@@ -1,0 +1,609 @@
+{
+    "nav": {
+        "home": "Hasiera",
+        "method": "Metodologia",
+        "accessibility": "Irisgarritasuna",
+        "privacy": "Pribatutasuna",
+        "learn": "Ikasi",
+        "lab": "Laborategia",
+        "challenges": "Erronkak",
+        "practice": "Praktika",
+        "teacher": "Irakaslea",
+        "theory": "Teoria"
+    },
+    "home": {
+        "title": "Zatikiak DBH",
+        "subtitle": "Ikasi zenbaki arrazionalak zentzuz",
+        "description": "2. DBHko gaitasunei oinarritutako ikasketa plataforma. Eraiki zure zatikien ulermena laborategi interaktiboen eta testuingurudun misioen bidez.",
+        "cta": {
+            "start": "Ikasten hasi",
+            "lab": "Laborategira joan",
+            "teacher": "Irakasleen gunea"
+        },
+        "features": {
+            "title": "Zer aurkituko duzu?",
+            "lab": {
+                "title": "Laborategi Interaktiboa",
+                "description": "Arakatu zatikiak irudikapen bisualen bidez: zenbaki zuzena, azalerak eta baliokidetasunak.",
+                "link": "Arakatu →"
+            },
+            "missions": {
+                "title": "Testuingurudun Misioak",
+                "description": "Ebatzi benetako arazoak \"Baserri Logika\" bezala, non zatikiek zentzua hartzen duten.",
+                "link": "Ikusi misioak →"
+            },
+            "teacher": {
+                "title": "Irakasleen Jarraipena",
+                "description": "Gaitasunen arabako analitika, erroreen mapa eta ikaskuntzaren frogak.",
+                "link": "Irakasleen panela →"
+            },
+            "accessibility": {
+                "title": "Diseinu Unibertsala",
+                "description": "Guztiontzako irisgarria: eleanitza (eu/es/ar), teklatu bidezko nabigazioa, egokitzapen bisualak.",
+                "link": "Gehiago jakin →"
+            }
+        },
+        "curriculum": {
+            "title": "Curriculumean Lerrokatzea",
+            "description": "Euskadiko 2. DBHko Matematikaren curriculumean oinarrituta diseinatua, gaitasunen ikuspegia eta ebaluazio irizpideak kontuan hartuta.",
+            "tags": {
+                "numerical": "Zenbaki-zentzua",
+                "fractions": "Zatikiak eta hamartarrak",
+                "proportionality": "Proportzionalitatea",
+                "problemSolving": "Arazoak ebaztea"
+            }
+        }
+    },
+    "lab": {
+        "title": "Zatikien Laborategia",
+        "numberLine": "Zenbaki zuzena",
+        "numberLineDesc": "Zatikiak zenbaki zuzen interaktiboan ikusi",
+        "numberLineAria": "Zuzen numerikoa {{num}}/{{den}} zatikia erakusten",
+        "area": "Azalera eta Eragilea",
+        "areaDesc": "Zatikiak sare baten zati gisa irudikatu",
+        "areaAria": "{{num}}/{{den}} zatikiaren azalera irudikapena",
+        "equivalence": "Baliokidetasunak",
+        "equivalenceDesc": "Zatiki baliokideak barra bisualekin arakatu",
+        "equivalenceAria": "Baliokidetasun-ikuspegia: {{num1}}/{{den1}} = {{num2}}/{{den2}}",
+        "instructions": "Arakatu zatikiak bisualki. Erabili kontrolak balioak aldatzeko eta irudikapenak ikusteko.",
+        "numerator": "Zenbakitzailea",
+        "denominator": "Izendatzailea",
+        "equivalent": "Baliokide den zatikia",
+        "simplified": "Sinplifikatutako forma",
+        "baseFraction": "Oinarrizko zatikia",
+        "equivalentFraction": "Baliokide den zatikia",
+        "totalParts": "Zatiak guztira (sarea)",
+        "selected": "Hautatuta",
+        "zoom": "Zoom",
+        "decimalValue": "Balio dezimala",
+        "fraction": "Zatikia",
+        "representation": "Irudikapena",
+        "whatIsIt": "Zer adierazten du?",
+        "whatIsItDesc": "{{num}}/{{den}} zatikiak {{den}} zati berdineko multzo batetik {{num}} zati hartzea adierazten du.",
+        "whatIsItEquiv": "{{total}} zatiko sarean, hau {{parts}} zati hautatzearen baliokidea da.",
+        "equivPrinciple": "Baliokidetasun-printzipioa",
+        "equivPrincipleDesc": "Zenbakitzailea eta izendatzailea zenbaki berdinarekin biderkatzeak (edo zatitzeak) ez du zatikiaren balioa aldatzen. Honi zatiki baliokidea deitzen zaio.",
+        "equivCase": "Kasu honetan, {{mult}}-rekin biderkatu dugu, beraz orain {{den}}-etik {{num}} zati ditugu, {{baseNum}}/{{baseDen}}-en kopuru bera adierazten duena.",
+        "irreducible": "Forma laburteezina",
+        "pizza": {
+            "title": "Pizza",
+            "description": "Zatikiak pizza zati gisa ikusi",
+            "none": "Ez duzu zatirik hartu!",
+            "all": "Pizza osoa jan duzu!",
+            "some": "{{num}} zati hartu dituzu {{den}}-tik",
+            "aria": "Pizza {{den}} zatitan banatuta, {{num}} hautatuta"
+        },
+        "operations": {
+            "title": "Eragiketak",
+            "description": "Zatikiak bisualki gehitu eta kendu pausoz pauso",
+            "fraction1": "Lehen zatikia",
+            "fraction2": "Bigarren zatikia",
+            "add": "Gehitu",
+            "subtract": "Kendu",
+            "steps": "Kalkuluaren pausoak",
+            "simplified": "Sinplifikatuta",
+            "aria": "{{num1}}/{{den1}} {{op}} {{num2}}/{{den2}} = {{resNum}}/{{resDen}}",
+            "plus": "gehi",
+            "minus": "ken"
+        },
+        "comparator": {
+            "title": "Konparatzailea",
+            "description": "Bi zatiki alderatu elkarren ondoan",
+            "fraction1": "A Zatikia",
+            "fraction2": "B Zatikia",
+            "greater": "Lehen zatikia HANDIAGOA da",
+            "less": "Lehen zatikia TXIKIAGOA da",
+            "equal": "Zatikiak BERDINAK dira",
+            "explanation": "Konparatzen: {{num1}}×{{den2}} = {{cross1}} vs {{num2}}×{{den1}} = {{cross2}}",
+            "aria": "Konparaketa: {{num1}}/{{den1}} {{symbol}} {{num2}}/{{den2}}"
+        }
+    },
+    "missions": {
+        "title": "Matematika Erronkak",
+        "subtitle": "Aukeratu zailtasun maila eta zure ezagutzak probatu",
+        "points": "puntu guztira",
+        "placeholder": "Idatzi zure erantzuna...",
+        "completed": "Erronka osatuta! +puntuak irabazi",
+        "levelCompleted": "✓ Osatuta",
+        "levels": {
+            "hasiberria": {
+                "label": "Hasiberria",
+                "sublabel": "Hasiberria"
+            },
+            "aurreratua": {
+                "label": "Aurreratua",
+                "sublabel": "Aurreratua"
+            },
+            "maisu": {
+                "label": "Maisu",
+                "sublabel": "Maisu"
+            }
+        },
+        "challenges": {
+            "ch1": {
+                "title": "🍎 Sagarrak baserrian",
+                "description": "Baserriak 24 sagar ditu. Uztaren 3/4 bildu dira. Zenbat sagar bildu dira?",
+                "hint": "Biderkatu guztira (24) zatikiarekin (3/4): 24 × 3/4",
+                "success": "Zuzen! 24ren 3/4 = 18 sagar bildu dira.",
+                "error": "Berrikusi zure kalkulua: 24 × 3/4 = ?"
+            },
+            "ch2": {
+                "title": "🍕 Pizza banatzen",
+                "description": "Pizza erdia (1/2) duzu eta lagun batek beste 1/4 eman dizu. Zenbat pizza duzu orain?",
+                "hint": "Bilatu izendatzaile komuna: 1/2 = 2/4, gero batu.",
+                "success": "Bikain! 1/2 + 1/4 = 2/4 + 1/4 = 3/4 pizza.",
+                "error": "Bihurtu 1/2 laurdenetara lehenik."
+            },
+            "ch3": {
+                "title": "🎂 Urtebetetze tarta",
+                "description": "Tarta bat 8 zatitan banatuta dago. 3 jaten badituzu, tartaren zer zatiki jan duzu?",
+                "hint": "Zatikia hau da: janitako zatiak / zatiak guztira",
+                "success": "Oso ondo! Tartaren 3/8 jan dituzu.",
+                "error": "Zati janak guztizkoarekin zatitu."
+            },
+            "ch4": {
+                "title": "⏰ Ikasteko denbora",
+                "description": "45 minutuz ikasi duzu. Ordu batek 60 minutu ditu. Orduaren zer zatiki ikasi duzu?",
+                "hint": "45/60 sinplifikatu daiteke biak 15ekin zatituz.",
+                "success": "Zuzen! 45/60 = orduaren 3/4.",
+                "error": "45/60 = ? Sinplifikatu zatikia."
+            },
+            "ch5": {
+                "title": "🏡 Baserriko lurra",
+                "description": "Lurraldea 12 km²-koa da. 1/3 sagarondoetara, 1/4 baratzara eta gainerakoa larretara bideratzen da. Zein zatiki da larrea?",
+                "hint": "Batu 1/3 + 1/4 eta kendu 1etik (guztizkoa).",
+                "success": "Ederki! 1 - 1/3 - 1/4 = 5/12 lurraldea larrea da.",
+                "error": "Gogoan izan: 1/3 + 1/4 = 7/12. Gainerakoa 1 - 7/12 da."
+            },
+            "ch6": {
+                "title": "🧁 Pastel errezeta",
+                "description": "Errezetak 2/3 katilu azukre behar ditu 4 pertsonarentzat. Zenbat azukre behar duzu 10 pertsonarentzat?",
+                "hint": "Pertsona bakoitzeko kalkulatu: (2/3) ÷ 4. Gero biderkatu 10ekin.",
+                "success": "Bikain! 5/3 katilu (1 eta 2/3) azukre behar dituzu.",
+                "error": "Pertsona bakoitzeko: (2/3) ÷ 4 = 1/6. 10entzako: 1/6 × 10 = 5/3"
+            },
+            "ch7": {
+                "title": "🚗 Auto bidaia",
+                "description": "120 km-ko bidaia da. Dagoeneko 2/5 egin dituzu. Zenbat km falta zaizkizu?",
+                "hint": "Bidaiaren 2/5 egin badituzu, 3/5 falta zaizkizu.",
+                "success": "Zuzen! 3/5 × 120 = 72 km falta zaizkizu.",
+                "error": "Kalkulatu 120 km-ren 3/5."
+            },
+            "ch8": {
+                "title": "💧 Ur depositua",
+                "description": "Zein da handiagoa: 5/8 ala 7/12?",
+                "hint": "Bihurtu biak izendatzaile berera (24) eta alderatu.",
+                "success": "Oso ondo! 5/8 = 15/24 > 7/12 = 14/24",
+                "error": "Bilatu 8 eta 12-ren m.k.t. alderatzeko."
+            },
+            "ch9": {
+                "title": "🔢 Eragiketa konbinatuak",
+                "description": "Kalkulatu: (2/3 + 1/4) × 6/5",
+                "hint": "Lehenik guraso artekoa batu, gero biderkatu.",
+                "success": "Bikain! (2/3 + 1/4) × 6/5 = 11/12 × 6/5 = 11/10",
+                "error": "2/3 + 1/4 = 11/12. Gero 11/12 × 6/5 = ?"
+            },
+            "ch10": {
+                "title": "📊 Ehunekoak eta zatikiak",
+                "description": "Ikasleen %60ak gainditu du. Zein da zatiki sinplifikatua?",
+                "hint": "%60 = 60/100. Sinplifikatu m.k.h.-rekin zatituz.",
+                "success": "Zuzen! 60/100 = 3/5",
+                "error": "Zatitu 60 eta 100 beraien m.k.h.-rekin (20)."
+            },
+            "ch11": {
+                "title": "🏃 Errelebo lasterketa",
+                "description": "Korrikalari batek bidearen 3/7 egiten du 15 minutuan. Zenbat minutu beharko ditu guztira?",
+                "hint": "3/7 = 15 min bada, orduan 1/7 = 5 min.",
+                "success": "Bikain! 15 ÷ 3 × 7 = 35 minutu.",
+                "error": "Erabili hiruko erregela: 3/7 → 15, 7/7 → ?"
+            },
+            "ch12": {
+                "title": "🧮 Zatikien zatiketa",
+                "description": "Kalkulatu: 5/6 ÷ 2/3 + 1/4",
+                "hint": "Lehenik zatitu (alderantzikatu eta biderkatu), gero batu.",
+                "success": "Bikain! 5/6 ÷ 2/3 = 5/4, eta 5/4 + 1/4 = 6/4 = 3/2... Itxaron! 5/4 da zatiketaren emaitza.",
+                "error": "5/6 × 3/2 = 15/12 = 5/4. Gero 1/4 batu."
+            }
+        },
+        "baserri": {
+            "title": "Baserri Logika",
+            "subtitle": "Kudeatu Gernikako baratza",
+            "description": "Lagundu familiari uzta baserriko kideen artean banatzen zatikien bidez.",
+            "task1": "Baserriak 24 sagar ditu. Uztaren 3/4 bildu dira. Zenbat sagar bildu dira?",
+            "task2": "Baserriaren lurraldea 12 km²-koa da. 1/3 sagarondoetara, 1/4 baratzara eta gainerakoa larretara bideratzen da. Zein zatikia da larrea?",
+            "task3": "Sagar-tartaren errezetak 2/3 katilu azukre behar ditu 4 pertsonarentzat. Zenbat azukre behar duzu 10 pertsonarentzat?",
+            "hints": {
+                "task1": "Biderkatu guztira (24) zatikiarekin (3/4): 24 × 3/4",
+                "task2": "Batuketa egin zatikiekin: 1/3 + 1/4. Kendu emaitza 1etik (guztira).",
+                "task3": "Lehenengo kalkulatu pertsona bakoitzeko: (2/3) ÷ 4. Gero biderkatu 10ekin."
+            },
+            "success": {
+                "task1": "Zuzen! 24ren 3/4 = 18 sagar bildu dira.",
+                "task2": "Ederki! 1 - 1/3 - 1/4 = 5/12 lurraldea larrea da.",
+                "task3": "Bikain! 5/3 katilu (1 eta 2/3) azukre behar dituzu."
+            },
+            "errors": {
+                "task1": "Berrikusi zure kalkulua: 24 × 3/4 = ?",
+                "task2": "Gogoan izan: 1/3 + 1/4 = 7/12. Gainerakoa 1 - 7/12 da.",
+                "task3": "Pertsona bakoitzeko: (2/3) ÷ 4 = 1/6. 10entzako: 1/6 × 10 = 10/6 = 5/3"
+            },
+            "progress": "eginkizun osatuta",
+            "task": "EGINKIZUNA",
+            "of": "-tik",
+            "placeholder": "Idatzi zure erantzuna...",
+            "check": "Egiaztatu",
+            "hint": "Pista"
+        }
+    },
+    "theory": {
+        "title": "Zatikien Teoria",
+        "subtitle": "2. DBHrako zatikiei buruz jakin behar duzun guztia",
+        "description": "Arakatu gai bakoitza txartelak klikatuz. Edukiak hedatuko dira azalpenekin, adibideekin eta zatikiak menperatzeko trikimailuekin.",
+        "sections": {
+            "definition": "Zer da zatiki bat?",
+            "types": "Zatiki motak",
+            "equivalent": "Zatiki baliokideak",
+            "compare": "Zatikiak konparatu",
+            "addSubtract": "Batuketa eta kenketa",
+            "multiply": "Biderketa",
+            "divide": "Zatiketa",
+            "powers": "Potentziak",
+            "combined": "Eragiketa konbinatuak",
+            "decimals": "Zatikiak eta hamartarrak",
+            "proportionality": "Proportzionaltasuna",
+            "percentages": "Ehunekoak"
+        },
+        "content": {
+            "definition": {
+                "title": "Definizioa",
+                "text1": "<strong>Zatiki</strong> bat osotasun baten zati bat adierazten duen adierazpen matematikoa da. Lerro batez banandutako bi zenbakiz osatuta dago:",
+                "numeratorLabel": "← Zenbakitzailea (hartzen ditugun zatiak)",
+                "denominatorLabel": "← Izendatzailea (zati guztiak)",
+                "meaningsTitle": "Zatiki baten esanahiak",
+                "partWholeTitle": "📦 Zatia-osotasuna",
+                "partWholeText": "Zati berdinetan banatutako objektu baten zati bat adierazten du.",
+                "partWholeExample": "<strong>Adibidea:</strong> Pizza baten 2/3ek 3 zati berdinetatik 2 adierazten ditu.",
+                "quotientTitle": "📊 Zatidura",
+                "quotientText": "Bi zenbakiren arteko zatiketa adierazten du.",
+                "quotientExample": "<strong>Adibidea:</strong> 3/4 = 3 ÷ 4 = 0.75",
+                "operatorTitle": "⚡ Eragilea",
+                "operatorText": "Kantitate baten gaineko biderkatzaile gisa jokatzen du.",
+                "operatorExample": "<strong>Adibidea:</strong> 12ren 2/3 = (2/3) × 12 = 8",
+                "ratioTitle": "📏 Arrazoia",
+                "ratioText": "Magnitude bereko bi kantitate konparatzen ditu.",
+                "ratioExample": "<strong>Adibidea:</strong> 2:5 arrazoiak 2/5 esan nahi du",
+                "tip": "<strong>💡 Trikimailua:</strong> Izendatzailea ezin da inoiz zero (0) izan, ezin baita ezeren truke zatitu."
+            },
+            "types": {
+                "title": "Motak zenbakitzaile eta izendatzailearen arabera",
+                "properTitle": "Zatiki propioak",
+                "properDesc": "Zenbakitzailea Izendatzailea baino txikiagoa",
+                "properValue": "Balioa 1 baino txikiagoa",
+                "properExample": "Unitate bat baino gutxiago adierazten dute",
+                "improperTitle": "Zatiki inpropioak",
+                "improperDesc": "Zenbakitzailea Izendatzailea baino handiagoa",
+                "improperValue": "Balioa 1 baino handiagoa",
+                "improperExample": "Unitate bat baino gehiago adierazten dute",
+                "unitTitle": "Unitate zatikiak",
+                "unitDesc": "Zenbakitzailea = 1",
+                "unitValue": "Balioa = 1/n",
+                "unitExample": "n zati berdinetako zati bat",
+                "mixedTitle": "Zenbaki mistoak",
+                "mixedText": "Zatiki inpropioak <strong>zenbaki misto</strong> bihur daitezke; hauek zati oso bat eta zatiki propio bat konbinatzen dituzte.",
+                "conversionStep1": "7 ÷ 4 = 1 hondarra 3",
+                "tip": "<strong>💡 Trikimailua:</strong> Zenbaki misto bat zatiki inpropio bihurtzeko: (osoa × izendatzailea) + zenbakitzailea, dena izendatzaile beraren gainean."
+            },
+            "equivalent": {
+                "title": "Zer dira zatiki baliokideak?",
+                "text1": "Bi zatiki <strong>baliokideak</strong> dira kantitate bera adierazten dutenean, nahiz eta zenbakitzaile eta izendatzaile ezberdinak izan.",
+                "propTitle": "Oinarrizko propietatea",
+                "propText": "Zenbakitzailea eta izendatzailea zenbaki berarekin (zero ez dena) biderkatu edo zatitzen baditugu, zatiki baliokide bat lortzen dugu.",
+                "exampleTitle": "Adibide praktikoa",
+                "tip": "<strong>💡 Trikimailua:</strong> Bi zatiki baliokideak diren egiaztatzeko, biderkatu gurutzatuta: a×d eta b×c berdinak izan behar dira."
+            },
+            "compare": {
+                "sameDenomTitle": "Izendatzaile bera duten zatikiak konparatu",
+                "sameDenomText": "Bi zatikik <strong>izendatzaile bera</strong> badute, zenbakitzaile handiena duena da handiena.",
+                "sameDenomExpl": "zeren 3 > 2",
+                "diffDenomTitle": "Izendatzaile ezberdina duten zatikiak konparatu",
+                "diffDenomText": "Lehenik <strong>izendatzaile komunera</strong> murrizten dugu izendatzaileen MKT (Multiplo Komun Txikiena) erabiliz.",
+                "methodTitle": "Pausoz pausoko metodoa:",
+                "methodStep1": "Kalkulatu izendatzaileen MKT",
+                "methodStep2": "Bihurtu bi zatikiak izendatzaile komun horretara",
+                "methodStep3": "Konparatu zenbakitzaileak",
+                "exampleTitle": "<strong>Adibidea:</strong> Konparatu 2/3 eta 3/4",
+                "exampleStep1": "MKT(3, 4) = 12",
+                "exampleConclusion": "8 < 12 denez, orduan 2/3 < 3/4",
+                "tip": "<strong>💡 Trikimailu azkarra:</strong> Biderkatu gurutzatuta: 2×4 = 8 eta 3×3 = 9. 8 < 9 denez, orduan 2/3 < 3/4"
+            },
+            "addSubtract": {
+                "sameDenomTitle": "Izendatzaile bereko zatikien batuketa eta kenketa",
+                "sameDenomText": "Zatikiek <strong>izendatzaile bera</strong> badute, zenbakitzaileak batu edo kentzen ditugu eta izendatzailea mantentzen dugu.",
+                "diffDenomTitle": "Izendatzaile ezberdineko zatikien batuketa eta kenketa",
+                "diffDenomText": "MKT erabiliz <strong>izendatzaile komunera</strong> murrizten ditugu, ondoren aurrekoan bezala eragiten dugu.",
+                "stepsTitle": "Pausoz pausoko metodoa",
+                "step1": "Izendatzaileen MKT kalkulatu",
+                "step2": "Bi zatikiak MKT-ra bihurtu",
+                "step3": "Zenbakitzaileak batu edo kendu",
+                "step4": "Emaitza sinplifikatu",
+                "exampleTitle": "Adibidea:",
+                "warning": "<strong>⚠️ Ohiko errorea:</strong> Inoiz ez batu izendatzaileak. 1/2 + 1/2 ≠ 2/4, baizik eta 2/2 = 1"
+            },
+            "multiply": {
+                "title": "Zatikien biderketa",
+                "text": "Zatikiak biderkatzeko, <strong>zenbakitzailea zenbakitzailearekin</strong> eta <strong>izendatzailea izendatzailearekin</strong> biderkatzen dugu.",
+                "simplificationTitle": "Biderkatu aurretik sinplifikatu",
+                "simplificationText": "Biderkatu aurretik <strong>gurutzatuta</strong> sinplifikatu dezakegu, zenbakitzaile bat eta izendatzaile bat beraien z.k.h.-rekin zatituz.",
+                "fractionOfNumberTitle": "Zenbaki baten zatikia",
+                "fractionOfNumberText": "Kantitate baten zatikia kalkulatzea zatikia kantitate horrengatik biderkatzea da.",
+                "tip": "<strong>💡 Trikimailua:</strong> Zatikiaren eta zenbakiaren arteko \"-(r)en\" hitzak biderketa esan nahi du."
+            },
+            "divide": {
+                "title": "Zatikien zatiketa",
+                "text": "Zatikiak zatitzeko, lehenengo zatikia bigarrenaren <strong>alderantzizkoarekin</strong> biderkatzen dugu.",
+                "inverseTitle": "Zer da alderantzizko zatikia?",
+                "inverseText": "Zatiki baten alderantzizkoa zenbakitzailea eta izendatzailea trukatuz lortzen da.",
+                "exampleTitle": "Adibidea:",
+                "integerTitle": "Zatikien zatiketa zenbaki osoekin",
+                "integerText": "Zenbaki osoa zatiki bihurtzen dugu (izendatzaile gisa 1 jarriz) eta arau bera aplikatzen dugu.",
+                "tip": "<strong>💡 Gogoratu:</strong> Zatiki bategatik zatitzea bere alderantzizkoagatik biderkatzea da. Inoiz ez zatitu zenbakitzaileak eta izendatzaileak zuzenean!"
+            },
+            "powers": {
+                "title": "Zatikien potentziak",
+                "text": "Zatiki bat potentzia batera igotzeko, bai zenbakitzailea bai izendatzailea potentzia horretara igotzen ditugu.",
+                "exampleTitle": "Adibideak:",
+                "negativeTitle": "Berretzaile negatiboa duten potentziak",
+                "negativeText": "Berretzaile negatiboak esan nahi du zatikiaren <strong>alderantzizkoa</strong> hartzen dugula eta potentzia positibora igotzen dugula.",
+                "rulesTitle": "Potentzien biderketa eta zatiketa",
+                "sameBaseTitle": "Oinarri bera",
+                "sameExpTitle": "Berretzaile bera",
+                "powerOfPowerTitle": "Potentziaren potentzia",
+                "tip": "<strong>💡 Trikimailua:</strong> 0ra jasotako edozein zatiki 1 da: (a/b)⁰ = 1"
+            },
+            "combined": {
+                "title": "Eragiketen ordena",
+                "text": "Eragiketa bat baino gehiago daudenean, <strong>lehentasun-ordena</strong> jarraitzen dugu:",
+                "priority1": "Parentesiak (barrutik kanpora)",
+                "priority2": "Potentziak",
+                "priority3": "Biderkelak eta zatiketak (ezkerretik eskumara)",
+                "priority4": "Batuketak eta kenketak (ezkerretik eskumara)",
+                "exampleTitle": "Pausoz pauso ebatzitako adibidea",
+                "step1": "Parentesia:",
+                "step2": "Biderketa:",
+                "step3": "Batuketa:",
+                "warning": "<strong>⚠️ Ohiko errorea:</strong> Ez egin eragiketak ezkerretik eskumara maila berekoak daudenean. Biderketak eta zatiketak lehentasun bera dute!",
+                "tip": "<strong>💡 Aholkua:</strong> Zalantzak badituzu, erabili parentesiak ordena argitzeko. Hobe da gehiegi jartzea oker egitea baino!"
+            },
+            "decimals": {
+                "fracToDecTitle": "Zatikia hamartarrera",
+                "fracToDecText": "Zatiki bat hamartarrera bihurtzeko, zenbakitzailea izendatzailearekin <strong>zatitzen</strong> dugu.",
+                "methodDirect": "Zatiketa zuzena",
+                "methodPower10": "10eko potentziara amplifikatu",
+                "typesTitle": "Zenbaki hamartar motak",
+                "typeExact": "Zehatzak",
+                "typeExactDesc": "Hamartar kopuru finitua dute",
+                "typeExactCond": "Izendatzaileak 2 eta/edo 5 faktoreak bakarrik ditu",
+                "typePure": "Periodiko puruak",
+                "typePureDesc": "Hamartar talde bat infinituki errepikatzen da",
+                "typePureCond": "Izendatzaileak ez du 2 ezta 5 faktorerik",
+                "typeMixed": "Periodiko mistoak",
+                "typeMixedDesc": "Hamartar ez-periodikoak daude eta ondoren periodikoak",
+                "typeMixedCond": "Izendatzaileak 2 edo 5 faktoreak eta beste batzuk ditu",
+                "decToFracTitle": "Hamartarra zatikira",
+                "stepExact": "Hamartar zehatza",
+                "stepExact1": "Zenbakitzailea: komarik gabeko zenbakia",
+                "stepExact2": "Izendatzailea: 1 bat eta hamartar adina zero",
+                "stepPure": "Periodiko purua",
+                "stepPure1": "Zenbakitzailea: periodoa",
+                "stepPure2": "Izendatzailea: periodoak dituen zifra adina 9",
+                "stepMixed": "Periodiko mistoa",
+                "stepMixed1": "Zenbakitzailea: (ez-periodikoa + periodoa) - ez-periodikoa",
+                "stepMixed2": "Izendatzailea: periodoak dituen zifra adina 9, ondoren zati ez-periodikoak dituen zifra adina 0",
+                "commonStep3": "Sinplifikatu",
+                "tip": "<strong>💡 Trikimailua:</strong> Hamartarra 1 baino handiagoa bada, bereizi zati osoa eta bihurtu bakarrik zati hamartarra, ondoren batu."
+            },
+            "proportionality": {
+                "title": "Arrazoia eta proportzioa",
+                "text": "<strong>Arrazoia</strong> bi kantitateren arteko zatidura da. <strong>Proportzioa</strong> bi arrazoien arteko berdintasuna da.",
+                "magnitudesTitle": "Magnitude proportzionalak",
+                "directTitle": "📈 Zuzenean proportzionalak",
+                "directText": "Bat handitzean, bestea proportzio berean handitzen da.",
+                "directEx1": "• Sagar kiloak → Prezioa",
+                "directEx2": "• Lan egindako orduak → Irabazitako dirua",
+                "directEx3": "• Abiadura → Distantzia (denbora berean)",
+                "inverseTitle": "📉 Alderantziz proportzionalak",
+                "inverseText": "Bat handitzean, bestea proportzio berean txikitzen da.",
+                "inverseEx1": "• Abiadura → Denbora (distantzia berean)",
+                "inverseEx2": "• Langileak → Denbora (lan berean)",
+                "inverseEx3": "• Zabalera → Luzera (azalera berean)",
+                "ruleOfThreeTitle": "Hiru erregela sinplea",
+                "ruleOfThreeText": "Proportzionaltasun problemak ebazteko metodoa.",
+                "problem": "<strong>Problema:</strong> 3 kg sagarrek 6€ balio badute, zenbat balio dute 5 kg-k?",
+                "constant": "konstantea",
+                "tip": "<strong>💡 Trikimailua:</strong> Biderkatu gurutzatuta eta zatitu soberan dagoenarekin: (bilatutako datua × gurutzatutako datua) ÷ alboko datua"
+            },
+            "percentages": {
+                "title": "Zer da ehuneko bat?",
+                "text": "<strong>Ehuneko</strong> bat 100 izendatzailea duen zatiki bat da. % ikurrarekin adierazten da.",
+                "calcTitle": "Kantitate baten ehunekoa kalkulatu",
+                "calcText": "Kantitatea ehunekoaren zatikiarekin biderkatzen dugu.",
+                "ex1": "<strong>1. Adibidea:</strong> 50en %20a kalkulatu",
+                "ex2": "<strong>2. Adibidea:</strong> 80ren %15a kalkulatu",
+                "increaseDecreaseTitle": "Igoera eta deskontu ehunekoak",
+                "increaseTitle": "📈 Ehuneko igoera",
+                "increaseFormula": "Amaierako kantitatea = Hasierako kantitatea × (1 + %/100)",
+                "increaseEx": "50 %20an handitu:",
+                "decreaseTitle": "📉 Ehuneko deskontua",
+                "decreaseFormula": "Amaierako kantitatea = Hasierako kantitatea × (1 - %/100)",
+                "decreaseEx": "50en gaineko %20ko deskontua:",
+                "equivTitle": "Ehuneko baliokideak",
+                "headerFraction": "Zatikia",
+                "headerDecimal": "Hamartarra",
+                "headerPercent": "Ehunekoa",
+                "tip": "<strong>💡 Trikimailu azkarra:</strong><br />• %10 = 10ekin zatitu<br />• %20 = 5ekin zatitu<br />• %25 = 4rekin zatitu<br />• %50 = 2rekin zatitu<br />• %75 = 4rekin zatitu eta 3rekin biderkatu"
+            }
+        }
+    },
+    "teacher": {
+        "title": "Irakasleen Panela",
+        "subtitle": "Ikaskuntzaren analitika eta jarraipen gaitasuna",
+        "tabs": {
+            "overview": "Ikuspegi Orokorra",
+            "students": "Ikasleak",
+            "analytics": "Analitika"
+        },
+        "stats": {
+            "activeStudents": "Ikasle aktiboak",
+            "averageProgress": "Aurrerapen ertaina",
+            "completedTasks": "Osatutako eginkizunak",
+            "finishedMissions": "Amaitutako misioak"
+        },
+        "competencies": {
+            "title": "Gaitasunen Arabako Errendimendua",
+            "numerical": "Zenbaki-zentzua",
+            "representation": "Zatikien irudikapena",
+            "equivalence": "Baliokidetasuna eta sinplifikazioa",
+            "operations": "Eragiketak zatikiekin",
+            "proportionality": "Proportzionalitatea"
+        },
+        "errors": {
+            "title": "Ohiko Erroreen Ereduak",
+            "addDenominators": "Izendatzaileak batzea",
+            "confuseLcmGcd": "Multiplo Komun Txikiena eta Zatitzaile Komun Handiena nahastea",
+            "loseUnit": "Unitatea galtzea",
+            "decimalFractionConfusion": "Zatiki eta hamartarren nahasmena",
+            "percentageAbsolute": "Ehunekoa zenbaki absolutu gisa",
+            "students": "ikasle"
+        },
+        "students": {
+            "title": "Ikasleak",
+            "name": "Ikaslea",
+            "progress": "Aurrerapena",
+            "tasks": "Eginkizunak",
+            "commonErrors": "Ohiko erroreak",
+            "lastActivity": "Azken jarduera",
+            "noErrors": "Ohiko errorerik gabe"
+        },
+        "analytics": {
+            "title": "Analitika",
+            "distribution": "Aurrerapenaren Banaketa",
+            "high": "Altua (70-100%)",
+            "medium": "Ertaina (50-69%)",
+            "low": "Baxua (0-49%)"
+        }
+    },
+    "accessibility": {
+        "title": "Irisgarritasuna eta DUA",
+        "description": "Plataforma honek Ikaskuntzarako Diseinu Unibertsala (DUA) eta WCAG 2.1 AA jarraibideak betetzen ditu.",
+        "features": {
+            "perception": "Aurkezpen modu anitzak",
+            "action": "Adierazpen modu anitzak",
+            "engagement": "Konpromiso modu anitzak"
+        },
+        "dua": {
+            "title": "Ikaskuntzarako Diseinu Unibertsala (DUA)",
+            "description": "Plataforma honek CAST Centerren DUA markoa inplementatzen du, nazioartean aitortua eta Euskadiko curriculumean lerrokatua. DUA hiru printzipio oinarriztan oinarritzen da:",
+            "perception": {
+                "title": "Aurkezpen modu anitzak",
+                "items": [
+                    "Zatikien irudikapen bisualak (zuzena, azalera, multzoak)",
+                    "Testu alternatiboak irudi eta grafiko guztientzako",
+                    "Pantaila-irakurleen laguntza deskribapen matematikoekin",
+                    "Kontraste handiko modua eskuragarri",
+                    "Testu egokitua (funtzionaltasun galdu gabe %200 arte)"
+                ]
+            },
+            "action": {
+                "title": "Adierazpen modu anitzak",
+                "items": [
+                    "Teklatu bidezko nabigazio osoa (Tab, Shift+Tab, Enter, Escape)",
+                    "Teklatu lasterbideak funtzio nagusietarako",
+                    "Interakzio modu anitzak (sagua, teklatua, ukimena)",
+                    "Foku-adierazle ikusgarri eta argiak",
+                    "Keinu konplexuen menpekotasunik gabe"
+                ]
+            },
+            "engagement": {
+                "title": "Konpromiso modu anitzak",
+                "items": [
+                    "Ikaskuntza-testuinguru anitzak (laborategia, misioak, praktika)",
+                    "Ikasle bakoitzaren erritmora egokitutako aurrerapena",
+                    "Feedback berehalakoa eta eraikitzailea",
+                    "Helburu argiak eta erronka graduatuak",
+                    "Kultura-garrantzia (euskal testuingurua)"
+                ]
+            }
+        },
+        "wcag": {
+            "title": "WCAG 2.1 Betetzea",
+            "description": "Plataformak Web Edukiaren Irisgarritasunerako Jarraibideen AA maila betetzen du:",
+            "perceptible": "Hautemangarria: Erabiltzaileek hauteman ditzaten moduan aurkeztutako informazioa eta interfaze-osagaiak",
+            "operable": "Eragikorra: Erabiltzaile guztiek erabil ditzaten nabigazio eta interfaze-osagaiak",
+            "understandable": "Ulergarria: Ulergarria den informazioa eta interfaze-eragiketa",
+            "robust": "Sendoa: Agente erabiltzaile anitzek interpretatu dezaketen edukia"
+        },
+        "multilingual": {
+            "title": "Eleaniztasuna eta Hizkuntz Inklusioa",
+            "description": "Plataformak Euskadiko errealitate eleanitza eta ikasleen aniztasuna errespetatzen ditu:",
+            "basque": "Euskara: Interfaze osoa euskara batuan",
+            "spanish": "Gaztelania: Interfaze osoa gaztelaniaz",
+            "arabic": "Arabiera: RTL (ezkerrera eskuinera) laguntza jatorri arabiarreko ikasleentzako",
+            "glossary": "Hiztegi matematiko eleanitza definizio testuingurudunekin",
+            "cultural": "Edukia kulturalki garrantzitsua (euskal testuingurua)"
+        },
+        "keyboard": {
+            "title": "Teklatu Lasterbideak",
+            "shortcut": "Lasterbidea",
+            "function": "Funtzioa",
+            "tab": "Hurrengo elementu interaktibora joan",
+            "shiftTab": "Aurreko elementura joan",
+            "enter": "Hautatutako botoia edo esteka aktibatu",
+            "escape": "Elkarrizketa-koadroak itxi edo ekintza ezeztatu",
+            "arrows": "Doitu balioak kontrol deslizantetan"
+        },
+        "help": {
+            "title": "Irisgarritasun laguntza behar duzu?",
+            "description": "Irisgarritasun oztopoak aurkitzen badituzu edo egokitzapen espezifikoak behar badituzu, jarri harremanetan laguntza-taldearekin. Konpromisoa hartu dugu hezkuntza matematikorako sarbide-berdintasunarekin."
+        }
+    },
+    "common": {
+        "language": "Hizkuntza",
+        "spanish": "Gaztelania",
+        "basque": "Euskara",
+        "arabic": "العربية",
+        "close": "Itxi",
+        "next": "Hurrengoa",
+        "previous": "Aurrekoa",
+        "check": "Egiaztatu",
+        "hint": "Pista",
+        "back": "Itzuli",
+        "showHint": "Pista ikusi",
+        "hideHint": "Pista ezkutatu"
+    },
+    "footer": {
+        "copyright": "© 2025 Zatikiak DBH - Euskadi",
+        "accessibility": "Irisgarritasuna",
+        "privacy": "Pribatutasuna",
+        "credits": "Kredituak"
+    }
+}

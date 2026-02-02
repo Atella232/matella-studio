@@ -1,0 +1,151 @@
+.area-lab {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.area-lab .lab-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-6);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+}
+
+.area-lab .control-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.area-lab .control-group label {
+    font-weight: 600;
+    color: var(--color-text-primary);
+    font-size: var(--text-sm);
+}
+
+.area-lab .control-group input[type="range"] {
+    width: 100%;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+}
+
+.area-lab .control-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: var(--color-secondary);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform var(--transition-fast);
+}
+
+.area-lab .control-group input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+}
+
+.area-lab .control-group output {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-secondary);
+    text-align: center;
+}
+
+.area-lab .canvas-container {
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+}
+
+.area-lab .canvas-container canvas {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+}
+
+.area-lab .fraction-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    justify-content: center;
+}
+
+.area-lab .info-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-lg);
+}
+
+.area-lab .info-label {
+    font-weight: 700;
+    color: #1e293b;
+    /* Antes var(--color-text-secondary) */
+}
+
+.area-lab .fraction-display {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-secondary);
+}
+
+.area-lab .fraction-display .numerator {
+    border-bottom: 2px solid currentColor;
+    padding: 0 var(--space-2);
+}
+
+.area-lab .fraction-display .denominator {
+    padding: 0 var(--space-2);
+}
+
+.area-lab .decimal-value {
+    font-family: var(--font-mono);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.area-explanation {
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+}
+
+.area-explanation h4 {
+    margin-bottom: var(--space-3);
+    color: var(--color-text-primary);
+}
+
+.area-explanation p {
+    margin-bottom: var(--space-2);
+    color: #1e293b;
+    /* Antes var(--color-text-secondary) */
+    font-weight: 500;
+}
+
+.area-explanation p:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+    .area-lab .lab-controls {
+        grid-template-columns: 1fr;
+    }
+
+    .area-lab .fraction-info {
+        flex-direction: column;
+        align-items: center;
+    }
+}

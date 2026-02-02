@@ -1,0 +1,609 @@
+{
+    "nav": {
+        "home": "Inicio",
+        "method": "Metodología",
+        "accessibility": "Accesibilidad",
+        "privacy": "Privacidad",
+        "learn": "Aprende",
+        "lab": "Laboratorio",
+        "challenges": "Retos",
+        "practice": "Práctica",
+        "teacher": "Docente",
+        "theory": "Teoría"
+    },
+    "home": {
+        "title": "Fracciones ESO",
+        "subtitle": "Aprende números racionales con sentido",
+        "description": "Plataforma de aprendizaje por competencias para 2º ESO. Construye tu comprensión de fracciones mediante laboratorios interactivos y misiones contextualizadas.",
+        "cta": {
+            "start": "Comenzar a aprender",
+            "lab": "Ir al laboratorio",
+            "teacher": "Área docente"
+        },
+        "features": {
+            "title": "¿Qué encontrarás?",
+            "lab": {
+                "title": "Laboratorio Interactivo",
+                "description": "Explora fracciones mediante representaciones visuales: recta numérica, áreas y equivalencias.",
+                "link": "Explorar →"
+            },
+            "missions": {
+                "title": "Misiones Contextualizadas",
+                "description": "Resuelve problemas reales como \"Baserri Logic\" donde las fracciones cobran sentido.",
+                "link": "Ver misiones →"
+            },
+            "teacher": {
+                "title": "Seguimiento Docente",
+                "description": "Analítica por competencias, mapa de errores y evidencias de aprendizaje.",
+                "link": "Panel docente →"
+            },
+            "accessibility": {
+                "title": "Diseño Universal",
+                "description": "Accesible para todos: multilingüe (eu/es/ar), navegación por teclado, adaptaciones visuales.",
+                "link": "Saber más →"
+            }
+        },
+        "curriculum": {
+            "title": "Alineación Curricular",
+            "description": "Diseñado según el currículo de Matemáticas de 2º ESO del País Vasco, con enfoque por competencias y criterios de evaluación.",
+            "tags": {
+                "numerical": "Sentido numérico",
+                "fractions": "Fracciones y decimales",
+                "proportionality": "Proporcionalidad",
+                "problemSolving": "Resolución de problemas"
+            }
+        }
+    },
+    "lab": {
+        "title": "Laboratorio de Fracciones",
+        "numberLine": "Recta numérica",
+        "numberLineDesc": "Visualiza fracciones en una recta numérica interactiva",
+        "numberLineAria": "Recta numérica mostrando la fracción {{num}}/{{den}}",
+        "area": "Área y Operador",
+        "areaDesc": "Representa fracciones como partes de una rejilla",
+        "areaAria": "Representación de área de la fracción {{num}}/{{den}}",
+        "equivalence": "Equivalencias",
+        "equivalenceDesc": "Explora fracciones equivalentes con barras visuales",
+        "equivalenceAria": "Visualización de equivalencia: {{num1}}/{{den1}} = {{num2}}/{{den2}}",
+        "instructions": "Explora las fracciones visualmente. Usa los controles para cambiar valores y ver las representaciones.",
+        "numerator": "Numerador",
+        "denominator": "Denominador",
+        "equivalent": "Fracción equivalente",
+        "simplified": "Forma simplificada",
+        "baseFraction": "Fracción base",
+        "equivalentFraction": "Fracción equivalente",
+        "totalParts": "Partes totales (rejilla)",
+        "selected": "Seleccionadas",
+        "zoom": "Zoom",
+        "decimalValue": "Valor decimal",
+        "fraction": "Fracción",
+        "representation": "Representación",
+        "whatIsIt": "¿Qué representa?",
+        "whatIsItDesc": "La fracción {{num}}/{{den}} representa tomar {{num}} partes de un total de {{den}} partes iguales.",
+        "whatIsItEquiv": "En la rejilla de {{total}} partes, esto equivale a seleccionar {{parts}} partes.",
+        "equivPrinciple": "Principio de equivalencia",
+        "equivPrincipleDesc": "Multiplicar (o dividir) el numerador y el denominador por el mismo número no cambia el valor de la fracción. Esto se llama fracción equivalente.",
+        "equivCase": "En este caso, hemos multiplicado por {{mult}}, por lo que ahora tenemos {{num}} partes de {{den}}, que representa la misma cantidad que {{baseNum}}/{{baseDen}}.",
+        "irreducible": "Forma irreducible",
+        "pizza": {
+            "title": "Pizza",
+            "description": "Visualiza fracciones como porciones de pizza",
+            "none": "¡No has tomado ninguna porción!",
+            "all": "¡Te has comido toda la pizza!",
+            "some": "Has tomado {{num}} de {{den}} porciones",
+            "aria": "Pizza dividida en {{den}} porciones, {{num}} seleccionadas"
+        },
+        "operations": {
+            "title": "Operaciones",
+            "description": "Suma y resta fracciones visualmente paso a paso",
+            "fraction1": "Primera fracción",
+            "fraction2": "Segunda fracción",
+            "add": "Sumar",
+            "subtract": "Restar",
+            "steps": "Pasos del cálculo",
+            "simplified": "Simplificado",
+            "aria": "{{num1}}/{{den1}} {{op}} {{num2}}/{{den2}} = {{resNum}}/{{resDen}}",
+            "plus": "más",
+            "minus": "menos"
+        },
+        "comparator": {
+            "title": "Comparador",
+            "description": "Compara dos fracciones lado a lado",
+            "fraction1": "Fracción A",
+            "fraction2": "Fracción B",
+            "greater": "La primera fracción es MAYOR",
+            "less": "La primera fracción es MENOR",
+            "equal": "Las fracciones son IGUALES",
+            "explanation": "Comparamos: {{num1}}×{{den2}} = {{cross1}} vs {{num2}}×{{den1}} = {{cross2}}",
+            "aria": "Comparación: {{num1}}/{{den1}} {{symbol}} {{num2}}/{{den2}}"
+        }
+    },
+    "missions": {
+        "title": "Retos Matemáticos",
+        "subtitle": "Elige tu nivel de dificultad y pon a prueba tus conocimientos",
+        "points": "puntos totales",
+        "placeholder": "Escribe tu respuesta...",
+        "completed": "¡Reto completado! +puntos ganados",
+        "levelCompleted": "✓ Completado",
+        "levels": {
+            "hasiberria": {
+                "label": "Hasiberria",
+                "sublabel": "Principiante"
+            },
+            "aurreratua": {
+                "label": "Aurreratua",
+                "sublabel": "Avanzado"
+            },
+            "maisu": {
+                "label": "Maisu",
+                "sublabel": "Experto"
+            }
+        },
+        "challenges": {
+            "ch1": {
+                "title": "🍎 Manzanas en la baserri",
+                "description": "La baserri tiene 24 manzanas. Se han recolectado 3/4 de la cosecha. ¿Cuántas manzanas se han recolectado?",
+                "hint": "Multiplica el total (24) por la fracción (3/4): 24 × 3/4",
+                "success": "¡Correcto! 3/4 de 24 = 18 manzanas recolectadas.",
+                "error": "Revisa tu cálculo: 24 × 3/4 = ?"
+            },
+            "ch2": {
+                "title": "🍕 Compartir pizza",
+                "description": "Tienes 1/2 de pizza y tu amigo te da 1/4 más. ¿Cuánta pizza tienes ahora?",
+                "hint": "Busca un denominador común: 1/2 = 2/4, luego suma.",
+                "success": "¡Perfecto! 1/2 + 1/4 = 2/4 + 1/4 = 3/4 de pizza.",
+                "error": "Convierte 1/2 a cuartos primero."
+            },
+            "ch3": {
+                "title": "🎂 Tarta de cumpleaños",
+                "description": "Una tarta está dividida en 8 trozos. Si te comes 3, ¿qué fracción de tarta has comido?",
+                "hint": "La fracción es: trozos comidos / total de trozos",
+                "success": "¡Muy bien! Has comido 3/8 de la tarta.",
+                "error": "Divide los trozos comidos entre el total."
+            },
+            "ch4": {
+                "title": "⏰ Tiempo de estudio",
+                "description": "Estudiaste 45 minutos. Una hora tiene 60 minutos. ¿Qué fracción de hora estudiaste?",
+                "hint": "45/60 se puede simplificar dividiendo ambos por 15.",
+                "success": "¡Correcto! 45/60 = 3/4 de hora.",
+                "error": "45/60 = ? Simplifica la fracción."
+            },
+            "ch5": {
+                "title": "🏡 Terreno de la baserri",
+                "description": "El terreno mide 12 km². 1/3 se dedica a manzanos, 1/4 a huerta y el resto a pasto. ¿Qué fracción es pasto?",
+                "hint": "Suma 1/3 + 1/4 y resta de 1 (el total).",
+                "success": "¡Exacto! 1 - 1/3 - 1/4 = 5/12 del terreno es pasto.",
+                "error": "Recuerda: 1/3 + 1/4 = 7/12. El resto es 1 - 7/12."
+            },
+            "ch6": {
+                "title": "🧁 Receta de pastel",
+                "description": "La receta necesita 2/3 de taza de azúcar para 4 personas. ¿Cuánta azúcar para 10 personas?",
+                "hint": "Calcula para 1 persona: (2/3) ÷ 4. Luego multiplica por 10.",
+                "success": "¡Perfecto! Necesitas 5/3 tazas (1 y 2/3) de azúcar.",
+                "error": "Para 1 persona: (2/3) ÷ 4 = 1/6. Para 10: 1/6 × 10 = 5/3"
+            },
+            "ch7": {
+                "title": "🚗 Viaje en coche",
+                "description": "Un viaje es de 120 km. Ya has recorrido 2/5. ¿Cuántos km te faltan?",
+                "hint": "Si has recorrido 2/5, te falta 3/5 del viaje.",
+                "success": "¡Correcto! Te faltan 3/5 × 120 = 72 km.",
+                "error": "Calcula 3/5 de 120 km."
+            },
+            "ch8": {
+                "title": "💧 Depósito de agua",
+                "description": "¿Cuál es mayor: 5/8 o 7/12?",
+                "hint": "Convierte ambas al mismo denominador (24) y compara.",
+                "success": "¡Muy bien! 5/8 = 15/24 > 7/12 = 14/24",
+                "error": "Busca el MCM de 8 y 12 para comparar."
+            },
+            "ch9": {
+                "title": "🔢 Operaciones combinadas",
+                "description": "Calcula: (2/3 + 1/4) × 6/5",
+                "hint": "Primero suma dentro del paréntesis, luego multiplica.",
+                "success": "¡Excelente! (2/3 + 1/4) × 6/5 = 11/12 × 6/5 = 11/10",
+                "error": "2/3 + 1/4 = 11/12. Luego 11/12 × 6/5 = ?"
+            },
+            "ch10": {
+                "title": "📊 Porcentajes y fracciones",
+                "description": "El 60% de los estudiantes aprobó. ¿Qué fracción simplificada es?",
+                "hint": "60% = 60/100. Simplifica dividiendo por el MCD.",
+                "success": "¡Correcto! 60/100 = 3/5",
+                "error": "Divide 60 y 100 por su MCD (20)."
+            },
+            "ch11": {
+                "title": "🏃 Carrera de relevos",
+                "description": "Un corredor completa 3/7 del trayecto en 15 minutos. ¿Cuántos minutos tardará en total?",
+                "hint": "Si 3/7 = 15 min, entonces 1/7 = 5 min.",
+                "success": "¡Perfecto! 15 ÷ 3 × 7 = 35 minutos.",
+                "error": "Usa regla de tres: 3/7 → 15, 7/7 → ?"
+            },
+            "ch12": {
+                "title": "🧮 División de fracciones",
+                "description": "Calcula: 5/6 ÷ 2/3 + 1/4",
+                "hint": "Primero divide (invierte y multiplica), luego suma.",
+                "success": "¡Excelente! 5/6 ÷ 2/3 = 5/4, y 5/4 + 1/4 = 6/4 = 3/2... ¡Espera! 5/4 es la respuesta de la división.",
+                "error": "5/6 × 3/2 = 15/12 = 5/4. Luego suma 1/4."
+            }
+        },
+        "baserri": {
+            "title": "Baserri Logic",
+            "subtitle": "Gestiona la huerta de Gernika",
+            "description": "Ayuda a la familia a repartir la cosecha entre los miembros de la baserri usando fracciones.",
+            "task1": "La baserri tiene 24 manzanas. Se han recolectado 3/4 de la cosecha. ¿Cuántas manzanas se han recolectado?",
+            "task2": "El terreno de la baserri mide 12 km². 1/3 se dedica a manzanos, 1/4 a huerta y el resto a pasto. ¿Qué fracción es pasto?",
+            "task3": "La receta del pastel de manzana necesita 2/3 de taza de azúcar por cada 4 personas. ¿Cuánta azúcar necesitas para 10 personas?",
+            "hints": {
+                "task1": "Multiplica el total (24) por la fracción (3/4): 24 × 3/4",
+                "task2": "Suma las fracciones conocidas: 1/3 + 1/4. Resta el resultado de 1 (el total).",
+                "task3": "Primero calcula para 1 persona: (2/3) ÷ 4. Luego multiplica por 10."
+            },
+            "success": {
+                "task1": "¡Correcto! 3/4 de 24 = 18 manzanas recolectadas.",
+                "task2": "¡Exacto! 1 - 1/3 - 1/4 = 5/12 del terreno es pasto.",
+                "task3": "¡Perfecto! Necesitas 5/3 tazas (1 y 2/3) de azúcar."
+            },
+            "errors": {
+                "task1": "Revisa tu cálculo: 24 × 3/4 = ?",
+                "task2": "Recuerda: 1/3 + 1/4 = 7/12. El resto es 1 - 7/12.",
+                "task3": "Para 1 persona: (2/3) ÷ 4 = 1/6. Para 10: 1/6 × 10 = 10/6 = 5/3"
+            },
+            "progress": "tareas completadas",
+            "task": "TAREA",
+            "of": "DE",
+            "placeholder": "Escribe tu respuesta...",
+            "check": "Comprobar",
+            "hint": "Pista"
+        }
+    },
+    "theory": {
+        "title": "Teoría de Fracciones",
+        "subtitle": "Todo lo que necesitas saber sobre fracciones para 2º ESO",
+        "description": "Explora cada tema haciendo clic en las tarjetas. El contenido se expandirá con explicaciones, ejemplos y trucos para dominar las fracciones.",
+        "sections": {
+            "definition": "¿Qué es una fracción?",
+            "types": "Tipos de fracciones",
+            "equivalent": "Fracciones equivalentes",
+            "compare": "Comparar fracciones",
+            "addSubtract": "Suma y resta",
+            "multiply": "Multiplicación",
+            "divide": "División",
+            "powers": "Potencias",
+            "combined": "Operaciones combinadas",
+            "decimals": "Fracciones y decimales",
+            "proportionality": "Proporcionalidad",
+            "percentages": "Porcentajes"
+        },
+        "content": {
+            "definition": {
+                "title": "Definición",
+                "text1": "Una <strong>fracción</strong> es una expresión matemática que representa una parte de un todo. Se compone de dos números separados por una línea:",
+                "numeratorLabel": "← Numerador (partes que tomamos)",
+                "denominatorLabel": "← Denominador (partes totales)",
+                "meaningsTitle": "Significados de una fracción",
+                "partWholeTitle": "📦 Parte-todo",
+                "partWholeText": "Representa una parte de un objeto dividido en partes iguales.",
+                "partWholeExample": "<strong>Ejemplo:</strong> 2/3 de una pizza significa 2 partes de 3 iguales.",
+                "quotientTitle": "📊 Cociente",
+                "quotientText": "Representa la división entre dos números.",
+                "quotientExample": "<strong>Ejemplo:</strong> 3/4 = 3 ÷ 4 = 0.75",
+                "operatorTitle": "⚡ Operador",
+                "operatorText": "Actúa como un multiplicador sobre una cantidad.",
+                "operatorExample": "<strong>Ejemplo:</strong> 2/3 de 12 = (2/3) × 12 = 8",
+                "ratioTitle": "📏 Razón",
+                "ratioText": "Compara dos cantidades de la misma magnitud.",
+                "ratioExample": "<strong>Ejemplo:</strong> La razón 2:5 significa 2/5",
+                "tip": "<strong>💡 Truco:</strong> El denominador nunca puede ser cero (0), porque no se puede dividir entre nada."
+            },
+            "types": {
+                "title": "Tipos según el numerador y denominador",
+                "properTitle": "Fracciones propias",
+                "properDesc": "Numerador menor que Denominador",
+                "properValue": "Valor menor que 1",
+                "properExample": "Representan menos de una unidad",
+                "improperTitle": "Fracciones impropias",
+                "improperDesc": "Numerador mayor que Denominador",
+                "improperValue": "Valor mayor que 1",
+                "improperExample": "Representan más de una unidad",
+                "unitTitle": "Fracciones unitarias",
+                "unitDesc": "Numerador = 1",
+                "unitValue": "Valor = 1/n",
+                "unitExample": "Una parte de n partes iguales",
+                "mixedTitle": "Números mixtos",
+                "mixedText": "Las fracciones impropias se pueden convertir en <strong>números mixtos</strong>, que combinan una parte entera y una fracción propia.",
+                "conversionStep1": "7 ÷ 4 = 1 resto 3",
+                "tip": "<strong>💡 Truco:</strong> Para convertir un número mixto a fracción impropia: (entero × denominador) + numerador, todo sobre el mismo denominador."
+            },
+            "equivalent": {
+                "title": "¿Qué son fracciones equivalentes?",
+                "text1": "Dos fracciones son <strong>equivalentes</strong> cuando representan la misma cantidad, aunque tengan diferentes numeradores y denominadores.",
+                "propTitle": "Propiedad fundamental",
+                "propText": "Si multiplicamos o dividimos el numerador y el denominador por el mismo número (distinto de cero), obtenemos una fracción equivalente.",
+                "exampleTitle": "Ejemplo práctico",
+                "tip": "<strong>💡 Truco:</strong> Para comprobar si dos fracciones son equivalentes, multiplica en cruz: a×d debe ser igual a b×c."
+            },
+            "compare": {
+                "sameDenomTitle": "Comparar fracciones con el mismo denominador",
+                "sameDenomText": "Si dos fracciones tienen el <strong>mismo denominador</strong>, la que tiene mayor numerador es la mayor.",
+                "sameDenomExpl": "porque 3 > 2",
+                "diffDenomTitle": "Comparar fracciones con distinto denominador",
+                "diffDenomText": "Primero reducimos a <strong>común denominador</strong> usando el m.c.m. (mínimo común múltiplo) de los denominadores.",
+                "methodTitle": "Método paso a paso:",
+                "methodStep1": "Calcular el m.c.m. de los denominadores",
+                "methodStep2": "Convertir ambas fracciones a ese denominador común",
+                "methodStep3": "Comparar los numeradores",
+                "exampleTitle": "<strong>Ejemplo:</strong> Comparar 2/3 y 3/4",
+                "exampleStep1": "m.c.m.(3, 4) = 12",
+                "exampleConclusion": "Como 8 < 12, entonces 2/3 < 3/4",
+                "tip": "<strong>💡 Truco rápido:</strong> Multiplica en cruz: 2×4 = 8 y 3×3 = 9. Como 8 < 9, entonces 2/3 < 3/4"
+            },
+            "addSubtract": {
+                "sameDenomTitle": "Suma y resta con el mismo denominador",
+                "sameDenomText": "Si las fracciones tienen el <strong>mismo denominador</strong>, sumamos o restamos los numeradores y mantenemos el denominador.",
+                "diffDenomTitle": "Suma y resta con distinto denominador",
+                "diffDenomText": "Reducimos a <strong>común denominador</strong> usando el m.c.m., luego operamos como antes.",
+                "stepsTitle": "Método paso a paso",
+                "step1": "Calcular m.c.m. de los denominadores",
+                "step2": "Convertir ambas fracciones al m.c.m.",
+                "step3": "Sumar o restar los numeradores",
+                "step4": "Simplificar el resultado",
+                "exampleTitle": "Ejemplo:",
+                "warning": "<strong>⚠️ Error común:</strong> Nunca sumes los denominadores. 1/2 + 1/2 ≠ 2/4, sino 2/2 = 1"
+            },
+            "multiply": {
+                "title": "Multiplicación de fracciones",
+                "text": "Para multiplicar fracciones, multiplicamos <strong>numerador con numerador</strong> y <strong>denominador con denominador</strong>.",
+                "simplificationTitle": "Simplificación antes de multiplicar",
+                "simplificationText": "Podemos simplificar <strong>cruzado</strong> antes de multiplicar, dividiendo un numerador y un denominador entre su m.c.d.",
+                "fractionOfNumberTitle": "Fracción de un número",
+                "fractionOfNumberText": "Calcular una fracción de una cantidad es multiplicar la fracción por esa cantidad.",
+                "tip": "<strong>💡 Truco:</strong> La palabra \"de\" entre fracción y número significa multiplicación."
+            },
+            "divide": {
+                "title": "División de fracciones",
+                "text": "Para dividir fracciones, multiplicamos la primera fracción por la <strong>inversa</strong> de la segunda.",
+                "inverseTitle": "¿Qué es la fracción inversa?",
+                "inverseText": "La inversa de una fracción se obtiene intercambiando numerador y denominador.",
+                "exampleTitle": "Ejemplo:",
+                "integerTitle": "División de fracciones con números enteros",
+                "integerText": "Convertimos el número entero en fracción (poniendo 1 como denominador) y aplicamos la misma regla.",
+                "tip": "<strong>💡 Recuerda:</strong> Dividir entre una fracción es lo mismo que multiplicar por su inversa. ¡Nunca dividas numeradores y denominadores directamente!"
+            },
+            "powers": {
+                "title": "Potencias de fracciones",
+                "text": "Para elevar una fracción a una potencia, elevamos tanto el numerador como el denominador a esa potencia.",
+                "exampleTitle": "Ejemplos:",
+                "negativeTitle": "Potencias con exponente negativo",
+                "negativeText": "Un exponente negativo significa que tomamos la <strong>inversa</strong> de la fracción y elevamos a la potencia positiva.",
+                "rulesTitle": "Producto y cociente de potencias",
+                "sameBaseTitle": "Misma base",
+                "sameExpTitle": "Mismo exponente",
+                "powerOfPowerTitle": "Potencia de potencia",
+                "tip": "<strong>💡 Truco:</strong> Cualquier fracción elevada a 0 es igual a 1: (a/b)⁰ = 1"
+            },
+            "combined": {
+                "title": "Orden de operaciones",
+                "text": "Cuando hay varias operaciones, seguimos el <strong>orden de prioridad</strong>:",
+                "priority1": "Paréntesis (de dentro hacia fuera)",
+                "priority2": "Potencias",
+                "priority3": "Multiplicaciones y divisiones (de izquierda a derecha)",
+                "priority4": "Sumas y restas (de izquierda a derecha)",
+                "exampleTitle": "Ejemplo resuelto paso a paso",
+                "step1": "Paréntesis:",
+                "step2": "Multiplicación:",
+                "step3": "Suma:",
+                "warning": "<strong>⚠️ Error común:</strong> No hacer las operaciones de izquierda a derecha cuando hay del mismo nivel. ¡Multiplicación y división tienen la misma prioridad!",
+                "tip": "<strong>💡 Consejo:</strong> Si tienes dudas, usa paréntesis para aclarar el orden. ¡Es mejor poner de más que equivocarse!"
+            },
+            "decimals": {
+                "fracToDecTitle": "Fracción a decimal",
+                "fracToDecText": "Para convertir una fracción a decimal, <strong>dividimos</strong> el numerador entre el denominador.",
+                "methodDirect": "División directa",
+                "methodPower10": "Amplificar a potencia de 10",
+                "typesTitle": "Tipos de decimales",
+                "typeExact": "Exactos",
+                "typeExactDesc": "Tienen un número finito de decimales",
+                "typeExactCond": "El denominador solo tiene factores 2 y/o 5",
+                "typePure": "Periódicos puros",
+                "typePureDesc": "Un grupo de decimales se repite infinitamente",
+                "typePureCond": "El denominador no tiene factores 2 ni 5",
+                "typeMixed": "Periódicos mixtos",
+                "typeMixedDesc": "Hay decimales no periódicos y luego los periódicos",
+                "typeMixedCond": "El denominador tiene factores 2 o 5 y otros",
+                "decToFracTitle": "Decimal a fracción",
+                "stepExact": "Decimal exacto",
+                "stepExact1": "Numerador: el número sin coma",
+                "stepExact2": "Denominador: 1 seguido de tantos ceros como decimales",
+                "stepPure": "Periódico puro",
+                "stepPure1": "Numerador: el período",
+                "stepPure2": "Denominador: tantos 9 como cifras en el período",
+                "stepMixed": "Periódico mixto",
+                "stepMixed1": "Numerador: (no periódico + período) - no periódico",
+                "stepMixed2": "Denominador: tantos 9 como cifras en el período, seguidos de tantos 0 como decimales no periódicos",
+                "commonStep3": "Simplificar",
+                "tip": "<strong>💡 Truco:</strong> Si el decimal es mayor que 1, separa la parte entera y convierte solo la parte decimal, luego suma."
+            },
+            "proportionality": {
+                "title": "Razón y proporción",
+                "text": "Una <strong>razón</strong> es el cociente de dos cantidades. Una <strong>proporción</strong> es la igualdad de dos razones.",
+                "magnitudesTitle": "Magnitudes proporcionales",
+                "directTitle": "📈 Directamente proporcionales",
+                "directText": "Si una aumenta, la otra aumenta en la misma proporción.",
+                "directEx1": "• Kilos de manzanas → Precio",
+                "directEx2": "• Horas trabajadas → Dinero ganado",
+                "directEx3": "• Velocidad → Distancia (mismo tiempo)",
+                "inverseTitle": "📉 Inversamente proporcionales",
+                "inverseText": "Si una aumenta, la otra disminuye en la misma proporción.",
+                "inverseEx1": "• Velocidad → Tiempo (misma distancia)",
+                "inverseEx2": "• Trabajadores → Tiempo (mismo trabajo)",
+                "inverseEx3": "• Ancho → Largo (misma área)",
+                "ruleOfThreeTitle": "Regla de tres simple",
+                "ruleOfThreeText": "Método para resolver problemas de proporcionalidad.",
+                "problem": "<strong>Problema:</strong> Si 3 kg de manzanas cuestan 6€, ¿cuánto cuestan 5 kg?",
+                "constant": "constante",
+                "tip": "<strong>💡 Truco:</strong> Multiplica cruzado y divide por el sobrante: (dato buscado × dato cruzado) ÷ dato al lado"
+            },
+            "percentages": {
+                "title": "¿Qué es un porcentaje?",
+                "text": "Un <strong>porcentaje</strong> es una fracción con denominador 100. Se representa con el símbolo %.",
+                "calcTitle": "Calcular un porcentaje de una cantidad",
+                "calcText": "Multiplicamos la cantidad por la fracción del porcentaje.",
+                "ex1": "<strong>Ejemplo 1:</strong> Calcular el 20% de 50",
+                "ex2": "<strong>Ejemplo 2:</strong> Calcular el 15% de 80",
+                "increaseDecreaseTitle": "Porcentajes de aumento y descuento",
+                "increaseTitle": "📈 Aumento porcentual",
+                "increaseFormula": "Cantidad final = Cantidad inicial × (1 + %/100)",
+                "increaseEx": "Aumentar 50 en un 20%:",
+                "decreaseTitle": "📉 Descuento porcentual",
+                "decreaseFormula": "Cantidad final = Cantidad inicial × (1 - %/100)",
+                "decreaseEx": "Descuento del 20% sobre 50:",
+                "equivTitle": "Porcentajes equivalentes",
+                "headerFraction": "Fracción",
+                "headerDecimal": "Decimal",
+                "headerPercent": "Porcentaje",
+                "tip": "<strong>💡 Truco rápido:</strong><br />• 10% = dividir entre 10<br />• 20% = dividir entre 5<br />• 25% = dividir entre 4<br />• 50% = dividir entre 2<br />• 75% = dividir entre 4 y multiplicar por 3"
+            }
+        }
+    },
+    "teacher": {
+        "title": "Panel Docente",
+        "subtitle": "Analítica de aprendizaje y seguimiento competencial",
+        "tabs": {
+            "overview": "Vista General",
+            "students": "Estudiantes",
+            "analytics": "Analítica"
+        },
+        "stats": {
+            "activeStudents": "Estudiantes activos",
+            "averageProgress": "Progreso medio",
+            "completedTasks": "Tareas completadas",
+            "finishedMissions": "Misiones finalizadas"
+        },
+        "competencies": {
+            "title": "Desempeño por Competencia",
+            "numerical": "Sentido numérico",
+            "representation": "Representación de fracciones",
+            "equivalence": "Equivalencia y simplificación",
+            "operations": "Operaciones con fracciones",
+            "proportionality": "Proporcionalidad"
+        },
+        "errors": {
+            "title": "Patrones de Error Frecuentes",
+            "addDenominators": "Sumar denominadores",
+            "confuseLcmGcd": "Confundir MCM con MCD",
+            "loseUnit": "Perder la unidad",
+            "decimalFractionConfusion": "Confusión decimal-fracción",
+            "percentageAbsolute": "Porcentaje como número absoluto",
+            "students": "estudiantes"
+        },
+        "students": {
+            "title": "Estudiantes",
+            "name": "Estudiante",
+            "progress": "Progreso",
+            "tasks": "Tareas",
+            "commonErrors": "Errores comunes",
+            "lastActivity": "Última actividad",
+            "noErrors": "Sin errores frecuentes"
+        },
+        "analytics": {
+            "title": "Analítica",
+            "distribution": "Distribución de Progreso",
+            "high": "Alto (70-100%)",
+            "medium": "Medio (50-69%)",
+            "low": "Bajo (0-49%)"
+        }
+    },
+    "accessibility": {
+        "title": "Accesibilidad y DUA",
+        "description": "Esta plataforma sigue el Diseño Universal para el Aprendizaje (DUA) y las pautas WCAG 2.1 AA.",
+        "features": {
+            "perception": "Múltiples formas de presentación",
+            "action": "Múltiples formas de expresión",
+            "engagement": "Múltiples formas de compromiso"
+        },
+        "dua": {
+            "title": "Diseño Universal para el Aprendizaje (DUA)",
+            "description": "Esta plataforma implementa el marco DUA del CAST Center, reconocido internacionalmente y alineado con el decreto curricular del País Vasco. El DUA se basa en tres principios fundamentales:",
+            "perception": {
+                "title": "Múltiples formas de presentación",
+                "items": [
+                    "Representaciones visuales de fracciones (recta, área, conjuntos)",
+                    "Texto alternativo para todas las imágenes y gráficos",
+                    "Soporte para lectores de pantalla con descripciones matemáticas",
+                    "Modo de alto contraste disponible",
+                    "Texto adaptable (hasta 200% sin pérdida de funcionalidad)"
+                ]
+            },
+            "action": {
+                "title": "Múltiples formas de expresión",
+                "items": [
+                    "Navegación completa por teclado (Tab, Shift+Tab, Enter, Escape)",
+                    "Atajos de teclado para funciones principales",
+                    "Múltiples formas de interactuar (ratón, teclado, táctil)",
+                    "Indicadores de foco visibles y claros",
+                    "Sin dependencia de gestos complejos"
+                ]
+            },
+            "engagement": {
+                "title": "Múltiples formas de compromiso",
+                "items": [
+                    "Múltiples contextos de aprendizaje (laboratorio, misiones, práctica)",
+                    "Progresión adaptable al ritmo de cada estudiante",
+                    "Feedback inmediato y constructivo",
+                    "Objetivos claros y desafíos graduales",
+                    "Relevancia cultural (contexto vasco)"
+                ]
+            }
+        },
+        "wcag": {
+            "title": "Conformidad WCAG 2.1",
+            "description": "La plataforma cumple con el nivel AA de las Pautas de Accesibilidad para el Contenido Web:",
+            "perceptible": "Perceptible: Información y componentes de interfaz presentables de forma que los usuarios puedan percibirlos",
+            "operable": "Operable: Componentes de navegación e interfaz operables por todos los usuarios",
+            "understandable": "Comprensible: Información y operación de interfaz comprensibles",
+            "robust": "Robusto: Contenido suficientemente robusto para ser interpretado por diversos agentes de usuario"
+        },
+        "multilingual": {
+            "title": "Multilingüismo e Inclusión Lingüística",
+            "description": "La plataforma respeta la realidad lingüística del País Vasco y la diversidad del alumnado:",
+            "basque": "Euskera: Interfaz completa en euskera batua",
+            "spanish": "Castellano: Interfaz completa en español",
+            "arabic": "Árabe: Soporte RTL (derecha a izquierda) para estudiantes de origen árabe",
+            "glossary": "Glosario matemático multilingüe con definiciones contextuales",
+            "cultural": "Contenido culturalmente relevante (contexto vasco)"
+        },
+        "keyboard": {
+            "title": "Atajos de Teclado",
+            "shortcut": "Atajo",
+            "function": "Función",
+            "tab": "Navegar al siguiente elemento interactivo",
+            "shiftTab": "Navegar al elemento anterior",
+            "enter": "Activar botón o enlace seleccionado",
+            "escape": "Cerrar diálogos o cancelar acción",
+            "arrows": "Ajustar valores en controles deslizantes"
+        },
+        "help": {
+            "title": "¿Necesitas ayuda de accesibilidad?",
+            "description": "Si encuentras barreras de accesibilidad o necesitas adaptaciones específicas, contacta con el equipo de soporte. Estamos comprometidos con la igualdad de oportunidades en el acceso a la educación matemática."
+        }
+    },
+    "common": {
+        "language": "Idioma",
+        "spanish": "Castellano",
+        "basque": "Euskera",
+        "arabic": "العربية",
+        "close": "Cerrar",
+        "next": "Siguiente",
+        "previous": "Anterior",
+        "check": "Comprobar",
+        "hint": "Pista",
+        "back": "Volver",
+        "showHint": "Ver pista",
+        "hideHint": "Ocultar pista"
+    },
+    "footer": {
+        "copyright": "© 2025 Fracciones ESO - País Vasco",
+        "accessibility": "Accesibilidad",
+        "privacy": "Privacidad",
+        "credits": "Créditos"
+    }
+}

@@ -1,0 +1,135 @@
+.number-line-lab {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.lab-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-6);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.control-group label {
+    font-weight: 600;
+    color: var(--color-text-primary);
+    font-size: var(--text-sm);
+}
+
+.control-group input[type="range"] {
+    width: 100%;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+}
+
+.control-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform var(--transition-fast);
+}
+
+.control-group input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+}
+
+.control-group input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+.control-group output {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-primary);
+    text-align: center;
+}
+
+.canvas-container {
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+}
+
+.canvas-container canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+.fraction-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    justify-content: center;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-lg);
+}
+
+.info-label {
+    font-weight: 700;
+    color: #1e293b;
+    /* Oscurecido de var(--color-text-secondary) */
+}
+
+.fraction-display {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.fraction-display .numerator {
+    border-bottom: 2px solid currentColor;
+    padding: 0 var(--space-2);
+}
+
+.fraction-display .denominator {
+    padding: 0 var(--space-2);
+}
+
+@media (max-width: 640px) {
+    .lab-controls {
+        grid-template-columns: 1fr;
+    }
+
+    .canvas-container {
+        padding: var(--space-4);
+    }
+
+    .fraction-info {
+        flex-direction: column;
+        align-items: center;
+    }
+}
