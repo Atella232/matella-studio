@@ -9,19 +9,51 @@
         "challenges": "Erronkak",
         "practice": "Praktika",
         "teacher": "Irakaslea",
-        "theory": "Teoria"
+        "theory": "Teoria",
+        "topics": "Gaiak",
+        "games": "Jokuak"
+    },
+    "subjects": {
+        "title": "Zer ikasi nahi duzu?",
+        "subtitle": "Aukeratu irakasgai bat zure ikaskuntza abentura hasteko",
+        "math": {
+            "title": "Matematikak",
+            "description": "1. DBH-tik 2. Batxilergora arte"
+        },
+        "natura": {
+            "title": "Natura",
+            "description": "Naturaren Zientziak eta Biologia"
+        },
+        "comingSoon": "Laster",
+        "about": {
+            "title": "Plataforma honi buruz",
+            "text": "Baliabide interaktiboak, laborategi birtualak eta erronka testuinguruatuak dituen hezkuntza-plataforma, matematikak eta zientziak zentzuz ikasteko."
+        }
+    },
+    "courses": {
+        "title": "Matematika Ikastaroak",
+        "subtitle": "Aukeratu zure ikastaroa eskuragarri dauden gaiak ikusteko"
+    },
+    "topics": {
+        "subtitle": "{{count}} gai eskuragarri",
+        "available": "Eskuragarri",
+        "comingSoon": "Laster"
     },
     "home": {
         "title": "Zatikiak DBH",
         "subtitle": "Ikasi zenbaki arrazionalak zentzuz",
         "description": "2. DBHko gaitasunei oinarritutako ikasketa plataforma. Eraiki zure zatikien ulermena laborategi interaktiboen eta testuingurudun misioen bidez.",
         "cta": {
-            "start": "Ikasten hasi",
-            "lab": "Laborategira joan",
-            "teacher": "Irakasleen gunea"
+            "start": "Erronkak",
+            "lab": "Joan laborategira",
+            "teacher": "Irakasleen eremua"
         },
         "features": {
             "title": "Zer aurkituko duzu?",
+            "theory": {
+                "description": "Ikasi zatikien oinarrizko kontzeptuak azalpen argiekin eta adibideekin.",
+                "link": "Ikasi →"
+            },
             "lab": {
                 "title": "Laborategi Interaktiboa",
                 "description": "Arakatu zatikiak irudikapen bisualen bidez: zenbaki zuzena, azalerak eta baliokidetasunak.",
@@ -31,6 +63,10 @@
                 "title": "Testuingurudun Misioak",
                 "description": "Ebatzi benetako arazoak \"Baserri Logika\" bezala, non zatikiek zentzua hartzen duten.",
                 "link": "Ikusi misioak →"
+            },
+            "games": {
+                "description": "Joko interaktiboak zatikiak modu dibertigarrian praktikatzeko.",
+                "link": "Jokatu →"
             },
             "teacher": {
                 "title": "Irakasleen Jarraipena",
@@ -385,13 +421,13 @@
                 "text": "Eragiketa bat baino gehiago daudenean, <strong>lehentasun-ordena</strong> jarraitzen dugu:",
                 "priority1": "Parentesiak (barrutik kanpora)",
                 "priority2": "Potentziak",
-                "priority3": "Biderkelak eta zatiketak (ezkerretik eskumara)",
+                "priority3": "Biderketak eta zatiketak (ezkerretik eskumara)",
                 "priority4": "Batuketak eta kenketak (ezkerretik eskumara)",
                 "exampleTitle": "Pausoz pauso ebatzitako adibidea",
                 "step1": "Parentesia:",
                 "step2": "Biderketa:",
                 "step3": "Batuketa:",
-                "warning": "<strong>⚠️ Ohiko errorea:</strong> Ez egin eragiketak ezkerretik eskumara maila berekoak daudenean. Biderketak eta zatiketak lehentasun bera dute!",
+                "warning": "<strong>⚠️ Ohiko errorea:</strong> Biderketak eta zatiketak lehentasun bera dute, baina ezkerretik eskumara egin behar ditugu!",
                 "tip": "<strong>💡 Aholkua:</strong> Zalantzak badituzu, erabili parentesiak ordena argitzeko. Hobe da gehiegi jartzea oker egitea baino!"
             },
             "decimals": {
@@ -598,7 +634,128 @@
         "hint": "Pista",
         "back": "Itzuli",
         "showHint": "Pista ikusi",
-        "hideHint": "Pista ezkutatu"
+        "hideHint": "Pista ezkutatu",
+        "levels": {
+            "easy": "Erraza",
+            "medium": "Ertaina",
+            "hard": "Zaila",
+            "expert": "Aditua"
+        }
+    },
+    "games": {
+        "hub": {
+            "subtitle": "Ikasi zatikiak jolasten",
+            "tags": {
+                "easyMedium": "Erraza-Ertaina",
+                "easyHard": "Erraza-Zaila",
+                "easyExpert": "Erraza-Aditua"
+            },
+            "objectives": {
+                "partOfWhole": "Zatikia osotasun baten zati gisa",
+                "equivalences": "Zatiki baliokideak",
+                "operations": "Zatikiekin eragiketak"
+            }
+        },
+        "pizzaFractions": {
+            "title": "Zatikien Pizzeria",
+            "subtitle": "Zerbitzatu zati zuzenak!",
+            "description": "Lagundu pizzerian pizzaren zatiak zuzentasunez zerbitzatzen. Ikasiko duzu zatikia zer den modu bisual eta dibertigarrian.",
+            "startGame": "Jokoa hasi",
+            "wantOrder": "Nahi dut...",
+            "oneSliceSelected": "Zati 1 hautatuta",
+            "multipleSlicesSelected": "{{count}} zati hautatuta",
+            "slice": "zatia",
+            "slices": "zati",
+            "serve": "Zerbitzatu",
+            "reset": "Garbitu",
+            "correct": "Ondo!",
+            "incorrect": "Zati okerra",
+            "of": "tik",
+            "selectedWrong": "{{selected}} zati hautatu dituzu, baina bezeroak {{needed}} nahi zituen {{total}} zatitik.",
+            "nextOrder": "Hurrengo eskaera",
+            "tryAgain": "Saiatu berriro",
+            "tips": "Propina",
+            "orders": "Eskaerak",
+            "level": "Maila",
+            "gameOver": "Txandaren amaiera!",
+            "ordersServed": "Zerbitzatutako eskaerak",
+            "tipsEarned": "Irabazitako propinak",
+            "playAgain": "Berriro jolastu"
+        },
+        "fractionMemory": {
+            "title": "Zatikien Memoria",
+            "subtitle": "Aurkitu zatiki baliokideak",
+            "description": "Aurkitu zatiki berdina adierazten duten kartak: zenbakizkoak, bisualak, hamartarrak edo ehunekoak.",
+            "startGame": "Jokoa hasi",
+            "pairs": "Bikoteak",
+            "cards": "Kartak",
+            "visual": "Bisuala",
+            "decimal": "Hamartarra",
+            "moves": "Mugimenduak",
+            "time": "Denbora",
+            "score": "Puntuazioa",
+            "restart": "Berrabiarazi",
+            "exit": "Irten",
+            "playAgain": "Berriro jolastu",
+            "completed": "Zorionak!",
+            "equivalencesFound": "Aurkitutako baliokidetasunak"
+        },
+        "fractionRace": {
+            "title": "Zatikien Lasterketa",
+            "subtitle": "Eragin zatikiekin irabazteko!",
+            "description": "Lehiatu lasterketa batean zatikien eragiketak ebatziz. Zenbat eta azkarrago erantzun, zure autoa gehiago aurreratuko da!",
+            "modes": {
+                "addSub": "Batuketak eta Kenketak",
+                "mulDiv": "Biderketak eta Zatiketak",
+                "powers": "Berreturak",
+                "combined": "Eragiketa Konbinatuak"
+            },
+            "startRace": "Lasterketa hasi!",
+            "questions": "Galderak",
+            "operations": "Eragiketak",
+            "mixedNumbers": "Zenbaki mistoak",
+            "maxExponent": "Geh. Berretz.",
+            "opponents": "Aurkariak",
+            "pts": "pt",
+            "exit": "Irten",
+            "question": "Galdera",
+            "of": "tik",
+            "correct": "Ondo!",
+            "incorrect": "Oker!",
+            "turbo": "TURBOA!",
+            "combo": "Combo",
+            "go": "Ekin!",
+            "oneGo": "1... Ekin!",
+            "raceFinished": "Lasterketa amaituta!",
+            "yourPosition": "Zure postua",
+            "points": "Puntuak",
+            "correctAnswers": "Erantzun zuzenak",
+            "time": "Denbora",
+            "reviewErrors": "Akatsen berrikuspena",
+            "playAgain": "Berriro jolastu",
+            "track": "Pista",
+            "position": "Postua",
+            "turboActivated": "TURBOA AKTIBATUTA!",
+            "results": {
+                "title": "Lasterketa amaituta!",
+                "position": "{{position}}. postua",
+                "stats": "Estatistikak",
+                "correctAnswers": "Erantzun zuzenak",
+                "time": "Denbora guztira",
+                "score": "Puntuazioa",
+                "seconds": "s",
+                "errors": "Akatsen berrikuspena",
+                "yourAnswer": "Zure erantzuna",
+                "correctAnswer": "Erantzun zuzena",
+                "noErrors": "Akatsik gabe! Lan bikaina!",
+                "playAgain": "Berriro jolastu",
+                "backToMenu": "Menura itzuli"
+            },
+            "player": "Zu",
+            "bot1": "Max",
+            "bot2": "Luna",
+            "bot3": "Leo"
+        }
     },
     "footer": {
         "copyright": "© 2025 Zatikiak DBH - Euskadi",

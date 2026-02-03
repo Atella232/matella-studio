@@ -1,0 +1,90 @@
+.order-bubble {
+    position: relative;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-6) var(--space-8);
+    box-shadow: var(--shadow-lg);
+    animation: bubbleIn 0.4s ease-out;
+    text-align: center;
+}
+
+.order-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 15px 15px 0;
+    border-style: solid;
+    border-color: var(--glass-bg) transparent transparent;
+}
+
+@keyframes bubbleIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.order-label {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-2);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.order-fraction {
+    font-size: 3rem;
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    line-height: 1;
+}
+
+.fraction-numerator {
+    font-size: 3rem;
+}
+
+.fraction-line {
+    width: 3rem;
+    height: 4px;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+    margin: var(--space-1) 0;
+}
+
+.fraction-denominator {
+    font-size: 3rem;
+}
+
+/* Pizza icon decoration */
+.order-pizza-icon {
+    margin-top: var(--space-4);
+    font-size: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .order-bubble {
+        padding: var(--space-4) var(--space-6);
+    }
+
+    .fraction-numerator,
+    .fraction-denominator {
+        font-size: 2.5rem;
+    }
+}

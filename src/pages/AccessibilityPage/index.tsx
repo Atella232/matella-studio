@@ -13,130 +13,115 @@ export function AccessibilityPage() {
                 </header>
 
                 <section className="dua-section glass">
-                    <h2>Diseño Universal para el Aprendizaje (DUA)</h2>
-                    <p>
-                        Esta plataforma implementa el marco DUA del CAST Center, reconocido internacionalmente
-                        y alineado con el decreto curricular del País Vasco. El DUA se basa en tres principios fundamentales:
-                    </p>
+                    <h2>{t('accessibility.dua.title')}</h2>
+                    <p>{t('accessibility.dua.description')}</p>
 
                     <div className="dua-principles">
                         <article className="principle-card">
                             <div className="principle-icon">👁️</div>
-                            <h3>{t('accessibility.features.perception')}</h3>
+                            <h3>{t('accessibility.dua.perception.title')}</h3>
                             <ul>
-                                <li>Representaciones visuales de fracciones (recta, área, conjuntos)</li>
-                                <li>Texto alternativo para todas las imágenes y gráficos</li>
-                                <li>Soporte para lectores de pantalla con descripciones matemáticas</li>
-                                <li>Modo de alto contraste disponible</li>
-                                <li>Texto adaptable (hasta 200% sin pérdida de funcionalidad)</li>
+                                {(t('accessibility.dua.perception.items', { returnObjects: true }) as string[]).map((item, index) => (
+                                    <li key={index}>{item}</li>
+                                ))}
                             </ul>
                         </article>
 
                         <article className="principle-card">
                             <div className="principle-icon">✍️</div>
-                            <h3>{t('accessibility.features.action')}</h3>
+                            <h3>{t('accessibility.dua.action.title')}</h3>
                             <ul>
-                                <li>Navegación completa por teclado (Tab, Shift+Tab, Enter, Escape)</li>
-                                <li>Atajos de teclado para funciones principales</li>
-                                <li>Múltiples formas de interactuar (ratón, teclado, táctil)</li>
-                                <li>Indicadores de foco visibles y claros</li>
-                                <li>Sin dependencia de gestos complejos</li>
+                                {(t('accessibility.dua.action.items', { returnObjects: true }) as string[]).map((item, index) => (
+                                    <li key={index}>{item}</li>
+                                ))}
                             </ul>
                         </article>
 
                         <article className="principle-card">
                             <div className="principle-icon">🎯</div>
-                            <h3>{t('accessibility.features.engagement')}</h3>
+                            <h3>{t('accessibility.dua.engagement.title')}</h3>
                             <ul>
-                                <li>Múltiples contextos de aprendizaje (laboratorio, misiones, práctica)</li>
-                                <li>Progresión adaptable al ritmo de cada estudiante</li>
-                                <li>Feedback inmediato y constructivo</li>
-                                <li>Objetivos claros y desafíos graduales</li>
-                                <li>Relevancia cultural (contexto vasco)</li>
+                                {(t('accessibility.dua.engagement.items', { returnObjects: true }) as string[]).map((item, index) => (
+                                    <li key={index}>{item}</li>
+                                ))}
                             </ul>
                         </article>
                     </div>
                 </section>
 
                 <section className="wcag-section glass">
-                    <h2>Conformidad WCAG 2.1</h2>
-                    <p>La plataforma cumple con el nivel AA de las Pautas de Accesibilidad para el Contenido Web:</p>
+                    <h2>{t('accessibility.wcag.title')}</h2>
+                    <p>{t('accessibility.wcag.description')}</p>
 
                     <div className="wcag-checklist">
                         <div className="checklist-item">
                             <span className="check-icon">✓</span>
-                            <span><strong>Perceptible:</strong> Información y componentes de interfaz presentables de forma que los usuarios puedan percibirlos</span>
+                            <span>{t('accessibility.wcag.perceptible')}</span>
                         </div>
                         <div className="checklist-item">
                             <span className="check-icon">✓</span>
-                            <span><strong>Operable:</strong> Componentes de navegación e interfaz operables por todos los usuarios</span>
+                            <span>{t('accessibility.wcag.operable')}</span>
                         </div>
                         <div className="checklist-item">
                             <span className="check-icon">✓</span>
-                            <span><strong>Comprensible:</strong> Información y operación de interfaz comprensibles</span>
+                            <span>{t('accessibility.wcag.understandable')}</span>
                         </div>
                         <div className="checklist-item">
                             <span className="check-icon">✓</span>
-                            <span><strong>Robusto:</strong> Contenido suficientemente robusto para ser interpretado por diversos agentes de usuario</span>
+                            <span>{t('accessibility.wcag.robust')}</span>
                         </div>
                     </div>
                 </section>
 
                 <section className="multilingual-section glass">
-                    <h2>Multilingüismo e Inclusión Lingüística</h2>
-                    <p>
-                        La plataforma respeta la realidad lingüística del País Vasco y la diversidad del alumnado:
-                    </p>
+                    <h2>{t('accessibility.multilingual.title')}</h2>
+                    <p>{t('accessibility.multilingual.description')}</p>
                     <ul className="feature-list">
-                        <li><strong>Euskera:</strong> Interfaz completa en euskera batua</li>
-                        <li><strong>Castellano:</strong> Interfaz completa en español</li>
-                        <li><strong>Árabe:</strong> Soporte RTL (derecha a izquierda) para estudiantes de origen árabe</li>
-                        <li>Glosario matemático multilingüe con definiciones contextuales</li>
-                        <li>Contenido culturalmente relevante (contexto vasco)</li>
+                        <li>{t('accessibility.multilingual.basque')}</li>
+                        <li>{t('accessibility.multilingual.spanish')}</li>
+                        <li>{t('accessibility.multilingual.arabic')}</li>
+                        <li>{t('accessibility.multilingual.glossary')}</li>
+                        <li>{t('accessibility.multilingual.cultural')}</li>
                     </ul>
                 </section>
 
                 <section className="keyboard-section glass">
-                    <h2>Atajos de Teclado</h2>
+                    <h2>{t('accessibility.keyboard.title')}</h2>
                     <table className="keyboard-table">
                         <thead>
                             <tr>
-                                <th>Atajo</th>
-                                <th>Función</th>
+                                <th>{t('accessibility.keyboard.shortcut')}</th>
+                                <th>{t('accessibility.keyboard.function')}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td><kbd>Tab</kbd></td>
-                                <td>Navegar al siguiente elemento interactivo</td>
+                                <td>{t('accessibility.keyboard.tab')}</td>
                             </tr>
                             <tr>
                                 <td><kbd>Shift</kbd> + <kbd>Tab</kbd></td>
-                                <td>Navegar al elemento anterior</td>
+                                <td>{t('accessibility.keyboard.shiftTab')}</td>
                             </tr>
                             <tr>
                                 <td><kbd>Enter</kbd> / <kbd>Espacio</kbd></td>
-                                <td>Activar botón o enlace seleccionado</td>
+                                <td>{t('accessibility.keyboard.enter')}</td>
                             </tr>
                             <tr>
                                 <td><kbd>Escape</kbd></td>
-                                <td>Cerrar diálogos o cancelar acción</td>
+                                <td>{t('accessibility.keyboard.escape')}</td>
                             </tr>
                             <tr>
                                 <td><kbd>←</kbd> <kbd>→</kbd></td>
-                                <td>Ajustar valores en controles deslizantes</td>
+                                <td>{t('accessibility.keyboard.arrows')}</td>
                             </tr>
                         </tbody>
                     </table>
                 </section>
 
                 <section className="contact-section glass">
-                    <h2>¿Necesitas ayuda de accesibilidad?</h2>
-                    <p>
-                        Si encuentras barreras de accesibilidad o necesitas adaptaciones específicas,
-                        contacta con el equipo de soporte. Estamos comprometidos con la igualdad de oportunidades
-                        en el acceso a la educación matemática.
-                    </p>
+                    <h2>{t('accessibility.help.title')}</h2>
+                    <p>{t('accessibility.help.description')}</p>
                 </section>
             </div>
         </div>

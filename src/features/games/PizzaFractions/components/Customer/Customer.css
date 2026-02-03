@@ -1,0 +1,104 @@
+.customer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.customer-avatar {
+    font-size: 4rem;
+    animation: customerFloat 3s ease-in-out infinite;
+    transition: transform 0.3s ease;
+}
+
+.customer-avatar.neutral {
+    animation: customerFloat 3s ease-in-out infinite;
+}
+
+.customer-avatar.happy {
+    animation: customerBounce 0.5s ease-in-out;
+}
+
+.customer-avatar.celebrating {
+    animation: customerCelebrate 0.8s ease-in-out infinite;
+}
+
+.customer-avatar.confused {
+    animation: customerShake 0.4s ease-in-out;
+}
+
+@keyframes customerFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes customerBounce {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes customerCelebrate {
+
+    0%,
+    100% {
+        transform: rotate(-5deg) scale(1.1);
+    }
+
+    50% {
+        transform: rotate(5deg) scale(1.1);
+    }
+}
+
+@keyframes customerShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-10px);
+    }
+
+    75% {
+        transform: translateX(10px);
+    }
+}
+
+/* Reaction emojis */
+.customer-reaction {
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: reactionPop 0.5s ease forwards;
+}
+
+@keyframes reactionPop {
+    0% {
+        opacity: 0;
+        transform: scale(0) translateY(20px);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.3) translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}

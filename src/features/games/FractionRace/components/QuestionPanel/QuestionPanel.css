@@ -1,0 +1,293 @@
+.question-panel {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+}
+
+.question-panel.feedback-correct {
+    border-color: #4ade80;
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+}
+
+.question-panel.feedback-incorrect {
+    border-color: #f87171;
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    animation: shake 0.5s ease;
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.question-number {
+    font-size: 0.9rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.combo-indicator {
+    background: linear-gradient(135deg, #f97316, #fb923c);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    animation: pulse 0.5s ease infinite alternate;
+}
+
+.operation-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.fraction-display {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f1f5f9;
+    padding: 0.5rem 0.75rem;
+    border-radius: 10px;
+    min-width: 50px;
+}
+
+.fraction-display.mixed {
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.fraction-display.mixed .whole-part {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.fraction-display.mixed .fraction-part {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.numerator,
+.denominator {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1.2;
+}
+
+.fraction-bar {
+    width: 100%;
+    height: 3px;
+    background: #334155;
+    margin: 0.25rem 0;
+}
+
+.operator,
+.equals {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #6366f1;
+}
+
+.question-exponent {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    vertical-align: super;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+}
+
+.answer-placeholder {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #94a3b8;
+    background: #e2e8f0;
+    padding: 0.5rem 1.5rem;
+    border-radius: 12px;
+}
+
+.answer-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.answer-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem 0.5rem;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.answer-button .fraction-display {
+    background: transparent;
+}
+
+.answer-button .numerator,
+.answer-button .denominator,
+.answer-button .whole-part {
+    color: white;
+}
+
+.answer-button .fraction-bar {
+    background: white;
+}
+
+.answer-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+}
+
+.answer-button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.answer-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.answer-button.correct-answer {
+    background: linear-gradient(135deg, #22c55e 0%, #4ade80 100%) !important;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+}
+
+.answer-button.wrong-answer:not(.correct-answer) {
+    background: linear-gradient(135deg, #94a3b8 0%, #cbd5e1 100%);
+    box-shadow: none;
+}
+
+.feedback-message {
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    animation: pop-in 0.3s ease-out;
+}
+
+.feedback-message.correct {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.feedback-message.incorrect {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-10px);
+    }
+
+    40% {
+        transform: translateX(10px);
+    }
+
+    60% {
+        transform: translateX(-10px);
+    }
+
+    80% {
+        transform: translateX(10px);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes pop-in {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .answer-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .question-panel {
+        padding: 0.75rem 1rem;
+    }
+
+    .operation-display {
+        gap: 0.5rem;
+    }
+
+    .fraction-display {
+        padding: 0.4rem 0.6rem;
+        min-width: 40px;
+    }
+
+    .numerator,
+    .denominator {
+        font-size: 1rem;
+    }
+
+    .operator,
+    .equals {
+        font-size: 1.25rem;
+    }
+
+    .answer-options {
+        gap: 0.5rem;
+    }
+
+    .answer-button {
+        padding: 0.5rem 0.4rem;
+    }
+
+    .answer-button .numerator,
+    .answer-button .denominator {
+        font-size: 0.9rem;
+    }
+}
+
+.paren {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #6366f1;
+    margin: 0 0.2rem;
+}

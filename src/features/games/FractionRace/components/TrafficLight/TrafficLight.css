@@ -1,0 +1,129 @@
+.traffic-light-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fade-in 0.3s ease;
+}
+
+.traffic-light {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background: #2c2c2c;
+    padding: 30px 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border: 4px solid #444;
+}
+
+.light {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #333;
+    border: 4px solid #555;
+    transition: all 0.2s ease;
+    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.light.red {
+    background: #4a1515;
+}
+
+.light.red.active {
+    background: #ef4444;
+    box-shadow:
+        0 0 30px #ef4444,
+        0 0 60px #ef4444,
+        inset 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.light.yellow {
+    background: #4a3a15;
+}
+
+.light.yellow.active {
+    background: #fbbf24;
+    box-shadow:
+        0 0 30px #fbbf24,
+        0 0 60px #fbbf24,
+        inset 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.light.green {
+    background: #154a1f;
+}
+
+.light.green.active {
+    background: #22c55e;
+    box-shadow:
+        0 0 30px #22c55e,
+        0 0 60px #22c55e,
+        inset 0 0 10px rgba(255, 255, 255, 0.3);
+    animation: pulse-green 0.3s ease infinite alternate;
+}
+
+.countdown-text {
+    margin-top: 30px;
+    font-size: 4rem;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    animation: scale-pulse 0.5s ease infinite alternate;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse-green {
+    0% {
+        box-shadow: 0 0 30px #22c55e, 0 0 60px #22c55e;
+    }
+
+    100% {
+        box-shadow: 0 0 50px #22c55e, 0 0 100px #22c55e;
+    }
+}
+
+@keyframes scale-pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .light {
+        width: 60px;
+        height: 60px;
+    }
+
+    .traffic-light {
+        padding: 20px 18px;
+        gap: 15px;
+    }
+
+    .countdown-text {
+        font-size: 3rem;
+    }
+}

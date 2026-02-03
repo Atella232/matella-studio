@@ -1,8 +1,8 @@
 {
-  "name": "fracciones-eso",
+  "name": "matella-studio",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://Atella232.github.io/fracciones-eso",
+  "homepage": "https://Atella232.github.io/matella-studio",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -13,7 +13,7 @@ export function Layout() {
                 <div className="container header-content">
                     <div className="logo">
                         <span className="logo-icon">∑</span>
-                        <span className="logo-text">Fracciones ESO</span>
+                        <span className="logo-text">Matella</span>
                     </div>
                     <Navigation />
                 </div>

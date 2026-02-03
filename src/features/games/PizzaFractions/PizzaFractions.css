@@ -1,0 +1,315 @@
+.pizza-game {
+    padding: var(--space-6);
+    min-height: calc(100vh - 200px);
+}
+
+.pizza-game .container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Header */
+.game-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+}
+
+.game-title {
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--space-2);
+}
+
+.game-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+}
+
+/* Start Screen */
+.game-start-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-16);
+    text-align: center;
+}
+
+.start-pizza-icon {
+    font-size: 6rem;
+    margin-bottom: var(--space-6);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+}
+
+.start-description {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    max-width: 500px;
+    margin-bottom: var(--space-8);
+    line-height: var(--line-height-relaxed);
+}
+
+.pizza-level-select {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+}
+
+.pizza-level-button {
+    width: 140px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 2px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-xl);
+    color: var(--color-text-primary);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: all var(--transition-fast);
+}
+
+.pizza-level-button:hover {
+    border-color: var(--color-primary);
+    background: var(--glass-bg-light);
+    transform: translateY(-3px);
+}
+
+.pizza-level-button.active {
+    border-color: var(--color-primary);
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.start-button {
+    padding: var(--space-5) var(--space-12);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-2xl);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-lg);
+}
+
+.start-button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: var(--shadow-xl), var(--shadow-glow);
+}
+
+/* Game Area */
+.game-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: start;
+}
+
+.customer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+}
+
+.pizza-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+}
+
+.pizza-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-6);
+    width: 100%;
+}
+
+.selection-info {
+    text-align: center;
+    padding: var(--space-3) var(--space-5);
+    background: var(--glass-bg);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--glass-border);
+}
+
+.selection-count {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--color-primary-light);
+}
+
+.selection-label {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+/* Action buttons */
+.game-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+}
+
+.serve-button {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.serve-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+.serve-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.reset-button {
+    padding: var(--space-4) var(--space-6);
+    font-size: var(--text-base);
+    font-weight: 600;
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.reset-button:hover {
+    background: var(--glass-bg);
+    color: var(--color-text-primary);
+}
+
+/* Game Over Screen */
+.game-over-screen {
+    text-align: center;
+    padding: var(--space-12);
+}
+
+.game-over-icon {
+    font-size: 5rem;
+    margin-bottom: var(--space-6);
+}
+
+.game-over-title {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-4);
+}
+
+.game-over-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-8);
+    margin-bottom: var(--space-8);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    color: var(--color-primary-light);
+}
+
+.stat-label {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+.play-again-button {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.play-again-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .game-area {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+    }
+
+    .customer-section {
+        order: 1;
+    }
+
+    .pizza-section {
+        order: 2;
+    }
+
+    .level-select {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .game-over-stats {
+        flex-wrap: wrap;
+        gap: var(--space-4);
+    }
+}
+
+@media (max-width: 480px) {
+    .pizza-game {
+        padding: var(--space-4);
+    }
+
+    .game-title {
+        font-size: var(--text-2xl);
+    }
+
+    .start-pizza-icon {
+        font-size: 4rem;
+    }
+}

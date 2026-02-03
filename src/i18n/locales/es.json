@@ -9,19 +9,51 @@
         "challenges": "Retos",
         "practice": "Práctica",
         "teacher": "Docente",
-        "theory": "Teoría"
+        "theory": "Teoría",
+        "topics": "Temas",
+        "games": "Juegos"
+    },
+    "subjects": {
+        "title": "¿Qué quieres aprender?",
+        "subtitle": "Elige una asignatura para comenzar tu aventura de aprendizaje",
+        "math": {
+            "title": "Matemáticas",
+            "description": "Desde 1º ESO hasta 2º Bachillerato"
+        },
+        "natura": {
+            "title": "Natura",
+            "description": "Ciencias de la Naturaleza y Biología"
+        },
+        "comingSoon": "Próximamente",
+        "about": {
+            "title": "Sobre esta plataforma",
+            "text": "Plataforma educativa con recursos interactivos, laboratorios virtuales y retos contextualizados para aprender matemáticas y ciencias con sentido."
+        }
+    },
+    "courses": {
+        "title": "Cursos de Matemáticas",
+        "subtitle": "Selecciona tu curso para ver los temas disponibles"
+    },
+    "topics": {
+        "subtitle": "{{count}} temas disponibles",
+        "available": "Disponible",
+        "comingSoon": "Próximamente"
     },
     "home": {
         "title": "Fracciones ESO",
         "subtitle": "Aprende números racionales con sentido",
         "description": "Plataforma de aprendizaje por competencias para 2º ESO. Construye tu comprensión de fracciones mediante laboratorios interactivos y misiones contextualizadas.",
         "cta": {
-            "start": "Comenzar a aprender",
+            "start": "Retos",
             "lab": "Ir al laboratorio",
             "teacher": "Área docente"
         },
         "features": {
             "title": "¿Qué encontrarás?",
+            "theory": {
+                "description": "Aprende los conceptos fundamentales de las fracciones con explicaciones claras y ejemplos.",
+                "link": "Estudiar →"
+            },
             "lab": {
                 "title": "Laboratorio Interactivo",
                 "description": "Explora fracciones mediante representaciones visuales: recta numérica, áreas y equivalencias.",
@@ -31,6 +63,10 @@
                 "title": "Misiones Contextualizadas",
                 "description": "Resuelve problemas reales como \"Baserri Logic\" donde las fracciones cobran sentido.",
                 "link": "Ver misiones →"
+            },
+            "games": {
+                "description": "Juegos interactivos para practicar fracciones de forma divertida.",
+                "link": "Jugar →"
             },
             "teacher": {
                 "title": "Seguimiento Docente",
@@ -598,7 +634,128 @@
         "hint": "Pista",
         "back": "Volver",
         "showHint": "Ver pista",
-        "hideHint": "Ocultar pista"
+        "hideHint": "Ocultar pista",
+        "levels": {
+            "easy": "Fácil",
+            "medium": "Medio",
+            "hard": "Difícil",
+            "expert": "Experto"
+        }
+    },
+    "games": {
+        "hub": {
+            "subtitle": "Aprende fracciones jugando",
+            "tags": {
+                "easyMedium": "Fácil-Medio",
+                "easyHard": "Fácil-Difícil",
+                "easyExpert": "Fácil-Experto"
+            },
+            "objectives": {
+                "partOfWhole": "Fracción como parte de un todo",
+                "equivalences": "Fracciones equivalentes",
+                "operations": "Operaciones con fracciones"
+            }
+        },
+        "pizzaFractions": {
+            "title": "Pizzería de Fracciones",
+            "subtitle": "¡Sirve las porciones correctas!",
+            "description": "Ayuda en la pizzería sirviendo las porciones correctas de pizza. Aprenderás qué es una fracción de forma visual y divertida.",
+            "startGame": "Comenzar partida",
+            "wantOrder": "Quiero...",
+            "oneSliceSelected": "1 porción seleccionada",
+            "multipleSlicesSelected": "{{count}} porciones seleccionadas",
+            "slice": "porción",
+            "slices": "porciones",
+            "serve": "Servir",
+            "reset": "Limpiar",
+            "correct": "¡Correcto!",
+            "incorrect": "Porción incorrecta",
+            "of": "de",
+            "selectedWrong": "Seleccionaste {{selected}} porciones, pero el cliente quería {{needed}} de {{total}}.",
+            "nextOrder": "Siguiente pedido",
+            "tryAgain": "Intentar de nuevo",
+            "tips": "Propinas",
+            "orders": "Pedidos",
+            "level": "Nivel",
+            "gameOver": "¡Fin del turno!",
+            "ordersServed": "Pedidos servidos",
+            "tipsEarned": "Propinas ganadas",
+            "playAgain": "Jugar de nuevo"
+        },
+        "fractionMemory": {
+            "title": "Memoria de Fracciones",
+            "subtitle": "Encuentra las fracciones equivalentes",
+            "description": "Encuentra pares de cartas que representen la misma fracción en diferentes formas: numérica, visual, decimal o porcentaje.",
+            "startGame": "Comenzar partida",
+            "pairs": "Parejas",
+            "cards": "Cartas",
+            "visual": "Visual",
+            "decimal": "Decimal",
+            "moves": "Movimientos",
+            "time": "Tiempo",
+            "score": "Puntuación",
+            "restart": "Reiniciar",
+            "exit": "Salir",
+            "playAgain": "Jugar de nuevo",
+            "completed": "¡Felicidades!",
+            "equivalencesFound": "Equivalencias encontradas"
+        },
+        "fractionRace": {
+            "title": "Carrera de Fracciones",
+            "subtitle": "¡Opera con fracciones para ganar!",
+            "description": "Compite en una carrera resolviendo operaciones con fracciones. ¡Cuanto más rápido respondas, más avanzará tu coche!",
+            "modes": {
+                "addSub": "Sumas y Restas",
+                "mulDiv": "Multiplicación y División",
+                "powers": "Potencias",
+                "combined": "Combinadas"
+            },
+            "startRace": "¡Comenzar carrera!",
+            "questions": "Preguntas",
+            "operations": "Operaciones",
+            "mixedNumbers": "Números mixtos",
+            "maxExponent": "Exp. Máx",
+            "opponents": "Oponentes",
+            "pts": "pts",
+            "exit": "Salir",
+            "question": "Pregunta",
+            "of": "de",
+            "correct": "¡Correcto!",
+            "incorrect": "¡Incorrecto!",
+            "turbo": "¡TURBO!",
+            "combo": "Combo",
+            "go": "¡YA!",
+            "oneGo": "1... ¡YA!",
+            "raceFinished": "¡Carrera terminada!",
+            "yourPosition": "Tu posición",
+            "points": "Puntos",
+            "correctAnswers": "Respuestas correctas",
+            "time": "Tiempo",
+            "reviewErrors": "Repaso de errores",
+            "playAgain": "Jugar de nuevo",
+            "track": "Pista",
+            "position": "Posición",
+            "turboActivated": "¡TURBO ACTIVADO!",
+            "results": {
+                "title": "¡Carrera terminada!",
+                "position": "{{position}}º puesto",
+                "stats": "Estadísticas",
+                "correctAnswers": "Respuestas correctas",
+                "time": "Tiempo total",
+                "score": "Puntuación",
+                "seconds": "s",
+                "errors": "Repaso de errores",
+                "yourAnswer": "Tu respuesta",
+                "correctAnswer": "Respuesta correcta",
+                "noErrors": "¡Sin errores! ¡Excelente trabajo!",
+                "playAgain": "Jugar de nuevo",
+                "backToMenu": "Volver al menú"
+            },
+            "player": "Tú",
+            "bot1": "Max",
+            "bot2": "Luna",
+            "bot3": "Leo"
+        }
     },
     "footer": {
         "copyright": "© 2025 Fracciones ESO - País Vasco",

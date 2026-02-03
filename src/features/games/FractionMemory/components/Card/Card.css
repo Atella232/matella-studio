@@ -1,0 +1,303 @@
+/* Memory Card - Enhanced Visual Design */
+.memory-card {
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+    aspect-ratio: 1;
+    cursor: pointer;
+    perspective: 1000px;
+    user-select: none;
+}
+
+.memory-card.disabled {
+    pointer-events: none;
+}
+
+.memory-card.matched {
+    animation: matchPulse 0.6s ease-out;
+}
+
+@keyframes matchPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Card Inner Container */
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.memory-card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Card Faces */
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Card Back - Beautiful Gradient with Pattern */
+.card-back {
+    background: linear-gradient(145deg, #7c3aed 0%, #5b21b6 50%, #4c1d95 100%);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 8px 25px rgba(124, 58, 237, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+        0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.card-back::before {
+    content: '❓';
+    font-size: 2.5rem;
+    opacity: 0.9;
+    animation: floatIcon 2s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-5px) scale(1.05);
+    }
+}
+
+.card-back::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.08) 50%,
+            transparent 70%);
+    animation: shineEffect 3s ease-in-out infinite;
+}
+
+@keyframes shineEffect {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+/* Card Front */
+.card-front {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    border: 3px solid #a78bfa;
+    transform: rotateY(180deg);
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(167, 139, 250, 0.3) inset;
+}
+
+/* Matched State - Green Glow */
+.memory-card.matched .card-front {
+    background: linear-gradient(145deg, #d1fae5 0%, #a7f3d0 100%);
+    border-color: #10b981;
+    box-shadow:
+        0 0 30px rgba(16, 185, 129, 0.4),
+        0 8px 25px rgba(16, 185, 129, 0.3),
+        0 0 0 1px rgba(16, 185, 129, 0.5) inset;
+    animation: successGlow 0.6s ease-out;
+}
+
+@keyframes successGlow {
+    0% {
+        box-shadow: 0 0 0 rgba(16, 185, 129, 0);
+    }
+
+    50% {
+        box-shadow: 0 0 50px rgba(16, 185, 129, 0.8), 0 0 100px rgba(16, 185, 129, 0.4);
+    }
+
+    100% {
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.4), 0 8px 25px rgba(16, 185, 129, 0.3);
+    }
+}
+
+/* Hover Effect */
+.memory-card:not(.flipped):not(.matched):hover .card-inner {
+    transform: scale(1.05) rotateY(5deg);
+}
+
+.memory-card:not(.flipped):not(.matched):hover .card-back {
+    box-shadow:
+        0 15px 40px rgba(124, 58, 237, 0.6),
+        0 0 0 2px rgba(255, 255, 255, 0.4) inset;
+}
+
+/* Numeric Fraction Display */
+.fraction-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 800;
+    gap: 0;
+}
+
+.fraction-numerator {
+    font-size: 2.5rem;
+    color: #5b21b6;
+    line-height: 1;
+    text-shadow: 0 2px 4px rgba(91, 33, 182, 0.2);
+}
+
+.fraction-line {
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #7c3aed, #5b21b6);
+    margin: 6px 0;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(124, 58, 237, 0.3);
+}
+
+.fraction-denominator {
+    font-size: 2.5rem;
+    color: #5b21b6;
+    line-height: 1;
+    text-shadow: 0 2px 4px rgba(91, 33, 182, 0.2);
+}
+
+/* Decimal Display */
+.decimal-display {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #059669;
+    text-shadow: 0 2px 8px rgba(5, 150, 105, 0.2);
+}
+
+/* Percentage Display */
+.percentage-display {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #d97706;
+    text-shadow: 0 2px 8px rgba(217, 119, 6, 0.2);
+}
+
+/* Visual Representation */
+.visual-display {
+    width: 85%;
+    height: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.visual-display svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+/* Pie Chart Visual */
+.pie-segment-filled {
+    fill: #7c3aed;
+    stroke: #5b21b6;
+    stroke-width: 1;
+}
+
+.pie-segment-empty {
+    fill: #f3f4f6;
+    stroke: #d1d5db;
+    stroke-width: 1;
+}
+
+.pie-outline {
+    fill: none;
+    stroke: #5b21b6;
+    stroke-width: 2;
+}
+
+/* Bar Visual */
+.bar-segment {
+    stroke: #9ca3af;
+    stroke-width: 1;
+}
+
+.bar-segment-filled {
+    fill: #7c3aed;
+    stroke: #5b21b6;
+}
+
+.bar-segment-empty {
+    fill: #f3f4f6;
+    stroke: #d1d5db;
+}
+
+/* Responsive Sizing */
+@media (max-width: 768px) {
+    .memory-card {
+        min-height: 80px;
+    }
+
+    .fraction-numerator,
+    .fraction-denominator {
+        font-size: 1.75rem;
+    }
+
+    .fraction-line {
+        width: 40px;
+        height: 3px;
+    }
+
+    .decimal-display {
+        font-size: 1.75rem;
+    }
+
+    .percentage-display {
+        font-size: 1.5rem;
+    }
+
+    .card-back::before {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .memory-card {
+        min-height: 70px;
+    }
+
+    .fraction-numerator,
+    .fraction-denominator {
+        font-size: 1.5rem;
+    }
+
+    .decimal-display,
+    .percentage-display {
+        font-size: 1.25rem;
+    }
+}

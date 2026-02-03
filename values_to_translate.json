@@ -1,0 +1,162 @@
+{
+  "lab.numberLineDesc": "Visualiza fracciones en una recta numérica interactiva",
+  "lab.numberLineAria": "Recta numérica mostrando la fracción {{num}}/{{den}}",
+  "lab.areaDesc": "Representa fracciones como partes de una rejilla",
+  "lab.areaAria": "Representación de área de la fracción {{num}}/{{den}}",
+  "lab.equivalenceDesc": "Explora fracciones equivalentes con barras visuales",
+  "lab.equivalenceAria": "Visualización de equivalencia: {{num1}}/{{den1}} = {{num2}}/{{den2}}",
+  "lab.decimalValue": "Valor decimal",
+  "lab.fraction": "Fracción",
+  "lab.representation": "Representación",
+  "lab.whatIsIt": "¿Qué representa?",
+  "lab.whatIsItDesc": "La fracción {{num}}/{{den}} representa tomar {{num}} partes de un total de {{den}} partes iguales.",
+  "lab.whatIsItEquiv": "En la rejilla de {{total}} partes, esto equivale a seleccionar {{parts}} partes.",
+  "lab.equivPrinciple": "Principio de equivalencia",
+  "lab.equivPrincipleDesc": "Multiplicar (o dividir) el numerador y el denominador por el mismo número no cambia el valor de la fracción. Esto se llama fracción equivalente.",
+  "lab.equivCase": "En este caso, hemos multiplicado por {{mult}}, por lo que ahora tenemos {{num}} partes de {{den}}, que representa la misma cantidad que {{baseNum}}/{{baseDen}}.",
+  "lab.irreducible": "Forma irreducible",
+  "lab.pizza": {
+    "title": "Pizza",
+    "description": "Visualiza fracciones como porciones de pizza",
+    "none": "¡No has tomado ninguna porción!",
+    "all": "¡Te has comido toda la pizza!",
+    "some": "Has tomado {{num}} de {{den}} porciones",
+    "aria": "Pizza dividida en {{den}} porciones, {{num}} seleccionadas"
+  },
+  "lab.operations": {
+    "title": "Operaciones",
+    "description": "Suma y resta fracciones visualmente paso a paso",
+    "fraction1": "Primera fracción",
+    "fraction2": "Segunda fracción",
+    "add": "Sumar",
+    "subtract": "Restar",
+    "steps": "Pasos del cálculo",
+    "simplified": "Simplificado",
+    "aria": "{{num1}}/{{den1}} {{op}} {{num2}}/{{den2}} = {{resNum}}/{{resDen}}",
+    "plus": "más",
+    "minus": "menos"
+  },
+  "lab.comparator": {
+    "title": "Comparador",
+    "description": "Compara dos fracciones lado a lado",
+    "fraction1": "Fracción A",
+    "fraction2": "Fracción B",
+    "greater": "La primera fracción es MAYOR",
+    "less": "La primera fracción es MENOR",
+    "equal": "Las fracciones son IGUALES",
+    "explanation": "Comparamos: {{num1}}×{{den2}} = {{cross1}} vs {{num2}}×{{den1}} = {{cross2}}",
+    "aria": "Comparación: {{num1}}/{{den1}} {{symbol}} {{num2}}/{{den2}}"
+  },
+  "missions.title": "Retos Matemáticos",
+  "missions.subtitle": "Elige tu nivel de dificultad y pon a prueba tus conocimientos",
+  "missions.points": "puntos totales",
+  "missions.placeholder": "Escribe tu respuesta...",
+  "missions.completed": "¡Reto completado! +puntos ganados",
+  "missions.levelCompleted": "✓ Completado",
+  "missions.levels.hasiberria": {
+    "label": "Hasiberria",
+    "sublabel": "Principiante"
+  },
+  "missions.levels.aurreratua": {
+    "label": "Aurreratua",
+    "sublabel": "Avanzado"
+  },
+  "missions.levels.maisu": {
+    "label": "Maisu",
+    "sublabel": "Experto"
+  },
+  "missions.challenges": {
+    "ch1": {
+      "title": "🍎 Manzanas en la baserri",
+      "description": "La baserri tiene 24 manzanas. Se han recolectado 3/4 de la cosecha. ¿Cuántas manzanas se han recolectado?",
+      "hint": "Multiplica el total (24) por la fracción (3/4): 24 × 3/4",
+      "success": "¡Correcto! 3/4 de 24 = 18 manzanas recolectadas.",
+      "error": "Revisa tu cálculo: 24 × 3/4 = ?"
+    },
+    "ch2": {
+      "title": "🍕 Compartir pizza",
+      "description": "Tienes 1/2 de pizza y tu amigo te da 1/4 más. ¿Cuánta pizza tienes ahora?",
+      "hint": "Busca un denominador común: 1/2 = 2/4, luego suma.",
+      "success": "¡Perfecto! 1/2 + 1/4 = 2/4 + 1/4 = 3/4 de pizza.",
+      "error": "Convierte 1/2 a cuartos primero."
+    },
+    "ch3": {
+      "title": "🎂 Tarta de cumpleaños",
+      "description": "Una tarta está dividida en 8 trozos. Si te comes 3, ¿qué fracción de tarta has comido?",
+      "hint": "La fracción es: trozos comidos / total de trozos",
+      "success": "¡Muy bien! Has comido 3/8 de la tarta.",
+      "error": "Divide los trozos comidos entre el total."
+    },
+    "ch4": {
+      "title": "⏰ Tiempo de estudio",
+      "description": "Estudiaste 45 minutos. Una hora tiene 60 minutos. ¿Qué fracción de hora estudiaste?",
+      "hint": "45/60 se puede simplificar dividiendo ambos por 15.",
+      "success": "¡Correcto! 45/60 = 3/4 de hora.",
+      "error": "45/60 = ? Simplifica la fracción."
+    },
+    "ch5": {
+      "title": "🏡 Terreno de la baserri",
+      "description": "El terreno mide 12 km². 1/3 se dedica a manzanos, 1/4 a huerta y el resto a pasto. ¿Qué fracción es pasto?",
+      "hint": "Suma 1/3 + 1/4 y resta de 1 (el total).",
+      "success": "¡Exacto! 1 - 1/3 - 1/4 = 5/12 del terreno es pasto.",
+      "error": "Recuerda: 1/3 + 1/4 = 7/12. El resto es 1 - 7/12."
+    },
+    "ch6": {
+      "title": "🧁 Receta de pastel",
+      "description": "La receta necesita 2/3 de taza de azúcar para 4 personas. ¿Cuánta azúcar para 10 personas?",
+      "hint": "Calcula para 1 persona: (2/3) ÷ 4. Luego multiplica por 10.",
+      "success": "¡Perfecto! Necesitas 5/3 tazas (1 y 2/3) de azúcar.",
+      "error": "Para 1 persona: (2/3) ÷ 4 = 1/6. Para 10: 1/6 × 10 = 5/3"
+    },
+    "ch7": {
+      "title": "🚗 Viaje en coche",
+      "description": "Un viaje es de 120 km. Ya has recorrido 2/5. ¿Cuántos km te faltan?",
+      "hint": "Si has recorrido 2/5, te falta 3/5 del viaje.",
+      "success": "¡Correcto! Te faltan 3/5 × 120 = 72 km.",
+      "error": "Calcula 3/5 de 120 km."
+    },
+    "ch8": {
+      "title": "💧 Depósito de agua",
+      "description": "¿Cuál es mayor: 5/8 o 7/12?",
+      "hint": "Convierte ambas al mismo denominador (24) y compara.",
+      "success": "¡Muy bien! 5/8 = 15/24 > 7/12 = 14/24",
+      "error": "Busca el MCM de 8 y 12 para comparar."
+    },
+    "ch9": {
+      "title": "🔢 Operaciones combinadas",
+      "description": "Calcula: (2/3 + 1/4) × 6/5",
+      "hint": "Primero suma dentro del paréntesis, luego multiplica.",
+      "success": "¡Excelente! (2/3 + 1/4) × 6/5 = 11/12 × 6/5 = 11/10",
+      "error": "2/3 + 1/4 = 11/12. Luego 11/12 × 6/5 = ?"
+    },
+    "ch10": {
+      "title": "📊 Porcentajes y fracciones",
+      "description": "El 60% de los estudiantes aprobó. ¿Qué fracción simplificada es?",
+      "hint": "60% = 60/100. Simplifica dividiendo por el MCD.",
+      "success": "¡Correcto! 60/100 = 3/5",
+      "error": "Divide 60 y 100 por su MCD (20)."
+    },
+    "ch11": {
+      "title": "🏃 Carrera de relevos",
+      "description": "Un corredor completa 3/7 del trayecto en 15 minutos. ¿Cuántos minutos tardará en total?",
+      "hint": "Si 3/7 = 15 min, entonces 1/7 = 5 min.",
+      "success": "¡Perfecto! 15 ÷ 3 × 7 = 35 minutos.",
+      "error": "Usa regla de tres: 3/7 → 15, 7/7 → ?"
+    },
+    "ch12": {
+      "title": "🧮 División de fracciones",
+      "description": "Calcula: 5/6 ÷ 2/3 + 1/4",
+      "hint": "Primero divide (invierte y multiplica), luego suma.",
+      "success": "¡Excelente! 5/6 ÷ 2/3 = 5/4, y 5/4 + 1/4 = 6/4 = 3/2... ¡Espera! 5/4 es la respuesta de la división.",
+      "error": "5/6 × 3/2 = 15/12 = 5/4. Luego suma 1/4."
+    }
+  },
+  "common.showHint": "Ver pista",
+  "common.hideHint": "Ocultar pista",
+  "common.levels": {
+    "easy": "Fácil",
+    "medium": "Medio",
+    "hard": "Difícil",
+    "expert": "Experto"
+  }
+}

@@ -1,0 +1,77 @@
+/* TopicsPage - Página de temas de un curso */
+
+.topics-page {
+    padding: var(--space-8) 0;
+    min-height: calc(100vh - 200px);
+}
+
+.topics-header {
+    text-align: center;
+    margin-bottom: var(--space-10);
+    animation: fadeIn 0.6s ease-out;
+}
+
+.topics-breadcrumb {
+    margin-bottom: var(--space-4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+}
+
+.topics-breadcrumb a {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    text-decoration: none;
+}
+
+.topics-breadcrumb a:hover {
+    color: var(--color-primary-light);
+}
+
+.topics-breadcrumb .separator {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+}
+
+.topics-header h1 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-3);
+    color: var(--course-color, var(--color-primary));
+}
+
+.topics-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-4);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.topic-item {
+    animation: fadeIn 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .topics-header h1 {
+        font-size: var(--text-3xl);
+    }
+
+    .topics-subtitle {
+        font-size: var(--text-base);
+    }
+
+    .topics-grid {
+        grid-template-columns: 1fr;
+    }
+}

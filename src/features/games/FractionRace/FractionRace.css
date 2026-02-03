@@ -1,0 +1,280 @@
+.fraction-race {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    padding: 1rem 0 2rem;
+}
+
+.fraction-race .container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Header */
+.game-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.game-title {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.game-subtitle {
+    font-size: 1.1rem;
+    color: #94a3b8;
+}
+
+/* Start Screen */
+.game-start-screen {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 24px;
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.start-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    animation: flag-wave 1s ease-in-out infinite;
+}
+
+.start-description {
+    font-size: 1.1rem;
+    color: #475569;
+    margin-bottom: 2rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.level-select {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.level-button {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #e2e8f0;
+    background: white;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.level-button:hover {
+    border-color: #6366f1;
+    color: #6366f1;
+}
+
+.level-button.active {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.level-info {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 16px;
+}
+
+.level-info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.level-info-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.level-info-label {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-top: 0.25rem;
+    text-align: center;
+}
+
+.start-button {
+    padding: 1.25rem 3rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+}
+
+.start-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(34, 197, 94, 0.5);
+}
+
+.start-button:active {
+    transform: translateY(0);
+}
+
+/* Race Header */
+.race-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.race-stats {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.race-stats .stat {
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.exit-race-btn {
+    padding: 0.5rem 1rem;
+    background: rgba(248, 113, 113, 0.2);
+    color: #f87171;
+    border: 1px solid rgba(248, 113, 113, 0.3);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.exit-race-btn:hover {
+    background: rgba(248, 113, 113, 0.3);
+}
+
+/* Animations */
+@keyframes flag-wave {
+
+    0%,
+    100% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+        transform: rotate(5deg);
+    }
+}
+
+/* Mode Select */
+.mode-select {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.mode-button {
+    padding: 1rem 1.5rem;
+    border: 2px solid #e2e8f0;
+    background: white;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 120px;
+}
+
+.mode-button:hover {
+    border-color: #6366f1;
+    color: #6366f1;
+}
+
+.mode-button.active {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.mode-icon {
+    font-size: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .game-title {
+        font-size: 1.8rem;
+    }
+
+    .game-start-screen {
+        padding: 1.5rem;
+    }
+
+    .start-icon {
+        font-size: 4rem;
+    }
+
+    .start-description {
+        font-size: 1rem;
+    }
+
+    .level-select {
+        flex-wrap: wrap;
+    }
+
+    .level-button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .level-info {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+        padding: 1rem;
+    }
+
+    .start-button {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .race-header {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .race-stats {
+        width: 100%;
+        justify-content: space-around;
+    }
+}

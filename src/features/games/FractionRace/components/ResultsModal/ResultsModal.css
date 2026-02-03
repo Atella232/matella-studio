@@ -1,0 +1,352 @@
+.results-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+    overflow-y: auto;
+    animation: fade-in 0.3s ease;
+}
+
+.results-modal {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-radius: 24px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slide-up 0.4s ease;
+}
+
+.results-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.results-header h2 {
+    color: white;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.player-result {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.podium {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.podium-place {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.podium-place.place-1 {
+    order: 2;
+}
+
+.podium-place.place-2 {
+    order: 1;
+}
+
+.podium-place.place-3 {
+    order: 3;
+}
+
+.podium-avatar {
+    font-size: 2.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.podium-name {
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.podium-medal {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.podium-bar {
+    width: 80px;
+    border-radius: 8px 8px 0 0;
+    transition: height 0.5s ease;
+}
+
+.place-1 .podium-bar {
+    background: linear-gradient(180deg, #fbbf24, #f59e0b);
+}
+
+.place-2 .podium-bar {
+    background: linear-gradient(180deg, #94a3b8, #64748b);
+}
+
+.place-3 .podium-bar {
+    background: linear-gradient(180deg, #cd7f32, #a16207);
+}
+
+.podium-place.is-player {
+    animation: winner-glow 1s ease infinite alternate;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4ade80;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    margin-top: 0.25rem;
+}
+
+.wrong-answers-section {
+    background: rgba(248, 113, 113, 0.1);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.wrong-answers-section h3 {
+    color: #f87171;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.wrong-answers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.wrong-answer-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    flex-wrap: wrap;
+}
+
+.wrong-operation {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.result-fraction {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.result-fraction.mixed {
+    flex-direction: row;
+    gap: 0.25rem;
+}
+
+.result-fraction .bar {
+    width: 100%;
+    height: 2px;
+    background: white;
+}
+
+.result-fraction .frac {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrong-operation .op {
+    color: #94a3b8;
+    font-size: 1rem;
+    margin: 0 0.25rem;
+}
+
+.result-exponent {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: white;
+    vertical-align: super;
+    margin-top: 0.25rem;
+}
+
+.correct-answer {
+    color: #4ade80;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.results-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-btn.play-again {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+}
+
+.action-btn.play-again:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+}
+
+.action-btn.exit {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.action-btn.exit:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-up {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes winner-glow {
+    0% {
+        filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.5));
+    }
+
+    100% {
+        filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.8));
+    }
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .results-modal {
+        padding: 1.5rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+    }
+
+    .stat-card {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .stat-value {
+        font-size: 1.2rem;
+    }
+
+    .podium-bar {
+        width: 60px;
+    }
+}
+
+/* Styles for FractionDisplay component inside Wrong Answers List */
+.wrong-answers-list .fraction-display {
+    background: transparent !important;
+    padding: 0 !important;
+    min-width: unset !important;
+    display: inline-flex !important;
+}
+
+.wrong-answers-list .fraction-display .whole-part,
+.wrong-answers-list .fraction-display .numerator,
+.wrong-answers-list .fraction-display .denominator {
+    color: white !important;
+    font-size: 0.85rem;
+}
+
+.wrong-answers-list .fraction-display .fraction-bar {
+    background: white !important;
+}
+
+.wrong-answers-list .operator {
+    color: #94a3b8;
+    font-size: 1rem;
+}
+
+.wrong-answers-list .paren {
+    color: #94a3b8;
+    font-weight: 700;
+    margin: 0 0.1rem;
+}
+
+.wrong-answers-list .question-exponent {
+    color: white;
+    font-size: 0.7rem;
+    vertical-align: super;
+}

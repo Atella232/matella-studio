@@ -1,0 +1,194 @@
+.race-track {
+    background: linear-gradient(180deg, #1e3a5f 0%, #0f2744 100%);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.track-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px dashed rgba(255, 255, 255, 0.2);
+}
+
+.track-label {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.position-indicator {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: #1a1a1a;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.track-lanes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.track-lane {
+    display: grid;
+    grid-template-columns: 60px 1fr 30px;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.track-lane.player-lane {
+    background: rgba(74, 222, 128, 0.15);
+    border: 2px solid rgba(74, 222, 128, 0.3);
+}
+
+.lane-label {
+    color: var(--lane-color, #fff);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-align: right;
+    padding-right: 0.5rem;
+}
+
+.lane-road {
+    position: relative;
+    height: 40px;
+    background: linear-gradient(90deg,
+        #3a3a3a 0%,
+        #4a4a4a 50%,
+        #3a3a3a 100%
+    );
+    border-radius: 4px;
+    overflow: hidden;
+    border: 2px solid #555;
+}
+
+.lane-road::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: repeating-linear-gradient(
+        90deg,
+        #fff 0,
+        #fff 20px,
+        transparent 20px,
+        transparent 40px
+    );
+    transform: translateY(-50%);
+    opacity: 0.3;
+}
+
+.lane-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(90deg,
+        var(--lane-color, #4ade80) 0%,
+        transparent 100%
+    );
+    opacity: 0.3;
+    transition: width 0.3s ease;
+}
+
+.racer-car {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    transition: left 0.3s ease;
+    z-index: 2;
+}
+
+.racer-car.turbo-active {
+    animation: turbo-shake 0.1s infinite;
+}
+
+.racer-car.turbo-active .car-avatar {
+    filter: drop-shadow(0 0 10px #fbbf24);
+}
+
+.turbo-flames {
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    animation: flame-flicker 0.2s infinite alternate;
+}
+
+.finish-line {
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.turbo-notification {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: #1a1a1a;
+    padding: 0.75rem 2rem;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    animation: turbo-popup 0.5s ease-out;
+    box-shadow: 0 4px 20px rgba(251, 191, 36, 0.5);
+    z-index: 10;
+}
+
+@keyframes turbo-shake {
+    0%, 100% { transform: translate(-50%, -50%) rotate(-1deg); }
+    50% { transform: translate(-50%, -50%) rotate(1deg); }
+}
+
+@keyframes flame-flicker {
+    0% { opacity: 0.8; transform: translateY(-50%) scale(1); }
+    100% { opacity: 1; transform: translateY(-50%) scale(1.1); }
+}
+
+@keyframes turbo-popup {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .race-track {
+        padding: 1rem;
+    }
+
+    .track-lane {
+        grid-template-columns: 50px 1fr 25px;
+    }
+
+    .lane-road {
+        height: 35px;
+    }
+
+    .racer-car {
+        font-size: 1.4rem;
+    }
+
+    .lane-label {
+        font-size: 0.75rem;
+    }
+}
