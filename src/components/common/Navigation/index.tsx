@@ -11,7 +11,7 @@ export function Navigation() {
     const dropdownRef = useRef<HTMLDivElement>(null)
 
     // Parsear la ruta para detectar contexto
-    // Formato: /matematicas/courseId/topicId/section
+    // Formato: /matematika/courseId/topicId/section
     const pathParts = location.pathname.split('/').filter(Boolean)
 
     // Detectar courseId y topicId del pathname
@@ -19,7 +19,7 @@ export function Navigation() {
     let topicId: string | undefined
     let currentSection: string | undefined
 
-    if (pathParts[0] === 'matematicas' && pathParts.length >= 2) {
+    if (pathParts[0] === 'matematika' && pathParts.length >= 2) {
         courseId = pathParts[1]
         if (pathParts.length >= 3) {
             topicId = pathParts[2]
@@ -33,9 +33,9 @@ export function Navigation() {
 
     // Detectar el contexto actual basado en la ruta
     const isHomePage = location.pathname === '/'
-    const isCoursesPage = location.pathname === '/matematicas'
-    const isTopicsPage = pathParts[0] === 'matematicas' && pathParts.length === 2 && courseId
-    const isContentPage = pathParts[0] === 'matematicas' && pathParts.length >= 3 && courseId && topicId
+    const isCoursesPage = location.pathname === '/matematika'
+    const isTopicsPage = pathParts[0] === 'matematika' && pathParts.length === 2 && courseId
+    const isContentPage = pathParts[0] === 'matematika' && pathParts.length >= 3 && courseId && topicId
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -73,7 +73,7 @@ export function Navigation() {
     }
 
     // Base path para las secciones
-    const contentBasePath = courseId && topicId ? `/matematicas/${courseId}/${topicId}` : ''
+    const contentBasePath = courseId && topicId ? `/matematika/${courseId}/${topicId}` : ''
 
     return (
         <nav className="navigation" role="navigation" aria-label="Main navigation" ref={dropdownRef}>
@@ -113,7 +113,7 @@ export function Navigation() {
                                 {courses.map(course => (
                                     <li key={course.id}>
                                         <Link
-                                            to={`/matematicas/${course.id}`}
+                                            to={`/matematika/${course.id}`}
                                             className="dropdown-item"
                                             onClick={() => setOpenDropdown(null)}
                                         >
@@ -141,7 +141,7 @@ export function Navigation() {
                                 {courses.map(course => (
                                     <li key={course.id}>
                                         <Link
-                                            to={`/matematicas/${course.id}`}
+                                            to={`/matematika/${course.id}`}
                                             className={`dropdown-item ${course.id === courseId ? 'active' : ''}`}
                                             onClick={() => setOpenDropdown(null)}
                                         >
@@ -170,7 +170,7 @@ export function Navigation() {
                                     <li key={topic.id}>
                                         {topic.active ? (
                                             <Link
-                                                to={`/matematicas/${courseId}/${topic.id}`}
+                                                to={`/matematika/${courseId}/${topic.id}`}
                                                 className={`dropdown-item ${topic.id === topicId ? 'active' : ''}`}
                                                 onClick={() => setOpenDropdown(null)}
                                             >

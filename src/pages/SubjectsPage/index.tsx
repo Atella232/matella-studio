@@ -15,7 +15,7 @@ export function SubjectsPage() {
 
                 <div className="subjects-grid">
                     <SubjectCard
-                        to="/matematicas"
+                        to="/matematika"
                         icon="∑"
                         title={t('subjects.math.title')}
                         description={t('subjects.math.description')}

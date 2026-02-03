@@ -18,7 +18,7 @@ const GAMES: GameInfo[] = [
         icon: '🍕',
         titleKey: 'games.pizzaFractions.title',
         descriptionKey: 'games.pizzaFractions.description',
-        path: '/matematicas/2eso/fracciones/jokuak/pizza',
+        path: '/matematika/dbh2/zatikiak/jokuak/pizza',
         tags: ['easyHard'],
         objectives: ['partOfWhole']
     },
@@ -27,7 +27,7 @@ const GAMES: GameInfo[] = [
         icon: '🃏',
         titleKey: 'games.fractionMemory.title',
         descriptionKey: 'games.fractionMemory.description',
-        path: '/matematicas/2eso/fracciones/jokuak/memory',
+        path: '/matematika/dbh2/zatikiak/jokuak/memory',
         tags: ['easyExpert'],
         objectives: ['equivalences']
     },
@@ -36,7 +36,7 @@ const GAMES: GameInfo[] = [
         icon: '🏎️',
         titleKey: 'games.fractionRace.title',
         descriptionKey: 'games.fractionRace.description',
-        path: '/matematicas/2eso/fracciones/jokuak/carrera',
+        path: '/matematika/dbh2/zatikiak/jokuak/carrera',
         tags: ['easyHard'],
         objectives: ['operations']
     }
@@ -48,7 +48,7 @@ export function GamesHub() {
     return (
         <div className="games-hub">
             <div className="container">
-                <Link to="/matematicas/2eso/fracciones/teoria" className="back-link">
+                <Link to="/matematika/dbh2/zatikiak/teoria" className="back-link">
                     ← {t('common.back')}
                 </Link>
 

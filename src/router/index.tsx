@@ -23,45 +23,45 @@ export const router = createHashRouter([
                 element: <SubjectsPage />,
             },
             {
-                path: 'matematicas',
+                path: 'matematika',
                 element: <CoursesPage />,
             },
             {
-                path: 'matematicas/:courseId',
+                path: 'matematika/:courseId',
                 element: <TopicsPage />,
             },
             // Ruta para Fracciones de 2º ESO (contenido actual)
             {
-                path: 'matematicas/2eso/fracciones',
+                path: 'matematika/dbh2/zatikiak',
                 element: <HomePage />,
             },
             {
-                path: 'matematicas/2eso/fracciones/laboratorio',
+                path: 'matematika/dbh2/zatikiak/laboratorio',
                 element: <LabPage />,
             },
             {
-                path: 'matematicas/2eso/fracciones/retos',
+                path: 'matematika/dbh2/zatikiak/retos',
                 element: <MissionPage />,
             },
             {
-                path: 'matematicas/2eso/fracciones/teoria',
+                path: 'matematika/dbh2/zatikiak/teoria',
                 element: <TheoryPage />,
             },
             // Games Hub and individual games
             {
-                path: 'matematicas/2eso/fracciones/jokuak',
+                path: 'matematika/dbh2/zatikiak/jokuak',
                 element: <GamesHub />,
             },
             {
-                path: 'matematicas/2eso/fracciones/jokuak/pizza',
+                path: 'matematika/dbh2/zatikiak/jokuak/pizza',
                 element: <PizzaFractions />,
             },
             {
-                path: 'matematicas/2eso/fracciones/jokuak/memory',
+                path: 'matematika/dbh2/zatikiak/jokuak/memory',
                 element: <FractionMemory />,
             },
             {
-                path: 'matematicas/2eso/fracciones/jokuak/carrera',
+                path: 'matematika/dbh2/zatikiak/jokuak/carrera',
                 element: <FractionRace />,
             },
             // Rutas legacy para compatibilidad

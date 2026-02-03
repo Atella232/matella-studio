@@ -11,7 +11,7 @@ export function TopicsPage() {
     const course = courseId ? getCourseById(courseId) : undefined
 
     if (!course) {
-        return <Navigate to="/matematicas" replace />
+        return <Navigate to="/matematika" replace />
     }
 
     const getCourseName = () => {
@@ -37,7 +37,7 @@ export function TopicsPage() {
                     <div className="topics-breadcrumb">
                         <a href="#/">{t('subjects.math.title')}</a>
                         <span className="separator">/</span>
-                        <a href="#/matematicas">{t('courses.title')}</a>
+                        <a href="#/matematika">{t('courses.title')}</a>
                     </div>
                     <h1 style={{ '--course-color': course.color } as React.CSSProperties}>
                         {getCourseName()}
@@ -55,7 +55,7 @@ export function TopicsPage() {
                             style={{ animationDelay: `${index * 0.05}s` }}
                         >
                             <SubjectCard
-                                to={topic.active ? `/matematicas/${courseId}/${topic.id}` : undefined}
+                                to={topic.active ? `/matematika/${courseId}/${topic.id}` : undefined}
                                 icon={topic.icon}
                                 title={getTopicName(topic)}
                                 description={topic.active ? t('topics.available') : t('topics.comingSoon')}

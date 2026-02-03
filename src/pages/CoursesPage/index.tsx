@@ -41,7 +41,7 @@ export function CoursesPage() {
                             style={{ animationDelay: `${index * 0.1}s` }}
                         >
                             <SubjectCard
-                                to={`/matematicas/${course.id}`}
+                                to={`/matematika/${course.id}`}
                                 icon={course.topics[0]?.icon || '📚'}
                                 title={getCourseName(course)}
                                 description={getCourseDescription(course)}

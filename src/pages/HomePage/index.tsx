@@ -14,16 +14,16 @@ export function HomePage() {
                     <p className="hero-description">{t('home.description')}</p>
 
                     <div className="hero-cta">
-                        <Link to="/matematicas/2eso/fracciones/teoria" className="btn btn-primary">
+                        <Link to="/matematika/dbh2/zatikiak/teoria" className="btn btn-primary">
                             📚 {t('nav.theory')}
                         </Link>
-                        <Link to="/matematicas/2eso/fracciones/laboratorio" className="btn btn-primary">
+                        <Link to="/matematika/dbh2/zatikiak/laboratorio" className="btn btn-primary">
                             🔬 {t('home.cta.lab')}
                         </Link>
-                        <Link to="/matematicas/2eso/fracciones/retos" className="btn btn-secondary">
+                        <Link to="/matematika/dbh2/zatikiak/retos" className="btn btn-secondary">
                             🎯 {t('home.cta.start')}
                         </Link>
-                        <Link to="/matematicas/2eso/fracciones/jokuak" className="btn btn-secondary">
+                        <Link to="/matematika/dbh2/zatikiak/jokuak" className="btn btn-secondary">
                             🎮 {t('nav.games')}
                         </Link>
                     </div>
@@ -38,28 +38,28 @@ export function HomePage() {
                             <div className="feature-icon">📚</div>
                             <h3>{t('nav.theory')}</h3>
                             <p>{t('home.features.theory.description')}</p>
-                            <Link to="/matematicas/2eso/fracciones/teoria" className="feature-link">{t('home.features.theory.link')}</Link>
+                            <Link to="/matematika/dbh2/zatikiak/teoria" className="feature-link">{t('home.features.theory.link')}</Link>
                         </article>
 
                         <article className="feature-card glass">
                             <div className="feature-icon">🔬</div>
                             <h3>{t('home.features.lab.title')}</h3>
                             <p>{t('home.features.lab.description')}</p>
-                            <Link to="/matematicas/2eso/fracciones/laboratorio" className="feature-link">{t('home.features.lab.link')}</Link>
+                            <Link to="/matematika/dbh2/zatikiak/laboratorio" className="feature-link">{t('home.features.lab.link')}</Link>
                         </article>
 
                         <article className="feature-card glass">
                             <div className="feature-icon">🎯</div>
                             <h3>{t('home.features.missions.title')}</h3>
                             <p>{t('home.features.missions.description')}</p>
-                            <Link to="/matematicas/2eso/fracciones/retos" className="feature-link">{t('home.features.missions.link')}</Link>
+                            <Link to="/matematika/dbh2/zatikiak/retos" className="feature-link">{t('home.features.missions.link')}</Link>
                         </article>
 
                         <article className="feature-card glass">
                             <div className="feature-icon">🎮</div>
                             <h3>{t('nav.games')}</h3>
                             <p>{t('home.features.games.description')}</p>
-                            <Link to="/matematicas/2eso/fracciones/jokuak" className="feature-link">{t('home.features.games.link')}</Link>
+                            <Link to="/matematika/dbh2/zatikiak/jokuak" className="feature-link">{t('home.features.games.link')}</Link>
                         </article>
 
                         <article className="feature-card glass">

@@ -21,7 +21,7 @@ export interface Course {
 
 export const courses: Course[] = [
   {
-    id: '1eso',
+    id: 'dbh1',
     name: '1º ESO',
     nameEu: 'DBH 1',
     nameAr: 'السنة الأولى',
@@ -33,7 +33,7 @@ export const courses: Course[] = [
       { id: 'numeros-naturales', name: 'Números Naturales', nameEu: 'Zenbaki Naturalak', nameAr: 'الأعداد الطبيعية', icon: '🔢' },
       { id: 'divisibilidad', name: 'Divisibilidad', nameEu: 'Zatigarritasuna', nameAr: 'القابلية للقسمة', icon: '➗' },
       { id: 'numeros-enteros', name: 'Números Enteros', nameEu: 'Zenbaki Osoak', nameAr: 'الأعداد الصحيحة', icon: '±' },
-      { id: 'fracciones', name: 'Fracciones', nameEu: 'Zatikiak', nameAr: 'الكسور', icon: '½' },
+      { id: 'zatikiak', name: 'Fracciones', nameEu: 'Zatikiak', nameAr: 'الكسور', icon: '½' },
       { id: 'numeros-decimales', name: 'Números Decimales', nameEu: 'Zenbaki Hamartarrak', nameAr: 'الأعداد العشرية', icon: '🔣' },
       { id: 'proporcionalidad', name: 'Proporcionalidad', nameEu: 'Proportzionaltasuna', nameAr: 'التناسب', icon: '⚖️' },
       { id: 'algebra', name: 'Iniciación al Álgebra', nameEu: 'Aljebraren Hastapenak', nameAr: 'مقدمة في الجبر', icon: '🔤' },
@@ -43,7 +43,7 @@ export const courses: Course[] = [
     ]
   },
   {
-    id: '2eso',
+    id: 'dbh2',
     name: '2º ESO',
     nameEu: 'DBH 2',
     nameAr: 'السنة الثانية',
@@ -54,7 +54,7 @@ export const courses: Course[] = [
     topics: [
       { id: 'divisibilidad', name: 'Divisibilidad', nameEu: 'Zatigarritasuna', nameAr: 'القابلية للقسمة', icon: '➗' },
       { id: 'numeros-enteros', name: 'Números Enteros', nameEu: 'Zenbaki Osoak', nameAr: 'الأعداد الصحيحة', icon: '±' },
-      { id: 'fracciones', name: 'Fracciones', nameEu: 'Zatikiak', nameAr: 'الكسور', icon: '½', active: true },
+      { id: 'zatikiak', name: 'Fracciones', nameEu: 'Zatikiak', nameAr: 'الكسور', icon: '½', active: true },
       { id: 'proporcionalidad', name: 'Proporcionalidad y Porcentajes', nameEu: 'Proportzionaltasuna eta Ehunekoak', nameAr: 'التناسب والنسب المئوية', icon: '📈' },
       { id: 'expresiones-algebraicas', name: 'Expresiones Algebraicas', nameEu: 'Adierazpen Aljebraikoak', nameAr: 'التعبيرات الجبرية', icon: '🔤' },
       { id: 'ecuaciones', name: 'Ecuaciones', nameEu: 'Ekuazioak', nameAr: 'المعادلات', icon: '⚖️' },
@@ -65,7 +65,7 @@ export const courses: Course[] = [
     ]
   },
   {
-    id: '3eso',
+    id: 'dbh3',
     name: '3º ESO',
     nameEu: 'DBH 3',
     nameAr: 'السنة الثالثة',
@@ -87,7 +87,7 @@ export const courses: Course[] = [
     ]
   },
   {
-    id: '4eso',
+    id: 'dbh4',
     name: '4º ESO',
     nameEu: 'DBH 4',
     nameAr: 'السنة الرابعة',
@@ -108,7 +108,7 @@ export const courses: Course[] = [
     ]
   },
   {
-    id: '1bach',
+    id: 'batx1',
     name: '1º Bachillerato',
     nameEu: 'Batxilergoa 1',
     nameAr: 'البكالوريا الأولى',
@@ -130,7 +130,7 @@ export const courses: Course[] = [
     ]
   },
   {
-    id: '2bach',
+    id: 'batx2',
     name: '2º Bachillerato',
     nameEu: 'Batxilergoa 2',
     nameAr: 'البكالوريا الثانية',
