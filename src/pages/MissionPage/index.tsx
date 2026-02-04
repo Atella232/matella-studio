@@ -117,7 +117,10 @@ const getChallenges = (t: any): Challenge[] => [
         title: t('missions.challenges.ch9.title'),
         description: t('missions.challenges.ch9.description'),
         hint: t('missions.challenges.ch9.hint'),
-        validate: (ans) => ans === '3/4' || ans === '0.75',
+        validate: (ans) => {
+            const normalized = ans.toLowerCase().replace(/\s+/g, '').replace('metros', '').replace('metro', '').replace('m', '')
+            return normalized === '18'
+        },
         successMessage: t('missions.challenges.ch9.success'),
         errorMessage: t('missions.challenges.ch9.error'),
         points: 30
