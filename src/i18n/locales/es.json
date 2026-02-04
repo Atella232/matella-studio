@@ -254,11 +254,11 @@
                 "error": "¡Cuidado con la parte de 'lo que quedaba'! 1/4 es el alquiler y 1/4 la comida."
             },
             "ch12": {
-                "title": "💀 El Desafío Final",
-                "description": "Calcula: [ (3/4 - 1/2) ÷ 1/8 ] × (2/3 + 1/6)",
-                "hint": "Haz el corchete primero, luego el paréntesis y multiplica.",
-                "success": "¡Lo lograste! [ 1/4 ÷ 1/8 ] × 5/6 = 2 × 5/6 = 5/3",
-                "error": "Corchete = 2. Paréntesis = 5/6. Entonces: 2 × 5/6 = ?"
+                "title": "💀 El Desafío Final: El Tanque de Agua",
+                "description": "Tres agricultores comparten un tanque de agua. El primero usa 1/4, el segundo usa 1/3 de lo que queda, y el tercero usa 2/5 del resto. Si quedan 1300 litros, ¿cuántos litros había al principio?",
+                "hint": "Trabaja hacia atrás: 1300L = resto × (1-2/5). Continúa paso a paso hasta el inicio.",
+                "success": "¡Excelente! Resolviendo: 1300 ÷ 0.6 ÷ 0.667 ÷ 0.75 = 6000L",
+                "error": "Paso a paso: Final = X × 3/4 × 2/3 × 3/5 = 1300. Despeja X."
             }
         },
         "baserri": {

@@ -96,8 +96,7 @@
 
 .info-label {
     font-weight: 700;
-    color: #1e293b;
-    /* Oscurecido de var(--color-text-secondary) */
+    color: var(--color-text-secondary, #94a3b8);
 }
 
 .fraction-display {

@@ -254,11 +254,11 @@
                 "error": "Kontuz 'geratzen denaren' zatiarekin! 1/4 alokairua eta 1/4 janaria da."
             },
             "ch12": {
-                "title": "💀 Azken Erronka",
-                "description": "Kalkulatu: [ (3/4 - 1/2) ÷ 1/8 ] × (2/3 + 1/6)",
-                "hint": "Egin kortxete barrukoa lehenik, gero guraso artekoa eta biderkatu.",
-                "success": "Zuzena da! [ 1/4 ÷ 1/8 ] × 5/6 = 2 × 5/6 = 5/3",
-                "error": "Kortxetea = 2. Guraso artekoa = 5/6. Orduan: 2 × 5/6 = ?"
+                "title": "💀 Azken Erronka: Ur Depositua",
+                "description": "Hiru nekazarik ur-depositu bat partekatzen dute. Lehenak 1/4 erabiltzen du, bigarrenak gainerakoaren 1/3, eta hirugarrenak 2/5 geratzen denaren. 1300 litro geratzen badira, zenbat litro zeuden hasieran?",
+                "hint": "Alderantziz lan egin: 1300L = geratutakoa × (1-2/5). Jarraitu pausoz-pauso hasierara arte.",
+                "success": "Bikain! 6000L × 3/4 = 4500L; 4500L × 2/3 = 3000L; 3000L × 3/5 = 1800L... Ez! Berriro: 1300 ÷ 0.6 ÷ 0.667 ÷ 0.75 = 6000L",
+                "error": "Pausoz pauso: Azkena = X × 3/4 × 2/3 × 3/5 = 1300. Ebatzi X."
             }
         },
         "baserri": {
