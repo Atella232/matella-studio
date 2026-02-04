@@ -80,7 +80,10 @@ const getChallenges = (t: any): Challenge[] => [
         title: t('missions.challenges.ch6.title'),
         description: t('missions.challenges.ch6.description'),
         hint: t('missions.challenges.ch6.hint'),
-        validate: (ans) => ans === '5/3' || ans === '1 2/3' || ans.includes('1.67'),
+        validate: (ans) => {
+            const normalized = ans.toLowerCase().replace(/\s+/g, '').replace('litros', '').replace('litro', '').replace('l', '')
+            return normalized === '6000'
+        },
         successMessage: t('missions.challenges.ch6.success'),
         errorMessage: t('missions.challenges.ch6.error'),
         points: 20
@@ -91,7 +94,7 @@ const getChallenges = (t: any): Challenge[] => [
         title: t('missions.challenges.ch7.title'),
         description: t('missions.challenges.ch7.description'),
         hint: t('missions.challenges.ch7.hint'),
-        validate: (ans) => ans === '72' || ans === '72 km' || ans === '72km',
+        validate: (ans) => ans === '3/5' || ans === '0.6',
         successMessage: t('missions.challenges.ch7.success'),
         errorMessage: t('missions.challenges.ch7.error'),
         points: 20
@@ -102,7 +105,7 @@ const getChallenges = (t: any): Challenge[] => [
         title: t('missions.challenges.ch8.title'),
         description: t('missions.challenges.ch8.description'),
         hint: t('missions.challenges.ch8.hint'),
-        validate: (ans) => ans.toLowerCase().includes('5/8') || ans === '5/8',
+        validate: (ans) => ans === '35' || ans.toLowerCase().includes('35 min'),
         successMessage: t('missions.challenges.ch8.success'),
         errorMessage: t('missions.challenges.ch8.error'),
         points: 20
@@ -114,7 +117,7 @@ const getChallenges = (t: any): Challenge[] => [
         title: t('missions.challenges.ch9.title'),
         description: t('missions.challenges.ch9.description'),
         hint: t('missions.challenges.ch9.hint'),
-        validate: (ans) => ans === '11/10' || ans === '1 1/10' || ans === '1.1',
+        validate: (ans) => ans === '3/4' || ans === '0.75',
         successMessage: t('missions.challenges.ch9.success'),
         errorMessage: t('missions.challenges.ch9.error'),
         points: 30
@@ -125,7 +128,7 @@ const getChallenges = (t: any): Challenge[] => [
         title: t('missions.challenges.ch10.title'),
         description: t('missions.challenges.ch10.description'),
         hint: t('missions.challenges.ch10.hint'),
-        validate: (ans) => ans === '3/5',
+        validate: (ans) => ans === '90' || ans.toLowerCase().includes('90 min'),
         successMessage: t('missions.challenges.ch10.success'),
         errorMessage: t('missions.challenges.ch10.error'),
         points: 30
@@ -136,7 +139,7 @@ const getChallenges = (t: any): Challenge[] => [
         title: t('missions.challenges.ch11.title'),
         description: t('missions.challenges.ch11.description'),
         hint: t('missions.challenges.ch11.hint'),
-        validate: (ans) => ans === '35' || ans === '35 minutos' || ans === '35 min',
+        validate: (ans) => ans === '1200' || ans.includes('1200'),
         successMessage: t('missions.challenges.ch11.success'),
         errorMessage: t('missions.challenges.ch11.error'),
         points: 30
@@ -147,10 +150,13 @@ const getChallenges = (t: any): Challenge[] => [
         title: t('missions.challenges.ch12.title'),
         description: t('missions.challenges.ch12.description'),
         hint: t('missions.challenges.ch12.hint'),
-        validate: (ans) => ans === '5/4' || ans === '1 1/4' || ans === '1.25',
+        validate: (ans) => {
+            const normalized = ans.toLowerCase().replace(/\s+/g, '').replace('litros', '').replace('litro', '').replace('l', '')
+            return normalized === '6000'
+        },
         successMessage: t('missions.challenges.ch12.success'),
         errorMessage: t('missions.challenges.ch12.error'),
-        points: 30
+        points: 40 // Increased for final boss
     }
 ]
 

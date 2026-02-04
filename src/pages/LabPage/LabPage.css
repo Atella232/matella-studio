@@ -1,15 +1,7 @@
 .lab-page {
     padding: var(--space-8) 0;
     min-height: 100vh;
-    background: linear-gradient(135deg, #F0F4FF 0%, #E0E7FF 50%, #F5F3FF 100%);
-
-    /* Forzar contraste máximo para fondo claro */
-    --color-text-primary: #020617;
-    /* Slate 950 (Casi Negro) */
-    --color-text-secondary: #0f172a;
-    /* Slate 900 */
-    --color-text-muted: #1e293b;
-    /* Slate 800 */
+    background: var(--color-bg);
 }
 
 .lab-header {
@@ -20,15 +12,15 @@
 .lab-header h1 {
     margin-bottom: var(--space-4);
     font-size: var(--text-4xl);
-    background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+    background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    filter: drop-shadow(0 0 2em var(--color-primary-glow));
 }
 
 .lab-instructions {
-    color: #334155;
-    /* Oscurecido de #475569 */
+    color: var(--color-text-secondary);
     max-width: 600px;
     margin: 0 auto;
     font-size: var(--text-lg);
@@ -52,31 +44,55 @@
     align-items: center;
     gap: var(--space-2);
     padding: var(--space-4);
-    background: white;
-    border: 3px solid transparent;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
     border-radius: var(--radius-xl);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     transition: all var(--transition-normal);
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.lab-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, var(--lab-color) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    z-index: 0;
 }
 
 .lab-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    border-color: var(--lab-color, var(--color-primary));
+    border-color: var(--lab-color);
+    box-shadow: 0 0 20px -5px var(--lab-color);
+}
+
+.lab-card:hover::before {
+    opacity: 0.1;
 }
 
 .lab-card.active {
-    background: linear-gradient(135deg, white, #F5F3FF);
-    border-color: var(--lab-color, var(--color-primary));
-    box-shadow: 0 8px 24px color-mix(in srgb, var(--lab-color, var(--color-primary)) 30%, transparent);
+    background: var(--glass-bg-light);
+    border-color: var(--lab-color);
+    box-shadow: 0 0 30px -5px var(--lab-color);
     transform: translateY(-2px);
+}
+
+.lab-card.active::before {
+    opacity: 0.15;
 }
 
 .lab-card .lab-icon {
     font-size: var(--text-4xl);
     line-height: 1;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    z-index: 1;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
     transition: transform var(--transition-normal);
 }
 
@@ -87,28 +103,47 @@
 
 .lab-card .lab-name {
     font-size: var(--text-sm);
-    font-weight: 800;
+    font-weight: 700;
     text-align: center;
-    color: #0f172a;
-    /* Negro azulado */
+    color: var(--color-text-primary);
+    z-index: 1;
 }
 
 .lab-card:focus-visible {
     outline: none;
-    box-shadow: var(--focus-ring), 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--focus-ring);
 }
 
 /* Lab Content */
 .lab-content {
     min-height: 400px;
-    background: white;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
     border-radius: var(--radius-2xl);
     padding: var(--space-6);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-2xl);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decoración de fondo para el panel */
+.lab-content::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--color-primary-glow) 0%, transparent 70%);
+    opacity: 0.1;
+    pointer-events: none;
 }
 
 .lab-panel {
     animation: fadeIn 0.3s ease;
+    position: relative;
+    z-index: 1;
 }
 
 .lab-panel-header {
@@ -117,23 +152,24 @@
     gap: var(--space-4);
     margin-bottom: var(--space-6);
     padding-bottom: var(--space-4);
-    border-bottom: 2px solid var(--color-border);
+    border-bottom: 1px solid var(--glass-border);
 }
 
 .lab-panel-header .panel-icon {
     font-size: var(--text-5xl);
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
 }
 
 .lab-panel-header h2 {
     margin: 0;
     font-size: var(--text-2xl);
     color: var(--color-text-primary);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .lab-panel-header p {
     margin: var(--space-1) 0 0;
-    color: #1e293b;
-    /* Oscurecido de #475569 */
+    color: var(--color-text-secondary);
     font-size: var(--text-base);
     font-weight: 500;
 }

@@ -219,46 +219,46 @@
                 "error": "Para 1 persona: (2/3) ÷ 4 = 1/6. Para 10: 1/6 × 10 = 5/3"
             },
             "ch7": {
-                "title": "🚗 Viaje en coche",
-                "description": "Un viaje es de 120 km. Ya has recorrido 2/5. ¿Cuántos km te faltan?",
-                "hint": "Si has recorrido 2/5, te falta 3/5 del viaje.",
-                "success": "¡Correcto! Te faltan 3/5 × 120 = 72 km.",
-                "error": "Calcula 3/5 de 120 km."
-            },
-            "ch8": {
-                "title": "💧 Depósito de agua",
-                "description": "¿Cuál es mayor: 5/8 o 7/12?",
-                "hint": "Convierte ambas al mismo denominador (24) y compara.",
-                "success": "¡Muy bien! 5/8 = 15/24 > 7/12 = 14/24",
-                "error": "Busca el MCM de 8 y 12 para comparar."
-            },
-            "ch9": {
-                "title": "🔢 Operaciones combinadas",
-                "description": "Calcula: (2/3 + 1/4) × 6/5",
-                "hint": "Primero suma dentro del paréntesis, luego multiplica.",
-                "success": "¡Excelente! (2/3 + 1/4) × 6/5 = 11/12 × 6/5 = 11/10",
-                "error": "2/3 + 1/4 = 11/12. Luego 11/12 × 6/5 = ?"
-            },
-            "ch10": {
                 "title": "📊 Porcentajes y fracciones",
                 "description": "El 60% de los estudiantes aprobó. ¿Qué fracción simplificada es?",
                 "hint": "60% = 60/100. Simplifica dividiendo por el MCD.",
                 "success": "¡Correcto! 60/100 = 3/5",
                 "error": "Divide 60 y 100 por su MCD (20)."
             },
-            "ch11": {
+            "ch8": {
                 "title": "🏃 Carrera de relevos",
                 "description": "Un corredor completa 3/7 del trayecto en 15 minutos. ¿Cuántos minutos tardará en total?",
                 "hint": "Si 3/7 = 15 min, entonces 1/7 = 5 min.",
                 "success": "¡Perfecto! 15 ÷ 3 × 7 = 35 minutos.",
                 "error": "Usa regla de tres: 3/7 → 15, 7/7 → ?"
             },
+            "ch9": {
+                "title": "🔢 Operaciones combinadas difíciles",
+                "description": "Calcula: (1/2 + 1/3) × 6/5 - 1/4",
+                "hint": "Primero el paréntesis, luego multiplica y al final resta.",
+                "success": "¡Excelente! (5/6) × 6/5 - 1/4 = 1 - 1/4 = 3/4",
+                "error": "Cuidado con el orden: (5/6) × 1.2 = 1. Luego 1 - 0.25 = ?"
+            },
+            "ch10": {
+                "title": "🚰 Grifos y depósitos",
+                "description": "Un grifo tarda 2 horas en llenar un depósito, y otro tarda 6 horas. ¿Cuántos minutos tardarán los dos juntos?",
+                "hint": "En una hora, uno llena 1/2 y el otro 1/6. Suma ambos.",
+                "success": "¡Muy bien! 1/2 + 1/6 = 2/3 llenan por hora. Así que tardan 3/2 horas = 90 minutos.",
+                "error": "Suma lo que llenan por hora: 1/2 + 1/6 = 2/3. Luego calcula el tiempo total."
+            },
+            "ch11": {
+                "title": "💸 Salario y gastos",
+                "description": "Has gastado 1/4 de tu salario en alquiler, y 1/3 de lo que te quedaba en comida. Si aún tienes 600€, ¿cuál era tu salario?",
+                "hint": "Tras el alquiler te quedan 3/4. La comida es 1/3 × 3/4 = 1/4.",
+                "success": "¡Perfecto! Alquiler + Comida = 1/2. Por tanto, 600€ es la mitad del salario. Total 1200€.",
+                "error": "¡Cuidado con la parte de 'lo que quedaba'! 1/4 es el alquiler y 1/4 la comida."
+            },
             "ch12": {
-                "title": "🧮 División de fracciones",
-                "description": "Calcula: 5/6 ÷ 2/3 + 1/4",
-                "hint": "Primero divide (invierte y multiplica), luego suma.",
-                "success": "¡Excelente! 5/6 ÷ 2/3 = 5/4, y 5/4 + 1/4 = 6/4 = 3/2... ¡Espera! 5/4 es la respuesta de la división.",
-                "error": "5/6 × 3/2 = 15/12 = 5/4. Luego suma 1/4."
+                "title": "💀 El Desafío Final",
+                "description": "Calcula: [ (3/4 - 1/2) ÷ 1/8 ] × (2/3 + 1/6)",
+                "hint": "Haz el corchete primero, luego el paréntesis y multiplica.",
+                "success": "¡Lo lograste! [ 1/4 ÷ 1/8 ] × 5/6 = 2 × 5/6 = 5/3",
+                "error": "Corchete = 2. Paréntesis = 5/6. Entonces: 2 × 5/6 = ?"
             }
         },
         "baserri": {
