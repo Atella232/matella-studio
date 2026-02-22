@@ -1,21 +1,8 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import './TheoryPage.css'
 
-interface VocabularyItem {
-    term: string
-    definition: string
-}
-
-interface QuickCheckItem {
-    question: string
-    answer: string
-}
-
-interface CardConnections {
-    laboratorio: string[]
-    erronkak: string[]
-    jokuak: string[]
-}
+type Lang = 'es' | 'eu' | 'ar'
 
 interface TheoryCard {
     id: string
@@ -24,572 +11,652 @@ interface TheoryCard {
     color: string
     objective: string
     keyIdea: string
-    development: string[]
-    vocabulary: VocabularyItem[]
-    solvedExample: string[]
-    edgeCase: string
+    example: string
     typicalError: string
     correction: string
-    quickCheck: QuickCheckItem[]
-    connections: CardConnections
+    quickQ: string
+    quickA: string
+    lab: string
+    mission: string
+    game: string
 }
 
-const THEORY_CARDS: TheoryCard[] = [
+interface TheoryCopy {
+    title: string
+    subtitle: string
+    description: string
+    cards: TheoryCard[]
+    labels: {
+        objective: string
+        keyIdea: string
+        example: string
+        typicalError: string
+        correction: string
+        answer: string
+        lab: string
+        mission: string
+        game: string
+    }
+    coherenceTitle: string
+    coherenceRows: Array<{ central: string; reinforces: string; connection: string }>
+    qualityTitle: string
+    qualityItems: string[]
+}
+
+function resolveLang(language: string): Lang {
+    if (language.startsWith('eu')) return 'eu'
+    if (language.startsWith('ar')) return 'ar'
+    return 'es'
+}
+
+const COMMON_META = [
+    { id: 't1', icon: '01', color: '#6366f1' },
+    { id: 't2', icon: '02', color: '#06b6d4' },
+    { id: 't3', icon: '03', color: '#8b5cf6' },
+    { id: 't4', icon: '04', color: '#ec4899' },
+    { id: 't5', icon: '05', color: '#f59e0b' },
+    { id: 't6', icon: '06', color: '#10b981' },
+    { id: 't7', icon: '07', color: '#14b8a6' },
+    { id: 't8', icon: '08', color: '#ef4444' },
+    { id: 't9', icon: '09', color: '#0ea5e9' },
+    { id: 't10', icon: '10', color: '#a855f7' }
+] as const
+
+const ES_CARDS: Omit<TheoryCard, 'id' | 'icon' | 'color'>[] = [
     {
-        id: 'sistema-decimal',
         title: 'Sistema decimal y valor posicional',
-        icon: '01',
-        color: '#6366f1',
-        objective: 'Comprender que el sistema de numeracion decimal es decimal y posicional.',
-        keyIdea:
-            'Cada posicion vale diez veces la posicion de su derecha. El valor de una cifra depende del lugar que ocupa.',
-        development: [
-            'El sistema es decimal porque trabaja con agrupaciones de $$10$$.',
-            'Es posicional porque la misma cifra puede representar cantidades distintas segun su orden.',
-            'En $$3,507$$ la cifra $$5$$ representa $$500$$; en $$35,070$$ representa $$5,000$$.',
-            'Ordenes habituales: unidades, decenas, centenas, unidades de millar, decenas de millar, centenas de millar, millones.',
-            'Relaciones clave: $$1$$ decena $$=10$$ unidades; $$1$$ centena $$=100$$ unidades; $$1$$ unidad de millar $$=1000$$ unidades.'
-        ],
-        vocabulary: [
-            { term: 'Cifra', definition: 'Simbolo del $$0$$ al $$9$$.' },
-            { term: 'Numero', definition: 'Expresion formada por una o mas cifras.' },
-            { term: 'Orden de unidades', definition: 'Posicion de una cifra dentro del numero.' },
-            { term: 'Valor posicional', definition: 'Cantidad que representa una cifra segun su posicion.' }
-        ],
-        solvedExample: [
-            'Numero: $$48,205$$.',
-            'Descomposicion: $$40,000 + 8,000 + 200 + 0 + 5$$.',
-            'Lectura estructurada: cuarenta y ocho mil doscientos cinco.'
-        ],
-        edgeCase: 'En $$30,004$$ los ceros mantienen la estructura del numero. No es lo mismo que $$34$$.',
-        typicalError: 'Pensar que la cifra $$5$$ siempre vale $$5$$.',
-        correction: 'La cifra puede valer $$5$$, $$50$$, $$500$$ o $$5,000$$ segun la posicion.',
-        quickCheck: [
-            { question: 'En $$72,641$$, que valor tiene la cifra $$6$$?', answer: '$$600$$' },
-            { question: 'Cuantas unidades son $$3$$ centenas?', answer: '$$300$$' }
-        ],
-        connections: {
-            laboratorio: ['Herramienta 1 (Abaco posicional)', 'Herramienta 2 (Lectura-descomposicion)'],
-            erronkak: ['Nivel 1 - Problema 1', 'Nivel 3 - Problema 1'],
-            jokuak: ['Juego 1 (Flash Posicional)']
-        }
+        objective: 'Entender que el valor de una cifra depende de su posicion.',
+        keyIdea: 'Cada orden vale 10 veces el orden de su derecha.',
+        example: '$$48,205 = 40,000 + 8,000 + 200 + 5$$.',
+        typicalError: 'Creer que la cifra $$5$$ siempre vale $$5$$.',
+        correction: 'Puede valer $$5$$, $$50$$, $$500$$ o $$5,000$$.',
+        quickQ: 'Valor del $$6$$ en $$72,641$$?',
+        quickA: '$$600$$',
+        lab: 'Herramienta 1 y 2',
+        mission: 'Nivel 1 - Problema 1',
+        game: 'Juego 1'
     },
     {
-        id: 'lectura-escritura',
         title: 'Lectura, escritura y descomposicion',
-        icon: '02',
-        color: '#06b6d4',
-        objective: 'Leer, escribir y descomponer numeros naturales con precision.',
-        keyIdea:
-            'Un numero puede representarse de forma equivalente con cifras, palabras y descomposicion aditiva.',
-        development: [
-            'Representaciones equivalentes: escritura en cifras, lectura en palabras y descomposicion aditiva.',
-            'La descomposicion muestra la estructura del numero y evita errores de lectura.',
-            'Ejemplo general: $$3,406,018 = 3,000,000 + 400,000 + 6,000 + 10 + 8$$.',
-            'Conviene agrupar por periodos de tres cifras para leer bien: unidades, millares, millones.'
-        ],
-        vocabulary: [
-            { term: 'Descomposicion aditiva', definition: 'Suma de los valores posicionales.' },
-            { term: 'Periodo', definition: 'Bloque de tres cifras (miles, millones, ...).' }
-        ],
-        solvedExample: [
-            'Numero: $$5,072,304$$.',
-            'Descomposicion: $$5,000,000 + 70,000 + 2,000 + 300 + 4$$.',
-            'Lectura: cinco millones setenta y dos mil trescientos cuatro.'
-        ],
-        edgeCase: 'No se lee cifra a cifra. Se lee por periodos completos.',
-        typicalError: 'Omitir periodos con cero y deformar la lectura.',
-        correction: 'Mantener todos los bloques de tres cifras y leer de izquierda a derecha por periodos.',
-        quickCheck: [
-            { question: 'Escribe en cifras: dos millones cuarenta mil siete.', answer: '$$2,040,007$$' },
-            { question: 'Descompon $$90,305$$.', answer: '$$90,000 + 300 + 5$$' }
-        ],
-        connections: {
-            laboratorio: ['Herramienta 2 (Lectura-escritura-descomposicion)'],
-            erronkak: ['Nivel 1 - Problema 1', 'Nivel 1 - Problema 2'],
-            jokuak: ['Juego 1 (Flash Posicional)']
-        }
+        objective: 'Pasar de cifras a palabras y descomposicion sin errores.',
+        keyIdea: 'Las tres representaciones son equivalentes.',
+        example: '$$5,072,304 = 5,000,000 + 70,000 + 2,000 + 300 + 4$$.',
+        typicalError: 'Omitir periodos con cero.',
+        correction: 'Leer por bloques de tres cifras.',
+        quickQ: 'Dos millones cuarenta mil siete en cifras?',
+        quickA: '$$2,040,007$$',
+        lab: 'Herramienta 2',
+        mission: 'Nivel 1 - Problema 1 y 2',
+        game: 'Juego 1'
     },
     {
-        id: 'orden-comparacion',
         title: 'Orden, comparacion y recta numerica',
-        icon: '03',
-        color: '#8b5cf6',
-        objective: 'Comparar y ordenar numeros naturales usando criterio posicional.',
-        keyIdea:
-            'Primero se compara el numero de cifras; si coinciden, se compara de izquierda a derecha.',
-        development: [
-            'Regla 1: en naturales, mas cifras suele implicar numero mayor.',
-            'Regla 2: si tienen igual numero de cifras, se compara por el orden mas alto.',
-            'Simbolos: $$>$$ mayor que, $$<$$ menor que, $$=$$ igual.',
-            'En la recta numerica, los numeros mayores quedan a la derecha.'
-        ],
-        vocabulary: [
-            { term: 'Comparar', definition: 'Decidir cual es mayor, menor o igual.' },
-            { term: 'Orden creciente', definition: 'De menor a mayor.' },
-            { term: 'Orden decreciente', definition: 'De mayor a menor.' }
-        ],
-        solvedExample: [
-            'Comparar $$438,912$$ y $$438,291$$.',
-            'Mismas cifras iniciales $$4,3,8$$. En la siguiente posicion $$9>2$$.',
-            'Conclusion: $$438,912 > 438,291$$.'
-        ],
-        edgeCase: '$$40,500 = 40,500$$. Tambien hay casos de igualdad exacta.',
-        typicalError: 'Comparar solo por la ultima cifra.',
-        correction: 'Siempre comparar desde la cifra de mayor orden.',
-        quickCheck: [
-            { question: 'Cual es mayor: $$70,203$$ o $$69,999$$?', answer: '$$70,203$$' },
-            { question: 'Ordena: $$5402, 5042, 5420$$.', answer: '$$5042 < 5402 < 5420$$' }
-        ],
-        connections: {
-            laboratorio: ['Herramienta 3 (Comparador y recta numerica)'],
-            erronkak: ['Nivel 1 - Problema 2'],
-            jokuak: ['Juego 1 (Flash Posicional)']
-        }
+        objective: 'Comparar naturales con criterio estable.',
+        keyIdea: 'Primero cifras totales; luego comparar desde la izquierda.',
+        example: '$$438,912 > 438,291$$.',
+        typicalError: 'Comparar solo por unidades.',
+        correction: 'Comenzar por la cifra de mayor orden.',
+        quickQ: 'Mayor: $$70,203$$ o $$69,999$$?',
+        quickA: '$$70,203$$',
+        lab: 'Herramienta 3',
+        mission: 'Nivel 1 - Problema 2',
+        game: 'Juego 1'
     },
     {
-        id: 'numeros-grandes',
         title: 'Numeros grandes y escalas de lectura',
-        icon: '04',
-        color: '#ec4899',
-        objective: 'Manejar numeros grandes con lectura por periodos y sentido de magnitud.',
-        keyIdea: 'Agrupar cifras en bloques de tres evita errores de lectura y comparacion.',
-        development: [
-            'Periodos de lectura: unidades, millares, millones, miles de millones.',
-            '$$1,000,000$$ es un millon; $$1,000,000,000$$ es mil millones.',
-            'La lectura por periodos ayuda a interpretar datos reales: poblacion, distancias, presupuestos.'
-        ],
-        vocabulary: [
-            { term: 'Millar', definition: '$$1000$$ unidades.' },
-            { term: 'Millon', definition: '$$1,000,000$$.' },
-            { term: 'Mil millones', definition: '$$1,000,000,000$$.' }
-        ],
-        solvedExample: [
-            'Leer $$2,405,070,018$$ como $$2 | 405 | 070 | 018$$.',
-            'Lectura correcta: dos mil cuatrocientos cinco millones setenta mil dieciocho.'
-        ],
-        edgeCase: 'Error frecuente: perder un periodo y leer "dos millones..." en lugar de "dos mil cuatrocientos cinco millones...".',
-        typicalError: 'Leer bloques sin nombrar el periodo correspondiente.',
-        correction: 'Separar en grupos de tres y asignar el nombre de cada periodo.',
-        quickCheck: [
-            { question: 'Escribe en cifras: siete mil millones.', answer: '$$7,000,000,000$$' },
-            { question: 'Que numero es mayor: $$999,999,999$$ o $$1,000,000,000$$?', answer: '$$1,000,000,000$$' }
-        ],
-        connections: {
-            laboratorio: ['Herramienta 2', 'Herramienta 3'],
-            erronkak: ['Nivel 1 - Problema 2'],
-            jokuak: ['Juego 1 (Flash Posicional)']
-        }
+        objective: 'Leer magnitudes grandes correctamente.',
+        keyIdea: 'Separar en bloques de tres simplifica lectura y orden.',
+        example: '$$2,405,070,018 = 2|405|070|018$$.',
+        typicalError: 'Perder un periodo al leer.',
+        correction: 'Nombrar cada bloque con su periodo.',
+        quickQ: 'Escribe siete mil millones.',
+        quickA: '$$7,000,000,000$$',
+        lab: 'Herramienta 2 y 3',
+        mission: 'Nivel 1 - Problema 2',
+        game: 'Juego 1'
     },
     {
-        id: 'aproximacion-redondeo',
         title: 'Aproximacion y redondeo',
-        icon: '05',
-        color: '#f59e0b',
-        objective: 'Redondear numeros naturales al orden pedido con criterio correcto.',
-        keyIdea:
-            'Para redondear a un orden, se mira solo la cifra inmediata de la derecha: menor que $$5$$ se mantiene, $$5$$ o mayor se sube una unidad.',
-        development: [
-            'Paso 1: identificar el orden de aproximacion.',
-            'Paso 2: mirar la cifra siguiente.',
-            'Paso 3: decidir mantener o subir.',
-            'Paso 4: reemplazar por ceros lo que queda a la derecha.',
-            'Redondear simplifica la comunicacion, pero pierde precision.'
-        ],
-        vocabulary: [
-            { term: 'Aproximar', definition: 'Sustituir un numero por otro cercano.' },
-            { term: 'Redondear', definition: 'Metodo de aproximacion basado en la cifra siguiente.' },
-            { term: 'Orden de aproximacion', definition: 'Posicion a la que se redondea.' }
-        ],
-        solvedExample: [
-            'Redondear $$384,523$$ a millares.',
-            'Se mira la centena: $$5$$. Como $$5 \ge 5$$, sube el millar.',
-            'Resultado: $$385,000$$.'
-        ],
-        edgeCase: '$$12,500$$ a millares se aproxima a $$13,000$$ porque la centena es $$5$$.',
-        typicalError: 'Mirar varias cifras de la derecha en vez de una sola.',
-        correction: 'Solo se mira la cifra inmediatamente siguiente al orden elegido.',
-        quickCheck: [
-            { question: 'Redondea $$72,480$$ a millares.', answer: '$$72,000$$' },
-            { question: 'Redondea $$72,580$$ a millares.', answer: '$$73,000$$' }
-        ],
-        connections: {
-            laboratorio: ['Herramienta 4 (Laboratorio de redondeo)'],
-            erronkak: ['Nivel 1 - Problema 3', 'Nivel 3 - Problema 2'],
-            jokuak: ['Juego 1 (Flash Posicional)']
-        }
+        objective: 'Redondear al orden indicado con seguridad.',
+        keyIdea: 'Mirar solo la cifra siguiente: <5 mantiene, >=5 sube.',
+        example: '$$384,523$$ a millares -> $$385,000$$.',
+        typicalError: 'Mirar varias cifras a la vez.',
+        correction: 'Solo cuenta la cifra inmediata.',
+        quickQ: '$$72,580$$ a millares?',
+        quickA: '$$73,000$$',
+        lab: 'Herramienta 4',
+        mission: 'Nivel 1 - Problema 3',
+        game: 'Juego 1'
     },
     {
-        id: 'suma-resta',
-        title: 'Suma y resta con sentido y comprobacion',
-        icon: '06',
-        color: '#10b981',
-        objective: 'Resolver sumas y restas en contexto y validar el resultado.',
-        keyIdea: 'La suma combina cantidades y la resta expresa diferencia o cambio. Son operaciones inversas en muchos casos.',
-        development: [
-            'Suma: juntar y aumentar.',
-            'Resta: quitar, comparar o completar.',
-            'Relacion inversa: si $$a+b=c$$ entonces $$c-a=b$$ y $$c-b=a$$.',
-            'Conviene estimar antes o despues para controlar la coherencia.'
-        ],
-        vocabulary: [
-            { term: 'Sumandos', definition: 'Numeros que se suman.' },
-            { term: 'Total', definition: 'Resultado de la suma.' },
-            { term: 'Minuendo, sustraendo, diferencia', definition: 'Terminos de la resta.' },
-            { term: 'Comprobacion', definition: 'Verificacion con operacion inversa o estimacion.' }
-        ],
-        solvedExample: [
-            'Compras: $$167 + 235 + 32$$.',
-            '$$167 + 235 = 402$$ y $$402 + 32 = 434$$.',
-            'Estimacion: $$170 + 240 + 30 \approx 440$$, resultado coherente.'
-        ],
-        edgeCase: 'En naturales, $$5-9$$ no pertenece al conjunto de naturales.',
-        typicalError: 'Aceptar el resultado sin comprobar si tiene sentido.',
-        correction: 'Comparar siempre con una estimacion razonable.',
-        quickCheck: [
-            { question: 'Si $$345 + 280 = 625$$, cuanto vale $$625-345$$?', answer: '$$280$$' },
-            { question: 'Estima $$498 + 203$$.', answer: '$$700$$ aprox.' }
-        ],
-        connections: {
-            laboratorio: ['Herramienta 5 (Operaciones + estimacion)'],
-            erronkak: ['Nivel 2 - Problema 1'],
-            jokuak: ['Juego 1 (Flash Posicional)']
-        }
+        title: 'Suma y resta con sentido',
+        objective: 'Resolver y comprobar resultados en contexto.',
+        keyIdea: 'Suma y resta son inversas en muchos problemas.',
+        example: '$$167 + 235 + 32 = 434$$.',
+        typicalError: 'Aceptar resultado sin validar.',
+        correction: 'Comprobar con estimacion y operacion inversa.',
+        quickQ: 'Si $$345 + 280 = 625$$, cuanto es $$625-345$$?',
+        quickA: '$$280$$',
+        lab: 'Herramienta 5',
+        mission: 'Nivel 2 - Problema 1',
+        game: 'Juego 1'
     },
     {
-        id: 'multiplicacion',
-        title: 'Multiplicacion: significado y propiedades',
-        icon: '07',
-        color: '#14b8a6',
-        objective: 'Entender la multiplicacion y usar propiedades para calcular mejor.',
-        keyIdea: 'Multiplicar representa grupos iguales y permite estrategias mentales con distributiva.',
-        development: [
-            'Interpretaciones: suma repetida, arreglo rectangular y escala.',
-            'Conmutativa: $$a \cdot b = b \cdot a$$.',
-            'Asociativa: $$(a \cdot b) \cdot c = a \cdot (b \cdot c)$$.',
-            'Distributiva: $$a(b+c)=ab+ac$$ y $$a(b-c)=ab-ac$$.',
-            'Estrategias mentales: $$n \cdot 9 = n \cdot 10 - n$$, $$n \cdot 11 = n \cdot 10 + n$$.'
-        ],
-        vocabulary: [
-            { term: 'Factores', definition: 'Numeros que se multiplican.' },
-            { term: 'Producto', definition: 'Resultado de la multiplicacion.' },
-            { term: 'Distributiva', definition: 'Repartir una multiplicacion sobre suma o resta.' }
-        ],
-        solvedExample: [
-            'Calcular $$25 \cdot 9$$.',
-            '$$25 \cdot (10-1)=25\cdot10-25\cdot1=250-25=225$$.'
-        ],
-        edgeCase: '$$3(4+2)=18$$ pero $$3\cdot4+2=14$$. No es lo mismo asociar que distribuir.',
-        typicalError: 'Pensar que multiplicar siempre hace crecer el numero.',
+        title: 'Multiplicacion en naturales',
+        objective: 'Usar propiedades para calcular mejor.',
+        keyIdea: 'La distributiva ayuda al calculo mental.',
+        example: '$$25\cdot9 = 25\cdot(10-1) = 225$$.',
+        typicalError: 'Pensar que multiplicar siempre aumenta.',
         correction: 'Con $$1$$ se mantiene y con $$0$$ se anula.',
-        quickCheck: [
-            { question: 'Calcula mentalmente $$33 \cdot 11$$.', answer: '$$363$$' },
-            { question: 'Que propiedad usas en $$8(10-2)=8\cdot10-8\cdot2$$?', answer: 'Distributiva' }
-        ],
-        connections: {
-            laboratorio: ['Herramienta 5', 'Herramienta 6'],
-            erronkak: ['Nivel 2 - Problema 1', 'Nivel 3 - Problema 3'],
-            jokuak: ['Juego 2 (Parentesis Tactico)']
-        }
+        quickQ: '$$33\cdot11$$?',
+        quickA: '$$363$$',
+        lab: 'Herramienta 5 y 6',
+        mission: 'Nivel 2 - Problema 1',
+        game: 'Juego 2'
     },
     {
-        id: 'division-entera',
         title: 'Division entera: cociente y resto',
-        icon: '08',
-        color: '#ef4444',
-        objective: 'Interpretar divisiones enteras y validar con la igualdad fundamental.',
-        keyIdea: '$$D = d\cdot c + r$$ con $$0 \le r < d$$.',
-        development: [
-            'Terminos: dividendo $$D$$, divisor $$d$$, cociente $$c$$, resto $$r$$.',
-            'Division exacta: $$r=0$$. No exacta: $$r>0$$.',
-            'Interpretaciones: reparto en partes iguales o empaquetado por lotes.',
-            'Siempre verificar con la igualdad de la division.'
-        ],
-        vocabulary: [
-            { term: 'Dividendo', definition: 'Cantidad a repartir.' },
-            { term: 'Divisor', definition: 'Tamano de grupo o numero de grupos.' },
-            { term: 'Cociente', definition: 'Numero de grupos completos.' },
-            { term: 'Resto', definition: 'Cantidad que sobra.' }
-        ],
-        solvedExample: [
-            'Dividir $$1274$$ entre $$30$$.',
-            '$$30 \cdot 42 = 1260$$ y $$30 \cdot 43 = 1290$$ (se pasa).',
-            'Cociente $$42$$, resto $$14$$. Verificacion: $$1274 = 30\cdot42 + 14$$.'
-        ],
-        edgeCase: '$$1274 = 30\cdot41 + 44$$ no es valido porque $$44$$ no cumple $$r<30$$.',
-        typicalError: 'Aceptar restos mayores o iguales al divisor.',
-        correction: 'Comprobar siempre $$0 \le r < d$$.',
-        quickCheck: [
-            { question: 'En $$96:13$$, si $$13\cdot7=91$$, cual es el resto?', answer: '$$5$$' },
-            { question: 'Es valida una division con divisor $$12$$ y resto $$12$$?', answer: 'No' }
-        ],
-        connections: {
-            laboratorio: ['Herramienta 6 (Division entera visual)'],
-            erronkak: ['Nivel 2 - Problema 2', 'Nivel 3 - Problema 3'],
-            jokuak: ['Juego 3 (Reparto Maestro)']
-        }
+        objective: 'Interpretar reparto exacto y con sobrante.',
+        keyIdea: '$$D=d\cdot c+r$$ con $$0 \le r < d$$.',
+        example: '$$1274:30 = 42$$ y resto $$14$$.',
+        typicalError: 'Aceptar resto mayor o igual al divisor.',
+        correction: 'Verificar siempre la condicion del resto.',
+        quickQ: 'En $$96:13$$ con $$13\cdot7=91$$, resto?',
+        quickA: '$$5$$',
+        lab: 'Herramienta 6',
+        mission: 'Nivel 2 - Problema 2',
+        game: 'Juego 3'
     },
     {
-        id: 'operaciones-combinadas',
-        title: 'Operaciones combinadas y jerarquia',
-        icon: '09',
-        color: '#0ea5e9',
-        objective: 'Aplicar correctamente el orden de operaciones y el uso de parentesis.',
-        keyIdea:
-            'Orden: parentesis, luego multiplicaciones/divisiones de izquierda a derecha, y despues sumas/restas de izquierda a derecha.',
-        development: [
-            'La jerarquia evita ambiguedades y garantiza un resultado unico.',
-            'Los parentesis cambian el significado de la expresion.',
-            'Mostrar pasos intermedios reduce errores de prioridad.'
-        ],
-        vocabulary: [
-            { term: 'Expresion numerica', definition: 'Combinacion de numeros y operaciones.' },
-            { term: 'Jerarquia de operaciones', definition: 'Orden establecido para operar.' },
-            { term: 'Parentesis', definition: 'Simbolo que define prioridad.' }
-        ],
-        solvedExample: [
-            'Resolver $$26 - 5\cdot(2+3) + 6$$.',
-            'Parentesis: $$2+3=5$$.',
-            'Multiplicacion: $$5\cdot5=25$$.',
-            'Suma/resta: $$26-25+6=1+6=7$$.'
-        ],
-        edgeCase: '$$2+3\cdot4=14$$, pero $$(2+3)\cdot4=20$$.',
-        typicalError: 'Operar solo de izquierda a derecha sin respetar prioridad.',
-        correction: 'Marcar primero que operaciones tienen prioridad.',
-        quickCheck: [
-            { question: 'Calcula $$15 - 10:5$$.', answer: '$$13$$' },
-            { question: 'Calcula $$(15-10):5$$.', answer: '$$1$$' }
-        ],
-        connections: {
-            laboratorio: ['Herramienta 7 (Detector de errores)', 'Herramienta 8 (Taller de expresiones)'],
-            erronkak: ['Nivel 2 - Problema 3'],
-            jokuak: ['Juego 2 (Parentesis Tactico)']
-        }
+        title: 'Operaciones combinadas y parentesis',
+        objective: 'Aplicar bien la jerarquia de operaciones.',
+        keyIdea: 'Parentesis -> multiplicacion/division -> suma/resta.',
+        example: '$$26 - 5\cdot(2+3) + 6 = 7$$.',
+        typicalError: 'Resolver de izquierda a derecha sin prioridad.',
+        correction: 'Marcar primero las operaciones prioritarias.',
+        quickQ: '$$15 - 10:5$$?',
+        quickA: '$$13$$',
+        lab: 'Herramienta 7 y 8',
+        mission: 'Nivel 2 - Problema 3',
+        game: 'Juego 2'
     },
     {
-        id: 'resolucion-problemas',
         title: 'Resolucion de problemas con naturales',
-        icon: '10',
-        color: '#a855f7',
-        objective: 'Modelizar enunciados con operaciones y validar el resultado.',
-        keyIdea:
-            'Resolver problemas no es solo calcular: hay que interpretar, modelizar, operar y comprobar coherencia.',
-        development: [
-            'Proceso recomendado: comprender, identificar datos, elegir operaciones, calcular, validar.',
-            'Una respuesta completa debe incluir unidad y sentido del resultado.',
-            'En problemas de reparto, distinguir numero de grupos, tamano y sobrante.'
-        ],
-        vocabulary: [
-            { term: 'Enunciado', definition: 'Texto del problema.' },
-            { term: 'Modelo numerico', definition: 'Expresion que representa la situacion.' },
-            { term: 'Validacion', definition: 'Comprobacion de resultado y estrategia.' }
-        ],
-        solvedExample: [
-            'Problema: $$200$$ arboles, cada uno $$7$$ cajas de $$5$$ kg, venta a $$2$$ euros/kg.',
-            'Modelo: $$200\cdot7\cdot5\cdot2$$.',
-            'Calculo: $$200\cdot7=1400$$; $$1400\cdot5=7000$$; $$7000\cdot2=14,000$$ euros.'
-        ],
-        edgeCase: '$$200 + 7 + 5 + 2$$ no modela la situacion; mezcla datos sin relacion operativa.',
-        typicalError: 'Elegir operaciones por palabras clave sin entender la estructura.',
-        correction: 'Representar primero relaciones entre cantidades y unidades.',
-        quickCheck: [
-            { question: 'Si se envasan $$250$$ kg en cajas de $$10$$ kg, que operacion modela?', answer: '$$250:10$$' },
-            { question: 'Si el precio esta en euros/kg, la respuesta final puede quedar en kg?', answer: 'No, debe quedar en euros' }
-        ],
-        connections: {
-            laboratorio: ['Herramienta 5', 'Herramienta 6', 'Herramienta 8'],
-            erronkak: ['Todos los problemas del tema'],
-            jokuak: ['Juego 2 y Juego 3']
-        }
+        objective: 'Modelizar, calcular y validar en contexto real.',
+        keyIdea: 'No es solo hacer cuentas: hay que justificar el modelo.',
+        example: '$$200\cdot7\cdot5\cdot2 = 14,000$$ euros.',
+        typicalError: 'Elegir operaciones por palabras sueltas.',
+        correction: 'Relacionar datos, unidades y objetivo del enunciado.',
+        quickQ: 'Modelo para $$250$$ kg en cajas de $$10$$ kg?',
+        quickA: '$$250:10$$',
+        lab: 'Herramienta 5, 6 y 8',
+        mission: 'Todos los niveles',
+        game: 'Juego 2 y 3'
     }
 ]
 
-const COHERENCE_MAP: Array<{ central: string; reinforces: string; connection: string }> = [
+const EU_CARDS: Omit<TheoryCard, 'id' | 'icon' | 'color'>[] = [
     {
-        central: 'Tarjetas 1 y 2',
-        reinforces: 'Herramientas 1 y 2, Juego 1',
-        connection: 'Valor posicional, lectura por periodos y descomposicion.'
+        title: 'Sistema hamartarra eta balio posizionala',
+        objective: 'Zifra baten balioa kokapenaren araberakoa dela ulertzea.',
+        keyIdea: 'Orden bakoitza eskuinekoaren 10 bider da.',
+        example: '$$48,205 = 40,000 + 8,000 + 200 + 5$$.',
+        typicalError: '$$5$$ zifrak beti $$5$$ balio duela pentsatzea.',
+        correction: 'Balioa ordenaren arabera aldatzen da.',
+        quickQ: '$$72,641$$-en $$6$$ zifraren balioa?',
+        quickA: '$$600$$',
+        lab: '1. eta 2. tresnak',
+        mission: '1. maila - 1. problema',
+        game: '1. jokoa'
     },
     {
-        central: 'Tarjetas 3 y 4',
-        reinforces: 'Herramienta 3, Nivel 1 - Problema 2',
-        connection: 'Comparacion por cifras y lectura de magnitudes grandes.'
+        title: 'Irakurketa, idazketa eta deskonposizioa',
+        objective: 'Zifrak, hitzak eta deskonposizioa zuzen lotzea.',
+        keyIdea: 'Hiru formak baliokideak dira.',
+        example: '$$5,072,304 = 5,000,000 + 70,000 + 2,000 + 300 + 4$$.',
+        typicalError: 'Zeroa duten periodoak kentzea.',
+        correction: 'Hiru zifrako blokeetan irakurri.',
+        quickQ: 'Bi milioi berrogei mila zazpi, zifretan?',
+        quickA: '$$2,040,007$$',
+        lab: '2. tresna',
+        mission: '1. maila - 1. eta 2. problema',
+        game: '1. jokoa'
     },
     {
-        central: 'Tarjeta 5',
-        reinforces: 'Herramienta 4, Nivel 1 - Problema 3, Nivel 3 - Problema 2',
-        connection: 'Redondeo por cifra siguiente y eleccion del orden segun contexto.'
+        title: 'Ordena, konparaketa eta zenbaki-zuzena',
+        objective: 'Zenbaki naturalak irizpidearekin konparatzea.',
+        keyIdea: 'Lehenik zifra kopurua, gero ezkerretik konparatu.',
+        example: '$$438,912 > 438,291$$.',
+        typicalError: 'Unitateei bakarrik begiratzea.',
+        correction: 'Orden handienetik hasi.',
+        quickQ: '$$70,203$$ ala $$69,999$$ handiagoa?',
+        quickA: '$$70,203$$',
+        lab: '3. tresna',
+        mission: '1. maila - 2. problema',
+        game: '1. jokoa'
     },
     {
-        central: 'Tarjetas 6, 7 y 8',
-        reinforces: 'Herramientas 5 y 6, Juego 3',
-        connection: 'Operacion con sentido, estimacion y division entera con resto valido.'
+        title: 'Zenbaki handiak eta irakurketa-eskalak',
+        objective: 'Magnitude handiak segurtasunez irakurtzea.',
+        keyIdea: 'Hiru zifrako blokeek irakurketa errazten dute.',
+        example: '$$2,405,070,018 = 2|405|070|018$$.',
+        typicalError: 'Periodo bat galtzea irakurketan.',
+        correction: 'Bloke bakoitzari periodo-izena eman.',
+        quickQ: 'Idatzi zazpi mila milioi.',
+        quickA: '$$7,000,000,000$$',
+        lab: '2. eta 3. tresnak',
+        mission: '1. maila - 2. problema',
+        game: '1. jokoa'
     },
     {
-        central: 'Tarjetas 9 y 10',
-        reinforces: 'Herramientas 7 y 8, Juego 2, Erronkak de nivel 2 y 3',
-        connection: 'Jerarquia de operaciones, modelizacion y validacion de resultados.'
+        title: 'Hurbilketa eta biribiltzea',
+        objective: 'Eskatutako ordenara biribiltzea.',
+        keyIdea: '<5 mantendu, >=5 igo.',
+        example: '$$384,523$$ milakoetara -> $$385,000$$.',
+        typicalError: 'Hainbat zifra batera begiratzea.',
+        correction: 'Hurrengo zifra bakarrik aztertu.',
+        quickQ: '$$72,580$$ milakoetara?',
+        quickA: '$$73,000$$',
+        lab: '4. tresna',
+        mission: '1. maila - 3. problema',
+        game: '1. jokoa'
+    },
+    {
+        title: 'Batuketa eta kenketa zentzuz',
+        objective: 'Emaitzak testuinguruan ebatzi eta egiaztatzea.',
+        keyIdea: 'Batuketa eta kenketa alderantzizkoak dira kasu askotan.',
+        example: '$$167 + 235 + 32 = 434$$.',
+        typicalError: 'Emaitza zuzena den ala ez ez egiaztatzea.',
+        correction: 'Estimazioa eta alderantzizko eragiketa erabili.',
+        quickQ: '$$345 + 280 = 625$$ bada, zenbat da $$625-345$$?',
+        quickA: '$$280$$',
+        lab: '5. tresna',
+        mission: '2. maila - 1. problema',
+        game: '1. jokoa'
+    },
+    {
+        title: 'Biderketa naturaletan',
+        objective: 'Propietateak erabiliz azkarrago kalkulatzea.',
+        keyIdea: 'Banakortasuna oso erabilgarria da buruzko kalkuluan.',
+        example: '$$25\cdot9 = 25\cdot(10-1) = 225$$.',
+        typicalError: 'Biderketak beti handitzen duela pentsatzea.',
+        correction: '$$1$$ekin berdin, $$0$$rekin zero.',
+        quickQ: '$$33\cdot11$$?',
+        quickA: '$$363$$',
+        lab: '5. eta 6. tresnak',
+        mission: '2. maila - 1. problema',
+        game: '2. jokoa'
+    },
+    {
+        title: 'Zatiketa osoa: zatidura eta hondarra',
+        objective: 'Banaketa zehatza eta soberakina ulertzea.',
+        keyIdea: '$$D=d\cdot c+r$$ eta $$0 \le r < d$$.',
+        example: '$$1274:30 = 42$$ eta hondarra $$14$$.',
+        typicalError: 'Hondarra zatitzailea baino handiagoa onartzea.',
+        correction: 'Baldintza beti egiaztatu.',
+        quickQ: '$$96:13$$ eta $$13\cdot7=91$$; hondarra?',
+        quickA: '$$5$$',
+        lab: '6. tresna',
+        mission: '2. maila - 2. problema',
+        game: '3. jokoa'
+    },
+    {
+        title: 'Eragiketa konbinatuak eta parentesiak',
+        objective: 'Hierarkia zuzen aplikatzea.',
+        keyIdea: 'Parentesiak -> biderketa/zatiketa -> batuketa/kenketa.',
+        example: '$$26 - 5\cdot(2+3) + 6 = 7$$.',
+        typicalError: 'Ezkerretik eskuinera zuzenean kalkulatzea.',
+        correction: 'Lehentasunak markatu kalkulatu aurretik.',
+        quickQ: '$$15 - 10:5$$?',
+        quickA: '$$13$$',
+        lab: '7. eta 8. tresnak',
+        mission: '2. maila - 3. problema',
+        game: '2. jokoa'
+    },
+    {
+        title: 'Problemak zenbaki naturalekin ebaztea',
+        objective: 'Modelizatu, kalkulatu eta balidatu.',
+        keyIdea: 'Ez da kontu hutsa: eredua justifikatu behar da.',
+        example: '$$200\cdot7\cdot5\cdot2 = 14,000$$ euro.',
+        typicalError: 'Hitz solteengatik eragiketa aukeratzea.',
+        correction: 'Datuak, unitateak eta helburua lotu.',
+        quickQ: '$$250$$ kg eta $$10$$ kg-ko kutxak: eredua?',
+        quickA: '$$250:10$$',
+        lab: '5., 6. eta 8. tresnak',
+        mission: 'Maila guztiak',
+        game: '2. eta 3. jokoa'
     }
 ]
 
-const QUALITY_CHECKLIST: string[] = [
-    'Rigor matematico: se trabaja en naturales, con division entera $$D=d\\cdot c+r$$ y $$0 \\le r < d$$.',
-    'Progresion didactica: del sistema decimal a la modelizacion de problemas.',
-    'Cobertura completa: numeracion, comparacion, redondeo, operaciones y combinadas.',
-    'Alineacion entre teoria, laboratorio, erronkak y jokuak con conexiones explicitas.'
+const AR_CARDS: Omit<TheoryCard, 'id' | 'icon' | 'color'>[] = [
+    {
+        title: 'النظام العشري والقيمة المكانية',
+        objective: 'فهم أن قيمة الرقم تعتمد على موضعه.',
+        keyIdea: 'كل مرتبة تساوي 10 أضعاف المرتبة التي على يمينها.',
+        example: '$$48,205 = 40,000 + 8,000 + 200 + 5$$.',
+        typicalError: 'الاعتقاد أن الرقم $$5$$ قيمته دائمًا $$5$$.',
+        correction: 'قد تكون قيمته $$5$$ أو $$50$$ أو $$500$$ أو $$5,000$$.',
+        quickQ: 'ما قيمة $$6$$ في $$72,641$$؟',
+        quickA: '$$600$$',
+        lab: 'الأداة 1 و2',
+        mission: 'المستوى 1 - المسألة 1',
+        game: 'اللعبة 1'
+    },
+    {
+        title: 'القراءة والكتابة والتحليل',
+        objective: 'التحويل بين الأرقام والكلمات والتحليل دون أخطاء.',
+        keyIdea: 'التمثيلات الثلاثة متكافئة.',
+        example: '$$5,072,304 = 5,000,000 + 70,000 + 2,000 + 300 + 4$$.',
+        typicalError: 'إهمال الفترات التي تحتوي على صفر.',
+        correction: 'اقرأ العدد على شكل كتل من ثلاث خانات.',
+        quickQ: 'اكتب "مليونان وأربعون ألفًا وسبعة" بالأرقام.',
+        quickA: '$$2,040,007$$',
+        lab: 'الأداة 2',
+        mission: 'المستوى 1 - المسألة 1 و2',
+        game: 'اللعبة 1'
+    },
+    {
+        title: 'الترتيب والمقارنة ومستقيم الأعداد',
+        objective: 'مقارنة الأعداد الطبيعية بمعيار ثابت.',
+        keyIdea: 'أولًا عدد الخانات، ثم المقارنة من اليسار.',
+        example: '$$438,912 > 438,291$$.',
+        typicalError: 'المقارنة اعتمادًا على الآحاد فقط.',
+        correction: 'ابدأ من المرتبة الأعلى.',
+        quickQ: 'أي أكبر: $$70,203$$ أم $$69,999$$؟',
+        quickA: '$$70,203$$',
+        lab: 'الأداة 3',
+        mission: 'المستوى 1 - المسألة 2',
+        game: 'اللعبة 1'
+    },
+    {
+        title: 'الأعداد الكبيرة ومقاييس القراءة',
+        objective: 'قراءة المقادير الكبيرة بثقة.',
+        keyIdea: 'تقسيم العدد إلى كتل من ثلاث خانات يسهل القراءة.',
+        example: '$$2,405,070,018 = 2|405|070|018$$.',
+        typicalError: 'فقدان فترة عند القراءة.',
+        correction: 'سم كل كتلة حسب فترتها.',
+        quickQ: 'اكتب سبعة مليارات.',
+        quickA: '$$7,000,000,000$$',
+        lab: 'الأداة 2 و3',
+        mission: 'المستوى 1 - المسألة 2',
+        game: 'اللعبة 1'
+    },
+    {
+        title: 'التقريب والتدوير',
+        objective: 'تقريب العدد إلى المرتبة المطلوبة بدقة.',
+        keyIdea: 'إذا كان الرقم التالي <5 نبقي، وإذا كان >=5 نزيد.',
+        example: '$$384,523$$ إلى الآلاف -> $$385,000$$.',
+        typicalError: 'النظر إلى أكثر من رقم في اليمين.',
+        correction: 'ننظر فقط إلى الرقم التالي مباشرة.',
+        quickQ: '$$72,580$$ إلى الآلاف؟',
+        quickA: '$$73,000$$',
+        lab: 'الأداة 4',
+        mission: 'المستوى 1 - المسألة 3',
+        game: 'اللعبة 1'
+    },
+    {
+        title: 'الجمع والطرح بمعنى',
+        objective: 'حل النتائج والتحقق منها داخل سياق.',
+        keyIdea: 'الجمع والطرح عمليتان عكسيتان في كثير من الحالات.',
+        example: '$$167 + 235 + 32 = 434$$.',
+        typicalError: 'قبول الناتج دون تحقق.',
+        correction: 'استخدم التقدير والعملية العكسية.',
+        quickQ: 'إذا كان $$345 + 280 = 625$$ فكم $$625-345$$؟',
+        quickA: '$$280$$',
+        lab: 'الأداة 5',
+        mission: 'المستوى 2 - المسألة 1',
+        game: 'اللعبة 1'
+    },
+    {
+        title: 'الضرب في الأعداد الطبيعية',
+        objective: 'استخدام الخصائص لتحسين الحساب.',
+        keyIdea: 'خاصية التوزيع مفيدة جدًا في الحساب الذهني.',
+        example: '$$25\cdot9 = 25\cdot(10-1) = 225$$.',
+        typicalError: 'الاعتقاد أن الضرب دائمًا يكبر العدد.',
+        correction: 'مع $$1$$ يبقى كما هو، ومع $$0$$ يصبح صفرًا.',
+        quickQ: '$$33\cdot11$$?',
+        quickA: '$$363$$',
+        lab: 'الأداة 5 و6',
+        mission: 'المستوى 2 - المسألة 1',
+        game: 'اللعبة 2'
+    },
+    {
+        title: 'القسمة الإقليدية: خارج القسمة والباقي',
+        objective: 'فهم القسمة الدقيقة والقسمة مع باقي.',
+        keyIdea: '$$D=d\cdot c+r$$ حيث $$0 \le r < d$$.',
+        example: '$$1274:30 = 42$$ والباقي $$14$$.',
+        typicalError: 'قبول باقي أكبر من أو يساوي المقسوم عليه.',
+        correction: 'تحقق دائمًا من شرط الباقي.',
+        quickQ: 'في $$96:13$$ مع $$13\cdot7=91$$ ما الباقي؟',
+        quickA: '$$5$$',
+        lab: 'الأداة 6',
+        mission: 'المستوى 2 - المسألة 2',
+        game: 'اللعبة 3'
+    },
+    {
+        title: 'العمليات المركبة والأقواس',
+        objective: 'تطبيق ترتيب العمليات بشكل صحيح.',
+        keyIdea: 'الأقواس ثم الضرب/القسمة ثم الجمع/الطرح.',
+        example: '$$26 - 5\cdot(2+3) + 6 = 7$$.',
+        typicalError: 'الحل من اليسار لليمين دون أولوية.',
+        correction: 'حدد العمليات ذات الأولوية أولًا.',
+        quickQ: '$$15 - 10:5$$?',
+        quickA: '$$13$$',
+        lab: 'الأداة 7 و8',
+        mission: 'المستوى 2 - المسألة 3',
+        game: 'اللعبة 2'
+    },
+    {
+        title: 'حل المسائل بالأعداد الطبيعية',
+        objective: 'النمذجة والحساب والتحقق في سياق واقعي.',
+        keyIdea: 'ليس الحساب فقط، بل تبرير النموذج أيضًا.',
+        example: '$$200\cdot7\cdot5\cdot2 = 14,000$$ يورو.',
+        typicalError: 'اختيار العمليات من كلمات منفصلة فقط.',
+        correction: 'اربط بين المعطيات والوحدات والهدف.',
+        quickQ: 'ما نموذج $$250$$ كغ في صناديق $$10$$ كغ؟',
+        quickA: '$$250:10$$',
+        lab: 'الأداة 5 و6 و8',
+        mission: 'كل المستويات',
+        game: 'اللعبة 2 و3'
+    }
 ]
+
+function withMeta(cards: Omit<TheoryCard, 'id' | 'icon' | 'color'>[]): TheoryCard[] {
+    return cards.map((card, index) => ({ ...card, ...COMMON_META[index] }))
+}
+
+const CONTENT: Record<Lang, TheoryCopy> = {
+    es: {
+        title: 'Teoria: Numeros naturales (1 ESO)',
+        subtitle: 'Sistema decimal, aproximacion y operaciones',
+        description: '10 tarjetas conectadas con laboratorio, erronkak y jokuak.',
+        cards: withMeta(ES_CARDS),
+        labels: {
+            objective: 'Objetivo',
+            keyIdea: 'Idea clave',
+            example: 'Ejemplo',
+            typicalError: 'Error tipico',
+            correction: 'Correccion',
+            answer: 'Respuesta',
+            lab: 'LABORATORIO',
+            mission: 'ERRONKAK',
+            game: 'JOKUAK'
+        },
+        coherenceTitle: 'Mapa de coherencia del tema',
+        coherenceRows: [
+            { central: 'Tarjetas 1-2', reinforces: 'Herramientas 1-2 y Juego 1', connection: 'Valor posicional y lectura.' },
+            { central: 'Tarjetas 3-4', reinforces: 'Herramienta 3 y Nivel 1', connection: 'Comparacion y numeros grandes.' },
+            { central: 'Tarjeta 5', reinforces: 'Herramienta 4', connection: 'Redondeo y eleccion de orden.' },
+            { central: 'Tarjetas 6-8', reinforces: 'Herramientas 5-6 y Juego 3', connection: 'Operaciones y division entera.' },
+            { central: 'Tarjetas 9-10', reinforces: 'Herramientas 7-8 y Juego 2', connection: 'Jerarquia y modelizacion.' }
+        ],
+        qualityTitle: 'Revision final de calidad',
+        qualityItems: [
+            'Rigor: $$D=d\cdot c+r$$ y $$0 \le r < d$$.',
+            'Progresion: de numeracion a resolucion de problemas.',
+            'Cobertura completa del tema de naturales.',
+            'Alineacion entre teoria, laboratorio, erronkak y jokuak.'
+        ]
+    },
+    eu: {
+        title: 'Teoria: zenbaki naturalak (DBH 1)',
+        subtitle: 'Sistema hamartarra, hurbilketa eta eragiketak',
+        description: '10 txartel, laborategi, erronkak eta jokuakekin lotuta.',
+        cards: withMeta(EU_CARDS),
+        labels: {
+            objective: 'Helburua',
+            keyIdea: 'Ideia nagusia',
+            example: 'Adibidea',
+            typicalError: 'Akats tipikoa',
+            correction: 'Zuzenketa',
+            answer: 'Erantzuna',
+            lab: 'LABORATEGIA',
+            mission: 'ERRONKAK',
+            game: 'JOKUAK'
+        },
+        coherenceTitle: 'Gaiaren koherentzia-mapa',
+        coherenceRows: [
+            { central: '1-2 txartelak', reinforces: '1-2 tresnak eta 1. jokoa', connection: 'Balio posizionala eta irakurketa.' },
+            { central: '3-4 txartelak', reinforces: '3. tresna eta 1. maila', connection: 'Konparaketa eta zenbaki handiak.' },
+            { central: '5. txartela', reinforces: '4. tresna', connection: 'Biribiltzea eta ordena.' },
+            { central: '6-8 txartelak', reinforces: '5-6 tresnak eta 3. jokoa', connection: 'Eragiketak eta zatiketa osoa.' },
+            { central: '9-10 txartelak', reinforces: '7-8 tresnak eta 2. jokoa', connection: 'Hierarkia eta modelizazioa.' }
+        ],
+        qualityTitle: 'Azken kalitate-berrikuspena',
+        qualityItems: [
+            'Zorroztasuna: $$D=d\cdot c+r$$ eta $$0 \le r < d$$.',
+            'Aurrerapena: numeraziotik problemen ebazpenera.',
+            'Zenbaki naturalen gaia osorik estalita.',
+            'Teoria, laborategia, erronkak eta jokuak lerrokatuta.'
+        ]
+    },
+    ar: {
+        title: 'النظرية: الأعداد الطبيعية (1 ESO)',
+        subtitle: 'النظام العشري، التقريب والعمليات',
+        description: '10 بطاقات مترابطة مع المختبر والتحديات والألعاب.',
+        cards: withMeta(AR_CARDS),
+        labels: {
+            objective: 'الهدف',
+            keyIdea: 'الفكرة الأساسية',
+            example: 'مثال',
+            typicalError: 'خطأ شائع',
+            correction: 'التصحيح',
+            answer: 'الإجابة',
+            lab: 'المختبر',
+            mission: 'التحديات',
+            game: 'الألعاب'
+        },
+        coherenceTitle: 'خريطة ترابط الوحدة',
+        coherenceRows: [
+            { central: 'البطاقات 1-2', reinforces: 'الأدوات 1-2 واللعبة 1', connection: 'القيمة المكانية والقراءة.' },
+            { central: 'البطاقات 3-4', reinforces: 'الأداة 3 والمستوى 1', connection: 'المقارنة والأعداد الكبيرة.' },
+            { central: 'البطاقة 5', reinforces: 'الأداة 4', connection: 'التقريب واختيار المرتبة.' },
+            { central: 'البطاقات 6-8', reinforces: 'الأدوات 5-6 واللعبة 3', connection: 'العمليات والقسمة الإقليدية.' },
+            { central: 'البطاقات 9-10', reinforces: 'الأدوات 7-8 واللعبة 2', connection: 'ترتيب العمليات والنمذجة.' }
+        ],
+        qualityTitle: 'مراجعة الجودة النهائية',
+        qualityItems: [
+            'الدقة الرياضية: $$D=d\cdot c+r$$ و $$0 \le r < d$$.',
+            'تدرج واضح من الترقيم إلى حل المسائل.',
+            'تغطية كاملة لموضوع الأعداد الطبيعية.',
+            'ترابط واضح بين النظرية والمختبر والتحديات والألعاب.'
+        ]
+    }
+}
 
 export function TheoryPage() {
-    const [expandedSection, setExpandedSection] = useState<string | null>(null)
-
-    const toggleSection = (id: string) => {
-        setExpandedSection((current) => (current === id ? null : id))
-    }
+    const { i18n } = useTranslation()
+    const lang = resolveLang(i18n.language)
+    const copy = useMemo(() => CONTENT[lang], [lang])
+    const [expanded, setExpanded] = useState<string | null>(null)
 
     return (
-        <div className="theory-page zenbaki-naturalak-theory">
+        <div className="theory-page zenbaki-naturalak-theory" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
             <div className="container">
                 <header className="theory-header">
-                    <h1>Teoria: Numeros Naturales (1 ESO)</h1>
-                    <p className="theory-subtitle">Sistema decimal, aproximacion y operaciones</p>
-                    <p className="theory-description">
-                        Secuencia didactica progresiva desde valor posicional hasta resolucion de problemas con
-                        operaciones combinadas.
-                    </p>
+                    <h1>{copy.title}</h1>
+                    <p className="theory-subtitle">{copy.subtitle}</p>
+                    <p className="theory-description">{copy.description}</p>
                 </header>
 
                 <div className="theory-grid">
-                    {THEORY_CARDS.map((card) => (
+                    {copy.cards.map((card) => (
                         <div
                             key={card.id}
-                            className={`theory-card ${expandedSection === card.id ? 'expanded' : ''}`}
+                            className={`theory-card ${expanded === card.id ? 'expanded' : ''}`}
                             style={{ '--card-color': card.color } as React.CSSProperties}
-                            onClick={() => toggleSection(card.id)}
+                            onClick={() => setExpanded((value) => (value === card.id ? null : card.id))}
                         >
                             <div className="card-header">
                                 <span className="card-icon">{card.icon}</span>
                                 <h3 className="card-title">{card.title}</h3>
-                                <span className="card-toggle">{expandedSection === card.id ? '-' : '+'}</span>
+                                <span className="card-toggle">{expanded === card.id ? '-' : '+'}</span>
                             </div>
 
-                            <div className={`card-content ${expandedSection === card.id ? 'visible' : ''}`}>
-                                <TheoryCardContent card={card} />
+                            <div className={`card-content ${expanded === card.id ? 'visible' : ''}`}>
+                                <div className="content-section">
+                                    <h4>{copy.labels.objective}</h4>
+                                    <p>{card.objective}</p>
+                                    <h4>{copy.labels.keyIdea}</h4>
+                                    <p>{card.keyIdea}</p>
+                                    <h4>{copy.labels.example}</h4>
+                                    <p>{card.example}</p>
+
+                                    <div className="warning-box">
+                                        <strong>{copy.labels.typicalError}:</strong>
+                                        <p>{card.typicalError}</p>
+                                        <strong>{copy.labels.correction}:</strong>
+                                        <p>{card.correction}</p>
+                                    </div>
+
+                                    <div className="quick-check-grid">
+                                        <div className="quick-check-card">
+                                            <p className="quick-question">{card.quickQ}</p>
+                                            <p className="quick-answer">{copy.labels.answer}: {card.quickA}</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="connections-grid">
+                                        <div className="connection-card">
+                                            <h5>{copy.labels.lab}</h5>
+                                            <p>{card.lab}</p>
+                                        </div>
+                                        <div className="connection-card">
+                                            <h5>{copy.labels.mission}</h5>
+                                            <p>{card.mission}</p>
+                                        </div>
+                                        <div className="connection-card">
+                                            <h5>{copy.labels.game}</h5>
+                                            <p>{card.game}</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     ))}
                 </div>
 
                 <section className="coherence-map">
-                    <h2>Mapa de coherencia del tema</h2>
+                    <h2>{copy.coherenceTitle}</h2>
                     <div className="coherence-grid">
-                        {COHERENCE_MAP.map((row) => (
+                        {copy.coherenceRows.map((row) => (
                             <article className="coherence-card" key={row.central}>
                                 <h3>{row.central}</h3>
-                                <p>
-                                    <strong>Refuerza/prepara:</strong> {row.reinforces}
-                                </p>
-                                <p>
-                                    <strong>Conexion:</strong> {row.connection}
-                                </p>
+                                <p>{row.reinforces}</p>
+                                <p>{row.connection}</p>
                             </article>
                         ))}
                     </div>
                 </section>
 
                 <section className="quality-review">
-                    <h2>Revision final de calidad</h2>
+                    <h2>{copy.qualityTitle}</h2>
                     <ul>
-                        {QUALITY_CHECKLIST.map((item) => (
+                        {copy.qualityItems.map((item) => (
                             <li key={item}>{item}</li>
                         ))}
                     </ul>
                 </section>
-            </div>
-        </div>
-    )
-}
-
-function TheoryCardContent({ card }: { card: TheoryCard }) {
-    return (
-        <div className="content-section">
-            <h4>Objetivo</h4>
-            <p>{card.objective}</p>
-
-            <h4>Idea clave</h4>
-            <p>{card.keyIdea}</p>
-
-            <h4>Desarrollo teorico</h4>
-            <ul className="example-list">
-                {card.development.map((point) => (
-                    <li key={point}>{point}</li>
-                ))}
-            </ul>
-
-            <h4>Vocabulario matematico esencial</h4>
-            <div className="vocab-grid">
-                {card.vocabulary.map((item) => (
-                    <div className="vocab-card" key={item.term}>
-                        <h5>{item.term}</h5>
-                        <p>{item.definition}</p>
-                    </div>
-                ))}
-            </div>
-
-            <h4>Ejemplo resuelto</h4>
-            <ol className="example-steps">
-                {card.solvedExample.map((step) => (
-                    <li key={step}>{step}</li>
-                ))}
-            </ol>
-
-            <div className="tip-box">
-                <strong>Contraejemplo o caso limite:</strong>
-                <p>{card.edgeCase}</p>
-            </div>
-
-            <div className="warning-box">
-                <strong>Error tipico:</strong>
-                <p>{card.typicalError}</p>
-                <strong>Correccion:</strong>
-                <p>{card.correction}</p>
-            </div>
-
-            <h4>Mini comprobacion</h4>
-            <div className="quick-check-grid">
-                {card.quickCheck.map((item) => (
-                    <div className="quick-check-card" key={item.question}>
-                        <p className="quick-question">{item.question}</p>
-                        <p className="quick-answer">Respuesta: {item.answer}</p>
-                    </div>
-                ))}
-            </div>
-
-            <h4>Conexiones didacticas</h4>
-            <div className="connections-grid">
-                <div className="connection-card">
-                    <h5>LABORATORIO</h5>
-                    <ul>
-                        {card.connections.laboratorio.map((item) => (
-                            <li key={item}>{item}</li>
-                        ))}
-                    </ul>
-                </div>
-                <div className="connection-card">
-                    <h5>ERRONKAK</h5>
-                    <ul>
-                        {card.connections.erronkak.map((item) => (
-                            <li key={item}>{item}</li>
-                        ))}
-                    </ul>
-                </div>
-                <div className="connection-card">
-                    <h5>JOKUAK</h5>
-                    <ul>
-                        {card.connections.jokuak.map((item) => (
-                            <li key={item}>{item}</li>
-                        ))}
-                    </ul>
-                </div>
             </div>
         </div>
     )
