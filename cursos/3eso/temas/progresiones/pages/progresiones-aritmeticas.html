@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Progresiones Aritméticas" data-lang-eu="Progresio Aritmetikoak">Progresiones Aritméticas</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-list-ol"></i>
+            <span data-lang-es="Progresiones Aritméticas" data-lang-eu="Progresio Aritmetikoak">Progresiones Aritméticas</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Botones superiores -->
+        <div class="top-buttons">
+            <a href="#" class="top-button" data-lang-es="Ejercicios" data-lang-eu="Ariketa">Ejercicios</a>
+            <a href="#" class="top-button" data-lang-es="Herramienta" data-lang-eu="Tresna">Herramienta</a>
+        </div>
+
+        <h2 class="page-title" data-lang-es="Progresiones Aritméticas" data-lang-eu="Progresio Aritmetikoak">Progresiones Aritméticas</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es una Progresión Aritmética?" data-lang-eu="Zer da Progresio Aritmetikoa?">¿Qué es una Progresión Aritmética?</h3>
+            <p data-lang-es="Una progresión aritmética es una sucesión de números en la que la diferencia entre dos términos consecutivos es siempre la misma. Esta diferencia constante se llama 'diferencia común' y se representa por la letra 'd'."
+               data-lang-eu="Progresio aritmetikoa zenbaki-sukurtsio bat da non bi termino jarraituren arteko diferentzia beti berdina den. Diferentzia konstante honek 'Diferentzia arrunta' deritzo eta 'd' hizkiak adierazten du.">
+               Una progresión aritmética es una sucesión de números en la que la diferencia entre dos términos consecutivos es siempre la misma. Esta diferencia constante se llama 'diferencia común' y se representa por la letra 'd'.
+            </p>
+            <p class="key-takeaway" data-lang-es="<b>Característica clave:</b> La diferencia entre términos consecutivos es constante."
+               data-lang-eu="<b>Zerikusi:</b> Termino jarraituren arteko diferentzian konstantea da.">
+               <b>Característica clave:</b> La diferencia entre términos consecutivos es constante.
+            </p>
+            <div class="formula-card">
+                <p data-lang-es="<b>Ejemplo:</b> 2, 5, 8, 11, 14, ... es una progresión aritmética donde d = 3"
+                   data-lang-eu="<b>Adibidea:</b> 2, 5, 8, 11, 14, ... progresio aritmetikoa da non d = 3">
+                   <b>Ejemplo:</b> 2, 5, 8, 11, 14, ... es una progresión aritmética donde d = 3
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Término General" data-lang-eu="Termino Orokorra">Término General</h3>
+            <p data-lang-es="La fórmula del término general nos permite encontrar cualquier término de la progresión sin tener que calcular todos los anteriores."
+               data-lang-eu="Termino orokorraren formulak progresioko edozein termino aurkitzeko aukera ematen digu aurretik beste guztiak kalkulatu beharrik gabe.">
+               La fórmula del término general nos permite encontrar cualquier término de la progresión sin tener que calcular todos los anteriores.
+            </p>
+            
+            <div class="formula-card">
+                <h4 data-lang-es="Fórmula del Término General" data-lang-eu="Termino Orokorraren Formula">Fórmula del Término General</h4>
+                <p class="math-formula">\\[ a_n = a_1 + (n-1) \cdot d \\]</p>
+                <div class="formula-description">
+                    <p><strong data-lang-es="Donde:" data-lang-eu="Non:">Donde:</strong></p>
+                    <ul>
+                        <li><strong>a<sub>n</sub></strong> <span data-lang-es="es el término que queremos encontrar" data-lang-eu="aurkitu nahi dugun terminoa da">es el término que queremos encontrar</span></li>
+                        <li><strong>a<sub>1</sub></strong> <span data-lang-es="es el primer término" data-lang-eu="lehen terminoa da">es el primer término</span></li>
+                        <li><strong>n</strong> <span data-lang-es="es la posición del término" data-lang-eu="terminoaren posizioa da">es la posición del término</span></li>
+                        <li><strong>d</strong> <span data-lang-es="es la diferencia común" data-lang-eu="diferentzia arrunta da">es la diferencia común</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <h4 data-lang-es="Ejemplo Práctico" data-lang-eu="Adibide Praktikoa">Ejemplo Práctico</h4>
+                <p data-lang-es="En la progresión 3, 7, 11, 15, 19, ... encuentra el término a<sub>10</sub>."
+                   data-lang-eu="3, 7, 11, 15, 19, ... progresioan, aurkitu a<sub>10</sub> terminoa.">
+                   En la progresión 3, 7, 11, 15, 19, ... encuentra el término a<sub>10</sub>.
+                </p>
+                <p><strong data-lang-es="Solución:" data-lang-eu="Soluzioa:">Solución:</strong></p>
+                <p data-lang-es="Tenemos: a<sub>1</sub> = 3, d = 4, n = 10"
+                   data-lang-eu="Daukagu: a<sub>1</sub> = 3, d = 4, n = 10">
+                   Tenemos: a<sub>1</sub> = 3, d = 4, n = 10
+                </p>
+                <p class="math-formula">\\[ a_{10} = 3 + (10-1) \cdot 4 = 3 + 36 = 39 \\]</p>
+                <p data-lang-es="Por tanto, a<sub>10</sub> = 39"
+                   data-lang-eu="Beraz, a<sub>10</sub> = 39">
+                   Por tanto, a<sub>10</sub> = 39
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Suma de n Términos" data-lang-es="n Terminoen Batura">Suma de n Términos</h3>
+            <p data-lang-es="Para calcular la suma de los primeros n términos de una progresión aritmética, podemos usar una de estas dos fórmulas equivalentes:"
+               data-lang-eu="Progresio aritmetikoaren lehen n terminoren batura kalkulatzeko, formule hauetako bat erabil dezakegu (berdinak direla):">
+               Para calcular la suma de los primeros n términos de una progresión aritmética, podemos usar una de estas dos fórmulas equivalentes:
+            </p>
+
+            <div class="formula-card">
+                <h4 data-lang-es="Fórmulas de la Suma" data-lang-eu="Baturaren Formulak">Fórmulas de la Suma</h4>
+                <p class="math-formula">\\[ S_n = \frac{n}{2} \cdot (a_1 + a_n) \\]</p>
+                <p><strong data-lang-es="o también:" data-lang-eu="edo era honetan:">o también:</strong></p>
+                <p class="math-formula">\\[ S_n = \frac{n}{2} \cdot [2a_1 + (n-1)d] \\]</p>
+                <div class="formula-description">
+                    <p><strong data-lang-es="Donde:" data-lang-eu="Non:">Donde:</strong></p>
+                    <ul>
+                        <li><strong>S<sub>n</sub></strong> <span data-lang-es="es la suma de los primeros n términos" data-lang-eu="lehen n terminoren batura da">es la suma de los primeros n términos</span></li>
+                        <li><strong>a<sub>1</sub></strong> <span data-lang-es="es el primer término" data-lang-eu="lehen terminoa da">es el primer término</span></li>
+                        <li><strong>a<sub>n</sub></strong> <span data-lang-es="es el término en la posición n" data-lang-eu="n posizioan dagoen terminoa da">es el término en la posición n</span></li>
+                        <li><strong>n</strong> <span data-lang-es="es el número de términos a sumar" data-lang-eu="batzeko terminoen kopurua da">es el número de términos a sumar</span></li>
+                        <li><strong>d</strong> <span data-lang-es="es la diferencia común" data-lang-eu="diferentzia arrunta da">es la diferencia común</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <h4 data-lang-es="Ejemplo de Suma" data-lang-eu="Batura Adibidea">Ejemplo de Suma</h4>
+                <p data-lang-es="Calcula la suma de los primeros 8 términos de la progresión: 5, 9, 13, 17, ..."
+                   data-lang-eu="Kalkulatu lehen 8 terminoren batura honako progresioan: 5, 9, 13, 17, ...">
+                   Calcula la suma de los primeros 8 términos de la progresión: 5, 9, 13, 17, ...
+                </p>
+                <p><strong data-lang-es="Solución:" data-lang-eu="Soluzioa:">Solución:</strong></p>
+                <p data-lang-es="Tenemos: a<sub>1</sub> = 5, d = 4, n = 8"
+                   data-lang-eu="Daukagu: a<sub>1</sub> = 5, d = 4, n = 8">
+                   Tenemos: a<sub>1</sub> = 5, d = 4, n = 8
+                </p>
+                <p class="math-formula">\\[ S_8 = \frac{8}{2} \cdot [2 \cdot 5 + (8-1) \cdot 4] = 4 \cdot [10 + 28] = 4 \cdot 38 = 152 \\]</p>
+                <p data-lang-es="Por tanto, S<sub>8</sub> = 152"
+                   data-lang-eu="Beraz, S<sub>8</sub> = 152">
+                   Por tanto, S<sub>8</sub> = 152
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section warning-section">
+            <h3 data-lang-es="⚠️ Errores Típicos" data-lang-eu="⚠️ Ohiko Akatsak">⚠️ Errores Típicos</h3>
+            <div class="warning-card">
+                <h4 data-lang-es="Error 1: Confundir el índice" data-lang-eu="1. Akatsa: Indizea nahastu">Error 1: Confundir el índice</h4>
+                <p data-lang-es="✗ <b>Incorrecto:</b> a<sub>n</sub> = a<sub>1</sub> + n · d"
+                   data-lang-eu="✗ <b>Okertua:</b> a<sub>n</sub> = a<sub>1</sub> + n · d">
+                   ✗ <b>Incorrecto:</b> a<sub>n</sub> = a<sub>1</sub> + n · d
+                </p>
+                <p data-lang-es="✓ <b>Correcto:</b> a<sub>n</sub> = a<sub>1</sub> + (n-1) · d"
+                   data-lang-eu="✓ <b>Zuzena:</b> a<sub>n</sub> = a<sub>1</sub> + (n-1) · d">
+                   ✓ <b>Correcto:</b> a<sub>n</sub> = a<sub>1</sub> + (n-1) · d
+                </p>
+                <p data-lang-es="<em>El término (n-1) es crucial porque empezamos a contar desde el primer término.</em>"
+                   data-lang-eu="<em>(n-1) terminoa funtsezkoa da lehen terminoa kontatzen hasi garelako.</em>">
+                   <em>El término (n-1) es crucial porque empezamos a contar desde el primer término.</em>
+                </p>
+            </div>
+
+            <div class="warning-card">
+                <h4 data-lang-es="Error 2: Usar n en lugar de (n-1)" data-lang-eu="2. Akatsa: n erabili (n-1)ren ordez">Error 2: Usar n en lugar de (n-1)</h4>
+                <p data-lang-es="En la fórmula de la suma, es importante usar (n-1) en lugar de n cuando trabajamos con la diferencia común."
+                   data-lang-eu="Baturaren formulako, garrantzitsua da (n-1) erabiltzea n-ren ordez diferentzia arruntarekin lan egiten dugunean.">
+                   En la fórmula de la suma, es importante usar (n-1) en lugar de n cuando trabajamos con la diferencia común.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Números Naturales - Matemáticas 1º ESO" data-lang-eu="Zenbaki Naturalak - Matematika DBH 1">Números Naturales - Matemáticas 1º ESO</title>
+    <link rel="stylesheet" href="../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+             <a href="../../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+             <i class="fas fa-hashtag"></i>
+             <span data-lang-es="Números Naturales" data-lang-eu="Zenbaki Naturalak">Números Naturales</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="subtopics">
+            <h2 data-lang-es="Conceptos de Números Naturales" data-lang-eu="Zenbaki Naturalen Kontzeptuak">Conceptos de Números Naturales</h2>
+            <div class="cards-container">
+
+                <div class="card">
+                    <a href="./pages/operaciones.html">
+                        <div class="card-icon"><i class="fas fa-calculator"></i></div>
+                        <h3 data-lang-es="Operaciones Básicas" data-lang-eu="Oinarrizko Eragiketak">Operaciones Básicas</h3>
+                        <div class="summary">
+                            <p data-lang-es="Repasa la suma, resta, multiplicación y división con números naturales." data-lang-eu="Berrikusi batuketa, kenketa, biderketa eta zatiketa zenbaki naturalekin.">Repasa la suma, resta, multiplicación y división con números naturales.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./pages/orden_operaciones.html">
+                        <div class="card-icon"><i class="fas fa-sort-numeric-down"></i></div>
+                        <h3 data-lang-es="Orden de Operaciones" data-lang-eu="Eragiketen Ordena">Orden de Operaciones</h3>
+                        <div class="summary">
+                            <p data-lang-es="Aprende la jerarquía de las operaciones y el uso de paréntesis para resolver expresiones combinadas." data-lang-eu="Ikasi eragiketen hierarkia eta parentesien erabilera adierazpen konbinatuak ebazteko.">Aprende la jerarquía de las operaciones y el uso de paréntesis para resolver expresiones combinadas.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./pages/calculo_mental.html">
+                        <div class="card-icon"><i class="fas fa-brain"></i></div>
+                        <h3 data-lang-es="Cálculo Mental" data-lang-eu="Buruzko Kalkulua">Cálculo Mental</h3>
+                        <div class="summary">
+                            <p data-lang-es="Desarrolla estrategias para realizar cálculos de forma rápida y eficiente sin necesidad de calculadora." data-lang-eu="Garatu estrategiak kalkuluak azkar eta eraginkortasunez egiteko kalkulagailurik gabe.">Desarrolla estrategias para realizar cálculos de forma rápida y eficiente sin necesidad de calculadora.</p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../assets/js/theme.js"></script>
+    <script src="../../../../assets/js/language.js"></script>
+    <script src="../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

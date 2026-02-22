@@ -43,6 +43,7 @@
         "title": "Fracciones ESO",
         "subtitle": "Aprende números racionales con sentido",
         "description": "Plataforma de aprendizaje por competencias para 2º ESO. Construye tu comprensión de fracciones mediante laboratorios interactivos y misiones contextualizadas.",
+        "description_dbh1": "Plataforma de aprendizaje por competencias para 1º ESO. Construye tu comprensión de fracciones mediante laboratorios interactivos y misiones contextualizadas.",
         "cta": {
             "start": "Retos",
             "lab": "Ir al laboratorio",
@@ -82,6 +83,7 @@
         "curriculum": {
             "title": "Alineación Curricular",
             "description": "Diseñado según el currículo de Matemáticas de 2º ESO del País Vasco, con enfoque por competencias y criterios de evaluación.",
+            "description_dbh1": "Diseñado según el currículo de Matemáticas de 1º ESO del País Vasco, con enfoque por competencias y criterios de evaluación.",
             "tags": {
                 "numerical": "Sentido numérico",
                 "fractions": "Fracciones y decimales",
@@ -294,6 +296,7 @@
     "theory": {
         "title": "Teoría de Fracciones",
         "subtitle": "Todo lo que necesitas saber sobre fracciones para 2º ESO",
+        "subtitle_dbh1": "Todo lo que necesitas saber sobre fracciones para 1º ESO",
         "description": "Explora cada tema haciendo clic en las tarjetas. El contenido se expandirá con explicaciones, ejemplos y trucos para dominar las fracciones.",
         "sections": {
             "definition": "¿Qué es una fracción?",
@@ -755,6 +758,887 @@
             "bot1": "Max",
             "bot2": "Luna",
             "bot3": "Leo"
+        }
+    },
+    "zatigarritasuna": {
+        "home": {
+            "title": "Divisibilidad",
+            "subtitle": "Múltiplos, divisores y números primos",
+            "description": "Descubre las reglas ocultas de los números. Aprende a encontrar múltiplos, divisores, m.c.m. y m.c.d., herramientas esenciales para simplificar problemas.",
+            "startTheory": "Explorar Teoría",
+            "startLab": "Laboratorio",
+            "features": {
+                "title": "¿Qué aprenderás?",
+                "lab": {
+                    "title": "Laboratorio Interactivo",
+                    "desc": "Pon a prueba tus conocimientos con herramientas dinámicas y observa la divisibilidad en acción.",
+                    "link": "Ir al Laboratorio"
+                },
+                "f1": {
+                    "title": "Múltiplos y Divisores",
+                    "desc": "Entiende la relación fundamental entre los números."
+                },
+                "f2": {
+                    "title": "Criterios",
+                    "desc": "Aprende trucos rápidos para saber si un número es divisible por otro."
+                },
+                "f3": {
+                    "title": "Números Primos",
+                    "desc": "Descubre los 'bloques de construcción' de todos los números."
+                },
+                "f4": {
+                    "title": "m.c.m. y m.c.d.",
+                    "desc": "Aplica estrategias para resolver problemas de coincidencia y reparto."
+                }
+            },
+            "curriculum": {
+                "title": "Alineación Curricular DBH 1",
+                "c1": "Identificación de múltiplos y divisores de un número.",
+                "c2": "Aplicación de los criterios de divisibilidad (2, 3, 5, 9, 10, 11).",
+                "c3": "Descomposición factorial en números primos.",
+                "c4": "Cálculo y aplicación del m.c.m. y el m.c.d. en la resolución de problemas."
+            }
+        },
+        "theory": {
+            "title": "Teoría de Divisibilidad",
+            "sections": {
+                "conceptos": "Conceptos Básicos",
+                "criterios": "Criterios de Divisibilidad",
+                "primos": "Primos y Compuestos",
+                "mcmMcd": "m.c.m. y m.c.d."
+            },
+            "conceptos": {
+                "title": "Múltiplos y Divisores",
+                "subtitle": "La relación fundamental",
+                "description": "Entendiendo cómo se relacionan los números a través de la multiplicación y la división exacta.",
+                "multiplos": {
+                    "title": "Múltiplos de un número",
+                    "text": "Los múltiplos de un número son todos los posibles resultados de multiplicar ese número por cada uno de los números naturales.",
+                    "example": "Múltiplos de 4 son 0, 4, 8, 12, 16... (resultado de 4×0, 4×1, 4×2, 4×3...)"
+                },
+                "divisores": {
+                    "title": "Divisores de un número",
+                    "text": "Los divisores de un número son aquellos que lo pueden dividir en una cantidad exacta de veces, es decir, sin dejar resto.",
+                    "example": "Divisores de 12 son 1, 2, 3, 4, 6 y 12."
+                }
+            },
+            "criterios": {
+                "title": "Reglas Rápidas de Divisibilidad",
+                "subtitle": "Atajos matemáticos",
+                "description": "Existen reglas sencillas que nos permiten saber si un número es divisible por otro sin necesidad de hacer la división."
+            },
+            "primos": {
+                "title": "Números Primos y Compuestos",
+                "subtitle": "Los bloques de construcción",
+                "description": "Clasificando los números según su cantidad de divisores.",
+                "primos": {
+                    "title": "Números Primos",
+                    "text": "Un número primo es un número natural mayor que 1 que tiene únicamente dos divisores distintos: él mismo y el 1.",
+                    "example": "Ejemplos: 2, 3, 5, 7, 11, 13..."
+                },
+                "compuestos": {
+                    "title": "Números Compuestos",
+                    "text": "Un número compuesto es cualquier número natural mayor que 1 que no es primo. Es decir, tiene más de dos divisores.",
+                    "example": "Ejemplos: 4 (divisores 1,2,4), 6 (1,2,3,6), 9 (1,3,9)..."
+                },
+                "descomposicion": {
+                    "title": "Descomposición en Factores Primos",
+                    "text": "Cualquier número compuesto se puede expresar como un producto único de números primos. Este proceso se llama descomposición factorial.",
+                    "example": "12 = 2² × 3"
+                }
+            },
+            "mcmMcd": {
+                "title": "m.c.m. y m.c.d.",
+                "subtitle": "Múltiplos y divisores comunes",
+                "description": "Cómo encontrar el mínimo común múltiplo y el máximo común divisor usando la factorización.",
+                "mcm": {
+                    "title": "Mínimo Común Múltiplo (m.c.m.)",
+                    "text": "El número más pequeño que es múltiplo de todos los números del grupo. Regla: Seleccionar todos los factores primos (comunes y no comunes), elevados al mayor exponente.",
+                    "example": "12 = 2² × 3, 18 = 2 × 3² ➔ m.c.m.(12, 18) = 2² × 3² = 36"
+                },
+                "mcd": {
+                    "title": "Máximo Común Divisor (m.c.d.)",
+                    "text": "El número más grande que puede dividir a todos los números del grupo sin dejar resto. Regla: Seleccionar solamente los factores primos comunes, elevados al menor exponente.",
+                    "example": "12 = 2² × 3, 18 = 2 × 3² ➔ m.c.d.(12, 18) = 2 × 3 = 6"
+                }
+            }
+        },
+        "lab": {
+            "title": "Laboratorio de Divisibilidad",
+            "subtitle": "Herramientas interactivas para explorar números",
+            "divisorChecker": {
+                "title": "Comprobar Divisibilidad",
+                "desc": "Comprueba si un número es divisible por otro",
+                "numberPlaceholder": "Ej: 24",
+                "divisorPlaceholder": "Ej: 6",
+                "number": "Número",
+                "divisor": "Divisor",
+                "check": "Comprobar",
+                "isDivisible": "¡Excelente! {{num}} es divisible por {{div}}.",
+                "isNotDivisible": "{{num}} NO es divisible por {{div}}.",
+                "explanationFormat": "{{num}} ÷ {{div}} = {{quotient}} (Resto: {{remainder}})"
+            },
+            "lcmGcd": {
+                "title": "Calculadora de m.c.m. y m.c.d.",
+                "desc": "Calcula el mínimo común múltiplo y máximo común divisor",
+                "num1Placeholder": "Ej: 12",
+                "num2Placeholder": "Ej: 18",
+                "num1": "1er Número",
+                "num2": "2º Número",
+                "lcm": "m.c.m. (Mínimo Común Múltiplo)",
+                "gcd": "m.c.d. (Máximo Común Divisor)",
+                "calculate": "Calcular",
+                "resultLcm": "El m.c.m. de {{n1}} y {{n2}} es {{result}}.",
+                "resultGcd": "El m.c.d. de {{n1}} y {{n2}} es {{result}}."
+            },
+            "rules": {
+                "title": "Criterios de Divisibilidad",
+                "desc": "Comprueba qué criterios de divisibilidad cumple un número",
+                "numberPlaceholder": "Ej: 120",
+                "number": "Número",
+                "check": "Comprobar Criterios",
+                "divBy": "Divisible por {{div}}:",
+                "yes": "Sí",
+                "no": "No",
+                "rule2": "La última cifra es par (0, 2, 4, 6, 8)",
+                "rule3": "La suma de sus cifras es múltiplo de 3",
+                "rule5": "Termina en 0 o 5",
+                "rule9": "La suma de sus cifras es múltiplo de 9",
+                "rule10": "Termina en 0",
+                "rule11": "La diferencia entre la suma de las cifras en posiciones pares e impares es 0 o múltiplo de 11"
+            }
+        }
+    },
+    "zenbakiNaturalak": {
+        "theory": {
+            "title": "Números Naturales y Decimales",
+            "subtitle": "Descubre la Recta Numérica y las Operaciones",
+            "description": "Aprende a usar números naturales y decimales, junto con la metodología D-P-E para resolver problemas.",
+            "sections": {
+                "arruntak": "Números Naturales",
+                "hamartarrak": "Números Decimales",
+                "dpe": "Metodología D-P-E",
+                "tips": "Técnicas de Estudio"
+            },
+            "arruntak": {
+                "title": "Números Naturales",
+                "description": "Usamos los números naturales (0, 1, 2, 3...) para representar cantidades enteras.",
+                "segidak": {
+                    "title": "Secuencias y Recta Numérica",
+                    "text": "Si tenemos dos números conocidos en una recta, calcula la distancia entre ellos y divide por la cantidad de intervalos."
+                },
+                "biribiltzea": {
+                    "title": "Redondeo a Millares",
+                    "text": "Si el número de la derecha es 5 o mayor, suma uno. Si es 4 o menor, déjalo igual."
+                },
+                "eragiketak": {
+                    "title": "Operaciones Combinadas",
+                    "text": "Jerarquía: 1. Paréntesis, 2. Multiplicaciones y divisiones, 3. Sumas y restas."
+                }
+            },
+            "hamartarrak": {
+                "title": "Números Decimales",
+                "description": "Los decimales se usan para representar partes más pequeñas que una unidad.",
+                "zuzena": {
+                    "title": "Ubicación en la Recta Numérica",
+                    "text": "Añade siempre un cero al final (ej. 9,7 -> 9,70) para verlo mejor."
+                },
+                "biribiltzea": {
+                    "title": "Redondeo a Décimas",
+                    "text": "Si la centésima es 5 o mayor, añade uno a la décima."
+                },
+                "eragiketak": {
+                    "title": "Mecánica de Operaciones",
+                    "text": "Suma/Resta: alinea todas las comas en la misma columna. Multiplicación/División (10, 100, 1000): Mueve la coma tantos espacios como ceros a la derecha o izquierda."
+                }
+            },
+            "dpe": {
+                "title": "Metodología D-P-E para Resolución de Problemas",
+                "description": "Para resolver un problema correctamente, siempre debes seguir esta estructura:",
+                "datuak": {
+                    "title": "D - Datos",
+                    "text": "Lee el texto y extrae solo la información matemática necesaria. Solo palabras clave y números."
+                },
+                "prozedura": {
+                    "title": "P - Procedimiento",
+                    "text": "Escribe claramente el planteamiento matemático. Si es posible, en una sola operación combinada."
+                },
+                "erantzuna": {
+                    "title": "E - Respuesta (Erantzuna)",
+                    "text": "Nunca dejes un número solo. Siempre debes responder con una frase completa."
+                }
+            },
+            "tips": {
+                "title": "Técnicas de Estudio",
+                "description": "Enfoques alternativos que funcionan:",
+                "semaforo": {
+                    "title": "El Semáforo de Operaciones Combinadas",
+                    "text": "Rojo: paréntesis. Amarillo: multiplicaciones/divisiones. Verde: sumas/restas."
+                },
+                "dirua": {
+                    "title": "Decimales vs. Céntimos",
+                    "text": "Si tienes problemas con los decimales, piensa en euros y céntimos. El cerebro procesa mejor el dinero."
+                },
+                "rol": {
+                    "title": "Juego de Rol",
+                    "text": "Realiza una operación con un error intencionado e intenta descubrir ese error y explicar el porqué."
+                }
+            }
+        },
+        "erronkak": {
+            "title": "Retos Numéricos",
+            "ch1": {
+                "title": "📌 Ubicación en la Recta",
+                "description": "En una recta numérica, el intervalo entre 5.000 y 6.000 está dividido en cuatro partes. ¿Qué número corresponde a la primera marca?",
+                "options": [
+                    "5.100",
+                    "5.250",
+                    "5.500"
+                ],
+                "success": "¡Correcto! Cada intervalo es (6000-5000)/4 = 250. 5000 + 250 = 5.250.",
+                "error": "Encuentra la longitud de cada intervalo dividiendo el tramo total (1000) entre 4."
+            },
+            "ch2": {
+                "title": "🔄 Redondeo",
+                "description": "Redondea 26.421 a los millares.",
+                "options": [
+                    "26.000",
+                    "26.400",
+                    "27.000"
+                ],
+                "success": "¡Correcto! Como la centena es 4 (< 5), el millar se queda igual: 26.000.",
+                "error": "Fíjate en la cifra a la derecha del millar (4)."
+            },
+            "ch3": {
+                "title": "🚦 El Semáforo",
+                "description": "Resuelve esta operación combinada: 6 × 5 - 10 + 36:9.",
+                "options": [
+                    "24",
+                    "14",
+                    "20"
+                ],
+                "success": "¡Excelente! (30) - 10 + (4) = 20 + 4 = 24.",
+                "error": "Resuelve primero las multiplicaciones y divisiones. Luego suma y resta de izquierda a derecha."
+            },
+            "ch4": {
+                "title": "🎯 Décimas",
+                "description": "Redondea 14,663 a las décimas.",
+                "options": [
+                    "14,6",
+                    "14,7",
+                    "15,0"
+                ],
+                "success": "¡Correcto! La centésima es 6, que es mayor que 5, así que se suma 1 a la décima: 14,7.",
+                "error": "Fíjate en la cifra a la derecha de la décima (6)."
+            },
+            "ch5": {
+                "title": "✖️ Multiplicación Rápida",
+                "description": "¿Cuál es el resultado de hacer esta multiplicación mentalmente? 7,5 × 1000.",
+                "options": [
+                    "750",
+                    "7.500",
+                    "75.000"
+                ],
+                "success": "¡Genial! La coma se mueve 3 posiciones a la derecha: 7.500.",
+                "error": "Mueve la coma a la derecha según la cantidad de ceros."
+            },
+            "ch6": {
+                "title": "➖ Resta Alineada",
+                "description": "¿Cuál es el resultado de esta resta (recuerda alinear las comas): 15,73 - 9,98?",
+                "options": [
+                    "5,75",
+                    "6,25",
+                    "5,85"
+                ],
+                "success": "¡Excelente! Alineando las comas correctamente y prestando atención a las llevadas, el resultado es 5,75.",
+                "error": "Alinea las comas verticalmente y realiza una resta normal."
+            },
+            "ch7": {
+                "title": "📏 Procedimiento D-P-E",
+                "description": "Un edificio tiene 27 pisos. En cada piso hay 12 viviendas, y en cada vivienda hay 7 ventanas. ¿Cuál es el PROCEDIMIENTO correcto para calcular las ventanas?",
+                "options": [
+                    "27 + 12 + 7",
+                    "27 × 12 × 7",
+                    "27 × 12 + 7"
+                ],
+                "success": "¡Correcto! Dado que todas las relaciones son multiplicativas, el procedimiento es 27 × 12 × 7.",
+                "error": "Cuando unos elementos aparecen repetidamente dentro de una cantidad de otros elementos, se multiplica."
+            },
+            "ch8": {
+                "title": "📊 Datos D-P-E",
+                "description": "Tengo 50€ y quiero comprar una prenda de 32,89€ y un balón de 17,50€. ¿Qué se debe escribir en la sección DATOS?",
+                "options": [
+                    "Todo el texto palabra por palabra.",
+                    "Dinero: 50€ / Prenda: 32,89€ / Balón: 17,50€",
+                    "32,89 + 17,50 = 50,39"
+                ],
+                "success": "¡Claro! En los datos solo se debe poner la información importante, sin operaciones.",
+                "error": "En los datos no se deben incluir operaciones, solo un resumen útil del problema."
+            },
+            "ch9": {
+                "title": "✍️ Respuesta D-P-E",
+                "description": "Cuando tienes el resultado numérico del problema anterior (faltan 0,39), ¿cómo se debe escribir la sección RESPUESTA?",
+                "options": [
+                    "Solo 0,39.",
+                    "0,39 €",
+                    "'Me falta dinero, exactamente me faltan 0,39 €.'"
+                ],
+                "success": "¡Muy bien! E (Respuesta) siempre debe escribirse con una frase completa, para dar contexto.",
+                "error": "Las respuestas no son números solos, siempre necesitan una frase explicativa."
+            }
+        },
+        "pdfTheory": {
+            "title": "Números Naturales y Decimales",
+            "subtitle": "Descubre la Recta Numérica y las Operaciones",
+            "description": "Aprende a usar números naturales y decimales, junto con la metodología D-P-E para resolver problemas.",
+            "sections": {
+                "arruntak": "Números Naturales",
+                "hamartarrak": "Números Decimales",
+                "dpe": "Metodología D-P-E",
+                "tips": "Técnicas de Estudio"
+            },
+            "arruntak": {
+                "title": "Números Naturales",
+                "description": "Usamos los números naturales (0, 1, 2, 3...) para representar cantidades enteras.",
+                "segidak": {
+                    "title": "Secuencias y Recta Numérica",
+                    "text": "Si tenemos dos números conocidos en una recta, calcula la distancia entre ellos y divide por la cantidad de intervalos."
+                },
+                "biribiltzea": {
+                    "title": "Redondeo a Millares",
+                    "text": "Si el número de la derecha es 5 o mayor, suma uno. Si es 4 o menor, déjalo igual."
+                },
+                "eragiketak": {
+                    "title": "Operaciones Combinadas",
+                    "text": "Jerarquía: 1. Paréntesis, 2. Multiplicaciones y divisiones, 3. Sumas y restas."
+                }
+            },
+            "hamartarrak": {
+                "title": "Números Decimales",
+                "description": "Los decimales se usan para representar partes más pequeñas que una unidad.",
+                "zuzena": {
+                    "title": "Ubicación en la Recta Numérica",
+                    "text": "Añade siempre un cero al final (ej. 9,7 -> 9,70) para verlo mejor."
+                },
+                "biribiltzea": {
+                    "title": "Redondeo a Décimas",
+                    "text": "Si la centésima es 5 o mayor, añade uno a la décima."
+                },
+                "eragiketak": {
+                    "title": "Mecánica de Operaciones",
+                    "text": "Suma/Resta: alinea todas las comas en la misma columna. Multiplicación/División (10, 100, 1000): Mueve la coma tantos espacios como ceros a la derecha o izquierda."
+                }
+            },
+            "dpe": {
+                "title": "Metodología D-P-E para Resolución de Problemas",
+                "description": "Para resolver un problema correctamente, siempre debes seguir esta estructura:",
+                "datuak": {
+                    "title": "D - Datos",
+                    "text": "Lee el texto y extrae solo la información matemática necesaria. Solo palabras clave y números."
+                },
+                "prozedura": {
+                    "title": "P - Procedimiento",
+                    "text": "Escribe claramente el planteamiento matemático. Si es posible, en una sola operación combinada."
+                },
+                "erantzuna": {
+                    "title": "E - Respuesta (Erantzuna)",
+                    "text": "Nunca dejes un número solo. Siempre debes responder con una frase completa."
+                }
+            },
+            "tips": {
+                "title": "Técnicas de Estudio",
+                "description": "Enfoques alternativos que funcionan:",
+                "semaforo": {
+                    "title": "El Semáforo de Operaciones Combinadas",
+                    "text": "Rojo: paréntesis. Amarillo: multiplicaciones/divisiones. Verde: sumas/restas."
+                },
+                "dirua": {
+                    "title": "Decimales vs. Céntimos",
+                    "text": "Si tienes problemas con los decimales, piensa en euros y céntimos. El cerebro procesa mejor el dinero."
+                },
+                "rol": {
+                    "title": "Juego de Rol",
+                    "text": "Realiza una operación con un error intencionado e intenta descubrir ese error y explicar el porqué."
+                }
+            }
+        }
+    },
+    "zenbakiOsoak": {
+        "home": {
+            "title": "Números Enteros",
+            "subtitle": "El Conjunto ℤ, Operaciones y Jerarquía",
+            "description": "Sumérgete en el mundo de los números enteros. Aprende a calcular con números positivos y negativos en distintas situaciones reales.",
+            "startTheory": "Explorar Teoría",
+            "features": {
+                "title": "¿Qué aprenderás?",
+                "f1": {
+                    "title": "El Conjunto ℤ",
+                    "desc": "Conoce los números negativos, positivos y el cero, y cómo se representan en la recta numérica."
+                },
+                "f2": {
+                    "title": "Valor Absoluto",
+                    "desc": "Entiende el concepto de distancia al cero y cómo calcular el valor absoluto de cualquier número."
+                },
+                "f3": {
+                    "title": "Suma y Resta",
+                    "desc": "Descubre las reglas de las operaciones básicas usando movimientos en la recta numérica."
+                },
+                "f4": {
+                    "title": "Operaciones Avanzadas",
+                    "desc": "Domina la regla de los signos para multiplicar y dividir, y resuelve operaciones combinadas."
+                }
+            },
+            "curriculum": {
+                "title": "Alineación Curricular DBH 1",
+                "c1": "Identificación y uso de números enteros en contextos reales (temperaturas, deudas).",
+                "c2": "Representación y ordenación en la recta numérica.",
+                "c3": "Cálculo del valor absoluto y del opuesto de un número.",
+                "c4": "Operaciones básicas y combinadas con números enteros siguiendo la jerarquía."
+            }
+        },
+        "theory": {
+            "title": "Teoría de Números Enteros",
+            "subtitle": "Descubre el conjunto ℤ",
+            "description": "Aprende cómo usar los números positivos y negativos para resolver problemas cotidianos y matemáticos.",
+            "sections": {
+                "concepto": "El Conjunto ℤ",
+                "operaciones": "Suma y Resta",
+                "avanzadas": "Operaciones Avanzadas"
+            },
+            "concepto": {
+                "title": "El Conjunto ℤ y la Recta Numérica",
+                "description": "Los números enteros incluyen los naturales (positivos), sus opuestos (negativos) y el cero. Se usan para representar deudas, temperaturas bajo cero o profundidades.",
+                "recta": {
+                    "title": "La Recta Numérica",
+                    "text": "El cero es el origen. A la derecha están los positivos (>0) y a la izquierda los negativos (<0)."
+                },
+                "absoluto": {
+                    "title": "Valor Absoluto",
+                    "text": "Es la distancia de un número al cero. Siempre es positivo o cero. Se escribe entre barras | |.",
+                    "example": "Ejemplo: |-7| = 7, porque -7 está a 7 unidades del 0."
+                }
+            },
+            "operaciones": {
+                "title": "Suma y Resta",
+                "description": "Piensa en la suma y resta como movimientos en la recta: sumar un positivo es avanzar (derecha), sumar un negativo es retroceder (izquierda).",
+                "sumaMismo": {
+                    "title": "Suma con el mismo signo",
+                    "text": "Suma sus valores absolutos y mantén el signo.",
+                    "example": "(-7) + (-2) = -9"
+                },
+                "sumaDiferente": {
+                    "title": "Suma con distinto signo",
+                    "text": "Resta sus valores absolutos y pon el signo del que tiene mayor valor absoluto.",
+                    "example": "(+8) + (-3) = +5"
+                },
+                "resta": {
+                    "title": "Resta",
+                    "text": "Restar un número es lo mismo que sumar su opuesto.",
+                    "example": "(+9) - (+5) → (+9) + (-5) = +4"
+                }
+            },
+            "avanzadas": {
+                "title": "Operaciones Avanzadas",
+                "description": "Reglas para multiplicación, división y operaciones combinadas.",
+                "multDiv": {
+                    "title": "Multiplicación y División",
+                    "text": "Se aplica la Regla de los Signos:\n• Signos iguales: resultado positivo (+)\n• Signos diferentes: resultado negativo (-)",
+                    "example": "(+3) × (-4) = -12"
+                },
+                "combinadas": {
+                    "title": "Operaciones Combinadas",
+                    "text": "Sigue la misma jerarquía que con los naturales, prestando atención a los signos.",
+                    "example": "15 - 3 · [6 - (−12) ÷ (+4)] = -12"
+                }
+            }
+        },
+        "lab": {
+            "title": "Laboratorio de Números Enteros",
+            "subtitle": "Calculadora interactiva para practicar con números enteros",
+            "integerCalculator": {
+                "title": "Calculadora Especial",
+                "desc": "Pon a prueba sumas, restas, multiplicaciones y divisiones con números negativos.",
+                "num1": "1er Número",
+                "num2": "2º Número",
+                "operation": "Operación",
+                "add": "Suma (+)",
+                "subtract": "Resta (-)",
+                "multiply": "Multiplicación (×)",
+                "divide": "División (÷)",
+                "calculate": "Calcular",
+                "result": "Resultado: {{res}}",
+                "errorZero": "¡No se puede dividir por cero!"
+            }
+        }
+    },
+    "algebra": {
+        "title": "Álgebra",
+        "subtitle": "La magia del cálculo mental: letras y ecuaciones",
+        "home": {
+            "theory": {
+                "description": "Aprende los fundamentos del álgebra, expresiones y ecuaciones.",
+                "link": "Ver la Teoría"
+            },
+            "lab": {
+                "description": "Resuelve ecuaciones y practica interactivamente.",
+                "link": "Entrar al Laboratorio"
+            }
+        },
+        "theory": {
+            "title": "Teoría de Álgebra",
+            "sections": {
+                "letras": {
+                    "title": "1. Letras y Expresiones",
+                    "subtitle1": "De Números a Letras",
+                    "p1": "En situaciones donde no conocemos un valor exacto, usamos una letra para representarlo. A esta letra la llamamos <1>incógnita</1> o <3>variable</3>. Esto nos permite generalizar reglas y resolver problemas complejos.",
+                    "example1": "<0>Ejemplo:</0> Si la edad de Juan es 'x', dentro de 15 años tendrá 'x + 15' años, y hace un año tenía 'x - 1'.",
+                    "subtitle2": "Expresiones Algebraicas",
+                    "p2": "Una expresión algebraica es una combinación de números, letras (variables) y operaciones matemáticas.",
+                    "components_title": "Componentes de una Expresión:",
+                    "c1": "<0>Letras (Variables):</0> Representan valores desconocidos (x, y, a, b...).",
+                    "c2": "<0>Números (Coeficientes):</0> Los valores conocidos que multiplican a las variables.",
+                    "c3": "<0>Operaciones:</0> Suma, resta, multiplicación, división, etc.",
+                    "example2": "<0>Ejemplos:</0> 3x - 5 (el triple de un número menos cinco), x² + 1 (el cuadrado de un número más uno)."
+                },
+                "ecuaciones": {
+                    "title": "2. Ecuaciones",
+                    "subtitle1": "¿Qué es una Ecuación?",
+                    "p1": "Una ecuación es una igualdad entre dos expresiones algebraicas que contiene uno o más valores desconocidos (incógnitas). Es como una balanza en equilibrio: lo que hay a un lado del signo igual (=) debe valer lo mismo que lo que hay al otro lado.",
+                    "goal": "<0>El objetivo:</0> Encontrar el valor de la incógnita (normalmente 'x') que hace que la igualdad sea cierta.",
+                    "subtitle2": "Técnicas para Resolver Ecuaciones",
+                    "p2": "Para resolver una ecuación de primer grado, seguimos unos pasos para 'despejar la x', es decir, dejarla sola a un lado del igual.",
+                    "step1_title": "Paso 1: Agrupar términos",
+                    "step1_desc": "Movemos todos los términos que tienen la incógnita (x) a un lado del igual y todos los números al otro lado. <1>Regla clave:</1> lo que está sumando en un lado, pasa restando al otro, y viceversa.",
+                    "step2_title": "Paso 2: Simplificar",
+                    "step2_desc": "Operamos en cada lado del igual para reducir la expresión.",
+                    "step3_title": "Paso 3: Despejar",
+                    "step3_desc": "Si la 'x' tiene un coeficiente (un número multiplicándola), lo pasamos al otro lado dividiendo.",
+                    "subtitle3": "Resolución de Problemas",
+                    "p3": "El verdadero poder del álgebra es traducir problemas de la vida real a un lenguaje matemático que podemos resolver.",
+                    "problem_example": "<0>Problema:</0> Un montón de monedas y una séptima parte de ese montón suman 24 euros. ¿Cuánto vale el montón?<br/><br/><2>Planteamiento:</2> x + (1/7)x = 24<br/><br/><5>Resolución:</5> (8/7)x = 24 → x = (24 × 7) / 8 → x = 21. El montón vale 21 euros."
+                },
+                "monomios": {
+                    "title": "3. Operaciones con Monomios",
+                    "subtitle1": "Suma y Resta de Monomios",
+                    "p1": "Solo se pueden sumar o restar monomios <1>semejantes</1>, es decir, aquellos que tienen la misma parte literal (mismas letras con los mismos exponentes).",
+                    "rule_title": "Regla de Oro:",
+                    "rule_desc": "Se suman o restan los coeficientes y se mantiene la misma parte literal.",
+                    "example1": "<0>Semejantes:</0> 4x + 2x = 6x<br/><br/><3>No semejantes:</3> 3a + 2b (no se puede simplificar)",
+                    "subtitle2": "Multiplicación y División",
+                    "p2": "Para multiplicar o dividir monomios, se operan los coeficientes y las partes literales por separado.",
+                    "mult_title": "Multiplicación",
+                    "mult_desc": "Se multiplican los coeficientes y se suman los exponentes de las letras iguales.",
+                    "div_title": "División",
+                    "div_desc": "Se dividen los coeficientes y se restan los exponentes de las letras iguales.",
+                    "dist_title": "Propiedad Distributiva",
+                    "dist_desc": "Un monomio que multiplica a una suma o resta, multiplica a cada uno de los términos."
+                }
+            }
+        },
+        "lab": {
+            "title": "Laboratorio de Ecuaciones",
+            "subtitle": "Resuelve ecuaciones automáticamente y practica el álgebra",
+            "streak": "Racha",
+            "tool_title": "Resolutor de Ecuaciones",
+            "new_equation": "Generar nueva ecuación",
+            "check": "Comprobar",
+            "show_solution": "Mostrar solución",
+            "correct": "¡Correcto! ¡Sigue así!",
+            "incorrect": "Incorrecto. ¡Inténtalo de nuevo!",
+            "solution_title": "Solución Paso a Paso",
+            "next_equation": "Siguiente Ecuación"
+        }
+    },
+    "geometria": {
+        "title": "Geometría",
+        "subtitle": "El estudio de las formas y el espacio",
+        "home": {
+            "theory": {
+                "description": "Aprende sobre triángulos, cuadriláteros y sus propiedades. Descubre el Teorema de Pitágoras y aprende a calcular áreas y perímetros.",
+                "link": "Explorar Geometría"
+            },
+            "lab": {
+                "description": "Utiliza nuestras herramientas interactivas para trabajar con diferentes formas geométricas y poner a prueba tus conocimientos.",
+                "link": "Entrar al Laboratorio"
+            }
+        },
+        "theory": {
+            "page_title": "Teoría de Geometría",
+            "page_subtitle": "Figuras Planas y sus Propiedades",
+            "table": {
+                "type": "Tipo",
+                "description": "Descripción",
+                "figure": "Figura",
+                "area": "Área",
+                "perimeter": "Perímetro"
+            },
+            "triangles": {
+                "title": "Triángulos",
+                "intro": "Los triángulos son polígonos que tienen tres lados y tres ángulos.",
+                "by_sides": {
+                    "title": "Clasificación según sus Lados",
+                    "equilateral": {
+                        "name": "Equilátero",
+                        "desc": "Tiene los tres lados iguales."
+                    },
+                    "isosceles": {
+                        "name": "Isósceles",
+                        "desc": "Tiene dos lados iguales y uno desigual."
+                    },
+                    "scalene": {
+                        "name": "Escaleno",
+                        "desc": "Tiene los tres lados desiguales."
+                    }
+                },
+                "by_angles": {
+                    "title": "Clasificación según sus Ángulos",
+                    "acute": {
+                        "name": "Acutángulo",
+                        "desc": "Tiene los tres ángulos agudos (menores de 90°)."
+                    },
+                    "right": {
+                        "name": "Rectángulo",
+                        "desc": "Tiene un ángulo recto (igual a 90°)."
+                    },
+                    "obtuse": {
+                        "name": "Obtusángulo",
+                        "desc": "Tiene un ángulo obtuso (mayor de 90°)."
+                    }
+                }
+            },
+            "quadrilaterals": {
+                "title": "Cuadriláteros",
+                "parallelograms": {
+                    "title": "Paralelogramos",
+                    "desc": "Tienen los lados opuestos paralelos dos a dos.",
+                    "square": {
+                        "name": "Cuadrado",
+                        "desc": "4 lados iguales y 4 ángulos rectos."
+                    },
+                    "rectangle": {
+                        "name": "Rectángulo",
+                        "desc": "Lados opuestos iguales y 4 ángulos rectos."
+                    },
+                    "rhombus": {
+                        "name": "Rombo",
+                        "desc": "4 lados iguales y ángulos opuestos iguales."
+                    },
+                    "rhomboid": {
+                        "name": "Romboide",
+                        "desc": "Lados opuestos iguales y ángulos opuestos iguales."
+                    }
+                },
+                "non_parallelograms": {
+                    "title": "No Paralelogramos",
+                    "trapezium": {
+                        "name": "Trapecio",
+                        "desc": "Solo dos de sus lados opuestos son paralelos."
+                    },
+                    "trapezoid": {
+                        "name": "Trapezoide",
+                        "desc": "No tiene ningún lado paralelo a su opuesto."
+                    }
+                }
+            },
+            "pythagoras": {
+                "title": "Teorema de Pitágoras",
+                "desc": "En todo triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos.",
+                "legend": "Donde 'c' es la hipotenusa, y 'a' y 'b' son los catetos."
+            },
+            "areas_perimeters": {
+                "title": "Áreas y Perímetros",
+                "desc": "Fórmulas para calcular el área y el perímetro de las figuras planas más comunes.",
+                "square": {
+                    "name": "Cuadrado"
+                },
+                "rectangle": {
+                    "name": "Rectángulo"
+                },
+                "triangle": {
+                    "name": "Triángulo"
+                },
+                "circle": {
+                    "name": "Círculo"
+                },
+                "rhombus": {
+                    "name": "Rombo"
+                },
+                "trapezium": {
+                    "name": "Trapecio",
+                    "perimeter_desc": "Suma de sus lados"
+                }
+            }
+        },
+        "lab": {
+            "title": "Sala Geométrica",
+            "subtitle": "Calcula el área de figuras aleatorias",
+            "streak": "Racha",
+            "tool_title": "Desafío de Área",
+            "new_problem": "Nuevo Desafío",
+            "side": "Lado",
+            "base": "Base",
+            "height": "Altura",
+            "radius": "Radio",
+            "find_area": "Calcula el área de esta figura.",
+            "find_area_rounded": "Calcula el área de esta figura (redondeado al entero más cercano).",
+            "check": "Comprobar",
+            "show_solution": "Ver Solución",
+            "correct": "¡Correcto! Excelente cálculo.",
+            "incorrect": "Incorrecto. Intenta de nuevo o mira la solución.",
+            "solution_title": "Solución",
+            "next_problem": "Siguiente Desafío"
+        }
+    },
+    "taulakGrafikoak": {
+        "title": "Tablas y Gráficos",
+        "subtitle": "Fundamentos de Estadística",
+        "home": {
+            "title": "Tablas y Gráficos",
+            "subtitle": "Representa el mundo de los datos",
+            "description": "Aprende cómo recopilar, organizar y representar información usando la estadística.",
+            "startTheory": "Explorar Teoría",
+            "features": {
+                "title": "¿Qué aprenderás?",
+                "f1": {
+                    "title": "Población y Muestra",
+                    "desc": "Aprende a quién preguntar para obtener información."
+                },
+                "f2": {
+                    "title": "Variables Estadísticas",
+                    "desc": "Aprende a diferenciar tipos de datos (cualitativos y cuantitativos)."
+                },
+                "f3": {
+                    "title": "Frecuencias y Tablas",
+                    "desc": "Aprende cómo organizar los datos y entender su significado."
+                },
+                "f4": {
+                    "title": "Gráficas y Medidas",
+                    "desc": "Aprende a crear gráficas y analizar medidas estadísticas básicas (Media, Mediana, Moda)."
+                }
+            },
+            "curriculum": {
+                "title": "Alineación Curricular DBH 1",
+                "c1": "Comprensión de los conceptos de población, muestra e individuo.",
+                "c2": "Diferenciación de variables estadísticas cualitativas y cuantitativas.",
+                "c3": "Creación de tablas de frecuencias absolutas y relativas.",
+                "c4": "Representación de datos mediante diagramas de barras y circulares."
+            }
+        },
+        "theory": {
+            "title": "Teoría de Estadística",
+            "subtitle": "Guía para entender los Datos",
+            "sections": {
+                "poblacion": "Población y Muestra",
+                "variables": "Variables Estadísticas",
+                "frecuencias": "Frecuencias y Tablas",
+                "graficos": "Gráficas Estadísticas",
+                "medidas": "Medidas Estadísticas"
+            },
+            "poblacion": {
+                "title": "Población y Muestra",
+                "description": "Antes de recopilar información, debemos tener claro a quién vamos a preguntar.",
+                "population": {
+                    "title": "Población",
+                    "text": "Es el conjunto de TODOS los elementos o personas que queremos estudiar."
+                },
+                "sample": {
+                    "title": "Muestra",
+                    "text": "Es una parte representativa de la población. A menudo no podemos preguntar a todos, por lo que tomamos una muestra."
+                },
+                "individual": {
+                    "title": "Individuo",
+                    "text": "Cada uno de los componentes de la población o muestra."
+                }
+            },
+            "variables": {
+                "title": "Variables Estadísticas",
+                "description": "Es la característica que se estudia de cada individuo.",
+                "qualitative": {
+                    "title": "Variables Cualitativas",
+                    "text": "No se miden con números. Representan una cualidad o característica (Ej: color de ojos, deporte favorito)."
+                },
+                "quantitative": {
+                    "title": "Variables Cuantitativas",
+                    "text": "Se expresan mediante números. Pueden ser de dos tipos:",
+                    "discrete": "Discretas: Toman valores aislados, normalmente números enteros (Ej: número de hermanos: 0, 1, 2...).",
+                    "continuous": "Continuas: Pueden tomar cualquier valor dentro de un intervalo, incluyendo decimales (Ej: altura, peso)."
+                }
+            },
+            "frecuencias": {
+                "title": "Frecuencias y Tablas",
+                "description": "Organizamos los datos en tablas para comprenderlos mejor.",
+                "absolute": {
+                    "title": "Frecuencia Absoluta (fi)",
+                    "text": "Número de veces que se repite un valor o dato."
+                },
+                "relative": {
+                    "title": "Frecuencia Relativa (hi)",
+                    "text": "Es el cociente entre la frecuencia absoluta y el número total de datos (N): hi = fi / N."
+                },
+                "percentage": {
+                    "title": "Porcentaje (%)",
+                    "text": "Se obtiene multiplicando la frecuencia relativa por 100. Indica qué porcentaje del total representa."
+                }
+            },
+            "graficos": {
+                "title": "Gráficos Estadísticos",
+                "description": "Se utilizan para entender los datos visualmente de forma rápida.",
+                "bar": {
+                    "title": "Diagrama de Barras",
+                    "text": "Se usa para variables cualitativas o cuantitativas discretas. La frecuencia se representa con la altura de las barras."
+                },
+                "pie": {
+                    "title": "Diagrama de Sectores",
+                    "text": "Ideal para mostrar las partes (porcentajes) de un total. El círculo se divide en porciones como una tarta."
+                }
+            },
+            "medidas": {
+                "title": "Medidas Estadísticas",
+                "description": "Para resumir un conjunto de datos con un valor o unos pocos valores.",
+                "media": {
+                    "title": "Media Aritmética",
+                    "text": "Suma de todos los datos dividida entre el número de datos. (Solo posible con variables cuantitativas)."
+                },
+                "mediana": {
+                    "title": "Mediana",
+                    "text": "Valor que queda en el centro después de ordenar los datos de menor a mayor."
+                },
+                "moda": {
+                    "title": "Moda",
+                    "text": "El valor que más veces aparece (el que tiene mayor frecuencia absoluta)."
+                },
+                "rango": {
+                    "title": "Rango",
+                    "text": "La diferencia entre el valor máximo y el valor mínimo."
+                }
+            }
+        },
+        "lab": {
+            "title": "Laboratorio de Datos",
+            "subtitle": "Construye tus tablas y gráficas",
+            "tabs": {
+                "variables": "Clasificar Variables",
+                "frequencies": "Tabla de Frecuencia",
+                "graphs": "Insertar Gráficos"
+            },
+            "variablesTool": {
+                "title": "Clasifica las Variables",
+                "description": "Elige el tipo correcto de cada elemento.",
+                "qualitative": "Cualitativa",
+                "quantDiscrete": "Cuantitativa Discreta",
+                "quantContinuous": "Cuantitativa Continua"
+            },
+            "frequencyTool": {
+                "title": "Completa la Tabla",
+                "description": "Calcula la frecuencia relativa y el porcentaje a partir de estos datos.",
+                "data": "Datos",
+                "fi": "fi (Absoluta)",
+                "hi": "hi (Relativa)",
+                "percent": "% (Porcentaje)",
+                "check": "Comprobar Tabla",
+                "correct": "¡Tabla correcta!",
+                "incorrect": "Hay errores en la tabla. Revisa."
+            }
         }
     },
     "footer": {

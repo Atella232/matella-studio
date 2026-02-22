@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="MCM y MCD - Divisibilidad" data-lang-eu="MKT eta ZKH - Zatigarritasuna">MCM y MCD - Divisibilidad</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    
+    <link rel="stylesheet" href="mcm-mcd.css"> 
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-calculator"></i>
+            <span data-lang-es="MCM y MCD" data-lang-eu="MKT eta ZKH">MCM y MCD</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle" 
+                    data-lang-es="Euskara" 
+                    data-lang-eu="Castellano" 
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title" data-lang-es="MCM y MCD por Factorización" data-lang-eu="MKT eta ZKH Faktorizazio bidez">MCM y MCD por Factorización</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="Paso 1: Factorización en Números Primos" data-lang-eu="1. Pausua: Zenbaki lehenetan faktorizatzea">Paso 1: Factorización en Números Primos</h3>
+            <p data-lang-es="Para calcular el MCM y el MCD, primero necesitamos descomponer cada número en sus <b>factores primos</b>. Esto significa expresar cada número como una multiplicación de números primos."
+               data-lang-eu="MKT eta ZKH kalkulatzeko, lehenik zenbaki bakoitza bere <b>faktore lehenetan</b> deskonposatu behar dugu. Horrek esan nahi du zenbaki bakoitza zenbaki lehenen biderketa gisa adierazi behar dela.">
+               Para calcular el MCM y el MCD, primero necesitamos descomponer cada número en sus <b>factores primos</b>. Esto significa expresar cada número como una multiplicación de números primos.
+            </p>
+            <p data-lang-es="El método consiste en dividir el número por el número primo más pequeño posible (2, 3, 5, 7...) hasta que el resultado sea 1."
+               data-lang-eu="Metodoa zenbakia ahalik eta zenbaki lehen txikienarekin (2, 3, 5, 7...) zatitzean datza, emaitza 1 izan arte.">
+               El método consiste en dividir el número por el número primo más pequeño posible (2, 3, 5, 7...) hasta que el resultado sea 1.
+            </p>
+
+            <h4 data-lang-es="Ejemplo Visual: Factorizar 60" data-lang-eu="Adibide Bisuala: 60 faktorizatzea">Ejemplo Visual: Factorizar 60</h4>
+            <div class="factorization-visual-container">
+                <div class="factorization-process">
+                    <div class="numbers-column">
+                        <span>60</span>
+                        <span>30</span>
+                        <span>15</span>
+                        <span>5</span>
+                        <span class="final">1</span>
+                    </div>
+                    <div class="divisors-column">
+                        <span>2</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>5</span>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="factorization-result">
+                    <i class="fas fa-arrow-right"></i>
+                    <p data-lang-es="Los factores primos son los números de la derecha. Por lo tanto:"
+                       data-lang-eu="Faktore lehenak eskuineko zenbakiak dira. Beraz:">
+                       Los factores primos son los números de la derecha. Por lo tanto:
+                    </p>
+                    <div class="final-expression">
+                        60 = 2 × 2 × 3 × 5 = <b>2<sup>2</sup> × 3 × 5</b>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Paso 2: Calcular el Mínimo Común Múltiplo (MCM)" data-lang-eu="2. Pausua: Multiplo Komun Txikiena (MKT) kalkulatzea">Paso 2: Calcular el Mínimo Común Múltiplo (MCM)</h3>
+            <p data-lang-es="El <b>mínimo común múltiplo</b> es el número más pequeño que es múltiplo de todos los números del grupo. Una vez factorizados los números, la regla es:"
+               data-lang-eu="<b>Multiplo komun txikiena</b> taldeko zenbaki guztien multiplo den zenbaki txikiena da. Zenbakiak faktorizatu ondoren, araua hauxe da:">
+               El <b>mínimo común múltiplo</b> es el número más pequeño que es múltiplo de todos los números del grupo. Una vez factorizados los números, la regla es:
+            </p>
+            <div class="rule-box mcm">
+                <p data-lang-es="Seleccionar <b>todos</b> los factores primos (comunes y no comunes), elevados al <b>mayor</b> exponente."
+                   data-lang-eu="Faktore lehen <b>guztiak</b> (komunak eta ez-komunak) aukeratu, berretzaile <b>handienera</b> jasota.">
+                   Seleccionar <b>todos</b> los factores primos (comunes y no comunes), elevados al <b>mayor</b> exponente.
+                </p>
+            </div>
+            
+            <h4 data-lang-es="Ejemplo: Calcular MCM(12, 18)" data-lang-eu="Adibidea: MKT(12, 18) kalkulatzea">Ejemplo: Calcular MCM(12, 18)</h4>
+            <div class="calculation-grid">
+                <div class="factor-group">
+                    <span class="original-number">12</span>
+                    <div class="factorization-process-small">
+                        <div class="numbers-column">
+                            <span>12</span>
+                            <span>6</span>
+                            <span>3</span>
+                            <span class="final">1</span>
+                        </div>
+                        <div class="divisors-column">
+                            <span>2</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="final-expression-small">12 = 2<sup>2</sup> × 3</div>
+                </div>
+                <div class="factor-group">
+                    <span class="original-number">18</span>
+                    <div class="factorization-process-small">
+                        <div class="numbers-column">
+                            <span>18</span>
+                            <span>9</span>
+                            <span>3</span>
+                            <span class="final">1</span>
+                        </div>
+                        <div class="divisors-column">
+                            <span>2</span>
+                            <span>3</span>
+                            <span>3</span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="final-expression-small">18 = 2 × 3<sup>2</sup></div>
+                </div>
+            </div>
+            
+            <div class="selection-visual">
+                <div class="selection-step">
+                    <span class="step-label" data-lang-es="Factores de 2:" data-lang-eu="2-ren faktoreak:">Factores de 2:</span>
+                    <span class="factor-option">2<sup>2</sup></span>
+                    <span class="factor-option">2</span>
+                    <i class="fas fa-arrow-right"></i>
+                    <span class="selected-factor mcm" data-lang-es="Mayor: 2²" data-lang-eu="Handiena: 2²">Mayor: 2²</span>
+                </div>
+                <div class="selection-step">
+                    <span class="step-label" data-lang-es="Factores de 3:" data-lang-eu="3-ren faktoreak:">Factores de 3:</span>
+                    <span class="factor-option">3</span>
+                    <span class="factor-option">3<sup>2</sup></span>
+                    <i class="fas fa-arrow-right"></i>
+                    <span class="selected-factor mcm" data-lang-es="Mayor: 3²" data-lang-eu="Handiena: 3²">Mayor: 3²</span>
+                </div>
+            </div>
+
+            <div class="final-calculation">
+                <span data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</span>
+                MCM(12, 18) = <span class="calc-part">2<sup>2</sup></span> × <span class="calc-part">3<sup>2</sup></span> = 4 × 9 = <span class="final-result">36</span>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Paso 3: Calcular el Máximo Común Divisor (MCD)" data-lang-eu="3. Pausua: Zatitzaile Komun Handiena (ZKH) kalkulatzea">Paso 3: Calcular el Máximo Común Divisor (MCD)</h3>
+            <p data-lang-es="El <b>máximo común divisor</b> es el número más grande que puede dividir a todos los números del grupo sin dejar resto. Usando la factorización, la regla es:"
+               data-lang-eu="<b>Zatitzaile komun handiena</b> taldeko zenbaki guztiak hondarrik utzi gabe zati ditzakeen zenbaki handiena da. Faktorizazioa erabiliz, araua hauxe da:">
+               El <b>máximo común divisor</b> es el número más grande que puede dividir a todos los números del grupo sin dejar resto. Usando la factorización, la regla es:
+            </p>
+            <div class="rule-box mcd">
+                <p data-lang-es="Seleccionar <b>solamente</b> los factores primos <b>comunes</b>, elevados al <b>menor</b> exponente."
+                   data-lang-eu="Faktore lehen <b>komunak soilik</b> aukeratu, berretzaile <b>txikienera</b> jasota.">
+                   Seleccionar <b>solamente</b> los factores primos <b>comunes</b>, elevados al <b>menor</b> exponente.
+                </p>
+            </div>
+
+            <h4 data-lang-es="Ejemplo: Calcular MCD(12, 18)" data-lang-eu="Adibidea: ZKH(12, 18) kalkulatzea">Ejemplo: Calcular MCD(12, 18)</h4>
+            <div class="calculation-grid">
+                <div class="factor-group">
+                    <span class="original-number">12</span>
+                    <div class="factorization-process-small">
+                        <div class="numbers-column">
+                            <span>12</span>
+                            <span>6</span>
+                            <span>3</span>
+                            <span class="final">1</span>
+                        </div>
+                        <div class="divisors-column">
+                            <span>2</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="final-expression-small">12 = <b>2</b><sup>2</sup> × <b>3</b></div>
+                </div>
+                <div class="factor-group">
+                    <span class="original-number">18</span>
+                    <div class="factorization-process-small">
+                        <div class="numbers-column">
+                            <span>18</span>
+                            <span>9</span>
+                            <span>3</span>
+                            <span class="final">1</span>
+                        </div>
+                        <div class="divisors-column">
+                            <span>2</span>
+                            <span>3</span>
+                            <span>3</span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="final-expression-small">18 = <b>2</b> × <b>3</b><sup>2</sup></div>
+                </div>
+            </div>
+            
+             <div class="selection-visual">
+                <div class="selection-step">
+                    <span class="step-label" data-lang-es="Factores de 2 (común):" data-lang-eu="2-ren faktoreak (komuna):">Factores de 2 (común):</span>
+                    <span class="factor-option">2<sup>2</sup></span>
+                    <span class="factor-option">2</span>
+                    <i class="fas fa-arrow-right"></i>
+                    <span class="selected-factor mcd" data-lang-es="Menor: 2" data-lang-eu="Txikiena: 2">Menor: 2</span>
+                </div>
+                <div class="selection-step">
+                    <span class="step-label" data-lang-es="Factores de 3 (común):" data-lang-eu="3-ren faktoreak (komuna):">Factores de 3 (común):</span>
+                    <span class="factor-option">3</span>
+                    <span class="factor-option">3<sup>2</sup></span>
+                    <i class="fas fa-arrow-right"></i>
+                    <span class="selected-factor mcd" data-lang-es="Menor: 3" data-lang-eu="Txikiena: 3">Menor: 3</span>
+                </div>
+            </div>
+
+            <div class="final-calculation">
+                 <span data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</span>
+                MCD(12, 18) = <span class="calc-part">2</span> × <span class="calc-part">3</span> = <span class="final-result">6</span>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="2025 - MATELLA | Diseinu Minimalista Profesionala">2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+    <script src="../js/mcm-mcd.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

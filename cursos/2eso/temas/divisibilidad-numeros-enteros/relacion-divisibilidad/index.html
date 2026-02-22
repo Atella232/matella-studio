@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="La relación de divisibilidad - MATELLA" data-lang-eu="Zatigarritasunaren erlazioa - MATELLA">La relación de divisibilidad - MATELLA</title>
+  
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <style>
+    /* Mejora para la rejilla de criterios de divisibilidad */
+    .criteria-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .criteria-card {
+      background-color: var(--button-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--secondary-color);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .criteria-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--card-shadow);
+    }
+    .criteria-card h5 {
+      margin-top: 0;
+      margin-bottom: 0.8rem;
+      color: var(--primary-color);
+      font-size: 1.1em;
+    }
+    .criteria-card .examples {
+      margin-top: 1rem;
+      font-size: 0.9em;
+      font-weight: bold;
+      color: var(--secondary-color);
+    }
+    .criteria-card .examples span {
+      font-weight: normal;
+      color: var(--text-color);
+      opacity: 0.8;
+    }
+
+    /* Estilos para la calculadora interactiva */
+    .calculator-tool {
+      padding: 1.5rem;
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+    .calculator-tool .tool-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .calculator-tool .tool-grid label { font-weight: bold; display: block; margin-bottom: 0.3rem; }
+    .calculator-tool .tool-grid input { width: 100%; padding: 0.6rem; border: 1px solid var(--border-color); border-radius: 4px; }
+    .calculator-tool .tool-actions { text-align: center; margin-bottom: 1.5rem; }
+    .calculator-tool .btn.primary { background-color: var(--primary-color); color: white; padding: 0.7em 1.5em; border-radius: 20px; font-weight: bold; transition: background-color 0.2s ease; }
+    .calculator-tool .btn.primary:hover { background-color: var(--secondary-color); }
+
+    /* Estilos para el cuadro de resultados de la calculadora */
+    #divisibilityResult {
+        padding: 1rem;
+        border-radius: 6px;
+        text-align: center;
+        font-size: 1.1em;
+        font-weight: bold;
+        min-height: 50px;
+        transition: opacity 0.3s ease;
+    }
+    #divisibilityResult.correct { background-color: var(--quiz-feedback-correct-bg); color: var(--quiz-feedback-correct-text); border: 1px solid var(--quiz-feedback-correct-border); }
+    #divisibilityResult.incorrect { background-color: var(--quiz-feedback-incorrect-bg); color: var(--quiz-feedback-incorrect-text); border: 1px solid var(--quiz-feedback-incorrect-border); }
+    #divisibilityResult.error { background-color: #fcf8e3; color: #8a6d3b; border: 1px solid #faebcc; }
+    #divisibilityResult p { margin-bottom: 0.2rem; }
+    #divisibilityResult p.details { font-size: 0.9em; font-weight: normal; opacity: 0.9; }
+
+  </style>
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <a href="../../../../index.html" class="home-link">
+        <i class="fas fa-calculator"></i>
+        <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+      </a>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
+    </nav>
+  </header>
+  
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol>
+      <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
+      <li><a href="../index.html" data-lang-es="Divisibilidad y números enteros" data-lang-eu="Zatigarritasuna eta zenbaki osoak">Divisibilidad y números enteros</a></li>
+      <li class="active" aria-current="page"><span data-lang-es="La relación de divisibilidad" data-lang-eu="Zatigarritasunaren erlazioa">La relación de divisibilidad</span></li>
+    </ol>
+  </nav>
+  
+  <main>
+    <h1 class="page-title" data-lang-es="La relación de divisibilidad" data-lang-eu="Zatigarritasunaren erlazioa">La relación de divisibilidad</h1>
+    
+    <section class="content-section">
+      <p data-lang-es="La divisibilidad es una relación fundamental en matemáticas que nos permite entender cómo se relacionan los números entre sí. Un número es divisible por otro cuando la división entre ellos es exacta, es decir, el resto es cero." data-lang-eu="Zatigarritasuna matematiketan oinarrizko erlazio bat da, zenbakiak elkarrekin nola erlazionatzen diren ulertzen laguntzen diguna. Zenbaki bat beste batez zatigarria da haien arteko zatiketa zehatza denean, hau da, hondarra zero denean.">La divisibilidad es una relación fundamental en matemáticas que nos permite entender cómo se relacionan los números entre sí. Un número es divisible por otro cuando la división entre ellos es exacta, es decir, el resto es cero.</p>
+    </section>
+    
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="true">
+          <span class="header-text">
+            <i class="fas fa-book-open icon-concept"></i>
+            <span data-lang-es="Definición Formal" data-lang-eu="Definizio formala">Definición Formal</span>
+          </span>
+          <i class="fas fa-chevron-down icon-toggle"></i>
+        </button>
+        <div class="accordion-content">
+          <p data-lang-es="Decimos que un número <strong>a</strong> es divisible por otro número <strong>b</strong> (o que <strong>b</strong> es un divisor de <strong>a</strong>) si existe un número entero <strong>c</strong> tal que:" data-lang-eu="Esaten dugu <strong>a</strong> zenbakia beste <strong>b</strong> zenbaki batez zatigarria dela (edo <strong>b</strong>, <strong>a</strong>-ren zatitzailea dela) <strong>c</strong> zenbaki oso bat existitzen bada, non:">Decimos que un número <strong>a</strong> es divisible por otro número <strong>b</strong> (o que <strong>b</strong> es un divisor de <strong>a</strong>) si existe un número entero <strong>c</strong> tal que:</p>
+          
+          <div class="math-formula">
+            a = b × c
+          </div>
+          
+          <ul>
+            <li><strong>a</strong> <span data-lang-es="es el <strong>dividendo</strong>" data-lang-eu="<strong>zatikizuna</strong> da">es el <strong>dividendo</strong></span></li>
+            <li><strong>b</strong> <span data-lang-es="es el <strong>divisor</strong>" data-lang-eu="<strong>zatitzailea</strong> da">es el <strong>divisor</strong></span></li>
+            <li><strong>c</strong> <span data-lang-es="es el <strong>cociente</strong>" data-lang-eu="<strong>zatidura</strong> da">es el <strong>cociente</strong></span></li>
+          </ul>
+
+          <div class="example-box card-style">
+            <h4 data-lang-es="Ejemplo Práctico" data-lang-eu="Adibide Praktikoa">Ejemplo Práctico</h4>
+            <p data-lang-es="<strong>Pregunta:</strong> ¿Es 24 divisible por 6?" data-lang-eu="<strong>Galdera:</strong> 24 zatigarria al da 6z?"><strong>Pregunta:</strong> ¿Es 24 divisible por 6?</p>
+            <p data-lang-es="Buscamos un número entero que, multiplicado por 6, dé como resultado 24." data-lang-eu="6z biderkatuta 24 ematen duen zenbaki oso bat bilatzen dugu.">Buscamos un número entero que, multiplicado por 6, dé como resultado 24.</p>
+            <div class="math-formula" style="margin-top: 1rem;">
+              24 = 6 × 4
+            </div>
+            <p class="key-takeaway" style="margin-top: 1rem;" data-lang-es="<strong>Conclusión:</strong> Sí, 24 es divisible por 6 porque encontramos el número entero 4." data-lang-eu="<strong>Ondorioa:</strong> Bai, 24 zatigarria da 6z, 4 zenbaki osoa aurkitu dugulako."><strong>Conclusión:</strong> Sí, 24 es divisible por 6 porque encontramos el número entero 4.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false">
+          <span class="header-text">
+            <i class="fas fa-list-check icon-concept"></i>
+            <span data-lang-es="Criterios de Divisibilidad" data-lang-eu="Zatigarritasun Irizpideak">Criterios de Divisibilidad</span>
+          </span>
+          <i class="fas fa-chevron-down icon-toggle"></i>
+        </button>
+        <div class="accordion-content">
+          <p data-lang-es="Los criterios de divisibilidad son 'atajos' que nos permiten saber rápidamente si un número es divisible por otro sin hacer la división completa:" data-lang-eu="Zatigarritasun-irizpideak 'lasterbideak' dira, zenbaki bat beste batez zatigarria den azkar jakiteko aukera ematen digutenak, zatiketa osoa egin gabe:">Los criterios de divisibilidad son 'atajos' que nos permiten saber rápidamente si un número es divisible por otro sin hacer la división completa:</p>
+
+          <div class="criteria-grid">
+            <div class="criteria-card">
+              <h5 data-lang-es="Divisibilidad por 2" data-lang-eu="2z zatigarria">Divisibilidad por 2</h5>
+              <p data-lang-es="Si la última cifra es 0, 2, 4, 6 u 8 (par)." data-lang-eu="Azken zifra 0, 2, 4, 6 edo 8 bada (bikoitia).">Si la última cifra es 0, 2, 4, 6 u 8 (par).</p>
+              <div class="examples"><span data-lang-es="Ej:" data-lang-eu="Adib:">Ej:</span> 24, 156, 1000</div>
+            </div>
+            <div class="criteria-card">
+              <h5 data-lang-es="Divisibilidad por 3" data-lang-eu="3z zatigarria">Divisibilidad por 3</h5>
+              <p data-lang-es="Si la suma de sus cifras es un múltiplo de 3." data-lang-eu="Bere zifren batura 3ren multiploa bada.">Si la suma de sus cifras es un múltiplo de 3.</p>
+              <div class="examples"><span data-lang-es="Ej:" data-lang-eu="Adib:">Ej:</span> 123 (1+2+3=6)</div>
+            </div>
+            <div class="criteria-card">
+              <h5 data-lang-es="Divisibilidad por 5" data-lang-eu="5z zatigarria">Divisibilidad por 5</h5>
+              <p data-lang-es="Si la última cifra es 0 o 5." data-lang-eu="Azken zifra 0 edo 5 bada.">Si la última cifra es 0 o 5.</p>
+              <div class="examples"><span data-lang-es="Ej:" data-lang-eu="Adib:">Ej:</span> 25, 150, 1005</div>
+            </div>
+            <div class="criteria-card">
+              <h5 data-lang-es="Divisibilidad por 9" data-lang-eu="9z zatigarria">Divisibilidad por 9</h5>
+              <p data-lang-es="Si la suma de sus cifras es un múltiplo de 9." data-lang-eu="Bere zifren batura 9ren multiploa bada.">Si la suma de sus cifras es un múltiplo de 9.</p>
+              <div class="examples"><span data-lang-es="Ej:" data-lang-eu="Adib:">Ej:</span> 189 (1+8+9=18)</div>
+            </div>
+            <div class="criteria-card">
+              <h5 data-lang-es="Divisibilidad por 10" data-lang-eu="10z zatigarria">Divisibilidad por 10</h5>
+              <p data-lang-es="Si la última cifra es 0." data-lang-eu="Azken zifra 0 bada.">Si la última cifra es 0.</p>
+              <div class="examples"><span data-lang-es="Ej:" data-lang-eu="Adib:">Ej:</span> 20, 150, 1000</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false">
+          <span class="header-text">
+            <i class="fas fa-calculator icon-concept"></i>
+            <span data-lang-es="Calculadora de Divisibilidad" data-lang-eu="Zatigarritasun Kalkulagailua">Calculadora de Divisibilidad</span>
+          </span>
+          <i class="fas fa-chevron-down icon-toggle"></i>
+        </button>
+        <div class="accordion-content">
+          <p data-lang-es="Usa esta herramienta para comprobar la divisibilidad entre dos números:" data-lang-eu="Erabili tresna hau bi zenbakiren arteko zatigarritasuna egiaztatzeko:">Usa esta herramienta para comprobar la divisibilidad entre dos números:</p>
+          
+          <div class="calculator-tool">
+            <div class="tool-grid">
+              <div>
+                <label for="dividend" data-lang-es="Dividendo" data-lang-eu="Zatikizuna">Dividendo</label>
+                <input type="number" id="dividend" data-placeholder-es="ej: 24" data-placeholder-eu="adib: 24">
+              </div>
+              <div>
+                <label for="divisor" data-lang-es="Divisor" data-lang-eu="Zatitzailea">Divisor</label>
+                <input type="number" id="divisor" data-placeholder-es="ej: 6" data-placeholder-eu="adib: 6">
+              </div>
+            </div>
+            <div class="tool-actions">
+              <button id="check-divisibility-btn" class="btn primary">
+                <i class="fas fa-check"></i>
+                <span data-lang-es="Verificar" data-lang-eu="Egiaztatu">Verificar</span>
+              </button>
+            </div>
+            <div id="divisibilityResult"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false">
+          <span class="header-text">
+            <i class="fas fa-tasks icon-concept"></i>
+            <span data-lang-es="Ejercicios Propuestos" data-lang-eu="Proposatutako Ariketak">Ejercicios Propuestos</span>
+          </span>
+          <i class="fas fa-chevron-down icon-toggle"></i>
+        </button>
+        <div class="accordion-content">
+          <ol class="exercises-list">
+            <li>
+              <p data-lang-es="De los siguientes números, indica cuáles son divisibles por <strong>2</strong>: 23, 46, 57, 88, 101." data-lang-eu="Hurrengo zenbakietatik, adierazi zein diren <strong>2</strong>z zatigarriak: 23, 46, 57, 88, 101.">De los siguientes números, indica cuáles son divisibles por <strong>2</strong>: 23, 46, 57, 88, 101.</p>
+              <button class="toggle-hint-button" data-target="hint1" aria-expanded="false">
+                <i class="fas fa-lightbulb"></i>
+                <span data-lang-es="Mostrar Pista" data-lang-eu="Pista Erakutsi" data-lang-es-hide="Ocultar Pista" data-lang-eu-hide="Pista Ezkutatu">Mostrar Pista</span>
+              </button>
+              <div class="hint-content" id="hint1">
+                <p data-lang-es="Un número es divisible por 2 si su última cifra es par (0, 2, 4, 6, 8)." data-lang-eu="Zenbaki bat 2z zatigarria da bere azken zifra bikoitia bada (0, 2, 4, 6, 8).">Un número es divisible por 2 si su última cifra es par (0, 2, 4, 6, 8).</p>
+              </div>
+            </li>
+            <li>
+              <p data-lang-es="¿Cuáles de estos números son divisibles por <strong>3</strong>: 72, 104, 315, 881?" data-lang-eu="Zenbaki hauetatik zein dira <strong>3</strong>z zatigarriak: 72, 104, 315, 881?">¿Cuáles de estos números son divisibles por <strong>3</strong>: 72, 104, 315, 881?</p>
+              <button class="toggle-hint-button" data-target="hint2" aria-expanded="false">
+                <i class="fas fa-lightbulb"></i>
+                <span data-lang-es="Mostrar Pista" data-lang-eu="Pista Erakutsi" data-lang-es-hide="Ocultar Pista" data-lang-eu-hide="Pista Ezkutatu">Mostrar Pista</span>
+              </button>
+              <div class="hint-content" id="hint2">
+                <p data-lang-es="Suma las cifras de cada número. Si el resultado es múltiplo de 3 (3, 6, 9, 12...), entonces el número original es divisible por 3." data-lang-eu="Gehitu zenbaki bakoitzaren zifrak. Emaitza 3ren multiploa bada (3, 6, 9, 12...), orduan jatorrizko zenbakia 3z zatigarria da.">Suma las cifras de cada número. Si el resultado es múltiplo de 3 (3, 6, 9, 12...), entonces el número original es divisible por 3.</p>
+              </div>
+            </li>
+            <li>
+              <p data-lang-es="Encuentra los números divisibles por <strong>5</strong> y por <strong>10</strong> en esta lista: 125, 230, 456, 780, 995." data-lang-eu="Aurkitu zerrenda honetan <strong>5</strong>ez eta <strong>10</strong>ez zatigarriak diren zenbakiak: 125, 230, 456, 780, 995.">Encuentra los números divisibles por <strong>5</strong> y por <strong>10</strong> en esta lista: 125, 230, 456, 780, 995.</p>
+              <button class="toggle-hint-button" data-target="hint3" aria-expanded="false">
+                <i class="fas fa-lightbulb"></i>
+                <span data-lang-es="Mostrar Pista" data-lang-eu="Pista Erakutsi" data-lang-es-hide="Ocultar Pista" data-lang-eu-hide="Pista Ezkutatu">Mostrar Pista</span>
+              </button>
+              <div class="hint-content" id="hint3">
+                <p data-lang-es="Divisibles por 5 acaban en 0 o 5. Divisibles por 10 acaban solo en 0. ¡Un número divisible por 10 siempre es divisible por 5!" data-lang-eu="5ez zatigarriak 0z edo 5ez amaitzen dira. 10ez zatigarriak 0z bakarrik amaitzen dira. 10ez zatigarria den zenbaki bat beti da 5ez zatigarria!">Divisibles por 5 acaban en 0 o 5. Divisibles por 10 acaban solo en 0. ¡Un número divisible por 10 siempre es divisible por 5!</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- Lógica para la Calculadora de Divisibilidad ---
+      const dividendInput = document.getElementById('dividend');
+      const divisorInput = document.getElementById('divisor');
+      const checkBtn = document.getElementById('check-divisibility-btn');
+      const resultBox = document.getElementById('divisibilityResult');
+      
+      const checkDivisibility = () => {
+        const dividend = parseInt(dividendInput.value);
+        const divisor = parseInt(divisorInput.value);
+        resultBox.className = '';
+        
+        if (isNaN(dividend) || isNaN(divisor)) {
+          resultBox.classList.add('error');
+          resultBox.innerHTML = `<p data-lang-es="Por favor, introduce ambos números." data-lang-eu="Mesedez, sartu bi zenbakiak.">Por favor, introduce ambos números.</p>`;
+          window.langUtils.applyLanguage(window.langUtils.getCurrentLang());
+          return;
+        }
+
+        if (divisor === 0) {
+          resultBox.classList.add('error');
+          resultBox.innerHTML = `<p data-lang-es="El divisor no puede ser cero." data-lang-eu="Zatitzailea ezin da zero izan.">El divisor no puede ser cero.</p>`;
+          window.langUtils.applyLanguage(window.langUtils.getCurrentLang());
+          return;
+        }
+        
+        const isDivisible = dividend % divisor === 0;
+        const quotient = Math.floor(dividend / divisor);
+        const remainder = dividend % divisor;
+        
+        let resultHTML = '';
+        if (isDivisible) {
+          resultBox.classList.add('correct');
+          resultHTML = `<p><strong>${dividend} <span data-lang-es="es divisible" data-lang-eu="zatigarria da">es divisible</span> por ${divisor}</strong></p>`;
+          resultHTML += `<p class="details">${dividend} = ${divisor} × ${quotient}</p>`;
+        } else {
+          resultBox.classList.add('incorrect');
+          resultHTML = `<p><strong>${dividend} <span data-lang-es="NO es divisible" data-lang-eu="EZ da zatigarria">NO es divisible</span> por ${divisor}</strong></p>`;
+          resultHTML += `<p class="details">${dividend} = ${divisor} × ${quotient} + ${remainder} (<span data-lang-es="resto" data-lang-eu="hondarra">resto</span> ${remainder})</p>`;
+        }
+        
+        resultBox.innerHTML = resultHTML;
+        window.langUtils.applyLanguage(window.langUtils.getCurrentLang());
+      };
+
+      if (checkBtn) {
+        checkBtn.addEventListener('click', checkDivisibility);
+        dividendInput.addEventListener('keydown', (e) => e.key === 'Enter' && checkDivisibility());
+        divisorInput.addEventListener('keydown', (e) => e.key === 'Enter' && checkDivisibility());
+      }
+    });
+  </script>
+</body>
+</html>

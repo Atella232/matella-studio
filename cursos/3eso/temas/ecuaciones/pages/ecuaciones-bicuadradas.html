@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Ecuaciones Bicuadradas - 3º ESO" data-lang-eu="Ekuazio Bikuadratuak - 3.DBH">Ecuaciones Bicuadradas - 3º ESO</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-superscript"></i>
+            <span data-lang-es="Ecuaciones Bicuadradas" data-lang-eu="Ekuazio Bikuadratuak">Ecuaciones Bicuadradas</span>
+        </div>
+        <nav>
+            <button id="exercise-btn" class="button-primary" data-lang-es="Ejercicios" data-lang-eu="Ariketa">Ejercicios</button>
+            <button id="tool-btn" class="button-secondary" data-lang-es="Herramienta" data-lang-eu="Tresna">Herramienta</button>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="page-title" data-lang-es="Ecuaciones Bicuadradas" data-lang-eu="Ekuazio Bikuadratuak">Ecuaciones Bicuadradas</h1>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es una Ecuación Bicuadrada?" data-lang-eu="Zer da Ekuazio Bikuadratu bat?">¿Qué es una Ecuación Bicuadrada?</h3>
+            <p data-lang-es="Una ecuación bicuadrada es una ecuación de cuarto grado que no contiene términos de grado impar. Es decir, solo aparecen términos con exponentes pares: x⁴, x² y término independiente."
+               data-lang-eu="Ekuazio bikuadratu bat laugarren mailako ekuazioa da, maila bako gaiak dituena. Hau da, esporente bikoitzeko gaiak bakarrik agertzen dira: x⁴, x² eta gai askea.">
+               Una ecuación bicuadrada es una ecuación de cuarto grado que no contiene términos de grado impar. Es decir, solo aparecen términos con exponentes pares: x⁴, x² y término independiente.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Forma General" data-lang-eu="Forma Orokorra">Forma General</h3>
+            <div class="math-formula">
+                \[ax^4 + bx^2 + c = 0 \quad \text{donde} \quad a \neq 0\]
+            </div>
+            <p data-lang-es="Como puedes observar, la ecuación bicuadrada tiene la misma estructura que una ecuación de segundo grado, pero con <b>x⁴</b> en lugar de <b>x²</b>, y <b>x²</b> en lugar de <b>x</b>."
+               data-lang-eu="Ikus daitekeenez, ekuazio bikuadratuak bigarren mailako ekuazioaren egitura bera du, baina <b>x⁴</b> <b>x²</b>-ren ordez eta <b>x²</b> <b>x</b>-aren ordez.">
+               Como puedes observar, la ecuación bicuadrada tiene la misma estructura que una ecuación de segundo grado, pero con <b>x⁴</b> en lugar de <b>x²</b>, y <b>x²</b> en lugar de <b>x</b>.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Método de Resolución" data-lang-eu="Ebazpenerako Metodoa">Método de Resolución</h3>
+            <p data-lang-es="Para resolver ecuaciones bicuadradas usamos un <b>cambio de variable</b> que las convierte en ecuaciones de segundo grado:"
+               data-lang-eu="Ekuazio bikuadratuak ebazteko, <b>aldagai-aldaketa</b> bat erabiltzen dugu bigarren mailako ekuazio bihurtzeko:">
+               Para resolver ecuaciones bicuadradas usamos un <b>cambio de variable</b> que las convierte en ecuaciones de segundo grado:
+            </p>
+            
+            <div class="steps-box">
+                <div class="step">
+                    <h4 data-lang-es="Paso 1: Hacer el cambio de variable" data-lang-eu="1. Pausua: Aldagai-aldaketa egin">Paso 1: Hacer el cambio de variable</h4>
+                    <div class="math-formula">
+                        \[x^2 = y\]
+                    </div>
+                    <p data-lang-es="Sustituimos <b>x²</b> por <b>y</b> y <b>x⁴</b> por <b>y²</b>."
+                       data-lang-eu="<b>x²</b> <b>y</b>-rekin ordezkatzen dugu eta <b>x⁴</b> <b>y²</b>-rekin.">
+                       Sustituimos <b>x²</b> por <b>y</b> y <b>x⁴</b> por <b>y²</b>.
+                    </p>
+                </div>
+                
+                <div class="step">
+                    <h4 data-lang-es="Paso 2: Resolver la ecuación en y" data-lang-eu="2. Pausua: y-n ekuazioa ebatzi">Paso 2: Resolver la ecuación en y</h4>
+                    <div class="math-formula">
+                        \[ay^2 + by + c = 0\]
+                    </div>
+                    <p data-lang-es="Ahora tenemos una ecuación de segundo grado en <b>y</b> que podemos resolver con la fórmula cuadrática."
+                       data-lang-eu="Orain <b>y</b>-n bigarren mailako ekuazioa daukagu, formula koadratikoarekin ebatz daitekeena.">
+                       Ahora tenemos una ecuación de segundo grado en <b>y</b> que podemos resolver con la fórmula cuadrática.
+                    </p>
+                </div>
+                
+                <div class="step">
+                    <h4 data-lang-es="Paso 3: Despejar x" data-lang-eu="3. Pausua: x askatu">Paso 3: Despejar x</h4>
+                    <div class="math-formula">
+                        \[x = \pm\sqrt{y}\]
+                    </div>
+                    <p data-lang-es="Por cada valor positivo de <b>y</b> obtenemos <b>dos valores de x</b> (positivo y negativo). Si <b>y < 0</b>, no hay soluciones reales."
+                       data-lang-eu="<b>y</b>-ren balio bakoitz positiboarentzat <b>bi x balio</b> lortzen ditugu (positiboa eta negatiboa). <b>y < 0</b> bada, ez dago soluzio errealik.">
+                       Por cada valor positivo de <b>y</b> obtenemos <b>dos valores de x</b> (positivo y negativo). Si <b>y < 0</b>, no hay soluciones reales.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Ejemplo Completo" data-lang-eu="Adibide Osoa">Ejemplo Completo</h3>
+            <p data-lang-es="Vamos a resolver la ecuación: \\(x^4 - 5x^2 + 4 = 0\\)"
+               data-lang-eu="Ekuazio hau ebatziko dugu: \\(x^4 - 5x^2 + 4 = 0\\)">
+               Vamos a resolver la ecuación: \\(x^4 - 5x^2 + 4 = 0\\)
+            </p>
+            
+            <div class="example-box">
+                <p><strong data-lang-es="Paso 1 - Cambio de variable:" data-lang-eu="1. Pausua - Aldagai-aldaketa:">Paso 1 - Cambio de variable:</strong></p>
+                <p>\\[x^2 = y\\]</p>
+                <p>\\[x^4 = y^2\\]</p>
+                <p data-lang-es="La ecuación se transforma en:" data-lang-eu="Ekuazioa honela bihurtzen da:">La ecuación se transforma en:</p>
+                <div class="math-formula">
+                    \[y^2 - 5y + 4 = 0\]
+                </div>
+                
+                <p><strong data-lang-es="Paso 2 - Resolver la ecuación en y:" data-lang-eu="2. Pausua - y-n ekuazioa ebatzi:">Paso 2 - Resolver la ecuación en y:</strong></p>
+                <p data-lang-es="Ecuación de segundo grado con coeficientes a = 1, b = -5, c = 4"
+                   data-lang-eu="Bigarren mailako ekuazioa, koefiziente hauekin: a = 1, b = -5, c = 4">
+                   Ecuación de segundo grado con coeficientes a = 1, b = -5, c = 4
+                </p>
+                <p>\\[\Delta = (-5)^2 - 4(1)(4) = 25 - 16 = 9\\]</p>
+                <p>\\[y = \\frac{5 \\pm \\sqrt{9}}{2} = \\frac{5 \\pm 3}{2}\\]</p>
+                <p>\\[y_1 = \\frac{5 + 3}{2} = 4, \\quad y_2 = \\frac{5 - 3}{2} = 1\\]</p>
+                
+                <p><strong data-lang-es="Paso 3 - Despejar x:" data-lang-eu="3. Pausua - x askatu:">Paso 3 - Despejar x:</strong></p>
+                <p data-lang-es="Para y₁ = 4:" data-lang-eu="y₁ = 4-rentzat:">Para y₁ = 4:</p>
+                <p>\\[x = \\pm\\sqrt{4} = \\pm2\\]</p>
+                <p data-lang-es="Para y₂ = 1:" data-lang-eu="y₂ = 1-rentzat:">Para y₂ = 1:</p>
+                <p>\\[x = \\pm\\sqrt{1} = \\pm1\\]</p>
+                
+                <p class="key-takeaway" data-lang-es="<b>Solución:</b> x = -2, x = -1, x = 1, x = 2<br><br><b>Comprobación:</b><br>Para x = -2: (-2)⁴ - 5(-2)² + 4 = 16 - 20 + 4 = 0 ✓<br>Para x = -1: (-1)⁴ - 5(-1)² + 4 = 1 - 5 + 4 = 0 ✓<br>Para x = 1: 1⁴ - 5(1)² + 4 = 1 - 5 + 4 = 0 ✓<br>Para x = 2: 2⁴ - 5(2)² + 4 = 16 - 20 + 4 = 0 ✓"
+                                   data-lang-eu="<b>Soluzioa:</b> x = -2, x = -1, x = 1, x = 2<br><br><b>Egiaztapena:</b><br>x = -2-rentzat: (-2)⁴ - 5(-2)² + 4 = 16 - 20 + 4 = 0 ✓<br>x = -1-rentzat: (-1)⁴ - 5(-1)² + 4 = 1 - 5 + 4 = 0 ✓<br>x = 1-rentzat: 1⁴ - 5(1)² + 4 = 1 - 5 + 4 = 0 ✓<br>x = 2-rentzat: 2⁴ - 5(2)² + 4 = 16 - 20 + 4 = 0 ✓">
+                                   <b>Solución:</b> x = -2, x = -1, x = 1, x = 2<br><br><b>Comprobación:</b><br>Para x = -2: (-2)⁴ - 5(-2)² + 4 = 16 - 20 + 4 = 0 ✓<br>Para x = -1: (-1)⁴ - 5(-1)² + 4 = 1 - 5 + 4 = 0 ✓<br>Para x = 1: 1⁴ - 5(1)² + 4 = 1 - 5 + 4 = 0 ✓<br>Para x = 2: 2⁴ - 5(2)² + 4 = 16 - 20 + 4 = 0 ✓
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Caso con Soluciones Complejas" data-lang-eu="Soluzio Konplexuak Dituen Kasua">Caso con Soluciones Complejas</h3>
+            <p data-lang-es="Veamos qué ocurre cuando alguna solución en <b>y</b> es negativa:"
+               data-lang-eu="Ikus dezagun zer gertatzen den <b>y</b>-ren soluzio bat negatiboa denean:">
+               Veamos qué ocurre cuando alguna solución en <b>y</b> es negativa:
+            </p>
+            
+            <div class="example-box">
+                <p><strong data-lang-es="Resolver:</strong> \\(x^4 + 2x^2 + 2 = 0\\)"
+                   <strong data-lang-eu="Ebatzi:</strong> \\(x^4 + 2x^2 + 2 = 0\\)">
+                   <strong>Resolver:</strong> \\(x^4 + 2x^2 + 2 = 0\\)
+                </p>
+                
+                <p><strong data-lang-es="Paso 1 - Cambio de variable:" data-lang-eu="1. Pausua - Aldagai-aldaketa:">Paso 1 - Cambio de variable:</strong></p>
+                <div class="math-formula">
+                    \[y^2 + 2y + 2 = 0\]
+                </div>
+                
+                <p><strong data-lang-es="Paso 2 - Resolver en y:" data-lang-eu="2. Pausua - y-n ebatzi:">Paso 2 - Resolver en y:</strong></p>
+                <p>\\[\Delta = 2^2 - 4(1)(2) = 4 - 8 = -4\\]</p>
+                <p>\\[y = \\frac{-2 \\pm \\sqrt{-4}}{2} = \\frac{-2 \\pm 2i}{2} = -1 \\pm i\\]</p>
+                
+                <p><strong data-lang-es="Conclusión:" data-lang-eu="Ondorioa:">Conclusión:</strong></p>
+                <p data-lang-es="Como ambas soluciones de <b>y</b> son números complejos negativos, la ecuación bicuadrada <b>no tiene soluciones reales</b>."
+                   data-lang-eu="<b>y</b>-ren bi soluzioak zenbaki konplexu negatiboak direnez, ekuazio bikuadratuak <b>ez du soluzio errealik</b>.">
+                   Como ambas soluciones de <b>y</b> son números complejos negativos, la ecuación bicuadrada <b>no tiene soluciones reales</b>.
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Número de Soluciones" data-lang-eu="Soluzio Kopurua">Número de Soluciones</h3>
+            <p data-lang-es="El número de soluciones reales de una ecuación bicuadrada depende del número de soluciones positivas de la ecuación auxiliar en <b>y</b>:"
+               data-lang-eu="Ekuazio bikuadratu baten soluzio errealen kopurua <b>y</b>-ren ekuazio lagungarriaren soluzio positiboen kopuruaren araberakoa da:">
+               El número de soluciones reales de una ecuación bicuadrada depende del número de soluciones positivas de la ecuación auxiliar en <b>y</b>:
+            </p>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-times icon-concept"></i>
+                        <span data-lang-es="0 soluciones en y > 0" data-lang-eu="y > 0-n 0 soluzio">0 soluciones en y > 0</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="La ecuación bicuadrada <b>no tiene soluciones reales</b>."
+                           data-lang-eu="Ekuazio bikuadratuak <b>ez du soluzio errealik</b>.">
+                           La ecuación bicuadrada <b>no tiene soluciones reales</b>.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-plus icon-concept"></i>
+                        <span data-lang-es="1 solución en y > 0" data-lang-eu="y > 0-n 1 soluzio">1 solución en y > 0</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="La ecuación bicuadrada tiene <b>2 soluciones reales</b> (x = ±√y)."
+                           data-lang-eu="Ekuazio bikuadratuak <b>2 soluzio erreal</b> ditu (x = ±√y).">
+                           La ecuación bicuadrada tiene <b>2 soluciones reales</b> (x = ±√y).
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-plus-circle icon-positive"></i>
+                        <span data-lang-es="2 soluciones en y > 0" data-lang-eu="y > 0-n 2 soluzio">2 soluciones en y > 0</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="La ecuación bicuadrada tiene <b>4 soluciones reales</b> (x = ±√y₁, x = ±√y₂)."
+                           data-lang-eu="Ekuazio bikuadratuak <b>4 soluzio erreal</b> ditu (x = ±√y₁, x = ±√y₂).">
+                           La ecuación bicuadrada tiene <b>4 soluciones reales</b> (x = ±√y₁, x = ±√y₂).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Casos Especiales" data-lang-eu="Kasu Bereziak">Casos Especiales</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-times icon-concept"></i>
+                        <span data-lang-es="Sin término independiente (c = 0)" data-lang-eu="Gai askea gabe (c = 0)">Sin término independiente (c = 0)</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="math-formula">
+                            \[ax^4 + bx^2 = 0\]
+                        </div>
+                        <p>\\[x^2(ax^2 + b) = 0\\]</p>
+                        <p data-lang-es="Una solución es siempre x = 0, y las otras dependen del signo de b."
+                           data-lang-eu="Soluzio bat beti da x = 0, eta besteak b-ren zeinuaren araberakoak dira.">
+                           Una solución es siempre x = 0, y las otras dependen del signo de b.
+                        </p>
+                        <p class="example">
+                            <em data-lang-es="Ejemplo: x⁴ - 4x² = 0 → x²(x² - 4) = 0 → x = 0, x = ±2"
+                            data-lang-eu="Adibidea: x⁴ - 4x² = 0 → x²(x² - 4) = 0 → x = 0, x = ±2">
+                            Ejemplo: x⁴ - 4x² = 0 → x²(x² - 4) = 0 → x = 0, x = ±2
+                        </em></p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-divide icon-concept"></i>
+                        <span data-lang-es="Solo términos extremos (b = 0)" data-lang-eu="Bai eta c soilik (b = 0)">Solo términos extremos (b = 0)</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="math-formula">
+                            \[ax^4 + c = 0\]
+                        </div>
+                        <p>\\[x^4 = -\\frac{c}{a}\\]</p>
+                        <p data-lang-es="Si -c/a > 0, hay 2 soluciones reales (±⁴√(-c/a)). Si -c/a < 0, no hay soluciones reales."
+                           data-lang-eu="-c/a > 0 bada, 2 soluzio erreal daude (±⁴√(-c/a)). -c/a < 0 bada, ez dago soluzio errealik.">
+                           Si -c/a > 0, hay 2 soluciones reales (±⁴√(-c/a)). Si -c/a < 0, no hay soluciones reales.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section warning-box">
+            <h3 data-lang-es="⚠️ Errores Típicos" data-lang-eu="⚠️ Ohiko Akatsak">⚠️ Errores Típicos</h3>
+            <ul>
+                <li data-lang-es="<b>Obtener soluciones no válidas:</b> Aceptar valores de y negativos como válidos para x"
+                    data-lang-eu="<b>Soluzio balioezinak lortzea:</b> y-ren balio negatiboak x-rentzat balitzat onartzea">
+                    <b>Obtener soluciones no válidas:</b> Aceptar valores de y negativos como válidos para x
+                </li>
+                <li data-lang-es="<b>No considerar las dos raíces cuadradas:</b> Para cada y > 0, siempre hay dos valores de x (±√y)"
+                    data-lang-eu="<b>Bi erro koadratuek ez kontuan hartzea:</b> y > 0 bakoitzerako, beti bi x balio daude (±√y)">
+                    <b>No considerar las dos raíces cuadradas:</b> Para cada y > 0, siempre hay dos valores de x (±√y)
+                </li>
+                <li data-lang-es="<b>Olvidar el cambio de variable:</b> Tratar de resolver directamente x⁴ - 5x² + 4 = 0 sin hacer x² = y"
+                    data-lang-eu="<b>Aldagai-aldaketa ahaztea:</b> Zuzenean x⁴ - 5x² + 4 = 0 ebaztea, x² = y egin gabe">
+                    <b>Olvidar el cambio de variable:</b> Tratar de resolver directamente x⁴ - 5x² + 4 = 0 sin hacer x² = y
+                </li>
+                <li data-lang-es="<b>No comprobar todas las soluciones:</b> Verificar que todas las x obtenidas satisfacen la ecuación original"
+                    data-lang-eu="<b>Soluzio guztiak ez egiaztatzea:</b> Lortutako x guztiek ekuazio originala betetzen dutela egiaztatzea">
+                    <b>No comprobar todas las soluciones:</b> Verificar que todas las x obtenidas satisfacen la ecuación original
+                </li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Aplicaciones" data-lang-eu="Aplikazioak">Aplicaciones</h3>
+            <p data-lang-es="Las ecuaciones bicuadradas aparecen en problemas de ingeniería y física donde se modelan fenómenos con simetría."
+               data-lang-eu="Ekuazio bikuadratuak ingeniaritzako eta fisika probleman agertzen dira, simetrikoak diren fenomenoak modelatzerakoan.">
+               Las ecuaciones bicuadradas aparecen en problemas de ingeniería y física donde se modelan fenómenos con simetría.
+            </p>
+            
+            <div class="example-box">
+                <p><strong data-lang-es="Problema de ingeniería:" data-lang-eu="Ingeniaritzako problema:">Problema de ingeniería:</strong></p>
+                <p data-lang-es="Una viga con sección cuadrada debe soportar una carga. La ecuación que modela la deformación es: \\(k·x^4 - m·x^2 + n = 0\\)"
+                   data-lang-eu="Sekzio karratua duen vigak karga bat jasaten du. Deformazioa modelatzen duen ekuazioa hau da: \\(k·x^4 - m·x^2 + n = 0\\)">
+                   Una viga con sección cuadrada debe soportar una carga. La ecuación que modela la deformación es: \\(k·x^4 - m·x^2 + n = 0\\)
+                </p>
+                <p data-lang-es="Para encontrar los valores seguros de x (dimensión de la viga), resolvemos la ecuación bicuadrada."
+                   data-lang-eu="x-ren balio seguruak (vigaren dimentsioa) aurkitzeko, ekuazio bikuadratua ebazten dugu.">
+                   Para encontrar los valores seguros de x (dimensión de la viga), resolvemos la ecuación bicuadrada.
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Resumen del Método" data-lang-eu="Metodoaren Laburpena">Resumen del Método</h3>
+            <div class="key-takeaway">
+                <p data-lang-es="<b>Para resolver cualquier ecuación bicuadrada:</b>"
+                   data-lang-eu="<b>Edozein ekuazio bikuadratu ebazteko:</b>">
+                   <b>Para resolver cualquier ecuación bicuadrada:</b>
+                </p>
+                <ol>
+                    <li data-lang-es="Haz el cambio de variable: <b>x² = y</b>"
+                        data-lang-eu="Egin aldagai-aldaketa: <b>x² = y</b>">
+                        Haz el cambio de variable: <b>x² = y</b>
+                    </li>
+                    <li data-lang-es="Resuelve la ecuación de segundo grado: <b>ay² + by + c = 0</b>"
+                        data-lang-eu="Ebatzi bigarren mailako ekuazioa: <b>ay² + by + c = 0</b>">
+                        Resuelve la ecuación de segundo grado: <b>ay² + by + c = 0</b>
+                    </li>
+                    <li data-lang-es="Para cada <b>y > 0</b>, calcula <b>x = ±√y</b>"
+                        data-lang-eu"><b>y > 0</b> bakoitzerako, <b>x = ±√y</b> kalkulatu">
+                        Para cada <b>y > 0</b>, calcula <b>x = ±√y</b>
+                    </li>
+                    <li data-lang-es="Descarta cualquier valor de <b>y ≤ 0</b> (no da soluciones reales para x)"
+                        data-lang-eu"><b>y ≤ 0</b> balioak baztertu (ez dute x-rentzat soluzio errealik ematen)">
+                        Descarta cualquier valor de <b>y ≤ 0</b> (no da soluciones reales para x)
+                    </li>
+                    <li data-lang-es="Comprueba todas las soluciones en la ecuación original"
+                        data-lang-eu">Egiaztatu soluzio guztiak ekuazio originalean">
+                        Comprueba todas las soluciones en la ecuación original
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

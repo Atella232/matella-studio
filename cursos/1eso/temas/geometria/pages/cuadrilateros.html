@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Cuadriláteros - Geometría" data-lang-eu="Laukiak - Geometria">Cuadriláteros - Geometría</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="far fa-square"></i>
+            <span data-lang-es="Cuadriláteros" data-lang-eu="Laukiak">Cuadriláteros</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Clasificación y Propiedades de los Cuadriláteros" data-lang-eu="Laukien Sailkapena eta Propietateak">Clasificación y Propiedades de los Cuadriláteros</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="Paralelogramos" data-lang-eu="Paralelogramoak">Paralelogramos</h3>
+            <p data-lang-es="Tienen los lados opuestos paralelos dos a dos."
+               data-lang-eu="Aurkako aldeak binaka paralelo dituzte.">
+               Tienen los lados opuestos paralelos dos a dos.
+            </p>
+            <div class="table-container">
+                 <table class="variables-table">
+                    <thead>
+                         <tr>
+                             <th data-lang-es="Tipo" data-lang-eu="Mota">Tipo</th>
+                             <th data-lang-es="Descripción" data-lang-eu="Deskribapena">Descripción</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr>
+                            <td><b data-lang-es="Cuadrado" data-lang-eu="Karratua">Cuadrado</b></td>
+                            <td data-lang-es="4 lados iguales y 4 ángulos rectos." data-lang-eu="4 alde berdin eta 4 angelu zuzen.">4 lados iguales y 4 ángulos rectos.</td>
+                         </tr>
+                         <tr>
+                            <td><b data-lang-es="Rectángulo" data-lang-eu="Laukizuzena">Rectángulo</b></td>
+                            <td data-lang-es="Lados opuestos iguales y 4 ángulos rectos." data-lang-eu="Aurkako aldeak berdinak eta 4 angelu zuzen.">Lados opuestos iguales y 4 ángulos rectos.</td>
+                         </tr>
+                         <tr>
+                            <td><b data-lang-es="Rombo" data-lang-eu="Erronboa">Rombo</b></td>
+                            <td data-lang-es="4 lados iguales y ángulos opuestos iguales." data-lang-eu="4 alde berdin eta aurkako angeluak berdinak.">4 lados iguales y ángulos opuestos iguales.</td>
+                         </tr>
+                         <tr>
+                            <td><b data-lang-es="Romboide" data-lang-eu="Erronboidea">Romboide</b></td>
+                            <td data-lang-es="Lados opuestos iguales y ángulos opuestos iguales." data-lang-eu="Aurkako aldeak eta angeluak berdinak.">Lados opuestos iguales y ángulos opuestos iguales.</td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="No Paralelogramos" data-lang-eu="Ez-Paralelogramoak">No Paralelogramos</h3>
+            <div class="table-container">
+                 <table class="variables-table">
+                    <thead>
+                         <tr>
+                             <th data-lang-es="Tipo" data-lang-eu="Mota">Tipo</th>
+                             <th data-lang-es="Descripción" data-lang-eu="Deskribapena">Descripción</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr>
+                            <td><b data-lang-es="Trapecio" data-lang-eu="Trapezioa">Trapecio</b></td>
+                            <td data-lang-es="Solo dos de sus lados opuestos son paralelos." data-lang-eu="Aurkako bi alde bakarrik ditu paraleloak.">Solo dos de sus lados opuestos son paralelos.</td>
+                         </tr>
+                         <tr>
+                            <td><b data-lang-es="Trapezoide" data-lang-eu="Trapezoidea">Trapezoide</b></td>
+                            <td data-lang-es="No tiene ningún lado paralelo a su opuesto." data-lang-eu="Ez du alde paralelorik bere aurkakoarekiko.">No tiene ningún lado paralelo a su opuesto.</td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+    <script src="../js/geometria.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

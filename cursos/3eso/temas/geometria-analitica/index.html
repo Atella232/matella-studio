@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Geometría Analítica 3º ESO - Inicio" data-lang-eu="Geometria Analitikoa DBH 3 - Hasiera">Geometría Analítica 3º ESO - Inicio</title>
+    <link rel="stylesheet" href="../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+             <a href="../../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+             <i class="fas fa-chart-area"></i>
+             <span data-lang-es="Geometría Analítica" data-lang-eu="Geometria Analitikoa">Geometría Analítica</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i> </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro">
+            <div class="intro-container">
+
+                <h2 data-lang-es="Bienvenida a la Geometría Analítica" data-lang-eu="Ongi Etorri Geometria Analitikora">Bienvenida a la Geometría Analítica</h2>
+
+                <ul class="tabs-nav">
+                    <li><a href="#tab-what" class="tab-link active" data-lang-es="¿Qué es?" data-lang-eu="Zer da?">¿Qué es?</a></li>
+                    <li><a href="#tab-why" class="tab-link" data-lang-es="¿Por qué es útil?" data-lang-eu="Zergatik da erabilgarria?">¿Por qué es útil?</a></li>
+                </ul>
+
+                <div class="tabs-content">
+
+                    <div id="tab-what" class="tab-pane active">
+                        <div class="tab-pane-content">
+                            <div class="tab-text">
+                                <h3 data-lang-es="Álgebra y Geometría Juntos" data-lang-eu="Aljebra eta Geometria Batera">Álgebra y Geometría Juntos</h3>
+                                <p data-lang-es="La geometría analítica combina <b>álgebra y geometría</b> para estudiar formas y figuras usando coordenadas. Permite representar puntos, líneas y curvas mediante <b>ecuaciones matemáticas</b>."
+                                   data-lang-eu="Geometria analitikoak <b>aljebra eta geometria</b> konbinatzen ditu koordenatuak erabiliz formak eta figureak aztertzeko. Puntuak, lerroak eta kurba <b>ekuazio matematikoen</b> bidez irudikatzeko aukera ematen du.">
+                                   La geometría analítica combina <b>álgebra y geometría</b> para estudiar formas y figuras usando coordenadas. Permite representar puntos, líneas y curvas mediante <b>ecuaciones matemáticas</b>.
+                                </p>
+                                <h4 data-lang-es="Elementos fundamentales:" data-lang-eu="Oinarrizko elementuak:">Elementos fundamentales:</h4>
+                                <ul class="icon-list">
+                                    <li><i class="fas fa-crosshairs"></i><span data-lang-es="Puntos definidos por coordenadas (x,y)" data-lang-eu="Koordenatuek definitutako puntuak (x,y)">Puntos definidos por coordenadas (x,y)</span></li>
+                                    <li><i class="fas fa-vector-square"></i><span data-lang-es="Vectores con magnitud y dirección" data-lang-eu="Magnitude eta noranzkodun bektoreak">Vectores con magnitud y dirección</span></li>
+                                    <li><i class="fas fa-ruler-horizontal"></i><span data-lang-es="Rectas expresadas como ecuaciones" data-lang-eu="Ekuazio gisa adierazitako lerro zuzenak">Rectas expresadas como ecuaciones</span></li>
+                                    <li><i class="fas fa-calculator"></i><span data-lang-es="Cálculos geométricos precisos" data-lang-eu="Kalkulu geometriko zehatzak">Cálculos geométricos precisos</span></li>
+                                </ul>
+                            </div>
+                            <div class="tab-visual">
+                                <i class="fas fa-chart-area fa-5x subtle-icon"></i> </div>
+                        </div>
+                    </div>
+
+                    <div id="tab-why" class="tab-pane">
+                         <div class="tab-pane-content">
+                            <div class="tab-text">
+                                <h3 data-lang-es="Aplicaciones en el Mundo Real" data-lang-eu="Mundu Errealeko Aplikazioak">Aplicaciones en el Mundo Real</h3>
+                                <p data-lang-es="¡Fundamental en tecnología, ciencia y diseño!" data-lang-eu="Teknologia, zientzia eta diseinuan funtsezkoa!">¡Fundamental en tecnología, ciencia y diseño!</p>
+                                <div class="usage-grid">
+                                    <div class="usage-item"><i class="fas fa-map"></i><span data-lang-es="Navegación GPS" data-lang-eu="GPS Nabigazioa">Navegación GPS</span></div>
+                                    <div class="usage-item"><i class="fas fa-gamepad"></i><span data-lang-es="Videojuegos y Gráficos" data-lang-eu="Bideojokoak eta Grafikoak">Videojuegos y Gráficos</span></div>
+                                    <div class="usage-item"><i class="fas fa-building"></i><span data-lang-es="Arquitectura y Construcción" data-lang-eu="Arkitektura eta Eraikuntza">Arquitectura y Construcción</span></div>
+                                    <div class="usage-item"><i class="fas fa-satellite"></i><span data-lang-es="Ingeniería y Tecnología" data-lang-eu="Ingeniaritza eta Teknologia">Ingeniería y Tecnología</span></div>
+                                    <div class="usage-item"><i class="fas fa-chart-line"></i><span data-lang-es="Análisis de Datos" data-lang-eu="Datuen Analisia">Análisis de Datos</span></div>
+                                    <div class="usage-item"><i class="fas fa-robot"></i><span data-lang-es="Robótica" data-lang-eu="Robotika">Robótica</span></div>
+                                </div>
+                                <h4 data-lang-es="Te permite:" data-lang-eu="Aukera ematen dizute:">Te permite:</h4>
+                                <ul class="benefits-list">
+                                    <li data-lang-es="Visualizar problemas geométricamente" data-lang-eu="Problemak geometrikoki ikustea">Visualizar problemas geométricamente</li>
+                                    <li data-lang-es="Calcular distancias y ángulos exactamente" data-lang-eu="Distantziak eta angeluak zehatz kalkulatzea">Calcular distancias y ángulos exactamente</li>
+                                    <li data-lang-es="Modelar situaciones del mundo real" data-lang-eu="Mundu errealeko egoerak modelatzea">Modelar situaciones del mundo real</li>
+                                    <li data-lang-es="Resolver problemas de manera algebraica" data-lang-eu="Problemak aljebrikoki ebaztea">Resolver problemas de manera algebraica</li>
+                                </ul>
+                            </div>
+                            <div class="tab-visual">
+                                <i class="fas fa-drafting-compass fa-5x subtle-icon"></i> </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section id="subtopics">
+            <h2 data-lang-es="Contenidos del Tema" data-lang-eu="Gaiaren Edukiak">Contenidos del Tema</h2>
+            <div class="cards-container">
+
+                <div class="card">
+                    <a href="./pages/puntos-coordenadas.html">
+                        <div class="card-icon"><i class="fas fa-crosshairs"></i></div>
+                        <h3 data-lang-es="Puntos y Coordenadas" data-lang-eu="Puntuak eta Koordenatuak">Puntos y Coordenadas</h3>
+                        <div class="summary">
+                            <p data-lang-es="<b>Localización precisa en el plano</b><br/>• <b>Sistema:</b> Pares ordenados (x, y) en el plano cartesiano<br/>• <b>Cuadrantes:</b> División en 4 regiones según signos<br/>• <b>Distancia:</b> Fórmula de Pitágoras d = √[(x₂-x₁)² + (y₂-y₁)²]<br/>• <b>Aplicaciones:</b> GPS, mapas, localización"
+                               data-lang-eu="<b>Kokapen zehatza planoko</b><br/>• <b>Sistema:</b> Ordeztutako binak (x, y) plano kartesiarrean<br/>• <b>Koadranteak:</b> Zeinuen arabera 4 eskualdetan zatituta<br/>• <b>Distantzia:</b> Pitagorasen formula d = √[(x₂-x₁)² + (y₂-y₁)²]<br/>• <b>Aplikazioak:</b> GPS, mapak, kokapena">
+                               <b>Localización precisa en el plano</b><br/>
+                               • <b>Sistema:</b> Pares ordenados (x, y) en el plano cartesiano<br/>
+                               • <b>Cuadrantes:</b> División en 4 regiones según signos<br/>
+                               • <b>Distancia:</b> Fórmula de Pitágoras d = √[(x₂-x₁)² + (y₂-y₁)²]<br/>
+                               • <b>Aplicaciones:</b> GPS, mapas, localización
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./pages/vectores-plano.html">
+                        <div class="card-icon"><i class="fas fa-vector-square"></i></div>
+                        <h3 data-lang-es="Vectores en el Plano" data-lang-eu="Bektoreak Planoko">Vectores en el Plano</h3>
+                        <div class="summary">
+                            <p data-lang-es="<b>Magnitud y dirección</b><br/>• <b>Definición:</b> Segmento con origen, dirección y módulo<br/>• <b>Componentes:</b> v = (vₓ, vᵧ) desde el origen<br/>• <b>Operaciones:</b> Suma, resta y multiplicación por escalar<br/>• <b>Magnitud:</b> |v| = √(vₓ² + vᵧ²)"
+                               data-lang-eu="<b>Magnitude eta noranzkoa</b><br/>• <b>Definizioa:</b> Jatorri, noranzko eta moduludun segmentua<br/>• <b>Osagaiak:</b> v = (vₓ, vᵧ) jatorritik<br/>• <b>Eragiketak:</b> Batura, kenketa eta eskalar biderkadura<br/>• <b>Magnitudea:</b> |v| = √(vₓ² + vᵧ²)">
+                               <b>Magnitud y dirección</b><br/>
+                               • <b>Definición:</b> Segmento con origen, dirección y módulo<br/>
+                               • <b>Componentes:</b> v = (vₓ, vᵧ) desde el origen<br/>
+                               • <b>Operaciones:</b> Suma, resta y multiplicación por escalar<br/>
+                               • <b>Magnitud:</b> |v| = √(vₓ² + vᵧ²)
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./pages/rectas-ecuaciones.html">
+                        <div class="card-icon"><i class="fas fa-ruler-horizontal"></i></div>
+                        <h3 data-lang-es="Rectas y Ecuaciones" data-lang-eu="Lerro Zuzenak eta Ekuazioak">Rectas y Ecuaciones</h3>
+                        <div class="summary">
+                            <p data-lang-es="<b>Líneas expresadas matemáticamente</b><br/>• <b>Explícita:</b> y = mx + n (pendiente y ordenada)<br/>• <b>Implícita:</b> ax + by + c = 0<br/>• <b>Punto-pendiente:</b> y - y₀ = m(x - x₀)<br/>• <b>Paralelas/Perpendiculares:</b> Relaciones entre pendientes"
+                               data-lang-eu="<b>Lerroak matematikoki adierazita</b><br/>• <b>Espizitua:</b> y = mx + n (malda eta ordenatua)<br/> <b>Inplizitua:</b> ax + by + c = 0<br/>• <b>Puntu-malda:</b> y - y₀ = m(x - x₀)<br/>• <b>Paraleloak/Perpendikularrak:</b> Maldan arteko harremanak">
+                               <b>Líneas expresadas matemáticamente</b><br/>
+                               • <b>Explícita:</b> y = mx + n (pendiente y ordenada)<br/>
+                               • <b>Implícita:</b> ax + by + c = 0<br/>
+                               • <b>Punto-pendiente:</b> y - y₀ = m(x - x₀)<br/>
+                               • <b>Paralelas/Perpendiculares:</b> Relaciones entre pendientes
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p data-lang-es="© 2024 MATELLA. Plataforma educativa de matemáticas." data-lang-eu="© 2024 MATELLA. Matematikako hezkuntza plataforma.">© 2024 MATELLA. Plataforma educativa de matemáticas.</p>
+        </div>
+    </footer>
+
+    <!-- Botón back to top -->
+    <button id="back-to-top" aria-label="Volver arriba" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="../../../../assets/js/theme.js"></script>
+    <script src="../../../../assets/js/language.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    <script src="../../../../assets/js/uiComponents.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Lógica específica para esta página
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

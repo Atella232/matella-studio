@@ -1,0 +1,98 @@
+.integer-calculator-lab {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.integer-calculator-lab .lab-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    width: 100%;
+    border-radius: var(--radius-lg);
+    background: rgba(var(--surface-color-rgb), 0.7);
+    border: 1px solid rgba(var(--text-color-rgb), 0.1);
+}
+
+.integer-calculator-lab .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.integer-calculator-lab .input-group label {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.integer-calculator-lab .glass-input {
+    background: rgba(var(--bg-color-rgb), 0.8);
+    border: 2px solid rgba(var(--primary-color-rgb), 0.2);
+    color: var(--text-color);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.integer-calculator-lab .glass-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.1);
+}
+
+.integer-calculator-lab .btn {
+    margin-top: 1rem;
+    padding: 1rem;
+    font-size: 1.1rem;
+    width: 100%;
+}
+
+.integer-calculator-lab .result-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    width: 100%;
+    border-radius: var(--radius-lg);
+    background: rgba(var(--surface-color-rgb), 0.8);
+    border: 2px solid var(--primary-color);
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(var(--primary-color-rgb), 0.1);
+}
+
+.integer-calculator-lab .result-card.error {
+    border-color: #ef4444;
+    /* red color for error */
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.integer-calculator-lab .result-card .result-value {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+}
+
+.integer-calculator-lab .result-card p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    opacity: 0.9;
+    margin: 0;
+}
+
+.integer-calculator-lab .negative-val {
+    color: #ef4444;
+    /* red for negative */
+}
+
+.integer-calculator-lab .positive-val {
+    color: var(--primary-color);
+    /* standard theme color for positive */
+}

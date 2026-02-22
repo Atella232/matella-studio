@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Circunferencia y Círculo - Figuras Planas" data-lang-eu="Zirkunferentzia eta Zirkulua - Figura Laugarrak">Circunferencia y Círculo - Figuras Planas</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-circle"></i>
+            <span data-lang-es="Circunferencia y Círculo" data-lang-eu="Zirkunferentzia eta Zirkulua">Circunferencia y Círculo</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Circunferencia y Círculo" data-lang-eu="Zirkunferentzia eta Zirkulua">Circunferencia y Círculo</h2>
+        
+        <div class="navigation-buttons">
+            <a href="#ejercicios" class="button-primary" data-lang-es="Ejercicios" data-lang-eu="Ariketa">Ejercicios</a>
+            <a href="#herramienta" class="button-secondary" data-lang-es="Herramienta" data-lang-eu="Tresna">Herramienta</a>
+        </div>
+
+        <section class="content-section">
+            <h3 data-lang-es="Diferencia entre Circunferencia y Círculo" data-lang-eu="Zirkunferentziaren eta Zirkuluaren Arteko Desberdintasuna">Diferencia entre Circunferencia y Círculo</h3>
+            <p data-lang-es="Es fundamental distinguir entre estos dos conceptos relacionados pero diferentes:"
+               data-lang-eu="Garrantzitsua da bi kontzeptu hauek bereiztea, erlazionatuak baitira baina desberdinak:">
+               Es fundamental distinguir entre estos dos conceptos relacionados pero diferentes:
+            </p>
+            <ul>
+                <li data-lang-es="<strong>Circunferencia:</strong> Es la línea curva cerrada que forma el contorno. Es decir, solo la \"frontera\"."
+                    data-lang-eu="<strong>Zirkunferentzia:</strong> Lerro kurba itxia da, ingurua osatzen duena. Hots, soilik \"muga\".">
+                    <strong>Circunferencia:</strong> Es la línea curva cerrada que forma el contorno. Es decir, solo la "frontera".
+                </li>
+                <li data-lang-es="<strong>Círculo:</strong> Es la superficie interior limitada por la circunferencia. Incluye tanto el contorno como el interior."
+                    data-lang-eu="<strong>Zirkulua:</strong> Zirkunferentziak mugatzen duen barnealdeko gainazala da. Ingurua eta barnealdea barne hartzen ditu.">
+                    <strong>Círculo:</strong> Es la superficie interior limitada por la circunferencia. Incluye tanto el contorno como el interior.
+                </li>
+            </ul>
+            <p class="key-takeaway" data-lang-es="<b>Analogía:</b> La circunferencia es como el borde de una moneda, el círculo es toda la moneda (borde + interior)."
+               data-lang-eu="<b>Analogiak:</b> Zirkunferentzia txanpon baten ertz bezalakoa da, zirkulua txanpon osoa (ertz + barnealdea) bezalakoa da.">
+               <b>Analogía:</b> La circunferencia es como el borde de una moneda, el círculo es toda la moneda (borde + interior).
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Elementos de la Circunferencia" data-lang-eu="Zirkunferentziaren Elementuak">Elementos de la Circunferencia</h3>
+            
+            <div class="definition-box">
+                <h4><i class="fas fa-circle-notch"></i> <span data-lang-es="Centro" data-lang-eu="Zentroa">Centro</span></h4>
+                <p data-lang-es="Punto equidistante de todos los puntos de la circunferencia. Se representa normalmente con la letra O."
+                   data-lang-eu="Zirkunferentziako puntu guztietatik distantzia berekoa den puntua. Normalean O hizkiak adierazten da.">
+                   Punto equidistante de todos los puntos de la circunferencia. Se representa normalmente con la letra O.
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <h4><i class="fas fa-ruler"></i> <span data-lang-es="Radio (r)" data-lang-eu="Erradioa (r)">Radio (r)</span></h4>
+                <p data-lang-es="Segmento que une el centro con cualquier punto de la circunferencia."
+                   data-lang-eu="Zirkunferentziaren zentroa eta edozein puntu lotzen dituen segmentua.">
+                   Segmento que une el centro con cualquier punto de la circunferencia.
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <h4><i class="fas fa-grip-lines-vertical"></i> <span data-lang-es="Diámetro (d)" data-lang-eu="Diametroa (d)">Diámetro (d)</span></h4>
+                <p data-lang-es="Segmento que une dos puntos de la circunferencia pasando por el centro. Es el doble del radio."
+                   data-lang-eu="Zirkunferentziako bi puntu lotzen dituen segmentua, zentroa zeharkatuz. Erradioaren bikoitza da.">
+                   Segmento que une dos puntos de la circunferencia pasando por el centro. Es el doble del radio.
+                </p>
+                <p>\\[d = 2r\\]</p>
+            </div>
+
+            <div class="definition-box">
+                <h4><i class="fas fa-undo"></i> <span data-lang-es="Arco" data-lang-eu="Arku">Arco</span></h4>
+                <p data-lang-es="Porción de la circunferencia comprendida entre dos puntos."
+                   data-lang-eu="Zirkunferentziaren bi puntuen arteko zatia.">
+                   Porción de la circunferencia comprendida entre dos puntos.
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <h4><i class="fas fa-cut"></i> <span data-lang-es="Cuerda" data-lang-eu="Korda">Cuerda</span></h4>
+                <p data-lang-es="Segmento que une dos puntos de la circunferencia sin pasar necesariamente por el centro."
+                   data-lang-eu="Zirkunferentziako bi puntu lotzen dituen segmentua, zentroa zeharkatu beharrik gabe.">
+                   Segmento que une dos puntos de la circunferencia sin pasar necesariamente por el centro.
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Fórmulas de la Circunferencia" data-lang-eu="Zirkunferentziaren Formulak">Fórmulas de la Circunferencia</h3>
+            
+            <div class="formula-container">
+                <h4 data-lang-es="Longitud de la Circunferencia" data-lang-eu="Zirkunferentziaren Luzera">Longitud de la Circunferencia</h4>
+                <p>\\[L = 2\\pi r\\]</p>
+                <p data-lang-es="o también" data-lang-eu="edo baita">o también</p>
+                <p>\\[L = \\pi d\\]</p>
+                <p><em data-lang-es="donde \\(\\pi \\approx 3.14159\\)" data-lang-eu="non \\(\\pi \\approx 3.14159\\)">donde \\(\\pi \\approx 3.14159\\)</em></p>
+            </div>
+
+            <div class="formula-container">
+                <h4 data-lang-es="Longitud de un Arco" data-lang-eu="Arkuaren Luzera">Longitud de un Arco</h4>
+                <p>\\[L_{arco} = \\frac{\\alpha \\cdot \\pi \\cdot r}{180°}\\]</p>
+                <p><em data-lang-es="donde \\(\\alpha\\) es el ángulo central en grados" data-lang-eu="non \\(\\alpha\\) gradutan dagoen angelu zentrala da">donde \\(\\alpha\\) es el ángulo central en grados</em></p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Fórmulas del Círculo" data-lang-eu="Zirkuluaren Formulak">Fórmulas del Círculo</h3>
+            
+            <div class="formula-container">
+                <h4 data-lang-es="Área del Círculo" data-lang-eu="Zirkuluaren Azalera">Área del Círculo</h4>
+                <p>\\[A = \\pi r^2\\]</p>
+                <p><em data-lang-es="o también" data-lang-eu="edo baita">o también</em></p>
+                <p>\\[A = \\frac{\\pi d^2}{4}\\]</p>
+            </div>
+
+            <div class="formula-container">
+                <h4 data-lang-es="Área del Sector Circular" data-lang-eu="Sektor Zirkularraren Azalera">Área del Sector Circular</h4>
+                <p>\\[A_{sector} = \\frac{\\alpha \\cdot \\pi \\cdot r^2}{360°}\\]</p>
+                <p><em data-lang-es="donde \\(\\alpha\\) es el ángulo central en grados" data-lang-eu="non \\(\\alpha\\) gradutan dagoen angelu zentrala da">donde \\(\\alpha\\) es el ángulo central en grados</em></p>
+            </div>
+
+            <div class="formula-container">
+                <h4 data-lang-es="Área del Segmento Circular" data-lang-eu="Segmentu Zirkularraren Azalera">Área del Segmento Circular</h4>
+                <p>\\[A_{segmento} = A_{sector} - A_{triángulo}\\]</p>
+                <p><em data-lang-es="Es el área del sector menos el área del triángulo formado por los radios y la cuerda"
+                       data-lang-eu="Sektoriaren azalera ken erradioak eta kordak osatzen duten triangeluaren azalera da">
+                       Es el área del sector menos el área del triángulo formado por los radios y la cuerda
+                </em></p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Ejemplos Prácticos" data-lang-eu="Adibide Praktikoak">Ejemplos Prácticos</h3>
+            
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 1: Longitud de una Circunferencia" data-lang-eu="Adibidea 1: Zirkunferentziaren Luzera">Ejemplo 1: Longitud de una Circunferencia</h4>
+                <p data-lang-es="Calcula la longitud de una circunferencia de radio 5 cm."
+                   data-lang-eu="Kalkulatu 5 cm erradioko zirkunferentziaren luzera.">
+                   Calcula la longitud de una circunferencia de radio 5 cm.
+                </p>
+                <p><strong data-lang-es="Solución:" data-lang-eu="Soluzioa:">Solución:</strong></p>
+                <p data-lang-es="\\[L = 2\\pi r = 2\\pi \\times 5 = 10\\pi \\approx 31.42\\) cm"
+                   data-lang-eu="\\[L = 2\\pi r = 2\\pi \\times 5 = 10\\pi \\approx 31.42\\) cm">
+                   \\[L = 2\\pi r = 2\\pi \\times 5 = 10\\pi \approx 31.42\] cm
+                </p>
+            </div>
+
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 2: Área del Círculo" data-lang-eu="Adibidea 2: Zirkuluaren Azalera">Ejemplo 2: Área del Círculo</h4>
+                <p data-lang-es="Calcula el área de un círculo de diámetro 8 cm."
+                   data-lang-eu="Kalkulatu 8 cm diametroko zirkulu baten azalera.">
+                   Calcula el área de un círculo de diámetro 8 cm.
+                </p>
+                <p><strong data-lang-es="Solución:" data-lang-eu="Soluzioa:">Solución:</strong></p>
+                <p data-lang-es="Primero hallamos el radio: \\(r = \\frac{d}{2} = \\frac{8}{2} = 4\\) cm"
+                   data-lang-eu="Lehenik erradioa aurkitzen dugu: \\(r = \\frac{d}{2} = \\frac{8}{2} = 4\\) cm">
+                   Primero hallamos el radio: \\(r = \frac{d}{2} = \frac{8}{2} = 4\\) cm
+                </p>
+                <p data-lang-es="Luego calculamos el área: \\(A = \\pi r^2 = \\pi \\times 4^2 = 16\\pi \\approx 50.27\\) cm²"
+                   data-lang-eu="Gero azalera kalkulatzen dugu: \\(A = \\pi r^2 = \\pi \\times 4^2 = 16\\pi \\approx 50.27\\) cm²">
+                   Luego calculamos el área: \\(A = \pi r^2 = \pi \times 4^2 = 16\pi \approx 50.27\] cm²
+                </p>
+            </div>
+
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 3: Sector Circular" data-lang-eu="Adibidea 3: Sektor Zirkularra">Ejemplo 3: Sector Circular</h4>
+                <p data-lang-es="Calcula el área de un sector circular de radio 6 cm y ángulo central de 90°."
+                   data-lang-eu="Kalkulatu 6 cm erradio eta 90°-ko angelurantz zentral bat duen sektore zirkular baten azalera.">
+                   Calcula el área de un sector circular de radio 6 cm y ángulo central de 90°.
+                </p>
+                <p><strong data-lang-es="Solución:" data-lang-eu="Soluzioa:">Solución:</strong></p>
+                <p data-lang-es="\\[A = \\frac{90 \\cdot \\pi \\cdot 6^2}{360} = \\frac{90 \\cdot \\pi \\cdot 36}{360} = 9\\pi \\approx 28.27\\) cm²"
+                   data-lang-eu="\\[A = \\frac{90 \\cdot \\pi \\cdot 6^2}{360} = \\frac{90 \\cdot \\pi \\cdot 36}{360} = 9\\pi \\approx 28.27\\) cm²">
+                   \\[A = \frac{90 \cdot \pi \cdot 6^2}{360} = \frac{90 \cdot \pi \cdot 36}{360} = 9\pi \approx 28.27\] cm²
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Número π (Pi)" data-lang-eu="π (Pi) Zenbakia">Número π (Pi)</h3>
+            <p data-lang-es="El número π (pi) es una constante matemática fundamental que relaciona el diámetro y la longitud de cualquier circunferencia."
+               data-lang-eu="π (pi) zenbakia konstante matematiko funtamental bat da, diametroa eta edozein zirkunferentziaren luzera lotzen dituena.">
+               El número π (pi) es una constante matemática fundamental que relaciona el diámetro y la longitud de cualquier circunferencia.
+            </p>
+            <div class="formula-container">
+                <p>\\[\\frac{L}{d} = \\pi \\approx 3.1415926535...\\]</p>
+                <p><em data-lang-es="π es un número irracional con infinitas cifras decimales no periódicas"
+                       data-lang-eu="π zenbaki irrazionala da, hamaika dezimal ditu eta ez da periodikoa">
+                       π es un número irracional con infinitas cifras decimales no periódicas
+                </em></p>
+            </div>
+            <p class="key-takeaway" data-lang-es="<b>Aproximaciones comunes:</b> Para cálculos cotidianos usamos π ≈ 3.14 o π ≈ 22/7"
+               data-lang-eu="<b>Hurbilpen arruntak:</b> Kalkulu arruntetarako π ≈ 3.14 edo π ≈ 22/7 erabiltzen dugu">
+               <b>Aproximaciones comunes:</b> Para cálculos cotidianos usamos π ≈ 3.14 o π ≈ 22/7
+            </p>
+        </section>
+
+        <section class="content-section warning-section">
+            <h3><i class="fas fa-exclamation-triangle"></i> <span data-lang-es="Errores Típicos" data-lang-eu="Akats Tipikoak">Errores Típicos</span></h3>
+            <ul>
+                <li data-lang-es="<strong>Confundir longitud de circunferencia con área del círculo:</strong> Son conceptos diferentes con fórmulas diferentes."
+                    data-lang-eu="<strong>Zirkunferentziaren luzera zirkuluaren azalerarekin nahastea:</strong> Kontzeptu desberdinak dira formulak desberdinak dituzte.">
+                    <strong>Confundir longitud de circunferencia con área del círculo:</strong> Son conceptos diferentes con fórmulas diferentes.
+                </li>
+                <li data-lang-es="<strong>Olvidar usar π en los cálculos:</strong> Siempre hay que incluir π en las fórmulas de circunferencia y círculo."
+                    data-lang-eu="<strong>π kalkuluetan ez erabiltzea:</strong> Beti sartu behar da π zirkunferentziaren eta zirkuluaren formuletan.">
+                    <strong>Olvidar usar π en los cálculos:</strong> Siempre hay que incluir π en las fórmulas de circunferencia y círculo.
+                </li>
+                <li data-lang-es="<strong>Usar grados sexagesimales sin convertir:</strong> En las fórmulas de arcos y sectores, los ángulos deben estar en grados."
+                    data-lang-eu="<strong>Gradu sexagesimalak bihurtu gabe erabiltzea:</strong> Arkuaren eta sektoreen formuletan, angeluek graduetan egon behar dute.">
+                    <strong>Usar grados sexagesimales sin convertir:</strong> En las fórmulas de arcos y sectores, los ángulos deben estar en grados.
+                </li>
+                <li data-lang-es="<strong>Confundir radio con diámetro:</strong> El diámetro es el doble del radio (d = 2r)."
+                    data-lang-eu="<strong>Erradioa diametroarekin nahastea:</strong> Diametroa erradioaren bikoitza da (d = 2r).">
+                    <strong>Confundir radio con diámetro:</strong> El diámetro es el doble del radio (d = 2r).
+                </li>
+                <li data-lang-es="<strong>Elevar π al cuadrado en lugar del radio:</strong> En A = πr², se eleva al cuadrado el radio, no π."
+                    data-lang-eu="<strong>π karratua erradioaren ordez jartzea:</strong> A = πr² formulanean, karratua erradioak egiten du, ez π-k.">
+                    <strong>Elevar π al cuadrado en lugar del radio:</strong> En A = πr², se eleva al cuadrado el radio, no π.
+                </li>
+            </ul>
+        </section>
+
+        <section class="content-section" id="ejercicios">
+            <h3 data-lang-es="Ejercicios Prácticos" data-lang-eu="Ariketa Praktikoak">Ejercicios Prácticos</h3>
+            <div class="exercise-placeholder">
+                <p data-lang-es="🔧 Los ejercicios interactivos se cargarán aquí. (Funcionalidad pendiente de implementar)"
+                   data-lang-eu="🔧 Ariketa interaktiboak hemen kargatuko dira. (Funtzionalitatea ezartzeke dago)">
+                   🔧 Los ejercicios interactivos se cargarán aquí. (Funcionalidad pendiente de implementar)
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section" id="herramienta">
+            <h3 data-lang-es="Herramienta Interactiva" data-lang-eu="Tresna Interaktiboa">Herramienta Interactiva</h3>
+            <div class="interactive-tool card-style">
+                <div class="tool-placeholder">
+                    <p data-lang-es="🔧 La herramienta de cálculo de circunferencias y círculos se cargará aquí. (Funcionalidad pendiente de implementar)"
+                       data-lang-eu="🔧 Zirkunferentziak eta zirkuluak kalkulatzeko tresna hemen kargatuko da. (Funtzionalitatea ezartzeke dago)">
+                       🔧 La herramienta de cálculo de circunferencias y círculos se cargará aquí. (Funcionalidad pendiente de implementar)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

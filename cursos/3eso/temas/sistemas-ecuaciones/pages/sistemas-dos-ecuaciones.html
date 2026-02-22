@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Sistemas de Ecuaciones - Álgebra" data-lang-eu="Ekuazio-sistemak - Aljebra">Sistemas de Ecuaciones - Álgebra</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-th"></i>
+            <span data-lang-es="Sistemas de Ecuaciones" data-lang-eu="Ekuazio-sistemak">Sistemas de Ecuaciones</span>
+        </div>
+        <nav>
+            <button class="button-primary" style="margin-right: 1rem;" data-lang-es="Ejercicios" data-lang-eu="Ariketak">Ejercicios</button>
+            <button class="button-secondary" data-lang-es="Herramienta" data-lang-eu="Tresna">Herramienta</button>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Sistemas de Dos Ecuaciones con Dos Incógnitas" data-lang-eu="Bi Ekuazioko Bi Ezezaguneko Sistemak">Sistemas de Dos Ecuaciones con Dos Incógnitas</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es un Sistema de Ecuaciones?" data-lang-eu="Zer da Ekuazio-sistema bat?">¿Qué es un Sistema de Ecuaciones?</h3>
+            <p data-lang-es="Un sistema de ecuaciones es un conjunto de ecuaciones que deben cumplirse simultáneamente. En este tema estudiaremos los sistemas de dos ecuaciones con dos incógnitas, donde buscamos valores para x e y que hagan verdaderas todas las ecuaciones del sistema a la vez."
+               data-lang-eu="Ekuazio-sistema ekuazio multzo bat da, aldi berean bete behar direnak. Gai honetan bi ekuazio dituzten bi ezezaguneko sistemak aztertuko ditugu. Hor, x eta y-rako balioak bilatzen ditugu sistema osoko ekuazio guztiak aldi berean egiazko bihurtzeko.">
+               Un sistema de ecuaciones es un conjunto de ecuaciones que deben cumplirse simultáneamente. En este tema estudiaremos los sistemas de dos ecuaciones con dos incógnitas, donde buscamos valores para x e y que hagan verdaderas todas las ecuaciones del sistema a la vez.
+            </p>
+            <div class="formula-box">
+                <p data-lang-es="<b>Forma general:</b>" data-lang-eu="<b>Forma orokorra:</b>"><b>Forma general:</b></p>
+                <div class="math-display" style="text-align: center; font-size: 1.2em; margin: 1rem 0;">
+                    \[\begin{cases} a_1x + b_1y = c_1 \\ a_2x + b_2y = c_2 \end{cases}\]
+                </div>
+            </div>
+            <p class="key-takeaway" data-lang-es="<b>El objetivo:</b> Encontrar los valores de x e y que satisfagan TODAS las ecuaciones del sistema."
+               data-lang-eu="<b>Helburua:</b> x eta y-ren balioak aurkitzea, sistemako EKUATIO GUZTIAK betetzen dituztenak.">
+               <b>El objetivo:</b> Encontrar los valores de x e y que satisfagan TODAS las ecuaciones del sistema.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Métodos de Resolución" data-lang-eu="Ebazteko Metodoak">Métodos de Resolución</h3>
+            <p data-lang-es="Existen tres métodos principales para resolver sistemas de ecuaciones. Cada uno tiene sus ventajas según el tipo de sistema."
+               data-lang-eu="Ekuazio-sistemak ebazteko hiru metodo nagusi daude. Bakoitzak bere abantaila ditu, sistemaren arabera.">
+               Existen tres métodos principales para resolver sistemas de ecuaciones. Cada uno tiene sus ventajas según el tipo de sistema.
+            </p>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-exchange-alt icon-concept"></i>
+                        <span data-lang-es="Método de Sustitución" data-lang-eu="Ordezkapen Metodoa">Método de Sustitución</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Consiste en despejar una variable de una ecuación y sustituirla en la otra ecuación. Es muy útil cuando una de las variables tiene coeficiente 1."
+                           data-lang-eu="Alde batetik ezezagun bat askatu eta beste ekuazioan ordezkatzean datza. Oso erabilgarria da ezezagun baten koefizientea 1 denean.">
+                           Consiste en despejar una variable de una ecuación y sustituirla en la otra ecuación. Es muy útil cuando una de las variables tiene coeficiente 1.
+                        </p>
+                        <ol data-lang-es="<b>Pasos:</b>
+                            <li>Despejar una variable de una ecuación</li>
+                            <li>Sustituir la expresión obtenida en la otra ecuación</li>
+                            <li>Resolver la ecuación resultante</li>
+                            <li>Calcular la otra variable sustituyendo de vuelta"
+                           data-lang-eu="<b>Pausuak:</b>
+                            <li>Ekuazio batetik ezezagun bat askatu</li>
+                            <li>Lortutako adierazpena beste ekuazioan ordezkatu</li>
+                            <li>Sortzen den ekuazioa ebatzi</li>
+                            <li>Beste ezezaguna kalkulatu, berriz ordezkatuz">
+                           <b>Pasos:</b>
+                            <li>Despejar una variable de una ecuación</li>
+                            <li>Sustituir la expresión obtenida en la otra ecuación</li>
+                            <li>Resolver la ecuación resultante</li>
+                            <li>Calcular la otra variable sustituyendo de vuelta</li>
+                        </ol>
+                        <div class="example">
+                            <p data-lang-es="<b>Ejemplo:</b>" data-lang-eu="<b>Adibidea:</b>"><b>Ejemplo:</b></p>
+                            <p data-lang-es="Resolver: \(\begin{cases} 2x + y = 7 \\ x - y = 2 \end{cases}\)"
+                               data-lang-eu="Ebatzi: \(\begin{cases} 2x + y = 7 \\ x - y = 2 \end{cases}\)">
+                               Resolver: \(\begin{cases} 2x + y = 7 \\ x - y = 2 \end{cases}\)
+                            </p>
+                            <p data-lang-es="1. Despejamos y de la primera ecuación: \(y = 7 - 2x\)"
+                               data-lang-eu="1. Lehenengo ekuaziotik y askatzen dugu: \(y = 7 - 2x\)">
+                               1. Despejamos y de la primera ecuación: \(y = 7 - 2x\)
+                            </p>
+                            <p data-lang-es="2. Sustituimos en la segunda: \(x - (7 - 2x) = 2\)"
+                               data-lang-eu="2. Bigarrenean ordezkatzen dugu: \(x - (7 - 2x) = 2\)">
+                               2. Sustituimos en la segunda: \(x - (7 - 2x) = 2\)
+                            </p>
+                            <p data-lang-es="3. Resolvemos: \(x - 7 + 2x = 2\) → \(3x = 9\) → \(x = 3\)"
+                               data-lang-eu="3. Ebazten dugu: \(x - 7 + 2x = 2\) → \(3x = 9\) → \(x = 3\)">
+                               3. Resolvemos: \(x - 7 + 2x = 2\) → \(3x = 9\) → \(x = 3\)
+                            </p>
+                            <p data-lang-es="4. Calculamos y: \(y = 7 - 2(3) = 1\)"
+                               data-lang-eu="4. y kalkulatzen dugu: \(y = 7 - 2(3) = 1\)">
+                               4. Calculamos y: \(y = 7 - 2(3) = 1\)
+                            </p>
+                            <p class="key-takeaway" data-lang-es="<b>Solución:</b> \(x = 3, y = 1\)"
+                               data-lang-eu="<b>Soluzioa:</b> \(x = 3, y = 1\)">
+                               <b>Solución:</b> \(x = 3, y = 1\)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-compress-arrows-alt icon-concept"></i>
+                        <span data-lang-es="Método de Eliminación" data-lang-eu="Kentze Metodoa">Método de Eliminación</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Consiste en eliminar una variable sumando o restando las ecuaciones multiplicadas por números apropiados. Es eficiente cuando los coeficientes son fáciles de igualar."
+                           data-lang-eu="Ekuazioak zenbaki egokiez biderkatuz, ezezagun bat kentzean datza, ekuazioak batuz edo kenduz. Eraginkorra da koefizienteak erraz berdintzen direnean.">
+                           Consiste en eliminar una variable sumando o restando las ecuaciones multiplicadas por números apropiados. Es eficiente cuando los coeficientes son fáciles de igualar.
+                        </p>
+                        <ol data-lang-es="<b>Pasos:</b>
+                            <li>Multiplicar las ecuaciones por números apropiados para igualar los coeficientes de una variable</li>
+                            <li>Sumar o restar las ecuaciones para eliminar esa variable</li>
+                            <li>Resolver la ecuación resultante</li>
+                            <li>Sustituir el valor obtenido en una ecuación original"
+                           data-lang-eu="<b>Pausuak:</b>
+                            <li>Ekuazioak zenbaki egokiez biderkatu, ezezagun baten koefizienteak berdintzeko</li>
+                            <li>Ekuazioak batuz edo kenduz ezezagun hori kentzeko</li>
+                            <li>Sortzen den ekuazioa ebatzi</li>
+                            <li>Lortutako balioa jatorrizko ekuazio batean ordezkatu">
+                           <b>Pasos:</b>
+                            <li>Multiplicar las ecuaciones por números apropiados para igualar los coeficientes de una variable</li>
+                            <li>Sumar o restar las ecuaciones para eliminar esa variable</li>
+                            <li>Resolver la ecuación resultante</li>
+                            <li>Sustituir el valor obtenido en una ecuación original</li>
+                        </ol>
+                        <div class="example">
+                            <p data-lang-es="<b>Ejemplo:</b>" data-lang-eu="<b>Adibidea:</b>"><b>Ejemplo:</b></p>
+                            <p data-lang-es="Resolver: \(\begin{cases} 3x + 2y = 16 \\ 2x + y = 10 \end{cases}\)"
+                               data-lang-eu="Ebatzi: \(\begin{cases} 3x + 2y = 16 \\ 2x + y = 10 \end{cases}\)">
+                               Resolver: \(\begin{cases} 3x + 2y = 16 \\ 2x + y = 10 \end{cases}\)
+                            </p>
+                            <p data-lang-es="1. Multiplicamos la segunda ecuación por 2: \(4x + 2y = 20\)"
+                               data-lang-eu="1. Bigarren ekuazioa 2z biderkatzen dugu: \(4x + 2y = 20\)">
+                               1. Multiplicamos la segunda ecuación por 2: \(4x + 2y = 20\)
+                            </p>
+                            <p data-lang-es="2. Restamos la primera ecuación: \((4x + 2y) - (3x + 2y) = 20 - 16\)"
+                               data-lang-eu="2. Lehenengo ekuazioa kendu behar diogu: \((4x + 2y) - (3x + 2y) = 20 - 16\)">
+                               2. Restamos la primera ecuación: \((4x + 2y) - (3x + 2y) = 20 - 16\)
+                            </p>
+                            <p data-lang-es="3. Obtenemos: \(x = 4\)"
+                               data-lang-eu="3. Lortzen dugu: \(x = 4\)">
+                               3. Obtenemos: \(x = 4\)
+                            </p>
+                            <p data-lang-es="4. Sustituimos: \(2(4) + y = 10\) → \(y = 2\)"
+                               data-lang-eu="4. Ordezkatzen dugu: \(2(4) + y = 10\) → \(y = 2\)">
+                               4. Sustituimos: \(2(4) + y = 10\) → \(y = 2\)
+                            </p>
+                            <p class="key-takeaway" data-lang-es="<b>Solución:</b> \(x = 4, y = 2\)"
+                               data-lang-eu="<b>Soluzioa:</b> \(x = 4, y = 2\)">
+                               <b>Solución:</b> \(x = 4, y = 2\)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-chart-line icon-concept"></i>
+                        <span data-lang-es="Método Gráfico" data-lang-eu="Metodo Grafikoa">Método Gráfico</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Consiste en representar gráficamente las dos ecuaciones como rectas y encontrar su punto de intersección. Es útil para visualizar las soluciones."
+                           data-lang-eu="Bi ekuazioak zuzen gisa grafikoki adieraztea eta haien ebaketa-puntua aurkitzean datza. Soluzioak ikusteko erabilgarria da.">
+                           Consiste en representar gráficamente las dos ecuaciones como rectas y encontrar su punto de intersección. Es útil para visualizar las soluciones.
+                        </p>
+                        <ol data-lang-es="<b>Pasos:</b>
+                            <li>Despejar y de ambas ecuaciones para obtener la forma y = mx + n</li>
+                            <li>Representar ambas rectas en el mismo sistema de coordenadas</li>
+                            <li>Identificar el punto de intersección</li>
+                            <li>Verificar la solución"
+                           data-lang-eu="<b>Pausuak:</b>
+                            <li>Bi ekuazioetatik y askatu, y = mx + n forma lortzeko</li>
+                            <li>Bi zuzenak koordenatu-sistema berean irudikatu</li>
+                            <li>Ebaketa-puntua identifikatu</li>
+                            <li>Soluzioa egiaztatu">
+                           <b>Pasos:</b>
+                            <li>Despejar y de ambas ecuaciones para obtener la forma y = mx + n</li>
+                            <li>Representar ambas rectas en el mismo sistema de coordenadas</li>
+                            <li>Identificar el punto de intersección</li>
+                            <li>Verificar la solución</li>
+                        </ol>
+                        <div class="example">
+                            <p data-lang-es="<b>Ejemplo:</b>" data-lang-eu="<b>Adibidea:</b>"><b>Ejemplo:</b></p>
+                            <p data-lang-es="Resolver: \(\begin{cases} x + y = 5 \\ x - y = 1 \end{cases}\)"
+                               data-lang-eu="Ebatzi: \(\begin{cases} x + y = 5 \\ x - y = 1 \end{cases}\)">
+                               Resolver: \(\begin{cases} x + y = 5 \\ x - y = 1 \end{cases}\)
+                            </p>
+                            <p data-lang-es="1. Despejamos y: \(y = 5 - x\) e \(y = x - 1\)"
+                               data-lang-eu="1. y askatzen dugu: \(y = 5 - x\) eta \(y = x - 1\)">
+                               1. Despejamos y: \(y = 5 - x\) e \(y = x - 1\)
+                            </p>
+                            <p data-lang-es="2. Dibujamos las rectas y = 5 - x e y = x - 1"
+                               data-lang-eu="2. y = 5 - x eta y = x - 1 zuzenak marrazten ditugu">
+                               2. Dibujamos las rectas y = 5 - x e y = x - 1
+                            </p>
+                            <p data-lang-es="3. El punto de intersección es (3, 2)"
+                               data-lang-eu="3. Ebaketa-puntua (3, 2) da">
+                               3. El punto de intersección es (3, 2)
+                            </p>
+                            <p class="key-takeaway" data-lang-es="<b>Solución:</b> \(x = 3, y = 2\)"
+                               data-lang-eu="<b>Soluzioa:</b> \(x = 3, y = 2\)">
+                               <b>Solución:</b> \(x = 3, y = 2\)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Tipos de Soluciones" data-lang-eu="Soluzio Motak">Tipos de Soluciones</h3>
+            <p data-lang-es="Un sistema de dos ecuaciones lineales con dos incógnitas puede tener tres tipos de soluciones, que dependen de la posición relativa de las rectas."
+               data-lang-eu="Bi ekuazio linealeko bi ezezaguneko sistema batek hiru soluzio mota izan ditzake, zuzenen posizio erlatiboaren arabera.">
+               Un sistema de dos ecuaciones lineales con dos incógnitas puede tener tres tipos de soluciones, que dependen de la posición relativa de las rectas.
+            </p>
+
+            <div class="types-grid">
+                <div class="card-style">
+                    <div class="card-header">
+                        <i class="fas fa-check-circle icon-concept"></i>
+                        <h4 data-lang-es="Una Solución (Sistema Compatible Determinado)" data-lang-eu="Soluzio Bakarra (Sistema Determinatua)">Una Solución (Sistema Compatible Determinado)</h4>
+                    </div>
+                    <p data-lang-es="Las rectas se cortan en un punto. Tiene una única solución."
+                       data-lang-eu="Zuzenak puntu batean ebakitzen dute. Soluzio bakarra du.">
+                       Las rectas se cortan en un punto. Tiene una única solución.
+                    </p>
+                    <p class="math-display" style="text-align: center;">
+                        \[\begin{cases} \text{(Rectas secantes)} \\ \text{(Zuzen ebakitzaileak)} \end{cases}\]
+                    </p>
+                </div>
+
+                <div class="card-style">
+                    <div class="card-header">
+                        <i class="fas fa-infinity icon-concept"></i>
+                        <h4 data-lang-es="Infinitas Soluciones (Sistema Compatible Indeterminado)" data-lang-eu="Infinitu Soluzio (Sistema Indeterminatua)">Infinitas Soluciones (Sistema Compatible Indeterminado)</h4>
+                    </div>
+                    <p data-lang-es="Las rectas son coincidentes (la misma recta). Tiene infinitas soluciones."
+                       data-lang-eu="Zuzenak gainjarriak dira (zuzen bera). Infinitu soluzio ditu.">
+                       Las rectas son coincidentes (la misma recta). Tiene infinitas soluciones.
+                    </p>
+                    <p class="math-display" style="text-align: center;">
+                        \[\begin{cases} \text{(Rectas coincidentes)} \\ \text{(Zuzen gainjarriak)} \end{cases}\]
+                    </p>
+                </div>
+
+                <div class="card-style">
+                    <div class="card-header">
+                        <i class="fas fa-times-circle icon-concept"></i>
+                        <h4 data-lang-es="Sin Solución (Sistema Incompatible)" data-lang-eu="Soluziorik Ez (Sistema Bateraezina)">Sin Solución (Sistema Incompatible)</h4>
+                    </div>
+                    <p data-lang-es="Las rectas son paralelas (nunca se cruzan). No tiene solución."
+                       data-lang-eu="Zuzenak paraleloak dira (inoiz ez dute gurutzatzen). Soluziorik ez du.">
+                       Las rectas son paralelas (nunca se cruzan). No tiene solución.
+                    </p>
+                    <p class="math-display" style="text-align: center;">
+                        \[\begin{cases} \text{(Rectas paralelas)} \\ \text{(Zuzen paraleloak)} \end{cases}\]
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="⚠️ Errores Típicos" data-lang-eu="⚠️ Ohiko Akatsak">⚠️ Errores Típicos</h3>
+            <div class="warnings-list">
+                <div class="warning-item">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p data-lang-es="<b>Error al multiplicar ecuaciones por números negativos:</b> Cambiar todos los signos de la ecuación."
+                       data-lang-eu="<b>Akatsa zenbaki negatiboez ekuazioak biderkatzean:</b> Ekuazioko zeinu guztiak aldatu.">
+                       <b>Error al multiplicar ecuaciones por números negativos:</b> Cambiar todos los signos de la ecuación.
+                    </p>
+                </div>
+                <div class="warning-item">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p data-lang-es="<b>No verificar la solución:</b> Siempre comprobar sustituyendo los valores en las ecuaciones originales."
+                       data-lang-eu="<b>Soluzioa egiaztatzea:</b> Beti egiaztatu jatorrizko ekuazioetan balioak ordezkatuz.">
+                       <b>No verificar la solución:</b> Siempre comprobar sustituyendo los valores en las ecuaciones originales.
+                    </p>
+                </div>
+                <div class="warning-item">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p data-lang-es="<b>Confundir los métodos:</b> Usar sustitución cuando eliminación sería más fácil, y viceversa."
+                       data-lang-eu="<b>Metodoak nahastea:</b> Kentzea errazagoa denean ordezkapena erabiltzea, eta alderantziz.">
+                       <b>Confundir los métodos:</b> Usar sustitución cuando eliminación sería más fácil, y viceversa.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Resolución de Problemas" data-lang-eu="Problemak Ebatzea">Resolución de Problemas</h3>
+            <p data-lang-es="Los sistemas de ecuaciones son muy útiles para resolver problemas de la vida real donde hay dos incógnitas relacionadas."
+               data-lang-eu="Ekuazio-sistemak oso erabilgarriak dira bizitza errealeko problemak ebazteko, non bi ezezagun elkarren menpekoak diren.">
+               Los sistemas de ecuaciones son muy útiles para resolver problemas de la vida real donde hay dos incógnitas relacionadas.
+            </p>
+            
+            <div class="example problem-box">
+                <h4 data-lang-es="Ejemplo: Compra en el mercado" data-lang-eu="Adibidea: Erosketa merkatuan">Ejemplo: Compra en el mercado</h4>
+                <p data-lang-es="Ana compra 3 kg de manzanas y 2 kg de naranjas por 14€. Carlos compra 2 kg de manzanas y 3 kg de naranjas por 13€. ¿Cuál es el precio de cada fruta?"
+                   data-lang-eu="Ana sagar 3 kg eta laranja 2 kg erosiz 14€ ordaintzen ditu. Carlos sagar 2 kg eta laranja 3 kg erosiz 13€ ordaintzen ditu. Zein da fruta bakoitzaren prezioa?">
+                   Ana compra 3 kg de manzanas y 2 kg de naranjas por 14€. Carlos compra 2 kg de manzanas y 3 kg de naranjas por 13€. ¿Cuál es el precio de cada fruta?
+                </p>
+                <div class="solution-steps">
+                    <p data-lang-es="<b>1. Definimos las incógnitas:</b>" data-lang-eu="<b>1. Ezezagunak definitzen ditugu:</b>"><b>1. Definimos las incógnitas:</b></p>
+                    <p data-lang-es="x = precio de 1 kg de manzanas, y = precio de 1 kg de naranjas"
+                       data-lang-eu="x = sagar 1 kg-ren prezioa, y = laranja 1 kg-ren prezioa">
+                       x = precio de 1 kg de manzanas, y = precio de 1 kg de naranjas
+                    </p>
+                    <p data-lang-es="<b>2. Planteamos el sistema:</b>" data-lang-eu="<b>2. Sistema planteatzen dugu:</b>"><b>2. Planteamos el sistema:</b></p>
+                    <p class="math-display" style="text-align: center;">
+                        \[\begin{cases} 3x + 2y = 14 \\ 2x + 3y = 13 \end{cases}\]
+                    </p>
+                    <p data-lang-es="<b>3. Resolvemos (usando eliminación):</b>" data-lang-eu="<b>3. Ebazten dugu (kentzea erabiliz):</b>"><b>3. Resolvemos (usando eliminación):</b></p>
+                    <p data-lang-es="Multiplicamos la primera ecuación por 3 y la segunda por 2:<br>\(9x + 6y = 42\)<br>\(4x + 6y = 26\)<br><br>Restamos: \(5x = 16\) → \(x = 3.2\)"
+                       data-lang-eu="Lehenengo ekuazioa 3z eta bigarrena 2z biderkatzen ditugu:<br>\(9x + 6y = 42\)<br>\(4x + 6y = 26\)<br><br>Kendu: \(5x = 16\) → \(x = 3.2\)">
+                       Multiplicamos la primera ecuación por 3 y la segunda por 2:<br>\(9x + 6y = 42\)<br>\(4x + 6y = 26\)<br><br>Restamos: \(5x = 16\) → \(x = 3.2\)
+                    </p>
+                    <p data-lang-es="Sustituimos en la primera ecuación: \(3(3.2) + 2y = 14\) → \(2y = 4.4\) → \(y = 2.2\)"
+                       data-lang-eu="Lehenengo ekuazioan ordezkatzen dugu: \(3(3.2) + 2y = 14\) → \(2y = 4.4\) → \(y = 2.2\)">
+                       Sustituimos en la primera ecuación: \(3(3.2) + 2y = 14\) → \(2y = 4.4\) → \(y = 2.2\)
+                    </p>
+                    <p class="key-takeaway" data-lang-es="<b>Solución:</b> Las manzanas cuestan 3.20€/kg y las naranjas 2.20€/kg."
+                       data-lang-eu="<b>Soluzioa:</b> Sagarrek 3.20€/kg eta laranjek 2.20€/kg balio dute.">
+                       <b>Solución:</b> Las manzanas cuestan 3.20€/kg y las naranjas 2.20€/kg.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

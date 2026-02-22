@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Ecuaciones de Segundo Grado - 3º ESO" data-lang-eu="Bigarren Mailako Ekuazioak - 3.DBH">Ecuaciones de Segundo Grado - 3º ESO</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-superscript"></i>
+            <span data-lang-es="Ecuaciones de Segundo Grado" data-lang-eu="Bigarren Mailako Ekuazioak">Ecuaciones de Segundo Grado</span>
+        </div>
+        <nav>
+            <button id="exercise-btn" class="button-primary" data-lang-es="Ejercicios" data-lang-eu="Ariketa">Ejercicios</button>
+            <button id="tool-btn" class="button-secondary" data-lang-es="Herramienta" data-lang-eu="Tresna">Herramienta</button>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="page-title" data-lang-es="Ecuaciones de Segundo Grado" data-lang-eu="Bigarren Mailako Ekuazioak">Ecuaciones de Segundo Grado</h1>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es una Ecuación de Segundo Grado?" data-lang-eu="Zer da Bigarren Mailako Ekuazio bat?">¿Qué es una Ecuación de Segundo Grado?</h3>
+            <p data-lang-es="Una ecuación de segundo grado es una igualdad matemática que contiene una incógnita elevada a la potencia 2. También se conoce como ecuación cuadrática."
+               data-lang-eu="Bigarren mailako ekuazio bat matematikako berdintasuna da, ezezaguna 2. mailara igotzen duena. Ekuazio koadratikoa ere esaten zaio.">
+               Una ecuación de segundo grado es una igualdad matemática que contiene una incógnita elevada a la potencia 2. También se conoce como ecuación cuadrática.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Forma General" data-lang-eu="Forma Orokorra">Forma General</h3>
+            <div class="math-formula">
+                \[ax^2 + bx + c = 0 \quad \text{donde} \quad a \neq 0\]
+            </div>
+            <p data-lang-es="Donde <b>a</b>, <b>b</b> y <b>c</b> son números conocidos (coeficientes) y <b>a ≠ 0</b> (si a = 0, sería una ecuación de primer grado)."
+               data-lang-eu="Non <b>a</b>, <b>b</b> eta <b>c</b> ezagunak diren zenbakiak (koefizienteak) eta <b>a ≠ 0</b> (a = 0 bada, lehen mailako ekuazioa izango litzateke).">
+               Donde <b>a</b>, <b>b</b> y <b>c</b> son números conocidos (coeficientes) y <b>a ≠ 0</b> (si a = 0, sería una ecuación de primer grado).
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Fórmula Cuadrática" data-lang-eu="Formula Koadratikoa">Fórmula Cuadrática</h3>
+            <p data-lang-es="Esta es la fórmula más importante para resolver ecuaciones de segundo grado:"
+               data-lang-eu="Hau da bigarren mailako ekuazioak ebazteko formulaz garrantzitsuena:">
+               Esta es la fórmula más importante para resolver ecuaciones de segundo grado:
+            </p>
+            <div class="math-formula">
+                \[x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}\]
+            </div>
+            <p class="key-takeaway" data-lang-es="<b>Recordatorio:</b> El símbolo ± significa que existen dos soluciones: una con + y otra con -"
+                               data-lang-eu="<b>Gogorarazi:</b> ± ikurrak bi soluzio daudela esan nahi du: bat +arekin eta bestea -arekin">
+                               <b>Recordatorio:</b> El símbolo ± significa que existen dos soluciones: una con + y otra con -
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="El Discriminante" data-lang-eu="Diskriminatzailea">El Discriminante</h3>
+            <p data-lang-es="La parte bajo la raíz cuadrada se llama discriminante y nos indica cuántas soluciones reales tiene la ecuación:"
+               data-lang-eu="Erro koadratuaren azpian dagoen partea diskriminatzailea deitzen da eta ekuazioak zenbat soluzio erreala dituen adierazten digu:">
+               La parte bajo la raíz cuadrada se llama discriminante y nos indica cuántas soluciones reales tiene la ecuación:
+            </p>
+            <div class="math-formula">
+                \[\Delta = b^2 - 4ac\]
+            </div>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-plus-circle icon-positive"></i>
+                        <span data-lang-es="Si Δ > 0" data-lang-eu="Δ > 0 bada">Si Δ > 0</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="La ecuación tiene <b>dos soluciones reales distintas</b>."
+                           data-lang-eu="Ekuazioak <b>bi soluzio erreal desberdin</b> ditu.">
+                           La ecuación tiene <b>dos soluciones reales distintas</b>.
+                        </p>
+                        <p class="example">
+                            <em data-lang-es="Ejemplo: x² - 5x + 6 = 0 → Δ = (-5)² - 4(1)(6) = 25 - 24 = 1 > 0"
+                            data-lang-eu="Adibidea: x² - 5x + 6 = 0 → Δ = (-5)² - 4(1)(6) = 25 - 24 = 1 > 0">
+                            Ejemplo: x² - 5x + 6 = 0 → Δ = (-5)² - 4(1)(6) = 25 - 24 = 1 > 0
+                        </em></p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-equals icon-neutral"></i>
+                        <span data-lang-es="Si Δ = 0" data-lang-eu="Δ = 0 bada">Si Δ = 0</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="La ecuación tiene <b>una sola solución real</b> (solución doble)."
+                           data-lang-eu="Ekuazioak <b>soluzio erreal bakarra</b> du (soluzio bikoitza).">
+                           La ecuación tiene <b>una sola solución real</b> (solución doble).
+                        </p>
+                        <p class="example">
+                            <em data-lang-es="Ejemplo: x² - 4x + 4 = 0 → Δ = (-4)² - 4(1)(4) = 16 - 16 = 0"
+                            data-lang-eu="Adibidea: x² - 4x + 4 = 0 → Δ = (-4)² - 4(1)(4) = 16 - 16 = 0">
+                            Ejemplo: x² - 4x + 4 = 0 → Δ = (-4)² - 4(1)(4) = 16 - 16 = 0
+                        </em></p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-minus-circle icon-negative"></i>
+                        <span data-lang-es="Si Δ < 0" data-lang-eu="Δ < 0 bada">Si Δ < 0</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="La ecuación <b>no tiene soluciones reales</b> (las soluciones son números complejos)."
+                           data-lang-eu="Ekuazioak <b>ez du soluzio errealik</b> (soluzioak zenbaki konplexuak dira).">
+                           La ecuación <b>no tiene soluciones reales</b> (las soluciones son números complejos).
+                        </p>
+                        <p class="example">
+                            <em data-lang-es="Ejemplo: x² + x + 1 = 0 → Δ = 1² - 4(1)(1) = 1 - 4 = -3 < 0"
+                            data-lang-eu="Adibidea: x² + x + 1 = 0 → Δ = 1² - 4(1)(1) = 1 - 4 = -3 < 0">
+                            Ejemplo: x² + x + 1 = 0 → Δ = 1² - 4(1)(1) = 1 - 4 = -3 < 0
+                        </em></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Casos Especiales" data-lang-eu="Kasu Bereziak">Casos Especiales</h3>
+            <p data-lang-es="Algunas ecuaciones de segundo grado pueden resolverse de forma más sencilla sin usar la fórmula general."
+               data-lang-eu="Bigarren mailako ekuazio batzuk formula orokorra erabili gabe modu errazagoan ebatz daitezke.">
+               Algunas ecuaciones de segundo grado pueden resolverse de forma más sencilla sin usar la fórmula general.
+            </p>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-times icon-concept"></i>
+                        <span data-lang-es="Ecuación incompleta (b = 0)" data-lang-eu="Ekuazio osatugabea (b = 0)">Ecuación incompleta (b = 0)</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="math-formula">
+                            \[ax^2 + c = 0\]
+                        </div>
+                        <p data-lang-es="Pasos para resolver:"
+                           data-lang-eu="Ebazteko pausoak:">
+                           Pasos para resolver:
+                        </p>
+                        <p>\\[ax^2 = -c\\]</p>
+                        <p>\\[x^2 = -\frac{c}{a}\\]</p>
+                        <p>\\[x = \pm\sqrt{-\frac{c}{a}}\\]</p>
+                        <p class="example">
+                            <em data-lang-es="Ejemplo: 2x² - 8 = 0 → 2x² = 8 → x² = 4 → x = ±2"
+                            data-lang-eu="Adibidea: 2x² - 8 = 0 → 2x² = 8 → x² = 4 → x = ±2">
+                            Ejemplo: 2x² - 8 = 0 → 2x² = 8 → x² = 4 → x = ±2
+                        </em></p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-divide icon-concept"></i>
+                        <span data-lang-es="Ecuación incompleta (c = 0)" data-lang-eu="Ekuazio osatugabea (c = 0)">Ecuación incompleta (c = 0)</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="math-formula">
+                            \[ax^2 + bx = 0\]
+                        </div>
+                        <p data-lang-es="Factor común y aplicación de la regla del producto nulo:"
+                           data-lang-eu="Faktore komununa eta produktu nuluaren erregela aplikatu:">
+                           Factor común y aplicación de la regla del producto nulo:
+                        </p>
+                        <p>\\[x(ax + b) = 0\\]</p>
+                        <p>\\[x = 0 \quad \text{o} \quad ax + b = 0\\]</p>
+                        <p>\\[x = 0 \quad \text{o} \quad x = -\frac{b}{a}\\]</p>
+                        <p class="example">
+                            <em data-lang-es="Ejemplo: x² - 3x = 0 → x(x - 3) = 0 → x = 0 o x = 3"
+                            data-lang-eu="Adibidea: x² - 3x = 0 → x(x - 3) = 0 → x = 0 edo x = 3">
+                            Ejemplo: x² - 3x = 0 → x(x - 3) = 0 → x = 0 o x = 3
+                        </em></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Ejemplo Completo con Fórmula General" data-lang-eu="Adibide Osoa Formula Orokorrarekin">Ejemplo Completo con Fórmula General</h3>
+            <p data-lang-es="Vamos a resolver la ecuación: \\(x^2 - 5x + 6 = 0\\)"
+               data-lang-eu="Ekuazio hau ebatziko dugu: \\(x^2 - 5x + 6 = 0\\)">
+               Vamos a resolver la ecuación: \\(x^2 - 5x + 6 = 0\\)
+            </p>
+            
+            <div class="example-box">
+                <p><strong data-lang-es="Identificar coeficientes:" data-lang-eu="Koefizienteak identifikatu:">Identificar coeficientes:</strong></p>
+                <p>\\[a = 1, \\quad b = -5, \\quad c = 6\\]</p>
+                
+                <p><strong data-lang-es="Calcular el discriminante:" data-lang-eu="Diskriminatzailea kalkulatu:">Calcular el discriminante:</strong></p>
+                <p>\\[\Delta = b^2 - 4ac = (-5)^2 - 4(1)(6) = 25 - 24 = 1\\]</p>
+                <p data-lang-es="Como Δ = 1 > 0, la ecuación tiene dos soluciones reales."
+                   data-lang-eu="Δ = 1 > 0 denez, ekuazioak bi soluzio erreal ditu.">
+                   Como Δ = 1 > 0, la ecuación tiene dos soluciones reales.
+                </p>
+                
+                <p><strong data-lang-es="Aplicar la fórmula cuadrática:" data-lang-eu="Formula koadratikoa aplikatu:">Aplicar la fórmula cuadrática:</strong></p>
+                <p>\\[x = \\frac{-(-5) \\pm \\sqrt{1}}{2(1)} = \\frac{5 \\pm 1}{2}\\]</p>
+                
+                <p><strong data-lang-es="Calcular las dos soluciones:" data-lang-eu="Bi soluzioak kalkulatu:">Calcular las dos soluciones:</strong></p>
+                <p>\\[x_1 = \\frac{5 + 1}{2} = \\frac{6}{2} = 3\\]</p>
+                <p>\\[x_2 = \\frac{5 - 1}{2} = \\frac{4}{2} = 2\\]</p>
+                
+                <p class="key-takeaway" data-lang-es="<b>Solución:</b> x = 2 o x = 3<br><b>Comprobación:</b> Para x = 2: 2² - 5(2) + 6 = 4 - 10 + 6 = 0 ✓<br>Para x = 3: 3² - 5(3) + 6 = 9 - 15 + 6 = 0 ✓"
+                                   data-lang-eu="<b>Soluzioa:</b> x = 2 edo x = 3<br><b>Egiaztapena:</b> x = 2-rentzat: 2² - 5(2) + 6 = 4 - 10 + 6 = 0 ✓<br>x = 3-rentzat: 3² - 5(3) + 6 = 9 - 15 + 6 = 0 ✓">
+                                   <b>Solución:</b> x = 2 o x = 3<br><b>Comprobación:</b> Para x = 2: 2² - 5(2) + 6 = 4 - 10 + 6 = 0 ✓<br>Para x = 3: 3² - 5(3) + 6 = 9 - 15 + 6 = 0 ✓
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Ejemplo con Ecuación Incompleta" data-lang-eu="Adibidea Ekuazio Osatugabearekin">Ejemplo con Ecuación Incompleta</h3>
+            <p data-lang-es="Resolver: \\(2x^2 - 8 = 0\\)"
+               data-lang-eu="Ebatzi: \\(2x^2 - 8 = 0\\)">
+               Resolver: \\(2x^2 - 8 = 0\\)
+            </p>
+            
+            <div class="example-box">
+                <p><strong data-lang-es="Como c = 0:" data-lang-eu="c = 0 denez:">Como c = 0:</strong></p>
+                <p>\\[2x^2 = 8\\]</p>
+                <p>\\[x^2 = 4\\]</p>
+                <p>\\[x = \\pm\\sqrt{4} = \\pm2\\]</p>
+                
+                <p class="key-takeaway" data-lang-es="<b>Solución:</b> x = 2 o x = -2"
+                                   data-lang-eu="<b>Soluzioa:</b> x = 2 edo x = -2">
+                                   <b>Solución:</b> x = 2 o x = -2
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section warning-box">
+            <h3 data-lang-es="⚠️ Errores Típicos" data-lang-eu="⚠️ Ohiko Akatsak">⚠️ Errores Típicos</h3>
+            <ul>
+                <li data-lang-es="<b>Olvidar el signo ±:</b> Escribir solo \\(x = \\frac{-b + \\sqrt{b^2 - 4ac}}{2a}\\) y olvidar la solución con -"
+                    data-lang-eu="<b>± zeinua ahaztea:</b> \\(x = \\frac{-b + \\sqrt{b^2 - 4ac}}{2a}\\) soilik idaztea eta -dun soluzioa ahaztea">
+                    <b>Olvidar el signo ±:</b> Escribir solo \\(x = \\frac{-b + \\sqrt{b^2 - 4ac}}{2a}\\) y olvidar la solución con -
+                </li>
+                <li data-lang-es="<b>Error en el cálculo del discriminante:</b> Confundir los signos de b, c o calcular mal b²"
+                    data-lang-eu="<b>Diskriminatzailea kalkulatzean akatsa:</b> b, c-ren zeinuak nahastea edo b² gaizki kalkulatzea">
+                    <b>Error en el cálculo del discriminante:</b> Confundir los signos de b, c o calcular mal b²
+                </li>
+                <li data-lang-es="<b>No comprobar las soluciones:</b> Siempre debemos verificar sustituyendo en la ecuación original"
+                    data-lang-eu="<b>Soluzioak egiaztatzea:</b> Beti ekuazio originalan ordezkatuz egiaztatu behar dugu">
+                    <b>No comprobar las soluciones:</b> Siempre debemos verificar sustituyendo en la ecuación original
+                </li>
+                <li data-lang-es="<b>Confundir a, b, c:</b> Recordar que van en el orden de los términos: ax² + bx + c"
+                    data-lang-eu="<b>a, b, c nahastea:</b> Gogoratu terminoen ordenan doazela: ax² + bx + c">
+                    <b>Confundir a, b, c:</b> Recordar que van en el orden de los términos: ax² + bx + c
+                </li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Aplicaciones Prácticas" data-lang-eu="Aplikazio Praktikoak">Aplicaciones Prácticas</h3>
+            <p data-lang-es="Las ecuaciones de segundo grado aparecen en muchos problemas de geometría, física y ciencias."
+               data-lang-eu="Bigarren mailako ekuazioak geometria, fisika eta zientzietako hainbat problematan agertzen dira.">
+               Las ecuaciones de segundo grado aparecen en muchos problemas de geometría, física y ciencias.
+            </p>
+            
+            <div class="example-box">
+                <p><strong data-lang-es="Problema de área:" data-lang-eu="Azalera-problema:">Problema de área:</strong></p>
+                <p data-lang-es="Un rectángulo tiene 6 metros más de largo que de ancho. Si su área es 55 m², ¿cuáles son sus dimensiones?"
+                   data-lang-eu="Luzarako 6 metro gehiago ditu zabalerarekin baino. Bere azalera 55 m² bada, zenbat dituzte bere dimentsioek?">
+                   Un rectángulo tiene 6 metros más de largo que de ancho. Si su área es 55 m², ¿cuáles son sus dimensiones?
+                </p>
+                
+                <p><strong data-lang-es="Planteamiento:" data-lang-eu="Planteamendua:">Planteamiento:</strong></p>
+                <p>\\[x = \\text{ancho (m)}\\]</p>
+                <p>\\[x + 6 = \\text{largo (m)}\\]</p>
+                <p>\\[x(x + 6) = 55\\]</p>
+                
+                <p><strong data-lang-es="Resolución:" data-lang-eu="Ebazpena:">Resolución:</strong></p>
+                <p>\\[x^2 + 6x - 55 = 0\\]</p>
+                <p>\\[a = 1, \\quad b = 6, \\quad c = -55\\]</p>
+                <p>\\[\Delta = 6^2 - 4(1)(-55) = 36 + 220 = 256\\]</p>
+                <p>\\[x = \\frac{-6 \\pm \\sqrt{256}}{2} = \\frac{-6 \\pm 16}{2}\\]</p>
+                
+                <p><strong data-lang-es="Solución:" data-lang-eu="Soluzioa:">Solución:</strong></p>
+                <p>\\[x = \\frac{-6 + 16}{2} = 5, \\quad x = \\frac{-6 - 16}{2} = -11\\]</p>
+                <p data-lang-es="Como las dimensiones no pueden ser negativas, el ancho es 5 m y el largo es 11 m."
+                   data-lang-eu="Dimentsioak ezin direnez izan negatiboak, zabalerra 5 m da eta luzeera 11 m.">
+                   Como las dimensiones no pueden ser negativas, el ancho es 5 m y el largo es 11 m.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

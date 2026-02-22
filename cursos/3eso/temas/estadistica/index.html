@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Estadística 3º ESO - Inicio" data-lang-eu="Estatistika DBH 3 - Hasiera">Estadística 3º ESO - Inicio</title>
+    <link rel="stylesheet" href="../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+             <a href="../../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+             <i class="fas fa-chart-bar"></i>
+             <span data-lang-es="Estadística" data-lang-eu="Estatistika">Estadística</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i> </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro">
+            <div class="intro-container">
+
+                <h2 data-lang-es="Bienvenida a la Estadística" data-lang-eu="Ongi Etorri Estatistikara">Bienvenida a la Estadística</h2>
+
+                <ul class="tabs-nav">
+                    <li><a href="#tab-what" class="tab-link active" data-lang-es="¿Qué es?" data-lang-eu="Zer da?">¿Qué es?</a></li>
+                    <li><a href="#tab-why" class="tab-link" data-lang-es="¿Por qué es útil?" data-lang-eu="Zergatik da erabilgarria?">¿Por qué es útil?</a></li>
+                </ul>
+
+                <div class="tabs-content">
+
+                    <div id="tab-what" class="tab-pane active">
+                        <div class="tab-pane-content">
+                            <div class="tab-text">
+                                <h3 data-lang-es="Ciencia de los Datos" data-lang-eu="Datuen Zientzia">Ciencia de los Datos</h3>
+                                <p data-lang-es="La estadística es la <b>ciencia que estudia la recogida, análisis e interpretación de datos</b> para tomar decisiones informadas. Nos ayuda a entender patrones, tendencias y hacer predicciones basadas en la información recopilada."
+                                   data-lang-eu="Estatistika <b>datuen bilketa, analisi eta interpretazioa aztertzen duen zientzia</b> da, erabaki informatuak hartzeko. Patroiak, joerak eta bildutako informazioan oinarritutako aurreikuspenak ulertzen laguntzen digu.">
+                                   La estadística es la <b>ciencia que estudia la recogida, análisis e interpretación de datos</b> para tomar decisiones informadas. Nos ayuda a entender patrones, tendencias y hacer predicciones basadas en la información recopilada.
+                                </p>
+                                <h4 data-lang-es="Ejemplos:" data-lang-eu="Adibideak:">Ejemplos:</h4>
+                                <ul class="icon-list">
+                                    <li><i class="fas fa-users"></i><span data-lang-es="Censo de población" data-lang-eu="Biztanleria zenbakia">Censo de población</span></li>
+                                    <li><i class="fas fa-thermometer-half"></i><span data-lang-es="Datos meteorológicos" data-lang-eu="Meteorologia datuak">Datos meteorológicos</span></li>
+                                    <li><i class="fas fa-chart-line"></i><span data-lang-es="Análisis de ventas" data-lang-eu="Salmenten analisia">Análisis de ventas</span></li>
+                                    <li><i class="fas fa-poll"></i><span data-lang-es="Encuestas de opinión" data-lang-eu="Iritzi inkestak">Encuestas de opinión</span></li>
+                                </ul>
+                            </div>
+                            <div class="tab-visual">
+                                <i class="fas fa-chart-pie fa-5x subtle-icon"></i> </div>
+                        </div>
+                    </div>
+
+                    <div id="tab-why" class="tab-pane">
+                         <div class="tab-pane-content">
+                            <div class="tab-text">
+                                <h3 data-lang-es="Aplicaciones en la Vida Real" data-lang-eu="Bizitza Errealeko Aplikazioak">Aplicaciones en la Vida Real</h3>
+                                <p data-lang-es="¡Es esencial en muchas disciplinas!" data-lang-eu="Disziplina askotan funtsezkoa da!">¡Es esencial en muchas disciplinas!</p>
+                                <div class="usage-grid">
+                                    <div class="usage-item"><i class="fas fa-heartbeat"></i><span data-lang-es="Medicina y Salud" data-lang-eu="Medikuntza eta Osasuna">Medicina y Salud</span></div>
+                                    <div class="usage-item"><i class="fas fa-chart-line"></i><span data-lang-es="Economía y Finanzas" data-lang-eu="Ekonomia eta Finantzak">Economía y Finanzas</span></div>
+                                    <div class="usage-item"><i class="fas fa-flask"></i><span data-lang-es="Investigación Científica" data-lang-eu="Ikerketa Zientifikoa">Investigación Científica</span></div>
+                                    <div class="usage-item"><i class="fas fa-vote-yea"></i><span data-lang-es="Política y Encuestas" data-lang-eu="Politika eta Inkestak">Política y Encuestas</span></div>
+                                    <div class="usage-item"><i class="fas fa-futbol"></i><span data-lang-es="Deportes" data-lang-eu="Kirola">Deportes</span></div>
+                                    <div class="usage-item"><i class="fas fa-mobile-alt"></i><span data-lang-es="Tecnología" data-lang-eu="Teknologia">Tecnología</span></div>
+                                </div>
+                                <h4 data-lang-es="Te permite:" data-lang-eu="Aukera ematen dizute:">Te permite:</h4>
+                                <ul class="benefits-list">
+                                    <li data-lang-es="Organizar y resumir información" data-lang-eu="Informazioa antolatzea eta laburtzea">Organizar y resumir información</li>
+                                    <li data-lang-es="Identificar patrones y tendencias" data-lang-eu="Patroi eta joerak identifikatzea">Identificar patrones y tendencias</li>
+                                    <li data-lang-es="Tomar decisiones basadas en datos" data-lang-eu="Datuetan oinarritutako erabakiak hartzea">Tomar decisiones basadas en datos</li>
+                                    <li data-lang-es="Predecir resultados futuros" data-lang-eu="Etorkizuneko emaitzak aurreikustea">Predecir resultados futuros</li>
+                                </ul>
+                            </div>
+                            <div class="tab-visual">
+                                <i class="fas fa-chart-bar fa-5x subtle-icon"></i> </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section id="subtopics">
+            <h2 data-lang-es="Contenidos del Tema" data-lang-eu="Gaiaren Edukiak">Contenidos del Tema</h2>
+            <div class="cards-container">
+
+                <div class="card">
+                    <a href="./pages/conceptos-basicos.html">
+                        <div class="card-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3 data-lang-es="Conceptos Básicos" data-lang-eu="Oinarrizko Kontzeptuak">Conceptos Básicos</h3>
+                        <div class="summary">
+                            <p data-lang-es="<b>Fundamentos de la estadística</b><br/>• <b>Población y muestra:</b> Conjunto completo vs. subconjunto<br/>• <b>Variables:</b> Cualitativas y cuantitativas<br/>• <b>Tipos de datos:</b> Discretos y continuos<br/>• <b>Recogida de datos:</b> Métodos y técnicas"
+                               data-lang-eu="<b>Estatistikaren oinarriak</b><br/>• <b>Populazioa eta lagina:</b> Multzo osoa vs. azpimultzoa<br/>• <b>Aldagaiak:</b> Kualitatiboak eta kuantitatiboak<br/>• <b>Datu motak:</b> Diskretuak eta jarraituak<br/>• <b>Datu bilketa:</b> Metodoak eta teknikak">
+                               <b>Fundamentos de la estadística</b><br/>
+                               • <b>Población y muestra:</b> Conjunto completo vs. subconjunto<br/>
+                               • <b>Variables:</b> Cualitativas y cuantitativas<br/>
+                               • <b>Tipos de datos:</b> Discretos y continuos<br/>
+                               • <b>Recogida de datos:</b> Métodos y técnicas
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./pages/tablas-frecuencias.html">
+                        <div class="card-icon"><i class="fas fa-table"></i></div>
+                        <h3 data-lang-es="Tablas de Frecuencias" data-lang-eu="Maiztasun Taulak">Tablas de Frecuencias</h3>
+                        <div class="summary">
+                            <p data-lang-es="<b>Organización de datos</b><br/>• <b>Frecuencia absoluta:</b> Número de veces que aparece cada valor<br/>• <b>Frecuencia relativa:</b> Proporción respecto al total<br/>• <b>Frecuencia acumulada:</b> Suma progresiva<br/>• <b>Representación:</b> Tablas y gráficos de frecuencias"
+                               data-lang-eu="<b>Datuen antolaketa</b><br/>• <b>Maiztasun absolutua:</b> Balio bakoitza zenbat aldiz agertzen den<br/>• <b>Maiztasun erlatiboa:</b> Guztirako proportzioa<br/>• <b>Maiztasun metatua:</b> Batura progresiboa<br/>• <b>Irudikapena:</b> Taulak eta maiztasun grafikoak">
+                               <b>Organización de datos</b><br/>
+                               • <b>Frecuencia absoluta:</b> Número de veces que aparece cada valor<br/>
+                               • <b>Frecuencia relativa:</b> Proporción respecto al total<br/>
+                               • <b>Frecuencia acumulada:</b> Suma progresiva<br/>
+                               • <b>Representación:</b> Tablas y gráficos de frecuencias
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./pages/parametros-dispersion.html">
+                        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3 data-lang-es="Parámetros de Dispersión" data-lang-eu="Dispertsio Parametroak">Parámetros de Dispersión</h3>
+                        <div class="summary">
+                            <p data-lang-es="<b>Medir la variabilidad</b><br/>• <b>Rango:</b> Diferencia entre valores máximo y mínimo<br/>• <b>Varianza:</b> Media de las desviaciones al cuadrado<br/>• <b>Desviación típica:</b> Raíz cuadrada de la varianza<br/>• <b>Coeficiente de variación:</b> Dispersión relativa"
+                               data-lang-eu="<b>Alboko aldakortasuna neurtzea</b><br/>• <b>Barrunea:</b> Balio maximo eta minimoaren arteko diferentzia<br/>• <b>Bariantza:</b> Desbideratzenen batez besteko karratua<br/>• <b>Desbideratze tipikoa:</b> Bariantzaren erro karratua<br/>• <b>Bariazio koefizientea:</b> Dispertsio erlatiboa">
+                               <b>Medir la variabilidad</b><br/>
+                               • <b>Rango:</b> Diferencia entre valores máximo y mínimo<br/>
+                               • <b>Varianza:</b> Media de las desviaciones al cuadrado<br/>
+                               • <b>Desviación típica:</b> Raíz cuadrada de la varianza<br/>
+                               • <b>Coeficiente de variación:</b> Dispersión relativa
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p data-lang-es="© 2024 MATELLA. Plataforma educativa de matemáticas." data-lang-eu="© 2024 MATELLA. Matematikako hezkuntza plataforma.">© 2024 MATELLA. Plataforma educativa de matemáticas.</p>
+        </div>
+    </footer>
+
+    <!-- Botón back to top -->
+    <button id="back-to-top" aria-label="Volver arriba" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="../../../../assets/js/theme.js"></script>
+    <script src="../../../../assets/js/language.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    <script src="../../../../assets/js/uiComponents.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Lógica específica para esta página
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

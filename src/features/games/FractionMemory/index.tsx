@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
 import { useGameState } from './hooks/useGameState'
 import { GameBoard } from './components/GameBoard'
 import { GameOverModal } from './components/GameOverModal'
@@ -9,6 +10,8 @@ import './FractionMemory.css'
 
 export function FractionMemory() {
     const { t } = useTranslation()
+    const location = useLocation()
+    const isDbh1 = location.pathname.includes('/dbh1/')
     const {
         state,
         elapsedTime,
@@ -20,7 +23,8 @@ export function FractionMemory() {
     } = useGameState()
     const [selectedLevel, setSelectedLevel] = useState(0)
 
-    const currentConfig = useMemo(() => LEVELS[selectedLevel], [selectedLevel])
+    const availableLevels = useMemo(() => isDbh1 ? LEVELS.filter(l => !l.includeDecimal && !l.includePercentage) : LEVELS, [isDbh1])
+    const currentConfig = useMemo(() => availableLevels[selectedLevel] || availableLevels[0], [availableLevels, selectedLevel])
 
     // Start screen
     if (state.cards.length === 0) {
@@ -39,7 +43,7 @@ export function FractionMemory() {
                         </p>
 
                         <div className="level-select">
-                            {LEVELS.map((level, index) => (
+                            {availableLevels.map((level, index) => (
                                 <button
                                     key={index}
                                     className={`level-button ${selectedLevel === index ? 'active' : ''}`}
@@ -123,18 +127,22 @@ export function FractionMemory() {
                             <span className="mismatch-value">
                                 {state.mismatchCards[0].numerator}/{state.mismatchCards[0].denominator}
                             </span>
-                            <span className="mismatch-decimal">
-                                = {toDecimalString(state.mismatchCards[0].numerator, state.mismatchCards[0].denominator)}
-                            </span>
+                            {!isDbh1 && (
+                                <span className="mismatch-decimal">
+                                    = {toDecimalString(state.mismatchCards[0].numerator, state.mismatchCards[0].denominator)}
+                                </span>
+                            )}
                         </div>
                         <span className="mismatch-symbol">≠</span>
                         <div className="mismatch-card">
                             <span className="mismatch-value">
                                 {state.mismatchCards[1].numerator}/{state.mismatchCards[1].denominator}
                             </span>
-                            <span className="mismatch-decimal">
-                                = {toDecimalString(state.mismatchCards[1].numerator, state.mismatchCards[1].denominator)}
-                            </span>
+                            {!isDbh1 && (
+                                <span className="mismatch-decimal">
+                                    = {toDecimalString(state.mismatchCards[1].numerator, state.mismatchCards[1].denominator)}
+                                </span>
+                            )}
                         </div>
                     </div>
                 )}

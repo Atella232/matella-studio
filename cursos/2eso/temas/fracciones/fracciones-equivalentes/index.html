@@ -1,0 +1,651 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="Fracciones equivalentes - MATELLA" data-lang-eu="Zatiki baliokideak - MATELLA">Fracciones equivalentes - MATELLA</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .methods-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    @media (min-width: 768px) {
+      .methods-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .method-card {
+      background-color: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--card-shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .method-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--card-hover-shadow);
+    }
+
+    .method-card h5 {
+      color: var(--secondary-color);
+      border-bottom: 2px solid var(--secondary-color);
+      padding-bottom: 0.5rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .method-card .formula {
+      font-family: 'Lato', monospace;
+      font-weight: 700;
+      font-size: 1.2em;
+      color: var(--primary-color);
+      background-color: var(--button-bg);
+      padding: 0.8rem;
+      border-radius: 6px;
+      text-align: center;
+      margin: 1rem 0;
+      border: 1px solid var(--border-color);
+    }
+
+    .visual-equivalents {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .fraction-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+      align-items: center;
+    }
+
+    .bar-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .bar-label {
+      min-width: 50px;
+      font-weight: bold;
+      text-align: center;
+      color: var(--primary-color);
+    }
+
+    .bar {
+      display: flex;
+      width: 200px;
+      height: 30px;
+      border: 2px solid var(--border-color);
+      border-radius: 4px;
+      overflow: hidden;
+      flex-grow: 1;
+    }
+
+    .colored-part {
+      flex: 1;
+      background-color: var(--secondary-color);
+      opacity: 0.8;
+      border-right: 1px solid var(--border-color);
+      transition: opacity 0.3s ease;
+    }
+
+    .colored-part:hover {
+      opacity: 1;
+    }
+
+    .colored-part:last-child {
+      border-right: none;
+    }
+
+    .tool-section {
+      background-color: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      margin: 1.5rem 0;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tool-grid label {
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    .tool-grid input {
+      padding: 0.8rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      width: 100%;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .tool-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .info-box {
+      background-color: var(--button-bg);
+      padding: 1rem;
+      border-radius: 6px;
+      border-left: 4px solid var(--secondary-color);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+    
+    .info-box i {
+      color: var(--secondary-color);
+      font-size: 1.2em;
+      margin-top: 0.2rem;
+    }
+
+    .result-box {
+      padding: 1.2rem;
+      border-radius: 6px;
+      background-color: var(--button-bg);
+      border: 1px solid var(--border-color);
+    }
+    
+    .result-box .ok {
+      color: var(--secondary-color);
+      font-weight: bold;
+    }
+    
+    .result-box .error {
+      color: #a94442;
+      font-weight: bold;
+    }
+    
+    .result-box .info {
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    .calculation-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+    
+    .step {
+      padding: 0.8rem;
+      background-color: var(--button-bg);
+      border-radius: 4px;
+      border-left: 3px solid var(--secondary-color);
+    }
+  </style>
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <a href="../../../../../index.html" class="home-link">
+        <i class="fas fa-calculator"></i>
+        <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+      </a>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">
+        <i class="fas fa-language"></i>
+        <span data-lang-es="Euskara" data-lang-eu="Castellano">Euskara</span>
+      </button>
+    </nav>
+  </header>
+  
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol>
+      <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
+      <li><a href="../index.html" data-lang-es="Fracciones" data-lang-eu="Zatikiak">Fracciones</a></li>
+      <li class="active" aria-current="page"><span data-lang-es="Fracciones equivalentes" data-lang-eu="Zatiki baliokideak">Fracciones equivalentes</span></li>
+    </ol>
+  </nav>
+  
+  <main>
+    <h1 class="page-title" data-lang-es="Fracciones equivalentes" data-lang-eu="Zatiki baliokideak">Fracciones equivalentes</h1>
+    
+    <div class="content-section">
+      <p data-lang-es="Dos fracciones son <strong>equivalentes</strong> cuando representan la misma cantidad, aunque se escriban de forma diferente. Esta propiedad es fundamental para simplificar fracciones y realizar operaciones." data-lang-eu="Bi zatiki <strong>baliokideak</strong> dira kantitate bera adierazten dutenean, nahiz eta modu desberdinean idatzi. Propietate hau funtsezkoa da zatikiak sinplifikatzeko eta eragiketak egiteko.">Dos fracciones son <strong>equivalentes</strong> cuando representan la misma cantidad, aunque se escriban de forma diferente. Esta propiedad es fundamental para simplificar fracciones y realizar operaciones.</p>
+
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="true">
+            <i class="fas fa-equals icon-concept"></i>
+            <span data-lang-es="¿Qué son las fracciones equivalentes?" data-lang-eu="Zer dira zatiki baliokideak?">¿Qué son las fracciones equivalentes?</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Dos fracciones <strong>a/b</strong> y <strong>c/d</strong> son equivalentes si:" data-lang-eu="Bi zatiki <strong>a/b</strong> eta <strong>c/d</strong> baliokideak dira baldin:">Dos fracciones <strong>a/b</strong> y <strong>c/d</strong> son equivalentes si:</p>
+            
+            <div class="math-formula">
+              a × d = b × c
+            </div>
+            
+            <p data-lang-es="Es decir, el producto cruzado de los términos es igual." data-lang-eu="Hau da, terminoen biderketa gurutzatua berdina da.">Es decir, el producto cruzado de los términos es igual.</p>
+
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: ¿Son 2/3 y 4/6 equivalentes?" data-lang-eu="Adibidea: 2/3 eta 4/6 baliokideak al dira?">Ejemplo: ¿Son 2/3 y 4/6 equivalentes?</h4>
+              <div class="solution">
+                <p data-lang-es="Aplicamos la regla del producto cruzado:" data-lang-eu="Biderketa gurutzatuaren araua aplikatzen dugu:">Aplicamos la regla del producto cruzado:</p>
+                <div class="calculation">
+                  <p><strong>2 × 6 = 12</strong></p>
+                  <p><strong>3 × 4 = 12</strong></p>
+                  <p data-lang-es="Como 12 = 12, las fracciones son equivalentes" data-lang-eu="12 = 12 denez, zatikiak baliokideak dira">Como 12 = 12, las fracciones son equivalentes</p>
+                </div>
+                <p data-lang-es="Por tanto, 2/3 = 4/6" data-lang-eu="Beraz, 2/3 = 4/6">Por tanto, 2/3 = 4/6</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-arrows-alt-h icon-concept"></i>
+            <span data-lang-es="Cómo obtener fracciones equivalentes" data-lang-eu="Nola lortu zatiki baliokideak">Cómo obtener fracciones equivalentes</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Existen dos métodos principales para obtener fracciones equivalentes:" data-lang-eu="Zatiki baliokideak lortzeko bi metodo nagusi daude:">Existen dos métodos principales para obtener fracciones equivalentes:</p>
+            
+            <div class="methods-grid">
+              <div class="method-card">
+                <h5><i class="fas fa-expand-alt"></i> <span data-lang-es="Amplificación" data-lang-eu="Anplifikazioa">Amplificación</span></h5>
+                <p data-lang-es="Multiplicar numerador y denominador por el mismo número" data-lang-eu="Zenbakitzailea eta izendatzailea zenbaki berdinaz biderkatzea">Multiplicar numerador y denominador por el mismo número</p>
+                <div class="formula">a/b = (a × k)/(b × k)</div>
+                <div class="examples">
+                  <p data-lang-es="Ejemplos:" data-lang-eu="Adibideak:">Ejemplos:</p>
+                  <p>2/3 = (2 × 2)/(3 × 2) = 4/6</p>
+                  <p>2/3 = (2 × 3)/(3 × 3) = 6/9</p>
+                </div>
+              </div>
+
+              <div class="method-card">
+                <h5><i class="fas fa-compress-alt"></i> <span data-lang-es="Simplificación" data-lang-eu="Sinplifikazioa">Simplificación</span></h5>
+                <p data-lang-es="Dividir numerador y denominador por el mismo número" data-lang-eu="Zenbakitzailea eta izendatzailea zenbaki berdinaz zatitzea">Dividir numerador y denominador por el mismo número</p>
+                <div class="formula">a/b = (a ÷ k)/(b ÷ k)</div>
+                <div class="examples">
+                  <p data-lang-es="Ejemplos:" data-lang-eu="Adibideak:">Ejemplos:</p>
+                  <p>8/12 = (8 ÷ 2)/(12 ÷ 2) = 4/6</p>
+                  <p>4/6 = (4 ÷ 2)/(6 ÷ 2) = 2/3</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo completo: Obtener fracciones equivalentes a 1/2" data-lang-eu="Adibide osoa: Lortu 1/2ren zatiki baliokideak">Ejemplo completo: Obtener fracciones equivalentes a 1/2</h4>
+              <div class="solution">
+                <p data-lang-es="Por amplificación:" data-lang-eu="Anplifikazio bidez:">Por amplificación:</p>
+                <div class="calculation-steps">
+                  <div class="step">1/2 = (1 × 2)/(2 × 2) = 2/4</div>
+                  <div class="step">1/2 = (1 × 3)/(2 × 3) = 3/6</div>
+                  <div class="step">1/2 = (1 × 4)/(2 × 4) = 4/8</div>
+                  <div class="step">1/2 = (1 × 5)/(2 × 5) = 5/10</div>
+                </div>
+                <p data-lang-es="Todas estas fracciones representan la mitad del todo." data-lang-eu="Zatiki hauek guztiek osotasunaren erdia adierazten dute.">Todas estas fracciones representan la mitad del todo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-search icon-concept"></i>
+            <span data-lang-es="Simplificación de fracciones" data-lang-eu="Zatikiak sinplifikatzea">Simplificación de fracciones</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Simplificar una fracción significa encontrar una fracción equivalente con términos más pequeños. Para esto, dividimos numerador y denominador por su máximo común divisor (MCD)." data-lang-eu="Zatiki bat sinplifikatzea gai txikiagoak dituen zatiki baliokide bat aurkitzea da. Horretarako, zenbakitzailea eta izendatzailea beren zatitzaile komun handienaz (ZKH) zatitzen ditugu.">Simplificar una fracción significa encontrar una fracción equivalente con términos más pequeños. Para esto, dividimos numerador y denominador por su máximo común divisor (MCD).</p>
+            
+            <div class="content-section">
+              <h4 data-lang-es="Pasos para simplificar" data-lang-eu="Sinplifikatzeko urratsak">Pasos para simplificar</h4>
+              <ol>
+                <li data-lang-es="Encontrar el MCD del numerador y denominador" data-lang-eu="Aurkitu zenbakitzailearen eta izendatzailearen ZKH">Encontrar el MCD del numerador y denominador</li>
+                <li data-lang-es="Dividir ambos términos por el MCD" data-lang-eu="Bi gaiak ZKHaz zatitzea">Dividir ambos términos por el MCD</li>
+                <li data-lang-es="La fracción resultante es irreducible" data-lang-eu="Emaitzako zatikia laburtezina da">La fracción resultante es irreducible</li>
+              </ol>
+            </div>
+
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: Simplificar 24/36" data-lang-eu="Adibidea: Sinplifikatu 24/36">Ejemplo: Simplificar 24/36</h4>
+              <div class="solution">
+                <p data-lang-es="Paso a paso:" data-lang-eu="Urratsez urrats:">Paso a paso:</p>
+                <div class="calculation-steps">
+                  <div class="step">1. Factores de 24: 1, 2, 3, 4, 6, 8, 12, 24</div>
+                  <div class="step">2. Factores de 36: 1, 2, 3, 4, 6, 9, 12, 18, 36</div>
+                  <div class="step">3. MCD = 12</div>
+                  <div class="step">4. 24/36 = (24 ÷ 12)/(36 ÷ 12) = 2/3</div>
+                </div>
+                <p data-lang-es="Por tanto, 24/36 = 2/3 (fracción irreducible)" data-lang-eu="Beraz, 24/36 = 2/3 (zatiki laburtezina)">Por tanto, 24/36 = 2/3 (fracción irreducible)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-paint-brush icon-concept"></i>
+            <span data-lang-es="Representación visual de fracciones equivalentes" data-lang-eu="Zatiki baliokideen irudikapen bisuala">Representación visual de fracciones equivalentes</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Las fracciones equivalentes representan la misma parte del todo, aunque se divida en diferentes números de partes:" data-lang-eu="Zatiki baliokideek osotasunaren zati bera adierazten dute, nahiz eta zati kopuru desberdinetan banatu:">Las fracciones equivalentes representan la misma parte del todo, aunque se divida en diferentes números de partes:</p>
+            
+            <div class="visual-equivalents">
+              <div class="equivalent-group">
+                <h4 data-lang-es="1/2 = 2/4 = 3/6 = 4/8" data-lang-eu="1/2 = 2/4 = 3/6 = 4/8">1/2 = 2/4 = 3/6 = 4/8</h4>
+                <div class="fraction-bars">
+                  <div class="bar-group">
+                    <div class="bar-label">1/2</div>
+                    <div class="bar bar-1-2">
+                      <div class="colored-part"></div>
+                      <div class="uncolored-part"></div>
+                    </div>
+                  </div>
+                  <div class="bar-group">
+                    <div class="bar-label">2/4</div>
+                    <div class="bar bar-2-4">
+                      <div class="colored-part"></div>
+                      <div class="colored-part"></div>
+                      <div class="uncolored-part"></div>
+                      <div class="uncolored-part"></div>
+                    </div>
+                  </div>
+                  <div class="bar-group">
+                    <div class="bar-label">3/6</div>
+                    <div class="bar bar-3-6">
+                      <div class="colored-part"></div>
+                      <div class="colored-part"></div>
+                      <div class="colored-part"></div>
+                      <div class="uncolored-part"></div>
+                      <div class="uncolored-part"></div>
+                      <div class="uncolored-part"></div>
+                    </div>
+                  </div>
+                  <div class="bar-group">
+                    <div class="bar-label">4/8</div>
+                    <div class="bar bar-4-8">
+                      <div class="colored-part"></div>
+                      <div class="colored-part"></div>
+                      <div class="colored-part"></div>
+                      <div class="colored-part"></div>
+                      <div class="uncolored-part"></div>
+                      <div class="uncolored-part"></div>
+                      <div class="uncolored-part"></div>
+                      <div class="uncolored-part"></div>
+                    </div>
+                  </div>
+                </div>
+                <p data-lang-es="Todas representan la mitad del todo" data-lang-eu="Guztiek osotasunaren erdia adierazten dute">Todas representan la mitad del todo</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-calculator icon-concept"></i>
+            <span data-lang-es="Calculadora de fracciones equivalentes" data-lang-eu="Zatiki baliokideen kalkulagailua">Calculadora de fracciones equivalentes</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Utiliza esta calculadora para encontrar fracciones equivalentes:" data-lang-eu="Erabili kalkulagailu hau zatiki baliokideak aurkitzeko:">Utiliza esta calculadora para encontrar fracciones equivalentes:</p>
+            
+            <div class="tool-section">
+              <div class="tool-grid">
+                <div>
+                  <label for="equivNumerator" data-lang-es="Numerador:" data-lang-eu="Zenbakitzailea:">Numerador:</label>
+                  <input type="number" id="equivNumerator" placeholder="ej: 2" min="1">
+                </div>
+                <div>
+                  <label for="equivDenominator" data-lang-es="Denominador:" data-lang-eu="Izendatzailea:">Denominador:</label>
+                  <input type="number" id="equivDenominator" placeholder="ej: 3" min="1">
+                </div>
+                <div>
+                  <label for="equivMultiplier" data-lang-es="Multiplicador:" data-lang-eu="Biderkatzailea:">Multiplicador:</label>
+                  <input type="number" id="equivMultiplier" placeholder="ej: 2" min="1">
+                </div>
+              </div>
+              <div class="tool-actions">
+                <button onclick="findEquivalentFractions()" class="button-primary">
+                  <i class="fas fa-equals"></i>
+                  <span data-lang-es="Encontrar equivalentes" data-lang-eu="Baliokideak aurkitu">Encontrar equivalentes</span>
+                </button>
+                <button onclick="simplifyFraction()" class="button-secondary">
+                  <i class="fas fa-compress-alt"></i>
+                  <span data-lang-es="Simplificar" data-lang-eu="Sinplifikatu">Simplificar</span>
+                </button>
+              </div>
+              <div class="result-box" id="equivalentResult"></div>
+            </div>
+
+            <div class="info-box">
+              <i class="fas fa-lightbulb"></i>
+              <p data-lang-es="Recuerda: para simplificar, el MCD debe ser mayor que 1. Si es 1, la fracción ya es irreducible." data-lang-eu="Gogoratu: sinplifikatzeko, ZKH 1 baino handiagoa izan behar du. 1 bada, zatikia laburtezina da.">Recuerda: para simplificar, el MCD debe ser mayor que 1. Si es 1, la fracción ya es irreducible.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-list-ol icon-concept"></i>
+            <span data-lang-es="Ejercicios propuestos" data-lang-eu="Proposatutako ariketak">Ejercicios propuestos</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <ol class="exercises-list">
+              <li>
+                <p data-lang-es="¿Son equivalentes las fracciones 3/4 y 6/8?" data-lang-eu="3/4 eta 6/8 zatikiak baliokideak al dira?">¿Son equivalentes las fracciones 3/4 y 6/8?</p>
+                <button class="toggle-hint-button" aria-expanded="false" data-target="hint-1">
+                  <i class="fas fa-lightbulb"></i>
+                  <span data-lang-es="Mostrar Pista" data-lang-es-hide="Ocultar Pista" data-lang-eu="Erakutsi Pista" data-lang-eu-hide="Ezkutatu Pista">Mostrar Pista</span>
+                </button>
+                <div class="hint-content" id="hint-1">
+                  <p data-lang-es="Usa la regla del producto cruzado: 3 × 8 = ? y 4 × 6 = ?" data-lang-eu="Erabili biderketa gurutzatuaren araua: 3 × 8 = ? eta 4 × 6 = ?">Usa la regla del producto cruzado: 3 × 8 = ? y 4 × 6 = ?</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="Encuentra tres fracciones equivalentes a 2/5" data-lang-eu="Aurkitu 2/5ren hiru zatiki baliokide">Encuentra tres fracciones equivalentes a 2/5</p>
+                <button class="toggle-hint-button" aria-expanded="false" data-target="hint-2">
+                  <i class="fas fa-lightbulb"></i>
+                  <span data-lang-es="Mostrar Pista" data-lang-es-hide="Ocultar Pista" data-lang-eu="Erakutsi Pista" data-lang-eu-hide="Ezkutatu Pista">Mostrar Pista</span>
+                </button>
+                <div class="hint-content" id="hint-2">
+                  <p data-lang-es="Multiplica numerador y denominador por 2, 3 y 4" data-lang-eu="Biderkatu zenbakitzailea eta izendatzailea 2z, 3z eta 4z">Multiplica numerador y denominador por 2, 3 y 4</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="Simplifica la fracción 18/24" data-lang-eu="Sinplifikatu 18/24 zatikia">Simplifica la fracción 18/24</p>
+                <button class="toggle-hint-button" aria-expanded="false" data-target="hint-3">
+                  <i class="fas fa-lightbulb"></i>
+                  <span data-lang-es="Mostrar Pista" data-lang-es-hide="Ocultar Pista" data-lang-eu="Erakutsi Pista" data-lang-eu-hide="Ezkutatu Pista">Mostrar Pista</span>
+                </button>
+                <div class="hint-content" id="hint-3">
+                  <p data-lang-es="Busca el MCD de 18 y 24, luego divide ambos términos por ese número" data-lang-eu="Bilatu 18 eta 24ren ZKH, gero zatitu bi gaiak zenbaki horrekin">Busca el MCD de 18 y 24, luego divide ambos términos por ese número</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  
+  <script>
+    // Función para encontrar fracciones equivalentes
+    function findEquivalentFractions() {
+      const numerator = parseInt(document.getElementById('equivNumerator').value);
+      const denominator = parseInt(document.getElementById('equivDenominator').value);
+      const multiplier = parseInt(document.getElementById('equivMultiplier').value);
+      
+      if (isNaN(numerator) || isNaN(denominator) || isNaN(multiplier) || denominator === 0) {
+        document.getElementById('equivalentResult').innerHTML = 
+          '<p class="error" data-lang-es="Por favor, introduce números válidos" data-lang-eu="Sartu baliozko zenbakiak, mesedez">Por favor, introduce números válidos</p>';
+        langUtils.applyLanguage(langUtils.getCurrentLang());
+        return;
+      }
+      
+      const newNumerator = numerator * multiplier;
+      const newDenominator = denominator * multiplier;
+      
+      const resultHTML = `
+        <p class="ok"><strong>${numerator}/${denominator} = ${newNumerator}/${newDenominator}</strong></p>
+        <p><strong data-lang-es="Verificación:" data-lang-eu="Egiaztapena:">Verificación:</strong></p>
+        <p>${numerator} × ${newDenominator} = ${numerator * newDenominator}</p>
+        <p>${denominator} × ${newNumerator} = ${denominator * newNumerator}</p>
+        <p data-lang-es="Como ${numerator * newDenominator} = ${denominator * newNumerator}, las fracciones son equivalentes" data-lang-eu="${numerator * newDenominator} = ${denominator * newNumerator} denez, zatikiak baliokideak dira">Como ${numerator * newDenominator} = ${denominator * newNumerator}, las fracciones son equivalentes</p>
+      `;
+      
+      document.getElementById('equivalentResult').innerHTML = resultHTML;
+      langUtils.applyLanguage(langUtils.getCurrentLang());
+    }
+
+    // Función para simplificar fracciones
+    function simplifyFraction() {
+      const numerator = parseInt(document.getElementById('equivNumerator').value);
+      const denominator = parseInt(document.getElementById('equivDenominator').value);
+      
+      if (isNaN(numerator) || isNaN(denominator) || denominator === 0) {
+        document.getElementById('equivalentResult').innerHTML = 
+          '<p class="error" data-lang-es="Por favor, introduce números válidos" data-lang-eu="Sartu baliozko zenbakiak, mesedez">Por favor, introduce números válidos</p>';
+        langUtils.applyLanguage(langUtils.getCurrentLang());
+        return;
+      }
+      
+      const gcd = findGCD(numerator, denominator);
+      
+      if (gcd === 1) {
+        document.getElementById('equivalentResult').innerHTML = 
+          '<p class="info" data-lang-es="La fracción ya es irreducible (MCD = 1)" data-lang-eu="Zatikia laburtezina da (ZKH = 1)">La fracción ya es irreducible (MCD = 1)</p>';
+        langUtils.applyLanguage(langUtils.getCurrentLang());
+        return;
+      }
+      
+      const simplifiedNum = numerator / gcd;
+      const simplifiedDen = denominator / gcd;
+      
+      const resultHTML = `
+        <p class="ok"><strong data-lang-es="Simplificación de ${numerator}/${denominator}:" data-lang-eu="${numerator}/${denominator}-ren sinplifikazioa:">Simplificación de ${numerator}/${denominator}:</strong></p>
+        <p><strong data-lang-es="MCD:" data-lang-eu="ZKH:">MCD:</strong> ${gcd}</p>
+        <p><strong data-lang-es="Fracción simplificada:" data-lang-eu="Zatiki sinplifikatua:">Fracción simplificada:</strong> ${simplifiedNum}/${simplifiedDen}</p>
+        <p><strong data-lang-es="Verificación:" data-lang-eu="Egiaztapena:">Verificación:</strong> ${numerator}/${denominator} = ${simplifiedNum}/${simplifiedDen}</p>
+      `;
+      
+      document.getElementById('equivalentResult').innerHTML = resultHTML;
+      langUtils.applyLanguage(langUtils.getCurrentLang());
+    }
+
+    // Función para encontrar el máximo común divisor (algoritmo de Euclides)
+    function findGCD(a, b) {
+      a = Math.abs(a);
+      b = Math.abs(b);
+      
+      while (b !== 0) {
+        const temp = b;
+        b = a % b;
+        a = temp;
+      }
+      
+      return a;
+    }
+  </script>
+  
+  <!-- Botón flotante para volver arriba -->
+  <button id="back-to-top" aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <script>
+    // Configuración del botón de volver arriba
+    document.addEventListener('DOMContentLoaded', function() {
+      const backToTopButton = document.getElementById('back-to-top');
+      
+      // Mostrar/ocultar botón al hacer scroll
+      function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.style.opacity = '1';
+          backToTopButton.style.visibility = 'visible';
+        } else {
+          backToTopButton.style.opacity = '0';
+          backToTopButton.style.visibility = 'hidden';
+        }
+      }
+      
+      // Mostrar el botón después de cargar la página
+      setTimeout(toggleBackToTop, 100);
+      
+      // Escuchar el evento de scroll
+      window.addEventListener('scroll', toggleBackToTop);
+      
+      // Hacer scroll suave al hacer clic
+      backToTopButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

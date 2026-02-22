@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Probabilidad Condicionada - Probabilidad" data-lang-eu="Probabilitate Baldintzatua - Probabilitatea">Probabilidad Condicionada - Probabilidad</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-filter"></i>
+            <span data-lang-es="Probabilidad Condicionada" data-lang-eu="Probabilitate Baldintzatua">Probabilidad Condicionada</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title" data-lang-es="Probabilidad Condicionada" data-lang-eu="Probabilitate Baldintzatua">Probabilidad Condicionada</h1>
+            <div class="page-actions">
+                <button class="button-primary" data-lang-es="Ejercicios" data-lang-eu="Ariketak">
+                    <i class="fas fa-pencil-alt"></i> Ejercicios
+                </button>
+                <button class="button-secondary" data-lang-es="Herramienta" data-lang-eu="Tresna">
+                    <i class="fas fa-tools"></i> Herramienta
+                </button>
+            </div>
+        </div>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es la Probabilidad Condicionada?" data-lang-eu="Zer da Probabilitate Baldintzatua?">¿Qué es la Probabilidad Condicionada?</h3>
+            <p data-lang-es="La probabilidad condicionada es la probabilidad de que ocurra un suceso A sabiendo que ya ha ocurrido otro suceso B."
+               data-lang-eu="Probabilitate baldintzatua B gertakaria jada gertatu dela jakinik A gertakaria gertatzeko probabilitatea da.">
+               La probabilidad condicionada es la probabilidad de que ocurra un suceso A sabiendo que ya ha ocurrido otro suceso B.
+            </p>
+            <p class="key-takeaway" data-lang-es="<b>Notación:</b> P(A|B) se lee 'probabilidad de A dado B'"
+               data-lang-eu="<b>Notazioa:</b> P(A|B) 'A-ren probabilitatea B emanda' irakurten da">
+               <b>Notación:</b> P(A|B) se lee 'probabilidad de A dado B'
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Fórmula de Probabilidad Condicionada" data-lang-eu="Probabilitate Baldintzatuen Formula">Fórmula de Probabilidad Condicionada</h3>
+            
+            <div class="formula-box">
+                <h4 data-lang-es="Fórmula Principal" data-lang-eu="Formula Nagusia">Fórmula Principal</h4>
+                <div class="math-formula">
+                    \[
+                    P(A|B) = \frac{P(A \cap B)}{P(B)} \quad \text{si} \quad P(B) > 0
+                    \]
+                </div>
+            </div>
+
+            <p data-lang-es="Esta fórmula nos dice que la probabilidad de A dado B es igual a la probabilidad de que ocurran ambos (A y B) dividida entre la probabilidad de B."
+               data-lang-eu="Formula honek esaten digu A-ren probabilitatea B emanda, biak (A eta B) gertatzeko probabilitatea B-ren probabilitateaz zatituta dagoela.">
+               Esta fórmula nos dice que la probabilidad de A dado B es igual a la probabilidad de que ocurran ambos (A y B) dividida entre la probabilidad de B.
+            </p>
+
+            <div class="example-box">
+                <p><strong data-lang-es="Interpretación intuitiva:" data-lang-eu="Interpretazio intuitiboa:">Interpretación intuitiva:</strong></p>
+                <p data-lang-es="Si sabemos que B ha ocurrido, 'el universo' se reduce a los resultados de B. Dentro de ese universo reducido, ¿cuántos resultados también pertenecen a A?"
+                   data-lang-eu="B gertatu dela badakigu, 'unibertsoa' B-ren emaitzetara murrizten da. Murriztutako unibertso horretan, zenbat emaitza A-ri ere badagozkie?">
+                   Si sabemos que B ha ocurrido, 'el universo' se reduce a los resultados de B. Dentro de ese universo reducido, ¿cuántos resultados también pertenecen a A?
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Sucesos Independientes" data-lang-es="Gertakari Independienteak">Sucesos Independientes</h3>
+            <p data-lang-es="Dos sucesos A y B son independientes si el conocimiento de que ha ocurrido B no cambia la probabilidad de A. Es decir, P(A|B) = P(A)."
+               data-lang-eu="Bi gertakari A eta B independenteak badira B gertatu dela jakiteak A-ren probabilitatea aldatzen ez du. Hau da, P(A|B) = P(A).">
+               Dos sucesos A y B son independientes si el conocimiento de que ha ocurrido B no cambia la probabilidad de A. Es decir, P(A|B) = P(A).
+            </p>
+
+            <div class="card-style info-card">
+                <h4><i class="fas fa-check-double"></i> <span data-lang-es="Criterio de Independencia" data-lang-eu="Independentziaren Irizpidea">Criterio de Independencia</span></h4>
+                <div class="formula-box">
+                    \[
+                    P(A \cap B) = P(A) \cdot P(B)
+                    \]
+                </div>
+                <p data-lang-es="Esta es la definición matemática de independencia. Si se cumple esta igualdad, los sucesos son independientes."
+                   data-lang-eu="Independentziaren definizio matematikoa da. Desberdintasun hau betetzen bada, gertakariak independenteak dira.">
+                   Esta es la definición matemática de independencia. Si se cumple esta igualdad, los sucesos son independientes.
+                </p>
+            </div>
+
+            <div class="example-box">
+                <p><strong data-lang-es="Ejemplos de independencia:" data-lang-eu="Independentziaren adibideak:">Ejemplos de independencia:</strong></p>
+                <ul>
+                    <li data-lang-es="Lanzar dos monedas diferentes: el resultado de la primera no afecta al de la segunda." 
+                        data-lang-eu="Bi txanpon desberdin botatzea: lehenengoaren emaitzak bigarrenaren gaineko eraginik ez du.">
+                        Lanzar dos monedas diferentes: el resultado de la primera no afecta al de la segunda.
+                    </li>
+                    <li data-lang-es="Sacar una carta, devolverla y sacar otra: los resultados son independientes." 
+                        data-lang-eu="Karta bat ateratzea, itzultzea eta beste bat ateratzea: emaitzak independenteak dira.">
+                        Sacar una carta, devolverla y sacar otra: los resultados son independientes.
+                    </li>
+                </ul>
+                <p><strong data-lang-es="Ejemplos de dependencia:" data-lang-eu="Dependentziaren adibideak:">Ejemplos de dependencia:</strong></p>
+                <ul>
+                    <li data-lang-es="Sacar dos cartas sin devolución: el resultado del primero afecta al segundo." 
+                        data-lang-eu="Bi karta itzuli gabe ateratzea: lehenengoaren emaitzak bigarrenaren gaineko eragin du.">
+                        Sacar dos cartas sin devolución: el resultado del primero afecta al segundo.
+                    </li>
+                    <li data-lang-es="Extraer bolas de una urna sin reemplazarlas: las extracciones están relacionadas." 
+                        data-lang-eu="Bolak urnatik ordezkapenik gabe ateratzea: aterketak lotuta daude.">
+                        Extraer bolas de una urna sin reemplazarlas: las extracciones están relacionadas.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Propiedades de la Independencia" data-lang-eu="Independentziaren Propietateak">Propiedades de la Independencia</h3>
+            
+            <div class="card-style property-card">
+                <h4><i class="fas fa-sync-alt"></i> <span data-lang-es="Propiedad 1: Simetría" data-lang-eu="1. Propietatea: Simetria">Propiedad 1: Simetría</span></h4>
+                <div class="formula-box">
+                    \[
+                    P(A|B) = P(A) \quad \Longleftrightarrow \quad P(B|A) = P(B)
+                    \]
+                </div>
+                <p data-lang-es="Si A es independiente de B, entonces B también es independiente de A. La independencia es una relación simétrica."
+                   data-lang-eu="A B-ren independentea bada, orduan B ere A-ren independentea da. Independentzia erlazio simetrikoa da.">
+                   Si A es independiente de B, entonces B también es independiente de A. La independencia es una relación simétrica.
+                </p>
+            </div>
+
+            <div class="card-style property-card">
+                <h4><i class="fas fa-times"></i> <span data-lang-es="Propiedad 2: Probabilidad conjunta" data-lang-eu="2. Propietatea: Probabilitate konposatua">Propiedad 2: Probabilidad conjunta</span></h4>
+                <div class="formula-box">
+                    \[
+                    P(A \cap B) = P(A) \cdot P(B)
+                    \]
+                </div>
+                <p data-lang-es="Si A y B son independientes, la probabilidad de que ocurran ambos es el producto de sus probabilidades individuales."
+                   data-lang-eu="A eta B independenteak badira, biak gertatzeko probabilitatea beren probabilitate indibidualen biderketa da.">
+                   Si A y B son independientes, la probabilidad de que ocurran ambos es el producto de sus probabilidades individuales.
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Ejemplos Resueltos" data-lang-eu="Ebatzitako Adibideak">Ejemplos Resueltos</h3>
+            
+            <div class="example-section">
+                <h4 data-lang-es="Ejemplo 1: Probabilidad condicionada simple" data-lang-eu="1. Adibidea: Probabilitate baldintzatu sinplea">Ejemplo 1: Probabilidad condicionada simple</h4>
+                <p data-lang-es="En una clase hay 30 estudiantes: 12 chicas y 18 chicos. 8 de las chicas y 12 de los chicos juegan fútbol. Calculamos la probabilidad de que un estudiante elegido al azar juegue fútbol sabiendo que es chica."
+                   data-lang-eu="Klasean 30 ikasle daude: 12 neska eta 18 mutil. Nesken 8-ak eta mutilen 12-ek futbol jokatzen dute. Ausaz aukeratutako ikasle bat neska izanik futbol jokatzen duela probabilitatea kalkulatzen dugu.">
+                   En una clase hay 30 estudiantes: 12 chicas y 18 chicos. 8 de las chicas y 12 de los chicos juegan fútbol. Calculamos la probabilidad de que un estudiante elegido al azar juegue fútbol sabiendo que es chica.
+                </p>
+
+                <p data-lang-es="<b>Definimos los sucesos:</b>" data-lang-eu="<b>Gertakariak definitzen ditugu:</b>"><b>Definimos los sucesos:</b></p>
+                <ul>
+                    <li data-lang-es="A = {juega fútbol}" data-lang-eu="A = {futbol jokatzen du}">A = {juega fútbol}</li>
+                    <li data-lang-es="B = {es chica}" data-lang-eu="B = {neska da}">B = {es chica}</li>
+                </ul>
+
+                <p data-lang-es="<b>1. Usando la fórmula de probabilidad condicionada:</b>" data-lang-eu="<b>1. Probabilitate baldintzatuen formula erabiliz:</b>"><b>1. Usando la fórmula de probabilidad condicionada:</b></p>
+                <div class="formula-box">
+                    \[
+                    P(A|B) = \frac{P(A \cap B)}{P(B)}
+                    \]
+
+                    Donde:
+                    \[P(A \cap B) = \frac{8}{30}\] (chicas que juegan fútbol)
+                    \[P(B) = \frac{12}{30}\] (total de chicas)
+
+                    Por lo tanto:
+                    \[P(A|B) = \frac{\frac{8}{30}}{\frac{12}{30}} = \frac{8}{12} = \frac{2}{3} \approx 0.667\]
+                </div>
+
+                <p class="result-highlight" data-lang-es="<b>Respuesta:</b> P(A|B) = 2/3 ≈ 66.7%. De las chicas, 2 de cada 3 juegan fútbol." 
+                   data-lang-eu="<b>Erantzuna:</b> P(A|B) = 2/3 ≈ % 66.7. Nesken 2-3 futbol jokatzen dute.">
+                   <b>Respuesta:</b> P(A|B) = 2/3 ≈ 66.7%. De las chicas, 2 de cada 3 juegan fútbol.
+                </p>
+            </div>
+
+            <div class="example-section">
+                <h4 data-lang-es="Ejemplo 2: Independencia" data-lang-eu="2. Adibidea: Independentzia">Ejemplo 2: Independencia</h4>
+                <p data-lang-es="Lanzamos una moneda dos veces. ¿Son independientes los sucesos A = {salir cara en el primer lanzamiento} y B = {salir cara en el segundo lanzamiento}?"
+                   data-lang-eu="Txanpon bat bi aldiz botatzen dugu. A = {aurpegia lehenengo botaeran} eta B = {aurpegia bigarren botaeran} gertakariak independenteak al dira?">
+                   Lanzamos una moneda dos veces. ¿Son independientes los sucesos A = {salir cara en el primer lanzamiento} y B = {salir cara en el segundo lanzamiento}?
+                </p>
+
+                <p data-lang-es="<b>1. Calculamos las probabilidades individuales:</b>" data-lang-eu="<b>1. Probabilitate indibidualak kalkulatzen ditugu:</b>"><b>1. Calculamos las probabilidades individuales:</b></p>
+                <div class="formula-box">
+                    \[P(A) = \frac{1}{2}\] (probabilidad de cara en cualquier lanzamiento)
+                    \[P(B) = \frac{1}{2}\] (probabilidad de cara en cualquier lanzamiento)
+                </div>
+
+                <p data-lang-es="<b>2. Calculamos la probabilidad conjunta:</b>" data-lang-eu="<b>2. Probabilitate konposatua kalkulatzen dugu:</b>"><b>2. Calculamos la probabilidad conjunta:</b></p>
+                <div class="formula-box">
+                    \[A \cap B = \{CC\}\] (cara en ambos lanzamientos)
+                    \[P(A \cap B) = \frac{1}{4}\] (de los 4 resultados posibles: CC, CX, XC, XX)
+                </div>
+
+                <p data-lang-es="<b>3. Verificamos la independencia:</b>" data-lang-eu="<b>3. Independentzia egiaztatzen dugu:</b>"><b>3. Verificamos la independencia:</b></p>
+                <div class="formula-box">
+                    \[P(A) \cdot P(B) = \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4}\]
+
+                    Como \(P(A \cap B) = P(A) \cdot P(B) = \frac{1}{4}\), los sucesos son independientes.
+                </div>
+
+                <p class="result-highlight" data-lang-es="<b>Respuesta:</b> Sí, A y B son independientes. El resultado del primer lanzamiento no afecta al segundo." 
+                   data-lang-eu="<b>Erantzuna:</b> Bai, A eta B independenteak. Lehenengo botaeraren emaitzak bigarrenari ez dio eraginik.">
+                   <b>Respuesta:</b> Sí, A y B son independientes. El resultado del primer lanzamiento no afecta al segundo.
+                </p>
+            </div>
+
+            <div class="example-section">
+                <h4 data-lang-es="Ejemplo 3: Dependencia" data-lang-eu="3. Adibidea: Dependentzia">Ejemplo 3: Dependencia</h4>
+                <p data-lang-es="Tenemos una bolsa con 3 bolas rojas y 2 azules. Sacamos dos bolas sin devolución. ¿Es independiente el suceso A = {primera bola roja} del suceso B = {segunda bola roja}?"
+                   data-lang-eu="3 bola gorri eta 2 urdin dituen poltsa bat dugu. Bi bola itzuli gabe ateratzen ditugu. A = {lehenengo bola gorria} eta B = {bigarren bola gorria} gertakariak independenteak al dira?">
+                   Tenemos una bolsa con 3 bolas rojas y 2 azules. Sacamos dos bolas sin devolución. ¿Es independiente el suceso A = {primera bola roja} del suceso B = {segunda bola roja}?
+                </p>
+
+                <p data-lang-es="<b>1. Calculamos P(A):</b>" data-lang-eu="<b>1. P(A) kalkulatzen dugu:</b>"><b>1. Calculamos P(A):</b></p>
+                <div class="formula-box">
+                    \[P(A) = \frac{3}{5} = 0.6\]
+                </div>
+
+                <p data-lang-es="<b>2. Calculamos P(A ∩ B):</b>" data-lang-eu="<b>2. P(A ∩ B) kalkulatzen dugu:</b>"><b>2. Calculamos P(A ∩ B):</b></p>
+                <div class="formula-box">
+                    \[P(A \cap B) = P(A) \cdot P(B|A) = \frac{3}{5} \cdot \frac{2}{4} = \frac{6}{20} = \frac{3}{10} = 0.3\]
+
+                    (Primero roja: 3/5, luego roja: 2/4 de las que quedan)
+                </div>
+
+                <p data-lang-es="<b>3. Calculamos P(B|A):</b>" data-lang-eu="<b>3. P(B|A) kalkulatzen dugu:</b>"><b>3. Calculamos P(B|A):</b></p>
+                <div class="formula-box">
+                    \[P(B|A) = \frac{P(A \cap B)}{P(A)} = \frac{0.3}{0.6} = 0.5\]
+
+                    (Si la primera fue roja, quedan 2 rojas de 4 bolas)
+                </div>
+
+                <p data-lang-es="<b>4. Comparamos P(B|A) con P(B):</b>" data-lang-eu="<b>4. P(B|A) P(B)-rekin alderatzen dugu:</b>"><b>4. Comparamos P(B|A) con P(B):</b></p>
+                <div class="formula-box">
+                    \[P(B) = \frac{3}{5} = 0.6\] (sin ninguna condición)
+                    \[P(B|A) = 0.5\] (sabiendo que la primera fue roja)
+
+                    Como \(P(B|A) \neq P(B)\), los sucesos NO son independientes.
+                </div>
+
+                <p class="result-highlight" data-lang-es="<b>Respuesta:</b> A y B NO son independientes. Si la primera bola es roja, la probabilidad de que la segunda también sea roja cambia." 
+                   data-lang-eu="<b>Erantzuna:</b> A eta B ez dira independenteak. Lehenengo bola gorria bada, bigarrena ere gorria izateko probabilitatea aldatzen da.">
+                   <b>Respuesta:</b> A y B NO son independientes. Si la primera bola es roja, la probabilidad de que la segunda también sea roja cambia.
+                </p>
+            </div>
+        </section>
+
+        <section class="warning-section">
+            <h3><i class="fas fa-exclamation-triangle"></i> <span data-lang-es="Errores Típicos" data-lang-eu="Akats Tipikoak">Errores Típicos</span></h3>
+            <ul>
+                <li data-lang-es="Confundir dependencia con independencia" 
+                    data-lang-eu="Dependentzia independentziarekin nahastea">
+                    Confundir dependencia con independencia
+                </li>
+                <li data-lang-es="Aplicar probabilidad condicionada sin verificar que P(B) > 0" 
+                    data-lang-eu="Probabilitate baldintzatua aplikatzea P(B) > 0 dela egiaztatu gabe">
+                    Aplicar probabilidad condicionada sin verificar que P(B) > 0
+                </li>
+                <li data-lang-es="Confundir P(A|B) con P(B|A)" 
+                    data-lang-eu="P(A|B) P(B|A)-rekin nahastea">
+                    Confundir P(A|B) con P(B|A)
+                </li>
+                <li data-lang-es="No distinguir entre 'y' (intersección) y 'o' (unión)" 
+                    data-lang-eu="'eta' (ebakiduna) eta 'edo' (bildura) arteko bereizkuntza ez egitea">
+                    No distinguir entre 'y' (intersección) y 'o' (unión)
+                </li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="⚠️ Recordatorio Importante" data-lang-eu="⚠️ Gogoan Hartu Garrantzitsua">⚠️ Recordatorio Importante</h3>
+            <div class="card-style warning-card">
+                <p data-lang-es="La independencia y la incompatibilidad son conceptos diferentes:" 
+                   data-lang-eu="Independentzia eta inkompatibilitatea kontzeptu desberdinak dira:">
+                   La independencia y la incompatibilidad son conceptos diferentes:
+                </p>
+                <ul>
+                    <li data-lang-es="<b>Incompatibles:</b> No pueden ocurrir a la vez (A ∩ B = ∅)" 
+                        data-lang-eu="<b>Inkompatibleak:</b> Ezin gerta daitezke aldi berean (A ∩ B = ∅)">
+                        <b>Incompatibles:</b> No pueden ocurrir a la vez (A ∩ B = ∅)
+                    </li>
+                    <li data-lang-es="<b>Independientes:</b> El conocimiento de uno no afecta al otro (P(A|B) = P(A))" 
+                        data-lang-eu="<b>Independienteak:</b> Bata ezagutzeak bestea ez du eraginik (P(A|B) = P(A))">
+                        <b>Independientes:</b> El conocimiento de uno no afecta al otro (P(A|B) = P(A))
+                    </li>
+                    <li data-lang-es="<b>Importante:</b> Dos sucesos incompatibles con P(A) > 0 y P(B) > 0 NO pueden ser independientes" 
+                        data-lang-eu="<b>Garrantzitsua:</b> P(A) > 0 eta P(B) > 0 duten bi gertakari inkompatibleak ezin dira independenteak izan">
+                        <b>Importante:</b> Dos sucesos incompatibles con P(A) > 0 y P(B) > 0 NO pueden ser independientes
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

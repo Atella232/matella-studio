@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Ecuaciones - Ãlgebra" data-lang-eu="Ekuazioak - Aljebra">Ecuaciones - Ãlgebra</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtujs"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-equals"></i>
+            <span data-lang-es="Ecuaciones de Primer Grado" data-lang-eu="Lehen Mailako Ekuazioak">Ecuaciones de Primer Grado</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Ecuaciones de Primer Grado" data-lang-eu="Lehen Mailako Ekuazioak">Ecuaciones de Primer Grado</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="Â¿QuÃ© es una EcuaciÃ³n?" data-lang-eu="Zer da Ekuazio bat?">Â¿QuÃ© es una EcuaciÃ³n?</h3>
+            <p data-lang-es="Una ecuaciÃ³n es una igualdad entre dos expresiones algebraicas que contiene uno o mÃ¡s valores desconocidos (incÃ³gnitas). Es como una balanza en equilibrio: lo que hay a un lado del signo igual (=) debe valer lo mismo que lo que hay al otro lado."
+               data-lang-eu="Ekuazio bat ezezagun bat edo gehiago dituzten bi adierazpen aljebraikoren arteko berdintasuna da. Balantza orekatu bat bezalakoa da: berdin (=) zeinuaren alde batean dagoenak beste aldean dagoenaren balio bera izan behar du.">
+               Una ecuaciÃ³n es una igualdad entre dos expresiones algebraicas que contiene uno o mÃ¡s valores desconocidos (incÃ³gnitas). Es como una balanza en equilibrio: lo que hay a un lado del signo igual (=) debe valer lo mismo que lo que hay al otro lado.
+            </p>
+            <p class="key-takeaway" data-lang-es="<b>El objetivo:</b> Encontrar el valor de la incÃ³gnita (normalmente 'x') que hace que la igualdad sea cierta."
+               data-lang-eu="<b>Helburua:</b> Berdintasuna egia bihurtzen duen ezezagunaren (normalean 'x') balioa aurkitzea.">
+               <b>El objetivo:</b> Encontrar el valor de la incÃ³gnita (normalmente 'x') que hace que la igualdad sea cierta.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="TÃ©cnicas para Resolver Ecuaciones" data-lang-eu="Ekuazioak Ebazteko Teknikak">TÃ©cnicas para Resolver Ecuaciones</h3>
+            <p data-lang-es="Para resolver una ecuaciÃ³n de primer grado, seguimos unos pasos para 'despejar la x', es decir, dejarla sola a un lado del igual."
+               data-lang-eu="Lehen mailako ekuazio bat ebazteko, pauso batzuk jarraitzen ditugu 'x askatzeko', hau da, berdin zeinuaren alde batean bakarrik uzteko.">
+               Para resolver una ecuaciÃ³n de primer grado, seguimos unos pasos para 'despejar la x', es decir, dejarla sola a un lado del igual.
+            </p>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-sort-numeric-down icon-concept"></i>
+                        <span data-lang-es="Paso 1: Agrupar tÃ©rminos" data-lang-eu="1. Pausua: Gaiak taldekatu">Paso 1: Agrupar tÃ©rminos</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Movemos todos los tÃ©rminos que tienen la incÃ³gnita (x) a un lado del igual y todos los nÃºmeros al otro lado. <b>Regla clave:</b> lo que estÃ¡ sumando en un lado, pasa restando al otro, y viceversa."
+                           data-lang-eu="Ezezaguna (x) duten gai guztiak berdin zeinuaren alde batera mugitzen ditugu eta zenbaki guztiak bestera. <b>Gako araua:</b> alde batean batzen ari dena, beste aldera kentzen pasatzen da, eta alderantziz.">
+                           Movemos todos los tÃ©rminos que tienen la incÃ³gnita (x) a un lado del igual y todos los nÃºmeros al otro lado. <b>Regla clave:</b> lo que estÃ¡ sumando en un lado, pasa restando al otro, y viceversa.
+                        </p>
+                        <p class="example"><em data-lang-es="4 + 2x = x + 10  âžœ  2x - x = 10 - 4" data-lang-eu="4 + 2x = x + 10  âžœ  2x - x = 10 - 4">4 + 2x = x + 10  âžœ  2x - x = 10 - 4</em></p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-compress icon-concept"></i>
+                        <span data-lang-es="Paso 2: Simplificar" data-lang-eu="2. Pausua: Sinplifikatu">Paso 2: Simplificar</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Operamos en cada lado del igual para reducir la expresiÃ³n."
+                           data-lang-eu="Berdin zeinuaren alde bakoitzean eragiketak egiten ditugu adierazpena murrizteko.">
+                           Operamos en cada lado del igual para reducir la expresiÃ³n.
+                        </p>
+                        <p class="example"><em data-lang-es="2x - x = 10 - 4  âžœ  x = 6" data-lang-eu="2x - x = 10 - 4  âžœ  x = 6">2x - x = 10 - 4  âžœ  x = 6</em></p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-check-double icon-concept"></i>
+                        <span data-lang-es="Paso 3: Despejar (si es necesario)" data-lang-eu="3. Pausua: Askatu (beharrezkoa bada)">Paso 3: Despejar (si es necesario)</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Si la 'x' tiene un coeficiente (un nÃºmero multiplicÃ¡ndola), lo pasamos al otro lado dividiendo."
+                           data-lang-eu="'x'-ak koefiziente bat badu (biderkatzen duen zenbaki bat), beste aldera zatitzen pasatzen dugu.">
+                           Si la 'x' tiene un coeficiente (un nÃºmero multiplicÃ¡ndola), lo pasamos al otro lado dividiendo.
+                        </p>
+                        <p class="example"><em data-lang-es="3x = 15  âžœ  x = 15 / 3  âžœ  x = 5" data-lang-eu="3x = 15  âžœ  x = 15 / 3  âžœ  x = 5">3x = 15  âžœ  x = 15 / 3  âžœ  x = 5</em></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="ResoluciÃ³n de Problemas con Ecuaciones" data-lang-eu="Problemen Ebazpena Ekuazioekin">ResoluciÃ³n de Problemas con Ecuaciones</h3>
+            <p data-lang-es="El verdadero poder del Ã¡lgebra es traducir problemas de la vida real a un lenguaje matemÃ¡tico que podemos resolver."
+               data-lang-eu="Aljebraren benetako indarra bizitza errealeko problemak ebatzi ditzakegun hizkuntza matematikora itzultzea da.">
+               El verdadero poder del Ã¡lgebra es traducir problemas de la vida real a un lenguaje matemÃ¡tico que podemos resolver.
+            </p>
+            <p class="example" data-lang-es="<b>Problema:</b> Un montÃ³n de monedas y una sÃ©ptima parte de ese montÃ³n suman 24 euros. Â¿CuÃ¡nto vale el montÃ³n?<br><b>Planteamiento:</b> x + (1/7)x = 24<br><b>ResoluciÃ³n:</b> (8/7)x = 24  âžœ  x = (24 * 7) / 8  âžœ  x = 21. El montÃ³n vale 21 euros."
+               data-lang-eu="<b>Problema:</b> Txanpon pila batek eta pilaren zazpigarren zati batek 24 euro balio dute. Zenbat balio du piloak?<br><b>Planteamendua:</b> x + (1/7)x = 24<br><b>Ebazpena:</b> (8/7)x = 24  âžœ  x = (24 * 7) / 8  âžœ  x = 21. Piloak 21 euro balio ditu.">
+               <b>Problema:</b> Un montÃ³n de monedas y una sÃ©ptima parte de ese montÃ³n suman 24 euros. Â¿CuÃ¡nto vale el montÃ³n?<br><b>Planteamiento:</b> x + (1/7)x = 24<br><b>ResoluciÃ³n:</b> (8/7)x = 24  âžœ  x = (24 * 7) / 8  âžœ  x = 21. El montÃ³n vale 21 euros.
+            </p>
+        </section>
+
+    <section class="content-section">
+            <h3 data-lang-es="Herramienta Interactiva: Resuelve Ecuaciones" data-lang-eu="Tresna Interaktiboa: Ekuazioak Ebatzi">Herramienta Interactiva: Resuelve Ecuaciones</h3>
+            <div class="interactive-tool card-style">
+                <div class="configuracion-ejercicio" style="text-align: center; margin-bottom: 1rem;">
+                    <button id="generar-ejercicio" class="button-primary" data-lang-es="Generar Nueva EcuaciÃ³n" data-lang-eu="Sortu Ekuazio Berria">Generar Nueva EcuaciÃ³n</button>
+                </div>
+                <div class="ejercicio-actual">
+                    <h4 data-lang-es="Resuelve la siguiente ecuaciÃ³n:" data-lang-eu="Ebatzi honako ekuazio hau:">Resuelve la siguiente ecuaciÃ³n:</h4>
+                    <div id="problema-matematico" class="problema-matematico" style="font-size: 1.5em; font-weight: bold; justify-content: center; gap: 1rem;">
+                        <!-- El ejercicio se generarÃ¡ aquÃ­ -->
+                    </div>
+                    <div class="controles-ejercicio" style="margin-top: 1rem; display: flex; justify-content: center; gap: 1rem;">
+                        <button id="comprobar-respuesta" class="button-primary" data-lang-es="Comprobar" data-lang-eu="Egiaztatu">Comprobar</button>
+                        <button id="mostrar-solucion" class="button-secondary" data-lang-es="Mostrar SoluciÃ³n" data-lang-eu="Erakutsi Soluzioa">Mostrar SoluciÃ³n</button>
+                    </div>
+                </div>
+                <div class="resultado-ejercicio" style="margin-top: 1.5rem; text-align: center;">
+                    <p id="mensaje-resultado" style="font-weight: bold; min-height: 24px;"></p>
+                    <div id="explicacion-solucion" class="solution" style="background-color: var(--button-bg); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <!-- La explicaciÃ³n aparecerÃ¡ aquÃ­ -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="Â© 2025 - MATELLA | DiseÃ±o Minimalista Profesional" data-lang-eu="Â© 2025 - MATELLA | Diseinu Minimalista Profesionala">Â© 2025 - MATELLA | DiseÃ±o Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+    <script src="../js/herramienta-algebra.js"></script>
+
+</body>
+</html>

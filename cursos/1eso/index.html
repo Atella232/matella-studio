@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Matemáticas 1º ESO" data-lang-eu="Matematika DBH 1">Matemáticas 1º ESO</title>
+    <link rel="stylesheet" href="../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../assets/css/base.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+             <i class="fas fa-calculator"></i>
+             <span data-lang-es="Matemáticas 1º ESO" data-lang-eu="Matematika DBH 1">Matemáticas 1º ESO</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i> </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara </button>
+        </nav>
+    </header>
+
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        <ol>
+            <li><a href="../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+            <li class="active" aria-current="page"><span data-lang-es="1º ESO" data-lang-eu="DBH 1">1º ESO</span></li>
+        </ol>
+    </nav>
+
+    <main>
+        <section id="intro">
+            <div class="intro-container">
+                <h2 data-lang-es="Bienvenida al Curso de Matemáticas" data-lang-eu="Ongi Etorri Matematikako Kurtsoara">Bienvenida al Curso de Matemáticas</h2>
+                <p data-lang-es="Selecciona un tema para empezar a aprender y practicar." data-lang-eu="Hautatu gai bat ikasten eta praktikatzen hasteko.">Selecciona un tema para empezar a aprender y practicar.</p>
+            </div>
+        </section>
+
+        <section id="subtopics">
+            <h2 data-lang-es="Temas Disponibles" data-lang-eu="Gaiak Eskuragarri">Temas Disponibles</h2>
+            <div class="cards-container">
+
+                <div class="card">
+                    <a href="./temas/numeros-naturales/index.html">
+                        <div class="card-icon"><i class="fas fa-hashtag"></i></div>
+                        <h3 data-lang-es="Números Naturales" data-lang-eu="Zenbaki Naturalak">Números Naturales</h3>
+                        <div class="summary">
+                            <p data-lang-es="Operaciones básicas, propiedades y resolución de problemas con los primeros números que aprendemos." data-lang-eu="Oinarrizko eragiketak, propietateak eta problemak ebaztea ikasten ditugun lehen zenbakiekin.">Operaciones básicas, propiedades y resolución de problemas con los primeros números que aprendemos.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./temas/divisibilidad/index.html">
+                        <div class="card-icon"><i class="fas fa-divide"></i></div>
+                        <h3 data-lang-es="Divisibilidad" data-lang-eu="Zatigarritasuna">Divisibilidad</h3>
+                        <div class="summary">
+                            <p data-lang-es="Múltiplos, divisores, números primos, MCM y MCD. Las bases para entender las relaciones entre números." data-lang-eu="Multiploak, zatitzaileak, zenbaki lehenak, MKT eta ZKH. Zenbakien arteko erlazioak ulertzeko oinarriak.">Múltiplos, divisores, números primos, MCM y MCD. Las bases para entender las relaciones entre números.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./temas/numeros-enteros/index.html">
+                        <div class="card-icon"><i class="fas fa-plus-minus"></i></div>
+                        <h3 data-lang-es="Números Enteros" data-lang-eu="Zenbaki Osoak">Números Enteros</h3>
+                        <div class="summary">
+                            <p data-lang-es="Explora los números positivos y negativos, su representación en la recta y las operaciones combinadas." data-lang-eu="Arakatu zenbaki positiboak eta negatiboak, haien irudikapena zuzenean eta eragiketa konbinatuak.">Explora los números positivos y negativos, su representación en la recta y las operaciones combinadas.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./temas/fracciones/index.html">
+                        <div class="card-icon"><i class="fas fa-pie"></i></div>
+                        <h3 data-lang-es="Fracciones" data-lang-eu="Zatikiak">Fracciones</h3>
+                        <div class="summary">
+                            <p data-lang-es="Desde el significado de una fracción hasta la comparación y operaciones. Domina las partes de un todo." data-lang-eu="Zatiki baten esanahaitik konparaziora eta eragiketetara. Menperatu osotasun baten zatiak.">Desde el significado de una fracción hasta la comparación y operaciones. Domina las partes de un todo.</p>
+                        </div>
+                    </a>
+                </div>
+
+                 <div class="card">
+                     <a href="./temas/algebra/index.html">
+                        <div class="card-icon"><i class="fas fa-x-ray"></i></div>
+                        <h3 data-lang-es="Álgebra" data-lang-eu="Aljebra">Álgebra</h3>
+                        <div class="summary">
+                            <p data-lang-es="Iníciate en el lenguaje de las letras y los números. Monomios, expresiones y ecuaciones de primer grado." data-lang-eu="Hasi letren eta zenbakien hizkuntzan. Monomioak, adierazpenak eta lehen mailako ekuazioak.">Iníciate en el lenguaje de las letras y los números. Monomios, expresiones y ecuaciones de primer grado.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./temas/geometria/index.html">
+                        <div class="card-icon"><i class="fas fa-draw-polygon"></i></div>
+                        <h3 data-lang-es="Geometría" data-lang-eu="Geometria">Geometría</h3>
+                        <div class="summary">
+                            <p data-lang-es="Estudia las formas, sus propiedades, áreas y perímetros. Incluye el Teorema de Pitágoras." data-lang-eu="Aztertu formak, haien propietateak, azalerak eta perimetroak. Pitagorasen Teorema barne.">Estudia las formas, sus propiedades, áreas y perímetros. Incluye el Teorema de Pitágoras.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./temas/tablas-graficas/index.html">
+                        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3 data-lang-es="Tablas y Gráficas" data-lang-eu="Taulak eta Grafikoak">Tablas y Gráficas</h3>
+                        <div class="summary">
+                            <p data-lang-es="Aprende a interpretar la información presentada en coordenadas cartesianas, tablas y diferentes tipos de gráficos." data-lang-eu="Ikasi koordenatu kartesiarretan, tauletan eta grafiko mota desberdinetan aurkeztutako informazioa interpretatzen.">Aprende a interpretar la información presentada en coordenadas cartesianas, tablas y diferentes tipos de gráficos.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./temas/estadistica/index.html">
+                        <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
+                        <h3 data-lang-es="Estadística" data-lang-eu="Estatistika">Estadística</h3>
+                        <div class="summary">
+                            <p data-lang-es="Conceptos de población y muestra, variables, tablas de frecuencia, gráficos y medidas estadísticas." data-lang-eu="Populazio eta lagin kontzeptuak, aldagaiak, maiztasun taulak, grafikoak eta neurri estatistikoak.">Conceptos de población y muestra, variables, tablas de frecuencia, gráficos y medidas estadísticas.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./temas/probabilidad/index.html">
+                        <div class="card-icon"><i class="fas fa-dice"></i></div>
+                        <h3 data-lang-es="Probabilidad" data-lang-eu="Probabilitatea">Probabilidad</h3>
+                        <div class="summary">
+                            <p data-lang-es="Estudio de los sucesos aleatorios, cálculo de probabilidades y la regla de Laplace." data-lang-eu="Gertaera aleatorioen azterketa, probabilitateen kalkulua eta Laplaceren erregela.">Estudio de los sucesos aleatorios, cálculo de probabilidades y la regla de Laplace.</p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/language.js"></script>
+    <script src="../../assets/js/uiComponents.js"></script>
+    <script src="../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

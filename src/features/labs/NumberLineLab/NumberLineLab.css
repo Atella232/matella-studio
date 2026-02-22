@@ -78,7 +78,7 @@
     height: auto;
 }
 
-.fraction-info {
+.number-line-lab .fraction-info {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-6);
@@ -87,19 +87,19 @@
     justify-content: center;
 }
 
-.info-item {
+.number-line-lab .info-item {
     display: flex;
     align-items: center;
     gap: var(--space-3);
     font-size: var(--text-lg);
 }
 
-.info-label {
+.number-line-lab .info-label {
     font-weight: 700;
     color: var(--color-text-secondary, #94a3b8);
 }
 
-.fraction-display {
+.number-line-lab .fraction-display {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -109,25 +109,25 @@
     color: var(--color-primary);
 }
 
-.fraction-display .numerator {
+.number-line-lab .fraction-display .numerator {
     border-bottom: 2px solid currentColor;
     padding: 0 var(--space-2);
 }
 
-.fraction-display .denominator {
+.number-line-lab .fraction-display .denominator {
     padding: 0 var(--space-2);
 }
 
 @media (max-width: 640px) {
-    .lab-controls {
+    .number-line-lab .lab-controls {
         grid-template-columns: 1fr;
     }
 
-    .canvas-container {
+    .number-line-lab .canvas-container {
         padding: var(--space-4);
     }
 
-    .fraction-info {
+    .number-line-lab .fraction-info {
         flex-direction: column;
         align-items: center;
     }

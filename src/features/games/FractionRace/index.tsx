@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
 import { useGameState } from './hooks/useGameState'
 import { RaceTrack } from './components/RaceTrack'
 import { QuestionPanel } from './components/QuestionPanel'
@@ -10,12 +11,15 @@ import './FractionRace.css'
 
 export function FractionRace() {
     const { t } = useTranslation()
+    const location = useLocation()
+    const isDbh1 = location.pathname.includes('/dbh1/')
     const { state, startGame, answerQuestion, resetGame } = useGameState()
     const [selectedMode, setSelectedMode] = useState<GameMode>('addSub')
     const [selectedDifficultyIndex, setSelectedDifficultyIndex] = useState(0)
 
     const visibleLevels = useMemo(() => LEVELS.filter(l => l.gameMode === selectedMode), [selectedMode])
     const currentConfig = useMemo(() => visibleLevels[selectedDifficultyIndex] || visibleLevels[0], [visibleLevels, selectedDifficultyIndex])
+    const availableModes = useMemo(() => isDbh1 ? GAME_MODES.filter(m => m.id !== 'powers') : GAME_MODES, [isDbh1])
 
     // Menu screen
     if (state.phase === 'menu') {
@@ -34,7 +38,7 @@ export function FractionRace() {
                         </p>
 
                         <div className="mode-select">
-                            {GAME_MODES.map(mode => (
+                            {availableModes.map(mode => (
                                 <button
                                     key={mode.id}
                                     className={`mode-button ${selectedMode === mode.id ? 'active' : ''}`}

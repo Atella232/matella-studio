@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Notación Científica - Potencias y Raíces" data-lang-eu="Notazio Zientifikoa - Berreketak eta Erroak">Notación Científica - Potencias y Raíces</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-atom"></i>
+            <span data-lang-es="Notación Científica" data-lang-eu="Notazio Zientifikoa">Notación Científica</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="action-buttons">
+            <button class="action-button" data-lang-es="Ejercicios" data-lang-eu="Ariketa">
+                <i class="fas fa-pencil-alt"></i>
+                <span>Ejercicios</span>
+            </button>
+            <button class="action-button" data-lang-es="Herramienta" data-lang-eu="Tresna">
+                <i class="fas fa-tools"></i>
+                <span>Herramienta</span>
+            </button>
+        </div>
+
+        <h2 class="page-title" data-lang-es="Notación Científica" data-lang-eu="Notazio Zientifikoa">Notación Científica</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es la Notación Científica?" data-lang-eu="Zer da Notazio Zientifikoa?">¿Qué es la Notación Científica?</h3>
+            <p data-lang-es="La notación científica es una forma de escribir números muy grandes o muy pequeños de manera más compacta y fácil de manejar. Se utiliza mucho en ciencias como la física, química y astronomía."
+               data-lang-eu="Notazio zientifikoa oso zenbaki handiak edo txikiak modu trinkoagoan eta maneiatzeko errazagoan idazteko modu bat da. Fisika, kimika eta astronomia bezalako zientzietan asko erabiltzen da.">
+               La notación científica es una forma de escribir números muy grandes o muy pequeños de manera más compacta y fácil de manejar. Se utiliza mucho en ciencias como la física, química y astronomía.
+            </p>
+            <div class="formula-card">
+                <p><strong data-lang-es="Definición:" data-lang-eu="Definizioa:">Definición:</strong></p>
+                <div class="math-display">\[ a \times 10^n \]</div>
+                <p class="key-takeaway">
+                    <span data-lang-es="donde $1 \leq |a| < 10$ y $n$ es un número entero"
+                          data-lang-eu="non $1 \leq |a| < 10$ eta $n$ zenbaki oso bat den">
+                        donde $1 \leq |a| < 10$ y $n$ es un número entero
+                    </span>
+                </p>
+            </div>
+            <p class="example" data-lang-es="<b>Por ejemplo:</b><br>- La velocidad de la luz: $3 \times 10^8$ m/s<br>- El tamaño de un virus: $1 \times 10^{-7}$ m"
+               data-lang-eu="<b>Adibidez:</b><br>- Argiaren abiadura: $3 \times 10^8$ m/s<br>- Birus baten tamaina: $1 \times 10^{-7}$ m">
+               <b>Por ejemplo:</b><br>- La velocidad de la luz: $3 \times 10^8$ m/s<br>- El tamaño de un virus: $1 \times 10^{-7}$ m
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Cómo Escribir un Número en Notación Científica?" data-lang-eu="Nola Idatzi Zenbaki bat Notazio Zientifikoan?">¿Cómo Escribir un Número en Notación Científica?</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-arrow-up icon-concept"></i>
+                        <span data-lang-es="Números mayores que 1" data-lang-eu="1 baino handiagoak diren zenbakiak">Números mayores que 1</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Movemos la coma decimal hacia la izquierda hasta tener un número entre 1 y 10. El exponente de 10 será el número de posiciones que movimos la coma."
+                           data-lang-eu="Komaz arrunkari ezkerrera mugitzen diogu 1 eta 10 artean zenbaki bat izan arte. 10 esponentekoa komak mugitzen ditugun posizio kopurua izango da.">
+                           Movemos la coma decimal hacia la izquierda hasta tener un número entre 1 y 10. El exponente de 10 será el número de posiciones que movimos la coma.
+                        </p>
+                        <div class="example">
+                            <p data-lang-es="<strong>Ejemplo:</strong> $6500 = 6.5 \times 10^3$"
+                               data-lang-eu="<strong>Adibidea:</strong> $6500 = 6.5 \times 10^3$">
+                               <strong>Ejemplo:</strong> $6500 = 6.5 \times 10^3$
+                            </p>
+                            <p data-lang-es="Movemos la coma 3 posiciones: $6500 = 6.5 \times 10^3$"
+                               data-lang-eu="Komaz 3 posizio mugitzen dugu: $6500 = 6.5 \times 10^3$">
+                               Movemos la coma 3 posiciones: $6500 = 6.5 \times 10^3$
+                            </p>
+                        </div>
+                        <div class="example">
+                            <p data-lang-es="<strong>Ejemplo:</strong> $123000000 = 1.23 \times 10^8$"
+                               data-lang-eu="<strong>Adibidea:</strong> $123000000 = 1.23 \times 10^8$">
+                               <strong>Ejemplo:</strong> $123000000 = 1.23 \times 10^8$
+                            </p>
+                            <p data-lang-es="Movemos la coma 8 posiciones: $123000000 = 1.23 \times 10^8$"
+                               data-lang-eu="Komaz 8 posizio mugitzen dugu: $123000000 = 1.23 \times 10^8$">
+                               Movemos la coma 8 posiciones: $123000000 = 1.23 \times 10^8$
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-arrow-down icon-concept"></i>
+                        <span data-lang-es="Números menores que 1" data-lang-eu="1 baino txikiagoak diren zenbakiak">Números menores que 1</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Movemos la coma decimal hacia la derecha hasta tener un número entre 1 y 10. El exponente de 10 será negativo y será el número de posiciones que movimos la coma."
+                           data-lang-eu="Komaz arrunkari eskuinera mugitzen diogu 1 eta 10 artean zenbaki bat izan arte. 10 esponentekoa negatiboa izango da eta komak mugitzen ditugun posizio kopurua izango da.">
+                           Movemos la coma decimal hacia la derecha hasta tener un número entre 1 y 10. El exponente de 10 será negativo y será el número de posiciones que movimos la coma.
+                        </p>
+                        <div class="example">
+                            <p data-lang-es="<strong>Ejemplo:</strong> $0.005 = 5 \times 10^{-3}$"
+                               data-lang-eu="<strong>Adibidea:</strong> $0.005 = 5 \times 10^{-3}$">
+                               <strong>Ejemplo:</strong> $0.005 = 5 \times 10^{-3}$
+                            </p>
+                            <p data-lang-es="Movemos la coma 3 posiciones: $0.005 = 5 \times 10^{-3}$"
+                               data-lang-eu="Komaz 3 posizio mugitzen dugu: $0.005 = 5 \times 10^{-3}$">
+                               Movemos la coma 3 posiciones: $0.005 = 5 \times 10^{-3}$
+                            </p>
+                        </div>
+                        <div class="example">
+                            <p data-lang-es="<strong>Ejemplo:</strong> $0.000000123 = 1.23 \times 10^{-7}$"
+                               data-lang-eu="<strong>Adibidea:</strong> $0.000000123 = 1.23 \times 10^{-7}$">
+                               <strong>Ejemplo:</strong> $0.000000123 = 1.23 \times 10^{-7}$
+                            </p>
+                            <p data-lang-es="Movemos la coma 7 posiciones: $0.000000123 = 1.23 \times 10^{-7}$"
+                               data-lang-eu="Komaz 7 posizio mugitzen dugu: $0.000000123 = 1.23 \times 10^{-7}$">
+                               Movemos la coma 7 posiciones: $0.000000123 = 1.23 \times 10^{-7}$
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Operaciones con Notación Científica" data-lang-eu="Notazio Zientifikoarekin Eragiketak">Operaciones con Notación Científica</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-times icon-concept"></i>
+                        <span data-lang-es="Multiplicación" data-lang-eu="Biderketa">Multiplicación</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Para multiplicar números en notación científica: multiplicamos las partes decimales y sumamos los exponentes."
+                           data-lang-eu="Notazio zientifikoan zenbakiak biderkatzeko: hamartarreko zatia biderkatzen dugu eta esponentekoak batzen ditugu.">
+                           Para multiplicar números en notación científica: multiplicamos las partes decimales y sumamos los exponentes.
+                        </p>
+                        <div class="formula-card">
+                            <div class="math-display">\[ (a \times 10^m) \times (b \times 10^n) = (a \times b) \times 10^{m+n} \]</div>
+                            <p class="example" data-lang-es="<strong>Ejemplo:</strong> $(3 \times 10^5) \times (2 \times 10^3) = (3 \times 2) \times 10^{5+3} = 6 \times 10^8$"
+                               data-lang-eu="<strong>Adibidea:</strong> $(3 \times 10^5) \times (2 \times 10^3) = (3 \times 2) \times 10^{5+3} = 6 \times 10^8$">
+                               <strong>Ejemplo:</strong> $(3 \times 10^5) \times (2 \times 10^3) = (3 \times 2) \times 10^{5+3} = 6 \times 10^8$
+                            </p>
+                        </div>
+                        <div class="example">
+                            <p data-lang-es="<strong>Otro ejemplo:</strong> $(2.5 \times 10^{-3}) \times (4 \times 10^2) = 10 \times 10^{-1} = 1 \times 10^0 = 1$"
+                               data-lang-eu="<strong>Beste adibidea:</strong> $(2.5 \times 10^{-3}) \times (4 \times 10^2) = 10 \times 10^{-1} = 1 \times 10^0 = 1$">
+                               <strong>Otro ejemplo:</strong> $(2.5 \times 10^{-3}) \times (4 \times 10^2) = 10 \times 10^{-1} = 1 \times 10^0 = 1$
+                            </p>
+                            <p data-lang-es="Necesitamos normalizar: $10 \times 10^{-1} = 1 \times 10^1 \times 10^{-1} = 1 \times 10^0 = 1$"
+                               data-lang-eu="Normalizatu behar dugu: $10 \times 10^{-1} = 1 \times 10^1 \times 10^{-1} = 1 \times 10^0 = 1$">
+                               Necesitamos normalizar: $10 \times 10^{-1} = 1 \times 10^1 \times 10^{-1} = 1 \times 10^0 = 1$
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-divide icon-concept"></i>
+                        <span data-lang-es="División" data-lang-eu="Zatiketa">División</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Para dividir números en notación científica: dividimos las partes decimales y restamos los exponentes."
+                           data-lang-eu="Notazio zientifikoan zenbakiak zatitzeko: hamartarreko zatia zatitzen dugu eta esponentekoak kentzen ditugu.">
+                           Para dividir números en notación científica: dividimos las partes decimales y restamos los exponentes.
+                        </p>
+                        <div class="formula-card">
+                            <div class="math-display">\[ (a \times 10^m) \div (b \times 10^n) = \frac{a}{b} \times 10^{m-n} \]</div>
+                            <p class="example" data-lang-es="<strong>Ejemplo:</strong> $(8 \times 10^6) \div (2 \times 10^3) = \frac{8}{2} \times 10^{6-3} = 4 \times 10^3$"
+                               data-lang-eu="<strong>Adibidea:</strong> $(8 \times 10^6) \div (2 \times 10^3) = \frac{8}{2} \times 10^{6-3} = 4 \times 10^3$">
+                               <strong>Ejemplo:</strong> $(8 \times 10^6) \div (2 \times 10^3) = \frac{8}{2} \times 10^{6-3} = 4 \times 10^3$
+                            </p>
+                        </div>
+                        <div class="example">
+                            <p data-lang-es="<strong>Ejemplo:</strong> $(9 \times 10^{-2}) \div (3 \times 10^{-5}) = 3 \times 10^{3} = 3000$"
+                               data-lang-eu="<strong>Adibidea:</strong> $(9 \times 10^{-2}) \div (3 \times 10^{-5}) = 3 \times 10^{3} = 3000$">
+                               <strong>Ejemplo:</strong> $(9 \times 10^{-2}) \div (3 \times 10^{-5}) = 3 \times 10^{3} = 3000$
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-plus icon-concept"></i>
+                        <span data-lang-es="Suma y Resta" data-lang-eu="Batura eta Kenketa">Suma y Resta</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Para sumar o restar números en notación científica, primero deben tener el mismo exponente de 10. Si no lo tienen, factorizamos para igualarlos."
+                           data-lang-eu="Notazio zientifikoan zenbakiak batzeko edo kentzeko, lehenengo 10 esponenteko berbera izan behar dute. Ez badute, faktoreizatzen ditugu berdintzeko.">
+                           Para sumar o restar números en notación científica, primero deben tener el mismo exponente de 10. Si no lo tienen, factorizamos para igualarlos.
+                        </p>
+                        <div class="formula-card">
+                            <p class="example" data-lang-es="<strong>Ejemplo:</strong> $(3 \times 10^4) + (5 \times 10^4) = (3 + 5) \times 10^4 = 8 \times 10^4$"
+                               data-lang-eu="<strong>Adibidea:</strong> $(3 \times 10^4) + (5 \times 10^4) = (3 + 5) \times 10^4 = 8 \times 10^4$">
+                               <strong>Ejemplo:</strong> $(3 \times 10^4) + (5 \times 10^4) = (3 + 5) \times 10^4 = 8 \times 10^4$
+                            </p>
+                        </div>
+                        <div class="example">
+                            <p data-lang-es="<strong>Ejemplo diferente:</strong> $(2 \times 10^3) + (5 \times 10^2)$"
+                               data-lang-eu="<strong>Adibide desberdina:</strong> $(2 \times 10^3) + (5 \times 10^2)$">
+                               <strong>Ejemplo diferente:</strong> $(2 \times 10^3) + (5 \times 10^2)$
+                            </p>
+                            <p data-lang-es="Transformamos: $(2 \times 10^3) + (0.5 \times 10^3) = (2 + 0.5) \times 10^3 = 2.5 \times 10^3$"
+                               data-lang-eu="-transformatzen dugu: $(2 \times 10^3) + (0.5 \times 10^3) = (2 + 0.5) \times 10^3 = 2.5 \times 10^3$">
+                               Transformamos: $(2 \times 10^3) + (0.5 \times 10^3) = (2 + 0.5) \times 10^3 = 2.5 \times 10^3$
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Aplicaciones en la Vida Real" data-lang-eu="Bizitza Errealean Aplikazioak">Aplicaciones en la Vida Real</h3>
+            <p data-lang-es="La notación científica es fundamental en muchas áreas científicas. Veamos algunos ejemplos:"
+               data-lang-eu="Notazio zientifikoa funtsezkoa da arlo zientifiko askotan. Ikus ditzagun zenbait adibide:">
+               La notación científica es fundamental en muchas áreas científicas. Veamos algunos ejemplos:
+            </p>
+            
+            <div class="info-cards">
+                <div class="card-style">
+                    <h4><i class="fas fa-lightbulb"></i> <span data-lang-es="Astronomía" data-lang-eu="Astronomia">Astronomía</span></h4>
+                    <ul>
+                        <li><strong data-lang-es="Distancia Tierra-Sol:" data-lang-eu="Lurraren eta Eguzkiaren arteko distantzia:">Distancia Tierra-Sol:</strong> $1.5 \times 10^{11}$ m</li>
+                        <li><strong data-lang-es="Masa del Sol:" data-lang-eu="Eguzkiaren masa:">Masa del Sol:</strong> $2 \times 10^{30}$ kg</li>
+                        <li><strong data-lang-es="Edad del universo:" data-lang-eu="Unibertsoaren adina:">Edad del universo:</strong> $4.3 \times 10^{17}$ s</li>
+                    </ul>
+                </div>
+                
+                <div class="card-style">
+                    <h4><i class="fas fa-atom"></i> <span data-lang-es="Física Atómica" data-lang-eu="Fisika Atomikoa">Física Atómica</span></h4>
+                    <ul>
+                        <li><strong data-lang-es="Radio del átomo de hidrógeno:" data-lang-eu="Hidrogeno atomoaren erradioa:">Radio del átomo de hidrógeno:</strong> $5.3 \times 10^{-11}$ m</li>
+                        <li><strong data-lang-es="Masa del electrón:" data-lang-eu="Elektroiaren masa:">Masa del electrón:</strong> $9.1 \times 10^{-31}$ kg</li>
+                        <li><strong data-lang-es="Constante de Planck:" data-lang-eu="Planck-en konstantea:">Constante de Planck:</strong> $6.6 \times 10^{-34}$ J·s</li>
+                    </ul>
+                </div>
+                
+                <div class="card-style">
+                    <h4><i class="fas fa-dna"></i> <span data-lang-es="Biología" data-lang-eu="Biologia">Biología</span></h4>
+                    <ul>
+                        <li><strong data-lang-es="Diámetro del ADN:" data-lang-eu="ADN-aren diametroa:">Diámetro del ADN:</strong> $2 \times 10^{-9}$ m</li>
+                        <li><strong data-lang-es="Número de células en el cuerpo humano:" data-lang-eu="Giza gorputzeko zelula kopurua:">Número de células en el cuerpo humano:</strong> $3.7 \times 10^{13}$</li>
+                        <li><strong data-lang-es="Bacteria promedio:" data-lang-eu="Bakterio baten tamaina:">Bacteria promedio:</strong> $1 \times 10^{-6}$ m</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="⚠️ Errores Típicos" data-lang-eu="⚠️ Ohiko Akatsak">⚠️ Errores Típicos</h3>
+            <p data-lang-es="¡Atención! Evita estos errores comunes:"
+               data-lang-eu="Kontuz! Akats arrunt hauek ekidin:">
+               ¡Atención! Evita estos errores comunes:
+            </p>
+            
+            <div class="warning-box">
+                <div class="error-item">
+                    <i class="fas fa-times-circle error-icon"></i>
+                    <div class="error-content">
+                        <p data-lang-es="No normalizar después de operar" data-lang-eu="Ez normalizatzea eragiketa ondoren">No normalizar después de operar</p>
+                        <p data-lang-es="<strong>INCORRECTO:</strong> $5 \times 10^2 + 3 \times 10^2 = 8 \times 10^2$ (¡correcto!)"
+                           data-lang-eu="<strong>OKERRA:</strong> $5 \times 10^2 + 3 \times 10^2 = 8 \times 10^2$ (¡zuzena!)">
+                           <strong>INCORRECTO:</strong> $5 \times 10^2 + 3 \times 10^2 = 8 \times 10^2$ (¡correcto!)
+                        </p>
+                        <p data-lang-es="<strong>PERO si obtenemos:</strong> $25 \times 10^3$ → Normalizar a $2.5 \times 10^4$"
+                           data-lang-eu="<strong>BAINA lortzen badugu:</strong> $25 \times 10^3$ → Normalizatu $2.5 \times 10^4$-ra">
+                           <strong>PERO si obtenemos:</strong> $25 \times 10^3$ → Normalizar a $2.5 \times 10^4$
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="error-item">
+                    <i class="fas fa-times-circle error-icon"></i>
+                    <div class="error-content">
+                        <p data-lang-es="Confundir el orden de magnitud" data-lang-eu="Magnitude ordenarekin nahastea">Confundir el orden de magnitud</p>
+                        <p data-lang-es="<strong>INCORRECTO:</strong> $0.00001 = 1 \times 10^5$"
+                           data-lang-eu="<strong>OKERRA:</strong> $0.00001 = 1 \times 10^5$">
+                           <strong>INCORRECTO:</strong> $0.00001 = 1 \times 10^5$
+                        </p>
+                        <p data-lang-es="<strong>CORRECTO:</strong> $0.00001 = 1 \times 10^{-5}$ (cinco posiciones a la derecha)"
+                           data-lang-eu="<strong>ZUZENA:</strong> $0.00001 = 1 \times 10^{-5}$ (bost posizio eskuinera)">
+                           <strong>CORRECTO:</strong> $0.00001 = 1 \times 10^{-5}$ (cinco posiciones a la derecha)
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="error-item">
+                    <i class="fas fa-times-circle error-icon"></i>
+                    <div class="error-content">
+                        <p data-lang-es="Sumar/restar sin igualar exponentes" data-lang-eu="Esponentekoak berdindu gabe batzea/kentzea">Sumar/restar sin igualar exponentes</p>
+                        <p data-lang-es="<strong>INCORRECTO:</strong> $2 \times 10^3 + 3 \times 10^2 = 5 \times 10^5$"
+                           data-lang-eu="<strong>OKERRA:</strong> $2 \times 10^3 + 3 \times 10^2 = 5 \times 10^5$">
+                           <strong>INCORRECTO:</strong> $2 \times 10^3 + 3 \times 10^2 = 5 \times 10^5$
+                        </p>
+                        <p data-lang-es="<strong>CORRECTO:</strong> $2 \times 10^3 + 0.3 \times 10^3 = 2.3 \times 10^3$"
+                           data-lang-eu="<strong>ZUZENA:</strong> $2 \times 10^3 + 0.3 \times 10^3 = 2.3 \times 10^3$">
+                           <strong>CORRECTO:</strong> $2 \times 10^3 + 0.3 \times 10^3 = 2.3 \times 10^3$
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

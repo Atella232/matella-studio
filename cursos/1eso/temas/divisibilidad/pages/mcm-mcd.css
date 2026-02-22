@@ -1,0 +1,213 @@
+/* =============================================== */
+/* ====== ESTILOS VISUALES PARA MCM Y MCD ====== */
+/* =============================================== */
+
+/* --- Contenedor Principal de Factorización --- */
+.factorization-visual-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: var(--button-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    flex-wrap: wrap;
+}
+
+/* --- Proceso de Factorización (línea vertical) --- */
+.factorization-process {
+    display: inline-flex; /* Usamos flex para alinear las dos columnas */
+    font-size: 1.2em;
+    font-family: monospace;
+}
+
+.numbers-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Alinea los números a la derecha */
+    padding-right: 1rem;
+    border-right: 2px solid var(--secondary-color); /* La línea ahora está aquí */
+}
+
+.divisors-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea los divisores a la izquierda */
+    padding-left: 1rem;
+}
+
+.numbers-column span {
+    padding: 0.2rem 0;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.numbers-column span.final {
+    color: var(--primary-color);
+}
+
+.divisors-column span {
+    padding: 0.2rem 0;
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+/* --- Resultado de la Factorización --- */
+.factorization-result {
+    text-align: center;
+}
+.factorization-result .fa-arrow-right {
+    font-size: 2em;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+.factorization-result p {
+    font-size: 0.9em;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+    max-width: 250px;
+}
+.final-expression {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: var(--text-color);
+    background-color: var(--card-bg);
+    padding: 0.5em 1em;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+.final-expression b {
+    color: var(--primary-color);
+}
+
+/* --- Grid para ejemplos de cálculo --- */
+.calculation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+    justify-items: center;
+}
+.factor-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+.original-number {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--primary-color);
+    background-color: var(--button-bg);
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+}
+
+/* --- Mini-diagrama de factorización también corregido --- */
+.factorization-process-small {
+    display: inline-flex;
+    font-family: monospace;
+    font-size: 1em;
+}
+.factorization-process-small .numbers-column {
+    padding-right: 0.8rem;
+    border-right-width: 2px;
+}
+.factorization-process-small .divisors-column {
+    padding-left: 0.8rem;
+}
+.factorization-process-small .numbers-column span,
+.factorization-process-small .divisors-column span {
+    padding: 0;
+}
+
+.final-expression-small {
+    font-size: 1.1em;
+    font-weight: bold;
+    background-color: var(--button-bg);
+    padding: 0.4em 0.8em;
+    border-radius: 4px;
+}
+
+/* --- Reglas y Selección de Factores --- */
+.rule-box {
+    margin-top: 1rem;
+    padding: 0.2rem 1.5rem;
+    border-radius: 8px;
+    border-left-width: 5px;
+    border-left-style: solid;
+}
+.rule-box.mcm {
+    background-color: rgba(0, 122, 90, 0.1);
+    border-left-color: var(--secondary-color);
+}
+.rule-box.mcd {
+    background-color: rgba(97, 31, 105, 0.1);
+    border-left-color: var(--primary-color);
+}
+.rule-box p { font-size: 1.05em; margin-bottom: 0.8em !important; }
+
+.selection-visual {
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border: 1px dashed var(--border-color);
+    border-radius: 8px;
+    max-width: 600px;
+}
+.selection-step {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.1em;
+    padding: 0.5rem 0;
+    flex-wrap: wrap;
+}
+.selection-step .step-label {
+    font-weight: bold;
+    color: var(--text-color);
+    opacity: 0.9;
+    min-width: 150px;
+}
+.factor-option {
+    background-color: var(--button-bg);
+    padding: 0.2em 0.6em;
+    border-radius: 4px;
+}
+.selection-step .fa-arrow-right {
+    color: var(--text-color);
+    opacity: 0.6;
+}
+.selected-factor {
+    font-weight: bold;
+    padding: 0.3em 0.7em;
+    border-radius: 4px;
+    color: white;
+}
+.selected-factor.mcm { background-color: var(--secondary-color); }
+.selected-factor.mcd { background-color: var(--primary-color); }
+
+/* --- Cálculo Final --- */
+.final-calculation {
+    text-align: center;
+    font-size: 1.3em;
+    margin-top: 1.5rem;
+    padding: 1.2rem;
+    background-color: var(--button-bg);
+    border-radius: 8px;
+}
+.final-calculation .calc-part {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+.final-calculation .final-result {
+    font-weight: bold;
+    color: var(--secondary-color);
+    font-size: 1.2em;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 0.1em;
+}

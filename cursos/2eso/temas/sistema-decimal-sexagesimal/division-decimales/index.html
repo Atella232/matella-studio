@@ -1,0 +1,449 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="División de números decimales" data-lang-eu="Zenbaki hamartarren zatiketa">División de números decimales</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <i class="fas fa-calculator"></i>
+      <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
+    </nav>
+  </header>
+  
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol>
+      <li><a href="../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
+      <li><a href="../index.html" data-lang-es="Sistema decimal y sexagesimal" data-lang-eu="Sistema hamartarra eta sexagesimala">Sistema decimal y sexagesimal</a></li>
+      <li class="active" aria-current="page"><span data-lang-es="División de números decimales" data-lang-eu="Zenbaki hamartarren zatiketa">División de números decimales</span></li>
+    </ol>
+  </nav>
+  
+  <main>
+    <h1 data-lang-es="División de números decimales" data-lang-eu="Zenbaki hamartarren zatiketa">División de números decimales</h1>
+    
+    <section class="content-section">
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="true">
+            <i class="fas fa-info-circle icon-concept"></i>
+            <span data-lang-es="¿Qué es la división de decimales?" data-lang-eu="Zer da hamartarren zatiketa?">¿Qué es la división de decimales?</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content" style="max-height: none;">
+            <p data-lang-es="La <strong>división de números decimales</strong> es una operación que nos permite repartir una cantidad decimal en partes iguales o encontrar cuántas veces cabe un número en otro." data-lang-eu="<strong>Zenbaki hamartarren zatiketa</strong> kantitate hamartar bat zati berdinetan banatzeko edo zenbaki bat beste batean zenbat aldiz sartzen den aurkitzeko aukera ematen digun eragiketa da.">La <strong>división de números decimales</strong> es una operación que nos permite repartir una cantidad decimal en partes iguales o encontrar cuántas veces cabe un número en otro.</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: Dividir 6,75 entre 2,25" data-lang-eu="Adibidea: 6,75 banatu 2,25en artean">Ejemplo: Dividir 6,75 entre 2,25</h4>
+              <p data-lang-es="Esto significa: ¿Cuántas veces cabe 2,25 en 6,75?" data-lang-eu="Honek esan nahi du: Zenbat aldiz sartzen da 2,25 6,75ean?">Esto significa: ¿Cuántas veces cabe 2,25 en 6,75?</p>
+              <div class="solution">
+                <strong data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</strong> 6,75 ÷ 2,25 = 3
+                <p data-lang-es="Porque 2,25 × 3 = 6,75" data-lang-eu="2,25 × 3 = 6,75 delako">Porque 2,25 × 3 = 6,75</p>
+              </div>
+            </div>
+
+            <div class="interactive-idea card-style">
+              <h4><i class="fas fa-lightbulb"></i> <span data-lang-es="Idea Interactiva" data-lang-eu="Ideia Interaktiboa">Idea Interactiva</span></h4>
+              <p data-lang-es="Imagina que tienes 6,75 euros y quieres repartirlos en grupos de 2,25 euros. ¿Cuántos grupos completos puedes hacer?" data-lang-eu="Imajinatu 6,75 euro dituzula eta 2,25 euroko taldeetan banatu nahi dituzula. Zenbat talde osatu ditzakezu?">Imagina que tienes 6,75 euros y quieres repartirlos en grupos de 2,25 euros. ¿Cuántos grupos completos puedes hacer?</p>
+              <div class="tool-objective">
+                <strong data-lang-es="Objetivo:" data-lang-eu="Helburua:">Objetivo:</strong> <span data-lang-es="Entender la división como reparto o agrupación" data-lang-eu="Ulertu zatiketa banaketa edo taldekatze gisa">Entender la división como reparto o agrupación</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-divide icon-concept"></i>
+            <span data-lang-es="Método de división" data-lang-eu="Zatiketaren metodoa">Método de división</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Para dividir números decimales, seguimos estos pasos:" data-lang-eu="Zenbaki hamartarrak banatzeko, urrats hauek jarraitzen ditugu:">Para dividir números decimales, seguimos estos pasos:</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: 8,4 ÷ 2,1" data-lang-eu="Adibidea: 8,4 ÷ 2,1">Ejemplo: 8,4 ÷ 2,1</h4>
+              <div class="solution">
+                <strong data-lang-es="Paso 1:" data-lang-eu="1. urratsa:">Paso 1:</strong> <span data-lang-es="Multiplicar dividendo y divisor por 10 hasta que el divisor sea entero" data-lang-eu="Biderkatu zatiketa eta zatitzailea 10ez zatitzailea osoa izan arte">Multiplicar dividendo y divisor por 10 hasta que el divisor sea entero</span>
+                <ul>
+                  <li><span>8,4 × 10 = 84</span></li>
+                  <li><span>2,1 × 10 = 21</span></li>
+                </ul>
+                <strong data-lang-es="Paso 2:" data-lang-eu="2. urratsa:">Paso 2:</strong> <span data-lang-es="Dividir los números enteros resultantes" data-lang-eu="Banatu emaitza diren zenbaki osoak">Dividir los números enteros resultantes</span>
+                <ul>
+                  <li><span>84 ÷ 21 = 4</span></li>
+                </ul>
+                <strong data-lang-es="Paso 3:" data-lang-eu="3. urratsa:">Paso 3:</strong> <span data-lang-es="El resultado es el mismo: 8,4 ÷ 2,1 = 4" data-lang-eu="Emaitza bera da: 8,4 ÷ 2,1 = 4">El resultado es el mismo: 8,4 ÷ 2,1 = 4</span>
+              </div>
+            </div>
+
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: 12,6 ÷ 0,3" data-lang-eu="Adibidea: 12,6 ÷ 0,3">Ejemplo: 12,6 ÷ 0,3</h4>
+              <div class="solution">
+                <strong data-lang-es="Paso 1:" data-lang-eu="1. urratsa:">Paso 1:</strong> <span data-lang-es="Multiplicar por 10 para eliminar el decimal del divisor" data-lang-eu="Biderkatu 10ez zatitzaileko hamartarra kentzeko">Multiplicar por 10 para eliminar el decimal del divisor</span>
+                <ul>
+                  <li><span>12,6 × 10 = 126</span></li>
+                  <li><span>0,3 × 10 = 3</span></li>
+                </ul>
+                <strong data-lang-es="Paso 2:" data-lang-eu="2. urratsa:">Paso 2:</strong> <span data-lang-es="Dividir: 126 ÷ 3 = 42" data-lang-eu="Banatu: 126 ÷ 3 = 42">Dividir: 126 ÷ 3 = 42</span>
+                <strong data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</strong> 12,6 ÷ 0,3 = 42
+              </div>
+            </div>
+
+            <div class="variable-diagram">
+              <strong data-lang-es="Regla de la división de decimales" data-lang-eu="Hamartarren zatiketaren araua">Regla de la división de decimales</strong>
+              <div class="split">
+                <div class="category">
+                  <strong data-lang-es="Paso 1" data-lang-eu="1. urratsa">Paso 1</strong>
+                  <div class="sub-split">
+                    <div class="sub-category" data-lang-es="Multiplicar por potencias de 10" data-lang-eu="Biderkatu 10en potentziekin">Multiplicar por potencias de 10</div>
+                    <div class="sub-category" data-lang-es="Hasta que el divisor sea entero" data-lang-eu="Zatitzailea osoa izan arte">Hasta que el divisor sea entero</div>
+                  </div>
+                </div>
+                <div class="category">
+                  <strong data-lang-es="Paso 2" data-lang-eu="2. urratsa">Paso 2</strong>
+                  <div class="sub-split">
+                    <div class="sub-category" data-lang-es="Dividir números enteros" data-lang-eu="Banatu zenbaki osoak">Dividir números enteros</div>
+                    <div class="sub-category" data-lang-es="Usar el método tradicional" data-lang-eu="Erabili metodo tradizionala">Usar el método tradicional</div>
+                  </div>
+                </div>
+                <div class="category">
+                  <strong data-lang-es="Paso 3" data-lang-eu="3. urratsa">Paso 3</strong>
+                  <div class="sub-split">
+                    <div class="sub-category" data-lang-es="El resultado es el mismo" data-lang-eu="Emaitza bera da">El resultado es el mismo</div>
+                    <div class="sub-category" data-lang-es="No cambia la respuesta" data-lang-eu="Ez da aldatzen erantzuna">No cambia la respuesta</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-calculator icon-concept"></i>
+            <span data-lang-es="División con cociente decimal" data-lang-eu="Zatiketa zatikiarekin">División con cociente decimal</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p>Cuando la división no es exacta, obtenemos un cociente decimal. En estos casos, podemos continuar dividiendo añadiendo ceros al dividendo.</p>
+            
+            <div class="example-solved">
+              <h4>Ejemplo: 7 ÷ 4</h4>
+              <div class="solution">
+                <strong>Paso 1:</strong> Dividir normalmente
+                <ul>
+                  <li><span>7 ÷ 4 = 1</span> (resto 3)</li>
+                </ul>
+                <strong>Paso 2:</strong> Añadir coma decimal y continuar
+                <ul>
+                  <li><span>7,0 ÷ 4 = 1,</span></li>
+                  <li><span>Bajar el 0: 30 ÷ 4 = 7</span> (resto 2)</li>
+                  <li><span>Bajar otro 0: 20 ÷ 4 = 5</span></li>
+                </ul>
+                <strong>Resultado:</strong> 7 ÷ 4 = 1,75
+              </div>
+            </div>
+
+            <div class="example-solved">
+              <h4>Ejemplo: 5,2 ÷ 3</h4>
+              <div class="solution">
+                <strong>Paso 1:</strong> Multiplicar por 10 para eliminar decimales
+                <ul>
+                  <li><span>5,2 × 10 = 52</span></li>
+                  <li><span>3 × 10 = 30</span></li>
+                </ul>
+                <strong>Paso 2:</strong> Dividir: 52 ÷ 30 = 1,733...
+                <strong>Resultado:</strong> 5,2 ÷ 3 ≈ 1,73
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-exclamation-triangle icon-concept"></i>
+            <span data-lang-es="Casos especiales" data-lang-eu="Kasu bereziak">Casos especiales</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p>Hay algunos casos especiales que debemos tener en cuenta:</p>
+            
+            <div class="example-solved">
+              <h4>División por números menores que 1</h4>
+              <div class="solution">
+                <strong>Ejemplo:</strong> 8 ÷ 0,5
+                <ul>
+                  <li><span>0,5 × 10 = 5</span></li>
+                  <li><span>8 × 10 = 80</span></li>
+                  <li><span>80 ÷ 5 = 16</span></li>
+                </ul>
+                <strong>Resultado:</strong> 8 ÷ 0,5 = 16
+                <p><strong>¡Importante!</strong> Al dividir por un número menor que 1, el resultado es mayor que el dividendo.</p>
+              </div>
+            </div>
+
+            <div class="example-solved">
+              <h4>División por números mayores que 1</h4>
+              <div class="solution">
+                <strong>Ejemplo:</strong> 6 ÷ 2,5
+                <ul>
+                  <li><span>2,5 × 10 = 25</span></li>
+                  <li><span>6 × 10 = 60</span></li>
+                  <li><span>60 ÷ 25 = 2,4</span></li>
+                </ul>
+                <strong>Resultado:</strong> 6 ÷ 2,5 = 2,4
+                <p><strong>¡Importante!</strong> Al dividir por un número mayor que 1, el resultado es menor que el dividendo.</p>
+              </div>
+            </div>
+
+            <div class="interactive-idea card-style">
+              <h4><i class="fas fa-lightbulb"></i> Idea Interactiva</h4>
+              <p>Piensa en la división como en repartir pizza: si divides 8 porciones entre 0,5 personas, cada persona recibe 16 porciones (porque 0,5 es media persona).</p>
+              <div class="tool-objective">
+                <strong>Objetivo:</strong> Entender por qué dividir por números pequeños da resultados grandes
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-calculator icon-concept"></i>
+            <span data-lang-es="Calculadora de división" data-lang-eu="Zatiketaren kalkulagailua">Calculadora de división</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p>Practica la división de decimales usando esta calculadora interactiva:</p>
+            
+            <div class="interactive-calculator">
+              <h5><i class="fas fa-divide"></i> Calculadora de División</h5>
+              <div class="calc-input">
+                <label for="dividendo-input">Dividendo:</label>
+                <textarea id="dividendo-input" placeholder="Ejemplo: 8.4"></textarea>
+                <label for="divisor-input">Divisor:</label>
+                <textarea id="divisor-input" placeholder="Ejemplo: 2.1"></textarea>
+              </div>
+              <div class="calc-buttons">
+                <button onclick="calcularDivision()">Calcular</button>
+                <button onclick="limpiarDivision()">Limpiar</button>
+              </div>
+              <div class="calc-results">
+                <h6>Resultado:</h6>
+                <p id="resultado-division"></p>
+                <h6>Proceso:</h6>
+                <p id="proceso-division"></p>
+                <h6>Verificación:</h6>
+                <p id="verificacion-division"></p>
+              </div>
+              <div class="calc-note">
+                <i class="fas fa-info-circle"></i> Usa punto (.) como separador decimal
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-list-ol icon-concept"></i>
+            <span data-lang-es="Ejercicios propuestos" data-lang-eu="Ariketak proposatuak">Ejercicios propuestos</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <ol class="exercises-list">
+              <li>
+                <p>Calcula: 12,6 ÷ 0,3</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> Ver pista
+                </button>
+                <div class="hint-content">
+                  <p>Multiplica ambos números por 10 para eliminar el decimal del divisor</p>
+                </div>
+              </li>
+              <li>
+                <p>Calcula: 8,4 ÷ 2,1</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> Ver pista
+                </button>
+                <div class="hint-content">
+                  <p>Multiplica por 10 para convertir ambos en números enteros</p>
+                </div>
+              </li>
+              <li>
+                <p>Calcula: 15 ÷ 0,5</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> Ver pista
+                </button>
+                <div class="hint-content">
+                  <p>Recuerda: dividir por 0,5 es lo mismo que multiplicar por 2</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  
+  <script>
+    // Funcionalidad para la calculadora de división
+    function calcularDivision() {
+      const dividendoInput = document.getElementById('dividendo-input').value.trim();
+      const divisorInput = document.getElementById('divisor-input').value.trim();
+      
+      if (!dividendoInput || !divisorInput) {
+        alert('Por favor, introduce tanto el dividendo como el divisor');
+        return;
+      }
+      
+      const dividendo = parseFloat(dividendoInput);
+      const divisor = parseFloat(divisorInput);
+      
+      if (isNaN(dividendo) || isNaN(divisor)) {
+        alert('Por favor, introduce números válidos');
+        return;
+      }
+      
+      if (divisor === 0) {
+        alert('No se puede dividir por cero');
+        return;
+      }
+      
+      const resultado = dividendo / divisor;
+      
+      // Mostrar resultado
+      document.getElementById('resultado-division').textContent = resultado.toFixed(4);
+      
+      // Mostrar proceso
+      let proceso = '';
+      if (divisor < 1) {
+        const factor = Math.pow(10, Math.ceil(-Math.log10(divisor)));
+        const dividendoNuevo = dividendo * factor;
+        const divisorNuevo = divisor * factor;
+        proceso = `Multiplicamos por ${factor}: ${dividendo} × ${factor} = ${dividendoNuevo}, ${divisor} × ${factor} = ${divisorNuevo}`;
+      } else if (divisor !== Math.floor(divisor)) {
+        const factor = Math.pow(10, (divisor.toString().split('.')[1] || '').length);
+        const dividendoNuevo = dividendo * factor;
+        const divisorNuevo = divisor * factor;
+        proceso = `Multiplicamos por ${factor}: ${dividendo} × ${factor} = ${dividendoNuevo}, ${divisor} × ${factor} = ${divisorNuevo}`;
+      } else {
+        proceso = `Divisor ya es entero, dividimos directamente: ${dividendo} ÷ ${divisor}`;
+      }
+      
+      document.getElementById('proceso-division').textContent = proceso;
+      
+      // Verificación
+      const verificacion = `${divisor} × ${resultado.toFixed(4)} = ${(divisor * resultado).toFixed(4)}`;
+      document.getElementById('verificacion-division').textContent = verificacion;
+    }
+    
+    function limpiarDivision() {
+      document.getElementById('dividendo-input').value = '';
+      document.getElementById('divisor-input').value = '';
+      document.getElementById('resultado-division').textContent = '';
+      document.getElementById('proceso-division').textContent = '';
+      document.getElementById('verificacion-division').textContent = '';
+    }
+    
+    // Funcionalidad para mostrar/ocultar pistas
+    function toggleHint(button) {
+      const hintContent = button.nextElementSibling;
+      const isVisible = hintContent.classList.contains('visible');
+      
+      if (isVisible) {
+        hintContent.classList.remove('visible');
+        button.classList.remove('open');
+      } else {
+        hintContent.classList.add('visible');
+        button.classList.add('open');
+      }
+    }
+    
+    // Inicialización cuando se carga la página
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof initTheme === 'function') {
+        initTheme(document.body, document.getElementById('theme-toggle'));
+      }
+      if (typeof initLanguage === 'function') {
+        initLanguage(document.documentElement, document.querySelectorAll('[data-lang-es], [data-lang-eu]'), document.getElementById('lang-toggle'));
+      }
+    });
+  </script>
+  
+  <!-- Botón flotante para volver arriba -->
+  <button id="back-to-top" aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <script>
+    // Configuración del botón de volver arriba
+    document.addEventListener('DOMContentLoaded', function() {
+      const backToTopButton = document.getElementById('back-to-top');
+      
+      // Mostrar/ocultar botón al hacer scroll
+      function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
+      }
+      
+      // Mostrar el botón después de cargar la página
+      setTimeout(toggleBackToTop, 100);
+      
+      // Escuchar el evento de scroll
+      window.addEventListener('scroll', toggleBackToTop);
+      
+      // Hacer scroll suave al hacer clic
+      backToTopButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

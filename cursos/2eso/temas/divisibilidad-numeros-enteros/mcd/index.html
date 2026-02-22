@@ -1,0 +1,525 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="Máximo Común Divisor (MCD)" data-lang-eu="Zatitzaile Komun Handiena (ZKH)">Máximo Común Divisor (MCD)</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <link rel="stylesheet" href="../math-formulas.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    /* Estilos para la calculadora de MCD y sus resultados */
+    .mcd-calculator-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem 1.5rem;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    .mcd-calculator-grid label {
+        font-weight: bold;
+        justify-self: end;
+    }
+    .mcd-calculator-grid input[type="number"] {
+        padding: 0.7rem;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        background-color: var(--card-bg);
+        color: var(--text-color);
+        width: 100%;
+    }
+    .mcd-calculator-grid .button-primary {
+        grid-column: 1 / -1; /* El botón ocupa ambas columnas */
+    }
+    #mcd-result-container {
+        margin-top: 1.5rem;
+        padding: 1rem;
+        border: 1px dashed var(--border-color);
+        border-radius: 8px;
+        background-color: var(--bg-color);
+        min-height: 50px;
+        transition: opacity 0.3s ease;
+    }
+    #mcd-result-container .result-success {
+      font-size: 1.3em;
+      font-weight: bold;
+      text-align: center;
+      color: var(--secondary-color);
+      margin-bottom: 1rem;
+    }
+    #mcd-result-container .result-error {
+      font-size: 1em;
+      text-align: center;
+      color: #a94442;
+    }
+    .mcd-steps-details {
+      border-top: 1px solid var(--border-color);
+      padding-top: 1rem;
+    }
+    .mcd-steps-details h5 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+    .mcd-step-method {
+      margin-bottom: 1rem;
+      padding: 0.8rem;
+      background-color: var(--card-bg);
+      border-radius: 6px;
+      font-size: 0.9em;
+      line-height: 1.6;
+    }
+    .mcd-step-method strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--secondary-color);
+    }
+    /* Responsividad para la calculadora */
+    @media (max-width: 480px) {
+      .mcd-calculator-grid {
+        grid-template-columns: 1fr;
+      }
+      .mcd-calculator-grid label {
+        justify-self: start;
+      }
+    }
+  </style>
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <a href="../../../../index.html" class="home-link">
+        <i class="fas fa-calculator"></i>
+        <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+      </a>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma"><i class="fas fa-language"></i> Euskara</button>
+    </nav>
+  </header>
+  
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol>
+      <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
+      <li><a href="../index.html" data-lang-es="Divisibilidad y números enteros" data-lang-eu="Zatigarritasuna eta Zenbaki Osoak">Divisibilidad y números enteros</a></li>
+      <li class="active" aria-current="page"><span data-lang-es="Máximo Común Divisor" data-lang-eu="Zatitzaile Komun Handiena">Máximo Común Divisor</span></li>
+    </ol>
+  </nav>
+  
+  <main>
+    <h1 class="page-title" data-lang-es="Máximo Común Divisor (MCD)" data-lang-eu="Zatitzaile Komun Handiena (ZKH)">Máximo Común Divisor (MCD)</h1>
+    
+    <section class="content-section">
+      <p data-lang-es="El <strong>Máximo Común Divisor (MCD)</strong> de dos o más números es el mayor número que los divide a todos de forma exacta. Es una herramienta fundamental para simplificar fracciones y resolver problemas de distribución y agrupamiento." data-lang-eu="Bi zenbakiren edo gehiagoren <strong>Zatitzaile Komun Handiena (ZKH)</strong>, zenbaki horiek guztiak zehatz zatitzen dituen zenbakirik handiena da. Funtsezko tresna da zatikiak sinplifikatzeko eta banaketa-arazoak ebazteko.">El <strong>Máximo Común Divisor (MCD)</strong> de dos o más números es el mayor número que los divide a todos de forma exacta. Es una herramienta fundamental para simplificar fracciones y resolver problemas de distribución y agrupamiento.</p>
+
+      <div class="accordion">
+        
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="true">
+            <span class="icon-concept"><i class="fas fa-question-circle"></i></span>
+            <span data-lang-es="Concepto Clave: ¿Qué es el MCD?" data-lang-eu="Gako Kontzeptua: Zer da ZKH?">Concepto Clave: ¿Qué es el MCD?</span>
+            <span class="icon-toggle"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="accordion-content" style="max-height: fit-content;">
+            <p data-lang-es="El <strong>Máximo Común Divisor</strong> de dos números, 'a' y 'b', es el mayor número natural que es divisor tanto de 'a' como de 'b' al mismo tiempo." data-lang-eu="'a' eta 'b' bi zenbakiren <strong>Zatitzaile Komun Handiena</strong> 'a' eta 'b' bien zatitzailea den zenbaki naturalik handiena da.">'a' eta 'b' bi zenbakiren <strong>Máximo Común Divisor</strong> 'a' eta 'b' bien zatitzailea den zenbaki naturalik handiena da.</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo Visual: MCD de 12 y 18" data-lang-eu="Adibide Bisuala: 12 eta 18ren ZKH">Ejemplo Visual: MCD de 12 y 18</h4>
+              <div class="solution">
+                <ul>
+                  <li><span data-lang-es="Divisores de 12:" data-lang-eu="12ren zatitzaileak:">Divisores de 12:</span> 1, 2, 3, 4, <strong>6</strong>, 12</li>
+                  <li><span data-lang-es="Divisores de 18:" data-lang-eu="18ren zatitzaileak:">Divisores de 18:</span> 1, 2, 3, <strong>6</strong>, 9, 18</li>
+                  <li><span data-lang-es="Divisores Comunes:" data-lang-eu="Zatitzaile Komunak:">Divisores Comunes:</span> 1, 2, 3, <strong>6</strong></li>
+                </ul>
+                <p data-lang-es="El mayor de los divisores comunes es 6. Por lo tanto:" data-lang-eu="Zatitzaile komunen artean handiena 6 da. Beraz:">El mayor de los divisores comunes es 6. Por lo tanto:</p>
+                <div class="math-result">
+                  <strong>MCD(12, 18) = 6</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="key-takeaway">
+              <p data-lang-es="<strong>Recuerda:</strong> Si dos números son primos entre sí (no comparten divisores aparte del 1), su MCD siempre será 1. Por ejemplo, MCD(8, 9) = 1." data-lang-eu="<strong>Gogoratu:</strong> Bi zenbaki elkarren artean lehenak badira (1a ez den beste zatitzailerik ez badute), haien ZKH beti 1 izango da. Adibidez, ZKH(8, 9) = 1."><strong>Recuerda:</strong> Si dos números son primos entre sí (no comparten divisores aparte del 1), su MCD siempre será 1. Por ejemplo, MCD(8, 9) = 1.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="icon-concept"><i class="fas fa-cogs"></i></span>
+            <span data-lang-es="Métodos para Calcular el MCD" data-lang-eu="ZKH Kalkulatzeko Metodoak">Métodos para Calcular el MCD</span>
+            <span class="icon-toggle"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Existen varios métodos para calcular el MCD. Aquí te mostramos los más importantes de forma interactiva:" data-lang-eu="ZKH kalkulatzeko hainbat metodo daude. Hemen garrantzitsuenak modu interaktiboan erakusten dizkizugu:">Existen varios métodos para calcular el MCD. Aquí te mostramos los más importantes de forma interactiva:</p>
+            
+            <ul class="tabs-nav">
+              <li><a class="tab-link active" href="#metodo-1" data-lang-es="Por Divisores" data-lang-eu="Zatitzaileen Bidez">Por Divisores</a></li>
+              <li><a class="tab-link" href="#metodo-2" data-lang-es="Factores Primos" data-lang-eu="Faktore Lehenak">Factores Primos</a></li>
+              <li><a class="tab-link" href="#metodo-3" data-lang-es="Algoritmo de Euclides" data-lang-eu="Euklidesen Algoritmoa">Algoritmo de Euclides</a></li>
+            </ul>
+
+            <div class="tabs-content">
+              <div id="metodo-1" class="tab-pane active">
+                <p data-lang-es="Consiste en listar todos los divisores de cada número, encontrar los que son comunes y elegir el mayor. Es ideal para números pequeños." data-lang-eu="Metodo honen bidez, zenbaki bakoitzaren zatitzaile guztiak zerrendatu, komunak direnak aurkitu, eta horien arteko handiena aukeratzen da. Zenbaki txikientzat aproposa da.">Consiste en listar todos los divisores de cada número, encontrar los que son comunes y elegir el mayor. Es ideal para números pequeños.</p>
+                <div class="example-solved">
+                  <h4 data-lang-es="Ejemplo: MCD(8, 12)" data-lang-eu="Adibidea: ZKH(8, 12)">Ejemplo: MCD(8, 12)</h4>
+                  <ul>
+                    <li><span data-lang-es="Divisores de 8:" data-lang-eu="8ren zatitzaileak:">Divisores de 8:</span> 1, 2, <strong>4</strong>, 8</li>
+                    <li><span data-lang-es="Divisores de 12:" data-lang-eu="12ren zatitzaileak:">Divisores de 12:</span> 1, 2, 3, <strong>4</strong>, 6, 12</li>
+                    <li><span data-lang-es="El mayor común es 4." data-lang-eu="Komun handiena 4 da.">El mayor común es 4.</span></li>
+                  </ul>
+                  <div class="math-result">
+                    <strong>MCD(8, 12) = 4</strong>
+                  </div>
+                </div>
+              </div>
+              <div id="metodo-2" class="tab-pane">
+                <p data-lang-es="Se descomponen ambos números en factores primos y se seleccionan los factores comunes elevados al menor exponente. Es muy eficaz para números grandes." data-lang-eu="Bi zenbakiak faktore lehenetan deskonposatzen dira eta faktore komunak berretzaile txikienarekin aukeratzen dira. Oso eraginkorra da zenbaki handientzat.">Se descomponen ambos números en factores primos y se seleccionan los factores comunes elevados al menor exponente. Es muy eficaz para números grandes.</p>
+                <div class="example-solved">
+                  <h4 data-lang-es="Ejemplo: MCD(24, 36)" data-lang-eu="Adibidea: ZKH(24, 36)">Ejemplo: MCD(24, 36)</h4>
+                  <ul>
+                    <li>$24 = 2^3 \cdot 3$</li>
+                    <li>$36 = 2^2 \cdot 3^2$</li>
+                  </ul>
+                   <p data-lang-es="Factores comunes con menor exponente: $2^2$ y $3^1$.<br>MCD(24, 36) = $2^2 \cdot 3 = 4 \cdot 3 = 12$." data-lang-eu="Berretzaile txikieneko faktore komunak: $2^2$ eta $3^1$.<br>ZKH(24, 36) = $2^2 \cdot 3 = 4 \cdot 3 = 12$.">Factores comunes con menor exponente: $2^2$ y $3^1$.<br>MCD(24, 36) = $2^2 \cdot 3 = 4 \cdot 3 = 12$.</p>
+                </div>
+              </div>
+              <div id="metodo-3" class="tab-pane">
+                <p data-lang-es="Este algoritmo se basa en divisiones sucesivas. Se divide el número mayor por el menor. Si el resto no es cero, se divide el divisor anterior por el resto, y así sucesivamente hasta que el resto sea cero. El último divisor no nulo es el MCD." data-lang-eu="Algoritmo hau ondoz ondoko zatiketetan oinarritzen da. Zenbaki handiena txikienarekin zatitzen da. Hondarra zero ez bada, aurreko zatitzailea hondarrarekin zatitzen da, prozesua errepikatuz hondarra zero izan arte. Zero ez den azken zatitzailea ZKH da.">Este algoritmo se basa en divisiones sucesivas. Se divide el número mayor por el menor. Si el resto no es cero, se divide el divisor anterior por el resto, y así sucesivamente hasta que el resto sea cero. El último divisor no nulo es el MCD.</p>
+                <div class="example-solved">
+                  <h4 data-lang-es="Ejemplo: MCD(48, 18)" data-lang-eu="Adibidea: ZKH(48, 18)">Ejemplo: MCD(48, 18)</h4>
+                  <ol>
+                      <li>$48 \div 18 = 2$ (resto $12$)</li>
+                      <li>$18 \div 12 = 1$ (resto $6$)</li>
+                      <li>$12 \div 6 = 2$ (resto $0$)</li>
+                  </ol>
+                  <p data-lang-es="El último divisor no nulo fue 6, por tanto:" data-lang-eu="Zero ez den azken zatitzailea 6 izan da, beraz:">El último divisor no nulo fue 6, por tanto:</p>
+                  <div class="math-result">
+                    <strong>MCD(48, 18) = 6</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="icon-concept"><i class="fas fa-puzzle-piece"></i></span>
+            <span data-lang-es="Aplicaciones Prácticas" data-lang-eu="Aplikazio Praktikoak">Aplicaciones Prácticas</span>
+            <span class="icon-toggle"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="accordion-content">
+             <p data-lang-es="El MCD no es solo un concepto teórico, ¡tiene usos muy importantes!" data-lang-eu="ZKH ez da soilik kontzeptu teoriko bat, oso erabilera garrantzitsuak ditu!">El MCD no es solo un concepto teórico, ¡tiene usos muy importantes!</p>
+            <div class="cards-container">
+              <div class="card">
+                <a href="javascript:void(0);">
+                  <div class="card-icon"><i class="fas fa-compress-alt"></i></div>
+                  <h3 data-lang-es="Simplificar Fracciones" data-lang-eu="Zatikiak Sinplifikatzea">Simplificar Fracciones</h3>
+                  <div class="summary">
+                    <p data-lang-es="Para reducir una fracción a su mínima expresión, dividimos el numerador y el denominador por su MCD." data-lang-eu="Zatiki bat ahalik eta gehien sinplifikatzeko, zenbakitzailea eta izendatzailea haien ZKH-rekin zatitzen ditugu.">Para reducir una fracción a su mínima expresión, dividimos el numerador y el denominador por su MCD.</p>
+                  </div>
+                </a>
+              </div>
+              <div class="card">
+                <a href="javascript:void(0);">
+                  <div class="card-icon"><i class="fas fa-boxes"></i></div>
+                  <h3 data-lang-es="Problemas de Reparto" data-lang-eu="Banaketa Arazoak">Problemas de Reparto</h3>
+                  <div class="summary">
+                    <p data-lang-es="Sirve para encontrar la forma de dividir diferentes cantidades en grupos iguales lo más grandes posible." data-lang-eu="Kantitate desberdinak ahalik eta talde berdintsu handienetan banatzeko modua aurkitzeko balio du.">Sirve para encontrar la forma de dividir diferentes cantidades en grupos iguales lo más grandes posible.</p>
+                  </div>
+                </a>
+              </div>
+              <div class="card">
+                <a href="javascript:void(0);">
+                  <div class="card-icon"><i class="fas fa-ruler-combined"></i></div>
+                  <h3 data-lang-es="Cálculo de Áreas" data-lang-eu="Azaleren Kalkulua">Cálculo de Áreas</h3>
+                  <div class="summary">
+                    <p data-lang-es="Permite encontrar la medida del lado de la baldosa cuadrada más grande posible para solar una superficie rectangular sin cortar ninguna." data-lang-eu="Gainazal laukizuzen bat lauzatu ahal izateko, baldosarik moztu gabe, erabil daitekeen baldosa karratu handienaren aldearen neurria aurkitzeko aukera ematen du.">Permite encontrar la medida del lado de la baldosa cuadrada más grande posible para solar una superficie rectangular sin cortar ninguna.</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="icon-concept"><i class="fas fa-calculator"></i></span>
+            <span data-lang-es="Calculadora Interactiva de MCD" data-lang-eu="ZKH-ren Kalkulagailu Interaktiboa">Calculadora Interactiva de MCD</span>
+            <span class="icon-toggle"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Introduce dos números para calcular su MCD y ver el proceso paso a paso con diferentes métodos." data-lang-eu="Sartu bi zenbaki haien ZKH kalkulatzeko eta prozesua urratsez urrats ikusteko metodo desberdinak erabiliz.">Introduce dos números para calcular su MCD y ver el proceso paso a paso con diferentes métodos.</p>
+            <div class="mcd-calculator-grid">
+              <label for="mcdNumber1" data-lang-es="Primer número:" data-lang-eu="Lehen zenbakia:">Primer número:</label>
+              <input type="number" id="mcdNumber1" data-placeholder-es="ej: 24" data-placeholder-eu="adib: 24" min="1">
+              <label for="mcdNumber2" data-lang-es="Segundo número:" data-lang-eu="Bigarren zenbakia:">Segundo número:</label>
+              <input type="number" id="mcdNumber2" data-placeholder-es="ej: 36" data-placeholder-eu="adib: 36" min="1">
+              <button id="calculateMCDButton" class="button-primary">
+                <i class="fas fa-cogs"></i>
+                <span data-lang-es="Calcular MCD" data-lang-eu="ZKH Kalkulatu">Calcular MCD</span>
+              </button>
+            </div>
+            <div id="mcd-result-container"></div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="icon-concept"><i class="fas fa-vial"></i></span>
+            <span data-lang-es="¡Ponte a Prueba!" data-lang-eu="Jarri Proban!">¡Ponte a Prueba!</span>
+            <span class="icon-toggle"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="accordion-content">
+            <ol class="exercises-list">
+              <li>
+                <p data-lang-es="Calcula el MCD de 16 y 24." data-lang-eu="Kalkulatu 16 eta 24ren ZKH.">Calcula el MCD de 16 y 24.</p>
+                <button class="toggle-hint-button" data-target="hint1" aria-expanded="false">
+                  <span data-lang-es="Mostrar Pista" data-lang-es-hide="Ocultar Pista" data-lang-eu="Pista Erakutsi" data-lang-eu-hide="Pista Ezkutatu">Mostrar Pista</span><i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="hint-content" id="hint1">
+                  <p data-lang-es="Prueba con el método de descomposición en factores primos: $16 = 2^4$ y $24 = 2^3 \cdot 3$. ¿Cuáles son los factores comunes con el menor exponente?" data-lang-eu="Saiatu faktore lehenetan deskonposatzearen metodoarekin: $16 = 2^4$ eta $24 = 2^3 \cdot 3$. Zeintzuk dira berretzaile txikiena duten faktore komunak?">Prueba con el método de descomposición en factores primos: $16 = 2^4$ y $24 = 2^3 \cdot 3$. ¿Cuáles son los factores comunes con el menor exponente?</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="Calcula el MCD de 45 y 75." data-lang-eu="Kalkulatu 45 eta 75ren ZKH.">Calcula el MCD de 45 y 75.</p>
+                <button class="toggle-hint-button" data-target="hint2" aria-expanded="false">
+                   <span data-lang-es="Mostrar Pista" data-lang-es-hide="Ocultar Pista" data-lang-eu="Pista Erakutsi" data-lang-eu-hide="Pista Ezkutatu">Mostrar Pista</span><i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="hint-content" id="hint2">
+                  <p data-lang-es="Ambos números son divisibles por 3 y por 5. Descomponlos para encontrar la respuesta." data-lang-eu="Bi zenbakiak 3z eta 5ez zatigarriak dira. Deskonposatu itzazu erantzuna aurkitzeko.">Ambos números son divisibles por 3 y por 5. Descomponlos para encontrar la respuesta.</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="Un carpintero quiere cortar una plancha de madera de 256 cm de largo y 96 cm de ancho en cuadrados lo más grandes posible. ¿Cuál debe ser la longitud del lado de cada cuadrado?" data-lang-eu="Arotz batek 256 cm-ko luzera eta 96 cm-ko zabalera duen egurrezko planxa bat ahalik eta karratu handienetan moztu nahi du. Zein izan behar da karratu bakoitzaren aldearen luzera?">Un carpintero quiere cortar una plancha de madera de 256 cm de largo y 96 cm de ancho en cuadrados lo más grandes posible. ¿Cuál debe ser la longitud del lado de cada cuadrado?</p>
+                <button class="toggle-hint-button" data-target="hint3" aria-expanded="false">
+                   <span data-lang-es="Mostrar Pista" data-lang-es-hide="Ocultar Pista" data-lang-eu="Pista Erakutsi" data-lang-eu-hide="Pista Ezkutatu">Mostrar Pista</span><i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="hint-content" id="hint3">
+                  <p data-lang-es="La solución es el MCD de las dos dimensiones de la plancha: MCD(256, 96)." data-lang-eu="Erantzuna planxaren bi dimentsioen ZKH da: ZKH(256, 96).">La solución es el MCD de las dos dimensiones de la plancha: MCD(256, 96).</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const num1Input = document.getElementById('mcdNumber1');
+      const num2Input = document.getElementById('mcdNumber2');
+      const calculateButton = document.getElementById('calculateMCDButton');
+      const resultContainer = document.getElementById('mcd-result-container');
+
+      // --- CORRECCIÃ“N: LÃ³gica local para las Pistas ---
+      const hintToggles = document.querySelectorAll('.toggle-hint-button');
+      hintToggles.forEach(button => {
+        const targetId = button.getAttribute('data-target');
+        const hintContent = document.getElementById(targetId);
+        
+        if (hintContent) {
+          // Aseguramos el estado inicial con todas las propiedades necesarias
+          hintContent.style.overflow = 'hidden';
+          hintContent.style.maxHeight = '0px';
+          hintContent.style.paddingTop = '0';
+          hintContent.style.paddingBottom = '0';
+          hintContent.style.marginTop = '0';
+          hintContent.style.opacity = '0';
+          hintContent.style.visibility = 'hidden';
+          hintContent.style.transition = 'all 0.4s ease-out';
+
+          button.addEventListener('click', () => {
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            
+            if (isExpanded) {
+              // Colapsar
+              hintContent.style.opacity = '0';
+              hintContent.style.maxHeight = '0px';
+              hintContent.style.paddingTop = '0';
+              hintContent.style.paddingBottom = '0';
+              hintContent.style.marginTop = '0';
+              // Esperar a que termine la transiciÃ³n para ocultarlo completamente
+              setTimeout(() => {
+                hintContent.style.visibility = 'hidden';
+              }, 400); // 400ms = 0.4s
+              button.setAttribute('aria-expanded', 'false');
+            } else {
+              // Expandir
+              hintContent.style.visibility = 'visible';
+              hintContent.style.opacity = '1';
+              hintContent.style.maxHeight = hintContent.scrollHeight + 'px';
+              hintContent.style.paddingTop = '0.8rem';
+              hintContent.style.paddingBottom = '0.8rem';
+              hintContent.style.marginTop = '0.5rem';
+              button.setAttribute('aria-expanded', 'true');
+            }
+            
+            // Actualizar el texto del botÃ³n
+            const span = button.querySelector('span');
+            if (span) {
+              const lang = document.documentElement.lang || 'es';
+              if (isExpanded) {
+                span.textContent = lang === 'es' ? 'Mostrar Pista' : 'Pista Erakutsi';
+              } else {
+                span.textContent = lang === 'es' ? 'Ocultar Pista' : 'Pista Ezkutatu';
+              }
+            }
+          });
+        }
+      });
+
+      const calculateMCD = () => {
+        const num1 = parseInt(num1Input.value);
+        const num2 = parseInt(num2Input.value);
+        
+        const lang = document.documentElement.lang || 'es';
+
+        if (isNaN(num1) || isNaN(num2) || num1 < 1 || num2 < 1) {
+          const errorMsg = lang === 'es' 
+            ? 'Por favor, introduce dos números enteros y positivos.' 
+            : 'Mesedez, sartu bi zenbaki oso eta positibo.';
+          resultContainer.innerHTML = `<p class="result-error">${errorMsg}</p>`;
+          return;
+        }
+        
+        const mcd = gcd(num1, num2);
+        const steps = getMCDSteps(num1, num2, lang);
+        
+        let resultHTML = `<p class="result-success">MCD(${num1}, ${num2}) = ${mcd}</p>`;
+        resultHTML += `<div class="mcd-steps-details">${steps}</div>`;
+        
+        resultContainer.innerHTML = resultHTML;
+      };
+
+      if (calculateButton) {
+        calculateButton.addEventListener('click', calculateMCD);
+      }
+      
+      // FunciÃ³n para calcular el MCD (algoritmo de Euclides)
+      function gcd(a, b) {
+        while (b) {
+          [a, b] = [b, a % b];
+        }
+        return a;
+      }
+
+      function getMCDSteps(a, b, lang) {
+        const titleText = lang === 'es' ? 'ExplicaciÃ³n Paso a Paso' : 'Urratsez Urratseko Azalpena';
+        let stepsHTML = `<h5>${titleText}</h5>`;
+
+        // MÃ©todo 1: DescomposiciÃ³n en factores primos
+        const factors1 = getPrimeFactors(a);
+        const factors2 = getPrimeFactors(b);
+        const mcdFactors = getMCDFactors(factors1, factors2);
+        stepsHTML += `<div class="mcd-step-method">
+                        <strong>${lang === 'es' ? 'MÃ©todo: Factores Primos' : 'Metodoa: Faktore Lehenak'}</strong>
+                        <span>$${a} = ${formatFactors(factors1)}$</span><br>
+                        <span>$${b} = ${formatFactors(factors2)}$</span><br>
+                        <span><strong>MCD</strong> = ${formatFactors(mcdFactors, true)} = <strong>${calculateFromFactors(mcdFactors)}</strong></span>
+                      </div>`;
+        
+        // MÃ©todo 2: Algoritmo de Euclides
+        let euclideanSteps = getEuclideanSteps(a, b, lang);
+        stepsHTML += `<div class="mcd-step-method">
+                        <strong>${lang === 'es' ? 'MÃ©todo: Algoritmo de Euclides' : 'Metodoa: Euklidesen Algoritmoa'}</strong>
+                        ${euclideanSteps}
+                      </div>`;
+
+        return stepsHTML;
+      }
+
+      function getPrimeFactors(num) {
+        const factors = {};
+        let d = 2;
+        while (num > 1) {
+          while (num % d === 0) {
+            factors[d] = (factors[d] || 0) + 1;
+            num /= d;
+          }
+          d++;
+        }
+        return factors;
+      }
+
+      function formatFactors(factorsMap, forMCD = false) {
+          if (Object.keys(factorsMap).length === 0) return '1';
+          return Object.entries(factorsMap)
+              .map(([base, exp]) => exp > 1 ? `${base}^${exp}` : base)
+              .join(' \\cdot ');
+      }
+
+      function getMCDFactors(factors1, factors2) {
+        const mcdFactors = {};
+        for (const factor in factors1) {
+          if (factors2[factor]) {
+            mcdFactors[factor] = Math.min(factors1[factor], factors2[factor]);
+          }
+        }
+        return mcdFactors;
+      }
+      
+      function calculateFromFactors(factorsMap) {
+        return Object.entries(factorsMap).reduce((acc, [base, exp]) => acc * (Math.pow(parseInt(base), exp)), 1);
+      }
+
+      function getEuclideanSteps(a, b, lang) {
+        let steps = '';
+        if (b > a) [a, b] = [b, a]; // Asegurar que a >= b
+        let currentA = a;
+        let currentB = b;
+        
+        while (currentB !== 0) {
+          const remainder = currentA % currentB;
+          steps += `<span>MCD(${currentA}, ${currentB}) &#8594; MCD(${currentB}, ${remainder})</span><br>`;
+          currentA = currentB;
+          currentB = remainder;
+        }
+        
+        steps += `<strong>${lang === 'es' ? 'Resultado Final' : 'Amaierako Emaitza'}: ${currentA}</strong>`;
+        return steps;
+      }
+    });
+  </script>
+</body>
+</html>

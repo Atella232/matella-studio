@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Cuerpos de Revolución - Cuerpos Geométricos" data-lang-eu="Erreguzio Gorputzak - Gorputz Geometrikoak">Cuerpos de Revolución - Cuerpos Geométricos</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+    <style>
+        .topic-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        .topic-button {
+            padding: 1rem 2rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .topic-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            background-color: var(--accent-color-dark);
+        }
+        .formula-box {
+            background-color: var(--section-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .warning-box {
+            background-color: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        .body-section {
+            border: 2px solid var(--accent-color-light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            background-color: rgba(var(--accent-color-rgb), 0.05);
+        }
+        .body-section h4 {
+            color: var(--accent-color);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-circle-notch"></i>
+            <span data-lang-es="Cuerpos de Revolución" data-lang-eu="Erreguzio Gorputzak">Cuerpos de Revolución</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <!-- Botones de Ejercicios y Herramienta -->
+    <div class="topic-buttons">
+        <button class="topic-button" data-lang-es="Ejercicios" data-lang-eu="Ariketak">
+            <i class="fas fa-pencil-alt"></i>
+            Ejercicios
+        </button>
+        <button class="topic-button" data-lang-es="Herramienta" data-lang-eu="Tresna">
+            <i class="fas fa-tools"></i>
+            Herramienta
+        </button>
+    </div>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Cuerpos de Revolución" data-lang-eu="Erreguzio Gorputzak">Cuerpos de Revolución</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué son los Cuerpos de Revolución?" data-lang-eu="Zer dira Erreguzio Gorputzak?">¿Qué son los Cuerpos de Revolución?</h3>
+            <p data-lang-es="Los cuerpos de revolución son sólidos geométricos que se obtienen al hacer girar una figura plana alrededor de un eje fijo. Son superficies generadas por la rotación de una línea (generatriz) alrededor de un eje."
+               data-lang-eu="Erreguzio gorputzak figura lau bat finko dagoen ardatzaren inguruan biraraziz lortzen diren gorputz geometriko solidoak dira. Generatriza izeneko lineak ardatzaren inguruko biraketak sortzen dituen gainazalak dira.">
+               Los cuerpos de revolución son sólidos geométricos que se obtienen al hacer girar una figura plana alrededor de un eje fijo. Son superficies generadas por la rotación de una línea (generatriz) alrededor de un eje.
+            </p>
+            <p class="key-takeaway" data-lang-es="<b>Características principales:</b> Se forman por la rotación de una figura plana alrededor de un eje, tienen simetría axial."
+               data-lang-eu="<b>Ezaugarri nagusiak:</b> Figura lau bat ardatzaren inguruan biraraziz sortzen dira, simetria axiala dute.">
+               <b>Características principales:</b> Se forman por la rotación de una figura plana alrededor de un eje, tienen simetría axial.
+            </p>
+        </section>
+
+        <!-- CILINDRO -->
+        <div class="body-section">
+            <h4>
+                <i class="fas fa-atom"></i>
+                <span data-lang-es="CILINDRO" data-lang-eu="ZILINDROA">CILINDRO</span>
+            </h4>
+            
+            <section class="content-section">
+                <h3 data-lang-es="¿Qué es un Cilindro?" data-lang-eu="Zer da Zilindro bat?">¿Qué es un Cilindro?</h3>
+                <p data-lang-es="Un cilindro es el cuerpo de revolución generado por un rectángulo que gira alrededor de uno de sus lados. Tiene dos bases circulares paralelas e iguales, y una superficie lateral curvada."
+                   data-lang-eu="Zilindro bat bere aldeetako baten inguruan biraraziz sortzen den laukizuzenak sortutako erreguzio gorputza da. Bi oinarri zirkular paralelo eta berdin ditu, eta alboko gainazal kurba bat.">
+                   Un cilindro es el cuerpo de revolución generado por un rectángulo que gira alrededor de uno de sus lados. Tiene dos bases circulares paralelas e iguales, y una superficie lateral curvada.
+                </p>
+                
+                <ul>
+                    <li data-lang-es="<b>Base:</b> Dos círculos paralelos e iguales"
+                       data-lang-eu="<b>Oinarria:</b> Bi zirkulu paralelo eta berdin">
+                        <b>Base:</b> Dos círculos paralelos e iguales
+                    </li>
+                    <li data-lang-es="<b>Altura:</b> Distancia entre las dos bases (es la longitud del lado del rectángulo que gira)"
+                       data-lang-eu="<b>Altuera:</b> Bi oinarrien arteko distantzia (birarazten den laukizuzenaren aldearen luzera da)">
+                        <b>Altura:</b> Distancia entre las dos bases (es la longitud del lado del rectángulo que gira)
+                    </li>
+                    <li data-lang-es="<b>Radio:</b> Radio de las bases circulares"
+                       data-lang-eu="<b>Erradioa:</b> Oinarri zirkularren erradioa">
+                        <b>Radio:</b> Radio de las bases circulares
+                    </li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h3 data-lang-es="Fórmulas del Cilindro" data-lang-eu="Zilindroaren Formulak">Fórmulas del Cilindro</h3>
+                
+                <div class="formula-box">
+                    <p data-lang-es="<b>Área Lateral</b>" data-lang-eu="<b>Alboko Azalera</b>"><b>Área Lateral</b></p>
+                    <div style="font-size: 1.4rem; margin-top: 0.5rem;">
+                        \\( A_L = 2\pi r h \\)
+                    </div>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; font-weight: normal;">
+                        <span data-lang-es="2π × radio × altura" data-lang-eu="2π × erradio × altuera">
+                            2π × radio × altura
+                        </span>
+                    </p>
+                </div>
+
+                <div class="formula-box">
+                    <p data-lang-es="<b>Área Total</b>" data-lang-eu="<b>Azalera Totala</b>"><b>Área Total</b></p>
+                    <div style="font-size: 1.4rem; margin-top: 0.5rem;">
+                        \\( A_T = 2\pi r h + 2\pi r^2 = 2\pi r(h + r) \\)
+                    </div>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; font-weight: normal;">
+                        <span data-lang-es="Área lateral + 2 × área de la base" data-lang-eu="Alboko azalera + 2 × oinarriaren azalera">
+                            Área lateral + 2 × área de la base
+                        </span>
+                    </p>
+                </div>
+
+                <div class="formula-box">
+                    <p data-lang-es="<b>Volumen</b>" data-lang-eu="<b>Bolumena</b>"><b>Volumen</b></p>
+                    <div style="font-size: 1.4rem; margin-top: 0.5rem;">
+                        \\( V = \pi r^2 h \\)
+                    </div>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; font-weight: normal;">
+                        <span data-lang-es="π × radio² × altura" data-lang-eu="π × erradio² × altuera">
+                            π × radio² × altura
+                        </span>
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <!-- CONO -->
+        <div class="body-section">
+            <h4>
+                <i class="fas fa-chevron-up"></i>
+                <span data-lang-es="CONO" data-lang-eu="KONOA">CONO</span>
+            </h4>
+            
+            <section class="content-section">
+                <h3 data-lang-es="¿Qué es un Cono?" data-lang-eu="Zer da Konu bat?">¿Qué es un Cono?</h3>
+                <p data-lang-es="Un cono es el cuerpo de revolución generado por un triángulo rectángulo que gira alrededor de uno de sus catetos. Tiene una base circular y una superficie lateral que converge en un vértice."
+                   data-lang-eu="Konu bat bere kateetako baten inguruan biraraziz sortzen den triangelu laukizuzenak sortutako erreguzio gorputza da. Oinarri zirkular bat du eta alboko gainazal bat erpina denean konbergentzen dena.">
+                   Un cono es el cuerpo de revolución generado por un triángulo rectángulo que gira alrededor de uno de sus catetos. Tiene una base circular y una superficie lateral que converge en un vértice.
+                </p>
+                
+                <ul>
+                    <li data-lang-es="<b>Base:</b> Círculo"
+                       data-lang-eu="<b>Oinarria:</b> Zirkulua">
+                        <b>Base:</b> Círculo
+                    </li>
+                    <li data-lang-es="<b>Altura:</b> Distancia perpendicular desde el vértice hasta la base"
+                       data-lang-eu="<b>Altuera:</b> Erpinetik oinarriraino dagoen distantzia perpendikularra">
+                        <b>Altura:</b> Distancia perpendicular desde el vértice hasta la base
+                    </li>
+                    <li data-lang-es="<b>Radio:</b> Radio de la base circular"
+                       data-lang-eu="<b>Erradioa:</b> Oinarri zirkularraren erradioa">
+                        <b>Radio:</b> Radio de la base circular
+                    </li>
+                    <li data-lang-es="<b>Generatriz:</b> Línea que va desde el vértice hasta cualquier punto de la circunferencia de la base (también llamada apotema lateral)"
+                       data-lang-eu="<b>Generatriza:</b> Erpinetik oinarriaren zirkunferentziako edozein puntutarako doan linea (alboko apotema ere esaten zaio)">
+                        <b>Generatriz:</b> Línea que va desde el vértice hasta cualquier punto de la circunferencia de la base (también llamada apotema lateral)
+                    </li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h3 data-lang-es="Fórmulas del Cono" data-lang-eu="Konuaren Formulak">Fórmulas del Cono</h3>
+                
+                <div class="formula-box">
+                    <p data-lang-es="<b>Área Lateral</b>" data-lang-eu="<b>Alboko Azalera</b>"><b>Área Lateral</b></p>
+                    <div style="font-size: 1.4rem; margin-top: 0.5rem;">
+                        \\( A_L = \pi r g \\)
+                    </div>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; font-weight: normal;">
+                        <span data-lang-es="π × radio × generatriz" data-lang-eu="π × erradio × generatriza">
+                            π × radio × generatriz
+                        </span>
+                    </p>
+                </div>
+
+                <div class="formula-box">
+                    <p data-lang-es="<b>Área Total</b>" data-lang-eu="<b>Azalera Totala</b>"><b>Área Total</b></p>
+                    <div style="font-size: 1.4rem; margin-top: 0.5rem;">
+                        \\( A_T = \pi r g + \pi r^2 = \pi r(g + r) \\)
+                    </div>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; font-weight: normal;">
+                        <span data-lang-es="Área lateral + área de la base" data-lang-eu="Alboko azalera + oinarriaren azalera">
+                            Área lateral + área de la base
+                        </span>
+                    </p>
+                </div>
+
+                <div class="formula-box">
+                    <p data-lang-es="<b>Volumen</b>" data-lang-eu="<b>Bolumena</b>"><b>Volumen</b></p>
+                    <div style="font-size: 1.4rem; margin-top: 0.5rem;">
+                        \\( V = \frac{\pi r^2 h}{3} \\)
+                    </div>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; font-weight: normal;">
+                        <span data-lang-es="(π × radio² × altura) ÷ 3" data-lang-eu="(π × erradio² × altuera) ÷ 3">
+                            (π × radio² × altura) ÷ 3
+                        </span>
+                    </p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h3 data-lang-es="Relación en el Cono: Teorema de Pitágoras" data-lang-eu="Konuan Erlazioa: Pitagorasen Teorema">Relación en el Cono: Teorema de Pitágoras</h3>
+                <p data-lang-es="En un cono, la altura (h), el radio (r) y la generatriz (g) forman un triángulo rectángulo:"
+                   data-lang-eu="Konu batean, altuera (h), erradioa (r) eta generatriza (g) triangelu laukizuzena osatzen dute:">
+                   En un cono, la altura (h), el radio (r) y la generatriz (g) forman un triángulo rectángulo:
+                </p>
+                
+                <div class="formula-box">
+                    \\( g^2 = h^2 + r^2 \\)
+                </div>
+                
+                <p class="example">
+                    <em data-lang-es="Por ejemplo: si r = 3 cm y h = 4 cm, entonces g = √(3² + 4²) = √(9 + 16) = √25 = 5 cm"
+                       data-lang-eu="Adibidez: r = 3 cm eta h = 4 cm badira, orduan g = √(3² + 4²) = √(9 + 16) = √25 = 5 cm">
+                       Por ejemplo: si r = 3 cm y h = 4 cm, entonces g = √(3² + 4²) = √(9 + 16) = √25 = 5 cm
+                    </em>
+                </p>
+            </section>
+        </div>
+
+        <!-- ESFERA -->
+        <div class="body-section">
+            <h4>
+                <i class="fas fa-circle"></i>
+                <span data-lang-es="ESFERA" data-lang-eu="ESFERA">ESFERA</span>
+            </h4>
+            
+            <section class="content-section">
+                <h3 data-lang-es="¿Qué es una Esfera?" data-lang-eu="Zer da Esfera bat?">¿Qué es una Esfera?</h3>
+                <p data-lang-es="Una esfera es el cuerpo de revolución generado por un semicírculo que gira alrededor de su diámetro. Es el conjunto de todos los puntos del espacio que equidistan de un punto fijo llamado centro."
+                   data-lang-eu="Esfera bat bere diametroaren inguruan biraraziz sortzen den erdi-zirkuluak sortutako erreguzio gorputza da. Puntutik finko bat (zentrua) distantzia berbera duten espazioko puntu guztien multzoa da.">
+                   Una esfera es el cuerpo de revolución generado por un semicírculo que gira alrededor de su diámetro. Es el conjunto de todos los puntos del espacio que equidistan de un punto fijo llamado centro.
+                </p>
+                
+                <ul>
+                    <li data-lang-es="<b>Centro:</b> Punto fijo interior del cual equidistan todos los puntos de la esfera"
+                       data-lang-eu="<b>Zentroa:</b> Barneko puntu finko bat honek esferako puntu guztiek distantzia bera dute">
+                        <b>Centro:</b> Punto fijo interior del cual equidistan todos los puntos de la esfera
+                    </li>
+                    <li data-lang-es="<b>Radio:</b> Distancia desde el centro hasta cualquier punto de la esfera"
+                       data-lang-eu="<b>Erradioa:</b> Zentrutik esferako edozein puntutarako dagoen distantzia">
+                        <b>Radio:</b> Distancia desde el centro hasta cualquier punto de la esfera
+                    </li>
+                    <li data-lang-es="<b>Diámetro:</b> Segmento que pasa por el centro y une dos puntos opuestos de la esfera"
+                       data-lang-eu="<b>Diametroa:</b> Zentroa zeharkatzen duen segmentua eta esferako bi aurkako puntu lotzen dituena">
+                        <b>Diámetro:</b> Segmento que pasa por el centro y une dos puntos opuestos de la esfera
+                    </li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h3 data-lang-es="Fórmulas de la Esfera" data-lang-eu="Esferaren Formulak">Fórmulas de la Esfera</h3>
+                
+                <div class="formula-box">
+                    <p data-lang-es="<b>Área de la Superficie" data-lang-eu="<b>Gainazalaren Azalera</b>"><b>Área de la Superficie</b></p>
+                    <div style="font-size: 1.4rem; margin-top: 0.5rem;">
+                        \\( A = 4\pi r^2 \\)
+                    </div>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; font-weight: normal;">
+                        <span data-lang-es="4π × radio²" data-lang-eu="4π × erradio²">
+                            4π × radio²
+                        </span>
+                    </p>
+                </div>
+
+                <div class="formula-box">
+                    <p data-lang-es="<b>Volumen</b>" data-lang-eu="<b>Bolumena</b>"><b>Volumen</b></p>
+                    <div style="font-size: 1.4rem; margin-top: 0.5rem;">
+                        \\( V = \frac{4\pi r^3}{3} \\)
+                    </div>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; font-weight: normal;">
+                        <span data-lang-es="(4π × radio³) ÷ 3" data-lang-eu="(4π × erradio³) ÷ 3">
+                            (4π × radio³) ÷ 3
+                        </span>
+                    </p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <p class="key-takeaway" data-lang-es="<b>Nota importante:</b> La esfera es un cuerpo muy eficiente: para un volumen dado, tiene la menor superficie posible."
+                   data-lang-eu="<b>Ohar garrantzitsua:</b> Esfera gorputz oso eraginkorra da: emandako bolumeneko, gainazal txikiena du posible izateko.">
+                   <b>Nota importante:</b> La esfera es un cuerpo muy eficiente: para un volumen dado, tiene la menor superficie posible.
+                </p>
+            </section>
+        </div>
+
+        <section class="content-section">
+            <h3 data-lang-es="Ejemplos Resueltos" data-lang-eu="Ebatzitako Adibideak">Ejemplos Resueltos</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-atom icon-concept"></i>
+                        <span data-lang-es="Ejemplo 1: Cilindro" data-lang-eu="1. Adibidea: Zilindroa">Ejemplo 1: Cilindro</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Calcula el área lateral, área total y volumen de un cilindro con radio 3 cm y altura 5 cm."
+                           data-lang-eu="Kalkulatu zilindro baten alboko azalera, azalera totala eta bolumena, erradioa 3 cm eta altuera 5 cm direlarik.">
+                           Calcula el área lateral, área total y volumen de un cilindro con radio 3 cm y altura 5 cm.
+                        </p>
+                        <div class="formula-box">
+                            \\( A_L = 2\pi r h = 2\pi \times 3 \times 5 = 30\pi \approx 94.25 \text{ cm}^2 \\)
+                            <br><br>
+                            \\( A_T = 2\pi r(h + r) = 2\pi \times 3 \times (5 + 3) = 48\pi \approx 150.80 \text{ cm}^2 \\)
+                            <br><br>
+                            \\( V = \pi r^2 h = \pi \times 3^2 \times 5 = 45\pi \approx 141.37 \text{ cm}^3 \\)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-chevron-up icon-concept"></i>
+                        <span data-lang-es="Ejemplo 2: Cono" data-lang-eu="2. Adibidea: Konua">Ejemplo 2: Cono</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Calcula el área lateral, área total y volumen de un cono con radio 4 cm y altura 3 cm."
+                           data-lang-eu="Kalkulatu konu baten alboko azalera, azalera totala eta bolumena, erradioa 4 cm eta altuera 3 cm direlarik.">
+                           Calcula el área lateral, área total y volumen de un cono con radio 4 cm y altura 3 cm.
+                        </p>
+                        <p><strong data-lang-es="Paso 1: Calcular la generatriz" data-lang-eu="1. Pausua: Generatriza kalkulatu"><strong>Paso 1: Calcular la generatriz</strong></strong></p>
+                        <div class="formula-box">
+                            \\( g = \sqrt{h^2 + r^2} = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5 \text{ cm} \\)
+                        </div>
+                        <p><strong data-lang-es="Paso 2: Calcular áreas y volumen" data-lang-eu="2. Pausua: Azalerak eta bolumena kalkulatu"><strong>Paso 2: Calcular áreas y volumen</strong></strong></p>
+                        <div class="formula-box">
+                            \\( A_L = \pi r g = \pi \times 4 \times 5 = 20\pi \approx 62.83 \text{ cm}^2 \\)
+                            <br><br>
+                            \\( A_T = \pi r(g + r) = \pi \times 4 \times (5 + 4) = 36\pi \approx 113.10 \text{ cm}^2 \\)
+                            <br><br>
+                            \\( V = \frac{\pi r^2 h}{3} = \frac{\pi \times 4^2 \times 3}{3} = 16\pi \approx 50.27 \text{ cm}^3 \\)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-circle icon-concept"></i>
+                        <span data-lang-es="Ejemplo 3: Esfera" data-lang-eu="3. Adibidea: Esfera">Ejemplo 3: Esfera</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Calcula el área y el volumen de una esfera con radio 6 cm."
+                           data-lang-eu="Kalkulatu esferaren azalera eta bolumena, erradioa 6 cm izanik.">
+                           Calcula el área y el volumen de una esfera con radio 6 cm.
+                        </p>
+                        <div class="formula-box">
+                            \\( A = 4\pi r^2 = 4\pi \times 6^2 = 144\pi \approx 452.39 \text{ cm}^2 \\)
+                            <br><br>
+                            \\( V = \frac{4\pi r^3}{3} = \frac{4\pi \times 6^3}{3} = 288\pi \approx 904.78 \text{ cm}^3 \\)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Comparación entre Cuerpos de Revolución" data-lang-es="Erreguzio Gorputzen Arteko Konparazioa">Comparación entre Cuerpos de Revolución</h3>
+            <p data-lang-es="Observamos las diferencias principales entre los tres cuerpos de revolución más comunes:"
+               data-lang-eu="Erreguzio gorputzen hiru mota ohikoenen arteko desberdintasun nagusiak ikusten ditugu:">
+               Observamos las diferencias principales entre los tres cuerpos de revolución más comunes:
+            </p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th data-lang-es="Concepto" data-lang-eu="Kontzeptua">Concepto</th>
+                            <th data-lang-es="Cilindro" data-lang-eu="Zilindroa">Cilindro</th>
+                            <th data-lang-es="Cono" data-lang-eu="Konua">Cono</th>
+                            <th data-lang-es="Esfera" data-lang-eu="Esfera">Esfera</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-lang-es="Figura generatriz" data-lang-eu="Figura sortzailea">Figura generatriz</td>
+                            <td data-lang-es="Rectángulo" data-lang-eu="Laukizuzena">Rectángulo</td>
+                            <td data-lang-es="Triángulo rectángulo" data-lang-eu="Triangelu laukizuzena">Triángulo rectángulo</td>
+                            <td data-lang-es="Semicírculo" data-lang-eu="Erdizirkulua">Semicírculo</td>
+                        </tr>
+                        <tr>
+                            <td data-lang-es="Nº de bases" data-lang-eu="Oinarri kopurua">Nº de bases</td>
+                            <td data-lang-es="2" data-lang-eu="2">2</td>
+                            <td data-lang-es="1" data-lang-eu="1">1</td>
+                            <td data-lang-es="0" data-lang-eu="0">0</td>
+                        </tr>
+                        <tr>
+                            <td data-lang-es="Superficie lateral" data-lang-eu="Alboko gainazala">Superficie lateral</td>
+                            <td data-lang-es="Curva (cilíndrica)" data-lang-eu="Kurba (zilindrikoa)">Curva (cilíndrica)</td>
+                            <td data-lang-es="Curva (cónica)" data-lang-eu="Kurba (konikoa)">Curva (cónica)</td>
+                            <td data-lang-es="Curva (esférica)" data-lang-eu="Kurba (esferikoa)">Curva (esférica)</td>
+                        </tr>
+                        <tr>
+                            <td data-lang-es="Volumen" data-lang-eu="Bolumena">Volumen</td>
+                            <td>\\( \pi r^2 h \\)</td>
+                            <td>\\( \frac{\pi r^2 h}{3} \\)</td>
+                            <td>\\( \frac{4\pi r^3}{3} \\)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="warning-box">
+                <h4 data-lang-es="⚠️ Errores Típicos" data-lang-eu="⚠️ Ohiko Akatsak">⚠️ Errores Típicos</h4>
+                <ul>
+                    <li data-lang-es="Confundir la generatriz con la altura en el cono"
+                       data-lang-eu="Konuaren generatriza altuerarekin nahastea">
+                        Confundir la generatriz con la altura en el cono
+                    </li>
+                    <li data-lang-es="No usar π (pi) en los cálculos"
+                       data-lang-eu="π (pi) ez erabiltzea kalkuluetan">
+                        No usar π (pi) en los cálculos
+                    </li>
+                    <li data-lang-es="En el cono, olvidar dividir el volumen por 3"
+                       data-lang-eu="Konuan, bolumena 3z zatitzeko ahaztea">
+                        En el cono, olvidar dividir el volumen por 3
+                    </li>
+                    <li data-lang-es="Confundir el diámetro con el radio (usar r en lugar de d/2 o viceversa)"
+                       data-lang-eu="Diametroa errodiorekin nahastea (r erabiltzea d/2 ordez edo alderantziz)">
+                        Confundir el diámetro con el radio (usar r en lugar de d/2 o viceversa)
+                    </li>
+                    <li data-lang-es="En la esfera, usar el diámetro en lugar del radio en la fórmula del volumen"
+                       data-lang-eu="Esferan, bolumenaren formularik erradioa ordez diametroa erabiltzea">
+                        En la esfera, usar el diámetro en lugar del radio en la fórmula del volumen
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

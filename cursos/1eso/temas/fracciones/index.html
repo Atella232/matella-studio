@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Fracciones - Matemáticas 1º ESO" data-lang-eu="Zatikiak - Matematika DBH 1">Fracciones - Matemáticas 1º ESO</title>
+    <link rel="stylesheet" href="../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+             <a href="../../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+             <i class="fas fa-pie"></i>
+             <span data-lang-es="Fracciones" data-lang-eu="Zatikiak">Fracciones</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="subtopics">
+            <h2 data-lang-es="Conceptos de Fracciones" data-lang-eu="Zatikien Kontzeptuak">Conceptos de Fracciones</h2>
+            <div class="cards-container">
+
+                <div class="card">
+                    <a href="./pages/concepto.html">
+                        <div class="card-icon"><i class="fas fa-book-open"></i></div>
+                        <h3 data-lang-es="Significado y Comparación" data-lang-eu="Esanahia eta Konparaketa">Significado y Comparación</h3>
+                        <div class="summary">
+                            <p data-lang-es="Entiende qué es una fracción, sus partes, y cómo comparar y ordenar fracciones." data-lang-eu="Ulertu zer den zatiki bat, bere zatiak, eta nola konparatu eta ordenatu zatikiak.">Entiende qué es una fracción, sus partes, y cómo comparar y ordenar fracciones.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./pages/operaciones.html">
+                        <div class="card-icon"><i class="fas fa-calculator"></i></div>
+                        <h3 data-lang-es="Operaciones con Fracciones" data-lang-eu="Zatikiakaz Eragiketak">Operaciones con Fracciones</h3>
+                        <div class="summary">
+                            <p data-lang-es="Aprende a sumar, restar, multiplicar y dividir fracciones, incluyendo la reducción a común denominador." data-lang-eu="Ikasi zatikiak batzen, kentzen, biderkatzen eta zatitzen, izendatzaile komunera murriztea barne.">Aprende a sumar, restar, multiplicar y dividir fracciones, incluyendo la reducción a común denominador.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./pages/problemas.html">
+                        <div class="card-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3 data-lang-es="Resolución de Problemas" data-lang-eu="Problemen Ebazpena">Resolución de Problemas</h3>
+                        <div class="summary">
+                            <p data-lang-es="Aplica tus conocimientos sobre fracciones para resolver problemas de la vida real." data-lang-eu="Aplikatu zatikiei buruzko zure ezagutzak bizitza errealeko problemak ebazteko.">Aplica tus conocimientos sobre fracciones para resolver problemas de la vida real.</p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../assets/js/theme.js"></script>
+    <script src="../../../../assets/js/language.js"></script>
+    <script src="../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

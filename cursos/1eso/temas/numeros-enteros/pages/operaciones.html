@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Suma y Resta - Números Enteros" data-lang-eu="Batuketa eta Kenketa - Zenbaki Osoak">Suma y Resta - Números Enteros</title>
+    <!-- Estilos existentes -->
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <!-- Fuentes y Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Estilos adicionales para los nuevos elementos visuales -->
+    <style>
+        .interactive-section {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .operation-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.2rem;
+            background-color: var(--button-bg);
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        .op-box {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-weight: bold;
+            background-color: var(--card-bg);
+            font-size: 1.1em;
+        }
+        .op-box.positive {
+            color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        .op-box.negative {
+            color: #c9302c;
+            border-color: #c9302c;
+        }
+        .op-icon {
+            font-size: 1.5em;
+            color: var(--primary-color);
+        }
+        .accordion-content .example {
+            font-size: 1.2em;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            text-align: center;
+            background-color: var(--bg-color);
+            padding: 0.8rem;
+            margin-top: 1rem;
+        }
+    </style>
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-calculator"></i>
+            <span data-lang-es="Suma y Resta" data-lang-eu="Batuketa eta Kenketa">Suma y Resta</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Suma y Resta de Números Enteros" data-lang-eu="Zenbaki Osoen Batuketa eta Kenketa">Suma y Resta de Números Enteros</h2>
+
+        <!-- SECCIÓN 1: EXPLICACIÓN VISUAL -->
+        <section class="content-section">
+            <h3 data-lang-es="Moviéndonos por la Recta Numérica" data-lang-eu="Zenbaki Zuzenean Mugituz">Moviéndonos por la Recta Numérica</h3>
+            <p data-lang-es="Una forma muy intuitiva de entender la suma y la resta es pensar en ellas como movimientos. Imagina que estás en la recta numérica:"
+               data-lang-eu="Batuketa eta kenketa ulertzeko modu oso intuitiboa mugimendu gisa pentsatzea da. Imajinatu zenbaki zuzenean zaudela:">
+               Una forma muy intuitiva de entender la suma y la resta es pensar en ellas como movimientos. Imagina que estás en la recta numérica:
+            </p>
+            <ul class="icon-list">
+                <li><i class="fas fa-plus-circle"></i><b data-lang-es="Sumar un número positivo:" data-lang-eu="Zenbaki positibo bat batzea:">Sumar un número positivo:</b><span data-lang-es="Te mueves hacia la derecha (avanzas)." data-lang-eu="Eskuinerantz mugitzen zara (aurrera egiten duzu)."> Te mueves hacia la derecha (avanzas).</span></li>
+                <li><i class="fas fa-minus-circle"></i><b data-lang-es="Sumar un número negativo:" data-lang-eu="Zenbaki negatibo bat batzea:">Sumar un número negativo:</b><span data-lang-es="Te mueves hacia la izquierda (retrocedes)." data-lang-eu="Ezkerrerantz mugitzen zara (atzera egiten duzu)."> Te mueves hacia la izquierda (retrocedes).</span></li>
+            </ul>
+            <div class="operation-visual">
+                <span data-lang-es="Partimos de +2" data-lang-eu="+2-tik abiatzen gara">Partimos de +2</span>
+                <div class="op-box positive">+2</div>
+                <i class="fas fa-plus op-icon"></i>
+                <div class="op-box negative">-5</div>
+                <i class="fas fa-long-arrow-alt-right op-icon"></i>
+                <span data-lang-es="Desde +2, retrocedemos 5 pasos..." data-lang-eu="+2-tik, 5 pauso atzera egin...">Desde +2, retrocedemos 5 pasos...</span>
+                <i class="fas fa-equals op-icon"></i>
+                <div class="op-box negative">-3</div>
+            </div>
+            <p data-lang-es="La resta puede parecer más complicada, pero hay un truco genial: <b>restar un número es lo mismo que sumar su opuesto</b>. El opuesto de un número es el mismo número pero con el signo contrario (el opuesto de +5 es -5, y el opuesto de -8 es +8)."
+               data-lang-eu="Kenketa konplikatuagoa iruditu daiteke, baina trikimailu bikain bat dago: <b>zenbaki bat kentzea bere aurkakoa batzearen berdina da</b>. Zenbaki baten aurkakoa zenbaki bera da baina kontrako zeinuarekin (+5-en aurkakoa -5 da, eta -8-ren aurkakoa +8).">
+               La resta puede parecer más complicada, pero hay un truco genial: <b>restar un número es lo mismo que sumar su opuesto</b>. El opuesto de un número es el mismo número pero con el signo contrario (el opuesto de +5 es -5, y el opuesto de -8 es +8).
+            </p>
+            <div class="operation-visual">
+                <div class="op-box positive">(+4)</div>
+                <i class="fas fa-minus op-icon"></i>
+                <div class="op-box negative">(-3)</div>
+                <i class="fas fa-equals op-icon"></i>
+                <div class="op-box positive">(+4)</div>
+                <i class="fas fa-plus op-icon"></i>
+                <div class="op-box positive">(+3)</div>
+                <i class="fas fa-equals op-icon"></i>
+                <div class="op-box positive">+7</div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: REGLAS DETALLADAS -->
+        <section class="content-section">
+            <h3 data-lang-es="Las Reglas de las Operaciones" data-lang-eu="Eragiketen Arauak">Las Reglas de las Operaciones</h3>
+            <p data-lang-es="Aunque la recta numérica ayuda, es útil conocer las reglas para calcular más rápido. Con el truco de la resta, ¡solo necesitas aprender las reglas de la suma!"
+               data-lang-eu="Zenbaki zuzenak laguntzen duen arren, arauak ezagutzea baliagarria da azkarrago kalkulatzeko. Kenketaren trikimailuarekin, batuketaren arauak ikasi besterik ez duzu behar!">
+               Aunque la recta numérica ayuda, es útil conocer las reglas para calcular más rápido. Con el truco de la resta, ¡solo necesitas aprender las reglas de la suma!
+            </p>
+            <div class="accordion" style="margin-top: 2rem;">
+                <!-- Regla 1 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="true">
+                        <span data-lang-es="Regla 1: Suma de números con el MISMO signo" data-lang-eu="1. Araua: Zeinu BERDINEKO zenbakien batuketa">Regla 1: Suma de números con el MISMO signo</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="<b>Paso 1:</b> Suma sus valores absolutos (los números sin signo).<br><b>Paso 2:</b> Mantén el signo que tenían en común."
+                           data-lang-eu="<b>1. Pausoa:</b> Batu haien balio absolutuak (zeinurik gabeko zenbakiak).<br><b>2. Pausoa:</b> Mantendu zuten zeinu komuna.">
+                           <b>Paso 1:</b> Suma sus valores absolutos (los números sin signo).<br><b>Paso 2:</b> Mantén el signo que tenían en común.
+                        </p>
+                        <p class="example" data-lang-es="(+5) + (+6) = +11" data-lang-eu="(+5) + (+6) = +11">(+5) + (+6) = +11</p>
+                        <p class="example" data-lang-es="(-7) + (-2) = -9" data-lang-eu="(-7) + (-2) = -9">(-7) + (-2) = -9</p>
+                    </div>
+                </div>
+                <!-- Regla 2 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span data-lang-es="Regla 2: Suma de números con DIFERENTE signo" data-lang-eu="2. Araua: Zeinu DESBERDINEKO zenbakien batuketa">Regla 2: Suma de números con DIFERENTE signo</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="<b>Paso 1:</b> Resta sus valores absolutos (el mayor menos el menor).<br><b>Paso 2:</b> Ponle al resultado el signo del número que tenía el mayor valor absoluto."
+                           data-lang-eu="<b>1. Pausoa:</b> Kendu haien balio absolutuak (handiena ken txikiena).<br><b>2. Pausoa:</b> Jarri emaitzari balio absolutu handiena zuen zenbakiaren zeinua.">
+                           <b>Paso 1:</b> Resta sus valores absolutos (el mayor menos el menor).<br><b>Paso 2:</b> Ponle al resultado el signo del número que tenía el mayor valor absoluto.
+                        </p>
+                        <p class="example" data-lang-es="(+8) + (-3) = +5  (8-3=5, y el 8, que es más grande, era positivo)"
+                                           data-lang-eu="(+8) + (-3) = +5  (8-3=5, eta 8, handiagoa zena, positiboa zen)">(+8) + (-3) = +5  (8-3=5, y el 8, que es más grande, era positivo)</p>
+                        <p class="example" data-lang-es="(-10) + (+4) = -6 (10-4=6, y el 10, que es más grande, era negativo)"
+                                           data-lang-eu="(-10) + (+4) = -6 (10-4=6, eta 10, handiagoa zena, negatiboa zen)">(-10) + (+4) = -6 (10-4=6, y el 10, que es más grande, era negativo)</p>
+                    </div>
+                </div>
+                 <!-- Regla 3 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span data-lang-es="Regla 3: ¿Y la resta?" data-lang-eu="3. Araua: Eta kenketa?">Regla 3: ¿Y la resta?</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="¡Fácil! Convierte cada resta en una suma cambiando el signo del número que se está restando. Luego, aplica las reglas de la suma."
+                           data-lang-eu="Erraza! Bihurtu kenketa bakoitza batuketa batean, kentzen ari den zenbakiaren zeinua aldatuz. Gero, aplikatu batuketaren arauak.">
+                           ¡Fácil! Convierte cada resta en una suma cambiando el signo del número que se está restando. Luego, aplica las reglas de la suma.
+                        </p>
+                        <p class="example" data-lang-es="(+9) - (+5)  →  (+9) + (-5) = +4" data-lang-eu="(+9) - (+5)  →  (+9) + (-5) = +4">(+9) - (+5)  →  (+9) + (-5) = +4</p>
+                        <p class="example" data-lang-es="(-3) - (-8)  →  (-3) + (+8) = +5" data-lang-eu="(-3) - (-8)  →  (-3) + (+8) = +5">(-3) - (-8)  →  (-3) + (+8) = +5</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: HERRAMIENTAS INTERACTIVAS (SIN CAMBIOS) -->
+        <section class="content-section">
+            <h3 data-lang-es="Herramientas Interactivas" data-lang-eu="Tresna Interaktiboak">Herramientas Interactivas</h3>
+            <div class="interactive-tool card-style">
+                <h4><i class="fas fa-calculator"></i> <span data-lang-es="Calculadora de Enteros" data-lang-eu="Zenbaki Osoen Kalkulagailua">Calculadora de Enteros</span></h4>
+                <div class="calculadora-naturales">
+                    <input type="number" id="num1" data-placeholder-es="Número 1" data-placeholder-eu="Zenbakia 1" placeholder="Número 1">
+                    <select id="operacion">
+                        <option value="+">+</option>
+                        <option value="-">-</option>
+                        <option value="*">×</option>
+                        <option value="/">÷</option>
+                    </select>
+                    <input type="number" id="num2" data-placeholder-es="Número 2" data-placeholder-eu="Zenbakia 2" placeholder="Número 2">
+                    <button class="button-primary" data-lang-es="Calcular" data-lang-eu="Kalkulatu">Calcular</button>
+                    <p id="resultado">Emaitza: </p>
+                </div>
+            </div>
+            <div class="interactive-tool card-style" style="margin-top: 2rem;">
+                <h4><i class="fas fa-question-circle"></i> <span data-lang-es="Quiz Rápido" data-lang-eu="Quiz Azkarra">Quiz Rápido</span></h4>
+                <div class="quiz-naturales">
+                    <p id="pregunta-quiz"></p>
+                    <div class="opciones-quiz"></div>
+                    <p id="resultado-quiz"></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <!-- Scripts existentes -->
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../js/herramienta-numeros-enteros.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+    
+    <!-- El script de uiComponents.js ya debería inicializar el acordeón -->
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

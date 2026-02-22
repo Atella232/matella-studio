@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Vectores - Geometría Analítica" data-lang-eu="Bektoreak - Geometria Analitikoa">Vectores - Geometría Analítica</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-arrows-alt"></i>
+            <span data-lang-es="Vectores" data-lang-eu="Bektoreak">Vectores</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title" data-lang-es="Vectores" data-lang-eu="Bektoreak">Vectores</h1>
+            <div class="topic-navigation">
+                <button class="nav-button" data-lang-es="Ejercicios" data-lang-eu="Ariketak" title="Ejercicios">
+                    <i class="fas fa-edit"></i> Ejercicios
+                </button>
+                <button class="nav-button" data-lang-es="Herramienta" data-lang-eu="Tresna" title="Herramienta">
+                    <i class="fas fa-tools"></i> Herramienta
+                </button>
+            </div>
+        </div>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es un Vector?" data-lang-eu="Zer da Bektore bat?">¿Qué es un Vector?</h3>
+            <p data-lang-es="Un vector es un segmento dirigido que tiene magnitud, dirección y sentido. Se utiliza para representar magnitudes que tienen estas tres características, como la velocidad, la fuerza o el desplazamiento."
+               data-lang-eu="Bektore bat magnitudea, norabidea eta noranzkoa dituen zuzen directed bat da. Magnitude hauek dituzten magnitudeak irudikatzeko erabiltzen da, hala nola abiadura, indarra edo desplazamendua.">
+               Un vector es un segmento dirigido que tiene magnitud, dirección y sentido. Se utiliza para representar magnitudes que tienen estas tres características, como la velocidad, la fuerza o el desplazamiento.
+            </p>
+            
+            <div class="math-formula" style="text-align: center; margin: 2rem 0;">
+                <p data-lang-es="<b>Magnitud:</b> Longitud del vector" data-lang-eu="<b>Magnitudea:</b> Bektorearen luzera"><b>Magnitud:</b> Longitud del vector</p>
+                <p data-lang-es="<b>Dirección:</b> Recta sobre la que actúa" data-lang-eu="<b>Norabidea:</b> Jardun duen zuzena"><b>Dirección:</b> Recta sobre la que actúa</p>
+                <p data-lang-es="<b>Sentido:</b> Hacia dónde apunta" data-lang-eu="<b>Noranzkoa:</b> Non apuntatzen duen"><b>Sentido:</b> Hacia dónde apunta</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Componentes de un Vector" data-lang-eu="Bektore Baten Osagaiak">Componentes de un Vector</h3>
+            <p data-lang-es="Un vector puede expresarse mediante sus componentes en un sistema de coordenadas cartesianas. Si tenemos un vector que va desde el punto A(x₁, y₁) hasta el punto B(x₂, y₂):"
+               data-lang-eu="Bektore bat bere osagaien bidez adieraz daiteke koordenatu sistema kartesiarraren batean. A(x₁, y₁) puntutik B(x₂, y₂) puntura doan bektore bat badugu:">
+               Un vector puede expresarse mediante sus componentes en un sistema de coordenadas cartesianas. Si tenemos un vector que va desde el punto A(x₁, y₁) hasta el punto B(x₂, y₂):
+            </p>
+            
+            <div class="math-formula" style="text-align: center; margin: 2rem 0;">
+                <p><span data-lang-es="Componentes del vector:" data-lang-eu="Bektorearen osagaiak:">Componentes del vector:</span></p>
+                <p style="font-size: 1.3em; margin: 1rem 0;">
+                    \\[ \\vec{AB} = (x_2 - x_1, y_2 - y_1) \\]
+                </p>
+            </div>
+            
+            <div class="example" style="background-color: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                <p data-lang-es="<b>Ejemplo:</b> Halla las componentes del vector que va de P(2, 3) a Q(7, 8)"
+                   data-lang-eu="<b>Adibidea:</b> Aurkitu P(2, 3)-tik Q(7, 8)-ra doan bektorearen osagaiak">
+                   <b>Ejemplo:</b> Halla las componentes del vector que va de P(2, 3) a Q(7, 8)
+                </p>
+                <p data-lang-es="<b>Solución:</b>" data-lang-eu="<b>Ebazpena:</b>"><b>Solución:</b></p>
+                <p>\\[ \\vec{PQ} = (7 - 2, 8 - 3) = (5, 5) \\]</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Operaciones con Vectores" data-lang-eu="Bektoreekin Eragiketak">Operaciones con Vectores</h3>
+            
+            <h4 data-lang-es="Suma de Vectores" data-lang-eu="Bektoreen Batura">Suma de Vectores</h4>
+            <p data-lang-es="Para sumar dos vectores, sumamos sus componentes correspondientes:"
+               data-lang-eu="Bi bektore baturako, bektore bakoitzaren osagai dagokienak gehitzen ditugu:">
+               Para sumar dos vectores, sumamos sus componentes correspondientes:
+            </p>
+            <div class="math-formula" style="text-align: center; margin: 1.5rem 0;">
+                <p style="font-size: 1.2em;">
+                    \\[ (a, b) + (c, d) = (a+c, b+d) \\]
+                </p>
+            </div>
+
+            <h4 data-lang-es="Producto por un Escalar" data-lang-eu="Eskalar Baten Biderkadura">Producto por un Escalar</h4>
+            <p data-lang-es="Para multiplicar un vector por un número (escalar), multiplicamos cada componente por ese número:"
+               data-lang-eu="Bektore bat zenbaki (eskalar) batez biderkatzeko, osagai bakoitza zenbaki horren bidez biderkatzen dugu:">
+               Para multiplicar un vector por un número (escalar), multiplicamos cada componente por ese número:
+            </p>
+            <div class="math-formula" style="text-align: center; margin: 1.5rem 0;">
+                <p style="font-size: 1.2em;">
+                    \\[ k \\cdot (a, b) = (ka, kb) \\]
+                </p>
+            </div>
+
+            <div class="example" style="background-color: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                <p data-lang-es="<b>Ejemplo de operaciones:</b>" data-lang-eu="<b>Eragiketen adibidea:</b>"><b>Ejemplo de operaciones:</b></p>
+                <p data-lang-es="Dados los vectores u = (3, 4) y v = (1, 2)" data-lang-eu="u = (3, 4) eta v = (1, 2) bektoreak izanik">
+                    Dados los vectores u = (3, 4) y v = (1, 2)
+                </p>
+                <p>1. \\[ \\vec{u} + \\vec{v} = (3, 4) + (1, 2) = (4, 6) \\]</p>
+                <p>2. \\[ 2 \\cdot \\vec{u} = 2 \\cdot (3, 4) = (6, 8) \\]</p>
+                <p>3. \\[ 3\\vec{u} - 2\\vec{v} = 3(3, 4) - 2(1, 2) = (9, 12) - (2, 4) = (7, 8) \\]</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Módulo de un Vector" data-lang-eu="Bektore Baten Modulua">Módulo de un Vector</h3>
+            <p data-lang-es="El módulo (o longitud) de un vector es la distancia desde su origen hasta su extremo. Se calcula aplicando el teorema de Pitágoras a sus componentes:"
+               data-lang-eu="Bektore baten modulua (edo luzera) bere jatorritik bere muturrera dagoen distantzia da. Pitagorasen teorema bere osagaietan aplikatuz kalkulatzen da:">
+               El módulo (o longitud) de un vector es la distancia desde su origen hasta su extremo. Se calcula aplicando el teorema de Pitágoras a sus componentes:
+            </p>
+            
+            <div class="math-formula" style="text-align: center; margin: 2rem 0;">
+                <p><span data-lang-es="Fórmula del módulo:" data-lang-eu="Moduluaren formula:">Fórmula del módulo:</span></p>
+                <p style="font-size: 1.3em; margin: 1rem 0;">
+                    \\[ |\\vec{v}| = \\sqrt{a^2 + b^2} \\]
+                </p>
+            </div>
+
+            <div class="example" style="background-color: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                <p data-lang-es="<b>Ejemplo:</b> Calcula el módulo del vector w = (6, 8)"
+                   data-lang-eu="<b>Adibidea:</b> Kalkulatu w = (6, 8) bektorearen modulua">
+                   <b>Ejemplo:</b> Calcula el módulo del vector w = (6, 8)
+                </p>
+                <p data-lang-es="<b>Solución:</b>" data-lang-eu="<b>Ebazpena:</b>"><b>Solución:</b></p>
+                <p>\\[ |\\vec{w}| = \\sqrt{6^2 + 8^2} = \\sqrt{36 + 64} = \\sqrt{100} = 10 \\]</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Vectores Especiales" data-lang-eu="Bektore Berezienak">Vectores Especiales</h3>
+            
+            <h4 data-lang-es="Vector Nulo" data-lang-eu="Bektore Nulua">Vector Nulo</h4>
+            <p data-lang-es="Es el vector (0, 0). No tiene dirección ni sentido definidos."
+               data-lang-eu="(0, 0) bektorea da. Ez du norabide ezta noranzko definiturik.">
+               Es el vector (0, 0). No tiene dirección ni sentido definidos.
+            </p>
+
+            <h4 data-lang-es="Vector Unitario" data-lang-eu="Bektore Unitarioa">Vector Unitario</h4>
+            <p data-lang-es="Es un vector cuyo módulo es 1. Se obtiene dividiendo un vector por su módulo."
+               data-lang-eu="Modulua 1 duen bektorea da. Bektore bat bere moduluaren bidez zatituz lortzen da.">
+               Es un vector cuyo módulo es 1. Se obtiene dividiendo un vector por su módulo.
+            </p>
+            <div class="math-formula" style="text-align: center; margin: 1rem 0;">
+                <p>\\[ \\hat{v} = \\frac{\\vec{v}}{|\\vec{v}|} \\]</p>
+            </div>
+
+            <h4 data-lang-es="Vectores Ouestos" data-lang-eu="Bektore Aurkakoak">Vectores Ouestos</h4>
+            <p data-lang-es="Dos vectores son opuestos si tienen la misma magnitud y dirección, pero sentido contrario."
+               data-lang-eu="Bi bektore aurkakoak badira magnitude eta norabide berdinak dituzte, baina noranzko kontrakoa.">
+               Dos vectores son opuestos si tienen la misma magnitud y dirección, pero sentido contrario.
+            </p>
+            <div class="math-formula" style="text-align: center; margin: 1rem 0;">
+                <p>\\[ \\vec{v} = (a, b) \\quad \\text{vs} \\quad -\\vec{v} = (-a, -b) \\]</p>
+            </div>
+        </section>
+
+        <section class="content-section warning">
+            <h3 data-lang-es="⚠️ Errores Típicos" data-lang-eu="⚠️ Ohiko Akatsak">⚠️ Errores Típicos</h3>
+            <ul>
+                <li data-lang-es="<b>Orden inverso en las componentes:</b> Calcular (x₁ - x₂, y₁ - y₂) en lugar de (x₂ - x₁, y₂ - y₁)"
+                   data-lang-eu="<b>Osagaietako ordena alderantziz:</b> (x₂ - x₁, y₂ - y₁)-ren ordez (x₁ - x₂, y₁ - y₂) kalkulatzea">
+                   <b>Orden inverso en las componentes:</b> Calcular (x₁ - x₂, y₁ - y₂) en lugar de (x₂ - x₁, y₂ - y₁)
+                </li>
+                <li data-lang-es="<b>Confundir módulo con componentes:</b> Pensar que el módulo es (a, b) en lugar de √(a² + b²)"
+                   data-lang-eu="<b>Osagaiak moduluan nahastea:</b> Modulua (a, b) dela pentsatzea √(a² + b²)-ren ordez">
+                   <b>Confundir módulo con componentes:</b> Pensar que el módulo es (a, b) en lugar de √(a² + b²)
+                </li>
+                <li data-lang-es="<b>Error en la suma:</b> Restar en lugar de sumar las componentes"
+                   data-lang-eu="<b>Baturan akats bat:</b> Osagaiak gehitu beharrean kentzea">
+                   <b>Error en la suma:</b> Restar en lugar de sumar las componentes
+                </li>
+                <li data-lang-es="<b>Confundir vector con punto:</b> Un vector es (x, y) pero no es lo mismo que el punto (x, y)"
+                   data-lang-eu="<b>Bektorea puntuan nahastea:</b> Bektorea (x, y) da baina ez da (x, y) puntuaren berdina">
+                   <b>Confundir vector con punto:</b> Un vector es (x, y) pero no es lo mismo que el punto (x, y)
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Geometría Analítica" data-lang-eu="© 2025 - MATELLA | Geometria Analitikoa">© 2025 - MATELLA | Geometría Analítica</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

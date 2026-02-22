@@ -1,0 +1,669 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="Operaciones con fracciones: Multiplicación y división - MATELLA" data-lang-eu="Zatikiekin eragiketak: Biderketa eta zatiketa - MATELLA">Operaciones con fracciones: Multiplicación y división - MATELLA</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .formula-box {
+      background-color: var(--button-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      margin: 1.5rem 0;
+      border-left: 4px solid var(--secondary-color);
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 1.3em;
+      color: var(--primary-color);
+    }
+    
+    .calculation-steps {
+      background-color: var(--accordion-content-bg);
+      border-radius: 8px;
+      padding: 1.2rem;
+      margin: 1rem 0;
+      border: 1px solid var(--border-color);
+    }
+    
+    .calculation-steps .step {
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed var(--border-color);
+      position: relative;
+      padding-left: 2rem;
+    }
+    
+    .calculation-steps .step:last-child {
+      border-bottom: none;
+    }
+    
+    .calculation-steps .step::before {
+      content: "→";
+      position: absolute;
+      left: 0.8rem;
+      color: var(--secondary-color);
+      font-weight: bold;
+    }
+    
+    .common-errors {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .error-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.2rem;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .error-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--card-hover-shadow);
+    }
+    
+    .error-card h5 {
+      color: #e74c3c;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .tool-grid label {
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+      color: var(--text-color);
+    }
+    
+    .tool-grid input, .tool-grid select {
+      padding: 0.8rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      width: 100%;
+    }
+    
+    .tool-actions {
+      display: flex;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+    
+    .result-box {
+      background-color: var(--button-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 1.5rem;
+      border-left: 4px solid var(--primary-color);
+    }
+    
+    .result-box .ok {
+      color: var(--secondary-color);
+      font-weight: bold;
+      margin: 0;
+    }
+    
+    .result-box .error {
+      color: #e74c3c;
+      font-weight: bold;
+      margin: 0;
+    }
+    
+    .info-box {
+      background-color: var(--hint-bg);
+      border: 1px solid var(--hint-border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+    
+    .info-box i {
+      color: var(--secondary-color);
+      font-size: 1.2em;
+      margin-top: 0.2rem;
+    }
+    
+    .priority-order {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .priority-order ol {
+      counter-reset: step-counter;
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    .priority-order li {
+      counter-increment: step-counter;
+      margin-bottom: 1rem;
+      padding-left: 3rem;
+      position: relative;
+      font-weight: bold;
+    }
+    
+    .priority-order li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2.2rem;
+      height: 2.2rem;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9em;
+    }
+    
+    @media (max-width: 768px) {
+      .common-errors {
+        grid-template-columns: 1fr;
+      }
+      
+      .tool-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .priority-order li {
+        padding-left: 2.5rem;
+      }
+      
+      .priority-order li::before {
+        width: 1.8rem;
+        height: 1.8rem;
+      }
+    }
+  </style>
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <a href="../../../../../index.html" class="home-link">
+        <i class="fas fa-calculator"></i>
+        <span data-lang-es="2º ESO" data-lang-eu="2. ESO">2º ESO</span>
+      </a>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma"><i class="fas fa-language"></i> <span>Euskara</span></button>
+    </nav>
+  </header>
+  
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol>
+      <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="2. ESO">2º ESO</a></li>
+      <li><a href="../index.html" data-lang-es="Fracciones" data-lang-eu="Zatikia">Fracciones</a></li>
+      <li class="active" aria-current="page"><span data-lang-es="Operaciones con fracciones: Multiplicación y división" data-lang-eu="Zatikiekin eragiketak: Biderketa eta zatiketa">Operaciones con fracciones: Multiplicación y división</span></li>
+    </ol>
+  </nav>
+  
+  <main>
+    <h1 class="page-title" data-lang-es="Operaciones con fracciones: Multiplicación y división" data-lang-eu="Zatikiekin eragiketak: Biderketa eta zatiketa">Operaciones con fracciones: Multiplicación y división</h1>
+    
+    <section class="content-section">
+      <p data-lang-es="La multiplicación y división de fracciones son operaciones más directas que la suma y resta, ya que no requieren encontrar denominadores comunes. Estas operaciones siguen reglas específicas que es importante conocer." data-lang-eu="Zatikien biderketa eta zatiketa eragiketa zuzenagoak dira batuketa eta kenketa baino, izendatzaile komuna aurkitzea eskatzen ez dutelako. Eragiketa hauek arau zehatzek jarraitzen dituzte ezagutzea garrantzitsua denak.">La multiplicación y división de fracciones son operaciones más directas que la suma y resta, ya que no requieren encontrar denominadores comunes. Estas operaciones siguen reglas específicas que es importante conocer.</p>
+    </section>
+
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="true">
+          <i class="fas fa-times icon-concept"></i>
+          <span data-lang-es="Multiplicación de fracciones" data-lang-eu="Zatikien biderketa">Multiplicación de fracciones</span>
+          <i class="fas fa-chevron-down icon-toggle"></i>
+        </button>
+        <div class="accordion-content">
+          <p data-lang-es="Para multiplicar fracciones, se multiplican los numeradores entre sí y los denominadores entre sí:" data-lang-eu="Zatikiak biderkatzeko, zenbakitzaileak elkarren artean biderkatzen dira eta izendatzaileak elkarren artean:">Para multiplicar fracciones, se multiplican los numeradores entre sí y los denominadores entre sí:</p>
+          
+          <div class="formula-box">
+            <span>a/b × c/d = (a × c)/(b × d)</span>
+          </div>
+          
+          <p data-lang-es="La multiplicación de fracciones es más simple que la suma porque no necesitamos denominadores comunes." data-lang-eu="Zatikien biderketa batuketa baino sinpleagoa da izendatzaile komuna behar ez dugulako.">La multiplicación de fracciones es más simple que la suma porque no necesitamos denominadores comunes.</p>
+
+          <div class="example-solved">
+            <h4 data-lang-es="Ejemplo resuelto: 2/3 × 3/4" data-lang-eu="Adibide ebatzia: 2/3 × 3/4">Ejemplo resuelto: 2/3 × 3/4</h4>
+            <div class="solution">
+              <p data-lang-es="Paso a paso:" data-lang-eu="Urratsez urrats:">Paso a paso:</p>
+              <div class="calculation-steps">
+                <div class="step" data-lang-es="Multiplicar numeradores: 2 × 3 = 6" data-lang-eu="Zenbakitzaileak biderkatu: 2 × 3 = 6">Multiplicar numeradores: 2 × 3 = 6</div>
+                <div class="step" data-lang-es="Multiplicar denominadores: 3 × 4 = 12" data-lang-eu="Izendatzaileak biderkatu: 3 × 4 = 12">Multiplicar denominadores: 3 × 4 = 12</div>
+                <div class="step" data-lang-es="Resultado: 6/12" data-lang-eu="Emaitza: 6/12">Resultado: 6/12</div>
+                <div class="step" data-lang-es="Simplificar: 6/12 = 1/2" data-lang-eu="Sinplifikatu: 6/12 = 1/2">Simplificar: 6/12 = 1/2</div>
+              </div>
+              <p data-lang-es="Por tanto, 2/3 × 3/4 = 1/2" data-lang-eu="Beraz, 2/3 × 3/4 = 1/2">Por tanto, 2/3 × 3/4 = 1/2</p>
+            </div>
+          </div>
+
+          <div class="key-takeaway">
+            <h5 data-lang-es="Consejos para la multiplicación" data-lang-eu="Biderketarako aholkuak">Consejos para la multiplicación</h5>
+            <ul class="icon-list">
+              <li><i class="fas fa-check-circle"></i> <span data-lang-es="Simplifica antes de multiplicar si es posible" data-lang-eu="Sinplifikatu biderkatu aurretik posible bada">Simplifica antes de multiplicar si es posible</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-lang-es="Multiplica en línea recta: numerador × numerador, denominador × denominador" data-lang-eu="Biderkatu lerro zuzenan: zenbakitzailea × zenbakitzailea, izendatzailea × izendatzailea">Multiplica en línea recta: numerador × numerador, denominador × denominador</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-lang-es="Siempre simplifica el resultado final" data-lang-eu="Beti sinplifikatu emaitza finala">Siempre simplifica el resultado final</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false">
+          <i class="fas fa-divide icon-concept"></i>
+          <span data-lang-es="División de fracciones" data-lang-eu="Zatikien zatiketa">División de fracciones</span>
+          <i class="fas fa-chevron-down icon-toggle"></i>
+        </button>
+        <div class="accordion-content">
+          <p data-lang-es="Para dividir fracciones, se multiplica la primera fracción por la inversa de la segunda:" data-lang-eu="Zatikiak zatitzeko, lehen zatkia bigarrenaren alderantzizkoaz biderkatzen da:">Para dividir fracciones, se multiplica la primera fracción por la inversa de la segunda:</p>
+          
+          <div class="formula-box">
+            <span>a/b ÷ c/d = a/b × d/c = (a × d)/(b × c)</span>
+          </div>
+          
+          <p data-lang-es="La división se convierte en multiplicación al invertir la segunda fracción." data-lang-eu="Zatiketa biderketara bihurtzen da bigarren zatkia alderantzikotuz.">La división se convierte en multiplicación al invertir la segunda fracción.</p>
+
+          <div class="example-solved">
+            <h4 data-lang-es="Ejemplo resuelto: 3/4 ÷ 2/5" data-lang-eu="Adibide ebatzia: 3/4 ÷ 2/5">Ejemplo resuelto: 3/4 ÷ 2/5</h4>
+            <div class="solution">
+              <p data-lang-es="Paso a paso:" data-lang-eu="Urratsez urrats:">Paso a paso:</p>
+              <div class="calculation-steps">
+                <div class="step" data-lang-es="Invertir la segunda fracción: 2/5 → 5/2" data-lang-eu="Bigarren zatkia alderantzikotu: 2/5 → 5/2">Invertir la segunda fracción: 2/5 → 5/2</div>
+                <div class="step" data-lang-es="Convertir a multiplicación: 3/4 × 5/2" data-lang-eu="Biderketara bihurtu: 3/4 × 5/2">Convertir a multiplicación: 3/4 × 5/2</div>
+                <div class="step" data-lang-es="Multiplicar numeradores: 3 × 5 = 15" data-lang-eu="Zenbakitzaileak biderkatu: 3 × 5 = 15">Multiplicar numeradores: 3 × 5 = 15</div>
+                <div class="step" data-lang-es="Multiplicar denominadores: 4 × 2 = 8" data-lang-eu="Izendatzaileak biderkatu: 4 × 2 = 8">Multiplicar denominadores: 4 × 2 = 8</div>
+                <div class="step" data-lang-es="Resultado: 15/8" data-lang-eu="Emaitza: 15/8">Resultado: 15/8</div>
+              </div>
+              <p data-lang-es="Por tanto, 3/4 ÷ 2/5 = 15/8" data-lang-eu="Beraz, 3/4 ÷ 2/5 = 15/8">Por tanto, 3/4 ÷ 2/5 = 15/8</p>
+            </div>
+          </div>
+
+          <div class="key-takeaway">
+            <h5 data-lang-es="Consejos para la división" data-lang-eu="Zatiketarako aholkuak">Consejos para la división</h5>
+            <ul class="icon-list">
+              <li><i class="fas fa-check-circle"></i> <span data-lang-es="Recuerda: dividir es multiplicar por la inversa" data-lang-eu="Gogoratu: zatitzea alderantzizkoaz biderkatzea da">Recuerda: dividir es multiplicar por la inversa</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-lang-es="La inversa de a/b es b/a" data-lang-eu="a/b-ren alderantzizkoa b/a da">La inversa de a/b es b/a</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-lang-es="Nunca dividas por cero (fracción con numerador 0)" data-lang-eu="Inoiz ez zatitu zerorekin (0 zenbakitzailea duen zatkia)">Nunca dividas por cero (fracción con numerador 0)</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false">
+          <i class="fas fa-compress-alt icon-concept"></i>
+          <span data-lang-es="Simplificación antes de operar" data-lang-eu="Eragiketa egin aurretik sinplifikatzea">Simplificación antes de operar</span>
+          <i class="fas fa-chevron-down icon-toggle"></i>
+        </button>
+        <div class="accordion-content">
+          <p data-lang-es="A veces es más eficiente simplificar las fracciones antes de multiplicar o dividir:" data-lang-eu="Batzuetan eraginkorragoa da zatikia sinplifikatzea biderkatu edo zatitu aurretik:">A veces es más eficiente simplificar las fracciones antes de multiplicar o dividir:</p>
+          
+          <div class="example-solved">
+            <h5 data-lang-es="Ejemplo: 8/15 × 5/12" data-lang-eu="Adibidea: 8/15 × 5/12">Ejemplo: 8/15 × 5/12</h5>
+            
+            <div class="solution">
+              <p data-lang-es="Método 1: Multiplicar directamente" data-lang-eu="Metodoa 1: Zuzenean biderkatu">Método 1: Multiplicar directamente</p>
+              <div class="calculation-steps">
+                <div class="step" data-lang-es="8/15 × 5/12 = 40/180 = 2/9" data-lang-eu="8/15 × 5/12 = 40/180 = 2/9">8/15 × 5/12 = 40/180 = 2/9</div>
+              </div>
+              
+              <p data-lang-es="Método 2: Simplificar antes (más eficiente)" data-lang-eu="Metodoa 2: Aurretik sinplifikatu (eraginkorragoa)">Método 2: Simplificar antes (más eficiente)</p>
+              <div class="calculation-steps">
+                <div class="step" data-lang-es="1. 8/15 = 8/(3×5), 5/12 = 5/(3×4)" data-lang-eu="1. 8/15 = 8/(3×5), 5/12 = 5/(3×4)">1. 8/15 = 8/(3×5), 5/12 = 5/(3×4)</div>
+                <div class="step" data-lang-es="2. 8/15 × 5/12 = (8×5)/(15×12) = 40/180" data-lang-eu="2. 8/15 × 5/12 = (8×5)/(15×12) = 40/180">2. 8/15 × 5/12 = (8×5)/(15×12) = 40/180</div>
+                <div class="step" data-lang-es="3. Simplificar: 40/180 = 2/9" data-lang-eu="3. Sinplifikatu: 40/180 = 2/9">3. Simplificar: 40/180 = 2/9</div>
+              </div>
+              
+              <p data-lang-es="Ambos métodos dan el mismo resultado, pero el segundo es más eficiente." data-lang-eu="Bi metodoek emaitza bera ematen dute, baina bigarrena eraginkorragoa da.">Ambos métodos dan el mismo resultado, pero el segundo es más eficiente.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false">
+          <i class="fas fa-calculator icon-concept"></i>
+          <span data-lang-es="Calculadora de multiplicación y división" data-lang-eu="Biderketa eta zatiketaren kalkulagailua">Calculadora de multiplicación y división</span>
+          <i class="fas fa-chevron-down icon-toggle"></i>
+        </button>
+        <div class="accordion-content">
+          <p data-lang-es="Utiliza esta calculadora para practicar operaciones con fracciones:" data-lang-eu="Erabili kalkulagailu hau zatikiekin eragiketak praktikatzeko:">Utiliza esta calculadora para practicar operaciones con fracciones:</p>
+          
+          <div class="tool-section">
+            <div class="tool-grid">
+              <div>
+                <label for="frac1Num" data-lang-es="Primera fracción - Numerador:" data-lang-eu="Lehen zatkia - Zenbakitzailea:">Primera fracción - Numerador:</label>
+                <input type="number" id="frac1Num" placeholder="ej: 2" min="1">
+              </div>
+              <div>
+                <label for="frac1Den" data-lang-es="Primera fracción - Denominador:" data-lang-eu="Lehen zatkia - Izendatzailea:">Primera fracción - Denominador:</label>
+                <input type="number" id="frac1Den" placeholder="ej: 3" min="1">
+              </div>
+              <div>
+                <label for="operation" data-lang-es="Operación:" data-lang-eu="Eragiketa:">Operación:</label>
+                <select id="operation">
+                  <option value="*">× (Multiplicación)</option>
+                  <option value="/">÷ (División)</option>
+                </select>
+              </div>
+              <div>
+                <label for="frac2Num" data-lang-es="Segunda fracción - Numerador:" data-lang-eu="Bigarren zatkia - Zenbakitzailea:">Segunda fracción - Numerador:</label>
+                <input type="number" id="frac2Num" placeholder="ej: 3" min="1">
+              </div>
+              <div>
+                <label for="frac2Den" data-lang-es="Segunda fracción - Denominador:" data-lang-eu="Bigarren zatkia - Izendatzailea:">Segunda fracción - Denominador:</label>
+                <input type="number" id="frac2Den" placeholder="ej: 4" min="1">
+              </div>
+            </div>
+            <div class="tool-actions">
+              <button onclick="calculateFractionOperation()" class="button-primary">
+                <i class="fas fa-equals"></i>
+                <span data-lang-es="Calcular" data-lang-eu="Kalkulatu">Calcular</span>
+              </button>
+            </div>
+            <div class="result-box" id="operationResult"></div>
+          </div>
+
+          <div class="info-box">
+            <i class="fas fa-lightbulb"></i>
+            <p data-lang-es="La calculadora simplifica automáticamente el resultado y muestra el proceso paso a paso." data-lang-eu="Kalkulagailuak automatikoki sinplifikatzen du emaitza eta urratsez urrats erakusten du prozesua.">La calculadora simplifica automáticamente el resultado y muestra el proceso paso a paso.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false">
+          <i class="fas fa-puzzle-piece icon-concept"></i>
+          <span data-lang-es="Operaciones combinadas" data-lang-eu="Eragiketa konbinatuak">Operaciones combinadas</span>
+          <i class="fas fa-chevron-down icon-toggle"></i>
+        </button>
+        <div class="accordion-content">
+          <p data-lang-es="Cuando combinamos multiplicación y división con suma y resta, seguimos el orden de prioridad:" data-lang-eu="Biderketa eta zatiketa batuketa eta kenketarekin konbinatzen ditugunean, lehentasun ordena jarraitzen dugu:">Cuando combinamos multiplicación y división con suma y resta, seguimos el orden de prioridad:</p>
+          
+          <div class="priority-order">
+            <ol>
+              <li data-lang-es="Paréntesis" data-lang-eu="Parentesiak">Paréntesis</li>
+              <li data-lang-es="Multiplicación y división (de izquierda a derecha)" data-lang-eu="Biderketa eta zatiketa (ezkerretik eskuinera)">Multiplicación y división (de izquierda a derecha)</li>
+              <li data-lang-es="Suma y resta (de izquierda a derecha)" data-lang-eu="Batuketa eta kenketa (ezkerretik eskuinera)">Suma y resta (de izquierda a derecha)</li>
+            </ol>
+          </div>
+
+          <div class="example-solved">
+            <h4 data-lang-es="Ejemplo: 2/3 × 3/4 + 1/2" data-lang-eu="Adibidea: 2/3 × 3/4 + 1/2">Ejemplo: 2/3 × 3/4 + 1/2</h4>
+            <div class="solution">
+              <p data-lang-es="Paso a paso:" data-lang-eu="Urratsez urrats:">Paso a paso:</p>
+              <div class="calculation-steps">
+                <div class="step" data-lang-es="Multiplicación: 2/3 × 3/4 = 6/12 = 1/2" data-lang-eu="Biderketa: 2/3 × 3/4 = 6/12 = 1/2">Multiplicación: 2/3 × 3/4 = 6/12 = 1/2</div>
+                <div class="step" data-lang-es="Suma: 1/2 + 1/2 = 2/2 = 1" data-lang-eu="Batuketa: 1/2 + 1/2 = 2/2 = 1">Suma: 1/2 + 1/2 = 2/2 = 1</div>
+              </div>
+              <p data-lang-es="Por tanto, 2/3 × 3/4 + 1/2 = 1" data-lang-eu="Beraz, 2/3 × 3/4 + 1/2 = 1">Por tanto, 2/3 × 3/4 + 1/2 = 1</p>
+            </div>
+          </div>
+
+          <div class="example-solved">
+            <h4 data-lang-es="Ejemplo: (1/2 + 1/3) × 2/5" data-lang-eu="Adibidea: (1/2 + 1/3) × 2/5">Ejemplo: (1/2 + 1/3) × 2/5</h4>
+            <div class="solution">
+              <p data-lang-es="Paso a paso:" data-lang-eu="Urratsez urrats:">Paso a paso:</p>
+              <div class="calculation-steps">
+                <div class="step" data-lang-es="Paréntesis: 1/2 + 1/3 = 3/6 + 2/6 = 5/6" data-lang-eu="Parentesiak: 1/2 + 1/3 = 3/6 + 2/6 = 5/6">Paréntesis: 1/2 + 1/3 = 3/6 + 2/6 = 5/6</div>
+                <div class="step" data-lang-es="Multiplicación: 5/6 × 2/5 = 10/30 = 1/3" data-lang-eu="Biderketa: 5/6 × 2/5 = 10/30 = 1/3">Multiplicación: 5/6 × 2/5 = 10/30 = 1/3</div>
+              </div>
+              <p data-lang-es="Por tanto, (1/2 + 1/3) × 2/5 = 1/3" data-lang-eu="Beraz, (1/2 + 1/3) × 2/5 = 1/3">Por tanto, (1/2 + 1/3) × 2/5 = 1/3</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false">
+          <i class="fas fa-exclamation-triangle icon-concept"></i>
+          <span data-lang-es="Errores comunes y consejos" data-lang-eu="Ohiko akatsak eta aholkuak">Errores comunes y consejos</span>
+          <i class="fas fa-chevron-down icon-toggle"></i>
+        </button>
+        <div class="accordion-content">
+          <p data-lang-es="Es importante evitar estos errores comunes al operar con fracciones:" data-lang-eu="Garrantzitsua da zatikiekin eragiketak egitean akats ohiko hauek saihestea:">Es importante evitar estos errores comunes al operar con fracciones:</p>
+          
+          <div class="common-errors">
+            <div class="error-card">
+              <h5><i class="fas fa-times-circle"></i> <span data-lang-es="Error: Multiplicar numeradores con denominadores" data-lang-eu="Akatsa: Zenbakitzaileak izendatzaileekin biderkatzea">Error: Multiplicar numeradores con denominadores</span></h5>
+              <p data-lang-es="Incorrecto: 2/3 × 3/4 = 6/7" data-lang-eu="Okerra: 2/3 × 3/4 = 6/7">Incorrecto: 2/3 × 3/4 = 6/7</p>
+              <p data-lang-es="Correcto: 2/3 × 3/4 = 6/12 = 1/2" data-lang-eu="Zuzena: 2/3 × 3/4 = 6/12 = 1/2">Correcto: 2/3 × 3/4 = 6/12 = 1/2</p>
+            </div>
+
+            <div class="error-card">
+              <h5><i class="fas fa-times-circle"></i> <span data-lang-es="Error: No invertir en la división" data-lang-eu="Akatsa: Ez alderantzikotzea zatiketan">Error: No invertir en la división</span></h5>
+              <p data-lang-es="Incorrecto: 3/4 ÷ 2/5 = 3/4 × 2/5" data-lang-eu="Okerra: 3/4 ÷ 2/5 = 3/4 × 2/5">Incorrecto: 3/4 ÷ 2/5 = 3/4 × 2/5</p>
+              <p data-lang-es="Correcto: 3/4 ÷ 2/5 = 3/4 × 5/2" data-lang-eu="Zuzena: 3/4 ÷ 2/5 = 3/4 × 5/2">Correcto: 3/4 ÷ 2/5 = 3/4 × 5/2</p>
+            </div>
+
+            <div class="error-card">
+              <h5><i class="fas fa-times-circle"></i> <span data-lang-es="Error: Dividir por cero" data-lang-eu="Akatsa: Zerorekin zatitzea">Error: Dividir por cero</span></h5>
+              <p data-lang-es="Incorrecto: 2/3 ÷ 0/1 (no está definido)" data-lang-eu="Okerra: 2/3 ÷ 0/1 (ez da definitzen)">Incorrecto: 2/3 ÷ 0/1 (no está definido)</p>
+              <p data-lang-es="Correcto: Evitar divisiones por cero" data-lang-eu="Zuzena: Zerorekin zatiketak saihestea">Correcto: Evitar divisiones por cero</p>
+            </div>
+          </div>
+
+          <div class="key-takeaway">
+            <h5 data-lang-es="Consejos útiles" data-lang-eu="Aholku erabilgarriak">Consejos útiles</h5>
+            <ul class="icon-list">
+              <li><i class="fas fa-check-circle"></i> <span data-lang-es="Para multiplicar: numerador × numerador, denominador × denominador" data-lang-eu="Biderketarako: zenbakitzailea × zenbakitzailea, izendatzailea × izendatzailea">Para multiplicar: numerador × numerador, denominador × denominador</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-lang-es="Para dividir: multiplica por la inversa" data-lang-eu="Zatiketarako: biderkatu alderantzizkoaz">Para dividir: multiplica por la inversa</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-lang-es="Simplifica antes de operar cuando sea posible" data-lang-eu="Sinplifikatu eragiketa egin aurretik posible denean">Simplifica antes de operar cuando sea posible</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-lang-es="Siempre simplifica el resultado final" data-lang-eu="Beti sinplifikatu emaitza finala">Siempre simplifica el resultado final</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false">
+          <i class="fas fa-list-ol icon-concept"></i>
+          <span data-lang-es="Ejercicios propuestos" data-lang-eu="Ariketak proposatuak">Ejercicios propuestos</span>
+          <i class="fas fa-chevron-down icon-toggle"></i>
+        </button>
+        <div class="accordion-content">
+          <ol class="exercises-list">
+            <li>
+              <p data-lang-es="Calcula: 3/4 × 2/5" data-lang-eu="Kalkulatu: 3/4 × 2/5">Calcula: 3/4 × 2/5</p>
+              <button class="toggle-hint-button" data-target="hint-1">
+                <i class="fas fa-lightbulb"></i>
+                <span data-lang-es="Mostrar Pista/Razón" data-lang-eu="Pista/Arrazoia Erakutsi" data-lang-es-hide="Ocultar Pista/Razón" data-lang-eu-hide="Pista/Arrazoia Ezkutatu">Ver pista</span>
+              </button>
+              <div class="hint-content" id="hint-1">
+                <p data-lang-es="Multiplica numeradores y denominadores por separado, luego simplifica." data-lang-eu="Biderkatu zenbakitzaileak eta izendatzaileak bereizita, gero sinplifikatu.">Multiplica numeradores y denominadores por separado, luego simplifica.</p>
+              </div>
+            </li>
+            <li>
+              <p data-lang-es="Calcula: 2/3 ÷ 1/4" data-lang-eu="Kalkulatu: 2/3 ÷ 1/4">Calcula: 2/3 ÷ 1/4</p>
+              <button class="toggle-hint-button" data-target="hint-2">
+                <i class="fas fa-lightbulb"></i>
+                <span data-lang-es="Mostrar Pista/Razón" data-lang-eu="Pista/Arrazoia Erakutsi" data-lang-es-hide="Ocultar Pista/Razón" data-lang-eu-hide="Pista/Arrazoia Ezkutatu">Ver pista</span>
+              </button>
+              <div class="hint-content" id="hint-2">
+                <p data-lang-es="Recuerda: dividir es multiplicar por la inversa. La inversa de 1/4 es 4/1." data-lang-eu="Gogoratu: zatitzea alderantzizkoaz biderkatzea da. 1/4-ren alderantzizkoa 4/1 da.">Recuerda: dividir es multiplicar por la inversa. La inversa de 1/4 es 4/1.</p>
+              </div>
+            </li>
+            <li>
+              <p data-lang-es="Calcula: (1/2 + 1/3) × 3/4" data-lang-eu="Kalkulatu: (1/2 + 1/3) × 3/4">Calcula: (1/2 + 1/3) × 3/4</p>
+              <button class="toggle-hint-button" data-target="hint-3">
+                <i class="fas fa-lightbulb"></i>
+                <span data-lang-es="Mostrar Pista/Razón" data-lang-eu="Pista/Arrazoia Erakutsi" data-lang-es-hide="Ocultar Pista/Razón" data-lang-eu-hide="Pista/Arrazoia Ezkutatu">Ver pista</span>
+              </button>
+              <div class="hint-content" id="hint-3">
+                <p data-lang-es="Primero resuelve el paréntesis (suma), luego multiplica por 3/4." data-lang-eu="Lehenik ebazi parentesia (batuketa), gero biderkatu 3/4z.">Primero resuelve el paréntesis (suma), luego multiplica por 3/4.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  
+  <script>
+    function calculateFractionOperation() {
+      const num1 = parseInt(document.getElementById('frac1Num').value);
+      const den1 = parseInt(document.getElementById('frac1Den').value);
+      const num2 = parseInt(document.getElementById('frac2Num').value);
+      const den2 = parseInt(document.getElementById('frac2Den').value);
+      const operation = document.getElementById('operation').value;
+      
+      if (isNaN(num1) || isNaN(den1) || isNaN(num2) || isNaN(den2) || den1 === 0 || den2 === 0) {
+        document.getElementById('operationResult').innerHTML = 
+          '<p class="error">' + (window.langUtils && window.langUtils.getCurrentLang() === 'eu' 
+            ? 'Mesedez, sartu baliozko zenbakiak eta 0 ez den izendatzaileak' 
+            : 'Por favor, introduce números válidos y denominadores diferentes de 0') + '</p>';
+        return;
+      }
+      
+      if (operation === '/' && num2 === 0) {
+        document.getElementById('operationResult').innerHTML = 
+          '<p class="error">' + (window.langUtils && window.langUtils.getCurrentLang() === 'eu' 
+            ? 'Errorea: Ezin da zerorekin zatitu' 
+            : 'Error: No se puede dividir por cero') + '</p>';
+        return;
+      }
+      
+      let resultNum, resultDen;
+      let operationSymbol;
+      let stepDescription;
+      
+      if (operation === '*') {
+        resultNum = num1 * num2;
+        resultDen = den1 * den2;
+        operationSymbol = '×';
+        stepDescription = (window.langUtils && window.langUtils.getCurrentLang() === 'eu' 
+          ? `Biderkatu: ${num1} × ${num2} = ${resultNum}, ${den1} × ${den2} = ${resultDen}`
+          : `Multiplicar: ${num1} × ${num2} = ${resultNum}, ${den1} × ${den2} = ${resultDen}`);
+      } else {
+        resultNum = num1 * den2;
+        resultDen = den1 * num2;
+        operationSymbol = '÷';
+        stepDescription = (window.langUtils && window.langUtils.getCurrentLang() === 'eu' 
+          ? `Zatitu (alderantzizkoaz biderkatu): ${num1} × ${den2} = ${resultNum}, ${den1} × ${num2} = ${resultDen}`
+          : `Dividir (multiplicar por inversa): ${num1} × ${den2} = ${resultNum}, ${den1} × ${num2} = ${resultDen}`);
+      }
+      
+      // Simplificar el resultado
+      const gcd = findGCD(Math.abs(resultNum), resultDen);
+      const simplifiedNum = resultNum / gcd;
+      const simplifiedDen = resultDen / gcd;
+      
+      let resultHTML = `<p><strong>${num1}/${den1} ${operationSymbol} ${num2}/${den2}</strong></p>`;
+      resultHTML += `<p><strong>${(window.langUtils && window.langUtils.getCurrentLang() === 'eu' ? '1. Urratsa' : 'Paso 1')}:</strong> ${stepDescription}</p>`;
+      resultHTML += `<p><strong>${(window.langUtils && window.langUtils.getCurrentLang() === 'eu' ? '2. Urratsa' : 'Paso 2')}:</strong> ${(window.langUtils && window.langUtils.getCurrentLang() === 'eu' ? 'Emaitza' : 'Resultado')}: ${resultNum}/${resultDen}</p>`;
+      
+      if (gcd > 1) {
+        resultHTML += `<p><strong>${(window.langUtils && window.langUtils.getCurrentLang() === 'eu' ? '3. Urratsa' : 'Paso 3')}:</strong> ${(window.langUtils && window.langUtils.getCurrentLang() === 'eu' ? 'Sinplifikatu' : 'Simplificar')}: ${resultNum}/${resultDen} = ${simplifiedNum}/${simplifiedDen}</p>`;
+        resultHTML += `<p class="ok"><strong>${(window.langUtils && window.langUtils.getCurrentLang() === 'eu' ? 'Emaitza finala' : 'Resultado final')}: ${simplifiedNum}/${simplifiedDen}</strong></p>`;
+      } else {
+        resultHTML += `<p class="ok"><strong>${(window.langUtils && window.langUtils.getCurrentLang() === 'eu' ? 'Emaitza finala' : 'Resultado final')}: ${resultNum}/${resultDen}</strong> (${(window.langUtils && window.langUtils.getCurrentLang() === 'eu' ? 'jada sinplifikatuta' : 'ya está simplificado')})</p>`;
+      }
+      
+      document.getElementById('operationResult').innerHTML = resultHTML;
+    }
+
+    function findGCD(a, b) {
+      a = Math.abs(a);
+      b = Math.abs(b);
+      
+      while (b !== 0) {
+        const temp = b;
+        b = a % b;
+        a = temp;
+      }
+      
+      return a;
+    }
+  </script>
+  
+  <!-- Botón flotante para volver arriba -->
+  <button id="back-to-top" aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <script>
+    // Configuración del botón de volver arriba
+    document.addEventListener('DOMContentLoaded', function() {
+      const backToTopButton = document.getElementById('back-to-top');
+      
+      // Mostrar/ocultar botón al hacer scroll
+      function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
+      }
+      
+      // Mostrar el botón después de cargar la página
+      setTimeout(toggleBackToTop, 100);
+      
+      // Escuchar el evento de scroll
+      window.addEventListener('scroll', toggleBackToTop);
+      
+      // Hacer scroll suave al hacer clic
+      backToTopButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

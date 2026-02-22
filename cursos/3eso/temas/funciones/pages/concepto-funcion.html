@@ -1,0 +1,286 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Concepto de Función - Funciones" data-lang-eu="Funtzio Kontzeptua - Funtzioak">Concepto de Función - Funciones</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-chart-line"></i>
+            <span data-lang-es="Concepto de Función" data-lang-eu="Funtzio Kontzeptua">Concepto de Función</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="action-buttons" style="text-align: center; margin: 2rem 0;">
+            <button class="button-primary" data-lang-es="Ejercicios" data-lang-eu="Ariketak" onclick="alert('Próximamente')">
+                <i class="fas fa-edit"></i> Ejercicios
+            </button>
+            <button class="button-secondary" data-lang-es="Herramienta" data-lang-eu="Tresna" onclick="alert('Próximamente')">
+                <i class="fas fa-tools"></i> Herramienta
+            </button>
+        </div>
+
+        <h2 class="page-title" data-lang-es="Concepto de Función" data-lang-eu="Funtzio Kontzeptua">Concepto de Función</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es una Función?" data-lang-eu="Zer da Funtzio bat?">¿Qué es una Función?</h3>
+            <p data-lang-es="Una función es como una máquina matemática que toma un valor de entrada (input) y produce un único valor de salida (output). Cada vez que introduces el mismo valor de entrada, siempre obtendrás el mismo resultado."
+               data-lang-eu="Funtzio bat sarrera balio bat (input) hartzen eta irteera balio bakarra (output) sortzen duen makina matematiko bat da. Sarritan sarrera balio berbera sartzen baduzu, beti emaitza berbera lortuko duzu.">
+               Una función es como una máquina matemática que toma un valor de entrada (input) y produce un único valor de salida (output). Cada vez que introduces el mismo valor de entrada, siempre obtendrás el mismo resultado.
+            </p>
+            <p class="key-takeaway" data-lang-es="<b>Definición formal:</b> Una función f es una relación que asigna a cada elemento x de un conjunto dominio un único elemento y de un conjunto recorrido."
+               data-lang-eu="<b>Definizio formala:</b> f funtzio bat domeinuko x elementu bakoitzeko errepideko y elementu bakarra esleitzen duen erlazio bat da.">
+               <b>Definición formal:</b> Una función f es una relación que asigna a cada elemento x de un conjunto dominio un único elemento y de un conjunto recorrido.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Notación de Funciones" data-lang-eu="Funtzio Notazioa">Notación de Funciones</h3>
+            <p data-lang-es="Las funciones se escriben como f(x) y se leen \"f de x\". Esto significa que la función f se aplica al valor x."
+               data-lang-eu="Funtzioak f(x) bezala idazten dira eta \"f x\" bezala irakurten da. Horrek esan nahi du f funtzioa x balioari aplikatzen zaiola.">
+               Las funciones se escriben como f(x) y se leen "f de x". Esto significa que la función f se aplica al valor x.
+            </p>
+            <div class="formula-box">
+                <p><strong data-lang-es="Notación general:" data-lang-eu="Notazio orokorra:">Notación general:</strong></p>
+                <p class="math">y = f(x)</p>
+                <p>donde:</p>
+                <ul>
+                    <li data-lang-es="x es la variable independiente" data-lang-eu="x aldagai independentea da">x es la variable independiente</li>
+                    <li data-lang-es="y es la variable dependiente" data-lang-eu="y aldagai dependentea da">y es la variable dependiente</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Dominio y Recorrido" data-lang-eu="Domeinua eta Ibilbidea">Dominio y Recorrido</h3>
+            <p data-lang-es="Toda función tiene dos conjuntos importantes:"
+               data-lang-eu="Funtzio bakoitzak bi multzo garrantzitsu ditu:">
+               Toda función tiene dos conjuntos importantes:
+            </p>
+            <div class="formula-box">
+                <p><strong data-lang-es="Dominio (Dom):" data-lang-eu="Domeinua (Dom):">Dominio (Dom):</strong></p>
+                <p data-lang-es="Conjunto de todos los valores que puede tomar la variable independiente x. Es el conjunto de entrada."
+                   data-lang-eu="x aldagai independenteak hartu ditzakeen balio guztien multzoa. Sarrera multzoa da.">
+                   Conjunto de todos los valores que puede tomar la variable independiente x. Es el conjunto de entrada.
+                </p>
+                <p style="margin-top: 1rem;"><strong data-lang-es="Recorrido o Rango (Im):" data-lang-eu="Ibilbidea edo Barrutia (Im):">Recorrido o Rango (Im):</strong></p>
+                <p data-lang-es="Conjunto de todos los valores que toma la función. Es el conjunto de salida."
+                   data-lang-eu="Funtzioak hartzen dituen balio guztien multzoa. Irteera multzoa da.">
+                   Conjunto de todos los valores que toma la función. Es el conjunto de salida.
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Representaciones de una Función" data-lang-eu="Funtzio baten Ordezkaritzak">Representaciones de una Función</h3>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-calculator icon-concept"></i>
+                        <span data-lang-es="Representación Analítica" data-lang-eu="Ordezkaritza Analitikoa">Representación Analítica</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Se expresa mediante una fórmula matemática que relaciona x con y."
+                           data-lang-eu="x y-ekin erlazionatzen duen formula matematiko baten bidez adierazten da.">
+                           Se expresa mediante una fórmula matemática que relaciona x con y.
+                        </p>
+                        <p class="example">
+                            <em data-lang-es="Ejemplos: f(x) = 2x + 1, g(x) = x², h(x) = 1/x" 
+                                data-lang-eu="Adibideak: f(x) = 2x + 1, g(x) = x², h(x) = 1/x">
+                                Ejemplos: f(x) = 2x + 1, g(x) = x², h(x) = 1/x
+                            </em>
+                        </p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-chart-area icon-concept"></i>
+                        <span data-lang-es="Representación Gráfica" data-lang-eu="Ordezkaritza Grafikoa">Representación Gráfica</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Se dibuja en un sistema de coordenadas. El eje X representa la variable independiente y el eje Y la variable dependiente."
+                           data-lang-eu="Koordenatu sistema batean marrazten da. X ardatza aldagai independentea irudikatzen du eta Y ardatza aldagai dependentea.">
+                           Se dibuja en un sistema de coordenadas. El eje X representa la variable independiente y el eje Y la variable dependiente.
+                        </p>
+                        <p class="example">
+                            <em data-lang-es="Prueba: Si trazamos f(x) = 2x + 1, obtenemos una línea recta" 
+                                data-lang-eu="Probatu: f(x) = 2x + 1 marrazten badugu, lerro zuzen bat lortzen dugu">
+                                Prueba: Si trazamos f(x) = 2x + 1, obtenemos una línea recta
+                            </em>
+                        </p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-table icon-concept"></i>
+                        <span data-lang-es="Representación Tabular" data-lang-eu="Ordezkaritza Taularra">Representación Tabular</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Se presenta en forma de tabla con valores de x y sus correspondientes f(x)."
+                           data-lang-eu="Taularekin aurkezten da, x balioekin eta haien f(x) dagokienekin.">
+                           Se presenta en forma de tabla con valores de x y sus correspondientes f(x).
+                        </p>
+                        <div class="example">
+                            <table style="margin: 1rem auto; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th style="border: 1px solid var(--border-color); padding: 0.5rem;">x</th>
+                                        <th style="border: 1px solid var(--border-color); padding: 0.5rem;">f(x) = 2x + 1</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">0</td>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">1</td>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">2</td>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">5</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Ejemplo Práctico" data-lang-eu="Adibide Praktikoa">Ejemplo Práctico</h3>
+            <p data-lang-es="Imagina que f(x) = 2x + 1 representa el coste de comprar x entradas de cine a 2€ cada una, más 1€ de gastos de reserva."
+               data-lang-eu="Imagina ezazu f(x) = 2x + 1 funtzioak zinema sarrera bakoitzeko 2€-ko prezioa eta 1€-ko erreserba gastuak dituela.">
+               Imagina que f(x) = 2x + 1 representa el coste de comprar x entradas de cine a 2€ cada una, más 1€ de gastos de reserva.
+            </p>
+            <div class="example">
+                <p><strong data-lang-es="Calculemos algunos valores:" data-lang-eu="Zenbait balio kalkula ditzagun:">Calculemos algunos valores:</strong></p>
+                <ul>
+                    <li data-lang-es="Si compras 0 entradas: f(0) = 2(0) + 1 = 1€ (solo gastos de reserva)" 
+                        data-lang-eu="0 sarrera erosiz gero: f(0) = 2(0) + 1 = 1€ (soilik erreserba gastuak)">
+                        Si compras 0 entradas: f(0) = 2(0) + 1 = 1€ (solo gastos de reserva)
+                    </li>
+                    <li data-lang-es="Si compras 3 entradas: f(3) = 2(3) + 1 = 7€" 
+                        data-lang-eu="3 sarrera erosiz gero: f(3) = 2(3) + 1 = 7€">
+                        Si compras 3 entradas: f(3) = 2(3) + 1 = 7€
+                    </li>
+                    <li data-lang-es="Si compras 10 entradas: f(10) = 2(10) + 1 = 21€" 
+                        data-lang-eu="10 sarrera erosiz gero: f(10) = 2(10) + 1 = 21€">
+                        Si compras 10 entradas: f(10) = 2(10) + 1 = 21€
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="⚠️ Errores Típicos" data-lang-eu="⚠️ Ohiko Akatsak">⚠️ Errores Típicos</h3>
+            <ul>
+                <li data-lang-es="Confundir función con relación general: No todas las relaciones son funciones" 
+                    data-lang-eu="Funtzioa erlazio orokorrarekin nahastea: ez dira erlazio guztiak funtzioak">
+                    Confundir función con relación general: No todas las relaciones son funciones
+                </li>
+                <li data-lang-es="No verificar la unicidad: Cada x debe tener UN solo f(x)" 
+                    data-lang-eu="Bakartasuna egiaztatzea: x bakoitzak f(x) BAKARRA izan behar du">
+                    No verificar la unicidad: Cada x debe tener UN solo f(x)
+                </li>
+                <li data-lang-es="Confundir dominio con recorrido" 
+                    data-lang-eu="Domeinua ibilbidearekin nahastea">
+                    Confundir dominio con recorrido
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

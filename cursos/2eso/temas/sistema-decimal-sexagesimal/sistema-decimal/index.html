@@ -1,0 +1,331 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="El sistema de numeración decimal" data-lang-eu="Zenbakitze hamartarra">El sistema de numeración decimal</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <i class="fas fa-calculator"></i>
+      <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
+    </nav>
+  </header>
+  
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol>
+      <li><a href="../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
+      <li><a href="../index.html" data-lang-es="Sistema decimal y sexagesimal" data-lang-eu="Sistema hamartarra eta sexagesimala">Sistema decimal y sexagesimal</a></li>
+      <li class="active" aria-current="page"><span data-lang-es="El sistema de numeración decimal" data-lang-eu="Zenbakitze hamartarra">El sistema de numeración decimal</span></li>
+    </ol>
+  </nav>
+  
+  <main>
+    <h1 data-lang-es="El sistema de numeración decimal" data-lang-eu="Zenbakitze hamartarra">El sistema de numeración decimal</h1>
+    
+    <section class="content-section">
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="true">
+            <i class="fas fa-info-circle icon-concept"></i>
+            <span data-lang-es="¿Qué es el sistema decimal?" data-lang-eu="Zer da sistema hamartarra?">¿Qué es el sistema decimal?</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content" style="max-height: none;">
+            <p data-lang-es="El <strong>sistema de numeración decimal</strong> es el sistema que utilizamos habitualmente para contar y escribir números. Se llama 'decimal' porque utiliza <strong>10 símbolos diferentes</strong> (del 0 al 9) y se basa en el valor posicional." data-lang-eu="<strong>Zenbakitze hamartarra</strong> zenbakiak zenbatu eta idazteko erabiltzen dugun sistema da. 'Hamartar' deitzen da <strong>10 ikur desberdin</strong> (0tik 9ra) erabiltzen dituelako eta balio posizionala oinarritzat hartzen duelako.">El <strong>sistema de numeración decimal</strong> es el sistema que utilizamos habitualmente para contar y escribir números. Se llama 'decimal' porque utiliza <strong>10 símbolos diferentes</strong> (del 0 al 9) y se basa en el valor posicional.</p>
+            
+            <div class="interactive-idea card-style">
+              <h4><i class="fas fa-lightbulb"></i> <span data-lang-es="Idea Interactiva" data-lang-eu="Ideia Interaktiboa">Idea Interactiva</span></h4>
+              <p data-lang-es="Imagina que cada posición en un número es como una 'caja' que puede contener del 0 al 9. Cuando una caja se llena, pasa 1 a la siguiente caja de la izquierda." data-lang-eu="Imajinatu zenbaki baten posizio bakoitza 0tik 9ra eduki dezakeen 'kutxa' bat dela. Kutxa bat betetzen denean, 1 bat pasatzen da ezkerreko hurrengo kutxara.">Imagina que cada posición en un número es como una 'caja' que puede contener del 0 al 9. Cuando una caja se llena, pasa 1 a la siguiente caja de la izquierda.</p>
+              <div class="tool-objective">
+                <strong data-lang-es="Objetivo:" data-lang-eu="Helburua:">Objetivo:</strong> <span data-lang-es="Entender cómo funciona el valor posicional" data-lang-eu="Ulertu balio posizionalak nola funtzionatzen duen">Entender cómo funciona el valor posicional</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-sort-numeric-up icon-concept"></i>
+            <span data-lang-es="Valor posicional" data-lang-eu="Posizio-balioa">Valor posicional</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Cada dígito en un número tiene un valor que depende de su <strong>posición</strong>. Cuanto más a la izquierda esté, mayor será su valor." data-lang-eu="Zenbaki baten digitu bakoitzak bere <strong>posizioaren</strong> araberako balioa du. Ezkerreago egon, handiago izango da bere balioa.">Cada dígito en un número tiene un valor que depende de su <strong>posición</strong>. Cuanto más a la izquierda esté, mayor será su valor.</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: El número 2.547" data-lang-eu="Adibidea: 2.547 zenbakia">Ejemplo: El número 2.547</h4>
+              <p data-lang-es="<strong>2</strong> = 2 × 1.000 = 2.000 (miles)" data-lang-eu="<strong>2</strong> = 2 × 1.000 = 2.000 (mila)"><strong>2</strong> = 2 × 1.000 = 2.000 (miles)</p>
+              <p data-lang-es="<strong>5</strong> = 5 × 100 = 500 (centenas)" data-lang-eu="<strong>5</strong> = 5 × 100 = 500 (ehunka)"><strong>5</strong> = 5 × 100 = 500 (centenas)</p>
+              <p data-lang-es="<strong>4</strong> = 4 × 10 = 40 (decenas)" data-lang-eu="<strong>4</strong> = 4 × 10 = 40 (hamarka)"><strong>4</strong> = 4 × 10 = 40 (decenas)</p>
+              <p data-lang-es="<strong>7</strong> = 7 × 1 = 7 (unidades)" data-lang-eu="<strong>7</strong> = 7 × 1 = 7 (unitate)"><strong>7</strong> = 7 × 1 = 7 (unidades)</p>
+              <div class="solution">
+                <strong data-lang-es="Total:" data-lang-eu="Guztira:">Total:</strong> <span data-lang-es="2.000 + 500 + 40 + 7 = 2.547" data-lang-eu="2.000 + 500 + 40 + 7 = 2.547">2.000 + 500 + 40 + 7 = 2.547</span>
+              </div>
+            </div>
+
+            <div class="variable-diagram">
+              <strong data-lang-es="Visualización del valor posicional" data-lang-eu="Balio posizionalaren ikuspegia">Visualización del valor posicional</strong>
+              <div class="split">
+                <div class="category">
+                  <strong data-lang-es="Miles" data-lang-eu="Mila">Miles</strong>
+                  <div class="sub-split">
+                    <div class="sub-category">2</div>
+                    <div class="sub-category">× 1.000</div>
+                  </div>
+                </div>
+                <div class="category">
+                  <strong data-lang-es="Centenas" data-lang-eu="Ehunka">Centenas</strong>
+                  <div class="sub-split">
+                    <div class="sub-category">5</div>
+                    <div class="sub-category">× 100</div>
+                  </div>
+                </div>
+                <div class="category">
+                  <strong data-lang-es="Decenas" data-lang-eu="Hamarka">Decenas</strong>
+                  <div class="sub-split">
+                    <div class="sub-category">4</div>
+                    <div class="sub-category">× 10</div>
+                  </div>
+                </div>
+                <div class="category">
+                  <strong data-lang-es="Unidades" data-lang-eu="Unitate">Unidades</strong>
+                  <div class="sub-split">
+                    <div class="sub-category">7</div>
+                    <div class="sub-category">× 1</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-expand-arrows-alt icon-concept"></i>
+            <span data-lang-es="Descomposición polinómica" data-lang-eu="Polinomio deskonposaketa">Descomposición polinómica</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="La <strong>descomposición polinómica</strong> es una forma de escribir un número como suma de potencias de 10." data-lang-eu="<strong>Deskonposaketa polinomikoa</strong> zenbaki bat 10en potentzien batuketa gisa idazteko modu bat da.">La <strong>descomposición polinómica</strong> es una forma de escribir un número como suma de potencias de 10.</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: 8.392" data-lang-eu="Adibidea: 8.392">Ejemplo: 8.392</h4>
+              <div class="solution">
+                <strong data-lang-es="Descomposición:" data-lang-eu="Deskonposaketa:">Descomposición:</strong>
+                <ul>
+                  <li><span>8.392</span> = 8 × 10³ + 3 × 10² + 9 × 10¹ + 2 × 10⁰</li>
+                  <li><span>8.392</span> = 8 × 1.000 + 3 × 100 + 9 × 10 + 2 × 1</li>
+                  <li><span>8.392</span> = 8.000 + 300 + 90 + 2</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="interactive-calculator">
+              <h5><i class="fas fa-calculator"></i> <span data-lang-es="Calculadora de Descomposición" data-lang-eu="Deskonposaketa Kalkulagailua">Calculadora de Descomposición</span></h5>
+              <div class="calc-input">
+                <label for="number-input" data-lang-es="Introduce un número:" data-lang-eu="Sartu zenbaki bat:">Introduce un número:</label>
+                <textarea id="number-input" placeholder="Ejemplo: 1234"></textarea>
+              </div>
+              <div class="calc-buttons">
+                <button onclick="descomponerNumero()" data-lang-es="Descomponer" data-lang-eu="Deskonposatu">Descomponer</button>
+                <button onclick="limpiarCalculadora()" data-lang-es="Limpiar" data-lang-eu="Garbitu">Limpiar</button>
+              </div>
+              <div class="calc-results">
+                <h6 data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</h6>
+                <p id="descomposicion-resultado"></p>
+                <h6 data-lang-es="Descomposición polinómica:" data-lang-eu="Deskonposaketa polinomikoa:">Descomposición polinómica:</h6>
+                <p id="polinomica-resultado"></p>
+              </div>
+              <div class="calc-note">
+                <i class="fas fa-info-circle"></i> <span data-lang-es="Prueba con números de 1 a 4 cifras" data-lang-eu="Probatu 1tik 4 zifrako zenbakiak">Prueba con números de 1 a 4 cifras</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-list-ol icon-concept"></i>
+            <span data-lang-es="Ejercicios propuestos" data-lang-eu="Ariketak proposatuak">Ejercicios propuestos</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <ol class="exercises-list">
+              <li>
+                <p data-lang-es="Descompón el número 7.856 en sus unidades de millar, centenas, decenas y unidades." data-lang-eu="Deskonposatu 7.856 zenbakia bere mila unitate, ehunka, hamarka eta unitateetan.">Descompón el número 7.856 en sus unidades de millar, centenas, decenas y unidades.</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> <span data-lang-es="Ver pista" data-lang-eu="Ikusi pista">Ver pista</span>
+                </button>
+                <div class="hint-content">
+                  <p data-lang-es="Recuerda: cada posición se multiplica por una potencia de 10" data-lang-eu="Gogoratu: posizio bakoitza 10en potentzia batez biderkatzen da">Recuerda: cada posición se multiplica por una potencia de 10</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="Escribe la descomposición polinómica del número 9.234." data-lang-eu="Idatzi 9.234 zenbakiaren deskonposaketa polinomikoa.">Escribe la descomposición polinómica del número 9.234.</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> <span data-lang-es="Ver pista" data-lang-eu="Ikusi pista">Ver pista</span>
+                </button>
+                <div class="hint-content">
+                  <p data-lang-es="Usa la forma: a × 10³ + b × 10² + c × 10¹ + d × 10⁰" data-lang-eu="Erabili forma hau: a × 10³ + b × 10² + c × 10¹ + d × 10⁰">Usa la forma: a × 10³ + b × 10² + c × 10¹ + d × 10⁰</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="¿Cuál es el valor de la cifra 5 en el número 15.847?" data-lang-eu="Zein da 5 zenbakiaren balioa 15.847 zenbakian?">¿Cuál es el valor de la cifra 5 en el número 15.847?</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> <span data-lang-es="Ver pista" data-lang-eu="Ikusi pista">Ver pista</span>
+                </button>
+                <div class="hint-content">
+                  <p data-lang-es="Observa en qué posición está el 5 y multiplica por la potencia de 10 correspondiente" data-lang-eu="Behatu 5 zenbakia zein posiziotan dagoen eta biderkatu dagokion 10en potentziarekin">Observa en qué posición está el 5 y multiplica por la potencia de 10 correspondiente</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  <script src="../js/sistema-decimal.js"></script>
+
+  <!-- Botón flotante para volver arriba -->
+  <button id="back-to-top" aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <script>
+    // Configuración del botón de volver arriba
+    document.addEventListener('DOMContentLoaded', function() {
+      const backToTopButton = document.getElementById('back-to-top');
+      
+      // Mostrar/ocultar botón al hacer scroll
+      function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
+      }
+      
+      // Mostrar el botón después de cargar la página
+      setTimeout(toggleBackToTop, 100);
+      
+      // Escuchar el evento de scroll
+      window.addEventListener('scroll', toggleBackToTop);
+      
+      // Hacer scroll suave al hacer clic
+      backToTopButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+  
+  <script>
+    // Funcionalidad para la calculadora de descomposiciÃ³n
+    function descomponerNumero() {
+      const input = document.getElementById('number-input').value.trim();
+      if (!input || isNaN(input)) {
+        alert('Por favor, introduce un número válido');
+        return;
+      }
+      
+      const numero = parseInt(input);
+      if (numero < 1 || numero > 9999) {
+        alert('Por favor, introduce un número entre 1 y 9999');
+        return;
+      }
+      
+      const numeroStr = numero.toString();
+      let descomposicion = '';
+      let polinomica = '';
+      
+      for (let i = 0; i < numeroStr.length; i++) {
+        const cifra = parseInt(numeroStr[i]);
+        const posicion = numeroStr.length - 1 - i;
+        const valor = cifra * Math.pow(10, posicion);
+        
+        if (i > 0) descomposicion += ' + ';
+        descomposicion += valor;
+        
+        if (i > 0) polinomica += ' + ';
+        polinomica += `${cifra} × 10^${posicion}`;
+      }
+      
+      document.getElementById('descomposicion-resultado').textContent = descomposicion;
+      document.getElementById('polinomica-resultado').textContent = polinomica;
+    }
+    
+    function limpiarCalculadora() {
+      document.getElementById('number-input').value = '';
+      document.getElementById('descomposicion-resultado').textContent = '';
+      document.getElementById('polinomica-resultado').textContent = '';
+    }
+    
+    // Funcionalidad para mostrar/ocultar pistas
+    function toggleHint(button) {
+      const hintContent = button.nextElementSibling;
+      const isVisible = hintContent.classList.contains('visible');
+      
+      if (isVisible) {
+        hintContent.classList.remove('visible');
+        button.classList.remove('open');
+      } else {
+        hintContent.classList.add('visible');
+        button.classList.add('open');
+      }
+    }
+    
+    // Inicialización cuando se carga la página
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof initTheme === 'function') {
+        initTheme(document.body, document.getElementById('theme-toggle'));
+      }
+      if (typeof initLanguage === 'function') {
+        initLanguage(document.documentElement, document.querySelectorAll('[data-lang-es], [data-lang-eu]'), document.getElementById('lang-toggle'));
+      }
+    });
+  </script>
+</body>
+</html>

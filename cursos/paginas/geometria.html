@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matematika 1. DBH - Geometria</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/numeros.css">
+    <link rel="icon" href="../img/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <div class="logo-titulo">
+            <h1>Geometria Matematikan</h1>
+        </div>
+        <nav class="navbar" aria-label="Nabigazio nagusia">
+            <a href="../index.html" class="navbar-logo">Matematika 1. DBH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <div class="navbar-menu">
+                <a href="../index.html" class="navbar-item">Hasiera</a>
+                <div class="dropdown">
+                    <a href="#" class="navbar-item dropdown-btn">Gaiak</a>
+                    <div class="dropdown-content">
+                        <a href="numeros-naturales.html">Zenbaki Naturalak</a>
+                        <a href="divisibilidad.html">Zatigarritasuna</a>
+                        <a href="numeros-enteros.html">Zenbaki Osoak</a>
+                        <a href="fracciones.html">Zatikiak</a>
+                        <a href="algebra.html">Aljebran</a>
+                        <a href="geometria.html" class="active">Geometria</a>
+                        <a href="tablas-graficas.html">Taulak eta Grafikoak</a>
+                    </div>
+                </div>
+                <a href="https://chatgpt.com/g/g-67d38635fb0c81919668655bdd91d6f7-matella-euskeraz" class="navbar-item">Matella ChatGPT</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="teoria-geometria" class="seccion-contenedor">
+            <h2>Geometria</h2>
+            
+            <div class="tarjetas-secciones">
+                <div class="tarjeta" data-modal="triangulos">
+                    <h3> Triangeluak</h3>
+                    <p>Triangeluen sailkapena eta propietateak</p>
+                    <a href="#" class="btn abrir-modal btn-mas-informacion">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="cuadrilateros">
+                    <h3> Laukiak</h3>
+                    <p>Lauki motak eta ezaugarriak</p>
+                    <a href="#" class="btn abrir-modal btn-mas-informacion">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="pitagoras">
+                    <h3> Pitagorasen Teorema</h3>
+                    <p>Teoremaren aplikazioak eta formula</p>
+                    <a href="#" class="btn abrir-modal btn-mas-informacion">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="areas-perimetros">
+                    <h3> Azalerak eta Perimetroak</h3>
+                    <p>Figura lauetako azaleren kalkulua</p>
+                    <a href="#" class="btn abrir-modal btn-mas-informacion">Informazio Gehiago</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="herramientas-interactivas" class="seccion-contenedor">
+            <h2>Tresna Interaktiboak</h2>
+            <div class="container">
+                <h1 class="title">Forma Geometrikoen Eraikitzailea</h1>
+                
+                <!-- Selector de modo -->
+                <div class="mode-selector">
+                    <button id="btn-formak" class="btn btn-mode btn-selected">Formak</button>
+                    <button id="btn-teoremak" class="btn btn-mode">Teoremak</button>
+                </div>
+                
+                <!-- Selector de formas -->
+                <div id="formak-selector" class="shape-selector">
+                    <button id="btn-triangelua" class="btn btn-shape btn-selected">Triangelua</button>
+                    <button id="btn-laukizuzena" class="btn btn-shape">Laukizuzena</button>
+                    <button id="btn-zirkulua" class="btn btn-shape">Zirkulua</button>
+                    <button id="btn-erronboa" class="btn btn-shape">Erronboa</button>
+                </div>
+                
+                <!-- Selector de teoremas (oculto inicialmente) -->
+                <div id="teoremak-selector" class="shape-selector" style="display: none;">
+                    <button id="btn-pitagoras" class="btn btn-theorem btn-selected">Pitagoras</button>
+                </div>
+                
+                <div class="main-content">
+                    <!-- Panel izquierdo - Visualización y controles -->
+                    <div class="panel panel-main">
+                        <div class="panel-row">
+                            <!-- Visualización -->
+                            <div class="panel-col visualization">
+                                <h2 class="subtitle" id="visualization-title">Forma</h2>
+                                <div id="visualization-container" class="visualization-container">
+                                    <!-- Aquí se renderiza el SVG -->
+                                </div>
+                                
+                                <div id="properties-container" class="properties-container">
+                                    <!-- Propietateen informazioa -->
+                                </div>
+                            </div>
+                            
+                            <!-- Controles -->
+                            <div class="panel-col controls">
+                                <h2 class="subtitle">Kontrolak</h2>
+                                <div id="controls-container" class="controls-container">
+                                    <!-- Kontrolak hemen bistaratuko dira -->
+                                </div>
+                                <div id="classification-container" class="classification-container">
+                                    <!-- Sailkapena (triangeluentzat) -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Panel derecho - Información adicional -->
+                    <div class="panel panel-info">
+                        <h2 class="subtitle">Xehetasunak</h2>
+                        <div id="details-container" class="details-container">
+                            <!-- Xehetasun informazioa -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modales -->
+    <div id="modal-triangulos" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-cuadrilateros" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-pitagoras" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-areas-perimetros" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+
+    <footer>
+        <p>2025 Matematika 1. DBH - Geometria Atala</p>
+        <p> Bihotzez garatua Derrigorrezko Bigarren Hezkuntzako ikasleentzat</p>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/modales-geometria.js"></script>
+    <script src="../js/herramienta-geometria.js"></script>
+</body>
+</html>

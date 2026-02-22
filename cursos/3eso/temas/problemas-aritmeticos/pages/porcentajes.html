@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Porcentajes - Problemas Aritméticos" data-lang-eu="Ehunekoak - Aritmetika Problemak">Porcentajes - Problemas Aritméticos</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-percentage"></i>
+            <span data-lang-es="Porcentajes" data-lang-eu="Ehunekoak">Porcentajes</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <!-- Botones de ejercicios y herramienta -->
+    <div class="action-buttons">
+        <button class="btn-exercises" data-lang-es="Ejercicios" data-lang-eu="Ariketa">Ejercicios</button>
+        <button class="btn-tool" data-lang-es="Herramienta" data-lang-eu="Tresna">Herramienta</button>
+    </div>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Porcentajes" data-lang-eu="Ehunekoak">Porcentajes</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es un Porcentaje?" data-lang-eu="Zer da Ehuneko bat?">¿Qué es un Porcentaje?</h3>
+            <p data-lang-es="Un porcentaje es una forma de expresar una fracción con denominador 100. Es una manera muy común de comparar proporciones y cantidades en nuestra vida diaria."
+               data-lang-eu="Ehuneko bat 100 izendatzaileko frakzio bat adierazteko modu bat da. Proportzioak eta kopuruak gure eguneroko bizitzan konparatzeko modu oso ohikoa da.">
+               Un porcentaje es una forma de expresar una fracción con denominador 100. Es una manera muy común de comparar proporciones y cantidades en nuestra vida diaria.
+            </p>
+            <p class="formula" data-lang-es="<b>Definición:</b> \(p\% = \frac{p}{100}\)"
+               data-lang-eu="<b>Definizioa:</b> \(p\% = \frac{p}{100}\)">
+               <b>Definición:</b> \(p\% = \frac{p}{100}\)
+            </p>
+            <p class="key-takeaway" data-lang-es="<b>Importante:</b> El símbolo % significa 'por cada cien' o 'de cada 100 unidades'."
+               data-lang-eu="<b>Garrantzitsua:</b> % sinboloak 'ehuneko bakoitzeko' edo '100 unitate bakoitzeko' esan nahi du.">
+               <b>Importante:</b> El símbolo % significa 'por cada cien' o 'de cada 100 unidades'.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Cálculos Básicos con Porcentajes" data-lang-eu="Ehunekoekin Oinarrizko Kalkuluak">Cálculos Básicos con Porcentajes</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-calculator icon-concept"></i>
+                        <span data-lang-es="Calcular el p% de x" data-lang-eu="x-ren p% kalkulatzea">Calcular el p% de x</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="formula" data-lang-es="<b>Fórmula:</b> \(x \cdot \frac{p}{100}\)"
+                           data-lang-eu="<b>Formula:</b> \(x \cdot \frac{p}{100}\)">
+                           <b>Fórmula:</b> \(x \cdot \frac{p}{100}\)
+                        </p>
+                        <p class="example" data-lang-es="<b>Problema:</b> ¿Cuánto es el 25% de 80?<br><b>Solución:</b> \(80 \cdot \frac{25}{100} = 80 \cdot 0.25 = 20\)"
+                           data-lang-eu="<b>Problema:</b> Zenbat da 80-ren %25?<br><b>Ebazpena:</b> \(80 \cdot \frac{25}{100} = 80 \cdot 0.25 = 20\)">
+                           <b>Problema:</b> ¿Cuánto es el 25% de 80?<br><b>Solución:</b> \(80 \cdot \frac{25}{100} = 80 \cdot 0.25 = 20\)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-percentage icon-concept"></i>
+                        <span data-lang-es="Qué porcentaje es a de b" data-lang-eu="Zenbat ehuneko da a b-ren">Qué porcentaje es a de b</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="formula" data-lang-es="<b>Fórmula:</b> \(\frac{a}{b} \cdot 100\)"
+                           data-lang-eu="<b>Formula:</b> \(\frac{a}{b} \cdot 100\)">
+                           <b>Fórmula:</b> \(\frac{a}{b} \cdot 100\)
+                        </p>
+                        <p class="example" data-lang-es="<b>Problema:</b> ¿Qué porcentaje es 15 de 60?<br><b>Solución:</b> \(\frac{15}{60} \cdot 100 = 0.25 \cdot 100 = 25\%\)"
+                           data-lang-eu="<b>Problema:</b> Zenbat ehuneko da 60-ren 15?<br><b>Ebazpena:</b> \(\frac{15}{60} \cdot 100 = 0.25 \cdot 100 = 25\%\)">
+                           <b>Problema:</b> ¿Qué porcentaje es 15 de 60?<br><b>Solución:</b> \(\frac{15}{60} \cdot 100 = 0.25 \cdot 100 = 25\%\)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-arrow-up icon-concept"></i>
+                        <span data-lang-es="Aumentar x en p%" data-lang-eu="x p% handitzea">Aumentar x en p%</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="formula" data-lang-es="<b>Fórmula:</b> \(x \cdot \left(1 + \frac{p}{100}\right)\)"
+                           data-lang-eu="<b>Formula:</b> \(x \cdot \left(1 + \frac{p}{100}\right)\)">
+                           <b>Fórmula:</b> \(x \cdot \left(1 + \frac{p}{100}\right)\)
+                        </p>
+                        <p class="example" data-lang-es="<b>Problema:</b> Aumenta 200€ en un 15%.<br><b>Solución:</b> \(200 \cdot \left(1 + \frac{15}{100}\right) = 200 \cdot 1.15 = 230\)€"
+                           data-lang-eu="<b>Problema:</b> Handitu 200€ %15 batekin.<br><b>Ebazpena:</b> \(200 \cdot \left(1 + \frac{15}{100}\right) = 200 \cdot 1.15 = 230\)€">
+                           <b>Problema:</b> Aumenta 200€ en un 15%.<br><b>Solución:</b> \(200 \cdot \left(1 + \frac{15}{100}\right) = 200 \cdot 1.15 = 230\)€
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-arrow-down icon-concept"></i>
+                        <span data-lang-es="Disminuir x en p%" data-lang-eu="x p% gutxitzea">Disminuir x en p%</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="formula" data-lang-es="<b>Fórmula:</b> \(x \cdot \left(1 - \frac{p}{100}\right)\)"
+                           data-lang-eu="<b>Formula:</b> \(x \cdot \left(1 - \frac{p}{100}\right)\)">
+                           <b>Fórmula:</b> \(x \cdot \left(1 - \frac{p}{100}\right)\)
+                        </p>
+                        <p class="example" data-lang-es="<b>Problema:</b> Disminuye 150€ en un 20%.<br><b>Solución:</b> \(150 \cdot \left(1 - \frac{20}{100}\right) = 150 \cdot 0.80 = 120\)€"
+                           data-lang-eu="<b>Problema:</b> Gutxitu 150€ %20 batekin.<br><b>Ebazpena:</b> \(150 \cdot \left(1 - \frac{20}{100}\right) = 150 \cdot 0.80 = 120\)€">
+                           <b>Problema:</b> Disminuye 150€ en un 20%.<br><b>Solución:</b> \(150 \cdot \left(1 - \frac{20}{100}\right) = 150 \cdot 0.80 = 120\)€
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Problemas con Porcentajes" data-lang-eu="Ehunekoen Problemak">Problemas con Porcentajes</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-tags icon-concept"></i>
+                        <span data-lang-es="Descuentos y Rebajas" data-lang-eu="Deskontuak eta Beherapendak">Descuentos y Rebajas</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Para calcular el precio final tras un descuento, multiplicamos el precio original por \(1 - \frac{d}{100}\)."
+                           data-lang-eu="Deskontu baten ondoren prezio finala kalkulatzeko, hasierako prezioa \(1 - \frac{d}{100}\) biderkatzen dugu.">
+                           Para calcular el precio final tras un descuento, multiplicamos el precio original por \(1 - \frac{d}{100}\).
+                        </p>
+                        <p class="example" data-lang-es="<b>Problema:</b> Una camiseta cuesta 40€ y tiene un descuento del 30%. ¿Cuál es el precio final?<br><b>Solución:</b> Precio final = \(40 \cdot (1 - \frac{30}{100}) = 40 \cdot 0.70 = 28\)€"
+                           data-lang-eu="<b>Problema:</b> Kamiseta bat 40€ kostako du eta %30eko deskontua du. Zein da prezio finala?<br><b>Ebazpena:</b> Prezio finala = \(40 \cdot (1 - \frac{30}{100}) = 40 \cdot 0.70 = 28\)€">
+                           <b>Problema:</b> Una camiseta cuesta 40€ y tiene un descuento del 30%. ¿Cuál es el precio final?<br><b>Solución:</b> Precio final = \(40 \cdot (1 - \frac{30}{100}) = 40 \cdot 0.70 = 28\)€
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-chart-line icon-concept"></i>
+                        <span data-lang-es="Impuestos y Aumentos" data-lang-eu="Zergak eta Handipenak">Impuestos y Aumentos</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Para calcular el precio final tras un aumento (como el IVA), multiplicamos el precio original por \(1 + \frac{aumento}{100}\)."
+                           data-lang-eu="Handipen baten ondoren prezio finala kalkulatzeko (IVA bezala), hasierako prezioa \(1 + \frac{handipena}{100}\) biderkatzen dugu.">
+                           Para calcular el precio final tras un aumento (como el IVA), multiplicamos el precio original por \(1 + \frac{aumento}{100}\).
+                        </p>
+                        <p class="example" data-lang-es="<b>Problema:</b> Un producto cuesta 100€ sin IVA. ¿Cuál es su precio con IVA del 21%?<br><b>Solución:</b> Precio con IVA = \(100 \cdot (1 + \frac{21}{100}) = 100 \cdot 1.21 = 121\)€"
+                           data-lang-eu="<b>Problema:</b> Produktu bat 100€ kostako du IVA gabe. Zenbat da bere prezioa %21eko IVArekin?<br><b>Ebazpena:</b> IVArekin prezioa = \(100 \cdot (1 + \frac{21}{100}) = 100 \cdot 1.21 = 121\)€">
+                           <b>Problema:</b> Un producto cuesta 100€ sin IVA. ¿Cuál es su precio con IVA del 21%?<br><b>Solución:</b> Precio con IVA = \(100 \cdot (1 + \frac{21}{100}) = 100 \cdot 1.21 = 121\)€
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Errores Comunes" data-lang-eu="Ohiko Akatsak">Errores Comunes</h3>
+            <div class="warning-box">
+                <p data-lang-es="⚠️ <b>Confundir 'más p%' con 'p% más':</b> 'Aumentar en 10%' no es lo mismo que 'aumentar a 110%'. El segundo ya incluye el aumento."
+                   data-lang-eu="⚠️ <b>'% p gehiago' eta '% p gehiago' nahastea:</b> '%10 gehiago handitzea' ez da '%110ra handitzea' bezala. Bigarrenak handipena jada barne hartzen du.">
+                   ⚠️ <b>Confundir 'más p%' con 'p% más':</b> 'Aumentar en 10%' no es lo mismo que 'aumentar a 110%'. El segundo ya incluye el aumento.
+                </p>
+            </div>
+            <div class="warning-box">
+                <p data-lang-es="⚠️ <b>Aplicar sucesivos porcentajes incorrectamente:</b> Un descuento del 20% seguido de otro del 10% NO es un descuento total del 30%."
+                   data-lang-eu="⚠️ <b>Ehunekoak ondoz ondoko aplikatu ez izana:</b> %20ko deskontua eta ondoren %10eko bat ez da %30eko deskontu totala.">
+                   ⚠️ <b>Aplicar sucesivos porcentajes incorrectamente:</b> Un descuento del 20% seguido de otro del 10% NO es un descuento total del 30%.
+                </p>
+            </div>
+            <p data-lang-es="<b>Ejemplo de aplicación correcta:</b> Un precio de 100€ con descuento del 20% se queda en 80€. Un descuento adicional del 10% sobre 80€ resulta en \(80 \cdot 0.90 = 72\)€."
+               data-lang-eu="<b>Egoki aplikatzeko adibidea:</b> 100€-ko prezioa %20ko deskontuarekin 80€-tara gelditzen da. %10eko deskontu gehigarriak 80€-tik \(80 \cdot 0.90 = 72\)€ ematen du.">
+               <b>Ejemplo de aplicación correcta:</b> Un precio de 100€ con descuento del 20% se queda en 80€. Un descuento adicional del 10% sobre 80€ resulta en \(80 \cdot 0.90 = 72\)€.
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

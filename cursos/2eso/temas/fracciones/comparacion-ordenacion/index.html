@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="Comparación y ordenación de fracciones - MATELLA" data-lang-eu="Zatikien alderaketa eta ordenatzea - MATELLA">Comparación y ordenación de fracciones - MATELLA</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <style>
+    /* Estilos para la herramienta de comparación visual de fracciones */
+    .visual-comparison-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+      margin-top: 1rem;
+      padding: 1.5rem;
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+    .fraction-bar-group {
+      width: 100%;
+      max-width: 400px;
+    }
+    .fraction-bar-label {
+      font-weight: bold;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      font-family: monospace;
+      font-size: 1.1em;
+    }
+    .fraction-bar {
+      display: flex;
+      height: 2.5rem;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+      border: 1px solid var(--border-color);
+    }
+    .fraction-bar .filled-part {
+      background: linear-gradient(45deg, var(--secondary-color), #2aaa8a);
+      transition: width 0.5s ease-in-out;
+    }
+    /* Estilos para las herramientas interactivas */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem 1.5rem;
+      align-items: center;
+    }
+    .tool-input-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .tool-input-group label {
+      font-size: 0.9em;
+      margin-bottom: 0.3rem;
+      opacity: 0.9;
+    }
+    .tool-input-group input {
+      padding: 0.6rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+    .tool-actions {
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+    .feedback-message {
+        font-size: 0.95em;
+        font-weight: bold;
+        margin-top: 1.5rem;
+        padding: 1rem 1.2rem;
+        border-radius: 6px;
+        text-align: center;
+        border: 1px solid transparent;
+        transition: opacity 0.3s ease;
+    }
+    .feedback-message.correct {
+        background-color: var(--quiz-feedback-correct-bg);
+        color: var(--quiz-feedback-correct-text);
+        border-color: var(--quiz-feedback-correct-border);
+    }
+    .feedback-message.error {
+        background-color: var(--quiz-feedback-incorrect-bg);
+        color: var(--quiz-feedback-incorrect-text);
+        border-color: var(--quiz-feedback-incorrect-border);
+    }
+  </style>
+</head>
+
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <a href="../../../../../index.html" class="home-link">
+        <i class="fas fa-calculator"></i>
+        <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+      </a>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
+    </nav>
+  </header>
+  
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol>
+      <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
+      <li><a href="../index.html" data-lang-es="Fracciones" data-lang-eu="Zatikiak">Fracciones</a></li>
+      <li class="active" aria-current="page"><span data-lang-es="Comparación y ordenación" data-lang-eu="Alderaketa eta ordenatzea">Comparación y ordenación</span></li>
+    </ol>
+  </nav>
+  
+  <main>
+    <h1 class="page-title" data-lang-es="Comparación y Ordenación de Fracciones" data-lang-eu="Zatikien Alderaketa eta Ordenatzea">Comparación y Ordenación de Fracciones</h1>
+    
+    <section class="content-section">
+      <p data-lang-es="Comparar y ordenar fracciones es fundamental para entender qué fracción representa una cantidad mayor, menor o igual a otra. Existen varios métodos que nos permiten hacer estas comparaciones de manera eficiente." data-lang-eu="Zatikiak alderatzea eta ordenatzea funtsezkoa da zein zatikik kantitate handiagoa, txikiagoa edo berdina adierazten duen ulertzeko. Alderaketa hauek modu eraginkorrean egiteko hainbat metodo daude.">Comparar y ordenar fracciones es fundamental para entender qué fracción representa una cantidad mayor, menor o igual a otra. Existen varios métodos que nos permiten hacer estas comparaciones de manera eficiente.</p>
+
+      <div class="accordion">
+        
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="true">
+            <span class="icon-concept"><i class="fas fa-balance-scale-right"></i></span>
+            <span data-lang-es="Métodos de Comparación" data-lang-eu="Alderaketa Metodoak">Métodos de Comparación</span>
+            <span class="icon-toggle"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Para saber si una fracción es mayor que otra, podemos usar principalmente tres métodos:" data-lang-eu="Zatiki bat bestea baino handiagoa den jakiteko, hiru metodo nagusi erabil ditzakegu:">Para saber si una fracción es mayor que otra, podemos usar principalmente tres métodos:</p>
+            
+            <div class="cards-container">
+              <div class="card-style">
+                <h4 data-lang-es="1. Producto Cruzado" data-lang-eu="1. Biderketa Gurutzatua">1. Producto Cruzado</h4>
+                <p data-lang-es="Multiplicamos el numerador de cada fracción por el denominador de la otra. La fracción con el producto mayor es la más grande." data-lang-eu="Zatiki bakoitzaren zenbakitzailea bestearen izendatzailearekin biderkatzen dugu. Biderkadurarik handiena duen zatikia da handiena.">Multiplicamos el numerador de cada fracción por el denominador de la otra. La fracción con el producto mayor es la más grande.</p>
+                <p class="example" data-lang-es="Ej: Para 3/4 y 2/3, calculamos 3×3=9 y 4×2=8. Como 9 > 8, entonces <b>3/4 > 2/3</b>." data-lang-eu="Adib: 3/4 eta 2/3 alderatzeko, 3×3=9 eta 4×2=8 kalkulatzen dugu. 9 > 8 denez, orduan <b>3/4 > 2/3</b>.">Ej: Para 3/4 y 2/3, calculamos 3×3=9 y 4×2=8. Como 9 > 8, entonces <b>3/4 > 2/3</b>.</p>
+              </div>
+
+              <div class="card-style">
+                <h4 data-lang-es="2. Denominador Común" data-lang-eu="2. Izendatzaile Komuna">2. Denominador Común</h4>
+                <p data-lang-es="Convertimos las fracciones a otras equivalentes con el mismo denominador (usando el MCM). Luego, comparamos los numeradores." data-lang-eu="Zatikiak izendatzaile bereko baliokide bihurtzen ditugu (mkt erabiliz). Gero, zenbakitzaileak alderatzen ditugu.">Convertimos las fracciones a otras equivalentes con el mismo denominador (usando el MCM). Luego, comparamos los numeradores.</p>
+                <p class="example" data-lang-es="Ej: Para 2/3 y 3/4, el MCM es 12. Las fracciones son 8/12 y 9/12. Como 8 < 9, entonces <b>2/3 < 3/4</b>." data-lang-eu="Adib: 2/3 eta 3/4 alderatzeko, mkt 12 da. Zatikiak 8/12 eta 9/12 dira. 8 < 9 denez, orduan <b>2/3 < 3/4</b>.">Ej: Para 2/3 y 3/4, el MCM es 12. Las fracciones son 8/12 y 9/12. Como 8 < 9, entonces <b>2/3 < 3/4</b>.</p>
+              </div>
+
+              <div class="card-style">
+                <h4 data-lang-es="3. Conversión a Decimal" data-lang-eu="3. Zenbaki Hamartarretara Bihurtzea">3. Conversión a Decimal</h4>
+                <p data-lang-es="Dividimos el numerador entre el denominador en cada fracción para obtener su valor decimal y los comparamos." data-lang-eu="Zatiki bakoitzean zenbakitzailea izendatzaileaz zatitzen dugu balio hamartarra lortzeko, eta gero alderatzen ditugu.">Dividimos el numerador entre el denominador en cada fracción para obtener su valor decimal y los comparamos.</p>
+                <p class="example" data-lang-es="Ej: Para 5/6 y 7/8, tenemos 0.833... y 0.875. Como 0.833 < 0.875, entonces <b>5/6 < 7/8</b>." data-lang-eu="Adib: 5/6 eta 7/8 alderatzeko, 0.833... eta 0.875 ditugu. 0.833 < 0.875 denez, orduan <b>5/6 < 7/8</b>.">Ej: Para 5/6 y 7/8, tenemos 0.833... y 0.875. Como 0.833 < 0.875, entonces <b>5/6 < 7/8</b>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-header" aria-expanded="false">
+                <span class="icon-concept"><i class="fas fa-sort-amount-up"></i></span>
+                <span data-lang-es="Ordenación de Múltiples Fracciones" data-lang-eu="Zatiki Asko Ordenatzea">Ordenación de Múltiples Fracciones</span>
+                <span class="icon-toggle"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-content">
+                <p data-lang-es="Para ordenar un conjunto de fracciones, el método más fiable es el del denominador común." data-lang-eu="Zatiki multzo bat ordenatzeko, metodorik fidagarriena izendatzaile komunarena da.">Para ordenar un conjunto de fracciones, el método más fiable es el del denominador común.</p>
+                <h4 data-lang-es="Ejemplo: Ordenar 2/3, 5/6, 1/2, 3/4 de menor a mayor." data-lang-eu="Adibidea: Ordenatu 2/3, 5/6, 1/2, 3/4 txikienetik handienera.">Ejemplo: Ordenar 2/3, 5/6, 1/2, 3/4 de menor a mayor.</h4>
+                <ol>
+                    <li><b data-lang-es="Paso 1: Hallar el MCM de los denominadores" data-lang-eu="1. urratsa: Izendatzaileen MKT aurkitu">Paso 1: Hallar el MCM de los denominadores</b>: MCM(2, 3, 4, 6) = <b>12</b>.</li>
+                    <li><b data-lang-es="Paso 2: Convertir cada fracción" data-lang-eu="2. urratsa: Zatiki bakoitza bihurtu">Paso 2: Convertir cada fracción</b>:
+                        <ul>
+                            <li>$1/2 = (1 \times 6) / (2 \times 6) = 6/12$</li>
+                            <li>$2/3 = (2 \times 4) / (3 \times 4) = 8/12$</li>
+                            <li>$3/4 = (3 \times 3) / (4 \times 3) = 9/12$</li>
+                            <li>$5/6 = (5 \times 2) / (6 \times 2) = 10/12$</li>
+                        </ul>
+                    </li>
+                    <li><b data-lang-es="Paso 3: Ordenar por numeradores" data-lang-eu="3. urratsa: Zenbakitzaileen arabera ordenatu">Paso 3: Ordenar por numeradores</b>: $6/12 < 8/12 < 9/12 < 10/12$.</li>
+                </ol>
+                <div class="key-takeaway">
+                    <p><strong data-lang-es="Resultado Final:" data-lang-eu="Amaierako Emaitza:">Resultado Final:</strong> $1/2 < 2/3 < 3/4 < 5/6$</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="icon-concept"><i class="fas fa-chart-pie"></i></span>
+            <span data-lang-es="Comparación Visual" data-lang-eu="Ikusizko Alderaketa">Comparación Visual</span>
+            <span class="icon-toggle"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="A veces, la forma más intuitiva de comparar fracciones es visualizarlas. Observa cómo 3/4 ocupa más espacio que 2/3:" data-lang-eu="Batzuetan, zatikiak alderatzeko modurik intuitiboena bistaratzea da. Begira nola 3/4-ek 2/3-ek baino leku gehiago hartzen duen:">A veces, la forma más intuitiva de comparar fracciones es visualizarlas. Observa cómo 3/4 ocupa más espacio que 2/3:</p>
+            <div class="visual-comparison-container">
+              <div class="fraction-bar-group">
+                <div class="fraction-bar-label">2/3 (66.6%)</div>
+                <div class="fraction-bar"><div class="filled-part" style="width: 66.66%;"></div></div>
+              </div>
+              <div class="fraction-bar-group">
+                <div class="fraction-bar-label">3/4 (75%)</div>
+                <div class="fraction-bar"><div class="filled-part" style="width: 75%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="icon-concept"><i class="fas fa-calculator"></i></span>
+            <span data-lang-es="Herramienta: Comparador Rápido" data-lang-eu="Tresna: Alderagailu Azkarra">Herramienta: Comparador Rápido</span>
+            <span class="icon-toggle"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Introduce dos fracciones y comprueba cuál es mayor al instante." data-lang-eu="Sartu bi zatiki eta egiaztatu berehala zein den handiena.">Introduce dos fracciones y comprueba cuál es mayor al instante.</p>
+            <div class="tool-grid">
+                <div class="tool-input-group">
+                    <label for="frac1Num" data-lang-es="Fracción 1: Numerador" data-lang-eu="1. Zatikia: Zenbakitzailea">Fracción 1: Numerador</label>
+                    <input type="number" id="frac1Num" data-placeholder-es="ej: 2" data-placeholder-eu="adib: 2">
+                </div>
+                <div class="tool-input-group">
+                    <label for="frac1Den" data-lang-es="Fracción 1: Denominador" data-lang-eu="1. Zatikia: Izendatzailea">Fracción 1: Denominador</label>
+                    <input type="number" id="frac1Den" data-placeholder-es="ej: 3" data-placeholder-eu="adib: 3">
+                </div>
+                <div class="tool-input-group">
+                    <label for="frac2Num" data-lang-es="Fracción 2: Numerador" data-lang-eu="2. Zatikia: Zenbakitzailea">Fracción 2: Numerador</label>
+                    <input type="number" id="frac2Num" data-placeholder-es="ej: 3" data-placeholder-eu="adib: 3">
+                </div>
+                <div class="tool-input-group">
+                    <label for="frac2Den" data-lang-es="Fracción 2: Denominador" data-lang-eu="2. Zatikia: Izendatzailea">Fracción 2: Denominador</label>
+                    <input type="number" id="frac2Den" data-placeholder-es="ej: 4" data-placeholder-eu="adib: 4">
+                </div>
+            </div>
+            <div class="tool-actions">
+              <button id="compare-btn" class="button-primary">
+                <i class="fas fa-balance-scale"></i>
+                <span data-lang-es="Comparar" data-lang-eu="Alderatu">Comparar</span>
+              </button>
+            </div>
+            <div id="comparisonResult"></div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+            <button class="accordion-header" aria-expanded="false">
+              <span class="icon-concept"><i class="fas fa-list-ol"></i></span>
+              <span data-lang-es="Ejercicios Propuestos" data-lang-eu="Proposatutako Ariketak">Ejercicios Propuestos</span>
+              <span class="icon-toggle"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-content">
+              <ol class="exercises-list">
+                <li>
+                  <p data-lang-es="Compara las fracciones 3/5 y 4/7 usando el método del producto cruzado." data-lang-eu="Alderatu 3/5 eta 4/7 zatikiak biderketa gurutzatuaren metodoa erabiliz.">Compara las fracciones 3/5 y 4/7 usando el método del producto cruzado.</p>
+                  <button class="toggle-hint-button" data-target="hint-1" aria-expanded="false">
+                    <i class="fas fa-lightbulb"></i> <span data-lang-es="Mostrar Pista" data-lang-es-hide="Ocultar Pista" data-lang-eu="Pista Erakutsi" data-lang-eu-hide="Pista Ezkutatu">Mostrar Pista</span>
+                  </button>
+                  <div class="hint-content" id="hint-1">
+                    <p data-lang-es="Calcula: 3 × 7 = ? y 5 × 4 = ?. Luego, compara los resultados." data-lang-eu="Kalkulatu: 3 × 7 = ? eta 5 × 4 = ?. Gero, alderatu emaitzak.">Calcula: 3 × 7 = ? y 5 × 4 = ?. Luego, compara los resultados.</p>
+                  </div>
+                </li>
+                <li>
+                  <p data-lang-es="Ordena de menor a mayor: 2/3, 5/8, 3/4, 1/2." data-lang-eu="Ordenatu txikienetik handienera: 2/3, 5/8, 3/4, 1/2.">Ordena de menor a mayor: 2/3, 5/8, 3/4, 1/2.</p>
+                  <button class="toggle-hint-button" data-target="hint-2" aria-expanded="false">
+                    <i class="fas fa-lightbulb"></i> <span data-lang-es="Mostrar Pista" data-lang-es-hide="Ocultar Pista" data-lang-eu="Pista Erakutsi" data-lang-eu-hide="Pista Ezkutatu">Mostrar Pista</span>
+                  </button>
+                  <div class="hint-content" id="hint-2">
+                    <p data-lang-es="Convierte todas las fracciones al mismo denominador (el MCM de 2, 3, 4 y 8 es 24) y luego ordena los numeradores." data-lang-eu="Bihurtu zatiki guztiak izendatzaile berera (2, 3, 4 eta 8ren mkt 24 da) eta gero ordenatu zenbakitzaileak.">Convierte todas las fracciones al mismo denominador (el MCM de 2, 3, 4 y 8 es 24) y luego ordena los numeradores.</p>
+                  </div>
+                </li>
+                <li>
+                  <p data-lang-es="¿Qué fracción es mayor: 7/9 o 8/11?" data-lang-eu="Zein da handiagoa: 7/9 edo 8/11?">¿Qué fracción es mayor: 7/9 o 8/11?</p>
+                   <button class="toggle-hint-button" data-target="hint-3" aria-expanded="false">
+                    <i class="fas fa-lightbulb"></i> <span data-lang-es="Mostrar Pista" data-lang-es-hide="Ocultar Pista" data-lang-eu="Pista Erakutsi" data-lang-eu-hide="Pista Ezkutatu">Mostrar Pista</span>
+                  </button>
+                  <div class="hint-content" id="hint-3">
+                    <p data-lang-es="Puedes usar el método del producto cruzado (7×11 vs 9×8) o convertir a decimal." data-lang-eu="Biderketa gurutzatuaren metodoa (7×11 vs 9×8) erabil dezakezu edo zenbaki hamartarretara bihurtu.">Puedes usar el método del producto cruzado (7×11 vs 9×8) o convertir a decimal.</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p data-lang-es="2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="2025 - MATELLA | Diseinu Minimalista Profesionala">2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
+  <script>
+    // Lógica específica para la herramienta de comparación
+    document.addEventListener('DOMContentLoaded', () => {
+        const compareBtn = document.getElementById('compare-btn');
+        const resultDiv = document.getElementById('comparisonResult');
+
+        if (compareBtn) {
+            compareBtn.addEventListener('click', () => {
+                const num1 = parseInt(document.getElementById('frac1Num').value);
+                const den1 = parseInt(document.getElementById('frac1Den').value);
+                const num2 = parseInt(document.getElementById('frac2Num').value);
+                const den2 = parseInt(document.getElementById('frac2Den').value);
+
+                const currentLang = window.langUtils.getCurrentLang();
+
+                if (isNaN(num1) || isNaN(den1) || isNaN(num2) || isNaN(den2) || den1 === 0 || den2 === 0) {
+                    const errorMsg = currentLang === 'es' 
+                        ? 'Por favor, introduce números válidos y denominadores diferentes de 0.'
+                        : 'Mesedez, sartu baliozko zenbakiak eta 0 ez den izendatzaileak.';
+                    resultDiv.innerHTML = `<div class="feedback-message error">${errorMsg}</div>`;
+                    return;
+                }
+
+                const crossProduct1 = num1 * den2;
+                const crossProduct2 = den1 * num2;
+                
+                const frac1Str = `${num1}/${den1}`;
+                const frac2Str = `${num2}/${den2}`;
+                
+                let comparisonSymbol = '=';
+                if (crossProduct1 > crossProduct2) {
+                    comparisonSymbol = '>';
+                } else if (crossProduct1 < crossProduct2) {
+                    comparisonSymbol = '<';
+                }
+
+                const decimal1 = (num1 / den1).toFixed(3);
+                const decimal2 = (num2 / den2).toFixed(3);
+
+                const resultText = currentLang === 'es' ? 'Resultado' : 'Emaitza';
+                const crossProductText = currentLang === 'es' ? 'Producto cruzado' : 'Biderketa gurutzatua';
+                const decimalValueText = currentLang === 'es' ? 'Valor decimal' : 'Balio hamartarra';
+
+                let resultHTML = `<div class="feedback-message correct">`;
+                resultHTML += `<h4>${resultText}: ${frac1Str} <strong>${comparisonSymbol}</strong> ${frac2Str}</h4>`;
+                resultHTML += `<p>(${crossProductText}: ${num1}×${den2}=${crossProduct1} vs ${den1}×${num2}=${crossProduct2})</p>`;
+                resultHTML += `<p><em>(${decimalValueText}: ${decimal1} vs ${decimal2})</em></p>`;
+                resultHTML += `</div>`;
+                
+                resultDiv.innerHTML = resultHTML;
+            });
+        }
+    });
+  </script>
+  
+  <!-- Botón flotante para volver arriba -->
+  <button id="back-to-top" aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <script>
+    // Configuración del botón de volver arriba
+    document.addEventListener('DOMContentLoaded', function() {
+      const backToTopButton = document.getElementById('back-to-top');
+      
+      // Mostrar/ocultar botón al hacer scroll
+      function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.style.opacity = '1';
+          backToTopButton.style.visibility = 'visible';
+        } else {
+          backToTopButton.style.opacity = '0';
+          backToTopButton.style.visibility = 'hidden';
+        }
+      }
+      
+      // Mostrar el botón después de cargar la página
+      setTimeout(toggleBackToTop, 100);
+      
+      // Escuchar el evento de scroll
+      window.addEventListener('scroll', toggleBackToTop);
+      
+      // Hacer scroll suave al hacer clic
+      backToTopButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

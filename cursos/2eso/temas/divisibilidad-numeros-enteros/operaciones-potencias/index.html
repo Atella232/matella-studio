@@ -1,0 +1,424 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="Operaciones con potencias - MATELLA" data-lang-eu="Berreturekin eragiketak - MATELLA">Operaciones con potencias - MATELLA</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <link rel="stylesheet" href="../math-formulas.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <a href="../../../../index.html" class="home-link">
+        <i class="fas fa-calculator"></i>
+        <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+      </a>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
+    </nav>
+  </header>
+  
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol>
+      <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
+      <li><a href="../index.html" data-lang-es="Divisibilidad y números enteros" data-lang-eu="Zatigarritasuna eta zenbaki osoak">Divisibilidad y números enteros</a></li>
+      <li class="active" aria-current="page"><span data-lang-es="Operaciones con potencias" data-lang-eu="Berreturekin eragiketak">Operaciones con potencias</span></li>
+    </ol>
+  </nav>
+  
+  <main>
+    <h1 class="page-title" data-lang-es="Operaciones con potencias" data-lang-eu="Berreturekin eragiketak">Operaciones con potencias</h1>
+    <p data-lang-es="Las potencias son una forma abreviada de escribir multiplicaciones repetidas. Son fundamentales en matemáticas y tienen propiedades muy útiles para simplificar cálculos." data-lang-eu="Berreturak biderketa errepikatuak idazteko modu laburra dira. Matematiketan oinarrizkoak dira eta kalkuluak sinplifikatzeko propietate oso erabilgarriak dituzte." style="text-align:center; max-width: 800px; margin: 0 auto 2.5rem auto;">Las potencias son una forma abreviada de escribir multiplicaciones repetidas. Son fundamentales en matemáticas y tienen propiedades muy útiles para simplificar cálculos.</p>
+
+    <div class="tabs-container">
+      <ul class="tabs-nav">
+        <li><a href="#teoria" class="tab-link active" data-lang-es="Teoría y Propiedades" data-lang-eu="Teoria eta Propietateak">Teoría y Propiedades</a></li>
+        <li><a href="#practica" class="tab-link" data-lang-es="Herramientas y Práctica" data-lang-eu="Tresnak eta Praktika">Herramientas y Práctica</a></li>
+      </ul>
+      <div class="tabs-content">
+        <div id="teoria" class="tab-pane active">
+          <div class="accordion">
+            <div class="accordion-item">
+              <button class="accordion-header" aria-expanded="true">
+                <i class="fas fa-info-circle icon-concept"></i>
+                <span data-lang-es="¿Qué es una potencia?" data-lang-eu="Zer da berretura?">¿Qué es una potencia?</span>
+                <i class="fas fa-chevron-down icon-toggle"></i>
+              </button>
+              <div class="accordion-content" style="max-height: fit-content;">
+                <p data-lang-es="Una <strong>potencia</strong> es una expresión de la forma <strong>aⁿ</strong>, donde:" data-lang-eu="<strong>Berretura</strong> <strong>aⁿ</strong> formako adierazpen bat da, non:">Una <strong>potencia</strong> es una expresión de la forma <strong>aⁿ</strong>, donde:</p>
+                
+                <div class="power-components">
+                  <div class="component">
+                    <h5 data-lang-es="Base (a)" data-lang-eu="Oinarria (a)">Base (a)</h5>
+                    <p data-lang-es="Es el número que se multiplica por sí mismo." data-lang-eu="Bere buruaz biderkatzen den zenbakia da.">Es el número que se multiplica por sí mismo.</p>
+                  </div>
+                  <div class="component">
+                    <h5 data-lang-es="Exponente (n)" data-lang-eu="Berretzailea (n)">Exponente (n)</h5>
+                    <p data-lang-es="Indica cuántas veces se multiplica la base por sí misma." data-lang-eu="Oinarria bere buruaz zenbat aldiz biderkatzen den adierazten du.">Indica cuántas veces se multiplica la base por sí misma.</p>
+                  </div>
+                </div>
+
+                <div class="math-formula-block">
+                  <span>aⁿ = a × a × a × ... × a (n veces)</span>
+                </div>
+
+                <div class="example-box">
+                  <h4 data-lang-es="Ejemplo: 2³" data-lang-eu="Adibidea: 2³">Ejemplo: 2³</h4>
+                  <div class="solution">
+                    <p data-lang-es="2³ significa 2 multiplicado por sí mismo 3 veces:" data-lang-eu="2³ esan nahi du 2 bere buruaz 3 aldiz biderkatua:">2³ significa 2 multiplicado por sí mismo 3 veces:</p>
+                    <div class="calculation">
+                      <span>2³ = 2 × 2 × 2 = 8</span>
+                    </div>
+                    <p data-lang-es="Por tanto, 2³ = 8" data-lang-eu="Beraz, 2³ = 8">Por tanto, 2³ = 8</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" aria-expanded="false">
+                <i class="fas fa-list-check icon-concept"></i>
+                <span data-lang-es="Propiedades de las potencias" data-lang-eu="Berreturen propietateak">Propiedades de las potencias</span>
+                <i class="fas fa-chevron-down icon-toggle"></i>
+              </button>
+              <div class="accordion-content">
+                <p data-lang-es="Las potencias tienen propiedades muy útiles que nos permiten simplificar cálculos:" data-lang-eu="Berreturek propietate oso erabilgarriak dituzte kalkuluak sinplifikatzeko aukera ematen digutenak:">Las potencias tienen propiedades muy útiles que nos permiten simplificar cálculos:</p>
+                
+                <div class="properties-grid">
+                  <div class="property-card">
+                    <h5 data-lang-es="Producto de potencias de la misma base" data-lang-eu="Oinarri bereko berreturen produktua">Producto de potencias de la misma base</h5>
+                    <div class="math-formula">aⁿ × aᵐ = aⁿ⁺ᵐ</div>
+                    <p data-lang-es="Se suman los exponentes." data-lang-eu="Berretzaileak batzen dira.">Se suman los exponentes.</p>
+                    <div class="examples">
+                      <span data-lang-es="Ejemplo:" data-lang-eu="Adibidea:">Ejemplo:</span> 2³ × 2² = 2³⁺² = 2⁵ = 32
+                    </div>
+                  </div>
+
+                  <div class="property-card">
+                    <h5 data-lang-es="Cociente de potencias de la misma base" data-lang-eu="Oinarri bereko berreturen zatiketa">Cociente de potencias de la misma base</h5>
+                    <div class="math-formula">aⁿ ÷ aᵐ = aⁿ⁻ᵐ</div>
+                    <p data-lang-es="Se restan los exponentes." data-lang-eu="Berretzaileak kentzen dira.">Se restan los exponentes.</p>
+                    <div class="examples">
+                      <span data-lang-es="Ejemplo:" data-lang-eu="Adibidea:">Ejemplo:</span> 5⁴ ÷ 5² = 5⁴⁻² = 5² = 25
+                    </div>
+                  </div>
+
+                  <div class="property-card">
+                    <h5 data-lang-es="Potencia de una potencia" data-lang-eu="Berreturaren berretura">Potencia de una potencia</h5>
+                    <div class="math-formula">(aⁿ)ᵐ = aⁿ⁻ᵐ</div>
+                    <p data-lang-es="Se multiplican los exponentes." data-lang-eu="Berretzaileak biderkatzen dira.">Se multiplican los exponentes.</p>
+                    <div class="examples">
+                      <span data-lang-es="Ejemplo:" data-lang-eu="Adibidea:">Ejemplo:</span> (3²)³ = 3²⁻³ = 3⁶ = 729
+                    </div>
+                  </div>
+
+                  <div class="property-card">
+                    <h5 data-lang-es="Potencia de un producto" data-lang-eu="Produktu baten berretura">Potencia de un producto</h5>
+                    <div class="math-formula">(a × b)ⁿ = aⁿ × bⁿ</div>
+                    <p data-lang-es="Cada factor se eleva al exponente." data-lang-eu="Faktore bakoitza berretzaileaz berretzen da.">Cada factor se eleva al exponente.</p>
+                    <div class="examples">
+                      <span data-lang-es="Ejemplo:" data-lang-eu="Adibidea:">Ejemplo:</span> (2 × 3)² = 2² × 3² = 4 × 9 = 36
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" aria-expanded="false">
+                <i class="fas fa-exclamation-triangle icon-concept"></i>
+                <span data-lang-es="Casos especiales" data-lang-eu="Kasu bereziak">Casos especiales</span>
+                <i class="fas fa-chevron-down icon-toggle"></i>
+              </button>
+              <div class="accordion-content">
+                <p data-lang-es="Existen algunos casos especiales que es importante conocer:" data-lang-eu="Ezagutzea garrantzitsua den kasu berezi batzuk daude:">Existen algunos casos especiales que es importante conocer:</p>
+                
+                <div class="special-cases">
+                  <div class="case-card">
+                    <h5 data-lang-es="Exponente 0" data-lang-eu="0 berretzailea">Exponente 0</h5>
+                    <div class="math-formula">a⁰ = 1</div>
+                    <p data-lang-es="Cualquier número elevado a 0 es igual a 1." data-lang-eu="Edozein zenbaki 0-ra berretuta 1 da.">Cualquier número elevado a 0 es igual a 1.</p>
+                    <div class="examples">
+                      <span data-lang-es="Ejemplos:" data-lang-eu="Adibideak:">Ejemplos:</span> 5⁰ = 1, (-3)⁰ = 1, 100⁰ = 1
+                    </div>
+                  </div>
+
+                  <div class="case-card">
+                    <h5 data-lang-es="Exponente 1" data-lang-eu="1 berretzailea">Exponente 1</h5>
+                    <div class="math-formula">a¹ = a</div>
+                    <p data-lang-es="Cualquier número elevado a 1 es igual a sí mismo." data-lang-eu="Edozein zenbaki 1-era berretuta zenbakia bera da.">Cualquier número elevado a 1 es igual a sí mismo.</p>
+                    <div class="examples">
+                      <span data-lang-es="Ejemplos:" data-lang-eu="Adibideak:">Ejemplos:</span> 7¹ = 7, (-4)¹ = -4, 0¹ = 0
+                    </div>
+                  </div>
+
+                  <div class="case-card">
+                    <h5 data-lang-es="Exponente negativo" data-lang-eu="Berretzaile negatiboa">Exponente negativo</h5>
+                    <div class="math-formula">a⁻ⁿ = 1/aⁿ</div>
+                    <p data-lang-es="Un exponente negativo indica la inversa de la potencia positiva." data-lang-eu="Berretzaile negatibo batek berretura positiboaren alderantzizkoa adierazten du.">Un exponente negativo indica la inversa de la potencia positiva.</p>
+                    <div class="examples">
+                      <span data-lang-es="Ejemplos:" data-lang-eu="Adibideak:">Ejemplos:</span> 2⁻³ = 1/2³ = 1/8, 5⁻² = 1/5² = 1/25
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" aria-expanded="false">
+                <i class="fas fa-puzzle-piece icon-concept"></i>
+                <span data-lang-es="Operaciones combinadas con potencias" data-lang-eu="Berreturekin eragiketa konbinatuak">Operaciones combinadas con potencias</span>
+                <i class="fas fa-chevron-down icon-toggle"></i>
+              </button>
+              <div class="accordion-content">
+                <p data-lang-es="Cuando combinamos potencias con otras operaciones, aplicamos las propiedades para simplificar:" data-lang-eu="Berreturak beste eragiketa batzuekin konbinatzen ditugunean, propietateak aplikatzen ditugu sinplifikatzeko:">Cuando combinamos potencias con otras operaciones, aplicamos las propiedades para simplificar:</p>
+                
+                <div class="example-box">
+                  <h4 data-lang-es="Ejemplo: 2³ × 2⁴ ÷ 2²" data-lang-eu="Adibidea: 2³ × 2⁴ ÷ 2²">Ejemplo: 2³ × 2⁴ ÷ 2²</h4>
+                  <div class="solution">
+                    <p data-lang-es="Aplicamos las propiedades paso a paso:" data-lang-eu="Propietateak urratsez urrats aplikatzen ditugu:">Aplicamos las propiedades paso a paso:</p>
+                    <div class="calculation-steps">
+                      <div class="step">1. Producto: 2³ × 2⁴ = 2³⁺⁴ = 2⁷</div>
+                      <div class="step">2. Cociente: 2⁷ ÷ 2² = 2⁷⁻² = 2⁵</div>
+                      <div class="step">3. Resultado: 2⁵ = 32</div>
+                    </div>
+                    <p data-lang-es="Por tanto:" data-lang-eu="Beraz:">Por tanto:</p>
+                    <div class="math-result">
+                      <strong>2³ × 2⁴ ÷ 2² = 32</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="example-box">
+                  <h4 data-lang-es="Ejemplo: (3²)³ × 3⁻¹" data-lang-eu="Adibidea: (3²)³ × 3⁻¹">Ejemplo: (3²)³ × 3⁻¹</h4>
+                  <div class="solution">
+                    <p data-lang-es="Aplicamos las propiedades:" data-lang-eu="Propietateak aplikatzen ditugu:">Aplicamos las propiedades:</p>
+                    <div class="calculation-steps">
+                      <div class="step">1. Potencia de potencia: (3²)³ = 3²⁻³ = 3⁶</div>
+                      <div class="step">2. Producto: 3⁶ × 3⁻¹ = 3⁶⁺⁻¹ = 3⁵</div>
+                      <div class="step">3. Resultado: 3⁵ = 243</div>
+                    </div>
+                    <p data-lang-es="Por tanto:" data-lang-eu="Beraz:">Por tanto:</p>
+                    <div class="math-result">
+                      <strong>(3²)³ × 3⁻¹ = 243</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="practica" class="tab-pane">
+          <div class="content-section">
+            <h3><i class="fas fa-calculator"></i> <span data-lang-es="Calculadora de potencias" data-lang-eu="Berreturen kalkulagailua">Calculadora de potencias</span></h3>
+            <p data-lang-es="Utiliza esta calculadora para practicar operaciones con potencias:" data-lang-eu="Erabili kalkulagailu hau berreturekin eragiketak praktikatzeko:">Utiliza esta calculadora para practicar operaciones con potencias:</p>
+            
+            <div class="tool-section">
+              <div class="tool-grid">
+                <label for="powerBase" data-lang-es="Base:" data-lang-eu="Oinarria:">Base:</label>
+                <input type="number" id="powerBase" data-placeholder-es="ej: 2" data-placeholder-eu="adib: 2">
+                <label for="powerExponent" data-lang-es="Exponente:" data-lang-eu="Berretzailea:">Exponente:</label>
+                <input type="number" id="powerExponent" data-placeholder-es="ej: 3" data-placeholder-eu="adib: 3">
+              </div>
+              <div class="tool-actions">
+                <button onclick="calculatePower()" class="button-primary">
+                  <i class="fas fa-equals"></i>
+                  <span data-lang-es="Calcular potencia" data-lang-eu="Berretura kalkulatu">Calcular potencia</span>
+                </button>
+              </div>
+              <div class="result-box" id="powerResult"></div>
+            </div>
+
+            <div class="info-box">
+              <i class="fas fa-lightbulb"></i>
+              <p data-lang-es="Recuerda: las potencias con exponente negativo dan como resultado fracciones." data-lang-eu="Gogoratu: berretzaile negatiboa duten berreturek zatikiak ematen dituzte emaitza gisa.">Recuerda: las potencias con exponente negativo dan como resultado fracciones.</p>
+            </div>
+          </div>
+          
+          <div class="content-section">
+            <h3><i class="fas fa-list-ol"></i> <span data-lang-es="Ejercicios propuestos" data-lang-eu="Proposatutako ariketak">Ejercicios propuestos</span></h3>
+            <ol class="exercises-list">
+              <li>
+                <p data-lang-es="Calcula: 2⁴ × 2³" data-lang-eu="Kalkulatu: 2⁴ × 2³">Calcula: 2⁴ × 2³</p>
+                <button class="toggle-hint-button" data-target="hint-1" aria-expanded="false">
+                  <i class="fas fa-lightbulb"></i> <span data-lang-es="Ver pista" data-lang-es-hide="Ocultar pista" data-lang-eu="Pista ikusi" data-lang-eu-hide="Pista ezkutatu">Ver pista</span>
+                </button>
+                <div id="hint-1" class="hint-content">
+                  <p data-lang-es="Usa la propiedad: aⁿ × aᵐ = aⁿ⁺ᵐ" data-lang-eu="Erabili propietatea: aⁿ × aᵐ = aⁿ⁺ᵐ">Usa la propiedad: aⁿ × aᵐ = aⁿ⁺ᵐ</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="Calcula: 5⁶ ÷ 5²" data-lang-eu="Kalkulatu: 5⁶ ÷ 5²">Calcula: 5⁶ ÷ 5²</p>
+                <button class="toggle-hint-button" data-target="hint-2" aria-expanded="false">
+                  <i class="fas fa-lightbulb"></i> <span data-lang-es="Ver pista" data-lang-es-hide="Ocultar pista" data-lang-eu="Pista ikusi" data-lang-eu-hide="Pista ezkutatu">Ver pista</span>
+                </button>
+                <div id="hint-2" class="hint-content">
+                  <p data-lang-es="Usa la propiedad: aⁿ ÷ aᵐ = aⁿ⁻ᵐ" data-lang-eu="Erabili propietatea: aⁿ ÷ aᵐ = aⁿ⁻ᵐ">Usa la propiedad: aⁿ ÷ aᵐ = aⁿ⁻ᵐ</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="Calcula: (2³)²" data-lang-eu="Kalkulatu: (2³)²">Calcula: (2³)²</p>
+                <button class="toggle-hint-button" data-target="hint-3" aria-expanded="false">
+                  <i class="fas fa-lightbulb"></i> <span data-lang-es="Ver pista" data-lang-es-hide="Ocultar pista" data-lang-eu="Pista ikusi" data-lang-eu-hide="Pista ezkutatu">Ver pista</span>
+                </button>
+                <div id="hint-3" class="hint-content">
+                  <p data-lang-es="Usa la propiedad: (aⁿ)ᵐ = aⁿ⁻ᵐ" data-lang-eu="Erabili propietatea: (aⁿ)ᵐ = aⁿ⁻ᵐ">Usa la propiedad: (aⁿ)ᵐ = aⁿ⁻ᵐ</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="Calcula: 3⁻²" data-lang-eu="Kalkulatu: 3⁻²">Calcula: 3⁻²</p>
+                <button class="toggle-hint-button" data-target="hint-4" aria-expanded="false">
+                  <i class="fas fa-lightbulb"></i> <span data-lang-es="Ver pista" data-lang-es-hide="Ocultar pista" data-lang-eu="Pista ikusi" data-lang-eu-hide="Pista ezkutatu">Ver pista</span>
+                </button>
+                <div id="hint-4" class="hint-content">
+                  <p data-lang-es="Recuerda: a⁻ⁿ = 1/aⁿ" data-lang-eu="Gogoratu: a⁻ⁿ = 1/aⁿ">Recuerda: a⁻ⁿ = 1/aⁿ</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  
+  <script>
+    // --- CORRECCIÓ: Lógica local para las Pistas ---
+    document.addEventListener('DOMContentLoaded', function() {
+      const hintToggles = document.querySelectorAll('.toggle-hint-button');
+      hintToggles.forEach(button => {
+        const targetId = button.getAttribute('data-target');
+        const hintContent = document.getElementById(targetId);
+        
+        if (hintContent) {
+          // Aseguramos el estado inicial con todas las propiedades necesarias
+          hintContent.style.overflow = 'hidden';
+          hintContent.style.maxHeight = '0px';
+          hintContent.style.paddingTop = '0';
+          hintContent.style.paddingBottom = '0';
+          hintContent.style.marginTop = '0';
+          hintContent.style.opacity = '0';
+          hintContent.style.visibility = 'hidden';
+          hintContent.style.transition = 'all 0.4s ease-out';
+
+          button.addEventListener('click', () => {
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            
+            if (isExpanded) {
+              // Colapsar
+              hintContent.style.opacity = '0';
+              hintContent.style.maxHeight = '0px';
+              hintContent.style.paddingTop = '0';
+              hintContent.style.paddingBottom = '0';
+              hintContent.style.marginTop = '0';
+              // Esperar a que termine la transición para ocultarlo completamente
+              setTimeout(() => {
+                hintContent.style.visibility = 'hidden';
+              }, 400); // 400ms = 0.4s
+              button.setAttribute('aria-expanded', 'false');
+            } else {
+              // Expandir
+              hintContent.style.visibility = 'visible';
+              hintContent.style.opacity = '1';
+              hintContent.style.maxHeight = hintContent.scrollHeight + 'px';
+              hintContent.style.paddingTop = '0.8rem';
+              hintContent.style.paddingBottom = '0.8rem';
+              hintContent.style.marginTop = '0.5rem';
+              button.setAttribute('aria-expanded', 'true');
+            }
+            
+            // Actualizar el texto del botón
+            const span = button.querySelector('span');
+            if (span) {
+              const lang = document.documentElement.lang || 'es';
+              if (isExpanded) {
+                span.textContent = lang === 'es' ? 'Ver pista' : 'Pista ikusi';
+              } else {
+                span.textContent = lang === 'es' ? 'Ocultar pista' : 'Pista ezkutatu';
+              }
+            }
+          });
+        }
+      });
+    });
+
+    function calculatePower() {
+      const base = parseFloat(document.getElementById('powerBase').value);
+      const exponent = parseInt(document.getElementById('powerExponent').value);
+      const resultBox = document.getElementById('powerResult');
+      
+      const lang = document.documentElement.lang || 'es';
+
+      if (isNaN(base) || isNaN(exponent)) {
+        const errorMsg = lang === 'eu' 
+            ? '<p class="error">Mesedez, sartu zenbaki baliodunak.</p>' 
+            : '<p class="error">Por favor, introduce números válidos.</p>';
+        resultBox.innerHTML = errorMsg;
+        return;
+      }
+      
+      let result;
+      let explanation = '';
+      
+      if (exponent === 0) {
+        result = 1;
+        explanation = lang === 'eu' ? 'Edozein zenbaki 0-ra berretuta 1 da.' : 'Cualquier número elevado a 0 es igual a 1.';
+      } else if (exponent === 1) {
+        result = base;
+        explanation = lang === 'eu' ? 'Edozein zenbaki 1-era berretuta zenbakia bera da.' : 'Cualquier número elevado a 1 es igual a sí mismo.';
+      } else if (exponent > 0) {
+        result = Math.pow(base, exponent);
+        explanation = lang === 'eu' ? `${base} bere buruaz ${exponent} aldiz biderkatuta.` : `${base} multiplicado por sí mismo ${exponent} veces.`;
+      } else {
+        result = 1 / Math.pow(base, Math.abs(exponent));
+        explanation = lang === 'eu' ? `1 zati ${base} ber ${Math.abs(exponent)}.` : `1 dividido por ${base} elevado a ${Math.abs(exponent)}.`;
+      }
+      
+      let resultHTML = `<p class="ok">${base}<sup>${exponent}</sup> = ${result.toLocaleString()}</p>`;
+      resultHTML += `<p><em>${explanation}</em></p>`;
+      
+      if (exponent < 0) {
+        resultHTML += `<p class="info-note">Nota: ${base}<sup>${exponent}</sup> = 1 / ${base}<sup>${Math.abs(exponent)}</sup></p>`;
+      }
+      
+      resultBox.innerHTML = resultHTML;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Cuerpos Geométricos 3º ESO - Inicio" data-lang-eu="Gorputz Geometrikoak DBH 3 - Hasiera">Cuerpos Geométricos 3º ESO - Inicio</title>
+    <link rel="stylesheet" href="../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+             <a href="../../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+             <i class="fas fa-cubes"></i>
+             <span data-lang-es="Cuerpos Geométricos" data-lang-eu="Gorputz Geometrikoak">Cuerpos Geométricos</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i> </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro">
+            <div class="intro-container">
+
+                <h2 data-lang-es="Bienvenida a los Cuerpos Geométricos" data-lang-eu="Ongi Etorri Gorputz Geometrikoei">Bienvenida a los Cuerpos Geométricos</h2>
+
+                <ul class="tabs-nav">
+                    <li><a href="#tab-what" class="tab-link active" data-lang-es="¿Qué son?" data-lang-eu="Zer dira?">¿Qué son?</a></li>
+                    <li><a href="#tab-why" class="tab-link" data-lang-es="¿Por qué son útiles?" data-lang-eu="Zergatik dira erabilgarriak?">¿Por qué son útiles?</a></li>
+                </ul>
+
+                <div class="tabs-content">
+
+                    <div id="tab-what" class="tab-pane active">
+                        <div class="tab-pane-content">
+                            <div class="tab-text">
+                                <h3 data-lang-es="Figuras de Tres Dimensiones" data-lang-eu="Hiru Dimentsioko Irudiak">Figuras de Tres Dimensiones</h3>
+                                <p data-lang-es="Los <b>cuerpos geométricos</b> son figuras tridimensionales que tienen <b>longitud, anchura y altura</b>. Se caracterizan por tener <b>caras planas o curvas</b> y pueden ser <b>sólidos o huecos</b>."
+                                   data-lang-eu="<b>Gorputz geometrikoak</b> hiru dimentsioko irudiak dira, <b>luzera, zabalera eta altuera</b> baitute. <b>Aurpegi lau edo kurbatuak</b> izateagatik bereizten dira eta <b>solidoak edo hutsak</b> izan daitezke.">
+                                   Los <b>cuerpos geométricos</b> son figuras tridimensionales que tienen <b>longitud, anchura y altura</b>. Se caracterizan por tener <b>caras planas o curvas</b> y pueden ser <b>sólidos o huecos</b>.
+                                </p>
+                                <h4 data-lang-es="Características:" data-lang-eu="Ezaugarriak:">Características:</h4>
+                                <ul class="icon-list">
+                                    <li><i class="fas fa-cube"></i><span data-lang-es="Caras: Superficies planas o curvas" data-lang-eu="Aurpegiak: Gainazal lauak edo kurbatuak">Caras: Superficies planas o curvas</span></li>
+                                    <li><i class="fas fa-ruler-combined"></i><span data-lang-es="Aristas: Líneas donde se juntan las caras" data-lang-eu="Ertzak: Aurpegiek elkartzen diren lerroak">Aristas: Líneas donde se juntan las caras</span></li>
+                                    <li><i class="fas fa-circle"></i><span data-lang-es="Vértices: Puntos donde se encuentran las aristas" data-lang-eu="Ertz-puntuak: Ertzak elkartzen diren puntuak">Vértices: Puntos donde se encuentran las aristas</span></li>
+                                    <li><i class="fas fa-drafting-compass"></i><span data-lang-es="Base: Superficie inferior de apoyo" data-lang-eu="Oinarria: Eusteko gainazal behekoa">Base: Superficie inferior de apoyo</span></li>
+                                </ul>
+                            </div>
+                            <div class="tab-visual">
+                                <i class="fas fa-cubes fa-5x subtle-icon"></i> </div>
+                        </div>
+                    </div>
+
+                    <div id="tab-why" class="tab-pane">
+                         <div class="tab-pane-content">
+                            <div class="tab-text">
+                                <h3 data-lang-es="Aplicaciones en la Vida Real" data-lang-eu="Bizitza Errealeko Aplikazioak">Aplicaciones en la Vida Real</h3>
+                                <p data-lang-es="¡Los cuerpos geométricos están por todas partes en nuestro entorno!" data-lang-eu="Gorputz geometrikoak gure ingurunean ezin daitezke gehiago egon!">¡Los cuerpos geométricos están por todas partes en nuestro entorno!</p>
+                                <div class="usage-grid">
+                                    <div class="usage-item"><i class="fas fa-home"></i><span data-lang-es="Construcción y Arquitectura" data-lang-eu="Eraikuntza eta Arkitektura">Construcción y Arquitectura</span></div>
+                                    <div class="usage-item"><i class="fas fa-box"></i><span data-lang-es="Empaques y Recipientes" data-lang-eu="Paketeak eta Ontziak">Empaques y Recipientes</span></div>
+                                    <div class="usage-item"><i class="fas fa-car"></i><span data-lang-es="Diseño de Vehículos" data-lang-eu="Ibilgailuen Diseinua">Diseño de Vehículos</span></div>
+                                    <div class="usage-item"><i class="fas fa-gamepad"></i><span data-lang-es="Modelado 3D" data-lang-eu="3D Modelatzea">Modelado 3D</span></div>
+                                    <div class="usage-item"><i class="fas fa-tools"></i><span data-lang-es="Ingeniería" data-lang-eu="Ingeniaritza">Ingeniería</span></div>
+                                    <div class="usage-item"><i class="fas fa-atom"></i><span data-lang-es="Ciencia y Medicina" data-lang-eu="Zientzia eta Medikuntza">Ciencia y Medicina</span></div>
+                                </div>
+                                <h4 data-lang-es="Te permiten:" data-lang-eu="Aukera ematen dizute:">Te permiten:</h4>
+                                <ul class="benefits-list">
+                                    <li data-lang-es="Calcular volúmenes y superficies" data-lang-eu="Bolumen eta azalerak kalkulatzea">Calcular volúmenes y superficies</li>
+                                    <li data-lang-es="Diseñar objetos funcionales" data-lang-eu="Objektu funtzionalak diseinatzea">Diseñar objetos funcionales</li>
+                                    <li data-lang-es="Comprender el espacio 3D" data-lang-eu="3D espazioa ulertzea">Comprender el espacio 3D</li>
+                                    <li data-lang-es="Resolver problemas de medición" data-lang-eu="Neurketa problemak ebaztea">Resolver problemas de medición</li>
+                                </ul>
+                            </div>
+                            <div class="tab-visual">
+                                <i class="fas fa-drafting-compass fa-5x subtle-icon"></i> </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section id="subtopics">
+            <h2 data-lang-es="Contenidos del Tema" data-lang-eu="Gaiaren Edukiak">Contenidos del Tema</h2>
+            <div class="cards-container">
+
+                <div class="card">
+                    <a href="./pages/prismas-piramides.html">
+                        <div class="card-icon"><i class="fas fa-cube"></i></div>
+                        <h3 data-lang-es="Prismas y Pirámides" data-lang-eu="Prisma eta Piramideak">Prismas y Pirámides</h3>
+                        <div class="summary">
+                            <p data-lang-es="<b>Cuerpos con caras planas</b><br/>• <b>Prismas:</b> Dos bases paralelas, caras laterales rectangulares<br/>• <b>Pirámides:</b> Una base poligonal, caras laterales triangulares<br/>• <b>Volumen:</b> Área de la base × altura<br/>• <b>Área:</b> Suma de áreas de todas las caras"
+                               data-lang-eu="<b>Aurpegi lauko gorputzak</b><br/>• <b>Prismak:</b> Bi oinarri paralelo, albo aurpegi laukizuzenak<br/>• <b>Piramideak:</b> Oinarri poligonala, albo aurpegi triangeluarrak<br/>• <b>Bolumena:</b> Oinarriaren area × altuera<br/>• <b>Azalera:</b> Aurpegi guztien azaleren batura">
+                               <b>Cuerpos con caras planas</b><br/>
+                               • <b>Prismas:</b> Dos bases paralelas, caras laterales rectangulares<br/>
+                               • <b>Pirámides:</b> Una base poligonal, caras laterales triangulares<br/>
+                               • <b>Volumen:</b> Área de la base × altura<br/>
+                               • <b>Área:</b> Suma de áreas de todas las caras
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./pages/cilindros-conos.html">
+                        <div class="card-icon"><i class="fas fa-shapes"></i></div>
+                        <h3 data-lang-es="Cilindros y Conos" data-lang-eu="Zilindroak eta Konoak">Cilindros y Conos</h3>
+                        <div class="summary">
+                            <p data-lang-es="<b>Cuerpos de revolución</b><br/>• <b>Cilindros:</b> Dos bases circulares paralelas, superficie lateral curva<br/>• <b>Conos:</b> Una base circular, superficie lateral cónica<br/>• <b>Volumen:</b> Cilindro: πr²h, Cono: (πr²h)/3<br/>• <b>Área lateral:</b> Desarrollo de la superficie curva"
+                               data-lang-eu="<b>Birakuntzako gorputzak</b><br/>• <b>Zilindroak:</b> Bi oinarri zirkular paralelo, gainazal albo kurbatua<br/>• <b>Konoak:</b> Oinarri zirkular bat, gainazal albo konikoa<br/>• <b>Bolumena:</b> Zilindroa: πr²h, Konoa: (πr²h)/3<br/>• <b>Azalera alboa:</b> Gainazal kurbatuaren garapena">
+                               <b>Cuerpos de revolución</b><br/>
+                               • <b>Cilindros:</b> Dos bases circulares paralelas, superficie lateral curva<br/>
+                               • <b>Conos:</b> Una base circular, superficie lateral cónica<br/>
+                               • <b>Volumen:</b> Cilindro: πr²h, Cono: (πr²h)/3<br/>
+                               • <b>Área lateral:</b> Desarrollo de la superficie curva
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./pages/esferas.html">
+                        <div class="card-icon"><i class="fas fa-globe"></i></div>
+                        <h3 data-lang-es="Esferas" data-lang-eu="Esferak">Esferas</h3>
+                        <div class="summary">
+                            <p data-lang-es="<b>El cuerpo perfectamente redondo</b><br/>• <b>Definición:</b> Conjunto de puntos equidistantes del centro<br/>• <b>Volumen:</b> (4/3)πr³<br/>• <b>Área:</b> 4πr²<br/>• <b>Secciones:</b> Planos producen círculos, radios y tangentes"
+                               data-lang-eu="<b>Gorputz erabat biribila</b><br/>• <b>Definizioa:</b> Zentrutik distantzia bereko puntuen multzoa<br/>• <b>Bolumena:</b> (4/3)πr³<br/>• <b>Azalera:</b> 4πr²<br/>• <b>Sekzioak:</b> Planook zirkuluak, erradioak eta tangenteak sortzen dituzte">
+                               <b>El cuerpo perfectamente redondo</b><br/>
+                               • <b>Definición:</b> Conjunto de puntos equidistantes del centro<br/>
+                               • <b>Volumen:</b> (4/3)πr³<br/>
+                               • <b>Área:</b> 4πr²<br/>
+                               • <b>Secciones:</b> Planos producen círculos, radios y tangentes
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p data-lang-es="© 2024 MATELLA. Plataforma educativa de matemáticas." data-lang-eu="© 2024 MATELLA. Matematikako hezkuntza plataforma.">© 2024 MATELLA. Plataforma educativa de matemáticas.</p>
+        </div>
+    </footer>
+
+    <!-- Botón back to top -->
+    <button id="back-to-top" aria-label="Volver arriba" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="../../../../assets/js/theme.js"></script>
+    <script src="../../../../assets/js/language.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    <script src="../../../../assets/js/uiComponents.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Lógica específica para esta página
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

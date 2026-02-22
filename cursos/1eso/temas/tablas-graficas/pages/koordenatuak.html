@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koordenatu Kartesiarrak</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-25px); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-bounce { animation: bounce 1s infinite; }
+        .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Iconos SVG simples
+        const Target = ({ className }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" strokeWidth="2"/>
+                <circle cx="12" cy="12" r="6" strokeWidth="2"/>
+                <circle cx="12" cy="12" r="2" strokeWidth="2"/>
+            </svg>
+        );
+
+        const MapPin = ({ className }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+        );
+
+        const Trophy = ({ className }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v5m-3 0h6M12 15l-3-3h6l-3 3zm0 0V9m0 0a6 6 0 100-12 6 6 0 000 12z"/>
+            </svg>
+        );
+
+        const RotateCcw = ({ className }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/>
+            </svg>
+        );
+
+        const Sparkles = ({ className }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3l1.5 7.5L5 18l7.5-1.5L20 18l-1.5-7.5L20 3l-7.5 1.5L5 3z"/>
+            </svg>
+        );
+
+        const CoordinateGame = () => {
+            const [screen, setScreen] = useState('menu');
+            const [mode, setMode] = useState(null);
+            const [round, setRound] = useState(0);
+            const [score, setScore] = useState(0);
+            const [targetCoord, setTargetCoord] = useState({ x: 0, y: 0 });
+            const [clickedPoint, setClickedPoint] = useState(null);
+            const [inputX, setInputX] = useState('');
+            const [inputY, setInputY] = useState('');
+            const [feedback, setFeedback] = useState(null);
+            const [showCelebration, setShowCelebration] = useState(false);
+
+            const generateRandomCoord = () => ({
+                x: Math.floor(Math.random() * 21) - 10,
+                y: Math.floor(Math.random() * 21) - 10
+            });
+
+            const startGame = (selectedMode) => {
+                setMode(selectedMode);
+                setScreen('game');
+                setRound(1);
+                setScore(0);
+                setTargetCoord(generateRandomCoord());
+                setClickedPoint(null);
+                setInputX('');
+                setInputY('');
+                setFeedback(null);
+            };
+
+            const handleGridClick = (e) => {
+                if (mode !== 1 || feedback) return;
+
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const gridX = Math.round((x / rect.width) * 20 - 10);
+                const gridY = Math.round(10 - (y / rect.height) * 20);
+
+                setClickedPoint({ x: gridX, y: gridY });
+
+                const distance = Math.sqrt(
+                    Math.pow(gridX - targetCoord.x, 2) + Math.pow(gridY - targetCoord.y, 2)
+                );
+
+                let points = 0;
+                let message = '';
+                let color = '';
+
+                if (distance === 0) {
+                    points = 100;
+                    message = 'PERFEKTUA! 🎯';
+                    color = 'text-green-400';
+                } else if (distance <= 1) {
+                    points = 80;
+                    message = 'Oso ondo! ✨';
+                    color = 'text-blue-400';
+                } else if (distance <= 2) {
+                    points = 60;
+                    message = 'Ondo! 👍';
+                    color = 'text-yellow-400';
+                } else if (distance <= 3) {
+                    points = 40;
+                    message = 'Hurbil... 🎲';
+                    color = 'text-orange-400';
+                } else {
+                    points = 20;
+                    message = 'Saiatu hobeto 💪';
+                    color = 'text-red-400';
+                }
+
+                setScore(score + points);
+                setFeedback({ message, color, points });
+
+                setTimeout(() => nextRound(), 2000);
+            };
+
+            const handleSubmitCoord = () => {
+                if (feedback || inputX === '' || inputY === '') return;
+
+                const userX = parseFloat(inputX);
+                const userY = parseFloat(inputY);
+
+                const diffX = Math.abs(userX - targetCoord.x);
+                const diffY = Math.abs(userY - targetCoord.y);
+
+                let points = 0;
+                let message = '';
+                let color = '';
+
+                if (diffX <= 0.5 && diffY <= 0.5) {
+                    points = 100;
+                    message = 'ZUZENA! 🎯';
+                    color = 'text-green-400';
+                } else {
+                    points = 0;
+                    message = `Okerra. (${targetCoord.x}, ${targetCoord.y}) zen ❌`;
+                    color = 'text-red-400';
+                }
+
+                setScore(score + points);
+                setFeedback({ message, color, points });
+
+                setTimeout(() => nextRound(), 2500);
+            };
+
+            const nextRound = () => {
+                if (round >= 10) {
+                    setShowCelebration(true);
+                    setTimeout(() => {
+                        setScreen('results');
+                        setShowCelebration(false);
+                    }, 2000);
+                } else {
+                    setRound(round + 1);
+                    setTargetCoord(generateRandomCoord());
+                    setClickedPoint(null);
+                    setInputX('');
+                    setInputY('');
+                    setFeedback(null);
+                }
+            };
+
+            const Grid = () => {
+                const gridSize = 400;
+                const step = gridSize / 20;
+
+                return (
+                    <div className="relative">
+                        <svg
+                            width={gridSize}
+                            height={gridSize}
+                            className="border-2 border-purple-500/30 rounded-lg bg-gradient-to-br from-slate-900 to-slate-800 cursor-crosshair shadow-2xl"
+                            onClick={mode === 1 ? handleGridClick : null}
+                        >
+                            {[...Array(21)].map((_, i) => (
+                                <g key={i}>
+                                    <line
+                                        x1={0}
+                                        y1={i * step}
+                                        x2={gridSize}
+                                        y2={i * step}
+                                        stroke="#374151"
+                                        strokeWidth="1"
+                                        opacity="0.3"
+                                    />
+                                    <line
+                                        x1={i * step}
+                                        y1={0}
+                                        x2={i * step}
+                                        y2={gridSize}
+                                        stroke="#374151"
+                                        strokeWidth="1"
+                                        opacity="0.3"
+                                    />
+                                </g>
+                            ))}
+
+                            <line
+                                x1={gridSize / 2}
+                                y1={0}
+                                x2={gridSize / 2}
+                                y2={gridSize}
+                                stroke="#8b5cf6"
+                                strokeWidth="2"
+                            />
+                            <line
+                                x1={0}
+                                y1={gridSize / 2}
+                                x2={gridSize}
+                                y2={gridSize / 2}
+                                stroke="#8b5cf6"
+                                strokeWidth="2"
+                            />
+
+                            {[-10, -5, 0, 5, 10].map((val) => (
+                                <g key={`label-${val}`}>
+                                    <text
+                                        x={(val + 10) * step}
+                                        y={gridSize / 2 + 15}
+                                        fill="#9ca3af"
+                                        fontSize="10"
+                                        textAnchor="middle"
+                                    >
+                                        {val}
+                                    </text>
+                                    <text
+                                        x={gridSize / 2 + 15}
+                                        y={(10 - val) * step + 5}
+                                        fill="#9ca3af"
+                                        fontSize="10"
+                                        textAnchor="middle"
+                                    >
+                                        {val}
+                                    </text>
+                                </g>
+                            ))}
+
+                            {mode === 2 && (
+                                <circle
+                                    cx={(targetCoord.x + 10) * step}
+                                    cy={(10 - targetCoord.y) * step}
+                                    r="8"
+                                    fill="#06b6d4"
+                                    className="animate-pulse"
+                                />
+                            )}
+
+                            {mode === 1 && clickedPoint && (
+                                <>
+                                    <circle
+                                        cx={(clickedPoint.x + 10) * step}
+                                        cy={(10 - clickedPoint.y) * step}
+                                        r="8"
+                                        fill="#f59e0b"
+                                        opacity="0.8"
+                                    />
+                                    <circle
+                                        cx={(targetCoord.x + 10) * step}
+                                        cy={(10 - targetCoord.y) * step}
+                                        r="8"
+                                        fill="#10b981"
+                                        opacity="0.8"
+                                    />
+                                    <line
+                                        x1={(clickedPoint.x + 10) * step}
+                                        y1={(10 - clickedPoint.y) * step}
+                                        x2={(targetCoord.x + 10) * step}
+                                        y2={(10 - targetCoord.y) * step}
+                                        stroke="#ef4444"
+                                        strokeWidth="2"
+                                        strokeDasharray="4"
+                                    />
+                                </>
+                            )}
+                        </svg>
+                    </div>
+                );
+            };
+
+            if (screen === 'menu') {
+                return (
+                    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 flex items-center justify-center p-4">
+                        <div className="text-center space-y-8 max-w-2xl">
+                            <div className="space-y-4">
+                                <div className="flex justify-center">
+                                    <Sparkles className="w-16 h-16 text-yellow-300 animate-pulse" />
+                                </div>
+                                <h1 className="text-6xl font-bold text-white drop-shadow-lg">
+                                    Koordenatu
+                                </h1>
+                                <h2 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                                    Kartesiarrak
+                                </h2>
+                                <p className="text-xl text-purple-200">
+                                    Menderatu plano kartesiarra jolasten
+                                </p>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+                                <button
+                                    onClick={() => startGame(1)}
+                                    className="group relative bg-gradient-to-br from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white p-8 rounded-2xl shadow-2xl transition-all duration-300 transform hover:scale-105"
+                                >
+                                    <div className="flex flex-col items-center space-y-4">
+                                        <Target className="w-16 h-16" />
+                                        <h3 className="text-2xl font-bold">1. Modua</h3>
+                                        <p className="text-sm opacity-90">Jarri Puntua</p>
+                                        <p className="text-xs opacity-75">
+                                            Egin klik koordenatua dagoen tokian
+                                        </p>
+                                    </div>
+                                </button>
+
+                                <button
+                                    onClick={() => startGame(2)}
+                                    className="group relative bg-gradient-to-br from-pink-500 to-orange-600 hover:from-pink-600 hover:to-orange-700 text-white p-8 rounded-2xl shadow-2xl transition-all duration-300 transform hover:scale-105"
+                                >
+                                    <div className="flex flex-col items-center space-y-4">
+                                        <MapPin className="w-16 h-16" />
+                                        <h3 className="text-2xl font-bold">2. Modua</h3>
+                                        <p className="text-sm opacity-90">Identifikatu Puntua</p>
+                                        <p className="text-xs opacity-75">
+                                            Idatzi erakutsitako puntuaren koordenatuak
+                                        </p>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+
+            if (screen === 'game') {
+                return (
+                    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
+                        {showCelebration && (
+                            <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
+                                <div className="text-8xl animate-bounce">🎉</div>
+                            </div>
+                        )}
+                        
+                        <div className="max-w-4xl w-full space-y-6">
+                            <div className="flex justify-between items-center bg-slate-800/50 backdrop-blur-sm p-4 rounded-xl border border-purple-500/30">
+                                <div className="flex items-center space-x-4">
+                                    <div className="bg-purple-600 px-4 py-2 rounded-lg">
+                                        <span className="text-white font-bold">{round}. txanda / 10</span>
+                                    </div>
+                                    <div className="bg-gradient-to-r from-yellow-500 to-orange-500 px-4 py-2 rounded-lg">
+                                        <span className="text-white font-bold">⭐ {score} puntu</span>
+                                    </div>
+                                </div>
+                                <button
+                                    onClick={() => setScreen('menu')}
+                                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors"
+                                >
+                                    Irten
+                                </button>
+                            </div>
+
+                            <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-purple-500/30 space-y-6">
+                                <div className="text-center space-y-2">
+                                    <h3 className="text-2xl font-bold text-white">
+                                        {mode === 1 ? '🎯 Jarri Puntua' : '📍 Identifikatu Puntua'}
+                                    </h3>
+                                    {mode === 1 ? (
+                                        <p className="text-3xl font-bold text-cyan-400">
+                                            ({targetCoord.x}, {targetCoord.y})
+                                        </p>
+                                    ) : (
+                                        <p className="text-lg text-purple-300">
+                                            Zeintzuk dira urdin puntuaren koordenatuak?
+                                        </p>
+                                    )}
+                                </div>
+
+                                <div className="flex justify-center">
+                                    <Grid />
+                                </div>
+
+                                {mode === 2 && !feedback && (
+                                    <div className="flex justify-center items-center space-x-4">
+                                        <span className="text-white font-bold">X:</span>
+                                        <input
+                                            type="number"
+                                            value={inputX}
+                                            onChange={(e) => setInputX(e.target.value)}
+                                            className="w-24 px-4 py-2 bg-slate-700 text-white rounded-lg border border-purple-500/30 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                            placeholder="0"
+                                        />
+                                        <span className="text-white font-bold">Y:</span>
+                                        <input
+                                            type="number"
+                                            value={inputY}
+                                            onChange={(e) => setInputY(e.target.value)}
+                                            className="w-24 px-4 py-2 bg-slate-700 text-white rounded-lg border border-purple-500/30 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                            placeholder="0"
+                                            onKeyPress={(e) => e.key === 'Enter' && handleSubmitCoord()}
+                                        />
+                                        <button
+                                            onClick={handleSubmitCoord}
+                                            className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-6 py-2 rounded-lg font-bold transition-all transform hover:scale-105"
+                                        >
+                                            Egiaztatu
+                                        </button>
+                                    </div>
+                                )}
+
+                                {feedback && (
+                                    <div className="text-center space-y-2">
+                                        <p className={`text-3xl font-bold ${feedback.color} animate-pulse`}>
+                                            {feedback.message}
+                                        </p>
+                                        {feedback.points > 0 && (
+                                            <p className="text-xl text-yellow-400">+{feedback.points} puntu</p>
+                                        )}
+                                    </div>
+                                )}
+
+                                <div className="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
+                                    <div
+                                        className="bg-gradient-to-r from-purple-500 to-pink-500 h-full transition-all duration-500"
+                                        style={{ width: `${(round / 10) * 100}%` }}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+
+            if (screen === 'results') {
+                return (
+                    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 flex items-center justify-center p-4">
+                        <div className="text-center space-y-8 max-w-2xl bg-slate-800/50 backdrop-blur-sm p-12 rounded-3xl border border-purple-500/30">
+                            <Trophy className="w-24 h-24 text-yellow-400 mx-auto animate-bounce" />
+                            <h2 className="text-5xl font-bold text-white">Jokoa Amaituta!</h2>
+                            <div className="space-y-4">
+                                <p className="text-3xl text-purple-300">Azken Puntuazioa</p>
+                                <p className="text-7xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+                                    {score}
+                                </p>
+                                <p className="text-xl text-purple-300">1000 puntu posibletatik</p>
+                            </div>
+
+                            <div className="space-y-4 pt-8">
+                                <button
+                                    onClick={() => startGame(mode)}
+                                    className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-8 py-4 rounded-xl font-bold text-xl transition-all transform hover:scale-105 flex items-center justify-center space-x-2"
+                                >
+                                    <RotateCcw className="w-6 h-6" />
+                                    <span>Berriro Jokatu</span>
+                                </button>
+                                <button
+                                    onClick={() => setScreen('menu')}
+                                    className="w-full bg-slate-700 hover:bg-slate-600 text-white px-8 py-4 rounded-xl font-bold text-xl transition-all"
+                                >
+                                    Menu Nagusia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+        };
+
+        ReactDOM.render(<CoordinateGame />, document.getElementById('root'));
+    </script>
+</body>
+</html>

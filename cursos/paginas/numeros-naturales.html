@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zenbaki Naturalak - Matematika 1. DBH</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/main.js" defer></script>
+    <meta name="description" content="Teoria eta kontzeptuak zenbaki naturalentzat 1. DBH">
+    <meta name="keywords" content="matematika, zenbaki naturalak, oinarrizko eragiketak">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔢</text></svg>">
+</head>
+<body>
+    <header>
+        <div class="logo-titulo">
+            <h1>Zenbaki Naturalak</h1>
+        </div>
+        <nav class="navbar" aria-label="Nabigazio nagusia">
+            <a href="../index.html" class="navbar-logo">Matematika 1. DBH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <div class="navbar-menu">
+                <a href="../index.html" class="navbar-item">Hasiera</a>
+                <div class="dropdown">
+                    <a href="#" class="navbar-item dropdown-btn">Gaiak</a>
+                    <div class="dropdown-content">
+                        <a href="numeros-naturales.html" class="active">Zenbaki Naturalak</a>
+                        <a href="divisibilidad.html">Zatigarritasuna</a>
+                        <a href="numeros-enteros.html">Zenbaki Osoak</a>
+                        <a href="fracciones.html">Zatikiak</a>
+                        <a href="algebra.html">Aljebran</a>
+                        <a href="geometria.html">Geometria</a>
+                        <a href="tablas-graficas.html">Taulak eta Grafikoak</a>
+                    </div>
+                </div>
+                <a href="https://chatgpt.com/g/g-67d38635fb0c81919668655bdd91d6f7-matella-euskeraz" class="navbar-item">Matella ChatGPT</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="teoria-numeros" class="seccion-contenedor">
+            <h2>Zenbaki Naturalak</h2>
+            
+            <div class="tarjetas-secciones">
+                <div class="tarjeta" data-modal="introduccion">
+                    <h3>✴️ Sarrera</h3>
+                    <p>Zenbaki naturalen kontzeptu orokorrak</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="suma">
+                    <h3>➕ Batuketa</h3>
+                    <p>Oinarrizko eragiketa</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="resta">
+                    <h3>➖ Kenketa</h3>
+                    <p>Oinarrizko eragiketa</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="multiplicacion">
+                    <h3>✖️ Biderketa</h3>
+                    <p>Oinarrizko eragiketa</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="division">
+                    <h3>➗ Zatiketa</h3>
+                    <p>Oinarrizko eragiketa</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="parentesis">
+                    <h3>🔄 Parentesien erabilera</h3>
+                    <p>Eragiketen ordena</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="orden-operaciones">
+                    <h3>🧮 Eragiketen ordena</h3>
+                    <p>Eragiketen ordena</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="calculo-mental">
+                    <h3>🧠 Buruko kalkulua</h3>
+                    <p>Arteatzaileak</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="herramientas-interactivas" class="seccion-contenedor">
+            <h2>Tresna Interaktiboak</h2>
+            <div class="herramientas">
+                <div class="herramienta">
+                    <h3>Zenbaki Naturalen Kalkulagailua</h3>
+                    <div class="calculadora">
+                        <input type="number" id="num1" placeholder="Zenbakia 1">
+                        <select id="operacion">
+                            <option value="+">+</option>
+                            <option value="-">-</option>
+                            <option value="*">×</option>
+                            <option value="/">÷</option>
+                        </select>
+                        <input type="number" id="num2" placeholder="Zenbakia 2">
+                        <button onclick="calcular()">Kalkulatu</button>
+                        <p id="resultado">Emaitza: </p>
+                    </div>
+                </div>
+                <div class="herramienta">
+                    <h3>Zenbaki Naturalen Quiz-a</h3>
+                    <div class="quiz">
+                        <p id="pregunta-quiz">Zein da 5 eta 7 arteko biderketa?</p>
+                        <div class="opciones-quiz">
+                            <button onclick="verificarRespuesta(30)">30</button>
+                            <button onclick="verificarRespuesta(35)">35</button>
+                            <button onclick="verificarRespuesta(25)">25</button>
+                            <button onclick="verificarRespuesta(40)">40</button>
+                        </div>
+                        <p id="resultado-quiz"></p>
+                    </div>
+                </div>
+                <div class="herramienta">
+                    <h3>Tresna Interaktibo Aurreratua</h3>
+                    <p>Zenbaki naturalekin ariketa interaktiboak egiteko tresna aurreratua.</p>
+                    <a href="herramienta-zenbaki-naturalak.html" class="btn btn-primario">Tresna Erabili</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modales -->
+    <div id="modal-introduccion" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-suma" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-resta" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-multiplicacion" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-division" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-parentesis" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-orden-operaciones" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-calculo-mental" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+
+    <footer>
+        <p> 2025 Matematika 1. DBH - Zenbaki Naturalen Atala</p>
+        <p>❤️ Bihotzez garatua Derrigorrezko Bigarren Hezkuntzako ikasleentzat</p>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/modales-numeros.js"></script>
+</body>
+</html>

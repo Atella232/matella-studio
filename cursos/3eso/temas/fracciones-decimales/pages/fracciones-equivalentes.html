@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Fracciones Equivalentes - 3º ESO" data-lang-eu="Frakzio Baliokideak - 3.ESO">Fracciones Equivalentes - 3º ESO</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-equals"></i>
+            <span data-lang-es="Fracciones Equivalentes" data-lang-eu="Frakzio Baliokideak">Fracciones Equivalentes</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="action-buttons">
+            <button class="button-secondary">
+                <i class="fas fa-pencil-alt"></i>
+                <span data-lang-es="Ejercicios" data-lang-eu="Ariketak">Ejercicios</span>
+            </button>
+            <button class="button-secondary">
+                <i class="fas fa-tools"></i>
+                <span data-lang-es="Herramienta" data-lang-eu="Tresna">Herramienta</span>
+            </button>
+        </div>
+
+        <h2 class="page-title" data-lang-es="Fracciones Equivalentes" data-lang-eu="Frakzio Baliokideak">Fracciones Equivalentes</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué son las Fracciones Equivalentes?" data-lang-eu="Zer dira Frakzio Baliokideak?">¿Qué son las Fracciones Equivalentes?</h3>
+            <p data-lang-es="Dos fracciones son equivalentes cuando representan la misma parte de la unidad, aunque tengan numeradores y denominadores diferentes."
+               data-lang-eu="Bi frakzio baliokideak dira unitatearen zati bera adierazten dutenean, nahiz eta zenbakitzaile eta izendatzaile desberdinak izan.">
+               Dos fracciones son equivalentes cuando representan la misma parte de la unidad, aunque tengan numeradores y denominadores diferentes.
+            </p>
+            
+            <div class="formula-box">
+                <h4 data-lang-es="Condición de Equivalencia" data-lang-eu="Baliokidetasun Baldintza">Condición de Equivalencia</h4>
+                <p class="formula">
+                    \\[ \frac{a}{b} = \frac{c}{d} \\text{ si y solo si } a \\cdot d = b \\cdot c \\]
+                </p>
+                <p data-lang-es="Esta condición nos permite verificar si dos fracciones son equivalentes multiplicando en cruz."
+                   data-lang-eu="Baldintza honek bi frakzio baliokideak diren egiaztatzeko aukera ematen digu gurutzatuz biderkatuz.">
+                   Esta condición nos permite verificar si dos fracciones son equivalentes multiplicando en cruz.
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Propiedades de las Fracciones Equivalentes" data-lang-eu="Frakzio Baliokideen Propietateak">Propiedades de las Fracciones Equivalentes</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-times icon-concept"></i>
+                        <span data-lang-es="Multiplicación por el mismo número" data-lang-eu="Zenbaki berean biderkatzea">Multiplicación por el mismo número</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Si multiplicamos el numerador y el denominador de una fracción por el mismo número (distinto de cero), obtenemos una fracción equivalente."
+                           data-lang-eu="Frakzio baten zenbakitzailea eta izendatzailea zenbaki berean (zerotik desberdina) biderkatzen baditugu, frakzio baliokide bat lortzen dugu.">
+                           Si multiplicamos el numerador y el denominador de una fracción por el mismo número (distinto de cero), obtenemos una fracción equivalente.
+                        </p>
+                        <p class="formula">\\[ \frac{a}{b} = \frac{a \\cdot k}{b \\cdot k} \\text{ con } k \\neq 0 \\]</p>
+                        <p class="example">
+                            <em data-lang-es="Ejemplo: \\(\\frac{2}{3} = \\frac{2 \\cdot 3}{3 \\cdot 3} = \\frac{6}{9}\\)"
+                                data-lang-eu="Adibidea: \\(\\frac{2}{3} = \\frac{2 \\cdot 3}{3 \\cdot 3} = \\frac{6}{9}\\)">
+                                Ejemplo: \\(\\frac{2}{3} = \\frac{2 \\cdot 3}{3 \\cdot 3} = \\frac{6}{9}\\)
+                            </em>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-divide icon-concept"></i>
+                        <span data-lang-es="División por el mismo número (simplificación)" data-lang-eu="Zenbaki berean zatiketa (sinplifikazioa)">División por el mismo número (simplificación)</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Si dividimos el numerador y el denominador de una fracción por un divisor común, obtenemos una fracción equivalente simplificada."
+                           data-lang-eu="Frakzio baten zenbakitzailea eta izendatzailea zatitzaile komun batean zatitzen baditugu, sinplifikatutako frakzio baliokide bat lortzen dugu.">
+                           Si dividimos el numerador y el denominador de una fracción por un divisor común, obtenemos una fracción equivalente simplificada.
+                        </p>
+                        <p class="formula">\\[ \frac{a}{b} = \\frac{a \\div d}{b \\div d} \\text{ donde } d \\text{ es divisor común de } a \\text{ y } b \\]</p>
+                        <p class="example">
+                            <em data-lang-es="Ejemplo: \\(\\frac{6}{8} = \\frac{6 \\div 2}{8 \\div 2} = \\frac{3}{4}\\)"
+                                data-lang-eu="Adibidea: \\(\\frac{6}{8} = \\frac{6 \\div 2}{8 \\div 2} = \\frac{3}{4}\\)">
+                                Ejemplo: \\(\\frac{6}{8} = \\frac{6 \\div 2}{8 \\div 2} = \\frac{3}{4}\\)
+                            </em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Ejemplos Prácticos" data-lang-eu="Adibide Praktikoak">Ejemplos Prácticos</h3>
+            
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 1: Verificar equivalencia" data-lang-eu="1. Adibidea: Baliokidetasuna egiaztatzea">Ejemplo 1: Verificar equivalencia</h4>
+                <p data-lang-es="¿Son equivalentes \\(\\frac{2}{3}\\) y \\(\\frac{4}{6}\\)?"
+                   data-lang-eu="\\(\\frac{2}{3}\\) eta \\(\\frac{4}{6}\\) frakzioak baliokideak al dira?">
+                   ¿Son equivalentes \\(\\frac{2}{3}\\) y \\(\\frac{4}{6}\\)?
+                </p>
+                <p class="example-step">
+                    <strong data-lang-es="Paso 1:" data-lang-eu="1. Pausua:">Paso 1:</strong> 
+                    <span data-lang-es=" Multiplicamos en cruz:" data-lang-eu=" Gurutzatuz biderkatzen dugu:">
+                    Multiplicamos en cruz:</span> \\(2 \\cdot 6 = 12\\) y \\(3 \\cdot 4 = 12\\)
+                </p>
+                <p class="example-step">
+                    <strong data-lang-es="Paso 2:" data-lang-eu="2. Pausua:">Paso 2:</strong>
+                    <span data-lang-es=" Como los productos son iguales, las fracciones son equivalentes."
+                          data-lang-eu=" Produktuak berdinak direnez, frakzioak baliokideak dira.">
+                    Como los productos son iguales, las fracciones son equivalentes.
+                    </span>
+                </p>
+                <p class="conclusion">
+                    <strong data-lang-es="Conclusión:" data-lang-eu="Ondorioa:">
+                    Conclusión:</strong> \\(\\frac{2}{3} = \\frac{4}{6}\\)
+                </p>
+            </div>
+
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 2: Simplificar fracción" data-lang-eu="2. Adibidea: Frakzio sinplifikatzea">Ejemplo 2: Simplificar fracción</h4>
+                <p data-lang-es="Simplificar \\(\\frac{12}{18}\\) hasta obtener la fracción irreducible."
+                   data-lang-eu="\\(\\frac{12}{18}\\) sinplifikatu biderkaezina lortu arte.">
+                   Simplificar \\(\\frac{12}{18}\\) hasta obtener la fracción irreducible.
+                </p>
+                <p class="example-step">
+                    <strong data-lang-es="Paso 1:" data-lang-eu="1. Pausua:">Paso 1:</strong>
+                    <span data-lang-es=" Hallar el MCD de 12 y 18:" data-lang-eu=" 12 eta 18-ren MKT aurkitu:">
+                    Hallar el MCD de 12 y 18:</span> MCD(12, 18) = 6
+                </p>
+                <p class="example-step">
+                    <strong data-lang-es="Paso 2:" data-lang-eu="2. Pausua:">Paso 2:</strong>
+                    <span data-lang-es=" Dividir numerador y denominador por 6:"
+                          data-lang-eu=" Zenbakitzailea eta izendatzailea 6an zatitu:">
+                    Dividir numerador y denominador por 6:</span> \\(\\frac{12 \\div 6}{18 \\div 6} = \\frac{2}{3}\\)
+                </p>
+                <p class="conclusion">
+                    <strong data-lang-es="Resultado:" data-lang-eu="Emaitza:">
+                    Resultado:</strong> \\(\\frac{12}{18} = \\frac{2}{3}\\) (<span data-lang-es="fracción irreducible" data-lang-eu="frakzio biderkaezina">fracción irreducible</span>)
+                </p>
+            </div>
+
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 3: Obtener fracciones equivalentes" data-lang-eu="3. Adibidea: Frakzio baliokideak lortzea">Ejemplo 3: Obtener fracciones equivalentes</h4>
+                <p data-lang-es="Obtener tres fracciones equivalentes a \\(\\frac{3}{5}\\)."
+                   data-lang-eu="\\(\\frac{3}{5}\\)-ren hiru frakzio baliokide lortu.">
+                   Obtener tres fracciones equivalentes a \\(\\frac{3}{5}\\).
+                </p>
+                <p class="formula">
+                    \\[ \frac{3}{5} = \\frac{3 \\cdot 2}{5 \\cdot 2} = \\frac{6}{10} \\quad | \\quad \frac{3}{5} = \\frac{3 \\cdot 3}{5 \\cdot 3} = \\frac{9}{15} \\quad | \\quad \frac{3}{5} = \\frac{3 \\cdot 4}{5 \\cdot 4} = \\frac{12}{20} \\]
+                </p>
+                <p data-lang-es="Todas estas fracciones representan la misma cantidad: 0.6"
+                   data-lang-eu="Frakzio guzti hauek kantitate bera adierazten dute: 0.6">
+                   Todas estas fracciones representan la misma cantidad: 0.6
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section warning-box">
+            <h3><i class="fas fa-exclamation-triangle"></i> <span data-lang-es="Errores Típicos" data-lang-eu="Akats Ohikoak">Errores Típicos</span></h3>
+            <ul>
+                <li data-lang-es="<b>Confundir numerador con denominador:</b> Al comprobar equivalencia, verificar que multiplicamos correctamente cruzando los términos."
+                   data-lang-eu="<b>Zenbakitzailea izendatzailearekin nahastea:</b> Baliokidetasuna egiaztatzean, terminoak ondo gurutzatuz biderkatzen ditugula egiaztatu.">
+                   <b>Confundir numerador con denominador:</b> Al comprobar equivalencia, verificar que multiplicamos correctamente cruzando los términos.
+                </li>
+                <li data-lang-es="<b>No reducir completamente:</b> Olvidar simplificar hasta el máximo común divisor para obtener la fracción irreducible."
+                   data-lang-eu="<b>Guzti ez sinplifikatzea:</b> Gehieneko zatitzaile komunera arte sinplifikatu gabe uztea frakzio biderkaezina lortzeko.">
+                   <b>No reducir completamente:</b> Olvidar simplificar hasta el máximo común divisor para obtener la fracción irreducible.
+                </li>
+                <li data-lang-es="<b>Multiplicar solo un término:</b> Para obtener fracciones equivalentes, hay que multiplicar O dividir AMBOS términos por el mismo número."
+                   data-lang-eu="<b>Termino bakarra biderkatzea:</b> Frakzio baliokideak lortzeko, zenbaki berean BI terminoak biderkatu ZATITU behar ditugu.">
+                   <b>Multiplicar solo un término:</b> Para obtener fracciones equivalentes, hay que multiplicar O dividir AMBOS términos por el mismo número.
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

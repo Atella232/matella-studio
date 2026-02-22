@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="Números primos y compuestos - MATELLA" data-lang-eu="Zenbaki lehenak eta konposatuak - MATELLA">Números primos y compuestos - MATELLA</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <link rel="stylesheet" href="../math-formulas.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <style>
+    .sieve-container {
+      text-align: center;
+    }
+    .sieve-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 5px;
+      max-width: 500px;
+      margin: 1rem auto;
+      padding: 1rem;
+      background-color: var(--button-bg);
+      border-radius: 8px;
+    }
+    .sieve-number {
+      aspect-ratio: 1 / 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--card-bg);
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+      border: 2px solid transparent;
+    }
+    .sieve-number.prime {
+      background-color: var(--secondary-color);
+      color: white;
+      border-color: var(--secondary-color);
+      transform: scale(1.1);
+    }
+    .sieve-number.composite {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      opacity: 0.5;
+      text-decoration: line-through;
+    }
+    .sieve-controls button {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 0.6em 1.2em;
+      border-radius: 20px;
+      margin: 0 0.5rem;
+      transition: background-color 0.2s ease;
+    }
+    .sieve-controls button:hover {
+      background-color: var(--secondary-color);
+    }
+    .sieve-steps {
+      margin-top: 1.5rem;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <a href="../../../../index.html" class="home-link">
+        <i class="fas fa-calculator"></i>
+        <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+      </a>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
+    </nav>
+  </header>
+
+  <main>
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+      <ol>
+        <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+        <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
+        <li><a href="../index.html" data-lang-es="Divisibilidad y números enteros" data-lang-eu="Zatigarritasuna eta zenbaki osoak">Divisibilidad y números enteros</a></li>
+        <li class="active" aria-current="page"><span data-lang-es="Números primos y compuestos" data-lang-eu="Zenbaki lehenak eta konposatuak">Números primos y compuestos</span></li>
+      </ol>
+    </nav>
+
+    <h1 class="page-title" data-lang-es="Números Primos y Compuestos" data-lang-eu="Zenbaki Lehenak eta Konposatuak">Números Primos y Compuestos</h1>
+
+    <div class="content-section intro-section">
+      <p data-lang-es="Los números primos son los 'ladrillos' fundamentales de las matemáticas. Son números naturales mayores que 1 que solo se pueden dividir por 1 y por sí mismos. Los números compuestos, en cambio, se pueden descomponer en factores más pequeños." data-lang-eu="Zenbaki lehenak matematikaren 'adreilu' oinarrizkoak dira. 1 baino handiagoak diren zenbaki naturalak dira, 1ez eta bere buruaz soilik zatitu daitezkeenak. Zenbaki konposatuak, aldiz, faktore txikiagoetan deskonposa daitezke.">Los números primos son los 'ladrillos' fundamentales de las matemáticas. Son números naturales mayores que 1 que solo se pueden dividir por 1 y por sí mismos. Los números compuestos, en cambio, se pueden descomponer en factores más pequeños.</p>
+    </div>
+
+    <h2 data-lang-es="Conceptos Fundamentales" data-lang-eu="Oinarrizko Kontzeptuak">Conceptos Fundamentales</h2>
+    <div class="tabs-container content-section">
+      <ul class="tabs-nav">
+        <li><a href="#primos" class="tab-link active" data-lang-es="Números Primos" data-lang-eu="Zenbaki Lehenak">Números Primos</a></li>
+        <li><a href="#compuestos" class="tab-link" data-lang-es="Números Compuestos" data-lang-eu="Zenbaki Konposatuak">Números Compuestos</a></li>
+      </ul>
+      <div class="tabs-content">
+        <div id="primos" class="tab-pane active">
+          <p data-lang-es="Un <strong>número primo</strong> es un número natural mayor que 1 que tiene exactamente dos divisores: 1 y él mismo." data-lang-eu="<strong>Zenbaki lehena</strong> 1 baino handiagoa den zenbaki natural bat da, bi zatitzaile soilik dituena: 1a eta bere burua.">Un <strong>número primo</strong> es un número natural mayor que 1 que tiene exactamente dos divisores: 1 y él mismo.</p>
+          <div class="example-solved">
+            <h4 data-lang-es="Ejemplo: El número 7" data-lang-eu="Adibidea: 7 zenbakia">Ejemplo: El número 7</h4>
+            <div class="solution">
+              <p data-lang-es="Los divisores de 7 son:" data-lang-eu="7ren zatitzaileak dira:">Los divisores de 7 son:</p>
+              <ul>
+                <li>1 (porque 7 ÷ 1 = 7)</li>
+                <li>7 (porque 7 ÷ 7 = 1)</li>
+              </ul>
+              <p data-lang-es="Como solo tiene dos divisores, 7 es un número primo." data-lang-eu="Bi zatitzaile soilik dituenez, 7 zenbaki lehena da.">Como solo tiene dos divisores, 7 es un número primo.</p>
+            </div>
+          </div>
+          <div class="interactive-idea card-style">
+            <h5><i class="fas fa-lightbulb"></i> <span data-lang-es="Características importantes" data-lang-eu="Ezaugarri garrantzitsuak">Características importantes</span></h5>
+            <ul class="icon-list">
+              <li><i class="fas fa-times-circle"></i><span data-lang-es="El 1 <strong>NO</strong> es primo (solo tiene un divisor)." data-lang-eu="1a <strong>EZ</strong> da lehena (zatitzaile bakarra du).">El 1 <strong>NO</strong> es primo (solo tiene un divisor).</span></li>
+              <li><i class="fas fa-star-of-life"></i><span data-lang-es="El 2 es el <strong>único</strong> número primo par." data-lang-eu="2a da zenbaki lehen bikoiti <strong>bakarra</strong>.">El 2 es el <strong>único</strong> número primo par.</span></li>
+              <li><i class="fas fa-infinity"></i><span data-lang-es="Los números primos son <strong>infinitos</strong>." data-lang-eu="Zenbaki lehenak <strong>infinituak</strong> dira.">Los números primos son <strong>infinitos</strong>.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div id="compuestos" class="tab-pane">
+          <p data-lang-es="Un <strong>número compuesto</strong> es un número natural mayor que 1 que tiene más de dos divisores. Es decir, se puede descomponer en factores más pequeños." data-lang-eu="<strong>Zenbaki konposatua</strong> 1 baino handiagoa den zenbaki natural bat da, bi zatitzaile baino gehiago dituena. Hau da, faktore txikiagoetan deskonposa daiteke.">Un <strong>número compuesto</strong> es un número natural mayor que 1 que tiene más de dos divisores. Es decir, se puede descomponer en factores más pequeños.</p>
+          <div class="example-solved">
+            <h4 data-lang-es="Ejemplo: El número 12" data-lang-eu="Adibidea: 12 zenbakia">Ejemplo: El número 12</h4>
+            <div class="solution">
+              <p data-lang-es="Los divisores de 12 son: 1, 2, 3, 4, 6, 12." data-lang-eu="12ren zatitzaileak dira: 1, 2, 3, 4, 6, 12.">Los divisores de 12 son: 1, 2, 3, 4, 6, 12.</p>
+              <p data-lang-es="Como tiene más de dos divisores, 12 es un número compuesto." data-lang-eu="Bi zatitzaile baino gehiago dituenez, 12 zenbaki konposatua da.">Como tiene más de dos divisores, 12 es un número compuesto.</p>
+            </div>
+          </div>
+          <h4 data-lang-es="Descomposición en Factores Primos" data-lang-eu="Faktore Lehenetan Deskonposatzea">Descomposición en Factores Primos</h4>
+          <p data-lang-es="Todo número compuesto se puede expresar como producto de números primos. Esta es la <strong>descomposición en factores primos</strong> o <strong>factorización</strong>." data-lang-eu="Zenbaki konposatu guztiak zenbaki lehenen produktu gisa adieraz daitezke. Hau da <strong>faktore lehenetan deskonposatzea</strong> edo <strong>faktorizazioa</strong>.">Todo número compuesto se puede expresar como producto de números primos. Esta es la <strong>descomposición en factores primos</strong> o <strong>factorización</strong>.</p>
+          <div class="example-solved">
+            <h4 data-lang-es="Ejemplo: Descomponer 60" data-lang-eu="Adibidea: 60 deskonposatu">Ejemplo: Descomponer 60</h4>
+            <div class="solution">
+              <p data-lang-es="Dividimos sucesivamente por los números primos más pequeños:" data-lang-eu="Zenbaki lehen txikienekin zatitzen dugu etengabe:">Dividimos sucesivamente por los números primos más pequeños:</p>
+              <div class="math-formula-block">
+                60 = 2 × 30 = 2 × 2 × 15 = 2 × 2 × 3 × 5
+              </div>
+              <p data-lang-es="Por tanto, la factorización de 60 es:" data-lang-eu="Beraz, 60ren faktorizazioa hauxe da:">Por tanto, la factorización de 60 es:</p>
+              <div class="math-result">
+                <strong>60 = 2² × 3 × 5</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <h2 data-lang-es="Herramientas y Métodos" data-lang-eu="Tresnak eta Metodoak">Herramientas y Métodos</h2>
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="true">
+          <i class="fas fa-sieve icon-concept"></i>
+          <span data-lang-es="La Criba de Eratóstenes" data-lang-eu="Eratostenesen Bahea">La Criba de Eratóstenes</span>
+          <i class="fas fa-chevron-down icon-toggle"></i>
+        </button>
+        <div class="accordion-content">
+          <p data-lang-es="La criba de Eratóstenes es un método antiguo y eficaz para encontrar todos los números primos hasta un número determinado:" data-lang-eu="Eratostenesen bahea zenbaki jakin baterainoko zenbaki lehen guztiak aurkitzeko metodo zahar eta eraginkorra da:">La criba de Eratóstenes es un método antiguo y eficaz para encontrar todos los números primos hasta un número determinado:</p>
+          <div class="sieve-container">
+            <h5 data-lang-es="Criba interactiva hasta 50" data-lang-eu="50erainoko bahe interaktiboa">Criba interactiva hasta 50</h5>
+            <div class="sieve-grid" id="sieveGrid"></div>
+            <div class="sieve-controls">
+              <button onclick="startSieve()" data-lang-es="Iniciar Criba" data-lang-eu="Bahea Hasi">Iniciar Criba</button>
+              <button onclick="clearSieve()" data-lang-es="Limpiar" data-lang-eu="Garbitu">Limpiar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false">
+          <i class="fas fa-calculator icon-concept"></i>
+          <span data-lang-es="Calculadoras de Primalidad y Factorización" data-lang-eu="Lehentasun eta Faktorizazio Kalkulagailuak">Calculadoras de Primalidad y Factorización</span>
+          <i class="fas fa-chevron-down icon-toggle"></i>
+        </button>
+        <div class="accordion-content">
+          <div class="interactive-calculator">
+            <h5 data-lang-es="Verificador de Números Primos" data-lang-eu="Zenbaki Lehenen Egiaztatzailea">Verificador de Números Primos</h5>
+            <p data-lang-es="Introduce un número para saber si es primo o compuesto." data-lang-eu="Sartu zenbaki bat lehena edo konposatua den jakiteko.">Introduce un número para saber si es primo o compuesto.</p>
+            <div class="input-group">
+              <input type="number" id="primeNumber" data-placeholder-es="ej: 17" data-placeholder-eu="adib: 17" min="2">
+              <button onclick="checkPrime()" data-lang-es="Verificar" data-lang-eu="Egiaztatu">Verificar</button>
+            </div>
+            <div class="result" id="primeResult"></div>
+          </div>
+          <div class="interactive-calculator" style="margin-top: 2rem;">
+            <h5 data-lang-es="Calculadora de Factorización" data-lang-eu="Faktorizazio Kalkulagailua">Calculadora de Factorización</h5>
+            <p data-lang-es="Introduce un número para descomponerlo en sus factores primos." data-lang-eu="Sartu zenbaki bat bere faktore lehenetan deskonposatzeko.">Introduce un número para descomponerlo en sus factores primos.</p>
+            <div class="input-group">
+              <input type="number" id="factorizeNumber" data-placeholder-es="ej: 60" data-placeholder-eu="adib: 60" min="2">
+              <button onclick="factorize()" data-lang-es="Factorizar" data-lang-eu="Faktorizatu">Factorizar</button>
+            </div>
+            <div class="result" id="factorizeResult"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <h2 data-lang-es="Ponte a Prueba" data-lang-eu="Jarri Proban Zeure Burua">Ponte a Prueba</h2>
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false">
+          <i class="fas fa-list-ol icon-concept"></i>
+          <span data-lang-es="Ejercicios Propuestos" data-lang-eu="Proposatutako Ariketak">Ejercicios Propuestos</span>
+          <i class="fas fa-chevron-down icon-toggle"></i>
+        </button>
+        <div class="accordion-content">
+          <ol class="exercises-list">
+            <li>
+              <p data-lang-es="¿Cuáles de estos números son primos: 13, 21, 29, 33, 37?" data-lang-eu="Zenbaki hauetatik zein dira lehenak: 13, 21, 29, 33, 37?">¿Cuáles de estos números son primos: 13, 21, 29, 33, 37?</p>
+              <button class="toggle-hint-button" data-target="hint-1" aria-expanded="false">
+                <i class="fas fa-lightbulb"></i>
+                <span data-lang-es="Mostrar Pista" data-lang-eu="Pista Erakutsi" data-lang-es-hide="Ocultar Pista" data-lang-eu-hide="Pista Ezkutatu">Mostrar Pista</span>
+              </button>
+              <div id="hint-1" class="hint-content">
+                <p data-lang-es="Recuerda: un número primo solo tiene dos divisores (1 y él mismo). Comprueba si alguno tiene otros divisores." data-lang-eu="Gogoratu: zenbaki lehen batek bi zatitzaile soilik ditu (1a eta bere burua). Egiaztatu ea besteren bat duten.">Recuerda: un número primo solo tiene dos divisores (1 y él mismo). Comprueba si alguno tiene otros divisores.</p>
+              </div>
+            </li>
+            <li>
+              <p data-lang-es="Descompón en factores primos los siguientes números: 48, 72, 100." data-lang-eu="Deskonposatu faktore lehenetan zenbaki hauek: 48, 72, 100.">Descompón en factores primos los siguientes números: 48, 72, 100.</p>
+              <button class="toggle-hint-button" data-target="hint-2" aria-expanded="false">
+                <i class="fas fa-lightbulb"></i>
+                <span data-lang-es="Mostrar Pista" data-lang-eu="Pista Erakutsi" data-lang-es-hide="Ocultar Pista" data-lang-eu-hide="Pista Ezkutatu">Mostrar Pista</span>
+              </button>
+              <div id="hint-2" class="hint-content">
+                <p data-lang-es="Empieza a dividir por el número primo más pequeño posible (2, 3, 5...) hasta que el resultado sea 1." data-lang-eu="Hasi ahal den zenbaki lehen txikienaz zatitzen (2, 3, 5...), emaitza 1 izan arte.">Empieza a dividir por el número primo más pequeño posible (2, 3, 5...) hasta que el resultado sea 1.</p>
+              </div>
+            </li>
+            <li>
+              <p data-lang-es="Encuentra todos los números primos que hay entre 20 y 40." data-lang-eu="Aurkitu 20 eta 40 artean dauden zenbaki lehen guztiak.">Encuentra todos los números primos que hay entre 20 y 40.</p>
+              <button class="toggle-hint-button" data-target="hint-3" aria-expanded="false">
+                <i class="fas fa-lightbulb"></i>
+                <span data-lang-es="Mostrar Pista" data-lang-eu="Pista Erakutsi" data-lang-es-hide="Ocultar Pista" data-lang-eu-hide="Pista Ezkutatu">Mostrar Pista</span>
+              </button>
+              <div id="hint-3" class="hint-content">
+                <p data-lang-es="Descarta todos los números pares. Luego, comprueba si los impares restantes son divisibles por 3, 5 o 7." data-lang-eu="Baztertu zenbaki bikoiti guztiak. Gero, egiaztatu gainerako bakoitiak 3, 5 edo 7rekin zatigarriak diren.">Descarta todos los números pares. Luego, comprueba si los impares restantes son divisibles por 3, 5 o 7.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    
+    <div id="translation-bank" style="display: none;">
+      <span id="js-es-primo" data-lang-es="es un número primo" data-lang-eu="zenbaki lehena da"></span>
+      <span id="js-es-compuesto" data-lang-es="es un número compuesto" data-lang-eu="zenbaki konposatua da"></span>
+      <span id="js-divisores" data-lang-es="Divisores:" data-lang-eu="Zatitzaileak:"></span>
+      <span id="js-error-valido" data-lang-es="Por favor, introduce un número válido ≥ 2" data-lang-eu="Mesedez, sartu zenbaki baliogarri bat (≥ 2)"></span>
+      <span id="js-factorizacion" data-lang-es="Factorización:" data-lang-eu="Faktorizazioa:"></span>
+      <span id="js-potencias" data-lang-es="Con potencias:" data-lang-eu="Berretzekin:"></span>
+    </div>
+
+  </main>
+
+  <footer>
+    <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+  
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+
+  <script>
+    // --- Funciones de Utilidad para JS ---
+    const getTranslatedText = (id) => {
+        const el = document.getElementById(id);
+        const lang = document.documentElement.lang || 'es';
+        return el ? (lang === 'eu' ? el.dataset.langEu : el.dataset.langEs) : '';
+    };
+
+    const isNumberPrime = (num) => {
+        if (num < 2) return false;
+        for (let i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i === 0) return false;
+        }
+        return true;
+    };
+    
+    // --- Lógica de la Criba de Eratóstenes ---
+    let sieveTimeout;
+    const createSieveGrid = () => {
+        const grid = document.getElementById('sieveGrid');
+        grid.innerHTML = '';
+        for (let i = 1; i <= 50; i++) {
+            const numberDiv = document.createElement('div');
+            numberDiv.className = 'sieve-number';
+            numberDiv.textContent = i;
+            numberDiv.dataset.number = i;
+            if (i === 1) numberDiv.classList.add('composite');
+            grid.appendChild(numberDiv);
+        }
+    };
+    
+    const startSieve = () => {
+        clearTimeout(sieveTimeout);
+        createSieveGrid();
+        const numbers = Array.from(document.querySelectorAll('.sieve-number'));
+        
+        let delay = 200;
+        for (let i = 2; i <= 50; i++) {
+            const currentNumEl = numbers[i - 1];
+            if (!currentNumEl.classList.contains('composite')) {
+                sieveTimeout = setTimeout(() => {
+                    currentNumEl.classList.add('prime');
+                    for (let j = i * i; j <= 50; j += i) {
+                        const multipleEl = numbers[j - 1];
+                        if (multipleEl) multipleEl.classList.add('composite');
+                    }
+                }, delay);
+                delay += 500;
+            }
+        }
+    };
+
+    const clearSieve = () => {
+        clearTimeout(sieveTimeout);
+        createSieveGrid();
+    };
+    
+    // --- Lógica de las Calculadoras ---
+    const checkPrime = () => {
+        const input = document.getElementById('primeNumber');
+        const number = parseInt(input.value);
+        const resultDiv = document.getElementById('primeResult');
+
+        if (isNaN(number) || number < 2) {
+            resultDiv.innerHTML = `<span class="error">${getTranslatedText('js-error-valido')}</span>`;
+            return;
+        }
+
+        if (isNumberPrime(number)) {
+            resultDiv.innerHTML = `<span class="success">✓ ${number} ${getTranslatedText('js-es-primo')}</span>`;
+        } else {
+            const divisors = Array.from({length: number}, (_, i) => i + 1).filter(d => number % d === 0);
+            resultDiv.innerHTML = `<span class="error">✗ ${number} ${getTranslatedText('js-es-compuesto')}</span><br>
+                                   <span><strong>${getTranslatedText('js-divisores')}</strong> ${divisors.join(', ')}</span>`;
+        }
+    };
+    
+    const factorize = () => {
+        const input = document.getElementById('factorizeNumber');
+        const number = parseInt(input.value);
+        const resultDiv = document.getElementById('factorizeResult');
+        
+        if (isNaN(number) || number < 2) {
+            resultDiv.innerHTML = `<span class="error">${getTranslatedText('js-error-valido')}</span>`;
+            return;
+        }
+
+        let n = number;
+        const factors = [];
+        let divisor = 2;
+        while (n >= 2) {
+            if (n % divisor === 0) {
+                factors.push(divisor);
+                n /= divisor;
+            } else {
+                divisor++;
+            }
+        }
+        
+        const powerMap = factors.reduce((acc, f) => { acc[f] = (acc[f] || 0) + 1; return acc; }, {});
+        const powerString = Object.entries(powerMap)
+            .map(([base, exp]) => exp > 1 ? `${base}<sup>${exp}</sup>` : base)
+            .join(' &times; ');
+
+        resultDiv.innerHTML = `<p><strong>${getTranslatedText('js-factorizacion')}</strong> ${number} = ${factors.join(' &times; ')}</p>
+                               <p><strong>${getTranslatedText('js-potencias')}</strong> ${number} = ${powerString}</p>`;
+    };
+    
+    // --- Inicialización al cargar la página ---
+    window.addEventListener('DOMContentLoaded', () => {
+        createSieveGrid();
+    });
+  </script>
+
+</body>
+</html>

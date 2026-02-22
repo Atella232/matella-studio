@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="Razones y Proporciones - MATELLA" data-lang-eu="Arrazoiak eta Proportzioak - MATELLA">Razones y Proporciones - MATELLA</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    .math-formula {
+      background-color: var(--card-bg);
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      margin: 1rem 0;
+      text-align: center;
+      font-size: 1.1em;
+      overflow-x: auto;
+    }
+    .example {
+      background-color: var(--button-bg);
+      padding: 0.8rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+    }
+    /* Estilos específicos para la herramienta "El Balancín de las Proporciones" */
+    /* Estilos específicos para la herramienta "El Balancín de las Proporciones" */
+    .proportion-balancer {
+      background-color: var(--bg-color);
+      padding: 2rem;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-top: 1.5rem;
+    }
+    .balancer-visual {
+      height: 150px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin-bottom: 2rem;
+    }
+    .pivot {
+      width: 12px;
+      height: 75px;
+      background-color: var(--text-color);
+      opacity: 0.8;
+      border-radius: 4px;
+    }
+    .beam {
+      width: 90%;
+      max-width: 400px;
+      height: 10px;
+      background-color: var(--secondary-color);
+      position: absolute;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%) rotate(0deg);
+      border-radius: 5px;
+      transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      transform-origin: center;
+    }
+    .beam.tilt-left { transform: translateX(-50%) rotate(-10deg); }
+    .beam.tilt-right { transform: translateX(-50%) rotate(10deg); }
+    .plate {
+      position: absolute;
+      bottom: -40px;
+      width: 100px;
+      height: 60px;
+      background-color: var(--card-bg);
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5em;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    .plate.left { left: 0; }
+    .plate.right { right: 0; }
+    .balancer-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .proportion-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      font-size: 2em;
+      font-weight: 700;
+    }
+    .fraction {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 1rem;
+    }
+    .fraction span { line-height: 1; }
+    .fraction .bar {
+      border-top: 2px solid var(--text-color);
+      width: 120%;
+      margin: 2px 0;
+    }
+    .fraction input[type="number"] {
+      width: 70px;
+      padding: 0.5rem;
+      border: 2px solid var(--border-color);
+      border-radius: 6px;
+      text-align: center;
+      font-size: 1em;
+      font-weight: 700;
+    }
+    .fraction input[type="number"]:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+    .difficulty-selector { text-align: center; }
+    .difficulty-selector label { margin: 0 0.5rem; cursor: pointer; }
+    #balancer-feedback {
+      min-height: 24px;
+      font-weight: bold;
+      font-size: 1.1em;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    #balancer-feedback.correct { color: var(--secondary-color); }
+    #balancer-feedback.incorrect { color: #e74c3c; }
+  </style>
+</head>
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <a href="../../../../../index.html" class="home-link">
+        <i class="fas fa-calculator"></i>
+        <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+      </a>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
+    </nav>
+  </header>
+  
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol>
+      <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
+      <li><a href="../index.html" data-lang-es="Proporcionalidad y porcentajes" data-lang-eu="Proportzionaltasuna eta ehunekoak">Proporcionalidad y porcentajes</a></li>
+      <li class="active" aria-current="page"><span data-lang-es="Razones y Proporciones" data-lang-eu="Arrazoiak eta Proportzioak">Razones y Proporciones</span></li>
+    </ol>
+  </nav>
+  
+  <main>
+    <h1 class="page-title" data-lang-es="Fundamentos de Razones y Proporciones" data-lang-eu="Arrazoien eta Proportzioen Oinarriak">Fundamentos de Razones y Proporciones</h1>
+    
+    <section id="intro">
+      <p data-lang-es="Antes de adentrarse en las relaciones de proporcionalidad, es imprescindible asentar con firmeza los dos conceptos que les sirven de cimiento: la razón y la proporción. Estos elementos constituyen el lenguaje básico que nos permitirá describir y analizar las relaciones entre magnitudes." data-lang-eu="Proportzionaltasun-erlazioetan murgildu aurretik, ezinbestekoa da oinarri diren bi kontzeptuak sendotzea: arrazoia eta proportzioa. Elementu horiek magnitudeen arteko erlazioak deskribatzeko eta aztertzeko oinarrizko lengoaia osatzen dute.">Antes de adentrarse en las relaciones de proporcionalidad, es imprescindible asentar con firmeza los dos conceptos que les sirven de cimiento: la razón y la proporción. Estos elementos constituyen el lenguaje básico que nos permitirá describir y analizar las relaciones entre magnitudes.</p>
+      
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="true">
+            <i class="fas fa-divide icon-concept"></i>
+            <span data-lang-es="La Razón Matemática: Más que una Fracción" data-lang-eu="Arrazoi Matematikoa: Zatiki bat baino gehiago">La Razón Matemática: Más que una Fracción</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="La idea de comparar cantidades es una de las actividades matemáticas más primarias. La razón es la herramienta formal para llevar a cabo esta comparación a través de un cociente." data-lang-eu="Kantitateak alderatzea matematikako jarduera oinarrizkoenetako bat da. Arrazoia konparaketa hori zatidura baten bidez egiteko tresna formala da.">La idea de comparar cantidades es una de las actividades matemáticas más primarias. La razón es la herramienta formal para llevar a cabo esta comparación a través de un cociente.</p>
+            <div class="card-style">
+                <h4 data-lang-es="Definición y Notación" data-lang-eu="Definizioa eta Notazioa">Definición y Notación</h4>
+                <p data-lang-es="Una razón es el cociente indicado entre dos números o dos cantidades de la misma magnitud. Si tenemos dos números, \(a\) y \(b\), su razón se puede escribir como una fracción, \(\frac{a}{b}\), o utilizando dos puntos, \(a:b\). En ambos casos, se lee 'a es a b'." data-lang-eu="Arrazoi bat bi zenbakiren edo magnitude bereko bi kantitateren arteko zatidura adierazia da. \(a\) eta \(b\) bi zenbaki baditugu, haien arrazoia zatiki gisa, \(\frac{a}{b}\), edo bi punturen bidez, \(a:b\), idatz daiteke. Bi kasuetan, 'a b-rekiko' irakurtzen da."></p>
+                <p data-lang-es="En la razón \(\frac{a}{b}\):" data-lang-eu="\(\frac{a}{b}\) arrazoian:"></p>
+                <ul class="icon-list">
+                    <li><i class="fas fa-arrow-up"></i><span data-lang-es="El número \(a\) (numerador) se denomina <strong>antecedente</strong>." data-lang-eu="\(a\) zenbakia (zenbakitzailea) <strong>aurrekaria</strong> deitzen da."></span></li>
+                    <li><i class="fas fa-arrow-down"></i><span data-lang-es="El número \(b\) (denominador) se denomina <strong>consecuente</strong>." data-lang-eu="\(b\) zenbakia (izendatzailea) <strong>ondorioa</strong> deitzen da."></span></li>
+                </ul>
+            </div>
+            <h4 data-lang-es="Contextualización" data-lang-eu="Testuingurua">Contextualización</h4>
+            <div class="usage-grid">
+              <div class="usage-item">
+                <i class="fas fa-cookie-bite"></i>
+                <span data-lang-es="<strong>Recetas:</strong> Si usas 300g de harina por 150g de azúcar, la razón es \(\frac{300}{150} = 2\). ¡El doble de harina que de azúcar!" data-lang-eu="<strong>Errezetak:</strong> 300g irin eta 150g azukre erabiltzen badituzu, arrazoia \(\frac{300}{150} = 2\) da. Irinaren kantitatea azukrearena halako bi da!"></span>
+              </div>
+              <div class="usage-item">
+                <i class="fas fa-basketball-ball"></i>
+                <span data-lang-es="<strong>Deportes:</strong> 8 aciertos de 10 intentos. La razón de aciertos es \(\frac{8}{10}\), que permite comparar su efectividad." data-lang-eu="<strong>Kirolak:</strong> 10 saiakeratik 8 saskiratze. Saskiratze-arrazoia \(\frac{8}{10}\) da, bere eraginkortasuna alderatzeko aukera ematen duena."></span>
+              </div>
+              <div class="usage-item">
+                <i class="fas fa-map-marked-alt"></i>
+                <span data-lang-es="<strong>Mapas:</strong> Una escala 1:50000 significa que 1 cm en el mapa son 50000 cm en la realidad." data-lang-eu="<strong>Mapak:</strong> 1:50000 eskalak mapako 1 cm errealitatean 50000 cm direla esan nahi du."></span>
+              </div>
+            </div>
+             <div class="key-takeaway">
+                <h5 data-lang-es="Distinción Clave: Razón vs. Fracción" data-lang-eu="Funtsezko Bereizketa: Arrazoia vs. Zatikia">Distinción Clave: Razón vs. Fracción</h5>
+                <p data-lang-es="Aunque se parecen, una <strong>razón</strong> puede comparar cualquier tipo de número (incluidos decimales), mientras que una <strong>fracción</strong> tradicionalmente compara números enteros. Por ejemplo, la razón entre 1.75 m de altura y 2.10 m de sombra es \(\frac{1.75}{2.10}\), una comparación perfectamente válida." data-lang-eu="Antzekoak diruditen arren, <strong>arrazoi</strong> batek edozein zenbaki mota aldera dezake (hamartarrak barne), <strong>zatiki</strong> batek tradizionalki zenbaki osoak alderatzen dituen bitartean. Adibidez, 1.75 m-ko altueraren eta 2.10 m-ko itzalaren arteko arrazoia \(\frac{1.75}{2.10}\) da, guztiz baliozkoa den konparaketa."></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-equals icon-concept"></i>
+            <span data-lang-es="La Proporción: El Equilibrio entre Razones" data-lang-eu="Proportzioa: Arrazoien arteko Oreka">La Proporción: El Equilibrio entre Razones</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Una vez que entendemos cómo comparar dos cantidades, el siguiente paso es explorar cuándo dos comparaciones son equivalentes. Este es el concepto de proporción." data-lang-eu="Behin bi kantitate nola alderatu ulertuta, hurrengo pausoa bi konparaketa noiz diren baliokideak aztertzea da. Hori da proportzioaren kontzeptua.">Una vez que entendemos cómo comparar dos cantidades, el siguiente paso es explorar cuándo dos comparaciones son equivalentes. Este es el concepto de proporción.</p>
+            <div class="card-style">
+                <h4 data-lang-es="Definición y Terminología" data-lang-eu="Definizioa eta Terminologia">Definición y Terminología</h4>
+                <p data-lang-es="Una proporción es la igualdad entre dos razones. Si la razón \(\frac{a}{b}\) es igual a la razón \(\frac{c}{d}\), escribimos:" data-lang-eu="Proportzio bat bi arrazoiren arteko berdintza da. \(\frac{a}{b}\) arrazoia \(\frac{c}{d}\) arrazoiaren berdina bada, honela idazten dugu:"></p>
+                <div class="math-formula">
+                    \[\frac{a}{b} = \frac{c}{d}\]
+                </div>
+                <p data-lang-es="Se lee: 'a es a b como c es a d'. En esta proporción:" data-lang-eu="Honela irakurtzen da: 'a b-rekiko, c d-rekiko bezala'. Proportzio honetan:"></p>
+                <ul class="icon-list">
+                    <li><i class="fas fa-expand-arrows-alt"></i><span data-lang-es="\(a\) y \(d\) se denominan <strong>extremos</strong>." data-lang-eu="\(a\) eta \(d\) <strong>muturrak</strong> deitzen dira."></span></li>
+                    <li><i class="fas fa-compress-arrows-alt"></i><span data-lang-es="\(b\) y \(c\) se denominan <strong>medios</strong>." data-lang-eu="\(b\) eta \(c\) <strong>erdiak</strong> deitzen dira."></span></li>
+                </ul>
+                <div class="example">
+                    <p data-lang-es="Por ejemplo, en \(\frac{2}{4} = \frac{3}{6}\), la relación '2 es a 4' (la mitad) es la misma que '3 es a 6' (también la mitad)." data-lang-eu="Adibidez, \(\frac{2}{4} = \frac{3}{6}\) adierazpenean, '2 4rekiko' erlazioa (erdia) eta '3 6rekiko' erlazioa (erdia ere) berdinak dira."></p>
+                </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-cogs icon-concept"></i>
+            <span data-lang-es="La Propiedad Fundamental de las Proporciones" data-lang-eu="Proportzioen Oinarrizko Propietatea">La Propiedad Fundamental de las Proporciones</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+             <p data-lang-es="El concepto más poderoso asociado a las proporciones es su propiedad fundamental: <strong>en toda proporción, el producto de los medios es igual al producto de los extremos.</strong>" data-lang-eu="Proportzioei lotutako kontzepturik ahaltsuena oinarrizko propietatea da: <strong>proportzio orotan, erdien biderkadura muturren biderkaduraren berdina da.</strong>"></p>
+             <div class="math-formula">
+                 \[\text{Si } \frac{a}{b} = \frac{c}{d}, \text{ entonces } a \cdot d = b \cdot c\]
+             </div>
+             <p data-lang-es="Esta propiedad es una herramienta de cálculo de enorme versatilidad y constituye la base matemática de la regla de tres." data-lang-eu="Propietate hau kalkulurako tresna oso moldakorra da eta hiruko erregelaren oinarri matematikoa osatzen du."></p>
+            
+             <h4 data-lang-es="Aplicaciones Prácticas" data-lang-eu="Aplikazio Praktikoak">Aplicaciones Prácticas</h4>
+             <ul class="icon-list">
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <strong data-lang-es="Verificar si dos razones forman una proporción." data-lang-eu="Bi arrazoik proportzio bat osatzen duten egiaztatzea."></strong>
+                        <div class="example">
+                            <p data-lang-es="¿Forman \(\frac{4}{6}\) y \(\frac{10}{15}\) una proporción?" data-lang-eu="\(\frac{4}{6}\) eta \(\frac{10}{15}\) arrazoiek proportzio bat osatzen al dute?"></p>
+                            <p data-lang-es="• Producto de extremos: \(4 \times 15 = 60\)" data-lang-eu="• Muturren biderkadura: \(4 \times 15 = 60\)"></p>
+                            <p data-lang-es="• Producto de medios: \(6 \times 10 = 60\)" data-lang-eu="• Erdien biderkadura: \(6 \times 10 = 60\)"></p>
+                            <p data-lang-es="¡Sí, forman una proporción porque los productos son iguales!" data-lang-eu="Bai, proportzio bat osatzen dute biderkadurak berdinak direlako!"></p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-search"></i>
+                    <div>
+                        <strong data-lang-es="Calcular un término desconocido (cuarta proporcional)." data-lang-eu="Gai ezezagun bat kalkulatzea (laugarren proportzionala)."></strong>
+                         <p data-lang-es="Esta es la aplicación más importante. Si tenemos la proporción \(\frac{3}{5} = \frac{6}{x}\), podemos usar la propiedad fundamental para encontrar \(x\)." data-lang-eu="Hau da aplikaziorik garrantzitsuena. \(\frac{3}{5} = \frac{6}{x}\) proportzioa badugu, oinarrizko propietatea erabil dezakegu \(x\) aurkitzeko."></p>
+                         <div class="solution">
+                             <p data-lang-es="<strong>Planteamiento:</strong> \(3 \times x = 5 \times 6\)" data-lang-eu="<strong>Planteamendua:</strong> \(3 \times x = 5 \times 6\)"></p>
+                             <p data-lang-es="<strong>Resolución:</strong> \(3x = 30\)" data-lang-eu="<strong>Ebazpena:</strong> \(3x = 30\)"></p>
+                             <p data-lang-es="\(x = \frac{30}{3}" data-lang-eu="\(x = \frac{30}{3}\)"></p>
+                             <p data-lang-es="\(x = 10\)" data-lang-eu="\(x = 10\)"></p>
+                         </div>
+                         <div class="info-box">
+                           <i class="fas fa-lightbulb"></i>
+                           <p data-lang-es="¡Ojo! \(3x = 30\) es una ecuación de primer grado. Al resolver proporciones, estás aplicando álgebra." data-lang-eu="Kontuz! \(3x = 30\) lehen mailako ekuazio bat da. Proportzioak ebaztean, algebra aplikatzen ari zara."></p>
+                         </div>
+                    </div>
+                </li>
+             </ul>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-header" aria-expanded="false">
+                <i class="fas fa-balance-scale icon-concept"></i>
+                <span data-lang-es="Herramienta: El Balancín de las Proporciones" data-lang-eu="Tresna: Proportzioen Balantzina">Herramienta: El Balancín de las Proporciones</span>
+                <i class="fas fa-chevron-down icon-toggle"></i>
+            </button>
+            <div class="accordion-content">
+                <p data-lang-es="Para solidificar la comprensión de la proporción como una equivalencia, utiliza esta herramienta interactiva. El objetivo es encontrar el valor desconocido para que la balanza se equilibre." data-lang-eu="Proportzioa baliokidetasun gisa ulertzen laguntzeko, erabili tresna interaktibo hau. Helburua balio ezezaguna aurkitzea da, balantza orekatzeko."></p>
+                <div class="proportion-balancer">
+                    <div class="balancer-visual">
+                        <div class="beam" id="balancer-beam">
+                            <div class="plate left" id="plate-left"></div>
+                            <div class="plate right" id="plate-right"></div>
+                        </div>
+                        <div class="pivot"></div>
+                    </div>
+                    <div class="difficulty-selector">
+                        <strong data-lang-es="Nivel:" data-lang-eu="Maila:">Nivel:</strong>
+                        <label><input type="radio" name="difficulty" value="1" checked> <span data-lang-es="Básico" data-lang-eu="Oinarrizkoa">Básico</span></label>
+                        <label><input type="radio" name="difficulty" value="2"> <span data-lang-es="Avanzado" data-lang-eu="Aurreratua">Avanzado</span></label>
+                        <label><input type="radio" name="difficulty" value="3"> <span data-lang-es="Problemas" data-lang-eu="Problemak">Problemas</span></label>
+                    </div>
+                    <p id="problem-text" style="text-align:center; min-height: 2em; margin-top: 1rem;"></p>
+                    <div class="balancer-controls">
+                        <div class="proportion-display">
+                            <div class="fraction">
+                                <span id="antecedent1"></span>
+                                <div class="bar"></div>
+                                <span id="consequent1"></span>
+                            </div>
+                            <span>=</span>
+                            <div class="fraction">
+                                <span id="antecedent2"></span>
+                                <div class="bar"></div>
+                                <span id="consequent2"></span>
+                            </div>
+                        </div>
+                        <button id="verify-button" class="button-primary"><i class="fas fa-check"></i> <span data-lang-es="Verificar" data-lang-eu="Egiaztatu">Verificar</span></button>
+                    </div>
+                    <div id="balancer-feedback"></div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer>
+    <p>&copy; 2024 MATELLA - <span data-lang-es="Matemáticas para todos" data-lang-eu="Matematika guztientzat">Matemáticas para todos</span></p>
+  </footer>
+  
+  <button id="back-to-top" aria-label="Volver arriba"><i class="fas fa-arrow-up"></i></button>
+
+  <script>
+    // Configuración de MathJax
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- LÓGICA DEL BALANCÍN DE PROPORCIONES ---
+      const beam = document.getElementById('balancer-beam');
+      const plateLeft = document.getElementById('plate-left');
+      const plateRight = document.getElementById('plate-right');
+      const verifyBtn = document.getElementById('verify-button');
+      const feedbackEl = document.getElementById('balancer-feedback');
+      const problemTextEl = document.getElementById('problem-text');
+      const difficultyRadios = document.querySelectorAll('input[name="difficulty"]');
+
+      const problems = {
+        '1': [ // Nivel Básico
+          { p: ['a', 2, 6, 4], text_es: '', text_eu: '' },
+          { p: [3, 'b', 9, 15], text_es: '', text_eu: '' },
+          { p: [5, 2, 'c', 4], text_es: '', text_eu: '' },
+          { p: [8, 10, 4, 'd'], text_es: '', text_eu: '' },
+          { p: [1, 7, 'c', 21], text_es: '', text_eu: '' }
+        ],
+        '2': [ // Nivel Avanzado (decimales)
+          { p: ['a', 2.5, 10, 5], text_es: '', text_eu: '' },
+          { p: [6, 'b', 2.4, 1], text_es: '', text_eu: '' },
+          { p: [1.5, 3, 'c', 8], text_es: '', text_eu: '' },
+          { p: [9, 1.5, 3, 'd'], text_es: '', text_eu: '' }
+        ],
+        '3': [ // Nivel Problemas
+          { p: [3, 1.80, 7, 'd'], text_es: 'Si 3 bolígrafos cuestan 1.80€, ¿cuánto costarán 7?', text_eu: '3 boligrafok 1.80€ balio badute, zenbat balioko dute 7k?' },
+          { p: [2, 5, 'c', 12.5], text_es: 'Un coche gasta 5L de gasolina cada 2 horas. ¿Cuántas horas puede viajar con 12.5L?', text_eu: 'Auto batek 5L gasolina gastatzen ditu 2 orduro. Zenbat orduz bidaia dezake 12.5L-rekin?' },
+          { p: [1, 50000, 4, 'd'], text_es: 'En un mapa a escala 1:50000, dos ciudades están a 4 cm. ¿Qué distancia real (en cm) las separa?', text_eu: '1:50000 eskalako mapa batean, bi hiri 4 cm-ra daude. Zein da bien arteko distantzia erreala (cm-tan)?' }
+        ]
+      };
+
+      let currentProblem;
+      let unknownVar;
+      let solution;
+
+      function setupProblem() {
+        feedbackEl.textContent = '';
+        beam.className = 'beam';
+        verifyBtn.disabled = false;
+        
+        const difficulty = document.querySelector('input[name="difficulty"]:checked').value;
+        const problemSet = problems[difficulty];
+        currentProblem = problemSet[Math.floor(Math.random() * problemSet.length)];
+        
+        const [a, b, c, d] = currentProblem.p;
+        const currentLang = document.documentElement.lang || 'es';
+        problemTextEl.textContent = currentLang === 'es' ? currentProblem.text_es : currentProblem.text_eu;
+
+        let a_val, b_val, c_val, d_val;
+
+        if (typeof a === 'string') { unknownVar = 'a'; solution = (b * c) / d; a_val = '<input type="number" id="unknown-input" aria-label="Valor desconocido" />'; } else { a_val = a; }
+        if (typeof b === 'string') { unknownVar = 'b'; solution = (a * d) / c; b_val = '<input type="number" id="unknown-input" aria-label="Valor desconocido" />'; } else { b_val = b; }
+        if (typeof c === 'string') { unknownVar = 'c'; solution = (a * d) / b; c_val = '<input type="number" id="unknown-input" aria-label="Valor desconocido" />'; } else { c_val = c; }
+        if (typeof d === 'string') { unknownVar = 'd'; solution = (b * c) / a; d_val = '<input type="number" id="unknown-input" aria-label="Valor desconocido" />'; } else { d_val = d; }
+        
+        document.getElementById('antecedent1').innerHTML = a_val;
+        document.getElementById('consequent1').innerHTML = b_val;
+        document.getElementById('antecedent2').innerHTML = c_val;
+        document.getElementById('consequent2').innerHTML = d_val;
+
+        plateLeft.textContent = `\frac{${a}}{${b}}`.replace('undefined','?');
+        plateRight.textContent = `\frac{${c}}{${d}}`.replace('undefined','?');
+        
+        // Enfocar el input si existe
+        const input = document.getElementById('unknown-input');
+        if (input) {
+          input.focus();
+          input.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter') {
+                  verifyBtn.click();
+              }
+          });
+        }
+      }
+
+      function checkAnswer() {
+        const input = document.getElementById('unknown-input');
+        if (!input) return;
+
+        const userAnswer = parseFloat(input.value);
+        const lang = document.documentElement.lang || 'es';
+
+        if (isNaN(userAnswer)) {
+          feedbackEl.textContent = lang === 'es' ? 'Por favor, introduce un número.' : 'Mesedez, sartu zenbaki bat.';
+          feedbackEl.className = 'incorrect';
+          return;
+        }
+
+        // Permitir una pequeña tolerancia para decimales
+        if (Math.abs(userAnswer - solution) < 0.01) {
+          feedbackEl.textContent = lang === 'es' ? '¡Correcto! La balanza está equilibrada.' : 'Zuzena! Balantza orekatuta dago.';
+          feedbackEl.className = 'correct';
+          beam.classList.add('balanced'); // Aunque ya esté en 0, para consistencia
+          input.disabled = true;
+          verifyBtn.disabled = true;
+          setTimeout(setupProblem, 2500);
+        } else {
+          feedbackEl.textContent = lang === 'es' ? 'Incorrecto, inténtalo de nuevo.' : 'Okerra, saiatu berriro.';
+          feedbackEl.className = 'incorrect';
+          beam.classList.toggle('tilt-left', userAnswer > solution);
+          beam.classList.toggle('tilt-right', userAnswer < solution);
+          input.select();
+        }
+      }
+
+      verifyBtn.addEventListener('click', checkAnswer);
+      difficultyRadios.forEach(radio => radio.addEventListener('change', setupProblem));
+
+      // Carga inicial
+      setupProblem();
+    });
+  </script>
+
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  <script src="../js/razones-proporciones.js"></script>
+
+  <!-- Botón flotante para volver arriba -->
+  <button id="back-to-top" aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <script>
+    // Configuración del botón de volver arriba
+    document.addEventListener('DOMContentLoaded', function() {
+      const backToTopButton = document.getElementById('back-to-top');
+      
+      // Mostrar/ocultar botón al hacer scroll
+      function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
+      }
+      
+      // Mostrar el botón después de cargar la página
+      setTimeout(toggleBackToTop, 100);
+      
+      // Escuchar el evento de scroll
+      window.addEventListener('scroll', toggleBackToTop);
+      
+      // Hacer scroll suave al hacer clic
+      backToTopButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

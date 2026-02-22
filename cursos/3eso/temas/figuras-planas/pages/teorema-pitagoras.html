@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Teorema de Pitágoras - Figuras Planas" data-lang-eu="Pitagorasen Teorema - Figura Laugarrak">Teorema de Pitágoras - Figuras Planas</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-ruler-triangle"></i>
+            <span data-lang-es="Teorema de Pitágoras" data-lang-eu="Pitagorasen Teorema">Teorema de Pitágoras</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Teorema de Pitágoras" data-lang-eu="Pitagorasen Teorema">Teorema de Pitágoras</h2>
+        
+        <div class="navigation-buttons">
+            <a href="#ejercicios" class="button-primary" data-lang-es="Ejercicios" data-lang-eu="Ariketa">Ejercicios</a>
+            <a href="#herramienta" class="button-secondary" data-lang-es="Herramienta" data-lang-eu="Tresna">Herramienta</a>
+        </div>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es un Triángulo Rectángulo?" data-lang-eu="Zer da Triangelu Errectangular bat?">¿Qué es un Triángulo Rectángulo?</h3>
+            <p data-lang-es="Un triángulo rectángulo es un triángulo que tiene un ángulo de 90° (ángulo recto). Los otros dos ángulos son agudos (menores de 90°)."
+               data-lang-eu="Triangelu errectangular bat 90°-ko angelua (angelu zuzena) duen triangelua da. Beste bi angeluak zorrotzak dira (90°-tik txikiagoak).">
+               Un triángulo rectángulo es un triángulo que tiene un ángulo de 90° (ángulo recto). Los otros dos ángulos son agudos (menores de 90°).
+            </p>
+            <div class="key-takeaway" data-lang-es="<b>Elementos del triángulo rectángulo:</b><br>• <strong>Hipotenusa:</strong> lado más largo (opuesto al ángulo recto)<br>• <strong>Catetos:</strong> los dos lados que forman el ángulo recto"
+               data-lang-eu="<b>Triangelu errectangulararen elementuak:</b><br>• <strong>Hipotenusa:</strong> alde luzeena (angelu zuzenaren aurkakoa)<br>• <strong>Katetoak:</strong> angelu zuzena osatzen duten bi aldeak">
+               <b>Elementos del triángulo rectángulo:</b><br>• <strong>Hipotenusa:</strong> lado más largo (opuesto al ángulo recto)<br>• <strong>Catetos:</strong> los dos lados que forman el ángulo recto
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="El Teorema de Pitágoras" data-lang-eu="Pitagorasen Teorema">El Teorema de Pitágoras</h3>
+            <p data-lang-es="El Teorema de Pitágoras es uno de los teoremas más famosos y útiles de las matemáticas. Fue formulado por el matemático griego Pitágoras de Samos alrededor del año 500 a.C."
+               data-lang-eu="Pitagorasen Teorema matematikako teoremarik ezagunenetako eta erabilgarrienetako bat da. Pitagoras Samoskoa greziar matematikariak формула zuen, K. a. 500 inguru.">
+               El Teorema de Pitágoras es uno de los teoremas más famosos y útiles de las matemáticas. Fue formulado por el matemático griego Pitágoras de Samos alrededor del año 500 a.C.
+            </p>
+            
+            <div class="theorem-box">
+                <h4 data-lang-es="Enunciado del Teorema" data-lang-eu="Teoremaren Enuntziatua">Enunciado del Teorema</h4>
+                <p data-lang-es="En un triángulo rectángulo, <strong>el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos</strong>."
+                   data-lang-eu="Triangelu errectangular batean, <strong>hipotenusaren karratua katetoen karratuen baturaren berdina da</strong>.">
+                   En un triángulo rectángulo, <strong>el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos</strong>.
+                </p>
+            </div>
+
+            <div class="formula-container">
+                <h4 data-lang-es="Fórmula" data-lang-eu="Formula">Fórmula</h4>
+                <p>\\[c^2 = a^2 + b^2\\]</p>
+                <p><em data-lang-es="donde 'c' es la hipotenusa y 'a', 'b' son los catetos"
+                       data-lang-eu="non 'c' hipotenusa den eta 'a', 'b' katetoak diren">
+                       donde 'c' es la hipotenusa y 'a', 'b' son los catetos
+                </em></p>
+            </div>
+
+            <p class="key-takeaway" data-lang-es="<b>Importante:</b> Este teorema solo se aplica a triángulos rectángulos."
+               data-lang-eu="<b>Garrantzitsua:</b> Teorema hau soilik triangelu errectangularretan aplikatzen da.">
+               <b>Importante:</b> Este teorema solo se aplica a triángulos rectángulos.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Demostración Visual" data-lang-eu="Eragiketa Bisuala">Demostración Visual</h3>
+            <p data-lang-es="El teorema se puede visualizar de diferentes maneras. Una de las más intuitivas es la demostración geométrica:"
+               data-lang-eu="Teorema era desberdinetan ikus daiteke. Intuitiboena demostrazio geometrikoa da:">
+               El teorema se puede visualizar de diferentes maneras. Una de las más intuitivas es la demostración geométrica:
+            </p>
+            
+            <div class="example-box">
+                <h4 data-lang-es="Demostración con Cuadrados" data-lang-eu="Karratuekin Egindako Demostrazioa">Demostración con Cuadrados</h4>
+                <p data-lang-es="Si construimos cuadrados sobre cada uno de los lados de un triángulo rectángulo:"
+                   data-lang-eu="Triangelu errectangular baten alde bakoitzean karratu bat eraikitzen badugu:">
+                   Si construimos cuadrados sobre cada uno de los lados de un triángulo rectángulo:
+                </p>
+                <ul>
+                    <li data-lang-es="El área del cuadrado construido sobre la hipotenusa es igual a la suma de las áreas de los cuadrados construidos sobre los catetos."
+                        data-lang-eu="Hipotenusaren gainean eraikitako karratuaren azalera katetoen gainean eraikitako karratuen azaleren baturaren berdina da.">
+                        El área del cuadrado construido sobre la hipotenusa es igual a la suma de las áreas de los cuadrados construidos sobre los catetos.
+                    </li>
+                    <li data-lang-es="Como el área de un cuadrado es lado², tenemos: c² = a² + b²"
+                        data-lang-eu="Karratu baten azalera alde² denez, hau dugu: c² = a² + b²">
+                        Como el área de un cuadrado es lado², tenemos: c² = a² + b²
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Aplicaciones del Teorema" data-lang-eu="Teorematik Aplikazioak">Aplicaciones del Teorema</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-calculator icon-concept"></i>
+                        <span data-lang-es="Calcular un lado desconocido" data-lang-eu="Ezezagun bat kalkulatzea">Calcular un lado desconocido</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Si conocemos dos lados del triángulo rectángulo, podemos calcular el tercero."
+                           data-lang-eu="Triangelu errectangular baten bi alde ezagutzen baditugun, hirugarrena kalkula dezakegu.">
+                           Si conocemos dos lados del triángulo rectángulo, podemos calcular el tercero.
+                        </p>
+                        
+                        <div class="formula-container">
+                            <p><strong data-lang-es="Para calcular la hipotenusa:" data-lang-eu="Hipotenusa kalkulatzeko:">Para calcular la hipotenusa:</strong></p>
+                            <p>\\[c = \\sqrt{a^2 + b^2}\\]</p>
+                        </div>
+                        
+                        <div class="formula-container">
+                            <p><strong data-lang-es="Para calcular un cateto:" data-lang-eu="Kateto bat kalkulatzeko:">Para calcular un cateto:</strong></p>
+                            <p>\\[a = \\sqrt{c^2 - b^2}\\]</p>
+                            <p>\\[b = \\sqrt{c^2 - a^2}\\]</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-check-circle icon-concept"></i>
+                        <span data-lang-es="Verificar si un triángulo es rectángulo" data-lang-eu="Triangelua errectangularra den jakitea">Verificar si un triángulo es rectángulo</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Para verificar si un triángulo es rectángulo, comprobamos si se cumple la relación pitagórica:"
+                           data-lang-eu="Triangelu bat errectangularra den jakiteko, pitagorasen erlazioa betetzen den begiratzen dugu:">
+                           Para verificar si un triángulo es rectángulo, comprobamos si se cumple la relación pitagórica:
+                        </p>
+                        <p>\\[c^2 = a^2 + b^2\\]</p>
+                        <ul>
+                            <li data-lang-es="Si la igualdad se cumple → el triángulo ES rectángulo"
+                                data-lang-eu="Berdintasuna betetzen bada → triangelua ERRECTANGULARRA da">
+                                Si la igualdad se cumple → el triángulo ES rectángulo
+                            </li>
+                            <li data-lang-es="Si no se cumple → el triángulo NO es rectángulo"
+                                data-lang-eu="Ez betetzen bada → triangelua EZ da errectangularra">
+                                Si no se cumple → el triángulo NO es rectángulo
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-ruler icon-concept"></i>
+                        <span data-lang-es="Calcular diagonales" data-lang-eu="Diagonalak kalkulatzea">Calcular diagonales</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Las diagonales de cuadrados y rectángulos forman triángulos rectángulos con los lados."
+                           data-lang-eu="Karratuen eta laukizuzenen diagonalak triangelu errectangularrak osatzen dituzte aldeekin.">
+                           Las diagonales de cuadrados y rectángulos forman triángulos rectángulos con los lados.
+                        </p>
+                        
+                        <div class="formula-container">
+                            <p><strong data-lang-es="Diagonal del cuadrado:" data-lang-eu="Karratuaren diagonal:">Diagonal del cuadrado:</strong></p>
+                            <p>\\[d = a\\sqrt{2}\\]</p>
+                        </div>
+                        
+                        <div class="formula-container">
+                            <p><strong data-lang-es="Diagonal del rectángulo:" data-lang-eu="Laukizuzenaren diagonal:">Diagonal del rectángulo:</strong></p>
+                            <p>\\[d = \\sqrt{a^2 + b^2}\\]</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-ladder icon-concept"></i>
+                        <span data-lang-es="Problemas de la vida real" data-lang-eu="Bizitza errealeko problemak">Problemas de la vida real</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="El teorema tiene muchas aplicaciones prácticas en la vida cotidiana:"
+                           data-lang-eu="Teoremak aplikazio praktiko asko ditu eguneroko bizitzan:">
+                           El teorema tiene muchas aplicaciones prácticas en la vida cotidiana:
+                        </p>
+                        <ul>
+                            <li data-lang-es="Calcular la altura de edificios"
+                                data-lang-eu="Eraikinen altitudea kalkulatzea">
+                                Calcular la altura de edificios
+                            </li>
+                            <li data-lang-es="Determinar la longitud de cables o escaleras"
+                                data-lang-eu="Kable edo eskaileren luzera zehaztea">
+                                Determinar la longitud de cables o escaleras
+                            </li>
+                            <li data-lang-es="Navegación y GPS"
+                                data-lang-eu="Nabigazioa eta GPS">
+                                Navegación y GPS
+                            </li>
+                            <li data-lang-es="Construcción y arquitectura"
+                                data-lang-eu="Eraikuntza eta arkitektura">
+                                Construcción y arquitectura
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Ejemplos Prácticos" data-lang-eu="Adibide Praktikoak">Ejemplos Prácticos</h3>
+            
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 1: Calcular la hipotenusa" data-lang-eu="Adibidea 1: Hipotenusa kalkulatzea">Ejemplo 1: Calcular la hipotenusa</h4>
+                <p data-lang-es="Un triángulo rectángulo tiene catetos de 3 cm y 4 cm. Calcula la hipotenusa."
+                   data-lang-eu="Triangelu errectangular batek 3 cm eta 4 cm katetoak ditu. Kalkulatu hipotenusa.">
+                   Un triángulo rectángulo tiene catetos de 3 cm y 4 cm. Calcula la hipotenusa.
+                </p>
+                <p><strong data-lang-es="Solución:" data-lang-eu="Soluzioa:">Solución:</strong></p>
+                <p>\\[c = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5\\] cm</p>
+            </div>
+
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 2: Calcular un cateto" data-lang-eu="Adibidea 2: Kateto bat kalkulatzea">Ejemplo 2: Calcular un cateto</h4>
+                <p data-lang-es="La hipotenusa de un triángulo rectángulo mide 10 cm y un cateto mide 6 cm. Calcula el otro cateto."
+                   data-lang-eu="Triangelu errectangular baten hipotenusak 10 cm neurtzen du eta kateto batek 6 cm. Kalkulatu beste katetoa.">
+                   La hipotenusa de un triángulo rectángulo mide 10 cm y un cateto mide 6 cm. Calcula el otro cateto.
+                </p>
+                <p><strong data-lang-es="Solución:" data-lang-eu="Soluzioa:">Solución:</strong></p>
+                <p>\\[b = \\sqrt{10^2 - 6^2} = \\sqrt{100 - 36} = \\sqrt{64} = 8\\] cm</p>
+            </div>
+
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 3: Verificar si es rectángulo" data-lang-eu="Adibidea 3: Errectangularra den jakitea">Ejemplo 3: Verificar si es rectángulo</h4>
+                <p data-lang-es="¿Es rectángulo un triángulo con lados de 5, 12 y 13 cm?"
+                   data-lang-eu="Triangelu bat 5, 12 eta 13 cm aldeak dituena, errectangularra da?">
+                   ¿Es rectángulo un triángulo con lados de 5, 12 y 13 cm?
+                </p>
+                <p><strong data-lang-es="Solución:" data-lang-eu="Soluzioa:">Solución:</strong></p>
+                <p data-lang-es="Comprobamos: 5² + 12² = 25 + 144 = 169 = 13²"
+                   data-lang-eu="Egiaztatzen dugu: 5² + 12² = 25 + 144 = 169 = 13²">
+                   Comprobamos: 5² + 12² = 25 + 144 = 169 = 13²
+                </p>
+                <p><strong data-lang-es="Conclusión:" data-lang-eu="Ondorioa:">Conclusión:</strong> <span data-lang-es="SÍ es un triángulo rectángulo" data-lang-eu="BAI, triangelu errectangularra da">SÍ es un triángulo rectángulo</span></p>
+            </div>
+
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 4: Diagonal de un rectángulo" data-lang-eu="Adibidea 4: Laukizuzenaren diagonal">Ejemplo 4: Diagonal de un rectángulo</h4>
+                <p data-lang-es="Calcula la diagonal de un rectángulo de 8 cm de largo y 6 cm de ancho."
+                   data-lang-eu="8 cm luze eta 6 cm zabalerako laukizuzenaren diagonal kalkulatu.">
+                   Calcula la diagonal de un rectángulo de 8 cm de largo y 6 cm de ancho.
+                </p>
+                <p><strong data-lang-es="Solución:" data-lang-eu="Soluzioa:">Solución:</strong></p>
+                <p>\\[d = \\sqrt{8^2 + 6^2} = \\sqrt{64 + 36} = \\sqrt{100} = 10\\] cm</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Triples Pitagóricos" data-lang-eu="Pitagoras Hirukoitzak">Triples Pitagóricos</h3>
+            <p data-lang-es="Los triples pitagóricos son conjuntos de tres números enteros que satisfacen la ecuación a² + b² = c², es decir, que pueden ser los lados de un triángulo rectángulo."
+               data-lang-eu="Pitagoras hirukoitzak hiru zenbaki osoko multzoak dira, a² + b² = c² ekuazioa betetzen dutenak, hau da, triangelu errectangular baten aldeak izan daitezkeenak.">
+               Los triples pitagóricos son conjuntos de tres números enteros que satisfacen la ecuación a² + b² = c², es decir, que pueden ser los lados de un triángulo rectángulo.
+            </p>
+            
+            <div class="definition-box">
+                <h4 data-lang-es="Triples Pitagóricos Conocidos" data-lang-eu="Pitagoras Hirukoitz Ezagunak">Triples Pitagóricos Conocidos</h4>
+                <ul>
+                    <li>(3, 4, 5) - El más simple y conocido</li>
+                    <li>(5, 12, 13)</li>
+                    <li>(8, 15, 17)</li>
+                    <li>(7, 24, 25)</li>
+                    <li>(20, 21, 29)</li>
+                </ul>
+            </div>
+
+            <p class="key-takeaway" data-lang-es="<b>Nota:</b> Si multiplicamos un triple pitagórico por cualquier número entero, obtenemos otro triple pitagórico. Por ejemplo: 2×(3, 4, 5) = (6, 8, 10)"
+               data-lang-eu="<b>Oharra:</b> Pitagoras hirukoitz bat edozein zenbaki osok biderkatuz gero, beste pitagoras hirukoitz bat lortzen dugu. Adibidez: 2×(3, 4, 5) = (6, 8, 10)">
+               <b>Nota:</b> Si multiplicamos un triple pitagórico por cualquier número entero, obtenemos otro triple pitagórico. Por ejemplo: 2×(3, 4, 5) = (6, 8, 10)
+            </p>
+        </section>
+
+        <section class="content-section warning-section">
+            <h3><i class="fas fa-exclamation-triangle"></i> <span data-lang-es="Errores Típicos" data-lang-eu="Akats Tipikoak">Errores Típicos</span></h3>
+            <ul>
+                <li data-lang-es="<strong>Aplicar Pitágoras a triángulos que no son rectángulos:</strong> Este teorema solo funciona en triángulos rectángulos."
+                    data-lang-eu="<strong>Pitagoras triangelu ez-errectangularrei aplikatzea:</strong> Teorema hau soilik triangelu errectangularretan funtzionatzen du.">
+                    <strong>Aplicar Pitágoras a triángulos que no son rectángulos:</strong> Este teorema solo funciona en triángulos rectángulos.
+                </li>
+                <li data-lang-es="<strong>Confundir hipotenusa con catetos:</strong> La hipotenusa siempre es el lado más largo, opuesto al ángulo de 90°."
+                    data-lang-eu="<strong>Hipotenusa katetoekin nahastea:</strong> Hipotenusa beti da alde luzeena, 90°-ko angeluaren aurkakoa.">
+                    <strong>Confundir hipotenusa con catetos:</strong> La hipotenusa siempre es el lado más largo, opuesto al ángulo de 90°.
+                </li>
+                <li data-lang-es="<strong>Confundir suma con resta:</strong> Para calcular un cateto, restamos; para la hipotenusa, sumamos."
+                    data-lang-eu="<strong>Batura kentzearekin nahastea:</strong> Kateto bat kalkulatzeko, kentzen dugu; hipotenusarentzat, batzen dugu.">
+                    <strong>Confundir suma con resta:</strong> Para calcular un cateto, restamos; para la hipotenusa, sumamos.
+                </li>
+                <li data-lang-es="<strong>Olvidar la raíz cuadrada:</strong> Al despejar, no debemos olvidar extraer la raíz cuadrada."
+                    data-lang-eu="<strong>Erro karratuari ahaztea:</strong> Askatzean, erro karratua ateratzea ez da ahaztu behar.">
+                    <strong>Olvidar la raíz cuadrada:</strong> Al despejar, no debemos olvidar extraer la raíz cuadrada.
+                </li>
+                <li data-lang-es="<strong>Confundir la fórmula de la diagonal:</strong> En un cuadrado, d = a√2, no d = a²."
+                    data-lang-eu="<strong>Diagonalaren formula nahastea:</strong> Karratu batean, d = a√2, ez d = a².">
+                    <strong>Confundir la fórmula de la diagonal:</strong> En un cuadrado, d = a√2, no d = a².
+                </li>
+                <li data-lang-es="<strong>No verificar si el resultado es coherente:</strong> La hipotenusa siempre debe ser mayor que cada cateto."
+                    data-lang-eu="<strong>Emaitzak koherentea den ez kontrolatzea:</strong> Hipotenusa beti izan behar da kateto bakoitz baino handiagoa.">
+                    <strong>No verificar si el resultado es coherente:</strong> La hipotenusa siempre debe ser mayor que cada cateto.
+                </li>
+            </ul>
+        </section>
+
+        <section class="content-section" id="ejercicios">
+            <h3 data-lang-es="Ejercicios Prácticos" data-lang-eu="Ariketa Praktikoak">Ejercicios Prácticos</h3>
+            <div class="exercise-placeholder">
+                <p data-lang-es="🔧 Los ejercicios interactivos se cargarán aquí. (Funcionalidad pendiente de implementar)"
+                   data-lang-eu="🔧 Ariketa interaktiboak hemen kargatuko dira. (Funtzionalitatea ezartzeke dago)">
+                   🔧 Los ejercicios interactivos se cargarán aquí. (Funcionalidad pendiente de implementar)
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section" id="herramienta">
+            <h3 data-lang-es="Herramienta Interactiva" data-lang-eu="Tresna Interaktiboa">Herramienta Interactiva</h3>
+            <div class="interactive-tool card-style">
+                <div class="tool-placeholder">
+                    <p data-lang-es="🔧 La herramienta de cálculo del Teorema de Pitágoras se cargará aquí. (Funcionalidad pendiente de implementar)"
+                       data-lang-eu="🔧 Pitagorasen Teorema kalkulatzeko tresna hemen kargatuko da. (Funtzionalitatea ezartzeke dago)">
+                       🔧 La herramienta de cálculo del Teorema de Pitágoras se cargará aquí. (Funcionalidad pendiente de implementar)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

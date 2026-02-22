@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aljebra - Matematika 1. DBH</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/herramientas.css">
+    <script src="../js/main.js" defer></script>
+    <meta name="description" content="Aljebraren teoria eta kontzeptuak 1. DBH">
+    <meta name="keywords" content="matematika, aljebra, adierazpen aljebraikoak, ekuazioak">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔢</text></svg>">
+</head>
+<body>
+    <header>
+        <div class="logo-titulo">
+            <h1>Aljebra</h1>
+        </div>
+        <nav class="navbar" aria-label="Nabigazio nagusia">
+            <a href="../index.html" class="navbar-logo">Matematika 1. DBH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <div class="navbar-menu">
+                <a href="../index.html" class="navbar-item">Hasiera</a>
+                <div class="dropdown">
+                    <a href="#" class="navbar-item dropdown-btn">Gaiak</a>
+                    <div class="dropdown-content">
+                        <a href="../paginas/numeros-naturales.html">Zenbaki Naturalak</a>
+                        <a href="../paginas/divisibilidad.html">Zatigarritasuna</a>
+                        <a href="../paginas/numeros-enteros.html">Zenbaki Osoak</a>
+                        <a href="../paginas/fracciones.html">Zatikiak</a>
+                        <a href="../paginas/algebra.html" class="active">Aljebran</a>
+                        <a href="../paginas/geometria.html">Geometria</a>
+                        <a href="../paginas/tablas-graficas.html">Taulak eta Grafikoak</a>
+                    </div>
+                </div>
+                <a href="https://chatgpt.com/g/g-67d38635fb0c81919668655bdd91d6f7-matella-euskeraz" class="navbar-item">Matella ChatGPT</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="teoria-numeros" class="seccion-contenedor">
+            <h2>Aljebra</h2>
+            
+            <div class="tarjetas-secciones">
+                <div class="tarjeta" data-modal="letras-numeros">
+                    <h3>🧩 Letra zenbakien ordez</h3>
+                    <p>Ezezagunak eta aldagaiak erabiltzea</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="expresiones-algebraicas">
+                    <h3>🔤 Aljebraren adierazpenak</h3>
+                    <p>Zenbaki, letra eta eragiketen konbinazioa</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="suma-resta-monomios">
+                    <h3>➕ Monomioen batuketa eta kenketak</h3>
+                    <p>Antzeko terminoekin eragiketak</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="multiplicacion-monomios">
+                    <h3>✖️ Monomioen biderketa</h3>
+                    <p>Termino aljebraikoak biderkatzeko arauak</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="multiplicacion-monomio-suma">
+                    <h3>🔢 Monomioaren biderketa batuketarekin</h3>
+                    <p>Banaketa propietatea aplikatzea</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="division-monomios">
+                    <h3>➗ Monomioen zatiketa</h3>
+                    <p>Kofiziente eta esponentzien sinplifikazioa</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="ecuaciones">
+                    <h3>🟰 Ekuazioak</h3>
+                    <p>Ezezagunak dituzten berdintasunak</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="tecnicas-ecuaciones">
+                    <h3>🔍 Ekuazioak ebazteko teknikak</h3>
+                    <p>Ezezagunak askatzeko pausoak</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="ecuaciones-primer-grado">
+                    <h3>📐 Lehen mailako ekuazioak</h3>
+                    <p>Ezezagun bakarreko ekuazioak</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="problemas-ecuaciones">
+                    <h3>💡 Ekuazioekin problemak</h3>
+                    <p>Aljebraren aplikazio praktikoak</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="herramientas-interactivas" class="seccion-contenedor">
+            <h2>Tresna Interaktiboak</h2>
+            
+            <!-- Ekuazioen Ebazlea -->
+            <div class="herramienta-card">
+                <div class="herramienta-header">
+                    <h3>Ekuazioen Ebazlea</h3>
+                    <p>Lehen mailako ekuazioak ebatzi eta pausoak ikusi</p>
+                </div>
+                <div class="herramienta-content">
+                    <div class="input-group">
+                        <div class="input-field">
+                            <label for="ekuazioa-input">Sartu ekuazioa:</label>
+                            <input type="text" id="ekuazioa-input" placeholder="Adib: 2x + 3 = 5x - 7">
+                        </div>
+                        <button class="btn-primario" onclick="ebatziEkuazioa()">Ebatzi</button>
+                    </div>
+                    <div id="ekuazioa-emaitza" class="emaitza-container"></div>
+                    <div id="ekuazioa-pausoak" class="pausoak-container"></div>
+                    <div id="ekuazioa-azalpena" class="azalpena-container"></div>
+                </div>
+            </div>
+            
+            <!-- Adierazpen Aljebraikoen Kalkulagailua -->
+            <div class="herramienta-card">
+                <div class="herramienta-header">
+                    <h3>Adierazpen Aljebraikoen Kalkulagailua</h3>
+                    <p>Adierazpen aljebraikoak ebaluatu x-ren balio batekin</p>
+                </div>
+                <div class="herramienta-content">
+                    <div class="input-group">
+                        <div class="input-field">
+                            <label for="adierazpena-input">Adierazpen aljebraikoa:</label>
+                            <input type="text" id="adierazpena-input" placeholder="Adib: 2x + 3">
+                        </div>
+                        <div class="input-field">
+                            <label for="x-balioa-input">x-ren balioa:</label>
+                            <input type="number" id="x-balioa-input" placeholder="Adib: 5">
+                        </div>
+                        <button class="btn-primario" onclick="kalkulatuAdierazpena()">Kalkulatu</button>
+                    </div>
+                    <div id="adierazpena-emaitza" class="emaitza-container"></div>
+                    <div id="adierazpena-azalpena" class="azalpena-container"></div>
+                </div>
+            </div>
+            
+            <!-- Monomioen Eragiketak -->
+            <div class="herramienta-card">
+                <div class="herramienta-header">
+                    <h3>Monomioen Eragiketak</h3>
+                    <p>Monomioen arteko eragiketak kalkulatu eta pausoak ikusi</p>
+                </div>
+                <div class="herramienta-content">
+                    <div class="input-group">
+                        <div class="input-field">
+                            <label for="monomio1-input">Lehenengo monomioa:</label>
+                            <input type="text" id="monomio1-input" placeholder="Adib: 3x²">
+                        </div>
+                        <div class="input-field">
+                            <label for="eragiketa-select">Eragiketa:</label>
+                            <select id="eragiketa-select">
+                                <option value="batu">Batu (+)</option>
+                                <option value="kendu">Kendu (-)</option>
+                                <option value="biderkatu">Biderkatu (×)</option>
+                                <option value="zatitu">Zatitu (÷)</option>
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <label for="monomio2-input">Bigarren monomioa:</label>
+                            <input type="text" id="monomio2-input" placeholder="Adib: 5x²">
+                        </div>
+                        <button class="btn-primario" onclick="kalkulatuMonomioak()">Kalkulatu</button>
+                    </div>
+                    <div id="monomioak-emaitza" class="emaitza-container"></div>
+                    <div id="monomioak-azalpena" class="azalpena-container"></div>
+                </div>
+            </div>
+            
+            <!-- Ekuazioen Problemak -->
+            <div class="herramienta-card">
+                <div class="herramienta-header">
+                    <h3>Ekuazioen Problemak</h3>
+                    <p>Ekuazioekin problemak ebatzi eta pausoak ikusi</p>
+                </div>
+                <div class="herramienta-content">
+                    <div class="input-group">
+                        <div class="input-field">
+                            <label for="problema-select">Aukeratu problema:</label>
+                            <select id="problema-select">
+                                <option value="">-- Aukeratu problema bat --</option>
+                                <option value="adina">Adina kalkulatzeko problema</option>
+                                <option value="dirua">Dirua banatzeko problema</option>
+                                <option value="abiadura">Abiadura eta denbora problema</option>
+                            </select>
+                        </div>
+                        <button class="btn-primario" onclick="ebatziProblema()">Ebatzi</button>
+                    </div>
+                    <div id="problema-emaitza" class="emaitza-container"></div>
+                    <div id="problema-azalpena" class="azalpena-container"></div>
+                    <div id="problema-pausoak" class="pausoak-container"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modales -->
+    <div id="modal-letras-numeros" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-expresiones-algebraicas" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-suma-resta-monomios" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-multiplicacion-monomios" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-multiplicacion-monomio-suma" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-division-monomios" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-ecuaciones" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-tecnicas-ecuaciones" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-ecuaciones-primer-grado" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-problemas-ecuaciones" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+
+    <footer>
+        <p> 2025 Matematika 1. DBH - Aljebraren Atala</p>
+        <p>❤️ Bihotzez garatua Derrigorrezko Bigarren Hezkuntzako ikasleentzat</p>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/modales-algebra.js"></script>
+    <script src="../js/herramienta-aljebra.js"></script>
+</body>
+</html>

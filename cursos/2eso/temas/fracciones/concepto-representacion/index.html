@@ -1,0 +1,711 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="Concepto y representación de fracciones - MATELLA" data-lang-eu="Zatikien kontzeptua eta irudikapena - MATELLA">Concepto y representación de fracciones - MATELLA</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .fraction-components {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    @media (min-width: 768px) {
+      .fraction-components {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .component-card {
+      background-color: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--card-shadow);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .component-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--card-hover-shadow);
+    }
+
+    .component-card h5 {
+      color: var(--secondary-color);
+      border-bottom: 2px solid var(--secondary-color);
+      padding-bottom: 0.5rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .visual-representations {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    
+    @media (min-width: 992px) {
+      .visual-representations {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .representation-card {
+      background-color: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      text-align: center;
+      box-shadow: var(--card-shadow);
+    }
+
+    .circle-container {
+      width: 180px;
+      height: 180px;
+      margin: 1rem auto;
+      position: relative;
+    }
+
+    .circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+      background-color: var(--bg-color);
+    }
+
+    .slice {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      top: 0;
+      right: 0;
+      transform-origin: 0% 100%;
+      background-color: var(--secondary-color);
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+      border: 1px solid var(--border-color);
+    }
+
+    .slice:hover {
+      opacity: 1;
+    }
+
+    .rectangle-container {
+      width: 240px;
+      height: 60px;
+      margin: 1rem auto;
+    }
+
+    .rectangle {
+      width: 100%;
+      height: 100%;
+      border: 2px solid var(--border-color);
+      display: flex;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .bar {
+      flex: 1;
+      background-color: var(--secondary-color);
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+      border-right: 1px solid var(--border-color);
+    }
+
+    .bar:hover {
+      opacity: 1;
+    }
+
+    .bar:last-child {
+      border-right: none;
+    }
+
+    .interactive-demo {
+      background-color: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      margin: 2rem 0;
+    }
+
+    .demo-controls {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    
+    @media (min-width: 576px) {
+      .demo-controls {
+        grid-template-columns: repeat(4, auto) 1fr;
+        align-items: center;
+      }
+    }
+
+    .demo-controls label {
+      font-weight: bold;
+    }
+
+    .demo-controls input {
+      padding: 0.8rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      text-align: center;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      width: 80px;
+    }
+
+    .fraction-types {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    @media (min-width: 768px) {
+      .fraction-types {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (min-width: 992px) {
+      .fraction-types {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .type-card {
+      background-color: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--card-shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .type-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--card-hover-shadow);
+    }
+
+    .type-card h5 {
+      color: var(--primary-color);
+      margin-top: 0;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .type-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .type-card li {
+      margin-bottom: 0.8rem;
+      padding: 0.8rem;
+      background-color: var(--button-bg);
+      border-radius: 4px;
+      border-left: 3px solid var(--secondary-color);
+    }
+
+    .type-card li:last-child {
+      margin-bottom: 0;
+    }
+
+    .tool-section {
+      background-color: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      margin: 1.5rem 0;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    @media (min-width: 576px) {
+      .tool-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .tool-grid > div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tool-grid label {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .tool-grid input {
+      padding: 0.8rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .result-box {
+      padding: 1.2rem;
+      border-radius: 6px;
+      background-color: var(--button-bg);
+      border: 1px solid var(--border-color);
+      margin-top: 1.5rem;
+    }
+    
+    .result-box .ok {
+      color: var(--secondary-color);
+      font-weight: bold;
+    }
+    
+    .result-box .error {
+      color: #a94442;
+      font-weight: bold;
+    }
+  </style>
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <a href="../../../../../index.html" class="home-link">
+        <i class="fas fa-calculator"></i>
+        <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+      </a>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">
+        <i class="fas fa-language"></i>
+        <span data-lang-es="Euskara" data-lang-eu="Castellano">Euskara</span>
+      </button>
+    </nav>
+  </header>
+  
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol>
+      <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
+      <li><a href="../index.html" data-lang-es="Fracciones" data-lang-eu="Zatikiak">Fracciones</a></li>
+      <li class="active" aria-current="page"><span data-lang-es="Concepto y representación de fracciones" data-lang-eu="Zatikien kontzeptua eta irudikapena">Concepto y representación de fracciones</span></li>
+    </ol>
+  </nav>
+  
+  <main>
+    <h1 class="page-title" data-lang-es="Concepto y representación de fracciones" data-lang-eu="Zatikien kontzeptua eta irudikapena">Concepto y representación de fracciones</h1>
+    
+    <div class="content-section">
+      <p data-lang-es="Las fracciones son una forma de expresar cantidades que no son números enteros. Representan partes de un todo y son fundamentales en matemáticas para expresar divisiones, proporciones y medidas." data-lang-eu="Zatikiak zenbaki osoak ez diren kantitateak adierazteko modu bat dira. Osotasun baten zatiak irudikatzen dituzte eta matematiketan oinarrizkoak dira zatiketak, proportzioak eta neurriak adierazteko.">Las fracciones son una forma de expresar cantidades que no son números enteros. Representan partes de un todo y son fundamentales en matemáticas para expresar divisiones, proporciones y medidas.</p>
+
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="true">
+            <i class="fas fa-info-circle icon-concept"></i>
+            <span data-lang-es="¿Qué es una fracción?" data-lang-eu="Zer da zatiki bat?">¿Qué es una fracción?</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Una <strong>fracción</strong> es una expresión de la forma <strong>a/b</strong>, donde:" data-lang-eu="<strong>Zatiki</strong> bat <strong>a/b</strong> formako adierazpen bat da, non:">Una <strong>fracción</strong> es una expresión de la forma <strong>a/b</strong>, donde:</p>
+            
+            <div class="fraction-components">
+              <div class="component-card">
+                <h5><i class="fas fa-arrow-up"></i> <span data-lang-es="Numerador (a)" data-lang-eu="Zenbakitzailea (a)">Numerador (a)</span></h5>
+                <p data-lang-es="Indica cuántas partes se toman del total" data-lang-eu="Guztira zenbat zati hartzen diren adierazten du">Indica cuántas partes se toman del total</p>
+              </div>
+              <div class="component-card">
+                <h5><i class="fas fa-arrow-down"></i> <span data-lang-es="Denominador (b)" data-lang-eu="Izendatzailea (b)">Denominador (b)</span></h5>
+                <p data-lang-es="Indica en cuántas partes iguales se divide el todo" data-lang-eu="Osotasuna zenbat zati berdinetan banatzen den adierazten du">Indica en cuántas partes iguales se divide el todo</p>
+              </div>
+            </div>
+
+            <div class="math-formula">
+              Fracción = a/b = Numerador/Denominador
+            </div>
+
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: 3/4" data-lang-eu="Adibidea: 3/4">Ejemplo: 3/4</h4>
+              <div class="solution">
+                <p data-lang-es="La fracción 3/4 significa:" data-lang-eu="3/4 zatiak esan nahi du:">La fracción 3/4 significa:</p>
+                <ul class="icon-list">
+                  <li><i class="fas fa-divide"></i> <span data-lang-es="El todo se divide en 4 partes iguales" data-lang-eu="Osotasuna 4 zati berdinetan banatzen da">El todo se divide en 4 partes iguales</span></li>
+                  <li><i class="fas fa-check-circle"></i> <span data-lang-es="Se toman 3 de esas partes" data-lang-eu="Zati horietatik 3 hartzen dira">Se toman 3 de esas partes</span></li>
+                </ul>
+                <p data-lang-es="Por tanto, 3/4 representa tres cuartas partes del todo." data-lang-eu="Beraz, 3/4k osotasunaren hiru laurden irudikatzen ditu.">Por tanto, 3/4 representa tres cuartas partes del todo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-paint-brush icon-concept"></i>
+            <span data-lang-es="Representación visual de fracciones" data-lang-eu="Zatikien irudikapen bisuala">Representación visual de fracciones</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Las fracciones se pueden representar de varias formas visuales:" data-lang-eu="Zatikiak hainbat modu bisualetan irudika daitezke:">Las fracciones se pueden representar de varias formas visuales:</p>
+            
+            <div class="visual-representations">
+              <div class="representation-card">
+                <h5><i class="fas fa-circle"></i> <span data-lang-es="Representación circular" data-lang-eu="Irudikapen zirkularra">Representación circular</span></h5>
+                <div class="circle-container">
+                  <div class="circle" id="circleFraction">
+                    <!-- Slices will be generated by JavaScript -->
+                  </div>
+                </div>
+                <p data-lang-es="El círculo se divide en partes iguales y se colorean las que representa el numerador" data-lang-eu="Zirkulua zati berdinetan banatzen da eta zenbakitzaileak adierazten dituenak koloreztatzen dira">El círculo se divide en partes iguales y se colorean las que representa el numerador</p>
+              </div>
+
+              <div class="representation-card">
+                <h5><i class="fas fa-square"></i> <span data-lang-es="Representación rectangular" data-lang-eu="Irudikapen angeluzuzena">Representación rectangular</span></h5>
+                <div class="rectangle-container">
+                  <div class="rectangle" id="rectangleFraction">
+                    <!-- Bars will be generated by JavaScript -->
+                  </div>
+                </div>
+                <p data-lang-es="El rectángulo se divide en partes iguales y se colorean las que representa el numerador" data-lang-eu="Angeluzuzena zati berdinetan banatzen da eta zenbakitzaileak adierazten dituenak koloreztatzen dira">El rectángulo se divide en partes iguales y se colorean las que representa el numerador</p>
+              </div>
+            </div>
+
+            <div class="interactive-demo">
+              <h5><i class="fas fa-sliders-h"></i> <span data-lang-es="Demostración interactiva" data-lang-eu="Erakustaldi interaktiboa">Demostración interactiva</span></h5>
+              <p data-lang-es="Cambia los valores para ver cómo se representa la fracción:" data-lang-eu="Aldatu balioak zatiki bat nola irudikatzen den ikusteko:">Cambia los valores para ver cómo se representa la fracción:</p>
+              
+              <div class="demo-controls">
+                <label for="demoNumerator" data-lang-es="Numerador:" data-lang-eu="Zenbakitzailea:">Numerador:</label>
+                <input type="number" id="demoNumerator" min="0" max="8" value="3">
+                <label for="demoDenominator" data-lang-es="Denominador:" data-lang-eu="Izendatzailea:">Denominador:</label>
+                <input type="number" id="demoDenominator" min="1" max="8" value="4">
+                <button onclick="updateFractionDemo()" class="button-primary">
+                  <i class="fas fa-sync-alt"></i>
+                  <span data-lang-es="Actualizar" data-lang-eu="Eguneratu">Actualizar</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-list-check icon-concept"></i>
+            <span data-lang-es="Tipos de fracciones" data-lang-eu="Zatiki motak">Tipos de fracciones</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Las fracciones se pueden clasificar según diferentes criterios:" data-lang-eu="Zatikiak hainbat irizpiden arabera sailka daitezke:">Las fracciones se pueden clasificar según diferentes criterios:</p>
+            
+            <div class="fraction-types">
+              <div class="type-card">
+                <h5><i class="fas fa-ruler-combined"></i> <span data-lang-es="Según el valor" data-lang-eu="Balioaren arabera">Según el valor</span></h5>
+                <ul>
+                  <li><strong data-lang-es="Fracción propia:" data-lang-eu="Zatiki egokia:">Fracción propia:</strong> <span data-lang-es="Numerador menor que denominador (ej: 2/3)" data-lang-eu="Zenbakitzailea izendatzailea baino txikiagoa (ad: 2/3)">Numerador menor que denominador (ej: 2/3)</span></li>
+                  <li><strong data-lang-es="Fracción impropia:" data-lang-eu="Zatiki ezegokia:">Fracción impropia:</strong> <span data-lang-es="Numerador mayor o igual que denominador (ej: 5/3)" data-lang-eu="Zenbakitzailea izendatzailea baino handiagoa edo berdina (ad: 5/3)">Numerador mayor o igual que denominador (ej: 5/3)</span></li>
+                  <li><strong data-lang-es="Fracción unitaria:" data-lang-eu="Zatiki unitarioa:">Fracción unitaria:</strong> <span data-lang-es="Numerador igual a 1 (ej: 1/4)" data-lang-eu="Zenbakitzailea 1en berdina (ad: 1/4)">Numerador igual a 1 (ej: 1/4)</span></li>
+                </ul>
+              </div>
+
+              <div class="type-card">
+                <h5><i class="fas fa-plus-minus"></i> <span data-lang-es="Según los signos" data-lang-eu="Ikurren arabera">Según los signos</span></h5>
+                <ul>
+                  <li><strong data-lang-es="Fracción positiva:" data-lang-eu="Zatiki positiboa:">Fracción positiva:</strong> <span data-lang-es="Ambos términos positivos (ej: 3/5)" data-lang-eu="Bi terminoak positiboak (ad: 3/5)">Ambos términos positivos (ej: 3/5)</span></li>
+                  <li><strong data-lang-es="Fracción negativa:" data-lang-eu="Zatiki negatiboa:">Fracción negativa:</strong> <span data-lang-es="Uno o ambos términos negativos (ej: -2/3)" data-lang-eu="Termino bat edo biak negatiboak (ad: -2/3)">Uno o ambos términos negativos (ej: -2/3)</span></li>
+                </ul>
+              </div>
+
+              <div class="type-card">
+                <h5><i class="fas fa-star"></i> <span data-lang-es="Fracciones especiales" data-lang-eu="Zatiki bereziak">Fracciones especiales</span></h5>
+                <ul>
+                  <li><strong data-lang-es="Fracción nula:" data-lang-eu="Zatiki nulua:">Fracción nula:</strong> <span data-lang-es="Numerador igual a 0 (ej: 0/5 = 0)" data-lang-eu="Zenbakitzailea 0en berdina (ad: 0/5 = 0)">Numerador igual a 0 (ej: 0/5 = 0)</span></li>
+                  <li><strong data-lang-es="Fracción entera:" data-lang-eu="Zatiki osoa:">Fracción entera:</strong> <span data-lang-es="Denominador igual a 1 (ej: 7/1 = 7)" data-lang-eu="Izendatzailea 1en berdina (ad: 7/1 = 7)">Denominador igual a 1 (ej: 7/1 = 7)</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-calculator icon-concept"></i>
+            <span data-lang-es="Calculadora de fracciones" data-lang-eu="Zatiki kalkulagailua">Calculadora de fracciones</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Utiliza esta calculadora para explorar diferentes fracciones:" data-lang-eu="Erabili kalkulagailu hau zatiki desberdinak esploratzeko:">Utiliza esta calculadora para explorar diferentes fracciones:</p>
+            
+            <div class="tool-section">
+              <div class="tool-grid">
+                <div>
+                  <label for="fracNumerator" data-lang-es="Numerador:" data-lang-eu="Zenbakitzailea:">Numerador:</label>
+                  <input type="number" id="fracNumerator" placeholder="ej: 3" min="0">
+                </div>
+                <div>
+                  <label for="fracDenominator" data-lang-es="Denominador:" data-lang-eu="Izendatzailea:">Denominador:</label>
+                  <input type="number" id="fracDenominator" placeholder="ej: 4" min="1">
+                </div>
+              </div>
+              <div class="tool-actions">
+                <button onclick="analyzeFraction()" class="button-primary">
+                  <i class="fas fa-search"></i>
+                  <span data-lang-es="Analizar fracción" data-lang-eu="Aztertu zatikia">Analizar fracción</span>
+                </button>
+              </div>
+              <div class="result-box" id="fractionResult"></div>
+            </div>
+
+            <div class="info-box">
+              <i class="fas fa-lightbulb"></i>
+              <p data-lang-es="Recuerda: el denominador no puede ser 0, ya que la división por cero no está definida." data-lang-eu="Gogoratu: izendatzailea ezin da 0 izan, zero bidezko zatiketa ez baitago definituta.">Recuerda: el denominador no puede ser 0, ya que la división por cero no está definida.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-list-ol icon-concept"></i>
+            <span data-lang-es="Ejercicios propuestos" data-lang-eu="Proposatutako ariketak">Ejercicios propuestos</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <ol class="exercises-list">
+              <li>
+                <p data-lang-es="¿Qué representa la fracción 5/8?" data-lang-eu="Zer irudikatzen du 5/8 zatikia?">¿Qué representa la fracción 5/8?</p>
+                <button class="toggle-hint-button" aria-expanded="false" data-target="hint-1">
+                  <i class="fas fa-lightbulb"></i>
+                  <span data-lang-es="Mostrar Pista" data-lang-es-hide="Ocultar Pista" data-lang-eu="Erakutsi Pista" data-lang-eu-hide="Ezkutatu Pista">Mostrar Pista</span>
+                </button>
+                <div class="hint-content" id="hint-1">
+                  <p data-lang-es="Piensa: si divides algo en 8 partes iguales y tomas 5, ¿qué tienes?" data-lang-eu="Pentsatu: zerbait 8 zati berdinetan banatzen baduzu eta 5 hartzen badituzu, zer duzu?">Piensa: si divides algo en 8 partes iguales y tomas 5, ¿qué tienes?</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="Clasifica estas fracciones: 2/3, 7/4, 1/5, 0/6, 8/1" data-lang-eu="Sailkatu zatiki hauek: 2/3, 7/4, 1/5, 0/6, 8/1">Clasifica estas fracciones: 2/3, 7/4, 1/5, 0/6, 8/1</p>
+                <button class="toggle-hint-button" aria-expanded="false" data-target="hint-2">
+                  <i class="fas fa-lightbulb"></i>
+                  <span data-lang-es="Mostrar Pista" data-lang-es-hide="Ocultar Pista" data-lang-eu="Erakutsi Pista" data-lang-eu-hide="Ezkutatu Pista">Mostrar Pista</span>
+                </button>
+                <div class="hint-content" id="hint-2">
+                  <p data-lang-es="Compara el numerador con el denominador para cada fracción." data-lang-eu="Alderatu zenbakitzailea izendatzailearekin zatiki bakoitzerako.">Compara el numerador con el denominador para cada fracción.</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="Dibuja la representación visual de la fracción 3/6" data-lang-eu="Marraztu 3/6 zatikiaren irudikapen bisuala">Dibuja la representación visual de la fracción 3/6</p>
+                <button class="toggle-hint-button" aria-expanded="false" data-target="hint-3">
+                  <i class="fas fa-lightbulb"></i>
+                  <span data-lang-es="Mostrar Pista" data-lang-es-hide="Ocultar Pista" data-lang-eu="Erakutsi Pista" data-lang-eu-hide="Ezkutatu Pista">Mostrar Pista</span>
+                </button>
+                <div class="hint-content" id="hint-3">
+                  <p data-lang-es="Divide un círculo o rectángulo en 6 partes iguales y colorea 3." data-lang-eu="Banatu zirkulu edo angeluzuzen bat 6 zati berdinetan eta koloreztatu 3.">Divide un círculo o rectángulo en 6 partes iguales y colorea 3.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  
+  <script>
+    // Función para actualizar la demostración de fracciones
+    function updateFractionDemo() {
+      const numerator = parseInt(document.getElementById('demoNumerator').value);
+      const denominator = parseInt(document.getElementById('demoDenominator').value);
+      
+      if (isNaN(numerator) || isNaN(denominator) || denominator <= 0) {
+        alert(langUtils.getCurrentLang() === 'es' ? 'Por favor, introduce valores válidos' : 'Sartu balio zuzenak, mesedez');
+        return;
+      }
+      
+      // Limitar valores a un rango razonable
+      const limitedNumerator = Math.min(Math.max(numerator, 0), 12);
+      const limitedDenominator = Math.min(Math.max(denominator, 1), 12);
+      
+      document.getElementById('demoNumerator').value = limitedNumerator;
+      document.getElementById('demoDenominator').value = limitedDenominator;
+      
+      // Actualizar representación circular
+      updateCircleFraction(limitedNumerator, limitedDenominator);
+      
+      // Actualizar representación rectangular
+      updateRectangleFraction(limitedNumerator, limitedDenominator);
+    }
+
+    // Función para actualizar la representación circular
+    function updateCircleFraction(numerator, denominator) {
+      const circle = document.getElementById('circleFraction');
+      circle.innerHTML = '';
+      
+      for (let i = 0; i < denominator; i++) {
+        const slice = document.createElement('div');
+        slice.className = 'slice';
+        slice.style.transform = `rotate(${i * (360 / denominator)}deg)`;
+        slice.style.backgroundColor = i < numerator ? 'var(--secondary-color)' : 'var(--bg-color)';
+        circle.appendChild(slice);
+      }
+    }
+
+    // Función para actualizar la representación rectangular
+    function updateRectangleFraction(numerator, denominator) {
+      const rectangle = document.getElementById('rectangleFraction');
+      rectangle.innerHTML = '';
+      
+      for (let i = 0; i < denominator; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'bar';
+        bar.style.backgroundColor = i < numerator ? 'var(--secondary-color)' : 'var(--bg-color)';
+        rectangle.appendChild(bar);
+      }
+    }
+
+    // Función para analizar una fracción
+    function analyzeFraction() {
+      const numerator = parseInt(document.getElementById('fracNumerator').value);
+      const denominator = parseInt(document.getElementById('fracDenominator').value);
+      
+      if (isNaN(numerator) || isNaN(denominator)) {
+        document.getElementById('fractionResult').innerHTML = 
+          '<p class="error" data-lang-es="Por favor, introduce números válidos" data-lang-eu="Sartu balio zuzenak, mesedez">Por favor, introduce números válidos</p>';
+        langUtils.applyLanguage(langUtils.getCurrentLang());
+        return;
+      }
+      
+      if (denominator === 0) {
+        document.getElementById('fractionResult').innerHTML = 
+          '<p class="error" data-lang-es="Error: El denominador no puede ser 0" data-lang-eu="Errorea: Izendatzailea ezin da 0 izan">Error: El denominador no puede ser 0</p>';
+        langUtils.applyLanguage(langUtils.getCurrentLang());
+        return;
+      }
+      
+      const decimalValue = numerator / denominator;
+      let fractionType = '';
+      let description = '';
+      
+      if (numerator === 0) {
+        fractionType = langUtils.getCurrentLang() === 'es' ? 'Fracción nula' : 'Zatiki nulua';
+        description = langUtils.getCurrentLang() === 'es' ? 'La fracción representa 0' : 'Zatikiak 0 irudikatzen du';
+      } else if (denominator === 1) {
+        fractionType = langUtils.getCurrentLang() === 'es' ? 'Fracción entera' : 'Zatiki osoa';
+        description = langUtils.getCurrentLang() === 'es' ? `La fracción representa el número entero ${numerator}` : `Zatikiak ${numerator} zenbaki osoa irudikatzen du`;
+      } else if (numerator === 1) {
+        fractionType = langUtils.getCurrentLang() === 'es' ? 'Fracción unitaria' : 'Zatiki unitarioa';
+        description = langUtils.getCurrentLang() === 'es' ? 'Representa una parte del todo' : 'Osotasunaren zati bat irudikatzen du';
+      } else if (numerator < denominator) {
+        fractionType = langUtils.getCurrentLang() === 'es' ? 'Fracción propia' : 'Zatiki egokia';
+        description = langUtils.getCurrentLang() === 'es' ? 'Representa menos de un todo' : 'Osotasun bat baino gutxiago irudikatzen du';
+      } else if (numerator === denominator) {
+        fractionType = langUtils.getCurrentLang() === 'es' ? 'Fracción igual a la unidad' : 'Unitatearen berdina den zatikia';
+        description = langUtils.getCurrentLang() === 'es' ? 'Representa exactamente un todo' : 'Osotasun bat zehatz-mehatz adierazten du';
+      } else {
+        fractionType = langUtils.getCurrentLang() === 'es' ? 'Fracción impropia' : 'Zatiki ezegokia';
+        description = langUtils.getCurrentLang() === 'es' ? 'Representa más de un todo' : 'Osotasun bat baino gehiago irudikatzen du';
+      }
+      
+      const resultHTML = `
+        <p class="ok"><strong>${numerator}/${denominator}</strong></p>
+        <p><strong data-lang-es="Tipo:" data-lang-eu="Mota:">Tipo:</strong> ${fractionType}</p>
+        <p><strong data-lang-es="Valor decimal:" data-lang-eu="Balio hamartarra:">Valor decimal:</strong> ${decimalValue.toFixed(3)}</p>
+        <p><strong data-lang-es="Descripción:" data-lang-eu="Deskribapena:">Descripción:</strong> ${description}</p>
+      `;
+      
+      document.getElementById('fractionResult').innerHTML = resultHTML;
+      langUtils.applyLanguage(langUtils.getCurrentLang());
+    }
+
+    // Inicializar la demostración al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+      updateFractionDemo();
+    });
+  </script>
+  
+  <!-- Botón flotante para volver arriba -->
+  <button id="back-to-top" aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <script>
+    // Configuración del botón de volver arriba
+    document.addEventListener('DOMContentLoaded', function() {
+      const backToTopButton = document.getElementById('back-to-top');
+      
+      // Mostrar/ocultar botón al hacer scroll
+      function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
+      }
+      
+      // Mostrar el botón después de cargar la página
+      setTimeout(toggleBackToTop, 100);
+      
+      // Escuchar el evento de scroll
+      window.addEventListener('scroll', toggleBackToTop);
+      
+      // Hacer scroll suave al hacer clic
+      backToTopButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

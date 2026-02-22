@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Sistemas de Ecuaciones 3º ESO - Inicio" data-lang-eu="Ekuazio Sistema DBH 3 - Hasiera">Sistemas de Ecuaciones 3º ESO - Inicio</title>
+    <link rel="stylesheet" href="../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+             <a href="../../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+             <i class="fas fa-calculator"></i>
+             <span data-lang-es="Sistemas de Ecuaciones" data-lang-eu="Ekuazio Sistema">Sistemas de Ecuaciones</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i> </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro">
+            <div class="intro-container">
+
+                <h2 data-lang-es="Bienvenida a los Sistemas de Ecuaciones" data-lang-eu="Ongi Etorri Ekuazio Sistemak">Bienvenida a los Sistemas de Ecuaciones</h2>
+
+                <ul class="tabs-nav">
+                    <li><a href="#tab-what" class="tab-link active" data-lang-es="¿Qué son?" data-lang-eu="Zer dira?">¿Qué son?</a></li>
+                    <li><a href="#tab-why" class="tab-link" data-lang-es="¿Por qué son útiles?" data-lang-eu="Zergatik dira erabilgarriak?">¿Por qué son útiles?</a></li>
+                </ul>
+
+                <div class="tabs-content">
+
+                    <div id="tab-what" class="tab-pane active">
+                        <div class="tab-pane-content">
+                            <div class="tab-text">
+                                <h3 data-lang-es="Conjuntos de Ecuaciones" data-lang-eu="Ekuazio Multzoak">Conjuntos de Ecuaciones</h3>
+                                <p data-lang-es="Un sistema de ecuaciones es un <b>conjunto de dos o más ecuaciones</b> con las mismas variables que se deben cumplir simultáneamente. La solución es el conjunto de valores que satisface todas las ecuaciones a la vez."
+                                   data-lang-eu="Ekuazio sistema <b>bi ekuazio edo gehiagoko multzo</b> da, aldagai berberak dituztenak eta aldi berean bete behar direnak. Soluzioa da ekuazio guztiak aldi berean betetzen dituen balio multzoa.">
+                                   Un sistema de ecuaciones es un <b>conjunto de dos o más ecuaciones</b> con las mismas variables que se deben cumplir simultáneamente. La solución es el conjunto de valores que satisface todas las ecuaciones a la vez.
+                                </p>
+                                <h4 data-lang-es="Ejemplo:" data-lang-eu="Adibidea:">Ejemplo:</h4>
+                                <ul class="icon-list">
+                                    <li><i class="fas fa-balance-scale"></i><span data-lang-es="2x + y = 7" data-lang-eu="2x + y = 7">2x + y = 7</span></li>
+                                    <li><i class="fas fa-puzzle-piece"></i><span data-lang-es="x - y = 1" data-lang-eu="x - y = 1">x - y = 1</span></li>
+                                    <li><i class="fas fa-check-circle"></i><span data-lang-es="Solución: x = 3, y = 1" data-lang-eu="Soluzioa: x = 3, y = 1">Solución: x = 3, y = 1</span></li>
+                                    <li><i class="fas fa-calculator"></i><span data-lang-es="Solucionar métodos diferentes" data-lang-eu="Metodo desberdinekin ebaztea">Solucionar métodos diferentes</span></li>
+                                </ul>
+                            </div>
+                            <div class="tab-visual">
+                                <i class="fas fa-network-wired fa-5x subtle-icon"></i> </div>
+                        </div>
+                    </div>
+
+                    <div id="tab-why" class="tab-pane">
+                         <div class="tab-pane-content">
+                            <div class="tab-text">
+                                <h3 data-lang-es="Aplicaciones en la Vida Real" data-lang-eu="Bizitza Errealeko Aplikazioak">Aplicaciones en la Vida Real</h3>
+                                <p data-lang-es="¡Son fundamentales para resolver problemas con múltiples relaciones!" data-lang-eu="Baliagarriak dira erlazio anitzeko problemak ebazteko!">¡Son fundamentales para resolver problemas con múltiples relaciones!</p>
+                                <div class="usage-grid">
+                                    <div class="usage-item"><i class="fas fa-dollar-sign"></i><span data-lang-es="Problemas Económicos" data-lang-eu="Problema Ekonomikoak">Problemas Económicos</span></div>
+                                    <div class="usage-item"><i class="fas fa-route"></span><span data-lang-es="Distancia y Velocidad" data-lang-eu="Distantzia eta Abiadura">Distancia y Velocidad</span></div>
+                                    <div class="usage-item"><i class="fas fa-flask"></i><span data-lang-es="Mezclas y Proporciones" data-lang-eu="Nahasketak eta Proportzioak">Mezclas y Proporciones</span></div>
+                                    <div class="usage-item"><i class="fas fa-cog"></i><span data-lang-es="Ingeniería" data-lang-eu="Ingeniaritza">Ingeniería</span></div>
+                                    <div class="usage-item"><i class="fas fa-chart-line"></i><span data-lang-es="Análisis de Datos" data-lang-eu="Datuen Analisia">Análisis de Datos</span></div>
+                                    <div class="usage-item"><i class="fas fa-gamepad"></i><span data-lang-es="Programación" data-lang-eu="Programazioa">Programación</span></div>
+                                </div>
+                                <h4 data-lang-es="Te permiten:" data-lang-eu="Aukera ematen dizute:">Te permiten:</h4>
+                                <ul class="benefits-list">
+                                    <li data-lang-es="Resolver problemas con múltiples variables" data-lang-eu="Aldagai anitzeko problemak ebaztea">Resolver problemas con múltiples variables</li>
+                                    <li data-lang-es="Encontrar valores óptimos" data-lang-eu="Balio optimoak aurkitzea">Encontrar valores óptimos</li>
+                                    <li data-lang-es="Modelar situaciones reales" data-lang-eu="Egoera erreala modelatzea">Modelar situaciones reales</li>
+                                    <li data-lang-es="Analizar interdependencias" data-lang-eu="Menpekotasunak analizatzea">Analizar interdependencias</li>
+                                </ul>
+                            </div>
+                            <div class="tab-visual">
+                                <i class="fas fa-project-diagram fa-5x subtle-icon"></i> </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section id="subtopics">
+            <h2 data-lang-es="Contenidos del Tema" data-lang-eu="Gaiaren Edukiak">Contenidos del Tema</h2>
+            <div class="cards-container">
+
+                <div class="card">
+                    <a href="./pages/metodo-sustitucion.html">
+                        <div class="card-icon"><i class="fas fa-exchange-alt"></i></div>
+                        <h3 data-lang-es="Método de Sustitución" data-lang-eu="Ordezkapen Metodoa">Método de Sustitución</h3>
+                        <div class="summary">
+                            <p data-lang-es="<b>Sustituir una variable por su expresión</b><br/>• <b>Concepto:</b> Despejar una variable y sustituir<br/>• <b>Pasos:</b> Despejar → Sustituir → Resolver → Comprobar<br/>• <b>Ventajas:</b> Bueno para ecuaciones lineales simples<br/>• <b>Errores comunes:</b> Errores en la sustitución"
+                               data-lang-eu="<b>Aldagai bat bere adierazpenagatik ordezkatzea</b><br/>• <b>Kontzeptua:</b> Aldagai bat askatzea eta ordezkatzea<br/>• <b>Pausuak:</b> Askatu → Ordezkatu → Ebatzi → Egiaztatu<br/>• <b>Abantailak:</b> Ekuazio linealen sinpleenentzat ona<br/>• <b>Ohiko akatsak:</b> Ordezkaketan akatsak">
+                               <b>Sustituir una variable por su expresión</b><br/>
+                               • <b>Concepto:</b> Despejar una variable y sustituir<br/>
+                               • <b>Pasos:</b> Despejar → Sustituir → Resolver → Comprobar<br/>
+                               • <b>Ventajas:</b> Bueno para ecuaciones lineales simples<br/>
+                               • <b>Errores comunes:</b> Errores en la sustitución
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./pages/metodo-eliminacion.html">
+                        <div class="card-icon"><i class="fas fa-cut"></i></div>
+                        <h3 data-lang-es="Método de Eliminación" data-lang-eu="Kentze Metodoa">Método de Eliminación</h3>
+                        <div class="summary">
+                            <p data-lang-es="<b>Eliminar una variable sumando/restas ecuaciones</b><br/>• <b>Concepto:</b> Multiplicar y sumar/restar para eliminar<br/>• <b>Pasos:</b> Igualar coeficientes → Sumar/restar → Resolver<br/>• <b>Ventajas:</b> Rápido y sistemático<br/>• <b>Errores comunes:</b> Error al multiplicar por el mismo número"
+                               data-lang-eu="<b>Aldagai bat kendu ekuazioak batuz/kentuz</b><br/>• <b>Kontzeptua:</b> Koefizienteak berdintzeko biderkatu eta batu/kendu<br/>• <b>Pausuak:</b> Koefizienteak berdindu → Batu/kendu → Ebatzi<br/>• <b>Abantailak:</b> Azkarra eta sistematikoa<br/>• <b>Ohiko akatsak:</b> Zenbaki berberekin biderkatzean akatsa">
+                               <b>Eliminar una variable sumando/restas ecuaciones</b><br/>
+                               • <b>Concepto:</b> Multiplicar y sumar/restar para eliminar<br/>
+                               • <b>Pasos:</b> Igualar coeficientes → Sumar/restar → Resolver<br/>
+                               • <b>Ventajas:</b> Rápido y sistemático<br/>
+                               • <b>Errores comunes:</b> Error al multiplicar por el mismo número
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./pages/metodo-grafico.html">
+                        <div class="card-icon"><i class="fas fa-chart-area"></i></div>
+                        <h3 data-lang-es="Método Gráfico" data-lang-eu="Metodo Grafikoa">Método Gráfico</h3>
+                        <div class="summary">
+                            <p data-lang-es="<b>Representar las rectas e intersectar</b><br/>• <b>Concepto:</b> Dibujar las rectas y encontrar intersección<br/>• <b>Pasos:</b> Despejar y → Dibujar rectas → Marcar punto<br/>• <b>Ventajas:</b> Visual y comprensible<br/>• <b>Errores comunes:</b> Escalas incorrectas en los ejes"
+                               data-lang-eu="<b>Zuzenak irudikatu eta ebakikundea aurkitu</b><br/>• <b>Kontzeptua:</b> Zuzenak marraztu eta ebakikundea aurkitu<br/>• <b>Pausuak:</b> y askatu → Zuzenak marraztu → Puntua markatu<br/>• <b>Abantailak:</b> Ikuskoa eta ulergarria<br/>• <b>Ohiko akatsak:</b> Ardatzetan eskalak oker">
+                               <b>Representar las rectas e intersectar</b><br/>
+                               • <b>Concepto:</b> Dibujar las rectas y encontrar intersección<br/>
+                               • <b>Pasos:</b> Despejar y → Dibujar rectas → Marcar punto<br/>
+                               • <b>Ventajas:</b> Visual y comprensible<br/>
+                               • <b>Errores comunes:</b> Escalas incorrectas en los ejes
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p data-lang-es="© 2024 MATELLA. Plataforma educativa de matemáticas." data-lang-eu="© 2024 MATELLA. Matematikako hezkuntza plataforma.">© 2024 MATELLA. Plataforma educativa de matemáticas.</p>
+        </div>
+    </footer>
+
+    <!-- Botón back to top -->
+    <button id="back-to-top" aria-label="Volver arriba" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="../../../../assets/js/theme.js"></script>
+    <script src="../../../../assets/js/language.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    <script src="../../../../assets/js/uiComponents.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Lógica específica para esta página
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

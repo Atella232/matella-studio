@@ -1,0 +1,434 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="Operaciones con números enteros - MATELLA" data-lang-eu="Zenbaki osoekin eragiketak - MATELLA">Operaciones con números enteros - MATELLA</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <link rel="stylesheet" href="../math-formulas.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* --- Estilos específicos para esta página --- */
+    .sign-rules-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin: 1.5rem 0;
+        text-align: center;
+    }
+    .sign-rule-card {
+        background-color: var(--button-bg);
+        padding: 1.5rem 1rem;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .sign-rule-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--card-hover-shadow);
+    }
+    .sign-rule-card .math-formula {
+        font-size: 2em;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        font-family: monospace;
+    }
+    .sign-rule-card .math-formula .positive { color: var(--secondary-color); }
+    .sign-rule-card .math-formula .negative { color: #a94442; }
+    .sign-rule-card .description { font-size: 0.9em; opacity: 0.8; }
+    
+    .priority-steps {
+        list-style: none;
+        padding-left: 0;
+        margin: 1.5rem 0;
+        counter-reset: step-counter;
+    }
+    .priority-step {
+        position: relative;
+        padding: 0.8rem 1rem 0.8rem 3.5rem;
+        margin-bottom: 1rem;
+        background-color: var(--button-bg);
+        border-radius: 8px;
+        border-left: 4px solid var(--secondary-color);
+    }
+    .priority-step::before {
+        counter-increment: step-counter;
+        content: counter(step-counter);
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        background-color: var(--secondary-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+    
+    .result-box.success {
+        background-color: var(--quiz-feedback-correct-bg);
+        color: var(--quiz-feedback-correct-text);
+        border: 1px solid var(--quiz-feedback-correct-border);
+        padding: 0.8rem 1rem; border-radius: 6px; margin-top: 1rem;
+        text-align: center; font-weight: bold; font-size: 1.1em;
+    }
+    .result-box.error {
+        background-color: var(--quiz-feedback-incorrect-bg);
+        color: var(--quiz-feedback-incorrect-text);
+        border: 1px solid var(--quiz-feedback-incorrect-border);
+        padding: 0.8rem 1rem; border-radius: 6px; margin-top: 1rem;
+        text-align: center; font-weight: bold;
+    }
+  </style>
+    <!-- MathJax Configuration -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <a href="../../../../index.html" class="home-link">
+        <i class="fas fa-calculator"></i>
+        <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+      </a>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Gaztelania" aria-label="Cambiar idioma">Euskara</button>
+    </nav>
+  </header>
+  
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol>
+      <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
+      <li><a href="../index.html" data-lang-es="Divisibilidad y números enteros" data-lang-eu="Zatigarritasuna eta zenbaki osoak">Divisibilidad y números enteros</a></li>
+      <li class="active" aria-current="page"><span data-lang-es="Operaciones con números enteros" data-lang-eu="Zenbaki osoekin eragiketak">Operaciones con números enteros</span></li>
+    </ol>
+  </nav>
+  
+  <main>
+    <h1 class="page-title" data-lang-es="Operaciones con números enteros" data-lang-eu="Zenbaki osoekin eragiketak">Operaciones con números enteros</h1>
+    
+    <section class="content-section">
+      <p data-lang-es="Los números enteros incluyen los números positivos, negativos y el cero. Las operaciones con ellos siguen unas reglas específicas que es fundamental conocer para resolver problemas matemáticos correctamente." data-lang-eu="Zenbaki osoek zenbaki positiboak, negatiboak eta zeroa barne hartzen dituzte. Zenbaki horiekin egindako eragiketek arau zehatzak jarraitzen dituzte, eta funtsezkoa da horiek ezagutzea problema matematikoak behar bezala ebazteko.">Los números enteros incluyen los números positivos, negativos y el cero. Las operaciones con ellos siguen unas reglas específicas que es fundamental conocer para resolver problemas matemáticos correctamente.</p>
+
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="true">
+            <span class="icon-concept"><i class="fas fa-plus-minus"></i></span>
+            <span data-lang-es="Suma y Resta de Enteros" data-lang-eu="Osoen Batuketa eta Kenketa">Suma y Resta de Enteros</span>
+            <span class="icon-toggle"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Para sumar y restar números enteros, es fundamental conocer la <strong>regla de los signos</strong>:" data-lang-eu="Zenbaki osoak batzeko eta kentzeko, funtsezkoa da <strong>zeinuen araua</strong> ezagutzea:">Para sumar y restar números enteros, es fundamental conocer la <strong>regla de los signos</strong>:</p>
+            
+            <div class="rules-grid">
+              <div class="card-style">
+                <h4><i class="fas fa-equals icon-concept"></i><span data-lang-es="Mismos Signos" data-lang-eu="Zeinu Berdinak">Mismos Signos</span></h4>
+                <p data-lang-es="Se suman los valores absolutos y se mantiene el signo común." data-lang-eu="Balio absolutuak batu eta zeinu komuna mantentzen da.">Se suman los valores absolutos y se mantiene el signo común.</p>
+                <p class="example">(+5) + (+3) = +8<br>(-4) + (-2) = -6</p>
+              </div>
+
+              <div class="card-style">
+                <h4><i class="fas fa-not-equal icon-concept"></i><span data-lang-es="Signos Diferentes" data-lang-eu="Zeinu Desberdinak">Signos Diferentes</span></h4>
+                <p data-lang-es="Se restan los valores absolutos y se pone el signo del número con mayor valor absoluto." data-lang-eu="Balio absolutuak kendu eta balio absolutu handiena duen zenbakiaren zeinua jartzen da.">Se restan los valores absolutos y se pone el signo del número con mayor valor absoluto.</p>
+                <p class="example">(+7) + (-3) = +4<br>(-8) + (+2) = -6</p>
+              </div>
+            </div>
+
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo resuelto: 15 + (-8) - (-3)" data-lang-eu="Adibide ebatzia: 15 + (-8) - (-3)">Ejemplo resuelto: 15 + (-8) - (-3)</h4>
+              <div class="solution">
+                <strong data-lang-es="Paso a paso:" data-lang-eu="Urratsez urrats:">Paso a paso:</strong>
+                <ul>
+                  <li><span>Paso 1:</span> 15 + (-8) = 7</li>
+                  <li><span>Paso 2:</span> 7 - (-3) = 7 + 3 = 10</li>
+                  <li><strong data-lang-es="Resultado Final:" data-lang-eu="Amaierako Emaitza:">Resultado Final:</strong> <strong>10</strong></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="icon-concept"><i class="fas fa-times"></i></span>
+            <span data-lang-es="Multiplicación y División" data-lang-eu="Biderketa eta Zatiketa">Multiplicación y División</span>
+            <span class="icon-toggle"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="La multiplicación y división de enteros siguen una regla de signos muy clara:" data-lang-eu="Zenbaki osoen biderketak eta zatiketak zeinuen arau argi bat jarraitzen dute:">La multiplicación y división de enteros siguen una regla de signos muy clara:</p>
+            
+            <div class="sign-rules-grid">
+              <div class="sign-rule-card">
+                <div class="math-formula"><span class="positive">(+)</span> × <span class="positive">(+)</span> = <span class="positive">(+)</span></div>
+                <div class="description" data-lang-es="Positivo por positivo da positivo" data-lang-eu="Positibo bider positibo, emaitza positiboa da">Positivo por positivo da positivo</div>
+              </div>
+              <div class="sign-rule-card">
+                <div class="math-formula"><span class="negative">(-)</span> × <span class="negative">(-)</span> = <span class="positive">(+)</span></div>
+                <div class="description" data-lang-es="Negativo por negativo da positivo" data-lang-eu="Negatibo bider negatibo, emaitza positiboa da">Negativo por negativo da positivo</div>
+              </div>
+              <div class="sign-rule-card">
+                <div class="math-formula"><span class="positive">(+)</span> × <span class="negative">(-)</span> = <span class="negative">(-)</span></div>
+                <div class="description" data-lang-es="Positivo por negativo da negativo" data-lang-eu="Positibo bider negatibo, emaitza negatiboa da">Positivo por negativo da negativo</div>
+              </div>
+              <div class="sign-rule-card">
+                <div class="math-formula"><span class="negative">(-)</span> × <span class="positive">(+)</span> = <span class="negative">(-)</span></div>
+                <div class="description" data-lang-es="Negativo por positivo da negativo" data-lang-eu="Negatibo bider positibo, emaitza negatiboa da">Negativo por positivo da negativo</div>
+              </div>
+            </div>
+
+            <div class="key-takeaway" data-lang-es="En resumen: <strong>signos iguales</strong> dan resultado <strong>positivo</strong>, y <strong>signos diferentes</strong> dan resultado <strong>negativo</strong>. ¡Esta regla se aplica tanto a la multiplicación como a la división!" data-lang-eu="Laburbilduz: <strong>zeinu berdinak</strong> badira, emaitza <strong>positiboa</strong> da, eta <strong>zeinu desberdinak</strong> badira, emaitza <strong>negatiboa</strong> da. Arau hau biderketan zein zatiketan aplikatzen da!">En resumen: <strong>signos iguales</strong> dan resultado <strong>positivo</strong>, y <strong>signos diferentes</strong> dan resultado <strong>negativo</strong>. ¡Esta regla se aplica tanto a la multiplicación como a la división!</div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="icon-concept"><i class="fas fa-layer-group"></i></span>
+            <span data-lang-es="Operaciones Combinadas" data-lang-eu="Eragiketa Konbinatuak">Operaciones Combinadas</span>
+            <span class="icon-toggle"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Cuando tenemos varias operaciones juntas, seguimos un orden de prioridad, conocido como <strong>jerarquía de operaciones</strong>:" data-lang-eu="Hainbat eragiketa batera ditugunean, lehentasun-ordena bati jarraitzen diogu, <strong>eragiketen hierarkia</strong> deritzonari:">Cuando tenemos varias operaciones juntas, seguimos un orden de prioridad, conocido como <strong>jerarquía de operaciones</strong>:</p>
+            
+            <div class="priority-steps">
+                <div class="priority-step" data-lang-es="<b>Paréntesis y corchetes</b>, desde dentro hacia afuera." data-lang-eu="<b>Parentesiak eta kortxeteak</b>, barrutik kanpora."><b>Paréntesis y corchetes</b>, desde dentro hacia afuera.</div>
+                <div class="priority-step" data-lang-es="<b>Multiplicaciones y divisiones</b>, en orden de izquierda a derecha." data-lang-eu="<b>Biderketak eta zatiketak</b>, ezkerretik eskuinera."><b>Multiplicaciones y divisiones</b>, en orden de izquierda a derecha.</div>
+                <div class="priority-step" data-lang-es="<b>Sumas y restas</b>, en orden de izquierda a derecha." data-lang-eu="<b>Batuketak eta kenketak</b>, ezkerretik eskuinera."><b>Sumas y restas</b>, en orden de izquierda a derecha.</div>
+            </div>
+
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: 2 × (5 - 8) + 10 ÷ (-5)" data-lang-eu="Adibidea: 2 × (5 - 8) + 10 ÷ (-5)">Ejemplo: 2 × (5 - 8) + 10 ÷ (-5)</h4>
+              <div class="solution">
+                <strong data-lang-es="Seguimos la jerarquía:" data-lang-eu="Hierarkiari jarraitzen diogu:">Seguimos la jerarquía:</strong>
+                <ul>
+                  <li><span>Paso 1 (Paréntesis):</span> (5 - 8) = -3  &nbsp;<em>(La operación queda: 2 × (-3) + 10 ÷ (-5))</em></li>
+                  <li><span>Paso 2 (Mult. y Div.):</span> 2 × (-3) = -6 &nbsp; y &nbsp; 10 ÷ (-5) = -2 &nbsp;<em>(La operación queda: -6 + (-2))</em></li>
+                  <li><span>Paso 3 (Suma):</span> -6 + (-2) = -8</li>
+                  <li><strong data-lang-es="Resultado Final:" data-lang-eu="Amaierako Emaitza:">Resultado Final:</strong> <strong>-8</strong></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-header" aria-expanded="false">
+              <span class="icon-concept"><i class="fas fa-calculator"></i></span>
+              <span data-lang-es="Calculadora de Enteros" data-lang-eu="Osoen Kalkulagailua">Calculadora de Enteros</span>
+              <span class="icon-toggle"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-content">
+              <p data-lang-es="Utiliza esta calculadora para practicar operaciones con números enteros:" data-lang-eu="Erabili kalkulagailu hau zenbaki osoekin eragiketak praktikatzeko:">Utiliza esta calculadora para practicar operaciones con números enteros:</p>
+              
+              <div class="interactive-calculator">
+                <div class="calc-input">
+                  <input type="number" id="intNumber1" data-placeholder-es="Nº 1 (ej: -5)" data-placeholder-eu="1. zbk (adib: -5)">
+                  <select id="intOperation" aria-label="Operación">
+                    <option value="+">+</option>
+                    <option value="-">−</option>
+                    <option value="*">×</option>
+                    <option value="/">÷</option>
+                  </select>
+                  <input type="number" id="intNumber2" data-placeholder-es="Nº 2 (ej: 3)" data-placeholder-eu="2. zbk (adib: 3)">
+                </div>
+                <div class="calc-buttons">
+                  <button id="calculateButton" class="button-primary">
+                    <i class="fas fa-equals"></i>
+                    <span data-lang-es="Calcular" data-lang-eu="Kalkulatu">Calcular</span>
+                  </button>
+                </div>
+                <div id="intResult" class="result-box" style="min-height: 58px;"></div>
+                <p class="calc-note">
+                  <i class="fas fa-info-circle"></i>
+                  <span data-lang-es="Recuerda: en la división, si el segundo número es 0, la operación no está definida." data-lang-eu="Gogoratu: zatiketan, bigarren zenbakia 0 bada, eragiketa ez dago zehaztuta.">Recuerda: en la división, si el segundo número es 0, la operación no está definida.</span>
+                </p>
+              </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="icon-concept"><i class="fas fa-pencil-alt"></i></span>
+            <span data-lang-es="Ejercicios Propuestos" data-lang-eu="Proposatutako Ariketak">Ejercicios Propuestos</span>
+            <span class="icon-toggle"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="accordion-content">
+            <ol class="exercises-list">
+              <li>
+                <p><strong>(-8) + 5 - (-3) = ?</strong></p>
+                <button class="toggle-hint-button" data-target="#hint1" aria-expanded="false">
+                  <i class="fas fa-lightbulb"></i> <span data-lang-es="Ver pista" data-lang-es-hide="Ocultar pista" data-lang-eu="Pista ikusi" data-lang-eu-hide="Pista ezkutatu">Ver pista</span>
+                </button>
+                <div class="hint-content" id="hint1">
+                  <p data-lang-es="Recuerda que restar un número negativo es lo mismo que sumar su positivo: <strong>-(-3)</strong> es igual que <strong>+3</strong>." data-lang-eu="Gogoratu zenbaki negatibo bat kentzea haren positiboa batzearen berdina dela: <strong>-(-3)</strong> eta <strong>+3</strong> berdinak dira.">Recuerda que restar un número negativo es lo mismo que sumar su positivo: <strong>-(-3)</strong> es igual que <strong>+3</strong>.</p>
+                </div>
+              </li>
+              <li>
+                <p><strong>4 × (-6) ÷ 2 = ?</strong></p>
+                <button class="toggle-hint-button" data-target="#hint2" aria-expanded="false">
+                  <i class="fas fa-lightbulb"></i> <span data-lang-es="Ver pista" data-lang-es-hide="Ocultar pista" data-lang-eu="Pista ikusi" data-lang-eu-hide="Pista ezkutatu">Ver pista</span>
+                </button>
+                <div class="hint-content" id="hint2">
+                  <p data-lang-es="Como la multiplicación y la división tienen la misma prioridad, se resuelven de izquierda a derecha. Primero haz la multiplicación." data-lang-eu="Biderketak eta zatiketak lehentasun bera dutenez, ezkerretik eskuinera ebazten dira. Egin biderketa lehenik.">Como la multiplicación y la división tienen la misma prioridad, se resuelven de izquierda a derecha. Primero haz la multiplicación.</p>
+                </div>
+              </li>
+              <li>
+                <p><strong>2 × (3 - 7) + 10 = ?</strong></p>
+                <button class="toggle-hint-button" data-target="#hint3" aria-expanded="false">
+                  <i class="fas fa-lightbulb"></i> <span data-lang-es="Ver pista" data-lang-es-hide="Ocultar pista" data-lang-eu="Pista ikusi" data-lang-eu-hide="Pista ezkutatu">Ver pista</span>
+                </button>
+                <div class="hint-content" id="hint3">
+                  <p data-lang-es="La jerarquía manda: primero resuelve la operación dentro del paréntesis, luego la multiplicación y, finalmente, la suma." data-lang-eu="Hierarkiak agintzen du: lehenik, ebatzi parentesi barruko eragiketa; gero, biderketa; eta, azkenik, batuketa.">La jerarquía manda: primero resuelve la operación dentro del paréntesis, luego la multiplicación y, finalmente, la suma.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const calculateButton = document.getElementById('calculateButton');
+      if (calculateButton) {
+        calculateButton.addEventListener('click', calculateIntegers);
+      }
+
+      // --- CORRECCIÓ: Lógica local para las Pistas ---
+      const hintToggles = document.querySelectorAll('.toggle-hint-button');
+      hintToggles.forEach(button => {
+        const targetId = button.getAttribute('data-target');
+        const hintContent = document.getElementById(targetId.replace('#', ''));
+        
+        if (hintContent) {
+          // Aseguramos el estado inicial con todas las propiedades necesarias
+          hintContent.style.overflow = 'hidden';
+          hintContent.style.maxHeight = '0px';
+          hintContent.style.paddingTop = '0';
+          hintContent.style.paddingBottom = '0';
+          hintContent.style.marginTop = '0';
+          hintContent.style.opacity = '0';
+          hintContent.style.visibility = 'hidden';
+          hintContent.style.transition = 'all 0.4s ease-out';
+
+          button.addEventListener('click', () => {
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            
+            if (isExpanded) {
+              // Colapsar
+              hintContent.style.opacity = '0';
+              hintContent.style.maxHeight = '0px';
+              hintContent.style.paddingTop = '0';
+              hintContent.style.paddingBottom = '0';
+              hintContent.style.marginTop = '0';
+              // Esperar a que termine la transición para ocultarlo completamente
+              setTimeout(() => {
+                hintContent.style.visibility = 'hidden';
+              }, 400); // 400ms = 0.4s
+              button.setAttribute('aria-expanded', 'false');
+            } else {
+              // Expandir
+              hintContent.style.visibility = 'visible';
+              hintContent.style.opacity = '1';
+              hintContent.style.maxHeight = hintContent.scrollHeight + 'px';
+              hintContent.style.paddingTop = '0.8rem';
+              hintContent.style.paddingBottom = '0.8rem';
+              hintContent.style.marginTop = '0.5rem';
+              button.setAttribute('aria-expanded', 'true');
+            }
+            
+            // Actualizar el texto del botón
+            const span = button.querySelector('span');
+            if (span) {
+              const lang = document.documentElement.lang || 'es';
+              if (isExpanded) {
+                span.textContent = lang === 'es' ? 'Ver pista' : 'Pista ikusi';
+              } else {
+                span.textContent = lang === 'es' ? 'Ocultar pista' : 'Pista ezkutatu';
+              }
+            }
+          });
+        }
+      });
+    });
+
+    function calculateIntegers() {
+      const num1Input = document.getElementById('intNumber1');
+      const num2Input = document.getElementById('intNumber2');
+      const operation = document.getElementById('intOperation').value;
+      const resultBox = document.getElementById('intResult');
+      
+      resultBox.innerHTML = '';
+      resultBox.className = 'result-box';
+
+      const num1 = parseInt(num1Input.value, 10);
+      const num2 = parseInt(num2Input.value, 10);
+
+      if (isNaN(num1) || isNaN(num2)) {
+        resultBox.innerHTML = `<p data-lang-es="Por favor, introduce números válidos." data-lang-eu="Mesedez, sartu baliozko zenbakiak.">Por favor, introduce números válidos.</p>`;
+        resultBox.classList.add('error');
+        window.langUtils?.applyLanguage(window.langUtils.getCurrentLang());
+        return;
+      }
+      
+      if (operation === '/' && num2 === 0) {
+        resultBox.innerHTML = `<p data-lang-es="Error: No se puede dividir por cero." data-lang-eu="Errorea: Ezin da zeroz zatitu.">Error: No se puede dividir por cero.</p>`;
+        resultBox.classList.add('error');
+        window.langUtils?.applyLanguage(window.langUtils.getCurrentLang());
+        return;
+      }
+      
+      let result;
+      const operationSymbols = {'+': '+', '-': '−', '*': '×', '/': '÷'};
+      const operationSymbol = operationSymbols[operation];
+      
+      switch(operation) {
+        case '+': result = num1 + num2; break;
+        case '-': result = num1 - num2; break;
+        case '*': result = num1 * num2; break;
+        case '/': result = num1 / num2; break;
+      }
+      
+      const finalResult = Number.isInteger(result) ? result : result.toFixed(2);
+      
+      resultBox.innerHTML = `<p>${num1} ${operationSymbol} ${num2} = <strong>${finalResult}</strong></p>`;
+      resultBox.classList.add('success');
+    }
+  </script>
+</body>
+</html>

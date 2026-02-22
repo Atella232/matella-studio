@@ -84,24 +84,24 @@
     margin-bottom: var(--space-6);
 }
 
-.fraction-step {
+.equivalence-lab .fraction-step {
     padding: var(--space-4);
     background: var(--color-bg-tertiary);
     border-radius: var(--radius-lg);
 }
 
-.fraction-step.result {
+.equivalence-lab .fraction-step.result {
     background: rgba(37, 99, 235, 0.1);
     border: 2px solid var(--color-primary);
 }
 
-.operator {
+.equivalence-lab .operator {
     font-size: var(--text-2xl);
     font-weight: 800;
     color: var(--color-accent-light, #a5b4fc);
 }
 
-.fraction-display {
+.equivalence-lab .fraction-display {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -111,48 +111,48 @@
     color: var(--color-primary);
 }
 
-.fraction-display .numerator {
+.equivalence-lab .fraction-display .numerator {
     border-bottom: 3px solid currentColor;
     padding: 0 var(--space-3);
 }
 
-.fraction-display .denominator {
+.equivalence-lab .fraction-display .denominator {
     padding: 0 var(--space-3);
 }
 
-.simplified-form {
+.equivalence-lab .simplified-form {
     text-align: center;
     padding-top: var(--space-4);
     border-top: 1px solid var(--color-border);
 }
 
-.simplified-form p {
+.equivalence-lab .simplified-form p {
     color: var(--color-text-secondary, #94a3b8);
     margin-bottom: var(--space-2);
     font-weight: 600;
 }
 
-.simplified-form .fraction-display {
+.equivalence-lab .simplified-form .fraction-display {
     color: var(--color-success);
 }
 
-.equivalence-explanation {
+.equivalence-lab .equivalence-explanation {
     padding: var(--space-6);
     border-radius: var(--radius-lg);
 }
 
-.equivalence-explanation h4 {
+.equivalence-lab .equivalence-explanation h4 {
     margin-bottom: var(--space-3);
     color: var(--color-text-primary);
 }
 
-.equivalence-explanation p {
+.equivalence-lab .equivalence-explanation p {
     margin-bottom: var(--space-2);
     color: var(--color-text-secondary, #94a3b8);
     font-weight: 500;
 }
 
-.equivalence-explanation p:last-child {
+.equivalence-lab .equivalence-explanation p:last-child {
     margin-bottom: 0;
 }
 
@@ -161,12 +161,12 @@
         grid-template-columns: 1fr;
     }
 
-    .equivalence-formula {
+    .equivalence-lab .equivalence-formula {
         flex-direction: column;
         gap: var(--space-2);
     }
 
-    .operator {
+    .equivalence-lab .operator {
         transform: rotate(90deg);
     }
 }

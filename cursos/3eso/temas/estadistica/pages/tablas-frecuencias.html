@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Tablas de Frecuencias - Estadística" data-lang-eu="Maiztasun Taulak - Estatistika">Tablas de Frecuencias - Estadística</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-table"></i>
+            <span data-lang-es="Tablas de Frecuencias" data-lang-eu="Maiztasun Taulak">Tablas de Frecuencias</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+            <div class="nav-buttons">
+                <button class="nav-button" data-lang-es="Ejercicios" data-lang-eu="Ariketak">Ejercicios</button>
+                <button class="nav-button" data-lang-es="Herramienta" data-lang-eu="Tresna">Herramienta</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Tablas de Frecuencias" data-lang-eu="Maiztasun Taulak">Tablas de Frecuencias</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es una Tabla de Frecuencias?" data-lang-eu="Zer da Maiztasun Taula bat?">¿Qué es una Tabla de Frecuencias?</h3>
+            <p data-lang-es="Una tabla de frecuencias es una herramienta que organiza los datos de una variable estadística, mostrando cuántas veces aparece cada valor (frecuencia) y otras medidas relacionadas. Facilita el análisis y la interpretación de los datos."
+               data-lang-eu="Maiztasun taula bat aldagai estatistiko baten datuak antolatzen dituen tresna da, balio bakoitzeko zenbat aldy agertzen den (maiztasuna) eta lotutako beste neurri batzuk erakutsiz. Datuen analisi eta interpretazioa errazten du.">
+               Una tabla de frecuencias es una herramienta que organiza los datos de una variable estadística, mostrando cuántas veces aparece cada valor (frecuencia) y otras medidas relacionadas. Facilita el análisis y la interpretación de los datos.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Tipos de Frecuencias" data-lang-eu="Maiztasun Motak">Tipos de Frecuencias</h3>
+            
+            <div class="definition-box">
+                <h4 data-lang-es="Frecuencia Absoluta (fᵢ)" data-lang-eu="Maiztasun Absolutua (fᵢ)">Frecuencia Absoluta (fᵢ)</h4>
+                <p data-lang-es="Número de veces que aparece cada valor en la población o muestra. Es un número entero que indica la repetición de un dato específico."
+                   data-lang-eu="Populazioan edo laginean balio bakoitzeko zenbat aldy agertzen den. Datu zehatz baten errepikapen kopurua adierazten duen zenbaki osoa da.">
+                   Número de veces que aparece cada valor en la población o muestra. Es un número entero que indica la repetición de un dato específico.
+                </p>
+                <p class="formula" data-lang-es="<strong>Fórmula:</strong> fᵢ = número de veces que aparece el valor i"
+                   data-lang-eu="<strong>Formula:</strong> fᵢ = i balioa zenbat aldy agertzen den">
+                   <strong>Fórmula:</strong> fᵢ = número de veces que aparece el valor i
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <h4 data-lang-es="Frecuencia Relativa (hᵢ)" data-lang-eu="Maiztasun Erlatiboa (hᵢ)">Frecuencia Relativa (hᵢ)</h4>
+                <p data-lang-es="Proporción que representa cada frecuencia absoluta respecto al total. Se expresa como fracción decimal o porcentaje."
+                   data-lang-eu="Maiztasun absolutu bakoitzak guztiraiko duen proportzioa. Dezimal frakzio bezala edo ehunekoa bezala adierazten da.">
+                   Proporción que representa cada frecuencia absoluta respecto al total. Se expresa como fracción decimal o porcentaje.
+                </p>
+                <p class="formula" data-lang-es="<strong>Fórmula:</strong> \\[ h_i = \frac{f_i}{N} \\] donde N es el total de datos"
+                   data-lang-eu="<strong>Formula:</strong> \\[ h_i = \frac{f_i}{N} \\] non N datu guztien kopurua den">
+                   <strong>Fórmula:</strong> \\[ h_i = \frac{f_i}{N} \\] donde N es el total de datos
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <h4 data-lang-es="Frecuencia Absoluta Acumulada (Fᵢ)" data-lang-eu="Maiztasun Absolutua Metatua (Fᵢ)">Frecuencia Absoluta Acumulada (Fᵢ)</h4>
+                <p data-lang-es="Suma de todas las frecuencias absolutas hasta ese valor. Indica cuántos datos son menores o iguales a un valor determinado."
+                   data-lang-eu="Balio horretarako maiztasun absolutu guztien batura. Zenbat datu diren balio zehatz baten txikiagoak edo berdinak adierazten du.">
+                   Suma de todas las frecuencias absolutas hasta ese valor. Indica cuántos datos son menores o iguales a un valor determinado.
+                </p>
+                <p class="formula" data-lang-es="<strong>Fórmula:</strong> \\[ F_i = f_1 + f_2 + \dots + f_i \\]"
+                   data-lang-eu="<strong>Formula:</strong> \\[ F_i = f_1 + f_2 + \dots + f_i \\]">
+                   <strong>Fórmula:</strong> \\[ F_i = f_1 + f_2 + \dots + f_i \\]
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <h4 data-lang-es="Frecuencia Relativa Acumulada (Hᵢ)" data-lang-eu="Maiztasun Erlatiboa Metatua (Hᵢ)">Frecuencia Relativa Acumulada (Hᵢ)</h4>
+                <p data-lang-es="Suma de todas las frecuencias relativas hasta ese valor. Se expresa como proporción del total."
+                   data-lang-eu="Balio horretarako maiztasun erlatibo guztien batura. Guztiraiko proportzio bezala adierazten da.">
+                   Suma de todas las frecuencias relativas hasta ese valor. Se expresa como proporción del total.
+                </p>
+                <p class="formula" data-lang-es="<strong>Fórmula:</strong> \\[ H_i = h_1 + h_2 + \dots + h_i \\]"
+                   data-lang-eu="<strong>Formula:</strong> \\[ H_i = h_1 + h_2 + \dots + h_i \\]">
+                   <strong>Fórmula:</strong> \\[ H_i = h_1 + h_2 + \dots + h_i \\]
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Ejemplo Completo" data-lang-eu="Adibide Osoa">Ejemplo Completo</h3>
+            <p data-lang-es="Supongamos que preguntamos a 20 estudiantes por su número de hermanos. Los datos obtenidos son:"
+               data-lang-eu="Demagun 20 ikasleri anai-arreba kopurua galdetzen dugula. Lortutako datuak honako hauek dira:">
+               Supongamos que preguntamos a 20 estudiantes por su número de hermanos. Los datos obtenidos son:
+            </p>
+            <div class="data-example">
+                <p>2, 1, 0, 3, 1, 2, 1, 4, 0, 1, 2, 1, 3, 1, 0, 2, 1, 1, 2, 3</p>
+            </div>
+            
+            <div class="table-container">
+                <table class="frequency-table">
+                    <thead>
+                        <tr>
+                            <th data-lang-es="Valor (xᵢ)" data-lang-eu="Balioa (xᵢ)">Valor (xᵢ)</th>
+                            <th data-lang-es="Frec. Absoluta (fᵢ)" data-lang-eu="Maiz. Absolutua (fᵢ)">Frec. Absoluta (fᵢ)</th>
+                            <th data-lang-es="Frec. Relativa (hᵢ)" data-lang-eu="Maiz. Erlatiboa (hᵢ)">Frec. Relativa (hᵢ)</th>
+                            <th data-lang-es="Frec. Rel. (%)" data-lang-eu="Maiz. Erlat. (%)">Frec. Rel. (%)</th>
+                            <th data-lang-es="Frec. Abs. Acum. (Fᵢ)" data-lang-eu="Maiz. Abs. Metatua (Fᵢ)">Frec. Abs. Acum. (Fᵢ)</th>
+                            <th data-lang-es="Frec. Rel. Acum. (Hᵢ)" data-lang-eu="Maiz. Erlat. Metatua (Hᵢ)">Frec. Rel. Acum. (Hᵢ)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>3</td>
+                            <td>0,15</td>
+                            <td>15%</td>
+                            <td>3</td>
+                            <td>0,15</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>8</td>
+                            <td>0,40</td>
+                            <td>40%</td>
+                            <td>11</td>
+                            <td>0,55</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>0,25</td>
+                            <td>25%</td>
+                            <td>16</td>
+                            <td>0,80</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>0,15</td>
+                            <td>15%</td>
+                            <td>19</td>
+                            <td>0,95</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>1</td>
+                            <td>0,05</td>
+                            <td>5%</td>
+                            <td>20</td>
+                            <td>1,00</td>
+                        </tr>
+                        <tr style="font-weight: bold; background-color: var(--primary-color); color: white;">
+                            <td data-lang-es="TOTAL" data-lang-eu="GUZTIRA">TOTAL</td>
+                            <td>20</td>
+                            <td>1,00</td>
+                            <td>100%</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Propiedades de las Frecuencias" data-lang-eu="Maiztasunen Proprietateak">Propiedades de las Frecuencias</h3>
+            
+            <div class="properties-grid">
+                <div class="property-box">
+                    <i class="fas fa-calculator"></i>
+                    <h4 data-lang-es="Suma de Frecuencias Absolutas" data-lang-eu="Maiztasun Absolutuen Batura">Suma de Frecuencias Absolutas</h4>
+                    <p class="formula">\\[ \sum f_i = N \\]</p>
+                    <p data-lang-es="La suma de todas las frecuencias absolutas debe ser igual al número total de datos."
+                       data-lang-eu="Maiztasun absolutuen batura guztira datu kopuruarekin berdina izan behar da.">
+                       La suma de todas las frecuencias absolutas debe ser igual al número total de datos.
+                    </p>
+                </div>
+                
+                <div class="property-box">
+                    <i class="fas fa-percentage"></i>
+                    <h4 data-lang-es="Suma de Frecuencias Relativas" data-lang-eu="Maiztasun Erlatiboen Batura">Suma de Frecuencias Relativas</h4>
+                    <p class="formula">\\[ \sum h_i = 1 \\]</p>
+                    <p data-lang-es="La suma de todas las frecuencias relativas debe ser igual a 1 (o 100%)."
+                       data-lang-eu="Maiztasun erlatiboen batura 1 (edo %100) izan behar da.">
+                       La suma de todas las frecuencias relativas debe ser igual a 1 (o 100%).
+                    </p>
+                </div>
+                
+                <div class="property-box">
+                    <i class="fas fa-sort-numeric-up"></i>
+                    <h4 data-lang-es="Suma de Frecuencias Acumuladas" data-lang-eu="Maiztasun Metatuen Batura">Suma de Frecuencias Acumuladas</h4>
+                    <p class="formula">\\[ \sum H_i = 1 \\]</p>
+                    <p data-lang-es="La suma de las frecuencias relativas acumuladas debe ser igual a 1."
+                       data-lang-eu="Maiztasun erlatibo metatuen batura 1 izan behar da.">
+                       La suma de las frecuencias relativas acumuladas debe ser igual a 1.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Representaciones Gráficas" data-lang-eu="Irudikapen Grafikoak">Representaciones Gráficas</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-chart-bar icon-concept"></i>
+                        <span data-lang-es="Diagrama de Barras" data-lang-eu="Barra Diagrama">Diagrama de Barras</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Se utiliza para variables cualitativas y cuantitativas discretas. Cada valor se representa con una barra cuya altura es proporcional a su frecuencia."
+                           data-lang-eu="Aldagai kualitatibo eta kuantitatibo diskretuetarako erabiltzen da. Balio bakoitza barra batez irudikatzen da, altuera maiztasunarekiko proportzionala dena.">
+                           Se utiliza para variables cualitativas y cuantitativas discretas. Cada valor se representa con una barra cuya altura es proporcional a su frecuencia.
+                        </p>
+                        <p class="example" data-lang-es="<b>Uso:</b> Mostrar la distribución de calificaciones, número de hermanos, tipo de sangre."
+                           data-lang-eu="<b>Erabilera:</b> Noten distribuzioa, anai-arreba kopurua, odol taldea erakusteko.">
+                           <b>Uso:</b> Mostrar la distribución de calificaciones, número de hermanos, tipo de sangre.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-chart-pie icon-concept"></i>
+                        <span data-lang-es="Diagrama de Sectores (Circular)" data-lang-eu="Sektor Diagrama (Zirkularra)">Diagrama de Sectores (Circular)</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Se utiliza principalmente para variables cualitativas. Cada categoría ocupa un sector proporcional a su frecuencia relativa."
+                           data-lang-eu="Nagusiki aldagai kualitatiboetarako erabiltzen da. Kategoria bakoitzak maiztasun erlatiboarekiko proportzionala den sektore bat hartzen du.">
+                           Se utiliza principalmente para variables cualitativas. Cada categoría ocupa un sector proporcional a su frecuencia relativa.
+                        </p>
+                        <p class="example" data-lang-es="<b>Uso:</b> Mostrar la distribución de colores de ojos, estado civil, preferencias deportivas."
+                           data-lang-eu="<b>Erabilera:</b> Begien koloreen distribuzioa, zibil egoera, kirol preferentziak erakusteko.">
+                           <b>Uso:</b> Mostrar la distribución de colores de ojos, estado civil, preferencias deportivas.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-chart-area icon-concept"></i>
+                        <span data-lang-es="Histograma" data-lang-eu="Histogramak">Histograma</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Se utiliza para variables cuantitativas continuas o datos agrupados en intervalos. Las barras están unidas y representan la frecuencia de cada intervalo."
+                           data-lang-eu="Aldagai kuantitatibo jarraituentzako edo interbaloetan taldekatutako datuentzako erabiltzen da. Barreak lotuta daude eta interbalo bakoitzeko maiztasuna adierazten dute.">
+                           Se utiliza para variables cuantitativas continuas o datos agrupados en intervalos. Las barras están unidas y representan la frecuencia de cada intervalo.
+                        </p>
+                        <p class="example" data-lang-es="<b>Uso:</b> Mostrar la distribución de alturas, pesos, calificaciones agrupadas."
+                           data-lang-eu="<b>Erabilera:</b> Altueren, pisuen, taldekatutako noten distribuzioa erakusteko.">
+                           <b>Uso:</b> Mostrar la distribución de alturas, pesos, calificaciones agrupadas.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-chart-line icon-concept"></i>
+                        <span data-lang-es="Polígono de Frecuencias" data-lang-eu="Maiztasun Poligonoa">Polígono de Frecuencias</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Se obtiene uniendo los puntos medios de las barras de un diagrama de barras o histograma. Es útil para comparar distribuciones."
+                           data-lang-eu="Barra diagrama edo histograma baten barraren puntu erdikoak lotuz lortzen da. Distributzioak konparatzeko erabilgarria da.">
+                           Se obtiene uniendo los puntos medios de las barras de un diagrama de barras o histograma. Es útil para comparar distribuciones.
+                        </p>
+                        <p class="example" data-lang-es="<b>Uso:</b> Analizar tendencias en datos temporales, comparar grupos."
+                           data-lang-eu="<b>Erabilera:</b> Denborazko datuetako trendak aztertzeko, taldeak konparatzeko.">
+                           <b>Uso:</b> Analizar tendencias en datos temporales, comparar grupos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section warning-section">
+            <h3><i class="fas fa-exclamation-triangle"></i> <span data-lang-es="Errores Típicos" data-lang-eu="Ohiko Akatsak">Errores Típicos</span></h3>
+            <ul>
+                <li data-lang-es="<b>No verificar que la suma de frecuencias absolutas sea igual al total:</b> Siempre comprobar que ∑fᵢ = N"
+                   data-lang-eu="<b>Maiztasun absolutuen batura guztira bezala dagoela ez egiaztatzea:</b> Beti egiaztatu ∑fᵢ = N dela">
+                   <b>No verificar que la suma de frecuencias absolutas sea igual al total:</b> Siempre comprobar que ∑fᵢ = N
+                </li>
+                <li data-lang-es="<b>Confundir frecuencia absoluta con relativa:</b> La absoluta es un conteo, la relativa es una proporción"
+                   data-lang-eu="<b>Maiztasun absolutua erlatiboarekin nahastea:</b> Absolutua kontaketak, erlatiboa proportzioa da">
+                   <b>Confundir frecuencia absoluta con relativa:</b> La absoluta es un conteo, la relativa es una proporción
+                </li>
+                <li data-lang-es="<b>No comprobar que la suma de frecuencias relativas sea 1:</b> Error común que indica mistake en los cálculos"
+                   data-lang-eu="<b>Maiztasun erlatiboen batura 1 dela ez egiaztatzea:</b> Kalkuluetan akats bat dagoela adierazten duen ohiko akatsa">
+                   <b>No comprobar que la suma de frecuencias relativas sea 1:</b> Error común que indica mistake en los cálculos
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

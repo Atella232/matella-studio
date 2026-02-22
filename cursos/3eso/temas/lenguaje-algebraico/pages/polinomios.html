@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Polinomios - Lenguaje Algebraico" data-lang-eu="Polinomioak - Hizkuntza Aljebraikoa">Polinomios - Lenguaje Algebraico</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-calculator"></i>
+            <span data-lang-es="Polinomios" data-lang-eu="Polinomioak">Polinomios</span>
+        </div>
+        <nav>
+            <button class="action-button" data-lang-es="Ejercicios" data-lang-eu="Ariketa">Ejercicios</button>
+            <button class="action-button" data-lang-es="Herramienta" data-lang-eu="Tresna">Herramienta</button>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Polinomios" data-lang-eu="Polinomioak">Polinomios</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es un Polinomio?" data-lang-eu="Zer da Polinomio bat?">¿Qué es un Polinomio?</h3>
+            <p data-lang-es="Un <b>polinomio</b> es una expresión algebraica formada por la suma o resta de varios monomios (cuatro o más)."
+               data-lang-eu="<b>Polinomio bat</b> monomio (lau edo gehiago) askoren batura edo kenketaz osatutako adierazpen aljebraiko bat da.">
+               Un <b>polinomio</b> es una expresión algebraica formada por la suma o resta de varios monomios (cuatro o más).
+            </p>
+            <p class="key-takeaway" data-lang-es="<b>Ejemplo:</b> $P(x) = 3x^3 + 2x^2 - 5x + 7$ es un polinomio de grado 3 en la variable x."
+               data-lang-eu="<b>Adibidea:</b> $P(x) = 3x^3 + 2x^2 - 5x + 7$ x aldagaian 3. mailako polinomio bat da.">
+               <b>Ejemplo:</b> $P(x) = 3x^3 + 2x^2 - 5x + 7$ es un polinomio de grado 3 en la variable x.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Valor Numérico de un Polinomio" data-lang-eu="Polinomio Baten Balio Zenbakia">Valor Numérico de un Polinomio</h3>
+            <p data-lang-es="El <b>valor numérico</b> de un polinomio es el resultado que obtenemos al sustituir las variables por valores numéricos concretos."
+               data-lang-eu="<b>Polinomio baten balio zenbakia</b> aldagaiak balio zenbaki zehatz batekin ordezkatutakoan lortzen dugun emaitza da.">
+               El <b>valor numérico</b> de un polinomio es el resultado que obtenemos al sustituir las variables por valores numéricos concretos.
+            </p>
+            <div class="formula-box">
+                <p data-lang-es="<b>Proceso:</b><br>1. Sustituir cada variable por su valor<br>2. Realizar las operaciones respetando el orden<br>3. Simplificar el resultado"
+                   data-lang-eu="<b>Prozesua:</b><br>1. Aldagai bakoitzaren balioarekin ordezkatu<br>2. Ordena errespetatuz eragiketak egin<br>3. Emaitza sinplifikatu">
+                   <b>Proceso:</b><br>1. Sustituir cada variable por su valor<br>2. Realizar las operaciones respetando el orden<br>3. Simplificar el resultado
+                </p>
+            </div>
+            <p class="example">
+                <em data-lang-es="<b>Ejemplo:</b> Dado $P(x) = x^2 + 3x - 4$, calcular $P(2)$:<br><br>
+                $P(2) = (2)^2 + 3(2) - 4$<br>
+                $P(2) = 4 + 6 - 4$<br>
+                $P(2) = 6$<br><br>
+                <b>Otro ejemplo:</b> Dado $Q(a,b) = 2a + 3ab - b^2$, calcular $Q(1,3)$:<br><br>
+                $Q(1,3) = 2(1) + 3(1)(3) - (3)^2$<br>
+                $Q(1,3) = 2 + 9 - 9$<br>
+                $Q(1,3) = 2$"
+                   data-lang-eu="<b>Adibidea:</b> $P(x) = x^2 + 3x - 4$ polinomioa izanda, $P(2)$ kalkula:<br><br>
+                $P(2) = (2)^2 + 3(2) - 4$<br>
+                $P(2) = 4 + 6 - 4$<br>
+                $P(2) = 6$<br><br>
+                <b>Beste adibide bat:</b> $Q(a,b) = 2a + 3ab - b^2$ izanda, $Q(1,3)$ kalkula:<br><br>
+                $Q(1,3) = 2(1) + 3(1)(3) - (3)^2$<br>
+                $Q(1,3) = 2 + 9 - 9$<br>
+                $Q(1,3) = 2$">
+                   <b>Ejemplo:</b> Dado $P(x) = x^2 + 3x - 4$, calcular $P(2)$:<br><br>
+                $P(2) = (2)^2 + 3(2) - 4$<br>
+                $P(2) = 4 + 6 - 4$<br>
+                $P(2) = 6$<br><br>
+                <b>Otro ejemplo:</b> Dado $Q(a,b) = 2a + 3ab - b^2$, calcular $Q(1,3)$:<br><br>
+                $Q(1,3) = 2(1) + 3(1)(3) - (3)^2$<br>
+                $Q(1,3) = 2 + 9 - 9$<br>
+                $Q(1,3) = 2$
+                </em>
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Suma de Polinomios" data-lang-eu="Polinomioen Batura">Suma de Polinomios</h3>
+            <p data-lang-es="Para <b>sumar polinomios</b>, agrupamos los términos semejantes y sumamos sus coeficientes."
+               data-lang-eu="<b>Polinomioak batu</b> egiteko, gai antzekoak taldekatzen ditugu eta koefizienteak batzen ditugu.">
+               Para <b>sumar polinomios</b>, agrupamos los términos semejantes y sumamos sus coeficientes.
+            </p>
+            <div class="formula-box">
+                <p data-lang-es="<b>Regla:</b> $(a_1x^n + ... + a_0) + (b_1x^n + ... + b_0) = (a_1+b_1)x^n + ... + (a_0+b_0)$"
+                   data-lang-eu="<b>Araua:</b> $(a_1x^n + ... + a_0) + (b_1x^n + ... + b_0) = (a_1+b_1)x^n + ... + (a_0+b_0)$">
+                   <b>Regla:</b> $(a_1x^n + ... + a_0) + (b_1x^n + ... + b_0) = (a_1+b_1)x^n + ... + (a_0+b_0)$
+                </p>
+            </div>
+            <div class="example">
+                <p data-lang-es="<b>Ejemplo:</b><br>
+                $P(x) = 2x^3 + 3x^2 - x + 5$<br>
+                $Q(x) = x^3 - 2x^2 + 4x - 3$<br><br>
+                $P(x) + Q(x) = (2x^3 + x^3) + (3x^2 - 2x^2) + (-x + 4x) + (5 - 3)$<br>
+                $P(x) + Q(x) = 3x^3 + x^2 + 3x + 2$"
+                   data-lang-eu="<b>Adibidea:</b><br>
+                $P(x) = 2x^3 + 3x^2 - x + 5$<br>
+                $Q(x) = x^3 - 2x^2 + 4x - 3$<br><br>
+                $P(x) + Q(x) = (2x^3 + x^3) + (3x^2 - 2x^2) + (-x + 4x) + (5 - 3)$<br>
+                $P(x) + Q(x) = 3x^3 + x^2 + 3x + 2$">
+                   <b>Ejemplo:</b><br>
+                $P(x) = 2x^3 + 3x^2 - x + 5$<br>
+                $Q(x) = x^3 - 2x^2 + 4x - 3$<br><br>
+                $P(x) + Q(x) = (2x^3 + x^3) + (3x^2 - 2x^2) + (-x + 4x) + (5 - 3)$<br>
+                $P(x) + Q(x) = 3x^3 + x^2 + 3x + 2$
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Resta de Polinomios" data-lang-eu="Polinomioen Kenketa">Resta de Polinomios</h3>
+            <p data-lang-es="Para <b>restar polinomios</b>, cambiamos los signos de todos los términos del segundo polinomio y luego sumamos."
+               data-lang-eu="<b>Polinomioak kentzeko</b>, bigarren polinomioaren gai guztien zeinuak aldatzen ditugu eta ondoren batzen ditugu.">
+               Para <b>restar polinomios</b>, cambiamos los signos de todos los términos del segundo polinomio y luego sumamos.
+            </p>
+            <div class="formula-box">
+                <p data-lang-es="<b>Proceso:</b> $P(x) - Q(x) = P(x) + (-Q(x))$"
+                   data-lang-eu="<b>Prozesua:</b> $P(x) - Q(x) = P(x) + (-Q(x))$">
+                   <b>Proceso:</b> $P(x) - Q(x) = P(x) + (-Q(x))$
+                </p>
+            </div>
+            <div class="example">
+                <p data-lang-es="<b>Ejemplo:</b><br>
+                $P(x) = 3x^3 + 2x^2 - x + 1$<br>
+                $Q(x) = x^3 - 5x^2 + 3x + 2$<br><br>
+                $P(x) - Q(x) = (3x^3 + 2x^2 - x + 1) - (x^3 - 5x^2 + 3x + 2)$<br>
+                $P(x) - Q(x) = 3x^3 + 2x^2 - x + 1 - x^3 + 5x^2 - 3x - 2$<br>
+                $P(x) - Q(x) = (3x^3 - x^3) + (2x^2 + 5x^2) + (-x - 3x) + (1 - 2)$<br>
+                $P(x) - Q(x) = 2x^3 + 7x^2 - 4x - 1$"
+                   data-lang-eu="<b>Adibidea:</b><br>
+                $P(x) = 3x^3 + 2x^2 - x + 1$<br>
+                $Q(x) = x^3 - 5x^2 + 3x + 2$<br><br>
+                $P(x) - Q(x) = (3x^3 + 2x^2 - x + 1) - (x^3 - 5x^2 + 3x + 2)$<br>
+                $P(x) - Q(x) = 3x^3 + 2x^2 - x + 1 - x^3 + 5x^2 - 3x - 2$<br>
+                $P(x) - Q(x) = (3x^3 - x^3) + (2x^2 + 5x^2) + (-x - 3x) + (1 - 2)$<br>
+                $P(x) - Q(x) = 2x^3 + 7x^2 - 4x - 1$">
+                   <b>Ejemplo:</b><br>
+                $P(x) = 3x^3 + 2x^2 - x + 1$<br>
+                $Q(x) = x^3 - 5x^2 + 3x + 2$<br><br>
+                $P(x) - Q(x) = (3x^3 + 2x^2 - x + 1) - (x^3 - 5x^2 + 3x + 2)$<br>
+                $P(x) - Q(x) = 3x^3 + 2x^2 - x + 1 - x^3 + 5x^2 - 3x - 2$<br>
+                $P(x) - Q(x) = (3x^3 - x^3) + (2x^2 + 5x^2) + (-x - 3x) + (1 - 2)$<br>
+                $P(x) - Q(x) = 2x^3 + 7x^2 - 4x - 1$
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Multiplicación de Polinomios" data-lang-eu="Polinomioen Biderketa">Multiplicación de Polinomios</h3>
+            <p data-lang-es="Para <b>multiplicar polinomios</b>, aplicamos la <b>propiedad distributiva</b>: cada término del primer polinomio se multiplica por cada término del segundo polinomio."
+               data-lang-eu="<b>Polinomioak biderkatzeko</b>, <b>banaketa propietatea</b> aplikatzen dugu: lehenengo polinomioaren gai bakoitza bigarren polinomioaren gai bakoitzarekin biderkatzen da.">
+               Para <b>multiplicar polinomios</b>, aplicamos la <b>propiedad distributiva</b>: cada término del primer polinomio se multiplica por cada término del segundo polinomio.
+            </p>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-paragraph icon-concept"></i>
+                        <span data-lang-es="Método: Cada término por cada término" data-lang-eu="Metodoa: Gai bakoitza gai bakoitzarekin">Método: Cada término por cada término</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="formula-box">
+                            <p data-lang-es="<b>Ejemplo:</b><br>
+                            $P(x) = 2x + 3$<br>
+                            $Q(x) = x - 1$<br><br>
+                            $P(x) \cdot Q(x) = (2x + 3)(x - 1)$<br>
+                            $= 2x \cdot x + 2x \cdot (-1) + 3 \cdot x + 3 \cdot (-1)$<br>
+                            $= 2x^2 - 2x + 3x - 3$<br>
+                            $= 2x^2 + x - 3$"
+                               data-lang-eu="<b>Adibidea:</b><br>
+                            $P(x) = 2x + 3$<br>
+                            $Q(x) = x - 1$<br><br>
+                            $P(x) \cdot Q(x) = (2x + 3)(x - 1)$<br>
+                            $= 2x \cdot x + 2x \cdot (-1) + 3 \cdot x + 3 \cdot (-1)$<br>
+                            $= 2x^2 - 2x + 3x - 3$<br>
+                            $= 2x^2 + x - 3$">
+                               <b>Ejemplo:</b><br>
+                            $P(x) = 2x + 3$<br>
+                            $Q(x) = x - 1$<br><br>
+                            $P(x) \cdot Q(x) = (2x + 3)(x - 1)$<br>
+                            $= 2x \cdot x + 2x \cdot (-1) + 3 \cdot x + 3 \cdot (-1)$<br>
+                            $= 2x^2 - 2x + 3x - 3$<br>
+                            $= 2x^2 + x - 3$
+                            </p>
+                        </div>
+                        <p data-lang-es="<b>Pasos:</b><br>1. Multiplicar cada término del primer polinomio por cada término del segundo<br>2. Sumar todos los productos obtenidos<br>3. Simplificar sumando términos semejantes"
+                           data-lang-eu="<b>Pausuak:</b><br>1. Lehenengo polinomioaren gai bakoitza bigarren polinomioaren gai bakoitzarekin biderkatu<br>2. Lortutako produktu guztiak batu<br3> Gai antzekoak batuz sinplifikatu">
+                           <b>Pasos:</b><br>1. Multiplicar cada término del primer polinomio por cada término del segundo<br>2. Sumar todos los productos obtenidos<br>3. Simplificar sumando términos semejantes
+                        </p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-star icon-concept"></i>
+                        <span data-lang-es="Ejemplo más complejo" data-lang-eu="Adibide konplexuago bat">Ejemplo más complejo</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="<b>Ejemplo:</b><br>
+                        $P(x) = x^2 + 2x - 1$<br>
+                        $Q(x) = x + 3$<br><br>
+                        $(x^2 + 2x - 1)(x + 3)$<br><br>
+                        $= x^2(x + 3) + 2x(x + 3) - 1(x + 3)$<br>
+                        $= x^3 + 3x^2 + 2x^2 + 6x - x - 3$<br>
+                        $= x^3 + (3x^2 + 2x^2) + (6x - x) - 3$<br>
+                        $= x^3 + 5x^2 + 5x - 3$"
+                           data-lang-eu="<b>Adibidea:</b><br>
+                        $P(x) = x^2 + 2x - 1$<br>
+                        $Q(x) = x + 3$<br><br>
+                        $(x^2 + 2x - 1)(x + 3)$<br><br>
+                        $= x^2(x + 3) + 2x(x + 3) - 1(x + 3)$<br>
+                        $= x^3 + 3x^2 + 2x^2 + 6x - x - 3$<br>
+                        $= x^3 + (3x^2 + 2x^2) + (6x - x) - 3$<br>
+                        $= x^3 + 5x^2 + 5x - 3$">
+                           <b>Ejemplo:</b><br>
+                        $P(x) = x^2 + 2x - 1$<br>
+                        $Q(x) = x + 3$<br><br>
+                        $(x^2 + 2x - 1)(x + 3)$<br><br>
+                        $= x^2(x + 3) + 2x(x + 3) - 1(x + 3)$<br>
+                        $= x^3 + 3x^2 + 2x^2 + 6x - x - 3$<br>
+                        $= x^3 + (3x^2 + 2x^2) + (6x - x) - 3$<br>
+                        $= x^3 + 5x^2 + 5x - 3$
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="División de Polinomios (por Monomios)" data-lang-eu="Polinomioen Zatiketa (Monomioez)">División de Polinomios (por Monomios)</h3>
+            <p data-lang-es="En 3º ESO, la <b>división de polinomios se limita a dividir un polinomio por un monomio</b>."
+               data-lang-eu="3. DBHn, <b>polinomioen zatiketa monomioez zatitzera mugatzen da</b>.">
+               En 3º ESO, la <b>división de polinomios se limita a dividir un polinomio por un monomio</b>.
+            </p>
+            <div class="formula-box">
+                <p data-lang-es="<b>Proceso:</b> Dividir cada término del polinomio por el monomio"
+                   data-lang-eu="<b>Prozesua:</b> Polinomioaren gai bakoitza monomioez zatitu">
+                   <b>Proceso:</b> Dividir cada término del polinomio por el monomio
+                </p>
+            </div>
+            <p class="example">
+                <em data-lang-es="<b>Ejemplo:</b><br>
+                $(6x^3 + 9x^2 - 3x) \div 3x$<br><br>
+                $= \frac{6x^3}{3x} + \frac{9x^2}{3x} + \frac{-3x}{3x}$<br>
+                $= 2x^2 + 3x - 1$<br><br>
+                <b>Verificación:</b> $2x^2 + 3x - 1$ multiplicado por $3x$ debe dar $6x^3 + 9x^2 - 3x$"
+                   data-lang-eu="<b>Adibidea:</b><br>
+                $(6x^3 + 9x^2 - 3x) \div 3x$<br><br>
+                $= \frac{6x^3}{3x} + \frac{9x^2}{3x} + \frac{-3x}{3x}$<br>
+                $= 2x^2 + 3x - 1$<br><br>
+                <b>Egiaztapena:</b> $2x^2 + 3x - 1$ eta $3x$ biderkatuak $6x^3 + 9x^2 - 3x$ eman behar du">
+                <b>Ejemplo:</b><br>
+                $(6x^3 + 9x^2 - 3x) \div 3x$<br><br>
+                $= \frac{6x^3}{3x} + \frac{9x^2}{3x} + \frac{-3x}{3x}$<br>
+                $= 2x^2 + 3x - 1$<br><br>
+                <b>Verificación:</b> $2x^2 + 3x - 1$ multiplicado por $3x$ debe dar $6x^3 + 9x^2 - 3x$
+                </em>
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Propiedades Importantes" data-lang-eu="Propietate Garrantzitsuak">Propiedades Importantes</h3>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-layer-group icon-concept"></i>
+                        <span data-lang-es="Grado del producto" data-lang-eu="Produktoaren maila">Grado del producto</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="El grado del <b>producto</b> de dos polinomios es la <b>suma de los grados</b>."
+                           data-lang-eu="Bi polinomioen <b>produktoaren maila</b> <b>mailen batura</b> da.">
+                           El grado del <b>producto</b> de dos polinomios es la <b>suma de los grados</b>.
+                        </p>
+                        <p class="example">
+                            <em data-lang-es="<b>Ejemplo:</b> grad$(x^2 + 1)$ = 2, grad$(x^3 - 2x)$ = 3, entonces grad$[(x^2 + 1)(x^3 - 2x)]$ = 2 + 3 = 5"
+                               data-lang-eu="<b>Adibidea:</b> maila$(x^2 + 1)$ = 2, maila$(x^3 - 2x)$ = 3, orduan maila$[(x^2 + 1)(x^3 - 2x)]$ = 2 + 3 = 5">
+                                <b>Ejemplo:</b> grad$(x^2 + 1)$ = 2, grad$(x^3 - 2x)$ = 3, entonces grad$[(x^2 + 1)(x^3 - 2x)]$ = 2 + 3 = 5
+                            </em>
+                        </p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-difference icon-concept"></i>
+                        <span data-lang-es="Grado de la suma/resta" data-lang-eu="Batura/kentzaren maila">Grado de la suma/resta</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="El grado de la <b>suma o resta</b> de dos polinomios es <b>menor o igual</b> que el mayor de los grados."
+                           data-lang-eu="Bi polinomioen <b>batura edo kenketa</b> baten maila <b>handiena baino txikiagoa edo berdina</b> da.">
+                           El grado de la <b>suma o resta</b> de dos polinomios es <b>menor o igual</b> que el mayor de los grados.
+                        </p>
+                        <p class="example">
+                            <em data-lang-es="<b>Ejemplo:</b> $(x^3 + 2x^2) + (x^2 + 1) = x^3 + 3x^2 + 1$ (grado 3 = max(3,2))"
+                               data-lang-eu="<b>Adibidea:</b> $(x^3 + 2x^2) + (x^2 + 1) = x^3 + 3x^2 + 1$ (3. maila = max(3,2))">
+                                <b>Ejemplo:</b> $(x^3 + 2x^2) + (x^2 + 1) = x^3 + 3x^2 + 1$ (grado 3 = max(3,2))
+                            </em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Errores Típicos" data-lang-eu="Ohiko Akatsak">Errores Típicos</h3>
+            <div class="warning-box">
+                <ul>
+                    <li data-lang-es="<b>No cambiar signos al restar polinomios:</b> ❌ $(x^2 + 3x) - (2x - 1) = x^2 + 3x - 2x - 1$ (incorrecto) ✓ $x^2 + 3x - 2x + 1$ (correcto)"
+                        data-lang-eu="<b>Polinomioak kentzean ez aldatzea zeinuak:</b> ❌ $(x^2 + 3x) - (2x - 1) = x^2 + 3x - 2x - 1$ (okerra) ✓ $x^2 + 3x - 2x + 1$ (zuzena)">
+                        <b>No cambiar signos al restar polinomios:</b> ❌ $(x^2 + 3x) - (2x - 1) = x^2 + 3x - 2x - 1$ (incorrecto) ✓ $x^2 + 3x - 2x + 1$ (correcto)
+                    </li>
+                    <li data-lang-es="<b>Olvidar términos al multiplicar:</b> No multiplicar todos los términos entre sí"
+                        data-lang-eu="<b>Biderkatzean gaiak ahaztea:</b> Gai guztiak elkarren artean biderkatzea ahaztea">
+                        <b>Olvidar términos al multiplicar:</b> No multiplicar todos los términos entre sí
+                    </li>
+                    <li data-lang-es="<b>No simplificar el resultado final:</b> Dejar términos semejantes sin agrupar"
+                        data-lang-eu="<b>Emaitza finala ez sinplifikatzea:</b> Gai antzekoak taldekatu gabe uztea">
+                        <b>No simplificar el resultado final:</b> Dejar términos semejantes sin agrupar
+                    </li>
+                    <li data-lang-es="<b>Confundir el grado del producto:</b> No sumar los grados de los factores"
+                        data-lang-eu="<b>Produktoaren maila nahastea:</b> Faktorren mailak ez batzea">
+                        <b>Confundir el grado del producto:</b> No sumar los grados de los factores
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

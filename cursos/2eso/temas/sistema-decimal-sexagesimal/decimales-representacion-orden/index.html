@@ -1,0 +1,448 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="Representación y ordenación de números decimales" data-lang-eu="Zenbaki hamartarrak: irudikapena eta ordena">Representación y ordenación de números decimales</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <i class="fas fa-calculator"></i>
+      <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
+    </nav>
+  </header>
+  
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol>
+      <li><a href="../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
+      <li><a href="../index.html" data-lang-es="Sistema decimal y sexagesimal" data-lang-eu="Sistema hamartarra eta sexagesimala">Sistema decimal y sexagesimal</a></li>
+      <li class="active" aria-current="page"><span data-lang-es="Representación y ordenación de números decimales" data-lang-eu="Zenbaki hamartarrak: irudikapena eta ordena">Representación y ordenación de números decimales</span></li>
+    </ol>
+  </nav>
+  
+  <main>
+    <h1 data-lang-es="Representación y ordenación de números decimales" data-lang-eu="Zenbaki hamartarrak: irudikapena eta ordena">Representación y ordenación de números decimales</h1>
+    
+    <section class="content-section">
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="true">
+            <i class="fas fa-info-circle icon-concept"></i>
+            <span data-lang-es="¿Qué son los números decimales?" data-lang-eu="Zer dira zenbaki hamartarrak?">¿Qué son los números decimales?</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content" style="max-height: none;">
+            <p data-lang-es="Los <strong>números decimales</strong> son números que tienen una parte entera y una parte decimal separadas por una coma. La parte decimal representa fracciones de la unidad." data-lang-eu="<strong>Zenbaki hamartarrak</strong> zati osoa eta zati hamartarra dituzten zenbakiak dira, koma batez bananduta. Zati hamartarrak unitatearen zatiketak irudikatzen ditu.">Los <strong>números decimales</strong> son números que tienen una parte entera y una parte decimal separadas por una coma. La parte decimal representa fracciones de la unidad.</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: El número 3,75" data-lang-eu="Adibidea: 3,75 zenbakia">Ejemplo: El número 3,75</h4>
+              <p data-lang-es="<strong>3</strong> = parte entera (3 unidades)" data-lang-eu="<strong>3</strong> = zati osoa (3 unitate)"><strong>3</strong> = parte entera (3 unidades)</p>
+              <p data-lang-es="<strong>75</strong> = parte decimal (75 centésimas)" data-lang-eu="<strong>75</strong> = zati hamartarra (75 ehunen)"><strong>75</strong> = parte decimal (75 centésimas)</p>
+              <div class="solution">
+                <strong data-lang-es="Total:" data-lang-eu="Guztira:">Total:</strong> <span data-lang-es="3,75 = 3 + 0,75 = 3 + 75/100" data-lang-eu="3,75 = 3 + 0,75 = 3 + 75/100">3,75 = 3 + 0,75 = 3 + 75/100</span>
+              </div>
+            </div>
+
+            <div class="interactive-idea card-style">
+              <h4><i class="fas fa-lightbulb"></i> <span data-lang-es="Idea Interactiva" data-lang-eu="Ideia Interaktiboa">Idea Interactiva</span></h4>
+              <p data-lang-es="Imagina que los números decimales son como medir longitudes con una regla. La parte entera son los centímetros completos y la parte decimal son los milímetros." data-lang-eu="Imajinatu zenbaki hamartarrak erregela batekin luzerak neurtzea direla. Zati osoa zentimetro osoak dira eta zati hamartarra milimetroak.">Imagina que los números decimales son como medir longitudes con una regla. La parte entera son los centímetros completos y la parte decimal son los milímetros.</p>
+              <div class="tool-objective">
+                <strong data-lang-es="Objetivo:" data-lang-eu="Helburua:">Objetivo:</strong> <span data-lang-es="Entender la relación entre enteros y decimales" data-lang-eu="Ulertu osoen eta hamartarren arteko harremana">Entender la relación entre enteros y decimales</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-sort-numeric-up icon-concept"></i>
+            <span data-lang-es="Ordenación de números decimales" data-lang-eu="Zenbaki hamartarren ordena">Ordenación de números decimales</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Para ordenar números decimales, primero comparamos las <strong>partes enteras</strong> y luego las <strong>partes decimales</strong>." data-lang-eu="Zenbaki hamartarrak ordenatzeko, lehenik <strong>zati osoak</strong> konparatzen ditugu eta gero <strong>zati hamartarrak</strong>.">Para ordenar números decimales, primero comparamos las <strong>partes enteras</strong> y luego las <strong>partes decimales</strong>.</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: Ordenar decimales" data-lang-eu="Adibidea: Hamartarrak ordenatu">Ejemplo: Ordenar decimales</h4>
+              <p data-lang-es="<strong>Números dados:</strong> 2,45; 1,89; 2,12; 1,95; 2,45" data-lang-eu="<strong>Ematen diren zenbakiak:</strong> 2,45; 1,89; 2,12; 1,95; 2,45"><strong>Números dados:</strong> 2,45; 1,89; 2,12; 1,95; 2,45</p>
+              <div class="solution">
+                <strong data-lang-es="Paso 1:" data-lang-eu="1. urratsa:">Paso 1:</strong> <span data-lang-es="Comparar partes enteras" data-lang-eu="Zati osoak konparatu">Comparar partes enteras</span>
+                <ul>
+                  <li><span>1,89</span> <span data-lang-es="y (parte entera = 1)" data-lang-eu="eta (zati osoa = 1)">y (parte entera = 1)</span></li>
+                  <li><span>2,45</span>, <span>2,12</span> <span data-lang-es="y (parte entera = 2)" data-lang-eu="eta (zati osoa = 2)">y (parte entera = 2)</span></li>
+                </ul>
+                <strong data-lang-es="Paso 2:" data-lang-eu="2. urratsa:">Paso 2:</strong> <span data-lang-es="Ordenar por partes enteras y luego decimales" data-lang-eu="Zati osoen arabera ordenatu eta gero hamartarren arabera">Ordenar por partes enteras y luego decimales</span>
+                <ul>
+                  <li><span>1,89</span> < 1,95 < 2,12 < 2,45 = 2,45</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="interactive-calculator">
+              <h5><i class="fas fa-sort"></i> <span data-lang-es="Ordenador de Decimales" data-lang-eu="Hamartarren Ordenatzailea">Ordenador de Decimales</span></h5>
+              <div class="calc-input">
+                <label for="decimal-input" data-lang-es="Introduce decimales separados por comas:" data-lang-eu="Sartu hamartarrak komez bananduta:">Introduce decimales separados por comas:</label>
+                <textarea id="decimal-input" placeholder="Ejemplo: 2.45, 1.89, 2.12, 1.95"></textarea>
+              </div>
+              <div class="calc-buttons">
+                <button onclick="ordenarDecimales()" data-lang-es="Ordenar" data-lang-eu="Ordenatu">Ordenar</button>
+                <button onclick="limpiarDecimales()" data-lang-es="Limpiar" data-lang-eu="Garbitu">Limpiar</button>
+              </div>
+              <div class="calc-results">
+                <h6 data-lang-es="Ordenados de menor a mayor:" data-lang-eu="Txikienetik handienera ordenatuak:">Ordenados de menor a mayor:</h6>
+                <p id="decimal-ascendente"></p>
+                <h6 data-lang-es="Ordenados de mayor a menor:" data-lang-eu="Handienetik txikienera ordenatuak:">Ordenados de mayor a menor:</h6>
+                <p id="decimal-descendente"></p>
+              </div>
+              <div class="calc-note">
+                <i class="fas fa-info-circle"></i> <span data-lang-es="Usa punto (.) como separador decimal" data-lang-eu="Erabili puntua (.) banatzaile hamartar gisa">Usa punto (.) como separador decimal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-compress-arrows-alt icon-concept"></i>
+            <span data-lang-es="Comparación de decimales" data-lang-eu="Hamartarren konparaketa">Comparación de decimales</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Para comparar números decimales, seguimos estos pasos:" data-lang-eu="Zenbaki hamartarrak konparatzeko, urrats hauek jarraitzen ditugu:">Para comparar números decimales, seguimos estos pasos:</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Método de comparación" data-lang-eu="Konparazioaren metodoa">Método de comparación</h4>
+              <div class="solution">
+                <strong data-lang-es="Paso 1:" data-lang-eu="1. urratsa:">Paso 1:</strong> <span data-lang-es="Comparar las partes enteras" data-lang-eu="Zati osoak konparatu">Comparar las partes enteras</span>
+                <ul>
+                  <li data-lang-es="Si son diferentes, el mayor es el que tiene mayor parte entera" data-lang-eu="Desberdinak badira, handiagoa zati oso handiagoa duena da">Si son diferentes, el mayor es el que tiene mayor parte entera</li>
+                  <li data-lang-es="Si son iguales, continuar al paso 2" data-lang-eu="Berdinak badira, jarraitu 2. urratsera">Si son iguales, continuar al paso 2</li>
+                </ul>
+                <strong data-lang-es="Paso 2:" data-lang-eu="2. urratsa:">Paso 2:</strong> <span data-lang-es="Comparar las partes decimales" data-lang-eu="Zati hamartarrak konparatu">Comparar las partes decimales</span>
+                <ul>
+                  <li data-lang-es="Si es necesario, añadir ceros para igualar el número de decimales" data-lang-eu="Beharrezkoa bada, gehitu zeroak hamartarren kopurua berdintzeko">Si es necesario, añadir ceros para igualar el número de decimales</li>
+                  <li data-lang-es="Comparar dígito a dígito de izquierda a derecha" data-lang-eu="Konparatu digitu bat digitu bat ezkerretik eskuinera">Comparar dígito a dígito de izquierda a derecha</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: Comparar 3,45 y 3,4" data-lang-eu="Adibidea: 3,45 eta 3,4 konparatu">Ejemplo: Comparar 3,45 y 3,4</h4>
+              <p data-lang-es="<strong>Paso 1:</strong> Partes enteras iguales (3 = 3)" data-lang-eu="<strong>1. urratsa:</strong> Zati osoak berdinak (3 = 3)"><strong>Paso 1:</strong> Partes enteras iguales (3 = 3)</p>
+              <p data-lang-es="<strong>Paso 2:</strong> Igualar decimales: 3,45 vs 3,40" data-lang-eu="<strong>2. urratsa:</strong> Hamartarrak berdindu: 3,45 vs 3,40"><strong>Paso 2:</strong> Igualar decimales: 3,45 vs 3,40</p>
+              <p data-lang-es="<strong>Paso 3:</strong> Comparar: 0,45 > 0,40" data-lang-eu="<strong>3. urratsa:</strong> Konparatu: 0,45 > 0,40"><strong>Paso 3:</strong> Comparar: 0,45 > 0,40</p>
+              <div class="solution">
+                <strong data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</strong> <span data-lang-es="3,45 > 3,4" data-lang-eu="3,45 > 3,4">3,45 > 3,4</span>
+              </div>
+            </div>
+
+            <div class="variable-diagram">
+              <strong data-lang-es="Reglas de comparación de decimales" data-lang-eu="Hamartarren konparazioaren arauak">Reglas de comparación de decimales</strong>
+              <div class="split">
+                <div class="category">
+                  <strong data-lang-es="Parte entera diferente" data-lang-eu="Zati osoa desberdina">Parte entera diferente</strong>
+                  <div class="sub-split">
+                    <div class="sub-category">Ejemplo: 5,23 vs 3,89</div>
+                    <div class="sub-category" data-lang-es="5 > 3, luego 5,23 > 3,89" data-lang-eu="5 > 3, beraz 5,23 > 3,89">5 > 3, luego 5,23 > 3,89</div>
+                  </div>
+                </div>
+                <div class="category">
+                  <strong data-lang-es="Parte entera igual" data-lang-eu="Zati osoa berdina">Parte entera igual</strong>
+                  <div class="sub-split">
+                    <div class="sub-category">Ejemplo: 4,56 vs 4,52</div>
+                    <div class="sub-category" data-lang-es="0,56 > 0,52, luego 4,56 > 4,52" data-lang-eu="0,56 > 0,52, beraz 4,56 > 4,52">0,56 > 0,52, luego 4,56 > 4,52</div>
+                  </div>
+                </div>
+                <div class="category">
+                  <strong data-lang-es="Decimales iguales" data-lang-eu="Hamartarrak berdinak">Decimales iguales</strong>
+                  <div class="sub-split">
+                    <div class="sub-category">Ejemplo: 2,34 vs 2,34</div>
+                    <div class="sub-category" data-lang-es="2,34 = 2,34" data-lang-eu="2,34 = 2,34">2,34 = 2,34</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-calculator icon-concept"></i>
+            <span data-lang-es="Redondeo de decimales" data-lang-eu="Hamartarren biribiltzea">Redondeo de decimales</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="El <strong>redondeo</strong> nos permite aproximar un número decimal a un número con menos cifras decimales." data-lang-eu="<strong>Biribiltzeak</strong> zenbaki hamartar bat gutxiago zifra hamartar dituen zenbaki batera hurbiltzen laguntzen digu.">El <strong>redondeo</strong> nos permite aproximar un número decimal a un número con menos cifras decimales.</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Reglas de redondeo" data-lang-eu="Biribiltzearen arauak">Reglas de redondeo</h4>
+              <div class="solution">
+                <ul>
+                  <li><span data-lang-es="Si la cifra siguiente es ≥ 5:" data-lang-eu="Hurrengo zifra ≥ 5 bada:">Si la cifra siguiente es ≥ 5:</span> <span data-lang-es="Aumentar en 1 la cifra a redondear" data-lang-eu="Gehitu 1 biribiltzeko zifrari">Aumentar en 1 la cifra a redondear</span></li>
+                  <li><span data-lang-es="Si la cifra siguiente es < 5:" data-lang-eu="Hurrengo zifra < 5 bada:">Si la cifra siguiente es < 5:</span> <span data-lang-es="Mantener la cifra a redondear" data-lang-eu="Mantendu biribiltzeko zifra">Mantener la cifra a redondear</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: Redondear 3,4567 a 2 decimales" data-lang-eu="Adibidea: 3,4567 biribiltu 2 hamartarretara">Ejemplo: Redondear 3,4567 a 2 decimales</h4>
+              <p data-lang-es="<strong>Paso 1:</strong> Identificar la posición a redondear (5 en 3,45)" data-lang-eu="<strong>1. urratsa:</strong> Identifikatu biribiltzeko posizioa (5 3,45ean)"><strong>Paso 1:</strong> Identificar la posición a redondear (5 en 3,45)</p>
+              <p data-lang-es="<strong>Paso 2:</strong> Ver la cifra siguiente (6 en 3,456)" data-lang-eu="<strong>2. urratsa:</strong> Ikusi hurrengo zifra (6 3,456an)"><strong>Paso 2:</strong> Ver la cifra siguiente (6 en 3,456)</p>
+              <p data-lang-es="<strong>Paso 3:</strong> Como 6 ≥ 5, aumentar 5 a 6" data-lang-eu="<strong>3. urratsa:</strong> 6 ≥ 5 denez, gehitu 5etik 6ra"><strong>Paso 3:</strong> Como 6 ≥ 5, aumentar 5 a 6</p>
+              <div class="solution">
+                <strong data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</strong> <span data-lang-es="3,4567 ≈ 3,46" data-lang-eu="3,4567 ≈ 3,46">3,4567 ≈ 3,46</span>
+              </div>
+            </div>
+
+            <div class="interactive-calculator">
+              <h5><i class="fas fa-calculator"></i> <span data-lang-es="Calculadora de Redondeo" data-lang-eu="Biribiltzearen Kalkulagailua">Calculadora de Redondeo</span></h5>
+              <div class="calc-input">
+                <label for="redondeo-input" data-lang-es="Introduce un número decimal:" data-lang-eu="Sartu zenbaki hamartar bat:">Introduce un número decimal:</label>
+                <textarea id="redondeo-input" placeholder="Ejemplo: 3.4567"></textarea>
+                <label for="decimales-input" data-lang-es="Número de decimales:" data-lang-eu="Hamartarren kopurua:">Número de decimales:</label>
+                <textarea id="decimales-input" placeholder="Ejemplo: 2"></textarea>
+              </div>
+              <div class="calc-buttons">
+                <button onclick="redondearNumero()" data-lang-es="Redondear" data-lang-eu="Biribiltu">Redondear</button>
+                <button onclick="limpiarRedondeo()" data-lang-es="Limpiar" data-lang-eu="Garbitu">Limpiar</button>
+              </div>
+              <div class="calc-results">
+                <h6 data-lang-es="Resultado del redondeo:" data-lang-eu="Biribiltzearen emaitza:">Resultado del redondeo:</h6>
+                <p id="redondeo-resultado"></p>
+                <h6 data-lang-es="Explicación:" data-lang-eu="Azalpena:">Explicación:</h6>
+                <p id="redondeo-explicacion"></p>
+              </div>
+              <div class="calc-note">
+                <i class="fas fa-info-circle"></i> <span data-lang-es="Prueba con diferentes números y decimales" data-lang-eu="Probatu zenbaki eta hamartar desberdinekin">Prueba con diferentes números y decimales</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-list-ol icon-concept"></i>
+            <span data-lang-es="Ejercicios propuestos" data-lang-eu="Ariketak proposatuak">Ejercicios propuestos</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <ol class="exercises-list">
+              <li>
+                <p data-lang-es="Ordena de menor a mayor: 2,45; 1,89; 2,12; 1,95; 2,45." data-lang-eu="Ordenatu txikienetik handienera: 2,45; 1,89; 2,12; 1,95; 2,45.">Ordena de menor a mayor: 2,45; 1,89; 2,12; 1,95; 2,45.</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> <span data-lang-es="Ver pista" data-lang-eu="Ikusi pista">Ver pista</span>
+                </button>
+                <div class="hint-content">
+                  <p data-lang-es="Primero compara las partes enteras, luego las decimales" data-lang-eu="Lehenik konparatu zati osoak, gero hamartarrak">Primero compara las partes enteras, luego las decimales</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="Redondea 7,8934 a 2 decimales." data-lang-eu="Biribiltu 7,8934 2 hamartarretara.">Redondea 7,8934 a 2 decimales.</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> <span data-lang-es="Ver pista" data-lang-eu="Ikusi pista">Ver pista</span>
+                </button>
+                <div class="hint-content">
+                  <p data-lang-es="Observa la tercera cifra decimal para decidir si redondear hacia arriba o abajo" data-lang-eu="Behatu hirugarren zifra hamartarra gora edo behera biribiltzeko erabakitzeko">Observa la tercera cifra decimal para decidir si redondear hacia arriba o abajo</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="¿Cuál es mayor: 4,567 o 4,57?" data-lang-eu="Zein da handiagoa: 4,567 edo 4,57?">¿Cuál es mayor: 4,567 o 4,57?</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> <span data-lang-es="Ver pista" data-lang-eu="Ikusi pista">Ver pista</span>
+                </button>
+                <div class="hint-content">
+                  <p data-lang-es="Iguala el número de decimales añadiendo un cero: 4,567 vs 4,570" data-lang-eu="Berdindu hamartarren kopurua zero bat gehituz: 4,567 vs 4,570">Iguala el número de decimales añadiendo un cero: 4,567 vs 4,570</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  
+  <script>
+    // Funcionalidad para el ordenador de decimales
+    function ordenarDecimales() {
+      const input = document.getElementById('decimal-input').value.trim();
+      if (!input) {
+        alert('Por favor, introduce algunos números decimales');
+        return;
+      }
+      
+      const decimales = input.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
+      
+      if (decimales.length === 0) {
+        alert('Por favor, introduce números decimales válidos separados por comas');
+        return;
+      }
+      
+      const ascendente = [...decimales].sort((a, b) => a - b);
+      const descendente = [...decimales].sort((a, b) => b - a);
+      
+      document.getElementById('decimal-ascendente').textContent = ascendente.join(' < ');
+      document.getElementById('decimal-descendente').textContent = descendente.join(' > ');
+    }
+    
+    function limpiarDecimales() {
+      document.getElementById('decimal-input').value = '';
+      document.getElementById('decimal-ascendente').textContent = '';
+      document.getElementById('decimal-descendente').textContent = '';
+    }
+    
+    // Funcionalidad para el redondeo
+    function redondearNumero() {
+      const numeroInput = document.getElementById('redondeo-input').value.trim();
+      const decimalesInput = document.getElementById('decimales-input').value.trim();
+      
+      if (!numeroInput || !decimalesInput) {
+        alert('Por favor, introduce tanto el número como el número de decimales');
+        return;
+      }
+      
+      const numero = parseFloat(numeroInput);
+      const decimales = parseInt(decimalesInput);
+      
+      if (isNaN(numero) || isNaN(decimales) || decimales < 0) {
+        alert('Por favor, introduce valores válidos');
+        return;
+      }
+      
+      const factor = Math.pow(10, decimales);
+      const redondeado = Math.round(numero * factor) / factor;
+      
+      document.getElementById('redondeo-resultado').textContent = redondeado.toFixed(decimales);
+      
+      // Explicación del redondeo
+      const numeroStr = numero.toString();
+      const puntoIndex = numeroStr.indexOf('.');
+      if (puntoIndex !== -1) {
+        const parteDecimal = numeroStr.substring(puntoIndex + 1);
+        if (parteDecimal.length > decimales) {
+          const cifraSiguiente = parseInt(parteDecimal[decimales]);
+          const cifraRedondear = parseInt(parteDecimal[decimales - 1]);
+          
+          let explicacion = `La cifra a redondear es ${cifraRedondear} en la posición ${decimales}. `;
+          if (cifraSiguiente >= 5) {
+            explicacion += `Como la siguiente cifra (${cifraSiguiente}) ≥ 5, se aumenta ${cifraRedondear} a ${cifraRedondear + 1}.`;
+          } else {
+            explicacion += `Como la siguiente cifra (${cifraSiguiente}) < 5, se mantiene ${cifraRedondear}.`;
+          }
+          
+          document.getElementById('redondeo-explicacion').textContent = explicacion;
+        } else {
+          document.getElementById('redondeo-explicacion').textContent = 'El número ya tiene menos decimales que los solicitados.';
+        }
+      } else {
+        document.getElementById('redondeo-explicacion').textContent = 'El número es entero, no hay decimales que redondear.';
+      }
+    }
+    
+    function limpiarRedondeo() {
+      document.getElementById('redondeo-input').value = '';
+      document.getElementById('decimales-input').value = '';
+      document.getElementById('redondeo-resultado').textContent = '';
+      document.getElementById('redondeo-explicacion').textContent = '';
+    }
+    
+    // Funcionalidad para mostrar/ocultar pistas
+    function toggleHint(button) {
+      const hintContent = button.nextElementSibling;
+      const isVisible = hintContent.classList.contains('visible');
+      
+      if (isVisible) {
+        hintContent.classList.remove('visible');
+        button.classList.remove('open');
+      } else {
+        hintContent.classList.add('visible');
+        button.classList.add('open');
+      }
+    }
+    
+    // Inicialización cuando se carga la página
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof initTheme === 'function') {
+        initTheme(document.body, document.getElementById('theme-toggle'));
+      }
+      if (typeof initLanguage === 'function') {
+        initLanguage(document.documentElement, document.querySelectorAll('[data-lang-es], [data-lang-eu]'), document.getElementById('lang-toggle'));
+      }
+    });
+  </script>
+  
+  <!-- Botón flotante para volver arriba -->
+  <button id="back-to-top" aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <script>
+    // Configuración del botón de volver arriba
+    document.addEventListener('DOMContentLoaded', function() {
+      const backToTopButton = document.getElementById('back-to-top');
+      
+      // Mostrar/ocultar botón al hacer scroll
+      function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
+      }
+      
+      // Mostrar el botón después de cargar la página
+      setTimeout(toggleBackToTop, 100);
+      
+      // Escuchar el evento de scroll
+      window.addEventListener('scroll', toggleBackToTop);
+      
+      // Hacer scroll suave al hacer clic
+      backToTopButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

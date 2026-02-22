@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Operaciones con Sucesos - Probabilidad" data-lang-eu="Gertakariekin Eragiketak - Probabilitatea">Operaciones con Sucesos - Probabilidad</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-project-diagram"></i>
+            <span data-lang-es="Operaciones con Sucesos" data-lang-eu="Gertakariekin Eragiketak">Operaciones con Sucesos</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title" data-lang-es="Operaciones con Sucesos" data-lang-eu="Gertakariekin Eragiketak">Operaciones con Sucesos</h1>
+            <div class="page-actions">
+                <button class="button-primary" data-lang-es="Ejercicios" data-lang-eu="Ariketak">
+                    <i class="fas fa-pencil-alt"></i> Ejercicios
+                </button>
+                <button class="button-secondary" data-lang-es="Herramienta" data-lang-eu="Tresna">
+                    <i class="fas fa-tools"></i> Herramienta
+                </button>
+            </div>
+        </div>
+
+        <section class="content-section">
+            <h3 data-lang-es="Unión de Sucesos" data-lang-eu="Gertakarien Bildura">Unión de Sucesos</h3>
+            <p data-lang-es="La unión de dos sucesos A y B, denoted por A ∪ B, es el suceso que ocurre cuando ocurre A o B o ambos (al menos uno de ellos)."
+               data-lang-eu="Bi gertakari A eta B-ren bildura, A ∪ B bezala adierazten dena, A edo B gertatzen denean gertatzen da (edo biak), hau da, gutxienez bat.">
+               La unión de dos sucesos A y B, denoted por A ∪ B, es el suceso que ocurre cuando ocurre A o B o ambos (al menos uno de ellos).
+            </p>
+            
+            <div class="visual-representation">
+                <h4 data-lang-es="Representación Visual" data-lang-eu="Irudikapen Bisuala">Representación Visual</h4>
+                <p data-lang-es="Se representa mediante un diagrama de Venn donde se unen los conjuntos A y B, incluyendo la intersección."
+                   data-lang-eu="Venn diagrama baten bidez irudikatzen da non A eta B multzoak batzen diren, ebakiduna barne.">
+                   Se representa mediante un diagrama de Venn donde se unen los conjuntos A y B, incluyendo la intersección.
+                </p>
+                <div class="example-box">
+                    <p><strong data-lang-es="Ejemplo con dados:" data-lang-eu="Dadoekin adibidea:">Ejemplo con dados:</strong></p>
+                    <p data-lang-es="A = {sacar un número ≤ 3} = {1, 2, 3}" 
+                       data-lang-eu="A = {≤ 3 zenbakia ateratzea} = {1, 2, 3}">
+                       A = {sacar un número ≤ 3} = {1, 2, 3}
+                    </p>
+                    <p data-lang-es="B = {sacar un número par} = {2, 4, 6}" 
+                       data-lang-eu="B = {zenbaki bikoitia ateratzea} = {2, 4, 6}">
+                       B = {sacar un número par} = {2, 4, 6}
+                    </p>
+                    <p data-lang-es="A ∪ B = {1, 2, 3, 4, 6} (resultados que están en A o en B o en ambos)" 
+                       data-lang-eu="A ∪ B = {1, 2, 3, 4, 6} (A edo B edo bietan dauden emaitzak)">
+                       A ∪ B = {1, 2, 3, 4, 6} (resultados que están en A o en B o en ambos)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Intersección de Sucesos" data-lang-eu="Gertakarien Ebakiduna">Intersección de Sucesos</h3>
+            <p data-lang-es="La intersección de dos sucesos A y B, denoted por A ∩ B, es el suceso que ocurre cuando ocurren A y B simultáneamente."
+               data-lang-eu="Bi gertakari A eta B-ren ebakiduna, A ∩ B bezala adierazten dena, A eta B aldi berean gertatzen direnean gertatzen da.">
+               La intersección de dos sucesos A y B, denoted por A ∩ B, es el suceso que ocurre cuando ocurren A y B simultáneamente.
+            </p>
+            
+            <div class="visual-representation">
+                <h4 data-lang-es="Representación Visual" data-lang-eu="Irudikapen Bisuala">Representación Visual</h4>
+                <p data-lang-es="Se representa mediante un diagrama de Venn mostrando la zona común de los conjuntos A y B."
+                   data-lang-eu="Venn diagrama baten bidez irudikatzen da A eta B multzoen zona komuna erakutsiz.">
+                   Se representa mediante un diagrama de Venn mostrando la zona común de los conjuntos A y B.
+                </p>
+                <div class="example-box">
+                    <p><strong data-lang-es="Ejemplo con dados (continuación):" data-lang-eu="Dadoekin adibidea (jarraipena):">Ejemplo con dados (continuación):</strong></p>
+                    <p data-lang-es="A ∩ B = {2} (único resultado que está en ambos conjuntos: ≤ 3 y par)" 
+                       data-lang-eu="A ∩ B = {2} (multzo bietan dagoen emaitza bakarra: ≤ 3 eta bikoitia)">
+                       A ∩ B = {2} (único resultado que está en ambos conjuntos: ≤ 3 y par)
+                    </p>
+                    <p data-lang-es="Los resultados en A ∩ B cumplen simultáneamente las condiciones de A y de B."
+                       data-lang-eu="A ∩ B-ko emaitzak aldi berean A-ren eta B-ren baldintzak betetzen dituzte.">
+                       Los resultados en A ∩ B cumplen simultáneamente las condiciones de A y de B.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Sucesos Incompatibles" data-lang-eu="Gertakari Incompatibleak">Sucesos Incompatibles</h3>
+            <p data-lang-es="Dos sucesos A y B son incompatibles (o mutuamente excluyentes) cuando no pueden ocurrir simultáneamente, es decir, cuando A ∩ B = ∅."
+               data-lang-eu="Bi gertakari A eta B incompatibleak (edo elkarren baztergarriak) direla esaten da aldi berean ezin gerta daitekeenean, hau da, A ∩ B = ∅ denean.">
+               Dos sucesos A y B son incompatibles (o mutuamente excluyentes) cuando no pueden ocurrir simultáneamente, es decir, cuando A ∩ B = ∅.
+            </p>
+            
+            <div class="example-box">
+                <p><strong data-lang-es="Ejemplos:" data-lang-eu="Adibideak:">Ejemplos:</strong></p>
+                <ul>
+                    <li data-lang-es="Al lanzar un dado: A = {sacar 1} y B = {sacar 2}. No pueden salir ambos a la vez." 
+                        data-lang-eu="Dadoa botatzean: A = {1 ateratzea} eta B = {2 ateratzea}. Biak ezin dira aldi berean atera.">
+                        Al lanzar un dado: A = {sacar 1} y B = {sacar 2}. No pueden salir ambos a la vez.
+                    </li>
+                    <li data-lang-es="Al lanzar una moneda: A = {cara} y B = {cruz}. Solo puede salir una de las dos." 
+                        data-lang-eu="Txanpona botatzean: A = {aurpegia} eta B = {buztana}. Bietako bat soilik atera daiteke.">
+                        Al lanzar una moneda: A = {cara} y B = {cruz}. Solo puede salir una de las dos.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Reglas de Probabilidad" data-lang-eu="Probabilitateko Arauak">Reglas de Probabilidad</h3>
+            
+            <div class="card-style formula-card">
+                <h4><i class="fas fa-plus"></i> <span data-lang-es="Regla de la Suma (caso general)" data-lang-eu="Batuketaren Araua (kasu orokorra)">Regla de la Suma (caso general)</span></h4>
+                <div class="formula-box">
+                    \[
+                    P(A \cup B) = P(A) + P(B) - P(A \cap B)
+                    \]
+                </div>
+                <p data-lang-es="Esta fórmula se usa cuando A y B pueden ocurrir simultáneamente (es decir, no son incompatibles)."
+                   data-lang-eu="Formula hau erabiltzen da A eta B aldi berean gerta daitezkeenean (hau da, ez direnean inkompatibleak).">
+                   Esta fórmula se usa cuando A y B pueden ocurrir simultáneamente (es decir, no son incompatibles).
+                </p>
+                <div class="example-box">
+                    <p data-lang-es="Restamos P(A ∩ B) porque esos casos se cuentan dos veces (una en P(A) y otra en P(B))."
+                       data-lang-eu="P(A ∩ B) kentzen dugu kasu horiek bi aldiz zenbatzen direlako (P(A)-an behin eta P(B)-an besterik).">
+                       Restamos P(A ∩ B) porque esos casos se cuentan dos veces (una en P(A) y otra en P(B)).
+                    </p>
+                </div>
+            </div>
+
+            <div class="card-style formula-card">
+                <h4><i class="fas fa-plus-circle"></i> <span data-lang-es="Regla de la Suma (sucesos incompatibles)" data-lang-eu="Batuketaren Araua (gertakari inkompatibleak)">Regla de la Suma (sucesos incompatibles)</span></h4>
+                <div class="formula-box">
+                    \[
+                    P(A \cup B) = P(A) + P(B)
+                    \]
+                </div>
+                <p data-lang-es="Si A y B son incompatibles (A ∩ B = ∅), entonces no restamos nada porque no hay casos comunes."
+                   data-lang-eu="A eta B inkompatibleak badira (A ∩ B = ∅), orduan ez dugu ezer kentzen kasu komunik ez dagoelako.">
+                   Si A y B son incompatibles (A ∩ B = ∅), entonces no restamos nada porque no hay casos comunes.
+                </p>
+            </div>
+
+            <div class="card-style formula-card">
+                <h4><i class="fas fa-times"></i> <span data-lang-es="Probabilidad Compuesta (caso general)" data-lang-eu="Probabilitate Konposatua (kasu orokorra)">Probabilidad Compuesta (caso general)</span></h4>
+                <div class="formula-box">
+                    \[
+                    P(A \cap B) = P(A) \cdot P(B|A)
+                    \]
+                </div>
+                <p data-lang-es="Esta es la regla general para calcular la probabilidad de que ocurran A y B simultáneamente."
+                   data-lang-eu="Hau A eta B aldi berean gertatzeko probabilitatea kalkulatzeko arau orokorra da.">
+                   Esta es la regla general para calcular la probabilidad de que ocurran A y B simultáneamente.
+                </p>
+                <p data-lang-es="P(B|A) se lee 'probabilidad de B dado A' (probabilidad condicionada, que estudiaremos más adelante)."
+                   data-lang-eu="P(B|A) 'A emanda B-ren probabilitatea' irakurten da (probabilitate baldintzatua, geroago ikasiko duguna).">
+                   P(B|A) se lee 'probabilidad de B dado A' (probabilidad condicionada, que estudiaremos más adelante).
+                </p>
+            </div>
+
+            <div class="card-style formula-card">
+                <h4><i class="fas fa-equals"></i> <span data-lang-es="Probabilidad Compuesta (sucesos independientes)" data-lang-eu="Probabilitate Konposatua (gertakari independenteak)">Probabilidad Compuesta (sucesos independientes)</span></h4>
+                <div class="formula-box">
+                    \[
+                    P(A \cap B) = P(A) \cdot P(B)
+                    \]
+                </div>
+                <p data-lang-es="Si A y B son independientes, entonces P(B|A) = P(B), por lo que la fórmula se simplifica."
+                   data-lang-eu="A eta B independenteak badira, orduan P(B|A) = P(B), beraz formula sinplifikatzen da.">
+                   Si A y B son independientes, entonces P(B|A) = P(B), por lo que la fórmula se simplifica.
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Ejemplos Resueltos" data-lang-eu="Ebatzitako Adibideak">Ejemplos Resueltos</h3>
+            
+            <div class="example-section">
+                <h4 data-lang-es="Ejemplo 1: Sucesos compatibles" data-lang-eu="1. Adibidea: Gertakari compatibleak">Ejemplo 1: Sucesos compatibles</h4>
+                <p data-lang-es="De una baraja española (40 cartas), calculamos:" 
+                   data-lang-eu="Espainiar barajatik (40 karta), kalkulatzen dugu:">
+                   De una baraja española (40 cartas), calculamos:
+                </p>
+                <p data-lang-es="A = {sacar una figura} (12 figuras: 4 de cada palo)" 
+                   data-lang-eu="A = {figura bat ateratzea} (12 figura: 4-palo bakoitzeko)">
+                   A = {sacar una figura} (12 figuras: 4 de cada palo)
+                </p>
+                <p data-lang-es="B = {sacar oros} (10 cartas de oros)" 
+                   data-lang-eu="B = {orre ateratzea} (10 orre karta)">
+                   B = {sacar oros} (10 cartas de oros)
+                </p>
+                
+                <p data-lang-es="<b>1. Calculamos las probabilidades individuales:</b>" data-lang-eu="<b>1. Probabilitate indibidualak kalkulatzen ditugu:</b>"><b>1. Calculamos las probabilidades individuales:</b></p>
+                <div class="formula-box">
+                    \[
+                    P(A) = \frac{12}{40} = \frac{3}{10} = 0.3
+                    \]
+                    \[
+                    P(B) = \frac{10}{40} = \frac{1}{4} = 0.25
+                    \]
+                </div>
+
+                <p data-lang-es="<b>2. Calculamos la intersección (A ∩ B):</b> Figuras de oros = 3 (sota, caballo, rey)" 
+                   data-lang-eu="<b>2. Ebakiduna kalkulatzen dugu (A ∩ B):</b> Orreko figureak = 3 (txota, zaldi, errege)">
+                   <b>2. Calculamos la intersección (A ∩ B):</b> Figuras de oros = 3 (sota, caballo, rey)
+                </p>
+                <div class="formula-box">
+                    \[
+                    P(A \cap B) = \frac{3}{40} = 0.075
+                    \]
+                </div>
+
+                <p data-lang-es="<b>3. Aplicamos la regla de la suma:</b>" data-lang-eu="<b>3. Batuketaren araua aplikatzen dugu:</b>"><b>3. Aplicamos la regla de la suma:</b></p>
+                <div class="formula-box">
+                    \[
+                    P(A \cup B) = P(A) + P(B) - P(A \cap B) = 0.3 + 0.25 - 0.075 = 0.475
+                    \]
+                </div>
+
+                <p class="result-highlight" data-lang-es="<b>Respuesta:</b> P(A ∪ B) = 0.475 (47.5%)" 
+                   data-lang-eu="<b>Erantzuna:</b> P(A ∪ B) = 0.475 (% 47.5)">
+                   <b>Respuesta:</b> P(A ∪ B) = 0.475 (47.5%)
+                </p>
+            </div>
+
+            <div class="example-section">
+                <h4 data-lang-es="Ejemplo 2: Sucesos incompatibles" data-lang-eu="2. Adibidea: Gertakari inkompatibleak">Ejemplo 2: Sucesos incompatibles</h4>
+                <p data-lang-es="Al lanzar un dado, calculamos la probabilidad de sacar un 1 o un 6:" 
+                   data-lang-eu="Dadoa botatzean, 1 edo 6 ateratzeko probabilitatea kalkulatzen dugu:">
+                   Al lanzar un dado, calculamos la probabilidad de sacar un 1 o un 6:
+                </p>
+                <p data-lang-es="A = {sacar 1}, B = {sacar 6}. Son incompatibles porque no pueden salir ambos." 
+                   data-lang-eu="A = {1 ateratzea}, B = {6 ateratzea}. Inkompatibleak dira biak ezin direlako atera.">
+                   A = {sacar 1}, B = {sacar 6}. Son incompatibles porque no pueden salir ambos.
+                </p>
+                
+                <div class="formula-box">
+                    <p data-lang-es="<b>Como son incompatibles:</b>" data-lang-eu="<b>Inkompatibleak direnez:</b>"><b>Como son incompatibles:</b></p>
+                    \[
+                    P(A \cup B) = P(A) + P(B) = \frac{1}{6} + \frac{1}{6} = \frac{2}{6} = \frac{1}{3} \approx 0.333
+                    \]
+                </div>
+
+                <p class="result-highlight" data-lang-es="<b>Respuesta:</b> P(A ∪ B) = 1/3 (33.3%)" 
+                   data-lang-eu="<b>Erantzuna:</b> P(A ∪ B) = 1/3 (% 33.3)">
+                   <b>Respuesta:</b> P(A ∪ B) = 1/3 (33.3%)
+                </p>
+            </div>
+        </section>
+
+        <section class="warning-section">
+            <h3><i class="fas fa-exclamation-triangle"></i> <span data-lang-es="Errores Típicos" data-lang-eu="Akats Tipikoak">Errores Típicos</span></h3>
+            <ul>
+                <li data-lang-es="Aplicar P(A ∪ B) = P(A) + P(B) cuando los sucesos no son incompatibles" 
+                    data-lang-eu="P(A ∪ B) = P(A) + P(B) aplikatzea gertakariak inkompatibleak ez direnean">
+                    Aplicar P(A ∪ B) = P(A) + P(B) cuando los sucesos no son incompatibles
+                </li>
+                <li data-lang-es="Confundir independencia con incompatibilidad" 
+                    data-lang-eu="Independentzia inkompatibilitatearekin nahastea">
+                    Confundir independencia con incompatibilidad
+                </li>
+                <li data-lang-es="No identificar correctamente cuándo dos sucesos son independientes" 
+                    data-lang-eu="Ez jakitea bi gertakari noiz diren independenteak">
+                    No identificar correctamente cuándo dos sucesos son independientes
+                </li>
+                <li data-lang-es="Olvidar restar la intersección en la regla de la suma" 
+                    data-lang-eu="Ebakiduna bukaketaren arauan kentzea ahaztea">
+                    Olvidar restar la intersección en la regla de la suma
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

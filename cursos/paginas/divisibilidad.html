@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matematika 1. DBH - Zatigarritasuna</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/numeros.css">
+    <link rel="stylesheet" href="../css/herramientas.css">
+    <link rel="icon" href="../img/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <div class="logo-titulo">
+            <h1>Zatigarritasuna Matematikan</h1>
+        </div>
+        <nav class="navbar" aria-label="Nabigazio nagusia">
+            <a href="../index.html" class="navbar-logo">Matematika 1. DBH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <div class="navbar-menu">
+                <a href="../index.html" class="navbar-item">Hasiera</a>
+                <div class="dropdown">
+                    <a href="#" class="navbar-item dropdown-btn">Gaiak</a>
+                    <div class="dropdown-content">
+                        <a href="numeros-naturales.html">Zenbaki Naturalak</a>
+                        <a href="divisibilidad.html" class="active">Zatigarritasuna</a>
+                        <a href="numeros-enteros.html">Zenbaki Osoak</a>
+                        <a href="fracciones.html">Zatikiak</a>
+                        <a href="algebra.html">Aljebran</a>
+                        <a href="geometria.html">Geometria</a>
+                        <a href="tablas-graficas.html">Taulak eta Grafikoak</a>
+                    </div>
+                </div>
+                <a href="https://chatgpt.com/g/g-67d38635fb0c81919668655bdd91d6f7-matella-euskeraz" class="navbar-item">Matella ChatGPT</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="teoria-divisibilidad" class="seccion-contenedor">
+            <h2>Zatigarritasuna</h2>
+            
+            <div class="tarjetas-secciones">
+                <div class="tarjeta" data-modal="relacion-divisibilidad">
+                    <h3>📊 Zatigarritasunaren Harremana</h3>
+                    <p>Zatigarritasunaren oinarrizko kontzeptuak</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="multiplos">
+                    <h3>🔢 Biderkagarriak</h3>
+                    <p>Biderkagarrien definizioa eta adibideak</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="divisores">
+                    <h3>🧩 Zatitzaileak</h3>
+                    <p>Zenbaki baten zatitzaileak identifikatzea</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="criterios-divisibilidad">
+                    <h3>📝 Zatigarritasunaren Irizpideak</h3>
+                    <p>Zatigarritasuna identifikatzeko arauak</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="primos-compuestos">
+                    <h3>🔍 Lehen eta Konposatuak</h3>
+                    <p>Zenbakien sailkapena</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="mcm">
+                    <h3>📈 Multiplo Komun Txikiena</h3>
+                    <p>M.K.T.-ren kalkulua</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="mcd">
+                    <h3>📉 Zatitzaile Komun Handiena</h3>
+                    <p>Z.K.H.-ren kalkulua</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="herramientas-interactivas" class="seccion-contenedor">
+            <h2>Tresna Interaktiboak</h2>
+            
+            <!-- Zatigarritasuna egiaztatzeko tresna -->
+            <div class="herramienta-card" id="zatigarritasuna-tresna">
+                <div class="herramienta-header">
+                    <h3>Zatigarritasuna Egiaztatzeko Tresna</h3>
+                    <p>Zenbaki bat beste batez zatigarria den egiaztatu</p>
+                </div>
+                <div class="herramienta-content">
+                    <div class="input-group">
+                        <div class="input-field">
+                            <label for="zenbakia-input">Zenbakia:</label>
+                            <input type="number" id="zenbakia-input" min="1" placeholder="Adib: 24">
+                        </div>
+                        <div class="input-field">
+                            <label for="zatitzailea-input">Zatitzailea:</label>
+                            <input type="number" id="zatitzailea-input" min="1" placeholder="Adib: 6">
+                        </div>
+                        <button id="egiaztatu-btn" class="btn-primario">Egiaztatu</button>
+                    </div>
+                    <div id="zatigarritasuna-emaitza" class="emaitza-container"></div>
+                    <div id="zatigarritasuna-azalpena" class="azalpena-container"></div>
+                </div>
+            </div>
+            
+            <!-- MKT eta ZKH kalkulatzeko tresna -->
+            <div class="herramienta-card" id="mkt-zkh-tresna">
+                <div class="herramienta-header">
+                    <h3>MKT eta ZKH Kalkulatzeko Tresna</h3>
+                    <p>Multiplo Komun Txikiena eta Zatitzaile Komun Handiena kalkulatu</p>
+                </div>
+                <div class="herramienta-content">
+                    <div class="input-group">
+                        <div class="input-field">
+                            <label for="zenbaki1-input">1. Zenbakia:</label>
+                            <input type="number" id="zenbaki1-input" min="1" placeholder="Adib: 12">
+                        </div>
+                        <div class="input-field">
+                            <label for="zenbaki2-input">2. Zenbakia:</label>
+                            <input type="number" id="zenbaki2-input" min="1" placeholder="Adib: 18">
+                        </div>
+                        <div class="input-field">
+                            <label for="eragiketa-select">Eragiketa:</label>
+                            <select id="eragiketa-select">
+                                <option value="mkt">MKT (Multiplo Komun Txikiena)</option>
+                                <option value="zkh">ZKH (Zatitzaile Komun Handiena)</option>
+                            </select>
+                        </div>
+                        <button id="kalkulatu-btn" class="btn-primario">Kalkulatu</button>
+                    </div>
+                    <div id="mkt-zkh-emaitza" class="emaitza-container"></div>
+                    <div id="mkt-zkh-azalpena" class="azalpena-container"></div>
+                    <div id="mkt-zkh-pausoak" class="pausoak-container"></div>
+                </div>
+            </div>
+            
+            <!-- Zatigarritasun irizpideak egiaztatzeko tresna -->
+            <div class="herramienta-card" id="irizpideak-tresna">
+                <div class="herramienta-header">
+                    <h3>Zatigarritasun Irizpideak</h3>
+                    <p>Zenbaki bat zatigarritasun irizpide ezberdinak betetzen dituen egiaztatu</p>
+                </div>
+                <div class="herramienta-content">
+                    <div class="input-group">
+                        <div class="input-field">
+                            <label for="irizpide-zenbakia-input">Zenbakia:</label>
+                            <input type="number" id="irizpide-zenbakia-input" min="1" placeholder="Adib: 120">
+                        </div>
+                        <button id="irizpide-egiaztatu-btn" class="btn-primario">Irizpideak Egiaztatu</button>
+                    </div>
+                    <div id="irizpideak-emaitza" class="emaitza-container"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modales -->
+    <div id="modal-relacion-divisibilidad" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-multiplos" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-divisores" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-criterios-divisibilidad" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-primos-compuestos" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-mcm" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-mcd" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+
+    <footer>
+        <p> 2025 Matematika 1. DBH - Zatigarritasunaren Atala</p>
+        <p>❤️ Bihotzez garatua Derrigorrezko Bigarren Hezkuntzako ikasleentzat</p>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/modales-divisibilidad.js"></script>
+    <script src="../js/herramienta-zatigarritasuna.js"></script>
+</body>
+</html>

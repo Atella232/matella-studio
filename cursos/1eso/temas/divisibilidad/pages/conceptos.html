@@ -1,0 +1,578 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Conceptos - Divisibilidad" data-lang-eu="Kontzeptuak - Zatigarritasuna">Conceptos - Divisibilidad</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-book-open"></i>
+            <span data-lang-es="Múltiplos y Divisores" data-lang-eu="Multiploak eta Zatitzaileak">Múltiplos y Divisores</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Múltiplos y Divisores" data-lang-eu="Multiploak eta Zatitzaileak">Múltiplos y Divisores</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="Relación de Divisibilidad" data-lang-eu="Zatigarritasunaren Harremana">Relación de Divisibilidad</h3>
+            <p data-lang-es="Un número 'a' es divisible por otro número 'b' si la división de 'a' entre 'b' es exacta, es decir, el resto es cero."
+               data-lang-eu="'a' zenbaki bat 'b' beste zenbaki batez zatigarria da 'a' 'b'-ren arteko zatiketa zehatza bada, hau da, hondarra zero bada.">
+               Un número 'a' es divisible por otro número 'b' si la división de 'a' entre 'b' es exacta, es decir, el resto es cero.
+            </p>
+            <p class="example" data-lang-es="<b>Ejemplo:</b> 24 es divisible por 6 porque 24 ÷ 6 = 4 (resto 0)."
+               data-lang-eu="<b>Adibidea:</b> 24 6z zatigarria da, 24 ÷ 6 = 4 (hondarra 0).">
+               <b>Ejemplo:</b> 24 es divisible por 6 porque 24 ÷ 6 = 4 (resto 0).
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Múltiplos de un Número" data-lang-eu="Zenbaki baten Multiploak">Múltiplos de un Número</h3>
+            <p data-lang-es="Los múltiplos de un número son todos los posibles resultados de multiplicar ese número por cada uno de los números naturales."
+               data-lang-eu="Zenbaki baten multiploak zenbaki hori zenbaki natural bakoitzarekin biderkatzearen emaitza posible guztiak dira.">
+               Los múltiplos de un número son todos los posibles resultados de multiplicar ese número por cada uno de los números naturales.
+            </p>
+            <p class="example" data-lang-es="<b>Ejemplo:</b> Múltiplos de 4 son 0, 4, 8, 12, 16... (resultado de 4×0, 4×1, 4×2, 4×3...)"
+               data-lang-eu="<b>Adibidea:</b> 4ren multiploak 0, 4, 8, 12, 16... dira (4x0, 4x1, 4x2, 4x3... emaitza)">
+               <b>Ejemplo:</b> Múltiplos de 4 son 0, 4, 8, 12, 16... (resultado de 4×0, 4×1, 4×2, 4×3...)
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Divisores de un Número" data-lang-eu="Zenbaki baten Zatitzaileak">Divisores de un Número</h3>
+            <p data-lang-es="Los divisores de un número son aquellos que lo pueden dividir en una cantidad exacta de veces, es decir, sin dejar resto."
+               data-lang-eu="Zenbaki baten zatitzaileak zenbaki hori kopuru zehatz batean zati dezaketenak dira, hau da, hondarrik utzi gabe.">
+               Los divisores de un número son aquellos que lo pueden dividir en una cantidad exacta de veces, es decir, sin dejar resto.
+            </p>
+            <p class="example" data-lang-es="<b>Ejemplo:</b> Divisores de 12 son 1, 2, 3, 4, 6 y 12."
+               data-lang-eu="<b>Adibidea:</b> 12ren zatitzaileak 1, 2, 3, 4, 6 eta 12 dira.">
+               <b>Ejemplo:</b> Divisores de 12 son 1, 2, 3, 4, 6 y 12.
+            </p>
+        </section>
+
+    <section class="content-section">
+            <h3 data-lang-es="Herramientas Interactivas" data-lang-eu="Tresna Interaktiboak">Herramientas Interactivas</h3>
+            <div class="interactive-tool card-style">
+                <h4><i class="fas fa-calculator"></i> <span data-lang-es="Calculadora de Divisibilidad" data-lang-eu="Zatigarritasunaren Kalkulagailua">Calculadora de Divisibilidad</span></h4>
+                <div class="calculadora">
+                    <input type="number" id="num1" data-placeholder-es="Número 1" data-placeholder-eu="Zenbakia 1" placeholder="Número 1">
+                    <select id="operacion">
+                        <option value="divisibilidad" data-lang-es="Divisibilidad" data-lang-eu="Zatigarritasuna">Divisibilidad</option>
+                        <option value="mcm" data-lang-es="Mínimo Común Múltiplo" data-lang-eu="Múltiplo Komun Txikiena (MKT)">Mínimo Común Múltiplo</option>
+                        <option value="mcd" data-lang-es="Máximo Común Divisor" data-lang-eu="Zatitzaile Komun Handiena (ZKH)">Máximo Común Divisor</option>
+                    </select>
+                    <input type="number" id="num2" data-placeholder-es="Número 2" data-placeholder-eu="Zenbakia 2" placeholder="Número 2">
+                    <button id="btnCalcular" class="button-primary" data-lang-es="Calcular" data-lang-eu="Kalkulatu">Calcular</button>
+                    <p id="resultado"><span data-lang-es="Resultado: " data-lang-eu="Emaitza: ">Resultado: </span><span id="resultado-valor"></span></p>
+                </div>
+            </div>
+            <div class="interactive-tool card-style" style="margin-top: 2rem;">
+                <h4><i class="fas fa-question-circle"></i> <span data-lang-es="Quiz Rápido" data-lang-eu="Quiz Azkarra">Quiz Rápido</span></h4>
+                <div class="quiz">
+                    <p id="pregunta-quiz"></p>
+                    <div class="opciones-quiz"></div>
+                    <p id="resultado-quiz"></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+    <style>
+        /* Estilos para la calculadora */
+        .calculadora {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .calculadora:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-hover-shadow);
+            border-color: var(--secondary-color);
+        }
+        
+        .calculadora input[type="number"],
+        .calculadora select {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        
+        .calculadora input[type="number"]:focus,
+        .calculadora select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+        
+        .calculadora select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+        
+        #btnCalcular {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        #btnCalcular:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        #btnCalcular:active {
+            transform: translateY(0);
+        }
+        
+        #resultado {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--button-bg);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        #resultado-valor {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        /* Efecto de carga */
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        
+        .calculadora.calculating #resultado-valor::after {
+            content: '...';
+            animation: pulse 1.5s infinite;
+            display: inline-block;
+            width: 1em;
+            text-align: left;
+        }
+
+        /* Ajustes para el tema oscuro */
+        [data-theme="dark"] .calculadora select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23aaa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        }
+
+        /* Estilos para los textos de respuesta */
+        .texto-verde {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .texto-rojo {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        [data-theme="dark"] .texto-verde {
+            color: #2ecc71;
+        }
+        
+        [data-theme="dark"] .texto-rojo {
+            color: #e74c3c;
+        }
+        
+        /* Estilo para los botones del quiz */
+        .opcion-quiz {
+            transition: transform 0.2s ease-in-out;
+        }
+        
+        .opcion-quiz:hover {
+            animation: pulse 0.5s ease-in-out infinite;
+            transform: scale(1.02);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+    </style>
+    <script src="../js/herramienta-divisibilidad.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Preguntas específicas sobre divisibilidad
+            const preguntas = [
+                {
+                    text: {
+                        'es': '¿Qué significa que un número sea divisible por otro?',
+                        'eu': 'Zer esan nahi du zenbaki bat beste baten bidez zatigarria izateak?'
+                    },
+                    opciones: [
+                        { text: { 'es': 'Que al dividirlos el resultado es cero', 'eu': 'Zatitzean emaitza zero dela' }, correcta: false },
+                        { text: { 'es': 'Que al dividirlos el resto es cero', 'eu': 'Zatitzean hondarra zero dela' }, correcta: true },
+                        { text: { 'es': 'Que son iguales', 'eu': 'Berdinak direla' }, correcta: false },
+                        { text: { 'es': 'Que uno es mayor que el otro', 'eu': 'Bata bestea baino handiagoa dela' }, correcta: false }
+                    ]
+                },
+                {
+                    text: {
+                        'es': '¿Cuál de estos números NO es divisor de 24?',
+                        'eu': 'Zein da 24ren zatitzailea EZ den zenbakia?'
+                    },
+                    opciones: [
+                        { text: { 'es': '3', 'eu': '3' }, correcta: false },
+                        { text: { 'es': '5', 'eu': '5' }, correcta: true },
+                        { text: { 'es': '6', 'eu': '6' }, correcta: false },
+                        { text: { 'es': '8', 'eu': '8' }, correcta: false }
+                    ]
+                },
+                {
+                    text: {
+                        'es': 'Si un número es divisible por 4 y por 3, también lo es por...',
+                        'eu': 'Zenbaki bat 4z eta 3z zatigarria bada, orduan...-z ere zatigarria da'
+                    },
+                    opciones: [
+                        { text: { 'es': '7', 'eu': '7' }, correcta: false },
+                        { text: { 'es': '9', 'eu': '9' }, correcta: false },
+                        { text: { 'es': '12', 'eu': '12' }, correcta: true },
+                        { text: { 'es': '15', 'eu': '15' }, correcta: false }
+                    ]
+                },
+                {
+                    text: {
+                        'es': '¿Cuál de estos números es divisible por 9?',
+                        'eu': 'Zein da 9z zatigarria den zenbakia?'
+                    },
+                    opciones: [
+                        { text: { 'es': '123', 'eu': '123' }, correcta: false },
+                        { text: { 'es': '234', 'eu': '234' }, correcta: true },
+                        { text: { 'es': '345', 'eu': '345' }, correcta: false },
+                        { text: { 'es': '456', 'eu': '456' }, correcta: false }
+                    ]
+                },
+                {
+                    text: {
+                        'es': 'Un número es divisible por 6 si...',
+                        'eu': 'Zenbaki bat 6z zatigarria da...'
+                    },
+                    opciones: [
+                        { text: { 'es': 'Termina en cifra par', 'eu': 'Zenbaki bikoitiaz amaitzen bada' }, correcta: false },
+                        { text: { 'es': 'Termina en 0 o 5', 'eu': '0z edo 5ez amaitzen bada' }, correcta: false },
+                        { text: { 'es': 'Es divisible por 2 y 3', 'eu': '2z eta 3z zatigarria bada' }, correcta: true },
+                        { text: { 'es': 'Es mayor que 10', 'eu': '10 baino handiagoa bada' }, correcta: false }
+                    ]
+                }
+            ];
+
+            let preguntaActual = 0;
+            let puntuacion = 0;
+            const preguntaElement = document.getElementById('pregunta-quiz');
+            const opcionesElement = document.querySelector('.opciones-quiz');
+            const resultadoElement = document.getElementById('resultado-quiz');
+            const botonSiguiente = document.createElement('button');
+            botonSiguiente.className = 'button-primary';
+            const nextButtonText = document.createElement('span');
+            nextButtonText.setAttribute('data-lang-es', 'Siguiente Pregunta');
+            nextButtonText.setAttribute('data-lang-eu', 'Hurrengo Galdera');
+            nextButtonText.textContent = 'Siguiente Pregunta';
+            botonSiguiente.appendChild(nextButtonText);
+            botonSiguiente.style.marginTop = '1rem';
+            botonSiguiente.style.display = 'none';
+            document.querySelector('.quiz').appendChild(botonSiguiente);
+
+            // Update language for all elements when language changes
+            document.addEventListener('languageChanged', function() {
+                const currentLang = document.documentElement.lang || 'es';
+                
+                // Update next button text
+                const nextButtonText = botonSiguiente.querySelector('span') || document.createElement('span');
+                nextButtonText.setAttribute('data-lang-es', 'Siguiente Pregunta');
+                nextButtonText.setAttribute('data-lang-eu', 'Hurrengo Galdera');
+                nextButtonText.textContent = currentLang === 'eu' ? 'Hurrengo Galdera' : 'Siguiente Pregunta';
+                
+                if (!botonSiguiente.querySelector('span')) {
+                    botonSiguiente.innerHTML = '';
+                    botonSiguiente.appendChild(nextButtonText);
+                }
+                
+                // Update current question and options
+                if (preguntaActual < preguntas.length) {
+                    const pregunta = preguntas[preguntaActual];
+                    const preguntaSpan = preguntaElement.querySelector('span') || document.createElement('span');
+                    preguntaSpan.setAttribute('data-lang-es', pregunta.text['es']);
+                    preguntaSpan.setAttribute('data-lang-eu', pregunta.text['eu']);
+                    preguntaSpan.textContent = pregunta.text[currentLang];
+                    
+                    if (!preguntaElement.querySelector('span')) {
+                        preguntaElement.innerHTML = '';
+                        preguntaElement.appendChild(preguntaSpan);
+                    }
+                    
+                    // Update options
+                    const opciones = opcionesElement.querySelectorAll('.opcion-quiz span');
+                    opciones.forEach((opcion, index) => {
+                        const opcionData = pregunta.opciones[index];
+                        opcion.setAttribute('data-lang-es', opcionData.text['es']);
+                        opcion.setAttribute('data-lang-eu', opcionData.text['eu']);
+                        opcion.textContent = opcionData.text[currentLang];
+                    });
+                }
+                
+                // Update result messages
+                const mensajeCorrecto = resultadoElement.querySelector('[data-lang-es]');
+                if (mensajeCorrecto) {
+                    const key = currentLang === 'eu' ? 'data-lang-eu' : 'data-lang-es';
+                    mensajeCorrecto.textContent = mensajeCorrecto.getAttribute(key);
+                }
+            });
+
+            function mostrarPregunta() {
+                const currentLang = document.documentElement.lang || 'es';
+                const pregunta = preguntas[preguntaActual];
+                
+                // Update question text with language attributes
+                preguntaElement.innerHTML = '';
+                const preguntaSpan = document.createElement('span');
+                preguntaSpan.setAttribute('data-lang-es', pregunta.text['es']);
+                preguntaSpan.setAttribute('data-lang-eu', pregunta.text['eu']);
+                preguntaSpan.textContent = pregunta.text[currentLang];
+                preguntaElement.appendChild(preguntaSpan);
+                
+                opcionesElement.innerHTML = '';
+                resultadoElement.textContent = '';
+                botonSiguiente.style.display = 'none';
+
+                // Create answer buttons
+                pregunta.opciones.forEach((opcion, index) => {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion-quiz';
+                    
+                    // Set button text based on current language with language attributes
+                    const span = document.createElement('span');
+                    span.setAttribute('data-lang-es', opcion.text['es']);
+                    span.setAttribute('data-lang-eu', opcion.text['eu']);
+                    span.textContent = opcion.text[currentLang];
+                    
+                    boton.appendChild(span);
+                    boton.onclick = () => verificarRespuesta(opcion.correcta, boton);
+                    opcionesElement.appendChild(boton);
+                });
+            }
+
+            function verificarRespuesta(esCorrecta, boton) {
+                const botones = document.querySelectorAll('.opcion-quiz');
+                botones.forEach(b => b.disabled = true);
+                
+                const currentLang = document.documentElement.lang || 'es';
+                
+                // Create result messages with language attributes
+                const mensajeCorrecto = document.createElement('span');
+                mensajeCorrecto.setAttribute('data-lang-es', '¡Respuesta correcta!');
+                mensajeCorrecto.setAttribute('data-lang-eu', 'Ongi erantzun duzu!');
+                mensajeCorrecto.textContent = currentLang === 'eu' ? 'Ongi erantzun duzu!' : '¡Respuesta correcta!';
+                
+                const mensajeIncorrecto = document.createElement('span');
+                mensajeIncorrecto.setAttribute('data-lang-es', 'Respuesta incorrecta. ¡Inténtalo de nuevo!');
+                mensajeIncorrecto.setAttribute('data-lang-eu', 'Erantzun okerra. Saiatu berriro!');
+                mensajeIncorrecto.textContent = currentLang === 'eu' ? 'Erantzun okerra. Saiatu berriro!' : 'Respuesta incorrecta. ¡Inténtalo de nuevo!';
+                
+                if (esCorrecta) {
+                    boton.style.backgroundColor = '#4CAF50';
+                    resultadoElement.innerHTML = '';
+                    resultadoElement.appendChild(mensajeCorrecto);
+                    resultadoElement.style.color = '#4CAF50';
+                    puntuacion++;
+                } else {
+                    boton.style.backgroundColor = '#f44336';
+                    resultadoElement.innerHTML = '';
+                    resultadoElement.appendChild(mensajeIncorrecto);
+                    resultadoElement.style.color = '#f44336';
+                }
+                
+                botonSiguiente.style.display = 'block';
+            }
+
+            botonSiguiente.addEventListener('click', function() {
+                preguntaActual++;
+                if (preguntaActual < preguntas.length) {
+                    mostrarPregunta();
+                } else {
+                    const currentLang = document.documentElement.lang || 'es';
+                    
+                    // Create completion message with language attributes
+                    const mensajeCompletado = document.createElement('span');
+                    mensajeCompletado.setAttribute('data-lang-es', `¡Quiz completado! Tu puntuación: ${puntuacion}/${preguntas.length}`);
+                    mensajeCompletado.setAttribute('data-lang-eu', `Quiz amaitu da! Zure puntuazioa: ${puntuacion}/${preguntas.length}`);
+                    mensajeCompletado.textContent = currentLang === 'eu' 
+                        ? `Quiz amaitu da! Zure puntuazioa: ${puntuacion}/${preguntas.length}`
+                        : `¡Quiz completado! Tu puntuación: ${puntuacion}/${preguntas.length}`;
+                    
+                    preguntaElement.innerHTML = '';
+                    preguntaElement.appendChild(mensajeCompletado);
+                    opcionesElement.innerHTML = '';
+                    resultadoElement.textContent = '';
+                    botonSiguiente.style.display = 'none';
+                    
+                    // Add restart button with language attributes
+                    const botonReiniciar = document.createElement('button');
+                    botonReiniciar.className = 'button-primary';
+                    
+                    const textoBoton = document.createElement('span');
+                    textoBoton.setAttribute('data-lang-es', 'Reiniciar Quiz');
+                    textoBoton.setAttribute('data-lang-eu', 'Berrabiarazi Quiz-a');
+                    textoBoton.textContent = currentLang === 'eu' ? 'Berrabiarazi Quiz-a' : 'Reiniciar Quiz';
+                    
+                    botonReiniciar.appendChild(textoBoton);
+                    botonReiniciar.style.marginTop = '1rem';
+                    botonReiniciar.onclick = function() {
+                        preguntaActual = 0;
+                        puntuacion = 0;
+                        mostrarPregunta();
+                        this.remove();
+                    };
+                    opcionesElement.appendChild(botonReiniciar);
+                }
+            });
+
+            // Start the quiz
+            mostrarPregunta();
+        });
+    </script>
+    <style>
+        .opciones-quiz {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 1rem 0;
+        }
+        .opcion-quiz {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: left;
+            width: 100%;
+        }
+        .opcion-quiz:hover {
+            background-color: #e9e9e9;
+        }
+        .opcion-quiz:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        #resultado-quiz {
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+    </style>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

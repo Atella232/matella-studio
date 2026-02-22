@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Expresiones Algebraicas - Lenguaje Algebraico" data-lang-eu="Adierazpen Aljebraikoak - Hizkuntza Aljebraikoa">Expresiones Algebraicas - Lenguaje Algebraico</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-calculator"></i>
+            <span data-lang-es="Expresiones Algebraicas" data-lang-eu="Adierazpen Aljebraikoak">Expresiones Algebraicas</span>
+        </div>
+        <nav>
+            <button class="action-button" data-lang-es="Ejercicios" data-lang-eu="Ariketa">Ejercicios</button>
+            <button class="action-button" data-lang-es="Herramienta" data-lang-eu="Tresna">Herramienta</button>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Expresiones Algebraicas" data-lang-eu="Adierazpen Aljebraikoak">Expresiones Algebraicas</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es una Expresión Algebraica?" data-lang-eu="Zer da Adierazpen Aljebraiko bat?">¿Qué es una Expresión Algebraica?</h3>
+            <p data-lang-es="Una expresión algebraica es una combinación de números, variables y operaciones algebraicas (suma, resta, multiplicación, división, potencias y raíces)."
+               data-lang-eu="Adierazpen aljebraiko bat zenbakien, aldagai eta eragiketa aljebraikoen (batura, kenketa, biderketa, zatiketa, berretura eta erroen) konbinazioa da.">
+               Una expresión algebraica es una combinación de números, variables y operaciones algebraicas (suma, resta, multiplicación, división, potencias y raíces).
+            </p>
+            <p class="key-takeaway" data-lang-es="<b>Las variables</b> son letras que representan valores desconocidos o variables en matemáticas. Los números que acompañan a las variables son los <b>coeficientes</b>."
+               data-lang-eu="<b>Aldagaiak</b> matematikan ezezagunak edo aldagaiak irudikatzen dituzten letrak dira. Aldagaiekin batera doazen zenbakiak <b>koefizienteak</b> dira.">
+               <b>Las variables</b> son letras que representan valores desconocidos o variables en matemáticas. Los números que acompañan a las variables son los <b>coeficientes</b>.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Clasificación de Expresiones Algebraicas" data-lang-eu="Adierazpen Aljebraikoen Sailkapena">Clasificación de Expresiones Algebraicas</h3>
+            <p data-lang-es="Según el número de términos que las componen, las expresiones algebraicas se clasifican en:"
+               data-lang-eu="Osagaien kopuruaren arabera, adierazpen aljebraikoak honela sailkatzen dira:">
+               Según el número de términos que las componen, las expresiones algebraicas se clasifican en:
+            </p>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-star icon-concept"></i>
+                        <span data-lang-es="Monomio" data-lang-eu="Monomioa">Monomio</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Es una expresión algebraica formada por un <b>único término</b>."
+                           data-lang-eu="Adierazpen aljebraiko bat da, <b>gai bakarra</b> daukana.">
+                           Es una expresión algebraica formada por un <b>único término</b>.
+                        </p>
+                        <p class="example"><em data-lang-es="Ejemplos: 3x²y, -5z, 7a²" data-lang-eu="Adibideak: 3x²y, -5z, 7a²">Ejemplos: 3x²y, -5z, 7a²</em></p>
+                        <p data-lang-es="Un monomio consta de:"
+                           data-lang-eu="Monomio batek hauek ditu:">
+                           Un monomio consta de:
+                        </p>
+                        <ul>
+                            <li data-lang-es="<b>Coefficient:</b> el número (ejemplo: 3 en 3x²y)"
+                                data-lang-eu="<b>Koefizientea:</b> zenbakia (adb: 3 3x²y-an)">
+                                <b>Coeficiente:</b> el número (ejemplo: 3 en 3x²y)
+                            </li>
+                            <li data-lang-es="<b>Variable:</b> la letra (ejemplo: x e y en 3x²y)"
+                                data-lang-eu="<b>Aldagaia:</b> letra (adb: x eta y 3x²y-an)">
+                                <b>Variable:</b> la letra (ejemplo: x e y en 3x²y)
+                            </li>
+                            <li data-lang-es="<b>Exponente:</b> el número pequeño que indica cuántas veces se repite la variable (ejemplo: 2 en x²)"
+                                data-lang-eu="<b>Berretzailea:</b> aldagai zenbat aldiz errepikatzen den adierazten duen zenbakia (adb: 2 x²-an)">
+                                <b>Exponente:</b> el número pequeño que indica cuántas veces se repite la variable (ejemplo: 2 en x²)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-plus icon-concept"></i>
+                        <span data-lang-es="Binomio" data-lang-eu="Binomioa">Binomio</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Es una expresión algebraica formada por <b>dos términos</b> unidos por suma o resta."
+                           data-lang-eu="Adierazpen aljebraiko bat da, <b>bi gai</b> dauzana, batura edo kenketaz lotuak.">
+                           Es una expresión algebraica formada por <b>dos términos</b> unidos por suma o resta.
+                        </p>
+                        <p class="example"><em data-lang-es="Ejemplos: 2x + 5, a - 3b, x² + 4"
+                                data-lang-eu="Adibideak: 2x + 5, a - 3b, x² + 4">Ejemplos: 2x + 5, a - 3b, x² + 4</em></p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-th icon-concept"></i>
+                        <span data-lang-es="Trinomio" data-lang-eu="Trinomioa">Trinomio</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Es una expresión algebraica formada por <b>tres términos</b>."
+                           data-lang-eu="Adierazpen aljebraiko bat da, <b>hiru gai</b> dauzana.">
+                           Es una expresión algebraica formada por <b>tres términos</b>.
+                        </p>
+                        <p class="example"><em data-lang-es="Ejemplos: x² + 3x + 2, 2a + 5b - c"
+                                data-lang-eu="Adibideak: x² + 3x + 2, 2a + 5b - c">Ejemplos: x² + 3x + 2, 2a + 5b - c</em></p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-layer-group icon-concept"></i>
+                        <span data-lang-es="Polinomio" data-lang-eu="Polinomioa">Polinomio</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Es una expresión algebraica formada por <b>cuatro o más términos</b>."
+                           data-lang-eu="Adierazpen aljebraiko bat da, <b>lau gai edo gehiago</b> dauzana.">
+                           Es una expresión algebraica formada por <b>cuatro o más términos</b>.
+                        </p>
+                        <p class="example"><em data-lang-es="Ejemplos: x³ + 2x² - x + 1, a² + b² + c² + 2ab"
+                                data-lang-eu="Adibideak: x³ + 2x² - x + 1, a² + b² + c² + 2ab">Ejemplos: x³ + 2x² - x + 1, a² + b² + c² + 2ab</em></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Grado de un Monomio" data-lang-eu="Monomio Baten Maila">Grado de un Monomio</h3>
+            <p data-lang-es="El <b>grado de un monomio</b> es la suma de todos los exponentes de las variables que contiene."
+               data-lang-eu="<b>Monomio baten maila</b> dauzkan aldagai guztien berretzaileen batura da.">
+               El <b>grado de un monomio</b> es la suma de todos los exponentes de las variables que contiene.
+            </p>
+            <div class="formula-box">
+                <p data-lang-es="<b>Fórmula:</b> Si el monomio es $ax_1^{e_1}x_2^{e_2}...x_n^{e_n}$, entonces grado = $e_1 + e_2 + ... + e_n$"
+                   data-lang-eu="<b>Formula:</b> Monomioa $ax_1^{e_1}x_2^{e_2}...x_n^{e_n}$ bada, orduan maila = $e_1 + e_2 + ... + e_n$">
+                   <b>Fórmula:</b> Si el monomio es $ax_1^{e_1}x_2^{e_2}...x_n^{e_n}$, entonces grado = $e_1 + e_2 + ... + e_n$
+                </p>
+            </div>
+            <p class="example">
+                <em data-lang-es="Ejemplos:<br>• $3x^2y^3$ → Grado = 2 + 3 = 5<br>• $-5ab^2c^4$ → Grado = 1 + 2 + 4 = 7<br>• $7x$ → Grado = 1"
+                   data-lang-eu="Adibideak:<br>• $3x^2y^3$ → Maila = 2 + 3 = 5<br>• $-5ab^2c^4$ → Maila = 1 + 2 + 4 = 7<br>• $7x$ → Maila = 1">
+                   Ejemplos:<br>• $3x^2y^3$ → Grado = 2 + 3 = 5<br>• $-5ab^2c^4$ → Grado = 1 + 2 + 4 = 7<br>• $7x$ → Grado = 1
+                </em>
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Grado de un Polinomio" data-lang-eu="Polinomio Baten Maila">Grado de un Polinomio</h3>
+            <p data-lang-es="El <b>grado de un polinomio</b> es el mayor grado de todos sus términos."
+               data-lang-eu="<b>Polinomio baten maila</b> bere gai guztien mailarik handiena da.">
+               El <b>grado de un polinomio</b> es el mayor grado de todos sus términos.
+            </p>
+            <div class="formula-box">
+                <p data-lang-es="<b>Ejemplo:</b> $P(x) = 3x^5 + 2x^3 - x + 7$ → Grado del polinomio = 5"
+                   data-lang-eu="<b>Adibidea:</b> $P(x) = 3x^5 + 2x^3 - x + 7$ → Polinomioaren maila = 5">
+                   <b>Ejemplo:</b> $P(x) = 3x^5 + 2x^3 - x + 7$ → Grado del polinomio = 5
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Términos Semejantes" data-lang-eu="Gai Antzekoak">Términos Semejantes</h3>
+            <p data-lang-es="Dos o más términos son <b>semejantes</b> cuando tienen las mismas variables elevadas a los mismos exponentes."
+               data-lang-eu="Bi gai edo gehiago <b>antzekoak</b> dira berdin-berdin berretuta dauden aldagaiak dutenean.">
+               Dos o más términos son <b>semejantes</b> cuando tienen las mismas variables elevadas a los mismos exponentes.
+            </p>
+            <p class="example">
+                <em data-lang-es="Ejemplos de términos semejantes:<br>• $3x^2$ y $5x^2$<br>• $-2ab$ y $7ab$<br>• $4x^3y^2$ y $-x^3y^2$<br><br>No son semejantes:<br>• $3x^2$ y $3x^3$ (diferentes exponentes)<br>• $2ab$ y $3ac$ (diferentes variables)"
+                   data-lang-eu="Gai antzekoen adibideak:<br>• $3x^2$ eta $5x^2$<br>• $-2ab$ eta $7ab$<br>• $4x^3y^2$ eta $-x^3y^2$<br><br>Ez dira antzekoak:<br>• $3x^2$ eta $3x^3$ (berretzaile desberdinak)<br>• $2ab$ eta $3ac$ (aldagai desberdinak)">
+                   Ejemplos de términos semejantes:<br>• $3x^2$ y $5x^2$<br>• $-2ab$ y $7ab$<br>• $4x^3y^2$ y $-x^3y^2$<br><br>No son semejantes:<br>• $3x^2$ y $3x^3$ (diferentes exponentes)<br>• $2ab$ y $3ac$ (diferentes variables)
+                </em>
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Errores Típicos" data-lang-eu="Ohiko Akatsak">Errores Típicos</h3>
+            <div class="warning-box">
+                <ul>
+                    <li data-lang-es="<b>Confundir coeficiente con grado:</b> El coeficiente es el número (5 en $5x^3$), el grado es la suma de exponentes (3 en $x^3$)"
+                        data-lang-eu="<b>Koefizientea mailarekin nahastea:</b> Koefizientea zenbakia da (5 $5x^3$-an), maila berretzaileen batura da (3 $x^3$-an)">
+                        <b>Confundir coeficiente con grado:</b> El coeficiente es el número (5 en $5x^3$), el grado es la suma de exponentes (3 en $x^3$)
+                    </li>
+                    <li data-lang-es="<b>No identificar correctamente el grado de un polinomio:</b> Debe ser el término de mayor grado"
+                        data-lang-eu="<b>Polinomio baten maila zuzen identifikatzea:</b> Gai mailarik handiena izan behar du">
+                        <b>No identificar correctamente el grado de un polinomio:</b> Debe ser el término de mayor grado
+                    </li>
+                    <li data-lang-es="<b>Confundir términos semejantes:</b> Deben tener las mismas variables con los mismos exponentes"
+                        data-lang-eu="<b>Gai antzekoak nahastea:</b> Berdin-berdin berretuta dituzten aldagai berdinak izan behar dituzte">
+                        <b>Confundir términos semejantes:</b> Deben tener las mismas variables con los mismos exponentes
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

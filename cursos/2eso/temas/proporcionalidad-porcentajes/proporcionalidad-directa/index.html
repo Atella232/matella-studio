@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="Proporcionalidad Directa - MATELLA" data-lang-eu="Zuzeneko Proportzionaltasuna - MATELLA">Proporcionalidad Directa - MATELLA</title>
+  
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    /* Estilos para fórmulas matemáticas */
+    .math-formula {
+      background-color: var(--card-bg);
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      margin: 1rem 0;
+      text-align: center;
+      font-size: 1.1em;
+      overflow-x: auto;
+    }
+    .example {
+      background-color: var(--button-bg);
+      padding: 0.8rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+    }
+    
+    /* Estilos específicos para la página de Proporcionalidad Directa */
+    body {
+        font-family: 'Poppins', sans-serif; /* Tipografía más juvenil */
+    }
+
+    .page-title {
+        font-size: 2.2em;
+        font-weight: 700;
+    }
+
+    .subsection-title {
+        font-size: 1.8em;
+        font-weight: 600;
+        margin-top: 3rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--secondary-color);
+        color: var(--primary-color);
+    }
+    
+    /* Cajas de información personalizadas */
+    .info-box {
+        background-color: var(--button-bg);
+        padding: 1.5rem;
+        border-radius: 8px;
+        border-left: 5px solid var(--secondary-color);
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin: 1.5rem 0;
+    }
+
+    .info-box i.fas {
+        font-size: 1.8em;
+        color: var(--secondary-color);
+        margin-top: 0.2rem;
+    }
+
+    .info-box.alert-box {
+        background-color: rgba(231, 76, 60, 0.1);
+        border-left-color: #e74c3c;
+    }
+
+    .info-box.alert-box i.fas {
+        color: #e74c3c;
+    }
+    
+    /* Grid para ejemplos interactivos */
+    .interactive-examples-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    .interactive-card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: var(--card-shadow);
+        text-align: center;
+    }
+
+    .interactive-card h4 {
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 0;
+    }
+
+    .interactive-card .slider-container {
+        margin: 1.5rem 0;
+    }
+
+    .interactive-card input[type="range"] {
+        width: 100%;
+        cursor: pointer;
+        accent-color: var(--primary-color);
+    }
+
+    .interactive-card .output-display {
+        font-size: 1.2em;
+        font-weight: 600;
+        margin: 1rem 0;
+    }
+
+    .interactive-card .k-constant {
+        background-color: var(--button-bg);
+        padding: 0.8rem;
+        border-radius: 6px;
+        font-family: monospace;
+        font-size: 1.1em;
+        color: var(--secondary-color);
+        font-weight: bold;
+    }
+
+    /* Layout de dos columnas para métodos de resolución */
+    .two-column-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    @media(min-width: 768px) {
+        .two-column-layout { grid-template-columns: 1fr 1fr; }
+    }
+
+    .resolution-method {
+        padding: 1.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+    }
+    
+    .resolution-method h4 {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.3em;
+        margin-top: 0;
+    }
+
+    .interactive-problem .step {
+        margin: 1rem 0;
+        font-weight: bold;
+    }
+    .interactive-problem input[type="text"] {
+        padding: 0.5rem;
+        border-radius: 4px;
+        border: 2px solid var(--border-color);
+        text-align: center;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        width: 80px;
+    }
+
+    .interactive-problem input.correct {
+        background-color: rgba(40, 167, 69, 0.1);
+        border-color: #28a745;
+    }
+    
+    .interactive-problem input.incorrect {
+        background-color: rgba(220, 53, 69, 0.1);
+        border-color: #dc3545;
+    }
+
+    .rule-of-three-table {
+        width: 80%;
+        margin: 1.5rem auto;
+        border-collapse: collapse;
+        text-align: center;
+    }
+
+    .rule-of-three-table th, .rule-of-three-table td {
+        border: 1px solid var(--border-color);
+        padding: 0.8rem;
+        font-size: 1.1em;
+    }
+    
+    .rule-of-three-table th {
+        background-color: var(--button-bg);
+        color: var(--primary-color);
+    }
+    
+    /* Simulador de Recetas */
+    #recipe-simulator {
+      background: linear-gradient(135deg, var(--bg-color) 0%, var(--card-bg) 100%);
+      padding: 2rem;
+    }
+
+    .recipe-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    @media(min-width: 768px) {
+        .recipe-container { grid-template-columns: 1fr 1fr; }
+    }
+
+    .recipe-list h4 { margin-bottom: 1rem; }
+    .recipe-list ul { list-style: none; padding-left: 0; }
+    .recipe-list li { margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+    .recipe-list input { width: 80px; margin-right: 5px; }
+    
+    #recipe-feedback-container {
+        position: relative;
+        margin-top: 1.5rem;
+        min-height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .feedback-animation {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .feedback-animation.active {
+        display: flex;
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    .feedback-animation img {
+        max-width: 150px;
+        margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <a href="../../../../../index.html" class="home-link">
+        <i class="fas fa-calculator"></i>
+        <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+      </a>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
+    </nav>
+  </header>
+  
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol>
+      <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
+      <li><a href="../index.html" data-lang-es="Proporcionalidad y porcentajes" data-lang-eu="Proportzionaltasuna eta ehunekoak">Proporcionalidad y porcentajes</a></li>
+      <li class="active" aria-current="page"><span data-lang-es="Proporcionalidad directa" data-lang-eu="Proportzionaltasun zuzena">Proporcionalidad directa</span></li>
+    </ol>
+  </nav>
+
+  <main>
+    <section class="content-section">
+      <h1 class="page-title" data-lang-es="El Mundo de la Proporcionalidad Directa" data-lang-eu="Zuzeneko Proportzionaltasunaren Mundua">El Mundo de la Proporcionalidad Directa</h1>
+      
+      <div class="accordion">
+        
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="true">
+            <i class="fas fa-ruler-combined icon-concept"></i>
+            <span data-lang-es="Definición y Constante de Proporcionalidad (k)" data-lang-eu="Definizioa eta Proportzionaltasun Konstantea (k)">Definición y Constante (k)</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <div class="info-box">
+              <i class="fas fa-book"></i>
+              <div>
+                <h4 data-lang-es="Definición Rigurosa" data-lang-eu="Definizio Zehatza">Definición Rigurosa</h4>
+                <p data-lang-es="Dos magnitudes son directamente proporcionales cuando, al multiplicar o dividir una por un número, la otra queda multiplicada o dividida por ese mismo número." data-lang-eu="Bi magnitude zuzenki proportzionalak dira, bat zenbaki batez biderkatzean edo zatitzean, bestea zenbaki berberaz biderkatuta edo zatituta geratzen denean.">Dos magnitudes son directamente proporcionales cuando, al multiplicar o dividir una por un número, la otra queda multiplicada o dividida por ese mismo número.</p>
+              </div>
+            </div>
+            <div class="info-box">
+              <i class="fas fa-lightbulb"></i>
+              <div>
+                <h4 data-lang-es="En otras palabras..." data-lang-eu="Beste era batera esanda...">En otras palabras...</h4>
+                <p data-lang-es="Si una cosa sube al doble, la otra también. Si baja a la mitad, la otra también." data-lang-eu="Gauza bat bikoizten bada, bestea ere bai. Erdira jaisten bada, bestea ere bai.">Si una cosa sube al doble, la otra también. Si baja a la mitad, la otra también.</p>
+              </div>
+            </div>
+            <div class="interactive-examples-grid">
+              <div class="interactive-card">
+                <h4><i class="fas fa-print"></i> <span data-lang-es="Fotocopias" data-lang-eu="Fotokopiak">Fotocopias</span></h4>
+                <div class="slider-container"><label for="fotocopias-slider" data-lang-es="Nº de fotocopias: " data-lang-eu="Fotokopia kop.: ">Nº de fotocopias: </label><span id="fotocopias-valor">1</span><input type="range" id="fotocopias-slider" min="1" max="20" value="1"></div>
+                <div class="output-display" data-lang-es="Coste Total: " data-lang-eu="Kostu Totala: ">Coste Total: <span id="fotocopias-coste">0.05</span> €</div>
+                <div class="k-constant">k = 0.05 €/copia</div>
+              </div>
+              <div class="interactive-card">
+                <h4><i class="fas fa-faucet-drip"></i> <span data-lang-es="Agua del Grifo" data-lang-eu="Txorrotako Ura">Agua del Grifo</span></h4>
+                <div class="slider-container"><label for="grifo-slider" data-lang-es="Minutos abierto: " data-lang-eu="Minutu irekita: ">Minutos abierto: </label><span id="grifo-valor">1</span><input type="range" id="grifo-slider" min="1" max="15" value="1"></div>
+                <div class="output-display" data-lang-es="Litros vertidos: " data-lang-eu="Isuritako litroak: ">Litros vertidos: <span id="grifo-litros">12</span> L</div>
+                <div class="k-constant">k = 12 L/min</div>
+              </div>
+            </div>
+            <div class="math-formula">
+              \[ k = \frac{\text{magnitud B}}{\text{magnitud A}} = \frac{y}{x} \]
+            </div>
+            <p style="text-align: center;" data-lang-es="La constante \(k\) es el ADN de la relación. ¡Nos dice cuánto vale una sola unidad!" data-lang-eu="\(k\) konstantea erlazioaren ADNa da. Unitate bakar batek zenbat balio duen esaten digu!">La constante <strong>\(k\)</strong> es el ADN de la relación. ¡Nos dice cuánto vale <strong>una sola unidad</strong>!</p>
+            <div class="info-box alert-box">
+              <i class="fas fa-triangle-exclamation"></i>
+              <div>
+                <h4 data-lang-es="¡OJO! Falsa Concepción" data-lang-eu="KONTUZ! Kontzeptu Okerra">¡OJO! Falsa Concepción</h4>
+                <p data-lang-es="Que dos cosas aumenten a la vez no significa que sean proporcionales. El cociente (k) debe ser constante." data-lang-eu="Bi gauza batera handitzeak ez du esan nahi proportzionalak direnik. Zatidurak (k) konstantea izan behar du.">Que dos cosas aumenten a la vez no significa que sean proporcionales. El cociente (k) debe ser <strong>constante</strong>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-calculator icon-concept"></i>
+            <span data-lang-es="Estrategias para Resolver Problemas" data-lang-eu="Problemak Ebazteko Estrategiak">Estrategias para Resolver Problemas</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <div class="two-column-layout">
+              <div class="resolution-method">
+                <h4><i class="fas fa-magnifying-glass"></i> <span data-lang-es="Reducción a la Unidad (El Lógico)" data-lang-eu="Unitatera Murriztea (Logikoa)">Reducción a la Unidad (El Lógico)</span></h4>
+                <ol>
+                  <li data-lang-es="Calcula el valor de UNA unidad (dividiendo)." data-lang-eu="Kalkulatu unitate BATEKO balioa (zatituz).">Calcula el valor de <strong>UNA</strong> unidad (dividiendo).</li>
+                  <li data-lang-es="Multiplica por el número que buscas." data-lang-eu="Biderkatu bilatzen duzun zenbakiarekin."><strong>Multiplica</strong> por el número que buscas.</li>
+                </ol>
+                <div class="interactive-problem">
+                  <p data-lang-es="Problema: Si \(6\) latas cuestan \(4.20\)€, ¿cuánto costarán \(10\)?" data-lang-eu="Arazoa: \(6\) lata \(4.20\)€ badira, zenbat \(10\)?"><strong>Problema:</strong> Si \(6\) latas cuestan \(4.20\)€, ¿cuánto costarán \(10\)?</p>
+                  <div class="step" data-lang-es="Paso 1: Precio 1 lata = " data-lang-eu="1. Urratsa: Lata 1 prezioa = ">Paso 1: Precio 1 lata = \(\frac{4.20}{6} =\) <input type="text" id="unidad-input" placeholder="?.??"> €</div>
+                  <div class="step" data-lang-es="Paso 2: Coste 10 latas = " data-lang-eu="2. Urratsa: 10 lata kostua = ">Paso 2: Coste 10 latas = \(10 \times\) <span id="unidad-value">0.70</span> = <span id="total-output">\(7.00\)</span> €</div>
+                </div>
+              </div>
+              <div class="resolution-method">
+                <h4><i class="fas fa-rocket"></i> <span data-lang-es="La Regla de Tres (El Rápido)" data-lang-eu="Hiruko Erregela (Azkarra)">La Regla de Tres (El Rápido)</span></h4>
+                <table class="rule-of-three-table">
+                  <thead><tr><th data-lang-es="Latas" data-lang-eu="Latak">Latas</th><th data-lang-es="Coste (€)" data-lang-eu="Kostua (€)">Coste (€)</th></tr></thead>
+                  <tbody><tr><td>6</td><td>4.20</td></tr><tr><td>10</td><td>x</td></tr></tbody>
+                </table>
+                <div class="formula-box">$$ \frac{6}{10} = \frac{4.20}{x} \implies 6 \cdot x = 10 \cdot 4.20 $$</div>
+                <div class="interactive-problem" style="text-align:center;">
+                  <div class="step">6x = <input type="text" id="cruzado-input" placeholder="??"></div>
+                  <div class="step">x = <input type="text" id="final-x-input" placeholder="?"> €</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-chart-line icon-concept"></i>
+            <span data-lang-es="Representación Gráfica: La Recta Mágica" data-lang-eu="Irudikapen Grafikoa: Lerro Magikoa">Representación Gráfica</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Al dibujar los puntos, ¡siempre forman una línea recta que empieza en el origen (0,0)!" data-lang-eu="Puntuak marraztean, beti jatorrian (0,0) hasten den lerro zuzen bat osatzen dute!">Al dibujar los puntos, ¡siempre forman una <strong>línea recta que empieza en el origen (0,0)</strong>!</p>
+            <div class="card-style">
+              <canvas id="proporcionalidad-chart"></canvas>
+              <div class="tool-actions" style="justify-content: center; margin-top: 1rem;"><button id="draw-points-btn" class="button-secondary"><i class="fas fa-circle-plus"></i> <span data-lang-es="Dibujar Puntos" data-lang-eu="Puntuak Marraztu">Dibujar Puntos</span></button><button id="draw-line-btn" class="button-primary"><i class="fas fa-pen-ruler"></i> <span data-lang-es="Unir con Recta" data-lang-eu="Lerroarekin Lotu">Unir con Recta</span></button></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-cookie-bite icon-concept"></i>
+            <span data-lang-es="¡A Cocinar! El Simulador de Recetas" data-lang-eu="Sukaldatzera! Errezeta Simulagailua">¡A Cocinar! El Simulador de Recetas</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <div id="recipe-simulator" class="interactive-tool card-style">
+              <h3 style="text-align:center; color: var(--primary-color);" data-lang-es="Muffins de Chocolate" data-lang-eu="Txokolatezko Muffinak">Muffins de Chocolate</h3>
+              <div class="recipe-container">
+                <div class="original-recipe recipe-list">
+                  <h4 data-lang-es="Receta para 6 personas" data-lang-eu="6 lagunentzako errezeta">Receta para 6 personas</h4>
+                  <ul>
+                    <li><i class="fas fa-cookie-bite" style="color: #D2B48C;"></i> 200 g Harina</li>
+                    <li><i class="fas fa-cube" style="color: #FFF;"></i> 150 g Azúcar</li>
+                    <li><i class="fas fa-egg" style="color: #F0E68C;"></i> 2 Huevos</li>
+                    <li><i class="fas fa-glass-water" style="color: #ADD8E6;"></i> 100 ml Leche</li>
+                    <li><i class="fas fa-seedling" style="color: #6B4226;"></i> 50 g Cacao</li>
+                  </ul>
+                </div>
+                <div class="new-recipe recipe-list">
+                  <h4><label for="people-selector" data-lang-es="Adaptar para " data-lang-eu="Egokitu ">Adaptar para </label><input type="number" id="people-selector" value="10" min="1" max="30" style="width: 60px;"><span data-lang-es=" personas" data-lang-eu=" lagun"> personas</span></h4>
+                  <ul>
+                    <li>Harina: <input type="text" id="harina-input" placeholder="g"> g</li>
+                    <li>Azúcar: <input type="text" id="azucar-input" placeholder="g"> g</li>
+                    <li>Huevos: <input type="text" id="huevos-input" placeholder="unid."></li>
+                    <li>Leche: <input type="text" id="leche-input" placeholder="ml"> ml</li>
+                    <li>Cacao: <input type="text" id="cacao-input" placeholder="g"> g</li>
+                  </ul>
+                </div>
+              </div>
+              <button id="bake-btn" class="button-primary" style="font-size: 1.2em; margin-top: 1.5rem;"><i class="fas fa-cookie-bite"></i> <span data-lang-es="¡A Hornear!" data-lang-eu="Labean Sartu!">¡A Hornear!</span></button>
+              <div id="recipe-feedback-container">
+                <div id="recipe-success" class="feedback-animation"><img src="https://i.imgur.com/2yA2C7L.png" alt="Muffins perfectos"><p style="color: #28a745; font-weight: bold;" data-lang-es="¡Perfecto! Eres un chef de la proporcionalidad." data-lang-eu="Primeran! Proportzionaltasunaren sukaldaria zara.">¡Perfecto! Eres un chef de la proporcionalidad.</p></div>
+                <div id="recipe-failure" class="feedback-animation"><img src="https://i.imgur.com/jY1hGgG.png" alt="Desastre en la cocina"><p style="color: #dc3545; font-weight: bold;" data-lang-es="¡Oh, no! Revisa tus cálculos." data-lang-eu="Akatsen bat dago. Berrikusi kalkuluak.">¡Oh, no! Revisa tus cálculos.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+
+  <!-- Botón flotante para volver arriba -->
+  <button id="back-to-top" aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof initTheme === 'function') initTheme(document.body, document.getElementById('theme-toggle'));
+      if (typeof initLanguage === 'function') initLanguage(document.documentElement, document.querySelectorAll('[data-lang-es], [data-lang-eu]'), document.getElementById('lang-toggle'));
+    });
+  </script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  
+  <script>
+    // Configuración del botón de volver arriba
+    document.addEventListener('DOMContentLoaded', function() {
+      const backToTopButton = document.getElementById('back-to-top');
+      
+      // Mostrar/ocultar botón al hacer scroll
+      function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
+      }
+      
+      // Mostrar el botón después de cargar la página
+      setTimeout(toggleBackToTop, 100);
+      
+      // Escuchar el evento de scroll
+      window.addEventListener('scroll', toggleBackToTop);
+      
+      // Hacer scroll suave al hacer clic
+      backToTopButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+  
+  <script>
+    // Configuración de MathJax
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- Inicialización del Acordeón (si no lo hace main.js) ---
+      // Se asume que main.js lo inicializa, pero si no, el código estaría aquí.
+      // if (typeof initAccordion === 'function') {
+      //   initAccordion(document.querySelectorAll('.accordion-item'));
+      // }
+
+      // --- Sliders Interactivos ---
+      const setupSlider = (sliderId, valorId, outputId, k, decimals = 2) => {
+          const slider = document.getElementById(sliderId);
+          const valor = document.getElementById(valorId);
+          const output = document.getElementById(outputId);
+          if (slider && valor && output) {
+              slider.addEventListener('input', () => {
+                  valor.textContent = slider.value;
+                  output.textContent = (slider.value * k).toFixed(decimals);
+              });
+          }
+      };
+      setupSlider('fotocopias-slider', 'fotocopias-valor', 'fotocopias-coste', 0.05);
+      setupSlider('grifo-slider', 'grifo-valor', 'grifo-litros', 12, 0);
+      
+      // --- Problemas Interactivos ---
+      const setupProblemChecker = (inputId, correctValue, outputId, outputValue) => {
+          const input = document.getElementById(inputId);
+          if (!input) return;
+          input.addEventListener('input', () => {
+              const userValue = parseFloat(input.value.replace(',', '.'));
+              if (Math.abs(userValue - correctValue) < 0.01) {
+                  input.classList.add('correct');
+                  input.classList.remove('incorrect');
+                  if (outputId && outputValue) {
+                      document.getElementById(outputId).textContent = outputValue;
+                  }
+                  if (inputId === 'final-x-input' && typeof confetti === 'function') {
+                      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                  }
+              } else {
+                  input.classList.add('incorrect');
+                  input.classList.remove('correct');
+                  if (outputId) document.getElementById(outputId).textContent = '?';
+              }
+          });
+      };
+      setupProblemChecker('unidad-input', 0.7, 'total-output', '7.00');
+      setupProblemChecker('cruzado-input', 42);
+      setupProblemChecker('final-x-input', 7);
+
+      // --- Gráfico Interactivo ---
+      const ctx = document.getElementById('proporcionalidad-chart');
+      let chart;
+      if (ctx) {
+          chart = new Chart(ctx, {
+              type: 'scatter',
+              data: { datasets: [{ label: 'Coste por Lata (€)', data: [], backgroundColor: 'var(--primary-color)', pointRadius: 6 }] },
+              options: {
+                  scales: { x: { title: { display: true, text: 'Nº de Latas' }}, y: { title: { display: true, text: 'Coste (€)'}, beginAtZero: true }},
+                  animation: { duration: 800 }
+              }
+          });
+          document.getElementById('draw-points-btn').addEventListener('click', () => {
+              chart.data.datasets[0].data = [{x: 0, y: 0}, {x: 6, y: 4.20}, {x: 10, y: 7.00}];
+              chart.options.showLine = false;
+              chart.update();
+          });
+          document.getElementById('draw-line-btn').addEventListener('click', () => {
+              chart.options.showLine = true;
+              chart.data.datasets[0].borderColor = 'var(--secondary-color)';
+              chart.data.datasets[0].borderWidth = 3;
+              chart.update();
+          });
+      }
+
+      // --- Simulador de Recetas ---
+      const bakeBtn = document.getElementById('bake-btn');
+      if (bakeBtn) {
+          bakeBtn.addEventListener('click', () => {
+              const people = document.getElementById('people-selector').value;
+              const k = { harina: 200/6, azucar: 150/6, huevos: 2/6, leche: 100/6, cacao: 50/6 };
+              const correct = { harina: k.harina * people, azucar: k.azucar * people, huevos: k.huevos * people, leche: k.leche * people, cacao: k.cacao * people };
+              let allCorrect = true;
+              for (const ing in correct) {
+                  const input = document.getElementById(`${ing}-input`);
+                  const isOk = Math.abs(parseFloat(input.value.replace(',', '.')) - correct[ing]) < correct[ing] * 0.05; // 5% de margen
+                  input.classList.toggle('correct', isOk);
+                  input.classList.toggle('incorrect', !isOk);
+                  if (!isOk) allCorrect = false;
+              }
+              document.getElementById('recipe-success').classList.toggle('active', allCorrect);
+              document.getElementById('recipe-failure').classList.toggle('active', !allCorrect);
+          });
+      }
+    });
+  </script>
+</body>
+</html>

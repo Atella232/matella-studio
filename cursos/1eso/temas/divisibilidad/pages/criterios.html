@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Criterios de Divisibilidad - Divisibilidad" data-lang-eu="Zatigarritasun Irizpideak - Zatigarritasuna">Criterios de Divisibilidad - Divisibilidad</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-tasks"></i>
+            <span data-lang-es="Criterios de Divisibilidad" data-lang-eu="Zatigarritasun Irizpideak">Criterios de Divisibilidad</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Criterios de Divisibilidad" data-lang-eu="Zatigarritasun Irizpideak">Criterios de Divisibilidad</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="Reglas Rápidas de Divisibilidad" data-lang-eu="Zatigarritasun Arau Azkarrak">Reglas Rápidas de Divisibilidad</h3>
+            <p data-lang-es="Existen reglas sencillas que nos permiten saber si un número es divisible por otro sin necesidad de hacer la división. Son atajos muy útiles."
+               data-lang-eu="Arau sinpleak daude, zenbaki bat beste batez zatigarria den jakiteko, zatiketa egin beharrik gabe. Lasterbide oso erabilgarriak dira.">
+               Existen reglas sencillas que nos permiten saber si un número es divisible por otro sin necesidad de hacer la división. Son atajos muy útiles.
+            </p>
+            <div class="table-container">
+                 <table class="variables-table">
+                    <thead>
+                         <tr>
+                             <th data-lang-es="Divisible por" data-lang-eu="Zatigarria">Divisible por</th>
+                             <th data-lang-es="Criterio" data-lang-eu="Irizpidea">Criterio</th>
+                             <th data-lang-es="Ejemplo" data-lang-eu="Adibidea">Ejemplo</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr>
+                            <td><b>2</b></td>
+                            <td data-lang-es="El número termina en cifra par (0, 2, 4, 6, 8)." data-lang-eu="Zenbakia zifra bikoitian amaitzen da (0, 2, 4, 6, 8).">El número termina en cifra par (0, 2, 4, 6, 8).</td>
+                            <td>53<b>8</b></td>
+                         </tr>
+                         <tr>
+                            <td><b>3</b></td>
+                            <td data-lang-es="La suma de sus cifras es un múltiplo de 3." data-lang-eu="Bere zifren batura 3ren multiploa da.">La suma de sus cifras es un múltiplo de 3.</td>
+                            <td>123 (1+2+3=6)</td>
+                         </tr>
+                         <tr>
+                            <td><b>4</b></td>
+                            <td data-lang-es="El número formado por sus dos últimas cifras es múltiplo de 4." data-lang-eu="Bere azken bi zifrek osatutako zenbakia 4ren multiploa da.">El número formado por sus dos últimas cifras es múltiplo de 4.</td>
+                            <td>7<b>24</b> (24 es múltiplo de 4)</td>
+                         </tr>
+                         <tr>
+                            <td><b>5</b></td>
+                            <td data-lang-es="El número termina en 0 o en 5." data-lang-eu="Zenbakia 0z edo 5ez amaitzen da.">El número termina en 0 o en 5.</td>
+                            <td>49<b>5</b></td>
+                         </tr>
+                         <tr>
+                            <td><b>9</b></td>
+                            <td data-lang-es="La suma de sus cifras es un múltiplo de 9." data-lang-eu="Bere zifren batura 9ren multiploa da.">La suma de sus cifras es un múltiplo de 9.</td>
+                            <td>3<b>18</b> (3+1+8=12, no) / 3<b>24</b> (3+2+4=9, sí)</td>
+                         </tr>
+                         <tr>
+                            <td><b>10</b></td>
+                            <td data-lang-es="El número termina en 0." data-lang-eu="Zenbakia 0z amaitzen da.">El número termina en 0.</td>
+                            <td>12<b>0</b></td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Números Enteros - Matemáticas 1º ESO" data-lang-eu="Zenbaki Osoak - Matematika DBH 1">Números Enteros - Matemáticas 1º ESO</title>
+    <link rel="stylesheet" href="../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+             <a href="../../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+             <i class="fas fa-plus-minus"></i>
+             <span data-lang-es="Números Enteros" data-lang-eu="Zenbaki Osoak">Números Enteros</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="subtopics">
+            <h2 data-lang-es="Conceptos de Números Enteros" data-lang-eu="Zenbaki Osoen Kontzeptuak">Conceptos de Números Enteros</h2>
+            <div class="cards-container">
+
+                <div class="card">
+                    <a href="./pages/concepto.html">
+                        <div class="card-icon"><i class="fas fa-ruler-horizontal"></i></div>
+                        <h3 data-lang-es="El Conjunto ℤ y la Recta Numérica" data-lang-eu="ℤ Multzoa eta Zenbaki Zuzena">El Conjunto ℤ y la Recta Numérica</h3>
+                        <div class="summary">
+                            <p data-lang-es="Introduce los números positivos y negativos, su orden y el concepto de valor absoluto." data-lang-eu="Sartu zenbaki positiboak eta negatiboak, haien ordena eta balio absolutuaren kontzeptua.">Introduce los números positivos y negativos, su orden y el concepto de valor absoluto.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./pages/operaciones.html">
+                        <div class="card-icon"><i class="fas fa-calculator"></i></div>
+                        <h3 data-lang-es="Suma y Resta" data-lang-eu="Batuketa eta Kenketa">Suma y Resta</h3>
+                        <div class="summary">
+                            <p data-lang-es="Aprende las reglas para sumar y restar números con el mismo y diferente signo." data-lang-eu="Ikasi zeinu berdineko eta desberdineko zenbakiak batzeko eta kentzeko arauak.">Aprende las reglas para sumar y restar números con el mismo y diferente signo.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="./pages/operaciones_avanzadas.html">
+                        <div class="card-icon"><i class="fas fa-cogs"></i></div>
+                        <h3 data-lang-es="Multiplicación, División y Combinadas" data-lang-eu="Biderketa, Zatiketa eta Konbinatuak">Multiplicación, División y Combinadas</h3>
+                        <div class="summary">
+                            <p data-lang-es="Domina la regla de los signos y la jerarquía de operaciones con paréntesis." data-lang-eu="Menperatu zeinuen araua eta eragiketen hierarkia parentesiekin.">Domina la regla de los signos y la jerarquía de operaciones con paréntesis.</p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../assets/js/theme.js"></script>
+    <script src="../../../../assets/js/language.js"></script>
+    <script src="../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

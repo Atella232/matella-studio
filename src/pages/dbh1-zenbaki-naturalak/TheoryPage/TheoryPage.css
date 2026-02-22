@@ -1,0 +1,341 @@
+.theory-page.zenbaki-naturalak-theory {
+    padding: var(--space-8) 0 var(--space-24);
+    min-height: 100vh;
+}
+
+/* Header */
+.zenbaki-naturalak-theory .theory-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+    padding: var(--space-8) 0;
+}
+
+.zenbaki-naturalak-theory .theory-header h1 {
+    font-size: var(--text-5xl);
+    margin-bottom: var(--space-4);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #f472b6 60%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 8s ease infinite;
+    background-size: 200% 200%;
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.zenbaki-naturalak-theory .theory-subtitle {
+    font-size: var(--text-xl);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-4);
+}
+
+.zenbaki-naturalak-theory .theory-description {
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Grid de tarjetas */
+.zenbaki-naturalak-theory .theory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: var(--space-6);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Tarjetas de teoría */
+.zenbaki-naturalak-theory .theory-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 4px solid var(--card-color);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-6);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.zenbaki-naturalak-theory .theory-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--card-color) 15%, transparent) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.zenbaki-naturalak-theory .theory-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--card-color) 10%, transparent) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.zenbaki-naturalak-theory .theory-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 40px color-mix(in srgb, var(--card-color) 20%, transparent);
+    border-left-width: 6px;
+}
+
+.zenbaki-naturalak-theory .theory-card:hover::before,
+.zenbaki-naturalak-theory .theory-card:hover::after {
+    opacity: 1;
+}
+
+.zenbaki-naturalak-theory .theory-card.expanded {
+    grid-column: 1 / -1;
+    cursor: default;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+.zenbaki-naturalak-theory .theory-card.expanded:hover {
+    transform: none;
+}
+
+/* Header de la tarjeta */
+.zenbaki-naturalak-theory .card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    position: relative;
+    z-index: 1;
+}
+
+.zenbaki-naturalak-theory .card-icon {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.zenbaki-naturalak-theory .theory-card:hover .card-icon {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.zenbaki-naturalak-theory .card-title {
+    font-size: var(--text-2xl);
+    margin: 0;
+    flex-grow: 1;
+    background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0.8));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.zenbaki-naturalak-theory .card-toggle {
+    font-size: 2rem;
+    color: var(--color-text-muted);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.zenbaki-naturalak-theory .theory-card:hover .card-toggle {
+    background: var(--card-color);
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+.zenbaki-naturalak-theory .theory-card.expanded .card-toggle {
+    transform: rotate(180deg);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-text);
+}
+
+.zenbaki-naturalak-theory .theory-card.expanded:hover .card-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+}
+
+/* Contenido de la tarjeta */
+.zenbaki-naturalak-theory .card-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+}
+
+.zenbaki-naturalak-theory .card-content.visible {
+    max-height: 5000px;
+    opacity: 1;
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Estilos de contenido interior */
+.zenbaki-naturalak-theory .content-section h4 {
+    color: var(--card-color);
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-4);
+    margin-top: var(--space-8);
+}
+
+.zenbaki-naturalak-theory .content-section h4:first-child {
+    margin-top: 0;
+}
+
+.zenbaki-naturalak-theory .content-section p {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-4);
+    font-size: 1.05rem;
+}
+
+.zenbaki-naturalak-theory .content-section strong {
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+.zenbaki-naturalak-theory .tip-box {
+    background: color-mix(in srgb, var(--card-color) 10%, rgba(255, 255, 255, 0.05));
+    border-left: 3px solid var(--card-color);
+    padding: var(--space-4) var(--space-6);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    margin: var(--space-6) 0;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
+
+.zenbaki-naturalak-theory .tip-box strong {
+    color: var(--card-color);
+}
+
+.zenbaki-naturalak-theory .warning-box {
+    background: rgba(239, 68, 68, 0.1);
+    border-left: 3px solid #ef4444;
+    padding: var(--space-4) var(--space-6);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    margin: var(--space-6) 0;
+    color: #fca5a5;
+    line-height: 1.6;
+}
+
+.zenbaki-naturalak-theory .warning-box strong {
+    color: #ef4444;
+}
+
+.zenbaki-naturalak-theory .example-list {
+    margin: var(--space-4) 0;
+    padding-left: var(--space-6);
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+}
+
+.zenbaki-naturalak-theory .example-step {
+    background: rgba(0, 0, 0, 0.2);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    margin: var(--space-2) 0;
+    font-family: monospace;
+    color: var(--color-primary-light);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.zenbaki-naturalak-theory .method-steps {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-6) 0;
+}
+
+.zenbaki-naturalak-theory .method-steps li {
+    background: rgba(255, 255, 255, 0.03);
+    margin-bottom: var(--space-2);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    color: var(--color-text-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.zenbaki-naturalak-theory .step-number {
+    background: var(--card-color);
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.zenbaki-naturalak-theory .ops-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-6);
+    margin-top: var(--space-6);
+}
+
+.zenbaki-naturalak-theory .ops-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.zenbaki-naturalak-theory .ops-card h5 {
+    color: var(--color-text);
+    font-size: 1.1rem;
+    margin-bottom: var(--space-2);
+    margin-top: 0;
+}
+
+.zenbaki-naturalak-theory .ops-card p {
+    font-size: 0.95rem;
+    margin-bottom: var(--space-4);
+}
+
+.zenbaki-naturalak-theory .example-text {
+    background: rgba(255, 255, 255, 0.05);
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    font-family: monospace;
+    color: var(--color-primary-light);
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .zenbaki-naturalak-theory .theory-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .zenbaki-naturalak-theory .theory-header h1 {
+        font-size: var(--text-4xl);
+    }
+}

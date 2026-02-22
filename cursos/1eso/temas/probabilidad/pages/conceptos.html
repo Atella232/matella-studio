@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-lang-es="Conceptos - Probabilidad" data-lang-eu="Kontzeptuak - Probabilitatea">Conceptos - Probabilidad</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css" />
+  <link rel="stylesheet" href="../../../../../assets/css/base.css" />
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css" />
+  <link rel="stylesheet" href="../../../../../assets/css/components.css" />
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+      <i class="fas fa-lightbulb"></i>
+      <span data-lang-es="Conceptos Básicos" data-lang-eu="Oinarrizko Kontzeptuak">Conceptos Básicos</span>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
+    </nav>
+  </header>
+
+  <main>
+    <h2 class="page-title" data-lang-es="Experimentos, Espacio Muestral y Sucesos" data-lang-eu="Esperimentuak, Lagin-espazioa eta Gertaerak">Experimentos, Espacio Muestral y Sucesos</h2>
+
+    <section class="content-section">
+      <h3 data-lang-es="Conceptos Clave" data-lang-eu="Funtsezko Kontzeptuak">Conceptos Clave</h3>
+      <ul class="icon-list">
+        <li><i class="fas fa-vial"></i> <b data-lang-es="Experimento aleatorio:" data-lang-eu="Ausazko esperimentua:">Experimento aleatorio:</b>
+          <span data-lang-es="Proceso cuyo resultado no puede predecirse con certeza." data-lang-eu="Ziurtasunez aurreikusi ezin den emaitza duen prozesua.">Proceso cuyo resultado no puede predecirse con certeza.</span></li>
+        <li><i class="fas fa-balls"></i> <b data-lang-es="Espacio muestral (Ω):" data-lang-eu="Lagin-espazioa (Ω):">Espacio muestral (Ω):</b>
+          <span data-lang-es="Conjunto de todos los resultados posibles." data-lang-eu="Emaitza posible guztien multzoa.">Conjunto de todos los resultados posibles.</span></li>
+        <li><i class="fas fa-star"></i> <b data-lang-es="Suceso:" data-lang-eu="Gertaera:">Suceso:</b>
+          <span data-lang-es="Subconjunto del espacio muestral." data-lang-eu="Lagin-espazioaren azpimultzoa.">Subconjunto del espacio muestral.</span></li>
+        <li><i class="fas fa-scale-balanced"></i> <b data-lang-es="Equiprobabilidad:" data-lang-eu="Aukera berdintasuna:">Equiprobabilidad:</b>
+          <span data-lang-es="Todos los resultados son igualmente probables." data-lang-eu="Emaitza guztiak aukera berekoak dira.">Todos los resultados son igualmente probables.</span></li>
+      </ul>
+    </section>
+
+    <section class="content-section card-style">
+      <h3 data-lang-es="Ejemplos Típicos" data-lang-eu="Ohiko Adibideak">Ejemplos Típicos</h3>
+      <div class="cards-container">
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-dice-one"></i></div>
+          <h4>Dado</h4>
+          <p>Ω = {1,2,3,4,5,6}</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-coins"></i></div>
+          <h4>Moneda</h4>
+          <p>Ω = {Cara, Cruz}</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-dice"></i></div>
+          <h4>Dos dados</h4>
+          <p>|Ω| = 36 resultados</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section interactive-tool card-style">
+      <h3><i class="fas fa-random"></i> <span data-lang-es="Generador de Espacio Muestral" data-lang-eu="Lagin-espazio Sortzailea">Generador de Espacio Muestral</span></h3>
+      <div class="form-row">
+        <label for="sample-type" data-lang-es="Experimento:" data-lang-eu="Esperimentua:">Experimento:</label>
+        <select id="sample-type">
+          <option value="coin" data-lang-es="Moneda (1 lanzamiento)" data-lang-eu="Txanpona (jaurtiketa 1)">Moneda (1 lanzamiento)</option>
+          <option value="two-coins" data-lang-es="Moneda (2 lanzamientos)" data-lang-eu="Txanpona (2 jaurtiketa)">Moneda (2 lanzamientos)</option>
+          <option value="die" data-lang-es="Dado (1 lanzamiento)" data-lang-eu="Dadoa (jaurtiketa 1)">Dado (1 lanzamiento)</option>
+          <option value="two-dice" data-lang-es="Dos dados" data-lang-eu="Bi dado">Dos dados</option>
+        </select>
+      </div>
+      <div id="sample-output" class="code-block" style="min-height: 60px;"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../js/herramienta-probabilidad.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

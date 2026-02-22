@@ -1,0 +1,449 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Coordenadas Cartesianas - Tablas y Gráficas" data-lang-eu="Koordenatu Kartesiarrak - Taulak eta Grafikoak">Coordenadas Cartesianas - Tablas y Gráficas</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script></head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-map-marker-alt"></i>
+            <span data-lang-es="Coordenadas Cartesianas" data-lang-eu="Koordenatu Kartesiarrak">Coordenadas Cartesianas</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Coordenadas Cartesianas" data-lang-eu="Koordenatu Kartesiarrak">Coordenadas Cartesianas</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="El Plano Cartesiano" data-lang-eu="Plano Kartesiarra">El Plano Cartesiano</h3>
+            <p data-lang-es="El plano cartesiano se forma con dos rectas numéricas perpendiculares, una horizontal (eje X o de abscisas) y otra vertical (eje Y o de ordenadas), que se cortan en un punto llamado origen (0,0)."
+               data-lang-eu="Plano kartesiarra bi zuzen zenbakidun perpendikularrekin osatzen da, bata horizontala (X ardatza edo abzisa-ardatza) eta bestea bertikala (Y ardatza edo ordenatu-ardatza), jatorria (0,0) deitzen den puntu batean gurutzatzen direnak.">
+               El plano cartesiano se forma con dos rectas numéricas perpendiculares, una horizontal (eje X o de abscisas) y otra vertical (eje Y o de ordenadas), que se cortan en un punto llamado origen (0,0).
+            </p>
+            <p class="example" data-lang-es="<b>Punto P(x, y):</b> La primera coordenada (x) indica la posición en el eje horizontal, y la segunda (y) en el eje vertical."
+               data-lang-eu="<b>P(x, y) puntua:</b> Lehenengo koordenatuak (x) ardatz horizontalean duen posizioa adierazten du, eta bigarrenak (y) ardatz bertikalean.">
+               <b>Punto P(x, y):</b> La primera coordenada (x) indica la posición en el eje horizontal, y la segunda (y) en el eje vertical.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Herramienta Interactiva: Juego de Coordenadas" data-lang-eu="Tresna Interaktiboa: Koordenatuen Jokoa">Herramienta Interactiva: Juego de Coordenadas</h3>
+            <div class="interactive-tool card-style">
+                <div class="configuracion-ejercicio" style="text-align: center; margin-bottom: 1rem;">
+                    <button id="start-game" class="button-primary" data-lang-es="Iniciar Juego" data-lang-eu="Hasi Jokoa">Iniciar Juego</button>
+                    <select id="game-mode" style="margin-left: 1rem; padding: 0.5rem; border-radius: 4px;">
+                        <option value="1" data-lang-es="Colocar Punto" data-lang-eu="Jarri Puntua">Colocar Punto</option>
+                        <option value="2" data-lang-es="Identificar Punto" data-lang-eu="Identifikatu Puntua">Identificar Punto</option>
+                    </select>
+                </div>
+                <div id="game-container" style="display: none; text-align: center;">
+                    <div class="ejercicio-actual">
+                        <h4 id="game-title" data-lang-es="Ronda 1 / 10" data-lang-eu="1. txanda / 10">Ronda 1 / 10</h4>
+                        <div id="game-display" class="problema-matematico" style="font-size: 1.2em; font-weight: bold; margin-bottom: 1rem;">
+                            <!-- Game content here -->
+                        </div>
+                        <div style="display: flex; flex-direction: row; align-items: flex-start; gap: 2rem; flex-wrap: wrap; justify-content: center;">
+                            <div id="coordinate-grid" style="display: inline-block;"></div>
+                            <div id="feedback-container" style="min-width: 200px; margin-top: 2rem;">
+                                <div id="feedback" style="font-weight: bold; min-height: 24px; font-size: 1.2em; margin-bottom: 1rem;"></div>
+                                <div id="score" style="font-size: 1.1em;"></div>
+                            </div>
+                        </div>
+                        <div id="input-controls" style="margin-top: 1rem; display: none;">
+                            <span>X: </span><input type="number" id="input-x" style="width: 60px; margin: 0 0.5rem; padding: 0.25rem;"> 
+                            <span>Y: </span><input type="number" id="input-y" style="width: 60px; margin: 0 0.5rem; padding: 0.25rem;">
+                            <button id="check-answer" class="button-primary" style="margin-left: 0.5rem;" data-lang-es="Verificar" data-lang-eu="Egiaztatu">Verificar</button>
+                        </div>
+                        <div class="controles-ejercicio" style="margin-top: 1rem;">
+                            <button id="next-round" class="button-primary" style="display: none;" data-lang-es="Siguiente" data-lang-eu="Hurrengoa">Siguiente</button>
+                            <button id="restart-game" class="button-secondary" data-lang-es="Reiniciar" data-lang-eu="Berrabiarazi">Reiniciar</button>
+                        </div>
+                    </div>
+                    <div class="resultado-ejercicio" style="margin-top: 1.5rem; text-align: center;">
+                        <!-- El feedback y el puntaje ahora están al lado del gráfico -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+    <script src="../js/tablas-graficas.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+
+    <script>
+        // Juego de Coordenadas Embebido
+        document.addEventListener('DOMContentLoaded', function() {
+            const startButton = document.getElementById('start-game');
+            const modeSelect = document.getElementById('game-mode');
+            const gameContainer = document.getElementById('game-container');
+            const gameTitle = document.getElementById('game-title');
+            const gameDisplay = document.getElementById('game-display');
+            const gridDiv = document.getElementById('coordinate-grid');
+            const inputControls = document.getElementById('input-controls');
+            const inputX = document.getElementById('input-x');
+            const inputY = document.getElementById('input-y');
+            const checkButton = document.getElementById('check-answer');
+            const nextButton = document.getElementById('next-round');
+            const restartButton = document.getElementById('restart-game');
+            const feedback = document.getElementById('feedback');
+            const scoreDiv = document.getElementById('score');
+
+            let round = 1;
+            let score = 0;
+            let mode = 1;
+            let targetCoord = {x: 0, y: 0};
+            let clickedPoint = null;
+            let currentLang = document.documentElement.lang || 'es';
+
+            function generateTarget() {
+                return {
+                    x: Math.floor(Math.random() * 21) - 10,
+                    y: Math.floor(Math.random() * 21) - 10
+                };
+            }
+
+            function createGrid() {
+                gridDiv.innerHTML = '';
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('width', '500');
+                svg.setAttribute('height', '500');
+                svg.setAttribute('viewBox', '0 0 300 300');
+                svg.style.border = '2px solid #8b5cf6';
+                svg.style.borderRadius = '8px';
+                svg.style.background = 'linear-gradient(to bottom right, #1e293b, #334155)';
+                svg.style.cursor = 'crosshair';
+                svg.style.maxWidth = '100%';
+
+                const step = 300 / 20;
+
+                // Grid lines
+                for (let i = 0; i <= 20; i++) {
+                    const line1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line1.setAttribute('x1', 0);
+                    line1.setAttribute('y1', i * step);
+                    line1.setAttribute('x2', 300);
+                    line1.setAttribute('y2', i * step);
+                    line1.setAttribute('stroke', '#374151');
+                    line1.setAttribute('stroke-width', '1');
+                    line1.setAttribute('opacity', '0.3');
+                    svg.appendChild(line1);
+
+                    const line2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line2.setAttribute('x1', i * step);
+                    line2.setAttribute('y1', 0);
+                    line2.setAttribute('x2', i * step);
+                    line2.setAttribute('y2', 300);
+                    line2.setAttribute('stroke', '#374151');
+                    line2.setAttribute('stroke-width', '1');
+                    line2.setAttribute('opacity', '0.3');
+                    svg.appendChild(line2);
+                }
+
+                // Axes
+                const axis1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                axis1.setAttribute('x1', 150);
+                axis1.setAttribute('y1', 0);
+                axis1.setAttribute('x2', 150);
+                axis1.setAttribute('y2', 300);
+                axis1.setAttribute('stroke', '#8b5cf6');
+                axis1.setAttribute('stroke-width', '2');
+                svg.appendChild(axis1);
+
+                const axis2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                axis2.setAttribute('x1', 0);
+                axis2.setAttribute('y1', 150);
+                axis2.setAttribute('x2', 300);
+                axis2.setAttribute('y2', 150);
+                axis2.setAttribute('stroke', '#8b5cf6');
+                axis2.setAttribute('stroke-width', '2');
+                svg.appendChild(axis2);
+
+                // Labels
+                [-10, -5, 0, 5, 10].forEach(val => {
+                    const text1 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    text1.setAttribute('x', (val + 10) * step);
+                    text1.setAttribute('y', 150 + 15);
+                    text1.setAttribute('fill', '#9ca3af');
+                    text1.setAttribute('font-size', '10');
+                    text1.setAttribute('text-anchor', 'middle');
+                    text1.textContent = val;
+                    svg.appendChild(text1);
+
+                    const text2 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    text2.setAttribute('x', 150 + 15);
+                    text2.setAttribute('y', (10 - val) * step + 5);
+                    text2.setAttribute('fill', '#9ca3af');
+                    text2.setAttribute('font-size', '10');
+                    text2.setAttribute('text-anchor', 'middle');
+                    text2.textContent = val;
+                    svg.appendChild(text2);
+                });
+
+                svg.addEventListener('click', handleGridClick);
+                gridDiv.appendChild(svg);
+                return svg;
+            }
+
+            function handleGridClick(e) {
+                if (mode !== 1) return;
+                const svg = gridDiv.querySelector('svg');
+                const pt = svg.createSVGPoint();
+                pt.x = e.clientX;
+                pt.y = e.clientY;
+                const svgP = pt.matrixTransform(svg.getScreenCTM().inverse());
+                const step = 300 / 20;
+                const gridX = Math.round((svgP.x / step) - 10);
+                const gridY = Math.round(10 - (svgP.y / step));
+
+                // Asegurarse de que las coordenadas estén dentro del rango [-10, 10]
+                if (gridX < -10 || gridX > 10 || gridY < -10 || gridY > 10) return;
+
+                clickedPoint = {x: gridX, y: gridY};
+                // Añadir un punto visual donde el usuario hizo clic
+                const clickPoint = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                clickPoint.setAttribute('cx', (gridX + 10) * step);
+                clickPoint.setAttribute('cy', (10 - gridY) * step);
+                clickPoint.setAttribute('r', '6');
+                clickPoint.setAttribute('fill', '#ef4444');
+                clickPoint.setAttribute('opacity', '0.8');
+                clickPoint.classList.add('user-point');
+                
+                // Eliminar cualquier punto de clic anterior
+                const oldPoints = gridDiv.querySelectorAll('.user-point');
+                oldPoints.forEach(point => point.remove());
+                
+                gridDiv.querySelector('svg').appendChild(clickPoint);
+
+                const distance = Math.sqrt(Math.pow(gridX - targetCoord.x, 2) + Math.pow(gridY - targetCoord.y, 2));
+                let points = 0;
+                let message = '';
+                
+                // Aumentar el margen de error para hacer el juego más accesible
+                if (distance <= 1) {
+                    points = 100;
+                    message = currentLang === 'es' ? '¡PERFECTO! 🎯' : 'PERFEKTUA! 🎯';
+                } else if (distance <= 2) {
+                    points = 80;
+                    message = currentLang === 'es' ? '¡Muy bien! ✨' : 'Oso ondo! ✨';
+                } else if (distance <= 3) {
+                    points = 60;
+                    message = currentLang === 'es' ? '¡Bien! 👍' : 'Ondo! 👍';
+                } else if (distance <= 4) {
+                    points = 40;
+                    message = currentLang === 'es' ? 'Cerca... 🎲' : 'Hurbil... 🎲';
+                } else if (distance <= 6) {
+                    points = 20;
+                    message = currentLang === 'es' ? 'Casi... sigue intentándolo' : 'Ia... saiatu berriro';
+                } else {
+                    points = 10;
+                    message = currentLang === 'es' ? 'Sigue practicando 💪' : 'Saiatu berriro 💪';
+                }
+                score += points;
+                feedback.textContent = message + ' +' + points + (currentLang === 'es' ? ' puntos' : ' puntu');
+                scoreDiv.textContent = (currentLang === 'es' ? 'Puntuación: ' : 'Puntuazioa: ') + score;
+                setTimeout(() => {
+                    nextRound();
+                }, 2000);
+            }
+
+            function handleSubmit() {
+                if (mode !== 2) return;
+                const userX = parseFloat(inputX.value);
+                const userY = parseFloat(inputY.value);
+                const diffX = Math.abs(userX - targetCoord.x);
+                const diffY = Math.abs(userY - targetCoord.y);
+                let points = 0;
+                let message = '';
+                if (diffX <= 0.5 && diffY <= 0.5) {
+                    points = 100;
+                    message = currentLang === 'es' ? '¡CORRECTO! 🎯' : 'ZUZENA! 🎯';
+                } else {
+                    points = 0;
+                    message = currentLang === 'es' ? `Incorrecto. Era (${targetCoord.x}, ${targetCoord.y}) ❌` : `Okerra. (${targetCoord.x}, ${targetCoord.y}) zen ❌`;
+                }
+                score += points;
+                feedback.textContent = message + (points > 0 ? ' +' + points + ' puntos' : '');
+                scoreDiv.textContent = 'Puntuación: ' + score;
+                setTimeout(() => {
+                    nextRound();
+                }, 2500);
+            }
+
+            function nextRound() {
+                // Limpiar cualquier punto de ronda anterior
+                const oldPoints = gridDiv.querySelectorAll('.user-point, .target-point');
+                oldPoints.forEach(point => point.remove());
+                
+                if (round >= 10) {
+                    feedback.textContent = currentLang === 'es' ? '¡Juego Terminado! Puntuación final: ' + score : 'Jokoa Amaituta! Azken puntuazioa: ' + score;
+                    scoreDiv.textContent = '';
+                    nextButton.style.display = 'none';
+                    return;
+                }
+                round++;
+                targetCoord = generateTarget();
+                clickedPoint = null;
+                feedback.textContent = '';
+                inputX.value = '';
+                inputY.value = '';
+                gameTitle.textContent = currentLang === 'es' ? 'Ronda ' + round + ' / 10' : round + '. txanda / 10';
+                gameDisplay.textContent = mode === 1 ? (currentLang === 'es' ? 'Haz clic en (' + targetCoord.x + ', ' + targetCoord.y + ')' : 'Egin klik (' + targetCoord.x + ', ' + targetCoord.y + ') tokian') : (currentLang === 'es' ? '¿Cuáles son las coordenadas del punto azul?' : 'Zeintzuk dira urdin puntuaren koordenatuak?');
+                if (mode === 2) {
+                    inputControls.style.display = 'block';
+                } else {
+                    inputControls.style.display = 'none';
+                }
+                createGrid();
+                if (mode === 2) {
+                    // Add blue target point
+                    const step = 300 / 20;
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('cx', (targetCoord.x + 10) * step);
+                    circle.setAttribute('cy', (10 - targetCoord.y) * step);
+                    circle.setAttribute('r', '8');
+                    circle.setAttribute('fill', '#06b6d4');
+                    circle.classList.add('target-point');
+                    gridDiv.querySelector('svg').appendChild(circle);
+                }
+            }
+
+            startButton.addEventListener('click', function() {
+                currentLang = document.documentElement.lang || 'es';
+                mode = parseInt(modeSelect.value);
+                round = 1;
+                score = 0;
+                targetCoord = generateTarget();
+                gameContainer.style.display = 'block';
+                gameTitle.textContent = currentLang === 'es' ? 'Ronda 1 / 10' : '1. txanda / 10';
+                gameDisplay.textContent = mode === 1 
+                    ? (currentLang === 'es' 
+                        ? 'Haz clic en (' + targetCoord.x + ', ' + targetCoord.y + ')' 
+                        : 'Egin klik (' + targetCoord.x + ', ' + targetCoord.y + ') tokian')
+                    : (currentLang === 'es' 
+                        ? '¿Cuáles son las coordenadas del punto azul?' 
+                        : 'Zeintzuk dira urdin puntuaren koordenatuak?');
+                feedback.textContent = '';
+                scoreDiv.textContent = currentLang === 'es' ? 'Puntuación: 0' : 'Puntuazioa: 0';
+                createGrid();
+                if (mode === 2) {
+                    inputControls.style.display = 'block';
+                    const step = 300 / 20;
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('cx', (targetCoord.x + 10) * step);
+                    circle.setAttribute('cy', (10 - targetCoord.y) * step);
+                    circle.setAttribute('r', '8');
+                    circle.setAttribute('fill', '#06b6d4');
+                    gridDiv.querySelector('svg').appendChild(circle);
+                } else {
+                    inputControls.style.display = 'none';
+                }
+            });
+
+            checkButton.addEventListener('click', handleSubmit);
+
+            nextButton.addEventListener('click', nextRound);
+
+            restartButton.addEventListener('click', function() {
+                gameContainer.style.display = 'none';
+                feedback.textContent = '';
+                scoreDiv.textContent = currentLang === 'es' ? 'Puntuación: 0' : 'Puntuazioa: 0';
+            });
+
+            inputX.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') handleSubmit();
+            });
+
+            inputY.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') handleSubmit();
+            });
+        });
+    </script>
+</body>
+</html>

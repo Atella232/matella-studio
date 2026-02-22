@@ -1,0 +1,252 @@
+.home-page.zenbaki-naturalak-home {
+    padding-bottom: var(--space-24);
+}
+
+/* ===== Hero Section ===== */
+.zenbaki-naturalak-home .hero {
+    text-align: center;
+    padding: var(--space-24) var(--space-4);
+    position: relative;
+    overflow: hidden;
+}
+
+.zenbaki-naturalak-home .hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--color-primary-glow) 0%, transparent 70%);
+    pointer-events: none;
+    animation: pulse 4s ease-in-out infinite;
+}
+
+.zenbaki-naturalak-home .hero h1 {
+    font-size: var(--text-6xl);
+    margin-bottom: var(--space-6);
+    background: linear-gradient(135deg, #fff 0%, var(--color-primary-light) 50%, var(--color-secondary-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeIn 0.8s ease-out forwards;
+    position: relative;
+    z-index: 1;
+}
+
+.zenbaki-naturalak-home .hero-subtitle {
+    font-size: var(--text-2xl);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-6);
+    animation: fadeIn 0.8s ease-out 0.2s forwards;
+    opacity: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.zenbaki-naturalak-home .hero-description {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto var(--space-12);
+    line-height: 1.6;
+    animation: fadeIn 0.8s ease-out 0.4s forwards;
+    opacity: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.zenbaki-naturalak-home .hero-cta {
+    display: flex;
+    gap: var(--space-6);
+    justify-content: center;
+    animation: fadeIn 0.8s ease-out 0.6s forwards;
+    opacity: 0;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+}
+
+.zenbaki-naturalak-home .hero-cta .btn {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--text-lg);
+}
+
+/* ===== Features Section ===== */
+.zenbaki-naturalak-home .features {
+    padding: var(--space-24) var(--space-4);
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.02));
+    position: relative;
+}
+
+.zenbaki-naturalak-home .features h2 {
+    text-align: center;
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-16);
+    color: var(--color-text);
+}
+
+.zenbaki-naturalak-home .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-8);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.zenbaki-naturalak-home .feature-card {
+    padding: var(--space-8);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, background 0.3s ease;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.zenbaki-naturalak-home .feature-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.zenbaki-naturalak-home .feature-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-6);
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+}
+
+.zenbaki-naturalak-home .feature-card h3 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-4);
+    color: var(--color-text);
+}
+
+.zenbaki-naturalak-home .feature-card p {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-6);
+    flex-grow: 1;
+}
+
+.zenbaki-naturalak-home .feature-link {
+    color: var(--color-primary-light);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.3s ease;
+    align-self: flex-start;
+}
+
+.zenbaki-naturalak-home .feature-link:hover {
+    color: var(--color-primary);
+}
+
+/* ===== Curriculum Section ===== */
+.zenbaki-naturalak-home .curriculum {
+    padding: var(--space-24) var(--space-4);
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.zenbaki-naturalak-home .curriculum h2 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-6);
+}
+
+.zenbaki-naturalak-home .curriculum-intro {
+    color: var(--color-text-secondary);
+    font-size: var(--text-lg);
+    line-height: 1.6;
+    margin-bottom: var(--space-12);
+}
+
+.zenbaki-naturalak-home .competencies {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+}
+
+.zenbaki-naturalak-home .competency-card {
+    padding: var(--space-6) var(--space-8);
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    border-radius: var(--radius-full);
+}
+
+.zenbaki-naturalak-home .competency-icon {
+    font-size: 1.5rem;
+}
+
+.zenbaki-naturalak-home .competency-card h4 {
+    margin: 0;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+/* ===== Animations ===== */
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.95);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.05);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(0.95);
+        opacity: 0.5;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Responsive adjustments ===== */
+@media (max-width: 768px) {
+    .zenbaki-naturalak-home .hero h1 {
+        font-size: var(--text-4xl);
+    }
+
+    .zenbaki-naturalak-home .hero-subtitle {
+        font-size: var(--text-xl);
+    }
+
+    .zenbaki-naturalak-home .hero-cta {
+        flex-direction: column;
+    }
+
+    .zenbaki-naturalak-home .hero-cta .btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .zenbaki-naturalak-home .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .zenbaki-naturalak-home .competency-card {
+        width: 100%;
+        justify-content: center;
+    }
+}

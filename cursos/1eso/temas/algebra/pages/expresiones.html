@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Expresiones Algebraicas - Álgebra" data-lang-eu="Adierazpen Aljebraikoak - Aljebra">Expresiones Algebraicas - Álgebra</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-puzzle-piece"></i>
+            <span data-lang-es="Letras y Expresiones" data-lang-eu="Letrak eta Adierazpenak">Letras y Expresiones</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Letras y Expresiones Algebraicas" data-lang-eu="Letrak eta Adierazpen Aljebraikoak">Letras y Expresiones Algebraicas</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="De Números a Letras: El Salto al Álgebra" data-lang-eu="Zenbakietatik Letretara: Aljebrarako Jauzia">De Números a Letras: El Salto al Álgebra</h3>
+            <p data-lang-es="En situaciones donde no conocemos un valor exacto, usamos una letra para representarlo. A esta letra la llamamos <b>incógnita</b> o <b>variable</b>. Esto nos permite generalizar reglas y resolver problemas complejos."
+               data-lang-eu="Balio zehatz bat ezagutzen ez dugun egoeretan, letra bat erabiltzen dugu hura irudikatzeko. Letra honi <b>ezezaguna</b> edo <b>aldagaia</b> deitzen diogu. Horrek arauak orokortzea eta problema konplexuak ebaztea ahalbidetzen digu.">
+               En situaciones donde no conocemos un valor exacto, usamos una letra para representarlo. A esta letra la llamamos <b>incógnita</b> o <b>variable</b>. Esto nos permite generalizar reglas y resolver problemas complejos.
+            </p>
+            <p class="example" data-lang-es="<b>Ejemplo:</b> Si la edad de Juan es 'x', dentro de 15 años tendrá 'x + 15' años, y hace un año tenía 'x - 1'."
+               data-lang-eu="<b>Adibidea:</b> Juanen adina 'x' bada, 15 urte barru 'x + 15' urte izango ditu, eta duela urtebete 'x - 1' zituen.">
+               <b>Ejemplo:</b> Si la edad de Juan es 'x', dentro de 15 años tendrá 'x + 15' años, y hace un año tenía 'x - 1'.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Expresiones Algebraicas" data-lang-eu="Adierazpen Aljebraikoak">Expresiones Algebraicas</h3>
+            <p data-lang-es="Una expresión algebraica es una combinación de números, letras (variables) y operaciones matemáticas."
+               data-lang-eu="Adierazpen aljebraiko bat zenbakien, letren (aldagaien) eta eragiketa matematikoen konbinazioa da.">
+               Una expresión algebraica es una combinación de números, letras (variables) y operaciones matemáticas.
+            </p>
+            <div class="key-takeaway">
+                <strong data-lang-es="Componentes de una Expresión:" data-lang-eu="Adierazpen baten Osagaiak:">Componentes de una Expresión:</strong>
+                <ul class="icon-list" style="margin-top: 1rem;">
+                    <li><i class="fas fa-font"></i><span data-lang-es="<b>Letras (Variables):</b> Representan valores desconocidos (x, y, a, b...)." data-lang-eu="<b>Letrak (Aldagaiak):</b> Balio ezezagunak adierazten dituzte (x, y, a, b...)."><b>Letras (Variables):</b> Representan valores desconocidos (x, y, a, b...).</span></li>
+                    <li><i class="fas fa-hashtag"></i><span data-lang-es="<b>Números (Coeficientes):</b> Los valores conocidos que multiplican a las variables." data-lang-eu="<b>Zenbakiak (Koefizienteak):</b> Aldagaiak biderkatzen dituzten balio ezagunak."><b>Números (Coeficientes):</b> Los valores conocidos que multiplican a las variables.</span></li>
+                    <li><i class="fas fa-plus-minus"></i><span data-lang-es="<b>Operaciones:</b> Suma, resta, multiplicación, división, etc." data-lang-eu="<b>Eragiketak:</b> Batuketa, kenketa, biderketa, zatiketa, etab."><b>Operaciones:</b> Suma, resta, multiplicación, división, etc.</span></li>
+                </ul>
+            </div>
+            <p class="example" style="margin-top: 1.5rem;" data-lang-es="<b>Ejemplos:</b> 3x - 5 (el triple de un número menos cinco), x² + 1 (el cuadrado de un número más uno)."
+               data-lang-eu="<b>Adibideak:</b> 3x - 5 (zenbaki baten hirukoitza ken bost), x² + 1 (zenbaki baten karratua gehi bat).">
+               <b>Ejemplos:</b> 3x - 5 (el triple de un número menos cinco), x² + 1 (el cuadrado de un número más uno).
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Perímetros y Áreas - Figuras Planas" data-lang-eu="Perimetroak eta Azalerak - Figura Laugarrak">Perímetros y Áreas - Figuras Planas</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-shapes"></i>
+            <span data-lang-es="Perímetros y Áreas" data-lang-eu="Perimetroak eta Azalerak">Perímetros y Áreas</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Perímetros y Áreas" data-lang-eu="Perimetroak eta Azalerak">Perímetros y Áreas</h2>
+        
+        <div class="navigation-buttons">
+            <a href="#ejercicios" class="button-primary" data-lang-es="Ejercicios" data-lang-eu="Ariketa">Ejercicios</a>
+            <a href="#herramienta" class="button-secondary" data-lang-es="Herramienta" data-lang-eu="Tresna">Herramienta</a>
+        </div>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es el Perímetro?" data-lang-eu="Zer da Perimetro bat?">¿Qué es el Perímetro?</h3>
+            <p data-lang-es="El perímetro es la suma de las longitudes de todos los lados de una figura geométrica. Es como si midiéramos el contorno completo de la figura."
+               data-lang-es="Perimetroa figura geometriko baten alde guztien luzeren batura da. Figura baten inguru osoa neurtuko bagenu bezalakoa da.">
+               El perímetro es la suma de las longitudes de todos los lados de una figura geométrica. Es como si midiéramos el contorno completo de la figura.
+            </p>
+            <p class="key-takeaway" data-lang-es="<b>Concepto clave:</b> El perímetro se mide en unidades de longitud (cm, m, km, etc.)"
+               data-lang-eu="<b>Kontzeptu gakoa:</b> Perimetroa luzera unitatetan neurtzen da (cm, m, km, etab.)">
+               <b>Concepto clave:</b> El perímetro se mide en unidades de longitud (cm, m, km, etc.)
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es el Área?" data-lang-eu="Zer da Azalera bat?">¿Qué es el Área?</h3>
+            <p data-lang-es="El área es la medida de la superficie de una figura geométrica. Nos indica cuánto espacio ocupa la figura en el plano."
+               data-lang-eu="Azalera figura geometriko baten azaleraren neurria da. Planoan figuraak zenbat espazio hartzen duen adierazten digu.">
+               El área es la medida de la superficie de una figura geométrica. Nos indica cuánto espacio ocupa la figura en el plano.
+            </p>
+            <p class="key-takeaway" data-lang-es="<b>Concepto clave:</b> El área se mide en unidades cuadradas (cm², m², km², etc.)"
+               data-lang-eu="<b>Kontzeptu gakoa:</b> Azalera unitate karratutan neurtzen da (cm², m², km², etab.)">
+               <b>Concepto clave:</b> El área se mide en unidades cuadradas (cm², m², km², etc.)
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Fórmulas de Perímetro y Área" data-lang-eu="Perimetroaren eta Azaleraren Formulak">Fórmulas de Perímetro y Área</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-play icon-concept"></i>
+                        <span data-lang-es="Triángulo" data-lang-eu="Triangelua">Triángulo</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="formula-container">
+                            <p><strong data-lang-es="Perímetro:" data-lang-eu="Perimetroa:">Perímetro:</strong></p>
+                            <p>\\[P = a + b + c\\]</p>
+                            <p><em data-lang-es="Suma de los tres lados" data-lang-eu="Hiru aldeen batura">Suma de los tres lados</em></p>
+                        </div>
+                        <div class="formula-container">
+                            <p><strong data-lang-es="Área:" data-lang-eu="Azalera:">Área:</strong></p>
+                            <p>\\[A = \\frac{b \\cdot h}{2}\\]</p>
+                            <p><em data-lang-es="Base por altura dividido entre 2" data-lang-eu="Oinarria bider altitudea, bi zatitu">Base por altura dividido entre 2</em></p>
+                        </div>
+                        <div class="formula-container">
+                            <p><strong data-lang-es="Fórmula de Herón:" data-lang-eu="Heronen formula:">Fórmula de Herón:</strong></p>
+                            <p>\\[A = \\sqrt{s(s-a)(s-b)(s-c)}\\]</p>
+                            <p><em data-lang-es="donde \\(s = \\frac{a+b+c}{2}\\) es el semiperímetro" data-lang-eu="non \\(s = \\frac{a+b+c}{2}\\) semiperimetroa den">donde \\(s = \\frac{a+b+c}{2}\\) es el semiperímetro</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-square icon-concept"></i>
+                        <span data-lang-es="Cuadrado" data-lang-eu="Karratua">Cuadrado</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="formula-container">
+                            <p><strong data-lang-es="Perímetro:" data-lang-eu="Perimetroa:">Perímetro:</strong></p>
+                            <p>\\[P = 4a\\]</p>
+                            <p><em data-lang-es="4 veces el lado" data-lang-eu="Aldea lau aldiz">4 veces el lado</em></p>
+                        </div>
+                        <div class="formula-container">
+                            <p><strong data-lang-es="Área:" data-lang-eu="Azalera:">Área:</strong></p>
+                            <p>\\[A = a^2\\]</p>
+                            <p><em data-lang-es="Lado al cuadrado" data-lang-eu="Aldea karratua">Lado al cuadrado</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-rectangle-wide icon-concept"></i>
+                        <span data-lang-es="Rectángulo" data-lang-eu="Laukizuzena">Rectángulo</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="formula-container">
+                            <p><strong data-lang-es="Perímetro:" data-lang-eu="Perimetroa:">Perímetro:</strong></p>
+                            <p>\\[P = 2(a + b)\\]</p>
+                            <p><em data-lang-es="2 veces (largo + ancho)" data-lang-eu="2 aldiz (luzera + zabalera)">2 veces (largo + ancho)</em></p>
+                        </div>
+                        <div class="formula-container">
+                            <p><strong data-lang-es="Área:" data-lang-eu="Azalera:">Área:</strong></p>
+                            <p>\\[A = a \\cdot b\\]</p>
+                            <p><em data-lang-es="Largo por ancho" data-lang-eu="Luzera bider zabalera">Largo por ancho</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-diamond icon-concept"></i>
+                        <span data-lang-es="Rombo" data-lang-eu="Erromboa">Rombo</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="formula-container">
+                            <p><strong data-lang-es="Perímetro:" data-lang-eu="Perimetroa:">Perímetro:</strong></p>
+                            <p>\\[P = 4a\\]</p>
+                            <p><em data-lang-es="4 veces el lado" data-lang-eu="Aldea lau aldiz">4 veces el lado</em></p>
+                        </div>
+                        <div class="formula-container">
+                            <p><strong data-lang-es="Área:" data-lang-eu="Azalera:">Área:</strong></p>
+                            <p>\\[A = \\frac{D \\cdot d}{2}\\]</p>
+                            <p><em data-lang-es="Diagonal mayor por diagonal menor, dividido entre 2" data-lang-eu="Diagonal handiagoa bider diagonal txikiagoa, bi zatitu">Diagonal mayor por diagonal menor, dividido entre 2</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-grip-lines icon-concept"></i>
+                        <span data-lang-es="Trapecio" data-lang-eu="Trapezioa">Trapecio</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="formula-container">
+                            <p><strong data-lang-es="Perímetro:" data-lang-eu="Perimetroa:">Perímetro:</strong></p>
+                            <p>\\[P = a + b + c + d\\]</p>
+                            <p><em data-lang-es="Suma de los cuatro lados" data-lang-eu="Lau aldeen batura">Suma de los cuatro lados</em></p>
+                        </div>
+                        <div class="formula-container">
+                            <p><strong data-lang-es="Área:" data-lang-eu="Azalera:">Área:</strong></p>
+                            <p>\\[A = \\frac{(B + b) \\cdot h}{2}\\]</p>
+                            <p><em data-lang-es="Media de las bases por la altura" data-lang-eu="Oinarrien batez bestekoa bider altitudea">Media de las bases por la altura</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Ejemplos Prácticos" data-lang-eu="Adibide Praktikoak">Ejemplos Prácticos</h3>
+            
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 1: Cuadrado" data-lang-eu="Adibidea 1: Karratua">Ejemplo 1: Cuadrado</h4>
+                <p data-lang-es="Calcula el perímetro y el área de un cuadrado de lado 6 cm."
+                   data-lang-es="Kalkulatu 6 cm aldeko karratu baten perimetroa eta azalera.">
+                   Calcula el perímetro y el área de un cuadrado de lado 6 cm.
+                </p>
+                <p><strong data-lang-es="Solución:" data-lang-eu="Soluzioa:">Solución:</strong></p>
+                <p data-lang-es="Perímetro: \\(P = 4 \\times 6 = 24\\) cm"
+                   data-lang-eu="Perimetroa: \\(P = 4 \\times 6 = 24\\) cm">
+                   Perímetro: \\(P = 4 \\times 6 = 24\\) cm
+                </p>
+                <p data-lang-es="Área: \\(A = 6^2 = 36\\) cm²"
+                   data-lang-eu="Azalera: \\(A = 6^2 = 36\\) cm²">
+                   Área: \\(A = 6^2 = 36\\) cm²
+                </p>
+            </div>
+
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 2: Rectángulo" data-lang-eu="Adibidea 2: Laukizuzena">Ejemplo 2: Rectángulo</h4>
+                <p data-lang-es="Un rectángulo tiene 8 cm de largo y 5 cm de ancho. Calcula su perímetro y área."
+                   data-lang-es="Laukizuzena batek 8 cm luzera eta 5 cm zabalera ditu. Kalkulatu bere perimetroa eta azalera.">
+                   Un rectángulo tiene 8 cm de largo y 5 cm de ancho. Calcula su perímetro y área.
+                </p>
+                <p><strong data-lang-es="Solución:" data-lang-eu="Soluzioa:">Solución:</strong></p>
+                <p data-lang-es="Perímetro: \\(P = 2(8 + 5) = 2 \\times 13 = 26\\) cm"
+                   data-lang-eu="Perimetroa: \\(P = 2(8 + 5) = 2 \\times 13 = 26\\) cm">
+                   Perímetro: \\(P = 2(8 + 5) = 2 \\times 13 = 26\\) cm
+                </p>
+                <p data-lang-es="Área: \\(A = 8 \\times 5 = 40\\) cm²"
+                   data-lang-eu="Azalera: \\(A = 8 \\times 5 = 40\\) cm²">
+                   Área: \\(A = 8 \\times 5 = 40\\) cm²
+                </p>
+            </div>
+
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 3: Triángulo" data-lang-eu="Adibidea 3: Triangelua">Ejemplo 3: Triángulo</h4>
+                <p data-lang-es="Un triángulo tiene una base de 10 cm y una altura de 6 cm. Calcula su área."
+                   data-lang-eu="Triangelu batek 10 cm oinarria eta 6 cm altitudea ditu. Kalkulatu bere azalera.">
+                   Un triángulo tiene una base de 10 cm y una altura de 6 cm. Calcula su área.
+                </p>
+                <p><strong data-lang-es="Solución:" data-lang-eu="Soluzioa:">Solución:</strong></p>
+                <p data-lang-es="Área: \\(A = \\frac{10 \\times 6}{2} = \\frac{60}{2} = 30\\) cm²"
+                   data-lang-eu="Azalera: \\(A = \\frac{10 \\times 6}{2} = \\frac{60}{2} = 30\\) cm²">
+                   Área: \\(A = \\frac{10 \\times 6}{2} = \\frac{60}{2} = 30\\) cm²
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section warning-section">
+            <h3><i class="fas fa-exclamation-triangle"></i> <span data-lang-es="Errores Típicos" data-lang-eu="Akats Tipikoak">Errores Típicos</span></h3>
+            <ul>
+                <li data-lang-es="<strong>Confundir perímetro con área:</strong> El perímetro es la longitud del contorno, el área es la superficie."
+                    data-lang-eu="<strong>Perimetroa azalerarekin nahastea:</strong> Perimetroa inguruaren luzera da, azalera gainazala.">
+                    <strong>Confundir perímetro con área:</strong> El perímetro es la longitud del contorno, el área es la superficie.
+                </li>
+                <li data-lang-es="<strong>Usar incorrectamente las fórmulas:</strong> Memoriza bien qué fórmula corresponde a cada figura."
+                    data-lang-eu="<strong>Formulak gaizki erabiltzea:</strong> Gogoratu ondo zein formula dagokion figura bakoitzari.">
+                    <strong>Usar incorrectamente las fórmulas:</strong> Memoriza bien qué fórmula corresponde a cada figura.
+                </li>
+                <li data-lang-es="<strong>No usar las unidades correctas:</strong> El perímetro se mide en unidades lineales, el área en unidades cuadradas."
+                    data-lang-eu="<strong>Unitate egokiak ez erabiltzea:</strong> Perimetroa unitate linealetAN neurtzen da, azalera unitate karratuetan.">
+                    <strong>No usar las unidades correctas:</strong> El perímetro se mide en unidades lineales, el área en unidades cuadradas.
+                </li>
+                <li data-lang-es="<strong>Olvidar dividir entre 2 en el triángulo:</strong> La fórmula del área del triángulo siempre incluye la división entre 2."
+                    data-lang-eu="<strong>Bi zatitzen ahaztea triangeluan:</strong> Triangeluaren azaleraren formulak beti bi zatitzea barne hartzen du.">
+                    <strong>Olvidar dividir entre 2 en el triángulo:</strong> La fórmula del área del triángulo siempre incluye la división entre 2.
+                </li>
+            </ul>
+        </section>
+
+        <section class="content-section" id="ejercicios">
+            <h3 data-lang-es="Ejercicios Prácticos" data-lang-eu="Ariketa Praktikoak">Ejercicios Prácticos</h3>
+            <div class="exercise-placeholder">
+                <p data-lang-es="🔧 Los ejercicios interactivos se cargarán aquí. (Funcionalidad pendiente de implementar)"
+                   data-lang-eu="🔧 Ariketa interaktiboak hemen kargatuko dira. (Funtzionalitatea ezartzeke dago)">
+                   🔧 Los ejercicios interactivos se cargarán aquí. (Funcionalidad pendiente de implementar)
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section" id="herramienta">
+            <h3 data-lang-es="Herramienta Interactiva" data-lang-eu="Tresna Interaktiboa">Herramienta Interactiva</h3>
+            <div class="interactive-tool card-style">
+                <div class="tool-placeholder">
+                    <p data-lang-es="🔧 La herramienta de cálculo de perímetros y áreas se cargará aquí. (Funcionalidad pendiente de implementar)"
+                       data-lang-eu="🔧 Perimetroak eta azalerak kalkulatzeko tresna hemen kargatuko da. (Funtzionalitatea ezartzeke dago)">
+                       🔧 La herramienta de cálculo de perímetros y áreas se cargará aquí. (Funcionalidad pendiente de implementar)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

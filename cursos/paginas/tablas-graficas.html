@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taulak eta Grafikoak - Matematika 1. DBH</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="../img/favicon.svg">
+    <link rel="alternate icon" href="../img/favicon.ico">
+</head>
+<body>
+    <header>
+        <div class="logo-titulo">
+            <h1>Taulak eta Grafikoak</h1>
+        </div>
+        <nav class="navbar" aria-label="Nabigazio nagusia">
+            <a href="../index.html" class="navbar-logo">Matematika 1. DBH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <div class="navbar-menu">
+                <a href="../index.html" class="navbar-item">Hasiera</a>
+                <div class="dropdown">
+                    <a href="#" class="navbar-item dropdown-btn">Gaiak</a>
+                    <div class="dropdown-content">
+                        <a href="numeros-naturales.html">Zenbaki Naturalak</a>
+                        <a href="divisibilidad.html">Zatigarritasuna</a>
+                        <a href="numeros-enteros.html">Zenbaki Osoak</a>
+                        <a href="fracciones.html">Zatikiak</a>
+                        <a href="algebra.html">Aljebran</a>
+                        <a href="geometria.html">Geometria</a>
+                        <a href="tablas-graficas.html" class="active">Taulak eta Grafikoak</a>
+                    </div>
+                </div>
+                <a href="https://chatgpt.com/g/g-67d38635fb0c81919668655bdd91d6f7-matella-euskeraz" class="navbar-item">Matella ChatGPT</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="teoria-tablas" class="seccion-contenedor">
+            <h2>Taulak eta Grafikoak</h2>
+            
+            <div class="tarjetas-secciones">
+                <div class="tarjeta" data-modal="coordenadas-cartesianas">
+                    <h3>📍 Koordenatu Kartesiarrak</h3>
+                    <p>Planoan koordenatuak ezartzea</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="informacion-puntos">
+                    <h3>🔍 Puntuak eta Informazioa</h3>
+                    <p>Aldagaien arteko erlazioak aztertzea</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="interpretacion-graficas">
+                    <h3>📈 Grafikoen Interpretazioa</h3>
+                    <p>Grafikoen irakurketa eta azterketa</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="distribuciones-estadisticas">
+                    <h3>📋 Estatistika Banaketak</h3>
+                    <p>Kualitatibo eta kuantitatibo aldagaia</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="parametros-estadisticos">
+                    <h3>📏 Estatistika Parametroak</h3>
+                    <p>Bataz bestekoa, mediana eta moda</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+                <div class="tarjeta" data-modal="graficos-estadisticos">
+                    <h3>📊 Estatistika Grafikoak</h3>
+                    <p>Estatistika datuen bisualizazioa</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Informazio Gehiago</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="herramientas-interactivas" class="seccion-contenedor">
+            <h2>Tresna Interaktiboak</h2>
+            <div class="herramientas">
+                <div class="herramienta">
+                    <h3>Plano Kartesiar Interaktiboa</h3>
+                    <div class="herramienta-contenedor">
+                        <div class="configuracion-ejercicio">
+                            <h4>Ariketa Konfigurazioa</h4>
+                            <div class="opciones-ejercicio">
+                                <div class="selector-tipo-ejercicio">
+                                    <label for="tipo-ejercicio">Ariketa Motak:</label>
+                                    <select id="tipo-ejercicio">
+                                        <option value="ubicar-puntos">Puntuak Kokatu</option>
+                                        <option value="dar-coordenadas">Koordenatuak Ematea</option>
+                                    </select>
+                                </div>
+                                <div class="selector-dificultad">
+                                    <label for="dificultad">Zailtasuna:</label>
+                                    <select id="dificultad">
+                                        <option value="facil">Erraza</option>
+                                        <option value="medio">Ertaina</option>
+                                        <option value="dificil">Zaila</option>
+                                    </select>
+                                </div>
+                                <button id="generar-ejercicio" class="btn">Ariketa Sortu</button>
+                            </div>
+                        </div>
+
+                        <div class="ejercicio-actual">
+                            <h4>Ariketa</h4>
+                            <div id="descripcion-ejercicio" class="descripcion-ejercicio">
+                                Sakatu "Ariketa Sortu" hasi ahal izateko.
+                            </div>
+                            <div id="plano-cartesiano" class="plano-cartesiano">
+                                <!-- Plano kartesiarra hemen marraztuko da -->
+                            </div>
+                            <div id="respuesta-contenedor" class="respuesta-contenedor">
+                                <input type="text" id="respuesta-usuario" placeholder="Zure erantzuna">
+                            </div>
+                            <div class="controles-ejercicio">
+                                <button id="comprobar-respuesta" class="btn btn-primario">Erantzuna Berretsi</button>
+                                <button id="mostrar-solucion" class="btn btn-secundario">Soluzioa Erakutsi</button>
+                            </div>
+                        </div>
+
+                        <div class="resultado-ejercicio">
+                            <h4>Emaitza</h4>
+                            <p id="mensaje-resultado"></p>
+                            <div id="explicacion-solucion" class="explicacion-solucion"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="herramienta">
+                    <h3>Estatistika Grafikoen Sortzailea</h3>
+                    <div class="herramienta-contenedor">
+                        <div class="configuracion-grafico">
+                            <h4>Grafikoa Konfigurazioa</h4>
+                            <div class="opciones-grafico">
+                                <div class="selector-tipo-grafico">
+                                    <label for="tipo-grafico">Grafiko Motak:</label>
+                                    <select id="tipo-grafico">
+                                        <option value="barras">Barrak Diagrama</option>
+                                        <option value="sectores">Sektoreen Diagrama</option>
+                                        <option value="poligono">Maiztinaren Poligonoa</option>
+                                    </select>
+                                </div>
+                                <div class="entrada-datos">
+                                    <button id="añadir-dato" class="btn">Datu Bat Gehitu</button>
+                                    <button id="borrar-datos" class="btn btn-secundario">Datuak Ezabatu</button>
+                                </div>
+                            </div>
+                            <div id="tabla-datos" class="tabla-datos">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Kategoria</th>
+                                            <th>Balioa</th>
+                                            <th>Ekintza</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cuerpo-tabla-datos">
+                                        <!-- Datuak hemen gehituko dira -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button id="generar-grafico" class="btn btn-primario">Grafikoa Sortu</button>
+                        </div>
+
+                        <div class="visualizacion-grafico">
+                            <h4>Bisualizazioa</h4>
+                            <div id="contenedor-grafico" class="contenedor-grafico">
+                                <!-- Grafikoa hemen marraztuko da -->
+                            </div>
+                        </div>
+
+                        <div class="analisis-grafico">
+                            <h4>Analisia</h4>
+                            <div id="estadisticas" class="estadisticas">
+                                <!-- Estatistikak hemen erakutsiko dira -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Matematika 1. DBH. Eskubide guztiak erreserbatuak.</p>
+    </footer>
+
+    <!-- Modales -->
+    <div id="modal-coordenadas-cartesianas" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-informacion-puntos" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-interpretacion-graficas" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-distribuciones-estadisticas" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-parametros-estadisticos" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-graficos-estadisticos" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+
+    <script src="../js/modales-tablas-graficas.js"></script>
+    <script src="../js/herramienta-tablas-graficas.js"></script>
+</body>
+</html>

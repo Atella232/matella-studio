@@ -1,0 +1,161 @@
+/* =============================================== */
+/* ====== ESTILOS PARA FÓRMULAS MATEMÁTICAS ====== */
+/* =============================================== */
+
+/* --- Fórmulas en línea y en bloque --- */
+.math-formula {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.1em;
+    color: var(--text-color);
+    background-color: var(--button-bg);
+    padding: 0.3em 0.6em;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    display: inline-block;
+    margin: 0.2em 0;
+}
+
+.math-formula-block {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.2em;
+    color: var(--text-color);
+    background-color: var(--card-bg);
+    padding: 1em;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+    margin: 1rem 0;
+    box-shadow: var(--card-shadow);
+}
+
+/* --- Exponentes y subíndices --- */
+.math-formula sup,
+.math-formula-block sup {
+    font-size: 0.8em;
+    vertical-align: super;
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.math-formula sub,
+.math-formula-block sub {
+    font-size: 0.8em;
+    vertical-align: sub;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* --- Operadores matemáticos --- */
+.math-operator {
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin: 0 0.3em;
+}
+
+.math-equals {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 0 0.5em;
+}
+
+/* --- Fracciones --- */
+.math-fraction {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 0.2em;
+}
+
+.math-fraction .numerator {
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.1em 0.3em;
+    font-weight: bold;
+}
+
+.math-fraction .denominator {
+    padding: 0.1em 0.3em;
+}
+
+/* --- Cálculos paso a paso --- */
+.calculation-step {
+    font-family: monospace;
+    font-size: 1.1em;
+    background-color: var(--button-bg);
+    padding: 0.8em;
+    border-radius: 6px;
+    border-left: 4px solid var(--secondary-color);
+    margin: 0.5rem 0;
+    text-align: center;
+}
+
+.calculation-step .step-number {
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin-right: 0.5em;
+}
+
+/* --- Resultados finales --- */
+.math-result {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: var(--secondary-color);
+    background-color: var(--card-bg);
+    padding: 0.8em 1.2em;
+    border-radius: 8px;
+    border: 2px solid var(--secondary-color);
+    text-align: center;
+    margin: 1rem 0;
+    box-shadow: var(--card-shadow);
+}
+
+/* --- Ejemplos con fórmulas --- */
+.example-formula {
+    background-color: var(--bg-color);
+    border: 1px dashed var(--border-color);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.example-formula .formula-title {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.1em;
+}
+
+.example-formula .formula-content {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.2em;
+    color: var(--text-color);
+}
+
+/* --- Mejoras para MathJax --- */
+.MathJax {
+    font-size: 1.1em !important;
+}
+
+.MathJax_Display {
+    margin: 1rem 0 !important;
+}
+
+/* --- Responsividad --- */
+@media (max-width: 768px) {
+    .math-formula-block {
+        font-size: 1em;
+        padding: 0.8em;
+    }
+    
+    .math-result {
+        font-size: 1.1em;
+        padding: 0.6em 1em;
+    }
+    
+    .calculation-step {
+        font-size: 1em;
+        padding: 0.6em;
+    }
+}
+
+

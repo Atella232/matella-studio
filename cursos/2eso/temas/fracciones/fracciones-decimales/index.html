@@ -1,0 +1,683 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="Fracciones y números decimales - MATELLA" data-lang-eu="Zatikiak eta zenbaki hamartarrak - MATELLA">Fracciones y números decimales - MATELLA</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* Estilos específicos para esta página */
+    .conversion-types, .decimal-to-fraction-methods, 
+    .practical-applications, .common-errors {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .type-card, .method-card, .application-card, .error-card {
+      background-color: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--card-shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .type-card:hover, .method-card:hover, 
+    .application-card:hover, .error-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--card-hover-shadow);
+    }
+    
+    
+    .method-card .formula {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 0.8rem;
+      border-radius: 6px;
+      text-align: center;
+      margin: 1rem 0;
+      font-family: monospace;
+      font-size: 1.1em;
+    }
+    
+    .application-card h5, .error-card h5 {
+      color: var(--secondary-color);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .error-card h5 {
+      color: #e74c3c;
+    }
+    
+    .tips-section {
+      background-color: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      margin: 1.5rem 0;
+    }
+    
+    .tips-section h5 {
+      color: #f39c12;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .calculation-steps {
+      margin: 1rem 0;
+    }
+    
+    .step {
+      background-color: var(--button-bg);
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+      border-left: 3px solid var(--secondary-color);
+    }
+    
+    .formula-box {
+      background-color: var(--button-bg);
+      padding: 1.2rem;
+      border-radius: 8px;
+      text-align: center;
+      margin: 1.5rem 0;
+      font-family: 'Lato', sans-serif;
+      font-weight: 900;
+      font-size: 1.4em;
+      color: var(--primary-color);
+      border: 1px solid var(--border-color);
+    }
+    
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .tool-grid label {
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+    
+    .result-box {
+      background-color: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      margin-top: 1.5rem;
+    }
+    
+    .result-box p {
+      margin-bottom: 0.8rem;
+    }
+    
+    .result-box p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .ok {
+      color: var(--secondary-color);
+      font-weight: bold;
+    }
+    
+    .error {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+    
+    .info-box {
+      background-color: var(--button-bg);
+      padding: 1rem;
+      border-radius: 6px;
+      border-left: 4px solid var(--secondary-color);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+    
+    .info-box i {
+      color: var(--secondary-color);
+      font-size: 1.2em;
+    }
+    
+    @media (max-width: 768px) {
+      .conversion-types, .decimal-to-fraction-methods, 
+      .practical-applications, .common-errors {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <a href="../../../../../index.html" class="home-link">
+        <i class="fas fa-calculator"></i>
+        <span data-lang-es="2º ESO" data-lang-eu="2. DBH">2º ESO</span>
+      </a>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
+    </nav>
+  </header>
+  
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol>
+      <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="2. DBH">2º ESO</a></li>
+      <li><a href="../index.html" data-lang-es="Fracciones" data-lang-eu="Zatikiak">Fracciones</a></li>
+      <li class="active" aria-current="page"><span data-lang-es="Fracciones y números decimales" data-lang-eu="Zatikiak eta zenbaki hamartarrak">Fracciones y números decimales</span></li>
+    </ol>
+  </nav>
+  
+  <main>
+    <h1 class="page-title" data-lang-es="Fracciones y números decimales" data-lang-eu="Zatikiak eta zenbaki hamartarrak">Fracciones y números decimales</h1>
+    
+    <div class="content-section">
+      <p data-lang-es="Las fracciones y los números decimales son dos formas diferentes de representar la misma cantidad. Es fundamental saber convertir entre ambas formas para resolver problemas matemáticos y entender mejor los conceptos." data-lang-eu="Zatikiak eta zenbaki hamartarrak kantitate berbera irudikatzeko modu desberdinak dira. Bi forma horien artean bihurtzea funtsezkoa da arazo matematikoak ebazteko eta kontzeptuak hobeto ulertzeko.">Las fracciones y los números decimales son dos formas diferentes de representar la misma cantidad. Es fundamental saber convertir entre ambas formas para resolver problemas matemáticos y entender mejor los conceptos.</p>
+
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="true">
+            <i class="fas fa-exchange-alt icon-concept"></i>
+            <span data-lang-es="Conversión de fracción a decimal" data-lang-eu="Zatikitik hamartarrera bihurtzea">Conversión de fracción a decimal</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Para convertir una fracción a decimal, dividimos el numerador entre el denominador:" data-lang-eu="Zatiki bat hamartar bihurtzeko, zenbakitzailea izendatzaileaz zatitzen dugu:">Para convertir una fracción a decimal, dividimos el numerador entre el denominador:</p>
+            
+            <div class="formula-box">
+              <span>a/b = a ÷ b</span>
+            </div>
+            
+            <p data-lang-es="Esta división puede dar como resultado un decimal exacto, periódico o infinito." data-lang-eu="Zatidura honek emaitza gisa hamartar zehatza, periodikoa edo infinitua eman dezake.">Esta división puede dar como resultado un decimal exacto, periódico o infinito.</p>
+
+            <div class="conversion-types">
+              <div class="type-card">
+                <h5 data-lang-es="Decimal exacto" data-lang-eu="Hamartar zehatza">Decimal exacto</h5>
+                <p data-lang-es="La división termina y no hay cifras que se repitan" data-lang-eu="Zatiketa amaitzen da eta ez dago errepikatzen den zifrarik">La división termina y no hay cifras que se repitan</p>
+                <div class="examples">
+                  <span data-lang-es="Ejemplos:" data-lang-eu="Adibideak:">Ejemplos:</span><br>
+                  1/2 = 0.5<br>
+                  3/4 = 0.75<br>
+                  7/8 = 0.875
+                </div>
+              </div>
+
+              <div class="type-card">
+                <h5 data-lang-es="Decimal periódico" data-lang-eu="Hamartar periodikoa">Decimal periódico</h5>
+                <p data-lang-es="Hay un grupo de cifras que se repite infinitamente" data-lang-eu="Zifra-talde bat infinituki errepikatzen da">Hay un grupo de cifras que se repita infinitamente</p>
+                <div class="examples">
+                  <span data-lang-es="Ejemplos:" data-lang-eu="Adibideak:">Ejemplos:</span><br>
+                  1/3 = 0.333... = 0.3̄<br>
+                  2/7 = 0.285714285714... = 0.285714̄
+                </div>
+              </div>
+            </div>
+
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo resuelto: Convertir 5/8 a decimal" data-lang-eu="Adibide ebatzia: 5/8 hamartar bihurtu">Ejemplo resuelto: Convertir 5/8 a decimal</h4>
+              <div class="solution">
+                <p data-lang-es="Paso a paso:" data-lang-eu="Urratsez urrats:">Paso a paso:</p>
+                <div class="calculation-steps">
+                  <div class="step">1. Dividir: 5 ÷ 8</div>
+                  <div class="step">2. 5.000 ÷ 8 = 0.625</div>
+                  <div class="step">3. La división termina exactamente</div>
+                </div>
+                <p data-lang-es="Por tanto, 5/8 = 0.625" data-lang-eu="Beraz, 5/8 = 0.625">Por tanto, 5/8 = 0.625</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-undo icon-concept"></i>
+            <span data-lang-es="Conversión de decimal a fracción" data-lang-eu="Hamartarretik zatikira bihurtzea">Conversión de decimal a fracción</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Para convertir un decimal a fracción, seguimos diferentes métodos según el tipo de decimal:" data-lang-eu="Hamartar bat zatiki bihurtzeko, hainbat metodo jarraitzen ditugu hamartar motaren arabera:">Para convertir un decimal a fracción, seguimos diferentes métodos según el tipo de decimal:</p>
+            
+            <div class="decimal-to-fraction-methods">
+              <div class="method-card">
+                <h5 data-lang-es="Decimal exacto" data-lang-eu="Hamartar zehatza">Decimal exacto</h5>
+                <p data-lang-es="Se coloca el número sin coma en el numerador y 1 seguido de tantos ceros como decimales en el denominador" data-lang-eu="Koma gabe zenbakia zenbakitzailean jartzen da eta 1 eta hainbat zero hamartarren kopuruaren arabera izendatzailean">Se coloca el número sin coma en el numerador y 1 seguido de tantos ceros como decimales en el denominador</p>
+                <div class="formula">0.abc = abc/1000</div>
+                <div class="examples">
+                  <span data-lang-es="Ejemplo:" data-lang-eu="Adibidea:">Ejemplo:</span> 0.75 = 75/100 = 3/4
+                </div>
+              </div>
+
+              <div class="method-card">
+                <h5 data-lang-es="Decimal periódico" data-lang-eu="Hamartar periodikoa">Decimal periódico</h5>
+                <p data-lang-es="Se usa el método algebraico para encontrar la fracción generatriz" data-lang-eu="Metodo algebraikoa erabiltzen da zatiki sortzailea aurkitzeko">Se usa el método algebraico para encontrar la fracción generatriz</p>
+                <div class="examples">
+                  <span data-lang-es="Ejemplo:" data-lang-eu="Adibidea:">Ejemplo:</span> 0.3̄ = 1/3
+                </div>
+              </div>
+            </div>
+
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo resuelto: Convertir 0.125 a fracción" data-lang-eu="Adibide ebatzia: 0.125 zatiki bihurtu">Ejemplo resuelto: Convertir 0.125 a fracción</h4>
+              <div class="solution">
+                <p data-lang-es="Paso a paso:" data-lang-eu="Urratsez urrats:">Paso a paso:</p>
+                <div class="calculation-steps">
+                  <div class="step">1. 0.125 tiene 3 decimales</div>
+                  <div class="step">2. Dividendo = 125, divisor = 1000</div>
+                  <div class="step">3. Simplificar 125/1000 = 1/8</div>
+                </div>
+                <p data-lang-es="Por tanto, 0.125 = 1/8" data-lang-eu="Beraz, 0.125 = 1/8">Por tanto, 0.125 = 1/8</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-calculator icon-concept"></i>
+            <span data-lang-es="Calculadora de conversiones" data-lang-eu="Bihurketen kalkulagailua">Calculadora de conversiones</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Utiliza esta calculadora para convertir entre fracciones y decimales:" data-lang-eu="Erabili kalkulagailu hau zatikien eta hamartarren artean bihurtzeko:">Utiliza esta calculadora para convertir entre fracciones y decimales:</p>
+            
+            <div class="tool-section card-style">
+              <div class="tool-grid">
+                <div>
+                  <label for="conversionType" data-lang-es="Tipo de conversión:" data-lang-eu="Bihurketaren mota:">Tipo de conversión:</label>
+                  <select id="conversionType" class="form-control">
+                    <option value="fraction-to-decimal" data-lang-es="Fracción → Decimal" data-lang-eu="Zatiki → Hamartar">Fracción → Decimal</option>
+                    <option value="decimal-to-fraction" data-lang-es="Decimal → Fracción" data-lang-eu="Hamartar → Zatiki">Decimal → Fracción</option>
+                  </select>
+                </div>
+                
+                <div id="fractionInputContainer">
+                  <label for="fractionInput" data-lang-es="Fracción (a/b):" data-lang-eu="Zatiki (a/b):">Fracción (a/b):</label>
+                  <input type="text" id="fractionInput" placeholder="ej: 3/4" class="form-control">
+                </div>
+                
+                <div id="decimalInputContainer" style="display: none;">
+                  <label for="decimalInput" data-lang-es="Decimal:" data-lang-eu="Hamartar:">Decimal:</label>
+                  <input type="number" id="decimalInput" step="0.001" placeholder="ej: 0.75" class="form-control">
+                </div>
+              </div>
+              
+              <div class="tool-actions">
+                <button onclick="convertFractionDecimal()" class="button-primary">
+                  <i class="fas fa-exchange-alt"></i>
+                  <span data-lang-es="Convertir" data-lang-eu="Bihurtu">Convertir</span>
+                </button>
+              </div>
+              
+              <div class="result-box" id="conversionResult"></div>
+            </div>
+
+            <div class="info-box">
+              <i class="fas fa-lightbulb"></i>
+              <p data-lang-es="La calculadora simplifica automáticamente las fracciones resultantes." data-lang-eu="Kalkulagailuak automatikoki sinplifikatzen ditu emaitzako zatikiak.">La calculadora simplifica automáticamente las fracciones resultantes.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-chart-line icon-concept"></i>
+            <span data-lang-es="Comparación de fracciones y decimales" data-lang-eu="Zatikien eta hamartarren konparazioa">Comparación de fracciones y decimales</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Para comparar fracciones y decimales, es útil convertirlos a la misma forma:" data-lang-eu="Zatikiak eta hamartarrak konparatzeko, komeni da forma berera bihurtzea:">Para comparar fracciones y decimales, es útil convertirlos a la misma forma:</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: Comparar 3/4 y 0.7" data-lang-eu="Adibidea: Konparatu 3/4 eta 0.7">Ejemplo: Comparar 3/4 y 0.7</h4>
+              <div class="solution">
+                <p data-lang-es="Método 1: Convertir fracción a decimal" data-lang-eu="1. metodoa: Zatikia hamartar bihurtu">Método 1: Convertir fracción a decimal</p>
+                <div class="calculation-steps">
+                  <div class="step">1. 3/4 = 3 ÷ 4 = 0.75</div>
+                  <div class="step">2. Comparar: 0.75 vs 0.7</div>
+                  <div class="step">3. Como 0.75 > 0.7, entonces 3/4 > 0.7</div>
+                </div>
+                
+                <p data-lang-es="Método 2: Convertir decimal a fracción" data-lang-eu="2. metodoa: Hamartarra zatiki bihurtu">Método 2: Convertir decimal a fracción</p>
+                <div class="calculation-steps">
+                  <div class="step">1. 0.7 = 7/10</div>
+                  <div class="step">2. Comparar: 3/4 vs 7/10</div>
+                  <div class="step">3. MCM(4,10) = 20</div>
+                  <div class="step">4. 3/4 = 15/20, 7/10 = 14/20</div>
+                  <div class="step">5. Como 15/20 > 14/20, entonces 3/4 > 0.7</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-puzzle-piece icon-concept"></i>
+            <span data-lang-es="Aplicaciones prácticas" data-lang-eu="Aplikazio praktikoak">Aplicaciones prácticas</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Las conversiones entre fracciones y decimales son útiles en muchas situaciones:" data-lang-eu="Zatikien eta hamartarren arteko bihurketak egoera askotan dira baliagarriak:">Las conversiones entre fracciones y decimales son útiles en muchas situaciones:</p>
+            
+            <div class="practical-applications">
+              <div class="application-card">
+                <h5><i class="fas fa-chart-pie"></i> <span data-lang-es="Porcentajes" data-lang-eu="Ehunekoak">Porcentajes</span></h5>
+                <p data-lang-es="Los porcentajes son fracciones con denominador 100" data-lang-eu="Ehunekoak 100 izendatzailea duten zatikiak dira">Los porcentajes son fracciones con denominador 100</p>
+                <div class="examples">
+                  <span data-lang-es="Ejemplo:" data-lang-eu="Adibidea:">Ejemplo:</span><br>
+                  25% = 25/100 = 1/4 = 0.25
+                </div>
+              </div>
+
+              <div class="application-card">
+                <h5><i class="fas fa-ruler"></i> <span data-lang-es="Medidas" data-lang-eu="Neurriak">Medidas</span></h5>
+                <p data-lang-es="Las medidas se expresan tanto en fracciones como en decimales" data-lang-eu="Neurriak zatikietan eta hamartarretan adierazten dira">Las medidas se expresan tanto en fracciones como en decimales</p>
+                <div class="examples">
+                  <span data-lang-es="Ejemplo:" data-lang-eu="Adibidea:">Ejemplo:</span><br>
+                  1/2 metro = 0.5 metros
+                </div>
+              </div>
+
+              <div class="application-card">
+                <h5><i class="fas fa-euro-sign"></i> <span data-lang-es="Dinero" data-lang-eu="Dirua">Dinero</span></h5>
+                <p data-lang-es="Los precios y cantidades monetarias usan decimales" data-lang-eu="Prezioek eta diru-kopuruek hamartarrak erabiltzen dituzte">Los precios y cantidades monetarias usan decimales</p>
+                <div class="examples">
+                  <span data-lang-es="Ejemplo:" data-lang-eu="Adibidea:">Ejemplo:</span><br>
+                  €3.50 = 3 + 1/2 = 3.5 euros
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-exclamation-triangle icon-concept"></i>
+            <span data-lang-es="Errores comunes y consejos" data-lang-eu="Ohiko akatsak eta aholkuak">Errores comunes y consejos</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Es importante evitar estos errores comunes al convertir entre fracciones y decimales:" data-lang-eu="Garrantzitsua da zatikien eta hamartarren artean bihurtzean ohiko akats hauek saihestea:">Es importante evitar estos errores comunes al convertir entre fracciones y decimales:</p>
+            
+            <div class="common-errors">
+              <div class="error-card">
+                <h5><i class="fas fa-times-circle"></i> <span data-lang-es="Error: No simplificar la fracción resultante" data-lang-eu="Akatsa: Emaitzako zatikia ez sinplifikatzea">Error: No simplificar la fracción resultante</span></h5>
+                <p data-lang-es="Incorrecto: 0.25 = 25/100 (dejar sin simplificar)" data-lang-eu="Okerra: 0.25 = 25/100 (sinplifikatu gabe utzi)">Incorrecto: 0.25 = 25/100 (dejar sin simplificar)</p>
+                <p data-lang-es="Correcto: 0.25 = 25/100 = 1/4" data-lang-eu="Zuzena: 0.25 = 25/100 = 1/4">Correcto: 0.25 = 25/100 = 1/4</p>
+              </div>
+
+              <div class="error-card">
+                <h5><i class="fas fa-times-circle"></i> <span data-lang-es="Error: Confundir decimales periódicos" data-lang-eu="Akatsa: Hamartar periodikoak nahastea">Error: Confundir decimales periódicos</span></h5>
+                <p data-lang-es="Incorrecto: 0.3̄ = 0.33" data-lang-eu="Okerra: 0.3̄ = 0.33">Incorrecto: 0.3̄ = 0.33</p>
+                <p data-lang-es="Correcto: 0.3̄ = 0.333... = 1/3" data-lang-eu="Zuzena: 0.3̄ = 0.333... = 1/3">Correcto: 0.3̄ = 0.333... = 1/3</p>
+              </div>
+
+              <div class="error-card">
+                <h5><i class="fas fa-times-circle"></i> <span data-lang-es="Error: No considerar la precisión decimal" data-lang-eu="Akatsa: Hamartarren zehaztasuna ez kontuan hartzea">Error: No considerar la precisión decimal</span></h5>
+                <p data-lang-es="Incorrecto: 0.1 = 1/10, 0.01 = 1/100" data-lang-eu="Okerra: 0.1 = 1/10, 0.01 = 1/100">Incorrecto: 0.1 = 1/10, 0.01 = 1/100</p>
+                <p data-lang-es="Correcto: Contar correctamente los decimales" data-lang-eu="Zuzena: Hamartarrak zuzen kontatzea">Correcto: Contar correctamente los decimales</p>
+              </div>
+            </div>
+
+            <div class="tips-section">
+              <h5><i class="fas fa-lightbulb"></i> <span data-lang-es="Consejos útiles" data-lang-eu="Aholku erabilgarriak">Consejos útiles</span></h5>
+              <ul>
+                <li data-lang-es="Para decimales exactos, cuenta los decimales y usa potencias de 10" data-lang-eu="Hamartar zehatzetarako, kontatu hamartarrak eta erabili 10en potentziak">Para decimales exactos, cuenta los decimales y usa potencias de 10</li>
+                <li data-lang-es="Siempre simplifica las fracciones resultantes" data-lang-eu="Beti sinplifikatu emaitzako zatikiak">Siempre simplifica las fracciones resultantes</li>
+                <li data-lang-es="Los decimales periódicos tienen fracciones generatrices específicas" data-lang-eu="Hamartar periodikoek zatiki sortzaile espezifikoak dituzte">Los decimales periódicos tienen fracciones generatrices específicas</li>
+                <li data-lang-es="Practica con ejemplos simples antes de los complejos" data-lang-eu="Praktikatu adibide sinpleekin konplexuak baino lehen">Practica con ejemplos simples antes de los complejos</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-list-ol icon-concept"></i>
+            <span data-lang-es="Ejercicios propuestos" data-lang-eu="Ariketak proposatuak">Ejercicios propuestos</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <ol class="exercises-list">
+              <li>
+                <p data-lang-es="Convierte 3/5 a decimal" data-lang-eu="Bihurtu 3/5 hamartarra">Convierte 3/5 a decimal</p>
+                <button class="toggle-hint-button" data-target="hint-1">
+                  <i class="fas fa-lightbulb"></i>
+                  <span data-lang-es="Mostrar Pista/Razón" data-lang-eu="Pista/Arrazoia Erakutsi" data-lang-es-hide="Ocultar Pista/Razón" data-lang-eu-hide="Pista/Arrazoia Ezkutatu">Mostrar Pista/Razón</span>
+                </button>
+                <div class="hint-content" id="hint-1">
+                  <p data-lang-es="Divide 3 entre 5: 3 ÷ 5" data-lang-eu="Zatitu 3 5ez: 3 ÷ 5">Divide 3 entre 5: 3 ÷ 5</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="Convierte 0.6 a fracción" data-lang-eu="Bihurtu 0.6 zatikira">Convierte 0.6 a fracción</p>
+                <button class="toggle-hint-button" data-target="hint-2">
+                  <i class="fas fa-lightbulb"></i>
+                  <span data-lang-es="Mostrar Pista/Razón" data-lang-eu="Pista/Arrazoia Erakutsi" data-lang-es-hide="Ocultar Pista/Razón" data-lang-eu-hide="Pista/Arrazoia Ezkutatu">Mostrar Pista/Razón</span>
+                </button>
+                <div class="hint-content" id="hint-2">
+                  <p data-lang-es="0.6 tiene 1 decimal, así que el denominador será 10" data-lang-eu="0.6-k hamartar bat du, beraz izendatzailea 10 izango da">0.6 tiene 1 decimal, así que el denominador será 10</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="¿Cuál es mayor: 2/3 o 0.67?" data-lang-eu="Zein da handiagoa: 2/3 edo 0.67?">¿Cuál es mayor: 2/3 o 0.67?</p>
+                <button class="toggle-hint-button" data-target="hint-3">
+                  <i class="fas fa-lightbulb"></i>
+                  <span data-lang-es="Mostrar Pista/Razón" data-lang-eu="Pista/Arrazoia Erakutsi" data-lang-es-hide="Ocultar Pista/Razón" data-lang-eu-hide="Pista/Arrazoia Ezkutatu">Mostrar Pista/Razón</span>
+                </button>
+                <div class="hint-content" id="hint-3">
+                  <p data-lang-es="Convierte 2/3 a decimal y luego compara ambos números decimales" data-lang-eu="Bihurtu 2/3 hamartarrera eta, ondoren, konparatu bi zenbaki hamartarrak">Convierte 2/3 a decimal y luego compara ambos números decimales</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="Convierte 0.125 a fracción simplificada" data-lang-eu="Bihurtu 0.125 zatiki sinplifikatura">Convierte 0.125 a fracción simplificada</p>
+                <button class="toggle-hint-button" data-target="hint-4">
+                  <i class="fas fa-lightbulb"></i>
+                  <span data-lang-es="Mostrar Pista/Razón" data-lang-eu="Pista/Arrazoia Erakutsi" data-lang-es-hide="Ocultar Pista/Razón" data-lang-eu-hide="Pista/Arrazoia Ezkutatu">Mostrar Pista/Razón</span>
+                </button>
+                <div class="hint-content" id="hint-4">
+                  <p data-lang-es="0.125 tiene 3 decimales, así que el denominador será 1000. Luego simplifica" data-lang-eu="0.125-ek 3 hamartar ditu, beraz izendatzailea 1000 izango da. Gero, sinplifikatu">0.125 tiene 3 decimales, así que el denominador será 1000. Luego simplifica</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="Convierte 7/8 a decimal" data-lang-eu="Bihurtu 7/8 hamartarra">Convierte 7/8 a decimal</p>
+                <button class="toggle-hint-button" data-target="hint-5">
+                  <i class="fas fa-lightbulb"></i>
+                  <span data-lang-es="Mostrar Pista/Razón" data-lang-eu="Pista/Arrazoia Erakutsi" data-lang-es-hide="Ocultar Pista/Razón" data-lang-eu-hide="Pista/Arrazoia Ezkutatu">Mostrar Pista/Razón</span>
+                </button>
+                <div class="hint-content" id="hint-5">
+                  <p data-lang-es="Divide 7 entre 8: 7 ÷ 8" data-lang-eu="Zatitu 7 8z: 7 ÷ 8">Divide 7 entre 8: 7 ÷ 8</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 MATELLA - <span data-lang-es="Matemáticas para todos" data-lang-eu="Matematika guztientzat">Matemáticas para todos</span></p>
+    </div>
+  </footer>
+  
+  <script src="../../../../../assets/js/main.js"></script>
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script>
+    // Script específico para esta página
+    document.addEventListener('DOMContentLoaded', function() {
+      // Inicializar acordeones
+      if (typeof initAccordions === 'function') {
+        initAccordions();
+      }
+      
+      // Inicializar botones de pista
+      const toggleHintButtons = document.querySelectorAll('.toggle-hint-button');
+      toggleHintButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const targetId = this.getAttribute('data-target');
+          const hintContent = document.getElementById(targetId);
+          
+          if (hintContent.style.display === 'none' || hintContent.style.display === '') {
+            hintContent.style.display = 'block';
+            const currentLang = document.documentElement.lang || 'es';
+            const hideText = currentLang === 'eu' ? this.getAttribute('data-lang-eu-hide') : this.getAttribute('data-lang-es-hide');
+            this.querySelector('span').textContent = hideText;
+          } else {
+            hintContent.style.display = 'none';
+            const currentLang = document.documentElement.lang || 'es';
+            const showText = currentLang === 'eu' ? this.getAttribute('data-lang-eu') : this.getAttribute('data-lang-es');
+            this.querySelector('span').textContent = showText;
+          }
+        });
+      });
+      
+      // Manejar cambio de tipo de conversión
+      const conversionType = document.getElementById('conversionType');
+      const fractionInputContainer = document.getElementById('fractionInputContainer');
+      const decimalInputContainer = document.getElementById('decimalInputContainer');
+      
+      conversionType.addEventListener('change', function() {
+        if (this.value === 'fraction-to-decimal') {
+          fractionInputContainer.style.display = 'block';
+          decimalInputContainer.style.display = 'none';
+        } else {
+          fractionInputContainer.style.display = 'none';
+          decimalInputContainer.style.display = 'block';
+        }
+      });
+    });
+    
+    // Función para convertir entre fracciones y decimales
+    function convertFractionDecimal() {
+      const conversionType = document.getElementById('conversionType').value;
+      const resultContainer = document.getElementById('conversionResult');
+      
+      if (conversionType === 'fraction-to-decimal') {
+        const fractionInput = document.getElementById('fractionInput').value.trim();
+        const fractionPattern = /^(\d+)\/(\d+)$/;
+        
+        if (!fractionPattern.test(fractionInput)) {
+          resultContainer.innerHTML = '<p class="error"><i class="fas fa-exclamation-circle"></i> <span data-lang-es="Formato incorrecto. Usa el formato a/b (ej: 3/4)" data-lang-eu="Formatua ez da egokia. Erabili a/b formatua (adib: 3/4)">Formato incorrecto. Usa el formato a/b (ej: 3/4)</span></p>';
+          return;
+        }
+        
+        const matches = fractionInput.match(fractionPattern);
+        const numerator = parseInt(matches[1]);
+        const denominator = parseInt(matches[2]);
+        
+        if (denominator === 0) {
+          resultContainer.innerHTML = '<p class="error"><i class="fas fa-exclamation-circle"></i> <span data-lang-es="Error: El denominador no puede ser cero" data-lang-eu="Errorea: Izendatzailea ezin da zero izan">Error: El denominador no puede ser cero</span></p>';
+          return;
+        }
+        
+        const result = numerator / denominator;
+        resultContainer.innerHTML = `
+          <p><span data-lang-es="Fracción:" data-lang-eu="Zatiki:">Fracción:</span> ${fractionInput}</p>
+          <p><span data-lang-es="Decimal:" data-lang-eu="Hamartarra:">Decimal:</span> ${result}</p>
+          <p class="ok"><i class="fas fa-check-circle"></i> <span data-lang-es="Conversión realizada correctamente" data-lang-eu="Bihurketa ondo burutu da">Conversión realizada correctamente</span></p>
+        `;
+        
+      } else {
+        const decimalInput = document.getElementById('decimalInput').value.trim();
+        const decimalValue = parseFloat(decimalInput);
+        
+        if (isNaN(decimalValue)) {
+          resultContainer.innerHTML = '<p class="error"><i class="fas fa-exclamation-circle"></i> <span data-lang-es="Por favor, introduce un número decimal válido" data-lang-eu="Mesedez, sartu baliozko zenbaki hamartar bat">Por favor, introduce un número decimal válido</span></p>';
+          return;
+        }
+        
+        // Convertir decimal a fracción (versión simplificada)
+        const tolerance = 1.0E-6;
+        let numerator = 1;
+        let denominator = 1;
+        
+        // Método simple para decimales exactos
+        const decimalString = decimalValue.toString();
+        if (decimalString.includes('.')) {
+          const decimalPlaces = decimalString.split('.')[1].length;
+          denominator = Math.pow(10, decimalPlaces);
+          numerator = decimalValue * denominator;
+          
+          // Simplificar la fracción
+          const gcd = greatestCommonDivisor(numerator, denominator);
+          numerator /= gcd;
+          denominator /= gcd;
+          
+          resultContainer.innerHTML = `
+            <p><span data-lang-es="Decimal:" data-lang-eu="Hamartar:">Decimal:</span> ${decimalValue}</p>
+            <p><span data-lang-es="Fracción:" data-lang-eu="Zatikia:">Fracción:</span> ${numerator}/${denominator}</p>
+            <p class="ok"><i class="fas fa-check-circle"></i> <span data-lang-es="Conversión realizada correctamente" data-lang-eu="Bihurketa ondo burutu da">Conversión realizada correctamente</span></p>
+          `;
+        } else {
+          resultContainer.innerHTML = `
+            <p><span data-lang-es="Decimal:" data-lang-eu="Hamartar:">Decimal:</span> ${decimalValue}</p>
+            <p><span data-lang-es="Fracción:" data-lang-eu="Zatikia:">Fracción:</span> ${decimalValue}/1</p>
+            <p class="ok"><i class="fas fa-check-circle"></i> <span data-lang-es="Conversión realizada correctamente" data-lang-eu="Bihurketa ondo burutu da">Conversión realizada correctamente</span></p>
+          `;
+        }
+      }
+    }
+    
+    // Función para calcular el máximo común divisor (simplificar fracciones)
+    function greatestCommonDivisor(a, b) {
+      a = Math.abs(a);
+      b = Math.abs(b);
+      
+      if (b < 0.0000001) return a; // Evitar división por cero
+      
+      return greatestCommonDivisor(b, a % b);
+    }
+  </script>
+  
+  <!-- Scripts principales -->
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  
+  <!-- Botón flotante para volver arriba -->
+  <button id="back-to-top" aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+</body>
+</html>

@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Operaciones con Monomios - Álgebra" data-lang-eu="Monomioekin Eragiketak - Aljebra">Operaciones con Monomios - Álgebra</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-calculator"></i>
+            <span data-lang-es="Operaciones con Monomios" data-lang-eu="Monomioekin Eragiketak">Operaciones con Monomios</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Operaciones con Monomios" data-lang-eu="Monomioekin Eragiketak">Operaciones con Monomios</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="Suma y Resta de Monomios" data-lang-eu="Monomioen Batuketa eta Kenketa">Suma y Resta de Monomios</h3>
+            <p data-lang-es="Solo se pueden sumar o restar monomios <b>semejantes</b>, es decir, aquellos que tienen la misma parte literal (mismas letras con los mismos exponentes)."
+               data-lang-eu="Monomio <b>antzekoak</b> bakarrik batu edo ken daitezke, hau da, zati literal berdina dutenak (letra berdinak eta berretzaile berdinak).">
+               Solo se pueden sumar o restar monomios <b>semejantes</b>, es decir, aquellos que tienen la misma parte literal (mismas letras con los mismos exponentes).
+            </p>
+            <div class="key-takeaway">
+                <strong data-lang-es="Regla de Oro:" data-lang-eu="Urrezko Araua:">Regla de Oro:</strong>
+                <p data-lang-es="Se suman o restan los coeficientes y se mantiene la misma parte literal."
+                   data-lang-eu="Koefizienteak batu edo kentzen dira eta zati literal berdina mantentzen da.">
+                   Se suman o restan los coeficientes y se mantiene la misma parte literal.
+                </p>
+            </div>
+            <p class="example" style="margin-top: 1.5rem;" data-lang-es="<b>Semejantes:</b> 4x + 2x = 6x<br><b>No semejantes:</b> 3a + 2b (no se puede simplificar)"
+               data-lang-eu="<b>Antzekoak:</b> 4x + 2x = 6x<br><b>Ez antzekoak:</b> 3a + 2b (ezin da sinplifikatu)">
+               <b>Semejantes:</b> 4x + 2x = 6x<br><b>No semejantes:</b> 3a + 2b (no se puede simplificar)
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Multiplicación y División de Monomios" data-lang-eu="Monomioen Biderketa eta Zatiketa">Multiplicación y División de Monomios</h3>
+            <p data-lang-es="Para multiplicar o dividir monomios, se operan los coeficientes y las partes literales por separado."
+               data-lang-eu="Monomioak biderkatzeko edo zatitzeko, koefizienteak eta zati literalak bereizita eragiten dira.">
+               Para multiplicar o dividir monomios, se operan los coeficientes y las partes literales por separado.
+            </p>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-times icon-concept"></i>
+                        <span data-lang-es="Multiplicación" data-lang-eu="Biderketa">Multiplicación</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Se multiplican los coeficientes y se suman los exponentes de las letras iguales."
+                           data-lang-eu="Koefizienteak biderkatzen dira eta letra berdinen berretzaileak batzen dira.">
+                           Se multiplican los coeficientes y se suman los exponentes de las letras iguales.
+                        </p>
+                        <p class="example"><em data-lang-es="\((3x^2)\cdot(2x^3) = (3\cdot 2)\,x^{2+3} = 6x^5\)" data-lang-eu="\((3x^2)\cdot(2x^3) = (3\cdot 2)\,x^{2+3} = 6x^5\)">\((3x^2)\cdot(2x^3) = (3\cdot 2)\,x^{2+3} = 6x^5\)</em></p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-divide icon-concept"></i>
+                        <span data-lang-es="División" data-lang-eu="Zatiketa">División</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Se dividen los coeficientes y se restan los exponentes de las letras iguales."
+                           data-lang-eu="Koefizienteak zatitzen dira eta letra berdinen berretzaileak kentzen dira.">
+                           Se dividen los coeficientes y se restan los exponentes de las letras iguales.
+                        </p>
+                        <p class="example"><em data-lang-es="\(\dfrac{6x^5}{2x^2} = \dfrac{6}{2}\,x^{5-2} = 3x^3\)" data-lang-eu="\(\dfrac{6x^5}{2x^2} = \dfrac{6}{2}\,x^{5-2} = 3x^3\)">\(\dfrac{6x^5}{2x^2} = \dfrac{6}{2}\,x^{5-2} = 3x^3\)</em></p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-expand-arrows-alt icon-concept"></i>
+                        <span data-lang-es="Propiedad Distributiva" data-lang-eu="Propietate Banatzailea">Propiedad Distributiva</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Un monomio que multiplica a una suma o resta, multiplica a cada uno de los términos."
+                           data-lang-eu="Batuketa edo kenketa bat biderkatzen duen monomio batek gai bakoitza biderkatzen du.">
+                           Un monomio que multiplica a una suma o resta, multiplica a cada uno de los términos.
+                        </p>
+                        <p class="example"><em data-lang-es="\(2x(x^2 + 3y) = (2x\cdot x^2) + (2x\cdot 3y) = 2x^3 + 6xy\)" data-lang-eu="\(2x(x^2 + 3y) = (2x\cdot x^2) + (2x\cdot 3y) = 2x^3 + 6xy\)">\(2x(x^2 + 3y) = (2x\cdot x^2) + (2x\cdot 3y) = 2x^3 + 6xy\)</em></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+    <script src="../js/monomios.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

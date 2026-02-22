@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Prismas - Cuerpos Geométricos" data-lang-eu="Prismak - Gorputz Geometrikoak">Prismas - Cuerpos Geométricos</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+    <style>
+        .topic-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        .topic-button {
+            padding: 1rem 2rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .topic-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            background-color: var(--accent-color-dark);
+        }
+        .formula-box {
+            background-color: var(--section-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .warning-box {
+            background-color: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-cube"></i>
+            <span data-lang-es="Prismas" data-lang-eu="Prismak">Prismas</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <!-- Botones de Ejercicios y Herramienta -->
+    <div class="topic-buttons">
+        <button class="topic-button" data-lang-es="Ejercicios" data-lang-eu="Ariketak">
+            <i class="fas fa-pencil-alt"></i>
+            Ejercicios
+        </button>
+        <button class="topic-button" data-lang-es="Herramienta" data-lang-eu="Tresna">
+            <i class="fas fa-tools"></i>
+            Herramienta
+        </button>
+    </div>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Prismas" data-lang-eu="Prismak">Prismas</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es un Prisma?" data-lang-eu="Zer da Prisma bat?">¿Qué es un Prisma?</h3>
+            <p data-lang-es="Un prisma es un poliedro que tiene dos bases paralelas e iguales (polígonos) y caras laterales que son paralelogramos. Las bases pueden ser cualquier polígono: triángulos, cuadrados, rectángulos, pentágonos, hexágonos, etc."
+               data-lang-eu="Prisma bat poliedro bat da bi oinarri paralelo eta berdin dituena (poligonoak) eta alboko aurpegak paralelogramoak dituena. Oinarriak edozein poligono izan daitezke: triangeluak, karratuak, laukizuzenak, pentagonoak, hexagonoak, etab.">
+               Un prisma es un poliedro que tiene dos bases paralelas e iguales (polígonos) y caras laterales que son paralelogramos. Las bases pueden ser cualquier polígono: triángulos, cuadrados, rectángulos, pentágonos, hexágonos, etc.
+            </p>
+            <p class="key-takeaway" data-lang-es="<b>Características principales:</b> Las bases son polígonos iguales y paralelos, y las caras laterales son paralelogramos que unen los lados correspondientes de las bases."
+               data-lang-eu="<b>Ezaugarri nagusiak:</b> Oinarriak poligono berdin eta paraleloak dira, eta alboko aurpegak paralelogramoak dira oinarrien alde Correspondingak lotzen dituztenak.">
+               <b>Características principales:</b> Las bases son polígonos iguales y paralelos, y las caras laterales son paralelogramos que unen los lados correspondientes de las bases.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Elementos de un Prisma" data-lang-es="Prismaren Elementuak">Elementos de un Prisma</h3>
+            <p data-lang-es="Todo prisma está formado por los siguientes elementos:"
+               data-lang-eu="Prisma bakoitza honako elementuez osatuta dago:">
+               Todo prisma está formado por los siguientes elementos:
+            </p>
+            <ul>
+                <li data-lang-es="<b>Base:</b> Polígonos paralelos e iguales (superficie inferior y superior)"
+                   data-lang-eu="<b>Oinarria:</b> Poligono paralelo eta berdinak (azpiko eta goiko gainazala)">
+                   <b>Base:</b> Polígonos paralelos e iguales (superficie inferior y superior)
+                </li>
+                <li data-lang-es="<b>Caras laterales:</b> Paralelogramos que unen los lados correspondientes de las bases"
+                   data-lang-eu="<b>Alboko aurpegiak:</b> Oinarrien alde correspondingak lotzen dituzten paralelogramoak">
+                   <b>Caras laterales:</b> Paralelogramos que unen los lados correspondientes de las bases
+                </li>
+                <li data-lang-es="<b>Aristas:</b> Segmentos donde se encuentran dos caras"
+                   data-lang-eu="<b>Erpinak:</b> Bi aurpegi elkartzen diren segmentuak">
+                   <b>Aristas:</b> Segmentos donde se encuentran dos caras
+                </li>
+                <li data-lang-es="<b>Vértices:</b> Puntos donde se encuentran tres o más aristas"
+                   data-lang-eu="<b>Ertzak:</b> Hiru arista edo gehiago elkartzen diren puntuak">
+                   <b>Vértices:</b> Puntos donde se encuentran tres o más aristas
+                </li>
+                <li data-lang-es="<b>Altura:</b> Distancia perpendicular entre las dos bases"
+                   data-lang-eu="<b>Altuera:</b> Bi oinarrien arteko distantzia perpendikularra">
+                   <b>Altura:</b> Distancia perpendicular entre las dos bases
+                </li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Fórmulas del Prisma" data-lang-eu="Prismaren Formulak">Fórmulas del Prisma</h3>
+            <p data-lang-es="Para calcular el área y volumen de un prisma, utilizamos las siguientes fórmulas:"
+               data-lang-eu="Prisma baten azalera eta bolumena kalkulatzeko, honako formulak erabiltzen ditugu:">
+               Para calcular el área y volumen de un prisma, utilizamos las siguientes fórmulas:
+            </p>
+            
+            <div class="formula-box">
+                <p data-lang-es="<b>Área Lateral</b>" data-lang-eu="<b>Alboko Azalera</b>"><b>Área Lateral</b></p>
+                <div style="font-size: 1.4rem; margin-top: 0.5rem;">
+                    \\( A_L = P_{base} \times h \\)
+                </div>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem; font-weight: normal;">
+                    <span data-lang-es="Perímetro de la base × altura" data-lang-eu="Oinarriaren perimetroa × altuera">
+                        Perímetro de la base × altura
+                    </span>
+                </p>
+            </div>
+
+            <div class="formula-box">
+                <p data-lang-es="<b>Área Total</b>" data-lang-eu="<b>Azalera Totala</b>"><b>Área Total</b></p>
+                <div style="font-size: 1.4rem; margin-top: 0.5rem;">
+                    \\( A_T = A_L + 2A_{base} \\)
+                </div>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem; font-weight: normal;">
+                    <span data-lang-es="Área lateral + 2 × área de la base" data-lang-eu="Alboko azalera + 2 × oinarriaren azalera">
+                        Área lateral + 2 × área de la base
+                    </span>
+                </p>
+            </div>
+
+            <div class="formula-box">
+                <p data-lang-es="<b>Volumen</b>" data-lang-eu="<b>Bolumena</b>"><b>Volumen</b></p>
+                <div style="font-size: 1.4rem; margin-top: 0.5rem;">
+                    \\( V = A_{base} \times h \\)
+                </div>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem; font-weight: normal;">
+                    <span data-lang-es="Área de la base × altura" data-lang-eu="Oinarriaren azalera × altuera">
+                        Área de la base × altura
+                    </span>
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Casos Especiales de Prismas" data-lang-eu="Prismen Kasu Berezien">Casos Especiales de Prismas</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-cube icon-concept"></i>
+                        <span data-lang-es="Cubo" data-lang-eu="Kubo">Cubo</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Un cubo es un prisma especial donde todas las caras son cuadrados iguales."
+                           data-lang-eu="Kubo bat prisma berezi bat da non aurpegi guztiak karratu berdinak diren.">
+                           Un cubo es un prisma especial donde todas las caras son cuadrados iguales.
+                        </p>
+                        <div class="formula-box">
+                            <p><strong><span data-lang-es="Área Total:" data-lang-eu="Azalera Totala:">Área Total:</span></strong></p>
+                            <div style="font-size: 1.4rem; margin-top: 0.5rem;">
+                                \\( A_T = 6a^2 \\)
+                            </div>
+                        </div>
+                        <div class="formula-box">
+                            <p><strong><span data-lang-es="Volumen:" data-lang-eu="Bolumena:">Volumen:</span></strong></p>
+                            <div style="font-size: 1.4rem; margin-top: 0.5rem;">
+                                \\( V = a^3 \\)
+                            </div>
+                        </div>
+                        <p class="example">
+                            <em data-lang-es="Si a = 5 cm, entonces: A = 6 × 5² = 150 cm² y V = 5³ = 125 cm³"
+                               data-lang-eu="a = 5 cm bada, orduan: A = 6 × 5² = 150 cm² eta V = 5³ = 125 cm³">
+                               Si a = 5 cm, entonces: A = 6 × 5² = 150 cm² y V = 5³ = 125 cm³
+                            </em>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-cube icon-concept"></i>
+                        <span data-lang-es="Ortoedro" data-lang-eu="Ortoedro">Ortoedro</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Un ortoedro (o paralelepípedo rectangular) es un prisma especial donde todas las caras son rectángulos."
+                           data-lang-eu="Ortoedro (edo paralelepipedo angeluzuzena) prisma berezi bat da non aurpegi guztiak laukizuzenak diren.">
+                           Un ortoedro (o paralelepípedo rectangular) es un prisma especial donde todas las caras son rectángulos.
+                        </p>
+                        <div class="formula-box">
+                            <p><strong><span data-lang-es="Área Total:" data-lang-eu="Azalera Totala:">Área Total:</span></strong></p>
+                            <div style="font-size: 1.4rem; margin-top: 0.5rem;">
+                                \\( A_T = 2(ab + ac + bc) \\)
+                            </div>
+                        </div>
+                        <div class="formula-box">
+                            <p><strong><span data-lang-es="Volumen:" data-lang-eu="Bolumena:">Volumen:</span></strong></p>
+                            <div style="font-size: 1.4rem; margin-top: 0.5rem;">
+                                \\( V = a \times b \times c \\)
+                            </div>
+                        </div>
+                        <p class="example">
+                            <em data-lang-es="Si a = 4 cm, b = 3 cm, c = 5 cm, entonces: A = 2(4×3 + 4×5 + 3×5) = 2(12 + 20 + 15) = 94 cm² y V = 4×3×5 = 60 cm³"
+                               data-lang-eu="a = 4 cm, b = 3 cm, c = 5 cm badira, orduan: A = 2(4×3 + 4×5 + 3×5) = 2(12 + 20 + 15) = 94 cm² eta V = 4×3×5 = 60 cm³">
+                               Si a = 4 cm, b = 3 cm, c = 5 cm, entonces: A = 2(4×3 + 4×5 + 3×5) = 2(12 + 20 + 15) = 94 cm² y V = 4×3×5 = 60 cm³
+                            </em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Ejemplo Resuelto" data-lang-eu="Ebatzitako Adibidea">Ejemplo Resuelto</h3>
+            <p data-lang-es="Calcula el área lateral, área total y volumen de un prisma hexagonal regular con apotema de la base 3 cm y altura 8 cm."
+               data-lang-eu="Kalkulatu prisma hexagonal erregular baten alboko azalera, azalera totala eta bolumena, oinarriaren apotema 3 cm eta altuera 8 cm direlarik.">
+               Calcula el área lateral, área total y volumen de un prisma hexagonal regular con apotema de la base 3 cm y altura 8 cm.
+            </p>
+            
+            <p><strong data-lang-es="Paso 1: Calcular el perímetro de la base" data-lang-eu="1. Pausua: Oinarriaren perimetroa kalkulatu"><strong>Paso 1: Calcular el perímetro de la base</strong></strong></p>
+            <p data-lang-es="Un hexágono regular tiene 6 lados iguales. Primero calculamos el lado usando la apotema."
+               data-lang-eu="Hexagono erregular batek 6 alde berdin ditu. Lehenengo aldea kalkulatzen dugu apotema erabiliz.">
+               Un hexágono regular tiene 6 lados iguales. Primero calculamos el lado usando la apotema.
+            </p>
+            <div class="formula-box">
+                \\( ap = \frac{L \sqrt{3}}{2} \\)
+                <br><br>
+                \\( 3 = \frac{L \sqrt{3}}{2} \\)
+                <br><br>
+                \\( L = \frac{6}{\sqrt{3}} = 2\sqrt{3} \\approx 3.46 \text{ cm} \\)
+            </div>
+            <p><strong data-lang-es="Por lo tanto, el perímetro es:" data-lang-eu="Beraz, perimetroa da:"><strong>Por lo tanto, el perímetro es:</strong></strong></p>
+            <div class="formula-box">
+                \\( P_{base} = 6 \times 2\sqrt{3} = 12\sqrt{3} \\approx 20.78 \text{ cm} \\)
+            </div>
+
+            <p><strong data-lang-es="Paso 2: Área lateral" data-lang-eu="2. Pausua: Alboko azalera"><strong>Paso 2: Área lateral</strong></strong></p>
+            <div class="formula-box">
+                \\( A_L = P_{base} \times h = 12\sqrt{3} \times 8 = 96\sqrt{3} \\approx 166.28 \text{ cm}^2 \\)
+            </div>
+
+            <p><strong data-lang-es="Paso 3: Área de la base hexagonal" data-lang-eu="3. Pausua: Oinarri hexagonalaren azalera"><strong>Paso 3: Área de la base hexagonal</strong></strong></p>
+            <div class="formula-box">
+                \\( A_{base} = \frac{P_{base} \times ap}{2} = \frac{12\sqrt{3} \times 3}{2} = 18\sqrt{3} \\approx 31.18 \text{ cm}^2 \\)
+            </div>
+
+            <p><strong data-lang-es="Paso 4: Área total" data-lang-eu="4. Pausua: Azalera totala"><strong>Paso 4: Área total</strong></strong></p>
+            <div class="formula-box">
+                \\( A_T = A_L + 2A_{base} = 96\sqrt{3} + 2 \times 18\sqrt{3} = 132\sqrt{3} \\approx 228.63 \text{ cm}^2 \\)
+            </div>
+
+            <p><strong data-lang-es="Paso 5: Volumen" data-lang-eu="5. Pausua: Bolumena"><strong>Paso 5: Volumen</strong></strong></p>
+            <div class="formula-box">
+                \\( V = A_{base} \times h = 18\sqrt{3} \times 8 = 144\sqrt{3} \\approx 249.41 \text{ cm}^3 \\)
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="warning-box">
+                <h4 data-lang-es="⚠️ Errores Típicos" data-lang-eu="⚠️ Ohiko Akatsak">⚠️ Errores Típicos</h4>
+                <ul>
+                    <li data-lang-es="Confundir la altura del prisma con el área lateral"
+                       data-lang-eu="Prismaren altuera alboko azalerarekin nahastea">
+                        Confundir la altura del prisma con el área lateral
+                    </li>
+                    <li data-lang-es="No considerar las dos bases en el área total (recordar: son 2 bases)"
+                       data-lang-eu="Azalera totalerako bi oinarriak ez kontuan hartzea (gogoratu: 2 oinarri baitira)">
+                        No considerar las dos bases en el área total (recordar: son 2 bases)
+                    </li>
+                    <li data-lang-es="Confundir la apotema de la base con la altura del prisma"
+                       data-lang-eu="Oinarriaren apotema prismaren altuerarekin nahastea">
+                        Confundir la apotema de la base con la altura del prisma
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Ecuaciones de la Recta - Geometría Analítica" data-lang-eu="Zuzenaren Ekuazioak - Geometria Analitikoa">Ecuaciones de la Recta - Geometría Analítica</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-grip-lines"></i>
+            <span data-lang-es="Ecuaciones de la Recta" data-lang-eu="Zuzenaren Ekuazioak">Ecuaciones de la Recta</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title" data-lang-es="Ecuaciones de la Recta" data-lang-eu="Zuzenaren Ekuazioak">Ecuaciones de la Recta</h1>
+            <div class="topic-navigation">
+                <button class="nav-button" data-lang-es="Ejercicios" data-lang-eu="Ariketak" title="Ejercicios">
+                    <i class="fas fa-edit"></i> Ejercicios
+                </button>
+                <button class="nav-button" data-lang-es="Herramienta" data-lang-eu="Tresna" title="Herramienta">
+                    <i class="fas fa-tools"></i> Herramienta
+                </button>
+            </div>
+        </div>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es la Ecuación de una Recta?" data-lang-eu="Zer da Zuzenaren Ekuazio bat?">¿Qué es la Ecuación de una Recta?</h3>
+            <p data-lang-es="La ecuación de una recta es una expresión algebraica que relaciona las coordenadas x e y de todos los puntos que pertenecen a esa recta. Nos permite identificar y trabajar con rectas de manera algebraica."
+               data-lang-eu="Zuzen baten ekuazioa adierazpen algebraiko bat da, zuzen horretako puntu guztien x eta y koordenatuak erlazionatzen dituena. Horri esker, zuzenak era algebraikoan identifikatu eta landu ditzakegu.">
+               La ecuación de una recta es una expresión algebraica que relaciona las coordenadas x e y de todos los puntos que pertenecen a esa recta. Nos permite identificar y trabajar con rectas de manera algebraica.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Forma Explícita (Pendiente-Ordenada)" data-lang-eu="Forma esplizitua (Malda-Ordenatua)">Forma Explícita (Pendiente-Ordenada)</h3>
+            <p data-lang-es="Esta es la forma más común y útil de escribir la ecuación de una recta:"
+               data-lang-eu="Hau zuzen baten ekuazioa idazteko forma arruntena eta erabilgarriena da:">
+               Esta es la forma más común y útil de escribir la ecuación de una recta:
+            </p>
+            
+            <div class="math-formula" style="text-align: center; margin: 2rem 0;">
+                <p style="font-size: 1.4em;">
+                    \\[ y = mx + n \\]
+                </p>
+                <p style="margin-top: 1rem;">
+                    <span data-lang-es="donde:" data-lang-eu="non:">donde:</span>
+                </p>
+                <p><b>m</b> = <span data-lang-es="pendiente" data-lang-eu="malda">pendiente</span></p>
+                <p><b>n</b> = <span data-lang-es="ordenada en el origen" data-lang-eu="jatorriko ordenatua">ordenada en el origen</span></p>
+            </div>
+
+            <div class="example" style="background-color: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                <p data-lang-es="<b>Ejemplo:</b> La recta y = 2x + 3 tiene pendiente m = 2 y ordenada n = 3"
+                   data-lang-eu="<b>Adibidea:</b> y = 2x + 3 zuzenak m = 2 malda eta n = 3 ordena dauzka">
+                   <b>Ejemplo:</b> La recta y = 2x + 3 tiene pendiente m = 2 y ordenada n = 3
+                </p>
+                <p data-lang-es="Esto significa que por cada unidad que avanzamos en x, subimos 2 unidades en y"
+                   data-lang-eu="Hau esan nahi du x-ean unitate bat aurreratzean, y-n 2 unitate igotzen dugula">
+                   Esto significa que por cada unidad que avanzamos en x, subimos 2 unidades en y
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Forma Punto-Pendiente" data-lang-eu="Forma Puntua-Malda">Forma Punto-Pendiente</h3>
+            <p data-lang-es="Cuando conocemos un punto (x₁, y₁) por el que pasa la recta y su pendiente m:"
+               data-lang-eu="Zuzena igarotzen den (x₁, y₁) puntu bat eta haren m malda ezagutzen dugunean:">
+               Cuando conocemos un punto (x₁, y₁) por el que pasa la recta y su pendiente m:
+            </p>
+            
+            <div class="math-formula" style="text-align: center; margin: 2rem 0;">
+                <p style="font-size: 1.3em;">
+                    \\[ y - y_1 = m(x - x_1) \\]
+                </p>
+            </div>
+
+            <div class="example" style="background-color: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                <p data-lang-es="<b>Ejemplo:</b> Recta que pasa por (1, 2) con pendiente 3"
+                   data-lang-eu="<b>Adibidea:</b> (1, 2) puntutik igarotzen den eta 3 malda duen zuzena">
+                   <b>Ejemplo:</b> Recta que pasa por (1, 2) con pendiente 3
+                </p>
+                <p>\\[ y - 2 = 3(x - 1) \\]</p>
+                <p data-lang-es="<b>Desarrollando:</b> y - 2 = 3x - 3, por lo que y = 3x - 1"
+                   data-lang-eu="<b>Garatuz:</b> y - 2 = 3x - 3, beraz y = 3x - 1">
+                   <b>Desarrollando:</b> y - 2 = 3x - 3, por lo que y = 3x - 1
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Forma General" data-lang-eu="Forma Orokorra">Forma General</h3>
+            <p data-lang-es="La forma general o implícita de la recta es:"
+               data-lang-eu="Zuzenaren forma orokorra edo inplizitua hau da:">
+               La forma general o implícita de la recta es:
+            </p>
+            
+            <div class="math-formula" style="text-align: center; margin: 2rem 0;">
+                <p style="font-size: 1.3em;">
+                    \\[ Ax + By + C = 0 \\]
+                </p>
+                <p style="margin-top: 1rem;">
+                    <span data-lang-es="con A, B, C números reales y A, B no simultáneamente cero"
+                          data-lang-eu="A, B, C zenbaki erreal eta A, B aldi berean zero ez izanik">
+                        con A, B, C números reales y A, B no simultáneamente cero
+                    </span>
+                </p>
+            </div>
+
+            <div class="example" style="background-color: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                <p data-lang-es="<b>Ejemplo:</b> La recta y = 2x + 3 en forma general es:"
+                   data-lang-eu="<b>Adibidea:</b> y = 2x + 3 zuzena forma orokorrean honakoa da:">
+                   <b>Ejemplo:</b> La recta y = 2x + 3 en forma general es:
+                </p>
+                <p>\\[ 2x - y + 3 = 0 \\]</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Cálculo de la Pendiente" data-lang-es="Maldaren Kalkulua">Cálculo de la Pendiente</h3>
+            <p data-lang-es="La pendiente m de una recta que pasa por dos puntos A(x₁, y₁) y B(x₂, y₂) es:"
+               data-lang-eu="A(x₁, y₁) eta B(x₂, y₂) bi puntu igarotzen dituen zuzen baten m malda hau da:">
+               La pendiente m de una recta que pasa por dos puntos A(x₁, y₁) y B(x₂, y₂) es:
+            </p>
+            
+            <div class="math-formula" style="text-align: center; margin: 2rem 0;">
+                <p style="font-size: 1.3em;">
+                    \\[ m = \\frac{y_2 - y_1}{x_2 - x_1} \\quad \\text{(si } x_1 \\neq x_2\\text{)} \\]
+                </p>
+                <p style="margin-top: 1rem;">
+                    <span data-lang-es="<b>Importante:</b> Si x₁ = x₂, la recta es vertical y no tiene pendiente definida"
+                          data-lang-eu="<b>Garrantzitsua:</b> x₁ = x₂ bada, zuzena bertikala da eta ez du malda definiturik">
+                        <b>Importante:</b> Si x₁ = x₂, la recta es vertical y no tiene pendiente definida
+                    </span>
+                </p>
+            </div>
+
+            <div class="example" style="background-color: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                <p data-lang-es="<b>Ejemplo:</b> Pendiente de la recta que pasa por P(1, 2) y Q(4, 8)"
+                   data-lang-eu="<b>Adibidea:</b> P(1, 2) eta Q(4, 8) igarotzen diren zuzenaren malda">
+                   <b>Ejemplo:</b> Pendiente de la recta que pasa por P(1, 2) y Q(4, 8)
+                </p>
+                <p>\\[ m = \\frac{8 - 2}{4 - 1} = \\frac{6}{3} = 2 \\]</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Posiciones Relativas de dos Rectas" data-lang-eu="Bi Zuzenen Posizio Erlatiboak">Posiciones Relativas de dos Rectas</h3>
+            
+            <h4 data-lang-es="Rectas Paralelas" data-lang-eu="Zuzen Paraleloak">Rectas Paralelas</h4>
+            <p data-lang-es="Dos rectas son paralelas cuando tienen la misma pendiente y distinta ordenada en el origen:"
+               data-lang-eu="Bi zuzen paraleloak dira malda bera dutenean eta jatorriko ordena desberdina dutenean:">
+               Dos rectas son paralelas cuando tienen la misma pendiente y distinta ordenada en el origen:
+            </p>
+            <div class="math-formula" style="text-align: center; margin: 1.5rem 0;">
+                <p>\\[ m_1 = m_2 \\text{ y } n_1 \\neq n_2 \\]</p>
+            </div>
+            <p data-lang-es="<b>Ejemplo:</b> y = 2x + 1 e y = 2x - 3 son paralelas"
+               data-lang-eu="<b>Adibidea:</b> y = 2x + 1 eta y = 2x - 3 paraleloak dira">
+               <b>Ejemplo:</b> y = 2x + 1 e y = 2x - 3 son paralelas
+            </p>
+
+            <h4 data-lang-es="Rectas Perpendiculares" data-lang-eu="Zuzen Perpendikularrak">Rectas Perpendiculares</h4>
+            <p data-lang-es="Dos rectas son perpendiculares cuando el producto de sus pendientes es -1:"
+               data-lang-eu="Bi zuzen perpendikularrak badira haien maldek biderkatuz -1 denean:">
+               Dos rectas son perpendiculares cuando el producto de sus pendientes es -1:
+            </p>
+            <div class="math-formula" style="text-align: center; margin: 1.5rem 0;">
+                <p>\\[ m_1 \\cdot m_2 = -1 \\]</p>
+            </div>
+            <p data-lang-es="<b>Ejemplo:</b> y = 2x + 1 e y = -½x + 3 son perpendiculares"
+               data-lang-eu="<b>Adibidea:</b> y = 2x + 1 eta y = -½x + 3 perpendikularrak dira">
+               <b>Ejemplo:</b> y = 2x + 1 e y = -½x + 3 son perpendiculares
+            </p>
+
+            <h4 data-lang-es="Rectas Secantes" data-lang-eu="Zuzen Sekanteak">Rectas Secantes</h4>
+            <p data-lang-es="Si las rectas no son paralelas ni perpendiculares, se cortan en un punto formando un ángulo distinto a 90°"
+               data-lang-eu="Zuzenak ez badira paraleloak ezta perpendikularrak, puntu batean mozten dute eta 90°-tik desberdina den angelu bat osatzen dute">
+               Si las rectas no son paralelas ni perpendiculares, se cortan en un punto formando un ángulo distinto a 90°
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Casos Especiales" data-lang-eu="Kasu Berezienak">Casos Especiales</h3>
+            
+            <h4 data-lang-es="Recta Horizontal" data-lang-eu="Zuzen Horizontala">Recta Horizontal</h4>
+            <p data-lang-es="Una recta horizontal tiene pendiente m = 0 y ecuación y = k (constante)"
+               data-lang-eu="Zuzen horizontalak m = 0 malda eta y = k (konstantea) ekuazioa ditu">
+               Una recta horizontal tiene pendiente m = 0 y ecuación y = k (constante)
+            </p>
+
+            <h4 data-lang-es="Recta Vertical" data-lang-eu="Zuzen Bertikala">Recta Vertical</h4>
+            <p data-lang-es="Una recta vertical no tiene pendiente definida y su ecuación es x = k (constante)"
+               data-lang-eu="Zuzen bertikalak ez du malda definiturik eta haren ekuazioa x = k (konstantea) da">
+               Una recta vertical no tiene pendiente definida y su ecuación es x = k (constante)
+            </p>
+        </section>
+
+        <section class="content-section warning">
+            <h3 data-lang-es="⚠️ Errores Típicos" data-lang-eu="⚠️ Ohiko Akatsak">⚠️ Errores Típicos</h3>
+            <ul>
+                <li data-lang-es="<b>División por cero:</b> Intentar calcular la pendiente cuando x₁ = x₂ (recta vertical)"
+                   data-lang-eu="<b>Zeroz zatitzea:</b> x₁ = x₂ denean (zuzen bertikala) malda kalkulatzen saiatzea">
+                   <b>División por cero:</b> Intentar calcular la pendiente cuando x₁ = x₂ (recta vertical)
+                </li>
+                <li data-lang-es="<b>No distinguir paralelas y coincidentes:</b> Pensar que todas las rectas con la misma pendiente son paralelas, sin verificar que tengan diferente ordenada"
+                   data-lang-eu="<b>Paraleloak eta gainjarriak bereizteko:</b> Malda bera duten zuzen guztiak paraleloak direla pentsatzea, ordena desberdina dutela egiaztatu gabe">
+                   <b>No distinguir paralelas y coincidentes:</b> Pensar que todas las rectas con la misma pendiente son paralelas, sin verificar que tengan diferente ordenada
+                </li>
+                <li data-lang-es="<b>Confundir signo en perpendiculares:</b> Pensar que m₁ = -m₂ en lugar de m₁ · m₂ = -1"
+                   data-lang-eu="<b>Perpendikularretan zeinua nahastea:</b> m₁ · m₂ = -1-ren ordez m₁ = -m₂ dela pentsatzea">
+                   <b>Confundir signo en perpendiculares:</b> Pensar que m₁ = -m₂ en lugar de m₁ · m₂ = -1
+                </li>
+                <li data-lang-es="<b>Cambiar el signo al despejar:</b> Al pasar un término del otro lado del igual, no cambiar el signo correctamente"
+                   data-lang-eu="<b>Zeinua aldatzean akats bat:</b> Gai bat berdin zeinuaren beste aldera pasatzean, zeinua zuzen aldatu gabe">
+                   <b>Cambiar el signo al despejar:</b> Al pasar un término del otro lado del igual, no cambiar el signo correctamente
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Geometría Analítica" data-lang-eu="© 2025 - MATELLA | Geometria Analitikoa">© 2025 - MATELLA | Geometría Analítica</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

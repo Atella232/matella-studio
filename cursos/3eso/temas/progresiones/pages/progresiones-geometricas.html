@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Progresiones Geométricas" data-lang-eu="Progresio Geometrikoak">Progresiones Geométricas</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-chart-line"></i>
+            <span data-lang-es="Progresiones Geométricas" data-lang-eu="Progresio Geometrikoak">Progresiones Geométricas</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Botones superiores -->
+        <div class="top-buttons">
+            <a href="#" class="top-button" data-lang-es="Ejercicios" data-lang-eu="Ariketa">Ejercicios</a>
+            <a href="#" class="top-button" data-lang-es="Herramienta" data-lang-eu="Tresna">Herramienta</a>
+        </div>
+
+        <h2 class="page-title" data-lang-es="Progresiones Geométricas" data-lang-eu="Progresio Geometrikoak">Progresiones Geométricas</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es una Progresión Geométrica?" data-lang-eu="Zer da Progresio Geometrikoa?">¿Qué es una Progresión Geométrica?</h3>
+            <p data-lang-es="Una progresión geométrica es una sucesión de números en la que el cociente (o razón) entre dos términos consecutivos es siempre el mismo. Esta razón constante se llama 'razón común' y se representa por la letra 'r'."
+               data-lang-eu="Progresio geometriko zenbaki-sukurtsio bat da non bi termino jarraituren arteko zatiketa (edo arrazoia) beti berdina den. Arrazoi konstante honek 'Arrazoi arrunta' deritzo eta 'r' hizkiak adierazten du.">
+               Una progresión geométrica es una sucesión de números en la que el cociente (o razón) entre dos términos consecutivos es siempre el mismo. Esta razón constante se llama 'razón común' y se representa por la letra 'r'.
+            </p>
+            <p class="key-takeaway" data-lang-es="<b>Característica clave:</b> El cociente entre términos consecutivos es constante."
+               data-lang-eu="<b>Zerikusi:</b> Termino jarraituren arteko zatiketa konstantea da.">
+               <b>Característica clave:</b> El cociente entre términos consecutivos es constante.
+            </p>
+            <div class="formula-card">
+                <p data-lang-es="<b>Ejemplo:</b> 2, 6, 18, 54, 162, ... es una progresión geométrica donde r = 3"
+                   data-lang-eu="<b>Adibidea:</b> 2, 6, 18, 54, 162, ... progresio geometrikoa da non r = 3">
+                   <b>Ejemplo:</b> 2, 6, 18, 54, 162, ... es una progresión geométrica donde r = 3
+                </p>
+                <p data-lang-es="Otro ejemplo: 81, 27, 9, 3, 1, ... es una progresión geométrica donde r = 1/3"
+                   data-lang-eu="<b>Beste adibidea:</b> 81, 27, 9, 3, 1, ... progresio geometrikoa da non r = 1/3">
+                   Otro ejemplo: 81, 27, 9, 3, 1, ... es una progresión geométrica donde r = 1/3
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Término General" data-lang-eu="Termino Orokorra">Término General</h3>
+            <p data-lang-es="La fórmula del término general nos permite encontrar cualquier término de la progresión geométrica multiplicando sucesivamente por la razón común."
+               data-lang-eu="Termino orokorraren formulak progresio geometrikoaren edozein termino aurkitzeko aukera ematen digu, arrazoi arrunta behin eta berriz biderkatuz.">
+               La fórmula del término general nos permite encontrar cualquier término de la progresión geométrica multiplicando sucesivamente por la razón común.
+            </p>
+            
+            <div class="formula-card">
+                <h4 data-lang-es="Fórmula del Término General" data-lang-eu="Termino Orokorraren Formula">Fórmula del Término General</h4>
+                <p class="math-formula">\\[ a_n = a_1 \cdot r^{n-1} \\]</p>
+                <div class="formula-description">
+                    <p><strong data-lang-es="Donde:" data-lang-eu="Non:">Donde:</strong></p>
+                    <ul>
+                        <li><strong>a<sub>n</sub></strong> <span data-lang-es="es el término que queremos encontrar" data-lang-eu="aurkitu nahi dugun terminoa da">es el término que queremos encontrar</span></li>
+                        <li><strong>a<sub>1</sub></strong> <span data-lang-es="es el primer término" data-lang-eu="lehen terminoa da">es el primer término</span></li>
+                        <li><strong>r</strong> <span data-lang-es="es la razón común" data-lang-eu="arrazoi arrunta da">es la razón común</span></li>
+                        <li><strong>n</strong> <span data-lang-es="es la posición del término" data-lang-eu="terminoaren posizioa da">es la posición del término</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <h4 data-lang-es="Ejemplo Práctico" data-lang-eu="Adibide Praktikoa">Ejemplo Práctico</h4>
+                <p data-lang-es="En la progresión 4, 12, 36, 108, ... encuentra el término a<sub>6</sub>."
+                   data-lang-eu="4, 12, 36, 108, ... progresioan, aurkitu a<sub>6</sub> terminoa.">
+                   En la progresión 4, 12, 36, 108, ... encuentra el término a<sub>6</sub>.
+                </p>
+                <p><strong data-lang-es="Solución:" data-lang-eu="Soluzioa:">Solución:</strong></p>
+                <p data-lang-es="Tenemos: a<sub>1</sub> = 4, r = 3, n = 6"
+                   data-lang-eu="Daukagu: a<sub>1</sub> = 4, r = 3, n = 6">
+                   Tenemos: a<sub>1</sub> = 4, r = 3, n = 6
+                </p>
+                <p class="math-formula">\\[ a_6 = 4 \cdot 3^{6-1} = 4 \cdot 3^5 = 4 \cdot 243 = 972 \\]</p>
+                <p data-lang-es="Por tanto, a<sub>6</sub> = 972"
+                   data-lang-eu="Beraz, a<sub>6</sub> = 972">
+                   Por tanto, a<sub>6</sub> = 972
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Suma de n Términos" data-lang-eu="n Terminoen Batura">Suma de n Términos</h3>
+            <p data-lang-es="Para calcular la suma de los primeros n términos de una progresión geométrica, necesitamos conocer la razón común. La fórmula depende del valor de r:"
+               data-lang-eu="Progresio geometrikoaren lehen n terminoren batura kalkulatzeko, arrazoi arrunta ezagutu behar dugu. Formula r-ren balioaren arabera da:">
+               Para calcular la suma de los primeros n términos de una progresión geométrica, necesitamos conocer la razón común. La fórmula depende del valor de r:
+            </p>
+
+            <div class="formula-card">
+                <h4 data-lang-es="Fórmulas de la Suma" data-lang-eu="Baturaren Formulak">Fórmulas de la Suma</h4>
+                <p><strong data-lang-es="Si r ≠ 1:" data-lang-eu="r ≠ 1 bada:">Si r ≠ 1:</strong></p>
+                <p class="math-formula">\\[ S_n = a_1 \cdot \frac{r^n - 1}{r - 1} \\]</p>
+                <p><strong data-lang-es="Si r = 1:" data-lang-eu="r = 1 bada:">Si r = 1:</strong></p>
+                <p class="math-formula">\\[ S_n = n \cdot a_1 \\]</p>
+                <div class="formula-description">
+                    <p><strong data-lang-es="Donde:" data-lang-eu="Non:">Donde:</strong></p>
+                    <ul>
+                        <li><strong>S<sub>n</sub></strong> <span data-lang-es="es la suma de los primeros n términos" data-lang-eu="lehen n terminoren batura da">es la suma de los primeros n términos</span></li>
+                        <li><strong>a<sub>1</sub></strong> <span data-lang-es="es el primer término" data-lang-eu="lehen terminoa da">es el primer término</span></li>
+                        <li><strong>r</strong> <span data-lang-es="es la razón común" data-lang-eu="arrazoi arrunta da">es la razón común</span></li>
+                        <li><strong>n</strong> <span data-lang-es="es el número de términos a sumar" data-lang-eu="batzeko terminoen kopurua da">es el número de términos a sumar</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <h4 data-lang-es="Ejemplo de Suma (r ≠ 1)" data-lang-eu="Batura Adibidea (r ≠ 1)">Ejemplo de Suma (r ≠ 1)</h4>
+                <p data-lang-es="Calcula la suma de los primeros 5 términos de la progresión: 3, 6, 12, 24, ..."
+                   data-lang-eu="Kalkulatu lehen 5 terminoren batura honako progresioan: 3, 6, 12, 24, ...">
+                   Calcula la suma de los primeros 5 términos de la progresión: 3, 6, 12, 24, ...
+                </p>
+                <p><strong data-lang-es="Solución:" data-lang-eu="Soluzioa:">Solución:</strong></p>
+                <p data-lang-es="Tenemos: a<sub>1</sub> = 3, r = 2, n = 5"
+                   data-lang-eu="Daukagu: a<sub>1</sub> = 3, r = 2, n = 5">
+                   Tenemos: a<sub>1</sub> = 3, r = 2, n = 5
+                </p>
+                <p class="math-formula">\\[ S_5 = 3 \cdot \frac{2^5 - 1}{2 - 1} = 3 \cdot \frac{32 - 1}{1} = 3 \cdot 31 = 93 \\]</p>
+                <p data-lang-es="Por tanto, S<sub>5</sub> = 93"
+                   data-lang-eu="Beraz, S<sub>5</sub> = 93">
+                   Por tanto, S<sub>5</sub> = 93
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Suma Infinita" data-lang-eu="Batura infinitekoa">Suma Infinita</h3>
+            <p data-lang-es="Cuando la razón común r cumple la condición |r| < 1 (es decir, -1 < r < 1), la progresión geométrica converge y podemos calcular la suma de todos sus infinitos términos."
+               data-lang-eu="Arrazoi arrunta r-k |r| < 1 baldintza betetzen duenean (hau da, -1 < r < 1), progresio geometrikoa konbergitzen da eta bere infinitu termino guztien batura kalkula dezakegu.">
+               Cuando la razón común r cumple la condición |r| < 1 (es decir, -1 < r < 1), la progresión geométrica converge y podemos calcular la suma de todos sus infinitos términos.
+            </p>
+            
+            <div class="formula-card">
+                <h4 data-lang-es="Fórmula de la Suma Infinita" data-lang-eu="Batura Infinitokoaren Formula">Fórmula de la Suma Infinita</h4>
+                <p class="math-formula">\\[ S_\infty = \frac{a_1}{1 - r} \\]</p>
+                <p class="warning"><strong data-lang-es="⚠️ Condición necesaria:" data-lang-eu="⚠️ Baldintza beharrezkoa:">⚠️ Condición necesaria:</strong> <span data-lang-es="Solo es válida cuando |r| < 1" data-lang-eu="Soilik balio du |r| < 1 denean">Solo es válida cuando |r| < 1</span></p>
+                <div class="formula-description">
+                    <p><strong data-lang-es="Donde:" data-lang-eu="Non:">Donde:</strong></p>
+                    <ul>
+                        <li><strong>S<sub>∞</sub></strong> <span data-lang-es="es la suma de todos los términos de la progresión" data-lang-eu="progresioaren termino guztien batura da">es la suma de todos los términos de la progresión</span></li>
+                        <li><strong>a<sub>1</sub></strong> <span data-lang-es="es el primer término" data-lang-eu="lehen terminoa da">es el primer término</span></li>
+                        <li><strong>r</strong> <span data-lang-es="es la razón común (debe cumplir |r| < 1)" data-lang-eu="arrazoi arrunta da (|r| < 1 bete behar du)">es la razón común (debe cumplir |r| < 1)</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <h4 data-lang-es="Ejemplo de Suma Infinita" data-lang-eu="Batura Infinitoko Adibidea">Ejemplo de Suma Infinita</h4>
+                <p data-lang-es="Calcula la suma infinita de la progresión: 9, 6, 4, 8/3, ..."
+                   data-lang-eu="Kalkulatu progresio infinituaren batura: 9, 6, 4, 8/3, ...">
+                   Calcula la suma infinita de la progresión: 9, 6, 4, 8/3, ...
+                </p>
+                <p><strong data-lang-es="Solución:" data-lang-eu="Soluzioa:">Solución:</strong></p>
+                <p data-lang-es="Tenemos: a<sub>1</sub> = 9, r = 2/3 (y |2/3| = 2/3 < 1, por lo que cumple la condición)"
+                   data-lang-eu="Daukagu: a<sub>1</sub> = 9, r = 2/3 (eta |2/3| = 2/3 < 1, beraz baldintza betetzen du)">
+                   Tenemos: a<sub>1</sub> = 9, r = 2/3 (y |2/3| = 2/3 < 1, por lo que cumple la condición)
+                </p>
+                <p class="math-formula">\\[ S_\infty = \frac{9}{1 - \frac{2}{3}} = \frac{9}{\frac{1}{3}} = 9 \cdot 3 = 27 \\]</p>
+                <p data-lang-es="Por tanto, S<sub>∞</sub> = 27"
+                   data-lang-eu="Beraz, S<sub>∞</sub> = 27">
+                   Por tanto, S<sub>∞</sub> = 27
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section warning-section">
+            <h3 data-lang-es="⚠️ Errores Típicos" data-lang-eu="⚠️ Ohiko Akatsak">⚠️ Errores Típicos</h3>
+            <div class="warning-card">
+                <h4 data-lang-es="Error 1: Usar r^n en lugar de r^(n-1)" data-lang-eu="1. Akatsa: r^n erabili r^(n-1)ren ordez">Error 1: Usar r^n en lugar de r^(n-1)</h4>
+                <p data-lang-es="✗ <b>Incorrecto:</b> a<sub>n</sub> = a<sub>1</sub> · r<sup>n</sup>"
+                   data-lang-eu="✗ <b>Okertua:</b> a<sub>n</sub> = a<sub>1</sub> · r<sup>n</sup>">
+                   ✗ <b>Incorrecto:</b> a<sub>n</sub> = a<sub>1</sub> · r<sup>n</sup>
+                </p>
+                <p data-lang-es="✓ <b>Correcto:</b> a<sub>n</sub> = a<sub>1</sub> · r<sup>n-1</sup>"
+                   data-lang-eu="✓ <b>Zuzena:</b> a<sub>n</sub> = a<sub>1</sub> · r<sup>n-1</sup>">
+                   ✓ <b>Correcto:</b> a<sub>n</sub> = a<sub>1</sub> · r<sup>n-1</sup>
+                </p>
+                <p data-lang-es="<em>El exponente (n-1) es necesario porque el primer término (n=1) no se multiplica por r.</em>"
+                   data-lang-eu="<em>(n-1) berretzaile beharrezkoa da lehen terminoa (n=1) r-rekin biderkatzen ez delako.</em>">
+                   <em>El exponente (n-1) es necesario porque el primer término (n=1) no se multiplica por r.</em>
+                </p>
+            </div>
+
+            <div class="warning-card">
+                <h4 data-lang-es="Error 2: Aplicar la suma infinita incorrectamente" data-lang-eu="2. Akatsa: Batura infinitoko oker aplikatu">Error 2: Aplicar la suma infinita incorrectamente</h4>
+                <p data-lang-es="✗ <b>Error común:</b> Aplicar S<sub>∞</sub> = a<sub>1</sub>/(1-r) cuando |r| ≥ 1"
+                   data-lang-eu="✗ <b>Akatsa arrunta:</b> S<sub>∞</sub> = a<sub>1</sub>/(1-r) aplikatzea |r| ≥ 1 denean">
+                   ✗ <b>Error común:</b> Aplicar S<sub>∞</sub> = a<sub>1</sub>/(1-r) cuando |r| ≥ 1
+                </p>
+                <p data-lang-es="✓ <b>Correcto:</b> Solo se puede usar cuando |r| < 1"
+                   data-lang-eu="✓ <b>Zuzena:</b> Soilik erabil daiteke |r| < 1 denean">
+                   ✓ <b>Correcto:</b> Solo se puede usar cuando |r| < 1
+                </p>
+                <p data-lang-es="<em>Si |r| ≥ 1, la progresión diverge (no tiene suma finita).</em>"
+                   data-lang-eu="<em>Si |r| ≥ 1, progresioa dibergitzen du (ez du batura finiturik).</em>">
+                   <em>Si |r| ≥ 1, la progresión diverge (no tiene suma finita).</em>
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

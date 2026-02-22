@@ -1,0 +1,392 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="Representación y ordenación de números naturales" data-lang-eu="Zenbaki naturalak: irudikapena eta ordena">Representación y ordenación de números naturales</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <i class="fas fa-calculator"></i>
+      <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
+    </nav>
+  </header>
+  
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol>
+      <li><a href="../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
+      <li><a href="../index.html" data-lang-es="Sistema decimal y sexagesimal" data-lang-eu="Sistema hamartarra eta sexagesimala">Sistema decimal y sexagesimal</a></li>
+      <li class="active" aria-current="page"><span data-lang-es="Representación y ordenación de números naturales" data-lang-eu="Zenbaki naturalak: irudikapena eta ordena">Representación y ordenación de números naturales</span></li>
+    </ol>
+  </nav>
+  
+  <main>
+    <h1 data-lang-es="Representación y ordenación de números naturales" data-lang-eu="Zenbaki naturalak: irudikapena eta ordena">Representación y ordenación de números naturales</h1>
+    
+    <section class="content-section">
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="true">
+            <i class="fas fa-info-circle icon-concept"></i>
+            <span data-lang-es="¿Qué son los números naturales?" data-lang-eu="Zer dira zenbaki naturalak?">¿Qué son los números naturales?</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content" style="max-height: none;">
+            <p data-lang-es="Los <strong>números naturales</strong> son los números que utilizamos para contar objetos: 1, 2, 3, 4, 5... y así sucesivamente. Comienzan en el 1 y continúan infinitamente." data-lang-eu="<strong>Zenbaki naturalak</strong> objektuak zenbatzeko erabiltzen ditugun zenbakiak dira: 1, 2, 3, 4, 5... eta horrela aurrera. 1ean hasten dira eta infinituki jarraitzen dute.">Los <strong>números naturales</strong> son los números que utilizamos para contar objetos: 1, 2, 3, 4, 5... y así sucesivamente. Comienzan en el 1 y continúan infinitamente.</p>
+            
+            <div class="interactive-idea card-style">
+              <h4><i class="fas fa-lightbulb"></i> <span data-lang-es="Idea Interactiva" data-lang-eu="Ideia Interaktiboa">Idea Interactiva</span></h4>
+              <p data-lang-es="Imagina que los números naturales son como escalones de una escalera infinita que sube hacia arriba. Cada escalón representa un número mayor que el anterior." data-lang-eu="Imajinatu zenbaki naturalak eskailera infinitu baten mailak direla gora doazenak. Maila bakoitzak aurrekoa baino handiagoa den zenbaki bat irudikatzen du.">Imagina que los números naturales son como escalones de una escalera infinita que sube hacia arriba. Cada escalón representa un número mayor que el anterior.</p>
+              <div class="tool-objective">
+                <strong data-lang-es="Objetivo:" data-lang-eu="Helburua:">Objetivo:</strong> <span data-lang-es="Entender la secuencia de los números naturales" data-lang-eu="Ulertu zenbaki naturalen sekuentzia">Entender la secuencia de los números naturales</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-sort-numeric-up icon-concept"></i>
+            <span data-lang-es="Ordenación de números naturales" data-lang-eu="Zenbaki naturalen ordena">Ordenación de números naturales</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Los números naturales tienen un <strong>orden natural</strong> que nos permite compararlos y ordenarlos de menor a mayor o de mayor a menor." data-lang-eu="Zenbaki naturalek <strong>orden natural</strong> bat dute, txikienetik handienera edo handienetik txikienera konparatu eta ordenatzeko aukera ematen diguna.">Los números naturales tienen un <strong>orden natural</strong> que nos permite compararlos y ordenarlos de menor a mayor o de mayor a menor.</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: Ordenar números" data-lang-eu="Adibidea: Zenbakiak ordenatu">Ejemplo: Ordenar números</h4>
+              <p data-lang-es="<strong>Números dados:</strong> 45, 12, 89, 23, 67" data-lang-eu="<strong>Ematen diren zenbakiak:</strong> 45, 12, 89, 23, 67"><strong>Números dados:</strong> 45, 12, 89, 23, 67</p>
+              <div class="solution">
+                <strong data-lang-es="Ordenados de menor a mayor:" data-lang-eu="Txikienetik handienera ordenatuak:">Ordenados de menor a mayor:</strong>
+                <ul>
+                  <li><span>12</span> < 23 < 45 < 67 < 89</li>
+                </ul>
+                <strong data-lang-es="Ordenados de mayor a menor:" data-lang-eu="Handienetik txikienera ordenatuak:">Ordenados de mayor a menor:</strong>
+                <ul>
+                  <li><span>89</span> > 67 > 45 > 23 > 12</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="interactive-calculator">
+              <h5><i class="fas fa-sort"></i> <span data-lang-es="Ordenador de Números" data-lang-eu="Zenbakien Ordenatzailea">Ordenador de Números</span></h5>
+              <div class="calc-input">
+                <label for="numbers-input" data-lang-es="Introduce números separados por comas:" data-lang-eu="Sartu zenbakiak komez bananduta:">Introduce números separados por comas:</label>
+                <textarea id="numbers-input" placeholder="Ejemplo: 45, 12, 89, 23, 67"></textarea>
+              </div>
+              <div class="calc-buttons">
+                <button onclick="ordenarNumeros()" data-lang-es="Ordenar" data-lang-eu="Ordenatu">Ordenar</button>
+                <button onclick="limpiarOrdenador()" data-lang-es="Limpiar" data-lang-eu="Garbitu">Limpiar</button>
+              </div>
+              <div class="calc-results">
+                <h6 data-lang-es="Ordenados de menor a mayor:" data-lang-eu="Txikienetik handienera ordenatuak:">Ordenados de menor a mayor:</h6>
+                <p id="orden-ascendente"></p>
+                <h6 data-lang-es="Ordenados de mayor a menor:" data-lang-eu="Handienetik txikienera ordenatuak:">Ordenados de mayor a menor:</h6>
+                <p id="orden-descendente"></p>
+              </div>
+              <div class="calc-note">
+                <i class="fas fa-info-circle"></i> <span data-lang-es="Introduce números naturales del 1 al 999" data-lang-eu="Sartu 1tik 999rako zenbaki naturalak">Introduce números naturales del 1 al 999</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-compress-arrows-alt icon-concept"></i>
+            <span data-lang-es="Comparación de números" data-lang-eu="Zenbakien konparaketa">Comparación de números</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Para comparar números naturales, utilizamos los símbolos <strong><</strong> (menor que), <strong>></strong> (mayor que) y <strong>=</strong> (igual a)." data-lang-eu="Zenbaki naturalak konparatzeko, <strong><</strong> (baino txikiago), <strong>></strong> (baino handiago) eta <strong>=</strong> (berdin) ikurrak erabiltzen ditugu.">Para comparar números naturales, utilizamos los símbolos <strong><</strong> (menor que), <strong>></strong> (mayor que) y <strong>=</strong> (igual a).</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplos de comparación" data-lang-eu="Konparazioaren adibideak">Ejemplos de comparación</h4>
+              <div class="solution">
+                <ul>
+                  <li><span>15 < 23</span> <span data-lang-es="(15 es menor que 23)" data-lang-eu="(15 baino txikiago da 23)">(15 es menor que 23)</span></li>
+                  <li><span>67 > 45</span> <span data-lang-es="(67 es mayor que 45)" data-lang-eu="(67 baino handiago da 45)">(67 es mayor que 45)</span></li>
+                  <li><span>89 = 89</span> <span data-lang-es="(89 es igual a 89)" data-lang-eu="(89 berdin da 89)">(89 es igual a 89)</span></li>
+                  <li><span>12 ≤ 15</span> <span data-lang-es="(12 es menor o igual que 15)" data-lang-eu="(12 txikiago edo berdin da 15)">(12 es menor o igual que 15)</span></li>
+                  <li><span>78 ≥ 78</span> <span data-lang-es="(78 es mayor o igual que 78)" data-lang-eu="(78 handiago edo berdin da 78)">(78 es mayor o igual que 78)</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="variable-diagram">
+              <strong data-lang-es="Reglas de comparación" data-lang-eu="Konparazioaren arauak">Reglas de comparación</strong>
+              <div class="split">
+                <div class="category">
+                  <strong data-lang-es="Menor que (<)" data-lang-eu="Baino txikiago (<)">Menor que (<)</strong>
+                  <div class="sub-split">
+                    <div class="sub-category" data-lang-es="El número de la izquierda es menor" data-lang-eu="Ezkerreko zenbakia txikiagoa da">El número de la izquierda es menor</div>
+                    <div class="sub-category">Ejemplo: 5 < 8</div>
+                  </div>
+                </div>
+                <div class="category">
+                  <strong data-lang-es="Mayor que (>)" data-lang-eu="Baino handiago (>)">Mayor que (>)</strong>
+                  <div class="sub-split">
+                    <div class="sub-category" data-lang-es="El número de la izquierda es mayor" data-lang-eu="Ezkerreko zenbakia handiagoa da">El número de la izquierda es mayor</div>
+                    <div class="sub-category">Ejemplo: 12 > 7</div>
+                  </div>
+                </div>
+                <div class="category">
+                  <strong data-lang-es="Igual a (=)" data-lang-eu="Berdin (=)">Igual a (=)</strong>
+                  <div class="sub-split">
+                    <div class="sub-category" data-lang-es="Ambos números son iguales" data-lang-eu="Bi zenbakiak berdinak dira">Ambos números son iguales</div>
+                    <div class="sub-category">Ejemplo: 15 = 15</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-chart-line icon-concept"></i>
+            <span data-lang-es="Recta numérica" data-lang-eu="Zenbaki zuzena">Recta numérica</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="La <strong>recta numérica</strong> es una línea horizontal donde representamos los números naturales en orden creciente de izquierda a derecha." data-lang-eu="<strong>Zenbaki zuzena</strong> zenbaki naturalak ezkerretik eskuinera ordena gorakorrean irudikatzen ditugun lerro horizontala da.">La <strong>recta numérica</strong> es una línea horizontal donde representamos los números naturales en orden creciente de izquierda a derecha.</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Representación en recta numérica" data-lang-eu="Zenbaki zuzenan irudikapena">Representación en recta numérica</h4>
+              <p data-lang-es="En una recta numérica, los números se representan así:" data-lang-eu="Zenbaki zuzen batean, zenbakiak horrela irudikatzen dira:">En una recta numérica, los números se representan así:</p>
+              <div class="solution">
+                <p><strong>0</strong> ← <strong>1</strong> ← <strong>2</strong> ← <strong>3</strong> ← <strong>4</strong> ← <strong>5</strong> ← ...</p>
+                <p data-lang-es="Cuanto más a la derecha, mayor es el número." data-lang-eu="Eskuinerago egon, handiagoa da zenbakia.">Cuanto más a la derecha, mayor es el número.</p>
+              </div>
+            </div>
+
+            <div class="interactive-calculator">
+              <h5><i class="fas fa-arrows-alt-h"></i> <span data-lang-es="Visualizador de Recta Numérica" data-lang-eu="Zenbaki Zuzenaren Ikuskatzailea">Visualizador de Recta Numérica</span></h5>
+              <div class="calc-input">
+                <label for="recta-input" data-lang-es="Introduce un número para ver su posición:" data-lang-eu="Sartu zenbaki bat bere posizioa ikusteko:">Introduce un número para ver su posición:</label>
+                <textarea id="recta-input" placeholder="Ejemplo: 7"></textarea>
+              </div>
+              <div class="calc-buttons">
+                <button onclick="mostrarRecta()" data-lang-es="Mostrar" data-lang-eu="Erakutsi">Mostrar</button>
+                <button onclick="limpiarRecta()" data-lang-es="Limpiar" data-lang-eu="Garbitu">Limpiar</button>
+              </div>
+              <div class="calc-results">
+                <h6 data-lang-es="Recta numérica:" data-lang-eu="Zenbaki zuzena:">Recta numérica:</h6>
+                <div id="recta-visual" style="font-family: monospace; font-size: 1.2em; text-align: center; padding: 1rem; background-color: var(--button-bg); border-radius: 4px; margin: 0.5rem 0;"></div>
+              </div>
+              <div class="calc-note">
+                <i class="fas fa-info-circle"></i> <span data-lang-es="Visualiza la posición del número en la recta" data-lang-eu="Ikusi zenbakiaren posizioa zuzenan">Visualiza la posición del número en la recta</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-list-ol icon-concept"></i>
+            <span data-lang-es="Ejercicios propuestos" data-lang-eu="Ariketak proposatuak">Ejercicios propuestos</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <ol class="exercises-list">
+              <li>
+                <p data-lang-es="Ordena de menor a mayor los números: 156, 89, 234, 67, 189." data-lang-eu="Ordenatu txikienetik handienera zenbakiak: 156, 89, 234, 67, 189.">Ordena de menor a mayor los números: 156, 89, 234, 67, 189.</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> <span data-lang-es="Ver pista" data-lang-eu="Ikusi pista">Ver pista</span>
+                </button>
+                <div class="hint-content">
+                  <p data-lang-es="Compara primero las centenas, luego las decenas y finalmente las unidades" data-lang-eu="Konparatu lehenik ehunka, gero hamarka eta azkenik unitateak">Compara primero las centenas, luego las decenas y finalmente las unidades</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="Coloca el símbolo correcto (<, >, =) entre: 456 ___ 465" data-lang-eu="Jarri ikur zuzena (<, >, =) artean: 456 ___ 465">Coloca el símbolo correcto (<, >, =) entre: 456 ___ 465</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> <span data-lang-es="Ver pista" data-lang-eu="Ikusi pista">Ver pista</span>
+                </button>
+                <div class="hint-content">
+                  <p data-lang-es="Ambos tienen 4 centenas, pero 456 tiene 5 decenas y 465 tiene 6 decenas" data-lang-eu="Biak 4 ehunka dituzte, baina 456k 5 hamarka ditu eta 465ek 6 hamarka">Ambos tienen 4 centenas, pero 456 tiene 5 decenas y 465 tiene 6 decenas</p>
+                </div>
+              </li>
+              <li>
+                <p data-lang-es="¿Cuál es el número natural más pequeño de tres cifras?" data-lang-eu="Zein da hiru zifrako zenbaki natural txikiena?">¿Cuál es el número natural más pequeño de tres cifras?</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> <span data-lang-es="Ver pista" data-lang-eu="Ikusi pista">Ver pista</span>
+                </button>
+                <div class="hint-content">
+                  <p data-lang-es="Recuerda que los números naturales empiezan en 1, no en 0" data-lang-eu="Gogoratu zenbaki naturalak 1ean hasten direla, ez 0an">Recuerda que los números naturales empiezan en 1, no en 0</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  
+  <script>
+    // Funcionalidad para el ordenador de números
+    function ordenarNumeros() {
+      const input = document.getElementById('numbers-input').value.trim();
+      if (!input) {
+        alert('Por favor, introduce algunos números');
+        return;
+      }
+      
+      const numeros = input.split(',').map(n => parseInt(n.trim())).filter(n => !isNaN(n));
+      
+      if (numeros.length === 0) {
+        alert('Por favor, introduce números válidos separados por comas');
+        return;
+      }
+      
+      // Verificar que sean números naturales
+      if (numeros.some(n => n < 1 || n > 999)) {
+        alert('Por favor, introduce números naturales del 1 al 999');
+        return;
+      }
+      
+      const ascendente = [...numeros].sort((a, b) => a - b);
+      const descendente = [...numeros].sort((a, b) => b - a);
+      
+      document.getElementById('orden-ascendente').textContent = ascendente.join(' < ');
+      document.getElementById('orden-descendente').textContent = descendente.join(' > ');
+    }
+    
+    function limpiarOrdenador() {
+      document.getElementById('numbers-input').value = '';
+      document.getElementById('orden-ascendente').textContent = '';
+      document.getElementById('orden-descendente').textContent = '';
+    }
+    
+    // Funcionalidad para la recta numérica
+    function mostrarRecta() {
+      const input = document.getElementById('recta-input').value.trim();
+      if (!input || isNaN(input)) {
+        alert('Por favor, introduce un número válido');
+        return;
+      }
+      
+      const numero = parseInt(input);
+      if (numero < 1 || numero > 20) {
+        alert('Por favor, introduce un número del 1 al 20 para mejor visualización');
+        return;
+      }
+      
+      let recta = '';
+      for (let i = 0; i <= 20; i++) {
+        if (i === numero) {
+          recta += ` [${i}] `;
+        } else {
+          recta += ` ${i} `;
+        }
+      }
+      
+      document.getElementById('recta-visual').textContent = recta;
+    }
+    
+    function limpiarRecta() {
+      document.getElementById('recta-input').value = '';
+      document.getElementById('recta-visual').textContent = '';
+    }
+    
+    // Funcionalidad para mostrar/ocultar pistas
+    function toggleHint(button) {
+      const hintContent = button.nextElementSibling;
+      const isVisible = hintContent.classList.contains('visible');
+      
+      if (isVisible) {
+        hintContent.classList.remove('visible');
+        button.classList.remove('open');
+      } else {
+        hintContent.classList.add('visible');
+        button.classList.add('open');
+      }
+    }
+    
+    // Inicialización cuando se carga la página
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof initTheme === 'function') {
+        initTheme(document.body, document.getElementById('theme-toggle'));
+      }
+      if (typeof initLanguage === 'function') {
+        initLanguage(document.documentElement, document.querySelectorAll('[data-lang-es], [data-lang-eu]'), document.getElementById('lang-toggle'));
+      }
+    });
+  </script>
+  
+  <!-- Botón flotante para volver arriba -->
+  <button id="back-to-top" aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <script>
+    // Configuración del botón de volver arriba
+    document.addEventListener('DOMContentLoaded', function() {
+      const backToTopButton = document.getElementById('back-to-top');
+      
+      // Mostrar/ocultar botón al hacer scroll
+      function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
+      }
+      
+      // Mostrar el botón después de cargar la página
+      setTimeout(toggleBackToTop, 100);
+      
+      // Escuchar el evento de scroll
+      window.addEventListener('scroll', toggleBackToTop);
+      
+      // Hacer scroll suave al hacer clic
+      backToTopButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

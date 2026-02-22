@@ -1,0 +1,69 @@
+.lcm-gcd-lab {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.lab-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--space-4);
+    padding: var(--space-6);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.input-group label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-6);
+}
+
+.result-card {
+    padding: var(--space-6);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+}
+
+.result-card h3 {
+    margin: 0;
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+}
+
+.result-value {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1;
+    margin: var(--space-4) 0;
+}
+
+.mkt-val {
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.zkh-val {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}

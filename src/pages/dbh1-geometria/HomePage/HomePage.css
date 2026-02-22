@@ -1,0 +1,191 @@
+.dbh1-geometria-home {
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    background: var(--bg-main);
+    background-image: var(--bg-pattern);
+    color: var(--text-main);
+
+    /* Geometry Theme Colors (Teal / Emerald) */
+    --accent-primary: #00d2ff;
+    --accent-secondary: #00ff88;
+    --accent-tertiary: #10b981;
+}
+
+.dbh1-geometria-home .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dbh1-geometria-home .page-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.dbh1-geometria-home .back-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.dbh1-geometria-home .back-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-4px);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+}
+
+.dbh1-geometria-home .title-container {
+    flex: 1;
+    padding: 3rem;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.dbh1-geometria-home .title-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+}
+
+.dbh1-geometria-home .title-container h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff, var(--accent-secondary));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+}
+
+.dbh1-geometria-home .subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.dbh1-geometria-home .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.dbh1-geometria-home .feature-card {
+    padding: 2.5rem;
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dbh1-geometria-home .feature-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: rgba(0, 255, 136, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+        inset 0 0 0 1px rgba(0, 255, 136, 0.2),
+        0 0 30px rgba(0, 255, 136, 0.1);
+}
+
+.dbh1-geometria-home .feature-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(30%, -30%);
+    transition: all 0.4s ease;
+}
+
+.dbh1-geometria-home .feature-card:hover::after {
+    transform: translate(20%, -20%) scale(1.2);
+    background: radial-gradient(circle, rgba(0, 255, 136, 0.15) 0%, transparent 70%);
+}
+
+.dbh1-geometria-home .feature-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 15px rgba(0, 255, 136, 0.3));
+    transition: transform 0.4s ease;
+}
+
+.dbh1-geometria-home .feature-card:hover .feature-icon {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.dbh1-geometria-home .feature-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    letter-spacing: -0.5px;
+}
+
+.dbh1-geometria-home .feature-card p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+    font-size: 1.1rem;
+}
+
+.dbh1-geometria-home .feature-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent-secondary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    margin-top: auto;
+    padding: 0.75rem 1.5rem;
+    background: rgba(0, 255, 136, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    width: fit-content;
+}
+
+.dbh1-geometria-home .feature-card:hover .feature-link {
+    background: var(--accent-secondary);
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+}
+
+@media (max-width: 768px) {
+    .dbh1-geometria-home .page-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.5rem;
+    }
+
+    .dbh1-geometria-home .title-container h1 {
+        font-size: 2.5rem;
+    }
+}

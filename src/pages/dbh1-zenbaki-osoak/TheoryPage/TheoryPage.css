@@ -1,0 +1,1468 @@
+.zenbaki-osoak-theory {
+    padding: var(--space-8) 0 var(--space-24);
+    min-height: 100vh;
+}
+.zenbaki-osoak-theory /* Header */
+.theory-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+    padding: var(--space-8) 0;
+}
+.zenbaki-osoak-theory .theory-header h1 {
+    font-size: var(--text-5xl);
+    margin-bottom: var(--space-4);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #f472b6 60%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 8s ease infinite;
+    background-size: 200% 200%;
+}
+
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    
+.zenbaki-osoak-theory 50% {
+        background-position: 100% 50%;
+    }
+.zenbaki-osoak-theory .theory-subtitle {
+    font-size: var(--text-xl);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-4);
+}
+.zenbaki-osoak-theory .theory-description {
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+.zenbaki-osoak-theory /* Grid de tarjetas */
+.theory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: var(--space-6);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.zenbaki-osoak-theory /* Tarjetas de teoría - NUEVO DISEÑO VIBRANTE */
+.theory-card {
+    background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.03) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 4px solid var(--card-color);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-6);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+.zenbaki-osoak-theory .theory-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg,
+            color-mix(in srgb, var(--card-color) 15%, transparent) 0%,
+            transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+.zenbaki-osoak-theory .theory-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle,
+            color-mix(in srgb, var(--card-color) 10%, transparent) 0%,
+            transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+.zenbaki-osoak-theory .theory-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow:
+        0 20px 40px -15px color-mix(in srgb, var(--card-color) 30%, transparent),
+        0 0 60px -20px var(--card-color);
+    border-color: color-mix(in srgb, var(--card-color) 60%, white);
+}
+.zenbaki-osoak-theory .theory-card:hover::before, .zenbaki-osoak-theory .theory-card:hover::after {
+    opacity: 1;
+}
+.zenbaki-osoak-theory .theory-card.expanded {
+    grid-column: 1 / -1;
+    background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.12) 0%,
+            rgba(255, 255, 255, 0.05) 100%);
+    border-left-width: 6px;
+}
+.zenbaki-osoak-theory .theory-card.expanded::before {
+    opacity: 1;
+}
+.zenbaki-osoak-theory /* Header de la tarjeta */
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    position: relative;
+    z-index: 1;
+}
+.zenbaki-osoak-theory .card-icon {
+    font-size: 2rem;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,
+            color-mix(in srgb, var(--card-color) 25%, transparent) 0%,
+            color-mix(in srgb, var(--card-color) 10%, transparent) 100%);
+    border-radius: var(--radius-xl);
+    border: 2px solid color-mix(in srgb, var(--card-color) 40%, transparent);
+    transition: all 0.3s ease;
+}
+.zenbaki-osoak-theory .theory-card:hover .card-icon {
+    transform: scale(1.1) rotate(5deg);
+    border-color: var(--card-color);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--card-color) 40%, transparent);
+}
+.zenbaki-osoak-theory .card-title {
+    flex: 1;
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+.zenbaki-osoak-theory .card-toggle {
+    font-size: var(--text-2xl);
+    font-weight: 300;
+    color: var(--card-color);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--card-color) 10%, transparent);
+    border: 2px solid color-mix(in srgb, var(--card-color) 30%, transparent);
+    border-radius: var(--radius-lg);
+    transition: all 0.3s ease;
+}
+.zenbaki-osoak-theory .theory-card:hover .card-toggle {
+    background: var(--card-color);
+    color: white;
+    transform: scale(1.1);
+}
+.zenbaki-osoak-theory /* Contenido expandible */
+.card-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+}
+.zenbaki-osoak-theory .card-content.visible {
+    max-height: 3000px;
+    opacity: 1;
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 2px solid color-mix(in srgb, var(--card-color) 30%, transparent);
+}
+.zenbaki-osoak-theory /* Contenido de sección */
+.content-section {
+    color: var(--color-text-secondary);
+    animation: fadeSlideIn 0.5s ease forwards;
+}
+
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    
+.zenbaki-osoak-theory to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+.zenbaki-osoak-theory .content-section h4 {
+    color: var(--color-text-primary);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    margin: var(--space-8) 0 var(--space-4);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+.zenbaki-osoak-theory .content-section h4::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: var(--card-color, linear-gradient(180deg, #667eea, #764ba2));
+    border-radius: 2px;
+}
+.zenbaki-osoak-theory .content-section h4:first-child {
+    margin-top: 0;
+}
+.zenbaki-osoak-theory .content-section h5 {
+    color: var(--color-text-primary);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin: var(--space-4) 0 var(--space-2);
+}
+.zenbaki-osoak-theory .content-section p {
+    margin-bottom: var(--space-3);
+    line-height: var(--line-height-relaxed);
+    font-size: var(--text-base);
+}
+.zenbaki-osoak-theory /* Visualización de fracciones - MEJORADO */
+.fraction-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+    padding: var(--space-8);
+    background: linear-gradient(135deg,
+            rgba(102, 126, 234, 0.1) 0%,
+            rgba(118, 75, 162, 0.1) 50%,
+            rgba(244, 114, 182, 0.1) 100%);
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    border-radius: var(--radius-2xl);
+    margin: var(--space-6) 0;
+    position: relative;
+    overflow: hidden;
+}
+.zenbaki-osoak-theory .fraction-visual::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #f472b6);
+}
+.zenbaki-osoak-theory .big-fraction {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+}
+.zenbaki-osoak-theory .big-fraction .numerator, .zenbaki-osoak-theory .big-fraction .denominator {
+    padding: var(--space-2) var(--space-8);
+    transition: all 0.3s ease;
+}
+.zenbaki-osoak-theory .big-fraction .numerator {
+    color: #667eea;
+}
+.zenbaki-osoak-theory .big-fraction .denominator {
+    color: #f472b6;
+}
+.zenbaki-osoak-theory .big-fraction .fraction-line {
+    width: 100px;
+    height: 6px;
+    background: linear-gradient(90deg, #667eea, #f472b6);
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+}
+.zenbaki-osoak-theory .fraction-labels {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    text-align: left;
+}
+.zenbaki-osoak-theory .label {
+    font-size: var(--text-base);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-lg);
+    font-weight: 500;
+}
+.zenbaki-osoak-theory .label.num-label {
+    background: rgba(102, 126, 234, 0.15);
+    color: #818cf8;
+    border-left: 3px solid #667eea;
+}
+.zenbaki-osoak-theory .label.den-label {
+    background: rgba(244, 114, 182, 0.15);
+    color: #f472b6;
+    border-left: 3px solid #f472b6;
+}
+.zenbaki-osoak-theory /* Grid de significados - MEJORADO */
+.meanings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-4);
+    margin: var(--space-6) 0;
+}
+.zenbaki-osoak-theory .meaning-card {
+    background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.zenbaki-osoak-theory .meaning-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #06b6d4);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+.zenbaki-osoak-theory .meaning-card:hover {
+    border-color: rgba(102, 126, 234, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px -10px rgba(102, 126, 234, 0.3);
+}
+.zenbaki-osoak-theory .meaning-card:hover::before {
+    transform: scaleX(1);
+}
+.zenbaki-osoak-theory .meaning-card h5 {
+    margin-top: 0;
+    font-size: var(--text-lg);
+    color: var(--color-text-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+.zenbaki-osoak-theory .meaning-card .example {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-top: var(--space-3);
+    padding: var(--space-3);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-lg);
+    border-left: 3px solid #06b6d4;
+}
+.zenbaki-osoak-theory /* Tip box - MEJORADO */
+.tip-box {
+    background: linear-gradient(135deg,
+            rgba(16, 185, 129, 0.15) 0%,
+            rgba(6, 182, 212, 0.15) 100%);
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    border-left: 5px solid #10b981;
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    margin: var(--space-8) 0;
+    font-size: var(--text-base);
+    position: relative;
+    overflow: hidden;
+}
+.zenbaki-osoak-theory .tip-box::before {
+    content: '💡';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 4rem;
+    opacity: 0.15;
+}
+.zenbaki-osoak-theory .warning-box {
+    background: linear-gradient(135deg,
+            rgba(245, 158, 11, 0.15) 0%,
+            rgba(239, 68, 68, 0.15) 100%);
+    border: 2px solid rgba(245, 158, 11, 0.3);
+    border-left: 5px solid #f59e0b;
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    margin: var(--space-8) 0;
+    font-size: var(--text-base);
+    position: relative;
+    overflow: hidden;
+}
+.zenbaki-osoak-theory .warning-box::before {
+    content: '⚠️';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 4rem;
+    opacity: 0.15;
+}
+.zenbaki-osoak-theory /* Cards de tipos - MEJORADO */
+.type-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-5);
+    margin: var(--space-6) 0;
+}
+.zenbaki-osoak-theory .type-card {
+    background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-5);
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.zenbaki-osoak-theory .type-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+}
+.zenbaki-osoak-theory .type-card.proper::before {
+    background: linear-gradient(90deg, #10b981, #34d399);
+}
+.zenbaki-osoak-theory .type-card.improper::before {
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+}
+.zenbaki-osoak-theory .type-card.unit::before {
+    background: linear-gradient(90deg, #6366f1, #818cf8);
+}
+.zenbaki-osoak-theory .type-card:hover {
+    transform: translateY(-6px) scale(1.02);
+}
+.zenbaki-osoak-theory .type-card.proper:hover {
+    border-color: #10b981;
+    box-shadow: 0 15px 40px -15px rgba(16, 185, 129, 0.4);
+}
+.zenbaki-osoak-theory .type-card.improper:hover {
+    border-color: #f59e0b;
+    box-shadow: 0 15px 40px -15px rgba(245, 158, 11, 0.4);
+}
+.zenbaki-osoak-theory .type-card.unit:hover {
+    border-color: #6366f1;
+    box-shadow: 0 15px 40px -15px rgba(99, 102, 241, 0.4);
+}
+.zenbaki-osoak-theory .type-card h5 {
+    margin-top: var(--space-2);
+    font-size: var(--text-lg);
+    font-weight: 700;
+}
+.zenbaki-osoak-theory .type-card .fraction-example {
+    font-size: var(--text-3xl);
+    margin: var(--space-4) 0;
+    padding: var(--space-4);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-xl);
+}
+.zenbaki-osoak-theory .type-card .value {
+    color: var(--color-primary-light);
+    font-weight: 700;
+    font-size: var(--text-base);
+}
+.zenbaki-osoak-theory .type-card .example {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-top: var(--space-2);
+    font-weight: 500;
+}
+.zenbaki-osoak-theory /* Fracciones en línea - MEJORADO */
+.fraction-display {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    padding: 0 var(--space-1);
+}
+.zenbaki-osoak-theory .fraction-display .num {
+    padding: 0 var(--space-2);
+    color: #818cf8;
+}
+.zenbaki-osoak-theory .fraction-display .line {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #667eea, #f472b6);
+    border-radius: 1px;
+}
+.zenbaki-osoak-theory .fraction-display .den {
+    padding: 0 var(--space-2);
+    color: #f472b6;
+}
+.zenbaki-osoak-theory /* Ejemplos de conversión - MEJORADO */
+.conversion-example {
+    background: linear-gradient(145deg,
+            rgba(102, 126, 234, 0.1) 0%,
+            rgba(244, 114, 182, 0.1) 100%);
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-6);
+    margin: var(--space-6) 0;
+}
+.zenbaki-osoak-theory .conversion-step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-5);
+    flex-wrap: wrap;
+    font-size: var(--text-xl);
+}
+.zenbaki-osoak-theory .arrow {
+    color: #06b6d4;
+    font-size: var(--text-2xl);
+    font-weight: 700;
+}
+.zenbaki-osoak-theory .result {
+    padding: var(--space-2) var(--space-4);
+    background: rgba(6, 182, 212, 0.15);
+    border-radius: var(--radius-lg);
+    color: #22d3ee;
+}
+.zenbaki-osoak-theory .mixed-number {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2));
+    border-radius: var(--radius-xl);
+    border: 2px solid rgba(16, 185, 129, 0.3);
+}
+.zenbaki-osoak-theory .mixed-number .whole {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    color: #10b981;
+}
+.zenbaki-osoak-theory .mixed-number .fraction-part {
+    display: flex;
+    flex-direction: column;
+    font-size: var(--text-base);
+}
+.zenbaki-osoak-theory /* Demostración de equivalencia - MEJORADO */
+.equivalence-demo {
+    background: linear-gradient(145deg,
+            rgba(244, 114, 182, 0.1) 0%,
+            rgba(6, 182, 212, 0.1) 100%);
+    border: 2px solid rgba(244, 114, 182, 0.2);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    margin: var(--space-6) 0;
+}
+.zenbaki-osoak-theory .fractions-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+}
+.zenbaki-osoak-theory .frac-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-xl);
+    transition: all 0.3s ease;
+}
+.zenbaki-osoak-theory .frac-visual:hover {
+    transform: scale(1.05);
+}
+.zenbaki-osoak-theory .frac-visual .fraction-display {
+    font-size: var(--text-2xl);
+}
+.zenbaki-osoak-theory .visual-bar {
+    width: 100px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+.zenbaki-osoak-theory .visual-bar .filled {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #f472b6);
+    border-radius: var(--radius-full);
+    transition: width 0.5s ease;
+}
+.zenbaki-osoak-theory .equals {
+    font-size: var(--text-3xl);
+    color: #10b981;
+    font-weight: 800;
+    text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+}
+.zenbaki-osoak-theory /* Cajas de fórmulas - MEJORADO */
+.formula-box {
+    background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-5);
+    margin: var(--space-5) 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    font-size: var(--text-xl);
+    font-family: var(--font-mono);
+    transition: all 0.3s ease;
+}
+.zenbaki-osoak-theory .formula-box:hover {
+    border-color: rgba(102, 126, 234, 0.4);
+    box-shadow: 0 10px 30px -10px rgba(102, 126, 234, 0.3);
+}
+.zenbaki-osoak-theory .formula-box.highlight {
+    background: linear-gradient(135deg,
+            rgba(102, 126, 234, 0.15) 0%,
+            rgba(6, 182, 212, 0.15) 100%);
+    border-color: rgba(102, 126, 234, 0.4);
+    box-shadow: 0 0 30px -10px rgba(102, 126, 234, 0.4);
+}
+.zenbaki-osoak-theory /* Pasos de ejemplo - MEJORADO */
+.example-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin: var(--space-6) 0;
+}
+.zenbaki-osoak-theory .step {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    padding: var(--space-3);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-xl);
+    transition: all 0.3s ease;
+}
+.zenbaki-osoak-theory .step:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+.zenbaki-osoak-theory .step-num {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: var(--radius-full);
+    font-size: var(--text-base);
+    font-weight: 800;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+.zenbaki-osoak-theory /* Cajas de método - MEJORADO */
+.method-box {
+    background: linear-gradient(145deg,
+            rgba(6, 182, 212, 0.1) 0%,
+            rgba(102, 126, 234, 0.1) 100%);
+    border: 2px solid rgba(6, 182, 212, 0.2);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-6);
+    margin: var(--space-6) 0;
+}
+.zenbaki-osoak-theory .method-box ol {
+    margin: var(--space-3) 0;
+    padding-left: var(--space-8);
+}
+.zenbaki-osoak-theory .method-box li {
+    margin: var(--space-3) 0;
+    padding-left: var(--space-2);
+}
+.zenbaki-osoak-theory .method-box li::marker {
+    color: #06b6d4;
+    font-weight: 700;
+}
+.zenbaki-osoak-theory /* Comparaciones - MEJORADO */
+.comparison-example {
+    background: linear-gradient(145deg,
+            rgba(139, 92, 246, 0.1) 0%,
+            rgba(6, 182, 212, 0.1) 100%);
+    border: 2px solid rgba(139, 92, 246, 0.2);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-6);
+    margin: var(--space-5) 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-5);
+    flex-wrap: wrap;
+    font-size: var(--text-xl);
+}
+.zenbaki-osoak-theory .comparison-op {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-xl);
+}
+.zenbaki-osoak-theory .comparison-op.greater {
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.15);
+}
+.zenbaki-osoak-theory .comparison-op.less {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.15);
+}
+.zenbaki-osoak-theory .explanation {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    padding: var(--space-2) var(--space-3);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-lg);
+}
+.zenbaki-osoak-theory /* Cajas de ejemplo - MEJORADO */
+.example-box {
+    background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.06) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-5);
+    margin: var(--space-5) 0;
+    transition: all 0.3s ease;
+}
+.zenbaki-osoak-theory .example-box:hover {
+    border-color: rgba(102, 126, 234, 0.3);
+}
+.zenbaki-osoak-theory .example-box .example {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    font-size: var(--text-xl);
+    padding: var(--space-4);
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: var(--radius-xl);
+    margin-top: var(--space-3);
+}
+.zenbaki-osoak-theory /* Simplificación cruzada */
+.cross-simplify {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: var(--radius-xl);
+}
+.zenbaki-osoak-theory .cross-simplify .fractions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+.zenbaki-osoak-theory .cross-simplify .crossed {
+    text-decoration: line-through;
+    color: var(--color-text-muted);
+    opacity: 0.5;
+}
+.zenbaki-osoak-theory /* Potencias - MEJORADO */
+.paren {
+    font-size: var(--text-2xl);
+    color: #f472b6;
+}
+.zenbaki-osoak-theory .power {
+    font-size: var(--text-sm);
+    vertical-align: super;
+    margin-left: 2px;
+    color: #06b6d4;
+    font-weight: 700;
+}
+.zenbaki-osoak-theory /* Reglas - MEJORADO */
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-5);
+    margin: var(--space-6) 0;
+}
+.zenbaki-osoak-theory .rule-card {
+    background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-5);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+.zenbaki-osoak-theory .rule-card:hover {
+    border-color: rgba(102, 126, 234, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px -10px rgba(102, 126, 234, 0.3);
+}
+.zenbaki-osoak-theory .rule-card h5 {
+    margin-top: 0;
+    color: #818cf8;
+    font-size: var(--text-base);
+}
+.zenbaki-osoak-theory .rule-card .formula {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    padding: var(--space-3);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-lg);
+    margin-top: var(--space-3);
+}
+.zenbaki-osoak-theory /* Ejemplo resuelto - MEJORADO */
+.solved-example {
+    background: linear-gradient(145deg,
+            rgba(102, 126, 234, 0.1) 0%,
+            rgba(139, 92, 246, 0.1) 100%);
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    margin: var(--space-6) 0;
+}
+.zenbaki-osoak-theory .solved-example .expression {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    font-size: var(--text-xl);
+    padding: var(--space-5);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-6);
+    border: 2px solid rgba(102, 126, 234, 0.3);
+}
+.zenbaki-osoak-theory .solved-example .steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+.zenbaki-osoak-theory .solved-example .step {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-xl);
+    padding: var(--space-4) var(--space-5);
+    border-left: 4px solid;
+}
+.zenbaki-osoak-theory .solved-example .step:nth-child(1) {
+    border-color: #667eea;
+}
+.zenbaki-osoak-theory .solved-example .step:nth-child(2) {
+    border-color: #f59e0b;
+}
+.zenbaki-osoak-theory .solved-example .step:nth-child(3) {
+    border-color: #10b981;
+}
+.zenbaki-osoak-theory /* Tipos de decimales - MEJORADO */
+.decimal-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-5);
+    margin: var(--space-6) 0;
+}
+.zenbaki-osoak-theory .type-item {
+    background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-5);
+    transition: all 0.3s ease;
+}
+.zenbaki-osoak-theory .type-item:hover {
+    border-color: rgba(6, 182, 212, 0.4);
+    transform: translateY(-4px);
+}
+.zenbaki-osoak-theory .type-item h5 {
+    margin-top: 0;
+    color: #22d3ee;
+    font-size: var(--text-lg);
+}
+.zenbaki-osoak-theory .type-item .example {
+    font-family: var(--font-mono);
+    color: var(--color-text-primary);
+    font-size: var(--text-xl);
+    margin: var(--space-3) 0;
+    padding: var(--space-3);
+    background: rgba(6, 182, 212, 0.1);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+.zenbaki-osoak-theory .type-item .condition {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    padding: var(--space-2) var(--space-3);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-lg);
+}
+.zenbaki-osoak-theory /* Pasos de conversión - MEJORADO */
+.conversion-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    margin: var(--space-6) 0;
+}
+.zenbaki-osoak-theory .step-card {
+    background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.06) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-left: 5px solid;
+    border-radius: var(--radius-2xl);
+    padding: var(--space-5);
+    transition: all 0.3s ease;
+}
+.zenbaki-osoak-theory .step-card:nth-child(1) {
+    border-left-color: #10b981;
+}
+.zenbaki-osoak-theory .step-card:nth-child(2) {
+    border-left-color: #f59e0b;
+}
+.zenbaki-osoak-theory .step-card:nth-child(3) {
+    border-left-color: #6366f1;
+}
+.zenbaki-osoak-theory .step-card:hover {
+    transform: translateX(8px);
+}
+.zenbaki-osoak-theory .step-card h5 {
+    margin-top: 0;
+    font-size: var(--text-lg);
+}
+.zenbaki-osoak-theory .step-card:nth-child(1) h5 {
+    color: #34d399;
+}
+.zenbaki-osoak-theory .step-card:nth-child(2) h5 {
+    color: #fbbf24;
+}
+.zenbaki-osoak-theory .step-card:nth-child(3) h5 {
+    color: #818cf8;
+}
+.zenbaki-osoak-theory .step-card ol {
+    margin: var(--space-3) 0;
+    padding-left: var(--space-6);
+}
+.zenbaki-osoak-theory .step-card li {
+    margin: var(--space-2) 0;
+}
+.zenbaki-osoak-theory /* Magnitudes - MEJORADO */
+.magnitude-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-5);
+    margin: var(--space-6) 0;
+}
+.zenbaki-osoak-theory .magnitude-card {
+    background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-6);
+    transition: all 0.3s ease;
+}
+.zenbaki-osoak-theory .magnitude-card.direct {
+    border-top: 4px solid #10b981;
+}
+.zenbaki-osoak-theory .magnitude-card.inverse {
+    border-top: 4px solid #f59e0b;
+}
+.zenbaki-osoak-theory .magnitude-card.direct:hover {
+    border-color: #10b981;
+    box-shadow: 0 15px 40px -15px rgba(16, 185, 129, 0.3);
+}
+.zenbaki-osoak-theory .magnitude-card.inverse:hover {
+    border-color: #f59e0b;
+    box-shadow: 0 15px 40px -15px rgba(245, 158, 11, 0.3);
+}
+.zenbaki-osoak-theory .magnitude-card h5 {
+    margin-top: 0;
+    font-size: var(--text-xl);
+}
+.zenbaki-osoak-theory .magnitude-card.direct h5 {
+    color: #34d399;
+}
+.zenbaki-osoak-theory .magnitude-card.inverse h5 {
+    color: #fbbf24;
+}
+.zenbaki-osoak-theory .magnitude-card .formula {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--space-3) var(--space-4);
+    margin: var(--space-4) 0;
+    font-family: var(--font-mono);
+    text-align: center;
+    font-size: var(--text-lg);
+}
+.zenbaki-osoak-theory .magnitude-card .examples {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+.zenbaki-osoak-theory .magnitude-card .examples p {
+    margin: 0;
+    padding: var(--space-2);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-lg);
+}
+.zenbaki-osoak-theory /* Regla de tres - MEJORADO */
+.rule-three-example {
+    background: linear-gradient(145deg,
+            rgba(244, 114, 182, 0.1) 0%,
+            rgba(102, 126, 234, 0.1) 100%);
+    border: 2px solid rgba(244, 114, 182, 0.2);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    margin: var(--space-6) 0;
+}
+.zenbaki-osoak-theory .rule-three-example .setup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin: var(--space-5) 0;
+    padding: var(--space-5);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-xl);
+}
+.zenbaki-osoak-theory .rule-three-example .proportion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-5);
+    font-family: var(--font-mono);
+    font-size: var(--text-xl);
+    padding: var(--space-2);
+}
+.zenbaki-osoak-theory .rule-three-example .solution {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-top: var(--space-5);
+    padding: var(--space-5);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.15));
+    border-radius: var(--radius-xl);
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    font-size: var(--text-xl);
+}
+.zenbaki-osoak-theory /* Proporción box */
+.proportion-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    padding: var(--space-6);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(244, 114, 182, 0.1));
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    border-radius: var(--radius-2xl);
+    margin: var(--space-5) 0;
+    font-size: var(--text-2xl);
+    font-family: var(--font-mono);
+}
+.zenbaki-osoak-theory /* Porcentajes - MEJORADO */
+.percent-fraction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-5);
+    font-size: var(--text-2xl);
+    margin: var(--space-6) 0;
+    padding: var(--space-6);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(244, 114, 182, 0.1));
+    border: 2px solid rgba(139, 92, 246, 0.2);
+    border-radius: var(--radius-2xl);
+}
+.zenbaki-osoak-theory .percent {
+    font-size: var(--text-4xl);
+    font-weight: 800;
+    background: linear-gradient(135deg, #8b5cf6, #f472b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.zenbaki-osoak-theory .calculation-examples {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    margin: var(--space-6) 0;
+}
+.zenbaki-osoak-theory .calculation-examples .example-box {
+    margin: 0;
+}
+.zenbaki-osoak-theory .calculation-examples .calculation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-top: var(--space-3);
+    font-size: var(--text-xl);
+    font-family: var(--font-mono);
+}
+.zenbaki-osoak-theory /* Aumento y descuento - MEJORADO */
+.increase-decrease {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-5);
+    margin: var(--space-6) 0;
+}
+.zenbaki-osoak-theory .operation-card {
+    background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-5);
+    transition: all 0.3s ease;
+}
+.zenbaki-osoak-theory .operation-card.increase {
+    border-top: 4px solid #10b981;
+}
+.zenbaki-osoak-theory .operation-card.decrease {
+    border-top: 4px solid #ef4444;
+}
+.zenbaki-osoak-theory .operation-card.increase:hover {
+    border-color: #10b981;
+    box-shadow: 0 15px 40px -15px rgba(16, 185, 129, 0.3);
+}
+.zenbaki-osoak-theory .operation-card.decrease:hover {
+    border-color: #ef4444;
+    box-shadow: 0 15px 40px -15px rgba(239, 68, 68, 0.3);
+}
+.zenbaki-osoak-theory .operation-card h5 {
+    margin-top: 0;
+    font-size: var(--text-xl);
+}
+.zenbaki-osoak-theory .operation-card.increase h5 {
+    color: #34d399;
+}
+.zenbaki-osoak-theory .operation-card.decrease h5 {
+    color: #f87171;
+}
+.zenbaki-osoak-theory .operation-card .example {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--space-4);
+    margin-top: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+}
+.zenbaki-osoak-theory /* Tabla de equivalentes - MEJORADO */
+.equivalents-table {
+    background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    margin: var(--space-6) 0;
+}
+.zenbaki-osoak-theory .table-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: var(--space-4) var(--space-5);
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+.zenbaki-osoak-theory .table-row:last-child {
+    border-bottom: none;
+}
+.zenbaki-osoak-theory .table-row:not(.header):hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+.zenbaki-osoak-theory .table-row.header {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.2), rgba(139, 92, 246, 0.2));
+    font-weight: 700;
+    color: var(--color-text-primary);
+    font-size: var(--text-base);
+}
+.zenbaki-osoak-theory /* RTL Support */
+[dir="rtl"] .theory-card {
+    border-left: none;
+    border-right: 4px solid var(--card-color);
+}
+.zenbaki-osoak-theory [dir="rtl"] .content-section h4::before {
+    margin-left: var(--space-3);
+    margin-right: 0;
+}
+.zenbaki-osoak-theory [dir="rtl"] .tip-box, .zenbaki-osoak-theory [dir="rtl"] .warning-box {
+    border-left: none;
+    border-right: 5px solid;
+}
+.zenbaki-osoak-theory [dir="rtl"] .tip-box {
+    border-right-color: #10b981;
+}
+.zenbaki-osoak-theory [dir="rtl"] .warning-box {
+    border-right-color: #f59e0b;
+}
+.zenbaki-osoak-theory [dir="rtl"] .step-card {
+    border-left: none;
+    border-right: 5px solid;
+}
+.zenbaki-osoak-theory [dir="rtl"] .step-card:nth-child(1) {
+    border-right-color: #10b981;
+}
+.zenbaki-osoak-theory [dir="rtl"] .step-card:nth-child(2) {
+    border-right-color: #f59e0b;
+}
+.zenbaki-osoak-theory [dir="rtl"] .step-card:nth-child(3) {
+    border-right-color: #6366f1;
+}
+.zenbaki-osoak-theory [dir="rtl"] .label {
+    border-left: none;
+    border-right: 3px solid;
+}
+.zenbaki-osoak-theory [dir="rtl"] .label.num-label {
+    border-right-color: #667eea;
+}
+.zenbaki-osoak-theory [dir="rtl"] .label.den-label {
+    border-right-color: #f472b6;
+}
+.zenbaki-osoak-theory [dir="rtl"] .meaning-card .example {
+    border-left: none;
+    border-right: 3px solid #06b6d4;
+}
+.zenbaki-osoak-theory [dir="rtl"] .solved-example .step {
+    border-left: none;
+    border-right: 4px solid;
+}
+.zenbaki-osoak-theory /* Priority list - For order of operations */
+.priority-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin: var(--space-6) 0;
+}
+.zenbaki-osoak-theory .priority-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-xl);
+    transition: all 0.3s ease;
+}
+.zenbaki-osoak-theory .priority-item:hover {
+    border-color: rgba(102, 126, 234, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+}
+.zenbaki-osoak-theory .priority-item:nth-child(1) {
+    border-left: 4px solid #ef4444;
+}
+.zenbaki-osoak-theory .priority-item:nth-child(2) {
+    border-left: 4px solid #f59e0b;
+}
+.zenbaki-osoak-theory .priority-item:nth-child(3) {
+    border-left: 4px solid #10b981;
+}
+.zenbaki-osoak-theory .priority-item:nth-child(4) {
+    border-left: 4px solid #06b6d4;
+}
+.zenbaki-osoak-theory .priority-num {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-lg);
+    font-weight: 800;
+    border-radius: var(--radius-full);
+    flex-shrink: 0;
+}
+.zenbaki-osoak-theory .priority-item:nth-child(1) .priority-num {
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    color: white;
+}
+.zenbaki-osoak-theory .priority-item:nth-child(2) .priority-num {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: white;
+}
+.zenbaki-osoak-theory .priority-item:nth-child(3) .priority-num {
+    background: linear-gradient(135deg, #10b981, #34d399);
+    color: white;
+}
+.zenbaki-osoak-theory .priority-item:nth-child(4) .priority-num {
+    background: linear-gradient(135deg, #06b6d4, #22d3ee);
+    color: white;
+}
+.zenbaki-osoak-theory .priority-text {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+}
+.zenbaki-osoak-theory /* Example boxes - For simple examples */
+.example-box {
+    background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.06) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-5);
+    margin: var(--space-5) 0;
+    transition: all 0.3s ease;
+}
+.zenbaki-osoak-theory .example-box:hover {
+    border-color: rgba(102, 126, 234, 0.3);
+    box-shadow: 0 5px 20px -10px rgba(102, 126, 234, 0.3);
+}
+.zenbaki-osoak-theory .example-box .example {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    font-size: var(--text-lg);
+}
+.zenbaki-osoak-theory .example-box p {
+    margin-bottom: var(--space-3);
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+.zenbaki-osoak-theory /* Solved examples - Multi-step examples */
+.solved-example {
+    background: linear-gradient(145deg,
+            rgba(102, 126, 234, 0.1) 0%,
+            rgba(118, 75, 162, 0.1) 50%,
+            rgba(6, 182, 212, 0.1) 100%);
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-6);
+    margin: var(--space-6) 0;
+    position: relative;
+    overflow: hidden;
+}
+.zenbaki-osoak-theory .solved-example::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #06b6d4);
+}
+.zenbaki-osoak-theory .solved-example p {
+    margin-bottom: var(--space-4);
+    font-size: var(--text-lg);
+    color: var(--color-text-primary);
+}
+.zenbaki-osoak-theory .solved-example .expression {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    font-size: var(--text-xl);
+    padding: var(--space-4);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-5);
+}
+.zenbaki-osoak-theory .solved-example .steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+.zenbaki-osoak-theory .solved-example .step {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    padding: var(--space-4);
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-xl);
+    border-left: 4px solid rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+}
+.zenbaki-osoak-theory .solved-example .step:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-left-color: #667eea;
+}
+.zenbaki-osoak-theory /* Operation symbols */
+.operation {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: #f472b6;
+    padding: 0 var(--space-2);
+}
+.zenbaki-osoak-theory /* Highlight for inverted fractions */
+.fraction-display.highlight {
+    background: linear-gradient(135deg,
+            rgba(16, 185, 129, 0.2) 0%,
+            rgba(6, 182, 212, 0.2) 100%);
+    border: 2px solid rgba(16, 185, 129, 0.4);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2);
+}
+.zenbaki-osoak-theory .fraction-display.highlight .num, .zenbaki-osoak-theory .fraction-display.highlight .den {
+    color: #10b981;
+}
+.zenbaki-osoak-theory /* Paren and power for exponents */
+.paren {
+    font-size: var(--text-2xl);
+    font-weight: 300;
+    color: var(--color-text-secondary);
+}
+.zenbaki-osoak-theory .power {
+    font-size: var(--text-lg);
+    position: relative;
+    top: -0.8em;
+    color: #f59e0b;
+    font-weight: 700;
+}
+.zenbaki-osoak-theory /* Tip box warning variant */
+.tip-box.warning {
+    background: linear-gradient(135deg,
+            rgba(245, 158, 11, 0.15) 0%,
+            rgba(239, 68, 68, 0.15) 100%);
+    border: 2px solid rgba(245, 158, 11, 0.3);
+    border-left: 5px solid #f59e0b;
+}
+.zenbaki-osoak-theory .tip-box.warning::before {
+    content: '⚠️';
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .theory-header h1 {
+        font-size: var(--text-4xl);
+    
+.zenbaki-osoak-theory .theory-grid {
+        grid-template-columns: 1fr;
+    }
+.zenbaki-osoak-theory .theory-card.expanded {
+        grid-column: 1;
+    }
+.zenbaki-osoak-theory .meanings-grid, .zenbaki-osoak-theory .type-cards {
+        grid-template-columns: 1fr;
+    }
+.zenbaki-osoak-theory .formula-box {
+        font-size: var(--text-base);
+        padding: var(--space-4);
+    }
+.zenbaki-osoak-theory .conversion-step {
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+.zenbaki-osoak-theory .fractions-row {
+        flex-direction: column;
+    }
+.zenbaki-osoak-theory .big-fraction {
+        font-size: 3rem;
+    }
+.zenbaki-osoak-theory .fraction-visual {
+        padding: var(--space-5);
+    }
+.zenbaki-osoak-theory .magnitude-types, .zenbaki-osoak-theory .increase-decrease, .zenbaki-osoak-theory .decimal-types {
+        grid-template-columns: 1fr;
+    }
+.zenbaki-osoak-theory .comparison-example, .zenbaki-osoak-theory .percent-fraction {
+        flex-direction: column;
+        gap: var(--space-3);
+    }

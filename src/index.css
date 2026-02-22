@@ -567,7 +567,6 @@ input::placeholder {
 }
 
 .fraction .numerator {
-  border-bottom: 2px solid currentColor;
   padding: 0 var(--space-2);
 }
 

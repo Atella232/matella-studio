@@ -1,0 +1,356 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="Raíz cuadrada de un número decimal" data-lang-eu="Zenbaki hamartarren erro karratua">Raíz cuadrada de un número decimal</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <i class="fas fa-calculator"></i>
+      <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
+    </nav>
+  </header>
+  
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol>
+      <li><a href="../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
+      <li><a href="../index.html" data-lang-es="Sistema decimal y sexagesimal" data-lang-eu="Sistema hamartarra eta sexagesimala">Sistema decimal y sexagesimal</a></li>
+      <li class="active" aria-current="page"><span data-lang-es="Raíz cuadrada de un número decimal" data-lang-eu="Zenbaki hamartarren erro karratua">Raíz cuadrada de un número decimal</span></li>
+    </ol>
+  </nav>
+  
+  <main>
+    <h1 data-lang-es="Raíz cuadrada de un número decimal" data-lang-eu="Zenbaki hamartarren erro karratua">Raíz cuadrada de un número decimal</h1>
+    
+    <section class="content-section">
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="true">
+            <i class="fas fa-info-circle icon-concept"></i>
+            <span data-lang-es="¿Qué es la raíz cuadrada?" data-lang-eu="Zer da erro karratua?">¿Qué es la raíz cuadrada?</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content" style="max-height: none;">
+            <p data-lang-es="La <strong>raíz cuadrada</strong> de un número es aquel número que, multiplicado por sí mismo, nos da el número original. Se representa con el símbolo √." data-lang-eu="Zenbaki baten <strong>erro karratua</strong> berak bere buruaz biderkatuta zenbaki originala ematen digun zenbakia da. √ ikurrarekin irudikatzen da.">La <strong>raíz cuadrada</strong> de un número es aquel número que, multiplicado por sí mismo, nos da el número original. Se representa con el símbolo √.</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: √16 = 4" data-lang-eu="Adibidea: √16 = 4">Ejemplo: √16 = 4</h4>
+              <p data-lang-es="Porque 4 × 4 = 16" data-lang-eu="4 × 4 = 16 delako">Porque 4 × 4 = 16</p>
+              <div class="solution">
+                <strong data-lang-es="Definición:" data-lang-eu="Definizioa:">Definición:</strong> √a = b <span data-lang-es="significa que b² = a" data-lang-eu="esan nahi du b² = a">significa que b² = a</span>
+                <p data-lang-es="En este caso: √16 = 4 porque 4² = 16" data-lang-eu="Kasu honetan: √16 = 4 4² = 16 delako">En este caso: √16 = 4 porque 4² = 16</p>
+              </div>
+            </div>
+
+            <div class="interactive-idea card-style">
+              <h4><i class="fas fa-lightbulb"></i> <span data-lang-es="Idea Interactiva" data-lang-eu="Ideia Interaktiboa">Idea Interactiva</span></h4>
+              <p data-lang-es="Imagina que tienes un cuadrado de área 16. La raíz cuadrada de 16 es la longitud del lado de ese cuadrado." data-lang-eu="Imajinatu 16 azalera duen karratu bat duzula. 16ren erro karratua karratu horren aldearen luzera da.">Imagina que tienes un cuadrado de área 16. La raíz cuadrada de 16 es la longitud del lado de ese cuadrado.</p>
+              <div class="tool-objective">
+                <strong data-lang-es="Objetivo:" data-lang-eu="Helburua:">Objetivo:</strong> <span data-lang-es="Entender la raíz cuadrada como la medida del lado de un cuadrado" data-lang-eu="Ulertu erro karratua karratu baten aldearen neurri gisa">Entender la raíz cuadrada como la medida del lado de un cuadrado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-square-root-variable icon-concept"></i>
+            <span data-lang-es="Raíz cuadrada de decimales" data-lang-eu="Hamartarren erro karratua">Raíz cuadrada de decimales</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Para calcular la raíz cuadrada de números decimales, podemos usar diferentes métodos:" data-lang-eu="Zenbaki hamartarren erro karratua kalkulatzeko, metodo desberdinak erabil ditzakegu:">Para calcular la raíz cuadrada de números decimales, podemos usar diferentes métodos:</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Método 1: Convertir a fracción" data-lang-eu="1. metodoa: Zatiketara bihurtu">Método 1: Convertir a fracción</h4>
+              <div class="solution">
+                <strong data-lang-es="Ejemplo:" data-lang-eu="Adibidea:">Ejemplo:</strong> √0,25
+                <ul>
+                  <li><span>0,25 = 25/100 = 1/4</span></li>
+                  <li><span>√(1/4) = 1/2 = 0,5</span></li>
+                </ul>
+                <strong data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</strong> √0,25 = 0,5
+              </div>
+            </div>
+
+            <div class="example-solved">
+              <h4 data-lang-es="Método 2: Multiplicar por potencias de 100" data-lang-eu="2. metodoa: Biderkatu 100en potentziekin">Método 2: Multiplicar por potencias de 100</h4>
+              <div class="solution">
+                <strong data-lang-es="Ejemplo:" data-lang-eu="Adibidea:">Ejemplo:</strong> √2,25
+                <ul>
+                  <li><span>2,25 × 100 = 225</span></li>
+                  <li><span>√225 = 15</span></li>
+                  <li><span>15 ÷ 10 = 1,5</span></li>
+                </ul>
+                <strong data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</strong> √2,25 = 1,5
+              </div>
+            </div>
+
+            <div class="variable-diagram">
+              <strong data-lang-es="Métodos para calcular raíz cuadrada de decimales" data-lang-eu="Hamartarren erro karratua kalkulatzeko metodoak">Métodos para calcular raíz cuadrada de decimales</strong>
+              <div class="split">
+                <div class="category">
+                  <strong data-lang-es="Método 1" data-lang-eu="1. metodoa">Método 1</strong>
+                  <div class="sub-split">
+                    <div class="sub-category" data-lang-es="Convertir a fracción" data-lang-eu="Zatiketara bihurtu">Convertir a fracción</div>
+                    <div class="sub-category" data-lang-es="Calcular raíz de la fracción" data-lang-eu="Kalkulatu zatiketaren erroa">Calcular raíz de la fracción</div>
+                  </div>
+                </div>
+                <div class="category">
+                  <strong data-lang-es="Método 2" data-lang-eu="2. metodoa">Método 2</strong>
+                  <div class="sub-split">
+                    <div class="sub-category" data-lang-es="Multiplicar por 100" data-lang-eu="Biderkatu 100ez">Multiplicar por 100</div>
+                    <div class="sub-category" data-lang-es="Dividir resultado por 10" data-lang-eu="Banatu emaitza 10ez">Dividir resultado por 10</div>
+                  </div>
+                </div>
+                <div class="category">
+                  <strong data-lang-es="Método 3" data-lang-eu="3. metodoa">Método 3</strong>
+                  <div class="sub-split">
+                    <div class="sub-category" data-lang-es="Aproximación" data-lang-eu="Hurbiltzea">Aproximación</div>
+                    <div class="sub-category" data-lang-es="Usar calculadora" data-lang-eu="Erabili kalkulagailua">Usar calculadora</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-calculator icon-concept"></i>
+            <span data-lang-es="Método de aproximación" data-lang-eu="Hurbiltze metodoa">Método de aproximación</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p>Para números decimales más complejos, podemos usar el método de aproximación:</p>
+            
+            <div class="example-solved">
+              <h4>Ejemplo: √3,6</h4>
+              <div class="solution">
+                <strong>Paso 1:</strong> Buscar cuadrados perfectos cercanos
+                <ul>
+                  <li><span>1² = 1</span></li>
+                  <li><span>2² = 4</span></li>
+                </ul>
+                <strong>Paso 2:</strong> 3,6 está entre 1 y 4
+                <ul>
+                  <li><span>√1 = 1</span></li>
+                  <li><span>√4 = 2</span></li>
+                </ul>
+                <strong>Paso 3:</strong> Aproximar: √3,6 ≈ 1,9
+                <p>Verificación: 1,9² = 3,61 (muy cercano a 3,6)</p>
+              </div>
+            </div>
+
+            <div class="example-solved">
+              <h4>Ejemplo: √0,64</h4>
+              <div class="solution">
+                <strong>Paso 1:</strong> 0,64 × 100 = 64
+                <strong>Paso 2:</strong> √64 = 8
+                <strong>Paso 3:</strong> 8 ÷ 10 = 0,8
+                <strong>Resultado:</strong> √0,64 = 0,8
+                <p>Verificación: 0,8² = 0,64 </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-exclamation-triangle icon-concept"></i>
+            <span data-lang-es="Casos especiales" data-lang-eu="Kasu bereziak">Casos especiales</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p>Hay algunos casos especiales que debemos conocer:</p>
+            
+            <div class="example-solved">
+              <h4>Raíz cuadrada de números entre 0 y 1</h4>
+              <div class="solution">
+                <strong>Propiedad:</strong> Si 0 < a < 1, entonces √a > a
+                <ul>
+                  <li><span>√0,25 = 0,5</span> (0,5 > 0,25)</li>
+                  <li><span>√0,36 = 0,6</span> (0,6 > 0,36)</li>
+                  <li><span>√0,49 = 0,7</span> (0,7 > 0,49)</li>
+                </ul>
+                <p><strong>¡Importante!</strong> La raíz cuadrada de un número entre 0 y 1 es mayor que el número original.</p>
+              </div>
+            </div>
+
+            <div class="example-solved">
+              <h4>Raíz cuadrada de números mayores que 1</h4>
+              <div class="solution">
+                <strong>Propiedad:</strong> Si a > 1, entonces √a < a
+                <ul>
+                  <li><span>√4 = 2</span> (2 < 4)</li>
+                  <li><span>√9 = 3</span> (3 < 9)</li>
+                  <li><span>√16 = 4</span> (4 < 16)</li>
+                </ul>
+                <p><strong>¡Importante!</strong> La raíz cuadrada de un número mayor que 1 es menor que el número original.</p>
+              </div>
+            </div>
+
+            <div class="interactive-idea card-style">
+              <h4><i class="fas fa-lightbulb"></i> Idea Interactiva</h4>
+              <p>Piensa en la raíz cuadrada como en "deshacer" un cuadrado. Si tienes un cuadrado de área 0,25, su lado es 0,5 (mayor que 0,25).</p>
+              <div class="tool-objective">
+                <strong>Objetivo:</strong> Entender por qué las raíces cuadradas de números pequeños son más grandes
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-calculator icon-concept"></i>
+            <span data-lang-es="Calculadora de raíz cuadrada" data-lang-eu="Erro karratuaren kalkulagailua">Calculadora de raíz cuadrada</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p>Practica el cálculo de raíces cuadradas usando esta calculadora interactiva:</p>
+            
+            <div class="interactive-calculator">
+              <h5><i class="fas fa-square-root-variable"></i> Calculadora de Raíz Cuadrada</h5>
+              <div class="calc-input">
+                <label for="numero-input">Introduce un número:</label>
+                <textarea id="numero-input" placeholder="Ejemplo: 2.25"></textarea>
+              </div>
+              <div class="calc-buttons">
+                <button onclick="calcularRaiz()">Calcular</button>
+                <button onclick="limpiarRaiz()">Limpiar</button>
+              </div>
+              <div class="calc-results">
+                <h6>Raíz cuadrada:</h6>
+                <p id="resultado-raiz"></p>
+                <h6>Verificación:</h6>
+                <p id="verificacion-raiz"></p>
+                <h6>Método usado:</h6>
+                <p id="metodo-raiz"></p>
+              </div>
+              <div class="calc-note">
+                <i class="fas fa-info-circle"></i> Usa punto (.) como separador decimal
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-list-ol icon-concept"></i>
+            <span data-lang-es="Ejercicios propuestos" data-lang-eu="Ariketak proposatuak">Ejercicios propuestos</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <ol class="exercises-list">
+              <li>
+                <p>Calcula: √0,25</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> Ver pista
+                </button>
+                <div class="hint-content">
+                  <p>Convierte 0,25 a fracción: 25/100 = 1/4</p>
+                </div>
+              </li>
+              <li>
+                <p>Calcula: √2,25</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> Ver pista
+                </button>
+                <div class="hint-content">
+                  <p>Multiplica por 100: 2,25 × 100 = 225, luego √225 = 15</p>
+                </div>
+              </li>
+              <li>
+                <p>Calcula: √0,64</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> Ver pista
+                </button>
+                <div class="hint-content">
+                  <p>0,64 × 100 = 64, √64 = 8, 8 ÷ 10 = 0,8</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  <script src="../js/raiz-cuadrada.js"></script>
+
+  <!-- Botón flotante para volver arriba -->
+  <button id="back-to-top" aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <script>
+    // Configuración del botón de volver arriba
+    document.addEventListener('DOMContentLoaded', function() {
+      const backToTopButton = document.getElementById('back-to-top');
+      
+      // Mostrar/ocultar botón al hacer scroll
+      function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
+      }
+      
+      // Mostrar el botón después de cargar la página
+      setTimeout(toggleBackToTop, 100);
+      
+      // Escuchar el evento de scroll
+      window.addEventListener('scroll', toggleBackToTop);
+      
+      // Hacer scroll suave al hacer clic
+      backToTopButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

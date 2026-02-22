@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Decimales y Fracciones - 3º ESO" data-lang-eu="Zenbaki Hamartarrak eta Frakzioak - 3.ESO">Decimales y Fracciones - 3º ESO</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-exchange-alt"></i>
+            <span data-lang-es="Decimales y Fracciones" data-lang-eu="Zenbaki Hamartarrak eta Frakzioak">Decimales y Fracciones</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="action-buttons">
+            <button class="button-secondary">
+                <i class="fas fa-pencil-alt"></i>
+                <span data-lang-es="Ejercicios" data-lang-eu="Ariketak">Ejercicios</span>
+            </button>
+            <button class="button-secondary">
+                <i class="fas fa-tools"></i>
+                <span data-lang-es="Herramienta" data-lang-eu="Tresna">Herramienta</span>
+            </button>
+        </div>
+
+        <h2 class="page-title" data-lang-es="Decimales y Fracciones" data-lang-eu="Zenbaki Hamartarrak eta Frakzioak">Decimales y Fracciones</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="Conversión de Fracción a Decimal" data-lang-eu="Frakziotik Hamartarrerako Bihurketa">Conversión de Fracción a Decimal</h3>
+            <p data-lang-es="Para convertir una fracción a decimal, dividimos el numerador entre el denominador. El resultado puede ser:"
+               data-lang-eu="Frakzio bat hamartarrera bihurtzeko, zenbakitzailea izendatzailean zatitzen dugu. Emaitza hau izan daiteke:">
+               Para convertir una fracción a decimal, dividimos el numerador entre el denominador. El resultado puede ser:
+            </p>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-stop-circle icon-concept"></i>
+                        <span data-lang-es="Decimal exacto (finito)" data-lang-eu="Hamartar zehatza (finitua)">Decimal exacto (finito)</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Cuando el denominador (después de simplificar) solo tiene factores 2 y/o 5, el decimal es finito."
+                           data-lang-eu="Izendatzaileak (sinplifikatu ondoren) soilik 2 eta/o 5 faktoreak baditu, hamartarra finitua da.">
+                           Cuando el denominador (después de simplificar) solo tiene factores 2 y/o 5, el decimal es finito.
+                        </p>
+                        <div class="example-box">
+                            <p data-lang-es="<b>Ejemplos:</b>"
+                               data-lang-eu="<b>Adibideak:</b>">
+                               <b>Ejemplos:</b>
+                            </p>
+                            <ul>
+                                <li>\\[ \\frac{3}{4} = 0.75 \\]</li>
+                                <li>\\[ \\frac{7}{8} = 0.875 \\]</li>
+                                <li>\\[ \\frac{1}{5} = 0.2 \\]</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-redo icon-concept"></i>
+                        <span data-lang-es="Decimal periódico" data-lang-eu="Hamartar periodikoa">Decimal periódico</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Cuando el denominador (después de simplificar) tiene factores primos distintos de 2 y 5, el decimal es infinito y periódico."
+                           data-lang-eu="Izendatzaileak (sinplifikatu ondoren) 2 eta 5 ez diren faktore primuak baditu, hamartarra infinitu eta periodikoa da.">
+                           Cuando el denominador (después de simplificar) tiene factores primos distintos de 2 y 5, el decimal es infinito y periódico.
+                        </p>
+                        
+                        <div class="sub-accordion">
+                            <div class="accordion-item">
+                                <button class="accordion-header" aria-expanded="false">
+                                    <i class="fas fa-infinity icon-concept"></i>
+                                    <span data-lang-es="Periódico puro" data-lang-eu="Periodiko puroa">Periódico puro</span>
+                                    <i class="fas fa-chevron-down icon-toggle"></i>
+                                </button>
+                                <div class="accordion-content">
+                                    <p data-lang-es="El período comienza inmediatamente después de la coma decimal."
+                                       data-lang-eu="Periodoa koma hamartarraren ondoren berehala hasten da.">
+                                       El período comienza inmediatamente después de la coma decimal.
+                                    </p>
+                                    <div class="example-box">
+                                        <p data-lang-es="<b>Ejemplos:</b>"
+                                           data-lang-eu="<b>Adibideak:</b>">
+                                           <b>Ejemplos:</b>
+                                        </p>
+                                        <ul>
+                                            <li>\\[ \\frac{1}{3} = 0.\\overline{3} = 0.333... \\]</li>
+                                            <li>\\[ \\frac{2}{11} = 0.\\overline{18} = 0.181818... \\]</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <button class="accordion-header" aria-expanded="false">
+                                    <i class="fas fa-list-ol icon-concept"></i>
+                                    <span data-lang-es="Periódico mixto" data-lang-eu="Periodiko nahasia">Periódico mixto</span>
+                                    <i class="fas fa-chevron-down icon-toggle"></i>
+                                </button>
+                                <div class="accordion-content">
+                                    <p data-lang-es="Hay cifras no periódicas (anteperíodo) antes del período."
+                                       data-lang-eu="Periodo aurretik diren zenbaki ez-periodikoak (aurre-periodoa) daude.">
+                                       Hay cifras no periódicas (anteperíodo) antes del período.
+                                    </p>
+                                    <div class="example-box">
+                                        <p data-lang-es="<b>Ejemplos:</b>"
+                                           data-lang-eu="<b>Adibideak:</b>">
+                                           <b>Ejemplos:</b>
+                                        </p>
+                                        <ul>
+                                            <li>\\[ \\frac{5}{6} = 0.8\\overline{3} = 0.8333... \\]</li>
+                                            <li>\\[ \\frac{7}{12} = 0.58\\overline{3} = 0.58333... \\]</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Conversión de Decimal a Fracción" data-lang-eu="Hamartarretik Frakziorako Bihurketa">Conversión de Decimal a Fracción</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-stop-circle icon-concept"></i>
+                        <span data-lang-es="Decimal exacto a fracción" data-lang-eu="Hamartar zehatza frakzio">Decimal exacto a fracción</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Para convertir un decimal exacto a fracción, escribimos como numerador el número sin coma y como denominador la potencia de 10 correspondiente al número de cifras decimales."
+                           data-lang-eu="Hamartar zehatz bat frakzio bihurtzeko, koma gabe zenbakia zenbakitzaile gisa idatziz eta hamartar zifra kopuruaren arabera 10-en potentzia izendatzaile gisa.">
+                           Para convertir un decimal exacto a fracción, escribimos como numerador el número sin coma y como denominador la potencia de 10 correspondiente al número de cifras decimales.
+                        </p>
+                        
+                        <div class="example-box">
+                            <h4 data-lang-es="Ejemplos" data-lang-eu="Adibideak">Ejemplos</h4>
+                            <ul>
+                                <li>
+                                    <p data-lang-es="0.75 → escribir 75 en el numerador y 100 en el denominador (2 cifras decimales = 10²)"
+                                       data-lang-eu="0.75 → 75 zenbakitzailean eta 100 izendatzailean idatzi (2 hamartar zifra = 10²)">
+                                       0.75 → escribimos 75/100 y simplificamos a 3/4
+                                    </p>
+                                    <p class="formula">\\[ 0.75 = \\frac{75}{100} = \\frac{3}{4} \\]</p>
+                                </li>
+                                <li>
+                                    <p data-lang-es="0.125 → 125/1000 = 1/8"
+                                       data-lang-eu="0.125 → 125/1000 = 1/8">
+                                       0.125 → 125/1000 y simplificamos a 1/8
+                                    </p>
+                                    <p class="formula">\\[ 0.125 = \\frac{125}{1000} = \\frac{1}{8} \\]</p>
+                                </li>
+                                <li>
+                                    <p data-lang-es="1.6 → 16/10 = 8/5"
+                                       data-lang-eu="1.6 → 16/10 = 8/5">
+                                       1.6 → 16/10 y simplificamos a 8/5
+                                    </p>
+                                    <p class="formula">\\[ 1.6 = \\frac{16}{10} = \\frac{8}{5} \\]</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-infinity icon-concept"></i>
+                        <span data-lang-es="Decimal periódico puro a fracción" data-lang-eu="Hamartar periodikoa frakzio">Decimal periódico puro a fracción</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Para convertir un decimal periódico puro a fracción, usamos el siguiente procedimiento:"
+                           data-lang-eu="Hamartar periodikoa frakzio bihurtzeko, honako prozedura erabiltzen dugu:">
+                           Para convertir un decimal periódico puro a fracción, usamos el siguiente procedimiento:
+                        </p>
+                        
+                        <div class="formula-box">
+                            <h4 data-lang-es="Regla" data-lang-eu="Erregela">Regla</h4>
+                            <p class="formula">
+                                \\[ 0.\\overline{ab} = \\frac{ab}{99} \\]
+                            </p>
+                            <p data-lang-es="Donde 'ab' es el período (un número con tantas cifras como tenga el período)"
+                               data-lang-eu="'ab' periodoaren zifra kopuruarekin zenbakia da">
+                               Donde 'ab' es el período (un número con tantas cifras como tenga el período)
+                            </p>
+                        </div>
+
+                        <div class="steps-box">
+                            <h4 data-lang-es="Método paso a paso:" data-lang-eu="Pausoz pauso metodoa:">Método paso a paso:</h4>
+                            <ol>
+                                <li data-lang-es="Llamar al número x"
+                                    data-lang-eu="Zenbakia x deitu">
+                                    Llamar al número x
+                                </li>
+                                <li data-lang-es="Multiplicar por 10ⁿ donde n es el número de cifras del período"
+                                    data-lang-eu="10ⁿ-ekin biderkatu non n periodoko zifra kopurua den">
+                                    Multiplicar por 10ⁿ donde n es el número de cifras del período
+                                </li>
+                                <li data-lang-es="Restar la ecuación original"
+                                    data-lang-eu="Jatorrizko ekuazioa kendu">
+                                    Restar la ecuación original
+                                </li>
+                                <li data-lang-es="Despejar x"
+                                    data-lang-eu="x askatu">
+                                    Despejar x
+                                </li>
+                            </ol>
+                        </div>
+
+                        <div class="example-box">
+                            <h4 data-lang-es="Ejemplo: Convertir \\(0.\\overline{3}\\) a fracción"
+                                data-lang-eu="Adibidea: \\(0.\\overline{3}\\) frakzio bihurtu">Ejemplo: Convertir \\(0.\\overline{3}\\) a fracción</h4>
+                            <p class="example-step">
+                                <strong>Paso 1:</strong> Sea \\(x = 0.\\overline{3} = 0.333...\\)
+                            </p>
+                            <p class="example-step">
+                                <strong>Paso 2:</strong> Multiplicamos por 10 (una cifra en el período): \\(10x = 3.333...\\)
+                            </p>
+                            <p class="example-step">
+                                <strong>Paso 3:</strong> Restamos: \\(10x - x = 3.333... - 0.333...\\)
+                            </p>
+                            <p class="example-step">
+                                \\(9x = 3\\)
+                            </p>
+                            <p class="example-step">
+                                <strong>Paso 4:</strong> \\(x = \\frac{3}{9} = \\frac{1}{3}\\)
+                            </p>
+                            <p class="conclusion">
+                                <strong data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</strong> \\[ 0.\\overline{3} = \\frac{1}{3} \\]
+                            </p>
+                        </div>
+
+                        <div class="example-box">
+                            <h4 data-lang-es="Ejemplo: Convertir \\(0.\\overline{18}\\) a fracción"
+                                data-lang-eu="Adibidea: \\(0.\\overline{18}\\) frakzio bihurtu">Ejemplo: Convertir \\(0.\\overline{18}\\) a fracción</h4>
+                            <p class="example-step">
+                                <strong>Paso 1:</strong> Sea \\(x = 0.\\overline{18} = 0.181818...\\)
+                            </p>
+                            <p class="example-step">
+                                <strong>Paso 2:</strong> Multiplicamos por 100 (dos cifras en el período): \\(100x = 18.181818...\\)
+                            </p>
+                            <p class="example-step">
+                                <strong>Paso 3:</strong> Restamos: \\(100x - x = 18.181818... - 0.181818...\\)
+                            </p>
+                            <p class="example-step">
+                                \\(99x = 18\\)
+                            </p>
+                            <p class="example-step">
+                                <strong>Paso 4:</strong> \\(x = \\frac{18}{99} = \\frac{2}{11}\\)
+                            </p>
+                            <p class="conclusion">
+                                <strong data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</strong> \\[ 0.\\overline{18} = \\frac{2}{11} \\]
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-list-ol icon-concept"></i>
+                        <span data-lang-es="Decimal periódico mixto a fracción" data-lang-eu="Hamartar periodiko nahasia frakzio">Decimal periódico mixto a fracción</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Para convertir un decimal periódico mixto a fracción, el procedimiento es similar pero más complejo."
+                           data-lang-eu="Hamartar periodiko nahasia frakzio bihurtzeko, prozedura antzekoa baina konplexuagoa da.">
+                           Para convertir un decimal periódico mixto a fracción, el procedimiento es similar pero más complejo.
+                        </p>
+                        
+                        <div class="formula-box">
+                            <h4 data-lang-es="Regla" data-lang-eu="Erregela">Regla</h4>
+                            <p class="formula">
+                                \\[ 0.ab\\overline{c} = \\frac{abc - ab}{990} \\]
+                            </p>
+                            <p data-lang-es="Donde 'ab' son las cifras no periódicas y 'c' el período"
+                               data-lang-eu="'ab' ez-periodikoak diren zifrak eta 'c' periodoarenak">
+                               Donde 'ab' son las cifras no periódicas y 'c' el período
+                            </p>
+                        </div>
+
+                        <div class="example-box">
+                            <h4 data-lang-es="Ejemplo: Convertir \\(0.8\\overline{3}\\) a fracción"
+                                data-lang-eu="Adibidea: \\(0.8\\overline{3}\\) frakzio bihurtu">Ejemplo: Convertir \\(0.8\\overline{3}\\) a fracción</h4>
+                            <p class="example-step">
+                                <strong>Paso 1:</strong> Sea \\(x = 0.8\\overline{3} = 0.8333...\\)
+                            </p>
+                            <p class="example-step">
+                                <strong>Paso 2:</strong> Multiplicamos por 10 (para separar el anteperíodo): \\(10x = 8.333...\\)
+                            </p>
+                            <p class="example-step">
+                                <strong>Paso 3:</strong> Multiplicamos por 100 (una cifra en el período): \\(100x = 83.333...\\)
+                            </p>
+                            <p class="example-step">
+                                <strong>Paso 4:</strong> Restamos: \\(100x - 10x = 83.333... - 8.333...\\)
+                            </p>
+                            <p class="example-step">
+                                \\(90x = 75\\)
+                            </p>
+                            <p class="example-step">
+                                <strong>Paso 5:</strong> \\(x = \\frac{75}{90} = \\frac{5}{6}\\)
+                            </p>
+                            <p class="conclusion">
+                                <strong data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</strong> \\[ 0.8\\overline{3} = \\frac{5}{6} \\]
+                            </p>
+                        </div>
+
+                        <div class="example-box">
+                            <h4 data-lang-es="Ejemplo: Convertir \\(0.58\\overline{3}\\) a fracción"
+                                data-lang-eu="Adibidea: \\(0.58\\overline{3}\\) frakzio bihurtu">Ejemplo: Convertir \\(0.58\\overline{3}\\) a fracción</h4>
+                            <p class="example-step">
+                                <strong>Paso 1:</strong> Sea \\(x = 0.58\\overline{3} = 0.58333...\\)
+                            </p>
+                            <p class="example-step">
+                                <strong>Paso 2:</strong> \\(10x = 5.8333...\\) (anteperíodo de 2 cifras)
+                            </p>
+                            <p class="example-step">
+                                <strong>Paso 3:</strong> \\(1000x = 583.333...\\) (anteperíodo + período = 3 cifras)
+                            </p>
+                            <p class="example-step">
+                                <strong>Paso 4:</strong> Restamos: \\(1000x - 10x = 583.333... - 5.833...\\)
+                            </p>
+                            <p class="example-step">
+                                \\(990x = 577.5\\) → corregimos: \\(990x = 5775 - 58 = 5717\\)
+                            </p>
+                            <p class="example-step">
+                                <strong>Paso 5:</strong> \\(x = \\frac{5717}{9900}\\) que simplificamos a \\(\\frac{7}{12}\\)
+                            </p>
+                            <p class="conclusion">
+                                <strong data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</strong> \\[ 0.58\\overline{3} = \\frac{7}{12} \\]
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Clasificación de Decimales" data-lang-eu="Hamartarren Sailkapena">Clasificación de Decimales</h3>
+            
+            <div class="classification-box">
+                <div class="type-card">
+                    <h4><i class="fas fa-stop-circle"></i> <span data-lang-es="Decimal Exacto" data-lang-eu="Hamartar Zehatza">Decimal Exacto</span></h4>
+                    <p data-lang-es="El resultado de la división termina."
+                       data-lang-eu="Zatiketaren emaitza amaitzen da.">
+                       El resultado de la división termina.
+                    </p>
+                    <p class="example">0.75, 0.125, 1.6</p>
+                    <p data-lang-es="<b>Fracción:</b> Denominador con solo factores 2 y/o 5"
+                       data-lang-eu="<b>Frakzioa:</b> Izendatzaileak soilik 2 eta/o 5 faktoreak ditu">
+                       <b>Fracción:</b> Denominador con solo factores 2 y/o 5
+                    </p>
+                </div>
+
+                <div class="type-card">
+                    <h4><i class="fas fa-infinity"></i> <span data-lang-es="Periódico Puro" data-lang-eu="Periodiko Puroa">Periódico Puro</span></h4>
+                    <p data-lang-es="El período empieza inmediatamente después de la coma."
+                       data-lang-eu="Periodoa koma ondoren berehala hasten da.">
+                       El período empieza inmediatamente después de la coma.
+                    </p>
+                    <p class="example">0.\(\overline{3}\), 0.\(\overline{18}\)</p>
+                    <p data-lang-es="<b>Fracción:</b> Denominador sin factores 2 ni 5"
+                       data-lang-eu="<b>Frakzioa:</b> Izendatzaileak ez 2 ez 5 faktorerik ez du">
+                       <b>Fracción:</b> Denominador sin factores 2 ni 5
+                    </p>
+                </div>
+
+                <div class="type-card">
+                    <h4><i class="fas fa-list-ol"></i> <span data-lang-es="Periódico Mixto" data-lang-eu="Periodiko Nahasia">Periódico Mixto</span></h4>
+                    <p data-lang-es="Hay cifras antes del período."
+                       data-lang-eu="Periodo aurretik zifrak daude.">
+                       Hay cifras antes del período.
+                    </p>
+                    <p class="example">0.8\(\overline{3}\), 0.58\(\overline{3}\)</p>
+                    <p data-lang-es="<b>Fracción:</b> Denominador con factores 2 y/o 5, y otros factores"
+                       data-lang-eu="<b>Frakzioa:</b> Izendatzaileak 2 eta/o 5 faktoreak eta beste faktore batzuk ditu">
+                       <b>Fracción:</b> Denominador con factores 2 y/o 5, y otros factores
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section warning-box">
+            <h3><i class="fas fa-exclamation-triangle"></i> <span data-lang-es="Errores Típicos" data-lang-eu="Akats Ohikoak">Errores Típicos</span></h3>
+            <ul>
+                <li data-lang-es="<b>Confundir el período:</b> En 0.12\(\overline{3}\) el período es 3, no 123"
+                   data-lang-eu="<b>Periodoa nahastea:</b> 0.12\(\overline{3}\)-an periodoa 3 da, ez 123">
+                   <b>Confundir el período:</b> En 0.12\(\overline{3}\) el período es 3, no 123
+                </li>
+                <li data-lang-es="<b>No simplificar:</b> Siempre debemos simplificar la fracción resultante hasta su forma irreducible"
+                   data-lang-eu="<b>Ez sinplifikatzea:</b> Beti sinplifikatu behar dugu emaitza frakzioa biderkaezina izan arte">
+                   <b>No simplificar:</b> Siempre debemos simplificar la fracción resultante hasta su forma irreducible
+                </li>
+                <li data-lang-es="<b>Error en multiplicaciones:</b> Al convertir periódicos mixtos, hay que multiplicar por la potencia de 10 correcta"
+                   data-lang-eu="<b>Biderketa akatsak:</b> Periodikoak bihurtzean, 10-en potentzia zuzena erabili behar da">
+                   <b>Error en multiplicaciones:</b> Al convertir periódicos mixtos, hay que multiplicar por la potencia de 10 correcta
+                </li>
+                <li data-lang-es="<b>Restar mal:</b> En el paso de resta, tenemos que restar la versión original sin la coma desplazada"
+                   data-lang-eu="<b>Kendu akatsak:</strong> Kenketa pausuan, koma desplazatu gabe bertsioa kendu behar dugu">
+                   <b>Restar mal:</b> En el paso de resta, tenemos que restar la versión original sin la coma desplazada
+                </li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Resumen de Fórmulas" data-lang-eu="Formulen Laburpena">Resumen de Fórmulas</h3>
+            
+            <div class="formula-summary">
+                <div class="formula-item">
+                    <h4 data-lang-es="Decimal exacto" data-lang-eu="Hamartar zehatza">Decimal exacto</h4>
+                    <p>\\[ 0.abc = \\frac{abc}{10^n} \\]</p>
+                    <p class="formula-note" data-lang-es="donde n es el número de cifras decimales"
+                       data-lang-eu="n non hamartar zifra kopurua den">
+                       donde n es el número de cifras decimales
+                    </p>
+                </div>
+
+                <div class="formula-item">
+                    <h4 data-lang-es="Periódico puro" data-lang-eu="Periodiko pura">Periódico puro</h4>
+                    <p>\\[ 0.\\overline{ab} = \\frac{ab}{99} \\]</p>
+                    <p class="formula-note" data-lang-es="donde ab es el período"
+                       data-lang-eu="ab non periodoaren zifrak diren">
+                       donde ab es el período
+                    </p>
+                </div>
+
+                <div class="formula-item">
+                    <h4 data-lang-es="Periódico mixto" data-lang-eu="Periodiko nahasia">Periódico mixto</h4>
+                    <p>\\[ 0.ab\\overline{c} = \\frac{abc - ab}{990} \\]</p>
+                    <p class="formula-note" data-lang-es="donde ab son cifras no periódicas y c el período"
+                       data-lang-eu="ab ez-periodikoak diren zifrak eta c periodoarenak">
+                       donde ab son cifras no periódicas y c el período
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

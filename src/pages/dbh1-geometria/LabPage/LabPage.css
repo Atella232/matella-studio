@@ -1,0 +1,403 @@
+.dbh1-geometria-lab {
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    background: var(--bg-main);
+    background-image: var(--bg-pattern);
+    color: var(--text-main);
+
+    --accent-primary: #00d2ff;
+    --accent-secondary: #00ff88;
+    --accent-tertiary: #10b981;
+}
+
+.dbh1-geometria-lab .container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.dbh1-geometria-lab .page-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.dbh1-geometria-lab .back-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.dbh1-geometria-lab .back-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-4px);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+}
+
+.dbh1-geometria-lab .title-container {
+    flex: 1;
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.dbh1-geometria-lab .title-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+}
+
+.dbh1-geometria-lab .title-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #fff, var(--accent-secondary));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+}
+
+.dbh1-geometria-lab .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+}
+
+.dbh1-geometria-lab .lab-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+.dbh1-geometria-lab .streak-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    background: rgba(255, 165, 0, 0.1);
+    border: 1px solid rgba(255, 165, 0, 0.3);
+    box-shadow: 0 0 20px rgba(255, 165, 0, 0.2);
+}
+
+.dbh1-geometria-lab .streak-icon {
+    font-size: 1.5rem;
+}
+
+.dbh1-geometria-lab .streak-count {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #FFA500;
+    text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+}
+
+.dbh1-geometria-lab .streak-label {
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.dbh1-geometria-lab .lab-tool-card {
+    width: 100%;
+    padding: 2.5rem;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.dbh1-geometria-lab .tool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
+}
+
+.dbh1-geometria-lab .tool-header h3 {
+    font-size: 1.5rem;
+    color: var(--accent-secondary);
+    margin: 0;
+}
+
+.dbh1-geometria-lab .btn-icon {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-main);
+    padding: 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dbh1-geometria-lab .btn-icon:hover {
+    background: rgba(0, 210, 255, 0.1);
+    border-color: var(--accent-secondary);
+    color: var(--accent-secondary);
+    transform: rotate(15deg);
+}
+
+.dbh1-geometria-lab .problem-play-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.dbh1-geometria-lab .shape-visualization {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid rgba(0, 210, 255, 0.2);
+}
+
+.dbh1-geometria-lab .shape-icon {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.dbh1-geometria-lab .shape-icon.square {
+    width: 100px;
+    height: 100px;
+}
+
+.dbh1-geometria-lab .shape-icon.rectangle {
+    width: 140px;
+    height: 80px;
+}
+
+.dbh1-geometria-lab .shape-icon.triangle {
+    width: 0;
+    height: 0;
+    background: transparent;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+    border-bottom: 100px solid var(--accent-secondary);
+    box-shadow: none;
+    filter: drop-shadow(0 0 15px rgba(0, 255, 136, 0.3));
+}
+
+.dbh1-geometria-lab .shape-icon.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.dbh1-geometria-lab .dimensions-labels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.dbh1-geometria-lab .dimensions-labels span {
+    font-family: monospace;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+}
+
+.dbh1-geometria-lab .problem-instruction {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.dbh1-geometria-lab .input-area {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 2rem;
+    font-family: monospace;
+}
+
+.dbh1-geometria-lab .area-label {
+    color: var(--accent-tertiary);
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+}
+
+.dbh1-geometria-lab .unit-label {
+    color: var(--text-muted);
+}
+
+.dbh1-geometria-lab .answer-input {
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 2rem;
+    font-family: monospace;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    width: 140px;
+    text-align: center;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.dbh1-geometria-lab .answer-input:focus {
+    border-color: var(--accent-secondary);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+}
+
+.dbh1-geometria-lab .answer-input.success {
+    border-color: var(--quiz-feedback-correct-border);
+    box-shadow: 0 0 15px var(--quiz-feedback-correct-border);
+    color: var(--quiz-feedback-correct-text);
+}
+
+.dbh1-geometria-lab .answer-input.error {
+    border-color: var(--quiz-feedback-incorrect-border);
+    box-shadow: 0 0 15px var(--quiz-feedback-incorrect-border);
+    color: var(--quiz-feedback-incorrect-text);
+}
+
+.dbh1-geometria-lab .action-buttons {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+.dbh1-geometria-lab .btn-primary,
+.dbh1-geometria-lab .btn-secondary {
+    flex: 1;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.dbh1-geometria-lab .btn-primary {
+    background: var(--accent-secondary);
+    color: #000;
+    border: none;
+}
+
+.dbh1-geometria-lab .btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
+}
+
+.dbh1-geometria-lab .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.dbh1-geometria-lab .btn-secondary {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dbh1-geometria-lab .btn-secondary:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-primary);
+}
+
+.dbh1-geometria-lab .btn-secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.dbh1-geometria-lab .feedback-message {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.dbh1-geometria-lab .feedback-message span {
+    font-weight: 500;
+}
+
+.dbh1-geometria-lab .glass-success {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #10b981;
+}
+
+.dbh1-geometria-lab .glass-error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.dbh1-geometria-lab .solution-box {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(0, 210, 255, 0.05);
+    border: 1px solid rgba(0, 210, 255, 0.2);
+    border-radius: 12px;
+}
+
+.dbh1-geometria-lab .solution-box h4 {
+    color: var(--accent-primary);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.dbh1-geometria-lab .solution-steps p {
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+    font-family: monospace;
+    font-size: 1.1rem;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+.w-full {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .dbh1-geometria-lab .page-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.5rem;
+    }
+
+    .dbh1-geometria-lab .title-container h1 {
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,454 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="Operaciones con números decimales" data-lang-eu="Zenbaki hamartarrekin eragiketak">Operaciones con números decimales</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <i class="fas fa-calculator"></i>
+      <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
+    </nav>
+  </header>
+  
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol>
+      <li><a href="../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
+      <li><a href="../index.html" data-lang-es="Sistema decimal y sexagesimal" data-lang-eu="Sistema hamartarra eta sexagesimala">Sistema decimal y sexagesimal</a></li>
+      <li class="active" aria-current="page"><span data-lang-es="Operaciones con números decimales" data-lang-eu="Zenbaki hamartarrekin eragiketak">Operaciones con números decimales</span></li>
+    </ol>
+  </nav>
+  
+  <main>
+    <h1 data-lang-es="Operaciones con números decimales" data-lang-eu="Zenbaki hamartarrekin eragiketak">Operaciones con números decimales</h1>
+    
+    <section class="content-section">
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="true">
+            <i class="fas fa-plus icon-concept"></i>
+            <span data-lang-es="Suma de números decimales" data-lang-eu="Zenbaki hamartarren batuketa">Suma de números decimales</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content" style="max-height: none;">
+            <p data-lang-es="Para sumar números decimales, seguimos estos pasos:" data-lang-eu="Zenbaki hamartarrak batutzeko, urrats hauek jarraitzen ditugu:">Para sumar números decimales, seguimos estos pasos:</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: Sumar 3,45 + 2,78" data-lang-eu="Adibidea: 3,45 + 2,78 batutu">Ejemplo: Sumar 3,45 + 2,78</h4>
+              <div class="solution">
+                <strong data-lang-es="Paso 1:" data-lang-eu="1. urratsa:">Paso 1:</strong> <span data-lang-es="Alinear las comas decimales" data-lang-eu="Lerrokatzen koma hamartarrak">Alinear las comas decimales</span>
+                <ul>
+                  <li><span>3,45</span></li>
+                  <li><span>+ 2,78</span></li>
+                  <li><span>------</span></li>
+                </ul>
+                <strong data-lang-es="Paso 2:" data-lang-eu="2. urratsa:">Paso 2:</strong> <span data-lang-es="Sumar como si fueran números naturales" data-lang-eu="Batutu zenbaki naturalak balira bezala">Sumar como si fueran números naturales</span>
+                <ul>
+                  <li><span>3,45</span></li>
+                  <li><span>+ 2,78</span></li>
+                  <li><span>------</span></li>
+                  <li><span>6,23</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="interactive-idea card-style">
+              <h4><i class="fas fa-lightbulb"></i> <span data-lang-es="Idea Interactiva" data-lang-eu="Ideia Interaktiboa">Idea Interactiva</span></h4>
+              <p data-lang-es="Imagina que estás sumando dinero: 3 euros y 45 céntimos más 2 euros y 78 céntimos. Primero sumas los euros, luego los céntimos." data-lang-eu="Imajinatu dirua batzen ari zarela: 3 euro eta 45 zentimo gehi 2 euro eta 78 zentimo. Lehenik euroak batzen dituzu, gero zentimoak.">Imagina que estás sumando dinero: 3 euros y 45 céntimos más 2 euros y 78 céntimos. Primero sumas los euros, luego los céntimos.</p>
+              <div class="tool-objective">
+                <strong data-lang-es="Objetivo:" data-lang-eu="Helburua:">Objetivo:</strong> <span data-lang-es="Entender la suma de decimales como suma de partes enteras y decimales" data-lang-eu="Ulertu hamartarren batuketa zati osoen eta hamartarren batuketa gisa">Entender la suma de decimales como suma de partes enteras y decimales</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-minus icon-concept"></i>
+            <span data-lang-es="Resta de números decimales" data-lang-eu="Zenbaki hamartarren kenketa">Resta de números decimales</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="La resta de números decimales se realiza de manera similar a la suma, pero restando." data-lang-eu="Zenbaki hamartarren kenketa batuketaren modu antzera egiten da, baina kenduz.">La resta de números decimales se realiza de manera similar a la suma, pero restando.</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: Restar 5,67 - 2,34" data-lang-eu="Adibidea: 5,67 - 2,34 kendu">Ejemplo: Restar 5,67 - 2,34</h4>
+              <div class="solution">
+                <strong data-lang-es="Paso 1:" data-lang-eu="1. urratsa:">Paso 1:</strong> <span data-lang-es="Alinear las comas decimales" data-lang-eu="Lerrokatzen koma hamartarrak">Alinear las comas decimales</span>
+                <ul>
+                  <li><span>5,67</span></li>
+                  <li><span>- 2,34</span></li>
+                  <li><span>------</span></li>
+                </ul>
+                <strong data-lang-es="Paso 2:" data-lang-eu="2. urratsa:">Paso 2:</strong> <span data-lang-es="Restar como si fueran números naturales" data-lang-eu="Kendu zenbaki naturalak balira bezala">Restar como si fueran números naturales</span>
+                <ul>
+                  <li><span>5,67</span></li>
+                  <li><span>- 2,34</span></li>
+                  <li><span>------</span></li>
+                  <li><span>3,33</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: Restar 4,50 - 1,75" data-lang-eu="Adibidea: 4,50 - 1,75 kendu">Ejemplo: Restar 4,50 - 1,75</h4>
+              <p data-lang-es="<strong>Paso 1:</strong> Alinear y añadir ceros si es necesario" data-lang-eu="<strong>1. urratsa:</strong> Lerrokatzen eta gehitu zeroak beharrezkoa bada"><strong>Paso 1:</strong> Alinear y añadir ceros si es necesario</p>
+              <div class="solution">
+                <ul>
+                  <li><span>4,50</span></li>
+                  <li><span>- 1,75</span></li>
+                  <li><span>------</span></li>
+                </ul>
+                <strong data-lang-es="Paso 2:" data-lang-eu="2. urratsa:">Paso 2:</strong> <span data-lang-es="Restar (si es necesario, pedir prestado)" data-lang-eu="Kendu (beharrezkoa bada, maileguan eskatu)">Restar (si es necesario, pedir prestado)</span>
+                <ul>
+                  <li><span>4,50</span></li>
+                  <li><span>- 1,75</span></li>
+                  <li><span>------</span></li>
+                  <li><span>2,75</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-times icon-concept"></i>
+            <span data-lang-es="Multiplicación de números decimales" data-lang-eu="Zenbaki hamartarren biderketa">Multiplicación de números decimales</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Para multiplicar números decimales, multiplicamos como si fueran números naturales y luego colocamos la coma decimal." data-lang-eu="Zenbaki hamartarrak biderkatzeko, zenbaki naturalak balira bezala biderkatzen ditugu eta gero koma hamartarra jartzen dugu.">Para multiplicar números decimales, multiplicamos como si fueran números naturales y luego colocamos la coma decimal.</p>
+            
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: Multiplicar 2,5 × 1,3" data-lang-eu="Adibidea: 2,5 × 1,3 biderkatu">Ejemplo: Multiplicar 2,5 × 1,3</h4>
+              <div class="solution">
+                <strong data-lang-es="Paso 1:" data-lang-eu="1. urratsa:">Paso 1:</strong> <span data-lang-es="Multiplicar sin considerar las comas" data-lang-eu="Biderkatu komak kontuan hartu gabe">Multiplicar sin considerar las comas</span>
+                <ul>
+                  <li><span>25 × 13 = 325</span></li>
+                </ul>
+                <strong data-lang-es="Paso 2:" data-lang-eu="2. urratsa:">Paso 2:</strong> <span data-lang-es="Contar decimales en total" data-lang-eu="Guztira hamartarren zenbaketa">Contar decimales en total</span>
+                <ul>
+                  <li><span>2,5</span> <span data-lang-es="tiene 1 decimal" data-lang-eu="1 hamartar du">tiene 1 decimal</span></li>
+                  <li><span>1,3</span> <span data-lang-es="tiene 1 decimal" data-lang-eu="1 hamartar du">tiene 1 decimal</span></li>
+                  <li><span data-lang-es="Total:" data-lang-eu="Guztira:">Total:</span> 1 + 1 = 2 decimales</li>
+                </ul>
+                <strong data-lang-es="Paso 3:" data-lang-eu="3. urratsa:">Paso 3:</strong> <span data-lang-es="Colocar la coma contando desde la derecha" data-lang-eu="Jarri koma eskuinetik zenbatuz">Colocar la coma contando desde la derecha</span>
+                <ul>
+                  <li><span>325</span> → <span>3,25</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo: Multiplicar 0,4 × 0,6" data-lang-eu="Adibidea: 0,4 × 0,6 biderkatu">Ejemplo: Multiplicar 0,4 × 0,6</h4>
+              <div class="solution">
+                <strong data-lang-es="Paso 1:" data-lang-eu="1. urratsa:">Paso 1:</strong> 4 × 6 = 24
+                <strong data-lang-es="Paso 2:" data-lang-eu="2. urratsa:">Paso 2:</strong> <span data-lang-es="Total decimales:" data-lang-eu="Hamartarrak guztira:">Total decimales:</span> 1 + 1 = 2
+                <strong data-lang-es="Paso 3:" data-lang-eu="3. urratsa:">Paso 3:</strong> 24 → 0,24
+                <strong data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</strong> 0,4 × 0,6 = 0,24
+              </div>
+            </div>
+
+            <div class="variable-diagram">
+              <strong>Regla de la multiplicación de decimales</strong>
+              <div class="split">
+                <div class="category">
+                  <strong>Paso 1</strong>
+                  <div class="sub-split">
+                    <div class="sub-category">Multiplicar como naturales</div>
+                    <div class="sub-category">Ignorar las comas</div>
+                  </div>
+                </div>
+                <div class="category">
+                  <strong>Paso 2</strong>
+                  <div class="sub-split">
+                    <div class="sub-category">Contar decimales totales</div>
+                    <div class="sub-category">Sumar decimales de ambos</div>
+                  </div>
+                </div>
+                <div class="category">
+                  <strong>Paso 3</strong>
+                  <div class="sub-split">
+                    <div class="sub-category">Colocar la coma</div>
+                    <div class="sub-category">Contar desde la derecha</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-calculator icon-concept"></i>
+            <span data-lang-es="Calculadora de operaciones" data-lang-eu="Eragiketen kalkulagailua">Calculadora de operaciones</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Practica las operaciones con decimales usando esta calculadora interactiva:" data-lang-eu="Praktikatu hamartarrekin eragiketak kalkulagailu interaktibo hau erabiliz:">Practica las operaciones con decimales usando esta calculadora interactiva:</p>
+            
+            <div class="interactive-calculator">
+              <h5><i class="fas fa-calculator"></i> <span data-lang-es="Calculadora de Decimales" data-lang-eu="Hamartarren Kalkulagailua">Calculadora de Decimales</span></h5>
+              <div class="calc-input">
+                <label for="num1-input" data-lang-es="Primer número:" data-lang-eu="Lehen zenbakia:">Primer número:</label>
+                <textarea id="num1-input" placeholder="Ejemplo: 3.45"></textarea>
+                <label for="num2-input" data-lang-es="Segundo número:" data-lang-eu="Bigarren zenbakia:">Segundo número:</label>
+                <textarea id="num2-input" placeholder="Ejemplo: 2.78"></textarea>
+              </div>
+              <div class="calc-buttons">
+                <button onclick="calcular('suma')" data-lang-es="Suma (+)" data-lang-eu="Batuketa (+)">Suma (+)</button>
+                <button onclick="calcular('resta')" data-lang-es="Resta (-)" data-lang-eu="Kenketa (-)">Resta (-)</button>
+                <button onclick="calcular('multiplicacion')" data-lang-es="Multiplicación (×)" data-lang-eu="Biderketa (×)">Multiplicación (×)</button>
+                <button onclick="limpiarCalculadora()" data-lang-es="Limpiar" data-lang-eu="Garbitu">Limpiar</button>
+              </div>
+              <div class="calc-results">
+                <h6 data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</h6>
+                <p id="resultado-calculo"></p>
+                <h6 data-lang-es="Operación realizada:" data-lang-eu="Egin den eragiketa:">Operación realizada:</h6>
+                <p id="operacion-realizada"></p>
+              </div>
+              <div class="calc-note">
+                <i class="fas fa-info-circle"></i> <span data-lang-es="Usa punto (.) como separador decimal" data-lang-eu="Erabili puntua (.) banatzaile hamartar gisa">Usa punto (.) como separador decimal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-exclamation-triangle icon-concept"></i>
+            <span data-lang-es="Errores comunes" data-lang-eu="Akats ohikoenak">Errores comunes</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <p data-lang-es="Es importante evitar estos errores frecuentes al operar con decimales:" data-lang-eu="Garrantzitsua da hauek saihestea hamartarrekin eragiketak egitean:">Es importante evitar estos errores frecuentes al operar con decimales:</p>
+            
+            <div class="example-solved non-representative">
+              <h4 data-lang-es="Errores a evitar" data-lang-eu="Saihestu beharreko akatsak">Errores a evitar</h4>
+              <div class="solution">
+                <ul>
+                  <li><i class="fas fa-times"></i> <span data-lang-es="No alinear las comas decimales" data-lang-eu="Ez lerrokatzen koma hamartarrak">No alinear las comas decimales</span> - <span data-lang-es="Siempre alinea las comas antes de operar" data-lang-eu="Beti lerrokatzen komak eragiketak egin aurretik">Siempre alinea las comas antes de operar</span></li>
+                  <li><i class="fas fa-times"></i> <span data-lang-es="Olvidar contar los decimales en multiplicación" data-lang-eu="Ahaztu hamartarren zenbaketa biderketan">Olvidar contar los decimales en multiplicación</span> - <span data-lang-es="Cuenta el total de decimales" data-lang-eu="Zenbatzen hamartarren guztira">Cuenta el total de decimales</span></li>
+                  <li><i class="fas fa-times"></i> <span data-lang-es="No añadir ceros cuando sea necesario" data-lang-eu="Ez gehitu zeroak beharrezkoa denean">No añadir ceros cuando sea necesario</span> - <span data-lang-es="Añade ceros para igualar decimales" data-lang-eu="Gehitu zeroak hamartarrak berdintzeko">Añade ceros para igualar decimales</span></li>
+                  <li><i class="fas fa-times"></i> <span data-lang-es="Confundir la posición de la coma en el resultado" data-lang-eu="Nahastu komaren posizioa emaitzan">Confundir la posición de la coma en el resultado</span> - <span data-lang-es="Cuenta desde la derecha" data-lang-eu="Zenbatzen eskuinetik">Cuenta desde la derecha</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="example-solved">
+              <h4 data-lang-es="Ejemplo correcto vs incorrecto" data-lang-eu="Adibide zuzena vs okerra">Ejemplo correcto vs incorrecto</h4>
+              <div class="solution">
+                <strong data-lang-es="Incorrecto:" data-lang-eu="Okerra:">Incorrecto:</strong>
+                <ul>
+                  <li><span>3,4</span></li>
+                  <li><span>+ 2,56</span></li>
+                  <li><span>------</span></li>
+                  <li><span>5,9</span> ← <span data-lang-es="¡Error! No se alinearon las comas" data-lang-eu="¡Akatsa! Ez ziren lerrokatu komak">¡Error! No se alinearon las comas</span></li>
+                </ul>
+                <strong data-lang-es="Correcto:" data-lang-eu="Zuzena:">Correcto:</strong>
+                <ul>
+                  <li><span>3,40</span> ← <span data-lang-es="Añadir cero" data-lang-eu="Gehitu zero">Añadir cero</span></li>
+                  <li><span>+ 2,56</span></li>
+                  <li><span>------</span></li>
+                  <li><span>5,96</span> ← <span data-lang-es="¡Correcto!" data-lang-eu="¡Zuzena!">¡Correcto!</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <i class="fas fa-list-ol icon-concept"></i>
+            <span data-lang-es="Ejercicios propuestos" data-lang-eu="Ariketak proposatuak">Ejercicios propuestos</span>
+            <i class="fas fa-chevron-down icon-toggle"></i>
+          </button>
+          <div class="accordion-content">
+            <ol class="exercises-list">
+              <li>
+                <p>Calcula: 4,25 + 2,78</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> Ver pista
+                </button>
+                <div class="hint-content">
+                  <p>Alinea las comas decimales y suma como números naturales</p>
+                </div>
+              </li>
+              <li>
+                <p>Calcula: 7,50 - 3,25</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> Ver pista
+                </button>
+                <div class="hint-content">
+                  <p>Recuerda alinear las comas y restar de derecha a izquierda</p>
+                </div>
+              </li>
+              <li>
+                <p>Calcula: 2,4 × 1,5</p>
+                <button class="toggle-hint-button" onclick="toggleHint(this)">
+                  <i class="fas fa-lightbulb"></i> Ver pista
+                </button>
+                <div class="hint-content">
+                  <p>Multiplica 24 × 15 y luego cuenta los decimales totales</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  
+  <script>
+    // Funcionalidad para la calculadora de decimales
+    function calcular(operacion) {
+      const num1Input = document.getElementById('num1-input').value.trim();
+      const num2Input = document.getElementById('num2-input').value.trim();
+      
+      if (!num1Input || !num2Input) {
+        alert('Por favor, introduce ambos números');
+        return;
+      }
+      
+      const num1 = parseFloat(num1Input);
+      const num2 = parseFloat(num2Input);
+      
+      if (isNaN(num1) || isNaN(num2)) {
+        alert('Por favor, introduce números válidos');
+        return;
+      }
+      
+      let resultado;
+      let operacionTexto;
+      
+      switch (operacion) {
+        case 'suma':
+          resultado = num1 + num2;
+          operacionTexto = `${num1} + ${num2}`;
+          break;
+        case 'resta':
+          resultado = num1 - num2;
+          operacionTexto = `${num1} - ${num2}`;
+          break;
+        case 'multiplicacion':
+          resultado = num1 * num2;
+          operacionTexto = `${num1} × ${num2}`;
+          break;
+        default:
+          return;
+      }
+      
+      document.getElementById('resultado-calculo').textContent = resultado.toFixed(4);
+      document.getElementById('operacion-realizada').textContent = operacionTexto;
+    }
+    
+    function limpiarCalculadora() {
+      document.getElementById('num1-input').value = '';
+      document.getElementById('num2-input').value = '';
+      document.getElementById('resultado-calculo').textContent = '';
+      document.getElementById('operacion-realizada').textContent = '';
+    }
+    
+    // Funcionalidad para mostrar/ocultar pistas
+    function toggleHint(button) {
+      const hintContent = button.nextElementSibling;
+      const isVisible = hintContent.classList.contains('visible');
+      
+      if (isVisible) {
+        hintContent.classList.remove('visible');
+        button.classList.remove('open');
+      } else {
+        hintContent.classList.add('visible');
+        button.classList.add('open');
+      }
+    }
+    
+    // Inicialización cuando se carga la página
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof initTheme === 'function') {
+        initTheme(document.body, document.getElementById('theme-toggle'));
+      }
+      if (typeof initLanguage === 'function') {
+        initLanguage(document.documentElement, document.querySelectorAll('[data-lang-es], [data-lang-eu]'), document.getElementById('lang-toggle'));
+      }
+    });
+  </script>
+
+  <!-- Botón flotante para volver arriba -->
+  <button id="back-to-top" aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <script>
+    // Configuración del botón de volver arriba
+    document.addEventListener('DOMContentLoaded', function() {
+      const backToTopButton = document.getElementById('back-to-top');
+      
+      // Mostrar/ocultar botón al hacer scroll
+      function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
+      }
+      
+      // Mostrar el botón después de cargar la página
+      setTimeout(toggleBackToTop, 100);
+      
+      // Escuchar el evento de scroll
+      window.addEventListener('scroll', toggleBackToTop);
+      
+      // Hacer scroll suave al hacer clic
+      backToTopButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

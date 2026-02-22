@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Operaciones con Fracciones - 3º ESO" data-lang-eu="Frakzioekin Eragiketak - 3.ESO">Operaciones con Fracciones - 3º ESO</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-calculator"></i>
+            <span data-lang-es="Operaciones con Fracciones" data-lang-eu="Frakzioekin Eragiketak">Operaciones con Fracciones</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="action-buttons">
+            <button class="button-secondary">
+                <i class="fas fa-pencil-alt"></i>
+                <span data-lang-es="Ejercicios" data-lang-eu="Ariketak">Ejercicios</span>
+            </button>
+            <button class="button-secondary">
+                <i class="fas fa-tools"></i>
+                <span data-lang-es="Herramienta" data-lang-eu="Tresna">Herramienta</span>
+            </button>
+        </div>
+
+        <h2 class="page-title" data-lang-es="Operaciones con Fracciones" data-lang-eu="Frakzioekin Eragiketak">Operaciones con Fracciones</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="Suma y Resta de Fracciones" data-lang-eu="Frakzioen Batura eta Kenketa">Suma y Resta de Fracciones</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-plus-circle icon-concept"></i>
+                        <span data-lang-es="Mismo denominador" data-lang-eu="Izendatzaile bera">Mismo denominador</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Cuando las fracciones tienen el mismo denominador, se suman o restan los numeradores y se mantiene el denominador común."
+                           data-lang-eu="Frakzioek izendatzaile bera dutenean, zenbakitzaileak batzen edo kendu egiten dira eta izendatzaile komunari eusten zaio.">
+                           Cuando las fracciones tienen el mismo denominador, se suman o restan los numeradores y se mantiene el denominador común.
+                        </p>
+                        <div class="formula-box">
+                            <p class="formula">
+                                \\[ \frac{a}{c} + \frac{b}{c} = \frac{a+b}{c} \\quad | \\quad \frac{a}{c} - \frac{b}{c} = \frac{a-b}{c} \\]
+                            </p>
+                        </div>
+                        <div class="example-box">
+                            <p data-lang-es="<b>Ejemplo:</b> \\(\\frac{2}{7} + \\frac{3}{7} = \\frac{2+3}{7} = \\frac{5}{7}\\)"
+                               data-lang-eu="<b>Adibidea:</b> \\(\\frac{2}{7} + \\frac{3}{7} = \\frac{2+3}{7} = \\frac{5}{7}\\)">
+                               <b>Ejemplo:</b> \\(\\frac{2}{7} + \\frac{3}{7} = \\frac{2+3}{7} = \\frac{5}{7}\\)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-not-equal icon-concept"></i>
+                        <span data-lang-es="Distinto denominador" data-lang-eu="Izendatzaile desberdinak">Distinto denominador</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Cuando las fracciones tienen distinto denominador, primero hay que encontrar el mínimo común múltiplo (mcm) de los denominadores para obtener un denominador común."
+                           data-lang-eu="Frakzioek izendatzaile desberdinak dituztenean, hasieran izendatzaile komun bat lortzeko gutxieneko zatitzaile komun (mzk) aurkitu behar da.">
+                           Cuando las fracciones tienen distinto denominador, primero hay que encontrar el mínimo común múltiplo (mcm) de los denominadores para obtener un denominador común.
+                        </p>
+                        
+                        <div class="steps-box">
+                            <h4 data-lang-es="Pasos a seguir:" data-lang-eu="Jarraitzeko pausoak:">Pasos a seguir:</h4>
+                            <ol>
+                                <li data-lang-es="Calcular el mcm de los denominadores"
+                                    data-lang-eu="Izendatzileen mzk kalkulatu">
+                                    Calcular el mcm de los denominadores
+                                </li>
+                                <li data-lang-es="Convertir cada fracción a denominador común"
+                                    data-lang-eu="Frakzio bakoitza izendatzaile komun bihurtu">
+                                    Convertir cada fracción a denominador común
+                                </li>
+                                <li data-lang-es="Sumar o restar los numeradores"
+                                    data-lang-eu="Zenbakitzaileak batu edo kendu">
+                                    Sumar o restar los numeradores
+                                </li>
+                                <li data-lang-es="Simplificar el resultado"
+                                    data-lang-eu="Emaitza sinplifikatu">
+                                    Simplificar el resultado
+                                </li>
+                            </ol>
+                        </div>
+
+                        <div class="example-box">
+                            <p data-lang-es="<b>Ejemplo:</b> \\(\\frac{1}{4} + \\frac{1}{6}\\)"
+                               data-lang-eu="<b>Adibidea:</b> \\(\\frac{1}{4} + \\frac{1}{6}\\)">
+                               <b>Ejemplo:</b> \\(\\frac{1}{4} + \\frac{1}{6}\\)
+                            </p>
+                            <p class="example-step">
+                                <strong data-lang-es="Paso 1:" data-lang-eu="1. Pausua:">Paso 1:</strong>
+                                <span data-lang-es=" mcm(4, 6) = 12"
+                                      data-lang-eu=" mzk(4, 6) = 12">
+                                      mcm(4, 6) = 12
+                                </span>
+                            </p>
+                            <p class="example-step">
+                                <strong data-lang-es="Paso 2:" data-lang-eu="2. Pausua:">Paso 2:</strong>
+                                <span data-lang-es=" Convertir: \\(\\frac{1}{4} = \\frac{1 \\times 3}{4 \\times 3} = \\frac{3}{12}\\) y \\(\\frac{1}{6} = \\frac{1 \\times 2}{6 \\times 2} = \\frac{2}{12}\\)"
+                                      data-lang-eu=" Bihurtu: \\(\\frac{1}{4} = \\frac{1 \\times 3}{4 \\times 3} = \\frac{3}{12}\\) eta \\(\\frac{1}{6} = \\frac{1 \\times 2}{6 \\times 2} = \\frac{2}{12}\\)">
+                                      Convertir: \\(\\frac{1}{4} = \\frac{3}{12}\\) y \\(\\frac{1}{6} = \\frac{2}{12}\\)
+                                </span>
+                            </p>
+                            <p class="example-step">
+                                <strong data-lang-es="Paso 3:" data-lang-eu="3. Pausua:">Paso 3:</strong>
+                                <span data-lang-es=" Sumar: \\(\\frac{3}{12} + \\frac{2}{12} = \\frac{5}{12}\\)"
+                                      data-lang-eu=" Batu: \\(\\frac{3}{12} + \\frac{2}{12} = \\frac{5}{12}\\)">
+                                      Sumar: \\(\\frac{3}{12} + \\frac{2}{12} = \\frac{5}{12}\\)
+                                </span>
+                            </p>
+                            <p class="conclusion">
+                                <strong data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</strong> \\(\\frac{1}{4} + \\frac{1}{6} = \\frac{5}{12}\\)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Multiplicación de Fracciones" data-lang-eu="Frakzioen Biderketa">Multiplicación de Fracciones</h3>
+            <p data-lang-es="Para multiplicar fracciones, se multiplican los numeradores entre sí y los denominadores entre sí."
+               data-lang-eu="Frakzioak biderkatzeko, zenbakitzaileak elkarren artean eta izendatzaileak elkarren artean biderkatzen dira.">
+               Para multiplicar fracciones, se multiplican los numeradores entre sí y los denominadores entre sí.
+            </p>
+
+            <div class="formula-box">
+                <h4 data-lang-es="Regla de multiplicación" data-lang-eu="Biderketa erregela">Regla de multiplicación</h4>
+                <p class="formula">
+                    \\[ \frac{a}{b} \\times \frac{c}{d} = \\frac{a \\times c}{b \\times d} \\quad \\text{con } b \\neq 0 \\text{ y } d \\neq 0 \\]
+                </p>
+            </div>
+
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 1: Fracciones simples" data-lang-eu="1. Adibidea: Frakzio sinpleak">Ejemplo 1: Fracciones simples</h4>
+                <p data-lang-es="<b>Calcular:</b> \\(\\frac{2}{3} \\times \\frac{4}{5}\\)"
+                   data-lang-eu="<b>Kalkulatu:</b> \\(\\frac{2}{3} \\times \\frac{4}{5}\\)">
+                   <b>Calcular:</b> \\(\\frac{2}{3} \\times \\frac{4}{5}\\)
+                </p>
+                <p class="example-step">
+                    \\( \\frac{2}{3} \\times \\frac{4}{5} = \\frac{2 \\times 4}{3 \\times 5} = \\frac{8}{15} \\)
+                </p>
+                <p class="conclusion">
+                    <strong data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</strong> \\(\\frac{8}{15}\\)
+                </p>
+            </div>
+
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 2: Simplificación previa" data-lang-eu="2. Adibidea: Aurretiko sinplifikazioa">Ejemplo 2: Simplificación previa</h4>
+                <p data-lang-es="<b>Calcular:</b> \\(\\frac{4}{9} \\times \\frac{3}{8}\\)"
+                   data-lang-eu="<b>Kalkulatu:</b> \\(\\frac{4}{9} \\times \\frac{3}{8}\\)">
+                   <b>Calcular:</b> \\(\\frac{4}{9} \\times \\frac{3}{8}\\)
+                </p>
+                <p data-lang-es="<b>Método 1:</b> Sin simplificar primero (no recomendable)"
+                   data-lang-eu="<b>Metodoa 1:</b> Lehenik sinplifikatu gabe (ez da gomendagarria)">
+                   <b>Método 1:</b> Sin simplificar primero (no recomendable)
+                </p>
+                <p class="example-step">
+                    \\( \\frac{4}{9} \\times \\frac{3}{8} = \\frac{4 \\times 3}{9 \\times 8} = \\frac{12}{72} = \\frac{1}{6} \\)
+                </p>
+                <p data-lang-es="<b>Método 2:</b> Simplificando antes de multiplicar (recomendable)"
+                   data-lang-eu="<b>Metodoa 2:</b> Biderkatu aurretik sinplifikatuz (gomendagarria)">
+                   <b>Método 2:</b> Simplificando antes de multiplicar (recomendable)
+                </p>
+                <p class="example-step">
+                    <span data-lang-es="Observamos que 4 y 8 tienen MCD=4, y 3 y 9 tienen MCD=3"
+                          data-lang-eu="4 eta 8-k MKT=4 dutela eta 3 eta 9-k MKT=3 dutela ikusten dugu">
+                          Observamos que 4 y 8 tienen MCD=4, y 3 y 9 tienen MCD=3
+                    </span>
+                </p>
+                <p class="example-step">
+                    \\[ \\frac{4}{9} \\times \\frac{3}{8} = \\frac{\\cancel{4}}{9} \\times \\frac{3}{\\cancel{8}} = \\frac{1}{9} \\times \\frac{3}{2} = \\frac{1 \\times 3}{9 \\times 2} = \\frac{3}{18} = \\frac{1}{6} \\]
+                </p>
+                <p class="conclusion">
+                    <strong data-lang-es="Resultado final:" data-lang-eu="Azken emaitza:">Resultado final:</strong> \\(\\frac{1}{6}\\)
+                </p>
+            </div>
+
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 3: Fracción por número entero" data-lang-eu="3. Adibidea: Frakzio bider zenbaki osoa">Ejemplo 3: Fracción por número entero</h4>
+                <p data-lang-es="<b>Calcular:</b> \\(\\frac{3}{7} \\times 4\\)"
+                   data-lang-eu="<b>Kalkulatu:</b> \\(\\frac{3}{7} \\times 4\\)<">
+                   <b>Calcular:</b> \\(\\frac{3}{7} \\times 4\\)
+                </p>
+                <p data-lang-es="Convertimos el entero a fracción: \\(4 = \\frac{4}{1}\\)"
+                   data-lang-eu="Zenbakia frakzio bihurtzen dugu: \\(4 = \\frac{4}{1}\\)">
+                   Convertimos el entero a fracción: \\(4 = \\frac{4}{1}\\)
+                </p>
+                <p class="example-step">
+                    \\[ \\frac{3}{7} \\times 4 = \\frac{3}{7} \\times \\frac{4}{1} = \\frac{3 \\times 4}{7 \\times 1} = \\frac{12}{7} = 1\\frac{5}{7} \\]
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="División de Fracciones" data-lang-eu="Frakzioen Zatiketa">División de Fracciones</h3>
+            <p data-lang-es="Para dividir fracciones, multiplicamos la primera fracción por el inverso (recíproco) de la segunda fracción."
+               data-lang-eu="Frakzioak zatitzeko, lehenengo frakzioa bigarrenaren alderantzizkoa (erreziprokoa) den frakzioz biderkatzen dugu.">
+               Para dividir fracciones, multiplicamos la primera fracción por el inverso (recíproco) de la segunda fracción.
+            </p>
+
+            <div class="formula-box">
+                <h4 data-lang-es="Regla de división" data-lang-eu="Zatiketa erregela">Regla de división</h4>
+                <p class="formula">
+                    \\[ \\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c} = \\frac{a \\times d}{b \\times c} \\quad \\text{con } b \\neq 0, c \\neq 0, d \\neq 0 \\]
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <h4 data-lang-es="💡 Consejo" data-lang-eu="💡 Aholkua">💡 Consejo</h4>
+                <p data-lang-es="El recíproco de \\(\\frac{c}{d}\\) es \\(\\frac{d}{c}\\). Es como "dar la vuelta" a la fracción."
+                   data-lang-eu="\\(\\frac{c}{d}\\)-ren erreziprokoa \\(\\frac{d}{c}\\) da. Frakzioari "buelta emateko" bezala da.">
+                   El recíproco de \\(\\frac{c}{d}\\) es \\(\\frac{d}{c}\\). Es como "dar la vuelta" a la fracción.
+                </p>
+            </div>
+
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 1: División básica" data-lang-eu="1. Adibidea: Zatiketa oinarrizkoa">Ejemplo 1: División básica</h4>
+                <p data-lang-es="<b>Calcular:</b> \\(\\frac{2}{3} \\div \\frac{4}{5}\\)"
+                   data-lang-eu="<b>Kalkulatu:</b> \\(\\frac{2}{3} \\div \\frac{4}{5}\\)">
+                   <b>Calcular:</b> \\(\\frac{2}{3} \\div \\frac{4}{5}\\)
+                </p>
+                <p class="example-step">
+                    <strong data-lang-es="Paso 1:" data-lang-eu="1. Pausua:">Paso 1:</strong>
+                    <span data-lang-es=" Multiplicar por el recíproco:"
+                          data-lang-eu=" Erreziprokoaz biderkatu:">
+                          Multiplicar por el recíproco:
+                    </span> \\(\\frac{2}{3} \\times \\frac{5}{4}\\)
+                </p>
+                <p class="example-step">
+                    <strong data-lang-es="Paso 2:" data-lang-eu="2. Pausua:">Paso 2:</strong>
+                    <span data-lang-es=" Simplificar y calcular:"
+                          data-lang-eu=" Sinplifikatu eta kalkulatu:">
+                          Simplificar y calcular:
+                    </span> \\(\\frac{2 \\times 5}{3 \\times 4} = \\frac{10}{12} = \\frac{5}{6}\\)
+                </p>
+                <p class="conclusion">
+                    <strong data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</strong> \\(\\frac{2}{3} \\div \\frac{4}{5} = \\frac{5}{6}\\)
+                </p>
+            </div>
+
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 2: División por un entero" data-lang-eu="2. Adibidea: Zenbaki oso baten zatiketa">Ejemplo 2: División por un entero</h4>
+                <p data-lang-es="<b>Calcular:</b> \\(\\frac{3}{4} \\div 2\\)"
+                   data-lang-eu="<b>Kalkulatu:</b> \\(\\frac{3}{4} \\div 2\\">
+                   <b>Calcular:</b> \\(\\frac{3}{4} \\div 2\\)
+                </p>
+                <p data-lang-es="Convertimos el entero a fracción: \\(2 = \\frac{2}{1}\\), y aplicamos la regla"
+                   data-lang-eu="Zenbakia frakzio bihurtzen dugu: \\(2 = \\frac{2}{1}\\), eta erregela aplikatzen dugu">
+                   Convertimos el entero a fracción: \\(2 = \\frac{2}{1}\\), y aplicamos la regla
+                </p>
+                <p class="example-step">
+                    \\[ \\frac{3}{4} \\div 2 = \\frac{3}{4} \\div \\frac{2}{1} = \\frac{3}{4} \\times \\frac{1}{2} = \\frac{3}{8} \\]
+                </p>
+            </div>
+
+            <div class="example-box">
+                <h4 data-lang-es="Ejemplo 3: División con simplificación" data-lang-eu="3. Adibidea: Sinplifikazioarekin zatiketa">Ejemplo 3: División con simplificación</h4>
+                <p data-lang-es="<b>Calcular:</b> \\(\\frac{6}{15} \\div \\frac{3}{10}\\)"
+                   data-lang-eu="<b>Kalkulatu:</b> \\(\\frac{6}{15} \\div \\frac{3}{10}\\)">
+                   <b>Calcular:</b> \\(\\frac{6}{15} \\div \\frac{3}{10}\\)
+                </p>
+                <p class="example-step">
+                    \\[ \\frac{6}{15} \\div \\frac{3}{10} = \\frac{6}{15} \\times \\frac{10}{3} = \\frac{6 \\times 10}{15 \\times 3} \\]
+                </p>
+                <p data-lang-es="Simplificamos antes de calcular:"
+                   data-lang-eu="Kalkulatu aurretik sinplifikatzen dugu:">
+                   Simplificamos antes de calcular:
+                </p>
+                <p class="example-step">
+                    \\[ = \\frac{\\cancel{6}}{\\cancel{15}} \\times \\frac{\\cancel{10}}{\\cancel{3}} = \\frac{2}{5} \\times \\frac{2}{1} = \\frac{4}{5} \\]
+                </p>
+                <p class="conclusion">
+                    <strong data-lang-es="Resultado:" data-lang-eu="Emaitza:">Resultado:</strong> \\(\\frac{6}{15} \\div \\frac{3}{10} = \\frac{4}{5}\\)
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section warning-box">
+            <h3><i class="fas fa-exclamation-triangle"></i> <span data-lang-es="Errores Típicos" data-lang-eu="Akats Ohikoak">Errores Típicos</span></h3>
+            <ul>
+                <li data-lang-es="<b>ERROR:</b> \\(\\frac{a}{b} + \\frac{c}{d} = \\frac{a+c}{b+d}\\) <br><b>CORRECTO:</b> \\(\\frac{a}{b} + \\frac{c}{d} = \\frac{a \\cdot d + c \\cdot b}{b \\cdot d}\\)"
+                   data-lang-eu="<b>AKATSA:</b> \\(\\frac{a}{b} + \\frac{c}{d} = \\frac{a+c}{b+d}\\) <br><b>ZUZENA:</b> \\(\\frac{a}{b} + \\frac{c}{d} = \\frac{a \\cdot d + c \\cdot b}{b \\cdot d}\\)">
+                   <b>ERROR:</b> \\(\\frac{a}{b} + \\frac{c}{d} = \\frac{a+c}{b+d}\\) <br><b>CORRECTO:</b> \\(\\frac{a}{b} + \\frac{c}{d} = \\frac{a \\cdot d + c \\cdot b}{b \\cdot d}\\)
+                </li>
+                <li data-lang-es="<b>ERROR:</b> Sumar denominadores al buscar denominador común<br><b>CORRECTO:</b> Calcular el mcm de los denominadores"
+                   data-lang-eu="<b>AKATSA:</b> Izendatzaile komun bila izendatzaileak batzea<br><b>ZUZENA:</b> Izendatzileen mzk kalkulatzea">
+                   <b>ERROR:</b> Sumar denominadores al buscar denominador común<br><b>CORRECTO:</b> Calcular el mcm de los denominadores
+                </li>
+                <li data-lang-es="<b>ERROR:</b> Cambiar solo uno de los términos al restar fracciones<br><b>CORRECTO:</b> Cambiar el signo a todo el término que se mueve"
+                   data-lang-eu="<b>AKATSA:</b> Frakzioak kentzean termino bakarra aldatzea<br><b>ZUZENA:</b> Mugitzen den termino osoaren zeinua aldatzea">
+                   <b>ERROR:</b> Cambiar solo uno de los términos al restar fracciones<br><b>CORRECTO:</b> Cambiar el signo a todo el término que se mueve
+                </li>
+                <li data-lang-es="<b>ERROR:</b> Dividir fracciones multiplicando numeradores y denominadores directamente<br><b>CORRECTO:</b> Multiplicar por el recíproco de la segunda fracción"
+                   data-lang-eu="<b>AKATSA:</b> Frakzioak zatitzean zenbakitzaile eta izendatzaileak zuzenean biderkatzea<br><b>ZUZENA:</b> Bigarren frakzioaren erreziprokoaz biderkatzea">
+                   <b>ERROR:</b> Dividir fracciones multiplicando numeradores y denominadores directamente<br><b>CORRECTO:</b> Multiplicar por el recíproco de la segunda fracción
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

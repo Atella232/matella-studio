@@ -1,0 +1,496 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Concepto - Números Enteros" data-lang-eu="Kontzeptua - Zenbaki Osoak">Concepto - Números Enteros</title>
+    <!-- Estilos existentes -->
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <!-- Fuentes y Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Estilos adicionales para los nuevos elementos interactivos -->
+    <style>
+        .interactive-section {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .number-line-container {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2rem;
+            overflow-x: auto;
+            padding-bottom: 20px;
+        }
+
+        .number-line-svg {
+            min-width: 600px; /* Ancho mínimo para ver de -10 a 10 */
+        }
+        
+        .number-line-svg .marker:hover {
+            cursor: pointer;
+            opacity: 0.7;
+        }
+
+        .number-line-svg .number-label {
+            font-size: 14px;
+            font-family: 'Lato', sans-serif;
+            fill: var(--text-color);
+        }
+
+        .number-line-svg .highlight-circle {
+            transition: all 0.3s ease;
+        }
+
+        .value-display {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .value-display span {
+            display: inline-block;
+            min-width: 150px;
+            background-color: var(--button-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+
+        .quiz-option {
+            background-color: var(--button-bg);
+            border: 1px solid var(--border-color);
+            padding: 0.8em 1.5em;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+            margin: 0.5rem;
+        }
+
+        .quiz-option:hover {
+            background-color: var(--button-hover-bg);
+            color: var(--primary-color);
+        }
+        
+        .quiz-option.correct {
+            background-color: var(--quiz-feedback-correct-bg);
+            color: var(--quiz-feedback-correct-text);
+            border-color: var(--quiz-feedback-correct-border);
+            transform: scale(1.05);
+        }
+
+        .quiz-option.incorrect {
+            background-color: var(--quiz-feedback-incorrect-bg);
+            color: var(--quiz-feedback-incorrect-text);
+            border-color: var(--quiz-feedback-incorrect-border);
+        }
+
+        .feedback {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 1rem;
+            min-height: 24px;
+        }
+    </style>
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script></head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-ruler-horizontal"></i>
+            <span data-lang-es="El Conjunto ℤ y la Recta Numérica" data-lang-eu="ℤ Multzoa eta Zenbaki Zuzena">El Conjunto ℤ y la Recta Numérica</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title" data-lang-es="El Conjunto ℤ y la Recta Numérica" data-lang-eu="ℤ Multzoa eta Zenbaki Zuzena">El Conjunto ℤ y la Recta Numérica</h2>
+
+        <!-- SECCIÓN 1: INTRODUCCIÓN A LOS NÚMEROS ENTEROS -->
+        <section class="content-section">
+            <h3 data-lang-es="¿Por qué necesitamos más que números naturales?" data-lang-eu="Zergatik behar ditugu zenbaki naturalak baino gehiago?">¿Por qué necesitamos más que números naturales?</h3>
+            <p data-lang-es="Los números que usamos para contar (1, 2, 3...) se llaman <b>números naturales (ℕ)</b>. Son perfectos para contar objetos, pero no son suficientes para describir todas las situaciones de la vida real."
+               data-lang-eu="Kontatzeko erabiltzen ditugun zenbakiak (1, 2, 3...) <b>zenbaki arruntak (ℕ)</b> deitzen dira. Objektuak kontatzeko ezin hobeak dira, baina ez dira nahikoak bizitza errealeko egoera guztiak deskribatzeko.">
+                Los números que usamos para contar (1, 2, 3...) se llaman <b>números naturales (ℕ)</b>. Son perfectos para contar objetos, pero no son suficientes para describir todas las situaciones de la vida real.
+            </p>
+            <p data-lang-es="Para representar deudas, temperaturas bajo cero o profundidades, necesitamos los <b>números negativos</b>. El conjunto que incluye los números naturales (positivos), sus opuestos (negativos) y el cero se llama <b>conjunto de los números enteros (ℤ)</b>."
+               data-lang-eu="Zorrak, zero azpiko tenperaturak edo sakonerak adierazteko, <b>zenbaki negatiboak</b> behar ditugu. Zenbaki naturalak (positiboak), haien aurkakoak (negatiboak) eta zeroa biltzen dituen multzoari <b>zenbaki osoen multzoa (ℤ)</b> deitzen zaio.">
+                Para representar deudas, temperaturas bajo cero o profundidades, necesitamos los <b>números negativos</b>. El conjunto que incluye los números naturales (positivos), sus opuestos (negativos) y el cero se llama <b>conjunto de los números enteros (ℤ)</b>.
+            </p>
+            <div class="usage-grid" style="margin-top: 2rem;">
+                <div class="usage-item">
+                    <i class="fas fa-thermometer-half"></i>
+                    <span data-lang-es="<b>-10°C</b><br>Temperatura" data-lang-eu="<b>-10°C</b><br>Tenperatura"><b>-10°C</b><br>Temperatura</span>
+                </div>
+                <div class="usage-item">
+                    <i class="fas fa-piggy-bank"></i>
+                    <span data-lang-es="<b>-50€</b><br>Deuda" data-lang-eu="<b>-50€</b><br>Zorra"><b>-50€</b><br>Deuda</span>
+                </div>
+                <div class="usage-item">
+                    <i class="fas fa-elevator"></i>
+                    <span data-lang-es="<b>Planta -2</b><br>Sótano" data-lang-eu="<b>-2 Solairua</b><br>Sotoa"><b>Planta -2</b><br>Sótano</span>
+                </div>
+                 <div class="usage-item">
+                    <i class="fas fa-water"></i>
+                    <span data-lang-es="<b>-200m</b><br>Profundidad" data-lang-eu="<b>-200m</b><br>Sakonera"><b>-200m</b><br>Profundidad</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: LA RECTA NUMÉRICA -->
+        <section class="content-section">
+            <h3 data-lang-es="Visualizando los números: La Recta Numérica" data-lang-eu="Zenbakiak bistaratzen: Zenbaki Zuzena">Visualizando los números: La Recta Numérica</h3>
+            <p data-lang-es="La recta numérica es una herramienta fantástica para ordenar y comparar números enteros. El <b>cero</b> es el punto de origen. A su derecha se sitúan los números <b>positivos</b> (mayores que cero) y a su izquierda, los <b>negativos</b> (menores que cero)."
+               data-lang-eu="Zenbaki zuzena zenbaki osoak ordenatzeko eta alderatzeko tresna zoragarria da. <b>Zeroa</b> jatorri-puntua da. Eskuinean zenbaki <b>positiboak</b> kokatzen dira (zero baino handiagoak) eta ezkerrean, <b>negatiboak</b> (zero baino txikiagoak).">
+                La recta numérica es una herramienta fantástica para ordenar y comparar números enteros. El <b>cero</b> es el punto de origen. A su derecha se sitúan los números <b>positivos</b> (mayores que cero) y a su izquierda, los <b>negativos</b> (menores que cero).
+            </p>
+            
+            <div class="interactive-section">
+                <h4 style="text-align:center;" data-lang-es="¡Haz clic en un número!" data-lang-eu="Egin klik zenbaki batean!">¡Haz clic en un número!</h4>
+                <div class="number-line-container">
+                    <svg id="number-line" class="number-line-svg" viewbox="0 0 600 80"></svg>
+                </div>
+                <div id="value-display" class="value-display">
+                    <span data-lang-es="Número seleccionado: 0" data-lang-eu="Aukeratutako zenbakia: 0">Número seleccionado: 0</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: VALOR ABSOLUTO -->
+        <section class="content-section">
+            <h3 data-lang-es="¿A qué distancia está del cero? El Valor Absoluto" data-lang-eu="Zerotik zein distantziara dago? Balio Absolutua">¿A qué distancia está del cero? El Valor Absoluto</h3>
+            <p data-lang-es="El <b>valor absoluto</b> de un número entero es la distancia que lo separa del cero en la recta numérica. Como las distancias no pueden ser negativas, el valor absoluto de un número <b>siempre es positivo o cero</b>. Se representa con dos barras verticales: | |."
+               data-lang-eu="Zenbaki oso baten <b>balio absolutua</b> zenbaki zuzenean zerotik bereizten duen distantzia da. Distantziak ezin direnez negatiboak izan, zenbaki baten balio absolutua <b>beti positiboa edo zero</b> da. Bi barra bertikalekin adierazten da: | |." >
+                El <b>valor absoluto</b> de un número entero es la distancia que lo separa del cero en la recta numérica. Como las distancias no pueden ser negativas, el valor absoluto de un número <b>siempre es positivo o cero</b>. Se representa con dos barras verticales: | |.
+            </p>
+            <p class="example" data-lang-es="<b>Ejemplo:</b> El valor absoluto de -7 es 7 (se escribe |-7| = 7), porque -7 está a 7 unidades de distancia del 0."
+               data-lang-eu="<b>Adibidea:</b> -7ren balio absolutua 7 da (|-7| = 7 idazten da), -7 zerotik 7 unitatera dagoelako.">
+               <b>Ejemplo:</b> El valor absoluto de -7 es 7 (se escribe |-7| = 7), porque -7 está a 7 unidades de distancia del 0.
+            </p>
+            <p class="example" data-lang-es="<b>Ejemplo:</b> El valor absoluto de +4 es 4 (se escribe |+4| = 4), porque +4 está a 4 unidades de distancia del 0."
+               data-lang-eu="<b>Adibidea:</b> +4ren balio absolutua 4 da (|+4| = 4 idazten da), +4 zerotik 4 unitatera dagoelako.">
+               <b>Ejemplo:</b> El valor absoluto de +4 es 4 (se escribe |+4| = 4), porque +4 está a 4 unidades de distancia del 0.
+            </p>
+            <div id="absolute-value-display" class="value-display" style="margin-top: 2rem;">
+                 <span data-lang-es="Valor absoluto: |0| = 0" data-lang-eu="Balio absolutua: |0| = 0">Valor absoluto: |0| = 0</span>
+            </div>
+        </section>
+        
+        <!-- SECCIÓN 4: MINI QUIZ INTERACTIVO -->
+        <section class="content-section">
+            <h3 data-lang-es="¡Ponte a prueba!" data-lang-eu="Jarri zeure burua proban!">¡Ponte a prueba!</h3>
+            <div class="interactive-section">
+                <p id="quiz-question" style="text-align:center; font-weight:bold;"></p>
+                <div id="quiz-options" style="text-align:center;"></div>
+                <div id="quiz-feedback" class="feedback"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <!-- Scripts existentes -->
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+
+    <!-- Script para la interactividad de la página -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const svgNS = "http://www.w3.org/2000/svg";
+            const svg = document.getElementById('number-line');
+            const valueDisplay = document.getElementById('value-display').querySelector('span');
+            const absoluteValueDisplay = document.getElementById('absolute-value-display').querySelector('span');
+            
+            const min = -10;
+            const max = 10;
+            const width = 600;
+            const height = 80;
+            const midY = height / 2;
+            const step = width / (max - min);
+
+            let selectedNumber = 0;
+
+            function createNumberLine() {
+                svg.innerHTML = ''; // Limpiar SVG
+                
+                // Línea principal
+                const line = document.createElementNS(svgNS, 'line');
+                line.setAttribute('x1', 0);
+                line.setAttribute('y1', midY);
+                line.setAttribute('x2', width);
+                line.setAttribute('y2', midY);
+                line.setAttribute('stroke', 'var(--text-color)');
+                line.setAttribute('stroke-width', 2);
+                svg.appendChild(line);
+
+                // Flechas
+                const arrowLeft = document.createElementNS(svgNS, 'path');
+                arrowLeft.setAttribute('d', `M 5 ${midY-5} L 0 ${midY} L 5 ${midY+5}`);
+                arrowLeft.setAttribute('fill', 'none');
+                arrowLeft.setAttribute('stroke', 'var(--text-color)');
+                arrowLeft.setAttribute('stroke-width', 2);
+                svg.appendChild(arrowLeft);
+
+                const arrowRight = document.createElementNS(svgNS, 'path');
+                arrowRight.setAttribute('d', `M ${width-5} ${midY-5} L ${width} ${midY} L ${width-5} ${midY+5}`);
+                arrowRight.setAttribute('fill', 'none');
+                arrowRight.setAttribute('stroke', 'var(--text-color)');
+                arrowRight.setAttribute('stroke-width', 2);
+                svg.appendChild(arrowRight);
+
+                // Círculo de resaltado
+                const highlightCircle = document.createElementNS(svgNS, 'circle');
+                highlightCircle.setAttribute('id', 'highlight-circle');
+                highlightCircle.setAttribute('cy', midY);
+                highlightCircle.setAttribute('r', 10);
+                highlightCircle.setAttribute('fill', 'var(--secondary-color)');
+                highlightCircle.setAttribute('opacity', '0.7');
+                highlightCircle.classList.add('highlight-circle');
+                svg.appendChild(highlightCircle);
+
+                // Marcas y números
+                for (let i = min; i <= max; i++) {
+                    const x = (i - min) * step;
+                    
+                    const marker = document.createElementNS(svgNS, 'line');
+                    marker.setAttribute('x1', x);
+                    marker.setAttribute('y1', midY - 8);
+                    marker.setAttribute('x2', x);
+                    marker.setAttribute('y2', midY + 8);
+                    marker.setAttribute('stroke', 'var(--text-color)');
+                    marker.setAttribute('stroke-width', i === 0 ? 3 : 1.5);
+                    svg.appendChild(marker);
+
+                    const text = document.createElementNS(svgNS, 'text');
+                    text.setAttribute('x', x);
+                    text.setAttribute('y', midY + 25);
+                    text.setAttribute('text-anchor', 'middle');
+                    text.classList.add('number-label');
+                    text.textContent = i;
+                    svg.appendChild(text);
+                    
+                    // Área de clic invisible
+                    const clickArea = document.createElementNS(svgNS, 'rect');
+                    clickArea.setAttribute('x', x - step / 2);
+                    clickArea.setAttribute('y', 0);
+                    clickArea.setAttribute('width', step);
+                    clickArea.setAttribute('height', height);
+                    clickArea.setAttribute('fill', 'transparent');
+                    clickArea.classList.add('marker');
+                    clickArea.addEventListener('click', () => updateSelection(i));
+                    svg.appendChild(clickArea);
+                }
+                
+                updateSelection(0); // Iniciar en 0
+            }
+
+            function updateSelection(num) {
+                selectedNumber = num;
+                const currentLang = localStorage.getItem('language') || 'es';
+                
+                // Actualizar círculo de resaltado
+                const highlightCircle = document.getElementById('highlight-circle');
+                const newX = (num - min) * step;
+                highlightCircle.setAttribute('cx', newX);
+
+                // Actualizar textos
+                if (currentLang === 'es') {
+                    valueDisplay.textContent = `Número seleccionado: ${num}`;
+                    absoluteValueDisplay.textContent = `Valor absoluto: |${num}| = ${Math.abs(num)}`;
+                } else {
+                    valueDisplay.textContent = `Aukeratutako zenbakia: ${num}`;
+                    absoluteValueDisplay.textContent = `Balio absolutua: |${num}| = ${Math.abs(num)}`;
+                }
+            }
+            
+            // Re-dibujar la recta si cambia el tema para que tome los colores correctos
+            const themeToggle = document.getElementById('theme-toggle');
+            if(themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    // Pequeño delay para que las variables CSS se actualicen
+                    setTimeout(createNumberLine, 50);
+                });
+            }
+
+            // Inicializar
+            createNumberLine();
+
+            // --- LÓGICA DEL QUIZ ---
+            const quizQuestions = [
+                { 
+                    question_es: "¿Cuál es el valor absoluto de -9?",
+                    question_eu: "Zein da -9-ren balio absolutua?",
+                    options: ["-9", "9", "0", "90"],
+                    answer: "9"
+                },
+                {
+                    question_es: "Una deuda de 25€ se representa como...",
+                    question_eu: "25€-ko zor bat honela adierazten da...",
+                    options: ["+25", "-25", "|-25|", "0"],
+                    answer: "-25"
+                },
+                {
+                    question_es: "En la recta numérica, ¿qué número está más a la izquierda?",
+                    question_eu: "Zenbaki zuzenean, zein zenbaki dago ezkerrago?",
+                    options: ["-5", "-1", "0", "3"],
+                    answer: "-5"
+                },
+                 {
+                    question_es: "¿Cuál es el resultado de |-15|?",
+                    question_eu: "Zein da |-15|-en emaitza?",
+                    options: ["-15", "0", "15", "1.5"],
+                    answer: "15"
+                }
+            ];
+            
+            let currentQuestionIndex = 0;
+            const questionEl = document.getElementById('quiz-question');
+            const optionsEl = document.getElementById('quiz-options');
+            const feedbackEl = document.getElementById('quiz-feedback');
+
+            function loadQuestion() {
+                const currentLang = localStorage.getItem('language') || 'es';
+                
+                const questionData = quizQuestions[currentQuestionIndex];
+
+                questionEl.textContent = currentLang === 'es' ? questionData.question_es : questionData.question_eu;
+                optionsEl.innerHTML = '';
+                feedbackEl.innerHTML = '';
+
+                questionData.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.classList.add('quiz-option');
+                    button.addEventListener('click', () => checkAnswer(option));
+                    optionsEl.appendChild(button);
+                });
+            }
+
+            function checkAnswer(selectedOption) {
+                const questionData = quizQuestions[currentQuestionIndex];
+                const buttons = optionsEl.querySelectorAll('.quiz-option');
+                const currentLang = localStorage.getItem('language') || 'es';
+
+                buttons.forEach(button => {
+                    button.disabled = true; // Deshabilitar botones
+                    if (button.textContent === questionData.answer) {
+                        button.classList.add('correct');
+                    } else if (button.textContent === selectedOption) {
+                        button.classList.add('incorrect');
+                    }
+                });
+
+                if (selectedOption === questionData.answer) {
+                    feedbackEl.textContent = currentLang === 'es' ? '¡Correcto! 🎉' : 'Zuzena! 🎉';
+                    feedbackEl.style.color = 'var(--quiz-feedback-correct-text)';
+                } else {
+                    feedbackEl.textContent = currentLang === 'es' ? '¡Inténtalo de nuevo!' : 'Saiatu berriro!';
+                    feedbackEl.style.color = 'var(--quiz-feedback-incorrect-text)';
+                }
+
+                // Cargar siguiente pregunta después de un momento
+                setTimeout(() => {
+                    currentQuestionIndex = (currentQuestionIndex + 1) % quizQuestions.length;
+                    loadQuestion();
+                }, 2000);
+            }
+
+            // Cargar la primera pregunta
+            loadQuestion();
+            
+            // Recargar pregunta si cambia el idioma
+            const langToggle = document.getElementById('lang-toggle');
+            if(langToggle) {
+                langToggle.addEventListener('click', () => {
+                    // Pequeño delay para que el localstorage se actualice
+                    setTimeout(loadQuestion, 50);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,394 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Función Lineal - Funciones" data-lang-eu="Funtzio Lineala - Funtzioak">Función Lineal - Funciones</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-chart-line"></i>
+            <span data-lang-es="Función Lineal" data-lang-eu="Funtzio Lineala">Función Lineal</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="action-buttons" style="text-align: center; margin: 2rem 0;">
+            <button class="button-primary" data-lang-es="Ejercicios" data-lang-eu="Ariketak" onclick="alert('Próximamente')">
+                <i class="fas fa-edit"></i> Ejercicios
+            </button>
+            <button class="button-secondary" data-lang-es="Herramienta" data-lang-eu="Tresna" onclick="alert('Próximamente')">
+                <i class="fas fa-tools"></i> Herramienta
+            </button>
+        </div>
+
+        <h2 class="page-title" data-lang-es="Función Lineal" data-lang-eu="Funtzio Lineala">Función Lineal</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es una Función Lineal?" data-lang-eu="Zer da Funtzio Lineala?">¿Qué es una Función Lineal?</h3>
+            <p data-lang-es="Una función lineal es el tipo más simple de función. Su gráfica es siempre una línea recta. La palabra \"lineal\" viene de \"línea\"."
+               data-lang-eu="Funtzio lineala funtzio motarik sinpleena da. Bere grafikoa beti lerro zuzen bat da. \"Lineal\" hitza \"lerrotik\" dator.">
+               Una función lineal es el tipo más simple de función. Su gráfica es siempre una línea recta. La palabra "lineal" viene de "línea".
+            </p>
+            <p class="key-takeaway" data-lang-es="<b>Definición:</b> Una función lineal tiene la forma f(x) = mx + n, donde m ≠ 0."
+               data-lang-eu="<b>Definizioa:</b> Funtzio linealak f(x) = mx + n forma du, non m ≠ 0.">
+               <b>Definición:</b> Una función lineal tiene la forma f(x) = mx + n, donde m ≠ 0.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Significado de los Parámetros" data-lang-eu="Parametroen Esanahia">Significado de los Parámetros</h3>
+            <p data-lang-es="En la función f(x) = mx + n, cada letra tiene un significado específico:"
+               data-lang-eu="f(x) = mx + n funtzioan, letrak ezuste zeinu zehatza dute:">
+               En la función f(x) = mx + n, cada letra tiene un significado específico:
+            </p>
+            <div class="formula-box">
+                <p><strong data-lang-es="m es la PENDIENTE:" data-lang-eu="m MALDA da:">m es la PENDIENTE:</strong></p>
+                <ul>
+                    <li data-lang-es="Indica la inclinación de la recta" 
+                        data-lang-eu="Lerroaren inklinazioa adierazten du">
+                        Indica la inclinación de la recta
+                    </li>
+                    <li data-lang-es="Si m > 0: la función es CRECIENTE (la línea sube de izquierda a derecha)" 
+                        data-lang-eu="m > 0 bada: funtzioa HANDITZAILEA da (lerroa ezkerretik eskuinera igotzen da)">
+                        Si m > 0: la función es CRECIENTE (la línea sube de izquierda a derecha)
+                    </li>
+                    <li data-lang-es="Si m < 0: la función es DECRECIENTE (la línea baja de izquierda a derecha)" 
+                        data-lang-eu="m < 0 bada: funtzioa MURRIZTAILEA da (lerroa ezkerretik eskuinera jeisten da)">
+                        Si m < 0: la función es DECRECIENTE (la línea baja de izquierda a derecha)
+                    </li>
+                    <li data-lang-es="Si |m| es grande: la pendiente es más pronunciada" 
+                        data-lang-eu="|m| handia bada: malda intentsitateagoa da">
+                        Si |m| es grande: la pendiente es más pronunciada
+                    </li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong data-lang-es="n es la ORDENADA EN EL ORIGEN:" data-lang-eu="n JATORRIKO ORDENATUA da:">n es la ORDENADA EN EL ORIGEN:</strong></p>
+                <ul>
+                    <li data-lang-es="Es el valor de f(0)" 
+                        data-lang-eu="f(0)-ren balioa da">
+                        Es el valor de f(0)
+                    </li>
+                    <li data-lang-es="Indica dónde corta la recta al eje Y" 
+                        data-lang-eu="Lerroak Y ardatza non ebakitzen duen adierazten du">
+                        Indica dónde corta la recta al eje Y
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Interpretación Geométrica" data-lang-eu="Interpretazio Geometrikoa">Interpretación Geométrica</h3>
+            <p data-lang-es="La pendiente (m) mide la inclinación de la recta. Se calcula como el \"aumento\" dividido por el \"avance\"."
+               data-lang-eu="Maldak (m) lerroaren inklinazioa neurtzen du. \"Handipena\" zatitu \"aurrerapen\" gisa kalkulatzen da.">
+               La pendiente (m) mide la inclinación de la recta. Se calcula como el "aumento" dividido por el "avance".
+            </p>
+            <div class="formula-box">
+                <p><strong data-lang-es="Fórmula de la pendiente:" data-lang-eu="Maldaren formula:">Fórmula de la pendiente:</strong></p>
+                <p class="math">m = \frac{y_2 - y_1}{x_2 - x_1} \quad \text{(si } x_1 \neq x_2\text{)}</p>
+                <p data-lang-es="donde (x₁, y₁) y (x₂, y₂) son dos puntos de la recta."
+                   data-lang-eu="non (x₁, y₁) eta (x₂, y₂) lerroko bi puntu baitira.">
+                   donde (x₁, y₁) y (x₂, y₂) son dos puntos de la recta.
+                </p>
+            </div>
+            <div class="example">
+                <p><strong data-lang-es="Ejemplo: Cálculo de pendiente" data-lang-eu="Adibidea: Malda kalkulatzea">Ejemplo: Cálculo de pendiente</strong></p>
+                <p data-lang-es="Si tenemos los puntos A(1, 3) y B(3, 7) de una recta:" 
+                   data-lang-eu="A(1, 3) eta B(3, 7) puntuak baditugu lerro baten:">
+                   Si tenemos los puntos A(1, 3) y B(3, 7) de una recta:
+                </p>
+                <p class="math">m = \frac{7 - 3}{3 - 1} = \frac{4}{2} = 2</p>
+                <p data-lang-es="Por tanto, la pendiente es 2, lo que significa que por cada unidad que aumenta x, y aumenta 2 unidades."
+                   data-lang-eu="Beraz, malda 2 da; honek esan nahi du x-ek unitate bat handitzen den bakoitzean, y 2 unitate handitzen dela.">
+                   Por tanto, la pendiente es 2, lo que significa que por cada unidad que aumenta x, y aumenta 2 unidades.
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Casos Especiales" data-lang-eu="Kasu Bereziak">Casos Especiales</h3>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-circle-notch icon-concept"></i>
+                        <span data-lang-es="Proporcionalidad Directa" data-lang-eu="Proportzionaltasun Zuzena">Proporcionalidad Directa</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Cuando n = 0, tenemos f(x) = mx. Esta función pasa por el origen (0,0) y se llama proporcionalidad directa."
+                           data-lang-eu="n = 0 denean, f(x) = mx dugu. Funtzio hau jatorritik igarotzen da (0,0) eta proportzionaltasun zuzena deitzen da.">
+                           Cuando n = 0, tenemos f(x) = mx. Esta función pasa por el origen (0,0) y se llama proporcionalidad directa.
+                        </p>
+                        <div class="formula-box">
+                            <p><strong data-lang-es="Ejemplos de proporcionalidad directa:" data-lang-eu="Proportzionaltasun zuzeneko adibideak:">Ejemplos de proporcionalidad directa:</strong></p>
+                            <ul>
+                                <li data-lang-es="Coste de gasolina: precio × litros" 
+                                    data-lang-eu="Gasolinzaren kostua: prezioa × litroak">
+                                    Coste de gasolina: precio × litros
+                                </li>
+                                <li data-lang-es="Distancia en movimiento uniforme: velocidad × tiempo" 
+                                    data-lang-eu="Mugimendu uniformean distantzia: abiadura × denbora">
+                                    Distancia en movimiento uniforme: velocidad × tiempo
+                                </li>
+                                <li data-lang-es="Dinero ganado: salario por hora × horas trabajadas" 
+                                    data-lang-eu="Irabazitako dirua: orduko salarioa × lan orduak">
+                                    Dinero ganado: salario por hora × horas trabajadas
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-arrows-alt-h icon-concept"></i>
+                        <span data-lang-es="Función Constante" data-lang-eu="Funtzio Konstantea">Función Constante</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Cuando m = 0, tenemos f(x) = n. Es una línea horizontal que no crece ni decrece."
+                           data-lang-eu="m = 0 denean, f(x) = n dugu. Lerro horizontal bat da, ez handitzen ezta murrizten.">
+                           Cuando m = 0, tenemos f(x) = n. Es una línea horizontal que no crece ni decrece.
+                        </p>
+                        <p class="example">
+                            <em data-lang-es="Ejemplo: f(x) = 5 es una línea horizontal que pasa por y = 5" 
+                                data-lang-eu="Adibidea: f(x) = 5 lerro horizontal bat da y = 5-tik igarotzen dena">
+                                Ejemplo: f(x) = 5 es una línea horizontal que pasa por y = 5
+                            </em>
+                        </p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-arrows-alt icon-concept"></i>
+                        <span data-lang-es="Rectas Verticales (NO son funciones)" data-lang-eu="Lerro Horizontalek (Ez dira funtzioak)">Rectas Verticales (NO son funciones)</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="x = k (donde k es una constante) es una recta vertical. NO es una función porque un valor de x corresponde a infinitos valores de y."
+                           data-lang-eu="x = k (non k konstante bat den) lerro bat da. EZ da funtzioa x balio batek y-ren balio infinitori baitagokie.">
+                           x = k (donde k es una constante) es una recta vertical. NO es una función porque un valor de x corresponde a infinitos valores de y.
+                        </p>
+                        <div class="example">
+                            <p data-lang-es="<b>¡Importante!</b> Las funciones lineales deben ser de la forma y = mx + n, NO x = k." 
+                               data-lang-eu="<b>Garrantzitsua!</b> Funtzio linealak y = mx + n forma izan behar dute, EZ x = k.">
+                               <b>¡Importante!</b> Las funciones lineales deben ser la forma y = mx + n, NO x = k.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Ejemplos Prácticos" data-lang-eu="Adibide Praktikoak">Ejemplos Prácticos</h3>
+            <div class="example">
+                <p><strong data-lang-es="Ejemplo 1: Tarifa de taxi" data-lang-eu="Adibidea 1: Taximotaren tarifa">Ejemplo 1: Tarifa de taxi</strong></p>
+                <p data-lang-es="Un taxi cobra 2€ por km recorrido más 3€ de bajada de bandera." 
+                   data-lang-eu="Taxi baten kostua 2€ km bakoitzeko gehi 3€ banderaren jaulpena.">
+                   Un taxi cobra 2€ por km recorrido más 3€ de bajada de bandera.
+                </p>
+                <p data-lang-es="Función: f(x) = 2x + 3" data-lang-eu="Funtzioa: f(x) = 2x + 3">Función: f(x) = 2x + 3</p>
+                <p data-lang-es="donde x = kilómetros recorridos" data-lang-eu="non x = kilometro eginak">donde x = kilómetros recorridos</p>
+                <table style="margin: 1rem auto; border-collapse: collapse; max-width: 400px;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid var(--border-color); padding: 0.5rem;">x (km)</th>
+                            <th style="border: 1px solid var(--border-color); padding: 0.5rem;">f(x) (€)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">0</td>
+                            <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">3</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">5</td>
+                            <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">13</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">10</td>
+                            <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">23</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="text-align: center; font-style: italic; color: var(--accent-color);">
+                    <span data-lang-es="✓ Pendiente: 2€/km (cada km cuesta 2€ más)" 
+                          data-lang-eu="✓ Malda: 2€/km (km bakoitzeko 2€ gehiago kostatzen da)">
+                        ✓ Pendiente: 2€/km (cada km cuesta 2€ más)
+                    </span>
+                </p>
+            </div>
+            <div class="example" style="margin-top: 2rem;">
+                <p><strong data-lang-es="Ejemplo 2: Conversión de temperatura" data-lang-eu="Adibidea 2: Tenperatura bihurtzea">Ejemplo 2: Conversión de temperatura</strong></p>
+                <p data-lang-es="Conversión de Celsius a Fahrenheit: F = 1.8C + 32" 
+                   data-lang-eu="Celsiusetik Fahrenheitera bihurtzea: F = 1.8C + 32">
+                   Conversión de Celsius a Fahrenheit: F = 1.8C + 32
+                </p>
+                <table style="margin: 1rem auto; border-collapse: collapse; max-width: 400px;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid var(--border-color); padding: 0.5rem;">C (°C)</th>
+                            <th style="border: 1px solid var(--border-color); padding: 0.5rem;">F (°F)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">0</td>
+                            <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">32</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">20</td>
+                            <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">68</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">37</td>
+                            <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">98.6</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Ejercicios para Practicar" data-lang-es="Ariketak Praktikatzeko">Ejercicios para Practicar</h3>
+            <div class="example">
+                <ol>
+                    <li data-lang-es="¿Cuál es la pendiente de la función f(x) = -3x + 5? ¿Es creciente o decreciente?" 
+                        data-lang-eu="Zein da f(x) = -3x + 5 funtzioaren malda? Handitzailea ala murriztailea da?">
+                        ¿Cuál es la pendiente de la función f(x) = -3x + 5? ¿Es creciente o decreciente?
+                    </li>
+                    <li data-lang-es="¿Por qué punto pasa la función f(x) = 2x - 1 cuando x = 0?" 
+                        data-lang-eu="Zein puntutik igarotzen da f(x) = 2x - 1 funtzioa x = 0 denean?">
+                        ¿Por qué punto pasa la función f(x) = 2x - 1 cuando x = 0?
+                    </li>
+                    <li data-lang-es="Una función pasa por los puntos (2, 7) y (5, 13). ¿Cuál es su pendiente?" 
+                        data-lang-eu="Funtzio bat (2, 7) eta (5, 13) puntuetatik igarotzen da. Zein da bere malda?">
+                        Una función pasa por los puntos (2, 7) y (5, 13). ¿Cuál es su pendiente?
+                    </li>
+                </ol>
+            </div>
+            <div class="example" style="margin-top: 1.5rem;">
+                <p><strong data-lang-es="💡 Respuestas:" data-lang-eu="💡 Erantzunak:">💡 Respuestas:</strong></p>
+                <ol>
+                    <li data-lang-es="Pendiente m = -3 (negativa, por tanto DECRECIENTE)" 
+                        data-lang-eu="Malda m = -3 (negatiboa, beraz MURRIZTAILEA)">
+                        Pendiente m = -3 (negativa, por tanto DECRECIENTE)
+                    </li>
+                    <li data-lang-es="Pasa por el punto (0, -1)" data-lang-eu="(0, -1) puntutik igarotzen da">
+                        Pasa por el punto (0, -1)
+                    </li>
+                    <li data-lang-es="m = (13-7)/(5-2) = 6/3 = 2" data-lang-eu="m = (13-7)/(5-2) = 6/3 = 2">
+                        m = (13-7)/(5-2) = 6/3 = 2
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="⚠️ Errores Típicos" data-lang-eu="⚠️ Ohiko Akatsak">⚠️ Errores Típicos</h3>
+            <ul>
+                <li data-lang-es="Confundir la pendiente con el valor de f(0)" 
+                    data-lang-eu="Maldak f(0)-ren balioarekin nahastea">
+                    Confundir la pendiente con el valor de f(0)
+                </li>
+                <li data-lang-es="No interpretar correctamente el significado de la pendiente" 
+                    data-lang-eu="Maldaren esanahia zuzen interpretatzea ez da">
+                    No interpretar correctamente el significado de la pendiente
+                </li>
+                <li data-lang-es="Pensar que todas las rectas son funciones lineales" 
+                    data-lang-eu="Lerro guztiak funtzio linealak direla pentsatzea">
+                    Pensar que todas las rectas son funciones lineales
+                </li>
+                <li data-lang-es="Confundir f(x) = mx con f(x) = mx + n" 
+                    data-lang-eu="f(x) = mx f(x) = mx + n-rekin nahastea">
+                    Confundir f(x) = mx con f(x) = mx + n
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

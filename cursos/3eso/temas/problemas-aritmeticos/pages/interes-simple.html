@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Interés Simple - Problemas Aritméticos" data-lang-eu="Interes Sinplea - Aritmetika Problemak">Interés Simple - Problemas Aritméticos</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-chart-line"></i>
+            <span data-lang-es="Interés Simple" data-lang-eu="Interes Sinplea">Interés Simple</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <!-- Botones de ejercicios y herramienta -->
+    <div class="action-buttons">
+        <button class="btn-exercises" data-lang-es="Ejercicios" data-lang-eu="Ariketa">Ejercicios</button>
+        <button class="btn-tool" data-lang-es="Herramienta" data-lang-eu="Tresna">Herramienta</button>
+    </div>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Interés Simple" data-lang-eu="Interes Sinplea">Interés Simple</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es el Interés Simple?" data-lang-eu="Zer da Interes Sinplea?">¿Qué es el Interés Simple?</h3>
+            <p data-lang-es="El interés simple es el beneficio que obtenemos al prestar o depositar una cantidad de dinero (capital) durante un tiempo determinado, aplicando un tipo de interés fijo."
+               data-lang-eu="Interes sinplea diru kopuru bat (kapitala) denbora jakin batez mailegatu edo gordetzearen ondorioz lortzen dugun etekina da, interes-tasa finko bat aplikatuz.">
+               El interés simple es el beneficio que obtenemos al prestar o depositar una cantidad de dinero (capital) durante un tiempo determinado, aplicando un tipo de interés fijo.
+            </p>
+            <p class="key-takeaway" data-lang-es="<b>Característica clave:</b> En el interés simple, los intereses se calculan siempre sobre el capital inicial, no sobre los intereses acumulados."
+               data-lang-eu="<b>Ezaugarri nagusia:</b> Interes sinplean, interesak beti hasierako kapitaletik kalkulatzen dira, metatutako interesetatik ez.">
+               <b>Característica clave:</b> En el interés simple, los intereses se calculan siempre sobre el capital inicial, no sobre los intereses acumulados.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Fórmula del Interés Simple" data-lang-eu="Interes Sinplearen Formula">Fórmula del Interés Simple</h3>
+            <p class="formula" data-lang-es="<b>Fórmula principal:</b> $I = C \\cdot r \\cdot t$"
+               data-lang-eu="<b>Formula nagusia:</b> $I = C \\cdot r \\cdot t$">
+               <b>Fórmula principal:</b> $I = C \cdot r \cdot t$
+            </p>
+            
+            <div class="formula-box">
+                <p data-lang-es="Donde:" data-lang-eu="Non:">Donde:</p>
+                <ul data-lang-es="<li>$I$ = Interés ganado (lo que queremos calcular)</li><li>$C$ = Capital inicial (cantidad que se presta o deposita)</li><li>$r$ = Tipo de interés (en forma decimal, NO en porcentaje)</li><li>$t$ = Tiempo (en las mismas unidades que el tipo de interés)"
+                   data-lang-eu="<li>$I$ = Lortutako interesa (kalkulatu nahi duguna)</li><li>$C$ = Hasierako kapitala (mailegatu edo gordetzen den kopurua)</li><li>$r$ = Interes-tasa (forma hamartarrean, ez ehunekoan)</li><li>$t$ = Denbora (interes-tasaren unitate beretan)">
+                   <li>$I$ = Interés ganado (lo que queremos calcular)</li>
+                   <li>$C$ = Capital inicial (cantidad que se presta o deposita)</li>
+                   <li>$r$ = Tipo de interés (en forma decimal, NO en porcentaje)</li>
+                   <li>$t$ = Tiempo (en las mismas unidades que el tipo de interés)</li>
+                </ul>
+            </div>
+
+            <div class="formula-box">
+                <p data-lang-es="<b>Importante:</b> El tiempo $t$ debe estar en las mismas unidades que el tipo de interés $r$"
+                   data-lang-eu="<b>Garrantzitsua:</b> Denbora $t$ interes-tasa $r$-ren unitate beretan egon behar da">
+                   <b>Importante:</b> El tiempo $t$ debe estar en las mismas unidades que el tipo de interés $r$
+                </p>
+                <ul data-lang-es="<li>Si el interés es anual, $t$ debe estar en años</li><li>Si el interés es mensual, $t$ debe estar en meses</li><li>Si el interés es diario, $t$ debe estar en días</li>"
+                   data-lang-eu="<li>Interesa urterokoa bada, $t$ urtetan egon behar da</li><li>Interesa hilekoa bada, $t$ hilabeteetan egon behar da</li><li>Interesa egunerokoa bada, $t$ egunetan egon behar da</li>">
+                   <li>Si el interés es anual, $t$ debe estar en años</li>
+                   <li>Si el interés es mensual, $t$ debe estar en meses</li>
+                   <li>Si el interés es diario, $t$ debe estar en días</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Conversión de Porcentajes" data-lang-eu="Ehunekoen Bihurketa">Conversión de Porcentajes</h3>
+            <p data-lang-es="Para usar la fórmula del interés simple, debemos convertir el porcentaje a decimal dividiendo por 100."
+               data-lang-eu="Interes sinplearen formula erabiltzeko, ehunekoa hamartar bihurtu behar dugu, 100ez zatituz.">
+               Para usar la fórmula del interés simple, debemos convertir el porcentaje a decimal dividiendo por 100.
+            </p>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-exchange-alt icon-concept"></i>
+                        <span data-lang-es="Conversión a decimal" data-lang-eu="Hamarrerako bihurketa">Conversión a decimal</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="formula" data-lang-es="Si tenemos un 5% anual: $r = \\frac{5}{100} = 0.05$<br>Si tenemos un 3.5% anual: $r = \\frac{3.5}{100} = 0.035$"
+                           data-lang-eu="%5 urterokoa badugu: $r = \\frac{5}{100} = 0.05$<br>%3.5 urterokoa badugu: $r = \\frac{3.5}{100} = 0.035$">
+                           Si tenemos un 5% anual: $r = \frac{5}{100} = 0.05$<br>
+                           Si tenemos un 3.5% anual: $r = \frac{3.5}{100} = 0.035$
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Capital Final" data-lang-eu="Kapital Finala">Capital Final</h3>
+            <p data-lang-es="Para calcular el capital final (capital + intereses), usamos la siguiente fórmula:"
+               data-lang-eu="Kapital finala (kapitala + interesak) kalkulatzeko, honako formula erabiltzen dugu:">
+               Para calcular el capital final (capital + intereses), usamos la siguiente fórmula:
+            </p>
+            <p class="formula" data-lang-es="<b>Capital final:</b> $C_f = C + I = C(1 + r \\cdot t)$"
+               data-lang-eu="<b>Kapital finala:</b> $C_f = C + I = C(1 + r \\cdot t)$">
+               <b>Capital final:</b> $C_f = C + I = C(1 + r \cdot t)$
+            </p>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-calculator icon-concept"></i>
+                        <span data-lang-es="Ejemplo completo" data-lang-eu="Adibide osoa">Ejemplo completo</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="example" data-lang-es="<b>Problema:</b> Depositamos 2000€ en un banco al 4% anual durante 3 años.<br><br><b>Datos:</b><br>$C = 2000$€<br>$r = \\frac{4}{100} = 0.04$<br>$t = 3$ años<br><br><b>Cálculo del interés:</b><br>$I = C \\cdot r \\cdot t = 2000 \\cdot 0.04 \\cdot 3 = 240$€<br><br><b>Capital final:</b><br>$C_f = C + I = 2000 + 240 = 2240$€<br><br><b>O directamente:</b><br>$C_f = C(1 + r \\cdot t) = 2000(1 + 0.04 \\cdot 3) = 2000(1.12) = 2240$€"
+                               data-lang-eu="<b>Problema:</b> 2000€ gordetzen ditugu banku batean %4 urterko interesa 3 urterako.<br><br><b>Datuak:</b><br>$C = 2000$€<br>$r = \\frac{4}{100} = 0.04$<br>$t = 3$ urte<br><br><b>Interesaren kalkulua:</b><br>$I = C \\cdot r \\cdot t = 2000 \\cdot 0.04 \\cdot 3 = 240$€<br><br><b>Kapital finala:</b><br>$C_f = C + I = 2000 + 240 = 2240$€<br><br><b>Zuzenean:</b><br>$C_f = C(1 + r \\cdot t) = 2000(1 + 0.04 \\cdot 3) = 2000(1.12) = 2240$€">
+                               <b>Problema:</b> Depositamos 2000€ en un banco al 4% anual durante 3 años.<br><br><b>Datos:</b><br>$C = 2000$€<br>$r = \frac{4}{100} = 0.04$<br>$t = 3$ años<br><br><b>Cálculo del interés:</b><br>$I = C \cdot r \cdot t = 2000 \cdot 0.04 \cdot 3 = 240$€<br><br><b>Capital final:</b><br>$C_f = C + I = 2000 + 240 = 2240$€<br><br><b>O directamente:</b><br>$C_f = C(1 + r \cdot t) = 2000(1 + 0.04 \cdot 3) = 2000(1.12) = 2240$€
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Casos con Diferentes Unidades de Tiempo" data-lang-eu="Denbora Unitate Ezberdinetako Kasuak">Casos con Diferentes Unidades de Tiempo</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-calendar-alt icon-concept"></i>
+                        <span data-lang-es="Interés por meses" data-lang-eu="Hilabeteko interesa">Interés por meses</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="example" data-lang-es="<b>Problema:</b> Prestamos 1500€ al 6% anual durante 8 meses.<br><br><b>Solución:</b><br>$I = 1500 \\cdot \\frac{6}{100} \\cdot \\frac{8}{12} = 1500 \\cdot 0.06 \\cdot 0.67 = 60$€"
+                               data-lang-eu="<b>Problema:</b> 1500€ mailegatzen ditugu %6 urterko interes 8 hilabeterako.<br><br><b>Ebazpena:</b><br>$I = 1500 \\cdot \\frac{6}{100} \\cdot \\frac{8}{12} = 1500 \\cdot 0.06 \\cdot 0.67 = 60$€">
+                               <b>Problema:</b> Prestamos 1500€ al 6% anual durante 8 meses.<br><br><b>Solución:</b><br>$I = 1500 \cdot \frac{6}{100} \cdot \frac{8}{12} = 1500 \cdot 0.06 \cdot 0.67 = 60$€
+                        </p>
+                        <p data-lang-es="Observa que convertimos 8 meses a años: $\\frac{8}{12}$"
+                           data-lang-eu="Ikus ezazu 8 hilabete urtetara bihurtzen dugula: $\\frac{8}{12}$">
+                           Observa que convertimos 8 meses a años: $\frac{8}{12}$
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-calendar-check icon-concept"></i>
+                        <span data-lang-es="Interés por días" data-lang-eu="Eguneko interesa">Interés por días</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="example" data-lang-es="<b>Problema:</b> Depositamos 5000€ al 3% anual durante 90 días.<br><br><b>Solución:</b><br>$I = 5000 \\cdot \\frac{3}{100} \\cdot \\frac{90}{365} = 5000 \\cdot 0.03 \\cdot 0.25 = 37.5$€"
+                               data-lang-eu="<b>Problema:</b> 5000€ gordetzen ditugu %3 urterko interes 90 egunerako.<br><br><b>Ebazpena:</b><br>$I = 5000 \\cdot \\frac{3}{100} \\cdot \\frac{90}{365} = 5000 \\cdot 0.03 \\cdot 0.25 = 37.5$€">
+                               <b>Problema:</b> Depositamos 5000€ al 3% anual durante 90 días.<br><br><b>Solución:</b><br>$I = 5000 \cdot \frac{3}{100} \cdot \frac{90}{365} = 5000 \cdot 0.03 \cdot 0.25 = 37.5$€
+                        </p>
+                        <p data-lang-es="Observa que usamos 365 días para el año: $\\frac{90}{365}$"
+                           data-lang-eu="Ikus ezazu urtean 365 egun erabiltzen dugula: $\\frac{90}{365}$">
+                           Observa que usamos 365 días para el año: $\frac{90}{365}$
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Errores Comunes" data-lang-eu="Ohiko Akatsak">Errores Comunes</h3>
+            <div class="warning-box">
+                <p data-lang-es="⚠️ <b>Usar el porcentaje como decimal sin dividir por 100:</b> Un 5% debe convertirse a 0.05, NO a 5."
+                   data-lang-eu="⚠️ <b>Ehunekoa hamartar bezala erabiltzea 100ez zatitu gabe:</b> %5 0.05 bihurtu behar da, ez 5.">
+                   ⚠️ <b>Usar el porcentaje como decimal sin dividir por 100:</b> Un 5% debe convertirse a 0.05, NO a 5.
+                </p>
+            </div>
+            <div class="warning-box">
+                <p data-lang-es="⚠️ <b>Confundir capital final con interés:</b> El capital final incluye el capital inicial + los intereses. El interés es solo la ganancia."
+                   data-lang-eu="⚠️ <b>Kapital finala interesekin nahastea:</b> Kapital finalak hasierako kapitala + interesak barne hartzen ditu. Interesa irabazpena da soilik.">
+                   ⚠️ <b>Confundir capital final con interés:</b> El capital final incluye el capital inicial + los intereses. El interés es solo la ganancia.
+                </p>
+            </div>
+            <div class="warning-box">
+                <p data-lang-es="⚠️ <b>No unificar las unidades de tiempo:</b> Si el interés es anual, el tiempo debe estar en años."
+                   data-lang-eu="⚠️ <b>Denbora unitateak batzen ez izana:</b> Interesa urterokoa bada, denbora urtetan egon behar da.">
+                   ⚠️ <b>No unificar las unidades de tiempo:</b> Si el interés es anual, el tiempo debe estar en años.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

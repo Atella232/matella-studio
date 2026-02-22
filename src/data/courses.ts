@@ -30,16 +30,16 @@ export const courses: Course[] = [
     descriptionAr: 'أساسيات الرياضيات',
     color: '#6366f1',
     topics: [
-      { id: 'numeros-naturales', name: 'Números Naturales', nameEu: 'Zenbaki Naturalak', nameAr: 'الأعداد الطبيعية', icon: '🔢' },
-      { id: 'divisibilidad', name: 'Divisibilidad', nameEu: 'Zatigarritasuna', nameAr: 'القابلية للقسمة', icon: '➗' },
-      { id: 'numeros-enteros', name: 'Números Enteros', nameEu: 'Zenbaki Osoak', nameAr: 'الأعداد الصحيحة', icon: '±' },
-      { id: 'zatikiak', name: 'Fracciones', nameEu: 'Zatikiak', nameAr: 'الكسور', icon: '½' },
+      { id: 'zenbaki-naturalak', name: 'Números Naturales', nameEu: 'Zenbaki Naturalak', nameAr: 'الأعداد الطبيعية', icon: '🔢', active: true },
+      { id: 'divisibilidad', name: 'Divisibilidad', nameEu: 'Zatigarritasuna', nameAr: 'القابلية للقسمة', icon: '➗', active: true },
+      { id: 'numeros-enteros', name: 'Números Enteros', nameEu: 'Zenbaki Osoak', nameAr: 'الأعداد الصحيحة', icon: '±', active: true },
+      { id: 'zatikiak', name: 'Fracciones', nameEu: 'Zatikiak', nameAr: 'الكسور', icon: '½', active: true },
       { id: 'numeros-decimales', name: 'Números Decimales', nameEu: 'Zenbaki Hamartarrak', nameAr: 'الأعداد العشرية', icon: '🔣' },
       { id: 'proporcionalidad', name: 'Proporcionalidad', nameEu: 'Proportzionaltasuna', nameAr: 'التناسب', icon: '⚖️' },
-      { id: 'algebra', name: 'Iniciación al Álgebra', nameEu: 'Aljebraren Hastapenak', nameAr: 'مقدمة في الجبر', icon: '🔤' },
-      { id: 'geometria-plana', name: 'Geometría del Plano', nameEu: 'Planoko Geometria', nameAr: 'هندسة المستوى', icon: '📐' },
+      { id: 'algebra', name: 'Iniciación al Álgebra', nameEu: 'Aljebraren Hastapenak', nameAr: 'مقدمة في الجبر', icon: '🔤', active: true },
+      { id: 'geometria', name: 'Geometría del Plano', nameEu: 'Planoko Geometria', nameAr: 'هندسة المستوى', icon: '📐', active: true },
       { id: 'figuras-planas', name: 'Figuras Planas', nameEu: 'Irudi Lauak', nameAr: 'الأشكال المستوية', icon: '🔷' },
-      { id: 'estadistica', name: 'Estadística', nameEu: 'Estatistika', nameAr: 'الإحصاء', icon: '📊' },
+      { id: 'estadistica', name: 'Estadística', nameEu: 'Estatistika', nameAr: 'الإحصاء', icon: '📊', active: true },
     ]
   },
   {

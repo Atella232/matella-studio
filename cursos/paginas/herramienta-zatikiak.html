@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zatikien Tresnak - Matematika 1. DBH</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>➗</text></svg>">
+    <style>
+        .herramienta-container {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .herramienta-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .herramienta-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+            color: #4a90e2;
+        }
+        
+        .herramienta-title {
+            margin: 0;
+            color: #333;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .input-label {
+            min-width: 120px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .fraction-input {
+            display: flex;
+            align-items: center;
+        }
+        
+        .fraction-input input {
+            width: 60px;
+            text-align: center;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .fraction-line {
+            margin: 0 5px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .btn-calcular {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-calcular:hover {
+            background-color: #3a7bc8;
+        }
+        
+        .resultado-container {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            border-left: 4px solid #4a90e2;
+        }
+        
+        .resultado-titulo {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c5282;
+        }
+        
+        .resultado-detalle {
+            margin-bottom: 5px;
+        }
+        
+        .resultado-explicacion {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e6ffed;
+            border-radius: 5px;
+            border-left: 3px solid #48bb78;
+        }
+        
+        .fraccion-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 15px 0;
+        }
+        
+        .fraccion-representacion {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        .fraccion-circulo {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .fraccion-rectangulo {
+            width: 100%;
+            height: 50px;
+            display: flex;
+        }
+        
+        .fraccion-parte {
+            height: 100%;
+            border: 1px solid #333;
+        }
+        
+        .fraccion-parte.activa {
+            background-color: #4a90e2;
+        }
+        
+        .fraccion-texto {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .operacion-simbolo {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        
+        .pasos-container {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff8e6;
+            border-radius: 8px;
+            border-left: 4px solid #f6ad55;
+        }
+        
+        .paso {
+            margin-bottom: 10px;
+            padding-left: 10px;
+            border-left: 2px solid #f6ad55;
+        }
+        
+        .simplificacion-flecha {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            color: #4a90e2;
+        }
+        
+        .error-mensaje {
+            color: #e53e3e;
+            margin-top: 10px;
+            padding: 8px;
+            background-color: #fff5f5;
+            border-radius: 4px;
+            border-left: 3px solid #e53e3e;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            border-bottom: 2px solid #4a90e2;
+            color: #4a90e2;
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .comparacion-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .comparacion-resultado {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 15px;
+            color: #4a90e2;
+        }
+        
+        .fraccion-simplificada {
+            color: #48bb78;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .input-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .input-label {
+                margin-bottom: 5px;
+            }
+            
+            .fraction-input {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-titulo">
+            <h1>Matematika 1. DBH</h1>
+        </div>
+        <nav class="navbar" aria-label="Nabigazio nagusia">
+            <a href="../index.html" class="navbar-logo">Matematika 1. DBH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <div class="navbar-menu">
+                <a href="../index.html" class="navbar-item">Hasiera</a>
+                <div class="dropdown">
+                    <a href="#" class="navbar-item dropdown-btn">Gaiak</a>
+                    <div class="dropdown-content">
+                        <a href="numeros-naturales.html">Zenbaki Naturalak</a>
+                        <a href="divisibilidad.html">Zatigarritasuna</a>
+                        <a href="numeros-enteros.html">Zenbaki Osoak</a>
+                        <a href="fracciones.html">Zatikiak</a>
+                        <a href="algebra.html">Aljebra</a>
+                        <a href="geometria.html">Geometria</a>
+                        <a href="tablas-graficas.html">Taulak eta Grafikoak</a>
+                    </div>
+                </div>
+                <a href="https://chatgpt.com/g/g-67d38635fb0c81919668655bdd91d6f7-matella-euskeraz" class="navbar-item">Matella ChatGPT</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="herramientas-zatikiak">
+            <h2>🧮 Zatikien Tresna Interaktiboak</h2>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="operaciones">Eragiketak</div>
+                <div class="tab" data-tab="simplificacion">Sinplifikazioa</div>
+                <div class="tab" data-tab="comparacion">Konparaketa</div>
+                <div class="tab" data-tab="equivalencia">Baliokidetasuna</div>
+                <div class="tab" data-tab="visualizacion">Bisualizazioa</div>
+            </div>
+            
+            <!-- Operaciones con fracciones -->
+            <div class="tab-content active" id="operaciones-tab">
+                <div class="herramienta-container">
+                    <div class="herramienta-header">
+                        <div class="herramienta-icon">🔢</div>
+                        <h3 class="herramienta-title">Zatikien Eragiketak</h3>
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="input-row">
+                            <span class="input-label">1. Zatikia:</span>
+                            <div class="fraction-input">
+                                <input type="number" id="num1" placeholder="Zenb.">
+                                <span class="fraction-line">/</span>
+                                <input type="number" id="den1" placeholder="Izen.">
+                            </div>
+                        </div>
+                        
+                        <div class="input-row">
+                            <span class="input-label">Eragiketa:</span>
+                            <select id="operacion">
+                                <option value="suma">Batuketa (+)</option>
+                                <option value="resta">Kenketa (-)</option>
+                                <option value="multiplicacion">Biderketa (×)</option>
+                                <option value="division">Zatiketa (÷)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-row">
+                            <span class="input-label">2. Zatikia:</span>
+                            <div class="fraction-input">
+                                <input type="number" id="num2" placeholder="Zenb.">
+                                <span class="fraction-line">/</span>
+                                <input type="number" id="den2" placeholder="Izen.">
+                            </div>
+                        </div>
+                        
+                        <button id="calcular-operacion" class="btn-calcular">Kalkulatu</button>
+                    </div>
+                    
+                    <div id="resultado-operacion" class="resultado-container" style="display: none;">
+                        <div class="resultado-titulo">Emaitza:</div>
+                        <div id="resultado-valor" class="resultado-detalle"></div>
+                        <div id="pasos-operacion" class="pasos-container"></div>
+                        <div id="explicacion-operacion" class="resultado-explicacion"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Simplificación de fracciones -->
+            <div class="tab-content" id="simplificacion-tab">
+                <div class="herramienta-container">
+                    <div class="herramienta-header">
+                        <div class="herramienta-icon">✂️</div>
+                        <h3 class="herramienta-title">Zatikien Sinplifikazioa</h3>
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="input-row">
+                            <span class="input-label">Zatikia:</span>
+                            <div class="fraction-input">
+                                <input type="number" id="num-simplificar" placeholder="Zenb.">
+                                <span class="fraction-line">/</span>
+                                <input type="number" id="den-simplificar" placeholder="Izen.">
+                            </div>
+                        </div>
+                        
+                        <button id="calcular-simplificacion" class="btn-calcular">Sinplifikatu</button>
+                    </div>
+                    
+                    <div id="resultado-simplificacion" class="resultado-container" style="display: none;">
+                        <div class="resultado-titulo">Zatiki sinplifikatua:</div>
+                        <div id="resultado-simplificado" class="resultado-detalle"></div>
+                        <div id="pasos-simplificacion" class="pasos-container"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Comparación de fracciones -->
+            <div class="tab-content" id="comparacion-tab">
+                <div class="herramienta-container">
+                    <div class="herramienta-header">
+                        <div class="herramienta-icon">⚖️</div>
+                        <h3 class="herramienta-title">Zatikien Konparaketa</h3>
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="input-row">
+                            <span class="input-label">1. Zatikia:</span>
+                            <div class="fraction-input">
+                                <input type="number" id="num-comp1" placeholder="Zenb.">
+                                <span class="fraction-line">/</span>
+                                <input type="number" id="den-comp1" placeholder="Izen.">
+                            </div>
+                        </div>
+                        
+                        <div class="input-row">
+                            <span class="input-label">2. Zatikia:</span>
+                            <div class="fraction-input">
+                                <input type="number" id="num-comp2" placeholder="Zenb.">
+                                <span class="fraction-line">/</span>
+                                <input type="number" id="den-comp2" placeholder="Izen.">
+                            </div>
+                        </div>
+                        
+                        <button id="calcular-comparacion" class="btn-calcular">Konparatu</button>
+                    </div>
+                    
+                    <div id="resultado-comparacion" class="resultado-container" style="display: none;">
+                        <div class="resultado-titulo">Konparaketaren emaitza:</div>
+                        <div class="comparacion-container">
+                            <div id="fraccion-comp1" class="fraccion-texto"></div>
+                            <div id="simbolo-comparacion" class="comparacion-resultado"></div>
+                            <div id="fraccion-comp2" class="fraccion-texto"></div>
+                        </div>
+                        <div id="explicacion-comparacion" class="resultado-explicacion"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fracciones equivalentes -->
+            <div class="tab-content" id="equivalencia-tab">
+                <div class="herramienta-container">
+                    <div class="herramienta-header">
+                        <div class="herramienta-icon">🔄</div>
+                        <h3 class="herramienta-title">Zatiki Baliokideak</h3>
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="input-row">
+                            <span class="input-label">Zatikia:</span>
+                            <div class="fraction-input">
+                                <input type="number" id="num-equiv" placeholder="Zenb.">
+                                <span class="fraction-line">/</span>
+                                <input type="number" id="den-equiv" placeholder="Izen.">
+                            </div>
+                        </div>
+                        
+                        <div class="input-row">
+                            <span class="input-label">Biderketarako zenbakia:</span>
+                            <input type="number" id="factor-equiv" placeholder="Zenbakia">
+                        </div>
+                        
+                        <button id="calcular-equivalencia" class="btn-calcular">Kalkulatu baliokidea</button>
+                    </div>
+                    
+                    <div id="resultado-equivalencia" class="resultado-container" style="display: none;">
+                        <div class="resultado-titulo">Zatiki baliokidea:</div>
+                        <div id="resultado-equiv" class="resultado-detalle"></div>
+                        <div id="explicacion-equiv" class="resultado-explicacion"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Visualización de fracciones -->
+            <div class="tab-content" id="visualizacion-tab">
+                <div class="herramienta-container">
+                    <div class="herramienta-header">
+                        <div class="herramienta-icon">👁️</div>
+                        <h3 class="herramienta-title">Zatikien Bisualizazioa</h3>
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="input-row">
+                            <span class="input-label">Zatikia:</span>
+                            <div class="fraction-input">
+                                <input type="number" id="num-visual" placeholder="Zenb.">
+                                <span class="fraction-line">/</span>
+                                <input type="number" id="den-visual" placeholder="Izen.">
+                            </div>
+                        </div>
+                        
+                        <div class="input-row">
+                            <span class="input-label">Bisualizazio mota:</span>
+                            <select id="tipo-visual">
+                                <option value="circulo">Zirkulua</option>
+                                <option value="rectangulo">Laukizuzena</option>
+                            </select>
+                        </div>
+                        
+                        <button id="mostrar-visual" class="btn-calcular">Bisualizatu</button>
+                    </div>
+                    
+                    <div id="resultado-visual" class="resultado-container" style="display: none;">
+                        <div class="resultado-titulo">Zatikiaren bisualizazioa:</div>
+                        <div class="fraccion-visual">
+                            <div id="fraccion-representacion" class="fraccion-representacion"></div>
+                            <div id="fraccion-texto-visual" class="fraccion-texto"></div>
+                        </div>
+                        <div id="explicacion-visual" class="resultado-explicacion"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="volver-seccion">
+            <a href="fracciones.html" class="btn btn-verde">Itzuli Zatikien Orrira</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Matematika 1. DBH. Eskubide guztiak erreserbatuak.</p>
+        <p>❤️ Bihotzez garatua Derrigorrezko Bigarren Hezkuntzako ikasleentzat</p>
+    </footer>
+
+    <script src="../js/herramienta-zatikiak.js"></script>
+</body>
+</html>

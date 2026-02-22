@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Proporcionalidad - Problemas Aritméticos" data-lang-eu="Proportionalitatea - Aritmetika Problemak">Proporcionalidad - Problemas Aritméticos</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\\\[', '\\\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-percentage"></i>
+            <span data-lang-es="Proporcionalidad" data-lang-eu="Proportionalitatea">Proporcionalidad</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <!-- Botones de ejercicios y herramienta -->
+    <div class="action-buttons">
+        <button class="btn-exercises" data-lang-es="Ejercicios" data-lang-eu="Ariketa">Ejercicios</button>
+        <button class="btn-tool" data-lang-es="Herramienta" data-lang-eu="Tresna">Herramienta</button>
+    </div>
+
+    <main>
+        <h2 class="page-title" data-lang-es="Proporcionalidad" data-lang-eu="Proportionalitatea">Proporcionalidad</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es la Proporcionalidad?" data-lang-eu="Zer da Proportionalitatea?">¿Qué es la Proporcionalidad?</h3>
+            <p data-lang-es="La proporcionalidad es una relación entre dos magnitudes que se mantiene constante. Es una de las herramientas más útiles en matemáticas para resolver problemas de la vida real."
+               data-lang-eu="Proportionalitatea bi magnitude arteko erlazio bat da, etengabe mantentzen dena. Matematikako tresnarik erabilgarrienetako bat da bizitza errealeko problemak ebazteko.">
+               La proporcionalidad es una relación entre dos magnitudes que se mantiene constante. Es una de las herramientas más útiles en matemáticas para resolver problemas de la vida real.
+            </p>
+            <p class="key-takeaway" data-lang-es="<b>Concepto clave:</b> Cuando dos magnitudes están relacionadas proporcionalmente, el cambio en una produce un cambio proporcional en la otra."
+               data-lang-eu="<b>Kontzeptu gakoa:</b> Bi magnitude modu proportionalean erlazionatuta daudenean, batean gertatzen den aldaketak bestean aldaketa proportional bat eragiten du.">
+               <b>Concepto clave:</b> Cuando dos magnitudes están relacionadas proporcionalmente, el cambio en una produce un cambio proporcional en la otra.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Tipos de Proporcionalidad" data-lang-eu="Proportionalitate Motak">Tipos de Proporcionalidad</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-arrow-right icon-concept"></i>
+                        <span data-lang-es="Proporcionalidad Directa" data-lang-eu="Proportionalitate Zuzena">Proporcionalidad Directa</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Dos magnitudes son <b>directamente proporcionales</b> cuando al aumentar una, la otra aumenta en la misma proporción, y viceversa."
+                           data-lang-eu="Bi magnitude <b>zuzenean proportionalak</b> izan daude bat handitzean bestea proportzio berean handitzen denean, eta alderantziz.">
+                           Dos magnitudes son <b>directamente proporcionales</b> cuando al aumentar una, la otra aumenta en la misma proporción, y viceversa.
+                        </p>
+                        <p class="formula" data-lang-es="<b>Fórmula:</b> Si \(x_1\) y \(y_1\) son valores correspondientes de las magnitudes, y \(x_2\) e \(y_2\) son otros valores correspondientes, entonces \(\frac{x_1}{y_1} = \frac{x_2}{y_2} = k\) (constante)"
+                           data-lang-eu="<b>Formula:</b> \(x_1\) eta \(y_1\) magnitudeen balioak badira, eta \(x_2\) eta \(y_2\) balio gainkorreak badira, orduan \(\frac{x_1}{y_1} = \frac{x_2}{y_2} = k\) (konstante)">
+                           <b>Fórmula:</b> Si \(x_1\) y \(y_1\) son valores correspondientes de las magnitudes, y \(x_2\) e \(y_2\) son otros valores correspondientes, entonces \(\frac{x_1}{y_1} = \frac{x_2}{y_2} = k\) (constante)
+                        </p>
+                        <p class="example" data-lang-es="<b>Ejemplo:</b> Precio de las naranjas. Si 2 kg cuestan 3€, entonces 4 kg costarán 6€ (se duplica el precio)."
+                           data-lang-eu="<b>Adibidea:</b> Laranjen prezioa. 2 kg-k 3€ baditu, orduan 4 kg-k 6€ kostako (prezioa bikoizten da).">
+                           <b>Ejemplo:</b> Precio de las naranjas. Si 2 kg cuestan 3€, entonces 4 kg costarán 6€ (se duplica el precio).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-arrow-left icon-concept"></i>
+                        <span data-lang-es="Proporcionalidad Inversa" data-lang-eu="Proportionalitate Alderantzizkoa">Proporcionalidad Inversa</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Dos magnitudes son <b>inversamente proporcionales</b> cuando al aumentar una, la otra disminuye en la misma proporción, y viceversa."
+                           data-lang-eu="Bi magnitude <b>alderantziz proportionalak</b> izan daude bat handitzean bestea proportzio berean gutxitzen denean, eta alderantziz.">
+                           Dos magnitudes son <b>inversamente proporcionales</b> cuando al aumentar una, la otra disminuye en la misma proporción, y viceversa.
+                        </p>
+                        <p class="formula" data-lang-es="<b>Fórmula:</b> Si $x_1$ e $y_1$ son valores correspondientes de las magnitudes, y $x_2$ e $y_2$ son otros valores correspondientes, entonces $x_1 \cdot y_1 = x_2 \cdot y_2 = k$ (constante)"
+                           data-lang-eu="<b>Formula:</b> $x_1$ eta $y_1$ magnitudeen balioak badira, eta $x_2$ eta $y_2$ balio gainkorreak badira, orduan $x_1 \cdot y_1 = x_2 \cdot y_2 = k$ (konstante)">
+                           <b>Fórmula:</b> Si $x_1$ e $y_1$ son valores correspondientes de las magnitudes, y $x_2$ e $y_2$ son otros valores correspondientes, entonces $x_1 \cdot y_1 = x_2 \cdot y_2 = k$ (constante)
+                        </p>
+                        <p class="example" data-lang-es="<b>Ejemplo:</b> Velocidad y tiempo. Si a 60 km/h tardamos 2 horas, a 120 km/h tardaremos 1 hora (se reduce el tiempo a la mitad)."
+                           data-lang-eu="<b>Adibidea:</b> Abiadura eta denbora. 60 km/h-an 2 orduz badaramagu, 120 km/h-an ordu batez eramango gaitu (denbora erdi bere gutxitzen da).">
+                           <b>Ejemplo:</b> Velocidad y tiempo. Si a 60 km/h tardamos 2 horas, a 120 km/h tardaremos 1 hora (se reduce el tiempo a la mitad).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Regla de Tres" data-lang-eu="Hiru zenbakiren Erregela">Regla de Tres</h3>
+            <p data-lang-es="La regla de tres es un método que utiliza la proporcionalidad para resolver problemas donde conocemos tres datos y buscamos el cuarto."
+               data-lang-eu="Hiru zenbakiren erregela proportzionalitatea erabiltzen duen metodo bat da, hiru datu dakitzagun eta laugarrena bilatzen dugun problemak ebazteko.">
+               La regla de tres es un método que utiliza la proporcionalidad para resolver problemas donde conocemos tres datos y buscamos el cuarto.
+            </p>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-equals icon-concept"></i>
+                        <span data-lang-es="Regla de Tres Directa" data-lang-eu="Hiru Zenbakiren Erregela Zuzena">Regla de Tres Directa</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="formula" data-lang-es="Si tenemos: \(\frac{a}{b} = \frac{x}{c}\), entonces \(x = \frac{a \cdot c}{b}\)"
+                           data-lang-eu="\(\frac{a}{b} = \frac{x}{c}\) badugu, orduan \(x = \frac{a \cdot c}{b}\)">
+                           Si tenemos: \(\frac{a}{b} = \frac{x}{c}\), entonces \(x = \frac{a \cdot c}{b}\)
+                        </p>
+                        <p class="example" data-lang-es="<b>Problema:</b> Si 3 camisetas cuestan 45€, ¿cuánto cuestan 5 camisetas?<br><b>Solución:</b> \(\frac{3}{45} = \frac{5}{x}\) → \(x = \frac{5 \cdot 45}{3} = 75\)€. Las 5 camisetas cuestan 75€."
+                           data-lang-eu="<b>Problema:</b> 3 kamisetak 45€ baditu, zenbat kostako 5 kamisetak?<br><b>Ebazpena:</b> \(\frac{3}{45} = \frac{5}{x}\) → \(x = \frac{5 \cdot 45}{3} = 75\)€. 5 kamisetak 75€ kostako dute.">
+                           <b>Problema:</b> Si 3 camisetas cuestan 45€, ¿cuánto cuestan 5 camisetas?<br><b>Solución:</b> \(\frac{3}{45} = \frac{5}{x}\) → \(x = \frac{5 \cdot 45}{3} = 75\)€. Las 5 camisetas cuestan 75€.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-not-equal icon-concept"></i>
+                        <span data-lang-es="Regla de Tres Inversa" data-lang-eu="Hiru Zenbakiren Erregela Alderantzizkoa">Regla de Tres Inversa</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                   <div class="accordion-content">
+    <p class="example" 
+       data-lang-es="<b>Problema:</b> 4 trabajadores tardan 6 días en hacer una obra. ¿Cuánto tardarían 8 trabajadores?<br><b>Solución:</b> \\(4 \\cdot 6 = 8 \\cdot x\\) → \\(x = \\frac{4 \\cdot 6}{8} = 3\\) días. Tardarían 3 días."
+       data-lang-eu="<b>Problema:</b> 4 langilek 6 egunetan egiten dute lan bat. Zenbat denboran egingo lukete 8 langilek?<br><b>Ebazpena:</b> \\(4 \\cdot 6 = 8 \\cdot x\\) → \\(x = \\frac{4 \\cdot 6}{8} = 3\\) egun. 3 egunetan egingo lukete.">
+       <b>Problema:</b> 4 trabajadores tardan 6 días en hacer una obra. ¿Cuánto tardarían 8 trabajadores?<br><b>Solución:</b> \\(4 \cdot 6 = 8 \cdot x\\) → \\(x = \frac{4 \cdot 6}{8} = 3\\) días. Tardarían 3 días.
+    </p>
+</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Errores Comunes" data-lang-eu="Ohiko Akatsak">Errores Comunes</h3>
+            <div class="warning-box">
+                <p data-lang-es="⚠️ <b>Aplicar regla de tres directa cuando debería ser inversa:</b> Es muy importante identificar si la relación es directa o inversa."
+                   data-lang-eu="⚠️ <b>Hiru zenbakiren erregela zuzena aplikatzea alderantzizkoa izan behar duenean:</b> Erlazioa zuzena edo alderantzizkoa den identifikatzea oso garrantzitsua da.">
+                   ⚠️ <b>Aplicar regla de tres directa cuando debería ser inversa:</b> Es muy importante identificar si la relación es directa o inversa.
+                </p>
+            </div>
+            <div class="warning-box">
+                <p data-lang-es="⚠️ <b>No identificar el tipo de proporcionalidad:</b> Antes de aplicar cualquier fórmula, debemos determinar si las magnitudes son directa o inversamente proporcionales."
+                   data-lang-eu="⚠️ <b>Proportionalitate mota identifikatu ez izana:</b> Edozein formula aplikatu aurretik, magnitudeak zuzen edo alderantziz proportionalak diren zehaztu behar dugu.">
+                   ⚠️ <b>No identificar el tipo de proporcionalidad:</b> Antes de aplicar cualquier fórmula, debemos determinar si las magnitudes son directa o inversamente proporcionales.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>
+  <p class="formula" data-lang-es="Si tenemos: $a \\cdot b = x \\cdot c$, entonces $x = \\frac{a \\cdot b}{c}$"
+                           data-lang-eu="$a \\cdot b = x \\cdot c$ badugu, orduan $x = \\frac{a \\cdot b}{c}$">
+                           Si tenemos: $a \cdot b = x \cdot c$, entonces $x = \frac{a \cdot b}{c}$
+                        </p>

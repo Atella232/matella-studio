@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Números Enteros - Matemáticas 1º ESO</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="../img/favicon.svg">
+    <link rel="alternate icon" href="../img/favicon.ico">
+</head>
+<body>
+    <header>
+        <div class="logo-titulo">
+            <h1>Números Enteros</h1>
+        </div>
+        <nav class="navbar" aria-label="Nabigazio nagusia">
+            <a href="../index.html" class="navbar-logo">Números Enteros&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <div class="navbar-menu">
+                <a href="../index.html" class="navbar-item">Inicio</a>
+                <div class="dropdown">
+                    <a href="#" class="navbar-item dropdown-btn">Temas</a>
+                    <div class="dropdown-content">
+                        <a href="numeros-naturales.html">Números Naturales</a>
+                        <a href="divisibilidad.html">Divisibilidad</a>
+                        <a href="numeros-enteros.html" class="active">Números Enteros</a>
+                        <a href="fracciones.html">Fracciones</a>
+                        <a href="algebra.html">Álgebra</a>
+                        <a href="geometria.html">Geometría</a>
+                        <a href="tablas-graficas.html">Tablas y Gráficas</a>
+                    </div>
+                </div>
+                <a href="https://chatgpt.com/g/g-67d38635fb0c81919668655bdd91d6f7-matella-euskeraz" class="navbar-item">Matella ChatGPT</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="teoria-numeros" class="seccion-contenedor">
+            <h2>Números Enteros</h2>
+            
+            <div class="tarjetas-secciones">
+                <div class="tarjeta" data-modal="positivos-negativos">
+                    <h3>🔹 Positivos y Negativos</h3>
+                    <p>Introducción a números positivos y negativos</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Más Información</a>
+                </div>
+                <div class="tarjeta" data-modal="conjunto-enteros">
+                    <h3>🔢 Conjunto de Enteros (ℤ)</h3>
+                    <p>Definición y propiedades del conjunto de números enteros</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Más Información</a>
+                </div>
+                <div class="tarjeta" data-modal="sumas-restas">
+                    <h3>➕➖ Sumas y Restas</h3>
+                    <p>Operaciones con números enteros</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Más Información</a>
+                </div>
+                <div class="tarjeta" data-modal="parentesis">
+                    <h3>🔄 Uso de Paréntesis</h3>
+                    <p>Reglas para eliminar paréntesis</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Más Información</a>
+                </div>
+                <div class="tarjeta" data-modal="multiplicacion-division">
+                    <h3>✖️➗ Multiplicación y División</h3>
+                    <p>Reglas de signos en multiplicación y división</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Más Información</a>
+                </div>
+                <div class="tarjeta" data-modal="operaciones-combinadas">
+                    <h3>🧮 Operaciones Combinadas</h3>
+                    <p>Resolución de expresiones complejas</p>
+                    <a href="#" class="btn btn-mas-informacion abrir-modal">Más Información</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="herramientas-interactivas" class="seccion-contenedor">
+            <h2>Herramientas Interactivas</h2>
+            <div class="herramientas">
+                <div class="herramienta">
+                    <h3>Calculadora de Números Enteros</h3>
+                    <div class="herramienta-contenedor">
+                        <div class="configuracion-ejercicio">
+                            <h4>Configurar Ejercicio</h4>
+                            <div class="opciones-ejercicio">
+                                <div class="selector-operacion">
+                                    <label for="operacion">Operación:</label>
+                                    <select id="operacion">
+                                        <option value="suma">Suma</option>
+                                        <option value="resta">Resta</option>
+                                        <option value="multiplicacion">Multiplicación</option>
+                                        <option value="division">División</option>
+                                    </select>
+                                </div>
+                                <div class="selector-dificultad">
+                                    <label for="dificultad">Dificultad:</label>
+                                    <select id="dificultad">
+                                        <option value="facil">Fácil</option>
+                                        <option value="medio">Medio</option>
+                                        <option value="dificil">Difícil</option>
+                                    </select>
+                                </div>
+                                <button id="generar-ejercicio" class="btn">Generar Ejercicio</button>
+                            </div>
+                        </div>
+
+                        <div class="ejercicio-actual">
+                            <h4>Ejercicio</h4>
+                            <div id="problema-matematico" class="problema-matematico">
+                                <span id="numero1">0</span>
+                                <span id="operador1">+</span>
+                                <span id="numero2">0</span>
+                                <span>=</span>
+                                <input type="text" id="respuesta-usuario" placeholder="Tu respuesta">
+                            </div>
+                            <div class="controles-ejercicio">
+                                <button id="comprobar-respuesta" class="btn btn-primario">Comprobar</button>
+                                <button id="mostrar-solucion" class="btn btn-secundario">Mostrar Solución</button>
+                            </div>
+                        </div>
+
+                        <div class="resultado-ejercicio">
+                            <h4>Resultado</h4>
+                            <p id="mensaje-resultado"></p>
+                            <div id="explicacion-solucion" class="explicacion-solucion"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Matemáticas 1º ESO. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Modales -->
+    <div id="modal-positivos-negativos" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-conjunto-enteros" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-sumas-restas" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-parentesis" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-multiplicacion-division" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+    <div id="modal-operaciones-combinadas" class="modal-overlay">
+        <div class="modal-contenido"></div>
+    </div>
+
+    <script src="../js/modales-numerosenteros.js"></script>
+    <script src="../js/herramienta-numeros-enteros.js"></script>
+</body>
+</html>

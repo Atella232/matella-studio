@@ -1,0 +1,387 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Características de las Funciones - Funciones" data-lang-eu="Funtzioen Ezaugarriak - Funtzioak">Características de las Funciones - Funciones</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-chart-line"></i>
+            <span data-lang-es="Características de las Funciones" data-lang-eu="Funtzioen Ezaugarriak">Características de las Funciones</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="action-buttons" style="text-align: center; margin: 2rem 0;">
+            <button class="button-primary" data-lang-es="Ejercicios" data-lang-eu="Ariketak" onclick="alert('Próximamente')">
+                <i class="fas fa-edit"></i> Ejercicios
+            </button>
+            <button class="button-secondary" data-lang-es="Herramienta" data-lang-eu="Tresna" onclick="alert('Próximamente')">
+                <i class="fas fa-tools"></i> Herramienta
+            </button>
+        </div>
+
+        <h2 class="page-title" data-lang-es="Características de las Funciones" data-lang-eu="Funtzioen Ezaugarriak">Características de las Funciones</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="Dominio de una Función" data-lang-eu="Funtzio baten Domeinua">Dominio de una Función</h3>
+            <p data-lang-es="El dominio es el conjunto de todos los valores que puede tomar la variable independiente x para que la función esté bien definida."
+               data-lang-eu="Domeinua x aldagai independenteak hart ditzakeen balio guztien multzoa da, funtzioa ongi definituta egon dadin.">
+               El dominio es el conjunto de todos los valores que puede tomar la variable independiente x para que la función esté bien definida.
+            </p>
+            <div class="formula-box">
+                <p><strong data-lang-es="Casos especiales según el tipo de función:" data-lang-eu="Funtzio motaren arabera kasu bereziak:">Casos especiales según el tipo de función:</strong></p>
+                <ul>
+                    <li data-lang-es="Función polinómica: Dom = ℝ (todos los números reales)" 
+                        data-lang-eu="Funtzio polinomikoa: Dom = ℝ (zenbaki erreal guztiak)">
+                        Función polinómica: Dom = ℝ (todos los números reales)
+                    </li>
+                    <li data-lang-es="Función racional: No puede haber división por 0" 
+                        data-lang-eu="Funtzio arrazionala: 0-rekiko zatiketa ezin da izan">
+                        Función racional: No puede haber división por 0
+                    </li>
+                    <li data-lang-es="Función radical: El radicando debe ser ≥ 0 (si es raíz par)" 
+                        data-lang-eu="Funtzio erradikala: erroa ≥ 0 izan behar da (bada bikoitia)">
+                        Función radical: El radicando debe ser ≥ 0 (si es raíz par)
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Recorrido o Rango" data-lang-eu="Ibilbidea edo Barrutia">Recorrido o Rango</h3>
+            <p data-lang-es="El recorrido es el conjunto de todos los valores que toma la función. Se obtiene observando todos los posibles resultados de f(x)."
+               data-lang-eu="Ibilbidea funtzioak hartzen dituen balio guztien multzoa da. f(x)-en emaitza posible guztiak behatuz lortzen da.">
+               El recorrido es el conjunto de todos los valores que toma la función. Se obtiene observando todos los posibles resultados de f(x).
+            </p>
+            <p class="example">
+                <em data-lang-es="Ejemplo: Para f(x) = x², el dominio es ℝ pero el recorrido es [0, +∞)" 
+                    data-lang-eu="Adibidea: f(x) = x² funtzioarentzat domeinua ℝ da baina ibilbidea [0, +∞)">
+                    Ejemplo: Para f(x) = x², el dominio es ℝ pero el recorrido es [0, +∞)
+                </em>
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Continuidad" data-lang-eu="Jarraitutasuna">Continuidad</h3>
+            <p data-lang-es="Una función es continua si podemos dibujarla sin levantar el lápiz del papel. No debe tener \"saltos\" o \"huecos\"."
+               data-lang-eu="Funtzio bat jarraitua da arkatza paperetik altxatu gabe marraztu baditzakegu. Ez du \"salto\" edo \"zulo\" izan behar.">
+               Una función es continua si podemos dibujarla sin levantar el lápiz del papel. No debe tener "saltos" o "huecos".
+            </p>
+            <div class="formula-box">
+                <p><strong data-lang-es="Tipos de discontinuidad:" data-lang-eu="Desjarraitutasun motak:">Tipos de discontinuidad:</strong></p>
+                <ul>
+                    <li data-lang-es="Discontinuidad de salto: La función \"salta\" de un valor a otro" 
+                        data-lang-eu="Salto desjarraitutasuna: funtzioak balio batetik bestera \"saltatzen\" du">
+                        Discontinuidad de salto: La función "salta" de un valor a otro
+                    </li>
+                    <li data-lang-es="Discontinuidad infinita: La función \"se va al infinito\"" 
+                        data-lang-eu="Infinitu desjarraitutasuna: funtzioa \"infiniturako doa\"">
+                        Discontinuidad infinita: La función "se va al infinito"
+                    </li>
+                    <li data-lang-es="Discontinuidad evitable: Hay un \"hueco\" en la gráfica" 
+                        data-lang-eu="Saihesteko desjarraitutasuna: grafikoan \"zulo\" bat dago">
+                        Discontinuidad evitable: Hay un "hueco" en la gráfica
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Monotonía (Crecimiento y Decrecimiento)" data-lang-eu="Monotonia (Handitzea eta Murriztea)">Monotonía (Crecimiento y Decrecimiento)</h3>
+            <div class="formula-box">
+                <p><strong data-lang-es="Función Creciente:" data-lang-eu="Funtzio Handitzailea:">Función Creciente:</strong></p>
+                <p data-lang-es="Si x₁ < x₂ entonces f(x₁) < f(x₂). A medida que x aumenta, f(x) también aumenta."
+                   data-lang-eu="x₁ < x₂ bada orduan f(x₁) < f(x₂). X handitzen den heinean, f(x) ere handitzen da.">
+                   Si x₁ < x₂ entonces f(x₁) < f(x₂). A medida que x aumenta, f(x) también aumenta.
+                </p>
+                <p><strong data-lang-es="Función Decreciente:" data-lang-eu="Funtzio Murriztailea:">Función Decreciente:</strong></p>
+                <p data-lang-es="Si x₁ < x₂ entonces f(x₁) > f(x₂). A medida que x aumenta, f(x) disminuye."
+                   data-lang-eu="x₁ < x₂ bada orduan f(x₁) > f(x₂). X handitzen den heinean, f(x) murriztu egiten da.">
+                   Si x₁ < x₂ entonces f(x₁) > f(x₂). A medida que x aumenta, f(x) disminuye.
+                </p>
+                <p><strong data-lang-es="Función Constante:" data-lang-eu="Funtzio Konstantea:">Función Constante:</strong></p>
+                <p data-lang-es="f(x₁) = f(x₂) para cualquier x₁ y x₂. El valor no cambia."
+                   data-lang-eu="f(x₁) = f(x₂) x₁ eta x₂ edozein izanik. Balioa ez da aldatzen.">
+                   f(x₁) = f(x₂) para cualquier x₁ y x₂. El valor no cambia.
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Extremos Relativos" data-lang-eu="Baliokide Muturrak">Extremos Relativos</h3>
+            <div class="formula-box">
+                <p><strong data-lang-es="Máximo Relativo:" data-lang-eu="Erlatiboko Maximoa:">Máximo Relativo:</strong></p>
+                <p data-lang-es="Un punto a es un máximo relativo si f(a) ≥ f(x) para todo x cercano a a."
+                   data-lang-eu="a puntu bat erlatiboko maximum bat da f(a) ≥ f(x) bada a-rengandik gertu dauden x guztietarako.">
+                   Un punto a es un máximo relativo si f(a) ≥ f(x) para todo x cercano a a.
+                </p>
+                <p><strong data-lang-es="Mínimo Relativo:" data-lang-eu="Erlatiboko Minimoa:">Mínimo Relativo:</strong></p>
+                <p data-lang-es="Un punto a es un mínimo relativo si f(a) ≤ f(x) para todo x cercano a a."
+                   data-lang-eu="a puntu bat erlatiboko minimum bat da f(a) ≤ f(x) bada a-rengandik gertu dauden x guztietarako.">
+                   Un punto a es un mínimo relativo si f(a) ≤ f(x) para todo x cercano a a.
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Ejemplos Visuales" data-lang-eu="Adibide Ikusgarriak">Ejemplos Visuales</h3>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-arrow-up icon-concept"></i>
+                        <span data-lang-es="Ejemplo: Función Creciente" data-lang-eu="Adibidea: Funtzio Handitzailea">Ejemplo: Función Creciente</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="f(x) = 2x + 1 es una función creciente en todo su dominio."
+                           data-lang-eu="f(x) = 2x + 1 funtzioa handitzailea da bere domeinu osoan.">
+                           f(x) = 2x + 1 es una función creciente en todo su dominio.
+                        </p>
+                        <div class="example">
+                            <table style="margin: 1rem auto; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th style="border: 1px solid var(--border-color); padding: 0.5rem;">x</th>
+                                        <th style="border: 1px solid var(--border-color); padding: 0.5rem;">f(x) = 2x + 1</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">-2</td>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center; color: var(--accent-color);">-3</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">-1</td>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center; color: var(--accent-color);">-1</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">0</td>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center; color: var(--accent-color);">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">1</td>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center; color: var(--accent-color);">3</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p style="text-align: center; margin-top: 1rem;">
+                                <em data-lang-es="Observa: cuando x aumenta, f(x) también aumenta" 
+                                    data-lang-eu="Behatu: x handitzen denean, f(x) ere handitzen da">
+                                    Observa: cuando x aumenta, f(x) también aumenta
+                                </em>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-arrow-down icon-concept"></i>
+                        <span data-lang-es="Ejemplo: Función Decreciente" data-lang-eu="Adibidea: Funtzio Murriztailea">Ejemplo: Función Decreciente</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="f(x) = -x + 3 es una función decreciente en todo su dominio."
+                           data-lang-eu="f(x) = -x + 3 funtzioa murriztailea da bere domeinu osoan.">
+                           f(x) = -x + 3 es una función decreciente en todo su dominio.
+                        </p>
+                        <div class="example">
+                            <table style="margin: 1rem auto; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th style="border: 1px solid var(--border-color); padding: 0.5rem;">x</th>
+                                        <th style="border: 1px solid var(--border-color); padding: 0.5rem;">f(x) = -x + 3</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">0</td>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center; color: var(--accent-color);">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">1</td>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center; color: var(--accent-color);">2</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">2</td>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center; color: var(--accent-color);">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">3</td>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center; color: var(--accent-color);">0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p style="text-align: center; margin-top: 1rem;">
+                                <em data-lang-es="Observa: cuando x aumenta, f(x) disminuye" 
+                                    data-lang-eu="Behatu: x handitzen denean, f(x) murriztu egiten da">
+                                    Observa: cuando x aumenta, f(x) disminuye
+                                </em>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-chart-area icon-concept"></i>
+                        <span data-lang-es="Ejemplo: Función con Máximo" data-lang-eu="Adibidea: Maximoa duen Funtzioa">Ejemplo: Función con Máximo</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="f(x) = -x² + 4 tiene un máximo en el punto (0, 4)."
+                           data-lang-eu="f(x) = -x² + 4 funtzioak maximo bat du (0, 4) puntuan.">
+                           f(x) = -x² + 4 tiene un máximo en el punto (0, 4).
+                        </p>
+                        <div class="example">
+                            <table style="margin: 1rem auto; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th style="border: 1px solid var(--border-color); padding: 0.5rem;">x</th>
+                                        <th style="border: 1px solid var(--border-color); padding: 0.5rem;">f(x) = -x² + 4</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">-2</td>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">-1</td>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center; background-color: var(--accent-color); color: white;">0</td>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center; background-color: var(--accent-color); color: white;">4</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">1</td>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">2</td>
+                                        <td style="border: 1px solid var(--border-color); padding: 0.5rem; text-align: center;">0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p style="text-align: center; margin-top: 1rem;">
+                                <em data-lang-es="El máximo está marcado en color" 
+                                    data-lang-eu="Maximoa kolorez markatuta dago">
+                                    El máximo está marcado en color
+                                </em>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="⚠️ Errores Típicos" data-lang-eu="⚠️ Ohiko Akatsak">⚠️ Errores Típicos</h3>
+            <ul>
+                <li data-lang-es="Confundir dominio con recorrido" 
+                    data-lang-eu="Domeinua ibilbidearekin nahastea">
+                    Confundir dominio con recorrido
+                </li>
+                <li data-lang-es="No identificar correctamente los intervalos de crecimiento" 
+                    data-lang-eu="Handitze-tarteak ez identifikatzea zuzen">
+                    No identificar correctamente los intervalos de crecimiento
+                </li>
+                <li data-lang-es="Confundir extremos relativos con absolutos" 
+                    data-lang-eu="Erlatiboko muturrak absolutuekin nahastea">
+                    Confundir extremos relativos con absolutos
+                </li>
+                <li data-lang-es="No considerar todas las restricciones del dominio" 
+                    data-lang-eu="Domeinuaren murriztapen guztiak ez kontuan hartzea">
+                    No considerar todas las restricciones del dominio
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Raíces - Potencias y Raíces" data-lang-eu="Erroak - Berreketak eta Erroak">Raíces - Potencias y Raíces</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-square-root-alt"></i>
+            <span data-lang-es="Raíces" data-lang-eu="Erroak">Raíces</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="action-buttons">
+            <button class="action-button" data-lang-es="Ejercicios" data-lang-eu="Ariketa">
+                <i class="fas fa-pencil-alt"></i>
+                <span>Ejercicios</span>
+            </button>
+            <button class="action-button" data-lang-es="Herramienta" data-lang-eu="Tresna">
+                <i class="fas fa-tools"></i>
+                <span>Herramienta</span>
+            </button>
+        </div>
+
+        <h2 class="page-title" data-lang-es="Raíces" data-lang-eu="Erroak">Raíces</h2>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es una Raíz?" data-lang-eu="Zer da Erro bat?">¿Qué es una Raíz?</h3>
+            <p data-lang-es="La raíz es la operación inversa de la potencia. Si una potencia nos dice cuántas veces multiplicar un número, la raíz nos pregunta: ¿qué número elevado a una potencia me da este resultado?"
+               data-lang-eu="Erroga berreketa eragiketaren aurkakoa da. Berreaketa batek zenbat aldiz biderkatu zenbaki bat esaten digunean, erroga galdetzen digu: zein zenbaki berreketa honetara ematen du emaitza hau?">
+               La raíz es la operación inversa de la potencia. Si una potencia nos dice cuántas veces multiplicar un número, la raíz nos pregunta: ¿qué número elevado a una potencia me da este resultado?
+            </p>
+            <div class="formula-card">
+                <p><strong data-lang-es="Definición:" data-lang-eu="Definizioa:">Definición:</strong></p>
+                <div class="math-display">\[ \sqrt[n]{a} = b \quad \text{si} \quad b^n = a \]</div>
+            </div>
+            <p class="key-takeaway" data-lang-es="<b>Por ejemplo:</b> $\sqrt[3]{8} = 2$ porque $2^3 = 8$"
+               data-lang-eu="<b>Adibidez:</b> $\sqrt[3]{8} = 2$ because $2^3 = 8$">
+               <b>Por ejemplo:</b> $\sqrt[3]{8} = 2$ porque $2^3 = 8$
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Tipos de Raíces" data-lang-eu="Erroen Motak">Tipos de Raíces</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-square-root-alt icon-concept"></i>
+                        <span data-lang-es="Raíz cuadrada (n = 2)" data-lang-eu="Erro karratua (n = 2)">Raíz cuadrada (n = 2)</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="La raíz cuadrada es la más común. El índice 2 suele omitirse."
+                           data-lang-eu="Erro karratua ohikoena da. 2 indizea askotan ez da idazten.">
+                           La raíz cuadrada es la más común. El índice 2 suele omitirse.
+                        </p>
+                        <div class="formula-card">
+                            <div class="math-display">\[ \sqrt{a} = \sqrt[2]{a} \]</div>
+                            <p class="example" data-lang-es="<strong>Ejemplo:</strong> $\sqrt{16} = 4$ porque $4^2 = 16$"
+                               data-lang-eu="<strong>Adibidea:</strong> $\sqrt{16} = 4$ because $4^2 = 16$">
+                               <strong>Ejemplo:</strong> $\sqrt{16} = 4$ porque $4^2 = 16$
+                            </p>
+                        </div>
+                        <div class="warning-box">
+                            <p data-lang-es="⚠️ <strong>Nota importante:</strong> La raíz cuadrada de un número positivo tiene <b>dos resultados</b>: uno positivo y otro negativo. Por ejemplo, $\sqrt{16} = \pm 4$"
+                               data-lang-eu="⚠️ <strong>Ohar garrantzitsua:</strong> Zenbaki positibo baten erro karratuak <b>bi emaitza</b> ditu: bat positiboa eta bestea negatiboa. Adibidez, $\sqrt{16} = \pm 4$">
+                               ⚠️ <strong>Nota importante:</strong> La raíz cuadrada de un número positivo tiene <b>dos resultados</b>: uno positivo y otro negativo. Por ejemplo, $\sqrt{16} = \pm 4$
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-cube icon-concept"></i>
+                        <span data-lang-es="Raíz cúbica (n = 3)" data-lang-eu="Erro kubikoa (n = 3)">Raíz cúbica (n = 3)</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="La raíz cúbica siempre tiene un resultado único, incluso para números negativos."
+                           data-lang-eu="Erro kubikoak beti emaitza bakarra du, zenbaki negatiboentzat ere.">
+                           La raíz cúbica siempre tiene un resultado único, incluso para números negativos.
+                        </p>
+                        <div class="formula-card">
+                            <div class="math-display">\[ \sqrt[3]{a} \]</div>
+                            <p class="example" data-lang-es="<strong>Ejemplo:</strong> $\sqrt[3]{27} = 3$ porque $3^3 = 27$<br>"
+                               data-lang-eu="<strong>Adibidea:</strong> $\sqrt[3]{27} = 3$ because $3^3 = 27$<br>">
+                               <strong>Ejemplo:</strong> $\sqrt[3]{27} = 3$ porque $3^3 = 27$<br>
+                            </p>
+                            <p class="example" data-lang-es="<strong>Ejemplo:</strong> $\sqrt[3]{-8} = -2$ porque $(-2)^3 = -8$"
+                               data-lang-eu="<strong>Adibidea:</strong> $\sqrt[3]{-8} = -2$ because $(-2)^3 = -8$">
+                               <strong>Ejemplo:</strong> $\sqrt[3]{-8} = -2$ porque $(-2)^3 = -8$
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-list-ol icon-concept"></i>
+                        <span data-lang-es="Raíz n-ésima (n > 3)" data-lang-eu="Erro n-garrena (n > 3)">Raíz n-ésima (n > 3)</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Para raíces de índice mayor que 3, escribimos el índice encima del símbolo."
+                           data-lang-eu="3 baino handiagoko indizea duten erroentzat, indizea sinboloaren gainean idazten dugu.">
+                           Para raíces de índice mayor que 3, escribimos el índice encima del símbolo.
+                        </p>
+                        <div class="formula-card">
+                            <div class="math-display">\[ \sqrt[n]{a} \]</div>
+                            <p class="example" data-lang-es="<strong>Ejemplo:</strong> $\sqrt[4]{16} = 2$ porque $2^4 = 16$"
+                               data-lang-eu="<strong>Adibidea:</strong> $\sqrt[4]{16} = 2$ because $2^4 = 16$">
+                               <strong>Ejemplo:</strong> $\sqrt[4]{16} = 2$ porque $2^4 = 16$
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Propiedades de las Raíces" data-lang-eu="Erroen Proprietateak">Propiedades de las Raíces</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-times icon-concept"></i>
+                        <span data-lang-es="Raíz de un producto" data-lang-eu="Biderketa baten erroa">Raíz de un producto</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="La raíz de un producto es igual al producto de las raíces."
+                           data-lang-eu="Biderketa baten erroa da erroen biderketa.">
+                           La raíz de un producto es igual al producto de las raíces.
+                        </p>
+                        <div class="formula-card">
+                            <div class="math-display">\[ \sqrt[n]{a \cdot b} = \sqrt[n]{a} \cdot \sqrt[n]{b} \]</div>
+                            <p class="example" data-lang-es="<strong>Ejemplo:</strong> $\sqrt{4 \cdot 9} = \sqrt{4} \cdot \sqrt{9} = 2 \cdot 3 = 6$"
+                               data-lang-eu="<strong>Adibidea:</strong> $\sqrt{4 \cdot 9} = \sqrt{4} \cdot \sqrt{9} = 2 \cdot 3 = 6$">
+                               <strong>Ejemplo:</strong> $\sqrt{4 \cdot 9} = \sqrt{4} \cdot \sqrt{9} = 2 \cdot 3 = 6$
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-divide icon-concept"></i>
+                        <span data-lang-es="Raíz de un cociente" data-lang-eu="Zatiketa baten erroa">Raíz de un cociente</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="La raíz de un cociente es igual al cociente de las raíces."
+                           data-lang-eu="Zatiketa baten erroa da erroen zatiketa.">
+                           La raíz de un cociente es igual al cociente de las raíces.
+                        </p>
+                        <div class="formula-card">
+                            <div class="math-display">\[ \sqrt[n]{\frac{a}{b}} = \frac{\sqrt[n]{a}}{\sqrt[n]{b}} \quad (b \neq 0) \]</div>
+                            <p class="example" data-lang-es="<strong>Ejemplo:</strong> $\sqrt{\frac{16}{4}} = \frac{\sqrt{16}}{\sqrt{4}} = \frac{4}{2} = 2$"
+                               data-lang-eu="<strong>Adibidea:</strong> $\sqrt{\frac{16}{4}} = \frac{\sqrt{16}}{\sqrt{4}} = \frac{4}{2} = 2$">
+                               <strong>Ejemplo:</strong> $\sqrt{\frac{16}{4}} = \frac{\sqrt{16}}{\sqrt{4}} = \frac{4}{2} = 2$
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-superscript icon-concept"></i>
+                        <span data-lang-es="Relación con potencias" data-lang-eu="Berreketekin duen harremana">Relación con potencias</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Una raíz puede expresarse como una potencia con exponente fraccionario."
+                           data-lang-eu="Erro bat esponenteko berreket bezala adieraz daiteke.">
+                           Una raíz puede expresarse como una potencia con exponente fraccionario.
+                        </p>
+                        <div class="formula-card">
+                            <div class="math-display">\[ \sqrt[n]{a^m} = a^{\frac{m}{n}} \]</div>
+                            <p class="example" data-lang-es="<strong>Ejemplo:</strong> $\sqrt[3]{5^2} = 5^{\frac{2}{3}}$"
+                               data-lang-eu="<strong>Adibidea:</strong> $\sqrt[3]{5^2} = 5^{\frac{2}{3}}$">
+                               <strong>Ejemplo:</strong> $\sqrt[3]{5^2} = 5^{\frac{2}{3}}$
+                            </p>
+                            <p class="example" data-lang-es="<strong>Ejemplo:</strong> $\sqrt{a} = a^{\frac{1}{2}}$"
+                               data-lang-eu="<strong>Adibidea:</strong> $\sqrt{a} = a^{\frac{1}{2}}$">
+                               <strong>Ejemplo:</strong> $\sqrt{a} = a^{\frac{1}{2}}$
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Racionalización" data-lang-eu="Arrazionalizazioa">Racionalización</h3>
+            <p data-lang-es="Racionalizar significa eliminar las raíces del denominador de una fracción. Esto nos facilita el cálculo y nos da una forma más 'limpia' del resultado."
+               data-lang-eu="Arrazionalizatzea da zatiketako izendatzailetik erroak kentzea. Horrek kalkulua errazten digu eta emaitzaren forma 'garbiagoa' ematen digu.">
+               Racionalizar significa eliminar las raíces del denominador de una fracción. Esto nos facilita el cálculo y nos da una forma más 'limpia' del resultado.
+            </p>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-square-root-alt icon-concept"></i>
+                        <span data-lang-es="Caso 1: Una raíz en el denominador" data-lang-eu="1. Kasua: Erro bat izendatzailean">Caso 1: Una raíz en el denominador</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Multiplicamos numerador y denominador por la misma raíz."
+                           data-lang-eu="Zenbatzailea eta izendatzailea erro berberaz biderkatzen ditugu.">
+                           Multiplicamos numerador y denominador por la misma raíz.
+                        </p>
+                        <div class="formula-card">
+                            <div class="math-display">\[ \frac{a}{\sqrt{b}} = \frac{a \cdot \sqrt{b}}{b} \]</div>
+                            <p class="example" data-lang-es="<strong>Ejemplo:</strong> $\frac{3}{\sqrt{2}} = \frac{3 \cdot \sqrt{2}}{2}$"
+                               data-lang-eu="<strong>Adibidea:</strong> $\frac{3}{\sqrt{2}} = \frac{3 \cdot \sqrt{2}}{2}$">
+                               <strong>Ejemplo:</strong> $\frac{3}{\sqrt{2}} = \frac{3 \cdot \sqrt{2}}{2}$
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <i class="fas fa-plus icon-concept"></i>
+                        <span data-lang-es="Caso 2: Suma o resta de raíces en el denominador" data-lang-eu="2. Kasua: Erroen batura edo kenketa izendatzailean">Caso 2: Suma o resta de raíces en el denominador</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p data-lang-es="Usamos la fórmula de diferencia de cuadrados para eliminar las raíces."
+                           data-lang-eu="Karratuen diferentziaren formula erabiltzen dugu erroak kentzeko.">
+                           Usamos la fórmula de diferencia de cuadrados para eliminar las raíces.
+                        </p>
+                        <div class="formula-card">
+                            <div class="math-display">\[ \frac{a}{\sqrt{b} + \sqrt{c}} = \frac{a(\sqrt{b} - \sqrt{c})}{b - c} \]</div>
+                            <p class="example" data-lang-es="<strong>Ejemplo:</strong> $\frac{2}{\sqrt{3} + \sqrt{2}} = \frac{2(\sqrt{3} - \sqrt{2})}{3 - 2} = 2(\sqrt{3} - \sqrt{2})$"
+                               data-lang-eu="<strong>Adibidea:</strong> $\frac{2}{\sqrt{3} + \sqrt{2}} = \frac{2(\sqrt{3} - \sqrt{2})}{3 - 2} = 2(\sqrt{3} - \sqrt{2})$">
+                               <strong>Ejemplo:</strong> $\frac{2}{\sqrt{3} + \sqrt{2}} = \frac{2(\sqrt{3} - \sqrt{2})}{3 - 2} = 2(\sqrt{3} - \sqrt{2})$
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="⚠️ Errores Típicos" data-lang-eu="⚠️ Ohiko Akatsak">⚠️ Errores Típicos</h3>
+            <p data-lang-es="¡Atención! Estas operaciones son <b>INCORRECTAS</b>:"
+               data-lang-eu="Kontuz! Eragiketa hauek <b>OKERRAK</b> dira:">
+               ¡Atención! Estas operaciones son <b>INCORRECTAS</b>:
+            </p>
+            
+            <div class="warning-box">
+                <div class="error-item">
+                    <i class="fas fa-times-circle error-icon"></i>
+                    <div class="error-content">
+                        <p data-lang-es="$\sqrt{a + b} \neq \sqrt{a} + \sqrt{b}$" data-lang-eu="$\sqrt{a + b} \neq \sqrt{a} + \sqrt{b}$">$\sqrt{a + b} \neq \sqrt{a} + \sqrt{b}$</p>
+                        <p data-lang-es="<strong>INCORRECTO:</strong> $\sqrt{4 + 9} \neq \sqrt{4} + \sqrt{9}$"
+                           data-lang-eu="<strong>OKERRA:</strong> $\sqrt{4 + 9} \neq \sqrt{4} + \sqrt{9}$">
+                           <strong>INCORRECTO:</strong> $\sqrt{4 + 9} \neq \sqrt{4} + \sqrt{9}$
+                        </p>
+                        <p data-lang-es="<strong>CORRECTO:</strong> $\sqrt{13} \neq 2 + 3 = 5$"
+                           data-lang-eu="<strong>ZUZENA:</strong> $\sqrt{13} \neq 2 + 3 = 5$">
+                           <strong>CORRECTO:</strong> $\sqrt{13} \neq 2 + 3 = 5$
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="error-item">
+                    <i class="fas fa-times-circle error-icon"></i>
+                    <div class="error-content">
+                        <p data-lang-es="$\sqrt{a^2} \neq a$" data-lang-eu="$\sqrt{a^2} \neq a$">$\sqrt{a^2} \neq a$</p>
+                        <p data-lang-es="<strong>INCORRECTO:</strong> Siempre escribir $\sqrt{a^2} = a$"
+                           data-lang-eu="<strong>OKERRA:</strong> Beti $\sqrt{a^2} = a$ idaztea">
+                           <strong>INCORRECTO:</strong> Siempre escribir $\sqrt{a^2} = a$
+                        </p>
+                        <p data-lang-es="<strong>CORRECTO:</strong> $\sqrt{a^2} = |a|$ (valor absoluto)"
+                           data-lang-eu="<strong>ZUZENA:</strong> $\sqrt{a^2} = |a|$ (balio absolutua)">
+                           <strong>CORRECTO:</strong> $\sqrt{a^2} = |a|$ (valor absoluto)
+                        </p>
+                        <p data-lang-es="<strong>Ejemplo:</strong> Si $a = -3$, entonces $\sqrt{(-3)^2} = \sqrt{9} = 3$, no $-3$"
+                           data-lang-eu="<strong>Adibidea:</strong> $a = -3$ bada, orduan $\sqrt{(-3)^2} = \sqrt{9} = 3$, ez $-3$">
+                           <strong>Ejemplo:</strong> Si $a = -3$, entonces $\sqrt{(-3)^2} = \sqrt{9} = 3$, no $-3$
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="error-item">
+                    <i class="fas fa-times-circle error-icon"></i>
+                    <div class="error-content">
+                        <p data-lang-es="No considerar el signo en raíces pares" data-lang-eu="Sinua kontutan ez hartzea erro bikoitzietan">No considerar el signo en raíces pares</p>
+                        <p data-lang-es="<strong>INCORRECTO:</strong> $\sqrt[4]{-16}$ no existe en números reales"
+                           data-lang-eu="<strong>OKERRA:</strong> $\sqrt[4]{-16}$ ez da existitzen zenbaki errealetan">
+                           <strong>INCORRECTO:</strong> $\sqrt[4]{-16}$ no existe en números reales
+                        </p>
+                        <p data-lang-es="<strong>CORRECTO:</strong> Solo las raíces de índice impar existen para números negativos"
+                           data-lang-eu="<strong>ZUZENA:</strong> Indize bakoitia duten erroak bakarrik existitzen dira zenbaki negatiboentzat">
+                           <strong>CORRECTO:</strong> Solo las raíces de índice impar existen para números negativos
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

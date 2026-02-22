@@ -769,5 +769,262 @@
     "accessibility": "إمكانية الوصول",
     "privacy": "الخصوصية",
     "credits": "الاعتمادات"
+  },
+  "zatigarritasuna": {
+    "home": {
+      "title": "Divisibilidad",
+      "subtitle": "Múltiplos, divisores y números primos",
+      "description": "Descubre las reglas ocultas de los números. Aprende a encontrar múltiplos, divisores, m.c.m. y m.c.d., herramientas esenciales para simplificar problemas.",
+      "startTheory": "Explorar Teoría",
+      "startLab": "Laboratorio",
+      "features": {
+        "title": "¿Qué aprenderás?",
+        "lab": {
+          "title": "Laboratorio Interactivo",
+          "desc": "Pon a prueba tus conocimientos con herramientas dinámicas y observa la divisibilidad en acción.",
+          "link": "Ir al Laboratorio"
+        },
+        "f1": {
+          "title": "Múltiplos y Divisores",
+          "desc": "Entiende la relación fundamental entre los números."
+        },
+        "f2": {
+          "title": "Criterios",
+          "desc": "Aprende trucos rápidos para saber si un número es divisible por otro."
+        },
+        "f3": {
+          "title": "Números Primos",
+          "desc": "Descubre los 'bloques de construcción' de todos los números."
+        },
+        "f4": {
+          "title": "m.c.m. y m.c.d.",
+          "desc": "Aplica estrategias para resolver problemas de coincidencia y reparto."
+        }
+      },
+      "curriculum": {
+        "title": "Alineación Curricular DBH 1",
+        "c1": "Identificación de múltiplos y divisores de un número.",
+        "c2": "Aplicación de los criterios de divisibilidad (2, 3, 5, 9, 10, 11).",
+        "c3": "Descomposición factorial en números primos.",
+        "c4": "Cálculo y aplicación del m.c.m. y el m.c.d. en la resolución de problemas."
+      }
+    },
+    "theory": {
+      "title": "Teoría de Divisibilidad",
+      "sections": {
+        "conceptos": "Conceptos Básicos",
+        "criterios": "Criterios de Divisibilidad",
+        "primos": "Primos y Compuestos",
+        "mcmMcd": "m.c.m. y m.c.d."
+      },
+      "conceptos": {
+        "title": "Múltiplos y Divisores",
+        "subtitle": "La relación fundamental",
+        "description": "Entendiendo cómo se relacionan los números a través de la multiplicación y la división exacta.",
+        "multiplos": {
+          "title": "Múltiplos de un número",
+          "text": "Los múltiplos de un número son todos los posibles resultados de multiplicar ese número por cada uno de los números naturales.",
+          "example": "Múltiplos de 4 son 0, 4, 8, 12, 16... (resultado de 4×0, 4×1, 4×2, 4×3...)"
+        },
+        "divisores": {
+          "title": "Divisores de un número",
+          "text": "Los divisores de un número son aquellos que lo pueden dividir en una cantidad exacta de veces, es decir, sin dejar resto.",
+          "example": "Divisores de 12 son 1, 2, 3, 4, 6 y 12."
+        }
+      },
+      "criterios": {
+        "title": "Reglas Rápidas de Divisibilidad",
+        "subtitle": "Atajos matemáticos",
+        "description": "Existen reglas sencillas que nos permiten saber si un número es divisible por otro sin necesidad de hacer la división."
+      },
+      "primos": {
+        "title": "Números Primos y Compuestos",
+        "subtitle": "Los bloques de construcción",
+        "description": "Clasificando los números según su cantidad de divisores.",
+        "primos": {
+          "title": "Números Primos",
+          "text": "Un número primo es un número natural mayor que 1 que tiene únicamente dos divisores distintos: él mismo y el 1.",
+          "example": "Ejemplos: 2, 3, 5, 7, 11, 13..."
+        },
+        "compuestos": {
+          "title": "Números Compuestos",
+          "text": "Un número compuesto es cualquier número natural mayor que 1 que no es primo. Es decir, tiene más de dos divisores.",
+          "example": "Ejemplos: 4 (divisores 1,2,4), 6 (1,2,3,6), 9 (1,3,9)..."
+        },
+        "descomposicion": {
+          "title": "Descomposición en Factores Primos",
+          "text": "Cualquier número compuesto se puede expresar como un producto único de números primos. Este proceso se llama descomposición factorial.",
+          "example": "12 = 2² × 3"
+        }
+      },
+      "mcmMcd": {
+        "title": "m.c.m. y m.c.d.",
+        "subtitle": "Múltiplos y divisores comunes",
+        "description": "Cómo encontrar el mínimo común múltiplo y el máximo común divisor usando la factorización.",
+        "mcm": {
+          "title": "Mínimo Común Múltiplo (m.c.m.)",
+          "text": "El número más pequeño que es múltiplo de todos los números del grupo. Regla: Seleccionar todos los factores primos (comunes y no comunes), elevados al mayor exponente.",
+          "example": "12 = 2² × 3, 18 = 2 × 3² ➔ m.c.m.(12, 18) = 2² × 3² = 36"
+        },
+        "mcd": {
+          "title": "Máximo Común Divisor (m.c.d.)",
+          "text": "El número más grande que puede dividir a todos los números del grupo sin dejar resto. Regla: Seleccionar solamente los factores primos comunes, elevados al menor exponente.",
+          "example": "12 = 2² × 3, 18 = 2 × 3² ➔ m.c.d.(12, 18) = 2 × 3 = 6"
+        }
+      }
+    },
+    "lab": {
+      "title": "Laboratorio de Divisibilidad",
+      "subtitle": "Herramientas interactivas para explorar números",
+      "divisorChecker": {
+        "title": "Comprobar Divisibilidad",
+        "desc": "Comprueba si un número es divisible por otro",
+        "numberPlaceholder": "Ej: 24",
+        "divisorPlaceholder": "Ej: 6",
+        "number": "Número",
+        "divisor": "Divisor",
+        "check": "Comprobar",
+        "isDivisible": "¡Excelente! {{num}} es divisible por {{div}}.",
+        "isNotDivisible": "{{num}} NO es divisible por {{div}}.",
+        "explanationFormat": "{{num}} ÷ {{div}} = {{quotient}} (Resto: {{remainder}})"
+      },
+      "lcmGcd": {
+        "title": "Calculadora de m.c.m. y m.c.d.",
+        "desc": "Calcula el mínimo común múltiplo y máximo común divisor",
+        "num1Placeholder": "Ej: 12",
+        "num2Placeholder": "Ej: 18",
+        "num1": "1er Número",
+        "num2": "2º Número",
+        "lcm": "m.c.m. (Mínimo Común Múltiplo)",
+        "gcd": "m.c.d. (Máximo Común Divisor)",
+        "calculate": "Calcular",
+        "resultLcm": "El m.c.m. de {{n1}} y {{n2}} es {{result}}.",
+        "resultGcd": "El m.c.d. de {{n1}} y {{n2}} es {{result}}."
+      },
+      "rules": {
+        "title": "Criterios de Divisibilidad",
+        "desc": "Comprueba qué criterios de divisibilidad cumple un número",
+        "numberPlaceholder": "Ej: 120",
+        "number": "Número",
+        "check": "Comprobar Criterios",
+        "divBy": "Divisible por {{div}}:",
+        "yes": "Sí",
+        "no": "No",
+        "rule2": "La última cifra es par (0, 2, 4, 6, 8)",
+        "rule3": "La suma de sus cifras es múltiplo de 3",
+        "rule5": "Termina en 0 o 5",
+        "rule9": "La suma de sus cifras es múltiplo de 9",
+        "rule10": "Termina en 0",
+        "rule11": "La diferencia entre la suma de las cifras en posiciones pares e impares es 0 o múltiplo de 11"
+      }
+    }
+  },
+  "zenbakiOsoak": {
+    "home": {
+      "title": "Números Enteros",
+      "subtitle": "El Conjunto ℤ, Operaciones y Jerarquía",
+      "description": "Sumérgete en el mundo de los números enteros. Aprende a calcular con números positivos y negativos en distintas situaciones reales.",
+      "startTheory": "Explorar Teoría",
+      "features": {
+        "title": "¿Qué aprenderás?",
+        "f1": {
+          "title": "El Conjunto ℤ",
+          "desc": "Conoce los números negativos, positivos y el cero, y cómo se representan en la recta numérica."
+        },
+        "f2": {
+          "title": "Valor Absoluto",
+          "desc": "Entiende el concepto de distancia al cero y cómo calcular el valor absoluto de cualquier número."
+        },
+        "f3": {
+          "title": "Suma y Resta",
+          "desc": "Descubre las reglas de las operaciones básicas usando movimientos en la recta numérica."
+        },
+        "f4": {
+          "title": "Operaciones Avanzadas",
+          "desc": "Domina la regla de los signos para multiplicar y dividir, y resuelve operaciones combinadas."
+        }
+      },
+      "curriculum": {
+        "title": "Alineación Curricular DBH 1",
+        "c1": "Identificación y uso de números enteros en contextos reales (temperaturas, deudas).",
+        "c2": "Representación y ordenación en la recta numérica.",
+        "c3": "Cálculo del valor absoluto y del opuesto de un número.",
+        "c4": "Operaciones básicas y combinadas con números enteros siguiendo la jerarquía."
+      }
+    },
+    "theory": {
+      "title": "Teoría de Números Enteros",
+      "subtitle": "Descubre el conjunto ℤ",
+      "description": "Aprende cómo usar los números positivos y negativos para resolver problemas cotidianos y matemáticos.",
+      "sections": {
+        "concepto": "El Conjunto ℤ",
+        "operaciones": "Suma y Resta",
+        "avanzadas": "Operaciones Avanzadas"
+      },
+      "concepto": {
+        "title": "El Conjunto ℤ y la Recta Numérica",
+        "description": "Los números enteros incluyen los naturales (positivos), sus opuestos (negativos) y el cero. Se usan para representar deudas, temperaturas bajo cero o profundidades.",
+        "recta": {
+          "title": "La Recta Numérica",
+          "text": "El cero es el origen. A la derecha están los positivos (>0) y a la izquierda los negativos (<0)."
+        },
+        "absoluto": {
+          "title": "Valor Absoluto",
+          "text": "Es la distancia de un número al cero. Siempre es positivo o cero. Se escribe entre barras | |.",
+          "example": "Ejemplo: |-7| = 7, porque -7 está a 7 unidades del 0."
+        }
+      },
+      "operaciones": {
+        "title": "Suma y Resta",
+        "description": "Piensa en la suma y resta como movimientos en la recta: sumar un positivo es avanzar (derecha), sumar un negativo es retroceder (izquierda).",
+        "sumaMismo": {
+          "title": "Suma con el mismo signo",
+          "text": "Suma sus valores absolutos y mantén el signo.",
+          "example": "(-7) + (-2) = -9"
+        },
+        "sumaDiferente": {
+          "title": "Suma con distinto signo",
+          "text": "Resta sus valores absolutos y pon el signo del que tiene mayor valor absoluto.",
+          "example": "(+8) + (-3) = +5"
+        },
+        "resta": {
+          "title": "Resta",
+          "text": "Restar un número es lo mismo que sumar su opuesto.",
+          "example": "(+9) - (+5) → (+9) + (-5) = +4"
+        }
+      },
+      "avanzadas": {
+        "title": "Operaciones Avanzadas",
+        "description": "Reglas para multiplicación, división y operaciones combinadas.",
+        "multDiv": {
+          "title": "Multiplicación y División",
+          "text": "Se aplica la Regla de los Signos:\n• Signos iguales: resultado positivo (+)\n• Signos diferentes: resultado negativo (-)",
+          "example": "(+3) × (-4) = -12"
+        },
+        "combinadas": {
+          "title": "Operaciones Combinadas",
+          "text": "Sigue la misma jerarquía que con los naturales, prestando atención a los signos.",
+          "example": "15 - 3 · [6 - (−12) ÷ (+4)] = -12"
+        }
+      }
+    },
+    "lab": {
+      "title": "Laboratorio de Números Enteros",
+      "subtitle": "Calculadora interactiva para practicar con números enteros",
+      "integerCalculator": {
+        "title": "Calculadora Especial",
+        "desc": "Pon a prueba sumas, restas, multiplicaciones y divisiones con números negativos.",
+        "num1": "1er Número",
+        "num2": "2º Número",
+        "operation": "Operación",
+        "add": "Suma (+)",
+        "subtract": "Resta (-)",
+        "multiply": "Multiplicación (×)",
+        "divide": "División (÷)",
+        "calculate": "Calcular",
+        "result": "Resultado: {{res}}",
+        "errorZero": "¡No se puede dividir por cero!"
+      }
+    }
   }
 }

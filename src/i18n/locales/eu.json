@@ -43,6 +43,7 @@
         "title": "Zatikiak DBH",
         "subtitle": "Ikasi zenbaki arrazionalak zentzuz",
         "description": "2. DBHko gaitasunei oinarritutako ikasketa plataforma. Eraiki zure zatikien ulermena laborategi interaktiboen eta testuingurudun misioen bidez.",
+        "description_dbh1": "1. DBHko gaitasunei oinarritutako ikasketa plataforma. Eraiki zure zatikien ulermena laborategi interaktiboen eta testuingurudun misioen bidez.",
         "cta": {
             "start": "Erronkak",
             "lab": "Joan laborategira",
@@ -82,6 +83,7 @@
         "curriculum": {
             "title": "Curriculumean Lerrokatzea",
             "description": "Euskadiko 2. DBHko Matematikaren curriculumean oinarrituta diseinatua, gaitasunen ikuspegia eta ebaluazio irizpideak kontuan hartuta.",
+            "description_dbh1": "Euskadiko 1. DBHko Matematikaren curriculumean oinarrituta diseinatua, gaitasunen ikuspegia eta ebaluazio irizpideak kontuan hartuta.",
             "tags": {
                 "numerical": "Zenbaki-zentzua",
                 "fractions": "Zatikiak eta hamartarrak",
@@ -294,6 +296,7 @@
     "theory": {
         "title": "Zatikien Teoria",
         "subtitle": "2. DBHrako zatikiei buruz jakin behar duzun guztia",
+        "subtitle_dbh1": "1. DBHrako zatikiei buruz jakin behar duzun guztia",
         "description": "Arakatu gai bakoitza txartelak klikatuz. Edukiak hedatuko dira azalpenekin, adibideekin eta zatikiak menperatzeko trikimailuekin.",
         "sections": {
             "definition": "Zer da zatiki bat?",
@@ -755,6 +758,884 @@
             "bot1": "Max",
             "bot2": "Luna",
             "bot3": "Leo"
+        }
+    },
+    "zatigarritasuna": {
+        "home": {
+            "title": "Zatigarritasuna",
+            "subtitle": "Multiploak, zatitzaileak eta zenbaki lehenak",
+            "description": "Ezagutu zenbakien ezkutuko arauak. Ikasi multiploak, zatitzaileak, m.k.t. eta Z.K.H. aurkitzen, problemak sinplifikatzeko ezinbesteko tresnak.",
+            "startTheory": "Teoria Arakatu",
+            "startLab": "Laborategia",
+            "features": {
+                "title": "Zer ikasiko duzu?",
+                "lab": {
+                    "title": "Laborategi Interaktiboa",
+                    "desc": "Probatu zure ezagutzak tresna dinamikoekin eta ikusi zatigarritasuna martxan.",
+                    "link": "Laborategira Joan"
+                },
+                "f1": {
+                    "title": "Multiploak eta Zatitzaileak",
+                    "desc": "Ulertu zenbakien arteko oinarrizko harremana."
+                },
+                "f2": {
+                    "title": "Irizpideak",
+                    "desc": "Ikasi truku azkarrak zenbaki bat beste batez zatigarria den jakiteko."
+                },
+                "f3": {
+                    "title": "Zenbaki Lehenak",
+                    "desc": "Ezagutu zenbaki guztien 'eraikuntza-blokeak'."
+                },
+                "f4": {
+                    "title": "m.k.t. eta Z.K.H.",
+                    "desc": "Aplikatu estrategiak kointzidentzia eta banaketa problemak ebazteko."
+                }
+            },
+            "curriculum": {
+                "title": "DBH 1 Curriculuma",
+                "c1": "Zenbaki baten multiploak eta zatitzaileak identifikatzea.",
+                "c2": "Zatigarritasun-irizpideak aplikatzea (2, 3, 5, 9, 10, 11).",
+                "c3": "Zenbaki lehenetan deskonposatze faktoriala.",
+                "c4": "m.k.t. eta Z.K.H. kalkulatzea eta problemen ebazpenean aplikatzea."
+            }
+        },
+        "theory": {
+            "title": "Zatigarritasuna Teoria",
+            "sections": {
+                "conceptos": "Oinarrizko Kontzeptuak",
+                "criterios": "Zatigarritasun Irizpideak",
+                "primos": "Lehenak eta Konposatuak",
+                "mcmMcd": "m.k.t. eta Z.K.H."
+            },
+            "conceptos": {
+                "title": "Multiploak eta Zatitzaileak",
+                "subtitle": "Oinarrizko harremana",
+                "description": "Zenbakiak elkarren artean nola erlazionatzen diren ulertzea biderketa eta zatiketa zehatzaren bidez.",
+                "multiplos": {
+                    "title": "Zenbaki baten multiploak",
+                    "text": "Zenbaki baten multiploak zenbaki hori zenbaki natural bakoitzarekin biderkatzearen emaitza posible guztiak dira.",
+                    "example": "4ren multiploak 0, 4, 8, 12, 16... dira (4x0, 4x1, 4x2, 4x3... emaitza)"
+                },
+                "divisores": {
+                    "title": "Zenbaki baten zatitzaileak",
+                    "text": "Zenbaki baten zatitzaileak zenbaki hori kopuru zehatz batean zati dezaketenak dira, hau da, hondarrik utzi gabe.",
+                    "example": "12ren zatitzaileak 1, 2, 3, 4, 6 eta 12 dira."
+                }
+            },
+            "criterios": {
+                "title": "Zatigarritasun Arau Azkarrak",
+                "subtitle": "Lasterbide matematikoak",
+                "description": "Arau sinpleak daude, zenbaki bat beste batez zatigarria den jakiteko, zatiketa egin beharrik gabe."
+            },
+            "primos": {
+                "title": "Zenbaki Lehenak eta Konposatuak",
+                "subtitle": "Eraikuntza blokeak",
+                "description": "Zenbakiak haien zatitzaile kopuruaren arabera sailkatzea.",
+                "primos": {
+                    "title": "Zenbaki Lehenak",
+                    "text": "Zenbaki lehen bat 1 baino handiagoa den zenbaki natural bat da, bi zatitzaile desberdin baino ez dituena: bera eta 1a.",
+                    "example": "Adibideak: 2, 3, 5, 7, 11, 13..."
+                },
+                "compuestos": {
+                    "title": "Zenbaki Konposatuak",
+                    "text": "Zenbaki konposatu bat lehena ez den 1 baino handiagoa den edozein zenbaki natural da. Hau da, bi zatitzaile baino gehiago ditu.",
+                    "example": "Adibideak: 4 (zatitzaileak 1,2,4), 6 (1,2,3,6), 9 (1,3,9)..."
+                },
+                "descomposicion": {
+                    "title": "Faktore Lehenetan Deskonposatzea",
+                    "text": "Edozein zenbaki konposatu zenbaki lehenen produktu bakar gisa adieraz daiteke. Prozesu honi deskonposaketa faktoriala deitzen zaio.",
+                    "example": "12 = 2² × 3"
+                }
+            },
+            "mcmMcd": {
+                "title": "m.k.t. eta Z.K.H.",
+                "subtitle": "Multiplo eta zatitzaile komunak",
+                "description": "Multiplo komun txikiena eta zatitzaile komun handiena nola aurkitu faktorizazioa erabiliz.",
+                "mcm": {
+                    "title": "Multiplo Komun Txikiena (m.k.t.)",
+                    "text": "Taldeko zenbaki guztien multiplo den zenbaki txikiena da. Araua: Faktore lehen guztiak (komunak eta ez-komunak) aukeratu, berretzaile handienera jasota.",
+                    "example": "12 = 2² × 3, 18 = 2 × 3² ➔ m.k.t.(12, 18) = 2² × 3² = 36"
+                },
+                "mcd": {
+                    "title": "Zatitzaile Komun Handiena (Z.K.H.)",
+                    "text": "Taldeko zenbaki guztiak hondarrik utzi gabe zati ditzakeen zenbaki handiena da. Araua: Faktore lehen komunak soilik aukeratu, berretzaile txikienera jasota.",
+                    "example": "12 = 2² × 3, 18 = 2 × 3² ➔ Z.K.H.(12, 18) = 2 × 3 = 6"
+                }
+            }
+        },
+        "lab": {
+            "title": "Zatigarritasun Laborategia",
+            "subtitle": "Tresna interaktiboak zenbakiak arakatzeko",
+            "divisorChecker": {
+                "title": "Zatigarritasuna Egiaztatu",
+                "desc": "Zenbaki bat beste batez zatigarria den egiaztatu",
+                "numberPlaceholder": "Adib: 24",
+                "divisorPlaceholder": "Adib: 6",
+                "number": "Zenbakia",
+                "divisor": "Zatitzailea",
+                "check": "Egiaztatu",
+                "isDivisible": "Bikain! {{num}} zatigarria da {{div}}-rekin.",
+                "isNotDivisible": "{{num}} EZ da zatigarria {{div}}-rekin.",
+                "explanationFormat": "{{num}} ÷ {{div}} = {{quotient}} (Hondarra: {{remainder}})"
+            },
+            "lcmGcd": {
+                "title": "MKT eta ZKH Kalkulagailua",
+                "desc": "Multiplo Komun Txikiena eta Zatitzaile Komun Handiena kalkulatu",
+                "num1Placeholder": "Adib: 12",
+                "num2Placeholder": "Adib: 18",
+                "num1": "1. Zenbakia",
+                "num2": "2. Zenbakia",
+                "lcm": "MKT (Multiplo Komun Txikiena)",
+                "gcd": "ZKH (Zatitzaile Komun Handiena)",
+                "calculate": "Kalkulatu",
+                "resultLcm": "{{n1}} eta {{n2}}ren MKT {{result}} da.",
+                "resultGcd": "{{n1}} eta {{n2}}ren ZKH {{result}} da."
+            },
+            "rules": {
+                "title": "Zatigarritasun Irizpideak",
+                "desc": "Zenbaki bat zein irizpide betetzen dituen egiaztatu",
+                "numberPlaceholder": "Adib: 120",
+                "number": "Zenbakia",
+                "check": "Irizpideak Egiaztatu",
+                "divBy": "{{div}}-z zatigarria:",
+                "yes": "Bai",
+                "no": "Ez",
+                "rule2": "Azken zifra bikoitia da (0, 2, 4, 6, 8)",
+                "rule3": "Zifren batura 3ren multiploa da",
+                "rule5": "0 edo 5ean amaitzen da",
+                "rule9": "Zifren batura 9ren multiploa da",
+                "rule10": "0an amaitzen da",
+                "rule11": "Bikoitietako eta bakoitietako zifren baturen arteko aldea 0 edo 11ren multiploa da"
+            }
+        }
+    },
+    "zenbakiNaturalak": {
+        "home": {
+            "title": "Zenbaki Naturalak",
+            "subtitle": "Eragiketak, buruzko kalkulua eta hierarkia",
+            "description": "Ikasi zenbaki naturalen oinarrizko kontzeptuak, garatu buruzko kalkulurako estrategiak eta menperatu eragiketen ordena."
+        },
+        "theory": {
+            "title": "Zenbaki Naturalen Teoria",
+            "subtitle": "Oinarrizko eragiketak ulertu",
+            "description": "Arakatu nola eragiten dugun zenbaki naturalekin eta kalkulu hauek zuzentzen dituzten arauak.",
+            "sections": {
+                "mentalMath": "Buruzko Kalkulua",
+                "operations": "Oinarrizko Eragiketak",
+                "orderOfOperations": "Eragiketen Ordena"
+            },
+            "mentalMath": {
+                "title": "Buruzko Kalkulurako Estrategiak",
+                "subtitle": "Azkarrago Kalkulatzeko Teknikak",
+                "description": "Buruzko kalkulua eragiketa matematikoak kalkulagailu edo bestelako tresnen laguntzarik gabe egitea da. Trebetasun hau garatzeak arintasuna eta zenbakien ulermen hobea emango dizu.",
+                "rounding": {
+                    "title": "Biribildu eta Doitu",
+                    "text": "Hurbildu zenbakietako bat gertuko hamarreko edo ehuneko batera, egin eragiketa eta ondoren zuzendu emaitza.",
+                    "example": "38 + 45 → (40 + 45) - 2 = 85 - 2 = 83"
+                },
+                "breakdown": {
+                    "title": "Deskonposatu",
+                    "text": "Banatu zenbakietako bat zati maneiagarriagoetan.",
+                    "example": "128 ÷ 4 → (120 ÷ 4) + (8 ÷ 4) = 30 + 2 = 32"
+                }
+            },
+            "order": {
+                "title": "Eragiketen Ordena",
+                "subtitle": "Eragiketen Hierarkia",
+                "description": "Adierazpen batek eragiketa bat baino gehiago dituenean, ordena zehatz bat jarraitu behar dugu guztiek emaitza bera lortzen dugula ziurtatzeko.",
+                "rulesTitle": "Ordena Zuzena hau da:",
+                "rule1": "<b>Parentesiak:</b> Lehenengo parentesi barruko eragiketak ebazten dira.",
+                "rule2": "<b>Biderketak eta Zatiketak:</b> Ezkerretik eskuinera ebazten dira.",
+                "rule3": "<b>Batuketak eta Kenketak:</b> Amaieran ebazten dira, ezkerretik eskuinera.",
+                "example": "Adibidea:",
+                "exampleText": "9 - (1 + 3) · 2\n= 9 - 4 · 2    // Lehenik parentesiaren barrualdea eragiten dugu kendu ahal izateko\n= 9 - 8        // Ondoren biderketa egingo dugu\n= 1            // Azkenik kenketa egingo dugu"
+            },
+            "ops": {
+                "title": "Oinarrizko Eragiketak",
+                "subtitle": "Definizioa eta Propietateak",
+                "description": "Zenbaki naturalak kontatzeko eta ordenatzeko erabiltzen dira. Eragiketa nagusiak batuketa, kenketa, biderketa eta zatiketa dira.",
+                "addition": {
+                    "title": "Batuketa",
+                    "text": "Kantitateak elkartzean datza. Emaitza kostatantea da zein ordenatan batzen diren kontuan hartu gabe (Propietate trukakorra).",
+                    "example": "15 + 23 = 38"
+                },
+                "subtraction": {
+                    "title": "Kenketa",
+                    "text": "Kantitate bati bestea kentzean datza. Kontuz! Ez da trukakorra.",
+                    "example": "45 - 12 = 33"
+                },
+                "multiplication": {
+                    "title": "Biderketa",
+                    "text": "Batu izeneko batukari berdinen batuketa laburtua da. Propietate trukakorra betetzen du.",
+                    "example": "4 · 5 = 20"
+                },
+                "division": {
+                    "title": "Zatiketa",
+                    "text": "Kantitate bat zati berdinetan banatzean datza.",
+                    "example": "20 ÷ 4 = 5"
+                }
+            }
+        },
+        "pdfTheory": {
+            "title": "Zenbaki Arruntak eta Hamartarrak",
+            "subtitle": "Ezagutu Zuzen Zenbakiduna eta Eragiketak",
+            "description": "Ikasi zenbaki arruntak eta hamartarrak nola erabili, problemak ebazteko D-P-E metodologiarekin batera.",
+            "sections": {
+                "arruntak": "Zenbaki Arruntak",
+                "hamartarrak": "Zenbaki Hamartarrak",
+                "dpe": "D-P-E Metodologia",
+                "tips": "Ikasketa Teknikak"
+            },
+            "arruntak": {
+                "title": "Zenbaki Arruntak",
+                "description": "Zenbaki arruntak (0, 1, 2, 3...) kantitate osoak adierazteko erabiltzen ditugu.",
+                "segidak": {
+                    "title": "Segidak eta Zuzen Zenbakiduna",
+                    "text": "Zuzen batean bi zenbaki ezagun baditugu, haien arteko distantzia kalkulatu eta tarte kopuruarekin zatitu."
+                },
+                "biribiltzea": {
+                    "title": "Biribiltzea Milakoetara",
+                    "text": "Eskuineko zenbakia 5 edo handiagoa bada, gehitu bat. 4 edo txikiagoa bada, berdin utzi."
+                },
+                "eragiketak": {
+                    "title": "Eragiketa Konbinatuak",
+                    "text": "Hierarkia: 1. Parentesiak, 2. Biderketak eta zatiketak, 3. Batuketak eta kenketak."
+                }
+            },
+            "hamartarrak": {
+                "title": "Zenbaki Hamartarrak",
+                "description": "Hamartarrak unitate bat baino txikiagoak diren zatiak adierazteko erabiltzen dira.",
+                "zuzena": {
+                    "title": "Zuzen Zenbakidunean Kokatzea",
+                    "text": "Beti irudikatu zero bat atzean (adibidez 9,7 -> 9,70) hobeto ikusteko."
+                },
+                "biribiltzea": {
+                    "title": "Biribiltzea Hamarrenetara",
+                    "text": "Ehunena 5 edo handiagoa bada, gehitu bat hamarrenari."
+                },
+                "eragiketak": {
+                    "title": "Eragiketen Mekanika",
+                    "text": "Batuketa/Kenketa: koma guztiak zutabe berean lerrokatu. Biderketa/Zatiketa (10, 100, 1000): Koma mugitu zero kopurua adina eskuinera edo ezkerrera."
+                }
+            },
+            "dpe": {
+                "title": "Problemak Ebazteko D-P-E Metodologia",
+                "description": "Problema bat ondo ebazteko estruktura hau jarraitu behar da beti:",
+                "datuak": {
+                    "title": "D - Datuak",
+                    "text": "Testua irakurri eta soilik beharrezkoa den informazio matematikoa atera. Hitz gakoak eta zenbakiak soilik."
+                },
+                "prozedura": {
+                    "title": "P - Prozedura",
+                    "text": "Planteamendu matematikoa garbi idatzi. Ahal bada eragiketa konbinatu bakar batean."
+                },
+                "erantzuna": {
+                    "title": "E - Erantzuna",
+                    "text": "Inoiz ez utzi zenbaki bat bakarrik. Perpaus oso batekin erantzun behar da beti."
+                }
+            },
+            "tips": {
+                "title": "Ikasketa Teknikak",
+                "description": "Funtzionatzen duten ikuspuntu alternatiboak:",
+                "semaforo": {
+                    "title": "Eragiketa Konbinatuen Semaforoa",
+                    "text": "Gorriz: parentesiak. Horiz: biderketak/zatiketak. Berdez: batuketak/kenketak."
+                },
+                "dirua": {
+                    "title": "Hamartarrak vs. Zentimoak",
+                    "text": "Hamartarrekin arazoak badaude, pentsatu euro eta zentimotan. Burmuinak dirua hobeto lantzen du."
+                },
+                "rol": {
+                    "title": "Rol Jokoa",
+                    "text": "Eragiketa bat berariazko akats batekin egin eta saiatu akats hori deskubritzen eta zergatia azaltzen."
+                }
+            }
+        },
+        "erronkak": {
+            "title": "Zenbakien Erronkak",
+            "ch1": {
+                "title": "📌 Kokapena Zuzenean",
+                "description": "Zuzen zenbakidun batean 5.000-tik 6.000-ra bitarteko tartea lau zatitan banatuta dago. Zein da lehenengo markari dagokion zenbakia?",
+                "options": [
+                    "5.100",
+                    "5.250",
+                    "5.500"
+                ],
+                "success": "Zuzen! Tarte bakoitza (6000-5000)/4 = 250 da. 5000 + 250 = 5.250.",
+                "error": "Tarte osoa (1000) zati 4 eginez aurkitu tarte bakoitzaren luzera."
+            },
+            "ch2": {
+                "title": "🔄 Biribiltzea",
+                "description": "Biribildu milakoetara 26.421 zenbakia.",
+                "options": [
+                    "26.000",
+                    "26.400",
+                    "27.000"
+                ],
+                "success": "Zuzen! Ehunena 4 denez (< 5), milakoa berdin geratzen da: 26.000.",
+                "error": "Begiratu milakoaren eskuinean dagoen zifrari (4)."
+            },
+            "ch3": {
+                "title": "🚦 Semaforoa",
+                "description": "Ebatzi eragiketa konbinatu hau: 6 × 5 - 10 + 36:9.",
+                "options": [
+                    "24",
+                    "14",
+                    "20"
+                ],
+                "success": "Bikain! (30) - 10 + (4) = 20 + 4 = 24.",
+                "error": "Lehenik biderketak eta zatiketak ebatzi. Gero batu eta kendu ezkerretik eskuinera."
+            },
+            "ch4": {
+                "title": "🎯 Hamarrenak",
+                "description": "Biribildu hamarrenetara 14,663 zenbakia.",
+                "options": [
+                    "14,6",
+                    "14,7",
+                    "15,0"
+                ],
+                "success": "Zuzen! Ehunena 6 da, 5 baino handiagoa, beraz hamarrenari 1 gehitzen zaio: 14,7.",
+                "error": "Hamarrenaren (6) eskuinean dagoen zifrari begiratu."
+            },
+            "ch5": {
+                "title": "✖️ Biderketa Azkarra",
+                "description": "Zein da emaitza biderketa hau buruz egitean? 7,5 × 1000.",
+                "options": [
+                    "750",
+                    "7.500",
+                    "75.000"
+                ],
+                "success": "Primeran! Koma 3 posizio eskuinera mugitzen da: 7.500.",
+                "error": "Mugitu koma eskuinera zenbat zero dauden arabera."
+            },
+            "ch6": {
+                "title": "➖ Kenketa Lerrokatua",
+                "description": "Zein da kenketa honen emaitza (gogoratu komak zutabetzea): 15,73 - 9,98.",
+                "options": [
+                    "5,75",
+                    "6,25",
+                    "5,85"
+                ],
+                "success": "Bikain! Komak ondo lerrokatuz eta bururakoak kontuan hartuz emaitza 5,75 da.",
+                "error": "Lerrokatu komak bertikalki eta egin kenketa arrunta."
+            },
+            "ch7": {
+                "title": "📏 D-P-E Prozedura",
+                "description": "Eraikin batek 27 solairu ditu. Solairu bakoitzean 12 bizileku daude, eta bakoitzenean 7 leiho. Zein da leihoak kalkulatzeko PROZEDURA egokia?",
+                "options": [
+                    "27 + 12 + 7",
+                    "27 × 12 × 7",
+                    "27 × 12 + 7"
+                ],
+                "success": "Zuzen! Erlazio guztiak biderkakorrak direnez, prozedura 27 × 12 × 7 da.",
+                "error": "Kantitate baten barruan beste elementu batzuk behin eta berriz agertzen direnean, biderkatu egiten da."
+            },
+            "ch8": {
+                "title": "📊 D-P-E Datuak",
+                "description": "50€ ditut eta 32,89€-ko jantzi bat eta 17,50€-ko baloi bat erosi nahi dut. Zer idatzi behar da DATUAK atalean?",
+                "options": [
+                    "Testu guztia hitzez hitz.",
+                    "Dirua: 50€ / Jantzia: 32,89€ / Baloia: 17,50€",
+                    "32,89 + 17,50 = 50,39"
+                ],
+                "success": "Garbi! Datuetan bakarrik informazio garrantzitsua jarri behar da, eragiketarik gabe.",
+                "error": "Datuetan ez dira eragiketak sartu behar, bakarrik problemaren laburpen erabilgarria."
+            },
+            "ch9": {
+                "title": "✍️ D-P-E Erantzuna",
+                "description": "Aurreko problemaren emaitza numerikoa daukazunean (0,39 falta), nola idatzi behar da ERANTZUNA atala?",
+                "options": [
+                    "0,39 bakarrik.",
+                    "0,39 €",
+                    "'Dirua faltan dut, zehazki 0,39 € falta zaizkit.'"
+                ],
+                "success": "Oso ondo! E (Erantzuna) beti esaldi oso batekin idatzi behar da, testuingurua emateko.",
+                "error": "Erantzunak ez dira zenbaki hutsak, beti azalpen esaldi bat behar dute."
+            }
+        }
+    },
+    "zenbakiOsoak": {
+        "home": {
+            "title": "Zenbaki Osoak",
+            "subtitle": "ℤ Multzoa, Eragiketak eta Hierarkia",
+            "description": "Murgildu zenbaki osoen munduan. Ikasi zenbaki positibo eta negatiboekin kalkulatzen bizitza errealeko hainbat egoeratan.",
+            "startTheory": "Teoria Arakatu",
+            "startLab": "Laborategia",
+            "features": {
+                "title": "Zer ikasiko duzu?",
+                "lab": {
+                    "title": "Laborategi Interaktiboa",
+                    "desc": "Praktikatu zenbaki osoekin kalkuluak egiten.",
+                    "link": "Laborategira Joan"
+                },
+                "f1": {
+                    "title": "ℤ Multzoa",
+                    "desc": "Ezagutu zenbaki negatiboak, positiboak eta zeroa, eta nola adierazten diren zenbaki zuzenean."
+                },
+                "f2": {
+                    "title": "Balio Absolutua",
+                    "desc": "Ulertu zerotik dagoen distantziaren kontzeptua eta nola kalkulatu edozein zenbakiren balio absolutua."
+                },
+                "f3": {
+                    "title": "Batuketa eta Kenketa",
+                    "desc": "Ezagutu oinarrizko eragiketen arauak zenbaki zuzeneko mugimenduak erabiliz."
+                },
+                "f4": {
+                    "title": "Eragiketa Aurreratuak",
+                    "desc": "Menperatu zeinuen araua biderkatzeko eta zatitzeko, eta ebatzi eragiketa konbinatuak."
+                }
+            },
+            "curriculum": {
+                "title": "DBH 1 Curriculuma",
+                "c1": "Zenbaki osoak identifikatzea eta erabiltzea testuinguru errealetan (tenperaturak, zorrak).",
+                "c2": "Adierazpena eta ordenazioa zenbaki zuzenean.",
+                "c3": "Zenbaki baten balio absolutuaren eta aurkakoaren kalkulua.",
+                "c4": "Oinarrizko eragiketak eta eragiketa konbinatuak zenbaki osoekin, hierarkia jarraituz."
+            }
+        },
+        "theory": {
+            "title": "Zenbaki Osoen Teoria",
+            "subtitle": "Ezagutu ℤ multzoa",
+            "description": "Ikasi zenbaki positiboak eta negatiboak nola erabili eguneroko arazoak eta arazo matematikoak ebazteko.",
+            "sections": {
+                "concepto": "ℤ Multzoa",
+                "operaciones": "Batuketa eta Kenketa",
+                "avanzadas": "Eragiketa Aurreratuak"
+            },
+            "concepto": {
+                "title": "ℤ Multzoa eta Zenbaki Zuzena",
+                "description": "Zenbaki osoek naturalak (positiboak), haien aurkakoak (negatiboak) eta zeroa biltzen dituzte. Zorrak, zero azpiko tenperaturak edo sakonerak adierazteko erabiltzen dira.",
+                "recta": {
+                    "title": "Zenbaki Zuzena",
+                    "text": "Zeroa jatorria da. Eskuinean positiboak daude (>0) eta ezkerrean negatiboak (<0)."
+                },
+                "absoluto": {
+                    "title": "Balio Absolutua",
+                    "text": "Zenbaki batetik zerora dagoen distantzia da. Beti da positiboa edo zero. | | barretan idazten da.",
+                    "example": "Adibidea: |-7| = 7, -7 zerotik 7 unitatera dagoelako."
+                }
+            },
+            "operaciones": {
+                "title": "Batuketa eta Kenketa",
+                "description": "Pentsatu batuketa eta kenketa zenbaki zuzeneko mugimendu gisa: positiboa batzea aurrera egitea da (eskuinera), negatiboa batzea atzera egitea da (ezkerrera).",
+                "sumaMismo": {
+                    "title": "Zeinu bereko batuketa",
+                    "text": "Batu balio absolutuak eta mantendu zeinua.",
+                    "example": "(-7) + (-2) = -9"
+                },
+                "sumaDiferente": {
+                    "title": "Zeinu desberdineko batuketa",
+                    "text": "Kendu balio absolutuak eta jarri balio absolutu handiena duenaren zeinua.",
+                    "example": "(+8) + (-3) = +5"
+                },
+                "resta": {
+                    "title": "Kenketa",
+                    "text": "Zenbaki bat kentzea haren aurkakoa batzearen berdina da.",
+                    "example": "(+9) - (+5) → (+9) + (-5) = +4"
+                }
+            },
+            "avanzadas": {
+                "title": "Eragiketa Aurreratuak",
+                "description": "Biderketa, zatiketa eta eragiketa konbinatuen arauak.",
+                "multDiv": {
+                    "title": "Biderketa eta Zatiketa",
+                    "text": "Zeinuen Araua aplikatzen da:\n• Zeinu berdinak: emaitza positiboa (+)\n• Zeinu desberdinak: emaitza negatiboa (-)",
+                    "example": "(+3) × (-4) = -12"
+                },
+                "combinadas": {
+                    "title": "Eragiketa Konbinatuak",
+                    "text": "Naturalekin erabiltzen den hierarkia bera jarraitzen da, zeinuei arreta jarriz.",
+                    "example": "15 - 3 · [6 - (−12) ÷ (+4)] = -12"
+                }
+            }
+        },
+        "lab": {
+            "title": "Zenbaki Osoen Laborategia",
+            "subtitle": "Kalkulagailu interaktiboa zenbaki osoekin praktikatzeko",
+            "integerCalculator": {
+                "title": "Kalkulagailu Berezia",
+                "desc": "Probatu batuketak, kenketak, biderketak eta zatiketak zenbaki negatiboekin.",
+                "num1": "1. Zenbakia",
+                "num2": "2. Zenbakia",
+                "operation": "Eragiketa",
+                "add": "Batuketa (+)",
+                "subtract": "Kenketa (-)",
+                "multiply": "Biderketa (×)",
+                "divide": "Zatiketa (÷)",
+                "calculate": "Kalkulatu",
+                "result": "Emaitza: {{res}}",
+                "errorZero": "Ezin da zerorekin zatitu!"
+            }
+        }
+    },
+    "algebra": {
+        "title": "Aljebra",
+        "subtitle": "Kalkulu mentalaren magia: letrak eta ekuazioak",
+        "home": {
+            "theory": {
+                "description": "Ikasi aljebraren oinarriak, adierazpenak eta ekuazioak.",
+                "link": "Teoria Ikusi"
+            },
+            "lab": {
+                "description": "Ebatzi ekuazioak eta praktikatu interaktiboki.",
+                "link": "Laborategian Sartu"
+            }
+        },
+        "theory": {
+            "title": "Aljebraren Teoria",
+            "sections": {
+                "letras": {
+                    "title": "1. Letrak eta Adierazpenak",
+                    "subtitle1": "Zenbakietatik Letretara",
+                    "p1": "Balio zehatz bat ezagutzen ez dugun egoeretan, letra bat erabiltzen dugu hura irudikatzeko. Letra honi <1>ezezaguna</1> edo <3>aldagaia</3> deitzen diogu. Horrek arauak orokortzea eta problema konplexuak ebaztea ahalbidetzen digu.",
+                    "example1": "<0>Adibidea:</0> Juanen adina 'x' bada, 15 urte barru 'x + 15' urte izango ditu, eta duela urtebete 'x - 1' zituen.",
+                    "subtitle2": "Adierazpen Aljebraikoak",
+                    "p2": "Adierazpen aljebraiko bat zenbakien, letren (aldagaien) eta eragiketa matematikoen konbinazioa da.",
+                    "components_title": "Adierazpen baten Osagaiak:",
+                    "c1": "<0>Letrak (Aldagaiak):</0> Balio ezezagunak adierazten dituzte (x, y, a, b...).",
+                    "c2": "<0>Zenbakiak (Koefizienteak):</0> Aldagaiak biderkatzen dituzten balio ezagunak.",
+                    "c3": "<0>Eragiketak:</0> Batuketa, kenketa, biderketa, zatiketa, etab.",
+                    "example2": "<0>Adibideak:</0> 3x - 5 (zenbaki baten hirukoitza ken bost), x² + 1 (zenbaki baten karratua gehi bat)."
+                },
+                "ecuaciones": {
+                    "title": "2. Ekuazioak",
+                    "subtitle1": "Zer da Ekuazio bat?",
+                    "p1": "Ekuazio bat ezezagun bat edo gehiago dituzten bi adierazpen aljebraikoren arteko berdintasuna da. Balantza orekatu bat bezalakoa da: berdin (=) zeinuaren alde batean dagoenak beste aldean dagoenaren balio bera izan behar du.",
+                    "goal": "<0>Helburua:</0> Berdintasuna egia bihurtzen duen ezezagunaren (normalean 'x') balioa aurkitzea.",
+                    "subtitle2": "Ekuazioak Ebazteko Teknikak",
+                    "p2": "Lehen mailako ekuazio bat ebazteko, pauso batzuk jarraitzen ditugu 'x askatzeko', hau da, berdin zeinuaren alde batean bakarrik uzteko.",
+                    "step1_title": "1. Pausua: Gaiak taldekatu",
+                    "step1_desc": "Ezezaguna (x) duten gai guztiak berdin zeinuaren alde batera mugitzen ditugu eta zenbaki guztiak bestera. <1>Gako araua:</1> alde batean batzen ari dena, beste aldera kentzen pasatzen da, eta alderantziz.",
+                    "step2_title": "2. Pausua: Sinplifikatu",
+                    "step2_desc": "Berdin zeinuaren alde bakoitzean eragiketak egiten ditugu adierazpena murrizteko.",
+                    "step3_title": "3. Pausua: Askatu",
+                    "step3_desc": "'x'-ak koefiziente bat badu (biderkatzen duen zenbaki bat), beste aldera zatitzen pasatzen dugu.",
+                    "subtitle3": "Problemen Ebazpena",
+                    "p3": "Aljebraren benetako indarra bizitza errealeko problemak ebatzi ditzakegun hizkuntza matematikora itzultzea da.",
+                    "problem_example": "<0>Problema:</0> Txanpon pila batek eta pilaren zazpigarren zati batek 24 euro balio dute. Zenbat balio du piloak?<br/><br/><2>Planteamendua:</2> x + (1/7)x = 24<br/><br/><5>Ebazpena:</5> (8/7)x = 24 → x = (24 × 7) / 8 → x = 21. Piloak 21 euro balio ditu."
+                },
+                "monomios": {
+                    "title": "3. Monomioekin Eragiketak",
+                    "subtitle1": "Monomioen Batuketa eta Kenketa",
+                    "p1": "Monomio <1>antzekoak</1> bakarrik batu edo ken daitezke, hau da, zati literal berdina dutenak (letra berdinak eta berretzaile berdinak).",
+                    "rule_title": "Urrezko Araua:",
+                    "rule_desc": "Koefizienteak batu edo kentzen dira eta zati literal berdina mantentzen da.",
+                    "example1": "<0>Antzekoak:</0> 4x + 2x = 6x<br/><br/><3>Ez antzekoak:</3> 3a + 2b (ezin da sinplifikatu)",
+                    "subtitle2": "Biderketa eta Zatiketa",
+                    "p2": "Monomioak biderkatzeko edo zatitzeko, koefizienteak eta zati literalak bereizita eragiten dira.",
+                    "mult_title": "Biderketa",
+                    "mult_desc": "Koefizienteak biderkatzen dira eta letra berdinen berretzaileak batzen dira.",
+                    "div_title": "Zatiketa",
+                    "div_desc": "Koefizienteak zatitzen dira eta letra berdinen berretzaileak kentzen dira.",
+                    "dist_title": "Propietate Banatzailea",
+                    "dist_desc": "Batuketa edo kenketa bat biderkatzen duen monomio batek gai bakoitza biderkatzen du."
+                }
+            }
+        },
+        "lab": {
+            "title": "Ekuazioen Laborategia",
+            "subtitle": "Ebatzi ekuazioak automatikoki eta landu aljebra",
+            "streak": "Segida",
+            "tool_title": "Ekuazioen Ebazlea",
+            "new_equation": "Sortu ekuazio berria",
+            "check": "Egiaztatu",
+            "show_solution": "Erakutsi soluzioa",
+            "correct": "Zuzena! Segi horrela!",
+            "incorrect": "Okerra. Saiatu berriro!",
+            "solution_title": "Pausoz Pausoko Soluzioa",
+            "next_equation": "Hurrengo Ekuazioa"
+        }
+    },
+    "geometria": {
+        "title": "Geometria",
+        "subtitle": "Formen eta espazioaren azterketa",
+        "home": {
+            "theory": {
+                "description": "Ikasi triangeluen, laukien eta haien propietateen inguruan. Ezagutu Pitagorasen teorema eta ikasi azalerak eta perimetroak kalkulatzen.",
+                "link": "Geometria aztertu"
+            },
+            "lab": {
+                "description": "Erabili gure tresna interaktiboak forma geometriko ezberdinekin lan egiteko eta zure ezagutzak probatzeko.",
+                "link": "Laborategian sartu"
+            }
+        },
+        "theory": {
+            "page_title": "Geometriaren Teoria",
+            "page_subtitle": "Forma Lauak eta Haien Propietateak",
+            "table": {
+                "type": "Mota",
+                "description": "Deskribapena",
+                "figure": "Figura",
+                "area": "Azalera",
+                "perimeter": "Perimetroa"
+            },
+            "triangles": {
+                "title": "Triangeluak",
+                "intro": "Triangeluak hiru alde eta hiru angelu dituzten poligonoak dira.",
+                "by_sides": {
+                    "title": "Sailkapena Aldeen Arabera",
+                    "equilateral": {
+                        "name": "Aldekidea",
+                        "desc": "Hiru aldeak berdinak ditu."
+                    },
+                    "isosceles": {
+                        "name": "Isoszelea",
+                        "desc": "Bi alde berdin eta bat desberdin ditu."
+                    },
+                    "scalene": {
+                        "name": "Eskalenoa",
+                        "desc": "Hiru aldeak desberdinak ditu."
+                    }
+                },
+                "by_angles": {
+                    "title": "Sailkapena Angeluen Arabera",
+                    "acute": {
+                        "name": "Akutangelua",
+                        "desc": "Hiru angelu zorrotz ditu (90° baino txikiagoak)."
+                    },
+                    "right": {
+                        "name": "Zuzena",
+                        "desc": "Angelu zuzen bat du (90°-koa)."
+                    },
+                    "obtuse": {
+                        "name": "Kamutsa",
+                        "desc": "Angelu kamuts bat du (90° baino handiagoa)."
+                    }
+                }
+            },
+            "quadrilaterals": {
+                "title": "Laukiak",
+                "parallelograms": {
+                    "title": "Paralelogramoak",
+                    "desc": "Aurkako aldeak binaka paralelo dituzte.",
+                    "square": {
+                        "name": "Karratua",
+                        "desc": "4 alde berdin eta 4 angelu zuzen."
+                    },
+                    "rectangle": {
+                        "name": "Laukizuzena",
+                        "desc": "Aurkako aldeak berdinak eta 4 angelu zuzen."
+                    },
+                    "rhombus": {
+                        "name": "Erronboa",
+                        "desc": "4 alde berdin eta aurkako angeluak berdinak."
+                    },
+                    "rhomboid": {
+                        "name": "Erronboidea",
+                        "desc": "Aurkako aldeak eta angeluak berdinak."
+                    }
+                },
+                "non_parallelograms": {
+                    "title": "Ez-Paralelogramoak",
+                    "trapezium": {
+                        "name": "Trapezioa",
+                        "desc": "Aurkako bi alde bakarrik ditu paraleloak."
+                    },
+                    "trapezoid": {
+                        "name": "Trapezoidea",
+                        "desc": "Ez du alde paralelorik bere aurkakoarekiko."
+                    }
+                }
+            },
+            "pythagoras": {
+                "title": "Pitagorasen Teorema",
+                "desc": "Triangelu zuzen guztietan, hipotenusaren karratua katetoen karratuen baturaren berdina da.",
+                "legend": "Non 'c' hipotenusa den, eta 'a' eta 'b' katetoak."
+            },
+            "areas_perimeters": {
+                "title": "Azalerak eta Perimetroak",
+                "desc": "Figura plano ohikoenen azalera eta perimetroa kalkulatzeko formulak.",
+                "square": {
+                    "name": "Karratua"
+                },
+                "rectangle": {
+                    "name": "Laukizuzena"
+                },
+                "triangle": {
+                    "name": "Triangelua"
+                },
+                "circle": {
+                    "name": "Zirkulua"
+                },
+                "rhombus": {
+                    "name": "Erronboa"
+                },
+                "trapezium": {
+                    "name": "Trapezioa",
+                    "perimeter_desc": "Aldeen batura"
+                }
+            }
+        },
+        "lab": {
+            "title": "Gela Geometrikoa",
+            "subtitle": "Kalkulatu ausazko figuren azalera",
+            "streak": "Bolada",
+            "tool_title": "Azalera Erronka",
+            "new_problem": "Erronka Berria",
+            "side": "Aldea",
+            "base": "Oinarria",
+            "height": "Altuera",
+            "radius": "Erradioa",
+            "find_area": "Kalkulatu irudi honen azalera.",
+            "find_area_rounded": "Kalkulatu irudi honen azalera (zenbaki oso bidera biribildu).",
+            "check": "Egiaztatu",
+            "show_solution": "Soluzioa Ikusi",
+            "correct": "Zuzena! Ederki kalkulatuta.",
+            "incorrect": "Okerra. Saiatu berriro edo ikusi soluzioa.",
+            "solution_title": "Soluzioa",
+            "next_problem": "Hurrengo Erronka"
+        }
+    },
+    "taulakGrafikoak": {
+        "title": "Taulak eta Grafikoak",
+        "subtitle": "Estatistiken oinarriak",
+        "home": {
+            "title": "Taulak eta Grafikoak",
+            "subtitle": "Datuen mundua irudikatu",
+            "description": "Ikasi informazioa nola bildu, antolatu eta irudikatu estatistika bidez.",
+            "startTheory": "Teoria Arakatu",
+            "features": {
+                "title": "Zer ikasiko duzu?",
+                "f1": {
+                    "title": "Biztanleria eta Lagina",
+                    "desc": "Ikasi nori galdetu informazioa lortzeko."
+                },
+                "f2": {
+                    "title": "Aldagai Estatistikoak",
+                    "desc": "Ikasi datu mota desberdinak bereizten (kualitatiboak eta kuantitatiboak)."
+                },
+                "f3": {
+                    "title": "Maiztasunak eta Taulak",
+                    "desc": "Ikasi datuak nola antolatu eta haien esanahia ulertu."
+                },
+                "f4": {
+                    "title": "Grafikoak eta Neurriak",
+                    "desc": "Ikasi grafikoak sortzen eta oinarrizko neurri estatistikoak aztertzen (Batez bestekoa, Mediana, Moda)."
+                }
+            },
+            "curriculum": {
+                "title": "DBH 1 Curriculuma",
+                "c1": "Biztanleria, lagina eta banakoaren kontzeptuak ulertzea.",
+                "c2": "Aldagai estatistiko kualitatiboak eta kuantitatiboak bereiztea.",
+                "c3": "Maiztasun absolutu eta erlatiboen taulak sortzea.",
+                "c4": "Datuak barra-diagrama eta diagrama zirkularren bidez irudikatzea."
+            }
+        },
+        "theory": {
+            "title": "Estatistikaren Teoria",
+            "subtitle": "Datuak Ulertzeko Gida",
+            "sections": {
+                "poblacion": "Biztanleria eta Lagina",
+                "variables": "Aldagai Estatistikoak",
+                "frecuencias": "Maiztasunak eta Taulak",
+                "graficos": "Grafiko Estatistikoak",
+                "medidas": "Neurri Estatistikoak"
+            },
+            "poblacion": {
+                "title": "Biztanleria eta Lagina",
+                "description": "Informazioa bildu aurretik, nori galdetuko diogun argi izan behar dugu.",
+                "population": {
+                    "title": "Biztanleria (Edo Populazioa)",
+                    "text": "Aztertu nahi ditugun elementu edo pertsona GUZTIEN multzoa da."
+                },
+                "sample": {
+                    "title": "Lagina",
+                    "text": "Biztanleriaren zati adierazgarri bat da. Askotan ezin diegu guztiei galdetu, beraz lagin bat hartzen dugu."
+                },
+                "individual": {
+                    "title": "Banakoa",
+                    "text": "Biztanleria edo laginaren osagai bakoitza da."
+                }
+            },
+            "variables": {
+                "title": "Aldagai Estatistikoak",
+                "description": "Banako bakoitzari buruz aztertzen den ezaugarria da.",
+                "qualitative": {
+                    "title": "Aldagai Kualitatiboak",
+                    "text": "Ez dira zenbakiekin neurtzen. Ezaugarri edo kualitate bat adierazten dute (Adibidez: begien kolorea, kirol gogokoena)."
+                },
+                "quantitative": {
+                    "title": "Aldagai Kuantitatiboak",
+                    "text": "Zenbakiekin adierazten dira. Bi motatakoak izan daitezke:",
+                    "discrete": "Diskretuak: Balio isolatuak hartzen dituzte, normalean zenbaki osoak (Adibidez: anai-arreba kopurua: 0, 1, 2...).",
+                    "continuous": "Jarraituak: Tarte bateko edozein balio har dezakete, hamartarrak barne (Adibidez: altuera, pisua)."
+                }
+            },
+            "frecuencias": {
+                "title": "Maiztasunak eta Taulak",
+                "description": "Datuak hobeto ulertzeko, tauletan antolatzen ditugu.",
+                "absolute": {
+                    "title": "Maiztasun Absolutua (fi)",
+                    "text": "Balio edo datu bat zenbat aldiz agertzen den errepikatuta."
+                },
+                "relative": {
+                    "title": "Maiztasun Erlatiboa (hi)",
+                    "text": "Maiztasun absolutuaren eta datu kopuru osoaren (N) arteko zatidura da: hi = fi / N."
+                },
+                "percentage": {
+                    "title": "Ehunekoa (%)",
+                    "text": "Maiztasun erlatiboa 100ekin biderkatuz lortzen da. Guztirakoaren zer ehuneko den adierazten du."
+                }
+            },
+            "graficos": {
+                "title": "Grafiko Estatistikoak",
+                "description": "Datuak ikusmen bidez azkar ulertzeko erabiltzen dira.",
+                "bar": {
+                    "title": "Barra-diagrama",
+                    "text": "Aldagai kualitatibo edo kuantitatibo diskretuetarako erabiltzen da. Maiztasuna barren altuerarekin irudikatzen da."
+                },
+                "pie": {
+                    "title": "Diagrama Zirkularra",
+                    "text": "Guztirako baten zatiak (ehunekoak) erakusteko oso egokia da. Zirkuilua tarta zatietan banatzen da."
+                }
+            },
+            "medidas": {
+                "title": "Neurri Estatistikoak",
+                "description": "Datu multzo bat balio bakar edo gutxirekin laburbiltzeko.",
+                "media": {
+                    "title": "Batez bestekoa",
+                    "text": "Datu guztien batura zati datu kopurua. (Aldagai kuantitatiboekin bakarrik posible da)."
+                },
+                "mediana": {
+                    "title": "Mediana",
+                    "text": "Datuak txikienetik handienera ordenatuta, erdian geratzen den balioa."
+                },
+                "moda": {
+                    "title": "Moda",
+                    "text": "Maizen agertzen den balioa (maiztasun absolutu handiena duena)."
+                },
+                "rango": {
+                    "title": "Ibiltartea",
+                    "text": "Balio maximoaren eta balio minimoaren arteko aldea."
+                }
+            }
+        },
+        "lab": {
+            "title": "Datuen Laborategia",
+            "subtitle": "Eraiki zure taulak eta grafikoak",
+            "tabs": {
+                "variables": "Sailkatu Aldagaiak",
+                "frequencies": "Maiztasun Taula",
+                "graphs": "Grafikoak Sartu"
+            },
+            "variablesTool": {
+                "title": "Sailkatu Aldagaiak",
+                "description": "Aukeratu elementu bakoitzaren mota.",
+                "qualitative": "Kualitatiboa",
+                "quantDiscrete": "Kuantitatibo Diskretua",
+                "quantContinuous": "Kuantitatibo Jarraitua"
+            },
+            "frequencyTool": {
+                "title": "Bete Maiztasun Taula",
+                "description": "Kalkulatu maiztasun erlatiboa eta ehunekoa datu hauetatik abiatuta.",
+                "data": "Datuak",
+                "fi": "fi (Absolutua)",
+                "hi": "hi (Erlatiboa)",
+                "percent": "% (Ehunekoa)",
+                "check": "Egiaztatu Taula",
+                "correct": "Taula zuzena da!",
+                "incorrect": "Akatsak daude taulan. Berrikusi."
+            }
         }
     },
     "footer": {

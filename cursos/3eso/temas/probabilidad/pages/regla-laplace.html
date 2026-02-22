@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Regla de Laplace - Probabilidad" data-lang-eu="Laplace-ren Araua - Probabilitatea">Regla de Laplace - Probabilidad</title>
+    <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MathJax Configuration -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+            <i class="fas fa-percentage"></i>
+            <span data-lang-es="Regla de Laplace" data-lang-eu="Laplace-ren Araua">Regla de Laplace</span>
+        </div>
+        <nav>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="lang-toggle"
+                    data-lang-es="Euskara"
+                    data-lang-eu="Castellano"
+                    aria-label="Cambiar idioma">
+                Euskara
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title" data-lang-es="Regla de Laplace" data-lang-eu="Laplace-ren Araua">Regla de Laplace</h1>
+            <div class="page-actions">
+                <button class="button-primary" data-lang-es="Ejercicios" data-lang-eu="Ariketak">
+                    <i class="fas fa-pencil-alt"></i> Ejercicios
+                </button>
+                <button class="button-secondary" data-lang-es="Herramienta" data-lang-eu="Tresna">
+                    <i class="fas fa-tools"></i> Herramienta
+                </button>
+            </div>
+        </div>
+
+        <section class="content-section">
+            <h3 data-lang-es="¿Qué es la Regla de Laplace?" data-lang-eu="Zer da Laplace-ren Araua?">¿Qué es la Regla de Laplace?</h3>
+            <p data-lang-es="La Regla de Laplace es un método para calcular probabilidades cuando todos los resultados del experimento tienen la misma probabilidad de ocurrir (resultados equiprobables)."
+               data-lang-eu="Laplace-ren araua probabilitateak kalkulatzeko metodo bat da esperimentuaren emaitza guztiek gertatzeko probabilitate bera dutenean (emaitza ekiprobableak).">
+               La Regla de Laplace es un método para calcular probabilidades cuando todos los resultados del experimento tienen la misma probabilidad de ocurrir (resultados equiprobables).
+            </p>
+            <div class="formula-box">
+                <h4 data-lang-es="Fórmula de Laplace" data-lang-eu="Laplace-ren Formula">Fórmula de Laplace</h4>
+                <div class="math-formula">
+                    \[
+                    P(A) = \frac{\text{número de casos favorables}}{\text{número de casos posibles}} = \frac{|A|}{|\Omega|}
+                    \]
+                </div>
+            </div>
+            <p data-lang-es="Donde:" data-lang-eu="Non:">Donde:</p>
+            <ul>
+                <li data-lang-es="<b>P(A)</b>: probabilidad del suceso A" data-lang-eu="<b>P(A)</b>: A gertakariaren probabilitatea">P(A): probabilidad del suceso A</li>
+                <li data-lang-es="<b>|A|</b>: número de elementos del suceso A (casos favorables)" data-lang-eu="<b>|A|</b>: A gertakariaren elementu kopurua (kasu aldekoak)">|A|: número de elementos del suceso A (casos favorables)</li>
+                <li data-lang-es="<b>|Ω|</b>: número de elementos del espacio muestral (casos posibles)" data-lang-eu="<b>|Ω|</b>: lagin-espazioko elementu kopurua (kasu posibleak)">|Ω|: número de elementos del espacio muestral (casos posibles)</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Propiedades de la Probabilidad" data-lang-eu="Probabilitatearen Propietateak">Propiedades de la Probabilidad</h3>
+            
+            <div class="card-style info-card">
+                <h4><i class="fas fa-arrow-right"></i> <span data-lang-es="Propiedad 1: Rango de valores" data-lang-eu="1. Propietatea: Balio-tartea">Propiedad 1: Rango de valores</span></h4>
+                <div class="formula-box">
+                    \[
+                    0 \leq P(A) \leq 1
+                    \]
+                </div>
+                <p data-lang-es="La probabilidad siempre está entre 0 y 1. Si es 0, el suceso es imposible. Si es 1, el suceso es seguro."
+                   data-lang-eu="Probabilitatea beti 0 eta 1 artean dago. 0 bada, gertakaria ezinezkoa da. 1 bada, gertakaria ziurra da.">
+                   La probabilidad siempre está entre 0 y 1. Si es 0, el suceso es imposible. Si es 1, el suceso es seguro.
+                </p>
+            </div>
+
+            <div class="card-style info-card">
+                <h4><i class="fas fa-ban"></i> <span data-lang-es="Propiedad 2: Suceso imposible" data-lang-eu="2. Propietatea: Gertakari ezinezkoa">Propiedad 2: Suceso imposible</span></h4>
+                <div class="formula-box">
+                    \[
+                    P(\emptyset) = 0
+                    \]
+                </div>
+                <p data-lang-es="La probabilidad de un suceso imposible es siempre 0."
+                   data-lang-eu="Gertakari ezinezko baten probabilitatea beti 0 da.">
+                   La probabilidad de un suceso imposible es siempre 0.
+                </p>
+            </div>
+
+            <div class="card-style info-card">
+                <h4><i class="fas fa-check-circle"></i> <span data-lang-es="Propiedad 3: Suceso seguro" data-lang-eu="3. Propietatea: Gertakari ziurra">Propiedad 3: Suceso seguro</span></h4>
+                <div class="formula-box">
+                    \[
+                    P(\Omega) = 1
+                    \]
+                </div>
+                <p data-lang-es="La probabilidad de un suceso seguro es siempre 1."
+                   data-lang-eu="Gertakari ziur baten probabilitatea beti 1 da.">
+                   La probabilidad de un suceso seguro es siempre 1.
+                </p>
+            </div>
+
+            <div class="card-style info-card">
+                <h4><i class="fas fa-sign-out-alt"></i> <span data-lang-es="Propiedad 4: Suceso complementario" data-lang-eu="4. Propietatea: Gertakari osagarria">Propiedad 4: Suceso complementario</span></h4>
+                <div class="formula-box">
+                    \[
+                    P(\bar{A}) = 1 - P(A)
+                    \]
+                </div>
+                <p data-lang-es="La probabilidad del suceso contrario (complementario) es 1 menos la probabilidad del suceso original."
+                   data-lang-eu="Gertakari aurkakoaren (osagarriaren) probabilitatea 1 minus gertakari originalaren probabilitatea da.">
+                   La probabilidad del suceso contrario (complementario) es 1 menos la probabilidad del suceso original.
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="Ejemplos de Aplicación" data-lang-eu="Aplikazio-adibideak">Ejemplos de Aplicación</h3>
+            
+            <div class="example-section">
+                <h4 data-lang-es="Ejemplo 1: Lanzar un dado" data-lang-eu="1. Adibidea: Dado bat botatzea">Ejemplo 1: Lanzar un dado</h4>
+                <p data-lang-es="Calculamos la probabilidad de sacar un número par." 
+                   data-lang-eu="Zenbaki bikoitia ateratzeko probabilitatea kalkulatzen dugu.">
+                   Calculamos la probabilidad de sacar un número par.
+                </p>
+                <p data-lang-es="<b>1. Identificar el espacio muestral:</b> Ω = {1, 2, 3, 4, 5, 6}, por lo que |Ω| = 6"
+                   data-lang-eu="<b>1. Lagin-espazioa identifikatzea:</b> Ω = {1, 2, 3, 4, 5, 6}, beraz |Ω| = 6">
+                   <b>1. Identificar el espacio muestral:</b> Ω = {1, 2, 3, 4, 5, 6}, por lo que |Ω| = 6
+                </p>
+                <p data-lang-es="<b>2. Identificar el suceso:</b> A = {2, 4, 6} (números pares), por lo que |A| = 3"
+                   data-lang-eu="<b>2. Gertakaria identifikatzea:</b> A = {2, 4, 6} (zenbaki bikoitiak), beraz |A| = 3">
+                   <b>2. Identificar el suceso:</b> A = {2, 4, 6} (números pares), por lo que |A| = 3
+                </p>
+                <div class="formula-box">
+                    <p data-lang-es="<b>3. Aplicar la fórmula:</b>" data-lang-eu="<b>3. Formula aplikatzea:</b>"><b>3. Aplicar la fórmula:</b></p>
+                    \[
+                    P(A) = \frac{|A|}{|\Omega|} = \frac{3}{6} = \frac{1}{2} = 0.5
+                    \]
+                </div>
+                <p class="result-highlight" data-lang-es="<b>Respuesta:</b> La probabilidad de sacar un número par es 0.5 (50%)" 
+                   data-lang-eu="<b>Erantzuna:</b> Zenbaki bikoitia ateratzeko probabilitatea 0.5 (% 50) da">
+                   <b>Respuesta:</b> La probabilidad de sacar un número par es 0.5 (50%)
+                </p>
+            </div>
+
+            <div class="example-section">
+                <h4 data-lang-es="Ejemplo 2: Sacar una carta" data-lang-eu="2. Adibidea: Karta bat ateratzea">Ejemplo 2: Sacar una carta</h4>
+                <p data-lang-es="Calculamos la probabilidad de sacar un as de una baraja española (40 cartas)."
+                   data-lang-eu="Espainiar baraja batetik as bat ateratzeko probabilitatea kalkulatzen dugu (40 karta).">
+                   Calculamos la probabilidad de sacar un as de una baraja española (40 cartas).
+                </p>
+                <p data-lang-es="<b>1. Espacio muestral:</b> |Ω| = 40 (total de cartas)"
+                   data-lang-eu="<b>1. Lagin-espazioa:</b> |Ω| = 40 (karta kopuru osoa)">
+                   <b>1. Espacio muestral:</b> |Ω| = 40 (total de cartas)
+                </p>
+                <p data-lang-es="<b>2. Casos favorables:</b> Hay 4 ases en la baraja (uno de cada palo), por lo que |A| = 4"
+                   data-lang-eu="<b>2. Kasu aldekoak:</b> 4 as daude barajan (palo bakoitzean bat), beraz |A| = 4">
+                   <b>2. Casos favorables:</b> Hay 4 ases en la baraja (uno de cada palo), por lo que |A| = 4
+                </p>
+                <div class="formula-box">
+                    <p data-lang-es="<b>3. Aplicar la fórmula:</b>" data-lang-eu="<b>3. Formula aplikatzea:</b>"><b>3. Aplicar la fórmula:</b></p>
+                    \[
+                    P(A) = \frac{4}{40} = \frac{1}{10} = 0.1
+                    \]
+                </div>
+                <p class="result-highlight" data-lang-es="<b>Respuesta:</b> La probabilidad de sacar un as es 0.1 (10%)" 
+                   data-lang-eu="<b>Erantzuna:</b> As bat ateratzeko probabilitatea 0.1 (% 10) da">
+                   <b>Respuesta:</b> La probabilidad de sacar un as es 0.1 (10%)
+                </p>
+            </div>
+
+            <div class="example-section">
+                <h4 data-lang-es="Ejemplo 3: Suceso complementario" data-lang-eu="3. Adibidea: Gertakari osagarria">Ejemplo 3: Suceso complementario</h4>
+                <p data-lang-es="En el ejemplo del dado, calculamos la probabilidad de NO sacar un número par (es decir, sacar impar)."
+                   data-lang-eu="Dadoaren adibidean, zenbaki bikoitia EZ ateratzeko probabilitatea kalkulatzen dugu (hau da, bakoitia ateratzea).">
+                   En el ejemplo del dado, calculamos la probabilidad de NO sacar un número par (es decir, sacar impar).
+                </p>
+                <div class="formula-box">
+                    <p data-lang-es="<b>Usando el complementario:</b>" data-lang-eu="<b>Osagarria erabiliz:</b>"><b>Usando el complementario:</b></p>
+                    \[
+                    P(\bar{A}) = 1 - P(A) = 1 - \frac{1}{2} = \frac{1}{2} = 0.5
+                    \]
+                </div>
+                <p data-lang-es="También podríamos haberlo calculado directamente: A' = {1, 3, 5}, entonces P(A') = 3/6 = 1/2"
+                   data-lang-eu="Zuzenean kalkula genezake: A' = {1, 3, 5}, orduan P(A') = 3/6 = 1/2">
+                   También podríamos haberlo calculado directamente: A' = {1, 3, 5}, entonces P(A') = 3/6 = 1/2
+                </p>
+            </div>
+        </section>
+
+        <section class="warning-section">
+            <h3><i class="fas fa-exclamation-triangle"></i> <span data-lang-es="Errores Típicos" data-lang-eu="Akats Tipikoak">Errores Típicos</span></h3>
+            <ul>
+                <li data-lang-es="Aplicar Laplace cuando los casos no son equiprobables" 
+                    data-lang-eu="Laplace aplikatzea kasuak ekiprobableak ez direnean">
+                    Aplicar Laplace cuando los casos no son equiprobables
+                </li>
+                <li data-lang-es="No verificar que la suma de probabilidades sea 1" 
+                    data-lang-eu="Probabilitateen batura 1 dela egiaztatzea">
+                    No verificar que la suma de probabilidades sea 1
+                </li>
+                <li data-lang-es="Contar mal los casos favorables o posibles" 
+                    data-lang-eu="Kasu aldekoak edo posibleak gaizki zenbatzea">
+                    Contar mal los casos favorables o posibles
+                </li>
+                <li data-lang-es="Confundir el suceso con su complementario" 
+                    data-lang-eu="Gertakaria bere osagarriarekin nahastea">
+                    Confundir el suceso con su complementario
+                </li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h3 data-lang-es="⚠️ Importante: Condiciones para Laplace" data-lang-eu="⚠️ Garrantzitsua: Laplace-ren Baldintzak">⚠️ Importante: Condiciones para Laplace</h3>
+            <div class="card-style warning-card">
+                <p data-lang-es="La Regla de Laplace solo se puede aplicar cuando <b>todos los resultados son equiprobables</b>. Si no es así, debemos usar otros métodos."
+                   data-lang-eu="Laplace-ren araua soilik aplika daiteke <b>emaitza guztiak ekiprobableak direnean</b>. Bestela, beste metodo batzuk erabili behar ditugu.">
+                   La Regla de Laplace solo se puede aplicar cuando <b>todos los resultados son equiprobables</b>. Si no es así, debemos usar otros métodos.
+                </p>
+                <p data-lang-es="<b>Ejemplo donde NO se puede aplicar:</b> Una ruleta sesgada donde algunos números tienen más probabilidad que otros."
+                   data-lang-eu="<b>EZ aplika daitekeen adibidea:</b> Zenbaki batzuek besteek baino probabilitate handiagoa duten ruleta okertu bat.">
+                   <b>Ejemplo donde NO se puede aplicar:</b> Una ruleta sesgada donde algunos números tienen más probabilidad que otros.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+    </footer>
+
+    <script src="../../../../../assets/js/theme.js"></script>
+    <script src="../../../../../assets/js/language.js"></script>
+    <script src="../../../../../assets/js/uiComponents.js"></script>
+    <script src="../../../../../assets/js/main.js"></script>
+
+    <!-- Botón flotante para volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+      // Configuración del botón de volver arriba
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        // Mostrar/ocultar botón al hacer scroll
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        }
+        
+        // Mostrar el botón después de cargar la página
+        setTimeout(toggleBackToTop, 100);
+        
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Hacer scroll suave al hacer clic
+        backToTopButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body>
+</html>

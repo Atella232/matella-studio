@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="Mínimo Común Múltiplo (MCM) - MATELLA" data-lang-eu="Multiplo Komun Txikiena (MKT) - MATELLA">Mínimo Común Múltiplo (MCM) - MATELLA</title>
+  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../../../assets/css/base.css">
+  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../../../../assets/css/components.css">
+  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <link rel="stylesheet" href="../math-formulas.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    .mcm-calculator-tool {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+    @media (min-width: 768px) {
+      .mcm-calculator-tool {
+        grid-template-columns: 250px 1fr;
+      }
+    }
+    .mcm-controls {
+      background-color: var(--bg-color);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+    .mcm-controls .input-group {
+      margin-bottom: 1rem;
+    }
+    .mcm-controls label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    .mcm-controls input {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+    }
+    .mcm-controls button {
+      width: 100%;
+      padding: 0.8em 1.5em;
+      font-size: 1em;
+    }
+    .mcm-results-container {
+      background-color: var(--bg-color);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      min-height: 230px;
+    }
+    #mcmResult .final-answer {
+      font-size: 1.8em;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background-color: var(--button-hover-bg);
+      border-radius: 6px;
+      color: var(--primary-color);
+    }
+    #mcmResult .steps-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+     @media (min-width: 550px) {
+      #mcmResult .steps-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .step-method {
+      font-size: 0.9em;
+      padding: 1rem;
+      border: 1px dashed var(--border-color);
+      border-radius: 6px;
+    }
+    .step-method h6 {
+      margin-top: 0;
+      margin-bottom: 0.8rem;
+      color: var(--secondary-color);
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <header>
+    <div class="logo">
+      <a href="../../../../index.html" class="home-link">
+        <i class="fas fa-calculator"></i>
+        <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+      </a>
+    </div>
+    <nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
+    </nav>
+  </header>
+
+  <main>
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+      <ol>
+        <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
+        <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
+        <li><a href="../index.html" data-lang-es="Divisibilidad y números enteros" data-lang-eu="Zatigarritasuna eta zenbaki osoak">Divisibilidad y números enteros</a></li>
+        <li class="active" aria-current="page"><span data-lang-es="Mínimo Común Múltiplo (MCM)" data-lang-eu="Multiplo Komun Txikiena (MKT)">Mínimo Común Múltiplo (MCM)</span></li>
+      </ol>
+    </nav>
+
+    <h1 class="page-title" data-lang-es="Mínimo Común Múltiplo (MCM)" data-lang-eu="Multiplo Komun Txikiena (MKT)">Mínimo Común Múltiplo (MCM)</h1>
+    
+    <div class="content-section">
+      <p data-lang-es="El <strong>mínimo común múltiplo (MCM)</strong> de dos números es el menor número que es múltiplo de ambos. Es una herramienta fundamental para resolver problemas de sincronización, operar con fracciones y muchas otras situaciones matemáticas." data-lang-eu="Bi zenbakien <strong>multiplo komun txikiena (MKT)</strong> bien multiplo den zenbakirik txikiena da. Funtsezko tresna da sinkronizazio-arazoak ebazteko, zatikiekin eragiketak egiteko eta beste hainbat egoera matematikotan.">El <strong>mínimo común múltiplo (MCM)</strong> de dos números es el menor número que es múltiplo de ambos. Es una herramienta fundamental para resolver problemas de sincronización, operar con fracciones y muchas otras situaciones matemáticas.</p>
+    </div>
+
+    <h2 data-lang-es="Conceptos y Métodos de Cálculo" data-lang-eu="Kontzeptuak eta Kalkulu Metodoak">Conceptos y Métodos de Cálculo</h2>
+    <div class="tabs-container content-section">
+      <ul class="tabs-nav">
+        <li><a href="#definicion" class="tab-link active" data-lang-es="¿Qué es el MCM?" data-lang-eu="Zer da MKT?">¿Qué es el MCM?</a></li>
+        <li><a href="#metodos" class="tab-link" data-lang-es="Métodos de Cálculo" data-lang-eu="Kalkulu Metodoak">Métodos de Cálculo</a></li>
+      </ul>
+      <div class="tabs-content">
+        <div id="definicion" class="tab-pane active">
+          <p data-lang-es="El <strong>mínimo común múltiplo</strong> de dos números <strong>a</strong> y <strong>b</strong> es el menor número natural que es, a la vez, múltiplo de <strong>a</strong> y de <strong>b</strong>." data-lang-eu="Bi zenbaki, <strong>a</strong> eta <strong>b</strong>, izanda, haien <strong>multiplo komun txikiena</strong>, aldi berean, <strong>a</strong>-ren eta <strong>b</strong>-ren multiplo den zenbaki naturalik txikiena da.">El <strong>mínimo común múltiplo</strong> de dos números <strong>a</strong> y <strong>b</strong> es el menor número natural que es, a la vez, múltiplo de <strong>a</strong> y de <strong>b</strong>.</p>
+          <div class="example-solved">
+            <h4 data-lang-es="Ejemplo: MCM de 6 y 8" data-lang-eu="Adibidea: 6 eta 8ren MKT">Ejemplo: MCM de 6 y 8</h4>
+            <div class="solution">
+              <p data-lang-es="Buscamos el primer número que aparezca en ambas listas de múltiplos:" data-lang-eu="Bi multiplo-zerrendetan agertzen den lehen zenbakia bilatzen dugu:">Buscamos el primer número que aparezca en ambas listas de múltiplos:</p>
+              <ul>
+                <li><strong><span data-lang-es="Múltiplos de 6" data-lang-eu="6ren multiploak">Múltiplos de 6</span>:</strong> 6, 12, 18, <strong>24</strong>, 30, 36...</li>
+                <li><strong><span data-lang-es="Múltiplos de 8" data-lang-eu="8ren multiploak">Múltiplos de 8</span>:</strong> 8, 16, <strong>24</strong>, 32, 40...</li>
+              </ul>
+                              <p data-lang-es="El primer múltiplo común es 24. Por tanto:" data-lang-eu="Lehen multiplo komuna 24 da. Beraz:">El primer múltiplo común es 24. Por tanto:</p>
+                <div class="math-result">
+                  <strong>MCM(6, 8) = 24</strong>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div id="metodos" class="tab-pane">
+          <p data-lang-es="Aunque buscar en las listas de múltiplos funciona, hay métodos más sistemáticos:" data-lang-eu="Multiploen zerrendak bilatzeak funtzionatzen duen arren, metodo sistematikoagoak daude:">Aunque buscar en las listas de múltiplos funciona, hay métodos más sistemáticos:</p>
+          <div class="interactive-idea card-style">
+            <h4><i class="fas fa-list-ol"></i> <span data-lang-es="Método 1: Descomposición en Factores Primos" data-lang-eu="1. Metodoa: Faktore Lehenetan Deskonposatzea">Método 1: Descomposición en Factores Primos</span></h4>
+            <p data-lang-es="Este es el método más eficaz, especialmente para números grandes." data-lang-eu="Hau da metodorik eraginkorrena, batez ere zenbaki handiekin.">Este es el método más eficaz, especialmente para números grandes.</p>
+            <ol>
+              <li data-lang-es="Descomponemos ambos números en sus factores primos." data-lang-eu="Bi zenbakiak beren faktore lehenetan deskonposatzen ditugu.">Descomponemos ambos números en sus factores primos.</li>
+              <li data-lang-es="Elegimos los factores <strong>comunes y no comunes</strong>, elevados al <strong>mayor exponente</strong>." data-lang-eu="Faktore <strong>komunak eta ez-komunak</strong> aukeratzen ditugu, <strong>berretzaile handienera</strong> jasota.">Elegimos los factores <strong>comunes y no comunes</strong>, elevados al <strong>mayor exponente</strong>.</li>
+              <li data-lang-es="Multiplicamos los factores seleccionados." data-lang-eu="Aukeratutako faktoreak biderkatzen ditugu.">Multiplicamos los factores seleccionados.</li>
+            </ol>
+            <div class="example-solved">
+              <h6 data-lang-es="Ejemplo: MCM(12, 18)" data-lang-eu="Adibidea: MKT(12, 18)">Ejemplo: MCM(12, 18)</h6>
+              <ul>
+                <li>$12 = 2^2 \times 3$</li>
+                <li>$18 = 2 \times 3^2$</li>
+                <li data-lang-es="Factores con mayor exponente: $2^2$ y $3^2$." data-lang-eu="Berretzaile handiena duten faktoreak: $2^2$ eta $3^2$.">Factores con mayor exponente: $2^2$ y $3^2$.</li>
+                <li data-lang-es="MCM(12, 18) = $2^2 \times 3^2 = 4 \times 9 = 36$" data-lang-eu="MKT(12, 18) = $2^2 \times 3^2 = 4 \times 9 = 36$">MCM(12, 18) = $2^2 \times 3^2 = 4 \times 9 = 36$</li>
+                <div class="math-result">
+                  <strong>MCM(12, 18) = 36</strong>
+                </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 data-lang-es="Calculadora Interactiva de MCM" data-lang-eu="MKTren Kalkulagailu Interaktiboa">Calculadora Interactiva de MCM</h2>
+    <div class="content-section">
+        <div class="mcm-calculator-tool">
+            <div class="mcm-controls">
+                <div class="input-group">
+                    <label for="mcmNumber1" data-lang-es="Primer número" data-lang-eu="Lehen zenbakia">Primer número</label>
+                    <input type="number" id="mcmNumber1" data-placeholder-es="ej: 12" data-placeholder-eu="adib: 12" min="1">
+                </div>
+                <div class="input-group">
+                    <label for="mcmNumber2" data-lang-es="Segundo número" data-lang-eu="Bigarren zenbakia">Segundo número</label>
+                    <input type="number" id="mcmNumber2" data-placeholder-es="ej: 18" data-placeholder-eu="adib: 18" min="1">
+                </div>
+                <button onclick="calculateMCM()" class="button-primary" data-lang-es="Calcular MCM" data-lang-eu="Kalkulatu MKT">Calcular MCM</button>
+            </div>
+            <div class="mcm-results-container">
+                <div id="mcmResult">
+                    <p class="placeholder" data-lang-es="Introduce dos números para ver el resultado y los pasos detallados del cálculo." data-lang-eu="Sartu bi zenbaki emaitza eta kalkuluaren urrats zehatzak ikusteko.">Introduce dos números para ver el resultado y los pasos detallados del cálculo.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 data-lang-es="Aplicaciones Prácticas" data-lang-eu="Aplikazio Praktikoak">Aplicaciones Prácticas</h2>
+    <div class="interactive-ideas-container">
+      <div class="interactive-idea card-style">
+        <h4><i class="fas fa-divide"></i> <span data-lang-es="Suma de Fracciones" data-lang-eu="Zatikien Batuketa">Suma de Fracciones</span></h4>
+        <p data-lang-es="Para sumar o restar fracciones con distinto denominador, primero calculamos el MCM de los denominadores para encontrar un denominador común." data-lang-eu="Izendatzaile desberdina duten zatikiak batu edo kentzeko, lehenik izendatzaileen MKT kalkulatzen dugu izendatzaile komun bat aurkitzeko.">Para sumar o restar fracciones con distinto denominador, primero calculamos el MCM de los denominadores para encontrar un denominador común.</p>
+      </div>
+      <div class="interactive-idea card-style">
+        <h4><i class="fas fa-sync-alt"></i> <span data-lang-es="Problemas de Sincronización" data-lang-eu="Sinkronizazio Arazoak">Problemas de Sincronización</span></h4>
+        <p data-lang-es="Si dos eventos se repiten en intervalos de tiempo diferentes (p. ej., cada 3 y 4 días), el MCM nos dice cuándo volverán a coincidir." data-lang-eu="Bi gertaera denbora-tarte desberdinetan errepikatzen badira (adibidez, 3 eta 4 egunetik behin), MKT-k esango digu noiz egingo duten bat berriro.">Si dos eventos se repiten en intervalos de tiempo diferentes (p. ej., cada 3 y 4 días), el MCM nos dice cuándo volverán a coincidir.</p>
+      </div>
+      <div class="interactive-idea card-style">
+        <h4><i class="fas fa-cogs"></i> <span data-lang-es="Engranajes y Ciclos" data-lang-eu="Engranajeak eta Zikloak">Engranajes y Ciclos</span></h4>
+        <p data-lang-es="Al calcular cuántas vueltas deben dar dos engranajes de diferente tamaño para volver a su posición inicial, estamos usando el MCM." data-lang-eu="Tamaina desberdineko bi engranajek hasierako posiziora itzultzeko zenbat bira eman behar dituzten kalkulatzean, MKT erabiltzen ari gara.">Al calcular cuántas vueltas deben dar dos engranajes de diferente tamaño para volver a su posición inicial, estamos usando el MCM.</p>
+      </div>
+    </div>
+
+    <h2 data-lang-es="Ponte a Prueba" data-lang-eu="Jarri Proban Zeure Burua">Ponte a Prueba</h2>
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false">
+          <i class="fas fa-list-ol icon-concept"></i>
+          <span data-lang-es="Ejercicios Propuestos" data-lang-eu="Proposatutako Ariketak">Ejercicios Propuestos</span>
+          <i class="fas fa-chevron-down icon-toggle"></i>
+        </button>
+        <div class="accordion-content">
+          <ol class="exercises-list">
+            <li>
+              <p data-lang-es="Calcula el MCM de 8 y 12." data-lang-eu="Kalkulatu 8 eta 12ren MKT.">Calcula el MCM de 8 y 12.</p>
+              <button class="toggle-hint-button" data-target="hint-1" aria-expanded="false">
+                <i class="fas fa-lightbulb"></i> <span data-lang-es="Mostrar Pista" data-lang-eu="Pista Erakutsi" data-lang-es-hide="Ocultar Pista" data-lang-eu-hide="Pista Ezkutatu">Mostrar Pista</span>
+              </button>
+              <div id="hint-1" class="hint-content">
+                <p data-lang-es="Prueba con el método de descomposición factorial: $8 = 2^3$ y $12 = 2^2 \times 3$. Ahora, elige los factores comunes y no comunes con el mayor exponente." data-lang-eu="Saiatu faktorizazio-metodoarekin: $8 = 2^3$ eta $12 = 2^2 \times 3$. Orain, aukeratu faktore komunak eta ez-komunak berretzaile handienarekin.">Prueba con el método de descomposición factorial: $8 = 2^3$ y $12 = 2^2 \times 3$. Ahora, elige los factores comunes y no comunes con el mayor exponente.</p>
+              </div>
+            </li>
+            <li>
+              <p data-lang-es="Dos autobuses salen de la misma estación. La línea A pasa cada 15 minutos y la línea B cada 20 minutos. Si ambos salen a las 8:00, ¿a qué hora volverán a coincidir?" data-lang-eu="Bi autobus geltoki beretik irteten dira. A linea 15 minututik behin igarotzen da eta B linea 20 minututik behin. Biak 8:00etan ateratzen badira, zer ordutan egingo dute bat berriro?">Dos autobuses salen de la misma estación. La línea A pasa cada 15 minutos y la línea B cada 20 minutos. Si ambos salen a las 8:00, ¿a qué hora volverán a coincidir?</p>
+              <button class="toggle-hint-button" data-target="hint-2" aria-expanded="false">
+                <i class="fas fa-lightbulb"></i> <span data-lang-es="Mostrar Pista" data-lang-eu="Pista Erakutsi" data-lang-es-hide="Ocultar Pista" data-lang-eu-hide="Pista Ezkutatu">Mostrar Pista</span>
+              </button>
+              <div id="hint-2" class="hint-content">
+                <p data-lang-es="Debes calcular el MCM(15, 20). El resultado serán los minutos que pasarán hasta que vuelvan a coincidir en la estación." data-lang-eu="MKT(15, 20) kalkulatu behar duzu. Emaitza geltokian berriro elkartu arte igaroko diren minutuak izango dira.">Debes calcular el MCM(15, 20). El resultado serán los minutos que pasarán hasta que vuelvan a coincidir en la estación.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    
+    <div id="translation-bank" style="display: none;">
+      <span id="js-error-valido" data-lang-es="Por favor, introduce dos números válidos (≥ 1)" data-lang-eu="Mesedez, sartu bi zenbaki baliogarri (≥ 1)"></span>
+      <span id="js-resultado-mcm" data-lang-es="El MCM de" data-lang-eu="Hauen MKT:"></span>
+      <span id="js-y" data-lang-es="y" data-lang-eu="eta"></span>
+      <span id="js-es" data-lang-es="es" data-lang-eu="da"></span>
+      <span id="js-pasos-detallados" data-lang-es="Pasos Detallados" data-lang-eu="Urrats Zehatzak"></span>
+      <span id="js-metodo-factores" data-lang-es="Método: Factores Primos" data-lang-eu="Metodoa: Faktore Lehenak"></span>
+    </div>
+  </main>
+
+  <footer>
+    <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
+  </footer>
+  
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="../../../../../assets/js/theme.js"></script>
+  <script src="../../../../../assets/js/language.js"></script>
+  <script src="../../../../../assets/js/uiComponents.js"></script>
+  <script src="../../../../../assets/js/main.js"></script>
+  
+  <script>
+    // --- CORRECCIÓN: Lógica local para las Pistas ---
+    document.addEventListener('DOMContentLoaded', function() {
+      const hintToggles = document.querySelectorAll('.toggle-hint-button');
+      hintToggles.forEach(button => {
+        const targetId = button.getAttribute('data-target');
+        const hintContent = document.getElementById(targetId);
+        
+        if (hintContent) {
+          // Aseguramos el estado inicial con todas las propiedades necesarias
+          hintContent.style.overflow = 'hidden';
+          hintContent.style.maxHeight = '0px';
+          hintContent.style.paddingTop = '0';
+          hintContent.style.paddingBottom = '0';
+          hintContent.style.marginTop = '0';
+          hintContent.style.opacity = '0';
+          hintContent.style.visibility = 'hidden';
+          hintContent.style.transition = 'all 0.4s ease-out';
+
+          button.addEventListener('click', () => {
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            
+            if (isExpanded) {
+              // Colapsar
+              hintContent.style.opacity = '0';
+              hintContent.style.maxHeight = '0px';
+              hintContent.style.paddingTop = '0';
+              hintContent.style.paddingBottom = '0';
+              hintContent.style.marginTop = '0';
+              // Esperar a que termine la transición para ocultarlo completamente
+              setTimeout(() => {
+                hintContent.style.visibility = 'hidden';
+              }, 400); // 400ms = 0.4s
+              button.setAttribute('aria-expanded', 'false');
+            } else {
+              // Expandir
+              hintContent.style.visibility = 'visible';
+              hintContent.style.opacity = '1';
+              hintContent.style.maxHeight = hintContent.scrollHeight + 'px';
+              hintContent.style.paddingTop = '0.8rem';
+              hintContent.style.paddingBottom = '0.8rem';
+              hintContent.style.marginTop = '0.5rem';
+              button.setAttribute('aria-expanded', 'true');
+            }
+            
+            // Actualizar el texto del botón
+            const span = button.querySelector('span');
+            if (span) {
+              const lang = document.documentElement.lang || 'es';
+              if (isExpanded) {
+                span.textContent = lang === 'es' ? 'Mostrar Pista' : 'Pista Erakutsi';
+              } else {
+                span.textContent = lang === 'es' ? 'Ocultar Pista' : 'Pista Ezkutatu';
+              }
+            }
+          });
+        }
+      });
+    });
+
+    const getTranslatedText = (id) => {
+        const el = document.getElementById(id);
+        const lang = document.documentElement.lang || 'es';
+        return el ? (lang === 'eu' ? el.dataset.langEu : el.dataset.langEs) : '';
+    };
+
+    function calculateMCM() {
+      const num1 = parseInt(document.getElementById('mcmNumber1').value);
+      const num2 = parseInt(document.getElementById('mcmNumber2').value);
+      const resultDiv = document.getElementById('mcmResult');
+      
+      if (isNaN(num1) || isNaN(num2) || num1 < 1 || num2 < 1) {
+        resultDiv.innerHTML = `<p class="error">${getTranslatedText('js-error-valido')}</p>`;
+        return;
+      }
+      
+      const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+      const mcm = (num1 * num2) / gcd(num1, num2);
+      
+      const getPrimeFactors = (num) => {
+        const factors = {};
+        let d = 2;
+        let n = num;
+        while (n > 1) {
+            while (n % d === 0) {
+                factors[d] = (factors[d] || 0) + 1;
+                n /= d;
+            }
+            d++;
+        }
+        return factors;
+      };
+
+      const formatFactors = (factors) => Object.entries(factors)
+        .map(([base, exp]) => exp > 1 ? `${base}<sup>${exp}</sup>` : base)
+        .join(' &times; ');
+
+      const factors1 = getPrimeFactors(num1);
+      const factors2 = getPrimeFactors(num2);
+      
+      const allFactors = new Set([...Object.keys(factors1), ...Object.keys(factors2)]);
+      const mcmFactors = {};
+      allFactors.forEach(f => {
+          mcmFactors[f] = Math.max(factors1[f] || 0, factors2[f] || 0);
+      });
+      
+      const resultHTML = `
+        <div class="final-answer">
+          ${getTranslatedText('js-resultado-mcm')} ${num1} ${getTranslatedText('js-y')} ${num2} ${getTranslatedText('js-es')} ${mcm}
+        </div>
+        <h5 style="text-align: center;">${getTranslatedText('js-pasos-detallados')}</h5>
+        <div class="steps-grid">
+          <div class="step-method">
+            <h6>${getTranslatedText('js-metodo-factores')}</h6>
+            <p>${num1} = ${formatFactors(factors1)}</p>
+            <p>${num2} = ${formatFactors(factors2)}</p>
+            <p><b>MCM</b> = ${formatFactors(mcmFactors)} = <b>${mcm}</b></p>
+          </div>
+        </div>
+      `;
+      resultDiv.innerHTML = resultHTML;
+    }
+  </script>
+</body>
+</html>
