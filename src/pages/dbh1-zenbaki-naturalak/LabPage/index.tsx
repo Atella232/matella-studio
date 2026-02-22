@@ -1,10 +1,10 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { MathText } from '../../../components/MathText'
 import './LabPage.css'
 
 type Lang = 'es' | 'eu' | 'ar'
 type ToolId = 'abaco' | 'constructor' | 'comparador' | 'redondeo' | 'operaciones' | 'division' | 'detector' | 'sandbox'
-
 type Op = '+' | '-' | '*'
 type RoundOrder = 'decenas' | 'centenas' | 'millares'
 
@@ -27,6 +27,7 @@ interface UiCopy {
     incorrect: string
     exact: string
     estimate: string
+    delta: string
     order: string
     operator: string
     decompositionPlaceholder: string
@@ -34,6 +35,21 @@ interface UiCopy {
     labToolsAria: string
     locale: Intl.LocalesArgument
     orderLabels: Record<RoundOrder, string>
+    liveLabel: string
+    formulaLabel: string
+    panelStrength: string
+    panelPractice: string
+    regroup: string
+    compareA: string
+    compareB: string
+    boardTools: string
+    boardGoal: string
+    boardMode: string
+    boardModeValue: string
+    sampleEq: string
+    betweenLabel: string
+    lowerBound: string
+    upperBound: string
 }
 
 function resolveLang(language: string): Lang {
@@ -43,20 +59,20 @@ function resolveLang(language: string): Lang {
 }
 
 const TOOL_META: Array<{ id: ToolId; icon: string; color: string }> = [
-    { id: 'abaco', icon: 'H1', color: '#6366f1' },
-    { id: 'constructor', icon: 'H2', color: '#0ea5e9' },
-    { id: 'comparador', icon: 'H3', color: '#8b5cf6' },
-    { id: 'redondeo', icon: 'H4', color: '#f59e0b' },
-    { id: 'operaciones', icon: 'H5', color: '#10b981' },
-    { id: 'division', icon: 'H6', color: '#ef4444' },
-    { id: 'detector', icon: 'H7', color: '#06b6d4' },
-    { id: 'sandbox', icon: 'H8', color: '#a855f7' }
+    { id: 'abaco', icon: '🧮', color: '#6366f1' },
+    { id: 'constructor', icon: '🧩', color: '#0ea5e9' },
+    { id: 'comparador', icon: '⚖️', color: '#8b5cf6' },
+    { id: 'redondeo', icon: '🎯', color: '#f59e0b' },
+    { id: 'operaciones', icon: '➕', color: '#10b981' },
+    { id: 'division', icon: '📦', color: '#ef4444' },
+    { id: 'detector', icon: '🕵️', color: '#06b6d4' },
+    { id: 'sandbox', icon: '🧠', color: '#a855f7' }
 ]
 
 const UI_COPY: Record<Lang, UiCopy> = {
     es: {
         pageTitle: 'Laboratorio: Numeros naturales',
-        pageDesc: '8 herramientas interactivas para practicar los conceptos del tema.',
+        pageDesc: '8 herramientas interactivas para practicar sistema decimal, operaciones y resolucion de problemas.',
         controls: 'Controles',
         result: 'Resultado',
         check: 'Comprobar',
@@ -67,6 +83,7 @@ const UI_COPY: Record<Lang, UiCopy> = {
         incorrect: 'Revisa el procedimiento',
         exact: 'Exacto',
         estimate: 'Estimado',
+        delta: 'Diferencia',
         order: 'Orden',
         operator: 'Operacion',
         decompositionPlaceholder: '400000 + 7000 + 200 + 5',
@@ -77,11 +94,26 @@ const UI_COPY: Record<Lang, UiCopy> = {
             decenas: 'Decenas',
             centenas: 'Centenas',
             millares: 'Millares'
-        }
+        },
+        liveLabel: 'Interaccion en vivo',
+        formulaLabel: 'Regla matematica',
+        panelStrength: 'Visual y manipulable',
+        panelPractice: 'Practica guiada',
+        regroup: 'Reagrupar',
+        compareA: 'Numero A',
+        compareB: 'Numero B',
+        boardTools: 'Herramientas activas',
+        boardGoal: 'Meta',
+        boardMode: 'Modo',
+        boardModeValue: 'Mixto conceptual + procedimental',
+        sampleEq: 'Expresion de referencia',
+        betweenLabel: 'Entre',
+        lowerBound: 'Inferior',
+        upperBound: 'Superior'
     },
     eu: {
         pageTitle: 'Laborategia: zenbaki naturalak',
-        pageDesc: 'Gaiaren kontzeptuak praktikatzeko 8 tresna interaktibo.',
+        pageDesc: '8 tresna interaktibo sistema hamartarra, eragiketak eta problemen ebazpena lantzeko.',
         controls: 'Kontrolak',
         result: 'Emaitza',
         check: 'Egiaztatu',
@@ -92,6 +124,7 @@ const UI_COPY: Record<Lang, UiCopy> = {
         incorrect: 'Berrikusi prozedura',
         exact: 'Zehatza',
         estimate: 'Estimazioa',
+        delta: 'Aldea',
         order: 'Ordena',
         operator: 'Eragiketa',
         decompositionPlaceholder: '400000 + 7000 + 200 + 5',
@@ -102,11 +135,26 @@ const UI_COPY: Record<Lang, UiCopy> = {
             decenas: 'Hamarrak',
             centenas: 'Ehunak',
             millares: 'Milak'
-        }
+        },
+        liveLabel: 'Zuzeneko interakzioa',
+        formulaLabel: 'Arau matematikoa',
+        panelStrength: 'Bisuala eta manipulatiboa',
+        panelPractice: 'Praktika gidatua',
+        regroup: 'Birrerapatu',
+        compareA: 'A zenbakia',
+        compareB: 'B zenbakia',
+        boardTools: 'Tresna aktiboak',
+        boardGoal: 'Helburua',
+        boardMode: 'Modua',
+        boardModeValue: 'Kontzeptuala + prozedurazkoa',
+        sampleEq: 'Erreferentzia adierazpena',
+        betweenLabel: 'Tartean',
+        lowerBound: 'Behekoa',
+        upperBound: 'Goikoa'
     },
     ar: {
         pageTitle: 'المختبر: الأعداد الطبيعية',
-        pageDesc: '8 أدوات تفاعلية للتدرب على مفاهيم الوحدة.',
+        pageDesc: '8 أدوات تفاعلية لتدريب النظام العشري والعمليات وحل المسائل.',
         controls: 'عناصر التحكم',
         result: 'النتيجة',
         check: 'تحقق',
@@ -117,6 +165,7 @@ const UI_COPY: Record<Lang, UiCopy> = {
         incorrect: 'راجع الخطوات',
         exact: 'الناتج الدقيق',
         estimate: 'الناتج التقريبي',
+        delta: 'الفرق',
         order: 'المرتبة',
         operator: 'العملية',
         decompositionPlaceholder: '400000 + 7000 + 200 + 5',
@@ -127,7 +176,22 @@ const UI_COPY: Record<Lang, UiCopy> = {
             decenas: 'العشرات',
             centenas: 'المئات',
             millares: 'الآلاف'
-        }
+        },
+        liveLabel: 'تفاعل مباشر',
+        formulaLabel: 'القاعدة الرياضية',
+        panelStrength: 'مرئي وقابل للتجريب',
+        panelPractice: 'تدريب موجه',
+        regroup: 'إعادة التجميع',
+        compareA: 'العدد A',
+        compareB: 'العدد B',
+        boardTools: 'الأدوات النشطة',
+        boardGoal: 'الهدف',
+        boardMode: 'النمط',
+        boardModeValue: 'مفاهيمي + إجرائي',
+        sampleEq: 'عبارة مرجعية',
+        betweenLabel: 'بين',
+        lowerBound: 'الأدنى',
+        upperBound: 'الأعلى'
     }
 }
 
@@ -260,6 +324,39 @@ const TOOL_COPY: Record<Lang, Record<ToolId, ToolCopy>> = {
     }
 }
 
+const FORMULAS: Record<Lang, Record<ToolId, string>> = {
+    es: {
+        abaco: '$$N = 1000M + 100C + 10D + U$$',
+        constructor: '$$N = a_k10^k + ... + a_110 + a_0$$',
+        comparador: '$$A ? B$$ comparando desde la izquierda',
+        redondeo: 'si siguiente < 5 mantiene; si >= 5 aumenta',
+        operaciones: 'exacto + estimacion para validar plausibilidad',
+        division: '$$D = d\cdot c + r,\ 0 \le r < d$$',
+        detector: '$$(\\ ) \\to \\times/\\div \\to +,-$$',
+        sandbox: 'modelo numerico de un enunciado'
+    },
+    eu: {
+        abaco: '$$N = 1000M + 100C + 10D + U$$',
+        constructor: '$$N = a_k10^k + ... + a_110 + a_0$$',
+        comparador: '$$A ? B$$ ezkerretik konparatuz',
+        redondeo: 'hurrengoa < 5 mantendu; >= 5 igo',
+        operaciones: 'zehatza + estimazioa, egiaztatzeko',
+        division: '$$D = d\cdot c + r,\ 0 \le r < d$$',
+        detector: '$$(\\ ) \\to \\times/\\div \\to +,-$$',
+        sandbox: 'enuntziatu baten eredu numerikoa'
+    },
+    ar: {
+        abaco: '$$N = 1000M + 100C + 10D + U$$',
+        constructor: '$$N = a_k10^k + ... + a_110 + a_0$$',
+        comparador: '$$A ? B$$ بالمقارنة من اليسار',
+        redondeo: 'إذا التالي < 5 نبقي، وإذا >= 5 نزيد',
+        operaciones: 'ناتج دقيق + تقدير للتحقق',
+        division: '$$D = d\cdot c + r,\ 0 \le r < d$$',
+        detector: '$$(\\ ) \\to \\times/\\div \\to +,-$$',
+        sandbox: 'نموذج عددي لوضعية لفظية'
+    }
+}
+
 const ROUND_FACTORS: Record<RoundOrder, number> = { decenas: 10, centenas: 100, millares: 1000 }
 
 function roundToOrder(value: number, order: RoundOrder) {
@@ -270,7 +367,12 @@ function roundToOrder(value: number, order: RoundOrder) {
 }
 
 function normalizeExpression(expression: string) {
-    return expression.replace(/\s+/g, '').replace(/:/g, '/')
+    return expression
+        .replace(/\s+/g, '')
+        .replace(/[×·]/g, '*')
+        .replace(/÷/g, '/')
+        .replace(/[−–]/g, '-')
+        .replace(/:/g, '/')
 }
 
 function safeEval(raw: string): number | null {
@@ -300,6 +402,14 @@ function decompositionOf(value: number) {
         place *= 10
     }
     return parts.join(' + ')
+}
+
+function toMath(expression: string) {
+    return `$$${expression}$$`
+}
+
+function opToLatex(op: Op) {
+    return op === '*' ? '\\cdot' : op
 }
 
 export function LabPage() {
@@ -346,7 +456,11 @@ export function LabPage() {
     const abacusTotal = u + d * 10 + c * 100 + m * 1000
     const compareSymbol = a === b ? '=' : a > b ? '>' : '<'
 
-    const rounded = roundToOrder(Math.max(0, Math.floor(roundNumber)), roundOrder)
+    const cleanRound = Math.max(0, Math.floor(roundNumber))
+    const rounded = roundToOrder(cleanRound, roundOrder)
+    const roundFactor = ROUND_FACTORS[roundOrder]
+    const roundLower = Math.floor(cleanRound / roundFactor) * roundFactor
+    const roundUpper = roundLower + roundFactor
 
     const exactResult = op === '+' ? opA + opB : op === '-' ? opA - opB : opA * opB
     const estimateA = Math.round(opA / 10) * 10
@@ -420,8 +534,14 @@ export function LabPage() {
         <div className="zn-lab-page" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
             <div className="container">
                 <header className="zn-lab-header">
-                    <h1>{ui.pageTitle}</h1>
+                    <h1>🧪 {ui.pageTitle}</h1>
                     <p>{ui.pageDesc}</p>
+                    <div className="zn-lab-board glass">
+                        <span><strong>8</strong> {ui.boardTools}</span>
+                        <span><strong>1º ESO</strong> {ui.boardGoal}</span>
+                        <span><strong>{ui.panelStrength}</strong></span>
+                        <span>{ui.boardMode}: <strong>{ui.boardModeValue}</strong></span>
+                    </div>
                 </header>
 
                 <nav className="zn-lab-grid" role="tablist" aria-label={ui.labToolsAria}>
@@ -444,14 +564,23 @@ export function LabPage() {
                         <span className="panel-chip">{currentMeta.icon}</span>
                         <div>
                             <h2>{toolText.title}</h2>
-                            <p>{toolText.objective}</p>
-                            <p>{toolText.concept}</p>
+                            <p><MathText text={toolText.objective} /></p>
+                            <p><MathText text={toolText.concept} /></p>
                         </div>
+                    </div>
+
+                    <div className="zn-lab-panel-tags">
+                        <span className="tag">⚡ {ui.liveLabel}</span>
+                        <span className="tag">🧭 {ui.panelPractice}</span>
+                    </div>
+
+                    <div className="zn-formula-strip">
+                        <strong>{ui.formulaLabel}:</strong> <MathText text={FORMULAS[lang][activeTool]} />
                     </div>
 
                     {activeTool === 'abaco' && (
                         <div className="zn-widget-card">
-                            <h3>{ui.controls}</h3>
+                            <h3>🧮 {ui.controls}</h3>
                             <div className="zn-widget-grid">
                                 <label>U<input type="number" min={0} value={u} onChange={(e) => setU(Number(e.target.value))} /></label>
                                 <label>D<input type="number" min={0} value={d} onChange={(e) => setD(Number(e.target.value))} /></label>
@@ -459,19 +588,22 @@ export function LabPage() {
                                 <label>M<input type="number" min={0} value={m} onChange={(e) => setM(Number(e.target.value))} /></label>
                             </div>
                             <div className="zn-widget-actions">
-                                <button onClick={regroupU}>{'U->D'}</button>
-                                <button onClick={regroupD}>{'D->C'}</button>
-                                <button onClick={regroupC}>{'C->M'}</button>
+                                <button onClick={regroupU}>{ui.regroup} U→D</button>
+                                <button onClick={regroupD}>{ui.regroup} D→C</button>
+                                <button onClick={regroupC}>{ui.regroup} C→M</button>
                             </div>
                             <p className="zn-widget-result">{ui.result}: {formatNumber(abacusTotal)}</p>
-                            <p className="zn-widget-note">{formatNumber(abacusTotal)} {ui.equals} {m * 1000} + {c * 100} + {d * 10} + {u}</p>
+                            <p className="zn-widget-note">
+                                <MathText text={toMath(`${abacusTotal} = ${m}\\cdot1000 + ${c}\\cdot100 + ${d}\\cdot10 + ${u}`)} inline />
+                            </p>
                         </div>
                     )}
 
                     {activeTool === 'constructor' && (
                         <div className="zn-widget-card">
-                            <p>{ui.target}: {formatNumber(constructorNumber)}</p>
-                            <p>{ui.result}: {constructorExpected}</p>
+                            <h3>🧩 {ui.controls}</h3>
+                            <p>{ui.target}: <strong>{formatNumber(constructorNumber)}</strong></p>
+                            <p>{ui.result}: <MathText text={toMath(constructorExpected)} inline /></p>
                             <input
                                 value={constructorInput}
                                 onChange={(e) => {
@@ -490,16 +622,22 @@ export function LabPage() {
 
                     {activeTool === 'comparador' && (
                         <div className="zn-widget-card">
+                            <h3>⚖️ {ui.controls}</h3>
                             <div className="zn-widget-grid">
-                                <label>A<input type="number" value={a} onChange={(e) => setA(Number(e.target.value))} /></label>
-                                <label>B<input type="number" value={b} onChange={(e) => setB(Number(e.target.value))} /></label>
+                                <label>{ui.compareA}<input type="number" value={a} onChange={(e) => setA(Number(e.target.value))} /></label>
+                                <label>{ui.compareB}<input type="number" value={b} onChange={(e) => setB(Number(e.target.value))} /></label>
                             </div>
-                            <p className="zn-widget-result">A {compareSymbol} B</p>
+                            <div className="zn-comparator-display">
+                                <span>{formatNumber(a)}</span>
+                                <span className={`symbol ${compareSymbol === '>' ? 'gt' : compareSymbol === '<' ? 'lt' : 'eq'}`}>{compareSymbol}</span>
+                                <span>{formatNumber(b)}</span>
+                            </div>
                         </div>
                     )}
 
                     {activeTool === 'redondeo' && (
                         <div className="zn-widget-card">
+                            <h3>🎯 {ui.controls}</h3>
                             <div className="zn-widget-grid">
                                 <label>
                                     N
@@ -514,12 +652,20 @@ export function LabPage() {
                                     </select>
                                 </label>
                             </div>
+                            <p className="zn-widget-note">
+                                {ui.betweenLabel}: <MathText text={toMath(`${roundLower} \\le N < ${roundUpper}`)} inline />
+                            </p>
+                            <p className="zn-widget-note">
+                                {ui.lowerBound}: <MathText text={toMath(String(roundLower))} inline /> · {ui.upperBound}:{' '}
+                                <MathText text={toMath(String(roundUpper))} inline />
+                            </p>
                             <p className="zn-widget-result">{ui.result}: {formatNumber(rounded)}</p>
                         </div>
                     )}
 
                     {activeTool === 'operaciones' && (
                         <div className="zn-widget-card">
+                            <h3>➕ {ui.controls}</h3>
                             <div className="zn-widget-grid">
                                 <label>A<input type="number" value={opA} onChange={(e) => setOpA(Number(e.target.value))} /></label>
                                 <label>
@@ -527,18 +673,23 @@ export function LabPage() {
                                     <select value={op} onChange={(e) => setOp(e.target.value as Op)}>
                                         <option value="+">+</option>
                                         <option value="-">-</option>
-                                        <option value="*">*</option>
+                                        <option value="*">×</option>
                                     </select>
                                 </label>
                                 <label>B<input type="number" value={opB} onChange={(e) => setOpB(Number(e.target.value))} /></label>
                             </div>
+                            <p className="zn-widget-note">
+                                <MathText text={toMath(`${opA} ${opToLatex(op)} ${opB} = ${exactResult}`)} inline />
+                            </p>
                             <p className="zn-widget-result">{ui.exact}: {formatNumber(exactResult)}</p>
                             <p className="zn-widget-note">{ui.estimate}: {formatNumber(estimatedResult)}</p>
+                            <p className="zn-widget-note">{ui.delta}: {formatNumber(Math.abs(exactResult - estimatedResult))}</p>
                         </div>
                     )}
 
                     {activeTool === 'division' && (
                         <div className="zn-widget-card">
+                            <h3>📦 {ui.controls}</h3>
                             <div className="zn-widget-grid">
                                 <label>D<input type="number" min={0} value={dividend} onChange={(e) => setDividend(Number(e.target.value))} /></label>
                                 <label>d<input type="number" min={1} value={divisor} onChange={(e) => setDivisor(Math.max(1, Number(e.target.value)))} /></label>
@@ -548,14 +699,17 @@ export function LabPage() {
                             <div className="zn-widget-actions">
                                 <button onClick={checkDivision}>{ui.check}</button>
                             </div>
-                            <p className="zn-widget-note">{dividend} = {divisor}*{trueQ} + {trueR}</p>
+                            <p className="zn-widget-note">
+                                <MathText text={toMath(`${Math.max(0, dividend)} = ${Math.max(1, divisor)}\\cdot${trueQ} + ${trueR}`)} inline />
+                            </p>
                             {divisionFeedback && <p className={divisionOk ? 'ok' : 'ko'}>{divisionFeedback}</p>}
                         </div>
                     )}
 
                     {activeTool === 'detector' && (
                         <div className="zn-widget-card">
-                            <p>2 + 3*4, {ui.target}: 20</p>
+                            <h3>🕵️ {ui.controls}</h3>
+                            <p>{ui.target}: <MathText text={toMath('2 + 3*4 = 20')} inline /></p>
                             <div className="zn-option-list">
                                 {detectorOptions.map((option, index) => (
                                     <button
@@ -566,7 +720,7 @@ export function LabPage() {
                                             setDetectorOk(null)
                                         }}
                                     >
-                                        {option}
+                                        <MathText text={toMath(option)} inline />
                                     </button>
                                 ))}
                             </div>
@@ -579,13 +733,19 @@ export function LabPage() {
 
                     {activeTool === 'sandbox' && (
                         <div className="zn-widget-card">
-                            <p>{ui.target}: {sandboxTargetExpr} = {sandboxTargetValue}</p>
+                            <h3>🧠 {ui.controls}</h3>
+                            <p>{ui.sampleEq}: <MathText text={toMath(`${sandboxTargetExpr} = ${sandboxTargetValue}`)} inline /></p>
                             <input
                                 value={sandboxExpression}
                                 onChange={(e) => setSandboxExpression(e.target.value)}
                                 placeholder={ui.expressionPlaceholder}
                             />
-                            <p className="zn-widget-note">{ui.result}: {sandboxValue === null ? '---' : sandboxValue}</p>
+                            <p className="zn-widget-note">
+                                {ui.result}:{' '}
+                                {sandboxValue === null
+                                    ? '---'
+                                    : <MathText text={toMath(String(sandboxValue))} inline />}
+                            </p>
                             {sandboxValue !== null && sandboxTargetValue !== null && (
                                 <p className={sandboxValue === sandboxTargetValue ? 'ok' : 'ko'}>
                                     {sandboxValue === sandboxTargetValue ? ui.correct : ui.incorrect}
@@ -598,3 +758,4 @@ export function LabPage() {
         </div>
     )
 }
+

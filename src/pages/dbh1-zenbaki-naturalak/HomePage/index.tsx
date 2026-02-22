@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+﻿import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import './HomePage.css'
 
@@ -24,6 +24,7 @@ interface HomeCopy {
     }
     sectionTitle: string
     features: FeatureItem[]
+    stats: Array<{ icon: string; label: string }>
     goalsTitle: string
     goalsIntro: string
     goals: Array<{ icon: string; label: string }>
@@ -44,7 +45,7 @@ const COPY: Record<Lang, HomeCopy> = {
         sectionTitle: 'Itinerario del tema',
         features: [
             {
-                icon: 'T',
+                icon: '📘',
                 title: 'Teoria',
                 description:
                     '10 tarjetas: sistema decimal, lectura de grandes numeros, redondeo, operaciones y modelizacion.',
@@ -52,7 +53,7 @@ const COPY: Record<Lang, HomeCopy> = {
                 link: 'Entrar en teoria ->'
             },
             {
-                icon: 'L',
+                icon: '🧪',
                 title: 'Laboratorio',
                 description:
                     '8 herramientas interactivas para experimentar y validar: abaco, comparador, redondeo, operaciones, division y mas.',
@@ -60,7 +61,7 @@ const COPY: Record<Lang, HomeCopy> = {
                 link: 'Ir al laboratorio ->'
             },
             {
-                icon: 'E',
+                icon: '🎯',
                 title: 'Erronkak',
                 description:
                     '9 problemas por niveles con pistas graduadas, correccion y resolucion paso a paso.',
@@ -68,7 +69,7 @@ const COPY: Record<Lang, HomeCopy> = {
                 link: 'Practicar erronkak ->'
             },
             {
-                icon: 'J',
+                icon: '🎮',
                 title: 'Jokuak',
                 description:
                     '3 juegos para entrenar valor posicional, parentesis tacticos y division entera en contexto.',
@@ -76,7 +77,7 @@ const COPY: Record<Lang, HomeCopy> = {
                 link: 'Abrir jokuak ->'
             },
             {
-                icon: 'A',
+                icon: '♿',
                 title: 'Accesibilidad',
                 description:
                     'Diseno adaptable para trabajo de aula y casa, con navegacion clara en los tres idiomas.',
@@ -84,13 +85,19 @@ const COPY: Record<Lang, HomeCopy> = {
                 link: 'Ver opciones ->'
             }
         ],
+        stats: [
+            { icon: '🗂️', label: '10 tarjetas de teoria' },
+            { icon: '🧰', label: '8 herramientas activas' },
+            { icon: '🧩', label: '9 retos por niveles' },
+            { icon: '🏁', label: '3 juegos evaluables' }
+        ],
         goalsTitle: 'Objetivos de aprendizaje',
         goalsIntro:
             'Progresion didactica desde la numeracion decimal hasta la resolucion de problemas con validacion del resultado.',
         goals: [
-            { icon: 'N', label: 'Valor posicional y numeracion' },
-            { icon: 'O', label: 'Operaciones y jerarquia' },
-            { icon: 'P', label: 'Modelizacion y validacion' }
+            { icon: '🔢', label: 'Valor posicional y numeracion' },
+            { icon: '🧮', label: 'Operaciones y jerarquia' },
+            { icon: '🧠', label: 'Modelizacion y validacion' }
         ]
     },
     eu: {
@@ -107,7 +114,7 @@ const COPY: Record<Lang, HomeCopy> = {
         sectionTitle: 'Gaiaren ibilbidea',
         features: [
             {
-                icon: 'T',
+                icon: '📘',
                 title: 'Teoria',
                 description:
                     '10 txartel: sistema hamartarra, zenbaki handien irakurketa, biribiltzea, eragiketak eta modelizazioa.',
@@ -115,7 +122,7 @@ const COPY: Record<Lang, HomeCopy> = {
                 link: 'Teorian sartu ->'
             },
             {
-                icon: 'L',
+                icon: '🧪',
                 title: 'Laborategia',
                 description:
                     '8 tresna interaktibo: abakoa, konparatzailea, biribiltzea, eragiketak, zatiketa eta gehiago.',
@@ -123,7 +130,7 @@ const COPY: Record<Lang, HomeCopy> = {
                 link: 'Laborategira joan ->'
             },
             {
-                icon: 'E',
+                icon: '🎯',
                 title: 'Erronkak',
                 description:
                     '9 problema mailaka, pista progresiboekin eta urratsez urratseko ebazpenarekin.',
@@ -131,7 +138,7 @@ const COPY: Record<Lang, HomeCopy> = {
                 link: 'Erronkak praktikatu ->'
             },
             {
-                icon: 'J',
+                icon: '🎮',
                 title: 'Jokuak',
                 description:
                     '3 joko: balio posizionala, parentesi taktikoak eta zatiketa osoa testuinguruan lantzeko.',
@@ -139,7 +146,7 @@ const COPY: Record<Lang, HomeCopy> = {
                 link: 'Jokuak ireki ->'
             },
             {
-                icon: 'A',
+                icon: '♿',
                 title: 'Irisgarritasuna',
                 description:
                     'Aula eta etxeko erabilerarako diseinu moldagarria, hiru hizkuntzetan nabigazio argiarekin.',
@@ -147,13 +154,19 @@ const COPY: Record<Lang, HomeCopy> = {
                 link: 'Aukerak ikusi ->'
             }
         ],
+        stats: [
+            { icon: '🗂️', label: '10 teoria txartel' },
+            { icon: '🧰', label: '8 tresna interaktibo' },
+            { icon: '🧩', label: '9 erronka mailaka' },
+            { icon: '🏁', label: '3 joko ebaluagarri' }
+        ],
         goalsTitle: 'Ikaskuntza helburuak',
         goalsIntro:
             'Aurrerapen didaktikoa sistema hamartarretik hasi eta emaitzaren balidaziora iristen den problemagintzaraino.',
         goals: [
-            { icon: 'N', label: 'Balio posizionala eta numerazioa' },
-            { icon: 'O', label: 'Eragiketak eta hierarkia' },
-            { icon: 'P', label: 'Modelizazioa eta balidazioa' }
+            { icon: '🔢', label: 'Balio posizionala eta numerazioa' },
+            { icon: '🧮', label: 'Eragiketak eta hierarkia' },
+            { icon: '🧠', label: 'Modelizazioa eta balidazioa' }
         ]
     },
     ar: {
@@ -170,7 +183,7 @@ const COPY: Record<Lang, HomeCopy> = {
         sectionTitle: 'مسار الوحدة',
         features: [
             {
-                icon: 'T',
+                icon: '📘',
                 title: 'النظرية',
                 description:
                     '10 بطاقات: النظام العشري، قراءة الأعداد الكبيرة، التقريب، العمليات والنمذجة.',
@@ -178,7 +191,7 @@ const COPY: Record<Lang, HomeCopy> = {
                 link: 'ادخل إلى النظرية ->'
             },
             {
-                icon: 'L',
+                icon: '🧪',
                 title: 'المختبر',
                 description:
                     '8 أدوات تفاعلية للتجريب والتحقق: المعداد، المقارن، التقريب، العمليات، القسمة وغيرها.',
@@ -186,7 +199,7 @@ const COPY: Record<Lang, HomeCopy> = {
                 link: 'اذهب إلى المختبر ->'
             },
             {
-                icon: 'E',
+                icon: '🎯',
                 title: 'التحديات',
                 description:
                     '9 مسائل بمستويات مع تلميحات تدريجية وتصحيح وحل خطوة بخطوة.',
@@ -194,7 +207,7 @@ const COPY: Record<Lang, HomeCopy> = {
                 link: 'تدرب على التحديات ->'
             },
             {
-                icon: 'J',
+                icon: '🎮',
                 title: 'الألعاب',
                 description:
                     '3 ألعاب لتدريب القيمة المكانية، الأقواس التكتيكية والقسمة الإقليدية في سياق.',
@@ -202,7 +215,7 @@ const COPY: Record<Lang, HomeCopy> = {
                 link: 'افتح الألعاب ->'
             },
             {
-                icon: 'A',
+                icon: '♿',
                 title: 'إمكانية الوصول',
                 description:
                     'تصميم متجاوب للاستخدام في الصف والمنزل مع تنقل واضح باللغات الثلاث.',
@@ -210,13 +223,19 @@ const COPY: Record<Lang, HomeCopy> = {
                 link: 'عرض الخيارات ->'
             }
         ],
+        stats: [
+            { icon: '🗂️', label: '10 بطاقات نظرية' },
+            { icon: '🧰', label: '8 أدوات تفاعلية' },
+            { icon: '🧩', label: '9 تحديات بمستويات' },
+            { icon: '🏁', label: '3 ألعاب تقييمية' }
+        ],
         goalsTitle: 'أهداف التعلم',
         goalsIntro:
             'تدرج تعليمي من النظام العشري إلى حل المسائل مع التحقق من النتيجة.',
         goals: [
-            { icon: 'N', label: 'القيمة المكانية والترقيم' },
-            { icon: 'O', label: 'العمليات وترتيبها' },
-            { icon: 'P', label: 'النمذجة والتحقق' }
+            { icon: '🔢', label: 'القيمة المكانية والترقيم' },
+            { icon: '🧮', label: 'العمليات وترتيبها' },
+            { icon: '🧠', label: 'النمذجة والتحقق' }
         ]
     }
 }
@@ -240,18 +259,27 @@ export function HomePage() {
                     <h2 className="hero-subtitle">{copy.subtitle}</h2>
                     <p className="hero-description">{copy.description}</p>
 
+                    <div className="hero-badges">
+                        {copy.stats.map((item) => (
+                            <span key={item.label} className="hero-badge glass">
+                                <span>{item.icon}</span>
+                                <span>{item.label}</span>
+                            </span>
+                        ))}
+                    </div>
+
                     <div className="hero-cta">
                         <Link to="/matematika/dbh1/zenbaki-naturalak/teoria" className="btn btn-primary">
-                            {copy.ctas.theory}
+                            📘 {copy.ctas.theory}
                         </Link>
                         <Link to="/matematika/dbh1/zenbaki-naturalak/laboratorio" className="btn btn-primary">
-                            {copy.ctas.lab}
+                            🧪 {copy.ctas.lab}
                         </Link>
                         <Link to="/matematika/dbh1/zenbaki-naturalak/retos" className="btn btn-secondary">
-                            {copy.ctas.missions}
+                            🎯 {copy.ctas.missions}
                         </Link>
                         <Link to="/matematika/dbh1/zenbaki-naturalak/jokuak" className="btn btn-secondary">
-                            {copy.ctas.games}
+                            🎮 {copy.ctas.games}
                         </Link>
                     </div>
                 </div>

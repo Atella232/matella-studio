@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { MathText } from '../../../components/MathText'
 import './TheoryPage.css'
 
 type Lang = 'es' | 'eu' | 'ar'
@@ -50,16 +51,16 @@ function resolveLang(language: string): Lang {
 }
 
 const COMMON_META = [
-    { id: 't1', icon: '01', color: '#6366f1' },
-    { id: 't2', icon: '02', color: '#06b6d4' },
-    { id: 't3', icon: '03', color: '#8b5cf6' },
-    { id: 't4', icon: '04', color: '#ec4899' },
-    { id: 't5', icon: '05', color: '#f59e0b' },
-    { id: 't6', icon: '06', color: '#10b981' },
-    { id: 't7', icon: '07', color: '#14b8a6' },
-    { id: 't8', icon: '08', color: '#ef4444' },
-    { id: 't9', icon: '09', color: '#0ea5e9' },
-    { id: 't10', icon: '10', color: '#a855f7' }
+    { id: 't1', icon: '🔢', color: '#6366f1' },
+    { id: 't2', icon: '🧾', color: '#06b6d4' },
+    { id: 't3', icon: '⚖️', color: '#8b5cf6' },
+    { id: 't4', icon: '🌍', color: '#ec4899' },
+    { id: 't5', icon: '🎯', color: '#f59e0b' },
+    { id: 't6', icon: '➕', color: '#10b981' },
+    { id: 't7', icon: '✖️', color: '#14b8a6' },
+    { id: 't8', icon: '➗', color: '#ef4444' },
+    { id: 't9', icon: '🧩', color: '#0ea5e9' },
+    { id: 't10', icon: '🧠', color: '#a855f7' }
 ] as const
 
 const ES_CARDS: Omit<TheoryCard, 'id' | 'icon' | 'color'>[] = [
@@ -590,44 +591,46 @@ export function TheoryPage() {
                             <div className="card-header">
                                 <span className="card-icon">{card.icon}</span>
                                 <h3 className="card-title">{card.title}</h3>
-                                <span className="card-toggle">{expanded === card.id ? '-' : '+'}</span>
+                                <span className="card-toggle">{expanded === card.id ? '−' : '+'}</span>
                             </div>
 
                             <div className={`card-content ${expanded === card.id ? 'visible' : ''}`}>
                                 <div className="content-section">
                                     <h4>{copy.labels.objective}</h4>
-                                    <p>{card.objective}</p>
+                                    <p><MathText text={card.objective} /></p>
                                     <h4>{copy.labels.keyIdea}</h4>
-                                    <p>{card.keyIdea}</p>
+                                    <p><MathText text={card.keyIdea} /></p>
                                     <h4>{copy.labels.example}</h4>
-                                    <p>{card.example}</p>
+                                    <div className="formula-box highlight">
+                                        <p><MathText text={card.example} /></p>
+                                    </div>
 
                                     <div className="warning-box">
                                         <strong>{copy.labels.typicalError}:</strong>
-                                        <p>{card.typicalError}</p>
+                                        <p><MathText text={card.typicalError} /></p>
                                         <strong>{copy.labels.correction}:</strong>
-                                        <p>{card.correction}</p>
+                                        <p><MathText text={card.correction} /></p>
                                     </div>
 
                                     <div className="quick-check-grid">
                                         <div className="quick-check-card">
-                                            <p className="quick-question">{card.quickQ}</p>
-                                            <p className="quick-answer">{copy.labels.answer}: {card.quickA}</p>
+                                            <p className="quick-question"><MathText text={card.quickQ} /></p>
+                                            <p className="quick-answer">✅ {copy.labels.answer}: <MathText text={card.quickA} /></p>
                                         </div>
                                     </div>
 
                                     <div className="connections-grid">
                                         <div className="connection-card">
                                             <h5>{copy.labels.lab}</h5>
-                                            <p>{card.lab}</p>
+                                            <p><MathText text={card.lab} /></p>
                                         </div>
                                         <div className="connection-card">
                                             <h5>{copy.labels.mission}</h5>
-                                            <p>{card.mission}</p>
+                                            <p><MathText text={card.mission} /></p>
                                         </div>
                                         <div className="connection-card">
                                             <h5>{copy.labels.game}</h5>
-                                            <p>{card.game}</p>
+                                            <p><MathText text={card.game} /></p>
                                         </div>
                                     </div>
                                 </div>
@@ -637,7 +640,7 @@ export function TheoryPage() {
                 </div>
 
                 <section className="coherence-map">
-                    <h2>{copy.coherenceTitle}</h2>
+                    <h2>🧭 {copy.coherenceTitle}</h2>
                     <div className="coherence-grid">
                         {copy.coherenceRows.map((row) => (
                             <article className="coherence-card" key={row.central}>
@@ -650,10 +653,10 @@ export function TheoryPage() {
                 </section>
 
                 <section className="quality-review">
-                    <h2>{copy.qualityTitle}</h2>
+                    <h2>✅ {copy.qualityTitle}</h2>
                     <ul>
                         {copy.qualityItems.map((item) => (
-                            <li key={item}>{item}</li>
+                            <li key={item}><MathText text={item} /></li>
                         ))}
                     </ul>
                 </section>

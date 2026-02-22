@@ -1,0 +1,33 @@
+.math-text {
+    color: inherit;
+    font: inherit;
+}
+
+.math-text .math-token.inline {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 0.1em;
+    padding: 0.08em 0.28em;
+    border-radius: 0.45em;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.math-text .math-token.display {
+    display: block;
+    margin: 0.45em 0;
+    padding: 0.4em 0.7em;
+    border-radius: 0.75em;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.math-text .katex {
+    color: inherit;
+    font-size: 1em;
+}
+
+.math-text .katex-display {
+    margin: 0;
+}
+
