@@ -22,7 +22,9 @@ import { GamesHub as GamesHubDBH1 } from '../features/games/GamesHubDBH1'
 
 import { HomePage as HomePageDBH1_Zenbaki } from '../pages/dbh1-zenbaki-naturalak/HomePage'
 import { TheoryPage as TheoryPageDBH1_Zenbaki } from '../pages/dbh1-zenbaki-naturalak/TheoryPage'
+import { LabPage as LabPageDBH1_Zenbaki } from '../pages/dbh1-zenbaki-naturalak/LabPage'
 import { MissionPage as MissionPageDBH1_Zenbaki } from '../pages/dbh1-zenbaki-naturalak/MissionPage'
+import { GamesPage as GamesPageDBH1_Zenbaki } from '../pages/dbh1-zenbaki-naturalak/GamesPage'
 
 import { HomePage as HomePageDBH1_Zatigarritasuna } from '../pages/dbh1-zatigarritasuna/HomePage'
 import { TheoryPage as TheoryPageDBH1_Zatigarritasuna } from '../pages/dbh1-zatigarritasuna/TheoryPage'
@@ -76,8 +78,20 @@ export const router = createHashRouter([
                 element: <TheoryPageDBH1_Zenbaki />,
             },
             {
+                path: 'matematika/dbh1/zenbaki-naturalak/laboratorio',
+                element: <LabPageDBH1_Zenbaki />,
+            },
+            {
+                path: 'matematika/dbh1/zenbaki-naturalak/retos',
+                element: <MissionPageDBH1_Zenbaki />,
+            },
+            {
                 path: 'matematika/dbh1/zenbaki-naturalak/misioa',
                 element: <MissionPageDBH1_Zenbaki />,
+            },
+            {
+                path: 'matematika/dbh1/zenbaki-naturalak/jokuak',
+                element: <GamesPageDBH1_Zenbaki />,
             },
             // Ruta para Divisibilidad de 1º ESO
             {

@@ -1,304 +1,507 @@
 import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import './MissionPage.css'
+
+type Difficulty = 'nivel1' | 'nivel2' | 'nivel3'
 
 interface Challenge {
     id: number
+    difficulty: Difficulty
     title: string
-    description: string
-    options: string[]
-    correctIndex: number
-    successMessage: string
-    errorMessage: string
+    statement: string
+    hints: string[]
+    resolution: string[]
+    finalAnswer: string
+    typicalError: string
     points: number
+    validate: (answer: string) => boolean
 }
 
-const getChallenges = (t: any): Challenge[] => [
+function normalizeText(input: string) {
+    return input
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/\s+/g, '')
+}
+
+function extractNaturalNumbers(input: string) {
+    const matches = input.match(/\d[\d.,]*/g) ?? []
+    return matches.map((token) => Number(token.replace(/[.,]/g, '')))
+}
+
+const CHALLENGES: Challenge[] = [
     {
         id: 1,
-        title: t('zenbakiNaturalak.erronkak.ch1.title'),
-        description: t('zenbakiNaturalak.erronkak.ch1.description'),
-        options: (t('zenbakiNaturalak.erronkak.ch1.options', { returnObjects: true }) as string[]),
-        correctIndex: 1,
-        successMessage: t('zenbakiNaturalak.erronkak.ch1.success'),
-        errorMessage: t('zenbakiNaturalak.erronkak.ch1.error'),
-        points: 10
+        difficulty: 'nivel1',
+        title: 'Nivel 1 - Problema 1: Reconstruccion posicional',
+        statement:
+            'Construye un numero natural de seis cifras con estas condiciones: centenas de millar 4, decenas de millar 0, millares 7, centenas 2, decenas 0, unidades 5. Escribelo, leelo y descomponlo.',
+        hints: [
+            'Coloca primero las cifras en una tabla de ordenes.',
+            'Las posiciones con 0 tambien cuentan.',
+            'La forma final es 4,0,7,2,0,5.'
+        ],
+        resolution: [
+            'Colocamos las cifras por orden: 4 | 0 | 7 | 2 | 0 | 5.',
+            'Numero obtenido: $$407,205$$.',
+            'Lectura: cuatrocientos siete mil doscientos cinco.',
+            'Descomposicion: $$400,000 + 7,000 + 200 + 5$$.'
+        ],
+        finalAnswer: '$$407,205$$',
+        typicalError: 'Escribir $$47,205$$ por ignorar la decena de millar con valor 0.',
+        points: 10,
+        validate: (answer) => normalizeText(answer).replace(/[.,]/g, '') === '407205'
     },
     {
         id: 2,
-        title: t('zenbakiNaturalak.erronkak.ch2.title'),
-        description: t('zenbakiNaturalak.erronkak.ch2.description'),
-        options: (t('zenbakiNaturalak.erronkak.ch2.options', { returnObjects: true }) as string[]),
-        correctIndex: 0,
-        successMessage: t('zenbakiNaturalak.erronkak.ch2.success'),
-        errorMessage: t('zenbakiNaturalak.erronkak.ch2.error'),
-        points: 10
+        difficulty: 'nivel1',
+        title: 'Nivel 1 - Problema 2: Ordena y compara datos',
+        statement:
+            'Ordena de menor a mayor: 82,600,000 ; 89,678,000,000 ; 7,000,000,000 ; 149,637 ; 24,356,000. Indica cual es el mayor y cual tiene mas cifras.',
+        hints: [
+            'Empieza por contar cifras.',
+            'No compares solo por las ultimas cifras.',
+            'El unico numero de 11 cifras sera el mayor.'
+        ],
+        resolution: [
+            'Conteo: 149,637 (6), 24,356,000 (8), 82,600,000 (8), 7,000,000,000 (10), 89,678,000,000 (11).',
+            'Orden: $$149,637 < 24,356,000 < 82,600,000 < 7,000,000,000 < 89,678,000,000$$.',
+            'Mayor y con mas cifras: $$89,678,000,000$$.'
+        ],
+        finalAnswer: '$$149,637 < 24,356,000 < 82,600,000 < 7,000,000,000 < 89,678,000,000$$',
+        typicalError: 'Poner $$7,000,000,000$$ antes de $$82,600,000$$ por no mirar la cantidad de cifras.',
+        points: 10,
+        validate: (answer) => {
+            const values = extractNaturalNumbers(answer)
+            const expected = [149637, 24356000, 82600000, 7000000000, 89678000000]
+            if (values.length < expected.length) return false
+            return expected.every((value, index) => values[index] === value)
+        }
     },
     {
         id: 3,
-        title: t('zenbakiNaturalak.erronkak.ch3.title'),
-        description: t('zenbakiNaturalak.erronkak.ch3.description'),
-        options: (t('zenbakiNaturalak.erronkak.ch3.options', { returnObjects: true }) as string[]),
-        correctIndex: 0,
-        successMessage: t('zenbakiNaturalak.erronkak.ch3.success'),
-        errorMessage: t('zenbakiNaturalak.erronkak.ch3.error'),
-        points: 15
+        difficulty: 'nivel1',
+        title: 'Nivel 1 - Problema 3: Redondeo al orden indicado',
+        statement:
+            'Redondea: 1) 24,963 a millares, 2) 72,580 a millares, 3) 384,523 a decenas de millar.',
+        hints: [
+            'Identifica primero el orden de redondeo.',
+            'Mira solo la cifra inmediata a la derecha.',
+            'Sustituye por ceros el resto de cifras.'
+        ],
+        resolution: [
+            '$$24,963$$ -> $$25,000$$ (centena 9).',
+            '$$72,580$$ -> $$73,000$$ (centena 5).',
+            '$$384,523$$ a decenas de millar -> $$380,000$$ (millares 4).'
+        ],
+        finalAnswer: '$$25,000$$, $$73,000$$, $$380,000$$',
+        typicalError: 'Mirar la cifra equivocada al redondear a decenas de millar.',
+        points: 10,
+        validate: (answer) => {
+            const values = extractNaturalNumbers(answer)
+            return values.includes(25000) && values.includes(73000) && values.includes(380000)
+        }
     },
     {
         id: 4,
-        title: t('zenbakiNaturalak.erronkak.ch4.title'),
-        description: t('zenbakiNaturalak.erronkak.ch4.description'),
-        options: (t('zenbakiNaturalak.erronkak.ch4.options', { returnObjects: true }) as string[]),
-        correctIndex: 1,
-        successMessage: t('zenbakiNaturalak.erronkak.ch4.success'),
-        errorMessage: t('zenbakiNaturalak.erronkak.ch4.error'),
-        points: 15
+        difficulty: 'nivel2',
+        title: 'Nivel 2 - Problema 1: Fruta en cajas',
+        statement:
+            'Una furgoneta transporta 8 cajas de platanos (15 kg cada una), 20 de naranjas y 6 de manzanas (8 kg cada una para estas dos). Cuantos kg transporta en total?',
+        hints: [
+            'Calcula por separado los kg de cada tipo de fruta.',
+            'Naranjas y manzanas tienen el mismo peso por caja.',
+            'Puedes usar $$8\cdot15 + (20+6)\cdot8$$.'
+        ],
+        resolution: [
+            'Platanos: $$8\cdot15 = 120$$ kg.',
+            'Naranjas y manzanas: $$20+6=26$$ cajas; $$26\cdot8=208$$ kg.',
+            'Total: $$120+208=328$$ kg.'
+        ],
+        finalAnswer: '$$328$$ kg',
+        typicalError: 'Mezclar cantidades y pesos sin modelo claro.',
+        points: 20,
+        validate: (answer) => extractNaturalNumbers(answer).includes(328)
     },
     {
         id: 5,
-        title: t('zenbakiNaturalak.erronkak.ch5.title'),
-        description: t('zenbakiNaturalak.erronkak.ch5.description'),
-        options: (t('zenbakiNaturalak.erronkak.ch5.options', { returnObjects: true }) as string[]),
-        correctIndex: 1,
-        successMessage: t('zenbakiNaturalak.erronkak.ch5.success'),
-        errorMessage: t('zenbakiNaturalak.erronkak.ch5.error'),
-        points: 15
+        difficulty: 'nivel2',
+        title: 'Nivel 2 - Problema 2: Bandejas y cajas',
+        statement:
+            'Un granjero recoge 1274 huevos. Los envasa en bandejas de 30 huevos y las bandejas en cajas de 10 bandejas. Cuantos huevos sobran sin completar bandeja? Cuantas bandejas sobran sin completar caja?',
+        hints: [
+            'Primero divide huevos entre 30.',
+            'Ese cociente son bandejas completas.',
+            'Despues divide las bandejas completas entre 10.'
+        ],
+        resolution: [
+            '$$1274:30 = 42$$ y resto $$14$$ -> sobran $$14$$ huevos.',
+            '$$42:10 = 4$$ y resto $$2$$ -> sobran $$2$$ bandejas.'
+        ],
+        finalAnswer: 'Sobran $$14$$ huevos y $$2$$ bandejas.',
+        typicalError: 'Dividir $$1274$$ entre $$300$$ y mezclar niveles (huevos vs bandejas).',
+        points: 20,
+        validate: (answer) => {
+            const values = extractNaturalNumbers(answer)
+            return values.includes(14) && values.includes(2)
+        }
     },
     {
         id: 6,
-        title: t('zenbakiNaturalak.erronkak.ch6.title'),
-        description: t('zenbakiNaturalak.erronkak.ch6.description'),
-        options: (t('zenbakiNaturalak.erronkak.ch6.options', { returnObjects: true }) as string[]),
-        correctIndex: 0,
-        successMessage: t('zenbakiNaturalak.erronkak.ch6.success'),
-        errorMessage: t('zenbakiNaturalak.erronkak.ch6.error'),
-        points: 20
+        difficulty: 'nivel2',
+        title: 'Nivel 2 - Problema 3: Jerarquia y parentesis',
+        statement:
+            'Resuelve y compara: 1) $$2 + 3\cdot4$$, 2) $$(2+3)\cdot4$$, 3) $$26 - 5\cdot(2+3) + 6$$.',
+        hints: [
+            'Primero parentesis.',
+            'Luego multiplicaciones y divisiones.',
+            'Finalmente sumas y restas de izquierda a derecha.'
+        ],
+        resolution: [
+            '$$2 + 3\cdot4 = 14$$.',
+            '$$(2+3)\cdot4 = 20$$.',
+            '$$26 - 5\cdot(2+3) + 6 = 7$$.'
+        ],
+        finalAnswer: '$$14$$, $$20$$ y $$7$$',
+        typicalError: 'Resolver todo de izquierda a derecha sin jerarquia.',
+        points: 20,
+        validate: (answer) => {
+            const values = extractNaturalNumbers(answer)
+            return values.includes(14) && values.includes(20) && values.includes(7)
+        }
     },
     {
         id: 7,
-        title: t('zenbakiNaturalak.erronkak.ch7.title'),
-        description: t('zenbakiNaturalak.erronkak.ch7.description'),
-        options: (t('zenbakiNaturalak.erronkak.ch7.options', { returnObjects: true }) as string[]),
-        correctIndex: 1,
-        successMessage: t('zenbakiNaturalak.erronkak.ch7.success'),
-        errorMessage: t('zenbakiNaturalak.erronkak.ch7.error'),
-        points: 20
+        difficulty: 'nivel3',
+        title: 'Nivel 3 - Problema 1: Numero oculto',
+        statement:
+            'Numero natural de cinco cifras con suma de cifras igual a 5. Al intercambiar la cifra de unidades con la de unidades de millar, el numero aumenta en 999. Que numero es?',
+        hints: [
+            'Llama $$a$$ a la cifra de millares y $$b$$ a la de unidades.',
+            'La variacion del intercambio afecta a miles y unidades.',
+            'La diferencia es $$999(b-a)$$ y debe valer $$999$$.'
+        ],
+        resolution: [
+            'De $$999(b-a)=999$$ se obtiene $$b-a=1$$.',
+            'Con suma de cifras $$5$$, una solucion minima y valida es $$40001$$.',
+            'Comprobacion: $$41000 - 40001 = 999$$.'
+        ],
+        finalAnswer: '$$40001$$',
+        typicalError: 'Probar al azar sin modelizar el cambio posicional.',
+        points: 30,
+        validate: (answer) => normalizeText(answer).replace(/[.,]/g, '') === '40001'
     },
     {
         id: 8,
-        title: t('zenbakiNaturalak.erronkak.ch8.title'),
-        description: t('zenbakiNaturalak.erronkak.ch8.description'),
-        options: (t('zenbakiNaturalak.erronkak.ch8.options', { returnObjects: true }) as string[]),
-        correctIndex: 1,
-        successMessage: t('zenbakiNaturalak.erronkak.ch8.success'),
-        errorMessage: t('zenbakiNaturalak.erronkak.ch8.error'),
-        points: 20
+        difficulty: 'nivel3',
+        title: 'Nivel 3 - Problema 2: Aproximacion segun contexto',
+        statement:
+            'Presupuesto de una obra: 149,637 euros. Da una aproximacion para: informe tecnico detallado, conversacion informal y titular breve. Justifica el orden elegido.',
+        hints: [
+            'No siempre conviene la misma precision.',
+            'En contexto informal se admite mayor simplificacion.',
+            'Una aproximacion habitual en conversacion es alrededor de 150,000 euros.'
+        ],
+        resolution: [
+            'Informe tecnico: mantener $$149,637$$ (valor exacto).',
+            'Conversacion informal: $$150,000$$ euros.',
+            'Titular breve: "unos $$150,000$$ euros" o equivalente.'
+        ],
+        finalAnswer: 'Exacto $$149,637$$; aproximado $$150,000$$ segun contexto.',
+        typicalError: 'Pensar que existe una unica aproximacion correcta para cualquier uso.',
+        points: 30,
+        validate: (answer) => {
+            const values = extractNaturalNumbers(answer)
+            return values.includes(149637) && values.includes(150000)
+        }
     },
     {
         id: 9,
-        title: t('zenbakiNaturalak.erronkak.ch9.title'),
-        description: t('zenbakiNaturalak.erronkak.ch9.description'),
-        options: (t('zenbakiNaturalak.erronkak.ch9.options', { returnObjects: true }) as string[]),
-        correctIndex: 2,
-        successMessage: t('zenbakiNaturalak.erronkak.ch9.success'),
-        errorMessage: t('zenbakiNaturalak.erronkak.ch9.error'),
-        points: 30
+        difficulty: 'nivel3',
+        title: 'Nivel 3 - Problema 3: Produccion y venta',
+        statement:
+            'Una agricultora tiene 200 melocotoneros. Cada arbol llena 7 cajas de 5 kg. Vende toda la produccion a 2 euros/kg y envasa en pales de 20 cajas. Calcula: kg totales, ingreso total, pales completos y cajas sobrantes.',
+        hints: [
+            'Calcula primero el numero total de cajas.',
+            'Pasa despues de cajas a kg para el ingreso.',
+            'Los pales se obtienen dividiendo cajas totales entre 20.'
+        ],
+        resolution: [
+            'Cajas: $$200\cdot7 = 1400$$.',
+            'Kg: $$1400\cdot5 = 7000$$ kg.',
+            'Ingreso: $$7000\cdot2 = 14,000$$ euros.',
+            'Pales: $$1400:20 = 70$$ y resto $$0$$.'
+        ],
+        finalAnswer: '$$7000$$ kg, $$14,000$$ euros, $$70$$ pales y $$0$$ cajas sobrantes.',
+        typicalError: 'Multiplicar por 20 en lugar de dividir para agrupar en pales.',
+        points: 40,
+        validate: (answer) => {
+            const values = extractNaturalNumbers(answer)
+            return values.includes(7000) && values.includes(14000) && values.includes(70)
+        }
     }
 ]
 
+const DIFFICULTY_CONFIG: Record<Difficulty, { label: string; sublabel: string; icon: string; color: string; bgColor: string }> = {
+    nivel1: {
+        label: 'Nivel 1',
+        sublabel: 'Fundamentos y seguridad basica',
+        icon: 'N1',
+        color: '#22C55E',
+        bgColor: '#DCFCE7'
+    },
+    nivel2: {
+        label: 'Nivel 2',
+        sublabel: 'Aplicacion y modelizacion',
+        icon: 'N2',
+        color: '#F59E0B',
+        bgColor: '#FEF3C7'
+    },
+    nivel3: {
+        label: 'Nivel 3',
+        sublabel: 'Razonamiento avanzado',
+        icon: 'N3',
+        color: '#EF4444',
+        bgColor: '#FEE2E2'
+    }
+}
+
 export function MissionPage() {
-    const { t } = useTranslation()
-    const [currentIndex, setCurrentIndex] = useState(0)
-    const [selectedOption, setSelectedOption] = useState<number | null>(null)
+    const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty | null>(null)
+    const [currentChallenge, setCurrentChallenge] = useState<Challenge | null>(null)
+    const [answer, setAnswer] = useState('')
     const [feedback, setFeedback] = useState<'idle' | 'success' | 'error'>('idle')
+    const [hintIndex, setHintIndex] = useState(-1)
+    const [showResolution, setShowResolution] = useState(false)
     const [completedChallenges, setCompletedChallenges] = useState<number[]>([])
     const [totalPoints, setTotalPoints] = useState(0)
-    const [showSummary, setShowSummary] = useState(false)
 
-    const allChallenges = getChallenges(t)
-    const currentChallenge = allChallenges[currentIndex]
-    const isCompleted = completedChallenges.includes(currentChallenge.id)
-
-    const handleOptionSelect = (index: number) => {
-        if (feedback !== 'idle') return
-        setSelectedOption(index)
-    }
+    const filteredChallenges = selectedDifficulty
+        ? CHALLENGES.filter((challenge) => challenge.difficulty === selectedDifficulty)
+        : []
 
     const handleCheck = () => {
-        if (selectedOption === null || !currentChallenge) return
-        if (selectedOption === currentChallenge.correctIndex) {
-            setFeedback('success')
-            if (!completedChallenges.includes(currentChallenge.id)) {
-                setCompletedChallenges([...completedChallenges, currentChallenge.id])
-                setTotalPoints(totalPoints + currentChallenge.points)
-            }
-        } else {
-            setFeedback('error')
+        if (!currentChallenge) return
+        const isCorrect = currentChallenge.validate(answer)
+        setFeedback(isCorrect ? 'success' : 'error')
+
+        if (isCorrect && !completedChallenges.includes(currentChallenge.id)) {
+            setCompletedChallenges((state) => [...state, currentChallenge.id])
+            setTotalPoints((state) => state + currentChallenge.points)
         }
     }
 
-    const handleNext = () => {
-        if (currentIndex < allChallenges.length - 1) {
-            setCurrentIndex(currentIndex + 1)
-            setSelectedOption(null)
-            setFeedback('idle')
-        } else {
-            setShowSummary(true)
-        }
-    }
-
-    const handlePrev = () => {
-        if (currentIndex > 0) {
-            setCurrentIndex(currentIndex - 1)
-            setSelectedOption(null)
-            setFeedback('idle')
-        }
-    }
-
-    const handleRestart = () => {
-        setCurrentIndex(0)
-        setSelectedOption(null)
+    const openChallenge = (challenge: Challenge) => {
+        setCurrentChallenge(challenge)
+        setAnswer('')
         setFeedback('idle')
-        setCompletedChallenges([])
-        setTotalPoints(0)
-        setShowSummary(false)
+        setHintIndex(-1)
+        setShowResolution(false)
     }
 
-    if (showSummary) {
-        const maxPoints = allChallenges.reduce((sum, c) => sum + c.points, 0)
-        const percentage = Math.round((totalPoints / maxPoints) * 100)
+    const handleBack = () => {
+        if (currentChallenge) {
+            setCurrentChallenge(null)
+        } else {
+            setSelectedDifficulty(null)
+        }
+        setAnswer('')
+        setFeedback('idle')
+        setHintIndex(-1)
+        setShowResolution(false)
+    }
+
+    const getProgress = (difficulty: Difficulty) => {
+        const levelChallenges = CHALLENGES.filter((challenge) => challenge.difficulty === difficulty)
+        const completed = levelChallenges.filter((challenge) => completedChallenges.includes(challenge.id)).length
+        return { completed, total: levelChallenges.length }
+    }
+
+    if (!selectedDifficulty) {
         return (
-            <div className="zn-mission-page">
+            <div className="mission-page">
                 <div className="container">
-                    <div className="zn-summary-card glass">
-                        <div className="zn-summary-icon">🏆</div>
-                        <h1>{t('zenbakiNaturalak.erronkak.title')}</h1>
-                        <div className="zn-score-display">
-                            <span className="zn-score-value">{totalPoints}</span>
-                            <span className="zn-score-max">/ {maxPoints} pts</span>
-                        </div>
-                        <div className="zn-progress-bar-large">
-                            <div
-                                className="zn-progress-fill"
-                                style={{ width: `${percentage}%` }}
-                            />
-                        </div>
-                        <p className="zn-score-pct">{percentage}%</p>
-                        <p className="zn-completed-msg">
-                            {completedChallenges.length} / {allChallenges.length} {t('common.completed') || 'completados'}
+                    <header className="mission-header">
+                        <h1>Erronkak: Numeros Naturales</h1>
+                        <p className="mission-subtitle">
+                            9 problemas progresivos con pistas graduadas, validacion y resolucion guiada.
                         </p>
-                        <button onClick={handleRestart} className="btn btn-primary zn-restart-btn">
-                            🔄 {t('common.restart') || 'Reiniciar'}
-                        </button>
+                    </header>
+
+                    <div className="points-display glass">
+                        <span className="points-icon">PTS</span>
+                        <span className="points-value">{totalPoints}</span>
+                        <span className="points-label">puntuacion total</span>
+                    </div>
+
+                    <div className="difficulty-grid">
+                        {(Object.keys(DIFFICULTY_CONFIG) as Difficulty[]).map((difficulty) => {
+                            const config = DIFFICULTY_CONFIG[difficulty]
+                            const progress = getProgress(difficulty)
+
+                            return (
+                                <button
+                                    key={difficulty}
+                                    className="difficulty-card glass"
+                                    onClick={() => setSelectedDifficulty(difficulty)}
+                                    style={{ '--level-color': config.color, '--level-bg': config.bgColor } as React.CSSProperties}
+                                >
+                                    <span className="difficulty-icon">{config.icon}</span>
+                                    <h3>{config.label}</h3>
+                                    <p className="difficulty-sublabel">{config.sublabel}</p>
+                                    <div className="difficulty-progress">
+                                        <div className="mini-progress-bar">
+                                            <div
+                                                className="mini-progress-fill"
+                                                style={{ width: `${(progress.completed / progress.total) * 100}%` }}
+                                            />
+                                        </div>
+                                        <span>
+                                            {progress.completed}/{progress.total}
+                                        </span>
+                                    </div>
+                                </button>
+                            )
+                        })}
                     </div>
                 </div>
             </div>
         )
     }
 
-    return (
-        <div className="zn-mission-page">
-            <div className="container">
-                <header className="zn-mission-header">
-                    <h1>🎯 {t('zenbakiNaturalak.erronkak.title')}</h1>
-                    <div className="zn-points-display glass">
-                        <span>🏆</span>
-                        <span className="zn-points-value">{totalPoints}</span>
-                        <span className="zn-points-label">pts</span>
-                    </div>
-                </header>
+    if (!currentChallenge) {
+        const config = DIFFICULTY_CONFIG[selectedDifficulty]
+        return (
+            <div className="mission-page">
+                <div className="container">
+                    <button className="back-button" onClick={handleBack}>
+                        {'<-'} Volver
+                    </button>
 
-                {/* Progress dots */}
-                <div className="zn-progress-dots">
-                    {allChallenges.map((c, i) => (
-                        <button
-                            key={c.id}
-                            className={`zn-dot ${i === currentIndex ? 'active' : ''} ${completedChallenges.includes(c.id) ? 'done' : ''}`}
-                            onClick={() => {
-                                setCurrentIndex(i)
-                                setSelectedOption(null)
-                                setFeedback('idle')
-                            }}
-                            aria-label={`Challenge ${i + 1}`}
-                        />
-                    ))}
-                </div>
+                    <header className="mission-header level-header" style={{ '--level-color': config.color } as React.CSSProperties}>
+                        <span className="level-icon">{config.icon}</span>
+                        <h1>{config.label}</h1>
+                        <p className="mission-subtitle">{config.sublabel}</p>
+                    </header>
 
-                {/* Challenge card */}
-                <div className="zn-challenge-card glass">
-                    <div className="zn-challenge-top">
-                        <span className="zn-challenge-num">#{currentIndex + 1}</span>
-                        <span className="zn-challenge-pts">+{currentChallenge.points} pts</span>
-                        {isCompleted && <span className="zn-done-badge">✓</span>}
-                    </div>
-
-                    <h2 className="zn-challenge-title">{currentChallenge.title}</h2>
-                    <p className="zn-challenge-desc">{currentChallenge.description}</p>
-
-                    <div className="zn-options-grid">
-                        {currentChallenge.options.map((option, i) => {
-                            let cls = 'zn-option'
-                            if (selectedOption === i) {
-                                if (feedback === 'idle') cls += ' selected'
-                                else if (feedback === 'success') cls += ' correct'
-                                else cls += ' wrong'
-                            }
-                            if (feedback !== 'idle' && i === currentChallenge.correctIndex) {
-                                cls += ' correct'
-                            }
+                    <div className="challenges-grid">
+                        {filteredChallenges.map((challenge, index) => {
+                            const solved = completedChallenges.includes(challenge.id)
                             return (
                                 <button
-                                    key={i}
-                                    className={cls}
-                                    onClick={() => handleOptionSelect(i)}
-                                    disabled={feedback !== 'idle'}
+                                    key={challenge.id}
+                                    className={`challenge-card glass ${solved ? 'completed' : ''}`}
+                                    onClick={() => openChallenge(challenge)}
+                                    style={{ '--level-color': config.color } as React.CSSProperties}
                                 >
-                                    <span className="zn-option-letter">{String.fromCharCode(65 + i)}</span>
-                                    <span className="zn-option-text">{option}</span>
+                                    <span className="challenge-number">{index + 1}</span>
+                                    <h4>{challenge.title}</h4>
+                                    <div className="challenge-meta">
+                                        <span className="challenge-points">+{challenge.points} pts</span>
+                                        {solved && <span className="completed-check">OK</span>}
+                                    </div>
                                 </button>
                             )
                         })}
                     </div>
+                </div>
+            </div>
+        )
+    }
 
-                    {feedback !== 'idle' && (
-                        <div className={`zn-feedback ${feedback}`} role="alert">
-                            <span className="zn-feedback-icon">
-                                {feedback === 'success' ? '🎉' : '❌'}
-                            </span>
-                            <p>
-                                {feedback === 'success'
-                                    ? currentChallenge.successMessage
-                                    : currentChallenge.errorMessage}
-                            </p>
+    const config = DIFFICULTY_CONFIG[currentChallenge.difficulty]
+
+    return (
+        <div className="mission-page">
+            <div className="container">
+                <button className="back-button" onClick={handleBack}>
+                    {'<-'} Volver
+                </button>
+
+                <div className="challenge-container glass" style={{ '--level-color': config.color } as React.CSSProperties}>
+                    <div className="challenge-header">
+                        <span className="challenge-difficulty-badge" style={{ background: config.bgColor, color: config.color }}>
+                            {config.icon} {config.label}
+                        </span>
+                        <span className="challenge-points-badge">+{currentChallenge.points} pts</span>
+                    </div>
+
+                    <h2 className="challenge-title">{currentChallenge.title}</h2>
+                    <p className="challenge-description">{currentChallenge.statement}</p>
+
+                    <div className="answer-section">
+                        <input
+                            type="text"
+                            value={answer}
+                            onChange={(event) => {
+                                setAnswer(event.target.value)
+                                setFeedback('idle')
+                            }}
+                            placeholder="Escribe aqui tu respuesta"
+                            className={`answer-input ${feedback !== 'idle' ? feedback : ''}`}
+                            onKeyDown={(event) => event.key === 'Enter' && handleCheck()}
+                        />
+                        <button onClick={handleCheck} className="btn btn-primary check-btn">
+                            Comprobar
+                        </button>
+                    </div>
+
+                    {feedback === 'success' && (
+                        <div className="feedback success" role="alert">
+                            <span className="feedback-icon">OK</span>
+                            <p>Respuesta correcta. Buen trabajo.</p>
                         </div>
                     )}
 
-                    <div className="zn-actions">
-                        <button
-                            className="zn-btn-nav"
-                            onClick={handlePrev}
-                            disabled={currentIndex === 0}
-                        >
-                            ← {t('common.back') || 'Atrás'}
-                        </button>
+                    {feedback === 'error' && (
+                        <div className="feedback error" role="alert">
+                            <span className="feedback-icon">X</span>
+                            <p>No coincide aun. Revisa el modelo y usa pistas.</p>
+                        </div>
+                    )}
 
-                        {feedback === 'idle' ? (
-                            <button
-                                className="btn btn-primary zn-check-btn"
-                                onClick={handleCheck}
-                                disabled={selectedOption === null}
-                            >
-                                {t('common.check') || 'Comprobar'}
-                            </button>
-                        ) : (
-                            <button className="btn btn-primary zn-next-btn" onClick={handleNext}>
-                                {currentIndex < allChallenges.length - 1
-                                    ? (t('common.next') || 'Siguiente') + ' →'
-                                    : '🏁 ' + (t('common.finish') || 'Finalizar')}
-                            </button>
-                        )}
+                    <div className="mission-tools-row">
+                        <button
+                            onClick={() => setHintIndex((value) => Math.min(value + 1, currentChallenge.hints.length - 1))}
+                            className="hint-toggle"
+                        >
+                            Mostrar pista {Math.min(hintIndex + 2, currentChallenge.hints.length)}
+                        </button>
+                        <button onClick={() => setShowResolution((value) => !value)} className="hint-toggle">
+                            {showResolution ? 'Ocultar resolucion' : 'Ver resolucion paso a paso'}
+                        </button>
                     </div>
+
+                    {hintIndex >= 0 && (
+                        <div className="hint-box">
+                            <p>{currentChallenge.hints[hintIndex]}</p>
+                        </div>
+                    )}
+
+                    {showResolution && (
+                        <div className="resolution-box">
+                            <h3>Resolucion guiada</h3>
+                            <ol>
+                                {currentChallenge.resolution.map((step) => (
+                                    <li key={step}>{step}</li>
+                                ))}
+                            </ol>
+                            <p>
+                                <strong>Respuesta final:</strong> {currentChallenge.finalAnswer}
+                            </p>
+                            <p>
+                                <strong>Error tipico:</strong> {currentChallenge.typicalError}
+                            </p>
+                        </div>
+                    )}
                 </div>
+
+                {completedChallenges.includes(currentChallenge.id) && (
+                    <div className="success-banner glass">
+                        <span>LOGRO</span>
+                        <p>Erronka completada</p>
+                    </div>
+                )}
             </div>
         </div>
     )
