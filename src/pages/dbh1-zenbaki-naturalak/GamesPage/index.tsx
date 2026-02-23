@@ -559,51 +559,8 @@ export function GamesPage() {
                         </div>
                     </div>
 
-                    <div className="zn-formula-bar">
-                        <strong>{ui.formula}:</strong> <MathText text={ui.formulas[activeGame]} />
-                    </div>
-
-                    {activeGame === 'flash' && (
-                        <div className="zn-widget">
-                            <h3>⚡ Flash</h3>
-                            <p className="zn-label">{ui.flash.number}</p>
-                            <div className="digit-track" aria-label={ui.flash.number}>
-                                {String(flashChallenge.number).split('').map((digit, index) => (
-                                    <span key={`${digit}-${index}`} className={`digit ${index === flashChallenge.index ? 'focus' : ''}`}>
-                                        {digit}
-                                    </span>
-                                ))}
-                            </div>
-                            <p className="zn-note">{formatNumber(flashChallenge.number)}</p>
-                            <div className="zn-mini-grid">
-                                <p><strong>{ui.flash.focusDigit}:</strong> {flashChallenge.digit}</p>
-                                <p><strong>{ui.flash.place}:</strong> {flashPlaceName}</p>
-                            </div>
-                            <p className="zn-math-inline">
-                                <MathText text={toMath(`${flashChallenge.digit} \\cdot ${flashChallenge.place} = ?`)} inline />
-                            </p>
-                            <input
-                                value={flashInput}
-                                onChange={(e) => setFlashInput(e.target.value)}
-                                placeholder={ui.flash.placeholder}
-                                onKeyDown={(e) => e.key === 'Enter' && checkFlash()}
-                            />
-                            <div className="zn-widget-actions">
-                                <button onClick={checkFlash}>{ui.check}</button>
-                                <button onClick={nextFlash}>{ui.next}</button>
-                            </div>
-                            {flashFeedback !== 'idle' && (
-                                <div className={`zn-feedback ${flashFeedback === 'ok' ? 'ok' : 'ko'}`}>
-                                    <p>{flashFeedback === 'ok' ? ui.correct : ui.incorrect}</p>
-                                    <p>{ui.flash.valuePrompt}: <MathText text={toMath(String(flashChallenge.value))} inline /></p>
-                                    <p className="feedback-hint">{ui.lockHint}</p>
-                                </div>
-                            )}
-                        </div>
-                    )}
-
                     {activeGame === 'parentesis' && (
-                        <div className="zn-widget">
+                        <div className={`zn-widget ${puzzleFeedback}`}>
                             <h3>🧩 Parentesis</h3>
                             <p className="zn-label">{ui.parentesis.base}</p>
                             <p className="zn-math-inline"><MathText text={toMath(currentPuzzle.statement)} inline /></p>
@@ -627,17 +584,17 @@ export function GamesPage() {
                                 ))}
                             </div>
                             <div className="zn-widget-actions">
-                                <button onClick={checkPuzzle}>{ui.check}</button>
-                                <button onClick={nextPuzzle}>{ui.next}</button>
+                                <button onClick={checkPuzzle} className="btn-primary">{ui.check}</button>
+                                <button onClick={nextPuzzle} className="btn-secondary">{ui.next}</button>
                             </div>
                             {puzzleFeedback !== 'idle' && (
                                 <div className={`zn-feedback ${puzzleFeedback === 'ok' ? 'ok' : 'ko'}`}>
-                                    <p>{puzzleFeedback === 'ok' ? ui.correct : ui.incorrect}</p>
+                                    <p className="feedback-title">{puzzleFeedback === 'ok' ? ui.correct : ui.incorrect}</p>
                                     <p>
                                         {ui.parentesis.explanation}:{' '}
                                         <MathText
                                             text={toMath(
-                                                `${puzzleExpected}${puzzleExpectedValue !== null ? ` = ${puzzleExpectedValue}` : ''}`
+                                                `${puzzleExpected} = ${puzzleExpectedValue}`
                                             )}
                                             inline
                                         />
@@ -649,7 +606,7 @@ export function GamesPage() {
                     )}
 
                     {activeGame === 'reparto' && (
-                        <div className="zn-widget">
+                        <div className={`zn-widget ${repartoFeedback}`}>
                             <h3>📦 Reparto</h3>
                             <p className="zn-label">{ui.reparto.context}</p>
                             <p className="zn-note">
@@ -662,45 +619,83 @@ export function GamesPage() {
                             <div className="zn-widget-grid">
                                 <label>
                                     {ui.reparto.quotient}
-                                    <input value={repartoQ} onChange={(e) => setRepartoQ(e.target.value)} />
+                                    <input className="zn-input" value={repartoQ} onChange={(e) => setRepartoQ(e.target.value)} />
                                 </label>
                                 <label>
                                     {ui.reparto.remainder}
-                                    <input value={repartoR} onChange={(e) => setRepartoR(e.target.value)} />
+                                    <input className="zn-input" value={repartoR} onChange={(e) => setRepartoR(e.target.value)} />
                                 </label>
                             </div>
-                            <div className="zn-rule-box">
-                                <p>
-                                    <strong>{ui.reparto.rule}:</strong>{' '}
-                                    <MathText
-                                        text={toMath(`${repartoChallenge.dividend} = ${repartoChallenge.divisor}\\cdot c + r`)}
-                                        inline
-                                    />
-                                </p>
-                                <p>
-                                    <strong>{ui.reparto.condition}:</strong>{' '}
-                                    <MathText text={toMath(`0 \\le r < ${repartoChallenge.divisor}`)} inline />
-                                </p>
-                            </div>
                             <div className="zn-widget-actions">
-                                <button onClick={checkReparto}>{ui.check}</button>
-                                <button onClick={nextReparto}>{ui.next}</button>
+                                <button onClick={checkReparto} className="btn-primary">{ui.check}</button>
+                                <button onClick={nextReparto} className="btn-secondary">{ui.next}</button>
                             </div>
                             {repartoFeedback !== 'idle' && (
-                                <div className={`zn-feedback ${repartoFeedback === 'ok' ? 'ok' : 'ko'}`}>
-                                    <p>{repartoFeedback === 'ok' ? ui.correct : ui.incorrect}</p>
-                                    <p>
-                                        {ui.reparto.solution}:{' '}
-                                        <MathText
-                                            text={toMath(`c = ${repartoChallenge.quotient},\\ r = ${repartoChallenge.remainder}`)}
-                                            inline
-                                        />
-                                    </p>
-                                    <p className="feedback-hint">{ui.lockHint}</p>
-                                </div>
+                                <>
+                                    <div className="zn-rule-box">
+                                        <p>
+                                            <strong>{ui.reparto.rule}:</strong>{' '}
+                                            <MathText
+                                                text={toMath(`${repartoChallenge.dividend} = ${repartoChallenge.divisor}\\cdot ${repartoChallenge.quotient} + ${repartoChallenge.remainder}`)}
+                                                inline
+                                            />
+                                        </p>
+                                        <p>
+                                            <strong>{ui.reparto.condition}:</strong>{' '}
+                                            <MathText text={toMath(`0 \\le ${repartoChallenge.remainder} < ${repartoChallenge.divisor}`)} inline />
+                                        </p>
+                                    </div>
+                                    <div className={`zn-feedback ${repartoFeedback === 'ok' ? 'ok' : 'ko'}`}>
+                                        <p className="feedback-title">{repartoFeedback === 'ok' ? ui.correct : ui.incorrect}</p>
+                                        <p>
+                                            {ui.reparto.solution}:{' '}
+                                            <MathText
+                                                text={toMath(`c = ${repartoChallenge.quotient},\\ r = ${repartoChallenge.remainder}`)}
+                                                inline
+                                            />
+                                        </p>
+                                        <p className="feedback-hint">{ui.lockHint}</p>
+                                    </div>
+                                </>
                             )}
                         </div>
                     )}
+                    <div className={`zn-widget ${flashFeedback}`}>
+                        <h3>⚡ Flash</h3>
+                        <p className="zn-label">{ui.flash.number}</p>
+                        <div className="digit-track" aria-label={ui.flash.number}>
+                            {String(flashChallenge.number).split('').map((digit, index) => (
+                                <span key={`${digit}-${index}`} className={`digit ${index === flashChallenge.index ? 'focus' : ''}`}>
+                                    {digit}
+                                </span>
+                            ))}
+                        </div>
+                        <p className="zn-note">{formatNumber(flashChallenge.number)}</p>
+                        <div className="zn-mini-grid">
+                            <p><strong>{ui.flash.focusDigit}:</strong> {flashChallenge.digit}</p>
+                            <p><strong>{ui.flash.place}:</strong> {flashPlaceName}</p>
+                        </div>
+                        <input
+                            className="zn-input"
+                            value={flashInput}
+                            onChange={(e) => setFlashInput(e.target.value)}
+                            placeholder={ui.flash.placeholder}
+                            onKeyDown={(e) => e.key === 'Enter' && checkFlash()}
+                        />
+                        <div className="zn-widget-actions">
+                            <button onClick={checkFlash} className="btn-primary">{ui.check}</button>
+                            <button onClick={nextFlash} className="btn-secondary">{ui.next}</button>
+                        </div>
+                        {flashFeedback !== 'idle' && (
+                            <div className={`zn-feedback ${flashFeedback === 'ok' ? 'ok' : 'ko'}`}>
+                                <p className="feedback-title">{flashFeedback === 'ok' ? ui.correct : ui.incorrect}</p>
+                                <p>{ui.flash.valuePrompt}: <MathText text={toMath(`${flashChallenge.digit} \\cdot ${flashChallenge.place} = ${flashChallenge.value}`)} inline /></p>
+                                <p className="feedback-hint">{ui.lockHint}</p>
+                            </div>
+                        )}
+                    </div>
+                    )}
+
                 </section>
             </div>
         </div>
