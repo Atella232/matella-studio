@@ -660,40 +660,42 @@ export function GamesPage() {
                             )}
                         </div>
                     )}
-                    <div className={`zn-widget ${flashFeedback}`}>
-                        <h3>⚡ Flash</h3>
-                        <p className="zn-label">{ui.flash.number}</p>
-                        <div className="digit-track" aria-label={ui.flash.number}>
-                            {String(flashChallenge.number).split('').map((digit, index) => (
-                                <span key={`${digit}-${index}`} className={`digit ${index === flashChallenge.index ? 'focus' : ''}`}>
-                                    {digit}
-                                </span>
-                            ))}
-                        </div>
-                        <p className="zn-note">{formatNumber(flashChallenge.number)}</p>
-                        <div className="zn-mini-grid">
-                            <p><strong>{ui.flash.focusDigit}:</strong> {flashChallenge.digit}</p>
-                            <p><strong>{ui.flash.place}:</strong> {flashPlaceName}</p>
-                        </div>
-                        <input
-                            className="zn-input"
-                            value={flashInput}
-                            onChange={(e) => setFlashInput(e.target.value)}
-                            placeholder={ui.flash.placeholder}
-                            onKeyDown={(e) => e.key === 'Enter' && checkFlash()}
-                        />
-                        <div className="zn-widget-actions">
-                            <button onClick={checkFlash} className="btn-primary">{ui.check}</button>
-                            <button onClick={nextFlash} className="btn-secondary">{ui.next}</button>
-                        </div>
-                        {flashFeedback !== 'idle' && (
-                            <div className={`zn-feedback ${flashFeedback === 'ok' ? 'ok' : 'ko'}`}>
-                                <p className="feedback-title">{flashFeedback === 'ok' ? ui.correct : ui.incorrect}</p>
-                                <p>{ui.flash.valuePrompt}: <MathText text={toMath(`${flashChallenge.digit} \\cdot ${flashChallenge.place} = ${flashChallenge.value}`)} inline /></p>
-                                <p className="feedback-hint">{ui.lockHint}</p>
+
+                    {activeGame === 'flash' && (
+                        <div className={`zn-widget ${flashFeedback}`}>
+                            <h3>⚡ Flash</h3>
+                            <p className="zn-label">{ui.flash.number}</p>
+                            <div className="digit-track" aria-label={ui.flash.number}>
+                                {String(flashChallenge.number).split('').map((digit, index) => (
+                                    <span key={`${digit}-${index}`} className={`digit ${index === flashChallenge.index ? 'focus' : ''}`}>
+                                        {digit}
+                                    </span>
+                                ))}
                             </div>
-                        )}
-                    </div>
+                            <p className="zn-note">{formatNumber(flashChallenge.number)}</p>
+                            <div className="zn-mini-grid">
+                                <p><strong>{ui.flash.focusDigit}:</strong> {flashChallenge.digit}</p>
+                                <p><strong>{ui.flash.place}:</strong> {flashPlaceName}</p>
+                            </div>
+                            <input
+                                className="zn-input"
+                                value={flashInput}
+                                onChange={(e) => setFlashInput(e.target.value)}
+                                placeholder={ui.flash.placeholder}
+                                onKeyDown={(e) => e.key === 'Enter' && checkFlash()}
+                            />
+                            <div className="zn-widget-actions">
+                                <button onClick={checkFlash} className="btn-primary">{ui.check}</button>
+                                <button onClick={nextFlash} className="btn-secondary">{ui.next}</button>
+                            </div>
+                            {flashFeedback !== 'idle' && (
+                                <div className={`zn-feedback ${flashFeedback === 'ok' ? 'ok' : 'ko'}`}>
+                                    <p className="feedback-title">{flashFeedback === 'ok' ? ui.correct : ui.incorrect}</p>
+                                    <p>{ui.flash.valuePrompt}: <MathText text={toMath(`${flashChallenge.digit} \\cdot ${flashChallenge.place} = ${flashChallenge.value}`)} inline /></p>
+                                    <p className="feedback-hint">{ui.lockHint}</p>
+                                </div>
+                            )}
+                        </div>
                     )}
 
                 </section>
