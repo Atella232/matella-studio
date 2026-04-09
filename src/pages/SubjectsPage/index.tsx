@@ -16,18 +16,17 @@ export function SubjectsPage() {
                 <div className="subjects-grid">
                     <SubjectCard
                         to="/matematika"
-                        icon="∑"
+                        icon="Σ"
                         title={t('subjects.math.title')}
                         description={t('subjects.math.description')}
                         color="#6366f1"
                     />
                     <SubjectCard
+                        to="/natura"
                         icon="🌿"
                         title={t('subjects.natura.title')}
                         description={t('subjects.natura.description')}
                         color="#10b981"
-                        disabled
-                        disabledLabel={t('subjects.comingSoon')}
                     />
                 </div>
 

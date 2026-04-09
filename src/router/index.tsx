@@ -51,6 +51,9 @@ import { LabPage as LabPageDBH2_Algebra } from '../pages/dbh2-algebra/LabPage'
 import { MissionPage as MissionPageDBH2_Algebra } from '../pages/dbh2-algebra/MissionPage'
 import { GamesPage as GamesPageDBH2_Algebra } from '../pages/dbh2-algebra/GamesPage'
 import { ExercisesPage as ExercisesPageDBH2_Algebra } from '../pages/dbh2-algebra/ExercisesPage'
+import { NaturaCoursesPage } from '../pages/NaturaCoursesPage'
+import { NaturaTopicsPage } from '../pages/NaturaTopicsPage'
+import { NaturaBiosferaPage } from '../pages/natura-biosfera'
 
 export const router = createHashRouter([
     {
@@ -66,8 +69,20 @@ export const router = createHashRouter([
                 element: <CoursesPage />,
             },
             {
+                path: 'natura',
+                element: <NaturaCoursesPage />,
+            },
+            {
                 path: 'matematika/:courseId',
                 element: <TopicsPage />,
+            },
+            {
+                path: 'natura/:courseId',
+                element: <NaturaTopicsPage />,
+            },
+            {
+                path: 'natura/dbh1/biosfera',
+                element: <NaturaBiosferaPage />,
             },
             // Ruta para Fracciones de 1º ESO
             {

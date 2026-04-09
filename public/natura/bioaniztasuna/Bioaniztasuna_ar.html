@@ -1,0 +1,2846 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bioaniztasuna — 1. DBH</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a1a0f;
+  --bg-card: #0f2518;
+  --bg-card-hover: #142e1e;
+  --accent-green: #4ade80;
+  --accent-lime: #a3e635;
+  --accent-emerald: #34d399;
+  --accent-teal: #2dd4bf;
+  --accent-cyan: #22d3ee;
+  --accent-amber: #fbbf24;
+  --accent-rose: #fb7185;
+  --accent-violet: #a78bfa;
+  --text-primary: #f0fdf4;
+  --text-secondary: #86efac;
+  --text-muted: #6b8f7b;
+  --border-subtle: rgba(74, 222, 128, 0.12);
+  --glow-green: rgba(74, 222, 128, 0.15);
+  --glow-emerald: rgba(52, 211, 153, 0.2);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-green) var(--bg-deep);
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* ===== PARTICLE CANVAS ===== */
+#particles-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ===== NAVIGATION ===== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(20px);
+  background: rgba(10, 26, 15, 0.8);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: all 0.4s ease;
+}
+
+.nav.scrolled {
+  padding: 0.6rem 2rem;
+  background: rgba(10, 26, 15, 0.95);
+}
+
+.nav-brand {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 1.3rem;
+  background: linear-gradient(135deg, var(--accent-green), var(--accent-teal));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.4rem 0.7rem;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--accent-green);
+  background: var(--glow-green);
+}
+
+.lang-switch {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 1.5rem;
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--border-subtle);
+}
+
+.lang-btn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.lang-btn.active {
+  background: var(--accent-green);
+  color: var(--bg-deep);
+  border-color: var(--accent-green);
+}
+
+.lang-btn:hover {
+  background: var(--glow-green);
+  color: var(--accent-green);
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  overflow: hidden;
+  background: linear-gradient(to bottom, rgba(10, 26, 15, 0.7), rgba(10, 26, 15, 0.95)), url('img/hero_background_1775265899059.png') no-repeat center center;
+  background-size: cover;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(74, 222, 128, 0.08) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 30%, rgba(34, 211, 238, 0.06) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 80%, rgba(163, 230, 53, 0.04) 0%, transparent 50%);
+  animation: heroGlow 12s ease-in-out infinite alternate;
+}
+
+@keyframes heroGlow {
+  0% { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(15deg) scale(1.1); }
+}
+
+.hero-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--accent-green);
+  background: rgba(74, 222, 128, 0.05);
+  margin-bottom: 2rem;
+  animation: fadeSlideUp 1s ease forwards;
+  opacity: 0;
+}
+
+.hero-badge .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+}
+
+.hero h1 {
+  position: relative;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  animation: fadeSlideUp 1s ease 0.2s forwards;
+  opacity: 0;
+}
+
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-teal) 40%, var(--accent-cyan) 70%, var(--accent-lime) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+.hero-subtitle {
+  position: relative;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--text-muted);
+  max-width: 600px;
+  font-weight: 300;
+  line-height: 1.8;
+  animation: fadeSlideUp 1s ease 0.4s forwards;
+  opacity: 0;
+}
+
+.hero-scroll {
+  position: relative;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  animation: fadeSlideUp 1s ease 0.6s forwards;
+  opacity: 0;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--accent-green), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; height: 40px; }
+  50% { opacity: 1; height: 60px; }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  position: relative;
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-number {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent-green);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.section-desc {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: 650px;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+/* ===== DIVIDER ===== */
+.section-divider {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+}
+
+/* ===== FEATURE CARDS ===== */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+  cursor: default;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-teal));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(74, 222, 128, 0.25);
+  background: var(--bg-card-hover);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px var(--glow-green);
+}
+
+.feature-card:hover::before { opacity: 1; }
+
+/* Nuevo diseño para Feature Cards */
+.feature-image {
+  width: calc(100% + 4rem);
+  height: 180px;
+  object-fit: cover;
+  margin: -2.5rem -2rem 1.5rem -2rem;
+  border-bottom: 1px solid var(--border-subtle);
+  border-radius: 20px 20px 0 0;
+  display: block;
+}
+
+.card-icon {
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.card-icon.green { background: rgba(74, 222, 128, 0.1); }
+.card-icon.teal { background: rgba(45, 212, 191, 0.1); }
+.card-icon.amber { background: rgba(251, 191, 36, 0.1); }
+.card-icon.rose { background: rgba(251, 113, 133, 0.1); }
+.card-icon.violet { background: rgba(167, 139, 250, 0.1); }
+.card-icon.cyan { background: rgba(34, 211, 238, 0.1); }
+
+.feature-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.01em;
+}
+
+.feature-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* ===== CHEMISTRY SECTION ===== */
+.chemistry-visual {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.element-card {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.element-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px var(--glow-green);
+}
+
+.element-symbol {
+  font-family: 'Space Mono', monospace;
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.element-card:nth-child(1) .element-symbol { color: var(--accent-green); }
+.element-card:nth-child(2) .element-symbol { color: var(--accent-cyan); }
+.element-card:nth-child(3) .element-symbol { color: var(--accent-amber); }
+.element-card:nth-child(4) .element-symbol { color: var(--accent-violet); }
+
+.element-name {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.substances-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.substance-box {
+  border-radius: 20px;
+  padding: 2.5rem;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+}
+
+.substance-box h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  margin-bottom: 1.2rem;
+}
+
+.substance-tag {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 0.25rem 0.15rem;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.substance-tag:hover { transform: scale(1.08); }
+
+.tag-organic {
+  background: rgba(74, 222, 128, 0.12);
+  color: var(--accent-green);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.tag-inorganic {
+  background: rgba(34, 211, 238, 0.12);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+}
+
+/* ===== FUNCTIONS INTERACTIVE ===== */
+.functions-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.func-tab {
+  padding: 0.7rem 1.6rem;
+  border-radius: 50px;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.func-tab:hover { border-color: var(--accent-green); color: var(--accent-green); }
+
+.func-tab.active {
+  background: var(--accent-green);
+  color: var(--bg-deep);
+  border-color: var(--accent-green);
+}
+
+.func-content {
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+.func-content.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.func-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.func-illustration {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  font-size: 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.func-illustration::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: radial-gradient(circle at center, rgba(74, 222, 128, 0.05), transparent 70%);
+}
+
+.func-info {
+  padding: 1rem 0;
+}
+
+.func-info h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.func-info p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+}
+
+.info-highlight {
+  background: rgba(74, 222, 128, 0.08);
+  border-left: 3px solid var(--accent-green);
+  border-radius: 0 12px 12px 0;
+  padding: 1.2rem 1.5rem;
+  margin-top: 1rem;
+}
+
+.info-highlight h4 {
+  font-size: 0.85rem;
+  color: var(--accent-green);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+}
+
+.info-highlight p {
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+/* ===== CELL INTERACTIVE ===== */
+.cell-viewer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.cell-type-btn {
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 2px solid var(--border-subtle);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  text-align: center;
+}
+
+.cell-type-btn:hover {
+  border-color: var(--accent-green);
+}
+
+.cell-type-btn.active {
+  border-color: var(--accent-green);
+  background: rgba(74, 222, 128, 0.08);
+  box-shadow: 0 0 30px var(--glow-green);
+}
+
+/* Nuevo diseño para Células Selector */
+.btn-icon-img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0 auto 0.8rem auto;
+  display: block;
+  border: 2px solid var(--border-subtle);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.cell-type-btn .btn-emoji {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.cell-detail-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  padding: 3rem;
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+.cell-detail-panel.active { display: block; }
+
+.cell-structure-list {
+  margin-top: 1.5rem;
+}
+
+.cell-structure-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.cell-structure-item:last-child { border-bottom: none; }
+
+.structure-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-top: 0.5rem;
+  flex-shrink: 0;
+}
+
+.structure-dot.green { background: var(--accent-green); }
+.structure-dot.cyan { background: var(--accent-cyan); }
+.structure-dot.amber { background: var(--accent-amber); }
+.structure-dot.rose { background: var(--accent-rose); }
+.structure-dot.violet { background: var(--accent-violet); }
+
+.cell-structure-item h4 {
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+
+.cell-structure-item p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ===== COMPARISON TABLE ===== */
+.comparison-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+}
+
+.comparison-table th {
+  background: rgba(74, 222, 128, 0.08);
+  padding: 1.2rem 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: left;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.comparison-table td {
+  padding: 1rem 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  transition: background 0.3s ease;
+}
+
+.comparison-table tr:hover td {
+  background: var(--bg-card-hover);
+}
+
+.comparison-table tr:last-child td { border-bottom: none; }
+
+/* ===== KINGDOMS ===== */
+.kingdoms-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.kingdom-card {
+  flex: 1 1 300px;
+  max-width: calc(33.333% - 1.2rem);
+  position: relative;
+  border-radius: 24px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.kingdom-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+}
+
+.kingdom-visual {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.kingdom-card:nth-child(1) .kingdom-visual { background: linear-gradient(135deg, rgba(74, 222, 128, 0.15), rgba(163, 230, 53, 0.08)); }
+.kingdom-card:nth-child(2) .kingdom-visual { background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(251, 113, 133, 0.08)); }
+.kingdom-card:nth-child(3) .kingdom-visual { background: linear-gradient(135deg, rgba(34, 211, 238, 0.15), rgba(167, 139, 250, 0.08)); }
+.kingdom-card:nth-child(4) .kingdom-visual { background: linear-gradient(135deg, rgba(251, 113, 133, 0.15), rgba(251, 191, 36, 0.08)); }
+.kingdom-card:nth-child(5) .kingdom-visual { background: linear-gradient(135deg, rgba(167, 139, 250, 0.15), rgba(34, 211, 238, 0.08)); }
+
+.kingdom-body {
+  padding: 1.5rem;
+}
+
+.kingdom-body h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.kingdom-body p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.kingdom-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.8rem;
+}
+
+.kingdom-tag {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  background: rgba(74, 222, 128, 0.08);
+  color: var(--accent-green);
+  border: 1px solid rgba(74, 222, 128, 0.15);
+}
+
+.kingdom-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+  padding: 0 1.5rem;
+}
+
+.kingdom-card.expanded .kingdom-details {
+  max-height: 300px;
+  padding: 0 1.5rem 1.5rem;
+}
+
+.kingdom-details p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ===== BIODIVERSITY ===== */
+.bio-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  transition: all 0.4s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.stat-number {
+  font-family: 'Space Mono', monospace;
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-green), var(--accent-teal));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.threats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.threat-card {
+  flex: 1 1 300px;
+  max-width: calc(33.333% - 1.2rem);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.threat-card::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--accent-rose);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.threat-card:hover::before { opacity: 1; }
+
+.threat-card:hover {
+  border-color: rgba(251, 113, 133, 0.2);
+  transform: translateY(-3px);
+}
+
+/* Nuevo diseño para Threat Cards */
+.threat-image {
+  width: calc(100% + 4rem);
+  height: 160px;
+  object-fit: cover;
+  margin: -2rem -2rem 1.5rem -2rem;
+  border-bottom: 1px solid var(--border-subtle);
+  border-radius: 16px 16px 0 0;
+  display: block;
+}
+
+.threat-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.threat-card h4 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.threat-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ===== INVASIVE SPECIES ===== */
+.invasive-showcase {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.invasive-card {
+  flex: 1 1 350px;
+  max-width: calc(50% - 1.5rem);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.invasive-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.invasive-header {
+  padding: 2rem;
+  position: relative;
+  background: linear-gradient(135deg, rgba(251, 113, 133, 0.1), rgba(251, 191, 36, 0.05));
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.invasive-emoji {
+  font-size: 3rem;
+}
+
+.invasive-names h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+}
+
+.invasive-names .sci-name {
+  font-style: italic;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.invasive-body {
+  padding: 1.5rem 2rem 2rem;
+}
+
+.invasive-body p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.invasive-danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.8rem;
+  background: rgba(251, 113, 133, 0.1);
+  border: 1px solid rgba(251, 113, 133, 0.2);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: var(--accent-rose);
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+/* ===== QUIZ ===== */
+.quiz-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  padding: 3rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.quiz-progress {
+  display: flex;
+  gap: 0.3rem;
+  margin-bottom: 2rem;
+}
+
+.quiz-dot {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(74, 222, 128, 0.15);
+  transition: background 0.3s ease;
+}
+
+.quiz-dot.done { background: var(--accent-green); }
+.quiz-dot.current { background: var(--accent-amber); }
+
+.quiz-question {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  line-height: 1.4;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-bottom: 2rem;
+}
+
+.quiz-option {
+  padding: 1rem 1.5rem;
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.quiz-option:hover {
+  border-color: var(--accent-green);
+  background: rgba(74, 222, 128, 0.05);
+}
+
+.quiz-option.selected {
+  border-color: var(--accent-green);
+  background: rgba(74, 222, 128, 0.1);
+}
+
+.quiz-option.correct {
+  border-color: var(--accent-green);
+  background: rgba(74, 222, 128, 0.15);
+  color: var(--accent-green);
+}
+
+.quiz-option.wrong {
+  border-color: var(--accent-rose);
+  background: rgba(251, 113, 133, 0.1);
+  color: var(--accent-rose);
+}
+
+.quiz-btn {
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  border: none;
+  background: var(--accent-green);
+  color: var(--bg-deep);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.quiz-btn:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(74, 222, 128, 0.3); }
+.quiz-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.quiz-feedback {
+  margin-top: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  display: none;
+}
+
+.quiz-feedback.show { display: block; }
+
+.quiz-feedback.correct-fb {
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  color: var(--accent-green);
+}
+
+.quiz-feedback.wrong-fb {
+  background: rgba(251, 113, 133, 0.1);
+  border: 1px solid rgba(251, 113, 133, 0.2);
+  color: var(--accent-rose);
+}
+
+.quiz-result {
+  text-align: center;
+  display: none;
+}
+
+.quiz-result.show { display: block; }
+
+.quiz-score {
+  font-family: 'Space Mono', monospace;
+  font-size: 4rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-green), var(--accent-teal));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== TIMELINE ===== */
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--accent-green), transparent);
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.timeline-item:nth-child(odd) { flex-direction: row; }
+.timeline-item:nth-child(even) { flex-direction: row-reverse; }
+
+.timeline-content {
+  width: 45%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.4s ease;
+}
+
+.timeline-content:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  border: 3px solid var(--bg-deep);
+  z-index: 2;
+}
+
+.timeline-year {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--accent-green);
+  margin-bottom: 0.3rem;
+}
+
+.timeline-content h4 {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.timeline-content p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.timeline-header-flex {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.timeline-portrait {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 2px solid var(--accent-green);
+  background: rgba(255,255,255,0.05); /* Placeholder background */
+  flex-shrink: 0;
+}
+
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 4rem 2rem;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 4rem;
+}
+
+.footer p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.footer .footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: var(--accent-green);
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .threat-card { flex: 1 1 100%; max-width: 100%; }
+  .invasive-card { flex: 1 1 100%; max-width: 100%; }
+  .flashcard { flex: 1 1 100% !important; max-width: 100% !important; height: 200px; }
+  .flashcard-front { font-size: 0.95rem; padding: 1.5rem; }
+  .flashcard-back { font-size: 1.3rem; }
+  .flashcard-front::before { font-size: 5rem; }
+
+  .kingdom-card { flex: 1 1 100%; max-width: 100%; }
+
+  .nav-links { display: none; }
+  .func-panel { grid-template-columns: 1fr; }
+  .cell-viewer { grid-template-columns: 1fr; }
+  .chemistry-visual { grid-template-columns: repeat(2, 1fr); }
+  .substances-grid { grid-template-columns: 1fr; }
+  .bio-stats { grid-template-columns: 1fr; }
+  .timeline::before { left: 20px; }
+  .timeline-item, .timeline-item:nth-child(even) { flex-direction: row; }
+  .timeline-content { width: calc(100% - 50px); margin-left: 50px; }
+  .timeline-dot { left: 20px; }
+  .comparison-table { font-size: 0.8rem; }
+  .comparison-table th, .comparison-table td { padding: 0.7rem; }
+}
+
+/* Image Modal */
+.image-modal {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+.image-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.image-modal-content {
+  max-width: 90%;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  transform: scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.image-modal.active .image-modal-content {
+  transform: scale(1);
+}
+.image-modal-close {
+  position: absolute;
+  top: 1.5rem; right: 2rem;
+  font-size: 3rem;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.image-modal-close:hover { color: var(--accent-rose); }
+
+/* ===== ORG LEVELS (NEW COMPLEX DESIGN) ===== */
+.org-container {
+  position: relative;
+  padding: 4rem 2rem;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  margin-top: 4rem;
+  color: white;
+}
+.org-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to bottom, rgba(10,26,15,0.9), rgba(10,26,15,0.95)), url('img/bg_org_levels.png') center/cover;
+  z-index: 0;
+  opacity: 0.8;
+}
+.org-bg::after {
+  content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
+  background: radial-gradient(circle at center, transparent, #050a06);
+}
+.org-content-wrapper {
+  position: relative; z-index: 1;
+}
+.org-title {
+  font-family: 'Playfair Display', serif; 
+  font-size: 2rem; text-align: center; margin-bottom: 3rem; color: #fff;
+}
+.org-definitions {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;
+  margin-bottom: 4rem; max-width: 900px; margin-left: auto; margin-right: auto;
+}
+.org-def {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+  padding: 1.5rem; border-radius: 16px; backdrop-filter: blur(10px);
+  transition: all 0.3s;
+}
+.org-def:hover { background: rgba(255,255,255,0.08); border-color: rgba(74,222,128,0.4); transform: translateY(-3px); }
+.org-def h4 { color: var(--accent-green); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;}
+.org-def p { font-size: 0.85rem; color: #aaa; line-height: 1.6; }
+
+.org-diagram {
+  display: flex; flex-direction: column; align-items: center; width: 100%;
+}
+.org-branches {
+  display: flex; gap: 4rem; justify-content: center; width: 100%; max-width: 600px;
+}
+.org-branch {
+  display: flex; flex-direction: column; align-items: center; flex: 1;
+}
+.org-node {
+  background: rgba(10,26,15,0.9); border: 1px solid rgba(74,222,128,0.3);
+  padding: 1rem 0.5rem; border-radius: 12px; width: 100%; max-width: 200px; text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-weight: 500; font-size: 0.85rem;
+  transition: all 0.3s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+}
+.org-node .icon { font-size: 1.5rem; }
+.org-node:hover { transform: scale(1.05); background: rgba(74,222,128,0.1); border-color: var(--accent-green); }
+.org-node.highlight { background: rgba(74,222,128,0.15); border: 2px solid var(--accent-green); font-size: 0.95rem; font-weight: 700;}
+.org-node.final { background: linear-gradient(135deg, rgba(74,222,128,0.2), rgba(34,211,238,0.2)); border: 2px solid var(--accent-cyan); font-size: 1rem; font-weight: 700; max-width: 250px;}
+.org-node.human { background: linear-gradient(135deg, var(--accent-green), var(--accent-teal)); color: #000; border: none; font-size: 1.1rem; font-weight: 800;}
+
+.org-arrow {
+  height: 25px; width: 2px; background: rgba(74,222,128,0.5);
+  position: relative;
+}
+.org-arrow::after {
+  content:''; position:absolute; bottom:0; left:-4px;
+  width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid rgba(74,222,128,0.5);
+}
+
+.bridge-container { display: flex; justify-content: center; height: 40px; width: 100%; max-width: 600px; }
+.bridge-half { flex: 1; border-bottom: 2px solid rgba(74,222,128,0.5); position: relative; }
+.bridge-half.left { border-left: 2px solid rgba(74,222,128,0.5); border-bottom-left-radius: 16px; margin-left: auto; max-width: calc(50% - 2rem); }
+.bridge-half.right { border-right: 2px solid rgba(74,222,128,0.5); border-bottom-right-radius: 16px; margin-right: auto; max-width: calc(50% - 2rem); }
+
+@media (max-width: 600px) {
+  .org-branches { gap: 1rem; }
+  .org-node { padding: 0.8rem 0.2rem; font-size: 0.75rem; }
+  .org-node .icon { font-size: 1.2rem; }
+  .bridge-half.left { max-width: calc(50% - 0.5rem); }
+  .bridge-half.right { max-width: calc(50% - 0.5rem); }
+}
+
+
+
+
+
+/* ===== ORG NODES CINEMATIC CARDS ===== */
+.org-node {
+  background: var(--bg-card);
+  border: 1px solid rgba(74,222,128,0.3);
+  padding: 0;
+  border-radius: 16px;
+  width: 100%; max-width: 220px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  transition: all 0.3s;
+  overflow: hidden;
+  display: flex !important;
+  flex-direction: column;
+  gap: 0 !important;
+}
+.org-node-visual {
+  width: 100%;
+  height: 110px;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid rgba(74,222,128,0.2);
+}
+.org-node-body {
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.org-node.highlight .org-node-body {
+  font-size: 1rem;
+  color: var(--accent-green);
+}
+.org-node.final .org-node-body {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.org-node.human .org-node-body {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #000;
+}
+
+
+/* ===== PRE-LOADER BIOLÓGICO ===== */
+#bio-loader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: var(--bg-dark);
+  z-index: 999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+.bio-pulse {
+  width: 60px; height: 60px;
+  background-color: var(--accent-green);
+  border-radius: 50%;
+  animation: bio-pulse-anim 1.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 30px rgba(74, 222, 128, 0.8);
+}
+@keyframes bio-pulse-anim {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+
+/* ===== FLASHCARDS (3D FLIP) ===== */
+.flashcards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 3rem;
+  max-width: 1100px;
+  margin-left: auto; margin-right: auto;
+}
+.flashcard {
+  flex: 1 1 280px;
+  max-width: calc(33.333% - 2rem);
+  perspective: 1000px;
+  height: 250px;
+  cursor: pointer;
+}
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+}
+.flashcard:hover .flashcard-inner,
+.flashcard.flipped .flashcard-inner {
+  transform: rotateY(180deg);
+}
+.flashcard-front, .flashcard-back {
+  position: absolute;
+  width: 100%; height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 16px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+.flashcard-front {
+  background:
+    url('img/bg_org_levels.png') center/cover,
+    linear-gradient(135deg, #0a1a0f 0%, #0d2016 100%);
+  background-blend-mode: multiply;
+  color: var(--text-light);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.flashcard-front::before {
+  content: '?';
+  position: absolute;
+  top: -10px;
+  right: 15px;
+  font-size: 8rem;
+  font-family: 'Playfair Display', serif;
+  color: rgba(74,222,128,0.06);
+  font-weight: 900;
+  line-height: 1;
+  pointer-events: none;
+}
+.flashcard-front::after {
+  content: '↻';
+  position: absolute; bottom: 1rem; right: 1.5rem;
+  font-size: 1.3rem; opacity: 0.25;
+}
+.flashcard-back {
+  background: linear-gradient(135deg, rgba(15,40,20,0.97) 0%, rgba(10,26,15,1) 100%);
+  border: 1px solid rgba(74,222,128,0.4);
+  transform: rotateY(180deg);
+  color: var(--accent-green);
+  font-size: 1.6rem;
+  font-family: 'Playfair Display', serif;
+  box-shadow: 0 0 30px rgba(74,222,128,0.15), 0 10px 30px rgba(0,0,0,0.5);
+}
+.flashcard-back::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(ellipse at center, rgba(74,222,128,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.flashcard-front::after {
+  content: '↻';
+  position: absolute; bottom: 1rem; right: 1.5rem;
+  font-size: 1.5rem; opacity: 0.3;
+}
+
+
+/* ===== THREAT MAP ===== */
+.threat-map-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 3rem auto;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.threat-map-bg {
+  width: 100%;
+  display: block;
+  opacity: 0.7;
+}
+.threat-hotspot {
+  position: absolute;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 5;
+}
+.threat-hotspot::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  background: #ef4444;
+  animation: hotspot-pulse 2s infinite;
+  box-shadow: 0 0 10px rgba(239,68,68,0.6);
+}
+.threat-hotspot::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 6px; height: 6px;
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  background: #fff;
+  z-index: 6;
+}
+@keyframes hotspot-pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.8); opacity: 0.4; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.threat-tooltip {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(10, 26, 15, 0.95);
+  border: 1px solid var(--accent-green);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  width: 200px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+}
+.threat-tooltip strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--accent-green);
+  margin-bottom: 0.3rem;
+}
+.threat-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%; left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--accent-green);
+}
+.threat-hotspot:hover .threat-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+/* Tooltips at edges: flip direction */
+.threat-hotspot.tooltip-right .threat-tooltip {
+  left: 0;
+  transform: translateX(0) translateY(10px);
+}
+.threat-hotspot.tooltip-right:hover .threat-tooltip {
+  transform: translateX(0) translateY(0);
+}
+.threat-hotspot.tooltip-left .threat-tooltip {
+  left: auto;
+  right: 0;
+  transform: translateX(0) translateY(10px);
+}
+.threat-hotspot.tooltip-left:hover .threat-tooltip {
+  transform: translateX(0) translateY(0);
+}
+.threat-hotspot.tooltip-left .threat-tooltip::after {
+  left: auto;
+  right: 10px;
+}
+.threat-hotspot.tooltip-right .threat-tooltip::after {
+  left: 10px;
+}
+@media (max-width: 600px) {
+  .threat-tooltip { width: 150px; font-size: 0.7rem; padding: 0.6rem 0.8rem; }
+}
+
+</style>
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="bio-loader">
+    <div class="bio-pulse"></div>
+  </div>
+
+
+
+<!-- PARTICLES BACKGROUND -->
+<canvas id="particles-bg"></canvas>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="mainNav">
+  <div class="nav-brand" style="direction: ltr; display: inline-block;">🧬 Biosfera</div>
+  <div class="nav-links">
+    <a href="#ezaugarriak">الخصائص</a>
+    <a href="#kimika">الكيمياء</a>
+    <a href="#funtzioak">الوظائف</a>
+    <a href="#zelulak">الخلايا</a>
+    <a href="#sailkapena">التصنيف</a>
+    <a href="#erreinuak">الممالك</a>
+    <a href="#bioaniztasuna">التنوع البيولوجي</a>
+    <a href="#inbaditzaileak">الأنواع الغازية</a>
+    <a href="#quiz">اختبار</a>
+  </div>
+    <div class="lang-switch" style="direction: ltr;">
+      <a href="javascript:void(0)" onclick="changeLanguage('index.html')" class="lang-btn">EU</a>
+      <a href="javascript:void(0)" onclick="changeLanguage('Bioaniztasuna_es.html')" class="lang-btn">ES</a>
+      <a href="javascript:void(0)" onclick="changeLanguage('Bioaniztasuna_ar.html')" class="lang-btn active">AR</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    <span class="dot"></span>
+    الصف الأول الإعدادي — العلوم الطبيعية
+  </div>
+  <h1><span class="gradient-text">التنوع البيولوجي</span></h1>
+  <p class="hero-subtitle">
+    سنستكشف العالم المذهل للكائنات الحية على الأرض: من الخلايا إلى الممالك، واكتشاف كيمياء الحياة والتعرف على التهديدات من الأنواع الغازية.
+  </p>
+  <div class="hero-scroll">
+    <span>استكشاف</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ================================================ -->
+<!-- SECTION 1: IZAKI BIZIDUNEN EZAUGARRIAK -->
+<!-- ================================================ -->
+<div class="section-divider"></div>
+<section class="section" id="ezaugarriak">
+  <div class="section-header reveal">
+    <div class="section-number">01 — الأساسيات</div>
+    <h2 class="section-title">خصائص الكائنات الحية</h2>
+    <p class="section-desc">ما الذي يميز الكائن الحي عن المادة غير الحية؟ ثلاث خصائص عامة وثلاث وظائف حيوية رئيسية.</p>
+  </div>
+
+  <div class="features-grid reveal">
+    <div class="feature-card">
+      <img class="feature-image" src="img/icon_organic.png" alt="">
+      <h3>تتكون من مادة عضوية</h3>
+      <p>تتكون الكائنات الحية من مادة عضوية (على عكس المادة غير الحية)، على الرغم من أنها تحتوي أيضًا على بعض المادة غير العضوية.</p>
+    </div>
+    <div class="feature-card">
+      <img class="feature-image" src="img/icon_vital.png" alt="">
+      <h3>ثلاث وظائف حيوية</h3>
+      <p>تقوم جميع الكائنات الحية بثلاث وظائف حيوية أساسية: التغذية، العلاقة، والتكاثر.</p>
+    </div>
+    <div class="feature-card">
+      <img class="feature-image" src="img/icon_cell.png" alt="">
+      <h3>تتكون من خلايا</h3>
+      <p>الخلية هي الوحدة الأساسية للحياة. بعض الكائنات وحيدة الخلية؛ والبعض الآخر متعدد الخلايا.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================ -->
+<!-- SECTION 2: BIZITZAREN KIMIKA -->
+<!-- ================================================ -->
+<div class="section-divider"></div>
+<section class="section" id="kimika">
+  <div class="section-header reveal">
+    <div class="section-number">02 — الكيمياء</div>
+    <h2 class="section-title">كيمياء الحياة</h2>
+    <p class="section-desc">تتكون مواد الكائنات الحية بشكل أساسي من أربعة عناصر. تشكل مجموعات هذه العناصر المواد العضوية وغير العضوية.</p>
+  </div>
+
+  <div class="chemistry-visual reveal">
+    <div class="element-card">
+      <div class="element-symbol">C</div>
+      <div class="element-name">كربون</div>
+    </div>
+    <div class="element-card">
+      <div class="element-symbol">O</div>
+      <div class="element-name">أكسجين</div>
+    </div>
+    <div class="element-card">
+      <div class="element-symbol">H</div>
+      <div class="element-name">هيدروجين</div>
+    </div>
+    <div class="element-card">
+      <div class="element-symbol">N</div>
+      <div class="element-name">نيتروجين</div>
+    </div>
+  </div>
+
+  <div class="substances-grid reveal">
+    <div class="substance-box">
+      <h3>🌿 المواد العضوية</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">مواد حصرية للكائنات الحية. تعتمد على شبكات من الكربون.</p>
+      <span class="substance-tag tag-organic">السكريات</span>
+      <span class="substance-tag tag-organic">الدهون</span>
+      <span class="substance-tag tag-organic">البروتينات</span>
+      <span class="substance-tag tag-organic">الأحماض النووية (DNA)</span>
+      <div style="margin-top: 1rem; padding: 1rem; background: rgba(74,222,128,0.05); border-radius: 12px;">
+        <p style="font-size: 0.82rem; color: var(--text-muted);"><strong style="color: var(--accent-green);">السكريات:</strong> وتسمى أيضاً الكربوهيدرات. الجلوكوز هو أحدها — يمد الجسم بالطاقة الحيوية.</p>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.5rem;"><strong style="color: var(--accent-green);">الدهون:</strong> الشحوم والكوليسترول. هي احتياطيات للطاقة وجزء رئيسي من غشاء الخلية.</p>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.5rem;"><strong style="color: var(--accent-green);">البروتينات:</strong> تشارك في العديد من العمليات، أساساً في الوظائف الهيكلية والبنائية.</p>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.5rem;"><strong style="color: var(--accent-green);">الأحماض النووية:</strong> الحمض النووي هو الأكثر شهرة. يحتوي على المعلومات الوراثية.</p>
+      </div>
+    </div>
+    <div class="substance-box">
+      <h3>💧 المواد غير العضوية</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">مواد لا تحتوي على هيكل كربوني (أو بكميات ضئيلة جداً).</p>
+      <span class="substance-tag tag-inorganic">الماء</span>
+      <span class="substance-tag tag-inorganic">الأملاح المعدنية</span>
+      <div style="margin-top: 1rem; padding: 1rem; background: rgba(34,211,238,0.05); border-radius: 12px;">
+        <p style="font-size: 0.82rem; color: var(--text-muted);"><strong style="color: var(--accent-cyan);">الماء:</strong> المادة الأكثر وفرة في تكوين الكائنات الحية. جميع التفاعلات تحدث من خلاله.</p>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.5rem;"><strong style="color: var(--accent-cyan);">الأملاح المعدنية:</strong> يمكن أن تذوب في السوائل الداخلية وتكون هياكل صلبة مثل العظام والأصداف.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================ -->
+<!-- SECTION 3: الوظائف الحيوية -->
+<!-- ================================================ -->
+<div class="section-divider"></div>
+<section class="section" id="funtzioak">
+  <div class="section-header reveal">
+    <div class="section-number">03 — الوظائف الحيوية</div>
+    <h2 class="section-title">التغذية، العلاقة والتكاثر</h2>
+    <p class="section-desc">الوظائف الحيوية الثلاث الرئيسية للكائنات الحية. انقر على كل علامة تبويب لمعلومات أكثر.</p>
+  </div>
+
+  <div class="functions-tabs reveal">
+    <button class="func-tab active" onclick="showFunction('elikadura')">🍃 التغذية</button>
+    <button class="func-tab" onclick="showFunction('erlazioa')">🔗 العلاقة</button>
+    <button class="func-tab" onclick="showFunction('ugalketa')">🔄 التكاثر</button>
+  </div>
+
+  <!-- التغذية -->
+  <div class="func-content active" id="func-elikadura">
+    <div class="func-panel reveal">
+      <div class="func-illustration" style="background: url('img/func_elikadura.png') no-repeat center center/cover; padding: 0; min-height: 400px;"></div>
+      <div class="func-info">
+        <h3>وظيفة التغذية</h3>
+        <p>هي مجموعة العمليات التي تحصل الكائنات الحية من خلالها على <strong>المادة</strong> و <strong>الطاقة</strong> اللازمتين للقيام بوظائفها الحيوية الأخرى.</p>
+        <div class="info-highlight">
+          <h4>🌿 التغذية الذاتية (Autótrofa)</h4>
+          <p>تستطيع إنتاج مادتها العضوية انطلاقاً من مواد غير عضوية من البيئة (ماء، أملاح معدنية، ثاني أكسيد الكربون). <strong>النباتات، الطحالب، وبعض البكتيريا.</strong></p>
+        </div>
+        <div class="info-highlight" style="margin-top: 0.8rem;">
+          <h4>🍖 التغذية غير الذاتية (Heterótrofa)</h4>
+          <p>تحتاج إلى مادة عضوية جاهزة؛ أي أنها تتغذى على كائنات أخرى أو بقاياها. <strong>الحيوانات، الفطريات والكائنات الدقيقة.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- العلاقة -->
+  <div class="func-content" id="func-erlazioa">
+    <div class="func-panel reveal">
+      <div class="func-illustration" style="background: url('img/func_erlazioa.png') no-repeat center center/cover; padding: 0; min-height: 400px;"></div>
+      <div class="func-info">
+        <h3>وظيفة العلاقة</h3>
+        <p>تتفاعل الكائنات الحية مع بعضها البعض. الحيوانات تنشئ علاقات تعاون أو تنافس فيما بينها.</p>
+        <p>تشمل هذه الوظيفة أيضاً تفاعل الكائنات مع بيئتها المحيطة: فهي تستشعر التغيرات البيئية وتستجيب لها.</p>
+        <div class="info-highlight">
+          <h4>🦎 التكيف</h4>
+          <p>تحافظ الكائنات الحية على بيئتها الداخلية رغم تغير العوامل الخارجية بفضل وظيفة العلاقة والتكيف. مثلاً، نبات الصبار يخزن الماء والخفافيش تدخل في سبات شتوي.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- التكاثر -->
+  <div class="func-content" id="func-ugalketa">
+    <div class="func-panel reveal">
+      <div class="func-illustration" style="background: url('img/func_ugalketa.png') no-repeat center center/cover; padding: 0; min-height: 400px;"></div>
+      <div class="func-info">
+        <h3>وظيفة التكاثر</h3>
+        <p>من خلال التكاثر، يمكن للكائنات الحية أن تنشئ نسلًا مستقبليًا للحفاظ على النوع. في هذه العملية قد يشترك كائن واحد أو كائنان.</p>
+        <div class="info-highlight">
+          <h4>🔄 التكاثر اللاجنسي</h4>
+          <p>يشارك فيه كائن وحيد، حيث يكون النسل الناتج نسخًا مطابقة تمامًا للأب (مثل انقسام البكتيريا).</p>
+        </div>
+        <div class="info-highlight" style="margin-top: 0.8rem;">
+          <h4>💕 التكاثر الجنسي</h4>
+          <p>يشارك فيه كائنان، بالغا الذكر والأنثى، من خلال دمج خليتين تناسليتين مختصتين تُدعى <strong>الأمشاج (gametos)</strong>، مما يخلق نسلًا جديدًا مختلط الخصائص.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================ -->
+<!-- SECTION 4: الخلايا -->
+<!-- ================================================ -->
+<div class="section-divider"></div>
+<section class="section" id="zelulak">
+  <div class="section-header reveal">
+    <div class="section-number">04 — الخلايا</div>
+    <h2 class="section-title">الخلية: أساس الحياة</h2>
+    <p class="section-desc">جميع الكائنات الحية تتكون من خلية واحدة أو أكثر. الخلايا هي أصغر الوحدات الحية.</p>
+  </div>
+
+  <!-- الهياكل المشتركة -->
+  <div class="reveal" style="margin-bottom: 3rem;">
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; text-align: center; margin-bottom: 2rem;">هياكل تمتلكها جميع الخلايا</h3>
+    <table class="comparison-table">
+      <tr>
+        <th style="width: 30%;">الهيكل</th>
+        <th>الوظيفة</th>
+      </tr>
+      <tr>
+        <td><strong style="color: var(--accent-green);">الغشاء البلازمي</strong></td>
+        <td>طبقة رقيقة تغطي الخلية بأكملها، وتتكون أساساً من الدهون. تنظم تبادل المواد من الخارج إلى الداخل والعكس.</td>
+      </tr>
+      <tr>
+        <td><strong style="color: var(--accent-cyan);">السيتوبلازم</strong></td>
+        <td>المحتوى الداخلي للخلية، يتكون من سائل لزج وعناصر متعددة الوظائف (العضيات).</td>
+      </tr>
+      <tr>
+        <td><strong style="color: var(--accent-amber);">المادة الوراثية</strong></td>
+        <td>مكونها الرئيسي هو الحمض النووي (DNA). تحتوي على المعلومات التي تحتاجها الخلية للقيام بجميع أنشطتها المحددة.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- محدد نوع الخلية -->
+  <div class="reveal">
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; text-align: center; margin-bottom: 2rem;">أنواع الخلايا — انقر للاستكشاف</h3>
+    <div class="cell-viewer">
+      <button class="cell-type-btn active" onclick="showCell('prokariota')">
+        <img class="btn-icon-img" src="img/cell_prokariota_1775266305927.png" alt="">
+        خلية بدائية النواة (Procariota)
+      </button>
+      <button class="cell-type-btn" onclick="showCell('eukariota-animalia')">
+        <img class="btn-icon-img" src="img/cell_animalia_1775265919180.png" alt="">
+        خلية حيوانية (Eucariota)
+      </button>
+      <button class="cell-type-btn" onclick="showCell('eukariota-landare')">
+        <img class="btn-icon-img" src="img/cell_plantae_1775266319103.png" alt="">
+        خلية نباتية (Eucariota)
+      </button>
+      <button class="cell-type-btn" onclick="showCell('desberdintasuna')">
+        <span class="btn-emoji">⚖️</span>
+        بدائية النواة ضد حقيقية النواة
+      </button>
+    </div>
+  </div>
+
+  <!-- لوحة بدائية النواة -->
+  <div class="cell-detail-panel active" id="cell-prokariota">
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem;">🦠 خلية بدائية النواة (Procariota)</h3>
+    <img src="img/cell_prokariota_1775266305927.png" style="width: 100%; max-height: 250px; object-fit: cover; border-radius: 16px; margin-bottom: 1.5rem; border: 1px solid var(--border-subtle);" alt="Zelula Prokariota">
+    <p style="color: var(--text-muted); font-size: 0.9rem;">خلايا ذات تنظيم أبسط. عادة ما تكون أصغر من حقيقيات النوى. هي كائنات وحيدة الخلية مثل البكتيريا.</p>
+    <div class="cell-structure-list">
+      <div class="cell-structure-item">
+        <div class="structure-dot green"></div>
+        <div><h4>جدار الخلية</h4><p>غطاء صلب. يقع حول الغشاء البلازمي. يعطي الخلية شكلاً ويحميها.</p></div>
+      </div>
+      <div class="cell-structure-item">
+        <div class="structure-dot cyan"></div>
+        <div><h4>الريبوسومات</h4><p>العضية الوحيدة. تشارك في بناء البروتينات.</p></div>
+      </div>
+      <div class="cell-structure-item">
+        <div class="structure-dot amber"></div>
+        <div><h4>المادة الوراثية</h4><p>تسبح بحرية في السيتوبلازم — غير مغلفة داخل نواة.</p></div>
+      </div>
+      <div class="cell-structure-item">
+        <div class="structure-dot violet"></div>
+        <div><h4>الأسواط</h4><p>امتدادات طويلة توجد في بعض البكتيريا. تستخدمها للتنقل من مكان لآخر.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- لوحة حقيقية النواة الحيوانية -->
+  <div class="cell-detail-panel" id="cell-eukariota-animalia">
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem;">🔴 خلية حيوانية (Eucariota)</h3>
+    <img src="img/cell_animalia_1775265919180.png" style="width: 100%; max-height: 250px; object-fit: cover; border-radius: 16px; margin-bottom: 1.5rem; border: 1px solid var(--border-subtle);" alt="Animalia-zelula">
+    <p style="color: var(--text-muted); font-size: 0.9rem;">ذات تنظيم داخلي أكثر تعقيداً من بدائيات النوى. نظراً لعدم وجود جدار خلوي لها، فغالباً ما تمتلك شكلاً غير منتظم.</p>
+    <div class="cell-structure-list">
+      <div class="cell-structure-item">
+        <div class="structure-dot green"></div>
+        <div><h4>النواة</h4><p>غلاف يحيط بمعظم المادة الوراثية. تقع حول المركز.</p></div>
+      </div>
+      <div class="cell-structure-item">
+        <div class="structure-dot cyan"></div>
+        <div><h4>الميتوكوندريا</h4><p>العضية المرتبطة بإنتاج الطاقة.</p></div>
+      </div>
+      <div class="cell-structure-item">
+        <div class="structure-dot amber"></div>
+        <div><h4>الشبكة الإندوبلازمية</h4><p>نظام قنوات بغشاء. تقوم بنقل المواد.</p></div>
+      </div>
+      <div class="cell-structure-item">
+        <div class="structure-dot rose"></div>
+        <div><h4>جهاز جولجي</h4><p>عضية لجمع وتعديل وتوزيع المواد.</p></div>
+      </div>
+      <div class="cell-structure-item">
+        <div class="structure-dot violet"></div>
+        <div><h4>الجسيم المركزي والمريكزات</h4><p>تشارك في انقسام الخلية.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- لوحة حقيقية النواة النباتية -->
+  <div class="cell-detail-panel" id="cell-eukariota-landare">
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem;">🟢 خلية نباتية (Eucariota)</h3>
+    <img src="img/cell_plantae_1775266319103.png" style="width: 100%; max-height: 250px; object-fit: cover; border-radius: 16px; margin-bottom: 1.5rem; border: 1px solid var(--border-subtle);" alt="Landare-zelula">
+    <p style="color: var(--text-muted); font-size: 0.9rem;">عادة ما تمتلك جدار خلية صلباً يمنحها شكلاً منتظماً. تحتوي على بلاستيدات خضراء — للقيام بعملية البناء الضوئي.</p>
+    <div class="cell-structure-list">
+      <div class="cell-structure-item">
+        <div class="structure-dot green"></div>
+        <div><h4>جدار الخلية</h4><p>صلب. إلى جانب الحماية، يمنح الخلية شكلاً منتظماً.</p></div>
+      </div>
+      <div class="cell-structure-item">
+        <div class="structure-dot cyan"></div>
+        <div><h4>البلاستيدات الخضراء</h4><p>العضية التي تنتج المادة العضوية. يحدث فيها البناء الضوئي.</p></div>
+      </div>
+      <div class="cell-structure-item">
+        <div class="structure-dot amber"></div>
+        <div><h4>الفجوة العصاربة المركزية</h4><p>مؤثرة بسبب حجمها الكبير. تقع على أحد جوانب الخلية.</p></div>
+      </div>
+      <div class="cell-structure-item">
+        <div class="structure-dot rose"></div>
+        <div><h4>النواة</h4><p>تقع على جانب واحد، بسبب الحجم الكبير للفجوة العصارية.</p></div>
+      </div>
+      <div class="cell-structure-item">
+        <div class="structure-dot violet"></div>
+        <div><h4>لا تمتلك آليات للحركة</h4><p>على عكس الخلايا الحيوانية، ليس للخلايا النباتية آليات للحركة.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- لوحة المقارنة -->
+  <div class="cell-detail-panel" id="cell-desberdintasuna">
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 1.5rem;">⚖️ بدائية النواة ضد حقيقية النواة</h3>
+    <table class="comparison-table">
+      <tr>
+        <th>الميزة</th>
+        <th>بدائية النواة (Procariota)</th>
+        <th>حقيقية النواة (Eucariota)</th>
+      </tr>
+      <tr>
+        <td><strong>النواة</strong></td>
+        <td>لا تمتلك نواة — المادة الوراثية منتشرة في السيتوبلازم</td>
+        <td>نعم، تحتوي على نواة محددة ومُحاطة بغشاء</td>
+      </tr>
+      <tr>
+        <td><strong>الحجم</strong></td>
+        <td>أصغر (1-10 ميكرومتر)</td>
+        <td>أكبر (10-100 ميكرومتر)</td>
+      </tr>
+      <tr>
+        <td><strong>العضيات</strong></td>
+        <td>ريبوسومات فقط</td>
+        <td>عضيات كثيرة (ميتوكوندريا، بلاستيدات خضراء...)</td>
+      </tr>
+      <tr>
+        <td><strong>أمثلة</strong></td>
+        <td>البكتيريا</td>
+        <td>الحيوانات، النباتات، الفطريات، الطلائعيات</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- وحيدة الخلية ضد متعددة الخلايا -->
+  <div class="reveal" style="margin-top: 4rem;">
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; text-align: center; margin-bottom: 2rem;">وحيد الخلية ضد متعدد الخلايا</h3>
+    <div class="features-grid">
+      <div class="feature-card">
+        <img class="feature-image" src="img/icon_uni.png" alt="">
+        <h3>كائنات وحيدة الخلية</h3>
+        <p>تتكون من خلية واحدة فقط. هذه الخلية المفردة تعيش بحرية وتؤدي جميع الوظائف الحيوية لكل كائن. أمثلة: <strong>البكتيريا، الأميبا.</strong></p>
+      </div>
+      <div class="feature-card">
+        <img class="feature-image" src="img/icon_multi.png" alt="">
+        <h3>كائنات متعددة الخلايا</h3>
+        <p>تتكون من عدد كبير من الخلايا. تتخصص هذه الخلايا لوظائف محددة وتعتمد على بعضها البعض للبقاء على قيد الحياة. أمثلة: <strong>النباتات والحيوانات.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Organization levels -->
+  <div class="org-container reveal" dir="rtl">
+    <div class="org-bg"></div>
+    <div class="org-content-wrapper">
+      <h3 class="org-title">مستويات التنظيم الخلوي</h3>
+      
+      <div class="org-definitions">
+        <div class="org-def">
+          <h4> الأنسجة</h4>
+          <p>مجموعات من الخلايا المتشابهة التي تؤدي نفس الوظيفة. مثل النسيج العضلي.</p>
+        </div>
+        <div class="org-def">
+          <h4> الأعضاء</h4>
+          <p>هياكل تتكون من عدة أنسجة تؤدي وظيفة معينة. مثل العظم.</p>
+        </div>
+        <div class="org-def">
+          <h4> الأجهزة والأنظمة</h4>
+          <p>مجموعات من الأعضاء تعمل بشكل متناسق لأداء وظيفة حيوية.</p>
+        </div>
+      </div>
+
+      <div class="org-diagram">
+        <div class="org-branches">
+          <!-- Columna Izquierda -->
+          <div class="org-branch">
+            <div class="org-node">
+  <div class="org-node-visual" style="background-image: url('img/org_bone_cell.png');"></div>
+  <div class="org-node-body">خلية عظمية</div>
+</div>
+            <div class="org-arrow"></div>
+            <div class="org-node">
+  <div class="org-node-visual" style="background-image: url('img/org_bone_tissue.png');"></div>
+  <div class="org-node-body">نسيج عظمي</div>
+</div>
+            <div class="org-arrow"></div>
+            <div class="org-node highlight">
+  <div class="org-node-visual" style="background-image: url('img/org_bone_organ.png');"></div>
+  <div class="org-node-body">عظم</div>
+</div>
+            <div class="org-arrow"></div>
+            <div class="org-node">
+  <div class="org-node-visual" style="background-image: url('img/org_skeleton_system.png');"></div>
+  <div class="org-node-body">هيكل عظمي</div>
+</div>
+          </div>
+          <!-- Columna Derecha -->
+          <div class="org-branch">
+            <div class="org-node">
+  <div class="org-node-visual" style="background-image: url('img/org_muscle_cell.png');"></div>
+  <div class="org-node-body">خلية عضلية</div>
+</div>
+            <div class="org-arrow"></div>
+            <div class="org-node">
+  <div class="org-node-visual" style="background-image: url('img/org_muscle_tissue.png');"></div>
+  <div class="org-node-body">نسيج عضلي</div>
+</div>
+            <div class="org-arrow"></div>
+            <div class="org-node highlight">
+  <div class="org-node-visual" style="background-image: url('img/org_muscle_organ.png');"></div>
+  <div class="org-node-body">عضلة</div>
+</div>
+            <div class="org-arrow"></div>
+            <div class="org-node">
+  <div class="org-node-visual" style="background-image: url('img/org_muscle_system.png');"></div>
+  <div class="org-node-body">جهاز عضلي</div>
+</div>
+          </div>
+        </div>
+        
+        <div class="bridge-container">
+          <div class="bridge-half left"></div>
+          <div class="bridge-half right"></div>
+        </div>
+        
+        <div style="display:flex; flex-direction: column; align-items: center; width: 100%;">
+          <div class="org-node final" style="margin-top:-2px; z-index:2;">
+            <div class="org-node-visual" style="background-image: url('img/org_locomotion.png');"></div>
+            <div class="org-node-body">الجهاز الحركي</div>
+          </div>
+          <div class="org-arrow"></div>
+          <div class="org-node human">
+  <div class="org-node-visual" style="background-image: url('img/org_human.png');"></div>
+  <div class="org-node-body">الإنسان</div>
+</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================ -->
+<!-- SECTION 5: التصنيف - التاريخ -->
+<!-- ================================================ -->
+<div class="section-divider"></div>
+<section class="section" id="sailkapena">
+  <div class="section-header reveal">
+    <div class="section-number">05 — التصنيف</div>
+    <h2 class="section-title">تاريخ التصنيف</h2>
+    <p class="section-desc">تغير نظام تصنيف الكائنات الحية عبر التاريخ مع تقدم العلوم.</p>
+  </div>
+
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="timeline-content" dir="rtl">
+        <div class="timeline-header-flex">
+          <img src="img/hist_aristoteles.png" class="timeline-portrait" alt="">
+          <div>
+            <div class="timeline-year">القرن 4 ق.م</div>
+            <h4>أرسطو — مملكتان</h4>
+          </div>
+        </div>
+        <p>قسّم الفيلسوف اليوناني الكائنات الحية إلى مجموعتين رئيسيتين: الكائنات ذات "الروح النباتية" (النباتات) وذات "الروح الحساسة" (الحيوانات).</p>
+      </div>
+      <div class="timeline-dot"></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content" dir="rtl">
+        <div class="timeline-header-flex">
+          <img src="img/hist_linneo.png" class="timeline-portrait" alt="">
+          <div>
+            <div class="timeline-year">1735</div>
+            <h4>كارل لينيوس — مملكتان</h4>
+          </div>
+        </div>
+        <p>رسّم هذا العالم النباتي السويدي فكرة أرسطو بتأسيس مملكتي الحيوان والنبات بشكل رسمي باستخدام أسماء علمية.</p>
+      </div>
+      <div class="timeline-dot"></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content" dir="rtl">
+        <div class="timeline-header-flex">
+          <img src="img/hist_haeckel.png" class="timeline-portrait" alt="">
+          <div>
+            <div class="timeline-year">1858-1865</div>
+            <h4>أوين وهيكل — 3 ممالك</h4>
+          </div>
+        </div>
+        <p>اقترح ريتشارد أوين مملكة الطلائعيات. ومَيَّز إرنست هيكل لأول مرة بين الكائنات وحيدة الخلية والكائنات متعددة الخلايا.</p>
+      </div>
+      <div class="timeline-dot"></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content" dir="rtl">
+        <div class="timeline-header-flex">
+          <img src="img/hist_copeland.png" class="timeline-portrait" alt="">
+          <div>
+            <div class="timeline-year">1938</div>
+            <h4>كوبلاند — 4 ممالك</h4>
+          </div>
+        </div>
+        <p>أدخل هربرت كوبلاند الفصل الرئيسي بين بدائيات النواة وحقيقيات النواة، مضيفاً مملكة البدائيات (البكتيريا بدون نواة).</p>
+      </div>
+      <div class="timeline-dot"></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content" dir="rtl">
+        <div class="timeline-header-flex">
+          <img src="img/hist_whittaker.png" class="timeline-portrait" alt="">
+          <div>
+            <div class="timeline-year">1969</div>
+            <h4>ويتاكر — 5 ممالك</h4>
+          </div>
+        </div>
+        <p>فصل روبرت ويتاكر بشكل نهائي الفطريات عن النباتات والحيوانات: البدائيات، الطلائعيات، الفطريات، النباتات والحيوانات.</p>
+      </div>
+      <div class="timeline-dot"></div>
+    </div>
+  </div>
+
+  <!-- مستويات التصنيف -->
+  <div class="reveal" style="margin-top: 3rem;">
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; text-align: center; margin-bottom: 1rem;">المراتب التصنيفية</h3>
+    <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">باستخدام النمر كمثال — من العام إلى الخاص</p>
+    <div style="display: flex; gap: 2rem; align-items: stretch; justify-content: center; max-width: 1000px; margin: 0 auto; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; justify-content: center;">
+        <table class="comparison-table" style="width: 100%; margin: 0; direction: rtl;">
+          <tr><th>المرتبة</th><th>النمر</th></tr>
+          <tr><td>المملكة</td><td>الحيوانات</td></tr>
+          <tr><td>الشعبة</td><td>الحبليات</td></tr>
+          <tr><td>الطائفة</td><td>الثدييات</td></tr>
+          <tr><td>الرتبة</td><td>اللواحم</td></tr>
+          <tr><td>الفصيلة</td><td>السنوريات</td></tr>
+          <tr><td>الجنس</td><td><em>نمر (Panthera)</em></td></tr>
+          <tr><td>النوع</td><td><em>النمر البنغالي (Panthera tigris)</em></td></tr>
+        </table>
+      </div>
+      <div style="flex: 1; min-width: 300px; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex;">
+        <img src="img/tiger_natgeo.png" class="taxonomy-image" style="width: 100%; height: 100%; object-fit: cover; display: block;" alt="Majestic Tiger">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================ -->
+<!-- SECTION 6: الممالك الخمس -->
+<!-- ================================================ -->
+<div class="section-divider"></div>
+<section class="section" id="erreinuak">
+  <div class="section-header reveal">
+    <div class="section-number">06 — الممالك</div>
+    <h2 class="section-title">الممالك الخمس</h2>
+    <p class="section-desc">حالياً، تُصنف جميع الكائنات الحية في خمس ممالك رئيسية. انقر على كل بطاقة لرؤية التفاصيل.</p>
+  </div>
+
+  <div class="kingdoms-grid reveal">
+    <!-- الحيوانات -->
+    <div class="kingdom-card" onclick="toggleKingdom(this)">
+      <div class="kingdom-visual" style="background: url('img/kingdom_animalia.png') center center / cover;"></div>
+      <div class="kingdom-body">
+        <h3>المملكة الحيوانية</h3>
+        <p>تشمل جميع الحيوانات الفقارية واللافقارية.</p>
+        <div class="kingdom-tags">
+          <span class="kingdom-tag">غير ذاتية التغذية</span>
+          <span class="kingdom-tag">متعددة الخلايا</span>
+          <span class="kingdom-tag">حقيقية النواة</span>
+          <span class="kingdom-tag">بأنسجة</span>
+        </div>
+      </div>
+      <div class="kingdom-details">
+        <p>نوع التغذية: <strong>غير ذاتية التغذية</strong>. التنظيم الخلوي: <strong>متعددة الخلايا</strong>. نوع الخلية: <strong>حقيقية النواة</strong>. وجود أنسجة: <strong>بأنسجة حقيقية</strong>. أمثلة: مرموط، سحلية، خفاش، أخطبوط، دودة الأرض.</p>
+      </div>
+    </div>
+
+    <!-- النباتات -->
+    <div class="kingdom-card" onclick="toggleKingdom(this)">
+      <div class="kingdom-visual" style="background: url('img/kingdom_plantae.png') center center / cover;"></div>
+      <div class="kingdom-body">
+        <h3>المملكة النباتية</h3>
+        <p>تشمل الحزازيات، السراخس والنباتات البذرية أو الزهرية.</p>
+        <div class="kingdom-tags">
+          <span class="kingdom-tag">ذاتية التغذية</span>
+          <span class="kingdom-tag">متعددة الخلايا</span>
+          <span class="kingdom-tag">حقيقية النواة</span>
+          <span class="kingdom-tag">بأنسجة</span>
+        </div>
+      </div>
+      <div class="kingdom-details">
+        <p>نوع التغذية: <strong>ذاتية التغذية</strong>. التنظيم الخلوي: <strong>متعددة الخلايا</strong>. نوع الخلية: <strong>حقيقية النواة</strong>. وجود أنسجة: <strong>بأنسجة حقيقية</strong>. أمثلة: بلوط، سرخس، أقحوان، حزاز، صنوبر.</p>
+      </div>
+    </div>
+
+    <!-- الفطريات -->
+    <div class="kingdom-card" onclick="toggleKingdom(this)">
+      <div class="kingdom-visual" style="background: url('img/kingdom_fungi.png') center center / cover;"></div>
+      <div class="kingdom-body">
+        <h3>مملكة الفطريات</h3>
+        <p>الخمائر، العفن والفطريات التي نراها في الغابة.</p>
+        <div class="kingdom-tags">
+          <span class="kingdom-tag">غير ذاتية التغذية</span>
+          <span class="kingdom-tag">متعددة ووحيدة</span>
+          <span class="kingdom-tag">حقيقية النواة</span>
+        </div>
+      </div>
+      <div class="kingdom-details">
+        <p>نوع التغذية: <strong>غير ذاتية التغذية</strong>. التنظيم الخلوي: <strong>وحيدة ومتعددة الخلايا</strong>. نوع الخلية: <strong>حقيقية النواة</strong>. وجود أنسجة: <strong>بدون أنسجة حقيقية</strong>. أمثلة: خميرة الخبز، عفن الفاكهة، عش الغراب.</p>
+      </div>
+    </div>
+
+    <!-- الطلائعيات -->
+    <div class="kingdom-card" onclick="toggleKingdom(this)">
+      <div class="kingdom-visual" style="background: url('img/kingdom_protista.png') center center / cover;"></div>
+      <div class="kingdom-body">
+        <h3>مملكة الطلائعيات</h3>
+        <p>تجمع بين الأوليات والطحالب.</p>
+        <div class="kingdom-tags">
+          <span class="kingdom-tag">ذاتية / غير ذاتية</span>
+          <span class="kingdom-tag">حقيقية النواة</span>
+        </div>
+      </div>
+      <div class="kingdom-details">
+        <p>نوع التغذية: <strong>ذاتية وغير ذاتية التغذية</strong>. التنظيم الخلوي: <strong>وحيدة ومتعددة الخلايا</strong>. نوع الخلية: <strong>حقيقية النواة</strong>. وجود أنسجة: <strong>بدون أنسجة حقيقية</strong>. أمثلة: براميسيوم، أميبا، الطحالب الخضراء والحمراء.</p>
+      </div>
+    </div>
+
+    <!-- البدائيات -->
+    <div class="kingdom-card" onclick="toggleKingdom(this)">
+      <div class="kingdom-visual" style="background: url('img/kingdom_monera.png') center center / cover;"></div>
+      <div class="kingdom-body">
+        <h3>مملكة البدائيات</h3>
+        <p>تندرج البكتيريا والبكتيريا الزرقاء في هذه المملكة.</p>
+        <div class="kingdom-tags">
+          <span class="kingdom-tag">ذاتية / غير ذاتية</span>
+          <span class="kingdom-tag">بدائية النواة</span>
+          <span class="kingdom-tag">وحيدة الخلية</span>
+        </div>
+      </div>
+      <div class="kingdom-details">
+        <p>نوع التغذية: <strong>ذاتية وغير ذاتية التغذية</strong>. التنظيم الخلوي: <strong>وحيدة الخلية غالباً</strong>. نوع الخلية: <strong>بدائية النواة</strong>. وجود أنسجة: <strong>بدون أنسجة حقيقية</strong>. أمثلة: ملتويات، عصيات (Lactobacillus)، البكتيريا الزرقاء.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================ -->
+<!-- SECTION 7: التنوع البيولوجي -->
+<!-- ================================================ -->
+<div class="section-divider"></div>
+<section class="section" id="bioaniztasuna">
+  <div class="section-header reveal">
+    <div class="section-number">07 — التنوع البيولوجي</div>
+    <h2 class="section-title">التنوع البيولوجي: كنز يجب حمايته</h2>
+    <p class="section-desc">عندما نتحدث عن التنوع البيولوجي، فإننا نعني مجموعة متنوعة من أشكال الحياة. هذا التنوع الكبير هو نتيجة لتكيف الكائنات الحية.</p>
+  </div>
+
+  <div class="bio-stats reveal">
+    <div class="stat-card">
+      <div class="stat-number">~8.7M</div>
+      <div class="stat-label">الأنواع المقدرة في العالم</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">~1M</div>
+      <div class="stat-label">أنواع مهددة بالانقراض</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">450+</div>
+      <div class="stat-label">أنواع جديدة في الأمازون مؤخراً</div>
+    </div>
+  </div>
+
+  <h3 class="reveal" style="font-family: 'Playfair Display', serif; font-size: 1.5rem; text-align: center; margin-bottom: 2rem;">⚠️ التهديدات التي تواجه التنوع البيولوجي</h3>
+  <div class="threats-grid reveal">
+    <div class="threat-card">
+      <img class="threat-image" src="img/threat_pollution.png" alt="">
+      <h4>التلوث</h4>
+      <p>تلوث الهواء والماء والتربة يضر بالموائل ويؤثر على الأنواع.</p>
+    </div>
+    <div class="threat-card">
+      <img class="threat-image" src="img/threat_habitat.png" alt="">
+      <h4>فقدان الموائل</h4>
+      <p>تدمير الغابات والتوسع الزراعي والعمراني يدمر المواطن الطبيعية.</p>
+    </div>
+    <div class="threat-card">
+      <img class="threat-image" src="img/threat_climate.png" alt="">
+      <h4>تغير المناخ</h4>
+      <p>يغير ارتفاع درجات الحرارة النظم البيئية ويصعب على الأنواع التكيف.</p>
+    </div>
+    <div class="threat-card">
+      <img class="threat-image" src="img/threat_invasive.png" alt="">
+      <h4>الأنواع الغازية</h4>
+      <p>تهدد الأنواع الوافدة من مناطق أخرى التنوع البيولوجي المحلي.</p>
+    </div>
+    <div class="threat-card">
+      <img class="threat-image" src="img/threat_overexploit.png" alt="">
+      <h4>الاستغلال المفرط</h4>
+      <p>انخفاض أعداد الأنواع بسبب الصيد الجائر والافراط في استغلال الموارد الطبيعية.</p>
+    </div>
+  </div>
+
+  <!-- المفاهيم -->
+  <h3 class="reveal" style="font-family: 'Playfair Display', serif; font-size: 1.5rem; text-align: center; margin: 3rem 0 2rem;">🌿 أنواع الكائنات: أصلية، دخيلة، غازية</h3>
+  <div class="features-grid reveal" style="margin-top: 0;">
+    <div class="feature-card">
+      <img class="feature-image" src="img/icon_autokto.png" alt="">
+      <h3>النوع الأصلي (المحلي)</h3>
+      <p>نوع يعيش أصلًا في مكان معين. نشأ هناك ويعيش في انسجام مع النظام البيئي. مثلاً، <strong>البلوط</strong> في إقليم الباسك.</p>
+    </div>
+    <div class="feature-card">
+      <img class="feature-image" src="img/icon_alokto.png" alt="">
+      <h3>النوع الدخيل</h3>
+      <p>نوع تم إحضاره من مكان آخر، ولم يكن يعيش هناك بشكل طبيعي. غالباً ما يجلبها الإنسان عمداً أو بالصدفة.</p>
+    </div>
+    <div class="feature-card">
+      <img class="feature-image" src="img/icon_inbaditzaile.png" alt="">
+      <h3>النوع الغازي</h3>
+      <p>نوع دخيل يلحق الضرر بالأنواع الأصلية الأخرى، حيث ينافسها على نفس الموطن ويهاجم النظام البيئي المحلي.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================ -->
+<!-- SECTION 8: الأنواع الغازية -->
+<!-- ================================================ -->
+<div class="section-divider"></div>
+<section class="section" id="inbaditzaileak">
+  <div class="section-header reveal">
+    <div class="section-number">08 — تهديد</div>
+    <h2 class="section-title">أنواع غازية في بيئتنا</h2>
+    <p class="section-desc">هناك العديد من الأنواع الغازية في منطقتنا، مما يسبب ضرراً كبيراً للتنوع البيولوجي المحلي.</p>
+  </div>
+
+  <div class="invasive-showcase reveal">
+    <div class="invasive-card">
+      <div class="invasive-header" style="background: linear-gradient(135deg, rgba(30,30,30,0.6), rgba(10,26,15,0.9)), url('img/inv_liztor_1775266406223.png') center/cover;">
+        <div class="invasive-emoji" style="display:none;"></div>
+        <div class="invasive-names">
+          <h3>الدبور الآسيوي</h3>
+          <span class="sci-name">Vespa velutina</span>
+        </div>
+      </div>
+      <div class="invasive-body">
+        <p>دبور وصل من آسيا. يهاجم النحل المحلي، ويدمر الخلايا ويهدد تجمعات النحل. بإلحاقه ضرراً بالنحل الأساسي للتلقيح، فإنه يعرض الزراعة والنظام البيئي بأكمله للخطر.</p>
+        <div class="invasive-danger">⚠️ خطورة عالية جداً</div>
+      </div>
+    </div>
+
+    <div class="invasive-card">
+      <div class="invasive-header" style="background: linear-gradient(135deg, rgba(30,30,30,0.6), rgba(10,26,15,0.9)), url('img/inv_pampas_1775266421388.png') center/cover;">
+        <div class="invasive-emoji" style="display:none;"></div>
+        <div class="invasive-names">
+          <h3>حشيشة البامبا</h3>
+          <span class="sci-name">Cortaderia selloana</span>
+        </div>
+      </div>
+      <div class="invasive-body">
+        <p>نبات غازٍ قادم من أمريكا الجنوبية. ينمو و ينتشر بسرعة ويحتل مساحات كبيرة، ساحبًا المساحة من النباتات المحلية. ينتشر على جوانب الطرق والمناطق المتدهورة.</p>
+        <div class="invasive-danger">⚠️ انتشار سريع جداً</div>
+      </div>
+    </div>
+
+    <div class="invasive-card">
+      <div class="invasive-header" style="background: linear-gradient(135deg, rgba(30,30,30,0.6), rgba(10,26,15,0.9)), url('img/inv_dortoka_1775266433718.png') center/cover;">
+        <div class="invasive-emoji" style="display:none;"></div>
+        <div class="invasive-names">
+          <h3>سلحفاة فلوريدا</h3>
+          <span class="sci-name">Trachemys scripta</span>
+        </div>
+      </div>
+      <div class="invasive-body">
+        <p>سُلحفاة أُحضرت كحيوان أليف، وتم إطلاقها لاحقاً في الأنهار والبحيرات. تتنافس مع السلحفاة الأوروبية الأصلية، وتستولي على موطنها ومصادر غذائها.</p>
+        <div class="invasive-danger">⚠️ تنافس الأنواع المحلية</div>
+      </div>
+    </div>
+
+    <div class="invasive-card">
+      <div class="invasive-header" style="background: linear-gradient(135deg, rgba(30,30,30,0.6), rgba(10,26,15,0.9)), url('img/inv_knotweed_1775266447704.png') center/cover;">
+        <div class="invasive-emoji" style="display:none;"></div>
+        <div class="invasive-names">
+          <h3>عصا الراعي اليابانية</h3>
+          <span class="sci-name">Reynoutria japonica</span>
+        </div>
+      </div>
+      <div class="invasive-body">
+        <p>نبات جاء من شرق آسيا، ويصعب جداً التخلص منه تماماً. يحل محل الحياة النباتية على ضفاف الأنهار، مما يؤدي إلى تدهور التربة والإضرار بالحيوانات المحلية. جذوره عميقة جداً.</p>
+        <div class="invasive-danger">⚠️ صعب الاستئصال جداً</div>
+      </div>
+          <div class="flashcard">
+        <div class="flashcard-inner">
+          <div class="flashcard-front">في أي مملكة تُصنف الفطريات والعفن؟</div>
+          <div class="flashcard-back">المملكة الفطرية</div>
+        </div>
+      </div>
+      <div class="flashcard">
+        <div class="flashcard-inner">
+          <div class="flashcard-front">كيف نسمي مجموع خصائص الكائن الحي الظاهرة؟</div>
+          <div class="flashcard-back">النمط الظاهري</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================ -->
+<!-- SECTION 9: اختبار (Quiz) -->
+<!-- ================================================ -->
+<div class="section-divider"></div>
+<section class="section" id="quiz">
+  <div class="section-header reveal">
+    <div class="section-number">09 — اختبر نفسك</div>
+    <h2 class="section-title">ماذا تعلمت؟</h2>
+    <p class="section-desc">باستخدام هذا الاختبار القصير، يمكنك التحقق من معرفتك. 10 أسئلة!</p>
+  </div>
+
+  <div class="quiz-container reveal" id="quizBox" style="direction: rtl; text-align: right;">
+    <div class="quiz-progress" id="quizProgress" style="direction: ltr;"></div>
+    <div id="quizContent"></div>
+    <div class="quiz-result" id="quizResult">
+      <p style="margin-bottom: 0.5rem; font-size: 1rem; color: var(--text-muted);">نتيجتك:</p>
+      <div class="quiz-score" id="quizScore"></div>
+      <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;" id="quizMessage"></p>
+      <button class="quiz-btn" style="margin-top: 1.5rem;" onclick="startQuiz()">🔄 حاول مرة أخرى</button>
+    </div>
+  </div>
+</section>
+
+<!-- التذييل (FOOTER) -->
+<footer class="footer">
+  <p><span class="footer-brand">🧬 الغلاف الحيوي</span> — السنة الأولى من التعليم الثانوي - العلوم الطبيعية</p>
+  <p style="margin-top: 0.3rem; font-size: 0.75rem;">وحدة التنوع البيولوجي — العام الدراسي 2025-26</p>
+</footer>
+
+<script>
+// ===== LANGUAGE SWITCHER =====
+function changeLanguage(url) {
+  const hash = window.location.hash;
+  window.location.href = url + hash;
+}
+
+// ===== PARTICLES =====
+const canvas = document.getElementById('particles-bg');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class Particle {
+  constructor() {
+    this.reset();
+  }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 2 + 0.5;
+    this.speedX = (Math.random() - 0.5) * 0.3;
+    this.speedY = (Math.random() - 0.5) * 0.3;
+    this.opacity = Math.random() * 0.4 + 0.1;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(74, 222, 128, ${this.opacity})`;
+    ctx.fill();
+  }
+}
+
+for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ===== NAV SCROLL =====
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ===== SCROLL REVEAL =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===== FUNCTIONS TABS =====
+function showFunction(name) {
+  document.querySelectorAll('.func-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.func-content').forEach(c => c.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('func-' + name).classList.add('active');
+}
+
+// ===== CELL VIEWER =====
+function showCell(type) {
+  document.querySelectorAll('.cell-type-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.cell-detail-panel').forEach(p => p.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.getElementById('cell-' + type).classList.add('active');
+}
+
+// ===== KINGDOMS TOGGLE =====
+function toggleKingdom(card) {
+  card.classList.toggle('expanded');
+}
+
+// ===== QUIZ =====
+const quizData = [
+  {
+    q: "ما هي الوظائف الحيوية الثلاث الرئيسية للكائنات الحية؟",
+    opts: ["التغذية والعلاقة والتكاثر", "الحركة والتنفس والنمو", "البناء الضوئي والهضم والتكاثر", "التغذية والحركة والتنفس"],
+    correct: 0
+  },
+  {
+    q: "ما هي العناصر الكيميائية الرئيسية في الكائنات الحية؟",
+    opts: ["Fe, Ca, Na, K", "C, O, H, N", "Au, Ag, Cu, Fe", "Si, O, Al, Fe"],
+    correct: 1
+  },
+  {
+    q: "ما هي السمة الرئيسية للخلية بدائية النواة؟",
+    opts: ["تحتوي على بلاستيدات خضراء", "لديها نواة محددة", "لا تحتوي على نواة", "كبيرة جدًا"],
+    correct: 2
+  },
+  {
+    q: "إلى أي مملكة تنتمي الكائنات ذاتية التغذية؟",
+    opts: ["الحيوانات والفطريات", "النباتات وبعض البدائيات", "الفطريات والطلائعيات", "الحيوانات فقط"],
+    correct: 1
+  },
+  {
+    q: "ما هو النوع الغازي؟",
+    opts: ["نوع يعيش دائمًا في مكان واحد", "نوع دخيل يلحق الضرر بالأنواع المحلية", "نوع محلي مهدد بالانقراض", "نوع تم إنشاؤه في المختبر"],
+    correct: 1
+  },
+  {
+    q: "ما هو الهيكل الموجود في جميع الخلايا؟",
+    opts: ["البلاستيدات الخضراء", "النواة", "الغشاء البلازمي", "جدار الخلية"],
+    correct: 2
+  },
+  {
+    q: "فيما يتعلق بالتغذية، ما هو المشترك بين الفطريات والحيوانات؟",
+    opts: ["كلاهما ذاتي التغذية", "كلاهما غير ذاتي التغذية", "كلاهما بدائي النواة", "كلاهما يمتلك جدار خلوي"],
+    correct: 1
+  },
+  {
+    q: "من اقترح نظام الممالك الخمس؟",
+    opts: ["أرسطو", "كارل لينيوس", "روبرت ويتاكر", "هربرت كوبلاند"],
+    correct: 2
+  },
+  {
+    q: "مثال على كائن حي وحيد الخلية:",
+    opts: ["البلوط", "الخفاش", "البكتيريا", "السرخس"],
+    correct: 2
+  },
+  {
+    q: "ما هو Vespa velutina؟",
+    opts: ["نوع من النحل المحلي", "نبات من إقليم الباسك", "نوع غازي — الدبور الآسيوي", "نوع من مملكة الفطريات"],
+    correct: 2
+  }
+];
+
+let currentQ = 0, score = 0, answered = false;
+
+function startQuiz() {
+  currentQ = 0;
+  score = 0;
+  answered = false;
+  document.getElementById('quizResult').classList.remove('show');
+  renderQuiz();
+}
+
+function renderQuiz() {
+  const prog = document.getElementById('quizProgress');
+  prog.innerHTML = quizData.map((_, i) =>
+    `<div class="quiz-dot ${i < currentQ ? 'done' : i === currentQ ? 'current' : ''}"></div>`
+  ).join('');
+
+  const d = quizData[currentQ];
+  document.getElementById('quizContent').innerHTML = `
+    <div class="quiz-question">${currentQ + 1}. ${d.q}</div>
+    <div class="quiz-options">
+      ${d.opts.map((o, i) => `<button class="quiz-option" onclick="selectOption(${i})" id="opt-${i}">${o}</button>`).join('')}
+    </div>
+    <div style="display:flex;gap:1rem;align-items:center;">
+      <button class="quiz-btn" id="checkBtn" onclick="checkAnswer()" disabled>تحقق</button>
+      <button class="quiz-btn" id="nextBtn" onclick="nextQuestion()" style="display:none;background:var(--accent-teal);">التالي ←</button>
+    </div>
+    <div class="quiz-feedback" id="feedback"></div>
+  `;
+  answered = false;
+}
+
+let selectedOpt = -1;
+
+function selectOption(i) {
+  if (answered) return;
+  selectedOpt = i;
+  document.querySelectorAll('.quiz-option').forEach((o, idx) => {
+    o.classList.toggle('selected', idx === i);
+  });
+  document.getElementById('checkBtn').disabled = false;
+}
+
+function checkAnswer() {
+  if (answered) return;
+  answered = true;
+  const correct = quizData[currentQ].correct;
+  const fb = document.getElementById('feedback');
+  
+  document.querySelectorAll('.quiz-option').forEach((o, idx) => {
+    if (idx === correct) o.classList.add('correct');
+    if (idx === selectedOpt && idx !== correct) o.classList.add('wrong');
+  });
+
+  if (selectedOpt === correct) {
+    score++;
+    fb.className = 'quiz-feedback show correct-fb';
+    fb.textContent = '✅ صحيح! ممتاز!';
+  } else {
+    fb.className = 'quiz-feedback show wrong-fb';
+    fb.textContent = '❌ خطأ. الإجابة الصحيحة مظللة باللون الأخضر.';
+  }
+
+  document.getElementById('checkBtn').style.display = 'none';
+  document.getElementById('nextBtn').style.display = 'inline-block';
+}
+
+function nextQuestion() {
+  currentQ++;
+  if (currentQ >= quizData.length) {
+    document.getElementById('quizContent').innerHTML = '';
+    const res = document.getElementById('quizResult');
+    res.classList.add('show');
+    document.getElementById('quizScore').textContent = `${score} / ${quizData.length}`;
+    const pct = (score / quizData.length) * 100;
+    let msg = '';
+    if (pct === 100) msg = '🏆 ممتاز! لقد أجبت على كل شيء بشكل صحيح!';
+    else if (pct >= 70) msg = '👏 أحسنت عملاً! أنت تعرف الكثير!';
+    else if (pct >= 50) msg = '📚 جيد، ولكن راجع قليلاً!';
+    else msg = '💪 حاول مرة أخرى! اقرأ المحتوى وجرب مرة أخرى.';
+    document.getElementById('quizMessage').textContent = msg;
+    
+    document.getElementById('quizProgress').innerHTML = quizData.map(() =>
+      `<div class="quiz-dot done"></div>`
+    ).join('');
+  } else {
+    renderQuiz();
+  }
+}
+
+// Start quiz on load
+startQuiz();
+
+    // --- Image Modal Logic ---
+    function openImageModal(imgSrc) {
+      if(!imgSrc) return;
+      document.getElementById('imageModalImg').src = imgSrc;
+      document.getElementById('imageModal').classList.add('active');
+    }
+
+    function closeImageModal() {
+      document.getElementById('imageModal').classList.remove('active');
+      document.getElementById('imageModalImg').src = '';
+    }
+
+    function initModals() {
+      const modal = document.getElementById('imageModal');
+      if (modal) {
+        modal.addEventListener('click', function(e) {
+          if(e.target === this || e.target.classList.contains('image-modal-close')) {
+            closeImageModal();
+          }
+        });
+      }
+
+      const elements = document.querySelectorAll('.invasive-header, .threat-image, .feature-image, .kingdom-visual, .func-illustration, .cell-detail-panel img, .org-node-visual, .timeline-portrait, .btn-icon-img, .taxonomy-image');
+      elements.forEach(el => {
+        el.style.cursor = 'zoom-in';
+        el.onclick = function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          let srcUrl = this.getAttribute('src');
+          if (!srcUrl) {
+            const style = window.getComputedStyle(this);
+            const match = style.backgroundImage.match(/url\((['"]?)(.*?)\1\)/);
+            if (match && match[2]) srcUrl = match[2];
+          }
+          if (srcUrl) {
+            srcUrl = srcUrl.replace(/["']/g, '');
+            openImageModal(srcUrl);
+          }
+        };
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initModals);
+    } else {
+      initModals();
+    }
+  </script>
+
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="image-modal">
+    <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
+    <img id="imageModalImg" class="image-modal-content" src="" alt="Modal Image">
+  </div>
+<script>
+  
+  // Flashcard touch support
+  document.querySelectorAll('.flashcard').forEach(card => {
+    card.addEventListener('click', () => card.classList.toggle('flipped'));
+  });
+
+  // Bio-loader
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('bio-loader');
+    if (loader) {
+      loader.style.opacity = '0';
+      setTimeout(() => { loader.style.visibility = 'hidden'; }, 800);
+    }
+  });
+</script>
+</body>
+</html>

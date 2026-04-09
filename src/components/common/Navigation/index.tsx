@@ -2,8 +2,13 @@ import { useTranslation } from 'react-i18next'
 import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { courses, getCourseById } from '../../../data/courses'
+import { naturaCourses, getNaturaCourseById } from '../../../data/naturaCourses'
 import { fixMaybeText } from '../../../utils/fixText'
 import './Navigation.css'
+
+type SubjectId = 'matematika' | 'natura'
+type CourseLike = (typeof courses)[number] | (typeof naturaCourses)[number]
+type TopicLike = CourseLike['topics'][number]
 
 export function Navigation() {
     const { t, i18n } = useTranslation()
@@ -11,32 +16,31 @@ export function Navigation() {
     const [openDropdown, setOpenDropdown] = useState<string | null>(null)
     const dropdownRef = useRef<HTMLDivElement>(null)
 
-    // Parsear la ruta para detectar contexto
-    // Formato: /matematika/courseId/topicId/section
     const pathParts = location.pathname.split('/').filter(Boolean)
+    const subjectId = (pathParts[0] === 'matematika' || pathParts[0] === 'natura'
+        ? pathParts[0]
+        : undefined) as SubjectId | undefined
 
-    // Detectar courseId y topicId del pathname
     let courseId: string | undefined
     let topicId: string | undefined
     let currentSection: string | undefined
 
-    if (pathParts[0] === 'matematika' && pathParts.length >= 2) {
+    if (subjectId && pathParts.length >= 2) {
         courseId = pathParts[1]
-        if (pathParts.length >= 3) {
-            topicId = pathParts[2]
-        }
-        if (pathParts.length >= 4) {
-            currentSection = pathParts[3]
-        }
+        if (pathParts.length >= 3) topicId = pathParts[2]
+        if (pathParts.length >= 4) currentSection = pathParts[3]
     }
 
-    const currentCourse = courseId ? getCourseById(courseId) : undefined
+    const currentCourses = subjectId === 'natura' ? naturaCourses : subjectId === 'matematika' ? courses : []
+    const currentCourse = courseId
+        ? (subjectId === 'natura' ? getNaturaCourseById(courseId) : getCourseById(courseId))
+        : undefined
 
-    // Detectar el contexto actual basado en la ruta
     const isHomePage = location.pathname === '/'
-    const isCoursesPage = location.pathname === '/matematika'
-    const isTopicsPage = pathParts[0] === 'matematika' && pathParts.length === 2 && courseId
-    const isContentPage = pathParts[0] === 'matematika' && pathParts.length >= 3 && courseId && topicId
+    const isCoursesPage = Boolean(subjectId && pathParts.length === 1)
+    const isTopicsPage = Boolean(subjectId && pathParts.length === 2 && courseId)
+    const isContentPage = Boolean(subjectId && pathParts.length >= 3 && courseId && topicId)
+    const isMathContentPage = subjectId === 'matematika' && isContentPage
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -53,7 +57,7 @@ export function Navigation() {
         document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'
     }
 
-    const getCourseName = (course: typeof courses[0]) => {
+    const getCourseName = (course: CourseLike) => {
         switch (i18n.language) {
             case 'eu': return fixMaybeText(course.nameEu)
             case 'ar': return fixMaybeText(course.nameAr)
@@ -61,7 +65,7 @@ export function Navigation() {
         }
     }
 
-    const getTopicName = (topic: typeof courses[0]['topics'][0]) => {
+    const getTopicName = (topic: TopicLike) => {
         switch (i18n.language) {
             case 'eu': return fixMaybeText(topic.nameEu)
             case 'ar': return fixMaybeText(topic.nameAr)
@@ -69,9 +73,11 @@ export function Navigation() {
         }
     }
 
-    const getTopicIcon = (topic: typeof courses[0]['topics'][0]) => fixMaybeText(topic.icon)
+    const getTopicIcon = (topic: TopicLike) => fixMaybeText(topic.icon)
 
-    const isAlgebraPage = courseId === 'dbh2' && topicId === 'algebra'
+    const subjectTitle = subjectId === 'natura' ? t('subjects.natura.title') : t('subjects.math.title')
+    const contentBasePath = subjectId && courseId && topicId ? `/${subjectId}/${courseId}/${topicId}` : ''
+    const isAlgebraPage = subjectId === 'matematika' && courseId === 'dbh2' && topicId === 'algebra'
     const exercisesLabel =
         i18n.language === 'ar'
             ? 'التمارين'
@@ -83,20 +89,15 @@ export function Navigation() {
         setOpenDropdown(openDropdown === id ? null : id)
     }
 
-    // Base path para las secciones
-    const contentBasePath = courseId && topicId ? `/matematika/${courseId}/${topicId}` : ''
-
     return (
         <nav className="navigation" role="navigation" aria-label="Main navigation" ref={dropdownRef}>
             <ul className="nav-list">
-                {/* Botón Inicio - siempre visible */}
                 <li>
                     <Link to="/" className={`nav-link nav-home ${isHomePage ? 'active' : ''}`}>
                         🏠 {t('nav.home')}
                     </Link>
                 </li>
 
-                {/* Botón Atrás - visible cuando no estamos en inicio */}
                 {!isHomePage && (
                     <li>
                         <button
@@ -109,50 +110,74 @@ export function Navigation() {
                     </li>
                 )}
 
-                {/* Página principal: mostrar asignaturas con cursos como dropdown */}
                 {isHomePage && (
-                    <li className="nav-dropdown">
-                        <button
-                            className={`nav-link dropdown-toggle ${openDropdown === 'math' ? 'open' : ''}`}
-                            onClick={() => toggleDropdown('math')}
+                    <>
+                        <li className="nav-dropdown">
+                            <button
+                                className={`nav-link dropdown-toggle ${openDropdown === 'math' ? 'open' : ''}`}
+                                onClick={() => toggleDropdown('math')}
                             aria-expanded={openDropdown === 'math'}
                         >
-                            ∑ {t('subjects.math.title')} ▾
+                            Σ {t('subjects.math.title')} ▾
                         </button>
-                        {openDropdown === 'math' && (
-                            <ul className="dropdown-menu glass">
-                                {courses.map(course => (
-                                    <li key={course.id}>
-                                        <Link
-                                            to={`/matematika/${course.id}`}
-                                            className="dropdown-item"
-                                            onClick={() => setOpenDropdown(null)}
-                                        >
-                                            {getCourseName(course)}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </li>
+                            {openDropdown === 'math' && (
+                                <ul className="dropdown-menu glass">
+                                    {courses.map((course) => (
+                                        <li key={course.id}>
+                                            <Link
+                                                to={`/matematika/${course.id}`}
+                                                className="dropdown-item"
+                                                onClick={() => setOpenDropdown(null)}
+                                            >
+                                                {getCourseName(course)}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </li>
+                        <li className="nav-dropdown">
+                            <button
+                                className={`nav-link dropdown-toggle ${openDropdown === 'natura' ? 'open' : ''}`}
+                                onClick={() => toggleDropdown('natura')}
+                            aria-expanded={openDropdown === 'natura'}
+                        >
+                            🌿 {t('subjects.natura.title')} ▾
+                        </button>
+                            {openDropdown === 'natura' && (
+                                <ul className="dropdown-menu glass">
+                                    {naturaCourses.map((course) => (
+                                        <li key={course.id}>
+                                            <Link
+                                                to={`/natura/${course.id}`}
+                                                className="dropdown-item"
+                                                onClick={() => setOpenDropdown(null)}
+                                            >
+                                                {getCourseName(course)}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </li>
+                    </>
                 )}
 
-                {/* En página de cursos, temas o contenido: mostrar dropdown de cursos */}
-                {(isCoursesPage || isTopicsPage || isContentPage) && (
+                {(isCoursesPage || isTopicsPage || isContentPage) && subjectId && (
                     <li className="nav-dropdown">
                         <button
                             className={`nav-link dropdown-toggle ${openDropdown === 'courses' ? 'open' : ''}`}
                             onClick={() => toggleDropdown('courses')}
                             aria-expanded={openDropdown === 'courses'}
                         >
-                            📚 {currentCourse ? getCourseName(currentCourse) : t('courses.title')} ▾
+                            📚 {currentCourse ? getCourseName(currentCourse) : subjectTitle} ▾
                         </button>
                         {openDropdown === 'courses' && (
                             <ul className="dropdown-menu glass">
-                                {courses.map(course => (
+                                {currentCourses.map((course) => (
                                     <li key={course.id}>
                                         <Link
-                                            to={`/matematika/${course.id}`}
+                                            to={`/${subjectId}/${course.id}`}
                                             className={`dropdown-item ${course.id === courseId ? 'active' : ''}`}
                                             onClick={() => setOpenDropdown(null)}
                                         >
@@ -165,8 +190,7 @@ export function Navigation() {
                     </li>
                 )}
 
-                {/* En página de temas o contenido: mostrar dropdown de temas */}
-                {(isTopicsPage || isContentPage) && currentCourse && (
+                {(isTopicsPage || isContentPage) && currentCourse && currentCourse.topics.length > 0 && subjectId && (
                     <li className="nav-dropdown">
                         <button
                             className={`nav-link dropdown-toggle ${openDropdown === 'topics' ? 'open' : ''}`}
@@ -177,11 +201,11 @@ export function Navigation() {
                         </button>
                         {openDropdown === 'topics' && (
                             <ul className="dropdown-menu glass">
-                                {currentCourse.topics.map(topic => (
+                                {currentCourse.topics.map((topic) => (
                                     <li key={topic.id}>
                                         {topic.active ? (
                                             <Link
-                                                to={`/matematika/${courseId}/${topic.id}`}
+                                                to={`/${subjectId}/${courseId}/${topic.id}`}
                                                 className={`dropdown-item ${topic.id === topicId ? 'active' : ''}`}
                                                 onClick={() => setOpenDropdown(null)}
                                             >
@@ -200,8 +224,7 @@ export function Navigation() {
                     </li>
                 )}
 
-                {/* En página de contenido: mostrar secciones del tema */}
-                {isContentPage && contentBasePath && (
+                {isMathContentPage && contentBasePath && (
                     <>
                         <li className="nav-separator">|</li>
                         <li>
