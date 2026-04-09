@@ -21,14 +21,15 @@
 
 
 @keyframes gradientShift {
-
     0%,
     100% {
         background-position: 0% 50%;
-    
-.zenbaki-osoak-theory 50% {
+    }
+
+    50% {
         background-position: 100% 50%;
     }
+}
 .zenbaki-osoak-theory .theory-subtitle {
     font-size: var(--text-xl);
     color: var(--color-text-secondary);
@@ -190,11 +191,13 @@
     from {
         opacity: 0;
         transform: translateY(10px);
-    
-.zenbaki-osoak-theory to {
+    }
+
+    to {
         opacity: 1;
         transform: translateY(0);
     }
+}
 .zenbaki-osoak-theory .content-section h4 {
     color: var(--color-text-primary);
     font-size: var(--text-xl);
@@ -1430,9 +1433,10 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-    .theory-header h1 {
+    .zenbaki-osoak-theory .theory-header h1 {
         font-size: var(--text-4xl);
-    
+    }
+
 .zenbaki-osoak-theory .theory-grid {
         grid-template-columns: 1fr;
     }
@@ -1466,3 +1470,4 @@
         flex-direction: column;
         gap: var(--space-3);
     }
+}

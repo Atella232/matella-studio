@@ -1,102 +1,49 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-lang-es="Expresiones algebraicas" data-lang-eu="Adierazpen aljebraikoak">Expresiones algebraicas</title>
-  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
-  <link rel="stylesheet" href="../../../../../assets/css/base.css">
-  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
-  <link rel="stylesheet" href="../../../../../assets/css/components.css">
-  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <title>Expresiones algebraicas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- MathJax Configuration -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['\\\\[', '\\\\]']],
-        processEscapes: true,
-        processEnvironments: true
-      },
-      options: {
-        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    };
-    </script></head>
-<body data-theme="light">
-  <header>
-    <div class="logo">
-      <i class="fas fa-calculator"></i>
-      <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../portal.css">
+</head>
+<body>
+  <div class="page-shell">
+    <div class="topbar">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <a href="../index.html" data-eu="Aljebra" data-es="Álgebra" data-ar="الجبر">Álgebra</a>
+        <span>•</span>
+        <span data-eu="Adierazpen aljebraikoak" data-es="Expresiones algebraicas" data-ar="التعبيرات الجبرية">Expresiones algebraicas</span>
+      </nav>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="eu">EU</button>
+        <button class="lang-btn active" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="ar">ع</button>
+      </div>
     </div>
-    <nav>
-      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
-      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
-    </nav>
-  </header>
-  <nav aria-label="breadcrumb" class="breadcrumb-nav">
-    <ol>
-      <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
-      <li><a href="../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
-      <li><a href="../index.html" data-lang-es="Álgebra" data-lang-eu="Aljebra">Álgebra</a></li>
-      <li class="active" aria-current="page"><span data-lang-es="Expresiones algebraicas" data-lang-eu="Adierazpen aljebraikoak">Expresiones algebraicas</span></li>
-    </ol>
-  </nav>
-  <main>
-    <h1 data-lang-es="Expresiones algebraicas" data-lang-eu="Adierazpen aljebraikoak">Expresiones algebraicas</h1>
-    <div class="content">
-      <p data-lang-es="Contenido en desarrollo. Próximamente disponible." data-lang-eu="Edukia garatzen. Laster eskuragarri.">Contenido en desarrollo. Próximamente disponible.</p>
-    </div>
-  </main>
-  <footer>
-    <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
-  </footer>
-  <script src="../../../../../assets/js/theme.js"></script>
-  <script src="../../../../../assets/js/language.js"></script>
-  <script src="../../../../../assets/js/uiComponents.js"></script>
-  <script src="../../../../../assets/js/main.js"></script>
-  <script src="../../js/expresiones-algebraicas.js"></script>
-
-  <!-- Botón flotante para volver arriba -->
-  <button id="back-to-top" aria-label="Volver arriba">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-  
-  <script>
-    // Configuración del botón de volver arriba
-    document.addEventListener('DOMContentLoaded', function() {
-      const backToTopButton = document.getElementById('back-to-top');
-      
-      // Mostrar/ocultar botón al hacer scroll
-      function toggleBackToTop() {
-        if (window.pageYOffset > 300) {
-          backToTopButton.classList.add('visible');
-        } else {
-          backToTopButton.classList.remove('visible');
-        }
-      }
-      
-      // Mostrar el botón después de cargar la página
-      setTimeout(toggleBackToTop, 100);
-      
-      // Escuchar el evento de scroll
-      window.addEventListener('scroll', toggleBackToTop);
-      
-      // Hacer scroll suave al hacer clic
-      backToTopButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      });
-    });
-  </script>
+    <section class="hero">
+      <div class="badge">MATELLA · 2 ESO</div>
+      <h1 data-eu="Adierazpen <span class='grad'>aljebraikoak</span>" data-es="Expresiones <span class='grad'>algebraicas</span>" data-ar="التعبيرات <span class='grad'>الجبرية</span>">Expresiones <span class='grad'>algebraicas</span></h1>
+      <p class="lead" data-eu="Hemen biltzen da jatorrizko proiektuko monomioei, egiturari eta irakurketa aljebraiko zuzenari eskainitako zatia." data-es="Aquí se concentra la parte del proyecto original dedicada a monomios, estructura interna y lectura algebraica correcta." data-ar="هنا يتركز الجزء من المشروع الأصلي المخصص للحدود الأحادية وبنيتها وقراءتها الجبرية الصحيحة.">Aquí se concentra la parte del proyecto original dedicada a monomios, estructura interna y lectura algebraica correcta.</p>
+      <div class="card-grid">
+        <article class="card">
+          <h3 data-eu="Edukia" data-es="Contenido" data-ar="المحتوى">Contenido</h3>
+          <p data-eu="Monomioaren definizioa, koefizientea, zati literala, gradua, monomio antzekoak eta aurkakoa." data-es="Definición de monomio, coeficiente, parte literal, grado, monomios semejantes y opuesto." data-ar="تعريف الحد الأحادي، المعامل، الجزء الحرفي، الدرجة، الحدود المتشابهة والمعاكس.">Definición de monomio, coeficiente, parte literal, grado, monomios semejantes y opuesto.</p>
+        </article>
+        <article class="card">
+          <h3 data-eu="Laguntza interaktiboa" data-es="Apoyo interactivo" data-ar="دعم تفاعلي">Apoyo interactivo</h3>
+          <p data-eu="Analizatzaile interaktiboa eta adibide bisualak Algebra 2 DBHtik ekarri dira." data-es="Se han traído el analizador interactivo y los ejemplos visuales desde Algebra 2 DBH." data-ar="تم جلب المحلل التفاعلي والأمثلة البصرية من Algebra 2 DBH.">Se han traído el analizador interactivo y los ejemplos visuales desde Algebra 2 DBH.</p>
+        </article>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="../index.html?tab=monomios#teoria" data-eu="Monomioen teoria ireki" data-es="Abrir teoría de monomios" data-ar="افتح نظرية الحدود الأحادية">Abrir teoría de monomios</a>
+        <a class="btn btn-secondary" href="../index.html#herramientas" data-eu="Tresnak ikusi" data-es="Ver herramientas" data-ar="شاهد الأدوات">Ver herramientas</a>
+      </div>
+      <div class="note" data-eu="Xehetasun eta adibide oso guztiak gaiaren atari nagusian daude eskuragarri." data-es="Todo el detalle y los ejemplos completos están disponibles en la portada principal del tema." data-ar="كل التفاصيل والأمثلة الكاملة متاحة في الصفحة الرئيسية للموضوع.">Todo el detalle y los ejemplos completos están disponibles en la portada principal del tema.</div>
+    </section>
+  </div>
+  <script src="../portal.js"></script>
 </body>
 </html>

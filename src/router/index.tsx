@@ -45,6 +45,12 @@ import { LabPage as LabPageDBH1_Geometria } from '../pages/dbh1-geometria/LabPag
 import { HomePage as HomePageDBH1_Estadistica } from '../pages/dbh1-taulak-grafikoak/HomePage'
 import { TheoryPage as TheoryPageDBH1_Estadistica } from '../pages/dbh1-taulak-grafikoak/TheoryPage'
 import { LabPage as LabPageDBH1_Estadistica } from '../pages/dbh1-taulak-grafikoak/LabPage'
+import { HomePage as HomePageDBH2_Algebra } from '../pages/dbh2-algebra/HomePage'
+import { TheoryPage as TheoryPageDBH2_Algebra } from '../pages/dbh2-algebra/TheoryPage'
+import { LabPage as LabPageDBH2_Algebra } from '../pages/dbh2-algebra/LabPage'
+import { MissionPage as MissionPageDBH2_Algebra } from '../pages/dbh2-algebra/MissionPage'
+import { GamesPage as GamesPageDBH2_Algebra } from '../pages/dbh2-algebra/GamesPage'
+import { ExercisesPage as ExercisesPageDBH2_Algebra } from '../pages/dbh2-algebra/ExercisesPage'
 
 export const router = createHashRouter([
     {
@@ -221,6 +227,38 @@ export const router = createHashRouter([
             {
                 path: 'matematika/dbh2/zatikiak/jokuak/carrera',
                 element: <FractionRace />,
+            },
+            {
+                path: 'matematika/dbh2/algebra',
+                element: <HomePageDBH2_Algebra />,
+            },
+            {
+                path: 'matematika/dbh2/algebra/teoria',
+                element: <TheoryPageDBH2_Algebra />,
+            },
+            {
+                path: 'matematika/dbh2/algebra/laboratorio',
+                element: <LabPageDBH2_Algebra />,
+            },
+            {
+                path: 'matematika/dbh2/algebra/laborategia',
+                element: <LabPageDBH2_Algebra />,
+            },
+            {
+                path: 'matematika/dbh2/algebra/retos',
+                element: <MissionPageDBH2_Algebra />,
+            },
+            {
+                path: 'matematika/dbh2/algebra/ariketak',
+                element: <ExercisesPageDBH2_Algebra />,
+            },
+            {
+                path: 'matematika/dbh2/algebra/ejercicios',
+                element: <ExercisesPageDBH2_Algebra />,
+            },
+            {
+                path: 'matematika/dbh2/algebra/jokuak',
+                element: <GamesPageDBH2_Algebra />,
             },
             // Rutas legacy para compatibilidad
             {

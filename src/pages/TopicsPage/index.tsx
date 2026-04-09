@@ -2,6 +2,7 @@ import { useParams, Navigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { SubjectCard } from '../../components/common/SubjectCard'
 import { getCourseById } from '../../data/courses'
+import { fixMaybeText } from '../../utils/fixText'
 import './TopicsPage.css'
 
 export function TopicsPage() {
@@ -40,7 +41,7 @@ export function TopicsPage() {
                         <a href="#/matematika">{t('courses.title')}</a>
                     </div>
                     <h1 style={{ '--course-color': course.color } as React.CSSProperties}>
-                        {getCourseName()}
+                        {fixMaybeText(getCourseName())}
                     </h1>
                     <p className="topics-subtitle">
                         {t('topics.subtitle', { count: course.topics.length })}
@@ -57,7 +58,7 @@ export function TopicsPage() {
                             <SubjectCard
                                 to={topic.active ? `/matematika/${courseId}/${topic.id}` : undefined}
                                 icon={topic.icon}
-                                title={getTopicName(topic)}
+                                title={fixMaybeText(getTopicName(topic))}
                                 description={topic.active ? t('topics.available') : t('topics.comingSoon')}
                                 color={course.color}
                                 disabled={!topic.active}

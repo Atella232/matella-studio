@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import katex from 'katex'
 import 'katex/dist/katex.min.css'
+import { fixMaybeText } from '../../utils/fixText'
 import './MathText.css'
 
 type RenderPiece =
@@ -13,9 +14,9 @@ interface MathTextProps {
     inline?: boolean
 }
 
-function parseMath(text: string): Array<{ type: 'text' | 'math'; value: string }> {
-    const pieces: Array<{ type: 'text' | 'math'; value: string }> = []
-    const pattern = /\$\$([\s\S]+?)\$\$/g
+function parseMath(text: string): Array<{ type: 'text' | 'math'; value: string; display?: boolean }> {
+    const pieces: Array<{ type: 'text' | 'math'; value: string; display?: boolean }> = []
+    const pattern = /\$\$([\s\S]+?)\$\$|\$([^\$]+?)\$/g
     let lastIndex = 0
 
     for (const match of text.matchAll(pattern)) {
@@ -23,7 +24,13 @@ function parseMath(text: string): Array<{ type: 'text' | 'math'; value: string }
         if (index > lastIndex) {
             pieces.push({ type: 'text', value: text.slice(lastIndex, index) })
         }
-        pieces.push({ type: 'math', value: (match[1] ?? '').trim() })
+        const displayValue = match[1]
+        const inlineValue = match[2]
+        pieces.push({
+            type: 'math',
+            value: (displayValue ?? inlineValue ?? '').trim(),
+            display: displayValue !== undefined
+        })
         lastIndex = index + match[0].length
     }
 
@@ -69,17 +76,18 @@ function renderMath(latex: string, display: boolean): string {
 
 export function MathText({ text, className, inline = false }: MathTextProps) {
     const content = useMemo<RenderPiece[]>(() => {
-        const parsed = parseMath(text)
+        const parsed = parseMath(fixMaybeText(text))
         const onlyMath = parsed.length === 1 && parsed[0].type === 'math' && !inline
 
         return parsed.map((piece, index) => {
             const key = `${piece.type}-${index}`
             if (piece.type === 'text') return { type: 'text', key, value: piece.value }
+            const display = piece.display || onlyMath
             return {
                 type: 'math',
                 key,
-                html: renderMath(piece.value, onlyMath),
-                display: onlyMath
+                html: renderMath(piece.value, display),
+                display
             }
         })
     }, [text, inline])

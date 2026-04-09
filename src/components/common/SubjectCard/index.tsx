@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { fixMaybeText } from '../../../utils/fixText'
 import './SubjectCard.css'
 
 interface SubjectCardProps {
@@ -23,11 +24,11 @@ export function SubjectCard({
     const cardContent = (
         <>
             <div className="subject-card-icon" style={{ background: `linear-gradient(135deg, ${color}, ${color}88)` }}>
-                {icon}
+                {fixMaybeText(icon)}
             </div>
             <div className="subject-card-content">
-                <h3 className="subject-card-title">{title}</h3>
-                <p className="subject-card-description">{description}</p>
+                <h3 className="subject-card-title">{fixMaybeText(title)}</h3>
+                <p className="subject-card-description">{fixMaybeText(description)}</p>
             </div>
             {disabled && (
                 <span className="subject-card-badge">{disabledLabel}</span>

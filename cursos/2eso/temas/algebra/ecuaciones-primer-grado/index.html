@@ -1,102 +1,49 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-lang-es="Ecuaciones de primer grado" data-lang-eu="Lehen mailako ekuazioak">Ecuaciones de primer grado</title>
-  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
-  <link rel="stylesheet" href="../../../../../assets/css/base.css">
-  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
-  <link rel="stylesheet" href="../../../../../assets/css/components.css">
-  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <title>Ecuaciones de primer grado</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- MathJax Configuration -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['\\\\[', '\\\\]']],
-        processEscapes: true,
-        processEnvironments: true
-      },
-      options: {
-        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    };
-    </script></head>
-<body data-theme="light">
-  <header>
-    <div class="logo">
-      <i class="fas fa-calculator"></i>
-      <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../portal.css">
+</head>
+<body>
+  <div class="page-shell">
+    <div class="topbar">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <a href="../index.html" data-eu="Aljebra" data-es="Álgebra" data-ar="الجبر">Álgebra</a>
+        <span>•</span>
+        <span data-eu="Lehen mailako ekuazioak" data-es="Ecuaciones de primer grado" data-ar="معادلات الدرجة الأولى">Ecuaciones de primer grado</span>
+      </nav>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="eu">EU</button>
+        <button class="lang-btn active" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="ar">ع</button>
+      </div>
     </div>
-    <nav>
-      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
-      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
-    </nav>
-  </header>
-  <nav aria-label="breadcrumb" class="breadcrumb-nav">
-    <ol>
-      <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
-      <li><a href="../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
-      <li><a href="../index.html" data-lang-es="Álgebra" data-lang-eu="Aljebra">Álgebra</a></li>
-      <li class="active" aria-current="page"><span data-lang-es="Ecuaciones de primer grado" data-lang-eu="Lehen mailako ekuazioak">Ecuaciones de primer grado</span></li>
-    </ol>
-  </nav>
-  <main>
-    <h1 data-lang-es="Ecuaciones de primer grado" data-lang-eu="Lehen mailako ekuazioak">Ecuaciones de primer grado</h1>
-    <div class="content">
-      <p data-lang-es="Contenido en desarrollo. Próximamente disponible." data-lang-eu="Edukia garatzen. Laster eskuragarri.">Contenido en desarrollo. Próximamente disponible.</p>
-    </div>
-  </main>
-  <footer>
-    <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
-  </footer>
-  <script src="../../../../../assets/js/theme.js"></script>
-  <script src="../../../../../assets/js/language.js"></script>
-  <script src="../../../../../assets/js/uiComponents.js"></script>
-  <script src="../../../../../assets/js/main.js"></script>
-  <script src="../../js/ecuaciones-primer-grado.js"></script>
-
-  <!-- Botón flotante para volver arriba -->
-  <button id="back-to-top" aria-label="Volver arriba">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-  
-  <script>
-    // Configuración del botón de volver arriba
-    document.addEventListener('DOMContentLoaded', function() {
-      const backToTopButton = document.getElementById('back-to-top');
-      
-      // Mostrar/ocultar botón al hacer scroll
-      function toggleBackToTop() {
-        if (window.pageYOffset > 300) {
-          backToTopButton.classList.add('visible');
-        } else {
-          backToTopButton.classList.remove('visible');
-        }
-      }
-      
-      // Mostrar el botón después de cargar la página
-      setTimeout(toggleBackToTop, 100);
-      
-      // Escuchar el evento de scroll
-      window.addEventListener('scroll', toggleBackToTop);
-      
-      // Hacer scroll suave al hacer clic
-      backToTopButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      });
-    });
-  </script>
+    <section class="hero">
+      <div class="badge">MATELLA · 2 ESO</div>
+      <h1 data-eu="Lehen mailako <span class='grad'>ekuazioak</span>" data-es="Ecuaciones de <span class='grad'>primer grado</span>" data-ar="معادلات <span class='grad'>الدرجة الأولى</span>">Ecuaciones de <span class='grad'>primer grado</span></h1>
+      <p class="lead" data-eu="Algebra gaiaren barruan, sarbide honek Matella Studio-n dagoen ekuazioen bloke espezifikora eramaten zaitu." data-es="Dentro del tema de Álgebra, este acceso te lleva al bloque específico de ecuaciones ya existente en Matella Studio." data-ar="داخل موضوع الجبر، يقودك هذا المدخل إلى كتلة المعادلات الخاصة الموجودة مسبقاً في Matella Studio.">Dentro del tema de Álgebra, este acceso te lleva al bloque específico de ecuaciones ya existente en Matella Studio.</p>
+      <div class="card-grid">
+        <article class="card">
+          <h3 data-eu="Antolaketa" data-es="Organización" data-ar="التنظيم">Organización</h3>
+          <p data-eu="Ekuazioen edukia Matellan gai propio batean dago, eta hortik jarraitzen da 2 ESOko sekuentzia didaktikoa." data-es="El contenido de ecuaciones vive en Matella como tema propio, y desde allí se sigue la secuencia didáctica de 2.º ESO." data-ar="محتوى المعادلات موجود في Matella كموضوع مستقل، ومن هناك تستمر secuencia didáctica de 2º ESO.">El contenido de ecuaciones vive en Matella como tema propio, y desde allí se sigue la secuencia didáctica de 2.º ESO.</p>
+        </article>
+        <article class="card">
+          <h3 data-eu="Lotura" data-es="Enlace" data-ar="الربط">Enlace</h3>
+          <p data-eu="Hemen sarbide zuzena uzten da lehen mailako ekuazioetara eta prozedura orokorrera." data-es="Aquí se deja acceso directo a ecuaciones sencillas de primer grado y al procedimiento general." data-ar="هنا يتم ترك وصول مباشر إلى المعادلات البسيطة من الدرجة الأولى وإلى الإجراء العام.">Aquí se deja acceso directo a ecuaciones sencillas de primer grado y al procedimiento general.</p>
+        </article>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="../../ecuaciones/resolucion-sencillas/index.html" data-eu="Ekuazio errazak" data-es="Ecuaciones sencillas" data-ar="المعادلات البسيطة">Ecuaciones sencillas</a>
+        <a class="btn btn-secondary" href="../../ecuaciones/procedimiento-general/index.html" data-eu="Prozedura orokorra" data-es="Procedimiento general" data-ar="الإجراء العام">Procedimiento general</a>
+      </div>
+      <div class="note" data-eu="Inportatutako proiektua osorik integratu da aljebran, eta ekuazioek beren unitatean jarraitzen dute egungo curriculum-ordena mantentzeko." data-es="El proyecto importado se ha integrado completo en álgebra y las ecuaciones continúan en su unidad propia para mantener el orden curricular actual." data-ar="تم دمج المشروع المستورد كاملاً في الجبر، وتستمر المعادلات في وحدتها الخاصة للحفاظ على الترتيب المنهجي الحالي.">El proyecto importado se ha integrado completo en álgebra y las ecuaciones continúan en su unidad propia para mantener el orden curricular actual.</div>
+    </section>
+  </div>
+  <script src="../portal.js"></script>
 </body>
 </html>

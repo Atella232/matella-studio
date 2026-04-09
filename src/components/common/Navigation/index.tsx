@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { courses, getCourseById } from '../../../data/courses'
+import { fixMaybeText } from '../../../utils/fixText'
 import './Navigation.css'
 
 export function Navigation() {
@@ -54,19 +55,29 @@ export function Navigation() {
 
     const getCourseName = (course: typeof courses[0]) => {
         switch (i18n.language) {
-            case 'eu': return course.nameEu
-            case 'ar': return course.nameAr
-            default: return course.name
+            case 'eu': return fixMaybeText(course.nameEu)
+            case 'ar': return fixMaybeText(course.nameAr)
+            default: return fixMaybeText(course.name)
         }
     }
 
     const getTopicName = (topic: typeof courses[0]['topics'][0]) => {
         switch (i18n.language) {
-            case 'eu': return topic.nameEu
-            case 'ar': return topic.nameAr
-            default: return topic.name
+            case 'eu': return fixMaybeText(topic.nameEu)
+            case 'ar': return fixMaybeText(topic.nameAr)
+            default: return fixMaybeText(topic.name)
         }
     }
+
+    const getTopicIcon = (topic: typeof courses[0]['topics'][0]) => fixMaybeText(topic.icon)
+
+    const isAlgebraPage = courseId === 'dbh2' && topicId === 'algebra'
+    const exercisesLabel =
+        i18n.language === 'ar'
+            ? 'التمارين'
+            : i18n.language === 'eu'
+                ? 'Ariketak'
+                : 'Ejercicios'
 
     const toggleDropdown = (id: string) => {
         setOpenDropdown(openDropdown === id ? null : id)
@@ -174,11 +185,11 @@ export function Navigation() {
                                                 className={`dropdown-item ${topic.id === topicId ? 'active' : ''}`}
                                                 onClick={() => setOpenDropdown(null)}
                                             >
-                                                {topic.icon} {getTopicName(topic)}
+                                                {getTopicIcon(topic)} {getTopicName(topic)}
                                             </Link>
                                         ) : (
                                             <span className="dropdown-item disabled">
-                                                {topic.icon} {getTopicName(topic)}
+                                                {getTopicIcon(topic)} {getTopicName(topic)}
                                                 <small>({t('subjects.comingSoon')})</small>
                                             </span>
                                         )}
@@ -204,7 +215,7 @@ export function Navigation() {
                         <li>
                             <Link
                                 to={`${contentBasePath}/laboratorio`}
-                                className={`nav-link nav-section ${currentSection === 'laboratorio' ? 'active' : ''}`}
+                                className={`nav-link nav-section ${currentSection === 'laboratorio' || currentSection === 'laborategia' ? 'active' : ''}`}
                             >
                                 🔬 {t('nav.lab')}
                             </Link>
@@ -225,6 +236,16 @@ export function Navigation() {
                                 🎮 {t('nav.games')}
                             </Link>
                         </li>
+                        {isAlgebraPage && (
+                            <li>
+                                <Link
+                                    to={`${contentBasePath}/ariketak`}
+                                    className={`nav-link nav-section ${currentSection === 'ariketak' || currentSection === 'ejercicios' ? 'active' : ''}`}
+                                >
+                                    📝 {exercisesLabel}
+                                </Link>
+                            </li>
+                        )}
                     </>
                 )}
             </ul>

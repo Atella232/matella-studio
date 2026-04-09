@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { SubjectCard } from '../../components/common/SubjectCard'
 import { courses } from '../../data/courses'
+import { fixMaybeText } from '../../utils/fixText'
 import './CoursesPage.css'
 
 export function CoursesPage() {
@@ -43,8 +44,8 @@ export function CoursesPage() {
                             <SubjectCard
                                 to={`/matematika/${course.id}`}
                                 icon={course.topics[0]?.icon || '📚'}
-                                title={getCourseName(course)}
-                                description={getCourseDescription(course)}
+                                title={fixMaybeText(getCourseName(course))}
+                                description={fixMaybeText(getCourseDescription(course))}
                                 color={course.color}
                             />
                         </div>

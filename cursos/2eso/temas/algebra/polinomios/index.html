@@ -1,59 +1,50 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-lang-es="Polinomios" data-lang-eu="Polinomios">Polinomios</title>
-  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
-  <link rel="stylesheet" href="../../../../../assets/css/base.css">
-  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
-  <link rel="stylesheet" href="../../../../../assets/css/components.css">
-  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
-    <!-- MathJax Configuration -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['\\\\[', '\\\\]']],
-        processEscapes: true,
-        processEnvironments: true
-      },
-      options: {
-        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    };
-    </script></head>
-<body data-theme="light">
-  <header>
-    <div class="logo">
-      <i class="fas fa-calculator"></i>
-      <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+  <title>Polinomios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../portal.css">
+</head>
+<body>
+  <div class="page-shell">
+    <div class="topbar">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <a href="../index.html" data-eu="Aljebra" data-es="Álgebra" data-ar="الجبر">Álgebra</a>
+        <span>•</span>
+        <span data-eu="Polinomioak" data-es="Polinomios" data-ar="كثيرات الحدود">Polinomios</span>
+      </nav>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="eu">EU</button>
+        <button class="lang-btn active" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="ar">ع</button>
+      </div>
     </div>
-    <nav>
-      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
-      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
-    </nav>
-  </header>
-  <nav aria-label="breadcrumb" class="breadcrumb-nav">
-    <ol>
-      <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
-      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
-      <li><a href="../index.html" data-lang-es="Álgebra" data-lang-eu="Álgebra">Álgebra</a></li>
-      <li class="active" aria-current="page"><span data-lang-es="Polinomios" data-lang-eu="Polinomios">Polinomios</span></li>
-    </ol>
-  </nav>
-  <main>
-    <h1 data-lang-es="Polinomios" data-lang-eu="Polinomios">Polinomios</h1>
-    <p data-lang-es="Contenido próximamente." data-lang-eu="Edukia laster.">Contenido próximamente.</p>
-  </main>
-  <footer>
-    <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
-  </footer>
-  <script src="../../../../../assets/js/theme.js"></script>
-  <script src="../../../../../assets/js/language.js"></script>
-  <script src="../../../../../assets/js/uiComponents.js"></script>
-  <script src="../../../../../assets/js/main.js"></script>
+    <section class="hero">
+      <div class="badge">MATELLA · 2 ESO</div>
+      <h1 data-eu="Polinomioak" data-es="Polinomios" data-ar="كثيرات الحدود">Polinomios</h1>
+      <p class="lead" data-eu="Azpigaionek inportatutako proiektuko bloke zabalena biltzen du: teoria, bistaratzea eta polinomioen praktika." data-es="Este subtema reúne el bloque más amplio del proyecto importado, con teoría, visualización y práctica de polinomios." data-ar="يجمع هذا الفرع أوسع كتلة من المشروع المستورد: النظرية والتمثيل والتدريب على كثيرات الحدود.">Este subtema reúne el bloque más amplio del proyecto importado, con teoría, visualización y práctica de polinomios.</p>
+      <div class="card-grid">
+        <article class="card">
+          <h3 data-eu="Polinomioen blokea" data-es="Bloque de polinomios" data-ar="كتلة كثيرات الحدود">Bloque de polinomios</h3>
+          <p data-eu="Definizioa, gradua, termino independentea, balio numerikoa eta aurkakoa." data-es="Definición, grado, término independiente, valor numérico y opuesto." data-ar="التعريف، الدرجة، الحد المستقل، القيمة العددية والمعاكس.">Definición, grado, término independiente, valor numérico y opuesto.</p>
+        </article>
+        <article class="card">
+          <h3 data-eu="Eragiketak eta produktu nabarmenak" data-es="Operaciones y productos notables" data-ar="العمليات والمتطابقات الشهيرة">Operaciones y productos notables</h3>
+          <p data-eu="Batuketak, kenketak, biderketak, zatiketa monomio batez eta produktu nabarmenak ere sartuta daude." data-es="Incluye suma, resta, multiplicación, división entre monomio y productos notables." data-ar="يتضمن الجمع والطرح والضرب والقسمة على حد أحادي والمتطابقات الشهيرة.">Incluye suma, resta, multiplicación, división entre monomio y productos notables.</p>
+        </article>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="../index.html?tab=polinomios#teoria" data-eu="Polinomioak ireki" data-es="Abrir polinomios" data-ar="افتح كثيرات الحدود">Abrir polinomios</a>
+        <a class="btn btn-secondary" href="../index.html?tab=oppolinomios#teoria" data-eu="Eragiketak ikusi" data-es="Ver operaciones" data-ar="شاهد العمليات">Ver operaciones</a>
+        <a class="btn btn-secondary" href="../index.html?tab=notables#teoria" data-eu="Produktu nabarmenak" data-es="Productos notables" data-ar="المتطابقات الشهيرة">Productos notables</a>
+      </div>
+      <div class="note" data-eu="Produktu nabarmenen zatia hemen integratu da, Matellako Algebra gaiaren uneko ordena errespetatzeko." data-es="La parte de productos notables se ha integrado aquí para respetar el orden actual del tema de Álgebra en Matella." data-ar="تم دمج جزء المتطابقات الشهيرة هنا احتراماً لترتيب موضوع الجبر الحالي في Matella.">La parte de productos notables se ha integrado aquí para respetar el orden actual del tema de Álgebra en Matella.</div>
+    </section>
+  </div>
+  <script src="../portal.js"></script>
 </body>
 </html>

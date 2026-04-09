@@ -1,65 +1,49 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-lang-es="Problemas con ecuaciones" data-lang-eu="Arazoak ekuazioekin">Problemas con ecuaciones</title>
-  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
-  <link rel="stylesheet" href="../../../../../assets/css/base.css">
-  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
-  <link rel="stylesheet" href="../../../../../assets/css/components.css">
-  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
+  <title>Problemas con ecuaciones</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- MathJax Configuration -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['\\\\[', '\\\\]']],
-        processEscapes: true,
-        processEnvironments: true
-      },
-      options: {
-        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    };
-    </script></head>
-<body data-theme="light">
-  <header>
-    <div class="logo">
-      <i class="fas fa-calculator"></i>
-      <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../portal.css">
+</head>
+<body>
+  <div class="page-shell">
+    <div class="topbar">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <a href="../index.html" data-eu="Aljebra" data-es="Álgebra" data-ar="الجبر">Álgebra</a>
+        <span>•</span>
+        <span data-eu="Arazorik ekuazioekin" data-es="Problemas con ecuaciones" data-ar="مسائل بالمعادلات">Problemas con ecuaciones</span>
+      </nav>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="eu">EU</button>
+        <button class="lang-btn active" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="ar">ع</button>
+      </div>
     </div>
-    <nav>
-      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
-      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
-    </nav>
-  </header>
-  <nav aria-label="breadcrumb" class="breadcrumb-nav">
-    <ol>
-      <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
-      <li><a href="../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
-      <li><a href="../index.html" data-lang-es="Álgebra" data-lang-eu="Aljebra">Álgebra</a></li>
-      <li class="active" aria-current="page"><span data-lang-es="Problemas con ecuaciones" data-lang-eu="Arazoak ekuazioekin">Problemas con ecuaciones</span></li>
-    </ol>
-  </nav>
-  <main>
-    <h1 data-lang-es="Problemas con ecuaciones" data-lang-eu="Arazoak ekuazioekin">Problemas con ecuaciones</h1>
-    <div class="content">
-      <p data-lang-es="Contenido en desarrollo. Próximamente disponible." data-lang-eu="Edukia garatzen. Laster eskuragarri.">Contenido en desarrollo. Próximamente disponible.</p>
-    </div>
-  </main>
-  <footer>
-    <p data-lang-es="© 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu="© 2025 - MATELLA | Diseinu Minimalista Profesionala">© 2025 - MATELLA | Diseño Minimalista Profesional</p>
-  </footer>
-  <script src="../../../../../assets/js/theme.js"></script>
-  <script src="../../../../../assets/js/language.js"></script>
-  <script src="../../../../../assets/js/uiComponents.js"></script>
-  <script src="../../../../../assets/js/main.js"></script>
+    <section class="hero">
+      <div class="badge">MATELLA · 2 ESO</div>
+      <h1 data-eu="Arazorik <span class='grad'>ekuazioekin</span>" data-es="Problemas con <span class='grad'>ecuaciones</span>" data-ar="مسائل <span class='grad'>بالمعادلات</span>">Problemas con <span class='grad'>ecuaciones</span></h1>
+      <p class="lead" data-eu="Sarbide honek Algebra gaiaren ordena mantentzen du eta Matellako unitate espezifikoaren barruko ekuazio bidezko arazoetara eramaten zaitu." data-es="Este acceso mantiene el orden del tema de Álgebra y te conduce al bloque de problemas con ecuaciones dentro de la unidad específica de Matella." data-ar="يحافظ هذا المدخل على ترتيب موضوع الجبر ويقودك إلى كتلة مسائل المعادلات داخل وحدة Matella الخاصة.">Este acceso mantiene el orden del tema de Álgebra y te conduce al bloque de problemas con ecuaciones dentro de la unidad específica de Matella.</p>
+      <div class="card-grid">
+        <article class="card">
+          <h3 data-eu="Arazoak" data-es="Problemas" data-ar="المسائل">Problemas</h3>
+          <p data-eu="Problemak planteatu, ekuazioa eraiki eta pausoz pauso ebatzi behar diren egoerak." data-es="Situaciones en las que hay que plantear el problema, construir la ecuación y resolverla paso a paso." data-ar="مواقف يجب فيها صياغة المسألة وبناء المعادلة وحلها خطوة خطوة.">Situaciones en las que hay que plantear el problema, construir la ecuación y resolverla paso a paso.</p>
+        </article>
+        <article class="card">
+          <h3 data-eu="Matellako kokapena" data-es="Ubicación en Matella" data-ar="الموضع في Matella">Ubicación en Matella</h3>
+          <p data-eu="Matellak arazoen atala ekuazioen gaian kokatzen du, eta lotura hori mantendu dugu." data-es="Matella sitúa la resolución de problemas dentro del tema de ecuaciones, y hemos mantenido esa conexión." data-ar="تضع Matella حل المسائل داخل موضوع المعادلات، وقد حافظنا على هذا الربط.">Matella sitúa la resolución de problemas dentro del tema de ecuaciones, y hemos mantenido esa conexión.</p>
+        </article>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="../../ecuaciones/problemas-ecuaciones/index.html" data-eu="Arazoak ireki" data-es="Abrir problemas" data-ar="افتح المسائل">Abrir problemas</a>
+        <a class="btn btn-secondary" href="../../ecuaciones/significado-utilidad/index.html" data-eu="Testuingurua ikusi" data-es="Ver contexto" data-ar="شاهد السياق">Ver contexto</a>
+      </div>
+      <div class="note" data-eu="Horrela, Algebra gaiak inportatutako material guztia dauka, eta aldi berean Matellak jada ekuazioetarako zuen bereizketa didaktikoa errespetatzen du." data-es="Así el tema de Álgebra contiene todo el material importado y, a la vez, respeta la separación didáctica que Matella ya tenía para ecuaciones." data-ar="بهذه الطريقة يحتوي موضوع الجبر على كل المادة المستوردة، وفي الوقت نفسه يحترم الفصل التعليمي الذي كانت Matella تملكه للمعادلات.">Así el tema de Álgebra contiene todo el material importado y, a la vez, respeta la separación didáctica que Matella ya tenía para ecuaciones.</div>
+    </section>
+  </div>
+  <script src="../portal.js"></script>
 </body>
 </html>

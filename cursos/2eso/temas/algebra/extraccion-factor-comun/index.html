@@ -1,96 +1,49 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-lang-es="ExtracciÃ³n de factor comÃºn" data-lang-eu="ExtracciÃ³n de factor comÃºn">ExtracciÃ³n de factor comÃºn</title>
-  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
-  <link rel="stylesheet" href="../../../../../assets/css/base.css">
-  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
-  <link rel="stylesheet" href="../../../../../assets/css/components.css">
-  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
-    <!-- MathJax Configuration -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtujs"></script>
-    <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['\\\\[', '\\\\]']],
-        processEscapes: true,
-        processEnvironments: true
-      },
-      options: {
-        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    };
-    </script></head>
-<body data-theme="light">
-  <header>
-    <div class="logo">
-      <i class="fas fa-calculator"></i>
-      <span data-lang-es="2Âº ESO" data-lang-eu="DBH 2">2Âº ESO</span>
+  <title>Extracción de factor común</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../portal.css">
+</head>
+<body>
+  <div class="page-shell">
+    <div class="topbar">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <a href="../index.html" data-eu="Aljebra" data-es="Álgebra" data-ar="الجبر">Álgebra</a>
+        <span>•</span>
+        <span data-eu="Faktore komunaren erauzketa" data-es="Extracción de factor común" data-ar="استخراج العامل المشترك">Extracción de factor común</span>
+      </nav>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="eu">EU</button>
+        <button class="lang-btn active" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="ar">ع</button>
+      </div>
     </div>
-    <nav>
-      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
-      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
-    </nav>
-  </header>
-  <nav aria-label="breadcrumb" class="breadcrumb-nav">
-    <ol>
-      <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
-      <li><a href="../../../index.html" data-lang-es="2Âº ESO" data-lang-eu="DBH 2">2Âº ESO</a></li>
-      <li><a href="../index.html" data-lang-es="Ãlgebra" data-lang-eu="Ãlgebra">Ãlgebra</a></li>
-      <li class="active" aria-current="page"><span data-lang-es="ExtracciÃ³n de factor comÃºn" data-lang-eu="ExtracciÃ³n de factor comÃºn">ExtracciÃ³n de factor comÃºn</span></li>
-    </ol>
-  </nav>
-  <main>
-    <h1 data-lang-es="ExtracciÃ³n de factor comÃºn" data-lang-eu="ExtracciÃ³n de factor comÃºn">ExtracciÃ³n de factor comÃºn</h1>
-    <p data-lang-es="Contenido prÃ³ximamente." data-lang-eu="Edukia laster.">Contenido prÃ³ximamente.</p>
-  </main>
-  <footer>
-    <p data-lang-es="Â© 2025 - MATELLA | DiseÃ±o Minimalista Profesional" data-lang-eu="Â© 2025 - MATELLA | Diseinu Minimalista Profesionala">Â© 2025 - MATELLA | DiseÃ±o Minimalista Profesional</p>
-  </footer>
-  <script src="../../../../../assets/js/theme.js"></script>
-  <script src="../../../../../assets/js/language.js"></script>
-  <script src="../../../../../assets/js/uiComponents.js"></script>
-  <script src="../../../../../assets/js/main.js"></script>
-  <script src="../../js/extraccion-factor-comun.js"></script>
-
-  <!-- Botón flotante para volver arriba -->
-  <button id="back-to-top" aria-label="Volver arriba">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-  
-  <script>
-    // Configuración del botón de volver arriba
-    document.addEventListener('DOMContentLoaded', function() {
-      const backToTopButton = document.getElementById('back-to-top');
-      
-      // Mostrar/ocultar botón al hacer scroll
-      function toggleBackToTop() {
-        if (window.pageYOffset > 300) {
-          backToTopButton.classList.add('visible');
-        } else {
-          backToTopButton.classList.remove('visible');
-        }
-      }
-      
-      // Mostrar el botón después de cargar la página
-      setTimeout(toggleBackToTop, 100);
-      
-      // Escuchar el evento de scroll
-      window.addEventListener('scroll', toggleBackToTop);
-      
-      // Hacer scroll suave al hacer clic
-      backToTopButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      });
-    });
-  </script>
+    <section class="hero">
+      <div class="badge">MATELLA · 2 ESO</div>
+      <h1 data-eu="Faktore komunaren <span class='grad'>erauzketa</span>" data-es="Extracción de <span class='grad'>factor común</span>" data-ar="استخراج <span class='grad'>العامل المشترك</span>">Extracción de <span class='grad'>factor común</span></h1>
+      <p class="lead" data-eu="Sarbide honek Algebra 2 DBHtik ekarritako faktore komunaren bloke osora eramaten du, Matellaren ordenara egokituta." data-es="Este acceso lleva al bloque completo de factor común importado desde Algebra 2 DBH y adaptado al orden de Matella." data-ar="هذا المدخل يأخذك إلى كتلة العامل المشترك الكاملة المستوردة من Algebra 2 DBH والمكيفة مع ترتيب Matella.">Este acceso lleva al bloque completo de factor común importado desde Algebra 2 DBH y adaptado al orden de Matella.</p>
+      <div class="card-grid">
+        <article class="card">
+          <h3 data-eu="Helburua" data-es="Objetivo" data-ar="الهدف">Objetivo</h3>
+          <p data-eu="Banatzailearen kontrako ideia ulertu eta faktore komuna modu sistematikoan ateratzea." data-es="Comprender la idea inversa de la distributiva y extraer factor común de forma sistemática." data-ar="فهم الفكرة العكسية للتوزيع واستخراج العامل المشترك بشكل منظم.">Comprender la idea inversa de la distributiva y extraer factor común de forma sistemática.</p>
+        </article>
+        <article class="card">
+          <h3 data-eu="Adibideak" data-es="Ejemplos" data-ar="الأمثلة">Ejemplos</h3>
+          <p data-eu="Jatorrizko proiektuko pausoz pausoko adibide gidatuak ere hemen lotuta geratzen dira." data-es="También quedan enlazados aquí los ejemplos guiados paso a paso del proyecto original." data-ar="كما ترتبط هنا الأمثلة الموجهة خطوة بخطوة من المشروع الأصلي.">También quedan enlazados aquí los ejemplos guiados paso a paso del proyecto original.</p>
+        </article>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="../index.html?tab=factor#teoria" data-eu="Faktore komuna ireki" data-es="Abrir factor común" data-ar="افتح العامل المشترك">Abrir factor común</a>
+        <a class="btn btn-secondary" href="../index.html#ejercicios" data-eu="Adibideak eta ariketak" data-es="Ejemplos y ejercicios" data-ar="الأمثلة والتمارين">Ejemplos y ejercicios</a>
+      </div>
+      <div class="note" data-eu="Bloke osoa Algebra atarian integratuta dago, inportatutako gainerako edukiarekin batera." data-es="El bloque completo está integrado en la portada de Álgebra junto con el resto del contenido importado." data-ar="الكتلة الكاملة مدمجة في صفحة الجبر الرئيسية مع بقية المحتوى المستورد.">El bloque completo está integrado en la portada de Álgebra junto con el resto del contenido importado.</div>
+    </section>
+  </div>
+  <script src="../portal.js"></script>
 </body>
 </html>

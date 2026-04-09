@@ -1,59 +1,49 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-lang-es="El álgebra: ¿para qué sirve?" data-lang-eu="El álgebra: ¿para qué sirve?">El álgebra: ¿para qué sirve?</title>
-  <link rel="stylesheet" href="../../../../../assets/css/theme.css">
-  <link rel="stylesheet" href="../../../../../assets/css/base.css">
-  <link rel="stylesheet" href="../../../../../assets/css/layout.css">
-  <link rel="stylesheet" href="../../../../../assets/css/components.css">
-  <link rel="stylesheet" href="../../../../../assets/css/responsive.css">
-    <!-- MathJax Configuration -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['\\\\[', '\\\\]']],
-        processEscapes: true,
-        processEnvironments: true
-      },
-      options: {
-        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    };
-    </script></head>
-<body data-theme="light">
-  <header>
-    <div class="logo">
-      <i class="fas fa-calculator"></i>
-      <span data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</span>
+  <title>Para qué sirve el álgebra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../portal.css">
+</head>
+<body>
+  <div class="page-shell">
+    <div class="topbar">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <a href="../index.html" data-eu="Aljebra" data-es="Álgebra" data-ar="الجبر">Álgebra</a>
+        <span>•</span>
+        <span data-eu="Zertarako balio du aljebrak" data-es="Para qué sirve el álgebra" data-ar="ما فائدة الجبر">Para qué sirve el álgebra</span>
+      </nav>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="eu">EU</button>
+        <button class="lang-btn active" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="ar">ع</button>
+      </div>
     </div>
-    <nav>
-      <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
-      <button id="lang-toggle" data-lang-es="Euskara" data-lang-eu="Castellano" aria-label="Cambiar idioma">Euskara</button>
-    </nav>
-  </header>
-  <nav aria-label="breadcrumb" class="breadcrumb-nav">
-    <ol>
-      <li><a href="../../../../../index.html" data-lang-es="Inicio" data-lang-eu="Hasiera">Inicio</a></li>
-      <li><a href="../../../index.html" data-lang-es="2º ESO" data-lang-eu="DBH 2">2º ESO</a></li>
-      <li><a href="../index.html" data-lang-es="Álgebra" data-lang-eu="Álgebra">Álgebra</a></li>
-      <li class="active" aria-current="page"><span data-lang-es="El álgebra: ¿para qué sirve?" data-lang-eu="El álgebra: ¿para qué sirve?">El álgebra: ¿para qué sirve?</span></li>
-    </ol>
-  </nav>
-  <main>
-    <h1 data-lang-es="El álgebra: ¿para qué sirve?" data-lang-eu="El álgebra: ¿para qué sirve?">El álgebra: ¿para qué sirve?</h1>
-    <p data-lang-es="Contenido próximamente." data-lang-eu="Edukia laster.">Contenido próximamente.</p>
-  </main>
-  <footer>
-    <p data-lang-es=" 2025 - MATELLA | Diseño Minimalista Profesional" data-lang-eu=" 2025 - MATELLA | Diseinu Minimalista Profesionala"> 2025 - MATELLA | Diseño Minimalista Profesional</p>
-  </footer>
-  <script src="../../../../../assets/js/theme.js"></script>
-  <script src="../../../../../assets/js/language.js"></script>
-  <script src="../../../../../assets/js/uiComponents.js"></script>
-  <script src="../../../../../assets/js/main.js"></script>
+    <section class="hero">
+      <div class="badge">MATELLA · 2 ESO</div>
+      <h1 data-eu="Zertarako balio du <span class='grad'>aljebrak</span>" data-es="Para qué sirve el <span class='grad'>álgebra</span>" data-ar="ما فائدة <span class='grad'>الجبر</span>">Para qué sirve el <span class='grad'>álgebra</span></h1>
+      <p class="lead" data-eu="Bloke honek gaiaren sarrera ematen du: zer den aljebra, zertarako erabiltzen den, zer diren aldagaiak eta konstanteak, eta nola pasatzen garen hizkuntza arruntetik adierazpen aljebraikoetara." data-es="Este bloque introduce el tema: qué es el álgebra, para qué se usa, qué son variables y constantes, y cómo pasamos del lenguaje cotidiano a las expresiones algebraicas." data-ar="يقدم هذا القسم الموضوع: ما هو الجبر، لماذا يُستخدم، ما هي المتغيرات والثوابت، وكيف ننتقل من اللغة اليومية إلى التعبيرات الجبرية.">Este bloque introduce el tema: qué es el álgebra, para qué se usa, qué son variables y constantes, y cómo pasamos del lenguaje cotidiano a las expresiones algebraicas.</p>
+      <div class="card-grid">
+        <article class="card">
+          <h3 data-eu="Zer lantzen da hemen" data-es="Qué se trabaja aquí" data-ar="ماذا يُدرس هنا">Qué se trabaja aquí</h3>
+          <p data-eu="Aljebraren zergatia, aldagaiak, konstanteak eta hizkuntza arruntetik algebra hizkuntzara itzultzea." data-es="El sentido del álgebra, variables, constantes y traducción del lenguaje natural al algebraico." data-ar="معنى الجبر، المتغيرات، الثوابت، والتحويل من اللغة العادية إلى الجبرية.">El sentido del álgebra, variables, constantes y traducción del lenguaje natural al algebraico.</p>
+        </article>
+        <article class="card">
+          <h3 data-eu="Jatorrizko edukia" data-es="Contenido original" data-ar="المحتوى الأصلي">Contenido original</h3>
+          <p data-eu="Bloke hau Algebra 2 DBH proiektuko hizkuntza aljebraikoaren atal osoarekin lotuta dago." data-es="Este bloque conecta con toda la parte de lenguaje algebraico del proyecto Algebra 2 DBH." data-ar="هذا القسم متصل بكل جزء اللغة الجبرية من مشروع Algebra 2 DBH.">Este bloque conecta con toda la parte de lenguaje algebraico del proyecto Algebra 2 DBH.</p>
+        </article>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="../index.html?tab=lenguaje#teoria" data-eu="Teoria osoa ireki" data-es="Abrir teoría completa" data-ar="افتح النظرية كاملة">Abrir teoría completa</a>
+        <a class="btn btn-secondary" href="../index.html#ejercicios" data-eu="Ariketetara joan" data-es="Ir a ejercicios" data-ar="اذهب إلى التمارين">Ir a ejercicios</a>
+      </div>
+      <div class="note" data-eu="Eduki osoa Algebra atari nagusian dago, eta hemen dagokion blokera sarbide zuzena uzten dizugu." data-es="El contenido completo está dentro de la portada general de Álgebra y aquí te dejamos el acceso directo al bloque correspondiente." data-ar="المحتوى الكامل موجود داخل صفحة الجبر الرئيسية، وهنا لديك وصول مباشر إلى القسم المناسب.">El contenido completo está dentro de la portada general de Álgebra y aquí te dejamos el acceso directo al bloque correspondiente.</div>
+    </section>
+  </div>
+  <script src="../portal.js"></script>
 </body>
 </html>
