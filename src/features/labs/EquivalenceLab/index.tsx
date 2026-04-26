@@ -110,7 +110,7 @@ export function EquivalenceLab() {
         ctx.textAlign = 'center'
         ctx.fillText('=', startX + barWidth + 120, (startY1 + startY2 + barHeight) / 2 + 10)
 
-    }, [baseNumerator, baseDenominator, equivalentNum, equivalentDen, multiplier])
+    }, [baseNumerator, baseDenominator, equivalentNum, equivalentDen, multiplier, t])
 
     return (
         <div className="equivalence-lab">

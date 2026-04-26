@@ -14,7 +14,6 @@ function safeEvaluate(expression: string, x: number, y: number) {
         .replace(/y/g, `(${y})`)
 
     try {
-        // eslint-disable-next-line no-new-func
         return Function(`"use strict"; return (${prepared});`)()
     } catch {
         return null

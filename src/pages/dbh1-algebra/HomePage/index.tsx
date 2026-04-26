@@ -32,7 +32,7 @@ export function HomePage() {
                         <div className="feature-icon">🧪</div>
                         <h3>{t('nav.lab')}</h3>
                         <p>{t('algebra.home.lab.description')}</p>
-                        <Link to="/matematika/dbh1/algebra/laborategia" className="feature-link">{t('algebra.home.lab.link')} →</Link>
+                        <Link to="/matematika/dbh1/algebra/laboratorio" className="feature-link">{t('algebra.home.lab.link')} →</Link>
                     </article>
                 </section>
             </div>

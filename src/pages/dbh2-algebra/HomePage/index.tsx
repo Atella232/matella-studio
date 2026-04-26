@@ -25,10 +25,10 @@ export function HomePage() {
                         <Link to="/matematika/dbh2/algebra/retos" className="btn btn-secondary">
                             🎯 {t('nav.challenges')}
                         </Link>
-                        <Link to="/matematika/dbh2/algebra/ariketak" className="btn btn-secondary">
+                        <Link to="/matematika/dbh2/algebra/ejercicios" className="btn btn-secondary">
                             📝 {pickText(lang, { eu: 'Ariketak', es: 'Ejercicios', ar: 'التمارين' })}
                         </Link>
-                        <Link to="/matematika/dbh2/algebra/jokuak" className="btn btn-secondary">
+                        <Link to="/matematika/dbh2/algebra/juegos" className="btn btn-secondary">
                             🎮 {t('nav.games')}
                         </Link>
                     </div>
@@ -64,7 +64,7 @@ export function HomePage() {
                             <div className="feature-icon">🎮</div>
                             <h3>{t('nav.games')}</h3>
                             <p>{pickText(lang, algebraHome.featureGames)}</p>
-                            <Link to="/matematika/dbh2/algebra/jokuak" className="feature-link">{pickText(lang, { eu: 'Jokatu →', es: 'Jugar →', ar: 'العب →' })}</Link>
+                            <Link to="/matematika/dbh2/algebra/juegos" className="feature-link">{pickText(lang, { eu: 'Jokatu →', es: 'Jugar →', ar: 'العب →' })}</Link>
                         </article>
 
                         <article className="feature-card glass">
@@ -75,7 +75,7 @@ export function HomePage() {
                                 es: 'Los 63 ejercicios del proyecto original, organizados por bloques y con solución.',
                                 ar: 'جميع تمارين المشروع الأصلي وعددها 63 تمرينًا، مرتبة حسب الكتل ومع الحل.'
                             })}</p>
-                            <Link to="/matematika/dbh2/algebra/ariketak" className="feature-link">{pickText(lang, { eu: 'Praktikatu →', es: 'Practicar →', ar: 'تدرّب →' })}</Link>
+                            <Link to="/matematika/dbh2/algebra/ejercicios" className="feature-link">{pickText(lang, { eu: 'Praktikatu →', es: 'Practicar →', ar: 'تدرّب →' })}</Link>
                         </article>
                     </div>
                 </div>

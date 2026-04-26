@@ -8,6 +8,7 @@ import { LabPage } from '../pages/LabPage'
 import { MissionPage } from '../pages/MissionPage'
 import { AccessibilityPage } from '../pages/AccessibilityPage'
 import { TheoryPage } from '../pages/TheoryPage'
+import { ExercisesPage as ExercisesPageDBH2_Zatikiak } from '../pages/dbh2-zatikiak/ExercisesPage'
 import { GamesHub } from '../features/games/GamesHub'
 import { PizzaFractions } from '../features/games/PizzaFractions'
 import { FractionMemory } from '../features/games/FractionMemory'
@@ -51,6 +52,12 @@ import { LabPage as LabPageDBH2_Algebra } from '../pages/dbh2-algebra/LabPage'
 import { MissionPage as MissionPageDBH2_Algebra } from '../pages/dbh2-algebra/MissionPage'
 import { GamesPage as GamesPageDBH2_Algebra } from '../pages/dbh2-algebra/GamesPage'
 import { ExercisesPage as ExercisesPageDBH2_Algebra } from '../pages/dbh2-algebra/ExercisesPage'
+import { HomePage as HomePageDBH2_Ekuazioak } from '../pages/dbh2-ekuazioak/HomePage'
+import { TheoryPage as TheoryPageDBH2_Ekuazioak } from '../pages/dbh2-ekuazioak/TheoryPage'
+import { LabPage as LabPageDBH2_Ekuazioak } from '../pages/dbh2-ekuazioak/LabPage'
+import { MissionPage as MissionPageDBH2_Ekuazioak } from '../pages/dbh2-ekuazioak/MissionPage'
+import { GamesPage as GamesPageDBH2_Ekuazioak } from '../pages/dbh2-ekuazioak/GamesPage'
+import { ExercisesPage as ExercisesPageDBH2_Ekuazioak } from '../pages/dbh2-ekuazioak/ExercisesPage'
 import { NaturaCoursesPage } from '../pages/NaturaCoursesPage'
 import { NaturaTopicsPage } from '../pages/NaturaTopicsPage'
 import { NaturaBiosferaPage } from '../pages/natura-biosfera'
@@ -111,6 +118,10 @@ export const router = createHashRouter([
                 element: <MissionPageDBH1_Zenbaki />,
             },
             {
+                path: 'matematika/dbh1/zenbaki-naturalak/juegos',
+                element: <GamesPageDBH1_Zenbaki />,
+            },
+            {
                 path: 'matematika/dbh1/zenbaki-naturalak/jokuak',
                 element: <GamesPageDBH1_Zenbaki />,
             },
@@ -150,6 +161,10 @@ export const router = createHashRouter([
                 element: <TheoryPageDBH1_Algebra />,
             },
             {
+                path: 'matematika/dbh1/algebra/laboratorio',
+                element: <LabPageDBH1_Algebra />,
+            },
+            {
                 path: 'matematika/dbh1/algebra/laborategia',
                 element: <LabPageDBH1_Algebra />,
             },
@@ -161,6 +176,10 @@ export const router = createHashRouter([
             {
                 path: 'matematika/dbh1/geometria/teoria',
                 element: <TheoryPageDBH1_Geometria />,
+            },
+            {
+                path: 'matematika/dbh1/geometria/laboratorio',
+                element: <LabPageDBH1_Geometria />,
             },
             {
                 path: 'matematika/dbh1/geometria/laborategia',
@@ -176,6 +195,10 @@ export const router = createHashRouter([
                 element: <TheoryPageDBH1_Estadistica />,
             },
             {
+                path: 'matematika/dbh1/estadistica/laboratorio',
+                element: <LabPageDBH1_Estadistica />,
+            },
+            {
                 path: 'matematika/dbh1/estadistica/laborategia',
                 element: <LabPageDBH1_Estadistica />,
             },
@@ -188,21 +211,41 @@ export const router = createHashRouter([
                 element: <MissionPageDBH1 />,
             },
             {
+                path: 'matematika/dbh1/zatikiak/misioa',
+                element: <MissionPageDBH1 />,
+            },
+            {
                 path: 'matematika/dbh1/zatikiak/teoria',
                 element: <TheoryPageDBH1 />,
             },
             // Games Hub for 1º ESO (Individual games are shared)
             {
+                path: 'matematika/dbh1/zatikiak/juegos',
+                element: <GamesHubDBH1 />,
+            },
+            {
                 path: 'matematika/dbh1/zatikiak/jokuak',
                 element: <GamesHubDBH1 />,
+            },
+            {
+                path: 'matematika/dbh1/zatikiak/juegos/pizza',
+                element: <PizzaFractions />,
             },
             {
                 path: 'matematika/dbh1/zatikiak/jokuak/pizza',
                 element: <PizzaFractions />,
             },
             {
+                path: 'matematika/dbh1/zatikiak/juegos/memory',
+                element: <FractionMemory />,
+            },
+            {
                 path: 'matematika/dbh1/zatikiak/jokuak/memory',
                 element: <FractionMemory />,
+            },
+            {
+                path: 'matematika/dbh1/zatikiak/juegos/carrera',
+                element: <FractionRace />,
             },
             {
                 path: 'matematika/dbh1/zatikiak/jokuak/carrera',
@@ -223,21 +266,49 @@ export const router = createHashRouter([
                 element: <MissionPage />,
             },
             {
+                path: 'matematika/dbh2/zatikiak/misioa',
+                element: <MissionPage />,
+            },
+            {
                 path: 'matematika/dbh2/zatikiak/teoria',
                 element: <TheoryPage />,
             },
+            {
+                path: 'matematika/dbh2/zatikiak/ejercicios',
+                element: <ExercisesPageDBH2_Zatikiak />,
+            },
+            {
+                path: 'matematika/dbh2/zatikiak/ariketak',
+                element: <ExercisesPageDBH2_Zatikiak />,
+            },
             // Games Hub and individual games
+            {
+                path: 'matematika/dbh2/zatikiak/juegos',
+                element: <GamesHub />,
+            },
             {
                 path: 'matematika/dbh2/zatikiak/jokuak',
                 element: <GamesHub />,
+            },
+            {
+                path: 'matematika/dbh2/zatikiak/juegos/pizza',
+                element: <PizzaFractions />,
             },
             {
                 path: 'matematika/dbh2/zatikiak/jokuak/pizza',
                 element: <PizzaFractions />,
             },
             {
+                path: 'matematika/dbh2/zatikiak/juegos/memory',
+                element: <FractionMemory />,
+            },
+            {
                 path: 'matematika/dbh2/zatikiak/jokuak/memory',
                 element: <FractionMemory />,
+            },
+            {
+                path: 'matematika/dbh2/zatikiak/juegos/carrera',
+                element: <FractionRace />,
             },
             {
                 path: 'matematika/dbh2/zatikiak/jokuak/carrera',
@@ -264,16 +335,48 @@ export const router = createHashRouter([
                 element: <MissionPageDBH2_Algebra />,
             },
             {
-                path: 'matematika/dbh2/algebra/ariketak',
-                element: <ExercisesPageDBH2_Algebra />,
+                path: 'matematika/dbh2/algebra/misioa',
+                element: <MissionPageDBH2_Algebra />,
             },
             {
                 path: 'matematika/dbh2/algebra/ejercicios',
                 element: <ExercisesPageDBH2_Algebra />,
             },
             {
+                path: 'matematika/dbh2/algebra/ariketak',
+                element: <ExercisesPageDBH2_Algebra />,
+            },
+            {
+                path: 'matematika/dbh2/algebra/juegos',
+                element: <GamesPageDBH2_Algebra />,
+            },
+            {
                 path: 'matematika/dbh2/algebra/jokuak',
                 element: <GamesPageDBH2_Algebra />,
+            },
+            {
+                path: 'matematika/dbh2/ekuazioak',
+                element: <HomePageDBH2_Ekuazioak />,
+            },
+            {
+                path: 'matematika/dbh2/ekuazioak/teoria',
+                element: <TheoryPageDBH2_Ekuazioak />,
+            },
+            {
+                path: 'matematika/dbh2/ekuazioak/laboratorio',
+                element: <LabPageDBH2_Ekuazioak />,
+            },
+            {
+                path: 'matematika/dbh2/ekuazioak/retos',
+                element: <MissionPageDBH2_Ekuazioak />,
+            },
+            {
+                path: 'matematika/dbh2/ekuazioak/ejercicios',
+                element: <ExercisesPageDBH2_Ekuazioak />,
+            },
+            {
+                path: 'matematika/dbh2/ekuazioak/juegos',
+                element: <GamesPageDBH2_Ekuazioak />,
             },
             // Rutas legacy para compatibilidad
             {
@@ -295,4 +398,3 @@ export const router = createHashRouter([
         ],
     },
 ])
-

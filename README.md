@@ -1,73 +1,35 @@
-# React + TypeScript + Vite
+# Matella Studio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Matella Studio es una plataforma educativa React/Vite para construir unidades de Matemática y Natura con teoría, laboratorio, retos, juegos y ejercicios en tres idiomas.
 
-Currently, two official plugins are available:
+## Scripts
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `npm run dev`: servidor local de desarrollo.
+- `npm run build`: validación TypeScript y build de producción.
+- `npm run lint`: revisión ESLint.
+- `npm run preview`: previsualización del build.
+- `npm run deploy`: despliegue a GitHub Pages desde `dist`.
 
-## React Compiler
+## Idiomas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+El idioma fuente del proyecto es `eu` y también es el fallback de i18n. Las traducciones activas están en:
 
-## Expanding the ESLint configuration
+- `src/i18n/locales/eu.json`
+- `src/i18n/locales/es.json`
+- `src/i18n/locales/ar.json`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Cuando se añada contenido nuevo, la fuente debe quedar completa en euskera primero y después sincronizarse a castellano y árabe.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Estructura
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- `src/router`: rutas principales de la aplicación.
+- `src/data`: catálogo de cursos y temas.
+- `src/pages`: páginas por asignatura, curso y unidad.
+- `src/features/games`: juegos reutilizables.
+- `src/features/labs`: laboratorios interactivos reutilizables.
+- `src/components`: componentes comunes.
+- `cursos`: contenido estático legado pendiente de migración progresiva.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Estado Técnico
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+El proyecto usa Rollup WASM (`rollup` alias a `@rollup/wasm-node`) para evitar problemas con binarios nativos de Rollup en entornos macOS restringidos.

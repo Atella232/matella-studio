@@ -67,7 +67,7 @@ export function AreaLab() {
         ctx.fillText(`${t('lab.totalParts')}: ${totalParts}`, padding, height - 10)
         ctx.fillText(`${t('lab.selected')}: ${partsToHighlight}`, padding + 200, height - 10)
 
-    }, [numerator, denominator, totalParts, partsToHighlight])
+    }, [numerator, denominator, totalParts, partsToHighlight, t])
 
     return (
         <div className="area-lab">

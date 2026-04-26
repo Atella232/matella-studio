@@ -14,6 +14,13 @@ interface GameOverModalProps {
     onExit: () => void
 }
 
+const CONFETTI_COLORS = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff']
+
+function seededRandom(seed: number): number {
+    const value = Math.sin(seed * 999) * 10000
+    return value - Math.floor(value)
+}
+
 export function GameOverModal({
     stars,
     score,
@@ -50,9 +57,9 @@ export function GameOverModal({
 
         return Array.from({ length: 50 }, (_, i) => ({
             id: i,
-            left: `${Math.random() * 100}%`,
-            delay: `${Math.random() * 2}s`,
-            color: ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff'][Math.floor(Math.random() * 5)]
+            left: `${seededRandom(i + 1) * 100}%`,
+            delay: `${seededRandom(i + 101) * 2}s`,
+            color: CONFETTI_COLORS[Math.floor(seededRandom(i + 201) * CONFETTI_COLORS.length)]
         }))
     }, [stars])
 

@@ -413,6 +413,7 @@ export function GamesPage() {
     const [repartoLocked, setRepartoLocked] = useState(false)
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setRepartoChallenge(generateRepartoChallenge(lang))
         setRepartoQ('')
         setRepartoR('')
@@ -703,4 +704,3 @@ export function GamesPage() {
         </div>
     )
 }
-

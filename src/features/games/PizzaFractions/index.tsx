@@ -20,7 +20,7 @@ export function PizzaFractions() {
         avatar: getRandomCustomer(),
         mood: state.feedbackType === 'correct' ? 'celebrating' as const :
             state.feedbackType === 'incorrect' ? 'confused' as const : 'neutral' as const
-    }), [state.currentOrder, state.feedbackType])
+    }), [state.feedbackType])
 
     // Calculate earned score for display
     const earnedScore = useMemo(() => {

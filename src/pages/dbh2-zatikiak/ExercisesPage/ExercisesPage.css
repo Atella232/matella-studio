@@ -1,0 +1,290 @@
+.fraction-exercises-page {
+    min-height: 100vh;
+    padding: 28px 0 80px;
+    background:
+        radial-gradient(circle at top left, rgba(20, 184, 166, 0.2), transparent 24%),
+        radial-gradient(circle at top right, rgba(244, 114, 182, 0.12), transparent 24%),
+        linear-gradient(135deg, #10231f 0%, #18243a 52%, #2b1c32 100%);
+}
+
+.exercises-shell {
+    max-width: 1280px;
+}
+
+.exercises-page-header {
+    margin: 0 0 20px;
+}
+
+.exercises-page-header .section-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(94, 234, 212, 0.25);
+    background: rgba(45, 212, 191, 0.12);
+    color: #d8fff8;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.exercises-page-header h1 {
+    margin: 14px 0 8px;
+    color: #fbfcff;
+    font-size: clamp(2.3rem, 5vw, 4rem);
+    line-height: 1.02;
+}
+
+.exercises-page-header p {
+    margin: 0;
+    color: rgba(228, 234, 248, 0.84);
+    font-size: 1.1rem;
+    line-height: 1.55;
+}
+
+.exercise-group-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.exercise-group {
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    background: rgba(19, 28, 48, 0.96);
+    box-shadow: 0 14px 40px rgba(7, 9, 24, 0.2);
+}
+
+.exercise-group-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 18px 20px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.exercise-group.open .exercise-group-head {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.exercise-group-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+.exercise-group-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #14b8a6 0%, #0f766e 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    color: #effffb;
+    font-size: 0.74rem;
+    font-weight: 800;
+    text-transform: lowercase;
+}
+
+.exercise-group-copy {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+    min-width: 0;
+}
+
+.exercise-group-copy h2 {
+    margin: 0;
+    color: #f7f8ff;
+    font-size: clamp(1.2rem, 2vw, 1.65rem);
+    line-height: 1.1;
+}
+
+.exercise-group-copy p {
+    margin: 0;
+    color: rgba(159, 173, 198, 0.86);
+    font-size: 0.95rem;
+}
+
+.exercise-group-arrow {
+    flex-shrink: 0;
+    color: rgba(173, 187, 214, 0.8);
+    font-size: 1.3rem;
+    line-height: 1;
+}
+
+.exercise-group-body {
+    padding: 26px 20px 20px;
+}
+
+.exercise-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.exercise-item-card {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 222px;
+    padding: 26px 26px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    background: rgba(26, 39, 66, 0.98);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+.exercise-item-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.exercise-item-number {
+    color: rgba(159, 173, 198, 0.88);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.exercise-item-level {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    padding: 0 14px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.exercise-item-level.easy {
+    background: rgba(10, 119, 108, 0.34);
+    color: #18dfaa;
+}
+
+.exercise-item-level.medium {
+    background: rgba(120, 95, 25, 0.4);
+    color: #efc147;
+}
+
+.exercise-item-level.hard {
+    background: rgba(113, 33, 60, 0.4);
+    color: #ff6f92;
+}
+
+.exercise-item-question,
+.exercise-item-solution-body {
+    color: #eef1fb;
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.exercise-item-question .math-text,
+.exercise-item-solution-body .math-text {
+    white-space: pre-line;
+}
+
+.exercise-item-action {
+    width: 100%;
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 46px;
+    padding: 0 18px;
+    border: 1px solid rgba(45, 212, 191, 0.36);
+    border-radius: 12px;
+    background: rgba(20, 184, 166, 0.2);
+    color: #8af4e7;
+    font-size: 0.98rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+}
+
+.exercise-item-action:hover {
+    transform: translateY(-1px);
+    background: rgba(20, 184, 166, 0.32);
+    border-color: rgba(94, 234, 212, 0.58);
+}
+
+.exercise-item-action-icon {
+    color: #f2c5aa;
+    font-size: 0.82rem;
+}
+
+.exercise-item-solution {
+    padding: 14px 16px;
+    border: 1px solid rgba(45, 212, 191, 0.22);
+    border-radius: 14px;
+    background: rgba(15, 118, 110, 0.2);
+}
+
+.exercise-item-solution-label {
+    margin-bottom: 8px;
+    color: #9af7ec;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+html[dir="rtl"] .exercise-group-head,
+html[dir="rtl"] .exercise-item-top {
+    text-align: right;
+}
+
+html[dir="rtl"] .exercise-group-head {
+    flex-direction: row-reverse;
+}
+
+@media (max-width: 980px) {
+    .exercise-cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .fraction-exercises-page {
+        padding: 20px 0 56px;
+    }
+
+    .exercise-group-head {
+        align-items: flex-start;
+    }
+
+    .exercise-group-title,
+    .exercise-group-copy,
+    .exercise-item-top {
+        align-items: flex-start;
+    }
+
+    .exercise-cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .exercise-item-card {
+        padding: 20px;
+    }
+}

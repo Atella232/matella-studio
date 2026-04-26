@@ -1,2 +1,0 @@
-﻿src/features/games/FractionRace/utils/fractions.ts(129,44): error TS2345: Argument of type 'Fraction | MixedNumber' is not assignable to parameter of type 'MixedNumber'.
-  Property 'whole' is missing in type 'Fraction' but required in type 'MixedNumber'.

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, RefreshCw, CheckCircle, XCircle, Lightbulb } from 'lucide-react';
@@ -18,9 +18,43 @@ interface GeometryProblem {
     area: number;
 }
 
+const createProblem = (): GeometryProblem => {
+    const types: ShapeType[] = ['square', 'rectangle', 'triangle', 'circle'];
+    const type = types[Math.floor(Math.random() * types.length)];
+    const dimensions: GeometryProblem['dimensions'] = {};
+    let area = 0;
+
+    switch (type) {
+        case 'square':
+            dimensions.side = Math.floor(Math.random() * 10) + 2;
+            area = dimensions.side * dimensions.side;
+            break;
+        case 'rectangle':
+            dimensions.base = Math.floor(Math.random() * 10) + 3;
+            dimensions.height = Math.floor(Math.random() * 8) + 2;
+            if (dimensions.base === dimensions.height) dimensions.base += 1;
+            area = dimensions.base * dimensions.height;
+            break;
+        case 'triangle':
+            dimensions.base = Math.floor(Math.random() * 8) + 2;
+            dimensions.height = Math.floor(Math.random() * 8) + 2;
+            if ((dimensions.base * dimensions.height) % 2 !== 0) {
+                dimensions.base += 1;
+            }
+            area = (dimensions.base * dimensions.height) / 2;
+            break;
+        case 'circle':
+            dimensions.radius = Math.floor(Math.random() * 5) + 2;
+            area = Math.round(Math.PI * dimensions.radius * dimensions.radius);
+            break;
+    }
+
+    return { type, dimensions, area };
+};
+
 export function LabPage() {
     const { t } = useTranslation();
-    const [problem, setProblem] = useState<GeometryProblem | null>(null);
+    const [problem, setProblem] = useState<GeometryProblem | null>(() => createProblem());
     const [userAnswer, setUserAnswer] = useState<string>('');
     const [feedback, setFeedback] = useState<'idle' | 'success' | 'error'>('idle');
     const [showSolution, setShowSolution] = useState(false);
@@ -28,37 +62,7 @@ export function LabPage() {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const generateProblem = () => {
-        const types: ShapeType[] = ['square', 'rectangle', 'triangle', 'circle'];
-        const type = types[Math.floor(Math.random() * types.length)];
-        let dimensions: any = {};
-        let area = 0;
-
-        switch (type) {
-            case 'square':
-                dimensions.side = Math.floor(Math.random() * 10) + 2;
-                area = dimensions.side * dimensions.side;
-                break;
-            case 'rectangle':
-                dimensions.base = Math.floor(Math.random() * 10) + 3;
-                dimensions.height = Math.floor(Math.random() * 8) + 2;
-                if (dimensions.base === dimensions.height) dimensions.base += 1;
-                area = dimensions.base * dimensions.height;
-                break;
-            case 'triangle':
-                dimensions.base = Math.floor(Math.random() * 8) + 2;
-                dimensions.height = Math.floor(Math.random() * 8) + 2;
-                if ((dimensions.base * dimensions.height) % 2 !== 0) {
-                    dimensions.base += 1;
-                }
-                area = (dimensions.base * dimensions.height) / 2;
-                break;
-            case 'circle':
-                dimensions.radius = Math.floor(Math.random() * 5) + 2;
-                area = Math.round(Math.PI * dimensions.radius * dimensions.radius);
-                break;
-        }
-
-        setProblem({ type, dimensions, area });
+        setProblem(createProblem());
         setUserAnswer('');
         setFeedback('idle');
         setShowSolution(false);
@@ -67,10 +71,6 @@ export function LabPage() {
             inputRef.current.focus();
         }
     };
-
-    useEffect(() => {
-        generateProblem();
-    }, []);
 
     const checkAnswer = () => {
         if (!problem) return;

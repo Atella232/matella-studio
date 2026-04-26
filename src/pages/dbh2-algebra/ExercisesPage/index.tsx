@@ -1,14 +1,9 @@
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MathText } from '../../../components/MathText'
-import { normalizeInlineMath } from '../../../utils/fixText'
 import { normalizeAlgebraLang, pickText } from '../content'
 import { algebraExerciseSections } from '../exercisesData'
 import './ExercisesPage.css'
-
-function formatExerciseText(text: string) {
-    return normalizeInlineMath(text)
-}
 
 function getSectionBadge(sectionId: string) {
     switch (sectionId) {
@@ -113,7 +108,7 @@ export function ExercisesPage() {
                                                         </div>
 
                                                         <div className="exercise-item-question">
-                                                            <MathText text={formatExerciseText(pickText(lang, item.question))} />
+                                                            <MathText text={pickText(lang, item.question)} />
                                                         </div>
 
                                                         <button
@@ -129,7 +124,7 @@ export function ExercisesPage() {
                                                             <div className="exercise-item-solution">
                                                                 <div className="exercise-item-solution-label">{labels.solution}</div>
                                                                 <div className="exercise-item-solution-body">
-                                                                    <MathText text={formatExerciseText(pickText(lang, item.solution))} />
+                                                                    <MathText text={pickText(lang, item.solution)} />
                                                                 </div>
                                                             </div>
                                                         )}

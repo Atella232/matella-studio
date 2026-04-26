@@ -73,7 +73,7 @@ const COPY: Record<Lang, HomeCopy> = {
                 title: 'Jokuak',
                 description:
                     '3 juegos para entrenar valor posicional, parentesis tacticos y division entera en contexto.',
-                href: '/matematika/dbh1/zenbaki-naturalak/jokuak',
+                href: '/matematika/dbh1/zenbaki-naturalak/juegos',
                 link: 'Abrir jokuak ->'
             },
             {
@@ -142,7 +142,7 @@ const COPY: Record<Lang, HomeCopy> = {
                 title: 'Jokuak',
                 description:
                     '3 joko: balio posizionala, parentesi taktikoak eta zatiketa osoa testuinguruan lantzeko.',
-                href: '/matematika/dbh1/zenbaki-naturalak/jokuak',
+                href: '/matematika/dbh1/zenbaki-naturalak/juegos',
                 link: 'Jokuak ireki ->'
             },
             {
@@ -211,7 +211,7 @@ const COPY: Record<Lang, HomeCopy> = {
                 title: 'الألعاب',
                 description:
                     '3 ألعاب لتدريب القيمة المكانية، الأقواس التكتيكية والقسمة الإقليدية في سياق.',
-                href: '/matematika/dbh1/zenbaki-naturalak/jokuak',
+                href: '/matematika/dbh1/zenbaki-naturalak/juegos',
                 link: 'افتح الألعاب ->'
             },
             {
@@ -278,7 +278,7 @@ export function HomePage() {
                         <Link to="/matematika/dbh1/zenbaki-naturalak/retos" className="btn btn-secondary">
                             🎯 {copy.ctas.missions}
                         </Link>
-                        <Link to="/matematika/dbh1/zenbaki-naturalak/jokuak" className="btn btn-secondary">
+                        <Link to="/matematika/dbh1/zenbaki-naturalak/juegos" className="btn btn-secondary">
                             🎮 {copy.ctas.games}
                         </Link>
                     </div>

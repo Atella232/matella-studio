@@ -9,6 +9,11 @@ interface PizzaProps {
     disabled?: boolean
 }
 
+function seededRandom(seed: number): number {
+    const value = Math.sin(seed * 997) * 10000
+    return value - Math.floor(value)
+}
+
 export function Pizza({ denominator, selectedSlices, onSliceClick, disabled = false }: PizzaProps) {
     const size = 300
     const center = size / 2
@@ -26,7 +31,7 @@ export function Pizza({ denominator, selectedSlices, onSliceClick, disabled = fa
 
     // Generate random toppings for each slice
     const toppings = useMemo(() => {
-        const allToppings: { cx: number; cy: number; type: 'pepperoni' | 'olive' | 'mushroom'; sliceIndex: number }[] = []
+        const allToppings: { cx: number; cy: number; rotation: number; type: 'pepperoni' | 'olive' | 'mushroom'; sliceIndex: number }[] = []
 
         slices.forEach((_, sliceIndex) => {
             const anglePerSlice = (2 * Math.PI) / denominator
@@ -35,7 +40,8 @@ export function Pizza({ denominator, selectedSlices, onSliceClick, disabled = fa
             // Add 2-3 toppings per slice at different distances from center
             const distances = [0.4, 0.6, 0.75]
             distances.forEach((dist, i) => {
-                const offsetAngle = midAngle + (Math.random() - 0.5) * anglePerSlice * 0.5
+                const seed = denominator * 100 + sliceIndex * 10 + i
+                const offsetAngle = midAngle + (seededRandom(seed) - 0.5) * anglePerSlice * 0.5
                 const cx = center + radius * dist * Math.cos(offsetAngle)
                 const cy = center + radius * dist * Math.sin(offsetAngle)
                 const types: ('pepperoni' | 'olive' | 'mushroom')[] = ['pepperoni', 'olive', 'mushroom']
@@ -43,6 +49,7 @@ export function Pizza({ denominator, selectedSlices, onSliceClick, disabled = fa
                 allToppings.push({
                     cx,
                     cy,
+                    rotation: seededRandom(seed + 500) * 360,
                     type: types[i % 3],
                     sliceIndex
                 })
@@ -108,9 +115,9 @@ export function Pizza({ denominator, selectedSlices, onSliceClick, disabled = fa
                             <circle
                                 key={`topping-${i}`}
                                 className="topping-pepperoni"
-                                cx={topping.cx}
-                                cy={topping.cy}
-                                r={8}
+                            cx={topping.cx}
+                            cy={topping.cy}
+                            r={8}
                             />
                         )
                     }
@@ -133,7 +140,7 @@ export function Pizza({ denominator, selectedSlices, onSliceClick, disabled = fa
                             cy={topping.cy}
                             rx={7}
                             ry={5}
-                            transform={`rotate(${Math.random() * 360} ${topping.cx} ${topping.cy})`}
+                            transform={`rotate(${topping.rotation} ${topping.cx} ${topping.cy})`}
                         />
                     )
                 })}

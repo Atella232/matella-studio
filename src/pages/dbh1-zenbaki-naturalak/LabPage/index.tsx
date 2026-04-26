@@ -331,7 +331,7 @@ const FORMULAS: Record<Lang, Record<ToolId, string>> = {
         comparador: '$$A ? B$$ comparando desde la izquierda',
         redondeo: 'si siguiente < 5 mantiene; si >= 5 aumenta',
         operaciones: 'exacto + estimacion para validar plausibilidad',
-        division: '$$D = d\cdot c + r,\ 0 \le r < d$$',
+        division: '$$D = d\\cdot c + r,\\ 0 \\le r < d$$',
         detector: '$$(\\ ) \\to \\times/\\div \\to +,-$$',
         sandbox: 'modelo numerico de un enunciado'
     },
@@ -341,7 +341,7 @@ const FORMULAS: Record<Lang, Record<ToolId, string>> = {
         comparador: '$$A ? B$$ ezkerretik konparatuz',
         redondeo: 'hurrengoa < 5 mantendu; >= 5 igo',
         operaciones: 'zehatza + estimazioa, egiaztatzeko',
-        division: '$$D = d\cdot c + r,\ 0 \le r < d$$',
+        division: '$$D = d\\cdot c + r,\\ 0 \\le r < d$$',
         detector: '$$(\\ ) \\to \\times/\\div \\to +,-$$',
         sandbox: 'enuntziatu baten eredu numerikoa'
     },
@@ -351,7 +351,7 @@ const FORMULAS: Record<Lang, Record<ToolId, string>> = {
         comparador: '$$A ? B$$ بالمقارنة من اليسار',
         redondeo: 'إذا التالي < 5 نبقي، وإذا >= 5 نزيد',
         operaciones: 'ناتج دقيق + تقدير للتحقق',
-        division: '$$D = d\cdot c + r,\ 0 \le r < d$$',
+        division: '$$D = d\\cdot c + r,\\ 0 \\le r < d$$',
         detector: '$$(\\ ) \\to \\times/\\div \\to +,-$$',
         sandbox: 'نموذج عددي لوضعية لفظية'
     }

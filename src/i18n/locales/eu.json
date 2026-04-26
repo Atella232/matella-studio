@@ -65,6 +65,10 @@
                 "description": "Ebatzi benetako arazoak \"Baserri Logika\" bezala, non zatikiek zentzua hartzen duten.",
                 "link": "Ikusi misioak →"
             },
+            "exercises": {
+                "description": "Azpigai eta mailaka antolatutako ariketak, urratsez urratseko soluzioekin.",
+                "link": "Praktikatu →"
+            },
             "games": {
                 "description": "Joko interaktiboak zatikiak modu dibertigarrian praktikatzeko.",
                 "link": "Jokatu →"

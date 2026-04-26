@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { TFunction } from 'i18next'
 import './MissionPage.css'
 
 type Difficulty = 'hasiberria' | 'aurreratua' | 'maisu'
@@ -16,7 +17,7 @@ interface Challenge {
     points: number
 }
 
-const getChallenges = (t: any): Challenge[] => [
+const getChallenges = (t: TFunction): Challenge[] => [
     // HASIBERRIA (Principiante) - 4 desafíos
     {
         id: 1,
@@ -163,7 +164,7 @@ const getChallenges = (t: any): Challenge[] => [
     }
 ]
 
-const getDifficultyConfig = (t: any) => ({
+const getDifficultyConfig = (t: TFunction) => ({
     hasiberria: {
         label: t('missions.levels.hasiberria.label'),
         sublabel: t('missions.levels.hasiberria.sublabel'),

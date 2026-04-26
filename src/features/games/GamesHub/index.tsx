@@ -18,7 +18,7 @@ const GAMES: GameInfo[] = [
         icon: '🍕',
         titleKey: 'games.pizzaFractions.title',
         descriptionKey: 'games.pizzaFractions.description',
-        path: '/matematika/dbh2/zatikiak/jokuak/pizza',
+        path: '/matematika/dbh2/zatikiak/juegos/pizza',
         tags: ['easyHard'],
         objectives: ['partOfWhole']
     },
@@ -27,7 +27,7 @@ const GAMES: GameInfo[] = [
         icon: '🃏',
         titleKey: 'games.fractionMemory.title',
         descriptionKey: 'games.fractionMemory.description',
-        path: '/matematika/dbh2/zatikiak/jokuak/memory',
+        path: '/matematika/dbh2/zatikiak/juegos/memory',
         tags: ['easyExpert'],
         objectives: ['equivalences']
     },
@@ -36,7 +36,7 @@ const GAMES: GameInfo[] = [
         icon: '🏎️',
         titleKey: 'games.fractionRace.title',
         descriptionKey: 'games.fractionRace.description',
-        path: '/matematika/dbh2/zatikiak/jokuak/carrera',
+        path: '/matematika/dbh2/zatikiak/juegos/carrera',
         tags: ['easyHard'],
         objectives: ['operations']
     }

@@ -36,7 +36,7 @@ export function HomePage() {
                         <div className="feature-icon">🧪</div>
                         <h3>{t('nav.lab')}</h3>
                         <p>{t('taulakGrafikoak.lab.subtitle')}</p>
-                        <Link to="/matematika/dbh1/estadistica/laborategia" className="feature-link">{t('taulakGrafikoak.lab.title')} →</Link>
+                        <Link to="/matematika/dbh1/estadistica/laboratorio" className="feature-link">{t('taulakGrafikoak.lab.title')} →</Link>
                     </article>
                 </section>
             </div>

@@ -4,6 +4,41 @@ import './OperationsLab.css'
 
 type Operation = 'add' | 'subtract'
 
+function drawFractionBar(
+    ctx: CanvasRenderingContext2D,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    numerator: number,
+    denominator: number,
+    fillColor: string,
+    strokeColor: string
+) {
+    const segmentWidth = width / denominator
+
+    // Draw filled segments
+    for (let i = 0; i < numerator && i < denominator; i++) {
+        ctx.fillStyle = fillColor
+        ctx.fillRect(x + i * segmentWidth + 1, y + 1, segmentWidth - 2, height - 2)
+    }
+
+    // Draw segment borders
+    for (let i = 0; i <= denominator; i++) {
+        ctx.strokeStyle = strokeColor
+        ctx.lineWidth = 2
+        ctx.beginPath()
+        ctx.moveTo(x + i * segmentWidth, y)
+        ctx.lineTo(x + i * segmentWidth, y + height)
+        ctx.stroke()
+    }
+
+    // Draw outer border
+    ctx.strokeStyle = strokeColor
+    ctx.lineWidth = 3
+    ctx.strokeRect(x, y, width, height)
+}
+
 export function OperationsLab() {
     const { t } = useTranslation()
     const [num1, setNum1] = useState(1)
@@ -85,42 +120,7 @@ export function OperationsLab() {
         ctx.font = 'bold 20px Inter, sans-serif'
         ctx.fillText(`${simplifiedNum}/${simplifiedDen}`, startX + barWidth / 2, y3 + barHeight + 30)
 
-    }, [num1, den1, num2, den2, operation, resultNum, simplifiedNum, simplifiedDen])
-
-    function drawFractionBar(
-        ctx: CanvasRenderingContext2D,
-        x: number,
-        y: number,
-        width: number,
-        height: number,
-        numerator: number,
-        denominator: number,
-        fillColor: string,
-        strokeColor: string
-    ) {
-        const segmentWidth = width / denominator
-
-        // Draw filled segments
-        for (let i = 0; i < numerator && i < denominator; i++) {
-            ctx.fillStyle = fillColor
-            ctx.fillRect(x + i * segmentWidth + 1, y + 1, segmentWidth - 2, height - 2)
-        }
-
-        // Draw segment borders
-        for (let i = 0; i <= denominator; i++) {
-            ctx.strokeStyle = strokeColor
-            ctx.lineWidth = 2
-            ctx.beginPath()
-            ctx.moveTo(x + i * segmentWidth, y)
-            ctx.lineTo(x + i * segmentWidth, y + height)
-            ctx.stroke()
-        }
-
-        // Draw outer border
-        ctx.strokeStyle = strokeColor
-        ctx.lineWidth = 3
-        ctx.strokeRect(x, y, width, height)
-    }
+    }, [num1, den1, num2, den2, operation, resultNum, resultDen, simplifiedNum, simplifiedDen])
 
     return (
         <div className="operations-lab">

@@ -128,6 +128,37 @@ export function useGameState() {
         }, 3000)
     }, [])
 
+    const nextQuestion = useCallback(() => {
+        setState(prev => {
+            // Check if race is over
+            const isLastQuestion = prev.questionNumber >= prev.totalQuestions
+            const playerFinished = prev.racers.find(r => r.isPlayer)?.position === 100
+
+            if (isLastQuestion || playerFinished) {
+                return {
+                    ...prev,
+                    phase: 'finished',
+                    showFeedback: false,
+                    turboActive: false
+                }
+            }
+
+            // Generate next question
+            const nextQ = generateOperation(prev.level)
+
+            return {
+                ...prev,
+                questionNumber: prev.questionNumber + 1,
+                currentQuestion: nextQ,
+                answerOptions: generateAnswerOptions(nextQ, prev.level),
+                questionStartTime: Date.now(),
+                showFeedback: false,
+                lastAnswerCorrect: null,
+                turboActive: prev.combo >= SCORE_CONFIG.turboThreshold
+            }
+        })
+    }, [])
+
     const answerQuestion = useCallback((answerId: string) => {
         setState(prev => {
             if (prev.showFeedback || !prev.currentQuestion) return prev
@@ -201,38 +232,7 @@ export function useGameState() {
         setTimeout(() => {
             nextQuestion()
         }, 1500)
-    }, [])
-
-    const nextQuestion = useCallback(() => {
-        setState(prev => {
-            // Check if race is over
-            const isLastQuestion = prev.questionNumber >= prev.totalQuestions
-            const playerFinished = prev.racers.find(r => r.isPlayer)?.position === 100
-
-            if (isLastQuestion || playerFinished) {
-                return {
-                    ...prev,
-                    phase: 'finished',
-                    showFeedback: false,
-                    turboActive: false
-                }
-            }
-
-            // Generate next question
-            const nextQ = generateOperation(prev.level)
-
-            return {
-                ...prev,
-                questionNumber: prev.questionNumber + 1,
-                currentQuestion: nextQ,
-                answerOptions: generateAnswerOptions(nextQ, prev.level),
-                questionStartTime: Date.now(),
-                showFeedback: false,
-                lastAnswerCorrect: null,
-                turboActive: prev.combo >= SCORE_CONFIG.turboThreshold
-            }
-        })
-    }, [])
+    }, [nextQuestion])
 
     const resetGame = useCallback(() => {
         if (timerRef.current) clearInterval(timerRef.current)

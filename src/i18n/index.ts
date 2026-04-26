@@ -6,6 +6,8 @@ import es from './locales/es.json'
 import eu from './locales/eu.json'
 import ar from './locales/ar.json'
 
+export const SOURCE_LANGUAGE = 'eu'
+
 i18n
     .use(LanguageDetector)
     .use(initReactI18next)
@@ -15,7 +17,7 @@ i18n
             eu: { translation: eu },
             ar: { translation: ar },
         },
-        fallbackLng: 'eu',
+        fallbackLng: SOURCE_LANGUAGE,
         interpolation: {
             escapeValue: false,
         },

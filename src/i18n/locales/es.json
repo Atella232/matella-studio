@@ -65,6 +65,10 @@
                 "description": "Resuelve problemas reales como \"Baserri Logic\" donde las fracciones cobran sentido.",
                 "link": "Ver misiones →"
             },
+            "exercises": {
+                "description": "Ejercicios graduados por subtema con solución paso a paso.",
+                "link": "Practicar →"
+            },
             "games": {
                 "description": "Juegos interactivos para practicar fracciones de forma divertida.",
                 "link": "Jugar →"

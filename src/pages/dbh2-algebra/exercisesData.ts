@@ -178,9 +178,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                     "ar": "\u0623\u0634\u0631 \u0625\u0644\u0649 \u0627\u0644\u0645\u0639\u0627\u0645\u0644 \u0648\u0627\u0644\u062c\u0632\u0621 \u0627\u0644\u062d\u0631\u0641\u064a \u0648\u062f\u0631\u062c\u0629 \\(5x^2yz\\)."
                 },
                 "solution": {
-                    "eu": "Coeficiente: \\(5\\) | Parte literal: \\(x^2yz\\) | Grado: \\(4\\)",
+                    "eu": "Koefizientea: \\(5\\) | Zati literala: \\(x^2yz\\) | Gradua: \\(4\\)",
                     "es": "Coeficiente: \\(5\\) | Parte literal: \\(x^2yz\\) | Grado: \\(4\\)",
-                    "ar": "Coeficiente: \\(5\\) | Parte literal: \\(x^2yz\\) | Grado: \\(4\\)"
+                    "ar": "المعامل: \\(5\\) | الجزء الحرفي: \\(x^2yz\\) | الدرجة: \\(4\\)"
                 }
             },
             {
@@ -220,9 +220,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                     "ar": "\u0647\u0644 \\(-3ab^2\\) \u0648 \\(2ab^2\\) \u062d\u062f\u0648\u062f \u0645\u062a\u0645\u0627\u062b\u0644\u0629\u061f \u0639\u0644\u0644."
                 },
                 "solution": {
-                    "eu": "S\u00ed, tienen la misma parte literal \\(ab^2\\)",
+                    "eu": "Bai, zati literal bera dute: \\(ab^2\\).",
                     "es": "S\u00ed, tienen la misma parte literal \\(ab^2\\)",
-                    "ar": "S\u00ed, tienen la misma parte literal \\(ab^2\\)"
+                    "ar": "نعم، لهما الجزء الحرفي نفسه: \\(ab^2\\)."
                 }
             },
             {
@@ -234,9 +234,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                     "ar": "\u0623\u064a\u0647\u0627 \u0645\u062a\u0645\u0627\u062b\u0644\u0629\u061f \\(3x^2\\)\u060c \\(-2x^2\\)\u060c \\(5xy\\)\u060c \\(x^2\\)\u060c \\(-7xy\\)"
                 },
                 "solution": {
-                    "eu": "\\(3x^2, -2x^2, x^2\\) son semejantes entre s\u00ed. \\(5xy\\) y \\(-7xy\\) son semejantes entre s\u00ed.",
+                    "eu": "\\(3x^2, -2x^2, x^2\\) antzekoak dira. \\(5xy\\) eta \\(-7xy\\) ere antzekoak dira.",
                     "es": "\\(3x^2, -2x^2, x^2\\) son semejantes entre s\u00ed. \\(5xy\\) y \\(-7xy\\) son semejantes entre s\u00ed.",
-                    "ar": "\\(3x^2, -2x^2, x^2\\) son semejantes entre s\u00ed. \\(5xy\\) y \\(-7xy\\) son semejantes entre s\u00ed."
+                    "ar": "\\(3x^2, -2x^2, x^2\\) حدود متشابهة. و\\(5xy\\) و \\(-7xy\\) حدود متشابهة أيضًا."
                 }
             },
             {
@@ -248,9 +248,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                     "ar": "\u0623\u0643\u0645\u0644: \u0627\u0644\u062d\u062f \\(6n^4\\): \u0627\u0644\u0645\u0639\u0627\u0645\u0644 ___\u060c \u0627\u0644\u062c\u0632\u0621 \u0627\u0644\u062d\u0631\u0641\u064a ___\u060c \u0627\u0644\u062f\u0631\u062c\u0629 ___."
                 },
                 "solution": {
-                    "eu": "Coeficiente: \\(6\\) | Parte literal: \\(n^4\\) | Grado: \\(4\\)",
+                    "eu": "Koefizientea: \\(6\\) | Zati literala: \\(n^4\\) | Gradua: \\(4\\)",
                     "es": "Coeficiente: \\(6\\) | Parte literal: \\(n^4\\) | Grado: \\(4\\)",
-                    "ar": "Coeficiente: \\(6\\) | Parte literal: \\(n^4\\) | Grado: \\(4\\)"
+                    "ar": "المعامل: \\(6\\) | الجزء الحرفي: \\(n^4\\) | الدرجة: \\(4\\)"
                 }
             },
             {
@@ -262,9 +262,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                     "ar": "\u0647\u0644 \u064a\u0645\u0643\u0646 \u0644\u062d\u062f \u0623\u062d\u0627\u062f\u064a \u0648\u0645\u0639\u0643\u0648\u0633\u0647 \u0623\u0644\u0627 \u064a\u0643\u0648\u0646\u0627 \u0645\u062a\u0645\u0627\u062b\u0644\u064a\u0646\u061f"
                 },
                 "solution": {
-                    "eu": "No. Siempre tienen la misma parte literal.",
+                    "eu": "Ez. Beti zati literal bera dute.",
                     "es": "No. Siempre tienen la misma parte literal.",
-                    "ar": "No. Siempre tienen la misma parte literal."
+                    "ar": "لا. لهما دائمًا الجزء الحرفي نفسه."
                 }
             },
             {
@@ -276,9 +276,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                     "ar": "\u0627\u0643\u062a\u0628 \u062d\u062f\u064a\u0646 \u0623\u062d\u0627\u062f\u064a\u064a\u0646 \u0645\u062a\u0645\u0627\u062b\u0644\u064a\u0646 \u0645\u0646 \u0627\u0644\u062f\u0631\u062c\u0629 3 \u0641\u064a \\(x\\) \u0648 \\(y\\)."
                 },
                 "solution": {
-                    "eu": "Ej: \\(2x^2y\\) y \\(-5x^2y\\) (cualquier par con parte literal \\(x^2y\\))",
+                    "eu": "Adibidez: \\(2x^2y\\) eta \\(-5x^2y\\) (\\(x^2y\\) zati literala duen edozein bikote).",
                     "es": "Ej: \\(2x^2y\\) y \\(-5x^2y\\) (cualquier par con parte literal \\(x^2y\\))",
-                    "ar": "Ej: \\(2x^2y\\) y \\(-5x^2y\\) (cualquier par con parte literal \\(x^2y\\))"
+                    "ar": "مثال: \\(2x^2y\\) و \\(-5x^2y\\) (أي زوج له الجزء الحرفي \\(x^2y\\))."
                 }
             }
         ]
@@ -429,9 +429,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                     "ar": "\u0635\u062d \u0623\u0645 \u062e\u0637\u0623: a) \\(2a+2a=4a^2\\) b) \\(x^2 \\cdot x^3=x^5\\) c) \\(8x^2y \\div 4xy = 2x\\)"
                 },
                 "solution": {
-                    "eu": "a) Falso: \\(2a+2a=4a\\) | b) Verdadero | c) Verdadero",
+                    "eu": "a) Gezurra: \\(2a+2a=4a\\) | b) Egia | c) Egia",
                     "es": "a) Falso: \\(2a+2a=4a\\) | b) Verdadero | c) Verdadero",
-                    "ar": "a) Falso: \\(2a+2a=4a\\) | b) Verdadero | c) Verdadero"
+                    "ar": "a) خطأ: \\(2a+2a=4a\\) | b) صحيح | c) صحيح"
                 }
             }
         ]
@@ -456,9 +456,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                     "ar": "\u0623\u0634\u0631 \u0625\u0644\u0649 \u062f\u0631\u062c\u0629 \u0648\u062d\u062f \u0645\u0633\u062a\u0642\u0644 \\(P(x)=11x^3-5x^2-3x+7\\)."
                 },
                 "solution": {
-                    "eu": "Grado: \\(3\\) | T\u00e9rmino independiente: \\(7\\)",
+                    "eu": "Gradua: \\(3\\) | Gai independentea: \\(7\\)",
                     "es": "Grado: \\(3\\) | T\u00e9rmino independiente: \\(7\\)",
-                    "ar": "Grado: \\(3\\) | T\u00e9rmino independiente: \\(7\\)"
+                    "ar": "الدرجة: \\(3\\) | الحد المستقل: \\(7\\)"
                 }
             },
             {
@@ -470,9 +470,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                     "ar": "\u0647\u0644 \u0644\u0640 \\(Q(x)=-2x^4+7x^2-x\\) \u062d\u062f \u0645\u0633\u062a\u0642\u0644\u061f \u0645\u0627 \u0647\u064a \u062f\u0631\u062c\u062a\u0647\u061f"
                 },
                 "solution": {
-                    "eu": "No tiene t\u00e9rmino independiente. Grado: \\(4\\)",
+                    "eu": "Ez du gai independenterik. Gradua: \\(4\\)",
                     "es": "No tiene t\u00e9rmino independiente. Grado: \\(4\\)",
-                    "ar": "No tiene t\u00e9rmino independiente. Grado: \\(4\\)"
+                    "ar": "ليس له حد مستقل. الدرجة: \\(4\\)"
                 }
             },
             {
@@ -540,9 +540,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                     "ar": "\u0647\u0644 \u0644\u0640 \\(P(x)=-7xy^2-2x^3y+9x\\) \u062d\u062f \u0645\u0633\u062a\u0642\u0644\u061f"
                 },
                 "solution": {
-                    "eu": "No. Ning\u00fan t\u00e9rmino carece de variables.",
+                    "eu": "Ez. Gai guztiek aldagaiak dituzte.",
                     "es": "No. Ning\u00fan t\u00e9rmino carece de variables.",
-                    "ar": "No. Ning\u00fan t\u00e9rmino carece de variables."
+                    "ar": "لا. كل حد يحتوي على متغيرات."
                 }
             },
             {
@@ -590,9 +590,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                 "id": 2,
                 "difficulty": "medium",
                 "question": {
-                    "eu": "Resta \\(P-Q\\) con \\(P=x^3-4x^2+2x\\) y \\(Q=3x^3-2x^2+1\\).",
+                    "eu": "Kendu \\(P-Q\\), \\(P=x^3-4x^2+2x\\) eta \\(Q=3x^3-2x^2+1\\) izanik.",
                     "es": "Resta \\(P-Q\\) con \\(P=x^3-4x^2+2x\\) y \\(Q=3x^3-2x^2+1\\).",
-                    "ar": "Resta \\(P-Q\\) con \\(P=x^3-4x^2+2x\\) y \\(Q=3x^3-2x^2+1\\)."
+                    "ar": "اطرح \\(P-Q\\)، حيث \\(P=x^3-4x^2+2x\\) و \\(Q=3x^3-2x^2+1\\)."
                 },
                 "solution": {
                     "eu": "\\(-2x^3-2x^2+2x-1\\)",
@@ -604,9 +604,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                 "id": 3,
                 "difficulty": "medium",
                 "question": {
-                    "eu": "Multiplica: \\(3x^2 \\cdot (-2-x^3+x)\\)",
+                    "eu": "Biderkatu: \\(3x^2 \\cdot (-2-x^3+x)\\)",
                     "es": "Multiplica: \\(3x^2 \\cdot (-2-x^3+x)\\)",
-                    "ar": "Multiplica: \\(3x^2 \\cdot (-2-x^3+x)\\)"
+                    "ar": "اضرب: \\(3x^2 \\cdot (-2-x^3+x)\\)"
                 },
                 "solution": {
                     "eu": "\\(-6x^2-3x^5+3x^3\\)",
@@ -674,9 +674,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                 "id": 8,
                 "difficulty": "hard",
                 "question": {
-                    "eu": "Calcula \\(A+B+C\\): \\(A=3x^3-6x^2+4x-2\\), \\(B=x^3-3x+1\\), \\(C=2x^2+4x-5\\).",
+                    "eu": "Kalkulatu \\(A+B+C\\): \\(A=3x^3-6x^2+4x-2\\), \\(B=x^3-3x+1\\), \\(C=2x^2+4x-5\\).",
                     "es": "Calcula \\(A+B+C\\): \\(A=3x^3-6x^2+4x-2\\), \\(B=x^3-3x+1\\), \\(C=2x^2+4x-5\\).",
-                    "ar": "Calcula \\(A+B+C\\): \\(A=3x^3-6x^2+4x-2\\), \\(B=x^3-3x+1\\), \\(C=2x^2+4x-5\\)."
+                    "ar": "احسب \\(A+B+C\\): \\(A=3x^3-6x^2+4x-2\\)، \\(B=x^3-3x+1\\)، \\(C=2x^2+4x-5\\)."
                 },
                 "solution": {
                     "eu": "\\(4x^3-4x^2+5x-6\\)",
@@ -827,9 +827,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                 "id": 8,
                 "difficulty": "medium",
                 "question": {
-                    "eu": "Factoriza: \\(x^2+6x+9\\)",
+                    "eu": "Faktorizatu: \\(x^2+6x+9\\)",
                     "es": "Factoriza: \\(x^2+6x+9\\)",
-                    "ar": "Factoriza: \\(x^2+6x+9\\)"
+                    "ar": "حلّل إلى عوامل: \\(x^2+6x+9\\)"
                 },
                 "solution": {
                     "eu": "\\((x+3)^2\\)",
@@ -841,9 +841,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                 "id": 9,
                 "difficulty": "medium",
                 "question": {
-                    "eu": "Factoriza: \\(4x^2-25\\)",
+                    "eu": "Faktorizatu: \\(4x^2-25\\)",
                     "es": "Factoriza: \\(4x^2-25\\)",
-                    "ar": "Factoriza: \\(4x^2-25\\)"
+                    "ar": "حلّل إلى عوامل: \\(4x^2-25\\)"
                 },
                 "solution": {
                     "eu": "\\((2x+5)(2x-5)\\)",
@@ -855,9 +855,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                 "id": 10,
                 "difficulty": "hard",
                 "question": {
-                    "eu": "Calcula mentalmente \\(99 \\times 101\\) usando productos notables.",
+                    "eu": "Kalkulatu buruz \\(99 \\times 101\\), produktu nabarmenak erabiliz.",
                     "es": "Calcula mentalmente \\(99 \\times 101\\) usando productos notables.",
-                    "ar": "Calcula mentalmente \\(99 \\times 101\\) usando productos notables."
+                    "ar": "احسب ذهنيًا \\(99 \\times 101\\) باستعمال المنتجات الشهيرة."
                 },
                 "solution": {
                     "eu": "\\((100-1)(100+1)=100^2-1^2=10000-1=9999\\)",
@@ -871,7 +871,7 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
         "id": "factor",
         "title": {
             "eu": "Faktore komuna",
-            "es": "Factor com?n",
+            "es": "Factor común",
             "ar": "العامل المشترك"
         },
         "icon": "🔑",
@@ -882,9 +882,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                 "id": 1,
                 "difficulty": "easy",
                 "question": {
-                    "eu": "Extrae factor com\u00fan: \\(6x+9\\)",
+                    "eu": "Atera faktore komuna: \\(6x+9\\)",
                     "es": "Extrae factor com\u00fan: \\(6x+9\\)",
-                    "ar": "Extrae factor com\u00fan: \\(6x+9\\)"
+                    "ar": "استخرج العامل المشترك: \\(6x+9\\)"
                 },
                 "solution": {
                     "eu": "\\(3(2x+3)\\)",
@@ -896,9 +896,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                 "id": 2,
                 "difficulty": "easy",
                 "question": {
-                    "eu": "Extrae factor com\u00fan: \\(4x^2+8x\\)",
+                    "eu": "Atera faktore komuna: \\(4x^2+8x\\)",
                     "es": "Extrae factor com\u00fan: \\(4x^2+8x\\)",
-                    "ar": "Extrae factor com\u00fan: \\(4x^2+8x\\)"
+                    "ar": "استخرج العامل المشترك: \\(4x^2+8x\\)"
                 },
                 "solution": {
                     "eu": "\\(4x(x+2)\\)",
@@ -910,9 +910,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                 "id": 3,
                 "difficulty": "medium",
                 "question": {
-                    "eu": "Extrae factor com\u00fan: \\(5x^2+10xy+15x\\)",
+                    "eu": "Atera faktore komuna: \\(5x^2+10xy+15x\\)",
                     "es": "Extrae factor com\u00fan: \\(5x^2+10xy+15x\\)",
-                    "ar": "Extrae factor com\u00fan: \\(5x^2+10xy+15x\\)"
+                    "ar": "استخرج العامل المشترك: \\(5x^2+10xy+15x\\)"
                 },
                 "solution": {
                     "eu": "\\(5x(x+2y+3)\\)",
@@ -924,9 +924,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                 "id": 4,
                 "difficulty": "medium",
                 "question": {
-                    "eu": "Extrae factor com\u00fan: \\(2a^2-8ab+4a^2b^2\\)",
+                    "eu": "Atera faktore komuna: \\(2a^2-8ab+4a^2b^2\\)",
                     "es": "Extrae factor com\u00fan: \\(2a^2-8ab+4a^2b^2\\)",
-                    "ar": "Extrae factor com\u00fan: \\(2a^2-8ab+4a^2b^2\\)"
+                    "ar": "استخرج العامل المشترك: \\(2a^2-8ab+4a^2b^2\\)"
                 },
                 "solution": {
                     "eu": "\\(2a(a-4b+2ab^2)\\)",
@@ -938,9 +938,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                 "id": 5,
                 "difficulty": "medium",
                 "question": {
-                    "eu": "Extrae factor com\u00fan: \\(6a^2b+3ab^2-9ab\\)",
+                    "eu": "Atera faktore komuna: \\(6a^2b+3ab^2-9ab\\)",
                     "es": "Extrae factor com\u00fan: \\(6a^2b+3ab^2-9ab\\)",
-                    "ar": "Extrae factor com\u00fan: \\(6a^2b+3ab^2-9ab\\)"
+                    "ar": "استخرج العامل المشترك: \\(6a^2b+3ab^2-9ab\\)"
                 },
                 "solution": {
                     "eu": "\\(3ab(2a+b-3)\\)",
@@ -952,9 +952,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                 "id": 6,
                 "difficulty": "hard",
                 "question": {
-                    "eu": "Simplifica: \\(\\dfrac{3x}{2x+xy}\\)",
+                    "eu": "Sinplifikatu: \\(\\dfrac{3x}{2x+xy}\\)",
                     "es": "Simplifica: \\(\\dfrac{3x}{2x+xy}\\)",
-                    "ar": "Simplifica: \\(\\dfrac{3x}{2x+xy}\\)"
+                    "ar": "بسّط: \\(\\dfrac{3x}{2x+xy}\\)"
                 },
                 "solution": {
                     "eu": "\\(\\dfrac{3x}{x(2+y)}=\\dfrac{3}{2+y}\\)",
@@ -966,9 +966,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                 "id": 7,
                 "difficulty": "hard",
                 "question": {
-                    "eu": "Simplifica: \\(\\dfrac{4a}{4a+8b}\\)",
+                    "eu": "Sinplifikatu: \\(\\dfrac{4a}{4a+8b}\\)",
                     "es": "Simplifica: \\(\\dfrac{4a}{4a+8b}\\)",
-                    "ar": "Simplifica: \\(\\dfrac{4a}{4a+8b}\\)"
+                    "ar": "بسّط: \\(\\dfrac{4a}{4a+8b}\\)"
                 },
                 "solution": {
                     "eu": "\\(\\dfrac{4a}{4(a+2b)}=\\dfrac{a}{a+2b}\\)",
@@ -980,9 +980,9 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
                 "id": 8,
                 "difficulty": "medium",
                 "question": {
-                    "eu": "Extrae factor com\u00fan: \\(x+x^2-x^3\\)",
+                    "eu": "Atera faktore komuna: \\(x+x^2-x^3\\)",
                     "es": "Extrae factor com\u00fan: \\(x+x^2-x^3\\)",
-                    "ar": "Extrae factor com\u00fan: \\(x+x^2-x^3\\)"
+                    "ar": "استخرج العامل المشترك: \\(x+x^2-x^3\\)"
                 },
                 "solution": {
                     "eu": "\\(x(1+x-x^2)\\)",

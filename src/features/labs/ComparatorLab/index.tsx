@@ -2,6 +2,47 @@ import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import './ComparatorLab.css'
 
+function drawBar(
+    ctx: CanvasRenderingContext2D,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    value: number,
+    fillColor: string,
+    strokeColor: string
+) {
+    // Background
+    ctx.fillStyle = '#E2E8F0'
+    ctx.fillRect(x, y, width, height)
+
+    // Filled portion
+    const fillWidth = Math.min(value, 1) * width
+    ctx.fillStyle = fillColor
+    ctx.fillRect(x, y, fillWidth, height)
+
+    // Gradient overlay
+    const gradient = ctx.createLinearGradient(x, y, x, y + height)
+    gradient.addColorStop(0, 'rgba(255,255,255,0.3)')
+    gradient.addColorStop(0.5, 'rgba(255,255,255,0)')
+    gradient.addColorStop(1, 'rgba(0,0,0,0.1)')
+    ctx.fillStyle = gradient
+    ctx.fillRect(x, y, fillWidth, height)
+
+    // Border
+    ctx.strokeStyle = strokeColor
+    ctx.lineWidth = 3
+    ctx.strokeRect(x, y, width, height)
+
+    // If value > 1, show overflow indicator
+    if (value > 1) {
+        ctx.fillStyle = '#EF4444'
+        ctx.font = 'bold 14px Inter, sans-serif'
+        ctx.textAlign = 'right'
+        ctx.fillText(`×${value.toFixed(2)}`, x + width - 10, y + height / 2 + 5)
+    }
+}
+
 export function ComparatorLab() {
     const { t } = useTranslation()
     const [num1, setNum1] = useState(2)
@@ -67,47 +108,6 @@ export function ComparatorLab() {
         ctx.fillText(`= ${value2.toFixed(3)}`, startX + barWidth + 80, y2 + barHeight / 2 + 6)
 
     }, [num1, den1, num2, den2, value1, value2, comparison])
-
-    function drawBar(
-        ctx: CanvasRenderingContext2D,
-        x: number,
-        y: number,
-        width: number,
-        height: number,
-        value: number,
-        fillColor: string,
-        strokeColor: string
-    ) {
-        // Background
-        ctx.fillStyle = '#E2E8F0'
-        ctx.fillRect(x, y, width, height)
-
-        // Filled portion
-        const fillWidth = Math.min(value, 1) * width
-        ctx.fillStyle = fillColor
-        ctx.fillRect(x, y, fillWidth, height)
-
-        // Gradient overlay
-        const gradient = ctx.createLinearGradient(x, y, x, y + height)
-        gradient.addColorStop(0, 'rgba(255,255,255,0.3)')
-        gradient.addColorStop(0.5, 'rgba(255,255,255,0)')
-        gradient.addColorStop(1, 'rgba(0,0,0,0.1)')
-        ctx.fillStyle = gradient
-        ctx.fillRect(x, y, fillWidth, height)
-
-        // Border
-        ctx.strokeStyle = strokeColor
-        ctx.lineWidth = 3
-        ctx.strokeRect(x, y, width, height)
-
-        // If value > 1, show overflow indicator
-        if (value > 1) {
-            ctx.fillStyle = '#EF4444'
-            ctx.font = 'bold 14px Inter, sans-serif'
-            ctx.textAlign = 'right'
-            ctx.fillText(`×${value.toFixed(2)}`, x + width - 10, y + height / 2 + 5)
-        }
-    }
 
     const getComparisonMessage = () => {
         if (comparison === '>') return t('lab.comparator.greater')

@@ -1,0 +1,65 @@
+.ekuazioak-games .mode-card {
+    min-height: 150px;
+    border: 1px solid rgba(96, 165, 250, 0.28);
+    background:
+        linear-gradient(135deg, rgba(14, 165, 233, 0.18), rgba(124, 58, 237, 0.14)),
+        rgba(15, 23, 42, 0.72);
+    color: var(--color-text-primary);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.ekuazioak-games .mode-card:hover {
+    border-color: rgba(56, 189, 248, 0.72);
+    transform: translateY(-2px);
+}
+
+.ekuazioak-games .mode-card.active {
+    border-color: #22d3ee;
+    background:
+        linear-gradient(135deg, rgba(34, 211, 238, 0.28), rgba(99, 102, 241, 0.24)),
+        rgba(15, 23, 42, 0.86);
+    box-shadow:
+        0 0 0 1px rgba(34, 211, 238, 0.24),
+        0 18px 42px rgba(14, 165, 233, 0.22);
+}
+
+.ekuazioak-games .game-card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 3.25rem;
+    height: 3.25rem;
+    padding: 0 0.7rem;
+    border: 1px solid rgba(125, 211, 252, 0.36);
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.68);
+    color: #bfdbfe;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: clamp(1rem, 1.8vw, 1.55rem);
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+    text-shadow: none;
+}
+
+.ekuazioak-games .mode-card.active .game-card-icon {
+    border-color: #22d3ee;
+    background:
+        linear-gradient(135deg, rgba(34, 211, 238, 0.28), rgba(99, 102, 241, 0.24)),
+        rgba(15, 23, 42, 0.86);
+    color: var(--color-text-primary);
+}
+
+.ekuazioak-games .game-card-title {
+    color: var(--color-text-primary);
+}
+
+.ekuazioak-games .quiz-option {
+    border-color: rgba(148, 163, 184, 0.24);
+    background: rgba(15, 23, 42, 0.62);
+}
+
+.ekuazioak-games .quiz-option:hover {
+    border-color: rgba(56, 189, 248, 0.58);
+    background: rgba(30, 41, 59, 0.8);
+}

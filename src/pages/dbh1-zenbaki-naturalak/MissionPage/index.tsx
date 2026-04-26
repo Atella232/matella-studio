@@ -61,64 +61,6 @@ function extractNaturalNumbers(input: string) {
     return matches.map((token) => Number(token.replace(/[.,]/g, '')))
 }
 
-function decodeMojibake(input: string) {
-    if (!/[ØÙ]/.test(input)) return input
-    try {
-        const bytes = Uint8Array.from(input, (char) => char.charCodeAt(0))
-        return new TextDecoder('utf-8').decode(bytes)
-    } catch {
-        return input
-    }
-}
-
-function decodeChallengeText(text: ChallengeText): ChallengeText {
-    return {
-        title: decodeMojibake(text.title),
-        statement: decodeMojibake(text.statement),
-        hints: text.hints.map(decodeMojibake),
-        resolution: text.resolution.map(decodeMojibake),
-        finalAnswer: decodeMojibake(text.finalAnswer),
-        typicalError: decodeMojibake(text.typicalError)
-    }
-}
-
-function decodeUiText(text: UiText): UiText {
-    return {
-        title: decodeMojibake(text.title),
-        subtitle: decodeMojibake(text.subtitle),
-        totalPoints: decodeMojibake(text.totalPoints),
-        levelLabel: {
-            nivel1: {
-                ...text.levelLabel.nivel1,
-                label: decodeMojibake(text.levelLabel.nivel1.label),
-                sublabel: decodeMojibake(text.levelLabel.nivel1.sublabel)
-            },
-            nivel2: {
-                ...text.levelLabel.nivel2,
-                label: decodeMojibake(text.levelLabel.nivel2.label),
-                sublabel: decodeMojibake(text.levelLabel.nivel2.sublabel)
-            },
-            nivel3: {
-                ...text.levelLabel.nivel3,
-                label: decodeMojibake(text.levelLabel.nivel3.label),
-                sublabel: decodeMojibake(text.levelLabel.nivel3.sublabel)
-            }
-        },
-        back: decodeMojibake(text.back),
-        writeAnswer: decodeMojibake(text.writeAnswer),
-        check: decodeMojibake(text.check),
-        showHint: decodeMojibake(text.showHint),
-        showResolution: decodeMojibake(text.showResolution),
-        hideResolution: decodeMojibake(text.hideResolution),
-        guided: decodeMojibake(text.guided),
-        finalAnswer: decodeMojibake(text.finalAnswer),
-        typicalError: decodeMojibake(text.typicalError),
-        success: decodeMojibake(text.success),
-        fail: decodeMojibake(text.fail),
-        completed: decodeMojibake(text.completed)
-    }
-}
-
 const META: Array<{ id: number; difficulty: Difficulty; points: number; validate: (answer: string) => boolean }> = [
     { id: 1, difficulty: 'nivel1', points: 10, validate: (a) => normalizeText(a).replace(/[.,]/g, '') === '407205' },
     {
@@ -226,33 +168,27 @@ const UI: Record<Lang, UiText> = {
         completed: 'Erronka osatuta'
     },
     ar: {
-        title: 'Ø§Ù„ØªØ­Ø¯ÙŠØ§Øª: Ø§Ù„Ø£Ø¹Ø¯Ø§Ø¯ Ø§Ù„Ø·Ø¨ÙŠØ¹ÙŠØ©',
-        subtitle: '9 Ù…Ø³Ø§Ø¦Ù„ Ø¨Ù…Ø³ØªÙˆÙŠØ§Øª Ù…Ø¹ ØªÙ„Ù…ÙŠØ­Ø§Øª ØªØ¯Ø±ÙŠØ¬ÙŠØ© ÙˆØ­Ù„ Ù…ÙˆØ¬Ù‘Ù‡.',
-        totalPoints: 'Ù…Ø¬Ù…ÙˆØ¹ Ø§Ù„Ù†Ù‚Ø§Ø·',
+        title: 'التحديات: الأعداد الطبيعية',
+        subtitle: '9 مسائل بمستويات مع تلميحات تدريجية وحل موجّه.',
+        totalPoints: 'مجموع النقاط',
         levelLabel: {
-            nivel1: { label: 'Ø§Ù„Ù…Ø³ØªÙˆÙ‰ 1', sublabel: 'Ø§Ù„Ø£Ø³Ø§Ø³ÙŠØ§Øª', icon: '🌱', color: '#22C55E', bgColor: '#DCFCE7' },
-            nivel2: { label: 'Ø§Ù„Ù…Ø³ØªÙˆÙ‰ 2', sublabel: 'Ø§Ù„ØªØ·Ø¨ÙŠÙ‚', icon: '🔥', color: '#F59E0B', bgColor: '#FEF3C7' },
-            nivel3: { label: 'Ø§Ù„Ù…Ø³ØªÙˆÙ‰ 3', sublabel: 'Ø§Ù„Ø§Ø³ØªØ¯Ù„Ø§Ù„', icon: '⭐', color: '#EF4444', bgColor: '#FEE2E2' }
+            nivel1: { label: 'المستوى 1', sublabel: 'الأساسيات', icon: '🌱', color: '#22C55E', bgColor: '#DCFCE7' },
+            nivel2: { label: 'المستوى 2', sublabel: 'التطبيق', icon: '🔥', color: '#F59E0B', bgColor: '#FEF3C7' },
+            nivel3: { label: 'المستوى 3', sublabel: 'الاستدلال', icon: '⭐', color: '#EF4444', bgColor: '#FEE2E2' }
         },
-        back: '<- Ø±Ø¬ÙˆØ¹',
-        writeAnswer: 'Ø§ÙƒØªØ¨ Ø¥Ø¬Ø§Ø¨ØªÙƒ Ù‡Ù†Ø§',
-        check: 'ØªØ­Ù‚Ù‚',
-        showHint: 'Ø¥Ø¸Ù‡Ø§Ø± ØªÙ„Ù…ÙŠØ­',
-        showResolution: 'Ø¹Ø±Ø¶ Ø§Ù„Ø­Ù„ Ø®Ø·ÙˆØ© Ø¨Ø®Ø·ÙˆØ©',
-        hideResolution: 'Ø¥Ø®ÙØ§Ø¡ Ø§Ù„Ø­Ù„',
-        guided: 'Ø­Ù„ Ù…ÙˆØ¬Ù‘Ù‡',
-        finalAnswer: 'Ø§Ù„Ø¥Ø¬Ø§Ø¨Ø© Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠØ©',
-        typicalError: 'Ø®Ø·Ø£ Ø´Ø§Ø¦Ø¹',
-        success: 'Ø¥Ø¬Ø§Ø¨Ø© ØµØ­ÙŠØ­Ø©',
-        fail: 'Ù„Ø§ ØªØ²Ø§Ù„ ØºÙŠØ± Ù…Ø·Ø§Ø¨Ù‚Ø©. Ø±Ø§Ø¬Ø¹ Ø§Ù„ØªÙ„Ù…ÙŠØ­Ø§Øª ÙˆØ§Ù„Ø®Ø·ÙˆØ§Øª.',
-        completed: 'ØªÙ… Ø¥Ù†Ø¬Ø§Ø² Ø§Ù„ØªØ­Ø¯ÙŠ'
+        back: '<- رجوع',
+        writeAnswer: 'اكتب إجابتك هنا',
+        check: 'تحقق',
+        showHint: 'إظهار تلميح',
+        showResolution: 'عرض الحل خطوة بخطوة',
+        hideResolution: 'إخفاء الحل',
+        guided: 'حل موجّه',
+        finalAnswer: 'الإجابة النهائية',
+        typicalError: 'خطأ شائع',
+        success: 'إجابة صحيحة',
+        fail: 'لا تزال غير مطابقة. راجع التلميحات والخطوات.',
+        completed: 'تم إنجاز التحدي'
     }
-}
-
-const UI_FIXED: Record<Lang, UiText> = {
-    es: UI.es,
-    eu: UI.eu,
-    ar: decodeUiText(UI.ar)
 }
 
 const ES_TEXT: ChallengeText[] = [
@@ -284,7 +220,7 @@ const ES_TEXT: ChallengeText[] = [
         title: 'Nivel 2 - Problema 1: Fruta en cajas',
         statement: '8 cajas de 15 kg y 26 cajas de 8 kg. Cuantos kg en total?',
         hints: ['Separa tipos de caja.', 'Agrupa 20+6.', 'Suma ambos resultados.'],
-        resolution: ['$$8\cdot15 = 120$$', '$$(20+6)\cdot8 = 208$$', 'Total: $$328$$ kg.'],
+        resolution: ['$$8\\cdot15 = 120$$', '$$(20+6)\\cdot8 = 208$$', 'Total: $$328$$ kg.'],
         finalAnswer: '$$328$$ kg',
         typicalError: 'Mezclar todos los datos sin modelo.'
     },
@@ -298,9 +234,9 @@ const ES_TEXT: ChallengeText[] = [
     },
     {
         title: 'Nivel 2 - Problema 3: Jerarquia',
-        statement: 'Resuelve: $$2+3\cdot4$$, $$(2+3)\cdot4$$, $$26-5\cdot(2+3)+6$$.',
+        statement: 'Resuelve: $$2+3\\cdot4$$, $$(2+3)\\cdot4$$, $$26-5\\cdot(2+3)+6$$.',
         hints: ['Parentesis primero.', 'Luego multiplicacion/division.', 'Al final suma/resta.'],
-        resolution: ['$$2+3\cdot4=14$$', '$$(2+3)\cdot4=20$$', '$$26-5\cdot(2+3)+6=7$$'],
+        resolution: ['$$2+3\\cdot4=14$$', '$$(2+3)\\cdot4=20$$', '$$26-5\\cdot(2+3)+6=7$$'],
         finalAnswer: '$$14$$, $$20$$ y $$7$$',
         typicalError: 'Resolver todo en orden de escritura.'
     },
@@ -359,7 +295,7 @@ const EU_TEXT: ChallengeText[] = [
         title: '2. maila - 1. problema: Fruta kutxetan',
         statement: '8 kutxa 15 kg-ko eta 26 kutxa 8 kg-ko. Zenbat kg guztira?',
         hints: ['Bi taldeak bereizi.', '20+6 batu.', 'Bi emaitzak batu.'],
-        resolution: ['$$8\cdot15=120$$', '$$26\cdot8=208$$', 'Guztira: $$328$$ kg'],
+        resolution: ['$$8\\cdot15=120$$', '$$26\\cdot8=208$$', 'Guztira: $$328$$ kg'],
         finalAnswer: '$$328$$ kg',
         typicalError: 'Datuak nahastea eredurik gabe.'
     },
@@ -373,7 +309,7 @@ const EU_TEXT: ChallengeText[] = [
     },
     {
         title: '2. maila - 3. problema: Hierarkia',
-        statement: 'Ebatzi: $$2+3\cdot4$$, $$(2+3)\cdot4$$, $$26-5\cdot(2+3)+6$$.',
+        statement: 'Ebatzi: $$2+3\\cdot4$$, $$(2+3)\\cdot4$$, $$26-5\\cdot(2+3)+6$$.',
         hints: ['Parentesiak lehenik.', 'Ondoren biderketa/zatiketa.', 'Azkenik batuketa/kenketa.'],
         resolution: ['$$14$$, $$20$$ eta $$7$$.'],
         finalAnswer: '$$14$$, $$20$$, $$7$$',
@@ -407,90 +343,88 @@ const EU_TEXT: ChallengeText[] = [
 
 const AR_TEXT: ChallengeText[] = [
     {
-        title: 'Ø§Ù„Ù…Ø³ØªÙˆÙ‰ 1 - Ø§Ù„Ù…Ø³Ø£Ù„Ø© 1: Ø¨Ù†Ø§Ø¡ Ø¹Ø¯Ø¯ÙŠ Ù…ÙˆØ¶Ø¹ÙŠ',
-        statement: 'ÙƒÙˆÙ‘Ù† Ø¹Ø¯Ø¯Ù‹Ø§ Ù…Ù† 6 Ø®Ø§Ù†Ø§Øª Ø¨Ø§Ù„ØªØ±ØªÙŠØ¨: 4ØŒ 0ØŒ 7ØŒ 2ØŒ 0ØŒ 5.',
-        hints: ['Ø¶Ø¹ Ø§Ù„Ø£Ø±Ù‚Ø§Ù… Ø­Ø³Ø¨ Ø§Ù„Ø±ØªØ¨Ø©.', 'Ø§Ù„Ø£ØµÙØ§Ø± Ù„Ù‡Ø§ Ù…ÙˆØ¶Ø¹ Ø£ÙŠØ¶Ù‹Ø§.', 'Ø§Ù„Ø´ÙƒÙ„ Ù‡Ùˆ 4-0-7-2-0-5.'],
-        resolution: ['Ø§Ù„Ø¹Ø¯Ø¯: $$407,205$$.', 'Ø§Ù„ØªØ­Ù„ÙŠÙ„: $$400,000 + 7,000 + 200 + 5$$.'],
+        title: 'المستوى 1 - المسألة 1: بناء عددي موضعي',
+        statement: 'كوّن عددًا من 6 خانات بالترتيب: 4، 0، 7، 2، 0، 5.',
+        hints: ['ضع الأرقام حسب الرتبة.', 'الأصفار لها موضع أيضًا.', 'الشكل هو 4-0-7-2-0-5.'],
+        resolution: ['العدد: $$407,205$$.', 'التحليل: $$400,000 + 7,000 + 200 + 5$$.'],
         finalAnswer: '$$407,205$$',
-        typicalError: 'ÙƒØªØ§Ø¨Ø© $$47,205$$ Ø¨Ø³Ø¨Ø¨ Ø¥Ù‡Ù…Ø§Ù„ Ø±ØªØ¨Ø© Ø¹Ø´Ø±Ø§Øª Ø§Ù„Ø£Ù„ÙˆÙ.'
+        typicalError: 'كتابة $$47,205$$ بسبب إهمال رتبة عشرات الألوف.'
     },
     {
-        title: 'Ø§Ù„Ù…Ø³ØªÙˆÙ‰ 1 - Ø§Ù„Ù…Ø³Ø£Ù„Ø© 2: Ø±ØªØ¨ ÙˆÙ‚Ø§Ø±Ù†',
-        statement: 'Ø±ØªØ¨: 82,600,000 ; 89,678,000,000 ; 7,000,000,000 ; 149,637 ; 24,356,000.',
-        hints: ['Ø§Ø¨Ø¯Ø£ Ø¨Ø¹Ø¯Ø¯ Ø§Ù„Ø®Ø§Ù†Ø§Øª.', 'Ù„Ø§ ØªØ¹ØªÙ…Ø¯ Ø¹Ù„Ù‰ Ø§Ù„Ø®Ø§Ù†Ø© Ø§Ù„Ø£Ø®ÙŠØ±Ø© ÙÙ‚Ø·.', 'Ø§Ù„Ø¹Ø¯Ø¯ Ø°Ùˆ 11 Ø®Ø§Ù†Ø© Ù‡Ùˆ Ø§Ù„Ø£ÙƒØ¨Ø±.'],
+        title: 'المستوى 1 - المسألة 2: رتب وقارن',
+        statement: 'رتب: 82,600,000 ; 89,678,000,000 ; 7,000,000,000 ; 149,637 ; 24,356,000.',
+        hints: ['ابدأ بعدد الخانات.', 'لا تعتمد على الخانة الأخيرة فقط.', 'العدد ذو 11 خانة هو الأكبر.'],
         resolution: ['$$149,637 < 24,356,000 < 82,600,000 < 7,000,000,000 < 89,678,000,000$$.'],
-        finalAnswer: 'Ø§Ù„ØªØ±ØªÙŠØ¨ Ø§Ù„ØµØ­ÙŠØ­ ÙƒÙ…Ø§ ÙÙŠ Ø§Ù„Ø³Ø·Ø± Ø§Ù„Ø³Ø§Ø¨Ù‚',
-        typicalError: 'Ù…Ù‚Ø§Ø±Ù†Ø© Ø§Ù„Ù‚ÙŠÙ… Ø§Ù„Ø£ÙˆÙ„Ù‰ Ø¯ÙˆÙ† Ø­Ø³Ø§Ø¨ Ø·ÙˆÙ„ Ø§Ù„Ø¹Ø¯Ø¯.'
+        finalAnswer: 'الترتيب الصحيح كما في السطر السابق',
+        typicalError: 'مقارنة القيم الأولى دون حساب طول العدد.'
     },
     {
-        title: 'Ø§Ù„Ù…Ø³ØªÙˆÙ‰ 1 - Ø§Ù„Ù…Ø³Ø£Ù„Ø© 3: Ø§Ù„ØªÙ‚Ø±ÙŠØ¨',
-        statement: 'Ù‚Ø±Ù‘Ø¨: $$24,963$$ Ø¥Ù„Ù‰ Ø§Ù„Ø¢Ù„Ø§ÙØ› $$72,580$$ Ø¥Ù„Ù‰ Ø§Ù„Ø¢Ù„Ø§ÙØ› $$384,523$$ Ø¥Ù„Ù‰ Ø¹Ø´Ø±Ø§Øª Ø§Ù„Ø¢Ù„Ø§Ù.',
-        hints: ['Ø­Ø¯Ø¯ Ø§Ù„Ù…Ø±ØªØ¨Ø© Ø§Ù„Ù…Ø·Ù„ÙˆØ¨Ø©.', 'Ø§Ù†Ø¸Ø± ÙÙ‚Ø· Ø¥Ù„Ù‰ Ø§Ù„Ø±Ù‚Ù… Ø§Ù„ØªØ§Ù„ÙŠ.', 'Ø¶Ø¹ Ø£ØµÙØ§Ø±Ù‹Ø§ ÙÙŠ ÙŠÙ…ÙŠÙ† Ø§Ù„Ù…Ø±ØªØ¨Ø©.'],
+        title: 'المستوى 1 - المسألة 3: التقريب',
+        statement: 'قرّب: $$24,963$$ إلى الآلاف؛ $$72,580$$ إلى الآلاف؛ $$384,523$$ إلى عشرات الآلاف.',
+        hints: ['حدد المرتبة المطلوبة.', 'انظر فقط إلى الرقم التالي.', 'ضع أصفارًا في يمين المرتبة.'],
         resolution: ['$$24,963 -> 25,000$$', '$$72,580 -> 73,000$$', '$$384,523 -> 380,000$$'],
-        finalAnswer: '$$25,000$$ØŒ $$73,000$$ØŒ $$380,000$$',
-        typicalError: 'Ø§Ù„Ù†Ø¸Ø± Ø¥Ù„Ù‰ Ø±Ù‚Ù… Ø®Ø§Ø·Ø¦ Ø£Ø«Ù†Ø§Ø¡ Ø§Ù„ØªÙ‚Ø±ÙŠØ¨.'
+        finalAnswer: '$$25,000$$، $$73,000$$، $$380,000$$',
+        typicalError: 'النظر إلى رقم خاطئ أثناء التقريب.'
     },
     {
-        title: 'Ø§Ù„Ù…Ø³ØªÙˆÙ‰ 2 - Ø§Ù„Ù…Ø³Ø£Ù„Ø© 1: ÙØ§ÙƒÙ‡Ø© ÙÙŠ ØµÙ†Ø§Ø¯ÙŠÙ‚',
-        statement: '8 ØµÙ†Ø§Ø¯ÙŠÙ‚ Ø¨ÙˆØ²Ù† 15 ÙƒØº Ùˆ26 ØµÙ†Ø¯ÙˆÙ‚Ù‹Ø§ Ø¨ÙˆØ²Ù† 8 ÙƒØº. ÙƒÙ… ÙƒØº ÙÙŠ Ø§Ù„Ù…Ø¬Ù…ÙˆØ¹ØŸ',
-        hints: ['Ø§ÙØµÙ„ Ù†ÙˆØ¹ÙŠ Ø§Ù„ØµÙ†Ø§Ø¯ÙŠÙ‚.', 'Ø§Ø¬Ù…Ø¹ 20+6.', 'Ø§Ø¬Ù…Ø¹ Ø§Ù„Ù†Ø§ØªØ¬ÙŠÙ†.'],
-        resolution: ['$$8\cdot15=120$$', '$$26\cdot8=208$$', 'Ø§Ù„Ù…Ø¬Ù…ÙˆØ¹ $$328$$ ÙƒØº.'],
-        finalAnswer: '$$328$$ ÙƒØº',
-        typicalError: 'Ø®Ù„Ø· ÙƒÙ„ Ø§Ù„Ù…Ø¹Ø·ÙŠØ§Øª Ø¯ÙˆÙ† Ù†Ù…ÙˆØ°Ø¬ Ø­Ø³Ø§Ø¨ÙŠ.'
+        title: 'المستوى 2 - المسألة 1: فاكهة في صناديق',
+        statement: '8 صناديق بوزن 15 كغ و26 صندوقًا بوزن 8 كغ. كم كغ في المجموع؟',
+        hints: ['افصل نوعي الصناديق.', 'اجمع 20+6.', 'اجمع الناتجين.'],
+        resolution: ['$$8\\cdot15=120$$', '$$26\\cdot8=208$$', 'المجموع $$328$$ كغ.'],
+        finalAnswer: '$$328$$ كغ',
+        typicalError: 'خلط كل المعطيات دون نموذج حسابي.'
     },
     {
-        title: 'Ø§Ù„Ù…Ø³ØªÙˆÙ‰ 2 - Ø§Ù„Ù…Ø³Ø£Ù„Ø© 2: ØµÙˆØ§Ù†ÙŠ ÙˆØµÙ†Ø§Ø¯ÙŠÙ‚',
-        statement: 'Ù…Ø¹ $$1274$$ Ø¨ÙŠØ¶Ø©ØŒ ØµÙˆØ§Ù†ÙŠ Ù…Ù† $$30$$ ÙˆØµÙ†Ø§Ø¯ÙŠÙ‚ Ù…Ù† $$10$$ ØµÙˆØ§Ù†ÙŠ. Ù…Ø§ Ø§Ù„Ù…ØªØ¨Ù‚ÙŠØŸ',
-        hints: ['Ø£ÙˆÙ„Ù‹Ø§ Ø¨ÙŠØ¶ -> ØµÙˆØ§Ù†ÙŠ.', 'Ø«Ù… ØµÙˆØ§Ù†ÙŠ -> ØµÙ†Ø§Ø¯ÙŠÙ‚.', 'ÙØ³Ù‘Ø± Ø§Ù„Ø¨Ø§Ù‚ÙŠÙŠÙ†.'],
-        resolution: ['$$1274:30 = 42$$ ÙˆØ§Ù„Ø¨Ø§Ù‚ÙŠ $$14$$ Ø¨ÙŠØ¶Ø©.', '$$42:10 = 4$$ ÙˆØ§Ù„Ø¨Ø§Ù‚ÙŠ $$2$$ ØµÙŠÙ†ÙŠØ©.'],
-        finalAnswer: '$$14$$ Ø¨ÙŠØ¶Ø© Ùˆ$$2$$ ØµÙŠÙ†ÙŠØ©',
-        typicalError: 'Ø®Ù„Ø· Ù…Ø³ØªÙˆÙŠÙŠ Ø§Ù„ÙˆØ­Ø¯Ø§Øª.'
+        title: 'المستوى 2 - المسألة 2: صواني وصناديق',
+        statement: 'مع $$1274$$ بيضة، صواني من $$30$$ وصناديق من $$10$$ صواني. ما المتبقي؟',
+        hints: ['أولًا بيض -> صواني.', 'ثم صواني -> صناديق.', 'فسّر الباقيين.'],
+        resolution: ['$$1274:30 = 42$$ والباقي $$14$$ بيضة.', '$$42:10 = 4$$ والباقي $$2$$ صينية.'],
+        finalAnswer: '$$14$$ بيضة و$$2$$ صينية',
+        typicalError: 'خلط مستويي الوحدات.'
     },
     {
-        title: 'Ø§Ù„Ù…Ø³ØªÙˆÙ‰ 2 - Ø§Ù„Ù…Ø³Ø£Ù„Ø© 3: ØªØ±ØªÙŠØ¨ Ø§Ù„Ø¹Ù…Ù„ÙŠØ§Øª',
-        statement: 'Ø§Ø­Ø³Ø¨: $$2+3\cdot4$$ØŒ $$(2+3)\cdot4$$ØŒ $$26-5\cdot(2+3)+6$$.',
-        hints: ['Ø§Ù„Ø£Ù‚ÙˆØ§Ø³ Ø£ÙˆÙ„Ù‹Ø§.', 'Ø«Ù… Ø§Ù„Ø¶Ø±Ø¨/Ø§Ù„Ù‚Ø³Ù…Ø©.', 'Ø«Ù… Ø§Ù„Ø¬Ù…Ø¹/Ø§Ù„Ø·Ø±Ø­.'],
-        resolution: ['$$14$$ØŒ $$20$$ØŒ $$7$$.'],
-        finalAnswer: '$$14$$ØŒ $$20$$ØŒ $$7$$',
-        typicalError: 'Ø§Ù„Ø­Ø³Ø§Ø¨ Ø­Ø³Ø¨ ØªØ±ØªÙŠØ¨ Ø§Ù„ÙƒØªØ§Ø¨Ø© ÙÙ‚Ø·.'
+        title: 'المستوى 2 - المسألة 3: ترتيب العمليات',
+        statement: 'احسب: $$2+3\\\\cdot4$$، $$(2+3)\\\\cdot4$$، $$26-5\\\\cdot(2+3)+6$$.',
+        hints: ['الأقواس أولًا.', 'ثم الضرب/القسمة.', 'ثم الجمع/الطرح.'],
+        resolution: ['$$14$$، $$20$$، $$7$$.'],
+        finalAnswer: '$$14$$، $$20$$، $$7$$',
+        typicalError: 'الحساب حسب ترتيب الكتابة فقط.'
     },
     {
-        title: 'Ø§Ù„Ù…Ø³ØªÙˆÙ‰ 3 - Ø§Ù„Ù…Ø³Ø£Ù„Ø© 1: Ø§Ù„Ø¹Ø¯Ø¯ Ø§Ù„Ù…Ø®ÙÙŠ',
-        statement: 'Ø¹Ø¯Ø¯ Ù…Ù† 5 Ø®Ø§Ù†Ø§ØªØŒ Ù…Ø¬Ù…ÙˆØ¹ Ø®Ø§Ù†Ø§ØªÙ‡ $$5$$ØŒ ÙˆØ¹Ù†Ø¯ ØªØ¨Ø¯ÙŠÙ„ Ø§Ù„Ø¢Ø­Ø§Ø¯ Ù…Ø¹ Ø§Ù„Ø¢Ù„Ø§Ù ÙŠØ²ÙŠØ¯ $$999$$.',
-        hints: ['Ø§ÙƒØªØ¨ $$999(b-a)=999$$.', 'Ø¥Ø°Ù† $$b-a=1$$.', 'Ø§Ø¨Ø­Ø« Ø¹Ù† Ø­Ø§Ù„Ø© Ù…Ø¬Ù…ÙˆØ¹Ù‡Ø§ 5.'],
-        resolution: ['Ø¥Ø­Ø¯Ù‰ Ø§Ù„Ø­Ù„ÙˆÙ„: $$40001$$.', 'ØªØ­Ù‚Ù‚: $$41000-40001=999$$.'],
+        title: 'المستوى 3 - المسألة 1: العدد المخفي',
+        statement: 'عدد من 5 خانات، مجموع خاناته $$5$$، وعند تبديل الآحاد مع الآلاف يزيد $$999$$.',
+        hints: ['اكتب $$999(b-a)=999$$.', 'إذن $$b-a=1$$.', 'ابحث عن حالة مجموعها 5.'],
+        resolution: ['إحدى الحلول: $$40001$$.', 'تحقق: $$41000-40001=999$$.'],
         finalAnswer: '$$40001$$',
-        typicalError: 'Ø§Ù„ØªØ¬Ø±ÙŠØ¨ Ø§Ù„Ø¹Ø´ÙˆØ§Ø¦ÙŠ Ø¯ÙˆÙ† Ù…Ø¹Ø§Ø¯Ù„Ø© Ù…ÙˆØ¶Ø¹ÙŠØ©.'
+        typicalError: 'التجريب العشوائي دون معادلة موضعية.'
     },
     {
-        title: 'Ø§Ù„Ù…Ø³ØªÙˆÙ‰ 3 - Ø§Ù„Ù…Ø³Ø£Ù„Ø© 2: Ø§Ù„ØªÙ‚Ø±ÙŠØ¨ Ø­Ø³Ø¨ Ø§Ù„Ø³ÙŠØ§Ù‚',
-        statement: 'Ù„Ù€ $$149,637$$ ÙŠÙˆØ±ÙˆØŒ Ø£Ø¹Ø· Ù†Ø³Ø®Ø© Ù„Ù„ØªÙ‚Ø±ÙŠØ± Ø§Ù„ÙÙ†ÙŠØŒ ÙˆØ§Ù„Ù…Ø­Ø§Ø¯Ø«Ø©ØŒ ÙˆØ§Ù„Ø¹Ù†ÙˆØ§Ù† Ø§Ù„ØµØ­ÙÙŠ.',
-        hints: ['Ù„ÙŠØ³Øª ÙƒÙ„ Ø§Ù„Ø³ÙŠØ§Ù‚Ø§Øª Ø¨Ù†ÙØ³ Ø§Ù„Ø¯Ù‚Ø©.', 'Ø§Ù„ØªÙ‚Ø±ÙŠØ±: Ø¯Ù‚Ø© Ø£Ø¹Ù„Ù‰.', 'Ø§Ù„Ù…Ø­Ø§Ø¯Ø«Ø©/Ø§Ù„Ø¹Ù†ÙˆØ§Ù†: ØªÙ‚Ø±ÙŠØ¨ ÙˆØ§Ø¶Ø­.'],
-        resolution: ['ØªÙ‚Ø±ÙŠØ±: $$149,637$$.', 'Ø³ÙŠØ§Ù‚ Ø¹Ø§Ù…: Ù†Ø­Ùˆ $$150,000$$.'],
-        finalAnswer: '$$149,637$$ Ùˆ$$150,000$$ Ø­Ø³Ø¨ Ø§Ù„Ø³ÙŠØ§Ù‚',
-        typicalError: 'Ø§Ù„Ø§Ø¹ØªÙ‚Ø§Ø¯ Ø¨ÙˆØ¬ÙˆØ¯ ØªÙ‚Ø±ÙŠØ¨ ÙˆØ­ÙŠØ¯ Ø¯Ø§Ø¦Ù…Ù‹Ø§.'
+        title: 'المستوى 3 - المسألة 2: التقريب حسب السياق',
+        statement: 'لـ $$149,637$$ يورو، أعط نسخة للتقرير الفني، والمحادثة، والعنوان الصحفي.',
+        hints: ['ليست كل السياقات بنفس الدقة.', 'التقرير: دقة أعلى.', 'المحادثة/العنوان: تقريب واضح.'],
+        resolution: ['تقرير: $$149,637$$.', 'سياق عام: نحو $$150,000$$.'],
+        finalAnswer: '$$149,637$$ و$$150,000$$ حسب السياق',
+        typicalError: 'الاعتقاد بوجود تقريب وحيد دائمًا.'
     },
     {
-        title: 'Ø§Ù„Ù…Ø³ØªÙˆÙ‰ 3 - Ø§Ù„Ù…Ø³Ø£Ù„Ø© 3: Ø¥Ù†ØªØ§Ø¬ ÙˆØ¨ÙŠØ¹',
-        statement: '200 Ø´Ø¬Ø±Ø©ØŒ 7 ØµÙ†Ø§Ø¯ÙŠÙ‚/Ø´Ø¬Ø±Ø©ØŒ 5 ÙƒØº/ØµÙ†Ø¯ÙˆÙ‚ØŒ 2 ÙŠÙˆØ±Ùˆ/ÙƒØºØŒ ÙˆÙ…Ù†ØµØ§Øª Ù…Ù† 20 ØµÙ†Ø¯ÙˆÙ‚Ù‹Ø§.',
-        hints: ['Ø£ÙˆÙ„Ù‹Ø§ Ø¹Ø¯Ø¯ Ø§Ù„ØµÙ†Ø§Ø¯ÙŠÙ‚ Ø§Ù„ÙƒÙ„ÙŠ.', 'Ø«Ù… Ø§Ù„ÙƒÙŠÙ„ÙˆØºØ±Ø§Ù…Ø§Øª ÙˆØ§Ù„Ø¯Ø®Ù„.', 'Ø£Ø®ÙŠØ±Ù‹Ø§ Ø§Ù‚Ø³Ù… Ø§Ù„ØµÙ†Ø§Ø¯ÙŠÙ‚ Ø¹Ù„Ù‰ 20.'],
-        resolution: ['Ø§Ù„ØµÙ†Ø§Ø¯ÙŠÙ‚ $$1400$$.', 'Ø§Ù„ÙƒÙŠÙ„ÙˆØºØ±Ø§Ù…Ø§Øª $$7000$$.', 'Ø§Ù„Ø¯Ø®Ù„ $$14,000$$ ÙŠÙˆØ±Ùˆ.', 'Ø§Ù„Ù…Ù†ØµØ§Øª $$70$$ ÙˆØ§Ù„Ø¨Ø§Ù‚ÙŠ $$0$$.'],
-        finalAnswer: '$$7000$$ ÙƒØºØŒ $$14,000$$ ÙŠÙˆØ±ÙˆØŒ $$70$$ Ù…Ù†ØµØ©',
-        typicalError: 'Ø§Ù„Ø¶Ø±Ø¨ ÙÙŠ 20 Ø¨Ø¯Ù„ Ø§Ù„Ù‚Ø³Ù…Ø© Ø¹Ù†Ø¯ Ø­Ø³Ø§Ø¨ Ø§Ù„Ù…Ù†ØµØ§Øª.'
+        title: 'المستوى 3 - المسألة 3: إنتاج وبيع',
+        statement: '200 شجرة، 7 صناديق/شجرة، 5 كغ/صندوق، 2 يورو/كغ، ومنصات من 20 صندوقًا.',
+        hints: ['أولًا عدد الصناديق الكلي.', 'ثم الكيلوغرامات والدخل.', 'أخيرًا اقسم الصناديق على 20.'],
+        resolution: ['الصناديق $$1400$$.', 'الكيلوغرامات $$7000$$.', 'الدخل $$14,000$$ يورو.', 'المنصات $$70$$ والباقي $$0$$.'],
+        finalAnswer: '$$7000$$ كغ، $$14,000$$ يورو، $$70$$ منصة',
+        typicalError: 'الضرب في 20 بدل القسمة عند حساب المنصات.'
     }
 ]
 
-const AR_TEXT_FIXED = AR_TEXT.map(decodeChallengeText)
-
 function buildChallenges(lang: Lang): Challenge[] {
-    const text = lang === 'eu' ? EU_TEXT : lang === 'ar' ? AR_TEXT_FIXED : ES_TEXT
+    const text = lang === 'eu' ? EU_TEXT : lang === 'ar' ? AR_TEXT : ES_TEXT
     return META.map((meta, index) => ({ ...meta, text: text[index] }))
 }
 
 export function MissionPage() {
     const { i18n } = useTranslation()
     const lang = resolveLang(i18n.language)
-    const ui = UI_FIXED[lang]
+    const ui = UI[lang]
     const challenges = useMemo(() => buildChallenges(lang), [lang])
 
     const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty | null>(null)
@@ -707,5 +641,4 @@ export function MissionPage() {
         </div>
     )
 }
-
 

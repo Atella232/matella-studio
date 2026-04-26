@@ -1,4 +1,0 @@
-﻿src/pages/dbh1-algebra/HomePage/index.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
-src/pages/dbh1-algebra/HomePage/index.tsx(3,26): error TS6133: 'Trans' is declared but its value is never read.
-src/pages/dbh1-algebra/TheoryPage/index.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
-src/pages/dbh1-geometria/HomePage/index.tsx(1,1): error TS6133: 'React' is declared but its value is never read.

@@ -23,7 +23,7 @@ export function HomePage() {
                         <Link to="/matematika/dbh1/zatikiak/retos" className="btn btn-secondary">
                             🎯 {t('home.cta.start')}
                         </Link>
-                        <Link to="/matematika/dbh1/zatikiak/jokuak" className="btn btn-secondary">
+                        <Link to="/matematika/dbh1/zatikiak/juegos" className="btn btn-secondary">
                             🎮 {t('nav.games')}
                         </Link>
                     </div>
@@ -59,7 +59,7 @@ export function HomePage() {
                             <div className="feature-icon">🎮</div>
                             <h3>{t('nav.games')}</h3>
                             <p>{t('home.features.games.description')}</p>
-                            <Link to="/matematika/dbh1/zatikiak/jokuak" className="feature-link">{t('home.features.games.link')}</Link>
+                            <Link to="/matematika/dbh1/zatikiak/juegos" className="feature-link">{t('home.features.games.link')}</Link>
                         </article>
 
                         <article className="feature-card glass">

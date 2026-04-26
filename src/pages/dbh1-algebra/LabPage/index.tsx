@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, RefreshCw, CheckCircle, XCircle, Lightbulb } from 'lucide-react';
@@ -13,35 +13,36 @@ interface Equation {
     text: string;
 }
 
+const generateNumber = (max: number) => {
+    return Math.floor(Math.random() * (max * 2 + 1)) - max;
+};
+
+const createEquation = (): Equation => {
+    let a = generateNumber(5);
+    if (a === 0) a = 1; // Avoid 0 coefficient
+
+    const x = generateNumber(10);
+    const b = generateNumber(20);
+    const c = a * x + b;
+    const bText = b >= 0 ? `+ ${b}` : `- ${Math.abs(b)}`;
+
+    return {
+        a, b, c, x,
+        text: `${a}x ${bText} = ${c}`
+    };
+};
+
 export function LabPage() {
     const { t } = useTranslation();
-    const [equation, setEquation] = useState<Equation | null>(null);
+    const [equation, setEquation] = useState<Equation | null>(() => createEquation());
     const [userAnswer, setUserAnswer] = useState<string>('');
     const [feedback, setFeedback] = useState<'idle' | 'success' | 'error'>('idle');
     const [showSolution, setShowSolution] = useState(false);
     const [streak, setStreak] = useState(0);
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const generateNumber = (max: number) => {
-        return Math.floor(Math.random() * (max * 2 + 1)) - max;
-    };
-
     const generateEquation = () => {
-        let a, b, c, x;
-        a = generateNumber(5);
-        if (a === 0) a = 1; // Avoid 0 coefficient
-
-        x = generateNumber(10);
-        b = generateNumber(20);
-        c = a * x + b;
-
-        const bText = b >= 0 ? `+ ${b}` : `- ${Math.abs(b)}`;
-
-        setEquation({
-            a, b, c, x,
-            text: `${a}x ${bText} = ${c}`
-        });
-
+        setEquation(createEquation());
         setUserAnswer('');
         setFeedback('idle');
         setShowSolution(false);
@@ -50,10 +51,6 @@ export function LabPage() {
             inputRef.current.focus();
         }
     };
-
-    useEffect(() => {
-        generateEquation();
-    }, []);
 
     const checkAnswer = () => {
         if (!equation) return;

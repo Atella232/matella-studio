@@ -1,5 +1,6 @@
 import { useState, type CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
+import { MathText } from '../../../components/MathText'
 import { algebraMissions, normalizeAlgebraLang, pickText } from '../content'
 import '../../dbh1-zatikiak/MissionPage/MissionPage.css'
 
@@ -97,15 +98,31 @@ export function MissionPage() {
                         <span className="challenge-points-badge">+{currentChallenge.points}</span>
                     </div>
                     <h2 className="challenge-title">{pickText(lang, currentChallenge.title)}</h2>
-                    <p className="challenge-description">{pickText(lang, currentChallenge.description)}</p>
+                    <p className="challenge-description">
+                        <MathText text={pickText(lang, currentChallenge.description)} />
+                    </p>
                     <div className="answer-section">
                         <input className={`answer-input ${feedback !== 'idle' ? feedback : ''}`} value={answer} onChange={(e) => { setAnswer(e.target.value); setFeedback('idle') }} onKeyDown={(e) => e.key === 'Enter' && check()} />
                         <button onClick={check} className="btn btn-primary check-btn">{pickText(lang, { eu: 'Egiaztatu', es: 'Comprobar', ar: 'تحقق' })}</button>
                     </div>
-                    {feedback === 'success' && <div className="feedback success"><span className="feedback-icon">🎉</span><p>{pickText(lang, currentChallenge.success)}</p></div>}
-                    {feedback === 'error' && <div className="feedback error"><span className="feedback-icon">❌</span><p>{pickText(lang, currentChallenge.error)}</p></div>}
+                    {feedback === 'success' && (
+                        <div className="feedback success">
+                            <span className="feedback-icon">🎉</span>
+                            <p><MathText text={pickText(lang, currentChallenge.success)} /></p>
+                        </div>
+                    )}
+                    {feedback === 'error' && (
+                        <div className="feedback error">
+                            <span className="feedback-icon">❌</span>
+                            <p><MathText text={pickText(lang, currentChallenge.error)} /></p>
+                        </div>
+                    )}
                     <button onClick={() => setShowHint(!showHint)} className="hint-toggle">💡 {pickText(lang, { eu: showHint ? 'Pista ezkutatu' : 'Pista ikusi', es: showHint ? 'Ocultar pista' : 'Ver pista', ar: showHint ? 'إخفاء التلميح' : 'عرض التلميح' })}</button>
-                    {showHint && <div className="hint-box"><p>{pickText(lang, currentChallenge.hint)}</p></div>}
+                    {showHint && (
+                        <div className="hint-box">
+                            <p><MathText text={pickText(lang, currentChallenge.hint)} /></p>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

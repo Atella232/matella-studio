@@ -77,7 +77,7 @@ export function Navigation() {
 
     const subjectTitle = subjectId === 'natura' ? t('subjects.natura.title') : t('subjects.math.title')
     const contentBasePath = subjectId && courseId && topicId ? `/${subjectId}/${courseId}/${topicId}` : ''
-    const isAlgebraPage = subjectId === 'matematika' && courseId === 'dbh2' && topicId === 'algebra'
+    const hasExercisesPage = subjectId === 'matematika' && courseId === 'dbh2' && (topicId === 'algebra' || topicId === 'zatikiak')
     const exercisesLabel =
         i18n.language === 'ar'
             ? 'التمارين'
@@ -253,16 +253,16 @@ export function Navigation() {
                         </li>
                         <li>
                             <Link
-                                to={`${contentBasePath}/jokuak`}
-                                className={`nav-link nav-section ${currentSection === 'jokuak' ? 'active' : ''}`}
+                                to={`${contentBasePath}/juegos`}
+                                className={`nav-link nav-section ${currentSection === 'juegos' || currentSection === 'jokuak' ? 'active' : ''}`}
                             >
                                 🎮 {t('nav.games')}
                             </Link>
                         </li>
-                        {isAlgebraPage && (
+                        {hasExercisesPage && (
                             <li>
                                 <Link
-                                    to={`${contentBasePath}/ariketak`}
+                                    to={`${contentBasePath}/ejercicios`}
                                     className={`nav-link nav-section ${currentSection === 'ariketak' || currentSection === 'ejercicios' ? 'active' : ''}`}
                                 >
                                     📝 {exercisesLabel}
