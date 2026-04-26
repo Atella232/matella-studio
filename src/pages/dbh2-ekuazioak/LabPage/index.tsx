@@ -36,9 +36,9 @@ export function LabPage() {
     const [quadC, setQuadC] = useState(6)
 
     const labs = [
-        { id: 'balance' as const, icon: '=', label: pickText(lang, { eu: 'Balantza', es: 'Balanza', ar: 'الميزان' }), color: '#6366f1' },
-        { id: 'linear' as const, icon: 'x', label: pickText(lang, { eu: 'Lehen maila', es: 'Primer grado', ar: 'الدرجة الأولى' }), color: '#10b981' },
-        { id: 'quadratic' as const, icon: 'x²', label: pickText(lang, { eu: 'Bigarren maila', es: 'Segundo grado', ar: 'الدرجة الثانية' }), color: '#f472b6' }
+        { id: 'balance' as const, icon: '⚖️', label: pickText(lang, { eu: 'Balantza', es: 'Balanza', ar: 'الميزان' }), color: '#6366f1' },
+        { id: 'linear' as const, icon: '🔎', label: pickText(lang, { eu: 'Lehen maila', es: 'Primer grado', ar: 'الدرجة الأولى' }), color: '#10b981' },
+        { id: 'quadratic' as const, icon: '📈', label: pickText(lang, { eu: 'Bigarren maila', es: 'Segundo grado', ar: 'الدرجة الثانية' }), color: '#f472b6' }
     ]
 
     const linearSolution = solveLinear(linearA, linearB, linearC)
@@ -60,7 +60,7 @@ export function LabPage() {
         <div className="lab-page ekuazioak-lab">
             <div className="container">
                 <header className="lab-header">
-                    <h1>{pickText(lang, { eu: 'Ekuazioen Laborategia', es: 'Laboratorio de Ecuaciones', ar: 'مختبر المعادلات' })}</h1>
+                    <h1>🧪 {pickText(lang, { eu: 'Ekuazioen Laborategia', es: 'Laboratorio de Ecuaciones', ar: 'مختبر المعادلات' })}</h1>
                     <p className="lab-instructions">
                         {pickText(lang, {
                             eu: 'Probatu oreka, ikusi lehen mailako ebazpena eta aztertu diskriminatzaileak soluzio kopuruan duen eragina.',
@@ -88,7 +88,7 @@ export function LabPage() {
                     {activeLab === 'balance' && (
                         <section className="lab-panel">
                             <div className="lab-panel-header">
-                                <span className="panel-icon lab-symbol">=</span>
+                                <span className="panel-icon lab-symbol">⚖️</span>
                                 <div>
                                     <h2>{labs[0].label}</h2>
                                     <p>{pickText(lang, { eu: 'Alde bietan eragiketa bera egiteak oreka mantentzen du.', es: 'Hacer la misma operación en ambos lados mantiene el equilibrio.', ar: 'إجراء العملية نفسها في الطرفين يحافظ على التوازن.' })}</p>
@@ -108,7 +108,7 @@ export function LabPage() {
                     {activeLab === 'linear' && (
                         <section className="lab-panel">
                             <div className="lab-panel-header">
-                                <span className="panel-icon lab-symbol">x</span>
+                                <span className="panel-icon lab-symbol">🔎</span>
                                 <div>
                                     <h2>{labs[1].label}</h2>
                                     <p><MathText text={pickText(lang, { eu: '$ax+b=c$ eredua ebazten du.', es: 'Resuelve el modelo $ax+b=c$.', ar: 'يحل النموذج $ax+b=c$.' })} /></p>
@@ -132,7 +132,7 @@ export function LabPage() {
                     {activeLab === 'quadratic' && (
                         <section className="lab-panel">
                             <div className="lab-panel-header">
-                                <span className="panel-icon lab-symbol">x²</span>
+                                <span className="panel-icon lab-symbol">📈</span>
                                 <div>
                                     <h2>{labs[2].label}</h2>
                                     <p><MathText text={pickText(lang, { eu: '$ax^2+bx+c=0$ ereduan diskriminatzailea aztertu.', es: 'Analiza el discriminante en $ax^2+bx+c=0$.', ar: 'حلل المميز في $ax^2+bx+c=0$.' })} /></p>

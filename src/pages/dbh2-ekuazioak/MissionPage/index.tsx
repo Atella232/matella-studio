@@ -33,7 +33,7 @@ export function MissionPage() {
             <div className="mission-page">
                 <div className="container">
                     <header className="mission-header">
-                        <h1>{pickText(lang, { eu: 'Ekuazioen Erronkak', es: 'Retos de Ecuaciones', ar: 'تحديات المعادلات' })}</h1>
+                        <h1>🎯 {pickText(lang, { eu: 'Ekuazioen Erronkak', es: 'Retos de Ecuaciones', ar: 'تحديات المعادلات' })}</h1>
                         <p className="mission-subtitle">{pickText(lang, { eu: 'Ebatzi, egiaztatu eta problemak ekuazio bihurtu hiru mailatan.', es: 'Resuelve, comprueba y convierte problemas en ecuaciones en tres niveles.', ar: 'حل وتحقق وحوّل المسائل إلى معادلات في ثلاثة مستويات.' })}</p>
                     </header>
 

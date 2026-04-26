@@ -21,10 +21,10 @@ export function GamesPage() {
 
     const current = questions[index % questions.length]
     const modeIcon = (item: Mode) => {
-        if (item === 'mixed') return 'mix'
-        if (item === 'lehen-maila') return 'x'
-        if (item === 'problemak') return '?'
-        return 'x²'
+        if (item === 'mixed') return '🧠'
+        if (item === 'lehen-maila') return '🔎'
+        if (item === 'problemak') return '📝'
+        return '📈'
     }
 
     const reset = (nextMode: Mode) => {
@@ -44,7 +44,7 @@ export function GamesPage() {
         <div className="games-hub algebra-games ekuazioak-games">
             <div className="container">
                 <div className="games-header">
-                    <h1>{pickText(lang, { eu: 'Ekuazioen Jokuak', es: 'Juegos de Ecuaciones', ar: 'ألعاب المعادلات' })}</h1>
+                    <h1>🎮 {pickText(lang, { eu: 'Ekuazioen Jokuak', es: 'Juegos de Ecuaciones', ar: 'ألعاب المعادلات' })}</h1>
                     <p>{pickText(lang, { eu: 'Quiz azkarrak: lehen maila, problemak eta bigarren maila.', es: 'Quizzes rápidos: primer grado, problemas y segundo grado.', ar: 'اختبارات سريعة: الدرجة الأولى والمسائل والدرجة الثانية.' })}</p>
                 </div>
 

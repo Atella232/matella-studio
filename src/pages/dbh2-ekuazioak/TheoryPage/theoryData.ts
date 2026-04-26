@@ -48,13 +48,13 @@ export const theoryLabels = {
 } satisfies Record<string, LocalizedText>
 
 export const theoryTabs: TheoryTab[] = [
-    { id: 'esanahia', icon: '=', label: { eu: 'Esanahia', es: 'Significado', ar: 'المعنى' } },
-    { id: 'elementuak', icon: 'E', label: { eu: 'Elementuak', es: 'Elementos', ar: 'العناصر' } },
-    { id: 'balantza', icon: '=', label: { eu: 'Balantza', es: 'Balanza', ar: 'الميزان' } },
-    { id: 'lehen-maila', icon: 'x', label: { eu: 'Lehen maila', es: 'Primer grado', ar: 'الدرجة الأولى' } },
-    { id: 'parentesiak', icon: '()', label: { eu: 'Parentesiak', es: 'Paréntesis', ar: 'الأقواس' } },
-    { id: 'problemak', icon: '?', label: { eu: 'Problemak', es: 'Problemas', ar: 'المسائل' } },
-    { id: 'bigarren-maila', icon: 'x²', label: { eu: 'Bigarren maila', es: 'Segundo grado', ar: 'الدرجة الثانية' } }
+    { id: 'esanahia', icon: '⚖️', label: { eu: 'Esanahia', es: 'Significado', ar: 'المعنى' } },
+    { id: 'elementuak', icon: '🧩', label: { eu: 'Elementuak', es: 'Elementos', ar: 'العناصر' } },
+    { id: 'balantza', icon: '⚖️', label: { eu: 'Balantza', es: 'Balanza', ar: 'الميزان' } },
+    { id: 'lehen-maila', icon: '🔎', label: { eu: 'Lehen maila', es: 'Primer grado', ar: 'الدرجة الأولى' } },
+    { id: 'parentesiak', icon: '🧮', label: { eu: 'Parentesiak', es: 'Paréntesis', ar: 'الأقواس' } },
+    { id: 'problemak', icon: '🧠', label: { eu: 'Problemak', es: 'Problemas', ar: 'المسائل' } },
+    { id: 'bigarren-maila', icon: '📈', label: { eu: 'Bigarren maila', es: 'Segundo grado', ar: 'الدرجة الثانية' } }
 ]
 
 export const theorySections: Record<TheoryTabId, TheorySection> = {
@@ -62,7 +62,7 @@ export const theorySections: Record<TheoryTabId, TheorySection> = {
         id: 'esanahia',
         cards: [
             {
-                icon: '=',
+                icon: '⚖️',
                 tone: 'purple',
                 title: { eu: 'Zer da ekuazio bat?', es: '¿Qué es una ecuación?', ar: 'ما هي المعادلة؟' },
                 body: {
@@ -78,7 +78,7 @@ export const theorySections: Record<TheoryTabId, TheorySection> = {
                 }
             },
             {
-                icon: '?',
+                icon: '🔎',
                 tone: 'blue',
                 title: { eu: 'Soluzioa egiaztatzea', es: 'Comprobar una solución', ar: 'التحقق من الحل' },
                 body: {
@@ -97,7 +97,7 @@ export const theorySections: Record<TheoryTabId, TheorySection> = {
         id: 'elementuak',
         cards: [
             {
-                icon: 'E',
+                icon: '🧩',
                 tone: 'cyan',
                 title: { eu: 'Kideak, terminoak eta ezezaguna', es: 'Miembros, términos e incógnita', ar: 'الأطراف والحدود والمجهول' },
                 body: {
@@ -141,7 +141,7 @@ export const theorySections: Record<TheoryTabId, TheorySection> = {
         id: 'balantza',
         cards: [
             {
-                icon: '=',
+                icon: '⚖️',
                 tone: 'purple',
                 title: { eu: 'Balantzaren printzipioa', es: 'Principio de la balanza', ar: 'مبدأ الميزان' },
                 body: {
@@ -154,7 +154,7 @@ export const theorySections: Record<TheoryTabId, TheorySection> = {
                 ]
             },
             {
-                icon: '<>',
+                icon: '🔁',
                 tone: 'blue',
                 title: { eu: 'Ekuazio baliokideak', es: 'Ecuaciones equivalentes', ar: 'معادلات متكافئة' },
                 body: {
@@ -172,7 +172,7 @@ export const theorySections: Record<TheoryTabId, TheorySection> = {
         id: 'lehen-maila',
         cards: [
             {
-                icon: 'x',
+                icon: '🔎',
                 tone: 'green',
                 title: { eu: 'Lehen mailako ekuazio sinpleak', es: 'Ecuaciones simples de primer grado', ar: 'معادلات الدرجة الأولى البسيطة' },
                 body: {
@@ -188,7 +188,7 @@ export const theorySections: Record<TheoryTabId, TheorySection> = {
                 ]
             },
             {
-                icon: '()',
+                icon: '🧮',
                 tone: 'cyan',
                 title: { eu: 'Adibide gidatua', es: 'Ejemplo guiado', ar: 'مثال موجه' },
                 body: { eu: '$5x-3=22$ ekuazioa ebatziko dugu.', es: 'Vamos a resolver $5x-3=22$.', ar: 'سنحل المعادلة $5x-3=22$.' },
@@ -202,7 +202,7 @@ export const theorySections: Record<TheoryTabId, TheorySection> = {
         id: 'parentesiak',
         cards: [
             {
-                icon: '()',
+                icon: '🧮',
                 tone: 'red',
                 title: { eu: 'Parentesiak dituzten ekuazioak', es: 'Ecuaciones con paréntesis', ar: 'معادلات فيها أقواس' },
                 body: {
@@ -216,7 +216,7 @@ export const theorySections: Record<TheoryTabId, TheorySection> = {
                 ]
             },
             {
-                icon: '⅓',
+                icon: '➗',
                 tone: 'blue',
                 title: { eu: 'Izendatzaileak dituzten ekuazioak', es: 'Ecuaciones con denominadores', ar: 'معادلات فيها مقامات' },
                 body: {
@@ -234,7 +234,7 @@ export const theorySections: Record<TheoryTabId, TheorySection> = {
         id: 'problemak',
         cards: [
             {
-                icon: '?',
+                icon: '🧠',
                 tone: 'green',
                 title: { eu: 'Problemak planteatzeko metodoa', es: 'Método para plantear problemas', ar: 'طريقة صياغة المسائل' },
                 body: {
@@ -250,7 +250,7 @@ export const theorySections: Record<TheoryTabId, TheorySection> = {
                 ]
             },
             {
-                icon: 'P',
+                icon: '🛍️',
                 tone: 'purple',
                 title: { eu: 'Erosketa baten adibidea', es: 'Ejemplo de compra', ar: 'مثال شراء' },
                 body: {
@@ -269,7 +269,7 @@ export const theorySections: Record<TheoryTabId, TheorySection> = {
         id: 'bigarren-maila',
         cards: [
             {
-                icon: '²',
+                icon: '📈',
                 tone: 'purple',
                 title: { eu: 'Forma orokorra', es: 'Forma general', ar: 'الصيغة العامة' },
                 body: {
@@ -280,7 +280,7 @@ export const theorySections: Record<TheoryTabId, TheorySection> = {
                 formula: { eu: '$$ax^2+bx+c=0 \\quad (a\\ne0)$$', es: '$$ax^2+bx+c=0 \\quad (a\\ne0)$$', ar: '$$ax^2+bx+c=0 \\quad (a\\ne0)$$' }
             },
             {
-                icon: '√',
+                icon: '📊',
                 tone: 'blue',
                 title: { eu: 'Formula eta diskriminatzailea', es: 'Fórmula y discriminante', ar: 'القانون والمميز' },
                 body: {

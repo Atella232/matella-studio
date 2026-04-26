@@ -64,7 +64,7 @@ Si una seccion es pequena puede empezar sin archivo `*Data.ts`, pero debe extrae
 - `labData.ts` guarda modos, parametros, formulas, etiquetas y explicaciones.
 - El laboratorio debe conectar con al menos dos subtemas de teoria.
 - Las etiquetas de inputs y descripciones con variables/formulas deben renderizarse con `MathText`, no como texto plano entre `$...$`.
-- Evitar emojis como iconos principales de tabs/herramientas. Usar simbolos controlados por CSS, iconos de la libreria del proyecto o `MathText`, con color explicito para estados activo/hover.
+- Los modos/herramientas deben tener iconos visuales. Se pueden usar emojis si van dentro de un contenedor con tamano, fondo, contraste y estados activo/hover definidos; no dejarlos como texto suelto ni sustituirlos por letras genericas.
 
 ### `MissionPage/index.tsx` y `missionData.ts`
 
@@ -78,7 +78,7 @@ Si una seccion es pequena puede empezar sin archivo `*Data.ts`, pero debe extrae
 - Si el juego crece, separar preguntas/reglas de la UI.
 - Debe tener estado claro de acierto/error/progreso.
 - Los botones de modo o cartas clicables deben tener fondo oscuro/tematico y estados `hover`/`active` visibles; evitar botones blancos o neutros que rompan el estilo de la unidad.
-- Evitar emojis en iconos de modos de juego; pueden renderizarse con estilos de sistema inconsistentes. Preferir texto corto, simbolos matematicos controlados o iconos CSS/libreria.
+- Los modos de juego deben tener icono visual propio, preferiblemente emoji o icono de libreria. Si se usan emojis, definir `font-family` de emoji y fondo/contraste para evitar que queden negros o parezcan texto accidental.
 
 ### `ExercisesPage/index.tsx` y `exercisesData.ts`
 
@@ -110,7 +110,7 @@ Si una seccion es pequena puede empezar sin archivo `*Data.ts`, pero debe extrae
 - EU/ES/AR no muestran textos rotos ni mojibake visible.
 - No hay dependencia nueva de `fixMaybeText`.
 - Teoria, laboratorio, juegos y ejercicios no contienen formulas LaTeX visibles sin renderizar.
-- Laboratorio y juegos no dependen de emojis para comunicar modos o herramientas.
+- Home, teoria, laboratorio, retos, juegos y ejercicios tienen iconos visuales coherentes, no letras provisionales.
 - Ejercicios tienen solucion.
 - Responsive revisado al menos en escritorio y movil.
 - La checklist propia de la unidad queda creada en `docs/units/<course>-<unit>-checklist.md`.
