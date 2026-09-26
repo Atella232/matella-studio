@@ -23,13 +23,18 @@ export function TrafficLight({ onComplete }: TrafficLightProps) {
     }, [onComplete])
 
     return (
-        <div className="traffic-light-overlay">
-            <div className="traffic-light">
+        <div
+            className="traffic-light-overlay"
+            role="status"
+            aria-live="assertive"
+            aria-label={t('games.fractionRace.countdown')}
+        >
+            <div className="traffic-light" aria-hidden="true">
                 <div className={`light red ${activeLight === 'red' ? 'active' : ''}`} />
                 <div className={`light yellow ${activeLight === 'yellow' ? 'active' : ''}`} />
                 <div className={`light green ${activeLight === 'green' ? 'active' : ''}`} />
             </div>
-            <div className="countdown-text">
+            <div className="countdown-text" aria-live="assertive">
                 {activeLight === 'red' && '3'}
                 {activeLight === 'yellow' && '2'}
                 {activeLight === 'green' && t('games.fractionRace.oneGo')}

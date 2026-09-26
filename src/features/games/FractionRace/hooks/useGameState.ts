@@ -1,21 +1,26 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
-import type { GameState, RacerState } from '../types'
-import { LEVELS, RACERS, SCORE_CONFIG } from '../types'
+import type { FinishReason, FractionOperation, GameState, RacerState, RaceSettings } from '../types'
+import { DEFAULT_RACE_SETTINGS, LEVELS, RACERS } from '../types'
 import { generateOperation, generateAnswerOptions } from '../utils/fractions'
+import { calculateScoreResult } from '../utils/scoring'
+import { calculateRivalMovement } from '../utils/rivals'
+import {
+    SPRINT_DURATION_SECONDS,
+    getRaceQuestionLimit,
+    perfectRaceFailed,
+    sprintTimeExpired
+} from '../utils/raceRules'
 
-const createInitialRacers = (): RacerState[] => {
-    return RACERS.map(r => ({
-        ...r,
-        position: 0,
-        speed: 0,
-        hasTurbo: false,
-        finishTime: null,
-        // Random luck factor (0.7 to 1.3) - assigned per race to vary outcomes
-        raceLuck: 0.7 + Math.random() * 0.6
-    }))
-}
+const createInitialRacers = (): RacerState[] => RACERS.map(racer => ({
+    ...racer,
+    position: 0,
+    speed: 0,
+    hasTurbo: false,
+    finishTime: null,
+    raceLuck: 0.92 + Math.random() * 0.16
+}))
 
-const INITIAL_STATE: GameState = {
+const createInitialState = (): GameState => ({
     phase: 'menu',
     currentQuestion: null,
     answerOptions: [],
@@ -24,233 +29,273 @@ const INITIAL_STATE: GameState = {
     totalQuestions: 10,
     level: 0,
     combo: 0,
+    maxCombo: 0,
     score: 0,
     correctAnswers: 0,
-    wrongAnswers: [],
+    attempts: [],
     startTime: null,
     questionStartTime: null,
     elapsedTime: 0,
     lastAnswerCorrect: null,
     showFeedback: false,
-    turboActive: false
+    turboActive: false,
+    lastScoreBreakdown: null,
+    selectedAnswerId: null,
+    questionQueue: [],
+    reviewMode: false,
+    settings: DEFAULT_RACE_SETTINGS,
+    finishReason: null
+})
+
+function normalizeRacersAtFinish(racers: RacerState[], now: number): RacerState[] {
+    const leadingPosition = Math.max(...racers.map(racer => racer.position))
+    if (leadingPosition <= 0 || leadingPosition >= 100) return racers
+
+    return racers.map(racer => {
+        const normalizedPosition = Math.min(100, racer.position / leadingPosition * 100)
+        return {
+            ...racer,
+            position: normalizedPosition,
+            finishTime: normalizedPosition >= 100 && racer.finishTime === null
+                ? now
+                : racer.finishTime
+        }
+    })
+}
+
+function finishRace(previous: GameState, reason: FinishReason, elapsedTime?: number): GameState {
+    const now = Date.now()
+    return {
+        ...previous,
+        phase: 'finished',
+        finishReason: reason,
+        elapsedTime: elapsedTime ?? (previous.startTime
+            ? Math.floor((now - previous.startTime) / 1000)
+            : previous.elapsedTime),
+        showFeedback: false,
+        turboActive: false,
+        selectedAnswerId: null,
+        racers: normalizeRacersAtFinish(previous.racers, now)
+    }
 }
 
 export function useGameState() {
-    const [state, setState] = useState<GameState>(INITIAL_STATE)
+    const [state, setState] = useState<GameState>(createInitialState)
     const timerRef = useRef<number | null>(null)
-    const botTimerRef = useRef<number | null>(null)
 
-    // Timer effect
     useEffect(() => {
         if (state.phase === 'racing' && state.startTime) {
             timerRef.current = window.setInterval(() => {
-                setState(prev => ({
-                    ...prev,
-                    elapsedTime: Math.floor((Date.now() - (prev.startTime || Date.now())) / 1000)
-                }))
+                setState(previous => {
+                    if (previous.phase !== 'racing') return previous
+                    const elapsedTime = Math.floor((Date.now() - (previous.startTime || Date.now())) / 1000)
+                    if (sprintTimeExpired(previous.settings, elapsedTime)) {
+                        return finishRace(previous, 'time', SPRINT_DURATION_SECONDS)
+                    }
+                    return { ...previous, elapsedTime }
+                })
             }, 1000)
         }
 
         return () => {
-            if (timerRef.current) clearInterval(timerRef.current)
+            if (timerRef.current !== null) {
+                clearInterval(timerRef.current)
+                timerRef.current = null
+            }
         }
     }, [state.phase, state.startTime])
 
-    // Bot movement effect
-    useEffect(() => {
-        if (state.phase === 'racing') {
-            const config = LEVELS[state.level]
-            const baseSpeed = config.botSpeed
-
-            botTimerRef.current = window.setInterval(() => {
-                setState(prev => {
-                    const now = Date.now()
-                    const newRacers = prev.racers.map(racer => {
-                        if (racer.isPlayer) return racer
-
-                        // Bots move based on: speedFactor * raceLuck (per-race) * randomFactor (per-tick)
-                        // This creates significant variety in race outcomes
-                        const tickRandom = 0.7 + Math.random() * 0.6  // 0.7-1.3 per tick
-                        const movement = (baseSpeed * racer.speedFactor * racer.raceLuck * tickRandom) * 0.3
-                        const newPosition = Math.min(100, racer.position + movement)
-
-                        // Set finishTime when crossing the finish line for the first time
-                        const finishTime = newPosition >= 100 && racer.finishTime === null ? now : racer.finishTime
-
-                        return { ...racer, position: newPosition, finishTime }
-                    })
-
-                    // Check if race should end:
-                    // - Player has finished, OR
-                    // - 3 racers have crossed the finish line (third place is determined)
-                    const player = newRacers.find(r => r.isPlayer)
-                    const playerFinished = player && player.position >= 100
-                    const finishedCount = newRacers.filter(r => r.position >= 100).length
-                    const raceOver = playerFinished || finishedCount >= 3
-
-                    return {
-                        ...prev,
-                        racers: newRacers,
-                        phase: raceOver && !prev.showFeedback ? 'finished' : prev.phase
-                    }
-                })
-            }, 200)
-        }
-
-        return () => {
-            if (botTimerRef.current) clearInterval(botTimerRef.current)
-        }
-    }, [state.phase, state.level])
-
-    const startGame = useCallback((level: number = 0) => {
-        const config = LEVELS[Math.min(level, LEVELS.length - 1)]
-        const firstQuestion = generateOperation(level)
+    const prepareRace = useCallback((
+        level: number,
+        questionQueue: FractionOperation[] = [],
+        settings: RaceSettings = DEFAULT_RACE_SETTINGS
+    ) => {
+        const safeLevel = Math.max(0, Math.min(level, LEVELS.length - 1))
+        const raceSettings: RaceSettings = questionQueue.length > 0
+            ? { ...settings, format: 'classic' }
+            : settings
+        const firstQuestion = questionQueue[0] ?? generateOperation(safeLevel, raceSettings)
+        const totalQuestions = getRaceQuestionLimit(raceSettings, questionQueue.length)
 
         setState({
-            ...INITIAL_STATE,
+            ...createInitialState(),
             phase: 'countdown',
-            level,
-            totalQuestions: config.questionsCount,
+            level: safeLevel,
+            totalQuestions,
             currentQuestion: firstQuestion,
-            answerOptions: generateAnswerOptions(firstQuestion, level),
-            racers: createInitialRacers()
+            answerOptions: generateAnswerOptions(firstQuestion),
+            questionQueue,
+            reviewMode: questionQueue.length > 0,
+            settings: raceSettings
         })
+    }, [])
 
-        // Start racing after countdown
-        setTimeout(() => {
-            setState(prev => ({
-                ...prev,
+    const startGame = useCallback((
+        level: number = 0,
+        settings: RaceSettings = DEFAULT_RACE_SETTINGS
+    ) => {
+        prepareRace(level, [], settings)
+    }, [prepareRace])
+
+    const startErrorReview = useCallback((
+        operations: FractionOperation[],
+        level: number,
+        settings: RaceSettings = DEFAULT_RACE_SETTINGS
+    ) => {
+        if (operations.length > 0) prepareRace(level, operations, settings)
+    }, [prepareRace])
+
+    const beginRace = useCallback(() => {
+        setState(previous => {
+            if (previous.phase !== 'countdown') return previous
+
+            const now = Date.now()
+            return {
+                ...previous,
                 phase: 'racing',
-                startTime: Date.now(),
-                questionStartTime: Date.now(),
+                startTime: now,
+                questionStartTime: now,
                 questionNumber: 1
-            }))
-        }, 3000)
+            }
+        })
     }, [])
 
     const nextQuestion = useCallback(() => {
-        setState(prev => {
-            // Check if race is over
-            const isLastQuestion = prev.questionNumber >= prev.totalQuestions
-            const playerFinished = prev.racers.find(r => r.isPlayer)?.position === 100
+        setState(previous => {
+            if (previous.phase !== 'racing' || !previous.showFeedback) return previous
 
-            if (isLastQuestion || playerFinished) {
-                return {
-                    ...prev,
-                    phase: 'finished',
-                    showFeedback: false,
-                    turboActive: false
-                }
-            }
+            const stoppedByMistake = perfectRaceFailed(previous.settings, previous.lastAnswerCorrect)
+            const isLastQuestion = previous.questionNumber >= previous.totalQuestions
+            if (stoppedByMistake) return finishRace(previous, 'mistake')
+            if (isLastQuestion) return finishRace(previous, 'completed')
 
-            // Generate next question
-            const nextQ = generateOperation(prev.level)
+            const nextQuestionIndex = previous.questionNumber
+            const nextOperation = previous.questionQueue[nextQuestionIndex]
+                ?? generateOperation(previous.level, previous.settings)
 
             return {
-                ...prev,
-                questionNumber: prev.questionNumber + 1,
-                currentQuestion: nextQ,
-                answerOptions: generateAnswerOptions(nextQ, prev.level),
+                ...previous,
+                questionNumber: previous.questionNumber + 1,
+                currentQuestion: nextOperation,
+                answerOptions: generateAnswerOptions(nextOperation),
                 questionStartTime: Date.now(),
                 showFeedback: false,
                 lastAnswerCorrect: null,
-                turboActive: prev.combo >= SCORE_CONFIG.turboThreshold
+                lastScoreBreakdown: null,
+                selectedAnswerId: null
             }
         })
     }, [])
 
     const answerQuestion = useCallback((answerId: string) => {
-        setState(prev => {
-            if (prev.showFeedback || !prev.currentQuestion) return prev
-
-            const selectedAnswer = prev.answerOptions.find(a => a.id === answerId)
-            if (!selectedAnswer) return prev
-
-            const isCorrect = selectedAnswer.isCorrect
-            const responseTime = Date.now() - (prev.questionStartTime || Date.now())
-            const isFast = responseTime < 3000
-
-            let newScore = prev.score
-            let newCombo = prev.combo
-            let newTurbo = prev.turboActive
-            const newWrongAnswers = [...prev.wrongAnswers]
-
-            if (isCorrect) {
-                // Calculate score
-                newScore += SCORE_CONFIG.basePoints
-                if (isFast) newScore += SCORE_CONFIG.speedBonus
-                newCombo += 1
-                newScore += newCombo * SCORE_CONFIG.comboMultiplier
-
-                // Check for turbo
-                if (newCombo >= SCORE_CONFIG.turboThreshold && !newTurbo) {
-                    newTurbo = true
-                }
-            } else {
-                newCombo = 0
-                newTurbo = false
-                newWrongAnswers.push(prev.currentQuestion)
+        setState(previous => {
+            if (previous.phase !== 'racing' || previous.showFeedback || !previous.currentQuestion) {
+                return previous
             }
 
-            // Move player based on answer
+            const selectedAnswer = previous.answerOptions.find(option => option.id === answerId)
+            const correctAnswer = previous.answerOptions.find(option => option.isCorrect)
+            if (!selectedAnswer || !correctAnswer) return previous
+
+            const config = LEVELS[previous.level]
+            const responseTime = Date.now() - (previous.questionStartTime || Date.now())
+            const isFast = responseTime <= config.fastAnswerMs
+            const isCorrect = selectedAnswer.isCorrect
+
+            const scoreResult = calculateScoreResult(previous.combo, isCorrect, isFast)
+            const newScore = previous.score + scoreResult.breakdown.total
+            const newCombo = scoreResult.combo
+            const newTurbo = scoreResult.turboActive
+
             const now = Date.now()
-            const newRacers = prev.racers.map(racer => {
-                if (!racer.isPlayer) return racer
-
-                let movement = 0
-                if (isCorrect) {
-                    const baseMove = 100 / prev.totalQuestions
-                    movement = isFast ? baseMove * 1.2 : baseMove
-                    if (newTurbo) movement *= 1.5
-                }
-
+            const baseMovement = 100 / previous.totalQuestions
+            const difficultyFactor = 0.8 + config.botSpeed * 0.5
+            const raceProgress = previous.questionNumber / previous.totalQuestions
+            let newRacers = previous.racers.map(racer => {
+                const movement = racer.isPlayer
+                    ? (isCorrect ? baseMovement : 0)
+                    : calculateRivalMovement(
+                        racer,
+                        baseMovement,
+                        raceProgress,
+                        difficultyFactor
+                    )
                 const newPosition = Math.min(100, racer.position + movement)
-                const finishTime = newPosition >= 100 && racer.finishTime === null ? now : racer.finishTime
+                const finishTime = newPosition >= 100 && racer.finishTime === null
+                    ? now
+                    : racer.finishTime
 
                 return {
                     ...racer,
                     position: newPosition,
-                    hasTurbo: newTurbo,
+                    hasTurbo: racer.isPlayer ? newTurbo : false,
                     finishTime
                 }
             })
 
+            const isFinalAnswer = previous.questionNumber >= previous.totalQuestions
+            const leadingPosition = Math.max(...newRacers.map(racer => racer.position))
+            if (isFinalAnswer && leadingPosition > 0 && leadingPosition < 100) {
+                newRacers = newRacers.map(racer => {
+                    const normalizedPosition = Math.min(100, racer.position / leadingPosition * 100)
+                    return {
+                        ...racer,
+                        position: normalizedPosition,
+                        finishTime: normalizedPosition >= 100 && racer.finishTime === null
+                            ? now
+                            : racer.finishTime
+                    }
+                })
+            }
+
             return {
-                ...prev,
+                ...previous,
                 score: newScore,
                 combo: newCombo,
-                correctAnswers: isCorrect ? prev.correctAnswers + 1 : prev.correctAnswers,
-                wrongAnswers: newWrongAnswers,
+                maxCombo: Math.max(previous.maxCombo, newCombo),
+                correctAnswers: isCorrect
+                    ? previous.correctAnswers + 1
+                    : previous.correctAnswers,
+                attempts: [
+                    ...previous.attempts,
+                    {
+                        operation: previous.currentQuestion,
+                        selectedAnswer: selectedAnswer.fraction,
+                        correctAnswer: correctAnswer.fraction,
+                        isCorrect,
+                        responseTimeMs: responseTime
+                    }
+                ],
                 lastAnswerCorrect: isCorrect,
                 showFeedback: true,
                 turboActive: newTurbo,
+                lastScoreBreakdown: scoreResult.breakdown,
+                selectedAnswerId: selectedAnswer.id,
                 racers: newRacers
             }
         })
-
-        // Auto-advance after feedback
-        setTimeout(() => {
-            nextQuestion()
-        }, 1500)
-    }, [nextQuestion])
-
-    const resetGame = useCallback(() => {
-        if (timerRef.current) clearInterval(timerRef.current)
-        if (botTimerRef.current) clearInterval(botTimerRef.current)
-        setState(INITIAL_STATE)
     }, [])
 
-    // Calculate player position (rank)
+    const resetGame = useCallback(() => {
+        if (timerRef.current !== null) {
+            clearInterval(timerRef.current)
+            timerRef.current = null
+        }
+        setState(createInitialState())
+    }, [])
+
     const getPlayerRank = useCallback((): number => {
         const sorted = [...state.racers].sort((a, b) => b.position - a.position)
-        const playerIndex = sorted.findIndex(r => r.isPlayer)
-        return playerIndex + 1
+        return sorted.findIndex(racer => racer.isPlayer) + 1
     }, [state.racers])
 
     return {
         state,
         startGame,
+        startErrorReview,
+        beginRace,
         answerQuestion,
+        nextQuestion,
         resetGame,
         getPlayerRank
     }

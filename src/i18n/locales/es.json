@@ -261,10 +261,10 @@
             },
             "ch12": {
                 "title": "💀 El Desafío Final: El Tanque de Agua",
-                "description": "Tres agricultores comparten un tanque de agua. El primero usa 1/4, el segundo usa 1/3 de lo que queda, y el tercero usa 2/5 del resto. Si quedan 1300 litros, ¿cuántos litros había al principio?",
-                "hint": "Trabaja hacia atrás: 1300L = resto × (1-2/5). Continúa paso a paso hasta el inicio.",
-                "success": "¡Excelente! Resolviendo: 1300 ÷ 0.6 ÷ 0.667 ÷ 0.75 = 6000L",
-                "error": "Paso a paso: Final = X × 3/4 × 2/3 × 3/5 = 1300. Despeja X."
+                "description": "Tres agricultores comparten un tanque de agua. El primero usa 1/4, el segundo usa 1/3 de lo que queda, y el tercero usa 2/5 del resto. Si quedan 1800 litros, ¿cuántos litros había al principio?",
+                "hint": "Trabaja hacia atrás: 1800 L son 3/5 de lo que había antes del tercer agricultor. Continúa paso a paso hasta el inicio.",
+                "success": "¡Excelente! Al final queda 3/4 × 2/3 × 3/5 = 3/10 del agua. Si 3/10 son 1800 L, al principio había 6000 L.",
+                "error": "Paso a paso: Final = X × 3/4 × 2/3 × 3/5 = 1800. Despeja X."
             }
         },
         "baserri": {
@@ -705,6 +705,7 @@
             "exit": "Salir",
             "playAgain": "Jugar de nuevo",
             "completed": "¡Felicidades!",
+            "hiddenCard": "Carta oculta",
             "equivalencesFound": "Equivalencias encontradas"
         },
         "fractionRace": {
@@ -721,9 +722,30 @@
             "questions": "Preguntas",
             "operations": "Operaciones",
             "mixedNumbers": "Números mixtos",
-            "maxExponent": "Exp. Máx",
-            "opponents": "Oponentes",
-            "pts": "pts",
+      "maxExponent": "Exp. Máx",
+      "opponents": "Oponentes",
+      "fastTime": "Bonificación rápida",
+      "modeSelection": "Tipo de operación",
+      "difficultySelection": "Dificultad",
+      "maxDenominator": "Denominador ≤ {{value}}",
+      "sameDenominators": "Denominadores iguales",
+      "differentDenominators": "Denominadores diferentes",
+      "simplifiedAnswers": "Respuestas simplificadas",
+      "continue": "Continuar",
+      "viewResults": "Ver resultados",
+      "retryErrors": "Repetir mis errores",
+      "reviewMode": "Repaso de errores",
+      "countdown": "Cuenta atrás de la carrera",
+      "fractionAria": "Fracción {{numerator}} entre {{denominator}}",
+      "mixedFractionAria": "Número mixto {{whole}} y {{numerator}} entre {{denominator}}",
+      "explanations": {
+        "addSubtract": "Busca un denominador común y opera únicamente los numeradores.",
+        "multiply": "Multiplica numeradores entre sí y denominadores entre sí; simplifica al final.",
+        "divide": "Multiplica por la fracción inversa del segundo término y simplifica.",
+        "power": "Eleva tanto el numerador como el denominador al exponente.",
+        "combined": "Respeta primero los paréntesis y después el orden de las operaciones."
+      },
+      "pts": "pts",
             "exit": "Salir",
             "question": "Pregunta",
             "of": "de",
@@ -731,6 +753,80 @@
             "incorrect": "¡Incorrecto!",
             "turbo": "¡TURBO!",
             "combo": "Combo",
+            "scoringGuide": "Sistema de puntuación",
+            "baseScore": "Acierto",
+            "speedScore": "Rapidez",
+            "comboScore": "Combo",
+            "comboStep": "por nivel de combo",
+            "turboScore": "Turbo",
+            "scoreEarned": "+{{points}} puntos conseguidos",
+            "noPoints": "0 puntos conseguidos",
+            "comboReset": "El combo vuelve a cero",
+            "turboProgress": "Turbo {{current}}/{{target}}",
+            "turboActiveBonus": "Turbo activo: +{{points}} por acierto",
+            "chooseRaceFormat": "Modalidad de carrera",
+            "soundOn": "Sonido activado",
+            "soundOff": "Sonido desactivado",
+            "formats": {
+                "classic": { "name": "Clásica", "description": "Llega a meta resolviendo todas las preguntas." },
+                "sprint": { "name": "Contrarreloj", "description": "Consigue el máximo de puntos en 60 segundos." },
+                "perfect": { "name": "Carrera perfecta", "description": "Un fallo termina la carrera." }
+            },
+            "questionCountSelection": "Número de preguntas",
+            "operationSelection": "Operaciones incluidas",
+            "operationFilters": {
+                "default": "Todas",
+                "addition": "Solo sumas",
+                "subtraction": "Solo restas",
+                "multiplication": "Solo multiplicaciones",
+                "division": "Solo divisiones"
+            },
+            "includeMixedOption": "Incluir números mixtos",
+            "timeLimit": "Tiempo límite",
+            "personalProgress": "Mi progreso",
+            "racesPlayed": "Carreras",
+            "wins": "Victorias",
+            "bestScore": "Mejor puntuación",
+            "bestTime": "Mejor tiempo",
+            "bestAccuracy": "Mejor precisión",
+            "bestCombo": "Mejor combo",
+            "noRecordYet": "Completa tu primera carrera para empezar a guardar récords.",
+            "newAchievements": "Nuevos logros",
+            "rivalPersonalities": {
+                "sprinter": "Salida rápida: empieza fuerte y pierde ritmo al final",
+                "steady": "Constante: mantiene un ritmo muy regular",
+                "comeback": "Remontador: acelera durante la segunda mitad"
+            },
+            "errorInsights": {
+                "sign": "Revisa el signo del resultado antes de elegir la respuesta.",
+                "simplification": "El valor es equivalente, pero la respuesta debe quedar totalmente simplificada.",
+                "commonDenominator": "No operes los denominadores: busca primero un denominador común.",
+                "multiplication": "Multiplica numerador por numerador y denominador por denominador.",
+                "inverse": "En una división debes invertir únicamente la segunda fracción.",
+                "power": "Aplica el exponente tanto al numerador como al denominador.",
+                "operationOrder": "Resuelve primero los paréntesis y respeta la prioridad de las operaciones.",
+                "calculation": "El procedimiento parece correcto; revisa el último cálculo y la simplificación."
+            },
+            "rewardTiers": {
+                "gold": "Carrera perfecta",
+                "silver": "Dominio excelente",
+                "bronze": "Buen progreso",
+                "finisher": "Reto completado",
+                "attempt": "Intento finalizado"
+            },
+            "finishReasons": {
+                "completed": "Has completado todo el recorrido.",
+                "time": "Se acabó el tiempo: cuenta cada acierto conseguido.",
+                "mistake": "La carrera perfecta termina con el primer fallo. Puedes repasar el error y volver a intentarlo."
+            },
+            "achievements": {
+                "firstRace": "🎟️ Primera carrera",
+                "firstWin": "🏆 Primera victoria",
+                "newBestScore": "⭐ Récord de puntos",
+                "newBestTime": "⏱️ Récord de tiempo",
+                "newBestAccuracy": "🎯 Récord de precisión",
+                "perfectRace": "💎 Sin errores"
+            },
             "go": "¡YA!",
             "oneGo": "1... ¡YA!",
             "raceFinished": "¡Carrera terminada!",

@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { TFunction } from 'i18next'
+import { validateMissionAnswer } from './missionValidation'
 import './MissionPage.css'
 
 type Difficulty = 'hasiberria' | 'aurreratua' | 'maisu'
@@ -17,6 +18,20 @@ interface Challenge {
     points: number
 }
 
+const PROGRESS_STORAGE_KEY = 'matella-dbh2-zatikiak-missions'
+
+function loadCompletedChallenges(): number[] {
+    if (typeof window === 'undefined') return []
+
+    try {
+        const stored = JSON.parse(window.localStorage.getItem(PROGRESS_STORAGE_KEY) ?? '[]')
+        if (!Array.isArray(stored)) return []
+        return [...new Set(stored.filter((id): id is number => Number.isInteger(id) && id >= 1 && id <= 12))]
+    } catch {
+        return []
+    }
+}
+
 const getChallenges = (t: TFunction): Challenge[] => [
     // HASIBERRIA (Principiante) - 4 desafíos
     {
@@ -25,7 +40,7 @@ const getChallenges = (t: TFunction): Challenge[] => [
         title: t('missions.challenges.ch1.title'),
         description: t('missions.challenges.ch1.description'),
         hint: t('missions.challenges.ch1.hint'),
-        validate: (ans) => ans === '18' || ans === '18 manzanas',
+        validate: (ans) => validateMissionAnswer(1, ans),
         successMessage: t('missions.challenges.ch1.success'),
         errorMessage: t('missions.challenges.ch1.error'),
         points: 10
@@ -36,7 +51,7 @@ const getChallenges = (t: TFunction): Challenge[] => [
         title: t('missions.challenges.ch2.title'),
         description: t('missions.challenges.ch2.description'),
         hint: t('missions.challenges.ch2.hint'),
-        validate: (ans) => ans === '3/4' || ans === '0.75',
+        validate: (ans) => validateMissionAnswer(2, ans),
         successMessage: t('missions.challenges.ch2.success'),
         errorMessage: t('missions.challenges.ch2.error'),
         points: 10
@@ -47,7 +62,7 @@ const getChallenges = (t: TFunction): Challenge[] => [
         title: t('missions.challenges.ch3.title'),
         description: t('missions.challenges.ch3.description'),
         hint: t('missions.challenges.ch3.hint'),
-        validate: (ans) => ans === '3/8',
+        validate: (ans) => validateMissionAnswer(3, ans),
         successMessage: t('missions.challenges.ch3.success'),
         errorMessage: t('missions.challenges.ch3.error'),
         points: 10
@@ -58,7 +73,7 @@ const getChallenges = (t: TFunction): Challenge[] => [
         title: t('missions.challenges.ch4.title'),
         description: t('missions.challenges.ch4.description'),
         hint: t('missions.challenges.ch4.hint'),
-        validate: (ans) => ans === '3/4' || ans === '45/60',
+        validate: (ans) => validateMissionAnswer(4, ans),
         successMessage: t('missions.challenges.ch4.success'),
         errorMessage: t('missions.challenges.ch4.error'),
         points: 10
@@ -70,7 +85,7 @@ const getChallenges = (t: TFunction): Challenge[] => [
         title: t('missions.challenges.ch5.title'),
         description: t('missions.challenges.ch5.description'),
         hint: t('missions.challenges.ch5.hint'),
-        validate: (ans) => ans === '5/12',
+        validate: (ans) => validateMissionAnswer(5, ans),
         successMessage: t('missions.challenges.ch5.success'),
         errorMessage: t('missions.challenges.ch5.error'),
         points: 20
@@ -81,10 +96,7 @@ const getChallenges = (t: TFunction): Challenge[] => [
         title: t('missions.challenges.ch6.title'),
         description: t('missions.challenges.ch6.description'),
         hint: t('missions.challenges.ch6.hint'),
-        validate: (ans) => {
-            const normalized = ans.toLowerCase().replace(/\s+/g, '').replace('litros', '').replace('litro', '').replace('l', '')
-            return normalized === '6000'
-        },
+        validate: (ans) => validateMissionAnswer(6, ans),
         successMessage: t('missions.challenges.ch6.success'),
         errorMessage: t('missions.challenges.ch6.error'),
         points: 20
@@ -95,7 +107,7 @@ const getChallenges = (t: TFunction): Challenge[] => [
         title: t('missions.challenges.ch7.title'),
         description: t('missions.challenges.ch7.description'),
         hint: t('missions.challenges.ch7.hint'),
-        validate: (ans) => ans === '3/5' || ans === '0.6',
+        validate: (ans) => validateMissionAnswer(7, ans),
         successMessage: t('missions.challenges.ch7.success'),
         errorMessage: t('missions.challenges.ch7.error'),
         points: 20
@@ -106,7 +118,7 @@ const getChallenges = (t: TFunction): Challenge[] => [
         title: t('missions.challenges.ch8.title'),
         description: t('missions.challenges.ch8.description'),
         hint: t('missions.challenges.ch8.hint'),
-        validate: (ans) => ans === '35' || ans.toLowerCase().includes('35 min'),
+        validate: (ans) => validateMissionAnswer(8, ans),
         successMessage: t('missions.challenges.ch8.success'),
         errorMessage: t('missions.challenges.ch8.error'),
         points: 20
@@ -118,10 +130,7 @@ const getChallenges = (t: TFunction): Challenge[] => [
         title: t('missions.challenges.ch9.title'),
         description: t('missions.challenges.ch9.description'),
         hint: t('missions.challenges.ch9.hint'),
-        validate: (ans) => {
-            const normalized = ans.toLowerCase().replace(/\s+/g, '').replace('metros', '').replace('metro', '').replace('m', '')
-            return normalized === '18'
-        },
+        validate: (ans) => validateMissionAnswer(9, ans),
         successMessage: t('missions.challenges.ch9.success'),
         errorMessage: t('missions.challenges.ch9.error'),
         points: 30
@@ -132,7 +141,7 @@ const getChallenges = (t: TFunction): Challenge[] => [
         title: t('missions.challenges.ch10.title'),
         description: t('missions.challenges.ch10.description'),
         hint: t('missions.challenges.ch10.hint'),
-        validate: (ans) => ans === '90' || ans.toLowerCase().includes('90 min'),
+        validate: (ans) => validateMissionAnswer(10, ans),
         successMessage: t('missions.challenges.ch10.success'),
         errorMessage: t('missions.challenges.ch10.error'),
         points: 30
@@ -143,7 +152,7 @@ const getChallenges = (t: TFunction): Challenge[] => [
         title: t('missions.challenges.ch11.title'),
         description: t('missions.challenges.ch11.description'),
         hint: t('missions.challenges.ch11.hint'),
-        validate: (ans) => ans === '1200' || ans.includes('1200'),
+        validate: (ans) => validateMissionAnswer(11, ans),
         successMessage: t('missions.challenges.ch11.success'),
         errorMessage: t('missions.challenges.ch11.error'),
         points: 30
@@ -154,10 +163,7 @@ const getChallenges = (t: TFunction): Challenge[] => [
         title: t('missions.challenges.ch12.title'),
         description: t('missions.challenges.ch12.description'),
         hint: t('missions.challenges.ch12.hint'),
-        validate: (ans) => {
-            const normalized = ans.toLowerCase().replace(/\s+/g, '').replace('litros', '').replace('litro', '').replace('l', '')
-            return normalized === '6000'
-        },
+        validate: (ans) => validateMissionAnswer(12, ans),
         successMessage: t('missions.challenges.ch12.success'),
         errorMessage: t('missions.challenges.ch12.error'),
         points: 40 // Increased for final boss
@@ -195,10 +201,23 @@ export function MissionPage() {
     const [answer, setAnswer] = useState('')
     const [feedback, setFeedback] = useState<'idle' | 'success' | 'error'>('idle')
     const [showHint, setShowHint] = useState(false)
-    const [completedChallenges, setCompletedChallenges] = useState<number[]>([])
-    const [totalPoints, setTotalPoints] = useState(0)
+    const [completedChallenges, setCompletedChallenges] = useState<number[]>(loadCompletedChallenges)
 
     const allChallenges = getChallenges(t)
+    const totalPoints = useMemo(
+        () => allChallenges
+            .filter((challenge) => completedChallenges.includes(challenge.id))
+            .reduce((total, challenge) => total + challenge.points, 0),
+        [allChallenges, completedChallenges]
+    )
+
+    useEffect(() => {
+        try {
+            window.localStorage.setItem(PROGRESS_STORAGE_KEY, JSON.stringify(completedChallenges))
+        } catch {
+            // The activity still works when browser storage is disabled.
+        }
+    }, [completedChallenges])
 
     const filteredChallenges = selectedDifficulty
         ? allChallenges.filter((c: Challenge) => c.difficulty === selectedDifficulty)
@@ -208,10 +227,9 @@ export function MissionPage() {
         if (!currentChallenge) return
         if (currentChallenge.validate(answer.trim())) {
             setFeedback('success')
-            if (!completedChallenges.includes(currentChallenge.id)) {
-                setCompletedChallenges([...completedChallenges, currentChallenge.id])
-                setTotalPoints(totalPoints + currentChallenge.points)
-            }
+            setCompletedChallenges((current) => current.includes(currentChallenge.id)
+                ? current
+                : [...current, currentChallenge.id])
         } else {
             setFeedback('error')
         }
@@ -356,7 +374,11 @@ export function MissionPage() {
                     <p className="challenge-description">{currentChallenge.description}</p>
 
                     <div className="answer-section">
+                        <label className="sr-only" htmlFor={`mission-answer-${currentChallenge.id}`}>
+                            {t('missions.placeholder')}
+                        </label>
                         <input
+                            id={`mission-answer-${currentChallenge.id}`}
                             type="text"
                             value={answer}
                             onChange={(e) => {

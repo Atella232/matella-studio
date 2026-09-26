@@ -13,6 +13,11 @@ export function EquivalenceLab() {
     const equivalentNum = baseNumerator * multiplier
     const equivalentDen = baseDenominator * multiplier
 
+    const changeBaseDenominator = (newDenominator: number) => {
+        setBaseDenominator(newDenominator)
+        setBaseNumerator((current) => Math.min(current, newDenominator))
+    }
+
     // Calculate GCD for simplified form
     const gcd = (a: number, b: number): number => (b === 0 ? a : gcd(b, a % b))
     const commonDivisor = gcd(baseNumerator, baseDenominator)
@@ -121,7 +126,7 @@ export function EquivalenceLab() {
                         id="base-numerator"
                         type="range"
                         min="1"
-                        max="10"
+                        max={baseDenominator}
                         value={baseNumerator}
                         onChange={(e) => setBaseNumerator(Number(e.target.value))}
                     />
@@ -136,7 +141,7 @@ export function EquivalenceLab() {
                         min="1"
                         max="10"
                         value={baseDenominator}
-                        onChange={(e) => setBaseDenominator(Number(e.target.value))}
+                        onChange={(e) => changeBaseDenominator(Number(e.target.value))}
                     />
                     <output>{baseDenominator}</output>
                 </div>

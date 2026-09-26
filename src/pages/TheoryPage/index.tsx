@@ -125,7 +125,17 @@ export function TheoryPage() {
                             key={section.id}
                             className={`theory-card ${expandedSection === section.id ? 'expanded' : ''}`}
                             style={{ '--card-color': section.color } as React.CSSProperties}
+                            role="button"
+                            tabIndex={0}
+                            aria-expanded={expandedSection === section.id}
+                            aria-controls={`theory-content-${section.id}`}
                             onClick={() => toggleSection(section.id)}
+                            onKeyDown={(event) => {
+                                if (event.key === 'Enter' || event.key === ' ') {
+                                    event.preventDefault()
+                                    toggleSection(section.id)
+                                }
+                            }}
                         >
                             <div className="card-header">
                                 <span className="card-icon">{section.icon}</span>
@@ -135,7 +145,11 @@ export function TheoryPage() {
                                 </span>
                             </div>
 
-                            <div className={`card-content ${expandedSection === section.id ? 'visible' : ''}`}>
+                            <div
+                                id={`theory-content-${section.id}`}
+                                className={`card-content ${expandedSection === section.id ? 'visible' : ''}`}
+                                aria-hidden={expandedSection !== section.id}
+                            >
                                 {section.content}
                             </div>
                         </div>

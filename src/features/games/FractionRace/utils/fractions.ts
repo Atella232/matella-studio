@@ -1,4 +1,4 @@
-import type { Fraction, MixedNumber, FractionOperation, AnswerOption, LevelConfig, ExpressionNode, Operator } from '../types'
+import type { Fraction, MixedNumber, FractionOperation, AnswerOption, LevelConfig, ExpressionNode, Operator, OperationFilter } from '../types'
 import { LEVELS } from '../types'
 
 // Greatest Common Divisor
@@ -30,17 +30,47 @@ export function simplify(numerator: number, denominator: number): Fraction {
     }
 }
 
+function signedNumerator(value: Fraction): number {
+    return value.isNegative ? -Math.abs(value.numerator) : value.numerator
+}
+
+function simplifyFractionValue(value: Fraction): Fraction {
+    return simplify(signedNumerator(value), value.denominator)
+}
+
+function rawFraction(numerator: number, denominator: number): Fraction {
+    const isNegative = (numerator < 0) !== (denominator < 0)
+    return {
+        numerator: Math.abs(numerator),
+        denominator: Math.abs(denominator),
+        isNegative
+    }
+}
+
+function isValidFraction(value: Fraction): boolean {
+    return Number.isFinite(value.numerator)
+        && Number.isFinite(value.denominator)
+        && value.denominator > 0
+}
+
 // Convert mixed number to improper fraction
 export function mixedToImproper(mixed: MixedNumber): Fraction {
-    const improperNumerator = mixed.whole * mixed.denominator + mixed.numerator
-    return { numerator: improperNumerator, denominator: mixed.denominator }
+    const sign = mixed.isNegative ? -1 : 1
+    const improperNumerator = sign * (Math.abs(mixed.whole) * mixed.denominator + mixed.numerator)
+    return simplify(improperNumerator, mixed.denominator)
 }
 
 // Convert improper fraction to mixed number
 export function improperToMixed(fraction: Fraction): MixedNumber {
-    const whole = Math.floor(fraction.numerator / fraction.denominator)
-    const remainder = fraction.numerator % fraction.denominator
-    return { whole, numerator: remainder, denominator: fraction.denominator }
+    const normalized = simplifyFractionValue(fraction)
+    const whole = Math.floor(normalized.numerator / normalized.denominator)
+    const remainder = normalized.numerator % normalized.denominator
+    return {
+        whole,
+        numerator: remainder,
+        denominator: normalized.denominator,
+        isNegative: normalized.isNegative
+    }
 }
 
 // Check if a fraction is a mixed number (improper)
@@ -51,7 +81,8 @@ export function isMixedNumber(obj: Fraction | MixedNumber): obj is MixedNumber {
 // Get fraction value as number
 export function toNumber(f: Fraction | MixedNumber): number {
     if (isMixedNumber(f)) {
-        return f.whole + f.numerator / f.denominator
+        const sign = f.isNegative ? -1 : 1
+        return sign * (Math.abs(f.whole) + f.numerator / f.denominator)
     }
     const sign = f.isNegative ? -1 : 1
     return sign * (f.numerator / f.denominator)
@@ -60,62 +91,62 @@ export function toNumber(f: Fraction | MixedNumber): number {
 // Add two fractions
 export function addFractions(a: Fraction, b: Fraction): Fraction {
     const commonDenom = lcm(a.denominator, b.denominator)
-    const newNumA = a.numerator * (commonDenom / a.denominator)
-    const newNumB = b.numerator * (commonDenom / b.denominator)
+    const newNumA = signedNumerator(a) * (commonDenom / a.denominator)
+    const newNumB = signedNumerator(b) * (commonDenom / b.denominator)
     return simplify(newNumA + newNumB, commonDenom)
 }
 
 // Add two fractions WITHOUT simplifying (for easy level)
 export function addFractionsRaw(a: Fraction, b: Fraction): Fraction {
     const commonDenom = lcm(a.denominator, b.denominator)
-    const newNumA = a.numerator * (commonDenom / a.denominator)
-    const newNumB = b.numerator * (commonDenom / b.denominator)
-    return { numerator: newNumA + newNumB, denominator: commonDenom }
+    const newNumA = signedNumerator(a) * (commonDenom / a.denominator)
+    const newNumB = signedNumerator(b) * (commonDenom / b.denominator)
+    return rawFraction(newNumA + newNumB, commonDenom)
 }
 
 // Subtract two fractions
 export function subtractFractions(a: Fraction, b: Fraction): Fraction {
     const commonDenom = lcm(a.denominator, b.denominator)
-    const newNumA = a.numerator * (commonDenom / a.denominator)
-    const newNumB = b.numerator * (commonDenom / b.denominator)
+    const newNumA = signedNumerator(a) * (commonDenom / a.denominator)
+    const newNumB = signedNumerator(b) * (commonDenom / b.denominator)
     return simplify(newNumA - newNumB, commonDenom)
 }
 
 // Subtract two fractions WITHOUT simplifying (for easy level)
 export function subtractFractionsRaw(a: Fraction, b: Fraction): Fraction {
     const commonDenom = lcm(a.denominator, b.denominator)
-    const newNumA = a.numerator * (commonDenom / a.denominator)
-    const newNumB = b.numerator * (commonDenom / b.denominator)
+    const newNumA = signedNumerator(a) * (commonDenom / a.denominator)
+    const newNumB = signedNumerator(b) * (commonDenom / b.denominator)
     const result = newNumA - newNumB
-    return { numerator: Math.abs(result), denominator: commonDenom, isNegative: result < 0 }
+    return rawFraction(result, commonDenom)
 }
 
 // Multiply two fractions
 export function multiplyFractions(a: Fraction, b: Fraction): Fraction {
-    return simplify(a.numerator * b.numerator, a.denominator * b.denominator)
+    return simplify(signedNumerator(a) * signedNumerator(b), a.denominator * b.denominator)
 }
 
 // Multiply two fractions WITHOUT simplifying
 export function multiplyFractionsRaw(a: Fraction, b: Fraction): Fraction {
-    return { numerator: a.numerator * b.numerator, denominator: a.denominator * b.denominator }
+    return rawFraction(signedNumerator(a) * signedNumerator(b), a.denominator * b.denominator)
 }
 
 // Divide two fractions (a ÷ b = a × (b inverted))
 export function divideFractions(a: Fraction, b: Fraction): Fraction {
-    return simplify(a.numerator * b.denominator, a.denominator * b.numerator)
+    return simplify(signedNumerator(a) * b.denominator, a.denominator * signedNumerator(b))
 }
 
 // Divide two fractions WITHOUT simplifying
 export function divideFractionsRaw(a: Fraction, b: Fraction): Fraction {
-    return { numerator: a.numerator * b.denominator, denominator: a.denominator * b.numerator }
+    return rawFraction(signedNumerator(a) * b.denominator, a.denominator * signedNumerator(b))
 }
 
 // Raise a fraction to an integer power
 export function powerFraction(base: Fraction, exponent: number): Fraction {
     if (exponent === 0) return { numerator: 1, denominator: 1 }
-    if (exponent === 1) return simplify(base.numerator, base.denominator)
+    if (exponent === 1) return simplifyFractionValue(base)
     return simplify(
-        Math.pow(base.numerator, exponent),
+        Math.pow(signedNumerator(base), exponent),
         Math.pow(base.denominator, exponent)
     )
 }
@@ -123,10 +154,10 @@ export function powerFraction(base: Fraction, exponent: number): Fraction {
 // Power WITHOUT simplifying
 export function powerFractionRaw(base: Fraction, exponent: number): Fraction {
     if (exponent === 0) return { numerator: 1, denominator: 1 }
-    return {
-        numerator: Math.pow(base.numerator, exponent),
-        denominator: Math.pow(base.denominator, exponent)
-    }
+    return rawFraction(
+        Math.pow(signedNumerator(base), exponent),
+        Math.pow(base.denominator, exponent)
+    )
 }
 
 // Generate a random fraction based on level config
@@ -149,8 +180,27 @@ function generateMixedNumber(config: LevelConfig): MixedNumber {
 }
 
 // Generate a complete fraction operation
-export function generateOperation(level: number): FractionOperation {
-    const config = LEVELS[Math.min(level, LEVELS.length - 1)]
+export function generateOperation(
+    level: number,
+    overrides: { operationFilter?: OperationFilter, includeMixed?: boolean } = {}
+): FractionOperation {
+    const baseConfig = LEVELS[Math.min(level, LEVELS.length - 1)]
+    let operationType = baseConfig.operationType
+
+    if (baseConfig.gameMode === 'addSub') {
+        if (overrides.operationFilter === 'addition') operationType = 'addition'
+        if (overrides.operationFilter === 'subtraction') operationType = 'subtraction'
+    }
+    if (baseConfig.gameMode === 'mulDiv') {
+        if (overrides.operationFilter === 'multiplication') operationType = 'multiplication'
+        if (overrides.operationFilter === 'division') operationType = 'division'
+    }
+
+    const config: LevelConfig = {
+        ...baseConfig,
+        operationType,
+        includeMixed: overrides.includeMixed ?? baseConfig.includeMixed
+    }
 
     // Determine operation type based on config
     switch (config.operationType) {
@@ -278,10 +328,10 @@ function generateCombinedOperation(config: LevelConfig): FractionOperation {
 
         result = evaluateExpression(tree)
 
-    } while ((result.isNegative || result.numerator < 0) && attempts < 20)
+    } while ((!isValidFraction(result) || result.isNegative || result.numerator < 0) && attempts < 40)
 
-    // Fallback if failed to generate positive result
-    if (result.isNegative || result.numerator < 0) {
+    // Fallback if no finite, non-negative expression could be generated.
+    if (!isValidFraction(result) || result.isNegative || result.numerator < 0) {
         tree = createOp('+',
             { type: 'fraction', value: { numerator: 1, denominator: 2 } },
             { type: 'fraction', value: { numerator: 1, denominator: 2 } }
@@ -295,7 +345,7 @@ function generateCombinedOperation(config: LevelConfig): FractionOperation {
         operator: '+', // Dummy
         result: result,
         rawResult: result,
-        simplifiedResult: simplify(result.numerator, result.denominator),
+        simplifiedResult: simplifyFractionValue(result),
         isMixed: false,
         displayTree: tree
     }
@@ -342,13 +392,14 @@ function generateAddSubOperation(config: LevelConfig): FractionOperation {
             operator,
             result,
             rawResult,
-            simplifiedResult: simplify(result.numerator, result.denominator),
+            simplifiedResult: simplifyFractionValue(result),
             isMixed: true
         }
     } else {
         // Simple fraction operation
+        const availableDenominators = [2, 3, 4, 5, 6, 8].filter(d => d <= config.maxDenominator)
         const baseDenom = config.sameDenominator
-            ? [2, 3, 4, 5, 6, 8].filter(d => d <= config.maxDenominator)[Math.floor(Math.random() * 6)]
+            ? availableDenominators[Math.floor(Math.random() * availableDenominators.length)]
             : undefined
 
         left = generateFraction(config, baseDenom)
@@ -376,7 +427,7 @@ function generateAddSubOperation(config: LevelConfig): FractionOperation {
             operator,
             result,
             rawResult,
-            simplifiedResult: simplify(result.numerator, result.denominator),
+            simplifiedResult: simplifyFractionValue(result),
             isMixed: false
         }
     }
@@ -410,7 +461,7 @@ function generateMulDivOperation(config: LevelConfig, operator: '×' | '÷'): Fr
             operator,
             result,
             rawResult,
-            simplifiedResult: simplify(result.numerator, result.denominator),
+            simplifiedResult: simplifyFractionValue(result),
             isMixed: true
         }
     } else {
@@ -431,7 +482,7 @@ function generateMulDivOperation(config: LevelConfig, operator: '×' | '÷'): Fr
             operator,
             result,
             rawResult,
-            simplifiedResult: simplify(result.numerator, result.denominator),
+            simplifiedResult: simplifyFractionValue(result),
             isMixed: false
         }
     }
@@ -441,7 +492,7 @@ function generateMulDivOperation(config: LevelConfig, operator: '×' | '÷'): Fr
 function generatePowerOperation(config: LevelConfig): FractionOperation {
     const base = generateFraction(config)
     const maxExp = config.maxExponent || 2
-    const exponent = Math.floor(Math.random() * maxExp) + 2  // 2 to maxExp+1
+    const exponent = 2 + Math.floor(Math.random() * Math.max(1, maxExp - 1))
 
     const result = powerFraction(base, exponent)
     const rawResult = powerFractionRaw(base, exponent)
@@ -452,15 +503,15 @@ function generatePowerOperation(config: LevelConfig): FractionOperation {
         operator: '^',
         result,
         rawResult,
-        simplifiedResult: simplify(result.numerator, result.denominator),
+        simplifiedResult: simplifyFractionValue(result),
         isMixed: false
     }
 }
 
 // Generate answer options (1 correct + 3 wrong)
-export function generateAnswerOptions(operation: FractionOperation, level: number = 1): AnswerOption[] {
-    // For easy level (0), use the rawResult (unsimplified) to avoid confusing students
-    const correct = level === 0 ? operation.rawResult : operation.simplifiedResult
+export function generateAnswerOptions(operation: FractionOperation): AnswerOption[] {
+    // Every mode follows the same contract: the accepted option is simplified.
+    const correct = operation.simplifiedResult
     const options: AnswerOption[] = [
         { fraction: correct, isCorrect: true, id: 'correct' }
     ]
@@ -588,8 +639,8 @@ export function generateAnswerOptions(operation: FractionOperation, level: numbe
 
 // Check if two fractions are equal
 export function fractionsEqual(a: Fraction, b: Fraction): boolean {
-    const aSimp = simplify(a.numerator, a.denominator)
-    const bSimp = simplify(b.numerator, b.denominator)
+    const aSimp = simplifyFractionValue(a)
+    const bSimp = simplifyFractionValue(b)
     return aSimp.numerator === bSimp.numerator &&
         aSimp.denominator === bSimp.denominator &&
         !!aSimp.isNegative === !!bSimp.isNegative
@@ -598,8 +649,9 @@ export function fractionsEqual(a: Fraction, b: Fraction): boolean {
 // Format fraction for display
 export function formatFraction(f: Fraction | MixedNumber): string {
     if (isMixedNumber(f)) {
-        if (f.numerator === 0) return `${f.whole}`
-        return `${f.whole} ${f.numerator}/${f.denominator}`
+        const sign = f.isNegative ? '-' : ''
+        if (f.numerator === 0) return `${sign}${f.whole}`
+        return `${sign}${f.whole} ${f.numerator}/${f.denominator}`
     }
     const sign = f.isNegative ? '-' : ''
     return `${sign}${f.numerator}/${f.denominator}`

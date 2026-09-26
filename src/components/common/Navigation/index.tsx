@@ -55,6 +55,7 @@ export function Navigation() {
     const changeLanguage = (lang: string) => {
         i18n.changeLanguage(lang)
         document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'
+        document.documentElement.lang = lang
     }
 
     const getCourseName = (course: CourseLike) => {

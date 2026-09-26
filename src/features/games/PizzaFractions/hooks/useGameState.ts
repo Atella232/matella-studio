@@ -14,7 +14,8 @@ const INITIAL_STATE: GameState = {
     attempts: 0,
     isGameOver: false,
     showFeedback: false,
-    feedbackType: null
+    feedbackType: null,
+    lastEarnedScore: 0
 }
 
 export function useGameState() {
@@ -45,6 +46,12 @@ export function useGameState() {
         })
     }, [])
 
+    const clearSelection = useCallback(() => {
+        setState(prev => prev.showFeedback
+            ? prev
+            : { ...prev, selectedSlices: [] })
+    }, [])
+
     const submitOrder = useCallback(() => {
         setState(prev => {
             if (!prev.currentOrder || prev.showFeedback) return prev
@@ -62,7 +69,8 @@ export function useGameState() {
                     combo: newCombo,
                     attempts: 0,
                     showFeedback: true,
-                    feedbackType: 'correct'
+                    feedbackType: 'correct',
+                    lastEarnedScore: earnedScore
                 }
             } else {
                 return {
@@ -70,7 +78,8 @@ export function useGameState() {
                     attempts: newAttempts,
                     combo: 0,
                     showFeedback: true,
-                    feedbackType: 'incorrect'
+                    feedbackType: 'incorrect',
+                    lastEarnedScore: 0
                 }
             }
         })
@@ -84,7 +93,8 @@ export function useGameState() {
                     ...prev,
                     showFeedback: false,
                     feedbackType: null,
-                    selectedSlices: []
+                    selectedSlices: [],
+                    lastEarnedScore: 0
                 }
             }
 
@@ -97,7 +107,8 @@ export function useGameState() {
                     ordersCompleted: newOrdersCompleted,
                     isGameOver: true,
                     showFeedback: false,
-                    feedbackType: null
+                    feedbackType: null,
+                    lastEarnedScore: 0
                 }
             }
 
@@ -115,7 +126,8 @@ export function useGameState() {
                 currentOrder: generateFraction(nextLevel),
                 selectedSlices: [],
                 showFeedback: false,
-                feedbackType: null
+                feedbackType: null,
+                lastEarnedScore: 0
             }
         })
     }, [])
@@ -128,6 +140,7 @@ export function useGameState() {
         state,
         startGame,
         selectSlice,
+        clearSelection,
         submitOrder,
         nextOrder,
         resetGame

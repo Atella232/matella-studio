@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useGameState } from './hooks/useGameState'
-import { getRandomCustomer, calculateScore } from './utils/fractions'
+import { getRandomCustomer } from './utils/fractions'
 import { Pizza } from './components/Pizza'
 import { Customer } from './components/Customer'
 import { OrderBubble } from './components/OrderBubble'
@@ -12,7 +12,7 @@ import './PizzaFractions.css'
 
 export function PizzaFractions() {
     const { t } = useTranslation()
-    const { state, startGame, selectSlice, submitOrder, nextOrder, resetGame } = useGameState()
+    const { state, startGame, selectSlice, clearSelection, submitOrder, nextOrder, resetGame } = useGameState()
     const [selectedLevel, setSelectedLevel] = useState(0)
 
     // Random customer for current order
@@ -21,14 +21,6 @@ export function PizzaFractions() {
         mood: state.feedbackType === 'correct' ? 'celebrating' as const :
             state.feedbackType === 'incorrect' ? 'confused' as const : 'neutral' as const
     }), [state.feedbackType])
-
-    // Calculate earned score for display
-    const earnedScore = useMemo(() => {
-        if (state.feedbackType === 'correct') {
-            return calculateScore(state.attempts + 1, state.combo - 1)
-        }
-        return 0
-    }, [state.feedbackType, state.attempts, state.combo])
 
     // Start screen
     if (!state.currentOrder && !state.isGameOver) {
@@ -152,7 +144,7 @@ export function PizzaFractions() {
                                     <div className="game-actions">
                                         <button
                                             className="reset-button"
-                                            onClick={() => selectSlice(-1)}
+                                            onClick={clearSelection}
                                             disabled={state.selectedSlices.length === 0 || state.showFeedback}
                                         >
                                             {t('games.pizzaFractions.reset')}
@@ -177,7 +169,7 @@ export function PizzaFractions() {
                         type={state.feedbackType}
                         order={state.currentOrder}
                         selectedCount={state.selectedSlices.length}
-                        earnedScore={earnedScore}
+                        earnedScore={state.lastEarnedScore}
                         onContinue={nextOrder}
                     />
                 )}

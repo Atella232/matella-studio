@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { formatDecimal, fraction as createFraction } from '../../fractions/fractionMath'
 import './AreaLab.css'
 
 export function AreaLab() {
@@ -9,8 +10,19 @@ export function AreaLab() {
     const [totalParts, setTotalParts] = useState(12)
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
-    const fraction = numerator / denominator
-    const partsToHighlight = Math.round(fraction * totalParts)
+    const partsToHighlight = (numerator * totalParts) / denominator
+    const maxCompatibleParts = Math.max(denominator, Math.floor(48 / denominator) * denominator)
+    const decimal = formatDecimal(createFraction(numerator, denominator))
+
+    const changeDenominator = (newDenominator: number) => {
+        setDenominator(newDenominator)
+        setNumerator((current) => Math.min(current, newDenominator))
+        setTotalParts((current) => {
+            const maxParts = Math.max(newDenominator, Math.floor(48 / newDenominator) * newDenominator)
+            const closestMultiplier = Math.max(1, Math.round(current / newDenominator))
+            return Math.min(maxParts, closestMultiplier * newDenominator)
+        })
+    }
 
     useEffect(() => {
         const canvas = canvasRef.current
@@ -78,7 +90,7 @@ export function AreaLab() {
                         id="area-numerator"
                         type="range"
                         min="1"
-                        max="20"
+                        max={denominator}
                         value={numerator}
                         onChange={(e) => setNumerator(Number(e.target.value))}
                     />
@@ -93,7 +105,7 @@ export function AreaLab() {
                         min="1"
                         max="20"
                         value={denominator}
-                        onChange={(e) => setDenominator(Number(e.target.value))}
+                        onChange={(e) => changeDenominator(Number(e.target.value))}
                     />
                     <output>{denominator}</output>
                 </div>
@@ -103,9 +115,9 @@ export function AreaLab() {
                     <input
                         id="total-parts"
                         type="range"
-                        min="4"
-                        max="48"
-                        step="4"
+                        min={denominator}
+                        max={maxCompatibleParts}
+                        step={denominator}
                         value={totalParts}
                         onChange={(e) => setTotalParts(Number(e.target.value))}
                     />
@@ -140,7 +152,7 @@ export function AreaLab() {
                 </div>
                 <div className="info-item">
                     <span className="info-label">{t('lab.decimalValue')}:</span>
-                    <span className="decimal-value">{fraction.toFixed(3)}</span>
+                    <span className="decimal-value">{decimal.exact ? '' : '≈ '}{decimal.value}</span>
                 </div>
             </div>
 

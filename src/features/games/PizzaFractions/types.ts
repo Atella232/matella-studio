@@ -26,6 +26,7 @@ export interface GameState {
     isGameOver: boolean
     showFeedback: boolean
     feedbackType: 'correct' | 'incorrect' | null
+    lastEarnedScore: number
 }
 
 export interface LevelConfig {

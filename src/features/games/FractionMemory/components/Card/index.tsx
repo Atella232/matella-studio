@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import type { Card as CardType } from '../../types'
 import { toDecimalString, toPercentageString } from '../../utils/fractions'
 import './Card.css'
@@ -10,6 +11,7 @@ interface CardProps {
 }
 
 export function Card({ card, onClick, disabled }: CardProps) {
+    const { t } = useTranslation()
     const isFlipped = card.isFlipped || card.isMatched
 
     const handleClick = () => {
@@ -19,18 +21,12 @@ export function Card({ card, onClick, disabled }: CardProps) {
     }
 
     return (
-        <div
+        <button
+            type="button"
             className={`memory-card ${isFlipped ? 'flipped' : ''} ${card.isMatched ? 'matched' : ''} ${disabled ? 'disabled' : ''}`}
             onClick={handleClick}
-            role="button"
-            tabIndex={disabled ? -1 : 0}
-            onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    handleClick()
-                }
-            }}
-            aria-label={card.isFlipped ? `${card.numerator}/${card.denominator}` : 'Carta oculta'}
+            disabled={disabled || card.isMatched}
+            aria-label={isFlipped ? `${card.numerator}/${card.denominator}` : t('games.fractionMemory.hiddenCard')}
         >
             <div className="card-inner">
                 <div className="card-face card-back" />
@@ -38,7 +34,7 @@ export function Card({ card, onClick, disabled }: CardProps) {
                     <CardContent card={card} />
                 </div>
             </div>
-        </div>
+        </button>
     )
 }
 

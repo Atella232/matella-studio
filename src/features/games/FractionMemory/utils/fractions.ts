@@ -2,6 +2,12 @@
 
 import type { Card, LevelConfig } from '../types'
 import { LEVELS } from '../types'
+import {
+    formatDecimal,
+    formatPercentage,
+    fraction,
+    hasTerminatingDecimal as fractionHasTerminatingDecimal
+} from '../../../fractions/fractionMath'
 
 /**
  * Generate a unique ID
@@ -62,19 +68,22 @@ export function generateEquivalentFraction(
  * Convert fraction to decimal string
  */
 export function toDecimalString(num: number, den: number): string {
-    const value = num / den
-    // Format with a reasonable number of decimals
-    if (Number.isInteger(value)) return value.toString()
-    return value.toFixed(value < 1 && value * 10 % 1 === 0 ? 1 : 2)
+    return formatDecimal(fraction(num, den), '.', 2).value
 }
 
 /**
  * Convert fraction to percentage string
  */
 export function toPercentageString(num: number, den: number): string {
-    const value = (num / den) * 100
-    if (Number.isInteger(value)) return `${value}%`
-    return `${value.toFixed(1)}%`
+    return formatPercentage(fraction(num, den), '.', 1).value
+}
+
+export function hasTerminatingDecimal(num: number, den: number): boolean {
+    return fractionHasTerminatingDecimal(fraction(num, den))
+}
+
+export function hasTerminatingPercentage(num: number, den: number): boolean {
+    return fractionHasTerminatingDecimal(fraction(num * 100, den))
 }
 
 /**
@@ -145,9 +154,13 @@ export function createCards(level: number): Card[] {
         let card2Type: Card['type'] = 'numeric'
 
         // Randomly assign visual, decimal or percentage based on level config
-        if (config.includePercentage && Math.random() < 0.2) {
+        if (config.includePercentage
+            && hasTerminatingPercentage(pair.equivalent[0], pair.equivalent[1])
+            && Math.random() < 0.2) {
             card2Type = 'percentage'
-        } else if (config.includeDecimal && Math.random() < 0.3) {
+        } else if (config.includeDecimal
+            && hasTerminatingDecimal(pair.equivalent[0], pair.equivalent[1])
+            && Math.random() < 0.3) {
             card2Type = 'decimal'
         } else if (config.includeVisual && Math.random() < 0.5) {
             card2Type = 'visual'

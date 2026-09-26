@@ -204,6 +204,101 @@
     white-space: pre-line;
 }
 
+.exercise-answer-block {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.exercise-answer-label {
+    color: rgba(216, 226, 242, 0.92);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.exercise-answer-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+}
+
+.exercise-answer-input {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 0 13px;
+    border: 1px solid rgba(148, 163, 184, 0.34);
+    border-radius: 11px;
+    outline: none;
+    background: rgba(11, 20, 36, 0.72);
+    color: #f8fafc;
+    font: inherit;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.exercise-answer-input::placeholder {
+    color: rgba(159, 173, 198, 0.68);
+}
+
+.exercise-answer-input:focus {
+    border-color: rgba(94, 234, 212, 0.78);
+    box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.14);
+}
+
+.exercise-answer-input.success {
+    border-color: rgba(52, 211, 153, 0.78);
+    background: rgba(6, 78, 59, 0.24);
+}
+
+.exercise-answer-input.error {
+    border-color: rgba(251, 113, 133, 0.76);
+    background: rgba(127, 29, 29, 0.2);
+}
+
+.exercise-answer-check {
+    min-height: 44px;
+    padding: 0 15px;
+    border: 1px solid rgba(45, 212, 191, 0.46);
+    border-radius: 11px;
+    background: rgba(20, 184, 166, 0.24);
+    color: #a7fff3;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.exercise-answer-check:hover {
+    transform: translateY(-1px);
+    border-color: rgba(94, 234, 212, 0.7);
+    background: rgba(20, 184, 166, 0.36);
+}
+
+.exercise-answer-feedback {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 9px 11px;
+    border-radius: 10px;
+    font-size: 0.86rem;
+    line-height: 1.45;
+}
+
+.exercise-answer-feedback.success {
+    border: 1px solid rgba(52, 211, 153, 0.28);
+    background: rgba(6, 95, 70, 0.22);
+    color: #a7f3d0;
+}
+
+.exercise-answer-feedback.error {
+    border: 1px solid rgba(251, 113, 133, 0.26);
+    background: rgba(127, 29, 29, 0.2);
+    color: #fecdd3;
+}
+
 .exercise-item-action {
     width: 100%;
     margin-top: auto;
@@ -286,5 +381,9 @@ html[dir="rtl"] .exercise-group-head {
 
     .exercise-item-card {
         padding: 20px;
+    }
+
+    .exercise-answer-row {
+        grid-template-columns: 1fr;
     }
 }

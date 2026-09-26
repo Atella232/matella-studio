@@ -2,6 +2,18 @@
 
 export type GameMode = 'addSub' | 'mulDiv' | 'powers' | 'combined'
 export type Operator = '+' | '-' | '×' | '÷' | '^'
+export type RaceFormat = 'classic' | 'sprint' | 'perfect'
+export type OperationFilter = 'default' | 'addition' | 'subtraction' | 'multiplication' | 'division'
+export type FinishReason = 'completed' | 'time' | 'mistake'
+export type RacerPersonality = 'player' | 'sprinter' | 'steady' | 'comeback'
+export type ErrorCategory = 'sign' | 'simplification' | 'commonDenominator' | 'multiplication' | 'inverse' | 'power' | 'operationOrder' | 'calculation'
+
+export interface RaceSettings {
+    format: RaceFormat
+    questionCount: 5 | 10 | 20
+    operationFilter: OperationFilter
+    includeMixed: boolean
+}
 
 export interface Fraction {
     numerator: number
@@ -35,6 +47,23 @@ export interface AnswerOption {
     id: string
 }
 
+export interface AttemptRecord {
+    operation: FractionOperation
+    selectedAnswer: Fraction
+    correctAnswer: Fraction
+    isCorrect: boolean
+    responseTimeMs: number
+}
+
+export interface ScoreBreakdown {
+    basePoints: number
+    speedBonus: number
+    comboBonus: number
+    turboBonus: number
+    total: number
+    comboReset: boolean
+}
+
 export interface RacerState {
     id: string
     name: string
@@ -47,6 +76,8 @@ export interface RacerState {
     speedFactor: number  // Individual speed factor for differentiation
     finishTime: number | null  // Timestamp when racer crossed finish line
     raceLuck: number  // Random luck factor assigned at race start (0.7-1.3)
+    personality: RacerPersonality
+    consistency: number
 }
 
 export interface GameState {
@@ -58,15 +89,40 @@ export interface GameState {
     totalQuestions: number
     level: number
     combo: number
+    maxCombo: number
     score: number
     correctAnswers: number
-    wrongAnswers: FractionOperation[]
+    attempts: AttemptRecord[]
     startTime: number | null
     questionStartTime: number | null
     elapsedTime: number
     lastAnswerCorrect: boolean | null
     showFeedback: boolean
     turboActive: boolean
+    lastScoreBreakdown: ScoreBreakdown | null
+    selectedAnswerId: string | null
+    questionQueue: FractionOperation[]
+    reviewMode: boolean
+    settings: RaceSettings
+    finishReason: FinishReason | null
+}
+
+export interface RaceRecord {
+    racesPlayed: number
+    wins: number
+    perfectRaces: number
+    bestScore: number
+    bestTime: number | null
+    bestAccuracy: number
+}
+
+export interface RecordAchievements {
+    firstRace: boolean
+    firstWin: boolean
+    newBestScore: boolean
+    newBestTime: boolean
+    newBestAccuracy: boolean
+    perfectRace: boolean
 }
 
 export interface LevelConfig {
@@ -79,7 +135,8 @@ export interface LevelConfig {
     includeMixed: boolean
     maxDenominator: number
     maxExponent?: number  // For powers mode
-    botSpeed: number  // Base speed for bot racers
+    botSpeed: number  // Relative rival difficulty
+    fastAnswerMs: number
 }
 
 // Game mode configurations
@@ -101,7 +158,8 @@ export const LEVELS: LevelConfig[] = [
         sameDenominator: true,
         includeMixed: false,
         maxDenominator: 8,
-        botSpeed: 0.4
+        botSpeed: 0.4,
+        fastAnswerMs: 4000
     },
     {
         id: 'addSub-medium',
@@ -112,7 +170,8 @@ export const LEVELS: LevelConfig[] = [
         sameDenominator: false,
         includeMixed: false,
         maxDenominator: 12,
-        botSpeed: 0.55
+        botSpeed: 0.55,
+        fastAnswerMs: 6000
     },
     {
         id: 'addSub-hard',
@@ -123,7 +182,8 @@ export const LEVELS: LevelConfig[] = [
         sameDenominator: false,
         includeMixed: true,
         maxDenominator: 12,
-        botSpeed: 0.7
+        botSpeed: 0.7,
+        fastAnswerMs: 8000
     },
     // Multiplication/Division Mode
     {
@@ -135,7 +195,8 @@ export const LEVELS: LevelConfig[] = [
         sameDenominator: false,
         includeMixed: false,
         maxDenominator: 6,
-        botSpeed: 0.4
+        botSpeed: 0.4,
+        fastAnswerMs: 5000
     },
     {
         id: 'mulDiv-medium',
@@ -146,7 +207,8 @@ export const LEVELS: LevelConfig[] = [
         sameDenominator: false,
         includeMixed: false,
         maxDenominator: 8,
-        botSpeed: 0.55
+        botSpeed: 0.55,
+        fastAnswerMs: 7000
     },
     {
         id: 'mulDiv-hard',
@@ -157,7 +219,8 @@ export const LEVELS: LevelConfig[] = [
         sameDenominator: false,
         includeMixed: true,
         maxDenominator: 10,
-        botSpeed: 0.7
+        botSpeed: 0.7,
+        fastAnswerMs: 9000
     },
     // Powers Mode
     {
@@ -170,7 +233,8 @@ export const LEVELS: LevelConfig[] = [
         includeMixed: false,
         maxDenominator: 5,
         maxExponent: 2,
-        botSpeed: 0.4
+        botSpeed: 0.4,
+        fastAnswerMs: 5000
     },
     {
         id: 'powers-medium',
@@ -182,7 +246,8 @@ export const LEVELS: LevelConfig[] = [
         includeMixed: false,
         maxDenominator: 6,
         maxExponent: 3,
-        botSpeed: 0.55
+        botSpeed: 0.55,
+        fastAnswerMs: 7000
     },
     {
         id: 'powers-hard',
@@ -194,7 +259,8 @@ export const LEVELS: LevelConfig[] = [
         includeMixed: false,
         maxDenominator: 8,
         maxExponent: 3,
-        botSpeed: 0.7
+        botSpeed: 0.7,
+        fastAnswerMs: 9000
     },
     // Combined Mode
     {
@@ -206,7 +272,8 @@ export const LEVELS: LevelConfig[] = [
         sameDenominator: false,
         includeMixed: false,
         maxDenominator: 6,
-        botSpeed: 0.4
+        botSpeed: 0.4,
+        fastAnswerMs: 7000
     },
     {
         id: 'combined-medium',
@@ -217,7 +284,8 @@ export const LEVELS: LevelConfig[] = [
         sameDenominator: false,
         includeMixed: false,
         maxDenominator: 8,
-        botSpeed: 0.55
+        botSpeed: 0.55,
+        fastAnswerMs: 10000
     },
     {
         id: 'combined-hard',
@@ -229,20 +297,29 @@ export const LEVELS: LevelConfig[] = [
         includeMixed: false,
         maxDenominator: 10,
         maxExponent: 2,
-        botSpeed: 0.7
+        botSpeed: 0.7,
+        fastAnswerMs: 13000
     }
 ]
 
 export const RACERS: Omit<RacerState, 'position' | 'speed' | 'hasTurbo' | 'finishTime' | 'raceLuck'>[] = [
-    { id: 'player', name: 'Tú', avatar: '🏎️', color: '#4ade80', isPlayer: true, speedFactor: 1.0 },
-    { id: 'bot1', name: 'Max', avatar: '🚗', color: '#f87171', isPlayer: false, speedFactor: 1.1 },  // Fastest bot
-    { id: 'bot2', name: 'Luna', avatar: '🚙', color: '#60a5fa', isPlayer: false, speedFactor: 0.9 }, // Medium bot
-    { id: 'bot3', name: 'Leo', avatar: '🏍️', color: '#fbbf24', isPlayer: false, speedFactor: 0.7 }  // Slowest bot
+    { id: 'player', name: 'Tú', avatar: '🏎️', color: '#4ade80', isPlayer: true, speedFactor: 1.0, personality: 'player', consistency: 1 },
+    { id: 'bot1', name: 'Max', avatar: '🚗', color: '#f87171', isPlayer: false, speedFactor: 1.04, personality: 'sprinter', consistency: 0.72 },
+    { id: 'bot2', name: 'Luna', avatar: '🚙', color: '#60a5fa', isPlayer: false, speedFactor: 0.96, personality: 'steady', consistency: 0.94 },
+    { id: 'bot3', name: 'Leo', avatar: '🏍️', color: '#fbbf24', isPlayer: false, speedFactor: 0.9, personality: 'comeback', consistency: 0.8 }
 ]
+
+export const DEFAULT_RACE_SETTINGS: RaceSettings = {
+    format: 'classic',
+    questionCount: 10,
+    operationFilter: 'default',
+    includeMixed: false
+}
 
 export const SCORE_CONFIG = {
     basePoints: 10,
-    speedBonus: 5,      // Bonus for fast answers (< 3s)
-    comboMultiplier: 2, // Extra points per combo level
-    turboThreshold: 3   // Consecutive correct answers for turbo
+    speedBonus: 5,
+    comboMultiplier: 2, // Extra points for every previous answer in the streak
+    turboThreshold: 3,  // Consecutive correct answers needed to activate turbo
+    turboBonus: 5       // Extra points for every correct answer while turbo is active
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState, type KeyboardEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NumberLineLab } from '../../features/labs/NumberLineLab'
 import { AreaLab } from '../../features/labs/AreaLab'
@@ -19,8 +19,9 @@ interface LabInfo {
 }
 
 export function LabPage() {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
     const [activeLab, setActiveLab] = useState<LabType>('pizza')
+    const tabRefs = useRef<Partial<Record<LabType, HTMLButtonElement>>>({})
 
     const labs: LabInfo[] = [
         {
@@ -86,6 +87,26 @@ export function LabPage() {
 
     const activeLabInfo = labs.find(l => l.id === activeLab)
 
+    const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+        const isRtl = i18n.dir() === 'rtl'
+        let nextIndex: number | null = null
+
+        if (event.key === 'Home') nextIndex = 0
+        if (event.key === 'End') nextIndex = labs.length - 1
+        if (event.key === 'ArrowDown' || event.key === (isRtl ? 'ArrowLeft' : 'ArrowRight')) {
+            nextIndex = (index + 1) % labs.length
+        }
+        if (event.key === 'ArrowUp' || event.key === (isRtl ? 'ArrowRight' : 'ArrowLeft')) {
+            nextIndex = (index - 1 + labs.length) % labs.length
+        }
+
+        if (nextIndex === null) return
+        event.preventDefault()
+        const nextLab = labs[nextIndex]
+        setActiveLab(nextLab.id)
+        tabRefs.current[nextLab.id]?.focus()
+    }
+
     return (
         <div className="lab-page">
             <div className="container">
@@ -94,16 +115,23 @@ export function LabPage() {
                     <p className="lab-instructions">{t('lab.instructions')}</p>
                 </header>
 
-                <nav className="lab-grid" role="tablist" aria-label="Laboratory types">
-                    {labs.map((lab) => (
+                <nav className="lab-grid" role="tablist" aria-label={t('lab.title')}>
+                    {labs.map((lab, index) => (
                         <button
                             key={lab.id}
+                            type="button"
+                            ref={(element) => {
+                                if (element) tabRefs.current[lab.id] = element
+                                else delete tabRefs.current[lab.id]
+                            }}
                             role="tab"
                             aria-selected={activeLab === lab.id}
                             aria-controls={`panel-${lab.id}`}
                             id={`tab-${lab.id}`}
+                            tabIndex={activeLab === lab.id ? 0 : -1}
                             className={`lab-card ${activeLab === lab.id ? 'active' : ''}`}
                             onClick={() => setActiveLab(lab.id)}
+                            onKeyDown={(event) => handleTabKeyDown(event, index)}
                             style={{ '--lab-color': lab.color } as React.CSSProperties}
                         >
                             <span className="lab-icon">{lab.icon}</span>
@@ -117,6 +145,7 @@ export function LabPage() {
                         id={`panel-${activeLab}`}
                         role="tabpanel"
                         aria-labelledby={`tab-${activeLab}`}
+                        tabIndex={0}
                         className="lab-panel"
                     >
                         <div className="lab-panel-header">
@@ -133,4 +162,3 @@ export function LabPage() {
         </div>
     )
 }
-

@@ -34,11 +34,59 @@
 .combo-indicator {
     background: linear-gradient(135deg, #f97316, #fb923c);
     color: white;
-    padding: 0.4rem 1rem;
+    padding: 0.25rem 0.6rem;
     border-radius: 20px;
     font-weight: 700;
-    font-size: 0.85rem;
-    animation: pulse 0.5s ease infinite alternate;
+    font-size: 0.75rem;
+}
+
+.power-meter {
+    width: min(280px, 58%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.power-meter-labels {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.turbo-progress-label {
+    color: var(--color-text-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-align: end;
+}
+
+.power-meter.turbo-active .turbo-progress-label {
+    color: var(--color-accent-light);
+}
+
+.turbo-meter-track {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.3rem;
+    height: 0.45rem;
+}
+
+.turbo-meter-track > span {
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.22);
+    box-shadow: inset 0 0 0 1px var(--glass-border);
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.turbo-meter-track > span.filled {
+    background: linear-gradient(90deg, #f97316, #fbbf24);
+    box-shadow: 0 0 8px rgba(251, 146, 60, 0.45);
+}
+
+.power-meter.turbo-active .turbo-meter-track > span.filled {
+    background: linear-gradient(90deg, var(--color-accent), var(--color-secondary-light));
+    box-shadow: 0 0 10px var(--color-primary-glow);
 }
 
 .operation-display {
@@ -290,4 +338,239 @@
     font-weight: 700;
     color: #6366f1;
     margin: 0 0.2rem;
+}
+
+/* Matella palette */
+.fraction-race .question-panel {
+    background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.04) 100%);
+    border-color: var(--glass-border);
+    box-shadow: var(--shadow-lg);
+}
+
+.fraction-race .question-panel.feedback-correct {
+    border-color: var(--color-success);
+    background: color-mix(in srgb, var(--color-success) 15%, var(--color-bg-secondary));
+}
+
+.fraction-race .question-panel.feedback-incorrect {
+    border-color: var(--color-error);
+    background: color-mix(in srgb, var(--color-error) 14%, var(--color-bg-secondary));
+}
+
+.fraction-race .question-number {
+    color: var(--color-text-muted);
+}
+
+.fraction-race .fraction-display,
+.fraction-race .answer-placeholder {
+    background: rgba(15, 23, 42, 0.58);
+    color: var(--color-text-muted);
+}
+
+.fraction-race .fraction-display.mixed .whole-part,
+.fraction-race .numerator,
+.fraction-race .denominator,
+.fraction-race .question-exponent {
+    color: var(--color-text-primary);
+}
+
+.fraction-race .fraction-bar {
+    background: var(--color-text-muted);
+}
+
+.fraction-race .operator,
+.fraction-race .equals,
+.fraction-race .paren {
+    color: var(--color-primary-light);
+}
+
+.fraction-race .answer-button {
+    background: var(--gradient-primary);
+    box-shadow: 0 4px 12px var(--color-primary-glow);
+}
+
+.fraction-race .answer-button.wrong-answer:not(.correct-answer) {
+    background: var(--color-bg-tertiary);
+}
+
+.fraction-race .feedback-message.correct {
+    background: color-mix(in srgb, var(--color-success) 18%, transparent);
+    color: color-mix(in srgb, var(--color-success) 65%, white);
+}
+
+.fraction-race .feedback-message.incorrect {
+    background: color-mix(in srgb, var(--color-error) 18%, transparent);
+    color: color-mix(in srgb, var(--color-error) 65%, white);
+}
+
+.fraction-race .answer-button {
+    position: relative;
+}
+
+.answer-shortcut {
+    position: absolute;
+    top: 0.35rem;
+    left: 0.45rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.4);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.7rem;
+    font-weight: 800;
+}
+
+.fraction-race .answer-button.selected-wrong-answer {
+    background: linear-gradient(135deg, var(--color-error), #be123c);
+    box-shadow: 0 4px 16px var(--color-error-glow);
+}
+
+.fraction-race .answer-button.muted-answer {
+    background: var(--color-bg-tertiary);
+    opacity: 0.5;
+    box-shadow: none;
+}
+
+.feedback-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.9rem;
+    border-radius: 12px;
+    background: rgba(15, 23, 42, 0.62);
+    box-shadow: inset 0 0 0 1px var(--glass-border);
+}
+
+.feedback-panel.correct {
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-success) 55%, transparent);
+}
+
+.feedback-panel.incorrect {
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-error) 55%, transparent);
+}
+
+.feedback-panel .feedback-message {
+    padding: 0;
+    color: var(--color-text-primary);
+    background: transparent;
+}
+
+.feedback-answer-summary {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+}
+
+.score-breakdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+}
+
+.score-breakdown > span,
+.score-breakdown > strong {
+    padding: 0.3rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.76rem;
+    line-height: 1;
+}
+
+.score-breakdown > span {
+    color: var(--color-text-secondary);
+    background: rgba(148, 163, 184, 0.1);
+    box-shadow: inset 0 0 0 1px var(--glass-border);
+}
+
+.score-breakdown > strong {
+    color: color-mix(in srgb, var(--color-success) 65%, white);
+    background: color-mix(in srgb, var(--color-success) 16%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-success) 42%, transparent);
+}
+
+.score-breakdown.no-score > strong {
+    color: color-mix(in srgb, var(--color-error) 65%, white);
+    background: color-mix(in srgb, var(--color-error) 16%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-error) 42%, transparent);
+}
+
+.feedback-answer-summary > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.feedback-answer-summary .fraction-display {
+    padding: 0.25rem 0.45rem;
+    min-width: 38px;
+}
+
+.feedback-explanation {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.45;
+    text-align: center;
+}
+
+.error-insight {
+    margin: 0;
+    padding: 0.65rem 0.75rem;
+    border-radius: 10px;
+    color: color-mix(in srgb, var(--color-accent) 72%, white);
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 30%, transparent);
+    font-size: 0.86rem;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.continue-button {
+    align-self: center;
+    padding: 0.7rem 1.6rem;
+    border: 0;
+    border-radius: 12px;
+    background: var(--gradient-primary);
+    color: white;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+}
+
+.continue-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+.continue-button:focus-visible {
+    outline: 3px solid var(--color-secondary-light);
+    outline-offset: 3px;
+}
+
+@media (max-width: 560px) {
+    .question-header {
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .power-meter {
+        width: 65%;
+    }
+
+    .power-meter-labels {
+        align-items: flex-end;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
 }

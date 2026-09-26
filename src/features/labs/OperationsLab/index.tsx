@@ -15,28 +15,39 @@ function drawFractionBar(
     fillColor: string,
     strokeColor: string
 ) {
-    const segmentWidth = width / denominator
+    const absoluteNumerator = Math.abs(numerator)
+    const unitCount = Math.max(1, Math.ceil(absoluteNumerator / denominator))
+    const unitGap = unitCount > 1 ? 5 : 0
+    const unitWidth = (width - unitGap * (unitCount - 1)) / unitCount
 
-    // Draw filled segments
-    for (let i = 0; i < numerator && i < denominator; i++) {
-        ctx.fillStyle = fillColor
-        ctx.fillRect(x + i * segmentWidth + 1, y + 1, segmentWidth - 2, height - 2)
-    }
+    for (let unit = 0; unit < unitCount; unit++) {
+        const unitX = x + unit * (unitWidth + unitGap)
+        const segmentWidth = unitWidth / denominator
+        const filledSegments = Math.max(0, Math.min(denominator, absoluteNumerator - unit * denominator))
 
-    // Draw segment borders
-    for (let i = 0; i <= denominator; i++) {
+        for (let segment = 0; segment < filledSegments; segment++) {
+            ctx.fillStyle = fillColor
+            ctx.fillRect(
+                unitX + segment * segmentWidth + 0.5,
+                y + 1,
+                Math.max(0.5, segmentWidth - 1),
+                height - 2
+            )
+        }
+
+        for (let segment = 0; segment <= denominator; segment++) {
+            ctx.strokeStyle = strokeColor
+            ctx.lineWidth = segmentWidth >= 4 ? 1.5 : 1
+            ctx.beginPath()
+            ctx.moveTo(unitX + segment * segmentWidth, y)
+            ctx.lineTo(unitX + segment * segmentWidth, y + height)
+            ctx.stroke()
+        }
+
         ctx.strokeStyle = strokeColor
         ctx.lineWidth = 2
-        ctx.beginPath()
-        ctx.moveTo(x + i * segmentWidth, y)
-        ctx.lineTo(x + i * segmentWidth, y + height)
-        ctx.stroke()
+        ctx.strokeRect(unitX, y, unitWidth, height)
     }
-
-    // Draw outer border
-    ctx.strokeStyle = strokeColor
-    ctx.lineWidth = 3
-    ctx.strokeRect(x, y, width, height)
 }
 
 export function OperationsLab() {
@@ -112,9 +123,7 @@ export function OperationsLab() {
         const resultColor = resultNum >= 0 ? '#10B981' : '#EF4444'
         const resultColorDark = resultNum >= 0 ? '#047857' : '#B91C1C'
 
-        if (resultNum > 0) {
-            drawFractionBar(ctx, startX, y3, barWidth, barHeight, Math.min(resultNum, resultDen), resultDen, resultColor, resultColorDark)
-        }
+        drawFractionBar(ctx, startX, y3, barWidth, barHeight, simplifiedNum, simplifiedDen, resultColor, resultColorDark)
 
         ctx.fillStyle = '#1e293b'
         ctx.font = 'bold 20px Inter, sans-serif'

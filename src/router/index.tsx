@@ -1,66 +1,74 @@
 import { createHashRouter } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
 import { Layout } from '../components/common/Layout'
 import { SubjectsPage } from '../pages/SubjectsPage'
 import { CoursesPage } from '../pages/CoursesPage'
 import { TopicsPage } from '../pages/TopicsPage'
-import { HomePage } from '../pages/HomePage'
-import { LabPage } from '../pages/LabPage'
-import { MissionPage } from '../pages/MissionPage'
 import { AccessibilityPage } from '../pages/AccessibilityPage'
-import { TheoryPage } from '../pages/TheoryPage'
-import { ExercisesPage as ExercisesPageDBH2_Zatikiak } from '../pages/dbh2-zatikiak/ExercisesPage'
-import { GamesHub } from '../features/games/GamesHub'
-import { PizzaFractions } from '../features/games/PizzaFractions'
-import { FractionMemory } from '../features/games/FractionMemory'
-import { FractionRace } from '../features/games/FractionRace'
 
-// DBH 1 Components
-import { HomePage as HomePageDBH1 } from '../pages/dbh1-zatikiak/HomePage'
-import { LabPage as LabPageDBH1 } from '../pages/dbh1-zatikiak/LabPage'
-import { MissionPage as MissionPageDBH1 } from '../pages/dbh1-zatikiak/MissionPage'
-import { TheoryPage as TheoryPageDBH1 } from '../pages/dbh1-zatikiak/TheoryPage'
-import { GamesHub as GamesHubDBH1 } from '../features/games/GamesHubDBH1'
+const ZatikiakPrototypePage = lazy(() => import('../pages/dbh2-zatikiak-prototype').then((module) => ({ default: module.ZatikiakPrototypePage })))
+const HomePage = lazy(() => import('../pages/HomePage').then((module) => ({ default: module.HomePage })))
+const LabPage = lazy(() => import('../pages/LabPage').then((module) => ({ default: module.LabPage })))
+const MissionPage = lazy(() => import('../pages/MissionPage').then((module) => ({ default: module.MissionPage })))
+const TheoryPage = lazy(() => import('../pages/TheoryPage').then((module) => ({ default: module.TheoryPage })))
+const ExercisesPageDBH2_Zatikiak = lazy(() => import('../pages/dbh2-zatikiak/ExercisesPage').then((module) => ({ default: module.ExercisesPage })))
+const GamesHub = lazy(() => import('../features/games/GamesHub').then((module) => ({ default: module.GamesHub })))
+const PizzaFractions = lazy(() => import('../features/games/PizzaFractions').then((module) => ({ default: module.PizzaFractions })))
+const FractionMemory = lazy(() => import('../features/games/FractionMemory').then((module) => ({ default: module.FractionMemory })))
+const FractionRace = lazy(() => import('../features/games/FractionRace').then((module) => ({ default: module.FractionRace })))
+const PrivacyPage = lazy(() => import('../pages/LegalPages').then((module) => ({ default: module.PrivacyPage })))
+const CreditsPage = lazy(() => import('../pages/LegalPages').then((module) => ({ default: module.CreditsPage })))
 
-import { HomePage as HomePageDBH1_Zenbaki } from '../pages/dbh1-zenbaki-naturalak/HomePage'
-import { TheoryPage as TheoryPageDBH1_Zenbaki } from '../pages/dbh1-zenbaki-naturalak/TheoryPage'
-import { LabPage as LabPageDBH1_Zenbaki } from '../pages/dbh1-zenbaki-naturalak/LabPage'
-import { MissionPage as MissionPageDBH1_Zenbaki } from '../pages/dbh1-zenbaki-naturalak/MissionPage'
-import { GamesPage as GamesPageDBH1_Zenbaki } from '../pages/dbh1-zenbaki-naturalak/GamesPage'
+const HomePageDBH1 = lazy(() => import('../pages/dbh1-zatikiak/HomePage').then((module) => ({ default: module.HomePage })))
+const LabPageDBH1 = lazy(() => import('../pages/dbh1-zatikiak/LabPage').then((module) => ({ default: module.LabPage })))
+const MissionPageDBH1 = lazy(() => import('../pages/dbh1-zatikiak/MissionPage').then((module) => ({ default: module.MissionPage })))
+const TheoryPageDBH1 = lazy(() => import('../pages/dbh1-zatikiak/TheoryPage').then((module) => ({ default: module.TheoryPage })))
+const GamesHubDBH1 = lazy(() => import('../features/games/GamesHubDBH1').then((module) => ({ default: module.GamesHub })))
 
-import { HomePage as HomePageDBH1_Zatigarritasuna } from '../pages/dbh1-zatigarritasuna/HomePage'
-import { TheoryPage as TheoryPageDBH1_Zatigarritasuna } from '../pages/dbh1-zatigarritasuna/TheoryPage'
-import { LabPageDBH1_Zatigarritasuna } from '../pages/dbh1-zatigarritasuna/LabPage'
+const HomePageDBH1_Zenbaki = lazy(() => import('../pages/dbh1-zenbaki-naturalak/HomePage').then((module) => ({ default: module.HomePage })))
+const TheoryPageDBH1_Zenbaki = lazy(() => import('../pages/dbh1-zenbaki-naturalak/TheoryPage').then((module) => ({ default: module.TheoryPage })))
+const LabPageDBH1_Zenbaki = lazy(() => import('../pages/dbh1-zenbaki-naturalak/LabPage').then((module) => ({ default: module.LabPage })))
+const MissionPageDBH1_Zenbaki = lazy(() => import('../pages/dbh1-zenbaki-naturalak/MissionPage').then((module) => ({ default: module.MissionPage })))
+const GamesPageDBH1_Zenbaki = lazy(() => import('../pages/dbh1-zenbaki-naturalak/GamesPage').then((module) => ({ default: module.GamesPage })))
 
-import { HomePage as HomePageDBH1_ZenbakiOsoak } from '../pages/dbh1-zenbaki-osoak/HomePage'
-import { TheoryPage as TheoryPageDBH1_ZenbakiOsoak } from '../pages/dbh1-zenbaki-osoak/TheoryPage'
-import { LabPageDBH1_ZenbakiOsoak } from '../pages/dbh1-zenbaki-osoak/LabPage'
+const HomePageDBH1_Zatigarritasuna = lazy(() => import('../pages/dbh1-zatigarritasuna/HomePage').then((module) => ({ default: module.HomePage })))
+const TheoryPageDBH1_Zatigarritasuna = lazy(() => import('../pages/dbh1-zatigarritasuna/TheoryPage').then((module) => ({ default: module.TheoryPage })))
+const LabPageDBH1_Zatigarritasuna = lazy(() => import('../pages/dbh1-zatigarritasuna/LabPage').then((module) => ({ default: module.LabPageDBH1_Zatigarritasuna })))
 
-import { HomePage as HomePageDBH1_Algebra } from '../pages/dbh1-algebra/HomePage'
-import { TheoryPage as TheoryPageDBH1_Algebra } from '../pages/dbh1-algebra/TheoryPage'
-import { LabPage as LabPageDBH1_Algebra } from '../pages/dbh1-algebra/LabPage'
+const HomePageDBH1_ZenbakiOsoak = lazy(() => import('../pages/dbh1-zenbaki-osoak/HomePage').then((module) => ({ default: module.HomePage })))
+const TheoryPageDBH1_ZenbakiOsoak = lazy(() => import('../pages/dbh1-zenbaki-osoak/TheoryPage').then((module) => ({ default: module.TheoryPage })))
+const LabPageDBH1_ZenbakiOsoak = lazy(() => import('../pages/dbh1-zenbaki-osoak/LabPage').then((module) => ({ default: module.LabPageDBH1_ZenbakiOsoak })))
 
-import { HomePage as HomePageDBH1_Geometria } from '../pages/dbh1-geometria/HomePage'
-import { TheoryPage as TheoryPageDBH1_Geometria } from '../pages/dbh1-geometria/TheoryPage'
-import { LabPage as LabPageDBH1_Geometria } from '../pages/dbh1-geometria/LabPage'
+const HomePageDBH1_Algebra = lazy(() => import('../pages/dbh1-algebra/HomePage').then((module) => ({ default: module.HomePage })))
+const TheoryPageDBH1_Algebra = lazy(() => import('../pages/dbh1-algebra/TheoryPage').then((module) => ({ default: module.TheoryPage })))
+const LabPageDBH1_Algebra = lazy(() => import('../pages/dbh1-algebra/LabPage').then((module) => ({ default: module.LabPage })))
 
-import { HomePage as HomePageDBH1_Estadistica } from '../pages/dbh1-taulak-grafikoak/HomePage'
-import { TheoryPage as TheoryPageDBH1_Estadistica } from '../pages/dbh1-taulak-grafikoak/TheoryPage'
-import { LabPage as LabPageDBH1_Estadistica } from '../pages/dbh1-taulak-grafikoak/LabPage'
-import { HomePage as HomePageDBH2_Algebra } from '../pages/dbh2-algebra/HomePage'
-import { TheoryPage as TheoryPageDBH2_Algebra } from '../pages/dbh2-algebra/TheoryPage'
-import { LabPage as LabPageDBH2_Algebra } from '../pages/dbh2-algebra/LabPage'
-import { MissionPage as MissionPageDBH2_Algebra } from '../pages/dbh2-algebra/MissionPage'
-import { GamesPage as GamesPageDBH2_Algebra } from '../pages/dbh2-algebra/GamesPage'
-import { ExercisesPage as ExercisesPageDBH2_Algebra } from '../pages/dbh2-algebra/ExercisesPage'
-import { HomePage as HomePageDBH2_Ekuazioak } from '../pages/dbh2-ekuazioak/HomePage'
-import { TheoryPage as TheoryPageDBH2_Ekuazioak } from '../pages/dbh2-ekuazioak/TheoryPage'
-import { LabPage as LabPageDBH2_Ekuazioak } from '../pages/dbh2-ekuazioak/LabPage'
-import { MissionPage as MissionPageDBH2_Ekuazioak } from '../pages/dbh2-ekuazioak/MissionPage'
-import { GamesPage as GamesPageDBH2_Ekuazioak } from '../pages/dbh2-ekuazioak/GamesPage'
-import { ExercisesPage as ExercisesPageDBH2_Ekuazioak } from '../pages/dbh2-ekuazioak/ExercisesPage'
-import { NaturaCoursesPage } from '../pages/NaturaCoursesPage'
-import { NaturaTopicsPage } from '../pages/NaturaTopicsPage'
-import { NaturaBiosferaPage } from '../pages/natura-biosfera'
+const HomePageDBH1_Geometria = lazy(() => import('../pages/dbh1-geometria/HomePage').then((module) => ({ default: module.HomePage })))
+const TheoryPageDBH1_Geometria = lazy(() => import('../pages/dbh1-geometria/TheoryPage').then((module) => ({ default: module.TheoryPage })))
+const LabPageDBH1_Geometria = lazy(() => import('../pages/dbh1-geometria/LabPage').then((module) => ({ default: module.LabPage })))
+
+const HomePageDBH1_Estadistica = lazy(() => import('../pages/dbh1-taulak-grafikoak/HomePage').then((module) => ({ default: module.HomePage })))
+const TheoryPageDBH1_Estadistica = lazy(() => import('../pages/dbh1-taulak-grafikoak/TheoryPage').then((module) => ({ default: module.TheoryPage })))
+const LabPageDBH1_Estadistica = lazy(() => import('../pages/dbh1-taulak-grafikoak/LabPage').then((module) => ({ default: module.LabPage })))
+
+const HomePageDBH2_Algebra = lazy(() => import('../pages/dbh2-algebra/HomePage').then((module) => ({ default: module.HomePage })))
+const TheoryPageDBH2_Algebra = lazy(() => import('../pages/dbh2-algebra/TheoryPage').then((module) => ({ default: module.TheoryPage })))
+const LabPageDBH2_Algebra = lazy(() => import('../pages/dbh2-algebra/LabPage').then((module) => ({ default: module.LabPage })))
+const MissionPageDBH2_Algebra = lazy(() => import('../pages/dbh2-algebra/MissionPage').then((module) => ({ default: module.MissionPage })))
+const GamesPageDBH2_Algebra = lazy(() => import('../pages/dbh2-algebra/GamesPage').then((module) => ({ default: module.GamesPage })))
+const ExercisesPageDBH2_Algebra = lazy(() => import('../pages/dbh2-algebra/ExercisesPage').then((module) => ({ default: module.ExercisesPage })))
+
+const HomePageDBH2_Ekuazioak = lazy(() => import('../pages/dbh2-ekuazioak/HomePage').then((module) => ({ default: module.HomePage })))
+const TheoryPageDBH2_Ekuazioak = lazy(() => import('../pages/dbh2-ekuazioak/TheoryPage').then((module) => ({ default: module.TheoryPage })))
+const LabPageDBH2_Ekuazioak = lazy(() => import('../pages/dbh2-ekuazioak/LabPage').then((module) => ({ default: module.LabPage })))
+const MissionPageDBH2_Ekuazioak = lazy(() => import('../pages/dbh2-ekuazioak/MissionPage').then((module) => ({ default: module.MissionPage })))
+const GamesPageDBH2_Ekuazioak = lazy(() => import('../pages/dbh2-ekuazioak/GamesPage').then((module) => ({ default: module.GamesPage })))
+const ExercisesPageDBH2_Ekuazioak = lazy(() => import('../pages/dbh2-ekuazioak/ExercisesPage').then((module) => ({ default: module.ExercisesPage })))
+const EkuazioakPrototypePage = lazy(() => import('../pages/dbh2-ekuazioak-prototype').then((module) => ({ default: module.EkuazioakPrototypePage })))
+
+const NaturaCoursesPage = lazy(() => import('../pages/NaturaCoursesPage').then((module) => ({ default: module.NaturaCoursesPage })))
+const NaturaTopicsPage = lazy(() => import('../pages/NaturaTopicsPage').then((module) => ({ default: module.NaturaTopicsPage })))
+const NaturaBiosferaPage = lazy(() => import('../pages/natura-biosfera').then((module) => ({ default: module.NaturaBiosferaPage })))
 
 export const router = createHashRouter([
     {
@@ -378,6 +386,14 @@ export const router = createHashRouter([
                 path: 'matematika/dbh2/ekuazioak/juegos',
                 element: <GamesPageDBH2_Ekuazioak />,
             },
+            {
+                path: 'prototipo/ekuazioak-v2',
+                element: <EkuazioakPrototypePage />,
+            },
+            {
+                path: 'prototipo/zatikiak-v2',
+                element: <Suspense fallback={<div role="status" aria-live="polite">Zatikiak V2…</div>}><ZatikiakPrototypePage /></Suspense>,
+            },
             // Rutas legacy para compatibilidad
             {
                 path: 'laboratorio',
@@ -390,6 +406,14 @@ export const router = createHashRouter([
             {
                 path: 'accesibilidad',
                 element: <AccessibilityPage />,
+            },
+            {
+                path: 'privacidad',
+                element: <PrivacyPage />,
+            },
+            {
+                path: 'creditos',
+                element: <CreditsPage />,
             },
             {
                 path: 'teoria',

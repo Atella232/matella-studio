@@ -7,7 +7,10 @@ import {
     pickText,
     type ExerciseDifficulty
 } from './exercisesData'
+import { validateExerciseAnswer } from './exerciseValidation'
 import './ExercisesPage.css'
+
+type ExerciseFeedback = 'idle' | 'success' | 'error'
 
 function getSectionBadge(sectionId: string) {
     switch (sectionId) {
@@ -39,6 +42,8 @@ export function ExercisesPage() {
     const lang = normalizeFractionLang(i18n.language)
     const [expandedSection, setExpandedSection] = useState<string>('representacion')
     const [revealed, setRevealed] = useState<Record<string, boolean>>({})
+    const [answers, setAnswers] = useState<Record<string, string>>({})
+    const [feedback, setFeedback] = useState<Record<string, ExerciseFeedback>>({})
 
     const labels = useMemo(
         () => ({
@@ -58,6 +63,23 @@ export function ExercisesPage() {
             reveal: pickText(lang, { eu: 'Soluzioa ikusi', es: 'Ver solución', ar: 'عرض الحل' }),
             hide: pickText(lang, { eu: 'Soluzioa ezkutatu', es: 'Ocultar solución', ar: 'إخفاء الحل' }),
             solution: pickText(lang, { eu: 'Irtenbidea', es: 'Solución', ar: 'الحل' }),
+            answer: pickText(lang, { eu: 'Zure erantzuna', es: 'Tu respuesta', ar: 'إجابتك' }),
+            answerPlaceholder: pickText(lang, {
+                eu: 'Adib.: 3/4, 0,75 edo ordenatutako zerrenda',
+                es: 'Ej.: 3/4, 0,75 o una lista ordenada',
+                ar: 'مثال: 3/4 أو 0.75 أو قائمة مرتبة'
+            }),
+            check: pickText(lang, { eu: 'Egiaztatu', es: 'Comprobar', ar: 'تحقق' }),
+            correct: pickText(lang, {
+                eu: 'Zuzena. Jarraian prozedura ikus dezakezu.',
+                es: 'Correcto. Puedes consultar el procedimiento debajo.',
+                ar: 'صحيح. يمكنك مراجعة طريقة الحل أدناه.'
+            }),
+            incorrect: pickText(lang, {
+                eu: 'Oraindik ez. Berrikusi ordena, zeinuak eta sinplifikazioa.',
+                es: 'Todavía no. Revisa el orden, los signos y la simplificación.',
+                ar: 'ليست صحيحة بعد. راجع الترتيب والإشارات والتبسيط.'
+            }),
             difficulty: {
                 easy: pickText(lang, { eu: 'Erraza', es: 'Fácil', ar: 'سهل' }),
                 medium: pickText(lang, { eu: 'Ertaina', es: 'Media', ar: 'متوسط' }),
@@ -69,6 +91,14 @@ export function ExercisesPage() {
 
     const toggleSolution = (key: string) => {
         setRevealed((current) => ({ ...current, [key]: !current[key] }))
+    }
+
+    const checkAnswer = (sectionId: string, exerciseId: number, key: string) => {
+        const isCorrect = validateExerciseAnswer(sectionId, exerciseId, answers[key] ?? '', lang)
+        setFeedback((current) => ({ ...current, [key]: isCorrect ? 'success' : 'error' }))
+        if (isCorrect) {
+            setRevealed((current) => ({ ...current, [key]: true }))
+        }
     }
 
     return (
@@ -90,6 +120,8 @@ export function ExercisesPage() {
                                 <button
                                     type="button"
                                     className="exercise-group-head"
+                                    aria-expanded={isOpen}
+                                    aria-controls={`exercise-section-${section.id}`}
                                     onClick={() => setExpandedSection(isOpen ? '' : section.id)}
                                 >
                                     <div className="exercise-group-title">
@@ -103,11 +135,12 @@ export function ExercisesPage() {
                                 </button>
 
                                 {isOpen && (
-                                    <div className="exercise-group-body">
+                                    <div className="exercise-group-body" id={`exercise-section-${section.id}`}>
                                         <div className="exercise-cards-grid">
                                             {section.items.map((item) => {
                                                 const revealKey = `${section.id}-${item.id}`
                                                 const isRevealed = Boolean(revealed[revealKey])
+                                                const answerFeedback = feedback[revealKey] ?? 'idle'
 
                                                 return (
                                                     <article key={revealKey} className="exercise-item-card">
@@ -122,9 +155,62 @@ export function ExercisesPage() {
                                                             <MathText text={pickText(lang, item.question)} />
                                                         </div>
 
+                                                        <div className="exercise-answer-block">
+                                                            <label
+                                                                className="exercise-answer-label"
+                                                                htmlFor={`exercise-answer-${revealKey}`}
+                                                            >
+                                                                {labels.answer}
+                                                            </label>
+                                                            <div className="exercise-answer-row">
+                                                                <input
+                                                                    id={`exercise-answer-${revealKey}`}
+                                                                    className={`exercise-answer-input ${answerFeedback}`}
+                                                                    type="text"
+                                                                    value={answers[revealKey] ?? ''}
+                                                                    placeholder={labels.answerPlaceholder}
+                                                                    autoComplete="off"
+                                                                    onChange={(event) => {
+                                                                        setAnswers((current) => ({
+                                                                            ...current,
+                                                                            [revealKey]: event.target.value
+                                                                        }))
+                                                                        setFeedback((current) => ({
+                                                                            ...current,
+                                                                            [revealKey]: 'idle'
+                                                                        }))
+                                                                    }}
+                                                                    onKeyDown={(event) => {
+                                                                        if (event.key === 'Enter') {
+                                                                            checkAnswer(section.id, item.id, revealKey)
+                                                                        }
+                                                                    }}
+                                                                />
+                                                                <button
+                                                                    type="button"
+                                                                    className="exercise-answer-check"
+                                                                    onClick={() => checkAnswer(section.id, item.id, revealKey)}
+                                                                >
+                                                                    {labels.check}
+                                                                </button>
+                                                            </div>
+                                                            {answerFeedback !== 'idle' && (
+                                                                <div
+                                                                    className={`exercise-answer-feedback ${answerFeedback}`}
+                                                                    role="status"
+                                                                    aria-live="polite"
+                                                                >
+                                                                    <span aria-hidden="true">{answerFeedback === 'success' ? '✓' : '×'}</span>
+                                                                    <span>{answerFeedback === 'success' ? labels.correct : labels.incorrect}</span>
+                                                                </div>
+                                                            )}
+                                                        </div>
+
                                                         <button
                                                             type="button"
                                                             className="exercise-item-action"
+                                                            aria-expanded={isRevealed}
+                                                            aria-controls={`exercise-solution-${revealKey}`}
                                                             onClick={() => toggleSolution(revealKey)}
                                                         >
                                                             <span className="exercise-item-action-icon" aria-hidden="true">◉</span>
@@ -132,7 +218,10 @@ export function ExercisesPage() {
                                                         </button>
 
                                                         {isRevealed && (
-                                                            <div className="exercise-item-solution">
+                                                            <div
+                                                                className="exercise-item-solution"
+                                                                id={`exercise-solution-${revealKey}`}
+                                                            >
                                                                 <div className="exercise-item-solution-label">{labels.solution}</div>
                                                                 <div className="exercise-item-solution-body">
                                                                     <MathText text={pickText(lang, item.solution)} />

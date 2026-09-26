@@ -5,7 +5,7 @@ import { useGameState } from './hooks/useGameState'
 import { GameBoard } from './components/GameBoard'
 import { GameOverModal } from './components/GameOverModal'
 import { LEVELS } from './types'
-import { toDecimalString } from './utils/fractions'
+import { hasTerminatingDecimal, toDecimalString } from './utils/fractions'
 import './FractionMemory.css'
 
 export function FractionMemory() {
@@ -129,7 +129,8 @@ export function FractionMemory() {
                             </span>
                             {!isDbh1 && (
                                 <span className="mismatch-decimal">
-                                    = {toDecimalString(state.mismatchCards[0].numerator, state.mismatchCards[0].denominator)}
+                                    {hasTerminatingDecimal(state.mismatchCards[0].numerator, state.mismatchCards[0].denominator) ? '=' : '≈'}{' '}
+                                    {toDecimalString(state.mismatchCards[0].numerator, state.mismatchCards[0].denominator)}
                                 </span>
                             )}
                         </div>
@@ -140,7 +141,8 @@ export function FractionMemory() {
                             </span>
                             {!isDbh1 && (
                                 <span className="mismatch-decimal">
-                                    = {toDecimalString(state.mismatchCards[1].numerator, state.mismatchCards[1].denominator)}
+                                    {hasTerminatingDecimal(state.mismatchCards[1].numerator, state.mismatchCards[1].denominator) ? '=' : '≈'}{' '}
+                                    {toDecimalString(state.mismatchCards[1].numerator, state.mismatchCards[1].denominator)}
                                 </span>
                             )}
                         </div>

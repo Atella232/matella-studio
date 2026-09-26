@@ -200,6 +200,53 @@
     background: #d1d5db;
 }
 
+/* Matella palette */
+.game-over-modal .modal-content {
+    background: linear-gradient(145deg,
+            rgba(30, 41, 59, 0.98) 0%,
+            rgba(15, 23, 42, 0.98) 100%);
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.45),
+        inset 0 0 0 1px var(--glass-border);
+}
+
+.game-over-modal .modal-title,
+.game-over-modal .modal-stat-value,
+.game-over-modal .modal-equivalences-title {
+    color: var(--color-primary-light);
+}
+
+.game-over-modal .modal-stat-label {
+    color: var(--color-text-muted);
+}
+
+.game-over-modal .modal-stats,
+.game-over-modal .modal-equivalences {
+    background: rgba(15, 23, 42, 0.55);
+    box-shadow: inset 0 0 0 1px var(--glass-border);
+}
+
+.game-over-modal .equivalence-item {
+    background: var(--glass-bg);
+    color: var(--color-text-primary);
+    box-shadow: inset 0 0 0 1px var(--glass-border);
+}
+
+.game-over-modal .modal-btn-primary {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.game-over-modal .modal-btn-secondary {
+    background: var(--glass-bg);
+    color: var(--color-text-secondary);
+}
+
+.game-over-modal .modal-btn-secondary:hover {
+    background: var(--glass-bg-light);
+    color: var(--color-text-primary);
+}
+
 /* Confetti animation */
 .confetti-container {
     position: absolute;

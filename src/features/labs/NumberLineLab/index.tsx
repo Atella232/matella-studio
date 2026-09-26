@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { formatDecimal, fraction as createFraction } from '../../fractions/fractionMath'
 import './NumberLineLab.css'
 
 export function NumberLineLab() {
@@ -10,6 +11,7 @@ export function NumberLineLab() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
     const fraction = numerator / denominator
+    const decimal = formatDecimal(createFraction(numerator, denominator))
     const gcd = (a: number, b: number): number => (b === 0 ? a : gcd(b, a % b))
     const commonDivisor = gcd(numerator, denominator)
     const simplifiedNum = numerator / commonDivisor
@@ -49,8 +51,9 @@ export function NumberLineLab() {
         ctx.stroke()
 
         // Draw tick marks and numbers
-        const visibleRange = 2 / zoomLevel
+        const visibleRange = Math.max(1, Math.ceil(fraction), Math.ceil(2 / zoomLevel))
         const tickSpacing = lineLength / visibleRange
+        const labelStep = Math.max(1, Math.ceil(visibleRange / 8))
 
         for (let i = 0; i <= visibleRange; i++) {
             const x = lineStart + i * tickSpacing
@@ -67,7 +70,9 @@ export function NumberLineLab() {
             ctx.fillStyle = '#1e293b'
             ctx.font = '16px Inter, sans-serif'
             ctx.textAlign = 'center'
-            ctx.fillText(i.toString(), x, lineY + 35)
+            if (i % labelStep === 0 || i === visibleRange) {
+                ctx.fillText(i.toString(), x, lineY + 35)
+            }
 
             // Draw subdivision ticks for the first unit
             if (i < visibleRange && zoomLevel >= 1) {
@@ -173,7 +178,7 @@ export function NumberLineLab() {
                         <span className="numerator">{numerator}</span>
                         <span className="denominator">{denominator}</span>
                     </span>
-                    = {fraction.toFixed(3)}
+                    {decimal.exact ? ' = ' : ' ≈ '}{decimal.value}
                 </div>
                 {commonDivisor > 1 && (
                     <div className="info-item">

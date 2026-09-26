@@ -261,10 +261,10 @@
             },
             "ch12": {
                 "title": "💀 Azken Erronka: Ur Depositua",
-                "description": "Hiru nekazarik ur-depositu bat partekatzen dute. Lehenak 1/4 erabiltzen du, bigarrenak gainerakoaren 1/3, eta hirugarrenak 2/5 geratzen denaren. 1300 litro geratzen badira, zenbat litro zeuden hasieran?",
-                "hint": "Alderantziz lan egin: 1300L = geratutakoa × (1-2/5). Jarraitu pausoz-pauso hasierara arte.",
-                "success": "Bikain! 6000L × 3/4 = 4500L; 4500L × 2/3 = 3000L; 3000L × 3/5 = 1800L... Ez! Berriro: 1300 ÷ 0.6 ÷ 0.667 ÷ 0.75 = 6000L",
-                "error": "Pausoz pauso: Azkena = X × 3/4 × 2/3 × 3/5 = 1300. Ebatzi X."
+                "description": "Hiru nekazarik ur-depositu bat partekatzen dute. Lehenak 1/4 erabiltzen du, bigarrenak gainerakoaren 1/3, eta hirugarrenak 2/5 geratzen denaren. 1800 litro geratzen badira, zenbat litro zeuden hasieran?",
+                "hint": "Egin atzerantz: 1800 L hirugarren nekazariaren aurretik zegoenaren 3/5 dira. Jarraitu pausoz pauso hasierara arte.",
+                "success": "Bikain! Amaieran uraren 3/4 × 2/3 × 3/5 = 3/10 geratzen da. 3/10 1800 L badira, hasieran 6000 L zeuden.",
+                "error": "Pausoz pauso: Azkena = X × 3/4 × 2/3 × 3/5 = 1800. Ebatzi X."
             }
         },
         "baserri": {
@@ -705,6 +705,7 @@
             "exit": "Irten",
             "playAgain": "Berriro jolastu",
             "completed": "Zorionak!",
+            "hiddenCard": "Ezkutuko karta",
             "equivalencesFound": "Aurkitutako baliokidetasunak"
         },
         "fractionRace": {
@@ -721,9 +722,30 @@
             "questions": "Galderak",
             "operations": "Eragiketak",
             "mixedNumbers": "Zenbaki mistoak",
-            "maxExponent": "Geh. Berretz.",
-            "opponents": "Aurkariak",
-            "pts": "pt",
+      "maxExponent": "Geh. Berretz.",
+      "opponents": "Aurkariak",
+      "fastTime": "Erantzun azkarra",
+      "modeSelection": "Eragiketa mota",
+      "difficultySelection": "Zailtasuna",
+      "maxDenominator": "Izendatzailea ≤ {{value}}",
+      "sameDenominators": "Izendatzaile berdinak",
+      "differentDenominators": "Izendatzaile desberdinak",
+      "simplifiedAnswers": "Erantzun sinplifikatuak",
+      "continue": "Jarraitu",
+      "viewResults": "Emaitzak ikusi",
+      "retryErrors": "Akatsak berriz egin",
+      "reviewMode": "Akatsen errepasoa",
+      "countdown": "Lasterketaren atzerako kontaketa",
+      "fractionAria": "{{numerator}} zati {{denominator}}",
+      "mixedFractionAria": "{{whole}} oso eta {{numerator}} zati {{denominator}}",
+      "explanations": {
+        "addSubtract": "Bilatu izendatzaile komun bat eta egin eragiketa zenbakitzaileekin bakarrik.",
+        "multiply": "Biderkatu zenbakitzaileak elkarrekin eta izendatzaileak elkarrekin; sinplifikatu amaieran.",
+        "divide": "Biderkatu bigarren zatikiaren alderantzizkoarekin eta sinplifikatu.",
+        "power": "Berretu zenbakitzailea eta izendatzailea berretzaile berarekin.",
+        "combined": "Ebatzi lehenik parentesiak eta jarraitu eragiketen lehentasuna."
+      },
+      "pts": "pt",
             "exit": "Irten",
             "question": "Galdera",
             "of": "tik",
@@ -731,6 +753,80 @@
             "incorrect": "Oker!",
             "turbo": "TURBOA!",
             "combo": "Combo",
+            "scoringGuide": "Puntuazio-sistema",
+            "baseScore": "Erantzun zuzena",
+            "speedScore": "Abiadura",
+            "comboScore": "Comboa",
+            "comboStep": "combo-mailako",
+            "turboScore": "Turboa",
+            "scoreEarned": "+{{points}} puntu lortuta",
+            "noPoints": "0 puntu lortuta",
+            "comboReset": "Comboa zerora itzuli da",
+            "turboProgress": "Turboa {{current}}/{{target}}",
+            "turboActiveBonus": "Turbo aktibo: +{{points}} erantzun zuzeneko",
+            "chooseRaceFormat": "Lasterketa mota",
+            "soundOn": "Soinua aktibatuta",
+            "soundOff": "Soinua desaktibatuta",
+            "formats": {
+                "classic": { "name": "Klasikoa", "description": "Iritsi helmugara galdera guztiak ebatziz." },
+                "sprint": { "name": "Erlojupekoa", "description": "Lortu ahalik eta puntu gehien 60 segundoan." },
+                "perfect": { "name": "Lasterketa perfektua", "description": "Akats batek lasterketa amaitzen du." }
+            },
+            "questionCountSelection": "Galdera kopurua",
+            "operationSelection": "Eragiketak",
+            "operationFilters": {
+                "default": "Guztiak",
+                "addition": "Batuketak soilik",
+                "subtraction": "Kenketak soilik",
+                "multiplication": "Biderketak soilik",
+                "division": "Zatiketak soilik"
+            },
+            "includeMixedOption": "Zenbaki mistoak sartu",
+            "timeLimit": "Denbora-muga",
+            "personalProgress": "Nire aurrerapena",
+            "racesPlayed": "Lasterketak",
+            "wins": "Garaipenak",
+            "bestScore": "Puntuazio onena",
+            "bestTime": "Denbora onena",
+            "bestAccuracy": "Zehaztasun onena",
+            "bestCombo": "Combo onena",
+            "noRecordYet": "Osatu lehen lasterketa zure errekorrak gordetzen hasteko.",
+            "newAchievements": "Lorpen berriak",
+            "rivalPersonalities": {
+                "sprinter": "Irteera azkarra: indartsu hasi eta amaieran moteldu egiten da",
+                "steady": "Konstantea: erritmo oso erregularra mantentzen du",
+                "comeback": "Erremontatzailea: bigarren zatian azeleratzen du"
+            },
+            "errorInsights": {
+                "sign": "Begiratu emaitzaren zeinua erantzuna aukeratu aurretik.",
+                "simplification": "Balioa baliokidea da, baina erantzuna guztiz sinplifikatu behar da.",
+                "commonDenominator": "Ez eragin izendatzaileekin: bilatu lehenik izendatzaile komuna.",
+                "multiplication": "Biderkatu zenbakitzailea zenbakitzailearekin eta izendatzailea izendatzailearekin.",
+                "inverse": "Zatiketan bigarren zatikia bakarrik alderantzikatu behar da.",
+                "power": "Aplikatu berretzailea zenbakitzaileari eta izendatzaileari.",
+                "operationOrder": "Ebatzi lehenik parentesiak eta errespetatu eragiketen lehentasuna.",
+                "calculation": "Prozedura zuzena dirudi; berrikusi azken kalkulua eta sinplifikazioa."
+            },
+            "rewardTiers": {
+                "gold": "Lasterketa perfektua",
+                "silver": "Maila bikaina",
+                "bronze": "Aurrerapen ona",
+                "finisher": "Erronka osatuta",
+                "attempt": "Saiakera amaituta"
+            },
+            "finishReasons": {
+                "completed": "Ibilbide osoa osatu duzu.",
+                "time": "Denbora amaitu da: lortutako erantzun zuzen guztiek balio dute.",
+                "mistake": "Lasterketa perfektua lehen akatsarekin amaitzen da. Berrikusi eta saiatu berriro."
+            },
+            "achievements": {
+                "firstRace": "🎟️ Lehen lasterketa",
+                "firstWin": "🏆 Lehen garaipena",
+                "newBestScore": "⭐ Puntu-errekorra",
+                "newBestTime": "⏱️ Denbora-errekorra",
+                "newBestAccuracy": "🎯 Zehaztasun-errekorra",
+                "perfectRace": "💎 Akatsik gabe"
+            },
             "go": "Ekin!",
             "oneGo": "1... Ekin!",
             "raceFinished": "Lasterketa amaituta!",

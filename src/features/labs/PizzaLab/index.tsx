@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { formatPercentage, fraction as createFraction } from '../../fractions/fractionMath'
 import './PizzaLab.css'
 
 export function PizzaLab() {
@@ -8,7 +9,7 @@ export function PizzaLab() {
     const [denominator, setDenominator] = useState(8)
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
-    const fraction = numerator / denominator
+    const percentage = formatPercentage(createFraction(numerator, denominator))
 
     useEffect(() => {
         const canvas = canvasRef.current
@@ -145,8 +146,8 @@ export function PizzaLab() {
                         <span className="line"></span>
                         <span className="den">{denominator}</span>
                     </div>
-                    <span className="equals">=</span>
-                    <span className="percentage">{(fraction * 100).toFixed(0)}%</span>
+                    <span className="equals">{percentage.exact ? '=' : '≈'}</span>
+                    <span className="percentage">{percentage.value}</span>
                 </div>
                 <p className="pizza-text">
                     {numerator === 0
