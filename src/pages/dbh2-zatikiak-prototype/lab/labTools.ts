@@ -1,7 +1,7 @@
 import type { FractionStageId, LocalizedText, TheoryTopicId } from '../content.ts'
-import { compare, equals, fraction, gcd, type FractionValue } from '../math/fraction.ts'
+import { checkAnswer, compare, equals, fraction, gcd, type AnswerForm, type FractionValue } from '../math/fraction.ts'
 
-export type LabToolId = 'parts' | 'numberline' | 'wall' | 'equivalence' | 'compare' | 'operations' | 'proportion'
+export type LabToolId = 'parts' | 'numberline' | 'wall' | 'equivalence' | 'compare' | 'addsub' | 'muldiv' | 'proportion'
 
 export interface LabToolInfo {
     id: LabToolId
@@ -76,14 +76,25 @@ export const labTools: LabToolInfo[] = [
         }
     },
     {
-        id: 'operations',
+        id: 'addsub',
         stage: 'operations',
         lessonTopic: 'add-subtract',
-        title: { eu: 'Eragiketak', es: 'Operaciones', ar: 'العمليات' },
+        title: { eu: 'Batuketa eta kenketa', es: 'Suma y resta', ar: 'الجمع والطرح' },
         observe: {
-            eu: 'Probatu eragiketa bat eta aurreikusi emaitza begiratu aurretik: zatiki bakoitza baino handiagoa ala txikiagoa izango da?',
-            es: 'Prueba una operación y predice el resultado antes de mirarlo: ¿será mayor o menor que cada fracción?',
-            ar: 'جرّب عملية وتوقّع النتيجة قبل النظر إليها: هل ستكون أكبر أم أصغر من كل كسر؟'
+            eu: 'Tamaina bereko zatiak bakarrik batu edo ken daitezke. Lehenik banatu bi barrak zati kopuru berean (izendatzaile komuna) eta gero bildu edo kendu zatiak.',
+            es: 'Solo se pueden sumar o restar trozos del mismo tamaño. Primero parte las dos barras en el mismo número de partes (denominador común) y después junta o quita trozos.',
+            ar: 'لا يمكن جمع أو طرح إلا القطع المتساوية في الحجم. قسّم الشريطين أولًا إلى العدد نفسه من الأجزاء (مقام مشترك) ثم اجمع القطع أو اطرحها.'
+        }
+    },
+    {
+        id: 'muldiv',
+        stage: 'operations',
+        lessonTopic: 'multiply-divide',
+        title: { eu: 'Biderketa eta zatiketa', es: 'Multiplicación y división', ar: 'الضرب والقسمة' },
+        observe: {
+            eu: 'Biderkatzea zatiki baten zatikia hartzea da: bi eremuen gurutzea da biderkadura. Zatitzea bigarren zatikia lehenengoan zenbat aldiz sartzen den galdetzea da.',
+            es: 'Multiplicar es tomar una fracción de otra: el cruce de las dos zonas es el producto. Dividir es preguntar cuántas veces cabe la segunda fracción en la primera.',
+            ar: 'الضرب هو أخذ كسر من كسر آخر: تقاطع المنطقتين هو الناتج. والقسمة هي السؤال عن عدد مرات احتواء الكسر الأول على الكسر الثاني.'
         }
     },
     {
@@ -106,9 +117,9 @@ export const labToolForTopic: Partial<Record<TheoryTopicId, LabToolId>> = {
     equivalence: 'equivalence',
     simplification: 'equivalence',
     ordering: 'compare',
-    'add-subtract': 'operations',
-    'multiply-divide': 'operations',
-    combined: 'operations',
+    'add-subtract': 'addsub',
+    'multiply-divide': 'muldiv',
+    combined: 'addsub',
     'fraction-of': 'proportion',
     percentages: 'proportion',
     proportionality: 'proportion'
@@ -482,10 +493,165 @@ export const compareChallenges: LabChallenge<CompareState>[] = [
     }
 ]
 
+/* ---------- Operations: shared answer handling ---------- */
+
+export interface OperationAnswer {
+    /** What the learner typed as the result */
+    answer: string
+    /** Whether the learner pressed "check" since last editing the answer */
+    checked: boolean
+    /** Whether the learner chose to see the worked result */
+    revealed: boolean
+}
+
+export const OPERATION_LIMITS = { minDenominator: 2, maxDenominator: 12 } as const
+
+const freshAnswer: OperationAnswer = { answer: '', checked: false, revealed: false }
+
+/** Operands stay within one unit; any change asks for a new answer */
+function withOperand<State extends { first: FractionValue; second: FractionValue } & OperationAnswer>(
+    state: State,
+    which: 'first' | 'second',
+    numerator: number,
+    denominator: number
+): State {
+    const nextDenominator = Math.min(OPERATION_LIMITS.maxDenominator, Math.max(OPERATION_LIMITS.minDenominator, denominator))
+    const nextNumerator = Math.min(nextDenominator, Math.max(1, numerator))
+    return { ...state, [which]: { numerator: nextNumerator, denominator: nextDenominator }, ...freshAnswer }
+}
+
+/** Whether a tool should show its worked result: the learner got it right or asked to see it */
+export function resultVisible(state: OperationAnswer, expected: FractionValue): boolean {
+    return state.revealed || (state.checked && checkAnswer(state.answer, expected) === 'correct')
+}
+
+const answered = (state: OperationAnswer, expected: FractionValue, form: AnswerForm = 'any') =>
+    checkAnswer(state.answer, expected, form) === 'correct'
+
+const operands = (state: { first: FractionValue; second: FractionValue }, a: [number, number], b: [number, number], ordered: boolean) =>
+    (sameTerms(state.first, ...a) && sameTerms(state.second, ...b)) || (!ordered && sameTerms(state.first, ...b) && sameTerms(state.second, ...a))
+
+/* ---------- Addition and subtraction ---------- */
+
+export interface SumState extends OperationAnswer {
+    first: FractionValue
+    second: FractionValue
+    op: 'add' | 'subtract'
+    /** Show the bars with their own parts or split into the common denominator */
+    view: 'original' | 'common'
+}
+
+export const initialSumState: SumState = {
+    first: { numerator: 1, denominator: 2 },
+    second: { numerator: 1, denominator: 3 },
+    op: 'add',
+    view: 'original',
+    ...freshAnswer
+}
+
+/** Both operands over their least common denominator, and the unsimplified result */
+export function sumParts(state: SumState): { common: number; first: number; second: number; result: FractionValue } {
+    const common = lcm(state.first.denominator, state.second.denominator)
+    const first = state.first.numerator * (common / state.first.denominator)
+    const second = state.second.numerator * (common / state.second.denominator)
+    return { common, first, second, result: { numerator: state.op === 'add' ? first + second : first - second, denominator: common } }
+}
+
+export const setSumOperand = (state: SumState, which: 'first' | 'second', numerator: number, denominator: number) =>
+    withOperand(state, which, numerator, denominator)
+
+export const setSumOp = (state: SumState, op: SumState['op']): SumState => state.op === op ? state : { ...state, op, ...freshAnswer }
+
+export const sumChallenges: LabChallenge<SumState>[] = [
+    {
+        id: 1201,
+        prompt: { eu: 'Kalkulatu 1/2 + 1/3 eta idatzi emaitza.', es: 'Calcula 1/2 + 1/3 y escribe el resultado.', ar: 'احسب 1/2 + 1/3 واكتب النتيجة.' },
+        hint: { eu: 'Banatu bi barrak seirenetan: 1/2 = 3/6 eta 1/3 = 2/6.', es: 'Parte las dos barras en sextos: 1/2 = 3/6 y 1/3 = 2/6.', ar: 'قسّم الشريطين إلى أسداس: 1/2 = 3/6 و1/3 = 2/6.' },
+        isSolved: (state) => state.op === 'add' && operands(state, [1, 2], [1, 3], false) && answered(state, fraction(5, 6))
+    },
+    {
+        id: 1202,
+        prompt: { eu: 'Kalkulatu 3/4 − 1/6 eta idatzi emaitza.', es: 'Calcula 3/4 − 1/6 y escribe el resultado.', ar: 'احسب 3/4 − 1/6 واكتب النتيجة.' },
+        hint: { eu: '4ren eta 6ren izendatzaile komuna 12 da.', es: 'El denominador común de 4 y 6 es 12.', ar: 'المقام المشترك لـ 4 و6 هو 12.' },
+        isSolved: (state) => state.op === 'subtract' && operands(state, [3, 4], [1, 6], true) && answered(state, fraction(7, 12))
+    },
+    {
+        id: 1203,
+        prompt: { eu: 'Batu izendatzaile desberdineko bi zatiki, emaitza zehazki 1 izan dadin.', es: 'Suma dos fracciones con distinto denominador que den exactamente 1.', ar: 'اجمع كسرين مختلفي المقام يكون ناتجهما 1 تمامًا.' },
+        hint: { eu: 'Probatu 1/2rekin eta 1/2ren balio bera duen beste zatiki batekin.', es: 'Prueba con 1/2 y otra fracción que valga lo mismo que 1/2.', ar: 'جرّب 1/2 وكسرًا آخر يساوي 1/2.' },
+        isSolved: (state) => state.op === 'add' && state.first.denominator !== state.second.denominator && equals(sumParts(state).result, fraction(1))
+    },
+    {
+        id: 1204,
+        prompt: { eu: 'Kalkulatu 5/6 + 3/4 eta idatzi emaitza zenbaki misto gisa.', es: 'Calcula 5/6 + 3/4 y escribe el resultado como número mixto.', ar: 'احسب 5/6 + 3/4 واكتب النتيجة عددًا كسريًا.' },
+        hint: { eu: 'Batura 19/12 da: zenbat unitate oso sartzen dira?', es: 'La suma es 19/12: ¿cuántas unidades completas caben?', ar: 'المجموع 19/12: كم وحدة كاملة فيه؟' },
+        isSolved: (state) => state.op === 'add' && operands(state, [5, 6], [3, 4], false) && answered(state, fraction(19, 12), 'mixed')
+    }
+]
+
+/* ---------- Multiplication and division ---------- */
+
+export interface ProductState extends OperationAnswer {
+    first: FractionValue
+    second: FractionValue
+    op: 'multiply' | 'divide'
+}
+
+export const initialProductState: ProductState = {
+    first: { numerator: 2, denominator: 3 },
+    second: { numerator: 1, denominator: 2 },
+    op: 'multiply',
+    ...freshAnswer
+}
+
+/** Unsimplified result: a·c/(b·d) or a·d/(b·c) */
+export function productResult(state: ProductState): FractionValue {
+    const { first, second } = state
+    return state.op === 'multiply'
+        ? { numerator: first.numerator * second.numerator, denominator: first.denominator * second.denominator }
+        : { numerator: first.numerator * second.denominator, denominator: first.denominator * second.numerator }
+}
+
+export const setProductOperand = (state: ProductState, which: 'first' | 'second', numerator: number, denominator: number) =>
+    withOperand(state, which, numerator, denominator)
+
+export const setProductOp = (state: ProductState, op: ProductState['op']): ProductState => state.op === op ? state : { ...state, op, ...freshAnswer }
+
+export const productChallenges: LabChallenge<ProductState>[] = [
+    {
+        id: 1301,
+        prompt: { eu: 'Kalkulatu 2/3 × 3/4 eta idatzi emaitza.', es: 'Calcula 2/3 × 3/4 y escribe el resultado.', ar: 'احسب 2/3 × 3/4 واكتب النتيجة.' },
+        hint: { eu: 'Zenbatu gurutzeko laukiak eta lauki guztiak.', es: 'Cuenta las casillas del cruce y las casillas totales.', ar: 'عُدّ خانات التقاطع وجميع الخانات.' },
+        isSolved: (state) => state.op === 'multiply' && operands(state, [2, 3], [3, 4], false) && answered(state, fraction(1, 2))
+    },
+    {
+        id: 1302,
+        prompt: { eu: 'Zenbat aldiz sartzen da 1/4 3/4an? Idatzi emaitza.', es: '¿Cuántas veces cabe 1/4 en 3/4? Escribe el resultado.', ar: 'كم مرة يتسع 3/4 لـ 1/4؟ اكتب النتيجة.' },
+        hint: { eu: 'Erabili zatiketa: lehen zatikia 3/4, bigarrena 1/4.', es: 'Usa la división: primera fracción 3/4, segunda 1/4.', ar: 'استعمل القسمة: الكسر الأول 3/4 والثاني 1/4.' },
+        isSolved: (state) => state.op === 'divide' && operands(state, [3, 4], [1, 4], true) && answered(state, fraction(3))
+    },
+    {
+        id: 1303,
+        prompt: { eu: 'Kalkulatu 2/3 : 3/4. Behin osorik sartzen da?', es: 'Calcula 2/3 : 3/4. ¿Cabe una vez entera?', ar: 'احسب 2/3 ÷ 3/4. هل يتسع مرة كاملة؟' },
+        hint: { eu: 'Biderkatu 2/3 3/4ren alderantzizkoarekin, hau da, 4/3rekin.', es: 'Multiplica 2/3 por la inversa de 3/4, que es 4/3.', ar: 'اضرب 2/3 في مقلوب 3/4 أي 4/3.' },
+        isSolved: (state) => state.op === 'divide' && operands(state, [2, 3], [3, 4], true) && answered(state, fraction(8, 9))
+    },
+    {
+        id: 1304,
+        prompt: { eu: 'Aurkitu 1 baino txikiagoak diren bi zatiki, biderkadura 1/4 izan dezaten.', es: 'Encuentra dos fracciones menores que 1 cuyo producto sea 1/4.', ar: 'جد كسرين أصغر من 1 حاصل ضربهما 1/4.' },
+        hint: { eu: 'Adibidez, erdiaren erdia.', es: 'Por ejemplo, la mitad de la mitad.', ar: 'مثلًا، نصف النصف.' },
+        isSolved: (state) => state.op === 'multiply'
+            && state.first.numerator < state.first.denominator && state.second.numerator < state.second.denominator
+            && equals(productResult(state), fraction(1, 4))
+    }
+]
+
 export const labChallengeIds: number[] = [
     ...partsChallenges,
     ...numberLineChallenges,
     ...wallChallenges,
     ...equivalenceChallenges,
-    ...compareChallenges
+    ...compareChallenges,
+    ...sumChallenges,
+    ...productChallenges
 ].map((challenge) => challenge.id)

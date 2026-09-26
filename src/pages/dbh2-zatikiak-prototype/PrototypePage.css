@@ -40,6 +40,10 @@
     --stage-soft: #f1f5fc;
     --stage-ink: #1e4a96;
 
+    /* Colour of the second operand/fraction in comparisons and operations */
+    --second: #c4432a;
+    --second-tint: #f8dcd0;
+
     min-height: 100vh;
     color: var(--ink);
     background: var(--paper);
@@ -56,7 +60,7 @@
 .fraction-v2 [data-stage="meaning"] { --stage: #2f6fdb; --stage-on: #ffffff; --stage-tint: #dde7f7; --stage-soft: #f1f5fc; --stage-ink: #1e4a96; }
 .fraction-v2 [data-stage="equivalence"] { --stage: #7a55d6; --stage-on: #ffffff; --stage-tint: #e8e0f7; --stage-soft: #f5f1fc; --stage-ink: #4a2f9e; }
 .fraction-v2 [data-stage="ordering"] { --stage: #e0a100; --stage-on: #1d2733; --stage-tint: #fbebc0; --stage-soft: #fdf7e6; --stage-ink: #6b4e12; }
-.fraction-v2 [data-stage="operations"] { --stage: #c4432a; --stage-on: #ffffff; --stage-tint: #f8dcd0; --stage-soft: #fcf1ec; --stage-ink: #9a3218; }
+.fraction-v2 [data-stage="operations"] { --stage: #c4432a; --stage-on: #ffffff; --stage-tint: #f8dcd0; --stage-soft: #fcf1ec; --stage-ink: #9a3218; --second: #2f6fdb; --second-tint: #dde7f7; }
 .fraction-v2 [data-stage="proportionality"] { --stage: #267b53; --stage-on: #ffffff; --stage-tint: #d6eddf; --stage-soft: #eff7f2; --stage-ink: #1f6443; }
 
 .fraction-v2 *,
@@ -1669,106 +1673,6 @@
 .fraction-v2-visuals > .math-text {
     font-size: 26px;
 }
-
-.fraction-v2-model-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    font-size: 30px;
-}
-
-.fraction-v2-model {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    max-width: 600px;
-}
-
-.fraction-v2-units {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
-.fraction-v2-unit {
-    display: grid;
-    flex: 1 1 150px;
-    grid-template-columns: repeat(var(--parts), minmax(4px, 1fr));
-    min-width: 120px;
-    height: 60px;
-    overflow: hidden;
-    border: 2px solid var(--ink);
-    border-radius: 8px;
-    background: #ffffff;
-}
-
-.fraction-v2-unit span {
-    border-inline-end: 1.5px solid var(--ink);
-}
-
-.fraction-v2-unit span:last-child {
-    border-inline-end: 0;
-}
-
-.fraction-v2-unit span.filled {
-    background: #2f6fdb;
-}
-
-.fraction-v2-model.negative .fraction-v2-unit span.filled {
-    background: #c4432a;
-}
-
-.fraction-v2-sign {
-    font-size: 36px;
-    font-weight: 700;
-}
-
-.fraction-v2-mixed {
-    padding: 4px 12px;
-    border-radius: 999px;
-    color: var(--mustard-ink);
-    background: var(--mustard-tint);
-    font-size: 15px;
-    font-weight: 700;
-}
-
-.fraction-v2-equivalence-pair,
-.fraction-v2-operands {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-}
-
-.fraction-v2-equivalence-pair > span,
-.fraction-v2-operands > span {
-    font-family: "Fraunces", Georgia, serif;
-    font-size: 40px;
-    font-weight: 600;
-}
-
-.fraction-v2-equivalence-pair .fraction-v2-unit,
-.fraction-v2-operands .fraction-v2-unit {
-    min-width: 90px;
-}
-
-.fraction-v2-operation-result {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    padding: 14px 26px;
-    border: 1.5px solid var(--ink);
-    border-radius: 16px;
-    background: var(--card);
-    font-size: 30px;
-}
-
 .fraction-v2-proportion-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2412,12 +2316,6 @@
         min-height: 320px;
         padding: 24px 16px;
     }
-
-    .fraction-v2-equivalence-pair,
-    .fraction-v2-operands {
-        flex-direction: column;
-    }
-
     .fraction-v2-proportion-grid {
         grid-template-columns: minmax(0, 1fr);
     }

@@ -13,6 +13,8 @@ import {
     initialEquivalenceState,
     initialNumberLineState,
     initialPartsState,
+    initialProductState,
+    initialSumState,
     initialWallState,
     labChallengeIds,
     labToolForTopic,
@@ -22,6 +24,9 @@ import {
     numberLineBounds,
     numberLineChallenges,
     partsChallenges,
+    productChallenges,
+    productResult,
+    resultVisible,
     selectWallPiece,
     setCompareFraction,
     setEquivalenceBase,
@@ -29,13 +34,19 @@ import {
     setNumberLineRange,
     setPartsDenominator,
     setPartsUnits,
+    setProductOp,
+    setSumOperand,
     setWallMode,
+    sumChallenges,
+    sumParts,
     togglePart,
     wallChallenges,
     wallEquivalents,
     type CompareState,
     type NumberLineState,
-    type PartsState
+    type PartsState,
+    type ProductState,
+    type SumState
 } from '../src/pages/dbh2-zatikiak-prototype/lab/labTools.ts'
 import { theoryTopics } from '../src/pages/dbh2-zatikiak-prototype/content.ts'
 
@@ -193,4 +204,41 @@ test('compare tool needs a right prediction and, when asked, the named strategy'
     assert.ok(!equal.isSolved(pair(2, 3, 2, 3, { guess: '=' })), 'the two fractions must be written differently')
     assert.ok(cross.isSolved(pair(7, 12, 3, 5, { guess: '<', strategy: 'cross' })))
     for (const challenge of compareChallenges) assert.ok(!challenge.isSolved(initialCompareState))
+})
+
+test('sum tool works over the least common denominator and checks the typed result', () => {
+    const sum = (a: number, b: number, c: number, d: number, extra: Partial<SumState> = {}): SumState =>
+        ({ ...initialSumState, first: { numerator: a, denominator: b }, second: { numerator: c, denominator: d }, ...extra })
+    assert.deepEqual(sumParts(sum(1, 2, 1, 3)), { common: 6, first: 3, second: 2, result: { numerator: 5, denominator: 6 } })
+    assert.deepEqual(sumParts(sum(3, 4, 1, 6, { op: 'subtract' })).result, { numerator: 7, denominator: 12 })
+    const answered = setSumOperand(sum(1, 2, 1, 3, { answer: '5/6', checked: true }), 'second', 1, 4)
+    assert.equal(answered.answer, '', 'changing an operand asks for a new answer')
+    assert.ok(!resultVisible(sum(1, 2, 1, 3, { answer: '5/6' }), { numerator: 5, denominator: 6 }), 'not shown before checking')
+    assert.ok(resultVisible(sum(1, 2, 1, 3, { answer: '10/12', checked: true }), { numerator: 5, denominator: 6 }))
+
+    const [half, minus, one, mixed] = sumChallenges
+    assert.ok(half.isSolved(sum(1, 3, 1, 2, { answer: '5/6' })))
+    assert.ok(!half.isSolved(sum(1, 2, 1, 3, { answer: '4/6' })))
+    assert.ok(minus.isSolved(sum(3, 4, 1, 6, { op: 'subtract', answer: '7/12' })))
+    assert.ok(!minus.isSolved(sum(1, 6, 3, 4, { op: 'subtract', answer: '7/12' })), 'order matters in a subtraction')
+    assert.ok(one.isSolved(sum(1, 2, 2, 4)))
+    assert.ok(!one.isSolved(sum(1, 2, 1, 2)), 'denominators must differ')
+    assert.ok(mixed.isSolved(sum(5, 6, 3, 4, { answer: '1 7/12' })))
+    assert.ok(!mixed.isSolved(sum(5, 6, 3, 4, { answer: '19/12' })), 'must be written as a mixed number')
+})
+
+test('product tool multiplies as area and divides by measuring', () => {
+    const product = (a: number, b: number, c: number, d: number, extra: Partial<ProductState> = {}): ProductState =>
+        ({ ...initialProductState, first: { numerator: a, denominator: b }, second: { numerator: c, denominator: d }, ...extra })
+    assert.deepEqual(productResult(product(2, 3, 3, 4)), { numerator: 6, denominator: 12 })
+    assert.deepEqual(productResult(product(3, 4, 1, 4, { op: 'divide' })), { numerator: 12, denominator: 4 })
+    assert.equal(setProductOp(product(2, 3, 3, 4, { answer: '1/2', checked: true }), 'divide').answer, '')
+
+    const [area, fits, lessThanOne, quarter] = productChallenges
+    assert.ok(area.isSolved(product(3, 4, 2, 3, { answer: '1/2' })))
+    assert.ok(fits.isSolved(product(3, 4, 1, 4, { op: 'divide', answer: '3' })))
+    assert.ok(!fits.isSolved(product(1, 4, 3, 4, { op: 'divide', answer: '3' })), 'order matters in a division')
+    assert.ok(lessThanOne.isSolved(product(2, 3, 3, 4, { op: 'divide', answer: '8/9' })))
+    assert.ok(quarter.isSolved(product(1, 2, 1, 2)))
+    assert.ok(!quarter.isSolved(product(1, 4, 4, 4)), 'both factors must be less than 1')
 })

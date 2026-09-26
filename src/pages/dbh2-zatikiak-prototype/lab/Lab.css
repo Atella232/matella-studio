@@ -218,6 +218,7 @@
 
 .fraction-v2-lab-readout {
     display: flex;
+    width: min(100%, 480px);
     flex-direction: column;
     align-items: center;
     gap: 6px;
@@ -651,12 +652,12 @@
 }
 
 .fraction-v2-wall-row button.second {
-    background: var(--coral-tint);
+    background: var(--second-tint);
 }
 
 .fraction-v2-wall-row button.second.selected {
     color: #ffffff;
-    background: #c4432a;
+    background: var(--second);
 }
 
 .fraction-v2-wall-guide {
@@ -675,7 +676,7 @@
 }
 
 .fraction-v2-wall-guide.second {
-    background: #c4432a;
+    background: var(--second);
 }
 
 @media (max-width: 760px) {
@@ -742,7 +743,7 @@
 }
 
 .fraction-v2-partition.second > span.filled {
-    background: #c4432a;
+    background: var(--second);
 }
 
 .fraction-v2-partition i {
@@ -873,7 +874,7 @@
 }
 
 .fraction-v2-cmp-point.second::after {
-    background: #c4432a;
+    background: var(--second);
 }
 
 .fraction-v2-cmp-cross {
@@ -906,7 +907,7 @@
 }
 
 .fraction-v2-cmp-products > span.second {
-    background: var(--coral-tint);
+    background: var(--second-tint);
 }
 
 .fraction-v2-cmp-products > strong {
@@ -933,4 +934,253 @@
         width: 46px;
         height: 46px;
     }
+}
+
+/* ---------- Operation tools: answer field ---------- */
+
+.fraction-v2-lab-answer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    margin-top: 6px;
+    font-size: 16px;
+    text-align: start;
+}
+
+.fraction-v2-lab-answer label {
+    font-weight: 700;
+}
+
+.fraction-v2-lab-answer-row {
+    display: flex;
+    gap: 8px;
+}
+
+.fraction-v2-lab-answer-row input {
+    flex: 1 1 auto;
+    width: 0;
+    min-width: 0;
+    min-height: 48px;
+    padding: 8px 14px;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    background: #ffffff;
+    font-size: 20px;
+}
+
+.fraction-v2-lab-answer-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 32px;
+}
+
+.fraction-v2-lab-answer-status {
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: var(--paper-deep);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.fraction-v2-lab-answer-status.success {
+    color: var(--success-ink);
+    background: var(--success-tint);
+}
+
+.fraction-v2-lab-answer-status.error {
+    color: var(--error-ink);
+    background: var(--error-tint);
+}
+
+/* ---------- Sum and difference result ---------- */
+
+.fraction-v2-segment-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.fraction-v2-segment-bar {
+    display: flex;
+    height: 64px;
+    overflow: hidden;
+    border: 2.5px solid var(--ink);
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.fraction-v2-segment-bar span {
+    flex: 1 1 0;
+    min-width: 0;
+    border-inline-end: 1.5px solid rgba(29, 39, 51, 0.6);
+}
+
+.fraction-v2-segment-bar span:last-child {
+    border-inline-end: 0;
+}
+
+.fraction-v2-segment-bar span.first {
+    background: var(--stage);
+}
+
+.fraction-v2-segment-bar span.second {
+    background: var(--second);
+}
+
+/* Pieces taken away stay visible, crossed out, so the subtraction reads as "remove" */
+.fraction-v2-segment-bar span.removed {
+    background: repeating-linear-gradient(135deg, var(--stage-tint) 0 6px, #ffffff 6px 12px);
+}
+
+/* ---------- Product as area ---------- */
+
+.fraction-v2-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    direction: ltr;
+}
+
+.fraction-v2-area-top {
+    font-size: 22px;
+    padding-inline-start: 60px;
+}
+
+.fraction-v2-area-body {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.fraction-v2-area-side {
+    width: 48px;
+    font-size: 22px;
+    text-align: end;
+}
+
+.fraction-v2-area-grid {
+    display: grid;
+    gap: 2px;
+    width: min(62vw, 300px);
+    aspect-ratio: 1;
+    overflow: hidden;
+    border: 2.5px solid var(--ink);
+    border-radius: 6px;
+    background: var(--ink);
+}
+
+.fraction-v2-area-grid span {
+    background: #ffffff;
+}
+
+.fraction-v2-area-grid span.first {
+    background: var(--stage-tint);
+}
+
+.fraction-v2-area-grid span.second {
+    background: var(--second-tint);
+}
+
+.fraction-v2-area-grid span.both {
+    background: var(--stage);
+}
+
+/* ---------- Quotient as measuring ---------- */
+
+.fraction-v2-measure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 680px;
+}
+
+.fraction-v2-measure-line {
+    position: relative;
+    width: calc(100% - 40px);
+    height: 150px;
+    margin: 0 20px;
+    direction: ltr;
+}
+
+.fraction-v2-measure-target {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 34px;
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    background: var(--stage-tint);
+}
+
+.fraction-v2-measure-target > span {
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 10px);
+    font-size: 20px;
+    white-space: nowrap;
+    transform: translateY(-50%);
+}
+
+.fraction-v2-measure-jump {
+    position: absolute;
+    top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border: 2px solid var(--ink);
+    border-radius: 999px 999px 8px 8px;
+    color: #ffffff;
+    background: var(--second);
+    font-weight: 700;
+}
+
+/* Alternate shades so neighbouring jumps stay distinguishable */
+.fraction-v2-measure-jump:nth-child(odd) {
+    filter: brightness(0.85);
+}
+
+.fraction-v2-measure-jump.partial {
+    border-style: dashed;
+    color: var(--ink);
+    background: var(--second-tint);
+    filter: none;
+}
+
+.fraction-v2-measure-axis {
+    position: absolute;
+    top: 104px;
+    right: -12px;
+    left: -12px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--ink);
+}
+
+.fraction-v2-measure-tick {
+    position: absolute;
+    top: 96px;
+    width: 3px;
+    height: 19px;
+    margin-left: -1.5px;
+    background: var(--ink);
+    font-size: 0;
+}
+
+.fraction-v2-measure-tick::after {
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    content: attr(data-label);
+    transform: translateX(-50%);
 }

@@ -1,7 +1,8 @@
 import { useId, useState, type ReactNode } from 'react'
 import type { PrototypeLanguage } from '../content'
 import { Icon } from '../icons'
-import type { LabChallenge, LabToolInfo } from './labTools'
+import { checkAnswer, type FractionValue } from '../math/fraction'
+import type { LabChallenge, LabToolInfo, OperationAnswer } from './labTools'
 import { useLabText } from './useLabText'
 
 
@@ -210,6 +211,47 @@ export function ToolFrame<State>({
                     language={language}
                 />
             )}
+        </div>
+    )
+}
+
+/** "Your result" field for the operation tools: type, check, or reveal the worked result */
+export function ResultAnswer({
+    language,
+    state,
+    expected,
+    onChange
+}: {
+    language: PrototypeLanguage
+    state: OperationAnswer
+    expected: FractionValue
+    onChange: (patch: Partial<OperationAnswer>) => void
+}) {
+    const l = useLabText(language)
+    const inputId = useId()
+    const result = state.checked ? checkAnswer(state.answer, expected) : null
+    return (
+        <div className="fraction-v2-lab-answer">
+            <label htmlFor={inputId}>{l({ eu: 'Zure emaitza', es: 'Tu resultado', ar: 'نتيجتك' })}</label>
+            <div className="fraction-v2-lab-answer-row">
+                <input
+                    id={inputId}
+                    value={state.answer}
+                    inputMode="text"
+                    placeholder={l({ eu: 'Adib.: 5/6 edo 1 1/2', es: 'Ej.: 5/6 o 1 1/2', ar: 'مثال: 5/6 أو 1 1/2' })}
+                    onChange={(event) => onChange({ answer: event.target.value, checked: false })}
+                    onKeyDown={(event) => { if (event.key === 'Enter') onChange({ checked: true }) }}
+                />
+                <button type="button" className="fraction-v2-primary" onClick={() => onChange({ checked: true })}>{l({ eu: 'Egiaztatu', es: 'Comprobar', ar: 'تحقق' })}</button>
+            </div>
+            <div className="fraction-v2-lab-answer-foot" aria-live="polite">
+                {result === 'correct' && <span className="fraction-v2-lab-answer-status success">{l({ eu: 'Zuzena!', es: '¡Correcto!', ar: 'صحيح!' })}</span>}
+                {result === 'incorrect' && <span className="fraction-v2-lab-answer-status error">{l({ eu: 'Oraindik ez. Berrikusi eredua.', es: 'Todavía no. Revisa el modelo.', ar: 'ليس بعد. راجع النموذج.' })}</span>}
+                {result === 'unreadable' && <span className="fraction-v2-lab-answer-status">{l({ eu: 'Idatzi zatiki bat, zenbaki misto bat edo hamartar bat.', es: 'Escribe una fracción, un número mixto o un decimal.', ar: 'اكتب كسرًا أو عددًا كسريًا أو عددًا عشريًا.' })}</span>}
+                {!state.revealed && result !== 'correct' && (
+                    <button type="button" className="fraction-v2-hint-button" onClick={() => onChange({ revealed: true })}>{l({ eu: 'Ikusi emaitza', es: 'Ver el resultado', ar: 'اعرض النتيجة' })}</button>
+                )}
+            </div>
         </div>
     )
 }

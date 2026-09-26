@@ -1,23 +1,12 @@
-// Tools carried over from the first V2 laboratory, now with their own controls.
-// Each one will be rebuilt in later steps (operations → sum/difference and
-// product/quotient, fraction of a quantity).
+// Tool carried over from the first V2 laboratory, now with its own controls.
+// It will be rebuilt as the fraction-of-a-quantity and percentages tool.
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import type { PrototypeLanguage } from '../content'
-import {
-    add,
-    divide,
-    fraction,
-    multiply,
-    subtract,
-    toExactDecimal,
-    toLatex,
-    type FractionValue
-} from '../math/fraction'
+import { fraction, multiply, toExactDecimal, toLatex } from '../math/fraction'
 import type { LabToolInfo } from './labTools'
-import { Segmented, Stepper, ToolFrame } from './LabKit'
+import { Stepper, ToolFrame } from './LabKit'
 import { useLabText } from './useLabText'
-import { FractionModel } from './models'
 
 export interface ToolProps {
     tool: LabToolInfo
@@ -27,9 +16,6 @@ export interface ToolProps {
     onComplete: (id: number) => void
     onOpenLesson: () => void
 }
-
-type Operation = 'add' | 'subtract' | 'multiply' | 'divide'
-const operationSymbols: Record<Operation, string> = { add: '+', subtract: '−', multiply: '×', divide: '÷' }
 
 function FractionSteppers({
     title,
@@ -55,78 +41,6 @@ function FractionSteppers({
             <Stepper label={l({ eu: 'Zenbakitzailea', es: 'Numerador', ar: 'البسط' })} value={numerator} min={minNumerator} max={12} onChange={onNumerator} language={language} />
             <Stepper label={l({ eu: 'Izendatzailea', es: 'Denominador', ar: 'المقام' })} value={denominator} min={2} max={12} onChange={onDenominator} language={language} />
         </>
-    )
-}
-
-function useTwoFractions() {
-    const [firstNumerator, setFirstNumerator] = useState(3)
-    const [firstDenominator, setFirstDenominator] = useState(8)
-    const [secondNumerator, setSecondNumerator] = useState(1)
-    const [secondDenominator, setSecondDenominator] = useState(2)
-    return {
-        first: { numerator: firstNumerator, denominator: firstDenominator },
-        second: { numerator: secondNumerator, denominator: secondDenominator },
-        setFirstNumerator,
-        setFirstDenominator,
-        setSecondNumerator,
-        setSecondDenominator
-    }
-}
-
-function TwoFractionControls({ fractions, language, minNumerator }: { fractions: ReturnType<typeof useTwoFractions>; language: PrototypeLanguage; minNumerator: number }) {
-    const l = useLabText(language)
-    return (
-        <>
-            <FractionSteppers title={l({ eu: 'Lehen zatikia', es: 'Primera fracción', ar: 'الكسر الأول' })} numerator={fractions.first.numerator} denominator={fractions.first.denominator} minNumerator={minNumerator} onNumerator={fractions.setFirstNumerator} onDenominator={fractions.setFirstDenominator} language={language} />
-            <FractionSteppers title={l({ eu: 'Bigarren zatikia', es: 'Segunda fracción', ar: 'الكسر الثاني' })} numerator={fractions.second.numerator} denominator={fractions.second.denominator} minNumerator={minNumerator} onNumerator={fractions.setSecondNumerator} onDenominator={fractions.setSecondDenominator} language={language} />
-        </>
-    )
-}
-
-const written = (value: FractionValue) => `${value.numerator < 0 ? '-' : ''}\\frac{${Math.abs(value.numerator)}}{${value.denominator}}`
-
-export function OperationsTool(props: ToolProps) {
-    const l = useLabText(props.language)
-    const fractions = useTwoFractions()
-    const [operation, setOperation] = useState<Operation>('add')
-    let result: FractionValue | null
-    try {
-        if (operation === 'add') result = add(fractions.first, fractions.second)
-        else if (operation === 'subtract') result = subtract(fractions.first, fractions.second)
-        else if (operation === 'multiply') result = multiply(fractions.first, fractions.second)
-        else result = divide(fractions.first, fractions.second)
-    } catch {
-        result = null
-    }
-
-    return (
-        <ToolFrame
-            {...props}
-            controls={(
-                <>
-                    <TwoFractionControls fractions={fractions} language={props.language} minNumerator={-12} />
-                    <Segmented
-                        label={l({ eu: 'Eragiketa', es: 'Operación', ar: 'العملية' })}
-                        value={operation}
-                        options={(Object.keys(operationSymbols) as Operation[]).map((item) => ({ value: item, label: operationSymbols[item] }))}
-                        onChange={setOperation}
-                    />
-                </>
-            )}
-            readout={(
-                <span className="fraction-v2-lab-readout-main">
-                    <MathText text={`$${written(fractions.first)}\\;${operationSymbols[operation]}\\;${written(fractions.second)}$`} />
-                    <span aria-hidden="true">=</span>
-                    {result ? <MathText text={`$${toLatex(result)}$`} /> : <strong>{l({ eu: 'Ezin da zeroz zatitu', es: 'No se puede dividir entre cero', ar: 'لا يمكن القسمة على صفر' })}</strong>}
-                </span>
-            )}
-        >
-            <div className="fraction-v2-operands">
-                <FractionModel value={fractions.first} label={l({ eu: 'Lehen eragigaia', es: 'Primer operando', ar: 'المعامل الأول' })} />
-                <span aria-hidden="true">{operationSymbols[operation]}</span>
-                <FractionModel value={fractions.second} label={l({ eu: 'Bigarren eragigaia', es: 'Segundo operando', ar: 'المعامل الثاني' })} />
-            </div>
-        </ToolFrame>
     )
 }
 

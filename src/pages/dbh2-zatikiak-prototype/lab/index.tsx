@@ -3,9 +3,11 @@ import { learningStages, type PrototypeLanguage, type TheoryTopicId } from '../c
 import { labTools, type LabToolId } from './labTools'
 import { useLabText } from './useLabText'
 import { PartsTool } from './PartsTool'
-import { OperationsTool, ProportionTool, type ToolProps } from './ClassicTools'
+import { ProportionTool, type ToolProps } from './ClassicTools'
 import { CompareTool } from './CompareTool'
 import { EquivalenceTool } from './EquivalenceTool'
+import { ProductTool } from './ProductTool'
+import { SumTool } from './SumTool'
 import { NumberLineTool } from './NumberLineTool'
 import { WallTool } from './WallTool'
 import './Lab.css'
@@ -16,7 +18,8 @@ const toolComponents: Record<LabToolId, (props: ToolProps) => JSX.Element> = {
     wall: WallTool,
     equivalence: EquivalenceTool,
     compare: CompareTool,
-    operations: OperationsTool,
+    addsub: SumTool,
+    muldiv: ProductTool,
     proportion: ProportionTool
 }
 
