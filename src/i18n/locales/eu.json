@@ -1412,7 +1412,7 @@
                     "step3_desc": "'x'-ak koefiziente bat badu (biderkatzen duen zenbaki bat), beste aldera zatitzen pasatzen dugu.",
                     "subtitle3": "Problemen Ebazpena",
                     "p3": "Aljebraren benetako indarra bizitza errealeko problemak ebatzi ditzakegun hizkuntza matematikora itzultzea da.",
-                    "problem_example": "<0>Problema:</0> Txanpon pila batek eta pilaren zazpigarren zati batek 24 euro balio dute. Zenbat balio du piloak?<br/><br/><2>Planteamendua:</2> x + (1/7)x = 24<br/><br/><5>Ebazpena:</5> (8/7)x = 24 → x = (24 × 7) / 8 → x = 21. Piloak 21 euro balio ditu."
+                    "problem_example": "<0>Problema:</0> Txanpon pila batek eta pilaren zazpigarren zati batek 24 euro balio dute. Zenbat balio du piloak?<br/><br/><3>Planteamendua:</3> x + (1/7)x = 24<br/><br/><6>Ebazpena:</6> (8/7)x = 24 → x = (24 × 7) / 8 → x = 21. Piloak 21 euro balio ditu."
                 },
                 "monomios": {
                     "title": "3. Monomioekin Eragiketak",
@@ -1737,6 +1737,14 @@
                 "incorrect": "Akatsak daude taulan. Berrikusi."
             }
         }
+    },
+    "routeError": {
+        "title": "Zerbait gaizki atera da",
+        "description": "Orri hau ezin izan da kargatu. Saiatu berriro edo itzuli hasierara.",
+        "notFoundTitle": "Ez dugu orri hau aurkitu",
+        "notFoundDescription": "Baliteke esteka zaharra izatea edo helbidea gaizki idatzita egotea.",
+        "retry": "Saiatu berriro",
+        "home": "Hasierara itzuli"
     },
     "footer": {
         "copyright": "© 2025 Zatikiak DBH - Euskadi",

@@ -1415,7 +1415,7 @@
                     "step3_desc": "Si la 'x' tiene un coeficiente (un número multiplicándola), lo pasamos al otro lado dividiendo.",
                     "subtitle3": "Resolución de Problemas",
                     "p3": "El verdadero poder del álgebra es traducir problemas de la vida real a un lenguaje matemático que podemos resolver.",
-                    "problem_example": "<0>Problema:</0> Un montón de monedas y una séptima parte de ese montón suman 24 euros. ¿Cuánto vale el montón?<br/><br/><2>Planteamiento:</2> x + (1/7)x = 24<br/><br/><5>Resolución:</5> (8/7)x = 24 → x = (24 × 7) / 8 → x = 21. El montón vale 21 euros."
+                    "problem_example": "<0>Problema:</0> Un montón de monedas y una séptima parte de ese montón suman 24 euros. ¿Cuánto vale el montón?<br/><br/><3>Planteamiento:</3> x + (1/7)x = 24<br/><br/><6>Resolución:</6> (8/7)x = 24 → x = (24 × 7) / 8 → x = 21. El montón vale 21 euros."
                 },
                 "monomios": {
                     "title": "3. Operaciones con Monomios",
@@ -1740,6 +1740,14 @@
                 "incorrect": "Hay errores en la tabla. Revisa."
             }
         }
+    },
+    "routeError": {
+        "title": "Algo ha salido mal",
+        "description": "No se ha podido cargar esta página. Vuelve a intentarlo o regresa al inicio.",
+        "notFoundTitle": "No hemos encontrado esta página",
+        "notFoundDescription": "Puede que el enlace sea antiguo o que la dirección esté mal escrita.",
+        "retry": "Reintentar",
+        "home": "Volver al inicio"
     },
     "footer": {
         "copyright": "© 2025 Fracciones ESO - País Vasco",
