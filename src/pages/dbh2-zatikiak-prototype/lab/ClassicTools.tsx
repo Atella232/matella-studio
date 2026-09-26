@@ -1,12 +1,11 @@
 // Tools carried over from the first V2 laboratory, now with their own controls.
-// Each one will be rebuilt in later steps (equivalence, compare, operations →
-// sum/difference and product/quotient, fraction of a quantity).
+// Each one will be rebuilt in later steps (operations → sum/difference and
+// product/quotient, fraction of a quantity).
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import type { PrototypeLanguage } from '../content'
 import {
     add,
-    compare,
     divide,
     fraction,
     multiply,
@@ -59,32 +58,6 @@ function FractionSteppers({
     )
 }
 
-export function EquivalenceTool(props: ToolProps) {
-    const l = useLabText(props.language)
-    const [numerator, setNumerator] = useState(2)
-    const [denominator, setDenominator] = useState(3)
-    const [multiplier, setMultiplier] = useState(2)
-
-    return (
-        <ToolFrame
-            {...props}
-            controls={(
-                <>
-                    <FractionSteppers numerator={numerator} denominator={denominator} minNumerator={0} onNumerator={setNumerator} onDenominator={setDenominator} language={props.language} />
-                    <Stepper label={l({ eu: 'Biderkatzailea', es: 'Multiplicador', ar: 'المضاعِف' })} value={multiplier} min={1} max={6} onChange={setMultiplier} language={props.language} />
-                </>
-            )}
-            readout={<MathText text={`$\\frac{${numerator}}{${denominator}}=\\frac{${numerator}\\cdot${multiplier}}{${denominator}\\cdot${multiplier}}=\\frac{${numerator * multiplier}}{${denominator * multiplier}}$`} />}
-        >
-            <div className="fraction-v2-equivalence-pair">
-                <FractionModel value={{ numerator, denominator }} label={l({ eu: 'Jatorrizko zatikia', es: 'Fracción original', ar: 'الكسر الأصلي' })} />
-                <span aria-hidden="true">=</span>
-                <FractionModel value={{ numerator: numerator * multiplier, denominator: denominator * multiplier }} label={l({ eu: 'Zatiki baliokidea', es: 'Fracción equivalente', ar: 'الكسر المكافئ' })} />
-            </div>
-        </ToolFrame>
-    )
-}
-
 function useTwoFractions() {
     const [firstNumerator, setFirstNumerator] = useState(3)
     const [firstDenominator, setFirstDenominator] = useState(8)
@@ -110,32 +83,7 @@ function TwoFractionControls({ fractions, language, minNumerator }: { fractions:
     )
 }
 
-const relation = (left: FractionValue, right: FractionValue) => {
-    const result = compare(left, right)
-    return result === 0 ? '=' : result < 0 ? '<' : '>'
-}
-
 const written = (value: FractionValue) => `${value.numerator < 0 ? '-' : ''}\\frac{${Math.abs(value.numerator)}}{${value.denominator}}`
-
-export function CompareTool(props: ToolProps) {
-    const l = useLabText(props.language)
-    const fractions = useTwoFractions()
-    const sign = relation(fractions.first, fractions.second)
-
-    return (
-        <ToolFrame
-            {...props}
-            controls={<TwoFractionControls fractions={fractions} language={props.language} minNumerator={-12} />}
-            readout={<MathText text={`$${written(fractions.first)}\\;${sign}\\;${written(fractions.second)}$`} />}
-        >
-            <div className="fraction-v2-operands">
-                <FractionModel value={fractions.first} label={l({ eu: 'Lehen zatikia', es: 'Primera fracción', ar: 'الكسر الأول' })} />
-                <span aria-hidden="true">{sign}</span>
-                <FractionModel value={fractions.second} label={l({ eu: 'Bigarren zatikia', es: 'Segunda fracción', ar: 'الكسر الثاني' })} />
-            </div>
-        </ToolFrame>
-    )
-}
 
 export function OperationsTool(props: ToolProps) {
     const l = useLabText(props.language)

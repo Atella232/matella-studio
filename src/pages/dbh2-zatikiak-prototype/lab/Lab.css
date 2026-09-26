@@ -103,7 +103,7 @@
 
 /* ---------- Controls ---------- */
 
-.fraction-v2-controls h3 {
+.fraction-v2 .fraction-v2-controls h3 {
     margin-top: 10px;
     color: var(--muted);
     font-family: var(--font-body);
@@ -113,7 +113,7 @@
     text-transform: uppercase;
 }
 
-.fraction-v2-controls h3:first-child {
+.fraction-v2 .fraction-v2-controls h3:first-child {
     margin-top: 0;
 }
 
@@ -690,5 +690,247 @@
 
     .fraction-v2-wall-row:nth-child(n + 7) button span {
         display: none;
+    }
+}
+
+/* ---------- Partition bars (equivalence and compare) ---------- */
+
+.fraction-v2-bar-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    max-width: 680px;
+}
+
+.fraction-v2-bar-row {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr);
+    align-items: center;
+    gap: 16px;
+    direction: ltr;
+}
+
+.fraction-v2-bar-label {
+    font-size: 24px;
+    text-align: end;
+}
+
+.fraction-v2-partition {
+    display: flex;
+    height: 64px;
+    overflow: hidden;
+    border: 2.5px solid var(--ink);
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.fraction-v2-partition > span {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    border-inline-end: 2px solid var(--ink);
+    transition: background-color 0.15s ease;
+}
+
+.fraction-v2-partition > span:last-child {
+    border-inline-end: 0;
+}
+
+.fraction-v2-partition > span.filled {
+    background: var(--stage);
+}
+
+.fraction-v2-partition.second > span.filled {
+    background: #c4432a;
+}
+
+.fraction-v2-partition i {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    border-left: 1.5px dashed rgba(29, 39, 51, 0.55);
+}
+
+.fraction-v2-partition > span.filled i {
+    border-left-color: rgba(255, 255, 255, 0.85);
+}
+
+/* ---------- Compare ---------- */
+
+.fraction-v2-cmp-guess {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    direction: ltr;
+}
+
+.fraction-v2-cmp-guess button {
+    width: 52px;
+    height: 52px;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    background: var(--card);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.fraction-v2-cmp-guess button:hover {
+    background: var(--paper-deep);
+}
+
+.fraction-v2-cmp-guess button.right {
+    border-color: var(--success);
+    color: var(--success-ink);
+    background: var(--success-tint);
+}
+
+.fraction-v2-cmp-guess button.wrong {
+    border-color: var(--error);
+    color: var(--error-ink);
+    background: var(--error-tint);
+}
+
+.fraction-v2-cmp-line {
+    position: relative;
+    width: calc(100% - 60px);
+    max-width: 640px;
+    height: 150px;
+    margin: 0 30px;
+    direction: ltr;
+}
+
+.fraction-v2-cmp-axis {
+    position: absolute;
+    top: 74px;
+    right: -14px;
+    left: -14px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--ink);
+}
+
+.fraction-v2-cmp-end {
+    position: absolute;
+    top: 64px;
+    width: 3px;
+    height: 23px;
+    margin-left: -1.5px;
+    background: var(--ink);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 0;
+}
+
+.fraction-v2-cmp-end[data-label]::after {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    font-size: 20px;
+    font-weight: 700;
+    content: attr(data-label);
+    transform: translateX(-50%);
+}
+
+.fraction-v2-cmp-end.start { left: 0; }
+.fraction-v2-cmp-end.half { left: 50%; height: 15px; top: 68px; background: var(--muted); }
+.fraction-v2-cmp-end.finish { left: 100%; }
+
+.fraction-v2-cmp-point {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 20px;
+    transform: translateX(-50%);
+}
+
+.fraction-v2-cmp-point::after {
+    width: 22px;
+    height: 22px;
+    border: 3px solid var(--ink);
+    border-radius: 50%;
+    content: "";
+}
+
+.fraction-v2-cmp-point.first {
+    top: 4px;
+}
+
+.fraction-v2-cmp-point.first::after {
+    background: var(--stage);
+}
+
+/* The second point hangs below the axis so both labels stay readable when close */
+.fraction-v2-cmp-point.second {
+    top: 64px;
+    flex-direction: column-reverse;
+}
+
+.fraction-v2-cmp-point.second::after {
+    background: #c4432a;
+}
+
+.fraction-v2-cmp-cross {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.fraction-v2-cmp-products {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    direction: ltr;
+}
+
+.fraction-v2-cmp-products > span {
+    padding: 8px 16px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    font-size: 24px;
+}
+
+.fraction-v2-cmp-products > span.first {
+    background: var(--stage-tint);
+}
+
+.fraction-v2-cmp-products > span.second {
+    background: var(--coral-tint);
+}
+
+.fraction-v2-cmp-products > strong {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 36px;
+}
+
+@media (max-width: 760px) {
+    .fraction-v2-bar-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+    }
+
+    .fraction-v2-bar-label {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .fraction-v2-partition {
+        height: 52px;
+    }
+
+    .fraction-v2-cmp-guess button {
+        width: 46px;
+        height: 46px;
     }
 }

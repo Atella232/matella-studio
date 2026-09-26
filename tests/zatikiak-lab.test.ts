@@ -2,19 +2,29 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import {
     clearParts,
+    commonDivisors,
+    compareChallenges,
+    compareRelation,
+    equivalenceChallenges,
+    equivalenceResult,
     fillAllParts,
     gridLayout,
+    initialCompareState,
+    initialEquivalenceState,
     initialNumberLineState,
     initialPartsState,
     initialWallState,
     labChallengeIds,
     labToolForTopic,
     labTools,
+    lcm,
     moveNumberLinePoint,
     numberLineBounds,
     numberLineChallenges,
     partsChallenges,
     selectWallPiece,
+    setCompareFraction,
+    setEquivalenceBase,
     setNumberLineDenominator,
     setNumberLineRange,
     setPartsDenominator,
@@ -23,6 +33,7 @@ import {
     togglePart,
     wallChallenges,
     wallEquivalents,
+    type CompareState,
     type NumberLineState,
     type PartsState
 } from '../src/pages/dbh2-zatikiak-prototype/lab/labTools.ts'
@@ -143,4 +154,43 @@ test('fraction wall challenges', () => {
     assert.ok(!larger.isSolved(pick(3, 5)))
     assert.ok(unit.isSolved(pick(1, 7)))
     assert.ok(!unit.isSolved(pick(1, 8)))
+})
+
+test('equivalence tool amplifies, simplifies and only offers real common divisors', () => {
+    assert.deepEqual(commonDivisors(8, 12), [2, 4])
+    assert.deepEqual(commonDivisors(5, 7), [])
+    const amplified = { ...initialEquivalenceState, numerator: 3, denominator: 4, factor: 3 }
+    assert.deepEqual(equivalenceResult(amplified), { numerator: 9, denominator: 12 })
+    const simplify = { ...initialEquivalenceState, mode: 'simplify' as const, numerator: 8, denominator: 12, divisor: 4 }
+    assert.deepEqual(equivalenceResult(simplify), { numerator: 2, denominator: 3 })
+    assert.deepEqual(equivalenceResult({ ...simplify, divisor: 3 }), { numerator: 8, denominator: 12 }, 'ignores a divisor that does not divide both')
+    const moved = setEquivalenceBase(simplify, 5, 12)
+    assert.equal(moved.divisor, null, 'drops a divisor that no longer fits')
+    assert.equal(setEquivalenceBase(simplify, 11, 6).numerator, 6, 'stays within one unit')
+    const [toTwelfths, irreducible, numeratorSix, prime] = equivalenceChallenges
+    assert.ok(toTwelfths.isSolved(amplified))
+    assert.ok(irreducible.isSolved(simplify))
+    assert.ok(!irreducible.isSolved({ ...simplify, divisor: 2 }), '4/6 is not irreducible yet')
+    assert.ok(numeratorSix.isSolved({ ...initialEquivalenceState, numerator: 2, denominator: 5, factor: 3 }))
+    assert.ok(prime.isSolved({ ...initialEquivalenceState, mode: 'simplify', numerator: 5, denominator: 7 }))
+    for (const challenge of equivalenceChallenges) assert.ok(!challenge.isSolved(initialEquivalenceState))
+})
+
+test('compare tool needs a right prediction and, when asked, the named strategy', () => {
+    const pair = (a: number, b: number, c: number, d: number, extra: Partial<CompareState> = {}): CompareState =>
+        ({ ...initialCompareState, first: { numerator: a, denominator: b }, second: { numerator: c, denominator: d }, ...extra })
+    assert.equal(compareRelation(pair(3, 8, 1, 2)), '<')
+    assert.equal(lcm(6, 9), 18)
+    assert.equal(setCompareFraction(pair(3, 8, 1, 2, { guess: '<' }), 'first', 3, 4).guess, null, 'a new fraction needs a new prediction')
+
+    const [half, common, equal, cross] = compareChallenges
+    assert.ok(half.isSolved(pair(3, 8, 1, 2, { guess: '<' })))
+    assert.ok(half.isSolved(pair(1, 2, 3, 8, { guess: '>' })), 'either order')
+    assert.ok(!half.isSolved(pair(3, 8, 1, 2, { guess: '>' })))
+    assert.ok(common.isSolved(pair(5, 6, 7, 9, { guess: '>', strategy: 'common' })))
+    assert.ok(!common.isSolved(pair(5, 6, 7, 9, { guess: '>', strategy: 'line' })))
+    assert.ok(equal.isSolved(pair(2, 3, 4, 6, { guess: '=' })))
+    assert.ok(!equal.isSolved(pair(2, 3, 2, 3, { guess: '=' })), 'the two fractions must be written differently')
+    assert.ok(cross.isSolved(pair(7, 12, 3, 5, { guess: '<', strategy: 'cross' })))
+    for (const challenge of compareChallenges) assert.ok(!challenge.isSolved(initialCompareState))
 })

@@ -1,5 +1,5 @@
 import type { FractionStageId, LocalizedText, TheoryTopicId } from '../content.ts'
-import { compare, equals, fraction, type FractionValue } from '../math/fraction.ts'
+import { compare, equals, fraction, gcd, type FractionValue } from '../math/fraction.ts'
 
 export type LabToolId = 'parts' | 'numberline' | 'wall' | 'equivalence' | 'compare' | 'operations' | 'proportion'
 
@@ -59,9 +59,9 @@ export const labTools: LabToolInfo[] = [
         lessonTopic: 'equivalence',
         title: { eu: 'Baliokidetasuna', es: 'Equivalencia', ar: 'التكافؤ' },
         observe: {
-            eu: 'Zenbakitzailea eta izendatzailea zenbaki berarekin biderkatzeak zati bakoitza zati txikiagotan banatzen du: koloreztatutako kantitatea ez da aldatzen.',
-            es: 'Multiplicar numerador y denominador por el mismo número parte cada porción en trozos más pequeños: la cantidad coloreada no cambia.',
-            ar: 'ضرب البسط والمقام في العدد نفسه يقسّم كل جزء إلى قطع أصغر: الكمية الملوّنة لا تتغيّر.'
+            eu: 'Anplifikatzeak zati bakoitza zati txikiagotan banatzen du; sinplifikatzeak zatiak talde berdinetan biltzen ditu. Bi kasuetan koloreztatutako zatia bera da: balioa ez da aldatzen.',
+            es: 'Amplificar parte cada porción en trozos más pequeños; simplificar junta porciones en grupos iguales. En los dos casos la parte coloreada es la misma: el valor no cambia.',
+            ar: 'التوسيع يقسّم كل جزء إلى قطع أصغر، والتبسيط يجمع الأجزاء في مجموعات متساوية. في الحالتين يبقى الجزء الملوّن نفسه: القيمة لا تتغيّر.'
         }
     },
     {
@@ -70,9 +70,9 @@ export const labTools: LabToolInfo[] = [
         lessonTopic: 'ordering',
         title: { eu: 'Konparatu', es: 'Comparar', ar: 'قارن' },
         observe: {
-            eu: 'Alderatzeko, begiratu balioari eta ez zenbakien tamainari: 3/8 1/2 baino txikiagoa da, nahiz eta 3 eta 8 handiagoak izan.',
-            es: 'Para comparar, fíjate en el valor y no en lo grandes que sean los números: 3/8 es menor que 1/2 aunque 3 y 8 sean mayores.',
-            ar: 'للمقارنة انظر إلى القيمة لا إلى كبر الأعداد: 3/8 أصغر من 1/2 مع أن 3 و8 أكبر.'
+            eu: 'Aurreikusi lehenik zein den handiagoa eta gero egiaztatu estrategia batekin: izendatzaile komuna, zenbaki-zuzena edo biderketa gurutzatua.',
+            es: 'Predice primero cuál es mayor y después compruébalo con una estrategia: denominador común, recta numérica o productos cruzados.',
+            ar: 'توقّع أولًا أيهما أكبر ثم تحقّق باستعمال استراتيجية: مقام مشترك أو خط الأعداد أو الضرب التبادلي.'
         }
     },
     {
@@ -342,4 +342,150 @@ export const wallChallenges: LabChallenge<WallState>[] = [
     }
 ]
 
-export const labChallengeIds: number[] = [...partsChallenges, ...numberLineChallenges, ...wallChallenges].map((challenge) => challenge.id)
+
+/* ---------- Equivalence ---------- */
+
+export interface EquivalenceState {
+    numerator: number
+    denominator: number
+    mode: 'amplify' | 'simplify'
+    /** Pieces each part is split into when amplifying */
+    factor: number
+    /** Common divisor chosen when simplifying (null until the learner picks one) */
+    divisor: number | null
+}
+
+export const EQUIVALENCE_LIMITS = { minDenominator: 2, maxDenominator: 12, minFactor: 2, maxFactor: 6 } as const
+
+export const initialEquivalenceState: EquivalenceState = { numerator: 2, denominator: 3, mode: 'amplify', factor: 2, divisor: null }
+
+/** Divisors greater than 1 shared by both terms, smallest first */
+export function commonDivisors(numerator: number, denominator: number): number[] {
+    const greatest = gcd(numerator, denominator)
+    return Array.from({ length: greatest }, (_, index) => index + 1).filter((candidate) => candidate > 1 && greatest % candidate === 0)
+}
+
+export function equivalenceResult(state: EquivalenceState): FractionValue {
+    if (state.mode === 'amplify') return { numerator: state.numerator * state.factor, denominator: state.denominator * state.factor }
+    if (state.divisor === null || !commonDivisors(state.numerator, state.denominator).includes(state.divisor)) {
+        return { numerator: state.numerator, denominator: state.denominator }
+    }
+    return { numerator: state.numerator / state.divisor, denominator: state.denominator / state.divisor }
+}
+
+/** New starting fraction: numerator stays within one unit and a divisor that no longer fits is dropped */
+export function setEquivalenceBase(state: EquivalenceState, numerator: number, denominator: number): EquivalenceState {
+    const nextDenominator = Math.min(EQUIVALENCE_LIMITS.maxDenominator, Math.max(EQUIVALENCE_LIMITS.minDenominator, denominator))
+    const nextNumerator = Math.min(nextDenominator, Math.max(1, numerator))
+    const divisor = state.divisor !== null && commonDivisors(nextNumerator, nextDenominator).includes(state.divisor) ? state.divisor : null
+    return { ...state, numerator: nextNumerator, denominator: nextDenominator, divisor }
+}
+
+const sameTerms = (value: FractionValue, numerator: number, denominator: number) =>
+    value.numerator === numerator && value.denominator === denominator
+
+export const equivalenceChallenges: LabChallenge<EquivalenceState>[] = [
+    {
+        id: 1001,
+        prompt: { eu: 'Lortu 3/4ren zatiki baliokide bat, 12 izendatzailearekin.', es: 'Consigue una fracción equivalente a 3/4 con denominador 12.', ar: 'كوّن كسرًا مكافئًا لـ 3/4 مقامه 12.' },
+        hint: { eu: 'Zein zenbakiz biderkatu behar da 4, 12ra iristeko?', es: '¿Por qué número hay que multiplicar 4 para llegar a 12?', ar: 'في أي عدد نضرب 4 لنصل إلى 12؟' },
+        isSolved: (state) => sameTerms(equivalenceResult(state), 9, 12)
+    },
+    {
+        id: 1002,
+        prompt: { eu: 'Sinplifikatu 8/12 zatiki laburtezinera arte.', es: 'Simplifica 8/12 hasta la fracción irreducible.', ar: 'بسّط 8/12 إلى أبسط صورة.' },
+        hint: { eu: '8ren eta 12ren zatitzaile komun handiena 4 da.', es: 'El mayor divisor común de 8 y 12 es 4.', ar: 'القاسم المشترك الأكبر لـ 8 و12 هو 4.' },
+        isSolved: (state) => state.mode === 'simplify' && sameTerms(state, 8, 12) && sameTerms(equivalenceResult(state), 2, 3)
+    },
+    {
+        id: 1003,
+        prompt: { eu: 'Aurkitu 6 zenbakitzailea duen 2/5ren zatiki baliokidea.', es: 'Encuentra la fracción equivalente a 2/5 que tiene numerador 6.', ar: 'جد الكسر المكافئ لـ 2/5 الذي بسطه 6.' },
+        hint: { eu: '2 × 3 = 6: biderkatu izendatzailea ere 3z.', es: '2 × 3 = 6: multiplica también el denominador por 3.', ar: '2 × 3 = 6: اضرب المقام أيضًا في 3.' },
+        isSolved: (state) => sameTerms(equivalenceResult(state), 6, 15)
+    },
+    {
+        id: 1004,
+        prompt: { eu: 'Egiaztatu 5/7 sinplifika daitekeen.', es: 'Comprueba si 5/7 se puede simplificar.', ar: 'تحقّق مما إذا كان يمكن تبسيط 5/7.' },
+        hint: { eu: 'Bilatu 5 eta 7 aldi berean zatitzen dituen zenbaki bat.', es: 'Busca un número que divida a la vez a 5 y a 7.', ar: 'ابحث عن عدد يقسم 5 و7 معًا.' },
+        isSolved: (state) => state.mode === 'simplify' && sameTerms(state, 5, 7)
+    }
+]
+
+/* ---------- Compare ---------- */
+
+export type Relation = '<' | '=' | '>'
+export type CompareStrategy = 'common' | 'line' | 'cross'
+
+export interface CompareState {
+    first: FractionValue
+    second: FractionValue
+    strategy: CompareStrategy
+    /** The learner's prediction; cleared whenever a fraction changes */
+    guess: Relation | null
+}
+
+export const COMPARE_LIMITS = { minDenominator: 2, maxDenominator: 12 } as const
+
+export const initialCompareState: CompareState = {
+    first: { numerator: 2, denominator: 3 },
+    second: { numerator: 3, denominator: 5 },
+    strategy: 'common',
+    guess: null
+}
+
+export function lcm(left: number, right: number): number {
+    return (left * right) / gcd(left, right)
+}
+
+export function compareRelation(state: CompareState): Relation {
+    const result = compare(state.first, state.second)
+    return result === 0 ? '=' : result < 0 ? '<' : '>'
+}
+
+/** Changing a fraction keeps it within one unit and asks for a new prediction */
+export function setCompareFraction(state: CompareState, which: 'first' | 'second', numerator: number, denominator: number): CompareState {
+    const nextDenominator = Math.min(COMPARE_LIMITS.maxDenominator, Math.max(COMPARE_LIMITS.minDenominator, denominator))
+    const nextNumerator = Math.min(nextDenominator, Math.max(1, numerator))
+    return { ...state, [which]: { numerator: nextNumerator, denominator: nextDenominator }, guess: null }
+}
+
+const comparesPair = (state: CompareState, a: [number, number], b: [number, number]) =>
+    (sameTerms(state.first, ...a) && sameTerms(state.second, ...b)) || (sameTerms(state.first, ...b) && sameTerms(state.second, ...a))
+
+const predictedRight = (state: CompareState) => state.guess !== null && state.guess === compareRelation(state)
+
+export const compareChallenges: LabChallenge<CompareState>[] = [
+    {
+        id: 1101,
+        prompt: { eu: 'Alderatu 3/8 eta 1/2 eta aukeratu zeinu zuzena.', es: 'Compara 3/8 y 1/2 y elige el signo correcto.', ar: 'قارن بين 3/8 و1/2 واختر الإشارة الصحيحة.' },
+        hint: { eu: 'Izendatzaile komunarekin: 1/2 = 4/8.', es: 'Con denominador común: 1/2 = 4/8.', ar: 'بمقام مشترك: 1/2 = 4/8.' },
+        isSolved: (state) => comparesPair(state, [3, 8], [1, 2]) && predictedRight(state)
+    },
+    {
+        id: 1102,
+        prompt: { eu: 'Alderatu 5/6 eta 7/9 izendatzaile komuna erabiliz.', es: 'Compara 5/6 y 7/9 usando el denominador común.', ar: 'قارن بين 5/6 و7/9 باستعمال مقام مشترك.' },
+        hint: { eu: '6ren eta 9ren multiplo komunetako txikiena 18 da.', es: 'El mínimo común múltiplo de 6 y 9 es 18.', ar: 'المضاعف المشترك الأصغر لـ 6 و9 هو 18.' },
+        isSolved: (state) => state.strategy === 'common' && comparesPair(state, [5, 6], [7, 9]) && predictedRight(state)
+    },
+    {
+        id: 1103,
+        prompt: { eu: 'Aukeratu balio bera duten bi zatiki desberdin eta markatu =.', es: 'Elige dos fracciones distintas que valgan lo mismo y marca =.', ar: 'اختر كسرين مختلفين لهما القيمة نفسها وحدّد =.' },
+        hint: { eu: 'Biderkatu baten zenbakitzailea eta izendatzailea zenbaki berarekin.', es: 'Multiplica numerador y denominador de una por el mismo número.', ar: 'اضرب بسط أحدهما ومقامه في العدد نفسه.' },
+        isSolved: (state) => state.guess === '=' && equals(state.first, state.second)
+            && !sameTerms(state.first, state.second.numerator, state.second.denominator)
+    },
+    {
+        id: 1104,
+        prompt: { eu: 'Alderatu 7/12 eta 3/5 biderketa gurutzatuarekin.', es: 'Compara 7/12 y 3/5 con productos cruzados.', ar: 'قارن بين 7/12 و3/5 بالضرب التبادلي.' },
+        hint: { eu: 'Kalkulatu 7 × 5 eta 3 × 12.', es: 'Calcula 7 × 5 y 3 × 12.', ar: 'احسب 7 × 5 و3 × 12.' },
+        isSolved: (state) => state.strategy === 'cross' && comparesPair(state, [7, 12], [3, 5]) && predictedRight(state)
+    }
+]
+
+export const labChallengeIds: number[] = [
+    ...partsChallenges,
+    ...numberLineChallenges,
+    ...wallChallenges,
+    ...equivalenceChallenges,
+    ...compareChallenges
+].map((challenge) => challenge.id)
