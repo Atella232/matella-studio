@@ -49,6 +49,7 @@ import {
     type GameMode,
     type PracticeMode
 } from './routing'
+import { Icon } from './icons'
 import './PrototypePage.css'
 
 type Feedback = 'idle' | 'success' | 'error'
@@ -274,7 +275,7 @@ function ExerciseBank({
                                 <div className="fraction-v2-bank-solution">
                                     <MathText text={item.solution[language]} />
                                     <div>
-                                        <button type="button" className="fraction-v2-primary" onClick={() => onComplete(progressId)} disabled={isComplete}>{isComplete ? '✓' : l({ eu: 'Lortu dut', es: 'Lo he conseguido', ar: 'أتقنتها' })}</button>
+                                        <button type="button" className={`fraction-v2-primary ${isComplete ? 'done' : ''}`} onClick={() => onComplete(progressId)} disabled={isComplete}>{isComplete ? '✓' : l({ eu: 'Lortu dut', es: 'Lo he conseguido', ar: 'أتقنتها' })}</button>
                                         <button type="button" className="fraction-v2-secondary" onClick={() => setRevealed((keys) => keys.filter((itemKey) => itemKey !== key))}>{l({ eu: 'Berriro saiatu', es: 'Volver a intentar', ar: 'حاول مجددًا' })}</button>
                                     </div>
                                 </div>
@@ -331,7 +332,9 @@ function useStoredTopics(key: string) {
 }
 
 function FractionModel({ value, label }: { value: FractionValue; label: string }) {
-    const normalized = fraction(value.numerator, value.denominator)
+    // Keep the parts the learner chose: 4/6 must be drawn in sixths, not simplified to thirds
+    const sign = value.denominator < 0 ? -1 : 1
+    const normalized = { numerator: value.numerator * sign, denominator: Math.abs(value.denominator) }
     const absoluteNumerator = Math.abs(normalized.numerator)
     const unitCount = Math.max(1, Math.ceil(absoluteNumerator / normalized.denominator))
     const units = Array.from({ length: unitCount }, (_, unitIndex) => unitIndex)
@@ -342,7 +345,7 @@ function FractionModel({ value, label }: { value: FractionValue; label: string }
             <div
                 className={`fraction-v2-model ${normalized.numerator < 0 ? 'negative' : ''}`}
                 role="img"
-                aria-label={`${label}: ${toText(normalized)}`}
+                aria-label={`${label}: ${normalized.numerator}/${normalized.denominator}`}
             >
                 {normalized.numerator < 0 && <span className="fraction-v2-sign" aria-hidden="true">−</span>}
                 <div className="fraction-v2-units" aria-hidden="true">
@@ -360,7 +363,7 @@ function FractionModel({ value, label }: { value: FractionValue; label: string }
                     ))}
                 </div>
             </div>
-            <MathText text={`$${toLatex(normalized)}$`} />
+            <MathText text={`$${normalized.denominator === 1 ? normalized.numerator : `${normalized.numerator < 0 ? '-' : ''}\\frac{${absoluteNumerator}}{${normalized.denominator}}`}$`} />
             {absoluteNumerator > normalized.denominator && (
                 <span className="fraction-v2-mixed">{toMixedText(normalized)}</span>
             )}
@@ -401,6 +404,7 @@ export function ZatikiakPrototypePage() {
         ? sectionState.section
         : sectionForPath(location.pathname)
     const [topicId, setTopicId] = useState<TheoryTopicId>('meaning')
+    const [moreOpen, setMoreOpen] = useState(false)
     const learned = useStoredTopics('matella-zatikiak-v2-learned')
     const diagnosticProgress = useStoredIds('matella-zatikiak-v2-diagnostic')
     const practiceProgress = useStoredIds('matella-zatikiak-v2-practice')
@@ -441,38 +445,71 @@ export function ZatikiakPrototypePage() {
     const progress = Math.round((completedGoals / totalGoals) * 100)
     const recommendedTopic = theoryTopics.find((topic) => !learned.ids.includes(topic.id)) ?? theoryTopics[theoryTopics.length - 1]
 
+    const unitTitle = l({ eu: 'Zatikiak', es: 'Fracciones', ar: 'الكسور' })
+    const courseTitle = l({ eu: '2. DBH', es: '2.º ESO', ar: 'الصف الثاني' })
+    const mobilePrimarySections: PrototypeSection[] = ['route', 'learn', 'practice', 'play']
+    const mobileMoreSections = prototypeSections.filter((item) => !mobilePrimarySections.includes(item.id))
+    const moreIsActive = mobileMoreSections.some((item) => item.id === section)
+
     return (
         <div className="fraction-v2" dir={isRtl ? 'rtl' : 'ltr'}>
             <header className="fraction-v2-header">
-                <div className="fraction-v2-brand">
-                    <span className="fraction-v2-brand-mark" aria-hidden="true">⅔</span>
-                    <span>
-                        <strong>{l({ eu: 'Zatikiak', es: 'Fracciones', ar: 'الكسور' })}</strong>
-                        <small>{l({ eu: '2. DBH · bertsio berria', es: '2.º ESO · versión nueva', ar: 'الصف الثاني · النسخة الجديدة' })}</small>
-                    </span>
+                <div className="fraction-v2-topbar">
+                    <Link className="fraction-v2-brand" to="/" aria-label={l({ eu: 'Matella, hasiera', es: 'Matella, inicio', ar: 'Matella، الصفحة الرئيسية' })}>
+                        <span className="fraction-v2-brand-mark" aria-hidden="true"><span /><span /><span /><span /></span>
+                        <span className="fraction-v2-brand-name">Matella</span>
+                    </Link>
+                    <Link className="fraction-v2-mobile-back" to="/matematika/dbh2" aria-label={`${l({ eu: 'Itzuli', es: 'Volver a', ar: 'العودة إلى' })} ${courseTitle}`}>
+                        <Icon name="back" size={22} className="fraction-v2-icon-flip" />
+                    </Link>
+                    <nav className="fraction-v2-breadcrumb" aria-label={l({ eu: 'Kokapena', es: 'Ruta de navegación', ar: 'مسار التنقل' })}>
+                        <Link to="/matematika">{l({ eu: 'Matematika', es: 'Matemáticas', ar: 'الرياضيات' })}</Link>
+                        <span aria-hidden="true">/</span>
+                        <Link to="/matematika/dbh2">{courseTitle}</Link>
+                        <span aria-hidden="true">/</span>
+                        <span aria-current="page">{unitTitle}</span>
+                    </nav>
+                    <span className="fraction-v2-mobile-title">{unitTitle}</span>
+                    <div className="fraction-v2-language" role="group" aria-label={l({ eu: 'Hizkuntza', es: 'Idioma', ar: 'اللغة' })}>
+                        {([['eu', 'EU'], ['es', 'ES'], ['ar', 'عربي']] as const).map(([code, label]) => (
+                            <button type="button" lang={code} aria-pressed={language === code} onClick={() => void i18n.changeLanguage(code)} key={code}>{label}</button>
+                        ))}
+                    </div>
                 </div>
-                <nav className="fraction-v2-nav" aria-label={l({ eu: 'Unitateko nabigazioa', es: 'Navegación de la unidad', ar: 'التنقل في الوحدة' })}>
+                <nav className="fraction-v2-nav" aria-label={l({ eu: 'Unitateko atalak', es: 'Secciones de la unidad', ar: 'أقسام الوحدة' })}>
                     {prototypeSections.map((item) => (
                         <button
                             type="button"
-                            className={section === item.id ? 'active' : ''}
+                            className={`${section === item.id ? 'active' : ''} ${mobilePrimarySections.includes(item.id) ? 'primary' : 'secondary'}`}
                             aria-current={section === item.id ? 'page' : undefined}
-                            onClick={() => navigate(item.id)}
+                            onClick={() => { setMoreOpen(false); navigate(item.id) }}
                             key={item.id}
                         >
-                            <span aria-hidden="true">{item.icon}</span>
-                            {l(item.label)}
+                            <Icon name={item.id} size={20} />
+                            <span>{l(item.label)}</span>
                         </button>
                     ))}
+                    <button
+                        type="button"
+                        className={`fraction-v2-nav-more ${moreIsActive ? 'active' : ''}`}
+                        aria-expanded={moreOpen}
+                        aria-controls="fraction-v2-more-menu"
+                        onClick={() => setMoreOpen((open) => !open)}
+                    >
+                        <Icon name={moreOpen ? 'close' : 'more'} size={20} />
+                        <span>{l({ eu: 'Gehiago', es: 'Más', ar: 'المزيد' })}</span>
+                    </button>
                 </nav>
-                <div className="fraction-v2-language" role="group" aria-label={l({ eu: 'Hizkuntza', es: 'Idioma', ar: 'اللغة' })}>
-                    {(['eu', 'es', 'ar'] as const).map((code) => (
-                        <button type="button" aria-pressed={language === code} onClick={() => void i18n.changeLanguage(code)} key={code}>{code.toUpperCase()}</button>
-                    ))}
-                </div>
-                <div className="fraction-v2-progress" aria-label={`${l({ eu: 'Aurrerapena', es: 'Progreso', ar: 'التقدم' })}: ${progress}%`}>
-                    <span style={{ width: `${progress}%` }} />
-                </div>
+                {moreOpen && (
+                    <div className="fraction-v2-more-menu" id="fraction-v2-more-menu">
+                        {mobileMoreSections.map((item) => (
+                            <button type="button" className={section === item.id ? 'active' : ''} aria-current={section === item.id ? 'page' : undefined} onClick={() => { setMoreOpen(false); navigate(item.id) }} key={item.id}>
+                                <Icon name={item.id} size={22} />
+                                {l(item.label)}
+                            </button>
+                        ))}
+                    </div>
+                )}
             </header>
 
             <main className="fraction-v2-main">
@@ -520,146 +557,217 @@ export function ZatikiakPrototypePage() {
         </div>
     )
 
+    function lessonsLabel(count: number) {
+        return count === 1
+            ? l({ eu: 'Ikasgai 1', es: '1 lección', ar: 'درس واحد' })
+            : l({ eu: `${count} ikasgai`, es: `${count} lecciones`, ar: `${count} دروس` })
+    }
+
+    function openTopic(nextTopic: TheoryTopicId) {
+        setTopicId(nextTopic)
+        navigate('learn')
+    }
+
     function renderRoute() {
+        const recommendedIndex = theoryTopics.findIndex((topic) => topic.id === recommendedTopic.id)
+        const recommendedStageIndex = learningStages.findIndex((stage) => stage.id === recommendedTopic.stage)
+        const hasStarted = completedGoals > 0
+        const diagnosticPending = diagnosticProgress.ids.length < diagnosticQuestions.length
+        const tools: Array<{ id: PrototypeSection; title: LocalizedText; description: LocalizedText }> = [
+            { id: 'lab', title: { eu: 'Laborategia', es: 'Laboratorio', ar: 'المختبر' }, description: { eu: 'Zazpi tresna zatikiak manipulatzeko eta zer gertatzen den ikusteko.', es: 'Siete herramientas para manipular fracciones y ver qué pasa.', ar: 'سبع أدوات للتعامل مع الكسور وملاحظة ما يحدث.' } },
+            { id: 'practice', title: { eu: 'Praktika', es: 'Práctica', ar: 'التدريب' }, description: { eu: `${guidedPractice.length} jarduera gidatu eta 42 ariketa zailtasunaren arabera.`, es: `${guidedPractice.length} actividades guiadas y 42 ejercicios por dificultad.`, ar: `${guidedPractice.length} أنشطة موجّهة و42 تمرينًا حسب الصعوبة.` } },
+            { id: 'challenges', title: { eu: 'Erronkak', es: 'Retos', ar: 'التحديات' }, description: { eu: `Bizitza errealeko ${challenges.length} problema ikasitakoa aplikatzeko.`, es: `${challenges.length} problemas de la vida real para aplicar lo aprendido.`, ar: `${challenges.length} مسألة من الحياة الواقعية لتطبيق ما تعلّمته.` } },
+            { id: 'play', title: { eu: 'Jokoak', es: 'Juegos', ar: 'الألعاب' }, description: { eu: 'Lau joko abiadura eta zehaztasuna entrenatzeko.', es: 'Cuatro juegos para entrenar rapidez y precisión.', ar: 'أربع ألعاب لتدريب السرعة والدقة.' } }
+        ]
+
         return (
             <div className="fraction-v2-route">
-                <section className="fraction-v2-hero">
-                    <div className="fraction-v2-kicker">{l({ eu: 'ULERTU · IRUDIKATU · ARRAZOITU', es: 'COMPRENDE · REPRESENTA · RAZONA', ar: 'افهم · مثّل · استدل' })}</div>
-                    <h1>{l({ eu: 'Zatikiei buruz ikastea baino gehiago.', es: 'Mucho más que memorizar fracciones.', ar: 'أكثر بكثير من حفظ الكسور.' })}</h1>
-                    <p>{l({
-                        eu: 'Ibilbide gidatu honek esanahia, irudikapena eta kalkulu zehatza lotzen ditu. Urrats bakoitzean manipulatu, erantzun eta azalduko duzu.',
-                        es: 'Esta ruta guiada conecta significado, representación y cálculo exacto. En cada paso manipularás, responderás y explicarás.',
-                        ar: 'يربط هذا المسار الموجّه بين المعنى والتمثيل والحساب الدقيق. في كل خطوة ستتفاعل وتجيب وتشرح.'
-                    })}</p>
-                    <div className="fraction-v2-hero-actions">
-                        <button type="button" className="fraction-v2-primary" onClick={() => {
-                            if (diagnosticProgress.ids.length < diagnosticQuestions.length) navigate('diagnostic')
-                            else {
-                                setTopicId(recommendedTopic.id)
-                                navigate('learn')
-                            }
-                        }}>
-                            {diagnosticProgress.ids.length < diagnosticQuestions.length
-                                ? l({ eu: 'Hasi diagnostikoarekin', es: 'Empezar con el diagnóstico', ar: 'ابدأ بالتشخيص' })
-                                : l({ eu: 'Jarraitu hurrengo urratsarekin', es: 'Continuar con el siguiente paso', ar: 'تابع إلى الخطوة التالية' })}
-                        </button>
-                        <button type="button" className="fraction-v2-secondary" onClick={() => navigate('lab')}>
-                            {l({ eu: 'Ireki laborategia', es: 'Abrir laboratorio', ar: 'افتح المختبر' })}
-                        </button>
+                <section className="fraction-v2-hero" aria-labelledby="fraction-v2-unit-title">
+                    <div className="fraction-v2-hero-copy">
+                        <span className="fraction-v2-chip fraction-v2-chip-coral">{courseTitle} · {l({ eu: 'Matematika', es: 'Matemáticas', ar: 'الرياضيات' })}</span>
+                        <h1 id="fraction-v2-unit-title">{unitTitle}</h1>
+                        <p>{l({
+                            eu: 'Zatia, banaketa, neurria eta zenbakia: ezagutu zatiki batek izan dezakeen guztia eta ikasi harekin segurtasunez kalkulatzen.',
+                            es: 'Parte, reparto, medida y número: descubre todo lo que puede ser una fracción y aprende a calcular con ella con seguridad.',
+                            ar: 'جزء وتقسيم وقياس وعدد: اكتشف كل ما يمكن أن يكونه الكسر وتعلّم الحساب به بثقة.'
+                        })}</p>
+                        <div className="fraction-v2-hero-actions">
+                            <button type="button" className="fraction-v2-primary" onClick={() => diagnosticPending ? navigate('diagnostic') : openTopic(recommendedTopic.id)}>
+                                {diagnosticPending
+                                    ? l({ eu: 'Hasi diagnostikoarekin', es: 'Empezar con el diagnóstico', ar: 'ابدأ بالتشخيص' })
+                                    : l({ eu: 'Jarraitu hurrengo urratsarekin', es: 'Seguir con el siguiente paso', ar: 'تابع إلى الخطوة التالية' })}
+                                <Icon name="arrow" size={18} strokeWidth={2.4} className="fraction-v2-icon-flip" />
+                            </button>
+                            <button type="button" className="fraction-v2-secondary" onClick={() => navigate('lab')}>
+                                {l({ eu: 'Ireki laborategia', es: 'Abrir el laboratorio', ar: 'افتح المختبر' })}
+                            </button>
+                        </div>
+                        {diagnosticPending && (
+                            <p className="fraction-v2-hero-note">{l({ eu: '6 galdera, notarik gabe. Nondik hastea komeni zaizun esango dizugu.', es: '6 preguntas, sin nota. Te diremos por dónde te conviene empezar.', ar: '6 أسئلة بلا علامة. سنقترح عليك من أين تبدأ.' })}</p>
+                        )}
                     </div>
-                    <div className="fraction-v2-curriculum" aria-label={l({ eu: 'Curriculum-loturak', es: 'Conexiones curriculares', ar: 'الارتباط بالمنهج' })}>
-                        <span>{l({ eu: 'Irudikapen anitzak', es: 'Representaciones múltiples', ar: 'تمثيلات متعددة' })}</span>
-                        <span>{l({ eu: 'Kalkulu zehatza', es: 'Cálculo exacto', ar: 'حساب دقيق' })}</span>
-                        <span>{l({ eu: 'Proportzionaltasuna', es: 'Proporcionalidad', ar: 'التناسب' })}</span>
-                        <span>{l({ eu: 'Errorearen analisia', es: 'Análisis del error', ar: 'تحليل الخطأ' })}</span>
+                    <div className="fraction-v2-collage" aria-hidden="true">
+                        <div className="fraction-v2-collage-pizza"><span /><span /></div>
+                        <div className="fraction-v2-collage-sticker"><span>3</span><span>4</span></div>
+                        <div className="fraction-v2-collage-bar">
+                            <div><span className="filled" /><span className="filled" /><span /><span /><span /></div>
+                            <strong>2 / 5</strong>
+                        </div>
+                        <div className="fraction-v2-collage-line">
+                            <div><span className="tick" /><span className="tick" /><span className="tick" /><span className="tick" /><span className="dot" /></div>
+                            <p><span>0</span><span>1</span><span>2</span><span>3</span></p>
+                        </div>
                     </div>
+                </section>
+
+                <section className="fraction-v2-continue" aria-label={l({ eu: 'Zure aurrerapena', es: 'Tu progreso', ar: 'تقدمك' })}>
+                    <div className="fraction-v2-ring" style={{ '--progress': `${progress}%` } as CSSProperties} role="img" aria-label={`${progress}%`}>
+                        <span>{progress}%</span>
+                    </div>
+                    <div className="fraction-v2-continue-text">
+                        <span>{hasStarted
+                            ? l({ eu: 'Jarraitu utzi zenuen lekutik', es: 'Continúa donde lo dejaste', ar: 'تابع من حيث توقفت' })
+                            : l({ eu: 'Hasi hemendik', es: 'Empieza por aquí', ar: 'ابدأ من هنا' })}</span>
+                        <strong>{l({ eu: 'Ikasgaia', es: 'Lección', ar: 'الدرس' })} {recommendedIndex + 1} · {l(recommendedTopic.title)}</strong>
+                    </div>
+                    <span className="fraction-v2-chip" data-stage={recommendedTopic.stage}>{l({ eu: `${recommendedStageIndex + 1}. etapa`, es: `Etapa ${recommendedStageIndex + 1}`, ar: `المرحلة ${recommendedStageIndex + 1}` })}</span>
+                    <button type="button" className="fraction-v2-stage-button" data-stage={recommendedTopic.stage} onClick={() => openTopic(recommendedTopic.id)}>
+                        {hasStarted ? l({ eu: 'Jarraitu', es: 'Continuar', ar: 'تابع' }) : l({ eu: 'Hasi', es: 'Empezar', ar: 'ابدأ' })}
+                    </button>
                 </section>
 
                 <section className="fraction-v2-overview" aria-labelledby="fraction-v2-path-title">
                     <div className="fraction-v2-section-heading">
-                        <span>{progress}%</span>
-                        <div>
-                            <h2 id="fraction-v2-path-title">{l({ eu: 'Zure ikaskuntza-ibilbidea', es: 'Tu ruta de aprendizaje', ar: 'مسار تعلّمك' })}</h2>
-                            <p>{completedGoals} / {totalGoals} {l({ eu: 'helburu osatuta', es: 'objetivos completados', ar: 'هدفًا مكتملًا' })}</p>
-                        </div>
+                        <h2 id="fraction-v2-path-title">{l({ eu: 'Zure ibilbidea', es: 'Tu ruta', ar: 'مسارك' })}</h2>
+                        <p>{l({ eu: 'Bost etapa, zatikiaren ideiatik proportzionaltasunera', es: 'Cinco etapas, de la idea de fracción a la proporcionalidad', ar: 'خمس مراحل، من فكرة الكسر إلى التناسب' })}</p>
                     </div>
-                    <div className="fraction-v2-path-grid">
+                    <ol className="fraction-v2-path-grid">
                         {learningStages.map((stage, index) => {
                             const stageTopics = theoryTopics.filter((topic) => topic.stage === stage.id)
-                            const complete = stageTopics.every((topic) => learned.ids.includes(topic.id))
-                            const recommended = stage.id === recommendedTopic.stage
+                            const learnedCount = stageTopics.filter((topic) => learned.ids.includes(topic.id)).length
+                            const complete = learnedCount === stageTopics.length
+                            const current = !complete && stage.id === recommendedTopic.stage
                             return (
-                                <button
-                                    type="button"
-                                    className={`fraction-v2-path-card ${complete ? 'complete' : ''} ${recommended ? 'recommended' : ''}`}
-                                    style={{ '--stage-color': stage.color } as CSSProperties}
-                                    onClick={() => {
-                                        const nextTopic = stageTopics.find((topic) => !learned.ids.includes(topic.id)) ?? stageTopics[0]
-                                        setTopicId(nextTopic.id)
-                                        navigate('learn')
-                                    }}
-                                    key={stage.id}
-                                >
-                                    <span className="fraction-v2-path-index">{complete ? '✓' : index + 1}</span>
-                                    <span className="fraction-v2-path-icon" aria-hidden="true">{stage.icon}</span>
-                                    <strong>{l(stage.title)}</strong>
-                                    <small>{l(stage.goal)}</small>
-                                    {recommended && <em>{l({ eu: 'Hurrengo urratsa', es: 'Siguiente paso', ar: 'الخطوة التالية' })}</em>}
-                                </button>
+                                <li key={stage.id}>
+                                    <button
+                                        type="button"
+                                        className={`fraction-v2-path-card ${complete ? 'complete' : ''} ${current ? 'current' : ''}`}
+                                        data-stage={stage.id}
+                                        aria-current={current ? 'step' : undefined}
+                                        onClick={() => openTopic((stageTopics.find((topic) => !learned.ids.includes(topic.id)) ?? stageTopics[0]).id)}
+                                    >
+                                        <span className="fraction-v2-stage-badge">{complete ? <Icon name="check" size={18} strokeWidth={3} /> : index + 1}</span>
+                                        <strong>{l(stage.title)}</strong>
+                                        {current && (
+                                            <span className="fraction-v2-meter"><span style={{ width: `${(learnedCount / stageTopics.length) * 100}%` }} /></span>
+                                        )}
+                                        <small>{complete
+                                            ? `${l({ eu: 'Osatuta', es: 'Completada', ar: 'مكتملة' })} · ${lessonsLabel(stageTopics.length)}`
+                                            : current
+                                                ? `${l({ eu: 'Martxan', es: 'En curso', ar: 'قيد التقدم' })} · ${learnedCount} / ${stageTopics.length}`
+                                                : lessonsLabel(stageTopics.length)}</small>
+                                    </button>
+                                </li>
                             )
                         })}
-                    </div>
+                    </ol>
                 </section>
 
-                <section className="fraction-v2-principles">
-                    <article><strong>1</strong><h3>{l({ eu: 'Lehenik ulertu', es: 'Primero comprende', ar: 'افهم أولًا' })}</h3><p>{l({ eu: 'Arau bakoitzak irudi eta azalpen bat du.', es: 'Cada regla nace de una imagen y una explicación.', ar: 'تنطلق كل قاعدة من صورة وتفسير.' })}</p></article>
-                    <article><strong>2</strong><h3>{l({ eu: 'Ondoren praktikatu', es: 'Después practica', ar: 'ثم تدرّب' })}</h3><p>{l({ eu: 'Pista erantzuna baino lehen agertzen da.', es: 'La pista aparece antes que la solución.', ar: 'يظهر التلميح قبل الحل.' })}</p></article>
-                    <article><strong>3</strong><h3>{l({ eu: 'Azkenik aplikatu', es: 'Finalmente aplica', ar: 'وأخيرًا طبّق' })}</h3><p>{l({ eu: 'Testuinguruko erronkek arrazoibidea egiaztatzen dute.', es: 'Los retos contextualizados comprueban el razonamiento.', ar: 'تختبر التحديات السياقية الاستدلال.' })}</p></article>
+                <section className="fraction-v2-tools" aria-labelledby="fraction-v2-tools-title">
+                    <div className="fraction-v2-section-heading">
+                        <h2 id="fraction-v2-tools-title">{l({ eu: 'Ikasteko beste modu batzuk', es: 'Más formas de aprender', ar: 'طرق أخرى للتعلّم' })}</h2>
+                    </div>
+                    <div className="fraction-v2-tools-grid">
+                        {tools.map((tool) => (
+                            <button type="button" className="fraction-v2-tool-card" data-tool={tool.id} onClick={() => navigate(tool.id)} key={tool.id}>
+                                <span className="fraction-v2-tool-icon"><Icon name={tool.id} size={24} strokeWidth={1.9} /></span>
+                                <strong>{l(tool.title)}</strong>
+                                <span>{l(tool.description)}</span>
+                            </button>
+                        ))}
+                    </div>
                 </section>
 
                 <div className="fraction-v2-route-footer">
                     <Link className="fraction-v2-back" to="/matematika/dbh2/zatikiak">
-                        {l({ eu: '← Oraingo bertsiora itzuli', es: '← Volver a la versión actual', ar: 'العودة إلى النسخة الحالية ←' })}
+                        {l({ eu: 'Oraingo bertsiora itzuli', es: 'Volver a la versión actual', ar: 'العودة إلى النسخة الحالية' })}
                     </Link>
-                    <button type="button" onClick={resetAllProgress}>{l({ eu: 'V2ko aurrerapena berrezarri', es: 'Reiniciar progreso de la V2', ar: 'إعادة ضبط تقدم النسخة الجديدة' })}</button>
+                    <button type="button" onClick={resetAllProgress}>{l({ eu: 'Aurrerapena berrezarri', es: 'Reiniciar el progreso', ar: 'إعادة ضبط التقدم' })}</button>
                 </div>
             </div>
         )
     }
 
     function renderLearn() {
-        const currentTopic = theoryTopics.find((topic) => topic.id === topicId) ?? theoryTopics[0]
+        const currentIndex = Math.max(0, theoryTopics.findIndex((topic) => topic.id === topicId))
+        const currentTopic = theoryTopics[currentIndex]
+        const currentStageIndex = learningStages.findIndex((stage) => stage.id === currentTopic.stage)
+        const nextTopic = theoryTopics[currentIndex + 1]
+        const isLearned = learned.ids.includes(currentTopic.id)
+        const selectTopic = (id: TheoryTopicId) => {
+            setTopicId(id)
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+            window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' })
+        }
+
         return (
-            <section className="fraction-v2-learning" aria-labelledby="fraction-v2-learning-title">
-                <div className="fraction-v2-page-intro">
-                    <span>{l({ eu: 'IKASI', es: 'APRENDE', ar: 'تعلّم' })}</span>
-                    <h1 id="fraction-v2-learning-title">{l({ eu: 'Ideia bat aldi bakoitzean', es: 'Una idea cada vez', ar: 'فكرة واحدة في كل مرة' })}</h1>
-                    <p>{l({ eu: 'Aukeratu urrats bat. Edukia laburra da eta zuzenean dagokion praktikara eramaten du.', es: 'Elige un paso. El contenido es breve y conduce directamente a su práctica.', ar: 'اختر خطوة. المحتوى موجز ويقود مباشرة إلى التدريب المرتبط به.' })}</p>
-                </div>
-                <div className="fraction-v2-learning-layout">
-                    <div className="fraction-v2-stage-tabs" role="tablist" aria-label={l({ eu: 'Ikaskuntza-urratsak', es: 'Etapas de aprendizaje', ar: 'مراحل التعلم' })}>
-                        {theoryTopics.map((topic, index) => (
-                            <button
-                                type="button"
-                                role="tab"
-                                id={`fraction-v2-theory-tab-${topic.id}`}
-                                aria-controls="fraction-v2-theory-panel"
-                                aria-selected={topic.id === currentTopic.id}
-                                className={topic.id === currentTopic.id ? 'active' : ''}
-                                onKeyDown={handleTabArrow}
-                                onClick={() => setTopicId(topic.id)}
-                                key={topic.id}
-                            >
-                                <span>{learned.ids.includes(topic.id) ? '✓' : index + 1}</span>
-                                {l(topic.title)}
-                            </button>
-                        ))}
-                    </div>
-                    <article
-                        className="fraction-v2-lesson"
-                        role="tabpanel"
-                        id="fraction-v2-theory-panel"
-                        aria-labelledby={`fraction-v2-theory-tab-${currentTopic.id}`}
-                        style={{ '--stage-color': currentTopic.color } as CSSProperties}
-                    >
-                        <span className="fraction-v2-lesson-icon" aria-hidden="true">{currentTopic.icon}</span>
-                        <p className="fraction-v2-lesson-goal"><strong>{l({ eu: 'Helburua:', es: 'Objetivo:', ar: 'الهدف:' })}</strong> {l(currentTopic.goal)}</p>
-                        <h2>{l(currentTopic.title)}</h2>
-                        <p>{l(currentTopic.explanation)}</p>
-                        <div className="fraction-v2-example"><MathText text={currentTopic.example} /></div>
-                        <div className="fraction-v2-takeaway"><span aria-hidden="true">◆</span><p>{l(currentTopic.takeaway)}</p></div>
-                        <div className="fraction-v2-lesson-actions">
-                            <button type="button" className="fraction-v2-primary" onClick={() => learned.addId(currentTopic.id)} disabled={learned.ids.includes(currentTopic.id)}>
-                                {learned.ids.includes(currentTopic.id)
-                                    ? l({ eu: 'Ulertuta', es: 'Comprendido', ar: 'تم الفهم' })
-                                    : l({ eu: 'Ulertu dut', es: 'Lo he comprendido', ar: 'فهمت' })}
-                            </button>
-                            <button type="button" className="fraction-v2-secondary" onClick={() => navigate('practice')}>
-                                {l({ eu: 'Praktikara joan', es: 'Ir a la práctica', ar: 'انتقل إلى التدريب' })}
-                            </button>
+            <section className="fraction-v2-learning">
+                <nav className="fraction-v2-lesson-index" aria-label={l({ eu: 'Ikasgaiak', es: 'Lecciones', ar: 'الدروس' })}>
+                    {learningStages.map((stage, stageIndex) => (
+                        <div className="fraction-v2-lesson-group" data-stage={stage.id} key={stage.id}>
+                            <span className="fraction-v2-lesson-group-title"><span aria-hidden="true" />{stageIndex + 1} · {l(stage.title)}</span>
+                            {theoryTopics.map((topic, index) => topic.stage !== stage.id ? null : (
+                                <button
+                                    type="button"
+                                    className={`${topic.id === currentTopic.id ? 'active' : ''} ${learned.ids.includes(topic.id) ? 'done' : ''}`}
+                                    aria-current={topic.id === currentTopic.id ? 'step' : undefined}
+                                    onClick={() => selectTopic(topic.id)}
+                                    key={topic.id}
+                                >
+                                    <span className="fraction-v2-lesson-number">{learned.ids.includes(topic.id) && topic.id !== currentTopic.id ? <Icon name="check" size={14} strokeWidth={3.2} /> : index + 1}</span>
+                                    {l(topic.title)}
+                                </button>
+                            ))}
                         </div>
-                    </article>
-                </div>
+                    ))}
+                </nav>
+
+                <article className="fraction-v2-lesson" data-stage={currentTopic.stage} aria-labelledby="fraction-v2-lesson-title">
+                    <div className="fraction-v2-lesson-meta">
+                        <span className="fraction-v2-chip" data-stage={currentTopic.stage}>{l({ eu: `${currentStageIndex + 1}. etapa`, es: `Etapa ${currentStageIndex + 1}`, ar: `المرحلة ${currentStageIndex + 1}` })} · {l(learningStages[currentStageIndex].title)}</span>
+                        <span>{l({ eu: `${currentIndex + 1}. ikasgaia / ${theoryTopics.length}`, es: `Lección ${currentIndex + 1} de ${theoryTopics.length}`, ar: `الدرس ${currentIndex + 1} من ${theoryTopics.length}` })}</span>
+                    </div>
+                    <h1 id="fraction-v2-lesson-title">{l(currentTopic.title)}</h1>
+                    <p className="fraction-v2-lesson-goal"><strong>{l({ eu: 'Helburua:', es: 'Objetivo:', ar: 'الهدف:' })}</strong> {l(currentTopic.goal)}</p>
+                    <p className="fraction-v2-lesson-body">{l(currentTopic.explanation)}</p>
+                    <figure className="fraction-v2-example">
+                        <MathText text={currentTopic.example} />
+                    </figure>
+                    <aside className="fraction-v2-takeaway">
+                        <span className="fraction-v2-takeaway-icon"><Icon name="bulb" size={22} /></span>
+                        <div>
+                            <span>{l({ eu: 'Ideia nagusia', es: 'Idea clave', ar: 'الفكرة الأساسية' })}</span>
+                            <p>{l(currentTopic.takeaway)}</p>
+                        </div>
+                    </aside>
+                    <div className="fraction-v2-lesson-actions">
+                        <button type="button" className={`fraction-v2-primary ${isLearned ? 'done' : ''}`} onClick={() => learned.addId(currentTopic.id)} disabled={isLearned}>
+                            {isLearned && <Icon name="check" size={18} strokeWidth={3} />}
+                            {isLearned
+                                ? l({ eu: 'Ulertuta', es: 'Entendido', ar: 'تم الفهم' })
+                                : l({ eu: 'Ulertu dut', es: 'Lo he entendido', ar: 'فهمت' })}
+                        </button>
+                        <button type="button" className="fraction-v2-secondary" onClick={() => navigate('practice')}>
+                            {l({ eu: 'Praktikatu', es: 'Practicar', ar: 'تدرّب' })}
+                        </button>
+                        {nextTopic && (
+                            <button type="button" className="fraction-v2-next" data-stage={nextTopic.stage} onClick={() => selectTopic(nextTopic.id)}>
+                                <span>{l({ eu: 'Hurrengoa:', es: 'Siguiente:', ar: 'التالي:' })} {l(nextTopic.title)}</span>
+                                <Icon name="arrow" size={18} strokeWidth={2.4} className="fraction-v2-icon-flip" />
+                            </button>
+                        )}
+                    </div>
+                </article>
             </section>
         )
     }
@@ -676,6 +784,8 @@ function FractionLaboratory({ language }: { language: ReturnType<typeof normaliz
     const [quantity, setQuantity] = useState(120)
     const [operation, setOperation] = useState<Operation>('add')
     const first = fraction(numerator, denominator)
+    // Area and equivalence models show the fraction exactly as chosen with the sliders (4/6 stays 4/6)
+    const chosen: FractionValue = { numerator, denominator }
     const second = fraction(secondNumerator, secondDenominator)
     const comparison = compare(first, second)
     let result: FractionValue | null
@@ -772,7 +882,7 @@ function FractionLaboratory({ language }: { language: ReturnType<typeof normaliz
                     )}
                     {mode === 'area' && (
                         <>
-                            <FractionModel value={first} label={l({ eu: 'Azalera-eredua', es: 'Modelo de área', ar: 'نموذج المساحة' })} />
+                            <FractionModel value={chosen} label={l({ eu: 'Azalera-eredua', es: 'Modelo de área', ar: 'نموذج المساحة' })} />
                             <p className="fraction-v2-insight">{l({ eu: 'Unitate oso guztiak marrazten dira eta zati kopurua izendatzailearekin bat dator beti.', es: 'Se dibujan todas las unidades completas y el número de partes coincide siempre con el denominador.', ar: 'تُرسم كل الوحدات الكاملة ويطابق عدد الأجزاء المقام دائمًا.' })}</p>
                         </>
                     )}
@@ -780,17 +890,17 @@ function FractionLaboratory({ language }: { language: ReturnType<typeof normaliz
                         <>
                             <NumberLineModel value={first} label={l({ eu: 'Zenbaki-zuzena', es: 'Recta numérica', ar: 'خط الأعداد' })} />
                             <div className="fraction-v2-operation-result"><MathText text={`$${toLatex(first)}${exactDecimal === null ? '\\approx' : '='}${exactDecimal ?? approximateDecimal}$`} /></div>
-                            <p className="fraction-v2-insight">{l({ eu: 'Eskala automatikoki zabaltzen da: markatzailea ez da inoiz pantailatik kanpo geratzen.', es: 'La escala se amplía automáticamente: el marcador nunca queda fuera de la pantalla.', ar: 'يتوسع المقياس تلقائيًا، فلا تخرج العلامة من الشاشة.' })}</p>
+                            <p className="fraction-v2-insight">{l({ eu: 'Mugitu graduatzaileak eta ikusi non kokatzen den zatikia zuzenean.', es: 'Mueve los deslizadores y observa dónde cae la fracción en la recta.', ar: 'حرّك المؤشرات ولاحظ موقع الكسر على خط الأعداد.' })}</p>
                         </>
                     )}
                     {mode === 'equivalence' && (
                         <>
                             <div className="fraction-v2-equivalence-pair">
-                                <FractionModel value={first} label={l({ eu: 'Jatorrizko zatikia', es: 'Fracción original', ar: 'الكسر الأصلي' })} />
+                                <FractionModel value={chosen} label={l({ eu: 'Jatorrizko zatikia', es: 'Fracción original', ar: 'الكسر الأصلي' })} />
                                 <span aria-hidden="true">=</span>
-                                <FractionModel value={{ numerator: first.numerator * multiplier, denominator: first.denominator * multiplier }} label={l({ eu: 'Zatiki baliokidea', es: 'Fracción equivalente', ar: 'الكسر المكافئ' })} />
+                                <FractionModel value={{ numerator: numerator * multiplier, denominator: denominator * multiplier }} label={l({ eu: 'Zatiki baliokidea', es: 'Fracción equivalente', ar: 'الكسر المكافئ' })} />
                             </div>
-                            <MathText text={`$\\frac{${first.numerator}}{${first.denominator}}=\\frac{${first.numerator}\\cdot${multiplier}}{${first.denominator}\\cdot${multiplier}}=\\frac{${first.numerator * multiplier}}{${first.denominator * multiplier}}$`} />
+                            <MathText text={`$\\frac{${numerator}}{${denominator}}=\\frac{${numerator}\\cdot${multiplier}}{${denominator}\\cdot${multiplier}}=\\frac{${numerator * multiplier}}{${denominator * multiplier}}$`} />
                         </>
                     )}
                     {mode === 'operations' && (
@@ -891,7 +1001,8 @@ function PracticeDeck({
                     {items.map((item, index) => (
                         <button
                             type="button"
-                            className={index === currentIndex ? 'active' : ''}
+                            className={`${index === currentIndex ? 'active' : ''} ${completedIds.includes(item.id) ? 'done' : ''}`}
+                            data-stage={item.stage}
                             aria-current={index === currentIndex ? 'step' : undefined}
                             aria-label={`${index + 1}: ${l(item.prompt)}`}
                             onClick={() => setCurrentIndex(index)}
@@ -903,7 +1014,7 @@ function PracticeDeck({
                     ))}
                 </nav>
 
-                <article className={`fraction-v2-task-card ${currentFeedback}`} aria-live="polite">
+                <article className={`fraction-v2-task-card ${currentFeedback}`} data-stage={current.stage} aria-live="polite">
                     <div className="fraction-v2-task-meta">
                         <span>{currentIndex + 1} / {items.length}</span>
                         {challengeMode && isChallengeItem(current) && <strong>+{current.points} pts</strong>}
@@ -961,7 +1072,7 @@ function GamesArea({ completedIds, onComplete, language, initialGame }: { comple
             <div className="fraction-v2-page-intro">
                 <span>{l({ eu: '4 JOKO-MODU', es: '4 MODOS DE JUEGO', ar: '4 أنماط لعب' })}</span>
                 <h1 id="fraction-v2-games-title">{l({ eu: 'Jolastu, baina beti balio zehatzarekin', es: 'Juega, siempre con valores exactos', ar: 'العب بقيم دقيقة دائمًا' })}</h1>
-                <p>{l({ eu: 'Pizza, memoria eta lasterketa berreraiki dira motor matematiko beraren gainean. Ez dago zati fantasmik edo hurbilketa faltsurik.', es: 'Pizza, memoria y carrera se han reconstruido sobre el mismo motor matemático. No hay porciones fantasma ni aproximaciones falsas.', ar: 'أُعيد بناء البيتزا والذاكرة والسباق فوق المحرك الرياضي نفسه، بلا أجزاء وهمية أو تقريبات زائفة.' })}</p>
+                <p>{l({ eu: 'Entrenatu lau jokorekin: baliokidetasunak, pizza, memoria eta kalkulua.', es: 'Entrena con cuatro juegos: equivalencias, pizza, memoria y cálculo.', ar: 'تدرّب بأربع ألعاب: التكافؤ والبيتزا والذاكرة والحساب.' })}</p>
             </div>
             <div className="fraction-v2-game-tabs" role="tablist" aria-label={l({ eu: 'Jokoa aukeratu', es: 'Elegir juego', ar: 'اختر لعبة' })}>
                 {gameOptions.map((option) => (
@@ -1072,7 +1183,7 @@ function ExactMemoryGame({ completedIds, onComplete, language }: { completedIds:
     return (
         <div className="fraction-v2-game-card fraction-v2-memory-game">
             <div className="fraction-v2-memory-meta"><span>{matchedPairs.length} / 6</span><span>{moves} {l({ eu: 'mugimendu', es: 'movimientos', ar: 'محاولات' })}</span></div>
-            <p>{l({ eu: 'Aurkitu balio bera duten bi adierazpenak. Karta ezkutuen edukia ez da irakurgailuari erakusten.', es: 'Encuentra dos representaciones del mismo valor. El contenido oculto no se expone al lector de pantalla.', ar: 'اعثر على تمثيلين للقيمة نفسها. لا يُكشف محتوى البطاقة المخفية لقارئ الشاشة.' })}</p>
+            <p>{l({ eu: 'Aurkitu balio bera duten bi karta.', es: 'Encuentra dos cartas con el mismo valor.', ar: 'اعثر على بطاقتين لهما القيمة نفسها.' })}</p>
             <div className="fraction-v2-memory-grid">
                 {cards.map((card, index) => {
                     const visible = flipped.includes(index) || matchedPairs.includes(card.pairId)
@@ -1155,12 +1266,7 @@ function ExactEquivalenceGame({ completedIds, onComplete, language }: { complete
     }
 
     return (
-        <section className="fraction-v2-game" aria-labelledby="fraction-v2-game-title">
-            <div className="fraction-v2-page-intro">
-                <span>{l({ eu: 'JOKO ZEHATZA', es: 'JUEGO EXACTO', ar: 'لعبة دقيقة' })}</span>
-                <h1 id="fraction-v2-game-title">{l({ eu: 'Aurkitu baliokidea', es: 'Encuentra la equivalente', ar: 'اعثر على الكسر المكافئ' })}</h1>
-                <p>{l({ eu: 'Ez dago hurbilketarik: aukera zuzenak balio bera du zehazki.', es: 'No hay aproximaciones: la opción correcta tiene exactamente el mismo valor.', ar: 'لا توجد تقريبـات: الخيار الصحيح يملك القيمة نفسها تمامًا.' })}</p>
-            </div>
+        <div className="fraction-v2-game">
             <div className="fraction-v2-game-card">
                 <div className="fraction-v2-game-score">{equivalenceRounds.filter((item) => completedIds.includes(item.id)).length} / {equivalenceRounds.length}</div>
                 <p>{l({ eu: 'Zein da zatiki honen baliokidea?', es: '¿Cuál es equivalente a esta fracción?', ar: 'أي كسر يكافئ هذا الكسر؟' })}</p>
@@ -1188,6 +1294,6 @@ function ExactEquivalenceGame({ completedIds, onComplete, language }: { complete
                 )}
                 <button type="button" className="fraction-v2-primary" onClick={next}>{l({ eu: 'Hurrengo txanda', es: 'Siguiente ronda', ar: 'الجولة التالية' })}</button>
             </div>
-        </section>
+        </div>
     )
 }

@@ -24,15 +24,33 @@ function contrast(foreground: string, background: string): number {
 
 test('core color pairs meet WCAG AA contrast', () => {
     const pairs = [
-        ['#f3f7fb', '#07111f'],
-        ['#a9b8ca', '#07111f'],
-        ['#06111e', '#60a5fa'],
-        ['#a7f3d0', '#07111f'],
-        ['#fecdd3', '#07111f'],
-        ['#fb7185', '#07111f']
+        // Ink and muted text on paper, cards and the lab controls
+        ['#1d2733', '#f6f1e7'],
+        ['#1d2733', '#fffcf6'],
+        ['#58616e', '#f6f1e7'],
+        ['#58616e', '#fffcf6'],
+        ['#58616e', '#fbf7ee'],
+        ['#f6f1e7', '#1d2733'],
+        // Stage text on its tint (chips, lesson numbers, path cards)
+        ['#1e4a96', '#dde7f7'],
+        ['#4a2f9e', '#e8e0f7'],
+        ['#6b4e12', '#fbebc0'],
+        ['#9a3218', '#f8dcd0'],
+        ['#1f6443', '#d6eddf'],
+        // Text on solid stage colours (badges and stage buttons)
+        ['#ffffff', '#2f6fdb'],
+        ['#ffffff', '#7a55d6'],
+        ['#1d2733', '#e0a100'],
+        ['#ffffff', '#c4432a'],
+        ['#ffffff', '#267b53'],
+        // Feedback and accents
+        ['#8f2c14', '#f8dcd0'],
+        ['#17482f', '#d6eddf'],
+        ['#7a1c14', '#f9dedc'],
+        ['#6b4e12', '#fbebc0']
     ] as const
 
     for (const [foreground, background] of pairs) {
-        assert.ok(contrast(foreground, background) >= 4.5, `${foreground} on ${background} must meet 4.5:1`)
+        assert.ok(contrast(foreground, background) >= 4.5, `${foreground} on ${background} must meet 4.5:1 (got ${contrast(foreground, background).toFixed(2)})`)
     }
 })

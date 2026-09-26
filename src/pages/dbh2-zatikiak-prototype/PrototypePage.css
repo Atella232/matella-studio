@@ -1,22 +1,63 @@
+/* ==========================================================================
+   Matella · "Cuaderno a color"
+   Warm paper and ink, one colour per learning stage, sticker-like ink
+   borders and solid shadows reserved for the elements that matter.
+   ========================================================================== */
+
 .fraction-v2 {
-    --v2-bg: #07111f;
-    --v2-panel: rgba(15, 29, 48, 0.78);
-    --v2-panel-strong: #10233b;
-    --v2-line: rgba(148, 163, 184, 0.2);
-    --v2-text: #f3f7fb;
-    --v2-muted: #a9b8ca;
-    --v2-blue: #38bdf8;
-    --v2-violet: #a78bfa;
-    --v2-green: #34d399;
-    --v2-rose: #fb7185;
+    --paper: #f6f1e7;
+    --paper-deep: #efe7d6;
+    --paper-note: #f3ebdc;
+    --card: #fffcf6;
+    --ink: #1d2733;
+    --ink-soft: #3a4452;
+    --muted: #58616e;
+    --line: #e3d9c6;
+    --grid-line: rgba(29, 39, 51, 0.07);
+    --focus: #2f6fdb;
+    --success: #267b53;
+    --success-tint: #d6eddf;
+    --success-ink: #17482f;
+    --error: #b3261e;
+    --error-tint: #f9dedc;
+    --error-ink: #7a1c14;
+    --mustard: #e0a100;
+    --mustard-tint: #fbebc0;
+    --mustard-ink: #6b4e12;
+    --coral: #d9502e;
+    --coral-tint: #f8dcd0;
+    --coral-ink: #8f2c14;
+    --shadow: 4px 4px 0 var(--ink);
+    --shadow-lg: 6px 6px 0 var(--ink);
+    --font-display: "Fraunces", "Noto Sans Arabic", Georgia, serif;
+    --font-body: "Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --gutter: clamp(16px, 4vw, 56px);
+
+    /* Default stage colours (meaning); every [data-stage] overrides them */
+    --stage: #2f6fdb;
+    --stage-on: #ffffff;
+    --stage-tint: #dde7f7;
+    --stage-soft: #f1f5fc;
+    --stage-ink: #1e4a96;
+
     min-height: 100vh;
-    color: var(--v2-text);
-    background:
-        radial-gradient(circle at 8% 0%, rgba(56, 189, 248, 0.12), transparent 28rem),
-        radial-gradient(circle at 92% 18%, rgba(167, 139, 250, 0.12), transparent 30rem),
-        var(--v2-bg);
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.5;
 }
+
+.fraction-v2[dir="rtl"] {
+    --font-display: "Noto Sans Arabic", "Fraunces", serif;
+    --font-body: "Noto Sans Arabic", "Atkinson Hyperlegible", system-ui, sans-serif;
+}
+
+.fraction-v2 [data-stage="meaning"] { --stage: #2f6fdb; --stage-on: #ffffff; --stage-tint: #dde7f7; --stage-soft: #f1f5fc; --stage-ink: #1e4a96; }
+.fraction-v2 [data-stage="equivalence"] { --stage: #7a55d6; --stage-on: #ffffff; --stage-tint: #e8e0f7; --stage-soft: #f5f1fc; --stage-ink: #4a2f9e; }
+.fraction-v2 [data-stage="ordering"] { --stage: #e0a100; --stage-on: #1d2733; --stage-tint: #fbebc0; --stage-soft: #fdf7e6; --stage-ink: #6b4e12; }
+.fraction-v2 [data-stage="operations"] { --stage: #c4432a; --stage-on: #ffffff; --stage-tint: #f8dcd0; --stage-soft: #fcf1ec; --stage-ink: #9a3218; }
+.fraction-v2 [data-stage="proportionality"] { --stage: #267b53; --stage-on: #ffffff; --stage-tint: #d6eddf; --stage-soft: #eff7f2; --stage-ink: #1f6443; }
 
 .fraction-v2 *,
 .fraction-v2 *::before,
@@ -24,668 +65,1654 @@
     box-sizing: border-box;
 }
 
-.fraction-v2 button,
-.fraction-v2 input {
+/* Isolation from the legacy global styles (src/index.css). :where(.fraction-v2) el
+   matches their element specificity, so these resets win by source order while
+   every .fraction-v2-* class rule below still overrides them. */
+:where(.fraction-v2) button,
+:where(.fraction-v2) input,
+:where(.fraction-v2) select,
+:where(.fraction-v2) textarea {
     font: inherit;
-}
-
-.fraction-v2 button {
     color: inherit;
 }
 
-.fraction-v2-header {
-    position: sticky;
-    z-index: 20;
-    top: 0;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 1rem 2rem;
-    padding: 0.8rem clamp(1rem, 4vw, 4rem) 0;
-    border-bottom: 1px solid var(--v2-line);
-    background: rgba(7, 17, 31, 0.9);
-    backdrop-filter: blur(18px);
-}
-
-.fraction-v2-brand {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    min-width: max-content;
-}
-
-.fraction-v2-brand-mark {
-    display: grid;
-    width: 2.8rem;
-    height: 2.8rem;
-    place-items: center;
-    border: 1px solid rgba(56, 189, 248, 0.45);
-    border-radius: 0.9rem;
-    color: #07111f;
-    background: linear-gradient(135deg, #67e8f9, #818cf8);
-    font-size: 1.2rem;
-    font-weight: 900;
-}
-
-.fraction-v2-brand > span:last-child {
-    display: grid;
-    gap: 0.08rem;
-}
-
-.fraction-v2-brand strong {
-    font-size: 1.05rem;
-    letter-spacing: 0.02em;
-}
-
-.fraction-v2-brand small {
-    color: var(--v2-muted);
-    font-size: 0.7rem;
-}
-
-.fraction-v2-nav {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.3rem;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-
-.fraction-v2-nav button,
-.fraction-v2-lab-tabs button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.35rem;
-    min-height: 2.6rem;
-    padding: 0.55rem 0.75rem;
-    border: 1px solid transparent;
-    border-radius: 0.7rem;
-    color: var(--v2-muted);
+:where(.fraction-v2) input,
+:where(.fraction-v2) select,
+:where(.fraction-v2) textarea {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    color: var(--ink);
     background: transparent;
+    box-shadow: none;
+    transition: none;
+}
+
+:where(.fraction-v2) input:focus,
+:where(.fraction-v2) select:focus,
+:where(.fraction-v2) textarea:focus {
+    box-shadow: none;
+}
+
+:where(.fraction-v2) input::placeholder,
+:where(.fraction-v2) textarea::placeholder {
+    color: var(--muted);
+}
+
+:where(.fraction-v2) button {
     cursor: pointer;
-    white-space: nowrap;
 }
 
-.fraction-v2-nav button:hover,
-.fraction-v2-nav button:focus-visible,
-.fraction-v2-nav button.active,
-.fraction-v2-lab-tabs button:hover,
-.fraction-v2-lab-tabs button:focus-visible,
-.fraction-v2-lab-tabs button.active {
-    border-color: var(--v2-line);
-    color: var(--v2-text);
-    background: rgba(56, 189, 248, 0.1);
+:where(.fraction-v2) button:disabled {
+    cursor: default;
 }
 
-.fraction-v2-language {
-    display: flex;
-    gap: 0.25rem;
+:where(.fraction-v2) a {
+    position: static;
+    color: inherit;
+    transition: none;
 }
 
-.fraction-v2-language button {
-    display: grid;
-    width: 2rem;
-    height: 2rem;
-    place-items: center;
-    border: 1px solid var(--v2-line);
-    border-radius: 0.55rem;
-    color: var(--v2-muted);
-    background: rgba(148, 163, 184, 0.05);
-    cursor: pointer;
-    font-size: 0.65rem;
-    font-weight: 800;
+:where(.fraction-v2) a::after {
+    content: none;
 }
 
-.fraction-v2-language button[aria-pressed="true"] {
-    border-color: rgba(56, 189, 248, 0.55);
-    color: #bae6fd;
-    background: rgba(56, 189, 248, 0.13);
+:where(.fraction-v2) p,
+:where(.fraction-v2) h1,
+:where(.fraction-v2) h2,
+:where(.fraction-v2) h3,
+:where(.fraction-v2) h4,
+:where(.fraction-v2) h5,
+:where(.fraction-v2) h6 {
+    margin: 0;
+    color: inherit;
 }
 
+.fraction-v2 :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+}
+
+.fraction-v2 h1,
+.fraction-v2 h2,
+.fraction-v2 h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.fraction-v2[dir="rtl"] h1,
+.fraction-v2[dir="rtl"] h2,
+.fraction-v2[dir="rtl"] h3 {
+    letter-spacing: 0;
+}
+
+.fraction-v2[dir="rtl"] .fraction-v2-icon-flip {
+    transform: scaleX(-1);
+}
+
+/* Formulas always read left to right, also in Arabic */
 .fraction-v2 .math-text,
 .fraction-v2 .katex {
     direction: ltr;
     unicode-bidi: isolate;
 }
 
-.fraction-v2-progress {
-    grid-column: 1 / -1;
-    height: 3px;
-    margin-inline: calc(clamp(1rem, 4vw, 4rem) * -1);
-    background: rgba(148, 163, 184, 0.12);
+.fraction-v2 .math-text .math-token.inline,
+.fraction-v2 .math-text .math-token.display {
+    padding: 0 0.1em;
+    border: 0;
+    background: transparent;
 }
 
-.fraction-v2-progress span {
-    display: block;
-    height: 100%;
-    background: linear-gradient(90deg, var(--v2-blue), var(--v2-violet), var(--v2-green));
-    transition: width 300ms ease;
-}
-
-.fraction-v2-main {
-    width: min(1180px, calc(100% - 2rem));
-    margin: 0 auto;
-    padding: clamp(2rem, 5vw, 5rem) 0 5rem;
-}
-
-.fraction-v2-hero {
-    position: relative;
-    overflow: hidden;
-    padding: clamp(2rem, 6vw, 5rem);
-    border: 1px solid var(--v2-line);
-    border-radius: 2rem;
-    background:
-        linear-gradient(120deg, rgba(15, 35, 59, 0.95), rgba(12, 24, 42, 0.88)),
-        var(--v2-panel);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
-}
-
-.fraction-v2-hero::after {
-    position: absolute;
-    width: 22rem;
-    height: 22rem;
-    inset-block-start: -12rem;
-    inset-inline-end: -7rem;
-    border: 5rem solid rgba(56, 189, 248, 0.06);
-    border-radius: 50%;
-    content: "";
-}
-
-.fraction-v2-kicker,
-.fraction-v2-page-intro > span {
-    color: #7dd3fc;
-    font-size: 0.76rem;
-    font-weight: 800;
-    letter-spacing: 0.18em;
-}
-
-.fraction-v2-hero h1,
-.fraction-v2-page-intro h1 {
-    max-width: 820px;
-    margin: 1rem 0;
-    font-size: clamp(2.25rem, 6vw, 5rem);
-    line-height: 0.98;
-    letter-spacing: -0.055em;
-}
-
-.fraction-v2-hero > p,
-.fraction-v2-page-intro p {
-    max-width: 760px;
-    color: var(--v2-muted);
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    line-height: 1.7;
-}
-
-.fraction-v2-hero-actions,
-.fraction-v2-lesson-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-    margin-top: 2rem;
-}
+/* ---------- Buttons and chips ---------- */
 
 .fraction-v2-primary,
 .fraction-v2-secondary,
-.fraction-v2-task-navigation button,
-.fraction-v2-hint-button {
-    min-height: 2.8rem;
-    padding: 0.7rem 1rem;
-    border: 1px solid transparent;
-    border-radius: 0.8rem;
-    cursor: pointer;
-    font-weight: 750;
+.fraction-v2-stage-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 12px 22px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
 }
 
 .fraction-v2-primary {
-    color: #06111e !important;
-    background: linear-gradient(135deg, #67e8f9, #60a5fa);
-    box-shadow: 0 10px 28px rgba(56, 189, 248, 0.16);
+    color: var(--paper);
+    background: var(--ink);
+    box-shadow: 4px 4px 0 var(--mustard);
 }
 
-.fraction-v2-secondary,
-.fraction-v2-task-navigation button,
-.fraction-v2-hint-button {
-    border-color: var(--v2-line);
-    color: var(--v2-text);
-    background: rgba(148, 163, 184, 0.07);
+.fraction-v2-secondary {
+    color: var(--ink);
+    background: var(--card);
 }
 
-.fraction-v2 button:focus-visible,
-.fraction-v2 input:focus-visible {
-    outline: 3px solid rgba(125, 211, 252, 0.55);
-    outline-offset: 3px;
+.fraction-v2-stage-button {
+    color: var(--stage-on);
+    background: var(--stage);
+    box-shadow: 3px 3px 0 var(--ink);
 }
 
-.fraction-v2 button:disabled {
+.fraction-v2-primary:hover:not(:disabled),
+.fraction-v2-stage-button:hover:not(:disabled) {
+    transform: translate(-1px, -1px);
+}
+
+.fraction-v2-primary:hover:not(:disabled) {
+    box-shadow: 5px 5px 0 var(--mustard);
+}
+
+.fraction-v2-stage-button:hover:not(:disabled) {
+    box-shadow: 4px 4px 0 var(--ink);
+}
+
+.fraction-v2-secondary:hover:not(:disabled) {
+    background: var(--paper-deep);
+}
+
+.fraction-v2-primary:active:not(:disabled),
+.fraction-v2-stage-button:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--ink);
+}
+
+.fraction-v2-primary:disabled {
+    opacity: 0.45;
+    box-shadow: none;
+}
+
+/* A completed action (lesson understood, exercise achieved) reads as done, not as unavailable */
+.fraction-v2-primary.done:disabled {
+    opacity: 1;
+    color: var(--success-ink);
+    background: var(--success-tint);
+    border-color: var(--success);
+}
+
+.fraction-v2-secondary:disabled {
     opacity: 0.5;
-    cursor: not-allowed;
 }
 
-.fraction-v2-curriculum {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.45rem;
-    margin-top: 2.2rem;
-}
-
-.fraction-v2-curriculum span {
-    padding: 0.45rem 0.7rem;
-    border: 1px solid rgba(52, 211, 153, 0.2);
+.fraction-v2-chip {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 6px;
+    padding: 5px 12px;
+    border: 1.5px solid var(--ink);
     border-radius: 999px;
-    color: #a7f3d0;
-    background: rgba(52, 211, 153, 0.07);
-    font-size: 0.78rem;
+    color: var(--stage-ink);
+    background: var(--stage-tint);
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
 }
 
-.fraction-v2-overview {
-    margin-top: 4rem;
+.fraction-v2-chip-coral {
+    border-color: transparent;
+    color: var(--coral-ink);
+    background: var(--coral-tint);
+}
+
+.fraction-v2-hint-button {
+    align-self: flex-start;
+    padding: 6px 0;
+    border: 0;
+    color: var(--stage-ink);
+    background: none;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+}
+
+.fraction-v2-hint-button:disabled {
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.fraction-v2-hint {
+    padding: 14px 18px;
+    border: 1.5px dashed #b98a00;
+    border-radius: 12px;
+    background: var(--mustard-tint);
+}
+
+.fraction-v2-feedback,
+.fraction-v2-game-feedback {
+    padding: 14px 18px;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    background: var(--paper-deep);
+}
+
+.fraction-v2-feedback.success,
+.fraction-v2-game-feedback.success {
+    border-color: var(--success);
+    color: var(--success-ink);
+    background: var(--success-tint);
+}
+
+.fraction-v2-feedback.error,
+.fraction-v2-game-feedback.error {
+    border-color: var(--error);
+    color: var(--error-ink);
+    background: var(--error-tint);
+}
+
+.fraction-v2-feedback strong {
+    margin-inline-end: 6px;
+}
+
+/* ---------- Header ---------- */
+
+.fraction-v2-header {
+    position: relative;
+    z-index: 20;
+    padding: 0 var(--gutter);
+    background: var(--paper);
+}
+
+.fraction-v2-topbar {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    min-height: 72px;
+}
+
+.fraction-v2-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.fraction-v2-brand-mark {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+    border: 2px solid var(--ink);
+    border-radius: 9px;
+    transform: rotate(-4deg);
+}
+
+.fraction-v2-brand-mark span:nth-child(1) { background: #2f6fdb; }
+.fraction-v2-brand-mark span:nth-child(2) { background: var(--mustard); }
+.fraction-v2-brand-mark span:nth-child(3) { background: var(--coral); }
+.fraction-v2-brand-mark span:nth-child(4) { background: var(--ink); }
+
+.fraction-v2-brand-name {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.fraction-v2-breadcrumb {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.fraction-v2-breadcrumb a {
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.fraction-v2-breadcrumb a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+}
+
+.fraction-v2-breadcrumb [aria-current="page"] {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.fraction-v2-mobile-back,
+.fraction-v2-mobile-title {
+    display: none;
+}
+
+.fraction-v2-language {
+    display: flex;
+    gap: 2px;
+    padding: 3px;
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    background: var(--card);
+}
+
+.fraction-v2-language button {
+    min-width: 40px;
+    min-height: 32px;
+    padding: 4px 12px;
+    border: 0;
+    border-radius: 999px;
+    color: var(--muted);
+    background: transparent;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.fraction-v2-language button[aria-pressed="true"] {
+    color: var(--paper);
+    background: var(--ink);
+}
+
+.fraction-v2-nav {
+    display: flex;
+    gap: 30px;
+    border-bottom: 1.5px solid var(--line);
+}
+
+.fraction-v2-nav button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: -1.5px;
+    padding: 14px 0 12px;
+    border: 0;
+    border-bottom: 4px solid transparent;
+    color: var(--muted);
+    background: none;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.fraction-v2-nav button:hover {
+    color: var(--ink);
+}
+
+.fraction-v2-nav button.active {
+    border-bottom-color: var(--coral);
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.fraction-v2-nav .fraction-v2-nav-more,
+.fraction-v2-more-menu {
+    display: none;
+}
+
+/* ---------- Page shell ---------- */
+
+.fraction-v2-main {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 40px var(--gutter) 88px;
+}
+
+.fraction-v2-page-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 28px;
+}
+
+.fraction-v2-page-intro > span {
+    color: var(--coral-ink);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.fraction-v2-page-intro h1 {
+    max-width: 780px;
+    margin: 0;
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 1.1;
+}
+
+.fraction-v2-page-intro p {
+    max-width: 680px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 18px;
 }
 
 .fraction-v2-section-heading {
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.4rem;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 24px;
+    margin-bottom: 22px;
 }
 
-.fraction-v2-section-heading > span {
-    display: grid;
-    width: 4rem;
-    height: 4rem;
-    place-items: center;
-    border: 1px solid rgba(56, 189, 248, 0.25);
-    border-radius: 50%;
-    color: #7dd3fc;
-    background: rgba(56, 189, 248, 0.08);
-    font-weight: 850;
+.fraction-v2-section-heading h2 {
+    margin: 0;
+    font-size: clamp(30px, 3.4vw, 40px);
 }
 
-.fraction-v2-section-heading h2,
 .fraction-v2-section-heading p {
     margin: 0;
+    color: var(--muted);
+    font-size: 16px;
 }
 
-.fraction-v2-section-heading p {
-    margin-top: 0.25rem;
-    color: var(--v2-muted);
+/* ---------- Route (unit home) ---------- */
+
+.fraction-v2-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
+    align-items: center;
+    gap: 48px;
+    padding: 20px 0 44px;
+}
+
+.fraction-v2-hero-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.fraction-v2-hero h1 {
+    margin: 0;
+    font-size: clamp(56px, 9vw, 100px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+}
+
+.fraction-v2-hero-copy > p {
+    max-width: 500px;
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 21px;
+    line-height: 1.55;
+}
+
+.fraction-v2-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding-top: 6px;
+}
+
+.fraction-v2-hero-actions button {
+    min-height: 54px;
+    font-size: 17px;
+}
+
+.fraction-v2 .fraction-v2-hero-note {
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.fraction-v2-collage {
+    position: relative;
+    height: 400px;
+    direction: ltr;
+    border: 1.5px solid var(--line);
+    border-radius: 24px;
+    background-color: var(--card);
+    background-image:
+        repeating-linear-gradient(0deg, #ede5d4 0 1px, transparent 1px 28px),
+        repeating-linear-gradient(90deg, #ede5d4 0 1px, transparent 1px 28px);
+}
+
+.fraction-v2-collage > div {
+    position: absolute;
+    border: 2px solid var(--ink);
+}
+
+.fraction-v2-collage-pizza {
+    top: 34px;
+    left: 34px;
+    width: 190px;
+    height: 190px;
+    border-width: 2.5px !important;
+    border-radius: 50%;
+    background: conic-gradient(var(--coral) 0 270deg, var(--card) 270deg 360deg);
+    box-shadow: var(--shadow);
+    transform: rotate(-8deg);
+}
+
+.fraction-v2-collage-pizza span {
+    position: absolute;
+    background: var(--ink);
+}
+
+.fraction-v2-collage-pizza span:first-child {
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2.5px;
+    margin-left: -1.25px;
+}
+
+.fraction-v2-collage-pizza span:last-child {
+    top: 50%;
+    right: 0;
+    left: 0;
+    height: 2.5px;
+    margin-top: -1.25px;
+}
+
+.fraction-v2-collage-sticker {
+    top: 164px;
+    left: 172px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: var(--mustard-tint);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1;
+    transform: rotate(7deg);
+}
+
+.fraction-v2-collage-sticker span:last-child {
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 2.5px solid var(--ink);
+}
+
+.fraction-v2-collage-bar {
+    top: 46px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 230px;
+    padding: 16px;
+    border-radius: 16px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    transform: rotate(3deg);
+}
+
+.fraction-v2-collage-bar > div {
+    display: flex;
+    height: 32px;
+    overflow: hidden;
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+}
+
+.fraction-v2-collage-bar > div span {
+    flex-grow: 1;
+    border-right: 2px solid var(--ink);
+}
+
+.fraction-v2-collage-bar > div span:last-child {
+    border-right: 0;
+}
+
+.fraction-v2-collage-bar > div span.filled {
+    background: #7a55d6;
+}
+
+.fraction-v2-collage-bar strong {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 20px;
+}
+
+.fraction-v2-collage-line {
+    right: 36px;
+    bottom: 34px;
+    width: 300px;
+    padding: 16px 18px 10px;
+    border-radius: 16px;
+    background: var(--success-tint);
+    box-shadow: var(--shadow);
+    transform: rotate(-3deg);
+}
+
+.fraction-v2-collage-line > div {
+    position: relative;
+    height: 36px;
+}
+
+.fraction-v2-collage-line > div::before {
+    position: absolute;
+    top: 18px;
+    right: 0;
+    left: 0;
+    height: 2.5px;
+    background: var(--ink);
+    content: "";
+}
+
+.fraction-v2-collage-line .tick {
+    position: absolute;
+    top: 10px;
+    width: 2.5px;
+    height: 18px;
+    background: var(--ink);
+}
+
+.fraction-v2-collage-line .tick:nth-child(1) { left: 0; }
+.fraction-v2-collage-line .tick:nth-child(2) { left: 33.3%; }
+.fraction-v2-collage-line .tick:nth-child(3) { left: 66.6%; }
+.fraction-v2-collage-line .tick:nth-child(4) { right: 0; }
+
+.fraction-v2-collage-line .dot {
+    position: absolute;
+    top: 7px;
+    left: 77.7%;
+    width: 24px;
+    height: 24px;
+    margin-left: -12px;
+    border: 2.5px solid var(--ink);
+    border-radius: 50%;
+    background: var(--success);
+}
+
+.fraction-v2-collage-line p {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.fraction-v2-continue {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 56px;
+    padding: 20px 26px;
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    background: var(--card);
+}
+
+.fraction-v2-ring {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    background: conic-gradient(var(--success) var(--progress), var(--line) 0);
+}
+
+.fraction-v2-ring span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--card);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.fraction-v2-continue-text {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.fraction-v2-continue-text span {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.fraction-v2-continue-text strong {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.fraction-v2-overview {
+    margin-bottom: 56px;
 }
 
 .fraction-v2-path-grid {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 0.8rem;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .fraction-v2-path-card {
-    position: relative;
-    display: grid;
-    min-height: 15rem;
-    align-content: start;
-    gap: 0.65rem;
-    padding: 1.25rem;
-    border: 1px solid var(--v2-line);
-    border-radius: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    height: 100%;
+    min-height: 206px;
+    padding: 20px;
+    border: 1.5px solid var(--ink);
+    border-radius: 18px;
+    color: var(--ink);
+    background: var(--stage-tint);
     text-align: start;
-    background: var(--v2-panel);
-    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
-.fraction-v2-path-card:hover,
-.fraction-v2-path-card.recommended {
-    border-color: color-mix(in srgb, var(--stage-color), transparent 45%);
-    transform: translateY(-2px);
+.fraction-v2-path-card:hover {
+    box-shadow: var(--shadow);
+    transform: translate(-2px, -2px);
 }
 
-.fraction-v2-path-card.complete {
-    background: linear-gradient(160deg, color-mix(in srgb, var(--stage-color), transparent 90%), var(--v2-panel));
+.fraction-v2-path-card.current {
+    border-width: 2px;
+    box-shadow: 5px 5px 0 var(--ink);
+    transform: translateY(-4px);
 }
 
-.fraction-v2-path-index {
-    position: absolute;
-    inset-block-start: 1rem;
-    inset-inline-end: 1rem;
-    display: grid;
-    width: 1.8rem;
-    height: 1.8rem;
-    place-items: center;
-    border-radius: 50%;
-    color: var(--v2-muted);
-    background: rgba(148, 163, 184, 0.1);
-    font-size: 0.75rem;
-}
-
-.fraction-v2-path-icon {
-    color: var(--stage-color);
-    font-size: 2rem;
-    font-weight: 900;
+.fraction-v2-stage-badge {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 2px solid var(--ink);
+    border-radius: 11px;
+    color: var(--stage-on);
+    background: var(--stage);
+    font-size: 17px;
+    font-weight: 700;
 }
 
 .fraction-v2-path-card strong {
-    line-height: 1.25;
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
 }
 
 .fraction-v2-path-card small {
-    color: var(--v2-muted);
-    line-height: 1.5;
+    margin-top: auto;
+    color: var(--stage-ink);
+    font-size: 14px;
+    font-weight: 700;
 }
 
-.fraction-v2-path-card em {
-    align-self: end;
-    color: var(--stage-color);
-    font-size: 0.72rem;
-    font-style: normal;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+.fraction-v2-meter {
+    display: block;
+    height: 8px;
+    margin-top: auto;
+    overflow: hidden;
+    border: 1.5px solid var(--ink);
+    border-radius: 4px;
+    background: var(--card);
 }
 
-.fraction-v2-principles {
+.fraction-v2-meter + small {
+    margin-top: 0;
+}
+
+.fraction-v2-meter span {
+    display: block;
+    height: 100%;
+    background: var(--stage);
+}
+
+.fraction-v2-tools-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin-top: 3rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
 }
 
-.fraction-v2-principles article {
-    padding: 1.5rem;
-    border-top: 1px solid var(--v2-line);
+.fraction-v2-tool-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 22px;
+    border: 1.5px solid var(--ink);
+    border-radius: 18px;
+    color: var(--ink);
+    background: var(--card);
+    text-align: start;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
-.fraction-v2-principles strong {
-    color: #7dd3fc;
-    font-size: 0.8rem;
+.fraction-v2-tool-card:hover {
+    box-shadow: var(--shadow);
+    transform: translate(-2px, -2px);
 }
 
-.fraction-v2-principles h3 {
-    margin: 0.7rem 0 0.4rem;
+.fraction-v2-tool-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border: 1.5px solid var(--ink);
+    border-radius: 14px;
+    background: #dde7f7;
 }
 
-.fraction-v2-principles p {
-    margin: 0;
-    color: var(--v2-muted);
-    line-height: 1.6;
+.fraction-v2-tool-card[data-tool="practice"] .fraction-v2-tool-icon { background: #e8e0f7; }
+.fraction-v2-tool-card[data-tool="challenges"] .fraction-v2-tool-icon { background: var(--coral-tint); }
+.fraction-v2-tool-card[data-tool="play"] .fraction-v2-tool-icon { background: var(--success-tint); }
+
+.fraction-v2-tool-card strong {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
 }
 
-.fraction-v2-back {
-    display: inline-block;
-    color: var(--v2-muted);
-    text-decoration: none;
+.fraction-v2-tool-card > span:last-child {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.45;
 }
 
 .fraction-v2-route-footer {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: space-between;
-    gap: 1rem;
-    margin-top: 3rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--v2-line);
+    gap: 12px;
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1.5px solid var(--line);
 }
 
+.fraction-v2-route-footer a,
 .fraction-v2-route-footer button {
-    padding: 0.55rem 0.75rem;
-    border: 1px solid rgba(251, 113, 133, 0.24);
-    border-radius: 0.7rem;
-    color: #fecdd3;
-    background: rgba(251, 113, 133, 0.06);
-    cursor: pointer;
+    padding: 6px 0;
+    border: 0;
+    color: var(--muted);
+    background: none;
+    font-size: 15px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
-.fraction-v2-page-intro {
-    margin-bottom: 2.5rem;
-}
+/* ---------- Learn ---------- */
 
-.fraction-v2-page-intro h1 {
-    max-width: 900px;
-    font-size: clamp(2.15rem, 5vw, 4.4rem);
-}
-
-.fraction-v2-learning-layout {
+.fraction-v2-learning {
     display: grid;
-    grid-template-columns: minmax(220px, 0.34fr) minmax(0, 1fr);
-    gap: 1.2rem;
+    grid-template-columns: 290px minmax(0, 1fr);
+    align-items: start;
+    gap: 44px;
 }
 
-.fraction-v2-stage-tabs,
-.fraction-v2-task-list {
-    display: grid;
-    align-content: start;
-    gap: 0.5rem;
+.fraction-v2-lesson-index {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
 
-.fraction-v2-stage-tabs button,
-.fraction-v2-task-list button {
+.fraction-v2-lesson-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.fraction-v2-lesson-group-title {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    min-height: 3.5rem;
-    padding: 0.7rem;
-    border: 1px solid transparent;
-    border-radius: 0.9rem;
-    color: var(--v2-muted);
+    gap: 8px;
+    padding: 0 10px 6px;
+    color: var(--stage-ink);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.fraction-v2-lesson-group-title > span {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    background: var(--stage);
+}
+
+.fraction-v2-lesson-group button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    border: 1.5px solid transparent;
+    border-radius: 12px;
+    color: var(--ink-soft);
+    background: none;
+    font-size: 15px;
+    line-height: 1.3;
     text-align: start;
-    background: transparent;
-    cursor: pointer;
 }
 
-.fraction-v2-stage-tabs button:hover,
-.fraction-v2-stage-tabs button.active,
-.fraction-v2-task-list button:hover,
-.fraction-v2-task-list button.active {
-    border-color: var(--v2-line);
-    color: var(--v2-text);
-    background: rgba(148, 163, 184, 0.08);
+.fraction-v2-lesson-group button:hover {
+    background: rgba(29, 39, 51, 0.05);
 }
 
-.fraction-v2-stage-tabs button span,
-.fraction-v2-task-list button span {
-    display: grid;
-    width: 2rem;
-    height: 2rem;
-    flex: 0 0 auto;
-    place-items: center;
-    border-radius: 0.6rem;
-    color: #7dd3fc;
-    background: rgba(56, 189, 248, 0.1);
-    font-size: 0.75rem;
-    font-weight: 800;
+.fraction-v2-lesson-number {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    color: var(--stage-ink);
+    background: var(--stage-tint);
+    font-size: 13px;
+    font-weight: 700;
 }
 
-.fraction-v2-lesson,
-.fraction-v2-task-card,
-.fraction-v2-game-card {
-    position: relative;
-    min-height: 31rem;
-    padding: clamp(1.5rem, 5vw, 3.5rem);
-    overflow: hidden;
-    border: 1px solid var(--v2-line);
-    border-radius: 1.5rem;
-    background: var(--v2-panel);
+.fraction-v2-lesson-group button.done .fraction-v2-lesson-number {
+    color: var(--stage-on);
+    background: var(--stage);
 }
 
-.fraction-v2-lesson::before {
-    position: absolute;
-    width: 18rem;
-    height: 18rem;
-    inset-block-start: -10rem;
-    inset-inline-end: -8rem;
-    border-radius: 50%;
-    background: color-mix(in srgb, var(--stage-color), transparent 86%);
-    content: "";
+.fraction-v2-lesson-group button.active {
+    border-color: var(--ink);
+    color: var(--ink);
+    background: var(--stage-tint);
+    font-weight: 700;
 }
 
-.fraction-v2-lesson-icon {
-    display: block;
-    color: var(--stage-color);
-    font-size: 3rem;
-    font-weight: 900;
+.fraction-v2-lesson-group button.active .fraction-v2-lesson-number {
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    background: var(--card);
 }
 
-.fraction-v2-lesson-goal {
-    color: var(--v2-muted);
+.fraction-v2-lesson {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 44px 52px;
+    border: 2px solid var(--ink);
+    border-radius: 24px;
+    background: var(--card);
+    box-shadow: var(--shadow-lg);
 }
 
-.fraction-v2-lesson h2 {
-    margin: 1.3rem 0 0.8rem;
-    font-size: clamp(1.7rem, 4vw, 2.7rem);
+.fraction-v2-lesson-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    color: var(--muted);
+    font-size: 14px;
 }
 
-.fraction-v2-lesson > p {
-    max-width: 760px;
-    color: var(--v2-muted);
-    line-height: 1.8;
+.fraction-v2-lesson h1 {
+    margin: 0;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.06;
+    letter-spacing: -0.025em;
 }
 
-.fraction-v2-example,
-.fraction-v2-task-expression,
-.fraction-v2-game-prompt {
-    display: grid;
-    min-height: 7rem;
-    margin: 2rem 0;
-    padding: 1.25rem;
-    place-items: center;
-    border: 1px solid var(--v2-line);
-    border-radius: 1rem;
-    background: rgba(3, 10, 20, 0.38);
-    font-size: clamp(1.2rem, 3vw, 2rem);
+.fraction-v2 .fraction-v2-lesson-goal {
+    margin: 0;
+    padding: 14px 18px;
+    border-radius: 12px;
+    background: var(--paper-note);
+}
+
+.fraction-v2 .fraction-v2-lesson-body {
+    max-width: 660px;
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 19px;
+    line-height: 1.65;
+}
+
+.fraction-v2-example {
+    margin: 0;
+    padding: 36px 24px;
+    border: 1.5px solid rgba(29, 39, 51, 0.14);
+    border-radius: 18px;
+    background-color: var(--stage-soft);
+    background-image:
+        repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px 24px),
+        repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px 24px);
+    font-size: clamp(26px, 3vw, 36px);
+    text-align: center;
 }
 
 .fraction-v2-takeaway {
     display: flex;
-    gap: 0.8rem;
-    padding: 1rem;
-    border-inline-start: 3px solid var(--stage-color);
-    color: #d8e5f2;
-    background: color-mix(in srgb, var(--stage-color), transparent 93%);
+    align-items: center;
+    align-self: flex-start;
+    gap: 16px;
+    max-width: 100%;
+    padding: 18px 24px;
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    background: var(--mustard-tint);
+    box-shadow: var(--shadow);
+    transform: rotate(-1deg);
+}
+
+.fraction-v2-takeaway-icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    color: var(--mustard-tint);
+    background: var(--ink);
+}
+
+.fraction-v2-takeaway span:not(.fraction-v2-takeaway-icon) {
+    color: var(--mustard-ink);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 }
 
 .fraction-v2-takeaway p {
-    margin: 0;
+    margin: 2px 0 0;
+    font-family: var(--font-display);
+    font-size: 23px;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1.25;
 }
 
-.fraction-v2-lab-tabs {
+.fraction-v2[dir="rtl"] .fraction-v2-takeaway p {
+    font-style: normal;
+}
+
+.fraction-v2-lesson-actions {
     display: flex;
-    width: fit-content;
-    gap: 0.35rem;
-    margin-bottom: 1rem;
-    padding: 0.3rem;
-    border: 1px solid var(--v2-line);
-    border-radius: 0.9rem;
-    background: rgba(7, 17, 31, 0.65);
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding-top: 8px;
+}
+
+.fraction-v2-next {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    margin-inline-start: auto;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 12px;
+    color: var(--stage-ink);
+    background: var(--stage-tint);
+    font-weight: 700;
+    text-align: start;
+}
+
+/* ---------- Diagnostic ---------- */
+
+.fraction-v2-diagnostic {
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+.fraction-v2-diagnostic-card,
+.fraction-v2-diagnostic-result {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 32px;
+    border: 2px solid var(--ink);
+    border-radius: 24px;
+    background: var(--card);
+    box-shadow: var(--shadow-lg);
+}
+
+.fraction-v2-diagnostic-result {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fraction-v2-diagnostic-result strong {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 48px;
+}
+
+.fraction-v2-diagnostic-progress {
+    height: 12px;
+    overflow: hidden;
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    background: var(--paper);
+}
+
+.fraction-v2-diagnostic-progress span {
+    display: block;
+    height: 100%;
+    background: #2f6fdb;
+    transition: width 0.3s ease;
+}
+
+.fraction-v2-diagnostic-card small {
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.fraction-v2-diagnostic-card h2 {
+    margin: 0;
+    font-size: clamp(24px, 3vw, 30px);
+    line-height: 1.2;
+}
+
+.fraction-v2-diagnostic-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.fraction-v2-diagnostic-options button {
+    min-height: 64px;
+    padding: 14px 18px;
+    border: 1.5px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.fraction-v2-diagnostic-options button:hover:not(:disabled) {
+    background: var(--paper-deep);
+}
+
+.fraction-v2-diagnostic-options button.success {
+    border: 2px solid var(--success);
+    color: var(--success-ink);
+    background: var(--success-tint);
+}
+
+.fraction-v2-diagnostic-options button.error {
+    border: 2px solid var(--error);
+    color: var(--error-ink);
+    background: var(--error-tint);
+}
+
+.fraction-v2-diagnostic-card > .fraction-v2-primary {
+    align-self: flex-end;
+}
+
+/* ---------- Practice, challenges and exercise bank ---------- */
+
+.fraction-v2-practice-switch {
+    display: inline-flex;
+    gap: 4px;
+    margin-bottom: 28px;
+    padding: 4px;
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    background: var(--card);
+}
+
+.fraction-v2-practice-switch button {
+    min-height: 40px;
+    padding: 8px 18px;
+    border: 0;
+    border-radius: 999px;
+    color: var(--muted);
+    background: none;
+    font-weight: 700;
+}
+
+.fraction-v2-practice-switch button.active {
+    color: var(--paper);
+    background: var(--ink);
+}
+
+.fraction-v2-task-layout {
+    display: grid;
+    grid-template-columns: 270px minmax(0, 1fr);
+    align-items: start;
+    gap: 32px;
+}
+
+.fraction-v2-task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.fraction-v2-task-list button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    border: 1.5px solid transparent;
+    border-radius: 12px;
+    color: var(--ink-soft);
+    background: none;
+    font-size: 15px;
+    line-height: 1.3;
+    text-align: start;
+}
+
+.fraction-v2-task-list button:hover {
+    background: rgba(29, 39, 51, 0.05);
+}
+
+.fraction-v2-task-list button span {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    color: var(--stage-ink);
+    background: var(--stage-tint);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.fraction-v2-task-list button.done span {
+    color: var(--stage-on);
+    background: var(--stage);
+}
+
+.fraction-v2-task-list button.active {
+    border-color: var(--ink);
+    color: var(--ink);
+    background: var(--stage-tint);
+    font-weight: 700;
+}
+
+.fraction-v2-task-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 32px 36px;
+    border: 2px solid var(--ink);
+    border-radius: 24px;
+    background: var(--card);
+    box-shadow: var(--shadow-lg);
+}
+
+.fraction-v2-task-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.fraction-v2-task-meta strong {
+    padding: 4px 10px;
+    border-radius: 999px;
+    color: var(--mustard-ink);
+    background: var(--mustard-tint);
+}
+
+.fraction-v2-task-card h2 {
+    margin: 0;
+    font-size: clamp(22px, 2.6vw, 28px);
+    line-height: 1.25;
+}
+
+.fraction-v2-task-expression {
+    padding: 24px;
+    border: 1.5px solid rgba(29, 39, 51, 0.14);
+    border-radius: 16px;
+    background-color: var(--stage-soft);
+    background-image:
+        repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px 24px),
+        repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px 24px);
+    font-size: clamp(22px, 2.6vw, 30px);
+    text-align: center;
+}
+
+.fraction-v2-task-card label,
+.fraction-v2-game-card label,
+.fraction-v2-bank-card label {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.fraction-v2-answer-row {
+    display: flex;
+    gap: 10px;
+}
+
+.fraction-v2-answer-row input {
+    flex-grow: 1;
+    min-width: 0;
+    min-height: 52px;
+    padding: 10px 16px;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    background: #ffffff;
+    font-size: 20px;
+}
+
+.fraction-v2-task-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 8px;
+    border-top: 1.5px solid var(--line);
+}
+
+.fraction-v2-task-navigation button {
+    min-height: 44px;
+    padding: 8px 16px;
+    border: 1.5px solid var(--ink);
+    border-radius: 12px;
+    background: var(--card);
+    font-weight: 700;
+}
+
+.fraction-v2-task-navigation button:disabled {
+    opacity: 0.4;
+}
+
+.fraction-v2-bank-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 14px 18px;
+    border: 1.5px solid var(--ink);
+    border-radius: 16px;
+    background: var(--card);
+}
+
+.fraction-v2-bank-toolbar label {
+    font-weight: 700;
+}
+
+.fraction-v2-bank-toolbar select {
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1.5px solid var(--ink);
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.fraction-v2-difficulty-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.fraction-v2-difficulty-filter button {
+    min-height: 40px;
+    padding: 6px 14px;
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    background: var(--card);
+    font-weight: 700;
+}
+
+.fraction-v2-difficulty-filter button[aria-pressed="true"] {
+    color: var(--paper);
+    background: var(--ink);
+}
+
+.fraction-v2-bank-toolbar > strong {
+    margin-inline-start: auto;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 20px;
+}
+
+.fraction-v2-bank-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.fraction-v2-bank-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    border: 1.5px solid var(--ink);
+    border-radius: 18px;
+    background: var(--card);
+}
+
+.fraction-v2-bank-card.complete {
+    border-color: var(--success);
+    background: #f3faf6;
+}
+
+.fraction-v2-bank-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.fraction-v2-bank-card-meta span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 30px;
+    padding: 0 6px;
+    border-radius: 8px;
+    background: var(--paper-deep);
+    font-weight: 700;
+}
+
+.fraction-v2-bank-card-meta em {
+    padding: 3px 10px;
+    border-radius: 999px;
+    color: var(--muted);
+    background: var(--paper);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.fraction-v2-bank-card-meta strong {
+    margin-inline-start: auto;
+    color: var(--success);
+}
+
+.fraction-v2-bank-question {
+    font-size: 18px;
+}
+
+.fraction-v2-bank-card textarea {
+    min-height: 64px;
+    padding: 10px 12px;
+    border: 1.5px solid var(--ink);
+    border-radius: 10px;
+    background: #ffffff;
+    resize: vertical;
+}
+
+.fraction-v2-bank-card small {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.fraction-v2-bank-solution {
+    padding: 16px;
+    border: 1.5px dashed var(--line);
+    border-radius: 12px;
+    background: var(--paper);
+}
+
+.fraction-v2-bank-solution > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+/* ---------- Laboratory ---------- */
+
+.fraction-v2-lab-tabs,
+.fraction-v2-game-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.fraction-v2-lab-tabs button {
+    min-height: 44px;
+    padding: 8px 16px;
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    background: var(--card);
+    font-weight: 700;
+}
+
+.fraction-v2-lab-tabs button:hover {
+    background: var(--paper-deep);
+}
+
+.fraction-v2-lab-tabs button.active {
+    color: var(--paper);
+    background: var(--ink);
 }
 
 .fraction-v2-lab-board {
     display: grid;
-    grid-template-columns: minmax(220px, 0.3fr) minmax(0, 1fr);
-    min-height: 38rem;
+    grid-template-columns: 300px minmax(0, 1fr);
     overflow: hidden;
-    border: 1px solid var(--v2-line);
-    border-radius: 1.5rem;
-    background: var(--v2-panel);
+    border: 2px solid var(--ink);
+    border-radius: 24px;
+    background: var(--card);
+    box-shadow: var(--shadow-lg);
 }
 
 .fraction-v2-controls {
-    padding: 1.5rem;
-    border-inline-end: 1px solid var(--v2-line);
-    background: rgba(3, 10, 20, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 26px 28px;
+    border-inline-end: 1.5px solid var(--line);
+    background: #fbf7ee;
 }
 
 .fraction-v2-controls h2 {
-    margin: 0 0 1rem;
-    font-size: 0.82rem;
-    letter-spacing: 0.09em;
+    margin: 14px 0 2px;
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
 }
 
-.fraction-v2-controls h2:not(:first-child) {
-    margin-top: 2rem;
+.fraction-v2-controls h2:first-child {
+    margin-top: 0;
 }
 
 .fraction-v2-controls label {
     display: flex;
+    align-items: baseline;
     justify-content: space-between;
-    margin: 1.1rem 0 0.45rem;
-    color: var(--v2-muted);
-    font-size: 0.86rem;
+    font-size: 15px;
 }
 
 .fraction-v2-controls label strong {
-    color: var(--v2-text);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 22px;
 }
 
 .fraction-v2-controls input[type="range"] {
     width: 100%;
-    accent-color: var(--v2-blue);
+    margin: 0 0 6px;
+    accent-color: var(--coral);
 }
 
 .fraction-v2-operation-picker {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.35rem;
-    margin-top: 1.2rem;
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
 }
 
 .fraction-v2-operation-picker button {
-    min-height: 2.5rem;
-    border: 1px solid var(--v2-line);
-    border-radius: 0.65rem;
-    background: rgba(148, 163, 184, 0.07);
-    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    border: 1.5px solid var(--ink);
+    border-radius: 12px;
+    background: var(--card);
+    font-size: 22px;
+    font-weight: 700;
 }
 
 .fraction-v2-operation-picker button[aria-pressed="true"] {
-    border-color: rgba(56, 189, 248, 0.6);
-    color: #7dd3fc;
-    background: rgba(56, 189, 248, 0.14);
+    color: var(--paper);
+    background: var(--ink);
 }
 
 .fraction-v2-visuals {
-    display: grid;
-    align-content: center;
-    gap: 2.5rem;
-    min-width: 0;
-    padding: clamp(1.5rem, 5vw, 4rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    min-height: 440px;
+    padding: 36px;
+    background-color: var(--card);
+    background-image:
+        repeating-linear-gradient(0deg, #f0e9da 0 1px, transparent 1px 28px),
+        repeating-linear-gradient(90deg, #f0e9da 0 1px, transparent 1px 28px);
+}
+
+.fraction-v2-visuals > .math-text {
+    font-size: 26px;
 }
 
 .fraction-v2-model-wrap {
-    display: grid;
-    justify-items: center;
-    gap: 0.55rem;
-    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    font-size: 30px;
 }
 
 .fraction-v2-model {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 10px;
     width: 100%;
-}
-
-.fraction-v2-sign {
-    color: var(--v2-rose);
-    font-size: 2rem;
-    font-weight: 900;
+    max-width: 600px;
 }
 
 .fraction-v2-units {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.45rem;
-    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .fraction-v2-unit {
     display: grid;
+    flex: 1 1 150px;
     grid-template-columns: repeat(var(--parts), minmax(4px, 1fr));
-    height: 3.4rem;
+    min-width: 120px;
+    height: 60px;
     overflow: hidden;
-    border: 2px solid rgba(226, 232, 240, 0.6);
-    border-radius: 0.55rem;
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    background: #ffffff;
 }
 
 .fraction-v2-unit span {
-    border-inline-end: 1px solid rgba(226, 232, 240, 0.3);
-    background: rgba(148, 163, 184, 0.05);
+    border-inline-end: 1.5px solid var(--ink);
 }
 
 .fraction-v2-unit span:last-child {
@@ -693,890 +1720,764 @@
 }
 
 .fraction-v2-unit span.filled {
-    background: linear-gradient(180deg, #67e8f9, #3b82f6);
+    background: #2f6fdb;
 }
 
 .fraction-v2-model.negative .fraction-v2-unit span.filled {
-    background: linear-gradient(180deg, #fda4af, #f43f5e);
+    background: #c4432a;
+}
+
+.fraction-v2-sign {
+    font-size: 36px;
+    font-weight: 700;
 }
 
 .fraction-v2-mixed {
-    color: var(--v2-muted);
-    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 999px;
+    color: var(--mustard-ink);
+    background: var(--mustard-tint);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.fraction-v2-equivalence-pair,
+.fraction-v2-operands {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.fraction-v2-equivalence-pair > span,
+.fraction-v2-operands > span {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.fraction-v2-equivalence-pair .fraction-v2-unit,
+.fraction-v2-operands .fraction-v2-unit {
+    min-width: 90px;
+}
+
+.fraction-v2-operation-result {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 14px 26px;
+    border: 1.5px solid var(--ink);
+    border-radius: 16px;
+    background: var(--card);
+    font-size: 30px;
 }
 
 .fraction-v2-number-line {
     position: relative;
-    height: 5rem;
-    margin: 2rem 1rem;
-    border-top: 2px solid rgba(226, 232, 240, 0.55);
+    width: 100%;
+    max-width: 640px;
+    height: 120px;
+    direction: ltr;
+}
+
+.fraction-v2-number-line::before {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    left: 0;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--ink);
+    content: "";
 }
 
 .fraction-v2-line-start,
 .fraction-v2-line-end {
     position: absolute;
-    top: 0.7rem;
-    color: var(--v2-muted);
-    font-size: 0.78rem;
+    top: 84px;
+    font-weight: 700;
 }
 
-.fraction-v2-line-start {
-    inset-inline-start: 0;
-}
-
-.fraction-v2-line-end {
-    inset-inline-end: 0;
-}
+.fraction-v2-line-start { left: 0; }
+.fraction-v2-line-end { right: 0; }
 
 .fraction-v2-line-marker {
     position: absolute;
-    top: -0.55rem;
-    display: grid;
-    transform: translateX(-50%);
-    justify-items: center;
-    color: #7dd3fc;
-}
-
-[dir="rtl"] .fraction-v2-line-marker {
-    transform: translateX(50%);
-}
-
-.fraction-v2-line-marker::before {
-    width: 1rem;
-    height: 1rem;
-    border: 3px solid #07111f;
-    border-radius: 50%;
-    background: var(--v2-blue);
-    box-shadow: 0 0 0 2px var(--v2-blue);
-    content: "";
-}
-
-.fraction-v2-line-marker .math-text {
-    margin-top: 0.45rem;
-    white-space: nowrap;
-}
-
-.fraction-v2-insight,
-.fraction-v2-hint,
-.fraction-v2-feedback,
-.fraction-v2-game-feedback {
-    padding: 1rem;
-    border: 1px solid var(--v2-line);
-    border-radius: 0.9rem;
-    color: var(--v2-muted);
-    background: rgba(148, 163, 184, 0.06);
-    line-height: 1.6;
-}
-
-.fraction-v2-equivalence-pair,
-.fraction-v2-operands {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    align-items: center;
-    gap: 1.2rem;
-}
-
-.fraction-v2-equivalence-pair > span,
-.fraction-v2-operands > span,
-.fraction-v2-operation-result > span {
-    color: var(--v2-muted);
-    font-size: 1.8rem;
-}
-
-.fraction-v2-operation-result {
+    top: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    min-height: 8rem;
-    padding: 1.5rem;
-    border: 1px solid rgba(56, 189, 248, 0.24);
-    border-radius: 1rem;
-    background: rgba(56, 189, 248, 0.06);
-    font-size: clamp(1.2rem, 3vw, 2rem);
+    gap: 4px;
+    font-size: 24px;
+    transform: translateX(-50%);
+}
+
+.fraction-v2-line-marker::after {
+    width: 22px;
+    height: 22px;
+    border: 2.5px solid var(--ink);
+    border-radius: 50%;
+    background: var(--success);
+    content: "";
 }
 
 .fraction-v2-proportion-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.75rem;
+    gap: 12px;
+    width: 100%;
 }
 
 .fraction-v2-proportion-grid article {
-    display: grid;
-    min-height: 8rem;
-    place-items: center;
-    align-content: center;
-    gap: 0.65rem;
-    padding: 1rem;
-    border: 1px solid var(--v2-line);
-    border-radius: 1rem;
-    background: rgba(3, 10, 20, 0.28);
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    border: 1.5px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+    font-size: 24px;
 }
 
-.fraction-v2-proportion-grid article span {
-    color: var(--v2-muted);
-    font-size: 0.75rem;
+.fraction-v2-proportion-grid article > span {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
 }
 
-.fraction-v2-proportion-grid article strong,
-.fraction-v2-proportion-grid article .math-text {
-    color: #a7f3d0;
-    font-size: 1.2rem;
+.fraction-v2-proportion-grid strong {
+    font-family: "Fraunces", Georgia, serif;
 }
 
-.fraction-v2-practice-switch {
-    display: flex;
-    width: fit-content;
-    gap: 0.35rem;
-    margin-bottom: 2rem;
-    padding: 0.3rem;
-    border: 1px solid var(--v2-line);
-    border-radius: 0.95rem;
-    background: rgba(7, 17, 31, 0.72);
+.fraction-v2 .fraction-v2-insight {
+    max-width: 540px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+    text-align: center;
 }
 
-.fraction-v2-practice-switch button {
-    min-height: 2.7rem;
-    padding: 0.55rem 0.85rem;
-    border: 1px solid transparent;
-    border-radius: 0.7rem;
-    color: var(--v2-muted);
-    background: transparent;
-    cursor: pointer;
+.fraction-v2-pizza {
+    width: 240px;
+    height: 240px;
+    border: 3px solid var(--ink);
+    border-radius: 50%;
+    background:
+        repeating-conic-gradient(from -90deg, transparent 0 calc(var(--slice-angle) - 1.2deg), var(--ink) calc(var(--slice-angle) - 1.2deg) var(--slice-angle)),
+        conic-gradient(from -90deg, var(--coral) 0 var(--selected-angle), #ffffff var(--selected-angle) 360deg);
+    box-shadow: var(--shadow);
 }
 
-.fraction-v2-practice-switch button.active {
-    border-color: rgba(56, 189, 248, 0.3);
-    color: var(--v2-text);
-    background: rgba(56, 189, 248, 0.1);
-}
-
-.fraction-v2-bank-toolbar {
-    display: grid;
-    grid-template-columns: auto minmax(180px, 1fr) minmax(0, 2fr) auto;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1.2rem;
-    padding: 1rem;
-    border: 1px solid var(--v2-line);
-    border-radius: 1rem;
-    background: var(--v2-panel);
-}
-
-.fraction-v2-bank-toolbar label {
-    color: var(--v2-muted);
-    font-size: 0.82rem;
-}
-
-.fraction-v2-bank-toolbar select,
-.fraction-v2-bank-card textarea {
-    width: 100%;
-    border: 1px solid var(--v2-line);
-    border-radius: 0.75rem;
-    color: var(--v2-text);
-    background: #0a192b;
-}
-
-.fraction-v2-bank-toolbar select {
-    min-height: 2.65rem;
-    padding: 0.55rem 0.7rem;
-}
-
-.fraction-v2-difficulty-filter {
-    display: flex;
-    justify-content: center;
-    gap: 0.3rem;
-}
-
-.fraction-v2-difficulty-filter button {
-    min-height: 2.4rem;
-    padding: 0.4rem 0.6rem;
-    border: 1px solid var(--v2-line);
-    border-radius: 0.65rem;
-    color: var(--v2-muted);
-    background: rgba(148, 163, 184, 0.05);
-    cursor: pointer;
-    font-size: 0.75rem;
-}
-
-.fraction-v2-difficulty-filter button[aria-pressed="true"] {
-    border-color: rgba(56, 189, 248, 0.5);
-    color: #bae6fd;
-    background: rgba(56, 189, 248, 0.12);
-}
-
-.fraction-v2-bank-toolbar > strong {
-    min-width: max-content;
-    color: #a7f3d0;
-}
-
-.fraction-v2-bank-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-.fraction-v2-bank-card {
-    display: grid;
-    align-content: start;
-    gap: 0.85rem;
-    min-height: 22rem;
-    padding: 1.25rem;
-    border: 1px solid var(--v2-line);
-    border-radius: 1.2rem;
-    background: var(--v2-panel);
-}
-
-.fraction-v2-bank-card.complete {
-    border-color: rgba(52, 211, 153, 0.34);
-    background: linear-gradient(160deg, rgba(52, 211, 153, 0.06), var(--v2-panel));
-}
-
-.fraction-v2-bank-card-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    color: var(--v2-muted);
-}
-
-.fraction-v2-bank-card-meta span {
-    display: grid;
-    width: 1.8rem;
-    height: 1.8rem;
-    place-items: center;
-    border-radius: 0.55rem;
-    color: #7dd3fc;
-    background: rgba(56, 189, 248, 0.1);
-    font-size: 0.72rem;
-    font-weight: 800;
-}
-
-.fraction-v2-bank-card-meta em {
-    font-size: 0.72rem;
-    font-style: normal;
-}
-
-.fraction-v2-bank-card-meta strong {
-    margin-inline-start: auto;
-    color: var(--v2-green);
-}
-
-.fraction-v2-bank-question {
-    min-height: 4.5rem;
-    line-height: 1.65;
-}
-
-.fraction-v2-bank-card > label {
-    color: var(--v2-muted);
-    font-size: 0.78rem;
-}
-
-.fraction-v2-bank-card textarea {
-    min-height: 4.5rem;
-    padding: 0.7rem;
-    resize: vertical;
-}
-
-.fraction-v2-bank-card > small {
-    color: var(--v2-muted);
-}
-
-.fraction-v2-bank-solution {
-    display: grid;
-    gap: 1rem;
-    padding: 1rem;
-    border: 1px solid rgba(52, 211, 153, 0.25);
-    border-radius: 0.9rem;
-    color: #d6f9ea;
-    background: rgba(52, 211, 153, 0.06);
-    line-height: 1.7;
-}
-
-.fraction-v2-bank-solution > div {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-}
+/* ---------- Games ---------- */
 
 .fraction-v2-game-tabs {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.75rem;
-    margin-bottom: 1.2rem;
+    gap: 12px;
+    margin-bottom: 24px;
 }
 
 .fraction-v2-game-tabs button {
-    display: grid;
-    min-height: 7.2rem;
-    justify-items: start;
-    align-content: center;
-    gap: 0.3rem;
-    padding: 1rem;
-    border: 1px solid var(--v2-line);
-    border-radius: 1rem;
-    color: var(--v2-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 16px 18px;
+    border: 1.5px solid var(--ink);
+    border-radius: 16px;
+    background: var(--card);
     text-align: start;
-    background: var(--v2-panel);
-    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
 .fraction-v2-game-tabs button > span {
-    color: #7dd3fc;
-    font-size: 1.35rem;
-    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid var(--ink);
+    border-radius: 11px;
+    background: #dde7f7;
+    font-size: 20px;
 }
 
+.fraction-v2-game-tabs button:nth-child(2) > span { background: var(--coral-tint); }
+.fraction-v2-game-tabs button:nth-child(3) > span { background: #e8e0f7; }
+.fraction-v2-game-tabs button:nth-child(4) > span { background: var(--success-tint); }
+
 .fraction-v2-game-tabs button strong {
-    color: var(--v2-text);
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 600;
 }
 
 .fraction-v2-game-tabs button small {
-    line-height: 1.35;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.fraction-v2-game-tabs button:hover {
+    transform: translate(-1px, -1px);
 }
 
 .fraction-v2-game-tabs button.active {
-    border-color: rgba(56, 189, 248, 0.55);
-    background: linear-gradient(145deg, rgba(56, 189, 248, 0.11), var(--v2-panel));
+    border-width: 2px;
+    background: var(--mustard-tint);
+    box-shadow: var(--shadow);
+}
+
+.fraction-v2-game-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px;
+    border: 2px solid var(--ink);
+    border-radius: 24px;
+    background: var(--card);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+}
+
+.fraction-v2-game-card > p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 18px;
+}
+
+.fraction-v2-game-score,
+.fraction-v2-memory-meta span {
+    padding: 5px 14px;
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    background: var(--mustard-tint);
+    font-weight: 700;
+}
+
+.fraction-v2-game-prompt,
+.fraction-v2-pizza-order {
+    font-size: 48px;
 }
 
 .fraction-v2-pizza-order {
-    margin: 1rem auto;
-    color: #fde68a;
-    font-size: 2rem;
+    padding: 8px 22px;
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    background: var(--mustard-tint);
+    transform: rotate(-2deg);
 }
 
-.fraction-v2-pizza {
-    width: min(16rem, 70vw);
-    aspect-ratio: 1;
-    margin: 1rem auto;
-    border: 0.7rem solid #8b4513;
-    border-radius: 50%;
-    background:
-        repeating-conic-gradient(from -90deg, transparent 0 calc(var(--slice-angle) - 1.8deg), rgba(7, 17, 31, 0.8) calc(var(--slice-angle) - 1.8deg) var(--slice-angle)),
-        conic-gradient(from -90deg, #fbbf24 0 var(--selected-angle), #4b5563 var(--selected-angle) 360deg);
-    box-shadow: inset 0 0 0 0.35rem #f59e0b, 0 18px 45px rgba(0, 0, 0, 0.25);
+.fraction-v2-game-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.fraction-v2-game-options button {
+    min-width: 100px;
+    min-height: 88px;
+    padding: 10px 18px;
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    background: var(--card);
+    font-size: 28px;
+}
+
+.fraction-v2-game-options button:hover {
+    background: var(--paper-deep);
+}
+
+.fraction-v2-game-options button.correct {
+    border-color: var(--success);
+    background: var(--success-tint);
+}
+
+.fraction-v2-game-options button.incorrect {
+    border-color: var(--error);
+    background: var(--error-tint);
+}
+
+.fraction-v2-game-card .fraction-v2-answer-row,
+.fraction-v2-game-card .fraction-v2-task-expression {
+    width: 100%;
 }
 
 .fraction-v2-pizza-count {
-    font-size: 1.1rem;
+    font-size: 20px;
+}
+
+.fraction-v2-pizza-count strong {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 32px;
 }
 
 .fraction-v2-pizza-controls {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.55rem;
-    margin: 1rem 0;
+    gap: 10px;
 }
 
-.fraction-v2-pizza-controls button {
-    min-width: 3rem;
-    min-height: 2.8rem;
-    padding: 0.6rem 0.85rem;
-    border: 1px solid var(--v2-line);
-    border-radius: 0.75rem;
-    background: rgba(148, 163, 184, 0.08);
-    cursor: pointer;
+.fraction-v2-pizza-controls button:not(.fraction-v2-primary) {
+    min-width: 52px;
+    min-height: 48px;
+    padding: 8px 16px;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    background: var(--card);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.fraction-v2-pizza-controls button:disabled {
+    opacity: 0.4;
 }
 
 .fraction-v2-memory-meta {
     display: flex;
-    justify-content: space-between;
-    color: var(--v2-muted);
-    font-size: 0.82rem;
+    gap: 12px;
 }
 
 .fraction-v2-memory-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.6rem;
-    margin: 1.2rem 0;
+    gap: 12px;
+    width: 100%;
+    max-width: 560px;
 }
 
 .fraction-v2-memory-grid button {
-    display: grid;
-    min-height: 6rem;
-    place-items: center;
-    border: 1px solid rgba(56, 189, 248, 0.25);
-    border-radius: 0.9rem;
-    color: #7dd3fc;
-    background:
-        linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(167, 139, 250, 0.08)),
-        #0a192b;
-    cursor: pointer;
-    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    color: var(--mustard);
+    background: var(--ink);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 32px;
+    font-weight: 700;
+    transition: transform 0.15s ease;
+}
+
+.fraction-v2-memory-grid button:hover {
+    transform: translateY(-2px);
 }
 
 .fraction-v2-memory-grid button.visible {
-    color: var(--v2-text);
-    background: rgba(226, 232, 240, 0.08);
+    color: var(--ink);
+    background: var(--card);
+    font-family: var(--font-body);
+    font-size: 24px;
+    font-weight: 400;
 }
 
 .fraction-v2-memory-grid button.matched {
-    border-color: rgba(52, 211, 153, 0.55);
-    color: #a7f3d0;
-    background: rgba(52, 211, 153, 0.1);
+    border-color: var(--success);
+    background: var(--success-tint);
 }
 
-.fraction-v2-race-track,
-.fraction-v2-diagnostic-progress {
-    height: 0.55rem;
+.fraction-v2-race-track {
+    width: 100%;
+    height: 16px;
     overflow: hidden;
+    border: 2px solid var(--ink);
     border-radius: 999px;
-    background: rgba(148, 163, 184, 0.14);
+    background: var(--paper);
 }
 
-.fraction-v2-race-track span,
-.fraction-v2-diagnostic-progress span {
+.fraction-v2-race-track span {
     display: block;
     height: 100%;
-    border-radius: inherit;
-    background: linear-gradient(90deg, var(--v2-blue), var(--v2-green));
+    background: var(--success);
+    transition: width 0.3s ease;
 }
 
-.fraction-v2-race-game > label {
-    display: block;
-    margin-bottom: 0.45rem;
-    color: var(--v2-muted);
-    text-align: start;
-    font-size: 0.8rem;
-}
+/* ---------- Responsive ---------- */
 
-.fraction-v2-diagnostic-card,
-.fraction-v2-diagnostic-result {
-    width: min(780px, 100%);
-    margin: 0 auto;
-    padding: clamp(1.25rem, 4vw, 2.5rem);
-    border: 1px solid var(--v2-line);
-    border-radius: 1.4rem;
-    background: var(--v2-panel);
-}
-
-.fraction-v2-diagnostic-card > small {
-    display: block;
-    margin-top: 1rem;
-    color: var(--v2-muted);
-}
-
-.fraction-v2-diagnostic-card h2 {
-    margin: 1rem 0 1.4rem;
-    font-size: clamp(1.4rem, 4vw, 2.2rem);
-}
-
-.fraction-v2-diagnostic-options {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.7rem;
-    margin-bottom: 1rem;
-}
-
-.fraction-v2-diagnostic-options button {
-    min-height: 5.5rem;
-    border: 1px solid var(--v2-line);
-    border-radius: 0.9rem;
-    background: rgba(148, 163, 184, 0.06);
-    cursor: pointer;
-    font-size: 1.1rem;
-}
-
-.fraction-v2-diagnostic-options button.success {
-    border-color: var(--v2-green);
-    background: rgba(52, 211, 153, 0.1);
-}
-
-.fraction-v2-diagnostic-options button.error {
-    border-color: var(--v2-rose);
-    background: rgba(251, 113, 133, 0.1);
-}
-
-.fraction-v2-diagnostic-card > .fraction-v2-primary {
-    margin-top: 1rem;
-}
-
-.fraction-v2-diagnostic-result {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.fraction-v2-diagnostic-result > strong {
-    color: #a7f3d0;
-    font-size: 2rem;
-}
-
-.fraction-v2-task-layout {
-    display: grid;
-    grid-template-columns: minmax(170px, 0.24fr) minmax(0, 1fr);
-    gap: 1.2rem;
-}
-
-.fraction-v2-task-list {
-    grid-template-columns: 1fr;
-}
-
-.fraction-v2-task-list button {
-    font-size: 0.78rem;
-}
-
-.fraction-v2-task-card {
-    min-height: 34rem;
-}
-
-.fraction-v2-task-card.success {
-    border-color: rgba(52, 211, 153, 0.38);
-}
-
-.fraction-v2-task-card.error {
-    border-color: rgba(251, 113, 133, 0.38);
-}
-
-.fraction-v2-task-meta {
-    display: flex;
-    justify-content: space-between;
-    color: var(--v2-muted);
-    font-size: 0.8rem;
-}
-
-.fraction-v2-task-meta strong {
-    color: #fde68a;
-}
-
-.fraction-v2-task-card h2 {
-    max-width: 760px;
-    margin: 1.2rem 0;
-    font-size: clamp(1.4rem, 3vw, 2.1rem);
-    line-height: 1.3;
-}
-
-.fraction-v2-task-card > label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--v2-muted);
-    font-size: 0.85rem;
-}
-
-.fraction-v2-answer-row {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 0.7rem;
-}
-
-.fraction-v2-answer-row input {
-    min-width: 0;
-    min-height: 3rem;
-    padding: 0.7rem 0.9rem;
-    border: 1px solid var(--v2-line);
-    border-radius: 0.8rem;
-    color: var(--v2-text);
-    background: rgba(3, 10, 20, 0.5);
-}
-
-.fraction-v2-hint-button {
-    margin: 1rem 0;
-}
-
-.fraction-v2-feedback.success,
-.fraction-v2-game-feedback.success {
-    border-color: rgba(52, 211, 153, 0.28);
-    color: #a7f3d0;
-    background: rgba(52, 211, 153, 0.07);
-}
-
-.fraction-v2-feedback.error,
-.fraction-v2-game-feedback.error {
-    border-color: rgba(251, 113, 133, 0.28);
-    color: #fecdd3;
-    background: rgba(251, 113, 133, 0.07);
-}
-
-.fraction-v2-feedback .math-text {
-    display: block;
-    margin-top: 0.5rem;
-}
-
-.fraction-v2-task-navigation {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-}
-
-.fraction-v2-game-card {
-    width: min(780px, 100%);
-    min-height: 0;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.fraction-v2-game-score {
-    width: fit-content;
-    margin-inline-start: auto;
-    padding: 0.35rem 0.65rem;
-    border-radius: 999px;
-    color: #a7f3d0;
-    background: rgba(52, 211, 153, 0.1);
-    font-size: 0.8rem;
-}
-
-.fraction-v2-game-prompt {
-    margin-inline: auto;
-    font-size: 2.3rem;
-}
-
-.fraction-v2-game-options {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-}
-
-.fraction-v2-game-options button {
-    min-height: 5rem;
-    border: 1px solid var(--v2-line);
-    border-radius: 1rem;
-    background: rgba(148, 163, 184, 0.06);
-    cursor: pointer;
-    font-size: 1.2rem;
-}
-
-.fraction-v2-game-options button.correct {
-    border-color: var(--v2-green);
-    background: rgba(52, 211, 153, 0.12);
-}
-
-.fraction-v2-game-options button.incorrect {
-    border-color: var(--v2-rose);
-    background: rgba(251, 113, 133, 0.12);
-}
-
-.fraction-v2-game-card > .fraction-v2-primary {
-    margin-top: 1rem;
-}
-
-@media (max-width: 980px) {
-    .fraction-v2-header {
-        grid-template-columns: 1fr;
-        gap: 0.65rem;
-    }
-
-    .fraction-v2-nav {
-        justify-content: flex-start;
-    }
-
+@media (max-width: 1100px) {
     .fraction-v2-path-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .fraction-v2-path-card:last-child {
-        grid-column: 1 / -1;
-        min-height: 10rem;
-    }
-
-    .fraction-v2-learning-layout,
-    .fraction-v2-lab-board,
-    .fraction-v2-task-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .fraction-v2-bank-toolbar {
-        grid-template-columns: auto minmax(0, 1fr);
-    }
-
-    .fraction-v2-difficulty-filter {
-        grid-column: 1 / -1;
-        justify-content: flex-start;
-        overflow-x: auto;
-    }
-
+    .fraction-v2-tools-grid,
     .fraction-v2-game-tabs {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .fraction-v2-stage-tabs,
-    .fraction-v2-task-list {
-        grid-template-columns: repeat(5, minmax(150px, 1fr));
-        padding-bottom: 0.4rem;
-        overflow-x: auto;
+    .fraction-v2-hero {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+        gap: 32px;
+    }
+
+    .fraction-v2-collage {
+        transform: scale(0.82);
+        transform-origin: center;
+    }
+}
+
+@media (max-width: 900px) {
+    .fraction-v2-hero {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .fraction-v2-collage {
+        display: none;
+    }
+
+    .fraction-v2-learning,
+    .fraction-v2-task-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .fraction-v2-lesson {
+        order: -1;
     }
 
     .fraction-v2-task-list {
-        grid-template-columns: repeat(4, minmax(105px, 1fr));
+        flex-direction: row;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 6px;
+    }
+
+    .fraction-v2-task-list button {
+        flex-shrink: 0;
+        max-width: 220px;
+    }
+
+    .fraction-v2-lab-board {
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .fraction-v2-controls {
         border-inline-end: 0;
-        border-bottom: 1px solid var(--v2-line);
+        border-bottom: 1.5px solid var(--line);
+    }
+
+    .fraction-v2-bank-grid {
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 760px) {
+    .fraction-v2 {
+        font-size: 16px;
+    }
+
     .fraction-v2-header {
-        position: relative;
-        padding: 0.65rem 0.75rem 0;
+        border-bottom: 1.5px solid var(--line);
+    }
+
+    .fraction-v2-topbar {
+        gap: 8px;
+        min-height: 60px;
+    }
+
+    .fraction-v2-brand-name,
+    .fraction-v2-breadcrumb {
+        display: none;
+    }
+
+    .fraction-v2-brand {
+        order: 2;
     }
 
     .fraction-v2-brand-mark {
-        width: 2.35rem;
-        height: 2.35rem;
-        border-radius: 0.7rem;
+        width: 26px;
+        height: 26px;
+        border-radius: 7px;
+    }
+
+    .fraction-v2-mobile-back {
+        display: flex;
+        order: 1;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        margin-inline-start: -10px;
+        color: var(--ink);
+    }
+
+    .fraction-v2-mobile-title {
+        display: block;
+        flex-grow: 1;
+        order: 3;
+        font-family: var(--font-display);
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .fraction-v2-language {
+        order: 4;
+    }
+
+    .fraction-v2-language button {
+        min-width: 34px;
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+
+    .fraction-v2-nav {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 30;
+        justify-content: space-around;
+        gap: 0;
+        padding: 6px 6px calc(8px + env(safe-area-inset-bottom));
+        border-top: 1.5px solid var(--ink);
+        border-bottom: 0;
+        background: var(--card);
     }
 
     .fraction-v2-nav button {
-        min-height: 2.25rem;
-        padding: 0.4rem 0.55rem;
-        font-size: 0.76rem;
+        flex: 1;
+        flex-direction: column;
+        gap: 3px;
+        min-height: 56px;
+        margin: 0;
+        padding: 4px 2px;
+        border-bottom: 0;
+        font-size: 12px;
     }
 
-    .fraction-v2-progress {
-        margin-inline: -0.75rem;
+    .fraction-v2-nav button.secondary {
+        display: none;
+    }
+
+    .fraction-v2-nav .fraction-v2-nav-more {
+        display: inline-flex;
+    }
+
+    .fraction-v2-nav button svg {
+        box-sizing: content-box;
+        padding: 3px 12px;
+        border-radius: 999px;
+    }
+
+    .fraction-v2-nav button.active {
+        color: var(--ink);
+    }
+
+    .fraction-v2-nav button.active svg {
+        color: var(--coral-ink);
+        background: var(--coral-tint);
+    }
+
+    .fraction-v2-more-menu {
+        position: fixed;
+        right: 12px;
+        bottom: calc(84px + env(safe-area-inset-bottom));
+        z-index: 31;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 220px;
+        padding: 8px;
+        border: 2px solid var(--ink);
+        border-radius: 18px;
+        background: var(--card);
+        box-shadow: var(--shadow);
+    }
+
+    .fraction-v2[dir="rtl"] .fraction-v2-more-menu {
+        right: auto;
+        left: 12px;
+    }
+
+    .fraction-v2-more-menu button {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 48px;
+        padding: 8px 14px;
+        border: 0;
+        border-radius: 12px;
+        background: none;
+        font-weight: 700;
+        text-align: start;
+    }
+
+    .fraction-v2-more-menu button.active {
+        color: var(--coral-ink);
+        background: var(--coral-tint);
     }
 
     .fraction-v2-main {
-        width: min(100% - 1rem, 1180px);
-        padding-top: 1rem;
+        padding: 24px 20px calc(110px + env(safe-area-inset-bottom));
     }
 
     .fraction-v2-hero {
-        padding: 1.5rem;
-        border-radius: 1.25rem;
+        gap: 16px;
+        padding-top: 4px;
     }
 
-    .fraction-v2-hero h1,
-    .fraction-v2-page-intro h1 {
-        letter-spacing: -0.04em;
+    .fraction-v2-hero h1 {
+        font-size: 52px;
     }
 
-    .fraction-v2-hero-actions,
-    .fraction-v2-lesson-actions {
-        display: grid;
+    .fraction-v2-hero-copy {
+        gap: 16px;
     }
 
-    .fraction-v2-hero-actions button,
-    .fraction-v2-lesson-actions button {
-        width: 100%;
+    .fraction-v2-hero-copy > p {
+        font-size: 17px;
+    }
+
+    .fraction-v2-hero-actions button {
+        flex: 1 1 100%;
+    }
+
+    .fraction-v2-continue {
+        flex-wrap: wrap;
+        gap: 14px;
+        padding: 16px;
+    }
+
+    .fraction-v2-continue .fraction-v2-chip {
+        display: none;
+    }
+
+    .fraction-v2-continue .fraction-v2-stage-button {
+        flex: 1 1 100%;
+    }
+
+    .fraction-v2-continue-text {
+        flex-basis: calc(100% - 76px);
+    }
+
+    .fraction-v2-continue-text strong {
+        font-size: 18px;
     }
 
     .fraction-v2-path-grid,
-    .fraction-v2-principles {
-        grid-template-columns: 1fr;
+    .fraction-v2-tools-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
     }
 
-    .fraction-v2-path-card,
-    .fraction-v2-path-card:last-child {
-        grid-column: auto;
-        min-height: 10rem;
+    .fraction-v2-path-card {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        min-height: 0;
+        padding: 12px 14px;
     }
 
-    .fraction-v2-principles {
-        gap: 0;
+    .fraction-v2-path-card.current {
+        transform: none;
     }
 
-    .fraction-v2-section-heading > span {
-        width: 3.2rem;
-        height: 3.2rem;
+    .fraction-v2-path-card strong {
+        flex: 1 1 0;
+        font-size: 17px;
     }
 
-    .fraction-v2-learning-layout,
-    .fraction-v2-task-layout {
-        gap: 0.7rem;
+    .fraction-v2-path-card small {
+        flex-basis: 100%;
+        margin-top: 0;
+        padding-inline-start: 50px;
+    }
+
+    .fraction-v2-path-card .fraction-v2-meter {
+        flex-basis: calc(100% - 50px);
+        margin-inline-start: 50px;
+    }
+
+    .fraction-v2-stage-badge {
+        width: 34px;
+        height: 34px;
+    }
+
+    .fraction-v2-tool-card {
+        display: grid;
+        grid-template-columns: 50px minmax(0, 1fr);
+        column-gap: 14px;
+        row-gap: 2px;
+        padding: 14px;
+    }
+
+    .fraction-v2-tool-icon {
+        grid-row: span 2;
     }
 
     .fraction-v2-lesson,
     .fraction-v2-task-card,
+    .fraction-v2-diagnostic-card,
     .fraction-v2-game-card {
-        min-height: 0;
-        padding: 1.25rem;
-        border-radius: 1.1rem;
+        padding: 22px 18px;
+        border-radius: 20px;
+        box-shadow: var(--shadow);
     }
 
-    .fraction-v2-lab-tabs {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        width: 100%;
+    .fraction-v2 .fraction-v2-lesson-body {
+        font-size: 17px;
     }
 
-    .fraction-v2-lab-tabs button {
-        padding-inline: 0.4rem;
-        font-size: 0.75rem;
+    .fraction-v2-takeaway {
+        padding: 14px 16px;
+    }
+
+    .fraction-v2-takeaway p {
+        font-size: 19px;
+    }
+
+    .fraction-v2-next {
+        flex: 1 1 100%;
+        justify-content: space-between;
+        margin-inline-start: 0;
+    }
+
+    .fraction-v2-diagnostic-options {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .fraction-v2-answer-row {
+        flex-direction: column;
     }
 
     .fraction-v2-visuals {
-        padding: 1rem;
-    }
-
-    .fraction-v2-units {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        min-height: 320px;
+        padding: 24px 16px;
     }
 
     .fraction-v2-equivalence-pair,
     .fraction-v2-operands {
-        grid-template-columns: 1fr;
-    }
-
-    .fraction-v2-proportion-grid,
-    .fraction-v2-bank-grid,
-    .fraction-v2-game-tabs {
-        grid-template-columns: 1fr;
-    }
-
-    .fraction-v2-practice-switch {
-        display: grid;
-        width: 100%;
-    }
-
-    .fraction-v2-bank-toolbar {
-        grid-template-columns: 1fr;
-    }
-
-    .fraction-v2-bank-toolbar label {
-        margin-bottom: -0.4rem;
-    }
-
-    .fraction-v2-difficulty-filter {
-        grid-column: auto;
-    }
-
-    .fraction-v2-bank-card {
-        min-height: 0;
-    }
-
-    .fraction-v2-memory-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .fraction-v2-diagnostic-options {
-        grid-template-columns: 1fr;
-    }
-
-    .fraction-v2-diagnostic-result {
-        align-items: stretch;
         flex-direction: column;
     }
 
-    .fraction-v2-route-footer {
-        align-items: stretch;
-        flex-direction: column;
+    .fraction-v2-proportion-grid {
+        grid-template-columns: minmax(0, 1fr);
     }
 
-    .fraction-v2-equivalence-pair > span,
-    .fraction-v2-operands > span {
-        justify-self: center;
+    .fraction-v2-pizza {
+        width: 200px;
+        height: 200px;
     }
 
-    .fraction-v2-operation-result {
-        flex-wrap: wrap;
+    .fraction-v2-game-tabs button {
+        padding: 12px;
     }
 
-    .fraction-v2-answer-row {
-        grid-template-columns: 1fr;
+    .fraction-v2-game-tabs button small {
+        display: none;
     }
 
-    .fraction-v2-game-options {
-        grid-template-columns: 1fr;
+    .fraction-v2-bank-toolbar > strong {
+        margin-inline-start: 0;
     }
 }
 
@@ -1584,9 +2485,7 @@
     .fraction-v2 *,
     .fraction-v2 *::before,
     .fraction-v2 *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
+        transition: none !important;
+        animation: none !important;
     }
 }
