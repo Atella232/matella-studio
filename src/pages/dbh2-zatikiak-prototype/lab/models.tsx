@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 import { MathText } from '../../../components/MathText'
-import { toLatex, toMixedText, toNumber, toText, type FractionValue } from '../math/fraction'
+import { toMixedText, type FractionValue } from '../math/fraction'
 
 export function FractionModel({ value, label }: { value: FractionValue; label: string }) {
     // Keep the parts the learner chose: 4/6 must be drawn in sixths, not simplified to thirds
@@ -38,23 +38,6 @@ export function FractionModel({ value, label }: { value: FractionValue; label: s
             {absoluteNumerator > normalized.denominator && (
                 <span className="fraction-v2-mixed">{toMixedText(normalized)}</span>
             )}
-        </div>
-    )
-}
-
-export function NumberLineModel({ value, label }: { value: FractionValue; label: string }) {
-    const numericValue = toNumber(value)
-    const minimum = Math.floor(Math.min(0, numericValue)) - 1
-    const maximum = Math.ceil(Math.max(0, numericValue)) + 1
-    const position = ((numericValue - minimum) / (maximum - minimum)) * 100
-
-    return (
-        <div className="fraction-v2-number-line" role="img" aria-label={`${label}: ${toText(value)}`}>
-            <span className="fraction-v2-line-start">{minimum}</span>
-            <span className="fraction-v2-line-end">{maximum}</span>
-            <span className="fraction-v2-line-marker" style={{ insetInlineStart: `${position}%` }}>
-                <MathText text={`$${toLatex(value)}$`} />
-            </span>
         </div>
     )
 }

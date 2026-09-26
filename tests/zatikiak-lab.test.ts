@@ -4,14 +4,26 @@ import {
     clearParts,
     fillAllParts,
     gridLayout,
+    initialNumberLineState,
     initialPartsState,
+    initialWallState,
     labChallengeIds,
     labToolForTopic,
     labTools,
+    moveNumberLinePoint,
+    numberLineBounds,
+    numberLineChallenges,
     partsChallenges,
+    selectWallPiece,
+    setNumberLineDenominator,
+    setNumberLineRange,
     setPartsDenominator,
     setPartsUnits,
+    setWallMode,
     togglePart,
+    wallChallenges,
+    wallEquivalents,
+    type NumberLineState,
     type PartsState
 } from '../src/pages/dbh2-zatikiak-prototype/lab/labTools.ts'
 import { theoryTopics } from '../src/pages/dbh2-zatikiak-prototype/content.ts'
@@ -82,4 +94,53 @@ test('every lab tool and lesson link points to something that exists', () => {
         assert.ok(topicIds.has(topic as never), `unknown lesson ${topic}`)
         assert.ok(toolIds.has(tool), `unknown tool ${tool}`)
     }
+})
+
+test('number line keeps the point on the chosen range and jumps', () => {
+    let state: NumberLineState = { ...initialNumberLineState, range: '0-1', denominator: 4, numerator: 3 }
+    state = setNumberLineDenominator(state, 8)
+    assert.equal(state.numerator, 6, '3/4 stays in place as 6/8')
+    state = setNumberLineDenominator(state, 3)
+    assert.equal(state.numerator, 2, 'rounds to the nearest third')
+    state = moveNumberLinePoint(state, 99)
+    assert.equal(state.numerator, 3, 'cannot leave the range')
+    state = setNumberLineRange({ ...state, numerator: 7, range: '0-3' }, '0-1')
+    assert.equal(state.numerator, 3)
+    assert.deepEqual(numberLineBounds({ range: '-2-2', denominator: 2, numerator: 0 }), { min: -4, max: 4 })
+})
+
+test('number line challenges accept every correct placement', () => {
+    const [threeQuarters, sevenThirds, minusHalf, between] = numberLineChallenges
+    assert.ok(threeQuarters.isSolved({ range: '0-1', denominator: 8, numerator: 6 }))
+    assert.ok(!threeQuarters.isSolved(initialNumberLineState))
+    assert.ok(sevenThirds.isSolved({ range: '0-3', denominator: 3, numerator: 7 }))
+    assert.ok(minusHalf.isSolved({ range: '-2-2', denominator: 4, numerator: -2 }))
+    assert.ok(between.isSolved({ range: '0-1', denominator: 12, numerator: 5 }))
+    assert.ok(!between.isSolved({ range: '0-1', denominator: 12, numerator: 4 }), '1/3 itself is not between')
+    assert.ok(!between.isSolved({ range: '0-1', denominator: 2, numerator: 1 }), '1/2 itself is not between')
+})
+
+test('fraction wall finds equivalents and pairs pieces for comparison', () => {
+    assert.deepEqual(wallEquivalents({ numerator: 2, denominator: 3 }).map((piece) => `${piece.numerator}/${piece.denominator}`), ['2/3', '4/6', '6/9', '8/12'])
+    assert.equal(wallEquivalents({ numerator: 1, denominator: 7 }).length, 1)
+
+    let state = selectWallPiece(initialWallState, { numerator: 1, denominator: 7 })
+    state = setWallMode(state, 'compare')
+    assert.equal(state.first, null, 'a new mode starts a fresh selection')
+    state = selectWallPiece(state, { numerator: 2, denominator: 3 })
+    state = selectWallPiece(state, { numerator: 3, denominator: 4 })
+    assert.ok(wallChallenges[3].isSolved(state))
+    state = selectWallPiece(state, { numerator: 1, denominator: 2 })
+    assert.deepEqual(state, { mode: 'compare', first: { numerator: 1, denominator: 2 }, second: null }, 'a third click starts a new pair')
+})
+
+test('fraction wall challenges', () => {
+    const pick = (numerator: number, denominator: number) => selectWallPiece(initialWallState, { numerator, denominator })
+    const [equivalent, larger, unit] = wallChallenges
+    assert.ok(equivalent.isSolved(pick(8, 12)))
+    assert.ok(!equivalent.isSolved(pick(2, 3)), 'needs a denominator greater than 3')
+    assert.ok(larger.isSolved(pick(5, 8)))
+    assert.ok(!larger.isSolved(pick(3, 5)))
+    assert.ok(unit.isSolved(pick(1, 7)))
+    assert.ok(!unit.isSolved(pick(1, 8)))
 })

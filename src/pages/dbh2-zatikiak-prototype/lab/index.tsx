@@ -3,12 +3,15 @@ import { learningStages, type PrototypeLanguage, type TheoryTopicId } from '../c
 import { labTools, type LabToolId } from './labTools'
 import { useLabText } from './useLabText'
 import { PartsTool } from './PartsTool'
-import { CompareTool, EquivalenceTool, NumberLineTool, OperationsTool, ProportionTool, type ToolProps } from './ClassicTools'
+import { CompareTool, EquivalenceTool, OperationsTool, ProportionTool, type ToolProps } from './ClassicTools'
+import { NumberLineTool } from './NumberLineTool'
+import { WallTool } from './WallTool'
 import './Lab.css'
 
 const toolComponents: Record<LabToolId, (props: ToolProps) => JSX.Element> = {
     parts: PartsTool,
     numberline: NumberLineTool,
+    wall: WallTool,
     equivalence: EquivalenceTool,
     compare: CompareTool,
     operations: OperationsTool,

@@ -1,6 +1,7 @@
 import type { FractionStageId, LocalizedText, TheoryTopicId } from '../content.ts'
+import { compare, equals, fraction, type FractionValue } from '../math/fraction.ts'
 
-export type LabToolId = 'parts' | 'numberline' | 'equivalence' | 'compare' | 'operations' | 'proportion'
+export type LabToolId = 'parts' | 'numberline' | 'wall' | 'equivalence' | 'compare' | 'operations' | 'proportion'
 
 export interface LabToolInfo {
     id: LabToolId
@@ -36,9 +37,20 @@ export const labTools: LabToolInfo[] = [
         lessonTopic: 'meaning',
         title: { eu: 'Zenbaki-zuzena', es: 'Recta numérica', ar: 'خط الأعداد' },
         observe: {
-            eu: 'Zatiki bakoitza zuzeneko puntu bat da. Begiratu non geratzen den 0rekiko eta 1ekiko, eta zer gertatzen den zeinuarekin.',
-            es: 'Cada fracción es un punto de la recta. Observa dónde queda respecto a 0 y a 1, y qué pasa con el signo.',
-            ar: 'كل كسر نقطة على خط الأعداد. لاحظ موقعه بالنسبة إلى 0 و1 وماذا يحدث مع الإشارة.'
+            eu: 'Zatiki bakoitza puntu bat da. Izendatzaileak unitate bakoitza zenbat jauzi berdinetan banatzen den adierazten du; zenbakitzaileak, 0tik zenbat jauzi egiten dituzun.',
+            es: 'Cada fracción es un punto. El denominador dice en cuántos saltos iguales se divide cada unidad; el numerador, cuántos saltos das desde el 0.',
+            ar: 'كل كسر نقطة. يبيّن المقام عدد القفزات المتساوية في كل وحدة، ويبيّن البسط عدد القفزات التي تقفزها من 0.'
+        }
+    },
+    {
+        id: 'wall',
+        stage: 'equivalence',
+        lessonTopic: 'equivalence',
+        title: { eu: 'Zatikien horma', es: 'Muro de fracciones', ar: 'جدار الكسور' },
+        observe: {
+            eu: 'Errenkada bakoitza zati berdinetan banatutako unitate bat da. Lerro berera zehazki iristen diren zatikiak baliokideak dira; urrunago iristen dena handiagoa da.',
+            es: 'Cada fila es una unidad partida en trozos iguales. Las fracciones que llegan exactamente a la misma línea son equivalentes; la que llega más lejos es mayor.',
+            ar: 'كل صف وحدة مقسّمة إلى قطع متساوية. الكسور التي تصل تمامًا إلى الخط نفسه متكافئة، والتي تصل أبعد هي الأكبر.'
         }
     },
     {
@@ -89,7 +101,7 @@ export const labTools: LabToolInfo[] = [
 
 /** Lab tool that best illustrates each lesson (lessons without a matching tool are left out) */
 export const labToolForTopic: Partial<Record<TheoryTopicId, LabToolId>> = {
-    meaning: 'parts',
+    meaning: 'numberline',
     representation: 'parts',
     equivalence: 'equivalence',
     simplification: 'equivalence',
@@ -190,4 +202,144 @@ export const partsChallenges: LabChallenge<PartsState>[] = [
     }
 ]
 
-export const labChallengeIds: number[] = partsChallenges.map((challenge) => challenge.id)
+
+/* ---------- Number line ---------- */
+
+export type NumberLineRange = '0-1' | '0-2' | '0-3' | '-2-2'
+
+export const numberLineRanges: Record<NumberLineRange, { min: number; max: number }> = {
+    '0-1': { min: 0, max: 1 },
+    '0-2': { min: 0, max: 2 },
+    '0-3': { min: 0, max: 3 },
+    '-2-2': { min: -2, max: 2 }
+}
+
+export const NUMBER_LINE_LIMITS = { minDenominator: 1, maxDenominator: 12 } as const
+
+export interface NumberLineState {
+    range: NumberLineRange
+    /** Equal jumps in every unit */
+    denominator: number
+    /** Jumps from 0 (negative to the left) */
+    numerator: number
+}
+
+export const initialNumberLineState: NumberLineState = { range: '0-1', denominator: 4, numerator: 1 }
+
+export function numberLineBounds(state: NumberLineState): { min: number; max: number } {
+    const { min, max } = numberLineRanges[state.range]
+    return { min: min * state.denominator, max: max * state.denominator }
+}
+
+export function moveNumberLinePoint(state: NumberLineState, numerator: number): NumberLineState {
+    const { min, max } = numberLineBounds(state)
+    return { ...state, numerator: Math.min(max, Math.max(min, Math.round(numerator))) }
+}
+
+/** Changing the jumps per unit keeps the point as close as possible to where it was */
+export function setNumberLineDenominator(state: NumberLineState, denominator: number): NumberLineState {
+    const next = Math.min(NUMBER_LINE_LIMITS.maxDenominator, Math.max(NUMBER_LINE_LIMITS.minDenominator, denominator))
+    return moveNumberLinePoint({ ...state, denominator: next }, (state.numerator / state.denominator) * next)
+}
+
+export function setNumberLineRange(state: NumberLineState, range: NumberLineRange): NumberLineState {
+    return moveNumberLinePoint({ ...state, range }, state.numerator)
+}
+
+const lineValue = (state: NumberLineState): FractionValue => ({ numerator: state.numerator, denominator: state.denominator })
+
+export const numberLineChallenges: LabChallenge<NumberLineState>[] = [
+    {
+        id: 801,
+        prompt: { eu: 'Kokatu 3/4 zuzenean.', es: 'Coloca 3/4 en la recta.', ar: 'ضع 3/4 على خط الأعداد.' },
+        hint: { eu: 'Zatitu unitate bakoitza 4 jauzitan eta egin 3.', es: 'Divide cada unidad en 4 saltos y da 3.', ar: 'قسّم كل وحدة إلى 4 قفزات واقفز 3.' },
+        isSolved: (state) => equals(lineValue(state), fraction(3, 4))
+    },
+    {
+        id: 802,
+        prompt: { eu: 'Kokatu 7/3. Zein bi zenbaki osoren artean geratzen da?', es: 'Coloca 7/3. ¿Entre qué dos enteros queda?', ar: 'ضع 7/3. بين أي عددين صحيحين يقع؟' },
+        hint: { eu: 'Gutxienez 3raino iristen den tarte bat behar duzu, heren bateko jauziekin.', es: 'Necesitas un tramo que llegue al menos hasta 3, con saltos de un tercio.', ar: 'تحتاج إلى مجال يصل إلى 3 على الأقل بقفزات من ثلث.' },
+        isSolved: (state) => equals(lineValue(state), fraction(7, 3))
+    },
+    {
+        id: 803,
+        prompt: { eu: 'Kokatu −1/2.', es: 'Coloca −1/2.', ar: 'ضع −1/2.' },
+        hint: { eu: 'Aukeratu −2tik 2rako tartea: negatiboak 0ren ezkerrean daude.', es: 'Elige el tramo de −2 a 2: los negativos quedan a la izquierda del 0.', ar: 'اختر المجال من −2 إلى 2: الأعداد السالبة تقع يسار 0.' },
+        isSolved: (state) => equals(lineValue(state), fraction(-1, 2))
+    },
+    {
+        id: 804,
+        prompt: { eu: 'Kokatu 1/3 eta 1/2 artean dagoen zatiki bat.', es: 'Coloca una fracción que esté entre 1/3 y 1/2.', ar: 'ضع كسرًا يقع بين 1/3 و1/2.' },
+        hint: { eu: 'Herenekin edo erdiekin ez da bat ere sartzen: probatu jauzi txikiagoak, hamabirenak adibidez.', es: 'Con tercios o medios no cabe ninguna: prueba saltos más pequeños, como doceavos.', ar: 'لا يتسع أي كسر بالأثلاث أو الأنصاف: جرّب قفزات أصغر مثل أجزاء من اثني عشر.' },
+        isSolved: (state) => compare(lineValue(state), fraction(1, 3)) > 0 && compare(lineValue(state), fraction(1, 2)) < 0
+    }
+]
+
+/* ---------- Fraction wall ---------- */
+
+export const WALL_DENOMINATORS = Array.from({ length: 12 }, (_, index) => index + 1)
+
+export interface WallPiece {
+    /** The fraction reaches the end of this piece: pieces 1..numerator of its row */
+    numerator: number
+    denominator: number
+}
+
+export interface WallState {
+    mode: 'equivalent' | 'compare'
+    first: WallPiece | null
+    second: WallPiece | null
+}
+
+export const initialWallState: WallState = { mode: 'equivalent', first: null, second: null }
+
+/** Switching mode starts a fresh selection, so a leftover piece never becomes half of a comparison */
+export function setWallMode(state: WallState, mode: WallState['mode']): WallState {
+    return state.mode === mode ? state : { mode, first: null, second: null }
+}
+
+export function selectWallPiece(state: WallState, piece: WallPiece): WallState {
+    if (state.mode === 'equivalent') return { ...state, first: piece, second: null }
+    if (state.first === null || state.second !== null) return { ...state, first: piece, second: null }
+    return { ...state, second: piece }
+}
+
+/** Every piece in the wall whose right edge lands exactly on the same value */
+export function wallEquivalents(piece: WallPiece): WallPiece[] {
+    return WALL_DENOMINATORS
+        .filter((denominator) => (piece.numerator * denominator) % piece.denominator === 0)
+        .map((denominator) => ({ numerator: (piece.numerator * denominator) / piece.denominator, denominator }))
+}
+
+const isPiece = (piece: WallPiece | null, numerator: number, denominator: number) =>
+    piece !== null && piece.numerator === numerator && piece.denominator === denominator
+
+export const wallChallenges: LabChallenge<WallState>[] = [
+    {
+        id: 901,
+        prompt: { eu: 'Hautatu 2/3ren baliokidea den zatiki bat, 3 baino izendatzaile handiagoarekin.', es: 'Selecciona una fracción equivalente a 2/3 con un denominador mayor que 3.', ar: 'اختر كسرًا مكافئًا لـ 2/3 مقامه أكبر من 3.' },
+        hint: { eu: 'Bilatu pieza bat 2/3ren lerro berean amaitzen den errenkadak.', es: 'Busca las filas donde una pieza termina justo en la misma línea que 2/3.', ar: 'ابحث عن الصفوف التي تنتهي فيها قطعة عند خط 2/3 نفسه تمامًا.' },
+        isSolved: (state) => state.mode === 'equivalent' && state.first !== null && state.first.denominator > 3 && equals(state.first, fraction(2, 3))
+    },
+    {
+        id: 902,
+        prompt: { eu: 'Zein da handiagoa, 3/5 ala 5/8? Hautatu handiena.', es: '¿Qué es mayor, 3/5 o 5/8? Selecciona la mayor.', ar: 'أيهما أكبر، 3/5 أم 5/8؟ اختر الأكبر.' },
+        hint: { eu: 'Hautatu bata eta gero bestea: urrunen iristen dena da handiena.', es: 'Selecciona primero una y después la otra: la que llegue más lejos es la mayor.', ar: 'اختر أحدهما ثم الآخر: الذي يصل أبعد هو الأكبر.' },
+        isSolved: (state) => state.mode === 'equivalent' && isPiece(state.first, 5, 8)
+    },
+    {
+        id: 903,
+        prompt: { eu: 'Hautatu 1/8 baino handiagoa den unitate-zatiki txikiena.', es: 'Selecciona la fracción unitaria más pequeña que sea mayor que 1/8.', ar: 'اختر أصغر كسر وحدي أكبر من 1/8.' },
+        hint: { eu: 'Unitate-zatikiek 1 dute zenbakitzaile. Zenbat eta zati gehiago, orduan eta txikiagoa da bakoitza.', es: 'Las fracciones unitarias tienen numerador 1. Cuantas más partes, más pequeña es cada una.', ar: 'الكسور الوحدية بسطها 1. كلما زاد عدد الأجزاء صغر كل جزء.' },
+        isSolved: (state) => state.mode === 'equivalent' && isPiece(state.first, 1, 7)
+    },
+    {
+        id: 904,
+        prompt: { eu: 'Konparatzeko moduan, markatu 2/3 eta 3/4.', es: 'En modo comparar, marca 2/3 y 3/4.', ar: 'في وضع المقارنة، حدّد 2/3 و3/4.' },
+        hint: { eu: 'Aukeratu «Konparatu» eta sakatu herenen bigarren pieza eta laurdenen hirugarrena.', es: 'Elige «Comparar» y pulsa la segunda pieza de los tercios y la tercera de los cuartos.', ar: 'اختر «مقارنة» واضغط القطعة الثانية من الأثلاث والقطعة الثالثة من الأرباع.' },
+        isSolved: (state) => state.mode === 'compare'
+            && ((isPiece(state.first, 2, 3) && isPiece(state.second, 3, 4)) || (isPiece(state.first, 3, 4) && isPiece(state.second, 2, 3)))
+    }
+]
+
+export const labChallengeIds: number[] = [...partsChallenges, ...numberLineChallenges, ...wallChallenges].map((challenge) => challenge.id)

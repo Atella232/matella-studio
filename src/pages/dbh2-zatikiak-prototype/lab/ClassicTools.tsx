@@ -1,6 +1,6 @@
 // Tools carried over from the first V2 laboratory, now with their own controls.
-// Each one will be rebuilt in later steps (number line, equivalence, compare,
-// operations → sum/difference and product/quotient, fraction of a quantity).
+// Each one will be rebuilt in later steps (equivalence, compare, operations →
+// sum/difference and product/quotient, fraction of a quantity).
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import type { PrototypeLanguage } from '../content'
@@ -13,13 +13,12 @@ import {
     subtract,
     toExactDecimal,
     toLatex,
-    toNumber,
     type FractionValue
 } from '../math/fraction'
 import type { LabToolInfo } from './labTools'
 import { Segmented, Stepper, ToolFrame } from './LabKit'
 import { useLabText } from './useLabText'
-import { FractionModel, NumberLineModel } from './models'
+import { FractionModel } from './models'
 
 export interface ToolProps {
     tool: LabToolInfo
@@ -57,25 +56,6 @@ function FractionSteppers({
             <Stepper label={l({ eu: 'Zenbakitzailea', es: 'Numerador', ar: 'البسط' })} value={numerator} min={minNumerator} max={12} onChange={onNumerator} language={language} />
             <Stepper label={l({ eu: 'Izendatzailea', es: 'Denominador', ar: 'المقام' })} value={denominator} min={2} max={12} onChange={onDenominator} language={language} />
         </>
-    )
-}
-
-export function NumberLineTool(props: ToolProps) {
-    const l = useLabText(props.language)
-    const [numerator, setNumerator] = useState(7)
-    const [denominator, setDenominator] = useState(3)
-    const value = fraction(numerator, denominator)
-    const exactDecimal = toExactDecimal(value, props.language === 'ar' ? '.' : ',')
-    const approximateDecimal = toNumber(value).toFixed(3).replace('.', props.language === 'ar' ? '.' : ',')
-
-    return (
-        <ToolFrame
-            {...props}
-            controls={<FractionSteppers numerator={numerator} denominator={denominator} minNumerator={-12} onNumerator={setNumerator} onDenominator={setDenominator} language={props.language} />}
-            readout={<MathText text={`$\\frac{${numerator}}{${denominator}}${exactDecimal === null ? '\\approx' : '='}${exactDecimal ?? approximateDecimal}$`} />}
-        >
-            <NumberLineModel value={value} label={l({ eu: 'Zenbaki-zuzena', es: 'Recta numérica', ar: 'خط الأعداد' })} />
-        </ToolFrame>
     )
 }
 

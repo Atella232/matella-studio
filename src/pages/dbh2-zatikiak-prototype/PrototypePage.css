@@ -1769,55 +1769,6 @@
     font-size: 30px;
 }
 
-.fraction-v2-number-line {
-    position: relative;
-    width: 100%;
-    max-width: 640px;
-    height: 120px;
-    direction: ltr;
-}
-
-.fraction-v2-number-line::before {
-    position: absolute;
-    top: 70px;
-    right: 0;
-    left: 0;
-    height: 3px;
-    border-radius: 2px;
-    background: var(--ink);
-    content: "";
-}
-
-.fraction-v2-line-start,
-.fraction-v2-line-end {
-    position: absolute;
-    top: 84px;
-    font-weight: 700;
-}
-
-.fraction-v2-line-start { left: 0; }
-.fraction-v2-line-end { right: 0; }
-
-.fraction-v2-line-marker {
-    position: absolute;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    font-size: 24px;
-    transform: translateX(-50%);
-}
-
-.fraction-v2-line-marker::after {
-    width: 22px;
-    height: 22px;
-    border: 2.5px solid var(--ink);
-    border-radius: 50%;
-    background: var(--success);
-    content: "";
-}
-
 .fraction-v2-proportion-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
