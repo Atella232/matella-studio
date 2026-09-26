@@ -27,20 +27,10 @@ import {
     type ExerciseDifficulty
 } from '../dbh2-zatikiak/ExercisesPage/exercisesData'
 import {
-    add,
     answerEquals,
     checkAnswer,
-    compare,
-    divide,
     equals,
-    fraction,
-    multiply,
-    subtract,
-    toExactDecimal,
     toLatex,
-    toMixedText,
-    toNumber,
-    toText,
     type FractionValue
 } from './math/fraction'
 import {
@@ -51,12 +41,12 @@ import {
     type PracticeMode
 } from './routing'
 import { Icon } from './icons'
+import { FractionLaboratory } from './lab'
+import { labChallengeIds, labToolForTopic, labTools, type LabToolId } from './lab/labTools'
 import './PrototypePage.css'
 
 type Feedback = 'idle' | 'success' | 'error'
 type TaskFeedback = Feedback | 'wrong-form' | 'unreadable'
-type LabMode = 'pizza' | 'area' | 'numberline' | 'equivalence' | 'compare' | 'operations' | 'proportion'
-type Operation = 'add' | 'subtract' | 'multiply' | 'divide'
 
 function isChallengeItem(item: PracticeItem): item is ChallengeItem {
     return 'points' in item && typeof item.points === 'number'
@@ -411,63 +401,6 @@ function useStoredTopics(key: string) {
     return { ids, addId, reset }
 }
 
-function FractionModel({ value, label }: { value: FractionValue; label: string }) {
-    // Keep the parts the learner chose: 4/6 must be drawn in sixths, not simplified to thirds
-    const sign = value.denominator < 0 ? -1 : 1
-    const normalized = { numerator: value.numerator * sign, denominator: Math.abs(value.denominator) }
-    const absoluteNumerator = Math.abs(normalized.numerator)
-    const unitCount = Math.max(1, Math.ceil(absoluteNumerator / normalized.denominator))
-    const units = Array.from({ length: unitCount }, (_, unitIndex) => unitIndex)
-    const segments = Array.from({ length: normalized.denominator }, (_, segmentIndex) => segmentIndex)
-
-    return (
-        <div className="fraction-v2-model-wrap">
-            <div
-                className={`fraction-v2-model ${normalized.numerator < 0 ? 'negative' : ''}`}
-                role="img"
-                aria-label={`${label}: ${normalized.numerator}/${normalized.denominator}`}
-            >
-                {normalized.numerator < 0 && <span className="fraction-v2-sign" aria-hidden="true">−</span>}
-                <div className="fraction-v2-units" aria-hidden="true">
-                    {units.map((unitIndex) => (
-                        <div
-                            className="fraction-v2-unit"
-                            style={{ '--parts': normalized.denominator } as CSSProperties}
-                            key={unitIndex}
-                        >
-                            {segments.map((segmentIndex) => {
-                                const position = unitIndex * normalized.denominator + segmentIndex
-                                return <span className={position < absoluteNumerator ? 'filled' : ''} key={segmentIndex} />
-                            })}
-                        </div>
-                    ))}
-                </div>
-            </div>
-            <MathText text={`$${normalized.denominator === 1 ? normalized.numerator : `${normalized.numerator < 0 ? '-' : ''}\\frac{${absoluteNumerator}}{${normalized.denominator}}`}$`} />
-            {absoluteNumerator > normalized.denominator && (
-                <span className="fraction-v2-mixed">{toMixedText(normalized)}</span>
-            )}
-        </div>
-    )
-}
-
-function NumberLineModel({ value, label }: { value: FractionValue; label: string }) {
-    const numericValue = toNumber(value)
-    const minimum = Math.floor(Math.min(0, numericValue)) - 1
-    const maximum = Math.ceil(Math.max(0, numericValue)) + 1
-    const position = ((numericValue - minimum) / (maximum - minimum)) * 100
-
-    return (
-        <div className="fraction-v2-number-line" role="img" aria-label={`${label}: ${toText(value)}`}>
-            <span className="fraction-v2-line-start">{minimum}</span>
-            <span className="fraction-v2-line-end">{maximum}</span>
-            <span className="fraction-v2-line-marker" style={{ insetInlineStart: `${position}%` }}>
-                <MathText text={`$${toLatex(value)}$`} />
-            </span>
-        </div>
-    )
-}
-
 const TOTAL_GAME_GOALS = equivalenceRounds.length + pizzaRounds.length + new Set(memoryCardsSource.map((card) => card.pairId)).size + raceRounds.length
 
 export function ZatikiakPrototypePage() {
@@ -485,6 +418,7 @@ export function ZatikiakPrototypePage() {
         : sectionForPath(location.pathname)
     const [topicId, setTopicId] = useState<TheoryTopicId>('meaning')
     const [moreOpen, setMoreOpen] = useState(false)
+    const [labTool, setLabTool] = useState<LabToolId>('parts')
     const learned = useStoredTopics('matella-zatikiak-v2-learned')
     const diagnosticProgress = useStoredIds('matella-zatikiak-v2-diagnostic')
     const diagnosticCorrect = useStoredIds('matella-zatikiak-v2-diagnostic-correct', 'matella-zatikiak-v2-diagnostic')
@@ -492,6 +426,7 @@ export function ZatikiakPrototypePage() {
     const bankProgress = useStoredIds('matella-zatikiak-v2-exercise-bank')
     const challengeProgress = useStoredIds('matella-zatikiak-v2-challenges')
     const playProgress = useStoredIds('matella-zatikiak-v2-play')
+    const labProgress = useStoredIds('matella-zatikiak-v2-lab')
 
     useEffect(() => {
         document.documentElement.lang = language
@@ -520,10 +455,11 @@ export function ZatikiakPrototypePage() {
         bankProgress.reset()
         challengeProgress.reset()
         playProgress.reset()
+        labProgress.reset()
     }
 
-    const completedGoals = diagnosticProgress.ids.length + learned.ids.length + practiceProgress.ids.length + bankProgress.ids.length + challengeProgress.ids.length + playProgress.ids.length
-    const totalGoals = diagnosticQuestions.length + theoryTopics.length + guidedPractice.length + 42 + challenges.length + TOTAL_GAME_GOALS
+    const completedGoals = diagnosticProgress.ids.length + learned.ids.length + practiceProgress.ids.length + bankProgress.ids.length + challengeProgress.ids.length + playProgress.ids.length + labProgress.ids.filter((id) => labChallengeIds.includes(id)).length
+    const totalGoals = diagnosticQuestions.length + theoryTopics.length + guidedPractice.length + 42 + challenges.length + TOTAL_GAME_GOALS + labChallengeIds.length
     const progress = Math.round((completedGoals / totalGoals) * 100)
     const recommendedTopic = theoryTopics.find((topic) => !learned.ids.includes(topic.id)) ?? theoryTopics[theoryTopics.length - 1]
 
@@ -610,7 +546,16 @@ export function ZatikiakPrototypePage() {
                     />
                 )}
                 {section === 'learn' && renderLearn()}
-                {section === 'lab' && <FractionLaboratory language={language} />}
+                {section === 'lab' && (
+                    <FractionLaboratory
+                        language={language}
+                        tool={labTool}
+                        onToolChange={setLabTool}
+                        completedIds={labProgress.ids}
+                        onComplete={labProgress.addId}
+                        onOpenLesson={openTopic}
+                    />
+                )}
                 {section === 'practice' && (
                     <PracticeArea
                         key={`practice-${location.pathname}`}
@@ -661,7 +606,7 @@ export function ZatikiakPrototypePage() {
         const hasStarted = completedGoals > 0
         const diagnosticPending = diagnosticProgress.ids.length < diagnosticQuestions.length
         const tools: Array<{ id: PrototypeSection; title: LocalizedText; description: LocalizedText }> = [
-            { id: 'lab', title: { eu: 'Laborategia', es: 'Laboratorio', ar: 'المختبر' }, description: { eu: 'Zazpi tresna zatikiak manipulatzeko eta zer gertatzen den ikusteko.', es: 'Siete herramientas para manipular fracciones y ver qué pasa.', ar: 'سبع أدوات للتعامل مع الكسور وملاحظة ما يحدث.' } },
+            { id: 'lab', title: { eu: 'Laborategia', es: 'Laboratorio', ar: 'المختبر' }, description: { eu: `${labTools.length} tresna zatikiak manipulatzeko, erronkekin.`, es: `${labTools.length} herramientas para manipular fracciones, con retos.`, ar: `${labTools.length} أدوات للتعامل مع الكسور، مع تحديات.` } },
             { id: 'practice', title: { eu: 'Praktika', es: 'Práctica', ar: 'التدريب' }, description: { eu: `${guidedPractice.length} jarduera gidatu eta 42 ariketa zailtasunaren arabera.`, es: `${guidedPractice.length} actividades guiadas y 42 ejercicios por dificultad.`, ar: `${guidedPractice.length} أنشطة موجّهة و42 تمرينًا حسب الصعوبة.` } },
             { id: 'challenges', title: { eu: 'Erronkak', es: 'Retos', ar: 'التحديات' }, description: { eu: `Bizitza errealeko ${challenges.length} problema ikasitakoa aplikatzeko.`, es: `${challenges.length} problemas de la vida real para aplicar lo aprendido.`, ar: `${challenges.length} مسألة من الحياة الواقعية لتطبيق ما تعلّمته.` } },
             { id: 'play', title: { eu: 'Jokoak', es: 'Juegos', ar: 'الألعاب' }, description: { eu: 'Lau joko abiadura eta zehaztasuna entrenatzeko.', es: 'Cuatro juegos para entrenar rapidez y precisión.', ar: 'أربع ألعاب لتدريب السرعة والدقة.' } }
@@ -847,6 +792,12 @@ export function ZatikiakPrototypePage() {
                         <button type="button" className="fraction-v2-secondary" onClick={() => navigate('practice')}>
                             {l({ eu: 'Praktikatu', es: 'Practicar', ar: 'تدرّب' })}
                         </button>
+                        {labToolForTopic[currentTopic.id] && (
+                            <button type="button" className="fraction-v2-secondary" onClick={() => { setLabTool(labToolForTopic[currentTopic.id]!); navigate('lab') }}>
+                                <Icon name="lab" size={18} />
+                                {l({ eu: 'Esperimentatu laborategian', es: 'Experimentar en el laboratorio', ar: 'جرّب في المختبر' })}
+                            </button>
+                        )}
                         {nextTopic && (
                             <button type="button" className="fraction-v2-next" data-stage={nextTopic.stage} onClick={() => selectTopic(nextTopic.id)}>
                                 <span>{l({ eu: 'Hurrengoa:', es: 'Siguiente:', ar: 'التالي:' })} {l(nextTopic.title)}</span>
@@ -858,184 +809,6 @@ export function ZatikiakPrototypePage() {
             </section>
         )
     }
-}
-
-function FractionLaboratory({ language }: { language: ReturnType<typeof normalizePrototypeLanguage> }) {
-    const l = (text: LocalizedText) => pickText(language, text)
-    const [mode, setMode] = useState<LabMode>('pizza')
-    const [numerator, setNumerator] = useState(7)
-    const [denominator, setDenominator] = useState(3)
-    const [secondNumerator, setSecondNumerator] = useState(-2)
-    const [secondDenominator, setSecondDenominator] = useState(5)
-    const [multiplier, setMultiplier] = useState(2)
-    const [quantity, setQuantity] = useState(120)
-    const [operation, setOperation] = useState<Operation>('add')
-    const first = fraction(numerator, denominator)
-    // Area and equivalence models show the fraction exactly as chosen with the sliders (4/6 stays 4/6)
-    const chosen: FractionValue = { numerator, denominator }
-    const second = fraction(secondNumerator, secondDenominator)
-    const comparison = compare(first, second)
-    let result: FractionValue | null
-    try {
-        if (operation === 'add') result = add(first, second)
-        else if (operation === 'subtract') result = subtract(first, second)
-        else if (operation === 'multiply') result = multiply(first, second)
-        else result = divide(first, second)
-    } catch {
-        result = null
-    }
-
-    const labels: Record<Operation, string> = { add: '+', subtract: '−', multiply: '×', divide: '÷' }
-    const fractionOfQuantity = multiply(first, fraction(quantity))
-    const percentage = multiply(first, fraction(100))
-    const exactDecimal = toExactDecimal(first, language === 'ar' ? '.' : ',')
-    const approximateDecimal = toNumber(first).toFixed(3).replace('.', language === 'ar' ? '.' : ',')
-    const pizzaNumerator = Math.min(Math.max(numerator, 0), denominator)
-    const pizzaSelectedAngle = (pizzaNumerator / denominator) * 360
-    const pizzaSliceAngle = 360 / denominator
-
-    return (
-        <section className="fraction-v2-lab" aria-labelledby="fraction-v2-lab-title">
-            <div className="fraction-v2-page-intro">
-                <span>{l({ eu: 'LABORATEGIA', es: 'LABORATORIO', ar: 'المختبر' })}</span>
-                <h1 id="fraction-v2-lab-title">{l({ eu: 'Ikusi balioa, ez soilik ikurra', es: 'Observa el valor, no solo el símbolo', ar: 'شاهد القيمة لا الرمز فقط' })}</h1>
-                <p>{l({ eu: 'Zazpi tresna zehatzek pizza, azalera, zenbaki-zuzena, baliokidetasuna, konparazioa, eragiketak eta proportzioak lotzen dituzte.', es: 'Siete herramientas exactas conectan pizza, área, recta numérica, equivalencia, comparación, operaciones y proporciones.', ar: 'تربط سبع أدوات دقيقة بين البيتزا والمساحة وخط الأعداد والتكافؤ والمقارنة والعمليات والتناسب.' })}</p>
-            </div>
-
-            <div className="fraction-v2-lab-tabs" role="tablist" aria-label={l({ eu: 'Tresna aukeratu', es: 'Elegir herramienta', ar: 'اختر أداة' })}>
-                {([
-                    ['pizza', { eu: 'Pizza', es: 'Pizza', ar: 'البيتزا' }],
-                    ['area', { eu: 'Azalera', es: 'Área', ar: 'المساحة' }],
-                    ['numberline', { eu: 'Zenbaki-zuzena', es: 'Recta', ar: 'خط الأعداد' }],
-                    ['equivalence', { eu: 'Baliokidetasuna', es: 'Equivalencia', ar: 'التكافؤ' }],
-                    ['compare', { eu: 'Konparatu', es: 'Compara', ar: 'قارن' }],
-                    ['operations', { eu: 'Eragiketak', es: 'Operaciones', ar: 'العمليات' }],
-                    ['proportion', { eu: 'Proportzioa', es: 'Proporción', ar: 'التناسب' }]
-                ] as Array<[LabMode, LocalizedText]>).map(([id, label]) => (
-                    <button type="button" role="tab" id={`fraction-v2-lab-tab-${id}`} aria-controls="fraction-v2-lab-panel" aria-selected={mode === id} className={mode === id ? 'active' : ''} onKeyDown={handleTabArrow} onClick={() => setMode(id)} key={id}>{l(label)}</button>
-                ))}
-            </div>
-
-            <div className="fraction-v2-lab-board">
-                <div className="fraction-v2-controls">
-                    <h2>{l({ eu: 'Lehen zatikia', es: 'Primera fracción', ar: 'الكسر الأول' })}</h2>
-                    <label htmlFor="fraction-v2-numerator">{l({ eu: 'Zenbakitzailea', es: 'Numerador', ar: 'البسط' })}: <strong>{mode === 'pizza' ? pizzaNumerator : numerator}</strong></label>
-                    <input id="fraction-v2-numerator" type="range" min={mode === 'pizza' ? 0 : -12} max={mode === 'pizza' ? denominator : 12} value={mode === 'pizza' ? pizzaNumerator : numerator} onInput={(event) => setNumerator(Number(event.currentTarget.value))} />
-                    <label htmlFor="fraction-v2-denominator">{l({ eu: 'Izendatzailea', es: 'Denominador', ar: 'المقام' })}: <strong>{denominator}</strong></label>
-                    <input id="fraction-v2-denominator" type="range" min="2" max="12" value={denominator} onInput={(event) => setDenominator(Number(event.currentTarget.value))} />
-
-                    {mode === 'equivalence' && (
-                        <>
-                            <label htmlFor="fraction-v2-multiplier">{l({ eu: 'Biderkatzailea', es: 'Multiplicador', ar: 'المضاعِف' })}: <strong>{multiplier}</strong></label>
-                            <input id="fraction-v2-multiplier" type="range" min="1" max="6" value={multiplier} onInput={(event) => setMultiplier(Number(event.currentTarget.value))} />
-                        </>
-                    )}
-
-                    {(mode === 'compare' || mode === 'operations') && (
-                        <>
-                            <h2>{l({ eu: 'Bigarren zatikia', es: 'Segunda fracción', ar: 'الكسر الثاني' })}</h2>
-                            <label htmlFor="fraction-v2-second-numerator">{l({ eu: 'Zenbakitzailea', es: 'Numerador', ar: 'البسط' })}: <strong>{secondNumerator}</strong></label>
-                            <input id="fraction-v2-second-numerator" type="range" min="-12" max="12" value={secondNumerator} onInput={(event) => setSecondNumerator(Number(event.currentTarget.value))} />
-                            <label htmlFor="fraction-v2-second-denominator">{l({ eu: 'Izendatzailea', es: 'Denominador', ar: 'المقام' })}: <strong>{secondDenominator}</strong></label>
-                            <input id="fraction-v2-second-denominator" type="range" min="2" max="12" value={secondDenominator} onInput={(event) => setSecondDenominator(Number(event.currentTarget.value))} />
-                            {mode === 'operations' && <div className="fraction-v2-operation-picker" aria-label={l({ eu: 'Eragiketa', es: 'Operación', ar: 'العملية' })}>
-                                {(Object.keys(labels) as Operation[]).map((item) => (
-                                    <button type="button" aria-pressed={operation === item} onClick={() => setOperation(item)} key={item}>{labels[item]}</button>
-                                ))}
-                            </div>}
-                        </>
-                    )}
-                    {mode === 'proportion' && (
-                        <>
-                            <h2>{l({ eu: 'Kantitatea', es: 'Cantidad', ar: 'الكمية' })}</h2>
-                            <label htmlFor="fraction-v2-quantity">{l({ eu: 'Guztizkoa', es: 'Total', ar: 'المجموع' })}: <strong>{quantity}</strong></label>
-                            <input id="fraction-v2-quantity" type="range" min="1" max="300" value={quantity} onInput={(event) => setQuantity(Number(event.currentTarget.value))} />
-                        </>
-                    )}
-                </div>
-
-                <div className="fraction-v2-visuals" role="tabpanel" id="fraction-v2-lab-panel" aria-labelledby={`fraction-v2-lab-tab-${mode}`}>
-                    {mode === 'pizza' && (
-                        <>
-                            <div
-                                className="fraction-v2-pizza fraction-v2-lab-pizza"
-                                role="img"
-                                aria-label={`${l({ eu: 'Pizza-zatikia', es: 'Fracción de pizza', ar: 'كسر البيتزا' })}: ${pizzaNumerator}/${denominator}`}
-                                style={{ '--selected-angle': `${pizzaSelectedAngle}deg`, '--slice-angle': `${pizzaSliceAngle}deg` } as CSSProperties}
-                            />
-                            <div className="fraction-v2-operation-result"><MathText text={`$\\frac{${pizzaNumerator}}{${denominator}}$`} /></div>
-                            <p className="fraction-v2-insight">{l({ eu: 'Pizza-laborategiak zatiki propioak eraikitzen ditu. Zatiki inpropioak ikusteko, erabili azalera-eredua.', es: 'El laboratorio de pizza construye fracciones propias. Para impropias, utiliza el modelo de área.', ar: 'يبني مختبر البيتزا الكسور الحقيقية. وللكسور غير الحقيقية استعمل نموذج المساحة.' })}</p>
-                        </>
-                    )}
-                    {mode === 'area' && (
-                        <>
-                            <FractionModel value={chosen} label={l({ eu: 'Azalera-eredua', es: 'Modelo de área', ar: 'نموذج المساحة' })} />
-                            <p className="fraction-v2-insight">{l({ eu: 'Unitate oso guztiak marrazten dira eta zati kopurua izendatzailearekin bat dator beti.', es: 'Se dibujan todas las unidades completas y el número de partes coincide siempre con el denominador.', ar: 'تُرسم كل الوحدات الكاملة ويطابق عدد الأجزاء المقام دائمًا.' })}</p>
-                        </>
-                    )}
-                    {mode === 'numberline' && (
-                        <>
-                            <NumberLineModel value={first} label={l({ eu: 'Zenbaki-zuzena', es: 'Recta numérica', ar: 'خط الأعداد' })} />
-                            <div className="fraction-v2-operation-result"><MathText text={`$${toLatex(first)}${exactDecimal === null ? '\\approx' : '='}${exactDecimal ?? approximateDecimal}$`} /></div>
-                            <p className="fraction-v2-insight">{l({ eu: 'Mugitu graduatzaileak eta ikusi non kokatzen den zatikia zuzenean.', es: 'Mueve los deslizadores y observa dónde cae la fracción en la recta.', ar: 'حرّك المؤشرات ولاحظ موقع الكسر على خط الأعداد.' })}</p>
-                        </>
-                    )}
-                    {mode === 'equivalence' && (
-                        <>
-                            <div className="fraction-v2-equivalence-pair">
-                                <FractionModel value={chosen} label={l({ eu: 'Jatorrizko zatikia', es: 'Fracción original', ar: 'الكسر الأصلي' })} />
-                                <span aria-hidden="true">=</span>
-                                <FractionModel value={{ numerator: numerator * multiplier, denominator: denominator * multiplier }} label={l({ eu: 'Zatiki baliokidea', es: 'Fracción equivalente', ar: 'الكسر المكافئ' })} />
-                            </div>
-                            <MathText text={`$\\frac{${numerator}}{${denominator}}=\\frac{${numerator}\\cdot${multiplier}}{${denominator}\\cdot${multiplier}}=\\frac{${numerator * multiplier}}{${denominator * multiplier}}$`} />
-                        </>
-                    )}
-                    {mode === 'operations' && (
-                        <>
-                            <div className="fraction-v2-operation-result">
-                                <MathText text={`$${toLatex(first)}\\;${labels[operation]}\\;${toLatex(second)}$`} />
-                                <span aria-hidden="true">=</span>
-                                {result ? <MathText text={`$${toLatex(result)}$`} /> : <strong>{l({ eu: 'Ezin da zeroz zatitu', es: 'No se puede dividir entre cero', ar: 'لا يمكن القسمة على صفر' })}</strong>}
-                            </div>
-                            <div className="fraction-v2-operands">
-                                <FractionModel value={first} label={l({ eu: 'Lehen eragigaia', es: 'Primer operando', ar: 'المعامل الأول' })} />
-                                <span>{comparison === 0 ? '=' : comparison < 0 ? '<' : '>'}</span>
-                                <FractionModel value={second} label={l({ eu: 'Bigarren eragigaia', es: 'Segundo operando', ar: 'المعامل الثاني' })} />
-                            </div>
-                        </>
-                    )}
-                    {mode === 'compare' && (
-                        <>
-                            <div className="fraction-v2-operation-result">
-                                <MathText text={`$${toLatex(first)}\\;${comparison === 0 ? '=' : comparison < 0 ? '<' : '>'}\\;${toLatex(second)}$`} />
-                            </div>
-                            <div className="fraction-v2-operands">
-                                <FractionModel value={first} label={l({ eu: 'Lehen zatikia', es: 'Primera fracción', ar: 'الكسر الأول' })} />
-                                <span>{comparison === 0 ? '=' : comparison < 0 ? '<' : '>'}</span>
-                                <FractionModel value={second} label={l({ eu: 'Bigarren zatikia', es: 'Segunda fracción', ar: 'الكسر الثاني' })} />
-                            </div>
-                            <p className="fraction-v2-insight">{l({ eu: 'Konparazioak balio zehatza erabiltzen du, ez biribildutako hamartarra.', es: 'La comparación utiliza el valor exacto, no un decimal redondeado.', ar: 'تستعمل المقارنة القيمة الدقيقة لا عددًا عشريًا مقرّبًا.' })}</p>
-                        </>
-                    )}
-                    {mode === 'proportion' && (
-                        <>
-                            <div className="fraction-v2-proportion-grid">
-                                <article><span>{l({ eu: 'Zatikia', es: 'Fracción', ar: 'الكسر' })}</span><MathText text={`$${toLatex(first)}$`} /></article>
-                                <article><span>{l({ eu: 'Hamartarra', es: 'Decimal', ar: 'العشري' })}</span><strong>{exactDecimal ?? l({ eu: 'periodikoa', es: 'periódico', ar: 'دوري' })}</strong></article>
-                                <article><span>{l({ eu: 'Ehunekoa', es: 'Porcentaje', ar: 'النسبة المئوية' })}</span><MathText text={`$${toLatex(percentage)}\\%$`} /></article>
-                            </div>
-                            <div className="fraction-v2-operation-result">
-                                <MathText text={`$${quantity}\\cdot${toLatex(first)}=${toLatex(fractionOfQuantity)}$`} />
-                            </div>
-                            <p className="fraction-v2-insight">{exactDecimal === null
-                                ? l({ eu: 'Hamartarra periodikoa denez, ez da berdintasun faltsurik erakusten.', es: 'Como el decimal es periódico, no se muestra una igualdad falsa con una aproximación.', ar: 'لأن العدد العشري دوري، لا نعرض مساواة زائفة مع قيمة تقريبية.' })
-                                : l({ eu: 'Hiru adierazpenek balio bera dute zehazki.', es: 'Las tres representaciones tienen exactamente el mismo valor.', ar: 'للتمثيلات الثلاثة القيمة الدقيقة نفسها.' })}</p>
-                        </>
-                    )}
-                </div>
-            </div>
-        </section>
-    )
 }
 
 function PracticeDeck({

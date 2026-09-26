@@ -425,6 +425,11 @@
     scrollbar-width: none;
 }
 
+.fraction-v2-nav::-webkit-scrollbar,
+.fraction-v2-task-list::-webkit-scrollbar {
+    display: none;
+}
+
 .fraction-v2-nav button {
     display: inline-flex;
     align-items: center;
@@ -1628,32 +1633,6 @@
 
 /* ---------- Laboratory ---------- */
 
-.fraction-v2-lab-tabs,
-.fraction-v2-game-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 20px;
-}
-
-.fraction-v2-lab-tabs button {
-    min-height: 44px;
-    padding: 8px 16px;
-    border: 1.5px solid var(--ink);
-    border-radius: 999px;
-    background: var(--card);
-    font-weight: 700;
-}
-
-.fraction-v2-lab-tabs button:hover {
-    background: var(--paper-deep);
-}
-
-.fraction-v2-lab-tabs button.active {
-    color: var(--paper);
-    background: var(--ink);
-}
-
 .fraction-v2-lab-board {
     display: grid;
     grid-template-columns: 300px minmax(0, 1fr);
@@ -1667,63 +1646,10 @@
 .fraction-v2-controls {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 16px;
     padding: 26px 28px;
     border-inline-end: 1.5px solid var(--line);
     background: #fbf7ee;
-}
-
-.fraction-v2-controls h2 {
-    margin: 14px 0 2px;
-    color: var(--muted);
-    font-family: var(--font-body);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
-.fraction-v2-controls h2:first-child {
-    margin-top: 0;
-}
-
-.fraction-v2-controls label {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    font-size: 15px;
-}
-
-.fraction-v2-controls label strong {
-    font-family: "Fraunces", Georgia, serif;
-    font-size: 22px;
-}
-
-.fraction-v2-controls input[type="range"] {
-    width: 100%;
-    margin: 0 0 6px;
-    accent-color: var(--coral);
-}
-
-.fraction-v2-operation-picker {
-    display: flex;
-    gap: 8px;
-    margin-top: 6px;
-}
-
-.fraction-v2-operation-picker button {
-    width: 48px;
-    height: 48px;
-    border: 1.5px solid var(--ink);
-    border-radius: 12px;
-    background: var(--card);
-    font-size: 22px;
-    font-weight: 700;
-}
-
-.fraction-v2-operation-picker button[aria-pressed="true"] {
-    color: var(--paper);
-    background: var(--ink);
 }
 
 .fraction-v2-visuals {
@@ -2228,6 +2154,7 @@
         gap: 8px;
         overflow-x: auto;
         padding-bottom: 6px;
+        scrollbar-width: none;
     }
 
     .fraction-v2-task-list button {
