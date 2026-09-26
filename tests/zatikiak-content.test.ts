@@ -11,7 +11,7 @@ import {
     raceRounds,
     theoryTopics
 } from '../src/pages/dbh2-zatikiak-prototype/content.ts'
-import { equals, toText } from '../src/pages/dbh2-zatikiak-prototype/math/fraction.ts'
+import { equals, gcd, toText } from '../src/pages/dbh2-zatikiak-prototype/math/fraction.ts'
 
 test('contains the complete theory, exercise and challenge inventory', () => {
     assert.equal(theoryTopics.length, 12)
@@ -27,7 +27,7 @@ test('contains the complete theory, exercise and challenge inventory', () => {
     assert.deepEqual(challenges.map((challenge) => challenge.id), Array.from({ length: 12 }, (_, index) => 101 + index))
 
     assert.equal(diagnosticQuestions.length, 6)
-    assert.equal(equivalenceRounds.length, 4)
+    assert.equal(equivalenceRounds.length, 8)
     assert.equal(pizzaRounds.length, 6)
     assert.equal(raceRounds.length, 6)
     assert.equal(memoryCardsSource.length, 12)
@@ -85,5 +85,25 @@ test('audits every diagnostic and game round', () => {
     for (const cards of pairs.values()) {
         assert.equal(cards.length, 2)
         assert.notEqual(cards[0].display, cards[1].display)
+    }
+})
+
+test('equivalence rounds cannot be solved by spotting the only unsimplified option', () => {
+    const isReduced = (value: { numerator: number; denominator: number }) => gcd(value.numerator, value.denominator) === 1
+    for (const round of equivalenceRounds) {
+        const correct = round.options.find((option) => equals(option, round.prompt))!
+        const sameShape = round.options.filter((option) => isReduced(option) === isReduced(correct))
+        assert.ok(sameShape.length > 1, `round ${round.id}: the correct option is the only ${isReduced(correct) ? 'reduced' : 'unreduced'} one`)
+    }
+})
+
+test('tasks that ask for a specific written form declare it', () => {
+    for (const item of [...guidedPractice, ...challenges]) {
+        const prompt = item.prompt.es.toLowerCase()
+        if (/simplifica|irreducible/.test(prompt)) assert.equal(item.answerForm, 'simplified', `item ${item.id}`)
+        if (/número mixto/.test(prompt)) {
+            assert.equal(item.answerForm, 'mixed', `item ${item.id}`)
+            assert.ok(Math.abs(item.expected.numerator) > item.expected.denominator, `item ${item.id} must be improper`)
+        }
     }
 })

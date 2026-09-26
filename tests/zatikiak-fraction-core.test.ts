@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import {
     add,
     answerEquals,
+    checkAnswer,
     compare,
     divide,
     equals,
@@ -89,4 +90,29 @@ test('satisfies rational arithmetic properties on a dense small domain', () => {
 
 test('rejects division by zero', () => {
     assert.throws(() => divide(fraction(1, 2), fraction(0)), /zero/)
+})
+
+test('checks the written form a task asks for', () => {
+    const sevenThirds = fraction(7, 3)
+    assert.equal(checkAnswer('2 1/3', sevenThirds, 'mixed'), 'correct')
+    assert.equal(checkAnswer('٢ ١/٣', sevenThirds, 'mixed'), 'correct')
+    assert.equal(checkAnswer('7/3', sevenThirds, 'mixed'), 'wrong-form')
+    assert.equal(checkAnswer('14/6', sevenThirds, 'mixed'), 'wrong-form')
+    assert.equal(checkAnswer('2 2/6', sevenThirds, 'mixed'), 'wrong-form')
+    assert.equal(checkAnswer('2 1/4', sevenThirds, 'mixed'), 'incorrect')
+
+    const threeQuarters = fraction(3, 4)
+    assert.equal(checkAnswer('3/4', threeQuarters, 'simplified'), 'correct')
+    assert.equal(checkAnswer('45/60', threeQuarters, 'simplified'), 'wrong-form')
+    assert.equal(checkAnswer('0,75', threeQuarters, 'simplified'), 'wrong-form')
+    assert.equal(checkAnswer('75%', threeQuarters, 'simplified'), 'wrong-form')
+    assert.equal(checkAnswer('-3/4', fraction(-3, 4), 'simplified'), 'correct')
+    assert.equal(checkAnswer('−6/8', fraction(-3, 4), 'simplified'), 'wrong-form')
+    assert.equal(checkAnswer('84', fraction(84), 'simplified'), 'correct')
+    assert.equal(checkAnswer('168/2', fraction(84), 'simplified'), 'wrong-form')
+
+    // Without a required form any equivalent value is accepted
+    assert.equal(checkAnswer('45/60', threeQuarters), 'correct')
+    assert.equal(checkAnswer('0,75', threeQuarters), 'correct')
+    assert.equal(checkAnswer('tres cuartos', threeQuarters), 'unreadable')
 })

@@ -215,3 +215,29 @@ export function answerEquals(input: string, expected: FractionValue): boolean {
     const parsed = parseFractionInput(input)
     return parsed !== null && equals(parsed, expected)
 }
+
+/** The written form a task asks for: any equivalent value, the irreducible fraction or a mixed number. */
+export type AnswerForm = 'any' | 'simplified' | 'mixed'
+export type AnswerCheck = 'correct' | 'incorrect' | 'wrong-form' | 'unreadable'
+
+export function checkAnswer(input: string, expected: FractionValue, form: AnswerForm = 'any'): AnswerCheck {
+    const value = parseFractionInput(input)
+    if (value === null) return 'unreadable'
+    if (!equals(value, expected)) return 'incorrect'
+    if (form === 'any') return 'correct'
+
+    const written = normalizeDigits(input).trim().replace(/\s*([/.,])\s*/g, '$1')
+    const target = fraction(expected.numerator, expected.denominator)
+    // A whole number is already in its simplest form, and has no fractional part to write as mixed
+    if (target.denominator === 1) return /^[+-]?\d+$/.test(written) ? 'correct' : 'wrong-form'
+
+    const plain = written.match(/^[+-]?(\d+)\/(\d+)$/)
+    const isIrreducible = plain !== null && gcd(Number(plain[1]), Number(plain[2])) === 1
+    // Proper fractions have no whole part, so "mixed" means their irreducible form
+    if (form === 'simplified' || Math.abs(target.numerator) < target.denominator) {
+        return isIrreducible ? 'correct' : 'wrong-form'
+    }
+
+    const mixed = written.match(/^[+-]?\d+\s+(\d+)\/(\d+)$/)
+    return mixed !== null && gcd(Number(mixed[1]), Number(mixed[2])) === 1 ? 'correct' : 'wrong-form'
+}

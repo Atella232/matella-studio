@@ -1,4 +1,4 @@
-import { fraction, type FractionValue } from './math/fraction.ts'
+import { fraction, type AnswerForm, type FractionValue } from './math/fraction.ts'
 
 export type PrototypeLanguage = 'eu' | 'es' | 'ar'
 export type FractionStageId = 'meaning' | 'equivalence' | 'ordering' | 'operations' | 'proportionality'
@@ -33,6 +33,8 @@ export interface PracticeItem {
     prompt: LocalizedText
     expression?: string
     expected: FractionValue
+    /** Written form required by the prompt; defaults to any equivalent value */
+    answerForm?: AnswerForm
     hint: LocalizedText
     explanation: LocalizedText
 }
@@ -398,6 +400,7 @@ export const guidedPractice: PracticeItem[] = [
         prompt: { eu: 'Idatzi zenbaki misto gisa.', es: 'Escribe como número mixto.', ar: 'اكتب في صورة عدد كسري.' },
         expression: '$\\frac{7}{3}$',
         expected: fraction(7, 3),
+        answerForm: 'mixed',
         hint: { eu: 'Zatitu 7 zati 3.', es: 'Divide 7 entre 3.', ar: 'اقسم 7 على 3.' },
         explanation: { eu: 'Bi unitate oso eta heren bat geratzen dira.', es: 'Hay dos unidades completas y queda un tercio.', ar: 'توجد وحدتان كاملتان ويتبقى ثلث.' }
     },
@@ -407,6 +410,7 @@ export const guidedPractice: PracticeItem[] = [
         prompt: { eu: 'Sinplifikatu.', es: 'Simplifica.', ar: 'بسّط.' },
         expression: '$\\frac{45}{60}$',
         expected: fraction(3, 4),
+        answerForm: 'simplified',
         hint: { eu: 'Zatitu biak 15ez.', es: 'Divide ambos términos entre 15.', ar: 'اقسم البسط والمقام على 15.' },
         explanation: { eu: '$45\\div15=3$ eta $60\\div15=4$.', es: '$45\\div15=3$ y $60\\div15=4$.', ar: '$45\\div15=3$ و$60\\div15=4$.' }
     },
@@ -425,6 +429,7 @@ export const guidedPractice: PracticeItem[] = [
         prompt: { eu: 'Kalkulatu eta sinplifikatu.', es: 'Calcula y simplifica.', ar: 'احسب وبسّط.' },
         expression: '$\\frac{1}{3}-\\frac{5}{6}$',
         expected: fraction(-1, 2),
+        answerForm: 'simplified',
         hint: { eu: 'Idatzi herenak seiren gisa.', es: 'Escribe los tercios como sextos.', ar: 'حوّل الأثلاث إلى أسداس.' },
         explanation: { eu: '$2/6-5/6=-3/6=-1/2$.', es: '$2/6-5/6=-3/6=-1/2$.', ar: '$2/6-5/6=-3/6=-1/2$.' }
     },
@@ -434,6 +439,7 @@ export const guidedPractice: PracticeItem[] = [
         prompt: { eu: 'Kalkulatu eta sinplifikatu.', es: 'Calcula y simplifica.', ar: 'احسب وبسّط.' },
         expression: '$-\\frac{2}{5}\\cdot\\frac{15}{8}$',
         expected: fraction(-3, 4),
+        answerForm: 'simplified',
         hint: { eu: 'Sinplifikatu gurutzatuta biderkatu aurretik.', es: 'Simplifica en cruz antes de multiplicar.', ar: 'اختصر تبادليًا قبل الضرب.' },
         explanation: { eu: 'Zeinuak negatiboa ematen du eta balioa $-30/40=-3/4$ da.', es: 'El signo es negativo y el valor es $-30/40=-3/4$.', ar: 'الإشارة سالبة والقيمة $-30/40=-3/4$.' }
     },
@@ -443,6 +449,7 @@ export const guidedPractice: PracticeItem[] = [
         prompt: { eu: 'Kalkulatu eta sinplifikatu.', es: 'Calcula y simplifica.', ar: 'احسب وبسّط.' },
         expression: '$\\frac{5}{6}\\div\\left(-\\frac{10}{9}\\right)$',
         expected: fraction(-3, 4),
+        answerForm: 'simplified',
         hint: { eu: 'Biderkatu bigarren zatikiaren alderantzizkoarekin.', es: 'Multiplica por la inversa de la segunda fracción.', ar: 'اضرب في مقلوب الكسر الثاني.' },
         explanation: { eu: '$5/6\\cdot(-9/10)=-45/60=-3/4$.', es: '$5/6\\cdot(-9/10)=-45/60=-3/4$.', ar: '$5/6\\cdot(-9/10)=-45/60=-3/4$.' }
     },
@@ -575,6 +582,7 @@ const additionalChallenges: ChallengeItem[] = [
         points: 20,
         prompt: { eu: 'Ikasleen %60k gainditu du. Zein da zatiki laburtezina?', es: 'El 60 % del alumnado ha aprobado. ¿Cuál es la fracción irreducible?', ar: 'نجح 60٪ من الطلاب. ما الكسر في أبسط صورة؟' },
         expected: fraction(3, 5),
+        answerForm: 'simplified',
         hint: { eu: '$60/100$ sinplifikatu.', es: 'Simplifica $60/100$.', ar: 'بسّط $60/100$.' },
         explanation: { eu: '$60/100=3/5$.', es: '$60/100=3/5$.', ar: '$60/100=3/5$.' }
     },
@@ -613,11 +621,20 @@ const additionalChallenges: ChallengeItem[] = [
 export const challenges: ChallengeItem[] = [...additionalChallenges, ...auditedChallenges]
     .sort((left, right) => left.id - right.id)
 
+// Every value is written exactly as shown to the learner (never pre-simplified), so the
+// correct option can't be spotted by being the only unsimplified one. Distractors follow
+// common mistakes: adding the same number to both terms, scaling only one term, losing the sign.
+const raw = (numerator: number, denominator: number): FractionValue => ({ numerator, denominator })
+
 export const equivalenceRounds: EquivalenceRound[] = [
-    { id: 201, prompt: fraction(1, 2), options: [{ numerator: 2, denominator: 4 }, fraction(2, 3), fraction(3, 4)] },
-    { id: 202, prompt: fraction(2, 5), options: [{ numerator: 6, denominator: 10 }, { numerator: 4, denominator: 10 }, fraction(4, 5)] },
-    { id: 203, prompt: fraction(-3, 4), options: [fraction(6, 8), { numerator: -6, denominator: 8 }, fraction(-3, 8)] },
-    { id: 204, prompt: fraction(7, 3), options: [fraction(14, 9), fraction(21, 6), { numerator: 14, denominator: 6 }] }
+    { id: 201, prompt: raw(1, 2), options: [raw(3, 6), raw(2, 3), raw(2, 6)] },
+    { id: 202, prompt: raw(2, 5), options: [raw(4, 7), raw(6, 15), raw(6, 10)] },
+    { id: 203, prompt: raw(-3, 4), options: [raw(6, 8), raw(-3, 8), raw(-6, 8)] },
+    { id: 204, prompt: raw(7, 3), options: [raw(21, 6), raw(14, 6), raw(8, 4)] },
+    { id: 205, prompt: raw(4, 6), options: [raw(2, 4), raw(3, 5), raw(2, 3)] },
+    { id: 206, prompt: raw(9, 12), options: [raw(3, 4), raw(6, 9), raw(10, 13)] },
+    { id: 207, prompt: raw(5, 4), options: [raw(5, 8), raw(10, 8), raw(10, 4)] },
+    { id: 208, prompt: raw(-2, 3), options: [raw(8, 12), raw(-2, 6), raw(-8, 12)] }
 ]
 
 export const pizzaRounds: PizzaRound[] = [

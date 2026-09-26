@@ -29,6 +29,7 @@ import {
 import {
     add,
     answerEquals,
+    checkAnswer,
     compare,
     divide,
     equals,
@@ -53,6 +54,7 @@ import { Icon } from './icons'
 import './PrototypePage.css'
 
 type Feedback = 'idle' | 'success' | 'error'
+type TaskFeedback = Feedback | 'wrong-form' | 'unreadable'
 type LabMode = 'pizza' | 'area' | 'numberline' | 'equivalence' | 'compare' | 'operations' | 'proportion'
 type Operation = 'add' | 'subtract' | 'multiply' | 'divide'
 
@@ -78,43 +80,101 @@ function handleTabArrow(event: ReactKeyboardEvent<HTMLButtonElement>) {
     buttons[nextIndex].click()
 }
 
-function DiagnosticQuiz({ completedIds, onComplete, language, onStartLearning }: { completedIds: number[]; onComplete: (id: number) => void; language: ReturnType<typeof normalizePrototypeLanguage>; onStartLearning: (topic: TheoryTopicId) => void }) {
+function DiagnosticQuiz({
+    answeredIds,
+    correctIds,
+    onAnswer,
+    onRestart,
+    language,
+    onStartLearning
+}: {
+    answeredIds: number[]
+    correctIds: number[]
+    onAnswer: (id: number, correct: boolean) => void
+    onRestart: () => void
+    language: ReturnType<typeof normalizePrototypeLanguage>
+    onStartLearning: (topic: TheoryTopicId) => void
+}) {
     const l = (text: LocalizedText) => pickText(language, text)
-    const [questionIndex, setQuestionIndex] = useState(0)
+    const firstPending = diagnosticQuestions.findIndex((item) => !answeredIds.includes(item.id))
+    const [questionIndex, setQuestionIndex] = useState(Math.max(0, firstPending))
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
-    const [feedback, setFeedback] = useState<Feedback>('idle')
-    const [reviewTopics, setReviewTopics] = useState<TheoryTopicId[]>([])
+    const [showResult, setShowResult] = useState(firstPending === -1)
     const question = diagnosticQuestions[questionIndex]
-    const complete = diagnosticQuestions.every((item) => completedIds.includes(item.id))
+    const isLast = questionIndex === diagnosticQuestions.length - 1
+    const answered = selectedIndex !== null
 
+    // One attempt per question: the diagnostic measures, it doesn't grade
     const choose = (index: number) => {
+        if (answered) return
         setSelectedIndex(index)
-        const correct = index === question.correctIndex
-        setFeedback(correct ? 'success' : 'error')
-        if (correct) onComplete(question.id)
-        else setReviewTopics((topics) => topics.includes(question.topic) ? topics : [...topics, question.topic])
+        onAnswer(question.id, index === question.correctIndex)
     }
 
     const next = () => {
-        setQuestionIndex((index) => Math.min(index + 1, diagnosticQuestions.length - 1))
+        if (isLast) {
+            setShowResult(true)
+            return
+        }
+        setQuestionIndex((index) => index + 1)
         setSelectedIndex(null)
-        setFeedback('idle')
     }
 
-    if (complete) {
-        const firstReview = reviewTopics[0] ?? 'meaning'
+    const restart = () => {
+        onRestart()
+        setQuestionIndex(0)
+        setSelectedIndex(null)
+        setShowResult(false)
+    }
+
+    if (showResult) {
+        const score = diagnosticQuestions.filter((item) => correctIds.includes(item.id)).length
+        const reviewTopics = diagnosticQuestions
+            .filter((item) => answeredIds.includes(item.id) && !correctIds.includes(item.id))
+            .map((item) => item.topic)
+            .filter((topic, index, topics) => topics.indexOf(topic) === index)
+        const firstTopic = theoryTopics.find((topic) => topic.id === (reviewTopics[0] ?? 'meaning')) ?? theoryTopics[0]
+
         return (
             <section className="fraction-v2-diagnostic" aria-labelledby="fraction-v2-diagnostic-title">
                 <div className="fraction-v2-page-intro">
                     <span>{l({ eu: 'DIAGNOSTIKOA OSATUTA', es: 'DIAGNÓSTICO COMPLETADO', ar: 'اكتمل التشخيص' })}</span>
-                    <h1 id="fraction-v2-diagnostic-title">{l({ eu: 'Ibilbidea prest dago', es: 'Tu ruta está preparada', ar: 'مسارك جاهز' })}</h1>
-                    <p>{reviewTopics.length === 0
-                        ? l({ eu: 'Oinarrizko ideia guztiak menderatzen dituzu. Hasi nahi duzun gaitik.', es: 'Dominas todas las ideas iniciales. Puedes comenzar por el tema que prefieras.', ar: 'أنت متقن للأفكار الأولية. يمكنك البدء بالموضوع الذي تفضله.' })
-                        : l({ eu: 'Erantzunen arabera, lehenik berrikusteko gai bat proposatzen dizugu.', es: 'Según tus respuestas, te proponemos un primer tema de revisión.', ar: 'استنادًا إلى إجاباتك نقترح موضوعًا أول للمراجعة.' })}</p>
+                    <h1 id="fraction-v2-diagnostic-title">{l({ eu: 'Zure ibilbidea prest dago', es: 'Tu ruta está preparada', ar: 'مسارك جاهز' })}</h1>
                 </div>
-                <div className="fraction-v2-diagnostic-result">
-                    <strong>{completedIds.filter((id) => id >= 601 && id <= 606).length} / 6</strong>
-                    <button type="button" className="fraction-v2-primary" onClick={() => onStartLearning(firstReview)}>{l({ eu: 'Ikasten hasi', es: 'Empezar a aprender', ar: 'ابدأ التعلم' })}</button>
+                <div className="fraction-v2-diagnostic-card">
+                    <p className="fraction-v2-diagnostic-score">
+                        <strong>{score}</strong>
+                        <span>{l({ eu: `/ ${diagnosticQuestions.length} asmatuta`, es: `de ${diagnosticQuestions.length} correctas`, ar: `من ${diagnosticQuestions.length} صحيحة` })}</span>
+                    </p>
+                    {reviewTopics.length === 0 ? (
+                        <p>{l({ eu: 'Hasierako ideia guztiak menderatzen dituzu. Hasi nahi duzun gaitik edo jarraitu ibilbideari hasieratik.', es: 'Dominas las ideas iniciales. Empieza por el tema que prefieras o sigue la ruta desde el principio.', ar: 'أنت متقن للأفكار الأولية. ابدأ بالموضوع الذي تفضله أو تابع المسار من البداية.' })}</p>
+                    ) : (
+                        <>
+                            <p>{l({ eu: 'Erantzunen arabera, gai hauek berrikustea gomendatzen dizugu:', es: 'Según tus respuestas, te recomendamos repasar estos temas:', ar: 'استنادًا إلى إجاباتك، نوصيك بمراجعة هذه المواضيع:' })}</p>
+                            <ul className="fraction-v2-review-list">
+                                {reviewTopics.map((topicId) => {
+                                    const topic = theoryTopics.find((item) => item.id === topicId)
+                                    return topic ? (
+                                        <li key={topicId}>
+                                            <button type="button" data-stage={topic.stage} onClick={() => onStartLearning(topic.id)}>
+                                                <span aria-hidden="true" />
+                                                {l(topic.title)}
+                                                <Icon name="arrow" size={16} strokeWidth={2.4} className="fraction-v2-icon-flip" />
+                                            </button>
+                                        </li>
+                                    ) : null
+                                })}
+                            </ul>
+                        </>
+                    )}
+                    <div className="fraction-v2-diagnostic-actions">
+                        <button type="button" className="fraction-v2-primary" onClick={() => onStartLearning(firstTopic.id)}>
+                            {reviewTopics.length === 0
+                                ? l({ eu: 'Hasi lehen ikasgaitik', es: 'Empezar por la primera lección', ar: 'ابدأ بالدرس الأول' })
+                                : `${l({ eu: 'Hasi hemendik:', es: 'Empezar por:', ar: 'ابدأ بـ:' })} ${l(firstTopic.title)}`}
+                        </button>
+                        <button type="button" className="fraction-v2-secondary" onClick={restart}>{l({ eu: 'Errepikatu diagnostikoa', es: 'Repetir el diagnóstico', ar: 'أعد التشخيص' })}</button>
+                    </div>
                 </div>
             </section>
         )
@@ -125,19 +185,35 @@ function DiagnosticQuiz({ completedIds, onComplete, language, onStartLearning }:
             <div className="fraction-v2-page-intro">
                 <span>{l({ eu: '6 GALDERA · PUNTUAZIORIK GABE', es: '6 PREGUNTAS · SIN NOTA', ar: '6 أسئلة · بلا علامة' })}</span>
                 <h1 id="fraction-v2-diagnostic-title">{l({ eu: 'Aurkitu nondik hasi', es: 'Descubre por dónde empezar', ar: 'اكتشف من أين تبدأ' })}</h1>
-                <p>{l({ eu: 'Ez da azterketa bat. Erantzunek hurrengo urrats egokia aukeratzen lagunduko dute.', es: 'No es un examen. Tus respuestas ayudarán a elegir el siguiente paso adecuado.', ar: 'هذا ليس اختبارًا. ستساعد إجاباتك على اختيار الخطوة التالية المناسبة.' })}</p>
+                <p>{l({ eu: 'Ez da azterketa bat. Erantzun galdera bakoitza behin; zure erantzunek hurrengo urratsa aukeratzen lagunduko dute.', es: 'No es un examen. Responde cada pregunta una vez; tus respuestas ayudarán a elegir el siguiente paso.', ar: 'هذا ليس اختبارًا. أجب عن كل سؤال مرة واحدة؛ ستساعد إجاباتك على اختيار الخطوة التالية.' })}</p>
             </div>
             <article className="fraction-v2-diagnostic-card" aria-live="polite">
-                <div className="fraction-v2-diagnostic-progress"><span style={{ width: `${((questionIndex + 1) / diagnosticQuestions.length) * 100}%` }} /></div>
+                <div className="fraction-v2-diagnostic-progress"><span style={{ width: `${((questionIndex + (answered ? 1 : 0)) / diagnosticQuestions.length) * 100}%` }} /></div>
                 <small>{questionIndex + 1} / {diagnosticQuestions.length}</small>
                 <h2>{l(question.prompt)}</h2>
                 <div className="fraction-v2-diagnostic-options">
-                    {question.options.map((option, index) => (
-                        <button type="button" aria-pressed={selectedIndex === index} className={selectedIndex === index ? feedback : ''} disabled={feedback === 'success'} onClick={() => choose(index)} key={`${question.id}-${index}`}><span dir="ltr">{l(option)}</span></button>
-                    ))}
+                    {question.options.map((option, index) => {
+                        const state = !answered ? '' : index === question.correctIndex ? 'success' : index === selectedIndex ? 'error' : ''
+                        return (
+                            <button type="button" aria-pressed={selectedIndex === index} className={state} disabled={answered} onClick={() => choose(index)} key={`${question.id}-${index}`}>
+                                <span dir="ltr">{l(option)}</span>
+                            </button>
+                        )
+                    })}
                 </div>
-                {feedback !== 'idle' && <div className={`fraction-v2-feedback ${feedback}`}><MathText text={l(question.explanation)} /></div>}
-                <button type="button" className="fraction-v2-primary" disabled={feedback !== 'success' || questionIndex === diagnosticQuestions.length - 1} onClick={next}>{l({ eu: 'Hurrengo galdera', es: 'Siguiente pregunta', ar: 'السؤال التالي' })}</button>
+                {answered && (
+                    <div className={`fraction-v2-feedback ${selectedIndex === question.correctIndex ? 'success' : 'error'}`}>
+                        <strong>{selectedIndex === question.correctIndex
+                            ? l({ eu: 'Zuzena.', es: 'Correcto.', ar: 'صحيح.' })
+                            : l({ eu: 'Ez da hori.', es: 'No es esa.', ar: 'ليست هذه.' })}</strong>
+                        <MathText text={l(question.explanation)} />
+                    </div>
+                )}
+                <button type="button" className="fraction-v2-primary" disabled={!answered} onClick={next}>
+                    {isLast
+                        ? l({ eu: 'Ikusi emaitza', es: 'Ver el resultado', ar: 'اعرض النتيجة' })
+                        : l({ eu: 'Hurrengo galdera', es: 'Siguiente pregunta', ar: 'السؤال التالي' })}
+                </button>
             </article>
         </section>
     )
@@ -288,10 +364,10 @@ function ExerciseBank({
     )
 }
 
-function useStoredIds(key: string) {
+function useStoredIds(key: string, fallbackKey?: string) {
     const [ids, setIds] = useState<number[]>(() => {
         try {
-            const stored = localStorage.getItem(key)
+            const stored = localStorage.getItem(key) ?? (fallbackKey ? localStorage.getItem(fallbackKey) : null)
             if (!stored) return []
             const parsed: unknown = JSON.parse(stored)
             return Array.isArray(parsed) ? parsed.filter((id): id is number => typeof id === 'number' && Number.isSafeInteger(id)) : []
@@ -301,7 +377,11 @@ function useStoredIds(key: string) {
     })
 
     useEffect(() => {
-        localStorage.setItem(key, JSON.stringify(ids))
+        try {
+            localStorage.setItem(key, JSON.stringify(ids))
+        } catch {
+            // Storage can be unavailable (private mode); progress then lasts for the session only
+        }
     }, [ids, key])
 
     const addId = (id: number) => setIds((current) => current.includes(id) ? current : [...current, id])
@@ -407,6 +487,7 @@ export function ZatikiakPrototypePage() {
     const [moreOpen, setMoreOpen] = useState(false)
     const learned = useStoredTopics('matella-zatikiak-v2-learned')
     const diagnosticProgress = useStoredIds('matella-zatikiak-v2-diagnostic')
+    const diagnosticCorrect = useStoredIds('matella-zatikiak-v2-diagnostic-correct', 'matella-zatikiak-v2-diagnostic')
     const practiceProgress = useStoredIds('matella-zatikiak-v2-practice')
     const bankProgress = useStoredIds('matella-zatikiak-v2-exercise-bank')
     const challengeProgress = useStoredIds('matella-zatikiak-v2-challenges')
@@ -433,6 +514,7 @@ export function ZatikiakPrototypePage() {
         const confirmed = window.confirm(l({ eu: 'V2ko aurrerapen guztia ezabatu nahi duzu?', es: '¿Quieres borrar todo el progreso de la V2?', ar: 'هل تريد حذف كل تقدم النسخة الجديدة؟' }))
         if (!confirmed) return
         diagnosticProgress.reset()
+        diagnosticCorrect.reset()
         learned.reset()
         practiceProgress.reset()
         bankProgress.reset()
@@ -516,8 +598,13 @@ export function ZatikiakPrototypePage() {
                 {section === 'route' && renderRoute()}
                 {section === 'diagnostic' && (
                     <DiagnosticQuiz
-                        completedIds={diagnosticProgress.ids}
-                        onComplete={diagnosticProgress.addId}
+                        answeredIds={diagnosticProgress.ids}
+                        correctIds={diagnosticCorrect.ids}
+                        onAnswer={(id, correct) => {
+                            diagnosticProgress.addId(id)
+                            if (correct) diagnosticCorrect.addId(id)
+                        }}
+                        onRestart={() => { diagnosticProgress.reset(); diagnosticCorrect.reset() }}
                         language={language}
                         onStartLearning={(nextTopic) => { setTopicId(nextTopic); navigate('learn') }}
                     />
@@ -967,7 +1054,7 @@ function PracticeDeck({
     const l = (text: LocalizedText) => pickText(language, text)
     const [currentIndex, setCurrentIndex] = useState(0)
     const [answers, setAnswers] = useState<Record<number, string>>({})
-    const [feedback, setFeedback] = useState<Record<number, Feedback>>({})
+    const [feedback, setFeedback] = useState<Record<number, TaskFeedback>>({})
     const [hints, setHints] = useState<number[]>([])
     const current = items[currentIndex]
     const isComplete = completedIds.includes(current.id)
@@ -980,10 +1067,21 @@ function PracticeDeck({
         proportionality: { eu: 'Identifikatu zatiaren eta guztizkoaren arteko erlazioa, eta egiaztatu unitatea.', es: 'Identifica la relación entre la parte y el total y comprueba la unidad.', ar: 'حدّد العلاقة بين الجزء والكل وتحقق من الوحدة.' }
     }
 
+    const answerForm = current.answerForm ?? 'any'
+    const formMessage: LocalizedText = answerForm === 'mixed'
+        ? { eu: 'Balioa zuzena da, baina idatzi zenbaki misto gisa: oso bat eta zatiki propio laburtezin bat, adibidez 2 1/3.', es: 'El valor es correcto, pero escríbelo como número mixto: un entero y una fracción propia irreducible, por ejemplo 2 1/3.', ar: 'القيمة صحيحة، لكن اكتبها عددًا كسريًا: عدد صحيح وكسر حقيقي في أبسط صورة، مثل 2 1/3.' }
+        : { eu: 'Balioa zuzena da, baina oraindik sinplifika daiteke. Idatzi zatiki laburtezina.', es: 'El valor es correcto, pero todavía se puede simplificar. Escribe la fracción irreducible.', ar: 'القيمة صحيحة، لكن يمكن تبسيطها أكثر. اكتب الكسر في أبسط صورة.' }
+    const placeholder: LocalizedText = answerForm === 'mixed'
+        ? { eu: 'Adib.: 2 1/3', es: 'Ej.: 2 1/3', ar: 'مثال: 2 1/3' }
+        : answerForm === 'simplified'
+            ? { eu: 'Adib.: 3/4', es: 'Ej.: 3/4', ar: 'مثال: 3/4' }
+            : { eu: 'Adib.: 3/4 edo 0,75', es: 'Ej.: 3/4 o 0,75', ar: 'مثال: 3/4 أو 0.75' }
+
     const check = () => {
-        const correct = answerEquals(answers[current.id] ?? '', current.expected)
-        setFeedback((state) => ({ ...state, [current.id]: correct ? 'success' : 'error' }))
-        if (correct) onComplete(current.id)
+        const result = checkAnswer(answers[current.id] ?? '', current.expected, answerForm)
+        const next: TaskFeedback = result === 'correct' ? 'success' : result === 'incorrect' ? 'error' : result
+        setFeedback((state) => ({ ...state, [current.id]: next }))
+        if (result === 'correct') onComplete(current.id)
     }
 
     return (
@@ -993,7 +1091,7 @@ function PracticeDeck({
                 <h1 id="fraction-v2-practice-title">{challengeMode
                     ? l({ eu: 'Aplikatu egoera errealetan', es: 'Aplica en situaciones reales', ar: 'طبّق في مواقف واقعية' })
                     : l({ eu: 'Saiatu, jaso pista eta ulertu', es: 'Intenta, recibe una pista y comprende', ar: 'حاول ثم خذ تلميحًا وافهم' })}</h1>
-                <p>{l({ eu: 'Erantzun baliokideak eta koma edo puntua duten hamartarrak onartzen dira.', es: 'Se aceptan fracciones equivalentes y decimales con coma o punto.', ar: 'تُقبل الكسور المكافئة والأعداد العشرية بالفاصلة أو النقطة.' })}</p>
+                <p>{l({ eu: 'Enuntziatuak forma zehatzik eskatzen ez badu, zatiki baliokideak eta koma edo puntua duten hamartarrak onartzen dira.', es: 'Si el enunciado no pide una forma concreta, se aceptan fracciones equivalentes y decimales con coma o punto.', ar: 'إذا لم يطلب السؤال صيغة محددة، تُقبل الكسور المكافئة والأعداد العشرية بالفاصلة أو النقطة.' })}</p>
             </div>
 
             <div className="fraction-v2-task-layout">
@@ -1031,8 +1129,8 @@ function PracticeDeck({
                                 setFeedback((state) => ({ ...state, [current.id]: 'idle' }))
                             }}
                             onKeyDown={(event) => { if (event.key === 'Enter') check() }}
-                            placeholder={l({ eu: 'Adib.: 3/4 edo 0,75', es: 'Ej.: 3/4 o 0,75', ar: 'مثال: 3/4 أو 0.75' })}
-                            inputMode="decimal"
+                            placeholder={l(placeholder)}
+                            inputMode={answerForm === 'mixed' ? 'text' : 'decimal'}
                         />
                         <button type="button" className="fraction-v2-primary" onClick={check}>{l({ eu: 'Egiaztatu', es: 'Comprobar', ar: 'تحقق' })}</button>
                     </div>
@@ -1041,6 +1139,8 @@ function PracticeDeck({
                     </button>
                     {hints.includes(current.id) && <div className="fraction-v2-hint"><MathText text={l(current.hint)} /></div>}
                     {currentFeedback === 'error' && <div className="fraction-v2-feedback error">{l(errorByStage[current.stage])}</div>}
+                    {currentFeedback === 'wrong-form' && <div className="fraction-v2-feedback form">{l(formMessage)}</div>}
+                    {currentFeedback === 'unreadable' && <div className="fraction-v2-feedback">{l({ eu: 'Ez dut erantzun hori ulertzen. Idatzi zatiki bat (3/4), zenbaki misto bat (2 1/3) edo hamartar bat (0,75).', es: 'No entiendo esa respuesta. Escribe una fracción (3/4), un número mixto (2 1/3) o un decimal (0,75).', ar: 'لم أفهم هذه الإجابة. اكتب كسرًا (3/4) أو عددًا كسريًا (2 1/3) أو عددًا عشريًا (0.75).' })}</div>}
                     {currentFeedback === 'success' && (
                         <div className="fraction-v2-feedback success">
                             <strong>{l({ eu: 'Zuzena.', es: 'Correcto.', ar: 'صحيح.' })}</strong>
@@ -1248,21 +1348,41 @@ function FractionSprint({ completedIds, onComplete, language }: { completedIds: 
     )
 }
 
+/** LaTeX for a fraction exactly as written, without simplifying it */
+function writtenLatex(value: FractionValue): string {
+    if (value.denominator === 1) return String(value.numerator)
+    return `${value.numerator < 0 ? '-' : ''}\\frac{${Math.abs(value.numerator)}}{${value.denominator}}`
+}
+
+function shuffledOrder(length: number): number[] {
+    const order = Array.from({ length }, (_, index) => index)
+    for (let index = order.length - 1; index > 0; index -= 1) {
+        const swap = Math.floor(Math.random() * (index + 1))
+        ;[order[index], order[swap]] = [order[swap], order[index]]
+    }
+    return order
+}
+
 function ExactEquivalenceGame({ completedIds, onComplete, language }: { completedIds: number[]; onComplete: (id: number) => void; language: ReturnType<typeof normalizePrototypeLanguage> }) {
     const l = (text: LocalizedText) => pickText(language, text)
     const [roundIndex, setRoundIndex] = useState(0)
-    const [selected, setSelected] = useState<number | null>(null)
+    const [order, setOrder] = useState(() => shuffledOrder(equivalenceRounds[0].options.length))
+    const [tried, setTried] = useState<number[]>([])
     const round = equivalenceRounds[roundIndex]
-    const correct = selected !== null && equals(round.options[selected], round.prompt)
+    const solved = tried.some((index) => equals(round.options[index], round.prompt))
+    const lastTry = tried[tried.length - 1]
 
     const choose = (index: number) => {
-        setSelected(index)
+        if (solved || tried.includes(index)) return
+        setTried((current) => [...current, index])
         if (equals(round.options[index], round.prompt)) onComplete(round.id)
     }
 
     const next = () => {
-        setRoundIndex((index) => (index + 1) % equivalenceRounds.length)
-        setSelected(null)
+        const nextIndex = (roundIndex + 1) % equivalenceRounds.length
+        setRoundIndex(nextIndex)
+        setOrder(shuffledOrder(equivalenceRounds[nextIndex].options.length))
+        setTried([])
     }
 
     return (
@@ -1270,26 +1390,32 @@ function ExactEquivalenceGame({ completedIds, onComplete, language }: { complete
             <div className="fraction-v2-game-card">
                 <div className="fraction-v2-game-score">{equivalenceRounds.filter((item) => completedIds.includes(item.id)).length} / {equivalenceRounds.length}</div>
                 <p>{l({ eu: 'Zein da zatiki honen baliokidea?', es: '¿Cuál es equivalente a esta fracción?', ar: 'أي كسر يكافئ هذا الكسر؟' })}</p>
-                <div className="fraction-v2-game-prompt"><MathText text={`$${toLatex(round.prompt)}$`} /></div>
+                <div className="fraction-v2-game-prompt"><MathText text={`$${writtenLatex(round.prompt)}$`} /></div>
                 <div className="fraction-v2-game-options">
-                    {round.options.map((option, index) => (
-                        <button
-                            type="button"
-                            className={selected === index ? (correct ? 'correct' : 'incorrect') : ''}
-                            aria-label={option.denominator === 1 ? `${option.numerator}` : `${option.numerator}/${option.denominator}`}
-                            aria-pressed={selected === index}
-                            onClick={() => choose(index)}
-                            key={toText(option)}
-                        >
-                            <MathText text={`$${option.denominator === 1 ? option.numerator : `${option.numerator < 0 ? '-' : ''}\\frac{${Math.abs(option.numerator)}}{${option.denominator}}`}$`} />
-                        </button>
-                    ))}
+                    {order.map((index) => {
+                        const option = round.options[index]
+                        const isTried = tried.includes(index)
+                        const isCorrect = equals(option, round.prompt)
+                        return (
+                            <button
+                                type="button"
+                                className={isTried ? (isCorrect ? 'correct' : 'incorrect') : ''}
+                                aria-label={`${option.numerator}/${option.denominator}`}
+                                aria-pressed={isTried}
+                                disabled={solved && !isTried}
+                                onClick={() => choose(index)}
+                                key={`${round.id}-${index}`}
+                            >
+                                <MathText text={`$${writtenLatex(option)}$`} />
+                            </button>
+                        )
+                    })}
                 </div>
-                {selected !== null && (
-                    <div className={`fraction-v2-game-feedback ${correct ? 'success' : 'error'}`} aria-live="polite">
-                        {correct
+                {lastTry !== undefined && (
+                    <div className={`fraction-v2-game-feedback ${solved ? 'success' : 'error'}`} aria-live="polite">
+                        {solved
                             ? l({ eu: 'Bai. Biek balio bera dute.', es: 'Sí. Ambas tienen exactamente el mismo valor.', ar: 'نعم. للكسرين القيمة نفسها تمامًا.' })
-                            : l({ eu: 'Ez oraindik. Sinplifikatu aukera eta alderatu.', es: 'Todavía no. Simplifica la opción y compara.', ar: 'ليس بعد. بسّط الخيار ثم قارن.' })}
+                            : l({ eu: 'Ez oraindik. Sinplifikatu bietako bakoitza eta alderatu.', es: 'Todavía no. Simplifica cada una y compáralas.', ar: 'ليس بعد. بسّط كل كسر ثم قارن بينهما.' })}
                     </div>
                 )}
                 <button type="button" className="fraction-v2-primary" onClick={next}>{l({ eu: 'Hurrengo txanda', es: 'Siguiente ronda', ar: 'الجولة التالية' })}</button>

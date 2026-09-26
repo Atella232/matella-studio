@@ -7,13 +7,13 @@ La V2 está aislada en `src/pages/dbh2-zatikiak-prototype/` y se revisa en `#/pr
 Inventario funcional:
 
 - 12 temas de teoría en 5 bloques curriculares.
-- 6 preguntas de diagnóstico sin calificación.
+- 6 preguntas de diagnóstico sin calificación, con un intento por pregunta, puntuación real y temas recomendados según los fallos.
 - 10 actividades guiadas con pista, validación exacta y explicación.
 - 42 ejercicios del banco completo, organizados en 7 temas y 3 dificultades.
 - 12 retos contextualizados y auditados.
 - 7 laboratorios: pizza, área, recta, equivalencia, comparación, operaciones y proporcionalidad.
 - 4 modos de juego: equivalencias, pizza, memoria y carrera de cálculo.
-- 104 objetivos de progreso local, separados de la unidad pública.
+- 108 objetivos de progreso local, separados de la unidad pública.
 - Interfaz completa en euskera, castellano y árabe, con fórmulas siempre de izquierda a derecha.
 
 ## Comparación con la unidad actual
@@ -27,7 +27,7 @@ Inventario funcional:
 | Juegos | Pizza, memoria y carrera separados | Cuatro juegos reconstruidos sobre el mismo motor exacto |
 | Diagnóstico | No existe | 6 preguntas que recomiendan el punto de entrada |
 | Accesibilidad | Variable según página | Controles semánticos, teclado, estados anunciados y RTL real |
-| Progreso | Parcial y separado por experiencias | 104 objetivos en un único indicador local |
+| Progreso | Parcial y separado por experiencias | 108 objetivos en un único indicador local |
 | Móvil | Cabecera y contenidos irregulares | Diseño comprobado sin desbordamiento entre 390 y 1440 px |
 
 ## Cambio de rutas cuando exista aprobación

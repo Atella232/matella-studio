@@ -307,6 +307,12 @@
     background: var(--error-tint);
 }
 
+.fraction-v2-feedback.form {
+    border-color: #b98a00;
+    color: var(--mustard-ink);
+    background: var(--mustard-tint);
+}
+
 .fraction-v2-feedback strong {
     margin-inline-end: 6px;
 }
@@ -1248,6 +1254,67 @@
 
 .fraction-v2-diagnostic-card > .fraction-v2-primary {
     align-self: flex-end;
+}
+
+.fraction-v2 .fraction-v2-diagnostic-score {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.fraction-v2-diagnostic-score strong {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 64px;
+    line-height: 1;
+}
+
+.fraction-v2-diagnostic-score span {
+    color: var(--muted);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.fraction-v2-review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.fraction-v2-review-list button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 14px;
+    border: 1.5px solid var(--ink);
+    border-radius: 12px;
+    color: var(--stage-ink);
+    background: var(--stage-tint);
+    font-weight: 700;
+    text-align: start;
+}
+
+.fraction-v2-review-list button > span {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    background: var(--stage);
+}
+
+.fraction-v2-review-list button svg {
+    margin-inline-start: auto;
+}
+
+.fraction-v2-diagnostic-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 6px;
 }
 
 /* ---------- Practice, challenges and exercise bank ---------- */
