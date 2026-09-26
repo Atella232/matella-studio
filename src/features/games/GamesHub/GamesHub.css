@@ -22,7 +22,7 @@
             var(--color-accent) 52%,
             var(--color-secondary) 100%);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: var(--ink);
     background-clip: text;
     text-shadow: none;
     margin-bottom: 0.5rem;
@@ -42,8 +42,8 @@
 .game-card {
     --game-accent: var(--color-primary);
     background: linear-gradient(145deg,
-            rgba(255, 255, 255, 0.08) 0%,
-            rgba(255, 255, 255, 0.03) 100%);
+            rgba(29, 39, 51, 0.048) 0%,
+            rgba(29, 39, 51, 0.018) 100%);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-radius: 20px;
@@ -53,9 +53,7 @@
     cursor: pointer;
     text-decoration: none;
     color: var(--color-text-primary);
-    box-shadow:
-        inset 0 0 0 1px color-mix(in srgb, var(--game-accent) 25%, var(--glass-border)),
-        0 10px 30px rgba(0, 0, 0, 0.22);
+    box-shadow: none;
 }
 
 .game-card:nth-child(2) {
@@ -69,11 +67,9 @@
 .game-card:hover {
     transform: translateY(-8px);
     background: linear-gradient(145deg,
-            rgba(255, 255, 255, 0.12) 0%,
-            rgba(255, 255, 255, 0.05) 100%);
-    box-shadow:
-        inset 0 0 0 1px color-mix(in srgb, var(--game-accent) 60%, white),
-        0 20px 50px color-mix(in srgb, var(--game-accent) 22%, rgba(0, 0, 0, 0.3));
+            rgba(29, 39, 51, 0.072) 0%,
+            rgba(29, 39, 51, 0.03) 100%);
+    box-shadow: none;
 }
 
 .game-card-icon {

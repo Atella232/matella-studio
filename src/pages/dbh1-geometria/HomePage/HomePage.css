@@ -6,9 +6,9 @@
     color: var(--text-main);
 
     /* Geometry Theme Colors (Teal / Emerald) */
-    --accent-primary: #00d2ff;
-    --accent-secondary: #00ff88;
-    --accent-tertiary: #10b981;
+    --accent-primary: #2f6fdb;
+    --accent-secondary: #267b53;
+    --accent-tertiary: #267b53;
 }
 
 .dbh1-geometria-home .container {
@@ -37,10 +37,10 @@
 }
 
 .dbh1-geometria-home .back-button:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(29, 39, 51, 0.06);
     transform: translateX(-4px);
     border-color: var(--accent-primary);
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+    box-shadow: 0 0 15px rgba(47, 111, 219, 0.3);
 }
 
 .dbh1-geometria-home .title-container {
@@ -68,8 +68,8 @@
     background: linear-gradient(135deg, #fff, var(--accent-secondary));
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+    -webkit-text-fill-color: var(--ink);
+    text-shadow: none;
 }
 
 .dbh1-geometria-home .subtitle {
@@ -94,16 +94,16 @@
     flex-direction: column;
     position: relative;
     overflow: hidden;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
 }
 
 .dbh1-geometria-home .feature-card:hover {
     transform: translateY(-10px) scale(1.02);
-    border-color: rgba(0, 255, 136, 0.3);
+    border-color: rgba(38, 123, 83, 0.3);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
-        inset 0 0 0 1px rgba(0, 255, 136, 0.2),
-        0 0 30px rgba(0, 255, 136, 0.1);
+        inset 0 0 0 1px rgba(38, 123, 83, 0.2),
+        0 0 30px rgba(38, 123, 83, 0.1);
 }
 
 .dbh1-geometria-home .feature-card::after {
@@ -113,7 +113,7 @@
     right: 0;
     width: 150px;
     height: 150px;
-    background: radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(38, 123, 83, 0.1) 0%, transparent 70%);
     border-radius: 50%;
     transform: translate(30%, -30%);
     transition: all 0.4s ease;
@@ -121,7 +121,7 @@
 
 .dbh1-geometria-home .feature-card:hover::after {
     transform: translate(20%, -20%) scale(1.2);
-    background: radial-gradient(circle, rgba(0, 255, 136, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(38, 123, 83, 0.15) 0%, transparent 70%);
 }
 
 .dbh1-geometria-home .feature-icon {
@@ -131,8 +131,8 @@
     background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 15px rgba(0, 255, 136, 0.3));
+    -webkit-text-fill-color: var(--ink);
+    filter: drop-shadow(0 0 15px rgba(38, 123, 83, 0.3));
     transition: transform 0.4s ease;
 }
 
@@ -143,7 +143,7 @@
 .dbh1-geometria-home .feature-card h3 {
     font-size: 1.8rem;
     margin-bottom: 1rem;
-    color: #fff;
+    color: var(--ink);
     letter-spacing: -0.5px;
 }
 
@@ -166,16 +166,16 @@
     transition: all 0.3s ease;
     margin-top: auto;
     padding: 0.75rem 1.5rem;
-    background: rgba(0, 255, 136, 0.1);
+    background: rgba(38, 123, 83, 0.1);
     border-radius: 8px;
-    border: 1px solid rgba(0, 255, 136, 0.2);
+    border: 1px solid rgba(38, 123, 83, 0.2);
     width: fit-content;
 }
 
 .dbh1-geometria-home .feature-card:hover .feature-link {
     background: var(--accent-secondary);
     color: #000;
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+    box-shadow: 0 0 20px rgba(38, 123, 83, 0.4);
 }
 
 @media (max-width: 768px) {

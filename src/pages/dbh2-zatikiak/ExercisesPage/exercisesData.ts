@@ -214,7 +214,7 @@ export const fractionExerciseSections: ExerciseSectionData[] = [
         id: 'representacion',
         title: text('Concepto y representación', 'Kontzeptua eta adierazpena', 'المفهوم والتمثيل'),
         icon: '◴',
-        color: '#6366f1',
+        color: '#2f6fdb',
         count: 6,
         items: [
             {
@@ -259,7 +259,7 @@ export const fractionExerciseSections: ExerciseSectionData[] = [
         id: 'equivalentes',
         title: text('Equivalencia y simplificación', 'Baliokidetasuna eta sinplifikazioa', 'التكافؤ والتبسيط'),
         icon: '=',
-        color: '#06b6d4',
+        color: '#7a55d6',
         count: 6,
         items: [
             {
@@ -304,7 +304,7 @@ export const fractionExerciseSections: ExerciseSectionData[] = [
         id: 'comparacion',
         title: text('Comparación y orden', 'Konparazioa eta ordena', 'المقارنة والترتيب'),
         icon: '<>',
-        color: '#8b5cf6',
+        color: '#7a55d6',
         count: 6,
         items: [
             {
@@ -349,7 +349,7 @@ export const fractionExerciseSections: ExerciseSectionData[] = [
         id: 'suma-resta',
         title: text('Suma y resta', 'Batuketa eta kenketa', 'الجمع والطرح'),
         icon: '+-',
-        color: '#10b981',
+        color: '#267b53',
         count: 6,
         items: [
             {
@@ -394,7 +394,7 @@ export const fractionExerciseSections: ExerciseSectionData[] = [
         id: 'producto-division',
         title: text('Multiplicación y división', 'Biderketa eta zatiketa', 'الضرب والقسمة'),
         icon: '×÷',
-        color: '#f59e0b',
+        color: '#e0a100',
         count: 6,
         items: [
             {
@@ -439,7 +439,7 @@ export const fractionExerciseSections: ExerciseSectionData[] = [
         id: 'potencias',
         title: text('Potencias y operaciones combinadas', 'Berreturak eta eragiketa konbinatuak', 'القوى والعمليات المركبة'),
         icon: 'a²',
-        color: '#ec4899',
+        color: '#d9502e',
         count: 6,
         items: [
             {
@@ -484,7 +484,7 @@ export const fractionExerciseSections: ExerciseSectionData[] = [
         id: 'problemas',
         title: text('Problemas contextualizados', 'Testuinguruko problemak', 'مسائل سياقية'),
         icon: 'ctx',
-        color: '#22c55e',
+        color: '#267b53',
         count: 6,
         items: [
             {

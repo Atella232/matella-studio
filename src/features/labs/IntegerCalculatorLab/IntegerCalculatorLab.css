@@ -69,9 +69,9 @@
 }
 
 .integer-calculator-lab .result-card.error {
-    border-color: #ef4444;
+    border-color: #b3261e;
     /* red color for error */
-    background: rgba(239, 68, 68, 0.1);
+    background: rgba(179, 38, 30, 0.1);
 }
 
 .integer-calculator-lab .result-card .result-value {
@@ -88,7 +88,7 @@
 }
 
 .integer-calculator-lab .negative-val {
-    color: #ef4444;
+    color: #b3261e;
     /* red for negative */
 }
 

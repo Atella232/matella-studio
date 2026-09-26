@@ -91,7 +91,7 @@ export const algebraTheorySections: TheorySectionData[] = [
             ar: 'اللغة الجبرية'
         },
         icon: '🔤',
-        color: '#6366f1',
+        color: '#2f6fdb',
         blocks: [
             {
                 heading: {
@@ -191,7 +191,7 @@ export const algebraTheorySections: TheorySectionData[] = [
             ar: 'الحدود الأحادية'
         },
         icon: '🔷',
-        color: '#06b6d4',
+        color: '#7a55d6',
         blocks: [
             {
                 heading: {
@@ -218,7 +218,7 @@ export const algebraTheorySections: TheorySectionData[] = [
             ar: 'عمليات الحدود الأحادية'
         },
         icon: '⚡',
-        color: '#10b981',
+        color: '#267b53',
         blocks: [
             {
                 heading: {
@@ -245,7 +245,7 @@ export const algebraTheorySections: TheorySectionData[] = [
             ar: 'كثيرات الحدود'
         },
         icon: '📈',
-        color: '#f472b6',
+        color: '#d9502e',
         blocks: [
             {
                 heading: {
@@ -313,7 +313,7 @@ export const algebraTheorySections: TheorySectionData[] = [
             ar: 'عمليات كثيرات الحدود'
         },
         icon: '🔢',
-        color: '#f59e0b',
+        color: '#e0a100',
         blocks: [
             {
                 heading: {
@@ -387,7 +387,7 @@ export const algebraTheorySections: TheorySectionData[] = [
             ar: 'المتطابقات الشهيرة'
         },
         icon: '⭐',
-        color: '#8b5cf6',
+        color: '#7a55d6',
         blocks: [
             {
                 heading: {
@@ -437,7 +437,7 @@ export const algebraTheorySections: TheorySectionData[] = [
             ar: 'العامل المشترك'
         },
         icon: '🔑',
-        color: '#ec4899',
+        color: '#d9502e',
         blocks: [
             {
                 heading: {

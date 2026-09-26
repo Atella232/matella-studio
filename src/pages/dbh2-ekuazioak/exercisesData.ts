@@ -99,11 +99,11 @@ const bigarrenMaila = [
 ]
 
 export const ekuazioakExerciseSections: ExerciseSectionData[] = [
-    { id: 'significado', title: t('Esanahia eta elementuak', 'Significado y elementos', 'المعنى والعناصر'), icon: '⚖️', color: '#6366f1', count: significado.length, items: significado },
-    { id: 'baliokideak', title: t('Ekuazio baliokideak', 'Ecuaciones equivalentes', 'معادلات متكافئة'), icon: '🔁', color: '#06b6d4', count: baliokideak.length, items: baliokideak },
-    { id: 'lehen-maila', title: t('Lehen mailako ekuazioak', 'Ecuaciones de primer grado', 'معادلات الدرجة الأولى'), icon: '🔎', color: '#10b981', count: lehenMaila.length, items: lehenMaila },
-    { id: 'parentesiak', title: t('Parentesiak', 'Paréntesis', 'الأقواس'), icon: '🧮', color: '#f59e0b', count: parentesiak.length, items: parentesiak },
-    { id: 'izendatzaileak', title: t('Izendatzaileak', 'Denominadores', 'المقامات'), icon: '➗', color: '#f472b6', count: izendatzaileak.length, items: izendatzaileak },
-    { id: 'problemak', title: t('Problemak ekuazioekin', 'Problemas con ecuaciones', 'مسائل بالمعادلات'), icon: '🧠', color: '#8b5cf6', count: problemak.length, items: problemak },
-    { id: 'bigarren-maila', title: t('Bigarren mailako ekuazioak', 'Ecuaciones de segundo grado', 'معادلات الدرجة الثانية'), icon: '📈', color: '#ef4444', count: bigarrenMaila.length, items: bigarrenMaila }
+    { id: 'significado', title: t('Esanahia eta elementuak', 'Significado y elementos', 'المعنى والعناصر'), icon: '⚖️', color: '#2f6fdb', count: significado.length, items: significado },
+    { id: 'baliokideak', title: t('Ekuazio baliokideak', 'Ecuaciones equivalentes', 'معادلات متكافئة'), icon: '🔁', color: '#7a55d6', count: baliokideak.length, items: baliokideak },
+    { id: 'lehen-maila', title: t('Lehen mailako ekuazioak', 'Ecuaciones de primer grado', 'معادلات الدرجة الأولى'), icon: '🔎', color: '#267b53', count: lehenMaila.length, items: lehenMaila },
+    { id: 'parentesiak', title: t('Parentesiak', 'Paréntesis', 'الأقواس'), icon: '🧮', color: '#e0a100', count: parentesiak.length, items: parentesiak },
+    { id: 'izendatzaileak', title: t('Izendatzaileak', 'Denominadores', 'المقامات'), icon: '➗', color: '#d9502e', count: izendatzaileak.length, items: izendatzaileak },
+    { id: 'problemak', title: t('Problemak ekuazioekin', 'Problemas con ecuaciones', 'مسائل بالمعادلات'), icon: '🧠', color: '#7a55d6', count: problemak.length, items: problemak },
+    { id: 'bigarren-maila', title: t('Bigarren mailako ekuazioak', 'Ecuaciones de segundo grado', 'معادلات الدرجة الثانية'), icon: '📈', color: '#b3261e', count: bigarrenMaila.length, items: bigarrenMaila }
 ]

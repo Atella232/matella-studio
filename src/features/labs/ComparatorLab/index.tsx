@@ -36,7 +36,7 @@ function drawBar(
 
     // If value > 1, show overflow indicator
     if (value > 1) {
-        ctx.fillStyle = '#EF4444'
+        ctx.fillStyle = '#b3261e'
         ctx.font = 'bold 14px Inter, sans-serif'
         ctx.textAlign = 'right'
         ctx.fillText(`×${value.toFixed(2)}`, x + width - 10, y + height / 2 + 5)
@@ -71,7 +71,7 @@ export function ComparatorLab() {
 
         // Draw first fraction bar
         const y1 = 60
-        drawBar(ctx, startX, y1, barWidth, barHeight, value1, '#3B82F6', '#1D4ED8')
+        drawBar(ctx, startX, y1, barWidth, barHeight, value1, '#2f6fdb', '#2f6fdb')
 
         // Label for fraction 1
         ctx.fillStyle = '#1e293b'
@@ -81,7 +81,7 @@ export function ComparatorLab() {
 
         // Draw second fraction bar
         const y2 = y1 + barHeight + gap
-        drawBar(ctx, startX, y2, barWidth, barHeight, value2, '#8B5CF6', '#6D28D9')
+        drawBar(ctx, startX, y2, barWidth, barHeight, value2, '#7a55d6', '#2f6fdb')
 
         // Label for fraction 2
         ctx.fillText(`${num2}/${den2}`, startX + barWidth / 2, y2 - 20)
@@ -91,11 +91,11 @@ export function ComparatorLab() {
         ctx.font = 'bold 48px Inter, sans-serif'
 
         if (comparison === '>') {
-            ctx.fillStyle = '#3B82F6'
+            ctx.fillStyle = '#2f6fdb'
         } else if (comparison === '<') {
-            ctx.fillStyle = '#8B5CF6'
+            ctx.fillStyle = '#7a55d6'
         } else {
-            ctx.fillStyle = '#059669'
+            ctx.fillStyle = '#267b53'
         }
 
         ctx.fillText(comparison, startX + barWidth + 40, centerY + 15)

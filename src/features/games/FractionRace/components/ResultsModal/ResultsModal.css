@@ -4,7 +4,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(29, 39, 51, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,7 +15,7 @@
 }
 
 .results-modal {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    background: linear-gradient(135deg, var(--card) 0%, var(--card) 100%);
     border-radius: 24px;
     padding: 2rem;
     max-width: 680px;
@@ -31,7 +31,7 @@
 }
 
 .results-header h2 {
-    color: white;
+    color: var(--ink);
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
 }
@@ -39,9 +39,9 @@
 .player-result {
     font-size: 1.5rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    background: linear-gradient(135deg, #e0a100, #e0a100);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: var(--ink);
     background-clip: text;
 }
 
@@ -52,23 +52,23 @@
     margin-top: 0.75rem;
     padding: 0.45rem 0.85rem;
     border-radius: 999px;
-    color: white;
+    color: #ffffff;
     background: var(--gradient-primary);
     box-shadow: var(--shadow-glow);
 }
 
 .reward-ribbon.gold {
     color: #422006;
-    background: linear-gradient(135deg, #fde68a, #f59e0b);
+    background: #fde68a;
 }
 
 .reward-ribbon.silver {
     color: #1e293b;
-    background: linear-gradient(135deg, #e2e8f0, #94a3b8);
+    background: #e2e8f0;
 }
 
 .reward-ribbon.bronze {
-    background: linear-gradient(135deg, #d97706, #92400e);
+    background: #e0a100;
 }
 
 .finish-message {
@@ -110,7 +110,7 @@
 }
 
 .podium-name {
-    color: white;
+    color: var(--ink);
     font-weight: 600;
     font-size: 0.9rem;
     margin-bottom: 0.25rem;
@@ -128,15 +128,15 @@
 }
 
 .place-1 .podium-bar {
-    background: linear-gradient(180deg, #fbbf24, #f59e0b);
+    background: #e0a100;
 }
 
 .place-2 .podium-bar {
-    background: linear-gradient(180deg, #94a3b8, #64748b);
+    background: #2f6fdb;
 }
 
 .place-3 .podium-bar {
-    background: linear-gradient(180deg, #cd7f32, #a16207);
+    background: #e0a100;
 }
 
 .podium-place.is-player {
@@ -174,7 +174,7 @@
     padding: 0.35rem 0.6rem;
     border-radius: 999px;
     color: var(--color-accent-light);
-    background: rgba(15, 23, 42, 0.42);
+    background: rgba(29, 39, 51, 0.04);
     font-size: 0.75rem;
     font-weight: 700;
 }
@@ -191,7 +191,7 @@
     padding: 0.4rem 0.65rem;
     border-radius: 999px;
     color: var(--color-text-secondary);
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(29, 39, 51, 0.036);
     font-size: 0.78rem;
 }
 
@@ -200,7 +200,7 @@
 }
 
 .stat-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(29, 39, 51, 0.06);
     border-radius: 12px;
     padding: 1rem;
     text-align: center;
@@ -210,25 +210,25 @@
     display: block;
     font-size: 1.5rem;
     font-weight: 700;
-    color: #4ade80;
+    color: #1f6443;
 }
 
 .stat-label {
     display: block;
     font-size: 0.75rem;
-    color: #94a3b8;
+    color: var(--muted);
     margin-top: 0.25rem;
 }
 
 .wrong-answers-section {
-    background: rgba(248, 113, 113, 0.1);
+    background: rgba(179, 38, 30, 0.1);
     border-radius: 12px;
     padding: 1rem;
     margin-bottom: 1.5rem;
 }
 
 .wrong-answers-section h3 {
-    color: #f87171;
+    color: #b3261e;
     font-size: 1rem;
     margin-bottom: 0.75rem;
 }
@@ -245,7 +245,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(29, 39, 51, 0.03);
     padding: 0.5rem 0.75rem;
     border-radius: 8px;
     flex-wrap: wrap;
@@ -261,7 +261,7 @@
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    color: white;
+    color: var(--ink);
     font-size: 0.85rem;
     font-weight: 600;
 }
@@ -274,7 +274,7 @@
 .result-fraction .bar {
     width: 100%;
     height: 2px;
-    background: white;
+    background: var(--card);
 }
 
 .result-fraction .frac {
@@ -284,7 +284,7 @@
 }
 
 .wrong-operation .op {
-    color: #94a3b8;
+    color: var(--muted);
     font-size: 1rem;
     margin: 0 0.25rem;
 }
@@ -292,13 +292,13 @@
 .result-exponent {
     font-size: 0.85rem;
     font-weight: 700;
-    color: white;
+    color: var(--ink);
     vertical-align: super;
     margin-top: 0.25rem;
 }
 
 .correct-answer {
-    color: #4ade80;
+    color: #1f6443;
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -322,22 +322,22 @@
 }
 
 .action-btn.play-again {
-    background: linear-gradient(135deg, #22c55e, #16a34a);
-    color: white;
+    background: #267b53;
+    color: #ffffff;
 }
 
 .action-btn.play-again:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+    box-shadow: 0 4px 20px rgba(38, 123, 83, 0.4);
 }
 
 .action-btn.exit {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
+    background: rgba(29, 39, 51, 0.06);
+    color: var(--ink);
 }
 
 .action-btn.exit:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(29, 39, 51, 0.08);
 }
 
 @keyframes fade-in {
@@ -364,11 +364,11 @@
 
 @keyframes winner-glow {
     0% {
-        filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.5));
+        filter: drop-shadow(0 0 10px rgba(224, 161, 0, 0.5));
     }
 
     100% {
-        filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.8));
+        filter: drop-shadow(0 0 20px rgba(224, 161, 0, 0.8));
     }
 }
 
@@ -416,18 +416,18 @@
 }
 
 .wrong-answers-list .operator {
-    color: #94a3b8;
+    color: var(--muted);
     font-size: 1rem;
 }
 
 .wrong-answers-list .paren {
-    color: #94a3b8;
+    color: var(--muted);
     font-weight: 700;
     margin: 0 0.1rem;
 }
 
 .wrong-answers-list .question-exponent {
-    color: white;
+    color: var(--ink);
     font-size: 0.7rem;
     vertical-align: super;
 }
@@ -442,7 +442,7 @@
     gap: 0.3rem;
     width: 100%;
     padding-top: 0.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid var(--line);
 }
 
 .result-error-insight {
@@ -466,11 +466,11 @@
 }
 
 .selected-answer {
-    color: #fda4af;
+    color: var(--ink);
 }
 
 .correct-answer {
-    color: #4ade80;
+    color: #1f6443;
 }
 
 .results-actions {
@@ -480,7 +480,7 @@
 .action-btn.review-errors {
     flex-basis: 100%;
     background: var(--gradient-primary);
-    color: white;
+    color: #ffffff;
 }
 
 .action-btn.review-errors:hover {

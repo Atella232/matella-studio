@@ -8,15 +8,15 @@
     display: flex;
     justify-content: center;
     padding: var(--space-6);
-    background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
-    border: 3px solid #F59E0B;
+    background: #FEF3C7;
+    border: 3px solid #e0a100;
 }
 
 .pizza-info {
     text-align: center;
     padding: var(--space-6);
-    background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
-    border: 2px solid #EF4444;
+    background: #FEE2E2;
+    border: 2px solid #b3261e;
 }
 
 .pizza-fraction-display {
@@ -33,7 +33,7 @@
     align-items: center;
     font-size: var(--text-3xl);
     font-weight: 700;
-    color: #B91C1C;
+    color: #b3261e;
 }
 
 .big-fraction .num,
@@ -44,7 +44,7 @@
 .big-fraction .line {
     width: 60px;
     height: 4px;
-    background: #B91C1C;
+    background: #b3261e;
     border-radius: 2px;
 }
 
@@ -57,9 +57,9 @@
 .percentage {
     font-size: var(--text-4xl);
     font-weight: 800;
-    background: linear-gradient(135deg, #EF4444, #F97316);
+    background: linear-gradient(135deg, #b3261e, #d9502e);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: var(--ink);
     background-clip: text;
 }
 

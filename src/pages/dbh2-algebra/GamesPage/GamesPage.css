@@ -5,11 +5,11 @@
 }
 
 .mode-card {
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--line);
 }
 
 .mode-card.active {
-    box-shadow: 0 0 30px rgba(99, 102, 241, 0.25);
+    box-shadow: 0 0 30px rgba(47, 111, 219, 0.25);
     border-color: var(--color-primary-light);
 }
 
@@ -44,19 +44,19 @@
     padding: var(--space-4);
     border-radius: var(--radius-xl);
     border: 1px solid var(--glass-border);
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(29, 39, 51, 0.024);
     color: var(--color-text-primary);
     text-align: left;
 }
 
 .quiz-option.correct {
     border-color: var(--color-success);
-    background: rgba(16, 185, 129, 0.14);
+    background: rgba(38, 123, 83, 0.14);
 }
 
 .quiz-option.wrong {
     border-color: var(--color-error);
-    background: rgba(239, 68, 68, 0.14);
+    background: rgba(179, 38, 30, 0.14);
 }
 
 .quiz-actions {

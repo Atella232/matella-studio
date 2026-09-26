@@ -25,21 +25,21 @@ export function LabPageDBH1_Zatigarritasuna() {
             icon: '🔍',
             label: t('zatigarritasuna.lab.divisorChecker.title'),
             description: t('zatigarritasuna.lab.divisorChecker.desc'),
-            color: '#3B82F6'
+            color: '#2f6fdb'
         },
         {
             id: 'lcmGcd',
             icon: '🧮',
             label: t('zatigarritasuna.lab.lcmGcd.title'),
             description: t('zatigarritasuna.lab.lcmGcd.desc'),
-            color: '#10B981'
+            color: '#267b53'
         },
         {
             id: 'rules',
             icon: '✅',
             label: t('zatigarritasuna.lab.rules.title'),
             description: t('zatigarritasuna.lab.rules.desc'),
-            color: '#F59E0B'
+            color: '#e0a100'
         }
     ]
 

@@ -36,9 +36,9 @@ export function LabPage() {
     const [quadC, setQuadC] = useState(6)
 
     const labs = [
-        { id: 'balance' as const, icon: '⚖️', label: pickText(lang, { eu: 'Balantza', es: 'Balanza', ar: 'الميزان' }), color: '#6366f1' },
-        { id: 'linear' as const, icon: '🔎', label: pickText(lang, { eu: 'Lehen maila', es: 'Primer grado', ar: 'الدرجة الأولى' }), color: '#10b981' },
-        { id: 'quadratic' as const, icon: '📈', label: pickText(lang, { eu: 'Bigarren maila', es: 'Segundo grado', ar: 'الدرجة الثانية' }), color: '#f472b6' }
+        { id: 'balance' as const, icon: '⚖️', label: pickText(lang, { eu: 'Balantza', es: 'Balanza', ar: 'الميزان' }), color: '#2f6fdb' },
+        { id: 'linear' as const, icon: '🔎', label: pickText(lang, { eu: 'Lehen maila', es: 'Primer grado', ar: 'الدرجة الأولى' }), color: '#267b53' },
+        { id: 'quadratic' as const, icon: '📈', label: pickText(lang, { eu: 'Bigarren maila', es: 'Segundo grado', ar: 'الدرجة الثانية' }), color: '#d9502e' }
     ]
 
     const linearSolution = solveLinear(linearA, linearB, linearC)

@@ -1,6 +1,6 @@
 .zenbaki-osoak-home {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: white;
+    background: var(--paper);
+    color: var(--ink);
     min-height: 100vh;
 }
 
@@ -12,7 +12,7 @@
 .zenbaki-osoak-home .hero h1 {
     font-size: 4rem;
     margin-bottom: 1rem;
-    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-shadow: none;
 }
 
 .zenbaki-osoak-home .hero-subtitle {
@@ -47,9 +47,9 @@
 }
 
 .zenbaki-osoak-home .feature-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(29, 39, 51, 0.06);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--line-strong);
     padding: 2.5rem;
     border-radius: 1rem;
     text-align: center;
@@ -58,7 +58,7 @@
 
 .zenbaki-osoak-home .feature-card:hover {
     transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(29, 39, 51, 0.08);
 }
 
 .zenbaki-osoak-home .feature-icon {
@@ -67,7 +67,7 @@
     background: linear-gradient(135deg, #fff, #f0f0f0);
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: var(--ink);
 }
 
 .zenbaki-osoak-home .feature-card h3 {
@@ -84,14 +84,14 @@
 
 .zenbaki-osoak-home .feature-link {
     display: inline-block;
-    color: #ffd700;
+    color: #6b4e12;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
 }
 
 .zenbaki-osoak-home .feature-link:hover {
-    color: #fff;
+    color: var(--ink);
 }
 
 .zenbaki-osoak-home .curriculum {
@@ -119,8 +119,8 @@
 }
 
 .zenbaki-osoak-home .competency-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(29, 39, 51, 0.03);
+    border: 1px solid var(--line);
     padding: 2rem;
     border-radius: 1rem;
     text-align: center;
@@ -128,7 +128,7 @@
 }
 
 .zenbaki-osoak-home .competency-card:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(29, 39, 51, 0.06);
     transform: scale(1.02);
 }
 

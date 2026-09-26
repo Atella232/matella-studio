@@ -1,26 +1,26 @@
 .ekuazioak-games .mode-card {
     min-height: 150px;
-    border: 1px solid rgba(96, 165, 250, 0.28);
+    border: 1px solid rgba(47, 111, 219, 0.28);
     background:
-        linear-gradient(135deg, rgba(14, 165, 233, 0.18), rgba(124, 58, 237, 0.14)),
-        rgba(15, 23, 42, 0.72);
+        linear-gradient(135deg, rgba(122, 85, 214, 0.18), rgba(122, 85, 214, 0.14)),
+        var(--card);
     color: var(--color-text-primary);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .ekuazioak-games .mode-card:hover {
-    border-color: rgba(56, 189, 248, 0.72);
+    border-color: rgba(47, 111, 219, 0.72);
     transform: translateY(-2px);
 }
 
 .ekuazioak-games .mode-card.active {
-    border-color: #22d3ee;
+    border-color: #7a55d6;
     background:
-        linear-gradient(135deg, rgba(34, 211, 238, 0.28), rgba(99, 102, 241, 0.24)),
-        rgba(15, 23, 42, 0.86);
+        linear-gradient(135deg, rgba(122, 85, 214, 0.28), rgba(47, 111, 219, 0.24)),
+        var(--card);
     box-shadow:
-        0 0 0 1px rgba(34, 211, 238, 0.24),
-        0 18px 42px rgba(14, 165, 233, 0.22);
+        0 0 0 1px rgba(122, 85, 214, 0.24),
+        0 18px 42px rgba(122, 85, 214, 0.22);
 }
 
 .ekuazioak-games .game-card-icon {
@@ -30,10 +30,10 @@
     min-width: 3.25rem;
     height: 3.25rem;
     padding: 0 0.7rem;
-    border: 1px solid rgba(125, 211, 252, 0.36);
+    border: 1px solid rgba(47, 111, 219, 0.36);
     border-radius: 999px;
-    background: rgba(15, 23, 42, 0.68);
-    color: #bfdbfe;
+    background: var(--card);
+    color: var(--ink);
     font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", ui-sans-serif, system-ui, sans-serif;
     font-size: clamp(1.25rem, 1.8vw, 1.75rem);
     font-weight: 900;
@@ -42,10 +42,10 @@
 }
 
 .ekuazioak-games .mode-card.active .game-card-icon {
-    border-color: #22d3ee;
+    border-color: #7a55d6;
     background:
-        linear-gradient(135deg, rgba(34, 211, 238, 0.28), rgba(99, 102, 241, 0.24)),
-        rgba(15, 23, 42, 0.86);
+        linear-gradient(135deg, rgba(122, 85, 214, 0.28), rgba(47, 111, 219, 0.24)),
+        var(--card);
     color: var(--color-text-primary);
 }
 
@@ -54,11 +54,11 @@
 }
 
 .ekuazioak-games .quiz-option {
-    border-color: rgba(148, 163, 184, 0.24);
-    background: rgba(15, 23, 42, 0.62);
+    border-color: rgba(47, 111, 219, 0.24);
+    background: var(--card);
 }
 
 .ekuazioak-games .quiz-option:hover {
-    border-color: rgba(56, 189, 248, 0.58);
-    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(47, 111, 219, 0.58);
+    background: var(--card);
 }

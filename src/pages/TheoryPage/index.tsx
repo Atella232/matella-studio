@@ -24,84 +24,84 @@ export function TheoryPage() {
             id: 'definicion',
             title: t('theory.sections.definition'),
             icon: '📐',
-            color: '#6366f1',
+            color: '#2f6fdb',
             content: <DefinicionContent />
         },
         {
             id: 'tipos',
             title: t('theory.sections.types'),
             icon: '📊',
-            color: '#06b6d4',
+            color: '#7a55d6',
             content: <TiposContent />
         },
         {
             id: 'equivalentes',
             title: t('theory.sections.equivalent'),
             icon: '🔄',
-            color: '#f472b6',
+            color: '#d9502e',
             content: <EquivalentesContent />
         },
         {
             id: 'comparacion',
             title: t('theory.sections.compare'),
             icon: '⚖️',
-            color: '#8b5cf6',
+            color: '#7a55d6',
             content: <ComparacionContent />
         },
         {
             id: 'suma-resta',
             title: t('theory.sections.addSubtract'),
             icon: '➕',
-            color: '#10b981',
+            color: '#267b53',
             content: <SumaRestaContent />
         },
         {
             id: 'multiplicacion',
             title: t('theory.sections.multiply'),
             icon: '✖️',
-            color: '#f59e0b',
+            color: '#e0a100',
             content: <MultiplicacionContent />
         },
         {
             id: 'division',
             title: t('theory.sections.divide'),
             icon: '➗',
-            color: '#ef4444',
+            color: '#b3261e',
             content: <DivisionContent />
         },
         {
             id: 'potencias',
             title: t('theory.sections.powers'),
             icon: '🔢',
-            color: '#ec4899',
+            color: '#d9502e',
             content: <PotenciasContent />
         },
         {
             id: 'operaciones',
             title: t('theory.sections.combined'),
             icon: '🧮',
-            color: '#6366f1',
+            color: '#2f6fdb',
             content: <OperacionesContent />
         },
         {
             id: 'decimales',
             title: t('theory.sections.decimals'),
             icon: '💱',
-            color: '#06b6d4',
+            color: '#7a55d6',
             content: <DecimalesContent />
         },
         {
             id: 'proporcionalidad',
             title: t('theory.sections.proportionality'),
             icon: '📈',
-            color: '#f472b6',
+            color: '#d9502e',
             content: <ProporcionalidadContent />
         },
         {
             id: 'porcentajes',
             title: t('theory.sections.percentages'),
             icon: '%',
-            color: '#8b5cf6',
+            color: '#7a55d6',
             content: <PorcentajesContent />
         }
     ]

@@ -1,5 +1,5 @@
-import { createHashRouter } from 'react-router-dom'
-import { lazy, Suspense } from 'react'
+import { createHashRouter, Navigate } from 'react-router-dom'
+import { lazy } from 'react'
 import { Layout } from '../components/common/Layout'
 import { SubjectsPage } from '../pages/SubjectsPage'
 import { CoursesPage } from '../pages/CoursesPage'
@@ -8,12 +8,6 @@ import { AccessibilityPage } from '../pages/AccessibilityPage'
 import { RouteError } from '../components/common/RouteError'
 
 const ZatikiakPrototypePage = lazy(() => import('../pages/dbh2-zatikiak-prototype').then((module) => ({ default: module.ZatikiakPrototypePage })))
-const HomePage = lazy(() => import('../pages/HomePage').then((module) => ({ default: module.HomePage })))
-const LabPage = lazy(() => import('../pages/LabPage').then((module) => ({ default: module.LabPage })))
-const MissionPage = lazy(() => import('../pages/MissionPage').then((module) => ({ default: module.MissionPage })))
-const TheoryPage = lazy(() => import('../pages/TheoryPage').then((module) => ({ default: module.TheoryPage })))
-const ExercisesPageDBH2_Zatikiak = lazy(() => import('../pages/dbh2-zatikiak/ExercisesPage').then((module) => ({ default: module.ExercisesPage })))
-const GamesHub = lazy(() => import('../features/games/GamesHub').then((module) => ({ default: module.GamesHub })))
 const PizzaFractions = lazy(() => import('../features/games/PizzaFractions').then((module) => ({ default: module.PizzaFractions })))
 const FractionMemory = lazy(() => import('../features/games/FractionMemory').then((module) => ({ default: module.FractionMemory })))
 const FractionRace = lazy(() => import('../features/games/FractionRace').then((module) => ({ default: module.FractionRace })))
@@ -266,67 +260,10 @@ export const router = createHashRouter([
                         element: <FractionRace />,
                     },
 
-                    // Ruta para Fracciones de 2º ESO (contenido actual)
+                    // Fracciones de 2º ESO: la unidad V2 gestiona sus propias secciones por URL
                     {
-                        path: 'matematika/dbh2/zatikiak',
-                        element: <HomePage />,
-                    },
-                    {
-                        path: 'matematika/dbh2/zatikiak/laboratorio',
-                        element: <LabPage />,
-                    },
-                    {
-                        path: 'matematika/dbh2/zatikiak/retos',
-                        element: <MissionPage />,
-                    },
-                    {
-                        path: 'matematika/dbh2/zatikiak/misioa',
-                        element: <MissionPage />,
-                    },
-                    {
-                        path: 'matematika/dbh2/zatikiak/teoria',
-                        element: <TheoryPage />,
-                    },
-                    {
-                        path: 'matematika/dbh2/zatikiak/ejercicios',
-                        element: <ExercisesPageDBH2_Zatikiak />,
-                    },
-                    {
-                        path: 'matematika/dbh2/zatikiak/ariketak',
-                        element: <ExercisesPageDBH2_Zatikiak />,
-                    },
-                    // Games Hub and individual games
-                    {
-                        path: 'matematika/dbh2/zatikiak/juegos',
-                        element: <GamesHub />,
-                    },
-                    {
-                        path: 'matematika/dbh2/zatikiak/jokuak',
-                        element: <GamesHub />,
-                    },
-                    {
-                        path: 'matematika/dbh2/zatikiak/juegos/pizza',
-                        element: <PizzaFractions />,
-                    },
-                    {
-                        path: 'matematika/dbh2/zatikiak/jokuak/pizza',
-                        element: <PizzaFractions />,
-                    },
-                    {
-                        path: 'matematika/dbh2/zatikiak/juegos/memory',
-                        element: <FractionMemory />,
-                    },
-                    {
-                        path: 'matematika/dbh2/zatikiak/jokuak/memory',
-                        element: <FractionMemory />,
-                    },
-                    {
-                        path: 'matematika/dbh2/zatikiak/juegos/carrera',
-                        element: <FractionRace />,
-                    },
-                    {
-                        path: 'matematika/dbh2/zatikiak/jokuak/carrera',
-                        element: <FractionRace />,
+                        path: 'matematika/dbh2/zatikiak/*',
+                        element: <ZatikiakPrototypePage />,
                     },
                     {
                         path: 'matematika/dbh2/algebra',
@@ -398,16 +335,16 @@ export const router = createHashRouter([
                     },
                     {
                         path: 'prototipo/zatikiak-v2',
-                        element: <Suspense fallback={<div role="status" aria-live="polite">Zatikiak V2…</div>}><ZatikiakPrototypePage /></Suspense>,
+                        element: <Navigate to="/matematika/dbh2/zatikiak" replace />,
                     },
                     // Rutas legacy para compatibilidad
                     {
                         path: 'laboratorio',
-                        element: <LabPage />,
+                        element: <Navigate to="/matematika/dbh2/zatikiak/laboratorio" replace />,
                     },
                     {
                         path: 'retos',
-                        element: <MissionPage />,
+                        element: <Navigate to="/matematika/dbh2/zatikiak/retos" replace />,
                     },
                     {
                         path: 'accesibilidad',
@@ -423,7 +360,7 @@ export const router = createHashRouter([
                     },
                     {
                         path: 'teoria',
-                        element: <TheoryPage />,
+                        element: <Navigate to="/matematika/dbh2/zatikiak/teoria" replace />,
                     },
                     {
                         path: '*',

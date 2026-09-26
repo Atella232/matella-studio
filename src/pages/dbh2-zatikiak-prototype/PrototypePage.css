@@ -944,6 +944,12 @@
     border-top: 1.5px solid var(--line);
 }
 
+.fraction-v2-route-footer nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+}
+
 .fraction-v2-route-footer a,
 .fraction-v2-route-footer button {
     padding: 6px 0;

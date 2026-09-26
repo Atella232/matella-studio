@@ -1,6 +1,6 @@
 .games-hub {
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--paper);
     padding: 2rem 1rem;
 }
 
@@ -17,14 +17,14 @@
 .games-header h1 {
     font-size: 2.5rem;
     font-weight: 800;
-    color: white;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    color: var(--ink);
+    text-shadow: none;
     margin-bottom: 0.5rem;
 }
 
 .games-header p {
     font-size: 1.125rem;
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--ink);
 }
 
 .games-grid {
@@ -34,7 +34,7 @@
 }
 
 .game-card {
-    background: rgba(255, 255, 255, 0.98);
+    background: var(--card);
     border-radius: 20px;
     padding: 2rem;
     text-align: center;
@@ -58,13 +58,13 @@
 .game-card-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #4338ca;
+    color: #1e4a96;
     margin-bottom: 0.5rem;
 }
 
 .game-card-description {
     font-size: 0.95rem;
-    color: #6b7280;
+    color: var(--muted);
     line-height: 1.5;
     margin-bottom: 1rem;
 }
@@ -79,7 +79,7 @@
 .game-card-tag {
     padding: 0.375rem 0.75rem;
     background: #eef2ff;
-    color: #4338ca;
+    color: #1e4a96;
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 600;
@@ -87,14 +87,14 @@
 
 .game-card-tag.objective {
     background: #d1fae5;
-    color: #059669;
+    color: #1f6443;
 }
 
 .back-link {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: white;
+    color: var(--ink);
     text-decoration: none;
     margin-bottom: 1.5rem;
     font-weight: 500;

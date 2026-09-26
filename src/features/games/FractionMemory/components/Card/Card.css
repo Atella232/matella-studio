@@ -68,10 +68,10 @@
 
 /* Card Back - Beautiful Gradient with Pattern */
 .card-back {
-    background: linear-gradient(145deg, #7c3aed 0%, #5b21b6 50%, #4c1d95 100%);
-    border: 3px solid rgba(255, 255, 255, 0.3);
+    background: linear-gradient(145deg, #7a55d6 0%, #7a55d6 50%, var(--card) 100%);
+    border: 3px solid var(--line-strong);
     box-shadow:
-        0 8px 25px rgba(124, 58, 237, 0.5),
+        0 8px 25px rgba(122, 85, 214, 0.5),
         0 0 0 1px rgba(255, 255, 255, 0.1) inset,
         0 10px 30px rgba(0, 0, 0, 0.2);
     overflow: hidden;
@@ -105,7 +105,7 @@
     height: 200%;
     background: linear-gradient(45deg,
             transparent 30%,
-            rgba(255, 255, 255, 0.08) 50%,
+            rgba(29, 39, 51, 0.048) 50%,
             transparent 70%);
     animation: shineEffect 3s ease-in-out infinite;
 }
@@ -122,39 +122,39 @@
 
 /* Card Front */
 .card-front {
-    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-    border: 3px solid #a78bfa;
+    background: #ffffff;
+    border: 3px solid #7a55d6;
     transform: rotateY(180deg);
     padding: 1rem;
     flex-direction: column;
     gap: 0.5rem;
     box-shadow:
         0 8px 25px rgba(0, 0, 0, 0.15),
-        0 0 0 1px rgba(167, 139, 250, 0.3) inset;
+        0 0 0 1px rgba(122, 85, 214, 0.3) inset;
 }
 
 /* Matched State - Green Glow */
 .memory-card.matched .card-front {
-    background: linear-gradient(145deg, #d1fae5 0%, #a7f3d0 100%);
-    border-color: #10b981;
+    background: #d1fae5;
+    border-color: #267b53;
     box-shadow:
-        0 0 30px rgba(16, 185, 129, 0.4),
-        0 8px 25px rgba(16, 185, 129, 0.3),
-        0 0 0 1px rgba(16, 185, 129, 0.5) inset;
+        0 0 30px rgba(38, 123, 83, 0.4),
+        0 8px 25px rgba(38, 123, 83, 0.3),
+        0 0 0 1px rgba(38, 123, 83, 0.5) inset;
     animation: successGlow 0.6s ease-out;
 }
 
 @keyframes successGlow {
     0% {
-        box-shadow: 0 0 0 rgba(16, 185, 129, 0);
+        box-shadow: 0 0 0 rgba(38, 123, 83, 0);
     }
 
     50% {
-        box-shadow: 0 0 50px rgba(16, 185, 129, 0.8), 0 0 100px rgba(16, 185, 129, 0.4);
+        box-shadow: 0 0 50px rgba(38, 123, 83, 0.8), 0 0 100px rgba(38, 123, 83, 0.4);
     }
 
     100% {
-        box-shadow: 0 0 30px rgba(16, 185, 129, 0.4), 0 8px 25px rgba(16, 185, 129, 0.3);
+        box-shadow: 0 0 30px rgba(38, 123, 83, 0.4), 0 8px 25px rgba(38, 123, 83, 0.3);
     }
 }
 
@@ -165,7 +165,7 @@
 
 .memory-card:not(.flipped):not(.matched):hover .card-back {
     box-shadow:
-        0 15px 40px rgba(124, 58, 237, 0.6),
+        0 15px 40px rgba(122, 85, 214, 0.6),
         0 0 0 2px rgba(255, 255, 255, 0.4) inset;
 }
 
@@ -180,41 +180,41 @@
 
 .fraction-numerator {
     font-size: 2.5rem;
-    color: #5b21b6;
+    color: #4a2f9e;
     line-height: 1;
-    text-shadow: 0 2px 4px rgba(91, 33, 182, 0.2);
+    text-shadow: none;
 }
 
 .fraction-line {
     width: 60px;
     height: 4px;
-    background: linear-gradient(90deg, #7c3aed, #5b21b6);
+    background: #7a55d6;
     margin: 6px 0;
     border-radius: 2px;
-    box-shadow: 0 2px 4px rgba(124, 58, 237, 0.3);
+    box-shadow: 0 2px 4px rgba(122, 85, 214, 0.3);
 }
 
 .fraction-denominator {
     font-size: 2.5rem;
-    color: #5b21b6;
+    color: #4a2f9e;
     line-height: 1;
-    text-shadow: 0 2px 4px rgba(91, 33, 182, 0.2);
+    text-shadow: none;
 }
 
 /* Decimal Display */
 .decimal-display {
     font-size: 2.5rem;
     font-weight: 800;
-    color: #059669;
-    text-shadow: 0 2px 8px rgba(5, 150, 105, 0.2);
+    color: #1f6443;
+    text-shadow: none;
 }
 
 /* Percentage Display */
 .percentage-display {
     font-size: 2.25rem;
     font-weight: 800;
-    color: #d97706;
-    text-shadow: 0 2px 8px rgba(217, 119, 6, 0.2);
+    color: #6b4e12;
+    text-shadow: none;
 }
 
 /* Visual Representation */
@@ -234,37 +234,37 @@
 
 /* Pie Chart Visual */
 .pie-segment-filled {
-    fill: #7c3aed;
-    stroke: #5b21b6;
+    fill: #4a2f9e;
+    stroke: #4a2f9e;
     stroke-width: 1;
 }
 
 .pie-segment-empty {
-    fill: #f3f4f6;
-    stroke: #d1d5db;
+    fill: var(--ink);
+    stroke: var(--ink);
     stroke-width: 1;
 }
 
 .pie-outline {
     fill: none;
-    stroke: #5b21b6;
+    stroke: #4a2f9e;
     stroke-width: 2;
 }
 
 /* Bar Visual */
 .bar-segment {
-    stroke: #9ca3af;
+    stroke: var(--muted);
     stroke-width: 1;
 }
 
 .bar-segment-filled {
-    fill: #7c3aed;
-    stroke: #5b21b6;
+    fill: #4a2f9e;
+    stroke: #4a2f9e;
 }
 
 .bar-segment-empty {
-    fill: #f3f4f6;
-    stroke: #d1d5db;
+    fill: var(--ink);
+    stroke: var(--ink);
 }
 
 /* Responsive Sizing */
@@ -318,7 +318,7 @@
             var(--color-primary) 0%,
             var(--color-primary-dark) 55%,
             var(--color-secondary-dark) 100%);
-    border-color: rgba(255, 255, 255, 0.22);
+    border-color: var(--line-strong);
     box-shadow:
         0 8px 25px var(--color-primary-glow),
         inset 0 0 0 1px rgba(255, 255, 255, 0.1),
@@ -327,12 +327,10 @@
 
 .memory-game .card-front {
     background: linear-gradient(145deg,
-            rgba(30, 41, 59, 0.98) 0%,
-            rgba(15, 23, 42, 0.98) 100%);
+            var(--card) 0%,
+            var(--card) 100%);
     border-color: var(--color-primary-light);
-    box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.28),
-        inset 0 0 0 1px var(--color-primary-glow);
+    box-shadow: none;
 }
 
 .memory-game .memory-card.matched .card-front {
@@ -351,7 +349,7 @@
 .memory-game .fraction-numerator,
 .memory-game .fraction-denominator {
     color: var(--color-primary-light);
-    text-shadow: 0 2px 8px var(--color-primary-glow);
+    text-shadow: none;
 }
 
 .memory-game .fraction-line {

@@ -5,9 +5,9 @@
     background-image: var(--bg-pattern);
     color: var(--text-main);
 
-    --accent-primary: #00d2ff;
-    --accent-secondary: #00ff88;
-    --accent-tertiary: #10b981;
+    --accent-primary: #2f6fdb;
+    --accent-secondary: #267b53;
+    --accent-tertiary: #267b53;
 }
 
 .dbh1-geometria-lab .container {
@@ -36,10 +36,10 @@
 }
 
 .dbh1-geometria-lab .back-button:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(29, 39, 51, 0.06);
     transform: translateX(-4px);
     border-color: var(--accent-primary);
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+    box-shadow: 0 0 15px rgba(47, 111, 219, 0.3);
 }
 
 .dbh1-geometria-lab .title-container {
@@ -67,8 +67,8 @@
     background: linear-gradient(135deg, #fff, var(--accent-secondary));
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+    -webkit-text-fill-color: var(--ink);
+    text-shadow: none;
 }
 
 .dbh1-geometria-lab .subtitle {
@@ -89,8 +89,8 @@
     gap: 0.75rem;
     padding: 0.75rem 1.5rem;
     border-radius: 50px;
-    background: rgba(255, 165, 0, 0.1);
-    border: 1px solid rgba(255, 165, 0, 0.3);
+    background: rgba(224, 161, 0, 0.1);
+    border: 1px solid rgba(224, 161, 0, 0.3);
     box-shadow: 0 0 20px rgba(255, 165, 0, 0.2);
 }
 
@@ -101,8 +101,8 @@
 .dbh1-geometria-lab .streak-count {
     font-size: 1.5rem;
     font-weight: 800;
-    color: #FFA500;
-    text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+    color: #6b4e12;
+    text-shadow: none;
 }
 
 .dbh1-geometria-lab .streak-label {
@@ -126,7 +126,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--line);
     padding-bottom: 1rem;
 }
 
@@ -138,7 +138,7 @@
 
 .dbh1-geometria-lab .btn-icon {
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--line-strong);
     color: var(--text-main);
     padding: 0.5rem;
     border-radius: 8px;
@@ -150,7 +150,7 @@
 }
 
 .dbh1-geometria-lab .btn-icon:hover {
-    background: rgba(0, 210, 255, 0.1);
+    background: rgba(47, 111, 219, 0.1);
     border-color: var(--accent-secondary);
     color: var(--accent-secondary);
     transform: rotate(15deg);
@@ -170,15 +170,15 @@
     gap: 1.5rem;
     padding: 2rem;
     border-radius: 16px;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(29, 39, 51, 0.075);
     width: 100%;
     max-width: 400px;
-    border: 1px solid rgba(0, 210, 255, 0.2);
+    border: 1px solid rgba(47, 111, 219, 0.2);
 }
 
 .dbh1-geometria-lab .shape-icon {
     background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+    box-shadow: 0 0 20px rgba(38, 123, 83, 0.3);
 }
 
 .dbh1-geometria-lab .shape-icon.square {
@@ -199,7 +199,7 @@
     border-right: 60px solid transparent;
     border-bottom: 100px solid var(--accent-secondary);
     box-shadow: none;
-    filter: drop-shadow(0 0 15px rgba(0, 255, 136, 0.3));
+    filter: drop-shadow(0 0 15px rgba(38, 123, 83, 0.3));
 }
 
 .dbh1-geometria-lab .shape-icon.circle {
@@ -219,8 +219,8 @@
     font-family: monospace;
     font-size: 1.2rem;
     font-weight: 600;
-    color: #fff;
-    background: rgba(255, 255, 255, 0.1);
+    color: var(--ink);
+    background: rgba(29, 39, 51, 0.06);
     padding: 0.25rem 0.75rem;
     border-radius: 6px;
 }
@@ -242,7 +242,7 @@
 .dbh1-geometria-lab .area-label {
     color: var(--accent-tertiary);
     font-weight: 700;
-    text-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+    text-shadow: none;
 }
 
 .dbh1-geometria-lab .unit-label {
@@ -250,9 +250,9 @@
 }
 
 .dbh1-geometria-lab .answer-input {
-    background: rgba(0, 0, 0, 0.5);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
+    background: rgba(29, 39, 51, 0.08);
+    border: 2px solid var(--line-strong);
+    color: var(--ink);
     font-size: 2rem;
     font-family: monospace;
     padding: 0.5rem 1rem;
@@ -265,7 +265,7 @@
 
 .dbh1-geometria-lab .answer-input:focus {
     border-color: var(--accent-secondary);
-    box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+    box-shadow: 0 0 15px rgba(38, 123, 83, 0.3);
 }
 
 .dbh1-geometria-lab .answer-input.success {
@@ -309,7 +309,7 @@
 
 .dbh1-geometria-lab .btn-primary:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
+    box-shadow: 0 5px 15px rgba(38, 123, 83, 0.4);
 }
 
 .dbh1-geometria-lab .btn-primary:disabled {
@@ -322,11 +322,11 @@
 .dbh1-geometria-lab .btn-secondary {
     background: transparent;
     color: var(--text-main);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--line-strong);
 }
 
 .dbh1-geometria-lab .btn-secondary:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(29, 39, 51, 0.06);
     border-color: var(--accent-primary);
 }
 
@@ -350,22 +350,22 @@
 }
 
 .dbh1-geometria-lab .glass-success {
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    color: #10b981;
+    background: rgba(38, 123, 83, 0.1);
+    border: 1px solid rgba(38, 123, 83, 0.3);
+    color: #1f6443;
 }
 
 .dbh1-geometria-lab .glass-error {
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    color: #ef4444;
+    background: rgba(179, 38, 30, 0.1);
+    border: 1px solid rgba(179, 38, 30, 0.3);
+    color: #b3261e;
 }
 
 .dbh1-geometria-lab .solution-box {
     margin-top: 2rem;
     padding: 1.5rem;
-    background: rgba(0, 210, 255, 0.05);
-    border: 1px solid rgba(0, 210, 255, 0.2);
+    background: rgba(47, 111, 219, 0.05);
+    border: 1px solid rgba(47, 111, 219, 0.2);
     border-radius: 12px;
 }
 

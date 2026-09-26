@@ -1,5 +1,5 @@
 .race-track {
-    background: linear-gradient(180deg, #1e3a5f 0%, #0f2744 100%);
+    background: linear-gradient(180deg, var(--card) 0%, var(--card) 100%);
     border-radius: 16px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
@@ -12,11 +12,11 @@
     align-items: center;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px dashed rgba(255, 255, 255, 0.2);
+    border-bottom: 2px dashed var(--line-strong);
 }
 
 .track-label {
-    color: #fff;
+    color: var(--ink);
     font-size: 1.1rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -24,7 +24,7 @@
 }
 
 .position-indicator {
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    background: #e0a100;
     color: #1a1a1a;
     padding: 0.4rem 1rem;
     border-radius: 20px;
@@ -44,14 +44,14 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(29, 39, 51, 0.03);
     border-radius: 8px;
     transition: background 0.3s ease;
 }
 
 .track-lane.player-lane {
-    background: rgba(74, 222, 128, 0.15);
-    border: 2px solid rgba(74, 222, 128, 0.3);
+    background: rgba(38, 123, 83, 0.15);
+    border: 2px solid rgba(38, 123, 83, 0.3);
 }
 
 .lane-label {
@@ -59,7 +59,7 @@
     align-items: center;
     justify-content: flex-end;
     gap: 0.25rem;
-    color: var(--lane-color, #fff);
+    color: var(--lane-color, var(--ink));
     font-weight: 600;
     font-size: 0.85rem;
     text-align: right;
@@ -73,7 +73,7 @@
     width: 1.15rem;
     height: 1.15rem;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(29, 39, 51, 0.06);
     font-size: 0.65rem;
     cursor: help;
 }
@@ -81,11 +81,7 @@
 .lane-road {
     position: relative;
     height: 40px;
-    background: linear-gradient(90deg,
-        #3a3a3a 0%,
-        #4a4a4a 50%,
-        #3a3a3a 100%
-    );
+    background: #3a3a3a;
     border-radius: 4px;
     overflow: hidden;
     border: 2px solid #555;
@@ -115,7 +111,7 @@
     left: 0;
     height: 100%;
     background: linear-gradient(90deg,
-        var(--lane-color, #4ade80) 0%,
+        var(--lane-color, #267b53) 0%,
         transparent 100%
     );
     opacity: 0.3;
@@ -142,7 +138,7 @@
 }
 
 .racer-car.turbo-active .car-avatar {
-    filter: drop-shadow(0 0 10px #fbbf24);
+    filter: drop-shadow(0 0 10px #e0a100);
 }
 
 .turbo-flames {
@@ -164,14 +160,14 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    background: #e0a100;
     color: #1a1a1a;
     padding: 0.75rem 2rem;
     border-radius: 30px;
     font-size: 1.2rem;
     font-weight: 700;
     animation: turbo-popup 0.5s ease-out;
-    box-shadow: 0 4px 20px rgba(251, 191, 36, 0.5);
+    box-shadow: 0 4px 20px rgba(224, 161, 0, 0.5);
     z-index: 10;
 }
 

@@ -27,7 +27,7 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
             "ar": "اللغة الجبرية"
         },
         "icon": "🔤",
-        "color": "#6366f1",
+        "color": "#2f6fdb",
         "count": 9,
         "items": [
             {
@@ -166,7 +166,7 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
             "ar": "الحدود الأحادية"
         },
         "icon": "🔷",
-        "color": "#06b6d4",
+        "color": "#7a55d6",
         "count": 8,
         "items": [
             {
@@ -291,7 +291,7 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
             "ar": "عمليات الحدود الأحادية"
         },
         "icon": "⚡",
-        "color": "#10b981",
+        "color": "#267b53",
         "count": 10,
         "items": [
             {
@@ -444,7 +444,7 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
             "ar": "كثيرات الحدود"
         },
         "icon": "📈",
-        "color": "#f472b6",
+        "color": "#d9502e",
         "count": 8,
         "items": [
             {
@@ -569,7 +569,7 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
             "ar": "عمليات كثيرات الحدود"
         },
         "icon": "🔢",
-        "color": "#f59e0b",
+        "color": "#e0a100",
         "count": 10,
         "items": [
             {
@@ -722,7 +722,7 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
             "ar": "المنتجات الشهيرة"
         },
         "icon": "⭐",
-        "color": "#8b5cf6",
+        "color": "#7a55d6",
         "count": 10,
         "items": [
             {
@@ -875,7 +875,7 @@ export const algebraExerciseSections: ExerciseSectionData[] = [
             "ar": "العامل المشترك"
         },
         "icon": "🔑",
-        "color": "#ec4899",
+        "color": "#d9502e",
         "count": 8,
         "items": [
             {

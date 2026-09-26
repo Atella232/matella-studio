@@ -23,21 +23,21 @@ export function TheoryPage() {
             id: 'concepto',
             title: t('zenbakiOsoak.theory.sections.concepto'),
             icon: '🎯',
-            color: '#6366f1',
+            color: '#2f6fdb',
             content: <ConceptoContent />
         },
         {
             id: 'operaciones',
             title: t('zenbakiOsoak.theory.sections.operaciones'),
             icon: '🧮',
-            color: '#10b981',
+            color: '#267b53',
             content: <OperacionesContent />
         },
         {
             id: 'avanzadas',
             title: t('zenbakiOsoak.theory.sections.avanzadas'),
             icon: '⚡',
-            color: '#f59e0b',
+            color: '#e0a100',
             content: <AvanzadasContent />
         }
     ]

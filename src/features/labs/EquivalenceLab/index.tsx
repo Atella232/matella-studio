@@ -88,7 +88,7 @@ export function EquivalenceLab() {
         ctx.textAlign = 'left'
         ctx.fillText(t('lab.baseFraction') + ':', startX - 150, startY1 + barHeight / 2 + 6)
 
-        ctx.fillStyle = '#2563eb'
+        ctx.fillStyle = '#2f6fdb'
         ctx.font = 'bold 24px Inter, sans-serif'
         ctx.textAlign = 'center'
         ctx.fillText(`${baseNumerator}/${baseDenominator}`, startX + barWidth / 2, startY1 - 20)
@@ -98,13 +98,13 @@ export function EquivalenceLab() {
         ctx.textAlign = 'left'
         ctx.fillText(t('lab.equivalentFraction') + ':', startX - 150, startY2 + barHeight / 2 + 6)
 
-        ctx.fillStyle = '#7c3aed'
+        ctx.fillStyle = '#7a55d6'
         ctx.font = 'bold 24px Inter, sans-serif'
         ctx.textAlign = 'center'
         ctx.fillText(`${equivalentNum}/${equivalentDen}`, startX + barWidth / 2, startY2 - 20)
 
         // Multiplier indicator
-        ctx.fillStyle = '#059669'
+        ctx.fillStyle = '#267b53'
         ctx.font = 'bold 20px Inter, sans-serif'
         ctx.textAlign = 'center'
         ctx.fillText(`× ${multiplier}`, startX + barWidth + 50, (startY1 + startY2 + barHeight) / 2)

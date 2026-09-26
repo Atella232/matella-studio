@@ -92,7 +92,7 @@ export function ResultsModal({
             particleCount: isPerfect ? 120 : 80,
             spread: 72,
             origin: { y: 0.62 },
-            colors: ['#818cf8', '#22d3ee', '#fbbf24', '#4ade80']
+            colors: ['#2f6fdb', '#7a55d6', '#e0a100', '#267b53']
         })
     }, [isPerfect, playerRank])
 

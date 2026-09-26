@@ -45,13 +45,13 @@
 }
 
 .rule-card.passes {
-    border-left-color: #10B981;
-    background: linear-gradient(90deg, rgba(16, 185, 129, 0.05) 0%, transparent 100%);
+    border-left-color: #267b53;
+    background: linear-gradient(90deg, rgba(38, 123, 83, 0.05) 0%, transparent 100%);
 }
 
 .rule-card.fails {
-    border-left-color: #EF4444;
-    background: linear-gradient(90deg, rgba(239, 68, 68, 0.05) 0%, transparent 100%);
+    border-left-color: #b3261e;
+    background: linear-gradient(90deg, rgba(179, 38, 30, 0.05) 0%, transparent 100%);
 }
 
 .rule-header {
@@ -72,12 +72,12 @@
 }
 
 .passes .rule-status {
-    color: #10B981;
+    color: #1f6443;
     font-weight: 700;
 }
 
 .fails .rule-status {
-    color: #EF4444;
+    color: #b3261e;
     font-weight: 600;
 }
 

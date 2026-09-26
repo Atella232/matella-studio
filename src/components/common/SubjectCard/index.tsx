@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { fixMaybeText } from '../../../utils/fixText'
 import './SubjectCard.css'
@@ -21,9 +22,10 @@ export function SubjectCard({
     disabled = false,
     disabledLabel = 'Próximamente'
 }: SubjectCardProps) {
+    const cardStyle = { '--card-color': color } as CSSProperties
     const cardContent = (
         <>
-            <div className="subject-card-icon" style={{ background: `linear-gradient(135deg, ${color}, ${color}88)` }}>
+            <div className="subject-card-icon" aria-hidden="true">
                 {fixMaybeText(icon)}
             </div>
             <div className="subject-card-content">
@@ -41,14 +43,14 @@ export function SubjectCard({
 
     if (disabled || !to) {
         return (
-            <div className={`subject-card glass ${disabled ? 'disabled' : ''}`}>
+            <div className={`subject-card glass ${disabled ? 'disabled' : ''}`} style={cardStyle}>
                 {cardContent}
             </div>
         )
     }
 
     return (
-        <Link to={to} className="subject-card glass">
+        <Link to={to} className="subject-card glass" style={cardStyle}>
             {cardContent}
         </Link>
     )

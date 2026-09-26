@@ -303,10 +303,10 @@ export const LEVELS: LevelConfig[] = [
 ]
 
 export const RACERS: Omit<RacerState, 'position' | 'speed' | 'hasTurbo' | 'finishTime' | 'raceLuck'>[] = [
-    { id: 'player', name: 'Tú', avatar: '🏎️', color: '#4ade80', isPlayer: true, speedFactor: 1.0, personality: 'player', consistency: 1 },
-    { id: 'bot1', name: 'Max', avatar: '🚗', color: '#f87171', isPlayer: false, speedFactor: 1.04, personality: 'sprinter', consistency: 0.72 },
-    { id: 'bot2', name: 'Luna', avatar: '🚙', color: '#60a5fa', isPlayer: false, speedFactor: 0.96, personality: 'steady', consistency: 0.94 },
-    { id: 'bot3', name: 'Leo', avatar: '🏍️', color: '#fbbf24', isPlayer: false, speedFactor: 0.9, personality: 'comeback', consistency: 0.8 }
+    { id: 'player', name: 'Tú', avatar: '🏎️', color: '#267b53', isPlayer: true, speedFactor: 1.0, personality: 'player', consistency: 1 },
+    { id: 'bot1', name: 'Max', avatar: '🚗', color: '#b3261e', isPlayer: false, speedFactor: 1.04, personality: 'sprinter', consistency: 0.72 },
+    { id: 'bot2', name: 'Luna', avatar: '🚙', color: '#2f6fdb', isPlayer: false, speedFactor: 0.96, personality: 'steady', consistency: 0.94 },
+    { id: 'bot3', name: 'Leo', avatar: '🏍️', color: '#e0a100', isPlayer: false, speedFactor: 0.9, personality: 'comeback', consistency: 0.8 }
 ]
 
 export const DEFAULT_RACE_SETTINGS: RaceSettings = {

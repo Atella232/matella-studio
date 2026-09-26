@@ -12,9 +12,9 @@
 .zenbaki-naturalak-theory .theory-header h1 {
     font-size: var(--text-5xl);
     margin-bottom: var(--space-4);
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #f472b6 60%, #06b6d4 100%);
+    background: linear-gradient(135deg, #2f6fdb 0%, #7a55d6 30%, #d9502e 60%, #7a55d6 100%);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: var(--ink);
     background-clip: text;
     background-size: 200% 200%;
     animation: gradientShift 8s ease infinite;
@@ -52,9 +52,9 @@
 }
 
 .zenbaki-naturalak-theory .theory-card {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+    background: linear-gradient(145deg, rgba(29, 39, 51, 0.048) 0%, rgba(29, 39, 51, 0.018) 100%);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--line);
     border-left: 4px solid var(--card-color);
     border-radius: var(--radius-2xl);
     padding: var(--space-6);
@@ -87,7 +87,7 @@
 .zenbaki-naturalak-theory .theory-card.expanded {
     grid-column: 1 / -1;
     cursor: default;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%);
+    background: linear-gradient(145deg, rgba(29, 39, 51, 0.072) 0%, rgba(29, 39, 51, 0.03) 100%);
 }
 
 .zenbaki-naturalak-theory .theory-card.expanded:hover {
@@ -144,7 +144,7 @@
 
 .zenbaki-naturalak-theory .theory-card:hover .card-toggle {
     background: var(--card-color);
-    color: #fff;
+    color: var(--ink);
 }
 
 .zenbaki-naturalak-theory .card-content {
@@ -161,7 +161,7 @@
     opacity: 1;
     margin-top: var(--space-6);
     padding-top: var(--space-6);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--line);
 }
 
 .zenbaki-naturalak-theory .content-section h4 {
@@ -209,8 +209,8 @@
 }
 
 .zenbaki-naturalak-theory .vocab-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: rgba(29, 39, 51, 0.024);
+    border: 1px solid var(--line);
     border-radius: var(--radius-lg);
     padding: var(--space-4);
 }
@@ -239,7 +239,7 @@
 
 .zenbaki-naturalak-theory .tip-box {
     margin-top: var(--space-6);
-    background: color-mix(in srgb, var(--card-color) 12%, rgba(255, 255, 255, 0.04));
+    background: color-mix(in srgb, var(--card-color) 12%, rgba(29, 39, 51, 0.024));
     border-left: 3px solid var(--card-color);
     border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
     padding: var(--space-4) var(--space-5);
@@ -257,21 +257,21 @@
 
 .zenbaki-naturalak-theory .warning-box {
     margin-top: var(--space-4);
-    background: rgba(239, 68, 68, 0.11);
-    border-left: 3px solid #ef4444;
+    background: rgba(179, 38, 30, 0.11);
+    border-left: 3px solid #b3261e;
     border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
     padding: var(--space-4) var(--space-5);
 }
 
 .zenbaki-naturalak-theory .warning-box strong {
     display: block;
-    color: #fca5a5;
+    color: #b3261e;
     margin-bottom: var(--space-1);
 }
 
 .zenbaki-naturalak-theory .warning-box p {
     margin: 0 0 var(--space-3);
-    color: #fee2e2;
+    color: var(--ink);
 }
 
 .zenbaki-naturalak-theory .warning-box p:last-child {
@@ -279,16 +279,16 @@
 }
 
 .zenbaki-naturalak-theory .formula-box {
-    border: 2px solid rgba(255, 255, 255, 0.14);
+    border: 2px solid var(--line-strong);
     border-radius: var(--radius-xl);
     padding: var(--space-4);
     margin-bottom: var(--space-4);
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+    background: linear-gradient(145deg, rgba(29, 39, 51, 0.036) 0%, rgba(29, 39, 51, 0.012) 100%);
 }
 
 .zenbaki-naturalak-theory .formula-box.highlight {
-    background: linear-gradient(135deg, color-mix(in srgb, var(--card-color) 16%, rgba(255, 255, 255, 0.04)) 0%, rgba(255, 255, 255, 0.03) 100%);
-    border-color: color-mix(in srgb, var(--card-color) 45%, rgba(255, 255, 255, 0.2));
+    background: linear-gradient(135deg, color-mix(in srgb, var(--card-color) 16%, rgba(29, 39, 51, 0.024)) 0%, rgba(29, 39, 51, 0.018) 100%);
+    border-color: color-mix(in srgb, var(--card-color) 45%, var(--line-strong));
 }
 
 .zenbaki-naturalak-theory .formula-box p {
@@ -304,9 +304,9 @@
 }
 
 .zenbaki-naturalak-theory .quick-check-card {
-    background: rgba(0, 0, 0, 0.24);
+    background: rgba(29, 39, 51, 0.06);
     border-radius: var(--radius-lg);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line);
     padding: var(--space-4);
 }
 
@@ -318,7 +318,7 @@
 
 .zenbaki-naturalak-theory .quick-answer {
     margin: 0;
-    color: color-mix(in srgb, var(--card-color) 65%, #ffffff);
+    color: color-mix(in srgb, var(--card-color) 65%, var(--ink));
     font-weight: 600;
 }
 
@@ -329,8 +329,8 @@
 }
 
 .zenbaki-naturalak-theory .connection-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: rgba(29, 39, 51, 0.024);
+    border: 1px solid var(--line);
     border-radius: var(--radius-lg);
     padding: var(--space-4);
 }
@@ -355,7 +355,7 @@
 .zenbaki-naturalak-theory .quality-review {
     margin-top: var(--space-10);
     border-radius: var(--radius-2xl);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--line);
     background: var(--glass-bg);
     padding: var(--space-6);
 }
@@ -375,8 +375,8 @@
 
 .zenbaki-naturalak-theory .coherence-card {
     border-radius: var(--radius-lg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--line);
+    background: rgba(29, 39, 51, 0.018);
     padding: var(--space-4);
 }
 
@@ -403,7 +403,7 @@
 }
 
 [dir='rtl'] .zenbaki-naturalak-theory .theory-card {
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 1px solid var(--line);
     border-right: 4px solid var(--card-color);
 }
 

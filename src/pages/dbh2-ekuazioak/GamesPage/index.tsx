@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MathText } from '../../../components/MathText'
 import { ekuazioakQuizQuestions, normalizeEkuazioakLang, pickText } from '../content'
+import '../../../features/games/GamesHubDBH1/GamesHub.css'
 import '../../dbh2-algebra/GamesPage/GamesPage.css'
 import './GamesPage.css'
 

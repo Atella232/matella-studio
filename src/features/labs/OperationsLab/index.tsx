@@ -90,7 +90,7 @@ export function OperationsLab() {
 
         // Draw first fraction bar
         const y1 = 50
-        drawFractionBar(ctx, startX, y1, barWidth, barHeight, num1, den1, '#3B82F6', '#1D4ED8')
+        drawFractionBar(ctx, startX, y1, barWidth, barHeight, num1, den1, '#2f6fdb', '#2f6fdb')
         ctx.fillStyle = '#1e293b'
         ctx.font = 'bold 18px Inter, sans-serif'
         ctx.textAlign = 'center'
@@ -99,12 +99,12 @@ export function OperationsLab() {
         // Draw operation symbol
         const opY = y1 + barHeight + gap / 2 + 5
         ctx.font = 'bold 32px Inter, sans-serif'
-        ctx.fillStyle = operation === 'add' ? '#059669' : '#DC2626'
+        ctx.fillStyle = operation === 'add' ? '#267b53' : '#b3261e'
         ctx.fillText(operation === 'add' ? '+' : '−', startX + barWidth / 2, opY)
 
         // Draw second fraction bar
         const y2 = y1 + barHeight + gap + 20
-        drawFractionBar(ctx, startX, y2, barWidth, barHeight, num2, den2, '#8B5CF6', '#6D28D9')
+        drawFractionBar(ctx, startX, y2, barWidth, barHeight, num2, den2, '#7a55d6', '#2f6fdb')
         ctx.fillStyle = '#1e293b'
         ctx.font = 'bold 18px Inter, sans-serif'
         ctx.fillText(`${num2}/${den2}`, startX + barWidth / 2, y2 - 15)
@@ -120,8 +120,8 @@ export function OperationsLab() {
 
         // Draw result bar
         const y3 = lineY + 30
-        const resultColor = resultNum >= 0 ? '#10B981' : '#EF4444'
-        const resultColorDark = resultNum >= 0 ? '#047857' : '#B91C1C'
+        const resultColor = resultNum >= 0 ? '#267b53' : '#b3261e'
+        const resultColorDark = resultNum >= 0 ? '#267b53' : '#b3261e'
 
         drawFractionBar(ctx, startX, y3, barWidth, barHeight, simplifiedNum, simplifiedDen, resultColor, resultColorDark)
 

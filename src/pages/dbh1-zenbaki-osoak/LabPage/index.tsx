@@ -24,7 +24,7 @@ export function LabPageDBH1_ZenbakiOsoak() {
             icon: '🧮',
             label: t('zenbakiOsoak.lab.integerCalculator.title'),
             description: t('zenbakiOsoak.lab.integerCalculator.desc'),
-            color: '#3B82F6' // Blue
+            color: '#2f6fdb' // Blue
         }
     ]
 

@@ -4,7 +4,145 @@
    ============================================ */
 
 /* ===== CSS Custom Properties ===== */
+/* "Cuaderno a color" (see src/pages/dbh2-zatikiak-prototype/PrototypePage.css):
+   warm paper and ink with one colour per stage. The legacy token names are kept
+   so every existing page picks the new palette up without touching its markup. */
 :root {
+  --paper: #f6f1e7;
+  --paper-deep: #efe7d6;
+  --paper-note: #f3ebdc;
+  --card: #fffcf6;
+  --ink: #1d2733;
+  --ink-soft: #3a4452;
+  --muted: #58616e;
+  --line: #e3d9c6;
+  --line-strong: #cfc2aa;
+  --grid-line: rgba(29, 39, 51, 0.07);
+  --blue: #2f6fdb;
+  --blue-tint: #dde7f7;
+  --blue-ink: #1e4a96;
+  --violet: #7a55d6;
+  --violet-tint: #e8e0f7;
+  --violet-ink: #4a2f9e;
+  --mustard: #e0a100;
+  --mustard-tint: #fbebc0;
+  --mustard-ink: #6b4e12;
+  --coral: #d9502e;
+  --coral-tint: #f8dcd0;
+  --coral-ink: #8f2c14;
+  --green: #267b53;
+  --green-tint: #d6eddf;
+  --green-ink: #17482f;
+  --red: #b3261e;
+  --red-tint: #f9dedc;
+
+  --color-primary: var(--blue);
+  --color-primary-light: #3f7be0;
+  --color-primary-dark: var(--blue-ink);
+  --color-primary-glow: rgba(47, 111, 219, 0.22);
+
+  --color-secondary: var(--violet);
+  --color-secondary-light: #8f6fe0;
+  --color-secondary-dark: var(--violet-ink);
+  --color-secondary-glow: rgba(122, 85, 214, 0.22);
+
+  --color-accent: var(--coral);
+  --color-accent-light: #e2704f;
+  --color-accent-dark: var(--coral-ink);
+  --color-accent-glow: rgba(217, 80, 46, 0.22);
+
+  --color-success: var(--green);
+  --color-success-glow: rgba(38, 123, 83, 0.2);
+  --color-warning: var(--mustard);
+  --color-warning-glow: rgba(224, 161, 0, 0.22);
+  --color-error: var(--red);
+  --color-error-glow: rgba(179, 38, 30, 0.2);
+
+  --color-bg-primary: var(--paper);
+  --color-bg-secondary: var(--card);
+  --color-bg-tertiary: var(--paper-deep);
+  --color-bg-elevated: var(--card);
+
+  --color-text-primary: var(--ink);
+  --color-text-secondary: var(--ink-soft);
+  --color-text-muted: var(--muted);
+  --color-text-inverse: #ffffff;
+
+  --color-border: var(--line-strong);
+  --color-border-light: var(--line);
+  --color-border-focus: rgba(47, 111, 219, 0.5);
+
+  --font-sans: "Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Fraunces", "Noto Sans Arabic", Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.7;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Solid ink shadows, reserved for the elements that matter */
+  --shadow-sm: 0 1px 0 rgba(29, 39, 51, 0.08);
+  --shadow-md: 3px 3px 0 var(--ink);
+  --shadow-lg: 4px 4px 0 var(--ink);
+  --shadow-xl: 5px 5px 0 var(--ink);
+  --shadow-glow: 0 0 0 transparent;
+  --shadow-glow-secondary: 0 0 0 transparent;
+
+  /* "Glass" surfaces become paper cards */
+  --glass-bg: var(--card);
+  --glass-bg-light: var(--paper-note);
+  --glass-border: var(--line-strong);
+  --glass-blur: none;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.125rem;
+  --radius-3xl: 1.5rem;
+  --radius-full: 9999px;
+
+  --transition-fast: 120ms ease;
+  --transition-normal: 180ms ease;
+  --transition-slow: 300ms ease;
+  --transition-bounce: 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  --focus-ring: 0 0 0 3px rgba(47, 111, 219, 0.45);
+
+  --gradient-primary: linear-gradient(135deg, var(--blue) 0%, var(--blue) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--coral) 0%, var(--coral) 100%);
+  --gradient-dark: linear-gradient(180deg, var(--paper) 0%, var(--paper) 100%);
+  --gradient-mesh: none;
+
+  --direction: ltr;
+}
+
+/* Natura keeps its original dark "glass" look */
+:root[data-theme="classic"] {
   /* Colores Primarios - Gradiente Principal */
   --color-primary: #6366f1;
   --color-primary-light: #818cf8;

@@ -404,7 +404,7 @@ function useStoredTopics(key: string) {
 const TOTAL_GAME_GOALS = equivalenceRounds.length + pizzaRounds.length + new Set(memoryCardsSource.map((card) => card.pairId)).size + raceRounds.length
 
 export function ZatikiakPrototypePage() {
-    const { i18n } = useTranslation()
+    const { t, i18n } = useTranslation()
     const location = useLocation()
     const language = normalizePrototypeLanguage(i18n.language)
     const isRtl = language === 'ar'
@@ -446,7 +446,7 @@ export function ZatikiakPrototypePage() {
     }
 
     const resetAllProgress = () => {
-        const confirmed = window.confirm(l({ eu: 'V2ko aurrerapen guztia ezabatu nahi duzu?', es: '¿Quieres borrar todo el progreso de la V2?', ar: 'هل تريد حذف كل تقدم النسخة الجديدة؟' }))
+        const confirmed = window.confirm(l({ eu: 'Unitate honetako aurrerapen guztia ezabatu nahi duzu?', es: '¿Quieres borrar todo el progreso de esta unidad?', ar: 'هل تريد حذف كل التقدم في هذه الوحدة؟' }))
         if (!confirmed) return
         diagnosticProgress.reset()
         diagnosticCorrect.reset()
@@ -721,9 +721,11 @@ export function ZatikiakPrototypePage() {
                 </section>
 
                 <div className="fraction-v2-route-footer">
-                    <Link className="fraction-v2-back" to="/matematika/dbh2/zatikiak">
-                        {l({ eu: 'Oraingo bertsiora itzuli', es: 'Volver a la versión actual', ar: 'العودة إلى النسخة الحالية' })}
-                    </Link>
+                    <nav aria-label={l({ eu: 'Informazio legala', es: 'Información legal', ar: 'معلومات قانونية' })}>
+                        <Link to="/accesibilidad">{t('footer.accessibility')}</Link>
+                        <Link to="/privacidad">{t('footer.privacy')}</Link>
+                        <Link to="/creditos">{t('footer.credits')}</Link>
+                    </nav>
                     <button type="button" onClick={resetAllProgress}>{l({ eu: 'Aurrerapena berrezarri', es: 'Reiniciar el progreso', ar: 'إعادة ضبط التقدم' })}</button>
                 </div>
             </div>

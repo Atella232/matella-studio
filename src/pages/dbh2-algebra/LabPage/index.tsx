@@ -91,28 +91,28 @@ export function LabPage() {
             icon: '🧮',
             label: pickText(lang, { eu: 'Balio numerikoa', es: 'Valor numérico', ar: 'القيمة العددية' }),
             description: pickText(lang, { eu: 'Adierazpenak ebaluatu', es: 'Evalúa expresiones', ar: 'قيّم التعابير' }),
-            color: '#6366f1'
+            color: '#2f6fdb'
         },
         {
             id: 'monomial' as const,
             icon: '🔍',
             label: pickText(lang, { eu: 'Monomioak', es: 'Monomios', ar: 'الحدود الأحادية' }),
             description: pickText(lang, { eu: 'Zatitu osagaietan', es: 'Descompón en partes', ar: 'حلل إلى أجزاء' }),
-            color: '#06b6d4'
+            color: '#7a55d6'
         },
         {
             id: 'notables' as const,
             icon: '📐',
             label: pickText(lang, { eu: 'Biderkadura nabarmenak', es: 'Productos notables', ar: 'المتطابقات الشهيرة' }),
             description: pickText(lang, { eu: 'Ikusi egitura geometrikoa', es: 'Visualiza la estructura geométrica', ar: 'شاهد البنية الهندسية' }),
-            color: '#f472b6'
+            color: '#d9502e'
         },
         {
             id: 'factor' as const,
             icon: '🔑',
             label: pickText(lang, { eu: 'Faktore komuna', es: 'Factor común', ar: 'العامل المشترك' }),
             description: pickText(lang, { eu: 'Egitura aurkitu', es: 'Encuentra la estructura', ar: 'اعثر على البنية' }),
-            color: '#10b981'
+            color: '#267b53'
         }
     ]
 

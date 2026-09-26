@@ -149,9 +149,9 @@ const StatCalculatorLab = () => {
 const GraphCreatorLab = () => {
     const { t } = useTranslation();
     const data = [
-        { label: 'Gorria', value: 30, color: '#ef4444' },
-        { label: 'Urdina', value: 45, color: '#3b82f6' },
-        { label: 'Berdea', value: 25, color: '#10b981' }
+        { label: 'Gorria', value: 30, color: '#b3261e' },
+        { label: 'Urdina', value: 45, color: '#2f6fdb' },
+        { label: 'Berdea', value: 25, color: '#267b53' }
     ];
 
     const maxVal = Math.max(...data.map(d => d.value));

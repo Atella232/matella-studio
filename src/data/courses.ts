@@ -28,7 +28,7 @@ export const courses: Course[] = [
     description: 'Fundamentos matemáticos',
     descriptionEu: 'Oinarrizko matematikak',
     descriptionAr: 'أساسيات الرياضيات',
-    color: '#6366f1',
+    color: '#2f6fdb',
     topics: [
       { id: 'zenbaki-naturalak', name: 'Números Naturales', nameEu: 'Zenbaki Naturalak', nameAr: 'الأعداد الطبيعية', icon: '🔢', active: true },
       { id: 'divisibilidad', name: 'Divisibilidad', nameEu: 'Zatigarritasuna', nameAr: 'القابلية للقسمة', icon: '➗', active: true },
@@ -50,7 +50,7 @@ export const courses: Course[] = [
     description: 'Consolidación y álgebra',
     descriptionEu: 'Sendotzea eta aljebra',
     descriptionAr: 'التوحيد والجبر',
-    color: '#06b6d4',
+    color: '#7a55d6',
     topics: [
       { id: 'divisibilidad', name: 'Divisibilidad', nameEu: 'Zatigarritasuna', nameAr: 'القابلية للقسمة', icon: '➗' },
       { id: 'numeros-enteros', name: 'Números Enteros', nameEu: 'Zenbaki Osoak', nameAr: 'الأعداد الصحيحة', icon: '±' },
@@ -72,7 +72,7 @@ export const courses: Course[] = [
     description: 'Álgebra y funciones',
     descriptionEu: 'Aljebra eta funtzioak',
     descriptionAr: 'الجبر والدوال',
-    color: '#f472b6',
+    color: '#e0a100',
     topics: [
       { id: 'numeros-racionales', name: 'Números Racionales', nameEu: 'Zenbaki Arrazionalak', nameAr: 'الأعداد النسبية', icon: '🔢' },
       { id: 'numeros-reales', name: 'Números Reales', nameEu: 'Zenbaki Errealak', nameAr: 'الأعداد الحقيقية', icon: '∞' },
@@ -94,7 +94,7 @@ export const courses: Course[] = [
     description: 'Preparación para Bachillerato',
     descriptionEu: 'Batxilergorako prestaketa',
     descriptionAr: 'التحضير للبكالوريا',
-    color: '#8b5cf6',
+    color: '#d9502e',
     topics: [
       { id: 'numeros-reales', name: 'Números Reales', nameEu: 'Zenbaki Errealak', nameAr: 'الأعداد الحقيقية', icon: '∞' },
       { id: 'polinomios-fracciones', name: 'Polinomios y Fracciones Algebraicas', nameEu: 'Polinomioak eta Zatiki Aljebraikoak', nameAr: 'متعددات الحدود والكسور الجبرية', icon: '🔤' },
@@ -115,7 +115,7 @@ export const courses: Course[] = [
     description: 'Análisis y geometría avanzada',
     descriptionEu: 'Analisia eta geometria aurreratua',
     descriptionAr: 'التحليل والهندسة المتقدمة',
-    color: '#10b981',
+    color: '#267b53',
     topics: [
       { id: 'numeros-reales', name: 'Números Reales', nameEu: 'Zenbaki Errealak', nameAr: 'الأعداد الحقيقية', icon: '∞' },
       { id: 'potencias-logaritmos', name: 'Potencias y Logaritmos', nameEu: 'Potentziak eta Logaritmoak', nameAr: 'القوى واللوغاريتمات', icon: '📐' },
@@ -137,7 +137,7 @@ export const courses: Course[] = [
     description: 'Cálculo y álgebra lineal',
     descriptionEu: 'Kalkulua eta aljebra lineala',
     descriptionAr: 'التفاضل والتكامل والجبر الخطي',
-    color: '#f59e0b',
+    color: '#c4432a',
     topics: [
       { id: 'matrices', name: 'Matrices', nameEu: 'Matrizeak', nameAr: 'المصفوفات', icon: '🔲' },
       { id: 'determinantes', name: 'Determinantes', nameEu: 'Determinanteak', nameAr: 'المحددات', icon: '📐' },

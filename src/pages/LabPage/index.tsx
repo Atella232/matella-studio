@@ -29,42 +29,42 @@ export function LabPage() {
             icon: '🍕',
             label: t('lab.pizza.title'),
             description: t('lab.pizza.description'),
-            color: '#F59E0B'
+            color: '#e0a100'
         },
         {
             id: 'numberLine',
             icon: '📏',
             label: t('lab.numberLine'),
             description: t('lab.numberLineDesc'),
-            color: '#3B82F6'
+            color: '#2f6fdb'
         },
         {
             id: 'area',
             icon: '📐',
             label: t('lab.area'),
             description: t('lab.areaDesc'),
-            color: '#10B981'
+            color: '#267b53'
         },
         {
             id: 'equivalence',
             icon: '⚖️',
             label: t('lab.equivalence'),
             description: t('lab.equivalenceDesc'),
-            color: '#8B5CF6'
+            color: '#7a55d6'
         },
         {
             id: 'operations',
             icon: '➕',
             label: t('lab.operations.title'),
             description: t('lab.operations.description'),
-            color: '#EC4899'
+            color: '#d9502e'
         },
         {
             id: 'comparator',
             icon: '🔍',
             label: t('lab.comparator.title'),
             description: t('lab.comparator.description'),
-            color: '#6366F1'
+            color: '#2f6fdb'
         },
     ]
 

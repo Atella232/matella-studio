@@ -15,19 +15,19 @@
 
 /* Pizza base */
 .pizza-crust {
-    fill: #D4A574;
-    stroke: #B8956A;
+    fill: #6b4e12;
+    stroke: #6b4e12;
     stroke-width: 3;
 }
 
 .pizza-sauce {
-    fill: #E53935;
+    fill: #8f2c14;
 }
 
 /* Individual slices */
 .pizza-slice {
-    fill: #FFCA28;
-    stroke: #E8B923;
+    fill: #6b4e12;
+    stroke: var(--ink);
     stroke-width: 2;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -40,7 +40,7 @@
 }
 
 .pizza-slice.selected {
-    fill: #FFD54F;
+    fill: #6b4e12;
     stroke: var(--color-primary);
     stroke-width: 4;
     filter: drop-shadow(0 0 10px var(--color-primary-glow));
@@ -68,7 +68,7 @@
 
 /* Toppings */
 .topping-pepperoni {
-    fill: #C62828;
+    fill: #8f2c14;
     stroke: #8E1C1C;
     stroke-width: 1;
 }
@@ -78,22 +78,22 @@
 }
 
 .topping-mushroom {
-    fill: #E0C9A6;
-    stroke: #C4A77D;
+    fill: var(--ink);
+    stroke: #6b4e12;
     stroke-width: 0.5;
 }
 
 /* Slice lines */
 .pizza-lines {
-    stroke: #D4A574;
+    stroke: #6b4e12;
     stroke-width: 3;
     fill: none;
 }
 
 /* Center circle (covering point) */
 .pizza-center {
-    fill: #FFCA28;
-    stroke: #E0B623;
+    fill: #6b4e12;
+    stroke: var(--ink);
     stroke-width: 2;
 }
 
@@ -101,7 +101,7 @@
 .slice-indicator {
     font-size: 1.5rem;
     pointer-events: none;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: none;
 }
 
 /* Responsive */

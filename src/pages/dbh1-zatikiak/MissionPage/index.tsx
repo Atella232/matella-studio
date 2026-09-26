@@ -169,21 +169,21 @@ const getDifficultyConfig = (t: TFunction) => ({
         label: t('missions.levels.hasiberria.label'),
         sublabel: t('missions.levels.hasiberria.sublabel'),
         icon: '🌱',
-        color: '#22C55E',
+        color: '#267b53',
         bgColor: '#DCFCE7'
     },
     aurreratua: {
         label: t('missions.levels.aurreratua.label'),
         sublabel: t('missions.levels.aurreratua.sublabel'),
         icon: '🔥',
-        color: '#F59E0B',
+        color: '#e0a100',
         bgColor: '#FEF3C7'
     },
     maisu: {
         label: t('missions.levels.maisu.label'),
         sublabel: t('missions.levels.maisu.sublabel'),
         icon: '⭐',
-        color: '#EF4444',
+        color: '#b3261e',
         bgColor: '#FEE2E2'
     }
 })

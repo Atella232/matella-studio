@@ -27,7 +27,7 @@ export function PizzaLab() {
         // Draw pizza base
         ctx.beginPath()
         ctx.arc(centerX, centerY, radius, 0, Math.PI * 2)
-        ctx.fillStyle = '#FCD34D'
+        ctx.fillStyle = '#e0a100'
         ctx.fill()
         ctx.strokeStyle = '#B45309'
         ctx.lineWidth = 4
@@ -36,7 +36,7 @@ export function PizzaLab() {
         // Draw crust
         ctx.beginPath()
         ctx.arc(centerX, centerY, radius - 10, 0, Math.PI * 2)
-        ctx.strokeStyle = '#D97706'
+        ctx.strokeStyle = '#e0a100'
         ctx.lineWidth = 20
         ctx.stroke()
 

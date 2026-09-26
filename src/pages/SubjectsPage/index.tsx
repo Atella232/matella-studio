@@ -19,14 +19,14 @@ export function SubjectsPage() {
                         icon="Σ"
                         title={t('subjects.math.title')}
                         description={t('subjects.math.description')}
-                        color="#6366f1"
+                        color="#2f6fdb"
                     />
                     <SubjectCard
                         to="/natura"
                         icon="🌿"
                         title={t('subjects.natura.title')}
                         description={t('subjects.natura.description')}
-                        color="#10b981"
+                        color="#267b53"
                     />
                 </div>
 

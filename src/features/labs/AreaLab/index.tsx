@@ -60,7 +60,7 @@ export function AreaLab() {
             }
 
             // Draw cell border
-            ctx.strokeStyle = '#2563eb'
+            ctx.strokeStyle = '#2f6fdb'
             ctx.lineWidth = 2
             ctx.strokeRect(x, y, cellWidth, cellHeight)
 

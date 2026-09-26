@@ -5,10 +5,10 @@
     justify-content: center;
     width: 3.25rem;
     height: 3.25rem;
-    border: 1px solid rgba(125, 211, 252, 0.38);
+    border: 1px solid rgba(47, 111, 219, 0.38);
     border-radius: 999px;
-    background: rgba(15, 23, 42, 0.72);
-    color: #dbeafe;
+    background: var(--card);
+    color: var(--ink);
     font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", ui-sans-serif, system-ui, sans-serif;
     font-size: clamp(1.25rem, 2vw, 1.8rem);
     font-weight: 900;
@@ -23,8 +23,8 @@
 .ekuazioak-lab .lab-card.active .lab-icon {
     border-color: var(--lab-color);
     background:
-        linear-gradient(135deg, rgba(34, 211, 238, 0.34), rgba(99, 102, 241, 0.28)),
-        rgba(15, 23, 42, 0.86);
+        linear-gradient(135deg, rgba(122, 85, 214, 0.34), rgba(47, 111, 219, 0.28)),
+        var(--card);
     color: var(--color-text-primary);
 }
 
@@ -34,8 +34,8 @@
 
 .ekuazioak-lab .lab-card.active {
     background:
-        linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(244, 114, 182, 0.16)),
-        rgba(15, 23, 42, 0.76);
+        linear-gradient(135deg, rgba(122, 85, 214, 0.2), rgba(217, 80, 46, 0.16)),
+        var(--card);
 }
 
 .ekuazioak-lab .algebra-result-card .math-token.display {

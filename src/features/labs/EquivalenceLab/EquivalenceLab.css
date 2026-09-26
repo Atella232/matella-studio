@@ -91,14 +91,14 @@
 }
 
 .equivalence-lab .fraction-step.result {
-    background: rgba(37, 99, 235, 0.1);
+    background: rgba(47, 111, 219, 0.1);
     border: 2px solid var(--color-primary);
 }
 
 .equivalence-lab .operator {
     font-size: var(--text-2xl);
     font-weight: 800;
-    color: var(--color-accent-light, #a5b4fc);
+    color: var(--color-accent-light, #1e4a96);
 }
 
 .equivalence-lab .fraction-display {
@@ -127,7 +127,7 @@
 }
 
 .equivalence-lab .simplified-form p {
-    color: var(--color-text-secondary, #94a3b8);
+    color: var(--color-text-secondary, #1e4a96);
     margin-bottom: var(--space-2);
     font-weight: 600;
 }
@@ -148,7 +148,7 @@
 
 .equivalence-lab .equivalence-explanation p {
     margin-bottom: var(--space-2);
-    color: var(--color-text-secondary, #94a3b8);
+    color: var(--color-text-secondary, #1e4a96);
     font-weight: 500;
 }
 

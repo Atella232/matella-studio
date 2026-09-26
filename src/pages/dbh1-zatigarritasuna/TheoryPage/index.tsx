@@ -23,28 +23,28 @@ export function TheoryPage() {
             id: 'conceptos',
             title: t('zatigarritasuna.theory.sections.conceptos'),
             icon: '🎯',
-            color: '#6366f1',
+            color: '#2f6fdb',
             content: <ConceptosContent />
         },
         {
             id: 'criterios',
             title: t('zatigarritasuna.theory.sections.criterios'),
             icon: '⚡',
-            color: '#10b981',
+            color: '#267b53',
             content: <CriteriosContent />
         },
         {
             id: 'primos',
             title: t('zatigarritasuna.theory.sections.primos'),
             icon: '🧱',
-            color: '#f59e0b',
+            color: '#e0a100',
             content: <PrimosContent />
         },
         {
             id: 'mcmMcd',
             title: t('zatigarritasuna.theory.sections.mcmMcd'),
             icon: '🧮',
-            color: '#ec4899',
+            color: '#d9502e',
             content: <McmMcdContent />
         }
     ]

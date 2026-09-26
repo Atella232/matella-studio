@@ -46,7 +46,7 @@
     font-weight: 700;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: var(--ink);
     background-clip: text;
     display: flex;
     flex-direction: column;

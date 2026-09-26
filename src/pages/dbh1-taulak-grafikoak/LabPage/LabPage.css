@@ -8,10 +8,10 @@
 .lab-header h1 {
     font-size: 3rem;
     margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, #a78bfa, #3b82f6);
+    background: linear-gradient(135deg, #7a55d6, #2f6fdb);
     -webkit-background-clip: text;
     background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: var(--ink);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,8 +40,8 @@
 .lab-module {
     padding: 2rem;
     border-radius: 24px;
-    background: rgba(20, 25, 40, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--card);
+    border: 1px solid var(--line);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
@@ -54,11 +54,11 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    color: #e2e8f0;
+    color: var(--ink-soft);
 }
 
 .inline-icon {
-    color: #60a5fa;
+    color: #1e4a96;
 }
 
 .module-desc {
@@ -80,9 +80,9 @@
     width: 100%;
     padding: 1rem;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
+    background: rgba(29, 39, 51, 0.03);
+    border: 1px solid var(--line);
+    color: var(--ink);
     font-family: inherit;
     font-size: 1rem;
     transition: all 0.3s;
@@ -91,16 +91,16 @@
 .glass-input:focus,
 .glass-textarea:focus {
     outline: none;
-    border-color: #3b82f6;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    border-color: #2f6fdb;
+    background: rgba(29, 39, 51, 0.06);
+    box-shadow: 0 0 0 2px rgba(47, 111, 219, 0.2);
 }
 
 /* Frequency Table */
 .table-wrapper {
     overflow-x: auto;
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--line);
 }
 
 .freq-table {
@@ -110,29 +110,29 @@
 }
 
 .freq-table th {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(29, 39, 51, 0.03);
     padding: 1rem;
     font-weight: 600;
-    color: #e2e8f0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--line);
 }
 
 .freq-table td {
     padding: 0.75rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--line);
     color: var(--text-secondary);
 }
 
 .freq-table .highlight-val {
-    color: #3b82f6;
+    color: #1e4a96;
     font-weight: 500;
 }
 
 .total-row td {
     font-weight: bold;
-    color: #e2e8f0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.02);
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line);
+    background: rgba(29, 39, 51, 0.012);
 }
 
 /* Stat Results */
@@ -148,8 +148,8 @@
     align-items: center;
     padding: 1rem;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(29, 39, 51, 0.03);
+    border: 1px solid var(--line);
 }
 
 .stat-label {
@@ -162,24 +162,24 @@
 .stat-value {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #fff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    color: var(--ink);
+    text-shadow: none;
 }
 
 .stat-card.box-primary {
-    border-bottom: 3px solid #3b82f6;
+    border-bottom: 3px solid #2f6fdb;
 }
 
 .stat-card.box-success {
-    border-bottom: 3px solid #10b981;
+    border-bottom: 3px solid #267b53;
 }
 
 .stat-card.box-warning {
-    border-bottom: 3px solid #f59e0b;
+    border-bottom: 3px solid #e0a100;
 }
 
 .stat-card.box-purple {
-    border-bottom: 3px solid #a855f7;
+    border-bottom: 3px solid #7a55d6;
 }
 
 /* Custom Graphs */
@@ -190,7 +190,7 @@
 }
 
 .graph-box {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(29, 39, 51, 0.05);
     padding: 1.5rem;
     border-radius: 16px;
 }
@@ -202,8 +202,8 @@
     justify-content: space-around;
     height: 200px;
     padding-top: 2rem;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-    border-left: 2px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 2px solid var(--line-strong);
+    border-left: 2px solid var(--line-strong);
 }
 
 .bar-wrapper {
@@ -289,16 +289,16 @@
 }
 
 .score-display span {
-    color: #fbbf24;
+    color: #6b4e12;
     font-size: 1.5rem;
 }
 
 .variable-prompt {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(29, 39, 51, 0.03);
     padding: 2rem;
     border-radius: 16px;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--line);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     width: 100%;
 }
@@ -312,7 +312,7 @@
 .variable-text {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #e2e8f0;
+    color: var(--ink-soft);
     margin: 0;
 }
 
@@ -331,7 +331,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
-    color: white;
+    color: var(--ink);
     flex: 1;
     min-width: 140px;
 }
@@ -342,15 +342,15 @@
 }
 
 .classifier-btn.box-primary {
-    background: #3b82f6;
+    background: #2f6fdb;
 }
 
 .classifier-btn.box-success {
-    background: #10b981;
+    background: #267b53;
 }
 
 .classifier-btn.box-warning {
-    background: #f59e0b;
+    background: #e0a100;
 }
 
 .feedback-message {

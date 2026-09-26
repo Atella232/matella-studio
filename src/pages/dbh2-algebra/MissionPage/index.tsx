@@ -7,9 +7,9 @@ import '../../dbh1-zatikiak/MissionPage/MissionPage.css'
 type Difficulty = 'hasiberria' | 'aurreratua' | 'maisu'
 
 const difficultyMeta = {
-    hasiberria: { icon: '🌱', color: '#22C55E' },
-    aurreratua: { icon: '🔥', color: '#F59E0B' },
-    maisu: { icon: '⭐', color: '#EF4444' }
+    hasiberria: { icon: '🌱', color: '#267b53' },
+    aurreratua: { icon: '🔥', color: '#e0a100' },
+    maisu: { icon: '⭐', color: '#b3261e' }
 } as const
 
 export function MissionPage() {

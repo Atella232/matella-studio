@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MathText } from '../../../components/MathText'
 import { algebraQuizQuestions, normalizeAlgebraLang, pickText } from '../content'
+import '../../../features/games/GamesHubDBH1/GamesHub.css'
 import './GamesPage.css'
 
 type Mode = 'mixed' | 'monomios' | 'polinomios'

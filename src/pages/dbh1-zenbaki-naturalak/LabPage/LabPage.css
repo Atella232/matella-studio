@@ -12,7 +12,7 @@
     font-size: var(--text-5xl);
     background: var(--gradient-primary);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: var(--ink);
     background-clip: text;
 }
 
@@ -97,7 +97,7 @@
     align-items: center;
     justify-content: center;
     font-size: 1.45rem;
-    color: white;
+    color: #ffffff;
     background: var(--lab-color);
     flex-shrink: 0;
     z-index: 1;
@@ -110,7 +110,7 @@
 }
 
 .zn-lab-panel {
-    --panel-color: #6366f1;
+    --panel-color: #2f6fdb;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-2xl);
@@ -146,7 +146,7 @@
     justify-content: center;
     font-size: 1.4rem;
     background: var(--panel-color);
-    color: white;
+    color: #ffffff;
     flex-shrink: 0;
 }
 
@@ -169,8 +169,8 @@
 }
 
 .zn-lab-panel-tags .tag {
-    border: 1px solid color-mix(in srgb, var(--panel-color) 45%, rgba(255, 255, 255, 0.2));
-    background: color-mix(in srgb, var(--panel-color) 14%, rgba(255, 255, 255, 0.02));
+    border: 1px solid color-mix(in srgb, var(--panel-color) 45%, var(--line-strong));
+    background: color-mix(in srgb, var(--panel-color) 14%, rgba(29, 39, 51, 0.012));
     border-radius: var(--radius-full);
     padding: var(--space-1) var(--space-3);
     color: var(--color-text-secondary);
@@ -180,8 +180,8 @@
 .zn-formula-strip {
     margin-bottom: var(--space-5);
     border-radius: var(--radius-xl);
-    border: 1px solid color-mix(in srgb, var(--panel-color) 35%, rgba(255, 255, 255, 0.2));
-    background: color-mix(in srgb, var(--panel-color) 10%, rgba(255, 255, 255, 0.04));
+    border: 1px solid color-mix(in srgb, var(--panel-color) 35%, var(--line-strong));
+    background: color-mix(in srgb, var(--panel-color) 10%, rgba(29, 39, 51, 0.024));
     padding: var(--space-3) var(--space-4);
     color: var(--color-text-secondary);
 }
@@ -193,8 +193,8 @@
 .zn-widget-card {
     margin-bottom: var(--space-6);
     border-radius: var(--radius-xl);
-    border: 1px solid color-mix(in srgb, var(--panel-color) 35%, rgba(255, 255, 255, 0.1));
-    background: color-mix(in srgb, var(--panel-color) 8%, rgba(255, 255, 255, 0.02));
+    border: 1px solid color-mix(in srgb, var(--panel-color) 35%, var(--line));
+    background: color-mix(in srgb, var(--panel-color) 8%, rgba(29, 39, 51, 0.012));
     padding: var(--space-5);
 }
 
@@ -204,7 +204,7 @@
 }
 
 .zn-widget-card code {
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(29, 39, 51, 0.062);
     border-radius: var(--radius-md);
     padding: 2px 8px;
     color: var(--color-text-primary);
@@ -228,9 +228,9 @@
 .zn-widget-grid select,
 .zn-widget-card input {
     width: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--line-strong);
     border-radius: var(--radius-md);
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(29, 39, 51, 0.08);
     color: var(--color-text-primary);
     padding: var(--space-2) var(--space-3);
 }
@@ -244,9 +244,9 @@
 
 .zn-widget-actions button,
 .zn-option-list .option {
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--line-strong);
     border-radius: var(--radius-md);
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(29, 39, 51, 0.048);
     color: var(--color-text-primary);
     padding: var(--space-2) var(--space-3);
     transition: all 0.2s ease;
@@ -267,13 +267,13 @@
 .zn-option-list .selected {
     border-color: var(--panel-color);
     box-shadow: 0 0 0 1px var(--panel-color);
-    background: color-mix(in srgb, var(--panel-color) 18%, rgba(255, 255, 255, 0.06));
+    background: color-mix(in srgb, var(--panel-color) 18%, rgba(29, 39, 51, 0.036));
 }
 
 .zn-comparator-display {
     margin-top: var(--space-4);
     border-radius: var(--radius-xl);
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    border: 1px solid var(--line-strong);
     padding: var(--space-4);
     display: flex;
     align-items: center;
@@ -281,7 +281,7 @@
     gap: var(--space-4);
     font-size: var(--text-2xl);
     color: var(--color-text-primary);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(29, 39, 51, 0.018);
 }
 
 .zn-comparator-display .symbol {
@@ -296,27 +296,27 @@
 }
 
 .zn-comparator-display .symbol.gt {
-    color: #10b981;
-    background: rgba(16, 185, 129, 0.18);
+    color: #1f6443;
+    background: rgba(38, 123, 83, 0.18);
 }
 
 .zn-comparator-display .symbol.lt {
-    color: #ef4444;
-    background: rgba(239, 68, 68, 0.18);
+    color: #b3261e;
+    background: rgba(179, 38, 30, 0.18);
 }
 
 .zn-comparator-display .symbol.eq {
-    color: #f59e0b;
-    background: rgba(245, 158, 11, 0.18);
+    color: #6b4e12;
+    background: rgba(224, 161, 0, 0.18);
 }
 
 .ok {
-    color: #34d399;
+    color: #1f6443;
     font-weight: 700;
 }
 
 .ko {
-    color: #fca5a5;
+    color: #b3261e;
     font-weight: 700;
 }
 

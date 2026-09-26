@@ -92,13 +92,13 @@ export function NumberLineLab() {
         const fractionX = lineStart + fraction * tickSpacing
 
         // Marker circle
-        ctx.fillStyle = '#2563eb'
+        ctx.fillStyle = '#2f6fdb'
         ctx.beginPath()
         ctx.arc(fractionX, lineY, 8, 0, Math.PI * 2)
         ctx.fill()
 
         // Marker label
-        ctx.fillStyle = '#2563eb'
+        ctx.fillStyle = '#2f6fdb'
         ctx.font = 'bold 18px Inter, sans-serif'
         ctx.textAlign = 'center'
         ctx.fillText(`${numerator}/${denominator}`, fractionX, lineY - 20)

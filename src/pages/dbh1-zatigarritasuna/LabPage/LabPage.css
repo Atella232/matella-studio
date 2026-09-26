@@ -14,7 +14,7 @@
     font-size: var(--text-4xl);
     background: var(--gradient-primary);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: var(--ink);
     background-clip: text;
     filter: drop-shadow(0 0 2em var(--color-primary-glow));
 }
@@ -164,7 +164,7 @@
     margin: 0;
     font-size: var(--text-2xl);
     color: var(--color-text-primary);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    text-shadow: none;
 }
 
 .lab-panel-header p {

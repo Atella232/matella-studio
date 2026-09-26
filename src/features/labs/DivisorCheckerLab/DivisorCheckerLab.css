@@ -33,13 +33,13 @@
 }
 
 .result-container.success {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.1) 100%);
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    background: linear-gradient(135deg, rgba(38, 123, 83, 0.1) 0%, rgba(38, 123, 83, 0.1) 100%);
+    border: 1px solid rgba(38, 123, 83, 0.3);
 }
 
 .result-container.error {
-    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(248, 113, 113, 0.1) 100%);
-    border: 1px solid rgba(239, 68, 68, 0.3);
+    background: linear-gradient(135deg, rgba(179, 38, 30, 0.1) 0%, rgba(179, 38, 30, 0.1) 100%);
+    border: 1px solid rgba(179, 38, 30, 0.3);
 }
 
 .result-icon {
