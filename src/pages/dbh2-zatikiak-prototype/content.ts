@@ -53,31 +53,6 @@ export interface DiagnosticQuestion {
     topic: TheoryTopicId
 }
 
-export interface EquivalenceRound {
-    id: number
-    prompt: FractionValue
-    options: FractionValue[]
-}
-
-export interface PizzaRound {
-    id: number
-    target: FractionValue
-}
-
-export interface RaceRound {
-    id: number
-    expression: string
-    expected: FractionValue
-    hint: LocalizedText
-}
-
-export interface MemoryCardData {
-    id: string
-    pairId: number
-    display: string
-    spoken: LocalizedText
-}
-
 export function normalizePrototypeLanguage(language: string): PrototypeLanguage {
     if (language.startsWith('ar')) return 'ar'
     if (language.startsWith('es')) return 'es'
@@ -620,52 +595,3 @@ const additionalChallenges: ChallengeItem[] = [
 
 export const challenges: ChallengeItem[] = [...additionalChallenges, ...auditedChallenges]
     .sort((left, right) => left.id - right.id)
-
-// Every value is written exactly as shown to the learner (never pre-simplified), so the
-// correct option can't be spotted by being the only unsimplified one. Distractors follow
-// common mistakes: adding the same number to both terms, scaling only one term, losing the sign.
-const raw = (numerator: number, denominator: number): FractionValue => ({ numerator, denominator })
-
-export const equivalenceRounds: EquivalenceRound[] = [
-    { id: 201, prompt: raw(1, 2), options: [raw(3, 6), raw(2, 3), raw(2, 6)] },
-    { id: 202, prompt: raw(2, 5), options: [raw(4, 7), raw(6, 15), raw(6, 10)] },
-    { id: 203, prompt: raw(-3, 4), options: [raw(6, 8), raw(-3, 8), raw(-6, 8)] },
-    { id: 204, prompt: raw(7, 3), options: [raw(21, 6), raw(14, 6), raw(8, 4)] },
-    { id: 205, prompt: raw(4, 6), options: [raw(2, 4), raw(3, 5), raw(2, 3)] },
-    { id: 206, prompt: raw(9, 12), options: [raw(3, 4), raw(6, 9), raw(10, 13)] },
-    { id: 207, prompt: raw(5, 4), options: [raw(5, 8), raw(10, 8), raw(10, 4)] },
-    { id: 208, prompt: raw(-2, 3), options: [raw(8, 12), raw(-2, 6), raw(-8, 12)] }
-]
-
-export const pizzaRounds: PizzaRound[] = [
-    { id: 301, target: fraction(2, 3) },
-    { id: 302, target: fraction(3, 4) },
-    { id: 303, target: fraction(5, 6) },
-    { id: 304, target: fraction(3, 8) },
-    { id: 305, target: fraction(7, 10) },
-    { id: 306, target: fraction(5, 12) }
-]
-
-export const raceRounds: RaceRound[] = [
-    { id: 501, expression: '$\\frac{1}{3}-\\frac{5}{6}$', expected: fraction(-1, 2), hint: { eu: 'Idatzi $1/3=2/6$.', es: 'Escribe $1/3=2/6$.', ar: 'اكتب $1/3=2/6$.' } },
-    { id: 502, expression: '$\\left(\\frac{1}{3}-\\frac{5}{6}\\right)+\\frac{1}{4}$', expected: fraction(-1, 4), hint: { eu: 'Parentesiaren emaitza negatiboa da.', es: 'El resultado del paréntesis es negativo.', ar: 'نتيجة ما داخل القوس سالبة.' } },
-    { id: 503, expression: '$\\frac{5}{6}\\cdot\\left(-\\frac{9}{10}\\right)\\div\\frac{3}{4}$', expected: fraction(-1), hint: { eu: 'Lehen biderketak $-3/4$ ematen du.', es: 'El primer producto da $-3/4$.', ar: 'ناتج الضرب الأول هو $-3/4$.' } },
-    { id: 504, expression: '$\\left(\\frac{2}{3}\\right)^3$', expected: fraction(8, 27), hint: { eu: 'Berretu zenbakitzailea eta izendatzailea.', es: 'Eleva numerador y denominador.', ar: 'ارفع البسط والمقام إلى القوة.' } },
-    { id: 505, expression: '$\\frac{2}{3}\\div\\left(\\frac{5}{6}-\\frac{1}{2}\\right)$', expected: fraction(2), hint: { eu: 'Parentesia $1/3$ da.', es: 'El paréntesis vale $1/3$.', ar: 'قيمة القوس هي $1/3$.' } },
-    { id: 506, expression: '$-\\frac{3}{4}+\\left(\\frac{2}{3}\\right)^2\\div\\frac{8}{9}$', expected: fraction(-1, 4), hint: { eu: 'Berretura eta zatiketa batuketa baino lehen.', es: 'Potencia y división antes que la suma.', ar: 'القوة والقسمة قبل الجمع.' } }
-]
-
-export const memoryCardsSource: MemoryCardData[] = [
-    { id: 'half-fraction', pairId: 401, display: '$\\frac{1}{2}$', spoken: { eu: 'erdi bat', es: 'un medio', ar: 'نصف' } },
-    { id: 'half-decimal', pairId: 401, display: '$0,5$', spoken: { eu: 'zero koma bost', es: 'cero coma cinco', ar: 'صفر فاصلة خمسة' } },
-    { id: 'three-quarters', pairId: 402, display: '$\\frac{3}{4}$', spoken: { eu: 'hiru laurden', es: 'tres cuartos', ar: 'ثلاثة أرباع' } },
-    { id: 'seventy-five', pairId: 402, display: '$75\\%$', spoken: { eu: 'ehuneko hirurogeita hamabost', es: 'setenta y cinco por ciento', ar: 'خمسة وسبعون بالمئة' } },
-    { id: 'two-fifths', pairId: 403, display: '$\\frac{2}{5}$', spoken: { eu: 'bi bosten', es: 'dos quintos', ar: 'خُمسان' } },
-    { id: 'point-four', pairId: 403, display: '$0,4$', spoken: { eu: 'zero koma lau', es: 'cero coma cuatro', ar: 'صفر فاصلة أربعة' } },
-    { id: 'five-fourths', pairId: 404, display: '$\\frac{5}{4}$', spoken: { eu: 'bost laurden', es: 'cinco cuartos', ar: 'خمسة أرباع' } },
-    { id: 'mixed-quarter', pairId: 404, display: '$1\\frac{1}{4}$', spoken: { eu: 'bat eta laurden bat', es: 'uno y un cuarto', ar: 'واحد وربع' } },
-    { id: 'negative-half', pairId: 405, display: '$-\\frac{1}{2}$', spoken: { eu: 'minus erdi bat', es: 'menos un medio', ar: 'سالب نصف' } },
-    { id: 'negative-percent', pairId: 405, display: '$-50\\%$', spoken: { eu: 'minus ehuneko berrogeita hamar', es: 'menos cincuenta por ciento', ar: 'سالب خمسين بالمئة' } },
-    { id: 'seven-thirds', pairId: 406, display: '$\\frac{7}{3}$', spoken: { eu: 'zazpi heren', es: 'siete tercios', ar: 'سبعة أثلاث' } },
-    { id: 'fourteen-sixths', pairId: 406, display: '$\\frac{14}{6}$', spoken: { eu: 'hamalau seiren', es: 'catorce sextos', ar: 'أربعة عشر سدسًا' } }
-]

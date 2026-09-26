@@ -4,14 +4,10 @@ import { readFileSync } from 'node:fs'
 import {
     challenges,
     diagnosticQuestions,
-    equivalenceRounds,
     guidedPractice,
-    memoryCardsSource,
-    pizzaRounds,
-    raceRounds,
     theoryTopics
 } from '../src/pages/dbh2-zatikiak-prototype/content.ts'
-import { equals, gcd, toText } from '../src/pages/dbh2-zatikiak-prototype/math/fraction.ts'
+import { toText } from '../src/pages/dbh2-zatikiak-prototype/math/fraction.ts'
 
 test('contains the complete theory, exercise and challenge inventory', () => {
     assert.equal(theoryTopics.length, 12)
@@ -27,10 +23,6 @@ test('contains the complete theory, exercise and challenge inventory', () => {
     assert.deepEqual(challenges.map((challenge) => challenge.id), Array.from({ length: 12 }, (_, index) => 101 + index))
 
     assert.equal(diagnosticQuestions.length, 6)
-    assert.equal(equivalenceRounds.length, 8)
-    assert.equal(pizzaRounds.length, 6)
-    assert.equal(raceRounds.length, 6)
-    assert.equal(memoryCardsSource.length, 12)
 })
 
 test('keeps every localized theory and challenge text populated', () => {
@@ -59,7 +51,7 @@ test('contains the corrected recipe and water-tank answers', () => {
     assert.match(challenges.find((challenge) => challenge.id === 112)!.prompt.es, /1800/)
 })
 
-test('audits every diagnostic and game round', () => {
+test('audits every diagnostic question', () => {
     for (const question of diagnosticQuestions) {
         assert.ok(question.correctIndex >= 0 && question.correctIndex < question.options.length)
         assert.equal(question.options.length, 3)
@@ -68,32 +60,6 @@ test('audits every diagnostic and game round', () => {
             assert.ok(question.explanation[language].trim())
             assert.ok(question.options.every((option) => option[language].trim()))
         }
-    }
-
-    for (const round of equivalenceRounds) {
-        assert.equal(round.options.filter((option) => equals(option, round.prompt)).length, 1)
-    }
-    for (const round of pizzaRounds) {
-        assert.ok(round.target.numerator > 0)
-        assert.ok(round.target.numerator < round.target.denominator)
-    }
-    assert.deepEqual(raceRounds.map((round) => toText(round.expected)), ['-1/2', '-1/4', '-1', '8/27', '2', '-1/4'])
-
-    const pairs = new Map<number, typeof memoryCardsSource>()
-    for (const card of memoryCardsSource) pairs.set(card.pairId, [...(pairs.get(card.pairId) ?? []), card])
-    assert.equal(pairs.size, 6)
-    for (const cards of pairs.values()) {
-        assert.equal(cards.length, 2)
-        assert.notEqual(cards[0].display, cards[1].display)
-    }
-})
-
-test('equivalence rounds cannot be solved by spotting the only unsimplified option', () => {
-    const isReduced = (value: { numerator: number; denominator: number }) => gcd(value.numerator, value.denominator) === 1
-    for (const round of equivalenceRounds) {
-        const correct = round.options.find((option) => equals(option, round.prompt))!
-        const sameShape = round.options.filter((option) => isReduced(option) === isReduced(correct))
-        assert.ok(sameShape.length > 1, `round ${round.id}: the correct option is the only ${isReduced(correct) ? 'reduced' : 'unreduced'} one`)
     }
 })
 

@@ -5,19 +5,14 @@ import { MathText } from '../../components/MathText'
 import {
     challenges,
     diagnosticQuestions,
-    equivalenceRounds,
     guidedPractice,
     learningStages,
-    memoryCardsSource,
-    pizzaRounds,
-    raceRounds,
     theoryTopics,
     normalizePrototypeLanguage,
     pickText,
     prototypeSections,
     type ChallengeItem,
     type LocalizedText,
-    type MemoryCardData,
     type PracticeItem,
     type PrototypeSection,
     type TheoryTopicId
@@ -27,21 +22,18 @@ import {
     type ExerciseDifficulty
 } from '../dbh2-zatikiak/ExercisesPage/exercisesData'
 import {
-    answerEquals,
-    checkAnswer,
-    equals,
-    toLatex,
-    type FractionValue
+    checkAnswer
 } from './math/fraction'
 import {
     gameModeForPath,
     practiceModeForPath,
     sectionForPath,
-    type GameMode,
     type PracticeMode
 } from './routing'
 import { Icon } from './icons'
 import { FractionLaboratory } from './lab'
+import { GamesArea } from './games'
+import { GAME_RECORDS_KEY, gameProgressIds } from './games/records'
 import { labChallengeIds, labToolForTopic, labTools, type LabToolId } from './lab/labTools'
 import './PrototypePage.css'
 
@@ -401,8 +393,6 @@ function useStoredTopics(key: string) {
     return { ids, addId, reset }
 }
 
-const TOTAL_GAME_GOALS = equivalenceRounds.length + pizzaRounds.length + new Set(memoryCardsSource.map((card) => card.pairId)).size + raceRounds.length
-
 export function ZatikiakPrototypePage() {
     const { t, i18n } = useTranslation()
     const location = useLocation()
@@ -455,11 +445,16 @@ export function ZatikiakPrototypePage() {
         bankProgress.reset()
         challengeProgress.reset()
         playProgress.reset()
+        try {
+            localStorage.removeItem(GAME_RECORDS_KEY)
+        } catch {
+            // Storage unavailable: nothing to clear
+        }
         labProgress.reset()
     }
 
-    const completedGoals = diagnosticProgress.ids.length + learned.ids.length + practiceProgress.ids.length + bankProgress.ids.length + challengeProgress.ids.length + playProgress.ids.length + labProgress.ids.filter((id) => labChallengeIds.includes(id)).length
-    const totalGoals = diagnosticQuestions.length + theoryTopics.length + guidedPractice.length + 42 + challenges.length + TOTAL_GAME_GOALS + labChallengeIds.length
+    const completedGoals = diagnosticProgress.ids.length + learned.ids.length + practiceProgress.ids.length + bankProgress.ids.length + challengeProgress.ids.length + playProgress.ids.filter((id) => gameProgressIds.includes(id)).length + labProgress.ids.filter((id) => labChallengeIds.includes(id)).length
+    const totalGoals = diagnosticQuestions.length + theoryTopics.length + guidedPractice.length + 42 + challenges.length + gameProgressIds.length + labChallengeIds.length
     const progress = Math.round((completedGoals / totalGoals) * 100)
     const recommendedTopic = theoryTopics.find((topic) => !learned.ids.includes(topic.id)) ?? theoryTopics[theoryTopics.length - 1]
 
@@ -929,272 +924,5 @@ function PracticeDeck({
                 </article>
             </div>
         </section>
-    )
-}
-
-function GamesArea({ completedIds, onComplete, language, initialGame }: { completedIds: number[]; onComplete: (id: number) => void; language: ReturnType<typeof normalizePrototypeLanguage>; initialGame: GameMode }) {
-    const l = (text: LocalizedText) => pickText(language, text)
-    const [game, setGame] = useState<GameMode>(initialGame)
-    const gameOptions: Array<{ id: typeof game; icon: string; title: LocalizedText; description: LocalizedText }> = [
-        { id: 'equivalence', icon: '≡', title: { eu: 'Baliokide azkarra', es: 'Equivalencia rápida', ar: 'تكافؤ سريع' }, description: { eu: 'Balio bera aukeratu.', es: 'Elige el mismo valor.', ar: 'اختر القيمة نفسها.' } },
-        { id: 'pizza', icon: '◉', title: { eu: 'Pizza zehatza', es: 'Pizza exacta', ar: 'بيتزا دقيقة' }, description: { eu: 'Prestatu eskatutako zatia.', es: 'Prepara la porción pedida.', ar: 'حضّر الكسر المطلوب.' } },
-        { id: 'memory', icon: '▦', title: { eu: 'Memoria', es: 'Memoria', ar: 'الذاكرة' }, description: { eu: 'Lotu adierazpen zehatzak.', es: 'Empareja representaciones exactas.', ar: 'طابق التمثيلات الدقيقة.' } },
-        { id: 'race', icon: '➜', title: { eu: 'Kalkulu-lasterketa', es: 'Carrera de cálculo', ar: 'سباق الحساب' }, description: { eu: 'Ebatzi zeinua galdu gabe.', es: 'Resuelve sin perder el signo.', ar: 'احسب من دون فقدان الإشارة.' } }
-    ]
-
-    return (
-        <section className="fraction-v2-games" aria-labelledby="fraction-v2-games-title">
-            <div className="fraction-v2-page-intro">
-                <span>{l({ eu: '4 JOKO-MODU', es: '4 MODOS DE JUEGO', ar: '4 أنماط لعب' })}</span>
-                <h1 id="fraction-v2-games-title">{l({ eu: 'Jolastu, baina beti balio zehatzarekin', es: 'Juega, siempre con valores exactos', ar: 'العب بقيم دقيقة دائمًا' })}</h1>
-                <p>{l({ eu: 'Entrenatu lau jokorekin: baliokidetasunak, pizza, memoria eta kalkulua.', es: 'Entrena con cuatro juegos: equivalencias, pizza, memoria y cálculo.', ar: 'تدرّب بأربع ألعاب: التكافؤ والبيتزا والذاكرة والحساب.' })}</p>
-            </div>
-            <div className="fraction-v2-game-tabs" role="tablist" aria-label={l({ eu: 'Jokoa aukeratu', es: 'Elegir juego', ar: 'اختر لعبة' })}>
-                {gameOptions.map((option) => (
-                    <button type="button" role="tab" id={`fraction-v2-game-tab-${option.id}`} aria-controls="fraction-v2-game-panel" aria-selected={game === option.id} className={game === option.id ? 'active' : ''} onKeyDown={handleTabArrow} onClick={() => setGame(option.id)} key={option.id}>
-                        <span aria-hidden="true">{option.icon}</span><strong>{l(option.title)}</strong><small>{l(option.description)}</small>
-                    </button>
-                ))}
-            </div>
-            <div id="fraction-v2-game-panel" role="tabpanel" aria-labelledby={`fraction-v2-game-tab-${game}`}>
-                {game === 'equivalence' && <ExactEquivalenceGame completedIds={completedIds} onComplete={onComplete} language={language} />}
-                {game === 'pizza' && <ExactPizzaGame completedIds={completedIds} onComplete={onComplete} language={language} />}
-                {game === 'memory' && <ExactMemoryGame completedIds={completedIds} onComplete={onComplete} language={language} />}
-                {game === 'race' && <FractionSprint completedIds={completedIds} onComplete={onComplete} language={language} />}
-            </div>
-        </section>
-    )
-}
-
-function ExactPizzaGame({ completedIds, onComplete, language }: { completedIds: number[]; onComplete: (id: number) => void; language: ReturnType<typeof normalizePrototypeLanguage> }) {
-    const l = (text: LocalizedText) => pickText(language, text)
-    const [roundIndex, setRoundIndex] = useState(0)
-    const [selectedSlices, setSelectedSlices] = useState(0)
-    const [feedback, setFeedback] = useState<Feedback>('idle')
-    const round = pizzaRounds[roundIndex]
-    const denominator = round.target.denominator
-    const targetSlices = round.target.numerator
-    const selectedAngle = (selectedSlices / denominator) * 360
-    const sliceAngle = 360 / denominator
-
-    const reset = () => {
-        setSelectedSlices(0)
-        setFeedback('idle')
-    }
-
-    const serve = () => {
-        const correct = selectedSlices === targetSlices
-        setFeedback(correct ? 'success' : 'error')
-        if (correct) onComplete(round.id)
-    }
-
-    const next = () => {
-        setRoundIndex((index) => (index + 1) % pizzaRounds.length)
-        reset()
-    }
-
-    return (
-        <div className="fraction-v2-game-card fraction-v2-pizza-game">
-            <div className="fraction-v2-game-score">{pizzaRounds.filter((item) => completedIds.includes(item.id)).length} / {pizzaRounds.length}</div>
-            <p>{l({ eu: 'Prestatu bezeroak eskatutako pizza-zatia.', es: 'Prepara la fracción de pizza solicitada.', ar: 'حضّر كسر البيتزا المطلوب.' })}</p>
-            <div className="fraction-v2-pizza-order"><MathText text={`$${toLatex(round.target)}$`} /></div>
-            <div
-                className="fraction-v2-pizza"
-                role="img"
-                aria-label={`${l({ eu: 'Hautatutako pizza', es: 'Pizza seleccionada', ar: 'البيتزا المحددة' })}: ${selectedSlices}/${denominator}`}
-                style={{ '--selected-angle': `${selectedAngle}deg`, '--slice-angle': `${sliceAngle}deg` } as CSSProperties}
-            />
-            <div className="fraction-v2-pizza-count"><strong>{selectedSlices}</strong> / {denominator}</div>
-            <div className="fraction-v2-pizza-controls">
-                <button type="button" aria-label={l({ eu: 'Zati bat kendu', es: 'Quitar una porción', ar: 'أنقص قطعة' })} disabled={selectedSlices === 0} onClick={() => { setSelectedSlices((count) => count - 1); setFeedback('idle') }}>−</button>
-                <button type="button" aria-label={l({ eu: 'Zati bat gehitu', es: 'Añadir una porción', ar: 'أضف قطعة' })} disabled={selectedSlices === denominator} onClick={() => { setSelectedSlices((count) => count + 1); setFeedback('idle') }}>+</button>
-                <button type="button" onClick={reset}>{l({ eu: 'Garbitu', es: 'Limpiar', ar: 'مسح' })}</button>
-                <button type="button" className="fraction-v2-primary" onClick={serve}>{l({ eu: 'Zerbitzatu', es: 'Servir', ar: 'قدّم' })}</button>
-            </div>
-            {feedback !== 'idle' && <div className={`fraction-v2-game-feedback ${feedback}`} aria-live="polite">{feedback === 'success' ? l({ eu: 'Eskaera zehatza. Ongi!', es: 'Pedido exacto. ¡Bien!', ar: 'الطلب مطابق تمامًا. أحسنت!' }) : l({ eu: 'Begiratu zenbat zati dauden eta zenbat aukeratu dituzun.', es: 'Revisa cuántas porciones hay y cuántas has elegido.', ar: 'راجع عدد القطع وعدد القطع التي اخترتها.' })}</div>}
-            <button type="button" className="fraction-v2-secondary" onClick={next}>{l({ eu: 'Hurrengo eskaera', es: 'Siguiente pedido', ar: 'الطلب التالي' })}</button>
-        </div>
-    )
-}
-
-function ExactMemoryGame({ completedIds, onComplete, language }: { completedIds: number[]; onComplete: (id: number) => void; language: ReturnType<typeof normalizePrototypeLanguage> }) {
-    const l = (text: LocalizedText) => pickText(language, text)
-    const [cards, setCards] = useState<MemoryCardData[]>(() => [...memoryCardsSource].sort(() => Math.random() - 0.5))
-    const [flipped, setFlipped] = useState<number[]>([])
-    const [matchedPairs, setMatchedPairs] = useState<number[]>(() => [...new Set(completedIds.filter((id) => id >= 401 && id <= 406))])
-    const [moves, setMoves] = useState(0)
-    const [message, setMessage] = useState('')
-
-    const selectCard = (index: number) => {
-        const card = cards[index]
-        if (matchedPairs.includes(card.pairId) || flipped.includes(index)) return
-
-        const active = flipped.length === 2 ? [] : flipped
-        const next = [...active, index]
-        setFlipped(next)
-        setMessage('')
-        if (next.length === 2) {
-            setMoves((count) => count + 1)
-            const first = cards[next[0]]
-            const second = cards[next[1]]
-            if (first.pairId === second.pairId) {
-                setMatchedPairs((pairs) => pairs.includes(first.pairId) ? pairs : [...pairs, first.pairId])
-                onComplete(first.pairId)
-                setMessage(l({ eu: 'Baliokide zehatzak.', es: 'Representaciones exactamente equivalentes.', ar: 'تمثيلان متكافئان تمامًا.' }))
-            } else {
-                setMessage(l({ eu: 'Ez dute balio bera. Aukeratu beste karta bat jarraitzeko.', es: 'No tienen el mismo valor. Elige otra carta para continuar.', ar: 'ليستا بالقيمة نفسها. اختر بطاقة أخرى للمتابعة.' }))
-            }
-        }
-    }
-
-    const reset = () => {
-        setCards([...memoryCardsSource].sort(() => Math.random() - 0.5))
-        setFlipped([])
-        setMatchedPairs([])
-        setMoves(0)
-        setMessage('')
-    }
-
-    return (
-        <div className="fraction-v2-game-card fraction-v2-memory-game">
-            <div className="fraction-v2-memory-meta"><span>{matchedPairs.length} / 6</span><span>{moves} {l({ eu: 'mugimendu', es: 'movimientos', ar: 'محاولات' })}</span></div>
-            <p>{l({ eu: 'Aurkitu balio bera duten bi karta.', es: 'Encuentra dos cartas con el mismo valor.', ar: 'اعثر على بطاقتين لهما القيمة نفسها.' })}</p>
-            <div className="fraction-v2-memory-grid">
-                {cards.map((card, index) => {
-                    const visible = flipped.includes(index) || matchedPairs.includes(card.pairId)
-                    return (
-                        <button
-                            type="button"
-                            className={`${visible ? 'visible' : ''} ${matchedPairs.includes(card.pairId) ? 'matched' : ''}`}
-                            aria-label={visible ? `${l({ eu: `Karta ${index + 1}`, es: `Carta ${index + 1}`, ar: `البطاقة ${index + 1}` })}: ${l(card.spoken)}` : l({ eu: `Karta ${index + 1}, ezkutuan`, es: `Carta ${index + 1}, oculta`, ar: `البطاقة ${index + 1}، مخفية` })}
-                            aria-pressed={visible}
-                            onClick={() => selectCard(index)}
-                            key={card.id}
-                        >
-                            {visible ? <MathText text={language === 'ar' ? card.display.replace('0,', '0.') : card.display} /> : <span aria-hidden="true">?</span>}
-                        </button>
-                    )
-                })}
-            </div>
-            {message && <div className="fraction-v2-game-feedback" aria-live="polite">{message}</div>}
-            {matchedPairs.length === 6 && <div className="fraction-v2-game-feedback success">{l({ eu: 'Taula osatu duzu!', es: '¡Has completado el tablero!', ar: 'أكملت اللوحة!' })}</div>}
-            <button type="button" className="fraction-v2-secondary" onClick={reset}>{l({ eu: 'Taula berria', es: 'Nuevo tablero', ar: 'لوحة جديدة' })}</button>
-        </div>
-    )
-}
-
-function FractionSprint({ completedIds, onComplete, language }: { completedIds: number[]; onComplete: (id: number) => void; language: ReturnType<typeof normalizePrototypeLanguage> }) {
-    const l = (text: LocalizedText) => pickText(language, text)
-    const [roundIndex, setRoundIndex] = useState(0)
-    const [answer, setAnswer] = useState('')
-    const [feedback, setFeedback] = useState<Feedback>('idle')
-    const [showHint, setShowHint] = useState(false)
-    const round = raceRounds[roundIndex]
-    const completedRounds = raceRounds.filter((item) => completedIds.includes(item.id)).length
-
-    const check = () => {
-        const correct = answerEquals(answer, round.expected)
-        setFeedback(correct ? 'success' : 'error')
-        if (correct) onComplete(round.id)
-    }
-
-    const next = () => {
-        setRoundIndex((index) => (index + 1) % raceRounds.length)
-        setAnswer('')
-        setFeedback('idle')
-        setShowHint(false)
-    }
-
-    return (
-        <div className="fraction-v2-game-card fraction-v2-race-game">
-            <div className="fraction-v2-race-track" aria-label={`${completedRounds} / ${raceRounds.length}`}><span style={{ width: `${(completedRounds / raceRounds.length) * 100}%` }} /></div>
-            <p>{l({ eu: 'Ebatzi zehazki. Zatiki baliokideak eta koma edo puntua onartzen dira.', es: 'Resuelve exactamente. Se aceptan fracciones equivalentes y coma o punto decimal.', ar: 'احسب بدقة. تُقبل الكسور المكافئة والفاصلة أو النقطة العشرية.' })}</p>
-            <div className="fraction-v2-task-expression"><MathText text={round.expression} /></div>
-            <label htmlFor="fraction-v2-race-answer">{l({ eu: 'Emaitza', es: 'Resultado', ar: 'النتيجة' })}</label>
-            <div className="fraction-v2-answer-row">
-                <input id="fraction-v2-race-answer" value={answer} onChange={(event) => { setAnswer(event.target.value); setFeedback('idle') }} onKeyDown={(event) => { if (event.key === 'Enter') check() }} inputMode="decimal" />
-                <button type="button" className="fraction-v2-primary" onClick={check}>{l({ eu: 'Egiaztatu', es: 'Comprobar', ar: 'تحقق' })}</button>
-            </div>
-            <button type="button" className="fraction-v2-hint-button" aria-expanded={showHint} onClick={() => setShowHint((visible) => !visible)}>{l({ eu: 'Pista', es: 'Pista', ar: 'تلميح' })}</button>
-            {showHint && <div className="fraction-v2-hint"><MathText text={l(round.hint)} /></div>}
-            {feedback !== 'idle' && <div className={`fraction-v2-game-feedback ${feedback}`}>{feedback === 'success' ? <MathText text={`${l({ eu: 'Zuzena:', es: 'Correcto:', ar: 'صحيح:' })} $${toLatex(round.expected)}$`} /> : l({ eu: 'Ez da oraindik. Errespetatu eragiketen ordena eta zeinua.', es: 'Todavía no. Respeta el orden de operaciones y el signo.', ar: 'ليست صحيحة بعد. احترم ترتيب العمليات والإشارة.' })}</div>}
-            <button type="button" className="fraction-v2-secondary" onClick={next}>{l({ eu: 'Hurrengo kalkulua', es: 'Siguiente cálculo', ar: 'الحساب التالي' })}</button>
-        </div>
-    )
-}
-
-/** LaTeX for a fraction exactly as written, without simplifying it */
-function writtenLatex(value: FractionValue): string {
-    if (value.denominator === 1) return String(value.numerator)
-    return `${value.numerator < 0 ? '-' : ''}\\frac{${Math.abs(value.numerator)}}{${value.denominator}}`
-}
-
-function shuffledOrder(length: number): number[] {
-    const order = Array.from({ length }, (_, index) => index)
-    for (let index = order.length - 1; index > 0; index -= 1) {
-        const swap = Math.floor(Math.random() * (index + 1))
-        ;[order[index], order[swap]] = [order[swap], order[index]]
-    }
-    return order
-}
-
-function ExactEquivalenceGame({ completedIds, onComplete, language }: { completedIds: number[]; onComplete: (id: number) => void; language: ReturnType<typeof normalizePrototypeLanguage> }) {
-    const l = (text: LocalizedText) => pickText(language, text)
-    const [roundIndex, setRoundIndex] = useState(0)
-    const [order, setOrder] = useState(() => shuffledOrder(equivalenceRounds[0].options.length))
-    const [tried, setTried] = useState<number[]>([])
-    const round = equivalenceRounds[roundIndex]
-    const solved = tried.some((index) => equals(round.options[index], round.prompt))
-    const lastTry = tried[tried.length - 1]
-
-    const choose = (index: number) => {
-        if (solved || tried.includes(index)) return
-        setTried((current) => [...current, index])
-        if (equals(round.options[index], round.prompt)) onComplete(round.id)
-    }
-
-    const next = () => {
-        const nextIndex = (roundIndex + 1) % equivalenceRounds.length
-        setRoundIndex(nextIndex)
-        setOrder(shuffledOrder(equivalenceRounds[nextIndex].options.length))
-        setTried([])
-    }
-
-    return (
-        <div className="fraction-v2-game">
-            <div className="fraction-v2-game-card">
-                <div className="fraction-v2-game-score">{equivalenceRounds.filter((item) => completedIds.includes(item.id)).length} / {equivalenceRounds.length}</div>
-                <p>{l({ eu: 'Zein da zatiki honen baliokidea?', es: '¿Cuál es equivalente a esta fracción?', ar: 'أي كسر يكافئ هذا الكسر؟' })}</p>
-                <div className="fraction-v2-game-prompt"><MathText text={`$${writtenLatex(round.prompt)}$`} /></div>
-                <div className="fraction-v2-game-options">
-                    {order.map((index) => {
-                        const option = round.options[index]
-                        const isTried = tried.includes(index)
-                        const isCorrect = equals(option, round.prompt)
-                        return (
-                            <button
-                                type="button"
-                                className={isTried ? (isCorrect ? 'correct' : 'incorrect') : ''}
-                                aria-label={`${option.numerator}/${option.denominator}`}
-                                aria-pressed={isTried}
-                                disabled={solved && !isTried}
-                                onClick={() => choose(index)}
-                                key={`${round.id}-${index}`}
-                            >
-                                <MathText text={`$${writtenLatex(option)}$`} />
-                            </button>
-                        )
-                    })}
-                </div>
-                {lastTry !== undefined && (
-                    <div className={`fraction-v2-game-feedback ${solved ? 'success' : 'error'}`} aria-live="polite">
-                        {solved
-                            ? l({ eu: 'Bai. Biek balio bera dute.', es: 'Sí. Ambas tienen exactamente el mismo valor.', ar: 'نعم. للكسرين القيمة نفسها تمامًا.' })
-                            : l({ eu: 'Ez oraindik. Sinplifikatu bietako bakoitza eta alderatu.', es: 'Todavía no. Simplifica cada una y compáralas.', ar: 'ليس بعد. بسّط كل كسر ثم قارن بينهما.' })}
-                    </div>
-                )}
-                <button type="button" className="fraction-v2-primary" onClick={next}>{l({ eu: 'Hurrengo txanda', es: 'Siguiente ronda', ar: 'الجولة التالية' })}</button>
-            </div>
-        </div>
     )
 }
