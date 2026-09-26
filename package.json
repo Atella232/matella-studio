@@ -4,11 +4,15 @@
   "version": "0.0.0",
   "homepage": "https://Atella232.github.io/matella-studio",
   "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "packageManager": "npm@10.9.4",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "test": "node --test tests/original-zatikiak.test.mjs",
+    "test": "node --test \"tests/*.test.{mjs,ts}\"",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
