@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import {
     clearParts,
     commonDivisors,
+    decimalExpansion,
     compareChallenges,
     compareRelation,
     equivalenceChallenges,
@@ -14,6 +15,7 @@ import {
     initialNumberLineState,
     initialPartsState,
     initialProductState,
+    initialProportionState,
     initialSumState,
     initialWallState,
     labChallengeIds,
@@ -26,6 +28,8 @@ import {
     partsChallenges,
     productChallenges,
     productResult,
+    proportionChallenges,
+    proportionResult,
     resultVisible,
     selectWallPiece,
     setCompareFraction,
@@ -39,6 +43,7 @@ import {
     setWallMode,
     sumChallenges,
     sumParts,
+    updateProportion,
     togglePart,
     wallChallenges,
     wallEquivalents,
@@ -46,6 +51,7 @@ import {
     type NumberLineState,
     type PartsState,
     type ProductState,
+    type ProportionState,
     type SumState
 } from '../src/pages/dbh2-zatikiak-prototype/lab/labTools.ts'
 import { theoryTopics } from '../src/pages/dbh2-zatikiak-prototype/content.ts'
@@ -241,4 +247,33 @@ test('product tool multiplies as area and divides by measuring', () => {
     assert.ok(lessThanOne.isSolved(product(2, 3, 3, 4, { op: 'divide', answer: '8/9' })))
     assert.ok(quarter.isSolved(product(1, 2, 1, 2)))
     assert.ok(!quarter.isSolved(product(1, 4, 4, 4)), 'both factors must be less than 1')
+})
+
+test('decimal expansion separates the repeating block', () => {
+    assert.deepEqual(decimalExpansion(3, 4), { integer: 0, fixed: '75', repeating: '' })
+    assert.deepEqual(decimalExpansion(1, 3), { integer: 0, fixed: '', repeating: '3' })
+    assert.deepEqual(decimalExpansion(1, 6), { integer: 0, fixed: '1', repeating: '6' })
+    assert.deepEqual(decimalExpansion(5, 7), { integer: 0, fixed: '', repeating: '714285' })
+    assert.deepEqual(decimalExpansion(100, 6), { integer: 16, fixed: '', repeating: '6' })
+    assert.deepEqual(decimalExpansion(12, 4), { integer: 3, fixed: '', repeating: '' })
+})
+
+test('quantities and percentages tool', () => {
+    const state = (extra: Partial<ProportionState>): ProportionState => ({ ...initialProportionState, ...extra })
+    assert.deepEqual(proportionResult(state({ numerator: 3, denominator: 5, quantity: 120 })), { numerator: 72, denominator: 1 })
+    assert.deepEqual(proportionResult(state({ mode: 'percent', percent: 25, quantity: 80 })), { numerator: 20, denominator: 1 })
+    assert.deepEqual(proportionResult(state({ numerator: 1, denominator: 6, quantity: 80 })), { numerator: 40, denominator: 3 })
+    const updated = updateProportion(state({ answer: '72', checked: true }), { denominator: 3 })
+    assert.equal(updated.answer, '', 'a new question asks for a new answer')
+    assert.equal(updated.numerator, 3, 'numerator stays within one unit')
+    assert.equal(updateProportion(state({}), { quantity: 5000 }).quantity, 600)
+
+    const [ofQuantity, percent, seventyFive, periodic] = proportionChallenges
+    assert.ok(ofQuantity.isSolved(state({ numerator: 3, denominator: 5, quantity: 120, answer: '72' })))
+    assert.ok(!ofQuantity.isSolved(state({ numerator: 3, denominator: 5, quantity: 120, answer: '24' })))
+    assert.ok(percent.isSolved(state({ mode: 'percent', percent: 25, quantity: 80, answer: '20' })))
+    assert.ok(seventyFive.isSolved(state({ mode: 'forms', numerator: 9, denominator: 12 })))
+    assert.ok(!seventyFive.isSolved(state({ mode: 'of', numerator: 3, denominator: 4 })), 'must be in the three-forms view')
+    assert.ok(periodic.isSolved(state({ mode: 'forms', numerator: 1, denominator: 6 })))
+    assert.ok(!periodic.isSolved(state({ mode: 'forms', numerator: 1, denominator: 8 })))
 })

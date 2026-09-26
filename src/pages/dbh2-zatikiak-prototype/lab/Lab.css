@@ -171,6 +171,7 @@
 
 .fraction-v2-segmented > div {
     display: flex;
+    flex-wrap: wrap;
     gap: 4px;
     padding: 3px;
     border: 1.5px solid var(--ink);
@@ -179,7 +180,7 @@
 }
 
 .fraction-v2-segmented button {
-    flex: 1;
+    flex: 1 1 auto;
     min-height: 40px;
     padding: 6px 4px;
     border: 0;
@@ -236,6 +237,9 @@
     align-items: center;
     justify-content: center;
     gap: 14px;
+    max-width: 100%;
+    /* Long chains scroll sideways instead of spilling out of the card */
+    overflow-x: auto;
     /* Chains of equalities read left to right in every language */
     direction: ltr;
 }
@@ -418,6 +422,11 @@
 }
 
 @media (max-width: 760px) {
+    .fraction-v2-lab-readout {
+        padding: 12px 14px;
+        font-size: 19px;
+    }
+
     .fraction-v2-lab-picker {
         flex-wrap: nowrap;
         margin-inline: -20px;
@@ -1183,4 +1192,222 @@
     font-weight: 700;
     content: attr(data-label);
     transform: translateX(-50%);
+}
+
+/* ---------- Quantities and percentages ---------- */
+
+.fraction-v2-tape {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 680px;
+    direction: ltr;
+}
+
+.fraction-v2-tape-total {
+    position: relative;
+    height: 34px;
+    border: 2px solid var(--ink);
+    border-bottom: 0;
+    border-radius: 12px 12px 0 0;
+}
+
+.fraction-v2-tape-total > span,
+.fraction-v2-tape-part > span {
+    position: absolute;
+    left: 50%;
+    padding: 0 10px;
+    background: var(--card);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    transform: translateX(-50%);
+}
+
+.fraction-v2-tape-total > span {
+    top: -18px;
+}
+
+.fraction-v2-tape-bar {
+    display: flex;
+    height: 64px;
+    overflow: hidden;
+    border: 2.5px solid var(--ink);
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.fraction-v2-tape-bar > span {
+    display: flex;
+    flex: 1 1 0;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    border-inline-end: 2px solid var(--ink);
+    font-size: 15px;
+    overflow: hidden;
+}
+
+.fraction-v2-tape-bar > span:last-child {
+    border-inline-end: 0;
+}
+
+.fraction-v2-tape-bar > span.filled {
+    color: var(--stage-on);
+    background: var(--stage);
+}
+
+.fraction-v2-tape-part {
+    position: relative;
+    height: 30px;
+    border: 2px solid var(--stage);
+    border-top: 0;
+    border-radius: 0 0 12px 12px;
+}
+
+.fraction-v2-tape-part > span {
+    top: 14px;
+    color: var(--stage-ink);
+}
+
+.fraction-v2-tape .fraction-v2-insight {
+    margin-top: 22px;
+    align-self: center;
+}
+
+.fraction-v2-percent {
+    position: relative;
+    width: calc(100% - 48px);
+    max-width: 640px;
+    height: 150px;
+    margin: 0 24px;
+    direction: ltr;
+}
+
+.fraction-v2-percent-labels {
+    position: absolute;
+    right: 0;
+    left: 0;
+    height: 20px;
+}
+
+.fraction-v2-percent-labels.top {
+    top: 0;
+}
+
+.fraction-v2-percent-labels.bottom {
+    top: 84px;
+}
+
+.fraction-v2-percent-labels span {
+    position: absolute;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    transform: translateX(-50%);
+}
+
+.fraction-v2-percent-labels.bottom span {
+    color: var(--ink-soft);
+}
+
+.fraction-v2-percent-bar {
+    position: absolute;
+    top: 24px;
+    right: 0;
+    left: 0;
+    height: 52px;
+    overflow: hidden;
+    border: 2.5px solid var(--ink);
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.fraction-v2-percent-fill {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: var(--stage);
+}
+
+.fraction-v2-percent-bar i {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    border-left: 1.5px dashed rgba(29, 39, 51, 0.45);
+}
+
+.fraction-v2-percent-marker {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    margin-left: -1.5px;
+    background: var(--ink);
+}
+
+.fraction-v2-percent-answer {
+    position: absolute;
+    top: 110px;
+    padding: 2px 10px;
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    background: var(--stage-tint);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    transform: translateX(-50%);
+}
+
+.fraction-v2-hundred {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.fraction-v2-hundred-grid {
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    gap: 2px;
+    width: min(64vw, 280px);
+    aspect-ratio: 1;
+    padding: 2px;
+    border: 2.5px solid var(--ink);
+    border-radius: 6px;
+    background: var(--ink);
+    direction: ltr;
+}
+
+.fraction-v2-hundred-grid span {
+    position: relative;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.fraction-v2-hundred-grid span.filled {
+    background: var(--stage);
+}
+
+.fraction-v2-hundred-grid span i {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: var(--stage);
+    opacity: 0.6;
+}
+
+@media (max-width: 760px) {
+    .fraction-v2-tape-bar > span {
+        font-size: 12px;
+    }
+
+    .fraction-v2-percent-labels span:nth-child(even) {
+        display: none;
+    }
 }

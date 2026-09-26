@@ -1673,37 +1673,6 @@
 .fraction-v2-visuals > .math-text {
     font-size: 26px;
 }
-.fraction-v2-proportion-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-    width: 100%;
-}
-
-.fraction-v2-proportion-grid article {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 16px;
-    border: 1.5px solid var(--ink);
-    border-radius: 14px;
-    background: var(--card);
-    font-size: 24px;
-}
-
-.fraction-v2-proportion-grid article > span {
-    color: var(--muted);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
-.fraction-v2-proportion-grid strong {
-    font-family: "Fraunces", Georgia, serif;
-}
-
 .fraction-v2 .fraction-v2-insight {
     max-width: 540px;
     margin: 0;
@@ -2316,10 +2285,6 @@
         min-height: 320px;
         padding: 24px 16px;
     }
-    .fraction-v2-proportion-grid {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
     .fraction-v2-pizza {
         width: 200px;
         height: 200px;

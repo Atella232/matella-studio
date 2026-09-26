@@ -13,7 +13,7 @@ import {
     type NumberLineRange,
     type NumberLineState
 } from './labTools'
-import type { ToolProps } from './ClassicTools'
+import type { ToolProps } from './labTools'
 import { Segmented, Stepper, ToolFrame } from './LabKit'
 import { useLabText } from './useLabText'
 

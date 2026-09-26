@@ -11,7 +11,7 @@ import {
     sumParts,
     type SumState
 } from './labTools'
-import type { ToolProps } from './ClassicTools'
+import type { ToolProps } from './labTools'
 import { ResultAnswer, Segmented, Stepper, ToolFrame } from './LabKit'
 import { PartitionBar, SegmentBars, type SegmentTone } from './models'
 import { useLabText } from './useLabText'

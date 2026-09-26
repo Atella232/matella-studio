@@ -11,7 +11,7 @@ import {
     setProductOperand,
     type ProductState
 } from './labTools'
-import type { ToolProps } from './ClassicTools'
+import type { ToolProps } from './labTools'
 import { ResultAnswer, Segmented, Stepper, ToolFrame } from './LabKit'
 import { useLabText } from './useLabText'
 

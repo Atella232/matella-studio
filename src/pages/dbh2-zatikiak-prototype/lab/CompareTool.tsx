@@ -12,7 +12,7 @@ import {
     type CompareStrategy,
     type Relation
 } from './labTools'
-import type { ToolProps } from './ClassicTools'
+import type { ToolProps } from './labTools'
 import { Segmented, Stepper, ToolFrame } from './LabKit'
 import { PartitionBar } from './models'
 import { useLabText } from './useLabText'

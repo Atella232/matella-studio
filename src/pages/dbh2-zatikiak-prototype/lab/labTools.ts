@@ -1,5 +1,5 @@
-import type { FractionStageId, LocalizedText, TheoryTopicId } from '../content.ts'
-import { checkAnswer, compare, equals, fraction, gcd, type AnswerForm, type FractionValue } from '../math/fraction.ts'
+import type { FractionStageId, LocalizedText, PrototypeLanguage, TheoryTopicId } from '../content.ts'
+import { checkAnswer, compare, equals, fraction, gcd, hasTerminatingDecimal, type AnswerForm, type FractionValue } from '../math/fraction.ts'
 
 export type LabToolId = 'parts' | 'numberline' | 'wall' | 'equivalence' | 'compare' | 'addsub' | 'muldiv' | 'proportion'
 
@@ -9,6 +9,16 @@ export interface LabToolInfo {
     lessonTopic: TheoryTopicId
     title: LocalizedText
     observe: LocalizedText
+}
+
+/** Props every lab tool receives from the laboratory */
+export interface ToolProps {
+    tool: LabToolInfo
+    stageLabel: string
+    language: PrototypeLanguage
+    completedIds: number[]
+    onComplete: (id: number) => void
+    onOpenLesson: () => void
 }
 
 /** A short goal inside a tool, checked against the tool's current state */
@@ -101,11 +111,11 @@ export const labTools: LabToolInfo[] = [
         id: 'proportion',
         stage: 'proportionality',
         lessonTopic: 'fraction-of',
-        title: { eu: 'Kantitate baten zatikia', es: 'Fracción de una cantidad', ar: 'كسر من كمية' },
+        title: { eu: 'Kantitateak eta ehunekoak', es: 'Cantidades y porcentajes', ar: 'الكميات والنسب المئوية' },
         observe: {
-            eu: 'Zatiki batek, hamartar batek eta ehuneko batek kantitate bera adieraz dezakete. Kalkulatu kantitate baten zatikia eta alderatu hiru formak.',
-            es: 'Una fracción, un decimal y un porcentaje pueden expresar la misma cantidad. Calcula la fracción de una cantidad y compara las tres formas.',
-            ar: 'يمكن للكسر والعدد العشري والنسبة المئوية أن تعبّر عن الكمية نفسها. احسب كسرًا من كمية وقارن بين الصيغ الثلاث.'
+            eu: 'Kantitate baten zatikia zati berdinetan banatu eta batzuk hartzea da. Ehuneko bat 100 izendatzailea duen zatikia da, eta hamartarra balio bera idazteko beste modu bat.',
+            es: 'Una fracción de una cantidad es repartir en partes iguales y tomar algunas. Un porcentaje es una fracción con denominador 100, y un decimal es otra forma de escribir el mismo valor.',
+            ar: 'كسر من كمية يعني تقسيمها إلى أجزاء متساوية وأخذ بعضها. النسبة المئوية كسر مقامه 100، والعدد العشري طريقة أخرى لكتابة القيمة نفسها.'
         }
     }
 ]
@@ -646,6 +656,92 @@ export const productChallenges: LabChallenge<ProductState>[] = [
     }
 ]
 
+/* ---------- Quantities and percentages ---------- */
+
+export interface ProportionState extends OperationAnswer {
+    mode: 'of' | 'percent' | 'forms'
+    numerator: number
+    denominator: number
+    quantity: number
+    percent: number
+}
+
+export const PROPORTION_LIMITS = {
+    minDenominator: 2,
+    maxDenominator: 12,
+    minQuantity: 10,
+    maxQuantity: 600,
+    quantityStep: 10,
+    percentStep: 5
+} as const
+
+export const initialProportionState: ProportionState = { mode: 'of', numerator: 3, denominator: 4, quantity: 120, percent: 25, ...freshAnswer }
+
+/** Exact result of the current question: n/d of Q, or p % of Q */
+export function proportionResult(state: ProportionState): FractionValue {
+    return state.mode === 'percent'
+        ? fraction(state.percent * state.quantity, 100)
+        : fraction(state.numerator * state.quantity, state.denominator)
+}
+
+/** Any change to the question asks for a new answer */
+export function updateProportion(state: ProportionState, patch: Partial<Pick<ProportionState, 'mode' | 'numerator' | 'denominator' | 'quantity' | 'percent'>>): ProportionState {
+    const next = { ...state, ...patch }
+    const denominator = Math.min(PROPORTION_LIMITS.maxDenominator, Math.max(PROPORTION_LIMITS.minDenominator, next.denominator))
+    return {
+        ...next,
+        denominator,
+        numerator: Math.min(denominator, Math.max(1, next.numerator)),
+        quantity: Math.min(PROPORTION_LIMITS.maxQuantity, Math.max(PROPORTION_LIMITS.minQuantity, next.quantity)),
+        percent: Math.min(100, Math.max(0, next.percent)),
+        ...freshAnswer
+    }
+}
+
+/** Decimal digits of a non-negative fraction, with the repeating block (period) separated */
+export function decimalExpansion(numerator: number, denominator: number): { integer: number; fixed: string; repeating: string } {
+    const integer = Math.floor(numerator / denominator)
+    let remainder = numerator % denominator
+    const digits: number[] = []
+    const seen = new Map<number, number>()
+    while (remainder !== 0 && !seen.has(remainder)) {
+        seen.set(remainder, digits.length)
+        remainder *= 10
+        digits.push(Math.floor(remainder / denominator))
+        remainder %= denominator
+    }
+    if (remainder === 0) return { integer, fixed: digits.join(''), repeating: '' }
+    const start = seen.get(remainder) ?? 0
+    return { integer, fixed: digits.slice(0, start).join(''), repeating: digits.slice(start).join('') }
+}
+
+export const proportionChallenges: LabChallenge<ProportionState>[] = [
+    {
+        id: 1401,
+        prompt: { eu: 'Kalkulatu 120ren 3/5 eta idatzi emaitza.', es: 'Calcula 3/5 de 120 y escribe el resultado.', ar: 'احسب 3/5 من 120 واكتب النتيجة.' },
+        hint: { eu: 'Banatu 120 5 talde berdinetan eta hartu 3.', es: 'Reparte 120 en 5 grupos iguales y toma 3.', ar: 'قسّم 120 إلى 5 مجموعات متساوية وخذ 3 منها.' },
+        isSolved: (state) => state.mode === 'of' && sameTerms(state, 3, 5) && state.quantity === 120 && answered(state, fraction(72))
+    },
+    {
+        id: 1402,
+        prompt: { eu: 'Zenbat da 80ren % 25? Idatzi emaitza.', es: '¿Cuánto es el 25 % de 80? Escribe el resultado.', ar: 'كم يساوي 25٪ من 80؟ اكتب النتيجة.' },
+        hint: { eu: '% 25 laurdena da.', es: 'El 25 % es la cuarta parte.', ar: '25٪ هي الربع.' },
+        isSolved: (state) => state.mode === 'percent' && state.percent === 25 && state.quantity === 80 && answered(state, fraction(20))
+    },
+    {
+        id: 1403,
+        prompt: { eu: 'Eraiki zehazki % 75 balio duen zatiki bat.', es: 'Construye una fracción que valga exactamente el 75 %.', ar: 'كوّن كسرًا يساوي 75٪ تمامًا.' },
+        hint: { eu: '100etik 75… zenbat 4tik?', es: '75 de cada 100… ¿cuántos de cada 4?', ar: '75 من كل 100... كم من كل 4؟' },
+        isSolved: (state) => state.mode === 'forms' && equals(state, fraction(3, 4))
+    },
+    {
+        id: 1404,
+        prompt: { eu: 'Aurkitu hamartarra inoiz amaitzen ez den zatiki bat (periodikoa).', es: 'Encuentra una fracción cuyo decimal no se acabe nunca (periódico).', ar: 'جد كسرًا لا ينتهي عدده العشري أبدًا (دوري).' },
+        hint: { eu: 'Probatu herenekin edo zazpirenekin.', es: 'Prueba con tercios o séptimos.', ar: 'جرّب الأثلاث أو الأسباع.' },
+        isSolved: (state) => state.mode === 'forms' && !hasTerminatingDecimal(state)
+    }
+]
+
 export const labChallengeIds: number[] = [
     ...partsChallenges,
     ...numberLineChallenges,
@@ -653,5 +749,6 @@ export const labChallengeIds: number[] = [
     ...equivalenceChallenges,
     ...compareChallenges,
     ...sumChallenges,
-    ...productChallenges
+    ...productChallenges,
+    ...proportionChallenges
 ].map((challenge) => challenge.id)

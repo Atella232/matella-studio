@@ -11,7 +11,7 @@ import {
     type WallPiece,
     type WallState
 } from './labTools'
-import type { ToolProps } from './ClassicTools'
+import type { ToolProps } from './labTools'
 import { Segmented, ToolFrame } from './LabKit'
 import { useLabText } from './useLabText'
 
