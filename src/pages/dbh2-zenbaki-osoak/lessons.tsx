@@ -50,11 +50,13 @@ export const integerTopics: UnitTopic[] = [
             es: 'Clasificar los números enteros y situarlos en la recta numérica.',
             ar: 'تصنيف الأعداد الصحيحة ووضعها على خط الأعداد.'
         },
-        explanation: {
-            eu: 'Zenbaki osoen multzoa ℤ da, eta hiru zati ditu: zenbaki oso positiboak (+1, +2, +3…), zeroa eta zenbaki oso negatiboak (−1, −2, −3…). Zenbakizko zuzenean zeroak zuzena bi zatitan banatzen du: positiboak eskuinean eta negatiboak ezkerrean, elkarrengandik distantzia berera. Zero ez da ez positiboa ez negatiboa, eta positiboak + zeinurik gabe ere idazten dira: +5 = 5.',
-            es: 'El conjunto de los números enteros es ℤ y tiene tres partes: los enteros positivos (+1, +2, +3…), el cero y los enteros negativos (−1, −2, −3…). En la recta numérica el cero la divide en dos: los positivos a la derecha y los negativos a la izquierda, separados por la misma distancia. El cero no es ni positivo ni negativo, y los positivos también se escriben sin el signo +: +5 = 5.',
-            ar: 'مجموعة الأعداد الصحيحة هي ℤ ولها ثلاثة أجزاء: الأعداد الصحيحة الموجبة (+1، +2، +3…)، والصفر، والأعداد الصحيحة السالبة (−1، −2، −3…). على خط الأعداد يقسم الصفر الخط إلى قسمين: الموجبة على اليمين والسالبة على اليسار، بمسافات متساوية. الصفر ليس موجبًا ولا سالبًا، ويمكن كتابة الموجبة دون الإشارة +: ‎+5 = 5.'
-        },
+        explanation: { eu: 'Zenbaki osoen multzoa ℤ da, eta hiru zati ditu. Zenbakizko zuzenean, zeroak zuzena bi zatitan banatzen du.', es: 'El conjunto de los números enteros es ℤ y tiene tres partes. En la recta numérica, el cero la divide en dos.', ar: 'مجموعة الأعداد الصحيحة هي ℤ ولها ثلاثة أجزاء. على خط الأعداد يقسم الصفر الخط إلى قسمين.' },
+        stepsKind: 'facts',
+        steps: [
+            { title: { eu: 'Zenbaki oso positiboak', es: 'Enteros positivos', ar: 'الأعداد الصحيحة الموجبة' }, text: { eu: 'Zeroaren eskuinean daude. + zeinurik gabe ere idazten dira: +5 = 5.', es: 'Están a la derecha del cero. También se escriben sin el signo +: +5 = 5.', ar: 'تقع على يمين الصفر، ويمكن كتابتها دون الإشارة +: ‎+5 = 5.' }, math: '$+1,\\ +2,\\ +3,\\ \\dots$' },
+            { title: { eu: 'Zeroa', es: 'El cero', ar: 'الصفر' }, text: { eu: 'Ez da ez positiboa ez negatiboa: zuzenaren erdigunea da.', es: 'No es ni positivo ni negativo: es el centro de la recta.', ar: 'ليس موجبًا ولا سالبًا: إنه مركز الخط.' }, math: '$0$' },
+            { title: { eu: 'Zenbaki oso negatiboak', es: 'Enteros negativos', ar: 'الأعداد الصحيحة السالبة' }, text: { eu: 'Zeroaren ezkerrean daude, positiboen distantzia berera.', es: 'Están a la izquierda del cero, a la misma distancia que los positivos.', ar: 'تقع على يسار الصفر، بالمسافات نفسها التي للموجبة.' }, math: '$-1,\\ -2,\\ -3,\\ \\dots$' }
+        ],
         example: '$\\mathbb{Z}=\\{\\dots,-3,-2,-1,0,+1,+2,+3,\\dots\\}$',
         takeaway: {
             eu: 'Zeroa da zuzenaren erdigunea: ez da positiboa ez negatiboa.',
@@ -116,11 +118,14 @@ export const integerTopics: UnitTopic[] = [
             es: 'Comparar dos enteros con < o > y justificarlo.',
             ar: 'مقارنة عددين صحيحين بالرمزين < أو > وتبرير ذلك.'
         },
-        explanation: {
-            eu: 'Zenbakizko zuzenean eskuinean dagoena da handiena. Horregatik: edozein positibo edozein negatibo baino handiagoa da; zeroa negatiboak baino handiagoa eta positiboak baino txikiagoa da; bi positiboren artean, balio absolutu handienekoa da handiena; eta bi negatiboren artean, balio absolutu txikienekoa.',
-            es: 'En la recta numérica, el que está más a la derecha es el mayor. Por eso: cualquier positivo es mayor que cualquier negativo; el cero es mayor que los negativos y menor que los positivos; entre dos positivos, es mayor el de mayor valor absoluto; y entre dos negativos, el de menor valor absoluto.',
-            ar: 'على خط الأعداد يكون العدد الواقع إلى اليمين هو الأكبر. لذلك: كل عدد موجب أكبر من أي عدد سالب؛ والصفر أكبر من السالبة وأصغر من الموجبة؛ وبين عددين موجبين يكون الأكبر صاحب القيمة المطلقة الأكبر؛ وبين عددين سالبين يكون الأكبر صاحب القيمة المطلقة الأصغر.'
-        },
+        explanation: { eu: 'Zenbakizko zuzenean eskuinean dagoena da handiena. Hortik ateratzen dira lau arau hauek:', es: 'En la recta numérica, el que está más a la derecha es el mayor. De ahí salen estas cuatro reglas:', ar: 'على خط الأعداد يكون العدد الواقع إلى اليمين هو الأكبر. ومن ذلك تنتج هذه القواعد الأربع:' },
+        stepsKind: 'facts',
+        steps: [
+            { title: { eu: 'Positiboa eta negatiboa', es: 'Positivo y negativo', ar: 'موجب وسالب' }, text: { eu: 'Edozein positibo edozein negatibo baino handiagoa da.', es: 'Cualquier positivo es mayor que cualquier negativo.', ar: 'كل عدد موجب أكبر من أي عدد سالب.' }, math: '$-5<+3$' },
+            { title: { eu: 'Zeroa', es: 'El cero', ar: 'الصفر' }, text: { eu: 'Zeroa negatibo guztiak baino handiagoa da, eta positibo guztiak baino txikiagoa.', es: 'El cero es mayor que todos los negativos y menor que todos los positivos.', ar: 'الصفر أكبر من كل الأعداد السالبة وأصغر من كل الموجبة.' }, math: '$-3<0<+2$' },
+            { title: { eu: 'Bi positibo', es: 'Dos positivos', ar: 'عددان موجبان' }, text: { eu: 'Balio absolutu handienekoa da handiena.', es: 'Es mayor el de mayor valor absoluto.', ar: 'الأكبر هو صاحب القيمة المطلقة الأكبر.' }, math: '$+3<+5$' },
+            { title: { eu: 'Bi negatibo', es: 'Dos negativos', ar: 'عددان سالبان' }, text: { eu: 'Balio absolutu txikienekoa da handiena: zerotik hurbilago dago.', es: 'Es mayor el de menor valor absoluto: está más cerca del cero.', ar: 'الأكبر هو صاحب القيمة المطلقة الأصغر: إنه أقرب إلى الصفر.' }, math: '$-4<-2$' }
+        ],
         example: '$\\begin{gathered}-4<-2\\\\-5<+3\\\\+3<+5\\end{gathered}$',
         takeaway: {
             eu: 'Negatiboetan, zerotik hurbilago dagoena da handiena: −2 > −4.',
@@ -138,11 +143,13 @@ export const integerTopics: UnitTopic[] = [
             es: 'Ordenar una lista de enteros de menor a mayor y al revés.',
             ar: 'ترتيب قائمة من الأعداد الصحيحة تصاعديًا وتنازليًا.'
         },
-        explanation: {
-            eu: 'Urratsak: 1) banatu positiboak eta negatiboak; 2) ordenatu positiboak zenbaki arruntak bezala; 3) ordenatu negatiboak, kontuan izanda balio absolutu txikienekoa dela handiena; 4) elkartu dena, zeroa erdian dela.',
-            es: 'Pasos: 1) separa positivos y negativos; 2) ordena los positivos como números naturales; 3) ordena los negativos teniendo en cuenta que el de menor valor absoluto es el mayor; 4) júntalo todo con el cero en medio.',
-            ar: 'الخطوات: 1) افصل الموجبة عن السالبة؛ 2) رتّب الموجبة كالأعداد الطبيعية؛ 3) رتّب السالبة مع مراعاة أن صاحب القيمة المطلقة الأصغر هو الأكبر؛ 4) اجمع الكل مع وضع الصفر في الوسط.'
-        },
+        explanation: { eu: 'Adibidez, ordenatu handienetik txikienera: −10, +4, +9, 0, −6, −8, +3. Jarraitu urrats hauek:', es: 'Por ejemplo, ordena de mayor a menor: −10, +4, +9, 0, −6, −8, +3. Sigue estos pasos:', ar: 'مثال: رتّب تنازليًا: ‎−10، +4، +9، 0، −6، −8، +3. اتبع هذه الخطوات:' },
+        steps: [
+            { text: { eu: 'Banatu positiboak alde batean eta negatiboak bestean; zeroa erdian.', es: 'Separa los positivos a un lado y los negativos al otro; el cero, en medio.', ar: 'افصل الموجبة في جهة والسالبة في جهة أخرى، والصفر في الوسط.' }, math: '$+4,\\,+9,\\,+3\\quad\\mid\\quad 0\\quad\\mid\\quad -10,\\,-6,\\,-8$' },
+            { text: { eu: 'Ordenatu positiboak zenbaki arruntak bezala.', es: 'Ordena los positivos como números naturales.', ar: 'رتّب الموجبة كالأعداد الطبيعية.' }, math: '$+9>+4>+3$' },
+            { text: { eu: 'Ordenatu negatiboak: balio absolutu txikienekoa da handiena.', es: 'Ordena los negativos: el de menor valor absoluto es el mayor.', ar: 'رتّب السالبة: صاحب القيمة المطلقة الأصغر هو الأكبر.' }, math: '$-6>-8>-10$' },
+            { text: { eu: 'Elkartu dena: positiboak, zeroa eta negatiboak.', es: 'Júntalo todo: positivos, cero y negativos.', ar: 'اجمع الكل: الموجبة ثم الصفر ثم السالبة.' }, math: '$+9>+4>+3>0>-6>-8>-10$' }
+        ],
         example: '$-10<-8<-6<0<+3<+4<+9$',
         takeaway: {
             eu: 'Txikienetik handienera: lehenengo negatiboak. Handienetik txikienera: lehenengo positiboak.',
@@ -160,11 +167,12 @@ export const integerTopics: UnitTopic[] = [
             es: 'Sumar enteros del mismo signo y de distinto signo.',
             ar: 'جمع أعداد صحيحة لها الإشارة نفسها أو إشارات مختلفة.'
         },
-        explanation: {
-            eu: 'Zeinu bereko bi zenbaki batzeko, balio absolutuak batu eta zeinu bera jartzen da. Zeinu desberdineko bi zenbaki batzeko, balio absolutu handienari txikiena kendu, eta balio absolutu handiena duenaren zeinua jartzen da. Zuzenean, positibo bat batzea eskuinera mugitzea da, eta negatibo bat batzea, ezkerrera.',
-            es: 'Para sumar dos enteros del mismo signo, se suman sus valores absolutos y se pone el mismo signo. Para sumar dos de distinto signo, al valor absoluto mayor se le resta el menor y se pone el signo del que tiene mayor valor absoluto. En la recta, sumar un positivo es moverse a la derecha, y sumar un negativo, a la izquierda.',
-            ar: 'لجمع عددين صحيحين لهما الإشارة نفسها نجمع قيمتيهما المطلقتين ونضع الإشارة نفسها. ولجمع عددين مختلفي الإشارة نطرح القيمة المطلقة الصغرى من الكبرى ونضع إشارة العدد صاحب القيمة المطلقة الأكبر. على خط الأعداد، جمع عدد موجب انتقال إلى اليمين، وجمع عدد سالب انتقال إلى اليسار.'
-        },
+        explanation: { eu: 'Bi zenbaki osoren batuketan bi kasu daude, zeinuen arabera. Zuzenean, positibo bat batzea eskuinera mugitzea da, eta negatibo bat batzea, ezkerrera.', es: 'En la suma de dos enteros hay dos casos, según los signos. En la recta, sumar un positivo es moverse a la derecha, y sumar un negativo, a la izquierda.', ar: 'في جمع عددين صحيحين حالتان حسب الإشارات. على خط الأعداد، جمع عدد موجب انتقال إلى اليمين، وجمع عدد سالب انتقال إلى اليسار.' },
+        stepsKind: 'facts',
+        steps: [
+            { title: { eu: 'Zeinu bereko zenbakiak', es: 'Números del mismo signo', ar: 'عددان لهما الإشارة نفسها' }, text: { eu: 'Batu balio absolutuak eta jarri zenbakien zeinu bera.', es: 'Suma los valores absolutos y pon el mismo signo de los números.', ar: 'اجمع القيمتين المطلقتين وضع الإشارة نفسها.' }, math: '$(-2)+(-4)=-(2+4)=-6$' },
+            { title: { eu: 'Zeinu desberdineko zenbakiak', es: 'Números de distinto signo', ar: 'عددان مختلفا الإشارة' }, text: { eu: 'Balio absolutu handienari txikiena kendu, eta jarri balio absolutu handiena duenaren zeinua.', es: 'Al valor absoluto mayor réstale el menor y pon el signo del que tiene mayor valor absoluto.', ar: 'اطرح القيمة المطلقة الصغرى من الكبرى وضع إشارة صاحب القيمة المطلقة الأكبر.' }, math: '$(-8)+(+2)=-(8-2)=-6$' }
+        ],
         example: '$\\begin{gathered}(-2)+(-4)=-6\\\\(-8)+(+2)=-6\\end{gathered}$',
         takeaway: {
             eu: 'Zeinu bera: batu eta zeinua mantendu. Zeinu desberdina: kendu eta handienaren zeinua jarri.',
@@ -204,11 +212,13 @@ export const integerTopics: UnitTopic[] = [
             es: 'Escribir y calcular cadenas de sumas y restas sin paréntesis.',
             ar: 'كتابة سلاسل الجمع والطرح دون أقواس وحسابها.'
         },
-        explanation: {
-            eu: '1. araua: lehen batugaiari parentesiak kendu; positiboa bada, zeinurik gabe idazten da. 2. araua: aurretik + duen parentesia kentzean, zenbakiaren zeinua bere horretan geratzen da. 3. araua: aurretik − duen parentesia kentzean, aurkakoaren zeinua idazten da. Praktikan: $+(+a)=+a$, $+(-a)=-a$, $-(+a)=-a$ eta $-(-a)=+a$. Gero, batu positiboak alde batetik eta negatiboak bestetik, eta kendu.',
-            es: 'Regla 1: al primer sumando se le quitan los paréntesis; si es positivo, se escribe sin signo. Regla 2: al quitar un paréntesis precedido de +, el número conserva su signo. Regla 3: al quitar un paréntesis precedido de −, se escribe el signo del opuesto. En la práctica: $+(+a)=+a$, $+(-a)=-a$, $-(+a)=-a$ y $-(-a)=+a$. Después suma por un lado los positivos y por otro los negativos, y resta.',
-            ar: 'القاعدة 1: نحذف أقواس الحد الأول؛ وإذا كان موجبًا نكتبه دون إشارة. القاعدة 2: عند حذف قوس تسبقه + يحتفظ العدد بإشارته. القاعدة 3: عند حذف قوس تسبقه − نكتب إشارة المعاكس. عمليًا: $+(+a)=+a$، $+(-a)=-a$، $-(+a)=-a$، $-(-a)=+a$. ثم نجمع الموجبة معًا والسالبة معًا ونطرح.'
-        },
+        explanation: { eu: 'Batuketa eta kenketa kateak errazago egiteko, parentesiak kendu eta modu laburtuan idazten dira. Hiru arau hauek erabiltzen dira:', es: 'Para calcular cadenas de sumas y restas con más facilidad, se quitan los paréntesis y se escriben en forma abreviada. Se usan estas tres reglas:', ar: 'لحساب سلاسل الجمع والطرح بسهولة نحذف الأقواس ونكتبها بالصيغة المختصرة. نستعمل هذه القواعد الثلاث:' },
+        steps: [
+            { title: { eu: '1. araua · Lehen batugaia', es: 'Regla 1 · Primer sumando', ar: 'القاعدة 1 · الحد الأول' }, text: { eu: 'Lehen batugaiari parentesiak kentzen zaizkio. Positiboa bada, zeinurik gabe idazten da.', es: 'Al primer sumando se le quitan los paréntesis. Si es positivo, se escribe sin signo.', ar: 'نحذف أقواس الحد الأول، وإذا كان موجبًا نكتبه دون إشارة.' }, math: '$(+3)+(-7)=3+(-7)$' },
+            { title: { eu: '2. araua · Aurretik +', es: 'Regla 2 · Precedido de +', ar: 'القاعدة 2 · تسبقه +' }, text: { eu: 'Aurretik + duen parentesia kentzean, zenbakiak bere zeinua mantentzen du.', es: 'Al quitar un paréntesis precedido de +, el número conserva su signo.', ar: 'عند حذف قوس تسبقه + يحتفظ العدد بإشارته.' }, math: '$(-4)+(-8)=-4-8$' },
+            { title: { eu: '3. araua · Aurretik −', es: 'Regla 3 · Precedido de −', ar: 'القاعدة 3 · تسبقه −' }, text: { eu: 'Aurretik − duen parentesia kentzean, aurkakoaren zeinua idazten da.', es: 'Al quitar un paréntesis precedido de −, se escribe el signo del opuesto.', ar: 'عند حذف قوس تسبقه − نكتب إشارة المعاكس.' }, math: '$(+3)-(-4)=3+4$' },
+            { title: { eu: 'Azkenik, kalkulatu', es: 'Por último, calcula', ar: 'أخيرًا، احسب' }, text: { eu: 'Batu positiboak alde batetik eta negatiboak bestetik, eta kendu lehen emaitzari bigarrena.', es: 'Suma los positivos por un lado y los negativos por otro, y resta el segundo resultado al primero.', ar: 'اجمع الموجبة معًا والسالبة معًا، ثم اطرح الناتج الثاني من الأول.' }, math: '$3+9+4-7-5-2=16-14=2$' }
+        ],
         example: '$\\begin{aligned}&(-7)-(+5)+(+3)+(+9)-(-4)+(-2)\\\\&=-7-5+3+9+4-2\\\\&=16-14=2\\end{aligned}$',
         takeaway: {
             eu: 'Zeinu berdinak elkarren ondoan: +. Zeinu desberdinak: −.',
@@ -225,11 +235,12 @@ export const integerTopics: UnitTopic[] = [
             es: 'Resolver sumas y restas con paréntesis en el orden correcto.',
             ar: 'حل عمليات الجمع والطرح ذات الأقواس بالترتيب الصحيح.'
         },
-        explanation: {
-            eu: 'Adierazpenak parentesiak baditu, lehenik parentesi barruko eragiketak egiten dira eta emaitza parentesi artean uzten da. Ondoren parentesiak kendu (modu laburtua) eta ezkerretik eskuinera kalkulatzen da. Beste bide bat: parentesiak hasieratik kentzea; aurretik − badago, barruko zeinu guztiak aldatzen dira.',
-            es: 'Si la expresión tiene paréntesis, primero se hacen las operaciones de dentro y el resultado se deja entre paréntesis. Después se quitan los paréntesis (forma abreviada) y se calcula de izquierda a derecha. Otro camino: quitar los paréntesis desde el principio; si van precedidos de −, cambian todos los signos de dentro.',
-            ar: 'إذا احتوى التعبير على أقواس نجري أولًا العمليات داخلها ونترك النتيجة بين قوسين. ثم نحذف الأقواس (الصيغة المختصرة) ونحسب من اليسار إلى اليمين. طريقة أخرى: حذف الأقواس من البداية؛ وإذا سبقتها − تتغيّر كل الإشارات داخلها.'
-        },
+        explanation: { eu: 'Adierazpenak parentesiak baditu, bi bide daude. Biek emaitza bera ematen dute.', es: 'Si la expresión tiene paréntesis, hay dos caminos. Los dos dan el mismo resultado.', ar: 'إذا احتوى التعبير على أقواس فهناك طريقان، ويعطيان النتيجة نفسها.' },
+        stepsKind: 'facts',
+        steps: [
+            { title: { eu: 'Lehenik barrukoa', es: 'Primero lo de dentro', ar: 'الداخل أولًا' }, text: { eu: 'Egin parentesi barruko eragiketak eta utzi emaitza parentesi artean. Gero kendu parentesiak eta kalkulatu.', es: 'Haz las operaciones de dentro y deja el resultado entre paréntesis. Después quita los paréntesis y calcula.', ar: 'أجرِ العمليات داخل الأقواس واترك النتيجة بين قوسين، ثم احذف الأقواس واحسب.' }, math: '$6-(-3+2)=6-(-1)=6+1=7$' },
+            { title: { eu: 'Parentesiak kenduz', es: 'Quitando paréntesis', ar: 'بحذف الأقواس' }, text: { eu: 'Kendu parentesiak hasieratik. Aurretik − badago, barruko zeinu guztiak aldatzen dira.', es: 'Quita los paréntesis desde el principio. Si van precedidos de −, cambian todos los signos de dentro.', ar: 'احذف الأقواس من البداية. إذا سبقتها − تتغيّر كل الإشارات داخلها.' }, math: '$6-(-3+2)=6+3-2=7$' }
+        ],
         example: '$\\begin{aligned}&5+(-7+2-1)-(8-4+3-2)-4\\\\&=5+(-6)-(5)-4\\\\&=5-6-5-4=-10\\end{aligned}$',
         takeaway: {
             eu: 'Parentesi baten aurrean − badago, barruko zeinu guztiak aldatzen dira.',
@@ -246,11 +257,12 @@ export const integerTopics: UnitTopic[] = [
             es: 'Multiplicar y dividir enteros usando la regla de los signos.',
             ar: 'ضرب الأعداد الصحيحة وقسمتها باستعمال قاعدة الإشارات.'
         },
-        explanation: {
-            eu: 'Bi zenbaki osoren biderketa edo zatiketa egiteko, balio absolutuak biderkatu edo zatitzen dira, eta emaitzari + zeinua jartzen zaio bi zenbakiek zeinu bera badute, eta − zeinua zeinu desberdina badute. Faktore gehiago badaude, ezkerretik eskuinera egiten da; edo lehenik zeinua erabakitzen da: faktore negatiboen kopurua bikoitia bada, emaitza positiboa da.',
-            es: 'Para multiplicar o dividir dos enteros, se multiplican o dividen sus valores absolutos y al resultado se le pone signo + si los dos tienen el mismo signo, y signo − si tienen signos distintos. Si hay más factores, se opera de izquierda a derecha; o se decide antes el signo: si el número de factores negativos es par, el resultado es positivo.',
-            ar: 'لضرب عددين صحيحين أو قسمتهما نضرب قيمتيهما المطلقتين أو نقسمهما، ونضع للنتيجة الإشارة + إذا كانت للعددين الإشارة نفسها، والإشارة − إذا اختلفت إشارتاهما. وإذا كانت هناك عوامل أكثر نحسب من اليسار إلى اليمين، أو نحدد الإشارة أولًا: إذا كان عدد العوامل السالبة زوجيًا فالنتيجة موجبة.'
-        },
+        explanation: { eu: 'Biderketan eta zatiketan arau bera erabiltzen da, bi urratsetan:', es: 'Para multiplicar y dividir se usa la misma regla, en dos pasos:', ar: 'في الضرب والقسمة نستعمل القاعدة نفسها، في خطوتين:' },
+        steps: [
+            { text: { eu: 'Biderkatu edo zatitu balio absolutuak.', es: 'Multiplica o divide los valores absolutos.', ar: 'اضرب القيمتين المطلقتين أو اقسمهما.' }, math: '$\\lvert -12\\rvert \\mathbin{:}\\lvert -4\\rvert =12\\mathbin{:}4=3$' },
+            { text: { eu: 'Jarri zeinua: + bi zenbakiek zeinu bera badute; − zeinu desberdina badute.', es: 'Pon el signo: + si los dos tienen el mismo signo; − si tienen signos distintos.', ar: 'ضع الإشارة: + إذا كانت للعددين الإشارة نفسها، و− إذا اختلفت إشارتاهما.' }, math: '$(-12)\\mathbin{:}(-4)=+3\\qquad (-3)\\cdot(+5)=-15$' },
+            { title: { eu: 'Hainbat faktore', es: 'Varios factores', ar: 'عدة عوامل' }, text: { eu: 'Faktore gehiago badaude, egin ezkerretik eskuinera, edo zenbatu negatiboak: kopurua bikoitia bada, emaitza positiboa da.', es: 'Si hay más factores, opera de izquierda a derecha, o cuenta los negativos: si hay un número par, el resultado es positivo.', ar: 'إذا كانت هناك عوامل أكثر، احسب من اليسار إلى اليمين، أو عُدّ العوامل السالبة: إذا كان عددها زوجيًا فالنتيجة موجبة.' }, math: '$(-2)\\cdot(-3)\\cdot(-1)=-6$' }
+        ],
         example: '$\\begin{gathered}(-3)\\cdot(+5)=-15\\\\(-12)\\mathbin{:}(-4)=+3\\\\(-12)\\cdot(-2)\\mathbin{:}(+3)\\mathbin{:}(-4)=-2\\end{gathered}$',
         takeaway: {
             eu: 'Zeinu bera → +. Zeinu desberdina → −.',
@@ -268,11 +280,12 @@ export const integerTopics: UnitTopic[] = [
             es: 'Resolver operaciones combinadas respetando la jerarquía.',
             ar: 'حل العمليات المركبة مع احترام أولوية العمليات.'
         },
-        explanation: {
-            eu: 'Ordena hau errespetatu behar da: 1) parentesi eta kako zuzenen barruko eragiketak, barrutik kanpora; 2) biderketak eta zatiketak, agertzen diren ordenan, ezkerretik eskuinera; 3) batuketak eta kenketak, horiek ere ezkerretik eskuinera. Urrats bakoitzean zeinuak zaindu.',
-            es: 'Hay que respetar este orden: 1) las operaciones dentro de paréntesis y corchetes, de dentro hacia fuera; 2) los productos y cocientes, en el orden en que aparecen, de izquierda a derecha; 3) las sumas y restas, también de izquierda a derecha. En cada paso, cuida los signos.',
-            ar: 'يجب احترام هذا الترتيب: 1) العمليات داخل الأقواس والأقواس المعقوفة من الداخل إلى الخارج؛ 2) الضرب والقسمة حسب ترتيب ظهورهما من اليسار إلى اليمين؛ 3) الجمع والطرح من اليسار إلى اليمين أيضًا. انتبه للإشارات في كل خطوة.'
-        },
+        explanation: { eu: 'Eragiketa konbinatuetan ordena hau errespetatu behar da. Urrats bakoitzean, zaindu zeinuak.', es: 'En las operaciones combinadas hay que respetar este orden. En cada paso, cuida los signos.', ar: 'في العمليات المركبة يجب احترام هذا الترتيب، مع الانتباه للإشارات في كل خطوة.' },
+        steps: [
+            { title: { eu: 'Parentesiak eta kakoak', es: 'Paréntesis y corchetes', ar: 'الأقواس' }, text: { eu: 'Parentesi eta kako zuzenen barruko eragiketak, barrutik kanpora.', es: 'Las operaciones dentro de paréntesis y corchetes, de dentro hacia fuera.', ar: 'العمليات داخل الأقواس والأقواس المعقوفة، من الداخل إلى الخارج.' }, math: '$[(-8)-(+2)]=-10$' },
+            { title: { eu: 'Biderketak eta zatiketak', es: 'Productos y cocientes', ar: 'الضرب والقسمة' }, text: { eu: 'Agertzen diren ordenan, ezkerretik eskuinera.', es: 'En el orden en que aparecen, de izquierda a derecha.', ar: 'حسب ترتيب ظهورها، من اليسار إلى اليمين.' }, math: '$(-10)\\mathbin{:}(-5)=+2$' },
+            { title: { eu: 'Batuketak eta kenketak', es: 'Sumas y restas', ar: 'الجمع والطرح' }, text: { eu: 'Azkenik, horiek ere ezkerretik eskuinera.', es: 'Por último, también de izquierda a derecha.', ar: 'أخيرًا، من اليسار إلى اليمين أيضًا.' }, math: '$(-4)-(+2)+(-2)=-8$' }
+        ],
         example: '$\\begin{aligned}&(-4)-[(-8)-(+2)]\\mathbin{:}(-5)\\\\&\\quad+(-6)\\mathbin{:}[(+1)-(-2)]\\\\&=(-4)-(-10)\\mathbin{:}(-5)+(-6)\\mathbin{:}(+3)\\\\&=(-4)-(+2)+(-2)=-8\\end{aligned}$',
         takeaway: {
             eu: 'Parentesiak → biderketak eta zatiketak → batuketak eta kenketak.',

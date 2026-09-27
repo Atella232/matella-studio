@@ -26,12 +26,26 @@ export interface UnitStage {
     title: LocalizedText
 }
 
+/** One rule, step or case of a lesson, shown as its own card */
+export interface LessonStep {
+    title?: LocalizedText
+    text: LocalizedText
+    /** Short worked formula for this step, in LaTeX between $…$ */
+    math?: string
+}
+
 export interface UnitTopic {
     id: string
     stage: string
     title: LocalizedText
     goal: LocalizedText
     explanation: LocalizedText
+    /**
+     * Rules, steps or cases that would otherwise crowd the explanation.
+     * 'steps' are numbered and done in order; 'facts' are independent ideas.
+     */
+    steps?: LessonStep[]
+    stepsKind?: 'steps' | 'facts'
     /** Worked example, in LaTeX between $…$; the same in every language */
     example: string
     takeaway: LocalizedText

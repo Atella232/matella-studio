@@ -414,6 +414,20 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                     <h1 id="fraction-v2-lesson-title">{l(currentTopic.title)}</h1>
                     <p className="fraction-v2-lesson-goal"><strong>{l({ eu: 'Helburua:', es: 'Objetivo:', ar: 'الهدف:' })}</strong> {l(currentTopic.goal)}</p>
                     <p className="fraction-v2-lesson-body"><MathText text={l(currentTopic.explanation)} /></p>
+                    {currentTopic.steps && (
+                        <ol className={`fraction-v2-lesson-steps ${currentTopic.stepsKind ?? 'steps'}`}>
+                            {currentTopic.steps.map((step, index) => (
+                                <li key={index}>
+                                    <span className="fraction-v2-lesson-step-badge" aria-hidden="true">{(currentTopic.stepsKind ?? 'steps') === 'steps' ? index + 1 : ''}</span>
+                                    <div className="fraction-v2-lesson-step-body">
+                                        {step.title && <strong>{l(step.title)}</strong>}
+                                        <p><MathText text={l(step.text)} /></p>
+                                    </div>
+                                    {step.math && <div className="fraction-v2-lesson-step-math"><MathText text={step.math} /></div>}
+                                </li>
+                            ))}
+                        </ol>
+                    )}
                     {currentTopic.figure && <div className="fraction-v2-lesson-figure">{currentTopic.figure(language)}</div>}
                     <figure className="fraction-v2-example">
                         <MathText text={currentTopic.example} />
