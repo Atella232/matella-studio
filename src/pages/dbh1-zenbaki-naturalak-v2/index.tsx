@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { naturalsChallenges, naturalsDiagnostic, naturalsExerciseBank, naturalsPractice } from './content'
 import { NaturalsHeroArt } from './figures'
+import { NaturalsLaboratory } from './lab'
+import { naturalsLabChallengeIds, naturalsLabToolForTopic, naturalsLabTools } from './lab/labTools'
 import { naturalsStages, naturalsTopics } from './lessons'
 import { readNaturalAnswer } from './numbers'
 import './NaturalNumbers.css'
@@ -25,6 +27,12 @@ const zenbakiNaturalakUnit: UnitDefinition = {
     guidedPractice: naturalsPractice,
     exerciseBank: naturalsExerciseBank,
     challenges: naturalsChallenges,
+    lab: {
+        description: { eu: `${naturalsLabTools.length} tresna zenbakiak ukitzeko: posizio-taula, zuzena, erromatarrak, biribiltzea, laukizuzenak, banaketak, semaforoa eta berreturak.`, es: `${naturalsLabTools.length} herramientas para tocar los números: tabla de posiciones, recta, romanos, redondeo, rectángulos, repartos, semáforo y potencias.`, ar: `${naturalsLabTools.length} أدوات للمس الأعداد: جدول المراتب والمستقيم والأرقام الرومانية والتقريب والمستطيلات والتوزيع وإشارة المرور والقوى.` },
+        progressIds: naturalsLabChallengeIds,
+        toolForTopic: naturalsLabToolForTopic,
+        render: (props) => <NaturalsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi emaitza zenbaki gisa, adibidez 44 edo 15.000.', es: 'Escribe el resultado como un número, por ejemplo 44 o 15.000.', ar: 'اكتب النتيجة عددًا، مثل 44 أو 15.000.' },
         defaultForm: 'simplified',

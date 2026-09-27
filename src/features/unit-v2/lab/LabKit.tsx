@@ -231,6 +231,7 @@ export function ResultAnswer({
     form = 'any',
     placeholder,
     unreadable,
+    normalizeInput = (input: string) => input,
     onChange
 }: {
     language: PrototypeLanguage
@@ -241,11 +242,13 @@ export function ResultAnswer({
     placeholder: LocalizedText
     /** Shown when the answer cannot be read as a number */
     unreadable: LocalizedText
+    /** Rewrites the answer before it is checked (e.g. drops the point in 15.000) */
+    normalizeInput?: (input: string) => string
     onChange: (patch: Partial<OperationAnswer>) => void
 }) {
     const l = useLabText(language)
     const inputId = useId()
-    const result = state.checked ? checkAnswer(state.answer, expected, form) : null
+    const result = state.checked ? checkAnswer(normalizeInput(state.answer), expected, form) : null
     return (
         <div className="fraction-v2-lab-answer">
             <label htmlFor={inputId}>{l({ eu: 'Zure emaitza', es: 'Tu resultado', ar: 'نتيجتك' })}</label>

@@ -1,37 +1,6 @@
 /* Zatigarritasuna laboratory models. The shared lab shell lives in
    src/features/unit-v2/lab/LabKit.css. */
 
-.divisibility-number-field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.divisibility-number-field > div {
-    display: flex;
-    gap: 8px;
-}
-
-.divisibility-number-field input {
-    flex: 1 1 auto;
-    min-width: 0;
-    min-height: 46px;
-    padding: 8px 12px;
-    border: 2px solid var(--ink);
-    border-radius: 12px;
-    background: var(--card);
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.divisibility-number-field input[aria-invalid="true"] {
-    border-color: var(--error);
-}
-
-.divisibility-number-field small {
-    color: var(--error-ink);
-}
-
 .divisibility-figure-box {
     width: 100%;
     padding: 8px;

@@ -416,3 +416,36 @@
     color: var(--error-ink);
     background: var(--error-tint);
 }
+
+/* ---------- Typed whole number (NumberField) ---------- */
+
+.fraction-v2-number-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.fraction-v2-number-field > div {
+    display: flex;
+    gap: 8px;
+}
+
+.fraction-v2-number-field input {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 46px;
+    padding: 8px 12px;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    background: var(--card);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.fraction-v2-number-field input[aria-invalid="true"] {
+    border-color: var(--error);
+}
+
+.fraction-v2-number-field small {
+    color: var(--error-ink);
+}
