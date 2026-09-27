@@ -1,3 +1,4 @@
+import type { PointerEvent } from 'react'
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
 import { signed } from './format'
 
@@ -16,9 +17,9 @@ const toneColor: Record<Tone, string> = {
     ink: INK
 }
 
-interface Point { value: number; tone?: Tone; label?: string }
-interface Span { from: number; to: number; tone?: Tone; label?: string; row?: number }
-interface Jump { from: number; to: number; tone?: Tone; label?: string; row?: number }
+export interface NumberLinePoint { value: number; tone?: Tone; label?: string; /** Lifts the label one row, so two close points stay readable */ raise?: boolean }
+export interface NumberLineSpan { from: number; to: number; tone?: Tone; label?: string; row?: number }
+export interface NumberLineJump { from: number; to: number; tone?: Tone; label?: string; row?: number }
 
 /**
  * A horizontal number line from `min` to `max` with optional points, distance
@@ -33,29 +34,44 @@ export function NumberLine({
     plusLabels = true,
     caption,
     braces = false,
+    labelEvery = 1,
+    mirror = false,
+    onPick,
     language
 }: {
     min: number
     max: number
-    points?: Point[]
-    spans?: Span[]
-    jumps?: Jump[]
+    points?: NumberLinePoint[]
+    spans?: NumberLineSpan[]
+    jumps?: NumberLineJump[]
     plusLabels?: boolean
     caption?: string
     /** Brace the negative and positive halves, as in the textbook */
     braces?: boolean
+    /** Label only the multiples of this number (long lines) */
+    labelEvery?: number
+    /** Dashed mirror through zero, for opposites */
+    mirror?: boolean
+    /** Makes the line clickable: reports the nearest integer */
+    onPick?: (value: number) => void
     language?: UnitLanguage
 }) {
     const width = 720
     const margin = 36
     const rows = Math.max(0, ...spans.map((span) => (span.row ?? 0) + 1), ...jumps.map((jump) => (jump.row ?? 0) + 1))
-    const top = 24 + rows * 34
+    const top = 24 + rows * 34 + (points.some((point) => point.raise) ? 22 : 0)
     const lineY = top + 20
     const height = lineY + (braces ? 86 : 48) + (caption ? 26 : 0)
     const step = (width - margin * 2) / (max - min)
     const x = (value: number) => margin + (value - min) * step
     const ticks = Array.from({ length: max - min + 1 }, (_, index) => min + index)
     const l = (text: LocalizedText) => (language ? pickText(language, text) : text.es)
+    const pick = (event: PointerEvent<SVGRectElement>) => {
+        const matrix = event.currentTarget.ownerSVGElement?.getScreenCTM()
+        if (!onPick || !matrix) return
+        const svgX = (event.clientX - matrix.e) / matrix.a
+        onPick(Math.min(max, Math.max(min, Math.round((svgX - margin) / step + min))))
+    }
 
     return (
         <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={caption ?? `${signed(min)} … ${signed(max)}`} className="integers-number-line">
@@ -93,18 +109,19 @@ export function NumberLine({
                 )
             })}
 
+            {mirror && <line x1={x(0)} x2={x(0)} y1={8} y2={lineY + 40} stroke={MUTED} strokeWidth={2} strokeDasharray="6 5" />}
             <line x1={margin - 22} x2={width - margin + 22} y1={lineY} y2={lineY} stroke={INK} strokeWidth={2.4} markerStart="url(#integers-arrow-ink)" markerEnd="url(#integers-arrow-ink)" />
             {ticks.map((value) => (
                 <g key={value}>
                     <line x1={x(value)} x2={x(value)} y1={lineY - (value === 0 ? 10 : 7)} y2={lineY + (value === 0 ? 10 : 7)} stroke={INK} strokeWidth={value === 0 ? 2.6 : 1.8} />
-                    <text x={x(value)} y={lineY + 30} textAnchor="middle" fontSize={17} fontWeight={value === 0 ? 700 : 400} fill={INK}>{signed(value, plusLabels)}</text>
+                    {value % labelEvery === 0 && <text x={x(value)} y={lineY + 30} textAnchor="middle" fontSize={17} fontWeight={value === 0 ? 700 : 400} fill={INK}>{signed(value, plusLabels)}</text>}
                 </g>
             ))}
 
             {points.map((point, index) => (
                 <g key={`point-${index}`}>
                     <circle cx={x(point.value)} cy={lineY} r={8} fill={toneColor[point.tone ?? 'stage']} stroke={INK} strokeWidth={2} />
-                    {point.label && <text x={x(point.value)} y={lineY - 16} textAnchor="middle" fontSize={16} fontWeight={700} fill={toneColor[point.tone ?? 'stage']}>{point.label}</text>}
+                    {point.label && <text x={x(point.value)} y={lineY - (point.raise ? 40 : 16)} textAnchor="middle" fontSize={16} fontWeight={700} fill={toneColor[point.tone ?? 'stage']}>{point.label}</text>}
                 </g>
             ))}
 
@@ -115,6 +132,20 @@ export function NumberLine({
                     <path d={`M${x(1)} ${lineY + 64} q0 -10 10 -10 H${x(max) - 10} q10 0 10 -10`} fill="none" stroke={MUTED} strokeWidth={1.5} />
                     <text x={(x(1) + x(max)) / 2} y={lineY + 82}>{l({ eu: 'Zenbaki oso positiboak', es: 'Enteros positivos', ar: 'الأعداد الصحيحة الموجبة' })}</text>
                 </g>
+            )}
+
+            {onPick && (
+                <rect
+                    x={margin - step / 2}
+                    y={0}
+                    width={width - margin * 2 + step}
+                    height={lineY + 40}
+                    fill="transparent"
+                    style={{ cursor: 'pointer', touchAction: 'none' }}
+                    aria-hidden="true"
+                    onPointerDown={(event) => { event.currentTarget.setPointerCapture(event.pointerId); pick(event) }}
+                    onPointerMove={(event) => { if (event.currentTarget.hasPointerCapture(event.pointerId)) pick(event) }}
+                />
             )}
 
             {caption && <text x={width / 2} y={height - 6} textAnchor="middle" fontSize={16} fill={MUTED}>{caption}</text>}

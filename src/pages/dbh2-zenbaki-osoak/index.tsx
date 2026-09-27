@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { integerChallenges, integerDiagnostic, integerExerciseBank, integerPractice } from './content'
 import { IntegersHeroArt } from './figures'
+import { IntegerLaboratory } from './lab'
+import { integerLabChallengeIds, integerLabToolForTopic, integerLabTools } from './lab/labTools'
 import { integerStages, integerTopics } from './lessons'
 import './ZenbakiOsoak.css'
 
@@ -24,6 +26,12 @@ const zenbakiOsoakUnit: UnitDefinition = {
     guidedPractice: integerPractice,
     exerciseBank: integerExerciseBank,
     challenges: integerChallenges,
+    lab: {
+        description: { eu: `${integerLabTools.length} tresna zenbaki osoak manipulatzeko, erronkekin.`, es: `${integerLabTools.length} herramientas para manipular números enteros, con retos.`, ar: `${integerLabTools.length} أدوات للتعامل مع الأعداد الصحيحة، مع تحديات.` },
+        progressIds: integerLabChallengeIds,
+        toolForTopic: integerLabToolForTopic,
+        render: (props) => <IntegerLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi emaitza zenbaki oso gisa: −7, 12 edo +12.', es: 'Escribe el resultado como número entero: −7, 12 o +12.', ar: 'اكتب النتيجة عددًا صحيحًا: ⁦−7⁩ أو 12 أو ⁦+12⁩.' },
         defaultForm: 'simplified',
