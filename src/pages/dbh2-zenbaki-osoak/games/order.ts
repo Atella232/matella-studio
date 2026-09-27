@@ -40,8 +40,8 @@ export interface OrderRound {
     descending: boolean
 }
 
-export function createOrderRound(random: Random, levelIndex: number, roundIndex: number): OrderRound {
-    const level = orderLevels[levelIndex]
+export function createOrderRound(random: Random, levelIndex: number, roundIndex: number, levels: OrderLevel[] = orderLevels): OrderRound {
+    const level = levels[levelIndex]
     const values = new Set<number>()
     // Half of the cards negative at least, where the ordering mistakes happen
     while (values.size < level.count) {
@@ -74,12 +74,12 @@ export function nextExpected(round: OrderRound, tapped: string[]): number | null
     return round.descending ? Math.max(...left) : Math.min(...left)
 }
 
-export function orderParTime(levelIndex: number): number {
-    return (ORDER_ROUNDS * orderLevels[levelIndex].secondsPerRound + 5) * 1000
+export function orderParTime(levelIndex: number, levels: OrderLevel[] = orderLevels): number {
+    return (ORDER_ROUNDS * levels[levelIndex].secondsPerRound + 5) * 1000
 }
 
-export function orderStars(levelIndex: number, timeMs: number, mistakes: number): Stars {
-    const par = orderParTime(levelIndex)
+export function orderStars(levelIndex: number, timeMs: number, mistakes: number, levels: OrderLevel[] = orderLevels): Stars {
+    const par = orderParTime(levelIndex, levels)
     if (timeMs <= par * 0.8 && mistakes <= 1) return 3
     if (timeMs <= par) return 2
     return 1

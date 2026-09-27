@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, type ReactNode } from 'react'
 import { GameTopbar, LevelPicker, ResultPanel } from '../../../features/unit-v2/games/GameKit'
 import { formatTime, nowMs, useGameText } from '../../../features/unit-v2/games/gameHooks'
 import type { GameProps } from '../../../features/unit-v2/games/GamesHub'
@@ -6,11 +6,19 @@ import { createRandom, randomSeed, type Random } from '../../../features/unit-v2
 import { signed } from '../format'
 import { IntegerGameArt } from './GameArt'
 import { integerGames } from './info'
-import { createPyramid, pyramidLevels, PYRAMIDS_PER_LEVEL, pyramidStars, wrongCells, type Pyramid } from './pyramid'
+import type { GameInfo } from '../../../features/unit-v2/games/records'
+import { createPyramid, pyramidLevels, PYRAMIDS_PER_LEVEL, pyramidStars, wrongCells, type Pyramid, type PyramidLevel } from './pyramid'
 
 type Phase = 'pick' | 'playing' | 'solved' | 'finished'
 
-const game = integerGames.find((item) => item.id === 'pyramid')!
+const defaultGame = integerGames.find((item) => item.id === 'pyramid')!
+
+/** Another unit can reuse the game with its own level list and illustration */
+export interface PyramidConfig {
+    game: GameInfo
+    levels: PyramidLevel[]
+    art: ReactNode
+}
 
 /** Reads what the student typed as an integer: −7, -7, +7, 7 */
 function parseInteger(input: string): number | null {
@@ -18,7 +26,9 @@ function parseInteger(input: string): number | null {
     return /^-?\d+$/.test(cleaned) ? Number(cleaned) : null
 }
 
-export function PyramidGame({ language, records, onResult, onExit }: GameProps) {
+export function PyramidGame({ language, records, onResult, onExit , config }: GameProps & { config?: PyramidConfig }) {
+    const game = config?.game ?? defaultGame
+    const levels = config?.levels ?? pyramidLevels
     const l = useGameText(language)
     const random = useRef<Random>(createRandom(randomSeed()))
     const startedAt = useRef(0)
@@ -31,10 +41,10 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
     const [missing, setMissing] = useState(false)
     const [mistakes, setMistakes] = useState(0)
     const [time, setTime] = useState(0)
-    const op = pyramidLevels[level].op
+    const op = levels[level].op
 
     const newPyramid = () => {
-        setPyramid(createPyramid(random.current, level))
+        setPyramid(createPyramid(random.current, level, levels))
         setInputs({})
         setWrong([])
         setMissing(false)
@@ -46,7 +56,7 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
         setLevel(nextLevel)
         setRound(0)
         setMistakes(0)
-        setPyramid(createPyramid(random.current, nextLevel))
+        setPyramid(createPyramid(random.current, nextLevel, levels))
         setInputs({})
         setWrong([])
         setMissing(false)
@@ -91,7 +101,7 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
         return (
             <LevelPicker
                 game={game}
-                art={<IntegerGameArt game="pyramid" />}
+                art={config?.art ?? <IntegerGameArt game="pyramid" />}
                 language={language}
                 records={records}
                 onStart={start}

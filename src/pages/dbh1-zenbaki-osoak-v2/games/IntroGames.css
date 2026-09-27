@@ -1,0 +1,111 @@
+/* Zenbaki osoak (1. DBH) games: the lift. The pyramid and order games are
+   styled by the 2. DBH IntegerGames.css. */
+
+.fraction-v2-games-card[data-game="elevator"] { --game-tint: var(--coral-tint); }
+
+.integers-elevator {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.integers-elevator-board {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 20px;
+    align-items: start;
+}
+
+.integers-elevator-story {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 18px;
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    background: var(--card);
+    box-shadow: 6px 6px 0 var(--ink);
+    font-size: 20px;
+}
+
+.integers-elevator-story p {
+    margin: 0;
+}
+
+.integers-elevator-story ol {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.integers-elevator-story li.up {
+    color: var(--blue-ink);
+}
+
+.integers-elevator-story li.down {
+    color: var(--coral-ink);
+}
+
+.fraction-v2 .integers-elevator-question {
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.integers-elevator-panel {
+    display: grid;
+    grid-template-columns: repeat(2, 58px);
+    gap: 8px;
+    padding: 14px;
+    border: 2px solid var(--ink);
+    border-radius: 22px;
+    background: var(--paper-deep, #efe7d6);
+}
+
+.integers-elevator-panel button {
+    width: 58px;
+    height: 58px;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    background: var(--card);
+    color: var(--ink);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.integers-elevator-panel button.ground {
+    background: var(--blue-tint);
+}
+
+.integers-elevator-panel button.basement {
+    background: var(--coral-tint);
+}
+
+.integers-elevator-panel button.start {
+    outline: 3px dashed var(--ink);
+    outline-offset: 2px;
+}
+
+.integers-elevator-panel button.missed {
+    background: var(--coral);
+    color: #fff;
+}
+
+.integers-elevator-panel button:hover {
+    filter: brightness(0.95);
+}
+
+@media (max-width: 640px) {
+    .integers-elevator-board {
+        grid-template-columns: 1fr;
+    }
+
+    .integers-elevator-panel {
+        grid-template-columns: repeat(4, 58px);
+        justify-content: center;
+    }
+}

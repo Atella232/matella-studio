@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import '../dbh2-zenbaki-osoak/ZenbakiOsoak.css'
 import { integerIntroChallenges, integerIntroDiagnostic, integerIntroExerciseBank, integerIntroPractice } from './content'
 import { IntegersIntroHeroArt } from './figures'
+import { IntegerIntroGames } from './games'
+import { INTRO_GAME_RECORDS_KEY, introGameProgressIds } from './games/info'
 import { IntegerIntroLaboratory } from './lab'
 import { introLabChallengeIds, introLabToolForTopic, introLabTools } from './lab/labTools'
 import { integerIntroStages, integerIntroTopics } from './lessons'
@@ -32,6 +34,12 @@ const zenbakiOsoakIntroUnit: UnitDefinition = {
         progressIds: introLabChallengeIds,
         toolForTopic: introLabToolForTopic,
         render: (props) => <IntegerIntroLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Lau joko zenbaki osoekin azkar aritzeko: lasterketa, igogailua, piramidea eta ilara.', es: 'Cuatro juegos para ganar rapidez con los enteros: carrera, ascensor, pirámide y en fila.', ar: 'أربع ألعاب لاكتساب السرعة مع الأعداد الصحيحة: السباق والمصعد والهرم وفي صف.' },
+        progressIds: introGameProgressIds,
+        recordsKey: INTRO_GAME_RECORDS_KEY,
+        render: (props) => <IntegerIntroGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi emaitza zenbaki oso gisa: −7, 12 edo +12.', es: 'Escribe el resultado como número entero: −7, 12 o +12.', ar: 'اكتب النتيجة عددًا صحيحًا: ⁦−7⁩ أو 12 أو ⁦+12⁩.' },

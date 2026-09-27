@@ -74,8 +74,8 @@ function nonZero(random: Random, min: number, max: number): number {
     return random() < 0.5 ? -size : size
 }
 
-export function createPyramid(random: Random, levelIndex: number): Pyramid {
-    const level = pyramidLevels[levelIndex]
+export function createPyramid(random: Random, levelIndex: number, levels: PyramidLevel[] = pyramidLevels): Pyramid {
+    const level = levels[levelIndex]
     for (let attempt = 0; attempt < 500; attempt += 1) {
         const base = Array.from({ length: level.rows }, () => nonZero(random, level.min, level.max))
         // Both signs in every pyramid, so it is really about integers

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { MathText } from '../../../components/MathText'
 import { GameTopbar, LevelPicker, ResultPanel } from '../../../features/unit-v2/games/GameKit'
 import { formatTime, nowMs, useGameText } from '../../../features/unit-v2/games/gameHooks'
@@ -9,13 +9,23 @@ import { IntegerGameArt } from './GameArt'
 import { integerGames } from './info'
 import { integerCardLatex } from './memory'
 import { signedLatex } from './race'
-import { createOrderRound, nextExpected, ORDER_PENALTY_MS, ORDER_ROUNDS, orderParTime, orderStars, type OrderCard, type OrderRound } from './order'
+import type { GameInfo } from '../../../features/unit-v2/games/records'
+import { createOrderRound, nextExpected, ORDER_PENALTY_MS, ORDER_ROUNDS, orderLevels, orderParTime, orderStars, type OrderCard, type OrderLevel, type OrderRound } from './order'
 
 type Phase = 'pick' | 'playing' | 'finished'
 
-const game = integerGames.find((item) => item.id === 'order')!
+const defaultGame = integerGames.find((item) => item.id === 'order')!
 
-export function OrderGame({ language, records, onResult, onExit }: GameProps) {
+/** Another unit can reuse the game with its own level list and illustration */
+export interface OrderConfig {
+    game: GameInfo
+    levels: OrderLevel[]
+    art: ReactNode
+}
+
+export function OrderGame({ language, records, onResult, onExit , config }: GameProps & { config?: OrderConfig }) {
+    const game = config?.game ?? defaultGame
+    const levels = config?.levels ?? orderLevels
     const l = useGameText(language)
     const random = useRef<Random>(createRandom(randomSeed()))
     const startedAt = useRef(0)
@@ -35,7 +45,7 @@ export function OrderGame({ language, records, onResult, onExit }: GameProps) {
         startedAt.current = nowMs()
         setLevel(nextLevel)
         setRoundIndex(0)
-        setRound(createOrderRound(random.current, nextLevel, 0))
+        setRound(createOrderRound(random.current, nextLevel, 0, levels))
         setTapped([])
         setMistakes(0)
         setPenalty(0)
@@ -68,13 +78,13 @@ export function OrderGame({ language, records, onResult, onExit }: GameProps) {
         }
         if (roundIndex + 1 < ORDER_ROUNDS) {
             setRoundIndex(roundIndex + 1)
-            setRound(createOrderRound(random.current, level, roundIndex + 1))
+            setRound(createOrderRound(random.current, level, roundIndex + 1, levels))
             setTapped([])
             return
         }
         const total = nowMs() - startedAt.current + penalty
         setElapsed(nowMs() - startedAt.current)
-        onResult(level, { stars: orderStars(level, total, mistakes), score: -mistakes, timeMs: total })
+        onResult(level, { stars: orderStars(level, total, mistakes, levels), score: -mistakes, timeMs: total })
         setPhase('finished')
     }
 
@@ -82,7 +92,7 @@ export function OrderGame({ language, records, onResult, onExit }: GameProps) {
         return (
             <LevelPicker
                 game={game}
-                art={<IntegerGameArt game="order" />}
+                art={config?.art ?? <IntegerGameArt game="order" />}
                 language={language}
                 records={records}
                 onStart={start}
@@ -100,7 +110,7 @@ export function OrderGame({ language, records, onResult, onExit }: GameProps) {
     }
 
     const levelInfo = game.levels[level]
-    const par = orderParTime(level)
+    const par = orderParTime(level, levels)
 
     /** Why the tapped card was not the next one; operations show their value */
     const hintText = (card: OrderCard, expected: number) => {
@@ -167,7 +177,7 @@ export function OrderGame({ language, records, onResult, onExit }: GameProps) {
             {phase === 'finished' && (
                 <ResultPanel
                     language={language}
-                    stars={orderStars(level, elapsed + penalty, mistakes)}
+                    stars={orderStars(level, elapsed + penalty, mistakes, levels)}
                     title={l({ eu: 'Ilarak osatuta!', es: '¡Filas completas!', ar: 'اكتملت الصفوف!' })}
                     subtitle={l({ eu: `3 izar: ${formatTime(par * 0.8)} baino gutxiago eta akats bat gehienez · 2 izar: ${formatTime(par)} baino gutxiago`, es: `3 estrellas: menos de ${formatTime(par * 0.8)} y como mucho un fallo · 2: menos de ${formatTime(par)}`, ar: `3 نجوم: أقل من ${formatTime(par * 0.8)} وخطأ واحد على الأكثر · 2: أقل من ${formatTime(par)}` })}
                     stats={[
