@@ -1,5 +1,6 @@
 import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
+import { integerChallenges, integerDiagnostic, integerExerciseBank, integerPractice } from './content'
 import { IntegersHeroArt } from './figures'
 import { integerStages, integerTopics } from './lessons'
 import './ZenbakiOsoak.css'
@@ -19,13 +20,17 @@ const zenbakiOsoakUnit: UnitDefinition = {
     pathSubtitle: { eu: 'Bost etapa, zenbaki negatiboetatik eragiketa konbinatuetara', es: 'Cinco etapas, de los números negativos a las operaciones combinadas', ar: 'خمس مراحل، من الأعداد السالبة إلى العمليات المركبة' },
     stages: integerStages,
     topics: integerTopics,
+    diagnostic: integerDiagnostic,
+    guidedPractice: integerPractice,
+    exerciseBank: integerExerciseBank,
+    challenges: integerChallenges,
     answers: {
-        note: { eu: 'Idatzi emaitza zenbaki oso gisa: −7, 12 edo +12.', es: 'Escribe el resultado como número entero: −7, 12 o +12.', ar: 'اكتب النتيجة عددًا صحيحًا: ‎−7 أو 12 أو +12.' },
+        note: { eu: 'Idatzi emaitza zenbaki oso gisa: −7, 12 edo +12.', es: 'Escribe el resultado como número entero: −7, 12 o +12.', ar: 'اكتب النتيجة عددًا صحيحًا: ⁦−7⁩ أو 12 أو ⁦+12⁩.' },
         defaultForm: 'simplified',
         inputMode: 'text',
-        placeholder: () => ({ eu: 'Adib.: −7', es: 'Ej.: −7', ar: 'مثال: ‎−7' }),
+        placeholder: () => ({ eu: 'Adib.: −7', es: 'Ej.: −7', ar: 'مثال: ⁦−7⁩' }),
         wrongForm: () => ({ eu: 'Balioa zuzena da, baina idatzi zenbaki oso gisa, zatikirik gabe.', es: 'El valor es correcto, pero escríbelo como número entero, sin fracciones.', ar: 'القيمة صحيحة، لكن اكتبها عددًا صحيحًا دون كسور.' }),
-        unreadable: { eu: 'Ez dut erantzun hori ulertzen. Idatzi zenbaki oso bat, adibidez −7 edo 12.', es: 'No entiendo esa respuesta. Escribe un número entero, por ejemplo −7 o 12.', ar: 'لم أفهم هذه الإجابة. اكتب عددًا صحيحًا، مثل ‎−7 أو 12.' }
+        unreadable: { eu: 'Ez dut erantzun hori ulertzen. Idatzi zenbaki oso bat, adibidez −7 edo 12.', es: 'No entiendo esa respuesta. Escribe un número entero, por ejemplo −7 o 12.', ar: 'لم أفهم هذه الإجابة. اكتب عددًا صحيحًا، مثل ⁦−7⁩ أو 12.' }
     },
     errorByStage: {
         integers: { eu: 'Pentsatu egoera zerotik gora ala behera dagoen, eta aukeratu zeinua.', es: 'Piensa si la situación está por encima o por debajo de cero y elige el signo.', ar: 'فكّر هل الموقف فوق الصفر أم تحته واختر الإشارة.' },

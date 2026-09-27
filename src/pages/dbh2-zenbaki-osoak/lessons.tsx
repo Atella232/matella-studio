@@ -53,7 +53,7 @@ export const integerTopics: UnitTopic[] = [
         explanation: { eu: 'Zenbaki osoen multzoa ℤ da, eta hiru zati ditu. Zenbakizko zuzenean, zeroak zuzena bi zatitan banatzen du.', es: 'El conjunto de los números enteros es ℤ y tiene tres partes. En la recta numérica, el cero la divide en dos.', ar: 'مجموعة الأعداد الصحيحة هي ℤ ولها ثلاثة أجزاء. على خط الأعداد يقسم الصفر الخط إلى قسمين.' },
         stepsKind: 'facts',
         steps: [
-            { title: { eu: 'Zenbaki oso positiboak', es: 'Enteros positivos', ar: 'الأعداد الصحيحة الموجبة' }, text: { eu: 'Zeroaren eskuinean daude. + zeinurik gabe ere idazten dira: +5 = 5.', es: 'Están a la derecha del cero. También se escriben sin el signo +: +5 = 5.', ar: 'تقع على يمين الصفر، ويمكن كتابتها دون الإشارة +: ‎+5 = 5.' }, math: '$+1,\\ +2,\\ +3,\\ \\dots$' },
+            { title: { eu: 'Zenbaki oso positiboak', es: 'Enteros positivos', ar: 'الأعداد الصحيحة الموجبة' }, text: { eu: 'Zeroaren eskuinean daude. + zeinurik gabe ere idazten dira: +5 = 5.', es: 'Están a la derecha del cero. También se escriben sin el signo +: +5 = 5.', ar: 'تقع على يمين الصفر، ويمكن كتابتها دون الإشارة +: ⁦+5⁩ = 5.' }, math: '$+1,\\ +2,\\ +3,\\ \\dots$' },
             { title: { eu: 'Zeroa', es: 'El cero', ar: 'الصفر' }, text: { eu: 'Ez da ez positiboa ez negatiboa: zuzenaren erdigunea da.', es: 'No es ni positivo ni negativo: es el centro de la recta.', ar: 'ليس موجبًا ولا سالبًا: إنه مركز الخط.' }, math: '$0$' },
             { title: { eu: 'Zenbaki oso negatiboak', es: 'Enteros negativos', ar: 'الأعداد الصحيحة السالبة' }, text: { eu: 'Zeroaren ezkerrean daude, positiboen distantzia berera.', es: 'Están a la izquierda del cero, a la misma distancia que los positivos.', ar: 'تقع على يسار الصفر، بالمسافات نفسها التي للموجبة.' }, math: '$-1,\\ -2,\\ -3,\\ \\dots$' }
         ],
@@ -130,7 +130,7 @@ export const integerTopics: UnitTopic[] = [
         takeaway: {
             eu: 'Negatiboetan, zerotik hurbilago dagoena da handiena: −2 > −4.',
             es: 'Entre negativos, el más cercano al cero es el mayor: −2 > −4.',
-            ar: 'بين الأعداد السالبة يكون الأقرب إلى الصفر هو الأكبر: ‎−2 > −4.'
+            ar: 'بين الأعداد السالبة يكون الأقرب إلى الصفر هو الأكبر: ⁦−2⁩ > ⁦−4⁩.'
         },
         figure: () => <NumberLine min={-6} max={6} points={[{ value: -4, tone: 'second', label: '−4' }, { value: -2, label: '−2' }]} caption="−4 < −2" />
     },
@@ -143,7 +143,7 @@ export const integerTopics: UnitTopic[] = [
             es: 'Ordenar una lista de enteros de menor a mayor y al revés.',
             ar: 'ترتيب قائمة من الأعداد الصحيحة تصاعديًا وتنازليًا.'
         },
-        explanation: { eu: 'Adibidez, ordenatu handienetik txikienera: −10, +4, +9, 0, −6, −8, +3. Jarraitu urrats hauek:', es: 'Por ejemplo, ordena de mayor a menor: −10, +4, +9, 0, −6, −8, +3. Sigue estos pasos:', ar: 'مثال: رتّب تنازليًا: ‎−10، +4، +9، 0، −6، −8، +3. اتبع هذه الخطوات:' },
+        explanation: { eu: 'Adibidez, ordenatu handienetik txikienera: −10, +4, +9, 0, −6, −8, +3. Jarraitu urrats hauek:', es: 'Por ejemplo, ordena de mayor a menor: −10, +4, +9, 0, −6, −8, +3. Sigue estos pasos:', ar: 'مثال: رتّب تنازليًا: ⁦−10⁩، ⁦+4⁩، ⁦+9⁩، 0، ⁦−6⁩، ⁦−8⁩، ⁦+3⁩. اتبع هذه الخطوات:' },
         steps: [
             { text: { eu: 'Banatu positiboak alde batean eta negatiboak bestean; zeroa erdian.', es: 'Separa los positivos a un lado y los negativos al otro; el cero, en medio.', ar: 'افصل الموجبة في جهة والسالبة في جهة أخرى، والصفر في الوسط.' }, math: '$+4,\\,+9,\\,+3\\quad\\mid\\quad 0\\quad\\mid\\quad -10,\\,-6,\\,-8$' },
             { text: { eu: 'Ordenatu positiboak zenbaki arruntak bezala.', es: 'Ordena los positivos como números naturales.', ar: 'رتّب الموجبة كالأعداد الطبيعية.' }, math: '$+9>+4>+3$' },
