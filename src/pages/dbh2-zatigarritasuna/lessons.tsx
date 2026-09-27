@@ -148,7 +148,7 @@ export const divisibilityTopics: UnitTopic[] = [
             { title: { eu: '5ekin', es: 'Por 5', ar: 'على 5' }, text: { eu: 'Azken zifra 0 edo 5 bada.', es: 'Si la última cifra es 0 o 5.', ar: 'إذا كان الرقم الأخير 0 أو 5.' }, math: '$3\\,235\\ \\checkmark\\qquad 3\\,232\\ \\times$' },
             { title: { eu: '10ekin', es: 'Por 10', ar: 'على 10' }, text: { eu: 'Azken zifra 0 bada. 10ekin zatigarria dena 2rekin eta 5ekin ere bada.', es: 'Si la última cifra es 0. Lo que es divisible por 10 también lo es por 2 y por 5.', ar: 'إذا كان الرقم الأخير 0. وما يقبل القسمة على 10 يقبلها على 2 و5 أيضًا.' }, math: '$3\\,230\\ \\checkmark\\qquad 3\\,232\\ \\times$' }
         ],
-        example: '$370:\\ \\text{2 } \\checkmark\\quad \\text{5 } \\checkmark\\quad \\text{10 } \\checkmark$',
+        example: '$370\\mathbin{:}\\ \\text{2 } \\checkmark\\quad \\text{5 } \\checkmark\\quad \\text{10 } \\checkmark$',
         takeaway: {
             eu: '2, 5 eta 10: begiratu azken zifrari bakarrik.',
             es: '2, 5 y 10: mira solo la última cifra.',
@@ -171,11 +171,11 @@ export const divisibilityTopics: UnitTopic[] = [
         },
         stepsKind: 'facts',
         steps: [
-            { title: { eu: '3rekin', es: 'Por 3', ar: 'على 3' }, text: { eu: 'Zifren batura 3ren multiploa bada: 3, 6, 9, 12, 15…', es: 'Si la suma de sus cifras es múltiplo de 3: 3, 6, 9, 12, 15…', ar: 'إذا كان مجموع أرقامه مضاعفًا لـ 3: 3، 6، 9، 12، 15…' }, math: '$3\\,234:\\ 3+2+3+4=12\\ \\checkmark$' },
-            { title: { eu: '9rekin', es: 'Por 9', ar: 'على 9' }, text: { eu: 'Zifren batura 9ren multiploa bada: 9, 18, 27…', es: 'Si la suma de sus cifras es múltiplo de 9: 9, 18, 27…', ar: 'إذا كان مجموع أرقامه مضاعفًا لـ 9: 9، 18، 27…' }, math: '$5\\,013:\\ 5+0+1+3=9\\ \\checkmark$' },
-            { title: { eu: '6rekin', es: 'Por 6', ar: 'على 6' }, text: { eu: 'Irizpideak konbina daitezke: 6rekin zatigarria da 2rekin eta 3rekin zatigarria bada.', es: 'Los criterios se pueden combinar: es divisible por 6 si lo es por 2 y por 3.', ar: 'يمكن الجمع بين القواعد: يقبل القسمة على 6 إذا قبلها على 2 و3 معًا.' }, math: '$282:\\ \\text{2 } \\checkmark\\ \\ 2+8+2=12\\ \\checkmark$' }
+            { title: { eu: '3rekin', es: 'Por 3', ar: 'على 3' }, text: { eu: 'Zifren batura 3ren multiploa bada: 3, 6, 9, 12, 15…', es: 'Si la suma de sus cifras es múltiplo de 3: 3, 6, 9, 12, 15…', ar: 'إذا كان مجموع أرقامه مضاعفًا لـ 3: 3، 6، 9، 12، 15…' }, math: '$3\\,234\\mathbin{:}\\ 3+2+3+4=12\\ \\checkmark$' },
+            { title: { eu: '9rekin', es: 'Por 9', ar: 'على 9' }, text: { eu: 'Zifren batura 9ren multiploa bada: 9, 18, 27…', es: 'Si la suma de sus cifras es múltiplo de 9: 9, 18, 27…', ar: 'إذا كان مجموع أرقامه مضاعفًا لـ 9: 9، 18، 27…' }, math: '$5\\,013\\mathbin{:}\\ 5+0+1+3=9\\ \\checkmark$' },
+            { title: { eu: '6rekin', es: 'Por 6', ar: 'على 6' }, text: { eu: 'Irizpideak konbina daitezke: 6rekin zatigarria da 2rekin eta 3rekin zatigarria bada.', es: 'Los criterios se pueden combinar: es divisible por 6 si lo es por 2 y por 3.', ar: 'يمكن الجمع بين القواعد: يقبل القسمة على 6 إذا قبلها على 2 و3 معًا.' }, math: '$282\\mathbin{:}\\ \\text{2 } \\checkmark\\ \\ 2+8+2=12\\ \\checkmark$' }
         ],
-        example: '$\\begin{gathered}147:\\ 1+4+7=12\\\\\\text{3 } \\checkmark\\quad \\text{9 } \\times\\end{gathered}$',
+        example: '$\\begin{gathered}147\\mathbin{:}\\ 1+4+7=12\\\\\\text{3 } \\checkmark\\quad \\text{9 } \\times\\end{gathered}$',
         takeaway: {
             eu: '3 eta 9: batu zifrak. 9rekin zatigarria dena 3rekin ere bada.',
             es: '3 y 9: suma las cifras. Lo que es divisible por 9 también lo es por 3.',
@@ -201,15 +201,15 @@ export const divisibilityTopics: UnitTopic[] = [
             {
                 title: { eu: '11rekin', es: 'Por 11', ar: 'على 11' },
                 text: { eu: 'Batu posizio bikoitietako zifrak eta posizio bakoitietakoak. Kendu bi baturak: emaitza 0 edo 11ren multiploa bada, zatigarria da.', es: 'Suma las cifras de lugar par y las de lugar impar. Resta las dos sumas: si da 0 o un múltiplo de 11, es divisible.', ar: 'اجمع الأرقام في المواقع الزوجية والأرقام في المواقع الفردية، ثم اطرح المجموعين: إذا كان الناتج 0 أو مضاعفًا لـ 11 فالعدد يقبل القسمة.' },
-                math: '$3\\,234:\\ (2+4)-(3+3)=0\\ \\checkmark$'
+                math: '$3\\,234\\mathbin{:}\\ (2+4)-(3+3)=0\\ \\checkmark$'
             },
             {
                 title: { eu: '7rekin', es: 'Por 7', ar: 'على 7' },
                 text: { eu: 'Kendu unitateen zifra eta kendu haren bikoitza geratzen den zenbakiari. Emaitza 0 edo 7ren multiploa bada, zatigarria da. Handia bada, errepikatu.', es: 'Quita la cifra de las unidades y resta su doble al número que queda. Si da 0 o un múltiplo de 7, es divisible. Si es grande, repite.', ar: 'احذف رقم الآحاد واطرح ضعفه من العدد الباقي. إذا كان الناتج 0 أو مضاعفًا لـ 7 فالعدد يقبل القسمة. وإن كان كبيرًا فكرّر.' },
-                math: '$3\\,234:\\ 323-8=315;\\ 31-10=21\\ \\checkmark$'
+                math: '$3\\,234\\mathbin{:}\\ 323-8=315;\\ 31-10=21\\ \\checkmark$'
             }
         ],
-        example: '$\\begin{gathered}3\\,238:\\ (8+2)-(3+3)=4\\\\\\text{11 } \\times\\end{gathered}$',
+        example: '$\\begin{gathered}3\\,238\\mathbin{:}\\ (8+2)-(3+3)=4\\\\\\text{11 } \\times\\end{gathered}$',
         takeaway: {
             eu: '11: posizio bikoitiak − bakoitiak. 7: kendu azken zifraren bikoitza.',
             es: '11: lugares pares − impares. 7: resta el doble de la última cifra.',
@@ -261,7 +261,7 @@ export const divisibilityTopics: UnitTopic[] = [
         stepsKind: 'steps',
         steps: [
             { text: { eu: 'Idatzi zenbakia marra bertikal baten ezkerrean.', es: 'Escribe el número a la izquierda de una raya vertical.', ar: 'اكتب العدد على يسار خط عمودي.' } },
-            { text: { eu: 'Zatitu ahal den lehen txikienaz eta idatzi eskuinean; zatidura azpian.', es: 'Divide entre el menor primo posible y escríbelo a la derecha; el cociente, debajo.', ar: 'اقسم على أصغر عدد أولي ممكن واكتبه على اليمين، والناتج تحته.' }, math: '$360:2=180$' },
+            { text: { eu: 'Zatitu ahal den lehen txikienaz eta idatzi eskuinean; zatidura azpian.', es: 'Divide entre el menor primo posible y escríbelo a la derecha; el cociente, debajo.', ar: 'اقسم على أصغر عدد أولي ممكن واكتبه على اليمين، والناتج تحته.' }, math: '$360\\mathbin{:}2=180$' },
             { text: { eu: 'Jarraitu 1 lortu arte.', es: 'Sigue hasta llegar a 1.', ar: 'تابع حتى تصل إلى 1.' } },
             { text: { eu: 'Bildu eskuineko lehenak berreturetan.', es: 'Agrupa los primos de la derecha en potencias.', ar: 'اجمع الأعداد الأولية التي على اليمين في صورة قوى.' }, math: '$360=2^{3}\\cdot 3^{2}\\cdot 5$' }
         ],

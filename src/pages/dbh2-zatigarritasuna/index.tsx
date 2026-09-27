@@ -1,5 +1,6 @@
 import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
+import { divisibilityChallenges, divisibilityDiagnostic, divisibilityExerciseBank, divisibilityPractice } from './content'
 import { DivisibilityHeroArt } from './figures'
 import { divisibilityStages, divisibilityTopics } from './lessons'
 import './Zatigarritasuna.css'
@@ -19,6 +20,10 @@ const zatigarritasunaUnit: UnitDefinition = {
     pathSubtitle: { eu: 'Bost etapa, multiploetatik ZKH eta MKTko buruketetara', es: 'Cinco etapas, de los múltiplos a los problemas de m.c.d. y m.c.m.', ar: 'خمس مراحل، من المضاعفات إلى مسائل ق.م.أ وم.م.أ' },
     stages: divisibilityStages,
     topics: divisibilityTopics,
+    diagnostic: divisibilityDiagnostic,
+    guidedPractice: divisibilityPractice,
+    exerciseBank: divisibilityExerciseBank,
+    challenges: divisibilityChallenges,
     answers: {
         note: { eu: 'Idatzi emaitza zenbaki gisa, adibidez 12.', es: 'Escribe el resultado como un número, por ejemplo 12.', ar: 'اكتب النتيجة عددًا، مثل 12.' },
         defaultForm: 'simplified',
