@@ -1,7 +1,19 @@
 import type { LocalizedText } from '../content.ts'
-import { add, checkAnswer, compare, divide, equals, fraction, gcd, multiply, power, subtract, toLatex, type AnswerCheck, type AnswerForm, type FractionValue } from '../math/fraction.ts'
+import { add, checkAnswer, compare, divide, equals, fraction, gcd, multiply, power, subtract, toLatex, type AnswerCheck, type FractionValue } from '../math/fraction.ts'
 import { pick, randomInt, shuffle, type Random } from './random.ts'
 import type { Stars } from './records.ts'
+import {
+    parTimeFor,
+    positionFor,
+    rivalTimeFor,
+    starsFor,
+    type RaceOption as UnitRaceOption,
+    type RaceQuestion as UnitRaceQuestion,
+    type Rival,
+    type Tier
+} from '../../../features/unit-v2/games/raceCore.ts'
+
+export { lapShare, nextTier, PIT_AFTER, PIT_BONUS_MS, PIT_PENALTY_MS, RACE_QUESTIONS, rivals, TURBO_BONUS_MS, TURBO_STREAK, WRONG_PENALTY_MS, type Rival, type Tier } from '../../../features/unit-v2/games/raceCore.ts'
 
 /* ==========================================================================
    Zatikien lasterketa: question generators, rivals and scoring.
@@ -10,16 +22,6 @@ import type { Stars } from './records.ts'
    ========================================================================== */
 
 export const RACE_CIRCUITS = 6
-export const RACE_QUESTIONS = 10
-/** The pit stop comes after this many correct answers (half a lap) */
-export const PIT_AFTER = 5
-export const WRONG_PENALTY_MS = 4000
-export const TURBO_STREAK = 3
-export const TURBO_BONUS_MS = 1000
-export const PIT_BONUS_MS = 5000
-export const PIT_PENALTY_MS = 5000
-
-export type Tier = 0 | 1 | 2
 
 export type RaceErrorKind =
     | 'not-irreducible'
@@ -52,27 +54,8 @@ export type RaceErrorKind =
     | 'part-of-rest'
     | 'calculation'
 
-export interface RaceOption {
-    /** How the option is written (it matters for "simplify fully" questions) */
-    latex: string
-    correct: boolean
-    error: RaceErrorKind | null
-}
-
-export interface RaceQuestion {
-    circuit: number
-    kind: string
-    prompt: LocalizedText
-    options: RaceOption[]
-    answer: FractionValue
-    /** Written answers accepted at the pit stop */
-    answerForm: AnswerForm
-    /** Percent questions are answered with the number before the % sign */
-    percentAnswer: boolean
-    /** Only these kinds can be asked with a written answer */
-    writable: boolean
-    solution: LocalizedText
-}
+export type RaceOption = UnitRaceOption<RaceErrorKind>
+export type RaceQuestion = UnitRaceQuestion<RaceErrorKind>
 
 /* ---------- Writing helpers ---------- */
 
@@ -681,13 +664,6 @@ function generateAny(random: Random, circuit: number, tier: Tier): RaceQuestion 
     }
 }
 
-/** Three right answers in a row raise the level; two wrong answers in a row lower it */
-export function nextTier(tier: Tier, streak: number, wrongStreak: number): Tier {
-    if (streak > 0 && streak % 3 === 0) return Math.min(2, tier + 1) as Tier
-    if (wrongStreak >= 2) return Math.max(0, tier - 1) as Tier
-    return tier
-}
-
 /** Written answers at the pit stop. Percent answers may include the % sign. */
 export function checkPitAnswer(question: RaceQuestion, input: string): AnswerCheck {
     const cleaned = question.percentAnswer ? input.replace(/[%٪]/g, '') : input
@@ -696,43 +672,20 @@ export function checkPitAnswer(question: RaceQuestion, input: string): AnswerChe
 
 /** Expected time of an average student, in ms: the middle rival */
 export function parTime(circuit: number): number {
-    const secondsPerQuestion = [7, 7, 11, 12, 15, 12][circuit] ?? 10
-    return (RACE_QUESTIONS * secondsPerQuestion + 20) * 1000
+    return parTimeFor([7, 7, 11, 12, 15, 12][circuit] ?? 10)
 }
-
-export interface Rival {
-    id: string
-    name: string
-    /** Finish time as a multiple of the circuit's par time */
-    factor: number
-}
-
-export const rivals: Rival[] = [
-    { id: 'slow', name: 'Irati', factor: 1.3 },
-    { id: 'par', name: 'Unai', factor: 1 },
-    { id: 'fast', name: 'Nora', factor: 0.8 }
-]
 
 export function rivalTime(circuit: number, rival: Rival): number {
-    return Math.round(parTime(circuit) * rival.factor)
-}
-
-/** Share of the lap a car running at constant speed has covered */
-export function lapShare(elapsedMs: number, finishMs: number): number {
-    if (finishMs <= 0) return 1
-    return Math.min(1, Math.max(0, elapsedMs / finishMs))
+    return rivalTimeFor(parTime(circuit), rival)
 }
 
 export function raceStars(circuit: number, timeMs: number, mistakes: number): Stars {
-    const par = parTime(circuit)
-    if (timeMs <= par * 0.8 && mistakes <= 1) return 3
-    if (timeMs <= par) return 2
-    return 1
+    return starsFor(parTime(circuit), timeMs, mistakes)
 }
 
 /** 1 = winner. Ties go to the student. */
 export function racePosition(circuit: number, timeMs: number): number {
-    return 1 + rivals.filter((rival) => rivalTime(circuit, rival) < timeMs).length
+    return positionFor(parTime(circuit), timeMs)
 }
 
 export const raceErrorTips: Record<RaceErrorKind, LocalizedText> = {
