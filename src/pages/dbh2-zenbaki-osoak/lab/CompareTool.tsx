@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { NumberLine } from '../figures'
 import { signed } from '../format'
@@ -7,7 +8,7 @@ import { compareChallenges, initialCompareState, LINE_LIMITS, relationOf, setCom
 
 const relations: Relation[] = ['<', '=', '>']
 
-export function CompareTool(props: IntegerToolProps) {
+export function CompareTool(props: IntegerToolProps & { challenges?: LabChallenge<CompareState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<CompareState>(initialCompareState)
     const { first, second, guess } = state
@@ -32,7 +33,7 @@ export function CompareTool(props: IntegerToolProps) {
     )
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout || undefined} challenges={compareChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout || undefined} challenges={props.challenges ?? compareChallenges} state={state}>
             <div className="integers-lab-compare">
                 <p className="integers-lab-question">{l({ eu: 'Zein ikur doa erdian?', es: '¿Qué signo va en medio?', ar: 'أي رمز يوضع في الوسط؟' })}</p>
                 <div className="integers-lab-guess" dir="ltr">

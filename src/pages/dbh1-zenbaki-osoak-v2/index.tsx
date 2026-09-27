@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import '../dbh2-zenbaki-osoak/ZenbakiOsoak.css'
 import { integerIntroChallenges, integerIntroDiagnostic, integerIntroExerciseBank, integerIntroPractice } from './content'
 import { IntegersIntroHeroArt } from './figures'
+import { IntegerIntroLaboratory } from './lab'
+import { introLabChallengeIds, introLabToolForTopic, introLabTools } from './lab/labTools'
 import { integerIntroStages, integerIntroTopics } from './lessons'
 import './IntegersIntro.css'
 
@@ -25,6 +27,12 @@ const zenbakiOsoakIntroUnit: UnitDefinition = {
     guidedPractice: integerIntroPractice,
     exerciseBank: integerIntroExerciseBank,
     challenges: integerIntroChallenges,
+    lab: {
+        description: { eu: `${introLabTools.length} tresna zenbaki osoak ukitzeko: zuzena eta egoerak, alderaketa, ispilua, fitxak, jauziak, parentesiak eta zeinuen araua.`, es: `${introLabTools.length} herramientas para tocar los enteros: recta y situaciones, comparación, espejo, fichas, saltos, paréntesis y regla de los signos.`, ar: `${introLabTools.length} أدوات للمس الأعداد الصحيحة: المستقيم والمواقف والمقارنة والمرآة والبطاقات والقفزات والأقواس وقاعدة الإشارات.` },
+        progressIds: introLabChallengeIds,
+        toolForTopic: introLabToolForTopic,
+        render: (props) => <IntegerIntroLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi emaitza zenbaki oso gisa: −7, 12 edo +12.', es: 'Escribe el resultado como número entero: −7, 12 o +12.', ar: 'اكتب النتيجة عددًا صحيحًا: ⁦−7⁩ أو 12 أو ⁦+12⁩.' },
         defaultForm: 'simplified',

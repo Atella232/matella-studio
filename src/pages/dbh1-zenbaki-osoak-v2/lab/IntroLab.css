@@ -1,0 +1,74 @@
+/* Zenbaki osoak (1. DBH) laboratory: the brackets tool. The shared integer
+   tools are styled by the 2. DBH IntegerLab.css. */
+
+.integers-brackets {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    padding: 16px 12px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+}
+
+.integers-brackets-original {
+    text-align: center;
+    font-size: 26px;
+}
+
+.integers-brackets-flat {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.integers-brackets-fixed {
+    padding: 0 4px;
+}
+
+.integers-brackets-term {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 6px;
+    border: 1.8px dashed var(--line);
+    border-radius: 12px;
+}
+
+.integers-brackets-term.right {
+    border: 1.8px solid var(--green);
+    background: var(--green-tint);
+}
+
+.integers-brackets-term.wrong {
+    border: 1.8px solid var(--coral);
+    background: var(--coral-tint);
+}
+
+.integers-brackets-sign {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.integers-brackets-sign button {
+    width: 32px;
+    height: 26px;
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.integers-brackets-sign button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+}

@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { signed } from '../format'
 import { COUNTER_LIMITS, countersChallenges, countersSummary, initialCountersState, setCounters, type CountersState, type IntegerToolProps } from './labTools'
 
-export function CountersTool(props: IntegerToolProps) {
+export function CountersTool(props: IntegerToolProps & { challenges?: LabChallenge<CountersState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<CountersState>(initialCountersState)
     const { positive, negative } = state
@@ -39,7 +40,7 @@ export function CountersTool(props: IntegerToolProps) {
     )
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={countersChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? countersChallenges} state={state}>
             <div
                 className="integers-counters"
                 role="img"

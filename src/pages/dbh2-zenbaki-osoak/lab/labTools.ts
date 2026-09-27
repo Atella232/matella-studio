@@ -16,7 +16,8 @@ export interface IntegerLabTool extends UnitLabToolInfo {
     stage: IntegerStageId
 }
 
-export type IntegerToolProps = LabToolProps<IntegerLabTool>
+/** Loose on purpose: the 1. DBH unit reuses these tools with its own tool list and challenges */
+export type IntegerToolProps = LabToolProps<UnitLabToolInfo>
 
 export const integerLabTools: IntegerLabTool[] = [
     {

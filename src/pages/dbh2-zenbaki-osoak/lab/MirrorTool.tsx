@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { NumberLine, type NumberLinePoint, type NumberLineSpan } from '../figures'
 import { signed } from '../format'
 import { oppositeLatex, signedTex as tex, yesNo } from './text'
 import { initialMirrorState, LINE_LIMITS, mirrorChallenges, setMirrorValue, type IntegerToolProps, type MirrorState } from './labTools'
 
-export function MirrorTool(props: IntegerToolProps) {
+export function MirrorTool(props: IntegerToolProps & { challenges?: LabChallenge<MirrorState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<MirrorState>(initialMirrorState)
     const { value, showOpposite } = state
@@ -58,7 +59,7 @@ export function MirrorTool(props: IntegerToolProps) {
     }
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={mirrorChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? mirrorChallenges} state={state}>
             <div className="integers-lab-figure">
                 <NumberLine
                     min={LINE_LIMITS.min}

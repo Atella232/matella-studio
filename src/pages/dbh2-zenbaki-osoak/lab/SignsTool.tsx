@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { NumberLine, type NumberLineJump } from '../figures'
 import { signed } from '../format'
@@ -24,7 +25,7 @@ import { bracketTex, signedTex } from './text'
 const RANGE = SIGN_LIMITS.max * SIGN_LIMITS.max
 const signOf = (value: number) => (value < 0 ? '−' : '+')
 
-export function SignsTool(props: IntegerToolProps) {
+export function SignsTool(props: IntegerToolProps & { challenges?: LabChallenge<SignsState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<SignsState>(initialSignsState)
     const { op, groups, size } = state
@@ -85,7 +86,7 @@ export function SignsTool(props: IntegerToolProps) {
     if (groups < 0 && showJumps) jumps.push({ from: reach, to: -reach, tone: 'second', label: props.language === 'es' ? 'Op' : props.language === 'ar' ? 'معاكس' : 'Aur', row: 1 })
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={signsChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? signsChallenges} state={state}>
             <div className="integers-lab-figure">
                 <NumberLine
                     min={-RANGE}

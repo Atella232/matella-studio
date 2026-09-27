@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { NumberLine, type NumberLineJump } from '../figures'
 import { signed } from '../format'
@@ -8,7 +9,7 @@ import { IntegerAnswer } from './IntegerLabKit'
 import { integerResultVisible, initialJumpsState, JUMP_LIMITS, jumpMove, jumpsChallenges, jumpsResult, setJumps, type IntegerToolProps, type JumpsState } from './labTools'
 import { bracketTex, oppositeLatex, signedTex } from './text'
 
-export function JumpsTool(props: IntegerToolProps) {
+export function JumpsTool(props: IntegerToolProps & { challenges?: LabChallenge<JumpsState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<JumpsState>(initialJumpsState)
     const { start, op, amount } = state
@@ -57,7 +58,7 @@ export function JumpsTool(props: IntegerToolProps) {
     if (move !== 0) jumps.push({ from: start, to: result, tone: move > 0 ? 'stage' : 'second', label: signed(move), row: 1 })
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={jumpsChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? jumpsChallenges} state={state}>
             <div className="integers-lab-figure">
                 <NumberLine
                     min={min}

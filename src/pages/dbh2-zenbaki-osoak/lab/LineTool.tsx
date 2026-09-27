@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { NumberLine } from '../figures'
 import { signed } from '../format'
@@ -7,7 +8,7 @@ import { describeLineValue, initialLineState, LINE_LIMITS, lineChallenges, setLi
 
 const unitOf: Record<LineContext, string> = { plain: '', temperature: ' °C', floors: '', sea: ' m' }
 
-export function LineTool(props: IntegerToolProps) {
+export function LineTool(props: IntegerToolProps & { challenges?: LabChallenge<LineState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<LineState>(initialLineState)
     const { context, value } = state
@@ -54,7 +55,7 @@ export function LineTool(props: IntegerToolProps) {
     }[context]
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={lineChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? lineChallenges} state={state}>
             <div className="integers-lab-figure">
                 <NumberLine
                     min={LINE_LIMITS.min}
