@@ -1,0 +1,368 @@
+/* Zatigarritasuna laboratory models. The shared lab shell lives in
+   src/features/unit-v2/lab/LabKit.css. */
+
+.divisibility-number-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.divisibility-number-field > div {
+    display: flex;
+    gap: 8px;
+}
+
+.divisibility-number-field input {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 46px;
+    padding: 8px 12px;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    background: var(--card);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.divisibility-number-field input[aria-invalid="true"] {
+    border-color: var(--error);
+}
+
+.divisibility-number-field small {
+    color: var(--error-ink);
+}
+
+.divisibility-figure-box {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+    overflow-x: auto;
+}
+
+.divisibility-figure-box svg {
+    display: block;
+    width: 100%;
+    min-width: 520px;
+    height: auto;
+}
+
+.divisibility-lines {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ---------- Rectangles ---------- */
+
+.divisibility-rectangle {
+    display: grid;
+    gap: 4px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 12px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+}
+
+.divisibility-rectangle span {
+    aspect-ratio: 1;
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+    background: var(--stage-tint);
+}
+
+.divisibility-rectangle span.rest {
+    border-style: dashed;
+    border-color: var(--error);
+    background: var(--error-tint);
+}
+
+.divisibility-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.divisibility-found small {
+    color: var(--muted);
+    font-weight: 700;
+}
+
+/* ---------- Criteria machine ---------- */
+
+.divisibility-criteria-box {
+    width: 100%;
+}
+
+.divisibility-criteria {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 6px;
+    font-size: 16px;
+}
+
+.divisibility-criteria th,
+.divisibility-criteria td {
+    padding: 8px 10px;
+    text-align: start;
+    background: var(--card);
+    border-block: 2px solid var(--ink);
+}
+
+.divisibility-criteria thead th {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.divisibility-criteria tbody th {
+    border-inline-start: 2px solid var(--ink);
+    border-start-start-radius: 10px;
+    border-end-start-radius: 10px;
+    font-size: 20px;
+}
+
+.divisibility-criteria tbody td:last-child {
+    border-inline-end: 2px solid var(--ink);
+    border-start-end-radius: 10px;
+    border-end-end-radius: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.divisibility-criteria tr.yes th,
+.divisibility-criteria tr.yes td {
+    background: var(--success-tint);
+}
+
+.divisibility-criteria tr.yes td:last-child {
+    color: var(--success-ink);
+}
+
+.divisibility-criteria tr.no td:last-child {
+    color: var(--muted);
+}
+
+/* ---------- Sieve ---------- */
+
+.divisibility-sieve {
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    gap: 4px;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+}
+
+.divisibility-sieve button {
+    position: relative;
+    aspect-ratio: 1;
+    min-height: 32px;
+    padding: 0;
+    border: 1.5px solid var(--ink);
+    border-radius: 8px;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.divisibility-sieve button:hover:not(:disabled) {
+    background: var(--stage-tint);
+}
+
+.divisibility-sieve button.crossed {
+    border-color: var(--line);
+    color: var(--muted);
+    font-weight: 400;
+    text-decoration: line-through;
+    text-decoration-color: var(--error);
+    text-decoration-thickness: 2px;
+    opacity: 0.7;
+}
+
+.divisibility-sieve button.circled {
+    border-width: 3px;
+    border-radius: 50%;
+    background: var(--stage);
+    color: var(--stage-on);
+}
+
+.divisibility-sieve button.prime:not(.circled) {
+    background: var(--stage-tint);
+}
+
+/* ---------- Factor ladder ---------- */
+
+.divisibility-prime-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.divisibility-prime-buttons > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.divisibility-prime-buttons button {
+    min-width: 48px;
+    height: 48px;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    background: var(--card);
+    color: var(--ink);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.divisibility-prime-buttons button:hover:not(:disabled) {
+    background: var(--stage-tint);
+}
+
+.divisibility-prime-buttons button.big {
+    background: var(--stage);
+    color: var(--stage-on);
+}
+
+.divisibility-ladder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 120px;
+    padding: 16px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+    font-family: var(--font-display);
+    font-size: 24px;
+}
+
+.divisibility-ladder-row {
+    display: grid;
+    grid-template-columns: 110px 70px;
+}
+
+.divisibility-ladder-row span {
+    padding: 2px 14px;
+    border-inline-end: 3px solid var(--ink);
+    text-align: end;
+}
+
+.divisibility-ladder-row strong {
+    padding: 2px 14px;
+    color: var(--stage-ink);
+}
+
+.divisibility-ladder-row.current span {
+    background: var(--stage-tint);
+    border-radius: 8px 0 0 8px;
+}
+
+.divisibility-ladder-row.done span {
+    color: var(--success-ink);
+}
+
+/* ---------- Sorting problems ---------- */
+
+.divisibility-sort {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.divisibility-sort li {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+}
+
+.divisibility-sort li.right {
+    border-color: var(--success);
+    background: var(--success-tint);
+}
+
+.divisibility-sort li.wrong {
+    border-color: var(--error);
+    background: var(--error-tint);
+}
+
+.fraction-v2 .divisibility-sort p {
+    margin: 0;
+    font-size: 15px;
+}
+
+.divisibility-sort li > div {
+    display: flex;
+    gap: 8px;
+}
+
+.divisibility-sort button {
+    flex: 1;
+    min-height: 40px;
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    background: var(--paper);
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.divisibility-sort button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+}
+
+.fraction-v2 .divisibility-sort-score {
+    margin: 0;
+    font-weight: 700;
+}
+
+@media (max-width: 760px) {
+    .divisibility-sieve button {
+        min-height: 26px;
+        font-size: 12px;
+    }
+
+    .divisibility-criteria-box {
+        overflow-x: auto;
+    }
+
+    .divisibility-criteria {
+        font-size: 14px;
+    }
+
+    /* The calculation already shows the rule; keep the table within the screen */
+    .divisibility-criteria th:nth-child(2),
+    .divisibility-criteria td:nth-child(2) {
+        display: none;
+    }
+
+    .divisibility-criteria th,
+    .divisibility-criteria td {
+        padding: 6px 8px;
+    }
+
+    .divisibility-ladder {
+        font-size: 20px;
+    }
+}

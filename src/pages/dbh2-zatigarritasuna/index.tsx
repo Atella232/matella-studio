@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { divisibilityChallenges, divisibilityDiagnostic, divisibilityExerciseBank, divisibilityPractice } from './content'
 import { DivisibilityHeroArt } from './figures'
+import { DivisibilityLaboratory } from './lab'
+import { divisibilityLabChallengeIds, divisibilityLabToolForTopic, divisibilityLabTools } from './lab/labTools'
 import { divisibilityStages, divisibilityTopics } from './lessons'
 import './Zatigarritasuna.css'
 
@@ -24,6 +26,12 @@ const zatigarritasunaUnit: UnitDefinition = {
     guidedPractice: divisibilityPractice,
     exerciseBank: divisibilityExerciseBank,
     challenges: divisibilityChallenges,
+    lab: {
+        description: { eu: `${divisibilityLabTools.length} tresna multiploak, zatitzaileak, lehenak, ZKH eta MKT manipulatzeko, erronkekin.`, es: `${divisibilityLabTools.length} herramientas para manipular múltiplos, divisores, primos, m.c.d. y m.c.m., con retos.`, ar: `${divisibilityLabTools.length} أدوات للتعامل مع المضاعفات والقواسم والأعداد الأولية وق.م.أ وم.م.أ، مع تحديات.` },
+        progressIds: divisibilityLabChallengeIds,
+        toolForTopic: divisibilityLabToolForTopic,
+        render: (props) => <DivisibilityLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi emaitza zenbaki gisa, adibidez 12.', es: 'Escribe el resultado como un número, por ejemplo 12.', ar: 'اكتب النتيجة عددًا، مثل 12.' },
         defaultForm: 'simplified',
