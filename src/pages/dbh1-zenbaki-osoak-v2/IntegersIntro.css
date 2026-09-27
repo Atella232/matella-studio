@@ -1,0 +1,9 @@
+/* Zenbaki osoak (1. DBH) · unit-specific pieces. The number line and the
+   shared figures come from the 2. DBH unit stylesheet. */
+
+.integers-dbh1-hero-art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}

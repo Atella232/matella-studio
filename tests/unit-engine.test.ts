@@ -48,7 +48,8 @@ test('unit engine: legacy URLs open the matching section of any V2 unit', () => 
     assert.equal(practiceModeForPath('/matematika/dbh2/numeros-enteros/ariketak'), 'bank')
     assert.ok(isUnitV2Path('/matematika/dbh2/numeros-enteros/teoria'))
     assert.ok(isUnitV2Path('/matematika/dbh2/zatikiak'))
-    assert.ok(!isUnitV2Path('/matematika/dbh1/numeros-enteros'))
+    assert.ok(isUnitV2Path('/matematika/dbh1/numeros-enteros'))
+    assert.ok(!isUnitV2Path('/matematika/dbh1/algebra'))
     assert.ok(!isUnitV2Path('/matematika/dbh2/zatikiak-extra'))
 })
 

@@ -28,9 +28,7 @@ const HomePageDBH1_Zatigarritasuna = lazy(() => import('../pages/dbh1-zatigarrit
 const TheoryPageDBH1_Zatigarritasuna = lazy(() => import('../pages/dbh1-zatigarritasuna/TheoryPage').then((module) => ({ default: module.TheoryPage })))
 const LabPageDBH1_Zatigarritasuna = lazy(() => import('../pages/dbh1-zatigarritasuna/LabPage').then((module) => ({ default: module.LabPageDBH1_Zatigarritasuna })))
 
-const HomePageDBH1_ZenbakiOsoak = lazy(() => import('../pages/dbh1-zenbaki-osoak/HomePage').then((module) => ({ default: module.HomePage })))
-const TheoryPageDBH1_ZenbakiOsoak = lazy(() => import('../pages/dbh1-zenbaki-osoak/TheoryPage').then((module) => ({ default: module.TheoryPage })))
-const LabPageDBH1_ZenbakiOsoak = lazy(() => import('../pages/dbh1-zenbaki-osoak/LabPage').then((module) => ({ default: module.LabPageDBH1_ZenbakiOsoak })))
+const ZenbakiOsoakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-osoak-v2').then((module) => ({ default: module.ZenbakiOsoakIntroPage })))
 
 const HomePageDBH1_Algebra = lazy(() => import('../pages/dbh1-algebra/HomePage').then((module) => ({ default: module.HomePage })))
 const TheoryPageDBH1_Algebra = lazy(() => import('../pages/dbh1-algebra/TheoryPage').then((module) => ({ default: module.TheoryPage })))
@@ -120,18 +118,10 @@ export const router = createHashRouter([
                         path: 'matematika/dbh1/divisibilidad/laboratorio',
                         element: <LabPageDBH1_Zatigarritasuna />,
                     },
-                    // Ruta para Números Enteros de 1º ESO
+                    // Números enteros de 1º ESO: unidad V2, gestiona sus propias secciones por URL
                     {
-                        path: 'matematika/dbh1/numeros-enteros',
-                        element: <HomePageDBH1_ZenbakiOsoak />,
-                    },
-                    {
-                        path: 'matematika/dbh1/numeros-enteros/teoria',
-                        element: <TheoryPageDBH1_ZenbakiOsoak />,
-                    },
-                    {
-                        path: 'matematika/dbh1/numeros-enteros/laboratorio',
-                        element: <LabPageDBH1_ZenbakiOsoak />,
+                        path: 'matematika/dbh1/numeros-enteros/*',
+                        element: <ZenbakiOsoakDBH1Page />,
                     },
                     // Ruta para Álgebra de 1º ESO
                     {
