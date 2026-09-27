@@ -1,0 +1,180 @@
+/* Zatigarritasuna games: number hunt and quick factorization. Shared game
+   pieces live in src/features/unit-v2/games/Games.css. */
+
+.fraction-v2-games-card[data-game="hunt"] { --game-tint: var(--violet-tint); }
+.fraction-v2-games-card[data-game="factor"] { --game-tint: var(--mustard-tint); }
+
+.divisibility-hunt,
+.divisibility-factor {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* ---------- Number hunt ---------- */
+
+.fraction-v2 .divisibility-hunt-rule {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 12px;
+    margin: 0;
+}
+
+.divisibility-hunt-rule strong {
+    font-family: var(--font-display);
+    font-size: 28px;
+}
+
+.divisibility-hunt-rule span {
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.divisibility-hunt-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    padding: 18px;
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    background: var(--card);
+    box-shadow: 6px 6px 0 var(--ink);
+}
+
+.divisibility-hunt-grid button {
+    min-height: 64px;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.divisibility-hunt-grid button:hover:not(:disabled) {
+    background: var(--stage-tint);
+}
+
+.divisibility-hunt-grid button.found {
+    border-color: var(--success);
+    background: var(--success-tint);
+    color: var(--success-ink);
+}
+
+.divisibility-hunt-grid button.missed {
+    border-color: var(--error);
+    background: var(--error-tint);
+    animation: divisibility-shake 0.35s ease;
+}
+
+/* ---------- Quick factorization ---------- */
+
+.divisibility-factor-board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    padding: 28px 18px;
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    background: var(--card);
+    box-shadow: 6px 6px 0 var(--ink);
+}
+
+.divisibility-factor-number {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.divisibility-factor-number small {
+    color: var(--muted);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.divisibility-factor-number strong {
+    font-family: var(--font-display);
+    font-size: 64px;
+    line-height: 1;
+    animation: divisibility-pop 0.25s ease;
+}
+
+.divisibility-factor-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.divisibility-factor-buttons button {
+    width: 68px;
+    height: 68px;
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    background: var(--stage-tint);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 700;
+    box-shadow: 3px 3px 0 var(--ink);
+}
+
+.divisibility-factor-buttons button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--ink);
+}
+
+.divisibility-factor-buttons button.rejected {
+    border-color: var(--error);
+    background: var(--error-tint);
+    animation: divisibility-shake 0.35s ease;
+}
+
+@keyframes divisibility-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+}
+
+@keyframes divisibility-pop {
+    from { transform: scale(0.8); opacity: 0.4; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 760px) {
+    .divisibility-hunt-grid {
+        gap: 6px;
+        padding: 10px;
+    }
+
+    .divisibility-hunt-grid button {
+        min-height: 54px;
+        font-size: 20px;
+    }
+
+    .divisibility-hunt-rule strong {
+        font-size: 22px;
+    }
+
+    .divisibility-factor-number strong {
+        font-size: 52px;
+    }
+
+    .divisibility-factor-buttons button {
+        width: 58px;
+        height: 58px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .divisibility-hunt-grid button.missed,
+    .divisibility-factor-buttons button.rejected,
+    .divisibility-factor-number strong {
+        animation: none;
+    }
+}

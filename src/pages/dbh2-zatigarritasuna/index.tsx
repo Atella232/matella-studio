@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { divisibilityChallenges, divisibilityDiagnostic, divisibilityExerciseBank, divisibilityPractice } from './content'
 import { DivisibilityHeroArt } from './figures'
+import { DivisibilityGames } from './games'
+import { DIVISIBILITY_GAME_RECORDS_KEY, divisibilityGameProgressIds } from './games/info'
 import { DivisibilityLaboratory } from './lab'
 import { divisibilityLabChallengeIds, divisibilityLabToolForTopic, divisibilityLabTools } from './lab/labTools'
 import { divisibilityStages, divisibilityTopics } from './lessons'
@@ -31,6 +33,12 @@ const zatigarritasunaUnit: UnitDefinition = {
         progressIds: divisibilityLabChallengeIds,
         toolForTopic: divisibilityLabToolForTopic,
         render: (props) => <DivisibilityLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Lau joko multiploekin, lehenekin, ZKH eta MKTrekin azkar aritzeko.', es: 'Cuatro juegos para ganar rapidez con múltiplos, primos, m.c.d. y m.c.m.', ar: 'أربع ألعاب لاكتساب السرعة مع المضاعفات والأعداد الأولية وق.م.أ وم.م.أ.' },
+        progressIds: divisibilityGameProgressIds,
+        recordsKey: DIVISIBILITY_GAME_RECORDS_KEY,
+        render: (props) => <DivisibilityGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi emaitza zenbaki gisa, adibidez 12.', es: 'Escribe el resultado como un número, por ejemplo 12.', ar: 'اكتب النتيجة عددًا، مثل 12.' },
