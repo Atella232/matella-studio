@@ -70,15 +70,15 @@ export const divisibilityTopics: UnitTopic[] = [
             ar: 'حساب مضاعفات عدد وإيجاد المضاعفات المشتركة.'
         },
         explanation: {
-            eu: 'Zenbaki baten multiploak lortzeko, zenbaki hori 1, 2, 3, 4… zenbaki naturalekin biderkatzen da. Multiploen multzoa M(a) idazten da, eta infinitua da: ez du amaierarik. Bi zenbakiren multiplo komunak bi zerrendetan agertzen direnak dira.',
-            es: 'Para obtener los múltiplos de un número, se multiplica por los números naturales 1, 2, 3, 4… El conjunto de múltiplos se escribe M(a) y es infinito: no se acaba nunca. Los múltiplos comunes de dos números son los que aparecen en las dos listas.',
-            ar: 'للحصول على مضاعفات عدد نضربه في الأعداد الطبيعية 1، 2، 3، 4… وتُكتب مجموعة المضاعفات M(a) وهي غير منتهية. والمضاعفات المشتركة لعددين هي التي تظهر في القائمتين.'
+            eu: 'Zenbaki baten multiploak lortzeko, zenbaki hori 1, 2, 3, 4… zenbaki naturalekin biderkatzen da. Multiploen multzoa M(a) idazten da, eta infinitua da: ez du amaierarik. 0 ere zenbaki guztien multiploa da ($a\\cdot 0=0$), baina zerrendetan multiplo positiboak idazten ditugu. Bi zenbakiren multiplo komunak bi zerrendetan agertzen direnak dira.',
+            es: 'Para obtener los múltiplos de un número, se multiplica por los números naturales 1, 2, 3, 4… El conjunto de múltiplos se escribe M(a) y es infinito: no se acaba nunca. El 0 también es múltiplo de todos los números ($a\\cdot 0=0$), pero en las listas escribimos los múltiplos positivos. Los múltiplos comunes de dos números son los que aparecen en las dos listas.',
+            ar: 'للحصول على مضاعفات عدد نضربه في الأعداد الطبيعية 1، 2، 3، 4… وتُكتب مجموعة المضاعفات M(a) وهي غير منتهية. والصفر أيضًا مضاعف لكل الأعداد ($a\\cdot 0=0$)، لكننا نكتب في القوائم المضاعفات الموجبة. والمضاعفات المشتركة لعددين هي التي تظهر في القائمتين.'
         },
         stepsKind: 'facts',
         steps: [
             {
                 title: { eu: 'Nola kalkulatu', es: 'Cómo se calculan', ar: 'كيف نحسبها' },
-                text: { eu: 'Biderkatu 1ez, 2z, 3z… Lehen multiploa zenbakia bera da.', es: 'Multiplica por 1, 2, 3… El primer múltiplo es el propio número.', ar: 'اضرب في 1، 2، 3… وأول مضاعف هو العدد نفسه.' },
+                text: { eu: 'Biderkatu 1ez, 2z, 3z… Multiplo positiboetan, lehena zenbakia bera da.', es: 'Multiplica por 1, 2, 3… De los múltiplos positivos, el primero es el propio número.', ar: 'اضرب في 1، 2، 3… وأول مضاعف موجب هو العدد نفسه.' },
                 math: '$\\mathrm{M}(4)=\\{4,\\ 8,\\ 12,\\ 16,\\ 20,\\ \\dots\\}$'
             },
             {
@@ -93,9 +93,9 @@ export const divisibilityTopics: UnitTopic[] = [
         ],
         example: '$\\mathrm{M}(3)=\\{3,\\ 6,\\ 9,\\ 12,\\ 15,\\ 18,\\ \\dots\\}$',
         takeaway: {
-            eu: 'Multiploak = biderketak. Infinituak dira, eta txikiena zenbakia bera da.',
-            es: 'Múltiplos = multiplicaciones. Son infinitos y el menor es el propio número.',
-            ar: 'المضاعفات = عمليات ضرب. هي غير منتهية وأصغرها العدد نفسه.'
+            eu: 'Multiploak = biderketak. Infinituak dira, eta multiplo positibo txikiena zenbakia bera da.',
+            es: 'Múltiplos = multiplicaciones. Son infinitos y el menor múltiplo positivo es el propio número.',
+            ar: 'المضاعفات = عمليات ضرب. هي غير منتهية وأصغر مضاعف موجب هو العدد نفسه.'
         },
         figure: (language) => <MultiplesFigure step={3} max={24} language={language} />
     },

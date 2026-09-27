@@ -1,11 +1,11 @@
 import { useEffect, useState, type CSSProperties } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { MathText } from '../../components/MathText'
 import { DiagnosticQuiz } from './Diagnostic'
 import { Icon } from './icons'
 import { PracticeArea, PracticeDeck } from './Practice'
-import { practiceModeForPath, sectionForPath } from './routing'
+import { parseUnitPath, unitBasePath, unitPathFor, type PracticeMode } from './routing'
 import { useStoredIds, useStoredTopics } from './storage'
 import {
     availableSections,
@@ -28,20 +28,17 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
     const isRtl = language === 'ar'
     const l = (text: LocalizedText) => pickText(language, text)
     const sections = availableSections(unit)
-    const resolveSection = (pathname: string): UnitSection => {
-        const wanted = sectionForPath(pathname)
-        return sections.includes(wanted) ? wanted : 'route'
-    }
-    const [sectionState, setSectionState] = useState(() => ({
-        pathname: location.pathname,
-        section: resolveSection(location.pathname)
-    }))
-    const section: UnitSection = sectionState.pathname === location.pathname
-        ? sectionState.section
-        : resolveSection(location.pathname)
-    const [topicId, setTopicId] = useState(unit.topics[0].id)
+    const goTo = useNavigate()
+    const basePath = unitBasePath(location.pathname)
+    const place = parseUnitPath(location.pathname)
+    const section: UnitSection = sections.includes(place.section) ? place.section : 'route'
+    const topicInPath = unit.topics.find((topic) => topic.id === place.detail)?.id
+    // The lesson last opened, so the Learn tab and the practice keep their context
+    const [lastTopicId, setLastTopicId] = useState(unit.topics[0].id)
+    const topicId = section === 'learn' && topicInPath ? topicInPath : lastTopicId
+    const practiceTopic = section === 'practice' ? unit.topics.find((topic) => topic.id === place.detail) : undefined
+    const labTool = section === 'lab' ? place.detail ?? null : null
     const [moreOpen, setMoreOpen] = useState(false)
-    const [labTool, setLabTool] = useState<string | null>(null)
     const key = (suffix: string) => `${unit.storagePrefix}-${suffix}`
     const learned = useStoredTopics(key('learned'), unit.topics.map((topic) => topic.id))
     const diagnosticProgress = useStoredIds(key('diagnostic'))
@@ -63,10 +60,17 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
         return () => { document.title = previousTitle }
     }, [language, unit.documentTitle])
 
-    const navigate = (next: UnitSection) => {
-        setSectionState({ pathname: location.pathname, section: next })
+    const scrollToTop = () => {
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
         window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' })
+    }
+
+    /** Every move inside the unit changes the address, so reload, Back and shared links keep the place */
+    const navigate = (next: UnitSection, detail?: string, practiceMode?: PracticeMode) => {
+        const nextDetail = detail ?? (next === 'learn' ? topicId : undefined)
+        if (next === 'learn' && nextDetail) setLastTopicId(nextDetail)
+        goTo(unitPathFor(basePath, next, nextDetail, practiceMode))
+        scrollToTop()
     }
 
     const stageOf = (id: string) => unit.stages.find((stage) => stage.id === id) ?? unit.stages[0]
@@ -189,17 +193,18 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                 {section === 'lab' && unit.lab?.render({
                     language,
                     tool: labTool,
-                    onToolChange: setLabTool,
+                    onToolChange: (tool) => goTo(unitPathFor(basePath, 'lab', tool), { replace: true }),
                     completedIds: labProgress.ids,
                     onComplete: labProgress.addId,
                     onOpenLesson: openTopic
                 })}
                 {section === 'practice' && (
                     <PracticeArea
-                        key={`practice-${location.pathname}`}
                         unit={unit}
                         language={language}
-                        initialMode={practiceModeForPath(location.pathname)}
+                        mode={place.practiceMode}
+                        onModeChange={(mode) => goTo(unitPathFor(basePath, 'practice', practiceTopic?.id, mode), { replace: true })}
+                        focusStage={practiceTopic?.stage}
                         guidedCompletedIds={practiceProgress.ids}
                         onGuidedComplete={practiceProgress.addId}
                         bankCompletedIds={bankProgress.ids}
@@ -232,8 +237,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
     }
 
     function openTopic(nextTopic: string) {
-        setTopicId(nextTopic)
-        navigate('learn')
+        navigate('learn', nextTopic)
     }
 
     function renderRoute() {
@@ -379,11 +383,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
         const nextTopic = unit.topics[currentIndex + 1]
         const isLearned = learned.ids.includes(currentTopic.id)
         const labToolId = unit.lab?.toolForTopic[currentTopic.id]
-        const selectTopic = (id: string) => {
-            setTopicId(id)
-            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-            window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' })
-        }
+        const selectTopic = (id: string) => navigate('learn', id)
 
         return (
             <section className="fraction-v2-learning">
@@ -448,12 +448,12 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                                 : l({ eu: 'Ulertu dut', es: 'Lo he entendido', ar: 'فهمت' })}
                         </button>
                         {sections.includes('practice') && (
-                            <button type="button" className="fraction-v2-secondary" onClick={() => navigate('practice')}>
+                            <button type="button" className="fraction-v2-secondary" onClick={() => { setLastTopicId(currentTopic.id); navigate('practice', currentTopic.id) }}>
                                 {l({ eu: 'Praktikatu', es: 'Practicar', ar: 'تدرّب' })}
                             </button>
                         )}
                         {labToolId && (
-                            <button type="button" className="fraction-v2-secondary" onClick={() => { setLabTool(labToolId); navigate('lab') }}>
+                            <button type="button" className="fraction-v2-secondary" onClick={() => { setLastTopicId(currentTopic.id); navigate('lab', labToolId) }}>
                                 <Icon name="lab" size={18} />
                                 {l({ eu: 'Esperimentatu laborategian', es: 'Experimentar en el laboratorio', ar: 'جرّب في المختبر' })}
                             </button>

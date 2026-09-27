@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { availableSections, exerciseBankSize, totalGoals, type UnitDefinition } from '../src/features/unit-v2/types.ts'
-import { practiceModeForPath, sectionForPath } from '../src/features/unit-v2/routing.ts'
+import { parseUnitPath, practiceModeForPath, sectionForPath, unitBasePath, unitPathFor } from '../src/features/unit-v2/routing.ts'
 import { isUnitV2Path } from '../src/features/unit-v2/paths.ts'
 import { fraction } from '../src/features/unit-v2/math/fraction.ts'
 
@@ -50,4 +50,23 @@ test('unit engine: legacy URLs open the matching section of any V2 unit', () => 
     assert.ok(isUnitV2Path('/matematika/dbh2/zatikiak'))
     assert.ok(!isUnitV2Path('/matematika/dbh1/numeros-enteros'))
     assert.ok(!isUnitV2Path('/matematika/dbh2/zatikiak-extra'))
+})
+
+test('every place inside a unit has its own address', () => {
+    const base = '/matematika/dbh2/divisibilidad'
+    assert.equal(unitBasePath(`${base}/teoria/multiples`), base)
+    assert.deepEqual(parseUnitPath(`${base}/teoria/multiples`), { section: 'learn', practiceMode: 'guided', detail: 'multiples' })
+    assert.deepEqual(parseUnitPath(`${base}/laborategia/sieve`), { section: 'lab', practiceMode: 'guided', detail: 'sieve' })
+    assert.deepEqual(parseUnitPath(`${base}/praktika/primes`), { section: 'practice', practiceMode: 'guided', detail: 'primes' })
+    assert.equal(parseUnitPath(`${base}/ejercicios`).practiceMode, 'bank')
+    assert.equal(parseUnitPath(`${base}/diagnostikoa`).section, 'diagnostic')
+    assert.equal(parseUnitPath(`${base}/juegos/carrera`).section, 'play')
+    assert.equal(parseUnitPath(`${base}/zerbait`).section, 'route')
+    assert.equal(unitPathFor(base, 'route'), base)
+    assert.equal(unitPathFor(base, 'learn', 'multiples'), `${base}/teoria/multiples`)
+    assert.equal(unitPathFor(base, 'practice', 'primes', 'bank'), `${base}/ariketak/primes`)
+    assert.equal(unitPathFor(base, 'challenges'), `${base}/erronkak`)
+    for (const section of ['diagnostic', 'learn', 'lab', 'practice', 'challenges', 'play'] as const) {
+        assert.equal(parseUnitPath(unitPathFor(base, section, 'x')).section, section)
+    }
 })

@@ -23,7 +23,9 @@ function isChallengeItem(item: PracticeItem): item is ChallengeItem {
 export function PracticeArea({
     unit,
     language,
-    initialMode,
+    mode: requestedMode,
+    onModeChange,
+    focusStage,
     guidedCompletedIds,
     onGuidedComplete,
     bankCompletedIds,
@@ -31,7 +33,10 @@ export function PracticeArea({
 }: {
     unit: UnitDefinition
     language: UnitLanguage
-    initialMode: PracticeMode
+    mode: PracticeMode
+    onModeChange: (mode: PracticeMode) => void
+    /** Stage of the lesson the student comes from: practice starts there */
+    focusStage?: string
     guidedCompletedIds: number[]
     onGuidedComplete: (id: number) => void
     bankCompletedIds: number[]
@@ -40,10 +45,11 @@ export function PracticeArea({
     const l = (text: LocalizedText) => pickText(language, text)
     const guided = unit.guidedPractice ?? []
     const bankSize = exerciseBankSize(unit)
-    const [mode, setMode] = useState<PracticeMode>(guided.length === 0 ? 'bank' : bankSize === 0 ? 'guided' : initialMode)
+    const mode: PracticeMode = guided.length === 0 ? 'bank' : bankSize === 0 ? 'guided' : requestedMode
+    const setMode = (next: PracticeMode) => { if (next !== mode) onModeChange(next) }
 
-    const deck = <PracticeDeck unit={unit} items={guided} completedIds={guidedCompletedIds} onComplete={onGuidedComplete} language={language} />
-    const bank = <ExerciseBank unit={unit} completedIds={bankCompletedIds} onComplete={onBankComplete} language={language} />
+    const deck = <PracticeDeck key={`deck-${focusStage ?? ''}`} unit={unit} items={guided} completedIds={guidedCompletedIds} onComplete={onGuidedComplete} language={language} focusStage={focusStage} />
+    const bank = <ExerciseBank key={`bank-${focusStage ?? ''}`} unit={unit} completedIds={bankCompletedIds} onComplete={onBankComplete} language={language} focusStage={focusStage} />
     if (guided.length === 0) return bank
     if (bankSize === 0) return deck
 
@@ -68,17 +74,20 @@ function ExerciseBank({
     unit,
     completedIds,
     onComplete,
-    language
+    language,
+    focusStage
 }: {
     unit: UnitDefinition
     completedIds: number[]
     onComplete: (id: number) => void
     language: UnitLanguage
+    focusStage?: string
 }) {
     const l = (text: LocalizedText) => pickText(language, text)
     const sections = unit.exerciseBank ?? []
     const total = exerciseBankSize(unit)
-    const [sectionId, setSectionId] = useState(sections[0]?.id ?? '')
+    // Bank sections share their id with the stage they practise
+    const [sectionId, setSectionId] = useState(sections.find((item) => item.id === focusStage)?.id ?? sections[0]?.id ?? '')
     const [difficulty, setDifficulty] = useState<'all' | ExerciseDifficulty>('all')
     const [attempts, setAttempts] = useState<Record<string, string>>({})
     const [revealed, setRevealed] = useState<string[]>([])
@@ -173,7 +182,8 @@ export function PracticeDeck({
     completedIds,
     onComplete,
     language,
-    challengeMode = false
+    challengeMode = false,
+    focusStage
 }: {
     unit: UnitDefinition
     items: PracticeItem[]
@@ -181,9 +191,10 @@ export function PracticeDeck({
     onComplete: (id: number) => void
     language: UnitLanguage
     challengeMode?: boolean
+    focusStage?: string
 }) {
     const l = (text: LocalizedText) => pickText(language, text)
-    const [currentIndex, setCurrentIndex] = useState(0)
+    const [currentIndex, setCurrentIndex] = useState(() => startIndex(items, completedIds, focusStage))
     const [answers, setAnswers] = useState<Record<number, string>>({})
     const [feedback, setFeedback] = useState<Record<number, TaskFeedback>>({})
     const [hints, setHints] = useState<number[]>([])
@@ -274,4 +285,12 @@ export function PracticeDeck({
             </div>
         </section>
     )
+}
+
+/** First pending activity of the stage (or its first one if all are done); the first activity without a stage */
+function startIndex(items: PracticeItem[], completedIds: number[], stage?: string): number {
+    if (!stage) return 0
+    const inStage = items.map((item, index) => ({ item, index })).filter(({ item }) => item.stage === stage)
+    const pending = inStage.find(({ item }) => !completedIds.includes(item.id))
+    return (pending ?? inStage[0])?.index ?? 0
 }

@@ -44,7 +44,7 @@ export function TopicsPage() {
                         {fixMaybeText(getCourseName())}
                     </h1>
                     <p className="topics-subtitle">
-                        {t('topics.subtitle', { count: course.topics.length })}
+                        {t('topics.subtitle', { count: course.topics.filter((topic) => topic.active).length })}
                     </p>
                 </header>
 
