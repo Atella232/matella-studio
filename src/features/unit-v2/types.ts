@@ -46,6 +46,8 @@ export interface UnitTopic {
      */
     steps?: LessonStep[]
     stepsKind?: 'steps' | 'facts'
+    /** Exercise that the numbered steps solve, shown above them so the student knows where they are going */
+    problem?: LocalizedText
     /** Worked example, in LaTeX between $…$; per language when the notation differs (Div / Zat) */
     example: string | LocalizedText
     takeaway: LocalizedText

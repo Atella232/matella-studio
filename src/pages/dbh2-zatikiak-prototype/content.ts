@@ -20,11 +20,6 @@ export interface LearningStage {
     takeaway: LocalizedText
 }
 
-export interface TheoryTopic extends Omit<LearningStage, 'id' | 'tone'> {
-    id: TheoryTopicId
-    stage: FractionStageId
-}
-
 export interface PracticeItem {
     id: number
     stage: FractionStageId
@@ -220,132 +215,7 @@ export const learningStages: LearningStage[] = [
     }
 ]
 
-export const theoryTopics: TheoryTopic[] = [
-    { ...learningStages[0], id: 'meaning', stage: 'meaning' },
-    {
-        id: 'representation',
-        stage: 'meaning',
-        icon: '▥',
-        color: '#22d3ee',
-        title: { eu: 'Zatiki propioak, inpropioak eta mistoak', es: 'Fracciones propias, impropias y mixtas', ar: 'الكسور الحقيقية وغير الحقيقية والأعداد الكسرية' },
-        goal: { eu: 'Adierazpen batetik bestera igarotzea eta zenbaki-zuzenean kokatzea.', es: 'Pasar de una representación a otra y situarla en la recta.', ar: 'التحويل بين التمثيلات ووضع القيمة على خط الأعداد.' },
-        explanation: {
-            eu: 'Zenbakitzailea izendatzailea baino txikiagoa bada, zatikia propioa da. Handiagoa bada, unitate osoak ditu eta zenbaki misto gisa idatz daiteke. Zatiketa euklidearrak unitateak eta hondarra ematen ditu.',
-            es: 'Si el numerador es menor que el denominador, la fracción es propia. Si es mayor, contiene unidades completas y puede escribirse como número mixto. La división entera proporciona las unidades y el resto.',
-            ar: 'إذا كان البسط أصغر من المقام فالكسر حقيقي. وإذا كان أكبر فهو يحتوي وحدات كاملة ويمكن كتابته عددًا كسريًا. تعطينا القسمة الصحيحة عدد الوحدات والباقي.'
-        },
-        example: '$\\frac{17}{5}=3\\frac{2}{5}=3,4$',
-        takeaway: { eu: 'Adierazpena aldatzen da; balioa ez.', es: 'Cambia la representación, no el valor.', ar: 'يتغيّر التمثيل ولا تتغيّر القيمة.' }
-    },
-    { ...learningStages[1], id: 'equivalence', stage: 'equivalence' },
-    {
-        id: 'simplification',
-        stage: 'equivalence',
-        icon: '↓',
-        color: '#c084fc',
-        title: { eu: 'Sinplifikazioa eta zatiki laburtezina', es: 'Simplificación y fracción irreducible', ar: 'التبسيط والكسر غير القابل للاختزال' },
-        goal: { eu: 'Zatiki bat bere forma laburrenean idaztea z.k.h. erabiliz.', es: 'Escribir una fracción en su forma más reducida usando el MCD.', ar: 'كتابة الكسر في أبسط صورة باستعمال القاسم المشترك الأكبر.' },
-        explanation: {
-            eu: 'Zenbakitzailearen eta izendatzailearen zatitzaile komun handienarekin biak zatituz gero, zatiki laburtezina lortzen da urrats bakarrean. Zeinua zenbakitzailean gordetzen da.',
-            es: 'Al dividir numerador y denominador entre su máximo común divisor se obtiene la fracción irreducible en un solo paso. El signo se conserva en el numerador.',
-            ar: 'بقسمة البسط والمقام على القاسم المشترك الأكبر نحصل على أبسط صورة في خطوة واحدة، وتبقى الإشارة في البسط.'
-        },
-        example: '$\\frac{-84}{126}=\\frac{-2}{3}$',
-        takeaway: { eu: 'Sinplifikatu azken emaitza beti.', es: 'Simplifica siempre el resultado final.', ar: 'بسّط النتيجة النهائية دائمًا.' }
-    },
-    { ...learningStages[2], id: 'ordering', stage: 'ordering' },
-    {
-        id: 'add-subtract',
-        stage: 'operations',
-        icon: '+−',
-        color: '#fb7185',
-        title: { eu: 'Batuketa eta kenketa', es: 'Suma y resta', ar: 'الجمع والطرح' },
-        goal: { eu: 'Izendatzaile komun egokia aukeratu eta zeinuekin zuzen jardutea.', es: 'Elegir un denominador común adecuado y operar correctamente con signos.', ar: 'اختيار مقام مشترك مناسب وإجراء العمليات بالإشارات الصحيحة.' },
-        explanation: {
-            eu: 'Izendatzaile bera duten zatikietan zenbakitzaileak batu edo kentzen dira. Desberdinak badira, lehenik m.k.t. erabiliz baliokideak sortu. Izendatzailea ez da batzen.',
-            es: 'Con igual denominador se suman o restan los numeradores. Si son distintos, primero se crean equivalentes usando el m.c.m. Los denominadores no se suman.',
-            ar: 'عند تساوي المقامات نجمع أو نطرح البسوط. وإذا اختلفت نكوّن كسورًا مكافئة باستعمال المضاعف المشترك الأصغر. لا نجمع المقامات.'
-        },
-        example: '$\\frac{5}{6}-\\frac{1}{4}=\\frac{10}{12}-\\frac{3}{12}=\\frac{7}{12}$',
-        takeaway: { eu: 'Izendatzaile komuna lehenik; sinplifikazioa azkenik.', es: 'Denominador común primero; simplificación al final.', ar: 'المقام المشترك أولًا، والتبسيط أخيرًا.' }
-    },
-    {
-        id: 'multiply-divide',
-        stage: 'operations',
-        icon: '×÷',
-        color: '#f97316',
-        title: { eu: 'Biderketa eta zatiketa', es: 'Multiplicación y división', ar: 'الضرب والقسمة' },
-        goal: { eu: 'Gurutzatutako sinplifikazioa eta alderantzizkoa erabiltzea.', es: 'Utilizar la simplificación cruzada y la fracción inversa.', ar: 'استعمال الاختصار التبادلي ومقلوب الكسر.' },
-        explanation: {
-            eu: 'Biderketan zenbakitzaileak eta izendatzaileak zuzenean biderkatzen dira; aurretik gurutzatuta sinplifikatzeak zenbakiak txikitzen ditu. Zatiketa bigarren zatikiaren alderantzizkoaz biderkatzea da.',
-            es: 'En el producto se multiplican numeradores y denominadores; simplificar en cruz antes mantiene números pequeños. Dividir equivale a multiplicar por la inversa de la segunda fracción.',
-            ar: 'في الضرب نضرب البسوط والمقامات، والاختصار التبادلي قبل الضرب يبقي الأعداد صغيرة. والقسمة هي الضرب في مقلوب الكسر الثاني.'
-        },
-        example: '$-\\frac{4}{9}\\div\\frac{8}{15}=-\\frac{4}{9}\\cdot\\frac{15}{8}=-\\frac{5}{6}$',
-        takeaway: { eu: 'Zatitu: alderantzikatu bigarrena eta biderkatu.', es: 'Para dividir: invierte la segunda y multiplica.', ar: 'للقسمة: اقلب الكسر الثاني ثم اضرب.' }
-    },
-    {
-        id: 'combined',
-        stage: 'operations',
-        icon: '( )',
-        color: '#f43f5e',
-        title: { eu: 'Eragiketa konbinatuak', es: 'Operaciones combinadas', ar: 'العمليات المركبة' },
-        goal: { eu: 'Eragiketen hierarkia errespetatuz kalkulatzea.', es: 'Calcular respetando la jerarquía de operaciones.', ar: 'الحساب مع احترام ترتيب العمليات.' },
-        explanation: {
-            eu: 'Lehenik parentesiak eta berreturak; gero biderketak eta zatiketak; azkenik batuketak eta kenketak. Maila bereko eragiketak ezkerretik eskuinera egiten dira.',
-            es: 'Primero paréntesis y potencias; después multiplicaciones y divisiones; por último sumas y restas. Las operaciones del mismo nivel se resuelven de izquierda a derecha.',
-            ar: 'نبدأ بالأقواس والقوى، ثم الضرب والقسمة، وأخيرًا الجمع والطرح. وتُنجز العمليات من المستوى نفسه من اليسار إلى اليمين.'
-        },
-        example: '$\\frac{1}{2}+\\frac{3}{4}\\cdot\\frac{2}{9}=\\frac{1}{2}+\\frac{1}{6}=\\frac{2}{3}$',
-        takeaway: { eu: 'Ez egin dena batera: idatzi tarteko urratsak.', es: 'No lo hagas todo de una vez: escribe los pasos intermedios.', ar: 'لا تنجز كل شيء دفعة واحدة؛ اكتب الخطوات الوسيطة.' }
-    },
-    {
-        id: 'powers',
-        stage: 'operations',
-        icon: 'a²',
-        color: '#e879f9',
-        title: { eu: 'Zatikien berreturak', es: 'Potencias de fracciones', ar: 'قوى الكسور' },
-        goal: { eu: 'Oinarriaren zeinua eta berretzailearen paritatea kontrolatzea.', es: 'Controlar el signo de la base y la paridad del exponente.', ar: 'ضبط إشارة الأساس وزوجية الأس.' },
-        explanation: {
-            eu: 'Zenbakitzailea eta izendatzailea berretzen dira. Oinarri negatiboan, berretzaile bikoitiak emaitza positiboa ematen du eta bakoitiak negatiboa.',
-            es: 'Se elevan numerador y denominador. Con base negativa, un exponente par produce resultado positivo y uno impar, negativo.',
-            ar: 'نرفع البسط والمقام إلى القوة. إذا كان الأساس سالبًا كانت النتيجة موجبة للأس الزوجي وسالبة للأس الفردي.'
-        },
-        example: '$\\left(-\\frac{3}{5}\\right)^2=\\frac{9}{25}$',
-        takeaway: { eu: 'Parentesiek zeinua berreturaren barruan dagoen argitzen dute.', es: 'Los paréntesis indican si el signo forma parte de la potencia.', ar: 'توضّح الأقواس هل الإشارة جزء من القوة.' }
-    },
-    {
-        id: 'fraction-of',
-        stage: 'proportionality',
-        icon: '▣',
-        color: '#2dd4bf',
-        title: { eu: 'Kantitate baten zatikia', es: 'Fracción de una cantidad', ar: 'كسر من كمية' },
-        goal: { eu: 'Zati bat, guztizkoa edo falta den kantitatea aurkitzea.', es: 'Encontrar una parte, el total o la cantidad que falta.', ar: 'إيجاد الجزء أو الكل أو الكمية الناقصة.' },
-        explanation: {
-            eu: 'Kantitate baten zatikia aurkitzeko, kantitatea zatikiarekin biderkatu. Zatia ezaguna eta guztizkoa ezezaguna bada, zatiarekin zatitu edo alderantzizkoaz biderkatu.',
-            es: 'Para hallar una fracción de una cantidad, se multiplica la cantidad por la fracción. Si se conoce la parte y se busca el total, se divide entre la fracción.',
-            ar: 'لإيجاد كسر من كمية نضرب الكمية في الكسر. وإذا عرفنا الجزء وأردنا الكل نقسم على الكسر.'
-        },
-        example: '$\\frac{3}{8}\\text{ de }120=45\\qquad 45\\div\\frac{3}{8}=120$',
-        takeaway: { eu: 'Galderak zatiari edo guztizkoari buruz ari den identifikatu.', es: 'Identifica si la pregunta pide la parte o el total.', ar: 'حدّد هل المطلوب هو الجزء أم الكل.' }
-    },
-    {
-        id: 'percentages',
-        stage: 'proportionality',
-        icon: '%',
-        color: '#34d399',
-        title: { eu: 'Zatikiak, hamartarrak eta ehunekoak', es: 'Fracciones, decimales y porcentajes', ar: 'الكسور والأعداد العشرية والنسب المئوية' },
-        goal: { eu: 'Hiru adierazpenen artean zehaztasuna galdu gabe bihurtzea.', es: 'Convertir entre las tres representaciones sin perder exactitud.', ar: 'التحويل بين التمثيلات الثلاثة من دون فقدان الدقة.' },
-        explanation: {
-            eu: 'Zatikia hamartar bihurtzeko zenbakitzailea izendatzaileaz zatitu. Hamartar finitua ez bada, errepikapena edo hurbilketa adierazi behar da. Ehunekoa lortzeko balioa 100ez biderkatzen da.',
-            es: 'Para pasar a decimal se divide numerador entre denominador. Si no termina, debe indicarse el período o que es una aproximación. Para obtener el porcentaje se multiplica el valor por 100.',
-            ar: 'للتحويل إلى عدد عشري نقسم البسط على المقام. وإذا لم ينتهِ العدد وجب بيان الدوري أو التقريب. وللحصول على النسبة المئوية نضرب القيمة في 100.'
-        },
-        example: '$\\frac{3}{8}=0,375=37,5\\%\\qquad \\frac{1}{3}=0,\\overline{3}\\neq0,33$',
-        takeaway: { eu: '“=” eta “≈” ez dira gauza bera.', es: '“=” y “≈” no significan lo mismo.', ar: 'الرمزان “=” و“≈” لا يعنيان الشيء نفسه.' }
-    },
-    { ...learningStages[4], id: 'proportionality', stage: 'proportionality' }
-]
+export { theoryTopics, type TheoryTopic } from './lessons.ts'
 
 export const guidedPractice: PracticeItem[] = [
     {

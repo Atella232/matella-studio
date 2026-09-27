@@ -113,6 +113,7 @@ export const divisibilityTopics: UnitTopic[] = [
             es: 'Los divisores de un número son los números que lo dividen de forma exacta. Se escribe Div(a) y es un conjunto finito: el menor es 1 y el mayor, el propio número. Para encontrarlos todos, divide entre 1, 2, 3… y anota los divisores por parejas; cuando las parejas empiezan a repetirse, has terminado.',
             ar: 'قواسم عدد هي الأعداد التي تقسمه قسمة تامة. وتُكتب مجموعتها Zat(a) وهي منتهية: أصغرها 1 وأكبرها العدد نفسه. لإيجادها كلها اقسم على 1، 2، 3… واكتب القواسم أزواجًا؛ وعندما تبدأ الأزواج بالتكرار تكون قد انتهيت.'
         },
+        problem: { eu: 'Aurkitu 36ren zatitzaile guztiak.', es: 'Encuentra todos los divisores de 36.', ar: 'أوجد جميع قواسم 36.' },
         stepsKind: 'steps',
         steps: [
             { text: { eu: 'Zatitu 1ez eta idatzi bikotea.', es: 'Divide entre 1 y anota la pareja.', ar: 'اقسم على 1 واكتب الزوج.' }, math: '$36=1\\cdot 36$' },
@@ -230,6 +231,7 @@ export const divisibilityTopics: UnitTopic[] = [
             es: 'Los números primos solo tienen dos divisores: 1 y el propio número. Los números compuestos tienen más de dos divisores. El 1 solo tiene un divisor, así que no es ni primo ni compuesto. La criba de Eratóstenes ayuda a encontrar los primos hasta 100.',
             ar: 'للأعداد الأولية قاسمان فقط: 1 والعدد نفسه. وللأعداد المؤلفة أكثر من قاسمين. أما العدد 1 فله قاسم واحد، فهو ليس أوليًا ولا مؤلفًا. ويساعد غربال إراتوستينس على إيجاد الأعداد الأولية حتى 100.'
         },
+        problem: { eu: 'Bilatu 50 baino txikiagoak diren zenbaki lehen guztiak.', es: 'Busca todos los números primos menores que 50.', ar: 'ابحث عن كل الأعداد الأولية الأصغر من 50.' },
         stepsKind: 'steps',
         steps: [
             { title: { eu: 'Eratostenesen bahea', es: 'Criba de Eratóstenes', ar: 'غربال إراتوستينس' }, text: { eu: 'Ratatu 1. Utzi 2 eta ratatu haren multiplo guztiak.', es: 'Tacha el 1. Deja el 2 y tacha todos sus múltiplos.', ar: 'اشطب 1. أبقِ 2 واشطب كل مضاعفاته.' } },
@@ -258,6 +260,7 @@ export const divisibilityTopics: UnitTopic[] = [
             es: 'Todo número compuesto se puede escribir como producto de números primos, y de una única forma. Para ello, divide el número entre el menor primo posible (usando los criterios de divisibilidad), después el cociente, y así hasta llegar a 1. Los factores repetidos se escriben como potencias.',
             ar: 'يمكن كتابة كل عدد مؤلف في صورة حاصل ضرب أعداد أولية، وبطريقة واحدة فقط. لذلك اقسم العدد على أصغر عدد أولي ممكن (باستعمال قواعد قابلية القسمة)، ثم اقسم الناتج، وهكذا حتى تصل إلى 1. وتُكتب العوامل المكررة في صورة قوى.'
         },
+        problem: { eu: 'Deskonposatu 360 biderkagai lehenetan.', es: 'Descompón 360 en factores primos.', ar: 'حلّل 360 إلى عوامل أولية.' },
         stepsKind: 'steps',
         steps: [
             { text: { eu: 'Idatzi zenbakia marra bertikal baten ezkerrean.', es: 'Escribe el número a la izquierda de una raya vertical.', ar: 'اكتب العدد على يسار خط عمودي.' } },
@@ -287,6 +290,7 @@ export const divisibilityTopics: UnitTopic[] = [
             es: 'El m.c.d. de dos o más números es el mayor de sus divisores comunes. Con números pequeños, escribe las listas de divisores y toma el mayor de los comunes. Con números grandes, descompón en factores primos y multiplica los factores comunes con el menor exponente.',
             ar: 'ق.م.أ لعددين أو أكثر هو أكبر قواسمهما المشتركة. مع الأعداد الصغيرة اكتب قوائم القواسم وخذ أكبر المشترك منها. ومع الأعداد الكبيرة حلّل إلى عوامل أولية واضرب العوامل المشتركة بأصغر أس.'
         },
+        problem: { eu: 'Kalkulatu 24ren eta 36ren ZKH.', es: 'Calcula el m.c.d. de 24 y 36.', ar: 'احسب ق.م.أ للعددين 24 و36.' },
         stepsKind: 'steps',
         steps: [
             { text: { eu: 'Deskonposatu zenbaki bakoitza.', es: 'Descompón cada número.', ar: 'حلّل كل عدد.' }, math: '$24=2^{3}\\cdot 3\\qquad 36=2^{2}\\cdot 3^{2}$' },
@@ -315,6 +319,7 @@ export const divisibilityTopics: UnitTopic[] = [
             es: 'El m.c.m. de dos o más números es el menor de sus múltiplos comunes (sin contar el 0). Con números pequeños, escribe las listas de múltiplos. Con números grandes, descompón y multiplica los factores comunes y no comunes, cada uno con su mayor exponente. Si el m.c.d. de dos números es 1, son primos entre sí y su m.c.m. es su producto.',
             ar: 'م.م.أ لعددين أو أكثر هو أصغر مضاعفاتهما المشتركة (دون احتساب 0). مع الأعداد الصغيرة اكتب قوائم المضاعفات. ومع الأعداد الكبيرة حلّل واضرب العوامل المشتركة وغير المشتركة، كل منها بأكبر أس. وإذا كان ق.م.أ لعددين يساوي 1 فهما أوليان فيما بينهما، ويكون م.م.أ حاصل ضربهما.'
         },
+        problem: { eu: 'Kalkulatu 24ren eta 36ren MKT.', es: 'Calcula el m.c.m. de 24 y 36.', ar: 'احسب م.م.أ للعددين 24 و36.' },
         stepsKind: 'steps',
         steps: [
             { text: { eu: 'Deskonposatu zenbaki bakoitza.', es: 'Descompón cada número.', ar: 'حلّل كل عدد.' }, math: '$24=2^{3}\\cdot 3\\qquad 36=2^{2}\\cdot 3^{2}$' },
@@ -365,10 +370,11 @@ export const divisibilityTopics: UnitTopic[] = [
             ar: 'حل مسائل ق.م.أ وم.م.أ بترتيب وإعطاء النتيجة في جملة.'
         },
         explanation: {
-            eu: 'Klasean ikasitako lau urratsak jarraitu. Adibidea: 4 mm-ko 9 bola gorri, 6 mm-ko 12 bola berde eta 8 mm-ko 15 bola urdin ditugu, eta kolore bakarreko lepokoak egin nahi ditugu, denak bola kopuru berarekin.',
-            es: 'Sigue los cuatro pasos de clase. Ejemplo: tenemos 9 bolas rojas de 4 mm, 12 verdes de 6 mm y 15 azules de 8 mm, y queremos hacer collares de un solo color, todos con el mismo número de bolas.',
-            ar: 'اتبع الخطوات الأربع التي تعلّمتها في القسم. مثال: لدينا 9 كرات حمراء قطرها 4 مم، و12 خضراء قطرها 6 مم، و15 زرقاء قطرها 8 مم، ونريد صنع عقود بلون واحد، كلها بعدد الكرات نفسه.'
+            eu: 'Klasean ikasitako lau urratsak jarraitu: erabaki ZKH ala MKT behar den, faktorizatu, kalkulatu eta interpretatu emaitza. Behean ZKHko buruketa bat dago ebatzita. Amaierako adibidean, bolek 4, 6 eta 8 mm dituzte, eta kolore bakoitzeko ilarak bat egiten duten luzera txikiena bilatzen da: MKT bat.',
+            es: 'Sigue los cuatro pasos de clase: decide si hace falta el m.c.d. o el m.c.m., factoriza, calcula e interpreta el resultado. Abajo tienes resuelto un problema de m.c.d. En el ejemplo final, las bolas miden 4, 6 y 8 mm y se busca la menor longitud en la que coinciden hileras de cada color: un m.c.m.',
+            ar: 'اتبع الخطوات الأربع التي تعلّمتها في القسم: قرّر هل تحتاج إلى ق.م.أ أم م.م.أ، ثم حلّل، ثم احسب، ثم فسّر النتيجة. في الأسفل مسألة محلولة عن ق.م.أ. وفي المثال الأخير أقطار الكرات 4 و6 و8 مم، ونبحث عن أصغر طول تتطابق فيه صفوف كل لون: وهذا م.م.أ.'
         },
+        problem: { eu: '9 bola gorri, 12 berde eta 15 urdin ditugu. Kolore bakarreko lepokoak egin nahi ditugu, denak bola kopuru berarekin, ahalik eta luzeenak eta bolarik soberan utzi gabe. Zenbat bola izango ditu lepoko bakoitzak?', es: 'Tenemos 9 bolas rojas, 12 verdes y 15 azules. Queremos hacer collares de un solo color, todos con el mismo número de bolas, lo más largos posible y sin que sobre ninguna. ¿Cuántas bolas tendrá cada collar?', ar: 'لدينا 9 كرات حمراء و12 خضراء و15 زرقاء. نريد صنع عقود بلون واحد، كلها بعدد الكرات نفسه، وأطول ما يمكن، دون أن تبقى أي كرة. كم كرة سيكون في كل عقد؟' },
         stepsKind: 'steps',
         steps: [
             { title: { eu: 'ZKH ala MKT?', es: '¿m.c.d. o m.c.m.?', ar: 'ق.م.أ أم م.م.أ؟' }, text: { eu: 'Bolak lepokoetan banatzen ditugu, soberakinik gabe: 9, 12 eta 15en zatitzaile komuna behar dugu → ZKH.', es: 'Repartimos bolas en collares, sin que sobren: necesitamos un divisor común de 9, 12 y 15 → m.c.d.', ar: 'نوزّع الكرات على عقود دون أن يبقى شيء: نحتاج قاسمًا مشتركًا لـ 9 و12 و15 ← ق.م.أ.' } },

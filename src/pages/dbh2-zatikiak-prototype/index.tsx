@@ -1,5 +1,6 @@
 import { UnitPage } from '../../features/unit-v2/UnitPage'
-import type { UnitDefinition } from '../../features/unit-v2/types'
+import type { ReactNode } from 'react'
+import type { UnitDefinition, UnitLanguage } from '../../features/unit-v2/types'
 import {
     challenges,
     diagnosticQuestions,
@@ -13,6 +14,23 @@ import { labChallengeIds, labToolForTopic, labTools } from './lab/labTools'
 import { GamesArea } from './games'
 import { GAME_RECORDS_KEY, gameProgressIds } from './games/records'
 import { gameModeForPath } from './routing'
+import { AddFigure, AreaFigure, EquivalenceFigure, FractionOfFigure, MeaningFigure, MixedFigure, OrderFigure, PercentFigure, PowerFigure, ProportionFigure, SimplifyFigure } from './figures'
+import type { TheoryTopicId } from './content'
+
+/** The model drawn under each lesson; 'combined' is shown with its steps only */
+const lessonFigures: Partial<Record<TheoryTopicId, (language: UnitLanguage) => ReactNode>> = {
+    meaning: (language) => <MeaningFigure language={language} />,
+    representation: (language) => <MixedFigure language={language} />,
+    equivalence: (language) => <EquivalenceFigure language={language} />,
+    simplification: (language) => <SimplifyFigure language={language} />,
+    ordering: (language) => <OrderFigure language={language} />,
+    'add-subtract': (language) => <AddFigure language={language} />,
+    'multiply-divide': (language) => <AreaFigure language={language} />,
+    powers: (language) => <PowerFigure language={language} />,
+    'fraction-of': (language) => <FractionOfFigure language={language} />,
+    percentages: (language) => <PercentFigure language={language} />,
+    proportionality: (language) => <ProportionFigure language={language} />
+}
 
 const zatikiakUnit: UnitDefinition = {
     storagePrefix: 'matella-zatikiak-v2',
@@ -41,7 +59,7 @@ const zatikiakUnit: UnitDefinition = {
     ),
     pathSubtitle: { eu: 'Bost etapa, zatikiaren ideiatik proportzionaltasunera', es: 'Cinco etapas, de la idea de fracción a la proporcionalidad', ar: 'خمس مراحل، من فكرة الكسر إلى التناسب' },
     stages: learningStages,
-    topics: theoryTopics,
+    topics: theoryTopics.map((topic) => ({ ...topic, figure: lessonFigures[topic.id] })),
     diagnostic: diagnosticQuestions,
     guidedPractice,
     exerciseBank: fractionExerciseSections,

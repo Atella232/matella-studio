@@ -415,6 +415,12 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                     <h1 id="fraction-v2-lesson-title">{l(currentTopic.title)}</h1>
                     <p className="fraction-v2-lesson-goal"><strong>{l({ eu: 'Helburua:', es: 'Objetivo:', ar: 'الهدف:' })}</strong> {l(currentTopic.goal)}</p>
                     <p className="fraction-v2-lesson-body"><MathText text={l(currentTopic.explanation)} /></p>
+                    {currentTopic.problem && (
+                        <div className="fraction-v2-lesson-problem">
+                            <span>{l({ eu: 'Ebatz dezagun', es: 'Vamos a resolver', ar: 'لنحلّ' })}</span>
+                            <p><MathText text={l(currentTopic.problem)} /></p>
+                        </div>
+                    )}
                     {currentTopic.steps && (
                         <ol className={`fraction-v2-lesson-steps ${currentTopic.stepsKind ?? 'steps'}`}>
                             {currentTopic.steps.map((step, index) => (

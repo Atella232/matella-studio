@@ -32,6 +32,11 @@ test('keeps every localized theory and challenge text populated', () => {
             assert.ok(topic.goal[language].trim())
             assert.ok(topic.explanation[language].trim())
             assert.ok(topic.takeaway[language].trim())
+            assert.ok((typeof topic.example === 'string' ? topic.example : topic.example[language]).includes('$'))
+        }
+        assert.ok((topic.steps?.length ?? 0) >= 3, `${topic.id} explains its idea in steps`)
+        for (const step of topic.steps ?? []) {
+            for (const language of ['eu', 'es', 'ar'] as const) assert.ok(step.text[language].trim())
         }
     }
 

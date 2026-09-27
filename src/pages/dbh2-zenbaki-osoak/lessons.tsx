@@ -144,6 +144,7 @@ export const integerTopics: UnitTopic[] = [
             ar: 'ترتيب قائمة من الأعداد الصحيحة تصاعديًا وتنازليًا.'
         },
         explanation: { eu: 'Adibidez, ordenatu handienetik txikienera: −10, +4, +9, 0, −6, −8, +3. Jarraitu urrats hauek:', es: 'Por ejemplo, ordena de mayor a menor: −10, +4, +9, 0, −6, −8, +3. Sigue estos pasos:', ar: 'مثال: رتّب تنازليًا: ⁦−10⁩، ⁦+4⁩، ⁦+9⁩، 0، ⁦−6⁩، ⁦−8⁩، ⁦+3⁩. اتبع هذه الخطوات:' },
+        problem: { eu: 'Ordenatu handienetik txikienera: $+4,\\ -10,\\ +9,\\ -6,\\ 0,\\ +3,\\ -8$.', es: 'Ordena de mayor a menor: $+4,\\ -10,\\ +9,\\ -6,\\ 0,\\ +3,\\ -8$.', ar: 'رتّب من الأكبر إلى الأصغر: $+4,\\ -10,\\ +9,\\ -6,\\ 0,\\ +3,\\ -8$.' },
         steps: [
             { text: { eu: 'Banatu positiboak alde batean eta negatiboak bestean; zeroa erdian.', es: 'Separa los positivos a un lado y los negativos al otro; el cero, en medio.', ar: 'افصل الموجبة في جهة والسالبة في جهة أخرى، والصفر في الوسط.' }, math: '$+4,\\,+9,\\,+3\\quad\\mid\\quad 0\\quad\\mid\\quad -10,\\,-6,\\,-8$' },
             { text: { eu: 'Ordenatu positiboak zenbaki arruntak bezala.', es: 'Ordena los positivos como números naturales.', ar: 'رتّب الموجبة كالأعداد الطبيعية.' }, math: '$+9>+4>+3$' },
@@ -281,6 +282,7 @@ export const integerTopics: UnitTopic[] = [
             ar: 'حل العمليات المركبة مع احترام أولوية العمليات.'
         },
         explanation: { eu: 'Eragiketa konbinatuetan ordena hau errespetatu behar da. Urrats bakoitzean, zaindu zeinuak.', es: 'En las operaciones combinadas hay que respetar este orden. En cada paso, cuida los signos.', ar: 'في العمليات المركبة يجب احترام هذا الترتيب، مع الانتباه للإشارات في كل خطوة.' },
+        problem: { eu: 'Kalkulatu $(-4)-[(-8)-(+2)]\\mathbin{:}(-5)+(-6)\\mathbin{:}[(+1)-(-2)]$.', es: 'Calcula $(-4)-[(-8)-(+2)]\\mathbin{:}(-5)+(-6)\\mathbin{:}[(+1)-(-2)]$.', ar: 'احسب $(-4)-[(-8)-(+2)]\\mathbin{:}(-5)+(-6)\\mathbin{:}[(+1)-(-2)]$.' },
         steps: [
             { title: { eu: 'Parentesiak eta kakoak', es: 'Paréntesis y corchetes', ar: 'الأقواس' }, text: { eu: 'Parentesi eta kako zuzenen barruko eragiketak, barrutik kanpora.', es: 'Las operaciones dentro de paréntesis y corchetes, de dentro hacia fuera.', ar: 'العمليات داخل الأقواس والأقواس المعقوفة، من الداخل إلى الخارج.' }, math: '$[(-8)-(+2)]=-10$' },
             { title: { eu: 'Biderketak eta zatiketak', es: 'Productos y cocientes', ar: 'الضرب والقسمة' }, text: { eu: 'Agertzen diren ordenan, ezkerretik eskuinera.', es: 'En el orden en que aparecen, de izquierda a derecha.', ar: 'حسب ترتيب ظهورها، من اليسار إلى اليمين.' }, math: '$(-10)\\mathbin{:}(-5)=+2$' },

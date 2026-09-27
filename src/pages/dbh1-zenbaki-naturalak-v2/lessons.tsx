@@ -218,6 +218,7 @@ export const naturalsTopics: UnitTopic[] = [
             es: 'Para redondear un número a un orden, mira la cifra que está a la derecha de la que vas a redondear. Si es 5 o mayor, se suma 1 a la cifra que redondeas; si es 4 o menor, se deja igual. Todas las cifras de la derecha pasan a ser ceros. Así se obtiene el número «redondo» más cercano al original.',
             ar: 'لتقريب عدد إلى مرتبة معيّنة ننظر إلى الرقم الذي على يمين الرقم المراد تقريبه. إذا كان 5 أو أكبر نضيف 1 إلى الرقم المقرَّب، وإذا كان 4 أو أصغر نتركه كما هو. وتصبح كل الأرقام التي على اليمين أصفارًا. هكذا نحصل على أقرب عدد «مدوَّر» إلى العدد الأصلي.'
         },
+        problem: { eu: 'Biribildu 14.823 milakoetara.', es: 'Redondea 14.823 a los millares.', ar: `قرّب ${ltr('14.823')} إلى الآلاف.` },
         stepsKind: 'steps',
         steps: [
             { text: { eu: 'Markatu biribildu beharreko zifra. Milakoetara: 4.', es: 'Marca la cifra que vas a redondear. A los millares: el 4.', ar: 'حدّد الرقم المراد تقريبه. إلى الآلاف: 4.' }, math: '$1\\underline{4}.823$' },
@@ -247,10 +248,11 @@ export const naturalsTopics: UnitTopic[] = [
             es: 'Estimar es calcular un resultado aproximado después de redondear los números. Se hace mentalmente y sirve para dos cosas: dar una respuesta rápida cuando no hace falta mucha precisión, y comprobar si el resultado de un cálculo exacto es razonable.',
             ar: 'التقدير هو حساب نتيجة تقريبية بعد تقريب الأعداد. يتم ذهنيًا ويفيد في أمرين: إعطاء جواب سريع عندما لا نحتاج إلى دقة كبيرة، والتحقق من أن نتيجة الحساب الدقيق معقولة.'
         },
+        problem: { eu: 'Carmenek 167 €, 235 € eta 32 € ordaindu ditu. Gutxi gorabehera, zenbat ordaindu du guztira?', es: 'Carmen ha pagado 167 €, 235 € y 32 €. ¿Cuánto ha pagado en total, aproximadamente?', ar: 'دفعت كارمن 167 € و235 € و32 €. كم دفعت في المجموع تقريبًا؟' },
         stepsKind: 'steps',
         steps: [
             {
-                text: { eu: 'Carmenek 167 €, 235 € eta 32 € ordaindu ditu. Biribildu zenbaki bakoitza hamarrekoetara.', es: 'Carmen ha pagado 167 €, 235 € y 32 €. Redondea cada número a las decenas.', ar: 'دفعت كارمن 167 € و235 € و32 €. قرّب كل عدد إلى العشرات.' },
+                text: { eu: 'Biribildu zenbaki bakoitza hamarrekoetara.', es: 'Redondea cada número a las decenas.', ar: 'قرّب كل عدد إلى العشرات.' },
                 math: '$167\\approx 170 \\quad 235\\approx 240 \\quad 32\\approx 30$'
             },
             { text: { eu: 'Egin eragiketa buruz.', es: 'Haz la operación mentalmente.', ar: 'أجرِ العملية ذهنيًا.' }, math: '$170+240+30=440$' },
@@ -461,6 +463,7 @@ export const naturalsTopics: UnitTopic[] = [
             es: 'Los paréntesis cambian el orden de las operaciones: lo de dentro se hace primero. Con los mismos números, los paréntesis pueden cambiar totalmente el resultado. Cuando hay un paréntesis dentro de otro, el de fuera se escribe con corchetes [ ] y se resuelve de dentro hacia fuera: primero los paréntesis y luego los corchetes. Dentro también se respeta la jerarquía.',
             ar: 'تغيّر الأقواس ترتيب العمليات: ما بداخلها يُحسب أولًا. وبالأعداد نفسها قد تغيّر الأقواس النتيجة تمامًا. وعندما يوجد قوس داخل آخر نكتب الخارجي بأقواس معقوفة [ ] ونحل من الداخل إلى الخارج: الأقواس أولًا ثم الأقواس المعقوفة. وداخلها نحترم الأولوية أيضًا.'
         },
+        problem: { eu: 'Kalkulatu $3\\cdot [13-3\\cdot (5-2)]$.', es: 'Calcula $3\\cdot [13-3\\cdot (5-2)]$.', ar: 'احسب $3\\cdot [13-3\\cdot (5-2)]$.' },
         stepsKind: 'steps',
         steps: [
             { text: { eu: 'Ebatzi barruko parentesia.', es: 'Resuelve el paréntesis de dentro.', ar: 'حلّ القوس الداخلي.' }, math: '$3\\cdot [13-3\\cdot (5-2)]=3\\cdot [13-3\\cdot 3]$' },
@@ -488,11 +491,12 @@ export const naturalsTopics: UnitTopic[] = [
             es: 'Para resolver bien un problema, en clase se usa una estructura de tres pasos. Datos: lee el enunciado y saca solo los números y las palabras clave necesarias. Procedimiento: escribe la operación con claridad; si puedes, en una sola operación combinada. Respuesta: nunca dejes un número solo; responde con una frase completa y con unidades.',
             ar: 'لحل مسألة جيدًا نستعمل في القسم بنية من ثلاث خطوات. المعطيات: اقرأ النص واستخرج الأعداد والكلمات المفتاحية اللازمة فقط. الطريقة: اكتب العملية بوضوح، ويستحسن في عملية مركبة واحدة. الجواب: لا تترك عددًا وحده أبدًا؛ أجب بجملة كاملة مع الوحدات.'
         },
+        problem: { eu: 'Eraikin batek 27 solairu ditu; solairu bakoitzean 12 bizileku daude, eta bizileku bakoitzean 7 leiho. Zenbat leiho ditu eraikinak?', es: 'Un edificio tiene 27 plantas; en cada planta hay 12 viviendas, y en cada vivienda, 7 ventanas. ¿Cuántas ventanas tiene el edificio?', ar: 'في مبنى 27 طابقًا؛ في كل طابق 12 شقة، وفي كل شقة 7 نوافذ. كم نافذة في المبنى؟' },
         stepsKind: 'steps',
         steps: [
             {
                 title: { eu: 'Datuak', es: 'Datos', ar: 'المعطيات' },
-                text: { eu: 'Eraikin batek 27 solairu ditu; solairu bakoitzean 12 bizileku daude, eta bizileku bakoitzean 7 leiho.', es: 'Un edificio tiene 27 plantas; en cada planta hay 12 viviendas, y en cada vivienda, 7 ventanas.', ar: 'في مبنى 27 طابقًا؛ في كل طابق 12 شقة، وفي كل شقة 7 نوافذ.' }
+                text: { eu: 'Atera zenbakiak: 27 solairu, 12 bizileku solairuko eta 7 leiho bizilekuko.', es: 'Saca los números: 27 plantas, 12 viviendas por planta y 7 ventanas por vivienda.', ar: 'استخرج الأعداد: 27 طابقًا، و12 شقة في كل طابق، و7 نوافذ في كل شقة.' }
             },
             {
                 title: { eu: 'Prozedura', es: 'Procedimiento', ar: 'الطريقة' },

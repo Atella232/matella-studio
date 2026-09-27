@@ -1099,6 +1099,36 @@
     line-height: 1.65;
 }
 
+/* The exercise the numbered steps solve, stated before them */
+.fraction-v2-lesson-problem {
+    display: grid;
+    gap: 6px;
+    margin-bottom: -4px;
+    padding: 16px 20px;
+    border: 2px dashed var(--stage);
+    border-radius: 16px;
+    background: var(--card);
+}
+
+.fraction-v2-lesson-problem > span {
+    color: var(--stage-ink);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.fraction-v2-lesson-problem > p {
+    margin: 0;
+    color: var(--ink);
+    font-size: 19px;
+    line-height: 1.55;
+}
+
+.fraction-v2-lesson-problem .katex {
+    font-size: 1.3em;
+}
+
 .fraction-v2-lesson-steps {
     display: grid;
     gap: 12px;
