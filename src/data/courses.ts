@@ -52,8 +52,8 @@ export const courses: Course[] = [
     descriptionAr: 'التوحيد والجبر',
     color: '#7a55d6',
     topics: [
-      { id: 'divisibilidad', name: 'Divisibilidad', nameEu: 'Zatigarritasuna', nameAr: 'القابلية للقسمة', icon: '➗', active: true },
       { id: 'numeros-enteros', name: 'Números Enteros', nameEu: 'Zenbaki Osoak', nameAr: 'الأعداد الصحيحة', icon: '±', active: true },
+      { id: 'divisibilidad', name: 'Divisibilidad', nameEu: 'Zatigarritasuna', nameAr: 'القابلية للقسمة', icon: '➗', active: true },
       { id: 'zatikiak', name: 'Fracciones', nameEu: 'Zatikiak', nameAr: 'الكسور', icon: '½', active: true },
       { id: 'proporcionalidad', name: 'Proporcionalidad y Porcentajes', nameEu: 'Proportzionaltasuna eta Ehunekoak', nameAr: 'التناسب والنسب المئوية', icon: '📈' },
       { id: 'algebra', name: 'Álgebra', nameEu: 'Aljebra', nameAr: 'الجبر', icon: '🔤', active: true },
