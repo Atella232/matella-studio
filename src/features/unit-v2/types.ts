@@ -30,8 +30,8 @@ export interface UnitStage {
 export interface LessonStep {
     title?: LocalizedText
     text: LocalizedText
-    /** Short worked formula for this step, in LaTeX between $…$ */
-    math?: string
+    /** Short worked formula for this step, in LaTeX between $…$ (per language when notation differs) */
+    math?: string | LocalizedText
 }
 
 export interface UnitTopic {
@@ -46,8 +46,8 @@ export interface UnitTopic {
      */
     steps?: LessonStep[]
     stepsKind?: 'steps' | 'facts'
-    /** Worked example, in LaTeX between $…$; the same in every language */
-    example: string
+    /** Worked example, in LaTeX between $…$; per language when the notation differs (Div / Zat) */
+    example: string | LocalizedText
     takeaway: LocalizedText
     /** Optional model drawn under the explanation (a number line, a thermometer…) */
     figure?: (language: UnitLanguage) => ReactNode
@@ -166,6 +166,11 @@ export function normalizeUnitLanguage(language: string): UnitLanguage {
 
 export function pickText(language: UnitLanguage, text: LocalizedText): string {
     return text[language]
+}
+
+/** Text that may be the same in every language (a formula) or change with it */
+export function pickMaybeText(language: UnitLanguage, text: string | LocalizedText): string {
+    return typeof text === 'string' ? text : text[language]
 }
 
 export const unitSections: Array<{ id: UnitSection; label: LocalizedText }> = [

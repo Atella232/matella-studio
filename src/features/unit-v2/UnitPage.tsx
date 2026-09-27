@@ -11,6 +11,7 @@ import {
     availableSections,
     exerciseBankSize,
     normalizeUnitLanguage,
+    pickMaybeText,
     pickText,
     totalGoals,
     unitSections,
@@ -423,14 +424,14 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                                         {step.title && <strong>{l(step.title)}</strong>}
                                         <p><MathText text={l(step.text)} /></p>
                                     </div>
-                                    {step.math && <div className="fraction-v2-lesson-step-math"><MathText text={step.math} /></div>}
+                                    {step.math && <div className="fraction-v2-lesson-step-math"><MathText text={pickMaybeText(language, step.math)} /></div>}
                                 </li>
                             ))}
                         </ol>
                     )}
                     {currentTopic.figure && <div className="fraction-v2-lesson-figure">{currentTopic.figure(language)}</div>}
                     <figure className="fraction-v2-example">
-                        <MathText text={currentTopic.example} />
+                        <MathText text={pickMaybeText(language, currentTopic.example)} />
                     </figure>
                     <aside className="fraction-v2-takeaway">
                         <span className="fraction-v2-takeaway-icon"><Icon name="bulb" size={22} /></span>
