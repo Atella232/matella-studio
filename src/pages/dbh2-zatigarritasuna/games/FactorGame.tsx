@@ -3,18 +3,27 @@ import { MathText } from '../../../components/MathText'
 import { GameTopbar, LevelPicker, ResultPanel } from '../../../features/unit-v2/games/GameKit'
 import { formatTime, nowMs, useGameText } from '../../../features/unit-v2/games/gameHooks'
 import type { GameProps } from '../../../features/unit-v2/games/GamesHub'
+import type { GameInfo } from '../../../features/unit-v2/games/records'
 import { createRandom, randomSeed } from '../../../features/unit-v2/games/random'
 import { rekin } from '../basque'
 import { factorize, factorLatex } from '../math'
-import { createFactorNumbers, FACTOR_NUMBERS, FACTOR_PENALTY_MS, factorLevels, factorParTime, factorStars } from './factor'
+import { createFactorNumbers, FACTOR_NUMBERS, FACTOR_PENALTY_MS, factorLevels, factorParTime, factorStars, type FactorLevel } from './factor'
 import { DivisibilityGameArt } from './GameArt'
 import { divisibilityGames } from './info'
 
 type Phase = 'pick' | 'playing' | 'finished'
 
-const game = divisibilityGames.find((item) => item.id === 'factor')!
+const defaultGame = divisibilityGames.find((item) => item.id === 'factor')!
 
-export function FactorGame({ language, records, onResult, onExit }: GameProps) {
+/** Lets the 1. DBH unit reuse the game with its own levels and level list */
+export interface FactorGameConfig {
+    game: GameInfo<string>
+    levels?: FactorLevel[]
+}
+
+export function FactorGame({ language, records, onResult, onExit, config }: GameProps & { config?: FactorGameConfig }) {
+    const game = config?.game ?? defaultGame
+    const levels = config?.levels ?? factorLevels
     const l = useGameText(language)
     const startedAt = useRef(0)
     const [phase, setPhase] = useState<Phase>('pick')
@@ -31,7 +40,7 @@ export function FactorGame({ language, records, onResult, onExit }: GameProps) {
     const start = (nextLevel: number) => {
         startedAt.current = nowMs()
         setLevel(nextLevel)
-        setNumbers(createFactorNumbers(createRandom(randomSeed()), nextLevel))
+        setNumbers(createFactorNumbers(createRandom(randomSeed()), nextLevel, levels))
         setIndex(0)
         setSteps([])
         setRejected(null)
@@ -72,7 +81,7 @@ export function FactorGame({ language, records, onResult, onExit }: GameProps) {
         }
         const time = nowMs() - startedAt.current
         setElapsed(time)
-        onResult(level, { stars: factorStars(level, time + penalty, mistakes), score: -mistakes, timeMs: time + penalty })
+        onResult(level, { stars: factorStars(level, time + penalty, mistakes, levels), score: -mistakes, timeMs: time + penalty })
         setPhase('finished')
     }
 
@@ -82,7 +91,7 @@ export function FactorGame({ language, records, onResult, onExit }: GameProps) {
         const onKey = (event: KeyboardEvent) => {
             if (event.metaKey || event.ctrlKey || event.altKey) return
             const prime = Number(event.key)
-            if (factorLevels[level].primes.includes(prime)) {
+            if (levels[level].primes.includes(prime)) {
                 event.preventDefault()
                 divide(prime)
             }
@@ -112,7 +121,7 @@ export function FactorGame({ language, records, onResult, onExit }: GameProps) {
         )
     }
 
-    const par = factorParTime(level)
+    const par = factorParTime(level, levels)
     const total = elapsed + penalty
 
     return (
@@ -131,7 +140,7 @@ export function FactorGame({ language, records, onResult, onExit }: GameProps) {
                             <strong key={`${index}-${steps.length}`}>{rest}</strong>
                         </div>
                         <div className="divisibility-factor-buttons" role="group" aria-label={l({ eu: 'Zatitu honekin', es: 'Dividir entre', ar: 'اقسم على' })}>
-                            {factorLevels[level].primes.map((prime) => (
+                            {levels[level].primes.map((prime) => (
                                 <button type="button" className={rejected === prime ? 'rejected' : ''} onClick={() => divide(prime)} key={`${prime}-${rejected === prime ? mistakes : 0}`}>{prime}</button>
                             ))}
                         </div>
@@ -152,7 +161,7 @@ export function FactorGame({ language, records, onResult, onExit }: GameProps) {
             {phase === 'finished' && (
                 <ResultPanel
                     language={language}
-                    stars={factorStars(level, total, mistakes)}
+                    stars={factorStars(level, total, mistakes, levels)}
                     title={l({ eu: 'Denak deskonposatuta!', es: '¡Todos descompuestos!', ar: 'تم تحليل الجميع!' })}
                     subtitle={l({ eu: `3 izar: ${formatTime(par * 0.8)} baino gutxiago eta akats bat gehienez · 2 izar: ${formatTime(par)} baino gutxiago`, es: `3 estrellas: menos de ${formatTime(par * 0.8)} y como mucho un fallo · 2: menos de ${formatTime(par)}`, ar: `3 نجوم: أقل من ${formatTime(par * 0.8)} وخطأ واحد على الأكثر · 2: أقل من ${formatTime(par)}` })}
                     stats={[

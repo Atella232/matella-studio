@@ -4,6 +4,8 @@ import '../dbh2-zatigarritasuna/Zatigarritasuna.css'
 import { readNaturalAnswer } from '../dbh1-zenbaki-naturalak-v2/numbers'
 import { divisibilityIntroChallenges, divisibilityIntroDiagnostic, divisibilityIntroExerciseBank, divisibilityIntroPractice } from './content'
 import { DivisibilityIntroHeroArt } from './figures'
+import { DivisibilityIntroGames } from './games'
+import { INTRO_DIVISIBILITY_GAME_RECORDS_KEY, introDivisibilityGameProgressIds } from './games/info'
 import { DivisibilityIntroLaboratory } from './lab'
 import { divisibilityIntroLabChallengeIds, divisibilityIntroLabToolForTopic, divisibilityIntroLabTools } from './lab/labTools'
 import { divisibilityIntroStages, divisibilityIntroTopics } from './lessons'
@@ -32,6 +34,12 @@ const zatigarritasunaIntroUnit: UnitDefinition = {
         progressIds: divisibilityIntroLabChallengeIds,
         toolForTopic: divisibilityIntroLabToolForTopic,
         render: (props) => <DivisibilityIntroLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Lau joko multiploekin, irizpideekin, lehenekin, ZKH eta MKTrekin azkar aritzeko.', es: 'Cuatro juegos para ganar rapidez con múltiplos, criterios, primos, m.c.d. y m.c.m.', ar: 'أربع ألعاب لاكتساب السرعة مع المضاعفات والقواعد والأعداد الأولية وق.م.أ وم.م.أ.' },
+        progressIds: introDivisibilityGameProgressIds,
+        recordsKey: INTRO_DIVISIBILITY_GAME_RECORDS_KEY,
+        render: (props) => <DivisibilityIntroGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi emaitza zenbaki gisa, adibidez 12.', es: 'Escribe el resultado como un número, por ejemplo 12.', ar: 'اكتب النتيجة عددًا، مثل 12.' },

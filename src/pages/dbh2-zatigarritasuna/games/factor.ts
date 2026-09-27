@@ -25,8 +25,8 @@ export const factorLevels: FactorLevel[] = [
 ]
 
 /** Numbers whose prime factors are all in the level's buttons, with at least three factors */
-export function factorPool(levelIndex: number): number[] {
-    const { primes, min, max } = factorLevels[levelIndex]
+export function factorPool(levelIndex: number, levels: FactorLevel[] = factorLevels): number[] {
+    const { primes, min, max } = levels[levelIndex]
     const pool: number[] = []
     for (let value = min; value <= max; value += 1) {
         const factors = factorize(value)
@@ -36,9 +36,9 @@ export function factorPool(levelIndex: number): number[] {
     return pool
 }
 
-export function createFactorNumbers(random: Random, levelIndex: number): number[] {
-    const pool = factorPool(levelIndex)
-    const { primes } = factorLevels[levelIndex]
+export function createFactorNumbers(random: Random, levelIndex: number, levels: FactorLevel[] = factorLevels): number[] {
+    const pool = factorPool(levelIndex, levels)
+    const { primes } = levels[levelIndex]
     // The newest prime of the level shows up at least twice
     const newest = primes[primes.length - 1]
     const withNewest = shuffle(random, pool.filter((value) => value % newest === 0)).slice(0, 2)
@@ -51,12 +51,12 @@ export function createFactorNumbers(random: Random, levelIndex: number): number[
     return shuffle(random, chosen)
 }
 
-export function factorParTime(levelIndex: number): number {
-    return (FACTOR_NUMBERS * factorLevels[levelIndex].secondsPerNumber + 5) * 1000
+export function factorParTime(levelIndex: number, levels: FactorLevel[] = factorLevels): number {
+    return (FACTOR_NUMBERS * levels[levelIndex].secondsPerNumber + 5) * 1000
 }
 
-export function factorStars(levelIndex: number, timeMs: number, mistakes: number): Stars {
-    const par = factorParTime(levelIndex)
+export function factorStars(levelIndex: number, timeMs: number, mistakes: number, levels: FactorLevel[] = factorLevels): Stars {
+    const par = factorParTime(levelIndex, levels)
     if (timeMs <= par * 0.8 && mistakes <= 1) return 3
     if (timeMs <= par) return 2
     return 1

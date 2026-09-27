@@ -3,6 +3,7 @@ import { MathText } from '../../../components/MathText'
 import { GameTopbar, LevelPicker, ResultPanel } from '../../../features/unit-v2/games/GameKit'
 import { formatTime, nowMs, useGameText } from '../../../features/unit-v2/games/gameHooks'
 import type { GameProps } from '../../../features/unit-v2/games/GamesHub'
+import type { GameInfo } from '../../../features/unit-v2/games/records'
 import { createRandom, randomSeed } from '../../../features/unit-v2/games/random'
 import { DivisibilityGameArt } from './GameArt'
 import { divisibilityGames } from './info'
@@ -10,7 +11,7 @@ import { createDivisibilityMemoryBoard, divisibilityCardLatex, divisibilityMemor
 
 type Phase = 'pick' | 'playing' | 'finished'
 
-const game = divisibilityGames.find((item) => item.id === 'memory')!
+const defaultGame = divisibilityGames.find((item) => item.id === 'memory')!
 const MISMATCH_MS = 1300
 
 /** What a screen reader says for a card: the LaTeX made readable */
@@ -22,7 +23,9 @@ function spokenCard(latex: string): string {
         .replace(/\\cdot\s?/g, ' · ')
 }
 
-export function DivisibilityMemoryGame({ language, records, onResult, onExit }: GameProps) {
+/** The 1. DBH unit reuses the game with its own level list (same boards) */
+export function DivisibilityMemoryGame({ language, records, onResult, onExit, config }: GameProps & { config?: { game: GameInfo<string> } }) {
+    const game = config?.game ?? defaultGame
     const l = useGameText(language)
     const [phase, setPhase] = useState<Phase>('pick')
     const [level, setLevel] = useState(0)

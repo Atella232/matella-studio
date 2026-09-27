@@ -26,7 +26,7 @@ export interface HuntRound {
     numbers: number[]
 }
 
-const multipleRule = (n: number): HuntRule => ({
+export const multipleRule = (n: number): HuntRule => ({
     id: `multiple-${n}`,
     label: { eu: `${ren(n)} multiploak`, es: `Múltiplos de ${n}`, ar: `مضاعفات ${n}` },
     test: (value) => value % n === 0,
@@ -35,7 +35,7 @@ const multipleRule = (n: number): HuntRule => ({
         : { eu: `${value} = ${n} · ${Math.floor(value / n)} + ${value % n}: hondarra ez da 0.`, es: `${value} = ${n} · ${Math.floor(value / n)} + ${value % n}: el resto no es 0.`, ar: `${value} = ${n} · ${Math.floor(value / n)} + ${value % n}: الباقي ليس 0.` })
 })
 
-const divisorRule = (n: number): HuntRule => ({
+export const divisorRule = (n: number): HuntRule => ({
     id: `divisor-${n}`,
     label: { eu: `${ren(n)} zatitzaileak`, es: `Divisores de ${n}`, ar: `قواسم ${n}` },
     test: (value) => n % value === 0,
@@ -46,7 +46,7 @@ const divisorRule = (n: number): HuntRule => ({
 
 const digitSumText = (value: number) => `${String(value).split('').join(' + ')} = ${String(value).split('').reduce((sum, digit) => sum + Number(digit), 0)}`
 
-const byRule = (d: number): HuntRule => ({
+export const byRule = (d: number): HuntRule => ({
     id: `by-${d}`,
     label: { eu: `${rekin(d)} zatigarriak`, es: `Divisibles por ${d}`, ar: `تقبل القسمة على ${d}` },
     test: (value) => value % d === 0,
@@ -58,7 +58,7 @@ const byRule = (d: number): HuntRule => ({
     }
 })
 
-const primeRule: HuntRule = {
+export const primeRule: HuntRule = {
     id: 'primes',
     label: { eu: 'Zenbaki lehenak', es: 'Números primos', ar: 'الأعداد الأولية' },
     test: isPrime,
@@ -69,7 +69,7 @@ const primeRule: HuntRule = {
     }
 }
 
-const bothRule = (a: number, b: number): HuntRule => ({
+export const bothRule = (a: number, b: number): HuntRule => ({
     id: `both-${a}-${b}`,
     label: { eu: `${rekin(a)} eta ${rekin(b)} zatigarriak`, es: `Divisibles por ${a} y por ${b}`, ar: `تقبل القسمة على ${a} و${b}` },
     test: (value) => value % a === 0 && value % b === 0,
@@ -106,8 +106,8 @@ export const huntLevels: HuntLevel[] = [
 ]
 
 /** A grid of distinct numbers with between 4 and 7 right answers */
-export function createHuntRound(random: Random, levelIndex: number): HuntRound {
-    const level = huntLevels[levelIndex]
+export function createHuntRound(random: Random, levelIndex: number, levels: HuntLevel[] = huntLevels): HuntRound {
+    const level = levels[levelIndex]
     for (let attempt = 0; attempt < 200; attempt += 1) {
         const rule = level.rules(random)
         const [min, max] = level.range(rule)
@@ -123,12 +123,12 @@ export function createHuntRound(random: Random, levelIndex: number): HuntRound {
 
 export const targetsLeft = (round: HuntRound, found: number[]) => round.numbers.filter((value) => round.rule.test(value) && !found.includes(value)).length
 
-export function huntParTime(levelIndex: number): number {
-    return (HUNT_ROUNDS * huntLevels[levelIndex].secondsPerRound + 5) * 1000
+export function huntParTime(levelIndex: number, levels: HuntLevel[] = huntLevels): number {
+    return (HUNT_ROUNDS * levels[levelIndex].secondsPerRound + 5) * 1000
 }
 
-export function huntStars(levelIndex: number, timeMs: number, mistakes: number): Stars {
-    const par = huntParTime(levelIndex)
+export function huntStars(levelIndex: number, timeMs: number, mistakes: number, levels: HuntLevel[] = huntLevels): Stars {
+    const par = huntParTime(levelIndex, levels)
     if (timeMs <= par * 0.8 && mistakes <= 1) return 3
     if (timeMs <= par) return 2
     return 1

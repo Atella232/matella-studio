@@ -2,16 +2,25 @@ import { useEffect, useRef, useState } from 'react'
 import { GameTopbar, LevelPicker, ResultPanel } from '../../../features/unit-v2/games/GameKit'
 import { formatTime, nowMs, useGameText } from '../../../features/unit-v2/games/gameHooks'
 import type { GameProps } from '../../../features/unit-v2/games/GamesHub'
+import type { GameInfo } from '../../../features/unit-v2/games/records'
 import { createRandom, randomSeed, type Random } from '../../../features/unit-v2/games/random'
 import { DivisibilityGameArt } from './GameArt'
-import { createHuntRound, HUNT_PENALTY_MS, HUNT_ROUNDS, huntParTime, huntStars, targetsLeft, type HuntRound } from './hunt'
+import { createHuntRound, HUNT_PENALTY_MS, HUNT_ROUNDS, huntLevels, huntParTime, huntStars, targetsLeft, type HuntLevel, type HuntRound } from './hunt'
 import { divisibilityGames } from './info'
 
 type Phase = 'pick' | 'playing' | 'finished'
 
-const game = divisibilityGames.find((item) => item.id === 'hunt')!
+const defaultGame = divisibilityGames.find((item) => item.id === 'hunt')!
 
-export function HuntGame({ language, records, onResult, onExit }: GameProps) {
+/** Lets the 1. DBH unit reuse the game with its own levels and level list */
+export interface HuntGameConfig {
+    game: GameInfo<string>
+    levels?: HuntLevel[]
+}
+
+export function HuntGame({ language, records, onResult, onExit, config }: GameProps & { config?: HuntGameConfig }) {
+    const game = config?.game ?? defaultGame
+    const levels = config?.levels ?? huntLevels
     const l = useGameText(language)
     const random = useRef<Random>(createRandom(randomSeed()))
     const startedAt = useRef(0)
@@ -30,7 +39,7 @@ export function HuntGame({ language, records, onResult, onExit }: GameProps) {
         startedAt.current = nowMs()
         setLevel(nextLevel)
         setRoundIndex(0)
-        setRound(createHuntRound(random.current, nextLevel))
+        setRound(createHuntRound(random.current, nextLevel, levels))
         setFound([])
         setMissed(null)
         setMistakes(0)
@@ -61,13 +70,13 @@ export function HuntGame({ language, records, onResult, onExit }: GameProps) {
         }
         if (roundIndex + 1 < HUNT_ROUNDS) {
             setRoundIndex(roundIndex + 1)
-            setRound(createHuntRound(random.current, level))
+            setRound(createHuntRound(random.current, level, levels))
             setFound([])
             return
         }
         const time = nowMs() - startedAt.current
         setElapsed(time)
-        onResult(level, { stars: huntStars(level, time + penalty, mistakes), score: -mistakes, timeMs: time + penalty })
+        onResult(level, { stars: huntStars(level, time + penalty, mistakes, levels), score: -mistakes, timeMs: time + penalty })
         setPhase('finished')
     }
 
@@ -92,7 +101,7 @@ export function HuntGame({ language, records, onResult, onExit }: GameProps) {
         )
     }
 
-    const par = huntParTime(level)
+    const par = huntParTime(level, levels)
     const total = elapsed + penalty
 
     return (
@@ -135,7 +144,7 @@ export function HuntGame({ language, records, onResult, onExit }: GameProps) {
             {phase === 'finished' && (
                 <ResultPanel
                     language={language}
-                    stars={huntStars(level, total, mistakes)}
+                    stars={huntStars(level, total, mistakes, levels)}
                     title={l({ eu: 'Ehiza amaituta!', es: '¡Caza terminada!', ar: 'انتهى الصيد!' })}
                     subtitle={l({ eu: `3 izar: ${formatTime(par * 0.8)} baino gutxiago eta akats bat gehienez · 2 izar: ${formatTime(par)} baino gutxiago`, es: `3 estrellas: menos de ${formatTime(par * 0.8)} y como mucho un fallo · 2: menos de ${formatTime(par)}`, ar: `3 نجوم: أقل من ${formatTime(par * 0.8)} وخطأ واحد على الأكثر · 2: أقل من ${formatTime(par)}` })}
                     stats={[
