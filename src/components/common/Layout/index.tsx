@@ -2,6 +2,7 @@ import { Suspense, useEffect, useLayoutEffect } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Navigation } from '../Navigation'
+import { isUnitV2Path } from '../../../features/unit-v2/paths'
 import './Layout.css'
 
 export function Layout() {
@@ -9,7 +10,7 @@ export function Layout() {
     const location = useLocation()
     const isRTL = i18n.language === 'ar'
     const isPrototypeRoute = location.pathname.startsWith('/prototipo/ekuazioak-v2')
-        || location.pathname.startsWith('/matematika/dbh2/zatikiak')
+        || isUnitV2Path(location.pathname)
     const isImmersiveRoute = location.pathname.startsWith('/natura/dbh1/biosfera') || isPrototypeRoute
     // Natura keeps its original look; everything else uses "Cuaderno a color" (src/index.css)
     const isClassicTheme = location.pathname.startsWith('/natura')

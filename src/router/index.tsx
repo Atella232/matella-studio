@@ -7,6 +7,7 @@ import { TopicsPage } from '../pages/TopicsPage'
 import { AccessibilityPage } from '../pages/AccessibilityPage'
 import { RouteError } from '../components/common/RouteError'
 
+const ZenbakiOsoakDBH2Page = lazy(() => import('../pages/dbh2-zenbaki-osoak').then((module) => ({ default: module.ZenbakiOsoakPage })))
 const ZatikiakPrototypePage = lazy(() => import('../pages/dbh2-zatikiak-prototype').then((module) => ({ default: module.ZatikiakPrototypePage })))
 const PizzaFractions = lazy(() => import('../features/games/PizzaFractions').then((module) => ({ default: module.PizzaFractions })))
 const FractionMemory = lazy(() => import('../features/games/FractionMemory').then((module) => ({ default: module.FractionMemory })))
@@ -264,6 +265,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/dbh2/zatikiak/*',
                         element: <ZatikiakPrototypePage />,
+                    },
+                    // Números enteros de 2º ESO: unidad V2, gestiona sus propias secciones por URL
+                    {
+                        path: 'matematika/dbh2/numeros-enteros/*',
+                        element: <ZenbakiOsoakDBH2Page />,
                     },
                     {
                         path: 'matematika/dbh2/algebra',

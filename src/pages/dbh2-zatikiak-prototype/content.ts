@@ -1,18 +1,16 @@
 import { fraction, type AnswerForm, type FractionValue } from './math/fraction.ts'
+import type { LocalizedText, StageTone, UnitLanguage, UnitSection } from '../../features/unit-v2/types.ts'
 
-export type PrototypeLanguage = 'eu' | 'es' | 'ar'
+export { normalizeUnitLanguage as normalizePrototypeLanguage, pickText, unitSections as prototypeSections } from '../../features/unit-v2/types.ts'
+export type { LocalizedText } from '../../features/unit-v2/types.ts'
+export type PrototypeLanguage = UnitLanguage
 export type FractionStageId = 'meaning' | 'equivalence' | 'ordering' | 'operations' | 'proportionality'
 export type TheoryTopicId = 'meaning' | 'representation' | 'equivalence' | 'simplification' | 'ordering' | 'add-subtract' | 'multiply-divide' | 'combined' | 'powers' | 'fraction-of' | 'percentages' | 'proportionality'
-export type PrototypeSection = 'route' | 'diagnostic' | 'learn' | 'lab' | 'practice' | 'challenges' | 'play'
-
-export interface LocalizedText {
-    eu: string
-    es: string
-    ar: string
-}
+export type PrototypeSection = UnitSection
 
 export interface LearningStage {
     id: FractionStageId
+    tone: StageTone
     icon: string
     color: string
     title: LocalizedText
@@ -22,7 +20,7 @@ export interface LearningStage {
     takeaway: LocalizedText
 }
 
-export interface TheoryTopic extends Omit<LearningStage, 'id'> {
+export interface TheoryTopic extends Omit<LearningStage, 'id' | 'tone'> {
     id: TheoryTopicId
     stage: FractionStageId
 }
@@ -52,30 +50,6 @@ export interface DiagnosticQuestion {
     explanation: LocalizedText
     topic: TheoryTopicId
 }
-
-export function normalizePrototypeLanguage(language: string): PrototypeLanguage {
-    if (language.startsWith('ar')) return 'ar'
-    if (language.startsWith('es')) return 'es'
-    return 'eu'
-}
-
-export function pickText(language: PrototypeLanguage, text: LocalizedText): string {
-    return text[language]
-}
-
-export const prototypeSections: Array<{
-    id: PrototypeSection
-    icon: string
-    label: LocalizedText
-}> = [
-    { id: 'route', icon: '⌂', label: { eu: 'Ibilbidea', es: 'Ruta', ar: 'المسار' } },
-    { id: 'diagnostic', icon: '◎', label: { eu: 'Diagnostikoa', es: 'Diagnóstico', ar: 'التشخيص' } },
-    { id: 'learn', icon: '◇', label: { eu: 'Ikasi', es: 'Aprende', ar: 'تعلّم' } },
-    { id: 'lab', icon: '◫', label: { eu: 'Laborategia', es: 'Laboratorio', ar: 'المختبر' } },
-    { id: 'practice', icon: '✓', label: { eu: 'Praktikatu', es: 'Practica', ar: 'تدرّب' } },
-    { id: 'challenges', icon: '⚑', label: { eu: 'Erronkak', es: 'Retos', ar: 'التحديات' } },
-    { id: 'play', icon: '✦', label: { eu: 'Jolastu', es: 'Juega', ar: 'العب' } }
-]
 
 export const diagnosticQuestions: DiagnosticQuestion[] = [
     {
@@ -131,6 +105,7 @@ export const diagnosticQuestions: DiagnosticQuestion[] = [
 export const learningStages: LearningStage[] = [
     {
         id: 'meaning',
+        tone: 'blue',
         icon: '◐',
         color: '#38bdf8',
         title: { eu: 'Zer adierazten du zatiki batek?', es: '¿Qué representa una fracción?', ar: 'ماذا يمثّل الكسر؟' },
@@ -153,6 +128,7 @@ export const learningStages: LearningStage[] = [
     },
     {
         id: 'equivalence',
+        tone: 'violet',
         icon: '≡',
         color: '#a78bfa',
         title: { eu: 'Baliokidetasuna eta sinplifikazioa', es: 'Equivalencia y simplificación', ar: 'التكافؤ والتبسيط' },
@@ -175,6 +151,7 @@ export const learningStages: LearningStage[] = [
     },
     {
         id: 'ordering',
+        tone: 'mustard',
         icon: '↔',
         color: '#f59e0b',
         title: { eu: 'Konparazioa eta ordena', es: 'Comparación y orden', ar: 'المقارنة والترتيب' },
@@ -197,6 +174,7 @@ export const learningStages: LearningStage[] = [
     },
     {
         id: 'operations',
+        tone: 'coral',
         icon: '±',
         color: '#fb7185',
         title: { eu: 'Eragiketak eta zeinuak', es: 'Operaciones y signos', ar: 'العمليات والإشارات' },
@@ -219,6 +197,7 @@ export const learningStages: LearningStage[] = [
     },
     {
         id: 'proportionality',
+        tone: 'green',
         icon: '%',
         color: '#34d399',
         title: { eu: 'Ehunekoak eta proportzionaltasuna', es: 'Porcentajes y proporcionalidad', ar: 'النسب المئوية والتناسب' },

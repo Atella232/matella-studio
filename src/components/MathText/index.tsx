@@ -51,7 +51,8 @@ function renderMath(latex: string, display: boolean): string {
         .replace(/(^|[^\\])<=/g, '$1\\le ')
         .replace(/(^|[^\\])>=/g, '$1\\ge ')
         .replace(/(^|[^\\])\*/g, '$1\\cdot ')
-        .replace(/(^|[^\\]):/g, '$1\\div ')
+        // \mathbin{:} keeps the colon used for division in Basque and Spanish textbooks
+        .replace(/(^|[^\\{]):/g, '$1\\div ')
 
     const withRecoveredCommands = withOperators
         .replace(/(^|[^\\])cdot(?=[^a-zA-Z]|$)/g, '$1\\cdot ')
@@ -59,7 +60,8 @@ function renderMath(latex: string, display: boolean): string {
         .replace(/(^|[^\\])div(?=[^a-zA-Z]|$)/g, '$1\\div ')
         .replace(/(^|[^\\])to(?=[^a-zA-Z]|$)/g, '$1\\to ')
         .replace(/(^|[^\\])quadtext\{/g, '$1\\quad \\text{')
-        .replace(/(^|[^\\])quad(?=[^a-zA-Z]|$)/g, '$1\\quad ')
+        // Recover a lost backslash, but leave \qquad and other commands alone
+        .replace(/(^|[^\\a-zA-Z])quad(?=[^a-zA-Z]|$)/g, '$1\\quad ')
         .replace(/(^|[^\\])text\{/g, '$1\\text{')
         .replace(/([0-9a-zA-Z)\]}])\s*le\s*([0-9a-zA-Z({[])/g, '$1\\le $2')
         .replace(/([0-9a-zA-Z)\]}])\s*ge\s*([0-9a-zA-Z({[])/g, '$1\\ge $2')

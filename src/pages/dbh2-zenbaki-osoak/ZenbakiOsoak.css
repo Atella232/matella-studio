@@ -1,0 +1,13 @@
+/* Zenbaki osoak · unit-specific pieces (the engine styles live in features/unit-v2) */
+
+.integers-hero-art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.integers-number-line {
+    font-family: "Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif;
+    direction: ltr;
+}

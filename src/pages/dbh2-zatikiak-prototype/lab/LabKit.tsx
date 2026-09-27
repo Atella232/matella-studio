@@ -1,6 +1,6 @@
 import { useId, useState, type ReactNode } from 'react'
 import type { PrototypeLanguage } from '../content'
-import { Icon } from '../icons'
+import { Icon } from '../../../features/unit-v2/icons'
 import { checkAnswer, type FractionValue } from '../math/fraction'
 import type { LabChallenge, LabToolInfo, OperationAnswer } from './labTools'
 import { useLabText } from './useLabText'

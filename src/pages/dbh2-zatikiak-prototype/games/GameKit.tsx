@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import type { PrototypeLanguage } from '../content'
-import { Icon } from '../icons'
+import { Icon } from '../../../features/unit-v2/icons'
 import { useGameText } from './gameHooks'
 import { recordKey, type GameId, type GameInfo, type GameRecords, type LevelRecord, type Stars } from './records'
 

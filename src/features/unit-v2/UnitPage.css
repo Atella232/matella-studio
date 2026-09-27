@@ -63,6 +63,14 @@
 .fraction-v2 [data-stage="operations"] { --stage: #c4432a; --stage-on: #ffffff; --stage-tint: #f8dcd0; --stage-soft: #fcf1ec; --stage-ink: #9a3218; --second: #2f6fdb; --second-tint: #dde7f7; }
 .fraction-v2 [data-stage="proportionality"] { --stage: #267b53; --stage-on: #ffffff; --stage-tint: #d6eddf; --stage-soft: #eff7f2; --stage-ink: #1f6443; }
 
+/* Stage colours by tone (used by every unit of the engine); they follow the
+   stage rules above so a unit's own tone wins */
+.fraction-v2 [data-tone="blue"] { --stage: #2f6fdb; --stage-on: #ffffff; --stage-tint: #dde7f7; --stage-soft: #f1f5fc; --stage-ink: #1e4a96; --second: #c4432a; --second-tint: #f8dcd0; }
+.fraction-v2 [data-tone="violet"] { --stage: #7a55d6; --stage-on: #ffffff; --stage-tint: #e8e0f7; --stage-soft: #f5f1fc; --stage-ink: #4a2f9e; }
+.fraction-v2 [data-tone="mustard"] { --stage: #e0a100; --stage-on: #1d2733; --stage-tint: #fbebc0; --stage-soft: #fdf7e6; --stage-ink: #6b4e12; }
+.fraction-v2 [data-tone="coral"] { --stage: #c4432a; --stage-on: #ffffff; --stage-tint: #f8dcd0; --stage-soft: #fcf1ec; --stage-ink: #9a3218; --second: #2f6fdb; --second-tint: #dde7f7; }
+.fraction-v2 [data-tone="green"] { --stage: #267b53; --stage-on: #ffffff; --stage-tint: #d6eddf; --stage-soft: #eff7f2; --stage-ink: #1f6443; }
+
 .fraction-v2 *,
 .fraction-v2 *::before,
 .fraction-v2 *::after {
@@ -797,7 +805,7 @@
 
 .fraction-v2-path-grid {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(var(--stages, 5), minmax(0, 1fr));
     gap: 16px;
     margin: 0;
     padding: 0;
@@ -1091,6 +1099,24 @@
     line-height: 1.65;
 }
 
+.fraction-v2-lesson-figure {
+    padding: 18px 16px 10px;
+    border: 1.5px solid var(--line);
+    border-radius: 18px;
+    background: var(--card);
+    overflow-x: auto;
+}
+
+.fraction-v2-lesson-figure svg {
+    display: block;
+    width: 100%;
+    /* Below this width the labels get too small: scroll instead */
+    min-width: 540px;
+    max-width: 720px;
+    height: auto;
+    margin: 0 auto;
+}
+
 .fraction-v2-example {
     margin: 0;
     padding: 36px 24px;
@@ -1100,8 +1126,9 @@
     background-image:
         repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px 24px),
         repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px 24px);
-    font-size: clamp(26px, 3vw, 36px);
+    font-size: clamp(22px, 3vw, 34px);
     text-align: center;
+    overflow-x: auto;
 }
 
 .fraction-v2-takeaway {

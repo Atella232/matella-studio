@@ -1,4 +1,4 @@
-import type { PrototypeSection } from './content'
+import type { UnitSection as PrototypeSection } from './types'
 
 export type IconName = PrototypeSection | 'more' | 'check' | 'arrow' | 'back' | 'bulb' | 'close'
 
