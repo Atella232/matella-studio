@@ -1,4 +1,4 @@
-import { useState, type JSX, type ReactNode } from 'react'
+import type { JSX, ReactNode } from 'react'
 import type { LocalizedText, UnitLanguage } from '../types'
 import { StarRow } from './GameKit'
 import { useGameRecords, useGameText } from './gameHooks'
@@ -25,7 +25,8 @@ export function GamesHub<Id extends string>({
     title,
     completedIds,
     onComplete,
-    initialGame
+    mode,
+    onModeChange
 }: {
     language: UnitLanguage
     games: HubGame<Id>[]
@@ -34,17 +35,13 @@ export function GamesHub<Id extends string>({
     title: LocalizedText
     completedIds: number[]
     onComplete: (id: number) => void
-    initialGame: Id | 'hub'
+    /** The open game comes from the address, so reload, Back and shared links keep it */
+    mode: Id | 'hub'
+    onModeChange: (next: Id | 'hub') => void
 }) {
     const l = useGameText(language)
-    const [mode, setMode] = useState<Id | 'hub'>(initialGame)
     const { records, save } = useGameRecords(recordsKey)
-
-    const open = (next: Id | 'hub') => {
-        setMode(next)
-        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-        window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' })
-    }
+    const open = onModeChange
 
     const current = games.find((game) => game.info.id === mode)
     if (current) {

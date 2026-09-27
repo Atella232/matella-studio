@@ -70,3 +70,20 @@ test('every place inside a unit has its own address', () => {
         assert.equal(parseUnitPath(unitPathFor(base, section, 'x')).section, section)
     }
 })
+
+test('every game address opens that game', async () => {
+    const units = [
+        ['/matematika/dbh2/zatikiak', await import('../src/pages/dbh2-zatikiak-prototype/routing.ts').then((m) => [m.gameSlugs, m.gameModeForPath] as const)],
+        ['/matematika/dbh2/divisibilidad', await import('../src/pages/dbh2-zatigarritasuna/games/info.ts').then((m) => [m.divisibilityGameSlugs, m.divisibilityGameModeForPath] as const)],
+        ['/matematika/dbh2/numeros-enteros', await import('../src/pages/dbh2-zenbaki-osoak/games/info.ts').then((m) => [m.integerGameSlugs, m.integerGameModeForPath] as const)],
+        ['/matematika/dbh1/zenbaki-naturalak', await import('../src/pages/dbh1-zenbaki-naturalak-v2/games/info.ts').then((m) => [m.naturalsGameSlugs, m.naturalsGameModeForPath] as const)]
+    ] as const
+    for (const [base, [slugs, modeForPath]] of units) {
+        for (const [id, slug] of Object.entries(slugs)) {
+            const path = unitPathFor(base, 'play', slug)
+            assert.equal(parseUnitPath(path).section, 'play')
+            assert.equal((modeForPath as (pathname: string) => string)(path), id, path)
+        }
+        assert.equal((modeForPath as (pathname: string) => string)(unitPathFor(base, 'play')), 'hub')
+    }
+})

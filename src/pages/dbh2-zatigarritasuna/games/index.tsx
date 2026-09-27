@@ -3,7 +3,7 @@ import type { UnitLanguage } from '../../../features/unit-v2/types'
 import { FactorGame } from './FactorGame'
 import { DivisibilityGameArt } from './GameArt'
 import { HuntGame } from './HuntGame'
-import { DIVISIBILITY_GAME_RECORDS_KEY, divisibilityGameModeForPath, divisibilityGames, type DivisibilityGameId } from './info'
+import { DIVISIBILITY_GAME_RECORDS_KEY, divisibilityGameModeForPath, divisibilityGameSlugs, divisibilityGames, type DivisibilityGameId } from './info'
 import { DivisibilityMemoryGame } from './MemoryGame'
 import { DivisibilityRaceGame } from './RaceGame'
 import './DivisibilityGames.css'
@@ -12,9 +12,10 @@ const components = { race: DivisibilityRaceGame, hunt: HuntGame, factor: FactorG
 
 const hubGames: HubGame<DivisibilityGameId>[] = divisibilityGames.map((info) => ({ info, art: <DivisibilityGameArt game={info.id} />, component: components[info.id] }))
 
-export function DivisibilityGames({ language, pathname, completedIds, onComplete }: {
+export function DivisibilityGames({ language, pathname, openGame, completedIds, onComplete }: {
     language: UnitLanguage
     pathname: string
+    openGame: (slug: string | null) => void
     completedIds: number[]
     onComplete: (id: number) => void
 }) {
@@ -26,7 +27,8 @@ export function DivisibilityGames({ language, pathname, completedIds, onComplete
             title={{ eu: 'Jolastu zenbakien barrenarekin', es: 'Juega con los números por dentro', ar: 'العب بالأعداد من الداخل' }}
             completedIds={completedIds}
             onComplete={onComplete}
-            initialGame={divisibilityGameModeForPath(pathname)}
+            mode={divisibilityGameModeForPath(pathname)}
+            onModeChange={(mode) => openGame(mode === 'hub' ? null : divisibilityGameSlugs[mode])}
         />
     )
 }

@@ -19,12 +19,14 @@ export function GamesArea({
     language,
     completedIds,
     onComplete,
-    initialGame
+    mode,
+    onModeChange
 }: {
     language: PrototypeLanguage
     completedIds: number[]
     onComplete: (id: number) => void
-    initialGame: GameMode
+    mode: GameMode
+    onModeChange: (mode: GameMode) => void
 }) {
     return (
         <GamesHub
@@ -34,7 +36,8 @@ export function GamesArea({
             title={{ eu: 'Jolastu eta hobetu zure marka', es: 'Juega y mejora tu marca', ar: 'العب وحسّن رقمك' }}
             completedIds={completedIds}
             onComplete={onComplete}
-            initialGame={initialGame}
+            mode={mode}
+            onModeChange={onModeChange}
         />
     )
 }

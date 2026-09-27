@@ -3,7 +3,7 @@ import type { UnitLanguage } from '../../../features/unit-v2/types'
 import '../lab/NaturalsLab.css'
 import { NaturalsGameArt } from './GameArt'
 import { HuntGame } from './HuntGame'
-import { NATURALS_GAME_RECORDS_KEY, naturalsGameModeForPath, naturalsGames, type NaturalsGameId } from './info'
+import { NATURALS_GAME_RECORDS_KEY, naturalsGameModeForPath, naturalsGameSlugs, naturalsGames, type NaturalsGameId } from './info'
 import { NaturalsMemoryGame } from './MemoryGame'
 import { NaturalsRaceGame } from './RaceGame'
 import { SprintGame } from './SprintGame'
@@ -13,9 +13,10 @@ const components = { race: NaturalsRaceGame, hunt: HuntGame, sprint: SprintGame,
 
 const hubGames: HubGame<NaturalsGameId>[] = naturalsGames.map((info) => ({ info, art: <NaturalsGameArt game={info.id} />, component: components[info.id] }))
 
-export function NaturalsGames({ language, pathname, completedIds, onComplete }: {
+export function NaturalsGames({ language, pathname, openGame, completedIds, onComplete }: {
     language: UnitLanguage
     pathname: string
+    openGame: (slug: string | null) => void
     completedIds: number[]
     onComplete: (id: number) => void
 }) {
@@ -27,7 +28,8 @@ export function NaturalsGames({ language, pathname, completedIds, onComplete }: 
             title={{ eu: 'Jolastu zenbaki naturalekin', es: 'Juega con los números naturales', ar: 'العب بالأعداد الطبيعية' }}
             completedIds={completedIds}
             onComplete={onComplete}
-            initialGame={naturalsGameModeForPath(pathname)}
+            mode={naturalsGameModeForPath(pathname)}
+            onModeChange={(mode) => openGame(mode === 'hub' ? null : naturalsGameSlugs[mode])}
         />
     )
 }

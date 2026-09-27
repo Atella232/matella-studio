@@ -14,7 +14,7 @@ import { FractionLaboratory } from './lab'
 import { labChallengeIds, labToolForTopic, labTools } from './lab/labTools'
 import { GamesArea } from './games'
 import { GAME_RECORDS_KEY, gameProgressIds } from './games/records'
-import { gameModeForPath } from './routing'
+import { gameModeForPath, gameSlugs } from './routing'
 import { AddFigure, AreaFigure, EquivalenceFigure, FractionOfFigure, MeaningFigure, MixedFigure, OrderFigure, PercentFigure, PowerFigure, ProportionFigure, SimplifyFigure } from './figures'
 import type { TheoryTopicId } from './content'
 
@@ -108,8 +108,14 @@ const zatikiakUnit: UnitDefinition = {
         description: { eu: 'Lau joko abiadura eta zehaztasuna entrenatzeko.', es: 'Cuatro juegos para entrenar rapidez y precisión.', ar: 'أربع ألعاب لتدريب السرعة والدقة.' },
         progressIds: gameProgressIds,
         recordsKey: GAME_RECORDS_KEY,
-        render: ({ language, pathname, completedIds, onComplete }) => (
-            <GamesArea language={language} completedIds={completedIds} onComplete={onComplete} initialGame={gameModeForPath(pathname)} />
+        render: ({ language, pathname, openGame, completedIds, onComplete }) => (
+            <GamesArea
+                language={language}
+                completedIds={completedIds}
+                onComplete={onComplete}
+                mode={gameModeForPath(pathname)}
+                onModeChange={(mode) => openGame(mode === 'hub' ? null : gameSlugs[mode])}
+            />
         )
     }
 }

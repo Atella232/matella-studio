@@ -60,6 +60,9 @@ export const naturalsGames: GameInfo<NaturalsGameId>[] = [
 
 export const naturalsGameProgressIds: number[] = levelProgressIds(naturalsGames)
 
+/** Address of each game (Basque); the parser below also accepts the Spanish ones */
+export const naturalsGameSlugs: Record<NaturalsGameId, string> = { race: 'lasterketa', hunt: 'ehiza', sprint: 'semaforoa', memory: 'memoria' }
+
 export function naturalsGameModeForPath(pathname: string): NaturalsGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
     if (!game) return 'hub'

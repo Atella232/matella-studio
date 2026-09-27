@@ -60,6 +60,9 @@ export const divisibilityGames: GameInfo<DivisibilityGameId>[] = [
 
 export const divisibilityGameProgressIds: number[] = levelProgressIds(divisibilityGames)
 
+/** Address of each game (Basque); the parser below also accepts the Spanish ones */
+export const divisibilityGameSlugs: Record<DivisibilityGameId, string> = { race: 'lasterketa', hunt: 'ehiza', factor: 'deskonposaketa', memory: 'memoria' }
+
 export function divisibilityGameModeForPath(pathname: string): DivisibilityGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
     if (!game) return 'hub'

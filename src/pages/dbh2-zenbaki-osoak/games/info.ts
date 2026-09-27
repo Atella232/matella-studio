@@ -60,6 +60,9 @@ export const integerGames: GameInfo<IntegerGameId>[] = [
 
 export const integerGameProgressIds: number[] = levelProgressIds(integerGames)
 
+/** Address of each game (Basque); the parser below also accepts the Spanish ones */
+export const integerGameSlugs: Record<IntegerGameId, string> = { race: 'lasterketa', pyramid: 'piramidea', memory: 'memoria', order: 'ilara' }
+
 export function integerGameModeForPath(pathname: string): IntegerGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
     if (!game) return 'hub'

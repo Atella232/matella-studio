@@ -221,11 +221,13 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                         challengeMode
                     />
                 )}
-                {section === 'play' && (
-                    <div key={`games-${location.pathname}`}>
-                        {unit.games?.render({ language, pathname: location.pathname, completedIds: playProgress.ids, onComplete: playProgress.addId })}
-                    </div>
-                )}
+                {section === 'play' && unit.games?.render({
+                    language,
+                    pathname: location.pathname,
+                    openGame: (slug) => navigate('play', slug ?? undefined),
+                    completedIds: playProgress.ids,
+                    onComplete: playProgress.addId
+                })}
             </main>
         </div>
     )

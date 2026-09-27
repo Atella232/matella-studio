@@ -132,6 +132,8 @@ export interface LabRenderProps {
 export interface GamesRenderProps {
     language: UnitLanguage
     pathname: string
+    /** Opens a game by its address slug, or the list of games with null */
+    openGame: (slug: string | null) => void
     completedIds: number[]
     onComplete: (id: number) => void
 }

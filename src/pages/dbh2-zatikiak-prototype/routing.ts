@@ -5,6 +5,9 @@ export { practiceModeForPath, sectionForPath, type PracticeMode } from '../../fe
 /** 'hub' is the list of games */
 export type GameMode = 'hub' | GameId
 
+/** Address of each game (Basque); the parser below also accepts the Spanish ones */
+export const gameSlugs: Record<GameId, string> = { race: 'lasterketa', target: 'itua', wall: 'horma', memory: 'memoria' }
+
 export function gameModeForPath(pathname: string): GameMode {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
     if (!game) return 'hub'
