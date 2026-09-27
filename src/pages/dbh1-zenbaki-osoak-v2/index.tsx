@@ -1,6 +1,7 @@
 import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import '../dbh2-zenbaki-osoak/ZenbakiOsoak.css'
+import { integerIntroChallenges, integerIntroDiagnostic, integerIntroExerciseBank, integerIntroPractice } from './content'
 import { IntegersIntroHeroArt } from './figures'
 import { integerIntroStages, integerIntroTopics } from './lessons'
 import './IntegersIntro.css'
@@ -20,6 +21,10 @@ const zenbakiOsoakIntroUnit: UnitDefinition = {
     pathSubtitle: { eu: 'Bost etapa, egoera errealetatik zeinuen araura', es: 'Cinco etapas, de las situaciones reales a la regla de los signos', ar: 'خمس مراحل، من المواقف الحقيقية إلى قاعدة الإشارات' },
     stages: integerIntroStages,
     topics: integerIntroTopics,
+    diagnostic: integerIntroDiagnostic,
+    guidedPractice: integerIntroPractice,
+    exerciseBank: integerIntroExerciseBank,
+    challenges: integerIntroChallenges,
     answers: {
         note: { eu: 'Idatzi emaitza zenbaki oso gisa: −7, 12 edo +12.', es: 'Escribe el resultado como número entero: −7, 12 o +12.', ar: 'اكتب النتيجة عددًا صحيحًا: ⁦−7⁩ أو 12 أو ⁦+12⁩.' },
         defaultForm: 'simplified',
