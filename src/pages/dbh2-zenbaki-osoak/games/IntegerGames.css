@@ -1,0 +1,192 @@
+/* Zenbaki osoak games: pyramid and "in a row". Shared game pieces live in
+   src/features/unit-v2/games/Games.css. */
+
+.fraction-v2-games-card[data-game="pyramid"] { --game-tint: var(--mustard-tint); }
+.fraction-v2-games-card[data-game="order"] { --game-tint: var(--green-tint, #d6eddf); }
+
+/* ---------- Pyramid ---------- */
+
+.integers-pyramid-game,
+.integers-order-game {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.fraction-v2 .integers-pyramid-rule {
+    margin: 0;
+    font-weight: 700;
+    text-align: center;
+}
+
+.integers-pyramid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 24px 16px;
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    background: var(--card);
+    box-shadow: 6px 6px 0 var(--ink);
+}
+
+.integers-pyramid-row {
+    display: flex;
+    gap: 8px;
+}
+
+.integers-brick {
+    display: inline-grid;
+    place-items: center;
+    width: 84px;
+    height: 54px;
+    padding: 0 6px;
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    background: var(--stage-tint);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+}
+
+input.integers-brick {
+    border-style: dashed;
+    background: var(--paper);
+}
+
+input.integers-brick:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+    border-style: solid;
+}
+
+input.integers-brick.wrong {
+    border-style: solid;
+    border-color: var(--error);
+    background: var(--error-tint);
+    color: var(--error-ink);
+}
+
+input.integers-brick.right {
+    border-style: solid;
+    border-color: var(--success);
+    background: var(--success-tint);
+    color: var(--success-ink);
+}
+
+.integers-pyramid > .fraction-v2-primary {
+    margin-top: 12px;
+}
+
+.integers-pyramid-next {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+/* ---------- In a row ---------- */
+
+.fraction-v2 .integers-order-direction {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.integers-order-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+}
+
+.integers-order-slot {
+    display: inline-grid;
+    place-items: center;
+    min-width: 56px;
+    height: 44px;
+    padding: 0 8px;
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    background: var(--stage-tint);
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.integers-order-slot.empty {
+    border-style: dashed;
+    border-color: var(--muted);
+    background: transparent;
+}
+
+.integers-order-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+    padding: 18px;
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    background: var(--card);
+    box-shadow: 6px 6px 0 var(--ink);
+}
+
+.integers-order-card {
+    min-height: 76px;
+    padding: 8px;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.integers-order-card:hover:not(:disabled) {
+    background: var(--stage-tint);
+}
+
+.integers-order-card.done {
+    opacity: 0.25;
+}
+
+.integers-order-card.shake {
+    border-color: var(--error);
+    background: var(--error-tint);
+    animation: integers-shake 0.35s ease;
+}
+
+@keyframes integers-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+}
+
+@media (max-width: 760px) {
+    .integers-brick {
+        width: 64px;
+        height: 48px;
+        font-size: 19px;
+    }
+
+    .integers-pyramid-row {
+        gap: 5px;
+    }
+
+    .integers-order-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .integers-order-card.shake {
+        animation: none;
+    }
+}

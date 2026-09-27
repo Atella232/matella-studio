@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { integerChallenges, integerDiagnostic, integerExerciseBank, integerPractice } from './content'
 import { IntegersHeroArt } from './figures'
+import { IntegerGames } from './games'
+import { INTEGER_GAME_RECORDS_KEY, integerGameProgressIds } from './games/info'
 import { IntegerLaboratory } from './lab'
 import { integerLabChallengeIds, integerLabToolForTopic, integerLabTools } from './lab/labTools'
 import { integerStages, integerTopics } from './lessons'
@@ -31,6 +33,12 @@ const zenbakiOsoakUnit: UnitDefinition = {
         progressIds: integerLabChallengeIds,
         toolForTopic: integerLabToolForTopic,
         render: (props) => <IntegerLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Lau joko zeinuekin azkar eta zehatz aritzeko.', es: 'Cuatro juegos para ganar rapidez y precisión con los signos.', ar: 'أربع ألعاب لاكتساب السرعة والدقة مع الإشارات.' },
+        progressIds: integerGameProgressIds,
+        recordsKey: INTEGER_GAME_RECORDS_KEY,
+        render: (props) => <IntegerGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi emaitza zenbaki oso gisa: −7, 12 edo +12.', es: 'Escribe el resultado como número entero: −7, 12 o +12.', ar: 'اكتب النتيجة عددًا صحيحًا: ⁦−7⁩ أو 12 أو ⁦+12⁩.' },
