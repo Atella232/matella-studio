@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { factorize, factorLatex } from '../math'
 import { acronymLatex } from './acronyms'
 import { WholeAnswer } from './LabBits'
 import { commonLandings, initialJumpsState, JUMP_LIMITS, JUMP_TRACK, jumpsChallenges, jumpsLcm, resultVisible, setJumps, type DivisibilityToolProps, type JumpsState } from './labTools'
 
-export function JumpsTool(props: DivisibilityToolProps) {
+export function JumpsTool(props: DivisibilityToolProps & { challenges?: LabChallenge<JumpsState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<JumpsState>(initialJumpsState)
     const { first, second } = state
@@ -43,7 +44,7 @@ export function JumpsTool(props: DivisibilityToolProps) {
     )
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={jumpsChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? jumpsChallenges} state={state}>
             <div className="divisibility-figure-box">
                 <svg viewBox={`0 0 ${width} 170`} className="divisibility-figure" role="img" aria-label={l({ eu: `Multiplo komunak: ${common.join(', ')}`, es: `Múltiplos comunes: ${common.join(', ')}`, ar: `المضاعفات المشتركة: ${common.join('، ')}` })}>
                     {shown && common.map((value) => <rect key={value} x={x(value) - 12} y={30} width={24} height={110} rx={8} fill="var(--mustard-tint, #fbebc0)" stroke="var(--ink)" strokeWidth={1.4} />)}

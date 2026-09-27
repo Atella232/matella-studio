@@ -4,6 +4,8 @@ import '../dbh2-zatigarritasuna/Zatigarritasuna.css'
 import { readNaturalAnswer } from '../dbh1-zenbaki-naturalak-v2/numbers'
 import { divisibilityIntroChallenges, divisibilityIntroDiagnostic, divisibilityIntroExerciseBank, divisibilityIntroPractice } from './content'
 import { DivisibilityIntroHeroArt } from './figures'
+import { DivisibilityIntroLaboratory } from './lab'
+import { divisibilityIntroLabChallengeIds, divisibilityIntroLabToolForTopic, divisibilityIntroLabTools } from './lab/labTools'
 import { divisibilityIntroStages, divisibilityIntroTopics } from './lessons'
 
 const zatigarritasunaIntroUnit: UnitDefinition = {
@@ -25,6 +27,12 @@ const zatigarritasunaIntroUnit: UnitDefinition = {
     guidedPractice: divisibilityIntroPractice,
     exerciseBank: divisibilityIntroExerciseBank,
     challenges: divisibilityIntroChallenges,
+    lab: {
+        description: { eu: `${divisibilityIntroLabTools.length} tresna multiploak, zatitzaileak, irizpideak, lehenak, ZKH eta MKT ukitzeko, erronkekin.`, es: `${divisibilityIntroLabTools.length} herramientas para tocar múltiplos, divisores, criterios, primos, m.c.d. y m.c.m., con retos.`, ar: `${divisibilityIntroLabTools.length} أدوات للمس المضاعفات والقواسم والقواعد والأعداد الأولية وق.م.أ وم.م.أ، مع تحديات.` },
+        progressIds: divisibilityIntroLabChallengeIds,
+        toolForTopic: divisibilityIntroLabToolForTopic,
+        render: (props) => <DivisibilityIntroLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi emaitza zenbaki gisa, adibidez 12.', es: 'Escribe el resultado como un número, por ejemplo 12.', ar: 'اكتب النتيجة عددًا، مثل 12.' },
         defaultForm: 'simplified',

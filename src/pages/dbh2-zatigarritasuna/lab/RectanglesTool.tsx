@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { divisors } from '../math'
 import { divisorsLatex } from './acronyms'
 import { initialRectanglesState, RECTANGLE_LIMITS, rectanglesChallenges, rectangleSplit, setRectangles, type DivisibilityToolProps, type RectanglesState } from './labTools'
 
-export function RectanglesTool(props: DivisibilityToolProps) {
+export function RectanglesTool(props: DivisibilityToolProps & { challenges?: LabChallenge<RectanglesState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<RectanglesState>(() => setRectangles(initialRectanglesState, {}))
     const { total, perRow } = state
@@ -40,7 +41,7 @@ export function RectanglesTool(props: DivisibilityToolProps) {
     )
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={rectanglesChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? rectanglesChallenges} state={state}>
             <div className="divisibility-rectangle" style={{ gridTemplateColumns: `repeat(${perRow}, minmax(0, 1fr))`, maxWidth: `${Math.min(perRow, 16) * 34}px` }} role="img" aria-label={exact ? `${rows} · ${perRow}` : `${rows} · ${perRow} + ${rest}`}>
                 {Array.from({ length: total }, (_, index) => (
                     <span className={index >= rows * perRow ? 'rest' : ''} key={index} />

@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { ToolFrame } from '../../../features/unit-v2/lab/LabKit'
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { WholeAnswer } from './LabBits'
 import { circleNumber, crossedOut, initialSieveState, PRIMES_UP_TO_100, SIEVE_MAX, sieveChallenges, sieveComplete, type DivisibilityToolProps, type SieveState } from './labTools'
 
-export function SieveTool(props: DivisibilityToolProps) {
+export function SieveTool(props: DivisibilityToolProps & { challenges?: LabChallenge<SieveState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<SieveState>(initialSieveState)
     const crossed = crossedOut(state)
@@ -30,7 +31,7 @@ export function SieveTool(props: DivisibilityToolProps) {
     )
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={sieveChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? sieveChallenges} state={state}>
             <div className="divisibility-sieve" dir="ltr">
                 {Array.from({ length: SIEVE_MAX }, (_, index) => index + 1).map((value) => {
                     const isCrossed = crossed.has(value)

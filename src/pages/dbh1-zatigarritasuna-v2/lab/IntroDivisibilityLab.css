@@ -1,0 +1,82 @@
+/* Zatigarritasuna (1. DBH) laboratory: the divisor table. The shared tools
+   are styled by the 2. DBH DivisibilityLab.css. */
+
+.divisibility-table-tool {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 16px 12px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+    overflow-x: auto;
+}
+
+.divisibility-table-factors {
+    margin: 0;
+    font-size: 24px;
+}
+
+.divisibility-table {
+    border-collapse: separate;
+    border-spacing: 6px;
+}
+
+.divisibility-table th {
+    min-width: 44px;
+    font-weight: 700;
+    color: var(--stage-strong, var(--ink));
+    text-align: center;
+}
+
+.divisibility-table tbody th {
+    text-align: end;
+    padding-inline-end: 6px;
+}
+
+.divisibility-table input {
+    width: 58px;
+    height: 48px;
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    background: var(--paper, #fffcf6);
+    color: var(--ink);
+    font: inherit;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.divisibility-table td.right input {
+    background: var(--stage-tint);
+}
+
+.divisibility-table td.wrong input {
+    border-style: dashed;
+    border-color: var(--error);
+    background: var(--error-tint);
+}
+
+.divisibility-table-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.divisibility-table-suggestions button {
+    min-width: 48px;
+    padding: 6px 10px;
+    border: 1.8px solid var(--ink);
+    border-radius: 999px;
+    background: var(--card);
+    color: var(--ink);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.divisibility-table-suggestions button[aria-pressed="true"] {
+    background: var(--stage-tint);
+}

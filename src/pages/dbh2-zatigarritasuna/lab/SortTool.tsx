@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { ToolFrame } from '../../../features/unit-v2/lab/LabKit'
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { acronym } from './acronyms'
 import { classifyCard, initialSortState, problemCards, sortChallenges, type DivisibilityToolProps, type SortState } from './labTools'
 
-export function SortTool(props: DivisibilityToolProps) {
+export function SortTool(props: DivisibilityToolProps & { challenges?: LabChallenge<SortState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<SortState>(initialSortState)
     const right = problemCards.filter((card) => state.answers[card.id] === card.kind).length
@@ -18,7 +19,7 @@ export function SortTool(props: DivisibilityToolProps) {
     )
 
     return (
-        <ToolFrame {...props} controls={controls} challenges={sortChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} challenges={props.challenges ?? sortChallenges} state={state}>
             <ul className="divisibility-sort">
                 {problemCards.map((card) => {
                     const chosen = state.answers[card.id]

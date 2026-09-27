@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { Segmented, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { factorize, factorLatex } from '../math'
 import { acronym, acronymLatex } from './acronyms'
@@ -21,7 +22,7 @@ function Factors({ values, cx, cy }: { values: number[]; cx: number; cy: number 
     )
 }
 
-export function VennTool(props: DivisibilityToolProps) {
+export function VennTool(props: DivisibilityToolProps & { challenges?: LabChallenge<VennState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<VennState>(initialVennState)
     const { first, second, ask } = state
@@ -51,7 +52,7 @@ export function VennTool(props: DivisibilityToolProps) {
     )
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={vennChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? vennChallenges} state={state}>
             <div className="divisibility-figure-box">
                 <svg viewBox="0 0 640 300" className="divisibility-figure" role="img" aria-label={l({ eu: `Erdian: ${regions.shared.join(' · ') || 'ezer ez'}`, es: `En el centro: ${regions.shared.join(' · ') || 'nada'}`, ar: `في الوسط: ${regions.shared.join(' · ') || 'لا شيء'}` })}>
                     <circle cx={250} cy={160} r={120} fill="var(--blue-tint, #dde7f7)" fillOpacity={ask === 'gcd' ? 0.5 : 0.8} stroke="var(--ink)" strokeWidth={2.2} />

@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { ToolFrame } from '../../../features/unit-v2/lab/LabKit'
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { factorize, factorLatex, isPrime } from '../math'
 import { NumberField } from './LabBits'
 import { divideLadder, initialLadderState, LADDER_LIMITS, LADDER_PRIMES, ladderChallenges, ladderRest, ladderStuck, setLadderValue, type DivisibilityToolProps, type LadderState } from './labTools'
 
-export function LadderTool(props: DivisibilityToolProps) {
+export function LadderTool(props: DivisibilityToolProps & { challenges?: LabChallenge<LadderState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<LadderState>(initialLadderState)
     const rest = ladderRest(state)
@@ -51,7 +52,7 @@ export function LadderTool(props: DivisibilityToolProps) {
     )
 
     return (
-        <ToolFrame {...props} controls={controls} readout={state.rejected !== null || stuck || done ? readout : undefined} challenges={ladderChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={state.rejected !== null || stuck || done ? readout : undefined} challenges={props.challenges ?? ladderChallenges} state={state}>
             <div className="divisibility-ladder" dir="ltr" aria-live="polite">
                 {rows.map(({ value, prime }, index) => (
                     <div className="divisibility-ladder-row" key={index}>

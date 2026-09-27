@@ -16,7 +16,8 @@ export interface DivisibilityLabTool extends UnitLabToolInfo {
     stage: DivisibilityStageId
 }
 
-export type DivisibilityToolProps = LabToolProps<DivisibilityLabTool>
+/** Loose on purpose: the 1. DBH unit reuses these tools with its own tool list and challenges */
+export type DivisibilityToolProps = LabToolProps<UnitLabToolInfo>
 
 export const divisibilityLabTools: DivisibilityLabTool[] = [
     {

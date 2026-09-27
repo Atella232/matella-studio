@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { ToolFrame } from '../../../features/unit-v2/lab/LabKit'
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import type { LocalizedText } from '../../../features/unit-v2/types'
 import { NumberField } from './LabBits'
@@ -16,11 +17,12 @@ const ruleText: Record<Criterion, LocalizedText> = {
     11: { eu: 'Posizio bikoitiak − bakoitiak', es: 'Lugares pares − impares', ar: 'المواقع الزوجية − الفردية' }
 }
 
-export function CriteriaTool(props: DivisibilityToolProps) {
+export function CriteriaTool(props: DivisibilityToolProps & { challenges?: LabChallenge<CriteriaState>[]; criteria?: readonly Criterion[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<CriteriaState>(initialCriteriaState)
     const { value } = state
-    const yes = CRITERIA.filter((criterion) => criterionWorking(criterion, value).applies)
+    const criteria = props.criteria ?? CRITERIA
+    const yes = criteria.filter((criterion) => criterionWorking(criterion, value).applies)
 
     const controls = (
         <>
@@ -40,7 +42,7 @@ export function CriteriaTool(props: DivisibilityToolProps) {
     )
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={criteriaChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? criteriaChallenges} state={state}>
             <div className="divisibility-criteria-box">
             <table className="divisibility-criteria">
                 <thead>
@@ -52,7 +54,7 @@ export function CriteriaTool(props: DivisibilityToolProps) {
                     </tr>
                 </thead>
                 <tbody>
-                    {CRITERIA.map((criterion) => {
+                    {criteria.map((criterion) => {
                         const { applies, detail } = criterionWorking(criterion, value)
                         return (
                             <tr className={applies ? 'yes' : 'no'} key={criterion}>
