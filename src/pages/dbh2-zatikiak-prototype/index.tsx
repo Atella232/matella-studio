@@ -9,7 +9,7 @@ import {
 } from './content'
 import { fractionExerciseSections } from '../dbh2-zatikiak/ExercisesPage/exercisesData'
 import { FractionLaboratory } from './lab'
-import { labChallengeIds, labToolForTopic, labTools, type LabToolId } from './lab/labTools'
+import { labChallengeIds, labToolForTopic, labTools } from './lab/labTools'
 import { GamesArea } from './games'
 import { GAME_RECORDS_KEY, gameProgressIds } from './games/records'
 import { gameModeForPath } from './routing'
@@ -74,7 +74,7 @@ const zatikiakUnit: UnitDefinition = {
         render: ({ language, tool, onToolChange, completedIds, onComplete, onOpenLesson }) => (
             <FractionLaboratory
                 language={language}
-                tool={(tool ?? 'parts') as LabToolId}
+                tool={tool}
                 onToolChange={onToolChange}
                 completedIds={completedIds}
                 onComplete={onComplete}

@@ -1,9 +1,12 @@
-import type { FractionStageId, LocalizedText, PrototypeLanguage, TheoryTopicId } from '../content.ts'
+import type { FractionStageId, LocalizedText, TheoryTopicId } from '../content.ts'
 import { checkAnswer, compare, equals, fraction, gcd, hasTerminatingDecimal, type AnswerForm, type FractionValue } from '../math/fraction.ts'
+import { freshAnswer, type LabChallenge, type LabToolInfo as UnitLabToolInfo, type LabToolProps, type OperationAnswer } from '../../../features/unit-v2/lab/types.ts'
+
+export type { LabChallenge, OperationAnswer } from '../../../features/unit-v2/lab/types.ts'
 
 export type LabToolId = 'parts' | 'numberline' | 'wall' | 'equivalence' | 'compare' | 'addsub' | 'muldiv' | 'proportion'
 
-export interface LabToolInfo {
+export interface LabToolInfo extends UnitLabToolInfo {
     id: LabToolId
     stage: FractionStageId
     lessonTopic: TheoryTopicId
@@ -12,22 +15,7 @@ export interface LabToolInfo {
 }
 
 /** Props every lab tool receives from the laboratory */
-export interface ToolProps {
-    tool: LabToolInfo
-    stageLabel: string
-    language: PrototypeLanguage
-    completedIds: number[]
-    onComplete: (id: number) => void
-    onOpenLesson: () => void
-}
-
-/** A short goal inside a tool, checked against the tool's current state */
-export interface LabChallenge<State> {
-    id: number
-    prompt: LocalizedText
-    hint: LocalizedText
-    isSolved: (state: State) => boolean
-}
+export type ToolProps = LabToolProps<LabToolInfo>
 
 export const labTools: LabToolInfo[] = [
     {
@@ -505,18 +493,7 @@ export const compareChallenges: LabChallenge<CompareState>[] = [
 
 /* ---------- Operations: shared answer handling ---------- */
 
-export interface OperationAnswer {
-    /** What the learner typed as the result */
-    answer: string
-    /** Whether the learner pressed "check" since last editing the answer */
-    checked: boolean
-    /** Whether the learner chose to see the worked result */
-    revealed: boolean
-}
-
 export const OPERATION_LIMITS = { minDenominator: 2, maxDenominator: 12 } as const
-
-const freshAnswer: OperationAnswer = { answer: '', checked: false, revealed: false }
 
 /** Operands stay within one unit; any change asks for a new answer */
 function withOperand<State extends { first: FractionValue; second: FractionValue } & OperationAnswer>(
