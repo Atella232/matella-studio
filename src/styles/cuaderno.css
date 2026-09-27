@@ -410,6 +410,57 @@
     opacity: 0.55;
 }
 
+/* "Coming soon" cards: the badge goes under the title instead of taking
+   width from it, so long names are not squeezed letter by letter */
+:root:not([data-theme="classic"]) .subject-card.disabled {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+        "icon content"
+        "icon badge";
+    align-items: center;
+    column-gap: 18px;
+    row-gap: 6px;
+}
+
+:root:not([data-theme="classic"]) .subject-card.disabled .subject-card-icon {
+    grid-area: icon;
+}
+
+:root:not([data-theme="classic"]) .subject-card.disabled .subject-card-content {
+    grid-area: content;
+    align-self: end;
+}
+
+:root:not([data-theme="classic"]) .subject-card.disabled .subject-card-badge {
+    grid-area: badge;
+    align-self: start;
+    justify-self: start;
+}
+
+/* Topic names are long single words in Basque (Zatigarritasuna,
+   Proportzionaltasuna): a slightly smaller title keeps them whole */
+:root:not([data-theme="classic"]) .topics-grid .subject-card {
+    gap: 14px;
+    column-gap: 14px;
+    padding-inline: 18px;
+}
+
+:root:not([data-theme="classic"]) .topics-grid .subject-card-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 1.55rem;
+}
+
+:root:not([data-theme="classic"]) .topics-grid .subject-card-title {
+    font-size: 1.15rem;
+}
+
+/* On the topics page the description of a coming-soon topic repeats the badge */
+:root:not([data-theme="classic"]) .topics-grid .subject-card.disabled .subject-card-description {
+    display: none;
+}
+
 :root:not([data-theme="classic"]) .subject-card-icon {
     width: 58px;
     height: 58px;
@@ -425,7 +476,8 @@
 }
 
 :root:not([data-theme="classic"]) .subject-card-title {
-    overflow-wrap: anywhere;
+    /* Break only between words, or inside a word that is longer than the card */
+    overflow-wrap: break-word;
     hyphens: auto;
     color: var(--ink);
     font-family: var(--font-display);
