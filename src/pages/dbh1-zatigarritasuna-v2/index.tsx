@@ -1,6 +1,8 @@
 import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import '../dbh2-zatigarritasuna/Zatigarritasuna.css'
+import { readNaturalAnswer } from '../dbh1-zenbaki-naturalak-v2/numbers'
+import { divisibilityIntroChallenges, divisibilityIntroDiagnostic, divisibilityIntroExerciseBank, divisibilityIntroPractice } from './content'
 import { DivisibilityIntroHeroArt } from './figures'
 import { divisibilityIntroStages, divisibilityIntroTopics } from './lessons'
 
@@ -19,10 +21,15 @@ const zatigarritasunaIntroUnit: UnitDefinition = {
     pathSubtitle: { eu: 'Bost etapa, zatiketa zehatzetik ZKH eta MKTko buruketetara', es: 'Cinco etapas, de la división exacta a los problemas de m.c.d. y m.c.m.', ar: 'خمس مراحل، من القسمة التامة إلى مسائل ق.م.أ وم.م.أ' },
     stages: divisibilityIntroStages,
     topics: divisibilityIntroTopics,
+    diagnostic: divisibilityIntroDiagnostic,
+    guidedPractice: divisibilityIntroPractice,
+    exerciseBank: divisibilityIntroExerciseBank,
+    challenges: divisibilityIntroChallenges,
     answers: {
         note: { eu: 'Idatzi emaitza zenbaki gisa, adibidez 12.', es: 'Escribe el resultado como un número, por ejemplo 12.', ar: 'اكتب النتيجة عددًا، مثل 12.' },
         defaultForm: 'simplified',
         inputMode: 'numeric',
+        normalizeInput: readNaturalAnswer,
         placeholder: () => ({ eu: 'Adib.: 12', es: 'Ej.: 12', ar: 'مثال: 12' }),
         wrongForm: () => ({ eu: 'Balioa zuzena da, baina idatzi zenbaki oso gisa.', es: 'El valor es correcto, pero escríbelo como número entero.', ar: 'القيمة صحيحة، لكن اكتبها عددًا صحيحًا.' }),
         unreadable: { eu: 'Ez dut erantzun hori ulertzen. Idatzi zenbaki bat, adibidez 12.', es: 'No entiendo esa respuesta. Escribe un número, por ejemplo 12.', ar: 'لم أفهم هذه الإجابة. اكتب عددًا، مثل 12.' }
