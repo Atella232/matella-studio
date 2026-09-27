@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { naturalsChallenges, naturalsDiagnostic, naturalsExerciseBank, naturalsPractice } from './content'
 import { NaturalsHeroArt } from './figures'
+import { NaturalsGames } from './games'
+import { NATURALS_GAME_RECORDS_KEY, naturalsGameProgressIds } from './games/info'
 import { NaturalsLaboratory } from './lab'
 import { naturalsLabChallengeIds, naturalsLabToolForTopic, naturalsLabTools } from './lab/labTools'
 import { naturalsStages, naturalsTopics } from './lessons'
@@ -32,6 +34,12 @@ const zenbakiNaturalakUnit: UnitDefinition = {
         progressIds: naturalsLabChallengeIds,
         toolForTopic: naturalsLabToolForTopic,
         render: (props) => <NaturalsLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Lau joko zenbaki naturalekin azkar aritzeko: lasterketa, ehiza, semaforo-sprinta eta memoria.', es: 'Cuatro juegos para ganar rapidez con los números naturales: carrera, caza, sprint del semáforo y memoria.', ar: 'أربع ألعاب لاكتساب السرعة مع الأعداد الطبيعية: السباق والصيد وسباق إشارة المرور والذاكرة.' },
+        progressIds: naturalsGameProgressIds,
+        recordsKey: NATURALS_GAME_RECORDS_KEY,
+        render: (props) => <NaturalsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi emaitza zenbaki gisa, adibidez 44 edo 15.000.', es: 'Escribe el resultado como un número, por ejemplo 44 o 15.000.', ar: 'اكتب النتيجة عددًا، مثل 44 أو 15.000.' },
