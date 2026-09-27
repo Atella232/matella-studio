@@ -104,6 +104,8 @@ export interface AnswerMessages {
     /** Default written form of this unit's answers */
     defaultForm: AnswerForm
     inputMode: 'decimal' | 'text' | 'numeric'
+    /** Rewrites an answer before it is checked (e.g. drops the point in 15.000) */
+    normalizeInput?: (input: string) => string
 }
 
 export interface LabRenderProps {

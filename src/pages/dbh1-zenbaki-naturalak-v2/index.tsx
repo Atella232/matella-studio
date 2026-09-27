@@ -1,7 +1,9 @@
 import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
+import { naturalsChallenges, naturalsDiagnostic, naturalsExerciseBank, naturalsPractice } from './content'
 import { NaturalsHeroArt } from './figures'
 import { naturalsStages, naturalsTopics } from './lessons'
+import { readNaturalAnswer } from './numbers'
 import './NaturalNumbers.css'
 
 const zenbakiNaturalakUnit: UnitDefinition = {
@@ -19,10 +21,15 @@ const zenbakiNaturalakUnit: UnitDefinition = {
     pathSubtitle: { eu: 'Bost etapa, sistema hamartarretik berreturetara', es: 'Cinco etapas, del sistema decimal a las potencias', ar: 'خمس مراحل، من النظام العشري إلى القوى' },
     stages: naturalsStages,
     topics: naturalsTopics,
+    diagnostic: naturalsDiagnostic,
+    guidedPractice: naturalsPractice,
+    exerciseBank: naturalsExerciseBank,
+    challenges: naturalsChallenges,
     answers: {
-        note: { eu: 'Idatzi emaitza zenbaki gisa, adibidez 44.', es: 'Escribe el resultado como un número, por ejemplo 44.', ar: 'اكتب النتيجة عددًا، مثل 44.' },
+        note: { eu: 'Idatzi emaitza zenbaki gisa, adibidez 44 edo 15.000.', es: 'Escribe el resultado como un número, por ejemplo 44 o 15.000.', ar: 'اكتب النتيجة عددًا، مثل 44 أو 15.000.' },
         defaultForm: 'simplified',
         inputMode: 'numeric',
+        normalizeInput: readNaturalAnswer,
         placeholder: () => ({ eu: 'Adib.: 44', es: 'Ej.: 44', ar: 'مثال: 44' }),
         wrongForm: () => ({ eu: 'Balioa zuzena da, baina idatzi zenbaki natural gisa.', es: 'El valor es correcto, pero escríbelo como número natural.', ar: 'القيمة صحيحة، لكن اكتبها عددًا طبيعيًا.' }),
         unreadable: { eu: 'Ez dut erantzun hori ulertzen. Idatzi zenbaki bat, adibidez 44.', es: 'No entiendo esa respuesta. Escribe un número, por ejemplo 44.', ar: 'لم أفهم هذه الإجابة. اكتب عددًا، مثل 44.' }

@@ -195,7 +195,8 @@ export function PracticeDeck({
     const stageOf = (id: string) => unit.stages.find((stage) => stage.id === id) ?? unit.stages[0]
 
     const check = () => {
-        const result = checkAnswer(answers[current.id] ?? '', current.expected, answerForm)
+        const written = answers[current.id] ?? ''
+        const result = checkAnswer(unit.answers.normalizeInput?.(written) ?? written, current.expected, answerForm)
         const next: TaskFeedback = result === 'correct' ? 'success' : result === 'incorrect' ? 'error' : result
         setFeedback((state) => ({ ...state, [current.id]: next }))
         if (result === 'correct') onComplete(current.id)
