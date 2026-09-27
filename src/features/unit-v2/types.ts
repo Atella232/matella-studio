@@ -83,11 +83,21 @@ export interface DiagnosticQuestion {
 
 export type ExerciseDifficulty = 'easy' | 'medium' | 'hard'
 
+/** The single number a closed exercise asks for; the bank then checks it instead of asking the student */
+export interface ExerciseAnswer {
+    expected: FractionValue
+    /** Written form required; defaults to the unit's answer form */
+    form?: AnswerForm
+    /** Replaces the unit's "right value, wrong form" message when the exercise asks for something more specific */
+    formMessage?: LocalizedText
+}
+
 export interface ExerciseItem {
     id: number
     difficulty: ExerciseDifficulty
     question: LocalizedText
     solution: LocalizedText
+    answer?: ExerciseAnswer
 }
 
 export interface ExerciseSection {

@@ -227,6 +227,9 @@ export function checkAnswer(input: string, expected: FractionValue, form: Answer
     if (form === 'any') return 'correct'
 
     const written = normalizeDigits(input).trim().replace(/\s*([/.,])\s*/g, '$1')
+        // Labels and units around the number ("x = 15", "25 m") do not change how it is written
+        .replace(/^[^\d+-]+/, '')
+        .replace(/[^\d%٪]+$/, '')
     const target = fraction(expected.numerator, expected.denominator)
     // A whole number is already in its simplest form, and has no fractional part to write as mixed
     if (target.denominator === 1) return /^[+-]?\d+$/.test(written) ? 'correct' : 'wrong-form'

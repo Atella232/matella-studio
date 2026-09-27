@@ -91,6 +91,7 @@ function ExerciseBank({
     const [difficulty, setDifficulty] = useState<'all' | ExerciseDifficulty>('all')
     const [attempts, setAttempts] = useState<Record<string, string>>({})
     const [revealed, setRevealed] = useState<string[]>([])
+    const [checks, setChecks] = useState<Record<string, TaskFeedback>>({})
     const sectionIndex = Math.max(0, sections.findIndex((section) => section.id === sectionId))
     const section = sections[sectionIndex]
     const items = section ? section.items.filter((item) => difficulty === 'all' || item.difficulty === difficulty) : []
@@ -110,7 +111,7 @@ function ExerciseBank({
             <div className="fraction-v2-page-intro">
                 <span>{l({ eu: `${total} ARIKETA`, es: `${total} EJERCICIOS`, ar: `${total} تمرينًا` })}</span>
                 <h1 id="fraction-v2-bank-title">{l({ eu: 'Praktikatu gai eta zailtasunaren arabera', es: 'Practica por tema y dificultad', ar: 'تدرّب حسب الموضوع والصعوبة' })}</h1>
-                <p>{l({ eu: 'Lehenik idatzi zure saiakera. Ondoren alderatu urratsez urratseko ebazpenarekin eta markatu lortu duzun.', es: 'Escribe primero tu intento. Después compáralo con la resolución y marca si lo has conseguido.', ar: 'اكتب محاولتك أولًا، ثم قارنها بالحل وحدد إن كنت قد أتقنتها.' })}</p>
+                <p>{l({ eu: 'Emaitza zenbaki bat denean, idatzi eta egiaztatu: zuzena bada, lortutzat markatzen da. Gainerakoetan, idatzi zure saiakera, alderatu ebazpenarekin eta markatu lortu duzun.', es: 'Cuando el resultado es un número, escríbelo y compruébalo: si es correcto, se marca como conseguido. En los demás, escribe tu intento, compáralo con la resolución y marca si lo has conseguido.', ar: 'عندما تكون النتيجة عددًا اكتبها وتحقق منها: إذا كانت صحيحة تُحتسب تلقائيًا. وفي غيرها اكتب محاولتك وقارنها بالحل وحدد إن كنت قد أتقنتها.' })}</p>
             </div>
 
             <div className="fraction-v2-bank-toolbar">
@@ -133,6 +134,17 @@ function ExerciseBank({
                     const hasAttempt = Boolean(attempts[key]?.trim())
                     const isRevealed = revealed.includes(key)
                     const isComplete = completedIds.includes(progressId)
+                    const answer = item.answer
+                    const answerForm = answer?.form ?? unit.answers.defaultForm
+                    const feedback = checks[key] ?? 'idle'
+                    const check = () => {
+                        if (!answer) return
+                        const written = attempts[key] ?? ''
+                        const result = checkAnswer(unit.answers.normalizeInput?.(written) ?? written, answer.expected, answerForm)
+                        const next: TaskFeedback = result === 'correct' ? 'success' : result === 'incorrect' ? 'error' : result
+                        setChecks((state) => ({ ...state, [key]: next }))
+                        if (next === 'success' && !isComplete) onComplete(progressId)
+                    }
                     return (
                         <article className={`fraction-v2-bank-card ${isComplete ? 'complete' : ''}`} key={key}>
                             <div className="fraction-v2-bank-card-meta">
@@ -141,14 +153,42 @@ function ExerciseBank({
                                 {isComplete && <strong>✓</strong>}
                             </div>
                             <div className="fraction-v2-bank-question"><MathText text={item.question[language]} /></div>
-                            <label htmlFor={`fraction-v2-bank-attempt-${key}`}>{l({ eu: 'Zure saiakera', es: 'Tu intento', ar: 'محاولتك' })}</label>
-                            <textarea
-                                id={`fraction-v2-bank-attempt-${key}`}
-                                rows={2}
-                                value={attempts[key] ?? ''}
-                                onChange={(event) => setAttempts((state) => ({ ...state, [key]: event.target.value }))}
-                                placeholder={l({ eu: 'Idatzi emaitza edo arrazoibidea…', es: 'Escribe el resultado o razonamiento…', ar: 'اكتب النتيجة أو الاستدلال…' })}
-                            />
+                            {answer ? (
+                                <>
+                                    <label htmlFor={`fraction-v2-bank-attempt-${key}`}>{l({ eu: 'Zure erantzuna', es: 'Tu respuesta', ar: 'إجابتك' })}</label>
+                                    <div className="fraction-v2-answer-row">
+                                        <input
+                                            id={`fraction-v2-bank-attempt-${key}`}
+                                            value={attempts[key] ?? ''}
+                                            onChange={(event) => {
+                                                setAttempts((state) => ({ ...state, [key]: event.target.value }))
+                                                setChecks((state) => ({ ...state, [key]: 'idle' }))
+                                            }}
+                                            onKeyDown={(event) => { if (event.key === 'Enter') check() }}
+                                            placeholder={l(unit.answers.placeholder(answerForm))}
+                                            inputMode={answerForm === 'mixed' ? 'text' : unit.answers.inputMode}
+                                        />
+                                        <button type="button" className="fraction-v2-primary" onClick={check} disabled={!hasAttempt}>{l({ eu: 'Egiaztatu', es: 'Comprobar', ar: 'تحقق' })}</button>
+                                    </div>
+                                    <div aria-live="polite">
+                                        {feedback === 'success' && <div className="fraction-v2-feedback success">{l({ eu: 'Zuzena! Ariketa lortuta.', es: '¡Correcto! Ejercicio conseguido.', ar: 'صحيح! أتقنت التمرين.' })}</div>}
+                                        {feedback === 'error' && <div className="fraction-v2-feedback error">{l(unit.errorByStage[section.id] ?? { eu: 'Ez da zuzena. Berrikusi urratsak eta saiatu berriro.', es: 'No es correcto. Revisa los pasos y vuelve a intentarlo.', ar: 'ليست صحيحة. راجع الخطوات وحاول مجددًا.' })}</div>}
+                                        {feedback === 'wrong-form' && <div className="fraction-v2-feedback form">{l(answer.formMessage ?? unit.answers.wrongForm(answerForm))}</div>}
+                                        {feedback === 'unreadable' && <div className="fraction-v2-feedback">{l(unit.answers.unreadable)}</div>}
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <label htmlFor={`fraction-v2-bank-attempt-${key}`}>{l({ eu: 'Zure saiakera', es: 'Tu intento', ar: 'محاولتك' })}</label>
+                                    <textarea
+                                        id={`fraction-v2-bank-attempt-${key}`}
+                                        rows={2}
+                                        value={attempts[key] ?? ''}
+                                        onChange={(event) => setAttempts((state) => ({ ...state, [key]: event.target.value }))}
+                                        placeholder={l({ eu: 'Idatzi emaitza edo arrazoibidea…', es: 'Escribe el resultado o razonamiento…', ar: 'اكتب النتيجة أو الاستدلال…' })}
+                                    />
+                                </>
+                            )}
                             <button
                                 type="button"
                                 className="fraction-v2-hint-button"
@@ -163,7 +203,8 @@ function ExerciseBank({
                                 <div className="fraction-v2-bank-solution">
                                     <MathText text={item.solution[language]} />
                                     <div>
-                                        <button type="button" className={`fraction-v2-primary ${isComplete ? 'done' : ''}`} onClick={() => onComplete(progressId)} disabled={isComplete}>{isComplete ? '✓' : l({ eu: 'Lortu dut', es: 'Lo he conseguido', ar: 'أتقنتها' })}</button>
+                                        {/* A checked exercise is only completed by a correct answer */}
+                                        {!answer && <button type="button" className={`fraction-v2-primary ${isComplete ? 'done' : ''}`} onClick={() => onComplete(progressId)} disabled={isComplete}>{isComplete ? '✓' : l({ eu: 'Lortu dut', es: 'Lo he conseguido', ar: 'أتقنتها' })}</button>}
                                         <button type="button" className="fraction-v2-secondary" onClick={() => setRevealed((keys) => keys.filter((itemKey) => itemKey !== key))}>{l({ eu: 'Berriro saiatu', es: 'Volver a intentar', ar: 'حاول مجددًا' })}</button>
                                     </div>
                                 </div>

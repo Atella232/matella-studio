@@ -392,13 +392,15 @@ export const integerExerciseBank: ExerciseSection[] = [
                 id: 5,
                 difficulty: 'medium',
                 question: { eu: 'Arrain bat −15 m-ra dago eta kaio bat +10 m-ra. Zein distantzia dago bien artean?', es: 'Un pez está a −15 m y una gaviota a +10 m. ¿Qué distancia los separa?', ar: 'سمكة على عمق ⁦−15⁩ م ونورس على ارتفاع ⁦+10⁩ م. ما المسافة بينهما؟' },
-                solution: { eu: '$15+10=25$ m. Bestela: $(+10)-(-15)=25$ m.', es: '$15+10=25$ m. También: $(+10)-(-15)=25$ m.', ar: '$15+10=25$ م. أو: $(+10)-(-15)=25$ م.' }
+                solution: { eu: '$15+10=25$ m. Bestela: $(+10)-(-15)=25$ m.', es: '$15+10=25$ m. También: $(+10)-(-15)=25$ m.', ar: '$15+10=25$ م. أو: $(+10)-(-15)=25$ م.' },
+                answer: { expected: fraction(25) }
             },
             {
                 id: 6,
                 difficulty: 'hard',
                 question: { eu: 'Zein zenbaki dago zuzenean −9ren eta +3ren erdi-erdian?', es: '¿Qué número está en la recta justo en medio de −9 y +3?', ar: 'ما العدد الواقع تمامًا في منتصف المسافة بين ⁦−9⁩ و⁦+3⁩؟' },
-                solution: { eu: 'Distantzia $3-(-9)=12$ da; erdia 6. $-9+6=-3$.', es: 'La distancia es $3-(-9)=12$; la mitad, 6. $-9+6=-3$.', ar: 'المسافة $3-(-9)=12$؛ ونصفها 6. $-9+6=-3$.' }
+                solution: { eu: 'Distantzia $3-(-9)=12$ da; erdia 6. $-9+6=-3$.', es: 'La distancia es $3-(-9)=12$; la mitad, 6. $-9+6=-3$.', ar: 'المسافة $3-(-9)=12$؛ ونصفها 6. $-9+6=-3$.' },
+                answer: { expected: fraction(-3) }
             }
         ]
     },
@@ -428,13 +430,15 @@ export const integerExerciseBank: ExerciseSection[] = [
                 id: 10,
                 difficulty: 'medium',
                 question: { eu: 'Kalkulatu: $\\lvert -7\\rvert +\\lvert +3\\rvert -\\lvert -4\\rvert$.', es: 'Calcula: $\\lvert -7\\rvert +\\lvert +3\\rvert -\\lvert -4\\rvert$.', ar: 'احسب: $\\lvert -7\\rvert +\\lvert +3\\rvert -\\lvert -4\\rvert$.' },
-                solution: same('$7+3-4=6$')
+                solution: same('$7+3-4=6$'),
+                answer: { expected: fraction(6) }
             },
             {
                 id: 11,
                 difficulty: 'medium',
                 question: { eu: 'Sinplifikatu: $-(-(-2))$.', es: 'Simplifica: $-(-(-2))$.', ar: 'بسّط: $-(-(-2))$.' },
-                solution: { eu: 'Barrutik kanpora: $-(-2)=+2$ eta $-(+2)=-2$. Emaitza: $-2$.', es: 'De dentro hacia fuera: $-(-2)=+2$ y $-(+2)=-2$. Resultado: $-2$.', ar: 'من الداخل إلى الخارج: $-(-2)=+2$ ثم $-(+2)=-2$. الناتج: $-2$.' }
+                solution: { eu: 'Barrutik kanpora: $-(-2)=+2$ eta $-(+2)=-2$. Emaitza: $-2$.', es: 'De dentro hacia fuera: $-(-2)=+2$ y $-(+2)=-2$. Resultado: $-2$.', ar: 'من الداخل إلى الخارج: $-(-2)=+2$ ثم $-(+2)=-2$. الناتج: $-2$.' },
+                answer: { expected: fraction(-2) }
             },
             {
                 id: 12,
@@ -482,7 +486,8 @@ export const integerExerciseBank: ExerciseSection[] = [
                 id: 18,
                 difficulty: 'hard',
                 question: { eu: 'Zenbat zenbaki oso $x$ betetzen dute $-4<x\\le 2$?', es: '¿Cuántos números enteros $x$ cumplen $-4<x\\le 2$?', ar: 'كم عددًا صحيحًا $x$ يحقق $-4<x\\le 2$؟' },
-                solution: { eu: '−4 ez da sartzen eta 2 bai: $-3,-2,-1,0,1,2$. Sei zenbaki.', es: 'El −4 no entra y el 2 sí: $-3,-2,-1,0,1,2$. Seis números.', ar: '⁦−4⁩ غير مشمول و2 مشمول: $-3,-2,-1,0,1,2$. ستة أعداد.' }
+                solution: { eu: '−4 ez da sartzen eta 2 bai: $-3,-2,-1,0,1,2$. Sei zenbaki.', es: 'El −4 no entra y el 2 sí: $-3,-2,-1,0,1,2$. Seis números.', ar: '⁦−4⁩ غير مشمول و2 مشمول: $-3,-2,-1,0,1,2$. ستة أعداد.' },
+                answer: { expected: fraction(6) }
             }
         ]
     },
@@ -506,25 +511,29 @@ export const integerExerciseBank: ExerciseSection[] = [
                 id: 21,
                 difficulty: 'medium',
                 question: { eu: 'Idatzi modu laburtuan eta kalkulatu: $(+6)-(-4)+(-9)-(+3)$.', es: 'Escribe en forma abreviada y calcula: $(+6)-(-4)+(-9)-(+3)$.', ar: 'اكتب بالصيغة المختصرة ثم احسب: $(+6)-(-4)+(-9)-(+3)$.' },
-                solution: same('$6+4-9-3=10-12=-2$')
+                solution: same('$6+4-9-3=10-12=-2$'),
+                answer: { expected: fraction(-2) }
             },
             {
                 id: 22,
                 difficulty: 'medium',
                 question: { eu: 'Kalkulatu: $-8+5-3+12-7$.', es: 'Calcula: $-8+5-3+12-7$.', ar: 'احسب: $-8+5-3+12-7$.' },
-                solution: { eu: 'Positiboak: $5+12=17$. Negatiboak: $8+3+7=18$. $17-18=-1$.', es: 'Positivos: $5+12=17$. Negativos: $8+3+7=18$. $17-18=-1$.', ar: 'الموجبة: $5+12=17$. السالبة: $8+3+7=18$. $17-18=-1$.' }
+                solution: { eu: 'Positiboak: $5+12=17$. Negatiboak: $8+3+7=18$. $17-18=-1$.', es: 'Positivos: $5+12=17$. Negativos: $8+3+7=18$. $17-18=-1$.', ar: 'الموجبة: $5+12=17$. السالبة: $8+3+7=18$. $17-18=-1$.' },
+                answer: { expected: fraction(-1) }
             },
             {
                 id: 23,
                 difficulty: 'hard',
                 question: { eu: 'Kalkulatu bi eratara (lehenik barrukoa, eta parentesiak kenduz): $10-(4-9)+(-3+5)$.', es: 'Calcula de las dos formas (primero lo de dentro, y quitando paréntesis): $10-(4-9)+(-3+5)$.', ar: 'احسب بالطريقتين (ما داخل الأقواس أولًا، ثم بحذف الأقواس): $10-(4-9)+(-3+5)$.' },
-                solution: { eu: 'Lehenik barrukoa: $10-(-5)+(+2)=10+5+2=17$. Parentesiak kenduz: $10-4+9-3+5=24-7=17$.', es: 'Primero lo de dentro: $10-(-5)+(+2)=10+5+2=17$. Quitando paréntesis: $10-4+9-3+5=24-7=17$.', ar: 'ما داخل الأقواس أولًا: $10-(-5)+(+2)=10+5+2=17$. وبحذف الأقواس: $10-4+9-3+5=24-7=17$.' }
+                solution: { eu: 'Lehenik barrukoa: $10-(-5)+(+2)=10+5+2=17$. Parentesiak kenduz: $10-4+9-3+5=24-7=17$.', es: 'Primero lo de dentro: $10-(-5)+(+2)=10+5+2=17$. Quitando paréntesis: $10-4+9-3+5=24-7=17$.', ar: 'ما داخل الأقواس أولًا: $10-(-5)+(+2)=10+5+2=17$. وبحذف الأقواس: $10-4+9-3+5=24-7=17$.' },
+                answer: { expected: fraction(17) }
             },
             {
                 id: 24,
                 difficulty: 'hard',
                 question: { eu: 'Kalkulatu: $-(6-11)-(-2+8)+4$.', es: 'Calcula: $-(6-11)-(-2+8)+4$.', ar: 'احسب: $-(6-11)-(-2+8)+4$.' },
-                solution: { eu: '$-(-5)-(+6)+4=5-6+4=3$. Parentesiak kenduz: $-6+11+2-8+4=3$.', es: '$-(-5)-(+6)+4=5-6+4=3$. Quitando paréntesis: $-6+11+2-8+4=3$.', ar: '$-(-5)-(+6)+4=5-6+4=3$. وبحذف الأقواس: $-6+11+2-8+4=3$.' }
+                solution: { eu: '$-(-5)-(+6)+4=5-6+4=3$. Parentesiak kenduz: $-6+11+2-8+4=3$.', es: '$-(-5)-(+6)+4=5-6+4=3$. Quitando paréntesis: $-6+11+2-8+4=3$.', ar: '$-(-5)-(+6)+4=5-6+4=3$. وبحذف الأقواس: $-6+11+2-8+4=3$.' },
+                answer: { expected: fraction(3) }
             }
         ]
     },
@@ -554,19 +563,22 @@ export const integerExerciseBank: ExerciseSection[] = [
                 id: 28,
                 difficulty: 'medium',
                 question: { eu: 'Kalkulatu: $8-3\\cdot(-5)$.', es: 'Calcula: $8-3\\cdot(-5)$.', ar: 'احسب: $8-3\\cdot(-5)$.' },
-                solution: { eu: 'Lehenik biderketa: $3\\cdot(-5)=-15$. $8-(-15)=8+15=23$.', es: 'Primero el producto: $3\\cdot(-5)=-15$. $8-(-15)=8+15=23$.', ar: 'الضرب أولًا: $3\\cdot(-5)=-15$. $8-(-15)=8+15=23$.' }
+                solution: { eu: 'Lehenik biderketa: $3\\cdot(-5)=-15$. $8-(-15)=8+15=23$.', es: 'Primero el producto: $3\\cdot(-5)=-15$. $8-(-15)=8+15=23$.', ar: 'الضرب أولًا: $3\\cdot(-5)=-15$. $8-(-15)=8+15=23$.' },
+                answer: { expected: fraction(23) }
             },
             {
                 id: 29,
                 difficulty: 'hard',
                 question: { eu: 'Kalkulatu: $(-18)\\mathbin{:}(+3)-4\\cdot(-2)+(-7)$.', es: 'Calcula: $(-18)\\mathbin{:}(+3)-4\\cdot(-2)+(-7)$.', ar: 'احسب: $(-18)\\mathbin{:}(+3)-4\\cdot(-2)+(-7)$.' },
-                solution: same('$(-6)-(-8)+(-7)=-6+8-7=-5$')
+                solution: same('$(-6)-(-8)+(-7)=-6+8-7=-5$'),
+                answer: { expected: fraction(-5) }
             },
             {
                 id: 30,
                 difficulty: 'hard',
                 question: { eu: 'Kalkulatu: $5-[(-3)+2\\cdot(-4)]\\mathbin{:}(-11)$.', es: 'Calcula: $5-[(-3)+2\\cdot(-4)]\\mathbin{:}(-11)$.', ar: 'احسب: $5-[(-3)+2\\cdot(-4)]\\mathbin{:}(-11)$.' },
-                solution: { eu: 'Kako barruan: $-3-8=-11$. $(-11)\\mathbin{:}(-11)=+1$. $5-1=4$.', es: 'Dentro del corchete: $-3-8=-11$. $(-11)\\mathbin{:}(-11)=+1$. $5-1=4$.', ar: 'داخل القوس المعقوف: $-3-8=-11$. $(-11)\\mathbin{:}(-11)=+1$. $5-1=4$.' }
+                solution: { eu: 'Kako barruan: $-3-8=-11$. $(-11)\\mathbin{:}(-11)=+1$. $5-1=4$.', es: 'Dentro del corchete: $-3-8=-11$. $(-11)\\mathbin{:}(-11)=+1$. $5-1=4$.', ar: 'داخل القوس المعقوف: $-3-8=-11$. $(-11)\\mathbin{:}(-11)=+1$. $5-1=4$.' },
+                answer: { expected: fraction(4) }
             }
         ]
     }

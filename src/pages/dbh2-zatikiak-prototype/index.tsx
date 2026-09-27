@@ -9,6 +9,7 @@ import {
     theoryTopics
 } from './content'
 import { fractionExerciseSections } from '../dbh2-zatikiak/ExercisesPage/exercisesData'
+import { fractionBankAnswers } from './bankAnswers'
 import { FractionLaboratory } from './lab'
 import { labChallengeIds, labToolForTopic, labTools } from './lab/labTools'
 import { GamesArea } from './games'
@@ -62,7 +63,10 @@ const zatikiakUnit: UnitDefinition = {
     topics: theoryTopics.map((topic) => ({ ...topic, figure: lessonFigures[topic.id] })),
     diagnostic: diagnosticQuestions,
     guidedPractice,
-    exerciseBank: fractionExerciseSections,
+    exerciseBank: fractionExerciseSections.map((section) => ({
+        ...section,
+        items: section.items.map((item) => ({ ...item, answer: fractionBankAnswers[`${section.id}#${item.id}`] }))
+    })),
     challenges,
     answers: {
         note: { eu: 'Enuntziatuak forma zehatzik eskatzen ez badu, zatiki baliokideak eta koma edo puntua duten hamartarrak onartzen dira.', es: 'Si el enunciado no pide una forma concreta, se aceptan fracciones equivalentes y decimales con coma o punto.', ar: 'إذا لم يطلب السؤال صيغة محددة، تُقبل الكسور المكافئة والأعداد العشرية بالفاصلة أو النقطة.' },
