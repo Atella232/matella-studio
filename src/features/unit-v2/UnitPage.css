@@ -1171,6 +1171,8 @@
     background: var(--stage-soft);
     font-size: 20px;
     white-space: nowrap;
+    max-width: 100%;
+    overflow-x: auto;
 }
 
 .fraction-v2-lesson-steps.facts .fraction-v2-lesson-step-math {

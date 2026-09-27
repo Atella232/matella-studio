@@ -22,11 +22,7 @@ const MissionPageDBH1 = lazy(() => import('../pages/dbh1-zatikiak/MissionPage').
 const TheoryPageDBH1 = lazy(() => import('../pages/dbh1-zatikiak/TheoryPage').then((module) => ({ default: module.TheoryPage })))
 const GamesHubDBH1 = lazy(() => import('../features/games/GamesHubDBH1').then((module) => ({ default: module.GamesHub })))
 
-const HomePageDBH1_Zenbaki = lazy(() => import('../pages/dbh1-zenbaki-naturalak/HomePage').then((module) => ({ default: module.HomePage })))
-const TheoryPageDBH1_Zenbaki = lazy(() => import('../pages/dbh1-zenbaki-naturalak/TheoryPage').then((module) => ({ default: module.TheoryPage })))
-const LabPageDBH1_Zenbaki = lazy(() => import('../pages/dbh1-zenbaki-naturalak/LabPage').then((module) => ({ default: module.LabPage })))
-const MissionPageDBH1_Zenbaki = lazy(() => import('../pages/dbh1-zenbaki-naturalak/MissionPage').then((module) => ({ default: module.MissionPage })))
-const GamesPageDBH1_Zenbaki = lazy(() => import('../pages/dbh1-zenbaki-naturalak/GamesPage').then((module) => ({ default: module.GamesPage })))
+const ZenbakiNaturalakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-naturalak-v2').then((module) => ({ default: module.ZenbakiNaturalakPage })))
 
 const HomePageDBH1_Zatigarritasuna = lazy(() => import('../pages/dbh1-zatigarritasuna/HomePage').then((module) => ({ default: module.HomePage })))
 const TheoryPageDBH1_Zatigarritasuna = lazy(() => import('../pages/dbh1-zatigarritasuna/TheoryPage').then((module) => ({ default: module.TheoryPage })))
@@ -106,34 +102,10 @@ export const router = createHashRouter([
                         path: 'matematika/dbh1/zatikiak',
                         element: <HomePageDBH1 />,
                     },
-                    // Ruta para Números Naturales de 1º ESO
+                    // Números naturales de 1º ESO: unidad V2, gestiona sus propias secciones por URL
                     {
-                        path: 'matematika/dbh1/zenbaki-naturalak',
-                        element: <HomePageDBH1_Zenbaki />,
-                    },
-                    {
-                        path: 'matematika/dbh1/zenbaki-naturalak/teoria',
-                        element: <TheoryPageDBH1_Zenbaki />,
-                    },
-                    {
-                        path: 'matematika/dbh1/zenbaki-naturalak/laboratorio',
-                        element: <LabPageDBH1_Zenbaki />,
-                    },
-                    {
-                        path: 'matematika/dbh1/zenbaki-naturalak/retos',
-                        element: <MissionPageDBH1_Zenbaki />,
-                    },
-                    {
-                        path: 'matematika/dbh1/zenbaki-naturalak/misioa',
-                        element: <MissionPageDBH1_Zenbaki />,
-                    },
-                    {
-                        path: 'matematika/dbh1/zenbaki-naturalak/juegos',
-                        element: <GamesPageDBH1_Zenbaki />,
-                    },
-                    {
-                        path: 'matematika/dbh1/zenbaki-naturalak/jokuak',
-                        element: <GamesPageDBH1_Zenbaki />,
+                        path: 'matematika/dbh1/zenbaki-naturalak/*',
+                        element: <ZenbakiNaturalakDBH1Page />,
                     },
                     // Ruta para Divisibilidad de 1º ESO
                     {
