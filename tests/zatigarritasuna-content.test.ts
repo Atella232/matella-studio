@@ -16,7 +16,7 @@ test('zatigarritasuna: notation follows each textbook', () => {
 test('zatigarritasuna: the unit is rendered by the V2 engine', () => {
     assert.ok(isUnitV2Path('/matematika/dbh2/divisibilidad'))
     assert.ok(isUnitV2Path('/matematika/dbh2/divisibilidad/teoria'))
-    assert.ok(!isUnitV2Path('/matematika/dbh1/divisibilidad'))
+    assert.ok(isUnitV2Path('/matematika/dbh1/divisibilidad'))
 })
 
 import { divisibilityChallenges, divisibilityDiagnostic, divisibilityExerciseBank, divisibilityPractice } from '../src/pages/dbh2-zatigarritasuna/content.ts'

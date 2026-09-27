@@ -24,9 +24,7 @@ const GamesHubDBH1 = lazy(() => import('../features/games/GamesHubDBH1').then((m
 
 const ZenbakiNaturalakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-naturalak-v2').then((module) => ({ default: module.ZenbakiNaturalakPage })))
 
-const HomePageDBH1_Zatigarritasuna = lazy(() => import('../pages/dbh1-zatigarritasuna/HomePage').then((module) => ({ default: module.HomePage })))
-const TheoryPageDBH1_Zatigarritasuna = lazy(() => import('../pages/dbh1-zatigarritasuna/TheoryPage').then((module) => ({ default: module.TheoryPage })))
-const LabPageDBH1_Zatigarritasuna = lazy(() => import('../pages/dbh1-zatigarritasuna/LabPage').then((module) => ({ default: module.LabPageDBH1_Zatigarritasuna })))
+const ZatigarritasunaDBH1Page = lazy(() => import('../pages/dbh1-zatigarritasuna-v2').then((module) => ({ default: module.ZatigarritasunaIntroPage })))
 
 const ZenbakiOsoakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-osoak-v2').then((module) => ({ default: module.ZenbakiOsoakIntroPage })))
 
@@ -105,18 +103,10 @@ export const router = createHashRouter([
                         path: 'matematika/dbh1/zenbaki-naturalak/*',
                         element: <ZenbakiNaturalakDBH1Page />,
                     },
-                    // Ruta para Divisibilidad de 1º ESO
+                    // Divisibilidad de 1º ESO: unidad V2, gestiona sus propias secciones por URL
                     {
-                        path: 'matematika/dbh1/divisibilidad',
-                        element: <HomePageDBH1_Zatigarritasuna />,
-                    },
-                    {
-                        path: 'matematika/dbh1/divisibilidad/teoria',
-                        element: <TheoryPageDBH1_Zatigarritasuna />,
-                    },
-                    {
-                        path: 'matematika/dbh1/divisibilidad/laboratorio',
-                        element: <LabPageDBH1_Zatigarritasuna />,
+                        path: 'matematika/dbh1/divisibilidad/*',
+                        element: <ZatigarritasunaDBH1Page />,
                     },
                     // Números enteros de 1º ESO: unidad V2, gestiona sus propias secciones por URL
                     {
