@@ -186,6 +186,8 @@ export function ToolFrame<State>({
     onOpenLesson: () => void
 }) {
     const l = useLabText(language)
+    // On a phone the hint starts folded so the model is closer to the top
+    const [observeOpen, setObserveOpen] = useState(false)
     return (
         <div className="fraction-v2-lab-tool" data-stage={tool.stage} data-tone={tone} role="tabpanel" id="fraction-v2-lab-panel" aria-labelledby={`fraction-v2-lab-tab-${tool.id}`}>
             <div className="fraction-v2-lab-tool-head">
@@ -198,10 +200,13 @@ export function ToolFrame<State>({
                     {l({ eu: 'Ikusi ikasgaia', es: 'Ver la lección', ar: 'اعرض الدرس' })}
                 </button>
             </div>
-            <p className="fraction-v2-lab-observe">
+            <div className={`fraction-v2-lab-observe ${observeOpen ? 'open' : ''}`}>
                 <span className="fraction-v2-lab-observe-icon"><Icon name="bulb" size={18} /></span>
-                <span><strong>{l({ eu: 'Zeri begiratu:', es: 'Qué observar:', ar: 'ما الذي تلاحظه:' })}</strong> {l(tool.observe)}</span>
-            </p>
+                <p><strong>{l({ eu: 'Zeri begiratu:', es: 'Qué observar:', ar: 'ما الذي تلاحظه:' })}</strong> {l(tool.observe)}</p>
+                <button type="button" className="fraction-v2-lab-observe-toggle" aria-expanded={observeOpen} onClick={() => setObserveOpen((open) => !open)}>
+                    {observeOpen ? l({ eu: 'Tolestu', es: 'Plegar', ar: 'إخفاء' }) : l({ eu: 'Irakurri dena', es: 'Leer todo', ar: 'اقرأ الكل' })}
+                </button>
+            </div>
             <div className="fraction-v2-lab-board">
                 <div className="fraction-v2-controls">{controls}</div>
                 <div className="fraction-v2-visuals">

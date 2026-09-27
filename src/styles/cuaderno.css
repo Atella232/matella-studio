@@ -541,6 +541,21 @@
     color: var(--ink-soft);
 }
 
+/* Wide screens: a long unit menu wraps to a second line instead of pushing the page wider */
+@media (min-width: 901px) {
+    :root:not([data-theme="classic"]) .navigation {
+        flex: 1 1 auto;
+        justify-content: flex-end;
+        min-width: 0;
+    }
+
+    :root:not([data-theme="classic"]) .nav-list {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        min-width: 0;
+    }
+}
+
 @media (max-width: 900px) {
     :root:not([data-theme="classic"]) .header-content {
         position: relative;

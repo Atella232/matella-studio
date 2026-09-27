@@ -105,7 +105,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
 
     const unitTitle = l(unit.title)
     const courseTitle = l(unit.courseTitle)
-    const mobilePrimarySections = (['route', 'learn', 'practice', 'play'] as UnitSection[]).filter((id) => sections.includes(id))
+    const mobilePrimarySections = (['route', 'learn', 'lab', 'practice'] as UnitSection[]).filter((id) => sections.includes(id))
     const navSections = unitSections.filter((item) => sections.includes(item.id))
     const mobileMoreSections = navSections.filter((item) => !mobilePrimarySections.includes(item.id))
     const moreIsActive = mobileMoreSections.some((item) => item.id === section)
@@ -406,6 +406,21 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                         </div>
                     ))}
                 </nav>
+
+                <label className="fraction-v2-lesson-jump" data-stage={currentTopic.stage} data-tone={currentTone}>
+                    <span>{l({ eu: 'Joan ikasgaira', es: 'Ir a la lección', ar: 'انتقل إلى الدرس' })}</span>
+                    <select value={currentTopic.id} onChange={(event) => selectTopic(event.target.value)}>
+                        {unit.stages.map((stage, stageIndex) => (
+                            <optgroup label={`${stageIndex + 1} · ${l(stage.title)}`} key={stage.id}>
+                                {unit.topics.filter((topic) => topic.stage === stage.id).map((topic) => (
+                                    <option value={topic.id} key={topic.id}>
+                                        {unit.topics.indexOf(topic) + 1}. {l(topic.title)}{learned.ids.includes(topic.id) ? ' ✓' : ''}
+                                    </option>
+                                ))}
+                            </optgroup>
+                        ))}
+                    </select>
+                </label>
 
                 <article className="fraction-v2-lesson" data-stage={currentTopic.stage} data-tone={currentTone} aria-labelledby="fraction-v2-lesson-title">
                     <div className="fraction-v2-lesson-meta">

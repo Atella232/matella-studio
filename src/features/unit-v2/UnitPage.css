@@ -975,6 +975,11 @@
     gap: 44px;
 }
 
+/* Phones and tablets: the lesson list goes below the lesson, so a picker sits on top */
+.fraction-v2-lesson-jump {
+    display: none;
+}
+
 .fraction-v2-lesson-index {
     display: flex;
     flex-direction: column;
@@ -1894,6 +1899,30 @@
         order: -1;
     }
 
+    .fraction-v2-lesson-jump {
+        display: flex;
+        flex-direction: column;
+        order: -2;
+        gap: 6px;
+        margin-bottom: -24px;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--muted);
+    }
+
+    .fraction-v2-lesson-jump select {
+        min-height: 48px;
+        padding: 8px 12px;
+        border: 2px solid var(--ink);
+        border-inline-start-width: 6px;
+        border-inline-start-color: var(--stage);
+        border-radius: 12px;
+        color: var(--ink);
+        background: var(--card);
+        font: inherit;
+        font-size: 16px;
+    }
+
     .fraction-v2-task-list {
         flex-direction: row;
         gap: 8px;
@@ -1922,6 +1951,24 @@
 }
 
 @media (max-width: 760px) {
+    /* Inside a working section the intro is a label, not a cover */
+    .fraction-v2-page-intro {
+        gap: 4px;
+        margin-bottom: 16px;
+    }
+
+    .fraction-v2-page-intro h1 {
+        font-size: 26px;
+    }
+
+    .fraction-v2-lab > .fraction-v2-page-intro p {
+        display: none;
+    }
+
+    .fraction-v2-lesson h1 {
+        font-size: 28px;
+    }
+
     .fraction-v2 {
         font-size: 16px;
     }
