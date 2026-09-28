@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { ResultAnswer, Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
-import type { LabToolProps } from '../../../features/unit-v2/lab/types'
+import type { LabChallenge, LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { fraction } from '../../../features/unit-v2/math/fraction'
 import { linearLatex, termsLatex } from '../algebra'
@@ -38,6 +38,7 @@ import {
     trialSides,
     tryValue,
     type BalanceState,
+    type MachineExpression,
     type MachineState,
     type TileGroup,
     type TilesState,
@@ -91,11 +92,12 @@ export function TranslateTool(props: LabToolProps) {
 
 /* ---------- The number machine ---------- */
 
-export function MachineTool(props: LabToolProps) {
+/** The machine of this unit by default; other units pass their expressions, limits for x and challenges */
+export function MachineTool({ expressions = machineExpressions, limits = MACHINE_LIMITS, challenges = machineChallenges, ...props }: LabToolProps & { expressions?: MachineExpression[]; limits?: { min: number; max: number }; challenges?: LabChallenge<MachineState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<MachineState>(initialMachineState)
-    const expression = machineExpressions[state.expression]
-    const value = machineValue(state)
+    const expression = expressions[state.expression]
+    const value = machineValue(state, expressions)
     const shown = state.revealed || state.checked
 
     const controls = (
@@ -103,10 +105,10 @@ export function MachineTool(props: LabToolProps) {
             <Segmented
                 label={l({ eu: 'Makina', es: 'Máquina', ar: 'الآلة' })}
                 value={String(state.expression)}
-                options={machineExpressions.map((item, index) => ({ value: String(index), label: item.latex.replace(/\\frac\{x\}\{2\}/, 'x/2').replace(/\^\{2\}/, '²') }))}
-                onChange={(next) => setState((current) => setMachine(current, { expression: Number(next) }))}
+                options={expressions.map((item, index) => ({ value: String(index), label: item.latex.replace(/\\frac\{x\}\{2\}/, 'x/2').replace(/\^\{2\}/g, '²').replace(/\^\{3\}/g, '³') }))}
+                onChange={(next) => setState((current) => setMachine(current, { expression: Number(next) }, expressions, limits))}
             />
-            <Stepper label="x" value={state.x} min={MACHINE_LIMITS.min} max={MACHINE_LIMITS.max} format={signed} onChange={(next) => setState((current) => setMachine(current, { x: next }))} language={props.language} />
+            <Stepper label="x" value={state.x} min={limits.min} max={limits.max} format={signed} onChange={(next) => setState((current) => setMachine(current, { x: next }, expressions, limits))} language={props.language} />
         </>
     )
 
@@ -129,7 +131,7 @@ export function MachineTool(props: LabToolProps) {
     )
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={machineChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={challenges} state={state}>
             <div className="algebra-machine" dir="ltr">
                 <span className="algebra-machine-in">x = {signed(state.x)}</span>
                 <span className="algebra-machine-arrow">→</span>
@@ -155,9 +157,10 @@ function TileRow({ group, label }: { group: TileGroup; label: string }) {
     )
 }
 
-export function TilesTool(props: LabToolProps) {
+/** The tiles of this unit by default; other units pass their starting groups and challenges */
+export function TilesTool({ initial = initialTilesState, challenges = tilesChallenges, ...props }: LabToolProps & { initial?: TilesState; challenges?: LabChallenge<TilesState>[] }) {
     const l = useLabText(props.language)
-    const [state, setState] = useState<TilesState>(initialTilesState)
+    const [state, setState] = useState<TilesState>(initial)
     const steppers = (which: 'first' | 'second') => (
         <div className="algebra-tile-controls">
             <strong>{which === 'first' ? 'A' : 'B'}</strong>
@@ -177,11 +180,11 @@ export function TilesTool(props: LabToolProps) {
     const second = termsLatex(groupTerms(state.second))
     const readout = (
         <span className="fraction-v2-lab-readout-main">
-            <MathText text={`$(${first})${state.op === 'add' ? '+' : '-'}(${second})=${termsLatex(tilesResult(state))}$`} />
+            <MathText text={`$\\begin{gathered}(${first})${state.op === 'add' ? '+' : '-'}(${second})\\\\=${termsLatex(tilesResult(state))}\\end{gathered}$`} />
         </span>
     )
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={tilesChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={challenges} state={state}>
             <div className="algebra-tiles" dir="ltr">
                 <TileRow group={state.first} label="A" />
                 <span className="algebra-tiles-op">{state.op === 'add' ? '+' : '−'}</span>

@@ -176,13 +176,14 @@ export interface MachineState extends OperationAnswer {
 
 export const initialMachineState: MachineState = { expression: 0, x: 1, ...freshAnswer }
 
-export function setMachine(state: MachineState, patch: Partial<Pick<MachineState, 'expression' | 'x'>>): MachineState {
-    const x = Math.min(MACHINE_LIMITS.max, Math.max(MACHINE_LIMITS.min, Math.round(patch.x ?? state.x)))
-    const expression = Math.min(machineExpressions.length - 1, Math.max(0, patch.expression ?? state.expression))
+/** Moves the machine; other units pass their own list of expressions and limits for x */
+export function setMachine(state: MachineState, patch: Partial<Pick<MachineState, 'expression' | 'x'>>, expressions: MachineExpression[] = machineExpressions, limits: { min: number; max: number } = MACHINE_LIMITS): MachineState {
+    const x = Math.min(limits.max, Math.max(limits.min, Math.round(patch.x ?? state.x)))
+    const expression = Math.min(expressions.length - 1, Math.max(0, patch.expression ?? state.expression))
     return { ...state, x, expression, ...freshAnswer }
 }
 
-export const machineValue = (state: Pick<MachineState, 'expression' | 'x'>) => machineExpressions[state.expression].value(state.x)
+export const machineValue = (state: Pick<MachineState, 'expression' | 'x'>, expressions: MachineExpression[] = machineExpressions) => expressions[state.expression].value(state.x)
 
 const machineAt = (state: MachineState, latex: string, x: number) => machineExpressions[state.expression].latex === latex && state.x === x
 
