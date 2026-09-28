@@ -19,11 +19,9 @@ const ZenbakiNaturalakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-natura
 const ZatigarritasunaDBH1Page = lazy(() => import('../pages/dbh1-zatigarritasuna-v2').then((module) => ({ default: module.ZatigarritasunaIntroPage })))
 
 const ZatikiakDBH1Page = lazy(() => import('../pages/dbh1-zatikiak-v2').then((module) => ({ default: module.ZatikiakIntroPage })))
+const AljebraDBH1Page = lazy(() => import('../pages/dbh1-aljebra-v2').then((module) => ({ default: module.AljebraIntroPage })))
 const ZenbakiOsoakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-osoak-v2').then((module) => ({ default: module.ZenbakiOsoakIntroPage })))
 
-const HomePageDBH1_Algebra = lazy(() => import('../pages/dbh1-algebra/HomePage').then((module) => ({ default: module.HomePage })))
-const TheoryPageDBH1_Algebra = lazy(() => import('../pages/dbh1-algebra/TheoryPage').then((module) => ({ default: module.TheoryPage })))
-const LabPageDBH1_Algebra = lazy(() => import('../pages/dbh1-algebra/LabPage').then((module) => ({ default: module.LabPage })))
 
 const HomePageDBH1_Geometria = lazy(() => import('../pages/dbh1-geometria/HomePage').then((module) => ({ default: module.HomePage })))
 const TheoryPageDBH1_Geometria = lazy(() => import('../pages/dbh1-geometria/TheoryPage').then((module) => ({ default: module.TheoryPage })))
@@ -91,6 +89,11 @@ export const router = createHashRouter([
                         path: 'matematika/dbh1/zatikiak/*',
                         element: <ZatikiakDBH1Page />,
                     },
+                    // Álgebra de 1º ESO: unidad V2, gestiona sus propias secciones por URL
+                    {
+                        path: 'matematika/dbh1/algebra/*',
+                        element: <AljebraDBH1Page />,
+                    },
                     // Números naturales de 1º ESO: unidad V2, gestiona sus propias secciones por URL
                     {
                         path: 'matematika/dbh1/zenbaki-naturalak/*',
@@ -105,23 +108,6 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/dbh1/numeros-enteros/*',
                         element: <ZenbakiOsoakDBH1Page />,
-                    },
-                    // Ruta para Álgebra de 1º ESO
-                    {
-                        path: 'matematika/dbh1/algebra',
-                        element: <HomePageDBH1_Algebra />,
-                    },
-                    {
-                        path: 'matematika/dbh1/algebra/teoria',
-                        element: <TheoryPageDBH1_Algebra />,
-                    },
-                    {
-                        path: 'matematika/dbh1/algebra/laboratorio',
-                        element: <LabPageDBH1_Algebra />,
-                    },
-                    {
-                        path: 'matematika/dbh1/algebra/laborategia',
-                        element: <LabPageDBH1_Algebra />,
                     },
                     // Ruta para Geometría de 1º ESO
                     {
