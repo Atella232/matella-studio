@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { statisticsIntroChallenges, statisticsIntroDiagnostic, statisticsIntroExerciseBank, statisticsIntroPractice } from './content'
 import { StatisticsIntroHeroArt } from './figures'
+import { StatisticsIntroGames } from './games'
+import { STATISTICS_GAME_RECORDS_KEY, statisticsGameProgressIds } from './games/info'
 import { StatisticsIntroLaboratory } from './lab'
 import { statisticsLabChallengeIds, statisticsLabToolForTopic, statisticsLabTools } from './lab/labTools'
 import { statisticsIntroStages, statisticsIntroTopics } from './lessons'
@@ -30,6 +32,12 @@ const estatistikaIntroUnit: UnitDefinition = {
         progressIds: statisticsLabChallengeIds,
         toolForTopic: statisticsLabToolForTopic,
         render: (props) => <StatisticsIntroLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Hiru joko: lasterketa, batez bestekoaren begia eta memoria.', es: 'Tres juegos: carrera, ojo para la media y memoria.', ar: 'ثلاث ألعاب: السباق وعين المتوسط والذاكرة.' },
+        progressIds: statisticsGameProgressIds,
+        recordsKey: STATISTICS_GAME_RECORDS_KEY,
+        render: (props) => <StatisticsIntroGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat edo zatiki bat: 7, 0,4 edo 3/8.', es: 'Escribe un número o una fracción: 7, 0,4 o 3/8.', ar: 'اكتب عددًا أو كسرًا: 7 أو 0.4 أو 3/8.' },
