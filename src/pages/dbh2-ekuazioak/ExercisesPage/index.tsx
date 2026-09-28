@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { MathText } from '../../../components/MathText'
 import { normalizeEkuazioakLang, pickText } from '../content'
 import { ekuazioakExerciseSections } from '../exercisesData'
-import '../../dbh2-algebra/ExercisesPage/ExercisesPage.css'
+import '../../../styles/legacy-unit/AlgebraExercisesPage.css'
 
 function getSectionBadge(sectionId: string) {
     switch (sectionId) {

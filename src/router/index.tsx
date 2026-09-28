@@ -22,17 +22,12 @@ const ZatikiakDBH1Page = lazy(() => import('../pages/dbh1-zatikiak-v2').then((mo
 const AljebraDBH1Page = lazy(() => import('../pages/dbh1-aljebra-v2').then((module) => ({ default: module.AljebraIntroPage })))
 const GeometriaDBH1Page = lazy(() => import('../pages/dbh1-geometria-v2').then((module) => ({ default: module.GeometriaIntroPage })))
 const EstatistikaDBH1Page = lazy(() => import('../pages/dbh1-estatistika-v2').then((module) => ({ default: module.EstatistikaIntroPage })))
+const AljebraDBH2Page = lazy(() => import('../pages/dbh2-aljebra-v2').then((module) => ({ default: module.AljebraDBH2Page })))
 const ZenbakiOsoakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-osoak-v2').then((module) => ({ default: module.ZenbakiOsoakIntroPage })))
 
 
 
 
-const HomePageDBH2_Algebra = lazy(() => import('../pages/dbh2-algebra/HomePage').then((module) => ({ default: module.HomePage })))
-const TheoryPageDBH2_Algebra = lazy(() => import('../pages/dbh2-algebra/TheoryPage').then((module) => ({ default: module.TheoryPage })))
-const LabPageDBH2_Algebra = lazy(() => import('../pages/dbh2-algebra/LabPage').then((module) => ({ default: module.LabPage })))
-const MissionPageDBH2_Algebra = lazy(() => import('../pages/dbh2-algebra/MissionPage').then((module) => ({ default: module.MissionPage })))
-const GamesPageDBH2_Algebra = lazy(() => import('../pages/dbh2-algebra/GamesPage').then((module) => ({ default: module.GamesPage })))
-const ExercisesPageDBH2_Algebra = lazy(() => import('../pages/dbh2-algebra/ExercisesPage').then((module) => ({ default: module.ExercisesPage })))
 
 const HomePageDBH2_Ekuazioak = lazy(() => import('../pages/dbh2-ekuazioak/HomePage').then((module) => ({ default: module.HomePage })))
 const TheoryPageDBH2_Ekuazioak = lazy(() => import('../pages/dbh2-ekuazioak/TheoryPage').then((module) => ({ default: module.TheoryPage })))
@@ -130,45 +125,10 @@ export const router = createHashRouter([
                         path: 'matematika/dbh2/divisibilidad/*',
                         element: <ZatigarritasunaDBH2Page />,
                     },
+                    // Álgebra de 2º ESO: unidad V2, gestiona sus propias secciones por URL
                     {
-                        path: 'matematika/dbh2/algebra',
-                        element: <HomePageDBH2_Algebra />,
-                    },
-                    {
-                        path: 'matematika/dbh2/algebra/teoria',
-                        element: <TheoryPageDBH2_Algebra />,
-                    },
-                    {
-                        path: 'matematika/dbh2/algebra/laboratorio',
-                        element: <LabPageDBH2_Algebra />,
-                    },
-                    {
-                        path: 'matematika/dbh2/algebra/laborategia',
-                        element: <LabPageDBH2_Algebra />,
-                    },
-                    {
-                        path: 'matematika/dbh2/algebra/retos',
-                        element: <MissionPageDBH2_Algebra />,
-                    },
-                    {
-                        path: 'matematika/dbh2/algebra/misioa',
-                        element: <MissionPageDBH2_Algebra />,
-                    },
-                    {
-                        path: 'matematika/dbh2/algebra/ejercicios',
-                        element: <ExercisesPageDBH2_Algebra />,
-                    },
-                    {
-                        path: 'matematika/dbh2/algebra/ariketak',
-                        element: <ExercisesPageDBH2_Algebra />,
-                    },
-                    {
-                        path: 'matematika/dbh2/algebra/juegos',
-                        element: <GamesPageDBH2_Algebra />,
-                    },
-                    {
-                        path: 'matematika/dbh2/algebra/jokuak',
-                        element: <GamesPageDBH2_Algebra />,
+                        path: 'matematika/dbh2/algebra/*',
+                        element: <AljebraDBH2Page />,
                     },
                     {
                         path: 'matematika/dbh2/ekuazioak',

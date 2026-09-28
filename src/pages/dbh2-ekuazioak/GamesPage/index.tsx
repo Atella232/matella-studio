@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { MathText } from '../../../components/MathText'
 import { ekuazioakQuizQuestions, normalizeEkuazioakLang, pickText } from '../content'
 import '../../../styles/legacy-unit/GamesHub.css'
-import '../../dbh2-algebra/GamesPage/GamesPage.css'
+import '../../../styles/legacy-unit/AlgebraGamesPage.css'
 import './GamesPage.css'
 
 type Mode = 'mixed' | 'lehen-maila' | 'problemak' | 'bigarren-maila'

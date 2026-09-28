@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { MathText } from '../../../components/MathText'
 import { normalizeEkuazioakLang, pickText, type LocalizedText } from '../content'
 import { theoryLabels, theorySections, theoryTabs, type TableRow, type TheoryCard, type TheoryTabId } from './theoryData'
-import '../../dbh2-algebra/TheoryPage/TheoryPage.css'
+import '../../../styles/legacy-unit/AlgebraTheoryPage.css'
 
 function renderTable(lang: ReturnType<typeof normalizeEkuazioakLang>, headers: LocalizedText[], rows: TableRow[]) {
     return (

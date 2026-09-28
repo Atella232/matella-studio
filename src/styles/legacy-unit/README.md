@@ -1,4 +1,4 @@
-Stylesheets of the legacy unit pages (home, lab, mission, games hub) that the
-2. DBH Algebra and Ekuazioak pages still use. They came from the old 1. DBH
-Zatikiak pages, removed when that unit moved to the V2 engine. Delete them
-once those units move to the V2 engine too.
+Stylesheets of the legacy unit pages that the 2. DBH Ekuazioak pages still use.
+HomePage, LabPage, MissionPage and GamesHub came from the old 1. DBH Zatikiak
+pages; the Algebra* files from the old 2. DBH Algebra pages. Both units moved
+to the V2 engine. Delete this folder once Ekuazioak moves to the V2 engine too.
