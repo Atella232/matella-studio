@@ -52,8 +52,8 @@ export function decomposeUnit(random: Random, family: FractionValue[]): Fraction
     return [f(1, 2), f(1, 2)]
 }
 
-export function createWallUnits(random: Random, levelIndex: number): FractionValue[][] {
-    const level = wallLevels[levelIndex]
+export function createWallUnits(random: Random, levelIndex: number, levels: WallLevel[] = wallLevels): FractionValue[][] {
+    const level = levels[levelIndex]
     return Array.from({ length: WALL_UNITS }, () => decomposeUnit(random, pick(random, level.families)))
 }
 

@@ -71,8 +71,8 @@ export function supportsKind(value: FractionValue, kind: CardKind): boolean {
     }
 }
 
-export function createMemoryBoard(random: Random, levelIndex: number): MemoryCard[] {
-    const level = memoryLevels[levelIndex]
+export function createMemoryBoard(random: Random, levelIndex: number, levels: MemoryLevel[] = memoryLevels): MemoryCard[] {
+    const level = levels[levelIndex]
     const chosen: FractionValue[] = []
     const playable = (value: FractionValue) => level.layouts.some((layout) => layout.every((kind) => supportsKind(value, kind)))
     const available = level.values.filter(playable)
@@ -105,8 +105,8 @@ export function evaluateFlip(cards: MemoryCard[], flipped: number[], groupSize: 
     return flipped.length === groupSize ? 'match' : 'continue'
 }
 
-export function memoryStars(levelIndex: number, moves: number): Stars {
-    const { groups } = memoryLevels[levelIndex]
+export function memoryStars(levelIndex: number, moves: number, levels: MemoryLevel[] = memoryLevels): Stars {
+    const { groups } = levels[levelIndex]
     if (moves <= Math.ceil(groups * 1.6)) return 3
     if (moves <= Math.ceil(groups * 2.3)) return 2
     return 1

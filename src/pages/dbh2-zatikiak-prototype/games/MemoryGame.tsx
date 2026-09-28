@@ -1,16 +1,17 @@
+import type { GameInfo as UnitGameInfo } from '../../../features/unit-v2/games/records'
 import { useEffect, useRef, useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { fraction, toNumber, toText } from '../math/fraction'
 import { GameTopbar, LevelPicker, ResultPanel } from './GameKit'
 import { formatTime, useGameText, nowMs } from './gameHooks'
 import type { GameProps } from './index'
-import { cardLatex, createMemoryBoard, evaluateFlip, memoryLevels, memoryStars, mismatchLatex, type MemoryCard } from './memory'
+import { cardLatex, createMemoryBoard, evaluateFlip, memoryLevels, memoryStars, mismatchLatex, type MemoryCard, type MemoryLevel } from './memory'
 import { createRandom, randomSeed } from './random'
 import { games } from './records'
 
 type Phase = 'pick' | 'playing' | 'finished'
 
-const game = games.find((item) => item.id === 'memory')!
+const defaultGame = games.find((item) => item.id === 'memory')!
 const MISMATCH_MS = 1300
 
 /** A unit bar (or two) with the value shaded */
@@ -57,7 +58,10 @@ function CardFace({ card, separator }: { card: MemoryCard; separator: ',' | '.' 
     return <MathText text={`$${cardLatex(card, separator)}$`} />
 }
 
-export function MemoryGame({ language, records, onResult, onExit }: GameProps) {
+/** The 1. DBH unit reuses the game with its own level list */
+export function MemoryGame({ language, records, onResult, onExit, config }: GameProps & { config?: { game: UnitGameInfo; levels?: MemoryLevel[] } }) {
+    const game = config?.game ?? defaultGame
+    const levels = config?.levels ?? memoryLevels
     const l = useGameText(language)
     const separator = language === 'ar' ? '.' : ','
     const [phase, setPhase] = useState<Phase>('pick')
@@ -70,11 +74,11 @@ export function MemoryGame({ language, records, onResult, onExit }: GameProps) {
     const [message, setMessage] = useState<{ tone: 'success' | 'error'; latex: string } | null>(null)
     const [elapsed, setElapsed] = useState(0)
     const startedAt = useRef(0)
-    const { groups, groupSize } = memoryLevels[level] ?? memoryLevels[0]
+    const { groups, groupSize } = levels[level] ?? levels[0]
 
     const start = (nextLevel: number) => {
         setLevel(nextLevel)
-        setCards(createMemoryBoard(createRandom(randomSeed()), nextLevel))
+        setCards(createMemoryBoard(createRandom(randomSeed()), nextLevel, levels))
         setFlipped([])
         setMatched([])
         setMoves(0)
@@ -111,7 +115,7 @@ export function MemoryGame({ language, records, onResult, onExit }: GameProps) {
             if (nextMatched.length === groups) {
                 const time = nowMs() - startedAt.current
                 setElapsed(time)
-                onResult(level, { stars: memoryStars(level, nextMoves), score: -nextMoves, timeMs: time })
+                onResult(level, { stars: memoryStars(level, nextMoves, levels), score: -nextMoves, timeMs: time })
                 window.setTimeout(() => setPhase('finished'), 600)
             }
             return
@@ -199,7 +203,7 @@ export function MemoryGame({ language, records, onResult, onExit }: GameProps) {
             {phase === 'finished' && (
                 <ResultPanel
                     language={language}
-                    stars={memoryStars(level, moves)}
+                    stars={memoryStars(level, moves, levels)}
                     title={l({ eu: `${moves} txandatan osatuta`, es: `Completado en ${moves} turnos`, ar: `اكتملت في ${moves} أدوار` })}
                     subtitle={l({ eu: `3 izar: ${Math.ceil(groups * 1.6)} txanda edo gutxiago · 2 izar: ${Math.ceil(groups * 2.3)}`, es: `3 estrellas: ${Math.ceil(groups * 1.6)} turnos o menos · 2: ${Math.ceil(groups * 2.3)}`, ar: `3 نجوم: ${Math.ceil(groups * 1.6)} أدوار أو أقل · 2: ${Math.ceil(groups * 2.3)}` })}
                     stats={[

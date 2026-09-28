@@ -1,3 +1,4 @@
+import type { GameInfo as UnitGameInfo } from '../../../features/unit-v2/games/records'
 import { useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
 import { MathText } from '../../../components/MathText'
 import { toNumber } from '../math/fraction'
@@ -17,8 +18,7 @@ import {
     targetShare,
     targetStars,
     type TargetRound,
-    type ThrowResult
-} from './target'
+    type ThrowResult, type TargetLevel } from './target'
 
 type Phase = 'pick' | 'aiming' | 'thrown' | 'finished'
 
@@ -28,9 +28,12 @@ interface Throw {
     result: ThrowResult
 }
 
-const game = games.find((item) => item.id === 'target')!
+const defaultGame = games.find((item) => item.id === 'target')!
 
-export function TargetGame({ language, records, onResult, onExit }: GameProps) {
+/** The 1. DBH unit reuses the game with its own level list */
+export function TargetGame({ language, records, onResult, onExit, config }: GameProps & { config?: { game: UnitGameInfo; levels?: TargetLevel[] } }) {
+    const game = config?.game ?? defaultGame
+    const levels = config?.levels ?? targetLevels
     const l = useGameText(language)
     const separator = language === 'ar' ? '.' : ','
     const [phase, setPhase] = useState<Phase>('pick')
@@ -44,7 +47,7 @@ export function TargetGame({ language, records, onResult, onExit }: GameProps) {
 
     const start = (nextLevel: number) => {
         setLevel(nextLevel)
-        setRounds(createTargetRounds(createRandom(randomSeed()), nextLevel))
+        setRounds(createTargetRounds(createRandom(randomSeed()), nextLevel, levels))
         setIndex(0)
         setShare(0.5)
         setThrows([])
@@ -56,7 +59,7 @@ export function TargetGame({ language, records, onResult, onExit }: GameProps) {
     const throwNow = () => {
         if (phase !== 'aiming') return
         const round = rounds[index]
-        const guess = shareToValue(level, share)
+        const guess = shareToValue(level, share, levels)
         setThrows((list) => [...list, { round, guess, result: scoreThrow(guess, round.value) }])
         setPhase('thrown')
     }
@@ -114,11 +117,11 @@ export function TargetGame({ language, records, onResult, onExit }: GameProps) {
         )
     }
 
-    const levelInfo = targetLevels[level]
+    const levelInfo = levels[level]
     const round = rounds[index]
     const lastThrow = phase === 'thrown' ? throws[throws.length - 1] : null
     const integers = Array.from({ length: levelInfo.max - levelInfo.min + 1 }, (_, offset) => levelInfo.min + offset)
-    const markerLeft = `${(lastThrow ? targetShare(level, lastThrow.guess) : share) * 100}%`
+    const markerLeft = `${(lastThrow ? targetShare(level, lastThrow.guess, levels) : share) * 100}%`
     const gradeText = (result: ThrowResult) => ({
         bullseye: l({ eu: 'Itua! Zuzen-zuzen.', es: '¡Diana! Justo en el blanco.', ar: 'إصابة مباشرة!' }),
         close: l({ eu: 'Oso gertu!', es: '¡Muy cerca!', ar: 'قريب جدًا!' }),
@@ -164,24 +167,24 @@ export function TargetGame({ language, records, onResult, onExit }: GameProps) {
                     >
                         <div className="fraction-v2-target-axis" />
                         {integers.map((value) => (
-                            <span className="fraction-v2-target-tick major" style={{ left: `${targetShare(level, value) * 100}%` }} key={value}>
+                            <span className="fraction-v2-target-tick major" style={{ left: `${targetShare(level, value, levels) * 100}%` }} key={value}>
                                 <b>{value < 0 ? `−${Math.abs(value)}` : value}</b>
                             </span>
                         ))}
                         {lastThrow && Array.from({ length: (levelInfo.max - levelInfo.min) * lastThrow.round.value.denominator - 1 }, (_, step) => {
                             const value = levelInfo.min + (step + 1) / lastThrow.round.value.denominator
-                            return Number.isInteger(value) ? null : <span className="fraction-v2-target-tick minor" style={{ left: `${targetShare(level, value) * 100}%` }} key={step} />
+                            return Number.isInteger(value) ? null : <span className="fraction-v2-target-tick minor" style={{ left: `${targetShare(level, value, levels) * 100}%` }} key={step} />
                         })}
                         {lastThrow && (
                             <>
                                 <span
                                     className="fraction-v2-target-gap"
                                     style={{
-                                        left: `${Math.min(targetShare(level, lastThrow.guess), targetShare(level, toNumber(lastThrow.round.value))) * 100}%`,
-                                        width: `${Math.abs(targetShare(level, lastThrow.guess) - targetShare(level, toNumber(lastThrow.round.value))) * 100}%`
+                                        left: `${Math.min(targetShare(level, lastThrow.guess, levels), targetShare(level, toNumber(lastThrow.round.value), levels)) * 100}%`,
+                                        width: `${Math.abs(targetShare(level, lastThrow.guess, levels) - targetShare(level, toNumber(lastThrow.round.value), levels)) * 100}%`
                                     }}
                                 />
-                                <span className="fraction-v2-target-truth" style={{ left: `${targetShare(level, toNumber(lastThrow.round.value)) * 100}%` }}>
+                                <span className="fraction-v2-target-truth" style={{ left: `${targetShare(level, toNumber(lastThrow.round.value), levels) * 100}%` }}>
                                     <MathText text={`$${targetLatex(lastThrow.round, separator)}$`} />
                                 </span>
                             </>

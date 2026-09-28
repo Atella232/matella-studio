@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import '../dbh2-zatigarritasuna/Zatigarritasuna.css'
 import { fractionsIntroChallenges, fractionsIntroDiagnostic, fractionsIntroExerciseBank, fractionsIntroPractice } from './content'
 import { FractionsIntroHeroArt } from './figures'
+import { FractionsIntroGames } from './games'
+import { INTRO_FRACTION_GAME_RECORDS_KEY, introFractionGameProgressIds } from './games/info'
 import { FractionsIntroLaboratory } from './lab'
 import { fractionsIntroLabChallengeIds, fractionsIntroLabToolForTopic, fractionsIntroLabTools } from './lab/labTools'
 import { fractionsIntroStages, fractionsIntroTopics } from './lessons'
@@ -31,6 +33,12 @@ const zatikiakIntroUnit: UnitDefinition = {
         progressIds: fractionsIntroLabChallengeIds,
         toolForTopic: fractionsIntroLabToolForTopic,
         render: (props) => <FractionsIntroLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Lau joko abiadura eta zehaztasuna entrenatzeko: lasterketa, itua, horma eta memoria.', es: 'Cuatro juegos para entrenar rapidez y precisión: carrera, diana, muro y memoria.', ar: 'أربع ألعاب لتدريب السرعة والدقة: السباق والهدف والجدار والذاكرة.' },
+        progressIds: introFractionGameProgressIds,
+        recordsKey: INTRO_FRACTION_GAME_RECORDS_KEY,
+        render: (props) => <FractionsIntroGames {...props} />
     },
     answers: {
         note: { eu: 'Enuntziatuak forma zehatzik eskatzen ez badu, zatiki baliokideak eta koma edo puntua duten hamartarrak onartzen dira.', es: 'Si el enunciado no pide una forma concreta, se aceptan fracciones equivalentes y decimales con coma o punto.', ar: 'إذا لم يطلب السؤال صيغة محددة، تُقبل الكسور المكافئة والأعداد العشرية بالفاصلة أو النقطة.' },

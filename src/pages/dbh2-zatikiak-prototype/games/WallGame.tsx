@@ -1,3 +1,4 @@
+import type { GameInfo as UnitGameInfo } from '../../../features/unit-v2/games/records'
 import { useCallback, useEffect, useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { add, fraction, subtract, toLatex, toNumber, toText, type FractionValue } from '../math/fraction'
@@ -30,7 +31,7 @@ interface Message {
     text: string
 }
 
-const game = games.find((item) => item.id === 'wall')!
+const defaultGame = games.find((item) => item.id === 'wall')!
 
 function Brick({ value, scale = 1 }: { value: FractionValue; scale?: number }) {
     return (
@@ -40,7 +41,9 @@ function Brick({ value, scale = 1 }: { value: FractionValue; scale?: number }) {
     )
 }
 
-export function WallGame({ language, records, onResult, onExit }: GameProps) {
+/** The 1. DBH unit reuses the game with its own level list */
+export function WallGame({ language, records, onResult, onExit, config }: GameProps & { config?: { game: UnitGameInfo } }) {
+    const game = config?.game ?? defaultGame
     const l = useGameText(language)
     const [phase, setPhase] = useState<Phase>('pick')
     const [level, setLevel] = useState(0)

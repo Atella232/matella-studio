@@ -38,8 +38,8 @@ function formFits(value: FractionValue, form: TargetForm): boolean {
     return true
 }
 
-export function createTargetRounds(random: Random, levelIndex: number): TargetRound[] {
-    const level = targetLevels[levelIndex]
+export function createTargetRounds(random: Random, levelIndex: number, levels: TargetLevel[] = targetLevels): TargetRound[] {
+    const level = levels[levelIndex]
     const rounds: TargetRound[] = []
     let guard = 0
     while (rounds.length < TARGET_THROWS && guard < 2000) {
@@ -70,13 +70,13 @@ export function targetLatex(round: TargetRound, separator: ',' | '.' = ','): str
 }
 
 /** Share of the range in which the value lies (0 = left end, 1 = right end) */
-export function targetShare(levelIndex: number, value: number): number {
-    const { min, max } = targetLevels[levelIndex]
+export function targetShare(levelIndex: number, value: number, levels: TargetLevel[] = targetLevels): number {
+    const { min, max } = levels[levelIndex]
     return (value - min) / (max - min)
 }
 
-export function shareToValue(levelIndex: number, share: number): number {
-    const { min, max } = targetLevels[levelIndex]
+export function shareToValue(levelIndex: number, share: number, levels: TargetLevel[] = targetLevels): number {
+    const { min, max } = levels[levelIndex]
     return min + Math.min(1, Math.max(0, share)) * (max - min)
 }
 
