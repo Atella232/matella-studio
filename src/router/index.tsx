@@ -10,22 +10,15 @@ import { RouteError } from '../components/common/RouteError'
 const ZenbakiOsoakDBH2Page = lazy(() => import('../pages/dbh2-zenbaki-osoak').then((module) => ({ default: module.ZenbakiOsoakPage })))
 const ZatigarritasunaDBH2Page = lazy(() => import('../pages/dbh2-zatigarritasuna').then((module) => ({ default: module.ZatigarritasunaPage })))
 const ZatikiakPrototypePage = lazy(() => import('../pages/dbh2-zatikiak-prototype').then((module) => ({ default: module.ZatikiakPrototypePage })))
-const PizzaFractions = lazy(() => import('../features/games/PizzaFractions').then((module) => ({ default: module.PizzaFractions })))
-const FractionMemory = lazy(() => import('../features/games/FractionMemory').then((module) => ({ default: module.FractionMemory })))
-const FractionRace = lazy(() => import('../features/games/FractionRace').then((module) => ({ default: module.FractionRace })))
 const PrivacyPage = lazy(() => import('../pages/LegalPages').then((module) => ({ default: module.PrivacyPage })))
 const CreditsPage = lazy(() => import('../pages/LegalPages').then((module) => ({ default: module.CreditsPage })))
 
-const HomePageDBH1 = lazy(() => import('../pages/dbh1-zatikiak/HomePage').then((module) => ({ default: module.HomePage })))
-const LabPageDBH1 = lazy(() => import('../pages/dbh1-zatikiak/LabPage').then((module) => ({ default: module.LabPage })))
-const MissionPageDBH1 = lazy(() => import('../pages/dbh1-zatikiak/MissionPage').then((module) => ({ default: module.MissionPage })))
-const TheoryPageDBH1 = lazy(() => import('../pages/dbh1-zatikiak/TheoryPage').then((module) => ({ default: module.TheoryPage })))
-const GamesHubDBH1 = lazy(() => import('../features/games/GamesHubDBH1').then((module) => ({ default: module.GamesHub })))
 
 const ZenbakiNaturalakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-naturalak-v2').then((module) => ({ default: module.ZenbakiNaturalakPage })))
 
 const ZatigarritasunaDBH1Page = lazy(() => import('../pages/dbh1-zatigarritasuna-v2').then((module) => ({ default: module.ZatigarritasunaIntroPage })))
 
+const ZatikiakDBH1Page = lazy(() => import('../pages/dbh1-zatikiak-v2').then((module) => ({ default: module.ZatikiakIntroPage })))
 const ZenbakiOsoakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-osoak-v2').then((module) => ({ default: module.ZenbakiOsoakIntroPage })))
 
 const HomePageDBH1_Algebra = lazy(() => import('../pages/dbh1-algebra/HomePage').then((module) => ({ default: module.HomePage })))
@@ -93,10 +86,10 @@ export const router = createHashRouter([
                         path: 'natura/dbh1/biosfera',
                         element: <NaturaBiosferaPage />,
                     },
-                    // Ruta para Fracciones de 1º ESO
+                    // Fracciones de 1º ESO: unidad V2, gestiona sus propias secciones por URL
                     {
-                        path: 'matematika/dbh1/zatikiak',
-                        element: <HomePageDBH1 />,
+                        path: 'matematika/dbh1/zatikiak/*',
+                        element: <ZatikiakDBH1Page />,
                     },
                     // Números naturales de 1º ESO: unidad V2, gestiona sus propias secciones por URL
                     {
@@ -163,55 +156,6 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/dbh1/estadistica/laborategia',
                         element: <LabPageDBH1_Estadistica />,
-                    },
-                    {
-                        path: 'matematika/dbh1/zatikiak/laboratorio',
-                        element: <LabPageDBH1 />,
-                    },
-                    {
-                        path: 'matematika/dbh1/zatikiak/retos',
-                        element: <MissionPageDBH1 />,
-                    },
-                    {
-                        path: 'matematika/dbh1/zatikiak/misioa',
-                        element: <MissionPageDBH1 />,
-                    },
-                    {
-                        path: 'matematika/dbh1/zatikiak/teoria',
-                        element: <TheoryPageDBH1 />,
-                    },
-                    // Games Hub for 1º ESO (Individual games are shared)
-                    {
-                        path: 'matematika/dbh1/zatikiak/juegos',
-                        element: <GamesHubDBH1 />,
-                    },
-                    {
-                        path: 'matematika/dbh1/zatikiak/jokuak',
-                        element: <GamesHubDBH1 />,
-                    },
-                    {
-                        path: 'matematika/dbh1/zatikiak/juegos/pizza',
-                        element: <PizzaFractions />,
-                    },
-                    {
-                        path: 'matematika/dbh1/zatikiak/jokuak/pizza',
-                        element: <PizzaFractions />,
-                    },
-                    {
-                        path: 'matematika/dbh1/zatikiak/juegos/memory',
-                        element: <FractionMemory />,
-                    },
-                    {
-                        path: 'matematika/dbh1/zatikiak/jokuak/memory',
-                        element: <FractionMemory />,
-                    },
-                    {
-                        path: 'matematika/dbh1/zatikiak/juegos/carrera',
-                        element: <FractionRace />,
-                    },
-                    {
-                        path: 'matematika/dbh1/zatikiak/jokuak/carrera',
-                        element: <FractionRace />,
                     },
 
                     // Fracciones de 2º ESO: la unidad V2 gestiona sus propias secciones por URL

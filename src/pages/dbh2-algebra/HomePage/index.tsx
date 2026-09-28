@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { algebraHome, normalizeAlgebraLang, pickText } from '../content'
-import '../../dbh1-zatikiak/HomePage/HomePage.css'
+import '../../../styles/legacy-unit/HomePage.css'
 
 export function HomePage() {
     const { i18n, t } = useTranslation()

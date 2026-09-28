@@ -2,7 +2,7 @@ import { useMemo, useState, type CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MathText } from '../../../components/MathText'
 import { normalizeAlgebraLang, pickText } from '../content'
-import '../../dbh1-zatikiak/LabPage/LabPage.css'
+import '../../../styles/legacy-unit/LabPage.css'
 import './LabPage.css'
 
 type LabType = 'calculator' | 'monomial' | 'notables' | 'factor'

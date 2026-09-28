@@ -2,7 +2,7 @@ import { useMemo, useState, type CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MathText } from '../../../components/MathText'
 import { normalizeEkuazioakLang, pickText } from '../content'
-import '../../dbh1-zatikiak/LabPage/LabPage.css'
+import '../../../styles/legacy-unit/LabPage.css'
 import '../../dbh2-algebra/LabPage/LabPage.css'
 import './LabPage.css'
 

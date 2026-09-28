@@ -50,6 +50,7 @@ test('unit engine: legacy URLs open the matching section of any V2 unit', () => 
     assert.ok(isUnitV2Path('/matematika/dbh2/zatikiak'))
     assert.ok(isUnitV2Path('/matematika/dbh1/numeros-enteros'))
     assert.ok(isUnitV2Path('/matematika/dbh1/divisibilidad/teoria'))
+    assert.ok(isUnitV2Path('/matematika/dbh1/zatikiak/misioa'))
     assert.ok(!isUnitV2Path('/matematika/dbh1/algebra'))
     assert.ok(!isUnitV2Path('/matematika/dbh2/zatikiak-extra'))
 })

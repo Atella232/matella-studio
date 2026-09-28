@@ -2,7 +2,7 @@ import { useState, type CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MathText } from '../../../components/MathText'
 import { algebraMissions, normalizeAlgebraLang, pickText } from '../content'
-import '../../dbh1-zatikiak/MissionPage/MissionPage.css'
+import '../../../styles/legacy-unit/MissionPage.css'
 
 type Difficulty = 'hasiberria' | 'aurreratua' | 'maisu'
 

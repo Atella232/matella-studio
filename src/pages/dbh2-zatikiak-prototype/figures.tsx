@@ -35,7 +35,7 @@ const percent = (language: UnitLanguage, value: number) => {
     return language === 'eu' ? `%${number}` : `${number} %`
 }
 
-function Figure({ height, label, children }: { height: number; label: string; children: ReactNode }) {
+export function Figure({ height, label, children }: { height: number; label: string; children: ReactNode }) {
     return (
         <svg viewBox={`0 0 720 ${height}`} role="img" aria-label={label} style={svgStyle}>
             {children}
@@ -44,7 +44,7 @@ function Figure({ height, label, children }: { height: number; label: string; ch
 }
 
 /** A stacked fraction centred on x; y is the fraction bar */
-function Frac({ x, y, n, d, size = 20, color = INK, sign = '' }: { x: number; y: number; n: number | string; d: number | string; size?: number; color?: string; sign?: string }) {
+export function Frac({ x, y, n, d, size = 20, color = INK, sign = '' }: { x: number; y: number; n: number | string; d: number | string; size?: number; color?: string; sign?: string }) {
     const half = Math.max(String(n).length, String(d).length) * size * 0.32 + 4
     return (
         <g>
@@ -57,7 +57,7 @@ function Frac({ x, y, n, d, size = 20, color = INK, sign = '' }: { x: number; y:
 }
 
 /** A bar split into equal parts; the first `filled` in the stage colour, the next `extra` in the second colour */
-function Bar({ x, y, width, height = 40, parts, filled, extra = 0, labels }: { x: number; y: number; width: number; height?: number; parts: number; filled: number; extra?: number; labels?: string[] }) {
+export function Bar({ x, y, width, height = 40, parts, filled, extra = 0, labels }: { x: number; y: number; width: number; height?: number; parts: number; filled: number; extra?: number; labels?: string[] }) {
     const part = width / parts
     return (
         <g>
@@ -75,7 +75,7 @@ function Bar({ x, y, width, height = 40, parts, filled, extra = 0, labels }: { x
     )
 }
 
-function Caption({ y, children }: { y: number; children: ReactNode }) {
+export function Caption({ y, children }: { y: number; children: ReactNode }) {
     return <text x={360} y={y} textAnchor="middle" fontSize={15} fill={MUTED}>{children}</text>
 }
 
