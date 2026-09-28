@@ -1,5 +1,6 @@
 import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
+import { algebraIntroChallenges, algebraIntroDiagnostic, algebraIntroExerciseBank, algebraIntroPractice } from './content'
 import { AlgebraIntroHeroArt } from './figures'
 import { algebraIntroStages, algebraIntroTopics } from './lessons'
 
@@ -18,6 +19,10 @@ const aljebraIntroUnit: UnitDefinition = {
     pathSubtitle: { eu: 'Bost etapa, letretatik ekuazioekin ebatzitako buruketetara', es: 'Cinco etapas, de las letras a los problemas resueltos con ecuaciones', ar: 'خمس مراحل، من الحروف إلى المسائل المحلولة بالمعادلات' },
     stages: algebraIntroStages,
     topics: algebraIntroTopics,
+    diagnostic: algebraIntroDiagnostic,
+    guidedPractice: algebraIntroPractice,
+    exerciseBank: algebraIntroExerciseBank,
+    challenges: algebraIntroChallenges,
     answers: {
         note: { eu: 'Idatzi emaitza zenbaki gisa: 7, −3 edo 5/2.', es: 'Escribe el resultado como número: 7, −3 o 5/2.', ar: 'اكتب النتيجة عددًا: 7 أو ⁦−3⁩ أو 5/2.' },
         defaultForm: 'any',
