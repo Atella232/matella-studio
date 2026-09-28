@@ -1,0 +1,20 @@
+/* Geometria (1. DBH) laboratory models. The shared lab shell lives in
+   src/features/unit-v2/lab/LabKit.css. */
+
+.geometry-lab-figure {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+    font-family: "Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif;
+}
+
+.geometry-lab-figure svg {
+    display: block;
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    margin: 0 auto;
+    direction: ltr;
+}

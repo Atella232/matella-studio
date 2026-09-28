@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { geometryIntroChallenges, geometryIntroDiagnostic, geometryIntroExerciseBank, geometryIntroPractice } from './content'
 import { GeometryIntroHeroArt } from './figures'
+import { GeometryIntroLaboratory } from './lab'
+import { geometryLabChallengeIds, geometryLabToolForTopic, geometryLabTools } from './lab/labTools'
 import { geometryIntroStages, geometryIntroTopics } from './lessons'
 
 const geometriaIntroUnit: UnitDefinition = {
@@ -23,6 +25,12 @@ const geometriaIntroUnit: UnitDefinition = {
     guidedPractice: geometryIntroPractice,
     exerciseBank: geometryIntroExerciseBank,
     challenges: geometryIntroChallenges,
+    lab: {
+        description: { eu: `${geometryLabTools.length} tresna: garraiagailua, triangelu-sortzailea, Pitagorasen karratuak, azalera-sarea eta zirkulua, erronkekin.`, es: `${geometryLabTools.length} herramientas: transportador, constructor de triángulos, cuadrados de Pitágoras, cuadrícula de áreas y círculo, con retos.`, ar: `${geometryLabTools.length} أدوات: المنقلة وباني المثلثات ومربعات فيثاغورس وشبكة المساحات والدائرة، مع تحديات.` },
+        progressIds: geometryLabChallengeIds,
+        toolForTopic: geometryLabToolForTopic,
+        render: (props) => <GeometryIntroLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbakia bakarrik (unitaterik gabe): 55 edo 31,4.', es: 'Escribe solo el número (sin unidades): 55 o 31,4.', ar: 'اكتب العدد فقط (دون وحدات): 55 أو 31.4.' },
         defaultForm: 'any',
