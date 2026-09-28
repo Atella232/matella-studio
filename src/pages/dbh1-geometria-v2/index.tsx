@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { geometryIntroChallenges, geometryIntroDiagnostic, geometryIntroExerciseBank, geometryIntroPractice } from './content'
 import { GeometryIntroHeroArt } from './figures'
+import { GeometryIntroGames } from './games'
+import { GEOMETRY_GAME_RECORDS_KEY, geometryGameProgressIds } from './games/info'
 import { GeometryIntroLaboratory } from './lab'
 import { geometryLabChallengeIds, geometryLabToolForTopic, geometryLabTools } from './lab/labTools'
 import { geometryIntroStages, geometryIntroTopics } from './lessons'
@@ -30,6 +32,12 @@ const geometriaIntroUnit: UnitDefinition = {
         progressIds: geometryLabChallengeIds,
         toolForTopic: geometryLabToolForTopic,
         render: (props) => <GeometryIntroLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Hiru joko: lasterketa, angelu-begia eta memoria.', es: 'Tres juegos: carrera, ojo de ángulos y memoria.', ar: 'ثلاث ألعاب: السباق وعين الزوايا والذاكرة.' },
+        progressIds: geometryGameProgressIds,
+        recordsKey: GEOMETRY_GAME_RECORDS_KEY,
+        render: (props) => <GeometryIntroGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbakia bakarrik (unitaterik gabe): 55 edo 31,4.', es: 'Escribe solo el número (sin unidades): 55 o 31,4.', ar: 'اكتب العدد فقط (دون وحدات): 55 أو 31.4.' },
