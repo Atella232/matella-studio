@@ -1,5 +1,6 @@
 import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
+import { equationsChallenges, equationsDiagnostic, equationsExerciseBank, equationsPractice } from './content'
 import { EquationsHeroArt } from './figures'
 import { equationsStages, equationsTopics } from './lessons'
 
@@ -18,6 +19,10 @@ const ekuazioakUnit: UnitDefinition = {
     pathSubtitle: { eu: 'Bost etapa, balantzatik formula orokorrera', es: 'Cinco etapas, de la balanza a la fórmula general', ar: 'خمس مراحل، من الميزان إلى الصيغة العامة' },
     stages: equationsStages,
     topics: equationsTopics,
+    diagnostic: equationsDiagnostic,
+    guidedPractice: equationsPractice,
+    exerciseBank: equationsExerciseBank,
+    challenges: equationsChallenges,
     answers: {
         note: { eu: 'Idatzi x-ren balioa: 5, −3, 1,2 edo 2/3.', es: 'Escribe el valor de x: 5, −3, 1,2 o 2/3.', ar: 'اكتب قيمة x: 5 أو ⁦−3⁩ أو 1.2 أو 2/3.' },
         defaultForm: 'any',
