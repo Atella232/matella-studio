@@ -1,5 +1,6 @@
 import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
+import { algebraChallenges, algebraDiagnostic, algebraExerciseBank, algebraPractice } from './content'
 import { AlgebraHeroArt } from './figures'
 import { algebraStages, algebraTopics } from './lessons'
 
@@ -18,6 +19,10 @@ const aljebraUnit: UnitDefinition = {
     pathSubtitle: { eu: 'Bost etapa, hizkuntza aljebraikotik faktorizaziora', es: 'Cinco etapas, del lenguaje algebraico a la factorización', ar: 'خمس مراحل، من اللغة الجبرية إلى التحليل' },
     stages: algebraStages,
     topics: algebraTopics,
+    diagnostic: algebraDiagnostic,
+    guidedPractice: algebraPractice,
+    exerciseBank: algebraExerciseBank,
+    challenges: algebraChallenges,
     answers: {
         note: { eu: 'Idatzi zenbaki bat: −45, 12 edo 0,5.', es: 'Escribe un número: −45, 12 o 0,5.', ar: 'اكتب عددًا: ⁦−45⁩ أو 12 أو 0.5.' },
         defaultForm: 'any',
