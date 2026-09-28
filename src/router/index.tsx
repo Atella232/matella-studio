@@ -20,12 +20,10 @@ const ZatigarritasunaDBH1Page = lazy(() => import('../pages/dbh1-zatigarritasuna
 
 const ZatikiakDBH1Page = lazy(() => import('../pages/dbh1-zatikiak-v2').then((module) => ({ default: module.ZatikiakIntroPage })))
 const AljebraDBH1Page = lazy(() => import('../pages/dbh1-aljebra-v2').then((module) => ({ default: module.AljebraIntroPage })))
+const GeometriaDBH1Page = lazy(() => import('../pages/dbh1-geometria-v2').then((module) => ({ default: module.GeometriaIntroPage })))
 const ZenbakiOsoakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-osoak-v2').then((module) => ({ default: module.ZenbakiOsoakIntroPage })))
 
 
-const HomePageDBH1_Geometria = lazy(() => import('../pages/dbh1-geometria/HomePage').then((module) => ({ default: module.HomePage })))
-const TheoryPageDBH1_Geometria = lazy(() => import('../pages/dbh1-geometria/TheoryPage').then((module) => ({ default: module.TheoryPage })))
-const LabPageDBH1_Geometria = lazy(() => import('../pages/dbh1-geometria/LabPage').then((module) => ({ default: module.LabPage })))
 
 const HomePageDBH1_Estadistica = lazy(() => import('../pages/dbh1-taulak-grafikoak/HomePage').then((module) => ({ default: module.HomePage })))
 const TheoryPageDBH1_Estadistica = lazy(() => import('../pages/dbh1-taulak-grafikoak/TheoryPage').then((module) => ({ default: module.TheoryPage })))
@@ -94,6 +92,11 @@ export const router = createHashRouter([
                         path: 'matematika/dbh1/algebra/*',
                         element: <AljebraDBH1Page />,
                     },
+                    // Geometría de 1º ESO: unidad V2, gestiona sus propias secciones por URL
+                    {
+                        path: 'matematika/dbh1/geometria/*',
+                        element: <GeometriaDBH1Page />,
+                    },
                     // Números naturales de 1º ESO: unidad V2, gestiona sus propias secciones por URL
                     {
                         path: 'matematika/dbh1/zenbaki-naturalak/*',
@@ -108,23 +111,6 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/dbh1/numeros-enteros/*',
                         element: <ZenbakiOsoakDBH1Page />,
-                    },
-                    // Ruta para Geometría de 1º ESO
-                    {
-                        path: 'matematika/dbh1/geometria',
-                        element: <HomePageDBH1_Geometria />,
-                    },
-                    {
-                        path: 'matematika/dbh1/geometria/teoria',
-                        element: <TheoryPageDBH1_Geometria />,
-                    },
-                    {
-                        path: 'matematika/dbh1/geometria/laboratorio',
-                        element: <LabPageDBH1_Geometria />,
-                    },
-                    {
-                        path: 'matematika/dbh1/geometria/laborategia',
-                        element: <LabPageDBH1_Geometria />,
                     },
                     // Ruta para Estadística de 1º ESO
                     {
