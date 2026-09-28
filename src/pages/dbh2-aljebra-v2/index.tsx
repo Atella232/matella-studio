@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { algebraChallenges, algebraDiagnostic, algebraExerciseBank, algebraPractice } from './content'
 import { AlgebraHeroArt } from './figures'
+import { AlgebraGames } from './games'
+import { ALGEBRA_GAME_RECORDS_KEY, algebraGameProgressIds } from './games/info'
 import { AlgebraLaboratory } from './lab'
 import { algebraLabChallengeIds, algebraLabToolForTopic, algebraLabTools } from './lab/labTools'
 import { algebraStages, algebraTopics } from './lessons'
@@ -30,6 +32,12 @@ const aljebraUnit: UnitDefinition = {
         progressIds: algebraLabChallengeIds,
         toolForTopic: algebraLabToolForTopic,
         render: (props) => <AlgebraLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Hiru joko: lasterketa, garapen azkarra eta memoria.', es: 'Tres juegos: carrera, desarrollo rápido y memoria.', ar: 'ثلاث ألعاب: السباق والنشر السريع والذاكرة.' },
+        progressIds: algebraGameProgressIds,
+        recordsKey: ALGEBRA_GAME_RECORDS_KEY,
+        render: (props) => <AlgebraGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: −45, 12 edo 0,5.', es: 'Escribe un número: −45, 12 o 0,5.', ar: 'اكتب عددًا: ⁦−45⁩ أو 12 أو 0.5.' },
