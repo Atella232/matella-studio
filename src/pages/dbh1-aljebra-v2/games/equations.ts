@@ -1,5 +1,6 @@
 import { pick, randomInt, shuffle, type Random } from '../../../features/unit-v2/games/random.ts'
 import type { Stars } from '../../../features/unit-v2/games/records.ts'
+import type { PairCard } from '../../../features/unit-v2/games/pairsMemory.ts'
 import { linearLatex, termLatex, termsLatex, type Term } from '../algebra.ts'
 
 /* ==========================================================================
@@ -80,13 +81,7 @@ export const MEMORY_PAIRS = 6
 
 export type AlgebraMemoryKind = 'reduce' | 'value' | 'product'
 
-export interface AlgebraCard {
-    id: string
-    setId: number
-    latex: string
-    /** Plain value the pair shares, to explain a mismatch */
-    shows: string
-}
+export type AlgebraCard = PairCard
 
 export const algebraMemoryLevels: AlgebraMemoryKind[] = ['reduce', 'value', 'product']
 
@@ -131,8 +126,3 @@ export function createAlgebraMemoryBoard(random: Random, levelIndex: number): Al
     return shuffle(random, cards)
 }
 
-export function algebraMemoryStars(moves: number): Stars {
-    if (moves <= Math.ceil(MEMORY_PAIRS * 1.6)) return 3
-    if (moves <= Math.ceil(MEMORY_PAIRS * 2.3)) return 2
-    return 1
-}

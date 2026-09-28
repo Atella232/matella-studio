@@ -1,23 +1,28 @@
 import { useEffect, useRef, useState } from 'react'
 import { MathText } from '../../../components/MathText'
-import { GameTopbar, LevelPicker, ResultPanel } from '../../../features/unit-v2/games/GameKit'
-import { formatTime, nowMs, useGameText } from '../../../features/unit-v2/games/gameHooks'
-import type { GameProps } from '../../../features/unit-v2/games/GamesHub'
-import { createRandom, randomSeed } from '../../../features/unit-v2/games/random'
-import { algebraMemoryStars, createAlgebraMemoryBoard, MEMORY_PAIRS, type AlgebraCard } from './equations'
-import { AlgebraGameArt } from './GameArt'
-import { algebraGames } from './info'
+import { GameTopbar, LevelPicker, ResultPanel } from './GameKit'
+import { formatTime, nowMs, useGameText } from './gameHooks'
+import type { GameProps } from './GamesHub'
+import { createRandom, randomSeed } from './random'
+import { pairsMemoryStars, type PairsMemoryConfig, type PairCard } from './pairsMemory'
+
+/* ==========================================================================
+   Memory of pairs shared by the units: every card shows a formula in LaTeX
+   and has exactly one partner (an expression and its result, a figure's
+   data and its area…). A unit gives its game info, art and a board maker.
+   ========================================================================== */
 
 type Phase = 'pick' | 'playing' | 'finished'
 
-const game = algebraGames.find((item) => item.id === 'memory')!
 const MISMATCH_MS = 1300
 
-export function AlgebraMemoryGame({ language, records, onResult, onExit }: GameProps) {
+export function PairsMemoryGame({ language, records, onResult, onExit, config }: GameProps & { config: PairsMemoryConfig }) {
+    const { game, art, pairs, createBoard } = config
+    const stars = (moves: number) => pairsMemoryStars(pairs, moves)
     const l = useGameText(language)
     const [phase, setPhase] = useState<Phase>('pick')
     const [level, setLevel] = useState(0)
-    const [cards, setCards] = useState<AlgebraCard[]>([])
+    const [cards, setCards] = useState<PairCard[]>([])
     const [flipped, setFlipped] = useState<number[]>([])
     const [matched, setMatched] = useState<number[]>([])
     const [moves, setMoves] = useState(0)
@@ -28,7 +33,7 @@ export function AlgebraMemoryGame({ language, records, onResult, onExit }: GameP
 
     const start = (nextLevel: number) => {
         setLevel(nextLevel)
-        setCards(createAlgebraMemoryBoard(createRandom(randomSeed()), nextLevel))
+        setCards(createBoard(createRandom(randomSeed()), nextLevel))
         setFlipped([])
         setMatched([])
         setMoves(0)
@@ -61,10 +66,10 @@ export function AlgebraMemoryGame({ language, records, onResult, onExit }: GameP
             setMatched(nextMatched)
             setFlipped([])
             setMessage({ tone: 'success', latex: `${first.latex}=${card.latex}`.replace(/\\ \(x=(-?\d+)\)=/, '\\ (x=$1)\\ \\to\\ ') })
-            if (nextMatched.length === MEMORY_PAIRS) {
+            if (nextMatched.length === pairs) {
                 const time = nowMs() - startedAt.current
                 setElapsed(time)
-                onResult(level, { stars: algebraMemoryStars(nextMoves), score: -nextMoves, timeMs: time })
+                onResult(level, { stars: stars(nextMoves), score: -nextMoves, timeMs: time })
                 window.setTimeout(() => setPhase('finished'), 600)
             }
             return
@@ -81,7 +86,7 @@ export function AlgebraMemoryGame({ language, records, onResult, onExit }: GameP
         return (
             <LevelPicker
                 game={game}
-                art={<AlgebraGameArt game="memory" />}
+                art={art}
                 language={language}
                 records={records}
                 onStart={start}
@@ -89,7 +94,7 @@ export function AlgebraMemoryGame({ language, records, onResult, onExit }: GameP
                 bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${-record.score} ${l({ eu: 'txanda', es: 'turnos', ar: 'أدوار' })}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: 'Buelta eman kartei eta aurkitu adierazpen bat eta bere emaitza.', es: 'Da la vuelta a las cartas y encuentra una expresión y su resultado.', ar: 'اقلب البطاقات وجد عبارة وناتجها.' })}</li>
+                        <li>{l({ eu: 'Buelta eman kartei eta aurkitu balio bera duten bikoteak.', es: 'Da la vuelta a las cartas y encuentra las parejas que valen lo mismo.', ar: 'اقلب البطاقات وجد الأزواج ذات القيمة نفسها.' })}</li>
                         <li>{l({ eu: 'Zenbat eta txanda gutxiago, orduan eta izar gehiago.', es: 'Cuantos menos turnos, más estrellas.', ar: 'كلما قلت الأدوار زادت النجوم.' })}</li>
                     </ul>
                 )}
@@ -100,7 +105,7 @@ export function AlgebraMemoryGame({ language, records, onResult, onExit }: GameP
     return (
         <div className="fraction-v2-memory" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
-                <span><strong>{matched.length}</strong> / {MEMORY_PAIRS}</span>
+                <span><strong>{matched.length}</strong> / {pairs}</span>
                 <span>{moves} {l({ eu: 'txanda', es: 'turnos', ar: 'أدوار' })}</span>
                 <span>{formatTime(elapsed)}</span>
             </GameTopbar>
@@ -144,9 +149,9 @@ export function AlgebraMemoryGame({ language, records, onResult, onExit }: GameP
             {phase === 'finished' && (
                 <ResultPanel
                     language={language}
-                    stars={algebraMemoryStars(moves)}
+                    stars={stars(moves)}
                     title={l({ eu: `${moves} txandatan osatuta`, es: `Completado en ${moves} turnos`, ar: `اكتملت في ${moves} أدوار` })}
-                    subtitle={l({ eu: `3 izar: ${Math.ceil(MEMORY_PAIRS * 1.6)} txanda edo gutxiago · 2 izar: ${Math.ceil(MEMORY_PAIRS * 2.3)}`, es: `3 estrellas: ${Math.ceil(MEMORY_PAIRS * 1.6)} turnos o menos · 2: ${Math.ceil(MEMORY_PAIRS * 2.3)}`, ar: `3 نجوم: ${Math.ceil(MEMORY_PAIRS * 1.6)} أدوار أو أقل · 2: ${Math.ceil(MEMORY_PAIRS * 2.3)}` })}
+                    subtitle={l({ eu: `3 izar: ${Math.ceil(pairs * 1.6)} txanda edo gutxiago · 2 izar: ${Math.ceil(pairs * 2.3)}`, es: `3 estrellas: ${Math.ceil(pairs * 1.6)} turnos o menos · 2: ${Math.ceil(pairs * 2.3)}`, ar: `3 نجوم: ${Math.ceil(pairs * 1.6)} أدوار أو أقل · 2: ${Math.ceil(pairs * 2.3)}` })}
                     stats={[
                         { label: l({ eu: 'Txandak', es: 'Turnos', ar: 'الأدوار' }), value: String(moves) },
                         { label: l({ eu: 'Denbora', es: 'Tiempo', ar: 'الوقت' }), value: formatTime(elapsed) }

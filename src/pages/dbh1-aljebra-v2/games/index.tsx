@@ -1,14 +1,21 @@
 import type { JSX } from 'react'
 import { GamesHub, type GameProps, type HubGame } from '../../../features/unit-v2/games/GamesHub'
 import type { UnitLanguage } from '../../../features/unit-v2/types'
-import { AlgebraMemoryGame } from './AlgebraMemoryGame'
+import { PairsMemoryGame } from '../../../features/unit-v2/games/PairsMemoryGame'
+import { createAlgebraMemoryBoard, MEMORY_PAIRS } from './equations'
 import { EquationGame } from './EquationGame'
 import { AlgebraGameArt } from './GameArt'
 import { ALGEBRA_GAME_RECORDS_KEY, algebraGameModeForPath, algebraGames, algebraGameSlugs, type AlgebraGameId } from './info'
 import { AlgebraRaceGame } from './RaceGame'
 import './AlgebraGames.css'
 
-const components: Record<AlgebraGameId, (props: GameProps) => JSX.Element> = { race: AlgebraRaceGame, balance: EquationGame, memory: AlgebraMemoryGame }
+const memoryGame = algebraGames.find((game) => game.id === 'memory')!
+
+const components: Record<AlgebraGameId, (props: GameProps) => JSX.Element> = {
+    race: AlgebraRaceGame,
+    balance: EquationGame,
+    memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <AlgebraGameArt game="memory" />, pairs: MEMORY_PAIRS, createBoard: createAlgebraMemoryBoard }} />
+}
 
 const hubGames: HubGame<AlgebraGameId>[] = algebraGames.map((info) => ({ info, art: <AlgebraGameArt game={info.id} />, component: components[info.id] }))
 
