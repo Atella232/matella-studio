@@ -1,0 +1,116 @@
+/* Estatistika (1. DBH) laboratory models. The shared lab shell lives in
+   src/features/unit-v2/lab/LabKit.css. */
+
+.statistics-lab-figure {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+    font-family: "Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif;
+    overflow-x: auto;
+}
+
+.statistics-lab-figure svg {
+    display: block;
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    margin: 0 auto;
+    direction: ltr;
+}
+
+.statistics-lab-score {
+    margin: 0;
+    font-weight: 700;
+}
+
+/* ---------- Variable cards ---------- */
+
+.statistics-lab-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 10px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.statistics-lab-cards li {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+}
+
+.statistics-lab-cards p {
+    margin: 0;
+    font-weight: 700;
+}
+
+.statistics-lab-cards div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.statistics-lab-cards button {
+    padding: 6px 10px;
+    border: 1.8px solid var(--ink);
+    border-radius: 10px;
+    background: var(--paper, #fffcf6);
+    color: var(--ink);
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.statistics-lab-cards button[aria-pressed="true"] {
+    background: var(--stage-tint);
+    font-weight: 700;
+}
+
+/* ---------- Frequency table ---------- */
+
+.statistics-lab-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+}
+
+.statistics-lab-table th,
+.statistics-lab-table td {
+    padding: 8px 10px;
+    border-bottom: 1.5px solid var(--line, #d6cfc2);
+    text-align: center;
+}
+
+.statistics-lab-table th[scope="row"] {
+    text-align: start;
+    white-space: nowrap;
+}
+
+.statistics-lab-table thead th {
+    border-bottom: 2px solid var(--ink);
+}
+
+.statistics-lab-table tfoot th,
+.statistics-lab-table tfoot td {
+    border-top: 2px solid var(--ink);
+    border-bottom: none;
+    font-weight: 700;
+}
+
+.statistics-lab-swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-inline-end: 8px;
+    border: 1.4px solid var(--ink);
+    border-radius: 3px;
+    vertical-align: -1px;
+}

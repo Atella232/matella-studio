@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { statisticsIntroChallenges, statisticsIntroDiagnostic, statisticsIntroExerciseBank, statisticsIntroPractice } from './content'
 import { StatisticsIntroHeroArt } from './figures'
+import { StatisticsIntroLaboratory } from './lab'
+import { statisticsLabChallengeIds, statisticsLabToolForTopic, statisticsLabTools } from './lab/labTools'
 import { statisticsIntroStages, statisticsIntroTopics } from './lessons'
 
 const estatistikaIntroUnit: UnitDefinition = {
@@ -23,6 +25,12 @@ const estatistikaIntroUnit: UnitDefinition = {
     guidedPractice: statisticsIntroPractice,
     exerciseBank: statisticsIntroExerciseBank,
     challenges: statisticsIntroChallenges,
+    lab: {
+        description: { eu: `${statisticsLabTools.length} tresna: aldagai-sailkatzailea, maiztasun-taula, grafiko-egilea, batez bestekoaren balantza eta dado-simulagailua, erronkekin.`, es: `${statisticsLabTools.length} herramientas: clasificador de variables, tabla de frecuencias, creador de gráficos, balanza de la media y simulador de dados, con retos.`, ar: `${statisticsLabTools.length} أدوات: مصنّف المتغيرات وجدول التكرارات وصانع المخططات وميزان المتوسط ومحاكي النرد، مع تحديات.` },
+        progressIds: statisticsLabChallengeIds,
+        toolForTopic: statisticsLabToolForTopic,
+        render: (props) => <StatisticsIntroLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat edo zatiki bat: 7, 0,4 edo 3/8.', es: 'Escribe un número o una fracción: 7, 0,4 o 3/8.', ar: 'اكتب عددًا أو كسرًا: 7 أو 0.4 أو 3/8.' },
         defaultForm: 'any',
