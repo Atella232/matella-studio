@@ -1,5 +1,6 @@
 import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
+import { statisticsIntroChallenges, statisticsIntroDiagnostic, statisticsIntroExerciseBank, statisticsIntroPractice } from './content'
 import { StatisticsIntroHeroArt } from './figures'
 import { statisticsIntroStages, statisticsIntroTopics } from './lessons'
 
@@ -18,6 +19,10 @@ const estatistikaIntroUnit: UnitDefinition = {
     pathSubtitle: { eu: 'Bost etapa, inkestatik probabilitatera', es: 'Cinco etapas, de la encuesta a la probabilidad', ar: 'خمس مراحل، من الاستبيان إلى الاحتمال' },
     stages: statisticsIntroStages,
     topics: statisticsIntroTopics,
+    diagnostic: statisticsIntroDiagnostic,
+    guidedPractice: statisticsIntroPractice,
+    exerciseBank: statisticsIntroExerciseBank,
+    challenges: statisticsIntroChallenges,
     answers: {
         note: { eu: 'Idatzi zenbaki bat edo zatiki bat: 7, 0,4 edo 3/8.', es: 'Escribe un número o una fracción: 7, 0,4 o 3/8.', ar: 'اكتب عددًا أو كسرًا: 7 أو 0.4 أو 3/8.' },
         defaultForm: 'any',
