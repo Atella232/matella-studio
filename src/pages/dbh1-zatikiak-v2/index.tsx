@@ -1,6 +1,7 @@
 import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import '../dbh2-zatigarritasuna/Zatigarritasuna.css'
+import { fractionsIntroChallenges, fractionsIntroDiagnostic, fractionsIntroExerciseBank, fractionsIntroPractice } from './content'
 import { FractionsIntroHeroArt } from './figures'
 import { fractionsIntroStages, fractionsIntroTopics } from './lessons'
 
@@ -19,6 +20,10 @@ const zatikiakIntroUnit: UnitDefinition = {
     pathSubtitle: { eu: 'Bost etapa, zatikiaren ideiatik buruketetara', es: 'Cinco etapas, de la idea de fracción a los problemas', ar: 'خمس مراحل، من فكرة الكسر إلى المسائل' },
     stages: fractionsIntroStages,
     topics: fractionsIntroTopics,
+    diagnostic: fractionsIntroDiagnostic,
+    guidedPractice: fractionsIntroPractice,
+    exerciseBank: fractionsIntroExerciseBank,
+    challenges: fractionsIntroChallenges,
     answers: {
         note: { eu: 'Enuntziatuak forma zehatzik eskatzen ez badu, zatiki baliokideak eta koma edo puntua duten hamartarrak onartzen dira.', es: 'Si el enunciado no pide una forma concreta, se aceptan fracciones equivalentes y decimales con coma o punto.', ar: 'إذا لم يطلب السؤال صيغة محددة، تُقبل الكسور المكافئة والأعداد العشرية بالفاصلة أو النقطة.' },
         defaultForm: 'any',
