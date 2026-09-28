@@ -21,13 +21,11 @@ const ZatigarritasunaDBH1Page = lazy(() => import('../pages/dbh1-zatigarritasuna
 const ZatikiakDBH1Page = lazy(() => import('../pages/dbh1-zatikiak-v2').then((module) => ({ default: module.ZatikiakIntroPage })))
 const AljebraDBH1Page = lazy(() => import('../pages/dbh1-aljebra-v2').then((module) => ({ default: module.AljebraIntroPage })))
 const GeometriaDBH1Page = lazy(() => import('../pages/dbh1-geometria-v2').then((module) => ({ default: module.GeometriaIntroPage })))
+const EstatistikaDBH1Page = lazy(() => import('../pages/dbh1-estatistika-v2').then((module) => ({ default: module.EstatistikaIntroPage })))
 const ZenbakiOsoakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-osoak-v2').then((module) => ({ default: module.ZenbakiOsoakIntroPage })))
 
 
 
-const HomePageDBH1_Estadistica = lazy(() => import('../pages/dbh1-taulak-grafikoak/HomePage').then((module) => ({ default: module.HomePage })))
-const TheoryPageDBH1_Estadistica = lazy(() => import('../pages/dbh1-taulak-grafikoak/TheoryPage').then((module) => ({ default: module.TheoryPage })))
-const LabPageDBH1_Estadistica = lazy(() => import('../pages/dbh1-taulak-grafikoak/LabPage').then((module) => ({ default: module.LabPage })))
 
 const HomePageDBH2_Algebra = lazy(() => import('../pages/dbh2-algebra/HomePage').then((module) => ({ default: module.HomePage })))
 const TheoryPageDBH2_Algebra = lazy(() => import('../pages/dbh2-algebra/TheoryPage').then((module) => ({ default: module.TheoryPage })))
@@ -112,22 +110,10 @@ export const router = createHashRouter([
                         path: 'matematika/dbh1/numeros-enteros/*',
                         element: <ZenbakiOsoakDBH1Page />,
                     },
-                    // Ruta para Estadística de 1º ESO
+                    // Estadística de 1º ESO: unidad V2, gestiona sus propias secciones por URL
                     {
-                        path: 'matematika/dbh1/estadistica',
-                        element: <HomePageDBH1_Estadistica />,
-                    },
-                    {
-                        path: 'matematika/dbh1/estadistica/teoria',
-                        element: <TheoryPageDBH1_Estadistica />,
-                    },
-                    {
-                        path: 'matematika/dbh1/estadistica/laboratorio',
-                        element: <LabPageDBH1_Estadistica />,
-                    },
-                    {
-                        path: 'matematika/dbh1/estadistica/laborategia',
-                        element: <LabPageDBH1_Estadistica />,
+                        path: 'matematika/dbh1/estadistica/*',
+                        element: <EstatistikaDBH1Page />,
                     },
 
                     // Fracciones de 2º ESO: la unidad V2 gestiona sus propias secciones por URL
