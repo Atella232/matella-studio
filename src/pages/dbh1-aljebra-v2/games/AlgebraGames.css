@@ -1,0 +1,51 @@
+/* Aljebra (1. DBH) games: the quick balance. The shared game shell and the
+   memory board live in src/features/unit-v2/games/Games.css. */
+
+.algebra-equation-game {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.algebra-equation-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 24px 16px;
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    background: var(--card);
+}
+
+.algebra-equation-latex {
+    margin: 0;
+    font-size: 32px;
+}
+
+.algebra-equation-card label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.algebra-equation-card input {
+    width: 120px;
+    height: 52px;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    background: var(--paper, #fffcf6);
+    color: var(--ink);
+    font: inherit;
+    font-style: normal;
+    font-size: 24px;
+    text-align: center;
+}
+
+.algebra-equation-card input[aria-invalid="true"] {
+    border-color: var(--error);
+    background: var(--error-tint);
+}

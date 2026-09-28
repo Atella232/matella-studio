@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { algebraIntroChallenges, algebraIntroDiagnostic, algebraIntroExerciseBank, algebraIntroPractice } from './content'
 import { AlgebraIntroHeroArt } from './figures'
+import { AlgebraIntroGames } from './games'
+import { ALGEBRA_GAME_RECORDS_KEY, algebraGameProgressIds } from './games/info'
 import { AlgebraIntroLaboratory } from './lab'
 import { algebraLabChallengeIds, algebraLabToolForTopic, algebraLabTools } from './lab/labTools'
 import { algebraIntroStages, algebraIntroTopics } from './lessons'
@@ -30,6 +32,12 @@ const aljebraIntroUnit: UnitDefinition = {
         progressIds: algebraLabChallengeIds,
         toolForTopic: algebraLabToolForTopic,
         render: (props) => <AlgebraIntroLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Hiru joko azkar aritzeko: lasterketa, balantza azkarra eta memoria.', es: 'Tres juegos para ganar rapidez: carrera, balanza rápida y memoria.', ar: 'ثلاث ألعاب لاكتساب السرعة: السباق والميزان السريع والذاكرة.' },
+        progressIds: algebraGameProgressIds,
+        recordsKey: ALGEBRA_GAME_RECORDS_KEY,
+        render: (props) => <AlgebraIntroGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi emaitza zenbaki gisa: 7, −3 edo 5/2.', es: 'Escribe el resultado como número: 7, −3 o 5/2.', ar: 'اكتب النتيجة عددًا: 7 أو ⁦−3⁩ أو 5/2.' },
