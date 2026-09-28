@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { algebraIntroChallenges, algebraIntroDiagnostic, algebraIntroExerciseBank, algebraIntroPractice } from './content'
 import { AlgebraIntroHeroArt } from './figures'
+import { AlgebraIntroLaboratory } from './lab'
+import { algebraLabChallengeIds, algebraLabToolForTopic, algebraLabTools } from './lab/labTools'
 import { algebraIntroStages, algebraIntroTopics } from './lessons'
 
 const aljebraIntroUnit: UnitDefinition = {
@@ -23,6 +25,12 @@ const aljebraIntroUnit: UnitDefinition = {
     guidedPractice: algebraIntroPractice,
     exerciseBank: algebraIntroExerciseBank,
     challenges: algebraIntroChallenges,
+    lab: {
+        description: { eu: `${algebraLabTools.length} tresna: itzultzailea, zenbaki-makina, fitxa aljebraikoak, balantza eta probatu eta zuzendu, erronkekin.`, es: `${algebraLabTools.length} herramientas: traductor, máquina de números, fichas algebraicas, balanza y prueba y corrige, con retos.`, ar: `${algebraLabTools.length} أدوات: المترجم وآلة الأعداد والبطاقات الجبرية والميزان وجرّب وصحّح، مع تحديات.` },
+        progressIds: algebraLabChallengeIds,
+        toolForTopic: algebraLabToolForTopic,
+        render: (props) => <AlgebraIntroLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi emaitza zenbaki gisa: 7, −3 edo 5/2.', es: 'Escribe el resultado como número: 7, −3 o 5/2.', ar: 'اكتب النتيجة عددًا: 7 أو ⁦−3⁩ أو 5/2.' },
         defaultForm: 'any',
