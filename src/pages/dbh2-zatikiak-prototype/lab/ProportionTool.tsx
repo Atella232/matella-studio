@@ -1,3 +1,4 @@
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { fraction, type FractionValue } from '../math/fraction'
@@ -24,7 +25,7 @@ function decimalLatex(numerator: number, denominator: number, separator: string)
     return `${integer}{${separator}}${fixed}${repeating ? `\\overline{${repeating}}` : ''}`
 }
 
-export function ProportionTool(props: ToolProps) {
+export function ProportionTool(props: ToolProps & { challenges?: LabChallenge<ProportionState>[]; modes?: Array<ProportionState['mode']> }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<ProportionState>(initialProportionState)
     const { mode, numerator, denominator, quantity, percent } = state
@@ -48,11 +49,11 @@ export function ProportionTool(props: ToolProps) {
             <Segmented
                 label={l({ eu: 'Modua', es: 'Modo', ar: 'الوضع' })}
                 value={mode}
-                options={[
+                options={([
                     { value: 'of', label: l({ eu: 'Zatikia', es: 'Fracción de', ar: 'كسر من' }) },
                     { value: 'percent', label: l({ eu: 'Ehunekoa', es: 'Porcentaje', ar: 'نسبة مئوية' }) },
                     { value: 'forms', label: l({ eu: 'Hiru forma', es: 'Tres formas', ar: 'ثلاث صيغ' }) }
-                ]}
+                ] as Array<{ value: ProportionState['mode']; label: string }>).filter((option) => !props.modes || props.modes.includes(option.value))}
                 onChange={(next) => update({ mode: next })}
             />
             {mode !== 'percent' && fractionSteppers}
@@ -89,7 +90,7 @@ export function ProportionTool(props: ToolProps) {
     }
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={proportionChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? proportionChallenges} state={state}>
             {mode === 'of' && <TapeDiagram numerator={numerator} denominator={denominator} quantity={quantity} showResult={showResult} result={result} language={props.language} />}
             {mode === 'percent' && <PercentBar percent={percent} quantity={quantity} showResult={showResult} result={result} />}
             {mode === 'forms' && <HundredGrid numerator={numerator} denominator={denominator} language={props.language} />}

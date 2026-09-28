@@ -1,3 +1,4 @@
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { compare } from '../math/fraction'
@@ -18,7 +19,7 @@ import { useLabText } from './useLabText'
 const pieceLatex = (piece: WallPiece) => piece.denominator === 1 ? String(piece.numerator) : `\\frac{${piece.numerator}}{${piece.denominator}}`
 const pieceValue = (piece: WallPiece) => piece.numerator / piece.denominator
 
-export function WallTool(props: ToolProps) {
+export function WallTool(props: ToolProps & { challenges?: LabChallenge<WallState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<WallState>(initialWallState)
     const { mode, first, second } = state
@@ -95,7 +96,7 @@ export function WallTool(props: ToolProps) {
     const guides = [first, second].filter((piece): piece is WallPiece => piece !== null)
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={wallChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? wallChallenges} state={state}>
             <div className={`fraction-v2-wall fraction-v2-wall-${mode}`}>
                 {WALL_DENOMINATORS.map((denominator) => (
                     <div className={`fraction-v2-wall-row ${matchingRows.has(denominator) ? 'match' : ''}`} key={denominator}>

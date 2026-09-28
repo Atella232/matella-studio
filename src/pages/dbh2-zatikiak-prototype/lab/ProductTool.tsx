@@ -1,3 +1,4 @@
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useState, type CSSProperties } from 'react'
 import { MathText } from '../../../components/MathText'
 import { fraction, type FractionValue } from '../math/fraction'
@@ -27,7 +28,7 @@ function simplifiedTail(value: FractionValue): string {
     return tail
 }
 
-export function ProductTool(props: ToolProps) {
+export function ProductTool(props: ToolProps & { challenges?: LabChallenge<ProductState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<ProductState>(initialProductState)
     const { first, second, op } = state
@@ -62,7 +63,7 @@ export function ProductTool(props: ToolProps) {
     )
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={productChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? productChallenges} state={state}>
             {op === 'multiply' ? <AreaModel first={first} second={second} showResult={showResult} language={props.language} /> : <MeasureModel first={first} second={second} showResult={showResult} language={props.language} />}
         </ToolFrame>
     )

@@ -1,3 +1,4 @@
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { gcd } from '../math/fraction'
@@ -15,7 +16,7 @@ import { Segmented, Stepper, ToolFrame } from './LabKit'
 import { PartitionBar } from './models'
 import { useLabText } from './useLabText'
 
-export function EquivalenceTool(props: ToolProps) {
+export function EquivalenceTool(props: ToolProps & { challenges?: LabChallenge<EquivalenceState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<EquivalenceState>(initialEquivalenceState)
     const { numerator, denominator, mode, factor, divisor } = state
@@ -85,7 +86,7 @@ export function EquivalenceTool(props: ToolProps) {
     const resultLabel = `${l({ eu: 'Zatiki baliokidea', es: 'Fracción equivalente', ar: 'الكسر المكافئ' })}: ${result.numerator}/${result.denominator}`
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={equivalenceChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? equivalenceChallenges} state={state}>
             <div className="fraction-v2-bar-stack">
                 <div className="fraction-v2-bar-row">
                     <span className="fraction-v2-bar-label"><MathText text={`$\\frac{${numerator}}{${denominator}}$`} /></span>

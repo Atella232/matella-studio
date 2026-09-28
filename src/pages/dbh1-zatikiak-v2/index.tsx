@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import '../dbh2-zatigarritasuna/Zatigarritasuna.css'
 import { fractionsIntroChallenges, fractionsIntroDiagnostic, fractionsIntroExerciseBank, fractionsIntroPractice } from './content'
 import { FractionsIntroHeroArt } from './figures'
+import { FractionsIntroLaboratory } from './lab'
+import { fractionsIntroLabChallengeIds, fractionsIntroLabToolForTopic, fractionsIntroLabTools } from './lab/labTools'
 import { fractionsIntroStages, fractionsIntroTopics } from './lessons'
 
 const zatikiakIntroUnit: UnitDefinition = {
@@ -24,6 +26,12 @@ const zatikiakIntroUnit: UnitDefinition = {
     guidedPractice: fractionsIntroPractice,
     exerciseBank: fractionsIntroExerciseBank,
     challenges: fractionsIntroChallenges,
+    lab: {
+        description: { eu: `${fractionsIntroLabTools.length} tresna zatikiak ukitzeko: zatiak, zuzena, horma, baliokidetasuna, alderaketa, eragiketak eta kopuruak, erronkekin.`, es: `${fractionsIntroLabTools.length} herramientas para tocar las fracciones: partes, recta, muro, equivalencia, comparación, operaciones y cantidades, con retos.`, ar: `${fractionsIntroLabTools.length} أدوات للمس الكسور: الأجزاء والمستقيم والجدار والتكافؤ والمقارنة والعمليات والكميات، مع تحديات.` },
+        progressIds: fractionsIntroLabChallengeIds,
+        toolForTopic: fractionsIntroLabToolForTopic,
+        render: (props) => <FractionsIntroLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Enuntziatuak forma zehatzik eskatzen ez badu, zatiki baliokideak eta koma edo puntua duten hamartarrak onartzen dira.', es: 'Si el enunciado no pide una forma concreta, se aceptan fracciones equivalentes y decimales con coma o punto.', ar: 'إذا لم يطلب السؤال صيغة محددة، تُقبل الكسور المكافئة والأعداد العشرية بالفاصلة أو النقطة.' },
         defaultForm: 'any',

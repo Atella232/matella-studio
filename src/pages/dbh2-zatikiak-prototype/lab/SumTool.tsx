@@ -1,3 +1,4 @@
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { fraction, type FractionValue } from '../math/fraction'
@@ -32,7 +33,7 @@ function simplifiedTail(value: FractionValue): string {
     return tail
 }
 
-export function SumTool(props: ToolProps) {
+export function SumTool(props: ToolProps & { challenges?: LabChallenge<SumState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<SumState>(initialSumState)
     const { first, second, op, view } = state
@@ -91,7 +92,7 @@ export function SumTool(props: ToolProps) {
     )
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={sumChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? sumChallenges} state={state}>
             <div className="fraction-v2-bar-stack">
                 <div className="fraction-v2-bar-row">
                     <span className="fraction-v2-bar-label"><MathText text={`$${latex(first)}$`} /></span>

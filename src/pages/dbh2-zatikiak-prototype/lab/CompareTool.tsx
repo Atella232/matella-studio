@@ -1,3 +1,4 @@
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import type { FractionValue } from '../math/fraction'
@@ -22,7 +23,7 @@ const MAX_DRAWN_PIECES = 36
 
 const latex = (value: FractionValue) => `\\frac{${value.numerator}}{${value.denominator}}`
 
-export function CompareTool(props: ToolProps) {
+export function CompareTool(props: ToolProps & { challenges?: LabChallenge<CompareState>[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<CompareState>(initialCompareState)
     const { first, second, strategy, guess } = state
@@ -94,7 +95,7 @@ export function CompareTool(props: ToolProps) {
     const secondLabel = `${l({ eu: 'Bigarren zatikia', es: 'Segunda fracción', ar: 'الكسر الثاني' })}: ${second.numerator}/${second.denominator}`
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={compareChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? compareChallenges} state={state}>
             {strategy === 'common' && (
                 <div className="fraction-v2-bar-stack">
                     <div className="fraction-v2-bar-row">

@@ -1,3 +1,4 @@
+import type { LabChallenge } from '../../../features/unit-v2/lab/types'
 import { useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
 import { MathText } from '../../../components/MathText'
 import { fraction, toExactDecimal, toNumber, type FractionValue } from '../math/fraction'
@@ -33,7 +34,7 @@ function mixedLatex(value: FractionValue): string | null {
     return `${reduced.numerator < 0 ? '-' : ''}${whole}\\frac{${absolute % reduced.denominator}}{${reduced.denominator}}`
 }
 
-export function NumberLineTool(props: ToolProps) {
+export function NumberLineTool(props: ToolProps & { challenges?: LabChallenge<NumberLineState>[]; ranges?: NumberLineRange[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<NumberLineState>(initialNumberLineState)
     const trackRef = useRef<HTMLDivElement>(null)
@@ -92,12 +93,13 @@ export function NumberLineTool(props: ToolProps) {
         setState((current) => moveNumberLinePoint(current, moves[event.key]))
     }
 
-    const rangeOptions: Array<{ value: NumberLineRange; label: string }> = [
+    const allRanges: Array<{ value: NumberLineRange; label: string }> = [
         { value: '0-1', label: '0 – 1' },
         { value: '0-2', label: '0 – 2' },
         { value: '0-3', label: '0 – 3' },
         { value: '-2-2', label: '−2 – 2' }
     ]
+    const rangeOptions = allRanges.filter((option) => !props.ranges || props.ranges.includes(option.value))
 
     const controls = (
         <>
@@ -161,7 +163,7 @@ export function NumberLineTool(props: ToolProps) {
             {...props}
             controls={controls}
             readout={readout}
-            challenges={numberLineChallenges}
+            challenges={props.challenges ?? numberLineChallenges}
             state={state}
         >
             <div className="fraction-v2-nl">

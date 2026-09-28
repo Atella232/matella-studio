@@ -15,7 +15,8 @@ export interface LabToolInfo extends UnitLabToolInfo {
 }
 
 /** Props every lab tool receives from the laboratory */
-export type ToolProps = LabToolProps<LabToolInfo>
+/** Loose on purpose: the 1. DBH unit reuses these tools with its own tool list and challenges */
+export type ToolProps = LabToolProps<UnitLabToolInfo>
 
 export const labTools: LabToolInfo[] = [
     {
