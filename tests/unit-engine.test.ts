@@ -55,7 +55,7 @@ test('unit engine: legacy URLs open the matching section of any V2 unit', () => 
     assert.ok(isUnitV2Path('/matematika/dbh1/geometria/laboratorio'))
     assert.ok(isUnitV2Path('/matematika/dbh1/estadistica/laboratorio'))
     assert.ok(isUnitV2Path('/matematika/dbh2/algebra/jokuak'))
-    assert.ok(!isUnitV2Path('/matematika/dbh2/ekuazioak'))
+    assert.ok(isUnitV2Path('/matematika/dbh2/ekuazioak/teoria'))
     assert.ok(!isUnitV2Path('/matematika/dbh2/zatikiak-extra'))
 })
 

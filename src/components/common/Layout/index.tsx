@@ -9,8 +9,7 @@ export function Layout() {
     const { t, i18n } = useTranslation()
     const location = useLocation()
     const isRTL = i18n.language === 'ar'
-    const isPrototypeRoute = location.pathname.startsWith('/prototipo/ekuazioak-v2')
-        || isUnitV2Path(location.pathname)
+    const isPrototypeRoute = isUnitV2Path(location.pathname)
     const isImmersiveRoute = location.pathname.startsWith('/natura/dbh1/biosfera') || isPrototypeRoute
     // Natura keeps its original look; everything else uses "Cuaderno a color" (src/index.css)
     const isClassicTheme = location.pathname.startsWith('/natura')

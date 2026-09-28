@@ -23,19 +23,13 @@ const AljebraDBH1Page = lazy(() => import('../pages/dbh1-aljebra-v2').then((modu
 const GeometriaDBH1Page = lazy(() => import('../pages/dbh1-geometria-v2').then((module) => ({ default: module.GeometriaIntroPage })))
 const EstatistikaDBH1Page = lazy(() => import('../pages/dbh1-estatistika-v2').then((module) => ({ default: module.EstatistikaIntroPage })))
 const AljebraDBH2Page = lazy(() => import('../pages/dbh2-aljebra-v2').then((module) => ({ default: module.AljebraDBH2Page })))
+const EkuazioakDBH2Page = lazy(() => import('../pages/dbh2-ekuazioak-v2').then((module) => ({ default: module.EkuazioakDBH2Page })))
 const ZenbakiOsoakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-osoak-v2').then((module) => ({ default: module.ZenbakiOsoakIntroPage })))
 
 
 
 
 
-const HomePageDBH2_Ekuazioak = lazy(() => import('../pages/dbh2-ekuazioak/HomePage').then((module) => ({ default: module.HomePage })))
-const TheoryPageDBH2_Ekuazioak = lazy(() => import('../pages/dbh2-ekuazioak/TheoryPage').then((module) => ({ default: module.TheoryPage })))
-const LabPageDBH2_Ekuazioak = lazy(() => import('../pages/dbh2-ekuazioak/LabPage').then((module) => ({ default: module.LabPage })))
-const MissionPageDBH2_Ekuazioak = lazy(() => import('../pages/dbh2-ekuazioak/MissionPage').then((module) => ({ default: module.MissionPage })))
-const GamesPageDBH2_Ekuazioak = lazy(() => import('../pages/dbh2-ekuazioak/GamesPage').then((module) => ({ default: module.GamesPage })))
-const ExercisesPageDBH2_Ekuazioak = lazy(() => import('../pages/dbh2-ekuazioak/ExercisesPage').then((module) => ({ default: module.ExercisesPage })))
-const EkuazioakPrototypePage = lazy(() => import('../pages/dbh2-ekuazioak-prototype').then((module) => ({ default: module.EkuazioakPrototypePage })))
 
 const NaturaCoursesPage = lazy(() => import('../pages/NaturaCoursesPage').then((module) => ({ default: module.NaturaCoursesPage })))
 const NaturaTopicsPage = lazy(() => import('../pages/NaturaTopicsPage').then((module) => ({ default: module.NaturaTopicsPage })))
@@ -130,33 +124,14 @@ export const router = createHashRouter([
                         path: 'matematika/dbh2/algebra/*',
                         element: <AljebraDBH2Page />,
                     },
+                    // Ecuaciones de 2º ESO: unidad V2, gestiona sus propias secciones por URL
                     {
-                        path: 'matematika/dbh2/ekuazioak',
-                        element: <HomePageDBH2_Ekuazioak />,
-                    },
-                    {
-                        path: 'matematika/dbh2/ekuazioak/teoria',
-                        element: <TheoryPageDBH2_Ekuazioak />,
-                    },
-                    {
-                        path: 'matematika/dbh2/ekuazioak/laboratorio',
-                        element: <LabPageDBH2_Ekuazioak />,
-                    },
-                    {
-                        path: 'matematika/dbh2/ekuazioak/retos',
-                        element: <MissionPageDBH2_Ekuazioak />,
-                    },
-                    {
-                        path: 'matematika/dbh2/ekuazioak/ejercicios',
-                        element: <ExercisesPageDBH2_Ekuazioak />,
-                    },
-                    {
-                        path: 'matematika/dbh2/ekuazioak/juegos',
-                        element: <GamesPageDBH2_Ekuazioak />,
+                        path: 'matematika/dbh2/ekuazioak/*',
+                        element: <EkuazioakDBH2Page />,
                     },
                     {
                         path: 'prototipo/ekuazioak-v2',
-                        element: <EkuazioakPrototypePage />,
+                        element: <Navigate to="/matematika/dbh2/ekuazioak" replace />,
                     },
                     {
                         path: 'prototipo/zatikiak-v2',
