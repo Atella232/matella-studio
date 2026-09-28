@@ -1,5 +1,6 @@
 import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
+import { geometryIntroChallenges, geometryIntroDiagnostic, geometryIntroExerciseBank, geometryIntroPractice } from './content'
 import { GeometryIntroHeroArt } from './figures'
 import { geometryIntroStages, geometryIntroTopics } from './lessons'
 
@@ -18,6 +19,10 @@ const geometriaIntroUnit: UnitDefinition = {
     pathSubtitle: { eu: 'Bost etapa, zuzenetatik azaleretara', es: 'Cinco etapas, de las rectas a las áreas', ar: 'خمس مراحل، من المستقيمات إلى المساحات' },
     stages: geometryIntroStages,
     topics: geometryIntroTopics,
+    diagnostic: geometryIntroDiagnostic,
+    guidedPractice: geometryIntroPractice,
+    exerciseBank: geometryIntroExerciseBank,
+    challenges: geometryIntroChallenges,
     answers: {
         note: { eu: 'Idatzi zenbakia bakarrik (unitaterik gabe): 55 edo 31,4.', es: 'Escribe solo el número (sin unidades): 55 o 31,4.', ar: 'اكتب العدد فقط (دون وحدات): 55 أو 31.4.' },
         defaultForm: 'any',
