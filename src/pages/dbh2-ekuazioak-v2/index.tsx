@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { equationsChallenges, equationsDiagnostic, equationsExerciseBank, equationsPractice } from './content'
 import { EquationsHeroArt } from './figures'
+import { EquationsLaboratory } from './lab'
+import { equationsLabChallengeIds, equationsLabToolForTopic, equationsLabTools } from './lab/labTools'
 import { equationsStages, equationsTopics } from './lessons'
 
 const ekuazioakUnit: UnitDefinition = {
@@ -23,6 +25,12 @@ const ekuazioakUnit: UnitDefinition = {
     guidedPractice: equationsPractice,
     exerciseBank: equationsExerciseBank,
     challenges: equationsChallenges,
+    lab: {
+        description: { eu: `${equationsLabTools.length} tresna: balioak probatu, urratsez urrats ebatzi, izendatzaileak kendu, buruketak planteatu eta diskriminatzailea, erronkekin.`, es: `${equationsLabTools.length} herramientas: probar valores, resolver paso a paso, quitar denominadores, plantear problemas y el discriminante, con retos.`, ar: `${equationsLabTools.length} أدوات: تجربة القيم والحل خطوة بخطوة وحذف المقامات وصياغة المسائل والمميّز، مع تحديات.` },
+        progressIds: equationsLabChallengeIds,
+        toolForTopic: equationsLabToolForTopic,
+        render: (props) => <EquationsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi x-ren balioa: 5, −3, 1,2 edo 2/3.', es: 'Escribe el valor de x: 5, −3, 1,2 o 2/3.', ar: 'اكتب قيمة x: 5 أو ⁦−3⁩ أو 1.2 أو 2/3.' },
         defaultForm: 'any',

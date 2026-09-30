@@ -1,0 +1,126 @@
+/* Ekuazioak (2. DBH) laboratory models. The trial display comes from the
+   1. DBH algebra lab (AlgebraLab.css); the shared shell lives in
+   src/features/unit-v2/lab/LabKit.css. */
+
+.equations-lab-figure {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+}
+
+.equations-lab-figure svg {
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    margin: 0 auto;
+    direction: ltr;
+}
+
+/* ---------- Step-by-step solver ---------- */
+
+.equations-lab-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.equations-lab-steps li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 6px 14px;
+    padding: 10px 14px;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    background: var(--card);
+    font-size: 20px;
+}
+
+.equations-lab-steps li:last-child {
+    background: var(--stage-tint);
+}
+
+.equations-lab-steps small {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* ---------- Denominators ---------- */
+
+.equations-lab-lcm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    padding: 16px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+    font-size: 20px;
+    overflow-x: auto;
+}
+
+.equations-lab-lcm p {
+    margin: 0;
+}
+
+.equations-lab-lcm .cleared {
+    padding: 4px 12px;
+    border-radius: 10px;
+    background: var(--stage-tint);
+}
+
+.equations-lab-lcm-arrow {
+    color: var(--muted);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* ---------- Problems ---------- */
+
+.equations-lab-problem {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.equations-lab-statement {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.equations-lab-unknown {
+    margin: 0;
+    color: var(--muted);
+}
+
+.equations-lab-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.equations-lab-options button {
+    padding: 8px 14px;
+    border: 1.8px solid var(--ink);
+    border-radius: 10px;
+    background: var(--paper, #fffcf6);
+    color: var(--ink);
+    font: inherit;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.equations-lab-options button.right { background: var(--stage-tint); }
+.equations-lab-options button.wrong { border-style: dashed; background: var(--error-tint, #f8dcd0); }
