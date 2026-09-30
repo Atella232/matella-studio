@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { equationsChallenges, equationsDiagnostic, equationsExerciseBank, equationsPractice } from './content'
 import { EquationsHeroArt } from './figures'
+import { EquationsGames } from './games'
+import { EQUATIONS_GAME_RECORDS_KEY, equationsGameProgressIds } from './games/info'
 import { EquationsLaboratory } from './lab'
 import { equationsLabChallengeIds, equationsLabToolForTopic, equationsLabTools } from './lab/labTools'
 import { equationsStages, equationsTopics } from './lessons'
@@ -30,6 +32,12 @@ const ekuazioakUnit: UnitDefinition = {
         progressIds: equationsLabChallengeIds,
         toolForTopic: equationsLabToolForTopic,
         render: (props) => <EquationsLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Hiru joko: lasterketa, ebatzi azkar eta memoria.', es: 'Tres juegos: carrera, resuelve rápido y memoria.', ar: 'ثلاث ألعاب: السباق والحل السريع والذاكرة.' },
+        progressIds: equationsGameProgressIds,
+        recordsKey: EQUATIONS_GAME_RECORDS_KEY,
+        render: (props) => <EquationsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi x-ren balioa: 5, −3, 1,2 edo 2/3.', es: 'Escribe el valor de x: 5, −3, 1,2 o 2/3.', ar: 'اكتب قيمة x: 5 أو ⁦−3⁩ أو 1.2 أو 2/3.' },
