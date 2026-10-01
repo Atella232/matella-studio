@@ -65,7 +65,7 @@ export function PairsMemoryGame({ language, records, onResult, onExit, config }:
             const nextMatched = [...matched, card.setId]
             setMatched(nextMatched)
             setFlipped([])
-            setMessage({ tone: 'success', latex: `${first.latex}=${card.latex}`.replace(/\\ \(x=(-?\d+)\)=/, '\\ (x=$1)\\ \\to\\ ') })
+            setMessage({ tone: 'success', latex: first.explain ?? card.explain ?? `${first.latex}=${card.latex}`.replace(/\\ \(x=(-?\d+)\)=/, '\\ (x=$1)\\ \\to\\ ') })
             if (nextMatched.length === pairs) {
                 const time = nowMs() - startedAt.current
                 setElapsed(time)

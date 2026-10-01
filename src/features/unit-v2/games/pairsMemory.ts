@@ -14,6 +14,8 @@ export interface PairCard {
     latex: string
     /** Plain value the pair shares, shown to explain a mismatch */
     shows: string
+    /** Worked line shown when the pair is found, instead of "card = card" */
+    explain?: string
 }
 
 export interface PairsMemoryConfig {
