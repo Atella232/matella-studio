@@ -1,0 +1,23 @@
+/* Zenbaki errealak (4. DBH, aplikatuak): hero art and the models of the laboratory and the games.
+   The shared shells live in src/features/unit-v2. */
+
+.reals-v2-hero-art {
+    display: grid;
+    place-items: center;
+    width: min(100%, 300px);
+    color: var(--ink);
+}
+
+.reals-v2-hero-art svg {
+    width: 100%;
+    height: auto;
+}
+
+.reals-line {
+    display: block;
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    margin: 0 auto;
+    direction: ltr;
+}

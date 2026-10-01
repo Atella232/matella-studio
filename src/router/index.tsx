@@ -25,6 +25,7 @@ const EstatistikaDBH1Page = lazy(() => import('../pages/dbh1-estatistika-v2').th
 const AljebraDBH2Page = lazy(() => import('../pages/dbh2-aljebra-v2').then((module) => ({ default: module.AljebraDBH2Page })))
 const EkuazioakDBH2Page = lazy(() => import('../pages/dbh2-ekuazioak-v2').then((module) => ({ default: module.EkuazioakDBH2Page })))
 const FuntzioakDBH2Page = lazy(() => import('../pages/dbh2-funtzioak-v2').then((module) => ({ default: module.FuntzioakDBH2Page })))
+const ErrealakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-errealak').then((module) => ({ default: module.ErrealakDBH4ApPage })))
 const ZenbakiOsoakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-osoak-v2').then((module) => ({ default: module.ZenbakiOsoakIntroPage })))
 
 
@@ -134,6 +135,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/dbh2/funciones/*',
                         element: <FuntzioakDBH2Page />,
+                    },
+                    // Números reales de 4.º ESO (matemáticas aplicadas): unidad V2
+                    {
+                        path: 'matematika/dbh4-aplikatuak/numeros-reales/*',
+                        element: <ErrealakDBH4ApPage />,
                     },
                     {
                         path: 'prototipo/ekuazioak-v2',

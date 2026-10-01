@@ -11,6 +11,7 @@ export function TopicsPage() {
 
     const course = courseId ? getCourseById(courseId) : undefined
 
+    // 4. DBH split into the applied and the academic course: the old address shows both
     if (!course) {
         return <Navigate to="/matematika" replace />
     }
