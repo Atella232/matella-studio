@@ -1,0 +1,26 @@
+/* Funtzioak (2. DBH): hero art and the models of the laboratory and the games.
+   The shared shells live in src/features/unit-v2. */
+
+.functions-v2-hero-art {
+    display: grid;
+    place-items: center;
+    width: min(100%, 300px);
+    color: var(--ink);
+}
+
+.functions-v2-hero-art svg {
+    width: 100%;
+    height: auto;
+}
+
+.functions-plane {
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    margin: 0 auto;
+    direction: ltr;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+}

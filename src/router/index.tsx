@@ -24,6 +24,7 @@ const GeometriaDBH1Page = lazy(() => import('../pages/dbh1-geometria-v2').then((
 const EstatistikaDBH1Page = lazy(() => import('../pages/dbh1-estatistika-v2').then((module) => ({ default: module.EstatistikaIntroPage })))
 const AljebraDBH2Page = lazy(() => import('../pages/dbh2-aljebra-v2').then((module) => ({ default: module.AljebraDBH2Page })))
 const EkuazioakDBH2Page = lazy(() => import('../pages/dbh2-ekuazioak-v2').then((module) => ({ default: module.EkuazioakDBH2Page })))
+const FuntzioakDBH2Page = lazy(() => import('../pages/dbh2-funtzioak-v2').then((module) => ({ default: module.FuntzioakDBH2Page })))
 const ZenbakiOsoakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-osoak-v2').then((module) => ({ default: module.ZenbakiOsoakIntroPage })))
 
 
@@ -128,6 +129,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/dbh2/ekuazioak/*',
                         element: <EkuazioakDBH2Page />,
+                    },
+                    // Funciones de 2.º ESO: teoría, práctica, laboratorio y juegos V2
+                    {
+                        path: 'matematika/dbh2/funciones/*',
+                        element: <FuntzioakDBH2Page />,
                     },
                     {
                         path: 'prototipo/ekuazioak-v2',
