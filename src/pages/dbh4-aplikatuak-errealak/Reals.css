@@ -21,3 +21,68 @@
     margin: 0 auto;
     direction: ltr;
 }
+
+/* ---------- Laboratory ---------- */
+
+.reals-lab-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.reals-lab-table {
+    border-collapse: separate;
+    border-spacing: 4px;
+    margin: 0 auto 8px;
+    font-size: 18px;
+}
+
+.reals-lab-table th,
+.reals-lab-table td {
+    min-width: 64px;
+    padding: 6px 10px;
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    background: var(--card);
+    text-align: center;
+}
+
+.reals-lab-table th {
+    background: var(--stage-tint);
+    font-size: 15px;
+}
+
+.reals-lab-table tr.repeat td {
+    background: var(--mustard-tint);
+    font-weight: 700;
+}
+
+.reals-scientific {
+    display: grid;
+    justify-items: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.reals-scientific-original {
+    margin: 0;
+    color: var(--muted);
+    font-size: clamp(18px, 3vw, 24px);
+    letter-spacing: 0.04em;
+}
+
+.reals-scientific-now {
+    margin: 0;
+    padding: 10px 18px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+    font-family: var(--font-display);
+    font-size: clamp(26px, 5vw, 38px);
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.reals-scientific-now.ok {
+    border-color: var(--success);
+    background: var(--success-tint, #dcefe4);
+}

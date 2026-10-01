@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { realsChallenges, realsDiagnostic, realsExerciseBank, realsPractice } from './content'
 import { RealsHeroArt } from './figures'
+import { RealsLaboratory } from './lab'
+import { realsLabChallengeIds, realsLabToolForTopic, realsLabTools } from './lab/labTools'
 import { realsStages, realsTopics } from './lessons'
 import { withLines } from './withLines'
 import './Reals.css'
@@ -25,6 +27,16 @@ const errealakUnit: UnitDefinition = {
     guidedPractice: withLines(realsPractice),
     exerciseBank: realsExerciseBank.map((section) => ({ ...section, items: withLines(section.items) })),
     challenges: withLines(realsChallenges),
+    lab: {
+        description: {
+            eu: `${realsLabTools.length} tresna: berreturen eskailera, zatikitik hamartarrera, zatiki sortzailea, zuzen errealean zoom, tarteak, biribiltzea, idazkera zientifikoa eta erradikalak, erronkekin.`,
+            es: `${realsLabTools.length} herramientas: escalera de potencias, de fracción a decimal, fracción generatriz, zoom en la recta real, intervalos, redondeo, notación científica y radicales, con retos.`,
+            ar: `${realsLabTools.length} أدوات: سُلّم القوى، من الكسر إلى العشري، الكسر المولّد، التكبير على المستقيم الحقيقي، الفترات، التقريب، الترميز العلمي والجذريات، مع تحديات.`
+        },
+        progressIds: realsLabChallengeIds,
+        toolForTopic: realsLabToolForTopic,
+        render: (props) => <RealsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },
         defaultForm: 'any',
