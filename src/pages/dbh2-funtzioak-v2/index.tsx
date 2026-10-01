@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { functionsChallenges, functionsDiagnostic, functionsExerciseBank, functionsPractice } from './content'
 import { FunctionsHeroArt } from './figures'
+import { FunctionsLaboratory } from './lab'
+import { functionsLabChallengeIds, functionsLabToolForTopic, functionsLabTools } from './lab/labTools'
 import { functionsStages, functionsTopics } from './lessons'
 import './Functions.css'
 
@@ -24,6 +26,16 @@ const funtzioakUnit: UnitDefinition = {
     guidedPractice: functionsPractice,
     exerciseBank: functionsExerciseBank,
     challenges: functionsChallenges,
+    lab: {
+        description: {
+            eu: `${functionsLabTools.length} tresna: koordenatuak kokatu, funtzioak sailkatu, taulak eta formulak erabili, grafikoak irakurri, maldak neurtu eta zuzenak marraztu, erronkekin.`,
+            es: `${functionsLabTools.length} herramientas: situar coordenadas, clasificar funciones, usar tablas y fórmulas, leer gráficas, medir pendientes y dibujar rectas, con retos.`,
+            ar: `${functionsLabTools.length} أدوات: تحديد الإحداثيات وتصنيف الدوال واستعمال الجداول والصيغ وقراءة الرسوم وقياس الميول ورسم الخطوط، مع تحديات.`
+        },
+        progressIds: functionsLabChallengeIds,
+        toolForTopic: functionsLabToolForTopic,
+        render: (props) => <FunctionsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },
         defaultForm: 'any',

@@ -149,7 +149,7 @@ export function Plane({ box, cell = 30, label, labelStep = 1, labels = true, gri
         onPick([Math.min(box.xMax, Math.max(box.xMin, x)), Math.min(box.yMax, Math.max(box.yMin, y))])
     }
     return (
-        <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={label} className={className} onClick={onPick ? pick : undefined} style={onPick ? { cursor: 'crosshair', touchAction: 'manipulation' } : undefined}>
+        <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={label} className={className} onClick={onPick ? pick : undefined} style={{ maxWidth: Math.min(540, Math.round(width * 1.3)), ...(onPick ? { cursor: 'crosshair', touchAction: 'manipulation' } : {}) }}>
             <defs>
                 <clipPath id={clipId}><rect x={padLeft} y={padTop} width={map.width} height={map.height} /></clipPath>
             </defs>

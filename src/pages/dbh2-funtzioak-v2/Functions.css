@@ -24,3 +24,43 @@
     border-radius: 14px;
     background: var(--card);
 }
+
+/* ---------- Laboratory ---------- */
+
+.functions-lab-caption {
+    margin: 0 0 8px;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.functions-lab-table-wrap {
+    width: 100%;
+    margin-bottom: 12px;
+    overflow-x: auto;
+}
+
+.functions-lab-table {
+    border-collapse: separate;
+    border-spacing: 4px;
+    margin: 0 auto;
+    font-size: 18px;
+}
+
+.functions-lab-table th,
+.functions-lab-table td {
+    min-width: 44px;
+    padding: 8px 10px;
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    background: var(--card);
+    text-align: center;
+}
+
+.functions-lab-table th {
+    background: var(--stage-tint);
+}
+
+.functions-lab-table td.current {
+    background: var(--mustard-tint);
+    font-weight: 700;
+}
