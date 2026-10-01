@@ -25,6 +25,12 @@
     background: var(--card);
 }
 
+/* A graph under an exercise already sits in the engine's framed box */
+.fraction-v2-task-figure .functions-graph {
+    border: 0;
+    border-radius: 0;
+}
+
 /* ---------- Laboratory ---------- */
 
 .functions-lab-caption {
@@ -66,6 +72,13 @@
 }
 
 /* ---------- Games ---------- */
+
+.functions-race-graph {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 4px;
+}
+
 
 .functions-plot-card {
     display: grid;

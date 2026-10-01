@@ -16,11 +16,11 @@ export const functionsGames: GameInfo<FunctionsGameId>[] = [
         tagline: { eu: 'Erantzun ondo eta azkar: zure autoa aurrera doa, akatsek irrist egiten dute.', es: 'Responde bien y rápido: tu coche avanza, los errores le hacen derrapar.', ar: 'أجب بدقة وسرعة: تتقدم سيارتك، والأخطاء تجعلها تنزلق.' },
         skills: { eu: 'Bost zirkuitu, etapa bakoitzeko bat', es: 'Cinco circuitos, uno por etapa', ar: 'خمس حلبات، واحدة لكل مرحلة' },
         levels: [
-            { progressId: 31101, stage: 'idea', title: { eu: 'Koordenatuak eta erlazioak', es: 'Coordenadas y relaciones', ar: 'الإحداثيات والعلاقات' }, description: { eu: 'Koadranteak, funtzioak eta laukizuzenak.', es: 'Cuadrantes, funciones y rectángulos.', ar: 'الأرباع والدوال والمستطيلات.' } },
+            { progressId: 31101, stage: 'idea', title: { eu: 'Koordenatuak eta erlazioak', es: 'Coordenadas y relaciones', ar: 'الإحداثيات والعلاقات' }, description: { eu: 'Koadranteak, planoko puntuak, funtzioak eta laukizuzenak.', es: 'Cuadrantes, puntos del plano, funciones y rectángulos.', ar: 'الأرباع ونقاط المستوى والدوال والمستطيلات.' } },
             { progressId: 31102, stage: 'representations', title: { eu: 'Formulak eta puntuak', es: 'Fórmulas y puntos', ar: 'الصيغ والنقاط' }, description: { eu: 'f(x) kalkulatu eta puntuak egiaztatu.', es: 'Calcular f(x) y comprobar puntos.', ar: 'حساب f(x) والتحقق من النقاط.' } },
-            { progressId: 31103, stage: 'reading', title: { eu: 'Taulak irakurri', es: 'Leer tablas', ar: 'قراءة الجداول' }, description: { eu: 'Maximoak, beherakortasuna eta ebakidurak.', es: 'Máximos, decrecimiento y cortes con los ejes.', ar: 'القيم العظمى والتناقص والتقاطعات.' } },
-            { progressId: 31104, stage: 'proportional', title: { eu: 'Malda', es: 'La pendiente', ar: 'الميل' }, description: { eu: 'y = mx eta bi punturen malda.', es: 'y = mx y la pendiente entre dos puntos.', ar: 'y = mx والميل بين نقطتين.' } },
-            { progressId: 31105, stage: 'lines', title: { eu: 'Zuzenak eta tarifak', es: 'Rectas y tarifas', ar: 'الخطوط والتعرفات' }, description: { eu: 'y = mx + n, ekuazioa eta buruketak.', es: 'y = mx + n, ecuación y problemas.', ar: 'y = mx + n والمعادلة والمسائل.' } }
+            { progressId: 31103, stage: 'reading', title: { eu: 'Grafikoak irakurri', es: 'Leer gráficas', ar: 'قراءة الرسوم' }, description: { eu: 'Balioak, maximoak, beherakortasuna eta ebakidurak.', es: 'Valores, máximos, decrecimiento y cortes con los ejes.', ar: 'القيم والقيم العظمى والتناقص والتقاطعات.' } },
+            { progressId: 31104, stage: 'proportional', title: { eu: 'Malda', es: 'La pendiente', ar: 'الميل' }, description: { eu: 'y = mx eta malda, kalkulatuta eta grafikoan irakurrita.', es: 'y = mx y la pendiente, calculada y leída en la gráfica.', ar: 'y = mx والميل حسابًا وقراءةً من الرسم.' } },
+            { progressId: 31105, stage: 'lines', title: { eu: 'Zuzenak eta tarifak', es: 'Rectas y tarifas', ar: 'الخطوط والتعرفات' }, description: { eu: 'y = mx + n: grafikoaren ekuazioa eta buruketak.', es: 'y = mx + n: la ecuación de una gráfica y problemas.', ar: 'y = mx + n: معادلة الرسم والمسائل.' } }
         ]
     },
     {

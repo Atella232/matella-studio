@@ -35,7 +35,7 @@ export const functionsStages: UnitStage[] = [
     { id: 'representations', tone: 'violet', title: { eu: 'Taulak, formulak eta grafikoak', es: 'Tablas, fórmulas y gráficas', ar: 'الجداول والصيغ والرسوم' } },
     { id: 'reading', tone: 'mustard', title: { eu: 'Grafikoak irakurtzen', es: 'Leer gráficas', ar: 'قراءة الرسوم البيانية' } },
     { id: 'proportional', tone: 'coral', title: { eu: 'Proportzionaltasun zuzena eta malda', es: 'Proporcionalidad directa y pendiente', ar: 'التناسب الطردي والميل' } },
-    { id: 'lines', tone: 'green', title: { eu: 'Zuzen lineala eta konstantea', es: 'La recta lineal y la constante', ar: 'الخط الخطي والثابت' } }
+    { id: 'lines', tone: 'green', title: { eu: 'Funtzio linealak eta konstanteak', es: 'Funciones lineales y constantes', ar: 'الدوال الخطية والثابتة' } }
 ]
 
 const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })

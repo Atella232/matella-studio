@@ -68,8 +68,13 @@ test('funtzioak 2. DBH lab: the plane tool', () => {
 })
 
 test('funtzioak 2. DBH lab: the vertical line test agrees with the maths', () => {
-    assert.deepEqual(relations.map((item) => item.isFunction), [true, false, true, true, false, true])
-    for (const item of relations) assert.equal(item.isFunction, isFunctionRelation(item.points))
+    assert.deepEqual(relations.map((item) => item.isFunction), [true, false, true, true, false, true, true, false])
+    for (const item of relations) if (!item.curve) assert.equal(item.isFunction, isFunctionRelation(item.points))
+    // The curves: every point of the drawing satisfies the rule the vertical line reads
+    for (const item of relations) {
+        if (!item.curve) continue
+        for (const [x, y] of item.curve.path) assert.ok(item.curve.at(x).some((value) => Math.abs(value - y) < 0.01) || Math.abs(Math.abs(x) - 3) < 0.01, `${x}, ${y}`)
+    }
     // Sweeping the line over a non-function relation finds the double exit; over a function it never does
     for (let index = 0; index < relations.length; index += 1) {
         let state: RelationState = setRelation(initialRelationState, index)
@@ -80,8 +85,9 @@ test('funtzioak 2. DBH lab: the vertical line test agrees with the maths', () =>
     assert.ok(!hitsTwice({ relation: 0, k: 1 }))
     const classify = (indexes: number[]) => indexes.reduce((state: RelationState, index) => setVerdict(setRelation(state, index), relations[index].isFunction ? 'yes' : 'no'), initialRelationState)
     assert.ok(relationChallenges[1].isSolved(classify([0, 1, 2])) && !relationChallenges[1].isSolved(classify([0, 1])))
-    assert.ok(relationChallenges[2].isSolved(classify([0, 1, 2, 3, 4, 5])) && !relationChallenges[2].isSolved(classify([0, 1, 2, 3, 4])))
-    const wrong = setVerdict(setRelation(classify([0, 1, 2, 3, 4, 5]), 1), 'yes')
+    const all = relations.map((_, index) => index)
+    assert.ok(relationChallenges[2].isSolved(classify(all)) && !relationChallenges[2].isSolved(classify([0, 1, 2, 3, 4, 5])))
+    const wrong = setVerdict(setRelation(classify(all), 1), 'yes')
     assert.ok(!relationChallenges[2].isSolved(wrong))
     assert.ok(relationChallenges[0].isSolved(setLine(setRelation(initialRelationState, 1), 2)))
     assert.ok(!relationChallenges[0].isSolved(initialRelationState))

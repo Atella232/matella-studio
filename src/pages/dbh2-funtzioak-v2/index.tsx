@@ -2,6 +2,7 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { functionsChallenges, functionsDiagnostic, functionsExerciseBank, functionsPractice } from './content'
 import { FunctionsHeroArt } from './figures'
+import { withGraphs } from './withGraphs'
 import { FunctionsLaboratory } from './lab'
 import { FunctionsGames } from './games'
 import { FUNCTIONS_GAME_RECORDS_KEY, functionsGameProgressIds } from './games/info'
@@ -24,10 +25,10 @@ const funtzioakUnit: UnitDefinition = {
     pathSubtitle: { eu: 'Bost etapa, koordenatuetatik zuzenen ekuaziora', es: 'Cinco etapas, de las coordenadas a la ecuación de la recta', ar: 'خمس مراحل، من الإحداثيات إلى معادلة الخط' },
     stages: functionsStages,
     topics: functionsTopics,
-    diagnostic: functionsDiagnostic,
-    guidedPractice: functionsPractice,
-    exerciseBank: functionsExerciseBank,
-    challenges: functionsChallenges,
+    diagnostic: withGraphs(functionsDiagnostic),
+    guidedPractice: withGraphs(functionsPractice),
+    exerciseBank: functionsExerciseBank.map((section) => ({ ...section, items: withGraphs(section.items) })),
+    challenges: withGraphs(functionsChallenges),
     lab: {
         description: {
             eu: `${functionsLabTools.length} tresna: koordenatuak kokatu, funtzioak sailkatu, taulak eta formulak erabili, grafikoak irakurri, maldak neurtu eta zuzenak marraztu, erronkekin.`,

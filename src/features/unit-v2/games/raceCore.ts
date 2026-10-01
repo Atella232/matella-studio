@@ -1,5 +1,6 @@
 import type { AnswerCheck, AnswerForm, FractionValue } from '../math/fraction.ts'
-import type { LocalizedText } from '../types.ts'
+import type { ReactNode } from 'react'
+import type { LocalizedText, UnitLanguage } from '../types.ts'
 import type { Random } from './random.ts'
 import type { GameInfo, Stars } from './records.ts'
 
@@ -53,6 +54,8 @@ export interface RaceRules<Error extends string = string> {
     pitPlaceholder: (question: RaceQuestion<Error>) => string
     pitUnreadable: LocalizedText
     pitWrongForm: LocalizedText
+    /** Optional drawing for a question (a graph to read), shown under its prompt */
+    figure?: (question: RaceQuestion<Error>, language: UnitLanguage) => ReactNode
 }
 
 /** Three right answers in a row raise the level; two wrong answers in a row lower it */

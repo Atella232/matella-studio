@@ -26,6 +26,7 @@ import {
     readingInfo,
     RELATION_LIMIT,
     relationChallenges,
+    relationName,
     relations,
     SLOPE_LIMIT,
     setFormula,
@@ -59,6 +60,7 @@ const STAGE = 'var(--stage, #2f6fdb)'
 const SECOND = 'var(--second, #c4432a)'
 const GREEN = 'var(--success, #267b53)'
 const MUSTARD = 'var(--mustard, #e0a100)'
+const MUTED = 'var(--muted, #58616e)'
 const STAGE_TINT = 'var(--stage-tint, #dde7f7)'
 
 /** Decimal comma (decimal point in Arabic) for the steppers */
@@ -122,7 +124,7 @@ export function RelationTool(props: LabToolProps) {
     const verdict = state.verdicts[state.relation] ?? 'none'
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Erlazioa', es: 'Relación', ar: 'العلاقة' })} value={String(state.relation)} options={relations.map((_, index) => ({ value: String(index), label: String(index + 1) }))} onChange={(next) => setState((s) => setRelation(s, Number(next)))} />
+            <Segmented label={l({ eu: 'Erlazioa', es: 'Relación', ar: 'العلاقة' })} value={String(state.relation)} options={relations.map((_, index) => ({ value: String(index), label: relationName(index) }))} onChange={(next) => setState((s) => setRelation(s, Number(next)))} />
             <Stepper label={l({ eu: 'Zuzen bertikala: x =', es: 'Recta vertical: x =', ar: 'الخط الرأسي: x =' })} value={state.k} min={-RELATION_LIMIT} max={RELATION_LIMIT} format={signed} onChange={(k) => setState((s) => setLine(s, k))} language={props.language} />
             <Segmented
                 label={l({ eu: 'Zure erabakia', es: 'Tu decisión', ar: 'قرارك' })}
@@ -147,14 +149,16 @@ export function RelationTool(props: LabToolProps) {
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={relationChallenges} state={state}>
-            <Plane box={{ xMin: -5, xMax: 5, yMin: -4, yMax: 5 }} cell={30} label={l({ eu: `${state.relation + 1}. erlazioa`, es: `Relación ${state.relation + 1}`, ar: `العلاقة ${state.relation + 1}` })}>
-                {(map) => (
+            <Plane box={{ xMin: -5, xMax: 5, yMin: -4, yMax: 5 }} cell={30} label={l({ eu: `${relationName(state.relation)} erlazioa`, es: `Relación ${relationName(state.relation)}`, ar: `العلاقة ${relationName(state.relation)}` })}>
+                {(map, clip) => (
                     <g>
-                        <PlanePath map={map} points={[[state.k, -4], [state.k, 5]]} color={twice ? SECOND : STAGE} width={3} dashed />
+                        {current.curve && <PlanePath map={map} points={current.curve.path} color={STAGE} width={3.4} clip={clip} />}
+                        <PlanePath map={map} points={[[state.k, -4], [state.k, 5]]} color={twice ? SECOND : MUTED} width={3} dashed />
                         {current.points.map((point) => {
                             const onLine = point[0] === state.k
                             return <PlanePoint key={`${point[0]},${point[1]}`} map={map} point={point} color={onLine ? SECOND : STAGE} radius={onLine ? 8 : 6} />
                         })}
+                        {current.curve && hits.map((point) => <PlanePoint key={`h${point[1]}`} map={map} point={point} color={SECOND} radius={7.5} />)}
                     </g>
                 )}
             </Plane>
@@ -172,9 +176,9 @@ export function TableTool(props: LabToolProps) {
     const tried = triedValues(state)
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Funtzioa', es: 'Función', ar: 'الدالة' })} value={String(state.formula)} options={tableFormulas.map((_, index) => ({ value: String(index), label: String(index + 1) }))} onChange={(next) => setState((s) => setFormula(s, Number(next)))} />
+            <Segmented label={l({ eu: 'Funtzioa', es: 'Función', ar: 'الدالة' })} value={String(state.formula)} options={tableFormulas.map((item, index) => ({ value: String(index), label: item.label }))} onChange={(next) => setState((s) => setFormula(s, Number(next)))} />
             <Stepper label="x =" value={state.x} min={-TABLE_LIMIT} max={TABLE_LIMIT} format={signed} onChange={(x) => setState((s) => tryX(s, x))} language={props.language} />
-            <p className="fraction-v2-lab-tip">{l({ eu: `Probatutako balioak: ${tried.length}`, es: `Valores probados: ${tried.length}`, ar: `القيم المجرَّبة: ${tried.length}` })}</p>
+            <p className="fraction-v2-lab-tip">{l({ eu: `Probatutako balioak: ${tried.length}.`, es: `Valores probados: ${tried.length}.`, ar: `القيم المجرَّبة: ${tried.length}.` })} {tried.length < 3 ? l({ eu: 'Hiru puntutik aurrera, grafikoaren forma agertuko da.', es: 'A partir de tres puntos aparecerá la forma de la gráfica.', ar: 'بدءًا من ثلاث نقاط سيظهر شكل الرسم.' }) : ''}</p>
         </>
     )
     const readout = (
@@ -194,9 +198,11 @@ export function TableTool(props: LabToolProps) {
                     </tbody>
                 </table>
             </div>
-            <Plane box={{ xMin: -4, xMax: 4, yMin: -6, yMax: 8 }} cell={20} label={l({ eu: `${formula.latex.replace(/[{}]/g, '')} funtzioaren puntuak`, es: `Puntos de ${formula.latex.replace(/[{}]/g, '')}`, ar: `نقاط ${formula.latex.replace(/[{}]/g, '')}` })} labelStep={2}>
-                {(map) => (
+            <Plane box={{ xMin: -4, xMax: 4, yMin: -6, yMax: 8 }} cell={26} label={l({ eu: `${formula.label} funtzioaren puntuak`, es: `Puntos de ${formula.label}`, ar: `نقاط ${formula.label}` })} labelStep={2}>
+                {(map, clip) => (
                     <g>
+                        {/* With three points tried the shape of the graph appears, dashed */}
+                        {tried.length >= 3 && <PlanePath map={map} points={Array.from({ length: 81 }, (_, index) => { const x = -4 + index * 0.1; return [x, formula.apply(x)] as Point })} color={STAGE} width={2} dashed clip={clip} />}
                         {tried.map((x) => <PlanePoint key={x} map={map} point={[x, formula.apply(x)]} color={x === state.x ? SECOND : STAGE} radius={x === state.x ? 7 : 5} />)}
                         <PlaneGuides map={map} point={[state.x, value]} />
                     </g>
@@ -223,7 +229,7 @@ export function ReadingTool(props: LabToolProps) {
     const { max, min } = globalExtremes(graph.points)
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Grafikoa', es: 'Gráfica', ar: 'الرسم' })} value={String(state.graph)} options={storyGraphs.map((_, index) => ({ value: String(index), label: String(index + 1) }))} onChange={(next) => setState(setReadingGraph(Number(next)))} />
+            <Segmented label={l({ eu: 'Grafikoa', es: 'Gráfica', ar: 'الرسم' })} value={String(state.graph)} options={storyGraphs.map((graph, index) => ({ value: String(index), label: l(graph.short) }))} onChange={(next) => setState(setReadingGraph(Number(next)))} />
             <Stepper label={l({ eu: 'Kurtsorea: x =', es: 'Cursor: x =', ar: 'المؤشر: x =' })} value={state.x} min={from} max={to} format={signed} onChange={(x) => setState((s) => setReadingX(s, x))} language={props.language} />
             <Segmented label={l({ eu: 'Muturrak eta ebakidurak', es: 'Extremos y cortes', ar: 'القيم القصوى والتقاطعات' })} value={marks} options={[{ value: 'off', label: l({ eu: 'Ezkutatu', es: 'Ocultar', ar: 'إخفاء' }) }, { value: 'on', label: l({ eu: 'Erakutsi', es: 'Mostrar', ar: 'إظهار' }) }]} onChange={setMarks} />
         </>
@@ -244,8 +250,8 @@ export function ReadingTool(props: LabToolProps) {
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={readingChallenges} state={state}>
-            <p className="functions-lab-caption"><strong>{l(graph.title)}</strong> · {l(graph.xLabel)} / {l(graph.yLabel)}</p>
-            <Plane box={box} cell={cell} label={l(graph.title)} xName={l(graph.xLabel).length <= 2 ? l(graph.xLabel) : 'x'} yName={l(graph.yLabel).length <= 2 ? l(graph.yLabel) : 'y'}>
+            <p className="functions-lab-caption"><strong>{l(graph.title)}</strong></p>
+            <Plane box={box} cell={cell} label={l(graph.title)} xTitle={l(graph.xLabel).length > 2 ? l(graph.xLabel) : undefined} yTitle={l(graph.yLabel).length > 2 ? l(graph.yLabel) : undefined}>
                 {(map) => (
                     <g>
                         <PlanePath map={map} points={graph.points} color={STAGE} width={3.6} />

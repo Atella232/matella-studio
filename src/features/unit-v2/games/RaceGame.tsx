@@ -262,6 +262,7 @@ export function RaceGame<Error extends string>({ language, records, onResult, on
             {(phase === 'question' || phase === 'answered' || phase === 'wrong') && question && (
                 <div className={`fraction-v2-race-panel ${phase}`}>
                     <div className="fraction-v2-race-prompt"><MathText text={l(question.prompt)} /></div>
+                    {rules.figure?.(question, language)}
                     <div className="fraction-v2-race-options" role="group" aria-label={l({ eu: 'Erantzunak', es: 'Respuestas', ar: 'الإجابات' })}>
                         {question.options.map((option, index) => {
                             const state = chosen === null ? '' : option.correct && (phase !== 'question') ? 'correct' : index === chosen ? 'wrong' : ''
@@ -297,6 +298,7 @@ export function RaceGame<Error extends string>({ language, records, onResult, on
                     <span className="fraction-v2-race-pit-badge">{l({ eu: 'BOXAK', es: 'BOXES', ar: 'الصيانة' })}</span>
                     <p>{l({ eu: 'Erlojua geldituta dago. Idatzi emaitza zehatza.', es: 'El reloj está parado. Escribe el resultado exacto.', ar: 'الساعة متوقفة. اكتب النتيجة الدقيقة.' })}</p>
                     <div className="fraction-v2-race-prompt"><MathText text={l(pitQuestion.prompt)} /></div>
+                    {rules.figure?.(pitQuestion, language)}
                     {phase === 'pit' ? (
                         <form className="fraction-v2-race-pit-form" onSubmit={(event) => { event.preventDefault(); submitPit() }}>
                             <label htmlFor="fraction-v2-pit-answer">{l({ eu: 'Zure erantzuna', es: 'Tu respuesta', ar: 'إجابتك' })}</label>

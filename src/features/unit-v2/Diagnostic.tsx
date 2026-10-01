@@ -119,6 +119,7 @@ export function DiagnosticQuiz({
                 <div className="fraction-v2-diagnostic-progress"><span style={{ width: `${((questionIndex + (answered ? 1 : 0)) / count) * 100}%` }} /></div>
                 <small>{questionIndex + 1} / {count}</small>
                 <h2><MathText text={l(question.prompt)} /></h2>
+                {question.figure && <div className="fraction-v2-task-figure">{question.figure(language)}</div>}
                 <div className="fraction-v2-diagnostic-options">
                     {question.options.map((option, index) => {
                         const state = !answered ? '' : index === question.correctIndex ? 'success' : index === selectedIndex ? 'error' : ''

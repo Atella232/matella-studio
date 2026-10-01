@@ -153,6 +153,7 @@ function ExerciseBank({
                                 {isComplete && <strong>✓</strong>}
                             </div>
                             <div className="fraction-v2-bank-question"><MathText text={item.question[language]} /></div>
+                            {item.figure && <div className="fraction-v2-task-figure">{item.figure(language)}</div>}
                             {answer ? (
                                 <>
                                     <label htmlFor={`fraction-v2-bank-attempt-${key}`}>{l({ eu: 'Zure erantzuna', es: 'Tu respuesta', ar: 'إجابتك' })}</label>
@@ -202,6 +203,7 @@ function ExerciseBank({
                             {isRevealed && (
                                 <div className="fraction-v2-bank-solution">
                                     <MathText text={item.solution[language]} />
+                                    {item.solutionFigure && <div className="fraction-v2-task-figure">{item.solutionFigure(language)}</div>}
                                     <div>
                                         {/* A checked exercise is only completed by a correct answer */}
                                         {!answer && <button type="button" className={`fraction-v2-primary ${isComplete ? 'done' : ''}`} onClick={() => onComplete(progressId)} disabled={isComplete}>{isComplete ? '✓' : l({ eu: 'Lortu dut', es: 'Lo he conseguido', ar: 'أتقنتها' })}</button>}
@@ -290,6 +292,7 @@ export function PracticeDeck({
                     </div>
                     <h2><MathText text={l(current.prompt)} /></h2>
                     {current.expression && <div className="fraction-v2-task-expression"><MathText text={current.expression} /></div>}
+                    {current.figure && <div className="fraction-v2-task-figure">{current.figure(language)}</div>}
                     <label htmlFor={`fraction-v2-answer-${current.id}`}>{l({ eu: 'Zure erantzuna', es: 'Tu respuesta', ar: 'إجابتك' })}</label>
                     <div className="fraction-v2-answer-row">
                         <input

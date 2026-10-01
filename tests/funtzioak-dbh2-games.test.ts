@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import katex from 'katex'
 import { createRandom } from '../src/features/unit-v2/games/random.ts'
 import { equals, fraction, hasTerminatingDecimal, toExactDecimal, toNumber, type FractionValue } from '../src/features/unit-v2/math/fraction.ts'
-import { isFunctionRelation, quadrantOf, slopeBetween, type Point } from '../src/pages/dbh2-funtzioak-v2/functions.ts'
+import { isFunctionRelation, pointLatex, quadrantOf, slopeBetween, specValue, type Point } from '../src/pages/dbh2-funtzioak-v2/functions.ts'
 import { createFunctionsMemoryBoard, createPlotRound, FUNCTIONS_MEMORY_PAIRS, functionsMemoryLevels, PLOT_ROUNDS, plotLevels, plotPoints, plotStars, samePoint } from '../src/pages/dbh2-funtzioak-v2/games/boards.ts'
 import { functionsGameModeForPath, functionsGameProgressIds, functionsGames } from '../src/pages/dbh2-funtzioak-v2/games/info.ts'
 import { checkFunctionsPitAnswer, FUNCTIONS_RACE_CIRCUITS, functionsParTime, functionsRaceErrorTips, generateFunctionsRaceQuestion, type FunctionsRaceQuestion } from '../src/pages/dbh2-funtzioak-v2/games/race.ts'
@@ -91,6 +91,8 @@ function check(question: FunctionsRaceQuestion) {
             meta.points.forEach((point, index) => assert.equal(onLine(meta.m, meta.n, point), index === right, `${point}`))
             break
         case 'table':
+            // The values are now drawn: the broken line goes exactly through them
+            assert.deepEqual(question.graph!.curves![0].points, meta.ys.map((y, x) => [x, y]))
             if (meta.ask === 'max') {
                 assert.equal(meta.answer, Math.max(...meta.ys))
                 assert.equal(meta.ys.filter((y) => y === meta.answer).length, 1)
@@ -153,6 +155,40 @@ function check(question: FunctionsRaceQuestion) {
             assert.equal(meta.first.m * meta.x + meta.first.n, meta.second.m * meta.x + meta.second.n)
             assert.equal(question.options[right].latex, text(meta.x))
             break
+        case 'graph-point':
+            assert.equal(meta.right, right)
+            assert.deepEqual(question.graph!.points![0].at, meta.point)
+            assert.equal(question.options[right].latex, pointLatex(meta.point))
+            meta.points.forEach((point, index) => {
+                assert.equal(question.options[index].latex, pointLatex(point))
+                assert.equal(point[0] === meta.point[0] && point[1] === meta.point[1], index === right)
+            })
+            break
+        case 'graph-value':
+            assert.equal(meta.ys[meta.x], meta.y)
+            assert.equal(specValue(question.graph!, meta.x), meta.y)
+            assert.equal(question.options[right].latex, text(meta.y))
+            assert.equal(answerNumber, meta.y)
+            break
+        case 'graph-slope': {
+            assert.ok(onLine(meta.m, meta.n, meta.a) && onLine(meta.m, meta.n, meta.b))
+            assert.deepEqual(question.graph!.lines![0], { m: meta.m, n: meta.n })
+            assert.deepEqual(question.graph!.points!.map((point) => point.at), [meta.a, meta.b])
+            const { box } = question.graph!
+            for (const [x, y] of [meta.a, meta.b]) assert.ok(x >= box.xMin && x <= box.xMax && y >= box.yMin && y <= box.yMax, `${x}, ${y}`)
+            assert.equal(answerNumber, meta.m)
+            assert.equal(question.options[right].latex, text(meta.m))
+            for (const index of wrong) assert.notEqual(evaluate(question.options[index].latex), meta.m)
+            break
+        }
+        case 'graph-line':
+            assert.equal(meta.right, right)
+            assert.deepEqual(question.graph!.lines![0], { m: meta.m, n: meta.n })
+            meta.equations.forEach((line, index) => {
+                assert.deepEqual(parseLine(question.options[index].latex), line)
+                assert.equal(line.m === meta.m && line.n === meta.n, index === right)
+            })
+            break
     }
     if (question.writable) {
         assert.equal(checkFunctionsPitAnswer(question, typed(question.answer)), 'correct', question.kind)
@@ -193,7 +229,7 @@ test('funtzioak 2. DBH race: every question is right and every wrong option is r
         }
         assert.ok(functionsParTime(circuit) > 60000)
     }
-    for (const kind of ['quadrant', 'relation', 'area', 'value', 'square', 'inverse', 'point-on-line', 'max', 'argmin', 'decreasing', 'intercept-x', 'intercept-y', 'through-origin', 'slope', 'proportional-value', 'steepest', 'decreasing-line', 'line-n', 'equation', 'tariff-value', 'tariff-solve', 'meeting']) assert.ok(kinds.has(kind), `never generated: ${kind}`)
+    for (const kind of ['quadrant', 'relation', 'area', 'value', 'square', 'inverse', 'point-on-line', 'max', 'argmin', 'decreasing', 'intercept-x', 'intercept-y', 'through-origin', 'slope', 'proportional-value', 'steepest', 'decreasing-line', 'line-n', 'equation', 'tariff-value', 'tariff-solve', 'meeting', 'graph-point', 'graph-value', 'graph-slope', 'graph-line']) assert.ok(kinds.has(kind), `never generated: ${kind}`)
 })
 
 test('funtzioak 2. DBH race: fractional slopes are accepted in the pit stop', () => {

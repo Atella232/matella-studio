@@ -1,5 +1,6 @@
 import { fraction, type FractionValue } from '../../features/unit-v2/math/fraction.ts'
 import type { LocalizedText } from '../../features/unit-v2/types.ts'
+import type { PlaneBox } from './planeMap.ts'
 
 /* ==========================================================================
    Funtzioak (2. DBH) — pure maths shared by the lessons, the laboratory and
@@ -89,6 +90,8 @@ export type Trend = 'up' | 'down' | 'flat'
 export interface StoryGraph {
     id: string
     title: LocalizedText
+    /** One word for the selector of the laboratory */
+    short: LocalizedText
     xLabel: LocalizedText
     yLabel: LocalizedText
     /** One point for every whole x between the first and the last */
@@ -99,6 +102,7 @@ export const storyGraphs: StoryGraph[] = [
     {
         id: 'temperature',
         title: { eu: 'Tenperatura egun batean', es: 'Temperatura a lo largo del día', ar: 'درجة الحرارة خلال اليوم' },
+        short: { eu: 'Tenperatura', es: 'Temperatura', ar: 'الحرارة' },
         xLabel: { eu: 'ordua (h)', es: 'hora (h)', ar: 'الساعة (س)' },
         yLabel: { eu: 'tenperatura (°C)', es: 'temperatura (°C)', ar: 'الحرارة (°م)' },
         points: [[0, 3], [1, 2], [2, 1], [3, 4], [4, 8], [5, 11], [6, 12], [7, 9], [8, 6]]
@@ -106,6 +110,7 @@ export const storyGraphs: StoryGraph[] = [
     {
         id: 'plane',
         title: { eu: 'Hegazkin baten altuera', es: 'Altura de una avioneta', ar: 'ارتفاع طائرة صغيرة' },
+        short: { eu: 'Hegazkina', es: 'Avioneta', ar: 'الطائرة' },
         xLabel: { eu: 'denbora (h)', es: 'tiempo (h)', ar: 'الزمن (س)' },
         yLabel: { eu: 'altuera (km)', es: 'altura (km)', ar: 'الارتفاع (كم)' },
         points: [[0, 0], [1, 2], [2, 4], [3, 4], [4, 4], [5, 6], [6, 3], [7, 1], [8, 0]]
@@ -113,6 +118,7 @@ export const storyGraphs: StoryGraph[] = [
     {
         id: 'speed',
         title: { eu: 'Lasterketa-auto baten abiadura', es: 'Velocidad de un coche de carreras', ar: 'سرعة سيارة سباق' },
+        short: { eu: 'Abiadura', es: 'Velocidad', ar: 'السرعة' },
         xLabel: { eu: 'ibilbidea (km)', es: 'recorrido (km)', ar: 'المسافة (كم)' },
         yLabel: { eu: 'abiadura (×10 km/h)', es: 'velocidad (×10 km/h)', ar: 'السرعة (×10 كم/س)' },
         points: [[0, 1], [1, 3], [2, 6], [3, 8], [4, 5], [5, 2], [6, 5], [7, 7], [8, 4]]
@@ -120,6 +126,7 @@ export const storyGraphs: StoryGraph[] = [
     {
         id: 'tank',
         title: { eu: 'Depositu bat hustuz', es: 'Un depósito que se vacía', ar: 'خزان يفرغ' },
+        short: { eu: 'Depositua', es: 'Depósito', ar: 'الخزان' },
         xLabel: { eu: 'denbora (min)', es: 'tiempo (min)', ar: 'الزمن (د)' },
         yLabel: { eu: 'ura (litro)', es: 'agua (litros)', ar: 'الماء (لتر)' },
         points: [[0, 8], [1, 7], [2, 5], [3, 4], [4, 2], [5, 0]]
@@ -127,6 +134,7 @@ export const storyGraphs: StoryGraph[] = [
     {
         id: 'abstract',
         title: { eu: 'Funtzio bat', es: 'Una función', ar: 'دالة' },
+        short: { eu: 'f(x)', es: 'f(x)', ar: 'f(x)' },
         xLabel: { eu: 'x', es: 'x', ar: 'x' },
         yLabel: { eu: 'y', es: 'y', ar: 'y' },
         points: [[-4, -2], [-3, 0], [-2, 2], [-1, 3], [0, 2], [1, 0], [2, -2], [3, -3], [4, -1], [5, 0]]
@@ -182,6 +190,40 @@ export function globalExtremes(points: readonly Point[]): { max: Point; min: Poi
 
 /** Whole x where the graph meets the X axis */
 export const graphZeros = (points: readonly Point[]): number[] => points.filter((point) => point[1] === 0).map((point) => point[0])
+
+/* ---------- Graphs drawn beside exercises ---------- */
+
+export type GraphColor = 'stage' | 'second' | 'mustard' | 'green' | 'ink'
+
+/**
+ * A graph described as plain data, so the exercises that use it stay in
+ * TypeScript the tests can load (and check against the drawing). Values are
+ * in grid squares; xUnit / yUnit say what one square is worth on each axis.
+ */
+export interface GraphSpec {
+    box: PlaneBox
+    cell?: number
+    labelStep?: number
+    xUnit?: number
+    yUnit?: number
+    xTitle?: LocalizedText
+    yTitle?: LocalizedText
+    /** Polylines through whole points (story graphs, a function sampled) */
+    curves?: Array<{ points: Point[]; color?: GraphColor; dashed?: boolean }>
+    /** Straight lines y = mx + n across the whole box */
+    lines?: Array<{ m: number; n: number; color?: GraphColor; dashed?: boolean; name?: string; at?: number }>
+    /** Separate dots: the points of a discrete graph, or points to name */
+    points?: Array<{ at: Point; name?: string; color?: GraphColor; below?: boolean; left?: boolean }>
+}
+
+/** The value a graph's curve takes at x, in the units of the axes (null outside it) */
+export function specValue(spec: GraphSpec, x: number, curve = 0): number | null {
+    const points = spec.curves?.[curve]?.points
+    if (!points) return null
+    const scaled = x / (spec.xUnit ?? 1)
+    const found = points.find((point) => point[0] === scaled)
+    return found ? found[1] * (spec.yUnit ?? 1) : null
+}
 
 export const trendWord: Record<Trend, LocalizedText> = {
     up: { eu: 'gorakorra', es: 'creciente', ar: 'متزايدة' },

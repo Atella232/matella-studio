@@ -138,11 +138,36 @@ export const planeChallenges: LabChallenge<PlaneState>[] = [
 /* ---------- Function or not: the vertical line ---------- */
 
 export interface Relation {
+    /** Separate points (a relation given by pairs) */
     points: Point[]
+    /** A drawn curve instead of points, with the y values it takes at each x */
+    curve?: { path: Point[]; at: (x: number) => number[] }
     isFunction: boolean
 }
 
 const relation = (points: Point[]): Relation => ({ points, isFunction: isFunctionRelation(points) })
+
+const round3 = (value: number) => Math.round(value * 1000) / 1000
+
+/** The circle x² + y² = 9: every x strictly between −3 and 3 has two y */
+const circle: Relation = {
+    points: [],
+    curve: {
+        path: Array.from({ length: 73 }, (_, index) => [round3(3 * Math.cos((index * Math.PI) / 36)), round3(3 * Math.sin((index * Math.PI) / 36))] as Point),
+        at: (x) => (Math.abs(x) > 3 ? [] : Math.abs(x) === 3 ? [0] : [round3(Math.sqrt(9 - x * x)), round3(-Math.sqrt(9 - x * x))])
+    },
+    isFunction: false
+}
+
+/** The parabola y = x²/2 − 3: a curve that is a function */
+const parabola: Relation = {
+    points: [],
+    curve: {
+        path: Array.from({ length: 81 }, (_, index) => { const x = -4 + index * 0.1; return [round3(x), round3((x * x) / 2 - 3)] as Point }),
+        at: (x) => [(x * x) / 2 - 3]
+    },
+    isFunction: true
+}
 
 export const relations: Relation[] = [
     relation([[-3, -1], [-1, 2], [1, 2], [3, 4]]),
@@ -150,8 +175,13 @@ export const relations: Relation[] = [
     relation([[-4, -2], [-2, 0], [0, 2], [2, 4], [4, 5]]),
     relation([[-3, 4], [-2, 1], [0, 0], [2, 1], [3, 4]]),
     relation([[-3, 0], [0, 3], [0, -3], [3, 0], [-2, 2]]),
-    relation([[-4, 1], [-2, 1], [0, 1], [2, 1], [4, 1]])
+    relation([[-4, 1], [-2, 1], [0, 1], [2, 1], [4, 1]]),
+    parabola,
+    circle
 ]
+
+/** Name of each relation in the selector */
+export const relationName = (index: number) => 'ABCDEFGH'[index]
 
 export const RELATION_LIMIT = 5
 
@@ -169,7 +199,10 @@ export interface RelationState {
 export const initialRelationState: RelationState = { relation: 0, k: -4, found: [], verdicts: {} }
 
 /** Points of the relation on the vertical line x = k */
-export const lineHits = (state: Pick<RelationState, 'relation' | 'k'>): Point[] => pointsAtX(relations[state.relation].points, state.k)
+export function lineHits(state: Pick<RelationState, 'relation' | 'k'>): Point[] {
+    const current = relations[state.relation]
+    return current.curve ? current.curve.at(state.k).map((y) => [state.k, y] as Point) : pointsAtX(current.points, state.k)
+}
 
 export const hitsTwice = (state: Pick<RelationState, 'relation' | 'k'>) => new Set(lineHits(state).map((point) => point[1])).size > 1
 
@@ -190,14 +223,16 @@ const verdictsRight = (state: RelationState, indexes: number[]) => indexes.every
 
 export const relationChallenges: LabChallenge<RelationState>[] = [
     { id: 30201, prompt: say('Aurkitu zuzen bertikalak bi puntu ezberdin ebakitzen dituen erlazio bat.', 'Encuentra una relación en la que la recta vertical corte dos puntos distintos.', 'جد علاقة يقطع فيها الخط الرأسي نقطتين مختلفتين.'), hint: say('Mugitu zuzena erlazio ezberdinetan zehar.', 'Mueve la recta por distintas relaciones.', 'حرّك الخط في علاقات مختلفة.'), isSolved: (state) => state.found.length >= 1 },
-    { id: 30202, prompt: say('Sailkatu lehen hiru erlazioak (1, 2 eta 3): funtzioa ala ez.', 'Clasifica las tres primeras relaciones (1, 2 y 3): función o no.', 'صنّف العلاقات الثلاث الأولى (1 و2 و3): دالة أم لا.'), hint: say('Zuzen bertikalak puntu bat baino gehiago ebakitzen badu, ez da funtzioa.', 'Si la recta vertical corta más de un punto, no es función.', 'إذا قطع الخط الرأسي أكثر من نقطة فليست دالة.'), isSolved: (state) => verdictsRight(state, [0, 1, 2]) },
-    { id: 30203, prompt: say('Sailkatu sei erlazioak ondo.', 'Clasifica bien las seis relaciones.', 'صنّف العلاقات الست بشكل صحيح.'), hint: say('Kontuz: $x$ batek $y$ bera errepikatzea onartzen da.', 'Ojo: que una $y$ se repita en distintas $x$ está permitido.', 'انتبه: يجوز أن تتكرر $y$ لقيم مختلفة من $x$.'), isSolved: (state) => verdictsRight(state, [0, 1, 2, 3, 4, 5]) }
+    { id: 30202, prompt: say('Sailkatu lehen hiru erlazioak (A, B eta C): funtzioa ala ez.', 'Clasifica las tres primeras relaciones (A, B y C): función o no.', 'صنّف العلاقات الثلاث الأولى (A وB وC): دالة أم لا.'), hint: say('Zuzen bertikalak puntu bat baino gehiago ebakitzen badu, ez da funtzioa.', 'Si la recta vertical corta más de un punto, no es función.', 'إذا قطع الخط الرأسي أكثر من نقطة فليست دالة.'), isSolved: (state) => verdictsRight(state, [0, 1, 2]) },
+    { id: 30203, prompt: say('Sailkatu zortzi erlazioak ondo, G eta H kurbak barne.', 'Clasifica bien las ocho relaciones, incluidas las curvas G y H.', 'صنّف العلاقات الثماني بشكل صحيح، بما فيها المنحنيان G وH.'), hint: say('Kurbetan ere mugitu zuzen bertikala. Kontuz: $y$ bera $x$ ezberdinetan errepikatzea onartzen da.', 'En las curvas mueve también la recta vertical. Ojo: que una $y$ se repita en distintas $x$ está permitido.', 'حرّك الخط الرأسي على المنحنيين أيضًا. انتبه: يجوز أن تتكرر $y$ لقيم مختلفة من $x$.'), isSolved: (state) => verdictsRight(state, relations.map((_, index) => index)) }
 ]
 
 /* ---------- Table, formula and points ---------- */
 
 export interface TableFormula {
     latex: string
+    /** The rule as plain text, for the selector */
+    label: string
     /** Plain text of the rule, for the step shown for each x */
     apply: (x: number) => number
     /** How the substitution is written: 2·(−2)+1 */
@@ -207,11 +242,11 @@ export interface TableFormula {
 const bracket = (x: number) => (x < 0 ? `(${x})` : String(x))
 
 export const tableFormulas: TableFormula[] = [
-    { latex: 'y=2x+1', apply: (x) => 2 * x + 1, steps: (x) => `2\\cdot ${bracket(x)}+1` },
-    { latex: 'y=-x+3', apply: (x) => -x + 3, steps: (x) => `-${bracket(x)}+3` },
-    { latex: 'y=x^{2}-2', apply: (x) => x * x - 2, steps: (x) => `${bracket(x)}^{2}-2` },
-    { latex: 'y=-2x', apply: (x) => -2 * x, steps: (x) => `-2\\cdot ${bracket(x)}` },
-    { latex: 'y=4', apply: () => 4, steps: () => '4' }
+    { latex: 'y=2x+1', label: 'y = 2x + 1', apply: (x) => 2 * x + 1, steps: (x) => `2\\cdot ${bracket(x)}+1` },
+    { latex: 'y=-x+3', label: 'y = −x + 3', apply: (x) => -x + 3, steps: (x) => `-${bracket(x)}+3` },
+    { latex: 'y=x^{2}-2', label: 'y = x² − 2', apply: (x) => x * x - 2, steps: (x) => `${bracket(x)}^{2}-2` },
+    { latex: 'y=-2x', label: 'y = −2x', apply: (x) => -2 * x, steps: (x) => `-2\\cdot ${bracket(x)}` },
+    { latex: 'y=4', label: 'y = 4', apply: () => 4, steps: () => '4' }
 ]
 
 export const TABLE_LIMIT = 3

@@ -65,6 +65,8 @@ export interface PracticeItem {
     answerForm?: AnswerForm
     hint: LocalizedText
     explanation: LocalizedText
+    /** Optional drawing the prompt refers to (a graph, a plane…), shown under it */
+    figure?: (language: UnitLanguage) => ReactNode
 }
 
 export interface ChallengeItem extends PracticeItem {
@@ -79,6 +81,8 @@ export interface DiagnosticQuestion {
     correctIndex: number
     explanation: LocalizedText
     topic: string
+    /** Optional drawing the prompt refers to, shown under it */
+    figure?: (language: UnitLanguage) => ReactNode
 }
 
 export type ExerciseDifficulty = 'easy' | 'medium' | 'hard'
@@ -98,6 +102,10 @@ export interface ExerciseItem {
     question: LocalizedText
     solution: LocalizedText
     answer?: ExerciseAnswer
+    /** Optional drawing the question refers to, shown under it */
+    figure?: (language: UnitLanguage) => ReactNode
+    /** Optional drawing that completes the written solution (the graph to draw…) */
+    solutionFigure?: (language: UnitLanguage) => ReactNode
 }
 
 export interface ExerciseSection {

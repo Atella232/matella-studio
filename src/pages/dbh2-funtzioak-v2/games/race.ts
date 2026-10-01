@@ -2,15 +2,16 @@ import { checkAnswer, fraction, toLatex, type AnswerCheck, type FractionValue } 
 import { parTimeFor, type RaceOption, type RaceQuestion, type Tier } from '../../../features/unit-v2/games/raceCore.ts'
 import { pick, randomInt, shuffle, type Random } from '../../../features/unit-v2/games/random.ts'
 import type { LocalizedText } from '../../../features/unit-v2/types.ts'
-import { lineLatex, pointLatex, quadrantOf, type Point } from '../functions.ts'
+import { lineLatex, pointLatex, quadrantOf, type GraphSpec, type Point } from '../functions.ts'
 
 /* ==========================================================================
-   Funtzioen lasterketa (2. DBH): five circuits, one per stage. Questions
-   are text-only (graphs come as tables of values) and every wrong option is
-   a typical mistake: x and y swapped, the sign lost with a negative x, the
-   constant n forgotten, Δx over Δy, the equation with m and n exchanged…
-   Each question carries `meta`, the data it was built from, so the tests
-   can check the right option again without trusting the generator.
+   Funtzioen lasterketa (2. DBH): five circuits, one per stage. Every wrong
+   option is a typical mistake: x and y swapped, the sign lost with a
+   negative x, the constant n forgotten, Δx over Δy, the equation with m and
+   n exchanged… Questions that are read on a plane carry a `graph` (plain
+   data, drawn by RaceGame.tsx). Each question also carries `meta`, the data
+   it was built from, so the tests can check the right option again without
+   trusting the generator.
    ========================================================================== */
 
 export const FUNCTIONS_RACE_CIRCUITS = 5
@@ -52,16 +53,17 @@ export type RaceMeta =
     | { kind: 'equation'; a: Point; b: Point; equations: Array<{ m: number; n: number }>; right: number }
     | { kind: 'tariff'; m: number; n: number; x: number; y: number; mode: 'value' | 'solve' }
     | { kind: 'meeting'; first: { m: number; n: number }; second: { m: number; n: number }; x: number }
+    | { kind: 'graph-point'; point: Point; points: Point[]; right: number }
+    | { kind: 'graph-value'; ys: number[]; x: number; y: number }
+    | { kind: 'graph-slope'; m: number; n: number; a: Point; b: Point }
+    | { kind: 'graph-line'; m: number; n: number; equations: Array<{ m: number; n: number }>; right: number }
 
-export type FunctionsRaceQuestion = RaceQuestion<FunctionsRaceError> & { meta: RaceMeta }
+export type FunctionsRaceQuestion = RaceQuestion<FunctionsRaceError> & { meta: RaceMeta; graph?: GraphSpec }
 
 const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
 const math = (latex: string) => `$${latex}$`
 const signedRandom = (random: Random, min: number, max: number) => randomInt(random, min, max) * (random() < 0.5 ? -1 : 1)
 const roman = ['', 'I', 'II', 'III', 'IV'] as const
-
-/** Table of values as LaTeX */
-const table = (xs: number[], ys: number[]) => `\\begin{array}{c|${'c'.repeat(xs.length)}}x&${xs.join('&')}\\\\ \\hline y&${ys.join('&')}\\end{array}`
 
 interface Choice {
     latex: string
@@ -86,9 +88,12 @@ function pickOptions(random: Random, right: Choice, wrongs: Choice[]): RaceOptio
 
 const near = (value: number): Choice[] => [value + 1, value - 1, value + 2, value - 2, -value].map((item) => numberChoice(item, 'calculation'))
 
-function build(circuit: number, kind: string, prompt: LocalizedText, options: RaceOption<FunctionsRaceError>[], answer: FractionValue | null, worked: LocalizedText, meta: RaceMeta): FunctionsRaceQuestion {
-    return { circuit, kind, prompt, options, answer: answer ?? fraction(0), answerForm: 'any', percentAnswer: false, writable: answer !== null, solution: worked, meta }
+function build(circuit: number, kind: string, prompt: LocalizedText, options: RaceOption<FunctionsRaceError>[], answer: FractionValue | null, worked: LocalizedText, meta: RaceMeta, graph?: GraphSpec): FunctionsRaceQuestion {
+    return { circuit, kind, prompt, options, answer: answer ?? fraction(0), answerForm: 'any', percentAnswer: false, writable: answer !== null, solution: worked, meta, ...(graph ? { graph } : {}) }
 }
+
+/** A series of values for x = 0, 1, 2… drawn as a broken line */
+const seriesGraph = (ys: number[]): GraphSpec => ({ box: { xMin: 0, xMax: ys.length - 1, yMin: 0, yMax: Math.max(...ys) + 1 }, cell: 26, labelStep: Math.max(...ys) > 9 ? 2 : 1, curves: [{ points: ys.map((y, x) => [x, y] as Point) }] })
 
 const same = (latex: string): LocalizedText => ({ eu: math(latex), es: math(latex), ar: math(latex) })
 const bracket = (value: number) => (value < 0 ? `(${value})` : String(value))
@@ -141,6 +146,22 @@ function areaQuestion(random: Random): FunctionsRaceQuestion | null {
     const options = pickOptions(random, numberChoice(area, 'calculation'), [numberChoice(2 * (dx + dy), 'added'), numberChoice(dx + dy, 'added'), numberChoice(area + dx, 'calculation'), ...near(area)])
     if (!options) return null
     return build(0, 'area', say(`Laukizuzen baten erpinak ${math(shown)} dira. Zenbat da azalera?`, `Los vértices de un rectángulo son ${math(shown)}. ¿Cuánto mide su área?`, `رؤوس مستطيل هي ${math(shown)}. كم مساحته؟`), options, fraction(area), same(`${dx}\\cdot ${dy}=${area}`), { kind: 'area', vertices, area })
+}
+
+function pointGraphQuestion(random: Random): FunctionsRaceQuestion | null {
+    const point: Point = [signedRandom(random, 1, 5), signedRandom(random, 1, 4)]
+    const [x, y] = point
+    if (Math.abs(x) === Math.abs(y)) return null
+    const candidates: Array<{ point: Point; error: FunctionsRaceError }> = [
+        { point: [y, x], error: 'swap-xy' },
+        { point: [-x, y], error: 'x-sign' },
+        { point: [x, -y], error: 'y-sign' },
+        { point: [-y, -x], error: 'both-signs' }
+    ]
+    const options = pickOptions(random, { latex: pointLatex(point), error: null }, candidates.map((item) => ({ latex: pointLatex(item.point), error: item.error })))
+    if (!options) return null
+    const points = options.map((option) => (option.correct ? point : candidates.find((item) => pointLatex(item.point) === option.latex)!.point))
+    return build(0, 'graph-point', say('Zein dira $P$ puntuaren koordenatuak?', '¿Cuáles son las coordenadas del punto $P$?', 'ما إحداثيا النقطة $P$؟'), options, null, same(`P${pointLatex(point)}`), { kind: 'graph-point', point, points, right: options.findIndex((option) => option.correct) }, { box: { xMin: -5, xMax: 5, yMin: -4, yMax: 4 }, cell: 26, points: [{ at: point, name: 'P' }] })
 }
 
 /* ---------- Circuit 1: tables, formulas and points ---------- */
@@ -208,12 +229,12 @@ function pointOnLineQuestion(random: Random): FunctionsRaceQuestion | null {
     return build(1, 'point-on-line', say(`Zein puntu da ${math(lineLatex(m, n))} funtzioarena?`, `¿Cuál de estos puntos es de la función ${math(lineLatex(m, n))}?`, `أي هذه النقاط تنتمي إلى الدالة ${math(lineLatex(m, n))}؟`), options, null, same(`${m}\\cdot ${x}${n < 0 ? '' : '+'}${n}=${y}`), { kind: 'point-on-line', m, n, points, right: options.findIndex((option) => option.correct) })
 }
 
-/* ---------- Circuit 2: reading a table ---------- */
+/* ---------- Circuit 2: reading a graph ---------- */
 
 /** Six values (x from 0 to 5) with a single highest and a single lowest value */
 function series(random: Random): number[] | null {
     for (let attempt = 0; attempt < 50; attempt += 1) {
-        const ys = Array.from({ length: 6 }, () => randomInt(random, 0, 12))
+        const ys = Array.from({ length: 6 }, () => randomInt(random, 0, 9))
         const high = Math.max(...ys)
         const low = Math.min(...ys)
         if (ys.filter((y) => y === high).length === 1 && ys.filter((y) => y === low).length === 1 && high - low >= 4) return ys
@@ -221,15 +242,13 @@ function series(random: Random): number[] | null {
     return null
 }
 
-const xs6 = [0, 1, 2, 3, 4, 5]
-
 function maxQuestion(random: Random): FunctionsRaceQuestion | null {
     const ys = series(random)
     if (!ys) return null
     const high = Math.max(...ys)
     const options = pickOptions(random, numberChoice(high, 'calculation'), [numberChoice(Math.min(...ys), 'wrong-extreme'), numberChoice(ys.indexOf(high), 'wrong-extreme'), numberChoice(ys[ys.length - 1], 'wrong-extreme'), ...near(high)])
     if (!options) return null
-    return build(2, 'max', say(`${math(table(xs6, ys))} Zein da $y$-ren balio maximoa?`, `${math(table(xs6, ys))} ¿Cuál es el valor máximo de $y$?`, `${math(table(xs6, ys))} ما أكبر قيمة لـ $y$؟`), options, fraction(high), same(`\\max y=${high}\\quad (x=${ys.indexOf(high)})`), { kind: 'table', ys, ask: 'max', answer: high })
+    return build(2, 'max', say('Grafikoan, zein da $y$-ren balio maximoa?', 'En la gráfica, ¿cuál es el valor máximo de $y$?', 'في الرسم، ما أكبر قيمة لـ $y$؟'), options, fraction(high), same(`\\max y=${high}\\quad (x=${ys.indexOf(high)})`), { kind: 'table', ys, ask: 'max', answer: high }, seriesGraph(ys))
 }
 
 function argminQuestion(random: Random): FunctionsRaceQuestion | null {
@@ -239,21 +258,33 @@ function argminQuestion(random: Random): FunctionsRaceQuestion | null {
     const at = ys.indexOf(low)
     const options = pickOptions(random, numberChoice(at, 'calculation'), [numberChoice(low, 'wrong-extreme'), numberChoice(ys.indexOf(Math.max(...ys)), 'wrong-extreme'), ...near(at).filter((choice) => Number(choice.latex) >= 0)])
     if (!options) return null
-    return build(2, 'argmin', say(`${math(table(xs6, ys))} Zein $x$-rentzat da $y$ minimoa?`, `${math(table(xs6, ys))} ¿Para qué $x$ es mínima $y$?`, `${math(table(xs6, ys))} عند أي $x$ تكون $y$ أصغر ما يمكن؟`), options, fraction(at), same(`\\min y=${low}\\quad \\to\\ x=${at}`), { kind: 'table', ys, ask: 'argmin', answer: at })
+    return build(2, 'argmin', say('Grafikoan, zein $x$-rentzat da $y$ minimoa?', 'En la gráfica, ¿para qué $x$ es mínima $y$?', 'في الرسم، عند أي $x$ تكون $y$ أصغر ما يمكن؟'), options, fraction(at), same(`\\min y=${low}\\quad \\to\\ x=${at}`), { kind: 'table', ys, ask: 'argmin', answer: at }, seriesGraph(ys))
 }
 
 function decreasingQuestion(random: Random): FunctionsRaceQuestion | null {
     const step = randomInt(random, 0, 4)
-    const ys = [randomInt(random, 4, 8)]
+    const ys = [randomInt(random, 2, 5)]
     for (let index = 0; index < 5; index += 1) {
         const last = ys[index]
-        ys.push(index === step ? last - randomInt(random, 1, 3) : last + randomInt(random, 0, 3))
+        ys.push(index === step ? last - randomInt(random, 1, 3) : last + randomInt(random, 0, 2))
     }
+    // A short graph fits the race screen
+    if (Math.min(...ys) < 0 || Math.max(...ys) > 9) return null
     const interval = (index: number) => `(${index},\\,${index + 1})`
     const others = shuffle(random, [0, 1, 2, 3, 4].filter((index) => index !== step)).slice(0, 3)
     const options = pickOptions(random, { latex: interval(step), error: null }, others.map((index) => ({ latex: interval(index), error: 'wrong-trend' as const })))
     if (!options) return null
-    return build(2, 'decreasing', say(`${math(table(xs6, ys))} Zein tartetan da beherakorra?`, `${math(table(xs6, ys))} ¿En qué intervalo es decreciente?`, `${math(table(xs6, ys))} في أي فترة تكون متناقصة؟`), options, null, same(`f(${step})=${ys[step]}>f(${step + 1})=${ys[step + 1]}`), { kind: 'table', ys, ask: 'decreasing', answer: step })
+    return build(2, 'decreasing', say('Grafikoan, zein tartetan da beherakorra?', 'En la gráfica, ¿en qué intervalo es decreciente?', 'في الرسم، في أي فترة تكون متناقصة؟'), options, null, same(`f(${step})=${ys[step]}>f(${step + 1})=${ys[step + 1]}`), { kind: 'table', ys, ask: 'decreasing', answer: step }, seriesGraph(ys))
+}
+
+function graphValueQuestion(random: Random): FunctionsRaceQuestion | null {
+    const ys = Array.from({ length: 7 }, () => randomInt(random, 0, 8))
+    const x = randomInt(random, 1, 6)
+    const y = ys[x]
+    if (y === x) return null
+    const options = pickOptions(random, numberChoice(y, 'calculation'), [numberChoice(x, 'swap-xy'), numberChoice(ys[x - 1], 'calculation'), ...(x < 6 ? [numberChoice(ys[x + 1], 'calculation')] : []), ...near(y).filter((choice) => Number(choice.latex) >= 0)])
+    if (!options) return null
+    return build(2, 'graph-value', say(`Grafikoan, zenbat da ${math(`f(${x})`)}?`, `En la gráfica, ¿cuánto vale ${math(`f(${x})`)}?`, `في الرسم، كم تساوي ${math(`f(${x})`)}؟`), options, fraction(y), same(`x=${x}\\ \\to\\ y=${y}`), { kind: 'graph-value', ys, x, y }, seriesGraph(ys))
 }
 
 function interceptQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | null {
@@ -326,6 +357,24 @@ function slopeQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | null
     return build(3, 'slope', say(`Zein da ${math(`A${pointLatex(a)}`)} eta ${math(`B${pointLatex(b)}`)} puntuetatik pasatzen den zuzenaren malda?`, `¿Cuál es la pendiente de la recta que pasa por ${math(`A${pointLatex(a)}`)} y ${math(`B${pointLatex(b)}`)}?`, `ما ميل الخط المار بالنقطتين ${math(`A${pointLatex(a)}`)} و${math(`B${pointLatex(b)}`)}؟`), options, m, same(`m=\\frac{${b[1]}-${bracket(a[1])}}{${b[0]}-${bracket(a[0])}}=\\frac{${dy}}{${dx}}=${rightLatex}`), { kind: 'slope', a, b, m })
 }
 
+function slopeGraphQuestion(random: Random): FunctionsRaceQuestion | null {
+    const m = signedRandom(random, 1, 3)
+    const n = randomInt(random, -2, 2)
+    const run = Math.abs(m) === 3 ? 1 : randomInt(random, 1, 2)
+    const a: Point = [0, n]
+    const b: Point = [run, n + m * run]
+    if (Math.abs(b[1]) > 5) return null
+    const options = pickOptions(random, numberChoice(m, 'calculation'), [
+        ...(Math.abs(m) > 1 ? [{ latex: slopeLatex(fraction(1, m)), error: 'inverted' as const }] : []),
+        numberChoice(-m, 'order'),
+        numberChoice(n, 'swapped-mn'),
+        numberChoice(m * run, 'calculation'),
+        ...near(m)
+    ])
+    if (!options) return null
+    return build(3, 'graph-slope', say('Zenbat da zuzenaren malda? Erabili bi puntu markatuak.', '¿Cuánto vale la pendiente de la recta? Usa los dos puntos marcados.', 'كم يساوي ميل الخط؟ استعمل النقطتين المحددتين.'), options, fraction(m), same(`m=\\frac{${b[1]}-${bracket(a[1])}}{${b[0]}-0}=${m}`), { kind: 'graph-slope', m, n, a, b }, { box: { xMin: -4, xMax: 4, yMin: -5, yMax: 5 }, cell: 24, lines: [{ m, n }], points: [{ at: a, color: 'ink' }, { at: b, color: 'ink' }] })
+}
+
 function steepestQuestion(random: Random): FunctionsRaceQuestion | null {
     // The steepest line has a negative slope; the biggest positive slope is the typical wrong answer
     const biggest = randomInt(random, 6, 9)
@@ -381,6 +430,22 @@ function equationQuestion(random: Random): FunctionsRaceQuestion | null {
     return build(4, 'equation', say(`Zein da ${math(`A${pointLatex(a)}`)} eta ${math(`B${pointLatex(b)}`)} puntuetatik pasatzen den zuzenaren ekuazioa?`, `¿Cuál es la ecuación de la recta que pasa por ${math(`A${pointLatex(a)}`)} y ${math(`B${pointLatex(b)}`)}?`, `ما معادلة الخط المار بالنقطتين ${math(`A${pointLatex(a)}`)} و${math(`B${pointLatex(b)}`)}؟`), options, null, same(`m=${m},\\ n=${n}\\ \\to\\ ${lineLatex(m, n)}`), { kind: 'equation', a, b, equations, right: options.findIndex((option) => option.correct) })
 }
 
+function lineGraphQuestion(random: Random): FunctionsRaceQuestion | null {
+    const m = signedRandom(random, 1, 3)
+    const n = signedRandom(random, 1, 3)
+    if (m === n) return null
+    const wrongs = ([
+        { line: { m: n, n: m }, error: 'swapped-mn' },
+        { line: { m: -m, n }, error: 'sign-error' },
+        { line: { m, n: -n }, error: 'sign-error' },
+        { line: { m: -m, n: -n }, error: 'sign-error' }
+    ] as Array<{ line: { m: number; n: number }; error: FunctionsRaceError }>)
+    const options = pickOptions(random, { latex: lineLatex(m, n), error: null }, wrongs.map((item) => ({ latex: lineLatex(item.line.m, item.line.n), error: item.error })))
+    if (!options) return null
+    const equations = options.map((option) => (option.correct ? { m, n } : wrongs.find((item) => lineLatex(item.line.m, item.line.n) === option.latex)!.line))
+    return build(4, 'graph-line', say('Zein da zuzen honen ekuazioa?', '¿Cuál es la ecuación de esta recta?', 'ما معادلة هذا الخط؟'), options, null, same(`n=${n},\\ m=${m}\\ \\to\\ ${lineLatex(m, n)}`), { kind: 'graph-line', m, n, equations, right: options.findIndex((option) => option.correct) }, { box: { xMin: -4, xMax: 4, yMin: -5, yMax: 5 }, cell: 24, lines: [{ m, n }], points: [{ at: [0, n], color: 'ink' }] })
+}
+
 function tariffQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | null {
     const m = randomInt(random, 2, 9)
     const n = randomInt(random, 5, 30)
@@ -413,6 +478,7 @@ type Generator = (random: Random, tier: Tier) => FunctionsRaceQuestion | null
 const circuitGenerators: Generator[][] = [
     [
         (random) => quadrantQuestion(random),
+        (random) => pointGraphQuestion(random),
         (random) => relationQuestion(random),
         (random) => areaQuestion(random)
     ],
@@ -423,21 +489,21 @@ const circuitGenerators: Generator[][] = [
         (random, tier) => (tier === 2 ? squareQuestion(random) : valueQuestion(random, tier === 0 ? 0 : 1))
     ],
     [
-        (random) => maxQuestion(random),
-        (random) => argminQuestion(random),
-        (random, tier) => (tier === 0 ? maxQuestion(random) : decreasingQuestion(random)),
-        (random, tier) => interceptQuestion(random, tier)
+        (random) => graphValueQuestion(random),
+        (random, tier) => (tier === 0 ? maxQuestion(random) : argminQuestion(random)),
+        (random, tier) => (tier === 0 ? graphValueQuestion(random) : decreasingQuestion(random)),
+        (random, tier) => (tier === 0 ? maxQuestion(random) : interceptQuestion(random, tier))
     ],
     [
         (random, tier) => throughOriginQuestion(random, tier === 0 ? 0 : 1),
         (random, tier) => slopeQuestion(random, tier),
-        (random, tier) => (tier === 0 ? throughOriginQuestion(random, 0) : proportionalValueQuestion(random)),
+        (random, tier) => (tier === 0 ? throughOriginQuestion(random, 0) : random() < 0.5 ? slopeGraphQuestion(random) : proportionalValueQuestion(random)),
         (random, tier) => (tier === 2 ? steepestQuestion(random) : tier === 1 ? decreasingLineQuestion(random) : slopeQuestion(random, 0))
     ],
     [
         (random) => lineNQuestion(random),
         (random, tier) => tariffQuestion(random, tier),
-        (random, tier) => (tier === 0 ? tariffQuestion(random, 0) : equationQuestion(random)),
+        (random, tier) => (tier === 0 ? lineGraphQuestion(random) : random() < 0.5 ? lineGraphQuestion(random) : equationQuestion(random)),
         (random, tier) => (tier === 2 ? meetingQuestion(random) : tariffQuestion(random, tier))
     ]
 ]

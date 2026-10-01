@@ -1775,6 +1775,24 @@
     font-size: 18px;
 }
 
+/* A drawing the prompt refers to (a graph, a plane…), from the unit's own content */
+.fraction-v2-task-figure {
+    display: flex;
+    justify-content: center;
+    margin: 12px 0 16px;
+    padding: 12px;
+    border: 1.5px solid var(--line);
+    border-radius: 16px;
+    background: var(--card);
+}
+
+.fraction-v2-task-figure svg {
+    display: block;
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+}
+
 .fraction-v2-bank-card textarea {
     min-height: 64px;
     padding: 10px 12px;
