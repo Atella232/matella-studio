@@ -1,5 +1,6 @@
 import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
+import { functionsChallenges, functionsDiagnostic, functionsExerciseBank, functionsPractice } from './content'
 import { FunctionsHeroArt } from './figures'
 import { functionsStages, functionsTopics } from './lessons'
 import './Functions.css'
@@ -19,6 +20,10 @@ const funtzioakUnit: UnitDefinition = {
     pathSubtitle: { eu: 'Bost etapa, koordenatuetatik zuzenen ekuaziora', es: 'Cinco etapas, de las coordenadas a la ecuación de la recta', ar: 'خمس مراحل، من الإحداثيات إلى معادلة الخط' },
     stages: functionsStages,
     topics: functionsTopics,
+    diagnostic: functionsDiagnostic,
+    guidedPractice: functionsPractice,
+    exerciseBank: functionsExerciseBank,
+    challenges: functionsChallenges,
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },
         defaultForm: 'any',
