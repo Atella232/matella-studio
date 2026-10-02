@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { withLines } from '../dbh4-aplikatuak-errealak/withLines'
 import { percentChallenges, percentDiagnostic, percentExerciseBank, percentPractice } from './content'
 import { RealsPercentHeroArt } from './figures'
+import { PercentGames } from './games'
+import { PERCENT_GAME_RECORDS_KEY, percentGameProgressIds } from './games/info'
 import { RealsPercentLaboratory } from './lab'
 import { realsPercentLabChallengeIds, realsPercentLabToolForTopic, realsPercentLabTools } from './lab/labTools'
 import { realsPercentStages, realsPercentTopics } from './lessons'
@@ -36,6 +38,12 @@ const errealakEhunekoakUnit: UnitDefinition = {
         progressIds: realsPercentLabChallengeIds,
         toolForTopic: realsPercentLabToolForTopic,
         render: (props) => <RealsPercentLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Hiru joko: lasterketa, zenbakiak zuzenean kokatu eta memoria.', es: 'Tres juegos: carrera, situar números en la recta y memoria.', ar: 'ثلاث ألعاب: السباق ووضع الأعداد على المستقيم والذاكرة.' },
+        progressIds: percentGameProgressIds,
+        recordsKey: PERCENT_GAME_RECORDS_KEY,
+        render: (props) => <PercentGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Diruak, zentimoetara.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. El dinero, a los céntimos.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. والمال إلى السنت.' },

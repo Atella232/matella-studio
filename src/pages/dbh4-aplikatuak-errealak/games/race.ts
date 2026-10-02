@@ -213,7 +213,7 @@ const kindNames: Record<DecimalKind, LocalizedText> = {
     mixed: say('hamartar periodiko mistoa', 'un decimal periódico mixto', 'عددًا عشريًا دوريًا مختلطًا')
 }
 
-function kindPickQuestion(random: Random): RealsRaceQuestion | null {
+export function kindPickQuestion(random: Random): RealsRaceQuestion | null {
     const target = pick(random, ['exact', 'pure', 'mixed'] as const)
     const others = (['exact', 'pure', 'mixed'] as const).filter((kind) => kind !== target)
     const right = fractionOfKind(random, target)
@@ -226,7 +226,7 @@ function kindPickQuestion(random: Random): RealsRaceQuestion | null {
     return build(1, 'kind-pick', say(`Zein zatikik ematen du ${name.eu}?`, `¿Qué fracción da ${name.es}?`, `أي كسر يعطي ${name.ar}؟`), options, null, same(`${toLatex(right)}=${expansionLatex(expand(right))}`), { kind: 'kind-pick', target: kind, fractions, right: options.findIndex((option) => option.correct) })
 }
 
-function expansionQuestion(random: Random): RealsRaceQuestion | null {
+export function expansionQuestion(random: Random): RealsRaceQuestion | null {
     const value = fractionOfKind(random, pick(random, ['pure', 'mixed'] as const))
     const expansion = expand(value)
     const right = expansionLatex(expansion)
@@ -243,7 +243,7 @@ function expansionQuestion(random: Random): RealsRaceQuestion | null {
     return build(1, 'expansion', same(`${toLatex(value)}=\\ ?`), options, null, say(`${math(`${value.numerator}\\mathbin{:}${value.denominator}=${right}`)}: hondarrak errepikatzen dira.`, `${math(`${value.numerator}\\mathbin{:}${value.denominator}=${right}`)}: los restos se repiten.`, `${math(`${value.numerator}\\mathbin{:}${value.denominator}=${right}`)}: البواقي تتكرر.`), { kind: 'expansion', value })
 }
 
-function generatrixQuestion(random: Random, tier: Tier): RealsRaceQuestion | null {
+export function generatrixQuestion(random: Random, tier: Tier): RealsRaceQuestion | null {
     const kind: DecimalKind = tier === 0 ? pick(random, ['exact', 'pure'] as const) : tier === 1 ? pick(random, ['pure', 'mixed'] as const) : 'mixed'
     const value = fractionOfKind(random, kind)
     const expansion = expand(value)
@@ -275,7 +275,7 @@ function generatrixQuestion(random: Random, tier: Tier): RealsRaceQuestion | nul
 
 /* ---------- Circuit 2: real numbers and intervals ---------- */
 
-function irrationalPickQuestion(random: Random, tier: Tier): RealsRaceQuestion | null {
+export function irrationalPickQuestion(random: Random, tier: Tier): RealsRaceQuestion | null {
     const nonSquares = [2, 3, 5, 6, 7, 8, 10, 11, 12, 13, 15, 17, 20]
     const irrationals = tier === 0
         ? [`\\sqrt{${pick(random, nonSquares)}}`, '\\pi']
@@ -297,7 +297,7 @@ function randomInterval(random: Random, tier: Tier): Interval {
     return interval(from, to, random() < 0.5, random() < 0.5)
 }
 
-function intervalQuestion(random: Random, tier: Tier): RealsRaceQuestion | null {
+export function intervalQuestion(random: Random, tier: Tier): RealsRaceQuestion | null {
     const value = randomInterval(random, tier)
     const flips: Array<{ value: Interval; error: RealsRaceError }> = [
         { value: interval(value.from, value.to, !value.closedFrom, value.closedTo), error: 'bracket' },
@@ -321,7 +321,7 @@ function intervalQuestion(random: Random, tier: Tier): RealsRaceQuestion | null 
     return build(2, 'interval-line', say('Zein tarte dago marraztuta?', '¿Qué intervalo está dibujado?', 'ما الفترة المرسومة؟'), options, null, solution, meta, line)
 }
 
-function intervalCountQuestion(random: Random): RealsRaceQuestion | null {
+export function intervalCountQuestion(random: Random): RealsRaceQuestion | null {
     const from = randomInt(random, -6, 2)
     const to = from + randomInt(random, 3, 8)
     const value = interval(from, to, random() < 0.5, random() < 0.5)
@@ -332,7 +332,7 @@ function intervalCountQuestion(random: Random): RealsRaceQuestion | null {
     return build(2, 'interval-count', say(`Zenbat zenbaki oso daude ${math(intervalLatex(value))} tartean?`, `¿Cuántos números enteros hay en el intervalo ${math(intervalLatex(value))}?`, `كم عددًا صحيحًا في الفترة ${math(intervalLatex(value))}؟`), options, fraction(count), same(`${members.join(',\\ ')}\\ \\to\\ ${count}`), { kind: 'interval-count', value, count }, { from: from - 1, to: to + 1, intervals: [{ value }] })
 }
 
-function sqrtBetweenQuestion(random: Random): RealsRaceQuestion | null {
+export function sqrtBetweenQuestion(random: Random): RealsRaceQuestion | null {
     const n = randomInt(random, 5, 99)
     if (isPerfectSquare(n)) return null
     const low = Math.floor(Math.sqrt(n))
@@ -351,7 +351,7 @@ const decimalFraction = (text: string): FractionValue => {
     return text.startsWith('-') ? fraction(-value.numerator, value.denominator) : value
 }
 
-function roundQuestion(random: Random, tier: Tier): RealsRaceQuestion | null {
+export function roundQuestion(random: Random, tier: Tier): RealsRaceQuestion | null {
     const places = tier === 0 ? 1 : randomInt(random, 1, 3)
     const extra = randomInt(random, 1, 2)
     const whole = randomInt(random, 0, 60)
@@ -384,7 +384,7 @@ function difference(a: string, b: string): string {
     return places === 0 ? String(value) : (value / scale).toFixed(places).replace(/0+$/, '').replace(/\.$/, '')
 }
 
-function absErrorQuestion(random: Random): RealsRaceQuestion | null {
+export function absErrorQuestion(random: Random): RealsRaceQuestion | null {
     const places = randomInt(random, 2, 3)
     const whole = randomInt(random, 1, 30)
     const decimals = Array.from({ length: places }, () => randomInt(random, 0, 9)).join('')

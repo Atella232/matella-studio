@@ -4,6 +4,7 @@ import { GameTopbar, LevelPicker, ResultPanel } from '../../../features/unit-v2/
 import { useGameText } from '../../../features/unit-v2/games/gameHooks'
 import type { GameProps } from '../../../features/unit-v2/games/GamesHub'
 import { createRandom, randomSeed } from '../../../features/unit-v2/games/random'
+import type { GameInfo } from '../../../features/unit-v2/games/records'
 import { LinePoint, RealAxis } from '../realLine'
 import { lineMap, tickText } from '../realLineMap'
 import { PLACE_ROUNDS, PLACE_TRIES, createPlaceRound, isPlacedRight, placeHint, placeLevels, placePoints, placeStars, snapToMark, type PlaceTarget } from './boards'
@@ -12,7 +13,7 @@ import { realsGames } from './info'
 
 type Phase = 'pick' | 'playing' | 'finished'
 
-const game = realsGames.find((item) => item.id === 'place')!
+const appliedGame = realsGames.find((item) => item.id === 'place')!
 const STAGE = 'var(--stage, #2f6fdb)'
 const GREEN = 'var(--success, #267b53)'
 const SECOND = 'var(--second, #c4432a)'
@@ -21,7 +22,12 @@ const X0 = 40
 const X1 = 600
 
 /** Kokatu zuzenean: click (or move with the arrows) to the mark where the number is */
-export function PlaceGame({ language, records, onResult, onExit }: GameProps) {
+export function PlaceGame(props: GameProps) {
+    return <PlaceGameView {...props} game={appliedGame} />
+}
+
+/** The same game with another unit's levels and progress ids (the academic unit uses it too) */
+export function PlaceGameView({ language, records, onResult, onExit, game }: GameProps & { game: GameInfo<string> }) {
     const l = useGameText(language)
     const svg = useRef<SVGSVGElement>(null)
     const [phase, setPhase] = useState<Phase>('pick')

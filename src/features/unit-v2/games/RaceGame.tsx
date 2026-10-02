@@ -283,7 +283,7 @@ export function RaceGame<Error extends string>({ language, records, onResult, on
                     {phase === 'wrong' && chosen !== null && (
                         <div className="fraction-v2-race-feedback" role="alert">
                             <strong>{l({ eu: `Irristatu zara! +${WRONG_PENALTY_MS / 1000} s`, es: `¡Derrape! +${WRONG_PENALTY_MS / 1000} s`, ar: `انزلاق! +${WRONG_PENALTY_MS / 1000} ث` })}</strong>
-                            <p>{l(rules.errorTip(question.options[chosen].error))}</p>
+                            <p><MathText text={l(rules.errorTip(question.options[chosen].error))} /></p>
                             <div className="fraction-v2-race-solution"><MathText text={l(question.solution)} /></div>
                             <button type="button" className="fraction-v2-primary" onClick={resume} ref={(node) => node?.focus()}>
                                 {l({ eu: 'Jarraitu lasterketan', es: 'Seguir la carrera', ar: 'تابع السباق' })}
@@ -363,7 +363,7 @@ export function RaceGame<Error extends string>({ language, records, onResult, on
                                             <span aria-hidden="true">→</span>
                                             <span className="right"><MathText text={`$${localLatex(mistake.question.options.find((option) => option.correct)!.latex, language)}$`} /></span>
                                         </p>
-                                        <p>{l(rules.errorTip(mistake.chosen.error))}</p>
+                                        <p><MathText text={l(rules.errorTip(mistake.chosen.error))} /></p>
                                     </li>
                                 ))}
                             </ol>
