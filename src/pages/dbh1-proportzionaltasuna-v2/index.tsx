@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readProportionAnswer } from './answers'
 import { proportionChallenges, proportionDiagnostic, proportionExerciseBank, proportionPractice } from './content'
 import { ProportionHeroArt } from './figures'
+import { ProportionGames } from './games'
+import { PROPORTION_GAME_RECORDS_KEY, proportionGameProgressIds } from './games/info'
 import { ProportionLaboratory } from './lab'
 import { proportionLabChallengeIds, proportionLabToolForTopic, proportionLabTools } from './lab/labTools'
 import { proportionStages, proportionTopics } from './lessons'
@@ -31,6 +33,12 @@ const proportzionaltasunaUnit: UnitDefinition = {
         progressIds: proportionLabChallengeIds,
         toolForTopic: proportionLabToolForTopic,
         render: (props) => <ProportionLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: proportionGameProgressIds,
+        recordsKey: PROPORTION_GAME_RECORDS_KEY,
+        render: (props) => <ProportionGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (6,24 edo 6.24). Ehunekoetan, idatzi % ikurraren aurreko zenbakia.', es: 'Escribe un número, con coma o con punto (6,24 o 6.24). En los porcentajes, escribe el número que va delante del %.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (6.24). وفي النسب المئوية اكتب العدد الذي يسبق ٪.' },
