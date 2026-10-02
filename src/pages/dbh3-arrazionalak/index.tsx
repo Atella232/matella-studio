@@ -2,8 +2,11 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { rationalsChallenges, rationalsDiagnostic, rationalsExerciseBank, rationalsPractice } from './content'
 import { RationalsHeroArt } from './figures'
+import { RationalsLaboratory } from './lab'
+import { rationalsLabChallengeIds, rationalsLabToolForTopic, rationalsLabTools } from './lab/labTools'
 import { rationalsStages, rationalsTopics } from './lessons'
 import '../dbh4-aplikatuak-errealak/Reals.css'
+import './Rationals.css'
 
 const arrazionalakUnit: UnitDefinition = {
     storagePrefix: 'matella-arrazionalak-dbh3',
@@ -24,6 +27,16 @@ const arrazionalakUnit: UnitDefinition = {
     guidedPractice: rationalsPractice,
     exerciseBank: rationalsExerciseBank,
     challenges: rationalsChallenges,
+    lab: {
+        description: {
+            eu: `${rationalsLabTools.length} tresna: baliokidetasuna, zuzena, konparatu, batu eta kendu, biderkatu eta zatitu, eragiketen ordena, zatikitik hamartarrera eta zatiki sortzailea, erronkekin.`,
+            es: `${rationalsLabTools.length} herramientas: equivalencia, recta, comparar, sumar y restar, multiplicar y dividir, orden de las operaciones, de fracción a decimal y fracción generatriz, con retos.`,
+            ar: `${rationalsLabTools.length} أدوات: التكافؤ والمستقيم والمقارنة والجمع والطرح والضرب والقسمة وترتيب العمليات ومن الكسر إلى العشري والكسر المولّد، مع تحديات.`
+        },
+        progressIds: rationalsLabChallengeIds,
+        toolForTopic: rationalsLabToolForTopic,
+        render: (props) => <RationalsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat edo zatiki bat: 5, −3, 1,5 edo −7/2. "Laburtezina" eskatzen bada, sinplifikatu.', es: 'Escribe un número o una fracción: 5, −3, 1,5 o −7/2. Si se pide "irreducible", simplifica.', ar: 'اكتب عددًا أو كسرًا: 5 أو ⁦−3⁩ أو 1.5 أو ⁦−7/2⁩. وإذا طُلب "غير قابل للاختزال" فبسّط.' },
         defaultForm: 'any',
