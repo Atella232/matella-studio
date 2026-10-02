@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { withLines } from '../dbh4-aplikatuak-errealak/withLines'
 import { percentChallenges, percentDiagnostic, percentExerciseBank, percentPractice } from './content'
 import { RealsPercentHeroArt } from './figures'
+import { RealsPercentLaboratory } from './lab'
+import { realsPercentLabChallengeIds, realsPercentLabToolForTopic, realsPercentLabTools } from './lab/labTools'
 import { realsPercentStages, realsPercentTopics } from './lessons'
 import '../dbh4-aplikatuak-errealak/Reals.css'
 
@@ -25,6 +27,16 @@ const errealakEhunekoakUnit: UnitDefinition = {
     guidedPractice: withLines(percentPractice),
     exerciseBank: percentExerciseBank.map((section) => ({ ...section, items: withLines(section.items) })),
     challenges: withLines(percentChallenges),
+    lab: {
+        description: {
+            eu: `${realsPercentLabTools.length} tresna: zatikitik hamartarrera, zatiki sortzailea, Pitagorasen eraikitzailea, zuzenean zoom, tarteak, biribiltzea, ehuneko kateatuak eta interesen lasterketa, erronkekin.`,
+            es: `${realsPercentLabTools.length} herramientas: de fracción a decimal, fracción generatriz, constructor de Pitágoras, zoom en la recta, intervalos, redondeo, porcentajes encadenados y la carrera de los intereses, con retos.`,
+            ar: `${realsPercentLabTools.length} أدوات: من الكسر إلى العشري، والكسر المولّد، وباني فيثاغورس، والتكبير على المستقيم، والفترات، والتقريب، والنسب المتسلسلة، وسباق الفوائد، مع تحديات.`
+        },
+        progressIds: realsPercentLabChallengeIds,
+        toolForTopic: realsPercentLabToolForTopic,
+        render: (props) => <RealsPercentLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Diruak, zentimoetara.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. El dinero, a los céntimos.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. والمال إلى السنت.' },
         defaultForm: 'any',
