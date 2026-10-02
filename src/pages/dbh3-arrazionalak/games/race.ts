@@ -109,7 +109,14 @@ function wholeQuestion(random: Random, tier: Tier): RationalsRaceQuestion | null
 function fractionsQuestion(random: Random, circuit: number, tier: Tier, requireWritable: boolean): RationalsRaceQuestion {
     const level = Math.min(2, tier + 1) as Tier
     const sourceCircuit = circuit === 2 ? pick(random, [2, 3, 4]) : circuit
-    return { ...generateRaceQuestion(random, sourceCircuit, level, requireWritable), circuit, source: 'fractions' }
+    let question = generateRaceQuestion(random, sourceCircuit, level, requireWritable)
+    // The equivalence circuit seldom brings negatives on its own: ask for one more often
+    if (circuit === 0 && level === 2 && random() < 0.2) {
+        for (let attempt = 0; attempt < 30 && !question.options.some((option) => option.latex.startsWith('-')); attempt += 1) {
+            question = generateRaceQuestion(random, sourceCircuit, level, requireWritable)
+        }
+    }
+    return { ...question, circuit, source: 'fractions' }
 }
 
 const decimalGenerators = [

@@ -69,14 +69,15 @@ test('arrazionalak 3. DBH race: every circuit has valid questions and written an
                     if (requireWritable) assert.ok(question.writable, `${circuit} ${question.kind}`)
                     kinds.add(`${circuit}:${question.kind}`)
                     checkShape(question)
-                    if (question.options.some((option) => option.latex.startsWith('-'))) negatives += 1
+                    if (!requireWritable && question.options.some((option) => option.latex.startsWith('-'))) negatives += 1
                     if (question.source === 'decimals') checkRealsQuestion(question as unknown as RealsRaceQuestion, rationalsRaceErrorTips, checkRationalsPitAnswer as never)
                     if (question.source === 'problems') checkProblem(question)
                 }
             }
         }
         // Third year: negative fractions show up in the fractions, order and operations circuits
-        if (circuit <= 2) assert.ok(negatives > 30, `circuit ${circuit}: only ${negatives} questions with negatives`)
+        // At least 15 % of the 450 multiple-choice questions (none at the first level)
+        if (circuit <= 2) assert.ok(negatives > 67, `circuit ${circuit}: only ${negatives} questions with negatives`)
         assert.ok(rationalsParTime(circuit) > 60000)
     }
     for (const kind of ['4:fraction-of', '4:remaining', '4:whole', '3:generatrix', '3:kind-pick']) assert.ok(kinds.has(kind), `never generated: ${kind}`)
