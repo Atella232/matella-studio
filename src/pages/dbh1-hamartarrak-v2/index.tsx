@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readDecimalAnswer } from './answers'
 import { decimalsChallenges, decimalsDiagnostic, decimalsExerciseBank, decimalsPractice } from './content'
 import { DecimalsHeroArt } from './figures'
+import { DecimalsGames } from './games'
+import { DECIMALS_GAME_RECORDS_KEY, decimalsGameProgressIds } from './games/info'
 import { DecimalsLaboratory } from './lab'
 import { decimalsLabChallengeIds, decimalsLabToolForTopic, decimalsLabTools } from './lab/labTools'
 import { decimalsStages, decimalsTopics } from './lessons'
@@ -31,6 +33,12 @@ const hamartarrakUnit: UnitDefinition = {
         progressIds: decimalsLabChallengeIds,
         toolForTopic: decimalsLabToolForTopic,
         render: (props) => <DecimalsLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Hiru joko abiadura eta zehaztasuna entrenatzeko: lasterketa, itua eta memoria.', es: 'Tres juegos para entrenar rapidez y precisión: carrera, diana y memoria.', ar: 'ثلاث ألعاب لتدريب السرعة والدقة: السباق والهدف والذاكرة.' },
+        progressIds: decimalsGameProgressIds,
+        recordsKey: DECIMALS_GAME_RECORDS_KEY,
+        render: (props) => <DecimalsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi hamartarrak komarekin edo puntuarekin (0,75 edo 0.75), eta milakoak bereizlerik gabe (4700).', es: 'Escribe los decimales con coma o con punto (0,75 o 0.75), y los miles sin separador (4700).', ar: 'اكتب الأعداد العشرية بالنقطة أو بالفاصلة (0.75)، والآلاف بلا فاصل (4700).' },

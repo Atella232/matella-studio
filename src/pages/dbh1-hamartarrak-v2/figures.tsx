@@ -503,6 +503,7 @@ function HeroCard({ x, y, rotate, children }: { x: number; y: number; rotate: nu
     return <g transform={`translate(${x} ${y}) rotate(${rotate})`}>{children}</g>
 }
 
+/** Same art in every language: no decimal commas (Arabic writes the point) */
 export function DecimalsHeroArt() {
     return (
         <div className="fraction-v2-collage" aria-hidden="true">
@@ -515,11 +516,11 @@ export function DecimalsHeroArt() {
                 </HeroCard>
                 <HeroCard x={280} y={50} rotate={4}>
                     <rect width={190} height={100} rx={16} fill="#e8e0f7" stroke={INK} strokeWidth={2} />
-                    <text x={95} y={64} textAnchor="middle" fontSize={40} fontWeight={700} fill={INK} fontFamily="Fraunces, serif">0,45</text>
+                    <text x={95} y={64} textAnchor="middle" fontSize={40} fontWeight={700} fill={INK} fontFamily="Fraunces, serif">45/100</text>
                 </HeroCard>
                 <HeroCard x={290} y={185} rotate={-3}>
                     <rect width={180} height={80} rx={16} fill="#fbebc0" stroke={INK} strokeWidth={2} />
-                    <text x={90} y={52} textAnchor="middle" fontSize={26} fontWeight={700} fill={INK} fontFamily="Fraunces, serif">1,30 €/m</text>
+                    <text x={90} y={52} textAnchor="middle" fontSize={26} fontWeight={700} fill={INK} fontFamily="Fraunces, serif">· 10 : 10</text>
                 </HeroCard>
                 <HeroCard x={40} y={290} rotate={0}>
                     <rect width={440} height={80} rx={16} fill="#d6eddf" stroke={INK} strokeWidth={2} />
