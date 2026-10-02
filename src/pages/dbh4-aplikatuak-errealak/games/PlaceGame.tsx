@@ -1,4 +1,4 @@
-import { useRef, useState, type KeyboardEvent, type MouseEvent } from 'react'
+import { useRef, useState, type KeyboardEvent, type MouseEvent, type ReactNode } from 'react'
 import { MathText } from '../../../components/MathText'
 import { GameTopbar, LevelPicker, ResultPanel } from '../../../features/unit-v2/games/GameKit'
 import { useGameText } from '../../../features/unit-v2/games/gameHooks'
@@ -27,7 +27,7 @@ export function PlaceGame(props: GameProps) {
 }
 
 /** The same game with another unit's levels and progress ids (the academic unit uses it too) */
-export function PlaceGameView({ language, records, onResult, onExit, game }: GameProps & { game: GameInfo<string> }) {
+export function PlaceGameView({ language, records, onResult, onExit, game, art = <RealsGameArt game="place" /> }: GameProps & { game: GameInfo<string>; art?: ReactNode }) {
     const l = useGameText(language)
     const svg = useRef<SVGSVGElement>(null)
     const [phase, setPhase] = useState<Phase>('pick')
@@ -112,7 +112,7 @@ export function PlaceGameView({ language, records, onResult, onExit, game }: Gam
         return (
             <LevelPicker
                 game={game}
-                art={<RealsGameArt game="place" />}
+                art={art}
                 language={language}
                 records={records}
                 onStart={start}
@@ -122,7 +122,8 @@ export function PlaceGameView({ language, records, onResult, onExit, game }: Gam
                     <ul className="fraction-v2-game-rules">
                         <li>{l({ eu: `${PLACE_ROUNDS} zenbaki. Sakatu zuzenean zenbakia dagoen marka eta egiaztatu.`, es: `${PLACE_ROUNDS} números. Pulsa en la recta la marca donde está el número y comprueba.`, ar: `${PLACE_ROUNDS} أعداد. اضغط على العلامة التي يقع عندها العدد ثم تحقق.` })}</li>
                         <li>{l({ eu: 'Lehen saiakeran: 2 puntu; bigarrenean: 1.', es: 'A la primera: 2 puntos; a la segunda: 1.', ar: 'من المحاولة الأولى: نقطتان؛ من الثانية: نقطة.' })}</li>
-                        <li>{l({ eu: 'Irrazionalak: inguruko bi hamarrenetako edozein balio du.', es: 'Irracionales: vale cualquiera de las dos décimas que lo rodean.', ar: 'غير النسبية: يُقبل أي من العُشرين المحيطين به.' })}</li>
+                        {/* The irrational level is the third: units that stop at the rationals give only two */}
+                        {game.levels.length > 2 && <li>{l({ eu: 'Irrazionalak: inguruko bi hamarrenetako edozein balio du.', es: 'Irracionales: vale cualquiera de las dos décimas que lo rodean.', ar: 'غير النسبية: يُقبل أي من العُشرين المحيطين به.' })}</li>}
                         <li>{l({ eu: 'Teklatuarekin: geziek marka batetik bestera mugitzen dute eta Enter-ek egiaztatzen du.', es: 'Con el teclado: las flechas mueven de marca en marca y Enter comprueba.', ar: 'بلوحة المفاتيح: الأسهم تنقل من علامة إلى أخرى وEnter يتحقق.' })}</li>
                     </ul>
                 )}

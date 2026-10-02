@@ -2,7 +2,8 @@ import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { RealsGameId } from './info'
 
 /** Small illustration of each real-numbers game, in the notebook style */
-export function RealsGameArt({ game }: { game: RealsGameId }) {
+/** `points` changes the two numbers on the line of the placing game (√2 and π by default) and `caption` the numbers under the race */
+export function RealsGameArt({ game, points = [{ value: Math.SQRT2, label: '√2' }, { value: Math.PI, label: 'π' }], caption = '√2 · π · 3/4' }: { game: RealsGameId; points?: Array<{ value: number; label: string }>; caption?: string }) {
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" direction="ltr" aria-hidden="true">
@@ -10,7 +11,7 @@ export function RealsGameArt({ game }: { game: RealsGameId }) {
                 <line x1="14" y1="62" x2="206" y2="62" stroke="var(--line)" strokeWidth="2" strokeDasharray="8 7" />
                 <Car color="var(--coral)" label="√" x={104} y={20} width={72} />
                 <Car color="var(--blue, #2f6fdb)" x={40} y={50} width={62} />
-                <text x="110" y="112" textAnchor="middle" fontSize="16" fontWeight="700" fill="var(--ink)">√2 · π · 3/4</text>
+                <text x="110" y="112" textAnchor="middle" fontSize="16" fontWeight="700" fill="var(--ink)">{caption}</text>
             </svg>
         )
     }
@@ -27,10 +28,12 @@ export function RealsGameArt({ game }: { game: RealsGameId }) {
                     </g>
                 ))}
                 {Array.from({ length: 40 }, (_, index) => index / 10).filter((value) => value % 1 !== 0).map((value) => <line key={value} x1={x(value)} y1="67" x2={x(value)} y2="77" stroke="var(--line)" strokeWidth="1.2" />)}
-                <circle cx={x(Math.SQRT2)} cy="72" r="7" fill="var(--coral)" stroke="var(--card)" strokeWidth="2" />
-                <text x={x(Math.SQRT2)} y="48" textAnchor="middle" fontSize="16" fontWeight="700" fill="var(--coral)">√2</text>
-                <circle cx={x(Math.PI)} cy="72" r="7" fill="var(--blue, #2f6fdb)" stroke="var(--card)" strokeWidth="2" />
-                <text x={x(Math.PI)} y="48" textAnchor="middle" fontSize="16" fontWeight="700" fill="var(--blue, #2f6fdb)">π</text>
+                {points.map((point, index) => (
+                    <g key={point.label}>
+                        <circle cx={x(point.value)} cy="72" r="7" fill={index === 0 ? 'var(--coral)' : 'var(--blue, #2f6fdb)'} stroke="var(--card)" strokeWidth="2" />
+                        <text x={x(point.value)} y="48" textAnchor="middle" fontSize="16" fontWeight="700" fill={index === 0 ? 'var(--coral)' : 'var(--blue, #2f6fdb)'}>{point.label}</text>
+                    </g>
+                ))}
             </svg>
         )
     }

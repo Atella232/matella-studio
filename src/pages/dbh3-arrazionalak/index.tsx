@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { rationalsChallenges, rationalsDiagnostic, rationalsExerciseBank, rationalsPractice } from './content'
 import { RationalsHeroArt } from './figures'
+import { RationalsGames } from './games'
+import { RATIONALS_GAME_RECORDS_KEY, rationalsGameProgressIds } from './games/info'
 import { RationalsLaboratory } from './lab'
 import { rationalsLabChallengeIds, rationalsLabToolForTopic, rationalsLabTools } from './lab/labTools'
 import { rationalsStages, rationalsTopics } from './lessons'
@@ -36,6 +38,12 @@ const arrazionalakUnit: UnitDefinition = {
         progressIds: rationalsLabChallengeIds,
         toolForTopic: rationalsLabToolForTopic,
         render: (props) => <RationalsLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Hiru joko: lasterketa, zatikiak zuzenean kokatu eta memoria.', es: 'Tres juegos: carrera, situar fracciones en la recta y memoria.', ar: 'ثلاث ألعاب: السباق ووضع الكسور على المستقيم والذاكرة.' },
+        progressIds: rationalsGameProgressIds,
+        recordsKey: RATIONALS_GAME_RECORDS_KEY,
+        render: (props) => <RationalsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat edo zatiki bat: 5, −3, 1,5 edo −7/2. "Laburtezina" eskatzen bada, sinplifikatu.', es: 'Escribe un número o una fracción: 5, −3, 1,5 o −7/2. Si se pide "irreducible", simplifica.', ar: 'اكتب عددًا أو كسرًا: 5 أو ⁦−3⁩ أو 1.5 أو ⁦−7/2⁩. وإذا طُلب "غير قابل للاختزال" فبسّط.' },
