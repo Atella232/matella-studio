@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readDecimalAnswer } from './answers'
 import { decimalsChallenges, decimalsDiagnostic, decimalsExerciseBank, decimalsPractice } from './content'
 import { DecimalsHeroArt } from './figures'
+import { DecimalsLaboratory } from './lab'
+import { decimalsLabChallengeIds, decimalsLabToolForTopic, decimalsLabTools } from './lab/labTools'
 import { decimalsStages, decimalsTopics } from './lessons'
 
 const hamartarrakUnit: UnitDefinition = {
@@ -24,6 +26,12 @@ const hamartarrakUnit: UnitDefinition = {
     guidedPractice: decimalsPractice,
     exerciseBank: decimalsExerciseBank,
     challenges: decimalsChallenges,
+    lab: {
+        description: { eu: `${decimalsLabTools.length} tresna hamartarrak ukitzeko: sareta, posizioak, alderaketa, zuzena, biribiltzea, zatiketa, koma jauzika eta zatitzailea, erronkekin.`, es: `${decimalsLabTools.length} herramientas para tocar los decimales: cuadrícula, posiciones, comparación, recta, redondeo, división, la coma que salta y el divisor, con retos.`, ar: `${decimalsLabTools.length} أدوات للمس الأعداد العشرية: الشبكة والمنازل والمقارنة والمستقيم والتقريب والقسمة والفاصلة القافزة والمقسوم عليه، مع تحديات.` },
+        progressIds: decimalsLabChallengeIds,
+        toolForTopic: decimalsLabToolForTopic,
+        render: (props) => <DecimalsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi hamartarrak komarekin edo puntuarekin (0,75 edo 0.75), eta milakoak bereizlerik gabe (4700).', es: 'Escribe los decimales con coma o con punto (0,75 o 0.75), y los miles sin separador (4700).', ar: 'اكتب الأعداد العشرية بالنقطة أو بالفاصلة (0.75)، والآلاف بلا فاصل (4700).' },
         defaultForm: 'any',
