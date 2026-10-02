@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { realsChallenges, realsDiagnostic, realsExerciseBank, realsPractice } from './content'
 import { RealsHeroArt } from './figures'
+import { RealsGames } from './games'
+import { REALS_GAME_RECORDS_KEY, realsGameProgressIds } from './games/info'
 import { RealsLaboratory } from './lab'
 import { realsLabChallengeIds, realsLabToolForTopic, realsLabTools } from './lab/labTools'
 import { realsStages, realsTopics } from './lessons'
@@ -36,6 +38,12 @@ const errealakUnit: UnitDefinition = {
         progressIds: realsLabChallengeIds,
         toolForTopic: realsLabToolForTopic,
         render: (props) => <RealsLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Hiru joko: lasterketa, zenbakiak zuzenean kokatu eta memoria.', es: 'Tres juegos: carrera, situar números en la recta y memoria.', ar: 'ثلاث ألعاب: السباق ووضع الأعداد على المستقيم والذاكرة.' },
+        progressIds: realsGameProgressIds,
+        recordsKey: REALS_GAME_RECORDS_KEY,
+        render: (props) => <RealsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },

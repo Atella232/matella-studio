@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { GameTopbar, LevelPicker, ResultPanel } from './GameKit'
-import { formatTime, nowMs, useGameText } from './gameHooks'
+import { formatTime, localLatex, nowMs, useGameText } from './gameHooks'
 import type { GameProps } from './GamesHub'
 import { createRandom, randomSeed } from './random'
 import { pairsMemoryStars, type PairsMemoryConfig, type PairCard } from './pairsMemory'
@@ -120,14 +120,14 @@ export function PairsMemoryGame({ language, records, onResult, onExit, config }:
                                 <button
                                     type="button"
                                     className={`fraction-v2-memory-card ${visible ? 'visible' : ''} ${isMatched ? 'matched' : ''}`}
-                                    aria-label={visible ? `${l({ eu: `${index + 1}. karta`, es: `Carta ${index + 1}`, ar: `البطاقة ${index + 1}` })}: ${card.latex.replace(/\\cdot/g, '·').replace(/\^\{(\d+)\}/g, '^$1').replace(/\\ /g, ' ')}` : l({ eu: `${index + 1}. karta, ezkutuan`, es: `Carta ${index + 1}, oculta`, ar: `البطاقة ${index + 1}، مخفية` })}
+                                    aria-label={visible ? `${l({ eu: `${index + 1}. karta`, es: `Carta ${index + 1}`, ar: `البطاقة ${index + 1}` })}: ${localLatex(card.latex, language).replace(/\\cdot/g, '·').replace(/\^\{(\d+)\}/g, '^$1').replace(/\\ /g, ' ')}` : l({ eu: `${index + 1}. karta, ezkutuan`, es: `Carta ${index + 1}, oculta`, ar: `البطاقة ${index + 1}، مخفية` })}
                                     aria-pressed={visible}
                                     onClick={() => select(index)}
                                     key={card.id}
                                 >
                                     <span className="fraction-v2-memory-inner">
                                         <span className="fraction-v2-memory-back" aria-hidden="true" />
-                                        <span className="fraction-v2-memory-front">{visible && <MathText text={`$${card.latex}$`} />}</span>
+                                        <span className="fraction-v2-memory-front">{visible && <MathText text={`$${localLatex(card.latex, language)}$`} />}</span>
                                     </span>
                                 </button>
                             )
@@ -138,7 +138,7 @@ export function PairsMemoryGame({ language, records, onResult, onExit, config }:
                             ? (
                                 <>
                                     <span>{message.tone === 'success' ? l({ eu: 'Balio bera!', es: '¡Mismo valor!', ar: 'القيمة نفسها!' }) : l({ eu: 'Ez dute balio bera:', es: 'No valen lo mismo:', ar: 'ليست بالقيمة نفسها:' })}</span>
-                                    <MathText text={`$${message.latex}$`} />
+                                    <MathText text={`$${localLatex(message.latex, language)}$`} />
                                 </>
                             )
                             : <span>{l({ eu: 'Aukeratu balio bera duten bi karta.', es: 'Elige dos cartas con el mismo valor.', ar: 'اختر بطاقتين لهما القيمة نفسها.' })}</span>}

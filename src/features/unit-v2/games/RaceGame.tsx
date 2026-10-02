@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { MathText } from '../../../components/MathText'
 import { fraction, toLatex, type AnswerCheck } from '../math/fraction'
 import { Car, GameTopbar, LevelPicker, ResultPanel } from './GameKit'
-import { formatTime, useGameText } from './gameHooks'
+import { formatTime, localLatex, useGameText } from './gameHooks'
 import type { GameProps } from './GamesHub'
 import {
     lapShare,
@@ -275,7 +275,7 @@ export function RaceGame<Error extends string>({ language, records, onResult, on
                                     key={`${option.latex}-${index}`}
                                 >
                                     <span className="fraction-v2-race-key" aria-hidden="true">{index + 1}</span>
-                                    <MathText text={`$${option.latex}$`} />
+                                    <MathText text={`$${localLatex(option.latex, language)}$`} />
                                 </button>
                             )
                         })}
@@ -359,9 +359,9 @@ export function RaceGame<Error extends string>({ language, records, onResult, on
                                     <li key={index}>
                                         <div className="fraction-v2-race-prompt small"><MathText text={l(mistake.question.prompt)} /></div>
                                         <p>
-                                            <span className="wrong"><MathText text={`$${mistake.chosen.latex}$`} /></span>
+                                            <span className="wrong"><MathText text={`$${localLatex(mistake.chosen.latex, language)}$`} /></span>
                                             <span aria-hidden="true">→</span>
-                                            <span className="right"><MathText text={`$${mistake.question.options.find((option) => option.correct)!.latex}$`} /></span>
+                                            <span className="right"><MathText text={`$${localLatex(mistake.question.options.find((option) => option.correct)!.latex, language)}$`} /></span>
                                         </p>
                                         <p>{l(rules.errorTip(mistake.chosen.error))}</p>
                                     </li>

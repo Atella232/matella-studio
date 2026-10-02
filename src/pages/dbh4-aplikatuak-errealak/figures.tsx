@@ -503,7 +503,7 @@ export function RealsHeroArt() {
     const map = lineMap(-1, 3.5, 70, 350, 190)
     return (
         <div className="reals-v2-hero-art" aria-hidden="true">
-            <svg viewBox="0 0 420 270" role="presentation">
+            <svg viewBox="0 0 420 270" role="presentation" direction="ltr">
                 <rect x="16" y="18" width="388" height="228" rx="26" fill="var(--card, #fffcf6)" stroke="var(--ink, #1d2733)" strokeWidth="2.4" />
                 <RealAxis map={map} labels={false} minor={2} />
                 <rect x={map.x(0)} y={map.y - 70} width={70} height={70} fill="var(--blue-tint, #dde7f7)" stroke="var(--ink, #1d2733)" strokeWidth="2" />

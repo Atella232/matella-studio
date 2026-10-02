@@ -44,3 +44,6 @@ export function formatTime(ms: number): string {
 export function nowMs(): number {
     return Date.now()
 }
+
+/** Option and card formulas are shared by the three languages: Arabic writes the decimal point instead of the comma */
+export const localLatex = (latex: string, language: string) => (language === 'ar' ? latex.replace(/\{,\}/g, '.') : latex)

@@ -163,11 +163,18 @@
     transform: scaleX(-1);
 }
 
-/* Formulas always read left to right, also in Arabic */
-.fraction-v2 .math-text,
+/* Formulas always read left to right, also in Arabic; the sentence around them keeps the page's direction */
+.fraction-v2 .math-text .math-token,
 .fraction-v2 .katex {
     direction: ltr;
     unicode-bidi: isolate;
+}
+
+/* A wide formula scrolls inside itself: in an Arabic box its overflow to the right could not be reached */
+.fraction-v2 .math-text .math-token.display {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .fraction-v2 .math-text .math-token.inline,

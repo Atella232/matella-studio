@@ -298,13 +298,14 @@ export function ZoomTool(props: LabToolProps) {
                         aria-label={`${segment}`}
                     />
                 ))}
-                <RealAxis map={map} step={width / 10} labelEvery={10} arabic={props.language === 'ar'} fontSize={16} />
-                {Array.from({ length: 9 }, (_, index) => <text key={index} x={map.x0 + (index + 1) * segmentWidth} y={map.y + 28} textAnchor="middle" fontSize={13} fill={MUTED}>{index + 1}</text>)}
-                <text x={map.x0} y={map.y + 28} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{fmt(low)}</text>
-                <text x={map.x1} y={map.y + 28} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{fmt(low + width)}</text>
+                <RealAxis map={map} step={width / 10} labels={false} />
+                {/* The digit each segment adds, in its middle: tapping a segment chooses that digit */}
+                {Array.from({ length: 10 }, (_, segment) => <text key={segment} x={map.x0 + (segment + 0.5) * segmentWidth} y={map.y + 26} textAnchor="middle" fontSize={17} fill={MUTED} pointerEvents="none">{segment}</text>)}
+                <text x={map.x0} y={map.y + 52} textAnchor="middle" fontSize={18} fontWeight={700} fill={INK}>{fmt(low)}</text>
+                <text x={map.x1} y={map.y + 52} textAnchor="middle" fontSize={18} fontWeight={700} fill={INK}>{fmt(low + width)}</text>
                 <LinePoint map={map} value={target.value} name={target.label} />
                 {state.digits.length >= ZOOM_LEVELS && <text x={320} y={160} textAnchor="middle" fontSize={15} fill={GREEN} fontWeight={700}>{local(props.language, `${target.label} ≈ ${(Math.floor(target.value * 10 ** ZOOM_LEVELS) / 10 ** ZOOM_LEVELS).toFixed(ZOOM_LEVELS)}…`)}</text>}
-                <text x={320} y={24} textAnchor="middle" fontSize={14} fill={MUTED}>{`× ${10 ** state.digits.length}`}</text>
+                <text x={320} y={24} textAnchor="middle" fontSize={16} fill={MUTED}>{`× ${10 ** state.digits.length}`}</text>
             </svg>
         </ToolFrame>
     )
