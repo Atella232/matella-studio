@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readProportionAnswer } from './answers'
 import { proportionChallenges, proportionDiagnostic, proportionExerciseBank, proportionPractice } from './content'
 import { ProportionHeroArt } from './figures'
+import { ProportionLaboratory } from './lab'
+import { proportionLabChallengeIds, proportionLabToolForTopic, proportionLabTools } from './lab/labTools'
 import { proportionStages, proportionTopics } from './lessons'
 
 const proportzionaltasunaUnit: UnitDefinition = {
@@ -24,6 +26,12 @@ const proportzionaltasunaUnit: UnitDefinition = {
     guidedPractice: proportionPractice,
     exerciseBank: proportionExerciseBank,
     challenges: proportionChallenges,
+    lab: {
+        description: { eu: `${proportionLabTools.length} tresna proportzionaltasuna ukitzeko: arrazoiak, proportzioak, sailkapena, taulak, unitatera laburtzea, ehunekoak eta beherapenak, erronkekin.`, es: `${proportionLabTools.length} herramientas para tocar la proporcionalidad: razones, proporciones, clasificación, tablas, reducción a la unidad, porcentajes y rebajas, con retos.`, ar: `${proportionLabTools.length} أدوات للمس التناسب: النسب والتناسبات والتصنيف والجداول والإرجاع إلى الوحدة والنسب المئوية والتخفيضات، مع تحديات.` },
+        progressIds: proportionLabChallengeIds,
+        toolForTopic: proportionLabToolForTopic,
+        render: (props) => <ProportionLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (6,24 edo 6.24). Ehunekoetan, idatzi % ikurraren aurreko zenbakia.', es: 'Escribe un número, con coma o con punto (6,24 o 6.24). En los porcentajes, escribe el número que va delante del %.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (6.24). وفي النسب المئوية اكتب العدد الذي يسبق ٪.' },
         defaultForm: 'any',
