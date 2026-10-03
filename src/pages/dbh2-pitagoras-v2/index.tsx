@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readFiguresAnswer } from '../dbh1-figurak-v2/answers'
 import { pythagorasChallenges, pythagorasDiagnostic, pythagorasExerciseBank, pythagorasPractice } from './content'
 import { PythagorasHeroArt } from './figures'
+import { PythagorasGames } from './games'
+import { PYTHAGORAS_GAME_RECORDS_KEY, pythagorasGameProgressIds } from './games/info'
 import { PythagorasLaboratory } from './lab'
 import { pythagorasLabChallengeIds, pythagorasLabToolForTopic, pythagorasLabTools } from './lab/labTools'
 import { pythagorasStages, pythagorasTopics } from './lessons'
@@ -31,6 +33,12 @@ const pitagorasUnit: UnitDefinition = {
         progressIds: pythagorasLabChallengeIds,
         toolForTopic: pythagorasLabToolForTopic,
         render: (props) => <PythagorasLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: pythagorasGameProgressIds,
+        recordsKey: PYTHAGORAS_GAME_RECORDS_KEY,
+        render: (props) => <PythagorasGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (5,83 edo 5.83), unitaterik gabe. Erroa zehatza ez denean, hurbildu ariketak esaten duen bezala.', es: 'Escribe un número, con coma o con punto (5,83 o 5.83), sin la unidad. Si la raíz no es exacta, aproxima como diga el ejercicio.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (5.83) دون الوحدة. وإذا لم يكن الجذر دقيقًا فقرّب كما يطلب التمرين.' },
