@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readFiguresAnswer } from './answers'
 import { figuresChallenges, figuresDiagnostic, figuresExerciseBank, figuresPractice } from './content'
 import { FiguresHeroArt } from './figures'
+import { FiguresLaboratory } from './lab'
+import { figuresLabChallengeIds, figuresLabToolForTopic, figuresLabTools } from './lab/labTools'
 import { figuresStages, figuresTopics } from './lessons'
 
 const figurakUnit: UnitDefinition = {
@@ -24,6 +26,12 @@ const figurakUnit: UnitDefinition = {
     guidedPractice: figuresPractice,
     exerciseBank: figuresExerciseBank,
     challenges: figuresChallenges,
+    lab: {
+        description: { eu: `${figuresLabTools.length} tresna irudi lauak ukitzeko: poligonoak, lauzak, triangeluak eta haien zentroak, laukiak, zirkunferentziak, sektoreak eta L formako irudiak, erronkekin.`, es: `${figuresLabTools.length} herramientas para tocar las figuras planas: polígonos, baldosas, triángulos y sus centros, cuadriláteros, circunferencias, sectores y figuras en L, con retos.`, ar: `${figuresLabTools.length} أدوات للمس الأشكال المستوية: المضلعات والبلاط والمثلثات ومراكزها والرباعيات والدوائر والقطاعات والأشكال L، مع تحديات.` },
+        progressIds: figuresLabChallengeIds,
+        toolForTopic: figuresLabToolForTopic,
+        render: (props) => <FiguresLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (18,84 edo 18.84). Angeluetan, gradu-kopurua bakarrik (° gabe ere bai). Erabili π ≈ 3,14.', es: 'Escribe un número, con coma o con punto (18,84 o 18.84). En los ángulos, solo los grados (también sin °). Usa π ≈ 3,14.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (18.84). وفي الزوايا اكتب عدد الدرجات فقط (ويمكن دون °). استعمل π ≈ 3.14.' },
         defaultForm: 'any',
