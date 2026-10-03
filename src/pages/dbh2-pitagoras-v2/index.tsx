@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readFiguresAnswer } from '../dbh1-figurak-v2/answers'
 import { pythagorasChallenges, pythagorasDiagnostic, pythagorasExerciseBank, pythagorasPractice } from './content'
 import { PythagorasHeroArt } from './figures'
+import { PythagorasLaboratory } from './lab'
+import { pythagorasLabChallengeIds, pythagorasLabToolForTopic, pythagorasLabTools } from './lab/labTools'
 import { pythagorasStages, pythagorasTopics } from './lessons'
 
 const pitagorasUnit: UnitDefinition = {
@@ -24,6 +26,12 @@ const pitagorasUnit: UnitDefinition = {
     guidedPractice: pythagorasPractice,
     exerciseBank: pythagorasExerciseBank,
     challenges: pythagorasChallenges,
+    lab: {
+        description: { eu: `${pythagorasLabTools.length} tresna triangelu angeluzuzena ukitzeko: aldeetako karratuak, triangeluak sailkatu, hipotenusa eta katetoak, irudi lauetako triangelu ezkutatua, kordak eta ukitzaileak, kaxaren diagonala eta sareko distantziak, erronkekin.`, es: `${pythagorasLabTools.length} herramientas para tocar el triángulo rectángulo: cuadrados sobre los lados, clasificar triángulos, hipotenusa y catetos, el triángulo escondido en las figuras planas, cuerdas y tangentes, la diagonal de la caja y distancias en la cuadrícula, con retos.`, ar: `${pythagorasLabTools.length} أدوات للمس المثلث القائم: المربعات على الأضلاع، وتصنيف المثلثات، والوتر والضلعان القائمان، والمثلث المخفي في الأشكال المستوية، والأوتار والمماسات، وقطر الصندوق، والمسافات على الشبكة، مع تحديات.` },
+        progressIds: pythagorasLabChallengeIds,
+        toolForTopic: pythagorasLabToolForTopic,
+        render: (props) => <PythagorasLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (5,83 edo 5.83), unitaterik gabe. Erroa zehatza ez denean, hurbildu ariketak esaten duen bezala.', es: 'Escribe un número, con coma o con punto (5,83 o 5.83), sin la unidad. Si la raíz no es exacta, aproxima como diga el ejercicio.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (5.83) دون الوحدة. وإذا لم يكن الجذر دقيقًا فقرّب كما يطلب التمرين.' },
         defaultForm: 'any',
