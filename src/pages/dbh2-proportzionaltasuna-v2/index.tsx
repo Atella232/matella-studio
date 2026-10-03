@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readProportionAnswer } from '../dbh1-proportzionaltasuna-v2/answers'
 import { proportionDbh2Challenges, proportionDbh2Diagnostic, proportionDbh2ExerciseBank, proportionDbh2Practice } from './content'
 import { ProportionDbh2HeroArt } from './figures'
+import { ProportionDbh2Games } from './games'
+import { PROPORTION_DBH2_GAME_RECORDS_KEY, proportionDbh2GameProgressIds } from './games/info'
 import { ProportionDbh2Laboratory } from './lab'
 import { proportionDbh2LabChallengeIds, proportionDbh2LabToolForTopic, proportionDbh2LabTools } from './lab/labTools'
 import { proportionDbh2Stages, proportionDbh2Topics } from './lessons'
@@ -31,6 +33,12 @@ const proportzionaltasunaDbh2Unit: UnitDefinition = {
         progressIds: proportionDbh2LabChallengeIds,
         toolForTopic: proportionDbh2LabToolForTopic,
         render: (props) => <ProportionDbh2Laboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: proportionDbh2GameProgressIds,
+        recordsKey: PROPORTION_DBH2_GAME_RECORDS_KEY,
+        render: (props) => <ProportionDbh2Games {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (10,8 edo 10.8). Ehunekoetan, idatzi % ikurraren aurreko zenbakia.', es: 'Escribe un número, con coma o con punto (10,8 o 10.8). En los porcentajes, escribe el número que va delante del %.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (10.8). وفي النسب المئوية اكتب العدد الذي يسبق ٪.' },
