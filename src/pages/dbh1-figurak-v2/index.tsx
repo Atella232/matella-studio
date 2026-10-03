@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readFiguresAnswer } from './answers'
 import { figuresChallenges, figuresDiagnostic, figuresExerciseBank, figuresPractice } from './content'
 import { FiguresHeroArt } from './figures'
+import { FiguresGames } from './games'
+import { FIGURES_GAME_RECORDS_KEY, figuresGameProgressIds } from './games/info'
 import { FiguresLaboratory } from './lab'
 import { figuresLabChallengeIds, figuresLabToolForTopic, figuresLabTools } from './lab/labTools'
 import { figuresStages, figuresTopics } from './lessons'
@@ -31,6 +33,12 @@ const figurakUnit: UnitDefinition = {
         progressIds: figuresLabChallengeIds,
         toolForTopic: figuresLabToolForTopic,
         render: (props) => <FiguresLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: figuresGameProgressIds,
+        recordsKey: FIGURES_GAME_RECORDS_KEY,
+        render: (props) => <FiguresGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (18,84 edo 18.84). Angeluetan, gradu-kopurua bakarrik (° gabe ere bai). Erabili π ≈ 3,14.', es: 'Escribe un número, con coma o con punto (18,84 o 18.84). En los ángulos, solo los grados (también sin °). Usa π ≈ 3,14.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (18.84). وفي الزوايا اكتب عدد الدرجات فقط (ويمكن دون °). استعمل π ≈ 3.14.' },
