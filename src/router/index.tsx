@@ -21,6 +21,7 @@ const ZatigarritasunaDBH1Page = lazy(() => import('../pages/dbh1-zatigarritasuna
 const HamartarrakDBH1Page = lazy(() => import('../pages/dbh1-hamartarrak-v2').then((module) => ({ default: module.HamartarrakIntroPage })))
 const ProportzionaltasunaDBH1Page = lazy(() => import('../pages/dbh1-proportzionaltasuna-v2').then((module) => ({ default: module.ProportzionaltasunaIntroPage })))
 const ProportzionaltasunaDBH2Page = lazy(() => import('../pages/dbh2-proportzionaltasuna-v2').then((module) => ({ default: module.ProportzionaltasunaDbh2IntroPage })))
+const PitagorasDBH2Page = lazy(() => import('../pages/dbh2-pitagoras-v2').then((module) => ({ default: module.PitagorasIntroPage })))
 const FigurakDBH1Page = lazy(() => import('../pages/dbh1-figurak-v2').then((module) => ({ default: module.FigurakIntroPage })))
 const ZatikiakDBH1Page = lazy(() => import('../pages/dbh1-zatikiak-v2').then((module) => ({ default: module.ZatikiakIntroPage })))
 const AljebraDBH1Page = lazy(() => import('../pages/dbh1-aljebra-v2').then((module) => ({ default: module.AljebraIntroPage })))
@@ -121,6 +122,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/dbh2/proporcionalidad/*',
                         element: <ProportzionaltasunaDBH2Page />,
+                    },
+                    // Teorema de Pitágoras de 2º ESO: unidad V2, gestiona sus propias secciones por URL
+                    {
+                        path: 'matematika/dbh2/teorema-pitagoras/*',
+                        element: <PitagorasDBH2Page />,
                     },
                     // Figuras planas de 1º ESO: unidad V2, gestiona sus propias secciones por URL
                     {
