@@ -55,7 +55,7 @@ export const courses: Course[] = [
       { id: 'numeros-enteros', name: 'Números Enteros', nameEu: 'Zenbaki Osoak', nameAr: 'الأعداد الصحيحة', icon: '±', active: true },
       { id: 'divisibilidad', name: 'Divisibilidad', nameEu: 'Zatigarritasuna', nameAr: 'القابلية للقسمة', icon: '➗', active: true },
       { id: 'zatikiak', name: 'Fracciones', nameEu: 'Zatikiak', nameAr: 'الكسور', icon: '½', active: true },
-      { id: 'proporcionalidad', name: 'Proporcionalidad y Porcentajes', nameEu: 'Proportzionaltasuna eta Ehunekoak', nameAr: 'التناسب والنسب المئوية', icon: '📈' },
+      { id: 'proporcionalidad', name: 'Proporcionalidad y Porcentajes', nameEu: 'Proportzionaltasuna eta Ehunekoak', nameAr: 'التناسب والنسب المئوية', icon: '📈', active: true },
       { id: 'algebra', name: 'Álgebra', nameEu: 'Aljebra', nameAr: 'الجبر', icon: '🔤', active: true },
       { id: 'ekuazioak', name: 'Ecuaciones', nameEu: 'Ekuazioak', nameAr: 'المعادلات', icon: '⚖️', active: true },
       { id: 'teorema-pitagoras', name: 'Teorema de Pitágoras', nameEu: 'Pitagorasen Teorema', nameAr: 'نظرية فيثاغورس', icon: '📐' },

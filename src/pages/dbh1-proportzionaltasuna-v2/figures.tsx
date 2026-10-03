@@ -26,12 +26,12 @@ const num = (language: UnitLanguage, text: string) => (language === 'ar' ? text.
 /** A percentage as each language writes it */
 const pct = (language: UnitLanguage, value: string) => (language === 'eu' ? `% ${num(language, value)}` : language === 'ar' ? `${num(language, value)}٪` : `${value} %`)
 
-function Caption({ y, language, text }: { y: number; language: UnitLanguage; text: LocalizedText }) {
+export function Caption({ y, language, text }: { y: number; language: UnitLanguage; text: LocalizedText }) {
     return <Label x={360} y={y} textAnchor="middle" fontSize={15} fill={MUTED}>{pick(language, text)}</Label>
 }
 
 /** An arc arrow over (or under) two cells with its label */
-function Hop({ x1, x2, y, label, color = STAGE, below = false, rise = 26 }: { x1: number; x2: number; y: number; label: string; color?: string; below?: boolean; rise?: number }) {
+export function Hop({ x1, x2, y, label, color = STAGE, below = false, rise = 26 }: { x1: number; x2: number; y: number; label: string; color?: string; below?: boolean; rise?: number }) {
     const tip = below ? y + rise : y - rise
     return (
         <g>
@@ -43,7 +43,7 @@ function Hop({ x1, x2, y, label, color = STAGE, below = false, rise = 26 }: { x1
 }
 
 /** A two-row table: a heading cell and the values; returns nothing but the drawing */
-function ValueTable({ x, y, cell = 64, heads, rows, language, highlight = [] }: { x: number; y: number; cell?: number; heads: LocalizedText[]; rows: string[][]; language: UnitLanguage; highlight?: number[] }) {
+export function ValueTable({ x, y, cell = 64, heads, rows, language, highlight = [] }: { x: number; y: number; cell?: number; heads: LocalizedText[]; rows: string[][]; language: UnitLanguage; highlight?: number[] }) {
     const head = 150
     return (
         <g>
@@ -158,7 +158,7 @@ export function DirectTableFigure({ language }: { language: UnitLanguage }) {
 
 /* ---------- 5. Reduction to the unit ---------- */
 
-function Steps({ language, rows, operations, colors }: { language: UnitLanguage; rows: Array<[string, string]>; operations: string[]; colors: string[] }) {
+export function Steps({ language, rows, operations, colors }: { language: UnitLanguage; rows: Array<[string, string]>; operations: string[]; colors: string[] }) {
     const x = 160
     return (
         <g>
@@ -284,7 +284,7 @@ export function PercentGridFigure({ language }: { language: UnitLanguage }) {
 /* ---------- Percentage bars ---------- */
 
 /** A bar for the whole (100 %) with a coloured share, marks and labels */
-function PercentBar({ y, share, color = STAGE, left, right, whole = 100 }: { y: number; share: number; color?: string; left: ReactNode; right?: ReactNode; whole?: number }) {
+export function PercentBar({ y, share, color = STAGE, left, right, whole = 100 }: { y: number; share: number; color?: string; left: ReactNode; right?: ReactNode; whole?: number }) {
     const x = 90
     const width = 540 * (whole / 100)
     return (
