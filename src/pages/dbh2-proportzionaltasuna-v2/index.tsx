@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readProportionAnswer } from '../dbh1-proportzionaltasuna-v2/answers'
 import { proportionDbh2Challenges, proportionDbh2Diagnostic, proportionDbh2ExerciseBank, proportionDbh2Practice } from './content'
 import { ProportionDbh2HeroArt } from './figures'
+import { ProportionDbh2Laboratory } from './lab'
+import { proportionDbh2LabChallengeIds, proportionDbh2LabToolForTopic, proportionDbh2LabTools } from './lab/labTools'
 import { proportionDbh2Stages, proportionDbh2Topics } from './lessons'
 
 const proportzionaltasunaDbh2Unit: UnitDefinition = {
@@ -24,6 +26,12 @@ const proportzionaltasunaDbh2Unit: UnitDefinition = {
     guidedPractice: proportionDbh2Practice,
     exerciseBank: proportionDbh2ExerciseBank,
     challenges: proportionDbh2Challenges,
+    lab: {
+        description: { eu: `${proportionDbh2LabTools.length} tresna: taula eta grafikoa, proportzionaltasun konposatuaren makina, banaketak, ehunekoak, ehuneko kateatuak eta interesa, erronkekin.`, es: `${proportionDbh2LabTools.length} herramientas: tabla y gráfica, máquina de proporcionalidad compuesta, repartos, porcentajes, porcentajes encadenados e interés, con retos.`, ar: `${proportionDbh2LabTools.length} أدوات: الجدول والرسم، وآلة التناسب المركّب، والتوزيعات، والنسب المئوية، والنسب المتتالية، والفائدة، مع تحديات.` },
+        progressIds: proportionDbh2LabChallengeIds,
+        toolForTopic: proportionDbh2LabToolForTopic,
+        render: (props) => <ProportionDbh2Laboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (10,8 edo 10.8). Ehunekoetan, idatzi % ikurraren aurreko zenbakia.', es: 'Escribe un número, con coma o con punto (10,8 o 10.8). En los porcentajes, escribe el número que va delante del %.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (10.8). وفي النسب المئوية اكتب العدد الذي يسبق ٪.' },
         defaultForm: 'any',
