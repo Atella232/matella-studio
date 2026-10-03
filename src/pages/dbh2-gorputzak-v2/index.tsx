@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readSolidsAnswer } from './answers'
 import { solidsChallenges, solidsDiagnostic, solidsExerciseBank, solidsPractice } from './content'
 import { SolidsHeroArt } from './figures'
+import { SolidsGames } from './games'
+import { SOLIDS_GAME_RECORDS_KEY, solidsGameProgressIds } from './games/info'
 import { SolidsLaboratory } from './lab'
 import { solidsLabChallengeIds, solidsLabToolForTopic, solidsLabTools } from './lab/labTools'
 import { solidsStages, solidsTopics } from './lessons'
@@ -31,6 +33,12 @@ const gorputzakUnit: UnitDefinition = {
         progressIds: solidsLabChallengeIds,
         toolForTopic: solidsLabToolForTopic,
         render: (props) => <SolidsLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: solidsGameProgressIds,
+        recordsKey: SOLIDS_GAME_RECORDS_KEY,
+        render: (props) => <SolidsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (188,4 edo 188.4), unitaterik gabe. Erabili π ≈ 3,14.', es: 'Escribe un número, con coma o con punto (188,4 o 188.4), sin la unidad. Usa π ≈ 3,14.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (188.4) دون الوحدة. استعمل π ≈ 3.14.' },
