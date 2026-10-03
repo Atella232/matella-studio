@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readSolidsAnswer } from './answers'
 import { solidsChallenges, solidsDiagnostic, solidsExerciseBank, solidsPractice } from './content'
 import { SolidsHeroArt } from './figures'
+import { SolidsLaboratory } from './lab'
+import { solidsLabChallengeIds, solidsLabToolForTopic, solidsLabTools } from './lab/labTools'
 import { solidsStages, solidsTopics } from './lessons'
 
 const gorputzakUnit: UnitDefinition = {
@@ -24,6 +26,12 @@ const gorputzakUnit: UnitDefinition = {
     guidedPractice: solidsPractice,
     exerciseBank: solidsExerciseBank,
     challenges: solidsChallenges,
+    lab: {
+        description: { eu: `${solidsLabTools.length} tresna gorputzak ukitzeko: prismak eta piramideak, bost poliedro erregularrak, kaxa eta haren garapena, piramidearen apotema, zilindroa, konoa eta esfera, depositua litrotan eta bolumenak konparatzeko, erronkekin.`, es: `${solidsLabTools.length} herramientas para tocar los cuerpos: prismas y pirámides, los cinco poliedros regulares, la caja y su desarrollo, la apotema de la pirámide, cilindro, cono y esfera, el depósito en litros y comparar volúmenes, con retos.`, ar: `${solidsLabTools.length} أدوات للمس الأجسام: المناشير والأهرامات، ومتعددات الأوجه المنتظمة الخمسة، والصندوق ونشره، وعامد الهرم، والأسطوانة والمخروط والكرة، والخزان باللترات، ومقارنة الحجوم، مع تحديات.` },
+        progressIds: solidsLabChallengeIds,
+        toolForTopic: solidsLabToolForTopic,
+        render: (props) => <SolidsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (188,4 edo 188.4), unitaterik gabe. Erabili π ≈ 3,14.', es: 'Escribe un número, con coma o con punto (188,4 o 188.4), sin la unidad. Usa π ≈ 3,14.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (188.4) دون الوحدة. استعمل π ≈ 3.14.' },
         defaultForm: 'any',

@@ -72,6 +72,20 @@ export function camera(cx: number, cy: number, scale: number, theta = -0.5, phi 
     }
 }
 
+/** A camera that fits these points inside the box [x0, y0] – [x1, y1], scale at most `maxScale` */
+export function fitCamera(list: V3[], [x0, y0, x1, y1]: [number, number, number, number], maxScale = Infinity, theta = -0.5, phi = 0.36): Camera {
+    const unit = camera(0, 0, 1, theta, phi)
+    const projected = list.map((p) => unit.at(p))
+    const xs = projected.map(([x]) => x)
+    const ys = projected.map(([, y]) => y)
+    const [minX, maxX, minY, maxY] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)]
+    const scale = Math.min((x1 - x0) / Math.max(maxX - minX, 1e-6), (y1 - y0) / Math.max(maxY - minY, 1e-6), maxScale)
+    return camera((x0 + x1) / 2 - scale * (minX + maxX) / 2, (y0 + y1) / 2 - scale * (minY + maxY) / 2, scale, theta, phi)
+}
+
+/** Points that bound a round body: its circles (as rings) and, for a sphere, its outline */
+export const roundHull = (r: number, bottom: number, top: number, rTop = r): V3[] => [...ring(24, r, bottom), ...ring(24, rTop, top), [0, top, 0]]
+
 export interface Face {
     vertices: number[]
     normal: V3
