@@ -20,6 +20,7 @@ const ZatigarritasunaDBH1Page = lazy(() => import('../pages/dbh1-zatigarritasuna
 
 const HamartarrakDBH1Page = lazy(() => import('../pages/dbh1-hamartarrak-v2').then((module) => ({ default: module.HamartarrakIntroPage })))
 const ProportzionaltasunaDBH1Page = lazy(() => import('../pages/dbh1-proportzionaltasuna-v2').then((module) => ({ default: module.ProportzionaltasunaIntroPage })))
+const FigurakDBH1Page = lazy(() => import('../pages/dbh1-figurak-v2').then((module) => ({ default: module.FigurakIntroPage })))
 const ZatikiakDBH1Page = lazy(() => import('../pages/dbh1-zatikiak-v2').then((module) => ({ default: module.ZatikiakIntroPage })))
 const AljebraDBH1Page = lazy(() => import('../pages/dbh1-aljebra-v2').then((module) => ({ default: module.AljebraIntroPage })))
 const GeometriaDBH1Page = lazy(() => import('../pages/dbh1-geometria-v2').then((module) => ({ default: module.GeometriaIntroPage })))
@@ -114,6 +115,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/dbh1/proporcionalidad/*',
                         element: <ProportzionaltasunaDBH1Page />,
+                    },
+                    // Figuras planas de 1º ESO: unidad V2, gestiona sus propias secciones por URL
+                    {
+                        path: 'matematika/dbh1/figuras-planas/*',
+                        element: <FigurakDBH1Page />,
                     },
                     // Estadística de 1º ESO: unidad V2, gestiona sus propias secciones por URL
                     {
