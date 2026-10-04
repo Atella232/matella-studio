@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from './answers'
 import { statisticsChallenges, statisticsDiagnostic, statisticsExerciseBank, statisticsPractice } from './content'
 import { StatisticsHeroArt } from './figures'
+import { StatisticsLaboratory } from './lab'
+import { statisticsLabChallengeIds, statisticsLabToolForTopic, statisticsLabTools } from './lab/labTools'
 import { statisticsStages, statisticsTopics } from './lessons'
 
 const estatistikaUnit: UnitDefinition = {
@@ -24,6 +26,12 @@ const estatistikaUnit: UnitDefinition = {
     guidedPractice: statisticsPractice,
     exerciseBank: statisticsExerciseBank,
     challenges: statisticsChallenges,
+    lab: {
+        description: { eu: `${statisticsLabTools.length} tresna datuekin jolasteko: maiztasun metatuak, histograma eta poligonoak, ehunekoetatik sektoreetara, taula baten batez bestekoa, mediana eta moda, kutxa-diagrama eta bi dadoren taula, erronkekin.`, es: `${statisticsLabTools.length} herramientas para jugar con los datos: frecuencias acumuladas, histograma y polígonos, de porcentajes a sectores, media, mediana y moda de una tabla, diagrama de caja y la tabla de dos dados, con retos.`, ar: `${statisticsLabTools.length} أدوات للعب بالبيانات: التكرارات المتجمّعة، والمدرّج والمضلّعات، ومن النسب إلى القطاعات، ومتوسط الجدول ووسيطه ومنواله، ومخطط الصندوق، وجدول النردين، مع تحديات.` },
+        progressIds: statisticsLabChallengeIds,
+        toolForTopic: statisticsLabToolForTopic,
+        render: (props) => <StatisticsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat edo zatiki bat: 18, 1,8 edo 3/8. Ehunekoetan eta graduetan, zenbakia bakarrik.', es: 'Escribe un número o una fracción: 18, 1,8 o 3/8. En porcentajes y grados, solo el número.', ar: 'اكتب عددًا أو كسرًا: 18 أو 1.8 أو 3/8. وفي النسب المئوية والدرجات اكتب العدد فقط.' },
         defaultForm: 'any',
