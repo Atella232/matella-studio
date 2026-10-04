@@ -61,7 +61,7 @@ export const courses: Course[] = [
       { id: 'teorema-pitagoras', name: 'Teorema de Pitágoras', nameEu: 'Pitagorasen Teorema', nameAr: 'نظرية فيثاغورس', icon: '📐', active: true },
       { id: 'cuerpos-geometricos', name: 'Cuerpos Geométricos', nameEu: 'Gorputz Geometrikoak', nameAr: 'الأجسام الهندسية', icon: '🔲', active: true },
       { id: 'funciones', name: 'Funciones', nameEu: 'Funtzioak', nameAr: 'الدوال', icon: '📈', active: true },
-      { id: 'estadistica-probabilidad', name: 'Estadística y Probabilidad', nameEu: 'Estatistika eta Probabilitatea', nameAr: 'الإحصاء والاحتمالات', icon: '📊' },
+      { id: 'estadistica-probabilidad', name: 'Estadística y Probabilidad', nameEu: 'Estatistika eta Probabilitatea', nameAr: 'الإحصاء والاحتمالات', icon: '📊', active: true },
     ]
   },
   {
