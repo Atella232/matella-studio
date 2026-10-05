@@ -97,7 +97,7 @@ export const courses: Course[] = [
     color: '#d9502e',
     topics: [
       { id: 'numeros-reales', name: 'Números Reales', nameEu: 'Zenbaki Errealak', nameAr: 'الأعداد الحقيقية', icon: '∞', active: true },
-      { id: 'proporcionalidad', name: 'Proporcionalidad', nameEu: 'Proportzionaltasuna', nameAr: 'التناسب', icon: '⚖️' },
+      { id: 'proporcionalidad', name: 'Proporcionalidad', nameEu: 'Proportzionaltasuna', nameAr: 'التناسب', icon: '⚖️', active: true },
       { id: 'polinomios', name: 'Polinomios', nameEu: 'Polinomioak', nameAr: 'متعددات الحدود', icon: '🔤' },
       { id: 'ecuaciones-sistemas', name: 'Ecuaciones y Sistemas', nameEu: 'Ekuazioak eta Sistemak', nameAr: 'المعادلات والأنظمة', icon: '📝' },
       { id: 'areas-volumenes', name: 'Perímetros, Áreas y Volúmenes', nameEu: 'Perimetroak, Azalerak eta Bolumenak', nameAr: 'المحيطات والمساحات والأحجام', icon: '📦' },
