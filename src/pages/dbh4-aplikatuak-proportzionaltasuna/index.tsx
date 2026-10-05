@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readMoneyAnswer } from './answers'
 import { proportionDbh4ApChallenges, proportionDbh4ApDiagnostic, proportionDbh4ApExerciseBank, proportionDbh4ApPractice } from './content'
 import { ProportionDbh4ApHeroArt } from './figures'
+import { ProportionDbh4ApGames } from './games'
+import { PROPORTION_DBH4AP_GAME_RECORDS_KEY, proportionDbh4ApGameProgressIds } from './games/info'
 import { ProportionDbh4ApLaboratory } from './lab'
 import { proportionDbh4ApLabChallengeIds, proportionDbh4ApLabToolForTopic, proportionDbh4ApLabTools } from './lab/labTools'
 import { proportionDbh4ApStages, proportionDbh4ApTopics } from './lessons'
@@ -31,6 +33,12 @@ const proportzionaltasunaDbh4ApUnit: UnitDefinition = {
         progressIds: proportionDbh4ApLabChallengeIds,
         toolForTopic: proportionDbh4ApLabToolForTopic,
         render: (props) => <ProportionDbh4ApLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: proportionDbh4ApGameProgressIds,
+        recordsKey: PROPORTION_DBH4AP_GAME_RECORDS_KEY,
+        render: (props) => <ProportionDbh4ApGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (27,75 edo 27.75). Ehunekoetan, idatzi % ikurraren aurreko zenbakia; dirua, zentimoetara biribilduta.', es: 'Escribe un número, con coma o con punto (27,75 o 27.75). En los porcentajes, escribe el número que va delante del %; el dinero, redondeado a los céntimos.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (27.75). وفي النسب المئوية اكتب العدد الذي يسبق ٪؛ والمال مقرّبًا إلى السنتات.' },
