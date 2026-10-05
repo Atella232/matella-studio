@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readMoneyAnswer } from './answers'
 import { proportionDbh4ApChallenges, proportionDbh4ApDiagnostic, proportionDbh4ApExerciseBank, proportionDbh4ApPractice } from './content'
 import { ProportionDbh4ApHeroArt } from './figures'
+import { ProportionDbh4ApLaboratory } from './lab'
+import { proportionDbh4ApLabChallengeIds, proportionDbh4ApLabToolForTopic, proportionDbh4ApLabTools } from './lab/labTools'
 import { proportionDbh4ApStages, proportionDbh4ApTopics } from './lessons'
 
 const proportzionaltasunaDbh4ApUnit: UnitDefinition = {
@@ -24,6 +26,12 @@ const proportzionaltasunaDbh4ApUnit: UnitDefinition = {
     guidedPractice: proportionDbh4ApPractice,
     exerciseBank: proportionDbh4ApExerciseBank,
     challenges: proportionDbh4ApChallenges,
+    lab: {
+        description: { eu: `${proportionDbh4ApLabTools.length} tresna: magnitudeen sailkatzailea, proportzionaltasun konposatuaren makina, banaketak, ehuneko kateatuak, interes bakuna eta konposatua, nahasketak, mugikariak eta txorrotak, erronkekin.`, es: `${proportionDbh4ApLabTools.length} herramientas: clasificador de magnitudes, máquina de proporcionalidad compuesta, repartos, porcentajes encadenados, interés simple y compuesto, mezclas, móviles y grifos, con retos.`, ar: `${proportionDbh4ApLabTools.length} أدوات: مصنّف المقادير، وآلة التناسب المركّب، والتوزيعات، والنسب المتتالية، والفائدة البسيطة والمركّبة، والخلائط، والمتحركات، والصنابير، مع تحديات.` },
+        progressIds: proportionDbh4ApLabChallengeIds,
+        toolForTopic: proportionDbh4ApLabToolForTopic,
+        render: (props) => <ProportionDbh4ApLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (27,75 edo 27.75). Ehunekoetan, idatzi % ikurraren aurreko zenbakia; dirua, zentimoetara biribilduta.', es: 'Escribe un número, con coma o con punto (27,75 o 27.75). En los porcentajes, escribe el número que va delante del %; el dinero, redondeado a los céntimos.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (27.75). وفي النسب المئوية اكتب العدد الذي يسبق ٪؛ والمال مقرّبًا إلى السنتات.' },
         defaultForm: 'any',
