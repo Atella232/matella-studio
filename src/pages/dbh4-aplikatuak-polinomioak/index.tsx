@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { polynomialsChallenges, polynomialsDiagnostic, polynomialsExerciseBank, polynomialsPractice } from './content'
 import { PolynomialsHeroArt } from './figures'
+import { PolynomialsLaboratory } from './lab'
+import { polynomialsLabChallengeIds, polynomialsLabToolForTopic, polynomialsLabTools } from './lab/labTools'
 import { polynomialsStages, polynomialsTopics } from './lessons'
 
 const polinomioakUnit: UnitDefinition = {
@@ -23,6 +25,12 @@ const polinomioakUnit: UnitDefinition = {
     guidedPractice: polynomialsPractice,
     exerciseBank: polynomialsExerciseBank,
     challenges: polynomialsChallenges,
+    lab: {
+        description: { eu: `${polynomialsLabTools.length} tresna: zenbaki-makina, fitxa aljebraikoak, biderketaren azalera, identitateak, Ruffiniren taula, erroen bila eta faktore komuna, erronkekin.`, es: `${polynomialsLabTools.length} herramientas: máquina de números, fichas algebraicas, área del producto, identidades, tabla de Ruffini, caza de raíces y factor común, con retos.`, ar: `${polynomialsLabTools.length} أدوات: آلة الأعداد والبطاقات الجبرية ومساحة الجداء والمتطابقات وجدول روفيني والبحث عن الجذور والعامل المشترك، مع تحديات.` },
+        progressIds: polynomialsLabChallengeIds,
+        toolForTopic: polynomialsLabToolForTopic,
+        render: (props) => <PolynomialsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: −8, 22, 6,5 edo 13/2.', es: 'Escribe un número: −8, 22, 6,5 o 13/2.', ar: 'اكتب عددًا: ⁦−8⁩ أو 22 أو 6.5 أو 13/2.' },
         defaultForm: 'any',
