@@ -240,7 +240,7 @@ export function PrismAreaFigure({ language }: { language: UnitLanguage }) {
 /* ---------- 5. Area of a pyramid: the apothem ---------- */
 
 export function PyramidAreaFigure({ language }: { language: UnitLanguage }) {
-    const cam = camera(180, 270, 16)
+    const cam = camera(180, 256, 16)
     const pyramid = pyramidVertices(4, 5 * Math.SQRT2, 12, Math.PI / 4)
     const centre: V3 = [0, 0, 0]
     const foot: V3 = [-5, 0, 0]
