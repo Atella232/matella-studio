@@ -19,7 +19,8 @@ export interface SolidsLabTool extends LabToolInfo {
     stage: SolidsStageId
 }
 
-const say = (eu: string, es: string, ar: string) => ({ eu, es, ar })
+/** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
+const say = (eu: string, es: string, ar: string) => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, Math.round(value)))
 
 /** The square root of a whole number when it is whole, otherwise null */

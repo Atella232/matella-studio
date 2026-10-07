@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readSolidsAnswer } from '../dbh2-gorputzak-v2/answers'
 import { areasVolumesChallenges, areasVolumesDiagnostic, areasVolumesExerciseBank, areasVolumesPractice } from './content'
 import { AreasVolumesHeroArt } from './figures'
+import { AreasVolumesLaboratory } from './lab'
+import { areasVolumesLabChallengeIds, areasVolumesLabToolForTopic, areasVolumesLabTools } from './lab/labTools'
 import { areasVolumesStages, areasVolumesTopics } from './lessons'
 
 const areakUnit: UnitDefinition = {
@@ -24,6 +26,12 @@ const areakUnit: UnitDefinition = {
     guidedPractice: areasVolumesPractice,
     exerciseBank: areasVolumesExerciseBank,
     challenges: areasVolumesChallenges,
+    lab: {
+        description: { eu: `${areasVolumesLabTools.length} tresna: poligonoen angeluak, triangeluak sailkatzea, arkuak, Pitagoras eta triangelu ezkutuak, poligono erregularrak, sektoreak, kaxa, piramidea, biraketa-gorputzak, bolumenak eta gorputz konposatuak, erronkekin.`, es: `${areasVolumesLabTools.length} herramientas: ángulos de polígonos, clasificar triángulos, arcos, Pitágoras y triángulos escondidos, polígonos regulares, sectores, la caja, la pirámide, cuerpos de revolución, volúmenes y cuerpos compuestos, con retos.`, ar: `${areasVolumesLabTools.length} أداة: زوايا المضلعات، وتصنيف المثلثات، والأقواس، وفيثاغورس والمثلثات المخفية، والمضلعات المنتظمة، والقطاعات، والصندوق، والهرم، والأجسام الدورانية، والحجوم، والأجسام المركّبة، مع تحديات.` },
+        progressIds: areasVolumesLabChallengeIds,
+        toolForTopic: areasVolumesLabToolForTopic,
+        render: (props) => <AreasVolumesLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (188,4 edo 188.4), unitaterik gabe. Erabili π ≈ 3,14.', es: 'Escribe un número, con coma o con punto (188,4 o 188.4), sin la unidad. Usa π ≈ 3,14.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (188.4) دون الوحدة. استعمل π ≈ 3.14.' },
         defaultForm: 'any',
