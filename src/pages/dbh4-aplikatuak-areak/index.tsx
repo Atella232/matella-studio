@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readSolidsAnswer } from '../dbh2-gorputzak-v2/answers'
 import { areasVolumesChallenges, areasVolumesDiagnostic, areasVolumesExerciseBank, areasVolumesPractice } from './content'
 import { AreasVolumesHeroArt } from './figures'
+import { AreasVolumesGames } from './games'
+import { AREAS_VOLUMES_GAME_RECORDS_KEY, areasVolumesGameProgressIds } from './games/info'
 import { AreasVolumesLaboratory } from './lab'
 import { areasVolumesLabChallengeIds, areasVolumesLabToolForTopic, areasVolumesLabTools } from './lab/labTools'
 import { areasVolumesStages, areasVolumesTopics } from './lessons'
@@ -31,6 +33,12 @@ const areakUnit: UnitDefinition = {
         progressIds: areasVolumesLabChallengeIds,
         toolForTopic: areasVolumesLabToolForTopic,
         render: (props) => <AreasVolumesLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: areasVolumesGameProgressIds,
+        recordsKey: AREAS_VOLUMES_GAME_RECORDS_KEY,
+        render: (props) => <AreasVolumesGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (188,4 edo 188.4), unitaterik gabe. Erabili π ≈ 3,14.', es: 'Escribe un número, con coma o con punto (188,4 o 188.4), sin la unidad. Usa π ≈ 3,14.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (188.4) دون الوحدة. استعمل π ≈ 3.14.' },
