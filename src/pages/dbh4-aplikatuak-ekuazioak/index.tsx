@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { equationsSystemsChallenges, equationsSystemsDiagnostic, equationsSystemsExerciseBank, equationsSystemsPractice } from './content'
 import { EquationsSystemsHeroArt } from './figures'
+import { EquationsSystemsGames } from './games'
+import { EQUATIONS_SYSTEMS_GAME_RECORDS_KEY, equationsSystemsGameProgressIds } from './games/info'
 import { EquationsSystemsLaboratory } from './lab'
 import { equationsSystemsLabChallengeIds, equationsSystemsLabToolForTopic, equationsSystemsLabTools } from './lab/labTools'
 import { equationsSystemsStages, equationsSystemsTopics } from './lessons'
@@ -30,6 +32,12 @@ const ekuazioakUnit: UnitDefinition = {
         progressIds: equationsSystemsLabChallengeIds,
         toolForTopic: equationsSystemsLabToolForTopic,
         render: (props) => <EquationsSystemsLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: equationsSystemsGameProgressIds,
+        recordsKey: EQUATIONS_SYSTEMS_GAME_RECORDS_KEY,
+        render: (props) => <EquationsSystemsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: −4, 11, 1,78 edo 2/3.', es: 'Escribe un número: −4, 11, 1,78 o 2/3.', ar: 'اكتب عددًا: ⁦−4⁩ أو 11 أو 1.78 أو 2/3.' },
