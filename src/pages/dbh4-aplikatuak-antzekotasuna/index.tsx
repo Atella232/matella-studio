@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readSimilarityAnswer } from './answers'
 import { similarityChallenges, similarityDiagnostic, similarityExerciseBank, similarityPractice } from './content'
 import { SimilarityHeroArt } from './figures'
+import { SimilarityLaboratory } from './lab'
+import { similarityLabChallengeIds, similarityLabToolForTopic, similarityLabTools } from './lab/labTools'
 import { similarityStages, similarityTopics } from './lessons'
 
 const antzekotasunaUnit: UnitDefinition = {
@@ -24,6 +26,12 @@ const antzekotasunaUnit: UnitDefinition = {
     guidedPractice: similarityPractice,
     exerciseBank: similarityExerciseBank,
     challenges: similarityChallenges,
+    lab: {
+        description: { eu: `${similarityLabTools.length} tresna: proportzioak, zuzenki bat zatitzea, Tales posizioa, laukizuzen antzekoak, homotezia, karratuak eta kuboak haztea, mapak eta itzalak, erronkekin.`, es: `${similarityLabTools.length} herramientas: proporciones, dividir un segmento, posición de Tales, rectángulos semejantes, homotecia, hacer crecer cuadrados y cubos, mapas y sombras, con retos.`, ar: `${similarityLabTools.length} أدوات: التناسبات، وتقسيم قطعة، ووضع طاليس، والمستطيلات المتشابهة، والتحاكي، وتكبير المربعات والمكعبات، والخرائط، والظلال، مع تحديات.` },
+        progressIds: similarityLabChallengeIds,
+        toolForTopic: similarityLabToolForTopic,
+        render: (props) => <SimilarityLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (7,5 edo 7.5), unitaterik gabe. Eskala batean, idatzi n (1:n).', es: 'Escribe un número, con coma o con punto (7,5 o 7.5), sin la unidad. En una escala, escribe n (1:n).', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (7.5) دون الوحدة. وفي المقياس اكتب n من ‎1:n.' },
         defaultForm: 'any',
