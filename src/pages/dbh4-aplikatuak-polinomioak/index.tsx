@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { polynomialsChallenges, polynomialsDiagnostic, polynomialsExerciseBank, polynomialsPractice } from './content'
 import { PolynomialsHeroArt } from './figures'
+import { PolynomialsGames } from './games'
+import { POLYNOMIALS_GAME_RECORDS_KEY, polynomialsGameProgressIds } from './games/info'
 import { PolynomialsLaboratory } from './lab'
 import { polynomialsLabChallengeIds, polynomialsLabToolForTopic, polynomialsLabTools } from './lab/labTools'
 import { polynomialsStages, polynomialsTopics } from './lessons'
@@ -30,6 +32,12 @@ const polinomioakUnit: UnitDefinition = {
         progressIds: polynomialsLabChallengeIds,
         toolForTopic: polynomialsLabToolForTopic,
         render: (props) => <PolynomialsLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: polynomialsGameProgressIds,
+        recordsKey: POLYNOMIALS_GAME_RECORDS_KEY,
+        render: (props) => <PolynomialsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: −8, 22, 6,5 edo 13/2.', es: 'Escribe un número: −8, 22, 6,5 o 13/2.', ar: 'اكتب عددًا: ⁦−8⁩ أو 22 أو 6.5 أو 13/2.' },
