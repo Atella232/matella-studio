@@ -1,1 +1,0 @@
-import{B as a}from"./LabKit-C8DyBvPQ.js";function n(e){const r=e.trim().replace(/(\d)\s+(?=\d)/g,"$1");return/\d\.\d{3}.*,/.test(r)?r.replace(/\.(?=\d{3})/g,""):r}function o(e){const r=a(e);if(!r)throw new Error(`Not a number: ${e}`);return r}export{o as d,n as r};
