@@ -21,6 +21,7 @@ const ZatigarritasunaDBH1Page = lazy(() => import('../pages/dbh1-zatigarritasuna
 const HamartarrakDBH1Page = lazy(() => import('../pages/dbh1-hamartarrak-v2').then((module) => ({ default: module.HamartarrakIntroPage })))
 const ProportzionaltasunaDBH1Page = lazy(() => import('../pages/dbh1-proportzionaltasuna-v2').then((module) => ({ default: module.ProportzionaltasunaIntroPage })))
 const ProportzionaltasunaDBH2Page = lazy(() => import('../pages/dbh2-proportzionaltasuna-v2').then((module) => ({ default: module.ProportzionaltasunaDbh2IntroPage })))
+const PolinomioakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-polinomioak').then((module) => ({ default: module.PolinomioakDbh4ApIntroPage })))
 const ProportzionaltasunaDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-proportzionaltasuna').then((module) => ({ default: module.ProportzionaltasunaDbh4ApIntroPage })))
 const PitagorasDBH2Page = lazy(() => import('../pages/dbh2-pitagoras-v2').then((module) => ({ default: module.PitagorasIntroPage })))
 const GorputzakDBH2Page = lazy(() => import('../pages/dbh2-gorputzak-v2').then((module) => ({ default: module.GorputzakIntroPage })))
@@ -195,6 +196,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/dbh4-aplikatuak/proporcionalidad/*',
                         element: <ProportzionaltasunaDBH4ApPage />,
+                    },
+                    // Polinomios de 4.º ESO (matemáticas aplicadas): unidad V2
+                    {
+                        path: 'matematika/dbh4-aplikatuak/polinomios/*',
+                        element: <PolinomioakDBH4ApPage />,
                     },
                     // Números reales y porcentajes de 4.º ESO (matemáticas académicas): unidad V2
                     {
