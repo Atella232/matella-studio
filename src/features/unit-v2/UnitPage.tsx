@@ -430,7 +430,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                         <span>{l({ eu: `${currentIndex + 1}. ikasgaia / ${unit.topics.length}`, es: `Lección ${currentIndex + 1} de ${unit.topics.length}`, ar: `الدرس ${currentIndex + 1} من ${unit.topics.length}` })}</span>
                     </div>
                     <h1 id="fraction-v2-lesson-title">{l(currentTopic.title)}</h1>
-                    <p className="fraction-v2-lesson-goal"><strong>{l({ eu: 'Helburua:', es: 'Objetivo:', ar: 'الهدف:' })}</strong> {l(currentTopic.goal)}</p>
+                    <p className="fraction-v2-lesson-goal"><strong>{l({ eu: 'Helburua:', es: 'Objetivo:', ar: 'الهدف:' })}</strong> <MathText text={l(currentTopic.goal)} /></p>
                     <p className="fraction-v2-lesson-body"><MathText text={l(currentTopic.explanation)} /></p>
                     {currentTopic.problem && (
                         <div className="fraction-v2-lesson-problem">
