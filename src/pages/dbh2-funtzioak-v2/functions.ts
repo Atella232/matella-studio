@@ -213,7 +213,7 @@ export interface GraphSpec {
     /** Straight lines y = mx + n across the whole box */
     lines?: Array<{ m: number; n: number; color?: GraphColor; dashed?: boolean; name?: string; at?: number }>
     /** Separate dots: the points of a discrete graph, or points to name */
-    points?: Array<{ at: Point; name?: string; color?: GraphColor; below?: boolean; left?: boolean }>
+    points?: Array<{ at: Point; name?: string; color?: GraphColor; below?: boolean; left?: boolean; hollow?: boolean }>
 }
 
 /** The value a graph's curve takes at x, in the units of the axes (null outside it) */

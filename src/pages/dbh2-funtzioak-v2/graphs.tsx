@@ -60,6 +60,7 @@ export function GraphFigure({ spec, language, maxHeight = 380 }: { spec: GraphSp
                             dx={point.left ? -9 : 9}
                             dy={point.below ? 20 : -9}
                             anchor={point.left ? 'end' : 'start'}
+                            hollow={point.hollow}
                         />
                     ))}
                 </g>
