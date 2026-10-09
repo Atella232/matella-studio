@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readSimilarityAnswer } from './answers'
 import { similarityChallenges, similarityDiagnostic, similarityExerciseBank, similarityPractice } from './content'
 import { SimilarityHeroArt } from './figures'
+import { SimilarityGames } from './games'
+import { SIMILARITY_GAME_RECORDS_KEY, similarityGameProgressIds } from './games/info'
 import { SimilarityLaboratory } from './lab'
 import { similarityLabChallengeIds, similarityLabToolForTopic, similarityLabTools } from './lab/labTools'
 import { similarityStages, similarityTopics } from './lessons'
@@ -31,6 +33,12 @@ const antzekotasunaUnit: UnitDefinition = {
         progressIds: similarityLabChallengeIds,
         toolForTopic: similarityLabToolForTopic,
         render: (props) => <SimilarityLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: similarityGameProgressIds,
+        recordsKey: SIMILARITY_GAME_RECORDS_KEY,
+        render: (props) => <SimilarityGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (7,5 edo 7.5), unitaterik gabe. Eskala batean, idatzi n (1:n).', es: 'Escribe un número, con coma o con punto (7,5 o 7.5), sin la unidad. En una escala, escribe n (1:n).', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (7.5) دون الوحدة. وفي المقياس اكتب n من ‎1:n.' },
