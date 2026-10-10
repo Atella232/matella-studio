@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { powersChallenges, powersDiagnostic, powersExerciseBank, powersPractice } from './content'
 import { PowersHeroArt } from './figures'
+import { PowersGames } from './games'
+import { POWERS_GAME_RECORDS_KEY, powersGameProgressIds } from './games/info'
 import { PowersLaboratory } from './lab'
 import { powersLabChallengeIds, powersLabToolForTopic, powersLabTools } from './lab/labTools'
 import { powersStages, powersTopics } from './lessons'
@@ -34,6 +36,12 @@ const potentziakUnit: UnitDefinition = {
         progressIds: powersLabChallengeIds,
         toolForTopic: powersLabToolForTopic,
         render: (props) => <PowersLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: powersGameProgressIds,
+        recordsKey: POWERS_GAME_RECORDS_KEY,
+        render: (props) => <PowersGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Emaitza erradikal bat bada, eskatzen den zenbakia bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si el resultado es un radical, solo el número que se pide.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كانت النتيجة جذرًا فاكتب العدد المطلوب فقط.' },
