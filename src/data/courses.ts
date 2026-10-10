@@ -118,7 +118,7 @@ export const courses: Course[] = [
     color: '#b23a6f',
     topics: [
       { id: 'numeros-reales', name: 'Números Reales y Porcentajes', nameEu: 'Zenbaki Errealak eta Ehunekoak', nameAr: 'الأعداد الحقيقية والنسب المئوية', icon: '∞', active: true },
-      { id: 'potencias-radicales', name: 'Potencias, Radicales y Logaritmos', nameEu: 'Berreturak, Erroak eta Logaritmoak', nameAr: 'القوى والجذور واللوغاريتمات', icon: '√' },
+      { id: 'potencias-radicales', name: 'Potencias, Radicales y Logaritmos', nameEu: 'Berreturak, Erroak eta Logaritmoak', nameAr: 'القوى والجذور واللوغاريتمات', icon: '√', active: true },
       { id: 'polinomios-fracciones', name: 'Polinomios y Fracciones Algebraicas', nameEu: 'Polinomioak eta Zatiki Aljebraikoak', nameAr: 'متعددات الحدود والكسور الجبرية', icon: '🔤' },
       { id: 'ecuaciones-inecuaciones', name: 'Ecuaciones e Inecuaciones', nameEu: 'Ekuazioak eta Inekuazioak', nameAr: 'المعادلات والمتراجحات', icon: '⚖️' },
       { id: 'sistemas', name: 'Sistemas de Ecuaciones', nameEu: 'Ekuazio-sistemak', nameAr: 'أنظمة المعادلات', icon: '📝' },
