@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { statisticsChallenges, statisticsDiagnostic, statisticsExerciseBank, statisticsPractice } from './content'
 import { StatisticsHeroArt } from './figures'
+import { StatisticsGames } from './games'
+import { STATISTICS_GAME_RECORDS_KEY, statisticsGameProgressIds } from './games/info'
 import { StatisticsLaboratory } from './lab'
 import { statisticsLabChallengeIds, statisticsLabToolForTopic, statisticsLabTools } from './lab/labTools'
 import { statisticsStages, statisticsTopics } from './lessons'
@@ -35,6 +37,12 @@ const estatistikaUnit: UnitDefinition = {
         progressIds: statisticsLabChallengeIds,
         toolForTopic: statisticsLabToolForTopic,
         render: (props) => <StatisticsLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: statisticsGameProgressIds,
+        recordsKey: STATISTICS_GAME_RECORDS_KEY,
+        render: (props) => <StatisticsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat edo zatiki bat: 18, 1,57 edo 3/8. Ehunekoetan eta graduetan, zenbakia bakarrik.', es: 'Escribe un número o una fracción: 18, 1,57 o 3/8. En porcentajes y grados, solo el número.', ar: 'اكتب عددًا أو كسرًا: 18 أو 1.57 أو 3/8. وفي النسب المئوية والدرجات اكتب العدد فقط.' },
