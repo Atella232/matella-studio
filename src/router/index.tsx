@@ -24,6 +24,7 @@ const ProportzionaltasunaDBH2Page = lazy(() => import('../pages/dbh2-proportzion
 const AntzekotasunaDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-antzekotasuna').then((module) => ({ default: module.AntzekotasunaDbh4ApIntroPage })))
 const FuntzioakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-funtzioak').then((module) => ({ default: module.FuntzioakDbh4ApIntroPage })))
 const GrafikoaDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-grafikoa').then((module) => ({ default: module.GrafikoaDbh4ApIntroPage })))
+const EstatistikaDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-estatistika').then((module) => ({ default: module.EstatistikaDbh4ApIntroPage })))
 const AreakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-areak').then((module) => ({ default: module.AreakDbh4ApIntroPage })))
 const EkuazioakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-ekuazioak').then((module) => ({ default: module.EkuazioakDbh4ApIntroPage })))
 const PolinomioakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-polinomioak').then((module) => ({ default: module.PolinomioakDbh4ApIntroPage })))
@@ -231,6 +232,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/dbh4-aplikatuak/grafica-funcion/*',
                         element: <GrafikoaDBH4ApPage />,
+                    },
+                    // Estadística y probabilidad de 4.º ESO (matemáticas aplicadas): unidad V2
+                    {
+                        path: 'matematika/dbh4-aplikatuak/estadistica-probabilidad/*',
+                        element: <EstatistikaDBH4ApPage />,
                     },
                     // Números reales y porcentajes de 4.º ESO (matemáticas académicas): unidad V2
                     {

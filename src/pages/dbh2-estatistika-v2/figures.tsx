@@ -16,11 +16,11 @@ import { COLORS, INK, LINE, MUTED, num, PAPER, SECOND, STAGE, STAGE_TINT } from 
 
 const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
 const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language, text)
-function Caption({ x = 360, y, language, text, color = MUTED, size = 15 }: { x?: number; y: number; language: UnitLanguage; text: LocalizedText; color?: string; size?: number }) {
+export function Caption({ x = 360, y, language, text, color = MUTED, size = 15 }: { x?: number; y: number; language: UnitLanguage; text: LocalizedText; color?: string; size?: number }) {
     return <Label x={x} y={y} textAnchor="middle" fontSize={size} fontWeight={700} fill={color}>{pick(language, text)}</Label>
 }
 
-function Formula({ x, y, children, color = INK, size = 17, anchor = 'middle' }: { x: number; y: number; children: ReactNode; color?: string; size?: number; anchor?: 'start' | 'middle' | 'end' }) {
+export function Formula({ x, y, children, color = INK, size = 17, anchor = 'middle' }: { x: number; y: number; children: ReactNode; color?: string; size?: number; anchor?: 'start' | 'middle' | 'end' }) {
     return <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={700} fill={color} direction="ltr">{children}</text>
 }
 
@@ -36,12 +36,12 @@ export function Sub({ letter, index }: { letter: string; index: string }) {
 }
 
 /** x with a bar on top: the mean (the combining macron drifts in SVG fonts) */
-function XBar() {
+export function XBar() {
     return <tspan style={{ textDecoration: 'overline' }}>x</tspan>
 }
 
 /** A table of numbers: headers on top, a row per entry, an optional highlighted column */
-function Table({ x0, y0, columns, headers, rows, highlight, rowHeight = 30, language }: {
+export function Table({ x0, y0, columns, headers, rows, highlight, rowHeight = 30, language }: {
     x0: number
     y0: number
     columns: number[]

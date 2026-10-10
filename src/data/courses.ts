@@ -104,7 +104,7 @@ export const courses: Course[] = [
       { id: 'semejanza', name: 'Semejanza', nameEu: 'Antzekotasuna', nameAr: 'التشابه', icon: '📐', active: true },
       { id: 'funciones', name: 'Funciones', nameEu: 'Funtzioak', nameAr: 'الدوال', icon: '📈', active: true },
       { id: 'grafica-funcion', name: 'Gráfica de una Función', nameEu: 'Funtzio baten Grafikoa', nameAr: 'التمثيل البياني للدالة', icon: '〰️', active: true },
-      { id: 'estadistica-probabilidad', name: 'Estadística y Probabilidad', nameEu: 'Estatistika eta Probabilitatea', nameAr: 'الإحصاء والاحتمالات', icon: '📊' },
+      { id: 'estadistica-probabilidad', name: 'Estadística y Probabilidad', nameEu: 'Estatistika eta Probabilitatea', nameAr: 'الإحصاء والاحتمالات', icon: '📊', active: true },
     ]
   },
   {
