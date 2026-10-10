@@ -62,7 +62,7 @@ export function LongDivisionFigure({ language }: { language: UnitLanguage }) {
 /* ---------- The Ruffini table ---------- */
 
 /** A Ruffini table: coefficients, the root on the left, the products and the bottom row */
-function RuffiniTable({ x, y, root, top, middle, bottom, cell = 64 }: { x: number; y: number; root: string; top: string[]; middle: string[]; bottom: string[]; cell?: number }) {
+export function RuffiniTable({ x, y, root, top, middle, bottom, cell = 64 }: { x: number; y: number; root: string; top: string[]; middle: string[]; bottom: string[]; cell?: number }) {
     const width = top.length * cell
     return (
         <g>
