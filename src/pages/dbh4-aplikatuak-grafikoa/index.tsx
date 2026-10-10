@@ -4,6 +4,8 @@ import { withGraphs } from '../dbh2-funtzioak-v2/withGraphs'
 import '../dbh2-funtzioak-v2/Functions.css'
 import { graphsChallenges, graphsDiagnostic, graphsExerciseBank, graphsPractice } from './content'
 import { GraphsHeroArt } from './figures'
+import { GraphsLaboratory } from './lab'
+import { graphsLabChallengeIds, graphsLabToolForTopic, graphsLabTools } from './lab/labTools'
 import { graphsStages, graphsTopics } from './lessons'
 
 const grafikoaUnit: UnitDefinition = {
@@ -25,6 +27,16 @@ const grafikoaUnit: UnitDefinition = {
     guidedPractice: withGraphs(graphsPractice),
     exerciseBank: graphsExerciseBank.map((section) => ({ ...section, items: withGraphs(section.items) })),
     challenges: withGraphs(graphsChallenges),
+    lab: {
+        description: {
+            eu: `${graphsLabTools.length} tresna: zuzena eta bere malda, puntu bat eta malda bat, bi zuzen, parabola eta bere erpina, parabola baten ebakidurak, hiperbola eta asintotak, erroak, esponentziala eta azalera handieneko laukizuzena, erronkekin.`,
+            es: `${graphsLabTools.length} herramientas: la recta y su pendiente, un punto y una pendiente, dos rectas, la parábola y su vértice, cortes de una parábola, la hipérbola y sus asíntotas, raíces, la exponencial y el rectángulo de área máxima, con retos.`,
+            ar: `${graphsLabTools.length} أدوات: المستقيم وميله، ونقطة وميل، ومستقيمان، والقطع المكافئ ورأسه، وتقاطعات قطع مكافئ، والقطع الزائد ومقارباه، والجذور، والدالة الأسية، والمستطيل ذو المساحة العظمى، مع تحديات.`
+        },
+        progressIds: graphsLabChallengeIds,
+        toolForTopic: graphsLabToolForTopic,
+        render: (props) => <GraphsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2, unitaterik gabe.', es: 'Escribe un número: 5, −3, 1,5 o 3/2, sin la unidad.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2، دون الوحدة.' },
         defaultForm: 'any',
