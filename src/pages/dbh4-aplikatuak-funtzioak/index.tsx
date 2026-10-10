@@ -4,6 +4,8 @@ import { withGraphs } from '../dbh2-funtzioak-v2/withGraphs'
 import '../dbh2-funtzioak-v2/Functions.css'
 import { functionsChallenges, functionsDiagnostic, functionsExerciseBank, functionsPractice } from './content'
 import { FunctionsHeroArt } from './figures'
+import { FunctionsGames } from './games'
+import { FUNCTIONS_GAME_RECORDS_KEY, functionsGameProgressIds } from './games/info'
 import { FunctionsLaboratory } from './lab'
 import { functionsLabChallengeIds, functionsLabToolForTopic, functionsLabTools } from './lab/labTools'
 import { functionsStages, functionsTopics } from './lessons'
@@ -36,6 +38,12 @@ const funtzioakUnit: UnitDefinition = {
         progressIds: functionsLabChallengeIds,
         toolForTopic: functionsLabToolForTopic,
         render: (props) => <FunctionsLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: functionsGameProgressIds,
+        recordsKey: FUNCTIONS_GAME_RECORDS_KEY,
+        render: (props) => <FunctionsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2, unitaterik gabe.', es: 'Escribe un número: 5, −3, 1,5 o 3/2, sin la unidad.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2، دون الوحدة.' },
