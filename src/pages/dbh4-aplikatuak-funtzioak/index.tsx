@@ -4,6 +4,8 @@ import { withGraphs } from '../dbh2-funtzioak-v2/withGraphs'
 import '../dbh2-funtzioak-v2/Functions.css'
 import { functionsChallenges, functionsDiagnostic, functionsExerciseBank, functionsPractice } from './content'
 import { FunctionsHeroArt } from './figures'
+import { FunctionsLaboratory } from './lab'
+import { functionsLabChallengeIds, functionsLabToolForTopic, functionsLabTools } from './lab/labTools'
 import { functionsStages, functionsTopics } from './lessons'
 
 const funtzioakUnit: UnitDefinition = {
@@ -25,6 +27,16 @@ const funtzioakUnit: UnitDefinition = {
     guidedPractice: withGraphs(functionsPractice),
     exerciseBank: functionsExerciseBank.map((section) => ({ ...section, items: withGraphs(section.items) })),
     challenges: withGraphs(functionsChallenges),
+    lab: {
+        description: {
+            eu: `${functionsLabTools.length} tresna: funtzioa ala ez, taulak eta formulak, izate-eremua eta ibiltartea, parabola baten ebakidurak, grafiko bat korritzea, BAT, funtzio periodikoak eta kartulinazko kutxa, erronkekin.`,
+            es: `${functionsLabTools.length} herramientas: función o no, tablas y fórmulas, dominio y recorrido, cortes de una parábola, recorrer una gráfica, T.V.M., funciones periódicas y la caja de cartulina, con retos.`,
+            ar: `${functionsLabTools.length} أدوات: دالة أم لا، والجداول والصيغ، والمجال والمدى، وتقاطعات قطع مكافئ، والتجوّل في رسم، ومعدل التغير، والدوال الدورية، وعلبة الورق المقوى، مع تحديات.`
+        },
+        progressIds: functionsLabChallengeIds,
+        toolForTopic: functionsLabToolForTopic,
+        render: (props) => <FunctionsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2, unitaterik gabe.', es: 'Escribe un número: 5, −3, 1,5 o 3/2, sin la unidad.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2، دون الوحدة.' },
         defaultForm: 'any',
