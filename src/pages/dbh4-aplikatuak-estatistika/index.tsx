@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { statisticsChallenges, statisticsDiagnostic, statisticsExerciseBank, statisticsPractice } from './content'
 import { StatisticsHeroArt } from './figures'
+import { StatisticsLaboratory } from './lab'
+import { statisticsLabChallengeIds, statisticsLabToolForTopic, statisticsLabTools } from './lab/labTools'
 import { statisticsStages, statisticsTopics } from './lessons'
 
 const estatistikaUnit: UnitDefinition = {
@@ -24,6 +26,16 @@ const estatistikaUnit: UnitDefinition = {
     guidedPractice: statisticsPractice,
     exerciseBank: statisticsExerciseBank,
     challenges: statisticsChallenges,
+    lab: {
+        description: {
+            eu: `${statisticsLabTools.length} tresna, erronkekin: tarteak, histograma, pertzentilak, biboteak eta atipikoak, bost datuen sakabanaketa, taula baten desbideratze tipikoa, hodeia eta erregresio-zuzena, gertaeren bildura, kutxa bateko bi atera eta kontingentzia-taula.`,
+            es: `${statisticsLabTools.length} herramientas con retos: intervalos, histograma, percentiles, bigotes y atípicos, la dispersión de cinco datos, la desviación típica de una tabla, la nube y la recta de regresión, la unión de sucesos, dos extracciones de una urna y la tabla de contingencia.`,
+            ar: `${statisticsLabTools.length} أدوات مع تحديات: الفئات، والمدرّج، والمئينات، والشاربان والشواذ، وتشتت خمسة بيانات، والانحراف المعياري لجدول، والسحابة ومستقيم الانحدار، واتحاد الأحداث، وسحبتان من جرّة، وجدول التوافق.`
+        },
+        progressIds: statisticsLabChallengeIds,
+        toolForTopic: statisticsLabToolForTopic,
+        render: (props) => <StatisticsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat edo zatiki bat: 18, 1,57 edo 3/8. Ehunekoetan eta graduetan, zenbakia bakarrik.', es: 'Escribe un número o una fracción: 18, 1,57 o 3/8. En porcentajes y grados, solo el número.', ar: 'اكتب عددًا أو كسرًا: 18 أو 1.57 أو 3/8. وفي النسب المئوية والدرجات اكتب العدد فقط.' },
         defaultForm: 'any',
