@@ -90,7 +90,8 @@ export function exactLog(base: FractionValue, value: FractionValue): FractionVal
     if (a <= 0 || a === 1 || b <= 0) return null
     const approximation = Math.log(b) / Math.log(a)
     for (let q = 1; q <= 6; q += 1) {
-        const p = Math.round(approximation * q)
+        // + 0 turns −0 into 0
+        const p = Math.round(approximation * q) + 0
         if (Math.abs(approximation * q - p) < 1e-9) return fraction(p, q)
     }
     return null

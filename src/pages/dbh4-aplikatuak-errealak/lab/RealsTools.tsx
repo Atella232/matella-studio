@@ -125,7 +125,7 @@ export function PowersTool(props: LabToolProps) {
                         </g>
                     )
                 })}
-                <Label x={8} y={14} fontSize={13} fill={MUTED}>{l({ eu: 'berretzailea', es: 'exponente', ar: 'الأس' })}</Label>
+                <Label x={8} y={17} fontSize={13} fill={MUTED}>{l({ eu: 'berretzailea', es: 'exponente', ar: 'الأس' })}</Label>
                 <Label x={632} y={136} textAnchor="end" fontSize={13} fill={MUTED}>{l({ eu: `ezkerretik eskuinera: ${base.label}-z zatitu`, es: `de izquierda a derecha: dividir entre ${base.label}`, ar: `من اليسار إلى اليمين: القسمة على ${base.label}` })}</Label>
             </svg>
         </ToolFrame>

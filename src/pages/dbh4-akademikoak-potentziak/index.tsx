@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { powersChallenges, powersDiagnostic, powersExerciseBank, powersPractice } from './content'
 import { PowersHeroArt } from './figures'
+import { PowersLaboratory } from './lab'
+import { powersLabChallengeIds, powersLabToolForTopic, powersLabTools } from './lab/labTools'
 import { powersStages, powersTopics } from './lessons'
 
 const potentziakUnit: UnitDefinition = {
@@ -23,6 +25,16 @@ const potentziakUnit: UnitDefinition = {
     guidedPractice: powersPractice,
     exerciseBank: powersExerciseBank,
     challenges: powersChallenges,
+    lab: {
+        description: {
+            eu: `${powersLabTools.length} tresna, erronkekin: berreturen eskailera, faktorizatzeko makina, idazkera zientifikoa, berretzaile zatikia, indize komuna, errotik faktoreak ateratzea, arrazionalizatzeko faktorea, konjokatua, logaritmoen eskailera eta oinarri-aldaketa.`,
+            es: `${powersLabTools.length} herramientas con retos: la escalera de potencias, la máquina de factorizar, la notación científica, el exponente fraccionario, el índice común, sacar factores de la raíz, el factor que racionaliza, el conjugado, la escalera de los logaritmos y el cambio de base.`,
+            ar: `${powersLabTools.length} أدوات مع تحديات: سُلّم القوى، وآلة التحليل، والترميز العلمي، والأس الكسري، والدليل المشترك، وإخراج العوامل من الجذر، وعامل الإنطاق، والمرافق، وسُلّم اللوغاريتمات، وتغيير الأساس.`
+        },
+        progressIds: powersLabChallengeIds,
+        toolForTopic: powersLabToolForTopic,
+        render: (props) => <PowersLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Emaitza erradikal bat bada, eskatzen den zenbakia bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si el resultado es un radical, solo el número que se pide.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كانت النتيجة جذرًا فاكتب العدد المطلوب فقط.' },
         defaultForm: 'any',
