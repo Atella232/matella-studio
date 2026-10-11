@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { polynomialsFractionsChallenges, polynomialsFractionsDiagnostic, polynomialsFractionsExerciseBank, polynomialsFractionsPractice } from './content'
 import { PolynomialsFractionsHeroArt } from './figures'
+import { PolynomialsFractionsLaboratory } from './lab'
+import { polynomialsFractionsLabChallengeIds, polynomialsFractionsLabToolForTopic, polynomialsFractionsLabTools } from './lab/labTools'
 import { polynomialsFractionsStages, polynomialsFractionsTopics } from './lessons'
 
 const polinomioakUnit: UnitDefinition = {
@@ -23,6 +25,16 @@ const polinomioakUnit: UnitDefinition = {
     guidedPractice: polynomialsFractionsPractice,
     exerciseBank: polynomialsFractionsExerciseBank,
     challenges: polynomialsFractionsChallenges,
+    lab: {
+        description: {
+            eu: `${polynomialsFractionsLabTools.length} tresna, erronkekin: biderketaren azalera, identitateak, Tartagliaren triangelua, Ruffiniren taula, parametroa duen hondarra, erroen bila, ax² + bx + c faktorizatzea, z.k.h. eta m.k.t., zatikiaren balioa, faktoreak ezabatzea, izendatzaile komuna eta bi txorrota.`,
+            es: `${polynomialsFractionsLabTools.length} herramientas con retos: el área del producto, las identidades, el triángulo de Tartaglia, la tabla de Ruffini, el resto con parámetro, la caza de raíces, factorizar ax² + bx + c, el m.c.d. y el m.c.m., el valor de una fracción, eliminar factores, el denominador común y dos grifos.`,
+            ar: `${polynomialsFractionsLabTools.length} أداة مع تحديات: مساحة الجداء، والمتطابقات، ومثلث تارتاليا، وجدول روفيني، والباقي بوسيط، والبحث عن الجذور، وتحليل ax² + bx + c، والقاسم والمضاعف المشترك، وقيمة الكسر، وحذف العوامل، والمقام المشترك، وصنبوران.`
+        },
+        progressIds: polynomialsFractionsLabChallengeIds,
+        toolForTopic: polynomialsFractionsLabToolForTopic,
+        render: (props) => <PolynomialsFractionsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Emaitza polinomio edo zatiki bat bada, eskatzen den zenbakia bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si el resultado es un polinomio o una fracción, solo el número que se pide.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كانت النتيجة حدودية أو كسرًا فاكتب العدد المطلوب فقط.' },
         defaultForm: 'any',

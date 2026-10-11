@@ -126,7 +126,8 @@ export function RootsTool(props: LabToolProps) {
             <button type="button" className="fraction-v2-secondary" onClick={() => setState((s) => chooseRootsPolynomial(s, s.polynomial))}>{l(say('Hasi berriro', 'Empezar de nuevo', 'ابدأ من جديد'))}</button>
         </>
     )
-    const latex = `${polynomialLatex(rootsPolynomials[state.polynomial])}=${factorizationLatex(state)}`
+    // P(x) is written above the candidates: the readout only shows how far the factorisation has gone
+    const latex = `P(x)=${factorizationLatex(state)}`
     const note = finished
         ? quotient.length > 2
             ? l(say('Bukatuta: zatidurak ez du erro osorik, ezin da gehiago deskonposatu zenbaki osoekin.', 'Terminado: el cociente no tiene raíces enteras, no se descompone más con enteros.', 'انتهى: ليس لخارج القسمة جذور صحيحة، فلا يُحلّل أكثر بالأعداد الصحيحة.'))
