@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { polynomialsFractionsChallenges, polynomialsFractionsDiagnostic, polynomialsFractionsExerciseBank, polynomialsFractionsPractice } from './content'
 import { PolynomialsFractionsHeroArt } from './figures'
+import { PolynomialsGames } from './games'
+import { POLYNOMIALS_GAME_RECORDS_KEY, polynomialsGameProgressIds } from './games/info'
 import { PolynomialsFractionsLaboratory } from './lab'
 import { polynomialsFractionsLabChallengeIds, polynomialsFractionsLabToolForTopic, polynomialsFractionsLabTools } from './lab/labTools'
 import { polynomialsFractionsStages, polynomialsFractionsTopics } from './lessons'
@@ -34,6 +36,12 @@ const polinomioakUnit: UnitDefinition = {
         progressIds: polynomialsFractionsLabChallengeIds,
         toolForTopic: polynomialsFractionsLabToolForTopic,
         render: (props) => <PolynomialsFractionsLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: polynomialsGameProgressIds,
+        recordsKey: POLYNOMIALS_GAME_RECORDS_KEY,
+        render: (props) => <PolynomialsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Emaitza polinomio edo zatiki bat bada, eskatzen den zenbakia bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si el resultado es un polinomio o una fracción, solo el número que se pide.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كانت النتيجة حدودية أو كسرًا فاكتب العدد المطلوب فقط.' },
