@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { systemsChallenges, systemsDiagnostic, systemsExerciseBank, systemsPractice } from './content'
 import { SystemsHeroArt } from './figures'
+import { SystemsGames } from './games'
+import { SYSTEMS_GAME_RECORDS_KEY, systemsGameProgressIds } from './games/info'
 import { SystemsLaboratory } from './lab'
 import { systemsLabChallengeIds, systemsLabToolForTopic, systemsLabTools } from './lab/labTools'
 import { systemsStages, systemsTopics } from './lessons'
@@ -34,6 +36,12 @@ const sistemakUnit: UnitDefinition = {
         progressIds: systemsLabChallengeIds,
         toolForTopic: systemsLabToolForTopic,
         render: (props) => <SystemsLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: systemsGameProgressIds,
+        recordsKey: SYSTEMS_GAME_RECORDS_KEY,
+        render: (props) => <SystemsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Ezezagun baten balioa, zenbat ebazpen edo puntu dauden, parametro bat… eskatzen dena bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. El valor de una incógnita, cuántas soluciones o puntos hay, un parámetro… solo lo que se pide.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. قيمة مجهول أو عدد الحلول أو النقاط أو وسيطًا… المطلوب فقط.' },
