@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { equationsInequalitiesChallenges, equationsInequalitiesDiagnostic, equationsInequalitiesExerciseBank, equationsInequalitiesPractice } from './content'
 import { EquationsInequalitiesHeroArt } from './figures'
+import { EquationsGames } from './games'
+import { EQUATIONS_GAME_RECORDS_KEY, equationsGameProgressIds } from './games/info'
 import { EquationsInequalitiesLaboratory } from './lab'
 import { equationsInequalitiesLabChallengeIds, equationsInequalitiesLabToolForTopic, equationsInequalitiesLabTools } from './lab/labTools'
 import { equationsInequalitiesStages, equationsInequalitiesTopics } from './lessons'
@@ -34,6 +36,12 @@ const ekuazioakUnit: UnitDefinition = {
         progressIds: equationsInequalitiesLabChallengeIds,
         toolForTopic: equationsInequalitiesLabToolForTopic,
         render: (props) => <EquationsInequalitiesLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: equationsGameProgressIds,
+        recordsKey: EQUATIONS_GAME_RECORDS_KEY,
+        render: (props) => <EquationsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Ebazpen bat, zenbat diren, tarte baten muturra… eskatzen dena bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Una solución, cuántas hay, el extremo de un intervalo… solo lo que se pide.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. حلًا أو عدد الحلول أو طرف مجال… المطلوب فقط.' },
