@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readSimilarityAnswer } from '../dbh4-aplikatuak-antzekotasuna/answers'
 import { areasSimilarityChallenges, areasSimilarityDiagnostic, areasSimilarityExerciseBank, areasSimilarityPractice } from './content'
 import { AreasSimilarityHeroArt } from './figures'
+import { AreasSimilarityGames } from './games'
+import { AREAS_SIMILARITY_GAME_RECORDS_KEY, areasSimilarityGameProgressIds } from './games/info'
 import { AreasSimilarityLaboratory } from './lab'
 import { areasSimilarityLabChallengeIds, areasSimilarityLabToolForTopic, areasSimilarityLabTools } from './lab/labTools'
 import { areasSimilarityStages, areasSimilarityTopics } from './lessons'
@@ -35,6 +37,12 @@ const areakUnit: UnitDefinition = {
         progressIds: areasSimilarityLabChallengeIds,
         toolForTopic: areasSimilarityLabToolForTopic,
         render: (props) => <AreasSimilarityLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: areasSimilarityGameProgressIds,
+        recordsKey: AREAS_SIMILARITY_GAME_RECORDS_KEY,
+        render: (props) => <AreasSimilarityGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (263,76 edo 263.76), unitaterik gabe. Erabili π ≈ 3,14.', es: 'Escribe un número, con coma o con punto (263,76 o 263.76), sin la unidad. Usa π ≈ 3,14.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (263.76) دون الوحدة. استعمل π ≈ 3.14.' },
