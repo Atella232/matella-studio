@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { equationsInequalitiesChallenges, equationsInequalitiesDiagnostic, equationsInequalitiesExerciseBank, equationsInequalitiesPractice } from './content'
 import { EquationsInequalitiesHeroArt } from './figures'
+import { EquationsInequalitiesLaboratory } from './lab'
+import { equationsInequalitiesLabChallengeIds, equationsInequalitiesLabToolForTopic, equationsInequalitiesLabTools } from './lab/labTools'
 import { equationsInequalitiesStages, equationsInequalitiesTopics } from './lessons'
 
 const ekuazioakUnit: UnitDefinition = {
@@ -23,6 +25,16 @@ const ekuazioakUnit: UnitDefinition = {
     guidedPractice: equationsInequalitiesPractice,
     exerciseBank: equationsInequalitiesExerciseBank,
     challenges: equationsInequalitiesChallenges,
+    lab: {
+        description: {
+            eu: `${equationsInequalitiesLabTools.length} tresna, erronkekin: formula orokorra, erroetatik ekuaziora, bikarratuaren bi t-ak, ebazpen faltsuen ehiza, berretzaileak elkartzen, inekuazioa zuzenean, bi tarifa, parabolaren zeinua, parabola eta zuzena, eta bi inekuazio batera.`,
+            es: `${equationsInequalitiesLabTools.length} herramientas con retos: la fórmula general, de las raíces a la ecuación, las dos t de la bicuadrada, la caza de soluciones falsas, los exponentes que se encuentran, la inecuación en la recta, dos tarifas, el signo de la parábola, parábola y recta, y dos inecuaciones a la vez.`,
+            ar: `${equationsInequalitiesLabTools.length} أدوات مع تحديات: القانون العام، ومن الجذرين إلى المعادلة، وقيمتا t، وصيد الحلول الزائفة، والأسّان يلتقيان، والمتراجحة على المستقيم، وتعرفتان، وإشارة القطع المكافئ، والقطع المكافئ والمستقيم، ومتراجحتان معًا.`
+        },
+        progressIds: equationsInequalitiesLabChallengeIds,
+        toolForTopic: equationsInequalitiesLabToolForTopic,
+        render: (props) => <EquationsInequalitiesLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Ebazpen bat, zenbat diren, tarte baten muturra… eskatzen dena bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Una solución, cuántas hay, el extremo de un intervalo… solo lo que se pide.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. حلًا أو عدد الحلول أو طرف مجال… المطلوب فقط.' },
         defaultForm: 'any',
