@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readSimilarityAnswer } from '../dbh4-aplikatuak-antzekotasuna/answers'
 import { areasSimilarityChallenges, areasSimilarityDiagnostic, areasSimilarityExerciseBank, areasSimilarityPractice } from './content'
 import { AreasSimilarityHeroArt } from './figures'
+import { AreasSimilarityLaboratory } from './lab'
+import { areasSimilarityLabChallengeIds, areasSimilarityLabToolForTopic, areasSimilarityLabTools } from './lab/labTools'
 import { areasSimilarityStages, areasSimilarityTopics } from './lessons'
 
 const areakUnit: UnitDefinition = {
@@ -24,6 +26,16 @@ const areakUnit: UnitDefinition = {
     guidedPractice: areasSimilarityPractice,
     exerciseBank: areasSimilarityExerciseBank,
     challenges: areasSimilarityChallenges,
+    lab: {
+        description: {
+            eu: `${areasSimilarityLabTools.length} tresna, erronkekin: poligono erregularra, sektorea eta koroa, segmentu zirkularra, piramidearen apotema, gorputz biribilak, bolumenak, gorputz konposatuak, Tales, katetoen proiekzioak, r bider hazi, kono-enborra eta eskalako maketa.`,
+            es: `${areasSimilarityLabTools.length} herramientas con retos: polígono regular, sector y corona, segmento circular, apotema de la pirámide, cuerpos redondos, volúmenes, cuerpos compuestos, Tales, proyecciones de los catetos, crecer r veces, tronco de cono y maqueta a escala.`,
+            ar: `${areasSimilarityLabTools.length} أداة مع تحديات: المضلع المنتظم، والقطاع والحلقة، والقطعة الدائرية، وعامد الهرم، والأجسام الدورانية، والحجوم، والأجسام المركّبة، وطاليس، ومسقطا الضلعين القائمين، والتكبير r مرة، وجذع المخروط، والمجسّم بمقياس.`
+        },
+        progressIds: areasSimilarityLabChallengeIds,
+        toolForTopic: areasSimilarityLabToolForTopic,
+        render: (props) => <AreasSimilarityLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (263,76 edo 263.76), unitaterik gabe. Erabili π ≈ 3,14.', es: 'Escribe un número, con coma o con punto (263,76 o 263.76), sin la unidad. Usa π ≈ 3,14.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (263.76) دون الوحدة. استعمل π ≈ 3.14.' },
         defaultForm: 'any',

@@ -76,7 +76,8 @@ function Board({ height, label, children }: { height: number; label: string; chi
 function Readout({ language, latex, note }: { language: string; latex: string; note: string }) {
     return (
         <>
-            <span className="fraction-v2-lab-readout-main"><MathText text={localLatex(language, `$${latex}$`)} /></span>
+            {/* Each \qquad part is its own formula, so a long readout wraps instead of scrolling */}
+            <span className="fraction-v2-lab-readout-main"><MathText text={localLatex(language, latex.split('\\qquad').map((part) => `$${part.trim()}$`).join('\u2003'))} /></span>
             <span className="fraction-v2-lab-readout-note">{note}</span>
         </>
     )
@@ -232,7 +233,7 @@ export function CompoundTool(props: LabToolProps) {
     const amount = thirds % 3 === 0 ? `${thirds / 3}\\pi` : `\\frac{${thirds}}{3}\\pi`
     const latex = compoundIsEmpty(state)
         ? 'V=0'
-        : `V=${parts.map((part) => partLatex(state, part)).join('+')}=${amount}${volume.exact ? '=' : '\\approx '}${tex(hundredthsText(volume.value))}`
+        : `V=${parts.map((part) => partLatex(state, part)).join('+')}\\qquad =${amount}${volume.exact ? '=' : '\\approx '}${tex(hundredthsText(volume.value))}`
     const pieces = parts.map((part) => `${hundredthsText(Math.round((314 * partThirds(state, part)) / 3))}`).join(' + ')
     const note = compoundIsEmpty(state)
         ? l(say('Gehitu zilindro bat edo mutur bat.', 'Añade un cilindro o un extremo.', 'أضف أسطوانة أو طرفًا.'))
