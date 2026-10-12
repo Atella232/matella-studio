@@ -121,7 +121,7 @@ export const courses: Course[] = [
       { id: 'potencias-radicales', name: 'Potencias, Radicales y Logaritmos', nameEu: 'Berreturak, Erroak eta Logaritmoak', nameAr: 'القوى والجذور واللوغاريتمات', icon: '√', active: true },
       { id: 'polinomios-fracciones', name: 'Polinomios y Fracciones Algebraicas', nameEu: 'Polinomioak eta Zatiki Aljebraikoak', nameAr: 'متعددات الحدود والكسور الجبرية', icon: '🔤', active: true },
       { id: 'ecuaciones-inecuaciones', name: 'Ecuaciones e Inecuaciones', nameEu: 'Ekuazioak eta Inekuazioak', nameAr: 'المعادلات والمتراجحات', icon: '⚖️', active: true },
-      { id: 'sistemas', name: 'Sistemas de Ecuaciones', nameEu: 'Ekuazio-sistemak', nameAr: 'أنظمة المعادلات', icon: '📝' },
+      { id: 'sistemas', name: 'Sistemas de Ecuaciones', nameEu: 'Ekuazio-sistemak', nameAr: 'أنظمة المعادلات', icon: '📝', active: true },
       { id: 'areas-volumenes-semejanza', name: 'Áreas, Volúmenes y Semejanza', nameEu: 'Azalerak, Bolumenak eta Antzekotasuna', nameAr: 'المساحات والأحجام والتشابه', icon: '📦' },
       { id: 'trigonometria', name: 'Trigonometría', nameEu: 'Trigonometria', nameAr: 'حساب المثلثات', icon: '📏' },
       { id: 'vectores-rectas', name: 'Vectores y Rectas', nameEu: 'Bektoreak eta Zuzenak', nameAr: 'المتجهات والمستقيمات', icon: '➡️' },

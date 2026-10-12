@@ -1,0 +1,236 @@
+import { fraction, type FractionValue } from '../../features/unit-v2/math/fraction.ts'
+import type { ChallengeItem, DiagnosticQuestion, ExerciseSection, LocalizedText, PracticeItem } from '../../features/unit-v2/types.ts'
+
+/* ==========================================================================
+   Sistemak · 4. DBH akademikoak — diagnostic, guided practice, exercise
+   bank and challenges, after Santillana 4.º Académicas unit 5 (−x + 3y =
+   −4 with 5x + y = 4, the brackets and denominators of activities 11 and
+   12, √(x − 2) = y + 2, 1/(x − y) + 3/x = 2, the half-planes x + 2y ≤ −1,
+   the coins, x + y = 27 with x² − y² = 81) and the systems of Anaya 4.º
+   Académicas unit 3 (x + 5y = 7, 3x − 5y = −26, 22x + 17y = 49, x − y = 15
+   with xy = 100, x² + y² = 41, x² + xy + y² = 21). Every closed answer is
+   a single number: one unknown of the solution, how many solutions or
+   whole points there are, a parameter, a vertex or an area.
+   ========================================================================== */
+
+/** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
+const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
+/** Same formula everywhere, decimal point in Arabic */
+const same = (value: string): LocalizedText => ({ eu: value, es: value, ar: value.replace(/\{,\}/g, '.') })
+const n = (value: number) => fraction(value)
+const f = (numerator: number, denominator: number) => fraction(numerator, denominator)
+const v = (text: string): FractionValue => {
+    const negative = text.startsWith('-')
+    const [whole, decimals = ''] = text.replace('-', '').split(',')
+    return fraction((negative ? -1 : 1) * Number(whole + decimals), 10 ** decimals.length)
+}
+
+/** «Solve the system …» followed by what to give */
+const solve = (system: string, ask: LocalizedText) => say(`Ebatzi ${system} sistema. ${ask.eu}`, `Resuelve el sistema ${system}. ${ask.es}`, `حل النظام ${system}. ${ask.ar}`)
+const X = say('Zenbat da x?', '¿Cuánto vale x?', 'كم تساوي x؟')
+const Y = say('Zenbat da y?', '¿Cuánto vale y?', 'كم تساوي y؟')
+const HOW_MANY = say('Zenbat ebazpen ditu?', '¿Cuántas soluciones tiene?', 'كم حلًّا له؟')
+const AS_FRACTION = say('Eman zatiki gisa.', 'Dalo como fracción.', 'اكتبه كسرًا.')
+const LATTICE = say('Zenbat puntu ditu eskualdeak koordenatu osoekin?', '¿Cuántos puntos de coordenadas enteras tiene la región?', 'كم نقطة إحداثياتها صحيحة في المنطقة؟')
+const AREA = say('Zenbat da eskualdearen azalera?', '¿Cuánto vale el área de la región?', 'كم مساحة المنطقة؟')
+const and = (first: LocalizedText, second: LocalizedText) => say(`${first.eu} ${second.eu}`, `${first.es} ${second.es}`, `${first.ar} ${second.ar}`)
+
+export const systemsDiagnostic: DiagnosticQuestion[] = [
+    {
+        id: 5301,
+        prompt: say('Puntu hauetako zein da $2x-y=5$ ekuazioaren ebazpena?', '¿Cuál de estos puntos es solución de $2x-y=5$?', 'أيّ هذه النقاط حل للمعادلة $2x-y=5$؟'),
+        options: [same('$(3,1)$'), same('$(1,3)$'), same('$(2,0)$')],
+        correctIndex: 0,
+        explanation: same('$2\\cdot 3-1=5$'),
+        topic: 'linear-equations'
+    },
+    {
+        id: 5302,
+        prompt: say('Bi zuzen paraleloek osatzen duten sistema…', 'Un sistema formado por dos rectas paralelas es…', 'النظام المكوّن من مستقيمين متوازيين…'),
+        options: [say('bateragarri determinatua', 'compatible determinado', 'متوافق محدد'), say('bateraezina', 'incompatible', 'غير متوافق'), say('bateragarri indeterminatua', 'compatible indeterminado', 'متوافق غير محدد')],
+        correctIndex: 1,
+        explanation: say('Ez dute puntu komunik: ebazpenik ez.', 'No tienen ningún punto común: no hay solución.', 'لا نقطة مشتركة بينهما: لا حل.'),
+        topic: 'graphic'
+    },
+    {
+        id: 5303,
+        prompt: say('$x+2y=3$ eta $2x+4y=6$ sistema…', 'El sistema $x+2y=3$, $2x+4y=6$ es…', 'النظام $x+2y=3$ و$2x+4y=6$…'),
+        options: [say('bateragarri determinatua', 'compatible determinado', 'متوافق محدد'), say('bateraezina', 'incompatible', 'غير متوافق'), say('bateragarri indeterminatua', 'compatible indeterminado', 'متوافق غير محدد')],
+        correctIndex: 2,
+        explanation: same('$\\frac{1}{2}=\\frac{2}{4}=\\frac{3}{6}$'),
+        topic: 'classify'
+    },
+    {
+        id: 5304,
+        prompt: say('$x=2y$ eta $x+y=9$ sisteman, zenbat da x?', 'En el sistema $x=2y$, $x+y=9$, ¿cuánto vale x?', 'في النظام $x=2y$ و$x+y=9$، كم تساوي x؟'),
+        options: [same('$6$'), same('$3$'), same('$9$')],
+        correctIndex: 0,
+        explanation: same('$2y+y=9\\ \\to\\ y=3\\ \\to\\ x=6$'),
+        topic: 'substitution'
+    },
+    {
+        id: 5305,
+        prompt: say('$3x+2y=7$ eta $5x-2y=9$ batzean ateratzen da…', 'Al sumar $3x+2y=7$ y $5x-2y=9$ sale…', 'بجمع $3x+2y=7$ و$5x-2y=9$ نحصل على…'),
+        options: [same('$8x+4y=16$'), same('$8x=16$'), same('$2x=2$')],
+        correctIndex: 1,
+        explanation: say('y-ren koefizienteak aurkakoak dira: desagertzen da.', 'Los coeficientes de y son opuestos: desaparece.', 'معاملا y متعاكسان: فيختفي.'),
+        topic: 'reduction'
+    },
+    {
+        id: 5306,
+        prompt: say('Zenbat ebazpen ditu $x^{2}+y^{2}=41$, $x^{2}-y^{2}=9$ sistemak?', '¿Cuántas soluciones tiene el sistema $x^{2}+y^{2}=41$, $x^{2}-y^{2}=9$?', 'كم حلًّا للنظام $x^{2}+y^{2}=41$ و$x^{2}-y^{2}=9$؟'),
+        options: [same('$2$'), same('$1$'), same('$4$')],
+        correctIndex: 2,
+        explanation: say('$x=\\pm 5$ eta $y=\\pm 4$: lau konbinazio.', '$x=\\pm 5$ e $y=\\pm 4$: cuatro combinaciones.', '$x=\\pm 5$ و$y=\\pm 4$: أربع تركيبات.'),
+        topic: 'squares'
+    },
+    {
+        id: 5307,
+        prompt: say('$(0,0)$ puntua $x+2y\\le -1$ inekuazioaren ebazpena al da?', '¿Es $(0,0)$ solución de $x+2y\\le -1$?', 'هل $(0,0)$ حل للمتراجحة $x+2y\\le -1$؟'),
+        options: [say('Bai', 'Sí', 'نعم'), say('Ez', 'No', 'لا'), say('Zuzenean dago', 'Está en la recta', 'تقع على المستقيم')],
+        correctIndex: 1,
+        explanation: say('$0\\le -1$ gezurra da: ebazpena beste erdiplanoa da.', '$0\\le -1$ es falso: la solución es el otro semiplano.', '$0\\le -1$ خطأ: الحل نصف المستوى الآخر.'),
+        topic: 'half-plane'
+    },
+    {
+        id: 5308,
+        prompt: say('1 eta 2 euroko 20 txanponek 25 € egiten dute. Zenbat dira 2 eurokoak?', '20 monedas de 1 € y de 2 € suman 25 €. ¿Cuántas son de 2 €?', '20 قطعة نقدية من فئتي 1 € و2 € مجموعها 25 €. كم منها من فئة 2 €؟'),
+        options: [same('$5$'), same('$10$'), same('$15$')],
+        correctIndex: 0,
+        explanation: same('$x+y=20,\\ x+2y=25\\ \\to\\ y=5$'),
+        topic: 'linear-problems'
+    }
+]
+
+export const systemsPractice: PracticeItem[] = [
+    /* ---------- Linear systems ---------- */
+    { id: 1, stage: 'linear', prompt: say('$(k,3)$ bikotea $2x+5y=11$ ekuazioaren ebazpena da. Zenbat da k?', '$(k,3)$ es solución de $2x+5y=11$. ¿Cuánto vale k?', '$(k,3)$ حل للمعادلة $2x+5y=11$. كم تساوي k؟'), expected: n(-2), hint: say('Ordeztu $x=k$ eta $y=3$.', 'Sustituye $x=k$ e $y=3$.', 'عوّض $x=k$ و$y=3$.'), explanation: same('$2k+15=11\\ \\to\\ k=-2$') },
+    { id: 2, stage: 'linear', prompt: solve('$x+y=4$, $x-y=2$', and(say('Grafikoki.', 'Gráficamente.', 'بيانيًا.'), X)), expected: n(3), hint: say('Marraztu bi zuzenak eta bilatu ebaki-puntua.', 'Dibuja las dos rectas y busca el punto de corte.', 'ارسم المستقيمين وابحث عن نقطة التقاطع.'), explanation: say('Ebaki-puntua $(3,1)$ da: $x=3$.', 'Se cortan en $(3,1)$: $x=3$.', 'يتقاطعان في $(3,1)$: $x=3$.') },
+    { id: 3, stage: 'linear', prompt: say('m-ren zein baliotarako da bateraezina $x+2y=3$, $2x+my=5$ sistema?', '¿Para qué valor de m es incompatible el sistema $x+2y=3$, $2x+my=5$?', 'لأي قيمة لـ m يكون النظام $x+2y=3$ و$2x+my=5$ غير متوافق؟'), expected: n(4), hint: say('$\\frac{a}{a\'}=\\frac{b}{b\'}$ izan behar du.', 'Tiene que ser $\\frac{a}{a\'}=\\frac{b}{b\'}$.', 'يجب أن يكون $\\frac{a}{a\'}=\\frac{b}{b\'}$.'), explanation: say('$\\frac{1}{2}=\\frac{2}{m}$, $m=4$, eta $\\frac{3}{5}\\ne\\frac{1}{2}$.', '$\\frac{1}{2}=\\frac{2}{m}$, $m=4$, y $\\frac{3}{5}\\ne\\frac{1}{2}$.', '$\\frac{1}{2}=\\frac{2}{m}$، $m=4$، و$\\frac{3}{5}\\ne\\frac{1}{2}$.') },
+    { id: 4, stage: 'linear', prompt: say(`${'$3x-y=2$, $6x-2y=5$'}. Zenbat ebazpen ditu?`, `${'$3x-y=2$, $6x-2y=5$'}. ¿Cuántas soluciones tiene?`, `${'$3x-y=2$ و$6x-2y=5$'}. كم حلًّا له؟`), expected: n(0), hint: say('Alderatu $\\frac{a}{a\'}$, $\\frac{b}{b\'}$ eta $\\frac{c}{c\'}$.', 'Compara $\\frac{a}{a\'}$, $\\frac{b}{b\'}$ y $\\frac{c}{c\'}$.', 'قارن $\\frac{a}{a\'}$ و$\\frac{b}{b\'}$ و$\\frac{c}{c\'}$.'), explanation: say('$\\frac{3}{6}=\\frac{-1}{-2}\\ne\\frac{2}{5}$: paraleloak, 0 ebazpen.', '$\\frac{3}{6}=\\frac{-1}{-2}\\ne\\frac{2}{5}$: paralelas, 0 soluciones.', '$\\frac{3}{6}=\\frac{-1}{-2}\\ne\\frac{2}{5}$: متوازيان، 0 حلول.') },
+
+    /* ---------- Methods ---------- */
+    { id: 5, stage: 'methods', prompt: solve('$-x+3y=-4$, $5x+y=4$', Y), expected: n(-1), hint: say('Askatu x lehenengoan: $x=3y+4$.', 'Despeja x en la primera: $x=3y+4$.', 'اعزل x في الأولى: $x=3y+4$.'), explanation: same('$5(3y+4)+y=4\\ \\to\\ 16y=-16\\ \\to\\ y=-1$') },
+    { id: 6, stage: 'methods', prompt: solve('$x+5y=7$, $3x-5y=11$', and(X, AS_FRACTION)), expected: f(9, 2), hint: say('Batu: y desagertzen da.', 'Suma: desaparece la y.', 'اجمع: يختفي y.'), explanation: same('$4x=18\\ \\to\\ x=\\frac{9}{2}$') },
+    { id: 7, stage: 'methods', prompt: solve('$3x-5y=-26$, $4x+10y=32$', X), expected: n(-2), hint: say('Lehena bider 2.', 'La primera por 2.', 'الأولى في 2.'), explanation: same('$6x-10y=-52\\qquad 10x=-20\\ \\to\\ x=-2$') },
+    { id: 8, stage: 'methods', prompt: solve('$3x-2(y-1)=y-x+1$, $2x-y=x+y-9$', Y), expected: n(7), hint: say('Lehenik $ax+by=c$ moduan: $4x-3y=-1$ eta $x-2y=-9$.', 'Primero en la forma $ax+by=c$: $4x-3y=-1$ y $x-2y=-9$.', 'أولًا على الصورة $ax+by=c$: $4x-3y=-1$ و$x-2y=-9$.'), explanation: same('$x=2y-9\\ \\to\\ 8y-36-3y=-1\\ \\to\\ y=7$') },
+
+    /* ---------- Non-linear systems ---------- */
+    { id: 9, stage: 'nonlinear', prompt: solve('$x^{2}+y^{2}=25$, $x+y=7$', say('Zein da x-ren baliorik handiena?', '¿Cuál es el mayor valor de x?', 'ما أكبر قيمة لـ x؟')), expected: n(4), hint: say('$y=7-x$ ordeztu.', 'Sustituye $y=7-x$.', 'عوّض $y=7-x$.'), explanation: same('$x^{2}-7x+12=0\\ \\to\\ x=3,\\ x=4$') },
+    { id: 10, stage: 'nonlinear', prompt: solve('$x^{2}+y^{2}=34$, $x^{2}-y^{2}=16$', say('Eman y-ren balio positiboa.', 'Da el valor positivo de y.', 'أعطِ القيمة الموجبة لـ y.')), expected: n(3), hint: say('Kendu: x² desagertzen da.', 'Resta: desaparece x².', 'اطرح: يختفي x².'), explanation: same('$2y^{2}=18\\ \\to\\ y=\\pm 3$') },
+    { id: 11, stage: 'nonlinear', prompt: solve('$x-y=15$, $xy=100$', say('x positiboa duen ebazpenean, zenbat da y?', 'En la solución con x positiva, ¿cuánto vale y?', 'في الحل الذي فيه x موجب، كم تساوي y؟')), expected: n(5), hint: say('$x=y+15$ ordeztu.', 'Sustituye $x=y+15$.', 'عوّض $x=y+15$.'), explanation: same('$y^{2}+15y-100=0\\ \\to\\ y=5,\\ y=-20\\qquad x=20$') },
+    { id: 12, stage: 'nonlinear', prompt: solve('$\\sqrt{x-2}=y+2$, $2x-3=2-y$', Y), expected: n(-1), hint: say('$y=5-2x$; karratura jaso eta egiaztatu.', '$y=5-2x$; eleva al cuadrado y comprueba.', '$y=5-2x$؛ ربّع ثم تحقّق.'), explanation: say('$x=3$ eta $x=\\frac{17}{4}$ ateratzen dira; bigarrena faltsua da. $x=3$, $y=-1$.', 'Salen $x=3$ y $x=\\frac{17}{4}$; la segunda es falsa. $x=3$, $y=-1$.', 'يظهر $x=3$ و$x=\\frac{17}{4}$؛ والثاني زائف. $x=3$ و$y=-1$.') },
+
+    /* ---------- Inequalities in two unknowns ---------- */
+    { id: 13, stage: 'half-planes', prompt: say('Zein da c-ren balio osorik txikiena $(2,1)$ puntua $3x-y\\le c$ inekuazioaren ebazpena izateko?', '¿Cuál es el menor valor entero de c para que $(2,1)$ sea solución de $3x-y\\le c$?', 'ما أصغر قيمة صحيحة لـ c لكي تكون $(2,1)$ حلًّا للمتراجحة $3x-y\\le c$؟'), expected: n(5), hint: say('Ordeztu puntua.', 'Sustituye el punto.', 'عوّض النقطة.'), explanation: same('$3\\cdot 2-1=5\\le c$') },
+    { id: 14, stage: 'half-planes', prompt: say(`${'$x+y\\le 3$, $x\\ge 0$, $y\\ge 0$'}. ${LATTICE.eu}`, `${'$x+y\\le 3$, $x\\ge 0$, $y\\ge 0$'}. ${LATTICE.es}`, `${'$x+y\\le 3$ و$x\\ge 0$ و$y\\ge 0$'}. ${LATTICE.ar}`), expected: n(10), hint: say('Zenbatu zutabeka: $x=0$, 1, 2, 3.', 'Cuenta por columnas: $x=0$, 1, 2, 3.', 'عُدّ عمودًا عمودًا: $x=0$ و1 و2 و3.'), explanation: same('$4+3+2+1=10$') },
+    { id: 15, stage: 'half-planes', prompt: say(`${'$y\\ge 1$, $x\\le 4$, $y\\le x$'}. ${AREA.eu}`, `${'$y\\ge 1$, $x\\le 4$, $y\\le x$'}. ${AREA.es}`, `${'$y\\ge 1$ و$x\\le 4$ و$y\\le x$'}. ${AREA.ar}`), expected: v('4,5'), hint: say('Triangelua: $(1,1)$, $(4,1)$, $(4,4)$.', 'Triángulo: $(1,1)$, $(4,1)$, $(4,4)$.', 'المثلث: $(1,1)$ و$(4,1)$ و$(4,4)$.'), explanation: same('$\\frac{3\\cdot 3}{2}=4{,}5$') },
+    { id: 16, stage: 'half-planes', prompt: say('$x\\ge 0$, $y\\ge 0$, $2x+y\\le 6$ eskualdearen erpin bat X ardatzean dago. Zein da haren abszisa?', 'La región $x\\ge 0$, $y\\ge 0$, $2x+y\\le 6$ tiene un vértice en el eje X. ¿Cuál es su abscisa?', 'للمنطقة $x\\ge 0$ و$y\\ge 0$ و$2x+y\\le 6$ رأس على المحور X. ما فاصلته؟'), expected: n(3), hint: say('$2x+y=6$ eta $y=0$.', '$2x+y=6$ e $y=0$.', '$2x+y=6$ و$y=0$.'), explanation: same('$2x=6\\ \\to\\ x=3$') },
+
+    /* ---------- Problems ---------- */
+    { id: 17, stage: 'problems', prompt: say('Baserri batean oiloak eta untxiak daude: 20 buru eta 56 hanka. Zenbat untxi daude?', 'En una granja hay gallinas y conejos: 20 cabezas y 56 patas. ¿Cuántos conejos hay?', 'في مزرعة دجاج وأرانب: 20 رأسًا و56 رجلًا. كم أرنبًا هناك؟'), expected: n(8), hint: say('$x+y=20$ eta $2x+4y=56$.', '$x+y=20$ y $2x+4y=56$.', '$x+y=20$ و$2x+4y=56$.'), explanation: same('$2x+2y=40\\qquad 2y=16\\ \\to\\ y=8$') },
+    { id: 18, stage: 'problems', prompt: say('Bi zenbakiren batura 27 da eta haien karratuen kendura 81. Zein da handiena?', 'Dos números suman 27 y la diferencia de sus cuadrados es 81. ¿Cuál es el mayor?', 'عددان مجموعهما 27 والفرق بين مربعيهما 81. ما أكبرهما؟'), expected: n(15), hint: say('$x^{2}-y^{2}=(x+y)(x-y)$', '$x^{2}-y^{2}=(x+y)(x-y)$', '$x^{2}-y^{2}=(x+y)(x-y)$'), explanation: same('$x-y=\\frac{81}{27}=3\\qquad x=\\frac{27+3}{2}=15$') },
+    { id: 19, stage: 'problems', prompt: say('Laukizuzen baten perimetroa 34 cm da eta diagonala 13 cm. Zenbat neurtzen du alderik laburrenak?', 'Un rectángulo tiene 34 cm de perímetro y 13 cm de diagonal. ¿Cuánto mide el lado menor?', 'مستطيل محيطه 34 سم وقطره 13 سم. كم طول ضلعه الأصغر؟'), expected: n(5), hint: say('$x+y=17$ eta $x^{2}+y^{2}=169$.', '$x+y=17$ y $x^{2}+y^{2}=169$.', '$x+y=17$ و$x^{2}+y^{2}=169$.'), explanation: same('$x^{2}-17x+60=0\\ \\to\\ x=12,\\ x=5$') },
+    { id: 20, stage: 'problems', prompt: say('12 € ditugu 3 €-ko ogitartekoak eta 2 €-ko freskagarriak erosteko, eta ogitarteko bat gutxienez nahi dugu. Gehienez zenbat freskagarri eros ditzakegu?', 'Tenemos 12 € para bocadillos de 3 € y refrescos de 2 €, y queremos al menos un bocadillo. ¿Cuántos refrescos podemos comprar como máximo?', 'معنا 12 € لشطائر بـ3 € ومشروبات بـ2 €، ونريد شطيرة على الأقل. كم مشروبًا يمكن شراؤه على الأكثر؟'), expected: n(4), hint: say('$3x+2y\\le 12$ eta $x=1$.', '$3x+2y\\le 12$ y $x=1$.', '$3x+2y\\le 12$ و$x=1$.'), explanation: say('$3+2y\\le 12$, $y\\le 4{,}5$: gehienez 4.', '$3+2y\\le 12$, $y\\le 4{,}5$: como mucho 4.', '$3+2y\\le 12$، $y\\le 4{,}5$: 4 على الأكثر.') }
+]
+
+export const systemsChallenges: ChallengeItem[] = [
+    { id: 101, stage: 'linear', points: 10, context: 'starter', prompt: say('$2x+3y=12$ zuzenak ardatzak $(a,0)$ eta $(0,b)$ puntuetan ebakitzen ditu. Zenbat da $a+b$?', 'La recta $2x+3y=12$ corta los ejes en $(a,0)$ y $(0,b)$. ¿Cuánto vale $a+b$?', 'يقطع المستقيم $2x+3y=12$ المحورين في $(a,0)$ و$(0,b)$. كم تساوي $a+b$؟'), expected: n(10), hint: say('$y=0$ eta $x=0$ egin.', 'Haz $y=0$ y $x=0$.', 'اجعل $y=0$ ثم $x=0$.'), explanation: same('$a=6,\\ b=4\\qquad 6+4=10$') },
+    { id: 102, stage: 'linear', points: 20, context: 'advanced', prompt: say('k-ren zein baliotarako pasatzen da $kx+2y=10$ zuzena $x+y=4$ eta $x-y=2$ zuzenen ebaki-puntutik? Eman zatiki gisa.', '¿Para qué valor de k pasa la recta $kx+2y=10$ por el punto de corte de $x+y=4$ y $x-y=2$? Dalo como fracción.', 'لأي قيمة لـ k يمر المستقيم $kx+2y=10$ بنقطة تقاطع $x+y=4$ و$x-y=2$؟ اكتبه كسرًا.'), expected: f(8, 3), hint: say('Ebaki-puntua $(3,1)$ da.', 'El punto de corte es $(3,1)$.', 'نقطة التقاطع $(3,1)$.'), explanation: same('$3k+2=10\\ \\to\\ k=\\frac{8}{3}$') },
+    { id: 103, stage: 'linear', points: 30, context: 'master', prompt: say('$ax+6y=9$ eta $2x+4y=b$ sistemak infinitu ebazpen ditu. Zenbat da $a+b$?', 'El sistema $ax+6y=9$, $2x+4y=b$ tiene infinitas soluciones. ¿Cuánto vale $a+b$?', 'للنظام $ax+6y=9$ و$2x+4y=b$ حلول لا نهاية لها. كم تساوي $a+b$؟'), expected: n(9), hint: say('Hiru zatidurak berdinak: $\\frac{6}{4}=\\frac{3}{2}$.', 'Los tres cocientes iguales: $\\frac{6}{4}=\\frac{3}{2}$.', 'النسب الثلاث متساوية: $\\frac{6}{4}=\\frac{3}{2}$.'), explanation: same('$\\frac{a}{2}=\\frac{3}{2}\\ \\to\\ a=3\\qquad \\frac{9}{b}=\\frac{3}{2}\\ \\to\\ b=6\\qquad 3+6=9$') },
+    { id: 104, stage: 'methods', points: 10, context: 'starter', prompt: solve('$x+y=10$, $x-y=4$', X), expected: n(7), hint: say('Batu bi ekuazioak.', 'Suma las dos ecuaciones.', 'اجمع المعادلتين.'), explanation: same('$2x=14\\ \\to\\ x=7$') },
+    { id: 105, stage: 'methods', points: 20, context: 'advanced', prompt: solve('$22x+17y=49$, $31x-26y=119$', Y), expected: n(-1), hint: say('Lehena bider 31 eta bigarrena bider 22, eta kendu.', 'La primera por 31, la segunda por 22, y resta.', 'الأولى في 31 والثانية في 22 ثم اطرح.'), explanation: same('$1\\,099y=-1\\,099\\ \\to\\ y=-1$') },
+    { id: 106, stage: 'methods', points: 30, context: 'master', prompt: say('Ebatzi $\\frac{x}{5}-\\frac{y}{4}=4$, $-2(x+y)=1-\\frac{x}{2}$ sistema. Zenbat da $x-y$?', 'Resuelve el sistema $\\frac{x}{5}-\\frac{y}{4}=4$, $-2(x+y)=1-\\frac{x}{2}$. ¿Cuánto vale $x-y$?', 'حل النظام $\\frac{x}{5}-\\frac{y}{4}=4$ و$-2(x+y)=1-\\frac{x}{2}$. كم تساوي $x-y$؟'), expected: n(18), hint: say('$4x-5y=80$ eta $-3x-4y=2$.', '$4x-5y=80$ y $-3x-4y=2$.', '$4x-5y=80$ و$-3x-4y=2$.'), explanation: same('$x=10,\\ y=-8\\qquad 10-(-8)=18$') },
+    { id: 107, stage: 'nonlinear', points: 10, context: 'starter', prompt: solve('$x+y=5$, $xy=6$', say('Zein da y-ren baliorik handiena?', '¿Cuál es el mayor valor de y?', 'ما أكبر قيمة لـ y؟')), expected: n(3), hint: say('Batura 5 eta biderkadura 6 duten bi zenbaki.', 'Dos números que suman 5 y multiplican 6.', 'عددان مجموعهما 5 وجداؤهما 6.'), explanation: same('$y^{2}-5y+6=0\\ \\to\\ y=2,\\ y=3$') },
+    { id: 108, stage: 'nonlinear', points: 20, context: 'advanced', prompt: solve('$xy=6$, $x-y=1$', say('Zenbat dira ebazpenen x-ak guztira?', '¿Cuánto suman las x de las soluciones?', 'كم مجموع قيم x في الحلول؟')), expected: n(1), hint: say('$y=x-1$ ordeztu.', 'Sustituye $y=x-1$.', 'عوّض $y=x-1$.'), explanation: same('$x^{2}-x-6=0\\ \\to\\ x=3,\\ x=-2\\qquad 3-2=1$') },
+    { id: 109, stage: 'nonlinear', points: 30, context: 'master', prompt: solve('$\\frac{1}{x-y}+\\frac{3}{x}=2$, $3x-y-1=0$', say('Eman zenbaki osoa ez den x zatiki gisa.', 'Da como fracción la x que no es entera.', 'اكتب كسرًا قيمة x غير الصحيحة.')), expected: f(3, 4), hint: say('$y=3x-1$, beraz $x-y=1-2x$.', '$y=3x-1$, así que $x-y=1-2x$.', '$y=3x-1$، إذن $x-y=1-2x$.'), explanation: same('$4x^{2}-7x+3=0\\ \\to\\ x=1,\\ x=\\frac{3}{4}$') },
+    { id: 110, stage: 'half-planes', points: 10, context: 'starter', prompt: say('$(0,0)$, $(1,2)$, $(3,0)$ eta $(-1,5)$ puntuetatik, zenbatek betetzen dute $2x+y\\le 4$?', 'De los puntos $(0,0)$, $(1,2)$, $(3,0)$ y $(-1,5)$, ¿cuántos cumplen $2x+y\\le 4$?', 'من النقاط $(0,0)$ و$(1,2)$ و$(3,0)$ و$(-1,5)$، كم منها يحقق $2x+y\\le 4$؟'), expected: n(3), hint: say('Ordeztu bakoitza.', 'Sustituye cada uno.', 'عوّض كل نقطة.'), explanation: say('$0$, $4$, $6$ eta $3$: lehenengoak, bigarrenak eta laugarrenak bai, 3.', '$0$, $4$, $6$ y $3$: cumplen el primero, el segundo y el cuarto, 3.', '$0$ و$4$ و$6$ و$3$: تحققها الأولى والثانية والرابعة، 3.') },
+    { id: 111, stage: 'half-planes', points: 20, context: 'advanced', prompt: say('$x\\ge 0$, $y\\ge 0$, $x+2y\\le 8$, $x+y\\le 6$ eskualdean, $x+2y=8$ eta $x+y=6$ zuzenek erpin bat osatzen dute. Zenbat da haren y?', 'En la región $x\\ge 0$, $y\\ge 0$, $x+2y\\le 8$, $x+y\\le 6$, las rectas $x+2y=8$ y $x+y=6$ forman un vértice. ¿Cuánto vale su y?', 'في المنطقة $x\\ge 0$ و$y\\ge 0$ و$x+2y\\le 8$ و$x+y\\le 6$ يكوّن المستقيمان $x+2y=8$ و$x+y=6$ رأسًا. كم تساوي y فيه؟'), expected: n(2), hint: say('Kendu bi ekuazioak.', 'Resta las dos ecuaciones.', 'اطرح المعادلتين.'), explanation: same('$y=8-6=2\\qquad x=4$') },
+    { id: 112, stage: 'half-planes', points: 30, context: 'master', prompt: say('Zenbat puntuk betetzen dituzte koordenatu osoekin $y>0$, $y<x$ eta $x<5$?', '¿Cuántos puntos de coordenadas enteras cumplen $y>0$, $y<x$ y $x<5$?', 'كم نقطة إحداثياتها صحيحة تحقق $y>0$ و$y<x$ و$x<5$؟'), expected: n(6), hint: say('Ertzak ez dira sartzen; zenbatu $x=2$, 3, 4.', 'Los bordes no entran; cuenta $x=2$, 3, 4.', 'الحدود خارج الحل؛ عُدّ $x=2$ و3 و4.'), explanation: same('$1+2+3=6$') },
+    { id: 113, stage: 'problems', points: 10, context: 'starter', prompt: say('Kontzertu baterako 120 sarrera saldu dira, batzuk 15 €-tan eta besteak 10 €-tan, guztira 1 550 €. Zenbat saldu dira 15 €-tan?', 'Para un concierto se han vendido 120 entradas, unas a 15 € y otras a 10 €, por 1 550 € en total. ¿Cuántas se han vendido a 15 €?', 'بيعت لحفلة 120 تذكرة، بعضها بـ15 € والباقي بـ10 €، بمجموع 1 550 €. كم تذكرة بيعت بـ15 €؟'), expected: n(70), hint: say('$x+y=120$ eta $15x+10y=1\\,550$.', '$x+y=120$ y $15x+10y=1\\,550$.', '$x+y=120$ و$15x+10y=1\\,550$.'), explanation: same('$5x=1\\,550-1\\,200=350\\ \\to\\ x=70$') },
+    { id: 114, stage: 'problems', points: 20, context: 'advanced', prompt: say('Orain dela 5 urte aitak semearen adina halako hiru zuen, eta 10 urte barru bikoitza izango du. Zenbat urte ditu aitak?', 'Hace 5 años la edad de un padre era el triple de la de su hijo, y dentro de 10 años será el doble. ¿Cuántos años tiene el padre?', 'قبل 5 سنوات كان عمر الأب ثلاثة أضعاف عمر ابنه، وبعد 10 سنوات سيكون ضعفه. كم عمر الأب؟'), expected: n(50), hint: say('$x-5=3(y-5)$ eta $x+10=2(y+10)$.', '$x-5=3(y-5)$ y $x+10=2(y+10)$.', '$x-5=3(y-5)$ و$x+10=2(y+10)$.'), explanation: same('$x=3y-10\\ \\to\\ 3y=2y+20\\ \\to\\ y=20,\\ x=50$') },
+    { id: 115, stage: 'problems', points: 30, context: 'master', prompt: say('Laukizuzen baten azalera 48 cm² da eta diagonala 10 cm. Zenbat da perimetroa?', 'Un rectángulo tiene 48 cm² de área y 10 cm de diagonal. ¿Cuánto mide su perímetro?', 'مستطيل مساحته 48 سم² وقطره 10 سم. كم محيطه؟'), expected: n(28), hint: say('$(x+y)^{2}=x^{2}+y^{2}+2xy$', '$(x+y)^{2}=x^{2}+y^{2}+2xy$', '$(x+y)^{2}=x^{2}+y^{2}+2xy$'), explanation: same('$(x+y)^{2}=100+96=196\\ \\to\\ x+y=14\\qquad 2\\cdot 14=28$') }
+]
+
+export const systemsExerciseBank: ExerciseSection[] = [
+    {
+        id: 'linear',
+        title: say('Sistema linealak', 'Sistemas lineales', 'الأنظمة الخطية'),
+        items: [
+            { id: 1, difficulty: 'easy', question: say('$4x-y=3$ ekuazioan, $x=2$ bada, zenbat da y?', 'En $4x-y=3$, si $x=2$, ¿cuánto vale y?', 'في $4x-y=3$، إذا كان $x=2$ فكم تساوي y؟'), solution: same('$8-y=3\\ \\to\\ y=5$'), answer: { expected: n(5) } },
+            { id: 2, difficulty: 'easy', question: say('Non ebakitzen du $x+2y=6$ zuzenak Y ardatza? Eman y.', '¿Dónde corta la recta $x+2y=6$ al eje Y? Da la y.', 'أين يقطع المستقيم $x+2y=6$ المحور Y؟ أعطِ y.'), solution: same('$x=0\\ \\to\\ 2y=6\\ \\to\\ y=3$'), answer: { expected: n(3) } },
+            { id: 3, difficulty: 'easy', question: say('$(a,-1)$ bikotea $x-3y=7$ ekuazioaren ebazpena da. Zenbat da a?', '$(a,-1)$ es solución de $x-3y=7$. ¿Cuánto vale a?', '$(a,-1)$ حل للمعادلة $x-3y=7$. كم تساوي a؟'), solution: same('$a+3=7\\ \\to\\ a=4$'), answer: { expected: n(4) } },
+            { id: 4, difficulty: 'medium', question: solve('$y=2x-1$, $y=-x+5$', and(say('Grafikoki.', 'Gráficamente.', 'بيانيًا.'), X)), solution: say('Zuzenak $(2,3)$ puntuan ebakitzen dira: $x=2$.', 'Las rectas se cortan en $(2,3)$: $x=2$.', 'يتقاطع المستقيمان في $(2,3)$: $x=2$.'), answer: { expected: n(2) } },
+            { id: 5, difficulty: 'medium', question: say(`${'$2x-y=3$, $4x-2y=5$'}. ${HOW_MANY.eu}`, `${'$2x-y=3$, $4x-2y=5$'}. ${HOW_MANY.es}`, `${'$2x-y=3$ و$4x-2y=5$'}. ${HOW_MANY.ar}`), solution: say('$\\frac{2}{4}=\\frac{-1}{-2}\\ne\\frac{3}{5}$: bateraezina, 0.', '$\\frac{2}{4}=\\frac{-1}{-2}\\ne\\frac{3}{5}$: incompatible, 0.', '$\\frac{2}{4}=\\frac{-1}{-2}\\ne\\frac{3}{5}$: غير متوافق، 0.'), answer: { expected: n(0) } },
+            { id: 6, difficulty: 'medium', question: say('k-ren zein baliotarako ez da bateragarri determinatua $kx+3y=2$, $4x+6y=1$ sistema?', '¿Para qué valor de k no es compatible determinado el sistema $kx+3y=2$, $4x+6y=1$?', 'لأي قيمة لـ k لا يكون النظام $kx+3y=2$ و$4x+6y=1$ متوافقًا محددًا؟'), solution: same('$\\frac{k}{4}=\\frac{3}{6}\\ \\to\\ k=2$'), answer: { expected: n(2) } },
+            { id: 7, difficulty: 'medium', question: say('Idatzi $(2,-1)$ ebazpena duen sistema bat.', 'Escribe un sistema cuya solución sea $(2,-1)$.', 'اكتب نظامًا حلّه $(2,-1)$.'), solution: say('Adibidez $x+y=1$ eta $x-y=3$.', 'Por ejemplo $x+y=1$ y $x-y=3$.', 'مثلًا $x+y=1$ و$x-y=3$.') },
+            { id: 8, difficulty: 'hard', question: say('m-ren zein baliotarako ditu infinitu ebazpen $3x+my=6$, $x+2y=2$ sistemak?', '¿Para qué valor de m tiene infinitas soluciones el sistema $3x+my=6$, $x+2y=2$?', 'لأي قيمة لـ m يكون للنظام $3x+my=6$ و$x+2y=2$ حلول لا نهاية لها؟'), solution: same('$\\frac{3}{1}=\\frac{m}{2}=\\frac{6}{2}\\ \\to\\ m=6$'), answer: { expected: n(6) } },
+            { id: 9, difficulty: 'hard', question: say('$ax+y=5$ eta $x+by=7$ zuzenak $(1,2)$ puntuan ebakitzen dira. Zenbat da $a+b$?', 'Las rectas $ax+y=5$ y $x+by=7$ se cortan en $(1,2)$. ¿Cuánto vale $a+b$?', 'يتقاطع المستقيمان $ax+y=5$ و$x+by=7$ في $(1,2)$. كم تساوي $a+b$؟'), solution: same('$a+2=5\\ \\to\\ a=3\\qquad 1+2b=7\\ \\to\\ b=3\\qquad 3+3=6$'), answer: { expected: n(6) } },
+            { id: 10, difficulty: 'hard', question: say('$y=mx+n$ zuzena $(1,3)$ eta $(3,7)$ puntuetatik pasatzen da. Zenbat da m?', 'La recta $y=mx+n$ pasa por $(1,3)$ y $(3,7)$. ¿Cuánto vale m?', 'يمر المستقيم $y=mx+n$ بـ$(1,3)$ و$(3,7)$. كم تساوي m؟'), solution: same('$m+n=3,\\ 3m+n=7\\ \\to\\ 2m=4\\ \\to\\ m=2$'), answer: { expected: n(2) } }
+        ]
+    },
+    {
+        id: 'methods',
+        title: say('Ebazteko metodoak', 'Métodos de resolución', 'طرق الحل'),
+        items: [
+            { id: 11, difficulty: 'easy', question: solve('$y=2x$, $x+y=12$', X), solution: same('$3x=12\\ \\to\\ x=4$'), answer: { expected: n(4) } },
+            { id: 12, difficulty: 'easy', question: solve('$x+y=10$, $x-y=2$', Y), solution: same('$2y=8\\ \\to\\ y=4$'), answer: { expected: n(4) } },
+            { id: 13, difficulty: 'easy', question: solve('$y=x+3$, $y=2x+1$', X), solution: same('$x+3=2x+1\\ \\to\\ x=2$'), answer: { expected: n(2) } },
+            { id: 14, difficulty: 'medium', question: solve('$3x+2y=7$, $5x-2y=9$', and(Y, AS_FRACTION)), solution: same('$8x=16\\ \\to\\ x=2\\qquad 6+2y=7\\ \\to\\ y=\\frac{1}{2}$'), answer: { expected: f(1, 2) } },
+            { id: 15, difficulty: 'medium', question: solve('$4x-3y=-1$, $x-2y=-9$', X), solution: same('$x=2y-9\\ \\to\\ 5y=35\\ \\to\\ y=7,\\ x=5$'), answer: { expected: n(5) } },
+            { id: 16, difficulty: 'medium', question: solve('$5x+2y=1$, $3x-y=5$', Y), solution: same('$y=3x-5\\ \\to\\ 11x=11\\ \\to\\ x=1,\\ y=-2$'), answer: { expected: n(-2) } },
+            { id: 17, difficulty: 'medium', question: solve('$4x-5y=80$, $-3x-4y=2$', X), solution: same('$31y=-248\\ \\to\\ y=-8\\qquad 4x+40=80\\ \\to\\ x=10$'), answer: { expected: n(10) } },
+            { id: 18, difficulty: 'hard', question: solve('$\\frac{x+1}{2}-\\frac{y}{3}=1$, $x-(y-1)=2$', X), solution: same('$3x-2y=3,\\ x-y=1\\ \\to\\ y=0,\\ x=1$'), answer: { expected: n(1) } },
+            { id: 19, difficulty: 'hard', question: say('Ebatzi $\\frac{x}{3}+\\frac{y}{2}=3$, $\\frac{x}{2}-\\frac{y}{4}=\\frac{1}{2}$ sistema. Zenbat da $x+y$?', 'Resuelve el sistema $\\frac{x}{3}+\\frac{y}{2}=3$, $\\frac{x}{2}-\\frac{y}{4}=\\frac{1}{2}$. ¿Cuánto vale $x+y$?', 'حل النظام $\\frac{x}{3}+\\frac{y}{2}=3$ و$\\frac{x}{2}-\\frac{y}{4}=\\frac{1}{2}$. كم تساوي $x+y$؟'), solution: same('$2x+3y=18,\\ 2x-y=2\\ \\to\\ 4y=16\\qquad 3+4=7$'), answer: { expected: n(7) } },
+            { id: 20, difficulty: 'hard', question: solve('$3-2(x-4)=5y+6$, $5x-3y=12x-(4-y)$', Y), solution: same('$2x+5y=5,\\ 7x+4y=4\\ \\to\\ x=0,\\ y=1$'), answer: { expected: n(1) } }
+        ]
+    },
+    {
+        id: 'nonlinear',
+        title: say('Sistema ez-linealak', 'Sistemas no lineales', 'الأنظمة غير الخطية'),
+        items: [
+            { id: 21, difficulty: 'easy', question: solve('$x+y=7$, $xy=12$', say('Zein da x-ren baliorik handiena?', '¿Cuál es el mayor valor de x?', 'ما أكبر قيمة لـ x؟')), solution: same('$x^{2}-7x+12=0\\ \\to\\ x=3,\\ x=4$'), answer: { expected: n(4) } },
+            { id: 22, difficulty: 'easy', question: solve('$x^{2}+y^{2}=25$, $x=3$', say('Eman y positiboa.', 'Da la y positiva.', 'أعطِ y الموجبة.')), solution: same('$9+y^{2}=25\\ \\to\\ y=\\pm 4$'), answer: { expected: n(4) } },
+            { id: 23, difficulty: 'easy', question: solve('$y=x^{2}$, $y=4$', say('Eman x positiboa.', 'Da la x positiva.', 'أعطِ x الموجبة.')), solution: same('$x^{2}=4\\ \\to\\ x=\\pm 2$'), answer: { expected: n(2) } },
+            { id: 24, difficulty: 'medium', question: solve('$x^{2}+y^{2}=13$, $x^{2}-y^{2}=5$', HOW_MANY), solution: say('$x=\\pm 3$ eta $y=\\pm 2$: 4 ebazpen.', '$x=\\pm 3$ e $y=\\pm 2$: 4 soluciones.', '$x=\\pm 3$ و$y=\\pm 2$: 4 حلول.'), answer: { expected: n(4) } },
+            { id: 25, difficulty: 'medium', question: solve('$y=x^{2}-1$, $y=x+1$', say('Zein da y-ren baliorik handiena?', '¿Cuál es el mayor valor de y?', 'ما أكبر قيمة لـ y؟')), solution: same('$x^{2}-x-2=0\\ \\to\\ x=2,\\ x=-1\\qquad y=3,\\ y=0$'), answer: { expected: n(3) } },
+            { id: 26, difficulty: 'medium', question: solve('$x-y=15$, $xy=100$', say('Eman x negatiboa.', 'Da la x negativa.', 'أعطِ x السالبة.')), solution: same('$y=-20\\ \\to\\ x=-20+15=-5$'), answer: { expected: n(-5) } },
+            { id: 27, difficulty: 'medium', question: solve('$x^{2}+y^{2}=10$, $2x^{2}-y^{2}=17$', say('Bi ezezagunak positiboak direnean, zenbat da $xy$?', 'Cuando las dos incógnitas son positivas, ¿cuánto vale $xy$?', 'عندما يكون المجهولان موجبين، كم تساوي $xy$؟')), solution: same('$3x^{2}=27\\ \\to\\ x=3\\qquad y^{2}=1\\ \\to\\ y=1\\qquad 3\\cdot 1=3$'), answer: { expected: n(3) } },
+            { id: 28, difficulty: 'hard', question: solve('$\\sqrt{x-2}=y+2$, $2x-3=2-y$', X), solution: say('$4x^{2}-29x+51=0$: $x=3$ eta $x=\\frac{17}{4}$, baina bigarrenak ez du betetzen. $x=3$.', '$4x^{2}-29x+51=0$: $x=3$ y $x=\\frac{17}{4}$, pero la segunda no cumple. $x=3$.', '$4x^{2}-29x+51=0$: $x=3$ و$x=\\frac{17}{4}$، لكن الثاني لا يحقق. $x=3$.'), answer: { expected: n(3) } },
+            { id: 29, difficulty: 'hard', question: solve('$x+y=1$, $x^{2}+xy+y^{2}=21$', say('Zein da x-ren baliorik handiena?', '¿Cuál es el mayor valor de x?', 'ما أكبر قيمة لـ x؟')), solution: same('$y^{2}-y-20=0\\ \\to\\ y=5,\\ y=-4\\qquad x=-4,\\ x=5$'), answer: { expected: n(5) } },
+            { id: 30, difficulty: 'hard', question: solve('$\\frac{1}{x-y}+\\frac{3}{x}=2$, $3x-y-1=0$', say('Ebazpen osoan, zenbat da y?', 'En la solución entera, ¿cuánto vale y?', 'في الحل الصحيح، كم تساوي y؟')), solution: same('$x=1\\ \\to\\ y=3-1=2$'), answer: { expected: n(2) } }
+        ]
+    },
+    {
+        id: 'half-planes',
+        title: say('Bi ezezaguneko inekuazioak', 'Inecuaciones con dos incógnitas', 'متراجحات بمجهولين'),
+        items: [
+            { id: 31, difficulty: 'easy', question: say('Kalkulatu $2x-y$ $(3,2)$ puntuan. $2x-y>3$ inekuazioaren ebazpena da?', 'Calcula $2x-y$ en $(3,2)$. ¿Es solución de $2x-y>3$?', 'احسب $2x-y$ في $(3,2)$. هل هي حل للمتراجحة $2x-y>3$؟'), solution: say('$6-2=4$, eta $4>3$: bai.', '$6-2=4$, y $4>3$: sí.', '$6-2=4$، و$4>3$: نعم.'), answer: { expected: n(4) } },
+            { id: 32, difficulty: 'easy', question: say('Non ebakitzen du $3x+2y\\le 6$ inekuazioaren muga-zuzenak X ardatza?', '¿Dónde corta al eje X la recta frontera de $3x+2y\\le 6$?', 'أين يقطع المستقيم الحدّي للمتراجحة $3x+2y\\le 6$ المحور X؟'), solution: same('$y=0\\ \\to\\ 3x=6\\ \\to\\ x=2$'), answer: { expected: n(2) } },
+            { id: 33, difficulty: 'easy', question: say('Zein da c-ren balio osorik txikiena $(1,2)$ puntuak $x+y\\le c$ bete dezan?', '¿Cuál es el menor valor entero de c para que $(1,2)$ cumpla $x+y\\le c$?', 'ما أصغر قيمة صحيحة لـ c لكي تحقق $(1,2)$ المتراجحة $x+y\\le c$؟'), solution: same('$1+2=3\\le c$'), answer: { expected: n(3) } },
+            { id: 34, difficulty: 'medium', question: say(`${'$x+y\\le 3$, $x\\ge 0$, $y\\ge 0$'}. ${LATTICE.eu}`, `${'$x+y\\le 3$, $x\\ge 0$, $y\\ge 0$'}. ${LATTICE.es}`, `${'$x+y\\le 3$ و$x\\ge 0$ و$y\\ge 0$'}. ${LATTICE.ar}`), solution: same('$4+3+2+1=10$'), answer: { expected: n(10) } },
+            { id: 35, difficulty: 'medium', question: say(`${'$x\\ge 0$, $y\\ge 0$, $x+y\\le 5$'}. ${AREA.eu}`, `${'$x\\ge 0$, $y\\ge 0$, $x+y\\le 5$'}. ${AREA.es}`, `${'$x\\ge 0$ و$y\\ge 0$ و$x+y\\le 5$'}. ${AREA.ar}`), solution: same('$\\frac{5\\cdot 5}{2}=12{,}5$'), answer: { expected: v('12,5') } },
+            { id: 36, difficulty: 'medium', question: say(`${'$y\\ge 0$, $y\\le x$, $x\\le 6$'}. ${AREA.eu}`, `${'$y\\ge 0$, $y\\le x$, $x\\le 6$'}. ${AREA.es}`, `${'$y\\ge 0$ و$y\\le x$ و$x\\le 6$'}. ${AREA.ar}`), solution: same('$\\frac{6\\cdot 6}{2}=18$'), answer: { expected: n(18) } },
+            { id: 37, difficulty: 'medium', question: say('$x+y\\le 6$, $x-y\\ge 0$, $y\\ge 0$ eskualdearen goiko erpinean, zenbat da x?', 'En el vértice superior de la región $x+y\\le 6$, $x-y\\ge 0$, $y\\ge 0$, ¿cuánto vale x?', 'في الرأس العلوي للمنطقة $x+y\\le 6$ و$x-y\\ge 0$ و$y\\ge 0$، كم تساوي x؟'), solution: same('$x+y=6,\\ x=y\\ \\to\\ 2x=6\\ \\to\\ x=3$'), answer: { expected: n(3) } },
+            { id: 38, difficulty: 'hard', question: say(`${'$x\\ge 0$, $y\\ge 0$, $2x+y\\le 4$'}. ${LATTICE.eu}`, `${'$x\\ge 0$, $y\\ge 0$, $2x+y\\le 4$'}. ${LATTICE.es}`, `${'$x\\ge 0$ و$y\\ge 0$ و$2x+y\\le 4$'}. ${LATTICE.ar}`), solution: same('$5+3+1=9$'), answer: { expected: n(9) } },
+            { id: 39, difficulty: 'hard', question: say(`${'$x\\ge 1$, $y\\ge 1$, $x+y<6$'}. ${LATTICE.eu}`, `${'$x\\ge 1$, $y\\ge 1$, $x+y<6$'}. ${LATTICE.es}`, `${'$x\\ge 1$ و$y\\ge 1$ و$x+y<6$'}. ${LATTICE.ar}`), solution: same('$4+3+2+1=10$'), answer: { expected: n(10) } },
+            { id: 40, difficulty: 'hard', question: say('Zein da k-ren balio osorik handiena $(k,k)$ puntuak $3x+2y\\le 20$ bete dezan?', '¿Cuál es el mayor valor entero de k para que $(k,k)$ cumpla $3x+2y\\le 20$?', 'ما أكبر قيمة صحيحة لـ k لكي تحقق $(k,k)$ المتراجحة $3x+2y\\le 20$؟'), solution: same('$5k\\le 20\\ \\to\\ k\\le 4$'), answer: { expected: n(4) } }
+        ]
+    },
+    {
+        id: 'problems',
+        title: say('Problemak', 'Problemas', 'المسائل'),
+        items: [
+            { id: 41, difficulty: 'easy', question: say('Bi zenbakiren batura 30 da eta kendura 6. Zein da handiena?', 'Dos números suman 30 y se diferencian en 6. ¿Cuál es el mayor?', 'عددان مجموعهما 30 والفرق بينهما 6. ما أكبرهما؟'), solution: same('$2x=36\\ \\to\\ x=18$'), answer: { expected: n(18) } },
+            { id: 42, difficulty: 'easy', question: say('1 eta 2 euroko 20 txanponek 25 € egiten dute. Zenbat dira 1 eurokoak?', '20 monedas de 1 € y de 2 € suman 25 €. ¿Cuántas son de 1 €?', '20 قطعة من فئتي 1 € و2 € مجموعها 25 €. كم منها من فئة 1 €؟'), solution: same('$y=25-20=5\\qquad x=20-5=15$'), answer: { expected: n(15) } },
+            { id: 43, difficulty: 'easy', question: say('20 buru eta 56 hanka dituzten oiloak eta untxiak. Zenbat oilo?', 'Gallinas y conejos con 20 cabezas y 56 patas. ¿Cuántas gallinas?', 'دجاج وأرانب لها 20 رأسًا و56 رجلًا. كم دجاجة؟'), solution: same('$y=8\\qquad x=20-8=12$'), answer: { expected: n(12) } },
+            { id: 44, difficulty: 'medium', question: say('2 kafek eta 3 zukuk 7,30 € balio dute; 3 kafek eta 2 zukuk 6,70 €. Zenbat balio du kafe batek?', '2 cafés y 3 zumos cuestan 7,30 €; 3 cafés y 2 zumos, 6,70 €. ¿Cuánto cuesta un café?', 'قهوتان و3 عصائر بـ7.30 €؛ و3 قهوات وعصيران بـ6.70 €. كم ثمن القهوة؟'), solution: same('$c+z=\\frac{14}{5}=2{,}8\\qquad z-c=0{,}6\\ \\to\\ c=1{,}1$'), answer: { expected: v('1,1') } },
+            { id: 45, difficulty: 'medium', question: say('Aneren eta bere amaren adinen batura 52 da, eta 4 urte barru amak Aneren hirukoitza izango du. Zenbat urte ditu Anek?', 'Las edades de Ane y su madre suman 52, y dentro de 4 años la madre tendrá el triple que Ane. ¿Cuántos años tiene Ane?', 'مجموع عمري آنة وأمها 52، وبعد 4 سنوات سيكون عمر الأم ثلاثة أضعاف عمر آنة. كم عمر آنة؟'), solution: same('$m=3a+8\\ \\to\\ 4a+8=52\\ \\to\\ a=11$'), answer: { expected: n(11) } },
+            { id: 46, difficulty: 'medium', question: say('Laukizuzen baten perimetroa 34 cm da eta diagonala 13 cm. Zenbat neurtzen du alderik luzeenak?', 'Un rectángulo tiene 34 cm de perímetro y 13 cm de diagonal. ¿Cuánto mide el lado mayor?', 'مستطيل محيطه 34 سم وقطره 13 سم. كم طول ضلعه الأكبر؟'), solution: same('$x^{2}-17x+60=0\\ \\to\\ x=12,\\ x=5$'), answer: { expected: n(12) } },
+            { id: 47, difficulty: 'medium', question: say('Bi zenbaki positiboren biderkadura 70 da eta kendura 3. Zein da handiena?', 'Dos números positivos multiplican 70 y se diferencian en 3. ¿Cuál es el mayor?', 'عددان موجبان جداؤهما 70 والفرق بينهما 3. ما أكبرهما؟'), solution: same('$y(y+3)=70\\ \\to\\ y=7\\qquad 7+3=10$'), answer: { expected: n(10) } },
+            { id: 48, difficulty: 'hard', question: say('Bi zenbakiren batura 27 da eta haien karratuen kendura 81. Zein da txikiena?', 'Dos números suman 27 y la diferencia de sus cuadrados es 81. ¿Cuál es el menor?', 'عددان مجموعهما 27 والفرق بين مربعيهما 81. ما أصغرهما؟'), solution: same('$x-y=3\\qquad y=\\frac{27-3}{2}=12$'), answer: { expected: n(12) } },
+            { id: 49, difficulty: 'hard', question: say('8 €/kg eta 12 €/kg-ko kafeak nahastu nahi dira 9 €/kg-ko 20 kg lortzeko. Zenbat kg behar dira 8 €/kg-ko kafetik?', 'Se mezcla café de 8 €/kg y de 12 €/kg para obtener 20 kg a 9 €/kg. ¿Cuántos kg hacen falta del de 8 €/kg?', 'يُخلط بن بـ8 €/كغ وبن بـ12 €/كغ للحصول على 20 كغ بـ9 €/كغ. كم كغ من بن 8 €/كغ؟'), solution: same('$8x+12(20-x)=180\\ \\to\\ 4x=60\\ \\to\\ x=15$'), answer: { expected: n(15) } },
+            { id: 50, difficulty: 'hard', question: say('Kamioi batek gehienez 10 tona eraman ditzake, 2 tonako kutxa handietan eta tona bateko txikietan, eta gutxienez 2 handi eta 3 txiki eraman behar ditu. Zenbat konbinazio daude?', 'Un camión lleva como mucho 10 toneladas, en cajas grandes de 2 toneladas y pequeñas de 1, y tiene que llevar al menos 2 grandes y 3 pequeñas. ¿Cuántas combinaciones hay?', 'تحمل شاحنة 10 أطنان على الأكثر في صناديق كبيرة وزنها طنّان وصغيرة وزنها طن، ويجب أن تحمل كبيرين و3 صغيرة على الأقل. كم تركيبة ممكنة؟'), solution: same('$2x+y\\le 10,\\ x\\ge 2,\\ y\\ge 3\\qquad 4+2=6$'), answer: { expected: n(6) } }
+        ]
+    }
+]

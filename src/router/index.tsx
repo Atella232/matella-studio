@@ -28,6 +28,7 @@ const EstatistikaDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-estati
 const PotentziakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-potentziak').then((module) => ({ default: module.PotentziakDbh4AkIntroPage })))
 const PolinomioakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-polinomioak').then((module) => ({ default: module.PolinomioakDbh4AkIntroPage })))
 const EkuazioakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-ekuazioak').then((module) => ({ default: module.EkuazioakDbh4AkIntroPage })))
+const SistemakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-sistemak').then((module) => ({ default: module.SistemakDbh4AkIntroPage })))
 const AreakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-areak').then((module) => ({ default: module.AreakDbh4ApIntroPage })))
 const EkuazioakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-ekuazioak').then((module) => ({ default: module.EkuazioakDbh4ApIntroPage })))
 const PolinomioakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-polinomioak').then((module) => ({ default: module.PolinomioakDbh4ApIntroPage })))
@@ -255,6 +256,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/dbh4-akademikoak/ecuaciones-inecuaciones/*',
                         element: <EkuazioakDBH4AkPage />,
+                    },
+                    // Sistemas de 4.º ESO (matemáticas académicas): unidad V2
+                    {
+                        path: 'matematika/dbh4-akademikoak/sistemas/*',
+                        element: <SistemakDBH4AkPage />,
                     },
                     // Números reales y porcentajes de 4.º ESO (matemáticas académicas): unidad V2
                     {
