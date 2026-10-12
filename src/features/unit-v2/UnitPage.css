@@ -1236,12 +1236,20 @@
         font-size: 15px;
     }
 
+    /* The formula takes the whole width of the card, under the badge and the text */
     .fraction-v2-lesson-step-math {
-        grid-column: 2;
-        justify-self: start;
+        grid-column: 1 / -1;
+        justify-self: stretch;
         max-width: 100%;
         overflow-x: auto;
-        font-size: 18px;
+        padding: 8px 10px;
+        font-size: 17px;
+        text-align: center;
+    }
+
+    .fraction-v2-lesson-steps.facts .fraction-v2-lesson-step-math {
+        grid-column: 1 / -1;
+        justify-self: stretch;
     }
 }
 
