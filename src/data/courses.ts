@@ -123,7 +123,7 @@ export const courses: Course[] = [
       { id: 'ecuaciones-inecuaciones', name: 'Ecuaciones e Inecuaciones', nameEu: 'Ekuazioak eta Inekuazioak', nameAr: 'المعادلات والمتراجحات', icon: '⚖️', active: true },
       { id: 'sistemas', name: 'Sistemas de Ecuaciones', nameEu: 'Ekuazio-sistemak', nameAr: 'أنظمة المعادلات', icon: '📝', active: true },
       { id: 'areas-volumenes-semejanza', name: 'Áreas, Volúmenes y Semejanza', nameEu: 'Azalerak, Bolumenak eta Antzekotasuna', nameAr: 'المساحات والأحجام والتشابه', icon: '📦', active: true },
-      { id: 'trigonometria', name: 'Trigonometría', nameEu: 'Trigonometria', nameAr: 'حساب المثلثات', icon: '📏' },
+      { id: 'trigonometria', name: 'Trigonometría', nameEu: 'Trigonometria', nameAr: 'حساب المثلثات', icon: '📏', active: true },
       { id: 'vectores-rectas', name: 'Vectores y Rectas', nameEu: 'Bektoreak eta Zuzenak', nameAr: 'المتجهات والمستقيمات', icon: '➡️' },
       { id: 'funciones', name: 'Funciones', nameEu: 'Funtzioak', nameAr: 'الدوال', icon: '📈' },
       { id: 'funciones-polinomicas-racionales', name: 'Funciones Polinómicas y Racionales', nameEu: 'Funtzio Polinomikoak eta Arrazionalak', nameAr: 'الدوال كثيرة الحدود والنسبية', icon: '〰️' },
