@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { systemsChallenges, systemsDiagnostic, systemsExerciseBank, systemsPractice } from './content'
 import { SystemsHeroArt } from './figures'
+import { SystemsLaboratory } from './lab'
+import { systemsLabChallengeIds, systemsLabToolForTopic, systemsLabTools } from './lab/labTools'
 import { systemsStages, systemsTopics } from './lessons'
 
 const sistemakUnit: UnitDefinition = {
@@ -23,6 +25,16 @@ const sistemakUnit: UnitDefinition = {
     guidedPractice: systemsPractice,
     exerciseBank: systemsExerciseBank,
     challenges: systemsChallenges,
+    lab: {
+        description: {
+            eu: `${systemsLabTools.length} tresna, erronkekin: puntua bi zuzenetan, bigarren zuzena mugitzen, zein askatu, laburketa, zuzena eta zirkunferentzia, bi karratu, erdiplanoa eta proba-puntua, triangeluaren puntu osoak, kopurua eta guztizkoa, eta aurrekontuarekin erosten.`,
+            es: `${systemsLabTools.length} herramientas con retos: el punto en las dos rectas, mueve la segunda recta, qué despejar, reducción, recta y circunferencia, dos cuadrados, semiplano y punto de prueba, los puntos enteros del triángulo, cuántos y cuánto, y comprar con un presupuesto.`,
+            ar: `${systemsLabTools.length} أدوات مع تحديات: النقطة على المستقيمين، وتحريك المستقيم الثاني، وماذا نعزل، والحذف، والمستقيم والدائرة، ومربعان، ونصف المستوى ونقطة الاختبار، والنقاط الصحيحة في المثلث، والعدد والمجموع، والشراء بميزانية.`
+        },
+        progressIds: systemsLabChallengeIds,
+        toolForTopic: systemsLabToolForTopic,
+        render: (props) => <SystemsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Ezezagun baten balioa, zenbat ebazpen edo puntu dauden, parametro bat… eskatzen dena bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. El valor de una incógnita, cuántas soluciones o puntos hay, un parámetro… solo lo que se pide.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. قيمة مجهول أو عدد الحلول أو النقاط أو وسيطًا… المطلوب فقط.' },
         defaultForm: 'any',

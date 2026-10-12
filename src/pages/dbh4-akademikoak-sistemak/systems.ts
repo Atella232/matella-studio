@@ -54,6 +54,11 @@ export function inHalfPlane(h: HalfPlane, point: Point): boolean {
 export function clipPolygon(polygon: Point[], h: HalfPlane): Point[] {
     const keep = (point: Point) => (h.sense === '≤' || h.sense === '<' ? excess(h, point) <= 1e-9 : excess(h, point) >= -1e-9)
     const out: Point[] = []
+    // A vertex on the boundary would be added twice: as itself and as a crossing
+    const push = (point: Point) => {
+        const last = out[out.length - 1]
+        if (!last || Math.abs(last[0] - point[0]) > 1e-9 || Math.abs(last[1] - point[1]) > 1e-9) out.push(point)
+    }
     polygon.forEach((current, index) => {
         const previous = polygon[(index + polygon.length - 1) % polygon.length]
         const inCurrent = keep(current)
@@ -62,10 +67,13 @@ export function clipPolygon(polygon: Point[], h: HalfPlane): Point[] {
             const p = excess(h, previous)
             const q = excess(h, current)
             const t = p / (p - q)
-            out.push([previous[0] + t * (current[0] - previous[0]), previous[1] + t * (current[1] - previous[1])])
+            push([previous[0] + t * (current[0] - previous[0]), previous[1] + t * (current[1] - previous[1])])
         }
-        if (inCurrent) out.push(current)
+        if (inCurrent) push(current)
     })
+    const first = out[0]
+    const last = out[out.length - 1]
+    if (out.length > 1 && Math.abs(first[0] - last[0]) < 1e-9 && Math.abs(first[1] - last[1]) < 1e-9) out.pop()
     return out
 }
 
