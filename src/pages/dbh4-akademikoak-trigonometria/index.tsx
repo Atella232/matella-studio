@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readTrigonometryAnswer } from './answers'
 import { trigonometryChallenges, trigonometryDiagnostic, trigonometryExerciseBank, trigonometryPractice } from './content'
 import { TrigonometryHeroArt } from './figures'
+import { TrigonometryGames } from './games'
+import { TRIGONOMETRY_GAME_RECORDS_KEY, trigonometryGameProgressIds } from './games/info'
 import { TrigonometryLaboratory } from './lab'
 import { trigonometryLabChallengeIds, trigonometryLabToolForTopic, trigonometryLabTools } from './lab/labTools'
 import { trigonometryStages, trigonometryTopics } from './lessons'
@@ -35,6 +37,12 @@ const trigonometriaUnit: UnitDefinition = {
         progressIds: trigonometryLabChallengeIds,
         toolForTopic: trigonometryLabToolForTopic,
         render: (props) => <TrigonometryLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: trigonometryGameProgressIds,
+        recordsKey: TRIGONOMETRY_GAME_RECORDS_KEY,
+        render: (props) => <TrigonometryGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (0,75 edo 0.75), unitaterik gabe; angeluak gradutan. Negatiboak minus ikurrarekin.', es: 'Escribe un número, con coma o con punto (0,75 o 0.75), sin la unidad; los ángulos, en grados. Los negativos, con signo menos.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (0.75) دون الوحدة؛ والزوايا بالدرجات. والسالب بإشارة الناقص.' },
