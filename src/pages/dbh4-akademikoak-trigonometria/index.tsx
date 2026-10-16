@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readTrigonometryAnswer } from './answers'
 import { trigonometryChallenges, trigonometryDiagnostic, trigonometryExerciseBank, trigonometryPractice } from './content'
 import { TrigonometryHeroArt } from './figures'
+import { TrigonometryLaboratory } from './lab'
+import { trigonometryLabChallengeIds, trigonometryLabToolForTopic, trigonometryLabTools } from './lab/labTools'
 import { trigonometryStages, trigonometryTopics } from './lessons'
 
 const trigonometriaUnit: UnitDefinition = {
@@ -24,6 +26,16 @@ const trigonometriaUnit: UnitDefinition = {
     guidedPractice: trigonometryPractice,
     exerciseBank: trigonometryExerciseBank,
     challenges: trigonometryChallenges,
+    lab: {
+        description: {
+            eu: `${trigonometryLabTools.length} tresna, erronkekin: katetoetatik arrazoietara, 30°, 45° eta 60°, sinutik besteetara, kalkulagailua gradu eta minututan, bi alde ezagututa, goratze-angelua, behaketa bikoitza, azalera ½ · b · c · sin A, zirkunferentzia goniometrikoa, eta radiana eta arkua.`,
+            es: `${trigonometryLabTools.length} herramientas con retos: de los catetos a las razones, 30°, 45° y 60°, del seno a las demás, la calculadora en grados y minutos, conociendo dos lados, el ángulo de elevación, la doble observación, el área ½ · b · c · sen A, la circunferencia goniométrica, y el radián y el arco.`,
+            ar: `${trigonometryLabTools.length} أدوات مع تحديات: من الضلعين القائمين إلى النسب، و30° و45° و60°، ومن الجيب إلى البقية، والآلة الحاسبة بالدرجات والدقائق، وبمعرفة ضلعين، وزاوية الارتفاع، والرصد المزدوج، والمساحة ½ · b · c · sin A، والدائرة المثلثية، والراديان والقوس.`
+        },
+        progressIds: trigonometryLabChallengeIds,
+        toolForTopic: trigonometryLabToolForTopic,
+        render: (props) => <TrigonometryLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (0,75 edo 0.75), unitaterik gabe; angeluak gradutan. Negatiboak minus ikurrarekin.', es: 'Escribe un número, con coma o con punto (0,75 o 0.75), sin la unidad; los ángulos, en grados. Los negativos, con signo menos.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (0.75) دون الوحدة؛ والزوايا بالدرجات. والسالب بإشارة الناقص.' },
         defaultForm: 'any',
