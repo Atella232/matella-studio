@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readFunctionsAnswer } from './answers'
 import { functionsAkChallenges, functionsAkDiagnostic, functionsAkExerciseBank, functionsAkPractice } from './content'
 import { FunctionsAkHeroArt } from './figures'
+import { FunctionsAkGames } from './games'
+import { FUNCTIONS_AK_GAME_RECORDS_KEY, functionsAkGameProgressIds } from './games/info'
 import { FunctionsAkLaboratory } from './lab'
 import { functionsAkLabChallengeIds, functionsAkLabToolForTopic, functionsAkLabTools } from './lab/labTools'
 import { functionsAkStages, functionsAkTopics } from './lessons'
@@ -35,6 +37,12 @@ const funtzioakUnit: UnitDefinition = {
         progressIds: functionsAkLabChallengeIds,
         toolForTopic: functionsAkLabToolForTopic,
         render: (props) => <FunctionsAkLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: functionsAkGameProgressIds,
+        recordsKey: FUNCTIONS_AK_GAME_RECORDS_KEY,
+        render: (props) => <FunctionsAkGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bakar bat: irudia, tartearen muturra, erroa, parametroa edo tasa. Adibidez 5, −3, 2,5 edo 4/3.', es: 'Escribe un solo número: la imagen, el extremo del intervalo, la raíz, el parámetro o la tasa. Por ejemplo 5, −3, 2,5 o 4/3.', ar: 'اكتب عددًا واحدًا: الصورة أو طرف الفترة أو الجذر أو الوسيط أو المعدل. مثلًا 5 أو ⁦−3⁩ أو 2.5 أو 4/3.' },
