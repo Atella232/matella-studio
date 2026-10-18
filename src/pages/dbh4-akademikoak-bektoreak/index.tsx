@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readVectorsAnswer } from './answers'
 import { vectorsChallenges, vectorsDiagnostic, vectorsExerciseBank, vectorsPractice } from './content'
 import { VectorsHeroArt } from './figures'
+import { VectorsLaboratory } from './lab'
+import { vectorsLabChallengeIds, vectorsLabToolForTopic, vectorsLabTools } from './lab/labTools'
 import { vectorsStages, vectorsTopics } from './lessons'
 
 const bektoreakUnit: UnitDefinition = {
@@ -24,6 +26,16 @@ const bektoreakUnit: UnitDefinition = {
     guidedPractice: vectorsPractice,
     exerciseBank: vectorsExerciseBank,
     challenges: vectorsChallenges,
+    lab: {
+        description: {
+            eu: `${vectorsLabTools.length} tresna, erronkekin: A-tik B-rako bektorea, a · u + b · v konbinazioa, zuzenkiaren luzera eta erdiko puntua, hirugarren puntua, puntua, norabidea eta t, zuzen bera forma guztietan, malda, bigarren zuzena, erdibitzailea, eta zirkunferentzia eta puntu bat.`,
+            es: `${vectorsLabTools.length} herramientas con retos: el vector de A a B, la combinación a · u + b · v, longitud y punto medio de un segmento, el tercer punto, punto, dirección y t, la misma recta en todas sus formas, la pendiente, la segunda recta, la mediatriz, y una circunferencia y un punto.`,
+            ar: `${vectorsLabTools.length} أدوات مع تحديات: المتجه من A إلى B، والتركيب a · u + b · v، وطول القطعة ومنتصفها، والنقطة الثالثة، ونقطة واتجاه وt، والمستقيم نفسه بكل صيغه، والميل، والمستقيم الثاني، ومحور القطعة، ودائرة ونقطة.`
+        },
+        progressIds: vectorsLabChallengeIds,
+        toolForTopic: vectorsLabToolForTopic,
+        render: (props) => <VectorsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bakar bat: eskatzen den koordenatua, luzera, malda edo parametroa. Adibidez 5, −3, 2,5 edo 4/3.', es: 'Escribe un solo número: la coordenada, la longitud, la pendiente o el parámetro que se pide. Por ejemplo 5, −3, 2,5 o 4/3.', ar: 'اكتب عددًا واحدًا: الإحداثي أو الطول أو الميل أو الوسيط المطلوب. مثلًا 5 أو ⁦−3⁩ أو 2.5 أو 4/3.' },
         defaultForm: 'any',
