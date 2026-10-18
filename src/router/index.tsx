@@ -31,6 +31,7 @@ const EkuazioakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-ekuazio
 const SistemakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-sistemak').then((module) => ({ default: module.SistemakDbh4AkIntroPage })))
 const AreakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-areak').then((module) => ({ default: module.AreakDbh4AkIntroPage })))
 const TrigonometriaDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-trigonometria').then((module) => ({ default: module.TrigonometriaDbh4AkIntroPage })))
+const BektoreakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-bektoreak').then((module) => ({ default: module.BektoreakDbh4AkIntroPage })))
 const AreakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-areak').then((module) => ({ default: module.AreakDbh4ApIntroPage })))
 const EkuazioakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-ekuazioak').then((module) => ({ default: module.EkuazioakDbh4ApIntroPage })))
 const PolinomioakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-polinomioak').then((module) => ({ default: module.PolinomioakDbh4ApIntroPage })))
@@ -273,6 +274,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/dbh4-akademikoak/trigonometria/*',
                         element: <TrigonometriaDBH4AkPage />,
+                    },
+                    // Vectores y rectas de 4.º ESO (matemáticas académicas): unidad V2
+                    {
+                        path: 'matematika/dbh4-akademikoak/vectores-rectas/*',
+                        element: <BektoreakDBH4AkPage />,
                     },
                     // Números reales y porcentajes de 4.º ESO (matemáticas académicas): unidad V2
                     {
