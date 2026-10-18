@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readVectorsAnswer } from './answers'
 import { vectorsChallenges, vectorsDiagnostic, vectorsExerciseBank, vectorsPractice } from './content'
 import { VectorsHeroArt } from './figures'
+import { VectorsGames } from './games'
+import { VECTORS_GAME_RECORDS_KEY, vectorsGameProgressIds } from './games/info'
 import { VectorsLaboratory } from './lab'
 import { vectorsLabChallengeIds, vectorsLabToolForTopic, vectorsLabTools } from './lab/labTools'
 import { vectorsStages, vectorsTopics } from './lessons'
@@ -35,6 +37,12 @@ const bektoreakUnit: UnitDefinition = {
         progressIds: vectorsLabChallengeIds,
         toolForTopic: vectorsLabToolForTopic,
         render: (props) => <VectorsLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: vectorsGameProgressIds,
+        recordsKey: VECTORS_GAME_RECORDS_KEY,
+        render: (props) => <VectorsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bakar bat: eskatzen den koordenatua, luzera, malda edo parametroa. Adibidez 5, −3, 2,5 edo 4/3.', es: 'Escribe un solo número: la coordenada, la longitud, la pendiente o el parámetro que se pide. Por ejemplo 5, −3, 2,5 o 4/3.', ar: 'اكتب عددًا واحدًا: الإحداثي أو الطول أو الميل أو الوسيط المطلوب. مثلًا 5 أو ⁦−3⁩ أو 2.5 أو 4/3.' },
