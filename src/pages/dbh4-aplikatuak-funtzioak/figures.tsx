@@ -307,7 +307,7 @@ export function ContinuityFigure({ language }: { language: UnitLanguage }) {
         <Figure height={282} label={pick(language, say('Hiru etenune mota: jauzia, puntu lekualdatua eta adar infinitua', 'Tres tipos de discontinuidad: salto, punto desplazado y rama infinita', 'ثلاثة أنواع من الانقطاع: قفزة ونقطة منزاحة وفرع لانهائي'))}>
             {panels.map((panel, index) => (
                 <g key={index}>
-                    <Label x={panel.ox + 65} y={30} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, panel.title)}</Label>
+                    <Label x={panel.ox + 65} y={26} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, panel.title)}</Label>
                     <Frame box={box} cell={26} ox={panel.ox} oy={56}>
                         {(map, clip) => (
                             <g>
