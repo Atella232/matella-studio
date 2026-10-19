@@ -1,0 +1,363 @@
+import type { UnitStage, UnitTopic } from '../../features/unit-v2/types'
+import { LineEquationFigure, SlopeFigure } from '../dbh2-funtzioak-v2/figures'
+import { HyperbolaFigure, ParabolaShapesFigure, ShiftedHyperbolaFigure, ShiftFigure, VertexFigure } from '../dbh4-aplikatuak-grafikoa/figures'
+import { same, say } from '../dbh4-akademikoak-funtzioak/text'
+import {
+    AbsLinearFigure,
+    AbsPiecesFigure,
+    AbsQuadraticFigure,
+    LineKindsFigure,
+    LineParabolaFigure,
+    ParabolaCutsFigure,
+    RationalFormFigure,
+    VertexPointFigure
+} from './figures'
+
+/* ==========================================================================
+   Funtzio polinomikoak eta arrazionalak · 4. DBH akademikoak — stages and
+   lessons, following Santillana 4.º Académicas unit 10 (Funciones
+   polinómicas y racionales: linear functions, the slope and the equation
+   of a line, parabolas with their vertex and intercepts, translations,
+   inverse proportion and hyperbolas y = k/(x − a) + b) and Anaya 4.º
+   Académicas unit 5 (Funciones elementales: lines through a point or two
+   points, parabolas and their intercepts with a line, functions with
+   absolute value written piecewise, inverse proportion and rational
+   functions with their asymptotes).
+   ========================================================================== */
+
+export type PolynomialAkStageId = 'lines' | 'parabolas' | 'shifts' | 'absolute' | 'rational'
+
+export const polynomialAkStages: UnitStage[] = [
+    { id: 'lines', tone: 'blue', title: { eu: 'Funtzio linealak', es: 'Funciones lineales', ar: 'الدوال الخطية' } },
+    { id: 'parabolas', tone: 'violet', title: { eu: 'Funtzio koadratikoak', es: 'Funciones cuadráticas', ar: 'الدوال التربيعية' } },
+    { id: 'shifts', tone: 'mustard', title: { eu: 'Lekualdaketak eta ebakidurak', es: 'Traslaciones y cortes', ar: 'الانسحابات والتقاطعات' } },
+    { id: 'absolute', tone: 'coral', title: { eu: 'Balio absolutua', es: 'Valor absoluto', ar: 'القيمة المطلقة' } },
+    { id: 'rational', tone: 'green', title: { eu: 'Funtzio arrazionalak', es: 'Funciones racionales', ar: 'الدوال الكسرية' } }
+]
+
+export const polynomialAkTopics: UnitTopic[] = [
+    /* ---------- 1. Linear functions ---------- */
+    {
+        id: 'line-kinds',
+        stage: 'lines',
+        title: say('Funtzio linealak, proportzionalak eta konstanteak', 'Funciones lineales, de proporcionalidad y constantes', 'الدوال الخطية والتناسبية والثابتة'),
+        goal: say('$y=mx+n$ funtzio mota bereiztea, $m$ eta $n$ irakurtzea eta zuzena bi punturekin marraztea.', 'Distinguir los tipos de función $y=mx+n$, leer $m$ y $n$ y dibujar la recta con dos puntos.', 'التمييز بين أنواع الدالة $y=mx+n$، وقراءة $m$ و$n$، ورسم المستقيم بنقطتين.'),
+        explanation: say(
+            'Lehen mailako polinomio baten grafikoa zuzen bat da: $y=mx+n$. $m$ malda da (zuzenaren inklinazioa) eta $n$ jatorriko ordenatua (zuzenak Y ardatza $(0,\\,n)$ puntuan ebakitzen du). Hiru kasu daude. $n=0$ bada, $y=mx$ proportzionaltasun zuzeneko funtzioa da, eta zuzenak jatorritik pasatzen da: adibidez, kilo bakoitza 2 € bada, $y=2x$. $m\\ne 0$ eta $n\\ne 0$ badira, funtzio lineala (afina) da: taxi batek 3 € hartzen baditu hasieran eta 1,2 € km bakoitzeko, $y=1{,}2x+3$. $m=0$ bada, $y=n$ funtzio konstantea da, X ardatzaren zuzen paraleloa. Zuzen bat marrazteko nahikoa da bi puntu: kalkulatu, adibidez, $f(0)$ eta beste irudi bat.',
+            'La gráfica de un polinomio de primer grado es una recta: $y=mx+n$. $m$ es la pendiente (la inclinación de la recta) y $n$ la ordenada en el origen (la recta corta al eje Y en el punto $(0,\\,n)$). Hay tres casos. Si $n=0$, $y=mx$ es una función de proporcionalidad directa y la recta pasa por el origen: si cada kilo cuesta 2 €, $y=2x$. Si $m\\ne 0$ y $n\\ne 0$, es una función lineal (afín): un taxi que cobra 3 € al subir y 1,2 € por km da $y=1{,}2x+3$. Si $m=0$, $y=n$ es una función constante, una recta paralela al eje X. Para dibujar una recta bastan dos puntos: calcula, por ejemplo, $f(0)$ y otra imagen.',
+            'رسم كثير حدود من الدرجة الأولى مستقيم: $y=mx+n$. $m$ هو الميل (انحدار المستقيم) و$n$ الجزء المقطوع من محور Y (يقطع المستقيم محور Y في النقطة $(0,\\,n)$). هناك ثلاث حالات. إذا كان $n=0$ فإن $y=mx$ دالة تناسب طردي ويمر المستقيم بالأصل: إذا كان ثمن الكيلوغرام 2 € فإن $y=2x$. وإذا كان $m\\ne 0$ و$n\\ne 0$ فهي دالة خطية (تآلفية): سيارة أجرة تأخذ 3 € عند الركوب و1.2 € لكل كم تعطي $y=1{,}2x+3$. وإذا كان $m=0$ فإن $y=n$ دالة ثابتة، مستقيم يوازي محور X. يكفي لرسم المستقيم نقطتان: احسب مثلًا $f(0)$ وصورة أخرى.'
+        ),
+        problem: say('Marraztu $y=-\\frac{1}{2}x+2$: aurkitu bi puntu.', 'Representa $y=-\\frac{1}{2}x+2$: halla dos puntos.', 'ارسم $y=-\\frac{1}{2}x+2$: أوجد نقطتين.'),
+        stepsKind: 'steps',
+        steps: [
+            { text: say('$x=0$: jatorriko ordenatua.', '$x=0$: la ordenada en el origen.', '$x=0$: الجزء المقطوع.'), math: same('$f(0)=2\\ \\to\\ (0,\\,2)$') },
+            { text: say('$x=4$ hartu, zatikia desagertzeko.', 'Toma $x=4$ para que se vaya la fracción.', 'خذ $x=4$ لتختفي الكسور.'), math: same('$f(4)=-2+2=0$') },
+            { text: say('Lotu $(0,\\,2)$ eta $(4,\\,0)$ puntuak.', 'Une $(0,\\,2)$ y $(4,\\,0)$.', 'صِل $(0,\\,2)$ و$(4,\\,0)$.'), math: same('$m=-\\frac{1}{2}<0$') }
+        ],
+        example: same('$y=mx+n$'),
+        takeaway: say('Proportzionala: n = 0. Konstantea: m = 0. Bi puntu nahikoak dira zuzena marrazteko.', 'Proporcional: n = 0. Constante: m = 0. Dos puntos bastan para dibujar la recta.', 'تناسبية: n = 0. ثابتة: m = 0. تكفي نقطتان لرسم المستقيم.'),
+        figure: (language) => <LineKindsFigure language={language} />
+    },
+    {
+        id: 'slope',
+        stage: 'lines',
+        title: say('Malda', 'La pendiente', 'الميل'),
+        goal: say('Bi puntutatik pasatzen den zuzenaren malda kalkulatzea eta zuzena gorakorra edo beherakorra den esatea.', 'Calcular la pendiente de la recta que pasa por dos puntos y decir si la recta es creciente o decreciente.', 'حساب ميل المستقيم المار بنقطتين، وتحديد ما إذا كان متزايدًا أو متناقصًا.'),
+        explanation: say(
+            'Malda zuzenak gora egiten duena da $x$ unitate bat aurreratzean. $A(x_1,\\,y_1)$ eta $B(x_2,\\,y_2)$ puntuetatik pasatzen bada, $m=\\dfrac{y_2-y_1}{x_2-x_1}$: $y$-ren aldaketa zati $x$-ren aldaketa, ordena berean. $A(1,\\,2)$ eta $B(4,\\,8)$ puntuetan, $m=\\frac{6}{3}=2$: $x$ 1 aurreratzean, $y$ 2 igotzen da. $m>0$ bada, funtzioa gorakorra da; $m<0$ bada, beherakorra; $m=0$ bada, konstantea. Zenbat eta handiagoa izan $|m|$, orduan eta zutikago zuzena. Malda zatiki bat denean, $m=\\frac{2}{3}$ adibidez, irakurri honela: 3 eskuinera, 2 gora. Bi puntuen $x$ berdina bada, zuzena bertikala da eta ez da funtzio bat.',
+            'La pendiente es lo que sube la recta al avanzar una unidad en $x$. Si pasa por $A(x_1,\\,y_1)$ y $B(x_2,\\,y_2)$, $m=\\dfrac{y_2-y_1}{x_2-x_1}$: la variación de $y$ entre la variación de $x$, en el mismo orden. Con $A(1,\\,2)$ y $B(4,\\,8)$, $m=\\frac{6}{3}=2$: al avanzar 1 en $x$, $y$ sube 2. Si $m>0$ la función es creciente; si $m<0$, decreciente; si $m=0$, constante. Cuanto mayor es $|m|$, más empinada es la recta. Cuando la pendiente es una fracción, como $m=\\frac{2}{3}$, léela así: 3 a la derecha y 2 hacia arriba. Si los dos puntos tienen la misma $x$, la recta es vertical y no es una función.',
+            'الميل هو مقدار صعود المستقيم عند التقدم وحدة واحدة في $x$. إذا مرّ بـ $A(x_1,\\,y_1)$ و$B(x_2,\\,y_2)$ فإن $m=\\dfrac{y_2-y_1}{x_2-x_1}$: تغير $y$ مقسومًا على تغير $x$ بالترتيب نفسه. مع $A(1,\\,2)$ و$B(4,\\,8)$ يكون $m=\\frac{6}{3}=2$: عند التقدم 1 في $x$ يصعد $y$ بمقدار 2. إذا كان $m>0$ فالدالة متزايدة؛ وإذا كان $m<0$ فمتناقصة؛ وإذا كان $m=0$ فثابتة. كلما كبر $|m|$ ازداد انحدار المستقيم. وعندما يكون الميل كسرًا مثل $m=\\frac{2}{3}$ فاقرأه هكذا: 3 إلى اليمين و2 إلى الأعلى. وإذا كان للنقطتين $x$ نفسه فالمستقيم رأسي وليس دالة.'
+        ),
+        problem: say('Kalkulatu $A(-1,\\,4)$ eta $B(3,\\,-4)$ puntuetatik pasatzen den zuzenaren malda.', 'Calcula la pendiente de la recta que pasa por $A(-1,\\,4)$ y $B(3,\\,-4)$.', 'احسب ميل المستقيم المار بـ $A(-1,\\,4)$ و$B(3,\\,-4)$.'),
+        stepsKind: 'steps',
+        steps: [
+            { text: say('$y$-ren aldaketa zati $x$-ren aldaketa.', 'Variación de $y$ entre variación de $x$.', 'تغير $y$ على تغير $x$.'), math: same('$m=\\frac{-4-4}{3-(-1)}$') },
+            { text: say('Kalkulatu.', 'Calcula.', 'احسب.'), math: same('$m=\\frac{-8}{4}=-2$') },
+            { text: say('Negatiboa: beherakorra.', 'Negativa: decreciente.', 'سالب: متناقصة.'), math: same('$m<0$') }
+        ],
+        example: same('$m=\\frac{y_2-y_1}{x_2-x_1}$'),
+        takeaway: say('Malda: y-ren aldaketa zati x-ren aldaketa. Positiboa, gorakorra; negatiboa, beherakorra.', 'Pendiente: variación de y entre variación de x. Positiva, creciente; negativa, decreciente.', 'الميل: تغير y على تغير x. موجب: متزايدة؛ سالب: متناقصة.'),
+        figure: (language) => <SlopeFigure language={language} />
+    },
+    {
+        id: 'line-equation',
+        stage: 'lines',
+        title: say('Zuzenaren ekuazioa', 'La ecuación de la recta', 'معادلة المستقيم'),
+        goal: say('Zuzen baten ekuazioa idaztea puntu bat eta malda, bi puntu edo zuzen paralelo bat ezagututa.', 'Escribir la ecuación de una recta conociendo un punto y la pendiente, dos puntos o una recta paralela.', 'كتابة معادلة مستقيم بمعرفة نقطة والميل، أو نقطتين، أو مستقيم موازٍ.'),
+        explanation: say(
+            '$(x_0,\\,y_0)$ puntutik pasatzen den eta $m$ malda duen zuzenaren ekuazioa puntu-malda ekuazioa da: $y-y_0=m(x-x_0)$. Gero askatu $y$ eta $y=mx+n$ forman geratzen da. Bi puntu ematen badizkigute, lehenik kalkulatu malda haiekin eta gero erabili horietako bat: $(1,\\,2)$ eta $(3,\\,8)$ puntuetan $m=3$, eta $y-2=3(x-1)$, hau da, $y=3x-1$. Bi zuzen paraleloak dira malda bera badute; beraz, $y=2x+5$ zuzenaren paraleloa den eta $(1,\\,-1)$ puntutik pasatzen den zuzena $y+1=2(x-1)$ da, $y=2x-3$. Egiaztatzeko, ordeztu puntuak lortutako ekuazioan.',
+            'La ecuación de la recta que pasa por el punto $(x_0,\\,y_0)$ con pendiente $m$ es la ecuación punto-pendiente: $y-y_0=m(x-x_0)$. Después despeja $y$ y queda en la forma $y=mx+n$. Si nos dan dos puntos, primero calcula la pendiente con ellos y luego usa uno de los dos: con $(1,\\,2)$ y $(3,\\,8)$, $m=3$, e $y-2=3(x-1)$, es decir, $y=3x-1$. Dos rectas son paralelas si tienen la misma pendiente; así, la paralela a $y=2x+5$ que pasa por $(1,\\,-1)$ es $y+1=2(x-1)$, o sea $y=2x-3$. Para comprobarlo, sustituye los puntos en la ecuación obtenida.',
+            'معادلة المستقيم المار بالنقطة $(x_0,\\,y_0)$ وميله $m$ هي معادلة النقطة والميل: $y-y_0=m(x-x_0)$. ثم اعزل $y$ فتصير على الصورة $y=mx+n$. وإذا أُعطيت نقطتين فاحسب الميل بهما أولًا ثم استعمل إحداهما: مع $(1,\\,2)$ و$(3,\\,8)$ يكون $m=3$ و$y-2=3(x-1)$، أي $y=3x-1$. يتوازى مستقيمان إذا كان لهما الميل نفسه؛ فالمستقيم الموازي لـ $y=2x+5$ والمار بـ $(1,\\,-1)$ هو $y+1=2(x-1)$، أي $y=2x-3$. وللتحقق عوّض النقاط في المعادلة الناتجة.'
+        ),
+        problem: say('Idatzi $(1,\\,2)$ eta $(3,\\,8)$ puntuetatik pasatzen den zuzenaren ekuazioa.', 'Escribe la ecuación de la recta que pasa por $(1,\\,2)$ y $(3,\\,8)$.', 'اكتب معادلة المستقيم المار بـ $(1,\\,2)$ و$(3,\\,8)$.'),
+        stepsKind: 'steps',
+        steps: [
+            { text: say('Malda.', 'La pendiente.', 'الميل.'), math: same('$m=\\frac{8-2}{3-1}=3$') },
+            { text: say('Puntu-malda ekuazioa.', 'Ecuación punto-pendiente.', 'معادلة النقطة والميل.'), math: same('$y-2=3(x-1)$') },
+            { text: say('Askatu $y$.', 'Despeja $y$.', 'اعزل $y$.'), math: same('$y=3x-1$') }
+        ],
+        example: same('$y-y_0=m(x-x_0)$'),
+        takeaway: say('Puntu bat eta malda: y − y₀ = m(x − x₀). Paraleloak: malda bera.', 'Un punto y la pendiente: y − y₀ = m(x − x₀). Paralelas: la misma pendiente.', 'نقطة وميل: y − y₀ = m(x − x₀). المتوازيان: الميل نفسه.'),
+        figure: (language) => <LineEquationFigure language={language} />
+    },
+
+    /* ---------- 2. Quadratic functions ---------- */
+    {
+        id: 'parabola-a',
+        stage: 'parabolas',
+        title: say('$y=ax^{2}$ parabolak', 'Las parábolas $y=ax^{2}$', 'القطوع المكافئة $y=ax^{2}$'),
+        goal: say('$a$ koefizienteak parabolaren forman duen eragina ulertzea: irekiera, norabidea eta erpina.', 'Entender cómo influye el coeficiente $a$ en la forma de la parábola: abertura, orientación y vértice.', 'فهم أثر المعامل $a$ في شكل القطع المكافئ: الانفتاح والاتجاه والرأس.'),
+        explanation: say(
+            'Bigarren mailako polinomio baten grafikoa parabola bat da. Errazena $y=ax^{2}$ da: erpina $(0,\\,0)$ puntuan du eta Y ardatza simetria-ardatz du, $f(-x)=f(x)$ delako. $a>0$ bada, adarrak gora doaz eta erpina minimoa da; $a<0$ bada, adarrak behera doaz eta erpina maximoa da. $|a|$ zenbat eta handiagoa izan, orduan eta itxiagoa parabola: $y=3x^{2}$ itxiagoa da $y=x^{2}$ baino, eta $y=\\frac{1}{2}x^{2}$ irekiagoa. Balio-taula egiteko, hartu $x$-ren balio simetrikoak: $y=2x^{2}$ funtzioan, $x=\\pm 1$ denean $y=2$ eta $x=\\pm 2$ denean $y=8$.',
+            'La gráfica de un polinomio de segundo grado es una parábola. La más sencilla es $y=ax^{2}$: tiene el vértice en $(0,\\,0)$ y el eje Y como eje de simetría, porque $f(-x)=f(x)$. Si $a>0$, las ramas van hacia arriba y el vértice es un mínimo; si $a<0$, las ramas van hacia abajo y el vértice es un máximo. Cuanto mayor es $|a|$, más cerrada es la parábola: $y=3x^{2}$ es más cerrada que $y=x^{2}$, e $y=\\frac{1}{2}x^{2}$ más abierta. Para la tabla de valores, toma valores de $x$ simétricos: en $y=2x^{2}$, para $x=\\pm 1$ sale $y=2$ y para $x=\\pm 2$ sale $y=8$.',
+            'رسم كثير حدود من الدرجة الثانية قطع مكافئ. أبسطه $y=ax^{2}$: رأسه في $(0,\\,0)$ ومحور تماثله محور Y لأن $f(-x)=f(x)$. إذا كان $a>0$ يتجه الفرعان إلى الأعلى ويكون الرأس قيمة صغرى؛ وإذا كان $a<0$ يتجهان إلى الأسفل ويكون الرأس قيمة عظمى. كلما كبر $|a|$ ضاق القطع: $y=3x^{2}$ أضيق من $y=x^{2}$، و$y=\\frac{1}{2}x^{2}$ أوسع. ولجدول القيم خذ قيمًا متماثلة لـ $x$: في $y=2x^{2}$ يكون $y=2$ عند $x=\\pm 1$ و$y=8$ عند $x=\\pm 2$.'
+        ),
+        problem: say('Kalkulatu $y=3x^{2}$ eta $y=-\\frac{1}{2}x^{2}$ funtzioen balioa $x=2$ puntuan. Zein dago behera irekita?', 'Calcula el valor de $y=3x^{2}$ y de $y=-\\frac{1}{2}x^{2}$ en $x=2$. ¿Cuál se abre hacia abajo?', 'احسب قيمة $y=3x^{2}$ و$y=-\\frac{1}{2}x^{2}$ عند $x=2$. أيهما مفتوح إلى الأسفل؟'),
+        stepsKind: 'steps',
+        steps: [
+            { text: say('Lehenengoa: $a=3>0$, gora.', 'La primera: $a=3>0$, hacia arriba.', 'الأولى: $a=3>0$، إلى الأعلى.'), math: same('$3\\cdot 2^{2}=12$') },
+            { text: say('Bigarrena: $a<0$, behera.', 'La segunda: $a<0$, hacia abajo.', 'الثانية: $a<0$، إلى الأسفل.'), math: same('$-\\frac{1}{2}\\cdot 2^{2}=-2$') }
+        ],
+        example: same('$y=ax^{2}$'),
+        takeaway: say('a > 0: gora eta minimoa. a < 0: behera eta maximoa. |a| handiagoa: itxiagoa.', 'a > 0: hacia arriba y mínimo. a < 0: hacia abajo y máximo. |a| mayor: más cerrada.', 'a > 0: إلى الأعلى وقيمة صغرى. a < 0: إلى الأسفل وقيمة عظمى. |a| أكبر: أضيق.'),
+        figure: (language) => <ParabolaShapesFigure language={language} />
+    },
+    {
+        id: 'vertex',
+        stage: 'parabolas',
+        title: say('Erpina eta simetria-ardatza', 'Vértice y eje de simetría', 'الرأس ومحور التماثل'),
+        goal: say('$y=ax^{2}+bx+c$ parabolaren erpina kalkulatzea, maximoa ala minimoa den esatea eta ibiltartea idaztea.', 'Calcular el vértice de la parábola $y=ax^{2}+bx+c$, decir si es máximo o mínimo y escribir el recorrido.', 'حساب رأس القطع $y=ax^{2}+bx+c$، وتحديد ما إذا كان عظمى أو صغرى، وكتابة المدى.'),
+        explanation: say(
+            '$y=ax^{2}+bx+c$ parabola $y=ax^{2}$ bera da, beste leku batera eramanda: forma bera du ($a$-k erabakitzen du), baina erpina beste puntu batean dago. Erpinaren abzisa $x_v=\\dfrac{-b}{2a}$ da, eta ordenatua irudia kalkulatuta lortzen da: $y_v=f(x_v)$. $y=x^{2}-4x+3$ funtzioan $x_v=\\frac{4}{2}=2$ eta $y_v=4-8+3=-1$: $V(2,\\,-1)$. Simetria-ardatza $x=x_v$ zuzen bertikala da: erpinetik distantzia berera dauden puntuek irudi bera dute. $a>0$ bada, erpina minimoa da eta ibiltartea $[y_v,\\,+\\infty)$; $a<0$ bada, maximoa da eta ibiltartea $(-\\infty,\\,y_v]$. Problemetan erpinak ematen du balio handiena edo txikiena: altuera maximoa, etekin handiena, azalera maximoa…',
+            'La parábola $y=ax^{2}+bx+c$ es la misma $y=ax^{2}$ llevada a otro sitio: tiene la misma forma (la decide $a$), pero el vértice está en otro punto. La abscisa del vértice es $x_v=\\dfrac{-b}{2a}$, y la ordenada sale de calcular la imagen: $y_v=f(x_v)$. En $y=x^{2}-4x+3$, $x_v=\\frac{4}{2}=2$ e $y_v=4-8+3=-1$: $V(2,\\,-1)$. El eje de simetría es la recta vertical $x=x_v$: los puntos a la misma distancia del vértice tienen la misma imagen. Si $a>0$, el vértice es un mínimo y el recorrido es $[y_v,\\,+\\infty)$; si $a<0$, es un máximo y el recorrido es $(-\\infty,\\,y_v]$. En los problemas el vértice da el valor mayor o menor: la altura máxima, el beneficio mayor, el área máxima…',
+            'القطع $y=ax^{2}+bx+c$ هو القطع $y=ax^{2}$ نفسه منقولًا إلى مكان آخر: له الشكل نفسه (يحدده $a$) لكن رأسه في نقطة أخرى. الإحداثي السيني للرأس $x_v=\\dfrac{-b}{2a}$، والصادي يأتي من حساب الصورة: $y_v=f(x_v)$. في $y=x^{2}-4x+3$ يكون $x_v=\\frac{4}{2}=2$ و$y_v=4-8+3=-1$: $V(2,\\,-1)$. محور التماثل هو المستقيم الرأسي $x=x_v$: النقاط التي على البعد نفسه من الرأس لها الصورة نفسها. إذا كان $a>0$ فالرأس قيمة صغرى والمدى $[y_v,\\,+\\infty)$؛ وإذا كان $a<0$ فهو قيمة عظمى والمدى $(-\\infty,\\,y_v]$. في المسائل يعطي الرأس القيمة الكبرى أو الصغرى: أقصى ارتفاع، أكبر ربح، أكبر مساحة…'
+        ),
+        problem: say('Kalkulatu $y=-x^{2}+4x+1$ parabolaren erpina. Maximoa ala minimoa da?', 'Calcula el vértice de $y=-x^{2}+4x+1$. ¿Es máximo o mínimo?', 'احسب رأس $y=-x^{2}+4x+1$. هل هو عظمى أم صغرى؟'),
+        stepsKind: 'steps',
+        steps: [
+            { text: say('Abzisa: $a=-1$, $b=4$.', 'Abscisa: $a=-1$, $b=4$.', 'الإحداثي السيني: $a=-1$، $b=4$.'), math: same('$x_v=\\frac{-4}{-2}=2$') },
+            { text: say('Ordenatua: irudia.', 'Ordenada: la imagen.', 'الإحداثي الصادي: الصورة.'), math: same('$y_v=-4+8+1=5$') },
+            { text: say('$a<0$: $V(2,\\,5)$ maximoa da.', '$a<0$: $V(2,\\,5)$ es un máximo.', '$a<0$: $V(2,\\,5)$ قيمة عظمى.'), math: same('$\\text{Rec}\\,f=(-\\infty,\\,5]$') }
+        ],
+        example: same('$x_v=\\frac{-b}{2a}$'),
+        takeaway: say('Erpina: x = −b/2a eta gero haren irudia. a-ren zeinuak esaten du maximoa ala minimoa den.', 'Vértice: x = −b/2a y luego su imagen. El signo de a dice si es máximo o mínimo.', 'الرأس: x = −b/2a ثم صورته. إشارة a تحدد العظمى أو الصغرى.'),
+        figure: (language) => <VertexFigure language={language} />
+    },
+    {
+        id: 'parabola-cuts',
+        stage: 'parabolas',
+        title: say('Ebaki-puntuak eta grafikoa', 'Puntos de corte y gráfica', 'نقاط التقاطع والرسم'),
+        goal: say('Parabolak ardatzekin dituen ebaki-puntuak kalkulatzea, zenbat diren diskriminatzailearekin jakitea eta grafikoa osatzea.', 'Calcular los puntos de corte de una parábola con los ejes, saber cuántos hay con el discriminante y completar la gráfica.', 'حساب نقاط تقاطع القطع المكافئ مع المحورين، ومعرفة عددها بالمميز، وإكمال الرسم.'),
+        explanation: say(
+            'Y ardatzarekin ebaki-puntua beti dago eta $x=0$ eginda lortzen da: $(0,\\,c)$. X ardatzarekin ebaki-puntuak $ax^{2}+bx+c=0$ ekuazioaren soluzioak dira, eta diskriminatzaileak, $\\Delta=b^{2}-4ac$, esaten du zenbat dauden: $\\Delta>0$ bada, bi; $\\Delta=0$ bada, bat (erpina ardatzaren gainean dago); $\\Delta<0$ bada, bat ere ez (parabola osoa ardatzaren gainetik edo azpitik dago). Parabola bat ondo marrazteko: 1) erpina, 2) ebaki-puntuak, 3) erpinaren bi aldeetako puntu batzuk, simetria aprobetxatuz. $y=x^{2}-2x-8$ funtzioan: $V(1,\\,-9)$, Y ardatza $(0,\\,-8)$ puntuan eta X ardatza $x=4$ eta $x=-2$ puntuetan; $(0,\\,-8)$ puntuaren bikia $(2,\\,-8)$ da.',
+            'El corte con el eje Y siempre existe y se obtiene haciendo $x=0$: $(0,\\,c)$. Los cortes con el eje X son las soluciones de $ax^{2}+bx+c=0$, y el discriminante, $\\Delta=b^{2}-4ac$, dice cuántos hay: si $\\Delta>0$, dos; si $\\Delta=0$, uno (el vértice está sobre el eje); si $\\Delta<0$, ninguno (toda la parábola queda por encima o por debajo del eje). Para dibujar bien una parábola: 1) el vértice, 2) los puntos de corte, 3) algunos puntos a los dos lados del vértice, aprovechando la simetría. En $y=x^{2}-2x-8$: $V(1,\\,-9)$, eje Y en $(0,\\,-8)$ y eje X en $x=4$ y $x=-2$; la pareja simétrica de $(0,\\,-8)$ es $(2,\\,-8)$.',
+            'التقاطع مع محور Y موجود دائمًا ونحصل عليه بجعل $x=0$: $(0,\\,c)$. أما التقاطعات مع محور X فهي حلول $ax^{2}+bx+c=0$، والمميز $\\Delta=b^{2}-4ac$ يحدد عددها: إذا كان $\\Delta>0$ فاثنتان؛ وإذا كان $\\Delta=0$ فواحدة (الرأس على المحور)؛ وإذا كان $\\Delta<0$ فلا شيء (يبقى القطع كله فوق المحور أو تحته). لرسم القطع جيدًا: 1) الرأس، 2) نقاط التقاطع، 3) بعض النقاط على جانبي الرأس مستفيدًا من التماثل. في $y=x^{2}-2x-8$: $V(1,\\,-9)$، ومحور Y عند $(0,\\,-8)$، ومحور X عند $x=4$ و$x=-2$؛ ونظيرة $(0,\\,-8)$ هي $(2,\\,-8)$.'
+        ),
+        problem: say('Kalkulatu $y=x^{2}-2x-8$ parabolak ardatzekin dituen ebaki-puntuak.', 'Halla los puntos de corte de $y=x^{2}-2x-8$ con los ejes.', 'أوجد نقاط تقاطع $y=x^{2}-2x-8$ مع المحورين.'),
+        stepsKind: 'steps',
+        steps: [
+            { text: say('Y ardatza: $x=0$.', 'Eje Y: $x=0$.', 'محور Y: $x=0$.'), math: same('$(0,\\,-8)$') },
+            { text: say('X ardatza: diskriminatzailea.', 'Eje X: el discriminante.', 'محور X: المميز.'), math: same('$\\Delta=4+32=36>0$') },
+            { text: say('Bi soluzio.', 'Dos soluciones.', 'حلّان.'), math: same('$x=\\frac{2\\pm 6}{2}$') },
+            { text: say('Ebaki-puntuak.', 'Los cortes.', 'نقاط التقاطع.'), math: same('$(4,\\,0),\\ (-2,\\,0)$') }
+        ],
+        example: same('$\\Delta=b^{2}-4ac$'),
+        takeaway: say('Y ardatza: (0, c). X ardatza: ebatzi ekuazioa. Δ > 0 bi, Δ = 0 bat, Δ < 0 bat ere ez.', 'Eje Y: (0, c). Eje X: resuelve la ecuación. Δ > 0 dos, Δ = 0 uno, Δ < 0 ninguno.', 'محور Y: (0, c). محور X: حُلّ المعادلة. Δ > 0 اثنتان، Δ = 0 واحدة، Δ < 0 لا شيء.'),
+        figure: (language) => <ParabolaCutsFigure language={language} />
+    },
+
+    /* ---------- 3. Translations and intersections ---------- */
+    {
+        id: 'vertex-form',
+        stage: 'shifts',
+        title: say('Parabolen lekualdaketak', 'Traslaciones de parábolas', 'انسحابات القطوع المكافئة'),
+        goal: say('$y=a(x-p)^{2}+q$ parabola $y=ax^{2}$ parabolaren lekualdaketa gisa irakurtzea eta forma orokorrera eta alderantziz igarotzea.', 'Leer $y=a(x-p)^{2}+q$ como una traslación de $y=ax^{2}$ y pasar a la forma general y al revés.', 'قراءة $y=a(x-p)^{2}+q$ انسحابًا لـ $y=ax^{2}$، والانتقال إلى الصورة العامة وبالعكس.'),
+        explanation: say(
+            '$y=a(x-p)^{2}+q$ parabola $y=ax^{2}$ da, $p$ unitate horizontalki eta $q$ unitate bertikalki lekualdatuta; erpina $(p,\\,q)$ puntuan dago. Kontuz zeinuarekin: $y=(x-3)^{2}$ eskuinera mugitzen da ($p=3$), eta $y=(x+1)^{2}=(x-(-1))^{2}$ ezkerrera ($p=-1$). $q>0$ bada, gora; $q<0$ bada, behera. Forma orokorrera igarotzeko, garatu karratua: $2(x-1)^{2}+3=2x^{2}-4x+5$. Alderantziz, $y=x^{2}-6x+5$ emanda, kalkulatu erpina: $x_v=3$, $y_v=9-18+5=-4$, eta beraz $y=(x-3)^{2}-4$; $a$ bera da bi formetan. Forma kanonikoan erpina zuzenean irakurtzen da.',
+            '$y=a(x-p)^{2}+q$ es la parábola $y=ax^{2}$ trasladada $p$ unidades en horizontal y $q$ unidades en vertical; el vértice está en $(p,\\,q)$. Cuidado con el signo: $y=(x-3)^{2}$ se mueve a la derecha ($p=3$) e $y=(x+1)^{2}=(x-(-1))^{2}$ a la izquierda ($p=-1$). Si $q>0$, hacia arriba; si $q<0$, hacia abajo. Para pasar a la forma general, desarrolla el cuadrado: $2(x-1)^{2}+3=2x^{2}-4x+5$. Al revés, dada $y=x^{2}-6x+5$, calcula el vértice: $x_v=3$, $y_v=9-18+5=-4$, así que $y=(x-3)^{2}-4$; la $a$ es la misma en las dos formas. En la forma canónica el vértice se lee directamente.',
+            '$y=a(x-p)^{2}+q$ هو القطع $y=ax^{2}$ مسحوبًا $p$ وحدة أفقيًا و$q$ وحدة رأسيًا؛ ورأسه في $(p,\\,q)$. انتبه للإشارة: $y=(x-3)^{2}$ ينتقل إلى اليمين ($p=3$)، و$y=(x+1)^{2}=(x-(-1))^{2}$ إلى اليسار ($p=-1$). إذا كان $q>0$ فإلى الأعلى؛ وإذا كان $q<0$ فإلى الأسفل. للانتقال إلى الصورة العامة انشر المربع: $2(x-1)^{2}+3=2x^{2}-4x+5$. وبالعكس، إذا أُعطيت $y=x^{2}-6x+5$ فاحسب الرأس: $x_v=3$ و$y_v=9-18+5=-4$، إذن $y=(x-3)^{2}-4$؛ والمعامل $a$ نفسه في الصورتين. في الصورة القانونية يُقرأ الرأس مباشرة.'
+        ),
+        problem: say('Nola lortzen da $y=2(x+1)^{2}-3$ parabola $y=2x^{2}$ parabolatik? Zein da erpina?', '¿Cómo se obtiene $y=2(x+1)^{2}-3$ a partir de $y=2x^{2}$? ¿Cuál es su vértice?', 'كيف نحصل على $y=2(x+1)^{2}-3$ من $y=2x^{2}$؟ وما رأسه؟'),
+        stepsKind: 'steps',
+        steps: [
+            { text: say('Idatzi $x-p$ forman.', 'Escríbelo como $x-p$.', 'اكتبه على صورة $x-p$.'), math: same('$x+1=x-(-1)$') },
+            { text: say('1 ezkerrera eta 3 behera.', '1 a la izquierda y 3 hacia abajo.', '1 إلى اليسار و3 إلى الأسفل.'), math: same('$V(-1,\\,-3)$') }
+        ],
+        example: same('$y=a(x-p)^{2}+q$'),
+        takeaway: say('Erpina (p, q): x − p barruan (zeinua aldatuta) eta q kanpoan. Forma bera, beste leku batean.', 'Vértice (p, q): x − p dentro (con el signo cambiado) y q fuera. La misma forma en otro sitio.', 'الرأس (p, q): x − p في الداخل (بإشارة معكوسة) وq في الخارج. الشكل نفسه في مكان آخر.'),
+        figure: (language) => <ShiftFigure language={language} />
+    },
+    {
+        id: 'parabola-from',
+        stage: 'shifts',
+        title: say('Parabola bat aurkitzea', 'Hallar una parábola', 'إيجاد قطع مكافئ'),
+        goal: say('Parabola baten ekuazioa aurkitzea erpina eta puntu bat, edo ebaki-puntuak eta beste puntu bat ezagututa.', 'Hallar la ecuación de una parábola conociendo el vértice y un punto, o los cortes con el eje X y otro punto.', 'إيجاد معادلة قطع مكافئ بمعرفة الرأس ونقطة، أو نقاط التقاطع مع محور X ونقطة أخرى.'),
+        explanation: say(
+            'Erpina $(p,\\,q)$ ezagutzen badugu, idatzi $y=a(x-p)^{2}+q$: falta den bakarra $a$ da, eta beste puntu bat ordeztuta lortzen da. Erpina $(1,\\,-4)$ eta $(3,\\,0)$ puntutik pasatzen bada: $0=a\\cdot 4-4$, $a=1$, eta $y=(x-1)^{2}-4=x^{2}-2x-3$. X ardatzarekin ebaki-puntuak, $r_1$ eta $r_2$, ezagutzen baditugu, erabili forma faktorizatua: $y=a(x-r_1)(x-r_2)$, eta lortu $a$ beste puntu batekin. $-1$ eta $3$ puntuetan ebakitzen badu eta $(0,\\,6)$ puntutik pasatzen bada: $6=a\\cdot(1)\\cdot(-3)$, $a=-2$. Gogoratu simetria: ebaki-puntuen erdian dago erpinaren abzisa, $x_v=\\frac{r_1+r_2}{2}$.',
+            'Si conocemos el vértice $(p,\\,q)$, escribe $y=a(x-p)^{2}+q$: solo falta $a$, que sale al sustituir otro punto. Si el vértice es $(1,\\,-4)$ y pasa por $(3,\\,0)$: $0=a\\cdot 4-4$, $a=1$, e $y=(x-1)^{2}-4=x^{2}-2x-3$. Si conocemos los cortes con el eje X, $r_1$ y $r_2$, usa la forma factorizada: $y=a(x-r_1)(x-r_2)$, y halla $a$ con otro punto. Si corta en $-1$ y en $3$ y pasa por $(0,\\,6)$: $6=a\\cdot(1)\\cdot(-3)$, $a=-2$. Recuerda la simetría: la abscisa del vértice está en medio de los cortes, $x_v=\\frac{r_1+r_2}{2}$.',
+            'إذا عرفنا الرأس $(p,\\,q)$ فاكتب $y=a(x-p)^{2}+q$: يبقى $a$ وحده، ونحصل عليه بتعويض نقطة أخرى. إذا كان الرأس $(1,\\,-4)$ والقطع يمر بـ $(3,\\,0)$: $0=a\\cdot 4-4$، $a=1$، و$y=(x-1)^{2}-4=x^{2}-2x-3$. وإذا عرفنا نقطتي التقاطع مع محور X، $r_1$ و$r_2$، فاستعمل الصورة المحللة: $y=a(x-r_1)(x-r_2)$، وأوجد $a$ بنقطة أخرى. إذا قطع عند $-1$ و$3$ ومرّ بـ $(0,\\,6)$: $6=a\\cdot(1)\\cdot(-3)$، $a=-2$. تذكّر التماثل: الإحداثي السيني للرأس في منتصف نقطتي التقاطع، $x_v=\\frac{r_1+r_2}{2}$.'
+        ),
+        problem: say('Parabola baten erpina $(1,\\,-4)$ da eta $(3,\\,0)$ puntutik pasatzen da. Idatzi haren ekuazioa.', 'Una parábola tiene el vértice en $(1,\\,-4)$ y pasa por $(3,\\,0)$. Escribe su ecuación.', 'قطع مكافئ رأسه $(1,\\,-4)$ ويمر بـ $(3,\\,0)$. اكتب معادلته.'),
+        stepsKind: 'steps',
+        steps: [
+            { text: say('Erpina ordeztu.', 'Pon el vértice.', 'ضع الرأس.'), math: same('$y=a(x-1)^{2}-4$') },
+            { text: say('$(3,\\,0)$ puntua ordeztu.', 'Sustituye el punto $(3,\\,0)$.', 'عوّض النقطة $(3,\\,0)$.'), math: same('$0=4a-4\\ \\to\\ a=1$') },
+            { text: say('Garatu.', 'Desarrolla.', 'انشر.'), math: same('$y=x^{2}-2x-3$') }
+        ],
+        example: same('$y=a(x-r_1)(x-r_2)$'),
+        takeaway: say('Erpina ezagututa: a(x − p)² + q. Ebaki-puntuak ezagututa: a(x − r₁)(x − r₂). Beste puntu batek ematen du a.', 'Con el vértice: a(x − p)² + q. Con los cortes: a(x − r₁)(x − r₂). Otro punto da la a.', 'بالرأس: a(x − p)² + q. بالتقاطعات: a(x − r₁)(x − r₂). ونقطة أخرى تعطي a.'),
+        figure: (language) => <VertexPointFigure language={language} />
+    },
+    {
+        id: 'line-parabola',
+        stage: 'shifts',
+        title: say('Zuzen eta parabola baten ebakidurak', 'Cortes de recta y parábola', 'تقاطع مستقيم وقطع مكافئ'),
+        goal: say('Zuzen baten eta parabola baten ebaki-puntuak kalkulatzea ekuazio-sistema ebatziz.', 'Calcular los puntos de corte de una recta y una parábola resolviendo un sistema de ecuaciones.', 'حساب نقاط تقاطع مستقيم وقطع مكافئ بحل نظام معادلات.'),
+        explanation: say(
+            'Bi grafikoren ebaki-puntuak bi ekuazioak aldi berean betetzen dituzten puntuak dira. Zuzen bat eta parabola bat badira, berdindu bi adierazpenak: $x^{2}-1=x+1$, eta lortzen den bigarren mailako ekuazioak, $x^{2}-x-2=0$, ematen ditu abzisak: $x=2$ eta $x=-1$. Ordenatuak kalkulatzeko, ordeztu errazena den adierazpenean (zuzenean): $(2,\\,3)$ eta $(-1,\\,0)$. Diskriminatzaileak esaten du zer gertatzen den: $\\Delta>0$ bada, zuzena ebakitzailea da (bi puntu); $\\Delta=0$ bada, ukitzailea (puntu bat); $\\Delta<0$ bada, ez dute elkar ebakitzen. Era berean, bi parabolen ebaki-puntuak ere berdinduta kalkulatzen dira.',
+            'Los puntos de corte de dos gráficas son los puntos que cumplen a la vez las dos ecuaciones. Si son una recta y una parábola, iguala las dos expresiones: $x^{2}-1=x+1$, y la ecuación de segundo grado que sale, $x^{2}-x-2=0$, da las abscisas: $x=2$ y $x=-1$. Para las ordenadas, sustituye en la expresión más sencilla (la recta): $(2,\\,3)$ y $(-1,\\,0)$. El discriminante dice qué ocurre: si $\\Delta>0$, la recta es secante (dos puntos); si $\\Delta=0$, tangente (un punto); si $\\Delta<0$, no se cortan. Del mismo modo, los cortes de dos parábolas también se calculan igualando.',
+            'نقاط تقاطع رسمين هي النقاط التي تحقق المعادلتين معًا. إذا كانا مستقيمًا وقطعًا مكافئًا فساوِ بين العبارتين: $x^{2}-1=x+1$، والمعادلة التربيعية الناتجة $x^{2}-x-2=0$ تعطي الإحداثيات السينية: $x=2$ و$x=-1$. وللإحداثيات الصادية عوّض في أبسط عبارة (المستقيم): $(2,\\,3)$ و$(-1,\\,0)$. والمميز يحدد ما يحدث: إذا كان $\\Delta>0$ فالمستقيم قاطع (نقطتان)؛ وإذا كان $\\Delta=0$ فمماس (نقطة)؛ وإذا كان $\\Delta<0$ فلا يتقاطعان. وبالطريقة نفسها تُحسب تقاطعات قطعين مكافئين بالمساواة.'
+        ),
+        problem: say('Kalkulatu $y=x^{2}-1$ eta $y=x+1$ grafikoen ebaki-puntuak.', 'Halla los puntos de corte de $y=x^{2}-1$ e $y=x+1$.', 'أوجد نقاط تقاطع $y=x^{2}-1$ و$y=x+1$.'),
+        stepsKind: 'steps',
+        steps: [
+            { text: say('Berdindu.', 'Iguala.', 'ساوِ.'), math: same('$x^{2}-1=x+1$') },
+            { text: say('Eraman dena ezkerrera.', 'Pásalo todo a la izquierda.', 'انقل كل شيء إلى اليسار.'), math: same('$x^{2}-x-2=0$') },
+            { text: say('Ebatzi.', 'Resuelve.', 'حُلّ.'), math: same('$x=2,\\ x=-1$') },
+            { text: say('Ordeztu zuzenean.', 'Sustituye en la recta.', 'عوّض في المستقيم.'), math: same('$(2,\\,3),\\ (-1,\\,0)$') }
+        ],
+        example: same('$x^{2}-1=x+1$'),
+        takeaway: say('Ebaki-puntuak: berdindu bi adierazpenak. Δ-k esaten du ebakitzailea, ukitzailea ala kanpokoa den.', 'Cortes: iguala las dos expresiones. Δ dice si es secante, tangente o exterior.', 'التقاطع: ساوِ بين العبارتين. Δ يحدد إن كان قاطعًا أو مماسًا أو خارجيًا.'),
+        figure: (language) => <LineParabolaFigure language={language} />
+    },
+
+    /* ---------- 4. Absolute value ---------- */
+    {
+        id: 'absolute-linear',
+        stage: 'absolute',
+        title: say('Zuzen baten balio absolutua', 'Valor absoluto de una recta', 'القيمة المطلقة لمستقيم'),
+        goal: say('$y=|mx+n|$ funtzioak marraztea zuzenaren zati negatiboa islatuta, eta $|x-a|=b$ bezalako ekuazioak ebaztea.', 'Dibujar funciones $y=|mx+n|$ reflejando la parte negativa de la recta y resolver ecuaciones como $|x-a|=b$.', 'رسم دوال $y=|mx+n|$ بعكس الجزء السالب من المستقيم، وحل معادلات مثل $|x-a|=b$.'),
+        explanation: say(
+            'Zenbaki baten balio absolutua zeinurik gabeko zenbakia da: $|5|=5$ eta $|-5|=5$. Beraz, $y=|f(x)|$ funtzioak ez du inoiz balio negatiborik: $f(x)\\ge 0$ den lekuan grafikoa ez da aldatzen, eta $f(x)<0$ den lekuan X ardatzarekiko simetrikoa egiten da (gora islatzen da). $y=|x-2|$ marrazteko, marraztu $y=x-2$ zuzena eta islatu X ardatzaren azpian dagoen zatia: V forma bat geratzen da, erpina $(2,\\,0)$ puntuan, barrukoa 0 egiten den lekuan. $|x-2|$ zenbakizuzenean $x$-tik 2ra dagoen distantzia ere bada, eta horregatik $|x-1|=3$ ekuazioak bi soluzio ditu: $x-1=3$ edo $x-1=-3$, hau da, $x=4$ eta $x=-2$.',
+            'El valor absoluto de un número es el número sin su signo: $|5|=5$ y $|-5|=5$. Por eso, la función $y=|f(x)|$ nunca toma valores negativos: donde $f(x)\\ge 0$ la gráfica no cambia, y donde $f(x)<0$ se hace simétrica respecto al eje X (se refleja hacia arriba). Para dibujar $y=|x-2|$, traza la recta $y=x-2$ y refleja el trozo que queda por debajo del eje X: queda una V con el pico en $(2,\\,0)$, donde lo de dentro vale 0. $|x-2|$ es también la distancia de $x$ a 2 en la recta numérica, y por eso la ecuación $|x-1|=3$ tiene dos soluciones: $x-1=3$ o $x-1=-3$, es decir, $x=4$ y $x=-2$.',
+            'القيمة المطلقة لعدد هي العدد بلا إشارة: $|5|=5$ و$|-5|=5$. لذلك لا تأخذ الدالة $y=|f(x)|$ أي قيمة سالبة أبدًا: حيث $f(x)\\ge 0$ لا يتغير الرسم، وحيث $f(x)<0$ يصير متماثلًا بالنسبة لمحور X (ينعكس إلى الأعلى). لرسم $y=|x-2|$ ارسم المستقيم $y=x-2$ واعكس الجزء الواقع تحت محور X: يبقى شكل V رأسه في $(2,\\,0)$ حيث يساوي ما بالداخل 0. و$|x-2|$ هي أيضًا المسافة بين $x$ و2 على خط الأعداد، ولذلك للمعادلة $|x-1|=3$ حلّان: $x-1=3$ أو $x-1=-3$، أي $x=4$ و$x=-2$.'
+        ),
+        problem: say('$y=|x-2|$ izanik, kalkulatu $f(0)$ eta $f(5)$. Non dago erpina?', 'Siendo $y=|x-2|$, calcula $f(0)$ y $f(5)$. ¿Dónde está el pico?', 'إذا كان $y=|x-2|$ فاحسب $f(0)$ و$f(5)$. أين الرأس؟'),
+        stepsKind: 'steps',
+        steps: [
+            { text: say('Ordeztu eta kendu zeinua.', 'Sustituye y quita el signo.', 'عوّض واحذف الإشارة.'), math: same('$f(0)=|-2|=2$') },
+            { text: say('Positiboa da: ez da aldatzen.', 'Es positivo: no cambia.', 'موجب: لا يتغير.'), math: same('$f(5)=|3|=3$') },
+            { text: say('Barrukoa 0.', 'Lo de dentro, 0.', 'ما بالداخل يساوي 0.'), math: same('$x-2=0\\ \\to\\ (2,\\,0)$') }
+        ],
+        example: same('$|-5|=5$'),
+        takeaway: say('|f(x)|: ardatzaren azpiko zatia gora islatzen da. Erpina barrukoa 0 den lekuan.', '|f(x)|: lo que está bajo el eje se refleja hacia arriba. El pico, donde lo de dentro vale 0.', '|f(x)|: ما تحت المحور ينعكس إلى الأعلى. والرأس حيث يساوي ما بالداخل 0.'),
+        figure: (language) => <AbsLinearFigure language={language} />
+    },
+    {
+        id: 'absolute-pieces',
+        stage: 'absolute',
+        title: say('Balio absolutua zatika', 'El valor absoluto a trozos', 'القيمة المطلقة على أجزاء'),
+        goal: say('Balio absolutua duen funtzio bat zatika definitutako funtzio gisa idaztea, barrukoaren zeinua aztertuta.', 'Escribir una función con valor absoluto como una función definida a trozos, estudiando el signo de lo de dentro.', 'كتابة دالة فيها قيمة مطلقة دالةً معرّفة على أجزاء بدراسة إشارة ما بالداخل.'),
+        explanation: say(
+            'Balio absolutua kentzeko, aztertu barrukoaren zeinua. Barrukoa positiboa edo zero den lekuan, utzi den bezala; negatiboa den lekuan, aldatu zeinua (aurkakoa hartu). Mugak barrukoaren erroak dira. $y=|2x-4|$ funtzioan $2x-4=0$ denean $x=2$: ezkerrean, $x=0$ hartuta, $2\\cdot 0-4<0$, beraz $y=-2x+4$; eskuinean, $y=2x-4$. Hau da, $y=-2x+4$ baldin $x<2$ eta $y=2x-4$ baldin $x\\ge 2$. Bi zatiek balio bera ematen dute $x=2$ puntuan (0), eta horregatik funtzioa jarraitua da. Zati bakoitzean funtzioa lineala denez, balio absolutuko funtzio bat zuzen-zatiz osatuta dago, eta zati bakoitzaren malda zuzenaren malda bera da edo haren aurkakoa.',
+            'Para quitar el valor absoluto, estudia el signo de lo de dentro. Donde lo de dentro es positivo o cero, se deja igual; donde es negativo, se cambia de signo (se toma el opuesto). Los límites son las raíces de lo de dentro. En $y=|2x-4|$, $2x-4=0$ cuando $x=2$: a la izquierda, tomando $x=0$, $2\\cdot 0-4<0$, así que $y=-2x+4$; a la derecha, $y=2x-4$. Es decir, $y=-2x+4$ si $x<2$ e $y=2x-4$ si $x\\ge 2$. Los dos trozos dan el mismo valor en $x=2$ (el 0), y por eso la función es continua. Como en cada trozo la función es lineal, una función con valor absoluto de una recta está hecha de trozos de recta cuya pendiente es la de la recta o su opuesta.',
+            'لحذف القيمة المطلقة ادرس إشارة ما بالداخل. حيث يكون موجبًا أو صفرًا يبقى كما هو؛ وحيث يكون سالبًا تُغيَّر إشارته (نأخذ معاكسه). والحدود هي جذور ما بالداخل. في $y=|2x-4|$ يكون $2x-4=0$ عند $x=2$: إلى اليسار، بأخذ $x=0$، $2\\cdot 0-4<0$، إذن $y=-2x+4$؛ وإلى اليمين $y=2x-4$. أي $y=-2x+4$ إذا كان $x<2$ و$y=2x-4$ إذا كان $x\\ge 2$. يعطي الجزآن القيمة نفسها عند $x=2$ (الصفر)، ولذلك الدالة متصلة. وبما أن الدالة خطية في كل جزء، فإن دالة القيمة المطلقة لمستقيم تتكون من قطع مستقيمة ميل كل منها هو ميل المستقيم أو معاكسه.'
+        ),
+        problem: say('Idatzi $y=|2x-4|$ zatika eta kalkulatu $f(-1)$.', 'Escribe $y=|2x-4|$ a trozos y calcula $f(-1)$.', 'اكتب $y=|2x-4|$ على أجزاء واحسب $f(-1)$.'),
+        stepsKind: 'steps',
+        steps: [
+            { text: say('Barrukoaren erroa.', 'La raíz de lo de dentro.', 'جذر ما بالداخل.'), math: same('$2x-4=0\\ \\to\\ x=2$') },
+            { text: say('$x<2$: negatiboa, aldatu zeinua.', '$x<2$: negativo, cambia el signo.', '$x<2$: سالب، غيّر الإشارة.'), math: same('$y=-2x+4$') },
+            { text: say('$x\\ge 2$: utzi den bezala.', '$x\\ge 2$: déjalo igual.', '$x\\ge 2$: اتركه كما هو.'), math: same('$y=2x-4$') },
+            { text: say('$-1<2$: lehen zatia.', '$-1<2$: primer trozo.', '$-1<2$: الجزء الأول.'), math: same('$f(-1)=2+4=6$') }
+        ],
+        example: same('$|2x-4|$'),
+        takeaway: say('Zatika: barrukoaren erroek banatzen dute. Negatiboa den zatian, aldatu zeinua.', 'A trozos: las raíces de lo de dentro separan. En el trozo negativo, cambia el signo.', 'على أجزاء: جذور ما بالداخل تفصل. في الجزء السالب غيّر الإشارة.'),
+        figure: (language) => <AbsPiecesFigure language={language} />
+    },
+    {
+        id: 'absolute-quadratic',
+        stage: 'absolute',
+        title: say('Parabola baten balio absolutua', 'Valor absoluto de una parábola', 'القيمة المطلقة لقطع مكافئ'),
+        goal: say('$y=|ax^{2}+bx+c|$ funtzioak marraztea eta haien maximo eta minimoak aurkitzea.', 'Dibujar funciones $y=|ax^{2}+bx+c|$ y encontrar sus máximos y mínimos.', 'رسم دوال $y=|ax^{2}+bx+c|$ وإيجاد قيمها العظمى والصغرى.'),
+        explanation: say(
+            'Parabola batekin ere berdin egiten da: marraztu barruko parabola eta islatu X ardatzaren azpian dagoen zatia. Gora irekitako parabola batean ($a>0$) zati negatiboa bi ebaki-puntuen artean dago; hor erpina gora igarotzen da eta maximo erlatibo bihurtzen da. $y=|x^{2}-4|$ funtzioan ebaki-puntuak $x=\\pm 2$ dira, eta $(0,\\,-4)$ erpina $(0,\\,4)$ bihurtzen da: grafikoak bi minimo ditu, $(-2,\\,0)$ eta $(2,\\,0)$, eta maximo erlatibo bat, $(0,\\,4)$. Zatika idatzita: $y=x^{2}-4$ baldin $x\\le -2$ edo $x\\ge 2$, eta $y=-x^{2}+4$ baldin $-2<x<2$. Parabolak ez badu X ardatza ebakitzen ($\\Delta<0$) eta gora irekita badago, $|f(x)|=f(x)$: ez da ezer aldatzen.',
+            'Con una parábola se hace igual: dibuja la parábola de dentro y refleja la parte que queda por debajo del eje X. En una parábola abierta hacia arriba ($a>0$) la parte negativa está entre los dos cortes; allí el vértice sube y se convierte en un máximo relativo. En $y=|x^{2}-4|$ los cortes son $x=\\pm 2$, y el vértice $(0,\\,-4)$ pasa a $(0,\\,4)$: la gráfica tiene dos mínimos, $(-2,\\,0)$ y $(2,\\,0)$, y un máximo relativo, $(0,\\,4)$. A trozos: $y=x^{2}-4$ si $x\\le -2$ o $x\\ge 2$, e $y=-x^{2}+4$ si $-2<x<2$. Si la parábola no corta al eje X ($\\Delta<0$) y se abre hacia arriba, $|f(x)|=f(x)$: no cambia nada.',
+            'مع القطع المكافئ نفعل الشيء نفسه: ارسم القطع الداخلي واعكس الجزء الواقع تحت محور X. في قطع مفتوح إلى الأعلى ($a>0$) يكون الجزء السالب بين نقطتي التقاطع؛ وهناك يصعد الرأس ويصير قيمة عظمى نسبية. في $y=|x^{2}-4|$ نقطتا التقاطع $x=\\pm 2$، والرأس $(0,\\,-4)$ يصير $(0,\\,4)$: للرسم قيمتان صغريان $(-2,\\,0)$ و$(2,\\,0)$ وقيمة عظمى نسبية $(0,\\,4)$. على أجزاء: $y=x^{2}-4$ إذا كان $x\\le -2$ أو $x\\ge 2$، و$y=-x^{2}+4$ إذا كان $-2<x<2$. وإذا كان القطع لا يقطع محور X ($\\Delta<0$) ومفتوحًا إلى الأعلى فإن $|f(x)|=f(x)$: لا يتغير شيء.'
+        ),
+        problem: say('Kalkulatu $y=|x^{2}-2x-3|$ funtzioaren maximo erlatiboa.', 'Halla el máximo relativo de $y=|x^{2}-2x-3|$.', 'أوجد القيمة العظمى النسبية لـ $y=|x^{2}-2x-3|$.'),
+        stepsKind: 'steps',
+        steps: [
+            { text: say('Barruko parabolaren ebaki-puntuak.', 'Cortes de la parábola de dentro.', 'تقاطعات القطع الداخلي.'), math: same('$x=-1,\\ x=3$') },
+            { text: say('Erpina, tartean.', 'El vértice, entre ellos.', 'الرأس بينهما.'), math: same('$x_v=1,\\ y_v=-4$') },
+            { text: say('Gora islatzen da.', 'Se refleja hacia arriba.', 'ينعكس إلى الأعلى.'), math: same('$(1,\\,-4)\\ \\to\\ (1,\\,4)$') }
+        ],
+        example: same('$|x^{2}-4|$'),
+        takeaway: say('Parabola: ebaki-puntuen arteko zatia islatzen da, eta erpina maximo erlatibo bihurtzen da.', 'Parábola: se refleja el trozo entre los cortes, y el vértice se convierte en máximo relativo.', 'القطع المكافئ: ينعكس الجزء بين نقطتي التقاطع ويصير الرأس قيمة عظمى نسبية.'),
+        figure: (language) => <AbsQuadraticFigure language={language} />
+    },
+
+    /* ---------- 5. Rational functions ---------- */
+    {
+        id: 'inverse',
+        stage: 'rational',
+        title: say('Alderantzizko proportzionaltasuna: $y=\\frac{k}{x}$', 'Proporcionalidad inversa: $y=\\frac{k}{x}$', 'التناسب العكسي: $y=\\frac{k}{x}$'),
+        goal: say('$y=\\frac{k}{x}$ hiperbolak ezagutzea: $k$ puntu batetik kalkulatzea, adarren koadranteak eta asintotak.', 'Conocer las hipérbolas $y=\\frac{k}{x}$: calcular $k$ a partir de un punto, los cuadrantes de las ramas y las asíntotas.', 'التعرف إلى القطوع الزائدة $y=\\frac{k}{x}$: حساب $k$ من نقطة، وأرباع الفرعين، والمقاربين.'),
+        explanation: say(
+            'Bi magnitude alderantziz proportzionalak dira haien biderkadura konstantea bada: $x\\cdot y=k$, edo $y=\\frac{k}{x}$. Adibidez, 120 km egiteko abiadura eta denbora: $t=\\frac{120}{v}$. Grafikoa hiperbola bat da, bi adarrekin. $k>0$ bada, adarrak I. eta III. koadranteetan daude eta funtzioa beherakorra da adar bakoitzean; $k<0$ bada, II. eta IV. koadranteetan daude eta gorakorra da. Ez du ardatzik ebakitzen: Dom $f=\\mathbb{R}-\\{0\\}$ eta Rec $f=\\mathbb{R}-\\{0\\}$. Ardatzak asintotak dira: grafikoa gero eta hurbilago dago haietatik, baina ez ditu inoiz ukitzen. $k$ kalkulatzeko, biderkatu puntu baten koordenatuak: $(2,\\,-3)$ puntutik pasatzen bada, $k=-6$.',
+            'Dos magnitudes son inversamente proporcionales si su producto es constante: $x\\cdot y=k$, o sea $y=\\frac{k}{x}$. Por ejemplo, la velocidad y el tiempo para recorrer 120 km: $t=\\frac{120}{v}$. La gráfica es una hipérbola, con dos ramas. Si $k>0$, las ramas están en los cuadrantes I y III y la función es decreciente en cada rama; si $k<0$, están en los cuadrantes II y IV y es creciente. No corta a los ejes: Dom $f=\\mathbb{R}-\\{0\\}$ y Rec $f=\\mathbb{R}-\\{0\\}$. Los ejes son asíntotas: la gráfica se acerca cada vez más a ellos, pero nunca los toca. Para calcular $k$, multiplica las coordenadas de un punto: si pasa por $(2,\\,-3)$, $k=-6$.',
+            'تكون كميتان متناسبتين عكسيًا إذا كان حاصل ضربهما ثابتًا: $x\\cdot y=k$، أي $y=\\frac{k}{x}$. مثلًا السرعة والزمن لقطع 120 كم: $t=\\frac{120}{v}$. الرسم قطع زائد له فرعان. إذا كان $k>0$ فالفرعان في الربعين الأول والثالث والدالة متناقصة في كل فرع؛ وإذا كان $k<0$ ففي الربعين الثاني والرابع وهي متزايدة. لا يقطع المحورين: Dom $f=\\mathbb{R}-\\{0\\}$ وRec $f=\\mathbb{R}-\\{0\\}$. المحوران مقاربان: يقترب الرسم منهما أكثر فأكثر ولا يلمسهما أبدًا. ولحساب $k$ اضرب إحداثيي نقطة: إذا مرّ بـ $(2,\\,-3)$ فإن $k=-6$.'
+        ),
+        problem: say('$y=\\frac{k}{x}$ hiperbola $(2,\\,-3)$ puntutik pasatzen da. Kalkulatu $k$ eta $f(-1)$.', 'La hipérbola $y=\\frac{k}{x}$ pasa por $(2,\\,-3)$. Halla $k$ y $f(-1)$.', 'يمر القطع الزائد $y=\\frac{k}{x}$ بـ $(2,\\,-3)$. أوجد $k$ و$f(-1)$.'),
+        stepsKind: 'steps',
+        steps: [
+            { text: say('Biderkatu koordenatuak.', 'Multiplica las coordenadas.', 'اضرب الإحداثيين.'), math: same('$k=2\\cdot(-3)=-6$') },
+            { text: say('$k<0$: II. eta IV. koadranteak.', '$k<0$: cuadrantes II y IV.', '$k<0$: الربعان الثاني والرابع.'), math: same('$f(-1)=\\frac{-6}{-1}=6$') }
+        ],
+        example: same('$x\\cdot y=k$'),
+        takeaway: say('y = k/x: biderkadura konstantea. k > 0, I. eta III.; k < 0, II. eta IV. Asintotak: ardatzak.', 'y = k/x: producto constante. k > 0, I y III; k < 0, II y IV. Asíntotas: los ejes.', 'y = k/x: حاصل ضرب ثابت. k > 0 الأول والثالث؛ k < 0 الثاني والرابع. المقاربان: المحوران.'),
+        figure: (language) => <HyperbolaFigure language={language} />
+    },
+    {
+        id: 'hyperbola-shift',
+        stage: 'rational',
+        title: say('Hiperbolen lekualdaketak', 'Traslaciones de hipérbolas', 'انسحابات القطوع الزائدة'),
+        goal: say('$y=\\frac{k}{x-a}+b$ funtzioen asintotak, izate-eremua eta ibiltartea irakurtzea eta haien grafikoak marraztea.', 'Leer las asíntotas, el dominio y el recorrido de las funciones $y=\\frac{k}{x-a}+b$ y dibujar sus gráficas.', 'قراءة المقاربين والمجال والمدى للدوال $y=\\frac{k}{x-a}+b$ ورسمها.'),
+        explanation: say(
+            '$y=\\dfrac{k}{x-a}+b$ hiperbola $y=\\frac{k}{x}$ bera da, $a$ unitate horizontalki eta $b$ unitate bertikalki lekualdatuta, parabolekin bezala. Asintotak ere mugitzen dira: bertikala $x=a$ da (izendatzailea anulatzen den lekua) eta horizontala $y=b$. Beraz, Dom $f=\\mathbb{R}-\\{a\\}$ eta Rec $f=\\mathbb{R}-\\{b\\}$. $y=\\frac{2}{x+1}-3$ funtzioan asintotak $x=-1$ eta $y=-3$ dira, eta adarrak $y=\\frac{2}{x}$ funtzioarenak bezala daude, asintoten gurutzearen inguruan. Marrazteko: 1) asintotak marra etenekin, 2) ardatzekin ebaki-puntuak, 3) puntu gehiago asintota bertikalaren bi aldeetan.',
+            '$y=\\dfrac{k}{x-a}+b$ es la misma hipérbola $y=\\frac{k}{x}$ trasladada $a$ unidades en horizontal y $b$ en vertical, como las parábolas. Las asíntotas también se mueven: la vertical es $x=a$ (donde se anula el denominador) y la horizontal $y=b$. Por tanto, Dom $f=\\mathbb{R}-\\{a\\}$ y Rec $f=\\mathbb{R}-\\{b\\}$. En $y=\\frac{2}{x+1}-3$ las asíntotas son $x=-1$ e $y=-3$, y las ramas están como las de $y=\\frac{2}{x}$, alrededor del cruce de las asíntotas. Para dibujarla: 1) las asíntotas con línea discontinua, 2) los cortes con los ejes, 3) algunos puntos más a los dos lados de la asíntota vertical.',
+            '$y=\\dfrac{k}{x-a}+b$ هو القطع الزائد $y=\\frac{k}{x}$ نفسه مسحوبًا $a$ وحدة أفقيًا و$b$ رأسيًا، كما في القطوع المكافئة. ويتحرك المقاربان أيضًا: الرأسي $x=a$ (حيث ينعدم المقام) والأفقي $y=b$. إذن Dom $f=\\mathbb{R}-\\{a\\}$ وRec $f=\\mathbb{R}-\\{b\\}$. في $y=\\frac{2}{x+1}-3$ المقاربان $x=-1$ و$y=-3$، والفرعان كفرعي $y=\\frac{2}{x}$ حول تقاطع المقاربين. لرسمه: 1) المقاربان بخط متقطع، 2) التقاطعات مع المحورين، 3) بعض النقاط الأخرى على جانبي المقارب الرأسي.'
+        ),
+        problem: say('Idatzi $y=\\frac{2}{x+1}-3$ funtzioaren asintotak eta Y ardatzarekin duen ebaki-puntua.', 'Escribe las asíntotas de $y=\\frac{2}{x+1}-3$ y su corte con el eje Y.', 'اكتب مقاربي $y=\\frac{2}{x+1}-3$ وتقاطعه مع محور Y.'),
+        stepsKind: 'steps',
+        steps: [
+            { text: say('Izendatzailea 0: asintota bertikala.', 'Denominador 0: asíntota vertical.', 'المقام 0: المقارب الرأسي.'), math: same('$x=-1$') },
+            { text: say('Kanpoko gaia: asintota horizontala.', 'El término de fuera: asíntota horizontal.', 'الحد الخارجي: المقارب الأفقي.'), math: same('$y=-3$') },
+            { text: say('Y ardatza: $x=0$.', 'Eje Y: $x=0$.', 'محور Y: $x=0$.'), math: same('$f(0)=2-3=-1$') }
+        ],
+        example: same('$y=\\frac{k}{x-a}+b$'),
+        takeaway: say('Asintotak: x = a eta y = b. Dom = ℝ − {a}, Rec = ℝ − {b}.', 'Asíntotas: x = a e y = b. Dom = ℝ − {a}, Rec = ℝ − {b}.', 'المقاربان: x = a وy = b. Dom = ℝ − {a}، Rec = ℝ − {b}.'),
+        figure: (language) => <ShiftedHyperbolaFigure language={language} />
+    },
+    {
+        id: 'rational-form',
+        stage: 'rational',
+        title: say('$y=\\frac{ax+b}{cx+d}$ funtzioak', 'Funciones $y=\\frac{ax+b}{cx+d}$', 'الدوال $y=\\frac{ax+b}{cx+d}$'),
+        goal: say('Funtzio arrazional bat zatiketaren bidez $\\frac{k}{x-a}+b$ forman idaztea eta haren asintotak aurkitzea.', 'Escribir una función racional como $\\frac{k}{x-a}+b$ mediante la división y encontrar sus asíntotas.', 'كتابة دالة كسرية على صورة $\\frac{k}{x-a}+b$ بالقسمة، وإيجاد مقاربيها.'),
+        explanation: say(
+            'Zenbakitzailean eta izendatzailean lehen mailako polinomioak dituen funtzio arrazional bat ere hiperbola bat da. Zatiketa eginda ikusten da: $\\dfrac{2x+1}{x-1}$ zatitzean zatidura 2 eta hondarra 3 dira, beraz $y=2+\\dfrac{3}{x-1}$, $y=\\frac{3}{x}$ hiperbola 1 eskuinera eta 2 gora eramanda. Lasterbide bat: asintota bertikala izendatzailearen erroa da ($x-1=0$, $x=1$), eta horizontala $x$-en koefizienteen zatidura ($y=\\frac{2}{1}=2$). Orokorrean, $y=\\dfrac{ax+b}{cx+d}$ funtzioan, $x=\\frac{-d}{c}$ eta $y=\\frac{a}{c}$. Ebaki-puntuak: Y ardatza $f(0)=\\frac{b}{d}$ puntuan, eta X ardatza zenbakitzailea 0 egiten den lekuan ($2x+1=0$, $x=-\\frac{1}{2}$).',
+            'Una función racional con polinomios de primer grado en el numerador y en el denominador también es una hipérbola. Se ve haciendo la división: al dividir $\\dfrac{2x+1}{x-1}$ el cociente es 2 y el resto 3, así que $y=2+\\dfrac{3}{x-1}$, la hipérbola $y=\\frac{3}{x}$ llevada 1 a la derecha y 2 hacia arriba. Un atajo: la asíntota vertical es la raíz del denominador ($x-1=0$, $x=1$), y la horizontal el cociente de los coeficientes de $x$ ($y=\\frac{2}{1}=2$). En general, en $y=\\dfrac{ax+b}{cx+d}$, $x=\\frac{-d}{c}$ e $y=\\frac{a}{c}$. Cortes: el eje Y en $f(0)=\\frac{b}{d}$, y el eje X donde se anula el numerador ($2x+1=0$, $x=-\\frac{1}{2}$).',
+            'الدالة الكسرية التي بسطها ومقامها من الدرجة الأولى قطع زائد أيضًا. ويظهر ذلك بالقسمة: عند قسمة $\\dfrac{2x+1}{x-1}$ يكون الناتج 2 والباقي 3، إذن $y=2+\\dfrac{3}{x-1}$، أي القطع $y=\\frac{3}{x}$ منقولًا 1 إلى اليمين و2 إلى الأعلى. اختصار: المقارب الرأسي جذر المقام ($x-1=0$، $x=1$)، والأفقي ناتج قسمة معاملي $x$ ($y=\\frac{2}{1}=2$). وعمومًا في $y=\\dfrac{ax+b}{cx+d}$ يكون $x=\\frac{-d}{c}$ و$y=\\frac{a}{c}$. التقاطعات: محور Y عند $f(0)=\\frac{b}{d}$، ومحور X حيث ينعدم البسط ($2x+1=0$، $x=-\\frac{1}{2}$).'
+        ),
+        problem: say('Kalkulatu $y=\\frac{2x+1}{x-1}$ funtzioaren asintotak.', 'Halla las asíntotas de $y=\\frac{2x+1}{x-1}$.', 'أوجد مقاربي $y=\\frac{2x+1}{x-1}$.'),
+        stepsKind: 'steps',
+        steps: [
+            { text: say('Zatitu: zatidura 2, hondarra 3.', 'Divide: cociente 2, resto 3.', 'اقسم: الناتج 2 والباقي 3.'), math: same('$y=2+\\frac{3}{x-1}$') },
+            { text: say('Asintota bertikala.', 'Asíntota vertical.', 'المقارب الرأسي.'), math: same('$x=1$') },
+            { text: say('Asintota horizontala.', 'Asíntota horizontal.', 'المقارب الأفقي.'), math: same('$y=2$') }
+        ],
+        example: same('$y=\\frac{a}{c}$'),
+        takeaway: say('Zatitu eta hiperbola lekualdatua agertzen da. Bertikala: izendatzailea 0. Horizontala: a/c.', 'Divide y aparece una hipérbola trasladada. Vertical: denominador 0. Horizontal: a/c.', 'اقسم فيظهر قطع زائد مسحوب. الرأسي: المقام 0. الأفقي: a/c.'),
+        figure: (language) => <RationalFormFigure language={language} />
+    }
+]
