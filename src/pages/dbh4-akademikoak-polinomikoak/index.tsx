@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readFunctionsAnswer } from '../dbh4-akademikoak-funtzioak/answers'
 import { polynomialAkChallenges, polynomialAkDiagnostic, polynomialAkExerciseBank, polynomialAkPractice } from './content'
 import { PolynomialAkHeroArt } from './figures'
+import { PolynomialAkLaboratory } from './lab'
+import { polynomialAkLabChallengeIds, polynomialAkLabToolForTopic, polynomialAkLabTools } from './lab/labTools'
 import { polynomialAkStages, polynomialAkTopics } from './lessons'
 
 const polinomikoakUnit: UnitDefinition = {
@@ -24,6 +26,16 @@ const polinomikoakUnit: UnitDefinition = {
     guidedPractice: polynomialAkPractice,
     exerciseBank: polynomialAkExerciseBank,
     challenges: polynomialAkChallenges,
+    lab: {
+        description: {
+            eu: `${polynomialAkLabTools.length} tresna, erronkekin: zuzena eta haren malda, puntu bat eta malda bat, parabola eta haren erpina, ebaki-puntuak, parabola bat bere erroetatik, zuzen bat parabolaren aurka, balio absolutua tolestuta, hiperbola eta asintotak, eta (ax + b) / (x + d) funtzioa.`,
+            es: `${polynomialAkLabTools.length} herramientas con retos: la recta y su pendiente, un punto y una pendiente, la parábola y su vértice, los puntos de corte, una parábola desde sus raíces, una recta contra una parábola, el valor absoluto doblado, la hipérbola y sus asíntotas, y la función (ax + b) / (x + d).`,
+            ar: `${polynomialAkLabTools.length} أدوات مع تحديات: المستقيم وميله، ونقطة وميل، والقطع المكافئ ورأسه، ونقاط التقاطع، وقطع مكافئ من جذريه، ومستقيم مقابل قطع مكافئ، والقيمة المطلقة مطويّة، والقطع الزائد ومقارباه، والدالة ⁦(ax + b) / (x + d)⁩.`
+        },
+        progressIds: polynomialAkLabChallengeIds,
+        toolForTopic: polynomialAkLabToolForTopic,
+        render: (props) => <PolynomialAkLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bakar bat: malda, koordenatu bat, parametroa edo emaitza. Adibidez 5, −3, 3,5 edo −1/2.', es: 'Escribe un solo número: la pendiente, una coordenada, el parámetro o el resultado. Por ejemplo 5, −3, 3,5 o −1/2.', ar: 'اكتب عددًا واحدًا: الميل أو إحداثيًا أو الوسيط أو النتيجة. مثلًا 5 أو ⁦−3⁩ أو 3.5 أو ⁦−1/2⁩.' },
         defaultForm: 'any',
