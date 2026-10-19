@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readFunctionsAnswer } from '../dbh4-akademikoak-funtzioak/answers'
 import { polynomialAkChallenges, polynomialAkDiagnostic, polynomialAkExerciseBank, polynomialAkPractice } from './content'
 import { PolynomialAkHeroArt } from './figures'
+import { PolynomialAkGames } from './games'
+import { POLYNOMIAL_AK_GAME_RECORDS_KEY, polynomialAkGameProgressIds } from './games/info'
 import { PolynomialAkLaboratory } from './lab'
 import { polynomialAkLabChallengeIds, polynomialAkLabToolForTopic, polynomialAkLabTools } from './lab/labTools'
 import { polynomialAkStages, polynomialAkTopics } from './lessons'
@@ -35,6 +37,12 @@ const polinomikoakUnit: UnitDefinition = {
         progressIds: polynomialAkLabChallengeIds,
         toolForTopic: polynomialAkLabToolForTopic,
         render: (props) => <PolynomialAkLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: polynomialAkGameProgressIds,
+        recordsKey: POLYNOMIAL_AK_GAME_RECORDS_KEY,
+        render: (props) => <PolynomialAkGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bakar bat: malda, koordenatu bat, parametroa edo emaitza. Adibidez 5, −3, 3,5 edo −1/2.', es: 'Escribe un solo número: la pendiente, una coordenada, el parámetro o el resultado. Por ejemplo 5, −3, 3,5 o −1/2.', ar: 'اكتب عددًا واحدًا: الميل أو إحداثيًا أو الوسيط أو النتيجة. مثلًا 5 أو ⁦−3⁩ أو 3.5 أو ⁦−1/2⁩.' },
