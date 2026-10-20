@@ -130,7 +130,7 @@ export const courses: Course[] = [
       { id: 'funciones-exponenciales', name: 'Funciones Exponenciales, Logarítmicas y Trigonométricas', nameEu: 'Funtzio Esponentzialak, Logaritmikoak eta Trigonometrikoak', nameAr: 'الدوال الأسية واللوغاريتمية والمثلثية', icon: '📈', active: true },
       { id: 'estadistica', name: 'Estadística', nameEu: 'Estatistika', nameAr: 'الإحصاء', icon: '📊', active: true },
       { id: 'combinatoria', name: 'Combinatoria', nameEu: 'Konbinatoria', nameAr: 'التوافيق', icon: '🔢', active: true },
-      { id: 'probabilidad', name: 'Probabilidad', nameEu: 'Probabilitatea', nameAr: 'الاحتمالات', icon: '🎲' },
+      { id: 'probabilidad', name: 'Probabilidad', nameEu: 'Probabilitatea', nameAr: 'الاحتمالات', icon: '🎲', active: true },
     ]
   },
   {
