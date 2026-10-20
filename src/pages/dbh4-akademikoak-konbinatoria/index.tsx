@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readCountAnswer } from './answers'
 import { combinatoricsAkChallenges, combinatoricsAkDiagnostic, combinatoricsAkExerciseBank, combinatoricsAkPractice } from './content'
 import { CombinatoricsAkHeroArt } from './figures'
+import { CombinatoricsAkLaboratory } from './lab'
+import { combinatoricsAkLabChallengeIds, combinatoricsAkLabToolForTopic, combinatoricsAkLabTools } from './lab/labTools'
 import { combinatoricsAkStages, combinatoricsAkTopics } from './lessons'
 
 const konbinatoriaUnit: UnitDefinition = {
@@ -24,6 +26,16 @@ const konbinatoriaUnit: UnitDefinition = {
     guidedPractice: combinatoricsAkPractice,
     exerciseBank: combinatoricsAkExerciseBank,
     challenges: combinatoricsAkChallenges,
+    lab: {
+        description: {
+            eu: `${combinatoricsAkLabTools.length} tresna, erronkekin: zuhaitza, faktorialak, laukiak errepikatuz edo errepikatu gabe, letren ordenak, n-tik k aukeratzea, Tartagliaren triangelua eta sareko bideak.`,
+            es: `${combinatoricsAkLabTools.length} herramientas con retos: el árbol, los factoriales, las casillas con o sin repetición, los órdenes de letras, elegir k de n, el triángulo de Tartaglia y los caminos en la cuadrícula.`,
+            ar: `${combinatoricsAkLabTools.length} أدوات مع تحديات: الشجرة، والمضاريب، والخانات مع التكرار أو دونه، وترتيبات الأحرف، واختيار k من n، ومثلث تارتاليا، والمسارات في الشبكة.`
+        },
+        progressIds: combinatoricsAkLabChallengeIds,
+        toolForTopic: combinatoricsAkLabToolForTopic,
+        render: (props) => <CombinatoricsAkLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki oso bat: 120 edo 40 320 (hutsuneak berdin).', es: 'Escribe un número entero: 120 o 40 320 (los espacios dan igual).', ar: 'اكتب عددًا صحيحًا: 120 أو 40320.' },
         defaultForm: 'any',
