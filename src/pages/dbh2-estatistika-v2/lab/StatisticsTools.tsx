@@ -83,7 +83,8 @@ function Board({ height, label, children }: { height: number; label: string; chi
 function Readout({ latex, note }: { latex: string; note: string }) {
     return (
         <>
-            <span className="fraction-v2-lab-readout-main"><MathText text={`$${latex}$`} /></span>
+            {/* Each \quad part is its own formula, so a long readout wraps instead of scrolling */}
+            <span className="fraction-v2-lab-readout-main"><MathText text={latex.split(/\\qquad|\\quad/).map((part) => `$${part.trim()}$`).join('\u2003')} /></span>
             <span className="fraction-v2-lab-readout-note">{note}</span>
         </>
     )

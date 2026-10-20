@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { statisticsAkChallenges, statisticsAkDiagnostic, statisticsAkExerciseBank, statisticsAkPractice } from './content'
 import { StatisticsAkHeroArt } from './figures'
+import { StatisticsAkLaboratory } from './lab'
+import { statisticsAkLabChallengeIds, statisticsAkLabToolForTopic, statisticsAkLabTools } from './lab/labTools'
 import { statisticsAkStages, statisticsAkTopics } from './lessons'
 
 const estatistikaUnit: UnitDefinition = {
@@ -24,6 +26,16 @@ const estatistikaUnit: UnitDefinition = {
     guidedPractice: statisticsAkPractice,
     exerciseBank: statisticsAkExerciseBank,
     challenges: statisticsAkChallenges,
+    lab: {
+        description: {
+            eu: `${statisticsAkLabTools.length} tresna, erronkekin: lagin geruzatua, maiztasun metatuak, tarteak, bi taldeen balantza, batez bestekoa, mediana eta moda, histograma, pertzentilak, kuartilak eta biboteak, distantziak eta karratuak, taula baten σ, a · x + b datuak eta hodeia erregresio-zuzenarekin.`,
+            es: `${statisticsAkLabTools.length} herramientas con retos: la muestra estratificada, frecuencias acumuladas, intervalos, la balanza de dos grupos, media, mediana y moda, histograma, percentiles, cuartiles y bigotes, distancias y cuadrados, la σ de una tabla, los datos a · x + b y la nube con la recta de regresión.`,
+            ar: `${statisticsAkLabTools.length} أدوات مع تحديات: العيّنة الطبقية، والتكرارات المتجمّعة، والفئات، وميزان المجموعتين، والمتوسط والوسيط والمنوال، والمدرّج، والمئينات، والربيعيات والشاربان، والمسافات والمربعات، وσ لجدول، والبيانات a · x + b، والسحابة مع مستقيم الانحدار.`
+        },
+        progressIds: statisticsAkLabChallengeIds,
+        toolForTopic: statisticsAkLabToolForTopic,
+        render: (props) => <StatisticsAkLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat edo zatiki bat: 18, 1,76 edo 13/18. Ehunekoetan eta graduetan, zenbakia bakarrik.', es: 'Escribe un número o una fracción: 18, 1,76 o 13/18. En porcentajes y grados, solo el número.', ar: 'اكتب عددًا أو كسرًا: 18 أو 1.76 أو 13/18. وفي النسب المئوية والدرجات اكتب العدد فقط.' },
         defaultForm: 'any',
