@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readCountAnswer } from './answers'
 import { combinatoricsAkChallenges, combinatoricsAkDiagnostic, combinatoricsAkExerciseBank, combinatoricsAkPractice } from './content'
 import { CombinatoricsAkHeroArt } from './figures'
+import { CombinatoricsAkGames } from './games'
+import { COMBINATORICS_AK_GAME_RECORDS_KEY, combinatoricsAkGameProgressIds } from './games/info'
 import { CombinatoricsAkLaboratory } from './lab'
 import { combinatoricsAkLabChallengeIds, combinatoricsAkLabToolForTopic, combinatoricsAkLabTools } from './lab/labTools'
 import { combinatoricsAkStages, combinatoricsAkTopics } from './lessons'
@@ -35,6 +37,12 @@ const konbinatoriaUnit: UnitDefinition = {
         progressIds: combinatoricsAkLabChallengeIds,
         toolForTopic: combinatoricsAkLabToolForTopic,
         render: (props) => <CombinatoricsAkLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: combinatoricsAkGameProgressIds,
+        recordsKey: COMBINATORICS_AK_GAME_RECORDS_KEY,
+        render: (props) => <CombinatoricsAkGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki oso bat: 120 edo 40 320 (hutsuneak berdin).', es: 'Escribe un número entero: 120 o 40 320 (los espacios dan igual).', ar: 'اكتب عددًا صحيحًا: 120 أو 40320.' },
