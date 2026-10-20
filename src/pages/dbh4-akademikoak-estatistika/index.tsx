@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { statisticsAkChallenges, statisticsAkDiagnostic, statisticsAkExerciseBank, statisticsAkPractice } from './content'
 import { StatisticsAkHeroArt } from './figures'
+import { StatisticsAkGames } from './games'
+import { STATISTICS_AK_GAME_RECORDS_KEY, statisticsAkGameProgressIds } from './games/info'
 import { StatisticsAkLaboratory } from './lab'
 import { statisticsAkLabChallengeIds, statisticsAkLabToolForTopic, statisticsAkLabTools } from './lab/labTools'
 import { statisticsAkStages, statisticsAkTopics } from './lessons'
@@ -35,6 +37,12 @@ const estatistikaUnit: UnitDefinition = {
         progressIds: statisticsAkLabChallengeIds,
         toolForTopic: statisticsAkLabToolForTopic,
         render: (props) => <StatisticsAkLaboratory {...props} />
+    },
+    games: {
+        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        progressIds: statisticsAkGameProgressIds,
+        recordsKey: STATISTICS_AK_GAME_RECORDS_KEY,
+        render: (props) => <StatisticsAkGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat edo zatiki bat: 18, 1,76 edo 13/18. Ehunekoetan eta graduetan, zenbakia bakarrik.', es: 'Escribe un número o una fracción: 18, 1,76 o 13/18. En porcentajes y grados, solo el número.', ar: 'اكتب عددًا أو كسرًا: 18 أو 1.76 أو 13/18. وفي النسب المئوية والدرجات اكتب العدد فقط.' },
