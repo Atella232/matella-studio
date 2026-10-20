@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readExponentialAnswer } from './answers'
 import { exponentialAkChallenges, exponentialAkDiagnostic, exponentialAkExerciseBank, exponentialAkPractice } from './content'
 import { ExponentialAkHeroArt } from './figures'
+import { ExponentialAkLaboratory } from './lab'
+import { exponentialAkLabChallengeIds, exponentialAkLabToolForTopic, exponentialAkLabTools } from './lab/labTools'
 import { exponentialAkStages, exponentialAkTopics } from './lessons'
 
 const esponentzialakUnit: UnitDefinition = {
@@ -24,6 +26,16 @@ const esponentzialakUnit: UnitDefinition = {
     guidedPractice: exponentialAkPractice,
     exerciseBank: exponentialAkExerciseBank,
     challenges: exponentialAkChallenges,
+    lab: {
+        description: {
+            eu: `${exponentialAkLabTools.length} tresna, erronkekin: funtzio esponentziala, esponentziala mugitzen, hazkundea eta beherakuntza, logaritmoen eskailera, logaritmoa mugitzen, zirkunferentzia goniometrikoa eta uhinen laborategia.`,
+            es: `${exponentialAkLabTools.length} herramientas con retos: la función exponencial, mueve la exponencial, crecimiento y decrecimiento, la escalera de los logaritmos, mueve el logaritmo, la circunferencia goniométrica y el laboratorio de las ondas.`,
+            ar: `${exponentialAkLabTools.length} أدوات مع تحديات: الدالة الأسية، وتحريك الدالة الأسية، والنمو والتناقص، وسُلّم اللوغاريتمات، وتحريك اللوغاريتم، والدائرة المثلثية، ومختبر الموجات.`
+        },
+        progressIds: exponentialAkLabChallengeIds,
+        toolForTopic: exponentialAkLabToolForTopic,
+        render: (props) => <ExponentialAkLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bakar bat: balioa, berretzailea, parametroa, graduak edo aπ periodoaren a. Adibidez 5, −3, 2,5 edo 2/3.', es: 'Escribe un solo número: el valor, el exponente, el parámetro, los grados o la a del periodo aπ. Por ejemplo 5, −3, 2,5 o 2/3.', ar: 'اكتب عددًا واحدًا: القيمة أو الأس أو الوسيط أو الدرجات أو a في الدور aπ. مثلًا 5 أو ⁦−3⁩ أو 2.5 أو 2/3.' },
         defaultForm: 'any',
