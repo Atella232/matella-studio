@@ -1,4 +1,4 @@
-import type { LabChallenge } from '../../../features/unit-v2/lab/types'
+import type { LabChallenge, LabChallengeMaker } from '../../../features/unit-v2/lab/types'
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { fraction, type FractionValue } from '../math/fraction'
@@ -7,13 +7,17 @@ import {
     initialProportionState,
     PROPORTION_LIMITS,
     proportionChallenges,
+    proportionPrediction,
     proportionResult,
     resultVisible,
+    setPrediction,
     updateProportion,
     type ProportionState,
     type ToolProps
 } from './labTools'
 import { ResultAnswer, Segmented, Stepper, ToolFrame } from './LabKit'
+import { proportionExtra } from './extraChallenges'
+import { PredictionStep } from './PredictionStep'
 import { useLabText } from './useLabText'
 
 const valueLatex = (value: FractionValue) => value.denominator === 1 ? String(value.numerator) : `\\frac{${value.numerator}}{${value.denominator}}`
@@ -25,7 +29,7 @@ function decimalLatex(numerator: number, denominator: number, separator: string)
     return `${integer}{${separator}}${fixed}${repeating ? `\\overline{${repeating}}` : ''}`
 }
 
-export function ProportionTool(props: ToolProps & { challenges?: LabChallenge<ProportionState>[]; modes?: Array<ProportionState['mode']> }) {
+export function ProportionTool(props: ToolProps & { challenges?: LabChallenge<ProportionState>[]; extraChallenges?: LabChallengeMaker<ProportionState>; modes?: Array<ProportionState['mode']> }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<ProportionState>(initialProportionState)
     const { mode, numerator, denominator, quantity, percent } = state
@@ -84,13 +88,25 @@ export function ProportionTool(props: ToolProps & { challenges?: LabChallenge<Pr
                         <MathText text={`$${percent}\\,\\%=\\frac{${percent}}{100}${reducedPercent.denominator !== 100 ? `=${valueLatex(reducedPercent)}` : ''}$`} />
                     </span>
                 )}
-                <ResultAnswer language={props.language} state={state} expected={result} onChange={(patch) => setState((current) => ({ ...current, ...patch }))} />
+                <PredictionStep
+                    language={props.language}
+                    question={{ eu: `Kalkulatu aurretik: emaitza ${quantity} kantitatearen erdia baino txikiagoa, berdina ala handiagoa izango da?`, es: `Antes de calcular: ¿el resultado será menor, igual o mayor que la mitad de ${quantity}?`, ar: `قبل الحساب: هل ستكون النتيجة أصغر من نصف ${quantity} أم تساويه أم أكبر منه؟` }}
+                    actual={proportionPrediction(state).relation}
+                    choice={state.prediction}
+                    tip={mode === 'of'
+                        ? { eu: 'Zatikia erdia baino handiagoa bada, erdia baino gehiago hartzen duzu; txikiagoa bada, gutxiago.', es: 'Si la fracción es mayor que la mitad, tomas más de la mitad; si es menor, menos.', ar: 'إذا كان الكسر أكبر من النصف فأنت تأخذ أكثر من النصف، وإذا كان أصغر فأقل.' }
+                        : { eu: '% 50 erdia da: ehuneko handiago batek erdia baino gehiago hartzen du; txikiago batek, gutxiago.', es: 'El 50 % es la mitad: un porcentaje mayor toma más de la mitad; uno menor, menos.', ar: '50٪ هي النصف: النسبة الأكبر تأخذ أكثر من النصف، والأصغر أقل.' }}
+                    onChoose={(relation) => setState((current) => setPrediction(current, relation))}
+                >
+                    <ResultAnswer language={props.language} state={state} expected={result} onChange={(patch) => setState((current) => ({ ...current, ...patch }))} />
+                </PredictionStep>
             </>
         )
     }
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? proportionChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? proportionChallenges}
+            extraChallenges={props.challenges ? props.extraChallenges : proportionExtra} state={state}>
             {mode === 'of' && <TapeDiagram numerator={numerator} denominator={denominator} quantity={quantity} showResult={showResult} result={result} language={props.language} />}
             {mode === 'percent' && <PercentBar percent={percent} quantity={quantity} showResult={showResult} result={result} />}
             {mode === 'forms' && <HundredGrid numerator={numerator} denominator={denominator} language={props.language} />}

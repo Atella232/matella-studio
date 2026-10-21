@@ -1,4 +1,4 @@
-import type { LabChallenge, LabToolInfo as UnitLabToolInfo } from '../../../features/unit-v2/lab/types'
+import type { LabChallenge, LabChallengeMaker, LabToolInfo as UnitLabToolInfo } from '../../../features/unit-v2/lab/types'
 import { useState, type CSSProperties, type KeyboardEvent } from 'react'
 import { MathText } from '../../../components/MathText'
 import type { LocalizedText, PrototypeLanguage } from '../content'
@@ -16,6 +16,7 @@ import {
     type PartsState
 } from './labTools'
 import { Segmented, Stepper, ToolFrame } from './LabKit'
+import { partsExtra } from './extraChallenges'
 import { useLabText } from './useLabText'
 
 interface PartProps {
@@ -42,10 +43,12 @@ export function PartsTool({
     completedIds,
     onComplete,
     onOpenLesson,
-    challenges = partsChallenges
+    challenges,
+    extraChallenges
 }: {
     tool: UnitLabToolInfo
     challenges?: LabChallenge<PartsState>[]
+    extraChallenges?: LabChallengeMaker<PartsState>
     stageLabel: string
     language: PrototypeLanguage
     completedIds: number[]
@@ -151,7 +154,8 @@ export function PartsTool({
             stageLabel={stageLabel}
             controls={controls}
             readout={readout}
-            challenges={challenges}
+            challenges={challenges ?? partsChallenges}
+            extraChallenges={challenges ? extraChallenges : partsExtra}
             state={state}
             completedIds={completedIds}
             onComplete={onComplete}

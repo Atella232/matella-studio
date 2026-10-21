@@ -521,6 +521,26 @@ export const compareChallenges: LabChallenge<CompareState>[] = [
 
 export const OPERATION_LIMITS = { minDenominator: 2, maxDenominator: 12 } as const
 
+/** The learner's guess before calculating: is the result less than, equal to or greater than a reference value? */
+export interface Prediction {
+    /** The value the result is compared with */
+    reference: FractionValue
+    /** Where the result really is */
+    relation: Relation
+}
+
+function relationTo(value: FractionValue, reference: FractionValue): Relation {
+    const result = compare(value, reference)
+    return result === 0 ? '=' : result < 0 ? '<' : '>'
+}
+
+/** A new question: a new answer and a new prediction */
+const freshQuestion = { ...freshAnswer, prediction: null }
+
+/** The first guess stays: a prediction is not changed after seeing whether it was right */
+export const setPrediction = <State extends { prediction: Relation | null }>(state: State, prediction: Relation): State =>
+    state.prediction === null ? { ...state, prediction } : state
+
 /** Operands stay within one unit; any change asks for a new answer */
 function withOperand<State extends { first: FractionValue; second: FractionValue } & OperationAnswer>(
     state: State,
@@ -530,7 +550,7 @@ function withOperand<State extends { first: FractionValue; second: FractionValue
 ): State {
     const nextDenominator = Math.min(OPERATION_LIMITS.maxDenominator, Math.max(OPERATION_LIMITS.minDenominator, denominator))
     const nextNumerator = Math.min(nextDenominator, Math.max(1, numerator))
-    return { ...state, [which]: { numerator: nextNumerator, denominator: nextDenominator }, ...freshAnswer }
+    return { ...state, [which]: { numerator: nextNumerator, denominator: nextDenominator }, ...freshQuestion }
 }
 
 /** Whether a tool should show its worked result: the learner got it right or asked to see it */
@@ -552,6 +572,7 @@ export interface SumState extends OperationAnswer {
     op: 'add' | 'subtract'
     /** Show the bars with their own parts or split into the common denominator */
     view: 'original' | 'common'
+    prediction: Relation | null
 }
 
 export const initialSumState: SumState = {
@@ -559,7 +580,7 @@ export const initialSumState: SumState = {
     second: { numerator: 1, denominator: 3 },
     op: 'add',
     view: 'original',
-    ...freshAnswer
+    ...freshQuestion
 }
 
 /** Both operands over their least common denominator, and the unsimplified result */
@@ -573,7 +594,13 @@ export function sumParts(state: SumState): { common: number; first: number; seco
 export const setSumOperand = (state: SumState, which: 'first' | 'second', numerator: number, denominator: number) =>
     withOperand(state, which, numerator, denominator)
 
-export const setSumOp = (state: SumState, op: SumState['op']): SumState => state.op === op ? state : { ...state, op, ...freshAnswer }
+export const setSumOp = (state: SumState, op: SumState['op']): SumState => state.op === op ? state : { ...state, op, ...freshQuestion }
+
+/** Before adding: more or less than 1? Before subtracting: positive or negative? */
+export function sumPrediction(state: SumState): Prediction {
+    const reference = fraction(state.op === 'add' ? 1 : 0)
+    return { reference, relation: relationTo(sumParts(state).result, reference) }
+}
 
 export const sumChallenges: LabChallenge<SumState>[] = [
     {
@@ -608,13 +635,14 @@ export interface ProductState extends OperationAnswer {
     first: FractionValue
     second: FractionValue
     op: 'multiply' | 'divide'
+    prediction: Relation | null
 }
 
 export const initialProductState: ProductState = {
     first: { numerator: 2, denominator: 3 },
     second: { numerator: 1, denominator: 2 },
     op: 'multiply',
-    ...freshAnswer
+    ...freshQuestion
 }
 
 /** Unsimplified result: a·c/(b·d) or a·d/(b·c) */
@@ -628,7 +656,12 @@ export function productResult(state: ProductState): FractionValue {
 export const setProductOperand = (state: ProductState, which: 'first' | 'second', numerator: number, denominator: number) =>
     withOperand(state, which, numerator, denominator)
 
-export const setProductOp = (state: ProductState, op: ProductState['op']): ProductState => state.op === op ? state : { ...state, op, ...freshAnswer }
+export const setProductOp = (state: ProductState, op: ProductState['op']): ProductState => state.op === op ? state : { ...state, op, ...freshQuestion }
+
+/** Is the result more or less than the first fraction? Multiplying by less than 1 shrinks it; dividing by less than 1 makes it grow */
+export function productPrediction(state: ProductState): Prediction {
+    return { reference: state.first, relation: relationTo(productResult(state), state.first) }
+}
 
 export const productChallenges: LabChallenge<ProductState>[] = [
     {
@@ -667,6 +700,7 @@ export interface ProportionState extends OperationAnswer {
     denominator: number
     quantity: number
     percent: number
+    prediction: Relation | null
 }
 
 export const PROPORTION_LIMITS = {
@@ -678,7 +712,7 @@ export const PROPORTION_LIMITS = {
     percentStep: 5
 } as const
 
-export const initialProportionState: ProportionState = { mode: 'of', numerator: 3, denominator: 4, quantity: 120, percent: 25, ...freshAnswer }
+export const initialProportionState: ProportionState = { mode: 'of', numerator: 3, denominator: 4, quantity: 120, percent: 25, ...freshQuestion }
 
 /** Exact result of the current question: n/d of Q, or p % of Q */
 export function proportionResult(state: ProportionState): FractionValue {
@@ -697,8 +731,14 @@ export function updateProportion(state: ProportionState, patch: Partial<Pick<Pro
         numerator: Math.min(denominator, Math.max(1, next.numerator)),
         quantity: Math.min(PROPORTION_LIMITS.maxQuantity, Math.max(PROPORTION_LIMITS.minQuantity, next.quantity)),
         percent: Math.min(100, Math.max(0, next.percent)),
-        ...freshAnswer
+        ...freshQuestion
     }
+}
+
+/** Is the part more or less than half of the quantity? */
+export function proportionPrediction(state: ProportionState): Prediction {
+    const reference = fraction(state.quantity, 2)
+    return { reference, relation: relationTo(proportionResult(state), reference) }
 }
 
 /** Decimal digits of a non-negative fraction, with the repeating block (period) separated */

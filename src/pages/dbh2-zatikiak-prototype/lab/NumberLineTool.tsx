@@ -1,4 +1,4 @@
-import type { LabChallenge } from '../../../features/unit-v2/lab/types'
+import type { LabChallenge, LabChallengeMaker } from '../../../features/unit-v2/lab/types'
 import { useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
 import { MathText } from '../../../components/MathText'
 import { fraction, toExactDecimal, toNumber, type FractionValue } from '../math/fraction'
@@ -16,6 +16,7 @@ import {
 } from './labTools'
 import type { ToolProps } from './labTools'
 import { Segmented, Stepper, ToolFrame } from './LabKit'
+import { numberLineExtra } from './extraChallenges'
 import { useLabText } from './useLabText'
 
 /** Tick labels are only drawn while they still fit comfortably */
@@ -34,7 +35,7 @@ function mixedLatex(value: FractionValue): string | null {
     return `${reduced.numerator < 0 ? '-' : ''}${whole}\\frac{${absolute % reduced.denominator}}{${reduced.denominator}}`
 }
 
-export function NumberLineTool(props: ToolProps & { challenges?: LabChallenge<NumberLineState>[]; ranges?: NumberLineRange[] }) {
+export function NumberLineTool(props: ToolProps & { challenges?: LabChallenge<NumberLineState>[]; extraChallenges?: LabChallengeMaker<NumberLineState>; ranges?: NumberLineRange[] }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<NumberLineState>(initialNumberLineState)
     const trackRef = useRef<HTMLDivElement>(null)
@@ -164,6 +165,7 @@ export function NumberLineTool(props: ToolProps & { challenges?: LabChallenge<Nu
             controls={controls}
             readout={readout}
             challenges={props.challenges ?? numberLineChallenges}
+            extraChallenges={props.challenges ? props.extraChallenges : numberLineExtra}
             state={state}
         >
             <div className="fraction-v2-nl">

@@ -3,7 +3,8 @@ import { MathText } from '../../../components/MathText'
 import { Icon } from '../icons'
 import { checkAnswer, type AnswerForm, type FractionValue } from '../math/fraction'
 import type { LocalizedText, StageTone, UnitLanguage } from '../types'
-import type { LabChallenge, LabToolInfo, OperationAnswer } from './types'
+import { createRandom, randomSeed } from '../games/random'
+import type { LabChallenge, LabChallengeMaker, LabExtraChallenge, LabToolInfo, OperationAnswer } from './types'
 import { useLabText } from './useLabText'
 import './LabKit.css'
 
@@ -72,12 +73,15 @@ export function Segmented<Value extends string>({
 
 function ChallengePanel<State>({
     challenges,
+    makeExtra,
     state,
     completedIds,
     onComplete,
     language
 }: {
     challenges: LabChallenge<State>[]
+    /** Makes endless practice challenges once the fixed ones are done (or whenever the learner asks) */
+    makeExtra?: LabChallengeMaker<State>
     state: State
     completedIds: number[]
     onComplete: (id: number) => void
@@ -86,41 +90,70 @@ function ChallengePanel<State>({
     const l = useLabText(language)
     const firstPending = challenges.findIndex((challenge) => !completedIds.includes(challenge.id))
     const [index, setIndex] = useState(Math.max(0, firstPending))
+    const [extra, setExtra] = useState<LabExtraChallenge<State> | null>(null)
+    const [extraSolved, setExtraSolved] = useState(0)
     const [result, setResult] = useState<'idle' | 'success' | 'error'>('idle')
     const [showHint, setShowHint] = useState(false)
-    const challenge = challenges[index]
+    const fixed = challenges[index]
+    const challenge = extra ?? fixed
     const allDone = challenges.every((item) => completedIds.includes(item.id))
-    const isDone = completedIds.includes(challenge.id)
+    const isDone = extra ? result === 'success' : completedIds.includes(fixed.id)
 
-    const goTo = (next: number) => {
-        setIndex(next)
+    const reset = () => {
         setResult('idle')
         setShowHint(false)
+    }
+
+    const goTo = (next: number) => {
+        setExtra(null)
+        setIndex(next)
+        reset()
+    }
+
+    const newExtra = () => {
+        if (!makeExtra) return
+        setExtra(makeExtra(createRandom(randomSeed())))
+        reset()
     }
 
     const check = () => {
         const solved = challenge.isSolved(state)
         setResult(solved ? 'success' : 'error')
-        if (solved) onComplete(challenge.id)
+        if (!solved) return
+        if (extra) setExtraSolved((count) => count + 1)
+        else onComplete(fixed.id)
     }
+
+    const extraKicker = l({ eu: `Erronka gehigarria · ${extraSolved} lortuta`, es: `Reto extra · ${extraSolved} ${extraSolved === 1 ? 'conseguido' : 'conseguidos'}`, ar: `تحدٍّ إضافي · ${extraSolved} منجزة` })
 
     return (
         <section className="fraction-v2-lab-challenge" aria-label={l({ eu: 'Erronkak', es: 'Retos', ar: 'التحديات' })}>
             <div className="fraction-v2-lab-challenge-head">
-                <span className="fraction-v2-lab-challenge-kicker">{l({ eu: `${index + 1}. erronka / ${challenges.length}`, es: `Reto ${index + 1} de ${challenges.length}`, ar: `التحدي ${index + 1} من ${challenges.length}` })}</span>
+                <span className="fraction-v2-lab-challenge-kicker">{extra ? extraKicker : l({ eu: `${index + 1}. erronka / ${challenges.length}`, es: `Reto ${index + 1} de ${challenges.length}`, ar: `التحدي ${index + 1} من ${challenges.length}` })}</span>
                 <div className="fraction-v2-lab-challenge-dots">
                     {challenges.map((item, itemIndex) => (
                         <button
                             type="button"
-                            className={`${completedIds.includes(item.id) ? 'done' : ''} ${itemIndex === index ? 'current' : ''}`}
+                            className={`${completedIds.includes(item.id) ? 'done' : ''} ${!extra && itemIndex === index ? 'current' : ''}`}
                             aria-label={`${l({ eu: 'Erronka', es: 'Reto', ar: 'التحدي' })} ${itemIndex + 1}${completedIds.includes(item.id) ? ` · ${l({ eu: 'lortuta', es: 'conseguido', ar: 'منجز' })}` : ''}`}
-                            aria-current={itemIndex === index ? 'step' : undefined}
+                            aria-current={!extra && itemIndex === index ? 'step' : undefined}
                             onClick={() => goTo(itemIndex)}
                             key={item.id}
                         >
                             {completedIds.includes(item.id) && <Icon name="check" size={12} strokeWidth={3.4} />}
                         </button>
                     ))}
+                    {makeExtra && (
+                        <button
+                            type="button"
+                            className={`fraction-v2-lab-challenge-extra ${extra ? 'current' : ''}`}
+                            aria-label={l({ eu: 'Erronka gehigarriak', es: 'Retos extra', ar: 'تحديات إضافية' })}
+                            aria-current={extra ? 'step' : undefined}
+                            onClick={newExtra}
+                        >
+                            ∞
+                        </button>
+                    )}
                 </div>
             </div>
             <p className="fraction-v2-lab-challenge-prompt"><MathText text={l(challenge.prompt)} /></p>
@@ -134,9 +167,14 @@ function ChallengePanel<State>({
                         {l({ eu: 'Pista', es: 'Pista', ar: 'تلميح' })}
                     </button>
                 )}
-                {index < challenges.length - 1 && (
+                {!extra && index < challenges.length - 1 && (
                     <button type="button" className="fraction-v2-secondary" onClick={() => goTo(index + 1)}>
                         {l({ eu: 'Hurrengo erronka', es: 'Siguiente reto', ar: 'التحدي التالي' })}
+                    </button>
+                )}
+                {makeExtra && (extra || index === challenges.length - 1) && (
+                    <button type="button" className="fraction-v2-secondary" onClick={newExtra}>
+                        {extra ? l({ eu: 'Beste erronka bat', es: 'Otro reto', ar: 'تحدٍّ آخر' }) : l({ eu: 'Erronka gehigarria', es: 'Reto extra', ar: 'تحدٍّ إضافي' })}
                     </button>
                 )}
             </div>
@@ -144,9 +182,13 @@ function ChallengePanel<State>({
             <div aria-live="polite">
                 {result === 'success' && (
                     <div className="fraction-v2-feedback success">
-                        {allDone
-                            ? l({ eu: 'Lortuta! Tresna honetako erronka guztiak osatu dituzu.', es: '¡Conseguido! Has completado todos los retos de esta herramienta.', ar: 'أحسنت! أكملت كل تحديات هذه الأداة.' })
-                            : l({ eu: 'Lortuta!', es: '¡Conseguido!', ar: 'أحسنت!' })}
+                        {extra
+                            ? l({ eu: 'Lortuta! Sakatu «Beste erronka bat» jarraitzeko.', es: '¡Conseguido! Pulsa «Otro reto» para seguir.', ar: 'أحسنت! اضغط «تحدٍّ آخر» لتتابع.' })
+                            : allDone
+                                ? makeExtra
+                                    ? l({ eu: 'Lortuta! Erronka guztiak osatu dituzu. Jarraitu erronka gehigarriekin (∞).', es: '¡Conseguido! Has completado todos los retos. Sigue con los retos extra (∞).', ar: 'أحسنت! أكملت كل التحديات. تابع مع التحديات الإضافية (∞).' })
+                                    : l({ eu: 'Lortuta! Tresna honetako erronka guztiak osatu dituzu.', es: '¡Conseguido! Has completado todos los retos de esta herramienta.', ar: 'أحسنت! أكملت كل تحديات هذه الأداة.' })
+                                : l({ eu: 'Lortuta!', es: '¡Conseguido!', ar: 'أحسنت!' })}
                     </div>
                 )}
                 {result === 'error' && (
@@ -167,6 +209,7 @@ export function ToolFrame<State>({
     readout,
     children,
     challenges,
+    extraChallenges,
     state,
     completedIds,
     onComplete,
@@ -180,6 +223,8 @@ export function ToolFrame<State>({
     readout?: ReactNode
     children: ReactNode
     challenges?: LabChallenge<State>[]
+    /** Endless practice challenges after the fixed ones */
+    extraChallenges?: LabChallengeMaker<State>
     state?: State
     completedIds: number[]
     onComplete: (id: number) => void
@@ -218,6 +263,7 @@ export function ToolFrame<State>({
                 <ChallengePanel
                     key={tool.id}
                     challenges={challenges}
+                    makeExtra={extraChallenges}
                     state={state}
                     completedIds={completedIds}
                     onComplete={onComplete}

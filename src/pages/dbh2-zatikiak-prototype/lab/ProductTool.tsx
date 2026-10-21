@@ -1,19 +1,25 @@
-import type { LabChallenge } from '../../../features/unit-v2/lab/types'
+import type { LabChallenge, LabChallengeMaker } from '../../../features/unit-v2/lab/types'
 import { useState, type CSSProperties } from 'react'
 import { MathText } from '../../../components/MathText'
+import type { LocalizedText } from '../content'
 import { fraction, type FractionValue } from '../math/fraction'
 import {
     initialProductState,
     OPERATION_LIMITS,
     productChallenges,
+    productPrediction,
     productResult,
     resultVisible,
+    setPrediction,
     setProductOp,
     setProductOperand,
-    type ProductState
+    type ProductState,
+    type Relation
 } from './labTools'
 import type { ToolProps } from './labTools'
 import { ResultAnswer, Segmented, Stepper, ToolFrame } from './LabKit'
+import { productExtra } from './extraChallenges'
+import { PredictionStep } from './PredictionStep'
 import { useLabText } from './useLabText'
 
 const latex = (value: FractionValue) => value.denominator === 1 ? String(value.numerator) : `\\frac{${value.numerator}}{${value.denominator}}`
@@ -28,7 +34,19 @@ function simplifiedTail(value: FractionValue): string {
     return tail
 }
 
-export function ProductTool(props: ToolProps & { challenges?: LabChallenge<ProductState>[] }) {
+/** Why the result is smaller, the same or bigger: the operands stay within one unit */
+function productTip(op: ProductState['op'], relation: Relation): LocalizedText {
+    if (relation === '=') {
+        return op === 'multiply'
+            ? { eu: 'Bat zenbakiaz biderkatzeak ez du balioa aldatzen.', es: 'Multiplicar por 1 no cambia el valor.', ar: 'الضرب في 1 لا يغيّر القيمة.' }
+            : { eu: 'Bat zenbakiaz zatitzeak ez du balioa aldatzen.', es: 'Dividir entre 1 no cambia el valor.', ar: 'القسمة على 1 لا تغيّر القيمة.' }
+    }
+    return op === 'multiply'
+        ? { eu: '1 baino txikiagoa den zatiki batez biderkatzean emaitza txikiagoa da: zati bat baino ez duzu hartzen.', es: 'Multiplicar por una fracción menor que 1 hace el resultado más pequeño: tomas solo una parte.', ar: 'الضرب في كسر أصغر من 1 يصغّر النتيجة: فأنت تأخذ جزءًا منها فقط.' }
+        : { eu: '1 baino txikiagoa den zatiki batez zatitzean emaitza handiagoa da: behin baino gehiagotan sartzen da.', es: 'Dividir entre una fracción menor que 1 hace el resultado mayor: cabe más de una vez.', ar: 'القسمة على كسر أصغر من 1 تكبّر النتيجة: فهو يتّسع أكثر من مرة.' }
+}
+
+export function ProductTool(props: ToolProps & { challenges?: LabChallenge<ProductState>[]; extraChallenges?: LabChallengeMaker<ProductState> }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<ProductState>(initialProductState)
     const { first, second, op } = state
@@ -55,15 +73,29 @@ export function ProductTool(props: ToolProps & { challenges?: LabChallenge<Produ
         ? `${latex(first)}\\cdot${latex(second)}${showResult ? `=\\frac{${first.numerator}\\cdot${second.numerator}}{${first.denominator}\\cdot${second.denominator}}=${latex(result)}${simplifiedTail(result)}` : ''}`
         : `${latex(first)}\\div${latex(second)}${showResult ? `=${latex(first)}\\cdot\\frac{${second.denominator}}{${second.numerator}}=${latex(result)}${simplifiedTail(result)}` : ''}`
 
+    const prediction = productPrediction(state)
+
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${expression}$`} /></span>
-            <ResultAnswer language={props.language} state={state} expected={result} onChange={(patch) => setState((current) => ({ ...current, ...patch }))} />
+            <PredictionStep
+                language={props.language}
+                question={op === 'multiply'
+                    ? { eu: `Kalkulatu aurretik: biderkadura lehen zatikia ($${latex(first)}$) baino txikiagoa, berdina ala handiagoa izango da?`, es: `Antes de calcular: ¿el producto será menor, igual o mayor que la primera fracción, $${latex(first)}$?`, ar: `قبل الحساب: هل سيكون الناتج أصغر من الكسر الأول $${latex(first)}$ أم يساويه أم أكبر منه؟` }
+                    : { eu: `Kalkulatu aurretik: zatidura lehen zatikia ($${latex(first)}$) baino txikiagoa, berdina ala handiagoa izango da?`, es: `Antes de calcular: ¿el cociente será menor, igual o mayor que la primera fracción, $${latex(first)}$?`, ar: `قبل الحساب: هل سيكون خارج القسمة أصغر من الكسر الأول $${latex(first)}$ أم يساويه أم أكبر منه؟` }}
+                actual={prediction.relation}
+                choice={state.prediction}
+                tip={productTip(op, prediction.relation)}
+                onChoose={(relation) => setState((current) => setPrediction(current, relation))}
+            >
+                <ResultAnswer language={props.language} state={state} expected={result} onChange={(patch) => setState((current) => ({ ...current, ...patch }))} />
+            </PredictionStep>
         </>
     )
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? productChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? productChallenges}
+            extraChallenges={props.challenges ? props.extraChallenges : productExtra} state={state}>
             {op === 'multiply' ? <AreaModel first={first} second={second} showResult={showResult} language={props.language} /> : <MeasureModel first={first} second={second} showResult={showResult} language={props.language} />}
         </ToolFrame>
     )

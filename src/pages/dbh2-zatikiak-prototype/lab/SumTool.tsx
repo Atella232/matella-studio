@@ -1,4 +1,4 @@
-import type { LabChallenge } from '../../../features/unit-v2/lab/types'
+import type { LabChallenge, LabChallengeMaker } from '../../../features/unit-v2/lab/types'
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { fraction, type FractionValue } from '../math/fraction'
@@ -6,15 +6,19 @@ import {
     initialSumState,
     OPERATION_LIMITS,
     resultVisible,
+    setPrediction,
     setSumOp,
     setSumOperand,
     sumChallenges,
     sumParts,
+    sumPrediction,
     type SumState
 } from './labTools'
 import type { ToolProps } from './labTools'
 import { ResultAnswer, Segmented, Stepper, ToolFrame } from './LabKit'
 import { PartitionBar, SegmentBars, type SegmentTone } from './models'
+import { sumExtra } from './extraChallenges'
+import { PredictionStep } from './PredictionStep'
 import { useLabText } from './useLabText'
 
 /** Beyond this many pieces per unit the common split is too thin to draw */
@@ -33,7 +37,7 @@ function simplifiedTail(value: FractionValue): string {
     return tail
 }
 
-export function SumTool(props: ToolProps & { challenges?: LabChallenge<SumState>[] }) {
+export function SumTool(props: ToolProps & { challenges?: LabChallenge<SumState>[]; extraChallenges?: LabChallengeMaker<SumState> }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<SumState>(initialSumState)
     const { first, second, op, view } = state
@@ -87,12 +91,31 @@ export function SumTool(props: ToolProps & { challenges?: LabChallenge<SumState>
             {showResult && negative && (
                 <span className="fraction-v2-lab-readout-note">{l({ eu: 'Bigarren zatikia handiagoa denez, emaitza negatiboa da.', es: 'Como la segunda fracción es mayor, el resultado es negativo.', ar: 'بما أن الكسر الثاني أكبر، فالنتيجة سالبة.' })}</span>
             )}
-            <ResultAnswer language={props.language} state={state} expected={result} onChange={(patch) => setState((current) => ({ ...current, ...patch }))} />
+            <PredictionStep
+                language={props.language}
+                question={op === 'add'
+                    ? { eu: 'Kalkulatu aurretik: batura 1 baino txikiagoa, berdina ala handiagoa izango da?', es: 'Antes de calcular: ¿la suma será menor, igual o mayor que 1?', ar: 'قبل الحساب: هل سيكون المجموع أصغر من 1 أم يساويه أم أكبر منه؟' }
+                    : { eu: 'Kalkulatu aurretik: kenketa negatiboa, zero ala positiboa izango da?', es: 'Antes de calcular: ¿la resta será negativa, cero o positiva?', ar: 'قبل الحساب: هل سيكون الفرق سالبًا أم صفرًا أم موجبًا؟' }}
+                labels={op === 'add' ? undefined : {
+                    '<': { eu: 'Negatiboa', es: 'Negativa', ar: 'سالب' },
+                    '=': { eu: 'Zero', es: 'Cero', ar: 'صفر' },
+                    '>': { eu: 'Positiboa', es: 'Positiva', ar: 'موجب' }
+                }}
+                actual={sumPrediction(state).relation}
+                choice={state.prediction}
+                tip={op === 'add'
+                    ? { eu: 'Trikimailua: konparatu zatiki bakoitza erdiarekin. Biak erdia baino handiagoak badira, batura 1 baino handiagoa da; biak txikiagoak badira, ez da 1era iristen.', es: 'Truco: compara cada fracción con la mitad. Si las dos pasan de la mitad, la suma pasa de 1; si las dos se quedan por debajo, no llega a 1.', ar: 'حيلة: قارن كل كسر بالنصف. إذا تجاوز الكسران النصف تجاوز المجموع 1، وإذا كانا أصغر منه لم يبلغ 1.' }
+                    : { eu: 'Lehena baino zatiki handiago bat kentzen baduzu, emaitza negatiboa da; txikiagoa bada, positiboa.', es: 'Si restas una fracción mayor que la primera, el resultado es negativo; si es menor, positivo.', ar: 'إذا طرحت كسرًا أكبر من الأول فالنتيجة سالبة، وإذا كان أصغر فهي موجبة.' }}
+                onChoose={(relation) => setState((current) => setPrediction(current, relation))}
+            >
+                <ResultAnswer language={props.language} state={state} expected={result} onChange={(patch) => setState((current) => ({ ...current, ...patch }))} />
+            </PredictionStep>
         </>
     )
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? sumChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? sumChallenges}
+            extraChallenges={props.challenges ? props.extraChallenges : sumExtra} state={state}>
             <div className="fraction-v2-bar-stack">
                 <div className="fraction-v2-bar-row">
                     <span className="fraction-v2-bar-label"><MathText text={`$${latex(first)}$`} /></span>

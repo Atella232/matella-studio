@@ -326,6 +326,16 @@
     box-shadow: 0 0 0 3px var(--mustard);
 }
 
+/* Endless practice: a wider dot after the fixed challenges */
+.fraction-v2-lab-challenge-dots button.fraction-v2-lab-challenge-extra {
+    width: 34px;
+    border-radius: 13px;
+    color: var(--ink);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+}
+
 .fraction-v2 .fraction-v2-lab-challenge-prompt {
     font-family: var(--font-display);
     font-size: clamp(20px, 2.4vw, 24px);

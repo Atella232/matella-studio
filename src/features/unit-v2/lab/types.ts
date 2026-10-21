@@ -34,6 +34,18 @@ export interface LabChallenge<State> {
     isSolved: (state: State) => boolean
 }
 
+/** A practice challenge made up on the spot: it is not saved as progress */
+export interface LabExtraChallenge<State> {
+    prompt: LocalizedText
+    hint: LocalizedText
+    isSolved: (state: State) => boolean
+    /** A state that solves it, so the tests can check that every generated challenge can be done */
+    solution: State
+}
+
+/** Makes a new practice challenge from a seeded random source */
+export type LabChallengeMaker<State> = (random: () => number) => LabExtraChallenge<State>
+
 /** The learner's typed result in the operation tools */
 export interface OperationAnswer {
     /** What the learner typed as the result */

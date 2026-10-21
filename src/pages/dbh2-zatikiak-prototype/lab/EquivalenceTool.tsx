@@ -1,4 +1,4 @@
-import type { LabChallenge } from '../../../features/unit-v2/lab/types'
+import type { LabChallenge, LabChallengeMaker } from '../../../features/unit-v2/lab/types'
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { gcd } from '../math/fraction'
@@ -14,9 +14,10 @@ import {
 import type { ToolProps } from './labTools'
 import { Segmented, Stepper, ToolFrame } from './LabKit'
 import { PartitionBar } from './models'
+import { equivalenceExtra } from './extraChallenges'
 import { useLabText } from './useLabText'
 
-export function EquivalenceTool(props: ToolProps & { challenges?: LabChallenge<EquivalenceState>[] }) {
+export function EquivalenceTool(props: ToolProps & { challenges?: LabChallenge<EquivalenceState>[]; extraChallenges?: LabChallengeMaker<EquivalenceState> }) {
     const l = useLabText(props.language)
     const [state, setState] = useState<EquivalenceState>(initialEquivalenceState)
     const { numerator, denominator, mode, factor, divisor } = state
@@ -86,7 +87,8 @@ export function EquivalenceTool(props: ToolProps & { challenges?: LabChallenge<E
     const resultLabel = `${l({ eu: 'Zatiki baliokidea', es: 'Fracción equivalente', ar: 'الكسر المكافئ' })}: ${result.numerator}/${result.denominator}`
 
     return (
-        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? equivalenceChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? equivalenceChallenges}
+            extraChallenges={props.challenges ? props.extraChallenges : equivalenceExtra} state={state}>
             <div className="fraction-v2-bar-stack">
                 <div className="fraction-v2-bar-row">
                     <span className="fraction-v2-bar-label"><MathText text={`$\\frac{${numerator}}{${denominator}}$`} /></span>
