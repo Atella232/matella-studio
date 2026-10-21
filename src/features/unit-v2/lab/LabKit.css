@@ -250,8 +250,16 @@
     max-width: 100%;
     /* Long chains scroll sideways instead of spilling out of the card */
     overflow-x: auto;
+    /* Fractions stand a little above and below the line: leave them room, and never scroll up and down */
+    padding-block: 4px;
+    overflow-y: hidden;
     /* Chains of equalities read left to right in every language */
     direction: ltr;
+}
+
+/* A readout that is a single formula is set in display mode, whose box hides what stands below the line: the readout scrolls sideways itself, so let the denominators show */
+.fraction-v2-lab-readout-main .math-text .math-token.display {
+    overflow: visible;
 }
 
 .fraction-v2-lab-readout-main > span[aria-hidden="true"] {

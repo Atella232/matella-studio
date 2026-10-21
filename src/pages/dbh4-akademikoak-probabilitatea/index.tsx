@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { probabilityAkChallenges, probabilityAkDiagnostic, probabilityAkExerciseBank, probabilityAkPractice } from './content'
 import { ProbabilityAkHeroArt } from './figures'
+import { ProbabilityAkLaboratory } from './lab'
+import { probabilityAkLabChallengeIds, probabilityAkLabToolForTopic, probabilityAkLabTools } from './lab/labTools'
 import { probabilityAkStages, probabilityAkTopics } from './lessons'
 
 const probabilitateaUnit: UnitDefinition = {
@@ -24,6 +26,16 @@ const probabilitateaUnit: UnitDefinition = {
     guidedPractice: probabilityAkPractice,
     exerciseBank: probabilityAkExerciseBank,
     challenges: probabilityAkChallenges,
+    lab: {
+        description: {
+            eu: `${probabilityAkLabTools.length} tresna, erronkekin: gertaeren bildura, milaka jaurtiketa, bi dadoren taula, gutxienez behin, kutxa bateko bi atera, kontingentzia-taula, kutxa aukeratzen duen dadoa, batera ateratzea, hiru dado eta joko bidezkoa.`,
+            es: `${probabilityAkLabTools.length} herramientas con retos: la unión de sucesos, miles de lanzamientos, la tabla de dos dados, al menos una vez, dos extracciones de una urna, la tabla de contingencia, el dado que elige la urna, sacar varias a la vez, tres dados y el juego equitativo.`,
+            ar: `${probabilityAkLabTools.length} أدوات مع تحديات: اتحاد الأحداث، وآلاف الرميات، وجدول نردين، ومرة واحدة على الأقل، وسحبتان من جرّة، وجدول التوافق، والنرد الذي يختار الجرّة، والسحب معًا، وثلاثة نرود، واللعبة العادلة.`
+        },
+        progressIds: probabilityAkLabChallengeIds,
+        toolForTopic: probabilityAkLabToolForTopic,
+        render: (props) => <ProbabilityAkLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zatiki bat edo zenbaki zehatz bat: 3/8, 0,375 edo 12. Probabilitate ez-zehatzak (1/6), zatiki gisa.', es: 'Escribe una fracción o un número exacto: 3/8, 0,375 o 12. Las probabilidades no exactas (1/6), como fracción.', ar: 'اكتب كسرًا أو عددًا مضبوطًا: 3/8 أو 0.375 أو 12. والاحتمالات غير المنتهية (1/6) كسرًا.' },
         defaultForm: 'any',
