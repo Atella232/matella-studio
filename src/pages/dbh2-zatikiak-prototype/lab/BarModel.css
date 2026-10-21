@@ -1,0 +1,198 @@
+/* ---------- Problems with bars ---------- */
+
+.bar-model {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    max-width: 560px;
+}
+
+.bar-model svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    /* The bar reads from left to right in every language */
+    direction: ltr;
+}
+
+.bar-model-piece rect {
+    stroke: var(--ink);
+    stroke-width: 1.5;
+    fill: #ffffff;
+}
+
+.bar-model-piece.first rect {
+    fill: var(--stage);
+}
+
+.bar-model-piece.second rect {
+    fill: var(--second);
+}
+
+/* What is left after the first part: drawn again, split, in the bar below */
+.bar-model-piece.remainder rect {
+    fill: var(--paper-deep);
+}
+
+.bar-model-piece text {
+    fill: var(--ink);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.bar-model-piece.first text,
+.bar-model-piece.second text {
+    fill: #ffffff;
+}
+
+.bar-model-outline {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 2.5;
+}
+
+.bar-model-zoom {
+    fill: none;
+    stroke: var(--muted);
+    stroke-width: 1.5;
+    stroke-dasharray: 5 5;
+}
+
+.bar-model-bracket path {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.bar-model-bracket.first path {
+    stroke: var(--stage);
+}
+
+.bar-model-bracket.second path {
+    stroke: var(--second);
+}
+
+/* The asked part is dashed until its value is found */
+.bar-model-bracket.asked:not(.found) path {
+    stroke-dasharray: 4 4;
+}
+
+.bar-model-bracket text {
+    fill: var(--ink);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.bar-model-bracket.asked text {
+    fill: var(--second);
+}
+
+/* ---------- Readout ---------- */
+
+.bar-model-readout {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    font-size: 16px;
+    text-align: start;
+}
+
+.bar-model-readout-title {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.bar-model-fractions,
+.bar-model-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.bar-model-fractions li,
+.bar-model-steps li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 8px;
+    font-weight: 700;
+}
+
+.bar-model-fractions bdi,
+.bar-model-steps bdi {
+    font-weight: 400;
+}
+
+.bar-model-swatch {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--ink);
+    border-radius: 4px;
+    background: #ffffff;
+}
+
+.bar-model-swatch.first {
+    background: var(--stage);
+}
+
+.bar-model-swatch.second {
+    background: var(--second);
+}
+
+.bar-model-swatch.remainder {
+    background: var(--paper-deep);
+}
+
+.bar-model-question {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    padding-top: 10px;
+    border-top: 1.5px dashed var(--line);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.bar-model-question span:last-child {
+    color: var(--second);
+}
+
+.bar-model-readout-warning {
+    color: var(--second);
+    font-weight: 700;
+}
+
+.bar-model-steps {
+    padding-top: 10px;
+    border-top: 1.5px dashed var(--line);
+    counter-reset: bar-step;
+}
+
+.bar-model-steps li::before {
+    counter-increment: bar-step;
+    content: counter(bar-step);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    color: var(--paper);
+    background: var(--ink);
+    font-size: 13px;
+}

@@ -1,0 +1,221 @@
+/* ---------- Take the expression apart ---------- */
+
+.expr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 620px;
+}
+
+.expr-board {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 3px;
+    width: 100%;
+    min-height: 120px;
+    padding: 18px 10px;
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    background: var(--card);
+    font-size: 26px;
+    /* Expressions read from left to right in every language */
+    direction: ltr;
+}
+
+.expr-num,
+.expr-power {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* The fractions sit in the row, without the space display formulas leave around them, and show whole */
+.expr-board .expr-num .math-text .math-token.display {
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+}
+
+.expr-paren {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 2.6em;
+    font-weight: 300;
+    line-height: 1;
+    transform: scaleY(1.15);
+}
+
+.expr-op,
+.expr-exp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    color: var(--ink);
+    background: var(--paper);
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s, box-shadow 0.15s;
+}
+
+.expr-op {
+    min-width: 42px;
+    min-height: 44px;
+    margin-inline: 3px;
+    font-size: 26px;
+    line-height: 1;
+}
+
+/* The exponent is a small raised button */
+.expr-exp {
+    align-self: flex-start;
+    min-width: 32px;
+    min-height: 32px;
+    margin-top: -8px;
+    margin-inline-start: 2px;
+    font-size: 17px;
+}
+
+.expr-op:hover,
+.expr-exp:hover {
+    background: var(--stage-tint);
+}
+
+/* Green: can be done now; red: had to wait */
+.expr-op.lit,
+.expr-exp.lit {
+    border-color: var(--success);
+    background: var(--success-tint);
+    box-shadow: 0 0 0 3px var(--success);
+}
+
+.expr-op.wrong,
+.expr-exp.wrong {
+    border-color: var(--error);
+    color: var(--error);
+    background: var(--error-tint);
+    animation: expr-shake 0.35s;
+}
+
+@keyframes expr-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .expr-op.wrong,
+    .expr-exp.wrong {
+        animation: none;
+    }
+}
+
+.expr-feedback {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+    width: 100%;
+    font-size: 16px;
+}
+
+.expr-feedback p {
+    width: 100%;
+}
+
+/* The order of operations as four numbered symbols: brackets, powers, · ÷, + − */
+.expr-order {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.expr-order ol {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: expr-order;
+}
+
+.expr-order li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px 4px 4px;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    background: var(--card);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 17px;
+    font-weight: 700;
+    white-space: nowrap;
+    direction: ltr;
+}
+
+.expr-order li::before {
+    counter-increment: expr-order;
+    content: counter(expr-order);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    color: var(--paper);
+    background: var(--ink);
+    font-family: var(--font-body);
+    font-size: 12px;
+}
+
+.expr-order p {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* ---------- Readout: one line per step ---------- */
+
+.expr-readout {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.expr-lines {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    max-width: 100%;
+    margin: 0;
+    padding: 4px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    list-style: none;
+    font-size: 19px;
+    direction: ltr;
+}
+
+/* Each line scrolls sideways on its own; room above and below keeps the denominators whole */
+.expr-readout .expr-lines .math-text .math-token.display {
+    margin: 0;
+    padding-block: 0.3em;
+}
+
+.expr-mistakes {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 700;
+    text-align: start;
+}

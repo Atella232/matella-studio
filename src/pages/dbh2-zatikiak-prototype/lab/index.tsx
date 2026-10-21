@@ -10,6 +10,8 @@ import { ProductTool } from './ProductTool'
 import { SumTool } from './SumTool'
 import { NumberLineTool } from './NumberLineTool'
 import { WallTool } from './WallTool'
+import { BarModelTool } from './BarModelTool'
+import { ExpressionTool } from './ExpressionTool'
 import './Lab.css'
 
 const toolComponents: Record<LabToolId, (props: ToolProps) => JSX.Element> = {
@@ -20,7 +22,9 @@ const toolComponents: Record<LabToolId, (props: ToolProps) => JSX.Element> = {
     compare: CompareTool,
     addsub: SumTool,
     muldiv: ProductTool,
-    proportion: ProportionTool
+    expression: ExpressionTool,
+    proportion: ProportionTool,
+    bars: BarModelTool
 }
 
 export function FractionLaboratory({

@@ -1,10 +1,12 @@
 import type { FractionStageId, LocalizedText, TheoryTopicId } from '../content.ts'
 import { checkAnswer, compare, equals, fraction, gcd, hasTerminatingDecimal, type AnswerForm, type FractionValue } from '../math/fraction.ts'
 import { freshAnswer, type LabChallenge, type LabToolInfo as UnitLabToolInfo, type LabToolProps, type OperationAnswer } from '../../../features/unit-v2/lab/types.ts'
+import { barChallenges } from './barModel.ts'
+import { expressionChallenges } from './expression.ts'
 
 export type { LabChallenge, OperationAnswer } from '../../../features/unit-v2/lab/types.ts'
 
-export type LabToolId = 'parts' | 'numberline' | 'wall' | 'equivalence' | 'compare' | 'addsub' | 'muldiv' | 'proportion'
+export type LabToolId = 'parts' | 'numberline' | 'wall' | 'equivalence' | 'compare' | 'addsub' | 'muldiv' | 'expression' | 'proportion' | 'bars'
 
 export interface LabToolInfo extends UnitLabToolInfo {
     id: LabToolId
@@ -97,6 +99,17 @@ export const labTools: LabToolInfo[] = [
         }
     },
     {
+        id: 'expression',
+        stage: 'operations',
+        lessonTopic: 'combined',
+        title: { eu: 'Eragiketak urratsez urrats', es: 'Desmonta la expresión', ar: 'العمليات خطوة بخطوة' },
+        observe: {
+            eu: 'Sakatu orain egin behar den eragiketa: adierazpena bere emaitzara laburtzen da. Ordena okerra aukeratzen baduzu, zein arauk agintzen duen ikusiko duzu, eta askotan beste emaitza bat aterako litzatekeela. Lerro bakoitzak balio bera du, idazkera laburrago batean.',
+            es: 'Toca la operación que toca hacer ahora: la expresión se reduce a su resultado. Si eliges un orden equivocado, verás qué regla manda y, muchas veces, que saldría otro resultado. Cada línea vale lo mismo, escrita de forma más corta.',
+            ar: 'اضغط العملية التي يجب إجراؤها الآن: تُختصر العبارة إلى نتيجتها. إذا اخترت ترتيبًا خاطئًا سترى أي قاعدة تحكم، وأنه غالبًا ستنتج نتيجة أخرى. كل سطر له القيمة نفسها مكتوبة بصورة أقصر.'
+        }
+    },
+    {
         id: 'proportion',
         stage: 'proportionality',
         lessonTopic: 'fraction-of',
@@ -105,6 +118,17 @@ export const labTools: LabToolInfo[] = [
             eu: 'Kantitate baten zatikia zati berdinetan banatu eta batzuk hartzea da. Ehuneko bat 100 izendatzailea duen zatikia da, eta hamartarra balio bera idazteko beste modu bat.',
             es: 'Una fracción de una cantidad es repartir en partes iguales y tomar algunas. Un porcentaje es una fracción con denominador 100, y un decimal es otra forma de escribir el mismo valor.',
             ar: 'كسر من كمية يعني تقسيمها إلى أجزاء متساوية وأخذ بعضها. النسبة المئوية كسر مقامه 100، والعدد العشري طريقة أخرى لكتابة القيمة نفسها.'
+        }
+    },
+    {
+        id: 'bars',
+        stage: 'proportionality',
+        lessonTopic: 'fraction-of',
+        title: { eu: 'Problemak barrekin', es: 'Problemas con barras', ar: 'مسائل بالأشرطة' },
+        observe: {
+            eu: 'Marraztu problema: barra osoa da, eta zatiak, enuntziatuak esaten dituenak. Kontuz: «geratzen denaren» zatia ez da osoaren zatia; geratzen dena berriro banatzen da. Datuak zati batzuen balioa ematen du: banatu eta zati batek zenbat balio duen jakingo duzu, eta horrekin, barra osoarena.',
+            es: 'Dibuja el problema: la barra es el total y las partes son las que dice el enunciado. Cuidado: una parte «de lo que queda» no es una parte del total; lo que queda se vuelve a partir. El dato da el valor de unos trozos: repártelo y sabrás cuánto vale un trozo, y con él, toda la barra.',
+            ar: 'ارسم المسألة: الشريط هو الكل والأجزاء هي ما يذكره النص. انتبه: جزء «من الباقي» ليس جزءًا من الكل؛ فالباقي يُقسَّم من جديد. يعطي المعطى قيمة بعض القطع: وزّعه فتعرف قيمة القطعة الواحدة، ومنها قيمة الشريط كله.'
         }
     }
 ]
@@ -118,8 +142,9 @@ export const labToolForTopic: Partial<Record<TheoryTopicId, LabToolId>> = {
     ordering: 'compare',
     'add-subtract': 'addsub',
     'multiply-divide': 'muldiv',
-    combined: 'addsub',
-    'fraction-of': 'proportion',
+    combined: 'expression',
+    powers: 'expression',
+    'fraction-of': 'bars',
     percentages: 'proportion',
     proportionality: 'proportion'
 }
@@ -728,5 +753,7 @@ export const labChallengeIds: number[] = [
     ...compareChallenges,
     ...sumChallenges,
     ...productChallenges,
-    ...proportionChallenges
+    ...expressionChallenges,
+    ...proportionChallenges,
+    ...barChallenges
 ].map((challenge) => challenge.id)
