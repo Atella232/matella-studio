@@ -77,6 +77,40 @@ export function GameArt({ game }: { game: GameId }) {
             </svg>
         )
     }
+    if (game === 'exact') {
+        // Two cards and an operation make the target card
+        return (
+            <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
+                {([['1/3', 14, -5], ['1/4', 82, 4]] as const).map(([label, x, rotation]) => (
+                    <g key={label} transform={`rotate(${rotation} ${x + 22} 60)`}>
+                        <rect x={x} y="30" width="44" height="60" rx="8" fill="#fffcf6" stroke="var(--ink)" strokeWidth="2" />
+                        <text x={x + 22} y="66" textAnchor="middle" fontSize="16" fontWeight="700" fill="var(--ink)" fontFamily="Fraunces, serif">{label}</text>
+                    </g>
+                ))}
+                <circle cx="69" cy="60" r="11" fill="var(--ink)" />
+                <text x="69" y="65" textAnchor="middle" fontSize="16" fontWeight="700" fill="#fffcf6">+</text>
+                <path d="M134 60 h18 m-7 -7 l7 7 l-7 7" fill="none" stroke="var(--ink)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                <rect x="158" y="22" width="52" height="76" rx="10" fill="var(--mustard-tint)" stroke="var(--ink)" strokeWidth="2.4" />
+                <text x="184" y="66" textAnchor="middle" fontSize="17" fontWeight="700" fill="var(--ink)" fontFamily="Fraunces, serif">7/12</text>
+            </svg>
+        )
+    }
+    if (game === 'detective') {
+        // A worked solution with one line circled and a magnifying glass over it
+        return (
+            <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
+                <rect x="20" y="10" width="130" height="100" rx="8" fill="#fffcf6" stroke="var(--ink)" strokeWidth="2" />
+                {[34, 56, 78, 100].map((y) => <line key={y} x1="28" y1={y} x2="142" y2={y} stroke="var(--line)" strokeWidth="1.5" />)}
+                <text x="32" y="30" fontSize="13" fontWeight="700" fill="var(--ink)" fontFamily="Fraunces, serif">1/2 + 1/3</text>
+                <text x="32" y="52" fontSize="13" fill="var(--ink)" fontFamily="Fraunces, serif">= 2/5</text>
+                <text x="32" y="74" fontSize="13" fill="var(--ink)" fontFamily="Fraunces, serif">= …</text>
+                <ellipse cx="54" cy="47" rx="30" ry="12" fill="none" stroke="var(--coral)" strokeWidth="2.4" />
+                <circle cx="150" cy="70" r="26" fill="var(--blue-tint)" fillOpacity="0.6" stroke="var(--ink)" strokeWidth="3" />
+                <path d="M169 89 L200 112" stroke="var(--ink)" strokeWidth="8" strokeLinecap="round" />
+                <path d="M150 58 l0 14 m0 6 l0 2" stroke="var(--coral)" strokeWidth="3.4" strokeLinecap="round" />
+            </svg>
+        )
+    }
     return (
         <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
             {([['3/4', -6, 'var(--mustard-tint)'], ['0,75', 2, '#fffcf6'], ['75%', 8, 'var(--green-tint)']] as const).map(([label, rotation, fill], index) => (

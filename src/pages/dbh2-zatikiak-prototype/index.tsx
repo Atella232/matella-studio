@@ -105,7 +105,7 @@ const zatikiakUnit: UnitDefinition = {
         )
     },
     games: {
-        description: { eu: 'Lau joko abiadura eta zehaztasuna entrenatzeko.', es: 'Cuatro juegos para entrenar rapidez y precisión.', ar: 'أربع ألعاب لتدريب السرعة والدقة.' },
+        description: { eu: 'Sei joko abiadura, zehaztasuna eta estrategia entrenatzeko.', es: 'Seis juegos para entrenar rapidez, precisión y estrategia.', ar: 'ست ألعاب لتدريب السرعة والدقة والاستراتيجية.' },
         progressIds: gameProgressIds,
         recordsKey: GAME_RECORDS_KEY,
         render: ({ language, pathname, openGame, completedIds, onComplete }) => (

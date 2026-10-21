@@ -1,0 +1,210 @@
+/* ---------- Helburu zehatza / Objetivo exacto ---------- */
+
+.fraction-v2-games-card[data-game="exact"] { --game-tint: var(--blue-tint); }
+
+.exact-game {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.exact-target {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    align-self: center;
+    min-width: 220px;
+    padding: 10px 26px;
+    border: 2.5px solid var(--ink);
+    border-radius: 18px;
+    background: var(--mustard-tint);
+    box-shadow: var(--shadow);
+    font-size: 30px;
+}
+
+.exact-target-label {
+    color: var(--mustard-ink);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.exact-game .exact-target .math-text .math-token.display {
+    margin: 0;
+    overflow: visible;
+}
+
+.exact-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.exact-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 92px;
+    height: 104px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+    box-shadow: 0 3px 0 var(--ink);
+    font-size: 24px;
+    transition: transform 0.12s, background 0.12s;
+}
+
+.exact-game .exact-card .math-text .math-token.display {
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+}
+
+.exact-card:hover:not(:disabled) {
+    background: var(--stage-soft);
+}
+
+.exact-card.selected {
+    background: var(--stage-tint);
+    border-color: var(--stage);
+    box-shadow: 0 0 0 3px var(--stage);
+    transform: translateY(-3px);
+}
+
+/* The two cards a hint suggests */
+.exact-card.hinted {
+    border-style: dashed;
+    border-color: var(--mustard-ink);
+    background: var(--mustard-tint);
+}
+
+.exact-card.target {
+    border-color: var(--success);
+    background: var(--success-tint);
+    box-shadow: 0 0 0 3px var(--success);
+}
+
+.exact-card.fresh {
+    animation: exact-pop 0.3s ease-out;
+}
+
+@keyframes exact-pop {
+    0% { transform: scale(0.7); }
+    70% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .exact-card.fresh {
+        animation: none;
+    }
+}
+
+.exact-card:disabled {
+    cursor: default;
+}
+
+.exact-ops {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.exact-ops button {
+    width: 56px;
+    height: 52px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--paper);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.exact-ops button[aria-pressed="true"] {
+    color: var(--paper);
+    background: var(--ink);
+}
+
+.exact-ops button:disabled {
+    opacity: 0.4;
+}
+
+.exact-status,
+.exact-warning,
+.exact-hint {
+    text-align: center;
+    font-weight: 700;
+}
+
+.exact-status {
+    color: var(--muted);
+}
+
+.exact-warning {
+    color: var(--error);
+}
+
+.exact-hint {
+    align-self: center;
+    padding: 6px 14px;
+    border-radius: 10px;
+    background: var(--mustard-tint);
+}
+
+.exact-steps {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 20px;
+    direction: ltr;
+}
+
+.exact-game .exact-steps .math-text .math-token.display {
+    margin: 0;
+    padding-block: 0.3em;
+}
+
+.exact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.exact-outcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    background: var(--card);
+    font-size: 17px;
+}
+
+.exact-outcome.solved {
+    border-color: var(--success);
+    background: var(--success-tint);
+}
+
+@media (max-width: 480px) {
+    .exact-card {
+        width: 82px;
+        height: 94px;
+        font-size: 21px;
+    }
+
+    .exact-ops button {
+        width: 52px;
+    }
+}

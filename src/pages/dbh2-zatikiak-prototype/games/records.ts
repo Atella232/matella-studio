@@ -3,7 +3,7 @@ import { levelProgressIds, type GameInfo as UnitGameInfo, type GameLevelInfo as 
 
 export { gameStars, mergeRecord, parseRecords, recordKey, type GameRecords, type LevelRecord, type Stars } from '../../../features/unit-v2/games/records.ts'
 
-export type GameId = 'race' | 'memory' | 'target' | 'wall'
+export type GameId = 'race' | 'memory' | 'target' | 'wall' | 'exact' | 'detective'
 
 export interface GameLevelInfo extends UnitGameLevelInfo {
     stage: FractionStageId
@@ -62,6 +62,28 @@ export const games: GameInfo[] = [
             { progressId: 701, stage: 'meaning', title: { eu: 'Bikoteak', es: 'Parejas', ar: 'أزواج' }, description: { eu: '6 bikote: zatikiak, marrazkiak eta hamartarrak.', es: '6 parejas: fracciones, dibujos y decimales.', ar: '6 أزواج: كسور ورسوم وأعداد عشرية.' } },
             { progressId: 702, stage: 'equivalence', title: { eu: 'Adierazpen gehiago', es: 'Más representaciones', ar: 'تمثيلات أكثر' }, description: { eu: '8 bikote: ehunekoak, mistoak eta zuzena.', es: '8 parejas: porcentajes, mixtos y la recta.', ar: '8 أزواج: نسب مئوية وأعداد كسرية وخط الأعداد.' } },
             { progressId: 703, stage: 'proportionality', title: { eu: 'Hirukoteak', es: 'Tríos', ar: 'ثلاثيات' }, description: { eu: '6 hirukote: zatikia, hamartarra eta ehunekoa.', es: '6 tríos: fracción, decimal y porcentaje.', ar: '6 ثلاثيات: كسر وعدد عشري ونسبة مئوية.' } }
+        ]
+    },
+    {
+        id: 'exact',
+        title: { eu: 'Helburu zehatza', es: 'Objetivo exacto', ar: 'الهدف الدقيق' },
+        tagline: { eu: 'Konbinatu kartak lau eragiketekin eta iritsi zehazki helburura.', es: 'Combina las cartas con las cuatro operaciones y llega exactamente al objetivo.', ar: 'اجمع البطاقات بالعمليات الأربع وصِل إلى الهدف تمامًا.' },
+        skills: { eu: 'Estrategia eta eragiketak', es: 'Estrategia y operaciones', ar: 'الاستراتيجية والعمليات' },
+        levels: [
+            { progressId: 1001, stage: 'operations', title: { eu: 'Batu eta kendu', es: 'Sumar y restar', ar: 'الجمع والطرح' }, description: { eu: 'Lau karta, + eta − bakarrik.', es: 'Cuatro cartas, solo + y −.', ar: 'أربع بطاقات، + و− فقط.' } },
+            { progressId: 1002, stage: 'operations', title: { eu: 'Lau eragiketak', es: 'Las cuatro operaciones', ar: 'العمليات الأربع' }, description: { eu: 'Lau karta eta + − · ÷.', es: 'Cuatro cartas y + − · ÷.', ar: 'أربع بطاقات و+ − · ÷.' } },
+            { progressId: 1003, stage: 'operations', title: { eu: 'Helburu handia', es: 'Gran objetivo', ar: 'الهدف الكبير' }, description: { eu: 'Bost karta: hiru edo lau erabili beharko dituzu.', es: 'Cinco cartas: tendrás que usar tres o cuatro.', ar: 'خمس بطاقات: ستحتاج إلى ثلاث منها أو أربع.' } }
+        ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Akatsen detektibea', es: 'Detective de errores', ar: 'محقّق الأخطاء' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago. Aurkitu eta esan zein akats den.', es: 'En cada resolución hay una línea mal. Encuéntrala y di qué error es.', ar: 'في كل حلّ سطر خاطئ. جِده وقل ما نوع الخطأ.' },
+        skills: { eu: 'Ohiko akatsak', es: 'Errores típicos', ar: 'الأخطاء الشائعة' },
+        levels: [
+            { progressId: 1101, stage: 'operations', title: { eu: 'Batuketak eta kenketak', es: 'Sumas y restas', ar: 'الجمع والطرح' }, description: { eu: 'Izendatzaile komuna, zeinuak eta sinplifikazioa.', es: 'Denominador común, signos y simplificación.', ar: 'المقام المشترك والإشارات والاختزال.' } },
+            { progressId: 1102, stage: 'operations', title: { eu: 'Biderketak eta zatiketak', es: 'Productos y cocientes', ar: 'الضرب والقسمة' }, description: { eu: 'Zuzenean biderkatu eta zatitzeko alderantzikatu.', es: 'Multiplicar en línea e invertir para dividir.', ar: 'الضرب المباشر والقلب للقسمة.' } },
+            { progressId: 1103, stage: 'operations', title: { eu: 'Eragiketa konbinatuak', es: 'Operaciones combinadas', ar: 'العمليات المركبة' }, description: { eu: 'Hierarkia eta berreturak.', es: 'Jerarquía y potencias.', ar: 'الأولوية والقوى.' } }
         ]
     }
 ]
