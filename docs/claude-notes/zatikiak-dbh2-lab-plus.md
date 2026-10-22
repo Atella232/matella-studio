@@ -1,6 +1,6 @@
 ---
 name: zatikiak-dbh2-lab-plus
-description: "2. DBH Zatikiak lab upgrade: phase 1 (L1 bars + L2 expression) deployed 2026-10-21; phase 2 (M1 extra challenges + M2 predictions) deployed 2026-10-21; phase 3 games J1+J2 deployed 2026-10-22; J6 Rebajas deployed 2026-10-22; M4 deployed 2026-10-22; L3 deployed 2026-10-22; options left: L4–L5, M3, J3–J5"
+description: "2. DBH Zatikiak lab upgrade: phase 1 (L1 bars + L2 expression) deployed 2026-10-21; phase 2 (M1 extra challenges + M2 predictions) deployed 2026-10-21; phase 3 games J1+J2 deployed 2026-10-22; J6 Rebajas deployed 2026-10-22; M4 deployed 2026-10-22; L3 deployed 2026-10-22; L4 built 2026-10-22 on claude/eloquent-darwin-nhotrt (7873d14), waiting for the owner to merge; options left: L5, M3, J3–J5"
 ---
 
 On 2026-10-21 the owner asked for a review of the 2. DBH Zatikiak lab and games. From the proposed options the owner chose phase 1: L1 «Problemas con barras» + L2 «Desmonta la expresión».
@@ -107,3 +107,19 @@ L3 «Factores primos», the next option after the owner's «ADELANTE» on 2026-1
 - Gotchas:
   - MathText has an `inline` prop: a lone formula is otherwise rendered in display mode, as a centred block;
   - keep `direction: ltr` on the formula rows only, or Arabic sentences get their punctuation in the wrong place.
+
+L4 «De fracción a decimal» (2026-10-22, first cloud session) was committed as 7873d14 on `claude/eloquent-darwin-nhotrt` and pushed; the owner merges and deploys from the Mac. Not deployed yet.
+- Scope chosen by the owner: exact, pure periodic and mixed periodic, with the 2-and-5 rule. 1. DBH Hamartarrak only teaches exact/periodic and 3. DBH Arrazionalak the full classification, so the 2. DBH lesson `percentages` («Fracciones, decimales y porcentajes») got a fifth fact, «Exacto, puro o mixto», to say the same as the lab.
+- Interaction chosen by the owner: predict first, then watch. The learner predicts the kind from the denominator's prime tiles; the division opens only after the prediction, and right/wrong is shown when the division ends.
+- Code: `lab/decimals.ts` (`longDivision`, `divisionKind`, `denominatorFactors`, `kindFromFactors`, state helpers), `DecimalsTool.tsx` and `Decimals.css`. It reuses `pairAll`/`primesSummary` from `lab/primes.ts` for the crossed-out denominator factors, the `.primes-tile` classes from `Primes.css` and the `.prediction` classes from `Prediction.css`.
+- Tool id `decimals`, stage proportionality; the lesson `percentages` now opens it instead of `proportion` (`proportionality` still opens `proportion`).
+- What it shows: the denominator in prime tiles (the ones that simplify away crossed out), three prediction buttons, «Siguiente cifra» / «Hasta el final» / «Empezar de nuevo», the quotient in boxes (anteperiodo mustard, periodo green with a bar on top), a step list «70 ÷ 12 | 5 | 10» that scrolls to the last step, and chips with every possible remainder (0 … d−1), the repeated one in coral.
+- Limits: numerator 1–999, denominator 2–40 (40 chips still fit at 375 px; 1/29 gives 28 steps).
+- Challenges 1801–1804: 3/8 to the end; a pure periodic with a 6-digit period (1/7, 1/13, 1/21); a mixed periodic with 2 digits before the period (1/12); a denominator with a 3 that still gives an exact decimal, not a whole number (3/6). Endless extras ask to divide a random fraction (30 % with both terms doubled or tripled) and only count a right prediction.
+- Tests in `tests/zatikiak-decimals.test.ts` (every n ≤ 200, d ≤ 40: steps, stop rule, value given back with BigInt, kind from the factors, anteperiodo length = max exponent of 2 and 5); suite 836/836, lint and build OK. Checked at 375 px in eu, es and ar with Playwright (`playwright-core` in the scratchpad, `executablePath` `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`, language via `localStorage.i18nextLng`, route `#/matematika/dbh2/zatikiak/laboratorio/decimals`): no horizontal overflow, no console errors.
+- Gotchas:
+  - V2 units only have eu/es/ar (`UnitLanguage`); English falls back to Basque, so there are no English texts.
+  - Arabic counts change the noun's form with the number, so «12 بواقٍ» is avoided: the chips say «عددها 12 فقط».
+  - In Basque UI text, «0ra», «12rekin» and the like are suffixes after a number: write «Adibidez: 1/12.» or «hondarra inoiz 0 ez bada». The test checks the challenge texts for it.
+  - Writing `\u2066` inside a tool parameter can land as the raw invisible character; use the `ltr()` helper with escapes instead.
+
