@@ -1,0 +1,32 @@
+# Notas técnicas del proyecto
+
+Historial por unidad (ids, reutilización, fases, trucos). Copiadas de la memoria local de Claude el 2026-10-23; la fuente viva sigue siendo la memoria local del Mac.
+
+- [V2 redesign direction](v2-redesign-direction.md) — rebuild Matella around Zatikiak V2, then extend to all units
+- [Visual direction D](visual-direction-d.md) — chosen Matella look: paper+ink, Fraunces/Atkinson, color per stage
+- [Zatigarritasuna DBH2](zatigarritasuna-dbh2.md) — next unit: sources (Santillana + handouts), notation, phase progress
+- [Zenbaki naturalak DBH1](zenbaki-naturalak-dbh1.md) — first DBH1 V2 unit: sources, scope, dot thousands, phase progress
+- [Zenbaki osoak DBH1](zenbaki-osoak-dbh1.md) — second DBH1 V2 unit, reuses DBH2 integers pieces; phases and publish status
+- [Zatigarritasuna DBH1](zatigarritasuna-dbh1.md) — third DBH1 V2 unit, all 4 phases merged and deployed; reuse of DBH2 pieces
+- [Remaining DBH1 units](remaining-dbh1-units.md) — standing order: Zatikiak→Aljebra→Geometria→Estadística; progress log to resume
+- [Aljebra DBH2](aljebra-dbh2.md) — 2. DBH algebra V2 unit: sources, ids, phase progress
+- [Ekuazioak DBH2](ekuazioak-dbh2.md) — last legacy 2. DBH unit on V2; publishing pre-authorised
+- [Funtzioak DBH2](funtzioak-dbh2.md) — 2. DBH functions unit: deployed 2026-10-02, quality pass (graphs in exercises) deployed 2026-10-02
+- [Zenbaki errealak 4. DBH aplikatuak](zenbaki-errealak-dbh4ap.md) — 4. DBH split in two; first applied unit deployed 2026-10-02; goal: first unit of every course
+- [Errealak eta ehunekoak 4. DBH akademikoak](errealak-ehunekoak-dbh4ak.md) — first academic unit deployed 2026-10-02; Arabic SVG + Basque suffix gotchas
+- [Arrazionalak 3. DBH](arrazionalak-dbh3.md) — first 3. DBH unit deployed 2026-10-02; reuse map
+- [Remaining ESO units](remaining-eso-units.md) — owner's order 2026-10-02: finish 1./2. DBH before Bachillerato; progress log
+- [Potentziak DBH4 akademikoak](potentziak-dbh4ak.md) — 2nd 4.º académicas unit (potencias, radicales, logaritmos): ids, progress
+- [Polinomioak DBH4 akademikoak](polinomioak-dbh4ak.md) — 3rd 4.º académicas unit (polinomios y fracciones algebraicas): ids, progress
+- [Ekuazioak DBH4 akademikoak](ekuazioak-dbh4ak.md) — 4th 4.º académicas unit (ecuaciones e inecuaciones): ids, progress
+- [Sistemak DBH4 akademikoak](sistemak-dbh4ak.md) — 5th 4.º académicas unit (sistemas de ecuaciones e inecuaciones 2D): ids, progress
+- [Areak DBH4 akademikoak](areak-dbh4ak.md) — 6th 4.º académicas unit (áreas, volúmenes y semejanza): ids, progress, figure-render trick
+- [Trigonometria DBH4 akademikoak](trigonometria-dbh4ak.md) — 7th 4.º académicas unit (trigonometría): ids, naming per language, progress
+- [Bektoreak DBH4 akademikoak](bektoreak-dbh4ak.md) — 8th 4.º académicas unit (vectores y rectas): deployed 2026-10-18; next Funciones
+- [Funtzioak DBH4 akademikoak](funtzioak-dbh4ak.md) — 9th 4.º académicas unit (funciones): deployed 2026-10-18; next polinómicas y racionales
+- [Polinomikoak DBH4 akademikoak](polinomikoak-dbh4ak.md) — 10th 4.º académicas unit (funciones polinómicas y racionales): ids, deployed 2026-10-20; next funciones-exponenciales
+- [Esponentzialak DBH4 akademikoak](esponentzialak-dbh4ak.md) — 11th 4.º académicas unit (exponenciales, logarítmicas, trigonométricas): ids, deployed 2026-10-20; next estadistica
+- [Estatistika DBH4 akademikoak](estatistika-dbh4ak.md) — 12th 4.º académicas unit (estadística): ids, reuse, deployed 2026-10-20; next combinatoria
+- [Konbinatoria DBH4 akademikoak](konbinatoria-dbh4ak.md) — 13th 4.º académicas unit (combinatoria): ids, deployed 2026-10-21; next probabilidad
+- [Probabilitatea DBH4 akademikoak](probabilitatea-dbh4ak.md) — 14th/last 4.º académicas unit (probabilidad): ids, reuse, shared readout CSS fix; deployed 2026-10-21 (4.º académicas complete)
+- [Zatikiak DBH2 lab plus](zatikiak-dbh2-lab-plus.md) — 2026-10-21 lab upgrade: L1 bars + L2 expression deployed (eb305df); M1+M2 deployed (70106f9); games J1+J2 deployed (e676c53); J6 Rebajas deployed (b564431); M4 deployed (1ab7ce7); L3 primes deployed (13261d7); open L4–L5, M3, J3–J5

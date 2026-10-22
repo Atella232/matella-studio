@@ -1,0 +1,14 @@
+---
+name: areak-dbh4ak
+description: "Sixth 4. DBH akademikoak unit (Áreas, volúmenes y semejanza): sources, structure, ids, phase progress"
+---
+
+Started 2026-10-12 when the owner said «continua» after deploying [[sistemak-dbh4ak]]. Course topic `areas-volumenes-semejanza` in dbh4-akademikoak, folder `src/pages/dbh4-akademikoak-areak`, storagePrefix `matella-areak-dbh4ak`, page `AreakDbh4AkIntroPage`, branch `feat/areak-dbh4ak`.
+
+Sources: Santillana 4.º Académicas U6 «Áreas y volúmenes. Semejanza» (scanned solucionario, rendered to scratchpad sk6/) + Anaya Ac. U6 «Semejanza. Aplicaciones» (scratchpad ak6.txt: Thales, altitude/leg theorems, frustums, scales).
+
+Stages plane-areas/solid-areas/volumes/similarity/ratios; 15 topics: regular-polygons, circle-parts, segments, polyhedra-area, round-area, sphere-area, prism-cylinder-volume, pyramid-cone-volume, sphere-composite, thales, similar-triangles, right-theorems, ratio-powers, frustums, models. π ≈ 3,14, answers read with aplikatuak `readSimilarityAnswer`. New figures: SegmentFigure, RightTheoremsFigure, FrustumFigure (+ hero); the rest reused from dbh1-figurak, dbh2-gorputzak, dbh2-pitagoras, 4. DBH aplikatuak areak/antzekotasuna.
+
+Phase 1 DONE 47a0a9c (diag 5401–5408, practice 1–20, challenges 101–115, bank 1–50; tests/areak-dbh4ak-content.test.ts). Lab DONE 3464017 (owner said «dale»): 12 tools; reused regular + compound (aplikatuak areak), sector (dbh1), pyramid/round/volume (dbh2), thales + growth (aplikatuak antzekotasuna); new segment 691xx, projections 692xx, frustum 693xx, model 694xx (lab/AreasSimilarityTools.tsx). Shared fix in the same commit: the Readout of dbh1-figurak and aplikatuak-areak labs splits at \qquad so long readouts wrap (sector overflowed 108 px); ships to 1. DBH and 4. DBH ap on deploy. Known harmless: reused Thales readout scrolls 10 px at 375 px. Games DONE a386f26 (owner said «continua»): race 70101–70105 (borrows are:/sol:/sim: from aplikatuak areak, dbh2 gorputzak, aplikatuak antzekotasuna; 17 own kinds with `meta`), memory 70201–70203 (altitude m,n↔h; k with A₂:A₁ or V₂:V₁; volumes in π). Max card 81 px of 106 on phone. Gotcha: MathText turns a bare ':' inside $…$ into ÷ — write scales as `1\mathbin{:}n` (fixed in the lesson too). Basque check `$-ko` only on own race questions (borrowed aplikatuak arc prompt has `$60^{\circ}$-ko`, which is correct Basque). DEPLOYED 2026-10-12 (main a386f26, bundle index-C2zxjdyS), with the dbh1/aplikatuak lab readout wrap fix. Next 4.º académicas unit only when asked: `trigonometria` (Santillana Ac. U7 + Anaya Ac. U7).
+
+Figure check trick (browser pane hidden, screenshots fail): bundle a renderToStaticMarkup script with `NODE_PATH=$PWD/node_modules npx esbuild … --platform=node --jsx=automatic`, then `qlmanage -t -s 1440` the SVGs and Read the PNGs (qlmanage crops to a square).
