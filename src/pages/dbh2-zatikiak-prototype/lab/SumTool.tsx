@@ -9,16 +9,18 @@ import {
     setPrediction,
     setSumOp,
     setSumOperand,
+    setWorksheet,
     sumChallenges,
     sumParts,
     sumPrediction,
     type SumState
 } from './labTools'
 import type { ToolProps } from './labTools'
-import { ResultAnswer, Segmented, Stepper, ToolFrame } from './LabKit'
+import { Segmented, Stepper, ToolFrame } from './LabKit'
 import { PartitionBar, SegmentBars, type SegmentTone } from './models'
 import { sumExtra } from './extraChallenges'
 import { PredictionStep } from './PredictionStep'
+import { SumWorksheetPanel } from './SumWorksheet'
 import { useLabText } from './useLabText'
 
 /** Beyond this many pieces per unit the common split is too thin to draw */
@@ -108,7 +110,12 @@ export function SumTool(props: ToolProps & { challenges?: LabChallenge<SumState>
                     : { eu: 'Lehena baino zatiki handiago bat kentzen baduzu, emaitza negatiboa da; txikiagoa bada, positiboa.', es: 'Si restas una fracción mayor que la primera, el resultado es negativo; si es menor, positivo.', ar: 'إذا طرحت كسرًا أكبر من الأول فالنتيجة سالبة، وإذا كان أصغر فهي موجبة.' }}
                 onChoose={(relation) => setState((current) => setPrediction(current, relation))}
             >
-                <ResultAnswer language={props.language} state={state} expected={result} onChange={(patch) => setState((current) => ({ ...current, ...patch }))} />
+                <SumWorksheetPanel
+                    language={props.language}
+                    state={state}
+                    onWorksheet={(patch) => setState((current) => setWorksheet(current, patch))}
+                    onAnswer={(patch) => setState((current) => ({ ...current, ...patch }))}
+                />
             </PredictionStep>
         </>
     )

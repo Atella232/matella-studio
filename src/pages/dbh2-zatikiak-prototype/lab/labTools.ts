@@ -1,5 +1,5 @@
 import type { FractionStageId, LocalizedText, TheoryTopicId } from '../content.ts'
-import { checkAnswer, compare, equals, fraction, gcd, hasTerminatingDecimal, type AnswerForm, type FractionValue } from '../math/fraction.ts'
+import { checkAnswer, compare, equals, fraction, gcd, hasTerminatingDecimal, normalizeDigits, type AnswerForm, type FractionValue } from '../math/fraction.ts'
 import { freshAnswer, type LabChallenge, type LabToolInfo as UnitLabToolInfo, type LabToolProps, type OperationAnswer } from '../../../features/unit-v2/lab/types.ts'
 import { barChallenges } from './barModel.ts'
 import { expressionChallenges } from './expression.ts'
@@ -573,14 +573,27 @@ export interface SumState extends OperationAnswer {
     /** Show the bars with their own parts or split into the common denominator */
     view: 'original' | 'common'
     prediction: Relation | null
+    /** The learner's intermediate steps; the result itself is `answer` */
+    worksheet: SumWorksheet
 }
+
+/** Common denominator, the two numerators over it, and the numerator of the result, as typed */
+export interface SumWorksheet {
+    common: string
+    first: string
+    second: string
+    numerator: string
+}
+
+export const emptyWorksheet: SumWorksheet = { common: '', first: '', second: '', numerator: '' }
 
 export const initialSumState: SumState = {
     first: { numerator: 1, denominator: 2 },
     second: { numerator: 1, denominator: 3 },
     op: 'add',
     view: 'original',
-    ...freshQuestion
+    ...freshQuestion,
+    worksheet: emptyWorksheet
 }
 
 /** Both operands over their least common denominator, and the unsimplified result */
@@ -591,10 +604,77 @@ export function sumParts(state: SumState): { common: number; first: number; seco
     return { common, first, second, result: { numerator: state.op === 'add' ? first + second : first - second, denominator: common } }
 }
 
-export const setSumOperand = (state: SumState, which: 'first' | 'second', numerator: number, denominator: number) =>
-    withOperand(state, which, numerator, denominator)
+export const setSumOperand = (state: SumState, which: 'first' | 'second', numerator: number, denominator: number): SumState =>
+    ({ ...withOperand(state, which, numerator, denominator), worksheet: emptyWorksheet })
 
-export const setSumOp = (state: SumState, op: SumState['op']): SumState => state.op === op ? state : { ...state, op, ...freshQuestion }
+export const setSumOp = (state: SumState, op: SumState['op']): SumState => state.op === op ? state : { ...state, op, ...freshQuestion, worksheet: emptyWorksheet }
+
+/** Editing a step asks for a new check */
+export const setWorksheet = (state: SumState, patch: Partial<SumWorksheet>): SumState =>
+    ({ ...state, worksheet: { ...state.worksheet, ...patch }, checked: false })
+
+/** How a step stands: not written, right, wrong, or waiting for an earlier step to be put right */
+export type StepMark = 'empty' | 'right' | 'wrong' | 'waiting'
+
+export interface WorksheetMarks {
+    common: StepMark
+    /** The common denominator is the least one */
+    least: boolean
+    first: StepMark
+    second: StepMark
+    numerator: StepMark
+    /** The result: right (simplified or as a mixed number), right but not simplified, wrong, or not readable */
+    result: 'empty' | 'right' | 'wrong-form' | 'wrong' | 'unreadable'
+    /** What each denominator was multiplied by, once the common denominator is right */
+    factors: [number, number] | null
+}
+
+/** A whole number as typed, also with the minus sign − and Arabic digits */
+function readWhole(text: string): number | null {
+    const trimmed = normalizeDigits(text).trim().replace('−', '-')
+    return /^-?\d{1,6}$/.test(trimmed) ? Number(trimmed) : null
+}
+
+/**
+ * Checks each step on its own. Any common multiple of the denominators is
+ * a valid common denominator (the least one is just smaller); the
+ * numerators are judged over the learner's own common denominator, and the
+ * numerator of the result waits until both numerators are right.
+ */
+export function markSumWorksheet(state: SumState): WorksheetMarks {
+    const { first, second, op, worksheet, answer } = state
+    const marks: WorksheetMarks = { common: 'empty', least: false, first: 'empty', second: 'empty', numerator: 'empty', result: 'empty', factors: null }
+    const common = readWhole(worksheet.common)
+    if (worksheet.common.trim() !== '') {
+        marks.common = common !== null && common > 0 && common % first.denominator === 0 && common % second.denominator === 0 ? 'right' : 'wrong'
+    }
+    const step = (text: string, expected: number | null): StepMark => {
+        if (text.trim() === '') return 'empty'
+        if (expected === null) return 'waiting'
+        return readWhole(text) === expected ? 'right' : 'wrong'
+    }
+    if (marks.common === 'right' && common !== null) {
+        marks.least = common === lcm(first.denominator, second.denominator)
+        marks.factors = [common / first.denominator, common / second.denominator]
+        const scaledFirst = first.numerator * marks.factors[0]
+        const scaledSecond = second.numerator * marks.factors[1]
+        marks.first = step(worksheet.first, scaledFirst)
+        marks.second = step(worksheet.second, scaledSecond)
+        const bothRight = marks.first !== 'wrong' && marks.second !== 'wrong'
+        marks.numerator = step(worksheet.numerator, bothRight ? (op === 'add' ? scaledFirst + scaledSecond : scaledFirst - scaledSecond) : null)
+    } else {
+        marks.first = step(worksheet.first, null)
+        marks.second = step(worksheet.second, null)
+        marks.numerator = step(worksheet.numerator, null)
+    }
+    if (answer.trim() !== '') {
+        const expected = sumParts(state).result
+        const simplified = checkAnswer(answer, expected, 'simplified')
+        const mixed = checkAnswer(answer, expected, 'mixed')
+        marks.result = simplified === 'correct' || mixed === 'correct' ? 'right' : simplified === 'unreadable' ? 'unreadable' : simplified === 'wrong-form' ? 'wrong-form' : 'wrong'
+    }
+    return marks
+}
 
 /** Before adding: more or less than 1? Before subtracting: positive or negative? */
 export function sumPrediction(state: SumState): Prediction {

@@ -159,7 +159,8 @@ export function toExactDecimal(value: FractionValue, decimalSeparator: ',' | '.'
     return decimalSeparator === ',' ? rendered.replace('.', ',') : rendered
 }
 
-function normalizeDigits(value: string): string {
+/** Arabic-Indic and Persian digits as 0–9 */
+export function normalizeDigits(value: string): string {
     return value
         .replace(/[٠-٩۰-۹]/g, (digit) => ARABIC_DIGITS[digit] ?? digit)
         .replace(/[−–—]/g, '-')
