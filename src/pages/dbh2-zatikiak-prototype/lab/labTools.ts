@@ -4,10 +4,11 @@ import { freshAnswer, type LabChallenge, type LabToolInfo as UnitLabToolInfo, ty
 import { barChallenges } from './barModel.ts'
 import { expressionChallenges } from './expression.ts'
 import { primesChallenges } from './primes.ts'
+import { decimalsChallenges } from './decimals.ts'
 
 export type { LabChallenge, OperationAnswer } from '../../../features/unit-v2/lab/types.ts'
 
-export type LabToolId = 'parts' | 'numberline' | 'wall' | 'equivalence' | 'primes' | 'compare' | 'addsub' | 'muldiv' | 'expression' | 'proportion' | 'bars'
+export type LabToolId = 'parts' | 'numberline' | 'wall' | 'equivalence' | 'primes' | 'compare' | 'addsub' | 'muldiv' | 'expression' | 'proportion' | 'bars' | 'decimals'
 
 export interface LabToolInfo extends UnitLabToolInfo {
     id: LabToolId
@@ -142,6 +143,17 @@ export const labTools: LabToolInfo[] = [
             es: 'Dibuja el problema: la barra es el total y las partes son las que dice el enunciado. Cuidado: una parte «de lo que queda» no es una parte del total; lo que queda se vuelve a partir. El dato da el valor de unos trozos: repártelo y sabrás cuánto vale un trozo, y con él, toda la barra.',
             ar: 'ارسم المسألة: الشريط هو الكل والأجزاء هي ما يذكره النص. انتبه: جزء «من الباقي» ليس جزءًا من الكل؛ فالباقي يُقسَّم من جديد. يعطي المعطى قيمة بعض القطع: وزّعه فتعرف قيمة القطعة الواحدة، ومنها قيمة الشريط كله.'
         }
+    },
+    {
+        id: 'decimals',
+        stage: 'proportionality',
+        lessonTopic: 'percentages',
+        title: { eu: 'Zatikitik hamartarrera', es: 'De fracción a decimal', ar: 'من الكسر إلى العدد العشري' },
+        observe: {
+            eu: 'Zenbakitzailea izendatzaileaz zatitzean, zifrak banan-banan ateratzen dira: hondar bakoitzari 0 bat gehitu eta berriro zatitzen da. Hondarra 0 bada, hamartar zehatza da. 7 zatitzean 7 hondar posible baino ez daude (0, 1… 6); beraz, hondarra inoiz 0 ez bada, hondarren bat errepikatu egiten da, eta handik aurrera zifrak ere bai: periodikoa da. Itzultzen den hondarra lehenengoa bada, periodoa komaren ondoren hasten da (periodiko hutsa); bestela, lehenik zifra solte batzuk ateratzen dira, aurreperiodoa (periodiko mistoa). Zatitu gabe ere jakin daiteke: sinplifikatu eta begiratu izendatzailearen lehen faktoreei. 2 eta 5 bakarrik: zehatza; ez 2 ez 5: hutsa; 2 edo 5 eta beste faktore bat: mistoa.',
+            es: 'Al dividir el numerador entre el denominador, las cifras salen una a una: a cada resto se le añade un 0 y se vuelve a dividir. Si el resto llega a 0, el decimal es exacto. Al dividir entre 7 solo hay 7 restos posibles (0, 1… 6), así que, si no llega a 0, algún resto se repite, y desde ahí las cifras también: es periódico. Si el resto que vuelve es el primero, el periodo empieza justo después de la coma (periódico puro); si no, antes salen unas cifras sueltas, el anteperiodo (periódico mixto). También se sabe sin dividir: simplifica y mira los factores primos del denominador. Solo 2 y 5: exacto; ni 2 ni 5: puro; 2 o 5 y otro factor: mixto.',
+            ar: 'عند قسمة البسط على المقام تظهر الأرقام واحدًا بعد آخر: نضيف 0 إلى كل باقٍ ونقسم من جديد. إذا وصل الباقي إلى 0 فالعدد العشري منتهٍ. وعند القسمة على 7 لا توجد إلا سبعة بواقٍ ممكنة (0، 1… 6)؛ لذلك إن لم يصل الباقي إلى 0 فلا بد أن يتكرر أحد البواقي، ومن هناك تتكرر الأرقام أيضًا: العدد دوري. إذا كان الباقي العائد هو الأول بدأ الدور بعد الفاصلة مباشرة (دوري بحت)؛ وإلا ظهرت قبله بعض الأرقام، وهي ما قبل الدور (دوري مختلط). ويمكن معرفة ذلك من دون قسمة: اختزل الكسر وانظر إلى العوامل الأولية للمقام. 2 و5 فقط: منتهٍ؛ لا 2 ولا 5: دوري بحت؛ 2 أو 5 مع عامل آخر: دوري مختلط.'
+        }
     }
 ]
 
@@ -157,7 +169,7 @@ export const labToolForTopic: Partial<Record<TheoryTopicId, LabToolId>> = {
     combined: 'expression',
     powers: 'expression',
     'fraction-of': 'bars',
-    percentages: 'proportion',
+    percentages: 'decimals',
     proportionality: 'proportion'
 }
 
@@ -888,5 +900,6 @@ export const labChallengeIds: number[] = [
     ...productChallenges,
     ...expressionChallenges,
     ...proportionChallenges,
-    ...barChallenges
+    ...barChallenges,
+    ...decimalsChallenges
 ].map((challenge) => challenge.id)

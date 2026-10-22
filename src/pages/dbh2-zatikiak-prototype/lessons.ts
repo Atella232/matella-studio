@@ -447,6 +447,15 @@ export const theoryTopics: TheoryTopic[] = [
                 title: { eu: 'Periodikoak', es: 'Periódicos', ar: 'الأعداد الدورية' },
                 text: { eu: '$\\frac{1}{3}$ ez da 0,33: 3 zifra amaigabe errepikatzen da. 0,33 hurbilketa da.', es: '$\\frac{1}{3}$ no es 0,33: la cifra 3 se repite sin fin. 0,33 es una aproximación.', ar: '$\\frac{1}{3}$ ليس 0.33: يتكرر الرقم 3 بلا نهاية، و0.33 قيمة تقريبية.' },
                 math: dec('$\\frac{1}{3}=0{,}\\overline{3}\\approx 0{,}33$')
+            },
+            {
+                title: { eu: 'Zehatza, hutsa ala mistoa', es: 'Exacto, puro o mixto', ar: 'منتهٍ أم دوري بحت أم مختلط' },
+                text: {
+                    eu: 'Sinplifikatu eta deskonposatu izendatzailea. 2 eta 5 bakarrik: zehatza. Ez 2 ez 5: periodiko hutsa (periodoa komaren ondoren hasten da). 2 edo 5 eta beste faktore bat: periodiko mistoa (lehenik aurreperiodoa).',
+                    es: 'Simplifica y descompón el denominador. Solo 2 y 5: exacto. Ni 2 ni 5: periódico puro (el periodo empieza justo después de la coma). 2 o 5 y otro factor: periódico mixto (primero va el anteperiodo).',
+                    ar: 'اختزل الكسر وحلّل المقام. 2 و5 فقط: منتهٍ. لا 2 ولا 5: دوري بحت (يبدأ الدور بعد الفاصلة مباشرة). 2 أو 5 مع عامل آخر: دوري مختلط (يأتي ما قبل الدور أولًا).'
+                },
+                math: dec('$\\frac{3}{8}=0{,}375\\quad \\frac{2}{3}=0{,}\\overline{6}\\quad \\frac{5}{6}=0{,}8\\overline{3}$')
             }
         ],
         example: { eu: '$\\frac{3}{8}=0{,}375=\\%\\,37{,}5$', es: '$\\frac{3}{8}=0{,}375=37{,}5\\,\\%$', ar: '$\\frac{3}{8}=0.375=37.5\\,\\%$' },

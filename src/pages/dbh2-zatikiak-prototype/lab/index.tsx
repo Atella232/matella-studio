@@ -13,6 +13,7 @@ import { WallTool } from './WallTool'
 import { BarModelTool } from './BarModelTool'
 import { ExpressionTool } from './ExpressionTool'
 import { PrimesTool } from './PrimesTool'
+import { DecimalsTool } from './DecimalsTool'
 import './Lab.css'
 
 const toolComponents: Record<LabToolId, (props: ToolProps) => JSX.Element> = {
@@ -26,7 +27,8 @@ const toolComponents: Record<LabToolId, (props: ToolProps) => JSX.Element> = {
     muldiv: ProductTool,
     expression: ExpressionTool,
     proportion: ProportionTool,
-    bars: BarModelTool
+    bars: BarModelTool,
+    decimals: DecimalsTool
 }
 
 export function FractionLaboratory({

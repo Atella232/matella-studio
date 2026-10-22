@@ -1,0 +1,303 @@
+/* ---------- From a fraction to its decimal ---------- */
+
+.decimals {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    width: 100%;
+    max-width: 560px;
+    text-align: start;
+}
+
+.decimals-label {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* The denominator in primes: the L3 tiles, read left to right in every language */
+.decimals-factors {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.decimals-factor-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    direction: ltr;
+}
+
+.decimals-factor-row .primes-number {
+    min-width: 0;
+}
+
+.decimals .decimals-tile {
+    min-width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: default;
+}
+
+.decimals-simplified {
+    margin: 0;
+    font-size: 15px;
+}
+
+/* The chosen kind stands out until the division says whether it was right */
+.decimals .prediction-options button[aria-pressed="true"]:not(.right):not(.wrong) {
+    border-width: 2.5px;
+    background: var(--stage-tint);
+}
+
+.decimals-division {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.decimals-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.decimals-actions button {
+    flex: 1 1 auto;
+    min-height: 44px;
+    padding: 6px 12px;
+    font-size: 15px;
+}
+
+/* ---------- The quotient, one box per digit ---------- */
+
+.decimals-quotient {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 10px 6px;
+    padding-top: 8px;
+    direction: ltr;
+}
+
+.decimals-digit {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 42px;
+    padding: 0 6px;
+    border: 1.5px solid var(--ink);
+    border-radius: 8px;
+    background: var(--card);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.decimals-digit.whole {
+    background: var(--paper-deep);
+}
+
+.decimals-digit.next {
+    border-style: dashed;
+    color: var(--muted);
+}
+
+.decimals-digit.pre {
+    background: var(--mustard-tint);
+}
+
+/* Period digits share one bar on top, the overline of 0,58\overline{3} */
+.decimals-digit.period {
+    background: var(--stage-tint);
+}
+
+.decimals-digit.period::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: -4px;
+    right: -4px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--ink);
+}
+
+.decimals-comma,
+.decimals-dots {
+    align-self: flex-end;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.decimals-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.decimals-key {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--ink);
+    border-radius: 4px;
+}
+
+.decimals-legend > .decimals-key:not(:first-child) {
+    margin-inline-start: 8px;
+}
+
+.decimals-key.pre { background: var(--mustard-tint); }
+.decimals-key.period { background: var(--stage-tint); }
+
+/* ---------- The steps: dividend ÷ denominator, digit, remainder ---------- */
+
+.decimals-steps-wrap {
+    direction: ltr;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    background: var(--card);
+    overflow: hidden;
+}
+
+.decimals-steps-head,
+.decimals-steps li {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+}
+
+.decimals-steps-head {
+    border-bottom: 1.5px solid var(--line);
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.decimals-steps {
+    max-height: 264px;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    list-style: none;
+    font-size: 17px;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+}
+
+.decimals-steps li + li {
+    border-top: 1px dashed var(--line);
+}
+
+.decimals-steps li.whole {
+    background: var(--paper-deep);
+}
+
+.decimals-op {
+    text-align: start;
+}
+
+.decimals-step-digit {
+    justify-self: center;
+    min-width: 30px;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+.decimals-steps li.pre .decimals-step-digit { background: var(--mustard-tint); }
+.decimals-steps li.period .decimals-step-digit { background: var(--stage-tint); }
+
+.decimals-rest {
+    justify-self: center;
+    min-width: 34px;
+    padding: 0 4px;
+    border: 2px solid transparent;
+    border-radius: 999px;
+}
+
+/* The remainder that comes back, and where it was first */
+.decimals-rest.repeat {
+    border-color: var(--coral);
+    background: var(--coral-tint);
+    color: var(--coral-ink);
+    font-weight: 700;
+}
+
+.decimals-rest.zero {
+    border-color: var(--success);
+    background: var(--success-tint);
+    color: var(--success-ink);
+    font-weight: 700;
+}
+
+/* ---------- All the remainders there can be ---------- */
+
+.decimals-remainders {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.decimals-count {
+    font-weight: 400;
+}
+
+.decimals-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    direction: ltr;
+}
+
+.decimals-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 28px;
+    padding: 0 4px;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+}
+
+.decimals-chip.used {
+    border-color: var(--ink);
+    background: var(--stage-tint);
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.decimals-chip.used.zero {
+    border-color: var(--success);
+    background: var(--success-tint);
+    color: var(--success-ink);
+}
+
+.decimals-chip.repeat {
+    border-color: var(--coral);
+    background: var(--coral-tint);
+    color: var(--coral-ink);
+    box-shadow: 0 0 0 2px var(--coral);
+}
+
+.decimals .fraction-v2-insight {
+    align-self: center;
+}
