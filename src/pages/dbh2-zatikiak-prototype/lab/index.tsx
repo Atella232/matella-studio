@@ -12,6 +12,7 @@ import { NumberLineTool } from './NumberLineTool'
 import { WallTool } from './WallTool'
 import { BarModelTool } from './BarModelTool'
 import { ExpressionTool } from './ExpressionTool'
+import { PrimesTool } from './PrimesTool'
 import './Lab.css'
 
 const toolComponents: Record<LabToolId, (props: ToolProps) => JSX.Element> = {
@@ -19,6 +20,7 @@ const toolComponents: Record<LabToolId, (props: ToolProps) => JSX.Element> = {
     numberline: NumberLineTool,
     wall: WallTool,
     equivalence: EquivalenceTool,
+    primes: PrimesTool,
     compare: CompareTool,
     addsub: SumTool,
     muldiv: ProductTool,

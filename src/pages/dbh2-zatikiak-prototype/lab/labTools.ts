@@ -3,10 +3,11 @@ import { checkAnswer, compare, equals, fraction, gcd, hasTerminatingDecimal, nor
 import { freshAnswer, type LabChallenge, type LabToolInfo as UnitLabToolInfo, type LabToolProps, type OperationAnswer } from '../../../features/unit-v2/lab/types.ts'
 import { barChallenges } from './barModel.ts'
 import { expressionChallenges } from './expression.ts'
+import { primesChallenges } from './primes.ts'
 
 export type { LabChallenge, OperationAnswer } from '../../../features/unit-v2/lab/types.ts'
 
-export type LabToolId = 'parts' | 'numberline' | 'wall' | 'equivalence' | 'compare' | 'addsub' | 'muldiv' | 'expression' | 'proportion' | 'bars'
+export type LabToolId = 'parts' | 'numberline' | 'wall' | 'equivalence' | 'primes' | 'compare' | 'addsub' | 'muldiv' | 'expression' | 'proportion' | 'bars'
 
 export interface LabToolInfo extends UnitLabToolInfo {
     id: LabToolId
@@ -63,6 +64,17 @@ export const labTools: LabToolInfo[] = [
             eu: 'Anplifikatzeak zati bakoitza zati txikiagotan banatzen du; sinplifikatzeak zatiak talde berdinetan biltzen ditu. Bi kasuetan koloreztatutako zatia bera da: balioa ez da aldatzen.',
             es: 'Amplificar parte cada porción en trozos más pequeños; simplificar junta porciones en grupos iguales. En los dos casos la parte coloreada es la misma: el valor no cambia.',
             ar: 'التوسيع يقسّم كل جزء إلى قطع أصغر، والتبسيط يجمع الأجزاء في مجموعات متساوية. في الحالتين يبقى الجزء الملوّن نفسه: القيمة لا تتغيّر.'
+        }
+    },
+    {
+        id: 'primes',
+        stage: 'equivalence',
+        lessonTopic: 'simplification',
+        title: { eu: 'Lehen faktoreak', es: 'Factores primos', ar: 'العوامل الأولية' },
+        observe: {
+            eu: 'Deskonposatu zenbakitzailea eta izendatzailea lehen faktoretan. Faktore berdinen bikote bakoitza, bat goian eta bestea behean, marra daiteke: bi gaiak zenbaki beraz zatitzea da. Marratutakoa ZKH da; marratzeko ezer geratzen ez denean, zatikia laburtezina da. Eta marratutakoa (behin) bider goian eta behean geratzen dena, MKT.',
+            es: 'Descompón numerador y denominador en factores primos. Cada pareja de factores iguales, uno arriba y otro abajo, se puede tachar: es dividir los dos términos entre el mismo número. Lo tachado es el m.c.d.; cuando no queda nada que tachar, la fracción es irreducible. Y lo tachado (una vez) por lo que queda arriba y abajo es el m.c.m.',
+            ar: 'حلّل البسط والمقام إلى عوامل أولية. كل زوج من العوامل المتساوية، واحد في الأعلى وآخر في الأسفل، يمكن شطبه: وهذا قسمة الحدّين على العدد نفسه. المشطوب هو القاسم المشترك الأكبر؛ وحين لا يبقى ما يُشطب يكون الكسر في أبسط صورة. والمشطوب (مرة واحدة) مضروبًا في ما يبقى في الأعلى والأسفل هو المضاعف المشترك الأصغر.'
         }
     },
     {
@@ -138,7 +150,7 @@ export const labToolForTopic: Partial<Record<TheoryTopicId, LabToolId>> = {
     meaning: 'numberline',
     representation: 'parts',
     equivalence: 'equivalence',
-    simplification: 'equivalence',
+    simplification: 'primes',
     ordering: 'compare',
     'add-subtract': 'addsub',
     'multiply-divide': 'muldiv',
@@ -870,6 +882,7 @@ export const labChallengeIds: number[] = [
     ...numberLineChallenges,
     ...wallChallenges,
     ...equivalenceChallenges,
+    ...primesChallenges,
     ...compareChallenges,
     ...sumChallenges,
     ...productChallenges,
