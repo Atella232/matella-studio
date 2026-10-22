@@ -6,6 +6,7 @@ import { ExactGame } from './ExactGame'
 import { GameArt } from './GameKit'
 import { MemoryGame } from './MemoryGame'
 import { RaceGame } from './RaceGame'
+import { SalesGame } from './SalesGame'
 import { TargetGame } from './TargetGame'
 import { WallGame } from './WallGame'
 import { GAME_RECORDS_KEY, games, type GameId } from './records'
@@ -13,7 +14,7 @@ import './Games.css'
 
 export type { GameProps } from '../../../features/unit-v2/games/GamesHub'
 
-const components = { race: RaceGame, target: TargetGame, wall: WallGame, memory: MemoryGame, exact: ExactGame, detective: DetectiveGame }
+const components = { race: RaceGame, target: TargetGame, wall: WallGame, memory: MemoryGame, exact: ExactGame, detective: DetectiveGame, sales: SalesGame }
 
 const hubGames: HubGame<GameId>[] = games.map((info) => ({ info, art: <GameArt game={info.id} />, component: components[info.id] }))
 

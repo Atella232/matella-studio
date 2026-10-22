@@ -1,0 +1,269 @@
+/* ---------- Merkealdiak / Rebajas ---------- */
+
+.fraction-v2-games-card[data-game="sales"] { --game-tint: var(--success-tint); }
+
+.sales-game {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* A price tag hanging from a string hole */
+.sales-tag {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    align-self: center;
+    width: min(100%, 360px);
+    padding: 22px 20px 16px;
+    border: 2.5px solid var(--ink);
+    border-radius: 18px 18px 18px 18px;
+    background: var(--mustard-tint);
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.sales-tag-hole {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    background: var(--paper);
+    transform: translateX(-50%);
+}
+
+.sales-tag-product {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 22px;
+}
+
+.sales-tag-price {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.sales-tag-unit {
+    margin-top: -6px;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.sales-tag-line {
+    font-weight: 700;
+}
+
+.sales-tag-offer {
+    padding: 4px 12px;
+    border-radius: 999px;
+    color: #ffffff;
+    background: var(--coral);
+    font-weight: 700;
+}
+
+.sales-game .sales-tag-offer .math-text .math-token {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+}
+
+/* Fractions in offers are inline: a little larger so they stay readable */
+.sales-game .sales-tag-offer .katex,
+.sales-game .sales-options.offers .katex,
+.sales-game .sales-bar figcaption .katex {
+    font-size: 1.3em;
+}
+
+.sales-question {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.sales-options {
+    display: grid;
+    gap: 10px;
+    align-self: center;
+    width: min(100%, 520px);
+}
+
+.sales-options.money {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.sales-options button {
+    min-height: 56px;
+    padding: 8px 12px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+    box-shadow: 0 3px 0 var(--ink);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.sales-options.money button {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 24px;
+}
+
+.sales-options button:hover:not(:disabled) {
+    background: var(--stage-tint);
+}
+
+.sales-options button:disabled {
+    cursor: default;
+}
+
+.sales-options button.right {
+    border-color: var(--success);
+    color: var(--success-ink);
+    background: var(--success-tint);
+}
+
+.sales-options button.wrong {
+    border-color: var(--error);
+    color: var(--error-ink);
+    background: var(--error-tint);
+}
+
+.sales-explain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    align-self: center;
+    width: min(100%, 560px);
+    padding: 14px 16px;
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    background: var(--card);
+    font-size: 16px;
+}
+
+.sales-explain.right {
+    border-color: var(--success);
+}
+
+.sales-explain.wrong {
+    border-color: var(--error);
+}
+
+.sales-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    margin: 0;
+    padding-inline-start: 22px;
+}
+
+.sales-game .sales-steps .math-text .math-token {
+    padding-block: 0.25em;
+}
+
+/* ---------- Price bars ---------- */
+
+.sales-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.sales-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 16px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.sales-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.sales-legend i {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--ink);
+    border-radius: 3px;
+}
+
+.sales-legend i.paid,
+.sales-bar-row span.paid {
+    background: var(--green);
+}
+
+.sales-legend i.saved,
+.sales-bar-row span.saved {
+    background: repeating-linear-gradient(135deg, var(--coral-tint) 0 5px, #ffffff 5px 9px);
+}
+
+.sales-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 60%;
+    margin: 0;
+}
+
+.sales-bar figcaption {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.sales-bar-total {
+    font-weight: 700;
+    text-align: center;
+}
+
+.sales-bar-row {
+    display: flex;
+    height: 30px;
+    overflow: hidden;
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+}
+
+.sales-bar-row span {
+    flex: 1 1 0;
+    min-width: 0;
+    border-inline-end: 1px solid var(--ink);
+}
+
+.sales-bar-row span:last-child {
+    border-inline-end: 0;
+}
+
+.sales-bar-values {
+    display: flex;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.sales-bar-values span {
+    flex-basis: 0;
+    min-width: max-content;
+    text-align: center;
+}
+
+.sales-bar-values span.paid {
+    color: var(--green-ink, var(--success-ink));
+}
+
+.sales-bar-values span.saved {
+    color: var(--coral-ink, var(--error-ink));
+}

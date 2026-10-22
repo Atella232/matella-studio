@@ -3,7 +3,7 @@ import { levelProgressIds, type GameInfo as UnitGameInfo, type GameLevelInfo as 
 
 export { gameStars, mergeRecord, parseRecords, recordKey, type GameRecords, type LevelRecord, type Stars } from '../../../features/unit-v2/games/records.ts'
 
-export type GameId = 'race' | 'memory' | 'target' | 'wall' | 'exact' | 'detective'
+export type GameId = 'race' | 'memory' | 'target' | 'wall' | 'exact' | 'detective' | 'sales'
 
 export interface GameLevelInfo extends UnitGameLevelInfo {
     stage: FractionStageId
@@ -84,6 +84,17 @@ export const games: GameInfo[] = [
             { progressId: 1101, stage: 'operations', title: { eu: 'Batuketak eta kenketak', es: 'Sumas y restas', ar: 'الجمع والطرح' }, description: { eu: 'Izendatzaile komuna, zeinuak eta sinplifikazioa.', es: 'Denominador común, signos y simplificación.', ar: 'المقام المشترك والإشارات والاختزال.' } },
             { progressId: 1102, stage: 'operations', title: { eu: 'Biderketak eta zatiketak', es: 'Productos y cocientes', ar: 'الضرب والقسمة' }, description: { eu: 'Zuzenean biderkatu eta zatitzeko alderantzikatu.', es: 'Multiplicar en línea e invertir para dividir.', ar: 'الضرب المباشر والقلب للقسمة.' } },
             { progressId: 1103, stage: 'operations', title: { eu: 'Eragiketa konbinatuak', es: 'Operaciones combinadas', ar: 'العمليات المركبة' }, description: { eu: 'Hierarkia eta berreturak.', es: 'Jerarquía y potencias.', ar: 'الأولوية والقوى.' } }
+        ]
+    },
+    {
+        id: 'sales',
+        title: { eu: 'Merkealdiak', es: 'Rebajas', ar: 'التخفيضات' },
+        tagline: { eu: 'Kalkulatu deskontudun prezioak eta aukeratu benetan merkeena den eskaintza.', es: 'Calcula precios con descuento y elige la oferta que de verdad sale más barata.', ar: 'احسب الأسعار بعد الخصم واختر العرض الأرخص فعلًا.' },
+        skills: { eu: 'Ehunekoak eta kantitate baten zatikiak', es: 'Porcentajes y fracciones de una cantidad', ar: 'النسب المئوية وكسور الكميات' },
+        levels: [
+            { progressId: 1201, stage: 'proportionality', title: { eu: 'Zenbat ordaindu?', es: '¿Cuánto pago?', ar: 'كم أدفع؟' }, description: { eu: 'Deskontuak zatikitan eta ehunekotan: zer ordaindu eta zer aurreztu.', es: 'Descuentos en fracción y en %: lo que pagas y lo que ahorras.', ar: 'خصومات بالكسور والنسب: ما تدفعه وما توفّره.' } },
+            { progressId: 1202, stage: 'proportionality', title: { eu: 'Zein eskaintza da hobea?', es: '¿Qué oferta es mejor?', ar: 'أي عرض أفضل؟' }, description: { eu: 'Konparatu %, zatikiak eta 3 × 2 eskaintzak.', es: 'Compara %, fracciones y ofertas 3 × 2.', ar: 'قارن بين النسب والكسور وعروض 3 × 2.' } },
+            { progressId: 1203, stage: 'proportionality', title: { eu: 'Kateatuak eta alderantzizkoak', es: 'Encadenados e inversos', ar: 'متتالية وعكسية' }, description: { eu: 'Deskontu bat bestearen gainean eta merkealdien aurreko prezioa.', es: 'Un descuento sobre otro y el precio antes de la rebaja.', ar: 'خصم فوق خصم والسعر قبل التخفيض.' } }
         ]
     }
 ]

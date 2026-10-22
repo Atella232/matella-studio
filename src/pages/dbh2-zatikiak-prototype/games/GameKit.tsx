@@ -95,6 +95,21 @@ export function GameArt({ game }: { game: GameId }) {
             </svg>
         )
     }
+    if (game === 'sales') {
+        // A price tag: the old price crossed out, the discount and the new price
+        return (
+            <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
+                <path d="M60 14 H176 a10 10 0 0 1 10 10 V96 a10 10 0 0 1 -10 10 H60 L30 60 Z" fill="var(--mustard-tint)" stroke="var(--ink)" strokeWidth="2.4" strokeLinejoin="round" />
+                <circle cx="52" cy="60" r="6" fill="#fffcf6" stroke="var(--ink)" strokeWidth="2" />
+                <path d="M46 60 C 30 60 18 48 8 30" fill="none" stroke="var(--ink)" strokeWidth="1.6" />
+                <text x="120" y="46" textAnchor="middle" fontSize="18" fill="var(--muted)" fontFamily="Fraunces, serif">40 €</text>
+                <line x1="96" y1="40" x2="144" y2="40" stroke="var(--coral)" strokeWidth="2.6" />
+                <text x="120" y="84" textAnchor="middle" fontSize="26" fontWeight="700" fill="var(--ink)" fontFamily="Fraunces, serif">30 €</text>
+                <circle cx="178" cy="22" r="20" fill="var(--coral)" stroke="var(--ink)" strokeWidth="2" />
+                <text x="178" y="27" textAnchor="middle" fontSize="12" fontWeight="700" fill="#fffcf6">−25%</text>
+            </svg>
+        )
+    }
     if (game === 'detective') {
         // A worked solution with one line circled and a magnifying glass over it
         return (
