@@ -110,7 +110,7 @@ export function CompareTool(props: ToolProps & { challenges?: LabChallenge<Compa
                     </div>
                     <p className="fraction-v2-insight">
                         {l({
-                            eu: `Biak ${common}renetan: ${firstScaled} eta ${secondScaled} zati. Alderatu zenbakitzaileak.`,
+                            eu: `Biak ${common} zatitan banatuta: ${firstScaled} eta ${secondScaled} zati. Alderatu zenbakitzaileak.`,
                             es: `Las dos en ${common} partes: ${firstScaled} y ${secondScaled} trozos. Compara los numeradores.`,
                             ar: `كلاهما بـ ${common} أجزاء: ${firstScaled} و${secondScaled} قطعة. قارن البسطين.`
                         })}

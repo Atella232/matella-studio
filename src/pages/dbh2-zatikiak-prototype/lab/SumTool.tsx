@@ -106,7 +106,7 @@ export function SumTool(props: ToolProps & { challenges?: LabChallenge<SumState>
                 actual={sumPrediction(state).relation}
                 choice={state.prediction}
                 tip={op === 'add'
-                    ? { eu: 'Trikimailua: konparatu zatiki bakoitza erdiarekin. Biak erdia baino handiagoak badira, batura 1 baino handiagoa da; biak txikiagoak badira, ez da 1era iristen.', es: 'Truco: compara cada fracción con la mitad. Si las dos pasan de la mitad, la suma pasa de 1; si las dos se quedan por debajo, no llega a 1.', ar: 'حيلة: قارن كل كسر بالنصف. إذا تجاوز الكسران النصف تجاوز المجموع 1، وإذا كانا أصغر منه لم يبلغ 1.' }
+                    ? { eu: 'Trikimailua: konparatu zatiki bakoitza erdiarekin. Biak erdia baino handiagoak badira, batura 1 baino handiagoa da; biak txikiagoak badira, ez da batera iristen.', es: 'Truco: compara cada fracción con la mitad. Si las dos pasan de la mitad, la suma pasa de 1; si las dos se quedan por debajo, no llega a 1.', ar: 'حيلة: قارن كل كسر بالنصف. إذا تجاوز الكسران النصف تجاوز المجموع 1، وإذا كانا أصغر منه لم يبلغ 1.' }
                     : { eu: 'Lehena baino zatiki handiago bat kentzen baduzu, emaitza negatiboa da; txikiagoa bada, positiboa.', es: 'Si restas una fracción mayor que la primera, el resultado es negativo; si es menor, positivo.', ar: 'إذا طرحت كسرًا أكبر من الأول فالنتيجة سالبة، وإذا كان أصغر فهي موجبة.' }}
                 onChoose={(relation) => setState((current) => setPrediction(current, relation))}
             >

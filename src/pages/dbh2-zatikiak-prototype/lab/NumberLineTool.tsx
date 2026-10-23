@@ -1,5 +1,5 @@
 import type { LabChallenge, LabChallengeMaker } from '../../../features/unit-v2/lab/types'
-import { useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
+import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
 import { MathText } from '../../../components/MathText'
 import { fraction, toExactDecimal, toNumber, type FractionValue } from '../math/fraction'
 import {
@@ -22,6 +22,9 @@ import './Motion.css'
 
 /** Tick labels are only drawn while they still fit comfortably */
 const MAX_LABELLED_TICKS = 17
+/** Width of one character of a tick label (12px bold), and the room left between two labels */
+const LABEL_CHAR = 6.5
+const LABEL_GAP = 5
 
 function fractionLatex(value: FractionValue): string {
     if (value.denominator === 1) return String(value.numerator)
@@ -46,7 +49,18 @@ export function NumberLineTool(props: ToolProps & { challenges?: LabChallenge<Nu
     const { min: minStep, max: maxStep } = numberLineBounds(state)
     const position = (step: number) => ((step / denominator - minUnit) / (maxUnit - minUnit)) * 100
     const steps = Array.from({ length: maxStep - minStep + 1 }, (_, index) => minStep + index)
-    const showStepLabels = denominator > 1 && steps.length <= MAX_LABELLED_TICKS
+    // On a phone the labels of a long line would run into each other: then the flag on the point says it
+    const [trackWidth, setTrackWidth] = useState(0)
+    useEffect(() => {
+        const track = trackRef.current
+        if (!track) return
+        const observer = new ResizeObserver(([entry]) => setTrackWidth(entry.contentRect.width))
+        observer.observe(track)
+        return () => observer.disconnect()
+    }, [])
+    const longestLabel = Math.max(...[minStep, maxStep].map((step) => `${step < 0 ? '−' : ''}${Math.abs(step)}/${denominator}`.length))
+    const labelsFit = trackWidth === 0 || trackWidth / (steps.length - 1) >= longestLabel * LABEL_CHAR + LABEL_GAP
+    const showStepLabels = denominator > 1 && steps.length <= MAX_LABELLED_TICKS && labelsFit
 
     const value: FractionValue = { numerator, denominator }
     const reduced = fraction(numerator, denominator)
@@ -67,14 +81,15 @@ export function NumberLineTool(props: ToolProps & { challenges?: LabChallenge<Nu
 
     const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
         dragging.current = true
-        // While dragging, the point follows the finger without gliding
-        event.currentTarget.dataset.dragging = 'true'
         event.currentTarget.setPointerCapture(event.pointerId)
         moveToPointer(event.clientX)
     }
 
     const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
-        if (dragging.current) moveToPointer(event.clientX)
+        if (!dragging.current) return
+        // A tap glides to its place; while dragging, the point follows the finger without gliding
+        event.currentTarget.dataset.dragging = 'true'
+        moveToPointer(event.clientX)
     }
 
     const onPointerUp = () => {
@@ -192,21 +207,18 @@ export function NumberLineTool(props: ToolProps & { challenges?: LabChallenge<Nu
                     onPointerCancel={onPointerUp}
                 >
                     <span className="fraction-v2-nl-axis" aria-hidden="true" />
-                    <svg className={`fraction-v2-nl-hops ${numerator < 0 ? 'negative' : ''}`} viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true">
-                        {Array.from({ length: hops }, (_, hop) => {
-                            const from = position(direction * hop)
-                            const to = position(direction * (hop + 1))
-                            return (
-                                <path
-                                    key={`${denominator}:${direction}:${hop}`}
-                                    d={`M ${from} 20 Q ${(from + to) / 2} 0 ${to} 20`}
-                                    pathLength={1}
-                                    vectorEffect="non-scaling-stroke"
-                                    style={{ animationDelay: `${Math.max(0, hop - seen.firstNew) * pace}ms` }}
-                                />
-                            )
-                        })}
-                    </svg>
+                    {Array.from({ length: hops }, (_, hop) => {
+                        const from = position(direction * hop)
+                        const to = position(direction * (hop + 1))
+                        return (
+                            <span
+                                className={`fraction-v2-nl-hop ${direction < 0 ? 'negative' : ''}`}
+                                key={`${denominator}:${direction}:${hop}`}
+                                style={{ left: `${Math.min(from, to)}%`, width: `${Math.abs(to - from)}%`, animationDelay: `${Math.max(0, hop - seen.firstNew) * pace}ms` }}
+                                aria-hidden="true"
+                            />
+                        )
+                    })}
                     <span
                         className={`fraction-v2-nl-jumps ${numerator < 0 ? 'negative' : ''}`}
                         style={{ left: `${Math.min(zero, point)}%`, width: `${Math.abs(point - zero)}%` }}
@@ -214,8 +226,10 @@ export function NumberLineTool(props: ToolProps & { challenges?: LabChallenge<Nu
                     />
                     {steps.map((step) => {
                         const whole = step % denominator === 0
+                        // Keyed by the value, so a mark that stays (2/4 and 1/2) keeps its place, and glides when the stretch changes
+                        const mark = fraction(step, denominator)
                         return (
-                            <span className={`fraction-v2-nl-tick ${whole ? 'whole' : ''}`} style={{ left: `${position(step)}%` }} key={step} aria-hidden="true">
+                            <span className={`fraction-v2-nl-tick ${whole ? 'whole' : ''}`} style={{ left: `${position(step)}%` }} key={`${mark.numerator}/${mark.denominator}`} aria-hidden="true">
                                 {whole
                                     ? <span className="fraction-v2-nl-whole-label">{step / denominator < 0 ? `−${Math.abs(step / denominator)}` : step / denominator}</span>
                                     : showStepLabels && <span className="fraction-v2-nl-step-label">{step < 0 ? '−' : ''}{Math.abs(step)}/{denominator}</span>}

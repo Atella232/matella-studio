@@ -122,7 +122,7 @@ function AreaModel({ first, second, showResult, language }: { first: FractionVal
                 <div
                     key={`${first.numerator}/${first.denominator}·${second.numerator}/${second.denominator}`}
                     className="fraction-v2-area-grid"
-                    style={{ gridTemplateColumns: `repeat(${first.denominator}, minmax(0, 1fr))`, gridTemplateRows: `repeat(${second.denominator}, minmax(0, 1fr))` } as CSSProperties}
+                    style={{ gridTemplateColumns: `repeat(${first.denominator}, minmax(0, 1fr))`, gridTemplateRows: `repeat(${second.denominator}, minmax(0, 1fr))`, '--n': overlap } as CSSProperties}
                     role="img"
                     aria-label={l({ eu: `${total} laukitatik ${overlap} gurutzean`, es: `${overlap} de ${total} casillas en el cruce`, ar: `${overlap} من ${total} خانة في التقاطع` })}
                 >
@@ -182,7 +182,7 @@ function MeasureModel({ first, second, showResult, language }: { first: Fraction
                             ar: `تتسع ${fullJumps} قفزات كاملة، والباقي ${leftoverShare.numerator}/${leftoverShare.denominator} من قفزة.`
                         })
                         : l({ eu: `Zehazki ${fullJumps} jauzi sartzen dira.`, es: `Caben exactamente ${fullJumps} saltos.`, ar: `تتسع ${fullJumps} قفزات تمامًا.` })
-                    : l({ eu: `Zenbat jauzi ${second.numerator}/${second.denominator} sartzen dira ${first.numerator}/${first.denominator}ra iritsi arte?`, es: `¿Cuántos saltos de ${second.numerator}/${second.denominator} caben hasta llegar a ${first.numerator}/${first.denominator}?`, ar: `كم قفزة بطول ${second.numerator}/${second.denominator} تتسع حتى تصل إلى ${first.numerator}/${first.denominator}؟` })}
+                    : l({ eu: `Jauzi bakoitza ${second.numerator}/${second.denominator} bada, zenbat jauzi sartzen dira ${first.numerator}/${first.denominator} arte?`, es: `¿Cuántos saltos de ${second.numerator}/${second.denominator} caben hasta llegar a ${first.numerator}/${first.denominator}?`, ar: `كم قفزة بطول ${second.numerator}/${second.denominator} تتسع حتى تصل إلى ${first.numerator}/${first.denominator}؟` })}
             </p>
         </div>
     )

@@ -1,5 +1,5 @@
 import type { LabChallenge, LabChallengeMaker } from '../../../features/unit-v2/lab/types'
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
 import { MathText } from '../../../components/MathText'
 import { gcd } from '../math/fraction'
 import {
@@ -13,7 +13,8 @@ import {
 } from './labTools'
 import type { ToolProps } from './labTools'
 import { Segmented, Stepper, ToolFrame } from './LabKit'
-import { PartitionBar } from './models'
+import { MergeBar, PartitionBar } from './models'
+import { mergeDuration } from './motion'
 import { equivalenceExtra } from './extraChallenges'
 import { useLabText } from './useLabText'
 
@@ -25,6 +26,8 @@ export function EquivalenceTool(props: ToolProps & { challenges?: LabChallenge<E
     const divisors = commonDivisors(numerator, denominator)
     const simplified = mode === 'simplify' && divisor !== null && divisors.includes(divisor)
     const resultIsIrreducible = gcd(result.numerator, result.denominator) === 1
+    // Simplifying merges the pieces in groups of the divisor
+    const group = simplified && divisor !== null ? divisor : 1
 
     const controls = (
         <>
@@ -95,10 +98,17 @@ export function EquivalenceTool(props: ToolProps & { challenges?: LabChallenge<E
                     <PartitionBar parts={denominator} filled={numerator} label={startLabel} />
                 </div>
                 <div className="fraction-v2-bar-row">
-                    <span className="fraction-v2-bar-label"><MathText text={`$\\frac{${result.numerator}}{${result.denominator}}$`} /></span>
+                    {/* The new name appears once the pieces have been cut or merged */}
+                    <span
+                        className="fraction-v2-bar-label fraction-v2-merge-label"
+                        style={{ '--delay': `${mode === 'simplify' ? mergeDuration(denominator, group) : 0}ms` } as CSSProperties}
+                        key={`${result.numerator}/${result.denominator}`}
+                    >
+                        <MathText text={`$\\frac{${result.numerator}}{${result.denominator}}$`} />
+                    </span>
                     {mode === 'amplify'
                         ? <PartitionBar parts={denominator} filled={numerator} ghostPerPart={factor} label={resultLabel} />
-                        : <PartitionBar parts={result.denominator} filled={result.numerator} ghostPerPart={simplified ? divisor ?? 1 : 1} label={resultLabel} />}
+                        : <MergeBar parts={denominator} filled={numerator} group={group} label={resultLabel} />}
                 </div>
             </div>
         </ToolFrame>

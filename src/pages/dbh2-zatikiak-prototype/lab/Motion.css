@@ -1,17 +1,183 @@
 /* ==========================================================================
    Motion in the fraction models: each movement shows what the numbers do.
-   New cuts draw in and the old ones slide to their place; the pieces of a
-   sum come and join; the pieces taken away fade out; the crossing of a
-   product lights up cell by cell; division counts its jumps one by one;
-   the point on the number line glides; each new line of an expression
-   drops in. All of it stops for anyone who prefers less motion.
+   New cuts draw in and the old ones slide to their place; simplifying
+   merges the pieces group by group; the pieces of a sum come in from the
+   end of the unit and hook on; the pieces taken away fade from the end;
+   the crossing of a product lights up cell by cell; division counts its
+   jumps one by one; the point on the number line glides and its jumps are
+   drawn as hops; each new line of an expression drops in.
+   The rules outside the media query below draw the final picture, so
+   anyone who prefers less motion sees the same thing, only still.
    ========================================================================== */
 
-/* ---------- Cutting a unit into parts ---------- */
+/* ---------- Merging pieces (simplifying) ---------- */
 
-.fraction-v2-partition i {
-    transition: left 0.4s ease;
-    animation: motion-cut 0.4s ease-out both;
+.fraction-v2-merge {
+    position: relative;
+}
+
+.fraction-v2-partition.fraction-v2-merge > span {
+    border-inline-end: 0;
+}
+
+/* A line between two pieces: solid between groups, dashed inside a group */
+.fraction-v2-merge b {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    margin-inline-start: -1px;
+}
+
+.fraction-v2-merge b::before,
+.fraction-v2-merge b::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+}
+
+.fraction-v2-merge b::before {
+    border-inline-start: 2px solid var(--ink);
+}
+
+.fraction-v2-merge b::after {
+    border-inline-start: 1.5px dashed rgba(29, 39, 51, 0.55);
+    opacity: 0;
+}
+
+.fraction-v2-merge b.on-filled::after {
+    border-inline-start-color: rgba(255, 255, 255, 0.85);
+}
+
+.fraction-v2-merge b.inner::before {
+    opacity: 0;
+}
+
+.fraction-v2-merge b.inner::after {
+    opacity: 1;
+}
+
+/* Each group lights up as it merges */
+.fraction-v2-merge em {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    opacity: 0;
+    box-shadow: inset 0 0 0 3px var(--focus);
+    pointer-events: none;
+}
+
+/* ---------- Number line: the jumps of 1/d from 0, as hops ---------- */
+
+.fraction-v2-nl-hop {
+    position: absolute;
+    top: 14px;
+    height: 12px;
+    border: 2px solid var(--stage);
+    border-bottom: 0;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    pointer-events: none;
+}
+
+.fraction-v2-nl-hop.negative {
+    border-color: #c4432a;
+}
+
+/* ---------- Pieces taken away ---------- */
+
+/* Before fading, a piece taken away shows the colour it had in the first fraction */
+.fraction-v2-segment-bar span.removed {
+    position: relative;
+}
+
+.fraction-v2-segment-bar span.removed::after {
+    position: absolute;
+    inset: 0;
+    background: var(--stage);
+    content: "";
+    opacity: 0;
+}
+
+/* ---------- The movements ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+    /* Cutting a unit into parts: the new cuts draw in, the old ones slide */
+    .fraction-v2-partition i {
+        transition: left 0.4s ease;
+        animation: motion-cut 0.4s ease-out both;
+    }
+
+    /* Merging: the solid line fades into the dashed one, group after group */
+    .fraction-v2-merge b::before,
+    .fraction-v2-merge b::after {
+        transition: opacity 0.45s ease var(--delay, 0ms);
+    }
+
+    .fraction-v2-merge em {
+        animation: motion-group 0.7s ease var(--delay, 0ms) both;
+    }
+
+    .fraction-v2-merge-label {
+        animation: motion-label 0.35s ease-out var(--delay, 0ms) both;
+    }
+
+    /* Adding: the second fraction's pieces come in from the end of the unit and hook on */
+    .fraction-v2-segment-bar span.second {
+        animation: motion-join 0.55s cubic-bezier(0.25, 0.9, 0.3, 1) both;
+        animation-delay: calc(0.1s + var(--i, 0) * 50ms);
+    }
+
+    .fraction-v2-segment-bar:dir(rtl) span.second {
+        animation-name: motion-join-rtl;
+    }
+
+    /* Taking away: from the last piece back, the colour fades and leaves the piece crossed out */
+    .fraction-v2-segment-bar span.removed::after {
+        animation: motion-fade 0.6s ease both;
+        animation-delay: calc(0.2s + var(--i, 0) * 90ms);
+    }
+
+    /* Multiplying: the crossing lights up cell after cell, always in under a second */
+    .fraction-v2-area-grid span.both {
+        animation: motion-cross 0.4s ease-out both;
+        animation-delay: calc(0.15s + var(--i, 0) * min(35ms, 900ms / var(--n, 1)));
+    }
+
+    /* Dividing: the jumps are counted one by one */
+    .fraction-v2-measure-jump {
+        animation: motion-hop 0.35s ease-out both;
+        animation-delay: calc(var(--i, 0) * 140ms);
+    }
+
+    /* Number line: the point glides with the buttons, the keys or a tap, not while it is dragged */
+    .fraction-v2-nl-track:not([data-dragging]) .fraction-v2-nl-handle,
+    .fraction-v2-nl-track:not([data-dragging]) .fraction-v2-nl-jumps {
+        transition: left 0.25s ease, width 0.25s ease;
+    }
+
+    /* When the stretch of line changes, the marks and the hops glide with the point */
+    .fraction-v2-nl-tick,
+    .fraction-v2-nl-hop {
+        transition: left 0.25s ease, width 0.25s ease;
+    }
+
+    .fraction-v2-nl-hop {
+        animation: motion-hop-arc 0.32s ease-out both;
+    }
+
+    .fraction-v2-nl-hop.negative {
+        animation-name: motion-hop-arc-back;
+    }
+
+    /* Comparing on the line: the points glide too */
+    .fraction-v2-cmp-point {
+        transition: left 0.3s ease;
+    }
+
+    /* Expressions: each new line drops in (the first one is already there) */
+    .expr-lines li + li {
+        animation: motion-line 0.35s ease-out;
+    }
 }
 
 @keyframes motion-cut {
@@ -19,31 +185,25 @@
     to { opacity: 1; transform: none; }
 }
 
-/* ---------- Sums and differences ---------- */
-
-/* The second fraction's pieces arrive one after another */
-.fraction-v2-segment-bar span.second {
-    animation: motion-join 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
-    animation-delay: calc(var(--i, 0) * 45ms);
+@keyframes motion-group {
+    from { opacity: 0; }
+    35% { opacity: 1; }
+    to { opacity: 0; }
 }
 
-@keyframes motion-join {
-    from { opacity: 0; transform: translateY(-70%); }
+@keyframes motion-label {
+    from { opacity: 0; transform: scale(0.8); }
     to { opacity: 1; transform: none; }
 }
 
-/* The pieces taken away were part of the first fraction: their colour fades out */
-.fraction-v2-segment-bar span.removed {
-    position: relative;
+@keyframes motion-join {
+    from { transform: translateX(calc(var(--shift, 1) * 100%)); }
+    to { transform: none; }
 }
 
-.fraction-v2-segment-bar span.removed::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: var(--stage);
-    animation: motion-fade 0.6s ease forwards;
-    animation-delay: calc(0.2s + var(--i, 0) * 60ms);
+@keyframes motion-join-rtl {
+    from { transform: translateX(calc(var(--shift, 1) * -100%)); }
+    to { transform: none; }
 }
 
 @keyframes motion-fade {
@@ -51,23 +211,9 @@
     to { opacity: 0; }
 }
 
-/* ---------- Product as an area ---------- */
-
-.fraction-v2-area-grid span.both {
-    animation: motion-cross 0.4s ease-out both;
-    animation-delay: calc(0.15s + var(--i, 0) * 35ms);
-}
-
-/* The overlap starts in the second colour and turns into the product's colour, cell after cell */
+/* The overlap starts in the second colour and turns into the product's colour */
 @keyframes motion-cross {
     from { background: var(--second-tint); }
-}
-
-/* ---------- Division as measuring ---------- */
-
-.fraction-v2-measure-jump {
-    animation: motion-hop 0.35s ease-out both;
-    animation-delay: calc(var(--i, 0) * 140ms);
 }
 
 @keyframes motion-hop {
@@ -76,66 +222,18 @@
     to { opacity: 1; transform: none; }
 }
 
-/* ---------- Number line ---------- */
-
-/* The point glides when it moves with the buttons or the keys, not while it is dragged */
-.fraction-v2-nl-track:not([data-dragging]) .fraction-v2-nl-handle,
-.fraction-v2-nl-track:not([data-dragging]) .fraction-v2-nl-jumps {
-    transition: left 0.25s ease, width 0.25s ease;
-}
-
-/* Each jump of 1/d from 0, as an arc over the line: the numerator counts them */
-.fraction-v2-nl-hops {
-    position: absolute;
-    top: 6px;
-    left: 0;
-    width: 100%;
-    height: 20px;
-    overflow: visible;
-    pointer-events: none;
-}
-
-.fraction-v2-nl-hops path {
-    fill: none;
-    stroke: var(--stage);
-    stroke-width: 2;
-    /* Square ends: round caps would leave dots on the arcs still waiting to be drawn */
-    stroke-linecap: butt;
-    stroke-dasharray: 1;
-    animation: motion-hop-arc 0.32s ease-out both;
-}
-
-.fraction-v2-nl-hops.negative path {
-    stroke: #c4432a;
-}
-
+/* A hop is drawn from where it starts: rightwards from 0, or leftwards for a negative */
 @keyframes motion-hop-arc {
-    from { stroke-dashoffset: 1; }
-    to { stroke-dashoffset: 0; }
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0); }
 }
 
-/* ---------- Expressions ---------- */
-
-.expr-lines li:last-child {
-    animation: motion-line 0.35s ease-out;
+@keyframes motion-hop-arc-back {
+    from { clip-path: inset(0 0 0 100%); }
+    to { clip-path: inset(0); }
 }
 
 @keyframes motion-line {
     from { opacity: 0; transform: translateY(-8px); }
     to { opacity: 1; transform: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .fraction-v2-partition i,
-    .fraction-v2-segment-bar span.second,
-    .fraction-v2-segment-bar span.removed::after,
-    .fraction-v2-area-grid span.both,
-    .fraction-v2-measure-jump,
-    .fraction-v2-nl-track .fraction-v2-nl-handle,
-    .fraction-v2-nl-track .fraction-v2-nl-jumps,
-    .fraction-v2-nl-hops path,
-    .expr-lines li:last-child {
-        transition: none;
-        animation: none;
-    }
 }
