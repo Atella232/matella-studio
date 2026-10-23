@@ -6,7 +6,7 @@ export { practiceModeForPath, sectionForPath, type PracticeMode } from '../../fe
 export type GameMode = 'hub' | GameId
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const gameSlugs: Record<GameId, string> = { race: 'lasterketa', target: 'itua', wall: 'horma', memory: 'memoria', exact: 'helburua', detective: 'detektibea', sales: 'merkealdiak' }
+export const gameSlugs: Record<GameId, string> = { race: 'lasterketa', target: 'itua', wall: 'horma', memory: 'memoria', exact: 'helburua', detective: 'detektibea', sales: 'merkealdiak', balance: 'balantza' }
 
 export function gameModeForPath(pathname: string): GameMode {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
@@ -19,5 +19,6 @@ export function gameModeForPath(pathname: string): GameMode {
     if (['objetivo', 'helburua'].includes(game)) return 'exact'
     if (['detective', 'detektibea'].includes(game)) return 'detective'
     if (['rebajas', 'merkealdiak'].includes(game)) return 'sales'
+    if (['balanza', 'balantza'].includes(game)) return 'balance'
     return 'hub'
 }

@@ -1,0 +1,331 @@
+/* ---------- Balantza / Balanza ---------- */
+
+.fraction-v2-games-card[data-game="balance"] { --game-tint: var(--violet-tint, #e8e0f7); }
+
+.balance-game {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.balance-question {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* ---------- The scale: a beam that tilts, two pans that stay level ---------- */
+
+.balance-scale {
+    --tilt: 0deg;
+    position: relative;
+    align-self: center;
+    width: min(100%, 520px);
+    height: 250px;
+    margin-top: 8px;
+}
+
+/* The post and its foot */
+.balance-stand {
+    position: absolute;
+    top: 30px;
+    bottom: 0;
+    left: 50%;
+    width: 10px;
+    border: 2px solid var(--ink);
+    border-radius: 4px;
+    background: var(--paper-deep);
+    transform: translateX(-50%);
+}
+
+.balance-stand::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 120px;
+    height: 14px;
+    border: 2px solid var(--ink);
+    border-radius: 8px 8px 4px 4px;
+    background: var(--paper-deep);
+    transform: translateX(-50%);
+}
+
+.balance-beam {
+    position: absolute;
+    top: 26px;
+    left: 21%;
+    width: 58%;
+    height: 10px;
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+    background: var(--mustard);
+    transform: rotate(var(--tilt));
+    transform-origin: 50% 50%;
+    transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* The pivot */
+.balance-beam::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    background: var(--card);
+    transform: translate(-50%, -50%);
+}
+
+/* A pan hangs from each end and turns back so it stays level */
+.balance-hanger {
+    position: absolute;
+    top: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(72%, 200px);
+    transform: translateX(-50%) rotate(calc(-1 * var(--tilt)));
+    transform-origin: 50% 0;
+    transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.balance-hanger.left { left: 0; }
+.balance-hanger.right { left: 100%; }
+
+.balance-strings {
+    display: block;
+    width: 70%;
+    height: 26px;
+    overflow: visible;
+}
+
+.balance-strings path {
+    fill: none;
+    stroke: var(--ink-soft);
+    stroke-width: 1.5;
+}
+
+.balance-pan {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+    min-height: 54px;
+    padding: 6px 6px 8px;
+    border-bottom: 5px solid var(--ink);
+    border-radius: 0 0 50% 50% / 0 0 18px 18px;
+    background: linear-gradient(to top, var(--paper-deep), transparent 70%);
+}
+
+.balance-empty {
+    align-self: center;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* A weight: a block with a small handle on top */
+.balance-weight {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--size, 44px);
+    height: max(46px, calc(var(--size, 44px) * 0.86));
+    margin-top: 8px;
+    padding: 0 5px;
+    border: 2px solid var(--ink);
+    border-radius: 10px 10px 6px 6px;
+    color: var(--ink);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.balance-weight::before {
+    content: "";
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    width: 16px;
+    height: 9px;
+    border: 2px solid var(--ink);
+    border-bottom: 0;
+    border-radius: 8px 8px 0 0;
+    transform: translateX(-50%);
+}
+
+.balance-weight.loaded { background: var(--blue-tint); }
+.balance-weight.fixed { background: var(--paper-deep); }
+.balance-weight.mine { background: var(--coral-tint); }
+.balance-weight.tray { background: var(--card); box-shadow: 0 3px 0 var(--ink); }
+
+button.balance-weight {
+    cursor: pointer;
+}
+
+button.balance-weight.tray:hover {
+    background: var(--coral-tint);
+}
+
+button.balance-weight:active {
+    transform: translateY(2px);
+}
+
+/* The fraction on a weight, stacked so it reads at a glance */
+.balance-frac {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.05;
+}
+
+.balance-frac > span:first-child {
+    padding: 0 3px;
+    border-bottom: 2px solid currentColor;
+}
+
+.balance-frac.whole {
+    font-size: 20px;
+}
+
+/* What the last weighing said */
+.balance-dial {
+    position: absolute;
+    top: 46px;
+    left: 50%;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    background: var(--card);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    transform: translateX(-50%);
+}
+
+.balance-dial.balanced {
+    border-color: var(--success);
+    background: var(--success-tint);
+    color: var(--success-ink);
+}
+
+.balance-dial.lighter,
+.balance-dial.heavier {
+    background: var(--coral-tint);
+    color: var(--coral-ink);
+}
+
+.balance-dial.locked {
+    color: var(--muted);
+}
+
+.balance-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 16px;
+}
+
+.balance-weighings {
+    display: inline-flex;
+    gap: 5px;
+}
+
+.balance-weighings i {
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--ink);
+    border-radius: 4px 4px 2px 2px;
+    background: var(--mustard);
+}
+
+.balance-weighings i.used {
+    background: var(--paper-deep);
+    opacity: 0.5;
+}
+
+.balance-verdict.balanced { color: var(--success-ink); }
+.balance-verdict.lighter,
+.balance-verdict.heavier { color: var(--coral-ink); }
+
+.balance-tray {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 8px 12px;
+    border: 1.5px dashed var(--line);
+    border-radius: 14px;
+    direction: ltr;
+}
+
+.balance-slot {
+    display: inline-block;
+    width: 44px;
+    height: 36px;
+    border: 2px dashed var(--line);
+    border-radius: 10px;
+}
+
+.balance-weigh {
+    align-self: center;
+    min-width: 180px;
+}
+
+.balance-tip {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    text-align: center;
+}
+
+.balance-explain {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 16px;
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    background: var(--card);
+}
+
+.balance-explain.right { border-color: var(--success); background: var(--success-tint); }
+.balance-explain.wrong { border-color: var(--coral); background: var(--coral-tint); }
+
+.balance-explain p {
+    margin: 0;
+}
+
+.balance-sums {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    list-style: none;
+}
+
+.balance-explain > .fraction-v2-primary {
+    align-self: flex-end;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .balance-beam,
+    .balance-hanger {
+        transition: none;
+    }
+}

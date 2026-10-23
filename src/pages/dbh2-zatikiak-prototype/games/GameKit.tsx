@@ -110,6 +110,27 @@ export function GameArt({ game }: { game: GameId }) {
             </svg>
         )
     }
+    if (game === 'balance') {
+        // A scale tipped towards the heavier pan
+        return (
+            <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
+                <rect x="104" y="30" width="12" height="78" rx="3" fill="var(--paper-deep)" stroke="var(--ink)" strokeWidth="2" />
+                <rect x="70" y="104" width="80" height="10" rx="4" fill="var(--paper-deep)" stroke="var(--ink)" strokeWidth="2" />
+                <g transform="rotate(-8 110 30)">
+                    <rect x="40" y="25" width="140" height="10" rx="5" fill="var(--mustard)" stroke="var(--ink)" strokeWidth="2" />
+                </g>
+                <circle cx="110" cy="30" r="6" fill="#fffcf6" stroke="var(--ink)" strokeWidth="2" />
+                {([[41, 40, 'var(--blue-tint)', '3/4'], [179, 21, 'var(--coral-tint)', '1/2']] as const).map(([x, y, fill, label]) => (
+                    <g key={label}>
+                        <path d={`M${x} ${y} L${x - 26} ${y + 30} M${x} ${y} L${x + 26} ${y + 30}`} stroke="var(--ink-soft)" strokeWidth="1.5" />
+                        <path d={`M${x - 34} ${y + 30} H${x + 34} Q${x} ${y + 48} ${x - 34} ${y + 30} Z`} fill="var(--paper-deep)" stroke="var(--ink)" strokeWidth="2" />
+                        <rect x={x - 17} y={y + 8} width="34" height="22" rx="5" fill={fill} stroke="var(--ink)" strokeWidth="2" />
+                        <text x={x} y={y + 24} textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--ink)" fontFamily="Fraunces, serif">{label}</text>
+                    </g>
+                ))}
+            </svg>
+        )
+    }
     if (game === 'detective') {
         // A worked solution with one line circled and a magnifying glass over it
         return (

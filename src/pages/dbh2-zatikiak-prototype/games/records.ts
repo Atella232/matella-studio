@@ -3,7 +3,7 @@ import { levelProgressIds, type GameInfo as UnitGameInfo, type GameLevelInfo as 
 
 export { gameStars, mergeRecord, parseRecords, recordKey, type GameRecords, type LevelRecord, type Stars } from '../../../features/unit-v2/games/records.ts'
 
-export type GameId = 'race' | 'memory' | 'target' | 'wall' | 'exact' | 'detective' | 'sales'
+export type GameId = 'race' | 'memory' | 'target' | 'wall' | 'exact' | 'detective' | 'sales' | 'balance'
 
 export interface GameLevelInfo extends UnitGameLevelInfo {
     stage: FractionStageId
@@ -95,6 +95,17 @@ export const games: GameInfo[] = [
             { progressId: 1201, stage: 'proportionality', title: { eu: 'Zenbat ordaindu?', es: '¿Cuánto pago?', ar: 'كم أدفع؟' }, description: { eu: 'Deskontuak zatikitan eta ehunekotan: zer ordaindu eta zer aurreztu.', es: 'Descuentos en fracción y en %: lo que pagas y lo que ahorras.', ar: 'خصومات بالكسور والنسب: ما تدفعه وما توفّره.' } },
             { progressId: 1202, stage: 'proportionality', title: { eu: 'Zein eskaintza da hobea?', es: '¿Qué oferta es mejor?', ar: 'أي عرض أفضل؟' }, description: { eu: 'Konparatu %, zatikiak eta 3 × 2 eskaintzak.', es: 'Compara %, fracciones y ofertas 3 × 2.', ar: 'قارن بين النسب والكسور وعروض 3 × 2.' } },
             { progressId: 1203, stage: 'proportionality', title: { eu: 'Kateatuak eta alderantzizkoak', es: 'Encadenados e inversos', ar: 'متتالية وعكسية' }, description: { eu: 'Deskontu bat bestearen gainean eta merkealdien aurreko prezioa.', es: 'Un descuento sobre otro y el precio antes de la rebaja.', ar: 'خصم فوق خصم والسعر قبل التخفيض.' } }
+        ]
+    },
+    {
+        id: 'balance',
+        title: { eu: 'Balantza', es: 'Balanza', ar: 'الميزان' },
+        tagline: { eu: 'Orekatu balantza zatiki-pisuekin. Hiru pisaketa besterik ez dituzu: pentsatu pisatu aurretik.', es: 'Equilibra la balanza con pesas de fracciones. Solo tienes tres pesadas: piensa antes de pesar.', ar: 'وازن الميزان بأثقال من الكسور. لديك ثلاث وزنات فقط: فكّر قبل أن تزن.' },
+        skills: { eu: 'Baliokidetasuna, batuketak eta kenketak', es: 'Equivalencia, sumas y restas', ar: 'التكافؤ والجمع والطرح' },
+        levels: [
+            { progressId: 1301, stage: 'equivalence', title: { eu: 'Pisu berdinak', es: 'Pesos iguales', ar: 'أوزان متساوية' }, description: { eu: 'Pisu bat, familia bereko zatien aurka: erdiak, laurdenak, zortzirenak…', es: 'Una pesa contra trozos de la misma familia: medios, cuartos, octavos…', ar: 'ثقل واحد مقابل أجزاء من العائلة نفسها: أنصاف وأرباع وأثمان…' } },
+            { progressId: 1302, stage: 'operations', title: { eu: 'Batuketak', es: 'Sumas', ar: 'الجمع' }, description: { eu: 'Izendatzaile desberdineko bi pisu: zenbat pisatzen dute batera?', es: 'Dos pesas de distinto denominador: ¿cuánto pesan juntas?', ar: 'ثقلان بمقامين مختلفين: كم يزنان معًا؟' } },
+            { progressId: 1303, stage: 'operations', title: { eu: 'Falta dena', es: 'Lo que falta', ar: 'ما ينقص' }, description: { eu: 'Bi plateretan daude pisuak: gehitu falta dena, 1 baino gehiago izan arren.', es: 'Hay pesas en los dos platillos: añade lo que falta, aunque pase de 1.', ar: 'في الكفتين أثقال: أضف ما ينقص ولو تجاوز 1.' } }
         ]
     }
 ]

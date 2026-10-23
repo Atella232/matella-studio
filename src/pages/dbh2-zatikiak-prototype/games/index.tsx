@@ -1,6 +1,7 @@
 import { GamesHub, type HubGame } from '../../../features/unit-v2/games/GamesHub'
 import type { PrototypeLanguage } from '../content'
 import type { GameMode } from '../routing'
+import { BalanceGame } from './BalanceGame'
 import { DetectiveGame } from './DetectiveGame'
 import { ExactGame } from './ExactGame'
 import { GameArt } from './GameKit'
@@ -14,7 +15,7 @@ import './Games.css'
 
 export type { GameProps } from '../../../features/unit-v2/games/GamesHub'
 
-const components = { race: RaceGame, target: TargetGame, wall: WallGame, memory: MemoryGame, exact: ExactGame, detective: DetectiveGame, sales: SalesGame }
+const components = { race: RaceGame, target: TargetGame, wall: WallGame, memory: MemoryGame, exact: ExactGame, detective: DetectiveGame, sales: SalesGame, balance: BalanceGame }
 
 const hubGames: HubGame<GameId>[] = games.map((info) => ({ info, art: <GameArt game={info.id} />, component: components[info.id] }))
 

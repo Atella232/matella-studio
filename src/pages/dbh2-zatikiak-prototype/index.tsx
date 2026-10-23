@@ -13,7 +13,7 @@ import { fractionBankAnswers } from './bankAnswers'
 import { FractionLaboratory } from './lab'
 import { labChallengeIds, labToolForTopic, labTools } from './lab/labTools'
 import { GamesArea } from './games'
-import { GAME_RECORDS_KEY, gameProgressIds } from './games/records'
+import { GAME_RECORDS_KEY, gameProgressIds, games } from './games/records'
 import { gameModeForPath, gameSlugs } from './routing'
 import { AddFigure, AreaFigure, EquivalenceFigure, FractionOfFigure, MeaningFigure, MixedFigure, OrderFigure, PercentFigure, PowerFigure, ProportionFigure, SimplifyFigure } from './figures'
 import type { TheoryTopicId } from './content'
@@ -105,7 +105,7 @@ const zatikiakUnit: UnitDefinition = {
         )
     },
     games: {
-        description: { eu: 'Zazpi joko abiadura, zehaztasuna eta estrategia entrenatzeko.', es: 'Siete juegos para entrenar rapidez, precisión y estrategia.', ar: 'سبع ألعاب لتدريب السرعة والدقة والاستراتيجية.' },
+        description: { eu: `${games.length} joko abiadura, zehaztasuna eta estrategia entrenatzeko.`, es: `${games.length} juegos para entrenar rapidez, precisión y estrategia.`, ar: `${games.length} ألعاب لتدريب السرعة والدقة والاستراتيجية.` },
         progressIds: gameProgressIds,
         recordsKey: GAME_RECORDS_KEY,
         render: ({ language, pathname, openGame, completedIds, onComplete }) => (
