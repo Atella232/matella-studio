@@ -131,6 +131,20 @@ export function GameArt({ game }: { game: GameId }) {
             </svg>
         )
     }
+    if (game === 'pyramid') {
+        // Three rows of bricks: two below make the one above
+        const bricks: Array<[number, number, string, string]> = [[80, 10, '7/6', 'var(--success-tint)'], [44, 44, '1/2', 'var(--mustard-tint)'], [116, 44, '?', '#fffcf6'], [8, 78, '1/4', 'var(--mustard-tint)'], [80, 78, '1/4', 'var(--mustard-tint)'], [152, 78, '5/12', 'var(--mustard-tint)']]
+        return (
+            <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
+                {bricks.map(([x, y, label, fill]) => (
+                    <g key={`${x}-${y}`}>
+                        <rect x={x} y={y} width="60" height="30" rx="5" fill={fill} stroke="var(--ink)" strokeWidth="2" strokeDasharray={label === '?' ? '5 3' : undefined} />
+                        <text x={x + 30} y={y + 20} textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--ink)" fontFamily="Fraunces, serif">{label}</text>
+                    </g>
+                ))}
+            </svg>
+        )
+    }
     if (game === 'detective') {
         // A worked solution with one line circled and a magnifying glass over it
         return (

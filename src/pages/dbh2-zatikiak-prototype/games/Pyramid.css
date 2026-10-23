@@ -1,0 +1,188 @@
+/* ---------- Piramidea / Pirámide ---------- */
+
+.fraction-v2-games-card[data-game="pyramid"] { --game-tint: var(--coral-tint); }
+
+.pyramid-game {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.pyramid-rule {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Rows of bricks, each row half a brick in from the one below */
+.pyramid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 0 4px;
+}
+
+.pyramid-row {
+    display: flex;
+    gap: 6px;
+}
+
+.pyramid-brick {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(84px, 27vw, 120px);
+    height: 64px;
+    border: 2.5px solid var(--ink);
+    border-radius: 8px;
+    color: var(--ink);
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 700;
+}
+
+.pyramid-brick.given {
+    background: var(--mustard-tint);
+    box-shadow: inset 0 -5px 0 rgba(29, 39, 51, 0.12);
+}
+
+.pyramid-brick.open {
+    border-style: dashed;
+    background: var(--card);
+    cursor: pointer;
+}
+
+.pyramid-brick.open.selected {
+    border-style: solid;
+    border-color: var(--stage);
+    background: var(--stage-soft);
+    box-shadow: 0 0 0 3px var(--stage);
+}
+
+.pyramid-brick.done {
+    background: var(--success-tint);
+    border-color: var(--success);
+    color: var(--success-ink);
+    animation: pyramid-set 0.35s ease;
+}
+
+.pyramid-brick.wrong {
+    animation: pyramid-shake 0.4s ease;
+    border-color: var(--error);
+    box-shadow: 0 0 0 3px var(--error-tint);
+}
+
+@keyframes pyramid-set {
+    from { transform: translateY(-10px) scale(0.92); }
+    to { transform: none; }
+}
+
+@keyframes pyramid-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+}
+
+.pyramid-frac {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20px;
+    line-height: 1.05;
+}
+
+.pyramid-frac > span:first-child {
+    padding: 0 4px;
+    border-bottom: 2px solid currentColor;
+}
+
+.pyramid-frac.whole {
+    font-size: 24px;
+}
+
+.pyramid-unknown {
+    color: var(--muted);
+    font-size: 26px;
+}
+
+.pyramid-typing {
+    font-size: 22px;
+    letter-spacing: 0.02em;
+}
+
+/* ---------- Writing a brick: the pad ---------- */
+
+.pyramid-entry {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.pyramid-feedback {
+    min-height: 26px;
+    margin: 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+.pyramid-entry-help {
+    color: var(--muted);
+}
+
+.pyramid-keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 64px);
+    gap: 8px;
+}
+
+.pyramid-keypad button {
+    height: 48px;
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    background: var(--card);
+    box-shadow: 0 3px 0 var(--ink);
+    color: var(--ink);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.pyramid-keypad button:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 var(--ink);
+}
+
+.pyramid-entry-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.pyramid-entry-actions button {
+    min-width: 120px;
+}
+
+.pyramid-done {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border: 2px solid var(--success);
+    border-radius: 16px;
+    background: var(--success-tint);
+    color: var(--success-ink);
+}
+
+.pyramid-done p {
+    margin: 0;
+    font-size: 18px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pyramid-brick.done,
+    .pyramid-brick.wrong {
+        animation: none;
+    }
+}

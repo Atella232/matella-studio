@@ -3,7 +3,7 @@ import { levelProgressIds, type GameInfo as UnitGameInfo, type GameLevelInfo as 
 
 export { gameStars, mergeRecord, parseRecords, recordKey, type GameRecords, type LevelRecord, type Stars } from '../../../features/unit-v2/games/records.ts'
 
-export type GameId = 'race' | 'memory' | 'target' | 'wall' | 'exact' | 'detective' | 'sales' | 'balance'
+export type GameId = 'race' | 'memory' | 'target' | 'wall' | 'exact' | 'detective' | 'sales' | 'balance' | 'pyramid'
 
 export interface GameLevelInfo extends UnitGameLevelInfo {
     stage: FractionStageId
@@ -106,6 +106,17 @@ export const games: GameInfo[] = [
             { progressId: 1301, stage: 'equivalence', title: { eu: 'Pisu berdinak', es: 'Pesos iguales', ar: 'أوزان متساوية' }, description: { eu: 'Pisu bat, familia bereko zatien aurka: erdiak, laurdenak, zortzirenak…', es: 'Una pesa contra trozos de la misma familia: medios, cuartos, octavos…', ar: 'ثقل واحد مقابل أجزاء من العائلة نفسها: أنصاف وأرباع وأثمان…' } },
             { progressId: 1302, stage: 'operations', title: { eu: 'Batuketak', es: 'Sumas', ar: 'الجمع' }, description: { eu: 'Izendatzaile desberdineko bi pisu: zenbat pisatzen dute batera?', es: 'Dos pesas de distinto denominador: ¿cuánto pesan juntas?', ar: 'ثقلان بمقامين مختلفين: كم يزنان معًا؟' } },
             { progressId: 1303, stage: 'operations', title: { eu: 'Falta dena', es: 'Lo que falta', ar: 'ما ينقص' }, description: { eu: 'Bi plateretan daude pisuak: gehitu falta dena, 1 baino gehiago izan arren.', es: 'Hay pesas en los dos platillos: añade lo que falta, aunque pase de 1.', ar: 'في الكفتين أثقال: أضف ما ينقص ولو تجاوز 1.' } }
+        ]
+    },
+    {
+        id: 'pyramid',
+        title: { eu: 'Piramidea', es: 'Pirámide', ar: 'الهرم' },
+        tagline: { eu: 'Adreilu bakoitza azpiko bien batura da. Osatu piramidea gorantz eta beherantz.', es: 'Cada ladrillo es la suma de los dos de debajo. Completa la pirámide hacia arriba y hacia abajo.', ar: 'كل لبنة هي مجموع اللبنتين تحتها. أكمل الهرم صعودًا ونزولًا.' },
+        skills: { eu: 'Batuketak, kenketak eta biderketak', es: 'Sumas, restas y productos', ar: 'الجمع والطرح والضرب' },
+        levels: [
+            { progressId: 1401, stage: 'operations', title: { eu: 'Gorantz', es: 'Hacia arriba', ar: 'صعودًا' }, description: { eu: 'Beheko ilarako zatikiak familia berekoak dira: batu gorantz.', es: 'Las fracciones de abajo son de la misma familia: suma hacia arriba.', ar: 'كسور الصف السفلي من العائلة نفسها: اجمع صعودًا.' } },
+            { progressId: 1402, stage: 'operations', title: { eu: 'Beherantz', es: 'Hacia abajo', ar: 'نزولًا' }, description: { eu: 'Izendatzaile desberdinak; adreilu batzuk kenketaz aurkitzen dira.', es: 'Denominadores distintos; algunos ladrillos se encuentran restando.', ar: 'مقامات مختلفة؛ وبعض اللبنات تُوجد بالطرح.' } },
+            { progressId: 1403, stage: 'operations', title: { eu: 'Biderkaduren piramidea', es: 'Pirámide de productos', ar: 'هرم الضرب' }, description: { eu: 'Adreilu bakoitza biderkadura bat da; beherantz zatitu egiten da.', es: 'Cada ladrillo es un producto; hacia abajo se divide.', ar: 'كل لبنة حاصل ضرب؛ ونزولًا نقسم.' } }
         ]
     }
 ]
