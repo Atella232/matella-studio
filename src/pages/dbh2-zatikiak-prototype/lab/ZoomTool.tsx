@@ -318,7 +318,7 @@ export function ZoomTool(props: ToolProps) {
             {showMean && (
                 <div className="zoom-mean-body">
                     <p>{l({ eu: 'Bi zatikiren batez bestekoa beti dago justu erdian: batu biak eta hartu erdia.', es: 'La media de dos fracciones queda siempre justo en medio: suma las dos y toma la mitad.', ar: 'متوسط كسرين يقع دائمًا في المنتصف تمامًا: اجمعهما وخذ النصف.' })}</p>
-                    <p className="zoom-mean-formula" dir="ltr"><MathText inline text={`$\\displaystyle\\frac{1}{2}\\cdot\\left(${latex(pair[0])}+${latex(pair[1])}\\right)=\\frac{1}{2}\\cdot${latex(add(pair[0], pair[1]))}=${latex(mean)}$`} /></p>
+                    <p className="zoom-mean-formula" dir="ltr"><MathText inline text={`$\\frac{1}{2}\\cdot\\left(${latex(pair[0])}+${latex(pair[1])}\\right)=\\frac{1}{2}\\cdot${latex(add(pair[0], pair[1]))}=${latex(mean)}$`.replaceAll('\\frac', '\\dfrac')} /></p>
                     <p>
                         <span className="zoom-mean-key" aria-hidden="true" />
                         {equals(mean, chosen)

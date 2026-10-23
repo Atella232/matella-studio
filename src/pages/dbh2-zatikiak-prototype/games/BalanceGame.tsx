@@ -37,18 +37,18 @@ function Stacked({ value }: { value: FractionValue }) {
 }
 
 /** A weight on a pan: a block with a handle; all weights look the same size, so only the numbers tell what they weigh */
-function Weight({ value, tone }: { value: FractionValue; tone: 'loaded' | 'fixed' | 'mine' }) {
+function Weight({ value, tone }: { value: FractionValue; tone: 'loaded' | 'fixed' | 'mine' | 'solution' }) {
     return <span className={`balance-weight ${tone}`} role="img" aria-label={plain(value)}><Stacked value={value} /></span>
 }
 
-/** A pan's sum written as pieces that can wrap */
+/** A pan's sum written as pieces that can wrap, its fractions full size (\\displaystyle would clash with MathText's «le» shorthand) */
 function Sum({ parts }: { parts: string[] }) {
     return (
         <span className="balance-sum" dir="ltr">
             {parts.map((part, index) => (
                 <span key={index} className="balance-sum-piece">
                     {index > 0 && <MathText inline text="$=$" />}
-                    <MathText inline text={`$\\displaystyle ${part}$`} />
+                    <MathText inline text={`$${part.replaceAll('\\frac', '\\dfrac')}$`} />
                 </span>
             ))}
         </span>
@@ -73,6 +73,9 @@ export function BalanceGame({ language, records, onResult, onExit }: GameProps) 
     const [result, setResult] = useState<Weighing | null>(null)
     const [score, setScore] = useState(0)
     const [balancedRounds, setBalancedRounds] = useState(0)
+    /** After a round without balance: the solution put on the scale */
+    const [showSolution, setShowSolution] = useState(false)
+    const scaleRef = useRef<HTMLDivElement>(null)
     const questionRef = useRef<HTMLParagraphElement>(null)
     const explainRef = useRef<HTMLDivElement>(null)
 
@@ -89,6 +92,7 @@ export function BalanceGame({ language, records, onResult, onExit }: GameProps) 
         setResult(null)
         setScore(0)
         setBalancedRounds(0)
+        setShowSolution(false)
         setPhase('playing')
     }
 
@@ -124,6 +128,7 @@ export function BalanceGame({ language, records, onResult, onExit }: GameProps) 
         setChosen([])
         setLog([])
         setResult(null)
+        setShowSolution(false)
         requestAnimationFrame(() => questionRef.current?.focus())
     }
 
@@ -185,7 +190,10 @@ export function BalanceGame({ language, records, onResult, onExit }: GameProps) 
     // Only while a level is being set up
     if (!round) return <></>
 
-    const tilt = result === 'lighter' ? -8 : result === 'heavier' ? 8 : 0
+    const tilt = showSolution ? 0 : result === 'lighter' ? -8 : result === 'heavier' ? 8 : 0
+    // The weights on the learner's pan: theirs, or the solution once shown
+    const onPan = showSolution ? round.solution : chosen
+    const shownResult: Weighing | null = showSolution ? 'balanced' : result
     const leftValues = round.left
     const rightValues = [...round.right, ...chosen.map((trayIndex) => round.tray[trayIndex])]
     const solutionValues = [...round.right, ...round.solution.map((trayIndex) => round.tray[trayIndex])]
@@ -220,7 +228,7 @@ export function BalanceGame({ language, records, onResult, onExit }: GameProps) 
 
             <p className="balance-question" ref={questionRef} tabIndex={-1}>{l(question)}</p>
 
-            <div className={`balance-scale ${result ?? 'locked'}`} style={{ '--tilt': `${tilt}deg` } as CSSProperties} dir="ltr">
+            <div className={`balance-scale ${shownResult ?? 'locked'}`} style={{ '--tilt': `${tilt}deg` } as CSSProperties} dir="ltr" ref={scaleRef}>
                 <span className="balance-stand" aria-hidden="true" />
                 <div className="balance-beam">
                     <div className="balance-hanger left">
@@ -234,13 +242,13 @@ export function BalanceGame({ language, records, onResult, onExit }: GameProps) 
                         <svg className="balance-strings" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path d="M50 0 L6 30 M50 0 L94 30" vectorEffect="non-scaling-stroke" /></svg>
                         <div className="balance-pan" role="group" aria-label={l({ eu: 'Zure platera', es: 'Tu platillo', ar: 'كفّتك' })}>
                             {round.right.map((value, valueIndex) => <Weight key={`fixed-${valueIndex}`} value={value} tone="fixed" />)}
-                            {chosen.map((trayIndex) => <Weight key={trayIndex} value={round.tray[trayIndex]} tone="mine" />)}
-                            {rightValues.length === 0 && <span className="balance-empty">{l({ eu: 'hutsik', es: 'vacío', ar: 'فارغة' })}</span>}
+                            {onPan.map((trayIndex) => <Weight key={`${showSolution ? 'solution' : 'mine'}-${trayIndex}`} value={round.tray[trayIndex]} tone={showSolution ? 'solution' : 'mine'} />)}
+                            {round.right.length + onPan.length === 0 && <span className="balance-empty">{l({ eu: 'hutsik', es: 'vacío', ar: 'فارغة' })}</span>}
                         </div>
                         <span className="balance-caption mine">{l({ eu: 'Zurea', es: 'El tuyo', ar: 'كفّتك' })}</span>
                     </div>
                 </div>
-                <span className={`balance-dial ${result ?? 'locked'}`} aria-hidden="true">{result === 'balanced' ? '=' : result === 'lighter' ? '>' : result === 'heavier' ? '<' : '?'}</span>
+                <span className={`balance-dial ${shownResult ?? 'locked'}`} aria-hidden="true">{shownResult === 'balanced' ? '=' : shownResult === 'lighter' ? '>' : shownResult === 'heavier' ? '<' : '?'}</span>
             </div>
 
             <div className="balance-status">
@@ -248,7 +256,11 @@ export function BalanceGame({ language, records, onResult, onExit }: GameProps) 
                     {Array.from({ length: BALANCE_WEIGHINGS }, (_, item) => <i key={item} className={item < weighings ? 'used' : ''} />)}
                 </span>
                 <span className="balance-left">{l({ eu: `Geratzen diren pisaketak: ${remaining}`, es: `Pesadas que quedan: ${remaining}`, ar: `الوزنات الباقية: ${remaining}` })}</span>
-                <strong className={`balance-verdict ${result ?? ''}`} role="status">{result ? l(verdict[result]) : ''}</strong>
+                <strong className={`balance-verdict ${shownResult ?? ''}`} role="status">
+                    {showSolution
+                        ? l({ eu: 'Soluzioarekin, orekan.', es: 'Con la solución, en equilibrio.', ar: 'مع الحل يتوازن الميزان.' })
+                        : result ? l(verdict[result]) : ''}
+                </strong>
             </div>
 
             {log.length > 0 && (
@@ -301,6 +313,18 @@ export function BalanceGame({ language, records, onResult, onExit }: GameProps) 
                         <li><Sum parts={sumParts(leftValues, denominator)} /></li>
                         <li><Sum parts={sumParts(balanced ? rightValues : solutionValues, denominator)} /></li>
                     </ul>
+                    {!balanced && !showSolution && (
+                        <button
+                            type="button"
+                            className="fraction-v2-secondary balance-show"
+                            onClick={() => {
+                                setShowSolution(true)
+                                requestAnimationFrame(() => scaleRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' }))
+                            }}
+                        >
+                            {l({ eu: 'Erakutsi balantzan', es: 'Muéstramelo en la balanza', ar: 'أرني ذلك على الميزان' })}
+                        </button>
+                    )}
                     {!balanced && rightValues.length > 0 && (
                         <p className="balance-yours">
                             {l({ eu: 'Zure platerean:', es: 'En tu platillo había:', ar: 'كان في كفّتك:' })}{' '}

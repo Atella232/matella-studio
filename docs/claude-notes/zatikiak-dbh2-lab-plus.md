@@ -136,3 +136,12 @@ L5 «Lupa en la recta / Lupa zenbaki-zuzenean» (rounds: 2d3576f, 1eac132, round
 - Tests: `tests/zatikiak-zoom.test.ts`, including LRI/PDI around every fraction in Arabic challenge texts.
 - Gotchas: the screenshot helper must not hide every `nav` (the trail is a `nav`); `polygon` points cannot be animated with CSS transitions.
 
+J3 «Balanza / Balantza» (rounds: 06cef75, 28012a3, round 3 in the commit after it):
+- Code: `games/balance.ts`, `BalanceGame.tsx`, `Balance.css`; game id `balance`, slugs balantza/balanza; progress ids 1301–1303; GameArt `balance`. The unit's games description now counts `games.length`.
+- Rules: 6 rounds; the scale only moves on «Pesar»; three weighings a round; balance at the 1st/2nd/3rd weighing = 3/2/1 points; stars `BALANCE_STARS` 16/12/9 of 18 (random single-weight guessing averages about 7).
+- Levels: (1) one weight vs pieces of a family (two pieces and eighths in rounds 1–3; three pieces and finer families later; sometimes the ×2 equivalent weight), (2) two weights with different denominators: the sum, or two pieces of it, among near sums (±1–3 over the common denominator) and slips (one numerator scaled, adding across), (3) both pans loaded: the missing weight among near values and «forgot the fixed weight» / «added it».
+- Round 2 (after a review that simulated thousands of rounds): all weights the same size; `around()` puts a random number of wrong weights below and above a single right one, so its rank varies; `sizeDoesNotTell()` keeps the right weights from being the heaviest (or the lightest single); tray buttons stay mounted (aria-pressed); «Pesar» needs a chosen weight; only the verdict is live; explanation uses `roundDenominator()` for both pans and wraps (`sumParts`). New: the weighing log.
+- Round 3: «Muéstramelo en la balanza» after a failed round drops the solution onto the pan (green weights, the scale levels).
+- Tests: `tests/zatikiak-balance.test.ts` (solvable rounds, no rank wins half the time, never the heaviest, easier first rounds, stars).
+- Gotcha: MathText turns «le» between alphanumerics into \le, so `\displaystyle 1+…` breaks; use `\dfrac` (replaceAll on `\frac`) to get full-size fractions inline.
+
