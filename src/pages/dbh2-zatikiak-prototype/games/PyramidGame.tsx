@@ -9,6 +9,7 @@ import { games } from './records'
 import {
     brickPoints,
     createPyramids,
+    diagnose,
     hintFor,
     PYRAMID_BRICKS,
     PYRAMID_MAX_SCORE,
@@ -17,7 +18,8 @@ import {
     readBrick,
     stepLatex,
     type Pyramid,
-    type PyramidLevel
+    type PyramidLevel,
+    type PyramidSlip
 } from './pyramid'
 import './Pyramid.css'
 
@@ -50,7 +52,21 @@ function Stacked({ value }: { value: FractionValue }) {
     return <span className="pyramid-frac"><span>{reduced.numerator}</span><span>{reduced.denominator}</span></span>
 }
 
-type Feedback = { brick: number; kind: 'wrong' | 'unreadable' | 'later' } | { brick: number; kind: 'right'; points: number } | null
+type Feedback =
+    | { brick: number; kind: 'unreadable' | 'later' }
+    | { brick: number; kind: 'wrong'; slip: PyramidSlip | null }
+    | { brick: number; kind: 'right'; points: number }
+    | null
+
+/** What each typical slip means, said to the learner */
+const slipTips: Record<PyramidSlip, { eu: string; es: string; ar: string }> = {
+    across: { eu: 'Goikoak elkarrekin eta behekoak elkarrekin kalkulatu dituzu. Lehenik, izendatzaile komuna.', es: 'Has operado arriba con arriba y abajo con abajo. Primero, denominador común.', ar: 'حسبت البسطين معًا والمقامين معًا. حوّل أولًا إلى مقام مشترك.' },
+    added: { eu: 'Batu egin duzu, baina beherantz kendu egin behar da: goikoa ken ondokoa.', es: 'Has sumado, pero hacia abajo hay que restar: el de arriba menos el de al lado.', ar: 'لقد جمعت، لكن نزولًا يجب أن تطرح: العليا ناقص المجاورة.' },
+    subtracted: { eu: 'Kendu egin duzu, baina gorantz batu egiten da.', es: 'Has restado, pero hacia arriba se suma.', ar: 'لقد طرحت، لكن صعودًا نجمع.' },
+    multiplied: { eu: 'Biderkatu egin duzu, baina beherantz zatitu egin behar da: goikoa zati ondokoa.', es: 'Has multiplicado, pero hacia abajo hay que dividir: el de arriba entre el de al lado.', ar: 'لقد ضربت، لكن نزولًا يجب أن تقسم: العليا على المجاورة.' },
+    'upside-down': { eu: 'Alderantziz zatitu duzu: goikoa zati ondokoa da, ez alderantziz.', es: 'Has dividido al revés: es el de arriba entre el de al lado, no al contrario.', ar: 'قسمت بالعكس: العليا على المجاورة، لا العكس.' },
+    'added-not-multiplied': { eu: 'Batu egin duzu, baina piramide honetan adreilu bakoitza biderkadura da.', es: 'Has sumado, pero en esta pirámide cada ladrillo es un producto.', ar: 'لقد جمعت، لكن في هذا الهرم كل لبنة حاصل ضرب.' }
+}
 
 export function PyramidGame({ language, records, onResult, onExit }: GameProps) {
     const l = useGameText(language)
@@ -132,7 +148,7 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
         }
         if (!equals(value, pyramid.values[selected])) {
             setSlips((current) => current.map((count, brick) => (brick === selected ? count + 1 : count)))
-            setFeedback({ brick: selected, kind: 'wrong' })
+            setFeedback({ brick: selected, kind: 'wrong', slip: diagnose(pyramid, known, selected, value) })
             return
         }
         const points = brickPoints(slips[selected])
@@ -264,7 +280,11 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
             })
         }
         if (feedback.kind === 'unreadable') return l({ eu: 'Idatzi zatiki oso bat, adibidez 3/4 edo 1 1/2.', es: 'Escribe una fracción completa, como 3/4 o 1 1/2.', ar: `اكتب كسرًا كاملًا مثل ${ltr('3/4')} أو ${ltr('1 1/2')}.` })
-        if (feedback.kind === 'wrong') return l({ eu: 'Ez da hori. Saiatu berriro edo eskatu pista bat.', es: 'No es eso. Prueba otra vez o pide una pista.', ar: 'ليس هذا. حاول مرة أخرى أو اطلب تلميحًا.' })
+        if (feedback.kind === 'wrong') {
+            return feedback.slip
+                ? l(slipTips[feedback.slip])
+                : l({ eu: 'Ez da hori. Saiatu berriro edo eskatu pista bat.', es: 'No es eso. Prueba otra vez o pide una pista.', ar: 'ليس هذا. حاول مرة أخرى أو اطلب تلميحًا.' })
+        }
         return l({ eu: 'Adreilu hau ezin da oraindik kalkulatu: hasi beste batekin.', es: 'Este ladrillo todavía no se puede calcular: empieza por otro.', ar: 'لا يمكن حساب هذه اللبنة بعد: ابدأ بلبنة أخرى.' })
     })()
 

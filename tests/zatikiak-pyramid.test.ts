@@ -7,6 +7,7 @@ import { gameModeForPath, gameSlugs } from '../src/pages/dbh2-zatikiak-prototype
 import {
     buildValues,
     createPyramids,
+    diagnose,
     DOWNWARD_PATTERNS,
     hintFor,
     nextSteps,
@@ -116,5 +117,23 @@ test('zatikiak pyramid: each level starts gently', () => {
         assert.ok(products.slice(0, 2).every((pyramid) => pyramid.given.join() === 'false,false,false,true,true,true'), 'products upwards first')
         assert.ok(products.every((pyramid) => pyramid.values.every((value) => value.numerator <= 20 && value.denominator <= 20)), 'tidy products')
     }
+})
+
+test('zatikiak pyramid: typical slips are recognised', () => {
+    // 1/4 1/4 5/12 at the bottom; middle 1/2 and 2/3; top 7/6
+    const sums = { op: 'sum' as const, values: buildValues('sum', [fraction(1, 4), fraction(1, 4), fraction(5, 12)]), given: [false, false, false, true, true, true] }
+    const bottomKnown = [false, false, false, true, true, true]
+    assert.equal(diagnose(sums, bottomKnown, 2, fraction(6, 16)), 'across', '1/4 + 5/12 written as 6/16')
+    assert.equal(diagnose(sums, bottomKnown, 2, fraction(1, 6)), 'subtracted')
+    assert.equal(diagnose(sums, bottomKnown, 2, fraction(1, 7)), null, 'just wrong')
+    assert.equal(diagnose(sums, bottomKnown, 0, fraction(1, 7)), null, 'the top cannot be worked out yet')
+    const downKnown = [true, true, false, false, true, false]
+    assert.equal(diagnose(sums, downKnown, 2, add(fraction(7, 6), fraction(1, 2))), 'added', 'down needs taking away')
+    const products = { op: 'product' as const, values: buildValues('product', [fraction(1, 2), fraction(2, 3), fraction(3)]), given: [true, false, true, false, true, false] }
+    const known = [true, false, true, false, true, false]
+    // brick 5 = 2 ÷ 2/3 = 3
+    assert.equal(diagnose(products, known, 5, fraction(4, 3)), 'multiplied')
+    assert.equal(diagnose(products, known, 5, fraction(1, 3)), 'upside-down')
+    assert.equal(diagnose(products, [false, false, false, true, true, true], 1, add(fraction(1, 2), fraction(2, 3))), 'added-not-multiplied')
 })
 

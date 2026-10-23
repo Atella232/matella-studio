@@ -145,3 +145,12 @@ J3 «Balanza / Balantza» (rounds: 06cef75, 28012a3, round 3 in the commit after
 - Tests: `tests/zatikiak-balance.test.ts` (solvable rounds, no rank wins half the time, never the heaviest, easier first rounds, stars).
 - Gotcha: MathText turns «le» between alphanumerics into \le, so `\displaystyle 1+…` breaks; use `\dfrac` (replaceAll on `\frac`) to get full-size fractions inline.
 
+J4 «Pirámide / Piramidea» (rounds: ba86291, 94dd582, round 3 in the commit after it):
+- Code: `games/pyramid.ts`, `PyramidGame.tsx`, `Pyramid.css`; id `pyramid`, slugs piramidea/piramide; progress ids 1401–1403; GameArt `pyramid`.
+- Three-row pyramid (bricks 0 top, 1–2 middle, 3–5 bottom; `PYRAMID_RELATIONS`). Three bricks shown, three to work out; `DOWNWARD_PATTERNS` are the 15 three-brick patterns that can be finished one brick at a time and leave something to find downwards (`solvable`, `nextSteps`).
+- Levels: (1) sums upwards, bottom row from one family; (2) sums with downward steps, first two pyramids within one family, then mixed denominators (lcm ≤ 24, numbers ≤ 30); (3) products, first two upwards, then downwards (dividing), every brick ≤ 20.
+- Input: on-screen pad (digits, /, space for mixed numbers, backspace) or a real keyboard anywhere (a window listener through a ref); `readBrick` refuses half-written fractions («7/», «/4») at no cost; equivalent answers count.
+- Points: 2 per brick, each mistake or hint −1 (`brickPoints`), max 30; stars 26/20/14.
+- Round 2 (after review): keyboard and focus fixed (bricks are `aria-disabled`, not disabled), fresh input after a wrong answer, two-step hint (light the two bricks, then the operation; division shown as multiplying by the inverse), visible wrong style, gentler starts. Round 3: `diagnose()` names typical slips (across, added instead of subtracted and the reverse, multiplied instead of divided, divided upside down, added in a product pyramid).
+- Tests: `tests/zatikiak-pyramid.test.ts`.
+

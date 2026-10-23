@@ -209,6 +209,37 @@ export function hintFor(known: boolean[], brick: number): PyramidStep | null {
     return nextSteps(known).find((step) => step.brick === brick) ?? null
 }
 
+/** Typical slips when working out a brick, recognised from the wrong answer */
+export type PyramidSlip = 'across' | 'added' | 'subtracted' | 'multiplied' | 'upside-down' | 'added-not-multiplied'
+
+/**
+ * Which typical slip a wrong answer for a brick comes from, if any: adding
+ * numerators and denominators, adding where taking away was needed (or the
+ * other way round), multiplying where dividing was needed, dividing the
+ * wrong way round, or adding in a product pyramid.
+ */
+export function diagnose(pyramid: Pyramid, known: boolean[], brick: number, answer: FractionValue): PyramidSlip | null {
+    const step = hintFor(known, brick)
+    if (!step) return null
+    const [a, b] = step.from.map((index) => pyramid.values[index])
+    const same = (value: FractionValue | null) => value !== null && value.numerator > 0 && equals(answer, value)
+    const across = (sign: 1 | -1) => (a.denominator + sign * b.denominator > 0 ? fraction(a.numerator + sign * b.numerator, a.denominator + sign * b.denominator) : null)
+    if (pyramid.op === 'sum') {
+        if (step.way === 'up') {
+            if (same(across(1))) return 'across'
+            if (same(subtract(a, b)) || same(subtract(b, a))) return 'subtracted'
+            return null
+        }
+        if (same(add(a, b))) return 'added'
+        if (same(across(-1))) return 'across'
+        return null
+    }
+    if (step.way === 'up') return same(add(a, b)) ? 'added-not-multiplied' : null
+    if (same(multiply(a, b))) return 'multiplied'
+    if (a.numerator !== 0 && same(divide(b, a))) return 'upside-down'
+    return null
+}
+
 const latex = (value: FractionValue) => (value.denominator === 1 ? String(value.numerator) : `\\frac{${value.numerator}}{${value.denominator}}`)
 const wrap = (value: FractionValue) => (value.denominator === 1 ? latex(value) : `\\left(${latex(value)}\\right)`)
 
