@@ -10,6 +10,7 @@
 
 .pyramid-rule {
     margin: 0;
+    text-wrap: balance;
     font-size: 17px;
     font-weight: 700;
     text-align: center;
@@ -55,9 +56,14 @@
 
 .pyramid-brick.open.selected {
     border-style: solid;
-    border-color: var(--stage);
-    background: var(--stage-soft);
-    box-shadow: 0 0 0 3px var(--stage);
+    border-color: var(--ink);
+    background: var(--blue-tint);
+    box-shadow: 0 0 0 3px var(--focus);
+}
+
+.pyramid .pyramid-brick:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
 }
 
 .pyramid-brick.done {
@@ -67,10 +73,19 @@
     animation: pyramid-set 0.35s ease;
 }
 
-.pyramid-brick.wrong {
-    animation: pyramid-shake 0.4s ease;
+.pyramid-brick.open.selected.wrong {
     border-color: var(--error);
-    box-shadow: 0 0 0 3px var(--error-tint);
+    background: var(--error-tint);
+    box-shadow: 0 0 0 3px var(--error);
+    color: var(--error-ink);
+    animation: pyramid-shake 0.4s ease;
+}
+
+/* The two bricks a hint points at */
+.pyramid-brick.source {
+    box-shadow: 0 0 0 4px var(--mustard);
+    transform: translateY(-2px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 @keyframes pyramid-set {
@@ -109,6 +124,11 @@
 .pyramid-typing {
     font-size: 22px;
     letter-spacing: 0.02em;
+    white-space: pre;
+}
+
+.pyramid-typing.long {
+    font-size: 17px;
 }
 
 /* ---------- Writing a brick: the pad ---------- */
@@ -121,10 +141,34 @@
 }
 
 .pyramid-feedback {
-    min-height: 26px;
-    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    /* Room for two lines, so the pad never jumps under the finger */
+    min-height: 52px;
     font-size: 16px;
     text-align: center;
+}
+
+.pyramid-feedback p {
+    margin: 0;
+}
+
+.pyramid-feedback .wrong,
+.pyramid-feedback .unreadable {
+    color: var(--error-ink);
+    font-weight: 700;
+}
+
+.pyramid-feedback .right {
+    color: var(--success-ink);
+    font-weight: 700;
+}
+
+.pyramid-hint {
+    color: var(--mustard-ink);
+    font-weight: 700;
 }
 
 .pyramid-entry-help {
@@ -133,8 +177,12 @@
 
 .pyramid-keypad {
     display: grid;
-    grid-template-columns: repeat(3, 64px);
+    grid-template-columns: repeat(4, 60px);
     gap: 8px;
+}
+
+.pyramid-keypad .zero {
+    grid-column: 2 / span 2;
 }
 
 .pyramid-keypad button {
@@ -182,7 +230,9 @@
 
 @media (prefers-reduced-motion: reduce) {
     .pyramid-brick.done,
-    .pyramid-brick.wrong {
+    .pyramid-brick.open.selected.wrong,
+    .pyramid-brick.source {
         animation: none;
+        transition: none;
     }
 }

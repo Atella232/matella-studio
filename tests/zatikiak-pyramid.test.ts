@@ -14,6 +14,8 @@ import {
     PYRAMID_RELATIONS,
     PYRAMID_ROUNDS,
     pyramidStars,
+    readBrick,
+    brickPoints,
     solvable,
     stepLatex,
     stepValue,
@@ -80,8 +82,9 @@ test('zatikiak pyramid: hints, points and stars', () => {
     const pyramid = { op: 'sum' as const, values: buildValues('sum', [fraction(1, 4), fraction(1, 4), fraction(5, 12)]), given: [true, true, false, false, true, false] }
     assert.equal(stepLatex(pyramid, { brick: 3, way: 'down', from: [1, 4] }), '\\frac{1}{2}-\\frac{1}{4}')
     const products = { op: 'product' as const, values: buildValues('product', [fraction(1, 2), fraction(2, 3), fraction(3)]), given: [true, false, false, false, false, false] }
-    assert.equal(stepLatex(products, { brick: 5, way: 'down', from: [2, 4] }), '2\\div \\left(\\frac{2}{3}\\right)')
+    assert.equal(stepLatex(products, { brick: 5, way: 'down', from: [2, 4] }), '2\\div \\left(\\frac{2}{3}\\right)=2\\cdot \\frac{3}{2}', 'dividing is multiplying by the inverse')
     assert.equal(PYRAMID_MAX_SCORE, 30)
+    assert.deepEqual([0, 1, 2, 3].map(brickPoints), [2, 1, 0, 0], 'each mistake or hint takes a point away')
     assert.deepEqual([30, 26, 25, 20, 19, 14, 13].map(pyramidStars), [3, 3, 2, 2, 1, 1, 0])
 })
 
@@ -93,3 +96,25 @@ test('zatikiak pyramid: listed with three levels and reachable by its address', 
     assert.equal(gameModeForPath('/matematika/dbh2/zatikiak/juegos/piramide'), 'pyramid')
     assert.equal(gameModeForPath('/matematika/dbh2/zatikiak/jokuak/piramidea'), 'pyramid')
 })
+
+test('zatikiak pyramid: what is written on a brick', () => {
+    assert.deepEqual(readBrick('3/4'), { numerator: 3, denominator: 4 })
+    assert.deepEqual(readBrick('1 1/2'), { numerator: 3, denominator: 2 }, 'a mixed number')
+    assert.deepEqual(readBrick('0,5'), { numerator: 1, denominator: 2 }, 'a decimal')
+    assert.deepEqual(readBrick('٣/٤'), { numerator: 3, denominator: 4 }, 'Arabic digits')
+    assert.deepEqual(readBrick('12'), { numerator: 12, denominator: 1 })
+    for (const half of ['7/', '/4', '3//4', '', ' ', '1 /2', '1/ 2']) assert.equal(readBrick(half), null, `«${half}» is not read`)
+})
+
+test('zatikiak pyramid: each level starts gently', () => {
+    for (let seed = 1; seed <= 120; seed += 1) {
+        const downward = createPyramids(createRandom(seed), 1)
+        for (const pyramid of downward.slice(0, 2)) {
+            assert.ok(pyramid.values.every((value) => value.numerator <= 20 && value.denominator <= 12), 'one family at first')
+        }
+        const products = createPyramids(createRandom(seed), 2)
+        assert.ok(products.slice(0, 2).every((pyramid) => pyramid.given.join() === 'false,false,false,true,true,true'), 'products upwards first')
+        assert.ok(products.every((pyramid) => pyramid.values.every((value) => value.numerator <= 20 && value.denominator <= 20)), 'tidy products')
+    }
+})
+

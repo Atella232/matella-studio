@@ -111,12 +111,12 @@ export const games: GameInfo[] = [
     {
         id: 'pyramid',
         title: { eu: 'Piramidea', es: 'Pirámide', ar: 'الهرم' },
-        tagline: { eu: 'Adreilu bakoitza azpiko bien batura da. Osatu piramidea gorantz eta beherantz.', es: 'Cada ladrillo es la suma de los dos de debajo. Completa la pirámide hacia arriba y hacia abajo.', ar: 'كل لبنة هي مجموع اللبنتين تحتها. أكمل الهرم صعودًا ونزولًا.' },
+        tagline: { eu: 'Adreilu bakoitza azpiko bi adreiluen batura (edo biderkadura) da. Osatu piramidea gorantz eta beherantz.', es: 'Cada ladrillo es la suma (o el producto) de los dos de debajo. Completa la pirámide hacia arriba y hacia abajo.', ar: 'كل لبنة هي مجموع اللبنتين اللتين تحتها (أو حاصل ضربهما). أكمل الهرم صعودًا ونزولًا.' },
         skills: { eu: 'Batuketak, kenketak eta biderketak', es: 'Sumas, restas y productos', ar: 'الجمع والطرح والضرب' },
         levels: [
             { progressId: 1401, stage: 'operations', title: { eu: 'Gorantz', es: 'Hacia arriba', ar: 'صعودًا' }, description: { eu: 'Beheko ilarako zatikiak familia berekoak dira: batu gorantz.', es: 'Las fracciones de abajo son de la misma familia: suma hacia arriba.', ar: 'كسور الصف السفلي من العائلة نفسها: اجمع صعودًا.' } },
-            { progressId: 1402, stage: 'operations', title: { eu: 'Beherantz', es: 'Hacia abajo', ar: 'نزولًا' }, description: { eu: 'Izendatzaile desberdinak; adreilu batzuk kenketaz aurkitzen dira.', es: 'Denominadores distintos; algunos ladrillos se encuentran restando.', ar: 'مقامات مختلفة؛ وبعض اللبنات تُوجد بالطرح.' } },
-            { progressId: 1403, stage: 'operations', title: { eu: 'Biderkaduren piramidea', es: 'Pirámide de productos', ar: 'هرم الضرب' }, description: { eu: 'Adreilu bakoitza biderkadura bat da; beherantz zatitu egiten da.', es: 'Cada ladrillo es un producto; hacia abajo se divide.', ar: 'كل لبنة حاصل ضرب؛ ونزولًا نقسم.' } }
+            { progressId: 1402, stage: 'operations', title: { eu: 'Beherantz', es: 'Hacia abajo', ar: 'نزولًا' }, description: { eu: 'Adreilu batzuk kenketaz aurkitzen dira; gero, izendatzaile desberdinekin.', es: 'Algunos ladrillos se encuentran restando; después, con denominadores distintos.', ar: 'بعض اللبنات تُحسب بالطرح؛ ثم بمقامات مختلفة.' } },
+            { progressId: 1403, stage: 'operations', title: { eu: 'Biderkaduren piramidea', es: 'Pirámide de productos', ar: 'هرم الضرب' }, description: { eu: 'Adreilu bakoitza biderkadura bat da; beherantz zatitu egiten da, alderantzizkoaz biderkatuz.', es: 'Cada ladrillo es un producto; hacia abajo se divide, multiplicando por la inversa.', ar: 'كل لبنة حاصل ضرب؛ ونزولًا نقسم بالضرب في المقلوب.' } }
         ]
     }
 ]

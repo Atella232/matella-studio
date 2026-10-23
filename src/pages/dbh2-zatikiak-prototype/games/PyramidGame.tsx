@@ -1,19 +1,20 @@
-import { useState, type KeyboardEvent } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { MathText } from '../../../components/MathText'
-import { equals, fraction, normalizeDigits, parseFractionInput, type FractionValue } from '../math/fraction'
+import { equals, fraction, normalizeDigits, type FractionValue } from '../math/fraction'
 import { GameTopbar, LevelPicker, ResultPanel } from './GameKit'
 import { useGameText } from './gameHooks'
 import type { GameProps } from './index'
 import { createRandom, randomSeed } from './random'
 import { games } from './records'
 import {
+    brickPoints,
     createPyramids,
     hintFor,
     PYRAMID_BRICKS,
     PYRAMID_MAX_SCORE,
-    PYRAMID_POINTS,
     PYRAMID_ROUNDS,
     pyramidStars,
+    readBrick,
     stepLatex,
     type Pyramid,
     type PyramidLevel
@@ -24,10 +25,23 @@ const game = games.find((item) => item.id === 'pyramid')!
 
 /** Rows of a three-row pyramid, top first */
 const ROWS = [[0], [1, 2], [3, 4, 5]]
-const KEYS = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '/', '0', '⌫']
+/** The pad: digits, the fraction bar, a space for mixed numbers (1 1/2) and backspace */
+const KEYS = ['7', '8', '9', '⌫', '4', '5', '6', '/', '1', '2', '3', ' ', '0']
+const MAX_INPUT = 7
+const STARS = { three: 26, two: 20, one: 14 }
 
-/** In Arabic, a piece of arithmetic keeps its left-to-right order (LRI … PDI) */
+/** In Arabic, numbers and arithmetic keep their left-to-right order (LRI … PDI) */
 const ltr = (text: string) => `⁦${text}⁩`
+const plain = (value: FractionValue) => (value.denominator === 1 ? String(value.numerator) : `${value.numerator}/${value.denominator}`)
+
+const positions = [
+    { eu: 'Goiko adreilua', es: 'Ladrillo de arriba', ar: 'اللبنة العليا' },
+    { eu: 'Erdiko adreilua, ezkerrean', es: 'Ladrillo de en medio, a la izquierda', ar: 'اللبنة الوسطى اليسرى' },
+    { eu: 'Erdiko adreilua, eskuinean', es: 'Ladrillo de en medio, a la derecha', ar: 'اللبنة الوسطى اليمنى' },
+    { eu: 'Beheko adreilua, ezkerrean', es: 'Ladrillo de abajo, a la izquierda', ar: 'اللبنة السفلى اليسرى' },
+    { eu: 'Beheko adreilua, erdian', es: 'Ladrillo de abajo, en el centro', ar: 'اللبنة السفلى الوسطى' },
+    { eu: 'Beheko adreilua, eskuinean', es: 'Ladrillo de abajo, a la derecha', ar: 'اللبنة السفلى اليمنى' }
+]
 
 /** A fraction written stacked, as on the bricks */
 function Stacked({ value }: { value: FractionValue }) {
@@ -36,7 +50,7 @@ function Stacked({ value }: { value: FractionValue }) {
     return <span className="pyramid-frac"><span>{reduced.numerator}</span><span>{reduced.denominator}</span></span>
 }
 
-type Feedback = { brick: number; kind: 'wrong' | 'unreadable' | 'later' | 'hint' } | null
+type Feedback = { brick: number; kind: 'wrong' | 'unreadable' | 'later' } | { brick: number; kind: 'right'; points: number } | null
 
 export function PyramidGame({ language, records, onResult, onExit }: GameProps) {
     const l = useGameText(language)
@@ -46,17 +60,21 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
     const [index, setIndex] = useState(0)
     /** Bricks the learner has got right */
     const [filled, setFilled] = useState<boolean[]>([])
-    /** Bricks that cost a mistake or a hint: they score less */
-    const [helped, setHelped] = useState<boolean[]>([])
+    /** Mistakes and hints on each brick: each one takes a point away */
+    const [slips, setSlips] = useState<number[]>([])
+    /** How far the hint has gone on each brick: 0 none, 1 the bricks to use, 2 the operation */
+    const [hints, setHints] = useState<number[]>([])
     const [selected, setSelected] = useState<number | null>(null)
     const [input, setInput] = useState('')
     const [feedback, setFeedback] = useState<Feedback>(null)
     const [score, setScore] = useState(0)
     const [perfect, setPerfect] = useState(0)
+    const brickRefs = useRef<Array<HTMLButtonElement | null>>([])
 
     const pyramid = pyramids[index]
     const known = pyramid ? pyramid.given.map((given, brick) => given || filled[brick]) : []
     const complete = known.length > 0 && known.every(Boolean)
+    const step = pyramid && selected !== null ? hintFor(known, selected) : null
 
     const firstOpen = (target: Pyramid, done: boolean[]) => {
         const open = target.given.map((given, brick) => !given && !done[brick])
@@ -66,10 +84,11 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
     }
 
     const startPyramid = (target: Pyramid) => {
-        const none = Array.from({ length: PYRAMID_BRICKS }, () => false)
-        setFilled(none)
-        setHelped(none)
-        setSelected(firstOpen(target, none))
+        const zeros = Array.from({ length: PYRAMID_BRICKS }, () => 0)
+        setFilled(zeros.map(() => false))
+        setSlips(zeros)
+        setHints(zeros)
+        setSelected(firstOpen(target, zeros.map(() => false)))
         setInput('')
         setFeedback(null)
     }
@@ -86,51 +105,56 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
     }
 
     const choose = (brick: number) => {
-        if (!pyramid || pyramid.given[brick] || filled[brick]) return
+        if (!pyramid || pyramid.given[brick] || filled[brick] || brick === selected) return
         setSelected(brick)
         setInput('')
         setFeedback(null)
     }
 
     const press = (key: string) => {
-        if (selected === null) return
-        setFeedback(null)
+        if (selected === null || complete) return
+        // After a wrong answer, a new digit starts a new answer; backspace still edits the old one
+        const fresh = feedback?.kind === 'wrong' && key !== '⌫'
+        if (feedback?.kind !== 'right') setFeedback(null)
         if (key === '⌫') setInput((text) => text.slice(0, -1))
-        else setInput((text) => (text.length >= 7 ? text : text + key))
+        else setInput((current) => {
+            const text = fresh ? '' : current
+            return text.length >= MAX_INPUT || (key === ' ' && (text === '' || text.endsWith(' '))) ? text : text + key
+        })
     }
 
     const check = () => {
-        if (selected === null || !pyramid) return
-        const value = parseFractionInput(input)
+        if (selected === null || !pyramid || complete) return
+        const value = readBrick(input)
         if (!value) {
             setFeedback({ brick: selected, kind: 'unreadable' })
             return
         }
         if (!equals(value, pyramid.values[selected])) {
-            setHelped((current) => current.map((item, brick) => item || brick === selected))
+            setSlips((current) => current.map((count, brick) => (brick === selected ? count + 1 : count)))
             setFeedback({ brick: selected, kind: 'wrong' })
             return
         }
-        const points = helped[selected] ? PYRAMID_POINTS.later : PYRAMID_POINTS.first
+        const points = brickPoints(slips[selected])
         const done = filled.map((item, brick) => item || brick === selected)
         setScore((total) => total + points)
         setFilled(done)
         setInput('')
-        setFeedback(null)
+        setFeedback({ brick: selected, kind: 'right', points })
         const open = firstOpen(pyramid, done)
         setSelected(open >= 0 ? open : null)
-        if (open < 0 && !helped.some(Boolean)) setPerfect((count) => count + 1)
+        if (open < 0 && slips.every((count) => count === 0)) setPerfect((count) => count + 1)
     }
 
     const hint = () => {
         if (selected === null || !pyramid) return
-        const step = hintFor(known, selected)
         if (!step) {
             setFeedback({ brick: selected, kind: 'later' })
             return
         }
-        setHelped((current) => current.map((item, brick) => item || brick === selected))
-        setFeedback({ brick: selected, kind: 'hint' })
+        // The first hint on a brick costs a point; the second only adds the operation
+        if (hints[selected] === 0) setSlips((current) => current.map((count, brick) => (brick === selected ? count + 1 : count)))
+        setHints((current) => current.map((tier, brick) => (brick === selected ? Math.min(2, tier + 1) : tier)))
     }
 
     const next = () => {
@@ -143,16 +167,42 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
         startPyramid(pyramids[index + 1])
     }
 
-    /** Typing on a real keyboard works too */
-    const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-        if (complete || selected === null) return
-        const key = normalizeDigits(event.key)
-        if (/^[0-9]$/.test(key) || key === '/') press(key)
-        else if (event.key === 'Backspace') press('⌫')
-        else if (event.key === 'Enter') check()
-        else return
-        event.preventDefault()
-    }
+    // The keyboard follows the chosen brick
+    useEffect(() => {
+        if (phase === 'playing' && selected !== null) brickRefs.current[selected]?.focus({ preventScroll: true })
+    }, [phase, selected, index])
+
+    // A real keyboard works anywhere in the game, not only on the pad
+    const keyboard = useRef<(event: KeyboardEvent) => void>(() => {})
+    useEffect(() => {
+        keyboard.current = (event: KeyboardEvent) => {
+            if (phase !== 'playing' || complete || selected === null || event.ctrlKey || event.metaKey || event.altKey) return
+            const target = event.target as HTMLElement | null
+            const onButton = target?.tagName === 'BUTTON'
+            const onChosen = target === brickRefs.current[selected]
+            const key = normalizeDigits(event.key)
+            if (/^[0-9]$/.test(key) || key === '/') press(key)
+            else if (key === ',' || key === '.') press(',')
+            else if (key === ' ' && (!onButton || onChosen)) press(' ')
+            else if (event.key === 'Backspace') press('⌫')
+            // Enter on another button clicks it; on the chosen brick (or nowhere) it checks
+            else if (event.key === 'Enter' && (!onButton || onChosen)) check()
+            else return
+            event.preventDefault()
+        }
+    })
+    useEffect(() => {
+        const listener = (event: KeyboardEvent) => keyboard.current(event)
+        window.addEventListener('keydown', listener)
+        return () => window.removeEventListener('keydown', listener)
+    }, [])
+
+    const outOf = (value: number, total: number) => (language === 'ar' ? ltr(`${value} / ${total}`) : `${value} / ${total}`)
+    const starsText = l({
+        eu: `3 izar: ${STARS.three} puntu · 2: ${STARS.two} · 1: ${STARS.one}.`,
+        es: `3 estrellas: ${STARS.three} puntos · 2: ${STARS.two} · 1: ${STARS.one}.`,
+        ar: `3 نجوم: ${STARS.three} نقطة · 2: ${STARS.two} · 1: ${STARS.one}.`
+    })
 
     if (phase === 'pick') {
         return (
@@ -162,12 +212,12 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${record.score} / ${PYRAMID_MAX_SCORE}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'أفضل نتيجة' })}: ${outOf(record.score, PYRAMID_MAX_SCORE)}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: `${PYRAMID_ROUNDS} piramide maila bakoitzean. Sakatu adreilu huts bat eta idatzi haren zatikia.`, es: `${PYRAMID_ROUNDS} pirámides por nivel. Toca un ladrillo vacío y escribe su fracción.`, ar: `${PYRAMID_ROUNDS} أهرامات في كل مستوى. اضغط لبنة فارغة واكتب كسرها.` })}</li>
-                        <li>{l({ eu: 'Lehen saiakeran asmatutako adreilu bakoitzak 2 puntu ematen ditu; akats edo pista baten ondoren, puntu 1.', es: 'Cada ladrillo acertado a la primera vale 2 puntos; después de un error o de una pista, 1.', ar: 'كل لبنة صحيحة من المحاولة الأولى بنقطتين؛ وبعد خطأ أو تلميح بنقطة واحدة.' })}</li>
-                        <li>{l({ eu: '3 izar: 26 puntu · 2: 20 · 1: 14.', es: '3 estrellas: 26 puntos · 2: 20 · 1: 14.', ar: '3 نجوم: 26 نقطة · 2: 20 · 1: 14.' })}</li>
+                        <li>{l({ eu: `${PYRAMID_ROUNDS} piramide maila bakoitzean. Sakatu adreilu huts bat eta idatzi haren zatikia; zenbaki mistoak ere bai (1 1/2).`, es: `${PYRAMID_ROUNDS} pirámides por nivel. Toca un ladrillo vacío y escribe su fracción; también vale un número mixto (1 1/2).`, ar: `${PYRAMID_ROUNDS} أهرامات في كل مستوى. اضغط على لبنة فارغة واكتب كسرها؛ ويُقبل العدد الكسري أيضًا (${ltr('1 1/2')}).` })}</li>
+                        <li>{l({ eu: 'Lehen saiakeran asmatutako adreilu bakoitzak 2 puntu ematen ditu. Akats edo pista bakoitzak puntu bat kentzen du.', es: 'Cada ladrillo acertado a la primera vale 2 puntos. Cada error o pista resta uno.', ar: 'كل لبنة صحيحة من المحاولة الأولى بنقطتين. وكل خطأ أو تلميح يُنقص نقطة.' })}</li>
+                        <li>{starsText}</li>
                     </ul>
                 )}
             />
@@ -181,11 +231,11 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
                 <ResultPanel
                     language={language}
                     stars={pyramidStars(score)}
-                    title={`${score} / ${PYRAMID_MAX_SCORE}`}
-                    subtitle={l({ eu: '3 izar: 26 · 2 izar: 20 · izar 1: 14', es: '3 estrellas: 26 · 2: 20 · 1: 14', ar: '3 نجوم: 26 · 2: 20 · 1: 14' })}
+                    title={outOf(score, PYRAMID_MAX_SCORE)}
+                    subtitle={starsText}
                     stats={[
-                        { label: l({ eu: 'Puntuak', es: 'Puntos', ar: 'النقاط' }), value: `${score} / ${PYRAMID_MAX_SCORE}` },
-                        { label: l({ eu: 'Akatsik gabe', es: 'Sin fallos', ar: 'دون أخطاء' }), value: `${perfect} / ${PYRAMID_ROUNDS}` }
+                        { label: l({ eu: 'Puntuak', es: 'Puntos', ar: 'النقاط' }), value: outOf(score, PYRAMID_MAX_SCORE) },
+                        { label: l({ eu: 'Akatsik gabe', es: 'Sin fallos', ar: 'دون أخطاء' }), value: outOf(perfect, PYRAMID_ROUNDS) }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}
@@ -198,29 +248,36 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
     // Only while a level is being set up
     if (!pyramid) return <></>
 
-    const step = selected !== null ? hintFor(known, selected) : null
     const rule = pyramid.op === 'sum'
-        ? { eu: 'Adreilu bakoitza azpian dituen bien batura da.', es: 'Cada ladrillo es la suma de los dos que tiene debajo.', ar: 'كل لبنة هي مجموع اللبنتين اللتين تحتها.' }
-        : { eu: 'Adreilu bakoitza azpian dituen bien biderkadura da.', es: 'Cada ladrillo es el producto de los dos que tiene debajo.', ar: 'كل لبنة هي حاصل ضرب اللبنتين اللتين تحتها.' }
+        ? { eu: 'Adreilu bakoitza azpiko bi adreiluen batura da.', es: 'Cada ladrillo es la suma de los dos que tiene debajo.', ar: 'كل لبنة هي مجموع اللبنتين اللتين تحتها.' }
+        : { eu: 'Adreilu bakoitza azpiko bi adreiluen biderkadura da.', es: 'Cada ladrillo es el producto de los dos que tiene debajo.', ar: 'كل لبنة هي حاصل ضرب اللبنتين اللتين تحتها.' }
+    const tier = selected !== null ? hints[selected] : 0
+    const lit: number[] = tier > 0 && step ? step.from : []
 
-    const feedbackText = (() => {
+    const message = (() => {
         if (!feedback) return null
-        if (feedback.kind === 'unreadable') return l({ eu: 'Idatzi zatiki bat, adibidez 3/4.', es: 'Escribe una fracción, como 3/4.', ar: `اكتب كسرًا مثل ${ltr('3/4')}.` })
+        if (feedback.kind === 'right') {
+            return l({
+                eu: `Ondo! +${feedback.points} puntu`,
+                es: `¡Bien! +${feedback.points} ${feedback.points === 1 ? 'punto' : 'puntos'}`,
+                ar: feedback.points === 0 ? 'صحيح!' : feedback.points === 1 ? 'صحيح! +نقطة واحدة' : 'صحيح! +نقطتان'
+            })
+        }
+        if (feedback.kind === 'unreadable') return l({ eu: 'Idatzi zatiki oso bat, adibidez 3/4 edo 1 1/2.', es: 'Escribe una fracción completa, como 3/4 o 1 1/2.', ar: `اكتب كسرًا كاملًا مثل ${ltr('3/4')} أو ${ltr('1 1/2')}.` })
         if (feedback.kind === 'wrong') return l({ eu: 'Ez da hori. Saiatu berriro edo eskatu pista bat.', es: 'No es eso. Prueba otra vez o pide una pista.', ar: 'ليس هذا. حاول مرة أخرى أو اطلب تلميحًا.' })
-        if (feedback.kind === 'later') return l({ eu: 'Adreilu hau ezin da oraindik kalkulatu: hasi beste batekin.', es: 'Este ladrillo todavía no se puede calcular: empieza por otro.', ar: 'لا يمكن حساب هذه اللبنة بعد: ابدأ بلبنة أخرى.' })
-        return null
+        return l({ eu: 'Adreilu hau ezin da oraindik kalkulatu: hasi beste batekin.', es: 'Este ladrillo todavía no se puede calcular: empieza por otro.', ar: 'لا يمكن حساب هذه اللبنة بعد: ابدأ بلبنة أخرى.' })
     })()
 
     return (
         <div className="pyramid-game" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
-                <span>{index + 1} / {PYRAMID_ROUNDS}</span>
-                <span><strong>{score}</strong> {l({ eu: 'puntu', es: score === 1 ? 'punto' : 'puntos', ar: 'نقاط' })}</span>
+                <span><bdi dir="ltr">{index + 1} / {PYRAMID_ROUNDS}</bdi></span>
+                <span>{l({ eu: 'Puntuak', es: 'Puntos', ar: 'النقاط' })}: <strong><bdi dir="ltr">{score}</bdi></strong></span>
             </GameTopbar>
 
             <p className="pyramid-rule">{l(rule)}</p>
 
-            <div className="pyramid" dir="ltr" onKeyDown={onKeyDown}>
+            <div className="pyramid" dir="ltr" role="group" aria-label={l({ eu: 'Piramidea', es: 'Pirámide', ar: 'الهرم' })}>
                 {ROWS.map((row, rowIndex) => (
                     <div className="pyramid-row" key={rowIndex}>
                         {row.map((brick) => {
@@ -228,24 +285,28 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
                             const shown = pyramid.given[brick]
                             const done = filled[brick]
                             const isSelected = selected === brick && !done
-                            const wrong = feedback?.brick === brick && feedback.kind === 'wrong'
+                            const wrong = isSelected && feedback?.brick === brick && feedback.kind === 'wrong'
+                            const source = lit.includes(brick) ? 'source' : ''
+                            const where = l(positions[brick])
                             if (shown) {
-                                return <span key={brick} className="pyramid-brick given" role="img" aria-label={`${value.numerator}/${value.denominator}`}><Stacked value={value} /></span>
+                                return <span key={brick} className={`pyramid-brick given ${source}`} role="img" aria-label={`${where}: ${plain(value)}`}><Stacked value={value} /></span>
                             }
+                            const typed = isSelected && input
                             return (
                                 <button
                                     type="button"
                                     key={brick}
-                                    className={`pyramid-brick ${done ? 'done' : 'open'} ${isSelected ? 'selected' : ''} ${wrong ? 'wrong' : ''}`}
+                                    ref={(node) => { brickRefs.current[brick] = node }}
+                                    className={`pyramid-brick ${done ? 'done' : 'open'} ${isSelected ? 'selected' : ''} ${wrong ? 'wrong' : ''} ${source}`}
                                     aria-pressed={isSelected}
-                                    aria-label={done ? `${value.numerator}/${value.denominator}` : l({ eu: 'Adreilu hutsa', es: 'Ladrillo vacío', ar: 'لبنة فارغة' })}
-                                    disabled={done}
+                                    aria-disabled={done}
+                                    aria-label={`${where}: ${done ? plain(value) : typed ? input : l({ eu: 'hutsik', es: 'vacío', ar: 'فارغة' })}`}
                                     onClick={() => choose(brick)}
                                 >
                                     {done
                                         ? <Stacked value={value} />
-                                        : isSelected && input
-                                            ? <span className="pyramid-typing">{input}</span>
+                                        : typed
+                                            ? <span className={`pyramid-typing ${input.length > 5 ? 'long' : ''}`}>{input}</span>
                                             : <span className="pyramid-unknown">?</span>}
                                 </button>
                             )
@@ -256,26 +317,35 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
 
             {!complete && selected !== null && (
                 <div className="pyramid-entry">
-                    <p className="pyramid-feedback" aria-live="polite">
-                        {feedback?.kind === 'hint' && step
-                            ? <>{l({ eu: 'Pista:', es: 'Pista:', ar: 'تلميح:' })} <bdi dir="ltr"><MathText inline text={`$${stepLatex(pyramid, step)}$`} /></bdi></>
-                            : feedbackText ?? <span className="pyramid-entry-help">{l({ eu: 'Idatzi hautatutako adreiluaren zatikia.', es: 'Escribe la fracción del ladrillo marcado.', ar: 'اكتب كسر اللبنة المحدّدة.' })}</span>}
-                    </p>
+                    <div className="pyramid-feedback" aria-live="polite">
+                        {message && <p className={feedback?.kind ?? ''}>{message}</p>}
+                        {tier === 1 && step && <p className="pyramid-hint">{l({ eu: 'Pista: begiratu markatutako bi adreiluei.', es: 'Pista: fíjate en los dos ladrillos marcados.', ar: 'تلميح: انظر إلى اللبنتين المحدّدتين.' })}</p>}
+                        {tier === 2 && step && <p className="pyramid-hint">{l({ eu: 'Pista:', es: 'Pista:', ar: 'تلميح:' })} <bdi dir="ltr"><MathText inline text={`$${stepLatex(pyramid, step).replaceAll('\\frac', '\\dfrac')}$`} /></bdi></p>}
+                        {!message && tier === 0 && <p className="pyramid-entry-help">{l({ eu: 'Idatzi hautatutako adreiluaren zatikia.', es: 'Escribe la fracción del ladrillo seleccionado.', ar: 'اكتب كسر اللبنة المحدّدة.' })}</p>}
+                    </div>
                     <div className="pyramid-keypad" dir="ltr" role="group" aria-label={l({ eu: 'Teklatua', es: 'Teclado', ar: 'لوحة المفاتيح' })}>
                         {KEYS.map((key) => (
-                            <button type="button" key={key} onClick={() => press(key)} aria-label={key === '⌫' ? l({ eu: 'Ezabatu', es: 'Borrar', ar: 'احذف' }) : key}>{key}</button>
+                            <button
+                                type="button"
+                                key={key}
+                                className={key === '0' ? 'zero' : key === ' ' ? 'space' : ''}
+                                onClick={() => press(key)}
+                                aria-label={key === '⌫' ? l({ eu: 'Ezabatu', es: 'Borrar', ar: 'احذف' }) : key === ' ' ? l({ eu: 'Zuriunea (zenbaki mistoak)', es: 'Espacio (números mixtos)', ar: 'مسافة (للعدد الكسري)' }) : key}
+                            >
+                                {key === ' ' ? '␣' : key}
+                            </button>
                         ))}
                     </div>
                     <div className="pyramid-entry-actions">
-                        <button type="button" className="fraction-v2-secondary" onClick={hint}>{l({ eu: 'Pista', es: 'Pista', ar: 'تلميح' })}</button>
-                        <button type="button" className="fraction-v2-primary" disabled={!input} onClick={check}>{l({ eu: 'Egiaztatu', es: 'Comprobar', ar: 'تحقّق' })}</button>
+                        <button type="button" className="fraction-v2-secondary" disabled={tier >= 2} onClick={hint}>{tier === 1 ? l({ eu: 'Pista gehiago', es: 'Más pista', ar: 'تلميح آخر' }) : l({ eu: 'Pista', es: 'Pista', ar: 'تلميح' })}</button>
+                        <button type="button" className="fraction-v2-primary" disabled={!input.trim()} onClick={check}>{l({ eu: 'Egiaztatu', es: 'Comprobar', ar: 'تحقّق' })}</button>
                     </div>
                 </div>
             )}
 
             {complete && (
                 <div className="pyramid-done" role="status">
-                    <p><strong>{l({ eu: 'Piramidea osatuta!', es: '¡Pirámide completa!', ar: 'اكتمل الهرم!' })}</strong></p>
+                    <p><strong>{l({ eu: 'Piramidea osatu duzu!', es: '¡Pirámide completa!', ar: 'اكتمل الهرم!' })}</strong> {message}</p>
                     <button type="button" className="fraction-v2-primary" onClick={next} ref={(node) => node?.focus({ preventScroll: true })}>
                         {index + 1 >= PYRAMID_ROUNDS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', ar: 'التالي' })}
                     </button>

@@ -1,4 +1,4 @@
-import { add, compare, divide, equals, fraction, gcd, multiply, subtract, type FractionValue } from '../math/fraction.ts'
+import { add, compare, divide, equals, fraction, gcd, multiply, normalizeDigits, parseFractionInput, reciprocal, subtract, type FractionValue } from '../math/fraction.ts'
 import { pick, randomInt, shuffle, type Random } from './random.ts'
 import type { Stars } from './records.ts'
 
@@ -12,8 +12,11 @@ import type { Stars } from './records.ts'
 export const PYRAMID_ROUNDS = 5
 /** Bricks of a three-row pyramid: 0 on top, 1–2 in the middle, 3–5 at the bottom */
 export const PYRAMID_BRICKS = 6
-/** Points for a brick right at the first try, and after a mistake or a hint */
-export const PYRAMID_POINTS = { first: 2, later: 1 } as const
+/** Points for a brick right at the first try; each mistake or hint on it takes one away */
+export const PYRAMID_POINTS = { first: 2 } as const
+
+/** What a brick is worth after `slips` mistakes and hints: 2, 1, then nothing */
+export const brickPoints = (slips: number) => Math.max(0, PYRAMID_POINTS.first - slips)
 
 export type PyramidLevel = 0 | 1 | 2
 export type PyramidOp = 'sum' | 'product'
@@ -113,7 +116,7 @@ function properFraction(random: Random, denominators: number[]): FractionValue {
     }
 }
 
-/** Level 1: the bottom row from one family of denominators; work upwards */
+/** Level 1: the bottom row from one family of denominators (all of them divide the largest); work upwards */
 function upwards(random: Random): Pyramid {
     for (;;) {
         const family = pick(random, FAMILIES)
@@ -124,41 +127,49 @@ function upwards(random: Random): Pyramid {
     }
 }
 
-/** Level 2: mixed denominators and three bricks shown anywhere; some bricks have to be found by taking away */
-function downwards(random: Random): Pyramid {
+/** Every brick a tidy fraction: small numerator and denominator */
+const tidy = (values: FractionValue[], limit: number) => values.every((value) => value.numerator <= limit && value.denominator <= limit)
+
+/**
+ * Level 2: three bricks shown anywhere; some bricks have to be found by
+ * taking away. The first pyramids keep to one family; later ones mix
+ * denominators up to a common denominator of 24.
+ */
+function downwards(random: Random, step: number): Pyramid {
+    const easy = step < 2
     for (;;) {
-        const bottom: [FractionValue, FractionValue, FractionValue] = [properFraction(random, MIXED), properFraction(random, MIXED), properFraction(random, MIXED)]
+        const denominators = easy ? pick(random, FAMILIES) : MIXED
+        const bottom: [FractionValue, FractionValue, FractionValue] = [properFraction(random, denominators), properFraction(random, denominators), properFraction(random, denominators)]
         const values = buildValues('sum', bottom)
-        if (commonDenominator(values) > 24 || compare(values[0], fraction(4)) > 0) continue
+        if (commonDenominator(values) > (easy ? 12 : 24) || !tidy(values, easy ? 20 : 30) || compare(values[0], fraction(4)) > 0) continue
         return { op: 'sum', values, given: pick(random, DOWNWARD_PATTERNS) }
     }
 }
 
 /** Fractions that multiply into small numbers */
-const FACTORS = [fraction(1, 2), fraction(2, 3), fraction(3, 4), fraction(3, 2), fraction(4, 3), fraction(2, 5), fraction(5, 2), fraction(5, 6), fraction(6, 5), fraction(2), fraction(3), fraction(1, 3), fraction(3, 5), fraction(4, 5)]
+const FACTORS = [fraction(1, 2), fraction(2, 3), fraction(3, 4), fraction(3, 2), fraction(4, 3), fraction(2, 5), fraction(5, 2), fraction(2), fraction(3), fraction(1, 3), fraction(4, 5), fraction(5, 4)]
 
-/** Level 3: a product pyramid; downwards means dividing */
-function products(random: Random): Pyramid {
+/** Level 3: a product pyramid; the first ones upwards only, then downwards too, which means dividing */
+function products(random: Random, step: number): Pyramid {
     for (;;) {
         const bottom = shuffle(random, FACTORS).slice(0, 3) as [FractionValue, FractionValue, FractionValue]
         const values = buildValues('product', bottom)
-        const top = values[0]
-        if (top.numerator > 60 || top.denominator > 60 || equals(top, fraction(1))) continue
-        return { op: 'product', values, given: random() < 0.3 ? BOTTOM_ONLY : pick(random, DOWNWARD_PATTERNS) }
+        if (!tidy(values, 20) || equals(values[0], fraction(1))) continue
+        return { op: 'product', values, given: step < 2 ? BOTTOM_ONLY : pick(random, DOWNWARD_PATTERNS) }
     }
 }
 
-const builders = [upwards, downwards, products]
+const builders: Array<(random: Random, step: number) => Pyramid> = [upwards, downwards, products]
 
-export function createPyramid(random: Random, level: PyramidLevel): Pyramid {
-    return builders[level](random)
+export function createPyramid(random: Random, level: PyramidLevel, step = 0): Pyramid {
+    return builders[level](random, step)
 }
 
 export function createPyramids(random: Random, level: PyramidLevel): Pyramid[] {
     const pyramids: Pyramid[] = []
     const seen = new Set<string>()
     while (pyramids.length < PYRAMID_ROUNDS) {
-        const pyramid = createPyramid(random, level)
+        const pyramid = createPyramid(random, level, pyramids.length)
         const id = pyramid.values.map((value) => `${value.numerator}/${value.denominator}`).join(' ')
         if (seen.has(id)) continue
         seen.add(id)
@@ -168,6 +179,17 @@ export function createPyramids(random: Random, level: PyramidLevel): Pyramid[] {
 }
 
 /* ---------- Playing ---------- */
+
+/**
+ * What the learner wrote on a brick: a fraction, a mixed number (1 1/2) or a
+ * decimal. Half-written fractions ("7/", "/4", "3//4") are not read, so they
+ * cost nothing.
+ */
+export function readBrick(input: string): FractionValue | null {
+    const text = normalizeDigits(input).trim()
+    if (text === '' || /^\/|\/$|\/.*\//.test(text) || /\/\s|\s\//.test(text)) return null
+    return parseFractionInput(text)
+}
 
 export const PYRAMID_MAX_SCORE = PYRAMID_ROUNDS * (PYRAMID_BRICKS - 3) * PYRAMID_POINTS.first
 
@@ -194,5 +216,7 @@ const wrap = (value: FractionValue) => (value.denominator === 1 ? latex(value) :
 export function stepLatex(pyramid: Pyramid, step: PyramidStep): string {
     const [a, b] = step.from.map((index) => pyramid.values[index])
     if (pyramid.op === 'sum') return step.way === 'up' ? `${latex(a)}+${latex(b)}` : `${latex(a)}-${latex(b)}`
-    return step.way === 'up' ? `${latex(a)}\\cdot ${latex(b)}` : `${latex(a)}\\div ${wrap(b)}`
+    if (step.way === 'up') return `${latex(a)}\\cdot ${latex(b)}`
+    // Dividing by a fraction is multiplying by its inverse
+    return `${latex(a)}\\div ${wrap(b)}=${latex(a)}\\cdot ${latex(reciprocal(b))}`
 }
