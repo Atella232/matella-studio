@@ -28,7 +28,7 @@ const game = games.find((item) => item.id === 'balance')!
 const latex = (value: FractionValue) => (value.denominator === 1 ? String(value.numerator) : `\\frac{${value.numerator}}{${value.denominator}}`)
 const plain = (value: FractionValue) => (value.denominator === 1 ? String(value.numerator) : `${value.numerator}/${value.denominator}`)
 /** In Arabic, numbers and arithmetic keep their left-to-right order (LRI … PDI) */
-const ltr = (text: string) => `⁦${text}⁩`
+const ltr = (text: string) => `\u2066${text}\u2069`
 
 /** A fraction written stacked, as on the weights */
 function Stacked({ value }: { value: FractionValue }) {

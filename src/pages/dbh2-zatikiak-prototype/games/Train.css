@@ -288,6 +288,46 @@
     transform: translateX(-50%);
 }
 
+/* The halves, shown by the hint: the reference points to estimate with */
+.train-line-half {
+    position: absolute;
+    top: 26px;
+    width: 0;
+    height: 10px;
+    border-left: 2px dashed var(--focus);
+}
+
+.train-line-half > span {
+    position: absolute;
+    top: 11px;
+    left: 0;
+    color: var(--focus);
+    font-size: 11px;
+    font-weight: 700;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+.train-hint {
+    margin: 0;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: var(--blue-tint);
+    font-size: 15px;
+}
+
+.train .train-hint-button,
+.train-game .train-hint-button {
+    align-self: center;
+    padding: 4px 10px;
+    border: 0;
+    background: none;
+    color: var(--focus);
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
 @keyframes train-dot {
     from { transform: scale(0); }
     to { transform: none; }

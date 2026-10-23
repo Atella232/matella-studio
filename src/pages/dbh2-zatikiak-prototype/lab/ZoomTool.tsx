@@ -39,7 +39,7 @@ const MAX_DRAWN_MARKS = 120
 const latex = (value: FractionValue) => (value.denominator === 1 ? String(value.numerator) : `\\frac{${value.numerator}}{${value.denominator}}`)
 const plain = (value: FractionValue) => (value.denominator === 1 ? String(value.numerator) : `${value.numerator}/${value.denominator}`)
 /** In Arabic, a piece of arithmetic keeps its left-to-right order (LRI … PDI) */
-const ltr = (text: string) => `⁦${text}⁩`
+const ltr = (text: string) => `\u2066${text}\u2069`
 const times = (factor: number) => `×${factor >= 10 ? Math.round(factor) : Math.round(factor * 10) / 10}`
 
 /** Width of an element, kept up to date, so the labels are only drawn where they fit */

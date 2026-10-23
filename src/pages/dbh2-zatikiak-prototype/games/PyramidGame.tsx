@@ -33,7 +33,7 @@ const MAX_INPUT = 7
 const STARS = { three: 26, two: 20, one: 14 }
 
 /** In Arabic, numbers and arithmetic keep their left-to-right order (LRI … PDI) */
-const ltr = (text: string) => `⁦${text}⁩`
+const ltr = (text: string) => `\u2066${text}\u2069`
 const plain = (value: FractionValue) => (value.denominator === 1 ? String(value.numerator) : `${value.numerator}/${value.denominator}`)
 
 const positions = [

@@ -33,7 +33,7 @@ const game = games.find((item) => item.id === 'train')!
 const LINE_RANGES: Array<[number, number]> = [[0, 2], [0, 3], [-2, 2]]
 
 /** In Arabic, numbers and arithmetic keep their left-to-right order (LRI … PDI) */
-const ltr = (text: string) => `⁦${text}⁩`
+const ltr = (text: string) => `\u2066${text}\u2069`
 
 type Outcome = { kind: 'right' } | { kind: 'wrong'; neighbour: TrainCard; cardIsLarger: boolean; card: TrainCard; between: [TrainCard | null, TrainCard | null] } | null
 
@@ -61,6 +61,8 @@ export function TrainGame({ language, records, onResult, onExit }: GameProps) {
     const [score, setScore] = useState(0)
     /** The wagon that has just been hooked, to animate it and mark it on the line */
     const [lastHooked, setLastHooked] = useState<TrainCard | null>(null)
+    /** The wagon for which the learner asked to see the halves on the line */
+    const [hintFor, setHintFor] = useState<string | null>(null)
     const trackRef = useRef<HTMLDivElement>(null)
     const ghostRef = useRef<HTMLSpanElement>(null)
     const timer = useRef<number | undefined>(undefined)
@@ -247,8 +249,15 @@ export function TrainGame({ language, records, onResult, onExit }: GameProps) {
         return l({ eu: `${say(before)} eta ${say(after)} artean`, es: `Entre ${say(before)} y ${say(after)}`, ar: `بين ${say(before)} و${say(after)}` })
     })()
 
-    // The number line under the train: one dot per hooked wagon
+    // The number line under the train: one dot per hooked wagon, and the halves when the hint is on
+    const hinting = arriving !== null && choosing && hintFor === `${trainIndex}-${arrival}`
     const [lineLow, lineHigh] = LINE_RANGES[level]
+    const halves = hinting ? Array.from({ length: lineHigh - lineLow }, (_, index) => lineLow + index + 0.5) : []
+    const halfLabel = (value: number) => {
+        const whole = Math.trunc(value)
+        const sign = value < 0 ? '−' : ''
+        return Math.abs(whole) === 0 ? `${sign}½` : `${sign}${Math.abs(whole)}½`
+    }
     const linePosition = (card: TrainCard) => `${((card.value.numerator / card.value.denominator - lineLow) / (lineHigh - lineLow)) * 100}%`
     const wholes = Array.from({ length: lineHigh - lineLow + 1 }, (_, index) => lineLow + index)
 
@@ -316,6 +325,11 @@ export function TrainGame({ language, records, onResult, onExit }: GameProps) {
                         <span>{whole < 0 ? `−${-whole}` : whole}</span>
                     </span>
                 ))}
+                {halves.map((half) => (
+                    <span className="train-line-half" style={{ left: `${((half - lineLow) / (lineHigh - lineLow)) * 100}%` }} key={half}>
+                        <span>{halfLabel(half)}</span>
+                    </span>
+                ))}
                 {hooked.map((card) => (
                     <span key={wagonId(card)} className={`train-line-dot ${card === lastHooked ? 'last' : ''}`} style={{ left: linePosition(card) }}>
                         {card === lastHooked && <span className="train-line-label"><CardFace card={card} separator={separator} /></span>}
@@ -326,6 +340,19 @@ export function TrainGame({ language, records, onResult, onExit }: GameProps) {
             {choosing && (
                 <>
                     <p className="train-gap" aria-live="polite">{gap === null ? l({ eu: 'Sakatu trenean, bagoia non doan.', es: 'Toca en el tren dónde va el vagón.', ar: 'اضغط على القطار حيث تذهب العربة.' }) : gapWords}</p>
+                    {hinting
+                        ? (
+                            <p className="train-hint" role="status">
+                                {level === 2
+                                    ? l({ eu: 'Pista: begiratu lehenik zeinuari. Gero: zerotik ala batetik (edo minus batetik) gertuago dago? Zenbaki-zuzenean erdiak markatuta daude.', es: 'Pista: mira primero el signo. Después: ¿está más cerca de 0 o de 1 (o de −1)? En la recta están marcadas las mitades.', ar: `تلميح: انظر أولًا إلى الإشارة. ثم: هل هو أقرب إلى ${ltr('0')} أم إلى ${ltr('1')} (أو ${ltr('−1')})؟ على الخط علامات الأنصاف.` })
+                                    : l({ eu: 'Pista: erdia baino handiagoa ala txikiagoa da? Eta bat baino? Zenbaki-zuzenean erdiak markatuta daude.', es: 'Pista: ¿es mayor o menor que ½? ¿Y que 1? En la recta están marcadas las mitades.', ar: `تلميح: هل هو أكبر من النصف أم أصغر؟ ومن ${ltr('1')}؟ على الخط علامات الأنصاف.` })}
+                            </p>
+                        )
+                        : (
+                            <button type="button" className="train-hint-button" onClick={() => setHintFor(`${trainIndex}-${arrival}`)}>
+                                {l({ eu: 'Pista: konparatu erdiarekin', es: 'Pista: compara con ½', ar: 'تلميح: قارن بالنصف' })}
+                            </button>
+                        )}
                     <div className="train-controls" dir="ltr">
                         <button type="button" className="fraction-v2-secondary" aria-label={l({ eu: 'Ezkerrera', es: 'A la izquierda', ar: 'إلى اليسار' })} disabled={gap === 0} onClick={() => point(gap === null ? hooked.length : gap - 1)}>◀</button>
                         <button type="button" className="fraction-v2-primary" disabled={gap === null} onClick={hook}>{l({ eu: 'Lotu', es: 'Enganchar', ar: 'اربط' })}</button>

@@ -127,7 +127,7 @@ export function SumWorksheetPanel({
                             value={state.answer}
                             inputMode="text"
                             autoComplete="off"
-                            placeholder={l({ eu: 'Adib.: 5/6 edo 1 1/2', es: 'Ej.: 5/6 o 1 1/2', ar: '⁦5/6⁩ أو ⁦1 1/2⁩' })}
+                            placeholder={l({ eu: 'Adib.: 5/6 edo 1 1/2', es: 'Ej.: 5/6 o 1 1/2', ar: '\u20665/6\u2069 أو \u20661 1/2\u2069' })}
                             onChange={(event) => onAnswer({ answer: event.target.value, checked: false })}
                             onKeyDown={(event) => { if (event.key === 'Enter') onAnswer({ checked: true }) }}
                         />
