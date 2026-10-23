@@ -123,3 +123,16 @@ L4 «De fracción a decimal» (2026-10-22, first cloud session) was committed as
   - In Basque UI text, «0ra», «12rekin» and the like are suffixes after a number: write «Adibidez: 1/12.» or «hondarra inoiz 0 ez bada». The test checks the challenge texts for it.
   - Writing `\u2066` inside a tool parameter can land as the raw invisible character; use the `ltr()` helper with escapes instead.
 
+## 2026-10-23: goal «L5, M3, J3, J4, J5 in three rounds each» (cloud session, branch `claude/eloquent-darwin-nhotrt`)
+
+The owner asked for every remaining option, each built in three rounds: build, then review and add one new improvement, then review again and add another. Sonnet subagents review each round; I decide what to apply. Nothing is deployed: the owner merges and deploys from the Mac.
+
+L5 «Lupa en la recta / Lupa zenbaki-zuzenean» (rounds: 2d3576f, 1eac132, round 3 in the commit after it):
+- Code: `lab/zoom.ts`, `ZoomTool.tsx`, `Zoom.css`; tool id `zoom`, stage ordering, lesson `ordering` (still opened by `compare`). The ordering lesson got a fifth fact, «Siempre hay otra en medio».
+- How it works: two fractions are marks of their common denominator (as written, lcm of the two denominators) times «Partir cada trozo en» (1–10). A tap on the stretch picks the nearest mark strictly inside (`markForTap`). «Acercar la lupa» fills the line with the pair (only offered when it magnifies ×1.5 or more; the window never exceeds the whole units). With a mark chosen, «Lupa entre L y C» / «Lupa entre C y R» go in beside it (max 6), resetting the split.
+- Round 2 (after review): marks computed in whole numbers (`zoomWindow` returns firstMark/lastMark), whole-number ticks always drawn even beyond 120 marks, labels only where they fit (ResizeObserver width), focus kept on the line, readout wraps in pieces, `touch-action: pan-y`. New: the trail of views (`trail: ZoomView[]`), «Un paso atrás» and tappable steps with their magnification.
+- Round 3: «Otra forma: la media», a disclosure shown once the learner has found a fraction; it marks (a + b)/2 on the line with a triangle and writes ½·(a + b).
+- Challenges 1901–1904 (1/3–1/2; 5/6–7/9 with the lens; ≥ 5 marks between 2/5 and 3/5; three zooms in a row). Extras use Farey neighbours (|ad − bc| = 1), so there is never a mark between them at first.
+- Tests: `tests/zatikiak-zoom.test.ts`, including LRI/PDI around every fraction in Arabic challenge texts.
+- Gotchas: the screenshot helper must not hide every `nav` (the trail is a `nav`); `polygon` points cannot be animated with CSS transitions.
+

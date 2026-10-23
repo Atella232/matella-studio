@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent, type RefObject } from 'react'
 import { MathText } from '../../../components/MathText'
-import { fraction, type FractionValue } from '../math/fraction'
+import { add, equals, fraction, type FractionValue } from '../math/fraction'
 import type { ToolProps } from './labTools'
 import { Stepper, ToolFrame } from './LabKit'
 import {
@@ -23,6 +23,7 @@ import {
     zoomDenominator,
     zoomExtra,
     zoomIn,
+    zoomMidpoint,
     zoomOut,
     zoomPair,
     zoomWindow,
@@ -82,6 +83,10 @@ export function ZoomTool(props: ToolProps) {
     const lowMark = pair ? markOf(pair[0], denominator) : 0
     const highMark = pair ? markOf(pair[1], denominator) : 0
     const zooms = zoomCount(state)
+    // The mean is the other way to find one; it is offered once the learner has found their own
+    const [showMean, setShowMean] = useState(false)
+    const mean = zoomMidpoint(state)
+    const meanShown = showMean && chosen !== null && mean !== null
 
     /* ---------- Which marks to draw, and which to label ---------- */
 
@@ -248,6 +253,7 @@ export function ZoomTool(props: ToolProps) {
                 )
             })}
             {state.picked !== null && <span className="zoom-dot" style={{ left: `${position(state.picked / denominator)}%` }} aria-hidden="true" />}
+            {meanShown && mean && <span className="zoom-mean" style={{ left: `${position(mean.numerator / mean.denominator)}%` }} aria-hidden="true" />}
             {pair ? (
                 <>
                     {flag(pair[0], 'one', 'low')}
@@ -301,6 +307,27 @@ export function ZoomTool(props: ToolProps) {
                 })}
             </ol>
         </nav>
+    )
+
+    const meanBlock = pair && chosen && mean && (
+        <div className="zoom-mean-box">
+            <button type="button" className="zoom-mean-toggle" aria-expanded={showMean} onClick={() => setShowMean((open) => !open)}>
+                {l({ eu: 'Beste modu bat: batez bestekoa', es: 'Otra forma: la media', ar: 'طريقة أخرى: المتوسط' })}
+                <span aria-hidden="true">{showMean ? '−' : '+'}</span>
+            </button>
+            {showMean && (
+                <div className="zoom-mean-body">
+                    <p>{l({ eu: 'Bi zatikiren batez bestekoa beti dago justu erdian: batu biak eta hartu erdia.', es: 'La media de dos fracciones queda siempre justo en medio: suma las dos y toma la mitad.', ar: 'متوسط كسرين يقع دائمًا في المنتصف تمامًا: اجمعهما وخذ النصف.' })}</p>
+                    <p className="zoom-mean-formula" dir="ltr"><MathText inline text={`$\\displaystyle\\frac{1}{2}\\cdot\\left(${latex(pair[0])}+${latex(pair[1])}\\right)=\\frac{1}{2}\\cdot${latex(add(pair[0], pair[1]))}=${latex(mean)}$`} /></p>
+                    <p>
+                        <span className="zoom-mean-key" aria-hidden="true" />
+                        {equals(mean, chosen)
+                            ? l({ eu: 'Zuk aukeratutakoa da, hain zuzen!', es: '¡Es justo la que has elegido!', ar: 'إنه بالضبط الكسر الذي اخترته!' })
+                            : l({ eu: 'Bien arteko beste zatiki bat da, zurea ez bezalakoa.', es: 'Es otra fracción entre las dos, distinta de la tuya.', ar: 'إنه كسر آخر بينهما غير الذي اخترته.' })}
+                    </p>
+                </div>
+            )}
+        </div>
     )
 
     const message = (() => {
@@ -357,6 +384,7 @@ export function ZoomTool(props: ToolProps) {
                 <div className="zoom-line">{line}</div>
                 {!drawAll && <p className="zoom-dense-note">{l({ eu: 'Marra gehiegi daude denak marrazteko: hurbildu lupa.', es: 'Demasiadas marcas para dibujarlas todas: acerca la lupa.', ar: 'العلامات أكثر من أن تُرسم كلها: قرّب العدسة.' })}</p>}
                 {actions}
+                {meanBlock}
                 {trail}
                 <p className="fraction-v2-insight" aria-live="polite">{message}</p>
             </div>

@@ -308,6 +308,73 @@
     gap: 6px;
 }
 
+/* ---------- The other way: the mean of the two ---------- */
+
+/* A small triangle over the line, where the mean falls */
+.zoom-mean,
+.zoom-mean-key {
+    width: 0;
+    height: 0;
+    border-top: 12px solid var(--ink);
+    border-inline: 8px solid transparent;
+}
+
+.zoom-mean {
+    position: absolute;
+    top: 74px;
+    margin-left: -8px;
+    transition: left 0.45s ease;
+}
+
+.zoom-mean-key {
+    display: inline-block;
+    margin-inline-end: 8px;
+    vertical-align: middle;
+}
+
+.zoom-mean-box {
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    background: var(--card);
+}
+
+.zoom .zoom-mean-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 44px;
+    padding: 8px 14px;
+    border: 0;
+    background: none;
+    color: var(--ink);
+    font-size: 15px;
+    font-weight: 700;
+    text-align: start;
+}
+
+.zoom-mean-toggle span {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.zoom-mean-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 14px 12px;
+    font-size: 15px;
+}
+
+.zoom-mean-body p {
+    margin: 0;
+}
+
+.zoom-mean-formula {
+    overflow-x: auto;
+    text-align: center;
+}
+
 /* ---------- The trail: each stretch the lens went through ---------- */
 
 .zoom-trail {
@@ -372,6 +439,7 @@
     .zoom-between,
     .zoom-tick,
     .zoom-dot,
+    .zoom-mean,
     .zoom-flag {
         transition: none;
         animation: none;

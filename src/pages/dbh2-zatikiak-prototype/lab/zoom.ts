@@ -187,6 +187,14 @@ export function zoomBack(state: ZoomState, to = state.trail.length - 1): ZoomSta
 
 export const zoomOut = (state: ZoomState): ZoomState => ({ ...state, ...fresh })
 
+/** The other way to find one: the mean of the pair, (a + b) / 2, always lies halfway between them */
+export function zoomMidpoint(state: ZoomState): FractionValue | null {
+    const pair = zoomPair(state)
+    if (!pair) return null
+    const [low, high] = pair
+    return fraction(low.numerator * high.denominator + high.numerator * low.denominator, 2 * low.denominator * high.denominator)
+}
+
 /** The mark next to the left end, a quick way in from the keyboard */
 export function firstMarkBetween(state: ZoomState): number | null {
     const pair = zoomPair(state)

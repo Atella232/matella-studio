@@ -22,6 +22,7 @@ import {
     zoomDenominator,
     zoomExtra,
     zoomIn,
+    zoomMidpoint,
     zoomOut,
     zoomPair,
     zoomSolution,
@@ -149,6 +150,20 @@ test('zatikiak zoom: endless practice uses neighbouring fractions', () => {
         assert.doesNotMatch(challenge.prompt.ar.replace(/\u2066[^\u2069]*\u2069/g, ''), /\d\/\d/)
     }
     assert.ok(zoomSolution(fraction(1, 2), fraction(1, 2)).picked === null)
+})
+
+test('zatikiak zoom: the mean of the pair is always between them', () => {
+    assert.deepEqual(zoomMidpoint(pairOf([1, 3], [1, 2])), { numerator: 5, denominator: 12 })
+    assert.equal(zoomMidpoint(pairOf([2, 4], [1, 2])), null)
+    for (let a = 0; a <= 12; a += 1) {
+        for (let b = 1; b <= 6; b += 1) {
+            const state = pairOf([a, 4], [b, 3])
+            const pair = zoomPair(state)
+            const mean = zoomMidpoint(state)
+            if (!pair) continue
+            assert.ok(mean && compare(pair[0], mean) < 0 && compare(mean, pair[1]) < 0, `${a}/4 and ${b}/3`)
+        }
+    }
 })
 
 test('zatikiak zoom: the tool is in the ordering stage', () => {
