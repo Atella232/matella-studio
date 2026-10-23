@@ -163,6 +163,16 @@ export function NumberLineTool(props: ToolProps & { challenges?: LabChallenge<Nu
     const zero = position(0)
     const point = position(numerator)
 
+    // One arc per jump of 1/d from 0: the new ones are drawn one after another
+    const hops = Math.abs(numerator)
+    const direction = numerator < 0 ? -1 : 1
+    const [seen, setSeen] = useState({ denominator, hops, direction, firstNew: 0 })
+    if (seen.denominator !== denominator || seen.hops !== hops || seen.direction !== direction) {
+        const fresh = seen.denominator !== denominator || seen.direction !== direction
+        setSeen({ denominator, hops, direction, firstNew: fresh ? 0 : Math.min(seen.hops, hops) })
+    }
+    const pace = Math.min(70, 900 / Math.max(1, hops - seen.firstNew))
+
     return (
         <ToolFrame
             {...props}
@@ -182,6 +192,21 @@ export function NumberLineTool(props: ToolProps & { challenges?: LabChallenge<Nu
                     onPointerCancel={onPointerUp}
                 >
                     <span className="fraction-v2-nl-axis" aria-hidden="true" />
+                    <svg className={`fraction-v2-nl-hops ${numerator < 0 ? 'negative' : ''}`} viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true">
+                        {Array.from({ length: hops }, (_, hop) => {
+                            const from = position(direction * hop)
+                            const to = position(direction * (hop + 1))
+                            return (
+                                <path
+                                    key={`${denominator}:${direction}:${hop}`}
+                                    d={`M ${from} 20 Q ${(from + to) / 2} 0 ${to} 20`}
+                                    pathLength={1}
+                                    vectorEffect="non-scaling-stroke"
+                                    style={{ animationDelay: `${Math.max(0, hop - seen.firstNew) * pace}ms` }}
+                                />
+                            )
+                        })}
+                    </svg>
                     <span
                         className={`fraction-v2-nl-jumps ${numerator < 0 ? 'negative' : ''}`}
                         style={{ left: `${Math.min(zero, point)}%`, width: `${Math.abs(point - zero)}%` }}
