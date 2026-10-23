@@ -1,0 +1,110 @@
+/* ==========================================================================
+   Motion in the fraction models: each movement shows what the numbers do.
+   New cuts draw in and the old ones slide to their place; the pieces of a
+   sum come and join; the pieces taken away fade out; the crossing of a
+   product lights up cell by cell; division counts its jumps one by one;
+   the point on the number line glides; each new line of an expression
+   drops in. All of it stops for anyone who prefers less motion.
+   ========================================================================== */
+
+/* ---------- Cutting a unit into parts ---------- */
+
+.fraction-v2-partition i {
+    transition: left 0.4s ease;
+    animation: motion-cut 0.4s ease-out both;
+}
+
+@keyframes motion-cut {
+    from { opacity: 0; transform: scaleY(0); }
+    to { opacity: 1; transform: none; }
+}
+
+/* ---------- Sums and differences ---------- */
+
+/* The second fraction's pieces arrive one after another */
+.fraction-v2-segment-bar span.second {
+    animation: motion-join 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+    animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+@keyframes motion-join {
+    from { opacity: 0; transform: translateY(-70%); }
+    to { opacity: 1; transform: none; }
+}
+
+/* The pieces taken away were part of the first fraction: their colour fades out */
+.fraction-v2-segment-bar span.removed {
+    position: relative;
+}
+
+.fraction-v2-segment-bar span.removed::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--stage);
+    animation: motion-fade 0.6s ease forwards;
+    animation-delay: calc(0.2s + var(--i, 0) * 60ms);
+}
+
+@keyframes motion-fade {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* ---------- Product as an area ---------- */
+
+.fraction-v2-area-grid span.both {
+    animation: motion-cross 0.4s ease-out both;
+    animation-delay: calc(0.15s + var(--i, 0) * 35ms);
+}
+
+/* The overlap starts in the second colour and turns into the product's colour, cell after cell */
+@keyframes motion-cross {
+    from { background: var(--second-tint); }
+}
+
+/* ---------- Division as measuring ---------- */
+
+.fraction-v2-measure-jump {
+    animation: motion-hop 0.35s ease-out both;
+    animation-delay: calc(var(--i, 0) * 140ms);
+}
+
+@keyframes motion-hop {
+    from { opacity: 0; transform: translateY(-24px) scale(0.6); }
+    60% { opacity: 1; transform: translateY(4px); }
+    to { opacity: 1; transform: none; }
+}
+
+/* ---------- Number line ---------- */
+
+/* The point glides when it moves with the buttons or the keys, not while it is dragged */
+.fraction-v2-nl-track:not([data-dragging]) .fraction-v2-nl-handle,
+.fraction-v2-nl-track:not([data-dragging]) .fraction-v2-nl-jumps {
+    transition: left 0.25s ease, width 0.25s ease;
+}
+
+/* ---------- Expressions ---------- */
+
+.expr-lines li:last-child {
+    animation: motion-line 0.35s ease-out;
+}
+
+@keyframes motion-line {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fraction-v2-partition i,
+    .fraction-v2-segment-bar span.second,
+    .fraction-v2-segment-bar span.removed::after,
+    .fraction-v2-area-grid span.both,
+    .fraction-v2-measure-jump,
+    .fraction-v2-nl-track .fraction-v2-nl-handle,
+    .fraction-v2-nl-track .fraction-v2-nl-jumps,
+    .expr-lines li:last-child {
+        transition: none;
+        animation: none;
+    }
+}

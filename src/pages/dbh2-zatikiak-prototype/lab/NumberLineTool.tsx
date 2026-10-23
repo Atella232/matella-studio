@@ -18,6 +18,7 @@ import type { ToolProps } from './labTools'
 import { Segmented, Stepper, ToolFrame } from './LabKit'
 import { numberLineExtra } from './extraChallenges'
 import { useLabText } from './useLabText'
+import './Motion.css'
 
 /** Tick labels are only drawn while they still fit comfortably */
 const MAX_LABELLED_TICKS = 17
@@ -66,6 +67,8 @@ export function NumberLineTool(props: ToolProps & { challenges?: LabChallenge<Nu
 
     const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
         dragging.current = true
+        // While dragging, the point follows the finger without gliding
+        event.currentTarget.dataset.dragging = 'true'
         event.currentTarget.setPointerCapture(event.pointerId)
         moveToPointer(event.clientX)
     }
@@ -76,6 +79,7 @@ export function NumberLineTool(props: ToolProps & { challenges?: LabChallenge<Nu
 
     const onPointerUp = () => {
         dragging.current = false
+        delete trackRef.current?.dataset.dragging
     }
 
     const onHandleKey = (event: KeyboardEvent<HTMLDivElement>) => {

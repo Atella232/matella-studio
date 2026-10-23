@@ -1,3 +1,6 @@
+import type { CSSProperties } from 'react'
+import './Motion.css'
+
 /**
  * One unit split into `parts`, the first `filled` coloured. `ghostPerPart` draws
  * dashed lines inside every part, showing how it splits into smaller pieces.
@@ -34,11 +37,17 @@ export type SegmentTone = 'first' | 'second' | 'removed' | ''
 
 /** Units of equal pieces, each piece painted with its own tone (used for sums and differences) */
 export function SegmentBars({ units, label }: { units: SegmentTone[][]; label: string }) {
+    // Each piece's place among those of its own tone, so they can arrive one after another
+    const flat = units.flat()
+    const order = (unit: number, piece: number) => {
+        const index = unit * (units[0]?.length ?? 0) + piece
+        return flat.slice(0, index).filter((tone) => tone === flat[index]).length
+    }
     return (
         <div className="fraction-v2-segment-bars" role="img" aria-label={label}>
             {units.map((pieces, unit) => (
                 <div className="fraction-v2-segment-bar" key={unit}>
-                    {pieces.map((tone, piece) => <span className={tone} key={piece} />)}
+                    {pieces.map((tone, piece) => <span className={tone} key={piece} style={tone ? { '--i': order(unit, piece) } as CSSProperties : undefined} />)}
                 </div>
             ))}
         </div>

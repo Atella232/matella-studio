@@ -21,6 +21,7 @@ import { ResultAnswer, Segmented, Stepper, ToolFrame } from './LabKit'
 import { productExtra } from './extraChallenges'
 import { PredictionStep } from './PredictionStep'
 import { useLabText } from './useLabText'
+import './Motion.css'
 
 const latex = (value: FractionValue) => value.denominator === 1 ? String(value.numerator) : `\\frac{${value.numerator}}{${value.denominator}}`
 
@@ -119,12 +120,13 @@ function AreaModel({ first, second, showResult, language }: { first: FractionVal
             <div className="fraction-v2-area-body">
                 <div className="fraction-v2-area-side"><MathText text={`$${latex(second)}$`} /></div>
                 <div
+                    key={`${first.numerator}/${first.denominator}·${second.numerator}/${second.denominator}`}
                     className="fraction-v2-area-grid"
                     style={{ gridTemplateColumns: `repeat(${first.denominator}, minmax(0, 1fr))`, gridTemplateRows: `repeat(${second.denominator}, minmax(0, 1fr))` } as CSSProperties}
                     role="img"
                     aria-label={l({ eu: `${total} laukitatik ${overlap} gurutzean`, es: `${overlap} de ${total} casillas en el cruce`, ar: `${overlap} من ${total} خانة في التقاطع` })}
                 >
-                    {cells.map((tone, index) => <span className={tone} key={index} />)}
+                    {cells.map((tone, index) => <span className={tone} key={index} style={tone === 'both' ? { '--i': cells.slice(0, index).filter((item) => item === 'both').length } as CSSProperties : undefined} />)}
                 </div>
             </div>
             <p className="fraction-v2-insight">
@@ -155,10 +157,10 @@ function MeasureModel({ first, second, showResult, language }: { first: Fraction
                     <span><MathText text={`$${latex(first)}$`} /></span>
                 </span>
                 {jumps.map((index) => (
-                    <span className="fraction-v2-measure-jump" style={{ left: position(index * jump), width: position(jump) }} key={index}>{index + 1}</span>
+                    <span className="fraction-v2-measure-jump" style={{ left: position(index * jump), width: position(jump), '--i': index } as CSSProperties} key={`${first.numerator}/${first.denominator}:${second.numerator}/${second.denominator}:${index}`}>{index + 1}</span>
                 ))}
                 {leftover > 1e-9 && (
-                    <span className="fraction-v2-measure-jump partial" style={{ left: position(fullJumps * jump), width: position(leftover) }} />
+                    <span className="fraction-v2-measure-jump partial" style={{ left: position(fullJumps * jump), width: position(leftover), '--i': fullJumps } as CSSProperties} key={`${first.numerator}/${first.denominator}:${second.numerator}/${second.denominator}:rest`} />
                 )}
                 <span className="fraction-v2-measure-axis" />
                 {Array.from({ length: span + 1 }, (_, whole) => (

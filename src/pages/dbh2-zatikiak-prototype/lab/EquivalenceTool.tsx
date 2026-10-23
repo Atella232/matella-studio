@@ -62,13 +62,13 @@ export function EquivalenceTool(props: ToolProps & { challenges?: LabChallenge<E
     if (mode === 'amplify') {
         formula = `\\frac{${numerator}}{${denominator}}=\\frac{${numerator}\\cdot${factor}}{${denominator}\\cdot${factor}}=\\frac{${result.numerator}}{${result.denominator}}`
         note = l({
-            eu: `Zati bakoitza ${factor}tan banatu da: ${factor} aldiz zati gehiago daude eta ${factor} aldiz koloreztatu gehiago.`,
+            eu: `Zati bakoitza ${factor} zatitan banatu da: ${factor} aldiz zati gehiago daude eta ${factor} aldiz koloreztatu gehiago.`,
             es: `Cada porción se ha partido en ${factor}: hay ${factor} veces más partes y ${factor} veces más coloreadas.`,
             ar: `قُسّم كل جزء إلى ${factor}: صار عدد الأجزاء وعدد الأجزاء الملوّنة ${factor} أضعاف.`
         })
     } else if (simplified) {
         formula = `\\frac{${numerator}}{${denominator}}=\\frac{${numerator}:${divisor}}{${denominator}:${divisor}}=\\frac{${result.numerator}}{${result.denominator}}`
-        note = `${l({ eu: `Zatiak ${divisor}naka bildu dira.`, es: `Se han juntado las porciones de ${divisor} en ${divisor}.`, ar: `جُمعت الأجزاء كل ${divisor} معًا.` })}${resultIsIrreducible ? ` ${l({ eu: 'Zatiki laburtezina da.', es: 'Es la fracción irreducible.', ar: 'إنه الكسر في أبسط صورة.' })}` : ''}`
+        note = `${l({ eu: `Zatiak ${divisor} zatiko taldeetan bildu dira.`, es: `Se han juntado las porciones de ${divisor} en ${divisor}.`, ar: `جُمعت الأجزاء كل ${divisor} معًا.` })}${resultIsIrreducible ? ` ${l({ eu: 'Zatiki laburtezina da.', es: 'Es la fracción irreducible.', ar: 'إنه الكسر في أبسط صورة.' })}` : ''}`
     } else {
         formula = `\\frac{${numerator}}{${denominator}}`
         note = divisors.length === 0

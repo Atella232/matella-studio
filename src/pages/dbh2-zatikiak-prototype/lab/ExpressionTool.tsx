@@ -24,6 +24,7 @@ import type { ToolProps } from './labTools'
 import { Stepper, ToolFrame } from './LabKit'
 import { useLabText } from './useLabText'
 import './Expression.css'
+import './Motion.css'
 
 const opSymbols: Record<ExprOp, string> = { '+': '+', '-': '−', '·': '·', ':': '÷' }
 
