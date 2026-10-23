@@ -14,6 +14,7 @@ import { BarModelTool } from './BarModelTool'
 import { ExpressionTool } from './ExpressionTool'
 import { PrimesTool } from './PrimesTool'
 import { DecimalsTool } from './DecimalsTool'
+import { ZoomTool } from './ZoomTool'
 import './Lab.css'
 
 const toolComponents: Record<LabToolId, (props: ToolProps) => JSX.Element> = {
@@ -23,6 +24,7 @@ const toolComponents: Record<LabToolId, (props: ToolProps) => JSX.Element> = {
     equivalence: EquivalenceTool,
     primes: PrimesTool,
     compare: CompareTool,
+    zoom: ZoomTool,
     addsub: SumTool,
     muldiv: ProductTool,
     expression: ExpressionTool,

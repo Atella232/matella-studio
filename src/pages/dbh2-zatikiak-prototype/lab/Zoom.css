@@ -1,0 +1,313 @@
+/* ---------- A magnifying glass on the number line ---------- */
+
+.zoom {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+    max-width: 720px;
+}
+
+/* The lines read left to right in every language; the sentences keep the page's direction */
+.zoom-overview,
+.zoom-line {
+    padding-inline: 22px;
+    direction: ltr;
+}
+
+/* ---------- Overview: the whole units and the magnified part ---------- */
+
+.zoom-overview {
+    padding-top: 16px;
+}
+
+.zoom-overview-line {
+    position: relative;
+    height: 34px;
+}
+
+.zoom-overview-axis {
+    position: absolute;
+    top: 16px;
+    right: 0;
+    left: 0;
+    height: 2px;
+    background: var(--ink-soft);
+}
+
+.zoom-overview-band {
+    position: absolute;
+    top: 10px;
+    height: 14px;
+    min-width: 3px;
+    border: 1.5px solid var(--ink);
+    border-radius: 3px;
+    background: var(--stage);
+    transition: left 0.45s ease, width 0.45s ease;
+}
+
+.zoom-overview-dot {
+    position: absolute;
+    top: 13px;
+    width: 8px;
+    height: 8px;
+    margin-left: -4px;
+    border-radius: 50%;
+    background: var(--ink);
+}
+
+.zoom-overview-end {
+    position: absolute;
+    top: 0;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.zoom-overview-end.start { left: -16px; }
+.zoom-overview-end.end { right: -16px; }
+
+.zoom-badge {
+    position: absolute;
+    top: -14px;
+    right: 0;
+    padding: 1px 8px;
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    background: var(--stage-tint);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.zoom-connector {
+    display: block;
+    width: 100%;
+    height: 34px;
+    overflow: visible;
+}
+
+.zoom-connector polygon {
+    fill: var(--stage-soft);
+    transition: points 0.45s ease;
+}
+
+.zoom-connector line {
+    stroke: var(--ink-soft);
+    stroke-width: 1.5;
+    stroke-dasharray: 4 3;
+}
+
+/* ---------- The magnified line ---------- */
+
+.zoom-track {
+    position: relative;
+    height: 150px;
+    cursor: pointer;
+    touch-action: none;
+    user-select: none;
+}
+
+.zoom .zoom-track:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 4px;
+    border-radius: 8px;
+}
+
+.zoom-axis {
+    position: absolute;
+    top: 97px;
+    right: -14px;
+    left: -14px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--ink);
+}
+
+/* The stretch between the two fractions, where the new one has to be */
+.zoom-between {
+    position: absolute;
+    top: 92px;
+    height: 13px;
+    border: 1.5px solid var(--ink);
+    border-radius: 7px;
+    background: var(--stage-tint);
+    transition: left 0.45s ease, width 0.45s ease;
+}
+
+.zoom-tick {
+    position: absolute;
+    top: 89px;
+    width: 2px;
+    height: 19px;
+    margin-left: -1px;
+    background: var(--ink-soft);
+    transition: left 0.45s ease;
+    animation: zoom-appear 0.35s ease;
+}
+
+.zoom-line.dense .zoom-tick:not(.whole):not(.end):not(.picked) {
+    top: 93px;
+    height: 11px;
+    width: 1px;
+    margin-left: -0.5px;
+}
+
+.zoom-tick.whole {
+    top: 83px;
+    width: 3px;
+    height: 31px;
+    margin-left: -1.5px;
+    background: var(--ink);
+}
+
+.zoom-tick.inside {
+    background: var(--ink);
+}
+
+.zoom-tick.end {
+    top: 85px;
+    height: 27px;
+    background: var(--ink);
+}
+
+@keyframes zoom-appear {
+    from { opacity: 0; transform: scaleY(0.2); }
+    to { opacity: 1; transform: scaleY(1); }
+}
+
+/* Under each mark, its fraction stacked small */
+.zoom-label {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 50%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.15;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+.zoom-label > span:first-child {
+    padding: 0 2px;
+    border-bottom: 1.5px solid currentColor;
+}
+
+.zoom-label.whole {
+    color: var(--ink);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 18px;
+}
+
+.zoom-tick.inside .zoom-label {
+    color: var(--ink);
+}
+
+.zoom-tick.picked .zoom-label {
+    padding: 2px 5px;
+    border: 1.5px solid var(--ink);
+    border-radius: 7px;
+    background: var(--stage);
+    color: var(--stage-on);
+    font-size: 13px;
+}
+
+.zoom-dot {
+    position: absolute;
+    top: 87px;
+    width: 22px;
+    height: 22px;
+    margin-left: -11px;
+    border: 3px solid var(--ink);
+    border-radius: 50%;
+    background: var(--stage);
+    box-shadow: 2px 2px 0 var(--ink);
+    transition: left 0.2s ease;
+}
+
+/* The two ends: flags on two rows, so near fractions never cover each other */
+.zoom-flag {
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 97px;
+    transition: left 0.45s ease;
+}
+
+.zoom-flag::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -1px;
+    width: 2px;
+    height: 63px;
+    background: var(--ink-soft);
+}
+
+.zoom-flag.two::after {
+    height: 23px;
+}
+
+.zoom-flag-bubble {
+    position: absolute;
+    left: 0;
+    padding: 2px 8px;
+    border: 1.5px solid var(--ink);
+    border-radius: 10px;
+    font-size: 17px;
+    white-space: nowrap;
+    transform: translateX(-50%);
+}
+
+.zoom-flag.one .zoom-flag-bubble {
+    top: 0;
+}
+
+.zoom-flag.two .zoom-flag-bubble {
+    top: 40px;
+}
+
+.zoom-flag.low .zoom-flag-bubble { background: var(--blue-tint); }
+.zoom-flag.high .zoom-flag-bubble { background: var(--coral-tint); }
+
+.zoom-dense-note {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    text-align: center;
+}
+
+.zoom-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.zoom-actions button {
+    flex: 1 1 auto;
+    min-height: 44px;
+    padding: 6px 14px;
+    font-size: 15px;
+}
+
+.zoom .fraction-v2-insight {
+    align-self: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .zoom-overview-band,
+    .zoom-connector polygon,
+    .zoom-between,
+    .zoom-tick,
+    .zoom-dot,
+    .zoom-flag {
+        transition: none;
+        animation: none;
+    }
+}

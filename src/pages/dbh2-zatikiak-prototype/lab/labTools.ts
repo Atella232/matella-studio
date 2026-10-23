@@ -5,10 +5,11 @@ import { barChallenges } from './barModel.ts'
 import { expressionChallenges } from './expression.ts'
 import { primesChallenges } from './primes.ts'
 import { decimalsChallenges } from './decimals.ts'
+import { zoomChallenges } from './zoom.ts'
 
 export type { LabChallenge, OperationAnswer } from '../../../features/unit-v2/lab/types.ts'
 
-export type LabToolId = 'parts' | 'numberline' | 'wall' | 'equivalence' | 'primes' | 'compare' | 'addsub' | 'muldiv' | 'expression' | 'proportion' | 'bars' | 'decimals'
+export type LabToolId = 'parts' | 'numberline' | 'wall' | 'equivalence' | 'primes' | 'compare' | 'addsub' | 'muldiv' | 'expression' | 'proportion' | 'bars' | 'decimals' | 'zoom'
 
 export interface LabToolInfo extends UnitLabToolInfo {
     id: LabToolId
@@ -87,6 +88,17 @@ export const labTools: LabToolInfo[] = [
             eu: 'Aurreikusi lehenik zein den handiagoa eta gero egiaztatu estrategia batekin: izendatzaile komuna, zenbaki-zuzena edo biderketa gurutzatua.',
             es: 'Predice primero cuál es mayor y después compruébalo con una estrategia: denominador común, recta numérica o productos cruzados.',
             ar: 'توقّع أولًا أيهما أكبر ثم تحقّق باستعمال استراتيجية: مقام مشترك أو خط الأعداد أو الضرب التبادلي.'
+        }
+    },
+    {
+        id: 'zoom',
+        stage: 'ordering',
+        lessonTopic: 'ordering',
+        title: { eu: 'Lupa zenbaki-zuzenean', es: 'Lupa en la recta', ar: 'عدسة على خط الأعداد' },
+        observe: {
+            eu: 'Bi zatiki izendatzaile komunaren marrak dira, eta eskuinerago dagoena da handiagoa. Bien artean marrarik geratzen ez bada, zatitu zati bakoitza bitan (edo gehiagotan): marra berriak agertzen dira, bi zatikiak anplifikatzea baita. Aukeratu bat eta hurbildu lupa haren eta beste baten artean: berriro dago hutsunea, eta horrela amaigabe. Bi zatiki desberdinen artean beti dago beste bat.',
+            es: 'Dos fracciones son marcas de su denominador común, y la que queda más a la derecha es la mayor. Si entre ellas no queda ninguna marca, parte cada trozo en 2 (o en más): aparecen marcas nuevas, porque es amplificar las dos fracciones. Elige una y acerca la lupa entre ella y una de las otras: vuelve a haber hueco, y así sin fin. Entre dos fracciones distintas siempre hay otra.',
+            ar: 'الكسران علامتان من مقامهما المشترك، والواقع أكثر إلى اليمين هو الأكبر. وإذا لم تبقَ أي علامة بينهما فقسّم كل جزء إلى 2 (أو أكثر): تظهر علامات جديدة لأن ذلك توسيع للكسرين. اختر واحدة وقرّب العدسة بينها وبين أحد الكسرين: يظهر فراغ من جديد، وهكذا بلا نهاية. بين كسرين مختلفين يوجد دائمًا كسر آخر.'
         }
     },
     {
@@ -896,6 +908,7 @@ export const labChallengeIds: number[] = [
     ...equivalenceChallenges,
     ...primesChallenges,
     ...compareChallenges,
+    ...zoomChallenges,
     ...sumChallenges,
     ...productChallenges,
     ...expressionChallenges,

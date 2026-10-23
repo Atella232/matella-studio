@@ -213,6 +213,15 @@ export const theoryTopics: TheoryTopic[] = [
                 title: { eu: 'Negatiboak', es: 'Negativas', ar: 'الكسور السالبة' },
                 text: { eu: '$\\frac{2}{3}<\\frac{3}{4}$ denez, $-\\frac{2}{3}$ zerotik hurbilago dago eta handiagoa da.', es: 'Como $\\frac{2}{3}<\\frac{3}{4}$, $-\\frac{2}{3}$ está más cerca de 0 y es mayor.', ar: 'بما أن $\\frac{2}{3}<\\frac{3}{4}$ فإن $-\\frac{2}{3}$ أقرب إلى 0 وهو الأكبر.' },
                 math: '$-\\frac{3}{4}<-\\frac{2}{3}$'
+            },
+            {
+                title: { eu: 'Beti dago beste bat tartean', es: 'Siempre hay otra en medio', ar: 'يوجد دائمًا كسر بينهما' },
+                text: {
+                    eu: 'Bi zatiki desberdinen artean beti dago beste bat. Eraman izendatzaile komunera; tartean hutsunerik ez badago, bikoiztu bien gaiak.',
+                    es: 'Entre dos fracciones distintas siempre hay otra. Pásalas a denominador común; si no queda hueco en medio, multiplica por 2 los términos de las dos.',
+                    ar: 'بين كسرين مختلفين يوجد دائمًا كسر آخر. حوّلهما إلى مقام مشترك، وإن لم يبقَ فراغ بينهما فاضرب حدّي كل منهما في 2.'
+                },
+                math: '$\\frac{1}{3}=\\frac{4}{12}<\\frac{5}{12}<\\frac{6}{12}=\\frac{1}{2}$'
             }
         ],
         example: '$-\\frac{3}{4}<-\\frac{2}{3}<\\frac{1}{4}<\\frac{5}{6}$',
