@@ -100,10 +100,10 @@ export const games: GameInfo[] = [
     {
         id: 'balance',
         title: { eu: 'Balantza', es: 'Balanza', ar: 'الميزان' },
-        tagline: { eu: 'Orekatu balantza zatiki-pisuekin. Hiru pisaketa besterik ez dituzu: pentsatu pisatu aurretik.', es: 'Equilibra la balanza con pesas de fracciones. Solo tienes tres pesadas: piensa antes de pesar.', ar: 'وازن الميزان بأثقال من الكسور. لديك ثلاث وزنات فقط: فكّر قبل أن تزن.' },
+        tagline: { eu: 'Orekatu balantza zatikizko pisuekin. Hiru pisaketa besterik ez dituzu: pentsatu pisatu aurretik.', es: 'Equilibra la balanza con pesas de fracciones. Solo tienes tres pesadas: piensa antes de pesar.', ar: 'وازن الميزان بأثقال من الكسور. لديك ثلاث وزنات فقط: فكّر قبل أن تزن.' },
         skills: { eu: 'Baliokidetasuna, batuketak eta kenketak', es: 'Equivalencia, sumas y restas', ar: 'التكافؤ والجمع والطرح' },
         levels: [
-            { progressId: 1301, stage: 'equivalence', title: { eu: 'Pisu berdinak', es: 'Pesos iguales', ar: 'أوزان متساوية' }, description: { eu: 'Pisu bat, familia bereko zatien aurka: erdiak, laurdenak, zortzirenak…', es: 'Una pesa contra trozos de la misma familia: medios, cuartos, octavos…', ar: 'ثقل واحد مقابل أجزاء من العائلة نفسها: أنصاف وأرباع وأثمان…' } },
+            { progressId: 1301, stage: 'equivalence', title: { eu: 'Pisu baliokideak', es: 'Pesas equivalentes', ar: 'أثقال متكافئة' }, description: { eu: 'Pisu bat, familia bereko zatien aurka: erdiak, laurdenak, zortzirenak…', es: 'Una pesa contra trozos de la misma familia: medios, cuartos, octavos…', ar: 'ثقل واحد مقابل أجزاء من العائلة نفسها: أنصاف وأرباع وأثمان…' } },
             { progressId: 1302, stage: 'operations', title: { eu: 'Batuketak', es: 'Sumas', ar: 'الجمع' }, description: { eu: 'Izendatzaile desberdineko bi pisu: zenbat pisatzen dute batera?', es: 'Dos pesas de distinto denominador: ¿cuánto pesan juntas?', ar: 'ثقلان بمقامين مختلفين: كم يزنان معًا؟' } },
             { progressId: 1303, stage: 'operations', title: { eu: 'Falta dena', es: 'Lo que falta', ar: 'ما ينقص' }, description: { eu: 'Bi plateretan daude pisuak: gehitu falta dena, 1 baino gehiago izan arren.', es: 'Hay pesas en los dos platillos: añade lo que falta, aunque pase de 1.', ar: 'في الكفتين أثقال: أضف ما ينقص ولو تجاوز 1.' } }
         ]

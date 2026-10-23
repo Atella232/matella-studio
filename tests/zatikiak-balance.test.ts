@@ -13,6 +13,7 @@ import {
     leftWeight,
     rightWeight,
     sumLatex,
+    sumParts,
     weigh,
     type BalanceLevel,
     type BalanceRound
@@ -62,6 +63,43 @@ test('zatikiak balance: each level asks for its own idea', () => {
     }
 })
 
+test('zatikiak balance: size alone does not give the answer away', () => {
+    for (const level of [0, 1, 2] as BalanceLevel[]) {
+        const ranks = new Map<number, number>()
+        let singles = 0
+        for (let seed = 1; seed <= 300; seed += 1) {
+            for (const round of createBalanceRounds(createRandom(seed * 131 + level), level)) {
+                const order = round.tray.map((_, index) => index).sort((a, b) => compare(round.tray[a], round.tray[b]))
+                assert.ok(!round.solution.includes(order[order.length - 1]), 'the right weight is never the heaviest')
+                if (round.solution.length === 1) {
+                    singles += 1
+                    const rank = order.indexOf(round.solution[0])
+                    ranks.set(rank, (ranks.get(rank) ?? 0) + 1)
+                    assert.ok(rank > 0, 'nor the lightest')
+                }
+                // Two pieces never just repeat the loaded weights
+                if (level === 1 && round.solution.length === 2) {
+                    assert.ok(!round.solution.every((index) => round.left.some((weight) => equals(weight, round.tray[index]))))
+                }
+                // Every weight is a tidy fraction
+                assert.ok(round.tray.every((value) => fraction(value.numerator, value.denominator).denominator <= 24))
+            }
+        }
+        // No single place in the order wins half the time
+        for (const count of ranks.values()) assert.ok(count < singles * 0.5, `level ${level}: ${[...ranks]}`)
+    }
+})
+
+test('zatikiak balance: the first rounds of each level are the easier ones', () => {
+    for (let seed = 1; seed <= 100; seed += 1) {
+        const rounds = createBalanceRounds(createRandom(seed), 0)
+        for (const round of rounds.slice(0, 3)) {
+            assert.equal(round.solution.length, 2, 'two pieces at first')
+            assert.ok(round.tray.every((value) => 10 % fraction(value.numerator, value.denominator).denominator === 0 || 8 % fraction(value.numerator, value.denominator).denominator === 0 || 6 % fraction(value.numerator, value.denominator).denominator === 0))
+        }
+    }
+})
+
 test('zatikiak balance: weighing, points and stars', () => {
     const round: BalanceRound = { left: [fraction(1, 3), fraction(1, 4)], right: [], tray: [fraction(1, 2), fraction(1, 12), fraction(2, 7)], solution: [0, 1] }
     assert.equal(weigh(round, [2]), 'lighter')
@@ -69,10 +107,12 @@ test('zatikiak balance: weighing, points and stars', () => {
     assert.equal(weigh(round, [0, 1]), 'balanced')
     assert.deepEqual([1, 2, 3, 4].map(balancePoints), [3, 2, 1, 0])
     assert.equal(BALANCE_MAX_SCORE, 18)
-    assert.deepEqual([18, 15, 14, 11, 10, 7, 6].map(balanceStars), [3, 3, 2, 2, 1, 1, 0])
+    assert.deepEqual([18, 16, 15, 12, 11, 9, 8].map(balanceStars), [3, 3, 2, 2, 1, 1, 0])
     assert.equal(sumLatex([fraction(1, 3), fraction(1, 4)]), '\\frac{1}{3}+\\frac{1}{4}=\\frac{4}{12}+\\frac{3}{12}=\\frac{7}{12}')
     assert.equal(sumLatex([fraction(1, 2), fraction(1, 6)]), '\\frac{1}{2}+\\frac{1}{6}=\\frac{3}{6}+\\frac{1}{6}=\\frac{4}{6}=\\frac{2}{3}')
     assert.equal(sumLatex([fraction(3, 4)]), '\\frac{3}{4}')
+    assert.equal(sumLatex([fraction(3, 4)], 8), '\\frac{3}{4}=\\frac{6}{8}', 'one weight, rewritten over the common denominator')
+    assert.deepEqual(sumParts([fraction(1, 2), fraction(1, 4)], 8), ['\\frac{1}{2}+\\frac{1}{4}', '\\frac{4}{8}+\\frac{2}{8}', '\\frac{6}{8}', '\\frac{3}{4}'])
 })
 
 test('zatikiak balance: listed with three levels and reachable by its address', () => {

@@ -1,6 +1,6 @@
-import { useState, type CSSProperties } from 'react'
+import { useRef, useState, type CSSProperties } from 'react'
 import { MathText } from '../../../components/MathText'
-import { add, fraction, gcd, toNumber, type FractionValue } from '../math/fraction'
+import { add, fraction, type FractionValue } from '../math/fraction'
 import { GameTopbar, LevelPicker, ResultPanel } from './GameKit'
 import { useGameText } from './gameHooks'
 import type { GameProps } from './index'
@@ -9,11 +9,13 @@ import { games } from './records'
 import {
     BALANCE_MAX_SCORE,
     BALANCE_ROUNDS,
+    BALANCE_STARS,
     BALANCE_WEIGHINGS,
     balancePoints,
     balanceStars,
     createBalanceRounds,
-    sumLatex,
+    roundDenominator,
+    sumParts,
     weigh,
     type BalanceLevel,
     type BalanceRound,
@@ -24,17 +26,38 @@ import './Balance.css'
 const game = games.find((item) => item.id === 'balance')!
 
 const latex = (value: FractionValue) => (value.denominator === 1 ? String(value.numerator) : `\\frac{${value.numerator}}{${value.denominator}}`)
-const lcm = (a: number, b: number) => (a / gcd(a, b)) * b
+const plain = (value: FractionValue) => (value.denominator === 1 ? String(value.numerator) : `${value.numerator}/${value.denominator}`)
+/** In Arabic, numbers and arithmetic keep their left-to-right order (LRI … PDI) */
+const ltr = (text: string) => `⁦${text}⁩`
 
-/** A weight: a little block whose size grows with what it weighs, its fraction written stacked */
-function Weight({ value, tone, onClick, label }: { value: FractionValue; tone: 'loaded' | 'fixed' | 'mine' | 'tray'; onClick?: () => void; label?: string }) {
-    const style = { '--size': `${Math.round(36 + 10 * Math.min(2.5, toNumber(value)))}px` } as CSSProperties
-    const text = value.denominator === 1 ? String(value.numerator) : `${value.numerator}/${value.denominator}`
-    const content = value.denominator === 1
-        ? <span className="balance-frac whole" aria-hidden="true">{value.numerator}</span>
-        : <span className="balance-frac" aria-hidden="true"><span>{value.numerator}</span><span>{value.denominator}</span></span>
-    if (!onClick) return <span className={`balance-weight ${tone}`} style={style} role="img" aria-label={text}>{content}</span>
-    return <button type="button" className={`balance-weight ${tone}`} style={style} onClick={onClick} aria-label={`${text}: ${label}`}>{content}</button>
+/** A fraction written stacked, as on the weights */
+function Stacked({ value }: { value: FractionValue }) {
+    if (value.denominator === 1) return <span className="balance-frac whole" aria-hidden="true">{value.numerator}</span>
+    return <span className="balance-frac" aria-hidden="true"><span>{value.numerator}</span><span>{value.denominator}</span></span>
+}
+
+/** A weight on a pan: a block with a handle; all weights look the same size, so only the numbers tell what they weigh */
+function Weight({ value, tone }: { value: FractionValue; tone: 'loaded' | 'fixed' | 'mine' }) {
+    return <span className={`balance-weight ${tone}`} role="img" aria-label={plain(value)}><Stacked value={value} /></span>
+}
+
+/** A pan's sum written as pieces that can wrap */
+function Sum({ parts }: { parts: string[] }) {
+    return (
+        <span className="balance-sum" dir="ltr">
+            {parts.map((part, index) => (
+                <span key={index} className="balance-sum-piece">
+                    {index > 0 && <MathText inline text="$=$" />}
+                    <MathText inline text={`$\\displaystyle ${part}$`} />
+                </span>
+            ))}
+        </span>
+    )
+}
+
+interface LoggedWeighing {
+    chosen: number[]
+    result: Weighing
 }
 
 export function BalanceGame({ language, records, onResult, onExit }: GameProps) {
@@ -44,13 +67,17 @@ export function BalanceGame({ language, records, onResult, onExit }: GameProps) 
     const [rounds, setRounds] = useState<BalanceRound[]>([])
     const [index, setIndex] = useState(0)
     const [chosen, setChosen] = useState<number[]>([])
-    const [weighings, setWeighings] = useState(0)
+    /** Every weighing of the round: what was on the pan and what the scale said */
+    const [log, setLog] = useState<LoggedWeighing[]>([])
     /** The last weighing, while the pan has not changed since */
     const [result, setResult] = useState<Weighing | null>(null)
     const [score, setScore] = useState(0)
     const [balancedRounds, setBalancedRounds] = useState(0)
+    const questionRef = useRef<HTMLParagraphElement>(null)
+    const explainRef = useRef<HTMLDivElement>(null)
 
     const round = rounds[index]
+    const weighings = log.length
     const done = result === 'balanced' || weighings >= BALANCE_WEIGHINGS
 
     const start = (nextLevel: number) => {
@@ -58,7 +85,7 @@ export function BalanceGame({ language, records, onResult, onExit }: GameProps) 
         setRounds(createBalanceRounds(createRandom(randomSeed()), nextLevel as BalanceLevel))
         setIndex(0)
         setChosen([])
-        setWeighings(0)
+        setLog([])
         setResult(null)
         setScore(0)
         setBalancedRounds(0)
@@ -72,14 +99,18 @@ export function BalanceGame({ language, records, onResult, onExit }: GameProps) 
     }
 
     const weighNow = () => {
-        if (done || result !== null) return
+        if (done || result !== null || chosen.length === 0) return
         const outcome = weigh(round, chosen)
         const count = weighings + 1
-        setWeighings(count)
+        setLog((current) => [...current, { chosen, result: outcome }])
         setResult(outcome)
         if (outcome === 'balanced') {
             setScore((total) => total + balancePoints(count))
             setBalancedRounds((total) => total + 1)
+        }
+        if (outcome === 'balanced' || count >= BALANCE_WEIGHINGS) {
+            // Bring the explanation into view once it is drawn
+            requestAnimationFrame(() => explainRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' }))
         }
     }
 
@@ -91,9 +122,23 @@ export function BalanceGame({ language, records, onResult, onExit }: GameProps) 
         }
         setIndex(index + 1)
         setChosen([])
-        setWeighings(0)
+        setLog([])
         setResult(null)
+        requestAnimationFrame(() => questionRef.current?.focus())
     }
+
+    const starsText = l({
+        eu: `3 izar: ${BALANCE_STARS.three} puntu · 2: ${BALANCE_STARS.two} · 1: ${BALANCE_STARS.one}.`,
+        es: `3 estrellas: ${BALANCE_STARS.three} puntos · 2: ${BALANCE_STARS.two} · 1: ${BALANCE_STARS.one}.`,
+        ar: `3 نجوم: ${BALANCE_STARS.three} نقطة · 2: ${BALANCE_STARS.two} · 1: ${BALANCE_STARS.one}.`
+    })
+    const outOf = (value: number, total: number) => (language === 'ar' ? ltr(`${value} / ${total}`) : `${value} / ${total}`)
+    /** «+3 puntos», with the Arabic forms for one and two */
+    const pointsText = (points: number) => l({
+        eu: `+${points} puntu`,
+        es: `+${points} ${points === 1 ? 'punto' : 'puntos'}`,
+        ar: points === 1 ? '+نقطة واحدة' : points === 2 ? '+نقطتان' : `+${ltr(String(points))} نقاط`
+    })
 
     if (phase === 'pick') {
         return (
@@ -103,12 +148,13 @@ export function BalanceGame({ language, records, onResult, onExit }: GameProps) 
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${record.score} / ${BALANCE_MAX_SCORE}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'أفضل نتيجة' })}: ${outOf(record.score, BALANCE_MAX_SCORE)}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: `${BALANCE_ROUNDS} txanda maila bakoitzean. Jarri pisuak zure platerean, besteak bezainbeste pisatu arte.`, es: `${BALANCE_ROUNDS} rondas por nivel. Pon pesas en tu platillo hasta que pese lo mismo que el otro.`, ar: `${BALANCE_ROUNDS} جولات في كل مستوى. ضع أثقالًا في كفّتك حتى تزن مثل الكفة الأخرى.` })}</li>
-                        <li>{l({ eu: 'Balantza «Pisatu» sakatzean bakarrik mugitzen da, eta hiru pisaketa dituzu txanda bakoitzean: lehenengoan orekatuz gero, 3 puntu; bigarrenean, 2; hirugarrenean, 1.', es: 'La balanza solo se mueve al pulsar «Pesar», y tienes tres pesadas por ronda: equilibrio a la primera, 3 puntos; a la segunda, 2; a la tercera, 1.', ar: 'لا يتحرك الميزان إلا عند الضغط على «زِن»، ولديك ثلاث وزنات في كل جولة: التوازن من الأولى 3 نقاط، ومن الثانية 2، ومن الثالثة 1.' })}</li>
-                        <li>{l({ eu: '3 izar: 15 puntu · 2: 11 · 1: 7.', es: '3 estrellas: 15 puntos · 2: 11 · 1: 7.', ar: '3 نجوم: 15 نقطة · 2: 11 · 1: 7.' })}</li>
+                        <li>{l({ eu: `${BALANCE_ROUNDS} txanda maila bakoitzean. Jarri pisuak zure platerean, bi platerek pisu bera izan arte.`, es: `${BALANCE_ROUNDS} rondas por nivel. Pon pesas en tu platillo hasta que pese lo mismo que el otro.`, ar: `${BALANCE_ROUNDS} جولات في كل مستوى. ضع أثقالًا في كفّتك حتى تزن مثل الكفة الأخرى.` })}</li>
+                        <li>{l({ eu: 'Balantza «Pisatu» sakatzean bakarrik mugitzen da, eta hiru pisaketa dituzu txanda bakoitzean: lehenengoan orekatuz gero, 3 puntu; bigarrenean, 2; hirugarrenean, 1.', es: 'La balanza solo se mueve al pulsar «Pesar», y tienes tres pesadas por ronda: equilibrio a la primera, 3 puntos; a la segunda, 2; a la tercera, 1.', ar: 'لا يتحرك الميزان إلا عند الضغط على «زِن»، ولديك ثلاث وزنات في كل جولة: إن توازن من المرة الأولى فلك 3 نقاط، ومن الثانية نقطتان، ومن الثالثة نقطة واحدة.' })}</li>
+                        <li>{l({ eu: 'Pisu guztiak berdinak dira itxuraz: zenbakiek bakarrik esaten dute zenbat pisatzen duten.', es: 'Todas las pesas parecen iguales: solo los números dicen cuánto pesan.', ar: 'كل الأثقال متشابهة في الشكل: الأرقام وحدها تقول كم تزن.' })}</li>
+                        <li>{starsText}</li>
                     </ul>
                 )}
             />
@@ -122,11 +168,11 @@ export function BalanceGame({ language, records, onResult, onExit }: GameProps) 
                 <ResultPanel
                     language={language}
                     stars={balanceStars(score)}
-                    title={`${score} / ${BALANCE_MAX_SCORE}`}
-                    subtitle={l({ eu: '3 izar: 15 · 2 izar: 11 · izar 1: 7', es: '3 estrellas: 15 · 2: 11 · 1: 7', ar: '3 نجوم: 15 · 2: 11 · 1: 7' })}
+                    title={outOf(score, BALANCE_MAX_SCORE)}
+                    subtitle={starsText}
                     stats={[
-                        { label: l({ eu: 'Puntuak', es: 'Puntos', ar: 'النقاط' }), value: `${score} / ${BALANCE_MAX_SCORE}` },
-                        { label: l({ eu: 'Orekatuak', es: 'Equilibradas', ar: 'موزونة' }), value: `${balancedRounds} / ${BALANCE_ROUNDS}` }
+                        { label: l({ eu: 'Puntuak', es: 'Puntos', ar: 'النقاط' }), value: outOf(score, BALANCE_MAX_SCORE) },
+                        { label: l({ eu: 'Orekatutako txandak', es: 'Rondas equilibradas', ar: 'جولات متوازنة' }), value: outOf(balancedRounds, BALANCE_ROUNDS) }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}
@@ -140,17 +186,18 @@ export function BalanceGame({ language, records, onResult, onExit }: GameProps) 
     if (!round) return <></>
 
     const tilt = result === 'lighter' ? -8 : result === 'heavier' ? 8 : 0
-    const mine = chosen.map((trayIndex) => round.tray[trayIndex])
     const leftValues = round.left
-    const rightValues = [...round.right, ...mine]
-    const denominator = [...leftValues, ...rightValues].reduce((value, item) => lcm(value, item.denominator), 1)
+    const rightValues = [...round.right, ...chosen.map((trayIndex) => round.tray[trayIndex])]
     const solutionValues = [...round.right, ...round.solution.map((trayIndex) => round.tray[trayIndex])]
     const remaining = BALANCE_WEIGHINGS - weighings
+    const balanced = result === 'balanced'
+    // Both pans over one denominator: the learner's pan when it balanced, the solution when it did not
+    const denominator = roundDenominator(round, balanced ? chosen : round.solution)
 
     const question = [
-        { eu: 'Jarri pisuak zure platerean, bestea bezainbeste pisatu arte.', es: 'Pon pesas en tu platillo hasta que pese lo mismo que el otro.', ar: 'ضع أثقالًا في كفّتك حتى تزن مثل الكفة الأخرى.' },
+        { eu: 'Jarri pisuak zure platerean, bi platerek pisu bera izan arte.', es: 'Pon pesas en tu platillo hasta que pese lo mismo que el otro.', ar: 'ضع أثقالًا في كفّتك حتى تزن مثل الكفة الأخرى.' },
         { eu: 'Zenbat pisatzen dute bi pisuek batera? Orekatu balantza.', es: '¿Cuánto pesan las dos pesas juntas? Equilibra la balanza.', ar: 'كم يزن الثقلان معًا؟ وازن الميزان.' },
-        { eu: 'Zure platerak badu pisu bat jada. Gehitu falta dena.', es: 'Tu platillo ya tiene una pesa. Añade lo que falta.', ar: 'في كفّتك ثقل من قبل. أضف ما ينقص.' }
+        { eu: 'Zure platerean pisu bat dago jada. Gehitu falta dena.', es: 'Tu platillo ya tiene una pesa. Añade lo que falta.', ar: 'في كفّتك ثقل بالفعل. أضف ما ينقص.' }
     ][level]
 
     const verdict: Record<Weighing, { eu: string; es: string; ar: string }> = {
@@ -158,15 +205,20 @@ export function BalanceGame({ language, records, onResult, onExit }: GameProps) 
         heavier: { eu: 'Zure platerak gehiago pisatzen du.', es: 'Tu platillo pesa más.', ar: 'كفّتك أثقل.' },
         balanced: { eu: 'Oreka!', es: '¡Equilibrio!', ar: 'توازن!' }
     }
+    const shortVerdict: Record<Weighing, { eu: string; es: string; ar: string }> = {
+        lighter: { eu: 'arinagoa', es: 'pesa menos', ar: 'أخفّ' },
+        heavier: { eu: 'astunagoa', es: 'pesa más', ar: 'أثقل' },
+        balanced: { eu: 'oreka', es: 'equilibrio', ar: 'توازن' }
+    }
 
     return (
         <div className="balance-game" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
-                <span>{index + 1} / {BALANCE_ROUNDS}</span>
-                <span><strong>{score}</strong> {l({ eu: 'puntu', es: score === 1 ? 'punto' : 'puntos', ar: 'نقاط' })}</span>
+                <span><bdi dir="ltr">{index + 1} / {BALANCE_ROUNDS}</bdi></span>
+                <span>{l({ eu: 'Puntuak', es: 'Puntos', ar: 'النقاط' })}: <strong><bdi dir="ltr">{score}</bdi></strong></span>
             </GameTopbar>
 
-            <p className="balance-question">{l(question)}</p>
+            <p className="balance-question" ref={questionRef} tabIndex={-1}>{l(question)}</p>
 
             <div className={`balance-scale ${result ?? 'locked'}`} style={{ '--tilt': `${tilt}deg` } as CSSProperties} dir="ltr">
                 <span className="balance-stand" aria-hidden="true" />
@@ -176,65 +228,80 @@ export function BalanceGame({ language, records, onResult, onExit }: GameProps) 
                         <div className="balance-pan" role="group" aria-label={l({ eu: 'Kargatutako platera', es: 'Platillo cargado', ar: 'الكفة المحمّلة' })}>
                             {leftValues.map((value, valueIndex) => <Weight key={valueIndex} value={value} tone="loaded" />)}
                         </div>
+                        <span className="balance-caption">{l({ eu: 'Kargatuta', es: 'Cargado', ar: 'المحمّلة' })}</span>
                     </div>
                     <div className="balance-hanger right">
                         <svg className="balance-strings" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path d="M50 0 L6 30 M50 0 L94 30" vectorEffect="non-scaling-stroke" /></svg>
                         <div className="balance-pan" role="group" aria-label={l({ eu: 'Zure platera', es: 'Tu platillo', ar: 'كفّتك' })}>
                             {round.right.map((value, valueIndex) => <Weight key={`fixed-${valueIndex}`} value={value} tone="fixed" />)}
-                            {chosen.map((trayIndex) => (
-                                <Weight
-                                    key={trayIndex}
-                                    value={round.tray[trayIndex]}
-                                    tone="mine"
-                                    onClick={done ? undefined : () => toggle(trayIndex)}
-                                    label={l({ eu: 'Kendu pisu hau', es: 'Quitar esta pesa', ar: 'أزل هذا الثقل' })}
-                                />
-                            ))}
+                            {chosen.map((trayIndex) => <Weight key={trayIndex} value={round.tray[trayIndex]} tone="mine" />)}
                             {rightValues.length === 0 && <span className="balance-empty">{l({ eu: 'hutsik', es: 'vacío', ar: 'فارغة' })}</span>}
                         </div>
+                        <span className="balance-caption mine">{l({ eu: 'Zurea', es: 'El tuyo', ar: 'كفّتك' })}</span>
                     </div>
                 </div>
                 <span className={`balance-dial ${result ?? 'locked'}`} aria-hidden="true">{result === 'balanced' ? '=' : result === 'lighter' ? '>' : result === 'heavier' ? '<' : '?'}</span>
             </div>
 
-            <div className="balance-status" aria-live="polite">
-                <span className="balance-weighings" aria-label={l({ eu: `Pisaketak: ${remaining}`, es: `Pesadas que quedan: ${remaining}`, ar: `الوزنات الباقية: ${remaining}` })}>
-                    {Array.from({ length: BALANCE_WEIGHINGS }, (_, item) => <i key={item} className={item < weighings ? 'used' : ''} aria-hidden="true" />)}
+            <div className="balance-status">
+                <span className="balance-weighings" aria-hidden="true">
+                    {Array.from({ length: BALANCE_WEIGHINGS }, (_, item) => <i key={item} className={item < weighings ? 'used' : ''} />)}
                 </span>
-                <strong className={`balance-verdict ${result ?? ''}`}>
-                    {result ? l(verdict[result]) : l({ eu: 'Pisatu gabe', es: 'Sin pesar', ar: 'لم يُوزن بعد' })}
-                </strong>
+                <span className="balance-left">{l({ eu: `Geratzen diren pisaketak: ${remaining}`, es: `Pesadas que quedan: ${remaining}`, ar: `الوزنات الباقية: ${remaining}` })}</span>
+                <strong className={`balance-verdict ${result ?? ''}`} role="status">{result ? l(verdict[result]) : ''}</strong>
             </div>
+
+            {log.length > 0 && (
+                <ol className="balance-log" aria-label={l({ eu: 'Pisaketen koadernoa', es: 'Cuaderno de pesadas', ar: 'دفتر الوزنات' })}>
+                    {log.map((entry, entryIndex) => (
+                        <li key={entryIndex} className={entry.result}>
+                            <span className="balance-log-number">{entryIndex + 1}</span>
+                            <bdi dir="ltr" className="balance-log-weights">{[...round.right, ...entry.chosen.map((trayIndex) => round.tray[trayIndex])].map(plain).join(' + ')}</bdi>
+                            <span className="balance-log-result">{l(shortVerdict[entry.result])}</span>
+                        </li>
+                    ))}
+                </ol>
+            )}
 
             {!done && (
                 <>
                     <div className="balance-tray" role="group" aria-label={l({ eu: 'Pisu erabilgarriak', es: 'Pesas disponibles', ar: 'الأثقال المتاحة' })}>
-                        {round.tray.map((value, trayIndex) => (chosen.includes(trayIndex)
-                            ? <span key={trayIndex} className="balance-slot" aria-hidden="true" />
-                            : <Weight key={trayIndex} value={value} tone="tray" onClick={() => toggle(trayIndex)} label={l({ eu: 'Jarri zure platerean', es: 'Ponerla en tu platillo', ar: 'ضعه في كفّتك' })} />))}
+                        {round.tray.map((value, trayIndex) => {
+                            const onPan = chosen.includes(trayIndex)
+                            return (
+                                <button
+                                    type="button"
+                                    key={trayIndex}
+                                    className={`balance-weight tray ${onPan ? 'on-pan' : ''}`}
+                                    aria-pressed={onPan}
+                                    aria-label={`${plain(value)}: ${onPan ? l({ eu: 'zure platerean dago; sakatu kentzeko', es: 'está en tu platillo; toca para quitarla', ar: 'في كفّتك؛ اضغط لإزالته' }) : l({ eu: 'sakatu zure platerean jartzeko', es: 'toca para ponerla en tu platillo', ar: 'اضغط لتضعه في كفّتك' })}`}
+                                    onClick={() => toggle(trayIndex)}
+                                >
+                                    <Stacked value={value} />
+                                </button>
+                            )
+                        })}
                     </div>
-                    <button type="button" className="fraction-v2-primary balance-weigh" disabled={result !== null || rightValues.length === 0} onClick={weighNow}>
+                    <button type="button" className="fraction-v2-primary balance-weigh" disabled={result !== null || chosen.length === 0} onClick={weighNow}>
                         {l({ eu: 'Pisatu', es: 'Pesar', ar: 'زِن' })}
                     </button>
-                    <p className="balance-tip">{l({ eu: 'Sakatu pisu bat zure platerean jartzeko; sakatu berriro kentzeko.', es: 'Toca una pesa para ponerla en tu platillo; tócala otra vez para quitarla.', ar: 'اضغط ثقلًا لتضعه في كفّتك، واضغطه مرة أخرى لتزيله.' })}</p>
+                    <p className="balance-tip">{l({ eu: 'Sakatu erretiluko pisu bat zure platerean jartzeko; sakatu berriro kentzeko.', es: 'Toca una pesa de la bandeja para ponerla en tu platillo; tócala otra vez para quitarla.', ar: 'اضغط على ثقل لتضعه في كفّتك، واضغط عليه مرة أخرى لتزيله.' })}</p>
                 </>
             )}
 
             {done && (
-                <div className={`balance-explain ${result === 'balanced' ? 'right' : 'wrong'}`} role="status">
+                <div className={`balance-explain ${balanced ? 'right' : 'wrong'}`} ref={explainRef}>
                     <p>
-                        <strong>{result === 'balanced'
-                            ? l({ eu: `Oreka! +${balancePoints(weighings)} puntu`, es: `¡Equilibrio! +${balancePoints(weighings)} ${balancePoints(weighings) === 1 ? 'punto' : 'puntos'}`, ar: `توازن! +${balancePoints(weighings)} نقاط` })
-                            : l({ eu: 'Pisaketak amaitu dira.', es: 'Se acabaron las pesadas.', ar: 'انتهت الوزنات.' })}</strong>{' '}
-                        {result === 'balanced'
-                            ? l({ eu: 'Bi platerek berdin pisatzen dute:', es: 'Los dos platillos pesan lo mismo:', ar: 'الكفتان تزنان الشيء نفسه:' })
-                            : l({ eu: 'Honela orekatzen zen:', es: 'Así se equilibraba:', ar: 'هكذا كان يتوازن:' })}
+                        <strong>{balanced ? `${l({ eu: 'Oreka!', es: '¡Equilibrio!', ar: 'توازن!' })} ${pointsText(balancePoints(weighings))}` : l({ eu: 'Pisaketak amaitu dira.', es: 'Se acabaron las pesadas.', ar: 'انتهت الوزنات.' })}</strong>{' '}
+                        {balanced
+                            ? l({ eu: 'Bi platerek berdin pisatzen dute:', es: 'Los dos platillos pesan lo mismo:', ar: 'الكفتان متساويتان في الوزن:' })
+                            : l({ eu: 'Honela orekatuko zen:', es: 'Así se equilibraba:', ar: 'هكذا كان يمكن أن تتوازن الكفتان:' })}
                     </p>
                     <ul className="balance-sums">
-                        <li><MathText text={`$${sumLatex(leftValues, result === 'balanced' ? denominator : undefined)}$`} /></li>
-                        <li><MathText text={`$${result === 'balanced' ? sumLatex(rightValues, denominator) : sumLatex(solutionValues)}$`} /></li>
+                        <li><Sum parts={sumParts(leftValues, denominator)} /></li>
+                        <li><Sum parts={sumParts(balanced ? rightValues : solutionValues, denominator)} /></li>
                     </ul>
-                    {result !== 'balanced' && rightValues.length > 0 && (
+                    {!balanced && rightValues.length > 0 && (
                         <p className="balance-yours">
                             {l({ eu: 'Zure platerean:', es: 'En tu platillo había:', ar: 'كان في كفّتك:' })}{' '}
                             <bdi dir="ltr"><MathText inline text={`$${latex(rightValues.reduce((total, value) => add(total, value), fraction(0)))}$`} /></bdi>
