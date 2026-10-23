@@ -8,8 +8,10 @@ import {
     brokenNeighbour,
     cardLatex,
     cardText,
+    cardChain,
     compareLatex,
     createTrains,
+    numeratorTraps,
     fittingGaps,
     fits,
     hookAt,
@@ -49,10 +51,17 @@ test('zatikiak train: every level builds trains of different, tidy wagons with a
                 const values = train.cards.map((card) => card.value)
                 const pairs = values.filter((value, index) => values.slice(index + 1).some((other) => equals(other, value))).length
                 assert.ok(pairs <= 1, `${label}: at most one pair worth the same`)
+                const numbers = train.cards.map((card) => card.value.numerator / card.value.denominator)
+                const sorted = [...numbers].sort((a, b) => a - b)
+                const gaps = sorted.slice(1).map((value, index) => value - sorted[index]).filter((gap) => gap > 1e-9)
+                assert.ok(Math.min(...gaps) >= 0.02, `${label}: no two wagons almost the same`)
+                if (level < 2) assert.ok(numeratorTraps(train.cards) >= 3, `${label}: the numerators alone mislead`)
+                if (level === 0) assert.ok(numbers.every((value) => value > 0 && value < 2), label)
+                if (level === 2) assert.ok(numbers.filter((value) => value < 0).length >= 2 && numbers.filter((value) => value > 0).length >= 2, `${label}: both signs`)
                 for (const card of train.cards) {
                     const number = card.value.numerator / card.value.denominator
                     if (level < 2) assert.ok(number > 0 && number < 3, label)
-                    else assert.ok(number > -2 && number < 2 && number !== 0, label)
+                    else assert.ok(number >= -2 && number <= 2, label)
                     assert.ok(equals(card.value, fraction(card.written.numerator, card.written.denominator)) || card.form !== 'fraction', label)
                 }
                 // Playing it always ends with a train in order
@@ -76,11 +85,13 @@ test('zatikiak train: numbers written as on the wagons, and why one goes after a
     assert.equal(compareLatex({ value: fraction(3, 4), form: 'decimal', written: fraction(3, 4) }, f(2, 3)), '0{,}75=\\frac{3}{4}=\\frac{9}{12}>\\frac{8}{12}=\\frac{2}{3}')
     assert.equal(compareLatex(f(-1, 2), f(-3, 4)), '-\\frac{1}{2}=-\\frac{2}{4}>-\\frac{3}{4}')
     assert.equal(compareLatex(f(6, 8), f(3, 4)), '\\frac{6}{8}=\\frac{3}{4}=\\frac{3}{4}')
+    assert.equal(cardChain(f(16, 10), 10), '\\frac{16}{10}', 'no step that repeats the one before')
+    assert.equal(cardChain({ value: fraction(5, 4), form: 'mixed', written: fraction(5, 4) }, 12), '1\\tfrac{1}{4}=\\frac{5}{4}=\\frac{15}{12}')
 })
 
 test('zatikiak train: stars, and listed with three levels', () => {
     assert.equal(TRAIN_MAX_SCORE, 10)
-    assert.deepEqual([10, 9, 8, 7, 6, 5, 4].map(trainStars), [3, 3, 2, 2, 1, 1, 0])
+    assert.deepEqual([10, 9, 8, 7, 6, 5].map(trainStars), [3, 2, 2, 1, 1, 0])
     const train = games.find((item) => item.id === 'train')
     assert.ok(train)
     assert.deepEqual(train.levels.map((item) => item.progressId), [1501, 1502, 1503])

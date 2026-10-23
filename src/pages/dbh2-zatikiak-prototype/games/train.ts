@@ -68,10 +68,13 @@ export function brokenNeighbour(train: TrainCard[], card: TrainCard, gap: number
 export const inOrder = (cards: TrainCard[]) => cards.every((item, index) => index === 0 || compare(cards[index - 1].value, item.value) <= 0)
 
 /** One point for each wagon hooked right at the first try */
+/** Points for each star: always the same end of the train, or guessing, earns none */
+export const TRAIN_STARS = { three: 10, two: 8, one: 6 } as const
+
 export function trainStars(score: number): Stars {
-    if (score >= 9) return 3
-    if (score >= 7) return 2
-    if (score >= 5) return 1
+    if (score >= TRAIN_STARS.three) return 3
+    if (score >= TRAIN_STARS.two) return 2
+    if (score >= TRAIN_STARS.one) return 1
     return 0
 }
 
@@ -81,10 +84,10 @@ const card = (value: FractionValue, form: CardForm, written: FractionValue = val
 
 const FAMILIES = [[2, 4, 8], [3, 6, 12], [2, 4, 8], [5, 10], [3, 6]]
 
-/** Level 1: one family of denominators (halves, quarters, eighths…), from 0 to 3, some not simplified */
+/** Level 1: one family of denominators (halves, quarters, eighths…), between 0 and 2, some not simplified */
 function familyCard(random: Random, family: number[]): TrainCard {
     const denominator = pick(random, family)
-    const numerator = randomInt(random, 1, 3 * denominator - 1)
+    const numerator = randomInt(random, 1, 2 * denominator - 1)
     const value = fraction(numerator, denominator)
     if (value.denominator === 1) return card(value, 'whole')
     return card(value, 'fraction', { numerator, denominator })
@@ -102,12 +105,13 @@ function anyCard(random: Random): TrainCard {
     }
 }
 
-/** Level 3: from −2 to 2, with negatives, exact decimals and mixed numbers */
+/** Level 3: from −2 to 2, with negatives, exact decimals, mixed numbers and now and then 0 or ±1 */
 function signedCard(random: Random): TrainCard {
     for (;;) {
         const sign = random() < 0.5 ? -1 : 1
         const kind = random()
-        if (kind < 0.3) {
+        if (kind < 0.06) return card(fraction(pick(random, [-1, 0, 1])), 'whole')
+        if (kind < 0.32) {
             // An exact decimal with one or two decimals
             const hundredths = pick(random, [5, 10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 125, 150, 175])
             return card(fraction(sign * hundredths, 100), 'decimal')
@@ -124,10 +128,32 @@ function signedCard(random: Random): TrainCard {
 const sameCard = (a: TrainCard, b: TrainCard) =>
     a.form === b.form && a.written.numerator === b.written.numerator && a.written.denominator === b.written.denominator && equals(a.value, b.value)
 
+const number = (item: TrainCard) => item.value.numerator / item.value.denominator
+
+/**
+ * Pairs of fractions where looking only at the numerators gives the wrong
+ * order (3/4 and 5/8): there must be some, or "the bigger numerator is the
+ * bigger number" would win.
+ */
+export function numeratorTraps(cards: TrainCard[]): number {
+    const fractions = cards.filter((item) => item.form === 'fraction')
+    let traps = 0
+    fractions.forEach((item, index) => {
+        for (const other of fractions.slice(index + 1)) {
+            const byNumerator = Math.sign(item.written.numerator - other.written.numerator)
+            const byValue = compare(item.value, other.value)
+            if (byNumerator !== 0 && byValue !== 0 && byNumerator !== byValue) traps += 1
+        }
+    })
+    return traps
+}
+
 /**
  * A train: six different wagons. At most one pair is worth the same (an
- * equivalent fraction, which may go on either side), and at least one pair
- * is close, so the order takes some thought.
+ * equivalent fraction, which may go on either side); one pair is close but
+ * never too close to see (at least 1/50 apart); the numerators alone do not
+ * give the order; in the last level there are at least two negatives and two
+ * positives, and two negatives close to each other.
  */
 export function createTrain(random: Random, level: TrainLevel): Train {
     const family = pick(random, FAMILIES)
@@ -145,10 +171,19 @@ export function createTrain(random: Random, level: TrainLevel): Train {
             cards.push(next)
         }
         if (cards.length < TRAIN_ARRIVALS + 1) continue
-        // At least one close pair: neighbouring marks of the family, or less than a tenth apart
-        const values = cards.map((item) => item.value.numerator / item.value.denominator).sort((a, b) => a - b)
-        const closest = Math.min(...values.slice(1).map((value, index) => value - values[index]).filter((gap) => gap > 0))
-        if (closest > (level === 0 ? 1 / Math.max(...family) : 0.1) + 1e-9) continue
+        const values = cards.map(number).sort((a, b) => a - b)
+        const gaps = values.slice(1).map((value, index) => value - values[index]).filter((gap) => gap > 1e-9)
+        const closest = Math.min(...gaps)
+        if (closest < 0.02 || closest > (level === 0 ? 1 / Math.max(...family) : level === 1 ? 0.1 : 0.08) + 1e-9) continue
+        if (level < 2 && numeratorTraps(cards) < 3) continue
+        if (level === 0 && cards.filter((item) => item.form === 'whole').length > 1) continue
+        if (level === 2) {
+            const negatives = values.filter((value) => value < 0)
+            const positives = values.filter((value) => value > 0)
+            if (negatives.length < 2 || positives.length < 2) continue
+            const negativeGaps = negatives.slice(1).map((value, index) => value - negatives[index])
+            if (Math.min(...negativeGaps) > 0.3) continue
+        }
         return { cards: shuffle(random, cards) }
     }
 }
@@ -183,20 +218,27 @@ export function cardText(item: TrainCard, separator: ',' | '.' = ','): string {
 const lcm = (a: number, b: number) => (a / gcd(a, b)) * b
 
 /**
- * Why a wagon goes before or after another, over a common denominator:
- * 3/4 = 9/12 > 8/12 = 2/3. Decimals and mixed numbers are first written as
- * fractions.
+ * A wagon's number rewritten over a common denominator: 0,75 = 3/4 = 9/12.
+ * Decimals and mixed numbers go through their fraction first; a step that
+ * would repeat the one before is left out.
  */
+export function cardChain(item: TrainCard, common: number, separator: ',' | '.' = ','): string {
+    const steps = [cardLatex(item, separator)]
+    if (item.value.denominator !== 1 && (item.form === 'decimal' || item.form === 'mixed')) steps.push(frac(item.value.numerator, item.value.denominator))
+    steps.push(common === 1 ? String(item.value.numerator) : frac((item.value.numerator * common) / item.value.denominator, common))
+    return steps.filter((step, index) => index === 0 || step !== steps[index - 1]).join('=')
+}
+
+/** The common denominator of two wagons */
+export const commonOf = (a: TrainCard, b: TrainCard) => lcm(a.value.denominator, b.value.denominator)
+
+/** The last step of a chain: the number over the common denominator */
+export const overCommon = (item: TrainCard, common: number) =>
+    common === 1 ? String(item.value.numerator) : frac((item.value.numerator * common) / item.value.denominator, common)
+
+/** Why a wagon goes after another, in one line: 3/4 = 9/12 > 8/12 = 2/3 */
 export function compareLatex(larger: TrainCard, smaller: TrainCard, separator: ',' | '.' = ','): string {
-    const common = lcm(larger.value.denominator, smaller.value.denominator)
-    const side = (item: TrainCard, end: 'left' | 'right') => {
-        const steps = [cardLatex(item, separator)]
-        const simple = frac(item.value.numerator, item.value.denominator)
-        if (item.value.denominator !== 1 && (item.form === 'decimal' || item.form === 'mixed' || item.written.denominator !== item.value.denominator)) steps.push(simple)
-        const scaled = item.value.denominator === 1 && common === 1 ? String(item.value.numerator) : frac((item.value.numerator * common) / item.value.denominator, common)
-        if (steps[steps.length - 1] !== scaled) steps.push(scaled)
-        return (end === 'left' ? steps : [...steps].reverse()).join('=')
-    }
-    const relation = equals(larger.value, smaller.value) ? '=' : '>'
-    return `${side(larger, 'left')}${relation}${side(smaller, 'right')}`
+    const common = commonOf(larger, smaller)
+    const right = cardChain(smaller, common, separator).split('=').reverse().join('=')
+    return `${cardChain(larger, common, separator)}${equals(larger.value, smaller.value) ? '=' : '>'}${right}`
 }
