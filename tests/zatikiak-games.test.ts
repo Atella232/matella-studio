@@ -226,7 +226,7 @@ test('records: keep the best stars, score and time separately', () => {
     assert.deepEqual(parseRecords('{"race-0":{"stars":2,"score":10,"timeMs":5000},"bad":{"stars":9}}'), { 'race-0': { stars: 2, score: 10, timeMs: 5000 } })
     assert.deepEqual(parseRecords('not json'), {})
     assert.equal(new Set(gameProgressIds).size, gameProgressIds.length)
-    assert.equal(games.length, 9)
+    assert.equal(games.length, 10)
 })
 
 test('target: the hint rewrites the number step by step', () => {

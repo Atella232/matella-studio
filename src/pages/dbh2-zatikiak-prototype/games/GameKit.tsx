@@ -145,6 +145,27 @@ export function GameArt({ game }: { game: GameId }) {
             </svg>
         )
     }
+    if (game === 'train') {
+        // An engine pulling wagons from the smallest to the largest
+        return (
+            <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
+                <line x1="6" y1="98" x2="214" y2="98" stroke="var(--ink-soft)" strokeWidth="2" />
+                <line x1="6" y1="104" x2="214" y2="104" stroke="var(--ink-soft)" strokeWidth="2" />
+                <path d="M10 88 V60 H28 V46 H42 V60 H56 V88 Z" fill="var(--coral)" stroke="var(--ink)" strokeWidth="2.2" strokeLinejoin="round" />
+                <circle cx="22" cy="92" r="6" fill="var(--ink)" />
+                <circle cx="46" cy="92" r="6" fill="var(--ink)" />
+                {(['1/4', '1/2', '2/3', '5/4'] as const).map((label, index) => (
+                    <g key={label}>
+                        <rect x={62 + index * 38} y="54" width="34" height="34" rx="5" fill={index === 2 ? '#fffcf6' : 'var(--mustard-tint)'} stroke="var(--ink)" strokeWidth="2" strokeDasharray={index === 2 ? '4 3' : undefined} />
+                        <text x={79 + index * 38} y="76" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--ink)" fontFamily="Fraunces, serif">{label}</text>
+                        <circle cx={69 + index * 38} cy="92" r="4.5" fill="var(--ink)" />
+                        <circle cx={89 + index * 38} cy="92" r="4.5" fill="var(--ink)" />
+                    </g>
+                ))}
+                <path d="M155 34 v14 m-6 -6 l6 6 l6 -6" fill="none" stroke="var(--ink)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+        )
+    }
     if (game === 'detective') {
         // A worked solution with one line circled and a magnifying glass over it
         return (

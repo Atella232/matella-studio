@@ -1,0 +1,254 @@
+/* ---------- Ordenaren trena / El tren del orden ---------- */
+
+.fraction-v2-games-card[data-game="train"] { --game-tint: var(--mustard-tint); }
+
+.train-game {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* The platform: the wagon that is arriving */
+.train-platform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-height: 116px;
+    justify-content: center;
+}
+
+/* While a wrong wagon is explained the platform is empty: no room kept for it */
+.train-platform:empty {
+    min-height: 0;
+}
+
+.train-platform-label {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.train-count {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.train-right {
+    color: var(--success-ink);
+    font-size: 18px;
+}
+
+.train-direction {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
+    direction: ltr;
+}
+
+.train-direction-arrow {
+    flex: 1;
+    height: 2px;
+    background: var(--muted);
+    position: relative;
+}
+
+.train-direction-arrow::after {
+    content: "";
+    position: absolute;
+    top: -4px;
+    right: -1px;
+    border-left: 8px solid var(--muted);
+    border-block: 5px solid transparent;
+}
+
+/* ---------- The track ---------- */
+
+.train-track {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    min-height: 84px;
+    padding: 10px 4px 14px;
+    border-bottom: 4px double var(--ink-soft);
+    overflow-x: auto;
+    cursor: pointer;
+    touch-action: pan-x pan-y;
+}
+
+.train-game .train-track:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: 8px;
+}
+
+.train-engine {
+    flex-shrink: 0;
+    width: 40px;
+}
+
+.train-engine svg {
+    display: block;
+    width: 100%;
+}
+
+/* A wagon: a box on two wheels, its number in the middle */
+.train-wagon {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 56px;
+    border: 2px solid var(--ink);
+    border-radius: 7px;
+    background: var(--mustard-tint);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.train-wagon::before,
+.train-wagon::after {
+    content: "";
+    position: absolute;
+    bottom: -9px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--ink);
+}
+
+.train-wagon::before { left: 6px; }
+.train-wagon::after { right: 6px; }
+
+.train-wagon-face {
+    display: inline-flex;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.train-wagon-face .math-text .math-token {
+    font-size: 15px;
+}
+
+.train-wagon.arriving {
+    width: 64px;
+    height: 74px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    animation: train-arrive 0.45s ease-out;
+}
+
+.train-wagon.arriving .math-text .math-token {
+    font-size: 20px;
+}
+
+/* Where the wagon would go */
+.train-wagon.ghost {
+    border-style: dashed;
+    border-color: var(--focus);
+    background: var(--blue-tint);
+    opacity: 0.85;
+}
+
+.train-wagon.ghost::before,
+.train-wagon.ghost::after {
+    background: var(--focus);
+}
+
+.train-wagon.new {
+    animation: train-hook 0.35s ease-out;
+}
+
+.train-wagon.moved {
+    border-color: var(--error);
+    background: var(--error-tint);
+}
+
+.train-track.departing .train-engine,
+.train-track.departing .train-wagon {
+    animation: train-depart 1.2s ease-in 0.3s both;
+}
+
+@keyframes train-arrive {
+    from { opacity: 0; transform: translateX(60px); }
+    to { opacity: 1; transform: none; }
+}
+
+@keyframes train-hook {
+    from { transform: translateY(-14px); }
+    to { transform: none; }
+}
+
+@keyframes train-depart {
+    0% { transform: none; }
+    20% { transform: translateX(6px); }
+    100% { transform: translateX(-24px); }
+}
+
+.train-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.train-controls .fraction-v2-secondary {
+    min-width: 56px;
+    font-size: 18px;
+}
+
+.train-controls .fraction-v2-primary {
+    min-width: 150px;
+}
+
+.train-tip {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    text-align: center;
+}
+
+.train-explain,
+.train-done {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 16px;
+    border: 2px solid var(--coral);
+    border-radius: 16px;
+    background: var(--coral-tint);
+}
+
+.train-done {
+    align-items: center;
+    border-color: var(--success);
+    background: var(--success-tint);
+    color: var(--success-ink);
+}
+
+.train-explain p,
+.train-done p {
+    margin: 0;
+}
+
+.train-compare {
+    overflow-x: auto;
+    text-align: center;
+}
+
+.train-explain > .fraction-v2-primary {
+    align-self: flex-end;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .train-wagon.arriving,
+    .train-wagon.new,
+    .train-track.departing .train-engine,
+    .train-track.departing .train-wagon {
+        animation: none;
+    }
+}

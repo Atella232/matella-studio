@@ -3,7 +3,7 @@ import { levelProgressIds, type GameInfo as UnitGameInfo, type GameLevelInfo as 
 
 export { gameStars, mergeRecord, parseRecords, recordKey, type GameRecords, type LevelRecord, type Stars } from '../../../features/unit-v2/games/records.ts'
 
-export type GameId = 'race' | 'memory' | 'target' | 'wall' | 'exact' | 'detective' | 'sales' | 'balance' | 'pyramid'
+export type GameId = 'race' | 'memory' | 'target' | 'wall' | 'exact' | 'detective' | 'sales' | 'balance' | 'pyramid' | 'train'
 
 export interface GameLevelInfo extends UnitGameLevelInfo {
     stage: FractionStageId
@@ -117,6 +117,17 @@ export const games: GameInfo[] = [
             { progressId: 1401, stage: 'operations', title: { eu: 'Gorantz', es: 'Hacia arriba', ar: 'صعودًا' }, description: { eu: 'Beheko ilarako zatikiak familia berekoak dira: batu gorantz.', es: 'Las fracciones de abajo son de la misma familia: suma hacia arriba.', ar: 'كسور الصف السفلي من العائلة نفسها: اجمع صعودًا.' } },
             { progressId: 1402, stage: 'operations', title: { eu: 'Beherantz', es: 'Hacia abajo', ar: 'نزولًا' }, description: { eu: 'Adreilu batzuk kenketaz aurkitzen dira; gero, izendatzaile desberdinekin.', es: 'Algunos ladrillos se encuentran restando; después, con denominadores distintos.', ar: 'بعض اللبنات تُحسب بالطرح؛ ثم بمقامات مختلفة.' } },
             { progressId: 1403, stage: 'operations', title: { eu: 'Biderkaduren piramidea', es: 'Pirámide de productos', ar: 'هرم الضرب' }, description: { eu: 'Adreilu bakoitza biderkadura bat da; beherantz zatitu egiten da, alderantzizkoaz biderkatuz.', es: 'Cada ladrillo es un producto; hacia abajo se divide, multiplicando por la inversa.', ar: 'كل لبنة حاصل ضرب؛ ونزولًا نقسم بالضرب في المقلوب.' } }
+        ]
+    },
+    {
+        id: 'train',
+        title: { eu: 'Ordenaren trena', es: 'El tren del orden', ar: 'قطار الترتيب' },
+        tagline: { eu: 'Lotu bagoi bakoitza bere lekuan, trena txikienetik handienera joan dadin.', es: 'Engancha cada vagón en su sitio para que el tren vaya de menor a mayor.', ar: 'اربط كل عربة في مكانها ليصبح القطار من الأصغر إلى الأكبر.' },
+        skills: { eu: 'Konparatu eta ordenatu', es: 'Comparar y ordenar', ar: 'المقارنة والترتيب' },
+        levels: [
+            { progressId: 1501, stage: 'ordering', title: { eu: 'Familia bat', es: 'Una familia', ar: 'عائلة واحدة' }, description: { eu: 'Erdiak, laurdenak, zortzirenak… edo herenak, seirenak…: izendatzaile komun batekin berehala ordenatzen dira.', es: 'Medios, cuartos, octavos… o tercios, sextos…: con un denominador común se ordenan enseguida.', ar: 'أنصاف وأرباع وأثمان… أو أثلاث وأسداس…: بمقام مشترك تُرتَّب بسرعة.' } },
+            { progressId: 1502, stage: 'ordering', title: { eu: 'Edozein zatiki', es: 'Cualquier fracción', ar: 'أي كسر' }, description: { eu: 'Izendatzaile desberdinak, zatiki inpropioak eta zenbaki mistoak.', es: 'Denominadores distintos, fracciones impropias y números mixtos.', ar: 'مقامات مختلفة وكسور غير حقيقية وأعداد كسرية.' } },
+            { progressId: 1503, stage: 'ordering', title: { eu: 'Negatiboak eta hamartarrak', es: 'Negativos y decimales', ar: 'السالبة والعشرية' }, description: { eu: '−2 eta 2 artean: zatiki negatiboak, hamartarrak eta mistoak batera.', es: 'Entre −2 y 2: fracciones negativas, decimales y mixtos juntos.', ar: 'بين \u2066−2\u2069 و\u20662\u2069: كسور سالبة وأعداد عشرية وكسرية معًا.' } }
         ]
     }
 ]
