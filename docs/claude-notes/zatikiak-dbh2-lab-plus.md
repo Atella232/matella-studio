@@ -127,7 +127,7 @@ L4 «De fracción a decimal» (2026-10-22, first cloud session) was committed as
 
 The owner asked for every remaining option, each built in three rounds: build, then review and add one new improvement, then review again and add another. Sonnet subagents review each round; I decide what to apply. Nothing is deployed: the owner merges and deploys from the Mac.
 
-L5 «Lupa en la recta / Lupa zenbaki-zuzenean» (rounds: 2d3576f, 1eac132, round 3 in the commit after it):
+L5 «Lupa en la recta / Lupa zenbaki-zuzenean» (rounds: 2d3576f, 1eac132, e300ca8):
 - Code: `lab/zoom.ts`, `ZoomTool.tsx`, `Zoom.css`; tool id `zoom`, stage ordering, lesson `ordering` (still opened by `compare`). The ordering lesson got a fifth fact, «Siempre hay otra en medio».
 - How it works: two fractions are marks of their common denominator (as written, lcm of the two denominators) times «Partir cada trozo en» (1–10). A tap on the stretch picks the nearest mark strictly inside (`markForTap`). «Acercar la lupa» fills the line with the pair (only offered when it magnifies ×1.5 or more; the window never exceeds the whole units). With a mark chosen, «Lupa entre L y C» / «Lupa entre C y R» go in beside it (max 6), resetting the split.
 - Round 2 (after review): marks computed in whole numbers (`zoomWindow` returns firstMark/lastMark), whole-number ticks always drawn even beyond 120 marks, labels only where they fit (ResizeObserver width), focus kept on the line, readout wraps in pieces, `touch-action: pan-y`. New: the trail of views (`trail: ZoomView[]`), «Un paso atrás» and tappable steps with their magnification.
@@ -136,7 +136,7 @@ L5 «Lupa en la recta / Lupa zenbaki-zuzenean» (rounds: 2d3576f, 1eac132, round
 - Tests: `tests/zatikiak-zoom.test.ts`, including LRI/PDI around every fraction in Arabic challenge texts.
 - Gotchas: the screenshot helper must not hide every `nav` (the trail is a `nav`); `polygon` points cannot be animated with CSS transitions.
 
-J3 «Balanza / Balantza» (rounds: 06cef75, 28012a3, round 3 in the commit after it):
+J3 «Balanza / Balantza» (rounds: 06cef75, 28012a3, 5e4ce7d):
 - Code: `games/balance.ts`, `BalanceGame.tsx`, `Balance.css`; game id `balance`, slugs balantza/balanza; progress ids 1301–1303; GameArt `balance`. The unit's games description now counts `games.length`.
 - Rules: 6 rounds; the scale only moves on «Pesar»; three weighings a round; balance at the 1st/2nd/3rd weighing = 3/2/1 points; stars `BALANCE_STARS` 16/12/9 of 18 (random single-weight guessing averages about 7).
 - Levels: (1) one weight vs pieces of a family (two pieces and eighths in rounds 1–3; three pieces and finer families later; sometimes the ×2 equivalent weight), (2) two weights with different denominators: the sum, or two pieces of it, among near sums (±1–3 over the common denominator) and slips (one numerator scaled, adding across), (3) both pans loaded: the missing weight among near values and «forgot the fixed weight» / «added it».
@@ -145,7 +145,7 @@ J3 «Balanza / Balantza» (rounds: 06cef75, 28012a3, round 3 in the commit after
 - Tests: `tests/zatikiak-balance.test.ts` (solvable rounds, no rank wins half the time, never the heaviest, easier first rounds, stars).
 - Gotcha: MathText turns «le» between alphanumerics into \le, so `\displaystyle 1+…` breaks; use `\dfrac` (replaceAll on `\frac`) to get full-size fractions inline.
 
-J4 «Pirámide / Piramidea» (rounds: ba86291, 94dd582, round 3 in the commit after it):
+J4 «Pirámide / Piramidea» (rounds: ba86291, 94dd582, debe58f):
 - Code: `games/pyramid.ts`, `PyramidGame.tsx`, `Pyramid.css`; id `pyramid`, slugs piramidea/piramide; progress ids 1401–1403; GameArt `pyramid`.
 - Three-row pyramid (bricks 0 top, 1–2 middle, 3–5 bottom; `PYRAMID_RELATIONS`). Three bricks shown, three to work out; `DOWNWARD_PATTERNS` are the 15 three-brick patterns that can be finished one brick at a time and leave something to find downwards (`solvable`, `nextSteps`).
 - Levels: (1) sums upwards, bottom row from one family; (2) sums with downward steps, first two pyramids within one family, then mixed denominators (lcm ≤ 24, numbers ≤ 30); (3) products, first two upwards, then downwards (dividing), every brick ≤ 20.
@@ -163,7 +163,7 @@ J5 «El tren del orden / Ordenaren trena» (rounds: 8de9456, c2c8984, 7d83fff):
 - Tests: `tests/zatikiak-train.test.ts`.
 - Gotchas: the family threshold for the close pair is 1/(largest denominator of the family), otherwise sixths loop for ever; `cardText` puts a no-break space inside mixed numbers.
 
-M3 «Animaciones en las herramientas» (rounds: 35d2b64, 0321fdf, round 3 in the commit after 7d83fff):
+M3 «Animaciones en las herramientas» (rounds: 35d2b64, 0321fdf, cf2eb46):
 - Code: `lab/Motion.css` (imported by `models.tsx`, `ExpressionTool.tsx`, `NumberLineTool.tsx`), `lab/motion.ts` (merge timing), `MergeBar` in `models.tsx`. 1. DBH and 3. DBH reuse these tools, so they get the motion too.
 - What moves: new cuts draw in and old ones slide (`.fraction-v2-partition i`); the second fraction's pieces in a sum come in from the end of the unit (`--shift`, `:dir(rtl)` flips it); the pieces taken away keep the first colour and fade from the last one back; the product's overlap turns colour cell after cell (`--n` caps the whole sequence at about 1 s); division counts its jumps; the number-line point glides (also after a tap; not while dragging, `data-dragging` is set on pointermove); one arc per jump of 1/d from 0 (`.fraction-v2-nl-hop`, a div with a rounded top revealed by `clip-path`); ticks keyed by value (2/4 and 1/2 are the same mark) glide when the stretch changes; compare-line points glide; each new expression line drops in (`li + li`).
 - Round 2: the hops. Round 3 (after a review in Chromium at 375 px): every rule that moves is inside `@media (prefers-reduced-motion: no-preference)` and the rules outside it draw the final picture, so reduced motion shows the same thing still (before, the subtraction overlay stayed solid red). New: simplifying merges the pieces (`MergeBar`): the lines inside each group of the divisor fade from solid to dashed, group after group, each group lit by an outline, and the new name (2/3) appears when the merge ends (`mergeDuration`). The end picture is the old one (3 parts with dashed thirds).
