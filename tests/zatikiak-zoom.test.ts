@@ -4,8 +4,10 @@ import { createRandom } from '../src/features/unit-v2/games/random.ts'
 import { compare, equals, fraction } from '../src/pages/dbh2-zatikiak-prototype/math/fraction.ts'
 import { labTools } from '../src/pages/dbh2-zatikiak-prototype/lab/labTools.ts'
 import {
+    canZoomIn,
     firstMarkBetween,
     initialZoomState,
+    markForTap,
     magnification,
     marksBetween,
     pickedValue,
@@ -13,8 +15,10 @@ import {
     randomNeighbours,
     setZoomFraction,
     setZoomSplit,
+    zoomBack,
     zoomBeside,
     zoomChallenges,
+    zoomCount,
     zoomDenominator,
     zoomExtra,
     zoomIn,
@@ -58,18 +62,33 @@ test('zatikiak zoom: marks of the common denominator and cutting them finer', ()
     assert.equal(setZoomFraction(state, 'first', 1, 3).picked, null)
 })
 
+test('zatikiak zoom: a tap on the stretch chooses the nearest mark inside it', () => {
+    const state = setZoomSplit(pairOf([1, 3], [1, 2]), 2)
+    assert.equal(markForTap(state, 5 / 12), 5)
+    assert.equal(markForTap(state, 1 / 3 + 0.001), 5, 'next to an end')
+    assert.equal(markForTap(state, 1 / 3 - 0.02), 5, 'just outside, within half a mark')
+    assert.equal(markForTap(state, 0.1), null, 'far away')
+    assert.equal(markForTap(pairOf([1, 3], [1, 2]), 0.4), null, 'nothing between yet')
+})
+
 test('zatikiak zoom: windows, magnification and going deeper', () => {
     let state = setZoomSplit(pairOf([1, 3], [1, 2]), 2)
-    assert.deepEqual(zoomWindow(state), { low: 0, high: 1 })
-    assert.deepEqual(zoomWindow(pairOf([3, 2], [7, 3])), { low: 1, high: 3 })
-    assert.deepEqual(zoomWindow(pairOf([2, 1], [2, 1])), { low: 2, high: 3 })
+    assert.deepEqual(zoomWindow(state), { low: 0, high: 1, firstMark: 0, lastMark: 12 })
+    assert.deepEqual(zoomWindow(pairOf([3, 2], [7, 3])), { low: 1, high: 3, firstMark: 6, lastMark: 18 })
+    assert.deepEqual(zoomWindow(pairOf([2, 1], [2, 1])), { low: 2, high: 3, firstMark: 2, lastMark: 3 })
+    // The lens never shows more than the whole units, and is only offered when it magnifies
+    const wide = pairOf([0, 3], [6, 2])
+    assert.equal(canZoomIn(wide), false)
+    assert.ok(magnification(zoomIn(wide)) >= 1)
+    assert.deepEqual(zoomWindow(zoomIn(pairOf([0, 1], [1, 2]))).low, 0, 'no negative marks before 0')
+    assert.equal(canZoomIn(state), true)
     state = zoomIn(state)
     const { low, high } = zoomWindow(state)
     assert.ok(Math.abs(low - (1 / 3 - 1 / 24)) < 1e-12 && Math.abs(high - (1 / 2 + 1 / 24)) < 1e-12)
     assert.ok(Math.abs(magnification(state) - 4) < 1e-9)
     assert.equal(zoomBeside(state, 'left'), state, 'nothing chosen yet')
     state = zoomBeside(pickFirst(state), 'left')
-    assert.equal(state.zooms, 1)
+    assert.equal(zoomCount(state), 1)
     assert.deepEqual(zoomPair(state), [{ numerator: 1, denominator: 3 }, { numerator: 5, denominator: 12 }])
     assert.equal(state.split, 1)
     assert.equal(marksBetween(state), 0, 'a new gap to fill')
@@ -80,12 +99,21 @@ test('zatikiak zoom: windows, magnification and going deeper', () => {
         assert.equal(compare(pair[0], pair[1]), -1)
         assert.ok(compare(fraction(1, 3), pair[0]) <= 0 && compare(pair[1], fraction(1, 2)) < 0)
     }
-    assert.equal(state.zooms, ZOOM_LIMITS.maxZooms)
+    assert.equal(zoomCount(state), ZOOM_LIMITS.maxZooms)
     const deepest = pickFirst(setZoomSplit(state, 2))
     assert.notEqual(deepest.picked, null)
     assert.equal(zoomBeside(deepest, 'left'), deepest, 'no zooming past the limit')
     assert.ok(magnification(deepest) > 200, "six zooms magnify the line hundreds of times")
-    assert.deepEqual(zoomOut(deepest), { ...deepest, lens: null, split: 1, picked: null, zooms: 0 })
+    assert.deepEqual(zoomOut(deepest), { ...deepest, lens: null, split: 1, picked: null, trail: [] })
+    // Back out one view at a time, each as it was left, or jump to any earlier one
+    const back = zoomBack(deepest)
+    assert.equal(zoomCount(back), ZOOM_LIMITS.maxZooms - 1)
+    assert.deepEqual({ lens: back.lens, split: back.split, picked: back.picked }, deepest.trail[ZOOM_LIMITS.maxZooms - 1])
+    assert.notEqual(back.picked, null, 'the mark chosen there is still chosen')
+    const start = zoomBack(deepest, 0)
+    assert.equal(zoomCount(start), 0)
+    assert.deepEqual(zoomPair(start), [{ numerator: 1, denominator: 3 }, { numerator: 1, denominator: 2 }])
+    assert.equal(zoomBack(start), start, 'nothing to go back to')
 })
 
 test('zatikiak zoom: challenges', () => {
@@ -104,6 +132,8 @@ test('zatikiak zoom: challenges', () => {
     for (const challenge of zoomChallenges) {
         for (const language of ['eu', 'es', 'ar'] as const) assert.ok(challenge.prompt[language].trim() && challenge.hint[language].trim())
         assert.doesNotMatch(challenge.prompt.eu + challenge.hint.eu, /\d(?:ren|ko|ra|tik|rekin|tan|an|ean|ek|z)\b/, 'no suffix after a number in Basque')
+        // Arabic: every fraction sits inside LRI … PDI
+        assert.doesNotMatch((challenge.prompt.ar + challenge.hint.ar).replace(/\u2066[^\u2069]*\u2069/g, ''), /\d\/\d/, `${challenge.id} Arabic fractions isolated`)
     }
 })
 
@@ -116,6 +146,7 @@ test('zatikiak zoom: endless practice uses neighbouring fractions', () => {
         const challenge = zoomExtra(createRandom(seed * 271))
         assert.ok(challenge.isSolved(challenge.solution) && !challenge.isSolved(initialZoomState), `${seed}`)
         for (const text of [...Object.values(challenge.prompt), ...Object.values(challenge.hint)]) assert.ok(text.length > 0)
+        assert.doesNotMatch(challenge.prompt.ar.replace(/\u2066[^\u2069]*\u2069/g, ''), /\d\/\d/)
     }
     assert.ok(zoomSolution(fraction(1, 2), fraction(1, 2)).picked === null)
 })

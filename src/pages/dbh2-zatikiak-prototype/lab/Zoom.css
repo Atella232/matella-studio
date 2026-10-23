@@ -90,7 +90,6 @@
 
 .zoom-connector polygon {
     fill: var(--stage-soft);
-    transition: points 0.45s ease;
 }
 
 .zoom-connector line {
@@ -105,7 +104,8 @@
     position: relative;
     height: 150px;
     cursor: pointer;
-    touch-action: none;
+    /* Sideways drags choose a mark; the page still scrolls up and down */
+    touch-action: pan-y;
     user-select: none;
 }
 
@@ -145,13 +145,6 @@
     background: var(--ink-soft);
     transition: left 0.45s ease;
     animation: zoom-appear 0.35s ease;
-}
-
-.zoom-line.dense .zoom-tick:not(.whole):not(.end):not(.picked) {
-    top: 93px;
-    height: 11px;
-    width: 1px;
-    margin-left: -0.5px;
 }
 
 .zoom-tick.whole {
@@ -300,9 +293,82 @@
     align-self: center;
 }
 
+/* The chain under the line wraps between its comparisons instead of scrolling */
+.zoom-chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2px 6px;
+}
+
+.zoom-chain-piece {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ---------- The trail: each stretch the lens went through ---------- */
+
+.zoom-trail {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.zoom-trail-title {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.zoom-trail ol {
+    display: flex;
+    direction: ltr;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.zoom-trail li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.zoom-trail li + li::before {
+    content: "›";
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.zoom .zoom-trail-step {
+    min-height: 34px;
+    padding: 4px 10px;
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    background: var(--card);
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.zoom .zoom-trail-step.current {
+    display: inline-flex;
+    align-items: center;
+    background: var(--stage-tint);
+}
+
+.zoom-trail-step small {
+    color: var(--muted);
+    font-size: 12px;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .zoom-overview-band,
-    .zoom-connector polygon,
     .zoom-between,
     .zoom-tick,
     .zoom-dot,
