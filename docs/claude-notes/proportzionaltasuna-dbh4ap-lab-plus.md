@@ -1,6 +1,6 @@
 ---
 name: proportzionaltasuna-dbh4ap-lab-plus
-description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) built on feat/proportzionaltasuna-dbh4ap-lab-plus, not merged or deployed yet"
+description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); next phase 2: L2 + L1"
 ---
 
 On 2026-10-26 the owner asked for the same kind of review as [[zatikiak-dbh2-lab-plus]], this time for `src/pages/dbh4-aplikatuak-proportzionaltasuna`. The unit was built in October (see [[remaining-eso-units]]).
@@ -56,6 +56,12 @@ Order agreed:
 4. J1 + J2.
 
 ## Phase 1 (branch `feat/proportzionaltasuna-dbh4ap-lab-plus`)
+
+Committed as 576b3da, fast-forwarded into main, pushed and deployed to matella.net on 2026-10-26 (bundle index-CeH4y5Qt). Checked live at 375 px:
+- the title fits in eu, es and ar;
+- the four new tools ask for a prediction;
+- the ∞ challenges work in growth, mixture, motion, taps, chain and the 2. DBH shares;
+- there is no sideways scroll and no console error.
 
 ### A1: long titles at 375 px
 
