@@ -1,6 +1,6 @@
 ---
 name: proportzionaltasuna-dbh4ap-lab-plus
-description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) built 2026-10-27 on feat/proportzionaltasuna-dbh4ap-lab-l1l2, not merged or deployed yet; next phase 3: M3 + M4 + M5 + L3"
+description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); next phase 3: M3 + M4 + M5 + L3"
 ---
 
 On 2026-10-26 the owner asked for the same kind of review as [[zatikiak-dbh2-lab-plus]], this time for `src/pages/dbh4-aplikatuak-proportzionaltasuna`. The unit was built in October (see [[remaining-eso-units]]).
@@ -153,6 +153,11 @@ Checked at 375 px in eu, es and ar, in 4. DBH and in the 2. DBH tools that share
 ## Phase 2 (branch `feat/proportzionaltasuna-dbh4ap-lab-l1l2`, 2026-10-27)
 
 Two new tools for the four lessons that had none of their own. The lab now has 11 tools.
+
+Committed as 3751d4f, fast-forwarded into main, pushed and deployed to matella.net on 2026-10-27 (bundle index-BZ8nV5vz). Checked live at 375 px:
+- both tools take a correct answer and have ∞ challenges;
+- the lessons direct-rule, inverse-rule, percent-calc and index open them («Experimentar en el laboratorio»);
+- no sideways scroll and no console error.
 
 ### L2 «La barra del 100 %»
 
