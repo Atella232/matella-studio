@@ -7,12 +7,16 @@ import { ClassifyTool } from '../../dbh1-proportzionaltasuna-v2/lab/ProportionTo
 import { ChainTool, CompoundTool, InterestTool, ShareTool } from '../../dbh2-proportzionaltasuna-v2/lab/ProportionDbh2Tools'
 import { proportionDbh4ApStages } from '../lessons'
 import { proportionDbh4ApLabTools, type ProportionDbh4ApLabToolId } from './labTools'
+import { PercentBarTool } from './PercentBarTool'
+import { RuleTool } from './RuleTool'
 import { GrowthTool, MixtureTool, MotionTool, TapsTool } from './ProportionDbh4ApTools'
 
 const toolComponents: Record<ProportionDbh4ApLabToolId, (props: LabToolProps) => JSX.Element> = {
     classify: ClassifyTool,
+    rule: RuleTool,
     compound: CompoundTool,
     share: ShareTool,
+    percentbar: PercentBarTool,
     chain: ChainTool,
     interest: InterestTool,
     growth: GrowthTool,

@@ -1,6 +1,6 @@
 ---
 name: proportzionaltasuna-dbh4ap-lab-plus
-description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); next phase 2: L2 + L1"
+description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) built 2026-10-27 on feat/proportzionaltasuna-dbh4ap-lab-l1l2, not merged or deployed yet; next phase 3: M3 + M4 + M5 + L3"
 ---
 
 On 2026-10-26 the owner asked for the same kind of review as [[zatikiak-dbh2-lab-plus]], this time for `src/pages/dbh4-aplikatuak-proportzionaltasuna`. The unit was built in October (see [[remaining-eso-units]]).
@@ -149,3 +149,69 @@ Checked at 375 px in eu, es and ar, in 4. DBH and in the 2. DBH tools that share
 
 - In the extra-challenge tests, `/\$[^$]+\$[a-z]/` also matches across two formulas («…$: behar duzu $r…»). Check the character after each formula found with `matchAll` instead.
 - The `Label` from `dbh2-funtzioak-v2/plane` flips its anchor for Arabic. A legend drawn as a square and then a Label still reads left to right.
+
+## Phase 2 (branch `feat/proportzionaltasuna-dbh4ap-lab-l1l2`, 2026-10-27)
+
+Two new tools for the four lessons that had none of their own. The lab now has 11 tools.
+
+### L2 «La barra del 100 %»
+
+- Tool id `percentbar`, stage percent. The lessons `percent-calc` and `index` now open it instead of the chain tool.
+- Logic in `lab/percentBar.ts`, component in `lab/PercentBarTool.tsx`.
+- Situation: «a % of», «rise» or «cut». The learner picks what to find:
+  - the part (or the final price);
+  - the total (or the price before the change);
+  - the percentage (or the size of the change).
+- Amounts and the rate are typed with `NumberField`, in whole euros.
+- The learner writes the unknown with `ResultAnswer`, read with `readMoneyAnswer`.
+  - A result with more than two decimals is expected rounded to the hundredths (`roundedAnswer`, shared with L1).
+  - A rise to a lower price is flagged as impossible, with no answer field.
+- The drawing:
+  - the 100 % bar on top, in ten 10 % pieces;
+  - the compared bar below, on the same scale, with the extra part in green for a rise or a dashed red gap for a cut;
+  - an arrow between them with the index (« · 1,21 », or « : 0,75 » going back);
+  - «each piece: 10 % = …».
+  - The unknown shows «?» until it is written right or revealed.
+- `percentSlip` catches the classic slips after a wrong check:
+  - adding the % to the final price (84 € + 25 % = 105 €);
+  - multiplying by the index instead of dividing.
+- Challenges 43501–43504:
+  - the stadium: 24 000 is the 80 %;
+  - the dress: 84 € after a 25 % cut;
+  - the plumber: 119 € plus 21 % VAT;
+  - the insurance: 520 € down to 442 €.
+- Endless `percentBarExtra`: every situation and unknown, with whole euros on both bars.
+- Tests in `tests/proportzionaltasuna-dbh4ap-percentbar.test.ts`.
+
+### L1 «Regla de tres con flechas»
+
+- Tool id `rule`, stage simple. The lessons `direct-rule` and `inverse-rule` now open it instead of the classifier.
+- Logic in `lab/ruleOfThree.ts`, component in `lab/RuleTool.tsx`.
+- Seven situations, each with a fixed relation:
+  - direct: price (kg → €) and distance (min → km);
+  - inverse: workers, speed, food, cows and tap.
+- The learner types a, b and the new c, then chooses direct or inverse.
+  - A wrong choice can be changed. The feedback gives the «double → double / half» reason, styled with the Zatikiak `Prediction.css` classes.
+- Only with the right relation do the bottom arrows and the answer field appear.
+- Methods:
+  - «Regla de tres»: one arrow, · c/a on top; on the bottom · c/a when direct, : c/a when inverse.
+  - «Reducción a la unidad»: a middle column for 1 (: a then · c), with b/a or a·b on the bottom row.
+- The solved cell turns green.
+- `ruleSlip` warns when the written x is the other relation's result.
+- Challenges 43601–43604:
+  - food: 4 people, 30 days, 6 people;
+  - cyclist: 12 min for 4 km, 30 min;
+  - cows: 35, 60 days, 20;
+  - oranges through the unit: 5 kg for 8 €, 12 kg.
+- Endless `ruleExtra`: any situation; the result is whole 75 % of the time, otherwise up to two decimals.
+- Tests in `tests/proportzionaltasuna-dbh4ap-rule.test.ts`.
+
+### Checks
+
+- Suite 874/874; lint and build OK.
+- Checked at 375 px in eu, es and ar: no sideways scroll, and no SVG text outside the viewBox.
+
+### Gotchas
+
+- An SVG `Label` with Arabic words and a formula such as «10 % = 50 €» comes out scrambled. Wrap the formula in LRI/PDI yourself (`\u2066…\u2069`).
+- Basque prompts were rewritten so that no number takes a case ending («% 25 merketu dute», not «% 25eko beherapena»).

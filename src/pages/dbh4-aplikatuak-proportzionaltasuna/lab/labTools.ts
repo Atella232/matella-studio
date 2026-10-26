@@ -5,6 +5,8 @@ import type { LocalizedText } from '../../../features/unit-v2/types.ts'
 import type { ProportionDbh4ApStageId } from '../lessons.tsx'
 import { classifyChallenges } from '../../dbh1-proportzionaltasuna-v2/lab/labTools.ts'
 import { chainChallenges, compoundChallenges, interestChallenges, shareChallenges } from '../../dbh2-proportzionaltasuna-v2/lab/labTools.ts'
+import { percentBarChallenges } from './percentBar.ts'
+import { ruleChallenges } from './ruleOfThree.ts'
 
 /* ==========================================================================
    Proportzionaltasuna (4. DBH aplikatuak) laboratory. The magnitude sorter
@@ -19,7 +21,7 @@ import { chainChallenges, compoundChallenges, interestChallenges, shareChallenge
    and tests/proportzionaltasuna-dbh4ap-extra.test.ts.
    ========================================================================== */
 
-export type ProportionDbh4ApLabToolId = 'classify' | 'compound' | 'share' | 'chain' | 'interest' | 'growth' | 'mixture' | 'motion' | 'taps'
+export type ProportionDbh4ApLabToolId = 'classify' | 'rule' | 'compound' | 'share' | 'percentbar' | 'chain' | 'interest' | 'growth' | 'mixture' | 'motion' | 'taps'
 
 export interface ProportionDbh4ApLabTool extends LabToolInfo {
     id: ProportionDbh4ApLabToolId
@@ -68,8 +70,10 @@ const sameSet = (values: readonly number[], wanted: number[]) => [...values].sor
 
 export const proportionDbh4ApLabTools: ProportionDbh4ApLabTool[] = [
     { id: 'classify', stage: 'simple', lessonTopic: 'relations', title: say('Zuzena, alderantzizkoa ala bat ere ez', 'Directa, inversa o ninguna', 'طردي أم عكسي أم لا شيء'), observe: say('Bikoitza → bikoitza: zuzena. Bikoitza → erdia: alderantzizkoa. Handitzea bakarrik ez da nahikoa: proportzio berean handitu behar du.', 'Doble → doble: directa. Doble → mitad: inversa. No basta con crecer: tiene que crecer en la misma proporción.', 'الضعف ← الضعف: طردي. الضعف ← النصف: عكسي. ولا تكفي الزيادة: يجب أن تكون بالنسبة نفسها.') },
+    { id: 'rule', stage: 'simple', lessonTopic: 'direct-rule', title: say('Gezidun hiruko erregela', 'Regla de tres con flechas', 'قاعدة الثلاثة بالأسهم'), observe: say('Goian, lehen magnitudea zenbaki batez biderkatzen da. Erlazioa zuzena bada, behean zenbaki beraz biderkatzen da; alderantzizkoa bada, behean zatitu egiten da. Unitatera laburtuz: lehenik unitate baten balioa, gero eskatzen dena.', 'Arriba, la primera magnitud se multiplica por un número. Si la relación es directa, abajo se multiplica por el mismo; si es inversa, abajo se divide. Por la unidad: primero el valor de 1, luego el que se pide.', 'في الأعلى يُضرب المقدار الأول في عدد. إذا كانت العلاقة طردية نضرب في الأسفل في العدد نفسه، وإذا كانت عكسية نقسم في الأسفل. وبالإرجاع إلى الوحدة: أولًا قيمة الواحد ثم المطلوب.') },
     { id: 'compound', stage: 'compound', lessonTopic: 'compound', title: say('Proportzionaltasun konposatuaren makina', 'La máquina de proporcionalidad compuesta', 'آلة التناسب المركّب'), observe: say('Magnitude bakoitzeko erabaki: zuzena (berria/zaharra) ala alderantzizkoa (zaharra/berria). Ezezaguna zatiki guztiez biderkatzen da.', 'Para cada magnitud decide: directa (nuevo/viejo) o inversa (viejo/nuevo). La incógnita se multiplica por todas las fracciones.', 'قرّر لكل مقدار: طردي (الجديد/القديم) أم عكسي (القديم/الجديد). ويُضرب المجهول في كل الكسور.') },
     { id: 'share', stage: 'compound', lessonTopic: 'direct-share', title: say('Banaketak', 'Repartos', 'التوزيعات'), observe: say('Zuzenean zenbaki handienak zati handiena hartzen du; alderantzizkoan, txikiena. Zatien batura beti kantitate osoa da.', 'En el directo el número mayor se lleva la parte mayor; en el inverso, la menor. Las partes siempre suman la cantidad entera.', 'في الطردي يأخذ العدد الأكبر الجزء الأكبر؛ وفي العكسي الأصغر. ومجموع الأجزاء يساوي الكمية كلها دائمًا.') },
+    { id: 'percentbar', stage: 'percent', lessonTopic: 'percent-calc', title: say('Ehunekoen barra', 'La barra del 100 %', 'شريط 100٪'), observe: say('Goiko barra % 100 da; behekoa, ehunekoa, eskala berean. % 21 igotzean barra % 121 arte luzatzen da; % 25 merketzean % 75 geratzen da. Atzera egiteko, indizeaz zatitzen da.', 'La barra de arriba es el 100 %; la de abajo, el porcentaje, en la misma escala. Subir un 21 % alarga la barra hasta el 121 %; rebajar un 25 % la deja en el 75 %. Hacia atrás se divide entre el índice.', 'الشريط العلوي هو 100٪، والسفلي هو النسبة بالمقياس نفسه. رفع 21٪ يمدّ الشريط إلى 121٪، وتخفيض 25٪ يتركه عند 75٪. وللرجوع نقسم على المؤشر.') },
     { id: 'chain', stage: 'percent', lessonTopic: 'chained', title: say('Ehuneko kateatuak', 'Porcentajes encadenados', 'النسب المتتالية'), observe: say('Aldaketa bakoitza bere indizeaz biderkatzen da. % 10 igo eta % 10 jaitsiz gero, ez da hasierara itzultzen.', 'Cada cambio multiplica por su índice. Si subes un 10 % y bajas un 10 %, no vuelves al principio.', 'كل تغيّر يضرب في مؤشره. إذا زدت 10٪ ثم خفّضت 10٪ فلن تعود إلى البداية.') },
     { id: 'interest', stage: 'interest', lessonTopic: 'simple-interest', title: say('Interes bakuna', 'Interés simple', 'الفائدة البسيطة'), observe: say('Urtero interes bera gehitzen da, hasierako kapitalaren % r. Urte bikoitza edo tasa bikoitza → interes bikoitza.', 'Cada año se suma el mismo interés, el r % del capital inicial. El doble de años o el doble de tipo → el doble de interés.', 'تُضاف كل سنة الفائدة نفسها، r٪ من رأس المال الأصلي. ضعف السنوات أو ضعف السعر ← ضعف الفائدة.') },
     { id: 'growth', stage: 'interest', lessonTopic: 'compound-interest', title: say('Bakuna ala konposatua', 'Simple o compuesto', 'بسيطة أم مركّبة'), observe: say('Lehen urtean biak berdinak dira; gero konposatua aurrera doa, interesak ere interesa sortzen duelako. Aldi gehiago (k) → apur bat gehiago.', 'El primer año los dos coinciden; después el compuesto se adelanta, porque el interés también produce interés. Más periodos (k) → algo más.', 'في السنة الأولى يتساويان؛ ثم تتقدم المركّبة لأن الفائدة تُنتج فائدة. فترات أكثر (k) ← أكثر قليلًا.') },
@@ -80,13 +84,13 @@ export const proportionDbh4ApLabTools: ProportionDbh4ApLabTool[] = [
 
 export const proportionDbh4ApLabToolForTopic: Record<string, ProportionDbh4ApLabToolId | undefined> = {
     relations: 'classify',
-    'direct-rule': 'classify',
-    'inverse-rule': 'classify',
+    'direct-rule': 'rule',
+    'inverse-rule': 'rule',
     compound: 'compound',
     'direct-share': 'share',
     'inverse-share': 'share',
-    'percent-calc': 'chain',
-    index: 'chain',
+    'percent-calc': 'percentbar',
+    index: 'percentbar',
     chained: 'chain',
     'simple-interest': 'interest',
     'compound-interest': 'growth',
@@ -589,8 +593,10 @@ export const tapsExtra: LabChallengeMaker<TapsState> = freshFrom(initialTapsStat
 
 export const proportionDbh4ApLabChallengeIds = [
     ...classifyChallenges,
+    ...ruleChallenges,
     ...compoundChallenges,
     ...shareChallenges,
+    ...percentBarChallenges,
     ...chainChallenges,
     ...interestChallenges,
     ...growthChallenges,
