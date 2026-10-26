@@ -25,6 +25,7 @@ export function PredictionStep({
     actual,
     choice,
     tip,
+    wait,
     onChoose,
     children
 }: {
@@ -36,6 +37,8 @@ export function PredictionStep({
     choice: Relation | null
     /** Why, shown after the prediction */
     tip: LocalizedText
+    /** What to do before predicting; by default, «predict, then write the result» */
+    wait?: LocalizedText
     onChoose: (relation: Relation) => void
     children: ReactNode
 }) {
@@ -67,7 +70,7 @@ export function PredictionStep({
                 )}
             </div>
             {choice === null
-                ? <p className="prediction-wait">{l({ eu: 'Iragarri lehenik; gero idatzi emaitza.', es: 'Primero predice; después escribe el resultado.', ar: 'توقّع أولًا، ثم اكتب النتيجة.' })}</p>
+                ? <p className="prediction-wait">{l(wait ?? { eu: 'Iragarri lehenik; gero idatzi emaitza.', es: 'Primero predice; después escribe el resultado.', ar: 'توقّع أولًا، ثم اكتب النتيجة.' })}</p>
                 : children}
         </>
     )

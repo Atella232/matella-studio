@@ -59,8 +59,9 @@ test('proportzionaltasuna 4. DBH ap lab: tools, topics and challenge ids', () =>
 
 test('proportzionaltasuna 4. DBH ap lab: simple against compound interest', () => {
     // The lesson's example: 1000 € at 10 %
-    assert.deepEqual([0, 1, 2, 3].map((year) => toNumber(simpleAfter(initialGrowthState, year))), [1000, 1100, 1200, 1300])
-    assert.deepEqual([0, 1, 2, 3].map((year) => cents(compoundAfter(initialGrowthState, year))), [1000, 1100, 1210, 1331])
+    const lesson = setGrowth(initialGrowthState, { capital: 1000, rate: 10, years: 3 })
+    assert.deepEqual([0, 1, 2, 3].map((year) => toNumber(simpleAfter(lesson, year))), [1000, 1100, 1200, 1300])
+    assert.deepEqual([0, 1, 2, 3].map((year) => cents(compoundAfter(lesson, year))), [1000, 1100, 1210, 1331])
     // The textbook values
     assert.equal(cents(compoundAfter(setGrowth(initialGrowthState, { capital: 10000, rate: 12, years: 1, periods: 12 }), 1)), 11268.25)
     assert.equal(cents(compoundAfter(setGrowth(initialGrowthState, { capital: 10000, rate: 12, years: 1, periods: 4 }), 1)), 11255.09)
@@ -68,7 +69,7 @@ test('proportzionaltasuna 4. DBH ap lab: simple against compound interest', () =
     assert.equal(setGrowth(initialGrowthState, { rate: 40, years: 0 }).rate, 12)
     assert.equal(setGrowth(initialGrowthState, { years: 0 }).years, 1)
     const states = [
-        initialGrowthState,
+        lesson,
         setGrowth(initialGrowthState, { capital: 10000, rate: 12, years: 10 }),
         setGrowth(initialGrowthState, { rate: 12, years: 7 }),
         setGrowth(initialGrowthState, { capital: 10000, rate: 12, years: 1, periods: 12 })
@@ -79,22 +80,24 @@ test('proportzionaltasuna 4. DBH ap lab: simple against compound interest', () =
 })
 
 test('proportzionaltasuna 4. DBH ap lab: the mixture', () => {
-    assert.deepEqual(mixturePrice(initialMixtureState), fraction(1040, 100))
+    const coffee = setMixture(setMixture(setMixture(setMixture(initialMixtureState, { kilos: [0, 12] }), { price: [0, 1240] }), { kilos: [1, 8] }), { price: [1, 740] })
+    assert.deepEqual(mixturePrice(coffee), fraction(1040, 100))
     assert.equal(setMixture(initialMixtureState, { kilos: [0, 99] }).kilos[0], 30)
     const states = [
-        initialMixtureState,
-        setMixture(setMixture(initialMixtureState, { kilos: [1, 12] }), { price: [1, 600] }),
+        coffee,
+        setMixture(initialMixtureState, { kilos: [1, 10] }),
         setMixture(setMixture(setMixture(setMixture(initialMixtureState, { kilos: [0, 12] }), { price: [0, 1500] }), { kilos: [1, 10] }), { price: [1, 950] }),
         setMixture(setMixture(setMixture(setMixture(initialMixtureState, { kilos: [0, 1] }), { price: [0, 740] }), { kilos: [1, 3] }), { price: [1, 520] })
     ]
     assert.deepEqual(solvedBy(mixtureChallenges, states), all(mixtureChallenges))
     // Equal prices are not «halfway between two prices»
-    assert.ok(!solvedIds(mixtureChallenges, setMixture(setMixture(initialMixtureState, { kilos: [1, 12] }), { price: [1, 1240] })).includes(43202))
+    assert.ok(!solvedIds(mixtureChallenges, setMixture(setMixture(initialMixtureState, { kilos: [1, 10] }), { price: [1, 950] })).includes(43202))
 })
 
 test('proportzionaltasuna 4. DBH ap lab: two vehicles', () => {
-    assert.deepEqual(meetingMinutes(initialMotionState), fraction(80))
-    const met = setMotion(initialMotionState, { minutes: 80 })
+    const road = setMotion(setMotion(setMotion(initialMotionState, { distance: 240 }), { speed: [0, 70] }), { speed: [1, 110] })
+    assert.deepEqual(meetingMinutes(road), fraction(80))
+    const met = setMotion(road, { minutes: 80 })
     assert.ok(atMeeting(met))
     assert.deepEqual(positions(met)[0], positions(met)[1])
     // The clock moves in steps of 5 minutes
@@ -112,12 +115,13 @@ test('proportzionaltasuna 4. DBH ap lab: two vehicles', () => {
 })
 
 test('proportzionaltasuna 4. DBH ap lab: taps and drain', () => {
-    assert.deepEqual(fillHours(initialTapsState), fraction(35, 12))
+    const tank = setTaps(setTaps(initialTapsState, { tap: [0, 5] }), { tap: [1, 7] })
+    assert.deepEqual(fillHours(tank), fraction(35, 12))
     // Tap A cannot be closed; tap B and the drain can
     assert.equal(setTaps(initialTapsState, { tap: [0, 0] }).taps[0], 1)
     assert.equal(setTaps(initialTapsState, { tap: [1, 0] }).taps[1], 0)
     const states = [
-        initialTapsState,
+        tank,
         setTaps(setTaps(initialTapsState, { tap: [0, 3] }), { tap: [1, 6] }),
         setTaps(setTaps(setTaps(initialTapsState, { tap: [0, 8] }), { tap: [1, 12] }), { drain: 4 }),
         setTaps(setTaps(setTaps(initialTapsState, { tap: [0, 2] }), { tap: [1, 3] }), { drain: 6 })

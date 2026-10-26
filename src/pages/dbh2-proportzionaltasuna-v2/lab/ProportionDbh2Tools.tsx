@@ -8,6 +8,7 @@ import { Label } from '../../dbh2-funtzioak-v2/plane'
 import {
     CAPITALS,
     chainChallenges,
+    chainExtra,
     chainFinal,
     chainIndex,
     CHAIN_STARTS,
@@ -25,6 +26,7 @@ import {
     initialInterestState,
     initialShareState,
     interestChallenges,
+    interestExtra,
     interestOf,
     RATE_MAX,
     rightRelations,
@@ -34,6 +36,7 @@ import {
     SHARE_NUMBER_MAX,
     SHARE_TOTALS,
     shareChallenges,
+    shareExtra,
     shareParts,
     YEARS_MAX,
     type ChainState,
@@ -71,8 +74,10 @@ const valueText = (language: string, value: FractionValue) => {
 /** The terms of a fraction as LaTeX */
 const termLatex = (value: FractionValue) => (value.denominator === 1 ? String(value.numerator) : valueLatex(value))
 
-function Board({ height, label, children }: { height: number; label: string; children: ReactNode }) {
-    return <svg viewBox={`0 0 640 ${height}`} direction="ltr" role="img" aria-label={label} style={{ width: '100%', height: 'auto', fontFamily: '"Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif' }}>{children}</svg>
+function Board({ height, label, children, narrow = false }: { height: number; label: string; children: ReactNode; narrow?: boolean }) {
+    // A narrow board (360 wide) keeps its labels readable on a phone and stops at 520 px on a computer
+    const style = narrow ? { display: 'block', width: '100%', maxWidth: 520, height: 'auto', margin: '0 auto' } : { width: '100%', height: 'auto' }
+    return <svg viewBox={`0 0 ${narrow ? 360 : 640} ${height}`} direction="ltr" role="img" aria-label={label} style={{ ...style, fontFamily: '"Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif' }}>{children}</svg>
 }
 
 function Readout({ language, latex, note }: { language: string; latex: string; note: string }) {
@@ -171,7 +176,7 @@ export function ShareTool(props: LabToolProps) {
     // Where each part starts on the bar
     const segments = parts.map((_, index) => parts.slice(0, index).reduce((sum, part) => sum + (toNumber(part) / total) * 560, 0))
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={shareChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={shareChallenges} extraChallenges={shareExtra} state={state}>
             <Board height={200} label={l(say('Banaketa barra batean', 'El reparto en una barra', 'التوزيع في شريط'))}>
                 {parts.map((part, index) => {
                     const width = (toNumber(part) / total) * 560
@@ -210,27 +215,29 @@ export function ChainTool(props: LabToolProps) {
     const note = l(say(`Indize osoa ${valueText('eu', index)}: guztira ${change >= 0 ? '+' : ''}${(Math.round(change * 100) / 100).toString().replace('.', ',')} %.`, `Índice total ${valueText('es', index)}: en total ${change >= 0 ? '+' : ''}${(Math.round(change * 100) / 100).toString().replace('.', ',')} %.`, `المؤشر الكلي ${valueText('ar', index)}: إجمالًا ${change >= 0 ? '+' : ''}${Math.round(change * 100) / 100}٪.`))
     // Running amounts after each active change
     const steps = active.reduce<FractionValue[]>((list, percent) => [...list, { numerator: list[list.length - 1].numerator * (100 + percent), denominator: list[list.length - 1].denominator * 100 }], [{ numerator: state.start, denominator: 1 }])
-    const width = 500 / Math.max(1, steps.length - 1)
+    const width = 272 / Math.max(1, steps.length - 1)
+    const boxX = (step: number) => (steps.length === 1 ? 180 : 44 + step * width)
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={chainChallenges} state={state}>
-            <Board height={180} label={l(say('Aldaketen katea', 'La cadena de cambios', 'سلسلة التغيّرات'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={chainChallenges} extraChallenges={chainExtra} state={state}>
+            <Board narrow height={124} label={l(say('Aldaketen katea', 'La cadena de cambios', 'سلسلة التغيّرات'))}>
                 {steps.map((value, step) => {
-                    const x = steps.length === 1 ? 320 : 70 + step * width
+                    const x = boxX(step)
+                    const color = active[step - 1] > 0 ? GREEN : SECOND
                     return (
                         <g key={step}>
                             {step > 0 && (
                                 <g>
-                                    <line x1={70 + (step - 1) * width + 54} x2={x - 62} y1={70} y2={70} stroke={active[step - 1] > 0 ? GREEN : SECOND} strokeWidth={2.4} />
-                                    <path d={`M${x - 54} 70 l-10 -6 l0 12 z`} fill={active[step - 1] > 0 ? GREEN : SECOND} />
-                                    <text x={(70 + (step - 1) * width + x) / 2} y={56} textAnchor="middle" fontSize={15} fontWeight={700} fill={active[step - 1] > 0 ? GREEN : SECOND}>{`· ${valueText(props.language, changeIndex(active[step - 1]))}`}</text>
+                                    <line x1={boxX(step - 1) + 37} x2={x - 43} y1={66} y2={66} stroke={color} strokeWidth={2.4} />
+                                    <path d={`M${x - 37} 66 l-8 -5 l0 10 z`} fill={color} />
+                                    <text x={(boxX(step - 1) + x) / 2} y={30} textAnchor="middle" fontSize={15} fontWeight={700} fill={color}>{`· ${valueText(props.language, changeIndex(active[step - 1]))}`}</text>
                                 </g>
                             )}
-                            <rect x={x - 54} y={46} width={108} height={48} rx={10} fill={step === 0 ? STAGE_TINT : step === steps.length - 1 ? '#fbebc0' : CARD} stroke={INK} strokeWidth={1.8} />
-                            <text x={x} y={77} textAnchor="middle" fontSize={18} fontWeight={700} fill={INK}>{valueText(props.language, value)}</text>
+                            <rect x={x - 37} y={44} width={74} height={44} rx={9} fill={step === 0 ? STAGE_TINT : step === steps.length - 1 ? '#fbebc0' : CARD} stroke={INK} strokeWidth={1.8} />
+                            <text x={x} y={72} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{valueText(props.language, value)}</text>
                         </g>
                     )
                 })}
-                <text x={320} y={150} textAnchor="middle" fontSize={18} fontWeight={700} fill={STAGE}>{`· ${valueText(props.language, index)}`}</text>
+                <text x={180} y={116} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{`· ${valueText(props.language, index)}`}</text>
             </Board>
         </ToolFrame>
     )
@@ -256,7 +263,7 @@ export function InterestTool(props: LabToolProps) {
     const note = l(say(`Urtero ${yearly} €. Amaieran: ${state.capital + toNumber(interest)} €.`, `Cada año, ${yearly} €. Al final: ${state.capital + toNumber(interest)} €.`, `كل سنة ${yearly} €. في النهاية: ${state.capital + toNumber(interest)} €.`))
     const rowHeight = Math.min(34, 260 / (state.years + 1))
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={interestChallenges} state={state}>
+        <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={interestChallenges} extraChallenges={interestExtra} state={state}>
             <Board height={24 + (state.years + 1) * (rowHeight + 4)} label={l(say('Kapitala eta interesa urtez urte', 'Capital e interés año a año', 'رأس المال والفائدة سنة بعد سنة'))}>
                 {Array.from({ length: state.years + 1 }, (_, year) => {
                     const y = 16 + year * (rowHeight + 4)

@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
 import { Figure, Frac } from '../dbh2-zatikiak-prototype/figures'
 import { Label } from '../dbh2-funtzioak-v2/plane'
@@ -146,27 +147,37 @@ function Vehicle({ x, y, color, back = false }: { x: number; y: number; color: s
     )
 }
 
+/** A figure drawn 360 wide, so that it fits a phone without scrolling sideways (lesson figures are otherwise 720 wide with a 540 px minimum) */
+function NarrowFigure({ height, label, children }: { height: number; label: string; children: ReactNode }) {
+    return (
+        <svg viewBox={`0 0 360 ${height}`} role="img" aria-label={label} style={{ minWidth: 0, maxWidth: 520, fontFamily: '"Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif', direction: 'ltr' }}>
+            {children}
+        </svg>
+    )
+}
+
 export function MotionFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={330} label={pick(language, say('Elkarrengana: 240 km, 70 + 110 = 180 km/h. Atzetik: 75 km, 120 − 90 = 30 km/h', 'Al encuentro: 240 km, 70 + 110 = 180 km/h. Persecución: 75 km, 120 − 90 = 30 km/h', 'تلاقٍ: 240 كم، 70 + 110 = 180 كم/س. مطاردة: 75 كم، 120 − 90 = 30 كم/س'))}>
-            <Label x={60} y={28} fontSize={15} fontWeight={700} fill={MUTED}>{pick(language, say('Elkarrengana', 'Al encuentro', 'تلاقٍ'))}</Label>
-            <line x1={80} x2={640} y1={80} y2={80} stroke={INK} strokeWidth={2} />
-            <Vehicle x={100} y={70} color={STAGE} />
-            <Vehicle x={620} y={70} color={SECOND} back />
-            <text x={150} y={58} fontSize={15} fontWeight={700} fill={STAGE}>70 →</text>
-            <text x={570} y={58} textAnchor="end" fontSize={15} fontWeight={700} fill={SECOND}>← 110</text>
-            <text x={360} y={104} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>240 km</text>
-            <text x={360} y={134} textAnchor="middle" fontSize={19} fontWeight={700} fill={STAGE}>{num(language, '240 : 180 = 4/3 h = 1 h 20 min')}</text>
-            <Label x={60} y={176} fontSize={15} fontWeight={700} fill={MUTED}>{pick(language, say('Atzetik', 'Persecución', 'مطاردة'))}</Label>
-            <line x1={80} x2={640} y1={228} y2={228} stroke={INK} strokeWidth={2} />
-            <Vehicle x={110} y={218} color={STAGE} />
-            <Vehicle x={380} y={218} color={SECOND} />
-            <text x={160} y={206} fontSize={15} fontWeight={700} fill={STAGE}>120 →</text>
-            <text x={430} y={206} fontSize={15} fontWeight={700} fill={SECOND}>90 →</text>
-            <text x={245} y={252} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>75 km</text>
-            <text x={360} y={282} textAnchor="middle" fontSize={19} fontWeight={700} fill={STAGE}>{num(language, '75 : (120 − 90) = 75 : 30 = 2,5 h')}</text>
-            <Caption y={316} language={language} text={say('Elkarrengana: abiadurak batu. Atzetik: abiadurak kendu', 'Al encuentro: suma las velocidades. Persecución: réstalas', 'في التلاقي اجمع السرعتين، وفي المطاردة اطرحهما')} />
-        </Figure>
+        <NarrowFigure height={326} label={pick(language, say('Elkarrengana: 240 km, 70 + 110 = 180 km/h. Atzetik: 75 km, 120 − 90 = 30 km/h', 'Al encuentro: 240 km, 70 + 110 = 180 km/h. Persecución: 75 km, 120 − 90 = 30 km/h', 'تلاقٍ: 240 كم، 70 + 110 = 180 كم/س. مطاردة: 75 كم، 120 − 90 = 30 كم/س'))}>
+            <Label x={14} y={22} fontSize={15} fontWeight={700} fill={MUTED}>{pick(language, say('Elkarrengana', 'Al encuentro', 'تلاقٍ'))}</Label>
+            <line x1={14} x2={346} y1={72} y2={72} stroke={INK} strokeWidth={2} />
+            <Vehicle x={40} y={62} color={STAGE} />
+            <Vehicle x={320} y={62} color={SECOND} back />
+            <text x={66} y={46} fontSize={17} fontWeight={700} fill={STAGE}>70 →</text>
+            <text x={294} y={46} textAnchor="end" fontSize={17} fontWeight={700} fill={SECOND}>← 110</text>
+            <text x={180} y={94} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>240 km</text>
+            <text x={180} y={122} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{num(language, '240 : 180 = 4/3 h = 1 h 20 min')}</text>
+            <Label x={14} y={164} fontSize={15} fontWeight={700} fill={MUTED}>{pick(language, say('Atzetik', 'Persecución', 'مطاردة'))}</Label>
+            <line x1={14} x2={346} y1={214} y2={214} stroke={INK} strokeWidth={2} />
+            <Vehicle x={40} y={204} color={STAGE} />
+            <Vehicle x={200} y={204} color={SECOND} />
+            <text x={66} y={188} fontSize={17} fontWeight={700} fill={STAGE}>120 →</text>
+            <text x={226} y={188} fontSize={17} fontWeight={700} fill={SECOND}>90 →</text>
+            <text x={120} y={236} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>75 km</text>
+            <text x={180} y={264} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{num(language, '75 : (120 − 90) = 75 : 30 = 2,5 h')}</text>
+            <Label x={180} y={296} textAnchor="middle" fontSize={15} fill={MUTED}>{pick(language, say('Elkarrengana: batu abiadurak.', 'Al encuentro: suma las velocidades.', 'في التلاقي: اجمع السرعتين.'))}</Label>
+            <Label x={180} y={316} textAnchor="middle" fontSize={15} fill={MUTED}>{pick(language, say('Atzetik: kendu.', 'Persecución: réstalas.', 'في المطاردة: اطرحهما.'))}</Label>
+        </NarrowFigure>
     )
 }
 

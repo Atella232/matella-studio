@@ -270,7 +270,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                 <section className="fraction-v2-hero" aria-labelledby="fraction-v2-unit-title">
                     <div className="fraction-v2-hero-copy">
                         <span className="fraction-v2-chip fraction-v2-chip-coral">{courseTitle} · {l({ eu: 'Matematika', es: 'Matemáticas', ar: 'الرياضيات' })}</span>
-                        <h1 id="fraction-v2-unit-title">{unitTitle}</h1>
+                        <h1 id="fraction-v2-unit-title" style={{ '--hero-letters': Math.max(...unitTitle.split(/\s+/).map((word) => word.length)) } as CSSProperties}>{unitTitle}</h1>
                         <p>{l(unit.tagline)}</p>
                         <div className="fraction-v2-hero-actions">
                             <button type="button" className="fraction-v2-primary" onClick={() => diagnosticPending ? navigate('diagnostic') : openTopic(recommendedTopic.id)}>
