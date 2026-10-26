@@ -1,6 +1,6 @@
 ---
 name: zatikiak-dbh2-lab-plus
-description: "2. DBH Zatikiak lab upgrade: phase 1 (L1 bars + L2 expression) deployed 2026-10-21; phase 2 (M1 extra challenges + M2 predictions) deployed 2026-10-21; phase 3 games J1+J2 deployed 2026-10-22; J6 Rebajas deployed 2026-10-22; M4 deployed 2026-10-22; L3 deployed 2026-10-22; L4 built 2026-10-22 on claude/eloquent-darwin-nhotrt (7873d14); L5, M3, J3 Balanza, J4 Pirámide and J5 Tren built 2026-10-23 on the same branch, three rounds each, waiting for the owner to merge and deploy; every option from the review is now built"
+description: "2. DBH Zatikiak lab upgrade: phase 1 (L1 bars + L2 expression) deployed 2026-10-21; phase 2 (M1 extra challenges + M2 predictions) deployed 2026-10-21; phase 3 games J1+J2 deployed 2026-10-22; J6 Rebajas deployed 2026-10-22; M4 deployed 2026-10-22; L3 deployed 2026-10-22; L4 built 2026-10-22 on claude/eloquent-darwin-nhotrt (7873d14); L5, M3, J3 Balanza, J4 Pirámide and J5 Tren built 2026-10-23 on the same branch, three rounds each; all merged into main and live (checked 2026-10-26): every option from the review is built and deployed"
 ---
 
 On 2026-10-21 the owner asked for a review of the 2. DBH Zatikiak lab and games. From the proposed options the owner chose phase 1: L1 «Problemas con barras» + L2 «Desmonta la expresión».
@@ -108,7 +108,7 @@ L3 «Factores primos», the next option after the owner's «ADELANTE» on 2026-1
   - MathText has an `inline` prop: a lone formula is otherwise rendered in display mode, as a centred block;
   - keep `direction: ltr` on the formula rows only, or Arabic sentences get their punctuation in the wrong place.
 
-L4 «De fracción a decimal» (2026-10-22, first cloud session) was committed as 7873d14 on `claude/eloquent-darwin-nhotrt` and pushed; the owner merges and deploys from the Mac. Not deployed yet.
+L4 «De fracción a decimal» (2026-10-22, first cloud session) was committed as 7873d14 on `claude/eloquent-darwin-nhotrt` and pushed; the owner merges and deploys from the Mac. Live since (see «2026-10-26» at the end).
 - Scope chosen by the owner: exact, pure periodic and mixed periodic, with the 2-and-5 rule. 1. DBH Hamartarrak only teaches exact/periodic and 3. DBH Arrazionalak the full classification, so the 2. DBH lesson `percentages` («Fracciones, decimales y porcentajes») got a fifth fact, «Exacto, puro o mixto», to say the same as the lab.
 - Interaction chosen by the owner: predict first, then watch. The learner predicts the kind from the denominator's prime tiles; the division opens only after the prediction, and right/wrong is shown when the division ends.
 - Code: `lab/decimals.ts` (`longDivision`, `divisionKind`, `denominatorFactors`, `kindFromFactors`, state helpers), `DecimalsTool.tsx` and `Decimals.css`. It reuses `pairAll`/`primesSummary` from `lab/primes.ts` for the crossed-out denominator factors, the `.primes-tile` classes from `Primes.css` and the `.prediction` classes from `Prediction.css`.
@@ -169,3 +169,12 @@ M3 «Animaciones en las herramientas» (rounds: 35d2b64, 0321fdf, cf2eb46):
 - Round 2: the hops. Round 3 (after a review in Chromium at 375 px): every rule that moves is inside `@media (prefers-reduced-motion: no-preference)` and the rules outside it draw the final picture, so reduced motion shows the same thing still (before, the subtraction overlay stayed solid red). New: simplifying merges the pieces (`MergeBar`): the lines inside each group of the divisor fade from solid to dashed, group after group, each group lit by an outline, and the new name (2/3) appears when the merge ends (`mergeDuration`). The end picture is the old one (3 parts with dashed thirds).
 - Also in round 3: tick labels on the number line only when they fit the track width (ResizeObserver; at 375 px −2…2 in quarters used to overlap); Basque notes without suffixes on numbers in ProductTool, CompareTool and SumTool.
 - Gotchas: in Chromium, `stroke-dasharray` with `pathLength` and `vector-effect: non-scaling-stroke` draws wide arcs only half-way: do not use it; a CSS file loaded before Lab.css needs higher specificity to override `.fraction-v2-partition > span`; models.tsx may only export components (react-refresh lint), so timing helpers live in `motion.ts`.
+
+## 2026-10-26: everything is live
+
+- On the Mac, local main was 18 commits behind origin; a fast-forward pull brought it to fc5f3aa, which contains every round of L4, L5, M3, J3, J4 and J5.
+- On fc5f3aa: tests 861/861, lint and build OK.
+- The bundle built from fc5f3aa (`index-DgpwNC1h.js`) is the same one matella.net serves, so all of it is deployed.
+- Checked on matella.net: the lab tools `decimals` and `zoom` open with their challenges; the games hub lists ten games; Balanza, Pirámide and El tren del orden start a level. No console errors and no KaTeX errors.
+- Every option of the 2026-10-21 review is now built and live.
+- Tip for Mac sessions: run `git fetch` and check `main...origin/main` before starting, because cloud sessions push to origin.
