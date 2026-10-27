@@ -1,6 +1,6 @@
 ---
 name: proportzionaltasuna-dbh4ap-lab-plus
-description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) built 2026-10-27 on feat/proportzionaltasuna-dbh4ap-lab-motion, not merged or deployed yet; next phase 4: J1 + J2"
+description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) committed 90b3caa on feat/proportzionaltasuna-dbh4ap-lab-motion, fast-forwarded into main and deployed 2026-10-27 (bundle index-buE2QkQf); next phase 4: J1 + J2"
 ---
 
 On 2026-10-26 the owner asked for the same kind of review as [[zatikiak-dbh2-lab-plus]], this time for `src/pages/dbh4-aplikatuak-proportzionaltasuna`. The unit was built in October (see [[remaining-eso-units]]).
@@ -222,6 +222,10 @@ Committed as 3751d4f, fast-forwarded into main, pushed and deployed to matella.n
 - Basque prompts were rewritten so that no number takes a case ending («% 25 merketu dute», not «% 25eko beherapena»).
 
 ## Phase 3 (branch `feat/proportzionaltasuna-dbh4ap-lab-motion`, 2026-10-27)
+
+Committed as 90b3caa, fast-forwarded into main, pushed and deployed to matella.net on 2026-10-27 (bundle index-buE2QkQf). Checked live at 375 px:
+- growth, mixture, motion, taps, graph, rule and percentbar in eu, es and ar: no sideways scroll and no SVG text outside its drawing;
+- in Arabic, «Ver el viaje» waits for the prediction, then the cars move and the clock runs («1 h 42 min» half way).
 
 ### M3: the ▶ buttons
 
