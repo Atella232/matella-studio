@@ -1,0 +1,59 @@
+/* ---------- Akatsen detektibea (4. DBH aplikatuak): word problems ---------- */
+
+/* The sheet and its lines come from the Zatikiak detective; here the problem
+   is a sentence, and each line has a label above its formula. */
+
+.proportion-detective-problem {
+    margin: 0 0 6px;
+    /* Clear of the margin line drawn on the sheet */
+    padding-left: 34px;
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+.proportion-detective-line {
+    align-items: flex-start;
+    padding-block: 8px;
+}
+
+.proportion-detective-line .detective-line-number {
+    margin-top: 2px;
+}
+
+.proportion-detective-step {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+}
+
+.proportion-detective-label {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-align: start;
+}
+
+/* The formula reads from the left, at a size that fits a phone */
+.detective-game .proportion-detective-step .math-text {
+    font-size: 18px;
+    text-align: left;
+}
+
+.detective-game .proportion-detective-step .math-text .math-token {
+    margin: 0;
+    padding-block: 0.2em;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.detective-game .proportion-detective-step .katex-display,
+.detective-game .proportion-detective-step .katex-display > .katex {
+    text-align: left;
+}
+
+.detective-game .detective-explain .math-token.inline {
+    vertical-align: middle;
+}

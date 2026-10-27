@@ -46,7 +46,7 @@ const cardValue = (latex: string) => {
 }
 
 test('proportzionaltasuna 4. DBH ap games: levels, ids and routes', () => {
-    assert.equal(proportionGames.length, 2)
+    assert.equal(proportionGames.length, 4)
     assert.equal(proportionGames[0].levels.length, PROPORTION_RACE_CIRCUITS)
     assert.equal(proportionGames.find((game) => game.id === 'memory')!.levels.length, proportionMemoryLevels.length)
     assert.equal(new Set(proportionGameProgressIds).size, proportionGameProgressIds.length)
@@ -56,6 +56,10 @@ test('proportzionaltasuna 4. DBH ap games: levels, ids and routes', () => {
     assert.equal(proportionGameModeForPath('/matematika/dbh4-aplikatuak/proporcionalidad/juegos/carrera'), 'race')
     assert.equal(proportionGameModeForPath('/matematika/dbh4-aplikatuak/proporcionalidad/jokuak/memoria'), 'memory')
     assert.equal(proportionGameModeForPath('/matematika/dbh4-aplikatuak/proporcionalidad/jokuak'), 'hub')
+    assert.equal(proportionGameModeForPath('/matematika/dbh4-aplikatuak/proporcionalidad/juegos/detective'), 'detective')
+    assert.equal(proportionGameModeForPath('/matematika/dbh4-aplikatuak/proporcionalidad/jokuak/detektibea'), 'detective')
+    assert.equal(proportionGameModeForPath('/matematika/dbh4-aplikatuak/proporcionalidad/juegos/banco'), 'bank')
+    assert.equal(proportionGameModeForPath('/matematika/dbh4-aplikatuak/proporcionalidad/jokuak/bankua'), 'bank')
 })
 
 test('proportzionaltasuna 4. DBH ap race: every circuit has valid questions, typical mistakes and written answers', () => {

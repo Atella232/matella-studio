@@ -1,6 +1,6 @@
 ---
 name: proportzionaltasuna-dbh4ap-lab-plus
-description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) committed 90b3caa on feat/proportzionaltasuna-dbh4ap-lab-motion, fast-forwarded into main and deployed 2026-10-27 (bundle index-buE2QkQf); next phase 4: J1 + J2"
+description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) committed 90b3caa on feat/proportzionaltasuna-dbh4ap-lab-motion, fast-forwarded into main and deployed 2026-10-27 (bundle index-buE2QkQf); phase 4 (J1 error detective, J2 bank) built 2026-10-27 on feat/proportzionaltasuna-dbh4ap-games, not merged or deployed yet"
 ---
 
 On 2026-10-26 the owner asked for the same kind of review as [[zatikiak-dbh2-lab-plus]], this time for `src/pages/dbh4-aplikatuak-proportzionaltasuna`. The unit was built in October (see [[remaining-eso-units]]).
@@ -302,3 +302,55 @@ Challenges:
 
 - An SVG `Label` adds its own isolate around formulas. An extra LRI/PDI around «2000 €» is harmless.
 - `getStartPositionOfChar` is a reliable way to check Arabic order in SVG.
+
+## Phase 4 (branch `feat/proportzionaltasuna-dbh4ap-games`, 2026-10-27)
+
+Two new games, J1 and J2. The unit now has four games: race, memory, detective and bank. The games description in `index.tsx` says so.
+
+### J1 «Akatsen detektibea / Detective de errores»
+
+- Game id `detective`, slugs detektibea/detective, progress ids 44301–44303.
+- Logic in `games/detective.ts`, component in `games/DetectiveGame.tsx`.
+- CSS: it reuses the Zatikiak `Detective.css` (sheet, lines, options) and adds its own `games/Detective.css` (the problem sentence, a label above each formula, formulas aligned left).
+- Each case is a word problem with a 3-line worked solution. The template solves it twice from the same data: once right, once with the mistake. The wrong line is the first line that differs; the lines after it carry the mistake on.
+- `sheet()` checks that every value is exact (cents, or 4 decimals for an index or a backwards division) before rounding. Rounding first let 0,3333 through. A sheet that is not exact is thrown away.
+- Three levels, 5 mistakes each, 6 cases per game (every mistake once, plus one more):
+  - proportions and percentages: direct-inverse, added-percents, percent-of-final (VAT and discounts backwards), index (a fall written as a rise, or a rise without the 1), calculation;
+  - interest: months-years, simple-for-compound, rate-not-split (semesters, quarters, months), index (3 % → 1,3), calculation;
+  - mixtures, taps and vehicles: mean-prices, added-hours, speeds (meeting and chase mixed up), upside-down (cost : kilos, distance : speed, 1 : part), calculation.
+- The 3 options to name the mistake put the other mistakes of the same kind of problem first («Error de cálculo» is almost always one of them).
+- Scoring as in Zatikiak: 1 point for the line, 1 for the kind; stars at 11/9/6.
+- Tests in `tests/proportzionaltasuna-dbh4ap-detective.test.ts`:
+  - every line except the wrong one checks with `evaluate`;
+  - a slip breaks its line, and any other mistake is right arithmetic with a wrong idea;
+  - the wrong line appears in all three positions;
+  - texts render, no Basque suffix after a number, Arabic decimal point.
+
+### J2 «Bankua / El banco»
+
+- Game id `bank`, slugs bankua/banco, progress ids 44401–44403.
+- Logic in `games/bank.ts`, component in `games/BankGame.tsx`, CSS in `games/Bank.css`.
+- 6 rounds: the same capital and years for every offer; the player taps the offer that gives the most money. Then each card shows its formula and amount, bars show the interest of each offer (they grow with a CSS animation that respects reduced motion), and two sentences follow: the verdict with the difference in euros, and the lesson of the round (`bankLesson`).
+- Levels:
+  - simple or compound (2 offers);
+  - how often the interest is paid (3 compound offers, close rates);
+  - three offers of every kind.
+- `createBankRounds` asks each level for a set mix of winners (for example 3 simple and 3 compound), so no kind of offer always wins. The best offer beats the next one by at least 0,2 % of the capital and never by less than 5 €.
+- Stars at 6/5/4. The result also shows «Dinero que dejaste en el banco».
+- `games/numbers.ts` holds `latexNumber` (thin space from 10 000) and `moneyText` (narrow no-break space).
+- Tests in `tests/proportzionaltasuna-dbh4ap-bank.test.ts`:
+  - the margin holds and every kind of winner shows up;
+  - each formula evaluates to the amount shown (the periodic index is worked out first, because `evaluate` does not take nested brackets);
+  - texts render;
+  - money formatting is right.
+
+### Checks
+
+- Suite 883/883; lint and build OK.
+- Checked at 375 px in eu, es and ar: all 18 detective cases and all 18 bank rounds per language, with no overflow and no sideways scroll.
+
+### Gotchas
+
+- In Arabic the «+», «=» or «≈» before an amount has to go inside the LRI/PDI isolate. Outside it, it ends up on the wrong side («7798.40 €+»).
+- KaTeX centres display formulas through `.katex-display > .katex`, so aligning them left needs that selector too.
+- Writing `⁦` or ` ` with the Write tool can store the raw character. Check with grep and use escapes.
