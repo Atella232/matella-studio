@@ -14,6 +14,8 @@ import {
     initialTapsState,
     meetingMinutes,
     mixtureChallenges,
+    mixtureMean,
+    mixtureMoments,
     mixturePrice,
     motionChallenges,
     positions,
@@ -35,7 +37,7 @@ const all = (challenges: Array<{ id: number }>) => challenges.map((challenge) =>
 const solvedBy = (challenges: Array<{ id: number; isSolved: (state: never) => boolean }>, states: unknown[]) => [...new Set(states.flatMap((state) => solvedIds(challenges, state)))].sort()
 
 test('proportzionaltasuna 4. DBH ap lab: tools, topics and challenge ids', () => {
-    assert.equal(proportionDbh4ApLabTools.length, 11)
+    assert.equal(proportionDbh4ApLabTools.length, 12)
     for (const tool of proportionDbh4ApLabTools) {
         assert.ok(stages.includes(tool.stage), tool.id)
         assert.ok(topics.includes(tool.lessonTopic), tool.id)
@@ -87,9 +89,16 @@ test('proportzionaltasuna 4. DBH ap lab: the mixture', () => {
         coffee,
         setMixture(initialMixtureState, { kilos: [1, 10] }),
         setMixture(setMixture(setMixture(setMixture(initialMixtureState, { kilos: [0, 12] }), { price: [0, 1500] }), { kilos: [1, 10] }), { price: [1, 950] }),
-        setMixture(setMixture(setMixture(setMixture(initialMixtureState, { kilos: [0, 1] }), { price: [0, 740] }), { kilos: [1, 3] }), { price: [1, 520] })
+        setMixture(setMixture(setMixture(setMixture(initialMixtureState, { kilos: [0, 1] }), { price: [0, 740] }), { kilos: [1, 3] }), { price: [1, 520] }),
+        // The lesson's gold bar, twice as big: 4 kg of 0,85 and 3 kg of 0,9
+        setMixture(setMixture(setMixture(setMixture(setMixture(initialMixtureState, { kind: 'alloy' }), { kilos: [0, 4] }), { price: [0, 850] }), { kilos: [1, 3] }), { price: [1, 900] })
     ]
     assert.deepEqual(solvedBy(mixtureChallenges, states), all(mixtureChallenges))
+    assert.deepEqual(mixtureMean(states[4]), fraction(6100, 7))
+    // The seesaw balances: 12 kg · 2 € = 8 kg · 3 €
+    assert.deepEqual(mixtureMoments(coffee), [fraction(2400), fraction(2400)])
+    // Gold with the coffee's numbers is not coffee
+    assert.ok(!solvedIds(mixtureChallenges, { ...coffee, kind: 'alloy' }).includes(43201))
     // Equal prices are not «halfway between two prices»
     assert.ok(!solvedIds(mixtureChallenges, setMixture(setMixture(initialMixtureState, { kilos: [1, 10] }), { price: [1, 950] })).includes(43202))
 })

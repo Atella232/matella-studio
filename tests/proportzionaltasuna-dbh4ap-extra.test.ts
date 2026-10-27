@@ -25,6 +25,7 @@ import {
     YEARS_MAX
 } from '../src/pages/dbh2-proportzionaltasuna-v2/lab/labTools.ts'
 import {
+    ALLOY_PURITIES,
     CLOCK_MAX,
     fillHours,
     GROWTH_CAPITALS,
@@ -106,7 +107,8 @@ test('proportzionaltasuna 4. DBH ap lab: the endless solutions stay inside what 
         const growth = growthExtra(random()).solution
         assert.ok((GROWTH_CAPITALS as readonly number[]).includes(growth.capital) && growth.rate >= 1 && growth.rate <= GROWTH_RATE_MAX && growth.years >= 1 && growth.years <= GROWTH_YEARS_MAX, `growth ${seed}`)
         const mixture = mixtureExtra(random()).solution
-        assert.ok(mixture.kilos.every((kilos) => kilos >= 1 && kilos <= MIXTURE_KILOS_MAX) && mixture.prices.every((price) => (MIXTURE_PRICES as readonly number[]).includes(price)), `mixture ${seed}`)
+        const values: readonly number[] = mixture.kind === 'coffee' ? MIXTURE_PRICES : ALLOY_PURITIES
+        assert.ok(mixture.kilos.every((kilos) => kilos >= 1 && kilos <= MIXTURE_KILOS_MAX) && mixture.prices.every((price) => values.includes(price)), `mixture ${seed}`)
         const motion = motionExtra(random()).solution
         assert.ok((MOTION_DISTANCES as readonly number[]).includes(motion.distance) && motion.speeds.every((speed) => speed >= SPEED_MIN && speed <= SPEED_MAX && speed % 10 === 0) && motion.minutes % 5 === 0 && motion.minutes <= CLOCK_MAX, `motion ${seed}`)
         const taps = tapsExtra(random()).solution

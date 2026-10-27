@@ -1,6 +1,6 @@
 ---
 name: proportzionaltasuna-dbh4ap-lab-plus
-description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); next phase 3: M3 + M4 + M5 + L3"
+description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) built 2026-10-27 on feat/proportzionaltasuna-dbh4ap-lab-motion, not merged or deployed yet; next phase 4: J1 + J2"
 ---
 
 On 2026-10-26 the owner asked for the same kind of review as [[zatikiak-dbh2-lab-plus]], this time for `src/pages/dbh4-aplikatuak-proportzionaltasuna`. The unit was built in October (see [[remaining-eso-units]]).
@@ -220,3 +220,81 @@ Committed as 3751d4f, fast-forwarded into main, pushed and deployed to matella.n
 
 - An SVG `Label` with Arabic words and a formula such as «10 % = 50 €» comes out scrambled. Wrap the formula in LRI/PDI yourself (`\u2066…\u2069`).
 - Basque prompts were rewritten so that no number takes a case ending («% 25 merketu dute», not «% 25eko beherapena»).
+
+## Phase 3 (branch `feat/proportzionaltasuna-dbh4ap-lab-motion`, 2026-10-27)
+
+### M3: the ▶ buttons
+
+`lab/usePlayback.ts` runs a requestAnimationFrame progress from 0 to 1.
+- The progress belongs to the case it started for, through a key. When the case changes the animation simply disappears, with no effect needed.
+- With reduced motion it jumps to the end.
+- The ▶ buttons sit under the drawing and wait for the prediction.
+
+The three animations:
+- Interest, «Año a año»: one year every 0.45 s.
+- Motion, «Ver el viaje»: three seconds from the start to the meeting, or to 300 min if they never meet. The cars use exact float positions, and the clock shows «1 h 20 min» and turns green at the meeting. The typed clock is left as it was.
+- Taps, «Llenar el depósito»: the water rises in three seconds, showing the hours that have passed. It is off when the tank never fills.
+
+### M4: interest in layers
+
+Each year has two bars, simple on the left and compound on the right, each in three layers:
+- the capital: a fixed grey block, with a white zigzag to show that it is not to scale;
+- the interest of the capital (blue): the same in both bars;
+- the interest of the interest (green): only in the compound bar.
+
+Only the interest is to scale, so 2205 € against 2200 € can now be seen. The note says how many euros are interest on interest.
+
+### M5: the mixture as a seesaw, and gold
+
+`MixtureState` has a `kind`:
+- coffee: prices in cents;
+- alloy: fineness in thousandths, `ALLOY_PURITIES` 750–1000.
+
+Changing the kind sets two first values. Helpers:
+- `mixtureMean` gives the mean in raw units;
+- `mixtureMoments` gives kilos × distance;
+- the coffee challenges check `kind === 'coffee'`.
+
+The drawing:
+- the loads sit on a beam that works as a ruler (5–15 €, or 0,7–1);
+- after the prediction, the support (a red triangle) appears under the mean, with the two distances below it;
+- when both distances are short, the second label goes lower.
+
+The readout adds «Balancín: 12 · 2 = 8 · 3 (kilos por distancia)», with ≈ when the mean is not a whole number of cents or thousandths.
+
+Challenges:
+- New challenge 43205: the lesson's gold bar, twice as big (4 kg of 0,85 and 3 kg of 0,9).
+- `mixtureExtra` also makes gold targets (25 %).
+- The prediction buttons were shortened («Hacia el barato»).
+
+### L3 «Gráfica distancia–tiempo»
+
+- Tool `graph`, stage problems, lesson motion. The lab now has 12 tools.
+- Logic in `lab/roadGraph.ts`, component in `lab/RoadGraphTool.tsx`.
+- Settings:
+  - meeting or chase;
+  - B's start (0 km only in a chase);
+  - both speeds;
+  - who sets off later, and by 15–120 min.
+- `graphMeeting` solves the gap between the vehicles stretch by stretch, between departures, with exact fractions. It finds, for example, A reaching B's town while B still waits.
+- The plot uses axes with round steps (`niceAxis`). Each line is flat while its vehicle waits, and is clipped to the plot.
+- After the right answer (or «Ver el resultado»), the meeting point appears with dashed lines to the axes.
+- The learner writes the minutes since the first departure.
+- Challenges 43701–43704:
+  - the truck and the car an hour later (180 min);
+  - the car and the motorbike half an hour later (132 min);
+  - the lesson's 240 km (80 min);
+  - meeting halfway with different speeds (the slower one sets off first).
+- Endless `roadGraphExtra`: whole minutes, and both vehicles on the road at the meeting.
+- Tests in `tests/proportzionaltasuna-dbh4ap-graph.test.ts`.
+
+### Checks
+
+- Suite 877/877; lint and build OK.
+- Checked at 375 px in eu, es and ar: no sideways scroll, no SVG text outside the viewBox, no clipped button text.
+- All three animations were checked: the button is off before the prediction, there is an in-between frame, and the end state is right.
+
+### Gotchas
+
+- An SVG `Label` adds its own isolate around formulas. An extra LRI/PDI around «2000 €» is harmless.
+- `getStartPositionOfChar` is a reliable way to check Arabic order in SVG.

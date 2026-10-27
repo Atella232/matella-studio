@@ -6,6 +6,7 @@ import type { ProportionDbh4ApStageId } from '../lessons.tsx'
 import { classifyChallenges } from '../../dbh1-proportzionaltasuna-v2/lab/labTools.ts'
 import { chainChallenges, compoundChallenges, interestChallenges, shareChallenges } from '../../dbh2-proportzionaltasuna-v2/lab/labTools.ts'
 import { percentBarChallenges } from './percentBar.ts'
+import { roadGraphChallenges } from './roadGraph.ts'
 import { ruleChallenges } from './ruleOfThree.ts'
 
 /* ==========================================================================
@@ -21,7 +22,7 @@ import { ruleChallenges } from './ruleOfThree.ts'
    and tests/proportzionaltasuna-dbh4ap-extra.test.ts.
    ========================================================================== */
 
-export type ProportionDbh4ApLabToolId = 'classify' | 'rule' | 'compound' | 'share' | 'percentbar' | 'chain' | 'interest' | 'growth' | 'mixture' | 'motion' | 'taps'
+export type ProportionDbh4ApLabToolId = 'classify' | 'rule' | 'compound' | 'share' | 'percentbar' | 'chain' | 'interest' | 'growth' | 'mixture' | 'motion' | 'graph' | 'taps'
 
 export interface ProportionDbh4ApLabTool extends LabToolInfo {
     id: ProportionDbh4ApLabToolId
@@ -79,6 +80,7 @@ export const proportionDbh4ApLabTools: ProportionDbh4ApLabTool[] = [
     { id: 'growth', stage: 'interest', lessonTopic: 'compound-interest', title: say('Bakuna ala konposatua', 'Simple o compuesto', 'بسيطة أم مركّبة'), observe: say('Lehen urtean biak berdinak dira; gero konposatua aurrera doa, interesak ere interesa sortzen duelako. Aldi gehiago (k) → apur bat gehiago.', 'El primer año los dos coinciden; después el compuesto se adelanta, porque el interés también produce interés. Más periodos (k) → algo más.', 'في السنة الأولى يتساويان؛ ثم تتقدم المركّبة لأن الفائدة تُنتج فائدة. فترات أكثر (k) ← أكثر قليلًا.') },
     { id: 'mixture', stage: 'problems', lessonTopic: 'mixtures', title: say('Nahasketa', 'La mezcla', 'الخليط'), observe: say('Prezio ertaina beti bi prezioen artean dago, eta kantitate handiena duenetik hurbilago. Kantitate berdinekin, erdian.', 'El precio medio siempre queda entre los dos precios, y más cerca del que tiene más cantidad. Con cantidades iguales, justo en medio.', 'يقع السعر المتوسط دائمًا بين السعرين، وأقرب إلى الأكثر كمية. وبكميتين متساويتين في المنتصف تمامًا.') },
     { id: 'motion', stage: 'problems', lessonTopic: 'motion', title: say('Bi ibilgailu errepidean', 'Dos vehículos en la carretera', 'مركبتان على الطريق'), observe: say('Elkarrengana doazenean tartea abiaduren baturan txikitzen da; atzetik doazenean, abiaduren kenduran. Azkarrena atzean ez badago, ez dira inoiz elkartzen.', 'Al encuentro, la distancia se acorta a la suma de las velocidades; en una persecución, a su diferencia. Si el rápido no va detrás, no se encuentran nunca.', 'في التلاقي تقصر المسافة بمجموع السرعتين، وفي المطاردة بفرقهما. وإذا لم يكن الأسرع في الخلف فلن يلتقيا أبدًا.') },
+    { id: 'graph', stage: 'problems', lessonTopic: 'motion', title: say('Distantzia-denbora grafikoa', 'Gráfica distancia–tiempo', 'منحنى المسافة والزمن'), observe: say('Ibilgailu bakoitza zuzen bat da: zenbat eta inklinatuagoa, orduan eta azkarrago. Bata zain dagoen bitartean, bere zuzena horizontala da. Zuzenak ebakitzen diren puntuan elkartzen dira: puntu horrek minutua eta kilometroa ematen ditu.', 'Cada vehículo es una recta: cuanto más inclinada, más rápido va. Mientras uno espera, su recta es horizontal. Donde se cortan las rectas se encuentran: ese punto da el minuto y el kilómetro.', 'كل مركبة مستقيم: كلما كان أشدّ ميلًا كانت أسرع. وما دامت تنتظر يكون مستقيمها أفقيًا. وحيث يتقاطع المستقيمان تلتقيان: تلك النقطة تعطي الدقيقة والكيلومتر.') },
     { id: 'taps', stage: 'problems', lessonTopic: 'taps', title: say('Txorrotak eta hustubidea', 'Grifos y desagüe', 'الصنابير والمصرف'), observe: say('Ordu bateko zatiak batzen dira (eta hustubidearena kendu). Denbora osoa zati horren alderantzizkoa da.', 'Se suman las partes de una hora (y se resta la del desagüe). El tiempo total es el inverso de esa parte.', 'نجمع أجزاء الساعة (ونطرح جزء المصرف). والزمن الكلي مقلوب ذلك الجزء.') }
 ]
 
@@ -145,30 +147,48 @@ export const growthChallenges: LabChallenge<GrowthState>[] = [
     { id: 43104, prompt: say('10 000 € % 12an urtebetez, interesak hilero. Zenbat?', '10 000 € al 12 % durante un año, con intereses mensuales. ¿Cuánto?', '10000 € بفائدة 12٪ سنة واحدة مع فوائد شهرية. كم؟'), hint: say('$k=12$: % 1 hilero.', '$k=12$: un 1 % cada mes.', '$k=12$: 1٪ كل شهر.'), isSolved: (state) => state.capital === 10000 && state.rate === 12 && state.years === 1 && state.periods === 12 }
 ]
 
-/* ---------- 2. A mixture of two ingredients ---------- */
+/* ---------- 2. A mixture of two ingredients, or an alloy of two pieces of gold ---------- */
 
 /** Prices in cents per kilo, from the textbook problems */
 export const MIXTURE_PRICES = [520, 600, 740, 950, 1000, 1240, 1500] as const
+/** The fineness («ley») of gold, in thousandths: 0,75 is 18 carats, 1 is pure gold */
+export const ALLOY_PURITIES = [750, 800, 850, 900, 950, 1000] as const
 export const MIXTURE_KILOS_MAX = 30
 
+/** Coffee mixed by price, or gold melted by fineness: the same weighted mean */
+export type MixtureKind = 'coffee' | 'alloy'
+
 export interface MixtureState {
+    kind: MixtureKind
     kilos: [number, number]
-    /** Cents per kilo */
+    /** Cents per kilo (coffee) or thousandths of fineness (alloy) */
     prices: [number, number]
     /** The learner's guess before seeing the result; asked again whenever the case changes */
     prediction: Prediction | null
 }
 
 /** Not the lesson's coffee, so that its challenge is not solved on arrival */
-export const initialMixtureState: MixtureState = { kilos: [10, 5], prices: [950, 600], prediction: null }
+export const initialMixtureState: MixtureState = { kind: 'coffee', kilos: [10, 5], prices: [950, 600], prediction: null }
 
-export function setMixture(state: MixtureState, patch: { kilos?: [0 | 1, number]; price?: [0 | 1, number] }): MixtureState {
+/** Changing between coffee and gold starts from two values of that kind */
+const firstValues: Record<MixtureKind, [number, number]> = { coffee: [950, 600], alloy: [850, 950] }
+
+export function setMixture(state: MixtureState, patch: { kind?: MixtureKind; kilos?: [0 | 1, number]; price?: [0 | 1, number] }): MixtureState {
+    const kind = patch.kind ?? state.kind
     const kilos: [number, number] = [...state.kilos]
-    const prices: [number, number] = [...state.prices]
+    const prices: [number, number] = kind === state.kind ? [...state.prices] : [...firstValues[kind]]
     if (patch.kilos) kilos[patch.kilos[0]] = clamp(patch.kilos[1], 1, MIXTURE_KILOS_MAX)
     if (patch.price) prices[patch.price[0]] = patch.price[1]
-    const same = kilos[0] === state.kilos[0] && kilos[1] === state.kilos[1] && prices[0] === state.prices[0] && prices[1] === state.prices[1]
-    return { kilos, prices, prediction: same ? state.prediction : null }
+    const same = kind === state.kind && kilos[0] === state.kilos[0] && kilos[1] === state.kilos[1] && prices[0] === state.prices[0] && prices[1] === state.prices[1]
+    return { kind, kilos, prices, prediction: same ? state.prediction : null }
+}
+
+/** The weighted mean in the state's own units (cents per kilo, or thousandths of fineness), exact */
+export const mixtureMean = (state: MixtureState) => fraction(state.kilos[0] * state.prices[0] + state.kilos[1] * state.prices[1], state.kilos[0] + state.kilos[1])
+/** The seesaw: kilos times the distance to the mean are the same on both sides */
+export const mixtureMoments = (state: MixtureState): [FractionValue, FractionValue] => {
+    const mean = mixtureMean(state)
+    return [0, 1].map((side) => multiply(n(state.kilos[side]), subtract(mean, n(state.prices[side])))).map((moment) => (moment.numerator < 0 ? fraction(-moment.numerator, moment.denominator) : moment)) as [FractionValue, FractionValue]
 }
 
 /** Total cost in euros, exact */
@@ -176,13 +196,25 @@ export const mixtureCost = (state: MixtureState) => fraction(state.kilos[0] * st
 /** Mean price in euros per kilo, exact */
 export const mixturePrice = (state: MixtureState) => divide(mixtureCost(state), n(state.kilos[0] + state.kilos[1]))
 /** The prediction: the mean price below the midpoint of the two prices (nearer the cheaper one), on it, or above it */
-export const mixturePrediction = (state: MixtureState): Prediction => compareTo(100 * toNumber(mixturePrice(state)), (state.prices[0] + state.prices[1]) / 2)
+export const mixturePrediction = (state: MixtureState): Prediction => compareTo(toNumber(mixtureMean(state)), (state.prices[0] + state.prices[1]) / 2)
+
+const coffee = (state: MixtureState) => state.kind === 'coffee'
 
 export const mixtureChallenges: LabChallenge<MixtureState>[] = [
-    { id: 43201, prompt: say('Egin lezioaren kafea: 12 kg 12,40 €-an eta 8 kg 7,40 €-an.', 'Haz el café de la lección: 12 kg a 12,40 € y 8 kg a 7,40 €.', 'اصنع بن الدرس: 12 كغ بـ12.40 € و8 كغ بـ7.40 €.'), hint: say('Prezio ertaina 10,40 €/kg.', 'El precio medio es 10,40 €/kg.', 'السعر المتوسط 10.40 €/كغ.'), isSolved: (state) => equals(mixturePrice(state), fraction(1040, 100)) && state.kilos.includes(12) && state.kilos.includes(8) },
-    { id: 43202, prompt: say('Lortu prezio ertaina bi prezioen erdian geratzea, prezio desberdinekin.', 'Consigue que el precio medio quede justo en medio de los dos, con precios distintos.', 'اجعل السعر المتوسط في منتصف السعرين تمامًا، بسعرين مختلفين.'), hint: say('Kantitate berdinak.', 'Cantidades iguales.', 'كميتان متساويتان.'), isSolved: (state) => state.prices[0] !== state.prices[1] && equals(mixturePrice(state), fraction(state.prices[0] + state.prices[1], 200)) },
-    { id: 43203, prompt: say('10 kg kafe 9,50 €-an daude. Zenbat kg 15 €-ko kafe gehitu behar dira 12,50 €/kg lortzeko?', 'Hay 10 kg de café a 9,50 €. ¿Cuántos kg de café a 15 € hay que añadir para que salga a 12,50 €/kg?', 'لدينا 10 كغ من البن بـ9.50 €. كم كيلوغرامًا من البن بـ15 € نضيف ليصير السعر 12.50 €/كغ؟'), hint: say('$15x+95=12{,}5\\cdot(10+x)$.', '$15x+95=12{,}5\\cdot(10+x)$.', '$15x+95=12{,}5\\cdot(10+x)$.'), isSolved: (state) => equals(mixturePrice(state), fraction(1250, 100)) && state.prices.includes(1500) && state.prices.includes(950) },
-    { id: 43204, prompt: say('Egin 5,75 €-an saltzeko nahasketa: 7,40 €-ko ardoa eta 5,20 €-koa.', 'Haz una mezcla que salga a 5,75 €: vino de 7,40 € y de 5,20 €.', 'اصنع خليطًا سعره 5.75 €: نبيذ بـ7.40 € وآخر بـ5.20 €.'), hint: say('1 eta 3 arteko proportzioa.', 'En proporción 1 a 3.', 'بنسبة 1 إلى 3.'), isSolved: (state) => equals(mixturePrice(state), fraction(575, 100)) && state.prices.includes(740) && state.prices.includes(520) }
+    { id: 43201, prompt: say('Egin lezioaren kafea: 12 kg 12,40 €-an eta 8 kg 7,40 €-an.', 'Haz el café de la lección: 12 kg a 12,40 € y 8 kg a 7,40 €.', 'اصنع بن الدرس: 12 كغ بـ12.40 € و8 كغ بـ7.40 €.'), hint: say('Prezio ertaina 10,40 €/kg.', 'El precio medio es 10,40 €/kg.', 'السعر المتوسط 10.40 €/كغ.'), isSolved: (state) => coffee(state) && equals(mixturePrice(state), fraction(1040, 100)) && state.kilos.includes(12) && state.kilos.includes(8) },
+    { id: 43202, prompt: say('Lortu prezio ertaina bi prezioen erdian geratzea, prezio desberdinekin.', 'Consigue que el precio medio quede justo en medio de los dos, con precios distintos.', 'اجعل السعر المتوسط في منتصف السعرين تمامًا، بسعرين مختلفين.'), hint: say('Kantitate berdinak.', 'Cantidades iguales.', 'كميتان متساويتان.'), isSolved: (state) => coffee(state) && state.prices[0] !== state.prices[1] && equals(mixturePrice(state), fraction(state.prices[0] + state.prices[1], 200)) },
+    { id: 43203, prompt: say('10 kg kafe 9,50 €-an daude. Zenbat kg 15 €-ko kafe gehitu behar dira 12,50 €/kg lortzeko?', 'Hay 10 kg de café a 9,50 €. ¿Cuántos kg de café a 15 € hay que añadir para que salga a 12,50 €/kg?', 'لدينا 10 كغ من البن بـ9.50 €. كم كيلوغرامًا من البن بـ15 € نضيف ليصير السعر 12.50 €/كغ؟'), hint: say('$15x+95=12{,}5\\cdot(10+x)$.', '$15x+95=12{,}5\\cdot(10+x)$.', '$15x+95=12{,}5\\cdot(10+x)$.'), isSolved: (state) => coffee(state) && equals(mixturePrice(state), fraction(1250, 100)) && state.prices.includes(1500) && state.prices.includes(950) },
+    { id: 43204, prompt: say('Egin 5,75 €-an saltzeko nahasketa: 7,40 €-ko ardoa eta 5,20 €-koa.', 'Haz una mezcla que salga a 5,75 €: vino de 7,40 € y de 5,20 €.', 'اصنع خليطًا سعره 5.75 €: نبيذ بـ7.40 € وآخر بـ5.20 €.'), hint: say('1 eta 3 arteko proportzioa.', 'En proporción 1 a 3.', 'بنسبة 1 إلى 3.'), isSolved: (state) => coffee(state) && equals(mixturePrice(state), fraction(575, 100)) && state.prices.includes(740) && state.prices.includes(520) },
+    {
+        id: 43205,
+        prompt: say(
+            'Urtu 4 kg urre (purutasuna: 0,85) eta 3 kg urre (purutasuna: 0,9). Ikasgaiko lingotea da, bi aldiz handiagoa. Zer purutasun ateratzen da?',
+            'Funde 4 kg de oro de ley 0,85 con 3 kg de ley 0,9: es el lingote de la lección, el doble de grande. ¿Qué ley sale?',
+            'اصهر 4 كغ من الذهب عياره 0.85 مع 3 كغ عياره 0.9: إنها سبيكة الدرس بضعف الحجم. ما العيار الناتج؟'
+        ),
+        hint: say('Urre garbia: $4\\cdot 0{,}85+3\\cdot 0{,}9=6{,}1$ kg, 7 kilotan.', 'Oro puro: $4\\cdot 0{,}85+3\\cdot 0{,}9=6{,}1$ kg en 7 kg.', 'الذهب الخالص: $4\\cdot 0{,}85+3\\cdot 0{,}9=6{,}1$ كغ من 7 كغ.'),
+        isSolved: (state) => state.kind === 'alloy' && ([0, 1] as const).some((slot) => state.kilos[slot] === 4 && state.prices[slot] === 850 && state.kilos[1 - slot] === 3 && state.prices[1 - slot] === 900)
+    }
 ]
 
 /* ---------- 3. Two vehicles on a road ---------- */
@@ -411,7 +443,34 @@ function twoPrices(random: () => number): [number, number] {
 
 /** Mixture: a target price from two given prices, or the kilos to add to reach it */
 export const mixtureExtra: LabChallengeMaker<MixtureState> = freshFrom(initialMixtureState, (random) => {
-    if (random() < 0.5) {
+    const kind = random()
+    if (kind < 0.25) {
+        for (;;) {
+            const low = pick(random, ALLOY_PURITIES)
+            const high = pick(random, ALLOY_PURITIES)
+            const a = randomInt(random, 1, 6)
+            const b = randomInt(random, 1, 6)
+            const total = a * low + b * high
+            if (low >= high || gcd(a, b) !== 1 || total % (a + b) !== 0) continue
+            const mean = total / (a + b)
+            const fineness = (thousandths: number, point = false) => { const text = String(thousandths / 1000); return point ? text : text.replace('.', ',') }
+            return {
+                prompt: text(
+                    `Urtu urrea (purutasuna: ${fineness(low)}) eta urrea (purutasuna: ${fineness(high)}), ${fineness(mean)} purutasuneko lingote bat lortzeko.`,
+                    `Funde oro de ley ${fineness(low)} con oro de ley ${fineness(high)} para conseguir un lingote de ley ${fineness(mean)}.`,
+                    `اصهر ذهبًا عياره ${fineness(low, true)} مع ذهب عياره ${fineness(high, true)} لتحصل على سبيكة عيارها ${fineness(mean, true)}.`
+                ),
+                hint: text(
+                    'Pisu handiena duen zatiaren purutasunetik hurbilago geratzen da: probatu kilo kopuru desberdinak.',
+                    'La ley queda más cerca de la del trozo que pesa más: prueba con distintos kilos.',
+                    'يقترب العيار من عيار القطعة الأثقل: جرّب أوزانًا مختلفة.'
+                ),
+                isSolved: (state) => state.kind === 'alloy' && sameSet(state.prices, [low, high]) && equals(mixtureMean(state), n(mean)),
+                solution: { kind: 'alloy', kilos: [a, b], prices: [low, high], prediction: null }
+            }
+        }
+    }
+    if (kind < 0.6) {
         for (;;) {
             const [cheap, dear] = twoPrices(random)
             const a = randomInt(random, 1, 6)
@@ -430,8 +489,8 @@ export const mixtureExtra: LabChallengeMaker<MixtureState> = freshFrom(initialMi
                     `Cada kilo del barato queda $${eurosLatex(mean - cheap)}$ € por debajo del precio medio, y cada kilo del caro, $${eurosLatex(dear - mean)}$ € por encima: tienen que compensarse.`,
                     `كل كيلو من الرخيص أقل من السعر المتوسط بمقدار $${eurosLatex(mean - cheap)}$ €، وكل كيلو من الغالي أعلى منه بمقدار $${eurosLatex(dear - mean)}$ €: يجب أن يتوازنا.`
                 ),
-                isSolved: (state) => sameSet(state.prices, [cheap, dear]) && equals(mixturePrice(state), fraction(mean, 100)),
-                solution: { kilos: [a, b], prices: [cheap, dear], prediction: null }
+                isSolved: (state) => coffee(state) && sameSet(state.prices, [cheap, dear]) && equals(mixturePrice(state), fraction(mean, 100)),
+                solution: { kind: 'coffee', kilos: [a, b], prices: [cheap, dear], prediction: null }
             }
         }
     }
@@ -454,8 +513,8 @@ export const mixtureExtra: LabChallengeMaker<MixtureState> = freshFrom(initialMi
                 `Coste total entre kilos totales: $\\frac{${kilos}\\cdot ${eurosLatex(first)}+${eurosLatex(second)}\\cdot x}{${kilos}+x}=${eurosLatex(mean)}$.`,
                 `الكلفة الكلية على عدد الكيلوغرامات: $\\frac{${kilos}\\cdot ${eurosLatex(first)}+${eurosLatex(second)}\\cdot x}{${kilos}+x}=${eurosLatex(mean)}$.`
             ),
-            isSolved: (state) => ([0, 1] as const).some((slot) => state.kilos[slot] === kilos && state.prices[slot] === first && state.prices[1 - slot] === second) && equals(mixturePrice(state), fraction(mean, 100)),
-            solution: { kilos: [kilos, added], prices: [first, second], prediction: null }
+            isSolved: (state) => coffee(state) && ([0, 1] as const).some((slot) => state.kilos[slot] === kilos && state.prices[slot] === first && state.prices[1 - slot] === second) && equals(mixturePrice(state), fraction(mean, 100)),
+            solution: { kind: 'coffee', kilos: [kilos, added], prices: [first, second], prediction: null }
         }
     }
 })
@@ -602,5 +661,6 @@ export const proportionDbh4ApLabChallengeIds = [
     ...growthChallenges,
     ...mixtureChallenges,
     ...motionChallenges,
+    ...roadGraphChallenges,
     ...tapsChallenges
 ].map((challenge) => challenge.id)

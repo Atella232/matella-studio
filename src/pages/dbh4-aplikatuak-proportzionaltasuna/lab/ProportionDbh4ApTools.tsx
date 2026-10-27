@@ -27,12 +27,14 @@ import {
     initialMixtureState,
     initialMotionState,
     initialTapsState,
+    ALLOY_PURITIES,
     meetingMinutes,
     MIXTURE_KILOS_MAX,
     MIXTURE_PRICES,
     mixtureChallenges,
     mixtureCost,
     mixtureExtra,
+    mixtureMean,
     mixturePrediction,
     mixturePrice,
     MOTION_DISTANCES,
@@ -54,12 +56,14 @@ import {
     tapsExtra,
     tapsPrediction,
     type GrowthState,
+    type MixtureKind,
     type MixtureState,
     type MotionMode,
     type MotionState,
     type Prediction,
     type TapsState
 } from './labTools'
+import { usePlayback } from './usePlayback'
 
 const INK = 'var(--ink, #1d2733)'
 const MUTED = 'var(--muted, #58616e)'
@@ -70,6 +74,7 @@ const GREEN = 'var(--success, #267b53)'
 /** Simple interest stays blue, apart from the green compound bars, whatever the stage colour */
 const BLUE = '#2f6fdb'
 const CARD = 'var(--card, #fffcf6)'
+const GREY = '#d9d6cf'
 
 type Text = { eu: string; es: string; ar: string }
 const say = (eu: string, es: string, ar: string): Text => ({ eu, es, ar })
@@ -136,6 +141,15 @@ function Predict({ language, question, labels, actual, choice, tip, onChoose, ch
     return <PredictionStep language={language} question={question} labels={labels} actual={actual} choice={choice} tip={tip} wait={seeAfter} onChoose={onChoose}>{children}</PredictionStep>
 }
 
+/** The ▶ button under a drawing; it waits for the prediction */
+function PlayButton({ label, disabled, playing, onPlay }: { label: string; disabled: boolean; playing: boolean; onPlay: () => void }) {
+    return (
+        <div className="fraction-v2-lab-quick-actions" style={{ width: '100%', maxWidth: 520, margin: '0 auto' }}>
+            <button type="button" onClick={onPlay} disabled={disabled || playing}>{`▶ ${label}`}</button>
+        </div>
+    )
+}
+
 /** A big question mark where the result will be drawn */
 const Hidden = ({ x, y, size = 34 }: { x: number; y: number; size?: number }) => <text x={x} y={y} textAnchor="middle" fontSize={size} fontWeight={700} fill={MUTED} opacity={0.6}>?</text>
 
@@ -169,10 +183,11 @@ export function GrowthTool(props: LabToolProps) {
         ? `${state.capital}\\cdot ${exactLatex(fraction(100 + state.rate, 100))}^{${state.years}}${equalsSign}${moneyLatex(finalCompound)}`
         : `${state.capital}\\cdot\\left(1+\\frac{${state.rate}}{${100 * state.periods}}\\right)^{${state.periods}\\cdot ${state.years}}${equalsSign}${moneyLatex(finalCompound)}`
     const note = l(say(
-        `Bakuna: ${money('eu', finalSimple)} €. Konposatua: ${money('eu', finalCompound)} € (${money('eu', finalCompound - finalSimple)} € gehiago).`,
-        `Simple: ${money('es', finalSimple)} €. Compuesto: ${money('es', finalCompound)} € (${money('es', finalCompound - finalSimple)} € más).`,
-        `البسيطة: ${money('ar', finalSimple)} €. المركّبة: ${money('ar', finalCompound)} €، أي بزيادة ${money('ar', finalCompound - finalSimple)} €.`
+        `Bakuna: ${money('eu', finalSimple)} €. Konposatua: ${money('eu', finalCompound)} €. Gehiagoko ${money('eu', finalCompound - finalSimple)} € interesen interesa da.`,
+        `Simple: ${money('es', finalSimple)} €. Compuesto: ${money('es', finalCompound)} €. Los ${money('es', finalCompound - finalSimple)} € de más son el interés de los intereses.`,
+        `البسيطة: ${money('ar', finalSimple)} €. المركّبة: ${money('ar', finalCompound)} €. والزيادة ${money('ar', finalCompound - finalSimple)} € هي فائدة الفوائد.`
     ))
+    const growthPlayback = usePlayback(`${state.capital}-${state.rate}-${state.years}-${state.periods}`, 450 * state.years + 300)
     const rule = Math.round((72 / state.rate) * 10) / 10
     const ruleLatex = `72\\mathbin{:}${state.rate}\\approx ${String(rule).replace('.', props.language === 'ar' ? '.' : '{,}')}`
     const readout = (
@@ -192,124 +207,188 @@ export function GrowthTool(props: LabToolProps) {
             <Readout language={props.language} latex={latex} note={note} />
         </Predict>
     )
-    const top = Math.max(finalCompound, finalSimple)
-    const base = 196
-    const scale = 150 / top
+    // Layers: the capital (a fixed block, cut, so that the interest can be seen), the interest of the capital
+    // (the same in simple and compound) and, only in compound, the interest of the interest
+    const base = 208
+    const capitalHeight = 30
+    const scale = 126 / Math.max(finalCompound - state.capital, 1e-9)
     const slot = 324 / years.length
     const bar = Math.min(16, slot / 2 - 2)
     const lastX = 28 + state.years * slot + slot / 2 + bar / 2
+    const visible = growthPlayback.progress === null ? state.years : Math.floor(growthPlayback.progress * state.years + 1e-9)
+    const layer = (x: number, bottom: number, height: number, fill: string, opacity: number) =>
+        height > 0.2 && <rect x={x} y={bottom - height} width={bar} height={height} fill={fill} fillOpacity={opacity} stroke={INK} strokeWidth={1.1} />
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={growthChallenges} extraChallenges={growthExtra} state={state}>
-            <Board height={232} label={l(say('Bakuna eta konposatua urtez urte', 'Simple y compuesto año a año', 'البسيطة والمركّبة سنة بعد سنة'))}>
-                <rect x={10} y={6} width={13} height={13} fill={BLUE} fillOpacity={0.35} stroke={INK} />
-                <Label x={28} y={17} fontSize={14} fontWeight={700} fill={BLUE}>{l(say('bakuna', 'simple', 'بسيطة'))}</Label>
-                <rect x={120} y={6} width={13} height={13} fill={GREEN} fillOpacity={0.6} stroke={INK} />
-                <Label x={138} y={17} fontSize={14} fontWeight={700} fill={GREEN}>{l(say('konposatua', 'compuesto', 'مركّبة'))}</Label>
+            <Board height={252} label={l(say('Kapitala, kapitalaren interesa eta interesen interesa urtez urte', 'Capital, interés del capital e interés de los intereses año a año', 'رأس المال وفائدته وفائدة الفوائد سنة بعد سنة'))}>
+                <rect x={10} y={6} width={13} height={13} fill={GREY} stroke={INK} />
+                <Label x={28} y={17} fontSize={14} fontWeight={700} fill={MUTED}>{`${l(say('kapitala', 'capital', 'رأس المال'))}: \u2066${state.capital} €\u2069`}</Label>
+                <rect x={170} y={6} width={13} height={13} fill={BLUE} fillOpacity={0.45} stroke={INK} />
+                <Label x={188} y={17} fontSize={14} fontWeight={700} fill={BLUE}>{l(say('kapitalaren interesa', 'interés del capital', 'فائدة رأس المال'))}</Label>
+                <rect x={10} y={25} width={13} height={13} fill={GREEN} fillOpacity={0.65} stroke={INK} />
+                <Label x={28} y={36} fontSize={14} fontWeight={700} fill={GREEN}>{l(say('interesen interesa', 'interés de los intereses', 'فائدة الفوائد'))}</Label>
                 <line x1={20} x2={354} y1={base} y2={base} stroke={INK} strokeWidth={2} />
                 {years.map((year) => {
                     const x = 28 + year * slot + slot / 2
-                    const simple = toNumber(simpleAfter(state, year))
-                    const compound = compoundAfter(state, year)
+                    const own = (toNumber(simpleAfter(state, year)) - state.capital) * scale
+                    const extra = (compoundAfter(state, year) - toNumber(simpleAfter(state, year))) * scale
+                    const drawn = shown && year <= visible
                     return (
                         <g key={year}>
-                            {(shown || year === 0) && (
-                                <>
-                                    <rect x={x - bar - 1} y={base - simple * scale} width={bar} height={simple * scale} fill={BLUE} fillOpacity={0.35} stroke={INK} strokeWidth={1.2} />
-                                    <rect x={x + 1} y={base - compound * scale} width={bar} height={compound * scale} fill={GREEN} fillOpacity={0.6} stroke={INK} strokeWidth={1.2} />
-                                </>
-                            )}
+                            {[x - bar - 1, x + 1].map((left, side) => (
+                                <g key={side}>
+                                    <rect x={left} y={base - capitalHeight} width={bar} height={capitalHeight} fill={GREY} stroke={INK} strokeWidth={1.1} />
+                                    {/* The capital block is cut: its height is not to scale */}
+                                    <path d={`M${left - 1} ${base - 19} l${bar / 2} -4 l${bar / 2 + 2} 4`} fill="none" stroke={CARD} strokeWidth={2.4} />
+                                    {drawn && layer(left, base - capitalHeight, own, BLUE, 0.45)}
+                                    {drawn && side === 1 && layer(left, base - capitalHeight - own, extra, GREEN, 0.65)}
+                                </g>
+                            ))}
                             <text x={x} y={base + 17} textAnchor="middle" fontSize={14} fontWeight={700} fill={MUTED}>{year}</text>
                         </g>
                     )
                 })}
                 {shown
-                    ? <text x={Math.min(lastX, 352)} y={base - finalCompound * scale - 7} textAnchor={lastX > 330 ? 'end' : 'middle'} fontSize={15} fontWeight={700} fill={GREEN}>{money(props.language, finalCompound)}</text>
-                    : <Hidden x={200} y={120} />}
-                <Label x={352} y={229} textAnchor="end" fontSize={13} fill={MUTED}>{l(say('urteak', 'años', 'السنوات'))}</Label>
+                    ? visible === state.years && <text x={Math.min(lastX, 352)} y={base - capitalHeight - (finalCompound - state.capital) * scale - 7} textAnchor={lastX > 330 ? 'end' : 'middle'} fontSize={15} fontWeight={700} fill={GREEN}>{money(props.language, finalCompound)}</text>
+                    : <Hidden x={200} y={130} />}
+                <Label x={10} y={246} fontSize={13} fill={MUTED}>{l(say('Ezkerrean bakuna; eskuinean konposatua.', 'A la izquierda, simple; a la derecha, compuesto.', 'على اليسار البسيطة، وعلى اليمين المركّبة.'))}</Label>
+                <Label x={352} y={246} textAnchor="end" fontSize={13} fill={MUTED}>{l(say('urteak', 'años', 'السنوات'))}</Label>
             </Board>
+            <PlayButton disabled={!shown} playing={growthPlayback.playing} onPlay={growthPlayback.play} label={l(say('Urtez urte', 'Año a año', 'سنة بعد سنة'))} />
         </ToolFrame>
     )
 }
 
 /* ---------- 2. The mixture ---------- */
 
+/** Fineness of gold for a sentence: 850 thousandths → 0,85 (0.85 in Arabic); means are rounded to the thousandths */
+const fineness = (language: string, thousandths: number) => {
+    const rounded = Math.round(thousandths) / 1000
+    const text = String(rounded)
+    return language === 'ar' ? text : text.replace('.', ',')
+}
+
 export function MixtureTool(props: LabToolProps) {
     const l = useLabText(props.language)
     const [state, setState] = useState<MixtureState>(initialMixtureState)
-    const priceOption = (price: number) => ({ value: String(price), label: `${money(props.language, price / 100)} €` })
+    const gold = state.kind === 'alloy'
+    const valueText = (value: number) => (gold ? fineness(props.language, value) : money(props.language, value / 100))
+    const valueLatex = (value: number) => (gold ? fineness('eu', value) : money('eu', value / 100)).replace(',', '{,}')
     const controls = (
         <>
+            <Segmented label={l(say('Zer nahasten da?', '¿Qué se mezcla?', 'ماذا نخلط؟'))} value={state.kind} options={[{ value: 'coffee', label: l(say('Kafea', 'Café', 'البن')) }, { value: 'alloy', label: l(say('Urrea', 'Oro', 'الذهب')) }]} onChange={(kind) => setState((s) => setMixture(s, { kind: kind as MixtureKind }))} />
             {[0, 1].map((index) => (
                 <Fragment key={index}>
                     <Stepper label={`${index === 0 ? 'A' : 'B'} · kg`} value={state.kilos[index]} min={1} max={MIXTURE_KILOS_MAX} onChange={(kilos) => setState((s) => setMixture(s, { kilos: [index as 0 | 1, kilos] }))} language={props.language} />
-                    <Segmented label={`${index === 0 ? 'A' : 'B'} · €/kg`} value={String(state.prices[index])} options={MIXTURE_PRICES.map(priceOption)} onChange={(price) => setState((s) => setMixture(s, { price: [index as 0 | 1, Number(price)] }))} />
+                    <Segmented
+                        label={gold ? `${index === 0 ? 'A' : 'B'} · ${l(say('purutasuna', 'ley', 'العيار'))}` : `${index === 0 ? 'A' : 'B'} · €/kg`}
+                        value={String(state.prices[index])}
+                        options={(gold ? ALLOY_PURITIES : MIXTURE_PRICES).map((value) => ({ value: String(value), label: gold ? valueText(value) : `${valueText(value)} €` }))}
+                        onChange={(price) => setState((s) => setMixture(s, { price: [index as 0 | 1, Number(price)] }))}
+                    />
                 </Fragment>
             ))}
         </>
     )
     const shown = state.prediction !== null
-    const cost = mixtureCost(state)
-    const mean = mixturePrice(state)
     const [ka, kb] = state.kilos
-    const [pa, pb] = state.prices.map((price) => moneyLatex(price / 100))
-    const latex = `\\frac{${ka}\\cdot ${pa}+${kb}\\cdot ${pb}}{${ka + kb}}=\\frac{${exactLatex(cost)}}{${ka + kb}}${shortDecimal(mean) ? '=' : '\\approx '}${moneyLatex(toNumber(mean))}`
-    const note = l(say(
-        `${ka + kb} kg: ${money('eu', toNumber(cost))} €. Kiloa: ${money('eu', toNumber(mean))} €.`,
-        `${ka + kb} kg cuestan ${money('es', toNumber(cost))} €: ${money('es', toNumber(mean))} €/kg.`,
-        `${ka + kb} كغ تكلّف ${money('ar', toNumber(cost))} €، أي ${money('ar', toNumber(mean))} € للكيلوغرام.`
-    ))
+    const [pa, pb] = state.prices
+    const meanValue = toNumber(mixtureMean(state))
+    let latex: string
+    let note: string
+    if (gold) {
+        const pure = (ka * pa + kb * pb) / 1000
+        const exact = Number.isInteger(meanValue)
+        latex = `\\frac{${ka}\\cdot ${valueLatex(pa)}+${kb}\\cdot ${valueLatex(pb)}}{${ka + kb}}=\\frac{${String(pure).replace('.', '{,}')}}{${ka + kb}}${exact ? '=' : '\\approx '}${valueLatex(meanValue)}`
+        const pureText = props.language === 'ar' ? String(pure) : String(pure).replace('.', ',')
+        note = l(say(`${ka + kb} kg urre, eta horietatik ${pureText} kg urre garbia: purutasuna ${valueText(meanValue)}.`, `${ka + kb} kg de oro, de los que ${pureText} kg son oro puro: ley ${valueText(meanValue)}.`, `${ka + kb} كغ من الذهب، منها ${pureText} كغ ذهب خالص: العيار ${valueText(meanValue)}.`))
+    } else {
+        const cost = mixtureCost(state)
+        const mean = mixturePrice(state)
+        latex = `\\frac{${ka}\\cdot ${valueLatex(pa)}+${kb}\\cdot ${valueLatex(pb)}}{${ka + kb}}=\\frac{${exactLatex(cost)}}{${ka + kb}}${shortDecimal(mean) ? '=' : '\\approx '}${moneyLatex(toNumber(mean))}`
+        note = l(say(
+            `${ka + kb} kg: ${money('eu', toNumber(cost))} €. Kiloa: ${money('eu', toNumber(mean))} €.`,
+            `${ka + kb} kg cuestan ${money('es', toNumber(cost))} €: ${money('es', toNumber(mean))} €/kg.`,
+            `${ka + kb} كغ تكلّف ${money('ar', toNumber(cost))} €، أي ${money('ar', toNumber(mean))} € للكيلوغرام.`
+        ))
+    }
+    // The seesaw: kilos times the distance to the support are equal on both sides
+    const distance = (value: number) => valueText(Math.abs(meanValue - value))
+    // Written exactly only when the mean is a whole number of cents (or thousandths); otherwise the distances are rounded
+    const exactMean = Math.abs(meanValue - Math.round(meanValue)) < 1e-9
+    const balance = `\u2066${ka} · ${distance(pa)} ${exactMean ? '=' : '≈'} ${kb} · ${distance(pb)}\u2069`
+    const balanceNote = l(say(` Balantza: ${balance} (kiloak bider distantzia).`, ` Balancín: ${balance} (kilos por distancia).`, ` الميزان: ${balance} (الكيلوغرامات في المسافة).`))
     const readout = (
         <Predict
             language={props.language}
-            question={say('Emaitza ikusi aurretik: non geratuko da prezio ertaina?', 'Antes de ver el resultado: ¿dónde quedará el precio medio?', 'قبل رؤية النتيجة: أين سيقع السعر المتوسط؟')}
-            labels={{ '<': say('Merkeenetik hurbilago', 'Más cerca del barato', 'أقرب إلى الرخيص'), '=': say('Justu erdian', 'Justo en medio', 'في المنتصف تمامًا'), '>': say('Garestienetik hurbilago', 'Más cerca del caro', 'أقرب إلى الغالي') }}
+            question={say('Emaitza ikusi aurretik: non geratuko da balantzaren euskarria?', 'Antes de ver el resultado: ¿dónde quedará el apoyo del balancín?', 'قبل رؤية النتيجة: أين ستقع نقطة ارتكاز الميزان؟')}
+            labels={gold
+                ? { '<': say('Purutasun txikirantz', 'Hacia la ley baja', 'نحو العيار الأدنى'), '=': say('Justu erdian', 'Justo en medio', 'في المنتصف تمامًا'), '>': say('Purutasun handirantz', 'Hacia la ley alta', 'نحو العيار الأعلى') }
+                : { '<': say('Merkerantz', 'Hacia el barato', 'نحو الرخيص'), '=': say('Justu erdian', 'Justo en medio', 'في المنتصف تمامًا'), '>': say('Garestirantz', 'Hacia el caro', 'نحو الغالي') }}
             actual={mixturePrediction(state)}
             choice={state.prediction}
-            tip={say('Prezio ertaina kilo gehien dituen produktura hurbiltzen da; kilo berdinekin, justu erdian geratzen da.', 'El precio medio se acerca al producto del que hay más kilos; con los mismos kilos, queda justo en medio.', 'يقترب السعر المتوسط من المنتج الذي كمّيته أكبر؛ وبكميتين متساويتين يقع في المنتصف تمامًا.')}
+            tip={gold
+                ? say('Aleazioaren purutasuna pisu handiena duen zatiarenera hurbiltzen da; kilo berdinekin, erdian geratzen da.', 'La ley de la aleación se acerca a la del trozo que pesa más; con los mismos kilos, queda justo en medio.', 'يقترب عيار السبيكة من عيار القطعة الأثقل؛ وبوزنين متساويين يقع في المنتصف تمامًا.')
+                : say('Prezio ertaina kilo gehien dituen produktura hurbiltzen da; kilo berdinekin, justu erdian geratzen da.', 'El precio medio se acerca al producto del que hay más kilos; con los mismos kilos, queda justo en medio.', 'يقترب السعر المتوسط من المنتج الذي كمّيته أكبر؛ وبكميتين متساويتين يقع في المنتصف تمامًا.')}
             onChoose={(prediction) => setState((s) => setPrediction(s, prediction))}
         >
-            <Readout language={props.language} latex={latex} note={note} />
+            <Readout language={props.language} latex={latex} note={`${note}${balanceNote}`} />
         </Predict>
     )
-    // A price line from 5 € to 15 €
-    const line = (euros: number) => 30 + (euros - 5) * 30
-    const meanX = line(toNumber(mean))
-    // Sacks sit above their price; two close prices push their sacks apart and a dashed line points to the price
-    const ticks = state.prices.map((price) => line(price / 100))
+    // The beam is a ruler: 5–15 € for coffee, fineness 0,7–1 for gold
+    const [low, high] = gold ? [700, 1000] : [500, 1500]
+    const line = (value: number) => 30 + ((value - low) / (high - low)) * 300
+    const meanX = line(meanValue)
+    const ticks = state.prices.map(line)
+    // Sacks (or bars of gold) sit on the beam at their value; two close values push them apart and a dashed line points to the value
     const centre = (ticks[0] + ticks[1]) / 2
-    const apart = Math.abs(ticks[0] - ticks[1]) < 52
-    const sackX = apart ? ticks.map((tick, index) => centre + (tick < ticks[1 - index] || (tick === ticks[1 - index] && index === 0) ? -26 : 26)) : ticks
-    const sackXs = sackX.map((x) => Math.min(334, Math.max(26, x)))
+    const apart = Math.abs(ticks[0] - ticks[1]) < 50
+    const loadX = (apart ? ticks.map((tick, index) => centre + (tick < ticks[1 - index] || (tick === ticks[1 - index] && index === 0) ? -25 : 25)) : ticks).map((x) => Math.min(334, Math.max(26, x)))
+    const beam = 124
+    const ends = gold ? [700, 1000] : [500, 1500]
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={mixtureChallenges} extraChallenges={mixtureExtra} state={state}>
-            <Board height={190} label={l(say('Bi prezio eta prezio ertaina', 'Dos precios y el precio medio', 'سعران والسعر المتوسط'))}>
+            <Board height={228} label={l(gold ? say('Bi urre-zati balantza batean', 'Dos trozos de oro en un balancín', 'قطعتا ذهب على ميزان') : say('Bi kafe balantza batean', 'Dos cafés en un balancín', 'نوعان من البن على ميزان'))}>
                 {[0, 1].map((index) => {
-                    const x = sackXs[index]
+                    const x = loadX[index]
                     const height = 22 + state.kilos[index] * 2
+                    const shape = gold
+                        ? `M${x - 24} ${beam - 2} l7 ${-height} h34 l7 ${height} z`
+                        : `M${x - 22} ${beam - 2 - height} h44 l-5 ${height} h-34 z`
                     return (
                         <g key={index}>
-                            {Math.abs(x - ticks[index]) > 1 && <line x1={x} x2={ticks[index]} y1={118} y2={130} stroke={MUTED} strokeWidth={1.4} strokeDasharray="3 3" />}
-                            <path d={`M${x - 22} ${118 - height} h44 l-5 ${height} h-34 z`} fill={index === 0 ? '#8a5a33' : '#c4a27a'} fillOpacity={0.55} stroke={INK} strokeWidth={1.6} />
-                            <text x={x} y={118 - height / 2 + 5} textAnchor="middle" fontSize={14} fontWeight={700} fill={INK}>{`${state.kilos[index]} kg`}</text>
-                            <text x={x} y={112 - height} textAnchor="middle" fontSize={14} fontWeight={700} fill={MUTED}>{money(props.language, state.prices[index] / 100)}</text>
+                            {Math.abs(x - ticks[index]) > 1 && <line x1={x} x2={ticks[index]} y1={beam - 2} y2={beam + 4} stroke={MUTED} strokeWidth={1.4} strokeDasharray="3 3" />}
+                            <path d={shape} fill={gold ? (index === 0 ? '#d4a72c' : '#e9c95a') : index === 0 ? '#8a5a33' : '#c4a27a'} fillOpacity={0.7} stroke={INK} strokeWidth={1.6} />
+                            <text x={x} y={beam - 2 - height / 2 + 5} textAnchor="middle" fontSize={14} fontWeight={700} fill={INK}>{`${state.kilos[index]} kg`}</text>
+                            <text x={x} y={beam - 8 - height} textAnchor="middle" fontSize={14} fontWeight={700} fill={MUTED}>{gold ? valueText(state.prices[index]) : `${valueText(state.prices[index])} €`}</text>
                         </g>
                     )
                 })}
-                <line x1={line(5)} x2={line(15)} y1={130} y2={130} stroke={INK} strokeWidth={2} />
-                {[5, 10, 15].map((euros) => (
-                    <g key={euros}>
-                        <line x1={line(euros)} x2={line(euros)} y1={125} y2={135} stroke={INK} strokeWidth={1.6} />
-                        <text x={line(euros)} y={150} textAnchor="middle" fontSize={13} fill={MUTED}>{`${euros} €`}</text>
-                    </g>
-                ))}
+                <line x1={22} x2={338} y1={beam} y2={beam} stroke={INK} strokeWidth={5} strokeLinecap="round" />
+                {ends.map((value, index) => <text key={value} x={line(value)} y={beam + 22} textAnchor={index === 0 ? 'start' : 'end'} fontSize={13} fill={MUTED}>{gold ? valueText(value) : `${valueText(value)} €`}</text>)}
                 {shown
                     ? (
                         <>
-                            <path d={`M${meanX} 133 l-8 14 h16 z`} fill={SECOND} />
-                            <text x={Math.min(300, Math.max(60, meanX))} y={178} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{`${money(props.language, toNumber(mean))} €/kg`}</text>
+                            <path d={`M${meanX} ${beam + 3} l-13 26 h26 z`} fill={SECOND} stroke={INK} strokeWidth={1.2} />
+                            {[0, 1].map((index) => {
+                                const x = ticks[index]
+                                if (Math.abs(x - meanX) < 4) return null
+                                // Two short distances would write their labels on top of each other: the second goes lower
+                                const crowded = ticks.some((tick) => Math.abs(tick - meanX) < 48)
+                                const left = Math.min(x, meanX)
+                                const right = Math.max(x, meanX)
+                                return (
+                                    <g key={index}>
+                                        <line x1={left} x2={right} y1={beam + 40} y2={beam + 40} stroke={STAGE} strokeWidth={2} />
+                                        <line x1={x} x2={x} y1={beam + 34} y2={beam + 46} stroke={STAGE} strokeWidth={2} />
+                                        <text x={(left + right) / 2} y={beam + (crowded && index === 1 ? 73 : 57)} textAnchor="middle" fontSize={14} fontWeight={700} fill={STAGE}>{distance(state.prices[index])}</text>
+                                    </g>
+                                )
+                            })}
+                            <text x={Math.min(300, Math.max(60, meanX))} y={beam + 96} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{gold ? `${l(say('purutasuna', 'ley', 'العيار'))} ${valueText(meanValue)}` : `${valueText(meanValue)} €/kg`}</text>
                         </>
                     )
-                    : <Hidden x={180} y={182} size={26} />}
+                    : <Hidden x={180} y={beam + 70} size={28} />}
             </Board>
         </ToolFrame>
     )
@@ -379,8 +458,16 @@ export function MotionTool(props: LabToolProps) {
                 {result}
             </Predict>
         )
-    // The road shows from A's start to a bit beyond the furthest point
-    const far = Math.max(state.distance, toNumber(a), toNumber(b)) * 1.05
+    // ▶ drives both vehicles from the start to the meeting (or to the end of the clock if they never meet)
+    const [v1Speed, v2Speed] = state.speeds
+    const endMinutes = meeting === null ? CLOCK_MAX : toNumber(meeting)
+    const race = usePlayback(`${state.mode}-${state.distance}-${v1Speed}-${v2Speed}-${state.minutes}`, 3000)
+    const clock = race.progress === null ? state.minutes : race.progress * endMinutes
+    const at = (minutes: number): [number, number] => [v1Speed * minutes / 60, state.mode === 'meet' ? state.distance - v2Speed * minutes / 60 : state.distance + v2Speed * minutes / 60]
+    const [aKm, bKm] = race.progress === null ? [toNumber(a), toNumber(b)] : at(clock)
+    const met = race.progress === null ? atMeeting(state) : race.progress === 1 && meeting !== null
+    // The road shows from A's start to a bit beyond the furthest point, also at the end of the ride
+    const far = Math.max(state.distance, toNumber(a), toNumber(b), ...at(Math.min(endMinutes, CLOCK_MAX))) * 1.05
     const road = (km: number) => 20 + (Math.max(0, Math.min(km, far)) / far) * 316
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={motionChallenges} extraChallenges={motionExtra} state={state}>
@@ -391,13 +478,14 @@ export function MotionTool(props: LabToolProps) {
                 <line x1={road(state.distance)} x2={road(state.distance)} y1={80} y2={98} stroke={SECOND} strokeWidth={2} />
                 <text x={road(0)} y={114} textAnchor="middle" fontSize={14} fontWeight={700} fill={STAGE}>0</text>
                 <text x={road(state.distance)} y={114} textAnchor="middle" fontSize={14} fontWeight={700} fill={SECOND}>{`${state.distance} km`}</text>
-                <Car x={road(toNumber(a))} y={75} color="#2f6fdb" />
-                <Car x={road(toNumber(b))} y={75} color="#c4432a" back={state.mode === 'meet'} />
-                <text x={road(toNumber(a))} y={42} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>A</text>
+                <Car x={road(aKm)} y={75} color="#2f6fdb" />
+                <Car x={road(bKm)} y={75} color="#c4432a" back={state.mode === 'meet'} />
+                <text x={road(aKm)} y={42} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>A</text>
                 {/* Side by side, B's letter goes higher so that A's stays visible */}
-                <text x={road(toNumber(b))} y={Math.abs(road(toNumber(b)) - road(toNumber(a))) < 22 ? 22 : 42} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>B</text>
-                <text x={180} y={142} textAnchor="middle" fontSize={17} fontWeight={700} fill={atMeeting(state) ? GREEN : INK}>{`${state.minutes} min`}</text>
+                <text x={road(bKm)} y={Math.abs(road(bKm) - road(aKm)) < 22 ? 22 : 42} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>B</text>
+                <text x={180} y={142} textAnchor="middle" fontSize={17} fontWeight={700} fill={met ? GREEN : INK}>{race.progress === null ? `${state.minutes} min` : hoursText(clock / 60)}</text>
             </Board>
+            <PlayButton disabled={actual !== null && state.prediction === null} playing={race.playing} onPlay={race.play} label={l(say('Ikusi bidaia', 'Ver el viaje', 'شاهد الرحلة'))} />
         </ToolFrame>
     )
 }
@@ -450,6 +538,11 @@ export function TapsTool(props: LabToolProps) {
     const tankHeight = 176
     const share = Math.max(0, toNumber(rate))
     const bands = hours ? Math.ceil(toNumber(hours) - 1e-9) : 4
+    // ▶ fills the empty tank in three seconds, with a mark for each hour that passes
+    const fill = usePlayback(`${state.taps[0]}-${state.taps[1]}-${state.drain}`, 3000)
+    const filling = fill.progress !== null && fill.progress < 1 && hours !== null
+    const level = filling ? fill.progress! : 1
+    const elapsed = hours ? level * toNumber(hours) : 0
     const parts = [
         { width: 1 / state.taps[0], color: STAGE, label: 'A' },
         ...(state.taps[1] > 0 ? [{ width: 1 / state.taps[1], color: GREEN, label: 'B' }] : []),
@@ -472,14 +565,17 @@ export function TapsTool(props: LabToolProps) {
                 })}
                 <rect x={tankX} y={tankY} width={132} height={tankHeight} fill={CARD} stroke={INK} strokeWidth={2.4} />
                 {shown && share > 0 && Array.from({ length: Math.min(bands, 12) }, (_, hour) => {
-                    const filled = Math.min(1, share * (hour + 1)) - Math.min(1, share * hour)
-                    const bottom = tankY + tankHeight - Math.min(1, share * hour) * tankHeight
-                    return <rect key={hour} x={tankX} y={bottom - filled * tankHeight} width={132} height={filled * tankHeight} fill={hour % 2 ? STAGE : STAGE_TINT} fillOpacity={0.7} stroke={INK} strokeWidth={0.6} />
+                    // While filling, only the water up to the current level shows
+                    const from = Math.min(1, share * hour, level)
+                    const to = Math.min(1, share * (hour + 1), level)
+                    if (to <= from) return null
+                    return <rect key={hour} x={tankX} y={tankY + tankHeight - to * tankHeight} width={132} height={(to - from) * tankHeight} fill={hour % 2 ? STAGE : STAGE_TINT} fillOpacity={0.7} stroke={INK} strokeWidth={0.6} />
                 })}
                 {shown
-                    ? <text x={tankX + 66} y={tankY + tankHeight + 20} textAnchor="middle" fontSize={15} fontWeight={700} fill={hours ? STAGE : SECOND}>{hours ? hoursText(toNumber(hours)) : '∞'}</text>
+                    ? <text x={tankX + 66} y={tankY + tankHeight + 20} textAnchor="middle" fontSize={15} fontWeight={700} fill={hours ? STAGE : SECOND}>{hours ? hoursText(filling ? elapsed : toNumber(hours)) : '∞'}</text>
                     : <Hidden x={tankX + 66} y={tankY + tankHeight / 2 + 12} />}
             </Board>
+            <PlayButton disabled={!shown || hours === null} playing={filling} onPlay={fill.play} label={l(say('Bete biltegia', 'Llenar el depósito', 'املأ الخزان'))} />
         </ToolFrame>
     )
 }
