@@ -1,6 +1,6 @@
 ---
 name: proportzionaltasuna-dbh4ap-lab-plus
-description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) committed 90b3caa on feat/proportzionaltasuna-dbh4ap-lab-motion, fast-forwarded into main and deployed 2026-10-27 (bundle index-buE2QkQf); phase 4 (J1 error detective, J2 bank) committed 866d9d5 on feat/proportzionaltasuna-dbh4ap-games, fast-forwarded into main and deployed 2026-10-27 (bundle index-B-ETaI-9)"
+description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) committed 90b3caa on feat/proportzionaltasuna-dbh4ap-lab-motion, fast-forwarded into main and deployed 2026-10-27 (bundle index-buE2QkQf); phase 4 (J1 error detective, J2 bank) committed 866d9d5 on feat/proportzionaltasuna-dbh4ap-games, fast-forwarded into main and deployed 2026-10-27 (bundle index-B-ETaI-9); phase 5 (J3 meeting on the road, J4 fill the tank) built 2026-10-28 on feat/proportzionaltasuna-dbh4ap-games-road, not merged or deployed yet"
 ---
 
 On 2026-10-26 the owner asked for the same kind of review as [[zatikiak-dbh2-lab-plus]], this time for `src/pages/dbh4-aplikatuak-proportzionaltasuna`. The unit was built in October (see [[remaining-eso-units]]).
@@ -358,3 +358,61 @@ Committed as 866d9d5, fast-forwarded into main, pushed and deployed to matella.n
 - In Arabic the «+», «=» or «≈» before an amount has to go inside the LRI/PDI isolate. Outside it, it ends up on the wrong side («7798.40 €+»).
 - KaTeX centres display formulas through `.katex-display > .katex`, so aligning them left needs that selector too.
 - Writing `⁦` or ` ` with the Write tool can store the raw character. Check with grep and use escapes.
+
+## Phase 5 (branch `feat/proportzionaltasuna-dbh4ap-games-road`, 2026-10-28)
+
+Two more games, J3 and J4. The unit now has six games, and the games description in `index.tsx` lists them. Not deployed yet.
+
+### J3 «Errepideko topaketa / Encuentro en la carretera»
+
+- Game id `road`, slugs errepidea/carretera, progress ids 44501–44503.
+- Logic in `games/road.ts`, component in `games/RoadGame.tsx`, CSS in `games/Road.css`.
+- How it plays:
+  - A road seen from above, with B's lane on top and A's below.
+  - The player taps or drags on the road to plant a flag. There are − and + buttons (1 km) and the arrow keys. The flag starts unplanted, so the middle of the road gives no free points.
+  - «¡Salida!» drives both cars to the meeting in 3 s (`lab/usePlayback`, keyed by seed and round). The green line and its label show the real point; a red band covers the gap to the flag.
+  - Then the result shows the points, the answer in words, and three lines of working (`roadSteps`) with a label above each.
+- Levels:
+  1. towards each other (`meet`);
+  2. a chase (`chase`, B ahead);
+  3. a late start (`late-meet`: B waits; `late-chase`: A leaves the same town later), 3 rounds of each.
+- Every meeting point is a whole km, and the distances are multiples of 5. In a chase the road goes on past the meeting point by a random 10–100 %, so its end gives nothing away.
+- Points: 100 within 1 % of the road, then fewer, and none from 15 %. 6 rounds; stars at 510/390/240.
+- The topbar adds a throw's points only after the cars arrive.
+- Tests in `tests/proportzionaltasuna-dbh4ap-road.test.ts`:
+  - positions meet exactly at `minutes`, a late car waits, and the working holds line by line;
+  - the problem text holds every number;
+  - points, stars and texts.
+
+### J4 «Bete biltegia / Llena el depósito»
+
+- Game id `tank`, slugs biltegia/deposito, progress ids 44601–44603.
+- Logic in `games/tank.ts`, component in `games/TankGame.tsx`, CSS in `games/Tank.css`.
+- How it plays:
+  - A target time («2 h 24 min») and a switch for each tap and for the drain.
+  - «¡Llenar!» fills the drawn tank in 2.5 s with a clock. The feedback shows the sum of the parts of an hour (`tankLatex`; a single tap is just its part) and «too soon» or «too late».
+  - After a miss, a hint gives the part to fill each hour.
+  - 3 tries, worth 3/2/1 points. A choice already tried cannot be poured again. After the last miss the solution is shown.
+- Levels:
+  1. 3 taps, open 2;
+  2. 4 taps, open 2 or 3;
+  3. 3 taps and a drain, which is needed in 3 rounds out of 5.
+- Each round is built from a real combination. The target is a whole number of minutes (30 min–10 h), and no other combination gives it (checked over every choice).
+- 5 rounds; stars at 13/10/6.
+- `games/numbers.ts` gained `durationText` («1 h 20 min», «1 س 20 د») and `hoursLatex` (a short decimal or a fraction).
+- Tests in `tests/proportzionaltasuna-dbh4ap-tank.test.ts`:
+  - a single solution, whole minutes, and the right mix of drain rounds;
+  - every choice's sum evaluates to its rate;
+  - texts, points and stars.
+
+### Checks
+
+- Suite 887/887; lint and build OK.
+- Checked at 375 px in eu, es and ar: every level of both games, with no sideways scroll, and a whole road game played to the result panel.
+
+### Gotchas
+
+- `usePlayback`'s key must not change at the moment `play()` is called. Keying the tank by «try number» broke it: the try was added in the same click, so the progress belonged to an old key and the result never showed. It is keyed by seed and round now; each `play()` restarts from 0.
+- Toggle buttons must update with `setChoice((current) => …)`. Two quick taps on the old closure kept only the last one.
+- In an SVG label «أ · 80 km/h», the 80 jumps in front of the Arabic letter (European digits after an Arabic letter turn Arabic). An LRM after the letter, inside an LRI/PDI, keeps the order.
+- In the pane browser `requestAnimationFrame` runs about once a second, so the 3 s animations take about 4 s there; wait 4–5 s in scripts.

@@ -9,6 +9,8 @@ import { ProportionDbh4ApDetectiveGame } from './DetectiveGame'
 import { ProportionDbh4ApGameArt } from './GameArt'
 import { PROPORTION_DBH4AP_GAME_RECORDS_KEY, proportionDbh4ApGameModeForPath, proportionDbh4ApGames, proportionDbh4ApGameSlugs, type ProportionDbh4ApGameId } from './info'
 import { ProportionDbh4ApRaceGame } from './RaceGame'
+import { ProportionDbh4ApRoadGame } from './RoadGame'
+import { ProportionDbh4ApTankGame } from './TankGame'
 
 const memoryGame = proportionDbh4ApGames.find((game) => game.id === 'memory')!
 
@@ -16,7 +18,9 @@ const components: Record<ProportionDbh4ApGameId, (props: GameProps) => JSX.Eleme
     race: ProportionDbh4ApRaceGame,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <ProportionDbh4ApGameArt game="memory" />, pairs: PROPORTION_DBH4AP_MEMORY_PAIRS, createBoard: createProportionDbh4ApMemoryBoard }} />,
     detective: ProportionDbh4ApDetectiveGame,
-    bank: ProportionDbh4ApBankGame
+    bank: ProportionDbh4ApBankGame,
+    road: ProportionDbh4ApRoadGame,
+    tank: ProportionDbh4ApTankGame
 }
 
 const hubGames: HubGame<ProportionDbh4ApGameId>[] = proportionDbh4ApGames.map((game) => ({ info: game, art: <ProportionDbh4ApGameArt game={game.id} />, component: components[game.id] }))

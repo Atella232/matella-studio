@@ -1,8 +1,10 @@
+import { fraction, toExactDecimal, toLatex, type FractionValue } from '../../../features/unit-v2/math/fraction.ts'
 import type { UnitLanguage } from '../../../features/unit-v2/types.ts'
 
 /* ==========================================================================
-   Numbers for the detective and the bank: LaTeX with a decimal comma, and
-   euros for a sentence. No value in these games goes past four decimals.
+   Numbers for the games: LaTeX with a decimal comma, euros for a sentence
+   and times as «1 h 20 min». No value in these games goes past four
+   decimals.
    ========================================================================== */
 
 export const round4 = (value: number) => Math.round(value * 10000) / 10000
@@ -23,4 +25,20 @@ export function moneyText(value: number, language: UnitLanguage): string {
     const [whole, cents] = (Math.round(value * 100) / 100).toFixed(2).split('.')
     const grouped = Number(whole) >= 10000 ? whole.replace(/\B(?=(\d{3})+(?!\d))/g, '\u202f') : whole
     return cents === '00' ? grouped : `${grouped}${language === 'ar' ? '.' : ','}${cents}`
+}
+
+/** Minutes as «1 h 20 min» («1 س 20 د» in Arabic), to the minute */
+export function durationText(minutes: number, language: UnitLanguage): string {
+    const total = Math.round(minutes)
+    const whole = Math.floor(total / 60)
+    const rest = total % 60
+    const [h, min] = language === 'ar' ? ['س', 'د'] : ['h', 'min']
+    return whole === 0 ? `${rest} ${min}` : rest === 0 ? `${whole} ${h}` : `${whole} ${h} ${rest} ${min}`
+}
+
+/** Hours in LaTeX: a short decimal (1{,}25) when there is one, otherwise a fraction (\frac{4}{3}) */
+export function hoursLatex(hours: FractionValue): string {
+    const value = fraction(hours.numerator, hours.denominator)
+    const decimal = toExactDecimal(value, ',')
+    return decimal !== null && (decimal.split(',')[1] ?? '').length <= 2 ? decimal.replace(',', '{,}') : toLatex(value)
 }

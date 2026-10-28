@@ -46,6 +46,45 @@ export function ProportionDbh4ApGameArt({ game }: { game: ProportionDbh4ApGameId
             </svg>
         )
     }
+    if (game === 'road') {
+        return (
+            <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
+                <rect x="6" y="54" width="208" height="46" rx="8" fill="var(--paper-deep)" stroke="var(--ink)" strokeWidth="2" />
+                <line x1="12" y1="77" x2="208" y2="77" stroke="var(--card, #fffcf6)" strokeWidth="2" strokeDasharray="9 7" />
+                {[{ x: 40, y: 88, color: 'var(--blue)', right: true }, { x: 180, y: 66, color: 'var(--coral)', right: false }].map((car) => (
+                    <g key={car.x} transform={`translate(${car.x} ${car.y})`}>
+                        <rect x="-17" y="-8" width="34" height="16" rx="5" fill={car.color} stroke="var(--ink)" strokeWidth="2" />
+                        <rect x={car.right ? 4 : -12} y="-5" width="8" height="10" rx="2" fill="#fff" fillOpacity="0.75" />
+                    </g>
+                ))}
+                <line x1="124" y1="14" x2="124" y2="104" stroke="var(--ink)" strokeWidth="3" />
+                <path d="M124 14 L150 22 L124 30 Z" fill="var(--mustard, #e0a526)" stroke="var(--ink)" strokeWidth="2" strokeLinejoin="round" />
+                <path d="M66 88 H96 M88 82 L96 88 L88 94" fill="none" stroke="var(--ink)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M154 66 H136 M144 60 L136 66 L144 72" fill="none" stroke="var(--ink)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+        )
+    }
+    if (game === 'tank') {
+        return (
+            <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
+                <rect x="56" y="66" width="108" height="46" fill="var(--blue)" fillOpacity="0.35" />
+                <rect x="56" y="40" width="108" height="72" fill="none" stroke="var(--ink)" strokeWidth="2.4" />
+                {[84, 136].map((x) => (
+                    <g key={x}>
+                        <rect x={x - 5} y="8" width="10" height="16" fill="var(--paper-deep)" stroke="var(--ink)" strokeWidth="2" />
+                        <rect x={x - 10} y="22" width="20" height="8" rx="2" fill="var(--blue)" stroke="var(--ink)" strokeWidth="2" />
+                        <rect x={x - 2.5} y="30" width="5" height="36" fill="var(--blue)" fillOpacity="0.7" />
+                    </g>
+                ))}
+                <path d="M164 104 H186 V116" fill="none" stroke="var(--ink)" strokeWidth="7" strokeLinejoin="round" />
+                <path d="M164 104 H186 V116" fill="none" stroke="var(--coral)" strokeWidth="4" strokeLinejoin="round" />
+                <circle cx="196" cy="34" r="17" fill="var(--card, #fffcf6)" stroke="var(--ink)" strokeWidth="2.4" />
+                <path d="M196 23 V34 L204 39" fill="none" stroke="var(--ink)" strokeWidth="2.4" strokeLinecap="round" />
+                <text x="28" y="96" textAnchor="middle" fontSize="15" fontWeight="700" fill="var(--ink)" direction="ltr">+1/6</text>
+                <text x="28" y="76" textAnchor="middle" fontSize="15" fontWeight="700" fill="var(--ink)" direction="ltr">1/3</text>
+            </svg>
+        )
+    }
     return (
         <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
             {['1000', '×110/100', '×110/100', '1210'].map((label, index) => (

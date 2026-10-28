@@ -1,0 +1,172 @@
+/* ---------- Errepideko topaketa (4. DBH aplikatuak) ---------- */
+
+.fraction-v2-games-card[data-game="road"] { --game-tint: var(--mustard-tint, #f7ebc8); }
+
+.road-game {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.road-problem,
+.road-question,
+.road-board,
+.road-controls,
+.road-result,
+.road-steps {
+    align-self: center;
+    width: min(100%, 620px);
+    margin: 0;
+}
+
+.road-problem {
+    padding: 12px 16px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+.road-question {
+    font-weight: 700;
+    text-align: center;
+}
+
+/* The road is the slider: drag or tap it to plant the flag */
+.road-board {
+    display: block;
+    height: auto;
+    border-radius: 12px;
+    font-family: "Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif;
+    touch-action: none;
+    cursor: crosshair;
+    user-select: none;
+}
+
+.road-board.thrown {
+    cursor: default;
+}
+
+.road-board:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 4px;
+}
+
+.road-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px 16px;
+}
+
+.road-nudge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.road-nudge button {
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    color: var(--ink);
+    background: var(--card);
+    font: inherit;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.road-nudge button:hover {
+    background: var(--stage-soft);
+}
+
+.road-flag-value {
+    min-width: 128px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    text-align: center;
+}
+
+.road-result {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    border: 1.5px solid var(--line);
+    border-radius: 16px;
+    background: var(--paper);
+}
+
+.road-result > strong {
+    font-family: var(--font-display);
+    font-size: 32px;
+}
+
+.road-result p {
+    margin: 0;
+}
+
+.road-result.bullseye,
+.road-result.close {
+    border-color: var(--success);
+    background: var(--success-tint);
+}
+
+.road-result.far {
+    border-color: var(--error);
+    background: var(--error-tint);
+}
+
+.road-grade {
+    font-weight: 700;
+}
+
+/* The working: a label above each formula, the formula from the left */
+.road-steps {
+    display: grid;
+    gap: 6px;
+    padding: 10px 14px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+    list-style: none;
+}
+
+.road-steps li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.road-step-label {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.road-game .road-steps .math-text {
+    font-size: 18px;
+    direction: ltr;
+    text-align: left;
+}
+
+.road-game .road-steps .math-token {
+    margin: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.road-game .road-steps .katex-display,
+.road-game .road-steps .katex-display > .katex {
+    text-align: left;
+}
+
+.road-next {
+    align-self: center;
+}

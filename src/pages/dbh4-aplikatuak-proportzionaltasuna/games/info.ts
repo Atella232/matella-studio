@@ -6,7 +6,7 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
    star.
    ========================================================================== */
 
-export type ProportionDbh4ApGameId = 'race' | 'memory' | 'detective' | 'bank'
+export type ProportionDbh4ApGameId = 'race' | 'memory' | 'detective' | 'bank' | 'road' | 'tank'
 
 export const PROPORTION_DBH4AP_GAME_RECORDS_KEY = 'matella-proportzionaltasuna-dbh4ap-game-records'
 
@@ -56,13 +56,35 @@ export const proportionDbh4ApGames: GameInfo<ProportionDbh4ApGameId>[] = [
             { progressId: 44402, stage: 'interest', title: { eu: 'Noiz ordaintzen den', es: 'Cada cuánto se paga', ar: 'متى تُضاف الفوائد' }, description: { eu: 'Hilero, hiru hilean behin, sei hilean behin edo urtean behin.', es: 'Cada mes, trimestre, semestre o año.', ar: 'كل شهر أو ثلاثة أشهر أو ستة أشهر أو سنة.' } },
             { progressId: 44403, stage: 'interest', title: { eu: 'Hiru eskaintza', es: 'Tres ofertas', ar: 'ثلاثة عروض' }, description: { eu: 'Denetarik: bakuna, konposatua eta aldiak.', es: 'De todo: simple, compuesto y periodos.', ar: 'من كل نوع: بسيطة ومركّبة وفترات.' } }
         ]
+    },
+    {
+        id: 'road',
+        title: { eu: 'Errepideko topaketa', es: 'Encuentro en la carretera', ar: 'لقاء على الطريق' },
+        tagline: { eu: 'Jarri bandera bi ibilgailuak elkartuko diren lekuan, eta ikusi bidaia.', es: 'Pon la bandera donde se encontrarán los dos vehículos y mira el viaje.', ar: 'ضع الراية حيث ستلتقي المركبتان، وشاهد الرحلة.' },
+        skills: { eu: 'Topaketak, jazarpenak eta irteera berantiarrak', es: 'Encuentros, persecuciones y salidas tardías', ar: 'التلاقي والمطاردة والانطلاق المتأخر' },
+        levels: [
+            { progressId: 44501, stage: 'problems', title: { eu: 'Elkarrengana', es: 'Al encuentro', ar: 'التلاقي' }, description: { eu: 'Aldi berean abiatzen dira, bata bestearengana.', es: 'Salen a la vez, uno hacia el otro.', ar: 'تنطلقان معًا، كلٌّ نحو الأخرى.' } },
+            { progressId: 44502, stage: 'problems', title: { eu: 'Atzetik', es: 'Persecución', ar: 'المطاردة' }, description: { eu: 'Azkarrena atzetik doa eta bestea harrapatzen du.', es: 'El más rápido va detrás y alcanza al otro.', ar: 'الأسرع في الخلف ويلحق بالأخرى.' } },
+            { progressId: 44503, stage: 'problems', title: { eu: 'Bata geroago abiatzen da', es: 'Uno sale más tarde', ar: 'إحداهما تنطلق متأخرة' }, description: { eu: 'Lehenik bakarrik doa; gero, biak batera.', es: 'Primero va uno solo; después, los dos.', ar: 'تسير واحدة وحدها أولًا، ثم الاثنتان.' } }
+        ]
+    },
+    {
+        id: 'tank',
+        title: { eu: 'Bete biltegia', es: 'Llena el depósito', ar: 'املأ الخزان' },
+        tagline: { eu: 'Aukeratu zein txorrota ireki biltegia denbora zehatzean betetzeko.', es: 'Elige qué grifos abrir para llenar el depósito en el tiempo exacto.', ar: 'اختر الصنابير التي تفتحها لتملأ الخزان في الوقت المحدد تمامًا.' },
+        skills: { eu: 'Lan bateratua: ordu bateko zatiak batu eta kendu', es: 'Trabajo conjunto: sumar y restar partes de una hora', ar: 'العمل المشترك: جمع أجزاء الساعة وطرحها' },
+        levels: [
+            { progressId: 44601, stage: 'problems', title: { eu: 'Hiru txorrota', es: 'Tres grifos', ar: 'ثلاثة صنابير' }, description: { eu: 'Bi ireki behar dira.', es: 'Hay que abrir dos.', ar: 'يجب فتح اثنين.' } },
+            { progressId: 44602, stage: 'problems', title: { eu: 'Lau txorrota', es: 'Cuatro grifos', ar: 'أربعة صنابير' }, description: { eu: 'Bi edo hiru ireki behar dira.', es: 'Hay que abrir dos o tres.', ar: 'يجب فتح اثنين أو ثلاثة.' } },
+            { progressId: 44603, stage: 'problems', title: { eu: 'Hustubidearekin', es: 'Con desagüe', ar: 'مع المصرف' }, description: { eu: 'Hustubidea ireki ala ez?', es: '¿Abrir el desagüe o no?', ar: 'هل تفتح المصرف أم لا؟' } }
+        ]
     }
 ]
 
 export const proportionDbh4ApGameProgressIds: number[] = levelProgressIds(proportionDbh4ApGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const proportionDbh4ApGameSlugs: Record<ProportionDbh4ApGameId, string> = { race: 'lasterketa', memory: 'memoria', detective: 'detektibea', bank: 'bankua' }
+export const proportionDbh4ApGameSlugs: Record<ProportionDbh4ApGameId, string> = { race: 'lasterketa', memory: 'memoria', detective: 'detektibea', bank: 'bankua', road: 'errepidea', tank: 'biltegia' }
 
 export function proportionDbh4ApGameModeForPath(pathname: string): ProportionDbh4ApGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
@@ -71,5 +93,7 @@ export function proportionDbh4ApGameModeForPath(pathname: string): ProportionDbh
     if (['memoria', 'memory'].includes(game)) return 'memory'
     if (['detektibea', 'detective'].includes(game)) return 'detective'
     if (['bankua', 'banco'].includes(game)) return 'bank'
+    if (['errepidea', 'carretera'].includes(game)) return 'road'
+    if (['biltegia', 'deposito'].includes(game)) return 'tank'
     return 'hub'
 }

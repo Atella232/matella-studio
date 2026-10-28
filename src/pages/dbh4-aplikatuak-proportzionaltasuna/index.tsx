@@ -35,7 +35,7 @@ const proportzionaltasunaDbh4ApUnit: UnitDefinition = {
         render: (props) => <ProportionDbh4ApLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Lau joko: lasterketa, memoria, akatsen detektibea eta bankua.', es: 'Cuatro juegos: carrera, memoria, detective de errores y el banco.', ar: 'أربع ألعاب: السباق والذاكرة ومحقق الأخطاء والمصرف.' },
+        description: { eu: 'Sei joko: lasterketa, memoria, akatsen detektibea, bankua, errepideko topaketa eta biltegia.', es: 'Seis juegos: carrera, memoria, detective de errores, el banco, encuentro en la carretera y el depósito.', ar: 'ست ألعاب: السباق والذاكرة ومحقق الأخطاء والمصرف ولقاء على الطريق والخزان.' },
         progressIds: proportionDbh4ApGameProgressIds,
         recordsKey: PROPORTION_DBH4AP_GAME_RECORDS_KEY,
         render: (props) => <ProportionDbh4ApGames {...props} />
