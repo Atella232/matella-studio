@@ -1,6 +1,6 @@
 ---
 name: proportzionaltasuna-dbh4ap-lab-plus
-description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) committed 90b3caa on feat/proportzionaltasuna-dbh4ap-lab-motion, fast-forwarded into main and deployed 2026-10-27 (bundle index-buE2QkQf); phase 4 (J1 error detective, J2 bank) committed 866d9d5 on feat/proportzionaltasuna-dbh4ap-games, fast-forwarded into main and deployed 2026-10-27 (bundle index-B-ETaI-9); phase 5 (J3 meeting on the road, J4 fill the tank) committed b26ae19 on feat/proportzionaltasuna-dbh4ap-games-road, fast-forwarded into main and deployed 2026-10-28 (bundle index-BeM7dYPx)"
+description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) committed 90b3caa on feat/proportzionaltasuna-dbh4ap-lab-motion, fast-forwarded into main and deployed 2026-10-27 (bundle index-buE2QkQf); phase 4 (J1 error detective, J2 bank) committed 866d9d5 on feat/proportzionaltasuna-dbh4ap-games, fast-forwarded into main and deployed 2026-10-27 (bundle index-B-ETaI-9); phase 5 (J3 meeting on the road, J4 fill the tank) committed b26ae19 on feat/proportzionaltasuna-dbh4ap-games-road, fast-forwarded into main and deployed 2026-10-28 (bundle index-BeM7dYPx); phase 6 (J5 perfect mixture, J6 shop till) on feat/proportzionaltasuna-dbh4ap-games-mix, not deployed yet"
 ---
 
 On 2026-10-26 the owner asked for the same kind of review as [[zatikiak-dbh2-lab-plus]], this time for `src/pages/dbh4-aplikatuak-proportzionaltasuna`. The unit was built in October (see [[remaining-eso-units]]).
@@ -421,3 +421,55 @@ Committed as b26ae19, fast-forwarded into main, pushed and deployed to matella.n
 - Toggle buttons must update with `setChoice((current) => …)`. Two quick taps on the old closure kept only the last one.
 - In an SVG label «أ · 80 km/h», the 80 jumps in front of the Arabic letter (European digits after an Arabic letter turn Arabic). An LRM after the letter, inside an LRI/PDI, keeps the order.
 - In the pane browser `requestAnimationFrame` runs about once a second, so the 3 s animations take about 4 s there; wait 4–5 s in scripts.
+
+## Phase 6 (branch `feat/proportzionaltasuna-dbh4ap-games-mix`, 2026-10-28)
+
+Two more games, J5 and J6. The unit now has eight games, and the games description in `index.tsx` lists them.
+
+### J5 «Nahasketa perfektua / Mezcla perfecta»
+
+- Game id `mix`, slugs nahasketa/mezcla, progress ids 44701–44703, stage problems.
+- Logic in `games/mixture.ts`, component in `games/MixGame.tsx`, CSS in `games/Mix.css`.
+- How it plays:
+  - A card with the price a kilo to reach (or the fineness for gold) and the task.
+  - A seesaw with its support under the target. Each product sits at its distance from the support, the farther one 128 px away, so the near load needs more weight. The distances are written under the ground.
+  - Two cards with − / + (on a whole mixture, + on one side takes a kilo from the other) and a slider for big moves.
+  - Two blocks hold the beam level. «¡Mezclar!» («¡Fundir!» for gold) lets go: the beam stays level and turns green, or falls (0.9 s, faster and faster) until its end rests on the ground, and turns red.
+  - The feedback shows the mean as a fraction (≈ when it is not a whole number of cents or thousandths), the verdict (too cheap or too dear, too low or too high), and after a miss the seesaw rule with what each side weighs now («$5\cdot 2=10$ y $5\cdot 3=15$»).
+  - 3 tries, 3/2/1 points; after the last miss, the amounts and the balance («$6\cdot 2=4\cdot 3$»). 5 rounds; stars at 13/10/6.
+- Levels:
+  1. total fixed (coffee, tea, sweets or nuts): share out the kilos;
+  2. add: one product is already in (its card is dashed and fixed), choose how much of the other (slider up to 40 kg);
+  3. gold in grams: 3 whole bars and 2 to add to (slider up to 80 g).
+- Every round has one answer in whole kilos (grams): never half and half, the ratio of the amounts uses numbers up to 6, the target is a multiple of 10 cents (0,01 of fineness), and neither distance is tiny.
+- Tests in `tests/proportzionaltasuna-dbh4ap-mixture.test.ts`: only the answer balances (every slider setting checked), each try's working holds, the hint's products are right, texts render.
+
+### J6 «Dendako kutxa / La caja de la tienda»
+
+- Game id `till`, slugs kutxa/caja, progress ids 44801–44803, stage percent.
+- Logic in `games/till.ts`, component in `games/TillGame.tsx`, CSS in `games/Till.css`.
+- How it plays:
+  - A customer (a face that goes from smiling to cross) asks a question, with a patience bar under it: 45, 60 or 75 s by level.
+  - A price tag: the product, what the price is («Precio», «Sin IVA», «Rebajado», «IVA incluido», «Ha pagado»), the amount and a sticker for each change.
+  - A till keypad (7 8 9 / 4 5 6 / 1 2 3 / , 0 ⌫) and «Cobrar» («Responder» going back). The keyboard works too: digits, comma or point, Backspace, Enter.
+  - Right at the first try: 50 points plus up to 50 for the patience left; at the second try, half. Two tries; when the patience runs out the customer leaves. Then the working with a label on each line («Precio por el índice», «El índice total», «Precio entre el índice total»).
+  - 8 customers, each with a different product; stars at 600/450/300.
+- Levels:
+  1. final price: a discount or VAT (books 4 %, cakes 10 %, the rest 21 %); prices end in 0 or 5 and the result has at most one decimal;
+  2. original price: back from a discount or from VAT;
+  3. chained: two discounts or a discount and VAT, forwards and backwards; after the first change the price is in whole euros.
+- `tillSlip` names a typical slip after a wrong answer: only the discount (or VAT), the change the wrong way, the % taken from the final price, multiplying by the index instead of dividing, adding the percentages. With 50 % off the discount equals the answer, so the answer is never a slip.
+- Tests in `tests/proportzionaltasuna-dbh4ap-till.test.ts`: exact cents, the working ends in the answer, every slip is spotted, reading the till, points and stars.
+
+### Checks
+
+- Suite 891/891; lint and build OK.
+- Checked at 375 px: the mixture in es (level 1), eu (level 2, played right) and ar (gold, a miss with its hint); the till in es (level 1: a slip, then right), ar (level 3: right at the second try, and a customer leaving), eu (level 2: the «% of the final price» slip). The hub shows 8 cards, with no sideways scroll; also seen on a wide screen.
+
+### Gotchas
+
+- The browser pane's `key` action sends an empty key for the names «period» and «comma»; send «.» and «,». Its `type` action sends no key events at all, so the till does not see it.
+- To test the till running out, move the page clock: `Date.now = () => realNow() + 80000` (`nowMs` reads `Date.now`).
+- The Write tool stored LRI/PDI as raw characters again; they were turned into `\u2066`/`\u2069` escapes.
+- In Arabic the verdict's value and its ≈ go inside LRI/PDI, as in the bank game.
+- An amount and its € are joined with a no-break space, or «46,84» and «€» can end up on two lines.

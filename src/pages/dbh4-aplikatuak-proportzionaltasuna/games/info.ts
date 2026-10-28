@@ -6,7 +6,7 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
    star.
    ========================================================================== */
 
-export type ProportionDbh4ApGameId = 'race' | 'memory' | 'detective' | 'bank' | 'road' | 'tank'
+export type ProportionDbh4ApGameId = 'race' | 'memory' | 'detective' | 'bank' | 'road' | 'tank' | 'mix' | 'till'
 
 export const PROPORTION_DBH4AP_GAME_RECORDS_KEY = 'matella-proportzionaltasuna-dbh4ap-game-records'
 
@@ -78,13 +78,35 @@ export const proportionDbh4ApGames: GameInfo<ProportionDbh4ApGameId>[] = [
             { progressId: 44602, stage: 'problems', title: { eu: 'Lau txorrota', es: 'Cuatro grifos', ar: 'أربعة صنابير' }, description: { eu: 'Bi edo hiru ireki behar dira.', es: 'Hay que abrir dos o tres.', ar: 'يجب فتح اثنين أو ثلاثة.' } },
             { progressId: 44603, stage: 'problems', title: { eu: 'Hustubidearekin', es: 'Con desagüe', ar: 'مع المصرف' }, description: { eu: 'Hustubidea ireki ala ez?', es: '¿Abrir el desagüe o no?', ar: 'هل تفتح المصرف أم لا؟' } }
         ]
+    },
+    {
+        id: 'mix',
+        title: { eu: 'Nahasketa perfektua', es: 'Mezcla perfecta', ar: 'الخليط المثالي' },
+        tagline: { eu: 'Aukeratu produktu bakoitzetik zenbat jarri, eskatutako prezioa lortzeko; balantzak esango dizu ondo dagoen.', es: 'Elige cuánto poner de cada producto para conseguir el precio pedido; el balancín te dirá si está bien.', ar: 'اختر كم تضع من كل منتج لتحصل على السعر المطلوب؛ وسيخبرك الميزان إن كان صحيحًا.' },
+        skills: { eu: 'Nahasketak eta aleazioak: prezio ertaina eta balantza', es: 'Mezclas y aleaciones: precio medio y balancín', ar: 'الخلائط والسبائك: السعر المتوسط والميزان' },
+        levels: [
+            { progressId: 44701, stage: 'problems', title: { eu: 'Guztira finko', es: 'Total fijo', ar: 'المجموع ثابت' }, description: { eu: 'Banatu kiloak bi produkturen artean.', es: 'Reparte los kilos entre los dos productos.', ar: 'وزّع الكيلوغرامات بين المنتجين.' } },
+            { progressId: 44702, stage: 'problems', title: { eu: 'Gehitu', es: 'Añadir', ar: 'الإضافة' }, description: { eu: 'Produktu bat badago: zenbat gehitu bestetik?', es: 'Ya hay un producto: ¿cuánto añades del otro?', ar: 'يوجد منتج: كم تضيف من الآخر؟' } },
+            { progressId: 44703, stage: 'problems', title: { eu: 'Urrea', es: 'Oro', ar: 'الذهب' }, description: { eu: 'Urre-aleazioak, gramotan.', es: 'Aleaciones de oro, en gramos.', ar: 'سبائك الذهب بالغرامات.' } }
+        ]
+    },
+    {
+        id: 'till',
+        title: { eu: 'Dendako kutxa', es: 'La caja de la tienda', ar: 'صندوق المتجر' },
+        tagline: { eu: 'Bezeroak zain daude: kobratu prezio zuzena, pazientzia agortu baino lehen.', es: 'Los clientes esperan: cobra el precio justo antes de que se les acabe la paciencia.', ar: 'الزبائن ينتظرون: احسب السعر الصحيح قبل أن ينفد صبرهم.' },
+        skills: { eu: 'Deskontuak eta BEZa, aurrera eta atzera', es: 'Descuentos e IVA, hacia delante y hacia atrás', ar: 'الخصومات والضريبة ذهابًا وإيابًا' },
+        levels: [
+            { progressId: 44801, stage: 'percent', title: { eu: 'Azken prezioa', es: 'Precio final', ar: 'السعر النهائي' }, description: { eu: 'Deskontu bat kendu edo BEZa gehitu.', es: 'Restar un descuento o sumar el IVA.', ar: 'طرح خصم أو إضافة الضريبة.' } },
+            { progressId: 44802, stage: 'percent', title: { eu: 'Lehengo prezioa', es: 'Precio original', ar: 'السعر الأصلي' }, description: { eu: 'Atzera: merkatu aurretik edo BEZik gabe.', es: 'Hacia atrás: antes de la rebaja o sin IVA.', ar: 'إلى الخلف: قبل التخفيض أو دون ضريبة.' } },
+            { progressId: 44803, stage: 'percent', title: { eu: 'Kateatuak', es: 'Encadenados', ar: 'المتتالية' }, description: { eu: 'Bi aldaketa jarraian, aurrera eta atzera.', es: 'Dos cambios seguidos, hacia delante y hacia atrás.', ar: 'تغيّران متتاليان ذهابًا وإيابًا.' } }
+        ]
     }
 ]
 
 export const proportionDbh4ApGameProgressIds: number[] = levelProgressIds(proportionDbh4ApGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const proportionDbh4ApGameSlugs: Record<ProportionDbh4ApGameId, string> = { race: 'lasterketa', memory: 'memoria', detective: 'detektibea', bank: 'bankua', road: 'errepidea', tank: 'biltegia' }
+export const proportionDbh4ApGameSlugs: Record<ProportionDbh4ApGameId, string> = { race: 'lasterketa', memory: 'memoria', detective: 'detektibea', bank: 'bankua', road: 'errepidea', tank: 'biltegia', mix: 'nahasketa', till: 'kutxa' }
 
 export function proportionDbh4ApGameModeForPath(pathname: string): ProportionDbh4ApGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
@@ -95,5 +117,7 @@ export function proportionDbh4ApGameModeForPath(pathname: string): ProportionDbh
     if (['bankua', 'banco'].includes(game)) return 'bank'
     if (['errepidea', 'carretera'].includes(game)) return 'road'
     if (['biltegia', 'deposito'].includes(game)) return 'tank'
+    if (['nahasketa', 'mezcla'].includes(game)) return 'mix'
+    if (['kutxa', 'caja'].includes(game)) return 'till'
     return 'hub'
 }

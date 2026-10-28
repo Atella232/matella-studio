@@ -1,0 +1,177 @@
+/* ---------- Nahasketa perfektua (4. DBH aplikatuak) ---------- */
+
+.fraction-v2-games-card[data-game="mix"] { --game-tint: var(--coral-tint, #f8dcd0); }
+
+.mix-game {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mix-target,
+.mix-board,
+.mix-controls,
+.mix-slider,
+.mix-actions,
+.mix-feedback {
+    align-self: center;
+    width: min(100%, 560px);
+    margin: 0;
+}
+
+.mix-target {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 10px 16px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+    text-align: center;
+}
+
+.mix-target strong {
+    font-family: var(--font-display, "Fraunces", Georgia, serif);
+    font-size: 30px;
+    line-height: 1.2;
+}
+
+.mix-target p {
+    margin: 4px 0 0;
+}
+
+.mix-board {
+    display: block;
+    height: auto;
+    font-family: "Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif;
+}
+
+/* One card for each product: its price, its kilos and − / + */
+.mix-controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.mix-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+    padding: 8px 10px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+}
+
+.mix-side.fixed {
+    border-style: dashed;
+    background: var(--paper-deep, #ece6da);
+}
+
+.mix-side-value {
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.mix-side-amount {
+    font-family: var(--font-display, "Fraunces", Georgia, serif);
+    font-size: 24px;
+    line-height: 1.1;
+}
+
+.mix-side-state {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.mix-steppers {
+    display: flex;
+    gap: 10px;
+}
+
+.mix-steppers button {
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    color: var(--ink);
+    background: var(--card);
+    font: inherit;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.mix-steppers button:hover:not(:disabled) {
+    background: var(--stage-soft);
+}
+
+.mix-steppers button:disabled {
+    opacity: 0.4;
+}
+
+.mix-slider {
+    accent-color: var(--stage);
+    height: 32px;
+}
+
+.mix-slider:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+}
+
+.mix-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 16px;
+}
+
+.mix-tries {
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.mix-feedback {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 16px;
+    border-radius: 14px;
+}
+
+.mix-feedback.right {
+    background: var(--success-tint);
+}
+
+.mix-feedback.wrong {
+    background: var(--error-tint);
+}
+
+.mix-feedback p {
+    margin: 0;
+}
+
+.mix-game .mix-feedback > .math-text {
+    font-size: 18px;
+    direction: ltr;
+}
+
+.mix-game .mix-feedback .math-token {
+    margin: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.mix-verdict,
+.mix-points {
+    font-weight: 700;
+}
+
+.mix-next {
+    align-self: center;
+}
