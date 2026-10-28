@@ -1,6 +1,6 @@
 ---
 name: proportzionaltasuna-dbh4ap-lab-plus
-description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) committed 90b3caa on feat/proportzionaltasuna-dbh4ap-lab-motion, fast-forwarded into main and deployed 2026-10-27 (bundle index-buE2QkQf); phase 4 (J1 error detective, J2 bank) committed 866d9d5 on feat/proportzionaltasuna-dbh4ap-games, fast-forwarded into main and deployed 2026-10-27 (bundle index-B-ETaI-9); phase 5 (J3 meeting on the road, J4 fill the tank) built 2026-10-28 on feat/proportzionaltasuna-dbh4ap-games-road, not merged or deployed yet"
+description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) committed 90b3caa on feat/proportzionaltasuna-dbh4ap-lab-motion, fast-forwarded into main and deployed 2026-10-27 (bundle index-buE2QkQf); phase 4 (J1 error detective, J2 bank) committed 866d9d5 on feat/proportzionaltasuna-dbh4ap-games, fast-forwarded into main and deployed 2026-10-27 (bundle index-B-ETaI-9); phase 5 (J3 meeting on the road, J4 fill the tank) committed b26ae19 on feat/proportzionaltasuna-dbh4ap-games-road, fast-forwarded into main and deployed 2026-10-28 (bundle index-BeM7dYPx)"
 ---
 
 On 2026-10-26 the owner asked for the same kind of review as [[zatikiak-dbh2-lab-plus]], this time for `src/pages/dbh4-aplikatuak-proportzionaltasuna`. The unit was built in October (see [[remaining-eso-units]]).
@@ -361,7 +361,12 @@ Committed as 866d9d5, fast-forwarded into main, pushed and deployed to matella.n
 
 ## Phase 5 (branch `feat/proportzionaltasuna-dbh4ap-games-road`, 2026-10-28)
 
-Two more games, J3 and J4. The unit now has six games, and the games description in `index.tsx` lists them. Not deployed yet.
+Two more games, J3 and J4. The unit now has six games, and the games description in `index.tsx` lists them.
+
+Committed as b26ae19, fast-forwarded into main, pushed and deployed to matella.net on 2026-10-28 (bundle index-BeM7dYPx). Checked live at 375 px:
+- the road and the tank, all three levels, in eu, es and ar: no sideways scroll, and nothing sticks out of the page;
+- each road round shows its result and three lines of working, and each tank round solved at the first try gives 3 points.
+- The pane was hidden, so `requestAnimationFrame` did not run. The check patched `matchMedia` to reduced motion, which makes `usePlayback` jump to the end, then reloaded the page.
 
 ### J3 «Errepideko topaketa / Encuentro en la carretera»
 
