@@ -37,12 +37,11 @@ function checkQuestion(question: ProportionRaceQuestion): number {
     return checkChain(question.solution.es, question.kind)
 }
 
-/** Value of a memory card: a percentage (as a decimal), a change (as its index), an index or a product of indices */
+/** Value of a memory card: the price before a change (−20 % over ? → 40 is 50), an index of a period or an amount */
 const cardValue = (latex: string) => {
-    const change = latex.match(/^([+-])(\d+)\\,\\%$/)
-    if (change) return (100 + (change[1] === '+' ? 1 : -1) * Number(change[2])) / 100
-    if (latex.includes('\\%')) return Number(latex.split('\\,\\%')[0].replace('{,}', '.')) / 100
-    return valueOf(latex.replace(/^\\cdot /, ''))
+    const back = latex.match(/^\\overset\{\\textstyle ([+-]\d+)\\,\\%\}\{\?\\to (\d+)\}$/)
+    if (back) return Number(back[2]) / (1 + Number(back[1]) / 100)
+    return valueOf(latex)
 }
 
 test('proportzionaltasuna 4. DBH ap games: levels, ids and routes', () => {
@@ -113,7 +112,15 @@ test('proportzionaltasuna 4. DBH ap memory: every card has exactly one partner a
                 const b = cardValue(partner.latex)
                 assert.ok(a !== null && b !== null && Math.abs(a - b) < 1e-9, `${card.latex} ≠ ${partner.latex}`)
                 for (const other of cards.filter((item) => item.setId !== card.setId)) assert.ok(Math.abs(cardValue(other.latex)! - a!) > 1e-9, `${card.latex} ~ ${other.latex}`)
+                // The worked line holds: each side is the pair's value
+                renders(card.explain!)
+                const sides = card.explain!.split(/=|\\ \\to\\ /).map((side) => side.replace(/\\,\\%/g, ''))
+                assert.ok(Math.abs(valueOf(sides.at(-1)!)! - a!) < 1e-9 && Math.abs(valueOf(sides[0])! - valueOf(sides[1])!) < 1e-9, card.explain)
             }
+            // At least three kinds of pair on a board: changes, periods a year or indices
+            const kind = [/textstyle ([+-]\d+)/, /\}\{(\d+)\}$/, /\\cdot ([\d{},]+)\^/][level]
+            const kinds = new Set(cards.flatMap((card) => card.latex.match(kind)?.[1] ?? []))
+            assert.ok(kinds.size >= 3, cards.map((card) => card.latex).join(' '))
         }
     }
 })

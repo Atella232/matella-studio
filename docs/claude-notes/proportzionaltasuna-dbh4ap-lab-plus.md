@@ -1,6 +1,6 @@
 ---
 name: proportzionaltasuna-dbh4ap-lab-plus
-description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) committed 90b3caa on feat/proportzionaltasuna-dbh4ap-lab-motion, fast-forwarded into main and deployed 2026-10-27 (bundle index-buE2QkQf); phase 4 (J1 error detective, J2 bank) committed 866d9d5 on feat/proportzionaltasuna-dbh4ap-games, fast-forwarded into main and deployed 2026-10-27 (bundle index-B-ETaI-9); phase 5 (J3 meeting on the road, J4 fill the tank) committed b26ae19 on feat/proportzionaltasuna-dbh4ap-games-road, fast-forwarded into main and deployed 2026-10-28 (bundle index-BeM7dYPx); phase 6 (J5 perfect mixture, J6 shop till) committed 789f9df on feat/proportzionaltasuna-dbh4ap-games-mix, fast-forwarded into main and deployed 2026-10-28 (bundle index-CfxntXIn)"
+description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) committed 90b3caa on feat/proportzionaltasuna-dbh4ap-lab-motion, fast-forwarded into main and deployed 2026-10-27 (bundle index-buE2QkQf); phase 4 (J1 error detective, J2 bank) committed 866d9d5 on feat/proportzionaltasuna-dbh4ap-games, fast-forwarded into main and deployed 2026-10-27 (bundle index-B-ETaI-9); phase 5 (J3 meeting on the road, J4 fill the tank) committed b26ae19 on feat/proportzionaltasuna-dbh4ap-games-road, fast-forwarded into main and deployed 2026-10-28 (bundle index-BeM7dYPx); phase 6 (J5 perfect mixture, J6 shop till) committed 789f9df on feat/proportzionaltasuna-dbh4ap-games-mix, fast-forwarded into main and deployed 2026-10-28 (bundle index-CfxntXIn); phase 7 (J7 own memory boards) on feat/proportzionaltasuna-dbh4ap-memory, not deployed yet"
 ---
 
 On 2026-10-26 the owner asked for the same kind of review as [[zatikiak-dbh2-lab-plus]], this time for `src/pages/dbh4-aplikatuak-proportzionaltasuna`. The unit was built in October (see [[remaining-eso-units]]).
@@ -475,3 +475,27 @@ Committed as 789f9df, fast-forwarded into main, pushed and deployed to matella.n
 - The Write tool stored LRI/PDI as raw characters again; they were turned into `\u2066`/`\u2069` escapes.
 - In Arabic the verdict's value and its ≈ go inside LRI/PDI, as in the bank game.
 - An amount and its € are joined with a no-break space, or «46,84» and «€» can end up on two lines.
+
+## Phase 7 (branch `feat/proportzionaltasuna-dbh4ap-memory`, 2026-10-28)
+
+J7: the memory game no longer borrows the 2. DBH boards. All three boards are the unit's own, in `games/boards.ts`; the progress ids stay 44201–44203.
+
+- Level 1 «Lehengo prezioa / El precio de antes» (stage percent): a change written over «? → 40», and the price before it, 50. The change is in `\overset{\textstyle −20\,\%}{?\to 40}`. Only whole prices after the change (`BACK_PRICES`). When found: `40 : 0,8 = 50`.
+- Level 2 «Aldiak / Periodos» (stage interest): an annual rate paid k times a year and the index of each period, `1+\frac{0{,}08}{4}` and 1,02. k is 2, 3, 4 or 12, and the rate of each period is a whole number of quarters of a point (`PERIOD_RATES`). When found: `8 % / 4 = 2 % → 1,02`.
+- Level 3 «Interes konposatua / Interés compuesto»: the board this unit already had (C · index^t and the amount).
+- Every board has 6 pairs with different values, and no more than two pairs of a kind (the same change, periods a year or index), so there are at least three kinds.
+- The skills line and the level texts in `info.ts` are new.
+- Engine: `PairsMemoryGame` reads a card to screen readers with `spokenLatex`: fractions as a/b, `\overset` as «label, formula», `\cdot`, `\to`, `\%` and the decimal comma as text. Before, a label could say «\frac{12}{100· 12}».
+- The memory test in `tests/proportzionaltasuna-dbh4ap-games.test.ts` now checks the worked line of each pair and the three kinds per board.
+
+### Checks
+
+- Suite 891/891; lint and build OK.
+- At 375 px, all 12 cards of each board in eu, es and ar, measured with the card turned over: at least 7 px to spare across, no scroll bar inside a card, no sideways scroll.
+
+### Gotchas
+
+- A card is about 90 px wide inside on a phone, and KaTeX writes at 1.21 times the 18 px card font. «□ −20 % → 40» with the change on the arrow (`\xrightarrow`) stuck out by up to 27 px. «1 + 8 / (100 · 12)» stuck out by 7 px; with the rate as a decimal («1 + 0,08 / 12») it fits.
+- Two lines with `\begin{gathered}` fitted, but KaTeX's array is a pixel or two wider than its box, and the card's `.math-token` (`overflow-x: auto`) showed a scroll bar. `\overset{\textstyle …}{…}` gives the same two lines with no scroll bar. Test it with `offsetHeight` against `clientHeight` of `.math-token`.
+- To look at one card, turn over just one: it stays up until the second click. Two turned cards hide again after 1.3 s, and screenshots often catch them half turned (blank).
+- `getBoundingClientRect` of a card is skewed while it turns; use `offsetWidth`/`offsetHeight`.

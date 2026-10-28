@@ -28,10 +28,10 @@ export const proportionDbh4ApGames: GameInfo<ProportionDbh4ApGameId>[] = [
         id: 'memory',
         title: { eu: 'Memoria', es: 'Memoria', ar: 'الذاكرة' },
         tagline: { eu: 'Aurkitu balio bera duten kartak.', es: 'Encuentra las cartas que valen lo mismo.', ar: 'جد البطاقات ذات القيمة نفسها.' },
-        skills: { eu: 'Indizeak, kateatuak eta interes konposatua', es: 'Índices, encadenados e interés compuesto', ar: 'المؤشرات والمتتالية والفائدة المركّبة' },
+        skills: { eu: 'Lehengo prezioa, aldiak eta interes konposatua', es: 'El precio de antes, periodos e interés compuesto', ar: 'السعر السابق والفترات والفائدة المركّبة' },
         levels: [
-            { progressId: 44201, stage: 'percent', title: { eu: 'Aldakuntza-indizea', es: 'Índice de variación', ar: 'مؤشر التغيّر' }, description: { eu: '−15 % ↔ · 0,85', es: '−15 % ↔ · 0,85', ar: '−15٪ ↔ · 0.85' } },
-            { progressId: 44202, stage: 'percent', title: { eu: 'Indize kateatuak', es: 'Índices encadenados', ar: 'المؤشرات المتتالية' }, description: { eu: '1,1 · 0,9 ↔ 0,99', es: '1,1 · 0,9 ↔ 0,99', ar: '1.1 · 0.9 ↔ 0.99' } },
+            { progressId: 44201, stage: 'percent', title: { eu: 'Lehengo prezioa', es: 'El precio de antes', ar: 'السعر السابق' }, description: { eu: 'Merkatu edo garestitu aurreko prezioa: 40 : 0,8 = 50.', es: 'El precio antes de una rebaja o una subida: 40 : 0,8 = 50.', ar: 'السعر قبل التخفيض أو الزيادة: \u206640 : 0.8 = 50\u2069.' } },
+            { progressId: 44202, stage: 'interest', title: { eu: 'Aldiak', es: 'Periodos', ar: 'الفترات' }, description: { eu: 'Hilekoa, hiruhilekoa, seihilekoa: aldi bakoitzeko indizea.', es: 'Mensual, trimestral, semestral: el índice de cada periodo.', ar: 'شهريًا وربع سنوي ونصف سنوي: مؤشر كل فترة.' } },
             { progressId: 44203, stage: 'interest', title: { eu: 'Interes konposatua', es: 'Interés compuesto', ar: 'الفائدة المركّبة' }, description: { eu: '1000 · 1,1² ↔ 1210', es: '1000 · 1,1² ↔ 1210', ar: '1000 · 1.1² ↔ 1210' } }
         ]
     },

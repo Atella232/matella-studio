@@ -16,6 +16,19 @@ type Phase = 'pick' | 'playing' | 'finished'
 
 const MISMATCH_MS = 1300
 
+/** A card's formula as text for screen readers: 1+\frac{0{,}08}{4} → 1+0,08/4, and a label over a formula → «label, formula» */
+const spokenLatex = (latex: string) => latex
+    .replace(/\\textstyle\s*/g, '')
+    .replace(/\{,\}/g, ',')
+    .replace(/\\overset\{([^{}]+)\}\{([^{}]+)\}/g, '$1, $2')
+    .replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g, '$1/$2')
+    .replace(/\\cdot/g, '·')
+    .replace(/\\to\b/g, '→')
+    .replace(/\\mathbin\{:\}/g, ':')
+    .replace(/\\%/g, '%')
+    .replace(/\^\{(\d+)\}/g, '^$1')
+    .replace(/\\[ ,]/g, ' ')
+
 export function PairsMemoryGame({ language, records, onResult, onExit, config }: GameProps & { config: PairsMemoryConfig }) {
     const { game, art, pairs, createBoard } = config
     const stars = (moves: number) => pairsMemoryStars(pairs, moves)
@@ -120,7 +133,7 @@ export function PairsMemoryGame({ language, records, onResult, onExit, config }:
                                 <button
                                     type="button"
                                     className={`fraction-v2-memory-card ${visible ? 'visible' : ''} ${isMatched ? 'matched' : ''}`}
-                                    aria-label={visible ? `${l({ eu: `${index + 1}. karta`, es: `Carta ${index + 1}`, ar: `البطاقة ${index + 1}` })}: ${localLatex(card.latex, language).replace(/\\cdot/g, '·').replace(/\^\{(\d+)\}/g, '^$1').replace(/\\ /g, ' ')}` : l({ eu: `${index + 1}. karta, ezkutuan`, es: `Carta ${index + 1}, oculta`, ar: `البطاقة ${index + 1}، مخفية` })}
+                                    aria-label={visible ? `${l({ eu: `${index + 1}. karta`, es: `Carta ${index + 1}`, ar: `البطاقة ${index + 1}` })}: ${spokenLatex(localLatex(card.latex, language))}` : l({ eu: `${index + 1}. karta, ezkutuan`, es: `Carta ${index + 1}, oculta`, ar: `البطاقة ${index + 1}، مخفية` })}
                                     aria-pressed={visible}
                                     onClick={() => select(index)}
                                     key={card.id}
