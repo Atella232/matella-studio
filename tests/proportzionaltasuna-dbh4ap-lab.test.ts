@@ -37,7 +37,7 @@ const all = (challenges: Array<{ id: number }>) => challenges.map((challenge) =>
 const solvedBy = (challenges: Array<{ id: number; isSolved: (state: never) => boolean }>, states: unknown[]) => [...new Set(states.flatMap((state) => solvedIds(challenges, state)))].sort()
 
 test('proportzionaltasuna 4. DBH ap lab: tools, topics and challenge ids', () => {
-    assert.equal(proportionDbh4ApLabTools.length, 12)
+    assert.equal(proportionDbh4ApLabTools.length, 13)
     for (const tool of proportionDbh4ApLabTools) {
         assert.ok(stages.includes(tool.stage), tool.id)
         assert.ok(topics.includes(tool.lessonTopic), tool.id)

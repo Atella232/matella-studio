@@ -8,6 +8,7 @@ import { ChainTool, CompoundTool, InterestTool, ShareTool } from '../../dbh2-pro
 import { proportionDbh4ApStages } from '../lessons'
 import { proportionDbh4ApLabTools, type ProportionDbh4ApLabToolId } from './labTools'
 import { PercentBarTool } from './PercentBarTool'
+import { ReceiptTool } from './ReceiptTool'
 import { RoadGraphTool } from './RoadGraphTool'
 import { RuleTool } from './RuleTool'
 import { GrowthTool, MixtureTool, MotionTool, TapsTool } from './ProportionDbh4ApTools'
@@ -19,6 +20,7 @@ const toolComponents: Record<ProportionDbh4ApLabToolId, (props: LabToolProps) =>
     share: ShareTool,
     percentbar: PercentBarTool,
     chain: ChainTool,
+    receipt: ReceiptTool,
     interest: InterestTool,
     growth: GrowthTool,
     mixture: MixtureTool,

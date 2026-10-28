@@ -1,6 +1,6 @@
 ---
 name: proportzionaltasuna-dbh4ap-lab-plus
-description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) committed 90b3caa on feat/proportzionaltasuna-dbh4ap-lab-motion, fast-forwarded into main and deployed 2026-10-27 (bundle index-buE2QkQf); phase 4 (J1 error detective, J2 bank) committed 866d9d5 on feat/proportzionaltasuna-dbh4ap-games, fast-forwarded into main and deployed 2026-10-27 (bundle index-B-ETaI-9); phase 5 (J3 meeting on the road, J4 fill the tank) committed b26ae19 on feat/proportzionaltasuna-dbh4ap-games-road, fast-forwarded into main and deployed 2026-10-28 (bundle index-BeM7dYPx); phase 6 (J5 perfect mixture, J6 shop till) committed 789f9df on feat/proportzionaltasuna-dbh4ap-games-mix, fast-forwarded into main and deployed 2026-10-28 (bundle index-CfxntXIn); phase 7 (J7 own memory boards) committed fa2ead7 on feat/proportzionaltasuna-dbh4ap-memory, fast-forwarded into main and deployed 2026-10-28 (bundle index-B5-qfK7e)"
+description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) committed 90b3caa on feat/proportzionaltasuna-dbh4ap-lab-motion, fast-forwarded into main and deployed 2026-10-27 (bundle index-buE2QkQf); phase 4 (J1 error detective, J2 bank) committed 866d9d5 on feat/proportzionaltasuna-dbh4ap-games, fast-forwarded into main and deployed 2026-10-27 (bundle index-B-ETaI-9); phase 5 (J3 meeting on the road, J4 fill the tank) committed b26ae19 on feat/proportzionaltasuna-dbh4ap-games-road, fast-forwarded into main and deployed 2026-10-28 (bundle index-BeM7dYPx); phase 6 (J5 perfect mixture, J6 shop till) committed 789f9df on feat/proportzionaltasuna-dbh4ap-games-mix, fast-forwarded into main and deployed 2026-10-28 (bundle index-CfxntXIn); phase 7 (J7 own memory boards) committed fa2ead7 on feat/proportzionaltasuna-dbh4ap-memory, fast-forwarded into main and deployed 2026-10-28 (bundle index-B5-qfK7e); phase 8 (L4 shopping receipt) on feat/proportzionaltasuna-dbh4ap-receipt, not deployed yet"
 ---
 
 On 2026-10-26 the owner asked for the same kind of review as [[zatikiak-dbh2-lab-plus]], this time for `src/pages/dbh4-aplikatuak-proportzionaltasuna`. The unit was built in October (see [[remaining-eso-units]]).
@@ -501,3 +501,32 @@ Committed as fa2ead7, fast-forwarded into main, pushed and deployed to matella.n
 - Two lines with `\begin{gathered}` fitted, but KaTeX's array is a pixel or two wider than its box, and the card's `.math-token` (`overflow-x: auto`) showed a scroll bar. `\overset{\textstyle …}{…}` gives the same two lines with no scroll bar. Test it with `offsetHeight` against `clientHeight` of `.math-token`.
 - To look at one card, turn over just one: it stays up until the second click. Two turned cards hide again after 1.3 s, and screenshots often catch them half turned (blank).
 - `getBoundingClientRect` of a card is skewed while it turns; use `offsetWidth`/`offsetHeight`.
+
+## Phase 8 (branch `feat/proportzionaltasuna-dbh4ap-receipt`, 2026-10-29)
+
+L4 «Erosketaren tiketa / El tique de la compra / إيصال الشراء». The lab now has 13 tools.
+
+- Tool `receipt`, stage percent. The lesson `chained` now opens it instead of the 2. DBH chain tool (which stays in the lab).
+- Logic in `lab/receipt.ts`, component in `lab/ReceiptTool.tsx`, CSS in `lab/Receipt.css`.
+- Settings: the price without VAT (whole euros), the discount (0–90 %), the VAT (4, 10 or 21 %), a coupon of fixed euros (0–500), and the order of the three lines, each with ↑ and ↓. A 0 % discount or a 0 € coupon is greyed out and leaves the receipt.
+- The receipt is drawn on a 320-wide viewBox with a torn edge. Before the answer, each line shows its operation («· 0,75», «· 1,21», «− 5») and «?»; the learner writes the total (`ResultAnswer`, read with `readMoneyAnswer`, rounded to the cent when needed). After it, every line shows its change and what is left, and the working, e.g. `(60\cdot 0{,}75-5)\cdot 1{,}21=48{,}40` (money always with two decimals).
+- The note after the answer: each change multiplies by its index; swapping the discount and the VAT gives the same total; and, with a coupon, the totals with the coupon first, in the middle and last (60 €, 25 %, 21 %, 5 €: 49,91 €, 48,40 €, 49,45 €).
+- A coupon bigger than what is left at its line is flagged, with no answer field.
+- Challenges 43801–43804:
+  - the bag: 80 €, 20 %, 21 % (77,44 €);
+  - the same with the VAT first (the same total);
+  - with a 5 € coupon, the order that pays least (71,39 €);
+  - the book: 30 €, 10 %, 4 % VAT and a 3 € coupon last (25,08 €).
+- Endless `receiptExtra`: a receipt in a given order (any order with the same total is accepted), or «the order that pays least» (about a quarter); totals exact to the cent.
+- Tests in `tests/proportzionaltasuna-dbh4ap-receipt.test.ts`: the lines and totals, the six orders, the coupon places, the cheapest total, moving lines, rounding, the challenges and the endless ones.
+
+### Checks
+
+- Suite 895/895; lint and build OK.
+- At 375 px in eu, es and ar: no sideways scroll and no SVG text outside the drawing; the total and the notes in Arabic; the coupon moved between the lines in Spanish; challenge 43801 solved in Basque.
+
+### Gotchas
+
+- `Label` (from `dbh2-funtzioak-v2/plane`) already flips an Arabic label so that it keeps the LTR position. Mirroring the x myself as well put the Arabic names off the right edge. The receipt keeps the same layout in every language.
+- Amounts in the SVG are wrapped in LRI/PDI; otherwise «? €» came out as «€ ?» on the Arabic page.
+- The Write tool stored the LRI/PDI marks raw again (in `ReceiptTool.tsx`); they were turned into escapes.

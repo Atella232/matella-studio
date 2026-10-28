@@ -6,6 +6,7 @@ import type { ProportionDbh4ApStageId } from '../lessons.tsx'
 import { classifyChallenges } from '../../dbh1-proportzionaltasuna-v2/lab/labTools.ts'
 import { chainChallenges, compoundChallenges, interestChallenges, shareChallenges } from '../../dbh2-proportzionaltasuna-v2/lab/labTools.ts'
 import { percentBarChallenges } from './percentBar.ts'
+import { receiptChallenges } from './receipt.ts'
 import { roadGraphChallenges } from './roadGraph.ts'
 import { ruleChallenges } from './ruleOfThree.ts'
 
@@ -22,7 +23,7 @@ import { ruleChallenges } from './ruleOfThree.ts'
    and tests/proportzionaltasuna-dbh4ap-extra.test.ts.
    ========================================================================== */
 
-export type ProportionDbh4ApLabToolId = 'classify' | 'rule' | 'compound' | 'share' | 'percentbar' | 'chain' | 'interest' | 'growth' | 'mixture' | 'motion' | 'graph' | 'taps'
+export type ProportionDbh4ApLabToolId = 'classify' | 'rule' | 'compound' | 'share' | 'percentbar' | 'chain' | 'receipt' | 'interest' | 'growth' | 'mixture' | 'motion' | 'graph' | 'taps'
 
 export interface ProportionDbh4ApLabTool extends LabToolInfo {
     id: ProportionDbh4ApLabToolId
@@ -76,6 +77,7 @@ export const proportionDbh4ApLabTools: ProportionDbh4ApLabTool[] = [
     { id: 'share', stage: 'compound', lessonTopic: 'direct-share', title: say('Banaketak', 'Repartos', 'التوزيعات'), observe: say('Zuzenean zenbaki handienak zati handiena hartzen du; alderantzizkoan, txikiena. Zatien batura beti kantitate osoa da.', 'En el directo el número mayor se lleva la parte mayor; en el inverso, la menor. Las partes siempre suman la cantidad entera.', 'في الطردي يأخذ العدد الأكبر الجزء الأكبر؛ وفي العكسي الأصغر. ومجموع الأجزاء يساوي الكمية كلها دائمًا.') },
     { id: 'percentbar', stage: 'percent', lessonTopic: 'percent-calc', title: say('Ehunekoen barra', 'La barra del 100 %', 'شريط 100٪'), observe: say('Goiko barra % 100 da; behekoa, ehunekoa, eskala berean. % 21 igotzean barra % 121 arte luzatzen da; % 25 merketzean % 75 geratzen da. Atzera egiteko, indizeaz zatitzen da.', 'La barra de arriba es el 100 %; la de abajo, el porcentaje, en la misma escala. Subir un 21 % alarga la barra hasta el 121 %; rebajar un 25 % la deja en el 75 %. Hacia atrás se divide entre el índice.', 'الشريط العلوي هو 100٪، والسفلي هو النسبة بالمقياس نفسه. رفع 21٪ يمدّ الشريط إلى 121٪، وتخفيض 25٪ يتركه عند 75٪. وللرجوع نقسم على المؤشر.') },
     { id: 'chain', stage: 'percent', lessonTopic: 'chained', title: say('Ehuneko kateatuak', 'Porcentajes encadenados', 'النسب المتتالية'), observe: say('Aldaketa bakoitza bere indizeaz biderkatzen da. % 10 igo eta % 10 jaitsiz gero, ez da hasierara itzultzen.', 'Cada cambio multiplica por su índice. Si subes un 10 % y bajas un 10 %, no vuelves al principio.', 'كل تغيّر يضرب في مؤشره. إذا زدت 10٪ ثم خفّضت 10٪ فلن تعود إلى البداية.') },
+    { id: 'receipt', stage: 'percent', lessonTopic: 'chained', title: say('Erosketaren tiketa', 'El tique de la compra', 'إيصال الشراء'), observe: say('Deskontuak eta BEZak beren indizeaz biderkatzen dute; beraz, haien ordenak ez du axola. Kupoiak euro finkoak kentzen ditu, eta aurrezten duena atzetik datozen indizeez biderkatzen da: BEZaren aurretik, haren BEZa ere aurrezten duzu.', 'El descuento y el IVA multiplican por su índice, así que su orden da igual. El cupón resta euros fijos, y lo que ahorra se multiplica por los índices que vienen detrás: antes del IVA, te ahorras también su IVA.', 'الخصم والضريبة يضربان في مؤشريهما، فلا يهمّ ترتيبهما. أما القسيمة فتطرح يوروهات ثابتة، ويُضرب ما توفّره في المؤشرات التي تأتي بعدها: قبل الضريبة توفّر ضريبتها أيضًا.') },
     { id: 'interest', stage: 'interest', lessonTopic: 'simple-interest', title: say('Interes bakuna', 'Interés simple', 'الفائدة البسيطة'), observe: say('Urtero interes bera gehitzen da, hasierako kapitalaren % r. Urte bikoitza edo tasa bikoitza → interes bikoitza.', 'Cada año se suma el mismo interés, el r % del capital inicial. El doble de años o el doble de tipo → el doble de interés.', 'تُضاف كل سنة الفائدة نفسها، r٪ من رأس المال الأصلي. ضعف السنوات أو ضعف السعر ← ضعف الفائدة.') },
     { id: 'growth', stage: 'interest', lessonTopic: 'compound-interest', title: say('Bakuna ala konposatua', 'Simple o compuesto', 'بسيطة أم مركّبة'), observe: say('Lehen urtean biak berdinak dira; gero konposatua aurrera doa, interesak ere interesa sortzen duelako. Aldi gehiago (k) → apur bat gehiago.', 'El primer año los dos coinciden; después el compuesto se adelanta, porque el interés también produce interés. Más periodos (k) → algo más.', 'في السنة الأولى يتساويان؛ ثم تتقدم المركّبة لأن الفائدة تُنتج فائدة. فترات أكثر (k) ← أكثر قليلًا.') },
     { id: 'mixture', stage: 'problems', lessonTopic: 'mixtures', title: say('Nahasketa', 'La mezcla', 'الخليط'), observe: say('Prezio ertaina beti bi prezioen artean dago, eta kantitate handiena duenetik hurbilago. Kantitate berdinekin, erdian.', 'El precio medio siempre queda entre los dos precios, y más cerca del que tiene más cantidad. Con cantidades iguales, justo en medio.', 'يقع السعر المتوسط دائمًا بين السعرين، وأقرب إلى الأكثر كمية. وبكميتين متساويتين في المنتصف تمامًا.') },
@@ -93,7 +95,7 @@ export const proportionDbh4ApLabToolForTopic: Record<string, ProportionDbh4ApLab
     'inverse-share': 'share',
     'percent-calc': 'percentbar',
     index: 'percentbar',
-    chained: 'chain',
+    chained: 'receipt',
     'simple-interest': 'interest',
     'compound-interest': 'growth',
     periods: 'growth',
@@ -657,6 +659,7 @@ export const proportionDbh4ApLabChallengeIds = [
     ...shareChallenges,
     ...percentBarChallenges,
     ...chainChallenges,
+    ...receiptChallenges,
     ...interestChallenges,
     ...growthChallenges,
     ...mixtureChallenges,
