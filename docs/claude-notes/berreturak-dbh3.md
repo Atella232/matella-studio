@@ -11,6 +11,13 @@ Fuentes: Santillana 3.º U2 (págs. 39–72; el PDF es el solucionario, escanead
 - Figuras reutilizadas de 4.º aplicadas errealak (Powers, Scientific, ScientificOps, Roots, Simplify, RadicalOps, Irrational, RealLine, Intervals, Rounding, Errors) y de 4.º académicas potentziak (PowerRules). Sin figura propia en sci-compare e introduce.
 - Test: `tests/berreturak-dbh3-content.test.ts` (copia adaptada del de potentziak, más comprobación de lecciones y de sufijos euskera pegados a números).
 
+## Fase 2 (laboratorio) — hecha
+- 10 herramientas: 4 propias (`tokens` fichas de factores 361xx, `square` el cuadrado de la raíz 362xx, `scale` escala de magnitudes 363xx, `spiral` espiral de raíces 364xx) + 6 prestadas de 4.º aplicadas (`powers`, `scientific`, `radicals`, `zoom`, `intervals`, `rounding`, con sus retos 401xx–408xx).
+- Lógica pura en `lab/tokens.ts`, `square.ts`, `scale.ts`, `spiral.ts` (retos fijos + `extraChallenges` que nunca empiezan resueltos); interfaz en `lab/BerreturakTools.tsx`; tool list en `lab/labTools.ts`.
+- Todas dibujan en un SVG de 360 de ancho. La espiral tiene ▶ (`usePlayback` de proportzionaltasuna 4. DBH ap) y se reescala sola. La escala de magnitudes es de predecir y comprobar.
+- Test: `tests/berreturak-dbh3-lab.test.ts` (retos fijos resueltos y no resueltos al abrir; 150 semillas por reto infinito; KaTeX, árabe, sufijos euskera; geometría de la espiral).
+- Trucos: los `Stepper` calculan el valor con lo ya pintado, así que al probar desde la consola hay que esperar entre clics; cambiar de herramienta por `location.hash` no cambia la herramienta, se hace con las pestañas; `observe` es texto plano (nada de `$`).
+
 ## Ids reservados
 Lab: 361xx–364xx (una herramienta por centena). Juegos: carrera 37101–37105, parejas 37201–37203, propios 373xx–376xx.
 

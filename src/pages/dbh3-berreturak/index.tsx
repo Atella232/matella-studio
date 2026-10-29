@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { RealsHeroArt } from '../dbh4-aplikatuak-errealak/figures'
 import { powersChallenges, powersDiagnostic, powersExerciseBank, powersPractice } from './content'
+import { PowersLaboratory } from './lab'
+import { powersLabChallengeIds, powersLabToolForTopic, powersLabTools } from './lab/labTools'
 import { powersStages, powersTopics } from './lessons'
 import '../dbh4-aplikatuak-errealak/Reals.css'
 
@@ -24,6 +26,16 @@ const berreturakUnit: UnitDefinition = {
     guidedPractice: powersPractice,
     exerciseBank: powersExerciseBank,
     challenges: powersChallenges,
+    lab: {
+        description: {
+            eu: `${powersLabTools.length} tresna: faktore-fitxak, erroaren karratua, magnitude-eskala, erroen espirala, berreturen eskailera, komaren jauziak, tarteak eta biribiltzea, erronkekin.`,
+            es: `${powersLabTools.length} herramientas: fichas de factores, el cuadrado de la raíz, la escala de magnitudes, la espiral de raíces, la escalera de potencias, los saltos de la coma, intervalos y redondeo, con retos.`,
+            ar: `${powersLabTools.length} أدوات: رقاقات العوامل ومربع الجذر وسُلّم المقادير وحلزون الجذور وسُلّم القوى وقفزات الفاصلة والفترات والتقريب، مع تحديات.`
+        },
+        progressIds: powersLabChallengeIds,
+        toolForTopic: powersLabToolForTopic,
+        render: (props) => <PowersLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat edo zatiki bat: 5, −3, 1,5 edo 9/25. Emaitza erradikal edo 10en berretura bat bada, eskatzen den zenbakia bakarrik.', es: 'Escribe un número o una fracción: 5, −3, 1,5 o 9/25. Si el resultado es un radical o una potencia de 10, solo el número que se pide.', ar: 'اكتب عددًا أو كسرًا: 5 أو ⁦−3⁩ أو 1.5 أو 9/25. وإذا كانت النتيجة جذرًا أو قوة للعدد 10 فاكتب العدد المطلوب فقط.' },
         defaultForm: 'any',
