@@ -26,10 +26,34 @@ fragmentos pegados en una nota, en `docs/claude-notes/`, en una skill, en un tes
 
 ## Dónde están los libros
 
-En sesiones anteriores estaban en el Drive del dueño con la forma
-`LIBROS/<n>_ESO/Santillana|Anaya/Unidad_NN_Tema.pdf` (a veces «Libro_Estandar» o un solucionario).
-**El 2026-10-29 no los encontré en el Drive sincronizado de este Mac**, así que no des la ruta por buena:
-pregunta dónde están y qué capítulo y edición hay que usar (el libro de clase del dueño es el que manda).
+En el Drive del dueño, **montado en su Mac** (por eso esto solo funciona en local, no en sesiones en la nube).
+No está en «Mi unidad» sino en el equipo sincronizado:
+
+```text
+~/Library/CloudStorage/GoogleDrive-<cuenta>/Otros ordenadores/Mi portátil/Ideas/Klase/Matematika/LIBROS/
+  1_ESO  2_ESO  3_ESO  4_ESO  1_Bach  2_Bach  EBAU
+  <curso>/<Editorial>/Unidad_NN_Tema.pdf
+```
+
+- **1.º y 2.º ESO:** `Anaya` y `Santillana`. En 1.º, Anaya trae `Libro_Estandar/` (con `Libro_Completo.pdf`) y
+  `Suma_Piezas/`.
+- **3.º ESO:** además de Anaya y Santillana, `Bruño`, `Edebe`, `Marea_Verde` y `SM_Savia` (algunas con menos
+  unidades); Anaya incluye `Libro_Completo.pdf`.
+- **4.º ESO:** `<Editorial>/Academicas/` y `<Editorial>/Aplicadas/` (la misma unidad puede tener otro número
+  en cada editorial: busca por tema).
+- **Bachillerato:** `Ciencias` y `Sociales` por editorial; **EBAU** por comunidad y asignatura.
+- El libro de clase del dueño es el de **Santillana**; la pareja habitual de una unidad es Santillana + Anaya.
+
+Para encontrar un capítulo sin recorrer carpetas (solo lista rutas, no abre nada):
+
+```bash
+.claude/skills/matella-fuentes/scripts/buscar-libro.sh 2_ESO Decimal
+.claude/skills/matella-fuentes/scripts/buscar-libro.sh 4_ESO Trigono
+```
+
+Si no la encuentra, el Drive no está montado (`ls ~/Library/CloudStorage`). Prueba hecha el 2026-10-29: un
+capítulo de 16 páginas de Santillana 2.º se lee con `pdf-texto` y la capa de texto sirve; otros libros
+pueden venir escaneados (los solucionarios de 4.º aplicadas lo estaban).
 
 ## Herramientas (Mac, sin dependencias)
 
@@ -49,7 +73,7 @@ imágenes es lo más caro: hazlo por tramos de páginas, no el libro entero.
 
 ## Flujo
 
-1. **Identifica** libro, edición, curso, unidad y páginas; si es libro del alumno o solucionario, y si tiene
+1. **Localiza** los dos capítulos con `buscar-libro.sh`. **Identifica** libro, edición, curso, unidad y páginas; si es libro del alumno o solucionario, y si tiene
    «adaptación curricular» (un contenido reducido: eso fija el alcance). Pregunta lo que no esté claro.
 2. **Extrae el texto**; si la capa falla, renderiza y lee las páginas como imagen.
 3. **Perfila cada libro** (usa [references/ficha-fuente.md](references/ficha-fuente.md)): secciones y su orden,
