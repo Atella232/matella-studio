@@ -1,0 +1,103 @@
+/* Matella · base de impresión A4. Va DESPUÉS de tokens.css (build-pdf.mjs los junta).
+   Regla de oro: Chrome ignora `break-inside: avoid` en hijos de grid/flex, así que todo lo que
+   no debe partirse entre páginas es un bloque normal (display:block / inline-block), con el
+   número o el icono colocados con position:absolute. No uses grid ni flex dentro de tarjetas. */
+
+@page {
+  size: A4;
+  margin: 15mm 14mm 17mm;
+  @bottom-center { content: counter(page); font: 700 10pt "Atkinson Hyperlegible", sans-serif; color: #58616e; }
+}
+@page :first { @bottom-center { content: none; } }   /* la portada sin número */
+
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { background: #fff; font-size: 11pt; line-height: 1.45; }   /* blanco: ahorra tinta y no deja bordes de color desiguales */
+h1, h2, h3 { break-after: avoid; }
+p { orphans: 3; widows: 3; }
+
+/* Portada: ocupa una página entera */
+.doc-cover {
+  position: relative; height: 262mm; padding: 22mm 14mm; box-sizing: border-box;
+  border: 2px solid var(--ink); border-radius: 18px; overflow: hidden;
+  break-after: page;
+}
+.doc-cover h1 { margin: 38mm 0 6mm; font: 800 44pt/1.05 var(--font-display); max-width: 150mm; }
+.doc-cover .sub { font: 600 18pt/1.3 var(--font-display); color: var(--ink-soft); }
+.doc-cover .sticker {
+  position: absolute; right: 16mm; bottom: 26mm; padding: 6mm 9mm; transform: rotate(-5deg);
+  border: 2px solid var(--ink); border-radius: 14px; background: var(--stage); color: var(--stage-on);
+  box-shadow: 3px 3px 0 var(--ink); font: 800 22pt var(--font-display);
+}
+
+/* Cabecera de tema (cada tema empieza página y lleva su color de etapa con data-tone) */
+.topic { break-before: page; }
+.topic:first-of-type { break-before: auto; }
+.topic-head {
+  display: block; padding: 5mm 7mm; margin-bottom: 6mm;
+  border: 1.5px solid var(--ink); border-radius: 14px; box-shadow: 2px 2px 0 var(--ink);
+  background: var(--stage); color: var(--stage-on);
+}
+.topic-head .n { display: inline-block; margin-right: 4mm; font: 800 30pt/1 var(--font-display); vertical-align: middle; }
+.topic-head h2 { display: inline-block; margin: 0; font-size: 21pt; vertical-align: middle; }
+[dir="rtl"] .topic-head .n { margin-right: 0; margin-left: 4mm; }
+h3.part { margin: 7mm 0 3mm; color: var(--stage-ink); font-size: 14pt; }
+
+/* Bloques que NO se parten */
+.keep, .example, .ex, .box, .m-takeaway, .q { display: block; break-inside: avoid; page-break-inside: avoid; }
+.box, .example {
+  margin: 0 0 4mm; padding: 4mm 5mm; border: 1.5px solid var(--line-strong); border-radius: 12px; background: #fffcf6;
+}
+.example { border-left: 5px solid var(--stage); background: var(--stage-soft); }
+.example .tag { display: inline-block; margin-bottom: 2mm; color: var(--stage-ink); font-size: 9pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.m-takeaway { display: block; margin: 0 0 5mm; padding: 4mm 5mm 4mm 17mm; position: relative; transform: none; box-shadow: 2px 2px 0 var(--ink); }
+.m-takeaway__icon { position: absolute; left: 5mm; top: 4mm; display: block; width: 8mm; height: 8mm; line-height: 8mm; text-align: center; font-size: 14pt; }
+[dir="rtl"] .m-takeaway { padding: 4mm 17mm 4mm 5mm; }
+[dir="rtl"] .m-takeaway__icon { left: auto; right: 5mm; }
+.m-takeaway p { font-size: 13pt; }
+
+/* Ejercicio numerado: el número en círculo de tinta va en absoluto */
+.ex { position: relative; margin: 0 0 5mm; padding: 1.5mm 0 0 11mm; }   /* el padding-top evita que las fracciones asomen en la página anterior */
+[dir="rtl"] .ex { padding: 1.5mm 11mm 0 0; }
+.ex > .num {
+  position: absolute; left: 0; top: 1.6mm; width: 7.5mm; height: 7.5mm; line-height: 7.5mm; text-align: center;
+  border-radius: 50%; background: var(--ink); color: var(--paper); font: 700 10pt var(--font-body);
+}
+[dir="rtl"] .ex > .num { left: auto; right: 0; }
+.ex .sub { margin-top: 1.5mm; }
+.ex .answer, .answer { display: block; height: 9mm; border-bottom: 1.5px dotted var(--muted); }
+.ex .answer.tall { height: 22mm; }
+.ex .pts, .ke {
+  display: inline-block; margin-left: 2mm; padding: 0 2.2mm; border: 1px solid var(--ink); border-radius: 999px;
+  background: var(--stage-tint); color: var(--stage-ink); font: 700 8.5pt/1.5 var(--font-body); vertical-align: 1px;
+}
+.ke { background: var(--paper-deep); color: var(--ink); }
+
+/* Dos o tres columnas SIN grid: bloques en línea con ancho en % (se mueven enteros) */
+.cols > * { display: inline-block; vertical-align: top; width: 48.5%; box-sizing: border-box; padding-right: 3mm; break-inside: avoid; }
+.cols.c3 > * { width: 32%; }
+[dir="rtl"] .cols > * { padding-right: 0; padding-left: 3mm; }
+.cols { font-size: 0; }          /* quita el hueco entre bloques en línea */
+.cols > * { font-size: 11pt; }
+
+/* Tabla de datos */
+table.t { border-collapse: collapse; margin: 2mm 0 4mm; font-size: 10.5pt; break-inside: avoid; }
+table.t th { background: var(--stage-tint); color: var(--stage-ink); text-align: left; }
+table.t th, table.t td { padding: 1.5mm 3.5mm; border: 1px solid var(--line-strong); }
+
+/* Cabecera de examen: huecos en blanco, nunca nombres */
+.exam-head { display: block; margin-bottom: 6mm; padding: 4mm 6mm; border: 2px solid var(--ink); border-radius: 12px; break-inside: avoid; }
+.exam-head .row { display: block; margin-top: 3mm; }
+.exam-head .blank { display: inline-block; width: 70mm; border-bottom: 1.5px solid var(--ink); margin: 0 6mm 0 2mm; }
+.version { display: inline-block; float: right; width: 12mm; height: 12mm; line-height: 12mm; text-align: center; border: 2px solid var(--ink); border-radius: 50%; background: var(--mustard-tint); font: 800 20pt/12mm var(--font-display); }
+[dir="rtl"] .version { float: left; }
+
+/* Soluciones: siempre en página aparte, texto algo más pequeño */
+.solutions { break-before: page; font-size: 10pt; }
+.solutions h2 { color: var(--stage-ink); }
+.solutions .s { display: block; break-inside: avoid; margin-bottom: 2.5mm; }
+.solutions .s b { display: inline-block; min-width: 7mm; }
+
+/* Sombras y bordes más finos que en pantalla: en papel pesan más */
+.m-chip { border-width: 1px; }
+.katex { font-size: 1.08em; }
+.katex-display { margin: 2mm 0; break-inside: avoid; }
