@@ -45,8 +45,8 @@ Node solo existe dentro de Pinokio: añade su carpeta **al final** del PATH (si 
 rompe el deploy). Trabaja en tu carpeta temporal de sesión o en la carpeta de entrega.
 
 ```bash
-export PATH=$PATH:/Users/asier/pinokio/bin/miniconda/bin
-SK=/Users/asier/Documents/Proyectos/matella-studio/.claude/skills/matella-materiales-imprimibles
+export PATH=$PATH:$HOME/pinokio/bin/miniconda/bin
+SK=.claude/skills/matella-materiales-imprimibles   # desde la raíz del repositorio
 
 node $SK/scripts/build-pdf.mjs ficha.html ficha.pdf         # HTML → PDF (imprime el nº de páginas)
 

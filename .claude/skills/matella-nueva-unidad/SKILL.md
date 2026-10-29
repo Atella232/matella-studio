@@ -39,7 +39,7 @@ Detalle, criterios de diseño, patrones de calidad y ejemplos reales en
    **al final** del PATH):
 
    ```bash
-   export PATH=$PATH:/Users/asier/pinokio/bin/miniconda/bin
+   export PATH=$PATH:$HOME/pinokio/bin/miniconda/bin
    node .claude/skills/matella-nueva-unidad/scripts/inventario-unidad.mjs dbh4-akademikoak-trigonometria
    ```
 
