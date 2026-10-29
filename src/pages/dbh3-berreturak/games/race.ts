@@ -243,7 +243,7 @@ function irrationalCountQuestion(random: Random): PowersRaceQuestion | null {
     const count = pick(random, [1, 2, 3, 4])
     const items = shuffle(random, [...shuffle(random, IRRATIONAL_POOL).slice(0, count), ...shuffle(random, RATIONAL_POOL).slice(0, 5 - count)])
     const choices = options(random, fraction(count), [whole(5 - count, 'irrational'), whole(count + 1, 'calculation'), whole(count - 1, 'calculation'), whole(count + 2, 'calculation'), whole(0, 'irrational')])
-    return choices && build(3, 'irrational-count', say(`Hauetako zenbat dira irrazionalak: ${math(items.join(',\\ '))}?`, `¿Cuántos de estos son irracionales: ${math(items.join(',\\ '))}?`, `كم من هذه الأعداد غير نسبي: ${math(items.join(',\\ '))}؟`), choices, fraction(count), say(`${count} irrazional: karratu perfektua ez diren erroak, π eta horien biderkaduren.`, `${count} irracionales: raíces de no cuadrados perfectos, π y sus múltiplos.`, `${count} غير نسبية: جذور غير المربعات الكاملة و π ومضاعفاتها.`), { count })
+    return choices && build(3, 'irrational-count', say(`Hauetako zenbat dira irrazionalak: ${items.map(math).join(', ')}?`, `¿Cuántos de estos son irracionales: ${items.map(math).join(', ')}?`, `كم من هذه الأعداد غير نسبي: ${items.map(math).join(', ')}؟`), choices, fraction(count), say(`${count} irrazional: karratu perfektua ez diren erroak, π eta horien biderkaduren.`, `${count} irracionales: raíces de no cuadrados perfectos, π y sus múltiplos.`, `${count} غير نسبية: جذور غير المربعات الكاملة و π ومضاعفاتها.`), { count })
 }
 
 function betweenQuestion(random: Random, tier: Tier): PowersRaceQuestion | null {

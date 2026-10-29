@@ -1,6 +1,8 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
+import { powersDiagnostic } from '../src/pages/dbh3-berreturak/content.ts'
+import { powersLabChallengeIds } from '../src/pages/dbh3-berreturak/lab/labTools.ts'
 import { checkAnswer, toNumber } from '../src/features/unit-v2/math/fraction.ts'
 import { createRandom } from '../src/features/unit-v2/games/random.ts'
 import type { Tier } from '../src/features/unit-v2/games/raceCore.ts'
@@ -322,6 +324,9 @@ test('berreturak 3. DBH detective: six cases per level, one wrong line each, and
                 assert.equal(item.options.length, 3, where)
                 assert.equal(new Set(item.options).size, 3, where)
                 assert.ok(item.options.includes(item.error), where)
+                // The same wrong identity read the other way round is never offered as a distractor
+                if (item.error === 'add-radicands') assert.ok(!item.options.includes('root-sum'), where)
+                if (item.error === 'root-sum') assert.ok(!item.options.includes('add-radicands'), where)
                 checkTexts([item.problem])
                 for (const current of item.lines) { checkTexts([current.label]); renders(current.latex) }
                 renders(item.fix)
@@ -355,8 +360,8 @@ function checkSemantics(item: DetectiveCase) {
         }
         case 'rel-denominator': {
             assert.ok(item.lines[1].latex.includes(`{${m.approx}}`) && item.fix.includes(`{${m.exact}}`))
-            const value = (text: string) => Number(text.split('=').pop()!.replace('{,}', '.'))
-            assert.ok(value(item.lines[2].latex) !== value(item.fix))
+            assert.ok(Math.abs(m.exact - m.approx) / m.exact <= 0.1, `${m.exact} vs ${m.approx}`)
+            assert.notEqual(item.lines[2].latex.split('=').pop(), item.fix.split('=').pop())
             break
         }
         case 'bounds': {
@@ -385,4 +390,9 @@ function checkSemantics(item: DetectiveCase) {
 
 test('berreturak 3. DBH games: nothing is shared by accident (checkAnswer accepts a typed fraction)', () => {
     assert.equal(checkAnswer('9/25', checkAnswerFraction('0,36')), 'correct')
+})
+
+test('berreturak 3. DBH: no progress id repeats across the diagnostic, the lab and the games', () => {
+    const ids = [...powersDiagnostic.map((question) => question.id), ...powersLabChallengeIds, ...powersGameProgressIds]
+    assert.equal(new Set(ids).size, ids.length)
 })

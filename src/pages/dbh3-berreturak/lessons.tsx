@@ -78,7 +78,7 @@ export const powersTopics: UnitTopic[] = [
             { text: say('Kalkulatu.', 'Calcula.', 'احسب.'), math: same('$-8$') }
         ],
         example: same('$5^{-2}=\\frac{1}{25}$'),
-        takeaway: say('$a^{0}=1$. Berretzaile negatiboa: alderantzizkoa, ez emaitza negatiboa.', '$a^{0}=1$. Exponente negativo: el inverso, no un resultado negativo.', '$a^{0}=1$. الأس السالب: المقلوب لا نتيجة سالبة.'),
+        takeaway: say('Zero berretzailea: $5^{0}=1$. Berretzaile negatiboa: alderantzizkoa, ez emaitza negatiboa.', 'Exponente cero: $5^{0}=1$. Exponente negativo: el inverso, no un resultado negativo.', 'الأس صفر: $5^{0}=1$. الأس السالب: المقلوب لا نتيجة سالبة.'),
         figure: (language) => <PowersFigure language={language} />
     },
     {
@@ -122,7 +122,7 @@ export const powersTopics: UnitTopic[] = [
             { text: say('Idatzi.', 'Escribe el resultado.', 'اكتب النتيجة.'), math: same('$7{,}2\\cdot 10^{-5}$') }
         ],
         example: same('$3{,}2\\cdot 10^{6}=3\\,200\\,000$'),
-        takeaway: say('Handia: berretzaile positiboa. Txikia: berretzaile negatiboa. $1\\le a<10$.', 'Grande: exponente positivo. Pequeño: exponente negativo. $1\\le a<10$.', 'الكبير: أس موجب. الصغير: أس سالب. $1\\le a<10$.'),
+        takeaway: say('Handia: berretzaile positiboa. Txikia: berretzaile negatiboa. Komaren aurretik zifra bakarra, 0 ez dena.', 'Grande: exponente positivo. Pequeño: exponente negativo. Delante de la coma, una sola cifra distinta de 0.', 'الكبير: أس موجب. الصغير: أس سالب. قبل الفاصلة رقم واحد غير صفر.'),
         figure: (language) => <ScientificFigure language={language} />
     },
     {
@@ -143,7 +143,7 @@ export const powersTopics: UnitTopic[] = [
             { text: say('Egiaztatu hamartarrekin.', 'Comprueba con decimales.', 'تحقق بالأعداد العشرية.'), math: same('$0{,}002>0{,}0008$') }
         ],
         example: same('$4\\cdot 10^{5}>9\\cdot 10^{4}$'),
-        takeaway: say('Lehenik berretzaileak, gero $a$ zenbakiak. Berretzaileak magnitude-ordena ematen du.', 'Primero los exponentes, después los números $a$. El exponente da el orden de magnitud.', 'أولًا الأسس ثم الأعداد $a$. الأس يعطي رتبة المقدار.')
+        takeaway: say('Lehenik berretzaileak, gero zenbakiak. Berretzaileak magnitude-ordena ematen du.', 'Primero los exponentes, después los números. El exponente da el orden de magnitud.', 'أولًا الأسس ثم الأعداد. الأس يعطي رتبة المقدار.')
     },
     {
         id: 'sci-ops',
@@ -312,7 +312,7 @@ export const powersTopics: UnitTopic[] = [
             { text: say('Luzera: $4-(-1)$.', 'Longitud: $4-(-1)$.', 'الطول: $4-(-1)$.'), math: same('$5$') }
         ],
         example: same('$(0,\\,3]=\\{x:\\,0<x\\le 3\\}$'),
-        takeaway: say('Kortxetea: muturra sartzen da. Parentesia: ez da sartzen. Luzera: $b-a$.', 'Corchete: el extremo entra. Paréntesis: no entra. Longitud: $b-a$.', 'القوس المربع: الطرف داخل. القوس العادي: غير داخل. الطول: $b-a$.'),
+        takeaway: say('Kortxetea: muturra sartzen da. Parentesia: ez da sartzen. Luzera: muturra ken hasiera.', 'Corchete: el extremo entra. Paréntesis: no entra. Longitud: final menos principio.', 'القوس المربع: الطرف داخل. القوس العادي: غير داخل. الطول: النهاية ناقص البداية.'),
         figure: (language) => <IntervalsFigure language={language} />
     },
 

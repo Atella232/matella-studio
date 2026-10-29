@@ -212,7 +212,7 @@ export function ScaleTool(props: LabToolProps) {
 
 /* ---------- L4. The spiral of roots ---------- */
 
-const SPIRAL = { cx: 150, cy: 122, reach: 104, maxScale: 70 }
+const SPIRAL = { cx: 150, cy: 140, reach: 104, maxScale: 70 }
 
 export function SpiralTool(props: LabToolProps) {
     const l = useLabText(props.language)
@@ -245,7 +245,7 @@ export function SpiralTool(props: LabToolProps) {
         : l(say(`Hipotenusa √${state.n - 1} eta 1 aldeen artean dago; zuzenean bi marken artean erortzen da.`, `La hipotenusa de catetos √${state.n - 1} y 1 cae entre dos marcas de la recta.`, `وتر الضلعين √${state.n - 1} و1 يقع بين علامتين على المستقيم.`))
     return (
         <ToolFrame {...props} controls={controls} state={state} challenges={spiralChallenges} extraChallenges={spiralExtra} readout={<Readout latex={latex} note={note} />}>
-            <Board height={250} label={l(say(`Erroen espirala √${state.n} arte`, `La espiral de raíces hasta √${state.n}`, `حلزون الجذور حتى √${state.n}`))}>
+            <Board height={272} label={l(say(`Erroen espirala √${state.n} arte`, `La espiral de raíces hasta √${state.n}`, `حلزون الجذور حتى √${state.n}`))}>
                 {points.slice(0, Math.max(0, shown - 0)).map((point, index) => {
                     const next = points[index + 1]
                     if (!next || index + 1 >= shown) return null

@@ -1,3 +1,4 @@
+import { gcd } from '../../../features/unit-v2/math/fraction.ts'
 import { pick, randomInt, shuffle, type Random } from '../../../features/unit-v2/games/random.ts'
 import type { Stars } from '../../../features/unit-v2/games/records.ts'
 import type { LocalizedText } from '../../../features/unit-v2/types.ts'
@@ -58,6 +59,9 @@ export const detectiveLevels: DetectiveError[][] = [
 ]
 
 export const DETECTIVE_CASES = 6
+
+/** Two mistakes that are the same wrong identity read in two directions: never offered together */
+const SAME_MISTAKE: Partial<Record<DetectiveError, DetectiveError>> = { 'add-radicands': 'root-sum', 'root-sum': 'add-radicands' }
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
 const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
@@ -268,18 +272,18 @@ function intervalCount(random: Random): DetectiveCase | null {
 }
 
 function relDenominator(random: Random): DetectiveCase | null {
-    const values = [20, 25, 40, 50, 80, 100, 125, 200]
-    const exact = pick(random, values)
-    const approx = pick(random, values)
-    if (exact === approx) return null
-    const error = Math.abs(exact - approx)
-    const wrongValue = error / approx
-    const rightValue = error / exact
-    const show = (value: number) => String(value).replace('.', '{,}')
+    const exact = pick(random, [40, 50, 60, 80, 100, 120, 150, 200, 250])
+    // The approximation is within a few percent of the exact value
+    const error = randomInt(random, 1, Math.min(4, exact / 20))
+    const approx = random() < 0.5 ? exact - error : exact + error
+    const simplified = (numerator: number, denominator: number) => {
+        const divisor = gcd(numerator, denominator)
+        return numerator / divisor === 1 || denominator / divisor !== 1 ? `\\frac{${numerator / divisor}}{${denominator / divisor}}` : String(numerator / divisor)
+    }
     return {
         problem: say(`Zenbaki zehatza ${math(String(exact))} da eta hurbilketa ${math(String(approx))}. Zenbat da errore erlatiboa?`, `El valor exacto es ${math(String(exact))} y la aproximación ${math(String(approx))}. ¿Cuánto es el error relativo?`, `القيمة الصحيحة ${math(String(exact))} والتقريب ${math(String(approx))}. كم الخطأ النسبي؟`),
-        lines: [line(LABELS.step, `E_{a}=|${exact}-${approx}|=${error}`), line(LABELS.rule, `E_{r}=\\frac{${error}}{${approx}}`), line(LABELS.result, `E_{r}=${show(wrongValue)}`)],
-        wrong: 1, error: 'rel-denominator', fix: `E_{r}=\\frac{${error}}{${exact}}=${show(rightValue)}`, options: [], meta: { exact, approx }
+        lines: [line(LABELS.step, `E_{a}=|${exact}-${approx}|=${error}`), line(LABELS.rule, `E_{r}=\\frac{${error}}{${approx}}`), line(LABELS.result, `E_{r}=\\frac{${error}}{${approx}}=${simplified(error, approx)}`)],
+        wrong: 1, error: 'rel-denominator', fix: `E_{r}=\\frac{${error}}{${exact}}=${simplified(error, exact)}`, options: [], meta: { exact, approx }
     }
 }
 
@@ -316,7 +320,7 @@ export function createDetectiveCase(random: Random, levelIndex: number, error: D
     for (let attempt = 0; attempt < 500; attempt += 1) {
         const made = builders[error](random)
         if (!made) continue
-        const others = shuffle(random, pool.filter((item) => item !== error)).slice(0, 2)
+        const others = shuffle(random, pool.filter((item) => item !== error && item !== SAME_MISTAKE[error])).slice(0, 2)
         return { ...made, options: shuffle(random, [error, ...others]) }
     }
     throw new Error(`No detective case for ${error}`)
