@@ -75,7 +75,7 @@ export const courses: Course[] = [
     color: '#e0a100',
     topics: [
       { id: 'numeros-racionales', name: 'Números Racionales', nameEu: 'Zenbaki Arrazionalak', nameAr: 'الأعداد النسبية', icon: '🔢', active: true },
-      { id: 'numeros-reales', name: 'Números Reales', nameEu: 'Zenbaki Errealak', nameAr: 'الأعداد الحقيقية', icon: '∞' },
+      { id: 'potencias-raices', name: 'Potencias y Raíces', nameEu: 'Berreturak eta Erroak', nameAr: 'القوى والجذور', icon: '√', active: true },
       { id: 'proporcionalidad', name: 'Proporcionalidad', nameEu: 'Proportzionaltasuna', nameAr: 'التناسب', icon: '⚖️' },
       { id: 'polinomios', name: 'Polinomios', nameEu: 'Polinomioak', nameAr: 'متعددات الحدود', icon: '🔤' },
       { id: 'ecuaciones-sistemas', name: 'Ecuaciones y Sistemas', nameEu: 'Ekuazioak eta Sistemak', nameAr: 'المعادلات والأنظمة', icon: '📝' },

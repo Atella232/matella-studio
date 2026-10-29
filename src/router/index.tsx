@@ -55,6 +55,7 @@ const EkuazioakDBH2Page = lazy(() => import('../pages/dbh2-ekuazioak-v2').then((
 const FuntzioakDBH2Page = lazy(() => import('../pages/dbh2-funtzioak-v2').then((module) => ({ default: module.FuntzioakDBH2Page })))
 const ErrealakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-errealak').then((module) => ({ default: module.ErrealakDBH4ApPage })))
 const ArrazionalakDBH3Page = lazy(() => import('../pages/dbh3-arrazionalak').then((module) => ({ default: module.ArrazionalakDBH3Page })))
+const BerreturakDBH3Page = lazy(() => import('../pages/dbh3-berreturak').then((module) => ({ default: module.BerreturakDBH3Page })))
 const ErrealakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-errealak').then((module) => ({ default: module.ErrealakDBH4AkPage })))
 const ZenbakiOsoakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-osoak-v2').then((module) => ({ default: module.ZenbakiOsoakIntroPage })))
 
@@ -205,6 +206,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/dbh3/numeros-racionales/*',
                         element: <ArrazionalakDBH3Page />,
+                    },
+                    // Potencias y raíces de 3.º ESO: unidad V2
+                    {
+                        path: 'matematika/dbh3/potencias-raices/*',
+                        element: <BerreturakDBH3Page />,
                     },
                     // Números reales de 4.º ESO (matemáticas aplicadas): unidad V2
                     {
