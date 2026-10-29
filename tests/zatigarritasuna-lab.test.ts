@@ -138,7 +138,10 @@ test('sorting problems counts mistakes', () => {
     for (const id of [1701, 1702, 1703]) assert.ok(solved(sortChallenges, id, state))
     const wrong = classifyCard(initialSortState, 'tiles', 'lcm')
     assert.equal(wrong.mistakes, 1)
-    assert.equal(problemCards.filter((card) => card.kind === 'gcd').length, 4)
+    assert.equal(problemCards.length, 15)
+    assert.equal(new Set(problemCards.map((card) => card.id)).size, problemCards.length)
+    assert.equal(problemCards.filter((card) => card.kind === 'gcd').length, 7)
+    assert.equal(problemCards.filter((card) => card.kind === 'lcm').length, 8)
 })
 
 test('no challenge is solved by the starting state', () => {

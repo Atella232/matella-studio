@@ -10,3 +10,5 @@ Sources: Santillana 1.º ESO `LIBROS/1_ESO/Santillana/Unidad_02_Divisibilidad.pd
 Scope: 12 lessons (no rules for 7/11, which stay in DBH2). Reuses DBH2 `figures.tsx`, `notation.ts`, `math.ts` and CSS; own figures: BagsFigure, DivisorTableFigure, PoolCalendarFigure. Thousands with a dot in KaTeX (`5{.}027`), as in class.
 
 Phases (all done 2026-09-28; merged to main fast-forward c145bfe, pushed and deployed to matella.net the same day at the owner's request): 1) 12 lessons [1cdbe61]; 2) diagnostic 8, practice 19, bank 30 (12 closed), challenges 12, `normalizeInput: readNaturalAnswer` [13b9651]; 3) lab 8 tools / 31 challenges (ids 31xx–38xx): DBH2 tools now take `challenges` (CriteriaTool also `criteria`, here [2,3,5,9,10]) + new divisor TableTool [32ac9ac]; 4) games race/hunt/factor/memory (ids 41xx–44xx): DBH2 Hunt/Factor/Memory take `config` {game, levels}; race adds a "left over" question in circuit 0, caps DBH2 tiers at ≤1 [c145bfe]. Tests: tests/zatigarritasuna-dbh1-{content,lab,games}.test.ts.
+
+**2026-10-29 · sort tool.** «ZKH ala MKT?» (`sort`) uses the shared DBH2 `problemCards`, which grew from 8 to 15 cards; details in [[zatigarritasuna-dbh2]] note.
