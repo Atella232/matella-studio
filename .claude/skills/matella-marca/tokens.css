@@ -1,0 +1,203 @@
+/* Matella · «Cuaderno a color» — variables y componentes para cualquier HTML
+   (artifacts, documentos imprimibles, kits). Copia lo que necesites.
+   Fuentes (en el <head>):
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Noto+Sans+Arabic:wght@400;600;700&display=swap" />
+*/
+
+:root {
+  --paper: #f6f1e7;
+  --paper-deep: #efe7d6;
+  --paper-note: #f3ebdc;
+  --card: #fffcf6;
+  --ink: #1d2733;
+  --ink-soft: #3a4452;
+  --muted: #58616e;
+  --line: #e3d9c6;
+  --line-strong: #cfc2aa;
+  --grid-line: rgba(29, 39, 51, 0.07);
+
+  --blue: #2f6fdb;    --blue-tint: #dde7f7;    --blue-ink: #1e4a96;
+  --violet: #7a55d6;  --violet-tint: #e8e0f7;  --violet-ink: #4a2f9e;
+  --mustard: #e0a100; --mustard-tint: #fbebc0; --mustard-ink: #6b4e12;
+  --coral: #d9502e;   --coral-tint: #f8dcd0;   --coral-ink: #8f2c14;
+  --green: #267b53;   --green-tint: #d6eddf;   --green-ink: #17482f;
+  --red: #b3261e;     --red-tint: #f9dedc;
+
+  --font-display: "Fraunces", "Noto Sans Arabic", Georgia, serif;
+  --font-body: "Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --shadow: 4px 4px 0 var(--ink);
+  --shadow-lg: 6px 6px 0 var(--ink);
+  --radius: 16px;
+
+  /* Color de la etapa actual (por defecto azul); cámbialo con data-tone */
+  --stage: #2f6fdb; --stage-on: #ffffff; --stage-tint: #dde7f7; --stage-soft: #f1f5fc; --stage-ink: #1e4a96;
+}
+
+[data-tone="blue"]    { --stage: #2f6fdb; --stage-on: #ffffff; --stage-tint: #dde7f7; --stage-soft: #f1f5fc; --stage-ink: #1e4a96; }
+[data-tone="violet"]  { --stage: #7a55d6; --stage-on: #ffffff; --stage-tint: #e8e0f7; --stage-soft: #f5f1fc; --stage-ink: #4a2f9e; }
+[data-tone="mustard"] { --stage: #e0a100; --stage-on: #1d2733; --stage-tint: #fbebc0; --stage-soft: #fdf7e6; --stage-ink: #6b4e12; }
+[data-tone="coral"]   { --stage: #c4432a; --stage-on: #ffffff; --stage-tint: #f8dcd0; --stage-soft: #fcf1ec; --stage-ink: #9a3218; }
+[data-tone="green"]   { --stage: #267b53; --stage-on: #ffffff; --stage-tint: #d6eddf; --stage-soft: #eff7f2; --stage-ink: #1f6443; }
+
+/* Modo noche (solo si el formato lo exige, p. ej. artifacts): tinta de fondo, papel de texto.
+   Los colores de etapa se mantienen; la sombra dura pasa a ser negra. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1d2733; --paper-deep: #17202a; --paper-note: #222d3a; --card: #26323f;
+    --ink: #f6f1e7; --ink-soft: #e3d9c6; --muted: #b5ad9e; --line: #34414f; --line-strong: #4a5868;
+    --grid-line: rgba(246, 241, 231, 0.06);
+    --shadow: 4px 4px 0 #0c1117; --shadow-lg: 6px 6px 0 #0c1117;
+  }
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+[dir="rtl"] {
+  --font-display: "Noto Sans Arabic", "Fraunces", serif;
+  --font-body: "Noto Sans Arabic", "Atkinson Hyperlegible", system-ui, sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* Etiqueta pequeña en mayúsculas («GOGORATU», «1. ETAPA») */
+.m-eyebrow {
+  color: var(--stage-ink);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Fondo de papel milimetrado (detrás de modelos, gráficas y portadas) */
+.m-grid {
+  background-color: var(--card);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Tarjeta normal y tarjeta destacada (borde de tinta + sombra dura) */
+.m-card {
+  padding: 20px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--card);
+}
+.m-card--key {
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow);
+}
+
+/* Botones */
+.m-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 22px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  font: 700 16px/1 var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.m-btn--primary { color: var(--paper); background: var(--ink); box-shadow: 4px 4px 0 var(--mustard); }
+.m-btn--stage { color: var(--stage-on); background: var(--stage); box-shadow: 3px 3px 0 var(--ink); }
+.m-btn--ghost { color: var(--ink); background: var(--card); }
+.m-btn--primary:hover, .m-btn--stage:hover { transform: translate(-1px, -1px); }
+
+/* Chip / píldora */
+.m-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  color: var(--stage-ink);
+  background: var(--stage-tint);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Idea clave («Gogoratu»): mostaza claro, girada −1° */
+.m-takeaway {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 24px;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  background: var(--mustard-tint);
+  box-shadow: var(--shadow);
+  transform: rotate(-1deg);
+}
+.m-takeaway__icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: var(--mustard-tint);
+  background: var(--ink);
+  font: 800 22px/1 var(--font-display);
+}
+.m-takeaway__label { color: var(--mustard-ink); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.m-takeaway p { margin: 2px 0 0; font: italic 600 23px/1.25 var(--font-display); }
+[dir="rtl"] .m-takeaway p { font-style: normal; }
+
+/* Banda de etapa / cabecera de tema */
+.m-stage-band {
+  padding: 18px 22px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  color: var(--stage-on);
+  background: var(--stage);
+  box-shadow: var(--shadow);
+}
+
+/* Logo en línea: <a class="m-logo"><span class="m-logo__mark"><i></i><i></i><i></i><i></i></span>Matella</a> */
+.m-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font: 800 24px/1 var(--font-display);
+  text-decoration: none;
+}
+.m-logo__mark {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  border: 2px solid #1d2733;
+  border-radius: 9px;
+  box-shadow: 2px 2px 0 #1d2733;
+  transform: rotate(-4deg);
+}
+.m-logo__mark i:nth-child(1) { background: #2f6fdb; }
+.m-logo__mark i:nth-child(2) { background: #e0a100; }
+.m-logo__mark i:nth-child(3) { background: #d9502e; }
+.m-logo__mark i:nth-child(4) { background: #1d2733; }
+
+/* Árabe: fórmulas siempre de izquierda a derecha */
+.m-ltr { unicode-bidi: isolate; direction: ltr; }
