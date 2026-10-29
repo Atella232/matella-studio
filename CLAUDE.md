@@ -17,7 +17,7 @@ El dueño habla castellano: contéstale en castellano y con palabras sencillas.
 - Una rama por cambio (`feat/...`). Antes de dar algo por terminado: tests, lint y build en verde.
 - En sesiones en la nube: no publicar ni tocar `main` ni `gh-pages`. Sube tu rama y el dueño la fusiona y publica desde su Mac.
 - Cada unidad V2 sigue `docs/unit-model.md`, `docs/unit-quality-checklist.md` y `docs/unit-reusable-template.md`.
-- `docs/claude-notes/` guarda el historial de cada unidad: ids de ejercicios y retos, qué se reutiliza, fases hechas y trucos. Lee primero su `README.md` y la nota de la unidad que vayas a tocar. Al terminar, añade a esa nota lo hecho (commit, ids nuevos, trucos).
+- `docs/claude-notes/` guarda el historial de cada unidad: ids de ejercicios y retos, qué se reutiliza, fases hechas y trucos. Lee primero su `README.md` y la nota de la unidad que vayas a tocar. Actualiza esa nota mientras trabajas, no solo al final: al cerrar cada fase y antes de parar, añade lo hecho (commit, ids nuevos, trucos) y deja al final una sección «En curso» con lo que queda a medias y el siguiente paso, para que una sesión nueva pueda seguir solo con «sigue con la unidad X». Al terminar la unidad, borra esa sección.
 - Las fuentes (libros de Santillana y Anaya) no están en el repositorio y no deben subirse: el repositorio es público.
 
 ## Trucos que valen para todo
