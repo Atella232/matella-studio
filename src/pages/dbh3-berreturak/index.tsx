@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { RealsHeroArt } from '../dbh4-aplikatuak-errealak/figures'
 import { powersChallenges, powersDiagnostic, powersExerciseBank, powersPractice } from './content'
+import { PowersGames } from './games'
+import { POWERS_GAME_RECORDS_KEY, powersGameProgressIds } from './games/info'
 import { PowersLaboratory } from './lab'
 import { powersLabChallengeIds, powersLabToolForTopic, powersLabTools } from './lab/labTools'
 import { powersStages, powersTopics } from './lessons'
@@ -35,6 +37,16 @@ const berreturakUnit: UnitDefinition = {
         progressIds: powersLabChallengeIds,
         toolForTopic: powersLabToolForTopic,
         render: (props) => <PowersLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko: lasterketa, eskala kosmikoa, atera errotik, zubiaren zaindaria, berreturen detektibea eta memoria.',
+            es: 'Seis juegos: carrera, escala cósmica, saca de la raíz, el guardián del puente, detective de potencias y memoria.',
+            ar: 'ست ألعاب: السباق والسُّلّم الكوني وأخرِج من الجذر وحارس الجسر ومخبر القوى والذاكرة.'
+        },
+        progressIds: powersGameProgressIds,
+        recordsKey: POWERS_GAME_RECORDS_KEY,
+        render: (props) => <PowersGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat edo zatiki bat: 5, −3, 1,5 edo 9/25. Emaitza erradikal edo 10en berretura bat bada, eskatzen den zenbakia bakarrik.', es: 'Escribe un número o una fracción: 5, −3, 1,5 o 9/25. Si el resultado es un radical o una potencia de 10, solo el número que se pide.', ar: 'اكتب عددًا أو كسرًا: 5 أو ⁦−3⁩ أو 1.5 أو 9/25. وإذا كانت النتيجة جذرًا أو قوة للعدد 10 فاكتب العدد المطلوب فقط.' },

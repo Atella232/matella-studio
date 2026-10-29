@@ -18,6 +18,16 @@ Fuentes: Santillana 3.º U2 (págs. 39–72; el PDF es el solucionario, escanead
 - Test: `tests/berreturak-dbh3-lab.test.ts` (retos fijos resueltos y no resueltos al abrir; 150 semillas por reto infinito; KaTeX, árabe, sufijos euskera; geometría de la espiral).
 - Trucos: los `Stepper` calculan el valor con lo ya pintado, así que al probar desde la consola hay que esperar entre clics; cambiar de herramienta por `location.hash` no cambia la herramienta, se hace con las pestañas; `observe` es texto plano (nada de `$`).
 
+## Fase 3 (juegos) — hecha
+- 6 juegos: carrera de 5 circuitos (37101–37105, `race.ts`, 16 tipos de error), **4 propios** — `order` Escala cósmica (37301–37303, ordenar tamaños en notación científica, con tranpas: mismo exponente y números sin normalizar), `extract` Saca de la raíz (37401–37403, fichas de factores primos y parejas), `guard` El guardián del puente (37501–37503, racional o irracional), `detective` Detective de potencias y raíces (37601–37603, 15 errores típicos del tema) — y parejas (37201–37203, `boards.ts`).
+- Lógica pura en `games/order.ts`, `extract.ts`, `guard.ts`, `detective.ts`, `race.ts`, `boards.ts`; interfaz en `OrderGame.tsx`, `ExtractGame.tsx`, `GuardGame.tsx`, `DetectiveGame.tsx` (reutiliza `Detective.css` de zatikiak) y `Games.css`.
+- Test: `tests/berreturak-dbh3-games.test.ts` (carrera: 5 circuitos × 3 niveles × 120 semillas, cada respuesta recalculada desde `meta`; parejas verdaderas por evaluación numérica; detective: cada línea de cada caso evaluada, la errónea falla y las anteriores y el arreglo valen).
+- Inventario: 3 juegos propios + detective de patrón (sus fallos sí son los de esta unidad) y 4 herramientas propias.
+- Trucos: el hub guarda el juego abierto; para probar a mano otro juego, recarga la página. En el guardián no se habla de izquierda/derecha (en árabe el primer botón queda a la derecha).
+
+## Estado
+Rama `feat/potencias-raices-dbh3` con 3 fases (commits fase 1 `4a507e0`, fase 2 `cd97396`, fase 3 en el siguiente), tests/lint/build en verde (917 tests). Sin fusionar en `main` ni publicar.
+
 ## Ids reservados
 Lab: 361xx–364xx (una herramienta por centena). Juegos: carrera 37101–37105, parejas 37201–37203, propios 373xx–376xx.
 
