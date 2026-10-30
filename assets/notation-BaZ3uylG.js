@@ -1,0 +1,1 @@
+function c(e){const t=e.replace(/@DIV/g,"\\mathrm{Zat}").replace(/@GCD/g,"\\mathrm{ZKH}").replace(/@LCM/g,"\\mathrm{MKT}"),a=e.replace(/@DIV/g,"\\mathrm{Div}").replace(/@GCD/g,"\\text{m.c.d.}").replace(/@LCM/g,"\\text{m.c.m.}"),r=e.replace(/@DIV/g,"\\mathrm{Div}").replace(/@GCD/g,"\\text{GCD}").replace(/@LCM/g,"\\text{LCM}");return{eu:t,es:a,en:r,ar:t}}export{c as n};
