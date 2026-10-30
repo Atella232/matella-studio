@@ -33,7 +33,7 @@ Fuentes: Santillana 3.º U2 (págs. 39–72; el PDF es el solucionario, escanead
 - Test de ids: diagnóstico, laboratorio y juegos no repiten ningún id.
 
 ## Estado
-Rama `feat/potencias-raices-dbh3` con 3 fases (commits fase 1 `4a507e0`, fase 2 `cd97396`, fase 3 `ef46ff4`), tests/lint/build en verde (tests). Sin fusionar en `main` ni publicar.
+Rama `feat/potencias-raices-dbh3` con 3 fases (commits fase 1 `4a507e0`, fase 2 `cd97396`, fase 3 `ef46ff4`), tests/lint/build en verde (tests). Fusionada en `main` en local (2d35676); sin subir ni publicar.
 
 ## Ids reservados
 Lab: 361xx–364xx (una herramienta por centena). Juegos: carrera 37101–37105, parejas 37201–37203, propios 373xx–376xx.
