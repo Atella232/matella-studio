@@ -15,7 +15,7 @@ Historial por unidad (ids, reutilización, fases, trucos). Copiadas de la memori
 - [Zenbaki errealak 4. DBH aplikatuak](zenbaki-errealak-dbh4ap.md) — 4. DBH split in two; first applied unit deployed 2026-10-02; goal: first unit of every course
 - [Errealak eta ehunekoak 4. DBH akademikoak](errealak-ehunekoak-dbh4ak.md) — first academic unit deployed 2026-10-02; Arabic SVG + Basque suffix gotchas
 - [Arrazionalak 3. DBH](arrazionalak-dbh3.md) — first 3. DBH unit deployed 2026-10-02; reuse map
-- [Berreturak eta erroak 3. DBH](berreturak-dbh3.md) — 2nd 3. DBH unit (potencias y raíces, replaces `numeros-reales`); 4 own tools + 4 own games; merged into main locally 2026-10-29 (2d35676), not deployed
+- [Berreturak eta erroak 3. DBH](berreturak-dbh3.md) — 2nd 3. DBH unit (potencias y raíces, replaces `numeros-reales`); 4 own tools + 4 own games; merged and deployed 2026-10-30
 - [Remaining ESO units](remaining-eso-units.md) — owner's order 2026-10-02: finish 1./2. DBH before Bachillerato; progress log
 - [Potentziak DBH4 akademikoak](potentziak-dbh4ak.md) — 2nd 4.º académicas unit (potencias, radicales, logaritmos): ids, progress
 - [Polinomioak DBH4 akademikoak](polinomioak-dbh4ak.md) — 3rd 4.º académicas unit (polinomios y fracciones algebraicas): ids, progress
