@@ -1,6 +1,6 @@
 ---
 name: proportzionaltasuna-dbh4ap-lab-plus
-description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) committed 90b3caa on feat/proportzionaltasuna-dbh4ap-lab-motion, fast-forwarded into main and deployed 2026-10-27 (bundle index-buE2QkQf); phase 4 (J1 error detective, J2 bank) committed 866d9d5 on feat/proportzionaltasuna-dbh4ap-games, fast-forwarded into main and deployed 2026-10-27 (bundle index-B-ETaI-9); phase 5 (J3 meeting on the road, J4 fill the tank) committed b26ae19 on feat/proportzionaltasuna-dbh4ap-games-road, fast-forwarded into main and deployed 2026-10-28 (bundle index-BeM7dYPx); phase 6 (J5 perfect mixture, J6 shop till) committed 789f9df on feat/proportzionaltasuna-dbh4ap-games-mix, fast-forwarded into main and deployed 2026-10-28 (bundle index-CfxntXIn); phase 7 (J7 own memory boards) committed fa2ead7 on feat/proportzionaltasuna-dbh4ap-memory, fast-forwarded into main and deployed 2026-10-28 (bundle index-B5-qfK7e); phase 8 (L4 shopping receipt) committed 88b48e0 on feat/proportzionaltasuna-dbh4ap-receipt, fast-forwarded into main and deployed 2026-10-29 (bundle index-5EvrNL4x)"
+description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) committed 90b3caa on feat/proportzionaltasuna-dbh4ap-lab-motion, fast-forwarded into main and deployed 2026-10-27 (bundle index-buE2QkQf); phase 4 (J1 error detective, J2 bank) committed 866d9d5 on feat/proportzionaltasuna-dbh4ap-games, fast-forwarded into main and deployed 2026-10-27 (bundle index-B-ETaI-9); phase 5 (J3 meeting on the road, J4 fill the tank) committed b26ae19 on feat/proportzionaltasuna-dbh4ap-games-road, fast-forwarded into main and deployed 2026-10-28 (bundle index-BeM7dYPx); phase 6 (J5 perfect mixture, J6 shop till) committed 789f9df on feat/proportzionaltasuna-dbh4ap-games-mix, fast-forwarded into main and deployed 2026-10-28 (bundle index-CfxntXIn); phase 7 (J7 own memory boards) committed fa2ead7 on feat/proportzionaltasuna-dbh4ap-memory, fast-forwarded into main and deployed 2026-10-28 (bundle index-B5-qfK7e); phase 8 (L4 shopping receipt) committed 88b48e0 on feat/proportzionaltasuna-dbh4ap-receipt, fast-forwarded into main and deployed 2026-10-29 (bundle index-5EvrNL4x); phase 9 (M6 interest in months and days) on feat/proportzionaltasuna-dbh4ap-interest, not deployed yet"
 ---
 
 On 2026-10-26 the owner asked for the same kind of review as [[zatikiak-dbh2-lab-plus]], this time for `src/pages/dbh4-aplikatuak-proportzionaltasuna`. The unit was built in October (see [[remaining-eso-units]]).
@@ -533,3 +533,67 @@ Committed as 88b48e0, fast-forwarded into main, pushed and deployed to matella.n
 - Amounts in the SVG are wrapped in LRI/PDI; otherwise «? €» came out as «€ ?» on the Arabic page.
 - The Write tool stored the LRI/PDI marks raw again (in `ReceiptTool.tsx`); they were turned into escapes.
 - Seen live: in Basque, «(% 21)» in challenge 43801 can break between «%» and «21» on a phone. The texts use ordinary spaces around % and €, like the rest of the site.
+
+## Phase 9 (branch `feat/proportzionaltasuna-dbh4ap-interest`, 2026-10-30)
+
+M6 «Interesa hilabete eta egunetan / Interés en meses y días / الفائدة بالأشهر والأيام / Interest in months and days». The lab now has 14 tools.
+
+- A new tool of this unit, `calendar` (stage interest). The lesson `simple-interest` now opens it. The borrowed 2. DBH `interest` tool stays in the lab, with its challenges 21501–21504, so that progress already earned is kept.
+- Logic in `lab/calendar.ts`, component in `lab/CalendarTool.tsx`, CSS in `lab/Calendar.css`.
+- `lab/DecimalField.tsx` and `lab/decimalInput.ts`: a field like `NumberField` that takes up to two decimals (3,2 %, 448,80 €). Each language has its own decimal mark: 3,2 in eu and es (18.700 and 18 700 are thousands), and 3.2 in en (18,700 is thousands) and ar. It formats its text again when the language changes.
+- Controls:
+  - the unknown: interest, principal, rate or time;
+  - the unit: years, months or days;
+  - the three known values.
+- Changing the unknown keeps the case: the old unknown keeps its value (I = 30 € → «which principal gives 30 €?»).
+- Changing the unit converts the time when the result is exact (6 months = 180 days). The answer then still holds, unless the unknown is the time.
+- The drawing:
+  - one row is one year, with the interest of one year and of one month (or day) above it;
+  - 12 squares per row, one month each, or 30 days each;
+  - in years, each square is one year, with up to 10 squares;
+  - the squares are filled up to t.
+- Before the answer, the unknown shows as «?».
+- After the answer:
+  - the formula in two lines: with letters, then with the data and the result;
+  - why the divisor is 1200 or 36 000;
+  - for the interest, what you would get by taking the months or days as years («12 times as much»).
+- An unknown outside the field limits (rate above 30 %, time beyond the drawing) gives a note and no answer field.
+- English answers: `typeCalendarAnswer` keeps a `reading` with the thousands commas taken out, so a challenge's `isSolved` reads «18,700» as 18 700. This avoids open item 1 of `idioma-ingles.md` for this tool. The other tools of the unit (receipt, percent bar, rule, graph) still have it.
+- Challenges 43901–43905 come from the lesson:
+  - 6000 € at 3 % for 8 months → 120;
+  - 1000 € at 4 % for 4 months → 13,33;
+  - 448,80 € at 3,2 % in 9 months → C = 18 700;
+  - 120 000 → 126 750 in 6 months → r = 11,25;
+  - 3600 € at 5 % giving 30 € → 60 days.
+- Endless `calendarExtra`: any unknown and any unit (months and days more often), with every answer exact. The hint is the formula with letters.
+- In passing:
+  - English fix in the 2. DBH `interestExtra`, which said «años» in English;
+  - English fix in `receiptData`, which had Spanish words in English.
+- Tests in `tests/proportzionaltasuna-dbh4ap-calendar.test.ts`:
+  - the lesson cases, the working and the units;
+  - changing the unknown, the unit and the data;
+  - English answers with commas;
+  - the decimal fields;
+  - the challenges, and 300 endless seeds.
+- The text checks run in four languages:
+  - Basque: no case ending on a number (now also `ez`);
+  - Arabic: no `{,}`;
+  - English: no decimal comma;
+  - es/eu: no space that can break a number from € or %.
+
+### Checks
+
+- Suite 923/923; lint and build OK. The unit inventory gives OK (9 own tools).
+- At 375 px, no sideways scroll and no SVG text outside the drawing:
+  - eu: challenge 1 data, 120 €;
+  - es: principal 18 700 from 448,80 € and 3,2 %, and challenge 43903 solved;
+  - en: 120,000 and 6,750 typed with commas, 11.25, and challenge 43904 solved;
+  - ar: 60 days, and challenge 43905 solved;
+  - es: years mode and the note for an impossible unknown.
+
+### Gotchas
+
+- The Write tool stored the LRI/PDI marks and no-break spaces raw again; they were turned into escapes.
+- The first version wrote the formula in one line, which gave a scroll bar at 375 px. It is now two lines.
+- The lesson itself writes «1200ez» and «36 000z» in Basque: a case ending on a number. This phase does not change the lesson; the owner should decide.
+

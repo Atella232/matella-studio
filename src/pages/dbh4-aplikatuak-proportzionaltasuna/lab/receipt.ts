@@ -233,7 +233,7 @@ function receiptData(state: ReceiptState): LocalizedText {
     return say(
         `${price} € BEZik gabe.${discount ? ` Deskontua: % ${discount}.` : ''} BEZa: % ${vat}.${coupon ? ` Kupoia: ${coupon} €.` : ''}`,
         `${price} € sin IVA${discount ? `, un ${discount} % de descuento` : ''}, IVA del ${vat} %${coupon ? ` y un cupón de ${coupon} €` : ''}.`,
-        `${price} € دون ضريبة.${discount ? ` الخصم ${discount}٪.` : ''} الضريبة ${vat}٪.${coupon ? ` القسيمة ${coupon} €.` : ''}`, `€${price} without VAT${discount ? `, un ${discount} % de descuento` : ''}, VAT of ${vat}%${coupon ? ` y un cupón de ${coupon} €` : ''}.`
+        `${price} € دون ضريبة.${discount ? ` الخصم ${discount}٪.` : ''} الضريبة ${vat}٪.${coupon ? ` القسيمة ${coupon} €.` : ''}`, `€${price} without VAT${discount ? `, a ${discount}% discount` : ''}, VAT at ${vat}%${coupon ? ` and a €${coupon} coupon` : ''}.`
     )
 }
 

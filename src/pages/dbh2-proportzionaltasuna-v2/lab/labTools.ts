@@ -427,7 +427,7 @@ export const interestExtra: LabChallengeMaker<InterestState> = freshFrom(initial
         prompt: say(
             `Kapitala: ${capital} €; ${years} urte. Zer interes-tasarekin lortzen da ${interest} € interes?`,
             `¿A qué tipo de interés producen ${capital} € en ${years} ${years === 1 ? 'año' : 'años'} un interés de ${interest} €?`,
-            `رأس المال ${capital} € وعدد السنوات ${years}. بأي سعر فائدة نحصل على فائدة ${interest} €؟`, `At what interest rate will €${capital} earn €${interest} in interest in ${years} ${years === 1 ? 'año' : 'años'}?`
+            `رأس المال ${capital} € وعدد السنوات ${years}. بأي سعر فائدة نحصل على فائدة ${interest} €؟`, `At what interest rate will €${capital} earn €${interest} in interest in ${years} ${years === 1 ? 'year' : 'years'}?`
         ),
         hint: say(
             `Urtero $${interest}\\mathbin{:}${years}=${yearly}$ € sortu behar ditu.`,

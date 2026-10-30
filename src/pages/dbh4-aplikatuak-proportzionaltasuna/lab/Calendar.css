@@ -1,0 +1,14 @@
+/* The interest calendar (lab tool `calendar`): the drawing and its caption */
+
+.calendar-board {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.calendar-caption {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    text-align: center;
+}

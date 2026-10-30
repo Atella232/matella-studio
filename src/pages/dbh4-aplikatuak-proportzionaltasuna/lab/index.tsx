@@ -7,6 +7,7 @@ import { ClassifyTool } from '../../dbh1-proportzionaltasuna-v2/lab/ProportionTo
 import { ChainTool, CompoundTool, InterestTool, ShareTool } from '../../dbh2-proportzionaltasuna-v2/lab/ProportionDbh2Tools'
 import { proportionDbh4ApStages } from '../lessons'
 import { proportionDbh4ApLabTools, type ProportionDbh4ApLabToolId } from './labTools'
+import { CalendarTool } from './CalendarTool'
 import { PercentBarTool } from './PercentBarTool'
 import { ReceiptTool } from './ReceiptTool'
 import { RoadGraphTool } from './RoadGraphTool'
@@ -22,6 +23,7 @@ const toolComponents: Record<ProportionDbh4ApLabToolId, (props: LabToolProps) =>
     chain: ChainTool,
     receipt: ReceiptTool,
     interest: InterestTool,
+    calendar: CalendarTool,
     growth: GrowthTool,
     mixture: MixtureTool,
     motion: MotionTool,

@@ -6,6 +6,7 @@ import type { ProportionDbh4ApStageId } from '../lessons.tsx'
 import { classifyChallenges } from '../../dbh1-proportzionaltasuna-v2/lab/labTools.ts'
 import { chainChallenges, compoundChallenges, interestChallenges, shareChallenges } from '../../dbh2-proportzionaltasuna-v2/lab/labTools.ts'
 import { percentBarChallenges } from './percentBar.ts'
+import { calendarChallenges } from './calendar.ts'
 import { receiptChallenges } from './receipt.ts'
 import { roadGraphChallenges } from './roadGraph.ts'
 import { ruleChallenges } from './ruleOfThree.ts'
@@ -24,7 +25,7 @@ import { decimalSeparatorFor, thousandsSeparatorFor } from '../../../utils/numbe
    and tests/proportzionaltasuna-dbh4ap-extra.test.ts.
    ========================================================================== */
 
-export type ProportionDbh4ApLabToolId = 'classify' | 'rule' | 'compound' | 'share' | 'percentbar' | 'chain' | 'receipt' | 'interest' | 'growth' | 'mixture' | 'motion' | 'graph' | 'taps'
+export type ProportionDbh4ApLabToolId = 'classify' | 'rule' | 'compound' | 'share' | 'percentbar' | 'chain' | 'receipt' | 'interest' | 'calendar' | 'growth' | 'mixture' | 'motion' | 'graph' | 'taps'
 
 export interface ProportionDbh4ApLabTool extends LabToolInfo {
     id: ProportionDbh4ApLabToolId
@@ -80,6 +81,7 @@ export const proportionDbh4ApLabTools: ProportionDbh4ApLabTool[] = [
     { id: 'chain', stage: 'percent', lessonTopic: 'chained', title: say('Ehuneko kateatuak', 'Porcentajes encadenados', 'النسب المتتالية', 'Chained percentages'), observe: say('Aldaketa bakoitza bere indizeaz biderkatzen da. % 10 igo eta % 10 jaitsiz gero, ez da hasierara itzultzen.', 'Cada cambio multiplica por su índice. Si subes un 10 % y bajas un 10 %, no vuelves al principio.', 'كل تغيّر يضرب في مؤشره. إذا زدت 10٪ ثم خفّضت 10٪ فلن تعود إلى البداية.', 'Each change multiplies by its multiplier. If you go up 10% and then down 10%, you do not get back to the start.') },
     { id: 'receipt', stage: 'percent', lessonTopic: 'chained', title: say('Erosketaren tiketa', 'El tique de la compra', 'إيصال الشراء', 'The shopping receipt'), observe: say('Deskontuak eta BEZak beren indizeaz biderkatzen dute; beraz, haien ordenak ez du axola. Kupoiak euro finkoak kentzen ditu, eta aurrezten duena atzetik datozen indizeez biderkatzen da: BEZaren aurretik, haren BEZa ere aurrezten duzu.', 'El descuento y el IVA multiplican por su índice, así que su orden da igual. El cupón resta euros fijos, y lo que ahorra se multiplica por los índices que vienen detrás: antes del IVA, te ahorras también su IVA.', 'الخصم والضريبة يضربان في مؤشريهما، فلا يهمّ ترتيبهما. أما القسيمة فتطرح يوروهات ثابتة، ويُضرب ما توفّره في المؤشرات التي تأتي بعدها: قبل الضريبة توفّر ضريبتها أيضًا.', 'The discount and the VAT multiply by their multipliers, so their order does not matter. The coupon takes off a fixed amount in euros, and what it saves is multiplied by the multipliers that come after it: before the VAT, you also save the VAT on it.') },
     { id: 'interest', stage: 'interest', lessonTopic: 'simple-interest', title: say('Interes bakuna', 'Interés simple', 'الفائدة البسيطة', 'Simple interest'), observe: say('Urtero interes bera gehitzen da, hasierako kapitalaren % r. Urte bikoitza edo tasa bikoitza → interes bikoitza.', 'Cada año se suma el mismo interés, el r % del capital inicial. El doble de años o el doble de tipo → el doble de interés.', 'تُضاف كل سنة الفائدة نفسها، r٪ من رأس المال الأصلي. ضعف السنوات أو ضعف السعر ← ضعف الفائدة.', 'Each year the same interest is added: r% of the original principal. Double the years or double the rate → double the interest.') },
+    { id: 'calendar', stage: 'interest', lessonTopic: 'simple-interest', title: say('Interesa hilabete eta egunetan', 'Interés en meses y días', 'الفائدة بالأشهر والأيام', 'Interest in months and days'), observe: say('Hilabete bakoitzak urteko interesaren 1/12 ematen du, eta egun bakoitzak 1/360. Horregatik, 100 ordez 1200 (hilabeteak) edo 36\u00a0000 (egunak). Formula beretik ateratzen da edozein datu: interesa, kapitala, tasa edo denbora.', 'Cada mes da 1/12 del interés de un año, y cada día 1/360. Por eso, en lugar de 100, se divide entre 1200 (meses) o 36\u00a0000 (días). De la misma fórmula sale cualquier dato: el interés, el capital, el tipo o el tiempo.', 'كل شهر يعطي 1/12 من فائدة السنة، وكل يوم 1/360. لذلك نقسم على 1200 (الأشهر) أو 36000 (الأيام) بدل 100. ومن الصيغة نفسها نستخرج أي معطى: الفائدة أو رأس المال أو السعر أو المدة.', 'Each month gives 1/12 of a year\'s interest, and each day 1/360. That is why, instead of 100, you divide by 1200 (months) or 36,000 (days). Any value comes from the same formula: the interest, the principal, the rate or the time.') },
     { id: 'growth', stage: 'interest', lessonTopic: 'compound-interest', title: say('Bakuna ala konposatua', 'Simple o compuesto', 'بسيطة أم مركّبة', 'Simple or compound'), observe: say('Lehen urtean biak berdinak dira; gero konposatua aurrera doa, interesak ere interesa sortzen duelako. Aldi gehiago (k) → apur bat gehiago.', 'El primer año los dos coinciden; después el compuesto se adelanta, porque el interés también produce interés. Más periodos (k) → algo más.', 'في السنة الأولى يتساويان؛ ثم تتقدم المركّبة لأن الفائدة تُنتج فائدة. فترات أكثر (k) ← أكثر قليلًا.', 'In the first year the two match; after that compound interest pulls ahead, because interest also earns interest. More periods (k) → a little more.') },
     { id: 'mixture', stage: 'problems', lessonTopic: 'mixtures', title: say('Nahasketa', 'La mezcla', 'الخليط', 'The mixture'), observe: say('Prezio ertaina beti bi prezioen artean dago, eta kantitate handiena duenetik hurbilago. Kantitate berdinekin, erdian.', 'El precio medio siempre queda entre los dos precios, y más cerca del que tiene más cantidad. Con cantidades iguales, justo en medio.', 'يقع السعر المتوسط دائمًا بين السعرين، وأقرب إلى الأكثر كمية. وبكميتين متساويتين في المنتصف تمامًا.', 'The average price always lies between the two prices, closer to the one with the larger amount. With equal amounts, it is exactly in the middle.') },
     { id: 'motion', stage: 'problems', lessonTopic: 'motion', title: say('Bi ibilgailu errepidean', 'Dos vehículos en la carretera', 'مركبتان على الطريق', 'Two vehicles on the road'), observe: say('Elkarrengana doazenean tartea abiaduren baturan txikitzen da; atzetik doazenean, abiaduren kenduran. Azkarrena atzean ez badago, ez dira inoiz elkartzen.', 'Al encuentro, la distancia se acorta a la suma de las velocidades; en una persecución, a su diferencia. Si el rápido no va detrás, no se encuentran nunca.', 'في التلاقي تقصر المسافة بمجموع السرعتين، وفي المطاردة بفرقهما. وإذا لم يكن الأسرع في الخلف فلن يلتقيا أبدًا.', 'When they are moving towards each other, the gap closes at the sum of the speeds; in a chase, at their difference. If the faster one is not behind, they never meet.') },
@@ -97,7 +99,7 @@ export const proportionDbh4ApLabToolForTopic: Record<string, ProportionDbh4ApLab
     'percent-calc': 'percentbar',
     index: 'percentbar',
     chained: 'receipt',
-    'simple-interest': 'interest',
+    'simple-interest': 'calendar',
     'compound-interest': 'growth',
     periods: 'growth',
     mixtures: 'mixture',
@@ -662,6 +664,7 @@ export const proportionDbh4ApLabChallengeIds = [
     ...chainChallenges,
     ...receiptChallenges,
     ...interestChallenges,
+    ...calendarChallenges,
     ...growthChallenges,
     ...mixtureChallenges,
     ...motionChallenges,
