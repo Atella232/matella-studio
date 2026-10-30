@@ -1,0 +1,92 @@
+import { pick } from '../../../features/unit-v2/games/random.ts'
+import type { LabChallenge, LabChallengeMaker } from '../../../features/unit-v2/lab/types.ts'
+import type { LocalizedText } from '../../../features/unit-v2/types.ts'
+
+/* ==========================================================================
+   L3 · Escala de magnitudes: the learner predicts the exponent n of the size
+   of a real object, a·10ⁿ metres, then checks it on a strip of powers of ten.
+   Sizes are rounded to two or three figures; they are orders of magnitude,
+   not measurements. Pure state logic.
+   ========================================================================== */
+
+export interface ScaleObject {
+    id: string
+    name: LocalizedText
+    /** Mantissa as text with the comma, 1 ≤ a < 10 */
+    mantissa: string
+    exponent: number
+}
+
+/** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
+const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
+
+/** Sizes in metres (diameter, length or height), from the atom to the galaxy */
+export const scaleObjects: ScaleObject[] = [
+    { id: 'atom', name: say('Hidrogeno-atomo baten diametroa', 'El diámetro de un átomo de hidrógeno', 'قطر ذرة الهيدروجين'), mantissa: '1', exponent: -10 },
+    { id: 'virus', name: say('Koronabirus baten diametroa', 'El diámetro de un coronavirus', 'قطر فيروس كورونا'), mantissa: '1,2', exponent: -7 },
+    { id: 'cell', name: say('Globulu gorri baten diametroa', 'El diámetro de un glóbulo rojo', 'قطر كرية دم حمراء'), mantissa: '7', exponent: -6 },
+    { id: 'hair', name: say('Ile baten lodiera', 'El grosor de un cabello', 'سُمك شعرة'), mantissa: '7', exponent: -5 },
+    { id: 'ant', name: say('Inurri baten luzera', 'La longitud de una hormiga', 'طول نملة'), mantissa: '5', exponent: -3 },
+    { id: 'person', name: say('Pertsona baten altuera', 'La altura de una persona', 'طول شخص'), mantissa: '1,7', exponent: 0 },
+    { id: 'tower', name: say('Eiffel dorrearen altuera', 'La altura de la Torre Eiffel', 'ارتفاع برج إيفل'), mantissa: '3,3', exponent: 2 },
+    { id: 'everest', name: say('Everesten altuera', 'La altura del Everest', 'ارتفاع إيفرست'), mantissa: '8,8', exponent: 3 },
+    { id: 'earth', name: say('Lurraren diametroa', 'El diámetro de la Tierra', 'قطر الأرض'), mantissa: '1,27', exponent: 7 },
+    { id: 'sun', name: say('Eguzkiaren diametroa', 'El diámetro del Sol', 'قطر الشمس'), mantissa: '1,39', exponent: 9 },
+    { id: 'orbit', name: say('Lurretik Eguzkirako distantzia', 'La distancia de la Tierra al Sol', 'المسافة من الأرض إلى الشمس'), mantissa: '1,5', exponent: 11 },
+    { id: 'lightyear', name: say('Argi-urte bat', 'Un año luz', 'سنة ضوئية'), mantissa: '9,46', exponent: 15 },
+    { id: 'galaxy', name: say('Esne Bidearen diametroa', 'El diámetro de la Vía Láctea', 'قطر مجرة درب التبانة'), mantissa: '9,5', exponent: 20 }
+]
+
+export const SCALE_RANGE = { min: -11, max: 21 } as const
+
+export interface ScaleState {
+    object: number
+    /** The learner's prediction of the exponent */
+    guess: number
+    /** The learner pressed "check" for this object and guess */
+    revealed: boolean
+    /** Objects guessed right so far */
+    right: number[]
+}
+
+export const initialScaleState: ScaleState = { object: 5, guess: 3, revealed: false, right: [] }
+
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, Math.round(value)))
+
+/** Changing the object or the guess closes the answer: a new prediction is needed */
+export const setScale = (state: ScaleState, patch: Partial<Pick<ScaleState, 'object' | 'guess'>>): ScaleState => ({
+    ...state,
+    object: clamp(patch.object ?? state.object, 0, scaleObjects.length - 1),
+    guess: clamp(patch.guess ?? state.guess, SCALE_RANGE.min, SCALE_RANGE.max),
+    revealed: false
+})
+
+export const scaleCorrect = (state: Pick<ScaleState, 'object' | 'guess'>) => scaleObjects[state.object].exponent === state.guess
+
+/** Checks the prediction; a right one is remembered */
+export function revealScale(state: ScaleState): ScaleState {
+    const right = scaleCorrect(state) && !state.right.includes(state.object) ? [...state.right, state.object] : state.right
+    return { ...state, revealed: true, right }
+}
+
+const solved = (state: ScaleState) => state.revealed && scaleCorrect(state)
+
+export const scaleChallenges: LabChallenge<ScaleState>[] = [
+    { id: 36301, prompt: say('Asmatu pertsona baten altueraren berretzailea.', 'Acierta el exponente de la altura de una persona.', 'خمّن أس ارتفاع شخص.'), hint: say('Metro bat inguru da: $10^{0}$.', 'Es cerca de un metro: $10^{0}$.', 'نحو متر واحد: $10^{0}$.'), isSolved: (state) => solved(state) && scaleObjects[state.object].id === 'person' },
+    { id: 36302, prompt: say('Asmatu globulu gorri baten diametroaren berretzailea.', 'Acierta el exponente del diámetro de un glóbulo rojo.', 'خمّن أس قطر كرية الدم الحمراء.'), hint: say('Milimetro baten milarena inguru da: $10^{-6}$.', 'Es una milésima de milímetro, más o menos: $10^{-6}$.', 'نحو جزء من ألف من الملّيمتر: $10^{-6}$.'), isSolved: (state) => solved(state) && scaleObjects[state.object].id === 'cell' },
+    { id: 36303, prompt: say('Asmatu $10^{9}$ m baino handiagoa den objektu baten berretzailea.', 'Acierta el exponente de un objeto mayor que $10^{9}$ m.', 'خمّن أس جسم أكبر من $10^{9}$ م.'), hint: say('Planetak, izarrak eta galaxiak oso handiak dira.', 'Los astros y las galaxias son enormes.', 'الأجرام والمجرات ضخمة جدًا.'), isSolved: (state) => solved(state) && scaleObjects[state.object].exponent >= 9 },
+    { id: 36304, prompt: say('Asmatu $10^{-5}$ m baino txikiagoa den objektu baten berretzailea.', 'Acierta el exponente de un objeto menor que $10^{-5}$ m.', 'خمّن أس جسم أصغر من $10^{-5}$ م.'), hint: say('Berretzaile negatiboa: oso txikia.', 'Exponente negativo: muy pequeño.', 'أس سالب: صغير جدًا.'), isSolved: (state) => solved(state) && scaleObjects[state.object].exponent < -5 },
+    { id: 36305, prompt: say('Asmatu hiru objektu desberdinen berretzailea.', 'Acierta el exponente de tres objetos distintos.', 'خمّن أس ثلاثة أجسام مختلفة.'), hint: say('Aldatu objektua eta iragarri berriro.', 'Cambia de objeto y vuelve a predecir.', 'غيّر الجسم وتوقّع من جديد.'), isSolved: (state) => state.right.length >= 3 }
+]
+
+/** Endless practice: predict the exponent of an object picked at random. It never starts solved. */
+export const scaleExtra: LabChallengeMaker<ScaleState> = (random) => {
+    const index = scaleObjects.indexOf(pick(random, scaleObjects))
+    const object = scaleObjects[index]
+    return {
+        prompt: { eu: `Asmatu honen berretzailea: ${object.name.eu.toLowerCase()}.`, es: `Acierta el exponente: ${object.name.es.charAt(0).toLowerCase()}${object.name.es.slice(1)}.`, ar: `خمّن الأس: ${object.name.ar}.` },
+        hint: { eu: `Ordena handia: $10^{${object.exponent}}$ m inguru.`, es: `Orden de magnitud: unos $10^{${object.exponent}}$ m.`, ar: `رتبة المقدار: نحو $10^{${object.exponent}}$ م.` },
+        isSolved: (state) => state.object === index && solved(state),
+        solution: { object: index, guess: object.exponent, revealed: true, right: [] }
+    }
+}
