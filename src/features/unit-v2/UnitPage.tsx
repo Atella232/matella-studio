@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { MathText } from '../../components/MathText'
 import { DiagnosticQuiz } from './Diagnostic'
 import { Icon } from './icons'
+import { LessonCases, LessonMistakeBox } from './LessonExtras'
 import { PracticeArea, PracticeDeck } from './Practice'
 import { parseUnitPath, unitBasePath, unitPathFor, type PracticeMode } from './routing'
 import { useStoredIds, useStoredTopics } from './storage'
@@ -432,6 +433,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                     <h1 id="fraction-v2-lesson-title">{l(currentTopic.title)}</h1>
                     <p className="fraction-v2-lesson-goal"><strong>{l({ eu: 'Helburua:', es: 'Objetivo:', en: 'Goal:', ar: 'الهدف:' })}</strong> <MathText text={l(currentTopic.goal)} /></p>
                     <p className="fraction-v2-lesson-body"><MathText text={l(currentTopic.explanation)} /></p>
+                    {currentTopic.cases && <LessonCases cases={currentTopic.cases} language={language} />}
                     {currentTopic.problem && (
                         <div className="fraction-v2-lesson-problem">
                             <span>{l({ eu: 'Ebatz dezagun', es: 'Vamos a resolver', en: 'Let\'s solve', ar: 'لنحلّ' })}</span>
@@ -456,6 +458,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                     <figure className="fraction-v2-example">
                         <MathText text={pickMaybeText(language, currentTopic.example)} />
                     </figure>
+                    {currentTopic.mistake && <LessonMistakeBox mistake={currentTopic.mistake} language={language} />}
                     <aside className="fraction-v2-takeaway">
                         <span className="fraction-v2-takeaway-icon"><Icon name="bulb" size={22} /></span>
                         <div>

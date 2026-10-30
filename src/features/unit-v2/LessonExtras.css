@@ -1,0 +1,111 @@
+/* Lessons: the explanation split into case cards, and the typical-mistake box */
+
+.lesson-cases {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.lesson-cases li {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+    padding: 14px 16px;
+    border: 1.5px solid var(--line);
+    border-top: 5px solid var(--stage);
+    border-radius: 16px;
+    background: var(--card);
+}
+
+.lesson-cases strong {
+    color: var(--stage-ink);
+    font-family: var(--font-display);
+    font-size: 19px;
+    line-height: 1.25;
+}
+
+.fraction-v2 .lesson-cases p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+/* The formula at the foot of the card; a long one scrolls inside it */
+.lesson-cases-math {
+    margin-top: auto;
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 8px 10px;
+    border-radius: 12px;
+    background: var(--stage-soft);
+    font-size: 18px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.lesson-mistake {
+    display: grid;
+    gap: 8px;
+    max-width: 660px;
+    padding: 16px 18px;
+    border: 2px solid var(--error);
+    border-radius: 16px;
+    background: var(--card);
+}
+
+.lesson-mistake-label {
+    color: var(--error-ink);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.fraction-v2 .lesson-mistake p {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0;
+    padding: 8px 12px;
+    border-radius: 12px;
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+.lesson-mistake-wrong {
+    background: var(--error-tint);
+}
+
+.lesson-mistake-right {
+    background: var(--success-tint);
+}
+
+.lesson-mistake-mark {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    margin-top: 1px;
+    border-radius: 50%;
+    color: var(--card);
+}
+
+.lesson-mistake-wrong .lesson-mistake-mark {
+    background: var(--error);
+}
+
+.lesson-mistake-right .lesson-mistake-mark {
+    background: var(--success);
+}
+
+/* The sentence takes the width left by the mark, and wraps there */
+.lesson-mistake p > .math-text {
+    min-width: 0;
+}

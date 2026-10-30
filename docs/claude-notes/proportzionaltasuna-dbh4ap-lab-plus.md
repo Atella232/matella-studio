@@ -1,6 +1,6 @@
 ---
 name: proportzionaltasuna-dbh4ap-lab-plus
-description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) committed 90b3caa on feat/proportzionaltasuna-dbh4ap-lab-motion, fast-forwarded into main and deployed 2026-10-27 (bundle index-buE2QkQf); phase 4 (J1 error detective, J2 bank) committed 866d9d5 on feat/proportzionaltasuna-dbh4ap-games, fast-forwarded into main and deployed 2026-10-27 (bundle index-B-ETaI-9); phase 5 (J3 meeting on the road, J4 fill the tank) committed b26ae19 on feat/proportzionaltasuna-dbh4ap-games-road, fast-forwarded into main and deployed 2026-10-28 (bundle index-BeM7dYPx); phase 6 (J5 perfect mixture, J6 shop till) committed 789f9df on feat/proportzionaltasuna-dbh4ap-games-mix, fast-forwarded into main and deployed 2026-10-28 (bundle index-CfxntXIn); phase 7 (J7 own memory boards) committed fa2ead7 on feat/proportzionaltasuna-dbh4ap-memory, fast-forwarded into main and deployed 2026-10-28 (bundle index-B5-qfK7e); phase 8 (L4 shopping receipt) committed 88b48e0 on feat/proportzionaltasuna-dbh4ap-receipt, fast-forwarded into main and deployed 2026-10-29 (bundle index-5EvrNL4x); phase 9 (M6 interest in months and days) committed 34bd45f and 486bf40 on feat/proportzionaltasuna-dbh4ap-interest, fast-forwarded into main and deployed 2026-10-30 (bundle index-DqdNpvzH); phase 10 (English thousands in the lab checks) committed 44e4043 on feat/proportzionaltasuna-dbh4ap-english-answers, fast-forwarded into main and deployed 2026-10-30 (bundle index-DD7lYJwh)"
+description: "4. DBH aplikatuak Proportzionaltasuna upgrade (2026-10-26), modelled on the Zatikiak 2. DBH one: full review, options A/M/L/J/V; phase 1 (A1–A5 fixes, M1 predictions, M2 endless challenges) committed 576b3da on feat/proportzionaltasuna-dbh4ap-lab-plus, fast-forwarded into main and deployed 2026-10-26 (bundle index-CeH4y5Qt); phase 2 (L2 the 100 % bar, L1 the rule of three with arrows) committed 3751d4f on feat/proportzionaltasuna-dbh4ap-lab-l1l2, fast-forwarded into main and deployed 2026-10-27 (bundle index-BZ8nV5vz); phase 3 (M3 ▶ motion, M4 interest in layers, M5 mixture seesaw with gold, L3 distance–time graph) committed 90b3caa on feat/proportzionaltasuna-dbh4ap-lab-motion, fast-forwarded into main and deployed 2026-10-27 (bundle index-buE2QkQf); phase 4 (J1 error detective, J2 bank) committed 866d9d5 on feat/proportzionaltasuna-dbh4ap-games, fast-forwarded into main and deployed 2026-10-27 (bundle index-B-ETaI-9); phase 5 (J3 meeting on the road, J4 fill the tank) committed b26ae19 on feat/proportzionaltasuna-dbh4ap-games-road, fast-forwarded into main and deployed 2026-10-28 (bundle index-BeM7dYPx); phase 6 (J5 perfect mixture, J6 shop till) committed 789f9df on feat/proportzionaltasuna-dbh4ap-games-mix, fast-forwarded into main and deployed 2026-10-28 (bundle index-CfxntXIn); phase 7 (J7 own memory boards) committed fa2ead7 on feat/proportzionaltasuna-dbh4ap-memory, fast-forwarded into main and deployed 2026-10-28 (bundle index-B5-qfK7e); phase 8 (L4 shopping receipt) committed 88b48e0 on feat/proportzionaltasuna-dbh4ap-receipt, fast-forwarded into main and deployed 2026-10-29 (bundle index-5EvrNL4x); phase 9 (M6 interest in months and days) committed 34bd45f and 486bf40 on feat/proportzionaltasuna-dbh4ap-interest, fast-forwarded into main and deployed 2026-10-30 (bundle index-DqdNpvzH); phase 10 (English thousands in the lab checks) committed 44e4043 on feat/proportzionaltasuna-dbh4ap-english-answers, fast-forwarded into main and deployed 2026-10-30 (bundle index-DD7lYJwh); phase 11 (V1 lessons split into cases, V2 typical-mistake box) on feat/proportzionaltasuna-dbh4ap-lessons, not deployed yet"
 ---
 
 On 2026-10-26 the owner asked for the same kind of review as [[zatikiak-dbh2-lab-plus]], this time for `src/pages/dbh4-aplikatuak-proportzionaltasuna`. The unit was built in October (see [[remaining-eso-units]]).
@@ -632,4 +632,74 @@ Open item 1 of `idioma-ingles.md`, for this unit. On the English page, an answer
 Committed as 44e4043, fast-forwarded into main, pushed and deployed to matella.net on 2026-10-30 (bundle index-DD7lYJwh). Checked live at 375 px:
 - en: the 100 % bar challenge 1, answered «30,000», gives «Correct!» and «Completed!»;
 - es: the receipt still accepts 54,45.
+
+## Phase 11 (branch `feat/proportzionaltasuna-dbh4ap-lessons`, 2026-10-30)
+
+V1 (shorter explanations, split into cases) and V2 (a «typical mistake» box), the last two items of the review.
+
+### Shared engine (all units can use it; no other unit uses it yet)
+
+- `UnitTopic` has two new optional fields (`src/features/unit-v2/types.ts`):
+  - `cases?: LessonStep[]`: the explanation split into cases, each with a name, a short sentence and a formula;
+  - `mistake?: LessonMistake` (`{ wrong, right }`): the typical mistake.
+- `src/features/unit-v2/LessonExtras.tsx` and `LessonExtras.css` draw them, and `UnitPage.tsx` places them:
+  - the case cards right under the explanation, in a grid that becomes one column on a phone;
+  - the mistake box before the key idea, with the wrong way on red with a ✗ and the right way on green with a ✓.
+- The new boxes do not use the takeaway classes, so their KaTeX is not set in capitals.
+- A lesson of another unit (2. DBH proportionality) was checked: it renders as before.
+
+### This unit
+
+- `lessonTexts.ts` holds, for each of the 15 lessons, the explanation, 2–4 cases and the mistake, in eu/es/en/ar. `lessons.tsx` no longer has the explanations; it merges them by id (`proportionDbh4ApTopics`).
+- The explanations went from 450–600 to at most 250 characters in Spanish. The examples moved into the cases.
+- The examples that challenges call «the one in the lesson» are kept:
+  - the 24 000 fans;
+  - 448,80 €;
+  - 1000 € at 10 %;
+  - the coffee and the gold;
+  - the 240 km;
+  - the taps of 5 h and 7 h.
+- The mistakes are the ones the games already use:
+  - growing together taken as proportional;
+  - multiplying where you should divide;
+  - an inverse rule done as direct;
+  - one factor only;
+  - the value of one part taken as the share;
+  - an inverse share done as direct;
+  - multiplying to go back to the total;
+  - taking 21 % off to remove VAT;
+  - percentages added;
+  - months taken as years;
+  - simple interest used for compound;
+  - the annual rate not divided by k;
+  - the average of the prices;
+  - speeds subtracted when the vehicles meet;
+  - hours added for taps.
+- In Basque and Spanish a number never breaks from its € or %: `glue` in `lessonTexts.ts` puts a no-break space there.
+- Basque: the other lesson texts had case endings on numbers, and these were rewritten:
+  - «lehenik 1en balioa» (direct-rule takeaway);
+  - «% 3an» (simple-interest problem);
+  - «1200ez zatitu» (simple-interest step);
+  - «100ez / 1200ez / 36 000z» (simple-interest takeaway);
+  - «% 5ean» (compound-interest problem);
+  - «% 12an» (periods problem);
+  - «12tan» (taps problem).
+- One case formula of the direct rule (the cable) was too wide for a phone, so it is now two steps.
+- Tests in `tests/proportzionaltasuna-dbh4ap-lessons.test.ts`:
+  - each lesson has a short explanation, cases and a mistake;
+  - every formula renders, in all four languages;
+  - Arabic has no `{,}`;
+  - English has no decimal comma;
+  - Basque has no case ending on a number, which is also checked for every Basque string of `lessons.tsx` (read from the source);
+  - every worked equality is right, the mistakes included;
+  - the examples quoted by challenges are still there.
+
+### Checks
+
+- Suite 930/930; lint and build OK.
+- At 375 px, all 15 lessons in eu, es, en and ar: no sideways scroll, every lesson has its cards and its box, and no formula in a card or in the box scrolls sideways.
+- Screenshots:
+  - es: simple interest, cards and mistake box;
+  - ar: chained percentages, the mistake box from right to left;
+  - eu: the index.
 

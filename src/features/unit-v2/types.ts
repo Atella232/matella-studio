@@ -35,12 +35,20 @@ export interface LessonStep {
     math?: string | LocalizedText
 }
 
+/** A typical slip of the lesson: what students often write, and the right way */
+export interface LessonMistake {
+    wrong: LocalizedText
+    right: LocalizedText
+}
+
 export interface UnitTopic {
     id: string
     stage: string
     title: LocalizedText
     goal: LocalizedText
     explanation: LocalizedText
+    /** The explanation split into cases (direct / inverse, the part / the total…), shown as cards right under it */
+    cases?: LessonStep[]
     /**
      * Rules, steps or cases that would otherwise crowd the explanation.
      * 'steps' are numbered and done in order; 'facts' are independent ideas.
@@ -52,6 +60,8 @@ export interface UnitTopic {
     /** Worked example, in LaTeX between $…$; per language when the notation differs (Div / Zat) */
     example: string | LocalizedText
     takeaway: LocalizedText
+    /** The typical mistake of the lesson, shown before the key idea */
+    mistake?: LessonMistake
     /** Optional model drawn under the explanation (a number line, a thermometer…) */
     figure?: (language: UnitLanguage) => ReactNode
 }
