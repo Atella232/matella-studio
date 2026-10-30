@@ -1,6 +1,6 @@
 # Idioma inglés (en) en toda la web
 
-Rama: `feat/idioma-ingles`. Sin publicar: no hay deploy ni push. Inglés británico.
+Publicada en matella.net el 2026-10-30: commit `df11157` en `main` (avance rápido desde `feat/idioma-ingles`) y desplegada con `npm run deploy`. Inglés británico.
 
 ## Qué se ha hecho
 
@@ -40,3 +40,10 @@ Rama: `feat/idioma-ingles`. Sin publicar: no hay deploy ni push. Inglés britán
 - Dentro de `\text{}` de KaTeX no va árabe; las fórmulas en `say()` se escriben una vez.
 - Marcadores de texto plano: `englishNumberText` (formato español → inglés). Para LaTeX: `englishLatex`.
 - Si una respuesta se escribe con comas de miles en inglés, pásala por `englishDigits` antes del lector.
+
+## Publicación (2026-10-30)
+
+- Comprobaciones antes de publicar: tests 917/917, lint y build en verde; inventario de juegos y laboratorios sin cambios (31 de 45 unidades ya no tenían juegos ni herramientas propias antes de este cambio: pendiente, no lo toca esta publicación).
+- Publicado: `df11157` en `main`, subido a `origin/main`, y `npm run deploy` a `gh-pages` (commit `759ac52a`). El bundle en vivo es `index-DVSmNaRZ.js` con `index-wVUHXYHz.css`.
+- Comprobado en vivo a 375 px en eu, es, en y ar: el selector de idioma cabe, no hay desborde horizontal y la sección de laboratorio abre en los cuatro.
+- Incidencia tras el despliegue: durante unos minutos un fragmento de carga diferida respondió 503 en matella.net. La pestaña guarda ese fallo hasta que se recarga la página entera; recargando, todo carga bien.
