@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
@@ -42,9 +43,9 @@ function checkPercent(question: PercentRaceQuestion) {
         assert.ok(Math.abs(toNumber(question.answer) - expected) < 1e-9)
         assert.equal(checkPercentPitAnswer(question, typed(question.answer)), 'correct', question.kind)
     }
-    for (const language of ['eu', 'es', 'ar'] as const) {
+    for (const language of ['eu', 'es', 'en', 'ar'] as const) {
         for (const text of [question.prompt[language], question.solution[language]]) {
-            for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formula, { throwOnError: true, strict: 'error' })
+            for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formulaFor(language, formula), { throwOnError: true, strict: 'error' })
             if (language === 'ar') assert.ok(!text.includes('{,}'), text)
         }
     }

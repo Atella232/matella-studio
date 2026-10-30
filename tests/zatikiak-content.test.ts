@@ -16,7 +16,9 @@ test('contains the complete theory, exercise and challenge inventory', () => {
     assert.equal(exerciseSource.match(/count: 6,/g)?.length, 7)
     assert.equal(exerciseSource.match(/difficulty: '(?:easy|medium|hard)'/g)?.length, 42)
     const euTranslations = exerciseSource.slice(exerciseSource.indexOf('const euTranslations'), exerciseSource.indexOf('const arTranslations'))
-    const arTranslations = exerciseSource.slice(exerciseSource.indexOf('const arTranslations'), exerciseSource.indexOf('const text'))
+    const arTranslations = exerciseSource.slice(exerciseSource.indexOf('const arTranslations'), exerciseSource.indexOf('const enTranslations'))
+    const enTranslations = exerciseSource.slice(exerciseSource.indexOf('const enTranslations'), exerciseSource.indexOf('const text'))
+    assert.equal(enTranslations.match(/^ {4}'/gm)?.length, 84)
     assert.equal(euTranslations.match(/^ {4}'/gm)?.length, 84)
     assert.equal(arTranslations.match(/^ {4}'/gm)?.length, 84)
     assert.equal(challenges.length, 12)
@@ -27,7 +29,7 @@ test('contains the complete theory, exercise and challenge inventory', () => {
 
 test('keeps every localized theory and challenge text populated', () => {
     for (const topic of theoryTopics) {
-        for (const language of ['eu', 'es', 'ar'] as const) {
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) {
             assert.ok(topic.title[language].trim())
             assert.ok(topic.goal[language].trim())
             assert.ok(topic.explanation[language].trim())
@@ -36,13 +38,13 @@ test('keeps every localized theory and challenge text populated', () => {
         }
         assert.ok((topic.steps?.length ?? 0) >= 3, `${topic.id} explains its idea in steps`)
         for (const step of topic.steps ?? []) {
-            for (const language of ['eu', 'es', 'ar'] as const) assert.ok(step.text[language].trim())
+            for (const language of ['eu', 'es', 'en', 'ar'] as const) assert.ok(step.text[language].trim())
         }
     }
 
     for (const challenge of challenges) {
         assert.ok(challenge.expected.denominator > 0)
-        for (const language of ['eu', 'es', 'ar'] as const) {
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) {
             assert.ok(challenge.prompt[language].trim())
             assert.ok(challenge.hint[language].trim())
             assert.ok(challenge.explanation[language].trim())
@@ -60,7 +62,7 @@ test('audits every diagnostic question', () => {
     for (const question of diagnosticQuestions) {
         assert.ok(question.correctIndex >= 0 && question.correctIndex < question.options.length)
         assert.equal(question.options.length, 3)
-        for (const language of ['eu', 'es', 'ar'] as const) {
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) {
             assert.ok(question.prompt[language].trim())
             assert.ok(question.explanation[language].trim())
             assert.ok(question.options.every((option) => option[language].trim()))

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { MathText } from '../../../components/MathText'
+import { formulaFor } from '../../../utils/latexLanguage'
 import { GameTopbar, LevelPicker, ResultPanel } from './GameKit'
 import { formatTime, localLatex, nowMs, useGameText } from './gameHooks'
 import type { GameProps } from './GamesHub'
@@ -104,11 +105,11 @@ export function PairsMemoryGame({ language, records, onResult, onExit, config }:
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${-record.score} ${l({ eu: 'txanda', es: 'turnos', ar: 'أدوار' })}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${-record.score} ${l({ eu: 'txanda', es: 'turnos', en: 'turns', ar: 'أدوار' })}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: 'Buelta eman kartei eta aurkitu balio bera duten bikoteak.', es: 'Da la vuelta a las cartas y encuentra las parejas que valen lo mismo.', ar: 'اقلب البطاقات وجد الأزواج ذات القيمة نفسها.' })}</li>
-                        <li>{l({ eu: 'Zenbat eta txanda gutxiago, orduan eta izar gehiago.', es: 'Cuantos menos turnos, más estrellas.', ar: 'كلما قلت الأدوار زادت النجوم.' })}</li>
+                        <li>{l({ eu: 'Buelta eman kartei eta aurkitu balio bera duten bikoteak.', es: 'Da la vuelta a las cartas y encuentra las parejas que valen lo mismo.', en: 'Turn over the cards and find the pairs with the same value.', ar: 'اقلب البطاقات وجد الأزواج ذات القيمة نفسها.' })}</li>
+                        <li>{l({ eu: 'Zenbat eta txanda gutxiago, orduan eta izar gehiago.', es: 'Cuantos menos turnos, más estrellas.', en: 'The fewer turns, the more stars.', ar: 'كلما قلت الأدوار زادت النجوم.' })}</li>
                     </ul>
                 )}
             />
@@ -119,7 +120,7 @@ export function PairsMemoryGame({ language, records, onResult, onExit, config }:
         <div className="fraction-v2-memory" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span><strong>{matched.length}</strong> / {pairs}</span>
-                <span>{moves} {l({ eu: 'txanda', es: 'turnos', ar: 'أدوار' })}</span>
+                <span>{moves} {l({ eu: 'txanda', es: 'turnos', en: 'turns', ar: 'أدوار' })}</span>
                 <span>{formatTime(elapsed)}</span>
             </GameTopbar>
 
@@ -133,7 +134,7 @@ export function PairsMemoryGame({ language, records, onResult, onExit, config }:
                                 <button
                                     type="button"
                                     className={`fraction-v2-memory-card ${visible ? 'visible' : ''} ${isMatched ? 'matched' : ''}`}
-                                    aria-label={visible ? `${l({ eu: `${index + 1}. karta`, es: `Carta ${index + 1}`, ar: `البطاقة ${index + 1}` })}: ${spokenLatex(localLatex(card.latex, language))}` : l({ eu: `${index + 1}. karta, ezkutuan`, es: `Carta ${index + 1}, oculta`, ar: `البطاقة ${index + 1}، مخفية` })}
+                                    aria-label={visible ? `${l({ eu: `${index + 1}. karta`, es: `Carta ${index + 1}`, en: `Card ${index + 1}`, ar: `البطاقة ${index + 1}` })}: ${spokenLatex(formulaFor(language, localLatex(card.latex, language)))}` : l({ eu: `${index + 1}. karta, ezkutuan`, es: `Carta ${index + 1}, oculta`, en: `Card ${index + 1}, face down`, ar: `البطاقة ${index + 1}، مخفية` })}
                                     aria-pressed={visible}
                                     onClick={() => select(index)}
                                     key={card.id}
@@ -150,11 +151,11 @@ export function PairsMemoryGame({ language, records, onResult, onExit, config }:
                         {message
                             ? (
                                 <>
-                                    <span>{message.tone === 'success' ? l({ eu: 'Balio bera!', es: '¡Mismo valor!', ar: 'القيمة نفسها!' }) : l({ eu: 'Ez dute balio bera:', es: 'No valen lo mismo:', ar: 'ليست بالقيمة نفسها:' })}</span>
+                                    <span>{message.tone === 'success' ? l({ eu: 'Balio bera!', es: '¡Mismo valor!', en: 'Same value!', ar: 'القيمة نفسها!' }) : l({ eu: 'Ez dute balio bera:', es: 'No valen lo mismo:', en: 'Not the same value:', ar: 'ليست بالقيمة نفسها:' })}</span>
                                     <MathText text={`$${localLatex(message.latex, language)}$`} />
                                 </>
                             )
-                            : <span>{l({ eu: 'Aukeratu balio bera duten bi karta.', es: 'Elige dos cartas con el mismo valor.', ar: 'اختر بطاقتين لهما القيمة نفسها.' })}</span>}
+                            : <span>{l({ eu: 'Aukeratu balio bera duten bi karta.', es: 'Elige dos cartas con el mismo valor.', en: 'Choose two cards with the same value.', ar: 'اختر بطاقتين لهما القيمة نفسها.' })}</span>}
                     </div>
                 </>
             )}
@@ -163,11 +164,11 @@ export function PairsMemoryGame({ language, records, onResult, onExit, config }:
                 <ResultPanel
                     language={language}
                     stars={stars(moves)}
-                    title={l({ eu: `${moves} txandatan osatuta`, es: `Completado en ${moves} turnos`, ar: `اكتملت في ${moves} أدوار` })}
-                    subtitle={l({ eu: `3 izar: ${Math.ceil(pairs * 1.6)} txanda edo gutxiago · 2 izar: ${Math.ceil(pairs * 2.3)}`, es: `3 estrellas: ${Math.ceil(pairs * 1.6)} turnos o menos · 2: ${Math.ceil(pairs * 2.3)}`, ar: `3 نجوم: ${Math.ceil(pairs * 1.6)} أدوار أو أقل · 2: ${Math.ceil(pairs * 2.3)}` })}
+                    title={l({ eu: `${moves} txandatan osatuta`, es: `Completado en ${moves} turnos`, en: `Completed in ${moves} turns`, ar: `اكتملت في ${moves} أدوار` })}
+                    subtitle={l({ eu: `3 izar: ${Math.ceil(pairs * 1.6)} txanda edo gutxiago · 2 izar: ${Math.ceil(pairs * 2.3)}`, es: `3 estrellas: ${Math.ceil(pairs * 1.6)} turnos o menos · 2: ${Math.ceil(pairs * 2.3)}`, en: `3 stars: ${Math.ceil(pairs * 1.6)} turns or fewer · 2: ${Math.ceil(pairs * 2.3)}`, ar: `3 نجوم: ${Math.ceil(pairs * 1.6)} أدوار أو أقل · 2: ${Math.ceil(pairs * 2.3)}` })}
                     stats={[
-                        { label: l({ eu: 'Txandak', es: 'Turnos', ar: 'الأدوار' }), value: String(moves) },
-                        { label: l({ eu: 'Denbora', es: 'Tiempo', ar: 'الوقت' }), value: formatTime(elapsed) }
+                        { label: l({ eu: 'Txandak', es: 'Turnos', en: 'Turns', ar: 'الأدوار' }), value: String(moves) },
+                        { label: l({ eu: 'Denbora', es: 'Tiempo', en: 'Time', ar: 'الوقت' }), value: formatTime(elapsed) }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}

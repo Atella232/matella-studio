@@ -35,7 +35,7 @@ const CARD = 'var(--card, #fffcf6)'
 const PAPER = '#fffcf6'
 const SERIF = 'Fraunces, serif'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const useText = (language: UnitLanguage) => (text: LocalizedText) => pickText(language, text)
 
 function Caption({ y, children, x = 360 }: { y: number; children: ReactNode; x?: number }) {
@@ -107,17 +107,17 @@ function NumberLine({ x0, x1, y, from, to, shade, marks, color = GREEN, size = 1
 export function RationalDomainFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={272} label={t(say('y = 1 / (x² + 2x − 8) funtzioaren izate-eremua: izendatzailearen erroak kentzen dira', 'Dominio de y = 1 / (x² + 2x − 8): se quitan las raíces del denominador', 'مجال y = 1 / (x² + 2x − 8): تُحذف جذور المقام'))}>
+        <Figure height={272} label={t(say('y = 1 / (x² + 2x − 8) funtzioaren izate-eremua: izendatzailearen erroak kentzen dira', 'Dominio de y = 1 / (x² + 2x − 8): se quitan las raíces del denominador', 'مجال y = 1 / (x² + 2x − 8): تُحذف جذور المقام', 'Domain of y = 1 / (x² + 2x − 8): remove the roots of the denominator'))}>
             <Card x={16} y={18} width={256} height={112} tint={STAGE_TINT}>
                 <Frac x={170} y={72} n="1" d="x² + 2x − 8" size={21} sign="y =" />
             </Card>
-            <Label x={300} y={42} fontSize={16} fontWeight={700} fill={STAGE}>{t(say('Izendatzailea ezin da 0 izan:', 'El denominador no puede ser 0:', 'لا يكون المقام 0:'))}</Label>
+            <Label x={300} y={42} fontSize={16} fontWeight={700} fill={STAGE}>{t(say('Izendatzailea ezin da 0 izan:', 'El denominador no puede ser 0:', 'لا يكون المقام 0:', 'The denominator cannot be 0:'))}</Label>
             <F x={300} y={74} size={18}>x² + 2x − 8 = 0</F>
             <F x={300} y={104} size={18}>x = (−2 ± 6) / 2</F>
             <F x={300} y={134} size={18} color={SECOND}>x = −4 · x = 2</F>
             <NumberLine x0={60} x1={650} y={176} from={-6} to={4} shade={[['-inf', -4], [-4, 2], [2, 'inf']]} marks={[{ value: -4, filled: false }, { value: 2, filled: false }]} />
             <F x={360} y={238} size={21} color={SECOND} anchor="middle">Dom f = ℝ − {'{'}−4, 2{'}'}</F>
-            <Caption y={264}>{t(say('Zuzen osoa, izendatzailea anulatzen duten bi puntuak izan ezik', 'Toda la recta menos los dos puntos que anulan el denominador', 'المستقيم كله ما عدا النقطتين اللتين تعدمان المقام'))}</Caption>
+            <Caption y={264}>{t(say('Zuzen osoa, izendatzailea anulatzen duten bi puntuak izan ezik', 'Toda la recta menos los dos puntos que anulan el denominador', 'المستقيم كله ما عدا النقطتين اللتين تعدمان المقام', 'The whole line except the two points that make the denominator 0'))}</Caption>
         </Figure>
     )
 }
@@ -128,7 +128,7 @@ export function SignChartFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const parabola = (x: number) => (x * x - 9) / 3
     return (
-        <Figure height={300} label={t(say('y = √(x² − 9) funtzioaren izate-eremua: x² − 9 ≥ 0 zeinu-taulan', 'Dominio de y = √(x² − 9): x² − 9 ≥ 0 en una tabla de signos', 'مجال y = √(x² − 9): x² − 9 ≥ 0 في جدول الإشارات'))}>
+        <Figure height={300} label={t(say('y = √(x² − 9) funtzioaren izate-eremua: x² − 9 ≥ 0 zeinu-taulan', 'Dominio de y = √(x² − 9): x² − 9 ≥ 0 en una tabla de signos', 'مجال y = √(x² − 9): x² − 9 ≥ 0 في جدول الإشارات', 'Domain of y = √(x² − 9): x² − 9 ≥ 0 in a sign table'))}>
             <Frame box={{ xMin: -5, xMax: 5, yMin: -4, yMax: 5 }} cell={24} ox={30} oy={36} yUnit={3}>
                 {(map, clip) => (
                     <g>
@@ -141,7 +141,7 @@ export function SignChartFigure({ language }: { language: UnitLanguage }) {
                 )}
             </Frame>
             <F x={300} y={56} size={21} color={STAGE}>y = √(x² − 9)</F>
-            <Label x={300} y={90} fontSize={16} fontWeight={700} fill={INK}>{t(say('Errokizuna ez da negatiboa:', 'El radicando no es negativo:', 'ما تحت الجذر ليس سالبًا:'))}</Label>
+            <Label x={300} y={90} fontSize={16} fontWeight={700} fill={INK}>{t(say('Errokizuna ez da negatiboa:', 'El radicando no es negativo:', 'ما تحت الجذر ليس سالبًا:', 'The radicand is not negative:'))}</Label>
             <F x={300} y={120} size={18}>x² − 9 ≥ 0</F>
             <F x={440} y={120} size={18} color={SECOND}>x = ±3</F>
             {[['+', -4.8, GREEN], ['−', 0, SECOND], ['+', 4.8, GREEN]].map(([sign, value, color]) => (
@@ -149,7 +149,7 @@ export function SignChartFigure({ language }: { language: UnitLanguage }) {
             ))}
             <NumberLine x0={320} x1={680} y={182} from={-6} to={6} shade={[['-inf', -3], [3, 'inf']]} marks={[{ value: -3, filled: true }, { value: 3, filled: true }]} />
             <F x={300} y={246} size={19} color={SECOND}>Dom f = (−∞, −3] ∪ [3, +∞)</F>
-            <Caption y={288}>{t(say('Parabola X ardatzaren gainean edo ardatzean dagoen tokian dago erroa definituta', 'La raíz existe donde la parábola está sobre el eje X o en él', 'الجذر معرَّف حيث يكون القطع المكافئ فوق محور X أو عليه'))}</Caption>
+            <Caption y={288}>{t(say('Parabola X ardatzaren gainean edo ardatzean dagoen tokian dago erroa definituta', 'La raíz existe donde la parábola está sobre el eje X o en él', 'الجذر معرَّف حيث يكون القطع المكافئ فوق محور X أو عليه', 'The root exists where the parabola is on or above the x-axis'))}</Caption>
         </Figure>
     )
 }
@@ -159,12 +159,12 @@ export function SignChartFigure({ language }: { language: UnitLanguage }) {
 export function DomainCasesFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const cards = [
-        { x: 16, tint: STAGE_TINT, title: say('Erroa', 'Raíz', 'جذر'), condition: 'x − 5 ≥ 0', filled: true, shade: [[5, 'inf']] as [Bound, Bound][], result: 'Dom f = [5, +∞)' },
-        { x: 252, tint: MUSTARD_TINT, title: say('Erroa izendatzailean', 'Raíz en el denominador', 'جذر في المقام'), condition: 'x − 5 > 0', filled: false, shade: [[5, 'inf']] as [Bound, Bound][], result: 'Dom f = (5, +∞)' },
-        { x: 488, tint: GREEN_TINT, title: say('Zatikia', 'Fracción', 'كسر'), condition: 'x − 5 ≠ 0', filled: false, shade: [['-inf', 5], [5, 'inf']] as [Bound, Bound][], result: 'Dom f = ℝ − {5}' }
+        { x: 16, tint: STAGE_TINT, title: say('Erroa', 'Raíz', 'جذر', 'Square root'), condition: 'x − 5 ≥ 0', filled: true, shade: [[5, 'inf']] as [Bound, Bound][], result: 'Dom f = [5, +∞)' },
+        { x: 252, tint: MUSTARD_TINT, title: say('Erroa izendatzailean', 'Raíz en el denominador', 'جذر في المقام', 'Square root in the denominator'), condition: 'x − 5 > 0', filled: false, shade: [[5, 'inf']] as [Bound, Bound][], result: 'Dom f = (5, +∞)' },
+        { x: 488, tint: GREEN_TINT, title: say('Zatikia', 'Fracción', 'كسر', 'Fraction'), condition: 'x − 5 ≠ 0', filled: false, shade: [['-inf', 5], [5, 'inf']] as [Bound, Bound][], result: 'Dom f = ℝ − {5}' }
     ]
     return (
-        <Figure height={286} label={t(say('√(x − 5), 1 / √(x − 5) eta 1 / (x − 5): hiru izate-eremu desberdin', '√(x − 5), 1 / √(x − 5) y 1 / (x − 5): tres dominios distintos', '√(x − 5) و1 / √(x − 5) و1 / (x − 5): ثلاثة مجالات مختلفة'))}>
+        <Figure height={286} label={t(say('√(x − 5), 1 / √(x − 5) eta 1 / (x − 5): hiru izate-eremu desberdin', '√(x − 5), 1 / √(x − 5) y 1 / (x − 5): tres dominios distintos', '√(x − 5) و1 / √(x − 5) و1 / (x − 5): ثلاثة مجالات مختلفة', '√(x − 5), 1 / √(x − 5) and 1 / (x − 5): three different domains'))}>
             {cards.map((card, index) => (
                 <Card key={index} x={card.x} y={16} width={216} height={240} tint={card.tint}>
                     <Label x={card.x + 108} y={44} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{t(card.title)}</Label>
@@ -176,7 +176,7 @@ export function DomainCasesFigure({ language }: { language: UnitLanguage }) {
                     <F x={card.x + 108} y={238} size={17} anchor="middle" color={SECOND}>{card.result}</F>
                 </Card>
             ))}
-            <Caption y={278}>{t(say('Erroa izendatzailean: ≥ ez, > hertsia, 0z ezin delako zatitu', 'Raíz en el denominador: no ≥ sino > estricto, porque no se divide entre 0', 'جذر في المقام: ليس ≥ بل > لأن القسمة على 0 لا تجوز'))}</Caption>
+            <Caption y={278}>{t(say('Erroa izendatzailean: ≥ ez, > hertsia, 0z ezin delako zatitu', 'Raíz en el denominador: no ≥ sino > estricto, porque no se divide entre 0', 'جذر في المقام: ليس ≥ بل > لأن القسمة على 0 لا تجوز', 'Square root in the denominator: not ≥ but strictly >, because you cannot divide by 0'))}</Caption>
         </Figure>
     )
 }
@@ -186,7 +186,7 @@ export function DomainCasesFigure({ language }: { language: UnitLanguage }) {
 export function PiecewiseFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={278} label={t(say('Zatika definitutako funtzioa: −x, x² eta 1', 'Una función definida a trozos: −x, x² y 1', 'دالة معرّفة على أجزاء: −x وx² و1'))}>
+        <Figure height={278} label={t(say('Zatika definitutako funtzioa: −x, x² eta 1', 'Una función definida a trozos: −x, x² y 1', 'دالة معرّفة على أجزاء: −x وx² و1', 'A piecewise function: −x, x² and 1'))}>
             <F x={24} y={92} size={21}>f(x) =</F>
             <text x={104} y={108} fontSize={92} fill={INK} fontWeight={300} direction="ltr">{'{'}</text>
             {[['−x', 'x < 0', STAGE], ['x²', '0 ≤ x < 2', SECOND], ['1', 'x ≥ 2', GREEN]].map(([piece, condition, color], index) => (
@@ -195,7 +195,7 @@ export function PiecewiseFigure({ language }: { language: UnitLanguage }) {
                     <F x={204} y={52 + index * 36} size={19} weight={400}>{condition}</F>
                 </g>
             ))}
-            <Label x={24} y={170} fontSize={15} fontWeight={700} fill={INK}>{t(say('Lehenik, zein zatitan dagoen x:', 'Primero, en qué trozo está x:', 'أولًا: في أي جزء تقع x:'))}</Label>
+            <Label x={24} y={170} fontSize={15} fontWeight={700} fill={INK}>{t(say('Lehenik, zein zatitan dagoen x:', 'Primero, en qué trozo está x:', 'أولًا: في أي جزء تقع x:', 'First, work out which piece x is in:'))}</Label>
             <F x={24} y={204} size={18} color={STAGE}>f(−3) = −(−3) = 3</F>
             <F x={24} y={234} size={18} color={SECOND}>f(1) = 1² = 1</F>
             <F x={24} y={264} size={18} color={GREEN}>f(2) = 1</F>
@@ -212,7 +212,7 @@ export function PiecewiseFigure({ language }: { language: UnitLanguage }) {
                     </g>
                 )}
             </Frame>
-            <Caption y={246} x={556}>{t(say('Puntu hutsa: zati horrek ez du hartzen', 'Punto hueco: ese trozo no lo incluye', 'النقطة الفارغة لا يشملها ذلك الجزء'))}</Caption>
+            <Caption y={246} x={556}>{t(say('Puntu hutsa: zati horrek ez du hartzen', 'Punto hueco: ese trozo no lo incluye', 'النقطة الفارغة لا يشملها ذلك الجزء', 'Open dot: that piece does not include it'))}</Caption>
         </Figure>
     )
 }
@@ -222,7 +222,7 @@ export function PiecewiseFigure({ language }: { language: UnitLanguage }) {
 export function JoinFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={300} label={t(say('k = 1 denean bi zatiak x = 2 puntuan lotzen dira eta funtzioa jarraitua da', 'Con k = 1 los dos trozos se unen en x = 2 y la función es continua', 'عندما k = 1 يلتقي الجزءان عند x = 2 وتكون الدالة متصلة'))}>
+        <Figure height={300} label={t(say('k = 1 denean bi zatiak x = 2 puntuan lotzen dira eta funtzioa jarraitua da', 'Con k = 1 los dos trozos se unen en x = 2 y la función es continua', 'عندما k = 1 يلتقي الجزءان عند x = 2 وتكون الدالة متصلة', 'With k = 1 the two pieces join at x = 2 and the function is continuous'))}>
             <Frame box={{ xMin: -2, xMax: 5, yMin: -2, yMax: 7 }} cell={26} ox={36} oy={34}>
                 {(map, clip) => (
                     <g>
@@ -239,13 +239,13 @@ export function JoinFigure({ language }: { language: UnitLanguage }) {
             <F x={464} y={36} size={18} weight={400}>x ≤ 2</F>
             <F x={364} y={66} size={18} color={GREEN}>x + k</F>
             <F x={464} y={66} size={18} weight={400}>x &gt; 2</F>
-            <Label x={290} y={108} fontSize={15} fill={INK}>{t(say('Ezkerreko zatiak x = 2 puntuan:', 'El trozo izquierdo en x = 2:', 'الجزء الأيسر عند x = 2:'))}</Label>
+            <Label x={290} y={108} fontSize={15} fill={INK}>{t(say('Ezkerreko zatiak x = 2 puntuan:', 'El trozo izquierdo en x = 2:', 'الجزء الأيسر عند x = 2:', 'The left-hand piece at x = 2:'))}</Label>
             <F x={290} y={134} size={18} color={STAGE}>2² − 1 = 3</F>
-            <Label x={290} y={170} fontSize={15} fill={INK}>{t(say('Eskuinekoa hona hurbiltzen da:', 'El derecho se acerca a:', 'الجزء الأيمن يقترب من:'))}</Label>
+            <Label x={290} y={170} fontSize={15} fill={INK}>{t(say('Eskuinekoa hona hurbiltzen da:', 'El derecho se acerca a:', 'الجزء الأيمن يقترب من:', 'The right-hand piece approaches:'))}</Label>
             <F x={290} y={196} size={18} color={GREEN}>2 + k</F>
             <F x={290} y={236} size={20} color={SECOND}>2 + k = 3 → k = 1</F>
-            <Label x={290} y={266} fontSize={15} fill={MUTED}>{t(say('k = 3 bada, jauzi bat dago (marratua)', 'Si k = 3, hay un salto (discontinua)', 'إذا كان k = 3 توجد قفزة (المتقطع)'))}</Label>
-            <Caption y={292}>{t(say('Jarraitua izateko, bi zatiek balio bera eman behar dute lotunean', 'Para que sea continua, los dos trozos deben dar el mismo valor en la unión', 'لتكون متصلة يجب أن يعطي الجزءان القيمة نفسها عند نقطة الالتقاء'))}</Caption>
+            <Label x={290} y={266} fontSize={15} fill={MUTED}>{t(say('k = 3 bada, jauzi bat dago (marratua)', 'Si k = 3, hay un salto (discontinua)', 'إذا كان k = 3 توجد قفزة (المتقطع)', 'If k = 3, there is a jump (discontinuous)'))}</Label>
+            <Caption y={292}>{t(say('Jarraitua izateko, bi zatiek balio bera eman behar dute lotunean', 'Para que sea continua, los dos trozos deben dar el mismo valor en la unión', 'لتكون متصلة يجب أن يعطي الجزءان القيمة نفسها عند نقطة الالتقاء', 'To be continuous, the two pieces must give the same value at the join'))}</Caption>
         </Figure>
     )
 }
@@ -256,7 +256,7 @@ export function CubicInterceptsFigure({ language }: { language: UnitLanguage }) 
     const t = useText(language)
     const cubic = (x: number) => (x * x * x - x * x - 4 * x + 4) / 2
     return (
-        <Figure height={296} label={t(say('y = x³ − x² − 4x + 4 funtzioaren ebaki-puntuak: (−2, 0), (1, 0), (2, 0) eta (0, 4)', 'Puntos de corte de y = x³ − x² − 4x + 4: (−2, 0), (1, 0), (2, 0) y (0, 4)', 'نقاط تقاطع y = x³ − x² − 4x + 4: (−2, 0) و(1, 0) و(2, 0) و(0, 4)'))}>
+        <Figure height={296} label={t(say('y = x³ − x² − 4x + 4 funtzioaren ebaki-puntuak: (−2, 0), (1, 0), (2, 0) eta (0, 4)', 'Puntos de corte de y = x³ − x² − 4x + 4: (−2, 0), (1, 0), (2, 0) y (0, 4)', 'نقاط تقاطع y = x³ − x² − 4x + 4: (−2, 0) و(1, 0) و(2, 0) و(0, 4)', 'Points where y = x³ − x² − 4x + 4 crosses the axes: (−2, 0), (1, 0), (2, 0) and (0, 4)'))}>
             <Frame box={{ xMin: -3, xMax: 3, yMin: -2, yMax: 4 }} cell={34} ox={36} oy={40} yUnit={2}>
                 {(map, clip) => (
                     <g>
@@ -268,16 +268,16 @@ export function CubicInterceptsFigure({ language }: { language: UnitLanguage }) 
             </Frame>
             <F x={276} y={46} size={20} color={STAGE}>y = x³ − x² − 4x + 4</F>
             <Card x={268} y={62} width={436} height={70} tint={MUSTARD_TINT}>
-                <Label x={284} y={88} fontSize={15} fontWeight={700} fill={INK}>{t(say('Y ardatzarekin: x = 0', 'Con el eje Y: x = 0', 'مع محور Y: x = 0'))}</Label>
+                <Label x={284} y={88} fontSize={15} fontWeight={700} fill={INK}>{t(say('Y ardatzarekin: x = 0', 'Con el eje Y: x = 0', 'مع محور Y: x = 0', 'On the y-axis: x = 0'))}</Label>
                 <F x={284} y={118} size={17}>y = 4 → (0, 4)</F>
             </Card>
             <Card x={268} y={144} width={436} height={118} tint={STAGE_TINT}>
-                <Label x={284} y={170} fontSize={15} fontWeight={700} fill={INK}>{t(say('X ardatzarekin: y = 0, faktorizatu', 'Con el eje X: y = 0, factoriza', 'مع محور X: y = 0، حلّل'))}</Label>
+                <Label x={284} y={170} fontSize={15} fontWeight={700} fill={INK}>{t(say('X ardatzarekin: y = 0, faktorizatu', 'Con el eje X: y = 0, factoriza', 'مع محور X: y = 0، حلّل', 'For the x-axis, put y = 0 and factorise'))}</Label>
                 <F x={284} y={198} size={17}>x²(x − 1) − 4(x − 1) = 0</F>
                 <F x={284} y={224} size={17}>(x − 1)(x − 2)(x + 2) = 0</F>
                 <F x={284} y={250} size={17} color={SECOND}>x = 1 · x = 2 · x = −2</F>
             </Card>
-            <Caption y={286}>{t(say('Faktore bakoitza 0 eginez, X ardatzarekiko ebaki-puntu bat', 'Cada factor igualado a 0 da un corte con el eje X', 'كل عامل يساوي 0 يعطي نقطة تقاطع مع محور X'))}</Caption>
+            <Caption y={286}>{t(say('Faktore bakoitza 0 eginez, X ardatzarekiko ebaki-puntu bat', 'Cada factor igualado a 0 da un corte con el eje X', 'كل عامل يساوي 0 يعطي نقطة تقاطع مع محور X', 'Setting each factor to 0 gives a point where it crosses the x-axis'))}</Caption>
         </Figure>
     )
 }
@@ -288,7 +288,7 @@ export function SignFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const f = (x: number) => (x * (x + 2) * (x - 4)) / 4
     return (
-        <Figure height={300} label={t(say('Funtzio baten zeinua: positiboa (−2, 0) eta (4, +∞) tarteetan, negatiboa (−∞, −2) eta (0, 4) tarteetan', 'Signo de una función: positiva en (−2, 0) y (4, +∞), negativa en (−∞, −2) y (0, 4)', 'إشارة دالة: موجبة في (−2, 0) و(4, +∞) وسالبة في (−∞, −2) و(0, 4)'))}>
+        <Figure height={300} label={t(say('Funtzio baten zeinua: positiboa (−2, 0) eta (4, +∞) tarteetan, negatiboa (−∞, −2) eta (0, 4) tarteetan', 'Signo de una función: positiva en (−2, 0) y (4, +∞), negativa en (−∞, −2) y (0, 4)', 'إشارة دالة: موجبة في (−2, 0) و(4, +∞) وسالبة في (−∞, −2) و(0, 4)', 'Sign of a function: positive on (−2, 0) and (4, +∞), negative on (−∞, −2) and (0, 4)'))}>
             <Frame box={{ xMin: -3, xMax: 6, yMin: -5, yMax: 5 }} cell={24} ox={30} oy={28} labelStep={2}>
                 {(map, clip) => (
                     <g>
@@ -300,16 +300,16 @@ export function SignFigure({ language }: { language: UnitLanguage }) {
                     </g>
                 )}
             </Frame>
-            <Label x={274} y={48} fontSize={15} fontWeight={700} fill={GREEN}>{t(say('f(x) > 0: X ardatzaren gainean', 'f(x) > 0: sobre el eje X', 'f(x) > 0: فوق محور X'))}</Label>
+            <Label x={274} y={48} fontSize={15} fontWeight={700} fill={GREEN}>{t(say('f(x) > 0: X ardatzaren gainean', 'f(x) > 0: sobre el eje X', 'f(x) > 0: فوق محور X', 'f(x) > 0: above the x-axis'))}</Label>
             <F x={274} y={76} size={18} color={GREEN}>(−2, 0) ∪ (4, +∞)</F>
-            <Label x={274} y={112} fontSize={15} fontWeight={700} fill={SECOND}>{t(say('f(x) < 0: azpian', 'f(x) < 0: por debajo', 'f(x) < 0: تحته'))}</Label>
+            <Label x={274} y={112} fontSize={15} fontWeight={700} fill={SECOND}>{t(say('f(x) < 0: azpian', 'f(x) < 0: por debajo', 'f(x) < 0: تحته', 'f(x) < 0: below the x-axis'))}</Label>
             <F x={274} y={140} size={18} color={SECOND}>(−∞, −2) ∪ (0, 4)</F>
             <Card x={266} y={160} width={440} height={104} tint={MUSTARD_TINT}>
                 <F x={282} y={194} size={17}>Dom √f(x) = [−2, 0] ∪ [4, +∞)</F>
                 <F x={282} y={226} size={17}>Dom 1/f(x) = ℝ − {'{'}−2, 0, 4{'}'}</F>
                 <F x={282} y={252} size={14} color={MUTED} weight={400}>√f → f ≥ 0 · 1/f → f ≠ 0</F>
             </Card>
-            <Caption y={290}>{t(say('Zeinua X ardatzarekiko ebaki-puntuetan bakarrik alda daiteke (funtzio jarraituetan)', 'El signo solo puede cambiar en los cortes con el eje X (si la función es continua)', 'لا تتغير الإشارة إلا عند التقاطع مع محور X (إذا كانت الدالة متصلة)'))}</Caption>
+            <Caption y={290}>{t(say('Zeinua X ardatzarekiko ebaki-puntuetan bakarrik alda daiteke (funtzio jarraituetan)', 'El signo solo puede cambiar en los cortes con el eje X (si la función es continua)', 'لا تتغير الإشارة إلا عند التقاطع مع محور X (إذا كانت الدالة متصلة)', 'The sign can only change at the x-intercepts (if the function is continuous)'))}</Caption>
         </Figure>
     )
 }
@@ -320,8 +320,8 @@ export function SymmetryFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const box: PlaneBox = { xMin: -3, xMax: 3, yMin: -3, yMax: 3 }
     return (
-        <Figure height={310} label={t(say('Funtzio bikoitia (y = x² − 2, Y ardatzarekiko simetrikoa) eta bakoitia (y = (x³ − 3x)/2, jatorriarekiko simetrikoa)', 'Función par (y = x² − 2, simétrica respecto del eje Y) e impar (y = (x³ − 3x)/2, simétrica respecto del origen)', 'دالة زوجية (y = x² − 2، متناظرة حول محور Y) وفردية (y = (x³ − 3x)/2، متناظرة حول الأصل)'))}>
-            <Label x={170} y={24} textAnchor="end" fontSize={16} fontWeight={700} fill={STAGE}>{t(say('Bikoitia', 'Par', 'زوجية'))}</Label>
+        <Figure height={310} label={t(say('Funtzio bikoitia (y = x² − 2, Y ardatzarekiko simetrikoa) eta bakoitia (y = (x³ − 3x)/2, jatorriarekiko simetrikoa)', 'Función par (y = x² − 2, simétrica respecto del eje Y) e impar (y = (x³ − 3x)/2, simétrica respecto del origen)', 'دالة زوجية (y = x² − 2، متناظرة حول محور Y) وفردية (y = (x³ − 3x)/2، متناظرة حول الأصل)', 'Even function (y = x² − 2, symmetric about the y-axis) and odd function (y = (x³ − 3x)/2, symmetric about the origin)'))}>
+            <Label x={170} y={24} textAnchor="end" fontSize={16} fontWeight={700} fill={STAGE}>{t(say('Bikoitia', 'Par', 'زوجية', 'Even'))}</Label>
             <Frame box={box} cell={30} ox={90} oy={48}>
                 {(map, clip) => (
                     <g>
@@ -334,8 +334,8 @@ export function SymmetryFigure({ language }: { language: UnitLanguage }) {
                 )}
             </Frame>
             <F x={180} y={262} size={18} anchor="middle" color={SECOND}>f(−x) = f(x)</F>
-            <Label x={180} y={286} textAnchor="middle" fontSize={14} fill={INK}>{t(say('Y ardatzarekiko simetrikoa', 'Simétrica respecto del eje Y', 'متناظرة حول محور Y'))}</Label>
-            <Label x={530} y={24} textAnchor="end" fontSize={16} fontWeight={700} fill={GREEN}>{t(say('Bakoitia', 'Impar', 'فردية'))}</Label>
+            <Label x={180} y={286} textAnchor="middle" fontSize={14} fill={INK}>{t(say('Y ardatzarekiko simetrikoa', 'Simétrica respecto del eje Y', 'متناظرة حول محور Y', 'Symmetric about the y-axis'))}</Label>
+            <Label x={530} y={24} textAnchor="end" fontSize={16} fontWeight={700} fill={GREEN}>{t(say('Bakoitia', 'Impar', 'فردية', 'Odd'))}</Label>
             <Frame box={box} cell={30} ox={450} oy={48}>
                 {(map, clip) => (
                     <g>
@@ -348,8 +348,8 @@ export function SymmetryFigure({ language }: { language: UnitLanguage }) {
                 )}
             </Frame>
             <F x={540} y={262} size={18} anchor="middle" color={SECOND}>f(−x) = −f(x)</F>
-            <Label x={540} y={286} textAnchor="middle" fontSize={14} fill={INK}>{t(say('Jatorriarekiko simetrikoa', 'Simétrica respecto del origen', 'متناظرة حول الأصل'))}</Label>
-            <Caption y={306}>{t(say('Kalkulatu f(−x) eta konparatu f(x)-rekin', 'Calcula f(−x) y compárala con f(x)', 'احسب f(−x) وقارنها بـ f(x)'))}</Caption>
+            <Label x={540} y={286} textAnchor="middle" fontSize={14} fill={INK}>{t(say('Jatorriarekiko simetrikoa', 'Simétrica respecto del origen', 'متناظرة حول الأصل', 'Symmetric about the origin'))}</Label>
+            <Caption y={306}>{t(say('Kalkulatu f(−x) eta konparatu f(x)-rekin', 'Calcula f(−x) y compárala con f(x)', 'احسب f(−x) وقارنها بـ f(x)', 'Calculate f(−x) and compare it with f(x)'))}</Caption>
         </Figure>
     )
 }

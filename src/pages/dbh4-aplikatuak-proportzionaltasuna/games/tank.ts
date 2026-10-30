@@ -50,7 +50,7 @@ export interface TankRound {
 const TAP_HOURS = [2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 24] as const
 const DRAIN_HOURS = [3, 4, 5, 6, 8, 10, 12, 15, 20, 24] as const
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 
 /** Part of the tank filled in an hour; negative when the drain wins */
 export function tankRate(round: TankRound, choice: TankChoice): FractionValue {
@@ -122,7 +122,7 @@ export function tankStars(total: number): Stars {
 
 /* ---------- Texts ---------- */
 
-export const TANK_LETTERS: LocalizedText[] = [say('A', 'A', 'أ'), say('B', 'B', 'ب'), say('C', 'C', 'ج'), say('D', 'D', 'د')]
+export const TANK_LETTERS: LocalizedText[] = [say('A', 'A', 'أ', 'A'), say('B', 'B', 'ب', 'B'), say('C', 'C', 'ج', 'C'), say('D', 'D', 'د', 'D')]
 
 /** The parts of an hour: 1/4 + 1/6 − 1/12 = 1/3; a single tap is just its part */
 export function tankLatex(round: TankRound, choice: TankChoice): string {
@@ -135,7 +135,7 @@ export const tankMinutes = (hours: FractionValue) => Math.round(60 * toNumber(ho
 
 export function tankTarget(round: TankRound): LocalizedText {
     const minutes = tankMinutes(round.target)
-    return say(durationText(minutes, 'eu'), durationText(minutes, 'es'), durationText(minutes, 'ar'))
+    return say(durationText(minutes, 'eu'), durationText(minutes, 'es'), durationText(minutes, 'ar'), durationText(minutes, 'en'))
 }
 
 /** What a try gives: just in time, too soon, too late or never */
@@ -144,27 +144,27 @@ export function tankVerdict(round: TankRound, choice: TankChoice): { right: bool
     if (!hours) {
         return {
             right: false,
-            text: say('Hustubideak sartzen den beste edo gehiago ateratzen du: ez da inoiz beteko.', 'El desagüe saca tanto o más de lo que entra: no se llenará nunca.', 'يُخرج المصرف قدر ما يدخل أو أكثر: لن يمتلئ أبدًا.')
+            text: say('Hustubideak sartzen den beste edo gehiago ateratzen du: ez da inoiz beteko.', 'El desagüe saca tanto o más de lo que entra: no se llenará nunca.', 'يُخرج المصرف قدر ما يدخل أو أكثر: لن يمتلئ أبدًا.', 'The drain takes out as much as or more than what comes in: it will never fill up.')
         }
     }
     const minutes = tankMinutes(hours)
-    const time = (language: 'eu' | 'es' | 'ar') => durationText(minutes, language)
-    if (equals(hours, round.target)) return { right: true, text: say(`Justu garaiz! Biltegia betetzeko: ${time('eu')}.`, `¡Justo a tiempo! Se llena en ${time('es')}.`, `في الوقت تمامًا! يمتلئ في ${time('ar')}.`) }
+    const time = (language: 'eu' | 'es' | 'en' | 'ar') => durationText(minutes, language)
+    if (equals(hours, round.target)) return { right: true, text: say(`Justu garaiz! Biltegia betetzeko: ${time('eu')}.`, `¡Justo a tiempo! Se llena en ${time('es')}.`, `في الوقت تمامًا! يمتلئ في ${time('ar')}.`, `Just in time! It fills in ${time('en')}.`) }
     return toNumber(hours) < toNumber(round.target)
-        ? { right: false, text: say(`Betetzeko: ${time('eu')}. Goizegi!`, `Se llena en ${time('es')}: demasiado pronto.`, `يمتلئ في ${time('ar')}: مبكرًا جدًا.`) }
-        : { right: false, text: say(`Betetzeko: ${time('eu')}. Beranduegi!`, `Se llena en ${time('es')}: tarda demasiado.`, `يمتلئ في ${time('ar')}: متأخرًا جدًا.`) }
+        ? { right: false, text: say(`Betetzeko: ${time('eu')}. Goizegi!`, `Se llena en ${time('es')}: demasiado pronto.`, `يمتلئ في ${time('ar')}: مبكرًا جدًا.`, `It fills in ${time('en')}: too soon.`) }
+        : { right: false, text: say(`Betetzeko: ${time('eu')}. Beranduegi!`, `Se llena en ${time('es')}: tarda demasiado.`, `يمتلئ في ${time('ar')}: متأخرًا جدًا.`, `It fills in ${time('en')}: it takes too long.`) }
 }
 
 /** After a miss: the part of the tank each hour has to fill */
 export function tankHint(round: TankRound): LocalizedText {
     const part = toLatex(divide(fraction(1), round.target))
-    return say(`Ordu bakoitzean biltegiaren $${part}$ bete behar da.`, `Cada hora hay que llenar $${part}$ del depósito.`, `يجب ملء $${part}$ من الخزان كل ساعة.`)
+    return say(`Ordu bakoitzean biltegiaren $${part}$ bete behar da.`, `Cada hora hay que llenar $${part}$ del depósito.`, `يجب ملء $${part}$ من الخزان كل ساعة.`, `Each hour, you must fill $${part}$ of the tank.`)
 }
 
 /** What to open, in words: «A, C y el desagüe» */
 export function tankSolutionText(round: TankRound): LocalizedText {
-    const names = (language: 'eu' | 'es' | 'ar') => round.solution.taps.flatMap((open, index) => (open ? [TANK_LETTERS[index][language]] : []))
-    const list = (language: 'eu' | 'es' | 'ar', and: string, drain: string) => {
+    const names = (language: 'eu' | 'es' | 'en' | 'ar') => round.solution.taps.flatMap((open, index) => (open ? [TANK_LETTERS[index][language]] : []))
+    const list = (language: 'eu' | 'es' | 'en' | 'ar', and: string, drain: string) => {
         const items = [...names(language), ...(round.solution.drain ? [drain] : [])]
         if (language === 'ar') return items.join(' و')
         return `${items.slice(0, -1).join(', ')} ${and} ${items[items.length - 1]}`
@@ -172,6 +172,6 @@ export function tankSolutionText(round: TankRound): LocalizedText {
     return say(
         `Ireki behar zena: ${list('eu', 'eta', 'hustubidea')}.`,
         `Había que abrir ${list('es', 'y', 'el desagüe')}.`,
-        `كان يجب فتح ${list('ar', 'و', 'المصرف')}.`
+        `كان يجب فتح ${list('ar', 'و', 'المصرف')}.`, `You had to open ${list('en', 'and', 'the drain')}.`
     )
 }

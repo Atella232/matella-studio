@@ -5,6 +5,7 @@ import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { toExactDecimal, toNumber, type FractionValue } from '../../../features/unit-v2/math/fraction'
 import type { LocalizedText, UnitLanguage } from '../../../features/unit-v2/types'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import { transportSurvey } from '../data'
 import { COLORS, INK, LINE, MUTED, PAPER, SECOND, STAGE, STAGE_TINT } from '../palette'
 import {
@@ -58,21 +59,21 @@ import {
     type PolygonKind
 } from './labTools'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const sum = (values: number[]) => values.reduce((total, value) => total + value, 0)
 
 /** A value as a decimal in the learner's language: exact when short, otherwise rounded with ≈ */
 function decimal(value: FractionValue, language: UnitLanguage, digits = 2): string {
-    const separator = language === 'ar' ? '.' : ','
+    const separator = language === 'ar' ? '.' : decimalSeparatorFor(language)
     const exact = toExactDecimal(value, separator)
     if (exact !== null && exact.replace(/^[^,.]*[,.]?/, '').length <= digits) return exact
     const rounded = Math.round(toNumber(value) * 10 ** digits) / 10 ** digits
     return `≈ ${String(rounded).replace('.', separator)}`
 }
 
-/** "= value" or "≈ value" for LaTeX, with the comma between braces */
+/** "= value" or "≈ value" for LaTeX, with the comma between braces (the point in Arabic; MathText writes the point in English) */
 const texIs = (value: FractionValue, language: UnitLanguage, digits = 2) => {
-    const written = decimal(value, language, digits).replace(',', '{,}')
+    const written = decimal(value, language === 'ar' ? 'ar' : 'es', digits).replace(',', '{,}')
     return written.startsWith('≈ ') ? `\\approx ${written.slice(2)}` : `=${written}`
 }
 
@@ -117,7 +118,7 @@ export function CumulativeTool(props: LabToolProps) {
     const controls = (
         <>
             {state.counts.map((count, value) => (
-                <Stepper key={value} label={l(say(`${value} liburu (fᵢ)`, `${value} libros (fᵢ)`, `${value} كتب (fᵢ)`))} value={count} min={0} max={COUNT_MAX} onChange={(next) => setState((s) => setCount(s, value, next))} language={props.language} />
+                <Stepper key={value} label={l(say(`${value} liburu (fᵢ)`, `${value} libros (fᵢ)`, `${value} كتب (fᵢ)`, `${value} books (fᵢ)`))} value={count} min={0} max={COUNT_MAX} onChange={(next) => setState((s) => setCount(s, value, next))} language={props.language} />
             ))}
         </>
     )
@@ -127,8 +128,8 @@ export function CumulativeTool(props: LabToolProps) {
     }
     const latex = total === 0 ? 'N=0' : `N=${total}\\qquad F_2=${cumulative[2]}\\qquad H_2=\\frac{${cumulative[2]}}{${total}}${texIs(relativeCumulative(state.counts, 2)!, props.language)}`
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say('Azken metatua N da: datu guztiak.', 'La última acumulada es N: todos los datos.', 'آخر متجمّع هو N: كل البيانات.'))} />} challenges={cumulativeChallenges} state={state}>
-            <Board height={250} label={l(say('Maiztasun metatuen taula eta eskailera', 'Tabla y escalera de frecuencias acumuladas', 'جدول التكرارات المتجمّعة وسلّمها'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say('Azken metatua N da: datu guztiak.', 'La última acumulada es N: todos los datos.', 'آخر متجمّع هو N: كل البيانات.', 'The last cumulative frequency is N: all the data.'))} />} challenges={cumulativeChallenges} state={state}>
+            <Board height={250} label={l(say('Maiztasun metatuen taula eta eskailera', 'Tabla y escalera de frecuencias acumuladas', 'جدول التكرارات المتجمّعة وسلّمها', 'Table and step graph of cumulative frequencies'))}>
                 <rect x={columns[2] - 45} y={14} width={90} height={196} rx={10} fill={STAGE_TINT} />
                 {[<Sub key="x" letter="x" index="i" />, <Sub key="f" letter="f" index="i" />, <Sub key="F" letter="F" index="i" />, <Sub key="h" letter="H" index="i" />].map((header, index) => (
                     <Text key={index} x={columns[index]} y={36} color={STAGE} size={17}>{header}</Text>
@@ -159,8 +160,8 @@ export function CumulativeTool(props: LabToolProps) {
 /* ---------- 2. Histogram and polygons ---------- */
 
 const polygonNames: Record<PolygonKind, LocalizedText> = {
-    frequency: say('Maiztasunak', 'Frecuencias', 'التكرارات'),
-    cumulative: say('Metatuak', 'Acumuladas', 'المتجمّعة')
+    frequency: say('Maiztasunak', 'Frecuencias', 'التكرارات', 'Frequencies'),
+    cumulative: say('Metatuak', 'Acumuladas', 'المتجمّعة', 'Cumulative')
 }
 
 export function HistogramTool(props: LabToolProps) {
@@ -180,13 +181,13 @@ export function HistogramTool(props: LabToolProps) {
             {state.counts.map((count, index) => (
                 <Stepper key={index} label={`[${HEIGHT_EDGES[index]}, ${HEIGHT_EDGES[index + 1]})`} value={count} min={0} max={CLASS_MAX} onChange={(next) => setState((s) => setHistogram(s, { index, count: next }))} language={props.language} />
             ))}
-            <Segmented label={l(say('Poligonoa', 'Polígono', 'المضلّع'))} value={state.polygon} options={(['frequency', 'cumulative'] as PolygonKind[]).map((value) => ({ value, label: l(polygonNames[value]) }))} onChange={(value) => setState((s) => setHistogram(s, { polygon: value }))} />
+            <Segmented label={l(say('Poligonoa', 'Polígono', 'المضلّع', 'Polygon'))} value={state.polygon} options={(['frequency', 'cumulative'] as PolygonKind[]).map((value) => ({ value, label: l(polygonNames[value]) }))} onChange={(value) => setState((s) => setHistogram(s, { polygon: value }))} />
         </>
     )
     const latex = mean === null ? 'N=0' : `N=${total}\\qquad \\bar{x}${texIs(mean, props.language)}`
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say('Batez bestekoa klase-markekin: 145, 155, 165, 175.', 'Media con las marcas de clase: 145, 155, 165, 175.', 'المتوسط بمراكز الفئات: 145، 155، 165، 175.'))} />} challenges={histogramChallenges} state={state}>
-            <Board height={290} label={l(say('Altueren histograma', 'Histograma de alturas', 'مدرّج الأطوال'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say('Batez bestekoa klase-markekin: 145, 155, 165, 175.', 'Media con las marcas de clase: 145, 155, 165, 175.', 'المتوسط بمراكز الفئات: 145، 155، 165، 175.', 'Mean using the class marks: 145, 155, 165, 175.'))} />} challenges={histogramChallenges} state={state}>
+            <Board height={290} label={l(say('Altueren histograma', 'Histograma de alturas', 'مدرّج الأطوال', 'Histogram of heights'))}>
                 <line x1={x(130)} x2={x(130)} y1={30} y2={250} stroke={INK} strokeWidth={2} />
                 <line x1={x(130)} x2={x(192)} y1={250} y2={250} stroke={INK} strokeWidth={2} />
                 {[0, 0.25, 0.5, 0.75, 1].map((part) => {
@@ -237,11 +238,11 @@ export function PieTool(props: LabToolProps) {
         </>
     )
     const note = total === 100
-        ? l(say('Ehunekoek 100 ematen dute: zirkulua osorik dago.', 'Los porcentajes suman 100: el círculo está completo.', 'مجموع النسب 100: الدائرة كاملة.'))
-        : l(say(`Ehunekoek ${total} ematen dute: ${total < 100 ? 'zirkulua ez da osatzen' : 'gehiegi dira'}.`, `Los porcentajes suman ${total}: ${total < 100 ? 'el círculo no se completa' : 'sobran'}.`, `مجموع النسب ${total}: ${total < 100 ? 'الدائرة غير مكتملة' : 'زائدة'}.`))
+        ? l(say('Ehunekoek 100 ematen dute: zirkulua osorik dago.', 'Los porcentajes suman 100: el círculo está completo.', 'مجموع النسب 100: الدائرة كاملة.', 'The percentages add up to 100: the circle is complete.'))
+        : l(say(`Ehunekoek ${total} ematen dute: ${total < 100 ? 'zirkulua ez da osatzen' : 'gehiegi dira'}.`, `Los porcentajes suman ${total}: ${total < 100 ? 'el círculo no se completa' : 'sobran'}.`, `مجموع النسب ${total}: ${total < 100 ? 'الدائرة غير مكتملة' : 'زائدة'}.`, `The percentages add up to ${total}: ${total < 100 ? 'el círculo no se completa' : 'sobran'}.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={`${total}\\,\\%\\ \\to\\ ${percentAngle(total).toString().replace('.', props.language === 'ar' ? '.' : '{,}')}^{\\circ}`} note={note} />} challenges={pieChallenges} state={state}>
-            <Board height={300} label={l(say('Sektore-diagrama', 'Diagrama de sectores', 'مخطط دائري'))}>
+            <Board height={300} label={l(say('Sektore-diagrama', 'Diagrama de sectores', 'مخطط دائري', 'Pie chart'))}>
                 <circle cx={cx} cy={cy} r={r} fill={PAPER} stroke={LINE} strokeWidth={2} strokeDasharray="6 5" />
                 {state.percents.map((percent, index) => {
                     if (percent === 0) return null
@@ -256,17 +257,17 @@ export function PieTool(props: LabToolProps) {
                     return (
                         <g key={index}>
                             {full ? <circle cx={cx} cy={cy} r={r} fill={COLORS[index]} fillOpacity={0.72} stroke={INK} strokeWidth={2} /> : <path d={`M${cx} ${cy} L${x1} ${y1} A${r} ${r} 0 ${end - start > 180 ? 1 : 0} 1 ${x2} ${y2} Z`} fill={COLORS[index]} fillOpacity={0.72} stroke={INK} strokeWidth={2} />}
-                            {end - start >= 18 && <Text x={lx} y={ly + 5} size={14}>{`${Math.round((end - start) * 10) / 10}°`.replace('.', props.language === 'ar' ? '.' : ',')}</Text>}
+                            {end - start >= 18 && <Text x={lx} y={ly + 5} size={14}>{`${Math.round((end - start) * 10) / 10}°`.replace('.', props.language === 'ar' ? '.' : decimalSeparatorFor(props.language))}</Text>}
                         </g>
                     )
                 })}
                 {transportSurvey.map((_, index) => (
                     <g key={index}>
                         <rect x={330} y={70 + index * 44} width={20} height={20} fill={COLORS[index]} fillOpacity={0.72} stroke={INK} strokeWidth={1.4} />
-                        <Text x={360} y={86 + index * 44} anchor="start" size={15}>{`${state.percents[index]} % → ${String(percentAngle(state.percents[index])).replace('.', props.language === 'ar' ? '.' : ',')}°`}</Text>
+                        <Text x={360} y={86 + index * 44} anchor="start" size={15}>{`${state.percents[index]}${props.language === 'en' ? '%' : ' %'} → ${String(percentAngle(state.percents[index])).replace('.', props.language === 'ar' ? '.' : decimalSeparatorFor(props.language))}°`}</Text>
                     </g>
                 ))}
-                <Text x={330} y={270} anchor="start" size={15} color={total === 100 ? STAGE : SECOND}>Σ = {total} %</Text>
+                <Text x={330} y={270} anchor="start" size={15} color={total === 100 ? STAGE : SECOND}>Σ = {total}{props.language === 'en' ? '%' : ' %'}</Text>
             </Board>
         </ToolFrame>
     )
@@ -302,8 +303,8 @@ export function CentreTool(props: LabToolProps) {
     )
     const latex = mean === null || median === null ? 'N=0' : `\\bar{x}${texIs(mean, props.language)}\\qquad \\text{Me}${texIs(median, props.language)}\\qquad \\text{Mo}=${modes.join(',\\ ')}`
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`N = ${total}. Gorria batez bestekoa da, urdina mediana.`, `N = ${total}. La roja es la media; la azul, la mediana.`, `N = ${total}. الأحمر المتوسط والأزرق الوسيط.`))} />} challenges={centreChallenges} state={state}>
-            <Board height={290} label={l(say('Maiztasunen barra-diagrama eta parametroak', 'Diagrama de barras de frecuencias y parámetros', 'مخطط أعمدة التكرارات والمقاييس'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`N = ${total}. Gorria batez bestekoa da, urdina mediana.`, `N = ${total}. La roja es la media; la azul, la mediana.`, `N = ${total}. الأحمر المتوسط والأزرق الوسيط.`, `N = ${total}. The red one is the mean; the blue one, the median.`))} />} challenges={centreChallenges} state={state}>
+            <Board height={290} label={l(say('Maiztasunen barra-diagrama eta parametroak', 'Diagrama de barras de frecuencias y parámetros', 'مخطط أعمدة التكرارات والمقاييس', 'Bar chart of frequencies and statistics'))}>
                 <line x1={40} x2={620} y1={210} y2={210} stroke={INK} strokeWidth={2} />
                 {CENTRE_VALUES.map((value) => {
                     const count = state.counts[value]
@@ -336,7 +337,7 @@ export function BoxTool(props: LabToolProps) {
     const controls = (
         <>
             {state.values.map((value, index) => (
-                <Stepper key={index} label={l(say(`${index + 1}. datua`, `Dato ${index + 1}`, `البيان ${index + 1}`))} value={value} min={0} max={BOX_MAX} onChange={(next) => setState((s) => setBoxValue(s, index, next))} language={props.language} />
+                <Stepper key={index} label={l(say(`${index + 1}. datua`, `Dato ${index + 1}`, `البيان ${index + 1}`, `Value ${index + 1}`))} value={value} min={0} max={BOX_MAX} onChange={(next) => setState((s) => setBoxValue(s, index, next))} language={props.language} />
             ))}
         </>
     )
@@ -347,8 +348,8 @@ export function BoxTool(props: LabToolProps) {
         return { value, level }
     })
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`Ibiltartea: ${summary.max} − ${summary.min} = ${summary.max - summary.min}. Kutxa: ${summary.q3} − ${summary.q1} = ${summary.q3 - summary.q1}.`, `Recorrido: ${summary.max} − ${summary.min} = ${summary.max - summary.min}. Caja: ${summary.q3} − ${summary.q1} = ${summary.q3 - summary.q1}.`, `المدى: ${summary.max} − ${summary.min} = ${summary.max - summary.min}. الصندوق: ${summary.q3} − ${summary.q1} = ${summary.q3 - summary.q1}.`))} />} challenges={boxChallenges} state={state}>
-            <Board height={300} label={l(say('Datuak eta kutxa-diagrama', 'Los datos y su diagrama de caja', 'البيانات ومخطط الصندوق'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`Ibiltartea: ${summary.max} − ${summary.min} = ${summary.max - summary.min}. Kutxa: ${summary.q3} − ${summary.q1} = ${summary.q3 - summary.q1}.`, `Recorrido: ${summary.max} − ${summary.min} = ${summary.max - summary.min}. Caja: ${summary.q3} − ${summary.q1} = ${summary.q3 - summary.q1}.`, `المدى: ${summary.max} − ${summary.min} = ${summary.max - summary.min}. الصندوق: ${summary.q3} − ${summary.q1} = ${summary.q3 - summary.q1}.`, `Range: ${summary.max} − ${summary.min} = ${summary.max - summary.min}. Box: ${summary.q3} − ${summary.q1} = ${summary.q3 - summary.q1}.`))} />} challenges={boxChallenges} state={state}>
+            <Board height={300} label={l(say('Datuak eta kutxa-diagrama', 'Los datos y su diagrama de caja', 'البيانات ومخطط الصندوق', 'The data and its box plot'))}>
                 {dots.map(({ value, level }, index) => (
                     <circle key={index} cx={x(value)} cy={110 - level * 22} r={9} fill={STAGE} fillOpacity={0.6} stroke={INK} strokeWidth={1.4} />
                 ))}
@@ -387,15 +388,15 @@ export function DiceTool(props: LabToolProps) {
     const y0 = 34
     const controls = (
         <>
-            <Segmented label={l(say('Gertaera: batura', 'Suceso: la suma', 'الحدث: المجموع'))} value={state.rule} options={(['equal', 'atLeast', 'atMost'] as DiceRule[]).map((value) => ({ value, label: ruleNames[value] }))} onChange={(value) => setState((s) => setDice(s, { rule: value }))} />
-            <Stepper label={l(say('Zenbakia', 'Número', 'العدد'))} value={state.target} min={2} max={12} onChange={(value) => setState((s) => setDice(s, { target: value }))} language={props.language} />
+            <Segmented label={l(say('Gertaera: batura', 'Suceso: la suma', 'الحدث: المجموع', 'Event: the sum'))} value={state.rule} options={(['equal', 'atLeast', 'atMost'] as DiceRule[]).map((value) => ({ value, label: ruleNames[value] }))} onChange={(value) => setState((s) => setDice(s, { rule: value }))} />
+            <Stepper label={l(say('Zenbakia', 'Número', 'العدد', 'Number'))} value={state.target} min={2} max={12} onChange={(value) => setState((s) => setDice(s, { target: value }))} language={props.language} />
         </>
     )
     const simplified = probability.denominator === 36 ? '' : `=\\frac{${probability.numerator}}{${probability.denominator}}`
     const latex = `P=\\frac{${favourable}}{36}${favourable === 0 ? '=0' : simplified}\\qquad P(\\bar{A})=\\frac{${36 - favourable}}{36}`
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`Batura ${ruleNames[state.rule]} ${state.target}: ${favourable} gelaxka 36tik.`, `Suma ${ruleNames[state.rule]} ${state.target}: ${favourable} casillas de 36.`, `المجموع ${ruleNames[state.rule]} ${state.target}: ${favourable} خانة من 36.`))} />} challenges={diceChallenges} state={state}>
-            <Board height={300} label={l(say('Bi dadoren baturen taula', 'Tabla de sumas de dos dados', 'جدول مجاميع نردين'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`Batura ${ruleNames[state.rule]} ${state.target}: ${favourable} gelaxka 36tik.`, `Suma ${ruleNames[state.rule]} ${state.target}: ${favourable} casillas de 36.`, `المجموع ${ruleNames[state.rule]} ${state.target}: ${favourable} خانة من 36.`, `Sum ${ruleNames[state.rule]} ${state.target}: ${favourable} cells out of 36.`))} />} challenges={diceChallenges} state={state}>
+            <Board height={300} label={l(say('Bi dadoren baturen taula', 'Tabla de sumas de dos dados', 'جدول مجاميع نردين', 'Table of sums of two dice'))}>
                 <Text x={x0 - 26} y={y0 + 14} color={MUTED} size={16}>+</Text>
                 {[1, 2, 3, 4, 5, 6].map((face) => (
                     <g key={face}>

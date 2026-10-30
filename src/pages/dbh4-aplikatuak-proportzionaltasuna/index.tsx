@@ -12,16 +12,17 @@ import { proportionDbh4ApStages, proportionDbh4ApTopics } from './lessons'
 const proportzionaltasunaDbh4ApUnit: UnitDefinition = {
     storagePrefix: 'matella-proportzionaltasuna-dbh4ap',
     coursePath: '/matematika/dbh4-aplikatuak',
-    courseTitle: { eu: '4. DBH · Aplikatuak', es: '4.º ESO · Aplicadas', ar: 'الصف الرابع · التطبيقية' },
-    title: { eu: 'Proportzionaltasuna', es: 'Proporcionalidad', ar: 'التناسب' },
-    documentTitle: { eu: 'Proportzionaltasuna · 4. DBH', es: 'Proporcionalidad · 4.º ESO', ar: 'التناسب · الصف الرابع' },
+    courseTitle: { eu: '4. DBH · Aplikatuak', es: '4.º ESO · Aplicadas', en: '4th ESO · Applied', ar: 'الصف الرابع · التطبيقية' },
+    title: { eu: 'Proportzionaltasuna', es: 'Proporcionalidad', en: 'Proportionality', ar: 'التناسب' },
+    documentTitle: { eu: 'Proportzionaltasuna · 4. DBH', es: 'Proporcionalidad · 4.º ESO', en: 'Proportionality · 4th ESO', ar: 'التناسب · الصف الرابع' },
     tagline: {
         eu: 'Hiruko erregelatik bankura: proportzionaltasun konposatua, banaketak, ehuneko kateatuak, interes bakuna eta konposatua, nahasketak, mugikariak eta txorrotak.',
         es: 'De la regla de tres al banco: proporcionalidad compuesta, repartos, porcentajes encadenados, interés simple y compuesto, mezclas, móviles y grifos.',
+        en: 'From the rule of three to the bank: compound proportion, sharing, chained percentages, simple and compound interest, mixtures, moving objects and taps.',
         ar: 'من قاعدة الثلاثة إلى المصرف: التناسب المركّب، والتوزيعات، والنسب المتتالية، والفائدة البسيطة والمركّبة، والخلائط، والمتحركات، والصنابير.'
     },
     heroArt: <ProportionDbh4ApHeroArt />,
-    pathSubtitle: { eu: 'Bost etapa, hiruko erregelatik problema aritmetikoetara', es: 'Cinco etapas, de la regla de tres a los problemas aritméticos', ar: 'خمس مراحل، من قاعدة الثلاثة إلى المسائل الحسابية' },
+    pathSubtitle: { eu: 'Bost etapa, hiruko erregelatik problema aritmetikoetara', es: 'Cinco etapas, de la regla de tres a los problemas aritméticos', en: 'Five stages, from the rule of three to arithmetic problems.', ar: 'خمس مراحل، من قاعدة الثلاثة إلى المسائل الحسابية' },
     stages: proportionDbh4ApStages,
     topics: proportionDbh4ApTopics,
     diagnostic: proportionDbh4ApDiagnostic,
@@ -29,32 +30,32 @@ const proportzionaltasunaDbh4ApUnit: UnitDefinition = {
     exerciseBank: proportionDbh4ApExerciseBank,
     challenges: proportionDbh4ApChallenges,
     lab: {
-        description: { eu: `${proportionDbh4ApLabTools.length} tresna: magnitudeen sailkatzailea, gezidun hiruko erregela, proportzionaltasun konposatuaren makina, banaketak, ehunekoen barra, ehuneko kateatuak, interes bakuna eta konposatua, nahasketak, mugikariak, distantzia-denbora grafikoa eta txorrotak, erronkekin.`, es: `${proportionDbh4ApLabTools.length} herramientas: clasificador de magnitudes, regla de tres con flechas, máquina de proporcionalidad compuesta, repartos, barra del 100 %, porcentajes encadenados, interés simple y compuesto, mezclas, móviles, gráfica distancia–tiempo y grifos, con retos.`, ar: `${proportionDbh4ApLabTools.length} أدوات: مصنّف المقادير، وقاعدة الثلاثة بالأسهم، وآلة التناسب المركّب، والتوزيعات، وشريط 100٪، والنسب المتتالية، والفائدة البسيطة والمركّبة، والخلائط، والمتحركات، ومنحنى المسافة والزمن، والصنابير، مع تحديات.` },
+        description: { eu: `${proportionDbh4ApLabTools.length} tresna: magnitudeen sailkatzailea, gezidun hiruko erregela, proportzionaltasun konposatuaren makina, banaketak, ehunekoen barra, ehuneko kateatuak, interes bakuna eta konposatua, nahasketak, mugikariak, distantzia-denbora grafikoa eta txorrotak, erronkekin.`, es: `${proportionDbh4ApLabTools.length} herramientas: clasificador de magnitudes, regla de tres con flechas, máquina de proporcionalidad compuesta, repartos, barra del 100 %, porcentajes encadenados, interés simple y compuesto, mezclas, móviles, gráfica distancia–tiempo y grifos, con retos.`, en: `${proportionDbh4ApLabTools.length} tools: quantity sorter, rule of three with arrows, compound proportion machine, sharing, 100% bar, chained percentages, simple and compound interest, mixtures, moving objects, distance–time graph and taps, with challenges.`, ar: `${proportionDbh4ApLabTools.length} أدوات: مصنّف المقادير، وقاعدة الثلاثة بالأسهم، وآلة التناسب المركّب، والتوزيعات، وشريط 100٪، والنسب المتتالية، والفائدة البسيطة والمركّبة، والخلائط، والمتحركات، ومنحنى المسافة والزمن، والصنابير، مع تحديات.` },
         progressIds: proportionDbh4ApLabChallengeIds,
         toolForTopic: proportionDbh4ApLabToolForTopic,
         render: (props) => <ProportionDbh4ApLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Zortzi joko: lasterketa, memoria, akatsen detektibea, bankua, errepideko topaketa, biltegia, nahasketa perfektua eta dendako kutxa.', es: 'Ocho juegos: carrera, memoria, detective de errores, el banco, encuentro en la carretera, el depósito, la mezcla perfecta y la caja de la tienda.', ar: 'ثماني ألعاب: السباق والذاكرة ومحقق الأخطاء والمصرف ولقاء على الطريق والخزان والخليط المثالي وصندوق المتجر.' },
+        description: { eu: 'Zortzi joko: lasterketa, memoria, akatsen detektibea, bankua, errepideko topaketa, biltegia, nahasketa perfektua eta dendako kutxa.', es: 'Ocho juegos: carrera, memoria, detective de errores, el banco, encuentro en la carretera, el depósito, la mezcla perfecta y la caja de la tienda.', en: 'Eight games: race, memory, error detective, the bank, meeting on the road, the tank, the perfect mixture and the shop till.', ar: 'ثماني ألعاب: السباق والذاكرة ومحقق الأخطاء والمصرف ولقاء على الطريق والخزان والخليط المثالي وصندوق المتجر.' },
         progressIds: proportionDbh4ApGameProgressIds,
         recordsKey: PROPORTION_DBH4AP_GAME_RECORDS_KEY,
         render: (props) => <ProportionDbh4ApGames {...props} />
     },
     answers: {
-        note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (27,75 edo 27.75). Ehunekoetan, idatzi % ikurraren aurreko zenbakia; dirua, zentimoetara biribilduta.', es: 'Escribe un número, con coma o con punto (27,75 o 27.75). En los porcentajes, escribe el número que va delante del %; el dinero, redondeado a los céntimos.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (27.75). وفي النسب المئوية اكتب العدد الذي يسبق ٪؛ والمال مقرّبًا إلى السنتات.' },
+        note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (27,75 edo 27.75). Ehunekoetan, idatzi % ikurraren aurreko zenbakia; dirua, zentimoetara biribilduta.', es: 'Escribe un número, con coma o con punto (27,75 o 27.75). En los porcentajes, escribe el número que va delante del %; el dinero, redondeado a los céntimos.', en: 'Write a number, with a decimal point or a decimal comma (for example 27.75). For percentages, write the number before the %; for money, round to the nearest cent.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (27.75). وفي النسب المئوية اكتب العدد الذي يسبق ٪؛ والمال مقرّبًا إلى السنتات.' },
         defaultForm: 'any',
         inputMode: 'decimal',
         normalizeInput: readMoneyAnswer,
-        placeholder: () => ({ eu: 'Adib.: 27,75', es: 'Ej.: 27,75', ar: 'مثال: 27.75' }),
-        wrongForm: () => ({ eu: 'Balioa zuzena da, baina idatzi zenbaki gisa.', es: 'El valor es correcto, pero escríbelo como número.', ar: 'القيمة صحيحة، لكن اكتبها عددًا.' }),
-        unreadable: { eu: 'Ez dut erantzun hori ulertzen. Idatzi zenbaki bat, adibidez 30 edo 27,75.', es: 'No entiendo esa respuesta. Escribe un número, por ejemplo 30 o 27,75.', ar: 'لم أفهم هذه الإجابة. اكتب عددًا، مثل 30 أو 27.75.' }
+        placeholder: () => ({ eu: 'Adib.: 27,75', es: 'Ej.: 27,75', en: 'e.g. 27.75', ar: 'مثال: 27.75' }),
+        wrongForm: () => ({ eu: 'Balioa zuzena da, baina idatzi zenbaki gisa.', es: 'El valor es correcto, pero escríbelo como número.', en: 'The value is correct, but write it as a number.', ar: 'القيمة صحيحة، لكن اكتبها عددًا.' }),
+        unreadable: { eu: 'Ez dut erantzun hori ulertzen. Idatzi zenbaki bat, adibidez 30 edo 27,75.', es: 'No entiendo esa respuesta. Escribe un número, por ejemplo 30 o 27,75.', en: 'I don\'t understand that answer. Write a number, for example 30 or 27.75.', ar: 'لم أفهم هذه الإجابة. اكتب عددًا، مثل 30 أو 27.75.' }
     },
     errorByStage: {
-        simple: { eu: 'Zuzena: zatidura konstantea, x = b · c : a. Alderantzizkoa: biderkadura konstantea, x = a · b : c.', es: 'Directa: cociente constante, x = b · c : a. Inversa: producto constante, x = a · b : c.', ar: 'الطردي: حاصل قسمة ثابت، x = b · c : a. العكسي: حاصل ضرب ثابت، x = a · b : c.' },
-        compound: { eu: 'Magnitude bakoitza bere aldetik: zuzena berria/zaharra, alderantzizkoa zaharra/berria. Banaketa alderantzizkoa: alderantzizkoekiko.', es: 'Cada magnitud por separado: directa nuevo/viejo, inversa viejo/nuevo. Reparto inverso: a los inversos.', ar: 'كل مقدار على حدة: الطردي الجديد/القديم، والعكسي القديم/الجديد. التوزيع العكسي: على المقلوبات.' },
-        percent: { eu: 'Amaierakoa = hasierakoa · indizea. Kateatuak: biderkatu indizeak.', es: 'Final = inicial · índice. Encadenados: multiplica los índices.', ar: 'النهائية = الأصلية · المؤشر. المتتالية: اضرب المؤشرات.' },
-        interest: { eu: 'Bakuna: I = C · r · t : 100 (hilabeteak: 1200). Konposatua: urtero bider 1 + r : 100.', es: 'Simple: I = C · r · t : 100 (meses: 1200). Compuesto: cada año por 1 + r : 100.', ar: 'البسيطة: I = C · r · t : 100 (الأشهر: 1200). المركّبة: كل سنة في 1 + r : 100.' },
-        problems: { eu: 'Nahasketa: kostu osoa : kantitate osoa. Mugikariak: batu edo kendu abiadurak. Txorrotak: batu ordu bateko zatiak.', es: 'Mezcla: coste total : cantidad total. Móviles: suma o resta las velocidades. Grifos: suma las partes de una hora.', ar: 'الخليط: الكلفة الكلية : الكمية الكلية. المتحركات: اجمع السرعتين أو اطرحهما. الصنابير: اجمع أجزاء الساعة.' }
+        simple: { eu: 'Zuzena: zatidura konstantea, x = b · c : a. Alderantzizkoa: biderkadura konstantea, x = a · b : c.', es: 'Directa: cociente constante, x = b · c : a. Inversa: producto constante, x = a · b : c.', en: 'Direct: constant quotient, x = b · c : a. Inverse: constant product, x = a · b : c.', ar: 'الطردي: حاصل قسمة ثابت، x = b · c : a. العكسي: حاصل ضرب ثابت، x = a · b : c.' },
+        compound: { eu: 'Magnitude bakoitza bere aldetik: zuzena berria/zaharra, alderantzizkoa zaharra/berria. Banaketa alderantzizkoa: alderantzizkoekiko.', es: 'Cada magnitud por separado: directa nuevo/viejo, inversa viejo/nuevo. Reparto inverso: a los inversos.', en: 'Each quantity separately: direct new/old, inverse old/new. Inverse sharing: in proportion to the reciprocals.', ar: 'كل مقدار على حدة: الطردي الجديد/القديم، والعكسي القديم/الجديد. التوزيع العكسي: على المقلوبات.' },
+        percent: { eu: 'Amaierakoa = hasierakoa · indizea. Kateatuak: biderkatu indizeak.', es: 'Final = inicial · índice. Encadenados: multiplica los índices.', en: 'Final = initial · index. Chained: multiply the indices.', ar: 'النهائية = الأصلية · المؤشر. المتتالية: اضرب المؤشرات.' },
+        interest: { eu: 'Bakuna: I = C · r · t : 100 (hilabeteak: 1200). Konposatua: urtero bider 1 + r : 100.', es: 'Simple: I = C · r · t : 100 (meses: 1200). Compuesto: cada año por 1 + r : 100.', en: 'Simple: I = C · r · t : 100 (months: 1200). Compound: each year multiply by 1 + r : 100.', ar: 'البسيطة: I = C · r · t : 100 (الأشهر: 1200). المركّبة: كل سنة في 1 + r : 100.' },
+        problems: { eu: 'Nahasketa: kostu osoa : kantitate osoa. Mugikariak: batu edo kendu abiadurak. Txorrotak: batu ordu bateko zatiak.', es: 'Mezcla: coste total : cantidad total. Móviles: suma o resta las velocidades. Grifos: suma las partes de una hora.', en: 'Mixture: total cost : total quantity. Moving objects: add or subtract the speeds. Taps: add the parts of an hour.', ar: 'الخليط: الكلفة الكلية : الكمية الكلية. المتحركات: اجمع السرعتين أو اطرحهما. الصنابير: اجمع أجزاء الساعة.' }
     }
 }
 

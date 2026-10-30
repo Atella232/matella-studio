@@ -33,7 +33,7 @@ export function FunctionsLaboratory(props: {
             tools={functionsLabTools}
             stages={functionsStages}
             components={toolComponents}
-            title={{ eu: 'Mugitu, irakurri eta aztertu', es: 'Mueve, lee y estudia', ar: 'حرّك واقرأ وادرس' }}
+            title={{ eu: 'Mugitu, irakurri eta aztertu', es: 'Mueve, lee y estudia', en: 'Move, read and study', ar: 'حرّك واقرأ وادرس' }}
         />
     )
 }

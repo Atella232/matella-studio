@@ -43,7 +43,7 @@ export function ProportionDbh4ApLaboratory(props: {
             tools={proportionDbh4ApLabTools}
             stages={proportionDbh4ApStages}
             components={toolComponents}
-            title={{ eu: 'Proportzioak, bankua eta errepidea', es: 'Proporciones, el banco y la carretera', ar: 'التناسبات والمصرف والطريق' }}
+            title={{ eu: 'Proportzioak, bankua eta errepidea', es: 'Proporciones, el banco y la carretera', en: 'Proportions, the bank and the road', ar: 'التناسبات والمصرف والطريق' }}
         />
     )
 }

@@ -224,11 +224,13 @@ export const zoomChallenges: LabChallenge<ZoomState>[] = [
         prompt: {
             eu: 'Jarri 1/3 eta 1/2, eta aurkitu bien arteko zatiki bat.',
             es: 'Pon 1/3 y 1/2 y encuentra una fracción entre las dos.',
+            en: 'Place 1/3 and 1/2 and find a fraction between the two.',
             ar: `ضع ${ltr('1/3')} و${ltr('1/2')}، ثم جد كسرًا بينهما.`
         },
         hint: {
             eu: 'Izendatzaile komunarekin, 2/6 eta 3/6 dira: ez dago marrarik tartean. Zatitu zati bakoitza bitan.',
             es: 'Con denominador común son 2/6 y 3/6: no hay marca en medio. Parte cada trozo en 2.',
+            en: 'With a common denominator they are 2/6 and 3/6: there is no mark in between. Split each piece into 2.',
             ar: `بالمقام المشترك هما ${ltr('2/6')} و${ltr('3/6')}: لا علامة بينهما. قسّم كل جزء إلى 2.`
         },
         isSolved: (state) => found(state, fraction(1, 3), fraction(1, 2))
@@ -238,11 +240,13 @@ export const zoomChallenges: LabChallenge<ZoomState>[] = [
         prompt: {
             eu: 'Jarri 5/6 eta 7/9: oso gertu daude. Hurbildu lupa eta aurkitu bien arteko zatiki bat.',
             es: 'Pon 5/6 y 7/9: están muy cerca. Acerca la lupa y encuentra una fracción entre las dos.',
+            en: 'Place 5/6 and 7/9: they are very close. Zoom in and find a fraction between the two.',
             ar: `ضع ${ltr('5/6')} و${ltr('7/9')}: هما قريبان جدًا. قرّب العدسة وجد كسرًا بينهما.`
         },
         hint: {
             eu: 'Elkarren ondoan daude: 14/18 eta 15/18, beraz 7/9 txikiagoa da. Zatitu zatiak eta sakatu «Hurbildu lupa».',
             es: 'Están pegadas: 14/18 y 15/18, así que 7/9 es la menor. Parte los trozos y pulsa «Acercar la lupa».',
+            en: 'They are right next to each other: 14/18 and 15/18, so 7/9 is the smaller one. Split the pieces and press “Zoom in”.',
             ar: `هما متجاوران: ${ltr('14/18')} و${ltr('15/18')}، إذن ${ltr('7/9')} هو الأصغر. قسّم الأجزاء واضغط «قرّب العدسة».`
         },
         isSolved: (state) => state.lens !== null && found(state, fraction(5, 6), fraction(7, 9))
@@ -252,11 +256,13 @@ export const zoomChallenges: LabChallenge<ZoomState>[] = [
         prompt: {
             eu: 'Jarri 2/5 eta 3/5. Zatitu zatiak bien artean gutxienez 5 marra egon arte, eta aukeratu horietako bat.',
             es: 'Pon 2/5 y 3/5. Parte los trozos hasta que entre las dos haya al menos 5 marcas, y elige una.',
+            en: 'Place 2/5 and 3/5. Split the pieces until there are at least 5 marks between the two, and choose one.',
             ar: `ضع ${ltr('2/5')} و${ltr('3/5')}. قسّم الأجزاء حتى يكون بينهما خمس علامات على الأقل، ثم اختر إحداها.`
         },
         hint: {
             eu: 'Bosten bakoitza 6 zatitan zatituz gero, 12/30 eta 18/30 artean 5 marra daude.',
             es: 'Si partes cada quinto en 6, entre 12/30 y 18/30 hay 5 marcas.',
+            en: 'If you split each fifth into 6, there are 5 marks between 12/30 and 18/30.',
             ar: `إذا قسّمت كل خُمس إلى 6 أجزاء: بين ${ltr('12/30')} و${ltr('18/30')} خمس علامات.`
         },
         isSolved: (state) => found(state, fraction(2, 5), fraction(3, 5)) && marksBetween(state) >= 5
@@ -266,11 +272,13 @@ export const zoomChallenges: LabChallenge<ZoomState>[] = [
         prompt: {
             eu: 'Hurbildu lupa hiru aldiz jarraian, eta aurkitu beste zatiki bat tartean: beti dago beste bat.',
             es: 'Acerca la lupa tres veces seguidas y encuentra otra fracción en medio: siempre hay otra.',
+            en: 'Zoom in three times in a row and find another fraction in between: there is always another one.',
             ar: 'قرّب العدسة ثلاث مرات متتالية وجد كسرًا آخر في الوسط: يوجد دائمًا كسر آخر.'
         },
         hint: {
             eu: 'Aukeratu marra bat tartean, sakatu «Lupa…» botoietako bat, eta errepikatu.',
             es: 'Elige una marca en medio, pulsa uno de los botones «Lupa…» y repite.',
+            en: 'Choose a mark in between, press one of the “Zoom…” buttons and repeat.',
             ar: 'اختر علامة في الوسط، واضغط أحد زرّي «العدسة…»، ثم كرّر.'
         },
         isSolved: (state) => zoomCount(state) >= 3 && state.picked !== null
@@ -318,11 +326,13 @@ export const zoomExtra: LabChallengeMaker<ZoomState> = (random) => {
         prompt: {
             eu: `Jarri ${a} eta ${b}, eta aurkitu bien arteko zatiki bat.`,
             es: `Pon ${a} y ${b} y encuentra una fracción entre las dos.`,
+            en: `Place ${a} and ${b} and find a fraction between the two.`,
             ar: `ضع ${ltr(a)} و${ltr(b)}، ثم جد كسرًا بينهما.`
         },
         hint: {
             eu: `Izendatzaile komuna: ${common}. Tartean marrarik ez badago, zatitu zati bakoitza bitan.`,
             es: `Denominador común: ${common}. Si no hay marca en medio, parte cada trozo en 2.`,
+            en: `Common denominator: ${common}. If there is no mark in between, split each piece into 2.`,
             ar: `المقام المشترك: ${common}. إن لم توجد علامة في الوسط فقسّم كل جزء إلى 2.`
         },
         isSolved: (state) => found(state, first, second),

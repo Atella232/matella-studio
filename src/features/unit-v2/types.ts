@@ -7,11 +7,12 @@ import type { AnswerForm, FractionValue } from './math/fraction.ts'
    route, diagnostic, lessons, practice, challenges, lab and games.
    ========================================================================== */
 
-export type UnitLanguage = 'eu' | 'es' | 'ar'
+export type UnitLanguage = 'eu' | 'es' | 'en' | 'ar'
 
 export interface LocalizedText {
     eu: string
     es: string
+    en: string
     ar: string
 }
 
@@ -185,6 +186,7 @@ export interface UnitDefinition {
 export function normalizeUnitLanguage(language: string): UnitLanguage {
     if (language.startsWith('ar')) return 'ar'
     if (language.startsWith('es')) return 'es'
+    if (language.startsWith('en')) return 'en'
     return 'eu'
 }
 
@@ -198,13 +200,13 @@ export function pickMaybeText(language: UnitLanguage, text: string | LocalizedTe
 }
 
 export const unitSections: Array<{ id: UnitSection; label: LocalizedText }> = [
-    { id: 'route', label: { eu: 'Ibilbidea', es: 'Ruta', ar: 'المسار' } },
-    { id: 'diagnostic', label: { eu: 'Diagnostikoa', es: 'Diagnóstico', ar: 'التشخيص' } },
-    { id: 'learn', label: { eu: 'Ikasi', es: 'Aprende', ar: 'تعلّم' } },
-    { id: 'lab', label: { eu: 'Laborategia', es: 'Laboratorio', ar: 'المختبر' } },
-    { id: 'practice', label: { eu: 'Praktikatu', es: 'Practica', ar: 'تدرّب' } },
-    { id: 'challenges', label: { eu: 'Erronkak', es: 'Retos', ar: 'التحديات' } },
-    { id: 'play', label: { eu: 'Jolastu', es: 'Juega', ar: 'العب' } }
+    { id: 'route', label: { eu: 'Ibilbidea', es: 'Ruta', en: 'Path', ar: 'المسار' } },
+    { id: 'diagnostic', label: { eu: 'Diagnostikoa', es: 'Diagnóstico', en: 'Diagnostic', ar: 'التشخيص' } },
+    { id: 'learn', label: { eu: 'Ikasi', es: 'Aprende', en: 'Learn', ar: 'تعلّم' } },
+    { id: 'lab', label: { eu: 'Laborategia', es: 'Laboratorio', en: 'Lab', ar: 'المختبر' } },
+    { id: 'practice', label: { eu: 'Praktikatu', es: 'Practica', en: 'Practice', ar: 'تدرّب' } },
+    { id: 'challenges', label: { eu: 'Erronkak', es: 'Retos', en: 'Challenges', ar: 'التحديات' } },
+    { id: 'play', label: { eu: 'Jolastu', es: 'Juega', en: 'Play', ar: 'العب' } }
 ]
 
 /** Sections a unit actually offers, in navigation order */

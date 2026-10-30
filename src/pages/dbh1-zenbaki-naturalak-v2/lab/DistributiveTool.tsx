@@ -14,9 +14,9 @@ export function DistributiveTool(props: NaturalsToolProps) {
 
     const controls = (
         <>
-            <Stepper label={l({ eu: 'Ilarak (a)', es: 'Filas (a)', ar: 'الصفوف (a)' })} value={factor} min={1} max={DISTRIBUTIVE_LIMITS.factor} onChange={(next) => setState((current) => setDistributive(current, { factor: next }))} language={props.language} />
-            <Stepper label={l({ eu: 'Zutabe urdinak (b)', es: 'Columnas azules (b)', ar: 'الأعمدة الزرقاء (b)' })} value={first} min={1} max={DISTRIBUTIVE_LIMITS.part} onChange={(next) => setState((current) => setDistributive(current, { first: next }))} language={props.language} />
-            <Stepper label={l({ eu: 'Zutabe gorriak (c)', es: 'Columnas rojas (c)', ar: 'الأعمدة الحمراء (c)' })} value={second} min={1} max={DISTRIBUTIVE_LIMITS.part} onChange={(next) => setState((current) => setDistributive(current, { second: next }))} language={props.language} />
+            <Stepper label={l({ eu: 'Ilarak (a)', es: 'Filas (a)', en: 'Rows (a)', ar: 'الصفوف (a)' })} value={factor} min={1} max={DISTRIBUTIVE_LIMITS.factor} onChange={(next) => setState((current) => setDistributive(current, { factor: next }))} language={props.language} />
+            <Stepper label={l({ eu: 'Zutabe urdinak (b)', es: 'Columnas azules (b)', en: 'Blue columns (b)', ar: 'الأعمدة الزرقاء (b)' })} value={first} min={1} max={DISTRIBUTIVE_LIMITS.part} onChange={(next) => setState((current) => setDistributive(current, { first: next }))} language={props.language} />
+            <Stepper label={l({ eu: 'Zutabe gorriak (c)', es: 'Columnas rojas (c)', en: 'Red columns (c)', ar: 'الأعمدة الحمراء (c)' })} value={second} min={1} max={DISTRIBUTIVE_LIMITS.part} onChange={(next) => setState((current) => setDistributive(current, { second: next }))} language={props.language} />
         </>
     )
 

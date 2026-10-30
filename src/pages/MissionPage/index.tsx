@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { TFunction } from 'i18next'
+import { englishDigits } from '../../utils/numberFormat'
 import { validateMissionAnswer } from './missionValidation'
 import './MissionPage.css'
 
@@ -195,7 +196,7 @@ const getDifficultyConfig = (t: TFunction) => ({
 })
 
 export function MissionPage() {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
     const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty | null>(null)
     const [currentChallenge, setCurrentChallenge] = useState<Challenge | null>(null)
     const [answer, setAnswer] = useState('')
@@ -225,7 +226,7 @@ export function MissionPage() {
 
     const handleCheck = () => {
         if (!currentChallenge) return
-        if (currentChallenge.validate(answer.trim())) {
+        if (currentChallenge.validate(i18n.language === 'en' ? englishDigits(answer.trim()) : answer.trim())) {
             setFeedback('success')
             setCompletedChallenges((current) => current.includes(currentChallenge.id)
                 ? current

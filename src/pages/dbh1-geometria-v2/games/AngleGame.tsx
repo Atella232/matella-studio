@@ -82,12 +82,12 @@ export function AngleGame({ language, records, onResult, onExit }: GameProps) {
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${record.score} ${l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${record.score} ${l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: `${ANGLE_ROUNDS} angelu. Idatzi zenbat gradu dituen uste duzun.`, es: `${ANGLE_ROUNDS} ángulos. Escribe cuántos grados crees que mide.`, ar: `${ANGLE_ROUNDS} زوايا. اكتب كم درجة تظن أنها تقيس.` })}</li>
-                        <li>{l({ eu: '5°-ko errorea gehienez: 3 puntu; 15°: 2; 30°: 1.', es: 'Error de 5° como máximo: 3 puntos; 15°: 2; 30°: 1.', ar: 'خطأ 5° على الأكثر: 3 نقاط؛ 15°: 2؛ 30°: 1.' })}</li>
-                        <li>{l({ eu: 'Konparatu angelu zuzenarekin (90°) eta lauarekin (180°).', es: 'Compara con el recto (90°) y el llano (180°).', ar: 'قارن بالقائمة (90°) والمستقيمة (180°).' })}</li>
+                        <li>{l({ eu: `${ANGLE_ROUNDS} angelu. Idatzi zenbat gradu dituen uste duzun.`, es: `${ANGLE_ROUNDS} ángulos. Escribe cuántos grados crees que mide.`, en: `${ANGLE_ROUNDS} angles. Write how many degrees you think it measures.`, ar: `${ANGLE_ROUNDS} زوايا. اكتب كم درجة تظن أنها تقيس.` })}</li>
+                        <li>{l({ eu: '5°-ko errorea gehienez: 3 puntu; 15°: 2; 30°: 1.', es: 'Error de 5° como máximo: 3 puntos; 15°: 2; 30°: 1.', en: 'An error of up to 5°: 3 points; 15°: 2; 30°: 1.', ar: 'خطأ 5° على الأكثر: 3 نقاط؛ 15°: 2؛ 30°: 1.' })}</li>
+                        <li>{l({ eu: 'Konparatu angelu zuzenarekin (90°) eta lauarekin (180°).', es: 'Compara con el recto (90°) y el llano (180°).', en: 'Compare with a right angle (90°) and a straight angle (180°).', ar: 'قارن بالقائمة (90°) والمستقيمة (180°).' })}</li>
                     </ul>
                 )}
             />
@@ -98,7 +98,7 @@ export function AngleGame({ language, records, onResult, onExit }: GameProps) {
         <div className="geometry-angle-game" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span>{Math.min(index + 1, ANGLE_ROUNDS)} / {ANGLE_ROUNDS}</span>
-                <span>{total} {l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}</span>
+                <span>{total} {l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}</span>
             </GameTopbar>
 
             {phase === 'playing' && values[index] !== undefined && (
@@ -106,18 +106,18 @@ export function AngleGame({ language, records, onResult, onExit }: GameProps) {
                     <AngleDrawing value={values[index]} guess={last?.guess ?? null} />
                     {!last && (
                         <label>
-                            <input value={input} onChange={(event) => setInput(event.target.value)} inputMode="numeric" autoFocus aria-label={l({ eu: 'Zure estimazioa graduetan', es: 'Tu estimación en grados', ar: 'تقديرك بالدرجات' })} dir="ltr" />
+                            <input value={input} onChange={(event) => setInput(event.target.value)} inputMode="numeric" autoFocus aria-label={l({ eu: 'Zure estimazioa graduetan', es: 'Tu estimación en grados', en: 'Your estimate in degrees.', ar: 'تقديرك بالدرجات' })} dir="ltr" />
                             <span>°</span>
                         </label>
                     )}
                     <div aria-live="polite">
                         {last && (
                             <div className={`fraction-v2-feedback ${last.points >= 2 ? 'success' : 'error'}`}>
-                                {l({ eu: `${last.value}° zen; zuk ${last.guess}° esan duzu: +${last.points} puntu.`, es: `Medía ${last.value}°; has dicho ${last.guess}°: +${last.points} puntos.`, ar: `كانت ${last.value}°؛ قلت ${last.guess}°: +${last.points} نقطة.` })}
+                                {l({ eu: `${last.value}° zen; zuk ${last.guess}° esan duzu: +${last.points} puntu.`, es: `Medía ${last.value}°; has dicho ${last.guess}°: +${last.points} puntos.`, en: `It measured ${last.value}°; you said ${last.guess}°: +${last.points} points.`, ar: `كانت ${last.value}°؛ قلت ${last.guess}°: +${last.points} نقطة.` })}
                             </div>
                         )}
                     </div>
-                    <button type="submit" className="fraction-v2-primary">{last ? l({ eu: 'Hurrengoa', es: 'Siguiente', ar: 'التالي' }) : l({ eu: 'Egiaztatu', es: 'Comprobar', ar: 'تحقّق' })}</button>
+                    <button type="submit" className="fraction-v2-primary">{last ? l({ eu: 'Hurrengoa', es: 'Siguiente', en: 'Next', ar: 'التالي' }) : l({ eu: 'Egiaztatu', es: 'Comprobar', en: 'Check', ar: 'تحقّق' })}</button>
                 </form>
             )}
 
@@ -125,9 +125,9 @@ export function AngleGame({ language, records, onResult, onExit }: GameProps) {
                 <ResultPanel
                     language={language}
                     stars={angleStars(total)}
-                    title={l({ eu: `${total} puntu`, es: `${total} puntos`, ar: `${total} نقطة` })}
-                    subtitle={l({ eu: '3 izar: 24 puntu edo gehiago · 2 izar: 16', es: '3 estrellas: 24 puntos o más · 2: 16', ar: '3 نجوم: 24 نقطة أو أكثر · 2: 16' })}
-                    stats={[{ label: l({ eu: 'Puntuak', es: 'Puntos', ar: 'النقاط' }), value: `${total} / ${ANGLE_ROUNDS * 3}` }]}
+                    title={l({ eu: `${total} puntu`, es: `${total} puntos`, en: `${total} points`, ar: `${total} نقطة` })}
+                    subtitle={l({ eu: '3 izar: 24 puntu edo gehiago · 2 izar: 16', es: '3 estrellas: 24 puntos o más · 2: 16', en: '3 stars: 24 points or more · 2: 16', ar: '3 نجوم: 24 نقطة أو أكثر · 2: 16' })}
+                    stats={[{ label: l({ eu: 'Puntuak', es: 'Puntos', en: 'Points', ar: 'النقاط' }), value: `${total} / ${ANGLE_ROUNDS * 3}` }]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}
                     onLevels={() => setPhase('pick')}

@@ -36,7 +36,7 @@ export function GraphsLaboratory(props: {
             tools={graphsLabTools}
             stages={graphsStages}
             components={toolComponents}
-            title={{ eu: 'Mugitu parametroak eta ikusi grafikoa', es: 'Mueve los parámetros y mira la gráfica', ar: 'حرّك المعاملات وشاهد البيان' }}
+            title={{ eu: 'Mugitu parametroak eta ikusi grafikoa', es: 'Mueve los parámetros y mira la gráfica', en: 'Move the parameters and look at the graph.', ar: 'حرّك المعاملات وشاهد البيان' }}
         />
     )
 }

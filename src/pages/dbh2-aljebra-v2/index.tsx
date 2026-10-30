@@ -11,16 +11,17 @@ import { algebraStages, algebraTopics } from './lessons'
 const aljebraUnit: UnitDefinition = {
     storagePrefix: 'matella-aljebra-dbh2',
     coursePath: '/matematika/dbh2',
-    courseTitle: { eu: '2. DBH', es: '2.º ESO', ar: 'الصف الثاني' },
-    title: { eu: 'Adierazpen aljebraikoak', es: 'Expresiones algebraicas', ar: 'العبارات الجبرية' },
-    documentTitle: { eu: 'Adierazpen aljebraikoak · 2. DBH', es: 'Expresiones algebraicas · 2.º ESO', ar: 'العبارات الجبرية · الصف الثاني' },
+    courseTitle: { eu: '2. DBH', es: '2.º ESO', en: '2nd ESO', ar: 'الصف الثاني' },
+    title: { eu: 'Adierazpen aljebraikoak', es: 'Expresiones algebraicas', en: 'Algebraic expressions', ar: 'العبارات الجبرية' },
+    documentTitle: { eu: 'Adierazpen aljebraikoak · 2. DBH', es: 'Expresiones algebraicas · 2.º ESO', en: 'Algebraic expressions · 2nd ESO', ar: 'العبارات الجبرية · الصف الثاني' },
     tagline: {
         eu: 'Letrak, monomioak eta polinomioak: ikasi haiekin eragiketak egiten, biderkadura nabarmenak erabiltzen eta faktore komuna ateratzen.',
         es: 'Letras, monomios y polinomios: aprende a operar con ellos, a usar los productos notables y a sacar factor común.',
+        en: 'Letters, monomials and polynomials: learn to calculate with them, to use special products and to take out a common factor.',
         ar: 'حروف ووحيدات حد وحدوديات: تعلّم إجراء العمليات عليها واستعمال المتطابقات الشهيرة وإخراج العامل المشترك.'
     },
     heroArt: <AlgebraHeroArt />,
-    pathSubtitle: { eu: 'Bost etapa, hizkuntza aljebraikotik faktorizaziora', es: 'Cinco etapas, del lenguaje algebraico a la factorización', ar: 'خمس مراحل، من اللغة الجبرية إلى التحليل' },
+    pathSubtitle: { eu: 'Bost etapa, hizkuntza aljebraikotik faktorizaziora', es: 'Cinco etapas, del lenguaje algebraico a la factorización', en: 'Five stages, from algebraic language to factorisation', ar: 'خمس مراحل، من اللغة الجبرية إلى التحليل' },
     stages: algebraStages,
     topics: algebraTopics,
     diagnostic: algebraDiagnostic,
@@ -28,31 +29,31 @@ const aljebraUnit: UnitDefinition = {
     exerciseBank: algebraExerciseBank,
     challenges: algebraChallenges,
     lab: {
-        description: { eu: `${algebraLabTools.length} tresna: zenbaki-makina, fitxa aljebraikoak, biderketaren azalera, identitateak zenbakiekin eta faktore komuna, erronkekin.`, es: `${algebraLabTools.length} herramientas: máquina de números, fichas algebraicas, área del producto, identidades con números y factor común, con retos.`, ar: `${algebraLabTools.length} أدوات: آلة الأعداد والبطاقات الجبرية ومساحة الجداء والمتطابقات بالأعداد والعامل المشترك، مع تحديات.` },
+        description: { eu: `${algebraLabTools.length} tresna: zenbaki-makina, fitxa aljebraikoak, biderketaren azalera, identitateak zenbakiekin eta faktore komuna, erronkekin.`, es: `${algebraLabTools.length} herramientas: máquina de números, fichas algebraicas, área del producto, identidades con números y factor común, con retos.`, en: `${algebraLabTools.length} tools: number machine, algebra tiles, product area, identities with numbers and common factor, with challenges.`, ar: `${algebraLabTools.length} أدوات: آلة الأعداد والبطاقات الجبرية ومساحة الجداء والمتطابقات بالأعداد والعامل المشترك، مع تحديات.` },
         progressIds: algebraLabChallengeIds,
         toolForTopic: algebraLabToolForTopic,
         render: (props) => <AlgebraLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Hiru joko: lasterketa, garapen azkarra eta memoria.', es: 'Tres juegos: carrera, desarrollo rápido y memoria.', ar: 'ثلاث ألعاب: السباق والنشر السريع والذاكرة.' },
+        description: { eu: 'Hiru joko: lasterketa, garapen azkarra eta memoria.', es: 'Tres juegos: carrera, desarrollo rápido y memoria.', en: 'Three games: race, quick expansion and memory.', ar: 'ثلاث ألعاب: السباق والنشر السريع والذاكرة.' },
         progressIds: algebraGameProgressIds,
         recordsKey: ALGEBRA_GAME_RECORDS_KEY,
         render: (props) => <AlgebraGames {...props} />
     },
     answers: {
-        note: { eu: 'Idatzi zenbaki bat: −45, 12 edo 0,5.', es: 'Escribe un número: −45, 12 o 0,5.', ar: 'اكتب عددًا: ⁦−45⁩ أو 12 أو 0.5.' },
+        note: { eu: 'Idatzi zenbaki bat: −45, 12 edo 0,5.', es: 'Escribe un número: −45, 12 o 0,5.', en: 'Write a number: −45, 12 or 0.5.', ar: 'اكتب عددًا: ⁦−45⁩ أو 12 أو 0.5.' },
         defaultForm: 'any',
         inputMode: 'text',
-        placeholder: () => ({ eu: 'Adib.: −45', es: 'Ej.: −45', ar: 'مثال: ⁦−45⁩' }),
-        wrongForm: () => ({ eu: 'Balioa zuzena da, baina idatzi zenbaki gisa.', es: 'El valor es correcto, pero escríbelo como número.', ar: 'القيمة صحيحة، لكن اكتبها عددًا.' }),
-        unreadable: { eu: 'Ez dut erantzun hori ulertzen. Idatzi zenbaki bat, adibidez −45.', es: 'No entiendo esa respuesta. Escribe un número, por ejemplo −45.', ar: 'لم أفهم هذه الإجابة. اكتب عددًا، مثل ⁦−45⁩.' }
+        placeholder: () => ({ eu: 'Adib.: −45', es: 'Ej.: −45', en: 'E.g.: −45', ar: 'مثال: ⁦−45⁩' }),
+        wrongForm: () => ({ eu: 'Balioa zuzena da, baina idatzi zenbaki gisa.', es: 'El valor es correcto, pero escríbelo como número.', en: 'The value is correct, but write it as a number.', ar: 'القيمة صحيحة، لكن اكتبها عددًا.' }),
+        unreadable: { eu: 'Ez dut erantzun hori ulertzen. Idatzi zenbaki bat, adibidez −45.', es: 'No entiendo esa respuesta. Escribe un número, por ejemplo −45.', en: 'I don\'t understand that answer. Write a number, for example −45.', ar: 'لم أفهم هذه الإجابة. اكتب عددًا، مثل ⁦−45⁩.' }
     },
     errorByStage: {
-        language: { eu: 'Ordeztu letra zenbakiaz, negatiboak parentesi artean, eta lehenik berreturak.', es: 'Sustituye la letra por el número, los negativos entre paréntesis, y primero las potencias.', ar: 'عوّض الحرف بالعدد، والسالب بين قوسين، والقوى أولًا.' },
-        monomials: { eu: 'Batzeko, antzekoak bakarrik. Biderkatzean berretzaileak batu; zatitzean, kendu.', es: 'Para sumar, solo semejantes. Al multiplicar se suman los exponentes; al dividir, se restan.', ar: 'في الجمع المتشابهة فقط. عند الضرب نجمع الأسس وعند القسمة نطرحها.' },
-        polynomials: { eu: 'Minus baten atzeko parentesian zeinu guztiak aldatu. Biderkatzean, gai bakoitza guztiez.', es: 'Tras un menos, cambian todos los signos del paréntesis. Al multiplicar, cada término por todos.', ar: 'بعد الناقص تتغيّر كل إشارات القوس. وفي الضرب كل حد في كل الحدود.' },
-        products: { eu: '(a ± b)² = a² ± 2ab + b². Ez ahaztu 2ab! (a + b)(a − b) = a² − b².', es: '(a ± b)² = a² ± 2ab + b². ¡No olvides 2ab! (a + b)(a − b) = a² − b².', ar: '(a ± b)² = a² ± 2ab + b². لا تنسَ 2ab! (a + b)(a − b) = a² − b².' },
-        factor: { eu: 'Koefizienteen ZKH eta letra komunak berretzaile txikienarekin. Egiaztatu biderkatuz.', es: 'm.c.d. de los coeficientes y letras comunes con el menor exponente. Comprueba multiplicando.', ar: 'ق.م.أ للمعاملات والحروف المشتركة بأصغر أس. تحقّق بالضرب.' }
+        language: { eu: 'Ordeztu letra zenbakiaz, negatiboak parentesi artean, eta lehenik berreturak.', es: 'Sustituye la letra por el número, los negativos entre paréntesis, y primero las potencias.', en: 'Substitute the number for the letter, put negatives in brackets, and do powers first.', ar: 'عوّض الحرف بالعدد، والسالب بين قوسين، والقوى أولًا.' },
+        monomials: { eu: 'Batzeko, antzekoak bakarrik. Biderkatzean berretzaileak batu; zatitzean, kendu.', es: 'Para sumar, solo semejantes. Al multiplicar se suman los exponentes; al dividir, se restan.', en: 'Only like terms can be added. When multiplying, add the exponents; when dividing, subtract them.', ar: 'في الجمع المتشابهة فقط. عند الضرب نجمع الأسس وعند القسمة نطرحها.' },
+        polynomials: { eu: 'Minus baten atzeko parentesian zeinu guztiak aldatu. Biderkatzean, gai bakoitza guztiez.', es: 'Tras un menos, cambian todos los signos del paréntesis. Al multiplicar, cada término por todos.', en: 'After a minus, all the signs inside the bracket change. When multiplying, multiply each term by every term.', ar: 'بعد الناقص تتغيّر كل إشارات القوس. وفي الضرب كل حد في كل الحدود.' },
+        products: { eu: '(a ± b)² = a² ± 2ab + b². Ez ahaztu 2ab! (a + b)(a − b) = a² − b².', es: '(a ± b)² = a² ± 2ab + b². ¡No olvides 2ab! (a + b)(a − b) = a² − b².', en: '(a ± b)² = a² ± 2ab + b². Don\'t forget 2ab! (a + b)(a − b) = a² − b².', ar: '(a ± b)² = a² ± 2ab + b². لا تنسَ 2ab! (a + b)(a − b) = a² − b².' },
+        factor: { eu: 'Koefizienteen ZKH eta letra komunak berretzaile txikienarekin. Egiaztatu biderkatuz.', es: 'm.c.d. de los coeficientes y letras comunes con el menor exponente. Comprueba multiplicando.', en: 'GCD of the coefficients and the common letters, with the lowest exponent. Check by multiplying.', ar: 'ق.م.أ للمعاملات والحروف المشتركة بأصغر أس. تحقّق بالضرب.' }
     }
 }
 

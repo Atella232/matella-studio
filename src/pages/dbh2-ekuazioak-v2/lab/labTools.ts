@@ -23,10 +23,11 @@ export const equationsLabTools: EquationsLabTool[] = [
         id: 'trial',
         stage: 'basics',
         lessonTopic: 'meaning',
-        title: { eu: 'Probatu balioak', es: 'Prueba valores', ar: 'جرّب القيم' },
+        title: { eu: 'Probatu balioak', es: 'Prueba valores', en: 'Try values', ar: 'جرّب القيم' },
         observe: {
             eu: 'Ekuazio batean bi atalak balio batzuetarako bakarrik dira berdinak. Identitate batean, beti; eta ebazpenik gabeko ekuazio batean, inoiz ez.',
             es: 'En una ecuación los dos miembros solo coinciden para algunos valores. En una identidad, siempre; y en una ecuación sin solución, nunca.',
+            en: 'In an equation, the two sides match only for some values. In an identity, always; and in an equation with no solution, never.',
             ar: 'في المعادلة لا يتساوى الطرفان إلا لبعض القيم. وفي المتطابقة دائمًا، وفي المعادلة التي لا حل لها أبدًا.'
         }
     },
@@ -34,10 +35,11 @@ export const equationsLabTools: EquationsLabTool[] = [
         id: 'solver',
         stage: 'first-degree',
         lessonTopic: 'brackets',
-        title: { eu: 'Urratsez urrats', es: 'Paso a paso', ar: 'خطوة بخطوة' },
+        title: { eu: 'Urratsez urrats', es: 'Paso a paso', en: 'Step by step', ar: 'خطوة بخطوة' },
         observe: {
             eu: 'Urrats bakoitzean ekuazio baliokide bat lortzen da. Saiatu ebazpena idazten urrats guztiak ikusi aurretik.',
             es: 'En cada paso se obtiene una ecuación equivalente. Intenta escribir la solución antes de ver todos los pasos.',
+            en: 'Each step gives you an equivalent equation. Try to write the solution before you see all the steps.',
             ar: 'في كل خطوة نحصل على معادلة مكافئة. حاول كتابة الحل قبل رؤية كل الخطوات.'
         }
     },
@@ -45,10 +47,11 @@ export const equationsLabTools: EquationsLabTool[] = [
         id: 'lcm',
         stage: 'denominators',
         lessonTopic: 'lcm',
-        title: { eu: 'Izendatzaileak kendu', es: 'Quitar denominadores', ar: 'حذف المقامات' },
+        title: { eu: 'Izendatzaileak kendu', es: 'Quitar denominadores', en: 'Remove denominators', ar: 'حذف المقامات' },
         observe: {
             eu: 'Zenbaki batez biderkatzean, izendatzaile guztien multiploa bada, zatiki guztiak desagertzen dira. MKTa da horrelako zenbakirik txikiena.',
             es: 'Al multiplicar por un número que sea múltiplo de todos los denominadores, desaparecen todas las fracciones. El m.c.m. es el menor de esos números.',
+            en: 'When you multiply by a number that is a multiple of all the denominators, all the fractions disappear. The LCM is the smallest of these numbers.',
             ar: 'عند الضرب في عدد مضاعف لكل المقامات تختفي كل الكسور. وم.م.أ هو أصغر هذه الأعداد.'
         }
     },
@@ -56,10 +59,11 @@ export const equationsLabTools: EquationsLabTool[] = [
         id: 'problems',
         stage: 'problems',
         lessonTopic: 'problem-steps',
-        title: { eu: 'Buruketak planteatu', es: 'Plantea problemas', ar: 'صياغة المسائل' },
+        title: { eu: 'Buruketak planteatu', es: 'Plantea problemas', en: 'Set up problems', ar: 'صياغة المسائل' },
         observe: {
             eu: 'Lehenik erabaki zer den x, gero aukeratu enuntziatua ondo itzultzen duen ekuazioa, eta azkenik ebatzi.',
             es: 'Primero decide qué es x, después elige la ecuación que traduce bien el enunciado y al final resuélvela.',
+            en: 'First decide what x is, then choose the equation that translates the problem correctly, and finally solve it.',
             ar: 'حدّد أولًا ما هو x، ثم اختر المعادلة التي تترجم النص جيدًا، وأخيرًا حلّها.'
         }
     },
@@ -67,10 +71,11 @@ export const equationsLabTools: EquationsLabTool[] = [
         id: 'quadratic',
         stage: 'quadratic',
         lessonTopic: 'formula',
-        title: { eu: 'Diskriminatzailea', es: 'El discriminante', ar: 'المميّز' },
+        title: { eu: 'Diskriminatzailea', es: 'El discriminante', en: 'The discriminant', ar: 'المميّز' },
         observe: {
             eu: 'Aldatu a, b eta c: parabolak x ardatza bi puntutan, puntu batean edo inon ez du ebakitzen, Δ positiboa, 0 edo negatiboa den arabera.',
             es: 'Cambia a, b y c: la parábola corta el eje x en dos puntos, en uno o en ninguno según Δ sea positivo, 0 o negativo.',
+            en: 'Change a, b and c: the parabola cuts the x-axis at two points, at one point or at none, depending on whether Δ is positive, 0 or negative.',
             ar: 'غيّر a وb وc: يقطع القطع المكافئ محور x في نقطتين أو نقطة أو لا يقطعه بحسب كون Δ موجبًا أو 0 أو سالبًا.'
         }
     }
@@ -142,26 +147,26 @@ export const foundSolutions = (state: TrialState, equation: number) => (state.tr
 export const trialChallenges: LabChallenge<TrialState>[] = [
     {
         id: 28101,
-        prompt: { eu: 'Aurkitu $2x+5=3x+2$ ekuazioaren ebazpena.', es: 'Encuentra la solución de $2x+5=3x+2$.', ar: 'جد حل $2x+5=3x+2$.' },
-        hint: { eu: 'Probatu 1, 2, 3…', es: 'Prueba 1, 2, 3…', ar: 'جرّب 1، 2، 3…' },
+        prompt: { eu: 'Aurkitu $2x+5=3x+2$ ekuazioaren ebazpena.', es: 'Encuentra la solución de $2x+5=3x+2$.', en: 'Find the solution of $2x+5=3x+2$.', ar: 'جد حل $2x+5=3x+2$.' },
+        hint: { eu: 'Probatu 1, 2, 3…', es: 'Prueba 1, 2, 3…', en: 'Try 1, 2, 3…', ar: 'جرّب 1، 2، 3…' },
         isSolved: (state) => foundSolutions(state, 0).includes(3)
     },
     {
         id: 28102,
-        prompt: { eu: 'Probatu hiru balio $2(x+1)=2x+2$ identitatean: zer gertatzen da?', es: 'Prueba tres valores en la identidad $2(x+1)=2x+2$: ¿qué pasa?', ar: 'جرّب ثلاث قيم في المتطابقة $2(x+1)=2x+2$: ماذا يحدث؟' },
-        hint: { eu: 'Edozein balio.', es: 'Cualquier valor.', ar: 'أي قيمة.' },
+        prompt: { eu: 'Probatu hiru balio $2(x+1)=2x+2$ identitatean: zer gertatzen da?', es: 'Prueba tres valores en la identidad $2(x+1)=2x+2$: ¿qué pasa?', en: 'Try three values in the identity $2(x+1)=2x+2$: what happens?', ar: 'جرّب ثلاث قيم في المتطابقة $2(x+1)=2x+2$: ماذا يحدث؟' },
+        hint: { eu: 'Edozein balio.', es: 'Cualquier valor.', en: 'Any value.', ar: 'أي قيمة.' },
         isSolved: (state) => foundSolutions(state, 1).length >= 3
     },
     {
         id: 28103,
-        prompt: { eu: 'Aurkitu $x^{2}+2x+1=4$ ekuazioaren bi ebazpenak.', es: 'Encuentra las dos soluciones de $x^{2}+2x+1=4$.', ar: 'جد حلّي $x^{2}+2x+1=4$.' },
-        hint: { eu: 'Bat positiboa da eta bestea negatiboa.', es: 'Una es positiva y la otra negativa.', ar: 'أحدهما موجب والآخر سالب.' },
+        prompt: { eu: 'Aurkitu $x^{2}+2x+1=4$ ekuazioaren bi ebazpenak.', es: 'Encuentra las dos soluciones de $x^{2}+2x+1=4$.', en: 'Find the two solutions of $x^{2}+2x+1=4$.', ar: 'جد حلّي $x^{2}+2x+1=4$.' },
+        hint: { eu: 'Bat positiboa da eta bestea negatiboa.', es: 'Una es positiva y la otra negativa.', en: 'One is positive and the other is negative.', ar: 'أحدهما موجب والآخر سالب.' },
         isSolved: (state) => foundSolutions(state, 3).length === 2
     },
     {
         id: 28104,
-        prompt: { eu: 'Probatu bost balio $x+1=x+3$ ekuazioan. Zergatik ez dago ebazpenik?', es: 'Prueba cinco valores en $x+1=x+3$. ¿Por qué no hay solución?', ar: 'جرّب خمس قيم في $x+1=x+3$. لماذا لا يوجد حل؟' },
-        hint: { eu: 'Bigarren atala beti da 2 handiagoa.', es: 'El segundo miembro siempre es 2 más.', ar: 'الطرف الثاني دائمًا أكبر بـ 2.' },
+        prompt: { eu: 'Probatu bost balio $x+1=x+3$ ekuazioan. Zergatik ez dago ebazpenik?', es: 'Prueba cinco valores en $x+1=x+3$. ¿Por qué no hay solución?', en: 'Try five values in $x+1=x+3$. Why is there no solution?', ar: 'جرّب خمس قيم في $x+1=x+3$. لماذا لا يوجد حل؟' },
+        hint: { eu: 'Bigarren atala beti da 2 handiagoa.', es: 'El segundo miembro siempre es 2 más.', en: 'The right side is always 2 more.', ar: 'الطرف الثاني دائمًا أكبر بـ 2.' },
         isSolved: (state) => (state.tried[2]?.length ?? 0) >= 5
     }
 ]
@@ -215,26 +220,26 @@ export function answerSolver(state: SolverState, patch: Partial<OperationAnswer>
 export const solverChallenges: LabChallenge<SolverState>[] = [
     {
         id: 28201,
-        prompt: { eu: 'Ebatzi $5x-4=2x+11$ eta idatzi x.', es: 'Resuelve $5x-4=2x+11$ y escribe x.', ar: 'حلّ $5x-4=2x+11$ واكتب x.' },
-        hint: { eu: 'Ikusi urratsak bata bestearen atzetik.', es: 'Mira los pasos uno detrás de otro.', ar: 'انظر إلى الخطوات واحدة تلو الأخرى.' },
+        prompt: { eu: 'Ebatzi $5x-4=2x+11$ eta idatzi x.', es: 'Resuelve $5x-4=2x+11$ y escribe x.', en: 'Solve $5x-4=2x+11$ and write x.', ar: 'حلّ $5x-4=2x+11$ واكتب x.' },
+        hint: { eu: 'Ikusi urratsak bata bestearen atzetik.', es: 'Mira los pasos uno detrás de otro.', en: 'Look at the steps one after the other.', ar: 'انظر إلى الخطوات واحدة تلو الأخرى.' },
         isSolved: (state) => state.solved.includes(0)
     },
     {
         id: 28202,
-        prompt: { eu: 'Ebatzi parentesiak dituzten bi ekuazio.', es: 'Resuelve dos ecuaciones con paréntesis.', ar: 'حلّ معادلتين بأقواس.' },
-        hint: { eu: 'Lehen urratsa: parentesiak kendu.', es: 'Primer paso: quitar paréntesis.', ar: 'الخطوة الأولى: حذف الأقواس.' },
+        prompt: { eu: 'Ebatzi parentesiak dituzten bi ekuazio.', es: 'Resuelve dos ecuaciones con paréntesis.', en: 'Solve two equations with brackets.', ar: 'حلّ معادلتين بأقواس.' },
+        hint: { eu: 'Lehen urratsa: parentesiak kendu.', es: 'Primer paso: quitar paréntesis.', en: 'First step: remove the brackets.', ar: 'الخطوة الأولى: حذف الأقواس.' },
         isSolved: (state) => state.solved.filter((index) => solverEquations[index].expanded).length >= 2
     },
     {
         id: 28203,
-        prompt: { eu: 'Ebatzi $3-2(x+1)=x-8$: x-ren koefizientea negatiboa geratzen da.', es: 'Resuelve $3-2(x+1)=x-8$: el coeficiente de x queda negativo.', ar: 'حلّ $3-2(x+1)=x-8$: يبقى معامل x سالبًا.' },
-        hint: { eu: 'Negatiboa zati negatiboa: positiboa.', es: 'Negativo entre negativo: positivo.', ar: 'سالب على سالب: موجب.' },
+        prompt: { eu: 'Ebatzi $3-2(x+1)=x-8$: x-ren koefizientea negatiboa geratzen da.', es: 'Resuelve $3-2(x+1)=x-8$: el coeficiente de x queda negativo.', en: 'Solve $3-2(x+1)=x-8$: the coefficient of x ends up negative.', ar: 'حلّ $3-2(x+1)=x-8$: يبقى معامل x سالبًا.' },
+        hint: { eu: 'Negatiboa zati negatiboa: positiboa.', es: 'Negativo entre negativo: positivo.', en: 'Negative divided by negative: positive.', ar: 'سالب على سالب: موجب.' },
         isSolved: (state) => state.solved.includes(4)
     },
     {
         id: 28204,
-        prompt: { eu: 'Ebatzi bi ekuazio azken urratsa ikusi gabe.', es: 'Resuelve dos ecuaciones sin ver el último paso.', ar: 'حلّ معادلتين دون رؤية الخطوة الأخيرة.' },
-        hint: { eu: 'Idatzi x urrats guztiak agertu aurretik.', es: 'Escribe x antes de que salgan todos los pasos.', ar: 'اكتب x قبل ظهور كل الخطوات.' },
+        prompt: { eu: 'Ebatzi bi ekuazio azken urratsa ikusi gabe.', es: 'Resuelve dos ecuaciones sin ver el último paso.', en: 'Solve two equations without looking at the last step.', ar: 'حلّ معادلتين دون رؤية الخطوة الأخيرة.' },
+        hint: { eu: 'Idatzi x urrats guztiak agertu aurretik.', es: 'Escribe x antes de que salgan todos los pasos.', en: 'Write x before all the steps appear.', ar: 'اكتب x قبل ظهور كل الخطوات.' },
         isSolved: (state) => state.early.length >= 2
     }
 ]
@@ -307,26 +312,26 @@ export function setLcm(state: LcmState, patch: Partial<Pick<LcmState, 'equation'
 export const lcmChallenges: LabChallenge<LcmState>[] = [
     {
         id: 28301,
-        prompt: { eu: 'Kendu $\\frac{x}{2}+\\frac{x}{3}=5$ ekuazioaren izendatzaileak zenbakirik txikienarekin.', es: 'Quita los denominadores de $\\frac{x}{2}+\\frac{x}{3}=5$ con el menor número posible.', ar: 'احذف مقامات $\\frac{x}{2}+\\frac{x}{3}=5$ بأصغر عدد ممكن.' },
-        hint: { eu: 'MKT(2, 3)', es: 'm.c.m.(2, 3)', ar: 'م.م.أ(2، 3)' },
+        prompt: { eu: 'Kendu $\\frac{x}{2}+\\frac{x}{3}=5$ ekuazioaren izendatzaileak zenbakirik txikienarekin.', es: 'Quita los denominadores de $\\frac{x}{2}+\\frac{x}{3}=5$ con el menor número posible.', en: 'Remove the denominators of $\\frac{x}{2}+\\frac{x}{3}=5$ using the smallest possible number.', ar: 'احذف مقامات $\\frac{x}{2}+\\frac{x}{3}=5$ بأصغر عدد ممكن.' },
+        hint: { eu: 'MKT(2, 3)', es: 'm.c.m.(2, 3)', en: 'LCM(2, 3)', ar: 'م.م.أ(2، 3)' },
         isSolved: (state) => state.cleared.includes(0)
     },
     {
         id: 28302,
-        prompt: { eu: 'Egin gauza bera $\\frac{x}{4}-\\frac{x}{6}=1$ ekuazioarekin.', es: 'Haz lo mismo con $\\frac{x}{4}-\\frac{x}{6}=1$.', ar: 'افعل الشيء نفسه مع $\\frac{x}{4}-\\frac{x}{6}=1$.' },
-        hint: { eu: '24 ere balio du, baina txikiago bat dago.', es: '24 también vale, pero hay uno menor.', ar: '24 يصلح أيضًا لكن يوجد أصغر.' },
+        prompt: { eu: 'Egin gauza bera $\\frac{x}{4}-\\frac{x}{6}=1$ ekuazioarekin.', es: 'Haz lo mismo con $\\frac{x}{4}-\\frac{x}{6}=1$.', en: 'Do the same with $\\frac{x}{4}-\\frac{x}{6}=1$.', ar: 'افعل الشيء نفسه مع $\\frac{x}{4}-\\frac{x}{6}=1$.' },
+        hint: { eu: '24 ere balio du, baina txikiago bat dago.', es: '24 también vale, pero hay uno menor.', en: '24 also works, but there is a smaller one.', ar: '24 يصلح أيضًا لكن يوجد أصغر.' },
         isSolved: (state) => state.cleared.includes(1)
     },
     {
         id: 28303,
-        prompt: { eu: 'Kendu izendatzaileak zenbakitzaile luzeak dituzten bi ekuazioetan.', es: 'Quita los denominadores en las dos ecuaciones con numeradores largos.', ar: 'احذف المقامات في المعادلتين ذواتي البسط الطويل.' },
-        hint: { eu: 'Gogoratu: minusak zenbakitzaile osoari eragiten dio.', es: 'Recuerda: el menos afecta a todo el numerador.', ar: 'تذكّر: الناقص يؤثر في البسط كله.' },
+        prompt: { eu: 'Kendu izendatzaileak zenbakitzaile luzeak dituzten bi ekuazioetan.', es: 'Quita los denominadores en las dos ecuaciones con numeradores largos.', en: 'Remove the denominators in the two equations with long numerators.', ar: 'احذف المقامات في المعادلتين ذواتي البسط الطويل.' },
+        hint: { eu: 'Gogoratu: minusak zenbakitzaile osoari eragiten dio.', es: 'Recuerda: el menos afecta a todo el numerador.', en: 'Remember: the minus sign affects the whole numerator.', ar: 'تذكّر: الناقص يؤثر في البسط كله.' },
         isSolved: (state) => state.cleared.includes(2) && state.cleared.includes(3)
     },
     {
         id: 28304,
-        prompt: { eu: 'Kendu izendatzaileak MKTa ez den multiplo komun batekin. Ebazpena aldatzen da?', es: 'Quita los denominadores con un múltiplo común que no sea el m.c.m. ¿Cambia la solución?', ar: 'احذف المقامات بمضاعف مشترك ليس م.م.أ. هل يتغيّر الحل؟' },
-        hint: { eu: 'Adibidez, 12 lehen ekuazioan.', es: 'Por ejemplo, 12 en la primera ecuación.', ar: 'مثلًا 12 في المعادلة الأولى.' },
+        prompt: { eu: 'Kendu izendatzaileak MKTa ez den multiplo komun batekin. Ebazpena aldatzen da?', es: 'Quita los denominadores con un múltiplo común que no sea el m.c.m. ¿Cambia la solución?', en: 'Remove the denominators using a common multiple that is not the LCM. Does the solution change?', ar: 'احذف المقامات بمضاعف مشترك ليس م.م.أ. هل يتغيّر الحل؟' },
+        hint: { eu: 'Adibidez, 12 lehen ekuazioan.', es: 'Por ejemplo, 12 en la primera ecuación.', en: 'For example, 12 in the first equation.', ar: 'مثلًا 12 في المعادلة الأولى.' },
         isSolved: (state) => state.clearedBigger.length >= 1
     }
 ]
@@ -343,26 +348,26 @@ export interface ProblemCard {
 
 export const problemCards: ProblemCard[] = [
     {
-        statement: { eu: 'Zenbaki baten erdiari 13 batuz, bere bikoitzari 11 kenduta bezainbeste lortzen da.', es: 'Sumando 13 a la mitad de un número se obtiene lo mismo que restando 11 a su doble.', ar: 'بإضافة 13 إلى نصف عدد نحصل على ما نحصل عليه بطرح 11 من ضعفه.' },
-        unknown: { eu: 'x = zenbakia', es: 'x = el número', ar: 'x = العدد' },
+        statement: { eu: 'Zenbaki baten erdiari 13 batuz, bere bikoitzari 11 kenduta bezainbeste lortzen da.', es: 'Sumando 13 a la mitad de un número se obtiene lo mismo que restando 11 a su doble.', en: 'Adding 13 to half of a number gives the same result as subtracting 11 from twice the number.', ar: 'بإضافة 13 إلى نصف عدد نحصل على ما نحصل عليه بطرح 11 من ضعفه.' },
+        unknown: { eu: 'x = zenbakia', es: 'x = el número', en: 'x = the number', ar: 'x = العدد' },
         options: ['\\frac{x}{2}+13=2x-11', '\\frac{x+13}{2}=2x-11', '\\frac{x}{2}+13=2(x-11)'],
         answer: fraction(16)
     },
     {
-        statement: { eu: 'Aitak semeak baino 30 urte gehiago ditu, eta 5 urte barru semearen hirukoitza izango du.', es: 'Un padre tiene 30 años más que su hijo y dentro de 5 años tendrá el triple que él.', ar: 'الأب أكبر من ابنه بـ 30 سنة، وبعد 5 سنوات سيكون عمره ثلاثة أضعاف عمره.' },
-        unknown: { eu: 'x = semearen adina gaur', es: 'x = edad del hijo hoy', ar: 'x = عمر الابن اليوم' },
+        statement: { eu: 'Aitak semeak baino 30 urte gehiago ditu, eta 5 urte barru semearen hirukoitza izango du.', es: 'Un padre tiene 30 años más que su hijo y dentro de 5 años tendrá el triple que él.', en: 'A father is 30 years older than his son, and in 5 years he will be three times as old as his son.', ar: 'الأب أكبر من ابنه بـ 30 سنة، وبعد 5 سنوات سيكون عمره ثلاثة أضعاف عمره.' },
+        unknown: { eu: 'x = semearen adina gaur', es: 'x = edad del hijo hoy', en: 'x = the son\'s age today', ar: 'x = عمر الابن اليوم' },
         options: ['x+35=3(x+5)', 'x+30=3x', 'x+35=3x+5'],
         answer: fraction(10)
     },
     {
-        statement: { eu: 'Laukizuzen bat zabalera baino 3 m luzeagoa da eta perimetroa 30 m da.', es: 'Un rectángulo es 3 m más largo que ancho y su perímetro mide 30 m.', ar: 'مستطيل طوله أكبر من عرضه بـ 3 م ومحيطه 30 م.' },
-        unknown: { eu: 'x = zabalera', es: 'x = el ancho', ar: 'x = العرض' },
+        statement: { eu: 'Laukizuzen bat zabalera baino 3 m luzeagoa da eta perimetroa 30 m da.', es: 'Un rectángulo es 3 m más largo que ancho y su perímetro mide 30 m.', en: 'A rectangle is 3 m longer than it is wide and its perimeter is 30 m.', ar: 'مستطيل طوله أكبر من عرضه بـ 3 م ومحيطه 30 م.' },
+        unknown: { eu: 'x = zabalera', es: 'x = el ancho', en: 'x = the width', ar: 'x = العرض' },
         options: ['2x+2(x+3)=30', 'x+(x+3)=30', 'x(x+3)=30'],
         answer: fraction(6)
     },
     {
-        statement: { eu: 'Sarreren heren bat lehen egunean saldu zen, laurden bat bigarrenean eta gainerako 200ak hirugarrenean.', es: 'Un tercio de las entradas se vendió el primer día, un cuarto el segundo y las 200 restantes el tercero.', ar: 'بيع ثلث التذاكر في اليوم الأول وربعها في الثاني والـ 200 الباقية في الثالث.' },
-        unknown: { eu: 'x = sarrera guztiak', es: 'x = total de entradas', ar: 'x = مجموع التذاكر' },
+        statement: { eu: 'Sarreren heren bat lehen egunean saldu zen, laurden bat bigarrenean eta gainerako 200ak hirugarrenean.', es: 'Un tercio de las entradas se vendió el primer día, un cuarto el segundo y las 200 restantes el tercero.', en: 'A third of the tickets were sold on the first day, a quarter on the second, and the remaining 200 on the third.', ar: 'بيع ثلث التذاكر في اليوم الأول وربعها في الثاني والـ 200 الباقية في الثالث.' },
+        unknown: { eu: 'x = sarrera guztiak', es: 'x = total de entradas', en: 'x = total number of tickets', ar: 'x = مجموع التذاكر' },
         options: ['\\frac{x}{3}+\\frac{x}{4}+200=x', '\\frac{x}{3}+\\frac{x}{4}=200', 'x+\\frac{x}{3}+\\frac{x}{4}=200'],
         answer: fraction(480)
     }
@@ -394,9 +399,10 @@ export const problemsChallenges: LabChallenge<ProblemsState>[] = problemCards.ma
     prompt: {
         eu: `${index + 1}. buruketa: aukeratu ekuazioa eta idatzi ebazpena.`,
         es: `Problema ${index + 1}: elige la ecuación y escribe la solución.`,
+        en: `Problem ${index + 1}: choose the equation and write the solution.`,
         ar: `المسألة ${index + 1}: اختر المعادلة واكتب الحل.`
     },
-    hint: { eu: 'Irakurri enuntziatua zatika eta itzuli zati bakoitza.', es: 'Lee el enunciado por partes y traduce cada una.', ar: 'اقرأ النص جزءًا جزءًا وترجم كل جزء.' },
+    hint: { eu: 'Irakurri enuntziatua zatika eta itzuli zati bakoitza.', es: 'Lee el enunciado por partes y traduce cada una.', en: 'Read the problem part by part and translate each part.', ar: 'اقرأ النص جزءًا جزءًا وترجم كل جزء.' },
     isSolved: (state: ProblemsState) => state.solved.includes(index)
 }))
 
@@ -435,26 +441,26 @@ const isInteger = (value: number) => Math.abs(value - Math.round(value)) < 1e-9
 export const quadraticChallenges: LabChallenge<QuadraticState>[] = [
     {
         id: 28501,
-        prompt: { eu: 'Egin 2 eta 3 ebazpenak dituen ekuazio bat.', es: 'Construye una ecuación cuyas soluciones sean 2 y 3.', ar: 'ابنِ معادلة حلاها 2 و3.' },
-        hint: { eu: '$(x-2)(x-3)=x^{2}-5x+6$', es: '$(x-2)(x-3)=x^{2}-5x+6$', ar: '$(x-2)(x-3)=x^{2}-5x+6$' },
+        prompt: { eu: 'Egin 2 eta 3 ebazpenak dituen ekuazio bat.', es: 'Construye una ecuación cuyas soluciones sean 2 y 3.', en: 'Build an equation whose solutions are 2 and 3.', ar: 'ابنِ معادلة حلاها 2 و3.' },
+        hint: { eu: '$(x-2)(x-3)=x^{2}-5x+6$', es: '$(x-2)(x-3)=x^{2}-5x+6$', en: '$(x-2)(x-3)=x^{2}-5x+6$', ar: '$(x-2)(x-3)=x^{2}-5x+6$' },
         isSolved: (state) => { const roots = quadraticSolutions(state); return roots.length === 2 && Math.abs(roots[0] - 2) < 1e-9 && Math.abs(roots[1] - 3) < 1e-9 }
     },
     {
         id: 28502,
-        prompt: { eu: 'Egin ebazpen bakarra (bikoitza) duen ekuazio bat, c ≠ 0 izanik.', es: 'Construye una ecuación con una sola solución (doble), con c ≠ 0.', ar: 'ابنِ معادلة لها حل واحد (مضاعف) مع c ≠ 0.' },
-        hint: { eu: 'Δ = 0: adibidez $x^{2}-6x+9$.', es: 'Δ = 0: por ejemplo $x^{2}-6x+9$.', ar: 'Δ = 0: مثلًا $x^{2}-6x+9$.' },
+        prompt: { eu: 'Egin ebazpen bakarra (bikoitza) duen ekuazio bat, c ≠ 0 izanik.', es: 'Construye una ecuación con una sola solución (doble), con c ≠ 0.', en: 'Build an equation with only one solution (double), with c ≠ 0.', ar: 'ابنِ معادلة لها حل واحد (مضاعف) مع c ≠ 0.' },
+        hint: { eu: 'Δ = 0: adibidez $x^{2}-6x+9$.', es: 'Δ = 0: por ejemplo $x^{2}-6x+9$.', en: 'Δ = 0: for example $x^{2}-6x+9$.', ar: 'Δ = 0: مثلًا $x^{2}-6x+9$.' },
         isSolved: (state) => discriminant(state) === 0 && state.c !== 0
     },
     {
         id: 28503,
-        prompt: { eu: 'Egin ebazpenik gabeko ekuazio bat, b ≠ 0 izanik.', es: 'Construye una ecuación sin solución, con b ≠ 0.', ar: 'ابنِ معادلة بلا حل مع b ≠ 0.' },
-        hint: { eu: 'Δ < 0: c handia eta a-ren zeinu berekoa.', es: 'Δ < 0: c grande y del mismo signo que a.', ar: 'Δ < 0: c كبير وبإشارة a نفسها.' },
+        prompt: { eu: 'Egin ebazpenik gabeko ekuazio bat, b ≠ 0 izanik.', es: 'Construye una ecuación sin solución, con b ≠ 0.', en: 'Build an equation with no solution, with b ≠ 0.', ar: 'ابنِ معادلة بلا حل مع b ≠ 0.' },
+        hint: { eu: 'Δ < 0: c handia eta a-ren zeinu berekoa.', es: 'Δ < 0: c grande y del mismo signo que a.', en: 'Δ < 0: a large c with the same sign as a.', ar: 'Δ < 0: c كبير وبإشارة a نفسها.' },
         isSolved: (state) => discriminant(state) < 0 && state.b !== 0
     },
     {
         id: 28504,
-        prompt: { eu: 'Egin bi ebazpen oso eta aurkako dituen ekuazio bat.', es: 'Construye una ecuación con dos soluciones enteras y opuestas.', ar: 'ابنِ معادلة لها حلان صحيحان متعاكسان.' },
-        hint: { eu: 'b = 0: $x^{2}-16=0$.', es: 'b = 0: $x^{2}-16=0$.', ar: 'b = 0: $x^{2}-16=0$.' },
+        prompt: { eu: 'Egin bi ebazpen oso eta aurkako dituen ekuazio bat.', es: 'Construye una ecuación con dos soluciones enteras y opuestas.', en: 'Build an equation with two integer solutions that are opposites.', ar: 'ابنِ معادلة لها حلان صحيحان متعاكسان.' },
+        hint: { eu: 'b = 0: $x^{2}-16=0$.', es: 'b = 0: $x^{2}-16=0$.', en: 'b = 0: $x^{2}-16=0$.', ar: 'b = 0: $x^{2}-16=0$.' },
         isSolved: (state) => { const roots = quadraticSolutions(state); return roots.length === 2 && Math.abs(roots[0] + roots[1]) < 1e-9 && isInteger(roots[1]) }
     }
 ]

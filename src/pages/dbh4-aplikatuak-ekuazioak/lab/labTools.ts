@@ -22,16 +22,16 @@ export interface EquationsSystemsLabTool extends LabToolInfo {
     stage: EquationsSystemsStageId
 }
 
-const say = (eu: string, es: string, ar: string) => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string) => ({ eu, es, en, ar })
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, Math.round(value)))
 
 export const equationsSystemsLabTools: EquationsSystemsLabTool[] = [
-    { id: 'solver', stage: 'first-degree', lessonTopic: 'brackets', title: say('Urratsez urrats', 'Paso a paso', 'خطوة بخطوة'), observe: say('Urrats bakoitzean ekuazio baliokide bat lortzen da. Saiatu ebazpena idazten urrats guztiak ikusi aurretik.', 'En cada paso se obtiene una ecuación equivalente. Intenta escribir la solución antes de ver todos los pasos.', 'في كل خطوة نحصل على معادلة مكافئة. حاول كتابة الحل قبل رؤية كل الخطوات.') },
-    { id: 'lcm', stage: 'first-degree', lessonTopic: 'denominators', title: say('Izendatzaileak kendu', 'Quitar denominadores', 'حذف المقامات'), observe: say('Izendatzaile guztien multiplo batez biderkatzean, zatiki guztiak desagertzen dira. MKTa da horrelako zenbakirik txikiena.', 'Al multiplicar por un múltiplo de todos los denominadores, desaparecen todas las fracciones. El m.c.m. es el menor de esos números.', 'عند الضرب في مضاعف لكل المقامات تختفي كل الكسور. والمضاعف المشترك الأصغر أصغر هذه الأعداد.') },
-    { id: 'quadratic', stage: 'quadratic', lessonTopic: 'discriminant', title: say('Diskriminatzailea', 'El discriminante', 'المميّز'), observe: say('Aldatu a, b eta c: parabolak x ardatza bi puntutan, puntu batean edo inon ez du ebakitzen, Δ positiboa, 0 edo negatiboa den arabera.', 'Cambia a, b y c: la parábola corta el eje x en dos puntos, en uno o en ninguno según Δ sea positivo, 0 o negativo.', 'غيّر a وb وc: يقطع القطع المكافئ محور x في نقطتين أو نقطة أو لا يقطعه بحسب كون Δ موجبًا أو 0 أو سالبًا.') },
-    { id: 'radical', stage: 'other', lessonTopic: 'radical', title: say('Erroak eta egiaztapena', 'Raíces y comprobación', 'الجذور والتحقق'), observe: say('Karratura jasotzean 2. mailako ekuazio bat ateratzen da, baina haren ebazpen guztiek ez dute balio: erroa ezin da negatiboa izan. Egiaztatu hautagai bakoitza.', 'Al elevar al cuadrado sale una ecuación de 2.º grado, pero no todas sus soluciones valen: una raíz no puede ser negativa. Comprueba cada candidato.', 'بالتربيع تظهر معادلة من الدرجة الثانية، لكن ليست كل حلولها صالحة: الجذر لا يكون سالبًا. تحقّق من كل مرشح.') },
-    { id: 'plane', stage: 'systems', lessonTopic: 'graphic', title: say('Sistemak planoan', 'Sistemas en el plano', 'الأنظمة في المستوى'), observe: say('Puntu bat ekuazio baten ebazpena da haren zuzenean badago. Sistemaren ebazpena bi zuzenetan dagoen puntua da: ebaki-puntua.', 'Un punto es solución de una ecuación si está en su recta. La solución del sistema es el punto que está en las dos rectas: el punto de corte.', 'النقطة حل لمعادلة إذا كانت على مستقيمها. وحل النظام النقطة التي على المستقيمين: نقطة التقاطع.') },
-    { id: 'reduction', stage: 'methods', lessonTopic: 'reduction', title: say('Laburketa-metodoa', 'Método de reducción', 'طريقة الحذف'), observe: say('Bi ekuazioak zenbaki egokiez biderkatuta eta batuta, ezezagun bat desagertzen da. Koefizienteen MKTak ematen ditu zenbakirik txikienak.', 'Multiplicando las dos ecuaciones por los números adecuados y sumándolas, desaparece una incógnita. El m.c.m. de los coeficientes da los números más pequeños.', 'بضرب المعادلتين في عددين مناسبين وجمعهما يختفي مجهول. والمضاعف المشترك للمعاملات يعطي أصغر الأعداد.') }
+    { id: 'solver', stage: 'first-degree', lessonTopic: 'brackets', title: say('Urratsez urrats', 'Paso a paso', 'خطوة بخطوة', 'Step by step'), observe: say('Urrats bakoitzean ekuazio baliokide bat lortzen da. Saiatu ebazpena idazten urrats guztiak ikusi aurretik.', 'En cada paso se obtiene una ecuación equivalente. Intenta escribir la solución antes de ver todos los pasos.', 'في كل خطوة نحصل على معادلة مكافئة. حاول كتابة الحل قبل رؤية كل الخطوات.', 'Each step gives you an equivalent equation. Try to write the solution before you see all the steps.') },
+    { id: 'lcm', stage: 'first-degree', lessonTopic: 'denominators', title: say('Izendatzaileak kendu', 'Quitar denominadores', 'حذف المقامات', 'Remove denominators'), observe: say('Izendatzaile guztien multiplo batez biderkatzean, zatiki guztiak desagertzen dira. MKTa da horrelako zenbakirik txikiena.', 'Al multiplicar por un múltiplo de todos los denominadores, desaparecen todas las fracciones. El m.c.m. es el menor de esos números.', 'عند الضرب في مضاعف لكل المقامات تختفي كل الكسور. والمضاعف المشترك الأصغر أصغر هذه الأعداد.', 'When you multiply by a common multiple of all the denominators, all the fractions disappear. The LCM is the smallest of those numbers.') },
+    { id: 'quadratic', stage: 'quadratic', lessonTopic: 'discriminant', title: say('Diskriminatzailea', 'El discriminante', 'المميّز', 'The discriminant'), observe: say('Aldatu a, b eta c: parabolak x ardatza bi puntutan, puntu batean edo inon ez du ebakitzen, Δ positiboa, 0 edo negatiboa den arabera.', 'Cambia a, b y c: la parábola corta el eje x en dos puntos, en uno o en ninguno según Δ sea positivo, 0 o negativo.', 'غيّر a وb وc: يقطع القطع المكافئ محور x في نقطتين أو نقطة أو لا يقطعه بحسب كون Δ موجبًا أو 0 أو سالبًا.', 'Change a, b and c: the parabola cuts the x-axis at two points, at one point or at none, depending on whether Δ is positive, 0 or negative.') },
+    { id: 'radical', stage: 'other', lessonTopic: 'radical', title: say('Erroak eta egiaztapena', 'Raíces y comprobación', 'الجذور والتحقق', 'Roots and checking'), observe: say('Karratura jasotzean 2. mailako ekuazio bat ateratzen da, baina haren ebazpen guztiek ez dute balio: erroa ezin da negatiboa izan. Egiaztatu hautagai bakoitza.', 'Al elevar al cuadrado sale una ecuación de 2.º grado, pero no todas sus soluciones valen: una raíz no puede ser negativa. Comprueba cada candidato.', 'بالتربيع تظهر معادلة من الدرجة الثانية، لكن ليست كل حلولها صالحة: الجذر لا يكون سالبًا. تحقّق من كل مرشح.', 'Squaring gives a quadratic equation, but not all its solutions work: a root cannot be negative. Check each candidate.') },
+    { id: 'plane', stage: 'systems', lessonTopic: 'graphic', title: say('Sistemak planoan', 'Sistemas en el plano', 'الأنظمة في المستوى', 'Systems in the plane'), observe: say('Puntu bat ekuazio baten ebazpena da haren zuzenean badago. Sistemaren ebazpena bi zuzenetan dagoen puntua da: ebaki-puntua.', 'Un punto es solución de una ecuación si está en su recta. La solución del sistema es el punto que está en las dos rectas: el punto de corte.', 'النقطة حل لمعادلة إذا كانت على مستقيمها. وحل النظام النقطة التي على المستقيمين: نقطة التقاطع.', 'A point is a solution of an equation if it is on its straight line. The solution of the system is the point that is on both straight lines: the point of intersection.') },
+    { id: 'reduction', stage: 'methods', lessonTopic: 'reduction', title: say('Laburketa-metodoa', 'Método de reducción', 'طريقة الحذف', 'Elimination method'), observe: say('Bi ekuazioak zenbaki egokiez biderkatuta eta batuta, ezezagun bat desagertzen da. Koefizienteen MKTak ematen ditu zenbakirik txikienak.', 'Multiplicando las dos ecuaciones por los números adecuados y sumándolas, desaparece una incógnita. El m.c.m. de los coeficientes da los números más pequeños.', 'بضرب المعادلتين في عددين مناسبين وجمعهما يختفي مجهول. والمضاعف المشترك للمعاملات يعطي أصغر الأعداد.', 'Multiplying the two equations by suitable numbers and adding them makes one unknown disappear. The LCM of the coefficients gives the smallest numbers.') }
 ]
 
 export const equationsSystemsLabToolForTopic: Record<string, EquationsSystemsLabToolId | undefined> = {
@@ -131,26 +131,26 @@ export const radicalSolved = (state: RadicalState, equation: number) => radicalC
 export const radicalChallenges: LabChallenge<RadicalState>[] = [
     {
         id: 47101,
-        prompt: say('Aurkitu ebazpen faltsu bat: karratura jaso ondoren ateratzen den baina hasierako ekuazioa betetzen ez duen zenbaki bat.', 'Encuentra una solución falsa: un número que sale al elevar al cuadrado pero no cumple la ecuación inicial.', 'جد حلًّا زائفًا: عددًا يظهر بعد التربيع لكنه لا يحقق المعادلة الأصلية.'),
-        hint: say('Lehen ekuazioan, probatu $x=-1$.', 'En la primera ecuación, prueba $x=-1$.', 'في المعادلة الأولى جرّب $x=-1$.'),
+        prompt: say('Aurkitu ebazpen faltsu bat: karratura jaso ondoren ateratzen den baina hasierako ekuazioa betetzen ez duen zenbaki bat.', 'Encuentra una solución falsa: un número que sale al elevar al cuadrado pero no cumple la ecuación inicial.', 'جد حلًّا زائفًا: عددًا يظهر بعد التربيع لكنه لا يحقق المعادلة الأصلية.', 'Find a false solution: a number that comes out when you square but does not satisfy the original equation.'),
+        hint: say('Lehen ekuazioan, probatu $x=-1$.', 'En la primera ecuación, prueba $x=-1$.', 'في المعادلة الأولى جرّب $x=-1$.', 'In the first equation, try $x=-1$.'),
         isSolved: (state) => radicalEquations.some((equation, index) => (state.checked[index] ?? []).some((x) => !isTrueSolution(equation, x)))
     },
     {
         id: 47102,
-        prompt: say('Ebatzi osorik $\\sqrt{x+1}=x-5$: egiaztatu bi hautagaiak.', 'Resuelve por completo $\\sqrt{x+1}=x-5$: comprueba los dos candidatos.', 'حلّ $\\sqrt{x+1}=x-5$ كاملة: تحقّق من المرشحَين.'),
-        hint: say('$x^{2}-11x+24=0$: 8 eta 3.', '$x^{2}-11x+24=0$: 8 y 3.', '$x^{2}-11x+24=0$: 8 و3.'),
+        prompt: say('Ebatzi osorik $\\sqrt{x+1}=x-5$: egiaztatu bi hautagaiak.', 'Resuelve por completo $\\sqrt{x+1}=x-5$: comprueba los dos candidatos.', 'حلّ $\\sqrt{x+1}=x-5$ كاملة: تحقّق من المرشحَين.', 'Solve $\\sqrt{x+1}=x-5$ completely: check both candidates.'),
+        hint: say('$x^{2}-11x+24=0$: 8 eta 3.', '$x^{2}-11x+24=0$: 8 y 3.', '$x^{2}-11x+24=0$: 8 و3.', '$x^{2}-11x+24=0$: 8 and 3.'),
         isSolved: (state) => radicalSolved(state, 1)
     },
     {
         id: 47103,
-        prompt: say('Aurkitu bi hautagaiak egiazkoak dituen ekuazioa eta egiaztatu biak.', 'Encuentra la ecuación cuyos dos candidatos son verdaderos y compruébalos.', 'جد المعادلة التي مرشحاها صحيحان وتحقّق منهما.'),
-        hint: say('$\\sqrt{4x+5}=x+2$', '$\\sqrt{4x+5}=x+2$', '$\\sqrt{4x+5}=x+2$'),
+        prompt: say('Aurkitu bi hautagaiak egiazkoak dituen ekuazioa eta egiaztatu biak.', 'Encuentra la ecuación cuyos dos candidatos son verdaderos y compruébalos.', 'جد المعادلة التي مرشحاها صحيحان وتحقّق منهما.', 'Find the equation whose two candidates are both valid, and check them.'),
+        hint: say('$\\sqrt{4x+5}=x+2$', '$\\sqrt{4x+5}=x+2$', '$\\sqrt{4x+5}=x+2$', '$\\sqrt{4x+5}=x+2$'),
         isSolved: (state) => radicalSolved(state, 2)
     },
     {
         id: 47104,
-        prompt: say('Ebatzi osorik bost ekuazioetatik lau.', 'Resuelve por completo cuatro de las cinco ecuaciones.', 'حلّ أربعًا من المعادلات الخمس كاملة.'),
-        hint: say('Ekuazio bakoitzean: karratura jaso eta egiaztatu hautagai guztiak.', 'En cada ecuación: eleva al cuadrado y comprueba todos los candidatos.', 'في كل معادلة: ربّع وتحقّق من كل المرشحين.'),
+        prompt: say('Ebatzi osorik bost ekuazioetatik lau.', 'Resuelve por completo cuatro de las cinco ecuaciones.', 'حلّ أربعًا من المعادلات الخمس كاملة.', 'Solve four of the five equations completely.'),
+        hint: say('Ekuazio bakoitzean: karratura jaso eta egiaztatu hautagai guztiak.', 'En cada ecuación: eleva al cuadrado y comprueba todos los candidatos.', 'في كل معادلة: ربّع وتحقّق من كل المرشحين.', 'In each equation: square both sides and check all the candidates.'),
         isSolved: (state) => radicalEquations.filter((_, index) => radicalSolved(state, index)).length >= 4
     }
 ]
@@ -211,26 +211,26 @@ export const chooseKind = (state: PlaneState, kind: SystemKind): PlaneState => (
 export const planeChallenges: LabChallenge<PlaneState>[] = [
     {
         id: 47201,
-        prompt: say('Eraman puntua $x+y=4$, $x-y=2$ sistemaren ebazpenera.', 'Lleva el punto a la solución del sistema $x+y=4$, $x-y=2$.', 'انقل النقطة إلى حل النظام $x+y=4$ و$x-y=2$.'),
-        hint: say('Bi zuzenak ebakitzen diren puntua.', 'El punto donde se cortan las dos rectas.', 'النقطة التي يتقاطع فيها المستقيمان.'),
+        prompt: say('Eraman puntua $x+y=4$, $x-y=2$ sistemaren ebazpenera.', 'Lleva el punto a la solución del sistema $x+y=4$, $x-y=2$.', 'انقل النقطة إلى حل النظام $x+y=4$ و$x-y=2$.', 'Move the point to the solution of the system $x+y=4$, $x-y=2$.'),
+        hint: say('Bi zuzenak ebakitzen diren puntua.', 'El punto donde se cortan las dos rectas.', 'النقطة التي يتقاطع فيها المستقيمان.', 'The point where the two straight lines intersect.'),
         isSolved: (state) => (state.hits[0] ?? []).length > 0
     },
     {
         id: 47202,
-        prompt: say('Aurkitu $2x+y=1$, $x-y=5$ sistemaren ebazpena.', 'Encuentra la solución del sistema $2x+y=1$, $x-y=5$.', 'جد حل النظام $2x+y=1$ و$x-y=5$.'),
-        hint: say('y negatiboa da.', 'La y es negativa.', 'قيمة y سالبة.'),
+        prompt: say('Aurkitu $2x+y=1$, $x-y=5$ sistemaren ebazpena.', 'Encuentra la solución del sistema $2x+y=1$, $x-y=5$.', 'جد حل النظام $2x+y=1$ و$x-y=5$.', 'Find the solution of the system $2x+y=1$, $x-y=5$.'),
+        hint: say('y negatiboa da.', 'La y es negativa.', 'قيمة y سالبة.', 'The y is negative.'),
         isSolved: (state) => (state.hits[1] ?? []).length > 0
     },
     {
         id: 47203,
-        prompt: say('$x+2y=3$, $2x+4y=6$ sisteman, aurkitu bi ebazpen desberdin.', 'En el sistema $x+2y=3$, $2x+4y=6$, encuentra dos soluciones distintas.', 'في النظام $x+2y=3$ و$2x+4y=6$ جد حلين مختلفين.'),
-        hint: say('Zuzen berdinak dira: zuzenaren edozein puntuk balio du, adibidez $(3, 0)$ eta $(1, 1)$.', 'Las rectas coinciden: vale cualquier punto de la recta, por ejemplo $(3, 0)$ y $(1, 1)$.', 'المستقيمان منطبقان: تصلح أي نقطة منه، مثل $(3, 0)$ و$(1, 1)$.'),
+        prompt: say('$x+2y=3$, $2x+4y=6$ sisteman, aurkitu bi ebazpen desberdin.', 'En el sistema $x+2y=3$, $2x+4y=6$, encuentra dos soluciones distintas.', 'في النظام $x+2y=3$ و$2x+4y=6$ جد حلين مختلفين.', 'In the system $x+2y=3$, $2x+4y=6$, find two different solutions.'),
+        hint: say('Zuzen berdinak dira: zuzenaren edozein puntuk balio du, adibidez $(3, 0)$ eta $(1, 1)$.', 'Las rectas coinciden: vale cualquier punto de la recta, por ejemplo $(3, 0)$ y $(1, 1)$.', 'المستقيمان منطبقان: تصلح أي نقطة منه، مثل $(3, 0)$ و$(1, 1)$.', 'The straight lines coincide, so any point on the line works, for example $(3, 0)$ and $(1, 1)$.'),
         isSolved: (state) => (state.hits[4] ?? []).length >= 2
     },
     {
         id: 47204,
-        prompt: say('Sailkatu bost sistemak ondo: ebazpen bat, bat ere ez edo infinitu.', 'Clasifica bien los cinco sistemas: una solución, ninguna o infinitas.', 'صنّف الأنظمة الخمسة تصنيفًا صحيحًا: حل واحد أو لا حل أو ما لا نهاية.'),
-        hint: say('Zuzenak ebakitzen dira, paraleloak dira edo bat datoz.', 'Las rectas se cortan, son paralelas o coinciden.', 'المستقيمان متقاطعان أو متوازيان أو منطبقان.'),
+        prompt: say('Sailkatu bost sistemak ondo: ebazpen bat, bat ere ez edo infinitu.', 'Clasifica bien los cinco sistemas: una solución, ninguna o infinitas.', 'صنّف الأنظمة الخمسة تصنيفًا صحيحًا: حل واحد أو لا حل أو ما لا نهاية.', 'Classify the five systems correctly: one solution, none or infinitely many.'),
+        hint: say('Zuzenak ebakitzen dira, paraleloak dira edo bat datoz.', 'Las rectas se cortan, son paralelas o coinciden.', 'المستقيمان متقاطعان أو متوازيان أو منطبقان.', 'The straight lines intersect, are parallel or coincide.'),
         isSolved: (state) => planeSystems.every((system, index) => state.kinds[index] === systemKind(system))
     }
 ]
@@ -304,26 +304,26 @@ export function setMultipliers(state: ReductionState, patch: Partial<Pick<Reduct
 export const reductionChallenges: LabChallenge<ReductionState>[] = [
     {
         id: 47301,
-        prompt: say('$3x+2y=13$, $5x-4y=7$ sisteman, desagerrarazi y.', 'En el sistema $3x+2y=13$, $5x-4y=7$, haz desaparecer la y.', 'في النظام $3x+2y=13$ و$5x-4y=7$ احذف y.'),
-        hint: say('Biderkatu lehenengoa 2z.', 'Multiplica la primera por 2.', 'اضرب الأولى في 2.'),
+        prompt: say('$3x+2y=13$, $5x-4y=7$ sisteman, desagerrarazi y.', 'En el sistema $3x+2y=13$, $5x-4y=7$, haz desaparecer la y.', 'في النظام $3x+2y=13$ و$5x-4y=7$ احذف y.', 'In the system $3x+2y=13$, $5x-4y=7$, make the y disappear.'),
+        hint: say('Biderkatu lehenengoa 2z.', 'Multiplica la primera por 2.', 'اضرب الأولى في 2.', 'Multiply the first equation by 2.'),
         isSolved: (state) => (state.eliminated[0] ?? []).includes('y')
     },
     {
         id: 47302,
-        prompt: say('Sistema berean, orain desagerrarazi x.', 'En el mismo sistema, haz desaparecer ahora la x.', 'في النظام نفسه احذف x الآن.'),
-        hint: say('$5\\cdot 3=15$ eta $-3\\cdot 5=-15$.', '$5\\cdot 3=15$ y $-3\\cdot 5=-15$.', '$5\\cdot 3=15$ و$-3\\cdot 5=-15$.'),
+        prompt: say('Sistema berean, orain desagerrarazi x.', 'En el mismo sistema, haz desaparecer ahora la x.', 'في النظام نفسه احذف x الآن.', 'In the same system, now make the x disappear.'),
+        hint: say('$5\\cdot 3=15$ eta $-3\\cdot 5=-15$.', '$5\\cdot 3=15$ y $-3\\cdot 5=-15$.', '$5\\cdot 3=15$ و$-3\\cdot 5=-15$.', '$5\\cdot 3=15$ and $-3\\cdot 5=-15$.'),
         isSolved: (state) => (state.eliminated[0] ?? []).includes('x')
     },
     {
         id: 47303,
-        prompt: say('Ebatzi $4x+3y=18$, $3x+2y=13$: bi ekuazioak biderkatu behar dira.', 'Resuelve $4x+3y=18$, $3x+2y=13$: hay que multiplicar las dos ecuaciones.', 'حلّ $4x+3y=18$ و$3x+2y=13$: يجب ضرب المعادلتين.'),
-        hint: say('y desagertzeko: 2 eta −3.', 'Para quitar la y: 2 y −3.', 'لحذف y: 2 و−3.'),
+        prompt: say('Ebatzi $4x+3y=18$, $3x+2y=13$: bi ekuazioak biderkatu behar dira.', 'Resuelve $4x+3y=18$, $3x+2y=13$: hay que multiplicar las dos ecuaciones.', 'حلّ $4x+3y=18$ و$3x+2y=13$: يجب ضرب المعادلتين.', 'Solve $4x+3y=18$, $3x+2y=13$: you need to multiply both equations.'),
+        hint: say('y desagertzeko: 2 eta −3.', 'Para quitar la y: 2 y −3.', 'لحذف y: 2 و−3.', 'To remove the y: 2 and −3.'),
         isSolved: (state) => (state.eliminated[4] ?? []).length > 0
     },
     {
         id: 47304,
-        prompt: say('Desagerrarazi ezezagun bat bost sistemetan.', 'Haz desaparecer una incógnita en los cinco sistemas.', 'احذف مجهولًا في الأنظمة الخمسة.'),
-        hint: say('Koefizienteak aurkakoak badira, nahikoa da 1 eta 1.', 'Si los coeficientes ya son opuestos, basta con 1 y 1.', 'إذا كان المعاملان متعاكسين يكفي 1 و1.'),
+        prompt: say('Desagerrarazi ezezagun bat bost sistemetan.', 'Haz desaparecer una incógnita en los cinco sistemas.', 'احذف مجهولًا في الأنظمة الخمسة.', 'Make one unknown disappear in all five systems.'),
+        hint: say('Koefizienteak aurkakoak badira, nahikoa da 1 eta 1.', 'Si los coeficientes ya son opuestos, basta con 1 y 1.', 'إذا كان المعاملان متعاكسين يكفي 1 و1.', 'If the coefficients are already opposites, 1 and 1 is enough.'),
         isSolved: (state) => reductionSystems.every((_, index) => (state.eliminated[index] ?? []).length > 0)
     }
 ]

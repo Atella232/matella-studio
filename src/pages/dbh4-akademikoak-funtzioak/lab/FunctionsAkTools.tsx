@@ -3,6 +3,7 @@ import { MathText } from '../../../components/MathText'
 import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import { signed } from '../../dbh2-funtzioak-v2/functions'
 import { Plane, PlanePath, PlanePoint } from '../../dbh2-funtzioak-v2/plane'
 import { sampled } from '../../dbh4-aplikatuak-funtzioak/functions'
@@ -52,8 +53,8 @@ const SECOND = 'var(--second, #c4432a)'
 const GREEN = 'var(--success, #267b53)'
 const MUSTARD = 'var(--mustard, #e0a100)'
 
-/** A number for the readouts and steppers: decimal comma (point in Arabic), true minus sign */
-const plain = (language: string, value: number) => signed(Math.round(value * 1000) / 1000).replace('.', language === 'ar' ? '.' : ',')
+/** A number for the readouts and steppers: the language's decimal mark (a point in Arabic and English), true minus sign */
+const plain = (language: string, value: number) => signed(Math.round(value * 1000) / 1000).replace('.', language === 'ar' ? '.' : decimalSeparatorFor(language))
 /** The same in LaTeX */
 const latexNumber = (language: string, value: number) => {
     const rounded = Math.round(value * 1000) / 1000
@@ -85,12 +86,12 @@ export function DomainsTool(props: LabToolProps) {
     ]
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Funtzioa', es: 'Función', ar: 'الدالة' })} value={state.kind} options={kinds} onChange={(kind) => setState((s) => setDomains(s, { kind }))} />
-            <Segmented label={l({ eu: 'x²-ren zeinua', es: 'Signo de x²', ar: 'إشارة x²' })} value={String(sign)} options={[{ value: '1', label: '+' }, { value: '-1', label: '−' }]} onChange={(value) => setState((s) => setDomains(s, { sign: value === '-1' ? -1 : 1 }))} />
-            <Stepper label={l({ eu: 'Lehen erroa', es: 'Primera raíz', ar: 'الجذر الأول' })} value={r} min={-ROOT_LIMIT} max={ROOT_LIMIT} format={signed} onChange={(value) => setState((s) => setDomains(s, { r: value }))} language={props.language} />
-            <Stepper label={l({ eu: 'Bigarren erroa', es: 'Segunda raíz', ar: 'الجذر الثاني' })} value={t} min={-ROOT_LIMIT} max={ROOT_LIMIT} format={signed} onChange={(value) => setState((s) => setDomains(s, { t: value }))} language={props.language} />
+            <Segmented label={l({ eu: 'Funtzioa', es: 'Función', en: 'Function', ar: 'الدالة' })} value={state.kind} options={kinds} onChange={(kind) => setState((s) => setDomains(s, { kind }))} />
+            <Segmented label={l({ eu: 'x²-ren zeinua', es: 'Signo de x²', en: 'Sign of x²', ar: 'إشارة x²' })} value={String(sign)} options={[{ value: '1', label: '+' }, { value: '-1', label: '−' }]} onChange={(value) => setState((s) => setDomains(s, { sign: value === '-1' ? -1 : 1 }))} />
+            <Stepper label={l({ eu: 'Lehen erroa', es: 'Primera raíz', en: 'First root', ar: 'الجذر الأول' })} value={r} min={-ROOT_LIMIT} max={ROOT_LIMIT} format={signed} onChange={(value) => setState((s) => setDomains(s, { r: value }))} language={props.language} />
+            <Stepper label={l({ eu: 'Bigarren erroa', es: 'Segunda raíz', en: 'Second root', ar: 'الجذر الثاني' })} value={t} min={-ROOT_LIMIT} max={ROOT_LIMIT} format={signed} onChange={(value) => setState((s) => setDomains(s, { t: value }))} language={props.language} />
             <div className="fraction-v2-segmented" role="group" aria-labelledby={groupId}>
-                <span id={groupId} className="fraction-v2-stepper-label">{l({ eu: 'Izate-eremuan dago (sakatu)', es: 'Está en el dominio (pulsa)', ar: 'داخل المجال (اضغط)' })}</span>
+                <span id={groupId} className="fraction-v2-stepper-label">{l({ eu: 'Izate-eremuan dago (sakatu)', es: 'Está en el dominio (pulsa)', en: 'It is in the domain (tap)', ar: 'داخل المجال (اضغط)' })}</span>
                 <div dir="ltr" style={{ flexWrap: 'wrap' }}>
                     {live.map((piece) => (
                         <button type="button" key={piece} dir="ltr" aria-pressed={state.picks[piece]} onClick={() => setState((s) => togglePiece(s, piece))}>{pieceLabels[piece]}</button>
@@ -106,8 +107,8 @@ export function DomainsTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${domainFunctionLatex(state)}$`} /></span>
             <span className="fraction-v2-lab-readout-note"><MathText text={`$P(x)=${polynomialLatex(state)}$`} /></span>
             <span className="fraction-v2-lab-readout-note" dir="ltr">
-                {l({ eu: 'P-ren zeinua', es: 'Signo de P', ar: 'إشارة P' })}{': '}{live.map((piece) => signText(signs[piece])).join('  ')}
-                {domainsRight(state) ? ` · ${l({ eu: 'Izate-eremua ✓', es: 'Dominio ✓', ar: 'المجال ✓' })}` : ''}
+                {l({ eu: 'P-ren zeinua', es: 'Signo de P', en: 'Sign of P', ar: 'إشارة P' })}{': '}{live.map((piece) => signText(signs[piece])).join('  ')}
+                {domainsRight(state) ? ` · ${l({ eu: 'Izate-eremua ✓', es: 'Dominio ✓', en: 'Domain ✓', ar: 'المجال ✓' })}` : ''}
             </span>
         </>
     )
@@ -117,7 +118,7 @@ export function DomainsTool(props: LabToolProps) {
     const bands: Array<[number, number, number]> = [[0, box.xMin - 1, r], [2, r, t], [4, t, box.xMax + 1]]
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={domainsChallenges} state={state}>
-            <Plane box={box} cell={26} yUnit={2} label={l({ eu: 'P-ren grafikoa eta izate-eremua X ardatzean', es: 'La gráfica de P y el dominio sobre el eje X', ar: 'رسم P والمجال على محور X' })}>
+            <Plane box={box} cell={26} yUnit={2} label={l({ eu: 'P-ren grafikoa eta izate-eremua X ardatzean', es: 'La gráfica de P y el dominio sobre el eje X', en: 'The graph of P and the domain on the x-axis', ar: 'رسم P والمجال على محور X' })}>
                 {(map) => (
                     <g>
                         <defs><clipPath id={`${groupId}-clip`}><rect x={map.x(box.xMin)} y={map.y(box.yMax)} width={map.width} height={map.height} /></clipPath></defs>
@@ -147,7 +148,7 @@ export function JoinTool(props: LabToolProps) {
     const box = { xMin: -3, xMax: 6, yMin: -3, yMax: 9 }
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Funtzioa', es: 'Función', ar: 'الدالة' })} value={String(state.preset)} options={joinPresets.map((_, index) => ({ value: String(index), label: String(index + 1) }))} onChange={(next) => setState((s) => setJoin(s, { preset: Number(next) }))} />
+            <Segmented label={l({ eu: 'Funtzioa', es: 'Función', en: 'Function', ar: 'الدالة' })} value={String(state.preset)} options={joinPresets.map((_, index) => ({ value: String(index), label: String(index + 1) }))} onChange={(next) => setState((s) => setJoin(s, { preset: Number(next) }))} />
             <Stepper label="k" value={k} min={-K_LIMIT} max={K_LIMIT} step={0.5} format={(value) => plain(props.language, value)} onChange={(value) => setState((s) => setJoin(s, { k: value }))} language={props.language} />
         </>
     )
@@ -157,17 +158,17 @@ export function JoinTool(props: LabToolProps) {
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${cases}$`} /></span>
-            <span className="fraction-v2-lab-readout-main"><MathText text={l({ eu: `Ezkerra: $${latexNumber(props.language, left)}$ · eskuina: $${latexNumber(props.language, right)}$`, es: `Izquierda: $${latexNumber(props.language, left)}$ · derecha: $${latexNumber(props.language, right)}$`, ar: `اليسار: $${latexNumber(props.language, left)}$ · اليمين: $${latexNumber(props.language, right)}$` })} /></span>
+            <span className="fraction-v2-lab-readout-main"><MathText text={l({ eu: `Ezkerra: $${latexNumber(props.language, left)}$ · eskuina: $${latexNumber(props.language, right)}$`, es: `Izquierda: $${latexNumber(props.language, left)}$ · derecha: $${latexNumber(props.language, right)}$`, en: `Left: $${latexNumber(props.language, left)}$ · right: $${latexNumber(props.language, right)}$`, ar: `اليسار: $${latexNumber(props.language, left)}$ · اليمين: $${latexNumber(props.language, right)}$` })} /></span>
             <span className="fraction-v2-lab-readout-note">
                 {jump === 0
-                    ? l({ eu: 'Jarraitua ✓', es: 'Continua ✓', ar: 'متصلة ✓' })
-                    : l({ eu: `Jauzia: ${plain(props.language, jump)}`, es: `Salto: ${plain(props.language, jump)}`, ar: `القفزة: ${plain(props.language, jump)}` })}
+                    ? l({ eu: 'Jarraitua ✓', es: 'Continua ✓', en: 'Continuous ✓', ar: 'متصلة ✓' })
+                    : l({ eu: `Jauzia: ${plain(props.language, jump)}`, es: `Salto: ${plain(props.language, jump)}`, en: `Jump: ${plain(props.language, jump)}`, ar: `القفزة: ${plain(props.language, jump)}` })}
             </span>
         </>
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={joinChallenges} state={state}>
-            <Plane box={box} cell={24} label={l({ eu: 'Bi zatiak eta haien lotunea', es: 'Los dos trozos y su unión', ar: 'الجزآن ونقطة التقائهما' })}>
+            <Plane box={box} cell={24} label={l({ eu: 'Bi zatiak eta haien lotunea', es: 'Los dos trozos y su unión', en: 'The two pieces and their junction', ar: 'الجزآن ونقطة التقائهما' })}>
                 {(map) => {
                     const clip = `url(#join-clip-${state.preset})`
                     return (
@@ -206,7 +207,7 @@ export function RootsTool(props: LabToolProps) {
     const controls = (
         <>
             {[0, 1, 2].map((index) => (
-                <Stepper key={index} label={l({ eu: `${index + 1}. erroa`, es: `Raíz ${index + 1}`, ar: `الجذر ${index + 1}` })} value={state.roots[index]} min={-CUBIC_LIMIT} max={CUBIC_LIMIT} format={signed} onChange={(value) => setState((current) => setRoot(current, index, value))} language={props.language} />
+                <Stepper key={index} label={l({ eu: `${index + 1}. erroa`, es: `Raíz ${index + 1}`, en: `Root ${index + 1}`, ar: `الجذر ${index + 1}` })} value={state.roots[index]} min={-CUBIC_LIMIT} max={CUBIC_LIMIT} format={signed} onChange={(value) => setState((current) => setRoot(current, index, value))} language={props.language} />
             ))}
         </>
     )
@@ -214,13 +215,13 @@ export function RootsTool(props: LabToolProps) {
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$y=${[r, s, t].map(factor).join('')}$`} /></span>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${cubicLatex(state)}$`} /></span>
-            <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `Y ardatza: $(0,\\,${d})$ · $f>0$: $${positive}$`, es: `Eje Y: $(0,\\,${d})$ · $f>0$: $${positive}$`, ar: `محور Y: $(0,\\,${d})$ · $f>0$: $${positive}$` })} /></span>
+            <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `Y ardatza: $(0,\\,${d})$ · $f>0$: $${positive}$`, es: `Eje Y: $(0,\\,${d})$ · $f>0$: $${positive}$`, en: `y-axis: $(0,\\,${d})$ · $f>0$: $${positive}$`, ar: `محور Y: $(0,\\,${d})$ · $f>0$: $${positive}$` })} /></span>
         </>
     )
     const box = { xMin: -5, xMax: 5, yMin: -4, yMax: 4 }
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={rootsChallenges} state={state}>
-            <Plane box={box} cell={28} yUnit={4} label={l({ eu: 'Kubikoa, haren erroak eta haren zeinua', es: 'La cúbica, sus raíces y su signo', ar: 'الدالة التكعيبية وجذورها وإشارتها' })}>
+            <Plane box={box} cell={28} yUnit={4} label={l({ eu: 'Kubikoa, haren erroak eta haren zeinua', es: 'La cúbica, sus raíces y su signo', en: 'The cubic, its roots and its sign', ar: 'الدالة التكعيبية وجذورها وإشارتها' })}>
                 {(map) => (
                     <g>
                         <defs><clipPath id="roots-clip"><rect x={map.x(box.xMin)} y={map.y(box.yMax)} width={map.width} height={map.height} /></clipPath></defs>
@@ -245,10 +246,10 @@ export function ParityTool(props: LabToolProps) {
     const parity = parityOf(state)
     const mirror = parityLatex({ a: -state.a, b: state.b, c: -state.c, d: state.d }).replace('y=', 'f(-x)=')
     const names = {
-        even: l({ eu: 'Bikoitia: f(−x) = f(x)', es: 'Par: f(−x) = f(x)', ar: 'زوجية: f(−x) = f(x)' }),
-        odd: l({ eu: 'Bakoitia: f(−x) = −f(x)', es: 'Impar: f(−x) = −f(x)', ar: 'فردية: f(−x) = −f(x)' }),
-        both: l({ eu: 'Bikoitia eta bakoitia (y = 0)', es: 'Par e impar (y = 0)', ar: 'زوجية وفردية (y = 0)' }),
-        neither: l({ eu: 'Ez bikoitia ez bakoitia', es: 'Ni par ni impar', ar: 'لا زوجية ولا فردية' })
+        even: l({ eu: 'Bikoitia: f(−x) = f(x)', es: 'Par: f(−x) = f(x)', en: 'Even: f(−x) = f(x)', ar: 'زوجية: f(−x) = f(x)' }),
+        odd: l({ eu: 'Bakoitia: f(−x) = −f(x)', es: 'Impar: f(−x) = −f(x)', en: 'Odd: f(−x) = −f(x)', ar: 'فردية: f(−x) = −f(x)' }),
+        both: l({ eu: 'Bikoitia eta bakoitia (y = 0)', es: 'Par e impar (y = 0)', en: 'Even and odd (y = 0)', ar: 'زوجية وفردية (y = 0)' }),
+        neither: l({ eu: 'Ez bikoitia ez bakoitia', es: 'Ni par ni impar', en: 'Neither even nor odd', ar: 'لا زوجية ولا فردية' })
     }
     const step = (key: keyof ParityState, label: string) => (
         <Stepper label={label} value={state[key]} min={-PARITY_LIMIT} max={PARITY_LIMIT} format={signed} onChange={(value) => setState((s) => setParity(s, { [key]: value }))} language={props.language} />
@@ -258,7 +259,7 @@ export function ParityTool(props: LabToolProps) {
             {step('a', 'x³')}
             {step('b', 'x²')}
             {step('c', 'x')}
-            {step('d', l({ eu: 'gai askea', es: 'término independiente', ar: 'الحد الثابت' }))}
+            {step('d', l({ eu: 'gai askea', es: 'término independiente', en: 'Constant term', ar: 'الحد الثابت' }))}
         </>
     )
     const readout = (
@@ -271,7 +272,7 @@ export function ParityTool(props: LabToolProps) {
     const box = { xMin: -4, xMax: 4, yMin: -5, yMax: 5 }
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={parityChallenges} state={state}>
-            <Plane box={box} cell={28} label={l({ eu: 'Grafikoa (lerro jarraitua) eta haren ispilua Y ardatzean (marratua)', es: 'La gráfica (continua) y su reflejo en el eje Y (discontinua)', ar: 'الرسم (متصل) وانعكاسه في محور Y (متقطع)' })}>
+            <Plane box={box} cell={28} label={l({ eu: 'Grafikoa (lerro jarraitua) eta haren ispilua Y ardatzean (marratua)', es: 'La gráfica (continua) y su reflejo en el eje Y (discontinua)', en: 'The graph (solid line) and its reflection in the y-axis (dashed line).', ar: 'الرسم (متصل) وانعكاسه في محور Y (متقطع)' })}>
                 {(map) => (
                     <g>
                         <defs><clipPath id="parity-clip"><rect x={map.x(box.xMin)} y={map.y(box.yMax)} width={map.width} height={map.height} /></clipPath></defs>

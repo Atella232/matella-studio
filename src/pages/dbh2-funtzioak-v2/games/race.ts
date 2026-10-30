@@ -60,7 +60,7 @@ export type RaceMeta =
 
 export type FunctionsRaceQuestion = RaceQuestion<FunctionsRaceError> & { meta: RaceMeta; graph?: GraphSpec }
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const math = (latex: string) => `$${latex}$`
 const signedRandom = (random: Random, min: number, max: number) => randomInt(random, min, max) * (random() < 0.5 ? -1 : 1)
 const roman = ['', 'I', 'II', 'III', 'IV'] as const
@@ -95,7 +95,7 @@ function build(circuit: number, kind: string, prompt: LocalizedText, options: Ra
 /** A series of values for x = 0, 1, 2… drawn as a broken line */
 const seriesGraph = (ys: number[]): GraphSpec => ({ box: { xMin: 0, xMax: ys.length - 1, yMin: 0, yMax: Math.max(...ys) + 1 }, cell: 26, labelStep: Math.max(...ys) > 9 ? 2 : 1, curves: [{ points: ys.map((y, x) => [x, y] as Point) }] })
 
-const same = (latex: string): LocalizedText => ({ eu: math(latex), es: math(latex), ar: math(latex) })
+const same = (latex: string): LocalizedText => ({ eu: math(latex), es: math(latex), en: math(latex), ar: math(latex) })
 const bracket = (value: number) => (value < 0 ? `(${value})` : String(value))
 
 /* ---------- Circuit 0: coordinates and relations ---------- */
@@ -111,7 +111,7 @@ function quadrantQuestion(random: Random): FunctionsRaceQuestion | null {
     })
     const options = pickOptions(random, { latex: `\\text{${roman[right]}}`, error: null }, wrongs)
     if (!options) return null
-    return build(0, 'quadrant', say(`Zein koadrantetan dago ${math(`P${pointLatex(point)}`)} puntua?`, `¿En qué cuadrante está el punto ${math(`P${pointLatex(point)}`)}?`, `في أي ربع تقع النقطة ${math(`P${pointLatex(point)}`)}؟`), options, null, same(`P${pointLatex(point)}\\to\\text{${roman[right]}}`), { kind: 'quadrant', point })
+    return build(0, 'quadrant', say(`Zein koadrantetan dago ${math(`P${pointLatex(point)}`)} puntua?`, `¿En qué cuadrante está el punto ${math(`P${pointLatex(point)}`)}?`, `في أي ربع تقع النقطة ${math(`P${pointLatex(point)}`)}؟`, `Which quadrant is the point ${math(`P${pointLatex(point)}`)} in?`), options, null, same(`P${pointLatex(point)}\\to\\text{${roman[right]}}`), { kind: 'quadrant', point })
 }
 
 const relationLatex = (pairs: Point[]) => pairs.map(([x, y]) => `${x}\\to ${y}`).join(',\\ ')
@@ -130,7 +130,7 @@ function relationQuestion(random: Random): FunctionsRaceQuestion | null {
     const options = pickOptions(random, { latex: relationLatex(right), error: null }, wrongs.map((relation) => ({ latex: relationLatex(relation), error: 'repeated-input' as const })))
     if (!options) return null
     const shown = options.map((option) => all.find((relation) => relationLatex(relation) === option.latex)!)
-    return build(0, 'relation', say('Zein erlazio da funtzioa?', '¿Cuál de estas relaciones es una función?', 'أي هذه العلاقات دالة؟'), options, null, say('Funtzioa: sarrera bakoitzak irteera bakarra du.', 'Es función: cada entrada tiene una sola salida.', 'هي دالة: لكل مدخل مخرج واحد.'), { kind: 'relation', relations: shown, right: options.findIndex((option) => option.correct) })
+    return build(0, 'relation', say('Zein erlazio da funtzioa?', '¿Cuál de estas relaciones es una función?', 'أي هذه العلاقات دالة؟', 'Which of these relationships is a function?'), options, null, say('Funtzioa: sarrera bakoitzak irteera bakarra du.', 'Es función: cada entrada tiene una sola salida.', 'هي دالة: لكل مدخل مخرج واحد.', 'It is a function: each input has only one output.'), { kind: 'relation', relations: shown, right: options.findIndex((option) => option.correct) })
 }
 
 function areaQuestion(random: Random): FunctionsRaceQuestion | null {
@@ -145,7 +145,7 @@ function areaQuestion(random: Random): FunctionsRaceQuestion | null {
     const shown = vertices.map((vertex, index) => `${'ABCD'[index]}${pointLatex(vertex)}`).join(',\\ ')
     const options = pickOptions(random, numberChoice(area, 'calculation'), [numberChoice(2 * (dx + dy), 'added'), numberChoice(dx + dy, 'added'), numberChoice(area + dx, 'calculation'), ...near(area)])
     if (!options) return null
-    return build(0, 'area', say(`Laukizuzen baten erpinak ${math(shown)} dira. Zenbat da azalera?`, `Los vértices de un rectángulo son ${math(shown)}. ¿Cuánto mide su área?`, `رؤوس مستطيل هي ${math(shown)}. كم مساحته؟`), options, fraction(area), same(`${dx}\\cdot ${dy}=${area}`), { kind: 'area', vertices, area })
+    return build(0, 'area', say(`Laukizuzen baten erpinak ${math(shown)} dira. Zenbat da azalera?`, `Los vértices de un rectángulo son ${math(shown)}. ¿Cuánto mide su área?`, `رؤوس مستطيل هي ${math(shown)}. كم مساحته؟`, `The vertices of a rectangle are ${math(shown)}. What is its area?`), options, fraction(area), same(`${dx}\\cdot ${dy}=${area}`), { kind: 'area', vertices, area })
 }
 
 function pointGraphQuestion(random: Random): FunctionsRaceQuestion | null {
@@ -161,7 +161,7 @@ function pointGraphQuestion(random: Random): FunctionsRaceQuestion | null {
     const options = pickOptions(random, { latex: pointLatex(point), error: null }, candidates.map((item) => ({ latex: pointLatex(item.point), error: item.error })))
     if (!options) return null
     const points = options.map((option) => (option.correct ? point : candidates.find((item) => pointLatex(item.point) === option.latex)!.point))
-    return build(0, 'graph-point', say('Zein dira $P$ puntuaren koordenatuak?', '¿Cuáles son las coordenadas del punto $P$?', 'ما إحداثيا النقطة $P$؟'), options, null, same(`P${pointLatex(point)}`), { kind: 'graph-point', point, points, right: options.findIndex((option) => option.correct) }, { box: { xMin: -5, xMax: 5, yMin: -4, yMax: 4 }, cell: 26, points: [{ at: point, name: 'P' }] })
+    return build(0, 'graph-point', say('Zein dira $P$ puntuaren koordenatuak?', '¿Cuáles son las coordenadas del punto $P$?', 'ما إحداثيا النقطة $P$؟', 'What are the coordinates of point $P$?'), options, null, same(`P${pointLatex(point)}`), { kind: 'graph-point', point, points, right: options.findIndex((option) => option.correct) }, { box: { xMin: -5, xMax: 5, yMin: -4, yMax: 4 }, cell: 26, points: [{ at: point, name: 'P' }] })
 }
 
 /* ---------- Circuit 1: tables, formulas and points ---------- */
@@ -181,7 +181,7 @@ function valueQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | null
         ...near(y)
     ])
     if (!options) return null
-    return build(1, 'value', say(`${math(functionName(m, n))} bada, zenbat da ${math(`f(${x})`)}?`, `Si ${math(functionName(m, n))}, ¿cuánto vale ${math(`f(${x})`)}?`, `إذا كانت ${math(functionName(m, n))} فكم تساوي ${math(`f(${x})`)}؟`), options, fraction(y), same(`f(${x})=${m}\\cdot ${bracket(x)}${n < 0 ? '' : '+'}${n}=${y}`), { kind: 'value', m, n, x, y })
+    return build(1, 'value', say(`${math(functionName(m, n))} bada, zenbat da ${math(`f(${x})`)}?`, `Si ${math(functionName(m, n))}, ¿cuánto vale ${math(`f(${x})`)}?`, `إذا كانت ${math(functionName(m, n))} فكم تساوي ${math(`f(${x})`)}؟`, `If ${math(functionName(m, n))}, what is ${math(`f(${x})`)}?`), options, fraction(y), same(`f(${x})=${m}\\cdot ${bracket(x)}${n < 0 ? '' : '+'}${n}=${y}`), { kind: 'value', m, n, x, y })
 }
 
 function squareQuestion(random: Random): FunctionsRaceQuestion | null {
@@ -190,7 +190,7 @@ function squareQuestion(random: Random): FunctionsRaceQuestion | null {
     const y = x * x - k
     const options = pickOptions(random, numberChoice(y, 'calculation'), [numberChoice(-(x * x) - k, 'power-sign'), numberChoice(2 * x - k, 'power-sign'), numberChoice(x * x + k, 'sign-error'), ...near(y)])
     if (!options) return null
-    return build(1, 'square', say(`${math(`f(x)=x^{2}-${k}`)} bada, zenbat da ${math(`f(${x})`)}?`, `Si ${math(`f(x)=x^{2}-${k}`)}, ¿cuánto vale ${math(`f(${x})`)}?`, `إذا كانت ${math(`f(x)=x^{2}-${k}`)} فكم تساوي ${math(`f(${x})`)}؟`), options, fraction(y), same(`f(${x})=${bracket(x)}^{2}-${k}=${x * x}-${k}=${y}`), { kind: 'square', k, x, y })
+    return build(1, 'square', say(`${math(`f(x)=x^{2}-${k}`)} bada, zenbat da ${math(`f(${x})`)}?`, `Si ${math(`f(x)=x^{2}-${k}`)}, ¿cuánto vale ${math(`f(${x})`)}?`, `إذا كانت ${math(`f(x)=x^{2}-${k}`)} فكم تساوي ${math(`f(${x})`)}؟`, `If ${math(`f(x)=x^{2}-${k}`)}, what is ${math(`f(${x})`)}?`), options, fraction(y), same(`f(${x})=${bracket(x)}^{2}-${k}=${x * x}-${k}=${y}`), { kind: 'square', k, x, y })
 }
 
 function inverseQuestion(random: Random): FunctionsRaceQuestion | null {
@@ -205,7 +205,7 @@ function inverseQuestion(random: Random): FunctionsRaceQuestion | null {
         ...near(x)
     ])
     if (!options) return null
-    return build(1, 'inverse', say(`${math(functionName(m, n))} funtzioan, zein $x$-rentzat da ${math(`f(x)=${y}`)}?`, `En ${math(functionName(m, n))}, ¿para qué $x$ se cumple ${math(`f(x)=${y}`)}?`, `في ${math(functionName(m, n))} لأي $x$ يتحقق ${math(`f(x)=${y}`)}؟`), options, fraction(x), same(`${m}x${n < 0 ? '' : '+'}${n}=${y}\\ \\to\\ x=${x}`), { kind: 'inverse', m, n, y, x })
+    return build(1, 'inverse', say(`${math(functionName(m, n))} funtzioan, zein $x$-rentzat da ${math(`f(x)=${y}`)}?`, `En ${math(functionName(m, n))}, ¿para qué $x$ se cumple ${math(`f(x)=${y}`)}?`, `في ${math(functionName(m, n))} لأي $x$ يتحقق ${math(`f(x)=${y}`)}؟`, `In ${math(functionName(m, n))}, for which $x$ is ${math(`f(x)=${y}`)} true?`), options, fraction(x), same(`${m}x${n < 0 ? '' : '+'}${n}=${y}\\ \\to\\ x=${x}`), { kind: 'inverse', m, n, y, x })
 }
 
 function pointOnLineQuestion(random: Random): FunctionsRaceQuestion | null {
@@ -226,7 +226,7 @@ function pointOnLineQuestion(random: Random): FunctionsRaceQuestion | null {
     const options = pickOptions(random, { latex: pointLatex(right), error: null }, wrongs)
     if (!options) return null
     const points = options.map((option) => (option.latex === pointLatex(right) ? right : candidates.find((item) => pointLatex(item.point) === option.latex)!.point))
-    return build(1, 'point-on-line', say(`Zein puntu da ${math(lineLatex(m, n))} funtzioarena?`, `¿Cuál de estos puntos es de la función ${math(lineLatex(m, n))}?`, `أي هذه النقاط تنتمي إلى الدالة ${math(lineLatex(m, n))}؟`), options, null, same(`${m}\\cdot ${x}${n < 0 ? '' : '+'}${n}=${y}`), { kind: 'point-on-line', m, n, points, right: options.findIndex((option) => option.correct) })
+    return build(1, 'point-on-line', say(`Zein puntu da ${math(lineLatex(m, n))} funtzioarena?`, `¿Cuál de estos puntos es de la función ${math(lineLatex(m, n))}?`, `أي هذه النقاط تنتمي إلى الدالة ${math(lineLatex(m, n))}؟`, `Which of these points belongs to the function ${math(lineLatex(m, n))}?`), options, null, same(`${m}\\cdot ${x}${n < 0 ? '' : '+'}${n}=${y}`), { kind: 'point-on-line', m, n, points, right: options.findIndex((option) => option.correct) })
 }
 
 /* ---------- Circuit 2: reading a graph ---------- */
@@ -248,7 +248,7 @@ function maxQuestion(random: Random): FunctionsRaceQuestion | null {
     const high = Math.max(...ys)
     const options = pickOptions(random, numberChoice(high, 'calculation'), [numberChoice(Math.min(...ys), 'wrong-extreme'), numberChoice(ys.indexOf(high), 'wrong-extreme'), numberChoice(ys[ys.length - 1], 'wrong-extreme'), ...near(high)])
     if (!options) return null
-    return build(2, 'max', say('Grafikoan, zein da $y$-ren balio maximoa?', 'En la gráfica, ¿cuál es el valor máximo de $y$?', 'في الرسم، ما أكبر قيمة لـ $y$؟'), options, fraction(high), same(`\\max y=${high}\\quad (x=${ys.indexOf(high)})`), { kind: 'table', ys, ask: 'max', answer: high }, seriesGraph(ys))
+    return build(2, 'max', say('Grafikoan, zein da $y$-ren balio maximoa?', 'En la gráfica, ¿cuál es el valor máximo de $y$?', 'في الرسم، ما أكبر قيمة لـ $y$؟', 'On the graph, what is the maximum value of $y$?'), options, fraction(high), same(`\\max y=${high}\\quad (x=${ys.indexOf(high)})`), { kind: 'table', ys, ask: 'max', answer: high }, seriesGraph(ys))
 }
 
 function argminQuestion(random: Random): FunctionsRaceQuestion | null {
@@ -258,7 +258,7 @@ function argminQuestion(random: Random): FunctionsRaceQuestion | null {
     const at = ys.indexOf(low)
     const options = pickOptions(random, numberChoice(at, 'calculation'), [numberChoice(low, 'wrong-extreme'), numberChoice(ys.indexOf(Math.max(...ys)), 'wrong-extreme'), ...near(at).filter((choice) => Number(choice.latex) >= 0)])
     if (!options) return null
-    return build(2, 'argmin', say('Grafikoan, zein $x$-rentzat da $y$ minimoa?', 'En la gráfica, ¿para qué $x$ es mínima $y$?', 'في الرسم، عند أي $x$ تكون $y$ أصغر ما يمكن؟'), options, fraction(at), same(`\\min y=${low}\\quad \\to\\ x=${at}`), { kind: 'table', ys, ask: 'argmin', answer: at }, seriesGraph(ys))
+    return build(2, 'argmin', say('Grafikoan, zein $x$-rentzat da $y$ minimoa?', 'En la gráfica, ¿para qué $x$ es mínima $y$?', 'في الرسم، عند أي $x$ تكون $y$ أصغر ما يمكن؟', 'On the graph, for which $x$ is $y$ at its minimum?'), options, fraction(at), same(`\\min y=${low}\\quad \\to\\ x=${at}`), { kind: 'table', ys, ask: 'argmin', answer: at }, seriesGraph(ys))
 }
 
 function decreasingQuestion(random: Random): FunctionsRaceQuestion | null {
@@ -274,7 +274,7 @@ function decreasingQuestion(random: Random): FunctionsRaceQuestion | null {
     const others = shuffle(random, [0, 1, 2, 3, 4].filter((index) => index !== step)).slice(0, 3)
     const options = pickOptions(random, { latex: interval(step), error: null }, others.map((index) => ({ latex: interval(index), error: 'wrong-trend' as const })))
     if (!options) return null
-    return build(2, 'decreasing', say('Grafikoan, zein tartetan da beherakorra?', 'En la gráfica, ¿en qué intervalo es decreciente?', 'في الرسم، في أي فترة تكون متناقصة؟'), options, null, same(`f(${step})=${ys[step]}>f(${step + 1})=${ys[step + 1]}`), { kind: 'table', ys, ask: 'decreasing', answer: step }, seriesGraph(ys))
+    return build(2, 'decreasing', say('Grafikoan, zein tartetan da beherakorra?', 'En la gráfica, ¿en qué intervalo es decreciente?', 'في الرسم، في أي فترة تكون متناقصة؟', 'On the graph, in which interval is it decreasing?'), options, null, same(`f(${step})=${ys[step]}>f(${step + 1})=${ys[step + 1]}`), { kind: 'table', ys, ask: 'decreasing', answer: step }, seriesGraph(ys))
 }
 
 function graphValueQuestion(random: Random): FunctionsRaceQuestion | null {
@@ -284,7 +284,7 @@ function graphValueQuestion(random: Random): FunctionsRaceQuestion | null {
     if (y === x) return null
     const options = pickOptions(random, numberChoice(y, 'calculation'), [numberChoice(x, 'swap-xy'), numberChoice(ys[x - 1], 'calculation'), ...(x < 6 ? [numberChoice(ys[x + 1], 'calculation')] : []), ...near(y).filter((choice) => Number(choice.latex) >= 0)])
     if (!options) return null
-    return build(2, 'graph-value', say(`Grafikoan, zenbat da ${math(`f(${x})`)}?`, `En la gráfica, ¿cuánto vale ${math(`f(${x})`)}?`, `في الرسم، كم تساوي ${math(`f(${x})`)}؟`), options, fraction(y), same(`x=${x}\\ \\to\\ y=${y}`), { kind: 'graph-value', ys, x, y }, seriesGraph(ys))
+    return build(2, 'graph-value', say(`Grafikoan, zenbat da ${math(`f(${x})`)}?`, `En la gráfica, ¿cuánto vale ${math(`f(${x})`)}?`, `في الرسم، كم تساوي ${math(`f(${x})`)}؟`, `On the graph, what is ${math(`f(${x})`)}?`), options, fraction(y), same(`x=${x}\\ \\to\\ y=${y}`), { kind: 'graph-value', ys, x, y }, seriesGraph(ys))
 }
 
 function interceptQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | null {
@@ -296,11 +296,11 @@ function interceptQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | 
     if (axis === 'y') {
         const options = pickOptions(random, numberChoice(n, 'calculation'), [numberChoice(m, 'axes-mixed'), numberChoice(-n, 'sign-error'), numberChoice(x0, 'axes-mixed'), ...near(n)])
         if (!options) return null
-        return build(2, 'intercept-y', say(`Zein da ${math(lineLatex(m, n))} zuzenaren Y ardatzeko ebakiduraren ordenatua?`, `¿Cuál es la ordenada del corte de ${math(lineLatex(m, n))} con el eje Y?`, `ما ترتيبة تقاطع ${math(lineLatex(m, n))} مع محور Y؟`), options, fraction(n), same(`x=0\\ \\to\\ y=${n}`), { kind: 'intercept', m, n, axis, answer: n })
+        return build(2, 'intercept-y', say(`Zein da ${math(lineLatex(m, n))} zuzenaren Y ardatzeko ebakiduraren ordenatua?`, `¿Cuál es la ordenada del corte de ${math(lineLatex(m, n))} con el eje Y?`, `ما ترتيبة تقاطع ${math(lineLatex(m, n))} مع محور Y؟`, `What is the y-intercept of ${math(lineLatex(m, n))}?`), options, fraction(n), same(`x=0\\ \\to\\ y=${n}`), { kind: 'intercept', m, n, axis, answer: n })
     }
     const options = pickOptions(random, numberChoice(x0, 'calculation'), [numberChoice(-x0, 'sign-error'), numberChoice(n, 'axes-mixed'), numberChoice(m, 'axes-mixed'), ...near(x0)])
     if (!options) return null
-    return build(2, 'intercept-x', say(`Zein da ${math(lineLatex(m, n))} zuzenak X ardatza ebakitzen duen puntuaren abzisa?`, `¿Cuál es la abscisa del punto donde ${math(lineLatex(m, n))} corta al eje X?`, `ما فاصلة نقطة تقاطع ${math(lineLatex(m, n))} مع محور X؟`), options, fraction(x0), same(`0=${m}x${n < 0 ? '' : '+'}${n}\\ \\to\\ x=${x0}`), { kind: 'intercept', m, n, axis, answer: x0 })
+    return build(2, 'intercept-x', say(`Zein da ${math(lineLatex(m, n))} zuzenak X ardatza ebakitzen duen puntuaren abzisa?`, `¿Cuál es la abscisa del punto donde ${math(lineLatex(m, n))} corta al eje X?`, `ما فاصلة نقطة تقاطع ${math(lineLatex(m, n))} مع محور X؟`, `What is the x-coordinate of the point where ${math(lineLatex(m, n))} crosses the x-axis?`), options, fraction(x0), same(`0=${m}x${n < 0 ? '' : '+'}${n}\\ \\to\\ x=${x0}`), { kind: 'intercept', m, n, axis, answer: x0 })
 }
 
 /* ---------- Circuit 3: direct proportion and slope ---------- */
@@ -311,7 +311,7 @@ function throughOriginQuestion(random: Random, tier: Tier): FunctionsRaceQuestio
     const y = m * x
     const options = pickOptions(random, numberChoice(m, 'calculation'), [numberChoice(y - x, 'order'), numberChoice(y + x, 'added'), numberChoice(-m, 'sign-error'), ...near(m)])
     if (!options) return null
-    return build(3, 'through-origin', say(`${math('y=mx')} funtzioaren grafikoa ${math(`(${x},\\,${y})`)} puntutik pasatzen da. Zenbat da $m$?`, `La gráfica de ${math('y=mx')} pasa por ${math(`(${x},\\,${y})`)}. ¿Cuánto vale $m$?`, `رسم ${math('y=mx')} يمر بالنقطة ${math(`(${x},\\,${y})`)}. كم تساوي $m$؟`), options, fraction(m), same(`m=\\frac{${y}}{${x}}=${m}`), { kind: 'through-origin', point: [x, y], m })
+    return build(3, 'through-origin', say(`${math('y=mx')} funtzioaren grafikoa ${math(`(${x},\\,${y})`)} puntutik pasatzen da. Zenbat da $m$?`, `La gráfica de ${math('y=mx')} pasa por ${math(`(${x},\\,${y})`)}. ¿Cuánto vale $m$?`, `رسم ${math('y=mx')} يمر بالنقطة ${math(`(${x},\\,${y})`)}. كم تساوي $m$؟`, `The graph of ${math('y=mx')} passes through ${math(`(${x},\\,${y})`)}. What is $m$?`), options, fraction(m), same(`m=\\frac{${y}}{${x}}=${m}`), { kind: 'through-origin', point: [x, y], m })
 }
 
 function proportionalValueQuestion(random: Random): FunctionsRaceQuestion | null {
@@ -320,7 +320,7 @@ function proportionalValueQuestion(random: Random): FunctionsRaceQuestion | null
     const y = m * x
     const options = pickOptions(random, numberChoice(y, 'calculation'), [numberChoice(-y, 'sign-error'), numberChoice(m + x, 'added'), numberChoice(m - x, 'added'), ...near(y)])
     if (!options) return null
-    return build(3, 'proportional-value', say(`${math(`y=${m === 1 ? '' : m === -1 ? '-' : m}x`)} funtzioan, zenbat da $y$ ${math(`x=${x}`)} denean?`, `En ${math(`y=${m}x`)}, ¿cuánto vale $y$ cuando ${math(`x=${x}`)}?`, `في ${math(`y=${m}x`)} كم تساوي $y$ عندما ${math(`x=${x}`)}؟`), options, fraction(y), same(`y=${m}\\cdot ${bracket(x)}=${y}`), { kind: 'proportional-value', m, x, y })
+    return build(3, 'proportional-value', say(`${math(`y=${m === 1 ? '' : m === -1 ? '-' : m}x`)} funtzioan, zenbat da $y$ ${math(`x=${x}`)} denean?`, `En ${math(`y=${m}x`)}, ¿cuánto vale $y$ cuando ${math(`x=${x}`)}?`, `في ${math(`y=${m}x`)} كم تساوي $y$ عندما ${math(`x=${x}`)}؟`, `In ${math(`y=${m}x`)}, what is $y$ when ${math(`x=${x}`)}?`), options, fraction(y), same(`y=${m}\\cdot ${bracket(x)}=${y}`), { kind: 'proportional-value', m, x, y })
 }
 
 const slopeLatex = (value: FractionValue) => toLatex(value)
@@ -354,7 +354,7 @@ function slopeQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | null
     ] as Choice[]).filter((choice) => choice.latex !== rightLatex)
     const options = pickOptions(random, { latex: rightLatex, error: null }, wrongs)
     if (!options) return null
-    return build(3, 'slope', say(`Zein da ${math(`A${pointLatex(a)}`)} eta ${math(`B${pointLatex(b)}`)} puntuetatik pasatzen den zuzenaren malda?`, `¿Cuál es la pendiente de la recta que pasa por ${math(`A${pointLatex(a)}`)} y ${math(`B${pointLatex(b)}`)}?`, `ما ميل الخط المار بالنقطتين ${math(`A${pointLatex(a)}`)} و${math(`B${pointLatex(b)}`)}؟`), options, m, same(`m=\\frac{${b[1]}-${bracket(a[1])}}{${b[0]}-${bracket(a[0])}}=\\frac{${dy}}{${dx}}=${rightLatex}`), { kind: 'slope', a, b, m })
+    return build(3, 'slope', say(`Zein da ${math(`A${pointLatex(a)}`)} eta ${math(`B${pointLatex(b)}`)} puntuetatik pasatzen den zuzenaren malda?`, `¿Cuál es la pendiente de la recta que pasa por ${math(`A${pointLatex(a)}`)} y ${math(`B${pointLatex(b)}`)}?`, `ما ميل الخط المار بالنقطتين ${math(`A${pointLatex(a)}`)} و${math(`B${pointLatex(b)}`)}؟`, `What is the slope of the line through ${math(`A${pointLatex(a)}`)} and ${math(`B${pointLatex(b)}`)}?`), options, m, same(`m=\\frac{${b[1]}-${bracket(a[1])}}{${b[0]}-${bracket(a[0])}}=\\frac{${dy}}{${dx}}=${rightLatex}`), { kind: 'slope', a, b, m })
 }
 
 function slopeGraphQuestion(random: Random): FunctionsRaceQuestion | null {
@@ -372,7 +372,7 @@ function slopeGraphQuestion(random: Random): FunctionsRaceQuestion | null {
         ...near(m)
     ])
     if (!options) return null
-    return build(3, 'graph-slope', say('Zenbat da zuzenaren malda? Erabili bi puntu markatuak.', '¿Cuánto vale la pendiente de la recta? Usa los dos puntos marcados.', 'كم يساوي ميل الخط؟ استعمل النقطتين المحددتين.'), options, fraction(m), same(`m=\\frac{${b[1]}-${bracket(a[1])}}{${b[0]}-0}=${m}`), { kind: 'graph-slope', m, n, a, b }, { box: { xMin: -4, xMax: 4, yMin: -5, yMax: 5 }, cell: 24, lines: [{ m, n }], points: [{ at: a, color: 'ink' }, { at: b, color: 'ink' }] })
+    return build(3, 'graph-slope', say('Zenbat da zuzenaren malda? Erabili bi puntu markatuak.', '¿Cuánto vale la pendiente de la recta? Usa los dos puntos marcados.', 'كم يساوي ميل الخط؟ استعمل النقطتين المحددتين.', 'What is the slope of the line? Use the two marked points.'), options, fraction(m), same(`m=\\frac{${b[1]}-${bracket(a[1])}}{${b[0]}-0}=${m}`), { kind: 'graph-slope', m, n, a, b }, { box: { xMin: -4, xMax: 4, yMin: -5, yMax: 5 }, cell: 24, lines: [{ m, n }], points: [{ at: a, color: 'ink' }, { at: b, color: 'ink' }] })
 }
 
 function steepestQuestion(random: Random): FunctionsRaceQuestion | null {
@@ -383,7 +383,7 @@ function steepestQuestion(random: Random): FunctionsRaceQuestion | null {
     const right = slopes.indexOf(-biggest)
     const text = (slope: number) => `y=${slope === 1 ? '' : slope === -1 ? '-' : slope}x`
     const options = slopes.map((slope, index) => ({ latex: text(slope), correct: index === right, error: index === right ? null : slope === Math.max(...positives) ? ('steep-sign' as const) : ('calculation' as const) }))
-    return build(3, 'steepest', say('Zein zuzen da aldapatsuena?', '¿Cuál de estas rectas es la más inclinada?', 'أي هذه الخطوط أشد انحدارًا؟'), options, null, same(`|{-${biggest}}|=${biggest}`), { kind: 'steepest', slopes, right })
+    return build(3, 'steepest', say('Zein zuzen da aldapatsuena?', '¿Cuál de estas rectas es la más inclinada?', 'أي هذه الخطوط أشد انحدارًا؟', 'Which of these lines is the steepest?'), options, null, same(`|{-${biggest}}|=${biggest}`), { kind: 'steepest', slopes, right })
 }
 
 function decreasingLineQuestion(random: Random): FunctionsRaceQuestion | null {
@@ -393,7 +393,7 @@ function decreasingLineQuestion(random: Random): FunctionsRaceQuestion | null {
     const right = slopes.indexOf(negative)
     const text = (slope: number) => `y=${slope === 1 ? '' : slope === -1 ? '-' : slope}x`
     const options = slopes.map((slope, index) => ({ latex: text(slope), correct: index === right, error: index === right ? null : ('sign-error' as const) }))
-    return build(3, 'decreasing-line', say('Zein funtzio da beherakorra?', '¿Cuál de estas funciones es decreciente?', 'أي هذه الدوال متناقصة؟'), options, null, same(`m=${negative}<0`), { kind: 'decreasing', slopes, right })
+    return build(3, 'decreasing-line', say('Zein funtzio da beherakorra?', '¿Cuál de estas funciones es decreciente?', 'أي هذه الدوال متناقصة؟', 'Which of these functions is decreasing?'), options, null, same(`m=${negative}<0`), { kind: 'decreasing', slopes, right })
 }
 
 /* ---------- Circuit 4: the straight line ---------- */
@@ -407,7 +407,7 @@ function lineNQuestion(random: Random): FunctionsRaceQuestion | null {
     const b: Point = [x2, m * x2 + n]
     const options = pickOptions(random, numberChoice(n, 'calculation'), [numberChoice(a[1], 'forgot-n'), numberChoice(-n, 'sign-error'), numberChoice(m * x1 - a[1], 'sign-error'), numberChoice(m, 'swapped-mn'), ...near(n)])
     if (!options) return null
-    return build(4, 'line-n', say(`Zuzen bat ${math(`A${pointLatex(a)}`)} eta ${math(`B${pointLatex(b)}`)} puntuetatik pasatzen da. Zenbat da $n$ (${math('y=mx+n')} formulan)?`, `Una recta pasa por ${math(`A${pointLatex(a)}`)} y ${math(`B${pointLatex(b)}`)}. ¿Cuánto vale $n$ (en ${math('y=mx+n')})?`, `خط يمر بالنقطتين ${math(`A${pointLatex(a)}`)} و${math(`B${pointLatex(b)}`)}. كم تساوي $n$ (في ${math('y=mx+n')})؟`), options, fraction(n), same(`m=${m}\\qquad ${a[1]}=${m}\\cdot ${x1}+n\\ \\to\\ n=${n}`), { kind: 'line-n', a, b, m, n })
+    return build(4, 'line-n', say(`Zuzen bat ${math(`A${pointLatex(a)}`)} eta ${math(`B${pointLatex(b)}`)} puntuetatik pasatzen da. Zenbat da $n$ (${math('y=mx+n')} formulan)?`, `Una recta pasa por ${math(`A${pointLatex(a)}`)} y ${math(`B${pointLatex(b)}`)}. ¿Cuánto vale $n$ (en ${math('y=mx+n')})?`, `خط يمر بالنقطتين ${math(`A${pointLatex(a)}`)} و${math(`B${pointLatex(b)}`)}. كم تساوي $n$ (في ${math('y=mx+n')})؟`, `A line passes through ${math(`A${pointLatex(a)}`)} and ${math(`B${pointLatex(b)}`)}. What is $n$ (in ${math('y=mx+n')})?`), options, fraction(n), same(`m=${m}\\qquad ${a[1]}=${m}\\cdot ${x1}+n\\ \\to\\ n=${n}`), { kind: 'line-n', a, b, m, n })
 }
 
 function equationQuestion(random: Random): FunctionsRaceQuestion | null {
@@ -427,7 +427,7 @@ function equationQuestion(random: Random): FunctionsRaceQuestion | null {
     const options = pickOptions(random, { latex: lineLatex(m, n), error: null }, wrongs.map((item) => ({ latex: lineLatex(item.line.m, item.line.n), error: item.error })))
     if (!options) return null
     const equations = options.map((option) => (option.correct ? { m, n } : wrongs.find((item) => lineLatex(item.line.m, item.line.n) === option.latex)!.line))
-    return build(4, 'equation', say(`Zein da ${math(`A${pointLatex(a)}`)} eta ${math(`B${pointLatex(b)}`)} puntuetatik pasatzen den zuzenaren ekuazioa?`, `¿Cuál es la ecuación de la recta que pasa por ${math(`A${pointLatex(a)}`)} y ${math(`B${pointLatex(b)}`)}?`, `ما معادلة الخط المار بالنقطتين ${math(`A${pointLatex(a)}`)} و${math(`B${pointLatex(b)}`)}؟`), options, null, same(`m=${m},\\ n=${n}\\ \\to\\ ${lineLatex(m, n)}`), { kind: 'equation', a, b, equations, right: options.findIndex((option) => option.correct) })
+    return build(4, 'equation', say(`Zein da ${math(`A${pointLatex(a)}`)} eta ${math(`B${pointLatex(b)}`)} puntuetatik pasatzen den zuzenaren ekuazioa?`, `¿Cuál es la ecuación de la recta que pasa por ${math(`A${pointLatex(a)}`)} y ${math(`B${pointLatex(b)}`)}?`, `ما معادلة الخط المار بالنقطتين ${math(`A${pointLatex(a)}`)} و${math(`B${pointLatex(b)}`)}؟`, `What is the equation of the line through ${math(`A${pointLatex(a)}`)} and ${math(`B${pointLatex(b)}`)}?`), options, null, same(`m=${m},\\ n=${n}\\ \\to\\ ${lineLatex(m, n)}`), { kind: 'equation', a, b, equations, right: options.findIndex((option) => option.correct) })
 }
 
 function lineGraphQuestion(random: Random): FunctionsRaceQuestion | null {
@@ -443,7 +443,7 @@ function lineGraphQuestion(random: Random): FunctionsRaceQuestion | null {
     const options = pickOptions(random, { latex: lineLatex(m, n), error: null }, wrongs.map((item) => ({ latex: lineLatex(item.line.m, item.line.n), error: item.error })))
     if (!options) return null
     const equations = options.map((option) => (option.correct ? { m, n } : wrongs.find((item) => lineLatex(item.line.m, item.line.n) === option.latex)!.line))
-    return build(4, 'graph-line', say('Zein da zuzen honen ekuazioa?', '¿Cuál es la ecuación de esta recta?', 'ما معادلة هذا الخط؟'), options, null, same(`n=${n},\\ m=${m}\\ \\to\\ ${lineLatex(m, n)}`), { kind: 'graph-line', m, n, equations, right: options.findIndex((option) => option.correct) }, { box: { xMin: -4, xMax: 4, yMin: -5, yMax: 5 }, cell: 24, lines: [{ m, n }], points: [{ at: [0, n], color: 'ink' }] })
+    return build(4, 'graph-line', say('Zein da zuzen honen ekuazioa?', '¿Cuál es la ecuación de esta recta?', 'ما معادلة هذا الخط؟', 'What is the equation of this straight line?'), options, null, same(`n=${n},\\ m=${m}\\ \\to\\ ${lineLatex(m, n)}`), { kind: 'graph-line', m, n, equations, right: options.findIndex((option) => option.correct) }, { box: { xMin: -4, xMax: 4, yMin: -5, yMax: 5 }, cell: 24, lines: [{ m, n }], points: [{ at: [0, n], color: 'ink' }] })
 }
 
 function tariffQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | null {
@@ -454,11 +454,11 @@ function tariffQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | nul
     if (tier === 0 || random() < 0.4) {
         const options = pickOptions(random, numberChoice(y, 'calculation'), [numberChoice(m * x, 'forgot-n'), numberChoice((m + n) * x, 'order'), numberChoice(m + n + x, 'added'), ...near(y)])
         if (!options) return null
-        return build(4, 'tariff-value', say(`Alokairu batean ${n} € ordaintzen dira hasieran eta ${m} € orduko: ${math(`y=${m}x+${n}`)}. Zenbat € ordaindu behar dira ${x} ordutan?`, `En un alquiler se pagan ${n} € al empezar y ${m} € por hora: ${math(`y=${m}x+${n}`)}. ¿Cuántos € se pagan por ${x} horas?`, `في إيجار يُدفع ${n} € في البداية و${m} € للساعة: ${math(`y=${m}x+${n}`)}. كم € يُدفع عن ${x} ساعات؟`), options, fraction(y), same(`y=${m}\\cdot ${x}+${n}=${m * x}+${n}=${y}`), { kind: 'tariff', m, n, x, y, mode: 'value' })
+        return build(4, 'tariff-value', say(`Alokairu batean ${n} € ordaintzen dira hasieran eta ${m} € orduko: ${math(`y=${m}x+${n}`)}. Zenbat € ordaindu behar dira ${x} ordutan?`, `En un alquiler se pagan ${n} € al empezar y ${m} € por hora: ${math(`y=${m}x+${n}`)}. ¿Cuántos € se pagan por ${x} horas?`, `في إيجار يُدفع ${n} € في البداية و${m} € للساعة: ${math(`y=${m}x+${n}`)}. كم € يُدفع عن ${x} ساعات؟`, `A rental costs €${n} at the start and €${m} per hour: ${math(`y=${m}x+${n}`)}. How much do you pay for ${x} hours?`), options, fraction(y), same(`y=${m}\\cdot ${x}+${n}=${m * x}+${n}=${y}`), { kind: 'tariff', m, n, x, y, mode: 'value' })
     }
     const options = pickOptions(random, numberChoice(x, 'calculation'), [numberChoice(y - n, 'forgot-n'), ...(Number.isInteger((y + n) / m) ? [numberChoice((y + n) / m, 'sign-error')] : []), ...(Number.isInteger(y / m) ? [numberChoice(y / m, 'forgot-n')] : []), ...near(x)])
     if (!options) return null
-    return build(4, 'tariff-solve', say(`Alokairu batean ${n} € ordaintzen dira hasieran eta ${m} € orduko: ${math(`y=${m}x+${n}`)}. Zenbat ordu erabili dira ${y} € ordaindu bada?`, `En un alquiler se pagan ${n} € al empezar y ${m} € por hora: ${math(`y=${m}x+${n}`)}. ¿Cuántas horas se han usado si se han pagado ${y} €?`, `في إيجار يُدفع ${n} € في البداية و${m} € للساعة: ${math(`y=${m}x+${n}`)}. كم ساعة استُعملت إذا دُفع ${y} €؟`), options, fraction(x), same(`${y}=${m}x+${n}\\ \\to\\ ${m}x=${y - n}\\ \\to\\ x=${x}`), { kind: 'tariff', m, n, x, y, mode: 'solve' })
+    return build(4, 'tariff-solve', say(`Alokairu batean ${n} € ordaintzen dira hasieran eta ${m} € orduko: ${math(`y=${m}x+${n}`)}. Zenbat ordu erabili dira ${y} € ordaindu bada?`, `En un alquiler se pagan ${n} € al empezar y ${m} € por hora: ${math(`y=${m}x+${n}`)}. ¿Cuántas horas se han usado si se han pagado ${y} €?`, `في إيجار يُدفع ${n} € في البداية و${m} € للساعة: ${math(`y=${m}x+${n}`)}. كم ساعة استُعملت إذا دُفع ${y} €؟`, `A rental costs €${n} at the start and €${m} per hour: ${math(`y=${m}x+${n}`)}. How many hours have been used if you have paid €${y}?`), options, fraction(x), same(`${y}=${m}x+${n}\\ \\to\\ ${m}x=${y - n}\\ \\to\\ x=${x}`), { kind: 'tariff', m, n, x, y, mode: 'solve' })
 }
 
 function meetingQuestion(random: Random): FunctionsRaceQuestion | null {
@@ -468,7 +468,7 @@ function meetingQuestion(random: Random): FunctionsRaceQuestion | null {
     const n = (a2 - a1) * x
     const options = pickOptions(random, numberChoice(x, 'calculation'), [numberChoice(n, 'forgot-n'), ...(Number.isInteger(n / (a1 + a2)) ? [numberChoice(n / (a1 + a2), 'sign-error')] : []), numberChoice(n / (a2 - a1) + 1, 'calculation'), ...near(x)])
     if (!options) return null
-    return build(4, 'meeting', say(`Bi tarifa: ${math(`y=${a1}x+${n}`)} eta ${math(`y=${a2}x`)}. Zein $x$-rentzat dira berdinak?`, `Dos tarifas: ${math(`y=${a1}x+${n}`)} e ${math(`y=${a2}x`)}. ¿Para qué $x$ cuestan lo mismo?`, `تعرفتان: ${math(`y=${a1}x+${n}`)} و${math(`y=${a2}x`)}. عند أي $x$ تتساويان؟`), options, fraction(x), same(`${a1}x+${n}=${a2}x\\ \\to\\ ${n}=${a2 - a1}x\\ \\to\\ x=${x}`), { kind: 'meeting', first: { m: a1, n }, second: { m: a2, n: 0 }, x })
+    return build(4, 'meeting', say(`Bi tarifa: ${math(`y=${a1}x+${n}`)} eta ${math(`y=${a2}x`)}. Zein $x$-rentzat dira berdinak?`, `Dos tarifas: ${math(`y=${a1}x+${n}`)} e ${math(`y=${a2}x`)}. ¿Para qué $x$ cuestan lo mismo?`, `تعرفتان: ${math(`y=${a1}x+${n}`)} و${math(`y=${a2}x`)}. عند أي $x$ تتساويان؟`, `Two price plans: ${math(`y=${a1}x+${n}`)} and ${math(`y=${a2}x`)}. For which $x$ do they cost the same?`), options, fraction(x), same(`${a1}x+${n}=${a2}x\\ \\to\\ ${n}=${a2 - a1}x\\ \\to\\ x=${x}`), { kind: 'meeting', first: { m: a1, n }, second: { m: a2, n: 0 }, x })
 }
 
 /* ---------- Public API ---------- */
@@ -526,21 +526,21 @@ export function functionsParTime(circuit: number): number {
 }
 
 export const functionsRaceErrorTips: Record<FunctionsRaceError, LocalizedText> = {
-    'x-sign': say('Begiratu lehen koordenatuaren zeinua: positiboa eskuinera, negatiboa ezkerrera.', 'Mira el signo de la primera coordenada: positiva a la derecha, negativa a la izquierda.', 'انظر إلى إشارة الإحداثي الأول: موجبة يمينًا وسالبة يسارًا.'),
-    'y-sign': say('Begiratu bigarren koordenatuaren zeinua: positiboa gora, negatiboa behera.', 'Mira el signo de la segunda coordenada: positiva arriba, negativa abajo.', 'انظر إلى إشارة الإحداثي الثاني: موجبة إلى أعلى وسالبة إلى أسفل.'),
-    'both-signs': say('Koadranteak: I (+,+), II (−,+), III (−,−), IV (+,−).', 'Los cuadrantes: I (+,+), II (−,+), III (−,−), IV (+,−).', 'الأرباع: I (+,+) وII (−,+) وIII (−,−) وIV (+,−).'),
-    'repeated-input': say('Funtzioan sarrera bakoitzak irteera bakarra du: begiratu errepikatzen den sarrera.', 'En una función cada entrada tiene una sola salida: busca la entrada que se repite.', 'في الدالة لكل مدخل مخرج واحد: ابحث عن المدخل المتكرر.'),
-    'swap-xy': say('Puntu bat $(x, y)$ da: lehenengo sarrera, gero emaitza.', 'Un punto es $(x, y)$: primero la entrada y después el resultado.', 'النقطة $(x, y)$: أولًا المدخل ثم النتيجة.'),
-    'forgot-n': say('Ez ahaztu $n$ gehitzea (edo kentzea) $m\\cdot x$ kalkulatu ondoren.', 'No olvides sumar (o restar) $n$ después de calcular $m\\cdot x$.', 'لا تنس إضافة (أو طرح) $n$ بعد حساب $m\\cdot x$.'),
-    'sign-error': say('Ordeztu $x$ parentesi artean eta zaindu zeinuak.', 'Sustituye $x$ entre paréntesis y cuida los signos.', 'عوّض $x$ بين قوسين وانتبه للإشارات.'),
-    'power-sign': say('$(-3)^{2}=9$ da, ez $-9$: parentesiak zeinua ere berretzen du.', '$(-3)^{2}=9$, no $-9$: el paréntesis eleva también el signo.', '$(-3)^{2}=9$ وليس $-9$: القوس يرفع الإشارة أيضًا.'),
-    'wrong-trend': say('Beherakorra: $x$ handitzean $y$ txikitzen da. Konparatu bi balio jarraituak.', 'Decreciente: al crecer $x$, $y$ disminuye. Compara dos valores consecutivos.', 'متناقصة: بزيادة $x$ تنقص $y$. قارن قيمتين متتاليتين.'),
-    'wrong-extreme': say('Ez nahastu $x$ eta $y$: galdetzen dena $y$-ren balioa ala $x$-ren kokapena den begiratu.', 'No confundas $x$ e $y$: mira si se pide el valor de $y$ o la posición $x$.', 'لا تخلط بين $x$ و$y$: انظر هل يُطلب قيمة $y$ أم موضع $x$.'),
-    inverted: say('Malda = $\\Delta y$ / $\\Delta x$, ez alderantziz.', 'Pendiente = $\\Delta y$ / $\\Delta x$, no al revés.', 'الميل = $\\Delta y$ / $\\Delta x$ وليس العكس.'),
-    order: say('Kendu bi koordenatuak ordena berean: bigarrena ken lehenengoa, bietan.', 'Resta las dos coordenadas en el mismo orden: segundo menos primero, en las dos.', 'اطرح الإحداثيين بالترتيب نفسه: الثاني ناقص الأول في كليهما.'),
-    added: say('Aldaketak kendurak dira, ez batuketak: $y_2-y_1$ eta $x_2-x_1$.', 'Los cambios son restas, no sumas: $y_2-y_1$ y $x_2-x_1$.', 'التغيران طرح لا جمع: $y_2-y_1$ و$x_2-x_1$.'),
-    'swapped-mn': say('$y=mx+n$ formulan $m$ $x$-rekin doa (malda) eta $n$ bakarrik (ebakidura).', 'En $y=mx+n$, $m$ va con la $x$ (pendiente) y $n$ va sola (corte con el eje Y).', 'في $y=mx+n$ يرافق $m$ الحرف $x$ (الميل) ويأتي $n$ منفردًا (التقاطع).'),
-    'axes-mixed': say('Y ardatza: $x=0$ (zuzenaren $n$). X ardatza: $y=0$ ($x$ askatu).', 'Eje Y: $x=0$ (la $n$ de la recta). Eje X: $y=0$ (despeja $x$).', 'محور Y: $x=0$ ($n$ الخط). محور X: $y=0$ (اعزل $x$).'),
-    'steep-sign': say('Aldapak $|m|$ neurtzen du: zeinuak norabidea esaten du, ez aldapa.', 'La inclinación la mide $|m|$: el signo dice la dirección, no cuánto se inclina.', 'الانحدار يقيسه $|m|$: الإشارة تدل على الاتجاه لا على الانحدار.'),
-    calculation: say('Berrikusi kalkulua eta egiaztatu emaitza ordeztuz.', 'Revisa el cálculo y comprueba el resultado sustituyendo.', 'راجع الحساب وتحقق من النتيجة بالتعويض.')
+    'x-sign': say('Begiratu lehen koordenatuaren zeinua: positiboa eskuinera, negatiboa ezkerrera.', 'Mira el signo de la primera coordenada: positiva a la derecha, negativa a la izquierda.', 'انظر إلى إشارة الإحداثي الأول: موجبة يمينًا وسالبة يسارًا.', 'Look at the sign of the first coordinate: positive on the right, negative on the left.'),
+    'y-sign': say('Begiratu bigarren koordenatuaren zeinua: positiboa gora, negatiboa behera.', 'Mira el signo de la segunda coordenada: positiva arriba, negativa abajo.', 'انظر إلى إشارة الإحداثي الثاني: موجبة إلى أعلى وسالبة إلى أسفل.', 'Look at the sign of the second coordinate: positive up, negative down.'),
+    'both-signs': say('Koadranteak: I (+,+), II (−,+), III (−,−), IV (+,−).', 'Los cuadrantes: I (+,+), II (−,+), III (−,−), IV (+,−).', 'الأرباع: I (+,+) وII (−,+) وIII (−,−) وIV (+,−).', 'The quadrants: I (+,+), II (−,+), III (−,−), IV (+,−).'),
+    'repeated-input': say('Funtzioan sarrera bakoitzak irteera bakarra du: begiratu errepikatzen den sarrera.', 'En una función cada entrada tiene una sola salida: busca la entrada que se repite.', 'في الدالة لكل مدخل مخرج واحد: ابحث عن المدخل المتكرر.', 'In a function, each input has only one output: look for the input that repeats.'),
+    'swap-xy': say('Puntu bat $(x, y)$ da: lehenengo sarrera, gero emaitza.', 'Un punto es $(x, y)$: primero la entrada y después el resultado.', 'النقطة $(x, y)$: أولًا المدخل ثم النتيجة.', 'A point is $(x, y)$: first the input, then the output.'),
+    'forgot-n': say('Ez ahaztu $n$ gehitzea (edo kentzea) $m\\cdot x$ kalkulatu ondoren.', 'No olvides sumar (o restar) $n$ después de calcular $m\\cdot x$.', 'لا تنس إضافة (أو طرح) $n$ بعد حساب $m\\cdot x$.', 'Don\'t forget to add (or subtract) $n$ after calculating $m\\cdot x$.'),
+    'sign-error': say('Ordeztu $x$ parentesi artean eta zaindu zeinuak.', 'Sustituye $x$ entre paréntesis y cuida los signos.', 'عوّض $x$ بين قوسين وانتبه للإشارات.', 'Substitute $x$ in brackets and be careful with the signs.'),
+    'power-sign': say('$(-3)^{2}=9$ da, ez $-9$: parentesiak zeinua ere berretzen du.', '$(-3)^{2}=9$, no $-9$: el paréntesis eleva también el signo.', '$(-3)^{2}=9$ وليس $-9$: القوس يرفع الإشارة أيضًا.', '$(-3)^{2}=9$, not $-9$: the brackets square the minus sign too.'),
+    'wrong-trend': say('Beherakorra: $x$ handitzean $y$ txikitzen da. Konparatu bi balio jarraituak.', 'Decreciente: al crecer $x$, $y$ disminuye. Compara dos valores consecutivos.', 'متناقصة: بزيادة $x$ تنقص $y$. قارن قيمتين متتاليتين.', 'Decreasing: as $x$ increases, $y$ decreases. Compare two consecutive values.'),
+    'wrong-extreme': say('Ez nahastu $x$ eta $y$: galdetzen dena $y$-ren balioa ala $x$-ren kokapena den begiratu.', 'No confundas $x$ e $y$: mira si se pide el valor de $y$ o la posición $x$.', 'لا تخلط بين $x$ و$y$: انظر هل يُطلب قيمة $y$ أم موضع $x$.', 'Don\'t confuse $x$ and $y$: check whether it asks for the value of $y$ or the position $x$.'),
+    inverted: say('Malda = $\\Delta y$ / $\\Delta x$, ez alderantziz.', 'Pendiente = $\\Delta y$ / $\\Delta x$, no al revés.', 'الميل = $\\Delta y$ / $\\Delta x$ وليس العكس.', 'Slope = $\\Delta y$ / $\\Delta x$, not the other way round.'),
+    order: say('Kendu bi koordenatuak ordena berean: bigarrena ken lehenengoa, bietan.', 'Resta las dos coordenadas en el mismo orden: segundo menos primero, en las dos.', 'اطرح الإحداثيين بالترتيب نفسه: الثاني ناقص الأول في كليهما.', 'Subtract the two coordinates in the same order: second minus first, in both.'),
+    added: say('Aldaketak kendurak dira, ez batuketak: $y_2-y_1$ eta $x_2-x_1$.', 'Los cambios son restas, no sumas: $y_2-y_1$ y $x_2-x_1$.', 'التغيران طرح لا جمع: $y_2-y_1$ و$x_2-x_1$.', 'The changes are subtractions, not additions: $y_2-y_1$ and $x_2-x_1$.'),
+    'swapped-mn': say('$y=mx+n$ formulan $m$ $x$-rekin doa (malda) eta $n$ bakarrik (ebakidura).', 'En $y=mx+n$, $m$ va con la $x$ (pendiente) y $n$ va sola (corte con el eje Y).', 'في $y=mx+n$ يرافق $m$ الحرف $x$ (الميل) ويأتي $n$ منفردًا (التقاطع).', 'In $y=mx+n$, $m$ goes with the $x$ (the slope) and $n$ stands alone (where the line crosses the y-axis).'),
+    'axes-mixed': say('Y ardatza: $x=0$ (zuzenaren $n$). X ardatza: $y=0$ ($x$ askatu).', 'Eje Y: $x=0$ (la $n$ de la recta). Eje X: $y=0$ (despeja $x$).', 'محور Y: $x=0$ ($n$ الخط). محور X: $y=0$ (اعزل $x$).', 'y-axis: $x=0$ (the $n$ of the line). x-axis: $y=0$ (solve for $x$).'),
+    'steep-sign': say('Aldapak $|m|$ neurtzen du: zeinuak norabidea esaten du, ez aldapa.', 'La inclinación la mide $|m|$: el signo dice la dirección, no cuánto se inclina.', 'الانحدار يقيسه $|m|$: الإشارة تدل على الاتجاه لا على الانحدار.', 'The steepness is measured by $|m|$: the sign gives the direction, not how steep it is.'),
+    calculation: say('Berrikusi kalkulua eta egiaztatu emaitza ordeztuz.', 'Revisa el cálculo y comprueba el resultado sustituyendo.', 'راجع الحساب وتحقق من النتيجة بالتعويض.', 'Check your calculation and check the answer by substituting.')
 }

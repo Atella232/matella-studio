@@ -31,7 +31,7 @@ import {
 const renders = (latex: string) => katex.renderToString(latex, { throwOnError: true, strict: 'error' })
 
 function checkText(text: LocalizedText, where: string) {
-    for (const language of ['eu', 'es', 'ar'] as const) {
+    for (const language of ['eu', 'es', 'en', 'ar'] as const) {
         const line = text[language]
         assert.ok(line.length > 0 && !line.includes('$'), `${where}: ${line}`)
         if (language === 'eu') assert.ok(!/\d-?(an|ean|ra|era|tik|etik|ko|eko|rekin|ekin|k|z)\b/.test(line), `${where}: ${line}`)

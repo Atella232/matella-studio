@@ -109,12 +109,12 @@ export function FactorGame({ language, records, onResult, onExit, config }: Game
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => (record.timeMs === null ? '' : `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${formatTime(record.timeMs)}`)}
+                bestLabel={(record) => (record.timeMs === null ? '' : `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${formatTime(record.timeMs)}`)}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: `${FACTOR_NUMBERS} zenbaki. Sakatu zenbakia zehazki zatitzen duen lehen bat; 1era iristean, hurrengoa.`, es: `${FACTOR_NUMBERS} números. Pulsa un primo que divida exactamente al número; al llegar a 1, el siguiente.`, ar: `${FACTOR_NUMBERS} أعداد. اضغط عددًا أوليًا يقسم العدد قسمة تامة؛ وعند الوصول إلى 1 ننتقل إلى التالي.` })}</li>
-                        <li>{l({ eu: `Zatitzen ez duen lehen bakoitzak +${FACTOR_PENALTY_MS / 1000} s gehitzen ditu. Erabili irizpideak!`, es: `Cada primo que no divide suma +${FACTOR_PENALTY_MS / 1000} s. ¡Usa los criterios!`, ar: `كل عدد أولي لا يقسم يضيف ${FACTOR_PENALTY_MS / 1000} ث. استعمل القواعد!` })}</li>
-                        <li>{l({ eu: 'Teklatuarekin ere joka daiteke: 2, 3, 5, 7.', es: 'También se puede jugar con el teclado: 2, 3, 5, 7.', ar: 'يمكن اللعب بلوحة المفاتيح أيضًا: 2، 3، 5، 7.' })}</li>
+                        <li>{l({ eu: `${FACTOR_NUMBERS} zenbaki. Sakatu zenbakia zehazki zatitzen duen lehen bat; 1era iristean, hurrengoa.`, es: `${FACTOR_NUMBERS} números. Pulsa un primo que divida exactamente al número; al llegar a 1, el siguiente.`, en: `${FACTOR_NUMBERS} numbers. Tap a prime that divides the number exactly; once you reach 1, the next one.`, ar: `${FACTOR_NUMBERS} أعداد. اضغط عددًا أوليًا يقسم العدد قسمة تامة؛ وعند الوصول إلى 1 ننتقل إلى التالي.` })}</li>
+                        <li>{l({ eu: `Zatitzen ez duen lehen bakoitzak +${FACTOR_PENALTY_MS / 1000} s gehitzen ditu. Erabili irizpideak!`, es: `Cada primo que no divide suma +${FACTOR_PENALTY_MS / 1000} s. ¡Usa los criterios!`, en: `Each prime that doesn't divide adds +${FACTOR_PENALTY_MS / 1000} s. Use the divisibility rules!`, ar: `كل عدد أولي لا يقسم يضيف ${FACTOR_PENALTY_MS / 1000} ث. استعمل القواعد!` })}</li>
+                        <li>{l({ eu: 'Teklatuarekin ere joka daiteke: 2, 3, 5, 7.', es: 'También se puede jugar con el teclado: 2, 3, 5, 7.', en: 'You can also play with the keyboard: 2, 3, 5, 7.', ar: 'يمكن اللعب بلوحة المفاتيح أيضًا: 2، 3، 5، 7.' })}</li>
                     </ul>
                 )}
             />
@@ -129,7 +129,7 @@ export function FactorGame({ language, records, onResult, onExit, config }: Game
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span>{Math.min(index + 1, FACTOR_NUMBERS)} / {FACTOR_NUMBERS}</span>
                 <span>{formatTime(total)}</span>
-                <span>{l({ eu: 'Akatsak', es: 'Fallos', ar: 'الأخطاء' })}: {mistakes}</span>
+                <span>{l({ eu: 'Akatsak', es: 'Fallos', en: 'Mistakes', ar: 'الأخطاء' })}: {mistakes}</span>
             </GameTopbar>
 
             {phase === 'playing' && (
@@ -139,7 +139,7 @@ export function FactorGame({ language, records, onResult, onExit, config }: Game
                             <small>{value}{steps.length > 0 && ` = ${steps.join(' · ')} · ${rest}`}</small>
                             <strong key={`${index}-${steps.length}`}>{rest}</strong>
                         </div>
-                        <div className="divisibility-factor-buttons" role="group" aria-label={l({ eu: 'Zatitu honekin', es: 'Dividir entre', ar: 'اقسم على' })}>
+                        <div className="divisibility-factor-buttons" role="group" aria-label={l({ eu: 'Zatitu honekin', es: 'Dividir entre', en: 'Divide by', ar: 'اقسم على' })}>
                             {levels[level].primes.map((prime) => (
                                 <button type="button" className={rejected === prime ? 'rejected' : ''} onClick={() => divide(prime)} key={`${prime}-${rejected === prime ? mistakes : 0}`}>{prime}</button>
                             ))}
@@ -148,7 +148,7 @@ export function FactorGame({ language, records, onResult, onExit, config }: Game
                     <div aria-live="polite">
                         {rejected !== null && (
                             <div className="fraction-v2-feedback error">
-                                {l({ eu: `${rest} ez da ${rekin(rejected)} zatigarria (hondarra ${rest % rejected}). +${FACTOR_PENALTY_MS / 1000} s`, es: `${rest} no es divisible por ${rejected} (resto ${rest % rejected}). +${FACTOR_PENALTY_MS / 1000} s`, ar: `${rest} لا يقبل القسمة على ${rejected} (الباقي ${rest % rejected}). ‏+${FACTOR_PENALTY_MS / 1000} ث` })}
+                                {l({ eu: `${rest} ez da ${rekin(rejected)} zatigarria (hondarra ${rest % rejected}). +${FACTOR_PENALTY_MS / 1000} s`, es: `${rest} no es divisible por ${rejected} (resto ${rest % rejected}). +${FACTOR_PENALTY_MS / 1000} s`, en: `${rest} is not divisible by ${rejected} (remainder ${rest % rejected}). +${FACTOR_PENALTY_MS / 1000} s`, ar: `${rest} لا يقبل القسمة على ${rejected} (الباقي ${rest % rejected}). ‏+${FACTOR_PENALTY_MS / 1000} ث` })}
                             </div>
                         )}
                         {rejected === null && lastDone !== null && (
@@ -162,11 +162,11 @@ export function FactorGame({ language, records, onResult, onExit, config }: Game
                 <ResultPanel
                     language={language}
                     stars={factorStars(level, total, mistakes, levels)}
-                    title={l({ eu: 'Denak deskonposatuta!', es: '¡Todos descompuestos!', ar: 'تم تحليل الجميع!' })}
-                    subtitle={l({ eu: `3 izar: ${formatTime(par * 0.8)} baino gutxiago eta akats bat gehienez · 2 izar: ${formatTime(par)} baino gutxiago`, es: `3 estrellas: menos de ${formatTime(par * 0.8)} y como mucho un fallo · 2: menos de ${formatTime(par)}`, ar: `3 نجوم: أقل من ${formatTime(par * 0.8)} وخطأ واحد على الأكثر · 2: أقل من ${formatTime(par)}` })}
+                    title={l({ eu: 'Denak deskonposatuta!', es: '¡Todos descompuestos!', en: 'All factorised!', ar: 'تم تحليل الجميع!' })}
+                    subtitle={l({ eu: `3 izar: ${formatTime(par * 0.8)} baino gutxiago eta akats bat gehienez · 2 izar: ${formatTime(par)} baino gutxiago`, es: `3 estrellas: menos de ${formatTime(par * 0.8)} y como mucho un fallo · 2: menos de ${formatTime(par)}`, en: `3 stars: under ${formatTime(par * 0.8)} and at most one mistake · 2: under ${formatTime(par)}`, ar: `3 نجوم: أقل من ${formatTime(par * 0.8)} وخطأ واحد على الأكثر · 2: أقل من ${formatTime(par)}` })}
                     stats={[
-                        { label: l({ eu: 'Denbora', es: 'Tiempo', ar: 'الوقت' }), value: formatTime(total) },
-                        { label: l({ eu: 'Akatsak', es: 'Fallos', ar: 'الأخطاء' }), value: String(mistakes) }
+                        { label: l({ eu: 'Denbora', es: 'Tiempo', en: 'Time', ar: 'الوقت' }), value: formatTime(total) },
+                        { label: l({ eu: 'Akatsak', es: 'Fallos', en: 'Mistakes', ar: 'الأخطاء' }), value: String(mistakes) }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}

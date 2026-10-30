@@ -31,7 +31,7 @@ export function CombinatoricsAkLaboratory(props: {
             tools={combinatoricsAkLabTools}
             stages={combinatoricsAkStages}
             components={toolComponents}
-            title={{ eu: 'Zenbatu idatzi gabe', es: 'Cuenta sin escribir', ar: 'عُدّ دون أن تكتب' }}
+            title={{ eu: 'Zenbatu idatzi gabe', es: 'Cuenta sin escribir', en: 'Count without writing', ar: 'عُدّ دون أن تكتب' }}
         />
     )
 }

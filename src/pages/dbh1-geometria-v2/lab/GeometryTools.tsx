@@ -5,6 +5,7 @@ import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { fraction, toNumber } from '../../../features/unit-v2/math/fraction'
 import type { LocalizedText } from '../../../features/unit-v2/types'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import {
     AREA_LIMITS,
     angleKind,
@@ -50,23 +51,23 @@ const STAGE = 'var(--stage, #2f6fdb)'
 const STAGE_TINT = 'var(--stage-tint, #dde7f7)'
 const SECOND = 'var(--second, #c4432a)'
 const rad = (degrees: number) => (degrees * Math.PI) / 180
-const decimalText = (value: number, language: string) => (language === 'ar' ? String(value) : String(value).replace('.', ','))
+const decimalText = (value: number, language: string) => (language === 'ar' ? String(value) : String(value).replace('.', decimalSeparatorFor(language)))
 
 const answerTexts = {
-    placeholder: { eu: 'Adib.: 31,4', es: 'Ej.: 31,4', ar: 'مثال: 31.4' },
-    unreadable: { eu: 'Idatzi zenbaki bat, unitaterik gabe.', es: 'Escribe un número, sin unidades.', ar: 'اكتب عددًا دون وحدات.' }
+    placeholder: { eu: 'Adib.: 31,4', es: 'Ej.: 31,4', en: 'E.g.: 31.4', ar: 'مثال: 31.4' },
+    unreadable: { eu: 'Idatzi zenbaki bat, unitaterik gabe.', es: 'Escribe un número, sin unidades.', en: 'Write a number, without units.', ar: 'اكتب عددًا دون وحدات.' }
 }
 
 /* ---------- Protractor ---------- */
 
 const angleNames: Record<AngleKind, LocalizedText> = {
-    null: { eu: 'angelu nulua', es: 'ángulo nulo', ar: 'زاوية منعدمة' },
-    acute: { eu: 'angelu zorrotza', es: 'ángulo agudo', ar: 'زاوية حادة' },
-    right: { eu: 'angelu zuzena', es: 'ángulo recto', ar: 'زاوية قائمة' },
-    obtuse: { eu: 'angelu kamutsa', es: 'ángulo obtuso', ar: 'زاوية منفرجة' },
-    straight: { eu: 'angelu laua', es: 'ángulo llano', ar: 'زاوية مستقيمة' },
-    reflex: { eu: 'angelu ahurra (180° baino gehiago)', es: 'ángulo cóncavo (más de 180°)', ar: 'زاوية منعكسة (أكثر من 180°)' },
-    full: { eu: 'angelu osoa', es: 'ángulo completo', ar: 'زاوية كاملة' }
+    null: { eu: 'angelu nulua', es: 'ángulo nulo', en: 'zero angle', ar: 'زاوية منعدمة' },
+    acute: { eu: 'angelu zorrotza', es: 'ángulo agudo', en: 'acute angle', ar: 'زاوية حادة' },
+    right: { eu: 'angelu zuzena', es: 'ángulo recto', en: 'right angle', ar: 'زاوية قائمة' },
+    obtuse: { eu: 'angelu kamutsa', es: 'ángulo obtuso', en: 'obtuse angle', ar: 'زاوية منفرجة' },
+    straight: { eu: 'angelu laua', es: 'ángulo llano', en: 'straight angle', ar: 'زاوية مستقيمة' },
+    reflex: { eu: 'angelu ahurra (180° baino gehiago)', es: 'ángulo cóncavo (más de 180°)', en: 'reflex angle (more than 180°)', ar: 'زاوية منعكسة (أكثر من 180°)' },
+    full: { eu: 'angelu osoa', es: 'ángulo completo', en: 'full angle', ar: 'زاوية كاملة' }
 }
 
 export function ProtractorTool(props: LabToolProps) {
@@ -82,16 +83,16 @@ export function ProtractorTool(props: LabToolProps) {
 
     const controls = (
         <>
-            <Stepper label={l({ eu: 'Angelua (°)', es: 'Ángulo (°)', ar: 'الزاوية (°)' })} value={angle} min={0} max={360} onChange={(next) => setState((current) => setAngle(current, next))} language={props.language} />
-            <Stepper label={l({ eu: 'Urrats handiak', es: 'Pasos grandes', ar: 'خطوات كبيرة' })} value={angle} min={0} max={360} step={15} onChange={(next) => setState((current) => setAngle(current, next))} language={props.language} />
+            <Stepper label={l({ eu: 'Angelua (°)', es: 'Ángulo (°)', en: 'Angle (°)', ar: 'الزاوية (°)' })} value={angle} min={0} max={360} onChange={(next) => setState((current) => setAngle(current, next))} language={props.language} />
+            <Stepper label={l({ eu: 'Urrats handiak', es: 'Pasos grandes', en: 'Big steps', ar: 'خطوات كبيرة' })} value={angle} min={0} max={360} step={15} onChange={(next) => setState((current) => setAngle(current, next))} language={props.language} />
         </>
     )
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main">{angle}° · {l(angleNames[angleKind(angle)])}</span>
             <span className="fraction-v2-lab-readout-note">
-                {angle <= 90 && l({ eu: `Osagarria: ${90 - angle}°. `, es: `Complementario: ${90 - angle}°. `, ar: `المتممة: ${90 - angle}°. ` })}
-                {angle <= 180 && l({ eu: `Betegarria: ${180 - angle}°.`, es: `Suplementario: ${180 - angle}°.`, ar: `المكملة: ${180 - angle}°.` })}
+                {angle <= 90 && l({ eu: `Osagarria: ${90 - angle}°. `, es: `Complementario: ${90 - angle}°. `, en: `Complementary: ${90 - angle}°. `, ar: `المتممة: ${90 - angle}°. ` })}
+                {angle <= 180 && l({ eu: `Betegarria: ${180 - angle}°.`, es: `Suplementario: ${180 - angle}°.`, en: `Supplementary: ${180 - angle}°.`, ar: `المكملة: ${180 - angle}°.` })}
             </span>
         </>
     )
@@ -118,14 +119,14 @@ export function ProtractorTool(props: LabToolProps) {
 /* ---------- Triangle builder ---------- */
 
 const byAngles: Record<TriangleByAngles, LocalizedText> = {
-    acute: { eu: 'angelu-zorrotza', es: 'acutángulo', ar: 'حاد الزوايا' },
-    right: { eu: 'angeluzuzena', es: 'rectángulo', ar: 'قائم الزاوية' },
-    obtuse: { eu: 'angelu-kamutsa', es: 'obtusángulo', ar: 'منفرج الزاوية' }
+    acute: { eu: 'angelu-zorrotza', es: 'acutángulo', en: 'acute-angled', ar: 'حاد الزوايا' },
+    right: { eu: 'angeluzuzena', es: 'rectángulo', en: 'right-angled', ar: 'قائم الزاوية' },
+    obtuse: { eu: 'angelu-kamutsa', es: 'obtusángulo', en: 'obtuse-angled', ar: 'منفرج الزاوية' }
 }
 const bySides: Record<TriangleBySides, LocalizedText> = {
-    equilateral: { eu: 'aldeberdina', es: 'equilátero', ar: 'متساوي الأضلاع' },
-    isosceles: { eu: 'isoszelea', es: 'isósceles', ar: 'متساوي الساقين' },
-    scalene: { eu: 'eskalenoa', es: 'escaleno', ar: 'مختلف الأضلاع' }
+    equilateral: { eu: 'aldeberdina', es: 'equilátero', en: 'equilateral', ar: 'متساوي الأضلاع' },
+    isosceles: { eu: 'isoszelea', es: 'isósceles', en: 'isosceles', ar: 'متساوي الساقين' },
+    scalene: { eu: 'eskalenoa', es: 'escaleno', en: 'scalene', ar: 'مختلف الأضلاع' }
 }
 
 export function TriangleTool(props: LabToolProps) {
@@ -151,15 +152,15 @@ export function TriangleTool(props: LabToolProps) {
         <>
             <Stepper label="A (°)" value={state.a} min={1} max={179} step={5} onChange={(next) => setState((current) => setTriangle(current, { a: next }))} language={props.language} />
             <Stepper label="B (°)" value={state.b} min={1} max={179} step={5} onChange={(next) => setState((current) => setTriangle(current, { b: next }))} language={props.language} />
-            <Stepper label={l({ eu: 'B zehatz (°)', es: 'B fino (°)', ar: 'B بدقة (°)' })} value={state.b} min={1} max={179} onChange={(next) => setState((current) => setTriangle(current, { b: next }))} language={props.language} />
+            <Stepper label={l({ eu: 'B zehatz (°)', es: 'B fino (°)', en: 'B fine (°)', ar: 'B بدقة (°)' })} value={state.b} min={1} max={179} onChange={(next) => setState((current) => setTriangle(current, { b: next }))} language={props.language} />
         </>
     )
     const readout = c === null
-        ? <span className="fraction-v2-lab-readout-note">{l({ eu: `A + B = ${state.a + state.b}°: 180° edo gehiago. Ez dago triangelurik.`, es: `A + B = ${state.a + state.b}°: 180° o más. No hay triángulo.`, ar: `A + B = ${state.a + state.b}°: ‏180° أو أكثر. لا يوجد مثلث.` })}</span>
+        ? <span className="fraction-v2-lab-readout-note">{l({ eu: `A + B = ${state.a + state.b}°: 180° edo gehiago. Ez dago triangelurik.`, es: `A + B = ${state.a + state.b}°: 180° o más. No hay triángulo.`, en: `A + B = ${state.a + state.b}°: 180° or more. There is no triangle.`, ar: `A + B = ${state.a + state.b}°: ‏180° أو أكثر. لا يوجد مثلث.` })}</span>
         : (
             <>
                 <span className="fraction-v2-lab-readout-main"><MathText text={`$C=180^{\\circ}-${state.a}^{\\circ}-${state.b}^{\\circ}=${c}^{\\circ}$`} /></span>
-                {kind && <span className="fraction-v2-lab-readout-note">{l({ eu: `Triangelu ${l(byAngles[kind.angles])} eta ${l(bySides[kind.sides])}.`, es: `Triángulo ${l(byAngles[kind.angles])} y ${l(bySides[kind.sides])}.`, ar: `مثلث ${l(byAngles[kind.angles])} و${l(bySides[kind.sides])}.` })}</span>}
+                {kind && <span className="fraction-v2-lab-readout-note">{l({ eu: `Triangelu ${l(byAngles[kind.angles])} eta ${l(bySides[kind.sides])}.`, es: `Triángulo ${l(byAngles[kind.angles])} y ${l(bySides[kind.sides])}.`, en: `Triangle: ${l(byAngles[kind.angles])} and ${l(bySides[kind.sides])}.`, ar: `مثلث ${l(byAngles[kind.angles])} و${l(bySides[kind.sides])}.` })}</span>}
             </>
         )
     return (
@@ -192,16 +193,16 @@ export function PythagorasTool(props: LabToolProps) {
     const oy = 10 + a + b
     const controls = (
         <>
-            <Stepper label={l({ eu: 'Katetoa b', es: 'Cateto b', ar: 'الضلع b' })} value={legA} min={LEG_LIMITS.min} max={LEG_LIMITS.max} onChange={(next) => setState((current) => setLegs(current, { legA: next }))} language={props.language} />
-            <Stepper label={l({ eu: 'Katetoa c', es: 'Cateto c', ar: 'الضلع c' })} value={legB} min={LEG_LIMITS.min} max={LEG_LIMITS.max} onChange={(next) => setState((current) => setLegs(current, { legB: next }))} language={props.language} />
+            <Stepper label={l({ eu: 'Katetoa b', es: 'Cateto b', en: 'Leg b', ar: 'الضلع b' })} value={legA} min={LEG_LIMITS.min} max={LEG_LIMITS.max} onChange={(next) => setState((current) => setLegs(current, { legA: next }))} language={props.language} />
+            <Stepper label={l({ eu: 'Katetoa c', es: 'Cateto c', en: 'Leg c', ar: 'الضلع c' })} value={legB} min={LEG_LIMITS.min} max={LEG_LIMITS.max} onChange={(next) => setState((current) => setLegs(current, { legB: next }))} language={props.language} />
         </>
     )
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$a^{2}=${legA}^{2}+${legB}^{2}=${legA ** 2}+${legB ** 2}=${hypotenuseSquare(state)}$`} /></span>
             {whole
-                ? <ResultAnswer language={props.language} state={state} expected={fraction(hypotenuse(state))} placeholder={{ eu: 'Adib.: 5', es: 'Ej.: 5', ar: 'مثال: 5' }} unreadable={answerTexts.unreadable} onChange={(patch) => setState((current) => answerHypotenuse(current, patch))} />
-                : <span className="fraction-v2-lab-readout-note">{l({ eu: `a = √${hypotenuseSquare(state)} ≈ ${decimalText(Math.round(hypotenuse(state) * 100) / 100, 'eu')}: ez da zenbaki osoa. Bilatu kateto-bikote bat hipotenusa osoarekin.`, es: `a = √${hypotenuseSquare(state)} ≈ ${decimalText(Math.round(hypotenuse(state) * 100) / 100, 'es')}: no es entera. Busca una pareja de catetos con hipotenusa entera.`, ar: `a = √${hypotenuseSquare(state)} ≈ ${Math.round(hypotenuse(state) * 100) / 100}: ليس عددًا صحيحًا. ابحث عن زوج أضلاع وتره عدد صحيح.` })}</span>}
+                ? <ResultAnswer language={props.language} state={state} expected={fraction(hypotenuse(state))} placeholder={{ eu: 'Adib.: 5', es: 'Ej.: 5', en: 'E.g.: 5', ar: 'مثال: 5' }} unreadable={answerTexts.unreadable} onChange={(patch) => setState((current) => answerHypotenuse(current, patch))} />
+                : <span className="fraction-v2-lab-readout-note">{l({ eu: `a = √${hypotenuseSquare(state)} ≈ ${decimalText(Math.round(hypotenuse(state) * 100) / 100, 'eu')}: ez da zenbaki osoa. Bilatu kateto-bikote bat hipotenusa osoarekin.`, es: `a = √${hypotenuseSquare(state)} ≈ ${decimalText(Math.round(hypotenuse(state) * 100) / 100, 'es')}: no es entera. Busca una pareja de catetos con hipotenusa entera.`, en: `a = √${hypotenuseSquare(state)} ≈ ${decimalText(Math.round(hypotenuse(state) * 100) / 100, 'en')}: it is not a whole number. Look for a pair of legs with a whole-number hypotenuse.`, ar: `a = √${hypotenuseSquare(state)} ≈ ${Math.round(hypotenuse(state) * 100) / 100}: ليس عددًا صحيحًا. ابحث عن زوج أضلاع وتره عدد صحيح.` })}</span>}
         </>
     )
     const hx = -b
@@ -226,9 +227,9 @@ export function PythagorasTool(props: LabToolProps) {
 /* ---------- Area grid ---------- */
 
 const shapeNames: Record<AreaShape, LocalizedText> = {
-    rectangle: { eu: 'Laukizuzena', es: 'Rectángulo', ar: 'مستطيل' },
-    parallelogram: { eu: 'Paralelogramoa', es: 'Paralelogramo', ar: 'متوازي أضلاع' },
-    triangle: { eu: 'Triangelua', es: 'Triángulo', ar: 'مثلث' }
+    rectangle: { eu: 'Laukizuzena', es: 'Rectángulo', en: 'Rectangle', ar: 'مستطيل' },
+    parallelogram: { eu: 'Paralelogramoa', es: 'Paralelogramo', en: 'Parallelogram', ar: 'متوازي أضلاع' },
+    triangle: { eu: 'Triangelua', es: 'Triángulo', en: 'Triangle', ar: 'مثلث' }
 }
 
 export function AreaTool(props: LabToolProps) {
@@ -247,9 +248,9 @@ export function AreaTool(props: LabToolProps) {
     const area = areaOf(state)
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Irudia', es: 'Figura', ar: 'الشكل' })} value={shape} options={(['rectangle', 'parallelogram', 'triangle'] as const).map((value) => ({ value, label: l(shapeNames[value]) }))} onChange={(next) => setState((current) => setArea(current, { shape: next }))} />
-            <Stepper label={l({ eu: 'Oinarria', es: 'Base', ar: 'القاعدة' })} value={base} min={AREA_LIMITS.min} max={AREA_LIMITS.max} onChange={(next) => setState((current) => setArea(current, { base: next }))} language={props.language} />
-            <Stepper label={l({ eu: 'Altuera', es: 'Altura', ar: 'الارتفاع' })} value={height} min={AREA_LIMITS.min} max={AREA_LIMITS.max} onChange={(next) => setState((current) => setArea(current, { height: next }))} language={props.language} />
+            <Segmented label={l({ eu: 'Irudia', es: 'Figura', en: 'Shape', ar: 'الشكل' })} value={shape} options={(['rectangle', 'parallelogram', 'triangle'] as const).map((value) => ({ value, label: l(shapeNames[value]) }))} onChange={(next) => setState((current) => setArea(current, { shape: next }))} />
+            <Stepper label={l({ eu: 'Oinarria', es: 'Base', en: 'Base', ar: 'القاعدة' })} value={base} min={AREA_LIMITS.min} max={AREA_LIMITS.max} onChange={(next) => setState((current) => setArea(current, { base: next }))} language={props.language} />
+            <Stepper label={l({ eu: 'Altuera', es: 'Altura', en: 'Height', ar: 'الارتفاع' })} value={height} min={AREA_LIMITS.min} max={AREA_LIMITS.max} onChange={(next) => setState((current) => setArea(current, { height: next }))} language={props.language} />
         </>
     )
     const readout = (
@@ -283,8 +284,8 @@ export function CircleTool(props: LabToolProps) {
     const separator = props.language === 'ar' ? '.' : '{,}'
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Kalkulatu', es: 'Calcula', ar: 'احسب' })} value={ask} options={[{ value: 'length', label: l({ eu: 'Luzera (L)', es: 'Longitud (L)', ar: 'الطول (L)' }) }, { value: 'area', label: l({ eu: 'Azalera (A)', es: 'Área (A)', ar: 'المساحة (A)' }) }]} onChange={(next) => setState((current) => setCircle(current, { ask: next }))} />
-            <Stepper label={l({ eu: 'Erradioa r', es: 'Radio r', ar: 'نصف القطر r' })} value={radius} min={RADIUS_LIMITS.min} max={RADIUS_LIMITS.max} onChange={(next) => setState((current) => setCircle(current, { radius: next }))} language={props.language} />
+            <Segmented label={l({ eu: 'Kalkulatu', es: 'Calcula', en: 'Calculate', ar: 'احسب' })} value={ask} options={[{ value: 'length', label: l({ eu: 'Luzera (L)', es: 'Longitud (L)', en: 'Length (L)', ar: 'الطول (L)' }) }, { value: 'area', label: l({ eu: 'Azalera (A)', es: 'Área (A)', en: 'Area (A)', ar: 'المساحة (A)' }) }]} onChange={(next) => setState((current) => setCircle(current, { ask: next }))} />
+            <Stepper label={l({ eu: 'Erradioa r', es: 'Radio r', en: 'Radius r', ar: 'نصف القطر r' })} value={radius} min={RADIUS_LIMITS.min} max={RADIUS_LIMITS.max} onChange={(next) => setState((current) => setCircle(current, { radius: next }))} language={props.language} />
         </>
     )
     const formula = ask === 'length' ? `L=2\\cdot 3${separator}14\\cdot ${radius}` : `A=3${separator}14\\cdot ${radius}^{2}`

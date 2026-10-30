@@ -31,7 +31,7 @@ export function AlgebraIntroGames({ language, pathname, openGame, completedIds, 
             language={language}
             games={hubGames}
             recordsKey={ALGEBRA_GAME_RECORDS_KEY}
-            title={{ eu: 'Jolastu letrekin eta ekuazioekin', es: 'Juega con letras y ecuaciones', ar: 'العب بالحروف والمعادلات' }}
+            title={{ eu: 'Jolastu letrekin eta ekuazioekin', es: 'Juega con letras y ecuaciones', en: 'Play with letters and equations', ar: 'العب بالحروف والمعادلات' }}
             completedIds={completedIds}
             onComplete={onComplete}
             mode={algebraGameModeForPath(pathname)}

@@ -3,7 +3,8 @@ import { pickText, type LocalizedText, type UnitLanguage } from '../../features/
 import { Figure, Frac } from '../dbh2-zatikiak-prototype/figures'
 import { Label } from '../dbh2-funtzioak-v2/plane'
 import { Caption, Formula } from '../dbh2-estatistika-v2/figures'
-import { COLORS, INK, LINE, MUTED, num, PAPER, SECOND, STAGE, STAGE_TINT } from '../dbh2-estatistika-v2/palette'
+import { COLORS, INK, LINE, MUTED, PAPER, SECOND, STAGE, STAGE_TINT } from '../dbh2-estatistika-v2/palette'
+import { decimalSeparatorFor, thousandsSeparatorFor } from '../../utils/numberFormat'
 
 /* ==========================================================================
    Probabilitatea · 4. DBH akademikoak — lesson figures: the tree of three
@@ -17,8 +18,17 @@ import { COLORS, INK, LINE, MUTED, num, PAPER, SECOND, STAGE, STAGE_TINT } from 
    carry words only.
    ========================================================================== */
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language, text)
+
+/** A decimal for the screen: 0,5 in Spanish and Basque, 0.5 in English and Arabic */
+const num = (language: UnitLanguage, value: number | string) => {
+    const mark = language === 'ar' ? '.' : decimalSeparatorFor(language)
+    return typeof value === 'number' ? String(Math.round(value * 1000) / 1000).replace('.', mark) : value.replace(/,/g, mark)
+}
+
+/** Thousands written with a space in the source: 9 880 is 9.880 in Spanish and Basque, 9,880 in English; Arabic keeps the space */
+const grouped = (language: UnitLanguage, text: string) => text.replace(/(\d) (?=\d)/g, `$1${language === 'ar' ? ' ' : thousandsSeparatorFor(language)}`)
 
 const RED = '#d9502e'
 const GREEN = '#267b53'
@@ -83,7 +93,7 @@ export function CoinsTreeFigure({ language }: { language: UnitLanguage }) {
         </g>
     )
     return (
-        <Figure height={310} label={pick(language, say('Hiru txanponen zuhaitz-diagrama', 'Diagrama de árbol de tres monedas', 'المخطط الشجري لثلاث قطع نقدية'))}>
+        <Figure height={310} label={pick(language, say('Hiru txanponen zuhaitz-diagrama', 'Diagrama de árbol de tres monedas', 'المخطط الشجري لثلاث قطع نقدية', 'Tree diagram for three coins'))}>
             <circle cx={40} cy={148} r={6} fill={INK} />
             {[0, 1, 2].map((level) => Array.from({ length: 2 ** (level + 1) }, (_, index) => {
                 const x = levelX[level]
@@ -109,7 +119,7 @@ export function CoinsTreeFigure({ language }: { language: UnitLanguage }) {
             })}
             <Formula x={610} y={110} size={22} color={STAGE}>2 · 2 · 2 = 8</Formula>
             <Formula x={610} y={160} size={20} color={SECOND}>4 / 8</Formula>
-            <Caption y={298} language={language} text={say('Gutxienez bi C: lagin-espazioko 8 emaitzetatik 4', 'Al menos dos caras: 4 de los 8 resultados del espacio muestral', 'وجهان على الأقل: 4 من النتائج الثماني في فضاء العيّنة')} size={14} />
+            <Caption y={298} language={language} text={say('Gutxienez bi C: lagin-espazioko 8 emaitzetatik 4', 'Al menos dos caras: 4 de los 8 resultados del espacio muestral', 'وجهان على الأقل: 4 من النتائج الثماني في فضاء العيّنة', 'At least two heads: 4 of the 8 outcomes in the sample space')} size={14} />
         </Figure>
     )
 }
@@ -123,7 +133,7 @@ export function VennNumbersFigure({ language }: { language: UnitLanguage }) {
         [1, 52, 46], [4, 388, 46], [8, 52, 236], [10, 384, 236]
     ]
     return (
-        <Figure height={300} label={pick(language, say('Gertaeren bildura, ebakidura eta aurkakoa', 'Unión, intersección y contrario de sucesos', 'اتحاد الأحداث وتقاطعها والحدث المعاكس'))}>
+        <Figure height={300} label={pick(language, say('Gertaeren bildura, ebakidura eta aurkakoa', 'Unión, intersección y contrario de sucesos', 'اتحاد الأحداث وتقاطعها والحدث المعاكس', 'Union, intersection and complementary events'))}>
             <defs>
                 <clipPath id={clip}><circle cx={160} cy={140} r={92} /></clipPath>
             </defs>
@@ -141,7 +151,7 @@ export function VennNumbersFigure({ language }: { language: UnitLanguage }) {
             <Formula x={440} y={136} size={16} anchor="start">A ∪ B = {'{'}2, 3, 5, 6, 7, 9{'}'}</Formula>
             <Formula x={440} y={170} size={16} anchor="start">A ∩ B = {'{'}3{'}'}</Formula>
             <Formula x={440} y={204} size={16} anchor="start"><Bar>A</Bar> = {'{'}1, 4, 6, 8, 9, 10{'}'}</Formula>
-            <Caption y={290} language={language} text={say('Bildura: A-n edo B-n. Ebakidura: bietan. Aurkakoa: A-tik kanpo', 'Unión: en A o en B. Intersección: en los dos. Contrario: fuera de A', 'الاتحاد: في A أو في B. التقاطع: في كليهما. المعاكس: خارج A')} size={14} />
+            <Caption y={290} language={language} text={say('Bildura: A-n edo B-n. Ebakidura: bietan. Aurkakoa: A-tik kanpo', 'Unión: en A o en B. Intersección: en los dos. Contrario: fuera de A', 'الاتحاد: في A أو في B. التقاطع: في كليهما. المعاكس: خارج A', 'Union: in A or in B. Intersection: in both. Complementary event: outside A')} size={14} />
         </Figure>
     )
 }
@@ -149,12 +159,12 @@ export function VennNumbersFigure({ language }: { language: UnitLanguage }) {
 /* ---------- 3. The Spanish deck: compatible and incompatible ---------- */
 
 export function DeckEventsFigure({ language }: { language: UnitLanguage }) {
-    const suits = [say('Urreak', 'Oros', 'الذهب'), say('Kopak', 'Copas', 'الكؤوس'), say('Ezpatak', 'Espadas', 'السيوف'), say('Bastoiak', 'Bastos', 'العصي')]
+    const suits = [say('Urreak', 'Oros', 'الذهب', 'Coins'), say('Kopak', 'Copas', 'الكؤوس', 'Cups'), say('Ezpatak', 'Espadas', 'السيوف', 'Swords'), say('Bastoiak', 'Bastos', 'العصي', 'Clubs')]
     const values = [1, 2, 3, 4, 5, 6, 7, 10, 11, 12]
     const x = (column: number) => 168 + column * 44
     const y = (row: number) => 44 + row * 38
     return (
-        <Figure height={310} label={pick(language, say('Karta-sorta espainiarra', 'La baraja española', 'ورق اللعب الإسباني'))}>
+        <Figure height={310} label={pick(language, say('Karta-sorta espainiarra', 'La baraja española', 'ورق اللعب الإسباني', 'The Spanish deck'))}>
             {values.map((value, column) => <text key={value} x={x(column) + 19} y={30} textAnchor="middle" fontSize={15} fontWeight={700} fill={column >= 7 ? GOLD : MUTED}>{value}</text>)}
             {suits.map((suit, row) => (
                 <g key={row}>
@@ -170,9 +180,9 @@ export function DeckEventsFigure({ language }: { language: UnitLanguage }) {
             ))}
             <rect x={x(0) - 4} y={y(0) - 4} width={46} height={4 * 38 + 2} rx={8} fill="none" stroke={STAGE} strokeWidth={2.6} />
             <rect x={x(0) - 4} y={y(3) - 4} width={10 * 44 + 2} height={40} rx={8} fill="none" stroke={SECOND} strokeWidth={2.6} />
-            <Label x={360} y={226} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, say('A = batekoa, B = bastoiak: bateragarriak (bastoien batekoa)', 'A = as, B = bastos: compatibles (el as de bastos)', 'A = الآس، B = العصي: متوافقان (آس العصي)'))}</Label>
-            <Label x={360} y={256} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, say('A = batekoa, C = irudia: bateraezinak (ez dago biak den kartarik)', 'A = as, C = figura: incompatibles (ninguna carta es las dos cosas)', 'A = الآس، C = صورة: متنافيان (لا توجد ورقة تجمعهما)'))}</Label>
-            <Caption y={292} language={language} text={say('40 karta: 4 palo, 10 karta bakoitzean; irudiak 10, 11 eta 12 dira', '40 cartas: 4 palos de 10 cartas; las figuras son el 10, el 11 y el 12', '40 ورقة: 4 أنواع في كل منها 10 أوراق؛ والصور هي 10 و11 و12')} size={14} />
+            <Label x={360} y={226} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, say('A = batekoa, B = bastoiak: bateragarriak (bastoien batekoa)', 'A = as, B = bastos: compatibles (el as de bastos)', 'A = الآس، B = العصي: متوافقان (آس العصي)', 'A = ace, B = clubs: compatible (the ace of clubs)'))}</Label>
+            <Label x={360} y={256} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, say('A = batekoa, C = irudia: bateraezinak (ez dago biak den kartarik)', 'A = as, C = figura: incompatibles (ninguna carta es las dos cosas)', 'A = الآس، C = صورة: متنافيان (لا توجد ورقة تجمعهما)', 'A = ace, C = face card: incompatible (no card is both)'))}</Label>
+            <Caption y={292} language={language} text={say('40 karta: 4 palo, 10 karta bakoitzean; irudiak 10, 11 eta 12 dira', '40 cartas: 4 palos de 10 cartas; las figuras son el 10, el 11 y el 12', '40 ورقة: 4 أنواع في كل منها 10 أوراق؛ والصور هي 10 و11 و12', '40 cards: 4 suits of 10 cards; the face cards are the 10, 11 and 12')} size={14} />
         </Figure>
     )
 }
@@ -186,7 +196,7 @@ export function FrequencyFigure({ language }: { language: UnitLanguage }) {
     const x = (n: number) => 90 + ((Math.log10(n) - 1) / 2) * 540
     const y = (f: number) => 236 - f * 260
     return (
-        <Figure height={300} label={pick(language, say('Maiztasun erlatiboa egonkortzen da', 'La frecuencia relativa se estabiliza', 'التكرار النسبي يستقر'))}>
+        <Figure height={300} label={pick(language, say('Maiztasun erlatiboa egonkortzen da', 'La frecuencia relativa se estabiliza', 'التكرار النسبي يستقر', 'The relative frequency stabilises'))}>
             {[0, 0.2, 0.4, 0.6, 0.8].map((f) => (
                 <g key={f}>
                     <line x1={90} x2={640} y1={y(f)} y2={y(f)} stroke={LINE} strokeWidth={1} />
@@ -201,7 +211,7 @@ export function FrequencyFigure({ language }: { language: UnitLanguage }) {
             <Formula x={642} y={y(0.38) - 10} size={16} color={SECOND} anchor="end">P ≈ {num(language, 0.38)}</Formula>
             <polyline points={pinFrequencies.map(([n, f]) => `${x(n)},${y(f)}`).join(' ')} fill="none" stroke={STAGE} strokeWidth={3} strokeLinejoin="round" />
             {pinFrequencies.map(([n, f]) => <circle key={n} cx={x(n)} cy={y(f)} r={4.5} fill={STAGE} />)}
-            <Caption y={290} language={language} text={say('Txintxeta: zenbat eta jaurtiketa gehiago, orduan eta egonkorragoa da maiztasun erlatiboa', 'Chincheta: cuantos más lanzamientos, más estable es la frecuencia relativa', 'الدبوس: كلما زادت الرميات استقرّ التكرار النسبي أكثر')} size={14} />
+            <Caption y={290} language={language} text={say('Txintxeta: zenbat eta jaurtiketa gehiago, orduan eta egonkorragoa da maiztasun erlatiboa', 'Chincheta: cuantos más lanzamientos, más estable es la frecuencia relativa', 'الدبوس: كلما زادت الرميات استقرّ التكرار النسبي أكثر', 'Drawing pin: the more tosses, the more stable the relative frequency is')} size={14} />
         </Figure>
     )
 }
@@ -212,7 +222,7 @@ export function TwoDiceFigure({ language }: { language: UnitLanguage }) {
     const x = (column: number) => 96 + column * 46
     const y = (row: number) => 46 + row * 36
     return (
-        <Figure height={310} label={pick(language, say('Bi daduren 36 emaitzak', 'Los 36 resultados de dos dados', 'النتائج الـ36 لنردين'))}>
+        <Figure height={310} label={pick(language, say('Bi daduren 36 emaitzak', 'Los 36 resultados de dos dados', 'النتائج الـ36 لنردين', 'The 36 outcomes of two dice'))}>
             {[1, 2, 3, 4, 5, 6].map((value) => (
                 <g key={value}>
                     <text x={x(value - 1) + 21} y={34} textAnchor="middle" fontSize={15} fontWeight={700} fill={MUTED}>{value}</text>
@@ -229,11 +239,11 @@ export function TwoDiceFigure({ language }: { language: UnitLanguage }) {
                     </g>
                 )
             }))}
-            <Label x={530} y={84} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('7 batura', 'Suma 7', 'المجموع 7'))}</Label>
+            <Label x={530} y={84} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('7 batura', 'Suma 7', 'المجموع 7', 'Sum 7'))}</Label>
             <Formula x={530} y={114} size={19} color={SECOND}>6/36 = 1/6</Formula>
-            <Label x={530} y={164} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, say('11 batura', 'Suma 11', 'المجموع 11'))}</Label>
+            <Label x={530} y={164} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, say('11 batura', 'Suma 11', 'المجموع 11', 'Sum 11'))}</Label>
             <Formula x={530} y={194} size={19} color={STAGE}>2/36 = 1/18</Formula>
-            <Caption y={296} language={language} text={say('36 laukiak aukera berekoak dira; 2tik 12rako baturak, ez', 'Las 36 casillas son equiprobables; las sumas del 2 al 12, no', 'الخانات الـ36 متساوية الاحتمال، أما المجاميع من 2 إلى 12 فلا')} size={14} />
+            <Caption y={296} language={language} text={say('36 laukiak aukera berekoak dira; 2tik 12rako baturak, ez', 'Las 36 casillas son equiprobables; las sumas del 2 al 12, no', 'الخانات الـ36 متساوية الاحتمال، أما المجاميع من 2 إلى 12 فلا', 'The 36 cells are equally likely; the sums from 2 to 12 are not')} size={14} />
         </Figure>
     )
 }
@@ -243,7 +253,7 @@ export function TwoDiceFigure({ language }: { language: UnitLanguage }) {
 export function ProbabilityVennFigure({ language }: { language: UnitLanguage }) {
     const clip = useId()
     return (
-        <Figure height={300} label={pick(language, say('Probabilitateak Venn diagrama batean', 'Probabilidades en un diagrama de Venn', 'احتمالات في مخطط فن'))}>
+        <Figure height={300} label={pick(language, say('Probabilitateak Venn diagrama batean', 'Probabilidades en un diagrama de Venn', 'احتمالات في مخطط فن', 'Probabilities in a Venn diagram'))}>
             <defs>
                 <clipPath id={clip}><circle cx={130} cy={136} r={84} /></clipPath>
             </defs>
@@ -263,7 +273,7 @@ export function ProbabilityVennFigure({ language }: { language: UnitLanguage }) 
             <Formula x={530} y={138} size={16}>{num(language, 0.7)} = {num(language, 0.26)} + P(B) − {num(language, 0.12)}</Formula>
             <Formula x={530} y={184} size={20} color={SECOND}>P(B) = {num(language, 0.56)}</Formula>
             <Formula x={530} y={232} size={15} color={MUTED}>{num(language, 0.14)} + {num(language, 0.12)} + {num(language, 0.44)} + {num(language, 0.3)} = 1</Formula>
-            <Caption y={288} language={language} text={say('Ebakidura bitan zenbatzen da: behin kendu behar da', 'La intersección se cuenta dos veces: hay que restarla una vez', 'التقاطع يُحسب مرتين: يجب طرحه مرة')} size={14} />
+            <Caption y={288} language={language} text={say('Ebakidura bitan zenbatzen da: behin kendu behar da', 'La intersección se cuenta dos veces: hay que restarla una vez', 'التقاطع يُحسب مرتين: يجب طرحه مرة', 'The intersection is counted twice: it must be subtracted once')} size={14} />
         </Figure>
     )
 }
@@ -272,12 +282,12 @@ export function ProbabilityVennFigure({ language }: { language: UnitLanguage }) 
 
 export function ReplacementFigure({ language }: { language: UnitLanguage }) {
     const cards = [
-        { x: 130, name: say('batekoa', 'as', 'آس'), n: 4, color: STAGE },
-        { x: 360, name: say('irudia', 'figura', 'صورة'), n: 12, color: GOLD },
-        { x: 590, name: say('irudia', 'figura', 'صورة'), n: 12, color: GOLD }
+        { x: 130, name: say('batekoa', 'as', 'آس', 'ace'), n: 4, color: STAGE },
+        { x: 360, name: say('irudia', 'figura', 'صورة', 'face card'), n: 12, color: GOLD },
+        { x: 590, name: say('irudia', 'figura', 'صورة', 'face card'), n: 12, color: GOLD }
     ]
     return (
-        <Figure height={300} label={pick(language, say('Hiru karta, itzulita', 'Tres cartas con devolución', 'ثلاث أوراق مع الإرجاع'))}>
+        <Figure height={300} label={pick(language, say('Hiru karta, itzulita', 'Tres cartas con devolución', 'ثلاث أوراق مع الإرجاع', 'Three cards with replacement'))}>
             {cards.map((card, index) => (
                 <g key={index}>
                     <rect x={card.x - 46} y={24} width={92} height={124} rx={10} fill={card.color} fillOpacity={0.18} stroke={card.color} strokeWidth={2.4} />
@@ -295,7 +305,7 @@ export function ReplacementFigure({ language }: { language: UnitLanguage }) {
                 </g>
             ))}
             <Formula x={360} y={258} size={20} color={SECOND}>4/40 · 12/40 · 12/40 = 9/1000</Formula>
-            <Caption y={290} language={language} text={say('Karta itzultzean, sortak berriro 40 karta ditu: probabilitateak ez dira aldatzen', 'Al devolver la carta, la baraja vuelve a tener 40: las probabilidades no cambian', 'عند إرجاع الورقة تعود المجموعة إلى 40 ورقة: لا تتغيّر الاحتمالات')} size={14} />
+            <Caption y={290} language={language} text={say('Karta itzultzean, sortak berriro 40 karta ditu: probabilitateak ez dira aldatzen', 'Al devolver la carta, la baraja vuelve a tener 40: las probabilidades no cambian', 'عند إرجاع الورقة تعود المجموعة إلى 40 ورقة: لا تتغيّر الاحتمالات', 'When the card is put back, the deck has 40 cards again: the probabilities do not change')} size={14} />
         </Figure>
     )
 }
@@ -305,7 +315,7 @@ export function ReplacementFigure({ language }: { language: UnitLanguage }) {
 export function UrnDrawsFigure({ language }: { language: UnitLanguage }) {
     const steps = [{ white: 3, n: 3, d: 8 }, { white: 2, n: 2, d: 7 }, { white: 1, n: 1, d: 6 }]
     return (
-        <Figure height={300} label={pick(language, say('Hiru atera, itzuli gabe', 'Tres extracciones sin devolver', 'ثلاث سحبات دون إرجاع'))}>
+        <Figure height={300} label={pick(language, say('Hiru atera, itzuli gabe', 'Tres extracciones sin devolver', 'ثلاث سحبات دون إرجاع', 'Three draws without replacement'))}>
             {steps.map((step, index) => {
                 const cx = 130 + index * 230
                 const balls = [...Array.from({ length: 5 }, () => INK), ...Array.from({ length: step.white }, () => PAPER)]
@@ -319,7 +329,7 @@ export function UrnDrawsFigure({ language }: { language: UnitLanguage }) {
                 )
             })}
             <Formula x={360} y={262} size={20} color={SECOND}>3/8 · 2/7 · 1/6 = 6/336 = 1/56</Formula>
-            <Caption y={290} language={language} text={say('Bola zuri bat atera eta ez da itzultzen: hurrengo ateratzean bola bat gutxiago dago', 'Sale una bola blanca y no se devuelve: en la siguiente hay una bola menos', 'تُسحب كرة بيضاء ولا تُعاد: في السحبة التالية كرة أقل')} size={14} />
+            <Caption y={290} language={language} text={say('Bola zuri bat atera eta ez da itzultzen: hurrengo ateratzean bola bat gutxiago dago', 'Sale una bola blanca y no se devuelve: en la siguiente hay una bola menos', 'تُسحب كرة بيضاء ولا تُعاد: في السحبة التالية كرة أقل', 'A white ball is drawn and not put back: there is one ball fewer for the next draw')} size={14} />
         </Figure>
     )
 }
@@ -335,7 +345,7 @@ export function TwoDrawTreeFigure({ language }: { language: UnitLanguage }) {
         { y: 250, parent: 1, color: GREEN, n: 1, product: '2/20', tone: MUTED }
     ]
     return (
-        <Figure height={310} label={pick(language, say('Bi atera itzuli gabe: zuhaitza', 'Dos extracciones sin devolver: el árbol', 'سحبتان دون إرجاع: الشجرة'))}>
+        <Figure height={310} label={pick(language, say('Bi atera itzuli gabe: zuhaitza', 'Dos extracciones sin devolver: el árbol', 'سحبتان دون إرجاع: الشجرة', 'Two draws without replacement: the tree diagram'))}>
             <circle cx={50} cy={145} r={6} fill={INK} />
             {firsts.map((first, index) => (
                 <g key={index}>
@@ -355,7 +365,7 @@ export function TwoDrawTreeFigure({ language }: { language: UnitLanguage }) {
                     </g>
                 )
             })}
-            <Caption y={298} language={language} text={say('Bide batean biderkatu; kolore bana: bi bideak batu, 6/20 + 6/20 = 12/20', 'En un camino, multiplica; una de cada color: suma los dos caminos, 6/20 + 6/20 = 12/20', 'في المسار اضرب؛ واحدة من كل لون: اجمع المسارين، 6/20 + 6/20 = 12/20')} size={14} />
+            <Caption y={298} language={language} text={say('Bide batean biderkatu; kolore bana: bi bideak batu, 6/20 + 6/20 = 12/20', 'En un camino, multiplica; una de cada color: suma los dos caminos, 6/20 + 6/20 = 12/20', 'في المسار اضرب؛ واحدة من كل لون: اجمع المسارين، 6/20 + 6/20 = 12/20', 'On one path, multiply; one of each colour: add the two paths, 6/20 + 6/20 = 12/20')} size={14} />
         </Figure>
     )
 }
@@ -399,43 +409,43 @@ function TwoWayTable({ language, spec }: { language: UnitLanguage; spec: TableSp
 
 export function ContingencyTableFigure({ language }: { language: UnitLanguage }) {
     const spec: TableSpec = {
-        columns: [say('DBH', 'ESO', 'الإعدادي'), say('Batxilergoa', 'Bachillerato', 'البكالوريا'), say('Guztira', 'Total', 'المجموع')],
+        columns: [say('DBH', 'ESO', 'الإعدادي', 'ESO'), say('Batxilergoa', 'Bachillerato', 'البكالوريا', 'Bachillerato'), say('Guztira', 'Total', 'المجموع', 'Total')],
         rows: [
-            { name: say('Jantokia', 'Comedor', 'المطعم'), values: [240, 100, 340] },
-            { name: say('Jantokirik ez', 'Sin comedor', 'دون المطعم'), values: [360, 300, 660] },
-            { name: say('Guztira', 'Total', 'المجموع'), values: [600, 400, 1000] }
+            { name: say('Jantokia', 'Comedor', 'المطعم', 'Canteen'), values: [240, 100, 340] },
+            { name: say('Jantokirik ez', 'Sin comedor', 'دون المطعم', 'No canteen'), values: [360, 300, 660] },
+            { name: say('Guztira', 'Total', 'المجموع', 'Total'), values: [600, 400, 1000] }
         ],
         marks: [{ row: 0, column: 2, color: STAGE }, { row: 1, column: 0, color: SECOND }]
     }
     return (
-        <Figure height={300} label={pick(language, say('Kontingentzia-taula', 'Tabla de contingencia', 'جدول التوافق'))}>
+        <Figure height={300} label={pick(language, say('Kontingentzia-taula', 'Tabla de contingencia', 'جدول التوافق', 'Contingency table'))}>
             <TwoWayTable language={language} spec={spec} />
-            <Label x={200} y={226} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, say('Jantokia', 'Comedor', 'المطعم'))}</Label>
+            <Label x={200} y={226} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, say('Jantokia', 'Comedor', 'المطعم', 'Canteen'))}</Label>
             <Formula x={200} y={256} size={18} color={STAGE}>340/1000 = {num(language, 0.34)}</Formula>
-            <Label x={520} y={226} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('DBH eta jantokirik ez', 'ESO y sin comedor', 'الإعدادي ودون المطعم'))}</Label>
+            <Label x={520} y={226} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('DBH eta jantokirik ez', 'ESO y sin comedor', 'الإعدادي ودون المطعم', 'ESO and no canteen'))}</Label>
             <Formula x={520} y={256} size={18} color={SECOND}>360/1000 = {num(language, 0.36)}</Formula>
-            <Caption y={290} language={language} text={say('Guztizkoak lehenik: errenkada eta zutabe bakoitzaren batura', 'Primero los totales: la suma de cada fila y de cada columna', 'المجاميع أولًا: مجموع كل سطر وكل عمود')} size={14} />
+            <Caption y={290} language={language} text={say('Guztizkoak lehenik: errenkada eta zutabe bakoitzaren batura', 'Primero los totales: la suma de cada fila y de cada columna', 'المجاميع أولًا: مجموع كل سطر وكل عمود', 'First the totals: the sum of each row and each column')} size={14} />
         </Figure>
     )
 }
 
 export function ConditionalFigure({ language }: { language: UnitLanguage }) {
     const spec: TableSpec = {
-        columns: [say('Gizonak', 'Hombres', 'الرجال'), say('Emakumeak', 'Mujeres', 'النساء'), say('Guztira', 'Total', 'المجموع')],
+        columns: [say('Gizonak', 'Hombres', 'الرجال', 'Men'), say('Emakumeak', 'Mujeres', 'النساء', 'Women'), say('Guztira', 'Total', 'المجموع', 'Total')],
         rows: [
-            { name: say('Maskotarekin', 'Con mascota', 'مع حيوان أليف'), values: [40, 25, 65] },
-            { name: say('Maskotarik gabe', 'Sin mascota', 'دون حيوان أليف'), values: [20, 15, 35] },
-            { name: say('Guztira', 'Total', 'المجموع'), values: [60, 40, 100] }
+            { name: say('Maskotarekin', 'Con mascota', 'مع حيوان أليف', 'With a pet'), values: [40, 25, 65] },
+            { name: say('Maskotarik gabe', 'Sin mascota', 'دون حيوان أليف', 'Without a pet'), values: [20, 15, 35] },
+            { name: say('Guztira', 'Total', 'المجموع', 'Total'), values: [60, 40, 100] }
         ],
         marks: [{ row: 0, column: 1, color: SECOND }, { row: 2, column: 1, color: STAGE }],
         band: 1
     }
     return (
-        <Figure height={300} label={pick(language, say('Probabilitate baldintzatua taula batean', 'Probabilidad condicionada en una tabla', 'الاحتمال المشروط في جدول'))}>
+        <Figure height={300} label={pick(language, say('Probabilitate baldintzatua taula batean', 'Probabilidad condicionada en una tabla', 'الاحتمال المشروط في جدول', 'Conditional probability in a table'))}>
             <TwoWayTable language={language} spec={spec} />
             <Formula x={360} y={230} size={19} color={SECOND}>P(A / M) = 25/40 = {num(language, 0.625)}</Formula>
             <Formula x={360} y={262} size={16} color={MUTED}>P(A) = 65/100 = {num(language, 0.65)}</Formula>
-            <Caption y={292} language={language} text={say('M = emakumea, A = maskota. M dakigunean, 40 emakumeak dira kasu posible berriak', 'M = mujer, A = mascota. Si se sabe M, las 40 mujeres son los nuevos casos posibles', 'M = امرأة، A = حيوان أليف. إذا عُلم M فالنساء الأربعون هنّ الحالات الممكنة الجديدة')} size={14} />
+            <Caption y={292} language={language} text={say('M = emakumea, A = maskota. M dakigunean, 40 emakumeak dira kasu posible berriak', 'M = mujer, A = mascota. Si se sabe M, las 40 mujeres son los nuevos casos posibles', 'M = امرأة، A = حيوان أليف. إذا عُلم M فالنساء الأربعون هنّ الحالات الممكنة الجديدة', 'M = woman, A = pet. If M is known, the 40 women are the new possible outcomes')} size={14} />
         </Figure>
     )
 }
@@ -445,7 +455,7 @@ export function ConditionalFigure({ language }: { language: UnitLanguage }) {
 export function TotalTreeFigure({ language }: { language: UnitLanguage }) {
     const urns = [{ y: 80, name: 'I', n: 2, red: 2, blue: 3 }, { y: 214, name: 'II', n: 4, red: 4, blue: 1 }]
     return (
-        <Figure height={310} label={pick(language, say('Dado bat eta bi kutxa', 'Un dado y dos urnas', 'نرد وجرّتان'))}>
+        <Figure height={310} label={pick(language, say('Dado bat eta bi kutxa', 'Un dado y dos urnas', 'نرد وجرّتان', 'A die and two urns'))}>
             <DieFace x={48} y={147} value={5} size={44} />
             {urns.map((urn, index) => (
                 <g key={urn.name}>
@@ -468,7 +478,7 @@ export function TotalTreeFigure({ language }: { language: UnitLanguage }) {
                 </g>
             ))}
             <Formula x={600} y={152} size={18} color={SECOND}>4/30 + 16/30 = 2/3</Formula>
-            <Caption y={298} language={language} text={say('1 edo 2: I kutxa; bestela, II. Bola gorrira iristen diren bi bideak batu', '1 o 2: urna I; si no, la II. Suma los dos caminos que acaban en roja', '1 أو 2: الجرّة I، وإلا فالجرّة II. اجمع المسارين المنتهيين بكرة حمراء')} size={14} />
+            <Caption y={298} language={language} text={say('1 edo 2: I kutxa; bestela, II. Bola gorrira iristen diren bi bideak batu', '1 o 2: urna I; si no, la II. Suma los dos caminos que acaban en roja', '1 أو 2: الجرّة I، وإلا فالجرّة II. اجمع المسارين المنتهيين بكرة حمراء', '1 or 2: urn I; otherwise, urn II. Add the two paths that end in red')} size={14} />
         </Figure>
     )
 }
@@ -477,19 +487,19 @@ export function TotalTreeFigure({ language }: { language: UnitLanguage }) {
 
 export function CombinationsDeckFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={300} label={pick(language, say('Hiru urre, konbinazioekin', 'Tres oros con combinaciones', 'ثلاث أوراق ذهب بالتوافيق'))}>
+        <Figure height={300} label={pick(language, say('Hiru urre, konbinazioekin', 'Tres oros con combinaciones', 'ثلاث أوراق ذهب بالتوافيق', 'Three cards of coins, using combinations'))}>
             {Array.from({ length: 4 }, (_, row) => Array.from({ length: 10 }, (_, column) => {
                 const gold = row === 0
                 const picked = gold && [1, 4, 8].includes(column)
                 return <rect key={`${row}-${column}`} x={40 + column * 30} y={30 + row * 40} width={24} height={34} rx={4} fill={picked ? SECOND : gold ? GOLD : PAPER} fillOpacity={picked ? 0.6 : gold ? 0.35 : 1} stroke={gold ? GOLD : LINE} strokeWidth={1.6} />
             }))}
-            <Label x={190} y={214} textAnchor="middle" fontSize={15} fontWeight={700} fill={GOLD}>{pick(language, say('10 urre, 40 karta', '10 oros, 40 cartas', '10 أوراق ذهب من 40'))}</Label>
+            <Label x={190} y={214} textAnchor="middle" fontSize={15} fontWeight={700} fill={GOLD}>{pick(language, say('10 urre, 40 karta', '10 oros, 40 cartas', '10 أوراق ذهب من 40', '10 cards of coins, out of 40'))}</Label>
             <Formula x={530} y={58} size={19} color={GOLD}><Sub letter="C" index="10,3" rest=" = 120" /></Formula>
-            <Formula x={530} y={102} size={19}><Sub letter="C" index="40,3" rest=" = 9 880" /></Formula>
-            <Formula x={530} y={150} size={20} color={SECOND}>P = 120/9 880 = 3/247</Formula>
+            <Formula x={530} y={102} size={19}><Sub letter="C" index="40,3" rest={` = ${grouped(language, '9 880')}`} /></Formula>
+            <Formula x={530} y={150} size={20} color={SECOND}>P = 120/{grouped(language, '9 880')} = 3/247</Formula>
             <Formula x={530} y={196} size={15} color={MUTED}>10/40 · 9/39 · 8/38 = 3/247</Formula>
-            <Caption y={262} language={language} text={say('Aldeko kasuak: 10 urreetatik 3 aukeratzea. Kasu posibleak: 40 kartatik 3', 'Casos favorables: elegir 3 de los 10 oros. Casos posibles: 3 de las 40 cartas', 'الحالات الملائمة: اختيار 3 من 10 أوراق ذهب. والممكنة: 3 من 40 ورقة')} size={14} />
-            <Caption y={288} language={language} text={say('Biderkadurarekin emaitza bera ateratzen da', 'Con el producto sale lo mismo', 'وبالضرب نحصل على النتيجة نفسها')} size={14} />
+            <Caption y={262} language={language} text={say('Aldeko kasuak: 10 urreetatik 3 aukeratzea. Kasu posibleak: 40 kartatik 3', 'Casos favorables: elegir 3 de los 10 oros. Casos posibles: 3 de las 40 cartas', 'الحالات الملائمة: اختيار 3 من 10 أوراق ذهب. والممكنة: 3 من 40 ورقة', 'Favourable cases: choose 3 of the 10 cards of coins. Possible cases: 3 of the 40 cards')} size={14} />
+            <Caption y={288} language={language} text={say('Biderkadurarekin emaitza bera ateratzen da', 'Con el producto sale lo mismo', 'وبالضرب نحصل على النتيجة نفسها', 'Using the product gives the same result')} size={14} />
         </Figure>
     )
 }
@@ -500,7 +510,7 @@ export function MaxDiceFigure({ language }: { language: UnitLanguage }) {
     const x = (column: number) => 70 + column * 40
     const y = (row: number) => 30 + row * 36
     return (
-        <Figure height={310} label={pick(language, say('Daduen balio handiena', 'La mayor puntuación de los dados', 'أكبر نتيجة للنرد'))}>
+        <Figure height={310} label={pick(language, say('Daduen balio handiena', 'La mayor puntuación de los dados', 'أكبر نتيجة للنرد', 'The highest score on the dice'))}>
             {[1, 2, 3, 4, 5, 6].map((a) => [1, 2, 3, 4, 5, 6].map((b) => {
                 const top = Math.max(a, b)
                 const fill = top <= 3 ? STAGE_TINT : top === 4 ? SECOND : PAPER
@@ -511,13 +521,13 @@ export function MaxDiceFigure({ language }: { language: UnitLanguage }) {
                     </g>
                 )
             }))}
-            <Label x={490} y={52} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, say('Bi dado', 'Dos dados', 'نردان'))}</Label>
+            <Label x={490} y={52} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, say('Bi dado', 'Dos dados', 'نردان', 'Two dice'))}</Label>
             <Formula x={490} y={84} size={18}>4² − 3² = 16 − 9 = 7</Formula>
-            <Label x={490} y={136} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, say('Hiru dado', 'Tres dados', 'ثلاثة نرود'))}</Label>
+            <Label x={490} y={136} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, say('Hiru dado', 'Tres dados', 'ثلاثة نرود', 'Three dice'))}</Label>
             <Formula x={490} y={168} size={18}>4³ − 3³ = 64 − 27 = 37</Formula>
             <Formula x={490} y={216} size={21} color={SECOND}>P = 37/216</Formula>
-            <Caption y={262} language={language} text={say('Handiena 4 ≤ dutenak ken handiena 3 ≤ dutenak: handiena justu 4', 'Las de máximo ≤ 4 menos las de máximo ≤ 3: máximo exactamente 4', 'ما أكبره ≤ 4 ناقص ما أكبره ≤ 3: الأكبر 4 تمامًا')} size={14} />
-            <Caption y={290} language={language} text={say('Hiru daduk 6³ = 216 emaitza ditu, denak aukera berekoak', 'Tres dados tienen 6³ = 216 resultados, todos equiprobables', 'لثلاثة نرود 6³ = 216 نتيجة كلها متساوية الاحتمال')} size={14} />
+            <Caption y={262} language={language} text={say('Handiena 4 ≤ dutenak ken handiena 3 ≤ dutenak: handiena justu 4', 'Las de máximo ≤ 4 menos las de máximo ≤ 3: máximo exactamente 4', 'ما أكبره ≤ 4 ناقص ما أكبره ≤ 3: الأكبر 4 تمامًا', 'Those with maximum ≤ 4 minus those with maximum ≤ 3: maximum exactly 4')} size={14} />
+            <Caption y={290} language={language} text={say('Hiru daduk 6³ = 216 emaitza ditu, denak aukera berekoak', 'Tres dados tienen 6³ = 216 resultados, todos equiprobables', 'لثلاثة نرود 6³ = 216 نتيجة كلها متساوية الاحتمال', 'Three dice have 6³ = 216 outcomes, all equally likely')} size={14} />
         </Figure>
     )
 }
@@ -526,7 +536,7 @@ export function MaxDiceFigure({ language }: { language: UnitLanguage }) {
 
 export function FairGameFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={300} label={pick(language, say('Joko bidezko bat', 'Un juego equitativo', 'لعبة عادلة'))}>
+        <Figure height={300} label={pick(language, say('Joko bidezko bat', 'Un juego equitativo', 'لعبة عادلة', 'A fair game'))}>
             {[1, 2, 3, 4, 5, 6].map((value) => {
                 const win = value <= 2
                 const cx = 90 + (value - 1) * 108
@@ -538,8 +548,8 @@ export function FairGameFigure({ language }: { language: UnitLanguage }) {
                 )
             })}
             <Formula x={360} y={192} size={20}>6 · 2/6 − 3 · 4/6 = 2 − 2 = 0</Formula>
-            <Label x={360} y={236} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, say('Itxaropena 0 da: jokoa bidezkoa da', 'La esperanza es 0: el juego es equitativo', 'الأمل الرياضي 0: اللعبة عادلة'))}</Label>
-            <Caption y={284} language={language} text={say('Epe luzera, sei jokaldiko: 2 aldiz +6 € eta 4 aldiz −3 €', 'A la larga, de cada seis jugadas: 2 veces +6 € y 4 veces −3 €', 'على المدى الطويل، من كل ست جولات: مرتان +6 € وأربع مرات −3 €')} size={14} />
+            <Label x={360} y={236} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, say('Itxaropena 0 da: jokoa bidezkoa da', 'La esperanza es 0: el juego es equitativo', 'الأمل الرياضي 0: اللعبة عادلة', 'The expected value is 0: the game is fair'))}</Label>
+            <Caption y={284} language={language} text={say('Epe luzera, sei jokaldiko: 2 aldiz +6 € eta 4 aldiz −3 €', 'A la larga, de cada seis jugadas: 2 veces +6 € y 4 veces −3 €', 'على المدى الطويل، من كل ست جولات: مرتان +6 € وأربع مرات −3 €', 'In the long run, out of every six plays: 2 times +€6 and 4 times −€3')} size={14} />
         </Figure>
     )
 }

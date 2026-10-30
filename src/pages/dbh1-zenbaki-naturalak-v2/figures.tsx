@@ -21,6 +21,7 @@ const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language,
 const placeNames: Record<UnitLanguage, string[]> = {
     eu: ['unitateak', 'hamarrekoak', 'ehunekoak', 'milakoak', 'hamar milakoak', 'ehun milakoak', 'milioiak'],
     es: ['unidades', 'decenas', 'centenas', 'unidades de millar', 'decenas de millar', 'centenas de millar', 'unidades de millón'],
+    en: ['units', 'tens', 'hundreds', 'thousands', 'ten thousands', 'hundred thousands', 'millions'],
     ar: ['آحاد', 'عشرات', 'مئات', 'آلاف', 'عشرات الآلاف', 'مئات الآلاف', 'ملايين']
 }
 
@@ -39,7 +40,7 @@ export function PlaceValueFigure({ language }: { language: UnitLanguage }) {
     const names = placeNames[language]
     const value = Number(digits[highlight]) * 10 ** (digits.length - 1 - highlight)
     return (
-        <svg viewBox="0 0 720 250" role="img" aria-label={pick(language, { eu: 'Posizio-taula', es: 'Tabla de posiciones', ar: 'جدول المراتب' })} className="naturals-figure">
+        <svg viewBox="0 0 720 250" role="img" aria-label={pick(language, { eu: 'Posizio-taula', es: 'Tabla de posiciones', en: 'Place-value table', ar: 'جدول المراتب' })} className="naturals-figure">
             {digits.map((digit, index) => {
                 const x = left + index * column
                 const [first, second] = twoLines(names[digits.length - 1 - index])
@@ -56,12 +57,13 @@ export function PlaceValueFigure({ language }: { language: UnitLanguage }) {
                 )
             })}
             <path d={`M${left + highlight * column + (column - 6) / 2} 168 L${left + highlight * column + (column - 6) / 2} 190`} stroke={STAGE} strokeWidth={2.4} />
-            <text x={left + highlight * column + (column - 6) / 2} y={212} textAnchor="middle" fontSize={20} fontWeight={700} fill={STAGE}>{formatNatural(value)}</text>
+            <text x={left + highlight * column + (column - 6) / 2} y={212} textAnchor="middle" fontSize={20} fontWeight={700} fill={STAGE}>{formatNatural(value, language)}</text>
             <text x={360} y={242} textAnchor="middle" fontSize={15} fill={MUTED}>
                 {pick(language, {
-                    eu: `8.706.265 zenbakian, 7 zifrak ${formatNatural(value)} balio du`,
-                    es: `En 8.706.265, la cifra 7 vale ${formatNatural(value)}`,
-                    ar: `في العدد 8.706.265 قيمة الرقم 7 هي ${formatNatural(value)}`
+                    eu: `8.706.265 zenbakian, 7 zifrak ${formatNatural(value, language)} balio du`,
+                    es: `En 8.706.265, la cifra 7 vale ${formatNatural(value, language)}`,
+                    en: `In 8,706,265, the digit 7 is worth ${formatNatural(value, language)}`,
+                    ar: `في العدد 8.706.265 قيمة الرقم 7 هي ${formatNatural(value, language)}`
                 })}
             </text>
         </svg>
@@ -74,11 +76,12 @@ export function PeriodsFigure({ language }: { language: UnitLanguage }) {
     const labels: Record<UnitLanguage, string[]> = {
         eu: ['bilioiak', 'mila milioiak', 'milioiak', 'milakoak', 'unitateak'],
         es: ['billones', 'miles de millones', 'millones', 'millares', 'unidades'],
+        en: ['trillions', 'thousand millions', 'millions', 'thousands', 'units'],
         ar: ['تريليونات', 'مليارات', 'ملايين', 'آلاف', 'آحاد']
     }
     const width = 128
     return (
-        <svg viewBox="0 0 720 200" role="img" aria-label={pick(language, { eu: 'Hiruko taldeak', es: 'Grupos de tres cifras', ar: 'مجموعات من ثلاثة أرقام' })} className="naturals-figure">
+        <svg viewBox="0 0 720 200" role="img" aria-label={pick(language, { eu: 'Hiruko taldeak', es: 'Grupos de tres cifras', en: 'Groups of three digits', ar: 'مجموعات من ثلاثة أرقام' })} className="naturals-figure">
             {groups.map((group, index) => {
                 const x = 30 + index * (width + 4)
                 return (
@@ -93,6 +96,7 @@ export function PeriodsFigure({ language }: { language: UnitLanguage }) {
                 {pick(language, {
                     eu: '15 bilioi 350.000 milioi: hamabost bilioi hirurehun eta berrogeita hamar mila milioi',
                     es: '15 billones 350.000 millones: quince billones trescientos cincuenta mil millones',
+                    en: '15 trillion 350,000 million: fifteen trillion three hundred and fifty billion',
                     ar: '15 تريليونًا و350 مليارًا'
                 })}
             </text>
@@ -110,7 +114,7 @@ export function NumberLineJumpsFigure({ language }: { language: UnitLanguage }) 
     const lineY = 120
     const x = (index: number) => left + index * unit
     return (
-        <svg viewBox="0 0 720 200" role="img" aria-label={pick(language, { eu: '430etik 830era lau salto', es: 'Cuatro saltos de 430 a 830', ar: 'أربع قفزات من 430 إلى 830' })} className="naturals-figure">
+        <svg viewBox="0 0 720 200" role="img" aria-label={pick(language, { eu: '430etik 830era lau salto', es: 'Cuatro saltos de 430 a 830', en: 'Four jumps from 430 to 830', ar: 'أربع قفزات من 430 إلى 830' })} className="naturals-figure">
             <defs>
                 <marker id="naturals-jump" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
                     <path d="M0 0 L10 5 L0 10 z" fill={STAGE} />
@@ -133,7 +137,7 @@ export function NumberLineJumpsFigure({ language }: { language: UnitLanguage }) 
                 )
             })}
             <text x={360} y={190} textAnchor="middle" fontSize={15} fill={MUTED}>
-                {pick(language, { eu: '(830 − 430) : 4 = 100 → salto bakoitza 100 da', es: '(830 − 430) : 4 = 100 → cada salto vale 100', ar: '(830 − 430) : 4 = 100 ← كل قفزة تساوي 100' })}
+                {pick(language, { eu: '(830 − 430) : 4 = 100 → salto bakoitza 100 da', es: '(830 − 430) : 4 = 100 → cada salto vale 100', en: '(830 − 430) : 4 = 100 → each jump is worth 100', ar: '(830 − 430) : 4 = 100 ← كل قفزة تساوي 100' })}
             </text>
         </svg>
     )
@@ -144,19 +148,19 @@ export function RomanFigure({ language }: { language: UnitLanguage }) {
     const symbols: Array<[string, number]> = [['I', 1], ['V', 5], ['X', 10], ['L', 50], ['C', 100], ['D', 500], ['M', 1000]]
     const width = 86
     return (
-        <svg viewBox="0 0 720 200" role="img" aria-label={pick(language, { eu: 'Erromatar ikurrak', es: 'Símbolos romanos', ar: 'الرموز الرومانية' })} className="naturals-figure">
+        <svg viewBox="0 0 720 200" role="img" aria-label={pick(language, { eu: 'Erromatar ikurrak', es: 'Símbolos romanos', en: 'Roman numerals', ar: 'الرموز الرومانية' })} className="naturals-figure">
             {symbols.map(([symbol, value], index) => {
                 const x = 40 + index * (width + 8)
                 return (
                     <g key={symbol} transform={`rotate(${index % 2 === 0 ? -2 : 2} ${x + width / 2} 80)`}>
                         <rect x={x} y={30} width={width} height={104} rx={12} fill={index % 2 === 0 ? STAGE_TINT : PAPER} stroke={INK} strokeWidth={1.8} />
                         <text x={x + width / 2} y={86} textAnchor="middle" fontSize={40} fontWeight={700} fill={INK} fontFamily="Fraunces, serif">{symbol}</text>
-                        <text x={x + width / 2} y={120} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{formatNatural(value)}</text>
+                        <text x={x + width / 2} y={120} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{formatNatural(value, language)}</text>
                     </g>
                 )
             })}
             <text x={360} y={180} textAnchor="middle" fontSize={16} fill={MUTED}>
-                {pick(language, { eu: 'MMXXVI = 2.026     XC = 90     XIV = 14', es: 'MMXXVI = 2.026     XC = 90     XIV = 14', ar: 'MMXXVI = 2.026     XC = 90     XIV = 14' })}
+                {pick(language, { eu: 'MMXXVI = 2.026     XC = 90     XIV = 14', es: 'MMXXVI = 2.026     XC = 90     XIV = 14', en: 'MMXXVI = 2,026     XC = 90     XIV = 14', ar: 'MMXXVI = 2.026     XC = 90     XIV = 14' })}
             </text>
         </svg>
     )
@@ -172,7 +176,7 @@ export function RoundingFigure({ language }: { language: UnitLanguage }) {
     const x = (number: number) => left + ((number - from) / (to - from)) * (right - left)
     const lineY = 110
     return (
-        <svg viewBox="0 0 720 210" role="img" aria-label={pick(language, { eu: '14.823 milakoetara biribiltzea', es: 'Redondear 14.823 a los millares', ar: 'تقريب 14.823 إلى الآلاف' })} className="naturals-figure">
+        <svg viewBox="0 0 720 210" role="img" aria-label={pick(language, { eu: '14.823 milakoetara biribiltzea', es: 'Redondear 14.823 a los millares', en: 'Round 14,823 to the nearest thousand', ar: 'تقريب 14.823 إلى الآلاف' })} className="naturals-figure">
             <rect x={x(14500)} y={lineY - 34} width={right - x(14500)} height={68} rx={10} fill={STAGE_TINT} />
             <line x1={left - 20} x2={right + 20} y1={lineY} y2={lineY} stroke={INK} strokeWidth={2.4} />
             {Array.from({ length: 11 }, (_, index) => {
@@ -182,12 +186,12 @@ export function RoundingFigure({ language }: { language: UnitLanguage }) {
                 return (
                     <g key={number}>
                         <line x1={x(number)} x2={x(number)} y1={lineY - (main ? 12 : middle ? 10 : 6)} y2={lineY + (main ? 12 : middle ? 10 : 6)} stroke={INK} strokeWidth={main ? 2.6 : 1.4} strokeDasharray={middle ? '3 3' : undefined} />
-                        {(main || middle) && <text x={x(number)} y={lineY + 38} textAnchor="middle" fontSize={main ? 19 : 15} fontWeight={main ? 700 : 400} fill={main ? INK : MUTED}>{formatNatural(number)}</text>}
+                        {(main || middle) && <text x={x(number)} y={lineY + 38} textAnchor="middle" fontSize={main ? 19 : 15} fontWeight={main ? 700 : 400} fill={main ? INK : MUTED}>{formatNatural(number, language)}</text>}
                     </g>
                 )
             })}
             <circle cx={x(value)} cy={lineY} r={9} fill={STAGE} stroke={INK} strokeWidth={2} />
-            <text x={x(value)} y={lineY - 44} textAnchor="middle" fontSize={20} fontWeight={700} fill={STAGE}>{formatNatural(value)}</text>
+            <text x={x(value)} y={lineY - 44} textAnchor="middle" fontSize={20} fontWeight={700} fill={STAGE}>{formatNatural(value, language)}</text>
             <path d={`M${x(value) + 12} ${lineY - 18} Q ${(x(value) + x(to)) / 2} ${lineY - 40} ${x(to) - 6} ${lineY - 16}`} fill="none" stroke={STAGE} strokeWidth={2.2} markerEnd="url(#naturals-round)" />
             <defs>
                 <marker id="naturals-round" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
@@ -195,7 +199,7 @@ export function RoundingFigure({ language }: { language: UnitLanguage }) {
                 </marker>
             </defs>
             <text x={360} y={200} textAnchor="middle" fontSize={15} fill={MUTED}>
-                {pick(language, { eu: '14.500 baino gehiago da: 15.000ra biribiltzen da', es: 'Pasa de 14.500: se redondea a 15.000', ar: 'يتجاوز 14.500: نقرّبه إلى 15.000' })}
+                {pick(language, { eu: '14.500 baino gehiago da: 15.000ra biribiltzen da', es: 'Pasa de 14.500: se redondea a 15.000', en: 'It is over 14,500: it rounds up to 15,000', ar: 'يتجاوز 14.500: نقرّبه إلى 15.000' })}
             </text>
         </svg>
     )
@@ -210,7 +214,7 @@ export function DistributiveFigure({ language }: { language: UnitLanguage }) {
     const left = 150
     const top = 40
     return (
-        <svg viewBox="0 0 720 300" role="img" aria-label={pick(language, { eu: 'Banatze-propietatea laukizuzen batean', es: 'Propiedad distributiva en un rectángulo', ar: 'خاصية التوزيع في مستطيل' })} className="naturals-figure">
+        <svg viewBox="0 0 720 300" role="img" aria-label={pick(language, { eu: 'Banatze-propietatea laukizuzen batean', es: 'Propiedad distributiva en un rectángulo', en: 'Distributive property in a rectangle', ar: 'خاصية التوزيع في مستطيل' })} className="naturals-figure">
             {Array.from({ length: rows * (first + second) }, (_, index) => {
                 const column = index % (first + second)
                 const row = Math.floor(index / (first + second))
@@ -223,7 +227,7 @@ export function DistributiveFigure({ language }: { language: UnitLanguage }) {
             <text x={left + (first * cell) / 2} y={top + rows * cell + 30} textAnchor="middle" fontSize={18} fontWeight={700} fill={STAGE}>6 · 8 = 48</text>
             <text x={left + first * cell + 12 + (second * cell) / 2} y={top + rows * cell + 30} textAnchor="middle" fontSize={18} fontWeight={700} fill={SECOND}>6 · 2 = 12</text>
             <text x={360} y={288} textAnchor="middle" fontSize={16} fill={MUTED}>
-                {pick(language, { eu: '6 · (8 + 2) = 6 · 8 + 6 · 2 = 48 + 12 = 60 karratu', es: '6 · (8 + 2) = 6 · 8 + 6 · 2 = 48 + 12 = 60 cuadrados', ar: '6 · (8 + 2) = 6 · 8 + 6 · 2 = 48 + 12 = 60 مربعًا' })}
+                {pick(language, { eu: '6 · (8 + 2) = 6 · 8 + 6 · 2 = 48 + 12 = 60 karratu', es: '6 · (8 + 2) = 6 · 8 + 6 · 2 = 48 + 12 = 60 cuadrados', en: '6 · (8 + 2) = 6 · 8 + 6 · 2 = 48 + 12 = 60 squares', ar: '6 · (8 + 2) = 6 · 8 + 6 · 2 = 48 + 12 = 60 مربعًا' })}
             </text>
         </svg>
     )
@@ -236,7 +240,7 @@ export function DivisionFigure({ language }: { language: UnitLanguage }) {
     const remainder = 2
     const groupWidth = 150
     return (
-        <svg viewBox="0 0 720 220" role="img" aria-label={pick(language, { eu: '17 fitxa 5eko taldetan', es: '17 fichas en grupos de 5', ar: '17 قطعة في مجموعات من 5' })} className="naturals-figure">
+        <svg viewBox="0 0 720 220" role="img" aria-label={pick(language, { eu: '17 fitxa 5eko taldetan', es: '17 fichas en grupos de 5', en: '17 counters in groups of 5', ar: '17 قطعة في مجموعات من 5' })} className="naturals-figure">
             {Array.from({ length: quotient }, (_, group) => {
                 const x = 40 + group * (groupWidth + 20)
                 return (
@@ -252,10 +256,10 @@ export function DivisionFigure({ language }: { language: UnitLanguage }) {
                 <circle key={index} cx={590 + index * 44} cy={85} r={14} fill={SECOND} stroke={INK} strokeWidth={1.6} />
             ))}
             <text x={40 + (quotient * (groupWidth + 20) - 20) / 2} y={160} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>
-                {pick(language, { eu: '3 talde (zatidura)', es: '3 grupos (cociente)', ar: '3 مجموعات (خارج القسمة)' })}
+                {pick(language, { eu: '3 talde (zatidura)', es: '3 grupos (cociente)', en: '3 groups (quotient)', ar: '3 مجموعات (خارج القسمة)' })}
             </text>
             <text x={612} y={160} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>
-                {pick(language, { eu: '2 (hondarra)', es: '2 (resto)', ar: '2 (الباقي)' })}
+                {pick(language, { eu: '2 (hondarra)', es: '2 (resto)', en: '2 (remainder)', ar: '2 (الباقي)' })}
             </text>
             <text x={360} y={204} textAnchor="middle" fontSize={17} fill={MUTED}>17 = 5 · 3 + 2     (2 &lt; 5)</text>
         </svg>
@@ -288,12 +292,12 @@ export function SemaphoreFigure({ language }: { language: UnitLanguage }) {
         { color: GREEN, text: '4 + 3 = 7' }
     ]
     const legend: Array<{ color: string; label: LocalizedText }> = [
-        { color: RED, label: { eu: 'parentesiak', es: 'paréntesis', ar: 'الأقواس' } },
-        { color: YELLOW, label: { eu: '· eta :', es: '· y :', ar: '· و :' } },
-        { color: GREEN, label: { eu: '+ eta −', es: '+ y −', ar: '+ و −' } }
+        { color: RED, label: { eu: 'parentesiak', es: 'paréntesis', en: 'brackets', ar: 'الأقواس' } },
+        { color: YELLOW, label: { eu: '· eta :', es: '· y :', en: '· and :', ar: '· و :' } },
+        { color: GREEN, label: { eu: '+ eta −', es: '+ y −', en: '+ and −', ar: '+ و −' } }
     ]
     return (
-        <svg viewBox="0 0 720 300" role="img" aria-label={pick(language, { eu: 'Semaforoa eragiketa konbinatuetan', es: 'El semáforo en las operaciones combinadas', ar: 'إشارة المرور في العمليات المركبة' })} className="naturals-figure">
+        <svg viewBox="0 0 720 300" role="img" aria-label={pick(language, { eu: 'Semaforoa eragiketa konbinatuetan', es: 'El semáforo en las operaciones combinadas', en: 'The traffic light in combined operations', ar: 'إشارة المرور في العمليات المركبة' })} className="naturals-figure">
             {placed.map((token, index) => (
                 <g key={index}>
                     <text x={token.center} y={60} textAnchor="middle" fontSize={32} fontWeight={700} fill={INK} fontFamily="Fraunces, serif">{token.text}</text>
@@ -329,6 +333,11 @@ export function DpeFigure({ language }: { language: UnitLanguage }) {
             { letter: 'P', title: 'Procedimiento', lines: ['27 · 12 · 7 = 2.268'], color: '#e0a100' },
             { letter: 'R', title: 'Respuesta', lines: ['El edificio tiene', '2.268 ventanas en total.'], color: '#267b53' }
         ],
+        en: [
+            { letter: 'D', title: 'Data', lines: ['27 floors', '12 flats per floor', '7 windows per flat'], color: '#2f6fdb' },
+            { letter: 'P', title: 'Procedure', lines: ['27 · 12 · 7 = 2,268'], color: '#e0a100' },
+            { letter: 'R', title: 'Answer', lines: ['The building has', '2,268 windows in total.'], color: '#267b53' }
+        ],
         ar: [
             { letter: '١', title: 'المعطيات', lines: ['27 طابقًا', '12 شقة في كل طابق', '7 نوافذ في كل شقة'], color: '#2f6fdb' },
             { letter: '٢', title: 'الطريقة', lines: ['27 · 12 · 7 = 2.268'], color: '#e0a100' },
@@ -337,7 +346,7 @@ export function DpeFigure({ language }: { language: UnitLanguage }) {
     }[language]
     const width = 206
     return (
-        <svg viewBox="0 0 720 230" role="img" aria-label={pick(language, { eu: 'Datuak, prozedura eta erantzuna', es: 'Datos, procedimiento y respuesta', ar: 'المعطيات والطريقة والجواب' })} className="naturals-figure">
+        <svg viewBox="0 0 720 230" role="img" aria-label={pick(language, { eu: 'Datuak, prozedura eta erantzuna', es: 'Datos, procedimiento y respuesta', en: 'Data, procedure and answer', ar: 'المعطيات والطريقة والجواب' })} className="naturals-figure">
             {cards.map((card, index) => {
                 const x = 30 + index * (width + 21)
                 return (
@@ -384,7 +393,7 @@ export function PowerFigure({ language }: { language: UnitLanguage }) {
         }
     }
     return (
-        <svg viewBox="0 0 720 260" role="img" aria-label={pick(language, { eu: '3 karratura eta 3 kubora', es: '3 al cuadrado y 3 al cubo', ar: 'مربع 3 ومكعب 3' })} className="naturals-figure">
+        <svg viewBox="0 0 720 260" role="img" aria-label={pick(language, { eu: '3 karratura eta 3 kubora', es: '3 al cuadrado y 3 al cubo', en: '3 squared and 3 cubed', ar: 'مربع 3 ومكعب 3' })} className="naturals-figure">
             {Array.from({ length: 9 }, (_, index) => (
                 <rect key={index} x={squareLeft + (index % 3) * cell} y={top + Math.floor(index / 3) * cell} width={cell} height={cell} fill={STAGE_TINT} stroke={INK} strokeWidth={1.4} />
             ))}
@@ -392,7 +401,7 @@ export function PowerFigure({ language }: { language: UnitLanguage }) {
             <text x={squareLeft + 1.5 * cell} y={top + 3 * cell + 44} textAnchor="middle" fontSize={24} fontWeight={700} fill={INK} fontFamily="Fraunces, serif">3² = 3 · 3 = 9</text>
             <text x={cubeLeft + 1.5 * cell + depth / 2} y={top + 3 * cell + 44} textAnchor="middle" fontSize={24} fontWeight={700} fill={INK} fontFamily="Fraunces, serif">3³ = 3 · 3 · 3 = 27</text>
             <text x={360} y={250} textAnchor="middle" fontSize={15} fill={MUTED}>
-                {pick(language, { eu: 'Karratua: azalera. Kuboa: bolumena.', es: 'Cuadrado: área. Cubo: volumen.', ar: 'المربع: مساحة. المكعب: حجم.' })}
+                {pick(language, { eu: 'Karratua: azalera. Kuboa: bolumena.', es: 'Cuadrado: área. Cubo: volumen.', en: 'Square: area. Cube: volume.', ar: 'المربع: مساحة. المكعب: حجم.' })}
             </text>
         </svg>
     )

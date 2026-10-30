@@ -19,6 +19,9 @@ import './Sales.css'
 
 const game = games.find((item) => item.id === 'sales')!
 
+/** Money on the price tags: "12 €" in Basque, Spanish and Arabic, "€12" in English */
+const euro = (language: string, amount: number | string) => (language === 'en' ? `€${amount}` : `${amount} €`)
+
 export function SalesGame({ language, records, onResult, onExit }: GameProps) {
     const l = useGameText(language)
     const [phase, setPhase] = useState<'pick' | 'playing' | 'finished'>('pick')
@@ -63,12 +66,12 @@ export function SalesGame({ language, records, onResult, onExit }: GameProps) {
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${record.score} / ${SALES_ROUNDS}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${record.score} / ${SALES_ROUNDS}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: `${SALES_ROUNDS} erosketa maila bakoitzean. Begiratu etiketa eta aukeratu erantzuna.`, es: `${SALES_ROUNDS} compras por nivel. Mira la etiqueta y elige la respuesta.`, ar: `${SALES_ROUNDS} مشتريات في كل مستوى. انظر إلى البطاقة واختر الإجابة.` })}</li>
-                        <li>{l({ eu: 'Erantzun ondoren, prezioa barra batean ikusiko duzu: zer ordaintzen duzun eta zer aurrezten duzun.', es: 'Después de responder verás el precio en una barra: lo que pagas y lo que ahorras.', ar: 'بعد الإجابة سترى السعر على شريط: ما تدفعه وما توفّره.' })}</li>
-                        <li>{l({ eu: '3 izar: dena ondo · 2: 4 asmatze · 1: 3.', es: '3 estrellas: todo bien · 2: 4 aciertos · 1: 3.', ar: '3 نجوم: كل الإجابات صحيحة · 2: أربع إجابات · 1: ثلاث.' })}</li>
+                        <li>{l({ eu: `${SALES_ROUNDS} erosketa maila bakoitzean. Begiratu etiketa eta aukeratu erantzuna.`, es: `${SALES_ROUNDS} compras por nivel. Mira la etiqueta y elige la respuesta.`, en: `${SALES_ROUNDS} purchases per level. Look at the price tag and choose the answer.`, ar: `${SALES_ROUNDS} مشتريات في كل مستوى. انظر إلى البطاقة واختر الإجابة.` })}</li>
+                        <li>{l({ eu: 'Erantzun ondoren, prezioa barra batean ikusiko duzu: zer ordaintzen duzun eta zer aurrezten duzun.', es: 'Después de responder verás el precio en una barra: lo que pagas y lo que ahorras.', en: 'After you answer, you will see the price on a bar: what you pay and what you save.', ar: 'بعد الإجابة سترى السعر على شريط: ما تدفعه وما توفّره.' })}</li>
+                        <li>{l({ eu: '3 izar: dena ondo · 2: 4 asmatze · 1: 3.', es: '3 estrellas: todo bien · 2: 4 aciertos · 1: 3.', en: '3 stars: everything right · 2: 4 correct · 1: 3.', ar: '3 نجوم: كل الإجابات صحيحة · 2: أربع إجابات · 1: ثلاث.' })}</li>
                     </ul>
                 )}
             />
@@ -83,8 +86,8 @@ export function SalesGame({ language, records, onResult, onExit }: GameProps) {
                     language={language}
                     stars={salesStars(right)}
                     title={`${right} / ${SALES_ROUNDS}`}
-                    subtitle={l({ eu: '3 izar: 6 · 2 izar: 4 · izar 1: 3', es: '3 estrellas: 6 · 2: 4 · 1: 3', ar: '3 نجوم: 6 · 2: 4 · 1: 3' })}
-                    stats={[{ label: l({ eu: 'Asmatuak', es: 'Aciertos', ar: 'إجابات صحيحة' }), value: `${right} / ${SALES_ROUNDS}` }]}
+                    subtitle={l({ eu: '3 izar: 6 · 2 izar: 4 · izar 1: 3', es: '3 estrellas: 6 · 2: 4 · 1: 3', en: '3 stars: 6 · 2: 4 · 1: 3', ar: '3 نجوم: 6 · 2: 4 · 1: 3' })}
+                    stats={[{ label: l({ eu: 'Asmatuak', es: 'Aciertos', en: 'Correct answers', ar: 'إجابات صحيحة' }), value: `${right} / ${SALES_ROUNDS}` }]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}
                     onLevels={() => setPhase('pick')}
@@ -104,21 +107,21 @@ export function SalesGame({ language, records, onResult, onExit }: GameProps) {
         <div className="sales-game" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span>{index + 1} / {SALES_ROUNDS}</span>
-                <span><strong>{right}</strong> {l({ eu: 'asmatze', es: right === 1 ? 'acierto' : 'aciertos', ar: 'إجابات صحيحة' })}</span>
+                <span><strong>{right}</strong> {l({ eu: 'asmatze', es: right === 1 ? 'acierto' : 'aciertos', en: right === 1 ? 'correct answer' : 'correct answers', ar: 'إجابات صحيحة' })}</span>
             </GameTopbar>
 
             <div className="sales-tag" aria-live="polite">
                 <span className="sales-tag-hole" aria-hidden="true" />
                 <strong className="sales-tag-product">{l(products[round.product])}</strong>
                 <span className="sales-tag-price" dir="ltr">
-                    {round.kind === 'original' && !answered ? '? €' : `${round.price} €`}
+                    {round.kind === 'original' && !answered ? euro(language, '?') : euro(language, round.price)}
                 </span>
-                {round.quantity > 1 && <span className="sales-tag-unit">{l({ eu: 'bakoitza', es: 'cada uno', ar: 'للقطعة الواحدة' })}</span>}
-                {round.quantity > 1 && <span className="sales-tag-line">{l({ eu: `Zenbat erosten dituzu: ${round.quantity}`, es: `Compras ${round.quantity}`, ar: `تشتري ${round.quantity}` })}</span>}
+                {round.quantity > 1 && <span className="sales-tag-unit">{l({ eu: 'bakoitza', es: 'cada uno', en: 'each', ar: 'للقطعة الواحدة' })}</span>}
+                {round.quantity > 1 && <span className="sales-tag-line">{l({ eu: `Zenbat erosten dituzu: ${round.quantity}`, es: `Compras ${round.quantity}`, en: `You buy ${round.quantity}`, ar: `تشتري ${round.quantity}` })}</span>}
                 {tagOffers.map((offer, offerIndex) => (
                     <span className="sales-tag-offer" key={offerIndex}><MathText text={l(offerLabel(offer))} /></span>
                 ))}
-                {round.paid !== null && <span className="sales-tag-line">{l({ eu: `Ordaindua: ${round.paid} €`, es: `Has pagado ${round.paid} €`, ar: `دفعتَ ${round.paid} €` })}</span>}
+                {round.paid !== null && <span className="sales-tag-line">{l({ eu: `Ordaindua: ${round.paid} €`, es: `Has pagado ${round.paid} €`, en: `You paid €${round.paid}`, ar: `دفعتَ ${round.paid} €` })}</span>}
             </div>
 
             <p className="sales-question">{l(round.question)}</p>
@@ -140,7 +143,7 @@ export function SalesGame({ language, records, onResult, onExit }: GameProps) {
             {answered && picked && (
                 <div className={`sales-explain ${picked.correct ? 'right' : 'wrong'}`} role="status">
                     <p>
-                        <strong>{picked.correct ? l({ eu: 'Zuzena!', es: '¡Correcto!', ar: 'صحيح!' }) : l({ eu: 'Ez da hori.', es: 'No es eso.', ar: 'ليس هذا.' })}</strong>
+                        <strong>{picked.correct ? l({ eu: 'Zuzena!', es: '¡Correcto!', en: 'Correct!', ar: 'صحيح!' }) : l({ eu: 'Ez da hori.', es: 'No es eso.', en: 'That’s not it.', ar: 'ليس هذا.' })}</strong>
                         {picked.error && <> {l(saleErrorTips[picked.error])}</>}
                     </p>
                     <SaleBars bars={round.bars} language={language} />
@@ -148,7 +151,7 @@ export function SalesGame({ language, records, onResult, onExit }: GameProps) {
                         {round.steps.map((step, stepIndex) => <li key={stepIndex}><MathText text={l(step)} /></li>)}
                     </ol>
                     <button type="button" className="fraction-v2-primary" onClick={next} ref={(node) => node?.focus({ preventScroll: true })}>
-                        {index + 1 >= SALES_ROUNDS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', ar: 'التالي' })}
+                        {index + 1 >= SALES_ROUNDS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', en: 'See the result', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', en: 'Next', ar: 'التالي' })}
                     </button>
                 </div>
             )}
@@ -163,24 +166,24 @@ function SaleBars({ bars, language }: { bars: SaleBar[]; language: GameProps['la
     return (
         <div className="sales-bars">
             <p className="sales-legend">
-                <span><i className="paid" aria-hidden="true" />{l({ eu: 'Ordaintzen duzu', es: 'Pagas', ar: 'تدفع' })}</span>
-                <span><i className="saved" aria-hidden="true" />{l({ eu: 'Aurrezten duzu', es: 'Ahorras', ar: 'توفّر' })}</span>
+                <span><i className="paid" aria-hidden="true" />{l({ eu: 'Ordaintzen duzu', es: 'Pagas', en: 'You pay', ar: 'تدفع' })}</span>
+                <span><i className="saved" aria-hidden="true" />{l({ eu: 'Aurrezten duzu', es: 'Ahorras', en: 'You save', ar: 'توفّر' })}</span>
             </p>
             {bars.map((bar, barIndex) => (
                 <figure className="sales-bar" key={barIndex} style={{ width: `${(bar.total / widest) * 100}%` }}>
                     {bar.offer && <figcaption><MathText text={l(offerLabel(bar.offer))} /></figcaption>}
-                    <div className="sales-bar-total" dir="ltr">{bar.total} €</div>
+                    <div className="sales-bar-total" dir="ltr">{euro(language, bar.total)}</div>
                     <div
                         className="sales-bar-row"
                         role="img"
-                        aria-label={l({ eu: `${bar.total} €: ${bar.paidValue} € ordaindu eta ${bar.savedValue} € aurreztu`, es: `${bar.total} €: pagas ${bar.paidValue} € y ahorras ${bar.savedValue} €`, ar: `${bar.total} €: تدفع ${bar.paidValue} € وتوفّر ${bar.savedValue} €` })}
+                        aria-label={l({ eu: `${bar.total} €: ${bar.paidValue} € ordaindu eta ${bar.savedValue} € aurreztu`, es: `${bar.total} €: pagas ${bar.paidValue} € y ahorras ${bar.savedValue} €`, en: `€${bar.total}: you pay €${bar.paidValue} and save €${bar.savedValue}`, ar: `${bar.total} €: تدفع ${bar.paidValue} € وتوفّر ${bar.savedValue} €` })}
                         dir="ltr"
                     >
                         {Array.from({ length: bar.parts }, (_, part) => <span className={part < bar.paid ? 'paid' : 'saved'} key={part} />)}
                     </div>
                     <div className="sales-bar-values" dir="ltr">
-                        <span className="paid" style={{ flexGrow: bar.paid }}>{bar.paidValue} €</span>
-                        {bar.savedValue > 0 && <span className="saved" style={{ flexGrow: bar.parts - bar.paid }}>{bar.savedValue} €</span>}
+                        <span className="paid" style={{ flexGrow: bar.paid }}>{euro(language, bar.paidValue)}</span>
+                        {bar.savedValue > 0 && <span className="saved" style={{ flexGrow: bar.parts - bar.paid }}>{euro(language, bar.savedValue)}</span>}
                     </div>
                 </figure>
             ))}

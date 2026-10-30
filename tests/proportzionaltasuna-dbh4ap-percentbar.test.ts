@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
@@ -74,9 +75,9 @@ test('proportzionaltasuna 4. DBH ap percent bar: challenges', () => {
     assert.ok(!percentBarChallenges[0].isSolved({ ...states[0], answer: '' }))
     for (const challenge of percentBarChallenges) assert.ok(!challenge.isSolved(initialPercentBarState), String(challenge.id))
     for (const challenge of percentBarChallenges) {
-        for (const language of ['eu', 'es', 'ar'] as const) {
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) {
             for (const text of [challenge.prompt[language], challenge.hint[language]]) {
-                for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formula, { throwOnError: true })
+                for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formulaFor(language, formula), { throwOnError: true })
                 if (language === 'eu') assert.ok(!/\d-?(an|ean|ra|era|tik|etik|ko|eko|rekin|ekin)\b/.test(text), text)
                 if (language === 'ar') assert.ok(!/\d,\d/.test(text) && !text.includes('{,}'), text)
             }
@@ -92,11 +93,11 @@ test('proportzionaltasuna 4. DBH ap percent bar: endless challenges', () => {
         assert.ok(!challenge.isSolved(initialPercentBarState), `${seed} starts solved`)
         assert.ok(!challenge.isSolved({ ...challenge.solution, answer: '' }), `${seed} solved without an answer`)
         prompts.add(challenge.prompt.es)
-        for (const language of ['eu', 'es', 'ar'] as const) {
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) {
             for (const text of [challenge.prompt[language], challenge.hint[language]]) {
                 assert.equal(text.split('$').length % 2, 1, text)
                 for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) {
-                    katex.renderToString(formula, { throwOnError: true })
+                    katex.renderToString(formulaFor(language, formula), { throwOnError: true })
                     assert.ok(!/[؀-ۿ]/.test(formula), formula)
                 }
                 if (language === 'eu') assert.ok(!/\d-?(an|ean|ra|era|tik|etik|ko|eko|rekin|ekin)\b/.test(text), text)

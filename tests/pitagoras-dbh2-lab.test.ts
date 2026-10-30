@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
@@ -48,16 +49,16 @@ test('pitagoras 2. DBH lab: tools, topics and challenge ids', () => {
         assert.ok(stages.includes(tool.stage), tool.id)
         assert.ok(topics.includes(tool.lessonTopic), tool.id)
         // The observation box is plain text
-        for (const language of ['eu', 'es', 'ar'] as const) assert.ok(!tool.observe[language].includes('$'), tool.id)
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) assert.ok(!tool.observe[language].includes('$'), tool.id)
     }
     for (const stage of stages) assert.ok(pythagorasLabTools.some((tool) => tool.stage === stage), stage)
     for (const topic of topics) assert.ok(pythagorasLabTools.some((tool) => tool.id === pythagorasLabToolForTopic[topic]), topic)
     assert.equal(new Set(pythagorasLabChallengeIds).size, pythagorasLabChallengeIds.length)
     for (const challenges of [squaresChallenges, classifyChallenges, solveChallenges, figureChallenges, circleChallenges, boxChallenges, gridChallenges]) {
         for (const challenge of challenges) {
-            for (const language of ['eu', 'es', 'ar'] as const) {
+            for (const language of ['eu', 'es', 'en', 'ar'] as const) {
                 for (const text of [challenge.prompt[language], challenge.hint[language]]) {
-                    for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formula, { throwOnError: true })
+                    for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formulaFor(language, formula), { throwOnError: true })
                 }
             }
         }

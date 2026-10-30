@@ -12,8 +12,8 @@ const statisticsRace: RaceRules<StatisticsRaceError> = {
     parTime: statisticsParTime,
     errorTip: (error) => statisticsRaceErrorTips[error ?? 'calculation'],
     pitPlaceholder: () => '1,5',
-    pitUnreadable: { eu: 'Idatzi zenbaki bat edo zatiki bat, adibidez 1,5 edo 3/10.', es: 'Escribe un número o una fracción, por ejemplo 1,5 o 3/10.', ar: 'اكتب عددًا أو كسرًا، مثل 1.5 أو 3/10.' },
-    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', ar: 'اكتبه عددًا.' }
+    pitUnreadable: { eu: 'Idatzi zenbaki bat edo zatiki bat, adibidez 1,5 edo 3/10.', es: 'Escribe un número o una fracción, por ejemplo 1,5 o 3/10.', en: 'Write a number or a fraction, for example 1.5 or 3/10.', ar: 'اكتب عددًا أو كسرًا، مثل 1.5 أو 3/10.' },
+    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', en: 'Write it as a number.', ar: 'اكتبه عددًا.' }
 }
 
 export function StatisticsRaceGame(props: GameProps) {

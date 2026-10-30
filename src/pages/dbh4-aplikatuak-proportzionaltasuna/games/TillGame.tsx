@@ -5,6 +5,7 @@ import { localLatex, nowMs, useGameText } from '../../../features/unit-v2/games/
 import type { GameProps } from '../../../features/unit-v2/games/GamesHub'
 import { createRandom, randomSeed } from '../../../features/unit-v2/games/random'
 import { normalizeDigits } from '../../../features/unit-v2/math/fraction'
+import { decimalSeparatorFor } from '../../../utils/numberFormat.ts'
 import { ProportionDbh4ApGameArt } from './GameArt'
 import { proportionDbh4ApGames } from './info'
 import { moneyText } from './numbers'
@@ -186,21 +187,22 @@ export function ProportionDbh4ApTillGame({ language, records, onResult, onExit }
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${record.score} / ${TILL_CUSTOMERS * 100}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${record.score} / ${TILL_CUSTOMERS * 100}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: 'Bezero bakoitzak etiketa bat dakar: idatzi kutxan zenbat kobratu, edo zenbat balio zuen lehen.', es: 'Cada cliente trae una etiqueta: escribe en la caja cuánto cobrar, o cuánto costaba antes.', ar: 'يأتي كل زبون ببطاقة سعر: اكتب في الصندوق المبلغ المطلوب، أو كم كان السعر قبل ذلك.' })}</li>
+                        <li>{l({ eu: 'Bezero bakoitzak etiketa bat dakar: idatzi kutxan zenbat kobratu, edo zenbat balio zuen lehen.', es: 'Cada cliente trae una etiqueta: escribe en la caja cuánto cobrar, o cuánto costaba antes.', en: 'Each customer has a price tag: write in the till how much to charge, or how much it cost before.', ar: 'يأتي كل زبون ببطاقة سعر: اكتب في الصندوق المبلغ المطلوب، أو كم كان السعر قبل ذلك.' })}</li>
                         <li>
                             <MathText
                                 inline
                                 text={l({
                                     eu: 'Biderkatu indizeaz aurrera joateko, eta zatitu atzera egiteko: $80\\cdot 0{,}85=68$ eta $68\\mathbin{:}0{,}85=80$.',
                                     es: 'Multiplica por el índice para ir hacia delante y divide para volver atrás: $80\\cdot 0{,}85=68$ y $68\\mathbin{:}0{,}85=80$.',
+                                    en: 'Multiply by the index to go forward, and divide to go back: $80\\cdot 0{,}85=68$ and $68\\mathbin{:}0{,}85=80$.',
                                     ar: 'اضرب في المؤشر للتقدّم واقسم عليه للرجوع: $80\\cdot 0.85=68$ و$68\\mathbin{:}0.85=80$.'
                                 })}
                             />
                         </li>
-                        <li>{l({ eu: `${TILL_CUSTOMERS} bezero. Zenbat eta azkarrago, orduan eta puntu gehiago (100 arte). Bi saiakera bezero bakoitzeko.`, es: `${TILL_CUSTOMERS} clientes. Cuanto antes contestes, más puntos (hasta 100). Dos intentos por cliente.`, ar: `${TILL_CUSTOMERS} زبائن. كلما أجبت أسرع نلت نقاطًا أكثر (حتى 100). محاولتان لكل زبون.` })}</li>
+                        <li>{l({ eu: `${TILL_CUSTOMERS} bezero. Zenbat eta azkarrago, orduan eta puntu gehiago (100 arte). Bi saiakera bezero bakoitzeko.`, es: `${TILL_CUSTOMERS} clientes. Cuanto antes contestes, más puntos (hasta 100). Dos intentos por cliente.`, en: `${TILL_CUSTOMERS} customers. The sooner you answer, the more points (up to 100). Two attempts per customer.`, ar: `${TILL_CUSTOMERS} زبائن. كلما أجبت أسرع نلت نقاطًا أكثر (حتى 100). محاولتان لكل زبون.` })}</li>
                     </ul>
                 )}
             />
@@ -215,10 +217,10 @@ export function ProportionDbh4ApTillGame({ language, records, onResult, onExit }
                     language={language}
                     stars={tillStars(total)}
                     title={`${total} / ${TILL_CUSTOMERS * 100}`}
-                    subtitle={l({ eu: '3 izar: 600 puntu · 2 izar: 450 · izar 1: 300', es: '3 estrellas: 600 puntos · 2: 450 · 1: 300', ar: '3 نجوم: 600 نقطة · 2: 450 · 1: 300' })}
+                    subtitle={l({ eu: '3 izar: 600 puntu · 2 izar: 450 · izar 1: 300', es: '3 estrellas: 600 puntos · 2: 450 · 1: 300', en: '3 stars: 600 points · 2: 450 · 1: 300', ar: '3 نجوم: 600 نقطة · 2: 450 · 1: 300' })}
                     stats={[
-                        { label: l({ eu: 'Lehenengoan', es: 'A la primera', ar: 'من المحاولة الأولى' }), value: `${served.filter((item) => item.tries === 1).length} / ${TILL_CUSTOMERS}` },
-                        { label: l({ eu: 'Ondo kobratuta', es: 'Bien cobrados', ar: 'أجوبة صحيحة' }), value: `${served.filter((item) => item.tries > 0).length} / ${TILL_CUSTOMERS}` }
+                        { label: l({ eu: 'Lehenengoan', es: 'A la primera', en: 'First attempt', ar: 'من المحاولة الأولى' }), value: `${served.filter((item) => item.tries === 1).length} / ${TILL_CUSTOMERS}` },
+                        { label: l({ eu: 'Ondo kobratuta', es: 'Bien cobrados', en: 'Correctly charged', ar: 'أجوبة صحيحة' }), value: `${served.filter((item) => item.tries > 0).length} / ${TILL_CUSTOMERS}` }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}
@@ -231,7 +233,7 @@ export function ProportionDbh4ApTillGame({ language, records, onResult, onExit }
     // Only while a level is being set up
     if (!round) return <></>
     const back = isBack(round.kind)
-    const display = language === 'ar' ? typed.replace(',', '.') : typed
+    const display = typed.replace(',', language === 'ar' ? '.' : decimalSeparatorFor(language))
     const lastMiss = misses.at(-1) ?? null
     const slip = lastMiss !== null ? tillSlip(round, lastMiss) : null
     const mood = left > 0.5 ? 'calm' : left > 0.2 ? 'hurry' : 'late'
@@ -240,14 +242,14 @@ export function ProportionDbh4ApTillGame({ language, records, onResult, onExit }
         <div className="till-game" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span>{index + 1} / {TILL_CUSTOMERS}</span>
-                <span><strong>{total}</strong> {l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}</span>
+                <span><strong>{total}</strong> {l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}</span>
             </GameTopbar>
 
             <div className="till-scene">
                 <Customer left={left} outcome={outcome} />
                 <p className="till-bubble">{l(tillQuestion(round))}</p>
             </div>
-            <div className="till-patience" role="progressbar" aria-label={l({ eu: 'Bezeroaren pazientzia', es: 'Paciencia del cliente', ar: 'صبر الزبون' })} aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(left * 100)}>
+            <div className="till-patience" role="progressbar" aria-label={l({ eu: 'Bezeroaren pazientzia', es: 'Paciencia del cliente', en: 'Customer\'s patience', ar: 'صبر الزبون' })} aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(left * 100)}>
                 <span data-mood={mood} style={{ width: `${left * 100}%` }} />
             </div>
 
@@ -270,11 +272,11 @@ export function ProportionDbh4ApTillGame({ language, records, onResult, onExit }
                     {lastMiss !== null && (
                         <div className="till-retry" role="status">
                             <p>
-                                {l({ eu: 'Bezeroak kexa egin du: hori ez da', es: 'El cliente protesta: eso no es', ar: 'يعترض الزبون: ليس هذا' })}
+                                {l({ eu: 'Bezeroak kexa egin du: hori ez da', es: 'El cliente protesta: eso no es', en: 'The customer complains: that is not', ar: 'يعترض الزبون: ليس هذا' })}
                                 {' ('}<bdi dir="ltr">{`${moneyText(lastMiss / 100, language)}\u00a0€`}</bdi>{').'}
                             </p>
                             {slip && <p className="till-slip">{l(tillSlipText(round, slip))}</p>}
-                            <p>{l({ eu: 'Saiakera bat geratzen zaizu.', es: 'Te queda un intento.', ar: 'بقيت لك محاولة واحدة.' })}</p>
+                            <p>{l({ eu: 'Saiakera bat geratzen zaizu.', es: 'Te queda un intento.', en: 'You have one attempt left.', ar: 'بقيت لك محاولة واحدة.' })}</p>
                         </div>
                     )}
                     <div className="till-register" dir="ltr">
@@ -285,15 +287,15 @@ export function ProportionDbh4ApTillGame({ language, records, onResult, onExit }
                                     type="button"
                                     key={key}
                                     className={`till-key${key === 'del' ? ' del' : ''}`}
-                                    aria-label={key === 'del' ? l({ eu: 'Ezabatu', es: 'Borrar', ar: 'احذف' }) : key === 'sep' ? l({ eu: 'Koma', es: 'Coma', ar: 'فاصلة عشرية' }) : key}
+                                    aria-label={key === 'del' ? l({ eu: 'Ezabatu', es: 'Borrar', en: 'Delete', ar: 'احذف' }) : key === 'sep' ? l({ eu: 'Koma', es: 'Coma', en: 'Decimal point', ar: 'فاصلة عشرية' }) : key}
                                     onClick={() => press(key)}
                                 >
-                                    {key === 'del' ? '⌫' : key === 'sep' ? (language === 'ar' ? '.' : ',') : key}
+                                    {key === 'del' ? '⌫' : key === 'sep' ? (language === 'ar' ? '.' : decimalSeparatorFor(language)) : key}
                                 </button>
                             ))}
                         </div>
                         <button type="button" className="fraction-v2-primary till-charge" disabled={readCents(typed) === null} onClick={charge}>
-                            {back ? l({ eu: 'Erantzun', es: 'Responder', ar: 'أجب' }) : l({ eu: 'Kobratu', es: 'Cobrar', ar: 'احسب المبلغ' })}
+                            {back ? l({ eu: 'Erantzun', es: 'Responder', en: 'Answer', ar: 'أجب' }) : l({ eu: 'Kobratu', es: 'Cobrar', en: 'Charge', ar: 'احسب المبلغ' })}
                         </button>
                     </div>
                 </>
@@ -303,10 +305,10 @@ export function ProportionDbh4ApTillGame({ language, records, onResult, onExit }
                 <div className={`till-feedback ${outcome === 'right' ? 'right' : 'wrong'}`} role="status">
                     <p className="till-verdict">
                         {outcome === 'right'
-                            ? back ? l({ eu: 'Zehatz-mehatz!', es: '¡Exacto!', ar: 'بالضبط!' }) : l({ eu: 'Ondo kobratuta!', es: '¡Bien cobrado!', ar: 'أحسنت، المبلغ صحيح!' })
+                            ? back ? l({ eu: 'Zehatz-mehatz!', es: '¡Exacto!', en: 'Exactly!', ar: 'بالضبط!' }) : l({ eu: 'Ondo kobratuta!', es: '¡Bien cobrado!', en: 'Charged correctly!', ar: 'أحسنت، المبلغ صحيح!' })
                             : outcome === 'timeout'
-                                ? l({ eu: 'Pazientzia agortu zaio, eta joan egin da!', es: '¡Se le acabó la paciencia y se ha ido!', ar: 'نفد صبر الزبون وغادر!' })
-                                : l({ eu: 'Ezta hori ere. Bezeroa joan egin da.', es: 'Tampoco. El cliente se ha ido.', ar: 'ولا هذا. غادر الزبون.' })}
+                                ? l({ eu: 'Pazientzia agortu zaio, eta joan egin da!', es: '¡Se le acabó la paciencia y se ha ido!', en: 'Their patience ran out and they left!', ar: 'نفد صبر الزبون وغادر!' })
+                                : l({ eu: 'Ezta hori ere. Bezeroa joan egin da.', es: 'Tampoco. El cliente se ha ido.', en: 'Not that either. The customer has left.', ar: 'ولا هذا. غادر الزبون.' })}
                     </p>
                     {outcome !== 'right' && <p>{l(tillAnswerText(round))}</p>}
                     {outcome === 'wrong' && slip && <p className="till-slip">{l(tillSlipText(round, slip))}</p>}
@@ -318,13 +320,13 @@ export function ProportionDbh4ApTillGame({ language, records, onResult, onExit }
                             </li>
                         ))}
                     </ol>
-                    <p className="till-points"><bdi dir="ltr">+{served[index]?.points ?? 0}</bdi> {l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}</p>
+                    <p className="till-points"><bdi dir="ltr">+{served[index]?.points ?? 0}</bdi> {l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}</p>
                 </div>
             )}
 
             {outcome !== null && (
                 <button type="button" className="fraction-v2-primary till-next" onClick={next} ref={(node) => node?.focus({ preventScroll: true })}>
-                    {index + 1 >= TILL_CUSTOMERS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengo bezeroa', es: 'Siguiente cliente', ar: 'الزبون التالي' })}
+                    {index + 1 >= TILL_CUSTOMERS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', en: 'See the result', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengo bezeroa', es: 'Siguiente cliente', en: 'Next customer', ar: 'الزبون التالي' })}
                 </button>
             )}
         </div>

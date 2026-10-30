@@ -45,8 +45,8 @@ export type PolynomialsRaceError =
 export type PolynomialsRaceQuestion = RaceQuestion<PolynomialsRaceError> & { meta: Record<string, number> }
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => ({ eu: `$${latex}$`, es: `$${latex}$`, ar: `$${latex}$` })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => ({ eu: `$${latex}$`, es: `$${latex}$`, en: `$${latex}$`, ar: `$${latex}$` })
 const math = (latex: string) => `$${latex}$`
 /** A number inside a sum: +3, −3 */
 const plus = (value: number) => (value < 0 ? `-${-value}` : `+${value}`)
@@ -96,10 +96,10 @@ function build(circuit: number, kind: string, prompt: LocalizedText, choices: Ra
 const coefficientOf = (formula: string, term: string) => say(
     `${math(formula)} garatzean, zein da ${math(term)} gaiaren koefizientea?`,
     `Al desarrollar ${math(formula)}, ¿cuál es el coeficiente de ${math(term)}?`,
-    `عند نشر ${math(formula)} ما معامل ${math(term)}؟`
+    `عند نشر ${math(formula)} ما معامل ${math(term)}؟`, `When you expand ${math(formula)}, what is the coefficient of ${math(term)}?`
 )
-const howMuch = (formula: string, letter: string) => say(`${math(formula)}. Zenbat da ${math(letter)}?`, `${math(formula)}. ¿Cuánto vale ${math(letter)}?`, `${math(formula)}. كم تساوي ${math(letter)}؟`)
-const remainderPrompt = (division: string) => say(`Zein da ${math(division)} zatiketaren hondarra?`, `¿Cuál es el resto de ${math(division)}?`, `ما باقي ${math(division)}؟`)
+const howMuch = (formula: string, letter: string) => say(`${math(formula)}. Zenbat da ${math(letter)}?`, `${math(formula)}. ¿Cuánto vale ${math(letter)}?`, `${math(formula)}. كم تساوي ${math(letter)}؟`, `${math(formula)}. What is the value of ${math(letter)}?`)
+const remainderPrompt = (division: string) => say(`Zein da ${math(division)} zatiketaren hondarra?`, `¿Cuál es el resto de ${math(division)}?`, `ما باقي ${math(division)}؟`, `What is the remainder of ${math(division)}?`)
 const division = (p: number[], a: number) => `(${polyLatex(p)})\\mathbin{:}(${binomialLatex(a)})`
 
 /* ---------- Circuit 0: operations ---------- */
@@ -140,7 +140,7 @@ function valueQuestion(random: Random, tier: Tier): PolynomialsRaceQuestion | nu
     const a = nonZero(random, tier === 0 ? -2 : -3, tier === 0 ? 2 : 3)
     const value = evaluate(p, a)
     const choices = options(random, fraction(value), [whole(evaluate(p, -a), 'sign'), whole(evaluate(p.map((c) => Math.abs(c)), Math.abs(a)), 'sign'), ...near(value)])
-    return choices && build(0, 'value', say(`$P(x)=${polyLatex(p)}$. Kalkulatu $P(${a})$.`, `$P(x)=${polyLatex(p)}$. Calcula $P(${a})$.`, `$P(x)=${polyLatex(p)}$. احسب $P(${a})$.`), choices, fraction(value), same(`P(${a})=${value}`), { p0: p[0], p1: p[1], p2: p[2], p3: p[3], a })
+    return choices && build(0, 'value', say(`$P(x)=${polyLatex(p)}$. Kalkulatu $P(${a})$.`, `$P(x)=${polyLatex(p)}$. Calcula $P(${a})$.`, `$P(x)=${polyLatex(p)}$. احسب $P(${a})$.`, `$P(x)=${polyLatex(p)}$. Work out $P(${a})$.`), choices, fraction(value), same(`P(${a})=${value}`), { p0: p[0], p1: p[1], p2: p[2], p3: p[3], a })
 }
 
 /* ---------- Circuit 1: division ---------- */
@@ -165,7 +165,7 @@ function quotientQuestion(random: Random, tier: Tier): PolynomialsRaceQuestion |
     return choices && build(1, 'quotient', say(
         `Ruffiniz, ${math(division(p, a))}. Zein da zatiduraren gai askea?`,
         `Con Ruffini, ${math(division(p, a))}. ¿Cuál es el término independiente del cociente?`,
-        `بروفيني، ${math(division(p, a))}. ما الحد الثابت لخارج القسمة؟`
+        `بروفيني، ${math(division(p, a))}. ما الحد الثابت لخارج القسمة؟`, `Using Ruffini, ${math(division(p, a))}. What is the constant term of the quotient?`
     ), choices, fraction(value), same(`C(x)=${polyLatex(quotient)}`), { p0: p[0], p1: p[1], p2: p[2], p3: p[3], a })
 }
 
@@ -182,7 +182,7 @@ function parameterQuestion(random: Random, tier: Tier): PolynomialsRaceQuestion 
     return choices && build(1, 'parameter', say(
         `${math(p)} zatigarria da ${math(binomialLatex(a))} binomioaz. Zenbat da ${math('m')}?`,
         `${math(p)} es divisible entre ${math(binomialLatex(a))}. ¿Cuánto vale ${math('m')}?`,
-        `${math(p)} تقبل القسمة على ${math(binomialLatex(a))}. كم تساوي ${math('m')}؟`
+        `${math(p)} تقبل القسمة على ${math(binomialLatex(a))}. كم تساوي ${math('m')}؟`, `${math(p)} is divisible by ${math(binomialLatex(a))}. What is ${math('m')}?`
     ), choices, fraction(m), same(`P(${a})=0\\ \\to\\ m=${m}`), { a, b, d })
 }
 
@@ -196,7 +196,7 @@ function degreeQuestion(random: Random): PolynomialsRaceQuestion | null {
     return choices && build(1, 'degree', say(
         `Zein da ${math(`(${dividend})\\mathbin{:}(${divisor})`)} zatiketaren zatiduraren maila?`,
         `¿Cuál es el grado del cociente de ${math(`(${dividend})\\mathbin{:}(${divisor})`)}?`,
-        `ما درجة خارج قسمة ${math(`(${dividend})\\mathbin{:}(${divisor})`)}؟`
+        `ما درجة خارج قسمة ${math(`(${dividend})\\mathbin{:}(${divisor})`)}؟`, `What is the degree of the quotient of ${math(`(${dividend})\\mathbin{:}(${divisor})`)}?`
     ), choices, fraction(value), same(`${n}-${k}=${value}`), { n, k })
 }
 
@@ -213,7 +213,7 @@ function greatestRootQuestion(random: Random, tier: Tier): PolynomialsRaceQuesti
     return choices && build(2, 'greatest-root', say(
         `${math(polyLatex(p))} polinomioaren erro guztiak osoak dira. Zein da handiena?`,
         `Todas las raíces de ${math(polyLatex(p))} son enteras. ¿Cuál es la mayor?`,
-        `كل جذور ${math(polyLatex(p))} صحيحة. ما أكبرها؟`
+        `كل جذور ${math(polyLatex(p))} صحيحة. ما أكبرها؟`, `All the roots of ${math(polyLatex(p))} are integers. What is the largest one?`
     ), choices, fraction(top), same(roots.map((r) => `(${binomialLatex(r)})`).join('')), { r0: roots[0], r1: roots[1], r2: roots[2] ?? 99 })
 }
 
@@ -254,7 +254,7 @@ function lcmDegreeQuestion(random: Random): PolynomialsRaceQuestion | null {
     return choices && build(2, 'lcm-degree', say(
         `Zein da ${math(`P=${P}`)} eta ${math(`Q=${Q}`)} polinomioen m.k.t.-aren maila?`,
         `¿Cuál es el grado del m.c.m. de ${math(`P=${P}`)} y ${math(`Q=${Q}`)}?`,
-        `ما درجة المضاعف المشترك الأصغر لـ ${math(`P=${P}`)} و${math(`Q=${Q}`)}؟`
+        `ما درجة المضاعف المشترك الأصغر لـ ${math(`P=${P}`)} و${math(`Q=${Q}`)}؟`, `What is the degree of the LCM of ${math(`P=${P}`)} and ${math(`Q=${Q}`)}?`
     ), choices, fraction(value), same(`${power('x', Math.max(a, c))}${power(`(${binomialLatex(r)})`, b)}${power(`(${binomialLatex(s)})`, d)}`), { a, b, c, d })
 }
 
@@ -272,7 +272,7 @@ function fractionValueQuestion(random: Random, tier: Tier): PolynomialsRaceQuest
     return choices && build(3, 'fraction-value', say(
         `Kalkulatu ${math(`\\frac{x^{2}${a === 0 ? '' : plus(a)}}{x${plus(b)}}`)} zatikiaren balioa ${math(`x=${k}`)} denean.`,
         `Calcula el valor de ${math(`\\frac{x^{2}${a === 0 ? '' : plus(a)}}{x${plus(b)}}`)} para ${math(`x=${k}`)}.`,
-        `احسب قيمة ${math(`\\frac{x^{2}${a === 0 ? '' : plus(a)}}{x${plus(b)}}`)} عندما ${math(`x=${k}`)}.`
+        `احسب قيمة ${math(`\\frac{x^{2}${a === 0 ? '' : plus(a)}}{x${plus(b)}}`)} عندما ${math(`x=${k}`)}.`, `Work out the value of ${math(`\\frac{x^{2}${a === 0 ? '' : plus(a)}}{x${plus(b)}}`)} for ${math(`x=${k}`)}.`
     ), choices, answer, same(`\\frac{${bracket(k)}^{2}${a === 0 ? '' : plus(a)}}{${k}${plus(b)}}=${written(answer)}`), { a, b, k })
 }
 
@@ -286,7 +286,7 @@ function holeQuestion(random: Random): PolynomialsRaceQuestion | null {
     return choices && build(3, 'hole', say(
         `${math(`\\frac{x${plus(c)}}{${polyLatex(den)}}`)} zatikia ez dago x-ren bi baliotan. Zein da positiboa?`,
         `${math(`\\frac{x${plus(c)}}{${polyLatex(den)}}`)} no existe para dos valores de x. ¿Cuál es el positivo?`,
-        `${math(`\\frac{x${plus(c)}}{${polyLatex(den)}}`)} غير معرّف عند قيمتين لـ x. ما القيمة الموجبة؟`
+        `${math(`\\frac{x${plus(c)}}{${polyLatex(den)}}`)} غير معرّف عند قيمتين لـ x. ما القيمة الموجبة؟`, `${math(`\\frac{x${plus(c)}}{${polyLatex(den)}}`)} does not exist for two values of x. Which of the two values is positive?`
     ), choices, fraction(r), same(`${polyLatex(den)}=(${binomialLatex(r)})(${binomialLatex(s)})`), { r, s, c })
 }
 
@@ -301,7 +301,7 @@ function simplifyQuestion(random: Random, tier: Tier): PolynomialsRaceQuestion |
     return choices && build(3, 'simplify', say(
         `Sinplifikatu ${math(`\\frac{${polyLatex(numerator)}}{x${plus(a)}}`)} eta kalkulatu haren balioa ${math(`x=${k}`)} denean.`,
         `Simplifica ${math(`\\frac{${polyLatex(numerator)}}{x${plus(a)}}`)} y calcula su valor para ${math(`x=${k}`)}.`,
-        `بسّط ${math(`\\frac{${polyLatex(numerator)}}{x${plus(a)}}`)} واحسب قيمته عندما ${math(`x=${k}`)}.`
+        `بسّط ${math(`\\frac{${polyLatex(numerator)}}{x${plus(a)}}`)} واحسب قيمته عندما ${math(`x=${k}`)}.`, `Simplify ${math(`\\frac{${polyLatex(numerator)}}{x${plus(a)}}`)} and work out its value for ${math(`x=${k}`)}.`
     ), choices, fraction(value), same(`\\frac{(x${plus(a)})(x${plus(b)})}{x${plus(a)}}=x${plus(b)}`), { a, b, k })
 }
 
@@ -317,7 +317,7 @@ function equivalentQuestion(random: Random): PolynomialsRaceQuestion | null {
     return choices && build(3, 'equivalent', say(
         `${math(`\\frac{x${plus(a)}}{x${plus(b)}}=\\frac{x^{2}+kx${plus(a * c)}}{${polyLatex(den)}}`)}. Zenbat da ${math('k')}?`,
         `${math(`\\frac{x${plus(a)}}{x${plus(b)}}=\\frac{x^{2}+kx${plus(a * c)}}{${polyLatex(den)}}`)}. ¿Cuánto vale ${math('k')}?`,
-        `${math(`\\frac{x${plus(a)}}{x${plus(b)}}=\\frac{x^{2}+kx${plus(a * c)}}{${polyLatex(den)}}`)}. كم تساوي ${math('k')}؟`
+        `${math(`\\frac{x${plus(a)}}{x${plus(b)}}=\\frac{x^{2}+kx${plus(a * c)}}{${polyLatex(den)}}`)}. كم تساوي ${math('k')}؟`, `${math(`\\frac{x${plus(a)}}{x${plus(b)}}=\\frac{x^{2}+kx${plus(a * c)}}{${polyLatex(den)}}`)}. What is ${math('k')}?`
     ), choices, fraction(value), same(`(x${plus(a)})(x${plus(c)})=${polyLatex([1, a + c, a * c])}`), { a, b, c })
 }
 
@@ -334,7 +334,7 @@ function sumQuestion(random: Random, tier: Tier): PolynomialsRaceQuestion | null
     return choices && build(4, 'sum', say(
         `${math(`\\frac{${k1}}{x${plus(a)}}+\\frac{${k2}}{x${plus(b)}}=\\frac{${k1 + k2}x+c}{(x${plus(a)})(x${plus(b)})}`)}. Zenbat da ${math('c')}?`,
         `${math(`\\frac{${k1}}{x${plus(a)}}+\\frac{${k2}}{x${plus(b)}}=\\frac{${k1 + k2}x+c}{(x${plus(a)})(x${plus(b)})}`)}. ¿Cuánto vale ${math('c')}?`,
-        `${math(`\\frac{${k1}}{x${plus(a)}}+\\frac{${k2}}{x${plus(b)}}=\\frac{${k1 + k2}x+c}{(x${plus(a)})(x${plus(b)})}`)}. كم تساوي ${math('c')}؟`
+        `${math(`\\frac{${k1}}{x${plus(a)}}+\\frac{${k2}}{x${plus(b)}}=\\frac{${k1 + k2}x+c}{(x${plus(a)})(x${plus(b)})}`)}. كم تساوي ${math('c')}؟`, `${math(`\\frac{${k1}}{x${plus(a)}}+\\frac{${k2}}{x${plus(b)}}=\\frac{${k1 + k2}x+c}{(x${plus(a)})(x${plus(b)})}`)}. What is ${math('c')}?`
     ), choices, fraction(value), same(`${k1}\\cdot ${bracket(b)}+${k2}\\cdot ${bracket(a)}=${value}`), { k1, a, k2, b })
 }
 
@@ -364,7 +364,7 @@ function tapsQuestion(random: Random): PolynomialsRaceQuestion | null {
     return choices && build(4, 'taps', say(
         `Txorrota batek depositua ${a} minututan betetzen du, eta beste batek ${b} minututan. Zenbat minutu behar dituzte biek batera?`,
         `Un grifo llena un depósito en ${a} minutos y otro en ${b} minutos. ¿Cuántos minutos tardan los dos juntos?`,
-        `يملأ صنبور خزانًا في ${a} دقيقة وآخر في ${b} دقيقة. كم دقيقة يحتاجان معًا؟`
+        `يملأ صنبور خزانًا في ${a} دقيقة وآخر في ${b} دقيقة. كم دقيقة يحتاجان معًا؟`, `One tap fills a tank in ${a} minutes and another in ${b} minutes. How many minutes do the two of them take together?`
     ), choices, fraction(value), same(`\\frac{1}{${a}}+\\frac{1}{${b}}=\\frac{1}{${value}}`), { a, b })
 }
 
@@ -396,21 +396,21 @@ export function polynomialsParTime(circuit: number): number {
 }
 
 export const polynomialsRaceErrorTips: Record<PolynomialsRaceError, LocalizedText> = {
-    cross: say('Biderkatzean, gai bakoitza gai guztiez: x-ren gaia bi gurutze-biderkaduren batura da.', 'Al multiplicar, cada término por todos: el término en x es la suma de los dos productos cruzados.', 'في الضرب كل حد في كل الحدود: حد x هو مجموع الجداءين المتقاطعين.'),
-    'no-double': say('(a + b)² = a² + 2ab + b²: ez ahaztu bikoitza.', '(a + b)² = a² + 2ab + b²: no olvides el doble.', '(a + b)² = a² + 2ab + b²: لا تنسَ الضعف.'),
-    'no-power': say('Tartagliako zenbakia b-ren berreturaz biderkatzen da, ez b-z bakarrik.', 'El número de Tartaglia se multiplica por la potencia de b, no solo por b.', 'يُضرب عدد تارتاليا في قوة b لا في b وحدها.'),
-    row: say('Hartu errenkada egokia: (x + b)ⁿ → n. errenkada; xᵏ-ren aurrean b-ren berretzailea n − k da.', 'Toma la fila correcta: (x + b)ⁿ → fila n; delante de xᵏ, b va elevado a n − k.', 'خذ الصف الصحيح: (x + b)ⁿ ← الصف n؛ وأمام xᵏ يكون أس b هو n − k.'),
-    sign: say('Kontuz zeinuarekin: negatiboak parentesi artean.', 'Cuidado con el signo: los negativos, entre paréntesis.', 'انتبه للإشارة: السالب بين قوسين.'),
-    'binomial-sign': say('x − a binomioan erroa a da; x + a bada, −a.', 'En x − a la raíz es a; si es x + a, es −a.', 'في x − a يكون الجذر a؛ وإذا كان x + a فهو −a.'),
-    remainder: say('Azken zenbakia hondarra da; zatiduraren gai askea haren aurrekoa da.', 'El último número es el resto; el término independiente del cociente es el anterior.', 'العدد الأخير هو الباقي؛ والحد الثابت لخارج القسمة هو الذي قبله.'),
-    degree: say('Zatiduraren maila = zatikizunarena − zatitzailearena. M.k.t.: faktore bakoitza berretzaile handienarekin.', 'Grado del cociente = el del dividendo − el del divisor. M.c.m.: cada factor con su mayor exponente.', 'درجة خارج القسمة = درجة المقسوم − درجة المقسوم عليه. المضاعف: كل عامل بأكبر أس.'),
-    constant: say('Gai askea ez da erroa: erroak haren zatitzaileen artean daude.', 'El término independiente no es la raíz: las raíces están entre sus divisores.', 'الحد الثابت ليس الجذر: الجذور بين قواسمه.'),
-    product: say('Ez biderkatu dena: m.k.t.-an faktore komunak behin bakarrik doaz.', 'No lo multipliques todo: en el m.c.m. los factores comunes van una sola vez.', 'لا تضرب كل شيء: في المضاعف تُكتب العوامل المشتركة مرة واحدة.'),
-    'upside-down': say('Zenbakitzailea goian eta izendatzailea behean: ez eman buelta zatikiari.', 'El numerador arriba y el denominador abajo: no le des la vuelta a la fracción.', 'البسط في الأعلى والمقام في الأسفل: لا تقلب الكسر.'),
-    numerator: say('Zatikia ez dago izendatzailea 0 denean; zenbakitzailea 0 bada, zatikiak 0 balio du.', 'La fracción no existe cuando el denominador es 0; si es 0 el numerador, vale 0.', 'لا يكون الكسر معرّفًا عندما يكون المقام 0؛ وإذا انعدم البسط فقيمته 0.'),
-    'wrong-factor': say('Ezabatzen den faktorea izendatzailearena da; geratzen dena bestea da.', 'El factor que se elimina es el del denominador; queda el otro.', 'العامل الذي يُحذف هو عامل المقام؛ ويبقى الآخر.'),
-    'no-bracket': say('Kentzean, parentesia: −(x − a) = −x + a.', 'Al restar, paréntesis: −(x − a) = −x + a.', 'عند الطرح استعمل القوس: −(x − a) = −x + a.'),
-    'add-across': say('Zatikiak ez dira goikoak eta behekoak batuz batzen: izendatzaile komuna behar da.', 'Las fracciones no se suman sumando arriba y abajo: hace falta el denominador común.', 'لا تُجمع الكسور بجمع البسوط والمقامات: يلزم مقام مشترك.'),
-    average: say('Batera ez dute batez bestekoa behar: 1/a + 1/b minutuko, beraz bakoitzak bakarrik baino gutxiago.', 'Juntos no tardan la media: 1/a + 1/b por minuto, así que menos que cada uno solo.', 'معًا لا يحتاجان المتوسط: 1/a + 1/b في الدقيقة، أي أقل من كل واحد وحده.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    cross: say('Biderkatzean, gai bakoitza gai guztiez: x-ren gaia bi gurutze-biderkaduren batura da.', 'Al multiplicar, cada término por todos: el término en x es la suma de los dos productos cruzados.', 'في الضرب كل حد في كل الحدود: حد x هو مجموع الجداءين المتقاطعين.', 'When multiplying, multiply each term by every term: the x term is the sum of the two cross products.'),
+    'no-double': say('(a + b)² = a² + 2ab + b²: ez ahaztu bikoitza.', '(a + b)² = a² + 2ab + b²: no olvides el doble.', '(a + b)² = a² + 2ab + b²: لا تنسَ الضعف.', '(a + b)² = a² + 2ab + b²: don\'t forget the double.'),
+    'no-power': say('Tartagliako zenbakia b-ren berreturaz biderkatzen da, ez b-z bakarrik.', 'El número de Tartaglia se multiplica por la potencia de b, no solo por b.', 'يُضرب عدد تارتاليا في قوة b لا في b وحدها.', 'The Tartaglia number is multiplied by the power of b, not only by b.'),
+    row: say('Hartu errenkada egokia: (x + b)ⁿ → n. errenkada; xᵏ-ren aurrean b-ren berretzailea n − k da.', 'Toma la fila correcta: (x + b)ⁿ → fila n; delante de xᵏ, b va elevado a n − k.', 'خذ الصف الصحيح: (x + b)ⁿ ← الصف n؛ وأمام xᵏ يكون أس b هو n − k.', 'Take the correct row: (x + b)ⁿ → row n; with xᵏ, b is raised to the power n − k.'),
+    sign: say('Kontuz zeinuarekin: negatiboak parentesi artean.', 'Cuidado con el signo: los negativos, entre paréntesis.', 'انتبه للإشارة: السالب بين قوسين.', 'Be careful with the sign: put negatives in brackets.'),
+    'binomial-sign': say('x − a binomioan erroa a da; x + a bada, −a.', 'En x − a la raíz es a; si es x + a, es −a.', 'في x − a يكون الجذر a؛ وإذا كان x + a فهو −a.', 'In x − a the root is a; if it is x + a, it is −a.'),
+    remainder: say('Azken zenbakia hondarra da; zatiduraren gai askea haren aurrekoa da.', 'El último número es el resto; el término independiente del cociente es el anterior.', 'العدد الأخير هو الباقي؛ والحد الثابت لخارج القسمة هو الذي قبله.', 'The last number is the remainder; the constant term of the quotient is the one before it.'),
+    degree: say('Zatiduraren maila = zatikizunarena − zatitzailearena. M.k.t.: faktore bakoitza berretzaile handienarekin.', 'Grado del cociente = el del dividendo − el del divisor. M.c.m.: cada factor con su mayor exponente.', 'درجة خارج القسمة = درجة المقسوم − درجة المقسوم عليه. المضاعف: كل عامل بأكبر أس.', 'Degree of the quotient = degree of the dividend − degree of the divisor. LCM: each factor with its highest exponent.'),
+    constant: say('Gai askea ez da erroa: erroak haren zatitzaileen artean daude.', 'El término independiente no es la raíz: las raíces están entre sus divisores.', 'الحد الثابت ليس الجذر: الجذور بين قواسمه.', 'The constant term is not the root: the roots are among its divisors.'),
+    product: say('Ez biderkatu dena: m.k.t.-an faktore komunak behin bakarrik doaz.', 'No lo multipliques todo: en el m.c.m. los factores comunes van una sola vez.', 'لا تضرب كل شيء: في المضاعف تُكتب العوامل المشتركة مرة واحدة.', 'Don\'t multiply everything out: in the LCM, common factors appear only once.'),
+    'upside-down': say('Zenbakitzailea goian eta izendatzailea behean: ez eman buelta zatikiari.', 'El numerador arriba y el denominador abajo: no le des la vuelta a la fracción.', 'البسط في الأعلى والمقام في الأسفل: لا تقلب الكسر.', 'The numerator goes on top and the denominator at the bottom: don\'t flip the fraction.'),
+    numerator: say('Zatikia ez dago izendatzailea 0 denean; zenbakitzailea 0 bada, zatikiak 0 balio du.', 'La fracción no existe cuando el denominador es 0; si es 0 el numerador, vale 0.', 'لا يكون الكسر معرّفًا عندما يكون المقام 0؛ وإذا انعدم البسط فقيمته 0.', 'The fraction does not exist when the denominator is 0; if the numerator is 0, the fraction equals 0.'),
+    'wrong-factor': say('Ezabatzen den faktorea izendatzailearena da; geratzen dena bestea da.', 'El factor que se elimina es el del denominador; queda el otro.', 'العامل الذي يُحذف هو عامل المقام؛ ويبقى الآخر.', 'The factor that is cancelled is the one in the denominator; the other one stays.'),
+    'no-bracket': say('Kentzean, parentesia: −(x − a) = −x + a.', 'Al restar, paréntesis: −(x − a) = −x + a.', 'عند الطرح استعمل القوس: −(x − a) = −x + a.', 'When subtracting, use brackets: −(x − a) = −x + a.'),
+    'add-across': say('Zatikiak ez dira goikoak eta behekoak batuz batzen: izendatzaile komuna behar da.', 'Las fracciones no se suman sumando arriba y abajo: hace falta el denominador común.', 'لا تُجمع الكسور بجمع البسوط والمقامات: يلزم مقام مشترك.', 'Fractions are not added by adding the tops and the bottoms: you need a common denominator.'),
+    average: say('Batera ez dute batez bestekoa behar: 1/a + 1/b minutuko, beraz bakoitzak bakarrik baino gutxiago.', 'Juntos no tardan la media: 1/a + 1/b por minuto, así que menos que cada uno solo.', 'معًا لا يحتاجان المتوسط: 1/a + 1/b في الدقيقة، أي أقل من كل واحد وحده.', 'Together they don\'t take the mean of the two times: 1/a + 1/b per minute, so less than each one alone.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

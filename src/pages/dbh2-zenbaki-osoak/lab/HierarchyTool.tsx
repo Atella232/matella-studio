@@ -2,6 +2,7 @@ import { useId, useState, type ReactNode } from 'react'
 import { Segmented, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { signed } from '../format'
+import { englishDigits } from '../../../utils/numberFormat'
 import {
     chooseOperation,
     hierarchyChallenges,
@@ -31,6 +32,8 @@ function exprText(expr: Expr): string {
 
 export function HierarchyTool(props: IntegerToolProps) {
     const l = useLabText(props.language)
+    /** English types thousands with commas (15,000): read them as 15000 before checking */
+    const readAnswer = (input: string) => (props.language === 'en' ? englishDigits(input) : input)
     const inputId = useId()
     const [state, setState] = useState<HierarchyState>(initialHierarchyState)
     const { expr, selected, feedback, history } = state
@@ -58,7 +61,7 @@ export function HierarchyTool(props: IntegerToolProps) {
                     type="button"
                     className={`integers-hier-op ${chosen ? 'selected' : ''}`}
                     aria-pressed={chosen}
-                    aria-label={`${l({ eu: 'Eragiketa', es: 'Operación', ar: 'العملية' })} ${opSymbol[node.op]}`}
+                    aria-label={`${l({ eu: 'Eragiketa', es: 'Operación', en: 'Operation', ar: 'العملية' })} ${opSymbol[node.op]}`}
                     onClick={() => setState((current) => chooseOperation(current, path))}
                     disabled={done}
                 >
@@ -73,26 +76,26 @@ export function HierarchyTool(props: IntegerToolProps) {
     const controls = (
         <>
             <Segmented
-                label={l({ eu: 'Eragiketa', es: 'Operación', ar: 'العملية' })}
+                label={l({ eu: 'Eragiketa', es: 'Operación', en: 'Operation', ar: 'العملية' })}
                 value={String(state.exercise)}
                 options={hierarchyExercises.map((item) => ({ value: String(item.id), label: `${item.id}${state.finished[item.id] ? ' ✓' : ''}` }))}
                 onChange={(next) => setState((current) => startHierarchy(Number(next), current.finished))}
             />
             <button type="button" className="fraction-v2-secondary" onClick={() => setState((current) => startHierarchy(current.exercise, current.finished))}>
-                {l({ eu: 'Berriro hasi', es: 'Empezar de nuevo', ar: 'ابدأ من جديد' })}
+                {l({ eu: 'Berriro hasi', es: 'Empezar de nuevo', en: 'Start again', ar: 'ابدأ من جديد' })}
             </button>
             <p className="fraction-v2-lab-tip">
-                {l({ eu: `Ordena-akatsak: ${state.orderMistakes} · Kalkulu-akatsak: ${state.calcMistakes}`, es: `Errores de orden: ${state.orderMistakes} · Errores de cálculo: ${state.calcMistakes}`, ar: `أخطاء الترتيب: ${state.orderMistakes} · أخطاء الحساب: ${state.calcMistakes}` })}
+                {l({ eu: `Ordena-akatsak: ${state.orderMistakes} · Kalkulu-akatsak: ${state.calcMistakes}`, es: `Errores de orden: ${state.orderMistakes} · Errores de cálculo: ${state.calcMistakes}`, en: `Order mistakes: ${state.orderMistakes} · Calculation mistakes: ${state.calcMistakes}`, ar: `أخطاء الترتيب: ${state.orderMistakes} · أخطاء الحساب: ${state.calcMistakes}` })}
             </p>
         </>
     )
 
     const message = {
-        'inside-first': l({ eu: 'Oraindik ez: egin lehenik parentesi edo kako barrukoa.', es: 'Todavía no: haz primero lo de dentro del paréntesis o corchete.', ar: 'ليس بعد: احسب أولًا ما داخل القوس.' }),
-        'muldiv-first': l({ eu: 'Oraindik ez: lehenik biderketak eta zatiketak.', es: 'Todavía no: primero los productos y cocientes.', ar: 'ليس بعد: الضرب والقسمة أولًا.' }),
-        'left-first': l({ eu: 'Oraindik ez: maila bereko eragiketak ezkerretik eskuinera egiten dira.', es: 'Todavía no: las operaciones del mismo nivel se hacen de izquierda a derecha.', ar: 'ليس بعد: العمليات من المستوى نفسه تُجرى من اليسار إلى اليمين.' }),
-        'wrong-result': l({ eu: 'Emaitza hori ez da zuzena. Begiratu zeinuak.', es: 'Ese resultado no es correcto. Revisa los signos.', ar: 'هذه النتيجة غير صحيحة. راجع الإشارات.' }),
-        unreadable: l({ eu: 'Idatzi zenbaki oso bat, adibidez −7.', es: 'Escribe un número entero, por ejemplo −7.', ar: 'اكتب عددًا صحيحًا، مثل ⁦−7⁩.' })
+        'inside-first': l({ eu: 'Oraindik ez: egin lehenik parentesi edo kako barrukoa.', es: 'Todavía no: haz primero lo de dentro del paréntesis o corchete.', en: 'Not yet: do the part inside the brackets first.', ar: 'ليس بعد: احسب أولًا ما داخل القوس.' }),
+        'muldiv-first': l({ eu: 'Oraindik ez: lehenik biderketak eta zatiketak.', es: 'Todavía no: primero los productos y cocientes.', en: 'Not yet: do products and quotients first.', ar: 'ليس بعد: الضرب والقسمة أولًا.' }),
+        'left-first': l({ eu: 'Oraindik ez: maila bereko eragiketak ezkerretik eskuinera egiten dira.', es: 'Todavía no: las operaciones del mismo nivel se hacen de izquierda a derecha.', en: 'Not yet: operations at the same level are done from left to right.', ar: 'ليس بعد: العمليات من المستوى نفسه تُجرى من اليسار إلى اليمين.' }),
+        'wrong-result': l({ eu: 'Emaitza hori ez da zuzena. Begiratu zeinuak.', es: 'Ese resultado no es correcto. Revisa los signos.', en: 'That result is not correct. Check the signs.', ar: 'هذه النتيجة غير صحيحة. راجع الإشارات.' }),
+        unreadable: l({ eu: 'Idatzi zenbaki oso bat, adibidez −7.', es: 'Escribe un número entero, por ejemplo −7.', en: 'Write an integer, for example −7.', ar: 'اكتب عددًا صحيحًا، مثل ⁦−7⁩.' })
     }
 
     return (
@@ -109,7 +112,7 @@ export function HierarchyTool(props: IntegerToolProps) {
                 </div>
 
                 {!done && !selected && (
-                    <p className="integers-lab-question">{l({ eu: 'Sakatu lehenik egin behar duzun eragiketaren ikurra.', es: 'Pulsa el signo de la operación que tienes que hacer primero.', ar: 'اضغط رمز العملية التي يجب أن تجريها أولًا.' })}</p>
+                    <p className="integers-lab-question">{l({ eu: 'Sakatu lehenik egin behar duzun eragiketaren ikurra.', es: 'Pulsa el signo de la operación que tienes que hacer primero.', en: 'Press the sign of the operation you need to do first.', ar: 'اضغط رمز العملية التي يجب أن تجريها أولًا.' })}</p>
                 )}
 
                 {chosenNode?.kind === 'bin' && chosenNode.left.kind === 'num' && chosenNode.right.kind === 'num' && (
@@ -119,13 +122,13 @@ export function HierarchyTool(props: IntegerToolProps) {
                             id={inputId}
                             value={state.answer}
                             inputMode="text"
-                            placeholder={l({ eu: 'Adib.: −7', es: 'Ej.: −7', ar: 'مثال: ⁦−7⁩' })}
+                            placeholder={l({ eu: 'Adib.: −7', es: 'Ej.: −7', en: 'Example: −7', ar: 'مثال: ⁦−7⁩' })}
                             onChange={(event) => setState((current) => ({ ...current, answer: event.target.value, feedback: null }))}
-                            onKeyDown={(event) => { if (event.key === 'Enter') setState((current) => submitStep(current)) }}
+                            onKeyDown={(event) => { if (event.key === 'Enter') setState((current) => submitStep(current, false, readAnswer)) }}
                             autoFocus
                         />
-                        <button type="button" className="fraction-v2-primary" onClick={() => setState((current) => submitStep(current))}>{l({ eu: 'Egiaztatu', es: 'Comprobar', ar: 'تحقق' })}</button>
-                        <button type="button" className="fraction-v2-hint-button" onClick={() => setState((current) => submitStep(current, true))}>{l({ eu: 'Egin niretzat', es: 'Hazlo por mí', ar: 'احسبها لي' })}</button>
+                        <button type="button" className="fraction-v2-primary" onClick={() => setState((current) => submitStep(current, false, readAnswer))}>{l({ eu: 'Egiaztatu', es: 'Comprobar', en: 'Check', ar: 'تحقق' })}</button>
+                        <button type="button" className="fraction-v2-hint-button" onClick={() => setState((current) => submitStep(current, true))}>{l({ eu: 'Egin niretzat', es: 'Hazlo por mí', en: 'Do it for me', ar: 'احسبها لي' })}</button>
                     </div>
                 )}
 
@@ -134,8 +137,8 @@ export function HierarchyTool(props: IntegerToolProps) {
                     {done && record && (
                         <div className="fraction-v2-feedback success">
                             {record.order === 0 && record.calc === 0
-                                ? l({ eu: 'Amaituta, akatsik gabe!', es: '¡Terminada sin ningún error!', ar: 'انتهت دون أي خطأ!' })
-                                : l({ eu: `Amaituta. Ordena-akatsak: ${record.order}; kalkulu-akatsak: ${record.calc}.`, es: `Terminada. Errores de orden: ${record.order}; de cálculo: ${record.calc}.`, ar: `انتهت. أخطاء الترتيب: ${record.order}؛ أخطاء الحساب: ${record.calc}.` })}
+                                ? l({ eu: 'Amaituta, akatsik gabe!', es: '¡Terminada sin ningún error!', en: 'Finished without any mistakes!', ar: 'انتهت دون أي خطأ!' })
+                                : l({ eu: `Amaituta. Ordena-akatsak: ${record.order}; kalkulu-akatsak: ${record.calc}.`, es: `Terminada. Errores de orden: ${record.order}; de cálculo: ${record.calc}.`, en: `Finished. Order mistakes: ${record.order}; calculation mistakes: ${record.calc}.`, ar: `انتهت. أخطاء الترتيب: ${record.order}؛ أخطاء الحساب: ${record.calc}.` })}
                         </div>
                     )}
                 </div>

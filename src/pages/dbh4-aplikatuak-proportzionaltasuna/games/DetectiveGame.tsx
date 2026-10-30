@@ -84,12 +84,12 @@ export function ProportionDbh4ApDetectiveGame({ language, records, onResult, onE
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${record.score} / ${total}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${record.score} / ${total}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: 'Ebazpen bakoitzean lerro bakar bat dago gaizki; hortik aurrera, urratsak zuzenak dira, baina akatsa daramate.', es: 'En cada resolución hay una sola línea mal; a partir de ella, los pasos son correctos, pero arrastran el error.', ar: 'في كل حلّ سطر واحد خاطئ؛ وبعده تكون الخطوات صحيحة لكنها تحمل الخطأ.' })}</li>
-                        <li>{l({ eu: 'Sakatu lerro okerra (puntu 1) eta aukeratu zein akats den (beste puntu 1).', es: 'Toca la línea equivocada (1 punto) y elige qué error es (otro punto).', ar: 'اضغط السطر الخاطئ (نقطة) ثم اختر نوع الخطأ (نقطة أخرى).' })}</li>
-                        <li>{l({ eu: `${PROPORTION_DETECTIVE_CASES} kasu maila bakoitzean.`, es: `${PROPORTION_DETECTIVE_CASES} casos por nivel.`, ar: `${PROPORTION_DETECTIVE_CASES} حالات في كل مستوى.` })}</li>
+                        <li>{l({ eu: 'Ebazpen bakoitzean lerro bakar bat dago gaizki; hortik aurrera, urratsak zuzenak dira, baina akatsa daramate.', es: 'En cada resolución hay una sola línea mal; a partir de ella, los pasos son correctos, pero arrastran el error.', en: 'In each solution there is just one wrong line; from that line on, the steps look right but carry the mistake.', ar: 'في كل حلّ سطر واحد خاطئ؛ وبعده تكون الخطوات صحيحة لكنها تحمل الخطأ.' })}</li>
+                        <li>{l({ eu: 'Sakatu lerro okerra (puntu 1) eta aukeratu zein akats den (beste puntu 1).', es: 'Toca la línea equivocada (1 punto) y elige qué error es (otro punto).', en: 'Tap the wrong line (1 point) and choose which mistake it is (another point).', ar: 'اضغط السطر الخاطئ (نقطة) ثم اختر نوع الخطأ (نقطة أخرى).' })}</li>
+                        <li>{l({ eu: `${PROPORTION_DETECTIVE_CASES} kasu maila bakoitzean.`, es: `${PROPORTION_DETECTIVE_CASES} casos por nivel.`, en: `${PROPORTION_DETECTIVE_CASES} cases per level.`, ar: `${PROPORTION_DETECTIVE_CASES} حالات في كل مستوى.` })}</li>
                     </ul>
                 )}
             />
@@ -104,10 +104,10 @@ export function ProportionDbh4ApDetectiveGame({ language, records, onResult, onE
                     language={language}
                     stars={proportionDetectiveStars(score)}
                     title={`${score} / ${total}`}
-                    subtitle={l({ eu: '3 izar: 11 puntu · 2 izar: 9 · izar 1: 6', es: '3 estrellas: 11 puntos · 2: 9 · 1: 6', ar: '3 نجوم: 11 نقطة · 2: 9 · 1: 6' })}
+                    subtitle={l({ eu: '3 izar: 11 puntu · 2 izar: 9 · izar 1: 6', es: '3 estrellas: 11 puntos · 2: 9 · 1: 6', en: '3 stars: 11 points · 2: 9 · 1: 6', ar: '3 نجوم: 11 نقطة · 2: 9 · 1: 6' })}
                     stats={[
-                        { label: l({ eu: 'Lerro okerrak', es: 'Líneas encontradas', ar: 'الأسطر المكتشفة' }), value: `${found.lines} / ${PROPORTION_DETECTIVE_CASES}` },
-                        { label: l({ eu: 'Akats motak', es: 'Errores identificados', ar: 'الأخطاء المحدَّدة' }), value: `${found.kinds} / ${PROPORTION_DETECTIVE_CASES}` }
+                        { label: l({ eu: 'Lerro okerrak', es: 'Líneas encontradas', en: 'Lines found', ar: 'الأسطر المكتشفة' }), value: `${found.lines} / ${PROPORTION_DETECTIVE_CASES}` },
+                        { label: l({ eu: 'Akats motak', es: 'Errores identificados', en: 'Mistakes identified', ar: 'الأخطاء المحدَّدة' }), value: `${found.kinds} / ${PROPORTION_DETECTIVE_CASES}` }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}
@@ -125,10 +125,10 @@ export function ProportionDbh4ApDetectiveGame({ language, records, onResult, onE
         <div className="detective-game" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span>{index + 1} / {PROPORTION_DETECTIVE_CASES}</span>
-                <span><strong>{score}</strong> {l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}</span>
+                <span><strong>{score}</strong> {l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}</span>
             </GameTopbar>
 
-            <section className="detective-sheet proportion-detective-sheet" aria-label={l({ eu: 'Ebazpena', es: 'La resolución', ar: 'الحل' })}>
+            <section className="detective-sheet proportion-detective-sheet" aria-label={l({ eu: 'Ebazpena', es: 'La resolución', en: 'The solution', ar: 'الحل' })}>
                 <p className="proportion-detective-problem">
                     <MathText text={l(item.problem)} inline />
                 </p>
@@ -143,7 +143,7 @@ export function ProportionDbh4ApDetectiveGame({ language, records, onResult, onE
                                     type="button"
                                     className={`detective-line proportion-detective-line ${marks}`}
                                     disabled={step !== 'line'}
-                                    aria-label={`${l({ eu: 'Lerroa', es: 'Línea', ar: 'السطر' })} ${lineNumber(position)}: ${l(current.label)}`}
+                                    aria-label={`${l({ eu: 'Lerroa', es: 'Línea', en: 'Line', ar: 'السطر' })} ${lineNumber(position)}: ${l(current.label)}`}
                                     onClick={() => chooseLine(position)}
                                 >
                                     <span className="detective-line-number">{lineNumber(position)}</span>
@@ -159,17 +159,17 @@ export function ProportionDbh4ApDetectiveGame({ language, records, onResult, onE
             </section>
 
             <div className="detective-panel" aria-live="polite">
-                {step === 'line' && <p className="detective-question">{l({ eu: 'Zein lerrotan dago akatsa?', es: '¿En qué línea está el error?', ar: 'في أي سطر يوجد الخطأ؟' })}</p>}
+                {step === 'line' && <p className="detective-question">{l({ eu: 'Zein lerrotan dago akatsa?', es: '¿En qué línea está el error?', en: 'Which line has the error?', ar: 'في أي سطر يوجد الخطأ؟' })}</p>}
                 {step !== 'line' && (
                     <p className={`detective-verdict ${line === item.wrong ? 'right' : 'wrong'}`}>
                         {line === item.wrong
-                            ? l({ eu: `Ondo ikusita! Akatsa ${lineNumber(item.wrong)}. lerroan dago.`, es: `¡Bien visto! El error está en la línea ${lineNumber(item.wrong)}.`, ar: `أحسنت! الخطأ في السطر ${lineNumber(item.wrong)}.` })
-                            : l({ eu: `Ez: akatsa ${lineNumber(item.wrong)}. lerroan dago.`, es: `No: el error está en la línea ${lineNumber(item.wrong)}.`, ar: `لا: الخطأ في السطر ${lineNumber(item.wrong)}.` })}
+                            ? l({ eu: `Ondo ikusita! Akatsa ${lineNumber(item.wrong)}. lerroan dago.`, es: `¡Bien visto! El error está en la línea ${lineNumber(item.wrong)}.`, en: `Well spotted! The error is on line ${lineNumber(item.wrong)}.`, ar: `أحسنت! الخطأ في السطر ${lineNumber(item.wrong)}.` })
+                            : l({ eu: `Ez: akatsa ${lineNumber(item.wrong)}. lerroan dago.`, es: `No: el error está en la línea ${lineNumber(item.wrong)}.`, en: `No: the error is on line ${lineNumber(item.wrong)}.`, ar: `لا: الخطأ في السطر ${lineNumber(item.wrong)}.` })}
                     </p>
                 )}
                 {step !== 'line' && (
                     <>
-                        <p className="detective-question">{l({ eu: 'Zer akats da?', es: '¿Qué error es?', ar: 'ما نوع الخطأ؟' })}</p>
+                        <p className="detective-question">{l({ eu: 'Zer akats da?', es: '¿Qué error es?', en: 'What kind of error is it?', ar: 'ما نوع الخطأ؟' })}</p>
                         <div className="detective-options">
                             {item.options.map((option) => (
                                 <button
@@ -188,15 +188,15 @@ export function ProportionDbh4ApDetectiveGame({ language, records, onResult, onE
                 {step === 'done' && (
                     <div className="detective-explain">
                         <p>
-                            <strong>{kind === item.error ? l({ eu: 'Zuzena!', es: '¡Correcto!', ar: 'صحيح!' }) : l({ eu: `Ez zehazki: «${proportionDetectiveErrorNames[item.error].eu}».`, es: `No exactamente: «${proportionDetectiveErrorNames[item.error].es}».`, ar: `ليس تمامًا: «${proportionDetectiveErrorNames[item.error].ar}».` })}</strong>{' '}
+                            <strong>{kind === item.error ? l({ eu: 'Zuzena!', es: '¡Correcto!', en: 'Correct!', ar: 'صحيح!' }) : l({ eu: `Ez zehazki: «${proportionDetectiveErrorNames[item.error].eu}».`, es: `No exactamente: «${proportionDetectiveErrorNames[item.error].es}».`, en: `Not exactly: ‘${proportionDetectiveErrorNames[item.error].en}’.`, ar: `ليس تمامًا: «${proportionDetectiveErrorNames[item.error].ar}».` })}</strong>{' '}
                             <MathText text={l(proportionDetectiveErrorTips[item.error])} inline />
                         </p>
                         <p className="detective-fix">
-                            <span>{l({ eu: 'Hau izan behar zuen:', es: 'Debería ser:', ar: 'كان يجب أن يكون:' })}</span>
+                            <span>{l({ eu: 'Hau izan behar zuen:', es: 'Debería ser:', en: 'It should be:', ar: 'كان يجب أن يكون:' })}</span>
                             <MathText text={`$${localLatex(item.fix, language)}$`} />
                         </p>
                         <button type="button" className="fraction-v2-primary" onClick={next} ref={(node) => node?.focus({ preventScroll: true })}>
-                            {index + 1 >= PROPORTION_DETECTIVE_CASES ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', ar: 'التالي' })}
+                            {index + 1 >= PROPORTION_DETECTIVE_CASES ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', en: 'See the result', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', en: 'Next', ar: 'التالي' })}
                         </button>
                     </div>
                 )}

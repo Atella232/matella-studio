@@ -66,6 +66,6 @@ Para crear nuevas unidades, usar `docs/unit-reusable-template.md` como plantilla
 Resumen de decisiones:
 
 - EU es el idioma principal y fuente del contenido pedagógico.
-- ES y AR son idiomas secundarios activos desde el inicio, no añadidos finales.
+- ES, EN y AR son idiomas secundarios activos desde el inicio, no añadidos finales.
 - Zatikiak DBH2 y Algebra DBH2 son las dos unidades modelo actuales.
 - El JSX debe renderizar estructura e interacción; los datos pedagógicos grandes viven en archivos `*Data.ts`.

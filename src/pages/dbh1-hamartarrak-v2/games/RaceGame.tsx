@@ -12,8 +12,8 @@ const decimalsRace: RaceRules<DecimalsRaceError> = {
     parTime: decimalsParTime,
     errorTip: (error) => decimalsRaceErrorTips[error ?? 'calculation'],
     pitPlaceholder: () => '2,35',
-    pitUnreadable: { eu: 'Idatzi zenbaki bat, adibidez 2,35.', es: 'Escribe un número, por ejemplo 2,35.', ar: 'اكتب عددًا، مثل 2.35.' },
-    pitWrongForm: { eu: 'Idatzi zenbaki hamartar gisa.', es: 'Escríbelo como número decimal.', ar: 'اكتبه عددًا عشريًا.' }
+    pitUnreadable: { eu: 'Idatzi zenbaki bat, adibidez 2,35.', es: 'Escribe un número, por ejemplo 2,35.', en: 'Write a number, for example 2.35.', ar: 'اكتب عددًا، مثل 2.35.' },
+    pitWrongForm: { eu: 'Idatzi zenbaki hamartar gisa.', es: 'Escríbelo como número decimal.', en: 'Write it as a decimal number.', ar: 'اكتبه عددًا عشريًا.' }
 }
 
 export function DecimalsRaceGame(props: GameProps) {

@@ -62,6 +62,7 @@ export function Navigation() {
         switch (i18n.language) {
             case 'eu': return fixMaybeText(course.nameEu)
             case 'ar': return fixMaybeText(course.nameAr)
+            case 'en': return fixMaybeText(course.nameEn)
             default: return fixMaybeText(course.name)
         }
     }
@@ -70,6 +71,7 @@ export function Navigation() {
         switch (i18n.language) {
             case 'eu': return fixMaybeText(topic.nameEu)
             case 'ar': return fixMaybeText(topic.nameAr)
+            case 'en': return fixMaybeText(topic.nameEn)
             default: return fixMaybeText(topic.name)
         }
     }
@@ -84,7 +86,9 @@ export function Navigation() {
             ? 'التمارين'
             : i18n.language === 'eu'
                 ? 'Ariketak'
-                : 'Ejercicios'
+                : i18n.language === 'en'
+                    ? 'Exercises'
+                    : 'Ejercicios'
 
     const toggleDropdown = (id: string) => {
         setOpenDropdown(openDropdown === id ? null : id)
@@ -288,6 +292,13 @@ export function Navigation() {
                     aria-pressed={i18n.language === 'eu'}
                 >
                     EU
+                </button>
+                <button
+                    onClick={() => changeLanguage('en')}
+                    className={i18n.language === 'en' ? 'active' : ''}
+                    aria-pressed={i18n.language === 'en'}
+                >
+                    EN
                 </button>
                 <button
                     onClick={() => changeLanguage('ar')}

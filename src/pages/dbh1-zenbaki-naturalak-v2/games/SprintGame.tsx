@@ -76,13 +76,13 @@ export function SprintGame({ language, records, onResult, onExit }: GameProps) {
     }
 
     const text = (node: Expr): string => {
-        if (node.kind === 'num') return formatNatural(node.value)
+        if (node.kind === 'num') return formatNatural(node.value, language)
         if (node.kind === 'group') return node.bracket === 'square' ? `[${text(node.inner)}]` : `(${text(node.inner)})`
         return `${text(node.left)} ${opSymbol[node.op]} ${text(node.right)}`
     }
 
     const render = (node: Expr, path: ExprPath): ReactNode => {
-        if (node.kind === 'num') return <span className="naturals-sem-num" key={path.join('')}>{formatNatural(node.value)}</span>
+        if (node.kind === 'num') return <span className="naturals-sem-num" key={path.join('')}>{formatNatural(node.value, language)}</span>
         if (node.kind === 'group') {
             const [open, close] = node.bracket === 'square' ? ['[', ']'] : ['(', ')']
             return (
@@ -96,7 +96,7 @@ export function SprintGame({ language, records, onResult, onExit }: GameProps) {
         return (
             <span className="naturals-sem-bin" key={path.join('')}>
                 {render(node.left, [...path, 'l'])}
-                <button type="button" className={`naturals-sem-op ${isMulDiv(node.op) ? 'yellow' : 'green'}`} onClick={() => tap(path)} aria-label={`${l({ eu: 'Eragiketa', es: 'Operación', ar: 'العملية' })} ${opSymbol[node.op]}`}>
+                <button type="button" className={`naturals-sem-op ${isMulDiv(node.op) ? 'yellow' : 'green'}`} onClick={() => tap(path)} aria-label={`${l({ eu: 'Eragiketa', es: 'Operación', en: 'Operation', ar: 'العملية' })} ${opSymbol[node.op]}`}>
                     {opSymbol[node.op]}
                 </button>
                 {render(node.right, [...path, 'r'])}
@@ -108,17 +108,17 @@ export function SprintGame({ language, records, onResult, onExit }: GameProps) {
         return (
             <LevelPicker
                 game={game}
-                art={<NaturalsGameArt game="sprint" />}
+                art={<NaturalsGameArt game="sprint" language={language} />}
                 language={language}
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => (record.timeMs === null ? '' : `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${formatTime(record.timeMs)}`)}
+                bestLabel={(record) => (record.timeMs === null ? '' : `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${formatTime(record.timeMs)}`)}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: `${SPRINT_EXPRESSIONS} eragiketa. Sakatu hurrengo eragiketaren ikurra; makinak kalkulatzen du emaitza.`, es: `${SPRINT_EXPRESSIONS} operaciones. Pulsa el signo de la siguiente operación; la máquina calcula el resultado.`, ar: `${SPRINT_EXPRESSIONS} عمليات. اضغط رمز العملية التالية؛ والآلة تحسب النتيجة.` })}</li>
-                        <li>{l({ eu: 'Gorria (parentesiak) → horia (· eta :) → berdea (+ eta −), ezkerretik eskuinera.', es: 'Rojo (paréntesis) → amarillo (· y :) → verde (+ y −), de izquierda a derecha.', ar: 'الأحمر (الأقواس) ← الأصفر (· و:) ← الأخضر (+ و−)، من اليسار إلى اليمين.' })}</li>
-                        <li>{l({ eu: `Ordena oker bakoitzak +${SPRINT_PENALTY_MS / 1000} s gehitzen ditu.`, es: `Cada orden equivocado suma +${SPRINT_PENALTY_MS / 1000} s.`, ar: `كل ترتيب خاطئ يضيف ${SPRINT_PENALTY_MS / 1000} ث.` })}</li>
+                        <li>{l({ eu: `${SPRINT_EXPRESSIONS} eragiketa. Sakatu hurrengo eragiketaren ikurra; makinak kalkulatzen du emaitza.`, es: `${SPRINT_EXPRESSIONS} operaciones. Pulsa el signo de la siguiente operación; la máquina calcula el resultado.`, en: `${SPRINT_EXPRESSIONS} operations. Press the sign of the next operation; the machine works out the result.`, ar: `${SPRINT_EXPRESSIONS} عمليات. اضغط رمز العملية التالية؛ والآلة تحسب النتيجة.` })}</li>
+                        <li>{l({ eu: 'Gorria (parentesiak) → horia (· eta :) → berdea (+ eta −), ezkerretik eskuinera.', es: 'Rojo (paréntesis) → amarillo (· y :) → verde (+ y −), de izquierda a derecha.', en: 'Red (brackets) → yellow (· and :) → green (+ and −), from left to right.', ar: 'الأحمر (الأقواس) ← الأصفر (· و:) ← الأخضر (+ و−)، من اليسار إلى اليمين.' })}</li>
+                        <li>{l({ eu: `Ordena oker bakoitzak +${SPRINT_PENALTY_MS / 1000} s gehitzen ditu.`, es: `Cada orden equivocado suma +${SPRINT_PENALTY_MS / 1000} s.`, en: `Each wrong order adds +${SPRINT_PENALTY_MS / 1000} s.`, ar: `كل ترتيب خاطئ يضيف ${SPRINT_PENALTY_MS / 1000} ث.` })}</li>
                     </ul>
                 )}
             />
@@ -128,9 +128,9 @@ export function SprintGame({ language, records, onResult, onExit }: GameProps) {
     const par = sprintParTime(level)
     const total = elapsed + penalty
     const message = {
-        'inside-first': l({ eu: 'Gorria! Parentesiaren barrukoa lehenik.', es: '¡Rojo! Primero lo de dentro del paréntesis.', ar: 'أحمر! ما داخل القوس أولًا.' }),
-        'muldiv-first': l({ eu: 'Horia berdearen aurretik: lehenik · eta :.', es: 'El amarillo va antes que el verde: primero · y :.', ar: 'الأصفر قبل الأخضر: أولًا · و :.' }),
-        'left-first': l({ eu: 'Kolore berekoak ezkerretik eskuinera.', es: 'Las del mismo color, de izquierda a derecha.', ar: 'العمليات من اللون نفسه من اليسار إلى اليمين.' })
+        'inside-first': l({ eu: 'Gorria! Parentesiaren barrukoa lehenik.', es: '¡Rojo! Primero lo de dentro del paréntesis.', en: 'Red! First the part inside the brackets.', ar: 'أحمر! ما داخل القوس أولًا.' }),
+        'muldiv-first': l({ eu: 'Horia berdearen aurretik: lehenik · eta :.', es: 'El amarillo va antes que el verde: primero · y :.', en: 'Yellow goes before green: first · and :.', ar: 'الأصفر قبل الأخضر: أولًا · و :.' }),
+        'left-first': l({ eu: 'Kolore berekoak ezkerretik eskuinera.', es: 'Las del mismo color, de izquierda a derecha.', en: 'The ones of the same colour, from left to right.', ar: 'العمليات من اللون نفسه من اليسار إلى اليمين.' })
     }
 
     return (
@@ -138,7 +138,7 @@ export function SprintGame({ language, records, onResult, onExit }: GameProps) {
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span>{Math.min(index + 1, SPRINT_EXPRESSIONS)} / {SPRINT_EXPRESSIONS}</span>
                 <span>{formatTime(total)}</span>
-                <span>{l({ eu: 'Akatsak', es: 'Fallos', ar: 'الأخطاء' })}: {mistakes}</span>
+                <span>{l({ eu: 'Akatsak', es: 'Fallos', en: 'Mistakes', ar: 'الأخطاء' })}: {mistakes}</span>
             </GameTopbar>
 
             {phase === 'playing' && expr && (
@@ -155,7 +155,7 @@ export function SprintGame({ language, records, onResult, onExit }: GameProps) {
                     <div aria-live="polite">
                         {verdict
                             ? <div className="fraction-v2-feedback error">{message[verdict]} +{SPRINT_PENALTY_MS / 1000} s</div>
-                            : <p className="naturals-sprint-tip">{l({ eu: 'Zein da hurrengoa?', es: '¿Cuál va ahora?', ar: 'ما العملية التالية؟' })}</p>}
+                            : <p className="naturals-sprint-tip">{l({ eu: 'Zein da hurrengoa?', es: '¿Cuál va ahora?', en: 'Which one goes now?', ar: 'ما العملية التالية؟' })}</p>}
                     </div>
                 </div>
             )}
@@ -164,11 +164,11 @@ export function SprintGame({ language, records, onResult, onExit }: GameProps) {
                 <ResultPanel
                     language={language}
                     stars={sprintStars(level, total, mistakes)}
-                    title={l({ eu: 'Sprinta amaituta!', es: '¡Sprint terminado!', ar: 'انتهى السباق!' })}
-                    subtitle={l({ eu: `3 izar: ${formatTime(par * 0.8)} baino gutxiago eta akats bat gehienez · 2 izar: ${formatTime(par)} baino gutxiago`, es: `3 estrellas: menos de ${formatTime(par * 0.8)} y como mucho un fallo · 2: menos de ${formatTime(par)}`, ar: `3 نجوم: أقل من ${formatTime(par * 0.8)} وخطأ واحد على الأكثر · 2: أقل من ${formatTime(par)}` })}
+                    title={l({ eu: 'Sprinta amaituta!', es: '¡Sprint terminado!', en: 'Sprint finished!', ar: 'انتهى السباق!' })}
+                    subtitle={l({ eu: `3 izar: ${formatTime(par * 0.8)} baino gutxiago eta akats bat gehienez · 2 izar: ${formatTime(par)} baino gutxiago`, es: `3 estrellas: menos de ${formatTime(par * 0.8)} y como mucho un fallo · 2: menos de ${formatTime(par)}`, en: `3 stars: under ${formatTime(par * 0.8)} and at most one mistake · 2: under ${formatTime(par)}`, ar: `3 نجوم: أقل من ${formatTime(par * 0.8)} وخطأ واحد على الأكثر · 2: أقل من ${formatTime(par)}` })}
                     stats={[
-                        { label: l({ eu: 'Denbora', es: 'Tiempo', ar: 'الوقت' }), value: formatTime(total) },
-                        { label: l({ eu: 'Akatsak', es: 'Fallos', ar: 'الأخطاء' }), value: String(mistakes) }
+                        { label: l({ eu: 'Denbora', es: 'Tiempo', en: 'Time', ar: 'الوقت' }), value: formatTime(total) },
+                        { label: l({ eu: 'Akatsak', es: 'Fallos', en: 'Mistakes', ar: 'الأخطاء' }), value: String(mistakes) }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}

@@ -1,15 +1,16 @@
 import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { formatPercentage, fraction as createFraction } from '../../fractions/fractionMath'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import './PizzaLab.css'
 
 export function PizzaLab() {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
     const [numerator, setNumerator] = useState(3)
     const [denominator, setDenominator] = useState(8)
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
-    const percentage = formatPercentage(createFraction(numerator, denominator))
+    const percentage = formatPercentage(createFraction(numerator, denominator), decimalSeparatorFor(i18n.language))
 
     useEffect(() => {
         const canvas = canvasRef.current

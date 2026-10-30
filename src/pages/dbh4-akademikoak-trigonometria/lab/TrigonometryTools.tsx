@@ -7,6 +7,7 @@ import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { gcd, type FractionValue } from '../../../features/unit-v2/math/fraction'
 import type { UnitLanguage } from '../../../features/unit-v2/types'
 import { localize } from '../text'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import {
     AREA_LIMITS,
     areaAltitude,
@@ -97,7 +98,7 @@ import {
    decimal point. Inside readouts \sen and \tg go through localize().
    ========================================================================== */
 
-type Text = { eu: string; es: string; ar: string }
+type Text = { eu: string; es: string; en: string; ar: string }
 type Point = [number, number]
 
 const INK = 'var(--ink, #1d2733)'
@@ -111,17 +112,17 @@ const SOFT = '#fbebc0'
 const ROSE = '#f6d9d2'
 const SKY = '#e4eefb'
 
-const say = (eu: string, es: string, ar: string): Text => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): Text => ({ eu, es, en, ar })
 const points = (list: Point[]) => list.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ')
 const rad = (degrees: number) => (degrees * Math.PI) / 180
 /** The point at a screen angle (0 = right, 90 = up) and distance r from c */
 const polar = ([cx, cy]: Point, r: number, degrees: number): Point => [cx + r * Math.cos(rad(degrees)), cy - r * Math.sin(rad(degrees))]
-/** A number for plain text: the point instead of the comma in Arabic */
-const num = (language: UnitLanguage, text: string) => (language === 'ar' ? text.replace(/,/g, '.') : text)
+/** A number for plain text: the point instead of the comma in Arabic and English */
+const num = (language: UnitLanguage, text: string) => text.replace(/,/g, language === 'ar' ? '.' : decimalSeparatorFor(language))
 /** A decimal for LaTeX: {,} for the comma, the point in Arabic */
 const texNumber = (language: UnitLanguage, text: string) => text.replace(/,/g, language === 'ar' ? '.' : '{,}').replace(/−/g, '-')
 const sen = (language: UnitLanguage) => (language === 'es' ? 'sen' : 'sin')
-const tg = (language: UnitLanguage) => (language === 'ar' ? 'tan' : 'tg')
+const tg = (language: UnitLanguage) => (language === 'ar' || language === 'en' ? 'tan' : 'tg')
 /** a/b in LaTeX, written as a whole number when b is 1 */
 const fracLatex = ({ numerator, denominator }: FractionValue) => (denominator === 1 ? String(numerator) : `${numerator < 0 ? '-' : ''}\\frac{${Math.abs(numerator)}}{${denominator}}`)
 
@@ -188,8 +189,8 @@ export function RatiosTool(props: LabToolProps) {
     const B: Point = [C[0], 280 - opposite * s]
     const controls = (
         <>
-            <Stepper label={l(say('Aurkako katetoa', 'Cateto opuesto', 'الضلع المقابل'))} value={opposite} min={1} max={LEG_MAX} onChange={(value) => setState((current) => setRatios(current, { opposite: value }))} language={props.language} />
-            <Stepper label={l(say('Ondoko katetoa', 'Cateto contiguo', 'الضلع المجاور'))} value={adjacent} min={1} max={LEG_MAX} onChange={(value) => setState((current) => setRatios(current, { adjacent: value }))} language={props.language} />
+            <Stepper label={l(say('Aurkako katetoa', 'Cateto opuesto', 'الضلع المقابل', 'Opposite side'))} value={opposite} min={1} max={LEG_MAX} onChange={(value) => setState((current) => setRatios(current, { opposite: value }))} language={props.language} />
+            <Stepper label={l(say('Ondoko katetoa', 'Cateto contiguo', 'الضلع المجاور', 'Adjacent side'))} value={adjacent} min={1} max={LEG_MAX} onChange={(value) => setState((current) => setRatios(current, { adjacent: value }))} language={props.language} />
         </>
     )
     const hLatex = rootLatex(hypotenuseSquare(state))
@@ -198,11 +199,11 @@ export function RatiosTool(props: LabToolProps) {
     const note = l(say(
         `Hipotenusa: √(${opposite}² + ${adjacent}²) = √${hypotenuseSquare(state)}. α ≈ ${minutesText(angle)}.`,
         `Hipotenusa: √(${opposite}² + ${adjacent}²) = √${hypotenuseSquare(state)}. α ≈ ${minutesText(angle)}.`,
-        `الوتر: √(${opposite}² + ${adjacent}²) = √${hypotenuseSquare(state)}. α ≈ ${minutesText(angle)}.`
+        `الوتر: √(${opposite}² + ${adjacent}²) = √${hypotenuseSquare(state)}. α ≈ ${minutesText(angle)}.`, `Hypotenuse: √(${opposite}² + ${adjacent}²) = √${hypotenuseSquare(state)}. α ≈ ${minutesText(angle)}.`
     ))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={ratiosChallenges} state={state}>
-            <Board height={320} label={l(say('Bi katetoek zehaztutako triangelu angeluzuzena eta haren arrazoiak', 'El triángulo rectángulo determinado por sus dos catetos y sus razones', 'المثلث القائم المحدد بضلعيه القائمين ونسبه'))}>
+            <Board height={320} label={l(say('Bi katetoek zehaztutako triangelu angeluzuzena eta haren arrazoiak', 'El triángulo rectángulo determinado por sus dos catetos y sus razones', 'المثلث القائم المحدد بضلعيه القائمين ونسبه', 'The right-angled triangle defined by its two legs and its ratios'))}>
                 <polygon points={points([A, C, B])} fill={STAGE_TINT} stroke={INK} strokeWidth={2} strokeLinejoin="round" />
                 <line x1={A[0]} y1={A[1]} x2={B[0]} y2={B[1]} stroke={STAGE} strokeWidth={4} />
                 <line x1={C[0]} y1={C[1]} x2={B[0]} y2={B[1]} stroke={SECOND} strokeWidth={4} />
@@ -249,8 +250,8 @@ export function NotableTool(props: LabToolProps) {
     const whole: Point[] = angle === 45 ? [A, C, B, [A[0], B[1]]] : angle === 30 ? [A, B, [C[0], baseY + (baseY - B[1])]] : [A, [2 * C[0] - A[0], baseY], B]
     const controls = (
         <>
-            <Segmented label={l(say('Angelua', 'Ángulo', 'الزاوية'))} value={String(angle)} options={NOTABLE_ANGLES.map((value) => ({ value: String(value), label: `${value}°` }))} onChange={(value) => setState((current) => setNotable(current, { angle: Number(value) as NotableAngle }))} />
-            <Stepper label={l(say('Hipotenusa', 'Hipotenusa', 'الوتر'))} value={h} min={1} max={NOTABLE_HYPOTENUSE_MAX} onChange={(value) => setState((current) => setNotable(current, { hypotenuse: value }))} language={props.language} />
+            <Segmented label={l(say('Angelua', 'Ángulo', 'الزاوية', 'Angle'))} value={String(angle)} options={NOTABLE_ANGLES.map((value) => ({ value: String(value), label: `${value}°` }))} onChange={(value) => setState((current) => setNotable(current, { angle: Number(value) as NotableAngle }))} />
+            <Stepper label={l(say('Hipotenusa', 'Hipotenusa', 'الوتر', 'Hypotenuse'))} value={h} min={1} max={NOTABLE_HYPOTENUSE_MAX} onChange={(value) => setState((current) => setNotable(current, { hypotenuse: value }))} language={props.language} />
         </>
     )
     const [sinText, cosText, tanText] = notableExact[angle]
@@ -258,11 +259,11 @@ export function NotableTool(props: LabToolProps) {
     const note = l(say(
         `Katetoak: ${halfRootPlain(h, roots.opposite)} eta ${halfRootPlain(h, roots.adjacent)} (≈ ${num(props.language, decimalText(halfRootValue(h, roots.opposite), 2))} eta ${num(props.language, decimalText(halfRootValue(h, roots.adjacent), 2))}).`,
         `Catetos: ${halfRootPlain(h, roots.opposite)} y ${halfRootPlain(h, roots.adjacent)} (≈ ${num(props.language, decimalText(halfRootValue(h, roots.opposite), 2))} y ${num(props.language, decimalText(halfRootValue(h, roots.adjacent), 2))}).`,
-        `الضلعان القائمان: ${halfRootPlain(h, roots.opposite)} و${halfRootPlain(h, roots.adjacent)} (≈ ${num(props.language, decimalText(halfRootValue(h, roots.opposite), 2))} و${num(props.language, decimalText(halfRootValue(h, roots.adjacent), 2))}).`
+        `الضلعان القائمان: ${halfRootPlain(h, roots.opposite)} و${halfRootPlain(h, roots.adjacent)} (≈ ${num(props.language, decimalText(halfRootValue(h, roots.opposite), 2))} و${num(props.language, decimalText(halfRootValue(h, roots.adjacent), 2))}).`, `Legs: ${halfRootPlain(h, roots.opposite)} and ${halfRootPlain(h, roots.adjacent)} (≈ ${num(props.language, decimalText(halfRootValue(h, roots.opposite), 2))} and ${num(props.language, decimalText(halfRootValue(h, roots.adjacent), 2))}).`
     ))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={notableChallenges} state={state}>
-            <Board height={320} label={l(say('Angelu ospetsuen triangelua, karratu erdia edo triangelu aldeberdin erdia', 'El triángulo del ángulo notable, medio cuadrado o medio triángulo equilátero', 'مثلث الزاوية الشهيرة: نصف مربع أو نصف مثلث متساوي الأضلاع'))}>
+            <Board height={320} label={l(say('Angelu ospetsuen triangelua, karratu erdia edo triangelu aldeberdin erdia', 'El triángulo del ángulo notable, medio cuadrado o medio triángulo equilátero', 'مثلث الزاوية الشهيرة: نصف مربع أو نصف مثلث متساوي الأضلاع', 'The special-angle triangle: half a square or half an equilateral triangle'))}>
                 <polygon points={points(whole)} fill={PAPER} stroke={MUTED} strokeWidth={1.6} strokeDasharray="6 5" strokeLinejoin="round" />
                 <polygon points={points([A, C, B])} fill={STAGE_TINT} stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
                 <line x1={C[0]} y1={C[1]} x2={B[0]} y2={B[1]} stroke={SECOND} strokeWidth={4} />
@@ -273,7 +274,7 @@ export function NotableTool(props: LabToolProps) {
                 <Tag x={(A[0] + B[0]) / 2 - 12} y={(A[1] + B[1]) / 2 - 6} anchor="end" color={STAGE}>{String(h)}</Tag>
                 <Tag x={C[0] + 10} y={(B[1] + C[1]) / 2 + 6} anchor="start" color={SECOND}>{halfRootPlain(h, roots.opposite)}</Tag>
                 <Tag x={(A[0] + C[0]) / 2} y={A[1] + 24} color={GREEN}>{halfRootPlain(h, roots.adjacent)}</Tag>
-                <Tag x={530} y={70} size={15} color={MUTED}>{l(angle === 45 ? say('Karratu erdia', 'Medio cuadrado', 'نصف مربع') : say('Triangelu aldeberdin erdia', 'Medio triángulo equilátero', 'نصف مثلث متساوي الأضلاع'))}</Tag>
+                <Tag x={530} y={70} size={15} color={MUTED}>{l(angle === 45 ? say('Karratu erdia', 'Medio cuadrado', 'نصف مربع', 'Half a square') : say('Triangelu aldeberdin erdia', 'Medio triángulo equilátero', 'نصف مثلث متساوي الأضلاع', 'Half an equilateral triangle'))}</Tag>
                 <RatioColumn language={props.language} x={530} y={120} sin={Math.sin(rad(angle))} cos={Math.cos(rad(angle))} tan={Math.tan(rad(angle))} />
             </Board>
         </ToolFrame>
@@ -306,20 +307,20 @@ export function FundamentalTool(props: LabToolProps) {
     const barW = 250
     const controls = (
         <>
-            <Stepper label={l(say('Sinuaren zenbakitzailea p', 'Numerador del seno p', 'بسط الجيب p'))} value={p} min={1} max={q - 1} onChange={(value) => setState((current) => setFundamental(current, { p: value }))} language={props.language} />
-            <Stepper label={l(say('Sinuaren izendatzailea q', 'Denominador del seno q', 'مقام الجيب q'))} value={q} min={2} max={SINE_DENOMINATOR_MAX} onChange={(value) => setState((current) => setFundamental(current, { q: value }))} language={props.language} />
+            <Stepper label={l(say('Sinuaren zenbakitzailea p', 'Numerador del seno p', 'بسط الجيب p', 'Numerator of the sine p'))} value={p} min={1} max={q - 1} onChange={(value) => setState((current) => setFundamental(current, { p: value }))} language={props.language} />
+            <Stepper label={l(say('Sinuaren izendatzailea q', 'Denominador del seno q', 'مقام الجيب q', 'Denominator of the sine q'))} value={q} min={2} max={SINE_DENOMINATOR_MAX} onChange={(value) => setState((current) => setFundamental(current, { q: value }))} language={props.language} />
         </>
     )
     const latex = `\\sen\\alpha=\\frac{${p}}{${q}}\\quad\\cos\\alpha=\\sqrt{1-\\frac{${p * p}}{${q * q}}}=${cosineLatex(state)}`
     const note = l(say(
         `tg α = sin α : cos α ≈ ${decimalText(tan, 4)}. α ≈ ${minutesText(angle)}.`,
         `tg α = sen α : cos α ≈ ${decimalText(tan, 4)}. α ≈ ${minutesText(angle)}.`,
-        `tan α = sin α : cos α ≈ ${decimalText(tan, 4).replace(',', '.')}. α ≈ ${minutesText(angle)}.`
+        `tan α = sin α : cos α ≈ ${decimalText(tan, 4).replace(',', '.')}. α ≈ ${minutesText(angle)}.`, `tan α = sin α : cos α ≈ ${num('en', decimalText(tan, 4))}. α ≈ ${minutesText(angle)}.`
     ))
     const sinShare = sin * sin
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={fundamentalChallenges} state={state}>
-            <Board height={320} label={l(say('Erradio bateko zirkunferentzia-laurdena, sinua eta kosinua; sin² eta cos²-ren batura 1 da', 'Cuarto de circunferencia de radio 1 con el seno y el coseno; sen² y cos² suman 1', 'ربع دائرة نصف قطرها 1 مع الجيب وجيب التمام؛ مجموع sin² وcos² يساوي 1'))}>
+            <Board height={320} label={l(say('Erradio bateko zirkunferentzia-laurdena, sinua eta kosinua; sin² eta cos²-ren batura 1 da', 'Cuarto de circunferencia de radio 1 con el seno y el coseno; sen² y cos² suman 1', 'ربع دائرة نصف قطرها 1 مع الجيب وجيب التمام؛ مجموع sin² وcos² يساوي 1', 'Quarter of a circle of radius 1 with the sine and the cosine; sin² and cos² add up to 1'))}>
                 <AngleArc v={O} r={R} from={0} to={90} color={MUTED} />
                 <line x1={O[0]} y1={O[1]} x2={O[0] + R + 14} y2={O[1]} stroke={MUTED} strokeWidth={1.4} />
                 <line x1={O[0]} y1={O[1]} x2={O[0]} y2={O[1] - R - 14} stroke={MUTED} strokeWidth={1.4} />
@@ -359,9 +360,9 @@ export function CalculatorTool(props: LabToolProps) {
     const set = (patch: Partial<CalculatorState>) => setState((current) => setCalculator(current, patch))
     const controls = (
         <>
-            <NumberField label={l(say('Graduak', 'Grados', 'الدرجات'))} value={degrees} min={0} max={89} onChange={(value) => set({ degrees: value })} language={props.language} />
-            <NumberField label={l(say('Minutuak', 'Minutos', 'الدقائق'))} value={minutes} min={0} max={59} onChange={(value) => set({ minutes: value })} language={props.language} />
-            <Stepper label={l(say('Minutuka', 'Minuto a minuto', 'دقيقة بدقيقة'))} value={minutes} min={0} max={59} format={(value) => `${value}′`} onChange={(value) => set({ minutes: value })} language={props.language} />
+            <NumberField label={l(say('Graduak', 'Grados', 'الدرجات', 'Degrees'))} value={degrees} min={0} max={89} onChange={(value) => set({ degrees: value })} language={props.language} />
+            <NumberField label={l(say('Minutuak', 'Minutos', 'الدقائق', 'Minutes'))} value={minutes} min={0} max={59} onChange={(value) => set({ minutes: value })} language={props.language} />
+            <Stepper label={l(say('Minutuka', 'Minuto a minuto', 'دقيقة بدقيقة', 'Minute by minute'))} value={minutes} min={0} max={59} format={(value) => `${value}′`} onChange={(value) => set({ minutes: value })} language={props.language} />
         </>
     )
     // The calculator keys are always sin, cos and tan
@@ -372,10 +373,10 @@ export function CalculatorTool(props: LabToolProps) {
         </g>
     )
     const latex = `${degrees}^{\\circ}\\,${minutes}'=${degrees}+\\frac{${minutes}}{60}\\approx ${texNumber(props.language, decimalText(decimal, 4))}^{\\circ}`
-    const note = l(say('Kalkulagailua DEG moduan. Arrazoitik angelura: SHIFT sin, SHIFT cos, SHIFT tan.', 'Calculadora en modo DEG. De la razón al ángulo: SHIFT sin, SHIFT cos, SHIFT tan.', 'الآلة الحاسبة بوضع DEG. من النسبة إلى الزاوية: SHIFT sin وSHIFT cos وSHIFT tan.'))
+    const note = l(say('Kalkulagailua DEG moduan. Arrazoitik angelura: SHIFT sin, SHIFT cos, SHIFT tan.', 'Calculadora en modo DEG. De la razón al ángulo: SHIFT sin, SHIFT cos, SHIFT tan.', 'الآلة الحاسبة بوضع DEG. من النسبة إلى الزاوية: SHIFT sin وSHIFT cos وSHIFT tan.', 'Calculator in DEG mode. From the ratio to the angle: SHIFT sin, SHIFT cos, SHIFT tan.'))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={calculatorChallenges} state={state}>
-            <Board height={320} label={l(say('Angelua gradu eta minututan eta kalkulagailuaren pantaila', 'El ángulo en grados y minutos y la pantalla de la calculadora', 'الزاوية بالدرجات والدقائق وشاشة الآلة الحاسبة'))}>
+            <Board height={320} label={l(say('Angelua gradu eta minututan eta kalkulagailuaren pantaila', 'El ángulo en grados y minutos y la pantalla de la calculadora', 'الزاوية بالدرجات والدقائق وشاشة الآلة الحاسبة', 'The angle in degrees and minutes, and the calculator screen'))}>
                 <line x1={O[0]} y1={O[1]} x2={O[0] + 190} y2={O[1]} stroke={INK} strokeWidth={3} />
                 <line x1={O[0]} y1={O[1]} x2={polar(O, 200, decimal)[0]} y2={polar(O, 200, decimal)[1]} stroke={STAGE} strokeWidth={3} />
                 <AngleArc v={O} r={60} from={0} to={decimal} filled />
@@ -408,9 +409,9 @@ export function TwoSidesTool(props: LabToolProps) {
     const set = (patch: Partial<TwoSidesState>) => setState((current) => setTwoSides(current, patch))
     const controls = (
         <>
-            <Segmented label={l(say('Datuak', 'Datos', 'المعطيات'))} value={mode} options={[{ value: 'legs' as TwoSidesMode, label: l(say('Bi katetoak', 'Dos catetos', 'ضلعان قائمان')) }, { value: 'leg-hypotenuse' as TwoSidesMode, label: l(say('Katetoa eta hipotenusa', 'Cateto e hipotenusa', 'ضلع قائم ووتر')) }]} onChange={(value) => set({ mode: value })} />
-            <Stepper label={l(say('Aurkako katetoa a', 'Cateto opuesto a', 'الضلع المقابل a'))} value={a} min={1} max={mode === 'legs' ? TWO_SIDES_MAX : TWO_SIDES_MAX - 1} onChange={(value) => set({ a: value })} language={props.language} />
-            <Stepper label={l(mode === 'legs' ? say('Ondoko katetoa b', 'Cateto contiguo b', 'الضلع المجاور b') : say('Hipotenusa b', 'Hipotenusa b', 'الوتر b'))} value={b} min={mode === 'legs' ? 1 : a + 1} max={TWO_SIDES_MAX} onChange={(value) => set({ b: value })} language={props.language} />
+            <Segmented label={l(say('Datuak', 'Datos', 'المعطيات', 'Data'))} value={mode} options={[{ value: 'legs' as TwoSidesMode, label: l(say('Bi katetoak', 'Dos catetos', 'ضلعان قائمان', 'Two legs')) }, { value: 'leg-hypotenuse' as TwoSidesMode, label: l(say('Katetoa eta hipotenusa', 'Cateto e hipotenusa', 'ضلع قائم ووتر', 'Leg and hypotenuse')) }]} onChange={(value) => set({ mode: value })} />
+            <Stepper label={l(say('Aurkako katetoa a', 'Cateto opuesto a', 'الضلع المقابل a', 'Opposite side a'))} value={a} min={1} max={mode === 'legs' ? TWO_SIDES_MAX : TWO_SIDES_MAX - 1} onChange={(value) => set({ a: value })} language={props.language} />
+            <Stepper label={l(mode === 'legs' ? say('Ondoko katetoa b', 'Cateto contiguo b', 'الضلع المجاور b', 'Adjacent side b') : say('Hipotenusa b', 'Hipotenusa b', 'الوتر b', 'Hypotenuse b'))} value={b} min={mode === 'legs' ? 1 : a + 1} max={TWO_SIDES_MAX} onChange={(value) => set({ b: value })} language={props.language} />
         </>
     )
     const thirdText = Number.isInteger(Math.round(third * 1e9) / 1e9) ? String(Math.round(third)) : num(props.language, decimalText(third, 2))
@@ -420,13 +421,13 @@ export function TwoSidesTool(props: LabToolProps) {
     const note = l(say(
         `β = 90° − α ≈ ${minutesText(beta)}. Hirugarren aldea, Pitagorasekin: ${thirdText}.`,
         `β = 90° − α ≈ ${minutesText(beta)}. Tercer lado, con Pitágoras: ${thirdText}.`,
-        `β = 90° − α ≈ ${minutesText(beta)}. الضلع الثالث بفيثاغورس: ${thirdText}.`
+        `β = 90° − α ≈ ${minutesText(beta)}. الضلع الثالث بفيثاغورس: ${thirdText}.`, `β = 90° − α ≈ ${minutesText(beta)}. Third side, using Pythagoras: ${thirdText}.`
     ))
     const given = { stroke: INK, strokeWidth: 4.5 }
     const found = { stroke: STAGE, strokeWidth: 3, strokeDasharray: '8 6' }
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={twoSidesChallenges} state={state}>
-            <Board height={320} label={l(say('Bi alde ezagunak dituen triangelu angeluzuzena', 'El triángulo rectángulo con dos lados conocidos', 'المثلث القائم المعلوم منه ضلعان'))}>
+            <Board height={320} label={l(say('Bi alde ezagunak dituen triangelu angeluzuzena', 'El triángulo rectángulo con dos lados conocidos', 'المثلث القائم المعلوم منه ضلعان', 'The right-angled triangle with two known sides'))}>
                 <polygon points={points([A, C, B])} fill={SOFT} stroke="none" />
                 <line x1={C[0]} y1={C[1]} x2={B[0]} y2={B[1]} {...given} />
                 <line x1={A[0]} y1={A[1]} x2={C[0]} y2={C[1]} {...(mode === 'legs' ? given : found)} />
@@ -441,7 +442,7 @@ export function TwoSidesTool(props: LabToolProps) {
                 <Tag x={(A[0] + B[0]) / 2 - 12} y={(A[1] + B[1]) / 2 - 8} anchor="end" color={mode === 'legs' ? STAGE : INK}>{mode === 'legs' ? thirdText : `b = ${b}`}</Tag>
                 <Tag x={540} y={110} size={20} color={SECOND}>{`α ≈ ${minutesText(alpha)}`}</Tag>
                 <Tag x={540} y={160} size={20} color={GREEN}>{`β ≈ ${minutesText(beta)}`}</Tag>
-                <Tag x={540} y={210} size={18} color={STAGE}>{`${l(mode === 'legs' ? say('hipotenusa', 'hipotenusa', 'الوتر') : say('katetoa', 'cateto', 'الضلع'))} ${thirdText}`}</Tag>
+                <Tag x={540} y={210} size={18} color={STAGE}>{`${l(mode === 'legs' ? say('hipotenusa', 'hipotenusa', 'الوتر', 'hypotenuse') : say('katetoa', 'cateto', 'الضلع', 'leg'))} ${thirdText}`}</Tag>
             </Board>
         </ToolFrame>
     )
@@ -464,19 +465,19 @@ export function ElevationTool(props: LabToolProps) {
     const set = (patch: Partial<ElevationState>) => setState((current) => setElevation(current, patch))
     const controls = (
         <>
-            <Stepper label={l(say('Distantzia (m)', 'Distancia (m)', 'المسافة (م)'))} value={distance} min={ELEVATION_LIMITS.distance.min} max={ELEVATION_LIMITS.distance.max} step={ELEVATION_LIMITS.distance.step} onChange={(value) => set({ distance: value })} language={props.language} />
-            <Stepper label={l(say('Goratze-angelua', 'Ángulo de elevación', 'زاوية الارتفاع'))} value={angle} min={ELEVATION_LIMITS.angle.min} max={ELEVATION_LIMITS.angle.max} step={ELEVATION_LIMITS.angle.step} format={(value) => `${value}°`} onChange={(value) => set({ angle: value })} language={props.language} />
+            <Stepper label={l(say('Distantzia (m)', 'Distancia (m)', 'المسافة (م)', 'Distance (m)'))} value={distance} min={ELEVATION_LIMITS.distance.min} max={ELEVATION_LIMITS.distance.max} step={ELEVATION_LIMITS.distance.step} onChange={(value) => set({ distance: value })} language={props.language} />
+            <Stepper label={l(say('Goratze-angelua', 'Ángulo de elevación', 'زاوية الارتفاع', 'Angle of elevation'))} value={angle} min={ELEVATION_LIMITS.angle.min} max={ELEVATION_LIMITS.angle.max} step={ELEVATION_LIMITS.angle.step} format={(value) => `${value}°`} onChange={(value) => set({ angle: value })} language={props.language} />
         </>
     )
     const latex = `h=${distance}\\cdot\\tg ${angle}^{\\circ}\\approx ${texNumber(props.language, decimalText(height, 2))}\\ \\text{m}`
     const note = l(say(
         `Bisuala: ${distance} : cos ${angle}° ≈ ${decimalText(sight, 2)} m.`,
         `La visual: ${distance} : cos ${angle}° ≈ ${decimalText(sight, 2)} m.`,
-        `خط النظر: ${distance} : cos ${angle}° ≈ ${decimalText(sight, 2).replace(',', '.')} م.`
+        `خط النظر: ${distance} : cos ${angle}° ≈ ${decimalText(sight, 2).replace(',', '.')} م.`, `The line of sight: ${distance} : cos ${angle}° ≈ ${num('en', decimalText(sight, 2))} m.`
     ))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={elevationChallenges} state={state}>
-            <Board height={320} label={l(say('Behatzailea, dorrea eta goratze-angelua', 'El observador, la torre y el ángulo de elevación', 'الراصد والبرج وزاوية الارتفاع'))}>
+            <Board height={320} label={l(say('Behatzailea, dorrea eta goratze-angelua', 'El observador, la torre y el ángulo de elevación', 'الراصد والبرج وزاوية الارتفاع', 'The observer, the tower and the angle of elevation'))}>
                 <line x1={20} y1={ground} x2={460} y2={ground} stroke={INK} strokeWidth={2} />
                 <rect x={foot[0] - 7} y={top[1]} width={14} height={ground - top[1]} fill={ROSE} stroke={SECOND} strokeWidth={2} />
                 <line x1={eye[0]} y1={eye[1]} x2={top[0]} y2={top[1]} stroke={STAGE} strokeWidth={2.4} strokeDasharray="8 6" />
@@ -485,9 +486,9 @@ export function ElevationTool(props: LabToolProps) {
                 <Tag x={eye[0] + 54} y={eye[1] - 10} size={14} color={SECOND} anchor="start">{`${angle}°`}</Tag>
                 <Tag x={(eye[0] + foot[0]) / 2} y={ground + 24} size={15} color={GREEN}>{`${distance} m`}</Tag>
                 <Tag x={foot[0] + 14} y={(top[1] + ground) / 2 + 6} anchor="start" size={15} color={SECOND}>h</Tag>
-                <Tag x={550} y={110} size={15} color={MUTED}>{l(say('Altuera', 'Altura', 'الارتفاع'))}</Tag>
+                <Tag x={550} y={110} size={15} color={MUTED}>{l(say('Altuera', 'Altura', 'الارتفاع', 'Height'))}</Tag>
                 <Tag x={550} y={140} size={22} color={SECOND}>{`≈ ${num(props.language, decimalText(height, 2))} m`}</Tag>
-                <Tag x={550} y={190} size={15} color={MUTED}>{l(say('Bisuala', 'Visual', 'خط النظر'))}</Tag>
+                <Tag x={550} y={190} size={15} color={MUTED}>{l(say('Bisuala', 'Visual', 'خط النظر', 'Line of sight'))}</Tag>
                 <Tag x={550} y={220} size={20} color={STAGE}>{`≈ ${num(props.language, decimalText(sight, 2))} m`}</Tag>
             </Board>
         </ToolFrame>
@@ -510,20 +511,20 @@ export function DoubleTool(props: LabToolProps) {
     const set = (patch: Partial<DoubleState>) => setState((current) => setDouble(current, patch))
     const controls = (
         <>
-            <Stepper label={l(say('Bi puntuen arteko distantzia d (m)', 'Distancia entre los dos puntos d (m)', 'المسافة بين النقطتين d (م)'))} value={d} min={DOUBLE_LIMITS.d.min} max={DOUBLE_LIMITS.d.max} step={DOUBLE_LIMITS.d.step} onChange={(value) => set({ d: value })} language={props.language} />
-            <Stepper label={l(say('Urruneko angelua α', 'Ángulo lejano α', 'الزاوية البعيدة α'))} value={far} min={DOUBLE_LIMITS.far.min} max={DOUBLE_LIMITS.far.max} step={DOUBLE_LIMITS.step} format={(value) => `${value}°`} onChange={(value) => set({ far: value })} language={props.language} />
-            <Stepper label={l(say('Hurbileko angelua β', 'Ángulo cercano β', 'الزاوية القريبة β'))} value={near} min={DOUBLE_LIMITS.near.min} max={DOUBLE_LIMITS.near.max} step={DOUBLE_LIMITS.step} format={(value) => `${value}°`} onChange={(value) => set({ near: value })} language={props.language} />
+            <Stepper label={l(say('Bi puntuen arteko distantzia d (m)', 'Distancia entre los dos puntos d (m)', 'المسافة بين النقطتين d (م)', 'Distance between the two points d (m)'))} value={d} min={DOUBLE_LIMITS.d.min} max={DOUBLE_LIMITS.d.max} step={DOUBLE_LIMITS.d.step} onChange={(value) => set({ d: value })} language={props.language} />
+            <Stepper label={l(say('Urruneko angelua α', 'Ángulo lejano α', 'الزاوية البعيدة α', 'Far angle α'))} value={far} min={DOUBLE_LIMITS.far.min} max={DOUBLE_LIMITS.far.max} step={DOUBLE_LIMITS.step} format={(value) => `${value}°`} onChange={(value) => set({ far: value })} language={props.language} />
+            <Stepper label={l(say('Hurbileko angelua β', 'Ángulo cercano β', 'الزاوية القريبة β', 'Near angle β'))} value={near} min={DOUBLE_LIMITS.near.min} max={DOUBLE_LIMITS.near.max} step={DOUBLE_LIMITS.step} format={(value) => `${value}°`} onChange={(value) => set({ near: value })} language={props.language} />
         </>
     )
     const latex = `\\begin{cases}h=x\\cdot\\tg ${near}^{\\circ}\\\\ h=(${d}+x)\\cdot\\tg ${far}^{\\circ}\\end{cases}`
     const note = l(say(
         `x ≈ ${decimalText(x, 2)} m eta h ≈ ${decimalText(h, 2)} m.`,
         `x ≈ ${decimalText(x, 2)} m y h ≈ ${decimalText(h, 2)} m.`,
-        `x ≈ ${decimalText(x, 2).replace(',', '.')} م وh ≈ ${decimalText(h, 2).replace(',', '.')} م.`
+        `x ≈ ${decimalText(x, 2).replace(',', '.')} م وh ≈ ${decimalText(h, 2).replace(',', '.')} م.`, `x ≈ ${num('en', decimalText(x, 2))} m and h ≈ ${num('en', decimalText(h, 2))} m.`
     ))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={doubleChallenges} state={state}>
-            <Board height={350} label={l(say('Bi puntutatik neurtutako dorrea', 'La torre medida desde dos puntos', 'البرج مقيسًا من نقطتين'))}>
+            <Board height={350} label={l(say('Bi puntutatik neurtutako dorrea', 'La torre medida desde dos puntos', 'البرج مقيسًا من نقطتين', 'The tower measured from two points'))}>
                 <line x1={20} y1={ground} x2={470} y2={ground} stroke={INK} strokeWidth={2} />
                 <rect x={P[0] - 6} y={T[1]} width={12} height={ground - T[1]} fill={ROSE} stroke={SECOND} strokeWidth={2} />
                 <line x1={A[0]} y1={A[1]} x2={T[0]} y2={T[1]} stroke={MUTED} strokeWidth={2} strokeDasharray="7 5" />
@@ -566,21 +567,21 @@ export function AreaTool(props: LabToolProps) {
     const set = (patch: Partial<AreaState>) => setState((current) => setArea(current, patch))
     const controls = (
         <>
-            <Stepper label={l(say('b aldea', 'Lado b', 'الضلع b'))} value={b} min={AREA_LIMITS.side.min} max={AREA_LIMITS.side.max} onChange={(value) => set({ b: value })} language={props.language} />
-            <Stepper label={l(say('c aldea', 'Lado c', 'الضلع c'))} value={c} min={AREA_LIMITS.side.min} max={AREA_LIMITS.side.max} onChange={(value) => set({ c: value })} language={props.language} />
-            <Stepper label={l(say('A angelua', 'Ángulo A', 'الزاوية A'))} value={angle} min={AREA_LIMITS.angle.min} max={AREA_LIMITS.angle.max} step={AREA_LIMITS.angle.step} format={(value) => `${value}°`} onChange={(value) => set({ angle: value })} language={props.language} />
+            <Stepper label={l(say('b aldea', 'Lado b', 'الضلع b', 'Side b'))} value={b} min={AREA_LIMITS.side.min} max={AREA_LIMITS.side.max} onChange={(value) => set({ b: value })} language={props.language} />
+            <Stepper label={l(say('c aldea', 'Lado c', 'الضلع c', 'Side c'))} value={c} min={AREA_LIMITS.side.min} max={AREA_LIMITS.side.max} onChange={(value) => set({ c: value })} language={props.language} />
+            <Stepper label={l(say('A angelua', 'Ángulo A', 'الزاوية A', 'Angle A'))} value={angle} min={AREA_LIMITS.angle.min} max={AREA_LIMITS.angle.max} step={AREA_LIMITS.angle.step} format={(value) => `${value}°`} onChange={(value) => set({ angle: value })} language={props.language} />
         </>
     )
     const latex = `S=\\frac{1}{2}\\cdot ${b}\\cdot ${c}\\cdot\\sen ${angle}^{\\circ}\\approx ${texNumber(props.language, decimalText(area, 2))}`
     const note = l(say(
         `Altuera: h = ${c} · sin ${angle}° ≈ ${decimalText(altitude, 2)}.`,
         `Altura: h = ${c} · sen ${angle}° ≈ ${decimalText(altitude, 2)}.`,
-        `الارتفاع: h = ${c} · sin ${angle}° ≈ ${decimalText(altitude, 2).replace(',', '.')}.`
+        `الارتفاع: h = ${c} · sin ${angle}° ≈ ${decimalText(altitude, 2).replace(',', '.')}.`, `Height: h = ${c} · sin ${angle}° ≈ ${num('en', decimalText(altitude, 2))}.`
     ))
     const outside = footX < 0 || footX > b
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={areaChallenges} state={state}>
-            <Board height={320} label={l(say('Bi alde, haien arteko angelua eta altuera dituen triangelua', 'El triángulo con dos lados, el ángulo que forman y su altura', 'المثلث بضلعين والزاوية بينهما وارتفاعه'))}>
+            <Board height={320} label={l(say('Bi alde, haien arteko angelua eta altuera dituen triangelua', 'El triángulo con dos lados, el ángulo que forman y su altura', 'المثلث بضلعين والزاوية بينهما وارتفاعه', 'The triangle with two sides, the angle they form and its height'))}>
                 {outside && <line x1={Math.min(A[0], H[0])} y1={base} x2={Math.max(C[0], H[0])} y2={base} stroke={MUTED} strokeWidth={1.4} strokeDasharray="5 5" />}
                 <polygon points={points([A, C, B])} fill={STAGE_TINT} stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
                 <line x1={A[0]} y1={A[1]} x2={C[0]} y2={C[1]} stroke={GREEN} strokeWidth={4} />
@@ -594,9 +595,9 @@ export function AreaTool(props: LabToolProps) {
                 <Tag x={(A[0] + C[0]) / 2} y={base + 26} size={15} color={GREEN}>{`b = ${b}`}</Tag>
                 <Tag x={(A[0] + B[0]) / 2 - 10} y={(A[1] + B[1]) / 2} anchor="end" size={15} color={STAGE}>{`c = ${c}`}</Tag>
                 <Tag x={B[0] + 8} y={(B[1] + base) / 2 + 6} anchor="start" size={15} color={SECOND}>h</Tag>
-                <Tag x={560} y={110} size={15} color={MUTED}>{l(say('Altuera', 'Altura', 'الارتفاع'))}</Tag>
+                <Tag x={560} y={110} size={15} color={MUTED}>{l(say('Altuera', 'Altura', 'الارتفاع', 'Height'))}</Tag>
                 <Tag x={560} y={138} size={20} color={SECOND}>{`h ≈ ${num(props.language, decimalText(altitude, 2))}`}</Tag>
-                <Tag x={560} y={186} size={15} color={MUTED}>{l(say('Azalera', 'Área', 'المساحة'))}</Tag>
+                <Tag x={560} y={186} size={15} color={MUTED}>{l(say('Azalera', 'Área', 'المساحة', 'Area'))}</Tag>
                 <Tag x={560} y={216} size={22}>{`≈ ${num(props.language, decimalText(area, 2))}`}</Tag>
             </Board>
         </ToolFrame>
@@ -606,10 +607,10 @@ export function AreaTool(props: LabToolProps) {
 /* ---------- 9. The unit circle ---------- */
 
 const quadrantNames: Record<1 | 2 | 3 | 4, Text> = {
-    1: say('I. koadrantea', 'I cuadrante', 'الربع الأول'),
-    2: say('II. koadrantea', 'II cuadrante', 'الربع الثاني'),
-    3: say('III. koadrantea', 'III cuadrante', 'الربع الثالث'),
-    4: say('IV. koadrantea', 'IV cuadrante', 'الربع الرابع')
+    1: say('I. koadrantea', 'I cuadrante', 'الربع الأول', 'First quadrant'),
+    2: say('II. koadrantea', 'II cuadrante', 'الربع الثاني', 'Second quadrant'),
+    3: say('III. koadrantea', 'III cuadrante', 'الربع الثالث', 'Third quadrant'),
+    4: say('IV. koadrantea', 'IV cuadrante', 'الربع الرابع', 'Fourth quadrant')
 }
 
 export function CircleTool(props: LabToolProps) {
@@ -624,17 +625,17 @@ export function CircleTool(props: LabToolProps) {
     const P = polar(O, R, angle)
     const Q = polar(O, R, reduced)
     const controls = (
-        <Stepper label={l(say('Angelua', 'Ángulo', 'الزاوية'))} value={angle} min={0} max={360} step={CIRCLE_STEP} format={(value) => `${value}°`} onChange={(value) => setState((current) => setCircle(current, { angle: value }))} language={props.language} />
+        <Stepper label={l(say('Angelua', 'Ángulo', 'الزاوية', 'Angle'))} value={angle} min={0} max={360} step={CIRCLE_STEP} format={(value) => `${value}°`} onChange={(value) => setState((current) => setCircle(current, { angle: value }))} language={props.language} />
     )
     const relationText = relation === 'same' ? `${angle}°` : relation === '180-a' ? `180° − ${reduced}°` : relation === '180+a' ? `180° + ${reduced}°` : `360° − ${reduced}°`
     const sign = (value: number) => (value > 0 ? '' : value < 0 ? '-' : '')
     const latex = relation === 'same' || reduced === 0 || reduced === 90
         ? `\\sen ${angle}^{\\circ}\\approx ${texNumber(props.language, decimalText(sin, 4))}\\quad\\cos ${angle}^{\\circ}\\approx ${texNumber(props.language, decimalText(cos, 4))}`
         : `\\sen ${angle}^{\\circ}=${sign(sin)}\\sen ${reduced}^{\\circ}\\quad\\cos ${angle}^{\\circ}=${sign(cos)}\\cos ${reduced}^{\\circ}`
-    const note = `${zone ? l(quadrantNames[zone]) : l(say('Ardatz baten gainean', 'Sobre un eje', 'على محور'))}${relation === 'same' ? '' : ` · ${angle}° = ${relationText}`}`
+    const note = `${zone ? l(quadrantNames[zone]) : l(say('Ardatz baten gainean', 'Sobre un eje', 'على محور', 'On an axis'))}${relation === 'same' ? '' : ` · ${angle}° = ${relationText}`}`
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={circleChallenges} state={state}>
-            <Board height={320} label={l(say('Zirkunferentzia goniometrikoa, angeluaren puntua eta haren kosinua eta sinua', 'La circunferencia goniométrica con el punto del ángulo, su coseno y su seno', 'الدائرة المثلثية مع نقطة الزاوية وجيب تمامها وجيبها'))}>
+            <Board height={320} label={l(say('Zirkunferentzia goniometrikoa, angeluaren puntua eta haren kosinua eta sinua', 'La circunferencia goniométrica con el punto del ángulo, su coseno y su seno', 'الدائرة المثلثية مع نقطة الزاوية وجيب تمامها وجيبها', 'The unit circle with the point of the angle, its cosine and its sine'))}>
                 <line x1={O[0] - R - 30} y1={O[1]} x2={O[0] + R + 30} y2={O[1]} stroke={MUTED} strokeWidth={1.4} />
                 <line x1={O[0]} y1={O[1] - R - 20} x2={O[0]} y2={O[1] + R + 20} stroke={MUTED} strokeWidth={1.4} />
                 <circle cx={O[0]} cy={O[1]} r={R} fill="none" stroke={INK} strokeWidth={2} />
@@ -653,7 +654,7 @@ export function CircleTool(props: LabToolProps) {
                 <Tag x={O[0] + R + 8} y={O[1] - 8} anchor="start" size={13} color={MUTED}>1</Tag>
                 {relation !== 'same' && <Tag x={530} y={70} size={16} color={MUTED}>{`${angle}° = ${relationText}`}</Tag>}
                 <RatioColumn language={props.language} x={530} y={120} sin={sin} cos={cos} tan={tan} />
-                <Tag x={530} y={250} size={15} color={MUTED}>{zone ? l(quadrantNames[zone]) : l(say('Ardatz baten gainean', 'Sobre un eje', 'على محور'))}</Tag>
+                <Tag x={530} y={250} size={15} color={MUTED}>{zone ? l(quadrantNames[zone]) : l(say('Ardatz baten gainean', 'Sobre un eje', 'على محور', 'On an axis'))}</Tag>
             </Board>
         </ToolFrame>
     )
@@ -679,8 +680,8 @@ export function RadianTool(props: LabToolProps) {
     const set = (patch: Partial<RadianState>) => setState((current) => setRadian(current, patch))
     const controls = (
         <>
-            <Stepper label={l(say('Angelua', 'Ángulo', 'الزاوية'))} value={angle} min={0} max={360} step={CIRCLE_STEP} format={(value) => `${value}°`} onChange={(value) => set({ angle: value })} language={props.language} />
-            <Stepper label={l(say('Erradioa r', 'Radio r', 'نصف القطر r'))} value={r} min={1} max={RADIAN_RADIUS_MAX} onChange={(value) => set({ r: value })} language={props.language} />
+            <Stepper label={l(say('Angelua', 'Ángulo', 'الزاوية', 'Angle'))} value={angle} min={0} max={360} step={CIRCLE_STEP} format={(value) => `${value}°`} onChange={(value) => set({ angle: value })} language={props.language} />
+            <Stepper label={l(say('Erradioa r', 'Radio r', 'نصف القطر r', 'Radius r'))} value={r} min={1} max={RADIAN_RADIUS_MAX} onChange={(value) => set({ r: value })} language={props.language} />
         </>
     )
     const latex = `${angle}^{\\circ}=${angle}\\cdot\\frac{\\pi}{180}=${piLatex(theta)}\\ \\text{rad}\\qquad l=${r}\\cdot ${piLatex(theta)}=${piLatex(arc)}`
@@ -688,12 +689,12 @@ export function RadianTool(props: LabToolProps) {
     const note = l(say(
         `θ ≈ ${decimalText(radians, 2)} rad eta l ≈ ${decimalText(r * radians, 2)}.`,
         `θ ≈ ${decimalText(radians, 2)} rad y l ≈ ${decimalText(r * radians, 2)}.`,
-        `θ ≈ ${decimalText(radians, 2).replace(',', '.')} rad وl ≈ ${decimalText(r * radians, 2).replace(',', '.')}.`
+        `θ ≈ ${decimalText(radians, 2).replace(',', '.')} rad وl ≈ ${decimalText(r * radians, 2).replace(',', '.')}.`, `θ ≈ ${num('en', decimalText(radians, 2))} rad and l ≈ ${num('en', decimalText(r * radians, 2))}.`
     ))
     const end = polar(O, R, angle)
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={radianChallenges} state={state}>
-            <Board height={320} label={l(say('Zirkunferentzia, angelua eta ebakitzen duen arkua', 'La circunferencia, el ángulo y el arco que corta', 'الدائرة والزاوية والقوس الذي تقطعه'))}>
+            <Board height={320} label={l(say('Zirkunferentzia, angelua eta ebakitzen duen arkua', 'La circunferencia, el ángulo y el arco que corta', 'الدائرة والزاوية والقوس الذي تقطعه', 'The circle, the angle and the arc it cuts off'))}>
                 <circle cx={O[0]} cy={O[1]} r={R} fill={PAPER} stroke={MUTED} strokeWidth={1.6} />
                 <AngleArc v={O} r={R} from={0} to={angle} color={STAGE} filled />
                 <AngleArc v={O} r={R} from={0} to={angle} color={SECOND} />
@@ -701,9 +702,9 @@ export function RadianTool(props: LabToolProps) {
                 {angle > 0 && angle < 360 && <line x1={O[0]} y1={O[1]} x2={end[0]} y2={end[1]} stroke={INK} strokeWidth={2.2} />}
                 <circle cx={O[0]} cy={O[1]} r={4} fill={INK} />
                 <Tag x={O[0] + R / 2} y={O[1] + 22} size={14} color={GREEN}>{`r = ${r}`}</Tag>
-                <Tag x={530} y={90} size={15} color={MUTED}>{l(say('Angelua', 'Ángulo', 'الزاوية'))}</Tag>
+                <Tag x={530} y={90} size={15} color={MUTED}>{l(say('Angelua', 'Ángulo', 'الزاوية', 'Angle'))}</Tag>
                 <Tag x={530} y={122} size={22} color={STAGE}>{`${angle}° = ${piPlain(theta)} rad`}</Tag>
-                <Tag x={530} y={178} size={15} color={MUTED}>{l(say('Arkuaren luzera', 'Longitud del arco', 'طول القوس'))}</Tag>
+                <Tag x={530} y={178} size={15} color={MUTED}>{l(say('Arkuaren luzera', 'Longitud del arco', 'طول القوس', 'Arc length'))}</Tag>
                 <Tag x={530} y={210} size={22} color={SECOND}>{`l = ${piPlain(arc)}`}</Tag>
                 <Tag x={530} y={244} size={15} color={MUTED}>{`≈ ${num(props.language, decimalText((r * angle * Math.PI) / 180, 2))}`}</Tag>
             </Board>

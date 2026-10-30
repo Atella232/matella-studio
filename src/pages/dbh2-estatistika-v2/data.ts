@@ -25,8 +25,8 @@ export const heightClasses = [
 
 /** How 40 students come to school, in percentages */
 export const transportSurvey: Array<{ name: LocalizedText; percent: number }> = [
-    { name: { eu: 'Oinez', es: 'A pie', ar: 'مشيًا' }, percent: 45 },
-    { name: { eu: 'Autobusez', es: 'En autobús', ar: 'بالحافلة' }, percent: 30 },
-    { name: { eu: 'Autoz', es: 'En coche', ar: 'بالسيارة' }, percent: 15 },
-    { name: { eu: 'Bizikletaz', es: 'En bici', ar: 'بالدراجة' }, percent: 10 }
+    { name: { eu: 'Oinez', es: 'A pie', en: 'On foot', ar: 'مشيًا' }, percent: 45 },
+    { name: { eu: 'Autobusez', es: 'En autobús', en: 'By bus', ar: 'بالحافلة' }, percent: 30 },
+    { name: { eu: 'Autoz', es: 'En coche', en: 'By car', ar: 'بالسيارة' }, percent: 15 },
+    { name: { eu: 'Bizikletaz', es: 'En bici', en: 'By bike', ar: 'بالدراجة' }, percent: 10 }
 ]

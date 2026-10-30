@@ -35,7 +35,7 @@ export function PowersLaboratory(props: {
             tools={powersLabTools}
             stages={powersStages}
             components={toolComponents}
-            title={{ eu: 'Berretu, atera eta arrazionalizatu', es: 'Eleva, extrae y racionaliza', ar: 'ارفع وأخرج وأنطِق' }}
+            title={{ eu: 'Berretu, atera eta arrazionalizatu', es: 'Eleva, extrae y racionaliza', en: 'Raise, extract and rationalise', ar: 'ارفع وأخرج وأنطِق' }}
         />
     )
 }

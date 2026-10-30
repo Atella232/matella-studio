@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
+import { decimalSeparatorFor } from '../../utils/numberFormat'
 import { Figure } from '../dbh2-zatikiak-prototype/figures'
 import { Label } from '../dbh2-funtzioak-v2/plane'
 import {
@@ -40,10 +41,10 @@ import { Circle3, Cone, Cylinder, GridBox, Segment3, Solid, Sphere } from './sol
    carry words only; numbers and formulas go in their own left-to-right text.
    ========================================================================== */
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language, text)
-/** A number written with the comma, shown with the point in Arabic */
-const num = (language: UnitLanguage, text: string) => (language === 'ar' ? text.replace(/,/g, '.') : text)
+/** A number written with the comma: the point in English and Arabic, the comma in Spanish and Basque */
+const num = (language: UnitLanguage, text: string) => (language === 'ar' ? text.replace(/,/g, '.') : text.replace(/(\d),(\d)/g, `$1${decimalSeparatorFor(language)}$2`))
 /** Letter of the base area: O (oinarria) in Basque, B elsewhere */
 const baseLetter = (language: UnitLanguage) => (language === 'eu' ? 'O' : 'B')
 const dot3 = (a: V3, b: V3) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2]
@@ -104,23 +105,23 @@ export function ElementsFigure({ language }: { language: UnitLanguage }) {
     const prismCount = countElements(prism)
     const pyramidCount = countElements(pyramid)
     const rows: { text: LocalizedText; color: string; values: [number, number] }[] = [
-        { text: say('aurpegiak', 'caras', 'الأوجه'), color: STAGE, values: [prismCount.faces, pyramidCount.faces] },
-        { text: say('ertzak', 'aristas', 'الأحرف'), color: SECOND, values: [prismCount.edges, pyramidCount.edges] },
-        { text: say('erpinak', 'vértices', 'الرؤوس'), color: GREEN, values: [prismCount.vertices, pyramidCount.vertices] }
+        { text: say('aurpegiak', 'caras', 'الأوجه', 'faces'), color: STAGE, values: [prismCount.faces, pyramidCount.faces] },
+        { text: say('ertzak', 'aristas', 'الأحرف', 'edges'), color: SECOND, values: [prismCount.edges, pyramidCount.edges] },
+        { text: say('erpinak', 'vértices', 'الرؤوس', 'vertices'), color: GREEN, values: [prismCount.vertices, pyramidCount.vertices] }
     ]
     return (
-        <Figure height={300} label={pick(language, say('Prisma eta piramide pentagonalak: aurpegi bat, ertz bat eta erpin bat nabarmenduta', 'Prisma y pirámide pentagonales: una cara, una arista y un vértice destacados', 'منشور وهرم خماسيان: وجه وحرف ورأس مميزة'))}>
+        <Figure height={300} label={pick(language, say('Prisma eta piramide pentagonalak: aurpegi bat, ertz bat eta erpin bat nabarmenduta', 'Prisma y pirámide pentagonales: una cara, una arista y un vértice destacados', 'منشور وهرم خماسيان: وجه وحرف ورأس مميزة', 'Pentagonal prism and pyramid: one face, one edge and one vertex highlighted'))}>
             <Solid cam={camPrism} vertices={prism} faceFill={(face) => (face === prismFace ? STAGE_TINT : undefined)} />
             <Segment3 cam={camPrism} a={prism[front]} b={prism[front + 5]} color={SECOND} width={4} />
             <circle cx={camPrism.at(prism[back + 5])[0]} cy={camPrism.at(prism[back + 5])[1]} r={6} fill={GREEN} />
             <Solid cam={camPyramid} vertices={pyramid} faceFill={(face) => (face === pyramidFace ? STAGE_TINT : undefined)} />
             <Segment3 cam={camPyramid} a={pyramid[pyramidFront]} b={pyramid[(pyramidFront + 1) % 5]} color={SECOND} width={4} />
             <circle cx={camPyramid.at(pyramid[5])[0]} cy={camPyramid.at(pyramid[5])[1]} r={6} fill={GREEN} />
-            <Caption x={115} y={290} language={language} text={say('prisma', 'prisma', 'منشور')} color={INK} />
-            <Caption x={295} y={290} language={language} text={say('piramidea', 'pirámide', 'هرم')} color={INK} />
+            <Caption x={115} y={290} language={language} text={say('prisma', 'prisma', 'منشور', 'prism')} color={INK} />
+            <Caption x={295} y={290} language={language} text={say('piramidea', 'pirámide', 'هرم', 'pyramid')} color={INK} />
 
-            <Caption x={590} y={70} language={language} text={say('prisma', 'prisma', 'منشور')} size={14} />
-            <Caption x={670} y={70} language={language} text={say('piramidea', 'pirámide', 'هرم')} size={14} />
+            <Caption x={590} y={70} language={language} text={say('prisma', 'prisma', 'منشور', 'prism')} size={14} />
+            <Caption x={670} y={70} language={language} text={say('piramidea', 'pirámide', 'هرم', 'pyramid')} size={14} />
             {rows.map((row, index) => (
                 <g key={index}>
                     <rect x={418} y={98 + index * 44} width={14} height={14} rx={3} fill={row.color} />
@@ -129,7 +130,7 @@ export function ElementsFigure({ language }: { language: UnitLanguage }) {
                     <Formula x={670} y={112 + index * 44} size={20}>{row.values[1]}</Formula>
                 </g>
             ))}
-            <Caption x={560} y={262} language={language} text={say('Oinarria: pentagonoa (n = 5)', 'Base: pentágono (n = 5)', 'القاعدة: مخمّس')} size={14} />
+            <Caption x={560} y={262} language={language} text={say('Oinarria: pentagonoa (n = 5)', 'Base: pentágono (n = 5)', 'القاعدة: مخمّس', 'Base: pentagon (n = 5)')} size={14} />
         </Figure>
     )
 }
@@ -138,18 +139,18 @@ export function ElementsFigure({ language }: { language: UnitLanguage }) {
 
 export function EulerFigure({ language }: { language: UnitLanguage }) {
     const solids: { vertices: V3[]; lift: number; scale: number; name: LocalizedText }[] = [
-        { vertices: boxVertices(1.5, 1.5, 1.5), lift: 18, scale: 22, name: say('kuboa', 'cubo', 'مكعب') },
-        { vertices: prismVertices(5, 0.9, 1.4, 0.2), lift: 18, scale: 22, name: say('prisma pentagonala', 'prisma pentagonal', 'منشور خماسي') },
-        { vertices: pyramidVertices(6, 0.95, 1.6), lift: 18, scale: 22, name: say('piramide hexagonala', 'pirámide hexagonal', 'هرم سداسي') },
-        { vertices: platonic.octa, lift: 2, scale: 26, name: say('oktaedroa', 'octaedro', 'ثماني الأوجه') }
+        { vertices: boxVertices(1.5, 1.5, 1.5), lift: 18, scale: 22, name: say('kuboa', 'cubo', 'مكعب', 'cube') },
+        { vertices: prismVertices(5, 0.9, 1.4, 0.2), lift: 18, scale: 22, name: say('prisma pentagonala', 'prisma pentagonal', 'منشور خماسي', 'pentagonal prism') },
+        { vertices: pyramidVertices(6, 0.95, 1.6), lift: 18, scale: 22, name: say('piramide hexagonala', 'pirámide hexagonal', 'هرم سداسي', 'hexagonal pyramid') },
+        { vertices: platonic.octa, lift: 2, scale: 26, name: say('oktaedroa', 'octaedro', 'ثماني الأوجه', 'octahedron') }
     ]
     const columns = [
-        { x: 270, text: say('aurpegiak', 'caras', 'الأوجه'), color: STAGE },
-        { x: 370, text: say('erpinak', 'vértices', 'الرؤوس'), color: GREEN },
-        { x: 470, text: say('ertzak', 'aristas', 'الأحرف'), color: SECOND }
+        { x: 270, text: say('aurpegiak', 'caras', 'الأوجه', 'faces'), color: STAGE },
+        { x: 370, text: say('erpinak', 'vértices', 'الرؤوس', 'vertices'), color: GREEN },
+        { x: 470, text: say('ertzak', 'aristas', 'الأحرف', 'edges'), color: SECOND }
     ]
     return (
-        <Figure height={330} label={pick(language, say('Eulerren formula lau poliedrotan: aurpegiak + erpinak = ertzak + 2', 'La fórmula de Euler en cuatro poliedros: caras + vértices = aristas + 2', 'صيغة أويلر في أربعة متعددات أوجه: الأوجه + الرؤوس = الأحرف + 2'))}>
+        <Figure height={330} label={pick(language, say('Eulerren formula lau poliedrotan: aurpegiak + erpinak = ertzak + 2', 'La fórmula de Euler en cuatro poliedros: caras + vértices = aristas + 2', 'صيغة أويلر في أربعة متعددات أوجه: الأوجه + الرؤوس = الأحرف + 2', 'Euler\'s formula for four polyhedra: faces + vertices = edges + 2'))}>
             {columns.map((column) => <Caption key={column.x} x={column.x} y={34} language={language} text={column.text} color={column.color} size={14} />)}
             {solids.map((solid, index) => {
                 const y = 88 + index * 66
@@ -174,15 +175,15 @@ export function EulerFigure({ language }: { language: UnitLanguage }) {
 
 export function RegularFigure({ language }: { language: UnitLanguage }) {
     const solids: { vertices: V3[]; radius: number; name: LocalizedText; sum: string }[] = [
-        { vertices: platonic.tetra, radius: Math.sqrt(3), name: say('tetraedroa', 'tetraedro', 'رباعي الأوجه'), sum: '3 · 60° = 180°' },
-        { vertices: platonic.cube, radius: Math.sqrt(3), name: say('kuboa', 'cubo', 'المكعب'), sum: '3 · 90° = 270°' },
-        { vertices: platonic.octa, radius: 1, name: say('oktaedroa', 'octaedro', 'ثماني الأوجه'), sum: '4 · 60° = 240°' },
-        { vertices: platonic.dodeca, radius: Math.sqrt(3), name: say('dodekaedroa', 'dodecaedro', 'اثنا عشري الأوجه'), sum: '3 · 108° = 324°' },
-        { vertices: platonic.icosa, radius: Math.hypot(1, (1 + Math.sqrt(5)) / 2), name: say('ikosaedroa', 'icosaedro', 'عشريني الأوجه'), sum: '5 · 60° = 300°' }
+        { vertices: platonic.tetra, radius: Math.sqrt(3), name: say('tetraedroa', 'tetraedro', 'رباعي الأوجه', 'tetrahedron'), sum: '3 · 60° = 180°' },
+        { vertices: platonic.cube, radius: Math.sqrt(3), name: say('kuboa', 'cubo', 'المكعب', 'cube'), sum: '3 · 90° = 270°' },
+        { vertices: platonic.octa, radius: 1, name: say('oktaedroa', 'octaedro', 'ثماني الأوجه', 'octahedron'), sum: '4 · 60° = 240°' },
+        { vertices: platonic.dodeca, radius: Math.sqrt(3), name: say('dodekaedroa', 'dodecaedro', 'اثنا عشري الأوجه', 'dodecahedron'), sum: '3 · 108° = 324°' },
+        { vertices: platonic.icosa, radius: Math.hypot(1, (1 + Math.sqrt(5)) / 2), name: say('ikosaedroa', 'icosaedro', 'عشريني الأوجه', 'icosahedron'), sum: '5 · 60° = 300°' }
     ]
     const fills = [ROSE, SOFT, SKY, MINT, STAGE_TINT]
     return (
-        <Figure height={300} label={pick(language, say('Bost poliedro erregularrak eta erpin bakoitzean elkartzen diren angeluen batura', 'Los cinco poliedros regulares y la suma de los ángulos que se juntan en cada vértice', 'متعددات الأوجه المنتظمة الخمسة ومجموع الزوايا الملتقية عند كل رأس'))}>
+        <Figure height={300} label={pick(language, say('Bost poliedro erregularrak eta erpin bakoitzean elkartzen diren angeluen batura', 'Los cinco poliedros regulares y la suma de los ángulos que se juntan en cada vértice', 'متعددات الأوجه المنتظمة الخمسة ومجموع الزوايا الملتقية عند كل رأس', 'The five regular polyhedra and the sum of the angles that meet at each vertex'))}>
             {solids.map((solid, index) => {
                 const x = 72 + index * 144
                 const count = countElements(solid.vertices)
@@ -195,7 +196,7 @@ export function RegularFigure({ language }: { language: UnitLanguage }) {
                     </g>
                 )
             })}
-            <Caption y={278} language={language} text={say('Erpin bakoitzean: 360° baino gutxiago', 'En cada vértice: menos de 360°', 'عند كل رأس: أقل من 360°')} color={INK} />
+            <Caption y={278} language={language} text={say('Erpin bakoitzean: 360° baino gutxiago', 'En cada vértice: menos de 360°', 'عند كل رأس: أقل من 360°', 'At each vertex: less than 360°')} color={INK} />
         </Figure>
     )
 }
@@ -212,7 +213,7 @@ export function PrismAreaFigure({ language }: { language: UnitLanguage }) {
     const prism: V3[] = [[0, 0, 0], [3, 0, 0], [0, 0, 4], [0, 10, 0], [3, 10, 0], [0, 10, 4]].map(([x, y, z]): V3 => [x - 1, y, z - 4 / 3])
     const cam = camera(335, 262, 13)
     return (
-        <Figure height={330} label={pick(language, say('Prisma triangeluar baten garapena: alboko aurpegiek laukizuzen bat osatzen dute', 'Desarrollo de un prisma triangular: las caras laterales forman un rectángulo', 'نشر منشور ثلاثي: الأوجه الجانبية تكوّن مستطيلًا'))}>
+        <Figure height={330} label={pick(language, say('Prisma triangeluar baten garapena: alboko aurpegiek laukizuzen bat osatzen dute', 'Desarrollo de un prisma triangular: las caras laterales forman un rectángulo', 'نشر منشور ثلاثي: الأوجه الجانبية تكوّن مستطيلًا', 'Net of a triangular prism: the lateral faces form a rectangle'))}>
             <rect x={xs[0]} y={top} width={xs[3] - xs[0]} height={bottom - top} fill={STAGE_TINT} stroke={INK} strokeWidth={2} />
             {xs.slice(1, 3).map((x) => <line key={x} x1={x} y1={top} x2={x} y2={bottom} stroke={INK} strokeWidth={1.4} strokeDasharray="5 4" />)}
             <polygon points={points([[xs[1], top], [xs[2], top], [xs[1], top - 3 * u]])} fill={SOFT} stroke={INK} strokeWidth={2} />
@@ -232,7 +233,7 @@ export function PrismAreaFigure({ language }: { language: UnitLanguage }) {
             <Formula x={560} y={110} size={16} color={STAGE}><Area index="L" />= (3 + 4 + 5) · 10 = 120</Formula>
             <Formula x={560} y={150} size={16} color={SECOND}><Area index={B} />= 3 · 4 : 2 = 6</Formula>
             <Formula x={560} y={190} size={16}><Area index="T" />= 120 + 2 · 6 = 132</Formula>
-            <Caption x={560} y={240} language={language} text={say('Alboko azalera: perimetroa · altuera', 'Área lateral: perímetro · altura', 'المساحة الجانبية: المحيط · الارتفاع')} size={14} />
+            <Caption x={560} y={240} language={language} text={say('Alboko azalera: perimetroa · altuera', 'Área lateral: perímetro · altura', 'المساحة الجانبية: المحيط · الارتفاع', 'Lateral area: perimeter · height')} size={14} />
         </Figure>
     )
 }
@@ -248,7 +249,7 @@ export function PyramidAreaFigure({ language }: { language: UnitLanguage }) {
     const [c, m, a] = [cam.at(centre), cam.at(foot), cam.at(apex)]
     const B = baseLetter(language)
     return (
-        <Figure height={320} label={pick(language, say('Piramide karratu bat: altuera, oinarriaren apotema-erdia eta piramidearen apotema triangelu angeluzuzen batean', 'Una pirámide cuadrangular: la altura, media base y la apotema de la pirámide forman un triángulo rectángulo', 'هرم رباعي: الارتفاع ونصف القاعدة وعامد الهرم تكوّن مثلثًا قائمًا'))}>
+        <Figure height={320} label={pick(language, say('Piramide karratu bat: altuera, oinarriaren apotema-erdia eta piramidearen apotema triangelu angeluzuzen batean', 'Una pirámide cuadrangular: la altura, media base y la apotema de la pirámide forman un triángulo rectángulo', 'هرم رباعي: الارتفاع ونصف القاعدة وعامد الهرم تكوّن مثلثًا قائمًا', 'A square-based pyramid: the height, half a base side and the slant height of the pyramid form a right-angled triangle'))}>
             <Solid cam={cam} vertices={pyramid} fill={SOFT} />
             <polygon points={points([c, m, a])} fill={ROSE} fillOpacity={0.8} />
             <line x1={c[0]} y1={c[1]} x2={a[0]} y2={a[1]} stroke={STAGE} strokeWidth={2.4} strokeDasharray="6 4" />
@@ -264,7 +265,7 @@ export function PyramidAreaFigure({ language }: { language: UnitLanguage }) {
             <Formula x={530} y={145} size={17} color={STAGE}><Area index="L" />= 4 · (10 · 13 : 2) = 260</Formula>
             <Formula x={530} y={185} size={17}><Area index={B} />= 10² = 100</Formula>
             <Formula x={530} y={225} size={17}><Area index="T" />= 260 + 100 = 360</Formula>
-            <Caption x={530} y={270} language={language} text={say('a: alboko triangeluaren altuera', 'a: altura de cada triángulo lateral', 'a: ارتفاع كل مثلث جانبي')} size={14} />
+            <Caption x={530} y={270} language={language} text={say('a: alboko triangeluaren altuera', 'a: altura de cada triángulo lateral', 'a: ارتفاع كل مثلث جانبي', 'a: height of each lateral triangle')} size={14} />
         </Figure>
     )
 }
@@ -284,7 +285,7 @@ export function FrustumAreaFigure({ language }: { language: UnitLanguage }) {
     const topRight = left + 15 * s
     const yTop = y0 - 12 * s
     return (
-        <Figure height={300} label={pick(language, say('Piramide-enbor karratu bat eta haren alboko aurpegia, trapezio bat', 'Un tronco de pirámide cuadrangular y su cara lateral, un trapecio', 'جذع هرم رباعي ووجهه الجانبي، شبه منحرف'))}>
+        <Figure height={300} label={pick(language, say('Piramide-enbor karratu bat eta haren alboko aurpegia, trapezio bat', 'Un tronco de pirámide cuadrangular y su cara lateral, un trapecio', 'جذع هرم رباعي ووجهه الجانبي، شبه منحرف', 'A square-based truncated pyramid and its lateral face, a trapezium'))}>
             <Solid cam={cam} vertices={frustum} fill={PAPER} faceFill={(item) => (item === face ? STAGE_TINT : undefined)} />
             <Tag p={cam.at([0, 0, -10])} text="20" dy={24} />
 
@@ -316,7 +317,7 @@ export function CylinderFigure({ language }: { language: UnitLanguage }) {
     const axisBottom = cam.at([0, -1, 0])
     const axisTop = cam.at([0, 9.2, 0])
     return (
-        <Figure height={310} label={pick(language, say('Zilindroa laukizuzen bat bere alde baten inguruan biratuz sortzen da; garapena: laukizuzen bat eta bi zirkulu', 'El cilindro se genera al girar un rectángulo alrededor de un lado; su desarrollo: un rectángulo y dos círculos', 'تنشأ الأسطوانة بدوران مستطيل حول أحد أضلاعه؛ نشرها: مستطيل ودائرتان'))}>
+        <Figure height={310} label={pick(language, say('Zilindroa laukizuzen bat bere alde baten inguruan biratuz sortzen da; garapena: laukizuzen bat eta bi zirkulu', 'El cilindro se genera al girar un rectángulo alrededor de un lado; su desarrollo: un rectángulo y dos círculos', 'تنشأ الأسطوانة بدوران مستطيل حول أحد أضلاعه؛ نشرها: مستطيل ودائرتان', 'A cylinder is generated by rotating a rectangle around one side; its net: a rectangle and two circles'))}>
             <Cylinder cam={cam} r={2} h={8} />
             <line x1={axisBottom[0]} y1={axisBottom[1]} x2={axisTop[0]} y2={axisTop[1]} stroke={SECOND} strokeWidth={1.6} strokeDasharray="8 4 2 4" />
             <Segment3 cam={cam} a={[0, 8, 0]} b={[2 * RIGHT[0], 8, 2 * RIGHT[2]]} color={STAGE} />
@@ -334,7 +335,7 @@ export function CylinderFigure({ language }: { language: UnitLanguage }) {
             <Formula x={585} y={150} size={16} color={SECOND}><Area index={B} />{num(language, '= 3,14 · 2² = 12,56')}</Formula>
             <Formula x={585} y={190} size={16}><Area index="T" />{num(language, '= 100,48 + 2 · 12,56')}</Formula>
             <Formula x={585} y={216} size={16}>{num(language, '= 125,6')}</Formula>
-            <Caption x={585} y={262} language={language} text={say('Laukizuzenaren oinarria: zirkunferentzia', 'Base del rectángulo: la circunferencia', 'قاعدة المستطيل: محيط الدائرة')} size={14} />
+            <Caption x={585} y={262} language={language} text={say('Laukizuzenaren oinarria: zirkunferentzia', 'Base del rectángulo: la circunferencia', 'قاعدة المستطيل: محيط الدائرة', 'Base of the rectangle: the circumference')} size={14} />
         </Figure>
     )
 }
@@ -352,7 +353,7 @@ export function ConeFigure({ language }: { language: UnitLanguage }) {
     const from: Point = [centre[0] + R * Math.cos(Math.PI / 2 - spread), centre[1] + R * Math.sin(Math.PI / 2 - spread)]
     const to: Point = [centre[0] + R * Math.cos(Math.PI / 2 + spread), centre[1] + R * Math.sin(Math.PI / 2 + spread)]
     return (
-        <Figure height={310} label={pick(language, say('Konoa: altuera, erradioa eta sortzailea triangelu angeluzuzen batean; garapena: sektore zirkular bat eta zirkulu bat', 'El cono: altura, radio y generatriz en un triángulo rectángulo; su desarrollo: un sector circular y un círculo', 'المخروط: الارتفاع ونصف القطر والراسم في مثلث قائم؛ نشره: قطاع دائري ودائرة'))}>
+        <Figure height={310} label={pick(language, say('Konoa: altuera, erradioa eta sortzailea triangelu angeluzuzen batean; garapena: sektore zirkular bat eta zirkulu bat', 'El cono: altura, radio y generatriz en un triángulo rectángulo; su desarrollo: un sector circular y un círculo', 'المخروط: الارتفاع ونصف القطر والراسم في مثلث قائم؛ نشره: قطاع دائري ودائرة', 'The cone: height, radius and slant height in a right-angled triangle; its net: a circular sector and a circle'))}>
             <Cone cam={cam} r={6} h={8} />
             <polygon points={points([c, rimPoint, apex])} fill={ROSE} fillOpacity={0.7} />
             <line x1={c[0]} y1={c[1]} x2={apex[0]} y2={apex[1]} stroke={STAGE} strokeWidth={2.4} strokeDasharray="6 4" />
@@ -372,7 +373,7 @@ export function ConeFigure({ language }: { language: UnitLanguage }) {
             <Formula x={585} y={140} size={16} color={STAGE}><Area index="L" />{num(language, '= 3,14 · 6 · 10 = 188,4')}</Formula>
             <Formula x={585} y={180} size={16}><Area index={B} />{num(language, '= 3,14 · 6² = 113,04')}</Formula>
             <Formula x={585} y={220} size={16}><Area index="T" />{num(language, '= 301,44')}</Formula>
-            <Caption x={585} y={265} language={language} text={say('Alboko azalera: π · r · g', 'Área lateral: π · r · g', 'المساحة الجانبية: π · r · g')} size={14} />
+            <Caption x={585} y={265} language={language} text={say('Alboko azalera: π · r · g', 'Área lateral: π · r · g', 'المساحة الجانبية: π · r · g', 'Lateral area: π · r · g')} size={14} />
         </Figure>
     )
 }
@@ -388,7 +389,7 @@ export function SphereFigure({ language }: { language: UnitLanguage }) {
     const section = Math.sqrt(8)
     const side = cam.at([3 * RIGHT[0], 0, 3 * RIGHT[2]])
     return (
-        <Figure height={320} label={pick(language, say('Esfera bere zilindro zirkunskribatuan; zona esferiko batek zilindroaren banda berdinaren azalera du', 'La esfera en su cilindro circunscrito; una zona esférica tiene la misma área que la banda del cilindro', 'الكرة داخل أسطوانتها المحيطة؛ للمنطقة الكروية مساحة الشريط نفسه من الأسطوانة'))}>
+        <Figure height={320} label={pick(language, say('Esfera bere zilindro zirkunskribatuan; zona esferiko batek zilindroaren banda berdinaren azalera du', 'La esfera en su cilindro circunscrito; una zona esférica tiene la misma área que la banda del cilindro', 'الكرة داخل أسطوانتها المحيطة؛ للمنطقة الكروية مساحة الشريط نفسه من الأسطوانة', 'The sphere inside its circumscribed cylinder; a spherical zone has the same area as the cylinder\'s lateral area'))}>
             <defs>
                 <clipPath id="gorputzak-sphere-band">
                     <circle cx={cx} cy={cy} r={R} />
@@ -408,9 +409,9 @@ export function SphereFigure({ language }: { language: UnitLanguage }) {
 
             <Formula x={530} y={90} size={19}>A = 4 · π · r²</Formula>
             <Formula x={530} y={130} size={16} color={STAGE}>{num(language, 'r = 3:  4 · 3,14 · 9 = 113,04')}</Formula>
-            <Caption x={530} y={185} language={language} text={say('Zona edo kasketa:', 'Zona o casquete:', 'المنطقة أو القبعة:')} color={SECOND} size={15} />
+            <Caption x={530} y={185} language={language} text={say('Zona edo kasketa:', 'Zona o casquete:', 'المنطقة أو القبعة:', 'Spherical zone or cap:')} color={SECOND} size={15} />
             <Formula x={530} y={215} size={18} color={SECOND}>A = 2 · π · r · h</Formula>
-            <Caption x={530} y={262} language={language} text={say('Zilindroaren banda bezainbeste', 'Lo mismo que la banda del cilindro', 'مثل شريط الأسطوانة')} size={14} />
+            <Caption x={530} y={262} language={language} text={say('Zilindroaren banda bezainbeste', 'Lo mismo que la banda del cilindro', 'مثل شريط الأسطوانة', 'The same as the cylinder\'s lateral area')} size={14} />
         </Figure>
     )
 }
@@ -423,7 +424,7 @@ export function VolumeUnitsFigure({ language }: { language: UnitLanguage }) {
     const small = boxVertices(1, 1, 1).map(([x, y, z]): V3 => [x + (boxVertices(10, 10, 10)[corner][0] > 0 ? 4.5 : -4.5), y, z + (boxVertices(10, 10, 10)[corner][2] > 0 ? 4.5 : -4.5)])
     const units = ['km³', 'hm³', 'dam³', 'm³', 'dm³', 'cm³', 'mm³']
     return (
-        <Figure height={320} label={pick(language, say('Dezimetro kubiko batean 1000 zentimetro kubiko sartzen dira; unitate bakoitza hurrengoa baino 1000 aldiz handiagoa da', 'En un decímetro cúbico caben 1000 centímetros cúbicos; cada unidad es 1000 veces la siguiente', 'في الديسيمتر المكعب 1000 سنتيمتر مكعب؛ كل وحدة تساوي 1000 مرة الوحدة التالية'))}>
+        <Figure height={320} label={pick(language, say('Dezimetro kubiko batean 1000 zentimetro kubiko sartzen dira; unitate bakoitza hurrengoa baino 1000 aldiz handiagoa da', 'En un decímetro cúbico caben 1000 centímetros cúbicos; cada unidad es 1000 veces la siguiente', 'في الديسيمتر المكعب 1000 سنتيمتر مكعب؛ كل وحدة تساوي 1000 مرة الوحدة التالية', 'A cubic decimetre holds 1,000 cubic centimetres; each unit is 1,000 times the next one'))}>
             <GridBox cam={cam} a={10} b={10} c={10} fill={SKY} />
             <Solid cam={cam} vertices={small} fill={SECOND} opacity={1} />
             <Tag p={cam.at([0, 0, -5])} text="10 cm" dy={28} size={15} />
@@ -450,7 +451,7 @@ export function CapacityFigure({ language }: { language: UnitLanguage }) {
     const cam = camera(140, 250, 14)
     const water = boxVertices(10, 10, 8.5)
     return (
-        <Figure height={300} label={pick(language, say('Ur litro batek dezimetro kubiko bat betetzen du eta kilo bat pisatzen du', 'Un litro de agua llena un decímetro cúbico y pesa un kilo', 'لتر الماء يملأ ديسيمترًا مكعبًا ويزن كيلوغرامًا'))}>
+        <Figure height={300} label={pick(language, say('Ur litro batek dezimetro kubiko bat betetzen du eta kilo bat pisatzen du', 'Un litro de agua llena un decímetro cúbico y pesa un kilo', 'لتر الماء يملأ ديسيمترًا مكعبًا ويزن كيلوغرامًا', 'One litre of water fills a cubic decimetre and weighs one kilogram'))}>
             <Solid cam={cam} vertices={water} fill={SKY} opacity={0.95} hidden={false} />
             <Solid cam={cam} vertices={boxVertices(10, 10, 10)} fill="none" opacity={0} />
             <Tag p={cam.at([0, 4, -5])} text="1 L" size={22} color={STAGE} />
@@ -463,7 +464,7 @@ export function CapacityFigure({ language }: { language: UnitLanguage }) {
             <Formula x={560} y={110} size={18} color={STAGE}>1 dm³ = 1 L</Formula>
             <Formula x={560} y={150} size={18} color={SECOND}>1 cm³ = 1 mL</Formula>
             <Formula x={560} y={190} size={18}>1 L = 1000 mL</Formula>
-            <Caption x={560} y={238} language={language} text={say('Ur litro batek 1 kg pisatzen du', 'Un litro de agua pesa 1 kg', 'لتر الماء يزن 1 kg')} color={GREEN} />
+            <Caption x={560} y={238} language={language} text={say('Ur litro batek 1 kg pisatzen du', 'Un litro de agua pesa 1 kg', 'لتر الماء يزن 1 kg', 'One litre of water weighs 1 kg')} color={GREEN} />
         </Figure>
     )
 }
@@ -490,18 +491,18 @@ function CoinStack({ x, y, lean }: { x: number; y: number; lean: number }) {
 export function CavalieriFigure({ language }: { language: UnitLanguage }) {
     const cam = camera(560, 222, 38)
     return (
-        <Figure height={310} label={pick(language, say('Txanpon-pila zuzena eta okertua: bolumen bera. Ortoedroa unitate-kuboekin', 'Una pila de monedas recta y otra inclinada: mismo volumen. Un ortoedro con cubos unidad', 'كومة نقود مستقيمة وأخرى مائلة: الحجم نفسه. ومتوازي مستطيلات من مكعبات الوحدة'))}>
+        <Figure height={310} label={pick(language, say('Txanpon-pila zuzena eta okertua: bolumen bera. Ortoedroa unitate-kuboekin', 'Una pila de monedas recta y otra inclinada: mismo volumen. Un ortoedro con cubos unidad', 'كومة نقود مستقيمة وأخرى مائلة: الحجم نفسه. ومتوازي مستطيلات من مكعبات الوحدة', 'A straight stack of coins and a slanted one: same volume. A cuboid made of unit cubes'))}>
             <CoinStack x={90} y={250} lean={0} />
             <CoinStack x={210} y={250} lean={7} />
             <line x1={30} y1={262} x2={330} y2={262} stroke={INK} strokeWidth={2} />
-            <Caption x={180} y={292} language={language} text={say('Altuera eta sekzio berdinak → bolumen bera', 'Igual altura y secciones → mismo volumen', 'الارتفاع والمقاطع نفسها ← الحجم نفسه')} size={14} />
+            <Caption x={180} y={292} language={language} text={say('Altuera eta sekzio berdinak → bolumen bera', 'Igual altura y secciones → mismo volumen', 'الارتفاع والمقاطع نفسها ← الحجم نفسه', 'Same height and cross-sections → same volume')} size={14} />
 
             <GridBox cam={cam} a={4} b={3} c={2} fill={STAGE_TINT} />
             <Tag p={cam.at([0, 0, -1.5])} text="4" dy={22} />
             <Tag p={cam.at([-2, 0, 0])} text="3" dx={-14} dy={14} />
             <Tag p={cam.at([-2, 1, 1.5])} text="2" dx={-14} dy={5} />
             <Formula x={560} y={50} size={19} color={STAGE}>V = 4 · 3 · 2 = 24</Formula>
-            <Caption x={560} y={298} language={language} text={say('24 unitate-kubo', '24 cubos unidad', '24 مكعب وحدة')} size={14} />
+            <Caption x={560} y={298} language={language} text={say('24 unitate-kubo', '24 cubos unidad', '24 مكعب وحدة', '24 unit cubes')} size={14} />
         </Figure>
     )
 }
@@ -514,7 +515,7 @@ export function PrismVolumeFigure({ language }: { language: UnitLanguage }) {
     const prism = prismVertices(6, 1.3, 4)
     const B = baseLetter(language)
     return (
-        <Figure height={300} label={pick(language, say('Prisma eta zilindroa: bolumena oinarriaren azalera bider altuera da', 'Prisma y cilindro: el volumen es el área de la base por la altura', 'المنشور والأسطوانة: الحجم مساحة القاعدة في الارتفاع'))}>
+        <Figure height={300} label={pick(language, say('Prisma eta zilindroa: bolumena oinarriaren azalera bider altuera da', 'Prisma y cilindro: el volumen es el área de la base por la altura', 'المنشور والأسطوانة: الحجم مساحة القاعدة في الارتفاع', 'Prism and cylinder: the volume is the area of the base times the height'))}>
             <Solid cam={camPrism} vertices={prism} fill={PAPER} faceFill={(face) => (face.normal[1] > 0.99 ? SOFT : undefined)} />
             <Formula x={camPrism.at([0, 4, 0])[0]} y={camPrism.at([0, 4, 0])[1] + 6} size={15} color={SECOND}><Area index={B} /></Formula>
             <Tag p={camPrism.at([1.3 * RIGHT[0], 2, 1.3 * RIGHT[2]])} text="h" dx={16} color={STAGE} />
@@ -523,7 +524,7 @@ export function PrismVolumeFigure({ language }: { language: UnitLanguage }) {
             <Tag p={camCylinder.at([1.3 * RIGHT[0], 2, 1.3 * RIGHT[2]])} text="h" dx={16} color={STAGE} />
 
             <Formula x={555} y={90} size={22}>V = A<tspan fontSize="0.7em" dy="0.3em">{B}</tspan><tspan dy="-0.3em"> · h</tspan></Formula>
-            <Caption x={555} y={140} language={language} text={say('Zilindroa: oinarria zirkulua', 'Cilindro: la base es un círculo', 'الأسطوانة: القاعدة دائرة')} size={14} />
+            <Caption x={555} y={140} language={language} text={say('Zilindroa: oinarria zirkulua', 'Cilindro: la base es un círculo', 'الأسطوانة: القاعدة دائرة', 'Cylinder: the base is a circle')} size={14} />
             <Formula x={555} y={172} size={18} color={STAGE}>V = π · r² · h</Formula>
             <Formula x={555} y={214} size={16} color={SECOND}>{num(language, 'r = 5, h = 10:')}</Formula>
             <Formula x={555} y={240} size={16} color={SECOND}>{num(language, '3,14 · 25 · 10 = 785')}</Formula>
@@ -538,16 +539,16 @@ export function PyramidVolumeFigure({ language }: { language: UnitLanguage }) {
     const camCylinder = camera(300, 258, 15)
     const B = baseLetter(language)
     return (
-        <Figure height={310} label={pick(language, say('Piramide batek oinarri eta altuera bereko prismaren herena hartzen du; konoak, zilindroarena', 'Una pirámide ocupa un tercio del prisma de igual base y altura; el cono, un tercio del cilindro', 'يشغل الهرم ثلث المنشور المساوي له قاعدةً وارتفاعًا؛ والمخروط ثلث الأسطوانة'))}>
+        <Figure height={310} label={pick(language, say('Piramide batek oinarri eta altuera bereko prismaren herena hartzen du; konoak, zilindroarena', 'Una pirámide ocupa un tercio del prisma de igual base y altura; el cono, un tercio del cilindro', 'يشغل الهرم ثلث المنشور المساوي له قاعدةً وارتفاعًا؛ والمخروط ثلث الأسطوانة', 'A pyramid takes up a third of a prism with the same base and height; the cone takes up a third of a cylinder'))}>
             <Solid cam={camBox} vertices={boxVertices(8, 8, 10)} fill="none" opacity={0} stroke={MUTED} width={1.4} />
             <Solid cam={camBox} vertices={pyramidVertices(4, 4 * Math.SQRT2, 10, Math.PI / 4)} fill={SOFT} />
             <Cylinder cam={camCylinder} r={4} h={10} fill="none" top="none" stroke={MUTED} />
             <Cone cam={camCylinder} r={4} h={10} fill={ROSE} />
-            <Caption x={205} y={40} language={language} text={say('Hiru aldiz betetzen da', 'Se llena tres veces', 'يمتلئ ثلاث مرات')} color={SECOND} />
+            <Caption x={205} y={40} language={language} text={say('Hiru aldiz betetzen da', 'Se llena tres veces', 'يمتلئ ثلاث مرات', 'It takes three of them to fill the prism')} color={SECOND} />
 
             <Formula x={555} y={90} size={22}>V = A<tspan fontSize="0.7em" dy="0.3em">{B}</tspan><tspan dy="-0.3em"> · h : 3</tspan></Formula>
             <Formula x={555} y={140} size={16} color={STAGE}>10² · 12 : 3 = 400</Formula>
-            <Caption x={555} y={190} language={language} text={say('Konoa:', 'Cono:', 'المخروط:')} size={14} />
+            <Caption x={555} y={190} language={language} text={say('Konoa:', 'Cono:', 'المخروط:', 'Cone:')} size={14} />
             <Formula x={555} y={220} size={17} color={SECOND}>V = π · r² · h : 3</Formula>
             <Formula x={555} y={256} size={15} color={SECOND}>{num(language, '3,14 · 6² · 8 : 3 = 301,44')}</Formula>
         </Figure>
@@ -559,7 +560,7 @@ export function PyramidVolumeFigure({ language }: { language: UnitLanguage }) {
 export function SphereVolumeFigure({ language }: { language: UnitLanguage }) {
     const cam = camera(170, 170, 26)
     return (
-        <Figure height={320} label={pick(language, say('Esferaren bolumena zilindro zirkunskribatuaren bi heren da', 'El volumen de la esfera es dos tercios del de su cilindro circunscrito', 'حجم الكرة ثلثا حجم الأسطوانة المحيطة بها'))}>
+        <Figure height={320} label={pick(language, say('Esferaren bolumena zilindro zirkunskribatuaren bi heren da', 'El volumen de la esfera es dos tercios del de su cilindro circunscrito', 'حجم الكرة ثلثا حجم الأسطوانة المحيطة بها', 'The volume of the sphere is two thirds of that of its circumscribed cylinder'))}>
             <Cylinder cam={cam} r={3} h={6} base={-3} fill={SKY} top={PAPER} />
             <Sphere cam={cam} r={3} fill={MINT} />
             <Segment3 cam={cam} a={[0, 0, 0]} b={[3 * RIGHT[0], 0, 3 * RIGHT[2]]} color={STAGE} />
@@ -567,7 +568,7 @@ export function SphereVolumeFigure({ language }: { language: UnitLanguage }) {
 
             <Formula x={530} y={86} size={20}>V = 4 · π · r³ : 3</Formula>
             <Formula x={530} y={126} size={16} color={STAGE}>{num(language, 'r = 3:  4 · 3,14 · 27 : 3 = 113,04')}</Formula>
-            <Caption x={530} y={180} language={language} text={say('Zilindro zirkunskribatua:', 'Cilindro circunscrito:', 'الأسطوانة المحيطة:')} size={14} />
+            <Caption x={530} y={180} language={language} text={say('Zilindro zirkunskribatua:', 'Cilindro circunscrito:', 'الأسطوانة المحيطة:', 'Circumscribed cylinder:')} size={14} />
             <Formula x={530} y={208} size={16}>{num(language, '3,14 · 3² · 6 = 169,56')}</Formula>
             <Formula x={530} y={244} size={16} color={SECOND}>{num(language, '169,56 · 2 : 3 = 113,04')}</Formula>
         </Figure>

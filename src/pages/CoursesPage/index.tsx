@@ -11,6 +11,7 @@ export function CoursesPage() {
         switch (i18n.language) {
             case 'eu': return course.nameEu
             case 'ar': return course.nameAr
+            case 'en': return course.nameEn
             default: return course.name
         }
     }
@@ -19,6 +20,7 @@ export function CoursesPage() {
         switch (i18n.language) {
             case 'eu': return course.descriptionEu
             case 'ar': return course.descriptionAr
+            case 'en': return course.descriptionEn
             default: return course.description
         }
     }

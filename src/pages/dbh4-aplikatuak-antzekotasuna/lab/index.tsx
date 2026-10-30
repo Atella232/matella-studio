@@ -33,7 +33,7 @@ export function SimilarityLaboratory(props: {
             tools={similarityLabTools}
             stages={similarityStages}
             components={toolComponents}
-            title={{ eu: 'Handitu, txikitu eta neurtu', es: 'Amplía, reduce y mide', ar: 'كبّر وصغّر وقِس' }}
+            title={{ eu: 'Handitu, txikitu eta neurtu', es: 'Amplía, reduce y mide', en: 'Enlarge, reduce and measure', ar: 'كبّر وصغّر وقِس' }}
         />
     )
 }

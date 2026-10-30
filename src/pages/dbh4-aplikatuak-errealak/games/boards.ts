@@ -110,8 +110,8 @@ export function placeStars(total: number): Stars {
 
 /** Which way to move after a wrong pick */
 export const placeHint = (pick: number, value: number): LocalizedText => (pick < value
-    ? { eu: 'Ez da hori: zenbakia eskuinerago dago.', es: 'No es ahí: el número está más a la derecha.', ar: 'ليس هناك: العدد أبعد إلى اليمين.' }
-    : { eu: 'Ez da hori: zenbakia ezkerrerago dago.', es: 'No es ahí: el número está más a la izquierda.', ar: 'ليس هناك: العدد أبعد إلى اليسار.' })
+    ? { eu: 'Ez da hori: zenbakia eskuinerago dago.', es: 'No es ahí: el número está más a la derecha.', en: 'Not there: the number is further to the right.', ar: 'ليس هناك: العدد أبعد إلى اليمين.' }
+    : { eu: 'Ez da hori: zenbakia ezkerrerago dago.', es: 'No es ahí: el número está más a la izquierda.', en: 'Not there: the number is further to the left.', ar: 'ليس هناك: العدد أبعد إلى اليسار.' })
 
 /* ---------- Memory ---------- */
 

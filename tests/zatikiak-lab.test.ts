@@ -100,7 +100,7 @@ test('parts challenges are reachable and not solved by the starting state', () =
     for (const challenge of partsChallenges) {
         assert.equal(challenge.isSolved(initialPartsState), false, `${challenge.id} is solved before starting`)
         assert.equal(challenge.isSolved(solutions[challenge.id]), true, `${challenge.id} cannot be solved`)
-        for (const language of ['eu', 'es', 'ar'] as const) {
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) {
             assert.ok(challenge.prompt[language].trim())
             assert.ok(challenge.hint[language].trim())
         }
@@ -113,7 +113,7 @@ test('every lab tool and lesson link points to something that exists', () => {
     const toolIds = new Set(labTools.map((tool) => tool.id))
     for (const tool of labTools) {
         assert.ok(topicIds.has(tool.lessonTopic), `${tool.id} links to a missing lesson`)
-        for (const language of ['eu', 'es', 'ar'] as const) {
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) {
             assert.ok(tool.title[language].trim())
             assert.ok(tool.observe[language].trim())
         }

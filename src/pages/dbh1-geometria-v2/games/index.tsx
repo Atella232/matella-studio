@@ -31,7 +31,7 @@ export function GeometryIntroGames({ language, pathname, openGame, completedIds,
             language={language}
             games={hubGames}
             recordsKey={GEOMETRY_GAME_RECORDS_KEY}
-            title={{ eu: 'Jolastu irudiekin eta angeluekin', es: 'Juega con figuras y ángulos', ar: 'العب بالأشكال والزوايا' }}
+            title={{ eu: 'Jolastu irudiekin eta angeluekin', es: 'Juega con figuras y ángulos', en: 'Play with shapes and angles.', ar: 'العب بالأشكال والزوايا' }}
             completedIds={completedIds}
             onComplete={onComplete}
             mode={geometryGameModeForPath(pathname)}

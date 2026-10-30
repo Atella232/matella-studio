@@ -6,6 +6,7 @@ import { fraction, toExactDecimal, toNumber, type FractionValue } from '../../..
 import { readMoneyAnswer } from '../answers'
 import type { MotionMode } from './labTools'
 import { roundedAnswer } from './percentBar'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import {
     departures,
     expectedGraphAnswer,
@@ -32,13 +33,13 @@ const GREEN = 'var(--success, #267b53)'
 const BLUE = '#2f6fdb'
 const RED = '#c4432a'
 
-type Text = { eu: string; es: string; ar: string }
-const say = (eu: string, es: string, ar: string): Text => ({ eu, es, ar })
+type Text = { eu: string; es: string; en: string; ar: string }
+const say = (eu: string, es: string, ar: string, en: string): Text => ({ eu, es, en, ar })
 
-/** A number for a label: whole, or with the comma (point in Arabic) and ≈ when rounded */
+/** A number for a label: whole, or with the comma (point in Arabic and English) and ≈ when rounded */
 function numberText(language: string, value: FractionValue) {
     const { value: shown, rounded } = roundedAnswer(value)
-    return `${rounded ? '≈ ' : ''}${toExactDecimal(shown, language === 'ar' ? '.' : ',')}`
+    return `${rounded ? '≈ ' : ''}${toExactDecimal(shown, language === 'ar' ? '.' : decimalSeparatorFor(language))}`
 }
 /** Hours and minutes for a sentence: «1 h 54 min» («1 س 54 د» in Arabic) */
 function clockText(language: string, minutes: number) {
@@ -61,12 +62,12 @@ export function RoadGraphTool(props: LabToolProps) {
     const set = (patch: Parameters<typeof setRoadGraph>[1]) => setState((current) => setRoadGraph(current, patch))
     const controls = (
         <>
-            <Segmented label={l(say('Nola', 'Cómo', 'كيف'))} value={state.mode} options={[{ value: 'meet', label: l(say('Elkarrengana', 'Al encuentro', 'تلاقٍ')) }, { value: 'chase', label: l(say('Atzetik', 'Persecución', 'مطاردة')) }]} onChange={(mode) => set({ mode: mode as MotionMode })} />
-            <Segmented label={l(say('B-ren hasiera (km)', 'Salida de B (km)', 'انطلاق B (كم)'))} value={String(state.distance)} options={GRAPH_DISTANCES.filter((distance) => state.mode === 'chase' || distance > 0).map((distance) => ({ value: String(distance), label: String(distance) }))} onChange={(distance) => set({ distance: Number(distance) })} />
+            <Segmented label={l(say('Nola', 'Cómo', 'كيف', 'How'))} value={state.mode} options={[{ value: 'meet', label: l(say('Elkarrengana', 'Al encuentro', 'تلاقٍ', 'Towards each other')) }, { value: 'chase', label: l(say('Atzetik', 'Persecución', 'مطاردة', 'Chase')) }]} onChange={(mode) => set({ mode: mode as MotionMode })} />
+            <Segmented label={l(say('B-ren hasiera (km)', 'Salida de B (km)', 'انطلاق B (كم)', 'Starting point of B (km)'))} value={String(state.distance)} options={GRAPH_DISTANCES.filter((distance) => state.mode === 'chase' || distance > 0).map((distance) => ({ value: String(distance), label: String(distance) }))} onChange={(distance) => set({ distance: Number(distance) })} />
             <Stepper label="A · km/h" value={state.speeds[0]} min={GRAPH_SPEED_MIN} max={GRAPH_SPEED_MAX} step={GRAPH_SPEED_STEP} onChange={(speed) => set({ speed: [0, speed] })} language={props.language} />
             <Stepper label="B · km/h" value={state.speeds[1]} min={GRAPH_SPEED_MIN} max={GRAPH_SPEED_MAX} step={GRAPH_SPEED_STEP} onChange={(speed) => set({ speed: [1, speed] })} language={props.language} />
-            <Segmented label={l(say('Nor abiatzen da geroago?', '¿Quién sale más tarde?', 'من ينطلق لاحقًا؟'))} value={state.late} options={[{ value: 'none', label: l(say('Inor ez', 'Nadie', 'لا أحد')) }, { value: 'A', label: 'A' }, { value: 'B', label: 'B' }]} onChange={(late) => set({ late: late as LateVehicle })} />
-            {state.late !== 'none' && <Segmented label={l(say('Zenbat geroago (min)', 'Cuánto más tarde (min)', 'كم لاحقًا (د)'))} value={String(state.delay)} options={GRAPH_DELAYS.map((delay) => ({ value: String(delay), label: String(delay) }))} onChange={(delay) => set({ delay: Number(delay) })} />}
+            <Segmented label={l(say('Nor abiatzen da geroago?', '¿Quién sale más tarde?', 'من ينطلق لاحقًا؟', 'Who leaves later?'))} value={state.late} options={[{ value: 'none', label: l(say('Inor ez', 'Nadie', 'لا أحد', 'Nobody')) }, { value: 'A', label: 'A' }, { value: 'B', label: 'B' }]} onChange={(late) => set({ late: late as LateVehicle })} />
+            {state.late !== 'none' && <Segmented label={l(say('Zenbat geroago (min)', 'Cuánto más tarde (min)', 'كم لاحقًا (د)', 'How much later (min)'))} value={String(state.delay)} options={GRAPH_DELAYS.map((delay) => ({ value: String(delay), label: String(delay) }))} onChange={(delay) => set({ delay: Number(delay) })} />}
         </>
     )
 
@@ -75,26 +76,26 @@ export function RoadGraphTool(props: LabToolProps) {
     const solved = graphAnswered(state)
     const shown = meeting !== null && (solved || state.revealed)
     const readout = meeting === null || expected === null
-        ? <span className="fraction-v2-lab-readout-note">{l(say('Zuzenak ez dira ebakitzen: ez dira inoiz elkartzen.', 'Las rectas no se cortan: no se encuentran nunca.', 'لا يتقاطع المستقيمان: لن يلتقيا أبدًا.'))}</span>
+        ? <span className="fraction-v2-lab-readout-note">{l(say('Zuzenak ez dira ebakitzen: ez dira inoiz elkartzen.', 'Las rectas no se cortan: no se encuentran nunca.', 'لا يتقاطع المستقيمان: لن يلتقيا أبدًا.', 'The straight lines do not cross: they never meet.'))}</span>
         : (
             <>
-                <span className="fraction-v2-lab-readout-note">{l(say('Lehen irteeratik zenbat minutura elkartzen dira?', '¿A los cuántos minutos de la primera salida se encuentran?', 'بعد كم دقيقة من أول انطلاق يلتقيان؟'))}</span>
+                <span className="fraction-v2-lab-readout-note">{l(say('Lehen irteeratik zenbat minutura elkartzen dira?', '¿A los cuántos minutos de la primera salida se encuentran?', 'بعد كم دقيقة من أول انطلاق يلتقيان؟', 'How many minutes after the first one leaves do they meet?'))}</span>
                 <ResultAnswer
                     language={props.language}
                     state={state}
                     expected={expected}
-                    placeholder={say('Adib.: 80', 'Ej.: 80', '⁦80⁩')}
-                    unreadable={say('Idatzi minutuak, adibidez 80.', 'Escribe los minutos, por ejemplo 80.', 'اكتب الدقائق، مثل 80.')}
+                    placeholder={say('Adib.: 80', 'Ej.: 80', '⁦80⁩', 'Example: 80')}
+                    unreadable={say('Idatzi minutuak, adibidez 80.', 'Escribe los minutos, por ejemplo 80.', 'اكتب الدقائق، مثل 80.', 'Write the minutes, for example 80.')}
                     normalizeInput={readMoneyAnswer}
                     onChange={(patch) => setState((current) => ({ ...current, ...patch }))}
                 />
-                {roundedAnswer(meeting.minutes).rounded && !shown && <span className="fraction-v2-lab-readout-note">{l(say('Biribildu ehunenetara.', 'Redondea a las centésimas.', 'قرّب إلى أجزاء المئة.'))}</span>}
+                {roundedAnswer(meeting.minutes).rounded && !shown && <span className="fraction-v2-lab-readout-note">{l(say('Biribildu ehunenetara.', 'Redondea a las centésimas.', 'قرّب إلى أجزاء المئة.', 'Round to two decimal places.'))}</span>}
                 {shown && (
                     <span className="fraction-v2-lab-readout-note">
                         {l(say(
                             `${clockText('eu', toNumber(meeting.minutes))} igarotzean elkartzen dira, A-ren irteeratik ${numberText('eu', meeting.km)} km-ra. Zuzenen ebakidura da topaketa; zenbat eta zuzen inklinatuagoa, orduan eta azkarrago.`,
                             `Se encuentran al cabo de ${clockText('es', toNumber(meeting.minutes))}, a ${numberText('es', meeting.km)} km de la salida de A. El cruce de las rectas es el encuentro; cuanto más inclinada la recta, más rápido va.`,
-                            `يلتقيان بعد ${clockText('ar', toNumber(meeting.minutes))} على بعد ${numberText('ar', meeting.km)} كم من انطلاق A. تقاطع المستقيمين هو اللقاء، وكلما كان المستقيم أشدّ ميلًا كانت السرعة أكبر.`
+                            `يلتقيان بعد ${clockText('ar', toNumber(meeting.minutes))} على بعد ${numberText('ar', meeting.km)} كم من انطلاق A. تقاطع المستقيمين هو اللقاء، وكلما كان المستقيم أشدّ ميلًا كانت السرعة أكبر.`, `They meet after ${clockText('en', toNumber(meeting.minutes))}, ${numberText('en', meeting.km)} km from A's starting point. The point where the two straight lines cross is the meeting point; the steeper the line, the faster it goes.`
                         ))}
                     </span>
                 )}
@@ -122,7 +123,7 @@ export function RoadGraphTool(props: LabToolProps) {
     const meetY = meeting ? y(toNumber(meeting.km)) : 0
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={roadGraphChallenges} extraChallenges={roadGraphExtra} state={state}>
-            <svg viewBox="0 0 360 250" direction="ltr" role="img" aria-label={l(say('Bi ibilgailuen distantzia-denbora grafikoa', 'La gráfica distancia–tiempo de los dos vehículos', 'منحنى المسافة والزمن للمركبتين'))} style={{ display: 'block', width: '100%', maxWidth: 520, height: 'auto', margin: '0 auto', fontFamily: '"Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif' }}>
+            <svg viewBox="0 0 360 250" direction="ltr" role="img" aria-label={l(say('Bi ibilgailuen distantzia-denbora grafikoa', 'La gráfica distancia–tiempo de los dos vehículos', 'منحنى المسافة والزمن للمركبتين', 'The distance–time graph of the two vehicles'))} style={{ display: 'block', width: '100%', maxWidth: 520, height: 'auto', margin: '0 auto', fontFamily: '"Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif' }}>
                 <defs>
                     <clipPath id={clip}><rect x={left} y={top - 4} width={right - left} height={bottom - top + 4} /></clipPath>
                 </defs>

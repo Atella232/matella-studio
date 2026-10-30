@@ -24,10 +24,11 @@ export const algebraLabTools: AlgebraLabTool[] = [
         id: 'machine',
         stage: 'language',
         lessonTopic: 'value',
-        title: { eu: 'Zenbaki-makina', es: 'La máquina de números', ar: 'آلة الأعداد' },
+        title: { eu: 'Zenbaki-makina', es: 'La máquina de números', en: 'The number machine', ar: 'آلة الأعداد' },
         observe: {
             eu: 'Ordeztu x zenbaki negatiboekin ere: parentesiak jarri. Konparatu $(x+3)^{2}$ eta $x^{2}+6x+9$: beti ematen dute gauza bera.',
             es: 'Sustituye x también por negativos: con paréntesis. Compara $(x+3)^{2}$ y $x^{2}+6x+9$: siempre dan lo mismo.',
+            en: 'Substitute negative values for x too, using brackets. Compare $(x+3)^{2}$ and $x^{2}+6x+9$: they always give the same result.',
             ar: 'عوّض x بأعداد سالبة أيضًا: مع الأقواس. قارن $(x+3)^{2}$ و$x^{2}+6x+9$: يعطيان دائمًا الشيء نفسه.'
         }
     },
@@ -35,10 +36,11 @@ export const algebraLabTools: AlgebraLabTool[] = [
         id: 'tiles',
         stage: 'monomials',
         lessonTopic: 'add-polynomials',
-        title: { eu: 'Fitxa aljebraikoak', es: 'Fichas algebraicas', ar: 'البطاقات الجبرية' },
+        title: { eu: 'Fitxa aljebraikoak', es: 'Fichas algebraicas', en: 'Algebra tiles', ar: 'البطاقات الجبرية' },
         observe: {
             eu: 'Antzeko fitxak bakarrik elkartzen dira. Kentzean, bigarren polinomioaren fitxa guztiek kolorea aldatzen dute.',
             es: 'Solo se juntan fichas semejantes. Al restar, todas las fichas del segundo polinomio cambian de color.',
+            en: 'Only like tiles are put together. When subtracting, all the tiles of the second polynomial change colour.',
             ar: 'لا تُجمع إلا البطاقات المتشابهة. وعند الطرح تتغيّر ألوان كل بطاقات الحدودية الثانية.'
         }
     },
@@ -46,10 +48,11 @@ export const algebraLabTools: AlgebraLabTool[] = [
         id: 'area',
         stage: 'polynomials',
         lessonTopic: 'multiply-polynomials',
-        title: { eu: 'Biderketaren azalera', es: 'El área del producto', ar: 'مساحة الجداء' },
+        title: { eu: 'Biderketaren azalera', es: 'El área del producto', en: 'The area of the product', ar: 'مساحة الجداء' },
         observe: {
             eu: '(x + a)(x + b) laukizuzenak lau zati ditu: x², ax, bx eta ab. Erdiko bi zatiek x-ren koefizientea osatzen dute: a + b.',
             es: 'El rectángulo (x + a)(x + b) tiene cuatro partes: x², ax, bx y ab. Las dos del medio forman el coeficiente de x: a + b.',
+            en: 'The rectangle (x + a)(x + b) has four parts: x², ax, bx and ab. The two middle ones make up the coefficient of x: a + b.',
             ar: 'للمستطيل (x + a)(x + b) أربعة أجزاء: x² وax وbx وab. والجزآن الأوسطان يكوّنان معامل x: a + b.'
         }
     },
@@ -57,10 +60,11 @@ export const algebraLabTools: AlgebraLabTool[] = [
         id: 'identities',
         stage: 'products',
         lessonTopic: 'square-sum',
-        title: { eu: 'Identitateak zenbakiekin', es: 'Identidades con números', ar: 'المتطابقات بالأعداد' },
+        title: { eu: 'Identitateak zenbakiekin', es: 'Identidades con números', en: 'Identities with numbers', ar: 'المتطابقات بالأعداد' },
         observe: {
             eu: 'Aukeratu a eta b: identitatearen bi aldeek beti ematen dute gauza bera. $a^{2}+b^{2}$ ez, ordea: $2ab$ falta zaio.',
             es: 'Elige a y b: los dos lados de la identidad siempre dan lo mismo. $a^{2}+b^{2}$ no: le falta $2ab$.',
+            en: 'Choose a and b: the two sides of the identity always give the same result. $a^{2}+b^{2}$ does not: it is missing $2ab$.',
             ar: 'اختر a وb: طرفا المتطابقة يعطيان دائمًا الشيء نفسه. أما $a^{2}+b^{2}$ فلا: ينقصه $2ab$.'
         }
     },
@@ -68,10 +72,11 @@ export const algebraLabTools: AlgebraLabTool[] = [
         id: 'factor',
         stage: 'factor',
         lessonTopic: 'common-factor',
-        title: { eu: 'Faktore komuna', es: 'Factor común', ar: 'العامل المشترك' },
+        title: { eu: 'Faktore komuna', es: 'Factor común', en: 'Common factor', ar: 'العامل المشترك' },
         observe: {
             eu: 'Faktore bat baliozkoa da gai guztiak zatitzen baditu. Handiena lortzen duzunean, parentesi barruan ez da ezer komunik geratzen.',
             es: 'Un factor vale si divide a todos los términos. Cuando consigues el mayor, dentro del paréntesis no queda nada en común.',
+            en: 'A factor works if it divides all the terms. When you find the greatest one, nothing in common is left inside the brackets.',
             ar: 'يصلح العامل إذا قسم كل الحدود. وعندما تصل إلى أكبرها لا يبقى شيء مشترك داخل القوس.'
         }
     }
@@ -115,26 +120,26 @@ const machineAt = (state: MachineState, index: number, x: number) => state.expre
 export const machineChallenges: LabChallenge<MachineState>[] = [
     {
         id: 26101,
-        prompt: { eu: 'Kalkulatu $2x^{2}-3x+1$ balioa $x=-2$ denean.', es: 'Calcula el valor de $2x^{2}-3x+1$ para $x=-2$.', ar: 'احسب قيمة $2x^{2}-3x+1$ عندما $x=-2$.' },
-        hint: { eu: '$2\\cdot(-2)^{2}-3\\cdot(-2)+1$', es: '$2\\cdot(-2)^{2}-3\\cdot(-2)+1$', ar: '$2\\cdot(-2)^{2}-3\\cdot(-2)+1$' },
+        prompt: { eu: 'Kalkulatu $2x^{2}-3x+1$ balioa $x=-2$ denean.', es: 'Calcula el valor de $2x^{2}-3x+1$ para $x=-2$.', en: 'Calculate the value of $2x^{2}-3x+1$ for $x=-2$.', ar: 'احسب قيمة $2x^{2}-3x+1$ عندما $x=-2$.' },
+        hint: { eu: '$2\\cdot(-2)^{2}-3\\cdot(-2)+1$', es: '$2\\cdot(-2)^{2}-3\\cdot(-2)+1$', en: '$2\\cdot(-2)^{2}-3\\cdot(-2)+1$', ar: '$2\\cdot(-2)^{2}-3\\cdot(-2)+1$' },
         isSolved: (state) => machineAt(state, 0, -2) && answered(state, 15)
     },
     {
         id: 26102,
-        prompt: { eu: 'Kalkulatu P(2), $P(x)=x^{3}-x^{2}+3x-1$ bada.', es: 'Calcula P(2) si $P(x)=x^{3}-x^{2}+3x-1$.', ar: 'احسب P(2) إذا كان $P(x)=x^{3}-x^{2}+3x-1$.' },
-        hint: { eu: '$8-4+6-1$', es: '$8-4+6-1$', ar: '$8-4+6-1$' },
+        prompt: { eu: 'Kalkulatu P(2), $P(x)=x^{3}-x^{2}+3x-1$ bada.', es: 'Calcula P(2) si $P(x)=x^{3}-x^{2}+3x-1$.', en: 'Calculate P(2) if $P(x)=x^{3}-x^{2}+3x-1$.', ar: 'احسب P(2) إذا كان $P(x)=x^{3}-x^{2}+3x-1$.' },
+        hint: { eu: '$8-4+6-1$', es: '$8-4+6-1$', en: '$8-4+6-1$', ar: '$8-4+6-1$' },
         isSolved: (state) => machineAt(state, 1, 2) && answered(state, 9)
     },
     {
         id: 26103,
-        prompt: { eu: 'Kalkulatu $(x+3)^{2}$ balioa $x=-5$ denean.', es: 'Calcula el valor de $(x+3)^{2}$ para $x=-5$.', ar: 'احسب قيمة $(x+3)^{2}$ عندما $x=-5$.' },
-        hint: { eu: '$(-5+3)^{2}=(-2)^{2}$', es: '$(-5+3)^{2}=(-2)^{2}$', ar: '$(-5+3)^{2}=(-2)^{2}$' },
+        prompt: { eu: 'Kalkulatu $(x+3)^{2}$ balioa $x=-5$ denean.', es: 'Calcula el valor de $(x+3)^{2}$ para $x=-5$.', en: 'Calculate the value of $(x+3)^{2}$ for $x=-5$.', ar: 'احسب قيمة $(x+3)^{2}$ عندما $x=-5$.' },
+        hint: { eu: '$(-5+3)^{2}=(-2)^{2}$', es: '$(-5+3)^{2}=(-2)^{2}$', en: '$(-5+3)^{2}=(-2)^{2}$', ar: '$(-5+3)^{2}=(-2)^{2}$' },
         isSolved: (state) => machineAt(state, 2, -5) && answered(state, 4)
     },
     {
         id: 26104,
-        prompt: { eu: 'Kalkulatu $(x+2)(x-2)$ balioa $x=10$ denean. Zein da buruz egiteko modurik azkarrena?', es: 'Calcula el valor de $(x+2)(x-2)$ para $x=10$. ¿Cuál es la forma más rápida de hacerlo de cabeza?', ar: 'احسب قيمة $(x+2)(x-2)$ عندما $x=10$. ما أسرع طريقة لحسابها ذهنيًا؟' },
-        hint: { eu: '$10^{2}-2^{2}$', es: '$10^{2}-2^{2}$', ar: '$10^{2}-2^{2}$' },
+        prompt: { eu: 'Kalkulatu $(x+2)(x-2)$ balioa $x=10$ denean. Zein da buruz egiteko modurik azkarrena?', es: 'Calcula el valor de $(x+2)(x-2)$ para $x=10$. ¿Cuál es la forma más rápida de hacerlo de cabeza?', en: 'Calculate the value of $(x+2)(x-2)$ for $x=10$. What is the quickest way to do it in your head?', ar: 'احسب قيمة $(x+2)(x-2)$ عندما $x=10$. ما أسرع طريقة لحسابها ذهنيًا؟' },
+        hint: { eu: '$10^{2}-2^{2}$', es: '$10^{2}-2^{2}$', en: '$10^{2}-2^{2}$', ar: '$10^{2}-2^{2}$' },
         isSolved: (state) => machineAt(state, 4, 10) && answered(state, 96)
     }
 ]
@@ -153,26 +158,26 @@ const resultIs = (state: TilesState, squares: number, bars: number, units: numbe
 export const tilesChallenges: LabChallenge<TilesState>[] = [
     {
         id: 26201,
-        prompt: { eu: 'Batu $(3x^{2}-5x+2)+(x^{2}-2x+1)$.', es: 'Suma $(3x^{2}-5x+2)+(x^{2}-2x+1)$.', ar: 'اجمع $(3x^{2}-5x+2)+(x^{2}-2x+1)$.' },
-        hint: { eu: 'Emaitza: $4x^{2}-7x+3$.', es: 'Resultado: $4x^{2}-7x+3$.', ar: 'الناتج: $4x^{2}-7x+3$.' },
+        prompt: { eu: 'Batu $(3x^{2}-5x+2)+(x^{2}-2x+1)$.', es: 'Suma $(3x^{2}-5x+2)+(x^{2}-2x+1)$.', en: 'Add $(3x^{2}-5x+2)+(x^{2}-2x+1)$.', ar: 'اجمع $(3x^{2}-5x+2)+(x^{2}-2x+1)$.' },
+        hint: { eu: 'Emaitza: $4x^{2}-7x+3$.', es: 'Resultado: $4x^{2}-7x+3$.', en: 'Result: $4x^{2}-7x+3$.', ar: 'الناتج: $4x^{2}-7x+3$.' },
         isSolved: (state) => state.op === 'add' && isGroup(state.first, 3, -5, 2) && isGroup(state.second, 1, -2, 1)
     },
     {
         id: 26202,
-        prompt: { eu: 'Kendu $(5x^{2}-2x-3)-(4x^{2}+3x-1)$.', es: 'Resta $(5x^{2}-2x-3)-(4x^{2}+3x-1)$.', ar: 'اطرح $(5x^{2}-2x-3)-(4x^{2}+3x-1)$.' },
-        hint: { eu: 'Emaitza: $x^{2}-5x-2$.', es: 'Resultado: $x^{2}-5x-2$.', ar: 'الناتج: $x^{2}-5x-2$.' },
+        prompt: { eu: 'Kendu $(5x^{2}-2x-3)-(4x^{2}+3x-1)$.', es: 'Resta $(5x^{2}-2x-3)-(4x^{2}+3x-1)$.', en: 'Subtract $(5x^{2}-2x-3)-(4x^{2}+3x-1)$.', ar: 'اطرح $(5x^{2}-2x-3)-(4x^{2}+3x-1)$.' },
+        hint: { eu: 'Emaitza: $x^{2}-5x-2$.', es: 'Resultado: $x^{2}-5x-2$.', en: 'Result: $x^{2}-5x-2$.', ar: 'الناتج: $x^{2}-5x-2$.' },
         isSolved: (state) => state.op === 'subtract' && isGroup(state.first, 5, -2, -3) && isGroup(state.second, 4, 3, -1)
     },
     {
         id: 26203,
-        prompt: { eu: 'A = $2x^{2}-x+3$ bada, aurkitu B, A + B = 0 izan dadin.', es: 'Si A = $2x^{2}-x+3$, encuentra B para que A + B = 0.', ar: 'إذا كان A = $2x^{2}-x+3$ فجد B بحيث A + B = 0.' },
-        hint: { eu: 'B polinomio aurkakoa da: zeinu guztiak aldatuta.', es: 'B es el polinomio opuesto: todos los signos cambiados.', ar: 'B هي الحدودية المعاكسة: كل الإشارات مغيّرة.' },
+        prompt: { eu: 'A = $2x^{2}-x+3$ bada, aurkitu B, A + B = 0 izan dadin.', es: 'Si A = $2x^{2}-x+3$, encuentra B para que A + B = 0.', en: 'If A = $2x^{2}-x+3$, find B so that A + B = 0.', ar: 'إذا كان A = $2x^{2}-x+3$ فجد B بحيث A + B = 0.' },
+        hint: { eu: 'B polinomio aurkakoa da: zeinu guztiak aldatuta.', es: 'B es el polinomio opuesto: todos los signos cambiados.', en: 'B is the opposite polynomial: all the signs changed.', ar: 'B هي الحدودية المعاكسة: كل الإشارات مغيّرة.' },
         isSolved: (state) => state.op === 'add' && isGroup(state.first, 2, -1, 3) && isGroup(state.second, -2, 1, -3)
     },
     {
         id: 26204,
-        prompt: { eu: 'Egin hiru gaiko bi polinomioren batuketa edo kenketa bat, emaitza $x^{2}+x+1$ izan dadin.', es: 'Haz una suma o resta de dos polinomios de tres términos cuyo resultado sea $x^{2}+x+1$.', ar: 'اصنع جمعًا أو طرحًا لحدوديتين من ثلاثة حدود ناتجه $x^{2}+x+1$.' },
-        hint: { eu: 'Adibidez: $(3x^{2}+2x-1)+(-2x^{2}-x+2)$.', es: 'Por ejemplo: $(3x^{2}+2x-1)+(-2x^{2}-x+2)$.', ar: 'مثلًا: $(3x^{2}+2x-1)+(-2x^{2}-x+2)$.' },
+        prompt: { eu: 'Egin hiru gaiko bi polinomioren batuketa edo kenketa bat, emaitza $x^{2}+x+1$ izan dadin.', es: 'Haz una suma o resta de dos polinomios de tres términos cuyo resultado sea $x^{2}+x+1$.', en: 'Do an addition or a subtraction of two polynomials with three terms whose result is $x^{2}+x+1$.', ar: 'اصنع جمعًا أو طرحًا لحدوديتين من ثلاثة حدود ناتجه $x^{2}+x+1$.' },
+        hint: { eu: 'Adibidez: $(3x^{2}+2x-1)+(-2x^{2}-x+2)$.', es: 'Por ejemplo: $(3x^{2}+2x-1)+(-2x^{2}-x+2)$.', en: 'For example: $(3x^{2}+2x-1)+(-2x^{2}-x+2)$.', ar: 'مثلًا: $(3x^{2}+2x-1)+(-2x^{2}-x+2)$.' },
         isSolved: (state) => groupTerms(state.first).length === 3 && groupTerms(state.second).length === 3 && resultIs(state, 1, 1, 1)
     }
 ]
@@ -212,26 +217,26 @@ export function answerArea(state: AreaState, patch: Partial<OperationAnswer>): A
 export const areaChallenges: LabChallenge<AreaState>[] = [
     {
         id: 26301,
-        prompt: { eu: 'Egin $(x+2)(x+3)$ eta idatzi x-ren koefizientea.', es: 'Construye $(x+2)(x+3)$ y escribe el coeficiente de x.', ar: 'ابنِ $(x+2)(x+3)$ واكتب معامل x.' },
-        hint: { eu: 'Erdiko bi zatiak: $2x+3x$.', es: 'Las dos partes del medio: $2x+3x$.', ar: 'الجزآن الأوسطان: $2x+3x$.' },
+        prompt: { eu: 'Egin $(x+2)(x+3)$ eta idatzi x-ren koefizientea.', es: 'Construye $(x+2)(x+3)$ y escribe el coeficiente de x.', en: 'Build $(x+2)(x+3)$ and write the coefficient of x.', ar: 'ابنِ $(x+2)(x+3)$ واكتب معامل x.' },
+        hint: { eu: 'Erdiko bi zatiak: $2x+3x$.', es: 'Las dos partes del medio: $2x+3x$.', en: 'The two middle parts: $2x+3x$.', ar: 'الجزآن الأوسطان: $2x+3x$.' },
         isSolved: (state) => state.solved.includes('2,3,middle')
     },
     {
         id: 26302,
-        prompt: { eu: 'Egin $(x+4)(x+1)$ eta idatzi gai askea.', es: 'Construye $(x+4)(x+1)$ y escribe el término independiente.', ar: 'ابنِ $(x+4)(x+1)$ واكتب الحد الثابت.' },
-        hint: { eu: 'Izkinako zati txikia: $4\\cdot 1$.', es: 'La parte pequeña de la esquina: $4\\cdot 1$.', ar: 'الجزء الصغير في الزاوية: $4\\cdot 1$.' },
+        prompt: { eu: 'Egin $(x+4)(x+1)$ eta idatzi gai askea.', es: 'Construye $(x+4)(x+1)$ y escribe el término independiente.', en: 'Build $(x+4)(x+1)$ and write the constant term.', ar: 'ابنِ $(x+4)(x+1)$ واكتب الحد الثابت.' },
+        hint: { eu: 'Izkinako zati txikia: $4\\cdot 1$.', es: 'La parte pequeña de la esquina: $4\\cdot 1$.', en: 'The small part in the corner: $4\\cdot 1$.', ar: 'الجزء الصغير في الزاوية: $4\\cdot 1$.' },
         isSolved: (state) => state.solved.includes('1,4,constant')
     },
     {
         id: 26303,
-        prompt: { eu: 'Egin $(x+3)^{2}$ karratua eta idatzi x-ren koefizientea.', es: 'Construye el cuadrado $(x+3)^{2}$ y escribe el coeficiente de x.', ar: 'ابنِ المربع $(x+3)^{2}$ واكتب معامل x.' },
-        hint: { eu: 'a = b = 3: bikoitza bider biderkadura.', es: 'a = b = 3: el doble del producto.', ar: 'a = b = 3: ضعف الجداء.' },
+        prompt: { eu: 'Egin $(x+3)^{2}$ karratua eta idatzi x-ren koefizientea.', es: 'Construye el cuadrado $(x+3)^{2}$ y escribe el coeficiente de x.', en: 'Build the square $(x+3)^{2}$ and write the coefficient of x.', ar: 'ابنِ المربع $(x+3)^{2}$ واكتب معامل x.' },
+        hint: { eu: 'a = b = 3: bikoitza bider biderkadura.', es: 'a = b = 3: el doble del producto.', en: 'a = b = 3: twice the product.', ar: 'a = b = 3: ضعف الجداء.' },
         isSolved: (state) => state.solved.includes('3,3,middle')
     },
     {
         id: 26304,
-        prompt: { eu: 'Aurkitu biderkadura bat, $x^{2}+7x+12$ ematen duena, eta idatzi gai askea.', es: 'Encuentra un producto que dé $x^{2}+7x+12$ y escribe su término independiente.', ar: 'جد جداءً يعطي $x^{2}+7x+12$ واكتب حدّه الثابت.' },
-        hint: { eu: 'Bi zenbaki: batuta 7, biderkatuta 12.', es: 'Dos números: suman 7 y multiplicados dan 12.', ar: 'عددان: مجموعهما 7 وجداؤهما 12.' },
+        prompt: { eu: 'Aurkitu biderkadura bat, $x^{2}+7x+12$ ematen duena, eta idatzi gai askea.', es: 'Encuentra un producto que dé $x^{2}+7x+12$ y escribe su término independiente.', en: 'Find a product that gives $x^{2}+7x+12$ and write its constant term.', ar: 'جد جداءً يعطي $x^{2}+7x+12$ واكتب حدّه الثابت.' },
+        hint: { eu: 'Bi zenbaki: batuta 7, biderkatuta 12.', es: 'Dos números: suman 7 y multiplicados dan 12.', en: 'Two numbers: they add up to 7 and multiply to give 12.', ar: 'عددان: مجموعهما 7 وجداؤهما 12.' },
         isSolved: (state) => state.solved.includes('3,4,constant')
     }
 ]
@@ -286,26 +291,26 @@ export function answerIdentity(state: IdentityState, patch: Partial<OperationAns
 export const identityChallenges: LabChallenge<IdentityState>[] = [
     {
         id: 26401,
-        prompt: { eu: 'Kalkulatu $21^{2}$ batura baten karratu gisa: a = 20 eta b = 1.', es: 'Calcula $21^{2}$ como el cuadrado de una suma: a = 20 y b = 1.', ar: 'احسب $21^{2}$ مربعَ مجموع: a = 20 وb = 1.' },
-        hint: { eu: '$400+40+1$', es: '$400+40+1$', ar: '$400+40+1$' },
+        prompt: { eu: 'Kalkulatu $21^{2}$ batura baten karratu gisa: a = 20 eta b = 1.', es: 'Calcula $21^{2}$ como el cuadrado de una suma: a = 20 y b = 1.', en: 'Calculate $21^{2}$ as the square of a sum: a = 20 and b = 1.', ar: 'احسب $21^{2}$ مربعَ مجموع: a = 20 وb = 1.' },
+        hint: { eu: '$400+40+1$', es: '$400+40+1$', en: '$400+40+1$', ar: '$400+40+1$' },
         isSolved: (state) => state.solved.includes('sum,20,1')
     },
     {
         id: 26402,
-        prompt: { eu: 'Kalkulatu $19^{2}$ kendura baten karratu gisa: a = 20 eta b = 1.', es: 'Calcula $19^{2}$ como el cuadrado de una diferencia: a = 20 y b = 1.', ar: 'احسب $19^{2}$ مربعَ فرق: a = 20 وb = 1.' },
-        hint: { eu: '$400-40+1$', es: '$400-40+1$', ar: '$400-40+1$' },
+        prompt: { eu: 'Kalkulatu $19^{2}$ kendura baten karratu gisa: a = 20 eta b = 1.', es: 'Calcula $19^{2}$ como el cuadrado de una diferencia: a = 20 y b = 1.', en: 'Calculate $19^{2}$ as the square of a difference: a = 20 and b = 1.', ar: 'احسب $19^{2}$ مربعَ فرق: a = 20 وb = 1.' },
+        hint: { eu: '$400-40+1$', es: '$400-40+1$', en: '$400-40+1$', ar: '$400-40+1$' },
         isSolved: (state) => state.solved.includes('difference,20,1')
     },
     {
         id: 26403,
-        prompt: { eu: 'Kalkulatu $23\\cdot 17$ batura bider kendura gisa.', es: 'Calcula $23\\cdot 17$ como suma por diferencia.', ar: 'احسب $23\\cdot 17$ مجموعًا في فرق.' },
-        hint: { eu: '$(20+3)(20-3)=400-9$', es: '$(20+3)(20-3)=400-9$', ar: '$(20+3)(20-3)=400-9$' },
+        prompt: { eu: 'Kalkulatu $23\\cdot 17$ batura bider kendura gisa.', es: 'Calcula $23\\cdot 17$ como suma por diferencia.', en: 'Calculate $23\\cdot 17$ as a sum times a difference.', ar: 'احسب $23\\cdot 17$ مجموعًا في فرق.' },
+        hint: { eu: '$(20+3)(20-3)=400-9$', es: '$(20+3)(20-3)=400-9$', en: '$(20+3)(20-3)=400-9$', ar: '$(20+3)(20-3)=400-9$' },
         isSolved: (state) => state.solved.includes('product,20,3')
     },
     {
         id: 26404,
-        prompt: { eu: 'Aurkitu a eta b, $(a+b)^{2}$ eta $a^{2}+b^{2}$-ren arteko aldea 24 izan dadin.', es: 'Encuentra a y b para que la diferencia entre $(a+b)^{2}$ y $a^{2}+b^{2}$ sea 24.', ar: 'جد a وb بحيث يكون الفرق بين $(a+b)^{2}$ و$a^{2}+b^{2}$ هو 24.' },
-        hint: { eu: 'Aldea $2ab$ da: $ab=12$.', es: 'La diferencia es $2ab$: $ab=12$.', ar: 'الفرق هو $2ab$: $ab=12$.' },
+        prompt: { eu: 'Aurkitu a eta b, $(a+b)^{2}$ eta $a^{2}+b^{2}$-ren arteko aldea 24 izan dadin.', es: 'Encuentra a y b para que la diferencia entre $(a+b)^{2}$ y $a^{2}+b^{2}$ sea 24.', en: 'Find a and b so that the difference between $(a+b)^{2}$ and $a^{2}+b^{2}$ is 24.', ar: 'جد a وb بحيث يكون الفرق بين $(a+b)^{2}$ و$a^{2}+b^{2}$ هو 24.' },
+        hint: { eu: 'Aldea $2ab$ da: $ab=12$.', es: 'La diferencia es $2ab$: $ab=12$.', en: 'The difference is $2ab$: $ab=12$.', ar: 'الفرق هو $2ab$: $ab=12$.' },
         isSolved: (state) => state.kind === 'sum' && 2 * state.a * state.b === 24
     }
 ]
@@ -374,26 +379,26 @@ export const factorLatex = (terms: Term[]) => termsLatex(terms)
 export const factorChallenges: LabChallenge<FactorState>[] = [
     {
         id: 26501,
-        prompt: { eu: 'Atera faktore komunik handiena: $6x+9$.', es: 'Saca el mayor factor común: $6x+9$.', ar: 'أخرج أكبر عامل مشترك: $6x+9$.' },
-        hint: { eu: 'ZKH(6, 9) = 3; x ez dago bi gaietan.', es: 'm.c.d.(6, 9) = 3; la x no está en los dos términos.', ar: 'ق.م.أ(6، 9) = 3؛ وx ليس في الحدين.' },
+        prompt: { eu: 'Atera faktore komunik handiena: $6x+9$.', es: 'Saca el mayor factor común: $6x+9$.', en: 'Take out the greatest common factor: $6x+9$.', ar: 'أخرج أكبر عامل مشترك: $6x+9$.' },
+        hint: { eu: 'ZKH(6, 9) = 3; x ez dago bi gaietan.', es: 'm.c.d.(6, 9) = 3; la x no está en los dos términos.', en: 'GCD(6, 9) = 3; the x is not in both terms.', ar: 'ق.م.أ(6، 9) = 3؛ وx ليس في الحدين.' },
         isSolved: (state) => state.finished.includes(0)
     },
     {
         id: 26502,
-        prompt: { eu: 'Atera faktore komunik handiena: $4x^{2}+8x$.', es: 'Saca el mayor factor común: $4x^{2}+8x$.', ar: 'أخرج أكبر عامل مشترك: $4x^{2}+8x$.' },
-        hint: { eu: '$4x$', es: '$4x$', ar: '$4x$' },
+        prompt: { eu: 'Atera faktore komunik handiena: $4x^{2}+8x$.', es: 'Saca el mayor factor común: $4x^{2}+8x$.', en: 'Take out the greatest common factor: $4x^{2}+8x$.', ar: 'أخرج أكبر عامل مشترك: $4x^{2}+8x$.' },
+        hint: { eu: '$4x$', es: '$4x$', en: '$4x$', ar: '$4x$' },
         isSolved: (state) => state.finished.includes(1)
     },
     {
         id: 26503,
-        prompt: { eu: 'Atera faktore komunik handiena: $6x^{3}-9x^{2}+3x$.', es: 'Saca el mayor factor común: $6x^{3}-9x^{2}+3x$.', ar: 'أخرج أكبر عامل مشترك: $6x^{3}-9x^{2}+3x$.' },
-        hint: { eu: 'ZKH(6, 9, 3) eta x berretzaile txikienarekin.', es: 'm.c.d.(6, 9, 3) y x con el menor exponente.', ar: 'ق.م.أ(6، 9، 3) وx بأصغر أس.' },
+        prompt: { eu: 'Atera faktore komunik handiena: $6x^{3}-9x^{2}+3x$.', es: 'Saca el mayor factor común: $6x^{3}-9x^{2}+3x$.', en: 'Take out the greatest common factor: $6x^{3}-9x^{2}+3x$.', ar: 'أخرج أكبر عامل مشترك: $6x^{3}-9x^{2}+3x$.' },
+        hint: { eu: 'ZKH(6, 9, 3) eta x berretzaile txikienarekin.', es: 'm.c.d.(6, 9, 3) y x con el menor exponente.', en: 'GCD(6, 9, 3) and x with the smallest exponent.', ar: 'ق.م.أ(6، 9، 3) وx بأصغر أس.' },
         isSolved: (state) => state.finished.includes(2)
     },
     {
         id: 26504,
-        prompt: { eu: 'Atera faktore komunik handiena beste bi polinomioei.', es: 'Saca el mayor factor común de los otros dos polinomios.', ar: 'أخرج أكبر عامل مشترك من الحدوديتين الأخريين.' },
-        hint: { eu: '$2x$ eta $3x^{2}$.', es: '$2x$ y $3x^{2}$.', ar: '$2x$ و$3x^{2}$.' },
+        prompt: { eu: 'Atera faktore komunik handiena beste bi polinomioei.', es: 'Saca el mayor factor común de los otros dos polinomios.', en: 'Take out the greatest common factor of the other two polynomials.', ar: 'أخرج أكبر عامل مشترك من الحدوديتين الأخريين.' },
+        hint: { eu: '$2x$ eta $3x^{2}$.', es: '$2x$ y $3x^{2}$.', en: '$2x$ and $3x^{2}$.', ar: '$2x$ و$3x^{2}$.' },
         isSolved: (state) => state.finished.includes(3) && state.finished.includes(4)
     }
 ]

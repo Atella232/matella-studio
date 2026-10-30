@@ -23,10 +23,11 @@ export const algebraLabTools: AlgebraLabTool[] = [
         id: 'translate',
         stage: 'language',
         lessonTopic: 'translate',
-        title: { eu: 'Itzultzailea', es: 'Traductor', ar: 'المترجم' },
+        title: { eu: 'Itzultzailea', es: 'Traductor', en: 'Translator', ar: 'المترجم' },
         observe: {
             eu: 'Irakurri esaldia hitzez hitz: «bikoitza» x-ren aurrean 2 bat da, «gehi 3» amaieran batzen da, eta «baturaren bikoitza» parentesi batekin idazten da.',
             es: 'Lee la frase palabra a palabra: «el doble» es un 2 delante de la x, «más 3» se suma al final y «el doble de la suma» se escribe con un paréntesis.',
+            en: 'Read the phrase word by word: “twice” is a 2 in front of the x, “plus 3” is added at the end, and “twice the sum” is written with a bracket.',
             ar: 'اقرأ الجملة كلمة كلمة: «الضعف» 2 أمام x، و«زائد 3» يُضاف في النهاية، و«ضعف المجموع» يُكتب بقوس.'
         }
     },
@@ -34,10 +35,11 @@ export const algebraLabTools: AlgebraLabTool[] = [
         id: 'machine',
         stage: 'language',
         lessonTopic: 'value',
-        title: { eu: 'Zenbaki-makina', es: 'Máquina de números', ar: 'آلة الأعداد' },
+        title: { eu: 'Zenbaki-makina', es: 'Máquina de números', en: 'Number machine', ar: 'آلة الأعداد' },
         observe: {
             eu: 'Makinak x hartu eta adierazpenak esaten duena egiten du. x aldatzean balioa aldatzen da, baina adierazpena beti bera da.',
             es: 'La máquina toma x y hace lo que dice la expresión. Al cambiar x cambia el valor, pero la expresión es siempre la misma.',
+            en: 'The machine takes x and does what the expression says. When you change x, the value changes, but the expression is always the same.',
             ar: 'تأخذ الآلة x وتنفّذ ما تقوله العبارة. عند تغيير x تتغيّر القيمة لكن العبارة تبقى نفسها.'
         }
     },
@@ -45,10 +47,11 @@ export const algebraLabTools: AlgebraLabTool[] = [
         id: 'tiles',
         stage: 'operations',
         lessonTopic: 'add-monomials',
-        title: { eu: 'Fitxa aljebraikoak', es: 'Fichas algebraicas', ar: 'البطاقات الجبرية' },
+        title: { eu: 'Fitxa aljebraikoak', es: 'Fichas algebraicas', en: 'Algebra tiles', ar: 'البطاقات الجبرية' },
         observe: {
             eu: 'Fitxa bakoitza gai bat da: karratu handia x², barra x, karratu txikia 1. Mota bereko fitxak bakarrik elkartzen dira: horregatik antzekoak bakarrik batzen dira. Fitxa gorri batek eta urdin batek elkar ezabatzen dute.',
             es: 'Cada ficha es un término: el cuadrado grande x², la barra x, el cuadradito 1. Solo se juntan fichas del mismo tipo: por eso solo se suman los semejantes. Una ficha roja y una azul se anulan.',
+            en: 'Each tile is a term: the big square x², the bar x, the small square 1. Only tiles of the same type are grouped together, which is why only like terms are added. A red tile and a blue tile cancel each other out.',
             ar: 'كل بطاقة حد: المربع الكبير x²، والشريط x، والمربع الصغير 1. لا تجتمع إلا البطاقات من النوع نفسه: لذلك نجمع المتشابهة فقط. البطاقة الحمراء والزرقاء تلغي إحداهما الأخرى.'
         }
     },
@@ -56,10 +59,11 @@ export const algebraLabTools: AlgebraLabTool[] = [
         id: 'balance',
         stage: 'equations',
         lessonTopic: 'transpose',
-        title: { eu: 'Balantza', es: 'La balanza', ar: 'الميزان' },
+        title: { eu: 'Balantza', es: 'La balanza', en: 'The balance', ar: 'الميزان' },
         observe: {
             eu: 'Bi platerretan gauza bera egiten bada, balantza orekan geratzen da. Kendu unitateak bietatik eta gero zatitu: horixe da gaiak atalez aldatzea.',
             es: 'Si se hace lo mismo en los dos platos, la balanza sigue en equilibrio. Quita unidades de los dos y después divide: eso es transponer términos.',
+            en: 'If you do the same thing to both pans, the balance stays in equilibrium. Take units off both and then divide: that is transposing terms.',
             ar: 'إذا فعلنا الشيء نفسه في الكفتين يبقى الميزان متوازنًا. أزل وحدات من الكفتين ثم اقسم: هذا هو نقل الحدود.'
         }
     },
@@ -67,10 +71,11 @@ export const algebraLabTools: AlgebraLabTool[] = [
         id: 'trial',
         stage: 'equations',
         lessonTopic: 'trial',
-        title: { eu: 'Probatu eta zuzendu', es: 'Prueba y corrige', ar: 'جرّب وصحّح' },
+        title: { eu: 'Probatu eta zuzendu', es: 'Prueba y corrige', en: 'Test and correct', ar: 'جرّب وصحّح' },
         observe: {
             eu: 'Balio bat probatzean, konparatu bi atalak. Lehen atala handiegia bada, probatu x txikiago bat (x-ren koefizientea positiboa bada), eta alderantziz.',
             es: 'Al probar un valor, compara los dos miembros. Si el primero se pasa, prueba una x menor (si el coeficiente de x es positivo), y al revés.',
+            en: 'When you test a value, compare both sides. If the left side is too big, try a smaller x (if the coefficient of x is positive), and the other way round.',
             ar: 'عند تجربة قيمة قارن الطرفين. إذا زاد الطرف الأول فجرّب x أصغر (إذا كان معامل x موجبًا)، وبالعكس.'
         }
     }
@@ -105,14 +110,14 @@ export interface PhraseCard {
 }
 
 export const phraseCards: PhraseCard[] = [
-    { id: 'double', phrase: { eu: 'Zenbaki baten bikoitza', es: 'El doble de un número', ar: 'ضعف عدد' }, options: ['2x', 'x^{2}', 'x+2'] },
-    { id: 'minus3', phrase: { eu: 'Zenbaki bat ken 3', es: 'Un número disminuido en 3', ar: 'عدد ناقص 3' }, options: ['x-3', '3-x', '3x'] },
-    { id: 'half', phrase: { eu: 'Zenbaki baten erdia', es: 'La mitad de un número', ar: 'نصف عدد' }, options: ['\\frac{x}{2}', '2x', 'x-2'] },
-    { id: 'square', phrase: { eu: 'Zenbaki baten karratua', es: 'El cuadrado de un número', ar: 'مربع عدد' }, options: ['x^{2}', '2x', 'x+x'] },
-    { id: 'triple-plus', phrase: { eu: 'Zenbaki baten hirukoitza gehi 5', es: 'El triple de un número más 5', ar: 'ثلاثة أضعاف عدد زائد 5' }, options: ['3x+5', '3(x+5)', 'x+15'] },
-    { id: 'double-sum', phrase: { eu: 'Bi zenbakiren baturaren bikoitza', es: 'El doble de la suma de dos números', ar: 'ضعف مجموع عددين' }, options: ['2(x+y)', '2x+y', 'x^{2}+y^{2}'] },
-    { id: 'ago', phrase: { eu: 'Zure adina duela 4 urte', es: 'Tu edad hace 4 años', ar: 'عمرك قبل 4 سنوات' }, options: ['x-4', 'x+4', '4x'] },
-    { id: 'consecutive', phrase: { eu: 'Zenbaki bat eta hurrengoa batuta', es: 'Un número más el siguiente', ar: 'عدد زائد العدد الذي يليه' }, options: ['x+(x+1)', 'x+1', '2x'] }
+    { id: 'double', phrase: { eu: 'Zenbaki baten bikoitza', es: 'El doble de un número', en: 'Twice a number', ar: 'ضعف عدد' }, options: ['2x', 'x^{2}', 'x+2'] },
+    { id: 'minus3', phrase: { eu: 'Zenbaki bat ken 3', es: 'Un número disminuido en 3', en: 'A number decreased by 3', ar: 'عدد ناقص 3' }, options: ['x-3', '3-x', '3x'] },
+    { id: 'half', phrase: { eu: 'Zenbaki baten erdia', es: 'La mitad de un número', en: 'Half of a number', ar: 'نصف عدد' }, options: ['\\frac{x}{2}', '2x', 'x-2'] },
+    { id: 'square', phrase: { eu: 'Zenbaki baten karratua', es: 'El cuadrado de un número', en: 'The square of a number', ar: 'مربع عدد' }, options: ['x^{2}', '2x', 'x+x'] },
+    { id: 'triple-plus', phrase: { eu: 'Zenbaki baten hirukoitza gehi 5', es: 'El triple de un número más 5', en: 'Three times a number plus 5', ar: 'ثلاثة أضعاف عدد زائد 5' }, options: ['3x+5', '3(x+5)', 'x+15'] },
+    { id: 'double-sum', phrase: { eu: 'Bi zenbakiren baturaren bikoitza', es: 'El doble de la suma de dos números', en: 'Twice the sum of two numbers', ar: 'ضعف مجموع عددين' }, options: ['2(x+y)', '2x+y', 'x^{2}+y^{2}'] },
+    { id: 'ago', phrase: { eu: 'Zure adina duela 4 urte', es: 'Tu edad hace 4 años', en: 'Your age 4 years ago', ar: 'عمرك قبل 4 سنوات' }, options: ['x-4', 'x+4', '4x'] },
+    { id: 'consecutive', phrase: { eu: 'Zenbaki bat eta hurrengoa batuta', es: 'Un número más el siguiente', en: 'A number plus the next one', ar: 'عدد زائد العدد الذي يليه' }, options: ['x+(x+1)', 'x+1', '2x'] }
 ]
 
 export interface TranslateState {
@@ -134,20 +139,20 @@ export const translatedRight = (state: TranslateState) => phraseCards.filter((ca
 export const translateChallenges: LabChallenge<TranslateState>[] = [
     {
         id: 7101,
-        prompt: { eu: 'Itzuli ondo lau esaldi.', es: 'Traduce bien cuatro frases.', ar: 'ترجم أربع جمل ترجمة صحيحة.' },
-        hint: { eu: '«Bikoitza» = 2 bider; «erdia» = zati 2.', es: '«Doble» = por 2; «mitad» = entre 2.', ar: '«الضعف» = في 2؛ «النصف» = على 2.' },
+        prompt: { eu: 'Itzuli ondo lau esaldi.', es: 'Traduce bien cuatro frases.', en: 'Translate four phrases correctly.', ar: 'ترجم أربع جمل ترجمة صحيحة.' },
+        hint: { eu: '«Bikoitza» = 2 bider; «erdia» = zati 2.', es: '«Doble» = por 2; «mitad» = entre 2.', en: '“Double” = times 2; “half” = divided by 2.', ar: '«الضعف» = في 2؛ «النصف» = على 2.' },
         isSolved: (state) => translatedRight(state) >= 4
     },
     {
         id: 7102,
-        prompt: { eu: 'Itzuli «bi zenbakiren baturaren bikoitza».', es: 'Traduce «el doble de la suma de dos números».', ar: 'ترجم «ضعف مجموع عددين».' },
-        hint: { eu: 'Lehenik batura, parentesi artean; gero bikoitza.', es: 'Primero la suma, entre paréntesis; después el doble.', ar: 'أولًا المجموع بين قوسين، ثم الضعف.' },
+        prompt: { eu: 'Itzuli «bi zenbakiren baturaren bikoitza».', es: 'Traduce «el doble de la suma de dos números».', en: 'Translate “twice the sum of two numbers”.', ar: 'ترجم «ضعف مجموع عددين».' },
+        hint: { eu: 'Lehenik batura, parentesi artean; gero bikoitza.', es: 'Primero la suma, entre paréntesis; después el doble.', en: 'First the sum, in brackets; then take twice that.', ar: 'أولًا المجموع بين قوسين، ثم الضعف.' },
         isSolved: (state) => state.answers['double-sum'] === '2(x+y)'
     },
     {
         id: 7103,
-        prompt: { eu: 'Itzuli esaldi guztiak akatsik gabe.', es: 'Traduce todas las frases sin ningún error.', ar: 'ترجم كل الجمل دون أي خطأ.' },
-        hint: { eu: 'Akatsen bat egin baduzu, sakatu «Berriro hasi».', es: 'Si te has equivocado, pulsa «Empezar de nuevo».', ar: 'إذا أخطأت فاضغط «ابدأ من جديد».' },
+        prompt: { eu: 'Itzuli esaldi guztiak akatsik gabe.', es: 'Traduce todas las frases sin ningún error.', en: 'Translate all the phrases without any mistakes.', ar: 'ترجم كل الجمل دون أي خطأ.' },
+        hint: { eu: 'Akatsen bat egin baduzu, sakatu «Berriro hasi».', es: 'Si te has equivocado, pulsa «Empezar de nuevo».', en: 'If you made a mistake, press “Start again”.', ar: 'إذا أخطأت فاضغط «ابدأ من جديد».' },
         isSolved: (state) => state.mistakes === 0 && translatedRight(state) === phraseCards.length
     }
 ]
@@ -190,26 +195,26 @@ const machineAt = (state: MachineState, latex: string, x: number) => machineExpr
 export const machineChallenges: LabChallenge<MachineState>[] = [
     {
         id: 7201,
-        prompt: { eu: 'Kalkulatu $2x+1$ balioa $x=4$ denean.', es: 'Calcula el valor de $2x+1$ para $x=4$.', ar: 'احسب قيمة $2x+1$ عندما $x=4$.' },
-        hint: { eu: '$2\\cdot 4+1$', es: '$2\\cdot 4+1$', ar: '$2\\cdot 4+1$' },
+        prompt: { eu: 'Kalkulatu $2x+1$ balioa $x=4$ denean.', es: 'Calcula el valor de $2x+1$ para $x=4$.', en: 'Work out the value of $2x+1$ when $x=4$.', ar: 'احسب قيمة $2x+1$ عندما $x=4$.' },
+        hint: { eu: '$2\\cdot 4+1$', es: '$2\\cdot 4+1$', en: '$2\\cdot 4+1$', ar: '$2\\cdot 4+1$' },
         isSolved: (state) => machineAt(state, '2x+1', 4) && answered(state, 9)
     },
     {
         id: 7202,
-        prompt: { eu: 'Kalkulatu $3x-5$ balioa $x=-2$ denean.', es: 'Calcula el valor de $3x-5$ para $x=-2$.', ar: 'احسب قيمة $3x-5$ عندما $x=-2$.' },
-        hint: { eu: '$3\\cdot(-2)-5$', es: '$3\\cdot(-2)-5$', ar: '$3\\cdot(-2)-5$' },
+        prompt: { eu: 'Kalkulatu $3x-5$ balioa $x=-2$ denean.', es: 'Calcula el valor de $3x-5$ para $x=-2$.', en: 'Work out the value of $3x-5$ when $x=-2$.', ar: 'احسب قيمة $3x-5$ عندما $x=-2$.' },
+        hint: { eu: '$3\\cdot(-2)-5$', es: '$3\\cdot(-2)-5$', en: '$3\\cdot(-2)-5$', ar: '$3\\cdot(-2)-5$' },
         isSolved: (state) => machineAt(state, '3x-5', -2) && answered(state, -11)
     },
     {
         id: 7203,
-        prompt: { eu: 'Kalkulatu $x^{2}+1$ balioa $x=3$ denean.', es: 'Calcula el valor de $x^{2}+1$ para $x=3$.', ar: 'احسب قيمة $x^{2}+1$ عندما $x=3$.' },
-        hint: { eu: 'Lehenik berretura.', es: 'Primero la potencia.', ar: 'القوة أولًا.' },
+        prompt: { eu: 'Kalkulatu $x^{2}+1$ balioa $x=3$ denean.', es: 'Calcula el valor de $x^{2}+1$ para $x=3$.', en: 'Work out the value of $x^{2}+1$ when $x=3$.', ar: 'احسب قيمة $x^{2}+1$ عندما $x=3$.' },
+        hint: { eu: 'Lehenik berretura.', es: 'Primero la potencia.', en: 'First the power.', ar: 'القوة أولًا.' },
         isSolved: (state) => machineAt(state, 'x^{2}+1', 3) && answered(state, 10)
     },
     {
         id: 7204,
-        prompt: { eu: 'Aurkitu zein x-rekin ematen duen $2x+1$ makinak 11, eta idatzi balioa.', es: 'Encuentra con qué x da 11 la máquina $2x+1$ y escribe el valor.', ar: 'جد قيمة x التي تجعل الآلة $2x+1$ تعطي 11، واكتب القيمة.' },
-        hint: { eu: 'Probatu x = 4, 5, 6…', es: 'Prueba x = 4, 5, 6…', ar: 'جرّب x = 4، 5، 6…' },
+        prompt: { eu: 'Aurkitu zein x-rekin ematen duen $2x+1$ makinak 11, eta idatzi balioa.', es: 'Encuentra con qué x da 11 la máquina $2x+1$ y escribe el valor.', en: 'Find which x gives 11 in the machine $2x+1$, and write the value.', ar: 'جد قيمة x التي تجعل الآلة $2x+1$ تعطي 11، واكتب القيمة.' },
+        hint: { eu: 'Probatu x = 4, 5, 6…', es: 'Prueba x = 4, 5, 6…', en: 'Try x = 4, 5, 6…', ar: 'جرّب x = 4، 5، 6…' },
         isSolved: (state) => machineAt(state, '2x+1', 5) && answered(state, 11)
     }
 ]
@@ -260,26 +265,26 @@ const result = (state: TilesState) => tilesResult(state).map((term) => `${term.c
 export const tilesChallenges: LabChallenge<TilesState>[] = [
     {
         id: 7301,
-        prompt: { eu: 'Batu $3x+2$ eta $2x+1$. Zer lortzen duzu?', es: 'Suma $3x+2$ y $2x+1$. ¿Qué obtienes?', ar: 'اجمع $3x+2$ و$2x+1$. ماذا تحصل؟' },
-        hint: { eu: 'Barrak barrekin eta karratu txikiak haiekin.', es: 'Las barras con las barras y los cuadraditos con los cuadraditos.', ar: 'الأشرطة مع الأشرطة والمربعات الصغيرة معًا.' },
+        prompt: { eu: 'Batu $3x+2$ eta $2x+1$. Zer lortzen duzu?', es: 'Suma $3x+2$ y $2x+1$. ¿Qué obtienes?', en: 'Add $3x+2$ and $2x+1$. What do you get?', ar: 'اجمع $3x+2$ و$2x+1$. ماذا تحصل؟' },
+        hint: { eu: 'Barrak barrekin eta karratu txikiak haiekin.', es: 'Las barras con las barras y los cuadraditos con los cuadraditos.', en: 'Put the bars with the bars and the small squares with the small squares.', ar: 'الأشرطة مع الأشرطة والمربعات الصغيرة معًا.' },
         isSolved: (state) => state.op === 'add' && isGroup(state.first, 0, 3, 2) && isGroup(state.second, 0, 2, 1)
     },
     {
         id: 7302,
-        prompt: { eu: 'Laburtu $x^{2}+4x+5x^{2}+x$: jarri $x^{2}+4x$ eta $5x^{2}+x$ eta batu.', es: 'Reduce $x^{2}+4x+5x^{2}+x$: pon $x^{2}+4x$ y $5x^{2}+x$ y súmalos.', ar: 'بسّط $x^{2}+4x+5x^{2}+x$: ضع $x^{2}+4x$ و$5x^{2}+x$ واجمعهما.' },
-        hint: { eu: 'Emaitza: $6x^{2}+5x$.', es: 'Resultado: $6x^{2}+5x$.', ar: 'الناتج: $6x^{2}+5x$.' },
+        prompt: { eu: 'Laburtu $x^{2}+4x+5x^{2}+x$: jarri $x^{2}+4x$ eta $5x^{2}+x$ eta batu.', es: 'Reduce $x^{2}+4x+5x^{2}+x$: pon $x^{2}+4x$ y $5x^{2}+x$ y súmalos.', en: 'Simplify $x^{2}+4x+5x^{2}+x$: group $x^{2}+4x$ and $5x^{2}+x$ and add them.', ar: 'بسّط $x^{2}+4x+5x^{2}+x$: ضع $x^{2}+4x$ و$5x^{2}+x$ واجمعهما.' },
+        hint: { eu: 'Emaitza: $6x^{2}+5x$.', es: 'Resultado: $6x^{2}+5x$.', en: 'Result: $6x^{2}+5x$.', ar: 'الناتج: $6x^{2}+5x$.' },
         isSolved: (state) => state.op === 'add' && isGroup(state.first, 1, 4, 0) && isGroup(state.second, 5, 1, 0)
     },
     {
         id: 7303,
-        prompt: { eu: 'Egin batuketa bat, zenbakiak dituena, eta emaitza zehazki $5x$ izan dadila.', es: 'Haz una suma que tenga números y cuyo resultado sea exactamente $5x$.', ar: 'اصنع جمعًا فيه أعداد ويكون ناتجه $5x$ تمامًا.' },
-        hint: { eu: 'Fitxa gorriek zenbakiak ezaba ditzakete: $+3$ eta $-3$.', es: 'Las fichas rojas pueden anular números: $+3$ y $-3$.', ar: 'البطاقات الحمراء تلغي الأعداد: $+3$ و$-3$.' },
+        prompt: { eu: 'Egin batuketa bat, zenbakiak dituena, eta emaitza zehazki $5x$ izan dadila.', es: 'Haz una suma que tenga números y cuyo resultado sea exactamente $5x$.', en: 'Make a sum that includes numbers and whose result is exactly $5x$.', ar: 'اصنع جمعًا فيه أعداد ويكون ناتجه $5x$ تمامًا.' },
+        hint: { eu: 'Fitxa gorriek zenbakiak ezaba ditzakete: $+3$ eta $-3$.', es: 'Las fichas rojas pueden anular números: $+3$ y $-3$.', en: 'Red tiles can cancel out numbers: $+3$ and $-3$.', ar: 'البطاقات الحمراء تلغي الأعداد: $+3$ و$-3$.' },
         isSolved: (state) => state.op === 'add' && (state.first.units !== 0 || state.second.units !== 0) && result(state) === '5^1'
     },
     {
         id: 7304,
-        prompt: { eu: 'Kendu adierazpen bat bere buruari eta ikusi zer geratzen den.', es: 'Resta una expresión a sí misma y mira qué queda.', ar: 'اطرح عبارة من نفسها وانظر ماذا يبقى.' },
-        hint: { eu: 'Bi taldeak berdinak eta «−» eragiketa.', es: 'Los dos grupos iguales y la operación «−».', ar: 'المجموعتان متساويتان والعملية «−».' },
+        prompt: { eu: 'Kendu adierazpen bat bere buruari eta ikusi zer geratzen den.', es: 'Resta una expresión a sí misma y mira qué queda.', en: 'Subtract an expression from itself and see what is left.', ar: 'اطرح عبارة من نفسها وانظر ماذا يبقى.' },
+        hint: { eu: 'Bi taldeak berdinak eta «−» eragiketa.', es: 'Los dos grupos iguales y la operación «−».', en: 'The two identical groups and the “−” operation.', ar: 'المجموعتان متساويتان والعملية «−».' },
         isSolved: (state) => state.op === 'subtract' && groupTerms(state.first).length > 0 && isGroup(state.first, state.second.squares, state.second.bars, state.second.units)
     }
 ]
@@ -340,26 +345,26 @@ export const balanceSolved = (state: BalanceState) => state.left.a === 1 && stat
 export const balanceChallenges: LabChallenge<BalanceState>[] = [
     {
         id: 7401,
-        prompt: { eu: 'Ebatzi $x+2=8$ balantzarekin.', es: 'Resuelve $x+2=8$ con la balanza.', ar: 'حلّ $x+2=8$ بالميزان.' },
-        hint: { eu: 'Kendu unitate bat bi platerretatik, bi aldiz.', es: 'Quita una unidad de los dos platos, dos veces.', ar: 'أزل وحدة من الكفتين مرتين.' },
+        prompt: { eu: 'Ebatzi $x+2=8$ balantzarekin.', es: 'Resuelve $x+2=8$ con la balanza.', en: 'Solve $x+2=8$ with the balance.', ar: 'حلّ $x+2=8$ بالميزان.' },
+        hint: { eu: 'Kendu unitate bat bi platerretatik, bi aldiz.', es: 'Quita una unidad de los dos platos, dos veces.', en: 'Take one unit off both pans, twice.', ar: 'أزل وحدة من الكفتين مرتين.' },
         isSolved: (state) => state.finished.includes(1)
     },
     {
         id: 7402,
-        prompt: { eu: 'Ebatzi $2x+1=7$: lehenik unitateak, gero zatitu.', es: 'Resuelve $2x+1=7$: primero las unidades, después divide.', ar: 'حلّ $2x+1=7$: الوحدات أولًا ثم القسمة.' },
-        hint: { eu: '$2x=6$ lortu ondoren, zatitu bi kutxatan.', es: 'Cuando tengas $2x=6$, divide entre las dos cajas.', ar: 'عندما تحصل على $2x=6$ اقسم على الصندوقين.' },
+        prompt: { eu: 'Ebatzi $2x+1=7$: lehenik unitateak, gero zatitu.', es: 'Resuelve $2x+1=7$: primero las unidades, después divide.', en: 'Solve $2x+1=7$: first the units, then divide.', ar: 'حلّ $2x+1=7$: الوحدات أولًا ثم القسمة.' },
+        hint: { eu: '$2x=6$ lortu ondoren, zatitu bi kutxatan.', es: 'Cuando tengas $2x=6$, divide entre las dos cajas.', en: 'When you have $2x=6$, divide between the two boxes.', ar: 'عندما تحصل على $2x=6$ اقسم على الصندوقين.' },
         isSolved: (state) => state.finished.includes(2)
     },
     {
         id: 7403,
-        prompt: { eu: 'Ebatzi $3x+2=11$.', es: 'Resuelve $3x+2=11$.', ar: 'حلّ $3x+2=11$.' },
-        hint: { eu: '$3x=9$ eta gero hiru zatitan.', es: '$3x=9$ y después en tres partes.', ar: '$3x=9$ ثم ثلاثة أجزاء.' },
+        prompt: { eu: 'Ebatzi $3x+2=11$.', es: 'Resuelve $3x+2=11$.', en: 'Solve $3x+2=11$.', ar: 'حلّ $3x+2=11$.' },
+        hint: { eu: '$3x=9$ eta gero hiru zatitan.', es: '$3x=9$ y después en tres partes.', en: '$3x=9$, then divide into three parts.', ar: '$3x=9$ ثم ثلاثة أجزاء.' },
         isSolved: (state) => state.finished.includes(3)
     },
     {
         id: 7404,
-        prompt: { eu: 'Ebatzi $4x+3=15$ balantza desorekatu gabe (akatsik gabe).', es: 'Resuelve $4x+3=15$ sin desequilibrar la balanza (sin errores).', ar: 'حلّ $4x+3=15$ دون أن يختلّ الميزان (دون أخطاء).' },
-        hint: { eu: 'Ezin da zatitu plater batean unitate solteak dauden bitartean.', es: 'No se puede dividir mientras queden unidades sueltas en un plato.', ar: 'لا يمكن القسمة ما دامت هناك وحدات منفردة في كفة.' },
+        prompt: { eu: 'Ebatzi $4x+3=15$ balantza desorekatu gabe (akatsik gabe).', es: 'Resuelve $4x+3=15$ sin desequilibrar la balanza (sin errores).', en: 'Solve $4x+3=15$ without unbalancing the balance (with no mistakes).', ar: 'حلّ $4x+3=15$ دون أن يختلّ الميزان (دون أخطاء).' },
+        hint: { eu: 'Ezin da zatitu plater batean unitate solteak dauden bitartean.', es: 'No se puede dividir mientras queden unidades sueltas en un plato.', en: 'You can\'t divide while there are still loose units on a pan.', ar: 'لا يمكن القسمة ما دامت هناك وحدات منفردة في كفة.' },
         isSolved: (state) => state.exercise === 4 && balanceSolved(state) && state.mistakes === 0
     }
 ]
@@ -407,26 +412,26 @@ const foundSolution = (state: TrialState, equation: number) => state.equation ==
 export const trialChallenges: LabChallenge<TrialState>[] = [
     {
         id: 7501,
-        prompt: { eu: 'Aurkitu $2x+3=11$ ebazpena probatuz.', es: 'Encuentra la solución de $2x+3=11$ probando.', ar: 'جد حل $2x+3=11$ بالتجربة.' },
-        hint: { eu: 'x = 3 laburregia da (9); probatu handiago bat.', es: 'x = 3 se queda corto (9); prueba uno mayor.', ar: 'x = 3 أقل (9)؛ جرّب قيمة أكبر.' },
+        prompt: { eu: 'Aurkitu $2x+3=11$ ebazpena probatuz.', es: 'Encuentra la solución de $2x+3=11$ probando.', en: 'Find the solution of $2x+3=11$ by trying values.', ar: 'جد حل $2x+3=11$ بالتجربة.' },
+        hint: { eu: 'x = 3 laburregia da (9); probatu handiago bat.', es: 'x = 3 se queda corto (9); prueba uno mayor.', en: 'x = 3 falls short (9); try a bigger one.', ar: 'x = 3 أقل (9)؛ جرّب قيمة أكبر.' },
         isSolved: (state) => foundSolution(state, 0)
     },
     {
         id: 7502,
-        prompt: { eu: 'Aurkitu $11-x=6$ ebazpena.', es: 'Encuentra la solución de $11-x=6$.', ar: 'جد حل $11-x=6$.' },
-        hint: { eu: 'Kontuz: x handitzean, lehen atala txikitzen da.', es: 'Cuidado: al aumentar x, el primer miembro disminuye.', ar: 'انتبه: عند زيادة x يصغر الطرف الأول.' },
+        prompt: { eu: 'Aurkitu $11-x=6$ ebazpena.', es: 'Encuentra la solución de $11-x=6$.', en: 'Find the solution of $11-x=6$.', ar: 'جد حل $11-x=6$.' },
+        hint: { eu: 'Kontuz: x handitzean, lehen atala txikitzen da.', es: 'Cuidado: al aumentar x, el primer miembro disminuye.', en: 'Careful: as x increases, the left side decreases.', ar: 'انتبه: عند زيادة x يصغر الطرف الأول.' },
         isSolved: (state) => foundSolution(state, 1)
     },
     {
         id: 7503,
-        prompt: { eu: 'Aurkitu $5x-4=3x+6$ ebazpena gehienez 4 probatan.', es: 'Encuentra la solución de $5x-4=3x+6$ en 4 intentos como máximo.', ar: 'جد حل $5x-4=3x+6$ في 4 محاولات على الأكثر.' },
-        hint: { eu: 'Begiratu zenbat aldatzen den aldea x bakoitzeko.', es: 'Mira cuánto cambia la diferencia con cada x.', ar: 'انظر كم يتغيّر الفرق مع كل x.' },
+        prompt: { eu: 'Aurkitu $5x-4=3x+6$ ebazpena gehienez 4 probatan.', es: 'Encuentra la solución de $5x-4=3x+6$ en 4 intentos como máximo.', en: 'Find the solution of $5x-4=3x+6$ in 4 tries at most.', ar: 'جد حل $5x-4=3x+6$ في 4 محاولات على الأكثر.' },
+        hint: { eu: 'Begiratu zenbat aldatzen den aldea x bakoitzeko.', es: 'Mira cuánto cambia la diferencia con cada x.', en: 'Look at how much the difference changes with each x.', ar: 'انظر كم يتغيّر الفرق مع كل x.' },
         isSolved: (state) => foundSolution(state, 2) && (state.tried[2]?.length ?? 99) <= 4
     },
     {
         id: 7504,
-        prompt: { eu: 'Aurkitu $3x-2=x+8$ ebazpena.', es: 'Encuentra la solución de $3x-2=x+8$.', ar: 'جد حل $3x-2=x+8$.' },
-        hint: { eu: 'Bi ataletan dago x: konparatu biak.', es: 'Hay x en los dos miembros: compáralos.', ar: 'يوجد x في الطرفين: قارن بينهما.' },
+        prompt: { eu: 'Aurkitu $3x-2=x+8$ ebazpena.', es: 'Encuentra la solución de $3x-2=x+8$.', en: 'Find the solution of $3x-2=x+8$.', ar: 'جد حل $3x-2=x+8$.' },
+        hint: { eu: 'Bi ataletan dago x: konparatu biak.', es: 'Hay x en los dos miembros: compáralos.', en: 'There is an x on both sides: compare them.', ar: 'يوجد x في الطرفين: قارن بينهما.' },
         isSolved: (state) => foundSolution(state, 3)
     }
 ]

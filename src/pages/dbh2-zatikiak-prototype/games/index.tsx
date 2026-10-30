@@ -39,7 +39,7 @@ export function GamesArea({
             language={language}
             games={hubGames}
             recordsKey={GAME_RECORDS_KEY}
-            title={{ eu: 'Jolastu eta hobetu zure marka', es: 'Juega y mejora tu marca', ar: 'العب وحسّن رقمك' }}
+            title={{ eu: 'Jolastu eta hobetu zure marka', es: 'Juega y mejora tu marca', en: 'Play and improve your personal best', ar: 'العب وحسّن رقمك' }}
             completedIds={completedIds}
             onComplete={onComplete}
             mode={mode}

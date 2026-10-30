@@ -15,6 +15,7 @@ export const fractionBankAnswers: Record<string, ExerciseAnswer> = {
         formMessage: {
             eu: 'Balioa zuzena da, baina ariketak zatiki inpropio bat eskatzen du: zenbakitzailea izendatzailea baino handiagoa, zati osorik gabe.',
             es: 'El valor es correcto, pero el ejercicio pide una fracción impropia: numerador mayor que el denominador, sin parte entera.',
+            en: 'The value is correct, but the exercise asks for an improper fraction: numerator bigger than the denominator, with no whole-number part.',
             ar: 'القيمة صحيحة، لكن التمرين يطلب كسرًا غير حقيقي: بسط أكبر من المقام ومن دون جزء صحيح.'
         }
     },

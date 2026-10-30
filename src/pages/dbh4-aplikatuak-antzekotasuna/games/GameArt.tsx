@@ -1,8 +1,10 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
+import type { UnitLanguage } from '../../../features/unit-v2/types'
+import { thousandsSeparatorFor } from '../../../utils/numberFormat'
 import type { SimilarityGameId } from './info'
 
-/** Small illustration of each game; the art is the same in every language */
-export function SimilarityGameArt({ game }: { game: SimilarityGameId }) {
+/** Small illustration of each game; the art is the same in every language, only its thousands mark follows the language */
+export function SimilarityGameArt({ game, language }: { game: SimilarityGameId; language: UnitLanguage }) {
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
@@ -10,7 +12,7 @@ export function SimilarityGameArt({ game }: { game: SimilarityGameId }) {
                 <line x1="14" y1="62" x2="206" y2="62" stroke="var(--line)" strokeWidth="2" strokeDasharray="8 7" />
                 <Car color="var(--coral, #c4432a)" label="r" x={104} y={20} width={72} />
                 <Car color="var(--blue)" label="r" x={52} y={54} width={44} />
-                <text x="110" y="112" textAnchor="middle" fontSize="16" fontWeight="700" fill="var(--ink)" direction="ltr">1 : 50 000</text>
+                <text x="110" y="112" textAnchor="middle" fontSize="16" fontWeight="700" fill="var(--ink)" direction="ltr">{`1 : 50${language === 'ar' ? ' ' : thousandsSeparatorFor(language)}000`}</text>
             </svg>
         )
     }

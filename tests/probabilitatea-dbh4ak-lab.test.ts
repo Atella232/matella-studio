@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
@@ -66,10 +67,10 @@ test('probabilitatea 4. DBH ak lab: tools, topics and challenge ids', () => {
     for (const challenges of own) {
         for (const challenge of challenges) {
             assert.ok(challenge.id >= 85101 && challenge.id < 85700, `${challenge.id}`)
-            for (const language of ['eu', 'es', 'ar']) {
+            for (const language of ['eu', 'es', 'en', 'ar']) {
                 for (const text of [challenge.prompt[language], challenge.hint[language]]) {
                     for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) {
-                        katex.renderToString(formula, { throwOnError: true })
+                        katex.renderToString(formulaFor(language, formula), { throwOnError: true })
                         assert.ok(!/[؀-ۿ]/.test(formula), `${challenge.id} ${formula}`)
                     }
                 }

@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
@@ -9,13 +10,13 @@ import { initialSpiralState, setSpiral, spiralChallenges, spiralExtra, spiralPoi
 import { initialSquareState, isPerfectSquare, maxSide, setSquare, squareChallenges, squareExtra, squareFits, squareInside, squareSimplified, type SquareState } from '../src/pages/dbh3-berreturak/lab/square.ts'
 import { initialTokensState, setTokens, tokensCancelled, tokensChallenges, tokensExtra, tokensNet, tokensValue, type TokensState } from '../src/pages/dbh3-berreturak/lab/tokens.ts'
 
-const languages = ['eu', 'es', 'ar'] as const
+const languages = ['eu', 'es', 'en', 'ar'] as const
 
 function checkTexts(texts: LocalizedText[]) {
     for (const text of texts) {
         for (const language of languages) {
             assert.ok(text[language].length > 0)
-            for (const [, formula] of text[language].matchAll(/\$([^$]+)\$/g)) katex.renderToString(formula, { throwOnError: true, strict: 'error' })
+            for (const [, formula] of text[language].matchAll(/\$([^$]+)\$/g)) katex.renderToString(formulaFor(language, formula), { throwOnError: true, strict: 'error' })
         }
         assert.ok(!text.ar.includes('{,}'), text.ar)
         assert.ok(!/[؀-ۿ]/.test([...text.ar.matchAll(/\$([^$]+)\$/g)].map((match) => match[1]).join('')), text.ar)

@@ -12,7 +12,9 @@ export function NaturaBiosferaPage() {
                 ? 'Bioaniztasuna_es.html'
                 : i18n.language === 'ar'
                     ? 'Bioaniztasuna_ar.html'
-                    : 'index.html'
+                    : i18n.language === 'en'
+                        ? 'Bioaniztasuna_en.html'
+                        : 'index.html'
 
         return `${import.meta.env.BASE_URL}natura/bioaniztasuna/${fileName}`
     }, [i18n.language])
@@ -35,7 +37,7 @@ export function NaturaBiosferaPage() {
                 ref={iframeRef}
                 className="biosfera-frame"
                 src={pageSrc}
-                title="Bioaniztasuna"
+                title={i18n.language === 'en' ? 'Biodiversity' : 'Bioaniztasuna'}
                 onLoad={handleLoad}
             />
         </div>

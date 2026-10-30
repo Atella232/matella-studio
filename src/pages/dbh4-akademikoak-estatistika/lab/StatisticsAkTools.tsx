@@ -5,6 +5,7 @@ import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { toExactDecimal, toNumber, type FractionValue } from '../../../features/unit-v2/math/fraction'
 import type { LocalizedText, UnitLanguage } from '../../../features/unit-v2/types'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import { COLORS, INK, LINE, MUTED, SECOND, STAGE } from '../../dbh2-estatistika-v2/palette'
 import {
     A_MAX,
@@ -48,19 +49,22 @@ import {
     type TransformState
 } from './labTools'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
+/** The decimal mark in LaTeX: the comma, which MathText writes as a point in English; Arabic writes the point */
 const separator = (language: UnitLanguage) => (language === 'ar' ? '.' : ',')
+/** The decimal mark on the screen: the point in English and Arabic, the comma in Basque and Spanish */
+const screenSeparator = (language: UnitLanguage) => (language === 'ar' ? '.' : decimalSeparatorFor(language))
 
-/** A number in the learner's language: exact when it has few decimals, otherwise rounded with ≈ */
-function plain(value: number, language: UnitLanguage, digits = 2): string {
+/** A number in the learner's language: exact when it has few decimals, otherwise rounded with ≈. LaTeX passes its own mark */
+function plain(value: number, language: UnitLanguage, digits = 2, mark = screenSeparator(language)): string {
     const rounded = Math.round(value * 10 ** digits) / 10 ** digits
-    const text = String(Math.abs(rounded) < 1e-12 ? 0 : rounded).replace('.', separator(language)).replace('-', '−')
+    const text = String(Math.abs(rounded) < 1e-12 ? 0 : rounded).replace('.', mark).replace('-', '−')
     return Math.abs(rounded - value) < 1e-9 ? text : `≈ ${text}`
 }
 
 /** "= value" or "\approx value" for LaTeX from a float */
 function texNumber(value: number, language: UnitLanguage, digits = 2) {
-    const text = plain(value, language, digits).replace(',', '{,}').replace('−', '-')
+    const text = plain(value, language, digits, separator(language)).replace(',', '{,}').replace('−', '-')
     return text.startsWith('≈ ') ? `\\approx ${text.slice(2)}` : `=${text}`
 }
 
@@ -107,7 +111,7 @@ function Axis({ x, y, from, to, step, language }: { x: (value: number) => number
 
 /* ---------- 1. Stratified sample ---------- */
 
-const COURSES = [say('1. maila', '1.º', 'الأول'), say('2. maila', '2.º', 'الثاني'), say('3. maila', '3.º', 'الثالث'), say('4. maila', '4.º', 'الرابع')]
+const COURSES = [say('1. maila', '1.º', 'الأول', '1st'), say('2. maila', '2.º', 'الثاني', '2nd'), say('3. maila', '3.º', 'الثالث', '3rd'), say('4. maila', '4.º', 'الرابع', '4th')]
 
 export function StrataTool(props: LabToolProps) {
     const l = useLabText(props.language)
@@ -120,14 +124,14 @@ export function StrataTool(props: LabToolProps) {
             {COURSES.map((course, index) => (
                 <Stepper key={index} label={`${l(course)} (Nᵢ)`} value={state.sizes[index]} min={STRATA_STEP} max={STRATA_MAX} step={STRATA_STEP} onChange={(size) => setState((s) => setStrata(s, { index, size }))} language={props.language} />
             ))}
-            <Stepper label={l(say('Lagina (n)', 'Muestra (n)', 'العيّنة (n)'))} value={state.sample} min={SAMPLE_MIN} max={SAMPLE_MAX} step={SAMPLE_STEP} onChange={(sample) => setState((s) => setStrata(s, { sample }))} language={props.language} />
+            <Stepper label={l(say('Lagina (n)', 'Muestra (n)', 'العيّنة (n)', 'Sample (n)'))} value={state.sample} min={SAMPLE_MIN} max={SAMPLE_MAX} step={SAMPLE_STEP} onChange={(sample) => setState((s) => setStrata(s, { sample }))} language={props.language} />
         </>
     )
     const latex = `\\frac{n}{N}=\\frac{${state.sample}}{${total}}${texFraction(samplingFraction(state), props.language, 3)}`
     const note = shares.map((share, index) => `${l(COURSES[index])}: ${plain(toNumber(share), props.language, 1)}`).join(' · ')
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={strataChallenges} state={state}>
-            <Board height={290} label={l(say('Maila bakoitza eta haren zatia laginean', 'Cada curso y su parte en la muestra', 'كل صف ونصيبه في العيّنة'))}>
+            <Board height={290} label={l(say('Maila bakoitza eta haren zatia laginean', 'Cada curso y su parte en la muestra', 'كل صف ونصيبه في العيّنة', 'Each year group and its share of the sample'))}>
                 {state.sizes.map((size, index) => {
                     const y = 18 + index * 60
                     const width = size * 1.4
@@ -170,11 +174,11 @@ export function BalanceTool(props: LabToolProps) {
         </>
     )
     const weighted = state.sizes[0] * state.means[0] + state.sizes[1] * state.means[1]
-    const latex = `\\bar{x}=\\frac{${plain(weighted / 10, props.language).replace(',', '{,}')}}{${state.sizes[0] + state.sizes[1]}}${texFraction(joined, props.language, 3)}`
+    const latex = `\\bar{x}=\\frac{${plain(weighted / 10, props.language, 2, separator(props.language)).replace(',', '{,}')}}{${state.sizes[0] + state.sizes[1]}}${texFraction(joined, props.language, 3)}`
     const note = names.map((name, group) => `${name}: ${state.sizes[group]} · ${tenths(state.means[group])} = ${plain((state.sizes[group] * state.means[group]) / 10, props.language)}`).join('  ·  ')
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={balanceChallenges} state={state}>
-            <Board height={280} label={l(say('Bi taldeak balantza batean', 'Los dos grupos en una balanza', 'المجموعتان على ميزان'))}>
+            <Board height={280} label={l(say('Bi taldeak balantza batean', 'Los dos grupos en una balanza', 'المجموعتان على ميزان', 'The two groups on a balance'))}>
                 <line x1={x(0)} x2={x(10)} y1={190} y2={190} stroke={INK} strokeWidth={4} strokeLinecap="round" />
                 {([0, 1] as const).map((group) => {
                     const height = state.sizes[group] * 4
@@ -206,7 +210,7 @@ export function DeviationTool(props: LabToolProps) {
     const controls = (
         <>
             {state.values.map((value, index) => (
-                <Stepper key={index} label={l(say(`${index + 1}. datua`, `Dato ${index + 1}`, `البيان ${index + 1}`))} value={value} min={0} max={DEVIATION_MAX} onChange={(next) => setState((s) => setDeviation(s, index, next))} language={props.language} />
+                <Stepper key={index} label={l(say(`${index + 1}. datua`, `Dato ${index + 1}`, `البيان ${index + 1}`, `Value ${index + 1}`))} value={value} min={0} max={DEVIATION_MAX} onChange={(next) => setState((s) => setDeviation(s, index, next))} language={props.language} />
             ))}
         </>
     )
@@ -214,7 +218,7 @@ export function DeviationTool(props: LabToolProps) {
     const note = `x̄ = ${plain(mean, props.language)} · σ ${plain(Math.sqrt(toNumber(variance)), props.language).startsWith('≈') ? '' : '= '}${plain(Math.sqrt(toNumber(variance)), props.language)}`
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={deviationChallenges} state={state}>
-            <Board height={280} label={l(say('Batez bestekorako distantziak', 'Distancias a la media', 'المسافات عن المتوسط'))}>
+            <Board height={280} label={l(say('Batez bestekorako distantziak', 'Distancias a la media', 'المسافات عن المتوسط', 'Distances from the mean'))}>
                 <line x1={x(mean)} x2={x(mean)} y1={30} y2={220} stroke={SECOND} strokeWidth={2} strokeDasharray="5 4" />
                 <Text x={x(mean)} y={24} color={SECOND}><tspan style={{ textDecoration: 'overline' }}>x</tspan></Text>
                 {state.values.map((value, index) => {
@@ -267,10 +271,10 @@ export function TransformTool(props: LabToolProps) {
         </>
     )
     const latex = `\\bar{x}${texNumber(mean, props.language)}\\quad \\sigma${texNumber(sigma, props.language)}\\quad \\text{CV}${cv === null ? '=\\text{—}' : texFraction(cv, props.language)}`
-    const note = l(say(`Hasierako datuak: batez bestekoa 5, σ = 2. Berriak: ${formula}`, `Datos iniciales: media 5, σ = 2. Nuevos: ${formula}`, `البيانات الأولى: المتوسط 5، σ = 2. الجديدة: \u2066${formula}\u2069`))
+    const note = l(say(`Hasierako datuak: batez bestekoa 5, σ = 2. Berriak: ${formula}`, `Datos iniciales: media 5, σ = 2. Nuevos: ${formula}`, `البيانات الأولى: المتوسط 5، σ = 2. الجديدة: \u2066${formula}\u2069`, `Original data: mean 5, σ = 2. New: ${formula}`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={transformChallenges} state={state}>
-            <Board height={280} label={l(say('Hasierako datuak eta datu berriak', 'Los datos iniciales y los nuevos', 'البيانات الأولى والجديدة'))}>
+            <Board height={280} label={l(say('Hasierako datuak eta datu berriak', 'Los datos iniciales y los nuevos', 'البيانات الأولى والجديدة', 'The original data and the new data'))}>
                 <Text x={14} y={28} anchor="start" size={20} color={MUTED}>x</Text>
                 {strip(TRANSFORM_DATA, 100, COLORS[4], 5, 2)}
                 <Text x={14} y={128} anchor="start" size={20} color={STAGE}>{formula}</Text>

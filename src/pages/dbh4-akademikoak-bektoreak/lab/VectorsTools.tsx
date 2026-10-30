@@ -97,7 +97,7 @@ import {
    words go through <Label>.
    ========================================================================== */
 
-type Text = { eu: string; es: string; ar: string }
+type Text = { eu: string; es: string; en: string; ar: string }
 
 const INK = 'var(--ink, #1d2733)'
 const MUTED = 'var(--muted, #58616e)'
@@ -107,7 +107,7 @@ const GREEN = 'var(--success, #267b53)'
 const CARD = 'var(--card, #fffcf6)'
 const TINT = 'rgba(47, 111, 219, 0.10)'
 
-const say = (eu: string, es: string, ar: string): Text => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): Text => ({ eu, es, en, ar })
 const BOX: PlaneBox = { xMin: -7, xMax: 7, yMin: -7, yMax: 7 }
 const BOARD_HEIGHT = 330
 
@@ -198,8 +198,8 @@ export function VectorTool(props: LabToolProps) {
     )
     const latex = `\\overrightarrow{AB}=(${b[0]}-${wrap(a[0])},${b[1]}-${wrap(a[1])})=(${v[0]},${v[1]})\\quad|\\overrightarrow{AB}|=\\sqrt{${square}}${Number.isInteger(Math.sqrt(square)) ? `=${Math.sqrt(square)}` : ''}`
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say('Muturra ken jatorria; modulua, Pitagorasekin.', 'Extremo menos origen; el módulo, con Pitágoras.', 'الطرف ناقص الأصل؛ والطول بفيثاغورس.'))} />} challenges={vectorChallenges} state={state}>
-            <Board label={l(say('A-tik B-rako bektorea, haren katetoekin', 'El vector de A a B, con sus catetos', 'المتجه من A إلى B مع ضلعيه'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say('Muturra ken jatorria; modulua, Pitagorasekin.', 'Extremo menos origen; el módulo, con Pitágoras.', 'الطرف ناقص الأصل؛ والطول بفيثاغورس.', 'End point minus start point; the magnitude, using Pythagoras\' theorem.'))} />} challenges={vectorChallenges} state={state}>
+            <Board label={l(say('A-tik B-rako bektorea, haren katetoekin', 'El vector de A a B, con sus catetos', 'المتجه من A إلى B مع ضلعيه', 'The vector from A to B, with its legs'))}>
                 {(map) => (
                     <g>
                         <PlanePath map={map} points={[a, [b[0], a[1]]]} color={GREEN} width={2} dashed />
@@ -240,8 +240,8 @@ export function CombinationTool(props: LabToolProps) {
     )
     const latex = `${a}\\cdot(2,1)+(${b})\\cdot(-1,2)=(${result[0]},${result[1]})`
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say('u = (2, 1) eta v = (−1, 2): lehenik a · u, eta haren muturretik b · v.', 'u = (2, 1) y v = (−1, 2): primero a · u y, desde su extremo, b · v.', 'u = (2, 1) وv = (−1, 2): أولًا a · u ثم من طرفه b · v.'))} />} challenges={combinationChallenges} state={state}>
-            <Board label={l(say('a · u bektorea eta haren muturretik b · v; emaitza jatorritik', 'El vector a · u y desde su extremo b · v; el resultado desde el origen', 'المتجه a · u ومن طرفه b · v؛ والناتج من الأصل'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say('u = (2, 1) eta v = (−1, 2): lehenik a · u, eta haren muturretik b · v.', 'u = (2, 1) y v = (−1, 2): primero a · u y, desde su extremo, b · v.', 'u = (2, 1) وv = (−1, 2): أولًا a · u ثم من طرفه b · v.', 'u = (2, 1) and v = (−1, 2): first a · u and then, from its end point, b · v.'))} />} challenges={combinationChallenges} state={state}>
+            <Board label={l(say('a · u bektorea eta haren muturretik b · v; emaitza jatorritik', 'El vector a · u y desde su extremo b · v; el resultado desde el origen', 'المتجه a · u ومن طرفه b · v؛ والناتج من الأصل', 'The vector a · u and, from its end point, b · v; the result from the origin'))}>
                 {(map) => (
                     <g>
                         <Arrow map={map} from={[0, 0]} to={COMBINATION_U} color={MUTED} width={2} dashed />
@@ -274,8 +274,8 @@ export function SegmentTool(props: LabToolProps) {
     )
     const latex = `M=\\left(${fracLatex(mx)},${fracLatex(my)}\\right)\\quad d(A,B)=\\sqrt{${square}}${Number.isInteger(Math.sqrt(square)) ? `=${Math.sqrt(square)}` : ''}`
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say('Erdiko puntua: batu eta zatitu 2. Luzera: kendurak karratura.', 'Punto medio: suma y divide entre 2. Longitud: diferencias al cuadrado.', 'المنتصف: اجمع واقسم على 2. الطول: ربّع الفرقين.'))} />} challenges={segmentChallenges} state={state}>
-            <Board label={l(say('AB zuzenkia eta haren erdiko puntua', 'El segmento AB y su punto medio', 'القطعة AB ومنتصفها'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say('Erdiko puntua: batu eta zatitu 2. Luzera: kendurak karratura.', 'Punto medio: suma y divide entre 2. Longitud: diferencias al cuadrado.', 'المنتصف: اجمع واقسم على 2. الطول: ربّع الفرقين.', 'Midpoint: add and divide by 2. Length: squared differences.'))} />} challenges={segmentChallenges} state={state}>
+            <Board label={l(say('AB zuzenkia eta haren erdiko puntua', 'El segmento AB y su punto medio', 'القطعة AB ومنتصفها', 'The segment AB and its midpoint'))}>
                 {(map) => (
                     <g>
                         <PlanePath map={map} points={[a, b]} color={STAGE} width={3.4} />
@@ -302,11 +302,11 @@ export function AlignTool(props: LabToolProps) {
     const controls = <PointSteppers name="C" point={c} onChange={(point) => setState((s) => setAlign(s, { c: point }))} language={props.language} />
     const latex = `\\overrightarrow{AB}=(4,2)\\quad\\overrightarrow{AC}=(${ac[0]},${ac[1]})\\quad 4\\cdot ${ac[1] < 0 ? `(${ac[1]})` : ac[1]}-2\\cdot ${ac[0] < 0 ? `(${ac[0]})` : ac[0]}=${4 * ac[1] - 2 * ac[0]}`
     const status = aligned
-        ? (t > 1 ? say('Lerrokatuta, B-tik harago', 'Alineado, más allá de B', 'على الاستقامة نفسها بعد B') : t < 0 ? say('Lerrokatuta, A-ren atzean', 'Alineado, detrás de A', 'على الاستقامة نفسها خلف A') : say('Lerrokatuta, A eta B artean', 'Alineado, entre A y B', 'على الاستقامة نفسها بين A وB'))
-        : 4 * ac[0] + 2 * ac[1] === 0 ? say('Angelu zuzena A-n', 'Ángulo recto en A', 'زاوية قائمة في A') : say('Ez dago lerrokatuta', 'No está alineado', 'ليست على الاستقامة نفسها')
+        ? (t > 1 ? say('Lerrokatuta, B-tik harago', 'Alineado, más allá de B', 'على الاستقامة نفسها بعد B', 'Collinear, beyond B') : t < 0 ? say('Lerrokatuta, A-ren atzean', 'Alineado, detrás de A', 'على الاستقامة نفسها خلف A', 'Collinear, behind A') : say('Lerrokatuta, A eta B artean', 'Alineado, entre A y B', 'على الاستقامة نفسها بين A وB', 'Collinear, between A and B'))
+        : 4 * ac[0] + 2 * ac[1] === 0 ? say('Angelu zuzena A-n', 'Ángulo recto en A', 'زاوية قائمة في A', 'Right angle at A') : say('Ez dago lerrokatuta', 'No está alineado', 'ليست على الاستقامة نفسها', 'Not collinear')
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say('Biderkadura gurutzatua 0 bada, lerrokatuta.', 'Si el producto cruzado es 0, están alineados.', 'إذا كان الضرب التبادلي 0 فهي على استقامة واحدة.'))} />} challenges={alignChallenges} state={state}>
-            <Board label={l(say('A eta B finkoak eta C puntua, AB zuzenarekin', 'A y B fijos y el punto C, con la recta AB', 'A وB ثابتتان والنقطة C مع المستقيم AB'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say('Biderkadura gurutzatua 0 bada, lerrokatuta.', 'Si el producto cruzado es 0, están alineados.', 'إذا كان الضرب التبادلي 0 فهي على استقامة واحدة.', 'If the cross product is 0, they are collinear.'))} />} challenges={alignChallenges} state={state}>
+            <Board label={l(say('A eta B finkoak eta C puntua, AB zuzenarekin', 'A y B fijos y el punto C, con la recta AB', 'A وB ثابتتان والنقطة C مع المستقيم AB', 'A and B fixed, and point C, with the straight line AB'))}>
                 {(map, clip) => (
                     <g>
                         <LineDraw map={map} line={{ A: 1, B: -2, C: 1 }} clip={clip} color={MUTED} width={1.6} dashed />
@@ -342,7 +342,7 @@ export function ParametricTool(props: LabToolProps) {
     const latex = `(x,y)=(${p[0]},${p[1]})+${t < 0 ? `(${t})` : t}\\cdot(${d[0]},${d[1]})=(${point[0]},${point[1]})`
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={parametricText(p, d)} />} challenges={parametricChallenges} state={state}>
-            <Board label={l(say('P puntutik d norabidean doan zuzena eta t-k ematen duen puntua', 'La recta que sale de P en la dirección d y el punto que da t', 'المستقيم الخارج من P في اتجاه d والنقطة التي يعطيها t'))}>
+            <Board label={l(say('P puntutik d norabidean doan zuzena eta t-k ematen duen puntua', 'La recta que sale de P en la dirección d y el punto que da t', 'المستقيم الخارج من P في اتجاه d والنقطة التي يعطيها t', 'The straight line from P in direction d, and the point given by t'))}>
                 {(map, clip) => (
                     <g>
                         <LineDraw map={map} line={parametricLine(state)} clip={clip} color={STAGE} width={2.4} />
@@ -375,8 +375,8 @@ export function FormsTool(props: LabToolProps) {
     )
     const latex = m === null ? `x=${fracLatex({ numerator: -line.C, denominator: line.A })}` : `m=${fracLatex(m)}\\quad n=${fracLatex(n!)}`
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={m === null ? l(say('Zuzen bertikala: ez du maldarik.', 'Recta vertical: no tiene pendiente.', 'مستقيم رأسي: لا ميل له.')) : l(say('Malda eta jatorriko ordenatua.', 'Pendiente y ordenada en el origen.', 'الميل والمقطع الصادي.'))} />} challenges={formsChallenges} state={state}>
-            <Board label={l(say('P puntutik d norabidean doan zuzena', 'La recta por P con dirección d', 'المستقيم المار بـ P في اتجاه d'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={m === null ? l(say('Zuzen bertikala: ez du maldarik.', 'Recta vertical: no tiene pendiente.', 'مستقيم رأسي: لا ميل له.', 'Vertical straight line: it has no slope.')) : l(say('Malda eta jatorriko ordenatua.', 'Pendiente y ordenada en el origen.', 'الميل والمقطع الصادي.', 'Slope and y-intercept.'))} />} challenges={formsChallenges} state={state}>
+            <Board label={l(say('P puntutik d norabidean doan zuzena', 'La recta por P con dirección d', 'المستقيم المار بـ P في اتجاه d', 'The straight line through P with direction d'))}>
                 {(map, clip) => (
                     <g>
                         <LineDraw map={map} line={line} clip={clip} />
@@ -411,10 +411,10 @@ export function SlopeTool(props: LabToolProps) {
     const rise = b[1] - a[1]
     const run = b[0] - a[0]
     const latex = m === null ? `m=\\frac{${rise}}{0}\\ \\nexists` : `m=\\frac{${rise}}{${run}}=${fracLatex(m)}`
-    const kind = m === null ? say('Bertikala', 'Vertical', 'رأسي') : m.numerator === 0 ? say('Horizontala', 'Horizontal', 'أفقي') : m.numerator > 0 ? say('Gorakorra', 'Creciente', 'متزايد') : say('Beherakorra', 'Decreciente', 'متناقص')
+    const kind = m === null ? say('Bertikala', 'Vertical', 'رأسي', 'Vertical') : m.numerator === 0 ? say('Horizontala', 'Horizontal', 'أفقي', 'Horizontal') : m.numerator > 0 ? say('Gorakorra', 'Creciente', 'متزايد', 'Increasing') : say('Beherakorra', 'Decreciente', 'متناقص', 'Decreasing')
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(kind)} />} challenges={slopeChallenges} state={state}>
-            <Board label={l(say('A eta B puntuetatik pasatzen den zuzena, aurrerapena eta igoera', 'La recta por A y B, con lo que avanza y lo que sube', 'المستقيم المار بـ A وB مع التقدّم والصعود'))}>
+            <Board label={l(say('A eta B puntuetatik pasatzen den zuzena, aurrerapena eta igoera', 'La recta por A y B, con lo que avanza y lo que sube', 'المستقيم المار بـ A وB مع التقدّم والصعود', 'The straight line through A and B, with its run and rise'))}>
                 {(map, clip) => (
                     <g>
                         {!(a[0] === b[0] && a[1] === b[1]) && <LineDraw map={map} line={{ A: rise, B: -run, C: run * a[1] - rise * a[0] }} clip={clip} />}
@@ -425,7 +425,7 @@ export function SlopeTool(props: LabToolProps) {
                     </g>
                 )}
             </Board>
-            <Readings rows={[[`${l(say('aurrerapena', 'avance', 'التقدّم'))} ${num(run)}   ·   ${l(say('igoera', 'subida', 'الصعود'))} ${num(rise)}`, MUTED]]} />
+            <Readings rows={[[`${l(say('aurrerapena', 'avance', 'التقدّم', 'run'))} ${num(run)}   ·   ${l(say('igoera', 'subida', 'الصعود', 'rise'))} ${num(rise)}`, MUTED]]} />
         </ToolFrame>
     )
 }
@@ -433,9 +433,9 @@ export function SlopeTool(props: LabToolProps) {
 /* ---------- 8. A second line against y = 2x − 1 ---------- */
 
 const positionNames = {
-    secant: say('Ebakitzaileak', 'Secantes', 'متقاطعان'),
-    parallel: say('Paraleloak', 'Paralelas', 'متوازيان'),
-    coincident: say('Bat datozenak', 'Coincidentes', 'منطبقان')
+    secant: say('Ebakitzaileak', 'Secantes', 'متقاطعان', 'Intersecting'),
+    parallel: say('Paraleloak', 'Paralelas', 'متوازيان', 'Parallel'),
+    coincident: say('Bat datozenak', 'Coincidentes', 'منطبقان', 'Coincident')
 }
 
 export function TwoLinesTool(props: LabToolProps) {
@@ -447,16 +447,16 @@ export function TwoLinesTool(props: LabToolProps) {
     const perpendicular = Math.abs((m.numerator / m.denominator) * 2 + 1) < 1e-9
     const controls = (
         <>
-            <Stepper label={l(say('s-ren malda', 'Pendiente de s', 'ميل s'))} value={state.slope} min={0} max={SLOPES.length - 1} format={(index) => fractionText(SLOPES[index])} onChange={(value) => setState((s) => setTwoLines(s, { slope: value }))} language={props.language} />
+            <Stepper label={l(say('s-ren malda', 'Pendiente de s', 'ميل s', 'Slope of s'))} value={state.slope} min={0} max={SLOPES.length - 1} format={(index) => fractionText(SLOPES[index])} onChange={(value) => setState((s) => setTwoLines(s, { slope: value }))} language={props.language} />
             <Stepper label="n" value={state.n} min={-INTERCEPT_LIMIT} max={INTERCEPT_LIMIT} format={num} onChange={(value) => setState((s) => setTwoLines(s, { n: value }))} language={props.language} />
         </>
     )
     const sLine: Line = { A: -m.numerator, B: m.denominator, C: -state.n * m.denominator }
     const latex = `r\\colon y=2x-1\\quad s\\colon y=${m.numerator === 0 ? '' : `${m.denominator === 1 && Math.abs(m.numerator) === 1 ? (m.numerator < 0 ? '-' : '') : fracLatex(m)}x`}${state.n === 0 && m.numerator !== 0 ? '' : state.n < 0 || m.numerator === 0 ? state.n : `+${state.n}`}`
-    const note = `${l(positionNames[position])}${perpendicular ? ` · ${l(say('perpendikularrak', 'perpendiculares', 'متعامدان'))}` : ''}${point ? ` · (${fractionText(fractionOf(point[0]))}, ${fractionText(fractionOf(point[1]))})` : ''}`
+    const note = `${l(positionNames[position])}${perpendicular ? ` · ${l(say('perpendikularrak', 'perpendiculares', 'متعامدان', 'perpendicular'))}` : ''}${point ? ` · (${fractionText(fractionOf(point[0]))}, ${fractionText(fractionOf(point[1]))})` : ''}`
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={twoLinesChallenges} state={state}>
-            <Board label={l(say('r zuzen finkoa eta s zuzena', 'La recta fija r y la recta s', 'المستقيم الثابت r والمستقيم s'))}>
+            <Board label={l(say('r zuzen finkoa eta s zuzena', 'La recta fija r y la recta s', 'المستقيم الثابت r والمستقيم s', 'The fixed straight line r and the straight line s'))}>
                 {(map, clip) => (
                     <g>
                         <LineDraw map={map} line={{ A: 2, B: -1, C: -1 }} clip={clip} color={STAGE} width={3.4} />
@@ -499,8 +499,8 @@ export function BisectorTool(props: LabToolProps) {
     )
     const latex = line ? `M=\\left(${fracLatex(mx)},${fracLatex(my)}\\right)\\quad ${generalText(line).replace(/−/g, '-')}` : 'A=B'
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={line ? explicitText(line) : l(say('A eta B desberdinak izan behar dira.', 'A y B tienen que ser distintos.', 'يجب أن تختلف A وB.'))} />} challenges={bisectorChallenges} state={state}>
-            <Board label={l(say('AB zuzenkia, haren erdiko puntua eta erdibitzailea', 'El segmento AB, su punto medio y su mediatriz', 'القطعة AB ومنتصفها ومحورها'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={line ? explicitText(line) : l(say('A eta B desberdinak izan behar dira.', 'A y B tienen que ser distintos.', 'يجب أن تختلف A وB.', 'A and B must be different.'))} />} challenges={bisectorChallenges} state={state}>
+            <Board label={l(say('AB zuzenkia, haren erdiko puntua eta erdibitzailea', 'El segmento AB, su punto medio y su mediatriz', 'القطعة AB ومنتصفها ومحورها', 'The segment AB, its midpoint and its perpendicular bisector'))}>
                 {(map, clip) => (
                     <g>
                         {line && <LineDraw map={map} line={line} clip={clip} color={SECOND} />}
@@ -518,9 +518,9 @@ export function BisectorTool(props: LabToolProps) {
 /* ---------- 10. A circumference and a point ---------- */
 
 const placeNames = {
-    inside: say('P barruan dago', 'P está dentro', 'P داخل الدائرة'),
-    on: say('P zirkunferentzian dago', 'P está sobre la circunferencia', 'P على الدائرة'),
-    outside: say('P kanpoan dago', 'P está fuera', 'P خارج الدائرة')
+    inside: say('P barruan dago', 'P está dentro', 'P داخل الدائرة', 'P is inside'),
+    on: say('P zirkunferentzian dago', 'P está sobre la circunferencia', 'P على الدائرة', 'P is on the circumference'),
+    outside: say('P kanpoan dago', 'P está fuera', 'P خارج الدائرة', 'P is outside')
 }
 
 export function CircleTool(props: LabToolProps) {
@@ -540,7 +540,7 @@ export function CircleTool(props: LabToolProps) {
     const latex = `${part('x', center[0])}+${part('y', center[1])}=${r * r}\\quad d(P,C)=${rootLatex(square)}`
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(placeNames[place])} />} challenges={circleChallenges} state={state}>
-            <Board label={l(say('C zentroko eta r erradioko zirkunferentzia eta P puntua', 'La circunferencia de centro C y radio r, y el punto P', 'الدائرة التي مركزها C ونصف قطرها r، والنقطة P'))}>
+            <Board label={l(say('C zentroko eta r erradioko zirkunferentzia eta P puntua', 'La circunferencia de centro C y radio r, y el punto P', 'الدائرة التي مركزها C ونصف قطرها r، والنقطة P', 'The circumference with centre C and radius r, and the point P'))}>
                 {(map, clip) => (
                     <g>
                         <circle cx={map.x(center[0])} cy={map.y(center[1])} r={r * map.cell} fill={TINT} stroke={STAGE} strokeWidth={3} clipPath={clip} />

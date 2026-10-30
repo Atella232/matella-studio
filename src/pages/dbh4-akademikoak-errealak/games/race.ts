@@ -54,8 +54,8 @@ export type PercentRaceMeta =
 export type PercentRaceQuestion = RaceQuestion<PercentRaceError> & { meta: PercentRaceMeta | RealsRaceQuestion['meta']; line?: RealsRaceQuestion['line'] }
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => say(`$${latex}$`, `$${latex}$`, `$${latex}$`)
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => say(`$${latex}$`, `$${latex}$`, `$${latex}$`, `$${latex}$`)
 const math = (latex: string) => `$${latex}$`
 /** A number in LaTeX with the decimal comma: 1.21 → 1{,}21 */
 const num = (value: number) => String(tidy(value, 6)).replace('.', '{,}').replace(/^-/, '-')
@@ -106,7 +106,7 @@ function sqrtFloorQuestion(random: Random): PercentRaceQuestion | null {
     if (low * low === n) return null
     const options = pickOptions(random, numberChoice(low, 'calculation'), shuffle(random, [numberChoice(low + 1, 'calculation'), numberChoice(Math.floor(n / 2), 'root-guess'), numberChoice(low - 1, 'calculation'), numberChoice(low + 2, 'calculation')]).filter((item) => Number(item.latex) > 0))
     if (!options) return null
-    return build(1, 'sqrt-floor', say(`${math(`\\sqrt{${n}}`)} bi zenbaki oso jarraituren artean dago. Zein da txikiena?`, `${math(`\\sqrt{${n}}`)} está entre dos enteros consecutivos. ¿Cuál es el menor?`, `${math(`\\sqrt{${n}}`)} يقع بين عددين صحيحين متتاليين. ما الأصغر؟`), options, low, same(`${low * low}<${n}<${(low + 1) * (low + 1)}\\ \\to\\ ${low}<\\sqrt{${n}}<${low + 1}`), { kind: 'sqrt-floor', n, low })
+    return build(1, 'sqrt-floor', say(`${math(`\\sqrt{${n}}`)} bi zenbaki oso jarraituren artean dago. Zein da txikiena?`, `${math(`\\sqrt{${n}}`)} está entre dos enteros consecutivos. ¿Cuál es el menor?`, `${math(`\\sqrt{${n}}`)} يقع بين عددين صحيحين متتاليين. ما الأصغر؟`, `${math(`\\sqrt{${n}}`)} lies between two consecutive integers. Which is the smaller one?`), options, low, same(`${low * low}<${n}<${(low + 1) * (low + 1)}\\ \\to\\ ${low}<\\sqrt{${n}}<${low + 1}`), { kind: 'sqrt-floor', n, low })
 }
 
 function hypotenuseQuestion(random: Random): PercentRaceQuestion | null {
@@ -115,7 +115,7 @@ function hypotenuseQuestion(random: Random): PercentRaceQuestion | null {
     const n = a * a + b * b
     const options = pickOptions(random, numberChoice(n, 'calculation'), shuffle(random, [numberChoice((a + b) * (a + b), 'square-sum'), numberChoice(a + b, 'square-sum'), numberChoice(2 * a + 2 * b, 'calculation'), numberChoice(n + 1, 'calculation')]).filter((item) => item.latex !== num(n)))
     if (!options) return null
-    return build(1, 'hypotenuse', say(`Triangelu zuzen baten katetoak ${a} eta ${b} dira. Hipotenusa ${math('\\sqrt{n}')} da. Zenbat da $n$?`, `Los catetos de un triángulo rectángulo miden ${a} y ${b}. La hipotenusa mide ${math('\\sqrt{n}')}. ¿Cuánto vale $n$?`, `ضلعا مثلث قائم ${a} و${b}. طول الوتر ${math('\\sqrt{n}')}. كم تساوي $n$؟`), options, n, same(`${a}^{2}+${b}^{2}=${a * a}+${b * b}=${n}`), { kind: 'hypotenuse', a, b, n })
+    return build(1, 'hypotenuse', say(`Triangelu zuzen baten katetoak ${a} eta ${b} dira. Hipotenusa ${math('\\sqrt{n}')} da. Zenbat da $n$?`, `Los catetos de un triángulo rectángulo miden ${a} y ${b}. La hipotenusa mide ${math('\\sqrt{n}')}. ¿Cuánto vale $n$?`, `ضلعا مثلث قائم ${a} و${b}. طول الوتر ${math('\\sqrt{n}')}. كم تساوي $n$؟`, `The legs of a right-angled triangle measure ${a} and ${b}. The hypotenuse measures ${math('\\sqrt{n}')}. What is $n$?`), options, n, same(`${a}^{2}+${b}^{2}=${a * a}+${b * b}=${n}`), { kind: 'hypotenuse', a, b, n })
 }
 
 /* ---------- Circuit 3: percentages ---------- */
@@ -127,7 +127,7 @@ function percentOfQuestion(random: Random, tier: Tier): PercentRaceQuestion | nu
     if (!Number.isInteger(value * 100)) return null
     const options = pickOptions(random, numberChoice(value, 'calculation'), shuffle(random, [numberChoice(p * amount, 'percent-scale'), numberChoice(tidy(amount / p, 6), 'calculation'), numberChoice(tidy(value * 10, 6), 'percent-scale'), numberChoice(tidy(amount - value, 6), 'calculation'), ...near(value)]).filter((item) => Number.isFinite(Number(item.latex.replace('{,}', '.')))))
     if (!options) return null
-    return build(3, 'percent-of', say(`Zenbat da ${math(num(amount))} zenbakiaren % ${num(p).replace('{,}', ',')}?`, `Calcula el ${num(p).replace('{,}', ',')} % de ${math(num(amount))}.`, `احسب ${num(p).replace('{,}', '.')} % من ${math(num(amount))}.`), options, value, same(`${num(p / 100)}\\cdot ${num(amount)}=${num(value)}`), { kind: 'percent-of', p, amount, value })
+    return build(3, 'percent-of', say(`Zenbat da ${math(num(amount))} zenbakiaren % ${num(p).replace('{,}', ',')}?`, `Calcula el ${num(p).replace('{,}', ',')} % de ${math(num(amount))}.`, `احسب ${num(p).replace('{,}', '.')} % من ${math(num(amount))}.`, `Work out ${num(p).replace('{,}', '.')}% of ${math(num(amount))}.`), options, value, same(`${num(p / 100)}\\cdot ${num(amount)}=${num(value)}`), { kind: 'percent-of', p, amount, value })
 }
 
 function indexQuestion(random: Random, tier: Tier): PercentRaceQuestion | null {
@@ -144,8 +144,8 @@ function indexQuestion(random: Random, tier: Tier): PercentRaceQuestion | null {
     if (!options) return null
     const p = num(size).replace('{,}', ',')
     const prompt = change > 0
-        ? say(`Kantitate bat % ${p} igotzeko, zenbatez biderkatzen da?`, `Para aumentar una cantidad un ${p} %, ¿por qué número se multiplica?`, `لزيادة كمية ${p.replace(',', '.')} %، في أي عدد نضرب؟`)
-        : say(`Kantitate bat % ${p} jaisteko, zenbatez biderkatzen da?`, `Para disminuir una cantidad un ${p} %, ¿por qué número se multiplica?`, `لإنقاص كمية ${p.replace(',', '.')} %، في أي عدد نضرب؟`)
+        ? say(`Kantitate bat % ${p} igotzeko, zenbatez biderkatzen da?`, `Para aumentar una cantidad un ${p} %, ¿por qué número se multiplica?`, `لزيادة كمية ${p.replace(',', '.')} %، في أي عدد نضرب؟`, `To increase an amount by ${p.replace(',', '.')}%, which number do you multiply by?`)
+        : say(`Kantitate bat % ${p} jaisteko, zenbatez biderkatzen da?`, `Para disminuir una cantidad un ${p} %, ¿por qué número se multiplica?`, `لإنقاص كمية ${p.replace(',', '.')} %، في أي عدد نضرب؟`, `To decrease an amount by ${p.replace(',', '.')}%, which number do you multiply by?`)
     return build(3, 'index', prompt, options, index, same(`1${change > 0 ? '+' : '-'}${num(size / 100)}=${num(index)}`), { kind: 'index', change, index })
 }
 
@@ -159,7 +159,7 @@ function chainedQuestion(random: Random): PercentRaceQuestion | null {
     const options = pickOptions(random, numberChoice(total, 'calculation'), [numberChoice(added, 'percent-added'), ...shuffle(random, [numberChoice(-total, 'index-sign'), numberChoice(tidy(total + 1, 6), 'calculation'), numberChoice(tidy(total - 2, 6), 'calculation')])].filter((item) => item.latex !== num(total)))
     if (!options) return null
     const [a, b] = changes.map((change) => (change > 0 ? `+${change}` : String(change)))
-    return build(3, 'chained', say(`Prezio bat ${math(`${a}\\,\\%`)} eta gero ${math(`${b}\\,\\%`)} aldatu da. Zenbat aldatu da guztira (%)?`, `Un precio varía un ${math(`${a}\\,\\%`)} y después un ${math(`${b}\\,\\%`)}. ¿Cuánto ha variado en total (%)?`, `تغيّر سعر ${math(`${a}\\,\\%`)} ثم ${math(`${b}\\,\\%`)}. كم تغيّر إجمالًا (%)؟`), options, total, same(`${num(variationIndex(changes[0]))}\\cdot ${num(variationIndex(changes[1]))}=${num(chainedIndex(changes))}\\ \\to\\ ${signed(total)}\\,\\%`), { kind: 'chained', changes, total })
+    return build(3, 'chained', say(`Prezio bat ${math(`${a}\\,\\%`)} eta gero ${math(`${b}\\,\\%`)} aldatu da. Zenbat aldatu da guztira (%)?`, `Un precio varía un ${math(`${a}\\,\\%`)} y después un ${math(`${b}\\,\\%`)}. ¿Cuánto ha variado en total (%)?`, `تغيّر سعر ${math(`${a}\\,\\%`)} ثم ${math(`${b}\\,\\%`)}. كم تغيّر إجمالًا (%)؟`, `A price changes by ${math(`${a}\\,\\%`)} and then by ${math(`${b}\\,\\%`)}. What is the total change (%)?`), options, total, same(`${num(variationIndex(changes[0]))}\\cdot ${num(variationIndex(changes[1]))}=${num(chainedIndex(changes))}\\ \\to\\ ${signed(total)}\\,\\%`), { kind: 'chained', changes, total })
 }
 
 function inverseQuestion(random: Random, tier: Tier): PercentRaceQuestion | null {
@@ -173,8 +173,8 @@ function inverseQuestion(random: Random, tier: Tier): PercentRaceQuestion | null
     if (!options) return null
     const p = num(size).replace('{,}', ',')
     const prompt = change > 0
-        ? say(`Igoera: % ${p}. Orain ${math(num(final))} € balio du. Zenbat balio zuen?`, `Tras subir un ${p} %, cuesta ${math(num(final))} €. ¿Cuánto costaba?`, `بعد زيادة ${p.replace(',', '.')} % صار ثمنه ${math(num(final))} €. كم كان ثمنه؟`)
-        : say(`Beherapena: % ${p}. Orain ${math(num(final))} € balio du. Zenbat balio zuen?`, `Tras una rebaja del ${p} %, cuesta ${math(num(final))} €. ¿Cuánto costaba?`, `بعد خصم ${p.replace(',', '.')} % صار ثمنه ${math(num(final))} €. كم كان ثمنه؟`)
+        ? say(`Igoera: % ${p}. Orain ${math(num(final))} € balio du. Zenbat balio zuen?`, `Tras subir un ${p} %, cuesta ${math(num(final))} €. ¿Cuánto costaba?`, `بعد زيادة ${p.replace(',', '.')} % صار ثمنه ${math(num(final))} €. كم كان ثمنه؟`, `After a ${p.replace(',', '.')}% increase, it costs €${math(num(final))}. How much did it cost before?`)
+        : say(`Beherapena: % ${p}. Orain ${math(num(final))} € balio du. Zenbat balio zuen?`, `Tras una rebaja del ${p} %, cuesta ${math(num(final))} €. ¿Cuánto costaba?`, `بعد خصم ${p.replace(',', '.')} % صار ثمنه ${math(num(final))} €. كم كان ثمنه؟`, `After a ${p.replace(',', '.')}% discount, it costs €${math(num(final))}. How much did it cost before?`)
     return build(3, 'inverse', prompt, options, initial, same(`${num(final)}:${num(variationIndex(change))}=${num(initial)}`), { kind: 'inverse', change, initial, final })
 }
 
@@ -189,12 +189,12 @@ function simpleQuestion(random: Random, tier: Tier): PercentRaceQuestion | null 
     if (tier === 2 && random() < 0.5) {
         const options = pickOptions(random, numberChoice(rate, 'calculation'), shuffle(random, [numberChoice(tidy((interest * 100) / capital, 6), 'calculation'), numberChoice(tidy(interest / (capital * years), 6), 'percent-scale'), numberChoice(tidy(rate * 2, 6), 'calculation'), numberChoice(tidy(rate + 1, 6), 'calculation')]).filter((item) => item.latex !== num(rate)))
         if (!options) return null
-        return build(4, 'simple-rate', say(`${math(num(capital))} €-k ${years} urtean ${math(num(interest))} € interes sinple eman dituzte. Zer interes-tasarekin (%)?`, `${math(num(capital))} € han dado ${math(num(interest))} € de interés simple en ${years} años. ¿A qué rédito (%)?`, `أعطت ${math(num(capital))} € فائدة بسيطة قدرها ${math(num(interest))} € في ${years} أعوام. بأي معدل (%)؟`), options, rate, same(`r=\\frac{100\\cdot ${num(interest)}}{${num(capital)}\\cdot ${years}}=${num(rate)}`), { kind: 'simple', capital, rate, years, interest, ask: 'rate' })
+        return build(4, 'simple-rate', say(`${math(num(capital))} €-k ${years} urtean ${math(num(interest))} € interes sinple eman dituzte. Zer interes-tasarekin (%)?`, `${math(num(capital))} € han dado ${math(num(interest))} € de interés simple en ${years} años. ¿A qué rédito (%)?`, `أعطت ${math(num(capital))} € فائدة بسيطة قدرها ${math(num(interest))} € في ${years} أعوام. بأي معدل (%)؟`, `€${math(num(capital))} earned €${math(num(interest))} in simple interest over ${years} years. What is the rate (%)?`), options, rate, same(`r=\\frac{100\\cdot ${num(interest)}}{${num(capital)}\\cdot ${years}}=${num(rate)}`), { kind: 'simple', capital, rate, years, interest, ask: 'rate' })
     }
     const compound = tidy(compoundFinal(capital, rate, years) - capital, 6)
     const options = pickOptions(random, numberChoice(interest, 'calculation'), shuffle(random, [numberChoice(tidy(capital * rate * years, 6), 'percent-scale'), numberChoice(tidy(capital + interest, 6), 'interest-final'), ...(compound !== interest ? [numberChoice(compound, 'simple-compound')] : []), numberChoice(tidy(interest / years, 6), 'calculation')]).filter((item) => item.latex !== num(interest)))
     if (!options) return null
-    return build(4, 'simple-interest', say(`Interes sinplea. Kapitala: ${math(num(capital))} €; interes-tasa: % ${num(rate).replace('{,}', ',')}; denbora: ${years} urte. Zenbat interes (€)?`, `${math(num(capital))} € al ${num(rate).replace('{,}', ',')} % durante ${years} años a interés simple. ¿Cuántos intereses (€)?`, `${math(num(capital))} € بنسبة ${num(rate).replace('{,}', '.')} % لمدة ${years} أعوام بفائدة بسيطة. كم الفائدة (€)؟`), options, interest, same(`I=\\frac{${num(capital)}\\cdot ${num(rate)}\\cdot ${years}}{100}=${num(interest)}`), { kind: 'simple', capital, rate, years, interest, ask: 'interest' })
+    return build(4, 'simple-interest', say(`Interes sinplea. Kapitala: ${math(num(capital))} €; interes-tasa: % ${num(rate).replace('{,}', ',')}; denbora: ${years} urte. Zenbat interes (€)?`, `${math(num(capital))} € al ${num(rate).replace('{,}', ',')} % durante ${years} años a interés simple. ¿Cuántos intereses (€)?`, `${math(num(capital))} € بنسبة ${num(rate).replace('{,}', '.')} % لمدة ${years} أعوام بفائدة بسيطة. كم الفائدة (€)؟`, `€${math(num(capital))} at ${num(rate).replace('{,}', '.')}% for ${years} years at simple interest. How much interest (in €)?`), options, interest, same(`I=\\frac{${num(capital)}\\cdot ${num(rate)}\\cdot ${years}}{100}=${num(interest)}`), { kind: 'simple', capital, rate, years, interest, ask: 'interest' })
 }
 
 function compoundQuestion(random: Random, tier: Tier): PercentRaceQuestion | null {
@@ -205,7 +205,7 @@ function compoundQuestion(random: Random, tier: Tier): PercentRaceQuestion | nul
     const simple = tidy(capital + simpleInterest(capital, rate, years), 6)
     const options = pickOptions(random, numberChoice(final, 'calculation'), shuffle(random, [numberChoice(simple, 'simple-compound'), numberChoice(compoundFinal(capital, rate, years - 1), 'exponent-count'), numberChoice(compoundFinal(capital, rate, years + 1), 'exponent-count'), numberChoice(tidy(final - capital, 6), 'interest-final')]).filter((item) => item.latex !== num(final)))
     if (!options) return null
-    return build(4, 'compound', say(`Interes konposatua. Kapitala: ${math(num(capital))} €; interes-tasa: % ${rate}; denbora: ${years} urte. Zenbat izango dira (€)?`, `${math(num(capital))} € al ${rate} % durante ${years} años a interés compuesto. ¿En cuánto se convierten (€)?`, `${math(num(capital))} € بنسبة ${rate} % لمدة ${years} أعوام بفائدة مركبة. كم تصبح (€)؟`), options, final, same(`${num(capital)}\\cdot ${num(variationIndex(rate))}^{${years}}\\approx ${num(final)}`), { kind: 'compound', capital, rate, years, final })
+    return build(4, 'compound', say(`Interes konposatua. Kapitala: ${math(num(capital))} €; interes-tasa: % ${rate}; denbora: ${years} urte. Zenbat izango dira (€)?`, `${math(num(capital))} € al ${rate} % durante ${years} años a interés compuesto. ¿En cuánto se convierten (€)?`, `${math(num(capital))} € بنسبة ${rate} % لمدة ${years} أعوام بفائدة مركبة. كم تصبح (€)؟`, `€${math(num(capital))} at ${rate}% for ${years} years at compound interest. How much will it grow to (in €)?`), options, final, same(`${num(capital)}\\cdot ${num(variationIndex(rate))}^{${years}}\\approx ${num(final)}`), { kind: 'compound', capital, rate, years, final })
 }
 
 /* ---------- Public API ---------- */
@@ -264,12 +264,12 @@ export function percentParTime(circuit: number): number {
 
 export const percentRaceErrorTips: Record<PercentRaceError, LocalizedText> = {
     ...realsRaceErrorTips,
-    'percent-scale': say('Ehunekoa zati 100 da: % 16 = 0,16, ez 16.', 'Un porcentaje es entre 100: el 16 % es 0,16, no 16.', 'النسبة المئوية على 100: 16 % هي 0.16 لا 16.'),
-    'index-one': say('Indizean 1 dago: kantitate osoa gehi (edo ken) ehunekoa. % 21 igo → 1,21.', 'El índice incluye el 1: toda la cantidad más (o menos) el porcentaje. Subir un 21 % → 1,21.', 'المؤشر يتضمن 1: الكمية كلها زائد (أو ناقص) النسبة. زيادة 21 % → 1.21.'),
-    'index-sign': say('Igoerak 1 baino handiagoa den indizea du; jaitsierak, txikiagoa.', 'Un aumento tiene índice mayor que 1; una disminución, menor.', 'للزيادة مؤشر أكبر من 1 وللنقصان مؤشر أصغر من 1.'),
-    'percent-added': say('Ehuneko kateatuak ez dira batzen: biderkatu indizeak.', 'Los porcentajes encadenados no se suman: multiplica los índices.', 'لا تُجمع النسب المتسلسلة: اضرب المؤشرات.'),
-    'inverse-subtract': say('Hasierakoa aurkitzeko, zatitu indizeaz; ehunekoa hasierako kantitatearen gainean zegoen.', 'Para hallar la inicial, divide entre el índice; el porcentaje era sobre la cantidad inicial.', 'لإيجاد الأولية اقسم على المؤشر؛ فالنسبة كانت من الكمية الأولية.'),
-    'simple-compound': say('Sinplean urtero interes bera; konposatuan interesak kapitalari gehitzen zaizkio.', 'En el simple, cada año el mismo interés; en el compuesto, los intereses se suman al capital.', 'في البسيطة الفائدة نفسها كل عام؛ وفي المركبة تُضاف الفوائد إلى رأس المال.'),
-    'square-sum': say('$(a+b)^{2}\\neq a^{2}+b^{2}$: karratu bakoitza bere aldetik.', '$(a+b)^{2}\\neq a^{2}+b^{2}$: cada cateto se eleva por separado.', '$(a+b)^{2}\\neq a^{2}+b^{2}$: يُربَّع كل ضلع على حدة.'),
-    'interest-final': say('Begiratu zer galdetzen den: interesak ($I$) ala amaierako kapitala ($C+I$).', 'Mira qué se pregunta: los intereses ($I$) o el capital final ($C+I$).', 'انظر إلى المطلوب: الفوائد ($I$) أم رأس المال النهائي ($C+I$).')
+    'percent-scale': say('Ehunekoa zati 100 da: % 16 = 0,16, ez 16.', 'Un porcentaje es entre 100: el 16 % es 0,16, no 16.', 'النسبة المئوية على 100: 16 % هي 0.16 لا 16.', 'A percentage is divided by 100: 16% is 0.16, not 16.'),
+    'index-one': say('Indizean 1 dago: kantitate osoa gehi (edo ken) ehunekoa. % 21 igo → 1,21.', 'El índice incluye el 1: toda la cantidad más (o menos) el porcentaje. Subir un 21 % → 1,21.', 'المؤشر يتضمن 1: الكمية كلها زائد (أو ناقص) النسبة. زيادة 21 % → 1.21.', 'The multiplier includes the 1: the whole amount plus (or minus) the percentage. A 21% increase → 1.21.'),
+    'index-sign': say('Igoerak 1 baino handiagoa den indizea du; jaitsierak, txikiagoa.', 'Un aumento tiene índice mayor que 1; una disminución, menor.', 'للزيادة مؤشر أكبر من 1 وللنقصان مؤشر أصغر من 1.', 'An increase has a multiplier greater than 1; a decrease, less than 1.'),
+    'percent-added': say('Ehuneko kateatuak ez dira batzen: biderkatu indizeak.', 'Los porcentajes encadenados no se suman: multiplica los índices.', 'لا تُجمع النسب المتسلسلة: اضرب المؤشرات.', 'Successive percentages are not added: multiply the multipliers.'),
+    'inverse-subtract': say('Hasierakoa aurkitzeko, zatitu indizeaz; ehunekoa hasierako kantitatearen gainean zegoen.', 'Para hallar la inicial, divide entre el índice; el porcentaje era sobre la cantidad inicial.', 'لإيجاد الأولية اقسم على المؤشر؛ فالنسبة كانت من الكمية الأولية.', 'To find the original amount, divide by the multiplier; the percentage was taken of the original amount.'),
+    'simple-compound': say('Sinplean urtero interes bera; konposatuan interesak kapitalari gehitzen zaizkio.', 'En el simple, cada año el mismo interés; en el compuesto, los intereses se suman al capital.', 'في البسيطة الفائدة نفسها كل عام؛ وفي المركبة تُضاف الفوائد إلى رأس المال.', 'With simple interest, the same interest each year; with compound interest, the interest is added to the principal.'),
+    'square-sum': say('$(a+b)^{2}\\neq a^{2}+b^{2}$: karratu bakoitza bere aldetik.', '$(a+b)^{2}\\neq a^{2}+b^{2}$: cada cateto se eleva por separado.', '$(a+b)^{2}\\neq a^{2}+b^{2}$: يُربَّع كل ضلع على حدة.', '$(a+b)^{2}\\neq a^{2}+b^{2}$: square each leg separately.'),
+    'interest-final': say('Begiratu zer galdetzen den: interesak ($I$) ala amaierako kapitala ($C+I$).', 'Mira qué se pregunta: los intereses ($I$) o el capital final ($C+I$).', 'انظر إلى المطلوب: الفوائد ($I$) أم رأس المال النهائي ($C+I$).', 'Check what is being asked: the interest ($I$) or the final amount ($C+I$).')
 }

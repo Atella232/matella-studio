@@ -3,7 +3,8 @@ import { pickText, type LocalizedText, type UnitLanguage } from '../../features/
 import { Figure } from '../dbh2-zatikiak-prototype/figures'
 import { Label } from '../dbh2-funtzioak-v2/plane'
 import { Caption, Formula, Sub, Table, XBar } from '../dbh2-estatistika-v2/figures'
-import { COLORS, INK, MUTED, num, PAPER, SECOND, STAGE } from '../dbh2-estatistika-v2/palette'
+import { COLORS, INK, MUTED, num as paletteNum, PAPER, SECOND, STAGE } from '../dbh2-estatistika-v2/palette'
+import { decimalSeparatorFor } from '../../utils/numberFormat'
 import { classGroups, goalRows, schoolSample, schoolStrata, schoolTotal, sportHours } from './data'
 import { boxPlot } from '../dbh4-aplikatuak-estatistika/stats'
 import { allocate, joinedMean } from './stats'
@@ -17,9 +18,11 @@ import { allocate, joinedMean } from './stats'
    every language; Arabic labels carry words only.
    ========================================================================== */
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language, text)
 const round2 = (value: number) => Math.round(value * 100) / 100
+/** The palette writes the decimal comma (a point in Arabic): English gets the point */
+const num = (language: UnitLanguage, value: number) => paletteNum(language, value).replace(',', language === 'ar' ? '.' : decimalSeparatorFor(language))
 
 /** fᵢ · xᵢ written with small subscripts */
 function Product({ square = false }: { square?: boolean }) {
@@ -35,12 +38,12 @@ function Product({ square = false }: { square?: boolean }) {
 
 /* ---------- Stratified sample with proportional allocation ---------- */
 
-const COURSES = [say('1. DBH', '1.º ESO', 'الأول'), say('2. DBH', '2.º ESO', 'الثاني'), say('3. DBH', '3.º ESO', 'الثالث'), say('4. DBH', '4.º ESO', 'الرابع')]
+const COURSES = [say('1. DBH', '1.º ESO', 'الأول', '1st ESO'), say('2. DBH', '2.º ESO', 'الثاني', '2nd ESO'), say('3. DBH', '3.º ESO', 'الثالث', '3rd ESO'), say('4. DBH', '4.º ESO', 'الرابع', '4th ESO')]
 
 export function SamplingFigure({ language }: { language: UnitLanguage }) {
     const shares = allocate(schoolStrata.map((row) => row.students), schoolSample)
     return (
-        <Figure height={290} label={pick(language, say('Geruzakako laginketa', 'Muestreo estratificado', 'المعاينة الطبقية'))}>
+        <Figure height={290} label={pick(language, say('Geruzakako laginketa', 'Muestreo estratificado', 'المعاينة الطبقية', 'Stratified sampling'))}>
             <Formula x={236} y={28} color={MUTED} size={15}>
                 <Sub letter="N" index="i" />
             </Formula>
@@ -66,7 +69,7 @@ export function SamplingFigure({ language }: { language: UnitLanguage }) {
             <line x1={430} x2={690} y1={232} y2={232} stroke={INK} strokeWidth={1.2} />
             <Formula x={560} y={254} color={STAGE}>18 + 15 + 14 + 13 = {schoolSample}</Formula>
             <Formula x={200} y={254} color={MUTED} size={15}>N = {schoolTotal} · n = {schoolSample}</Formula>
-            <Caption y={282} language={language} text={say('Ikasturte bakoitzak bere tamainaren araberako zatia jartzen du', 'Cada curso aporta una parte proporcional a su tamaño', 'كل صف يساهم بجزء متناسب مع حجمه')} size={14} />
+            <Caption y={282} language={language} text={say('Ikasturte bakoitzak bere tamainaren araberako zatia jartzen du', 'Cada curso aporta una parte proporcional a su tamaño', 'كل صف يساهم بجزء متناسب مع حجمه', 'Each year group contributes a share proportional to its size')} size={14} />
         </Figure>
     )
 }
@@ -80,7 +83,7 @@ export function GoalsTableFigure({ language }: { language: UnitLanguage }) {
         return [row.value, row.count, round2(row.count / n), cumulative, round2(cumulative / n)]
     })
     return (
-        <Figure height={290} label={pick(language, say('Maiztasun-taula osoa', 'La tabla de frecuencias completa', 'جدول التكرارات الكامل'))}>
+        <Figure height={290} label={pick(language, say('Maiztasun-taula osoa', 'La tabla de frecuencias completa', 'جدول التكرارات الكامل', 'The complete frequency table'))}>
             <Table
                 x0={20}
                 y0={30}
@@ -98,8 +101,8 @@ export function GoalsTableFigure({ language }: { language: UnitLanguage }) {
             <Formula x={595} y={82} size={16}>h = 8 : 30 ≈ {num(language, 0.27)}</Formula>
             <Formula x={595} y={116} size={16}>F = 6 + 7 + 8 = 21</Formula>
             <Formula x={595} y={150} size={16} color={STAGE}>H = 21 : 30 = {num(language, 0.7)}</Formula>
-            <Formula x={595} y={186} size={15} color={SECOND}>x ≤ 2 → {pick(language, say('% 70', '70 %', '70 %'))}</Formula>
-            <Caption y={276} language={language} text={say('F metatzen doa: azkena N da; H-ren azkena, 1', 'F se va acumulando: la última es N; la última H, 1', 'F يتراكم: آخره N، وآخر H يساوي 1')} size={14} />
+            <Formula x={595} y={186} size={15} color={SECOND}>x ≤ 2 → {pick(language, say('% 70', '70 %', '70 %', '70%'))}</Formula>
+            <Caption y={276} language={language} text={say('F metatzen doa: azkena N da; H-ren azkena, 1', 'F se va acumulando: la última es N; la última H, 1', 'F يتراكم: آخره N، وآخر H يساوي 1', 'F builds up as you go: the last one is N; the last H is 1')} size={14} />
         </Figure>
     )
 }
@@ -111,7 +114,7 @@ export function JoinedMeanFigure({ language }: { language: UnitLanguage }) {
     const centre = joinedMean(classGroups)
     const blocks = classGroups.map((group, index) => ({ ...group, name: index === 0 ? 'A' : 'B', color: COLORS[index === 0 ? 0 : 3], height: group.students * 2.5 }))
     return (
-        <Figure height={270} label={pick(language, say('Bi taldeen batez besteko bateratua', 'La media de dos grupos juntos', 'متوسط مجموعتين معًا'))}>
+        <Figure height={270} label={pick(language, say('Bi taldeen batez besteko bateratua', 'La media de dos grupos juntos', 'متوسط مجموعتين معًا', 'The mean of two groups together'))}>
             <Formula x={360} y={26} size={16}>(20 · {num(language, 6.5)} + 30 · {num(language, 7.2)}) : 50 = {num(language, centre)}</Formula>
             <line x1={x(6)} x2={x(8)} y1={140} y2={140} stroke={INK} strokeWidth={4} strokeLinecap="round" />
             {blocks.map((block) => (
@@ -131,7 +134,7 @@ export function JoinedMeanFigure({ language }: { language: UnitLanguage }) {
                     <text x={x(value)} y={230} textAnchor="middle" fontSize={13} fill={MUTED}>{num(language, value)}</text>
                 </g>
             ))}
-            <Caption y={258} language={language} text={say('Ez da 6,5 eta 7,2ren erdia: talde handiak gehiago tiratzen du', 'No es el punto medio de 6,5 y 7,2: el grupo grande tira más', 'ليس منتصف 6.5 و7.2: المجموعة الأكبر تجذب أكثر')} size={14} />
+            <Caption y={258} language={language} text={say('Ez da 6,5 eta 7,2ren erdia: talde handiak gehiago tiratzen du', 'No es el punto medio de 6,5 y 7,2: el grupo grande tira más', 'ليس منتصف 6.5 و7.2: المجموعة الأكبر تجذب أكثر', 'It is not the midpoint of 6.5 and 7.2: the bigger group pulls harder')} size={14} />
         </Figure>
     )
 }
@@ -147,7 +150,7 @@ export function QuartileRuleFigure({ language }: { language: UnitLanguage }) {
         { at: 9, text: <>Q₃ = {num(language, 7.5)}</> }
     ]
     return (
-        <Figure height={260} label={pick(language, say('Kuartilak postuen bidez', 'Cuartiles por posiciones', 'الربيعيات بالمواقع'))}>
+        <Figure height={260} label={pick(language, say('Kuartilak postuen bidez', 'Cuartiles por posiciones', 'الربيعيات بالمواقع', 'Quartiles by position'))}>
             {sportHours.map((value, index) => {
                 const outlier = index === sportHours.length - 1
                 return (
@@ -166,7 +169,7 @@ export function QuartileRuleFigure({ language }: { language: UnitLanguage }) {
             ))}
             <Formula x={360} y={168} size={16}>12 · {num(language, 0.25)} = 3 → (3 + 4) : 2 = {num(language, 3.5)}</Formula>
             <Formula x={360} y={198} size={16}>12 · {num(language, 0.75)} = 9 → (7 + 8) : 2 = {num(language, 7.5)}</Formula>
-            <Caption y={240} language={language} text={say('N·k/100 osoa bada, datu hori eta hurrengoaren erdia; bestela, hurrengo datua', 'Si N·k/100 es entero, la media de ese dato y el siguiente; si no, el dato siguiente', 'إذا كان N·k/100 صحيحًا فمتوسط ذلك البيان والذي يليه، وإلا فالبيان التالي')} size={14} />
+            <Caption y={240} language={language} text={say('N·k/100 osoa bada, datu hori eta hurrengoaren erdia; bestela, hurrengo datua', 'Si N·k/100 es entero, la media de ese dato y el siguiente; si no, el dato siguiente', 'إذا كان N·k/100 صحيحًا فمتوسط ذلك البيان والذي يليه، وإلا فالبيان التالي', 'If N·k/100 is a whole number, take the mean of that value and the next one; if not, take the next value')} size={14} />
         </Figure>
     )
 }
@@ -178,7 +181,7 @@ export function SportBoxFigure({ language }: { language: UnitLanguage }) {
     const box = boxPlot(sportHours)
     const mid = 112
     return (
-        <Figure height={290} label={pick(language, say('Kirol-orduen kutxa-diagrama', 'Diagrama de caja de las horas de deporte', 'مخطط صندوق ساعات الرياضة'))}>
+        <Figure height={290} label={pick(language, say('Kirol-orduen kutxa-diagrama', 'Diagrama de caja de las horas de deporte', 'مخطط صندوق ساعات الرياضة', 'Box plot of hours of sport'))}>
             {[box.low, box.high].map((value) => (
                 <g key={value}>
                     <line x1={x(value)} x2={x(value)} y1={44} y2={176} stroke={MUTED} strokeWidth={1.6} strokeDasharray="5 4" />
@@ -202,7 +205,7 @@ export function SportBoxFigure({ language }: { language: UnitLanguage }) {
                 </g>
             ))}
             <Formula x={360} y={246} color={STAGE} size={16}>{num(language, 7.5)} − {num(language, 3.5)} = 4 → {num(language, 1.5)} · 4 = 6</Formula>
-            <Caption y={276} language={language} text={say('Biboteak 2 eta 9ra arte; 15ek 13,5 gainditzen du: atipikoa (*)', 'Bigotes hasta 2 y 9; el 15 pasa de 13,5: atípico (*)', 'الشاربان حتى 2 و9؛ العدد 15 يتجاوز 13.5: شاذ (*)')} size={14} />
+            <Caption y={276} language={language} text={say('Biboteak 2 eta 9ra arte; 15ek 13,5 gainditzen du: atipikoa (*)', 'Bigotes hasta 2 y 9; el 15 pasa de 13,5: atípico (*)', 'الشاربان حتى 2 و9؛ العدد 15 يتجاوز 13.5: شاذ (*)', 'Whiskers up to 2 and 9; the 15 is above 13.5: outlier (*)')} size={14} />
         </Figure>
     )
 }
@@ -212,7 +215,7 @@ export function SportBoxFigure({ language }: { language: UnitLanguage }) {
 export function GoalsVarianceFigure({ language }: { language: UnitLanguage }) {
     const rows = goalRows.map((row) => [row.value, row.count, row.value * row.count, row.count * row.value ** 2])
     return (
-        <Figure height={300} label={pick(language, say('Golen desbideratze tipikoa', 'La desviación típica de los goles', 'الانحراف المعياري للأهداف'))}>
+        <Figure height={300} label={pick(language, say('Golen desbideratze tipikoa', 'La desviación típica de los goles', 'الانحراف المعياري للأهداف', 'The standard deviation of the goals'))}>
             <Table
                 x0={20}
                 y0={30}
@@ -232,7 +235,7 @@ export function GoalsVarianceFigure({ language }: { language: UnitLanguage }) {
             <Formula x={570} y={124} size={16}>σ² = 150 : 30 − {num(language, 1.8)}²</Formula>
             <Formula x={570} y={154} size={17} color={STAGE}>σ² = 5 − {num(language, 3.24)} = {num(language, 1.76)}</Formula>
             <Formula x={570} y={190} size={19} color={SECOND}>σ ≈ {num(language, 1.33)}</Formula>
-            <Caption y={284} language={language} text={say('Karratuen batez bestekoa ken batez bestekoaren karratua; gero erroa', 'Media de los cuadrados menos el cuadrado de la media; después, la raíz', 'متوسط المربعات ناقص مربع المتوسط؛ ثم الجذر')} size={14} />
+            <Caption y={284} language={language} text={say('Karratuen batez bestekoa ken batez bestekoaren karratua; gero erroa', 'Media de los cuadrados menos el cuadrado de la media; después, la raíz', 'متوسط المربعات ناقص مربع المتوسط؛ ثم الجذر', 'Mean of the squares minus the square of the mean; then the square root')} size={14} />
         </Figure>
     )
 }

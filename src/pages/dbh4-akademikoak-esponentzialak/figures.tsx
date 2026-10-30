@@ -5,6 +5,7 @@ import { useBoxClip } from '../dbh2-funtzioak-v2/planeClip'
 import { planeMap, type PlaneBox, type PlaneMap } from '../dbh2-funtzioak-v2/planeMap'
 import { Figure } from '../dbh2-zatikiak-prototype/figures'
 import { sampled } from '../dbh4-aplikatuak-grafikoa/functions'
+import { decimalSeparatorFor } from '../../utils/numberFormat'
 
 /* ==========================================================================
    Funtzio esponentzialak, logaritmikoak eta trigonometrikoak · 4. DBH
@@ -32,13 +33,13 @@ const SERIF = 'Fraunces, serif'
 
 type Point = [number, number]
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const useText = (language: UnitLanguage) => (text: LocalizedText) => pickText(language, text)
 /** A number written with the comma, shown with the point in Arabic */
-const num = (language: UnitLanguage, text: string) => (language === 'ar' ? text.replace(/,/g, '.') : text)
+const num = (language: UnitLanguage, text: string) => (language === 'ar' ? text.replace(/,/g, '.') : text.replace(/,/g, decimalSeparatorFor(language)))
 /** The names of the ratios: sen / sin, tg / tan */
 const sen = (language: UnitLanguage) => (language === 'es' ? 'sen' : 'sin')
-const tg = (language: UnitLanguage) => (language === 'ar' ? 'tan' : 'tg')
+const tg = (language: UnitLanguage) => (language === 'ar' || language === 'en' ? 'tan' : 'tg')
 const trig = (language: UnitLanguage, text: string) => text.replace(/\bsen\b/g, sen(language)).replace(/\btg\b/g, tg(language))
 
 function Caption({ y, children, x = 360 }: { y: number; children: ReactNode; x?: number }) {
@@ -141,7 +142,7 @@ function TrigCurve({ f, x, y, from, to, color, clip, width = 3.4, dashed = false
 export function ExpShiftFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={322} label={t(say('y = 2ˣ eta y = 2ˣ⁻² + 1', 'y = 2ˣ e y = 2ˣ⁻² + 1', 'y = 2ˣ وy = 2ˣ⁻² + 1'))}>
+        <Figure height={322} label={t(say('y = 2ˣ eta y = 2ˣ⁻² + 1', 'y = 2ˣ e y = 2ˣ⁻² + 1', 'y = 2ˣ وy = 2ˣ⁻² + 1', 'y = 2ˣ and y = 2ˣ⁻² + 1'))}>
             <Frame box={{ xMin: -3, xMax: 5, yMin: -1, yMax: 8 }} cell={28} ox={40} oy={30}>
                 {(map, clip) => (
                     <g>
@@ -157,12 +158,12 @@ export function ExpShiftFigure({ language }: { language: UnitLanguage }) {
             <F x={336} y={60} color={MUTED}>y = 2<Up>x</Up></F>
             <Key x={300} y={96} color={STAGE} />
             <F x={336} y={96} color={STAGE}>y = 2<Up>x − 2</Up><Down> + 1</Down></F>
-            <Label x={300} y={140} fontSize={16} fill={INK}>{t(say('Berretzailean −2: 2 eskuinera', 'En el exponente −2: 2 a la derecha', 'في الأس −2: وحدتان إلى اليمين'))}</Label>
-            <Label x={300} y={170} fontSize={16} fill={INK}>{t(say('Kanpoan +1: 1 gora', 'Fuera +1: 1 hacia arriba', 'في الخارج +1: وحدة إلى الأعلى'))}</Label>
+            <Label x={300} y={140} fontSize={16} fill={INK}>{t(say('Berretzailean −2: 2 eskuinera', 'En el exponente −2: 2 a la derecha', 'في الأس −2: وحدتان إلى اليمين', 'In the exponent −2: 2 to the right'))}</Label>
+            <Label x={300} y={170} fontSize={16} fill={INK}>{t(say('Kanpoan +1: 1 gora', 'Fuera +1: 1 hacia arriba', 'في الخارج +1: وحدة إلى الأعلى', 'Outside +1: 1 up'))}</Label>
             <F x={300} y={212} color={SECOND}>(0, 1)  →  (2, 2)</F>
-            <Label x={300} y={250} fontSize={16} fill={MUTED}>{t(say('Asintota ere igotzen da:', 'La asíntota también sube:', 'يصعد المقارب أيضًا:'))}</Label>
+            <Label x={300} y={250} fontSize={16} fill={MUTED}>{t(say('Asintota ere igotzen da:', 'La asíntota también sube:', 'يصعد المقارب أيضًا:', 'The asymptote also moves up:'))}</Label>
             <F x={300} y={278} color={MUTED}>y = 0  →  y = 1</F>
-            <Caption y={312}>{t(say('Forma bera; puntu guztiak batera mugitzen dira', 'La misma forma; todos los puntos se mueven a la vez', 'الشكل نفسه؛ تتحرك كل النقاط معًا'))}</Caption>
+            <Caption y={312}>{t(say('Forma bera; puntu guztiak batera mugitzen dira', 'La misma forma; todos los puntos se mueven a la vez', 'الشكل نفسه؛ تتحرك كل النقاط معًا', 'The same shape; all the points move at once'))}</Caption>
         </Figure>
     )
 }
@@ -174,7 +175,7 @@ export function DecayFigure({ language }: { language: UnitLanguage }) {
     const values: Point[] = [[0, 80], [5, 40], [10, 20], [15, 10], [20, 5]]
     // One square: 5 years across, 10 g up
     return (
-        <Figure height={322} label={t(say('Erdibizitza: m = 80 · (1/2)^(t/5)', 'Periodo de semidesintegración: m = 80 · (1/2)^(t/5)', 'عمر النصف: m = 80 · (1/2)^(t/5)'))}>
+        <Figure height={322} label={t(say('Erdibizitza: m = 80 · (1/2)^(t/5)', 'Periodo de semidesintegración: m = 80 · (1/2)^(t/5)', 'عمر النصف: m = 80 · (1/2)^(t/5)', 'Half-life: m = 80 · (1/2)^(t/5)'))}>
             <Frame box={{ xMin: 0, xMax: 5, yMin: 0, yMax: 8 }} cell={30} ox={60} oy={30} xUnit={5} yUnit={10} labelStep={2}>
                 {(map, clip) => (
                     <g>
@@ -184,12 +185,12 @@ export function DecayFigure({ language }: { language: UnitLanguage }) {
                 )}
             </Frame>
             <F x={250} y={64} size={20}>m = 80 · (1/2)<Up>t/5</Up></F>
-            <Label x={250} y={102} fontSize={16} fill={SECOND}>{t(say('80 g hasieran (t = 0)', '80 g al principio (t = 0)', '80 غ في البداية (t = 0)'))}</Label>
-            <Label x={250} y={136} fontSize={16} fill={INK}>{t(say('5 urtero, erdia geratzen da:', 'Cada 5 años queda la mitad:', 'كل 5 سنوات يبقى النصف:'))}</Label>
+            <Label x={250} y={102} fontSize={16} fill={SECOND}>{t(say('80 g hasieran (t = 0)', '80 g al principio (t = 0)', '80 غ في البداية (t = 0)', '80 g at the start (t = 0)'))}</Label>
+            <Label x={250} y={136} fontSize={16} fill={INK}>{t(say('5 urtero, erdia geratzen da:', 'Cada 5 años queda la mitad:', 'كل 5 سنوات يبقى النصف:', 'Every 5 years, half is left:'))}</Label>
             <F x={262} y={168} color={STAGE}>80 → 40 → 20 → 10 → 5</F>
-            <Label x={250} y={206} fontSize={16} fill={INK}>{t(say('Urte bakoitzeko faktorea:', 'El factor de cada año:', 'معامل كل سنة:'))}</Label>
+            <Label x={250} y={206} fontSize={16} fill={INK}>{t(say('Urte bakoitzeko faktorea:', 'El factor de cada año:', 'معامل كل سنة:', 'The factor for each year:'))}</Label>
             <F x={262} y={238} color={MUTED}>(1/2)<Up>1/5</Up><Down>{num(language, ' ≈ 0,87')}</Down></F>
-            <Caption y={306}>{t(say('Beherakorra, baina inoiz ez da 0 izaten', 'Decreciente, pero nunca llega a 0', 'متناقصة لكنها لا تبلغ 0 أبدًا'))}</Caption>
+            <Caption y={306}>{t(say('Beherakorra, baina inoiz ez da 0 izaten', 'Decreciente, pero nunca llega a 0', 'متناقصة لكنها لا تبلغ 0 أبدًا', 'Decreasing, but it never reaches 0'))}</Caption>
         </Figure>
     )
 }
@@ -199,7 +200,7 @@ export function DecayFigure({ language }: { language: UnitLanguage }) {
 export function ExpEquationFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={322} label={t(say('2ˣ = 8 ekuazioa grafikoan', 'La ecuación 2ˣ = 8 en la gráfica', 'المعادلة 2ˣ = 8 على الرسم'))}>
+        <Figure height={322} label={t(say('2ˣ = 8 ekuazioa grafikoan', 'La ecuación 2ˣ = 8 en la gráfica', 'المعادلة 2ˣ = 8 على الرسم', 'The equation 2ˣ = 8 on the graph'))}>
             <Frame box={{ xMin: -2, xMax: 4, yMin: -1, yMax: 9 }} cell={25} ox={50} oy={30}>
                 {(map, clip) => (
                     <g>
@@ -211,13 +212,13 @@ export function ExpEquationFigure({ language }: { language: UnitLanguage }) {
                 )}
             </Frame>
             <F x={290} y={62} size={22}>2<Up>x</Up><Down> = 8</Down></F>
-            <Label x={290} y={102} fontSize={16} fill={INK}>{t(say('Idatzi bi aldeak oinarri berarekin:', 'Escribe los dos lados con la misma base:', 'اكتب الطرفين بالأساس نفسه:'))}</Label>
+            <Label x={290} y={102} fontSize={16} fill={INK}>{t(say('Idatzi bi aldeak oinarri berarekin:', 'Escribe los dos lados con la misma base:', 'اكتب الطرفين بالأساس نفسه:', 'Write both sides with the same base:'))}</Label>
             <F x={306} y={136}>2<Up>x</Up><Down> = 2</Down><Up>3</Up></F>
-            <Label x={290} y={176} fontSize={16} fill={INK}>{t(say('Oinarri berdinak, berretzaile berdinak:', 'Bases iguales, exponentes iguales:', 'أساسان متساويان، أسّان متساويان:'))}</Label>
+            <Label x={290} y={176} fontSize={16} fill={INK}>{t(say('Oinarri berdinak, berretzaile berdinak:', 'Bases iguales, exponentes iguales:', 'أساسان متساويان، أسّان متساويان:', 'Equal bases, equal exponents:'))}</Label>
             <F x={306} y={208} color={GREEN}>x = 3</F>
-            <Label x={290} y={246} fontSize={16} fill={MUTED}>{t(say('Ez badago oinarri bera, logaritmoak:', 'Si no hay la misma base, logaritmos:', 'إن لم يكن الأساس نفسه فاللوغاريتمات:'))}</Label>
+            <Label x={290} y={246} fontSize={16} fill={MUTED}>{t(say('Ez badago oinarri bera, logaritmoak:', 'Si no hay la misma base, logaritmos:', 'إن لم يكن الأساس نفسه فاللوغاريتمات:', 'If the bases are not the same, use logarithms:'))}</Label>
             <F x={306} y={276} color={MUTED}>2<Up>x</Up><Down>{num(language, ' = 10  →  x = log 10 / log 2 ≈ 3,32')}</Down></F>
-            <Caption y={312}>{t(say('Ebazpena: kurbaren eta zuzen horizontalaren ebaki-puntua', 'La solución: el corte de la curva con la recta horizontal', 'الحل: تقاطع المنحنى مع المستقيم الأفقي'))}</Caption>
+            <Caption y={312}>{t(say('Ebazpena: kurbaren eta zuzen horizontalaren ebaki-puntua', 'La solución: el corte de la curva con la recta horizontal', 'الحل: تقاطع المنحنى مع المستقيم الأفقي', 'The solution: where the curve crosses the horizontal line'))}</Caption>
         </Figure>
     )
 }
@@ -227,7 +228,7 @@ export function ExpEquationFigure({ language }: { language: UnitLanguage }) {
 export function LogGraphFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={322} label={t(say('y = log₂ x eta y = 2ˣ, y = x zuzenarekiko simetrikoak', 'y = log₂ x e y = 2ˣ, simétricas respecto a y = x', 'y = log₂ x وy = 2ˣ متماثلتان بالنسبة إلى y = x'))}>
+        <Figure height={322} label={t(say('y = log₂ x eta y = 2ˣ, y = x zuzenarekiko simetrikoak', 'y = log₂ x e y = 2ˣ, simétricas respecto a y = x', 'y = log₂ x وy = 2ˣ متماثلتان بالنسبة إلى y = x', 'y = log₂ x and y = 2ˣ, symmetrical about y = x'))}>
             <Frame box={{ xMin: -3, xMax: 5, yMin: -3, yMax: 5 }} cell={30} ox={40} oy={30}>
                 {(map, clip) => (
                     <g>
@@ -245,13 +246,13 @@ export function LogGraphFigure({ language }: { language: UnitLanguage }) {
             <F x={352} y={60} color={STAGE}>y = log<tspan dy={5} fontSize="70%">2</tspan><tspan dy={-5}> x</tspan></F>
             <Key x={316} y={94} color={MUSTARD} />
             <F x={352} y={94} color={MUSTARD}>y = 2<Up>x</Up></F>
-            <Label x={316} y={136} fontSize={16} fill={INK}>{t(say('(1, 0) puntutik pasatzen da beti', 'Pasa siempre por (1, 0)', 'يمر دائمًا بالنقطة (1, 0)'))}</Label>
-            <Label x={316} y={166} fontSize={16} fill={INK}>{t(say('Izate-eremua:', 'Dominio:', 'المجال:'))}</Label>
+            <Label x={316} y={136} fontSize={16} fill={INK}>{t(say('(1, 0) puntutik pasatzen da beti', 'Pasa siempre por (1, 0)', 'يمر دائمًا بالنقطة (1, 0)', 'Always passes through (1, 0)'))}</Label>
+            <Label x={316} y={166} fontSize={16} fill={INK}>{t(say('Izate-eremua:', 'Dominio:', 'المجال:', 'Domain:'))}</Label>
             <F x={430} y={166} color={SECOND}>(0, +∞)</F>
-            <Label x={316} y={196} fontSize={16} fill={INK}>{t(say('Asintota bertikala:', 'Asíntota vertical:', 'المقارب الرأسي:'))}</Label>
+            <Label x={316} y={196} fontSize={16} fill={INK}>{t(say('Asintota bertikala:', 'Asíntota vertical:', 'المقارب الرأسي:', 'Vertical asymptote:'))}</Label>
             <F x={480} y={196} color={SECOND}>x = 0</F>
             <F x={316} y={238} color={STAGE} size={17}>1 → 0 · 2 → 1 · 4 → 2 · 8 → 3</F>
-            <Caption y={312}>{t(say('Alderantzizkoak dira: x eta y trukatzen dira', 'Son inversas: se intercambian x e y', 'دالتان عكسيتان: يتبادل x وy'))}</Caption>
+            <Caption y={312}>{t(say('Alderantzizkoak dira: x eta y trukatzen dira', 'Son inversas: se intercambian x e y', 'دالتان عكسيتان: يتبادل x وy', 'They are inverses: x and y swap places'))}</Caption>
         </Figure>
     )
 }
@@ -261,7 +262,7 @@ export function LogGraphFigure({ language }: { language: UnitLanguage }) {
 export function LogShiftFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={322} label={t(say('y = log₂ x eta y = log₂(x + 2)', 'y = log₂ x e y = log₂(x + 2)', 'y = log₂ x وy = log₂(x + 2)'))}>
+        <Figure height={322} label={t(say('y = log₂ x eta y = log₂(x + 2)', 'y = log₂ x e y = log₂(x + 2)', 'y = log₂ x وy = log₂(x + 2)', 'y = log₂ x and y = log₂(x + 2)'))}>
             <Frame box={{ xMin: -3, xMax: 6, yMin: -3, yMax: 4 }} cell={28} ox={40} oy={36}>
                 {(map, clip) => (
                     <g>
@@ -277,12 +278,12 @@ export function LogShiftFigure({ language }: { language: UnitLanguage }) {
             <F x={352} y={60} color={MUTED}>y = log<tspan dy={5} fontSize="70%">2</tspan><tspan dy={-5}> x</tspan></F>
             <Key x={316} y={94} color={STAGE} />
             <F x={352} y={94} color={STAGE}>y = log<tspan dy={5} fontSize="70%">2</tspan><tspan dy={-5}>(x + 2)</tspan></F>
-            <Label x={316} y={136} fontSize={16} fill={INK}>{t(say('2 ezkerrera mugitzen da', 'Se mueve 2 a la izquierda', 'ينتقل وحدتين إلى اليسار'))}</Label>
-            <Label x={316} y={168} fontSize={16} fill={INK}>{t(say('Barrukoa positiboa izan behar da:', 'Lo de dentro tiene que ser positivo:', 'يجب أن يكون ما بالداخل موجبًا:'))}</Label>
+            <Label x={316} y={136} fontSize={16} fill={INK}>{t(say('2 ezkerrera mugitzen da', 'Se mueve 2 a la izquierda', 'ينتقل وحدتين إلى اليسار', 'It moves 2 to the left'))}</Label>
+            <Label x={316} y={168} fontSize={16} fill={INK}>{t(say('Barrukoa positiboa izan behar da:', 'Lo de dentro tiene que ser positivo:', 'يجب أن يكون ما بالداخل موجبًا:', 'What is inside must be positive:'))}</Label>
             <F x={330} y={198} color={SECOND}>x + 2 &gt; 0  →  x &gt; −2</F>
             <F x={330} y={232} color={SECOND}>Dom = (−2, +∞)</F>
             <F x={330} y={266} color={STAGE}>(1, 0)  →  (−1, 0)</F>
-            <Caption y={312}>{t(say('Asintota ere mugitzen da: x = −2', 'La asíntota también se mueve: x = −2', 'يتحرك المقارب أيضًا: x = −2'))}</Caption>
+            <Caption y={312}>{t(say('Asintota ere mugitzen da: x = −2', 'La asíntota también se mueve: x = −2', 'يتحرك المقارب أيضًا: x = −2', 'The asymptote also moves: x = −2'))}</Caption>
         </Figure>
     )
 }
@@ -292,7 +293,7 @@ export function LogShiftFigure({ language }: { language: UnitLanguage }) {
 export function SineFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={300} label={t(say('y = sin x funtzioa', 'La función y = sen x', 'الدالة y = sin x'))}>
+        <Figure height={300} label={t(say('y = sin x funtzioa', 'La función y = sen x', 'الدالة y = sin x', 'The function y = sin x'))}>
             <TrigPlane ox={36} oy={40} width={470} height={170} yMax={2} fromQuarter={-1} toQuarter={5}>
                 {(x, y, clip) => (
                     <g>
@@ -304,14 +305,14 @@ export function SineFigure({ language }: { language: UnitLanguage }) {
                 )}
             </TrigPlane>
             <F x={540} y={70} size={21} color={STAGE}>{trig(language, 'y = sen x')}</F>
-            <Label x={540} y={106} fontSize={15} fill={SECOND}>{t(say('Maximoa:', 'Máximo:', 'العظمى:'))}</Label>
+            <Label x={540} y={106} fontSize={15} fill={SECOND}>{t(say('Maximoa:', 'Máximo:', 'العظمى:', 'Maximum:'))}</Label>
             <F x={540} y={128} size={16} color={SECOND}>(π/2, 1)</F>
-            <Label x={540} y={160} fontSize={15} fill={GREEN}>{t(say('Minimoa:', 'Mínimo:', 'الصغرى:'))}</Label>
+            <Label x={540} y={160} fontSize={15} fill={GREEN}>{t(say('Minimoa:', 'Mínimo:', 'الصغرى:', 'Minimum:'))}</Label>
             <F x={540} y={182} size={16} color={GREEN}>(3π/2, −1)</F>
-            <Label x={540} y={214} fontSize={15} fill={INK}>{t(say('Periodoa:', 'Periodo:', 'الدور:'))}</Label>
+            <Label x={540} y={214} fontSize={15} fill={INK}>{t(say('Periodoa:', 'Periodo:', 'الدور:', 'Period:'))}</Label>
             <F x={540} y={236} size={16}>T = 2π</F>
-            <F x={270} y={256} size={16} anchor="middle">Dom = ℝ · Rec = [−1, 1]</F>
-            <Caption y={288}>{t(say('Zirkunferentzia unitarioko puntuaren altuera, angeluaren arabera', 'La altura del punto de la circunferencia unidad según el ángulo', 'ارتفاع نقطة دائرة الوحدة بحسب الزاوية'))}</Caption>
+            <F x={270} y={256} size={16} anchor="middle">Dom = ℝ · {t(say('Rec', 'Rec', 'Rec', 'Range'))} = [−1, 1]</F>
+            <Caption y={288}>{t(say('Zirkunferentzia unitarioko puntuaren altuera, angeluaren arabera', 'La altura del punto de la circunferencia unidad según el ángulo', 'ارتفاع نقطة دائرة الوحدة بحسب الزاوية', 'The height of the point on the unit circle, depending on the angle'))}</Caption>
         </Figure>
     )
 }
@@ -321,7 +322,7 @@ export function SineFigure({ language }: { language: UnitLanguage }) {
 export function CosineFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={300} label={t(say('y = cos x eta y = sin x', 'y = cos x e y = sen x', 'y = cos x وy = sin x'))}>
+        <Figure height={300} label={t(say('y = cos x eta y = sin x', 'y = cos x e y = sen x', 'y = cos x وy = sin x', 'y = cos x and y = sin x'))}>
             <TrigPlane ox={36} oy={40} width={470} height={170} yMax={2} fromQuarter={-1} toQuarter={5}>
                 {(x, y, clip) => (
                     <g>
@@ -337,12 +338,12 @@ export function CosineFigure({ language }: { language: UnitLanguage }) {
             <F x={574} y={64} size={19} color={STAGE}>y = cos x</F>
             <Key x={540} y={96} color={MUTED} dashed />
             <F x={574} y={96} size={19} color={MUTED}>{trig(language, 'y = sen x')}</F>
-            <Label x={540} y={134} fontSize={15} fill={SECOND}>{t(say('Maximoa:', 'Máximo:', 'العظمى:'))}</Label>
+            <Label x={540} y={134} fontSize={15} fill={SECOND}>{t(say('Maximoa:', 'Máximo:', 'العظمى:', 'Maximum:'))}</Label>
             <F x={540} y={156} size={16} color={SECOND}>(0, 1)</F>
-            <Label x={540} y={188} fontSize={15} fill={INK}>{t(say('Zeroak:', 'Ceros:', 'الأصفار:'))}</Label>
+            <Label x={540} y={188} fontSize={15} fill={INK}>{t(say('Zeroak:', 'Ceros:', 'الأصفار:', 'Zeros:'))}</Label>
             <F x={540} y={210} size={16}>π/2, 3π/2</F>
             <F x={270} y={256} size={16} anchor="middle">{trig(language, 'cos x = sen (x + π/2)')}</F>
-            <Caption y={288}>{t(say('Kosinua sinua bera da, π/2 ezkerrera', 'El coseno es el mismo seno, π/2 a la izquierda', 'جيب التمام هو الجيب نفسه منسحبًا π/2 إلى اليسار'))}</Caption>
+            <Caption y={288}>{t(say('Kosinua sinua bera da, π/2 ezkerrera', 'El coseno es el mismo seno, π/2 a la izquierda', 'جيب التمام هو الجيب نفسه منسحبًا π/2 إلى اليسار', 'Cosine is the same as sine, π/2 to the left'))}</Caption>
         </Figure>
     )
 }
@@ -352,7 +353,7 @@ export function CosineFigure({ language }: { language: UnitLanguage }) {
 export function AmplitudeFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={300} label={t(say('y = 2 sin x eta y = sin x + 1', 'y = 2 sen x e y = sen x + 1', 'y = 2 sin x وy = sin x + 1'))}>
+        <Figure height={300} label={t(say('y = 2 sin x eta y = sin x + 1', 'y = 2 sen x e y = sen x + 1', 'y = 2 sin x وy = sin x + 1', 'y = 2 sin x and y = sin x + 1'))}>
             <TrigPlane ox={36} oy={30} width={470} height={200} yMax={3} fromQuarter={-1} toQuarter={5} yLabels={[-2, -1, 1, 2]}>
                 {(x, y, clip) => (
                     <g>
@@ -370,8 +371,8 @@ export function AmplitudeFigure({ language }: { language: UnitLanguage }) {
             <F x={540} y={152} size={15} color={SECOND} weight={400}>[0, 2]</F>
             <Key x={540} y={190} color={MUTED} dashed />
             <F x={574} y={190} size={18} color={MUTED}>{trig(language, 'y = sen x')}</F>
-            <Label x={270} y={258} textAnchor="middle" fontSize={15} fill={INK}>{t(say('Biderkatzaileak gailurrak luzatzen ditu; batugaiak kurba osoa igotzen du', 'El factor estira las crestas; el sumando sube toda la curva', 'المعامل يمدّ القمم؛ والحد المضاف يرفع المنحنى كله'))}</Label>
-            <Caption y={288}>{t(say('Periodoa ez da aldatzen: 2π', 'El periodo no cambia: 2π', 'الدور لا يتغير: 2π'))}</Caption>
+            <Label x={270} y={258} textAnchor="middle" fontSize={15} fill={INK}>{t(say('Biderkatzaileak gailurrak luzatzen ditu; batugaiak kurba osoa igotzen du', 'El factor estira las crestas; el sumando sube toda la curva', 'المعامل يمدّ القمم؛ والحد المضاف يرفع المنحنى كله', 'The factor stretches the peaks; the added number raises the whole curve'))}</Label>
+            <Caption y={288}>{t(say('Periodoa ez da aldatzen: 2π', 'El periodo no cambia: 2π', 'الدور لا يتغير: 2π', 'The period does not change: 2π'))}</Caption>
         </Figure>
     )
 }
@@ -381,7 +382,7 @@ export function AmplitudeFigure({ language }: { language: UnitLanguage }) {
 export function PeriodFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={300} label={t(say('y = sin 2x funtzioaren periodoa', 'El periodo de y = sen 2x', 'دور y = sin 2x'))}>
+        <Figure height={300} label={t(say('y = sin 2x funtzioaren periodoa', 'El periodo de y = sen 2x', 'دور y = sin 2x', 'The period of y = sin 2x'))}>
             <TrigPlane ox={36} oy={40} width={470} height={170} yMax={2} fromQuarter={-1} toQuarter={5}>
                 {(x, y, clip) => (
                     <g>
@@ -394,12 +395,12 @@ export function PeriodFigure({ language }: { language: UnitLanguage }) {
                 )}
             </TrigPlane>
             <F x={540} y={70} size={20} color={STAGE}>{trig(language, 'y = sen 2x')}</F>
-            <Label x={540} y={108} fontSize={15} fill={INK}>{t(say('Bi aldiz azkarrago:', 'El doble de rápida:', 'أسرع مرتين:'))}</Label>
+            <Label x={540} y={108} fontSize={15} fill={INK}>{t(say('Bi aldiz azkarrago:', 'El doble de rápida:', 'أسرع مرتين:', 'Twice as fast:'))}</Label>
             <F x={540} y={140} size={18} color={SECOND}>T = 2π / 2 = π</F>
-            <Label x={540} y={180} fontSize={15} fill={INK}>{t(say('Orokorrean:', 'En general:', 'عمومًا:'))}</Label>
+            <Label x={540} y={180} fontSize={15} fill={INK}>{t(say('Orokorrean:', 'En general:', 'عمومًا:', 'In general:'))}</Label>
             <F x={540} y={210} size={18}>T = 2π / k</F>
             <F x={270} y={256} size={16} anchor="middle">{trig(language, 'sen (2(x + π)) = sen (2x + 2π) = sen 2x')}</F>
-            <Caption y={288}>{t(say('k handiagoa: uhin estuagoak; altuera ez da aldatzen', 'k mayor: ondas más apretadas; la altura no cambia', 'k أكبر: موجات أضيق؛ والارتفاع لا يتغير'))}</Caption>
+            <Caption y={288}>{t(say('k handiagoa: uhin estuagoak; altuera ez da aldatzen', 'k mayor: ondas más apretadas; la altura no cambia', 'k أكبر: موجات أضيق؛ والارتفاع لا يتغير', 'Larger k: waves closer together; the height does not change'))}</Caption>
         </Figure>
     )
 }
@@ -409,7 +410,7 @@ export function PeriodFigure({ language }: { language: UnitLanguage }) {
 export function TangentFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={300} label={t(say('y = tg x funtzioa eta haren asintotak', 'La función y = tg x y sus asíntotas', 'الدالة y = tan x ومقارباتها'))}>
+        <Figure height={300} label={t(say('y = tg x funtzioa eta haren asintotak', 'La función y = tg x y sus asíntotas', 'الدالة y = tan x ومقارباتها', 'The function y = tan x and its asymptotes'))}>
             <TrigPlane ox={36} oy={30} width={470} height={200} yMax={3} fromQuarter={-1} toQuarter={5} yLabels={[-2, -1, 1, 2]}>
                 {(x, y, clip) => (
                     <g>
@@ -423,12 +424,12 @@ export function TangentFigure({ language }: { language: UnitLanguage }) {
             </TrigPlane>
             <F x={540} y={66} size={20} color={STAGE}>{trig(language, 'y = tg x')}</F>
             <F x={540} y={98} size={16}>{trig(language, 'tg x = sen x / cos x')}</F>
-            <Label x={540} y={136} fontSize={15} fill={SECOND}>{t(say('Asintotak:', 'Asíntotas:', 'المقاربات:'))}</Label>
+            <Label x={540} y={136} fontSize={15} fill={SECOND}>{t(say('Asintotak:', 'Asíntotas:', 'المقاربات:', 'Asymptotes:'))}</Label>
             <F x={540} y={162} size={16} color={SECOND}>x = π/2, 3π/2…</F>
-            <Label x={540} y={198} fontSize={15} fill={INK}>{t(say('Periodoa:', 'Periodo:', 'الدور:'))}</Label>
+            <Label x={540} y={198} fontSize={15} fill={INK}>{t(say('Periodoa:', 'Periodo:', 'الدور:', 'Period:'))}</Label>
             <F x={540} y={222} size={16}>T = π</F>
-            <Label x={270} y={258} textAnchor="middle" fontSize={15} fill={INK}>{t(say('Adar bakoitzean gorakorra da', 'Es creciente en cada rama', 'متزايدة في كل فرع'))}</Label>
-            <Caption y={288}>{t(say('Izate-eremutik kanpo geratzen dira cos x = 0 egiten duten puntuak', 'Quedan fuera del dominio los puntos donde cos x = 0', 'تخرج من المجال النقاط التي يكون فيها cos x = 0'))}</Caption>
+            <Label x={270} y={258} textAnchor="middle" fontSize={15} fill={INK}>{t(say('Adar bakoitzean gorakorra da', 'Es creciente en cada rama', 'متزايدة في كل فرع', 'It is increasing on each branch'))}</Label>
+            <Caption y={288}>{t(say('Izate-eremutik kanpo geratzen dira cos x = 0 egiten duten puntuak', 'Quedan fuera del dominio los puntos donde cos x = 0', 'تخرج من المجال النقاط التي يكون فيها cos x = 0', 'Points where cos x = 0 are outside the domain'))}</Caption>
         </Figure>
     )
 }

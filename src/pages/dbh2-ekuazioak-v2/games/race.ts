@@ -28,7 +28,7 @@ export type EquationsRaceError =
 
 export type EquationsRaceQuestion = RaceQuestion<EquationsRaceError>
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const math = (latex: string) => `$${latex}$`
 const signedRandom = (random: Random, min: number, max: number) => randomInt(random, min, max) * (random() < 0.5 ? -1 : 1)
 
@@ -53,13 +53,13 @@ function options(random: Random, right: number, candidates: Candidate[]): RaceOp
 const near = (value: number): Candidate[] => [value + 1, value - 1, value + 2, value - 2, -value].map((item) => ({ value: item, error: 'calculation' }))
 
 /** The equation and its solution: the tests check that the equation holds for it */
-const worked = (equation: string, answer: number) => say(math(`${equation}\\ \\to\\ x=${answer}`), math(`${equation}\\ \\to\\ x=${answer}`), math(`${equation}\\ \\to\\ x=${answer}`))
+const worked = (equation: string, answer: number) => say(math(`${equation}\\ \\to\\ x=${answer}`), math(`${equation}\\ \\to\\ x=${answer}`), math(`${equation}\\ \\to\\ x=${answer}`), math(`${equation}\\ \\to\\ x=${answer}`))
 
 function question(circuit: number, kind: string, prompt: LocalizedText, choices: RaceOption<EquationsRaceError>[], answer: number, equation: string): EquationsRaceQuestion {
     return { circuit, kind, prompt, options: choices, answer: fraction(answer), answerForm: 'any', percentAnswer: false, writable: true, solution: worked(equation, answer) }
 }
 
-const solvePrompt = (equation: string) => say(`Ebatzi ${math(equation)}.`, `Resuelve ${math(equation)}.`, `حلّ ${math(equation)}.`)
+const solvePrompt = (equation: string) => say(`Ebatzi ${math(equation)}.`, `Resuelve ${math(equation)}.`, `حلّ ${math(equation)}.`, `Solve ${math(equation)}.`)
 
 /* ---------- Circuit 0: simple equations ---------- */
 
@@ -170,8 +170,8 @@ function problemQuestion(random: Random, tier: Tier): EquationsRaceQuestion | nu
         const n = randomInt(random, 1, 20)
         const result = k * x - n
         const choices = options(random, x, [{ value: (result - n) / k, error: 'transpose-sign' }, { value: result + n, error: 'wrong-equation' }, { value: (result + n) * k, error: 'transpose-operation' }, ...near(x)])
-        const times = [say('bikoitzari', 'doble', 'ضعف'), say('hirukoitzari', 'triple', 'ثلاثة أضعاف'), say('laukoitzari', 'cuádruple', 'أربعة أضعاف'), say('bostekoitzari', 'quíntuple', 'خمسة أضعاف')][k - 2]
-        return choices && question(3, kind, say(`Zenbaki baten ${times.eu} ${n} kenduta, ${result} lortzen da. Zein da zenbakia?`, `Si al ${times.es} de un número le restas ${n}, obtienes ${result}. ¿Qué número es?`, `إذا طرحت ${n} من ${times.ar} عدد تحصل على ${result}. ما العدد؟`), choices, x, `${k}x-${n}=${result}`)
+        const times = [say('bikoitzari', 'doble', 'ضعف', 'twice'), say('hirukoitzari', 'triple', 'ثلاثة أضعاف', 'three times'), say('laukoitzari', 'cuádruple', 'أربعة أضعاف', 'four times'), say('bostekoitzari', 'quíntuple', 'خمسة أضعاف', 'five times')][k - 2]
+        return choices && question(3, kind, say(`Zenbaki baten ${times.eu} ${n} kenduta, ${result} lortzen da. Zein da zenbakia?`, `Si al ${times.es} de un número le restas ${n}, obtienes ${result}. ¿Qué número es?`, `إذا طرحت ${n} من ${times.ar} عدد تحصل على ${result}. ما العدد؟`, `If you subtract ${n} from ${times.en} a number, you get ${result}. What is the number?`), choices, x, `${k}x-${n}=${result}`)
     }
     if (kind === 'consecutive') {
         const count = tier === 0 ? 2 : 3
@@ -179,7 +179,7 @@ function problemQuestion(random: Random, tier: Tier): EquationsRaceQuestion | nu
         const sum = count === 2 ? 2 * x + 1 : 3 * x + 3
         const choices = options(random, x, [{ value: Math.round(sum / count), error: 'wrong-equation' }, { value: x + 1, error: 'wrong-equation' }, { value: (sum - 1) / count, error: 'calculation' }, ...near(x)])
         const equation = count === 2 ? `x+(x+1)=${sum}` : `x+(x+1)+(x+2)=${sum}`
-        return choices && question(3, kind, say(`${count} zenbaki jarraituren batura ${sum} da. Zein da txikiena?`, `La suma de ${count} números consecutivos es ${sum}. ¿Cuál es el menor?`, `مجموع ${count} أعداد متتالية ${sum}. ما أصغرها؟`), choices, x, equation)
+        return choices && question(3, kind, say(`${count} zenbaki jarraituren batura ${sum} da. Zein da txikiena?`, `La suma de ${count} números consecutivos es ${sum}. ¿Cuál es el menor?`, `مجموع ${count} أعداد متتالية ${sum}. ما أصغرها؟`, `The sum of ${count} consecutive numbers is ${sum}. What is the smallest one?`), choices, x, equation)
     }
     if (kind === 'ages') {
         const x = randomInt(random, 4, 15)
@@ -188,21 +188,21 @@ function problemQuestion(random: Random, tier: Tier): EquationsRaceQuestion | nu
         const gap = (times - 1) * (x + years)
         const equation = `x+${gap + years}=${times}(x+${years})`
         const choices = options(random, x, [{ value: gap / times, error: 'wrong-equation' }, { value: x + years, error: 'wrong-equation' }, { value: gap / (times - 1), error: 'calculation' }, ...near(x)])
-        return choices && question(3, kind, say(`Aitak semeak baino ${gap} urte gehiago ditu, eta ${years} urte barru semearen adinaren ${times} halako izango du. Zenbat urte ditu semeak?`, `Un padre tiene ${gap} años más que su hijo y dentro de ${years} años tendrá ${times} veces su edad. ¿Cuántos años tiene el hijo?`, `الأب أكبر من ابنه بـ ${gap} سنة، وبعد ${years} سنوات سيكون عمره ${times} أضعاف عمر الابن. كم عمر الابن؟`), choices, x, equation)
+        return choices && question(3, kind, say(`Aitak semeak baino ${gap} urte gehiago ditu, eta ${years} urte barru semearen adinaren ${times} halako izango du. Zenbat urte ditu semeak?`, `Un padre tiene ${gap} años más que su hijo y dentro de ${years} años tendrá ${times} veces su edad. ¿Cuántos años tiene el hijo?`, `الأب أكبر من ابنه بـ ${gap} سنة، وبعد ${years} سنوات سيكون عمره ${times} أضعاف عمر الابن. كم عمر الابن؟`, `A father is ${gap} years older than his son. In ${years} years, he will be ${times} times as old as his son. How old is the son?`), choices, x, equation)
     }
     const x = randomInt(random, 2, 15)
     const extra = randomInt(random, 1, 8)
     const perimeter = 4 * x + 2 * extra
     const choices = options(random, x, [{ value: (perimeter - extra) / 2, error: 'wrong-equation' }, { value: x + extra, error: 'wrong-equation' }, { value: (perimeter - 2 * extra) / 2, error: 'wrong-equation' }, ...near(x)])
-    return choices && question(3, kind, say(`Laukizuzen bat zabalera baino ${extra} m luzeagoa da eta perimetroa ${perimeter} m da. Zenbat metro ditu zabalerak?`, `Un rectángulo es ${extra} m más largo que ancho y su perímetro mide ${perimeter} m. ¿Cuántos metros mide el ancho?`, `مستطيل طوله أكبر من عرضه بـ ${extra} م ومحيطه ${perimeter} م. كم مترًا عرضه؟`), choices, x, `2x+2(x+${extra})=${perimeter}`)
+    return choices && question(3, kind, say(`Laukizuzen bat zabalera baino ${extra} m luzeagoa da eta perimetroa ${perimeter} m da. Zenbat metro ditu zabalerak?`, `Un rectángulo es ${extra} m más largo que ancho y su perímetro mide ${perimeter} m. ¿Cuántos metros mide el ancho?`, `مستطيل طوله أكبر من عرضه بـ ${extra} م ومحيطه ${perimeter} م. كم مترًا عرضه؟`, `A rectangle is ${extra} m longer than it is wide, and its perimeter is ${perimeter} m. How many metres wide is it?`), choices, x, `2x+2(x+${extra})=${perimeter}`)
 }
 
 /* ---------- Circuit 4: second-degree equations ---------- */
 
 function quadraticQuestion(random: Random, tier: Tier): EquationsRaceQuestion | null {
     const kind = pick(random, tier === 0 ? ['pure', 'factor'] as const : ['pure', 'factor', 'complete'] as const)
-    const larger = say('Idatzi ebazpen handiena.', 'Escribe la solución mayor.', 'اكتب الحل الأكبر.')
-    const withLarger = (equation: string) => say(`Ebatzi ${math(equation)}. ${larger.eu}`, `Resuelve ${math(equation)}. ${larger.es}`, `حلّ ${math(equation)}. ${larger.ar}`)
+    const larger = say('Idatzi ebazpen handiena.', 'Escribe la solución mayor.', 'اكتب الحل الأكبر.', 'Write the larger solution.')
+    const withLarger = (equation: string) => say(`Ebatzi ${math(equation)}. ${larger.eu}`, `Resuelve ${math(equation)}. ${larger.es}`, `حلّ ${math(equation)}. ${larger.ar}`, `Solve ${math(equation)}. ${larger.en}`)
     if (kind === 'pure') {
         const root = randomInt(random, 2, 12)
         const a = tier === 0 ? 1 : randomInt(random, 1, 3)
@@ -257,13 +257,13 @@ export function equationsParTime(circuit: number): number {
 }
 
 export const equationsRaceErrorTips: Record<EquationsRaceError, LocalizedText> = {
-    'transpose-sign': say('Atal batetik bestera pasatzean, gaiak zeinua aldatzen du.', 'Al pasar de un miembro a otro, el término cambia de signo.', 'عند النقل من طرف إلى آخر تتغيّر إشارة الحد.'),
-    'transpose-operation': say('Batzen ari dena kentzen pasatzen da; biderkatzen ari dena, zatitzen. Ordena: lehenik batugaiak, gero koefizientea.', 'Lo que suma pasa restando; lo que multiplica, dividiendo. Orden: primero los sumandos, después el coeficiente.', 'ما يُجمع ينتقل مطروحًا وما يَضرب ينتقل قاسمًا. الترتيب: المجاميع أولًا ثم المعامل.'),
-    bracket: say('Parentesiaren aurreko zenbakiak barruko gai GUZTIAK biderkatzen ditu.', 'El número delante del paréntesis multiplica a TODOS los términos de dentro.', 'العدد قبل القوس يضرب كل الحدود داخله.'),
-    'not-all-terms': say('MKTaz gai GUZTIAK biderkatu behar dira, zatikirik gabeko zenbakiak ere bai.', 'Hay que multiplicar TODOS los términos por el m.c.m., también los números sin fracción.', 'يجب ضرب كل الحدود في م.م.أ حتى الأعداد بلا كسور.'),
-    'minus-numerator': say('Zatikiaren aurreko minusak zenbakitzaile osoaren zeinua aldatzen du: $-(x-3)=-x+3$.', 'El menos delante de la fracción cambia el signo de todo el numerador: $-(x-3)=-x+3$.', 'الناقص قبل الكسر يغيّر إشارة البسط كله: $-(x-3)=-x+3$.'),
-    'wrong-equation': say('Irakurri berriro enuntziatua eta egiaztatu emaitza hartan.', 'Vuelve a leer el enunciado y comprueba el resultado en él.', 'أعد قراءة النص وتحقّق من النتيجة فيه.'),
-    'no-root': say('$x^{2}$-ren balioa aurkitu ondoren, erro karratua atera behar da.', 'Después de hallar $x^{2}$ hay que hacer la raíz cuadrada.', 'بعد إيجاد $x^{2}$ يجب أخذ الجذر التربيعي.'),
-    'formula-sign': say('Formulan $-b$ dago: b-ren zeinua aldatu.', 'En la fórmula aparece $-b$: cambia el signo de b.', 'في الصيغة يظهر $-b$: غيّر إشارة b.'),
-    calculation: say('Berrikusi kalkulua eta egiaztatu ebazpena ordeztuz.', 'Revisa el cálculo y comprueba la solución sustituyendo.', 'راجع الحساب وتحقّق من الحل بالتعويض.')
+    'transpose-sign': say('Atal batetik bestera pasatzean, gaiak zeinua aldatzen du.', 'Al pasar de un miembro a otro, el término cambia de signo.', 'عند النقل من طرف إلى آخر تتغيّر إشارة الحد.', 'When you move a term from one side of the equation to the other, its sign changes.'),
+    'transpose-operation': say('Batzen ari dena kentzen pasatzen da; biderkatzen ari dena, zatitzen. Ordena: lehenik batugaiak, gero koefizientea.', 'Lo que suma pasa restando; lo que multiplica, dividiendo. Orden: primero los sumandos, después el coeficiente.', 'ما يُجمع ينتقل مطروحًا وما يَضرب ينتقل قاسمًا. الترتيب: المجاميع أولًا ثم المعامل.', 'What is added is subtracted; what multiplies is divided. Order: first the added terms, then the coefficient.'),
+    bracket: say('Parentesiaren aurreko zenbakiak barruko gai GUZTIAK biderkatzen ditu.', 'El número delante del paréntesis multiplica a TODOS los términos de dentro.', 'العدد قبل القوس يضرب كل الحدود داخله.', 'The number in front of the bracket multiplies ALL the terms inside.'),
+    'not-all-terms': say('MKTaz gai GUZTIAK biderkatu behar dira, zatikirik gabeko zenbakiak ere bai.', 'Hay que multiplicar TODOS los términos por el m.c.m., también los números sin fracción.', 'يجب ضرب كل الحدود في م.م.أ حتى الأعداد بلا كسور.', 'You must multiply ALL the terms by the LCM, including the numbers without a fraction.'),
+    'minus-numerator': say('Zatikiaren aurreko minusak zenbakitzaile osoaren zeinua aldatzen du: $-(x-3)=-x+3$.', 'El menos delante de la fracción cambia el signo de todo el numerador: $-(x-3)=-x+3$.', 'الناقص قبل الكسر يغيّر إشارة البسط كله: $-(x-3)=-x+3$.', 'The minus sign in front of the fraction changes the sign of the whole numerator: $-(x-3)=-x+3$.'),
+    'wrong-equation': say('Irakurri berriro enuntziatua eta egiaztatu emaitza hartan.', 'Vuelve a leer el enunciado y comprueba el resultado en él.', 'أعد قراءة النص وتحقّق من النتيجة فيه.', 'Read the problem again and check your answer against it.'),
+    'no-root': say('$x^{2}$-ren balioa aurkitu ondoren, erro karratua atera behar da.', 'Después de hallar $x^{2}$ hay que hacer la raíz cuadrada.', 'بعد إيجاد $x^{2}$ يجب أخذ الجذر التربيعي.', 'After finding $x^{2}$, you must take the square root.'),
+    'formula-sign': say('Formulan $-b$ dago: b-ren zeinua aldatu.', 'En la fórmula aparece $-b$: cambia el signo de b.', 'في الصيغة يظهر $-b$: غيّر إشارة b.', 'The formula contains $-b$: change the sign of b.'),
+    calculation: say('Berrikusi kalkulua eta egiaztatu ebazpena ordeztuz.', 'Revisa el cálculo y comprueba la solución sustituyendo.', 'راجع الحساب وتحقّق من الحل بالتعويض.', 'Check your working and test the solution by substituting it in.')
 }

@@ -1,3 +1,4 @@
+import { formulaFor } from '../../src/utils/latexLanguage.ts'
 import assert from 'node:assert/strict'
 import katex from 'katex'
 import { equals, hasTerminatingDecimal, toExactDecimal, toLatex, toNumber, type FractionValue } from '../../src/features/unit-v2/math/fraction.ts'
@@ -203,9 +204,9 @@ function checkQuestion(question: RealsRaceQuestion, tips: Record<string, Localiz
             numbers(meta.value)
             break
     }
-    for (const language of ['eu', 'es', 'ar'] as const) {
+    for (const language of ['eu', 'es', 'en', 'ar'] as const) {
         for (const text of [question.prompt[language], question.solution[language]]) {
-            for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formula, { throwOnError: true, strict: 'error' })
+            for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formulaFor(language, formula), { throwOnError: true, strict: 'error' })
             if (language === 'ar') assert.ok(!text.includes('{,}'), text)
         }
     }

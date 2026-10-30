@@ -24,9 +24,9 @@ export type EquationsSystemsRaceError = EquationsRaceError | 'delta-sign' | 'fac
 
 export type EquationsSystemsRaceQuestion = RaceQuestion<EquationsSystemsRaceError>
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const math = (latex: string) => `$${latex}$`
-const all = (latex: string): LocalizedText => say(math(latex), math(latex), math(latex))
+const all = (latex: string): LocalizedText => say(math(latex), math(latex), math(latex), math(latex))
 const signedRandom = (random: Random, min: number, max: number) => randomInt(random, min, max) * (random() < 0.5 ? -1 : 1)
 
 interface Candidate {
@@ -87,7 +87,7 @@ function discriminantQuestion(random: Random, tier: Tier): EquationsSystemsRaceQ
     return choices && question(1, 'discriminant', say(
         `Zenbat da ${math(equation)} ekuazioaren diskriminatzailea?`,
         `¿Cuánto vale el discriminante de ${math(equation)}?`,
-        `كم مميّز ${math(equation)}؟`
+        `كم مميّز ${math(equation)}؟`, `What is the discriminant of ${math(equation)}?`
     ), choices, answer, all(`\\Delta=${b < 0 ? `(${b})` : b}^{2}-4\\cdot ${a}\\cdot ${c < 0 ? `(${c})` : c}=${answer}`))
 }
 
@@ -107,7 +107,7 @@ function factoredQuestion(random: Random, tier: Tier): EquationsSystemsRaceQuest
     return choices && question(2, 'factored', say(
         `${math(equation)}. Zein da ebazpen ${largest ? 'handiena' : 'txikiena'}?`,
         `${math(equation)}. ¿Cuál es la ${largest ? 'mayor' : 'menor'} solución?`,
-        `${math(equation)}. ما الحل ${largest ? 'الأكبر' : 'الأصغر'}؟`
+        `${math(equation)}. ما الحل ${largest ? 'الأكبر' : 'الأصغر'}؟`, `${math(equation)}. What is the ${largest ? 'mayor' : 'menor'} solution?`
     ), choices, answer, all(`x=${roots.join(',\\ x=')}`))
 }
 
@@ -127,7 +127,7 @@ function radicalQuestion(random: Random): EquationsSystemsRaceQuestion | null {
     return choices && question(2, 'radical', say(
         `Ebatzi ${math(equation)}.`,
         `Resuelve ${math(equation)}.`,
-        `حلّ ${math(equation)}.`
+        `حلّ ${math(equation)}.`, `Solve ${math(equation)}.`
     ), choices, answer, all(`${quadraticLatex(2 * c - 1, c * c - b)}\\to x=${answer};\\ x=${other}\\ \\times`))
 }
 
@@ -139,7 +139,7 @@ function productQuestion(random: Random, tier: Tier): EquationsSystemsRaceQuesti
     return choices && question(2, 'product', say(
         `Bi zenbaki natural jarraien biderkadura ${product} da. Zein da txikiena?`,
         `El producto de dos números naturales consecutivos es ${product}. ¿Cuál es el menor?`,
-        `جداء عددين طبيعيين متتاليين ${product}. ما الأصغر؟`
+        `جداء عددين طبيعيين متتاليين ${product}. ما الأصغر؟`, `The product of two consecutive natural numbers is ${product}. What is the smaller number?`
     ), choices, answer, all(`x(x+1)=${product}\\to x=${answer}`))
 }
 
@@ -167,12 +167,12 @@ function systemQuestion(random: Random, tier: Tier, circuit: 3 | 4): EquationsSy
     const answer = askX ? x : y
     const other = askX ? y : x
     const choices = options(random, answer, [{ value: other, error: 'other-unknown' }, { value: -answer, error: 'transpose-sign' }, ...near(answer)])
-    const method = circuit === 3 ? say('ordezkapenez', 'por sustitución', 'بالتعويض') : say('laburketaz', 'por reducción', 'بالحذف')
+    const method = circuit === 3 ? say('ordezkapenez', 'por sustitución', 'بالتعويض', 'by substitution') : say('laburketaz', 'por reducción', 'بالحذف', 'by elimination')
     const letter = askX ? 'x' : 'y'
     return choices && question(circuit, circuit === 3 ? 'substitution' : 'reduction', say(
         `Ebatzi ${method.eu} ${math(systemLatex(first, second))}. Zenbat da ${letter}?`,
         `Resuelve ${method.es} ${math(systemLatex(first, second))}. ¿Cuánto vale ${letter}?`,
-        `حلّ ${method.ar} ${math(systemLatex(first, second))}. كم ${letter}؟`
+        `حلّ ${method.ar} ${math(systemLatex(first, second))}. كم ${letter}؟`, `Solve ${method.en} ${math(systemLatex(first, second))}. What is ${letter}?`
     ), choices, answer, all(`x=${x},\\ y=${y}`))
 }
 
@@ -187,7 +187,7 @@ function pointQuestion(random: Random, tier: Tier): EquationsSystemsRaceQuestion
     return choices && question(3, 'point', say(
         `${math(linearLatex(equation))} ekuazioan, zenbat da y ${math(`x=${x}`)} denean?`,
         `En ${math(linearLatex(equation))}, ¿cuánto vale y cuando ${math(`x=${x}`)}?`,
-        `في ${math(linearLatex(equation))}، كم y عندما ${math(`x=${x}`)}؟`
+        `في ${math(linearLatex(equation))}، كم y عندما ${math(`x=${x}`)}؟`, `In ${math(linearLatex(equation))}, what is y when ${math(`x=${x}`)}?`
     ), choices, y, all(`${a}\\cdot(${x})${b < 0 ? '-' : '+'}${Math.abs(b) === 1 ? '' : Math.abs(b)}y=${equation[2]}\\to y=${y}`))
 }
 
@@ -201,7 +201,7 @@ function farmQuestion(random: Random): EquationsSystemsRaceQuestion | null {
     return choices && question(4, 'farm', say(
         `Baserri batean oiloak eta untxiak daude: ${heads} buru eta ${legs} hanka. Zenbat untxi daude?`,
         `En una granja hay gallinas y conejos: ${heads} cabezas y ${legs} patas. ¿Cuántos conejos hay?`,
-        `في مزرعة دجاج وأرانب: ${heads} رأسًا و${legs} رجلًا. كم أرنبًا؟`
+        `في مزرعة دجاج وأرانب: ${heads} رأسًا و${legs} رجلًا. كم أرنبًا؟`, `On a farm there are hens and rabbits: ${heads} heads and ${legs} legs. How many rabbits are there?`
     ), choices, rabbits, all(`x+y=${heads},\\ 2x+4y=${legs}\\to y=${rabbits}`))
 }
 
@@ -213,7 +213,7 @@ function sumDifferenceQuestion(random: Random): EquationsSystemsRaceQuestion | n
     return choices && question(4, 'sum-difference', say(
         `Bi zenbakiren batura ${large + small} da eta kendura ${large - small}. Zein da handiena?`,
         `Dos números suman ${large + small} y su diferencia es ${large - small}. ¿Cuál es el mayor?`,
-        `مجموع عددين ${large + small} والفرق بينهما ${large - small}. ما الأكبر؟`
+        `مجموع عددين ${large + small} والفرق بينهما ${large - small}. ما الأكبر؟`, `Two numbers add up to ${large + small} and their difference is ${large - small}. What is the larger one?`
     ), choices, large, all(`2x=${2 * large}\\to x=${large}`))
 }
 
@@ -248,9 +248,9 @@ export function equationsSystemsParTime(circuit: number): number {
 
 export const equationsSystemsRaceErrorTips: Record<EquationsSystemsRaceError, LocalizedText> = {
     ...equationsRaceErrorTips,
-    'delta-sign': say('$\\Delta=b^{2}-4ac$: kendu, eta kontuz c negatiboa denean ($-4ac$ positibo bihurtzen da).', '$\\Delta=b^{2}-4ac$: se resta, y cuidado cuando c es negativo ($-4ac$ se vuelve positivo).', '$\\Delta=b^{2}-4ac$: نطرح، وانتبه عندما يكون c سالبًا (يصير $-4ac$ موجبًا).'),
-    'factor-sign': say('$(x-3)=0$ bada, $x=3$; $(x+3)=0$ bada, $x=-3$. Zeinua aldatzen da.', 'Si $(x-3)=0$, $x=3$; si $(x+3)=0$, $x=-3$. El signo cambia.', 'إذا كان $(x-3)=0$ فإن $x=3$؛ وإذا كان $(x+3)=0$ فإن $x=-3$. تتغيّر الإشارة.'),
-    'false-root': say('Karratura jasotzean ebazpen faltsuak agertzen dira: egiaztatu hasierako ekuazioan, erroa ezin da negatiboa izan.', 'Al elevar al cuadrado aparecen soluciones falsas: comprueba en la ecuación inicial, la raíz no puede ser negativa.', 'بالتربيع تظهر حلول زائفة: تحقّق في المعادلة الأصلية، فالجذر لا يكون سالبًا.'),
-    'other-unknown': say('Hori beste ezezagunaren balioa da. Irakurri zer galdetzen den.', 'Ese es el valor de la otra incógnita. Lee qué se pregunta.', 'هذه قيمة المجهول الآخر. اقرأ المطلوب.'),
-    'negative-solution': say('Zenbaki naturalak eskatzen dira: ebazpen negatiboa baztertu.', 'Se piden números naturales: descarta la solución negativa.', 'المطلوب أعداد طبيعية: استبعد الحل السالب.')
+    'delta-sign': say('$\\Delta=b^{2}-4ac$: kendu, eta kontuz c negatiboa denean ($-4ac$ positibo bihurtzen da).', '$\\Delta=b^{2}-4ac$: se resta, y cuidado cuando c es negativo ($-4ac$ se vuelve positivo).', '$\\Delta=b^{2}-4ac$: نطرح، وانتبه عندما يكون c سالبًا (يصير $-4ac$ موجبًا).', '$\\Delta=b^{2}-4ac$: 4ac is subtracted, so be careful when c is negative ($-4ac$ becomes positive).'),
+    'factor-sign': say('$(x-3)=0$ bada, $x=3$; $(x+3)=0$ bada, $x=-3$. Zeinua aldatzen da.', 'Si $(x-3)=0$, $x=3$; si $(x+3)=0$, $x=-3$. El signo cambia.', 'إذا كان $(x-3)=0$ فإن $x=3$؛ وإذا كان $(x+3)=0$ فإن $x=-3$. تتغيّر الإشارة.', 'If $(x-3)=0$, $x=3$; if $(x+3)=0$, $x=-3$. The sign changes.'),
+    'false-root': say('Karratura jasotzean ebazpen faltsuak agertzen dira: egiaztatu hasierako ekuazioan, erroa ezin da negatiboa izan.', 'Al elevar al cuadrado aparecen soluciones falsas: comprueba en la ecuación inicial, la raíz no puede ser negativa.', 'بالتربيع تظهر حلول زائفة: تحقّق في المعادلة الأصلية، فالجذر لا يكون سالبًا.', 'Squaring creates false solutions: check in the original equation, since the square root cannot be negative.'),
+    'other-unknown': say('Hori beste ezezagunaren balioa da. Irakurri zer galdetzen den.', 'Ese es el valor de la otra incógnita. Lee qué se pregunta.', 'هذه قيمة المجهول الآخر. اقرأ المطلوب.', 'That is the value of the other unknown. Read what the question asks.'),
+    'negative-solution': say('Zenbaki naturalak eskatzen dira: ebazpen negatiboa baztertu.', 'Se piden números naturales: descarta la solución negativa.', 'المطلوب أعداد طبيعية: استبعد الحل السالب.', 'The question asks for natural numbers, so discard the negative solution.')
 }

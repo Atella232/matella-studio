@@ -2,7 +2,7 @@ import { useState, type ReactElement } from 'react'
 import { MathText } from '../../../components/MathText'
 import { Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
-import { formatNatural } from '../format'
+import { formatNatural, formatNaturalLatex } from '../format'
 import { NaturalAnswer } from './LabBits'
 import { initialPowersState, POWER_LIMITS, powersChallenges, powerValue, resultVisible, setPowers, updatePowersAnswer, type NaturalsToolProps, type PowersState } from './labTools'
 
@@ -47,11 +47,11 @@ export function PowersTool(props: NaturalsToolProps) {
 
     const controls = (
         <>
-            <Stepper label={l({ eu: 'Oinarria', es: 'Base', ar: 'الأساس' })} value={base} min={1} max={POWER_LIMITS.base} onChange={(next) => setState((current) => setPowers(current, { base: next }))} language={props.language} />
-            <Stepper label={l({ eu: 'Berretzailea', es: 'Exponente', ar: 'الأس' })} value={exponent} min={1} max={POWER_LIMITS.exponent} onChange={(next) => setState((current) => setPowers(current, { exponent: next }))} language={props.language} />
+            <Stepper label={l({ eu: 'Oinarria', es: 'Base', en: 'Base', ar: 'الأساس' })} value={base} min={1} max={POWER_LIMITS.base} onChange={(next) => setState((current) => setPowers(current, { base: next }))} language={props.language} />
+            <Stepper label={l({ eu: 'Berretzailea', es: 'Exponente', en: 'Exponent', ar: 'الأس' })} value={exponent} min={1} max={POWER_LIMITS.exponent} onChange={(next) => setState((current) => setPowers(current, { exponent: next }))} language={props.language} />
             {state.solved.length > 0 && (
                 <p className="fraction-v2-lab-tip">
-                    {l({ eu: 'Kalkulatuta: ', es: 'Calculadas: ', ar: 'المحسوبة: ' })}
+                    {l({ eu: 'Kalkulatuta: ', es: 'Calculadas: ', en: 'Worked out: ', ar: 'المحسوبة: ' })}
                     <MathText text={state.solved.map((key) => `$${key.replace('^', '^{')}}$`).join(', ')} />
                 </p>
             )}
@@ -61,7 +61,7 @@ export function PowersTool(props: NaturalsToolProps) {
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main">
-                <MathText text={shown ? `$${base}^{${exponent}}=${factors}=${formatNatural(value)}$` : `$${base}^{${exponent}}=${factors}$`} />
+                <MathText text={shown ? `$${base}^{${exponent}}=${factors}=${formatNaturalLatex(value)}$` : `$${base}^{${exponent}}=${factors}$`} />
             </span>
             <NaturalAnswer language={props.language} state={state} expected={{ numerator: value, denominator: 1 }} onChange={(patch) => setState((current) => updatePowersAnswer(current, patch))} />
         </>
@@ -71,16 +71,16 @@ export function PowersTool(props: NaturalsToolProps) {
         <ToolFrame {...props} controls={controls} readout={readout} challenges={powersChallenges} state={state}>
             <div className="naturals-power" dir="ltr">
                 {exponent === 2 && (
-                    <div className="naturals-power-square" style={{ gridTemplateColumns: `repeat(${base}, 1fr)` }} role="img" aria-label={l({ eu: `${base} aldeko karratua`, es: `Cuadrado de lado ${base}`, ar: `مربع ضلعه ${base}` })}>
+                    <div className="naturals-power-square" style={{ gridTemplateColumns: `repeat(${base}, 1fr)` }} role="img" aria-label={l({ eu: `${base} aldeko karratua`, es: `Cuadrado de lado ${base}`, en: `Square with side ${base}`, ar: `مربع ضلعه ${base}` })}>
                         {Array.from({ length: base * base }, (_, index) => <span key={index} />)}
                     </div>
                 )}
                 {exponent === 3 && <CubeDrawing n={base} />}
-                <ol className="naturals-power-ladder" aria-label={l({ eu: 'Berreturak bata bestearen ondoren', es: 'Potencias una tras otra', ar: 'القوى الواحدة تلو الأخرى' })}>
+                <ol className="naturals-power-ladder" aria-label={l({ eu: 'Berreturak bata bestearen ondoren', es: 'Potencias una tras otra', en: 'Powers one after another', ar: 'القوى الواحدة تلو الأخرى' })}>
                     {ladder.map((step) => (
                         <li key={step.exponent} className={step.exponent === exponent ? 'current' : ''}>
                             <MathText text={`$${base}^{${step.exponent}}$`} />
-                            <strong>{step.exponent === exponent && !shown ? '?' : formatNatural(step.value)}</strong>
+                            <strong>{step.exponent === exponent && !shown ? '?' : formatNatural(step.value, props.language)}</strong>
                             {step.exponent < exponent && <small>· {base}</small>}
                         </li>
                     ))}

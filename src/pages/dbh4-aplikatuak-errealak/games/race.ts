@@ -86,8 +86,8 @@ export type RealsRaceMeta =
 export type RealsRaceQuestion = RaceQuestion<RealsRaceError> & { meta: RealsRaceMeta; line?: LineSpec }
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => say(`$${latex}$`, `$${latex}$`, `$${latex}$`)
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => say(`$${latex}$`, `$${latex}$`, `$${latex}$`, `$${latex}$`)
 const math = (latex: string) => `$${latex}$`
 const bracket = (latex: string) => (latex.startsWith('-') ? `\\left(${latex}\\right)` : latex)
 
@@ -191,7 +191,7 @@ function powerProductQuestion(random: Random, tier: Tier): RealsRaceQuestion | n
     if (!options) return null
     const pow = (exponentValue: number) => `${base}^{${exponentValue}}`
     const statement = `${pow(p)}\\cdot ${pow(q)}\\mathbin{:}${pow(r)}`
-    return build(0, 'power-product', say(`${math(`${statement}=${base}^{\\,?}`)} Zein da berretzailea?`, `${math(`${statement}=${base}^{\\,?}`)} ¿Cuál es el exponente?`, `${math(`${statement}=${base}^{\\,?}`)} ما الأس؟`), options, fraction(exponent), same(`${p}+${bracket(String(q))}-${bracket(String(r))}=${exponent}\\ \\to\\ ${pow(exponent)}`), { kind: 'power-product', base, p, q, r, exponent })
+    return build(0, 'power-product', say(`${math(`${statement}=${base}^{\\,?}`)} Zein da berretzailea?`, `${math(`${statement}=${base}^{\\,?}`)} ¿Cuál es el exponente?`, `${math(`${statement}=${base}^{\\,?}`)} ما الأس؟`, `${math(`${statement}=${base}^{\\,?}`)} What is the exponent?`), options, fraction(exponent), same(`${p}+${bracket(String(q))}-${bracket(String(r))}=${exponent}\\ \\to\\ ${pow(exponent)}`), { kind: 'power-product', base, p, q, r, exponent })
 }
 
 /* ---------- Circuit 1: decimals and their fraction ---------- */
@@ -208,9 +208,9 @@ function fractionOfKind(random: Random, kind: DecimalKind): FractionValue {
 }
 
 const kindNames: Record<DecimalKind, LocalizedText> = {
-    exact: say('hamartar zehatza', 'un decimal exacto', 'عددًا عشريًا منتهيًا'),
-    pure: say('hamartar periodiko hutsa', 'un decimal periódico puro', 'عددًا عشريًا دوريًا بحتًا'),
-    mixed: say('hamartar periodiko mistoa', 'un decimal periódico mixto', 'عددًا عشريًا دوريًا مختلطًا')
+    exact: say('hamartar zehatza', 'un decimal exacto', 'عددًا عشريًا منتهيًا', 'a terminating decimal'),
+    pure: say('hamartar periodiko hutsa', 'un decimal periódico puro', 'عددًا عشريًا دوريًا بحتًا', 'a pure recurring decimal'),
+    mixed: say('hamartar periodiko mistoa', 'un decimal periódico mixto', 'عددًا عشريًا دوريًا مختلطًا', 'a mixed recurring decimal')
 }
 
 export function kindPickQuestion(random: Random): RealsRaceQuestion | null {
@@ -223,7 +223,7 @@ export function kindPickQuestion(random: Random): RealsRaceQuestion | null {
     const fractions = options.map((option) => (option.correct ? right : wrongFractions.find((value) => toLatex(value) === option.latex)!))
     const name = kindNames[target]
     const kind = decimalKind(expand(right))
-    return build(1, 'kind-pick', say(`Zein zatikik ematen du ${name.eu}?`, `¿Qué fracción da ${name.es}?`, `أي كسر يعطي ${name.ar}؟`), options, null, same(`${toLatex(right)}=${expansionLatex(expand(right))}`), { kind: 'kind-pick', target: kind, fractions, right: options.findIndex((option) => option.correct) })
+    return build(1, 'kind-pick', say(`Zein zatikik ematen du ${name.eu}?`, `¿Qué fracción da ${name.es}?`, `أي كسر يعطي ${name.ar}؟`, `Which fraction gives ${name.en}?`), options, null, same(`${toLatex(right)}=${expansionLatex(expand(right))}`), { kind: 'kind-pick', target: kind, fractions, right: options.findIndex((option) => option.correct) })
 }
 
 export function expansionQuestion(random: Random): RealsRaceQuestion | null {
@@ -240,7 +240,7 @@ export function expansionQuestion(random: Random): RealsRaceQuestion | null {
     const wrongs = [...shifted, { latex: `${integer}{,}${preperiod}${period}`, error: 'period-place' as const }, ...shuffle(random, neighbours)]
     const options = pickOptions(random, { latex: right, error: null }, wrongs)
     if (!options) return null
-    return build(1, 'expansion', same(`${toLatex(value)}=\\ ?`), options, null, say(`${math(`${value.numerator}\\mathbin{:}${value.denominator}=${right}`)}: hondarrak errepikatzen dira.`, `${math(`${value.numerator}\\mathbin{:}${value.denominator}=${right}`)}: los restos se repiten.`, `${math(`${value.numerator}\\mathbin{:}${value.denominator}=${right}`)}: البواقي تتكرر.`), { kind: 'expansion', value })
+    return build(1, 'expansion', same(`${toLatex(value)}=\\ ?`), options, null, say(`${math(`${value.numerator}\\mathbin{:}${value.denominator}=${right}`)}: hondarrak errepikatzen dira.`, `${math(`${value.numerator}\\mathbin{:}${value.denominator}=${right}`)}: los restos se repiten.`, `${math(`${value.numerator}\\mathbin{:}${value.denominator}=${right}`)}: البواقي تتكرر.`, `${math(`${value.numerator}\\mathbin{:}${value.denominator}=${right}`)}: the remainders repeat.`), { kind: 'expansion', value })
 }
 
 export function generatrixQuestion(random: Random, tier: Tier): RealsRaceQuestion | null {
@@ -270,7 +270,7 @@ export function generatrixQuestion(random: Random, tier: Tier): RealsRaceQuestio
     if (!options) return null
     const values = options.map((option) => (option.correct ? value : wrongs.find((item) => item.latex === option.latex)!.value))
     const decimal = expansionLatex(expansion)
-    return build(1, kind === 'exact' ? 'exact-fraction' : 'generatrix', say(`Zein da ${math(decimal)} zenbakiaren zatiki sortzailea?`, `¿Cuál es la fracción generatriz de ${math(decimal)}?`, `ما الكسر المولّد للعدد ${math(decimal)}؟`), options, value, same(`${decimal}=${generatrixLatex(expansion)}=${toLatex(value)}`), { kind: 'generatrix', value, values })
+    return build(1, kind === 'exact' ? 'exact-fraction' : 'generatrix', say(`Zein da ${math(decimal)} zenbakiaren zatiki sortzailea?`, `¿Cuál es la fracción generatriz de ${math(decimal)}?`, `ما الكسر المولّد للعدد ${math(decimal)}؟`, `What is the generating fraction of ${math(decimal)}?`), options, value, same(`${decimal}=${generatrixLatex(expansion)}=${toLatex(value)}`), { kind: 'generatrix', value, values })
 }
 
 /* ---------- Circuit 2: real numbers and intervals ---------- */
@@ -287,7 +287,7 @@ export function irrationalPickQuestion(random: Random, tier: Tier): RealsRaceQue
     const wrongs = shuffle(random, rationals).map((latex) => ({ latex, error: 'irrational-set' as const }))
     const options = pickOptions(random, { latex: right, error: null }, wrongs)
     if (!options) return null
-    return build(2, 'irrational-pick', say('Zein zenbaki da irrazionala?', '¿Qué número es irracional?', 'أي عدد غير نسبي؟'), options, null, say(`${math(right)}: hamartar infinitu, periodorik gabe. Besteak zatiki gisa idatz daitezke.`, `${math(right)}: infinitos decimales sin periodo. Los demás se pueden escribir como fracción.`, `${math(right)}: منازل عشرية لا نهائية بلا دور. أما البقية فتُكتب كسورًا.`), { kind: 'irrational-pick', right: options.findIndex((option) => option.correct), rational: options.map((option) => !option.correct) })
+    return build(2, 'irrational-pick', say('Zein zenbaki da irrazionala?', '¿Qué número es irracional?', 'أي عدد غير نسبي؟', 'Which number is irrational?'), options, null, say(`${math(right)}: hamartar infinitu, periodorik gabe. Besteak zatiki gisa idatz daitezke.`, `${math(right)}: infinitos decimales sin periodo. Los demás se pueden escribir como fracción.`, `${math(right)}: منازل عشرية لا نهائية بلا دور. أما البقية فتُكتب كسورًا.`, `${math(right)}: infinite decimals with no recurring part. The others can be written as fractions.`), { kind: 'irrational-pick', right: options.findIndex((option) => option.correct), rational: options.map((option) => !option.correct) })
 }
 
 function randomInterval(random: Random, tier: Tier): Interval {
@@ -314,11 +314,11 @@ export function intervalQuestion(random: Random, tier: Tier): RealsRaceQuestion 
     const meta: RealsRaceMeta = { kind: 'interval', value, options: shown, right: options.findIndex((option) => option.correct) }
     const solution = same(`${inequalityLatex(value)}\\ \\to\\ ${intervalLatex(value)}`)
     if (tier === 0 || random() < 0.5) {
-        return build(2, 'interval-inequality', say(`Zein tarte da ${math(inequalityLatex(value))}?`, `¿Qué intervalo es ${math(inequalityLatex(value))}?`, `ما الفترة ${math(inequalityLatex(value))}؟`), options, null, solution, meta)
+        return build(2, 'interval-inequality', say(`Zein tarte da ${math(inequalityLatex(value))}?`, `¿Qué intervalo es ${math(inequalityLatex(value))}?`, `ما الفترة ${math(inequalityLatex(value))}؟`, `Which interval is ${math(inequalityLatex(value))}?`), options, null, solution, meta)
     }
     const ends = [value.from, value.to].filter((end): end is number => end !== null)
     const line: LineSpec = { from: Math.min(...ends) - 2, to: Math.max(...ends) + 2, intervals: [{ value }] }
-    return build(2, 'interval-line', say('Zein tarte dago marraztuta?', '¿Qué intervalo está dibujado?', 'ما الفترة المرسومة؟'), options, null, solution, meta, line)
+    return build(2, 'interval-line', say('Zein tarte dago marraztuta?', '¿Qué intervalo está dibujado?', 'ما الفترة المرسومة؟', 'Which interval is drawn?'), options, null, solution, meta, line)
 }
 
 export function intervalCountQuestion(random: Random): RealsRaceQuestion | null {
@@ -329,7 +329,7 @@ export function intervalCountQuestion(random: Random): RealsRaceQuestion | null 
     const options = pickOptions(random, numberChoice(count, 'calculation'), shuffle(random, [numberChoice(to - from + 1, 'bracket'), numberChoice(to - from - 1, 'bracket'), numberChoice(to - from, 'bracket'), numberChoice(to + from, 'calculation'), ...near(count)]))
     if (!options) return null
     const members = Array.from({ length: to - from + 1 }, (_, index) => from + index).filter((x) => (x > from || value.closedFrom) && (x < to || value.closedTo))
-    return build(2, 'interval-count', say(`Zenbat zenbaki oso daude ${math(intervalLatex(value))} tartean?`, `¿Cuántos números enteros hay en el intervalo ${math(intervalLatex(value))}?`, `كم عددًا صحيحًا في الفترة ${math(intervalLatex(value))}؟`), options, fraction(count), same(`${members.join(',\\ ')}\\ \\to\\ ${count}`), { kind: 'interval-count', value, count }, { from: from - 1, to: to + 1, intervals: [{ value }] })
+    return build(2, 'interval-count', say(`Zenbat zenbaki oso daude ${math(intervalLatex(value))} tartean?`, `¿Cuántos números enteros hay en el intervalo ${math(intervalLatex(value))}?`, `كم عددًا صحيحًا في الفترة ${math(intervalLatex(value))}؟`, `How many integers are there in the interval ${math(intervalLatex(value))}?`), options, fraction(count), same(`${members.join(',\\ ')}\\ \\to\\ ${count}`), { kind: 'interval-count', value, count }, { from: from - 1, to: to + 1, intervals: [{ value }] })
 }
 
 export function sqrtBetweenQuestion(random: Random): RealsRaceQuestion | null {
@@ -340,7 +340,7 @@ export function sqrtBetweenQuestion(random: Random): RealsRaceQuestion | null {
     const half = Math.floor(n / 2)
     const options = pickOptions(random, { latex: pair(low), error: null }, shuffle(random, [{ latex: pair(half), error: 'root-guess' as const }, { latex: pair(low - 1), error: 'calculation' as const }, { latex: pair(low + 1), error: 'calculation' as const }, { latex: pair(low + 2), error: 'calculation' as const }]).filter((item) => !item.latex.startsWith('(0') && !item.latex.startsWith('(-')))
     if (!options) return null
-    return build(2, 'sqrt-between', say(`Zein bi zenbaki osoren artean dago ${math(`\\sqrt{${n}}`)}?`, `¿Entre qué dos números enteros está ${math(`\\sqrt{${n}}`)}?`, `بين أي عددين صحيحين يقع ${math(`\\sqrt{${n}}`)}؟`), options, null, same(`${low}^{2}=${low * low}<${n}<${(low + 1) * (low + 1)}=${low + 1}^{2}`), { kind: 'sqrt-between', n, low })
+    return build(2, 'sqrt-between', say(`Zein bi zenbaki osoren artean dago ${math(`\\sqrt{${n}}`)}?`, `¿Entre qué dos números enteros está ${math(`\\sqrt{${n}}`)}?`, `بين أي عددين صحيحين يقع ${math(`\\sqrt{${n}}`)}؟`, `Between which two integers is ${math(`\\sqrt{${n}}`)}?`), options, null, same(`${low}^{2}=${low * low}<${n}<${(low + 1) * (low + 1)}=${low + 1}^{2}`), { kind: 'sqrt-between', n, low })
 }
 
 /* ---------- Circuit 3: approximations and scientific notation ---------- */
@@ -371,9 +371,9 @@ export function roundQuestion(random: Random, tier: Tier): RealsRaceQuestion | n
     // 2,96 → 3,0 and 3 are the same number: keep only wrong options with another value
     const options = pickOptions(random, { latex: commaLatex(rounded), error: null }, wrongs.filter((item) => Number(item.latex.replace('{,}', '.')) !== Number(rounded)))
     if (!options) return null
-    const place = [say('hamarrenetara', 'a las décimas', 'إلى الأعشار'), say('ehunenetara', 'a las centésimas', 'إلى الأجزاء من مئة'), say('milarenetara', 'a las milésimas', 'إلى الأجزاء من ألف')][places - 1]
+    const place = [say('hamarrenetara', 'a las décimas', 'إلى الأعشار', 'to the tenths'), say('ehunenetara', 'a las centésimas', 'إلى الأجزاء من مئة', 'to the hundredths'), say('milarenetara', 'a las milésimas', 'إلى الأجزاء من ألف', 'to three decimal places')][places - 1]
     const next = decimals[places]
-    return build(3, 'round', say(`Biribildu ${math(commaLatex(text))} ${place.eu}.`, `Redondea ${math(commaLatex(text))} ${place.es}.`, `قرّب ${math(commaLatex(text))} ${place.ar}.`), options, decimalFraction(rounded), say(`Hurrengo zifra ${next} da (≥ 5): ${math(`${commaLatex(text)}\\approx ${commaLatex(rounded)}`)}`, `La cifra siguiente es ${next} (≥ 5): ${math(`${commaLatex(text)}\\approx ${commaLatex(rounded)}`)}`, `الرقم التالي ${next} (≥ 5): ${math(`${commaLatex(text)}\\approx ${commaLatex(rounded)}`)}`), { kind: 'round', text, places, rounded })
+    return build(3, 'round', say(`Biribildu ${math(commaLatex(text))} ${place.eu}.`, `Redondea ${math(commaLatex(text))} ${place.es}.`, `قرّب ${math(commaLatex(text))} ${place.ar}.`, `Round ${math(commaLatex(text))} ${place.en}.`), options, decimalFraction(rounded), say(`Hurrengo zifra ${next} da (≥ 5): ${math(`${commaLatex(text)}\\approx ${commaLatex(rounded)}`)}`, `La cifra siguiente es ${next} (≥ 5): ${math(`${commaLatex(text)}\\approx ${commaLatex(rounded)}`)}`, `الرقم التالي ${next} (≥ 5): ${math(`${commaLatex(text)}\\approx ${commaLatex(rounded)}`)}`, `The next digit is ${next} (≥ 5): ${math(`${commaLatex(text)}\\approx ${commaLatex(rounded)}`)}`), { kind: 'round', text, places, rounded })
 }
 
 /** Exact difference of two decimals written as text, as text */
@@ -403,7 +403,7 @@ export function absErrorQuestion(random: Random): RealsRaceQuestion | null {
         { latex: commaLatex(approximation), error: 'error-meaning' as const }
     ]))
     if (!options) return null
-    return build(3, 'abs-error', say(`${math(commaLatex(real))} zenbakiaren ordez ${math(commaLatex(approximation))} hartzen da. Zein da errore absolutua?`, `Se toma ${math(commaLatex(approximation))} en lugar de ${math(commaLatex(real))}. ¿Cuál es el error absoluto?`, `نأخذ ${math(commaLatex(approximation))} بدل ${math(commaLatex(real))}. ما الخطأ المطلق؟`), options, decimalFraction(error), same(`|${commaLatex(real)}-${commaLatex(approximation)}|=${commaLatex(error)}`), { kind: 'abs-error', real, approximation, error })
+    return build(3, 'abs-error', say(`${math(commaLatex(real))} zenbakiaren ordez ${math(commaLatex(approximation))} hartzen da. Zein da errore absolutua?`, `Se toma ${math(commaLatex(approximation))} en lugar de ${math(commaLatex(real))}. ¿Cuál es el error absoluto?`, `نأخذ ${math(commaLatex(approximation))} بدل ${math(commaLatex(real))}. ما الخطأ المطلق؟`, `We use ${math(commaLatex(approximation))} instead of ${math(commaLatex(real))}. What is the absolute error?`), options, decimalFraction(error), same(`|${commaLatex(real)}-${commaLatex(approximation)}|=${commaLatex(error)}`), { kind: 'abs-error', real, approximation, error })
 }
 
 function scientificQuestion(random: Random, tier: Tier): RealsRaceQuestion | null {
@@ -418,7 +418,7 @@ function scientificQuestion(random: Random, tier: Tier): RealsRaceQuestion | nul
     if (random() < 0.5) {
         const options = pickOptions(random, numberChoice(exponent, 'calculation'), [numberChoice(-exponent, 'exponent-sign'), numberChoice(exponent + 1, 'exponent-count'), numberChoice(exponent - 1, 'exponent-count'), numberChoice(exponent < 0 ? exponent + significant.length : exponent - significant.length + 1, 'mantissa')])
         if (!options) return null
-        return build(3, 'sci-exponent', say(`${math(`${written}=${commaLatex(mantissa)}\\cdot 10^{\\,?}`)} Zein da berretzailea?`, `${math(`${written}=${commaLatex(mantissa)}\\cdot 10^{\\,?}`)} ¿Cuál es el exponente?`, `${math(`${written}=${commaLatex(mantissa)}\\cdot 10^{\\,?}`)} ما الأس؟`), options, fraction(exponent), same(`${written}=${scientificLatex(scientific)}`), { kind: 'scientific', text, mantissa, exponent })
+        return build(3, 'sci-exponent', say(`${math(`${written}=${commaLatex(mantissa)}\\cdot 10^{\\,?}`)} Zein da berretzailea?`, `${math(`${written}=${commaLatex(mantissa)}\\cdot 10^{\\,?}`)} ¿Cuál es el exponente?`, `${math(`${written}=${commaLatex(mantissa)}\\cdot 10^{\\,?}`)} ما الأس؟`, `${math(`${written}=${commaLatex(mantissa)}\\cdot 10^{\\,?}`)} What is the exponent?`), options, fraction(exponent), same(`${written}=${scientificLatex(scientific)}`), { kind: 'scientific', text, mantissa, exponent })
     }
     const wrongs: Choice[] = [
         { latex: scientificLatex({ mantissa, exponent: -exponent }), error: 'exponent-sign' },
@@ -428,7 +428,7 @@ function scientificQuestion(random: Random, tier: Tier): RealsRaceQuestion | nul
     ]
     const options = pickOptions(random, { latex: scientificLatex(scientific), error: null }, shuffle(random, wrongs))
     if (!options) return null
-    return build(3, 'scientific', say(`Idatzi ${math(written)} idazkera zientifikoan.`, `Escribe ${math(written)} en notación científica.`, `اكتب ${math(written)} بالترميز العلمي.`), options, null, same(`${written}=${scientificLatex(scientific)}`), { kind: 'scientific', text, mantissa, exponent })
+    return build(3, 'scientific', say(`Idatzi ${math(written)} idazkera zientifikoan.`, `Escribe ${math(written)} en notación científica.`, `اكتب ${math(written)} بالترميز العلمي.`, `Write ${math(written)} in scientific notation.`), options, null, same(`${written}=${scientificLatex(scientific)}`), { kind: 'scientific', text, mantissa, exponent })
 }
 
 function fromSci(mantissa: string, exponent: number): string {
@@ -493,7 +493,7 @@ function simplifyQuestion(random: Random): RealsRaceQuestion | null {
     if (simplifySqrt(radicand).outside !== outside) return null
     const options = pickOptions(random, numberChoice(outside, 'calculation'), shuffle(random, [numberChoice(outside * outside, 'radical-pairs'), numberChoice(radicand / inside / 2, 'root-guess'), ...near(outside)]).filter((item) => Number(item.latex) > 0 && Number.isInteger(Number(item.latex))))
     if (!options) return null
-    return build(4, 'simplify', say(`${math(`\\sqrt{${radicand}}=a\\sqrt{${inside}}`)}. Zenbat da $a$?`, `${math(`\\sqrt{${radicand}}=a\\sqrt{${inside}}`)}. ¿Cuánto vale $a$?`, `${math(`\\sqrt{${radicand}}=a\\sqrt{${inside}}`)}. كم تساوي $a$؟`), options, fraction(outside), same(`\\sqrt{${radicand}}=\\sqrt{${outside * outside}\\cdot ${inside}}=${radicalLatex(outside, inside)}`), { kind: 'simplify', radicand, outside, inside })
+    return build(4, 'simplify', say(`${math(`\\sqrt{${radicand}}=a\\sqrt{${inside}}`)}. Zenbat da $a$?`, `${math(`\\sqrt{${radicand}}=a\\sqrt{${inside}}`)}. ¿Cuánto vale $a$?`, `${math(`\\sqrt{${radicand}}=a\\sqrt{${inside}}`)}. كم تساوي $a$؟`, `${math(`\\sqrt{${radicand}}=a\\sqrt{${inside}}`)}. What is $a$?`), options, fraction(outside), same(`\\sqrt{${radicand}}=\\sqrt{${outside * outside}\\cdot ${inside}}=${radicalLatex(outside, inside)}`), { kind: 'simplify', radicand, outside, inside })
 }
 
 function likeRadicalsQuestion(random: Random, tier: Tier): RealsRaceQuestion | null {
@@ -510,7 +510,7 @@ function likeRadicalsQuestion(random: Random, tier: Tier): RealsRaceQuestion | n
     const term = (item: { coefficient: number; radicand: number }, first: boolean) => `${item.coefficient < 0 ? '-' : first ? '' : '+'}${Math.abs(item.coefficient) === 1 ? '' : Math.abs(item.coefficient)}\\sqrt{${item.radicand}}`
     const statement = terms.map((item, index) => term(item, index === 0)).join('')
     const simplified = terms.map((item, index) => term({ coefficient: item.coefficient * Math.sqrt(item.radicand / inside), radicand: inside }, index === 0)).join('')
-    return build(4, 'like-radicals', say(`${math(`${statement}=a\\sqrt{${inside}}`)}. Zenbat da $a$?`, `${math(`${statement}=a\\sqrt{${inside}}`)}. ¿Cuánto vale $a$?`, `${math(`${statement}=a\\sqrt{${inside}}`)}. كم تساوي $a$؟`), options, fraction(total), same(`${statement}=${simplified}=${radicalLatex(total, inside)}`), { kind: 'like-radicals', terms, inside, total })
+    return build(4, 'like-radicals', say(`${math(`${statement}=a\\sqrt{${inside}}`)}. Zenbat da $a$?`, `${math(`${statement}=a\\sqrt{${inside}}`)}. ¿Cuánto vale $a$?`, `${math(`${statement}=a\\sqrt{${inside}}`)}. كم تساوي $a$؟`, `${math(`${statement}=a\\sqrt{${inside}}`)}. What is $a$?`), options, fraction(total), same(`${statement}=${simplified}=${radicalLatex(total, inside)}`), { kind: 'like-radicals', terms, inside, total })
 }
 
 function radicalProductQuestion(random: Random): RealsRaceQuestion | null {
@@ -579,27 +579,27 @@ export function realsParTime(circuit: number): number {
 }
 
 export const realsRaceErrorTips: Record<RealsRaceError, LocalizedText> = {
-    added: say('Ez batu zenbakitzaileak eta izendatzaileak: lehenik izendatzaile komuna.', 'No sumes numeradores y denominadores: primero, denominador común.', 'لا تجمع البسوط والمقامات: أولًا المقام المشترك.'),
-    'no-flip': say('Zatitzeko, biderkatu bigarrenaren alderantzizkoaz (gurutzean).', 'Para dividir, multiplica por el inverso del segundo (en cruz).', 'للقسمة اضرب في مقلوب الثاني (تبادليًا).'),
-    'negative-power': say('Berretzaile negatiboak ez du zenbakia negatibo bihurtzen: alderantzizkoa ematen du.', 'Un exponente negativo no hace negativo el número: da el inverso.', 'الأس السالب لا يجعل العدد سالبًا: بل يعطي المقلوب.'),
-    'no-inverse': say('Berretzaile negatiboa: lehenik oinarriaren alderantzizkoa, gero berretu.', 'Exponente negativo: primero el inverso de la base, después la potencia.', 'الأس السالب: أولًا مقلوب الأساس ثم القوة.'),
-    'exponents-multiplied': say('Oinarri bereko berreturak biderkatzean, berretzaileak batu egiten dira (ez biderkatu).', 'Al multiplicar potencias de la misma base, los exponentes se suman (no se multiplican).', 'عند ضرب قوى لها الأساس نفسه تُجمع الأسس (لا تُضرب).'),
-    'exponent-sign': say('Zaindu berretzailearen zeinua: zatitzean kendu egiten da, eta zenbaki txikiek berretzaile negatiboa dute.', 'Cuida el signo del exponente: al dividir se resta, y los números pequeños tienen exponente negativo.', 'انتبه لإشارة الأس: عند القسمة يُطرح، والأعداد الصغيرة أسها سالب.'),
-    'denominator-factors': say('Begiratu izendatzaile laburtezina: 2 eta 5 bakarrik → zehatza; 2 eta 5 gabe → hutsa; nahastuta → mistoa.', 'Mira el denominador irreducible: solo 2 y 5 → exacto; sin 2 ni 5 → puro; mezclados → mixto.', 'انظر إلى المقام بعد الاختزال: 2 و5 فقط ← منتهٍ؛ بلا 2 ولا 5 ← دوري بحت؛ مختلط ← دوري مختلط.'),
-    'period-place': say('Periodoa errepikatzen den zifra-taldea da, eta komaren ondoren berehala hasten den ala ez begiratu.', 'El periodo es el grupo de cifras que se repite; mira si empieza justo después de la coma o no.', 'الدور هو مجموعة الأرقام المتكررة؛ انظر هل تبدأ بعد الفاصلة مباشرة أم لا.'),
-    'nines-zeros': say('Izendatzailea: 9 bat periodoko zifra bakoitzeko eta 0 bat aurreperiodoko bakoitzeko. Hamartar zehatzak: 10, 100, 1000…', 'Denominador: un 9 por cada cifra del periodo y un 0 por cada cifra del anteperiodo. Decimales exactos: 10, 100, 1000…', 'المقام: 9 لكل رقم في الدور و0 لكل رقم قبله. والعشري المنتهي: 10 أو 100 أو 1000…'),
-    'forgot-subtract': say('Zenbakitzailea: zifra guztiak ken periodoaren aurretik daudenak.', 'Numerador: todas las cifras menos las que hay antes del periodo.', 'البسط: كل الأرقام ناقص الأرقام التي قبل الدور.'),
-    'irrational-set': say('Zatiki gisa idatz daitekeena arrazionala da: hamartar periodikoak eta karratu perfektuen erroak ere bai.', 'Lo que se puede escribir como fracción es racional: también los decimales periódicos y las raíces de cuadrados perfectos.', 'ما يمكن كتابته كسرًا نسبي: وكذلك العشري الدوري وجذور المربعات الكاملة.'),
-    bracket: say('Kortxetea [ ]: muturra barne (≤). Parentesia ( ): muturra kanpo (<).', 'Corchete [ ]: el extremo está incluido (≤). Paréntesis ( ): no lo está (<).', 'القوس المعقوف [ ]: الطرف داخل (≤). والقوس العادي ( ): الطرف خارج (<).'),
-    endpoints: say('Begiratu norabidea: $x>a$ eskuinera doa, $(a,\\,+\\infty)$; $x<a$ ezkerrera, $(-\\infty,\\,a)$.', 'Mira la dirección: $x>a$ va hacia la derecha, $(a,\\,+\\infty)$; $x<a$ hacia la izquierda, $(-\\infty,\\,a)$.', 'انظر إلى الاتجاه: $x>a$ نحو اليمين $(a,\\,+\\infty)$؛ و$x<a$ نحو اليسار $(-\\infty,\\,a)$.'),
-    'root-guess': say('Erroa ez da zatiketa: bilatu zein zenbaki berretuta ematen duen errokizuna.', 'La raíz no es una división: busca qué número elevado da el radicando.', 'الجذر ليس قسمة: ابحث عن العدد الذي إذا رُفع أعطى ما تحت الجذر.'),
-    truncated: say('Biribiltzean, kentzen den lehen zifra 5 edo handiagoa bada, gehitu 1 azken zifrari.', 'Al redondear, si la primera cifra suprimida es 5 o mayor, suma 1 a la última cifra.', 'عند التقريب إذا كان أول رقم محذوف 5 أو أكثر فأضف 1 إلى آخر رقم.'),
-    'wrong-place': say('Begiratu zein ordenaraino biribildu behar den: hamarrenak (1), ehunenak (2), milarenak (3).', 'Mira hasta qué orden hay que redondear: décimas (1), centésimas (2), milésimas (3).', 'انظر إلى أي منزلة نقرّب: الأعشار (1) والأجزاء من مئة (2) والأجزاء من ألف (3).'),
-    'error-meaning': say('Errore absolutua bi zenbakien arteko distantzia da: |benetakoa − hurbilketa|.', 'El error absoluto es la distancia entre los dos números: |real − aproximación|.', 'الخطأ المطلق هو المسافة بين العددين: |الحقيقي − التقريب|.'),
-    'exponent-count': say('Zenbatu koma zenbat tokitan mugitzen den 1 eta 10 arteko zenbaki bat lortu arte.', 'Cuenta cuántos lugares se mueve la coma hasta dejar un número entre 1 y 10.', 'عُدّ كم منزلة تتحرك الفاصلة حتى يبقى عدد بين 1 و10.'),
-    mantissa: say('Idazkera zientifikoan, komaren aurretik zero ez den zifra bakarra: 1 ≤ a < 10.', 'En notación científica, una sola cifra distinta de cero delante de la coma: 1 ≤ a < 10.', 'في الترميز العلمي رقم واحد غير الصفر قبل الفاصلة: 1 ≤ a < 10.'),
-    'radical-pairs': say('Bikote bakoitzetik faktore bat ateratzen da: √36 = 6, ez 36.', 'De cada pareja sale un solo factor: √36 = 6, no 36.', 'من كل زوج يخرج عامل واحد: √36 = 6 وليس 36.'),
-    'unlike-radicals': say('Lehenik sinplifikatu erradikalak; errokizun bera dutenean bakarrik batzen dira koefizienteak.', 'Primero simplifica los radicales; solo se suman los coeficientes cuando tienen el mismo radicando.', 'بسّط الجذريات أولًا؛ ولا تُجمع المعاملات إلا إذا تساوى ما تحت الجذر.'),
-    'forgot-root': say('√a · √b = √(a · b): biderkatu eta gero atera erroa.', '√a · √b = √(a · b): multiplica y después saca la raíz.', '√a · √b = √(a · b): اضرب ثم خذ الجذر.'),
-    calculation: say('Berrikusi kalkulua urratsez urrats.', 'Revisa el cálculo paso a paso.', 'راجع الحساب خطوة بخطوة.')
+    added: say('Ez batu zenbakitzaileak eta izendatzaileak: lehenik izendatzaile komuna.', 'No sumes numeradores y denominadores: primero, denominador común.', 'لا تجمع البسوط والمقامات: أولًا المقام المشترك.', 'Don\'t add the numerators and denominators: first, find a common denominator.'),
+    'no-flip': say('Zatitzeko, biderkatu bigarrenaren alderantzizkoaz (gurutzean).', 'Para dividir, multiplica por el inverso del segundo (en cruz).', 'للقسمة اضرب في مقلوب الثاني (تبادليًا).', 'To divide, multiply by the reciprocal of the second fraction (cross-multiply).'),
+    'negative-power': say('Berretzaile negatiboak ez du zenbakia negatibo bihurtzen: alderantzizkoa ematen du.', 'Un exponente negativo no hace negativo el número: da el inverso.', 'الأس السالب لا يجعل العدد سالبًا: بل يعطي المقلوب.', 'A negative exponent does not make the number negative: it gives the reciprocal.'),
+    'no-inverse': say('Berretzaile negatiboa: lehenik oinarriaren alderantzizkoa, gero berretu.', 'Exponente negativo: primero el inverso de la base, después la potencia.', 'الأس السالب: أولًا مقلوب الأساس ثم القوة.', 'Negative exponent: first take the reciprocal of the base, then the power.'),
+    'exponents-multiplied': say('Oinarri bereko berreturak biderkatzean, berretzaileak batu egiten dira (ez biderkatu).', 'Al multiplicar potencias de la misma base, los exponentes se suman (no se multiplican).', 'عند ضرب قوى لها الأساس نفسه تُجمع الأسس (لا تُضرب).', 'When multiplying powers with the same base, the exponents are added (not multiplied).'),
+    'exponent-sign': say('Zaindu berretzailearen zeinua: zatitzean kendu egiten da, eta zenbaki txikiek berretzaile negatiboa dute.', 'Cuida el signo del exponente: al dividir se resta, y los números pequeños tienen exponente negativo.', 'انتبه لإشارة الأس: عند القسمة يُطرح، والأعداد الصغيرة أسها سالب.', 'Watch the sign of the exponent: when dividing, you subtract the exponents, and small numbers have a negative exponent.'),
+    'denominator-factors': say('Begiratu izendatzaile laburtezina: 2 eta 5 bakarrik → zehatza; 2 eta 5 gabe → hutsa; nahastuta → mistoa.', 'Mira el denominador irreducible: solo 2 y 5 → exacto; sin 2 ni 5 → puro; mezclados → mixto.', 'انظر إلى المقام بعد الاختزال: 2 و5 فقط ← منتهٍ؛ بلا 2 ولا 5 ← دوري بحت؛ مختلط ← دوري مختلط.', 'Look at the denominator in its simplest form: only 2 and 5 → terminating; neither 2 nor 5 → pure recurring; a mix of both → mixed recurring.'),
+    'period-place': say('Periodoa errepikatzen den zifra-taldea da, eta komaren ondoren berehala hasten den ala ez begiratu.', 'El periodo es el grupo de cifras que se repite; mira si empieza justo después de la coma o no.', 'الدور هو مجموعة الأرقام المتكررة؛ انظر هل تبدأ بعد الفاصلة مباشرة أم لا.', 'The recurring part is the group of digits that repeats; check whether it starts right after the decimal point or not.'),
+    'nines-zeros': say('Izendatzailea: 9 bat periodoko zifra bakoitzeko eta 0 bat aurreperiodoko bakoitzeko. Hamartar zehatzak: 10, 100, 1000…', 'Denominador: un 9 por cada cifra del periodo y un 0 por cada cifra del anteperiodo. Decimales exactos: 10, 100, 1000…', 'المقام: 9 لكل رقم في الدور و0 لكل رقم قبله. والعشري المنتهي: 10 أو 100 أو 1000…', 'Denominator: a 9 for each digit in the recurring part and a 0 for each digit in the non-recurring part. Terminating decimals: 10, 100, 1000…'),
+    'forgot-subtract': say('Zenbakitzailea: zifra guztiak ken periodoaren aurretik daudenak.', 'Numerador: todas las cifras menos las que hay antes del periodo.', 'البسط: كل الأرقام ناقص الأرقام التي قبل الدور.', 'Numerator: all the digits except those before the recurring part.'),
+    'irrational-set': say('Zatiki gisa idatz daitekeena arrazionala da: hamartar periodikoak eta karratu perfektuen erroak ere bai.', 'Lo que se puede escribir como fracción es racional: también los decimales periódicos y las raíces de cuadrados perfectos.', 'ما يمكن كتابته كسرًا نسبي: وكذلك العشري الدوري وجذور المربعات الكاملة.', 'Anything that can be written as a fraction is rational: this includes recurring decimals and the square roots of perfect squares.'),
+    bracket: say('Kortxetea [ ]: muturra barne (≤). Parentesia ( ): muturra kanpo (<).', 'Corchete [ ]: el extremo está incluido (≤). Paréntesis ( ): no lo está (<).', 'القوس المعقوف [ ]: الطرف داخل (≤). والقوس العادي ( ): الطرف خارج (<).', 'Square bracket [ ]: the endpoint is included (≤). Round bracket ( ): it is not included (<).'),
+    endpoints: say('Begiratu norabidea: $x>a$ eskuinera doa, $(a,\\,+\\infty)$; $x<a$ ezkerrera, $(-\\infty,\\,a)$.', 'Mira la dirección: $x>a$ va hacia la derecha, $(a,\\,+\\infty)$; $x<a$ hacia la izquierda, $(-\\infty,\\,a)$.', 'انظر إلى الاتجاه: $x>a$ نحو اليمين $(a,\\,+\\infty)$؛ و$x<a$ نحو اليسار $(-\\infty,\\,a)$.', 'Look at the direction: $x>a$ goes to the right, $(a,\\,+\\infty)$; $x<a$ goes to the left, $(-\\infty,\\,a)$.'),
+    'root-guess': say('Erroa ez da zatiketa: bilatu zein zenbaki berretuta ematen duen errokizuna.', 'La raíz no es una división: busca qué número elevado da el radicando.', 'الجذر ليس قسمة: ابحث عن العدد الذي إذا رُفع أعطى ما تحت الجذر.', 'A root is not a division: find which number, raised to the right power, gives the radicand.'),
+    truncated: say('Biribiltzean, kentzen den lehen zifra 5 edo handiagoa bada, gehitu 1 azken zifrari.', 'Al redondear, si la primera cifra suprimida es 5 o mayor, suma 1 a la última cifra.', 'عند التقريب إذا كان أول رقم محذوف 5 أو أكثر فأضف 1 إلى آخر رقم.', 'When rounding, if the first digit dropped is 5 or more, add 1 to the last digit you keep.'),
+    'wrong-place': say('Begiratu zein ordenaraino biribildu behar den: hamarrenak (1), ehunenak (2), milarenak (3).', 'Mira hasta qué orden hay que redondear: décimas (1), centésimas (2), milésimas (3).', 'انظر إلى أي منزلة نقرّب: الأعشار (1) والأجزاء من مئة (2) والأجزاء من ألف (3).', 'Check which place to round to: tenths (1), hundredths (2), thousandths (3).'),
+    'error-meaning': say('Errore absolutua bi zenbakien arteko distantzia da: |benetakoa − hurbilketa|.', 'El error absoluto es la distancia entre los dos números: |real − aproximación|.', 'الخطأ المطلق هو المسافة بين العددين: |الحقيقي − التقريب|.', 'The absolute error is the distance between the two numbers: |real − approximation|.'),
+    'exponent-count': say('Zenbatu koma zenbat tokitan mugitzen den 1 eta 10 arteko zenbaki bat lortu arte.', 'Cuenta cuántos lugares se mueve la coma hasta dejar un número entre 1 y 10.', 'عُدّ كم منزلة تتحرك الفاصلة حتى يبقى عدد بين 1 و10.', 'Count how many places the decimal point moves until you have a number between 1 and 10.'),
+    mantissa: say('Idazkera zientifikoan, komaren aurretik zero ez den zifra bakarra: 1 ≤ a < 10.', 'En notación científica, una sola cifra distinta de cero delante de la coma: 1 ≤ a < 10.', 'في الترميز العلمي رقم واحد غير الصفر قبل الفاصلة: 1 ≤ a < 10.', 'In scientific notation, a single non-zero digit before the decimal point: 1 ≤ a < 10.'),
+    'radical-pairs': say('Bikote bakoitzetik faktore bat ateratzen da: √36 = 6, ez 36.', 'De cada pareja sale un solo factor: √36 = 6, no 36.', 'من كل زوج يخرج عامل واحد: √36 = 6 وليس 36.', 'One factor comes out of each pair: √36 = 6, not 36.'),
+    'unlike-radicals': say('Lehenik sinplifikatu erradikalak; errokizun bera dutenean bakarrik batzen dira koefizienteak.', 'Primero simplifica los radicales; solo se suman los coeficientes cuando tienen el mismo radicando.', 'بسّط الجذريات أولًا؛ ولا تُجمع المعاملات إلا إذا تساوى ما تحت الجذر.', 'First simplify the radicals; you only add the coefficients when they have the same radicand.'),
+    'forgot-root': say('√a · √b = √(a · b): biderkatu eta gero atera erroa.', '√a · √b = √(a · b): multiplica y después saca la raíz.', '√a · √b = √(a · b): اضرب ثم خذ الجذر.', '√a · √b = √(a · b): multiply first and then take the root.'),
+    calculation: say('Berrikusi kalkulua urratsez urrats.', 'Revisa el cálculo paso a paso.', 'راجع الحساب خطوة بخطوة.', 'Check the calculation step by step.')
 }

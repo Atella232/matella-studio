@@ -11,6 +11,7 @@ export function NaturaCoursesPage() {
         switch (i18n.language) {
             case 'eu': return course.nameEu
             case 'ar': return course.nameAr
+            case 'en': return course.nameEn
             default: return course.name
         }
     }
@@ -19,6 +20,7 @@ export function NaturaCoursesPage() {
         switch (i18n.language) {
             case 'eu': return course.descriptionEu
             case 'ar': return course.descriptionAr
+            case 'en': return course.descriptionEn
             default: return course.description
         }
     }
@@ -28,7 +30,9 @@ export function NaturaCoursesPage() {
             ? 'اختر المرحلة الدراسية للدخول الى محتوى العلوم الطبيعية.'
             : i18n.language === 'eu'
                 ? 'Aukeratu ikasturtea Naturako edukietara sartzeko.'
-                : 'Elige el curso para entrar en los contenidos de Natura.'
+                : i18n.language === 'en'
+                    ? 'Choose a course to open its Natural Sciences content.'
+                    : 'Elige el curso para entrar en los contenidos de Natura.'
 
     return (
         <div className="courses-page">

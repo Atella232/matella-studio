@@ -1,4 +1,5 @@
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
+import { decimalSeparatorFor } from '../../utils/numberFormat'
 import { Figure } from '../dbh2-zatikiak-prototype/figures'
 import { Label } from '../dbh2-funtzioak-v2/plane'
 
@@ -24,10 +25,10 @@ const MINT = '#d6eddf'
 
 type Point = [number, number]
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language, text)
-/** A number written with the comma, shown with the point in Arabic */
-const num = (language: UnitLanguage, text: string) => (language === 'ar' ? text.replace(/,/g, '.') : text)
+/** A number written with the comma, shown with the point in Arabic and English */
+const num = (language: UnitLanguage, text: string) => text.replace(/,/g, language === 'ar' ? '.' : decimalSeparatorFor(language))
 const points = (list: Point[]) => list.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ')
 const midpoint = ([ax, ay]: Point, [bx, by]: Point): Point => [(ax + bx) / 2, (ay + by) / 2]
 /** Triangle with base on the x axis from `left`, given the three side lengths (base = c) and a scale */
@@ -117,7 +118,7 @@ export function SquaresFigure({ language }: { language: UnitLanguage }) {
     const a: Point = [190 + 4 * u, 200]
     const b: Point = [190, 200 - 3 * u]
     return (
-        <Figure height={340} label={pick(language, say('3, 4 eta 5 aldeko triangeluaren aldeetako karratuak: 9 + 16 = 25', 'Los cuadrados sobre los lados del triángulo de lados 3, 4 y 5: 9 + 16 = 25', 'المربعات على أضلاع المثلث 3 و4 و5: 9 + 16 = 25'))}>
+        <Figure height={340} label={pick(language, say('3, 4 eta 5 aldeko triangeluaren aldeetako karratuak: 9 + 16 = 25', 'Los cuadrados sobre los lados del triángulo de lados 3, 4 y 5: 9 + 16 = 25', 'المربعات على أضلاع المثلث 3 و4 و5: 9 + 16 = 25', 'The squares on the sides of the triangle with sides 3, 4 and 5: 9 + 16 = 25'))}>
             <SideSquare a={c} b={a} away={b} n={4} fill={STAGE_TINT} label="16" sub="4²" />
             <SideSquare a={b} b={c} away={a} n={3} fill={SOFT} label="9" sub="3²" />
             <SideSquare a={a} b={b} away={c} n={5} fill={ROSE} label="25" sub="5²" />
@@ -126,8 +127,8 @@ export function SquaresFigure({ language }: { language: UnitLanguage }) {
 
             <Formula x={560} y={120} size={24} color={STAGE}>9 + 16 = 25</Formula>
             <Formula x={560} y={162} size={24} color={SECOND}>3² + 4² = 5²</Formula>
-            <Caption x={560} y={210} language={language} text={say('Karratu handia =', 'Cuadrado grande =', 'المربع الكبير =')} color={INK} size={15} />
-            <Caption x={560} y={234} language={language} text={say('beste bien batura', 'suma de los otros dos', 'مجموع المربعين الآخرين')} color={INK} size={15} />
+            <Caption x={560} y={210} language={language} text={say('Karratu handia =', 'Cuadrado grande =', 'المربع الكبير =', 'Large square =')} color={INK} size={15} />
+            <Caption x={560} y={234} language={language} text={say('beste bien batura', 'suma de los otros dos', 'مجموع المربعين الآخرين', 'sum of the other two')} color={INK} size={15} />
         </Figure>
     )
 }
@@ -139,19 +140,19 @@ export function FormulaFigure({ language }: { language: UnitLanguage }) {
     const a: Point = [370, 230]
     const b: Point = [90, 50]
     return (
-        <Figure height={290} label={pick(language, say('Triangelu angeluzuzena: a hipotenusa, b eta c katetoak', 'Triángulo rectángulo: a es la hipotenusa, b y c los catetos', 'مثلث قائم: a الوتر، وb وc الضلعان القائمان'))}>
+        <Figure height={290} label={pick(language, say('Triangelu angeluzuzena: a hipotenusa, b eta c katetoak', 'Triángulo rectángulo: a es la hipotenusa, b y c los catetos', 'مثلث قائم: a الوتر، وb وc الضلعان القائمان', 'Right-angled triangle: a is the hypotenuse, b and c are the legs'))}>
             <polygon points={points([a, b, c])} fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
             <line x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke={SECOND} strokeWidth={5} strokeLinecap="round" />
             <RightMark v={c} a={a} b={b} size={18} />
             <SideLabel a={c} b={a} text="b" offset={-18} size={20} />
             <SideLabel a={b} b={c} text="c" offset={-16} size={20} />
             <SideLabel a={a} b={b} text="a" offset={-18} size={22} color={SECOND} />
-            <Caption x={230} y={272} language={language} text={say('Hipotenusa: angelu zuzenaren aurrean', 'Hipotenusa: frente al ángulo recto', 'الوتر: يقابل الزاوية القائمة')} color={SECOND} size={14} />
+            <Caption x={230} y={272} language={language} text={say('Hipotenusa: angelu zuzenaren aurrean', 'Hipotenusa: frente al ángulo recto', 'الوتر: يقابل الزاوية القائمة', 'Hypotenuse: opposite the right angle')} color={SECOND} size={14} />
 
             <Formula x={560} y={92} size={24} color={SECOND}>a² = b² + c²</Formula>
             <Formula x={560} y={150} size={21} color={STAGE}>b² = a² − c²</Formula>
             <Formula x={560} y={196} size={21} color={STAGE}>c² = a² − b²</Formula>
-            <Caption x={560} y={242} language={language} text={say('Hipotenusa: batu. Katetoa: kendu.', 'Hipotenusa: suma. Cateto: resta.', 'الوتر: اجمع. الضلع القائم: اطرح.')} color={INK} size={14} />
+            <Caption x={560} y={242} language={language} text={say('Hipotenusa: batu. Katetoa: kendu.', 'Hipotenusa: suma. Cateto: resta.', 'الوتر: اجمع. الضلع القائم: اطرح.', 'Hypotenuse: add. Leg: subtract.')} color={INK} size={14} />
         </Figure>
     )
 }
@@ -167,7 +168,7 @@ export function TriplesFigure({ language }: { language: UnitLanguage }) {
     ]
     const base = 165
     return (
-        <Figure height={252} label={pick(language, say('Hirukote pitagorikoak: 3-4-5, haren bikoitza 6-8-10, eta 5-12-13', 'Ternas pitagóricas: 3-4-5, su doble 6-8-10 y 5-12-13', 'الثلاثيات الفيثاغورية: 3-4-5 وضعفها 6-8-10 و5-12-13'))}>
+        <Figure height={252} label={pick(language, say('Hirukote pitagorikoak: 3-4-5, haren bikoitza 6-8-10, eta 5-12-13', 'Ternas pitagóricas: 3-4-5, su doble 6-8-10 y 5-12-13', 'الثلاثيات الفيثاغورية: 3-4-5 وضعفها 6-8-10 و5-12-13', 'Pythagorean triples: 3-4-5, its double 6-8-10 and 5-12-13'))}>
             {shapes.map((shape) => {
                 const c: Point = [shape.x, base]
                 const a: Point = [shape.x + shape.legs[0] * u, base]
@@ -185,7 +186,7 @@ export function TriplesFigure({ language }: { language: UnitLanguage }) {
                 )
             })}
             <Formula x={150} y={100} size={22} color={MUTED}>· 2 →</Formula>
-            <Caption y={240} language={language} text={say('Hirukote bat bider edozein zenbaki: beste hirukote bat', 'Una terna por cualquier número: otra terna', 'ثلاثية مضروبة في أي عدد: ثلاثية أخرى')} size={14} />
+            <Caption y={240} language={language} text={say('Hirukote bat bider edozein zenbaki: beste hirukote bat', 'Una terna por cualquier número: otra terna', 'ثلاثية مضروبة في أي عدد: ثلاثية أخرى', 'A triple times any number: another triple')} size={14} />
         </Figure>
     )
 }
@@ -201,7 +202,7 @@ export function HypotenuseFigure({ language }: { language: UnitLanguage }) {
     const a2: Point = [440 + 5 * 36, 240]
     const b2: Point = [440, 240 - 3 * 36]
     return (
-        <Figure height={320} label={pick(language, say('Hipotenusa: katetoen karratuak batu eta erro karratua atera', 'La hipotenusa: suma los cuadrados de los catetos y saca la raíz', 'الوتر: اجمع مربعي الضلعين القائمين ثم خذ الجذر'))}>
+        <Figure height={320} label={pick(language, say('Hipotenusa: katetoen karratuak batu eta erro karratua atera', 'La hipotenusa: suma los cuadrados de los catetos y saca la raíz', 'الوتر: اجمع مربعي الضلعين القائمين ثم خذ الجذر', 'Hypotenuse: add the squares of the legs and take the square root'))}>
             <polygon points={points([a, b, c])} fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
             <RightMark v={c} a={a} b={b} />
             <SideLabel a={c} b={a} text="8" offset={-16} />
@@ -218,8 +219,8 @@ export function HypotenuseFigure({ language }: { language: UnitLanguage }) {
             <Formula x={530} y={80} color={STAGE}>3² + 5² = 34</Formula>
             <Formula x={530} y={110} color={SECOND}>{num(language, '√34 ≈ 5,83')}</Formula>
 
-            <Caption x={154} y={300} language={language} text={say('Zehatza', 'Exacta', 'دقيقة')} color={INK} size={14} />
-            <Caption x={530} y={300} language={language} text={say('Hurbildua', 'Aproximada', 'تقريبية')} color={INK} size={14} />
+            <Caption x={154} y={300} language={language} text={say('Zehatza', 'Exacta', 'دقيقة', 'Exact')} color={INK} size={14} />
+            <Caption x={530} y={300} language={language} text={say('Hurbildua', 'Aproximada', 'تقريبية', 'Approximate')} color={INK} size={14} />
         </Figure>
     )
 }
@@ -232,7 +233,7 @@ export function LegFigure({ language }: { language: UnitLanguage }) {
     const a: Point = [50 + 12 * u, 220]
     const b: Point = [50, 220 - 5 * u]
     return (
-        <Figure height={290} label={pick(language, say('Katetoa: hipotenusaren karratuari beste katetoarena kendu', 'Un cateto: al cuadrado de la hipotenusa réstale el del otro cateto', 'الضلع القائم: اطرح مربع الضلع الآخر من مربع الوتر'))}>
+        <Figure height={290} label={pick(language, say('Katetoa: hipotenusaren karratuari beste katetoarena kendu', 'Un cateto: al cuadrado de la hipotenusa réstale el del otro cateto', 'الضلع القائم: اطرح مربع الضلع الآخر من مربع الوتر', 'A leg: subtract the square of the other leg from the square of the hypotenuse'))}>
             <polygon points={points([a, b, c])} fill={MINT} stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
             <RightMark v={c} a={a} b={b} />
             <SideLabel a={c} b={a} text="?" offset={-18} color={SECOND} size={20} />
@@ -242,8 +243,8 @@ export function LegFigure({ language }: { language: UnitLanguage }) {
             <Formula x={520} y={78} size={21} color={STAGE}>13² − 5² = 169 − 25 = 144</Formula>
             <Formula x={520} y={118} size={21} color={GREEN}>√144 = 12  ✓</Formula>
             <Formula x={520} y={182} size={18} color={SECOND}>13² + 5² = 194  ✗</Formula>
-            <Caption x={520} y={214} language={language} text={say('Katetoa hipotenusa baino txikiagoa da', 'El cateto es menor que la hipotenusa', 'الضلع القائم أصغر من الوتر')} color={SECOND} size={14} />
-            <Caption x={176} y={274} language={language} text={say('Ezaguna: hipotenusa eta katetoa', 'Conocidos: hipotenusa y un cateto', 'المعلوم: الوتر وضلع قائم')} size={14} />
+            <Caption x={520} y={214} language={language} text={say('Katetoa hipotenusa baino txikiagoa da', 'El cateto es menor que la hipotenusa', 'الضلع القائم أصغر من الوتر', 'A leg is shorter than the hypotenuse')} color={SECOND} size={14} />
+            <Caption x={176} y={274} language={language} text={say('Ezaguna: hipotenusa eta katetoa', 'Conocidos: hipotenusa y un cateto', 'المعلوم: الوتر وضلع قائم', 'Known: hypotenuse and one leg')} size={14} />
         </Figure>
     )
 }
@@ -252,12 +253,12 @@ export function LegFigure({ language }: { language: UnitLanguage }) {
 
 export function ClassifyFigure({ language }: { language: UnitLanguage }) {
     const kinds = [
-        { x: 15, sides: [7, 5, 6], check: '49 < 25 + 36', name: say('Angelu-zorrotza', 'Acutángulo', 'حاد الزوايا'), color: STAGE, fill: STAGE_TINT },
-        { x: 225, sides: [10, 6, 8], check: '100 = 36 + 64', name: say('Angeluzuzena', 'Rectángulo', 'قائم الزاوية'), color: GREEN, fill: MINT },
-        { x: 495, sides: [8, 4, 5], check: '64 > 16 + 25', name: say('Angelu-kamutsa', 'Obtusángulo', 'منفرج الزاوية'), color: SECOND, fill: ROSE }
+        { x: 15, sides: [7, 5, 6], check: '49 < 25 + 36', name: say('Angelu-zorrotza', 'Acutángulo', 'حاد الزوايا', 'Acute-angled'), color: STAGE, fill: STAGE_TINT },
+        { x: 225, sides: [10, 6, 8], check: '100 = 36 + 64', name: say('Angeluzuzena', 'Rectángulo', 'قائم الزاوية', 'Right-angled'), color: GREEN, fill: MINT },
+        { x: 495, sides: [8, 4, 5], check: '64 > 16 + 25', name: say('Angelu-kamutsa', 'Obtusángulo', 'منفرج الزاوية', 'Obtuse-angled'), color: SECOND, fill: ROSE }
     ]
     return (
-        <Figure height={290} label={pick(language, say('Alde handienaren karratua beste bien karratuen baturarekin konparatu', 'Compara el cuadrado del lado mayor con la suma de los cuadrados de los otros dos', 'قارن مربع الضلع الأكبر بمجموع مربعي الضلعين الآخرين'))}>
+        <Figure height={290} label={pick(language, say('Alde handienaren karratua beste bien karratuen baturarekin konparatu', 'Compara el cuadrado del lado mayor con la suma de los cuadrados de los otros dos', 'قارن مربع الضلع الأكبر بمجموع مربعي الضلعين الآخرين', 'Compare the square of the longest side with the sum of the squares of the other two'))}>
             {kinds.map((kind) => {
                 const [big, b, a] = kind.sides
                 const [p, q, r] = fromSides([kind.x + 10, 190], big, b, a, 24)
@@ -292,7 +293,7 @@ export function IsoscelesHeightFigure({ language }: { language: UnitLanguage }) 
     const eTop: Point = [420 + 20 * e, 220 - 34.64 * e]
     const eFoot: Point = [420 + 20 * e, 220]
     return (
-        <Figure height={300} label={pick(language, say('Altuerak oinarria erdibitzen du eta bi triangelu angeluzuzen sortzen ditu', 'La altura parte la base por la mitad y forma dos triángulos rectángulos', 'الارتفاع ينصّف القاعدة ويكوّن مثلثين قائمين'))}>
+        <Figure height={300} label={pick(language, say('Altuerak oinarria erdibitzen du eta bi triangelu angeluzuzen sortzen ditu', 'La altura parte la base por la mitad y forma dos triángulos rectángulos', 'الارتفاع ينصّف القاعدة ويكوّن مثلثين قائمين', 'The height cuts the base in half and forms two right-angled triangles'))}>
             <polygon points={points([left, right, top])} fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
             <polygon points={points([foot, right, top])} fill={SOFT} stroke="none" />
             <polygon points={points([left, right, top])} fill="none" stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
@@ -314,8 +315,8 @@ export function IsoscelesHeightFigure({ language }: { language: UnitLanguage }) 
             <Formula x={620} y={120} anchor="start" size={15} color={SECOND}>40² − 20²</Formula>
             <Formula x={620} y={146} anchor="start" size={15} color={SECOND}>{num(language, 'h ≈ 34,64')}</Formula>
 
-            <Caption x={120} y={272} language={language} text={say('Isoszelea', 'Isósceles', 'متساوي الساقين')} color={INK} size={14} />
-            <Caption x={492} y={272} language={language} text={say('Aldeberdina', 'Equilátero', 'متساوي الأضلاع')} color={INK} size={14} />
+            <Caption x={120} y={272} language={language} text={say('Isoszelea', 'Isósceles', 'متساوي الساقين', 'Isosceles')} color={INK} size={14} />
+            <Caption x={492} y={272} language={language} text={say('Aldeberdina', 'Equilátero', 'متساوي الأضلاع', 'Equilateral')} color={INK} size={14} />
         </Figure>
     )
 }
@@ -333,7 +334,7 @@ export function RectangleRhombusFigure({ language }: { language: UnitLanguage })
     const leftTip: Point = [rc[0] - 12 * k, 140]
     const rightTip: Point = [rc[0] + 12 * k, 140]
     return (
-        <Figure height={300} label={pick(language, say('Laukizuzenaren diagonala eta erronboaren aldea, biak 5-12-13 triangeluarekin', 'La diagonal del rectángulo y el lado del rombo, los dos con el triángulo 5-12-13', 'قطر المستطيل وضلع المعيّن، كلاهما بالمثلث 5-12-13'))}>
+        <Figure height={300} label={pick(language, say('Laukizuzenaren diagonala eta erronboaren aldea, biak 5-12-13 triangeluarekin', 'La diagonal del rectángulo y el lado del rombo, los dos con el triángulo 5-12-13', 'قطر المستطيل وضلع المعيّن، كلاهما بالمثلث 5-12-13', 'The diagonal of the rectangle and the side of the rhombus, both with the 5-12-13 triangle'))}>
             <rect x={x} y={y} width={12 * s} height={5 * s} fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} />
             <polygon points={points([[x, y + 5 * s], [x + 12 * s, y + 5 * s], [x + 12 * s, y]])} fill={SOFT} />
             <rect x={x} y={y} width={12 * s} height={5 * s} fill="none" stroke={INK} strokeWidth={2.4} />
@@ -343,7 +344,7 @@ export function RectangleRhombusFigure({ language }: { language: UnitLanguage })
             <text x={x + 12 * s + 16} y={y + 2.5 * s + 6} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>5</text>
             <text x={x + 6 * s - 12} y={y + 2.5 * s - 8} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>d</text>
             <Formula x={x + 6 * s} y={228} color={SECOND}>d = √(12² + 5²) = 13</Formula>
-            <Caption x={x + 6 * s} y={272} language={language} text={say('Laukizuzenaren diagonala', 'Diagonal del rectángulo', 'قطر المستطيل')} color={INK} size={14} />
+            <Caption x={x + 6 * s} y={272} language={language} text={say('Laukizuzenaren diagonala', 'Diagonal del rectángulo', 'قطر المستطيل', 'Diagonal of the rectangle')} color={INK} size={14} />
 
             <polygon points={points([leftTip, top, rightTip, bottom])} fill={MINT} stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
             <polygon points={points([rc, rightTip, top])} fill={SOFT} />
@@ -356,7 +357,7 @@ export function RectangleRhombusFigure({ language }: { language: UnitLanguage })
             <text x={rc[0] - 10} y={122} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>5</text>
             <SideLabel a={top} b={rightTip} text="l" offset={16} color={SECOND} size={17} />
             <Formula x={rc[0]} y={238} color={SECOND}>l = √(12² + 5²) = 13</Formula>
-            <Caption x={rc[0]} y={272} language={language} text={say('Diagonal-erdiak: 12 eta 5', 'Semidiagonales: 12 y 5', 'نصفا القطرين: 12 و5')} color={INK} size={14} />
+            <Caption x={rc[0]} y={272} language={language} text={say('Diagonal-erdiak: 12 eta 5', 'Semidiagonales: 12 y 5', 'نصفا القطرين: 12 و5', 'Half-diagonals: 12 and 5')} color={INK} size={14} />
         </Figure>
     )
 }
@@ -378,7 +379,7 @@ export function TrapezoidFigure({ language }: { language: UnitLanguage }) {
     const t: Point = [400 + 6 * k, base - 8 * k]
     const qFoot: Point = [r[0], base]
     return (
-        <Figure height={290} label={pick(language, say('Trapezioaren altuera: oinarrien kendura eta alde zeiharra', 'La altura del trapecio: la diferencia de las bases y el lado oblicuo', 'ارتفاع شبه المنحرف: فرق القاعدتين والضلع المائل'))}>
+        <Figure height={290} label={pick(language, say('Trapezioaren altuera: oinarrien kendura eta alde zeiharra', 'La altura del trapecio: la diferencia de las bases y el lado oblicuo', 'ارتفاع شبه المنحرف: فرق القاعدتين والضلع المائل', 'The height of the trapezium: the difference of the bases and the slanted side'))}>
             <polygon points={points([a, b, c, d])} fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
             <polygon points={points([foot, b, c])} fill={SOFT} />
             <polygon points={points([a, b, c, d])} fill="none" stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
@@ -402,8 +403,8 @@ export function TrapezoidFigure({ language }: { language: UnitLanguage }) {
             <SideLabel a={r} b={q} text="10" offset={14} />
             <text x={qFoot[0] - 12} y={base - 4 * k + 6} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>h</text>
             <Formula x={510} y={258} color={STAGE}>(22 − 10) : 2 = 6</Formula>
-            <Caption x={510} y={284} language={language} text={say('Isoszelea: kendura zati bi', 'Isósceles: la diferencia entre dos', 'متساوي الساقين: الفرق على اثنين')} size={13} />
-            <Caption x={50 + 9.5 * s} y={284} language={language} text={say('Angeluzuzena: oinarrien kendura', 'Rectángulo: la diferencia de las bases', 'القائم: فرق القاعدتين')} size={13} />
+            <Caption x={510} y={284} language={language} text={say('Isoszelea: kendura zati bi', 'Isósceles: la diferencia entre dos', 'متساوي الساقين: الفرق على اثنين', 'Isosceles trapezium: the difference between the two bases')} size={13} />
+            <Caption x={50 + 9.5 * s} y={284} language={language} text={say('Angeluzuzena: oinarrien kendura', 'Rectángulo: la diferencia de las bases', 'القائم: فرق القاعدتين', 'Right trapezium: the difference of the bases')} size={13} />
         </Figure>
     )
 }
@@ -420,7 +421,7 @@ export function ApothemFigure({ language }: { language: UnitLanguage }) {
     const foot = midpoint(v0, v1)
     const centre: Point = [cx, cy]
     return (
-        <Figure height={300} label={pick(language, say('Hexagono erregularraren apotema: erradioa hipotenusa, alde-erdia katetoa', 'La apotema del hexágono regular: el radio es la hipotenusa y medio lado un cateto', 'عامد المسدس المنتظم: نصف القطر وتر ونصف الضلع ضلع قائم'))}>
+        <Figure height={300} label={pick(language, say('Hexagono erregularraren apotema: erradioa hipotenusa, alde-erdia katetoa', 'La apotema del hexágono regular: el radio es la hipotenusa y medio lado un cateto', 'عامد المسدس المنتظم: نصف القطر وتر ونصف الضلع ضلع قائم', 'The apothem of the regular hexagon: the radius is the hypotenuse and half a side is a leg'))}>
             <polygon points={points(hexagon)} fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
             <polygon points={points([centre, foot, v1])} fill={SOFT} stroke={INK} strokeWidth={1.6} />
             <line x1={cx} y1={cy} x2={v1[0]} y2={v1[1]} stroke={STAGE} strokeWidth={3} />
@@ -434,8 +435,8 @@ export function ApothemFigure({ language }: { language: UnitLanguage }) {
 
             <Formula x={530} y={86} size={20} color={SECOND}>{num(language, 'ap = √(10² − 5²) ≈ 8,66')}</Formula>
             <Formula x={530} y={136} size={18} color={STAGE}>{num(language, 'A = 60 · 8,66 : 2 = 259,8')}</Formula>
-            <Caption x={530} y={186} language={language} text={say('Hexagonoan, aldea = erradioa', 'En el hexágono, lado = radio', 'في المسدس: الضلع = نصف القطر')} color={INK} size={14} />
-            <Caption x={530} y={212} language={language} text={say('Azalera = perimetroa · apotema : 2', 'Área = perímetro · apotema : 2', 'المساحة = المحيط · العامد : 2')} size={14} />
+            <Caption x={530} y={186} language={language} text={say('Hexagonoan, aldea = erradioa', 'En el hexágono, lado = radio', 'في المسدس: الضلع = نصف القطر', 'In the hexagon, side = radius')} color={INK} size={14} />
+            <Caption x={530} y={212} language={language} text={say('Azalera = perimetroa · apotema : 2', 'Área = perímetro · apotema : 2', 'المساحة = المحيط · العامد : 2', 'Area = perimeter · apothem : 2')} size={14} />
         </Figure>
     )
 }
@@ -452,7 +453,7 @@ export function ChordFigure({ language }: { language: UnitLanguage }) {
     const right: Point = [cx + 8 * s, lineY]
     const foot: Point = [cx, lineY]
     return (
-        <Figure height={290} label={pick(language, say('Korda: erradioa hipotenusa, zentrorako distantzia eta korda-erdia katetoak', 'Cuerda: el radio es la hipotenusa; la distancia al centro y media cuerda, los catetos', 'الوتر في الدائرة: نصف القطر وتر المثلث، والبعد عن المركز ونصف الوتر ضلعاه'))}>
+        <Figure height={290} label={pick(language, say('Korda: erradioa hipotenusa, zentrorako distantzia eta korda-erdia katetoak', 'Cuerda: el radio es la hipotenusa; la distancia al centro y media cuerda, los catetos', 'الوتر في الدائرة: نصف القطر وتر المثلث، والبعد عن المركز ونصف الوتر ضلعاه', 'Chord: the radius is the hypotenuse; the distance to the centre and half the chord are the legs'))}>
             <circle cx={cx} cy={cy} r={r} fill={PAPER} stroke={INK} strokeWidth={2.4} />
             <line x1={cx - 140} y1={lineY} x2={cx + 140} y2={lineY} stroke={MUTED} strokeWidth={1.6} />
             <polygon points={points([[cx, cy], foot, right])} fill={SOFT} stroke="none" />
@@ -467,8 +468,8 @@ export function ChordFigure({ language }: { language: UnitLanguage }) {
 
             <Formula x={530} y={96} size={20} color={STAGE}>√(10² − 6²) = 8</Formula>
             <Formula x={530} y={140} size={20} color={STAGE}>2 · 8 = 16</Formula>
-            <Caption x={530} y={190} language={language} text={say('Zentrotik kordarako perpendikularrak', 'La perpendicular desde el centro', 'العمود النازل من المركز')} color={INK} size={14} />
-            <Caption x={530} y={214} language={language} text={say('korda erdibitzen du', 'parte la cuerda por la mitad', 'ينصّف الوتر')} color={INK} size={14} />
+            <Caption x={530} y={190} language={language} text={say('Zentrotik kordarako perpendikularrak', 'La perpendicular desde el centro', 'العمود النازل من المركز', 'The perpendicular from the centre')} color={INK} size={14} />
+            <Caption x={530} y={214} language={language} text={say('korda erdibitzen du', 'parte la cuerda por la mitad', 'ينصّف الوتر', 'cuts the chord in half')} color={INK} size={14} />
         </Figure>
     )
 }
@@ -485,7 +486,7 @@ export function TangentFigure({ language }: { language: UnitLanguage }) {
     const sin = 12 / 13
     const t: Point = [o[0] + r * cos, o[1] - r * sin]
     return (
-        <Figure height={290} label={pick(language, say('Ukitzailea erradioarekiko perpendikularra da: OP hipotenusa da', 'La tangente es perpendicular al radio: OP es la hipotenusa', 'المماس عمودي على نصف القطر: OP هو الوتر'))}>
+        <Figure height={290} label={pick(language, say('Ukitzailea erradioarekiko perpendikularra da: OP hipotenusa da', 'La tangente es perpendicular al radio: OP es la hipotenusa', 'المماس عمودي على نصف القطر: OP هو الوتر', 'The tangent is perpendicular to the radius: OP is the hypotenuse'))}>
             <circle cx={o[0]} cy={o[1]} r={r} fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} />
             <polygon points={points([o, t, p])} fill={SOFT} fillOpacity={0.85} stroke="none" />
             <line x1={o[0]} y1={o[1]} x2={t[0]} y2={t[1]} stroke={STAGE} strokeWidth={3} />
@@ -504,7 +505,7 @@ export function TangentFigure({ language }: { language: UnitLanguage }) {
 
             <Formula x={570} y={96} size={20} color={INK}>OP² = r² + PT²</Formula>
             <Formula x={570} y={140} size={20} color={STAGE}>√(5² + 12²) = 13</Formula>
-            <Caption x={570} y={190} language={language} text={say('Angelu zuzena T puntuan', 'Ángulo recto en T', 'زاوية قائمة عند T')} color={INK} size={14} />
+            <Caption x={570} y={190} language={language} text={say('Angelu zuzena T puntuan', 'Ángulo recto en T', 'زاوية قائمة عند T', 'Right angle at T')} color={INK} size={14} />
         </Figure>
     )
 }
@@ -531,7 +532,7 @@ export function BoxDiagonalFigure({ language }: { language: UnitLanguage }) {
     }
     const { a, b, c, d, e, f, g, h } = corners
     return (
-        <Figure height={300} label={pick(language, say('Ortoedroaren diagonala: lehenik oinarriaren diagonala, gero diagonal handia', 'La diagonal del ortoedro: primero la diagonal de la base y luego la del espacio', 'قطر متوازي المستطيلات: أولًا قطر القاعدة ثم القطر الفراغي'))}>
+        <Figure height={300} label={pick(language, say('Ortoedroaren diagonala: lehenik oinarriaren diagonala, gero diagonal handia', 'La diagonal del ortoedro: primero la diagonal de la base y luego la del espacio', 'قطر متوازي المستطيلات: أولًا قطر القاعدة ثم القطر الفراغي', 'The diagonal of the cuboid: first the base diagonal, then the space diagonal'))}>
             <polygon points={points([a, b, c, d])} fill={STAGE_TINT} stroke="none" />
             <line x1={d[0]} y1={d[1]} x2={a[0]} y2={a[1]} stroke={MUTED} strokeWidth={1.6} strokeDasharray="5 4" />
             <line x1={d[0]} y1={d[1]} x2={c[0]} y2={c[1]} stroke={MUTED} strokeWidth={1.6} strokeDasharray="5 4" />
@@ -550,7 +551,7 @@ export function BoxDiagonalFigure({ language }: { language: UnitLanguage }) {
             <Formula x={560} y={96} size={19} color={STAGE}>{num(language, 'd = √(12² + 4²) = √160')}</Formula>
             <Formula x={560} y={140} size={19} color={SECOND}>D = √(160 + 3²) = 13</Formula>
             <Formula x={560} y={196} size={17} color={INK}>D = √(12² + 4² + 3²)</Formula>
-            <Caption x={560} y={236} language={language} text={say('Bi aldiz Pitagoras', 'Dos veces Pitágoras', 'فيثاغورس مرتين')} size={14} />
+            <Caption x={560} y={236} language={language} text={say('Bi aldiz Pitagoras', 'Dos veces Pitágoras', 'فيثاغورس مرتين', 'Pythagoras twice')} size={14} />
         </Figure>
     )
 }
@@ -566,7 +567,7 @@ export function GridFigure({ language }: { language: UnitLanguage }) {
     const b = at(7, 9)
     const corner = at(7, 1)
     return (
-        <Figure height={300} label={pick(language, say('Bi punturen arteko distantzia sarean: 6 eskuinera eta 8 gora, 10', 'Distancia entre dos puntos en la cuadrícula: 6 a la derecha y 8 arriba, 10', 'المسافة بين نقطتين على الشبكة: 6 يمينًا و8 أعلى، 10'))}>
+        <Figure height={300} label={pick(language, say('Bi punturen arteko distantzia sarean: 6 eskuinera eta 8 gora, 10', 'Distancia entre dos puntos en la cuadrícula: 6 a la derecha y 8 arriba, 10', 'المسافة بين نقطتين على الشبكة: 6 يمينًا و8 أعلى، 10', 'Distance between two points on the grid: 6 to the right and 8 up, 10'))}>
             {Array.from({ length: 11 }, (_, index) => (
                 <g key={index}>
                     <line x1={x0 + index * cell} y1={y0} x2={x0 + index * cell} y2={y0 - 10 * cell} stroke={MUTED} strokeWidth={0.7} strokeOpacity={0.5} />
@@ -586,8 +587,8 @@ export function GridFigure({ language }: { language: UnitLanguage }) {
             <SideLabel a={corner} b={b} text="8" offset={-14} color={STAGE} />
 
             <Formula x={560} y={110} size={21} color={SECOND}>√(6² + 8²) = √100 = 10</Formula>
-            <Caption x={560} y={160} language={language} text={say('Zenbatu laukiak:', 'Cuenta los cuadros:', 'عُدّ المربعات:')} color={INK} size={14} />
-            <Caption x={560} y={184} language={language} text={say('horizontalean eta bertikalean', 'en horizontal y en vertical', 'أفقيًا وعموديًا')} color={INK} size={14} />
+            <Caption x={560} y={160} language={language} text={say('Zenbatu laukiak:', 'Cuenta los cuadros:', 'عُدّ المربعات:', 'Count the squares:')} color={INK} size={14} />
+            <Caption x={560} y={184} language={language} text={say('horizontalean eta bertikalean', 'en horizontal y en vertical', 'أفقيًا وعموديًا', 'horizontally and vertically')} color={INK} size={14} />
         </Figure>
     )
 }
@@ -601,7 +602,7 @@ export function LadderFigure({ language }: { language: UnitLanguage }) {
     const foot: Point = [wallX + 2.5 * s, ground]
     const topPoint: Point = [wallX, ground - 6 * s]
     return (
-        <Figure height={300} label={pick(language, say('6,5 m-ko eskailera bat horman 6 m-ko altueran', 'Una escalera de 6,5 m apoyada en la pared a 6 m de altura', 'سلّم طوله 6.5 م مسنود إلى الجدار على ارتفاع 6 م'))}>
+        <Figure height={300} label={pick(language, say('6,5 m-ko eskailera bat horman 6 m-ko altueran', 'Una escalera de 6,5 m apoyada en la pared a 6 m de altura', 'سلّم طوله 6.5 م مسنود إلى الجدار على ارتفاع 6 م', 'A 6.5 m ladder leaning against the wall at a height of 6 m'))}>
             <rect x={wallX - 40} y={40} width={40} height={ground - 40} fill={ROSE} stroke={INK} strokeWidth={2} />
             <line x1={40} y1={ground} x2={330} y2={ground} stroke={INK} strokeWidth={2.4} />
             <line x1={foot[0]} y1={foot[1]} x2={topPoint[0]} y2={topPoint[1]} stroke={SECOND} strokeWidth={6} strokeLinecap="round" />
@@ -615,8 +616,8 @@ export function LadderFigure({ language }: { language: UnitLanguage }) {
 
             <Formula x={530} y={96} size={20} color={STAGE}>{num(language, 'x = √(6,5² − 6²)')}</Formula>
             <Formula x={530} y={136} size={20} color={STAGE}>{num(language, '√(42,25 − 36) = √6,25 = 2,5')}</Formula>
-            <Caption x={530} y={186} language={language} text={say('Eskailera: hipotenusa', 'La escalera: la hipotenusa', 'السلّم: الوتر')} color={SECOND} size={14} />
-            <Caption x={530} y={212} language={language} text={say('Horma eta lurra: katetoak', 'La pared y el suelo: los catetos', 'الجدار والأرض: الضلعان القائمان')} color={STAGE} size={14} />
+            <Caption x={530} y={186} language={language} text={say('Eskailera: hipotenusa', 'La escalera: la hipotenusa', 'السلّم: الوتر', 'The ladder: the hypotenuse')} color={SECOND} size={14} />
+            <Caption x={530} y={212} language={language} text={say('Horma eta lurra: katetoak', 'La pared y el suelo: los catetos', 'الجدار والأرض: الضلعان القائمان', 'The wall and the floor: the legs')} color={STAGE} size={14} />
         </Figure>
     )
 }

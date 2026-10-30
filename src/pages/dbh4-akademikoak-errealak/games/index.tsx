@@ -32,7 +32,7 @@ export function PercentGames({ language, pathname, openGame, completedIds, onCom
             language={language}
             games={hubGames}
             recordsKey={PERCENT_GAME_RECORDS_KEY}
-            title={{ eu: 'Jolastu errealekin eta ehunekoekin', es: 'Juega con reales y porcentajes', ar: 'العب بالأعداد الحقيقية والنسب' }}
+            title={{ eu: 'Jolastu errealekin eta ehunekoekin', es: 'Juega con reales y porcentajes', en: 'Play with real numbers and percentages', ar: 'العب بالأعداد الحقيقية والنسب' }}
             completedIds={completedIds}
             onComplete={onComplete}
             mode={percentGameModeForPath(pathname)}

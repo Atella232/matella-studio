@@ -66,7 +66,7 @@ test('sistemak 4. DBH ak lab: tools, topics and challenge ids', () => {
     for (const tool of systemsLabTools) {
         assert.ok(stages.includes(tool.stage), tool.id)
         assert.ok(topics.includes(tool.lessonTopic), tool.id)
-        for (const language of ['eu', 'es', 'ar'] as const) assert.ok(!tool.observe[language].includes('$'), tool.id)
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) assert.ok(!tool.observe[language].includes('$'), tool.id)
     }
     for (const stage of stages) assert.ok(systemsLabTools.some((tool) => tool.stage === stage), stage)
     for (const topic of topics) assert.ok(systemsLabTools.some((tool) => tool.id === systemsLabToolForTopic[topic]), topic)
@@ -75,7 +75,7 @@ test('sistemak 4. DBH ak lab: tools, topics and challenge ids', () => {
     for (const challenges of [classifyChallenges, substitutionChallenges, circleChallenges, squaresChallenges, halfPlaneChallenges, regionChallenges, mixtureChallenges, shoppingChallenges] as Array<Array<{ id: number; prompt: Record<string, string>; hint: Record<string, string> }>>) {
         for (const challenge of challenges) {
             assert.ok(challenge.id >= 67000 && challenge.id < 68000, `${challenge.id}`)
-            for (const language of ['eu', 'es', 'ar']) {
+            for (const language of ['eu', 'es', 'en', 'ar']) {
                 for (const text of [challenge.prompt[language], challenge.hint[language]]) {
                     for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) {
                         renders(formula)

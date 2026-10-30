@@ -3,6 +3,7 @@ import { MathText } from '../../../components/MathText'
 import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import { Label } from '../../dbh2-funtzioak-v2/plane'
 import {
     alignPair,
@@ -94,9 +95,9 @@ const GREEN = 'var(--success, #267b53)'
 const CARD = 'var(--card, #fffcf6)'
 const MISS = 'var(--coral-tint, #f8ddd5)'
 
-const say = (eu: string, es: string, ar: string) => ({ eu, es, ar })
-/** A number written with the comma, shown with the point in Arabic */
-const local = (language: string, text: string) => (language === 'ar' ? text.replace(/,/g, '.') : text)
+const say = (eu: string, es: string, ar: string, en: string) => ({ eu, es, en, ar })
+/** A number written with the comma, shown with the point in Arabic and English */
+const local = (language: string, text: string) => (language === 'ar' ? text.replace(/,/g, '.') : text.replace(/,/g, decimalSeparatorFor(language)))
 /** {,} in LaTeX becomes the point in Arabic */
 const localLatex = (language: string, latex: string) => (language === 'ar' ? latex.replace(/\{,\}/g, '.') : latex)
 const latexOf = (text: string) => text.replace(/,/g, '{,}')
@@ -115,19 +116,19 @@ export function GridTool(props: LabToolProps) {
     const cell = 22
     const controls = (
         <>
-            <Stepper label={l(say('Zutabeak (hamarrenak)', 'Columnas (décimas)', 'الأعمدة (الأعشار)'))} value={state.tenths} min={0} max={10} onChange={(tenths) => setState((s) => setGrid(s, { tenths }))} language={props.language} />
-            <Stepper label={l(say('Lauki solteak (ehunenak)', 'Cuadritos sueltos (centésimas)', 'المربعات المنفردة (الأجزاء من مئة)'))} value={state.hundredths} min={0} max={state.tenths === 10 ? 0 : 10} onChange={(hundredths) => setState((s) => setGrid(s, { hundredths }))} language={props.language} />
+            <Stepper label={l(say('Zutabeak (hamarrenak)', 'Columnas (décimas)', 'الأعمدة (الأعشار)', 'Columns (tenths)'))} value={state.tenths} min={0} max={10} onChange={(tenths) => setState((s) => setGrid(s, { tenths }))} language={props.language} />
+            <Stepper label={l(say('Lauki solteak (ehunenak)', 'Cuadritos sueltos (centésimas)', 'المربعات المنفردة (الأجزاء من مئة)', 'Single squares (hundredths)'))} value={state.hundredths} min={0} max={state.tenths === 10 ? 0 : 10} onChange={(hundredths) => setState((s) => setGrid(s, { hundredths }))} language={props.language} />
         </>
     )
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={localLatex(props.language, `$${latexOf(text)}=\\frac{${value}}{100}$`)} /></span>
-            <span className="fraction-v2-lab-readout-note">{l(say(`${state.tenths} hamarren eta ${state.hundredths} ehunen = ${value} ehunen`, `${state.tenths} décimas y ${state.hundredths} centésimas = ${value} centésimas`, `${state.tenths} أعشار و${state.hundredths} أجزاء من مئة = ${value} جزءًا من مئة`))}</span>
+            <span className="fraction-v2-lab-readout-note">{l(say(`${state.tenths} hamarren eta ${state.hundredths} ehunen = ${value} ehunen`, `${state.tenths} décimas y ${state.hundredths} centésimas = ${value} centésimas`, `${state.tenths} أعشار و${state.hundredths} أجزاء من مئة = ${value} جزءًا من مئة`, `${state.tenths} tenths and ${state.hundredths} hundredths = ${value} hundredths`))}</span>
         </>
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={gridChallenges} state={state}>
-            <Board height={250} label={l(say('Ehun laukiko sareta', 'Cuadrícula de cien cuadritos', 'شبكة من مئة مربع'))}>
+            <Board height={250} label={l(say('Ehun laukiko sareta', 'Cuadrícula de cien cuadritos', 'شبكة من مئة مربع', 'Grid of 100 squares'))}>
                 {Array.from({ length: 100 }, (_, index) => {
                     const column = Math.floor(index / 10)
                     const row = index % 10
@@ -147,28 +148,28 @@ export function GridTool(props: LabToolProps) {
 export function PlaceTool(props: LabToolProps) {
     const l = useLabText(props.language)
     const [state, setState] = useState<PlaceState>(initialPlaceState)
-    const heads = { eu: ['E', 'H', 'U', 'h', 'e', 'm'], es: ['C', 'D', 'U', 'd', 'c', 'm'], ar: ['مئات', 'عشرات', 'آحاد', 'أعشار', 'ج. من مئة', 'ج. من ألف'] }[props.language]
+    const heads = { eu: ['E', 'H', 'U', 'h', 'e', 'm'], es: ['C', 'D', 'U', 'd', 'c', 'm'], en: ['H', 'T', 'U', 't', 'h', 'th'], ar: ['مئات', 'عشرات', 'آحاد', 'أعشار', 'ج. من مئة', 'ج. من ألف'] }[props.language]
     const weights = ['100', '10', '1', '0,1', '0,01', '0,001']
     const cell = 84
     const x = (index: number) => 40 + index * cell + (index >= 3 ? 20 : 0)
     const parts = state.digits.map((digit, index) => (digit === 0 ? null : writeExact({ units: digit * PLACE_WEIGHTS[index], places: 3 }).replace(/0+$/, '').replace(/,$/, ''))).filter((part): part is string => part !== null)
     const controls = (
         <>
-            <p className="fraction-v2-lab-tip">{l(say('Sakatu ▲ edo ▼ zutabe bakoitzean.', 'Pulsa ▲ o ▼ en cada columna.', 'اضغط ▲ أو ▼ في كل عمود.'))}</p>
+            <p className="fraction-v2-lab-tip">{l(say('Sakatu ▲ edo ▼ zutabe bakoitzean.', 'Pulsa ▲ o ▼ en cada columna.', 'اضغط ▲ أو ▼ في كل عمود.', 'Press ▲ or ▼ on each column.'))}</p>
             <div className="fraction-v2-lab-quick-actions">
-                <button type="button" onClick={() => setState({ digits: [0, 0, 0, 0, 0, 0] })}>{l(say('Hustu', 'Vaciar', 'إفراغ'))}</button>
+                <button type="button" onClick={() => setState({ digits: [0, 0, 0, 0, 0, 0] })}>{l(say('Hustu', 'Vaciar', 'إفراغ', 'Clear'))}</button>
             </div>
         </>
     )
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={localLatex(props.language, `$${latexOf(placeText(state))}${parts.length > 1 ? `=${parts.map(latexOf).join('+')}` : ''}$`)} /></span>
-            <span className="fraction-v2-lab-readout-note">{l(say(`${placeValue(state)} milaren`, `${placeValue(state)} milésimas`, `${placeValue(state)} جزءًا من ألف`))}</span>
+            <span className="fraction-v2-lab-readout-note">{l(say(`${placeValue(state)} milaren`, `${placeValue(state)} milésimas`, `${placeValue(state)} جزءًا من ألف`, `${placeValue(state)} thousandths`))}</span>
         </>
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={placeChallenges} state={state}>
-            <Board height={250} label={l(say('Posizioen taula', 'Tablero de posiciones', 'لوحة المنازل'))}>
+            <Board height={250} label={l(say('Posizioen taula', 'Tablero de posiciones', 'لوحة المنازل', 'Place value chart'))}>
                 {state.digits.map((digit, index) => (
                     <g key={index}>
                         <rect x={x(index)} y={10} width={cell} height={34} fill={index >= 3 ? STAGE_TINT : CARD} stroke={INK} strokeWidth={1.6} />
@@ -187,7 +188,7 @@ export function PlaceTool(props: LabToolProps) {
                     </g>
                 ))}
                 <text x={x(3) - 10} y={134} textAnchor="middle" fontSize={40} fontWeight={700} fill={SECOND}>{local(props.language, ',')}</text>
-                <Label x={320} y={242} textAnchor="middle" fontSize={14} fill={MUTED}>{l(say('Zutabe bakoitzaren balioa', 'Valor de cada columna', 'قيمة كل عمود'))}</Label>
+                <Label x={320} y={242} textAnchor="middle" fontSize={14} fill={MUTED}>{l(say('Zutabe bakoitzaren balioa', 'Valor de cada columna', 'قيمة كل عمود', 'Value of each column'))}</Label>
             </Board>
         </ToolFrame>
     )
@@ -206,23 +207,23 @@ export function CompareTool(props: LabToolProps) {
     const startX = 320 - (aligned.left.length * column) / 2
     const original = [left, right]
     const controls = (
-        <Segmented label={l(say('Bikotea', 'Pareja', 'الزوج'))} value={String(state.pair)} options={comparePairs.map((_, index) => ({ value: String(index), label: `${index + 1}${state.answers[index] === undefined ? '' : state.answers[index] === rightSign(index) ? ' ✓' : ' ✗'}` }))} onChange={(next) => setState((s) => choosePair(s, Number(next)))} />
+        <Segmented label={l(say('Bikotea', 'Pareja', 'الزوج', 'Pair'))} value={String(state.pair)} options={comparePairs.map((_, index) => ({ value: String(index), label: `${index + 1}${state.answers[index] === undefined ? '' : state.answers[index] === rightSign(index) ? ' ✓' : ' ✗'}` }))} onChange={(next) => setState((s) => choosePair(s, Number(next)))} />
     )
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={localLatex(props.language, `$${latexOf(left)}\\ ${answered ?? '\\square'}\\ ${latexOf(right)}$`)} /></span>
             <span className="fraction-v2-lab-readout-note">
                 {answered === undefined
-                    ? l(say('Aukeratu zeinua: <, = edo >.', 'Elige el signo: <, = o >.', 'اختر الإشارة: < أو = أو >.'))
+                    ? l(say('Aukeratu zeinua: <, = edo >.', 'Elige el signo: <, = o >.', 'اختر الإشارة: < أو = أو >.', 'Choose the sign: <, = or >.'))
                     : correct
-                        ? l(say('Zuzena! Begiratu nabarmendutako zutabea.', '¡Correcto! Mira la columna marcada.', 'صحيح! انظر إلى العمود المميّز.'))
-                        : l(say('Ez. Idatzi biak zifra hamartar kopuru berarekin eta konparatu ezkerretik.', 'No. Escribe los dos con las mismas cifras decimales y compara desde la izquierda.', 'لا. اكتب العددين بالأرقام العشرية نفسها وقارن من اليسار.'))}
+                        ? l(say('Zuzena! Begiratu nabarmendutako zutabea.', '¡Correcto! Mira la columna marcada.', 'صحيح! انظر إلى العمود المميّز.', 'Correct! Look at the highlighted column.'))
+                        : l(say('Ez. Idatzi biak zifra hamartar kopuru berarekin eta konparatu ezkerretik.', 'No. Escribe los dos con las mismas cifras decimales y compara desde la izquierda.', 'لا. اكتب العددين بالأرقام العشرية نفسها وقارن من اليسار.', 'No. Write both with the same number of decimal places and compare from the left.'))}
             </span>
         </>
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={compareChallenges} state={state}>
-            <Board height={250} label={l(say('Bi zenbaki zutabeka', 'Dos números en columnas', 'عددان في أعمدة'))}>
+            <Board height={250} label={l(say('Bi zenbaki zutabeka', 'Dos números en columnas', 'عددان في أعمدة', 'Two numbers in columns'))}>
                 {answered !== undefined && aligned.differs !== null && <rect x={startX + aligned.differs * column} y={14} width={column} height={128} rx={8} fill={correct ? STAGE_TINT : MISS} />}
                 {[aligned.left, aligned.right].map((text, row) => (
                     <g key={row}>
@@ -260,11 +261,11 @@ export function ZoomTool(props: LabToolProps) {
     const segment = (x1 - x0) / 10
     const controls = (
         <>
-            <Segmented label={l(say('Zenbakia', 'Número', 'العدد'))} value={String(state.target)} options={zoomTargets.map((item, index) => ({ value: String(index), label: `${local(props.language, item)}${zoomFound(state, index) ? ' ✓' : ''}` }))} onChange={(next) => setState((s) => setZoomTarget(s, Number(next)))} />
+            <Segmented label={l(say('Zenbakia', 'Número', 'العدد', 'Number'))} value={String(state.target)} options={zoomTargets.map((item, index) => ({ value: String(index), label: `${local(props.language, item)}${zoomFound(state, index) ? ' ✓' : ''}` }))} onChange={(next) => setState((s) => setZoomTarget(s, Number(next)))} />
             <div className="fraction-v2-lab-quick-actions">
-                <button type="button" disabled={state.digits.length === 0} onClick={() => setState(zoomOut)}>{l(say('Urrundu', 'Alejar', 'تصغير'))}</button>
+                <button type="button" disabled={state.digits.length === 0} onClick={() => setState(zoomOut)}>{l(say('Urrundu', 'Alejar', 'تصغير', 'Zoom out'))}</button>
             </div>
-            <p className="fraction-v2-lab-tip">{found ? l(say('Aurkitu duzu!', '¡Lo has encontrado!', 'وجدته!')) : l(say('Sakatu zenbakia dagoen zatia.', 'Pulsa el tramo donde está el número.', 'اضغط الجزء الذي فيه العدد.'))}</p>
+            <p className="fraction-v2-lab-tip">{found ? l(say('Aurkitu duzu!', '¡Lo has encontrado!', 'وجدته!', 'You found it!')) : l(say('Sakatu zenbakia dagoen zatia.', 'Pulsa el tramo donde está el número.', 'اضغط الجزء الذي فيه العدد.', 'Press the section where the number is.'))}</p>
         </>
     )
     const readout = (
@@ -272,10 +273,10 @@ export function ZoomTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-main"><MathText text={localLatex(props.language, found ? `$${latexOf(target)}$` : `$${latexOf(writeExact(low))}<${latexOf(target)}<${latexOf(writeExact(high))}$`)} /></span>
             <span className="fraction-v2-lab-readout-note">
                 {state.miss !== null
-                    ? l(say(`Ez dago ${state.miss}. zatian.`, `No está en el tramo ${state.miss}.`, `ليس في الجزء ${state.miss}.`))
+                    ? l(say(`Ez dago ${state.miss}. zatian.`, `No está en el tramo ${state.miss}.`, `ليس في الجزء ${state.miss}.`, `It is not in the interval ${state.miss}.`))
                     : found
-                        ? l(say('Zifra hamartar bakoitza zoom bat izan da.', 'Cada cifra decimal ha sido un zoom.', 'كل رقم عشري كان تكبيرًا.'))
-                        : l(say(`Zatitu 10etan: ${places + 1}. zifra hamartarra.`, `Divide en 10: cifra decimal ${places + 1}.ª`, `قسّم إلى 10: الرقم العشري ${places + 1}.`))}
+                        ? l(say('Zifra hamartar bakoitza zoom bat izan da.', 'Cada cifra decimal ha sido un zoom.', 'كل رقم عشري كان تكبيرًا.', 'Each decimal place was one zoom.'))
+                        : l(say(`Zatitu 10etan: ${places + 1}. zifra hamartarra.`, `Divide en 10: cifra decimal ${places + 1}.ª`, `قسّم إلى 10: الرقم العشري ${places + 1}.`, `Divide into 10: decimal place ${places + 1}`))}
             </span>
         </>
     )
@@ -284,7 +285,7 @@ export function ZoomTool(props: LabToolProps) {
     const segmentValue = (index: number) => writeExact({ units: low.units * 10 + index, places: places + 1 })
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={zoomChallenges} state={state}>
-            <Board height={170} label={l(say('Zenbaki-zuzena zoomarekin', 'Recta numérica con zoom', 'خط الأعداد مع التكبير'))}>
+            <Board height={170} label={l(say('Zenbaki-zuzena zoomarekin', 'Recta numérica con zoom', 'خط الأعداد مع التكبير', 'Number line with zoom'))}>
                 {!found && Array.from({ length: 10 }, (_, index) => (
                     <rect key={index} x={x0 + index * segment} y={52} width={segment} height={64} fill={state.miss === index ? MISS : index % 2 === 0 ? STAGE_TINT : CARD} opacity={0.8} style={{ cursor: 'pointer' }} onClick={() => setState((s) => tapSegment(s, index))} role="button" aria-label={local(props.language, segmentValue(index))} />
                 ))}
@@ -314,7 +315,7 @@ export function RoundingTool(props: LabToolProps) {
     const value = exact(number)
     const { low, high, right } = roundingCandidates(state.number, state.places)
     const pick = state.picks[`${state.number}-${state.places}`]
-    const placeNames = [say('unitateak', 'unidades', 'الآحاد'), say('hamarrenak', 'décimas', 'الأعشار'), say('ehunenak', 'centésimas', 'الأجزاء من مئة')]
+    const placeNames = [say('unitateak', 'unidades', 'الآحاد', 'units'), say('hamarrenak', 'décimas', 'الأعشار', 'tenths'), say('ehunenak', 'centésimas', 'الأجزاء من مئة', 'hundredths')]
     const x0 = 60
     const x1 = 580
     // Position of the number between the two candidates
@@ -323,8 +324,8 @@ export function RoundingTool(props: LabToolProps) {
     const xOf = (fraction: number) => x0 + fraction * (x1 - x0)
     const controls = (
         <>
-            <Segmented label={l(say('Zenbakia', 'Número', 'العدد'))} value={String(state.number)} options={roundingNumbers.map((item, index) => ({ value: String(index), label: local(props.language, item) }))} onChange={(next) => setState((s) => setRoundingNumber(s, Number(next)))} />
-            <Segmented label={l(say('Biribildu', 'Redondear a', 'التقريب إلى'))} value={String(state.places)} options={roundingPlaces(state.number).map((places) => ({ value: String(places), label: l(placeNames[places]) }))} onChange={(next) => setState((s) => setRoundingPlaces(s, Number(next)))} />
+            <Segmented label={l(say('Zenbakia', 'Número', 'العدد', 'Number'))} value={String(state.number)} options={roundingNumbers.map((item, index) => ({ value: String(index), label: local(props.language, item) }))} onChange={(next) => setState((s) => setRoundingNumber(s, Number(next)))} />
+            <Segmented label={l(say('Biribildu', 'Redondear a', 'التقريب إلى', 'Round to'))} value={String(state.places)} options={roundingPlaces(state.number).map((places) => ({ value: String(places), label: l(placeNames[places]) }))} onChange={(next) => setState((s) => setRoundingPlaces(s, Number(next)))} />
         </>
     )
     const readout = (
@@ -332,22 +333,22 @@ export function RoundingTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-main"><MathText text={localLatex(props.language, pick === right ? `$${latexOf(number)}\\approx ${latexOf(writeExact(right === 'low' ? low : high))}$` : `$${latexOf(number)}\\approx\\ ?$`)} /></span>
             <span className="fraction-v2-lab-readout-note">
                 {pick === undefined
-                    ? l(say('Sakatu hurbilen dagoen hautagaia.', 'Pulsa el candidato más cercano.', 'اضغط المرشّح الأقرب.'))
+                    ? l(say('Sakatu hurbilen dagoen hautagaia.', 'Pulsa el candidato más cercano.', 'اضغط المرشّح الأقرب.', 'Press the closest option.'))
                     : pick === right
-                        ? l(say('Zuzena: hurrengo zifrak erabakitzen du (0–4 behera, 5–9 gora).', 'Correcto: decide la cifra siguiente (0–4 abajo, 5–9 arriba).', 'صحيح: يحسم الرقم التالي (0–4 للأسفل، 5–9 للأعلى).'))
-                        : l(say('Ez: begiratu erdiko marra. Zenbakia bestetik hurbilago dago.', 'No: mira la raya del medio. El número está más cerca del otro.', 'لا: انظر إلى خط المنتصف. العدد أقرب إلى الآخر.'))}
+                        ? l(say('Zuzena: hurrengo zifrak erabakitzen du (0–4 behera, 5–9 gora).', 'Correcto: decide la cifra siguiente (0–4 abajo, 5–9 arriba).', 'صحيح: يحسم الرقم التالي (0–4 للأسفل، 5–9 للأعلى).', 'Correct: use the next digit to decide (0–4 down, 5–9 up).'))
+                        : l(say('Ez: begiratu erdiko marra. Zenbakia bestetik hurbilago dago.', 'No: mira la raya del medio. El número está más cerca del otro.', 'لا: انظر إلى خط المنتصف. العدد أقرب إلى الآخر.', 'No: look at the middle mark. The number is closer to the other option.'))}
             </span>
         </>
     )
     const candidate = (side: 'low' | 'high', x: number, text: string) => (
-        <g role="button" aria-label={text} style={{ cursor: 'pointer' }} onClick={() => setState((s) => pickCandidate(s, side))}>
+        <g role="button" aria-label={local(props.language, text)} style={{ cursor: 'pointer' }} onClick={() => setState((s) => pickCandidate(s, side))}>
             <rect x={x - 56} y={138} width={112} height={48} rx={12} fill={pick === side ? (side === right ? GREEN : SECOND) : CARD} stroke={INK} strokeWidth={2} />
             <text x={x} y={170} textAnchor="middle" fontSize={22} fontWeight={700} fill={pick === side ? CARD : INK}>{local(props.language, text)}</text>
         </g>
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={roundingChallenges} state={state}>
-            <Board height={200} label={l(say('Bi hautagaien arteko zuzena', 'La recta entre los dos candidatos', 'المستقيم بين المرشّحين'))}>
+            <Board height={200} label={l(say('Bi hautagaien arteko zuzena', 'La recta entre los dos candidatos', 'المستقيم بين المرشّحين', 'The number line between the two options'))}>
                 <line x1={x0 - 10} x2={x1 + 10} y1={90} y2={90} stroke={INK} strokeWidth={2.4} />
                 {Array.from({ length: 11 }, (_, index) => <line key={index} x1={xOf(index / 10)} x2={xOf(index / 10)} y1={index % 10 === 0 ? 78 : 84} y2={index % 10 === 0 ? 102 : 96} stroke={INK} strokeWidth={index % 10 === 0 ? 2.4 : 1.2} />)}
                 <line x1={xOf(0.5)} x2={xOf(0.5)} y1={60} y2={110} stroke={MUTED} strokeWidth={1.6} strokeDasharray="5 5" />
@@ -371,10 +372,10 @@ export function DivisionTool(props: LabToolProps) {
     const repeated = status === 'periodic' ? remainders[remainders.length - 1] : null
     const controls = (
         <>
-            <Stepper label={l(say('Zatikizuna', 'Dividendo', 'المقسوم'))} value={state.dividend} min={DIVISION_LIMITS.dividend.min} max={DIVISION_LIMITS.dividend.max} onChange={(dividend) => setState((s) => setDivision(s, { dividend }))} language={props.language} />
-            <Stepper label={l(say('Zatitzailea', 'Divisor', 'المقسوم عليه'))} value={state.divisor} min={DIVISION_LIMITS.divisor.min} max={DIVISION_LIMITS.divisor.max} onChange={(divisor) => setState((s) => setDivision(s, { divisor }))} language={props.language} />
+            <Stepper label={l(say('Zatikizuna', 'Dividendo', 'المقسوم', 'Dividend'))} value={state.dividend} min={DIVISION_LIMITS.dividend.min} max={DIVISION_LIMITS.dividend.max} onChange={(dividend) => setState((s) => setDivision(s, { dividend }))} language={props.language} />
+            <Stepper label={l(say('Zatitzailea', 'Divisor', 'المقسوم عليه', 'Divisor'))} value={state.divisor} min={DIVISION_LIMITS.divisor.min} max={DIVISION_LIMITS.divisor.max} onChange={(divisor) => setState((s) => setDivision(s, { divisor }))} language={props.language} />
             <div className="fraction-v2-lab-quick-actions">
-                <button type="button" disabled={status !== 'open' || state.steps >= DIVISION_LIMITS.steps} onClick={() => setState(bringZero)}>{l(say('Jaitsi zero bat', 'Baja un cero', 'أنزل صفرًا'))}</button>
+                <button type="button" disabled={status !== 'open' || state.steps >= DIVISION_LIMITS.steps} onClick={() => setState(bringZero)}>{l(say('Jaitsi zero bat', 'Baja un cero', 'أنزل صفرًا', 'Bring down a zero'))}</button>
             </div>
         </>
     )
@@ -383,16 +384,16 @@ export function DivisionTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-main"><MathText text={localLatex(props.language, `$${state.dividend}\\mathbin{:}${state.divisor}=${latexOf(quotient).replace('…', '\\ldots')}$`)} /></span>
             <span className="fraction-v2-lab-readout-note">
                 {status === 'exact'
-                    ? l(say('Hondarra 0: hamartar zehatza.', 'Resto 0: decimal exacto.', 'الباقي 0: عدد عشري منتهٍ.'))
+                    ? l(say('Hondarra 0: hamartar zehatza.', 'Resto 0: decimal exacto.', 'الباقي 0: عدد عشري منتهٍ.', 'Remainder 0: terminating decimal.'))
                     : status === 'periodic'
-                        ? l(say(`${repeated} hondarra errepikatu da: zifrak beti errepikatuko dira. Periodikoa.`, `Se ha repetido el resto ${repeated}: las cifras se repetirán siempre. Periódico.`, `تكرر الباقي ${repeated}: ستتكرر الأرقام دائمًا. دوري.`))
-                        : l(say('Hondarra ez da 0: jaitsi zero bat.', 'El resto no es 0: baja un cero.', 'الباقي ليس 0: أنزل صفرًا.'))}
+                        ? l(say(`${repeated} hondarra errepikatu da: zifrak beti errepikatuko dira. Periodikoa.`, `Se ha repetido el resto ${repeated}: las cifras se repetirán siempre. Periódico.`, `تكرر الباقي ${repeated}: ستتكرر الأرقام دائمًا. دوري.`, `The remainder ${repeated} has repeated: the digits will repeat forever. Recurring.`))
+                        : l(say('Hondarra ez da 0: jaitsi zero bat.', 'El resto no es 0: baja un cero.', 'الباقي ليس 0: أنزل صفرًا.', 'The remainder is not 0: bring down a zero.'))}
             </span>
         </>
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={divisionChallenges} state={state}>
-            <Board height={90 + remainders.length * 30} label={l(say('Zatiketa luzea', 'La división larga', 'القسمة المطوّلة'))}>
+            <Board height={90 + remainders.length * 30} label={l(say('Zatiketa luzea', 'La división larga', 'القسمة المطوّلة', 'Long division'))}>
                 <text x={150} y={40} textAnchor="end" fontSize={26} fontWeight={700} fill={INK}>{state.dividend}</text>
                 <line x1={170} x2={170} y1={14} y2={50} stroke={INK} strokeWidth={2} />
                 <line x1={170} x2={420} y1={50} y2={50} stroke={INK} strokeWidth={2} />
@@ -419,7 +420,7 @@ export function ShiftTool(props: LabToolProps) {
     const startX = 320 - (chars.length * box) / 2
     const controls = (
         <>
-            <Segmented label={l(say('Zenbakia', 'Número', 'العدد'))} value={String(state.base)} options={shiftBases.map((item, index) => ({ value: String(index), label: local(props.language, item) }))} onChange={(next) => setState((s) => setShiftBase(s, Number(next)))} />
+            <Segmented label={l(say('Zenbakia', 'Número', 'العدد', 'Number'))} value={String(state.base)} options={shiftBases.map((item, index) => ({ value: String(index), label: local(props.language, item) }))} onChange={(next) => setState((s) => setShiftBase(s, Number(next)))} />
             <div className="fraction-v2-lab-quick-actions">
                 <button type="button" disabled={state.shift <= -SHIFT_LIMIT} onClick={() => setState((s) => moveShift(s, -1))}>: 10</button>
                 <button type="button" disabled={state.shift >= SHIFT_LIMIT} onClick={() => setState((s) => moveShift(s, 1))}>· 10</button>
@@ -431,16 +432,16 @@ export function ShiftTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-main"><MathText text={localLatex(props.language, `$${latexOf(base)}${operation}=${latexOf(result)}$`)} /></span>
             <span className="fraction-v2-lab-readout-note">
                 {state.shift === 0
-                    ? l(say('Sakatu · 10 edo : 10.', 'Pulsa · 10 o : 10.', 'اضغط · 10 أو : 10.'))
+                    ? l(say('Sakatu · 10 edo : 10.', 'Pulsa · 10 o : 10.', 'اضغط · 10 أو : 10.', 'Press · 10 or : 10.'))
                     : state.shift > 0
-                        ? l(say(`Koma ${state.shift} toki eskuinera.`, `La coma, ${state.shift} lugares a la derecha.`, `الفاصلة ${state.shift} منازل إلى اليمين.`))
-                        : l(say(`Koma ${-state.shift} toki ezkerrera.`, `La coma, ${-state.shift} lugares a la izquierda.`, `الفاصلة ${-state.shift} منازل إلى اليسار.`))}
+                        ? l(say(`Koma ${state.shift} toki eskuinera.`, `La coma, ${state.shift} lugares a la derecha.`, `الفاصلة ${state.shift} منازل إلى اليمين.`, `The decimal point, ${state.shift} places to the right.`))
+                        : l(say(`Koma ${-state.shift} toki ezkerrera.`, `La coma, ${-state.shift} lugares a la izquierda.`, `الفاصلة ${-state.shift} منازل إلى اليسار.`, `The decimal point, ${-state.shift} places to the left.`))}
             </span>
         </>
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={shiftChallenges} state={state}>
-            <Board height={130} label={l(say('Koma mugitzen da', 'La coma se mueve', 'الفاصلة تتحرك'))}>
+            <Board height={130} label={l(say('Koma mugitzen da', 'La coma se mueve', 'الفاصلة تتحرك', 'The decimal point moves'))}>
                 {chars.map((char, index) => {
                     const comma = char === ','
                     return comma
@@ -469,10 +470,10 @@ export function CommaTool(props: LabToolProps) {
     const placed = placedText(state)
     const controls = (
         <>
-            <Segmented label={l(say('Biderkadura', 'Producto', 'الضرب'))} value={String(state.product)} options={commaProducts.map(([x, y], index) => ({ value: String(index), label: `${local(props.language, x)} · ${local(props.language, y)}${state.solved.includes(index) ? ' ✓' : ''}` }))} onChange={(next) => setState((s) => setCommaProduct(s, Number(next)))} />
-            <Stepper label={l(say('Emaitzaren zifra hamartarrak', 'Cifras decimales del resultado', 'الأرقام العشرية في الناتج'))} value={state.places} min={0} max={5} onChange={(next) => setState((s) => setCommaPlaces(s, next))} language={props.language} />
+            <Segmented label={l(say('Biderkadura', 'Producto', 'الضرب', 'Product'))} value={String(state.product)} options={commaProducts.map(([x, y], index) => ({ value: String(index), label: `${local(props.language, x)} · ${local(props.language, y)}${state.solved.includes(index) ? ' ✓' : ''}` }))} onChange={(next) => setState((s) => setCommaProduct(s, Number(next)))} />
+            <Stepper label={l(say('Emaitzaren zifra hamartarrak', 'Cifras decimales del resultado', 'الأرقام العشرية في الناتج', 'Decimal places in the result'))} value={state.places} min={0} max={5} onChange={(next) => setState((s) => setCommaPlaces(s, next))} language={props.language} />
             <div className="fraction-v2-lab-quick-actions">
-                <button type="button" onClick={() => setState(checkComma)}>{l(say('Egiaztatu', 'Comprobar', 'تحقق'))}</button>
+                <button type="button" onClick={() => setState(checkComma)}>{l(say('Egiaztatu', 'Comprobar', 'تحقق', 'Check'))}</button>
             </div>
         </>
     )
@@ -481,10 +482,10 @@ export function CommaTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-main"><MathText text={localLatex(props.language, `$${latexOf(a)}\\cdot ${latexOf(b)}${solved && state.places === places ? '=' : '\\ \\to\\ '}${latexOf(placed)}$`)} /></span>
             <span className="fraction-v2-lab-readout-note">
                 {state.wrong
-                    ? l(say('Ez. Zenbatu faktore bakoitzaren zifra hamartarrak eta batu.', 'No. Cuenta las cifras decimales de cada factor y súmalas.', 'لا. عُدّ الأرقام العشرية في كل عامل واجمعها.'))
+                    ? l(say('Ez. Zenbatu faktore bakoitzaren zifra hamartarrak eta batu.', 'No. Cuenta las cifras decimales de cada factor y súmalas.', 'لا. عُدّ الأرقام العشرية في كل عامل واجمعها.', 'No. Count the decimal places in each factor and add them.'))
                     : solved && state.places === places
-                        ? l(say(`Zuzena: ${exact(a).places} + ${exact(b).places} = ${places} zifra hamartar.`, `Correcto: ${exact(a).places} + ${exact(b).places} = ${places} cifras decimales.`, `صحيح: ${exact(a).places} + ${exact(b).places} = ${places} أرقام عشرية.`))
-                        : l(say(`Komarik gabe: ${digits}. Non jarri koma?`, `Sin coma: ${digits}. ¿Dónde va la coma?`, `بلا فاصلة: ${digits}. أين توضع الفاصلة؟`))}
+                        ? l(say(`Zuzena: ${exact(a).places} + ${exact(b).places} = ${places} zifra hamartar.`, `Correcto: ${exact(a).places} + ${exact(b).places} = ${places} cifras decimales.`, `صحيح: ${exact(a).places} + ${exact(b).places} = ${places} أرقام عشرية.`, `Correct: ${exact(a).places} + ${exact(b).places} = ${places} decimal places.`))
+                        : l(say(`Komarik gabe: ${digits}. Non jarri koma?`, `Sin coma: ${digits}. ¿Dónde va la coma?`, `بلا فاصلة: ${digits}. أين توضع الفاصلة؟`, `Without the decimal point: ${digits}. Where does the decimal point go?`))}
             </span>
         </>
     )
@@ -497,15 +498,15 @@ export function CommaTool(props: LabToolProps) {
     }
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={commaChallenges} state={state}>
-            <Board height={230} label={l(say('Biderkadura eta koma', 'El producto y la coma', 'الضرب والفاصلة'))}>
+            <Board height={230} label={l(say('Biderkadura eta koma', 'El producto y la coma', 'الضرب والفاصلة', 'The product and the decimal point'))}>
                 {factor(a, 46)}
                 {factor(b, 90)}
                 <text x={200} y={90} textAnchor="middle" fontSize={28} fontWeight={700} fill={INK}>×</text>
                 <line x1={190} x2={330} y1={104} y2={104} stroke={INK} strokeWidth={2.2} />
                 {factor(placed, 150)}
-                <Label x={460} y={46} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{l(say(`${decimalsOf(a)} zifra hamartar`, `${decimalsOf(a)} cifras decimales`, `${decimalsOf(a)} أرقام عشرية`))}</Label>
-                <Label x={460} y={90} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{l(say(`${decimalsOf(b)} zifra hamartar`, `${decimalsOf(b)} cifras decimales`, `${decimalsOf(b)} أرقام عشرية`))}</Label>
-                <Label x={460} y={150} textAnchor="middle" fontSize={15} fontWeight={700} fill={state.wrong ? SECOND : solved && state.places === places ? GREEN : MUTED}>{l(say(`${state.places} zifra hamartar`, `${state.places} cifras decimales`, `${state.places} أرقام عشرية`))}</Label>
+                <Label x={460} y={46} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{l(say(`${decimalsOf(a)} zifra hamartar`, `${decimalsOf(a)} cifras decimales`, `${decimalsOf(a)} أرقام عشرية`, `${decimalsOf(a)} decimal places`))}</Label>
+                <Label x={460} y={90} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{l(say(`${decimalsOf(b)} zifra hamartar`, `${decimalsOf(b)} cifras decimales`, `${decimalsOf(b)} أرقام عشرية`, `${decimalsOf(b)} decimal places`))}</Label>
+                <Label x={460} y={150} textAnchor="middle" fontSize={15} fontWeight={700} fill={state.wrong ? SECOND : solved && state.places === places ? GREEN : MUTED}>{l(say(`${state.places} zifra hamartar`, `${state.places} cifras decimales`, `${state.places} أرقام عشرية`, `${state.places} decimal places`))}</Label>
                 <text x={320} y={206} textAnchor="middle" fontSize={15} fill={MUTED}>{`${String(exact(a).units)} · ${String(exact(b).units)} = ${digits}`}</text>
             </Board>
         </ToolFrame>
@@ -523,10 +524,10 @@ export function BalanceTool(props: LabToolProps) {
     const original = balancePairs[state.pair]
     const controls = (
         <>
-            <Segmented label={l(say('Zatiketa', 'División', 'القسمة'))} value={String(state.pair)} options={balancePairs.map(([x, y], index) => ({ value: String(index), label: `${local(props.language, x)} : ${local(props.language, y)}${state.cleared.includes(index) ? ' ✓' : ''}` }))} onChange={(next) => setState((s) => setBalancePair(s, Number(next)))} />
+            <Segmented label={l(say('Zatiketa', 'División', 'القسمة', 'Division'))} value={String(state.pair)} options={balancePairs.map(([x, y], index) => ({ value: String(index), label: `${local(props.language, x)} : ${local(props.language, y)}${state.cleared.includes(index) ? ' ✓' : ''}` }))} onChange={(next) => setState((s) => setBalancePair(s, Number(next)))} />
             <div className="fraction-v2-lab-quick-actions">
-                <button type="button" disabled={ready} onClick={() => setState(multiplyBoth)}>{l(say('Biak · 10', 'Los dos · 10', 'الاثنان · 10'))}</button>
-                <button type="button" disabled={state.times === 0} onClick={() => setState(resetBalance)}>{l(say('Hasieratik', 'Desde el principio', 'من البداية'))}</button>
+                <button type="button" disabled={ready} onClick={() => setState(multiplyBoth)}>{l(say('Biak · 10', 'Los dos · 10', 'الاثنان · 10', 'Both · 10'))}</button>
+                <button type="button" disabled={state.times === 0} onClick={() => setState(resetBalance)}>{l(say('Hasieratik', 'Desde el principio', 'من البداية', 'From the start'))}</button>
             </div>
         </>
     )
@@ -535,14 +536,14 @@ export function BalanceTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-main"><MathText text={localLatex(props.language, `$${latexOf(original[0])}\\mathbin{:}${latexOf(original[1])}=${latexOf(writeExact(dividend))}\\mathbin{:}${latexOf(writeExact(divisor))}${ready ? `=${latexOf(quotient)}` : ''}$`)} /></span>
             <span className="fraction-v2-lab-readout-note">
                 {ready
-                    ? l(say(`Zatitzaileak ez du komarik: ${state.times} aldiz · 10. Zatidura ez da aldatu.`, `El divisor ya no tiene coma: ${state.times} veces · 10. El cociente no ha cambiado.`, `لم يعد للمقسوم عليه فاصلة: ${state.times} مرات · 10. لم يتغيّر الناتج.`))
-                    : l(say(`Zatitzaileak ${stepsNeeded(state.pair) - state.times} zifra hamartar ditu oraindik.`, `Al divisor le quedan ${stepsNeeded(state.pair) - state.times} cifras decimales.`, `ما زال للمقسوم عليه ${stepsNeeded(state.pair) - state.times} أرقام عشرية.`))}
+                    ? l(say(`Zatitzaileak ez du komarik: ${state.times} aldiz · 10. Zatidura ez da aldatu.`, `El divisor ya no tiene coma: ${state.times} veces · 10. El cociente no ha cambiado.`, `لم يعد للمقسوم عليه فاصلة: ${state.times} مرات · 10. لم يتغيّر الناتج.`, `The divisor no longer has a decimal point: ${state.times} times · 10. The quotient has not changed.`))
+                    : l(say(`Zatitzaileak ${stepsNeeded(state.pair) - state.times} zifra hamartar ditu oraindik.`, `Al divisor le quedan ${stepsNeeded(state.pair) - state.times} cifras decimales.`, `ما زال للمقسوم عليه ${stepsNeeded(state.pair) - state.times} أرقام عشرية.`, `The divisor still has ${stepsNeeded(state.pair) - state.times} decimal places.`))}
             </span>
         </>
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={balanceChallenges} state={state}>
-            <Board height={150} label={l(say('Zatikizuna eta zatitzailea', 'Dividendo y divisor', 'المقسوم والمقسوم عليه'))}>
+            <Board height={150} label={l(say('Zatikizuna eta zatitzailea', 'Dividendo y divisor', 'المقسوم والمقسوم عليه', 'Dividend and divisor'))}>
                 <text x={240} y={80} textAnchor="end" fontSize={42} fontWeight={700} fill={STAGE}>{local(props.language, writeExact(dividend))}</text>
                 <text x={280} y={80} textAnchor="middle" fontSize={40} fontWeight={700} fill={INK}>:</text>
                 <text x={320} y={80} textAnchor="start" fontSize={42} fontWeight={700} fill={ready ? GREEN : SECOND}>{local(props.language, writeExact(divisor))}</text>

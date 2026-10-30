@@ -17,15 +17,15 @@ export function LadderTool(props: DivisibilityToolProps & { challenges?: LabChal
 
     const controls = (
         <>
-            <NumberField label={l({ eu: 'Deskonposatzeko zenbakia', es: 'Número que descomponer', ar: 'العدد المراد تحليله' })} value={state.value} min={LADDER_LIMITS.min} max={LADDER_LIMITS.max} onChange={(next) => setState((current) => setLadderValue(current, next))} language={props.language} />
-            <div className="divisibility-prime-buttons" role="group" aria-label={l({ eu: 'Zatitu honekin', es: 'Dividir entre', ar: 'اقسم على' })}>
-                <span className="fraction-v2-stepper-label">{l({ eu: 'Zatitu honekin', es: 'Dividir entre', ar: 'اقسم على' })}</span>
+            <NumberField label={l({ eu: 'Deskonposatzeko zenbakia', es: 'Número que descomponer', en: 'Number to factorise', ar: 'العدد المراد تحليله' })} value={state.value} min={LADDER_LIMITS.min} max={LADDER_LIMITS.max} onChange={(next) => setState((current) => setLadderValue(current, next))} language={props.language} />
+            <div className="divisibility-prime-buttons" role="group" aria-label={l({ eu: 'Zatitu honekin', es: 'Dividir entre', en: 'Divide by', ar: 'اقسم على' })}>
+                <span className="fraction-v2-stepper-label">{l({ eu: 'Zatitu honekin', es: 'Dividir entre', en: 'Divide by', ar: 'اقسم على' })}</span>
                 <div>
                     {LADDER_PRIMES.map((prime) => <button type="button" disabled={done} onClick={() => setState((current) => divideLadder(current, prime))} key={prime}>{prime}</button>)}
                     {stuck && isPrime(rest) && <button type="button" className="big" onClick={() => setState((current) => divideLadder(current, rest))}>{rest}</button>}
                 </div>
             </div>
-            <button type="button" className="fraction-v2-secondary" onClick={() => setState((current) => setLadderValue(current, current.value))}>{l({ eu: 'Berriro hasi', es: 'Empezar de nuevo', ar: 'ابدأ من جديد' })}</button>
+            <button type="button" className="fraction-v2-secondary" onClick={() => setState((current) => setLadderValue(current, current.value))}>{l({ eu: 'Berriro hasi', es: 'Empezar de nuevo', en: 'Start again', ar: 'ابدأ من جديد' })}</button>
         </>
     )
 
@@ -33,14 +33,14 @@ export function LadderTool(props: DivisibilityToolProps & { challenges?: LabChal
         <>
             {state.rejected !== null && (
                 <span className="fraction-v2-lab-readout-note">
-                    {l({ eu: `${rest} ez da ${state.rejected}rekin zatigarria (hondarra ${rest % state.rejected}). Probatu beste lehen bat.`, es: `${rest} no es divisible por ${state.rejected} (resto ${rest % state.rejected}). Prueba otro primo.`, ar: `${rest} لا يقبل القسمة على ${state.rejected} (الباقي ${rest % state.rejected}). جرّب عددًا أوليًا آخر.` })}
+                    {l({ eu: `${rest} ez da ${state.rejected}rekin zatigarria (hondarra ${rest % state.rejected}). Probatu beste lehen bat.`, es: `${rest} no es divisible por ${state.rejected} (resto ${rest % state.rejected}). Prueba otro primo.`, en: `${rest} is not divisible by ${state.rejected} (remainder ${rest % state.rejected}). Try another prime.`, ar: `${rest} لا يقبل القسمة على ${state.rejected} (الباقي ${rest % state.rejected}). جرّب عددًا أوليًا آخر.` })}
                 </span>
             )}
             {stuck && (
                 <span className="fraction-v2-lab-readout-note">
                     {isPrime(rest)
-                        ? l({ eu: `${rest} lehena da: zatitu berarekin.`, es: `${rest} es primo: divídelo entre sí mismo.`, ar: `${rest} أولي: اقسمه على نفسه.` })
-                        : l({ eu: `${rest} zenbakiak 13 baino handiagoak diren lehenak ditu.`, es: `${rest} tiene factores primos mayores que 13.`, ar: `للعدد ${rest} عوامل أولية أكبر من 13.` })}
+                        ? l({ eu: `${rest} lehena da: zatitu berarekin.`, es: `${rest} es primo: divídelo entre sí mismo.`, en: `${rest} is prime: divide it by itself.`, ar: `${rest} أولي: اقسمه على نفسه.` })
+                        : l({ eu: `${rest} zenbakiak 13 baino handiagoak diren lehenak ditu.`, es: `${rest} tiene factores primos mayores que 13.`, en: `${rest} has prime factors greater than 13.`, ar: `للعدد ${rest} عوامل أولية أكبر من 13.` })}
                 </span>
             )}
             {done && (

@@ -4,6 +4,7 @@ import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/Lab
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { toLatex } from '../../../features/unit-v2/math/fraction'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import { globalExtremes, graphXRange, graphZeros, lineLatex, lineXIntercept, localExtremes, numberLatex, pointLatex, quadrantText, signed, storyGraphs, trendWord, type Point } from '../functions'
 import { Plane, PlaneGuides, PlanePath, PlanePoint } from '../plane'
 import {
@@ -63,8 +64,8 @@ const MUSTARD = 'var(--mustard, #e0a100)'
 const MUTED = 'var(--muted, #58616e)'
 const STAGE_TINT = 'var(--stage-tint, #dde7f7)'
 
-/** Decimal comma (decimal point in Arabic) for the steppers */
-const decimal = (language: string, value: number) => signed(value).replace('.', language === 'ar' ? '.' : ',')
+/** The language's decimal mark (a point in Arabic and English) for the steppers */
+const decimal = (language: string, value: number) => signed(value).replace('.', language === 'ar' ? '.' : decimalSeparatorFor(language))
 
 /* ---------- The plane and its quadrants ---------- */
 
@@ -77,7 +78,7 @@ export function PlaneTool(props: LabToolProps) {
         <>
             <Stepper label="x" value={state.x} min={-PLANE_LIMIT} max={PLANE_LIMIT} format={signed} onChange={(x) => setState((current) => setPlanePoint(current, { x }))} language={props.language} />
             <Stepper label="y" value={state.y} min={-PLANE_LIMIT} max={PLANE_LIMIT} format={signed} onChange={(y) => setState((current) => setPlanePoint(current, { y }))} language={props.language} />
-            <p className="fraction-v2-lab-tip">{l({ eu: 'Planoan klik eginda ere kokatu dezakezu puntua.', es: 'También puedes colocar el punto pulsando en el plano.', ar: 'يمكنك أيضًا وضع النقطة بالنقر على المستوى.' })}</p>
+            <p className="fraction-v2-lab-tip">{l({ eu: 'Planoan klik eginda ere kokatu dezakezu puntua.', es: 'También puedes colocar el punto pulsando en el plano.', en: 'You can also place the point by clicking on the grid.', ar: 'يمكنك أيضًا وضع النقطة بالنقر على المستوى.' })}</p>
         </>
     )
     const readout = (
@@ -124,15 +125,15 @@ export function RelationTool(props: LabToolProps) {
     const verdict = state.verdicts[state.relation] ?? 'none'
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Erlazioa', es: 'Relación', ar: 'العلاقة' })} value={String(state.relation)} options={relations.map((_, index) => ({ value: String(index), label: relationName(index) }))} onChange={(next) => setState((s) => setRelation(s, Number(next)))} />
-            <Stepper label={l({ eu: 'Zuzen bertikala: x =', es: 'Recta vertical: x =', ar: 'الخط الرأسي: x =' })} value={state.k} min={-RELATION_LIMIT} max={RELATION_LIMIT} format={signed} onChange={(k) => setState((s) => setLine(s, k))} language={props.language} />
+            <Segmented label={l({ eu: 'Erlazioa', es: 'Relación', en: 'Relation', ar: 'العلاقة' })} value={String(state.relation)} options={relations.map((_, index) => ({ value: String(index), label: relationName(index) }))} onChange={(next) => setState((s) => setRelation(s, Number(next)))} />
+            <Stepper label={l({ eu: 'Zuzen bertikala: x =', es: 'Recta vertical: x =', en: 'Vertical straight line: x =', ar: 'الخط الرأسي: x =' })} value={state.k} min={-RELATION_LIMIT} max={RELATION_LIMIT} format={signed} onChange={(k) => setState((s) => setLine(s, k))} language={props.language} />
             <Segmented
-                label={l({ eu: 'Zure erabakia', es: 'Tu decisión', ar: 'قرارك' })}
+                label={l({ eu: 'Zure erabakia', es: 'Tu decisión', en: 'Your decision', ar: 'قرارك' })}
                 value={verdict}
                 options={[
                     { value: 'none', label: '?' },
-                    { value: 'yes', label: l({ eu: 'Funtzioa', es: 'Función', ar: 'دالة' }) },
-                    { value: 'no', label: l({ eu: 'Ez da', es: 'No es', ar: 'ليست' }) }
+                    { value: 'yes', label: l({ eu: 'Funtzioa', es: 'Función', en: 'Function', ar: 'دالة' }) },
+                    { value: 'no', label: l({ eu: 'Ez da', es: 'No es', en: 'Not a function', ar: 'ليست' }) }
                 ]}
                 onChange={(next) => setState((s) => setVerdict(s, next === 'none' ? null : (next as Verdict)))}
             />
@@ -141,15 +142,15 @@ export function RelationTool(props: LabToolProps) {
     const readout = (
         <span className="fraction-v2-lab-readout-note">
             {hits.length === 0
-                ? l({ eu: `x = ${signed(state.k)} zuzenak ez du punturik ebakitzen.`, es: `La recta x = ${signed(state.k)} no corta ningún punto.`, ar: `الخط x = ${signed(state.k)} لا يقطع أي نقطة.` })
+                ? l({ eu: `x = ${signed(state.k)} zuzenak ez du punturik ebakitzen.`, es: `La recta x = ${signed(state.k)} no corta ningún punto.`, en: `The straight line x = ${signed(state.k)} does not pass through any point.`, ar: `الخط x = ${signed(state.k)} لا يقطع أي نقطة.` })
                 : twice
-                    ? l({ eu: `x = ${signed(state.k)} zuzenak ${hits.length} puntu ebakitzen ditu: x berak bi irteera ditu, ez da funtzioa.`, es: `La recta x = ${signed(state.k)} corta ${hits.length} puntos: la misma x tiene dos salidas, no es función.`, ar: `الخط x = ${signed(state.k)} يقطع ${hits.length} نقاط: لـ x نفسها مخرجان فليست دالة.` })
-                    : l({ eu: `x = ${signed(state.k)} zuzenak puntu bat ebakitzen du: irteera bakarra.`, es: `La recta x = ${signed(state.k)} corta un punto: una sola salida.`, ar: `الخط x = ${signed(state.k)} يقطع نقطة واحدة: مخرج واحد.` })}
+                    ? l({ eu: `x = ${signed(state.k)} zuzenak ${hits.length} puntu ebakitzen ditu: x berak bi irteera ditu, ez da funtzioa.`, es: `La recta x = ${signed(state.k)} corta ${hits.length} puntos: la misma x tiene dos salidas, no es función.`, en: `The straight line x = ${signed(state.k)} passes through ${hits.length} points: the same x has two outputs, so it is not a function.`, ar: `الخط x = ${signed(state.k)} يقطع ${hits.length} نقاط: لـ x نفسها مخرجان فليست دالة.` })
+                    : l({ eu: `x = ${signed(state.k)} zuzenak puntu bat ebakitzen du: irteera bakarra.`, es: `La recta x = ${signed(state.k)} corta un punto: una sola salida.`, en: `The straight line x = ${signed(state.k)} passes through one point: a single output.`, ar: `الخط x = ${signed(state.k)} يقطع نقطة واحدة: مخرج واحد.` })}
         </span>
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={relationChallenges} state={state}>
-            <Plane box={{ xMin: -5, xMax: 5, yMin: -4, yMax: 5 }} cell={30} label={l({ eu: `${relationName(state.relation)} erlazioa`, es: `Relación ${relationName(state.relation)}`, ar: `العلاقة ${relationName(state.relation)}` })}>
+            <Plane box={{ xMin: -5, xMax: 5, yMin: -4, yMax: 5 }} cell={30} label={l({ eu: `${relationName(state.relation)} erlazioa`, es: `Relación ${relationName(state.relation)}`, en: `${relationName(state.relation)} relation`, ar: `العلاقة ${relationName(state.relation)}` })}>
                 {(map, clip) => (
                     <g>
                         {current.curve && <PlanePath map={map} points={current.curve.path} color={STAGE} width={3.4} clip={clip} />}
@@ -176,9 +177,9 @@ export function TableTool(props: LabToolProps) {
     const tried = triedValues(state)
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Funtzioa', es: 'Función', ar: 'الدالة' })} value={String(state.formula)} options={tableFormulas.map((item, index) => ({ value: String(index), label: item.label }))} onChange={(next) => setState((s) => setFormula(s, Number(next)))} />
+            <Segmented label={l({ eu: 'Funtzioa', es: 'Función', en: 'Function', ar: 'الدالة' })} value={String(state.formula)} options={tableFormulas.map((item, index) => ({ value: String(index), label: item.label }))} onChange={(next) => setState((s) => setFormula(s, Number(next)))} />
             <Stepper label="x =" value={state.x} min={-TABLE_LIMIT} max={TABLE_LIMIT} format={signed} onChange={(x) => setState((s) => tryX(s, x))} language={props.language} />
-            <p className="fraction-v2-lab-tip">{l({ eu: `Probatutako balioak: ${tried.length}.`, es: `Valores probados: ${tried.length}.`, ar: `القيم المجرَّبة: ${tried.length}.` })} {tried.length < 3 ? l({ eu: 'Hiru puntutik aurrera, grafikoaren forma agertuko da.', es: 'A partir de tres puntos aparecerá la forma de la gráfica.', ar: 'بدءًا من ثلاث نقاط سيظهر شكل الرسم.' }) : ''}</p>
+            <p className="fraction-v2-lab-tip">{l({ eu: `Probatutako balioak: ${tried.length}.`, es: `Valores probados: ${tried.length}.`, en: `Values tried: ${tried.length}.`, ar: `القيم المجرَّبة: ${tried.length}.` })} {tried.length < 3 ? l({ eu: 'Hiru puntutik aurrera, grafikoaren forma agertuko da.', es: 'A partir de tres puntos aparecerá la forma de la gráfica.', en: 'The shape of the graph appears after three points.', ar: 'بدءًا من ثلاث نقاط سيظهر شكل الرسم.' }) : ''}</p>
         </>
     )
     const readout = (
@@ -198,7 +199,7 @@ export function TableTool(props: LabToolProps) {
                     </tbody>
                 </table>
             </div>
-            <Plane box={{ xMin: -4, xMax: 4, yMin: -6, yMax: 8 }} cell={26} label={l({ eu: `${formula.label} funtzioaren puntuak`, es: `Puntos de ${formula.label}`, ar: `نقاط ${formula.label}` })} labelStep={2}>
+            <Plane box={{ xMin: -4, xMax: 4, yMin: -6, yMax: 8 }} cell={26} label={l({ eu: `${formula.label} funtzioaren puntuak`, es: `Puntos de ${formula.label}`, en: `Points of ${formula.label}`, ar: `نقاط ${formula.label}` })} labelStep={2}>
                 {(map, clip) => (
                     <g>
                         {/* With three points tried the shape of the graph appears, dashed */}
@@ -229,21 +230,21 @@ export function ReadingTool(props: LabToolProps) {
     const { max, min } = globalExtremes(graph.points)
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Grafikoa', es: 'Gráfica', ar: 'الرسم' })} value={String(state.graph)} options={storyGraphs.map((graph, index) => ({ value: String(index), label: l(graph.short) }))} onChange={(next) => setState(setReadingGraph(Number(next)))} />
-            <Stepper label={l({ eu: 'Kurtsorea: x =', es: 'Cursor: x =', ar: 'المؤشر: x =' })} value={state.x} min={from} max={to} format={signed} onChange={(x) => setState((s) => setReadingX(s, x))} language={props.language} />
-            <Segmented label={l({ eu: 'Muturrak eta ebakidurak', es: 'Extremos y cortes', ar: 'القيم القصوى والتقاطعات' })} value={marks} options={[{ value: 'off', label: l({ eu: 'Ezkutatu', es: 'Ocultar', ar: 'إخفاء' }) }, { value: 'on', label: l({ eu: 'Erakutsi', es: 'Mostrar', ar: 'إظهار' }) }]} onChange={setMarks} />
+            <Segmented label={l({ eu: 'Grafikoa', es: 'Gráfica', en: 'Graph', ar: 'الرسم' })} value={String(state.graph)} options={storyGraphs.map((graph, index) => ({ value: String(index), label: l(graph.short) }))} onChange={(next) => setState(setReadingGraph(Number(next)))} />
+            <Stepper label={l({ eu: 'Kurtsorea: x =', es: 'Cursor: x =', en: 'Cursor: x =', ar: 'المؤشر: x =' })} value={state.x} min={from} max={to} format={signed} onChange={(x) => setState((s) => setReadingX(s, x))} language={props.language} />
+            <Segmented label={l({ eu: 'Muturrak eta ebakidurak', es: 'Extremos y cortes', en: 'Extremes and intercepts', ar: 'القيم القصوى والتقاطعات' })} value={marks} options={[{ value: 'off', label: l({ eu: 'Ezkutatu', es: 'Ocultar', en: 'Hide', ar: 'إخفاء' }) }, { value: 'on', label: l({ eu: 'Erakutsi', es: 'Mostrar', en: 'Show', ar: 'إظهار' }) }]} onChange={setMarks} />
         </>
     )
     const tags: string[] = []
-    if (info.isMax) tags.push(l({ eu: 'maximoa', es: 'máximo', ar: 'قيمة عظمى' }))
-    if (info.isMin) tags.push(l({ eu: 'minimoa', es: 'mínimo', ar: 'قيمة صغرى' }))
-    if (info.isZero) tags.push(l({ eu: 'X ardatzeko ebakidura', es: 'corte con el eje X', ar: 'تقاطع مع محور X' }))
+    if (info.isMax) tags.push(l({ eu: 'maximoa', es: 'máximo', en: 'maximum', ar: 'قيمة عظمى' }))
+    if (info.isMin) tags.push(l({ eu: 'minimoa', es: 'mínimo', en: 'minimum', ar: 'قيمة صغرى' }))
+    if (info.isZero) tags.push(l({ eu: 'X ardatzeko ebakidura', es: 'corte con el eje X', en: 'x-axis intercept', ar: 'تقاطع مع محور X' }))
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$f(${state.x})=${info.y}$`} /></span>
             <span className="fraction-v2-lab-readout-note">
-                {l({ eu: `Hemendik aurrera ${l(trendWord[info.trend])} da`, es: `A partir de aquí es ${l(trendWord[info.trend])}`, ar: `من هنا تكون ${l(trendWord[info.trend])}` })}
-                {flat ? l({ eu: ` (x = ${flat.from} eta ${flat.to} artean berdin)`, es: ` (igual entre x = ${flat.from} y ${flat.to})`, ar: ` (ثابتة بين x = ${flat.from} و${flat.to})` }) : ''}
+                {l({ eu: `Hemendik aurrera ${l(trendWord[info.trend])} da`, es: `A partir de aquí es ${l(trendWord[info.trend])}`, en: `From here on it is ${l(trendWord[info.trend])}`, ar: `من هنا تكون ${l(trendWord[info.trend])}` })}
+                {flat ? l({ eu: ` (x = ${flat.from} eta ${flat.to} artean berdin)`, es: ` (igual entre x = ${flat.from} y ${flat.to})`, en: ` (flat between x = ${flat.from} and ${flat.to})`, ar: ` (ثابتة بين x = ${flat.from} و${flat.to})` }) : ''}
                 {tags.length > 0 ? ` · ${tags.join(' · ')}` : ''}
             </span>
         </>
@@ -288,12 +289,12 @@ export function SlopeTool(props: LabToolProps) {
         </>
     )
     const behaviour = slope === null
-        ? l({ eu: 'Δx = 0: zuzen bertikala. Ez du maldarik eta ez da funtzioa.', es: 'Δx = 0: recta vertical. No tiene pendiente y no es función.', ar: 'Δx = 0: خط رأسي. لا ميل له وليس دالة.' })
+        ? l({ eu: 'Δx = 0: zuzen bertikala. Ez du maldarik eta ez da funtzioa.', es: 'Δx = 0: recta vertical. No tiene pendiente y no es función.', en: 'Δx = 0: vertical straight line. It has no slope and is not a function.', ar: 'Δx = 0: خط رأسي. لا ميل له وليس دالة.' })
         : dy === 0
-            ? l({ eu: 'm = 0: zuzen horizontala (funtzio konstantea).', es: 'm = 0: recta horizontal (función constante).', ar: 'm = 0: خط أفقي (دالة ثابتة).' })
+            ? l({ eu: 'm = 0: zuzen horizontala (funtzio konstantea).', es: 'm = 0: recta horizontal (función constante).', en: 'm = 0: horizontal straight line (constant function).', ar: 'm = 0: خط أفقي (دالة ثابتة).' })
             : dy * dx > 0
-                ? l({ eu: 'm > 0: zuzena gorakorra da.', es: 'm > 0: la recta es creciente.', ar: 'm > 0: الخط متزايد.' })
-                : l({ eu: 'm < 0: zuzena beherakorra da.', es: 'm < 0: la recta es decreciente.', ar: 'm < 0: الخط متناقص.' })
+                ? l({ eu: 'm > 0: zuzena gorakorra da.', es: 'm > 0: la recta es creciente.', en: 'm > 0: the straight line is increasing.', ar: 'm > 0: الخط متزايد.' })
+                : l({ eu: 'm < 0: zuzena beherakorra da.', es: 'm < 0: la recta es decreciente.', en: 'm < 0: the straight line is decreasing.', ar: 'm < 0: الخط متناقص.' })
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main">
@@ -301,7 +302,7 @@ export function SlopeTool(props: LabToolProps) {
                     ? <MathText text={`$\\Delta x=${dx}\\qquad \\Delta y=${dy}$`} />
                     : <MathText text={`$m=\\frac{\\Delta y}{\\Delta x}=\\frac{${dy}}{${dx}}=${toLatex(slope)}$`} />}
             </span>
-            <span className="fraction-v2-lab-readout-note">{isSamePoint(state) ? l({ eu: 'A eta B puntu bera dira: mugitu bat.', es: 'A y B son el mismo punto: mueve uno.', ar: 'A وB النقطة نفسها: حرّك إحداهما.' }) : behaviour}</span>
+            <span className="fraction-v2-lab-readout-note">{isSamePoint(state) ? l({ eu: 'A eta B puntu bera dira: mugitu bat.', es: 'A y B son el mismo punto: mueve uno.', en: 'A and B are the same point: move one.', ar: 'A وB النقطة نفسها: حرّك إحداهما.' }) : behaviour}</span>
         </>
     )
     return (
@@ -337,22 +338,22 @@ export function LineTool(props: LabToolProps) {
         </>
     )
     const kind = m === 0
-        ? l({ eu: 'm = 0: funtzio konstantea, zuzen horizontala.', es: 'm = 0: función constante, recta horizontal.', ar: 'm = 0: دالة ثابتة، خط أفقي.' })
+        ? l({ eu: 'm = 0: funtzio konstantea, zuzen horizontala.', es: 'm = 0: función constante, recta horizontal.', en: 'm = 0: constant function, horizontal straight line.', ar: 'm = 0: دالة ثابتة، خط أفقي.' })
         : n === 0
-            ? l({ eu: 'n = 0: proportzionaltasun zuzeneko funtzioa, jatorritik pasatzen da.', es: 'n = 0: función de proporcionalidad directa, pasa por el origen.', ar: 'n = 0: دالة تناسب طردي، تمر بنقطة الأصل.' })
+            ? l({ eu: 'n = 0: proportzionaltasun zuzeneko funtzioa, jatorritik pasatzen da.', es: 'n = 0: función de proporcionalidad directa, pasa por el origen.', en: 'n = 0: direct proportion function, passes through the origin.', ar: 'n = 0: دالة تناسب طردي، تمر بنقطة الأصل.' })
             : m > 0
-                ? l({ eu: 'm > 0: zuzena gorakorra da.', es: 'm > 0: la recta es creciente.', ar: 'm > 0: الخط متزايد.' })
-                : l({ eu: 'm < 0: zuzena beherakorra da.', es: 'm < 0: la recta es decreciente.', ar: 'm < 0: الخط متناقص.' })
+                ? l({ eu: 'm > 0: zuzena gorakorra da.', es: 'm > 0: la recta es creciente.', en: 'm > 0: the straight line is increasing.', ar: 'm > 0: الخط متزايد.' })
+                : l({ eu: 'm < 0: zuzena beherakorra da.', es: 'm < 0: la recta es decreciente.', en: 'm < 0: the straight line is decreasing.', ar: 'm < 0: الخط متناقص.' })
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${lineLatex(m, n)}$`} /></span>
             <span className="fraction-v2-lab-readout-note">{kind}</span>
             <span className="fraction-v2-lab-readout-note">
-                <MathText text={l({ eu: `Y ardatza: $(0,\\,${numberLatex(n)})$`, es: `Eje Y: $(0,\\,${numberLatex(n)})$`, ar: `محور Y: $(0,\\,${numberLatex(n)})$` })} />
+                <MathText text={l({ eu: `Y ardatza: $(0,\\,${numberLatex(n)})$`, es: `Eje Y: $(0,\\,${numberLatex(n)})$`, en: `Y-axis: $(0,\\,${numberLatex(n)})$`, ar: `محور Y: $(0,\\,${numberLatex(n)})$` })} />
                 {' · '}
                 {xIntercept === null
-                    ? l({ eu: n === 0 ? 'X ardatza: zuzena bera da' : 'X ardatza: ez du ebakitzen', es: n === 0 ? 'Eje X: coincide con él' : 'Eje X: no lo corta', ar: n === 0 ? 'محور X: ينطبق عليه' : 'محور X: لا يقطعه' })
-                    : <MathText text={l({ eu: `X ardatza: $(${numberLatex(xIntercept)},\\,0)$`, es: `Eje X: $(${numberLatex(xIntercept)},\\,0)$`, ar: `محور X: $(${numberLatex(xIntercept)},\\,0)$` })} />}
+                    ? l({ eu: n === 0 ? 'X ardatza: zuzena bera da' : 'X ardatza: ez du ebakitzen', es: n === 0 ? 'Eje X: coincide con él' : 'Eje X: no lo corta', en: n === 0 ? 'X axis: it coincides with it' : 'X axis: it does not cut it', ar: n === 0 ? 'محور X: ينطبق عليه' : 'محور X: لا يقطعه' })
+                    : <MathText text={l({ eu: `X ardatza: $(${numberLatex(xIntercept)},\\,0)$`, es: `Eje X: $(${numberLatex(xIntercept)},\\,0)$`, en: `X-axis: $(${numberLatex(xIntercept)},\\,0)$`, ar: `محور X: $(${numberLatex(xIntercept)},\\,0)$` })} />}
             </span>
         </>
     )

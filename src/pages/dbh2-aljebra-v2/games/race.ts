@@ -31,9 +31,9 @@ export type AlgebraRaceError =
 
 export type AlgebraRaceQuestion = RaceQuestion<AlgebraRaceError>
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const math = (latex: string) => `$${latex}$`
-const all = (latex: string): LocalizedText => say(math(latex), math(latex), math(latex))
+const all = (latex: string): LocalizedText => say(math(latex), math(latex), math(latex), math(latex))
 const signedRandom = (random: Random, min: number, max: number) => randomInt(random, min, max) * (random() < 0.5 ? -1 : 1)
 
 interface Candidate {
@@ -76,7 +76,7 @@ function valueQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | null {
         const answer = p * n + q
         const choices = options(random, String(answer), [{ latex: String(p * n), error: 'general-term' }, { latex: String(p + q + n), error: 'general-term' }, { latex: String(p * (n + q)), error: 'priority' }, ...near(answer)])
         if (!choices) return null
-        return question(0, 'term', say(`${math(`a_{n}=${rule}`)} bada, zenbat da ${math(`a_{${n}}`)}?`, `Si ${math(`a_{n}=${rule}`)}, ¿cuánto vale ${math(`a_{${n}}`)}?`, `إذا كان ${math(`a_{n}=${rule}`)} فكم ${math(`a_{${n}}`)}؟`), choices, answer, all(`${p}\\cdot ${n}${q < 0 ? '' : '+'}${q}=${answer}`))
+        return question(0, 'term', say(`${math(`a_{n}=${rule}`)} bada, zenbat da ${math(`a_{${n}}`)}?`, `Si ${math(`a_{n}=${rule}`)}, ¿cuánto vale ${math(`a_{${n}}`)}?`, `إذا كان ${math(`a_{n}=${rule}`)} فكم ${math(`a_{${n}}`)}؟`, `If ${math(`a_{n}=${rule}`)}, what is ${math(`a_{${n}}`)}?`), choices, answer, all(`${p}\\cdot ${n}${q < 0 ? '' : '+'}${q}=${answer}`))
     }
     const a = signedRandom(random, 1, 4)
     const b = signedRandom(random, 1, 6)
@@ -95,7 +95,7 @@ function valueQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | null {
     const aPart = a === 1 ? '' : a === -1 ? '-' : `${a}\\cdot `
     const bPart = `${b < 0 ? '-' : '+'}${Math.abs(b) === 1 ? '' : `${Math.abs(b)}\\cdot `}`
     const worked = `${aPart}${shown}^{2}${bPart}${shown}${c === 0 ? '' : c < 0 ? c : `+${c}`}=${answer}`
-    return question(0, 'value', say(`Zenbat da ${math(expression)} balioa ${math(`x=${x}`)} denean?`, `¿Cuánto vale ${math(expression)} para ${math(`x=${x}`)}?`, `كم قيمة ${math(expression)} عندما ${math(`x=${x}`)}؟`), choices, answer, all(worked))
+    return question(0, 'value', say(`Zenbat da ${math(expression)} balioa ${math(`x=${x}`)} denean?`, `¿Cuánto vale ${math(expression)} para ${math(`x=${x}`)}?`, `كم قيمة ${math(expression)} عندما ${math(`x=${x}`)}؟`, `What is ${math(expression)} when ${math(`x=${x}`)}?`), choices, answer, all(worked))
 }
 
 /* ---------- Circuit 1: monomials ---------- */
@@ -116,7 +116,7 @@ function monomialQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | nul
             { latex: poly([t(sum + 1, power)]), error: 'calculation' },
             { latex: poly([t(first - second, power)]), error: 'calculation' }
         ])
-        return choices && question(1, kind, say(`Laburtu ${math(expression)}.`, `Reduce ${math(expression)}.`, `بسّط ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
+        return choices && question(1, kind, say(`Laburtu ${math(expression)}.`, `Reduce ${math(expression)}.`, `بسّط ${math(expression)}.`, `Simplify ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
     }
     const p = randomInt(random, 1, 4)
     const q = randomInt(random, 2, 4)
@@ -132,7 +132,7 @@ function monomialQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | nul
             { latex: termLatex(t(-a * b, p + q)), error: 'calculation' },
             { latex: termLatex(t(a * b, p + q + 1)), error: 'calculation' }
         ])
-        return choices && question(1, kind, say(`Kalkulatu ${math(expression)}.`, `Calcula ${math(expression)}.`, `احسب ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
+        return choices && question(1, kind, say(`Kalkulatu ${math(expression)}.`, `Calcula ${math(expression)}.`, `احسب ${math(expression)}.`, `Work out ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
     }
     const quotient = signedRandom(random, 2, 5)
     const divisor = randomInt(random, 2, 5)
@@ -145,7 +145,7 @@ function monomialQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | nul
         { latex: termLatex(t(quotient, q + 1)), error: 'calculation' },
         { latex: termLatex(t(-quotient, q)), error: 'calculation' }
     ])
-    return choices && question(1, kind, say(`Kalkulatu ${math(expression)}.`, `Calcula ${math(expression)}.`, `احسب ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
+    return choices && question(1, kind, say(`Kalkulatu ${math(expression)}.`, `Calcula ${math(expression)}.`, `احسب ${math(expression)}.`, `Work out ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
 }
 
 /* ---------- Circuit 2: polynomials ---------- */
@@ -162,7 +162,7 @@ function polynomialQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | n
             { latex: poly([...first, ...second]), error: 'bracket-sign' },
             { latex: poly([...first, t(-second[0].coefficient, 2), t(-second[1].coefficient, 1), second[2]]), error: 'bracket-sign' }
         ])
-        return choices && question(2, kind, say(`Kalkulatu ${math(expression)}.`, `Calcula ${math(expression)}.`, `احسب ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
+        return choices && question(2, kind, say(`Kalkulatu ${math(expression)}.`, `Calcula ${math(expression)}.`, `احسب ${math(expression)}.`, `Work out ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
     }
     if (kind === 'monomial') {
         const factor = t(signedRandom(random, 2, 5), randomInt(random, 1, 2))
@@ -176,7 +176,7 @@ function polynomialQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | n
             { latex: poly([product[0], product[1], t(inner[2].coefficient * factor.coefficient, 0)]), error: 'added-exponents' },
             { latex: poly(inner.map((term) => t(term.coefficient * factor.coefficient, term.power * (factor.power + 1)))), error: 'multiplied-exponents' }
         ])
-        return choices && question(2, kind, say(`Kalkulatu ${math(expression)}.`, `Calcula ${math(expression)}.`, `احسب ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
+        return choices && question(2, kind, say(`Kalkulatu ${math(expression)}.`, `Calcula ${math(expression)}.`, `احسب ${math(expression)}.`, `Work out ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
     }
     const a = signedRandom(random, 1, 7)
     const b = signedRandom(random, 1, 7)
@@ -189,7 +189,7 @@ function polynomialQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | n
         { latex: poly([t(1, 2), t(a + b, 1), t(a + b, 0)]), error: 'calculation' },
         { latex: poly([t(1, 2), t(a - b, 1), t(a * b, 0)]), error: 'calculation' }
     ])
-    return choices && question(2, kind, say(`Kalkulatu ${math(expression)}.`, `Calcula ${math(expression)}.`, `احسب ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
+    return choices && question(2, kind, say(`Kalkulatu ${math(expression)}.`, `Calcula ${math(expression)}.`, `احسب ${math(expression)}.`, `Work out ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
 }
 
 /* ---------- Circuit 3: notable products ---------- */
@@ -208,7 +208,7 @@ function productQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | null
             { latex: poly([t(p * p, 2), t(-2 * q, 0)]), error: 'calculation' },
             { latex: poly([t(p, 2), t(-q, 0)]), error: 'calculation' }
         ])
-        return choices && question(3, kind, say(`Garatu ${math(expression)}.`, `Desarrolla ${math(expression)}.`, `انشر ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
+        return choices && question(3, kind, say(`Garatu ${math(expression)}.`, `Desarrolla ${math(expression)}.`, `انشر ${math(expression)}.`, `Expand ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
     }
     const sign = kind === 'sum' ? 1 : -1
     const expression = `(${base(sign)})^{2}`
@@ -219,7 +219,7 @@ function productQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | null
         { latex: poly([t(p * p, 2), t(sign * 2 * p * q, 1), t(-q * q, 0)]), error: 'last-sign' },
         { latex: poly([t(p * p, 2), t(q * q, 0)]).replace('+', '-'), error: 'no-double' }
     ])
-    return choices && question(3, kind, say(`Garatu ${math(expression)}.`, `Desarrolla ${math(expression)}.`, `انشر ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
+    return choices && question(3, kind, say(`Garatu ${math(expression)}.`, `Desarrolla ${math(expression)}.`, `انشر ${math(expression)}.`, `Expand ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
 }
 
 /* ---------- Circuit 4: common factor and factorisation ---------- */
@@ -236,7 +236,7 @@ function factorQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | null 
             { latex: `(${poly([t(1, 1), t(q, 0)])})(${poly([t(1, 1), t(-q, 0)])})`, error: 'no-double' },
             { latex: `(${poly([t(1, 1), t(sign * 2 * q, 0)])})^{2}`, error: 'half-double' }
         ])
-        return choices && question(4, 'square', say(`Idatzi karratu gisa: ${math(expression)}.`, `Escribe como un cuadrado: ${math(expression)}.`, `اكتب على شكل مربع: ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
+        return choices && question(4, 'square', say(`Idatzi karratu gisa: ${math(expression)}.`, `Escribe como un cuadrado: ${math(expression)}.`, `اكتب على شكل مربع: ${math(expression)}.`, `Write as a square: ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
     }
     const gcd = randomInt(random, 2, 6)
     const power = randomInt(random, tier === 0 ? 0 : 1, 2)
@@ -260,7 +260,7 @@ function factorQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | null 
     ]
     const candidates = distractors.filter((candidate) => !candidate.latex.includes('^{-') && candidate.latex !== right)
     const choices = options(random, right, candidates)
-    return choices && question(4, 'common', say(`Atera faktore komuna: ${math(expression)}.`, `Saca factor común: ${math(expression)}.`, `أخرج العامل المشترك: ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
+    return choices && question(4, 'common', say(`Atera faktore komuna: ${math(expression)}.`, `Saca factor común: ${math(expression)}.`, `أخرج العامل المشترك: ${math(expression)}.`, `Take out the common factor: ${math(expression)}.`), choices, null, all(`${expression}=${right}`))
 }
 
 /* ---------- Public API ---------- */
@@ -287,18 +287,18 @@ export function algebraParTime(circuit: number): number {
 }
 
 export const algebraRaceErrorTips: Record<AlgebraRaceError, LocalizedText> = {
-    'square-sign': say('$(-3)^{2}=9$: negatibo baten karratua positiboa da. Jarri parentesiak.', '$(-3)^{2}=9$: el cuadrado de un negativo es positivo. Pon paréntesis.', '$(-3)^{2}=9$: مربع السالب موجب. ضع الأقواس.'),
-    priority: say('Lehenik berreturak eta biderketak, gero batuketak.', 'Primero potencias y productos, después sumas.', 'القوى والضرب أولًا ثم الجمع.'),
-    'general-term': say('Ordeztu n zenbakiaz formula osoan.', 'Sustituye n por el número en toda la fórmula.', 'عوّض n بالعدد في الصيغة كلها.'),
-    'added-exponents': say('Batzean berretzaileak ez dira aldatzen; biderkatzean batu egiten dira; zatitzean, kendu.', 'Al sumar, los exponentes no cambian; al multiplicar se suman; al dividir, se restan.', 'في الجمع لا تتغيّر الأسس، وفي الضرب تُجمع، وفي القسمة تُطرح.'),
-    'multiplied-exponents': say('Berretzaileak batu egiten dira, ez biderkatu: $x^{2}\\cdot x^{3}=x^{5}$.', 'Los exponentes se suman, no se multiplican: $x^{2}\\cdot x^{3}=x^{5}$.', 'الأسس تُجمع ولا تُضرب: $x^{2}\\cdot x^{3}=x^{5}$.'),
-    coefficients: say('Koefizienteekin, eragiketa bera: batzean batu, biderkatzean biderkatu.', 'Con los coeficientes, la misma operación: al sumar se suman, al multiplicar se multiplican.', 'مع المعاملات العملية نفسها: في الجمع تُجمع وفي الضرب تُضرب.'),
-    'bracket-sign': say('Minus baten atzeko parentesian gai GUZTIEK aldatzen dute zeinua.', 'Tras un menos, TODOS los términos del paréntesis cambian de signo.', 'بعد الناقص تتغيّر إشارة كل حدود القوس.'),
-    'forgot-term': say('Gai bakoitza beste parentesiko gai guztiez biderkatu behar da.', 'Cada término se multiplica por todos los del otro paréntesis.', 'كل حد يُضرب في كل حدود القوس الآخر.'),
-    'no-double': say('$(a+b)^{2}$ ez da $a^{2}+b^{2}$: falta da $2ab$.', '$(a+b)^{2}$ no es $a^{2}+b^{2}$: falta $2ab$.', '$(a+b)^{2}$ ليست $a^{2}+b^{2}$: ينقص $2ab$.'),
-    'last-sign': say('Karratu bat beti da positiboa; batura bider kenduran, berriz, $-b^{2}$.', 'Un cuadrado siempre es positivo; en suma por diferencia, en cambio, $-b^{2}$.', 'المربع موجب دائمًا؛ أما في مجموع في فرق فـ$-b^{2}$.'),
-    'half-double': say('Erdiko gaia BIKOITZA da: $2\\cdot a\\cdot b$.', 'El término del medio es el DOBLE: $2\\cdot a\\cdot b$.', 'الحد الأوسط هو الضعف: $2\\cdot a\\cdot b$.'),
-    'not-greatest': say('Faktore komuna da, baina ez handiena: hartu koefizienteen ZKH eta letra komunak berretzaile txikienarekin.', 'Es común, pero no el mayor: toma el m.c.d. de los coeficientes y las letras comunes con el menor exponente.', 'إنه مشترك لكن ليس الأكبر: خذ ق.م.أ للمعاملات والحروف المشتركة بأصغر أس.'),
-    'lost-one': say('Faktore osoa ateratzen den gaiaren lekuan 1 geratzen da.', 'Donde sale todo el término, dentro queda un 1.', 'حيث يخرج الحد كله يبقى داخل القوس 1.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    'square-sign': say('$(-3)^{2}=9$: negatibo baten karratua positiboa da. Jarri parentesiak.', '$(-3)^{2}=9$: el cuadrado de un negativo es positivo. Pon paréntesis.', '$(-3)^{2}=9$: مربع السالب موجب. ضع الأقواس.', '$(-3)^{2}=9$: the square of a negative is positive. Put in brackets.'),
+    priority: say('Lehenik berreturak eta biderketak, gero batuketak.', 'Primero potencias y productos, después sumas.', 'القوى والضرب أولًا ثم الجمع.', 'First powers and products, then sums.'),
+    'general-term': say('Ordeztu n zenbakiaz formula osoan.', 'Sustituye n por el número en toda la fórmula.', 'عوّض n بالعدد في الصيغة كلها.', 'Replace n with the number everywhere in the formula.'),
+    'added-exponents': say('Batzean berretzaileak ez dira aldatzen; biderkatzean batu egiten dira; zatitzean, kendu.', 'Al sumar, los exponentes no cambian; al multiplicar se suman; al dividir, se restan.', 'في الجمع لا تتغيّر الأسس، وفي الضرب تُجمع، وفي القسمة تُطرح.', 'When you add, the exponents stay the same. When you multiply, you add the exponents. When you divide, you subtract them.'),
+    'multiplied-exponents': say('Berretzaileak batu egiten dira, ez biderkatu: $x^{2}\\cdot x^{3}=x^{5}$.', 'Los exponentes se suman, no se multiplican: $x^{2}\\cdot x^{3}=x^{5}$.', 'الأسس تُجمع ولا تُضرب: $x^{2}\\cdot x^{3}=x^{5}$.', 'Exponents are added, not multiplied: $x^{2}\\cdot x^{3}=x^{5}$.'),
+    coefficients: say('Koefizienteekin, eragiketa bera: batzean batu, biderkatzean biderkatu.', 'Con los coeficientes, la misma operación: al sumar se suman, al multiplicar se multiplican.', 'مع المعاملات العملية نفسها: في الجمع تُجمع وفي الضرب تُضرب.', 'For the coefficients, use the same operation: add them when adding, multiply them when multiplying.'),
+    'bracket-sign': say('Minus baten atzeko parentesian gai GUZTIEK aldatzen dute zeinua.', 'Tras un menos, TODOS los términos del paréntesis cambian de signo.', 'بعد الناقص تتغيّر إشارة كل حدود القوس.', 'After a minus sign, ALL the terms in the bracket change sign.'),
+    'forgot-term': say('Gai bakoitza beste parentesiko gai guztiez biderkatu behar da.', 'Cada término se multiplica por todos los del otro paréntesis.', 'كل حد يُضرب في كل حدود القوس الآخر.', 'Each term is multiplied by every term in the other bracket.'),
+    'no-double': say('$(a+b)^{2}$ ez da $a^{2}+b^{2}$: falta da $2ab$.', '$(a+b)^{2}$ no es $a^{2}+b^{2}$: falta $2ab$.', '$(a+b)^{2}$ ليست $a^{2}+b^{2}$: ينقص $2ab$.', '$(a+b)^{2}$ is not $a^{2}+b^{2}$: $2ab$ is missing.'),
+    'last-sign': say('Karratu bat beti da positiboa; batura bider kenduran, berriz, $-b^{2}$.', 'Un cuadrado siempre es positivo; en suma por diferencia, en cambio, $-b^{2}$.', 'المربع موجب دائمًا؛ أما في مجموع في فرق فـ$-b^{2}$.', 'A square is always positive; in a sum times difference, however, it is $-b^{2}$.'),
+    'half-double': say('Erdiko gaia BIKOITZA da: $2\\cdot a\\cdot b$.', 'El término del medio es el DOBLE: $2\\cdot a\\cdot b$.', 'الحد الأوسط هو الضعف: $2\\cdot a\\cdot b$.', 'The middle term is DOUBLE the product: $2\\cdot a\\cdot b$.'),
+    'not-greatest': say('Faktore komuna da, baina ez handiena: hartu koefizienteen ZKH eta letra komunak berretzaile txikienarekin.', 'Es común, pero no el mayor: toma el m.c.d. de los coeficientes y las letras comunes con el menor exponente.', 'إنه مشترك لكن ليس الأكبر: خذ ق.م.أ للمعاملات والحروف المشتركة بأصغر أس.', 'It is common, but not the greatest one: take the GCD of the coefficients and the common letters with the smallest exponent.'),
+    'lost-one': say('Faktore osoa ateratzen den gaiaren lekuan 1 geratzen da.', 'Donde sale todo el término, dentro queda un 1.', 'حيث يخرج الحد كله يبقى داخل القوس 1.', 'When you take out the whole term, a 1 is left inside.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

@@ -12,8 +12,8 @@ const proportionDbh2Race: RaceRules<ProportionDbh2RaceError> = {
     parTime: proportionDbh2ParTime,
     errorTip: (error) => proportionDbh2RaceErrorTips[error ?? 'calculation'],
     pitPlaceholder: () => '30',
-    pitUnreadable: { eu: 'Idatzi zenbaki bat, adibidez 30 edo 10,8.', es: 'Escribe un número, por ejemplo 30 o 10,8.', ar: 'اكتب عددًا، مثل 30 أو 10.8.' },
-    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', ar: 'اكتبه عددًا.' }
+    pitUnreadable: { eu: 'Idatzi zenbaki bat, adibidez 30 edo 10,8.', es: 'Escribe un número, por ejemplo 30 o 10,8.', en: 'Write a number, for example 30 or 10.8.', ar: 'اكتب عددًا، مثل 30 أو 10.8.' },
+    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', en: 'Write it as a number.', ar: 'اكتبه عددًا.' }
 }
 
 export function ProportionDbh2RaceGame(props: GameProps) {

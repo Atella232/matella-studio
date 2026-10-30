@@ -33,7 +33,7 @@ export function EquationsSystemsLaboratory(props: {
             tools={equationsSystemsLabTools}
             stages={equationsSystemsStages}
             components={toolComponents}
-            title={{ eu: 'Ebatzi, egiaztatu eta ebaki', es: 'Resuelve, comprueba y corta', ar: 'حُلّ وتحقّق وقاطِع' }}
+            title={{ eu: 'Ebatzi, egiaztatu eta ebaki', es: 'Resuelve, comprueba y corta', en: 'Solve, check and cut', ar: 'حُلّ وتحقّق وقاطِع' }}
         />
     )
 }

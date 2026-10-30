@@ -56,8 +56,8 @@ export type StatisticsRaceError =
 export type StatisticsRaceQuestion = RaceQuestion<StatisticsRaceError> & { meta: Record<string, number> }
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => ({ eu: `$${latex}$`, es: `$${latex}$`, ar: `$${latex.replace(/\{,\}/g, '.')}$` })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => ({ eu: `$${latex}$`, es: `$${latex}$`, en: `$${latex}$`, ar: `$${latex.replace(/\{,\}/g, '.')}$` })
 const math = (latex: string) => `$${latex}$`
 const sum = (values: number[]) => values.reduce((total, value) => total + value, 0)
 
@@ -70,7 +70,7 @@ export function written(value: FractionValue, asFraction = false): string | null
 }
 // + 0 turns −0 into 0
 const n = (value: number) => fraction(Math.round(value * 10000) + 0, 10000)
-const tex = (value: number) => written(n(value)) ?? String(value)
+const tex = (value: number) => written(n(value)) ?? String(value).replace('.', '{,}')
 
 interface Candidate {
     value: FractionValue
@@ -121,7 +121,7 @@ function widthQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | nul
     return choices && build(0, 'width', say(
         `Datu txikiena ${math(String(min))} da eta handiena ${math(String(max))}; ${math(String(k))} tarte egingo dira. Zein da zabalera (osoa)?`,
         `Los datos van de ${math(String(min))} a ${math(String(max))} y se harán ${math(String(k))} intervalos. ¿Cuál es la amplitud (entera)?`,
-        `تمتد البيانات من ${math(String(min))} إلى ${math(String(max))} وستُعمل ${math(String(k))} فئات. ما طول الفئة (عدد صحيح)؟`
+        `تمتد البيانات من ${math(String(min))} إلى ${math(String(max))} وستُعمل ${math(String(k))} فئات. ما طول الفئة (عدد صحيح)؟`, `The data go from ${math(String(min))} to ${math(String(max))} and will be grouped into ${math(String(k))} intervals. What is the class width (a whole number)?`
     ), choices, n(width), same(`r=${range}\\to r'=${extended}\\to ${extended}:${k}=${width}`), { min, max, k })
 }
 
@@ -134,7 +134,7 @@ function markQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | null
     return choices && build(0, 'mark', say(
         `Zein da ${math(`[${tex(from)};\\ ${tex(to)})`)} tartearen klase-marka?`,
         `¿Cuál es la marca de clase del intervalo ${math(`[${tex(from)};\\ ${tex(to)})`)}?`,
-        `ما مركز الفئة ${math(`[${tex(from)};\\ ${tex(to)})`)}؟`
+        `ما مركز الفئة ${math(`[${tex(from)};\\ ${tex(to)})`)}؟`, `What is the class midpoint of the interval ${math(`[${tex(from)};\\ ${tex(to)})`)}?`
     ), choices, n(mark), same(`\\frac{${tex(from)}+${tex(to)}}{2}=${tex(mark)}`), { from, width })
 }
 
@@ -146,7 +146,7 @@ function sectorQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | nu
     return choices && build(0, 'sector', say(
         `Inkesta bat: guztira ${math(String(total))} pertsona, eta aukera bat ${math(String(part))} pertsonak hautatu dute. Zenbat gradu ditu haren sektoreak?`,
         `De ${math(String(total))} personas, ${math(String(part))} han elegido una opción. ¿Cuántos grados mide su sector?`,
-        `من ${math(String(total))} شخصًا اختار ${math(String(part))} خيارًا. كم درجة قطاعه؟`
+        `من ${math(String(total))} شخصًا اختار ${math(String(part))} خيارًا. كم درجة قطاعه؟`, `Out of ${math(String(total))} people, ${math(String(part))} have chosen an option. How many degrees does their sector measure?`
     ), choices, n(angle), same(`\\frac{${part}}{${total}}\\cdot 360=${tex(angle)}`), { part, total })
 }
 
@@ -159,7 +159,7 @@ function relativeQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | 
     return choices && build(0, 'relative', say(
         `${math(String(total))} datuko taula batean, balio baten maiztasun erlatiboa ${math(tex(h))} da. Zein da haren maiztasun absolutua?`,
         `En una tabla de ${math(String(total))} datos, la frecuencia relativa de un valor es ${math(tex(h))}. ¿Cuál es su frecuencia absoluta?`,
-        `في جدول من ${math(String(total))} بيانًا، التكرار النسبي لقيمة ${math(tex(h))}. ما تكرارها المطلق؟`
+        `في جدول من ${math(String(total))} بيانًا، التكرار النسبي لقيمة ${math(tex(h))}. ما تكرارها المطلق؟`, `In a table of ${math(String(total))} values, the relative frequency of a value is ${math(tex(h))}. What is its absolute frequency?`
     ), choices, n(count), same(`${tex(h)}\\cdot ${total}=${tex(count)}`), { h, total })
 }
 
@@ -177,7 +177,7 @@ function groupedMeanQuestion(random: Random, tier: Tier): StatisticsRaceQuestion
     return choices && build(1, 'grouped-mean', say(
         `Datu multzokatuak: ${math(intervals)}. Kalkulatu batez bestekoa.`,
         `Datos agrupados: ${math(intervals)}. Calcula la media.`,
-        `بيانات مبوّبة: ${math(intervals)}. احسب المتوسط.`
+        `بيانات مبوّبة: ${math(intervals)}. احسب المتوسط.`, `Grouped data: ${math(intervals)}. Calculate the mean.`
     ), choices, n(mean), same(`\\frac{${counts.map((count, index) => `${tex(marks[index])}\\cdot ${count}`).join('+')}}{${total}}=${tex(mean)}`), { width, c0: counts[0], c1: counts[1], c2: counts[2] })
 }
 
@@ -194,7 +194,7 @@ function percentileQuestion(random: Random, tier: Tier): StatisticsRaceQuestion 
     return choices && build(1, 'percentile', say(
         `Taula: ${tableText([0, 1, 2, 3, 4], counts)}. Zein da ${math(name)}?`,
         `Tabla: ${tableText([0, 1, 2, 3, 4], counts)}. ¿Cuánto vale ${math(name)}?`,
-        `جدول: ${tableText([0, 1, 2, 3, 4], counts)}. كم يساوي ${math(name)}؟`
+        `جدول: ${tableText([0, 1, 2, 3, 4], counts)}. كم يساوي ${math(name)}؟`, `Table: ${tableText([0, 1, 2, 3, 4], counts)}. What is the value of ${math(name)}?`
     ), choices, n(answer), same(`N=${total}\\quad F_i:\\ ${cumulative.join(',\\ ')}\\quad ${total}\\cdot\\frac{${k}}{100}=${tex((total * k) / 100)}\\to ${name}=${tex(answer)}`), { k, c0: counts[0], c1: counts[1], c2: counts[2], c3: counts[3], c4: counts[4] })
 }
 
@@ -208,7 +208,7 @@ function fenceQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | nul
     return choices && build(1, upper ? 'fence-up' : 'fence-down', say(
         `Kutxa-diagrama batean ${math(`Q_1=${q1}`)} eta ${math(`Q_3=${q3}`)}. Zein da ${upper ? 'goiko' : 'beheko'} biboteen muga?`,
         `En un diagrama de caja ${math(`Q_1=${q1}`)} y ${math(`Q_3=${q3}`)}. ¿Cuál es el límite ${upper ? 'superior' : 'inferior'} de los bigotes?`,
-        `في مخطط صندوق ${math(`Q_1=${q1}`)} و${math(`Q_3=${q3}`)}. ما الحد ${upper ? 'الأعلى' : 'الأدنى'} للشاربين؟`
+        `في مخطط صندوق ${math(`Q_1=${q1}`)} و${math(`Q_3=${q3}`)}. ما الحد ${upper ? 'الأعلى' : 'الأدنى'} للشاربين؟`, `In a box plot, ${math(`Q_1=${q1}`)} and ${math(`Q_3=${q3}`)}. What is the ${upper ? 'superior' : 'inferior'} limit of the whiskers?`
     ), choices, n(answer), same(`${upper ? q3 : q1}${upper ? '+' : '-'}1{,}5\\cdot ${box}=${tex(answer)}`), { q1, q3 })
 }
 
@@ -229,7 +229,7 @@ function varianceListQuestion(random: Random, tier: Tier): StatisticsRaceQuestio
     return choices && build(2, 'variance-list', say(
         `Kalkulatu bariantza: ${math(data.join(',\\ '))}.`,
         `Calcula la varianza de: ${math(data.join(',\\ '))}.`,
-        `احسب تباين: ${math(data.join(',\\ '))}.`
+        `احسب تباين: ${math(data.join(',\\ '))}.`, `Calculate the variance of: ${math(data.join(',\\ '))}.`
     ), choices, n(variance), same(`\\bar{x}=${mean}\\quad \\sigma^2=\\frac{${squares.join('+')}}{${size}}=${tex(variance)}`), Object.fromEntries(data.map((value, index) => [`d${index}`, value])))
 }
 
@@ -240,7 +240,7 @@ function sigmaQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | nul
     return choices && build(2, 'sigma', say(
         `Banaketa baten bariantza ${math(tex(variance))} da. Zein da desbideratze tipikoa?`,
         `La varianza de una distribución es ${math(tex(variance))}. ¿Cuál es la desviación típica?`,
-        `تباين توزيع ${math(tex(variance))}. ما الانحراف المعياري؟`
+        `تباين توزيع ${math(tex(variance))}. ما الانحراف المعياري؟`, `The variance of a distribution is ${math(tex(variance))}. What is the standard deviation?`
     ), choices, n(sigma), same(`\\sqrt{${tex(variance)}}=${tex(sigma)}`), { variance })
 }
 
@@ -256,7 +256,7 @@ function tableVarianceQuestion(random: Random, tier: Tier): StatisticsRaceQuesti
     return choices && build(2, 'table-variance', say(
         `Taula: ${tableText([0, 1, 2, 3], counts)}; ${math(`\\sum f_i x_i=${fx}`)} eta ${math(`\\sum f_i x_i^2=${fx2}`)}. Kalkulatu bariantza.`,
         `Tabla: ${tableText([0, 1, 2, 3], counts)}; ${math(`\\sum f_i x_i=${fx}`)} y ${math(`\\sum f_i x_i^2=${fx2}`)}. Calcula la varianza.`,
-        `جدول: ${tableText([0, 1, 2, 3], counts)}؛ ${math(`\\sum f_i x_i=${fx}`)} و${math(`\\sum f_i x_i^2=${fx2}`)}. احسب التباين.`
+        `جدول: ${tableText([0, 1, 2, 3], counts)}؛ ${math(`\\sum f_i x_i=${fx}`)} و${math(`\\sum f_i x_i^2=${fx2}`)}. احسب التباين.`, `Table: ${tableText([0, 1, 2, 3], counts)}; ${math(`\\sum f_i x_i=${fx}`)} and ${math(`\\sum f_i x_i^2=${fx2}`)}. Calculate the variance.`
     ), choices, n(variance), same(`\\frac{${fx2}}{${total}}-\\left(\\frac{${fx}}{${total}}\\right)^{2}=${tex(variance)}`), { c0: counts[0], c1: counts[1], c2: counts[2], c3: counts[3] })
 }
 
@@ -269,7 +269,7 @@ function cvQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | null {
     return choices && build(2, 'cv', say(
         `${math(`\\bar{x}=${mean}`)} eta ${math(`\\sigma=${sigma}`)}. Zein da aldakuntza-koefizientea, ehunekotan?`,
         `${math(`\\bar{x}=${mean}`)} y ${math(`\\sigma=${sigma}`)}. ¿Cuál es el coeficiente de variación, en porcentaje?`,
-        `${math(`\\bar{x}=${mean}`)} و${math(`\\sigma=${sigma}`)}. ما معامل الاختلاف بالنسبة المئوية؟`
+        `${math(`\\bar{x}=${mean}`)} و${math(`\\sigma=${sigma}`)}. ما معامل الاختلاف بالنسبة المئوية؟`, `${math(`\\bar{x}=${mean}`)} and ${math(`\\sigma=${sigma}`)}. What is the coefficient of variation, as a percentage?`
     ), choices, n(cv), same(`\\frac{${sigma}}{${mean}}\\cdot 100=${tex(cv)}`), { mean, sigma })
 }
 
@@ -285,7 +285,7 @@ function estimateQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | 
     return choices && build(3, 'estimate', say(
         `Erregresio-zuzena ${math(`\\hat{y}=${tex(m)}x${sign}${tex(Math.abs(b))}`)} da. Estimatu ${math('y')}, ${math(`x=${x}`)} denean.`,
         `La recta de regresión es ${math(`\\hat{y}=${tex(m)}x${sign}${tex(Math.abs(b))}`)}. Estima ${math('y')} para ${math(`x=${x}`)}.`,
-        `مستقيم الانحدار ${math(`\\hat{y}=${tex(m)}x${sign}${tex(Math.abs(b))}`)}. قدّر ${math('y')} عند ${math(`x=${x}`)}.`
+        `مستقيم الانحدار ${math(`\\hat{y}=${tex(m)}x${sign}${tex(Math.abs(b))}`)}. قدّر ${math('y')} عند ${math(`x=${x}`)}.`, `The regression line is ${math(`\\hat{y}=${tex(m)}x${sign}${tex(Math.abs(b))}`)}. Estimate ${math('y')} when ${math(`x=${x}`)}.`
     ), choices, n(answer), same(`${tex(m)}\\cdot ${x}${sign}${tex(Math.abs(b))}=${tex(answer)}`), { m, b, x })
 }
 
@@ -298,16 +298,16 @@ function throughMeansQuestion(random: Random, tier: Tier): StatisticsRaceQuestio
     return choices && build(3, 'through-means', say(
         `Erregresio-zuzenak ${math(`m=${tex(m)}`)} malda du, eta ${math(`\\bar{x}=${xm}`)}, ${math(`\\bar{y}=${ym}`)}. Zenbat da ${math('n')}?`,
         `La recta de regresión tiene pendiente ${math(`m=${tex(m)}`)}, y ${math(`\\bar{x}=${xm}`)}, ${math(`\\bar{y}=${ym}`)}. ¿Cuánto vale ${math('n')}?`,
-        `ميل مستقيم الانحدار ${math(`m=${tex(m)}`)}، و${math(`\\bar{x}=${xm}`)}، ${math(`\\bar{y}=${ym}`)}. كم تساوي ${math('n')}؟`
+        `ميل مستقيم الانحدار ${math(`m=${tex(m)}`)}، و${math(`\\bar{x}=${xm}`)}، ${math(`\\bar{y}=${ym}`)}. كم تساوي ${math('n')}؟`, `The regression line has slope ${math(`m=${tex(m)}`)}, with ${math(`\\bar{x}=${xm}`)} and ${math(`\\bar{y}=${ym}`)}. What is the value of ${math('n')}?`
     ), choices, n(answer), same(`n=${ym}-${m < 0 ? `(${tex(m)})` : tex(m)}\\cdot ${xm}=${tex(answer)}`), { m, xm, ym })
 }
 
 const clouds = [
-    { r: 0.95, text: say('gorantz doa eta puntuak zuzen batetik oso hurbil daude', 'sube y sus puntos están muy cerca de una recta', 'تصعد ونقاطها قريبة جدًا من مستقيم') },
-    { r: -0.95, text: say('beherantz doa eta puntuak zuzen batetik oso hurbil daude', 'baja y sus puntos están muy cerca de una recta', 'تهبط ونقاطها قريبة جدًا من مستقيم') },
-    { r: 0.5, text: say('gorantz doa, baina puntuak oso sakabanatuta daude', 'sube, pero sus puntos están muy dispersos', 'تصعد لكن نقاطها متشتتة جدًا') },
-    { r: -0.5, text: say('beherantz doa, baina puntuak oso sakabanatuta daude', 'baja, pero sus puntos están muy dispersos', 'تهبط لكن نقاطها متشتتة جدًا') },
-    { r: 0.05, text: say('ez du joerarik: puntuak toki guztietan daude', 'no tiene tendencia: los puntos están por todas partes', 'لا اتجاه لها: النقاط في كل مكان') }
+    { r: 0.95, text: say('gorantz doa eta puntuak zuzen batetik oso hurbil daude', 'sube y sus puntos están muy cerca de una recta', 'تصعد ونقاطها قريبة جدًا من مستقيم', 'goes up and its points are very close to a straight line') },
+    { r: -0.95, text: say('beherantz doa eta puntuak zuzen batetik oso hurbil daude', 'baja y sus puntos están muy cerca de una recta', 'تهبط ونقاطها قريبة جدًا من مستقيم', 'goes down and its points are very close to a straight line') },
+    { r: 0.5, text: say('gorantz doa, baina puntuak oso sakabanatuta daude', 'sube, pero sus puntos están muy dispersos', 'تصعد لكن نقاطها متشتتة جدًا', 'goes up, but its points are very spread out') },
+    { r: -0.5, text: say('beherantz doa, baina puntuak oso sakabanatuta daude', 'baja, pero sus puntos están muy dispersos', 'تهبط لكن نقاطها متشتتة جدًا', 'goes down, but its points are very spread out') },
+    { r: 0.05, text: say('ez du joerarik: puntuak toki guztietan daude', 'no tiene tendencia: los puntos están por todas partes', 'لا اتجاه لها: النقاط في كل مكان', 'has no trend: the points are all over the place') }
 ]
 
 function rQuestion(random: Random): StatisticsRaceQuestion | null {
@@ -321,7 +321,7 @@ function rQuestion(random: Random): StatisticsRaceQuestion | null {
     return choices && build(3, 'r', say(
         `Hodei bat ${cloud.text.eu}. Zein izan daiteke ${math('r')}?`,
         `Una nube ${cloud.text.es}. ¿Cuál puede ser ${math('r')}?`,
-        `سحابة ${cloud.text.ar}. أي قيمة قد تكون ${math('r')}؟`
+        `سحابة ${cloud.text.ar}. أي قيمة قد تكون ${math('r')}؟`, `A cloud ${cloud.text.en}. What could ${math('r')} be?`
     ), choices, n(cloud.r), same(`r=${tex(cloud.r)}`), { cloud: index })
 }
 
@@ -334,11 +334,11 @@ function unionQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | nul
     if (both > Math.min(a, b) || a + b - both > 1) return null
     const answer = a + b - both
     const choices = options(random, n(answer), [{ value: n(a + b), error: 'no-common' }, { value: n(a + b - 2 * both), error: 'common' }, { value: n(a * b), error: 'no-common' }, { value: n(1 - answer), error: 'no-complement' }, ...near(n(answer), 0.1)], { probability: true })
-    const given = both === 0 ? say('bateraezinak dira', 'son incompatibles', 'متنافيان') : say(`${math(`P(A\\cap B)=${tex(both)}`)}`, `${math(`P(A\\cap B)=${tex(both)}`)}`, `${math(`P(A\\cap B)=${tex(both)}`)}`)
+    const given = both === 0 ? say('bateraezinak dira', 'son incompatibles', 'متنافيان', 'they are mutually exclusive') : say(`${math(`P(A\\cap B)=${tex(both)}`)}`, `${math(`P(A\\cap B)=${tex(both)}`)}`, `${math(`P(A\\cap B)=${tex(both)}`)}`, `${math(`P(A\\cap B)=${tex(both)}`)}`)
     return choices && build(4, 'union', say(
         `${math(`P(A)=${tex(a)}`)}, ${math(`P(B)=${tex(b)}`)} eta ${given.eu}. Zenbat da ${math('P(A\\cup B)')}?`,
         `${math(`P(A)=${tex(a)}`)}, ${math(`P(B)=${tex(b)}`)} y ${given.es}. ¿Cuánto vale ${math('P(A\\cup B)')}?`,
-        `${math(`P(A)=${tex(a)}`)} و${math(`P(B)=${tex(b)}`)} و${given.ar}. كم يساوي ${math('P(A\\cup B)')}؟`
+        `${math(`P(A)=${tex(a)}`)} و${math(`P(B)=${tex(b)}`)} و${given.ar}. كم يساوي ${math('P(A\\cup B)')}؟`, `${math(`P(A)=${tex(a)}`)}, ${math(`P(B)=${tex(b)}`)} and ${given.en}. What is the value of ${math('P(A\\cup B)')}?`
     ), choices, n(answer), same(`${tex(a)}+${tex(b)}-${tex(both)}=${tex(answer)}`), { a, b, both })
 }
 
@@ -357,7 +357,7 @@ function drawsQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | nul
     return choices && build(4, 'draws', say(
         `Kutxa batean ${math(String(red))} bola gorri eta ${math(String(blue))} urdin daude. Bi atera dira, itzuli gabe. Zein da biak gorriak izateko probabilitatea?`,
         `En una urna hay ${math(String(red))} bolas rojas y ${math(String(blue))} azules. Se sacan dos sin devolver. ¿Cuál es la probabilidad de que las dos sean rojas?`,
-        `في جرّة ${math(String(red))} كرات حمراء و${math(String(blue))} زرقاء. تُسحب كرتان دون إرجاع. ما احتمال أن تكونا حمراوين؟`
+        `في جرّة ${math(String(red))} كرات حمراء و${math(String(blue))} زرقاء. تُسحب كرتان دون إرجاع. ما احتمال أن تكونا حمراوين؟`, `An urn has ${math(String(red))} red balls and ${math(String(blue))} blue balls. Two are taken out without replacement. What is the probability that both are red?`
     ), choices, answer, same(`\\frac{${red}}{${total}}\\cdot\\frac{${red - 1}}{${total - 1}}=${written(answer, true)}`), { red, blue })
 }
 
@@ -377,7 +377,7 @@ function conditionalQuestion(random: Random, tier: Tier): StatisticsRaceQuestion
     return choices && build(4, 'conditional', say(
         `Mutilak: ${math(String(boysGlasses))} betaurrekoekin eta ${math(String(boysWithout))} gabe. Neskak: ${math(String(girlsGlasses))} betaurrekoekin eta ${math(String(girlsWithout))} gabe. Neska dela jakinda, zein da betaurrekoak eramateko probabilitatea?`,
         `Chicos: ${math(String(boysGlasses))} con gafas y ${math(String(boysWithout))} sin gafas. Chicas: ${math(String(girlsGlasses))} con gafas y ${math(String(girlsWithout))} sin gafas. Sabiendo que es chica, ¿cuál es la probabilidad de que lleve gafas?`,
-        `الأولاد: ${math(String(boysGlasses))} بنظارات و${math(String(boysWithout))} بلا نظارات. البنات: ${math(String(girlsGlasses))} بنظارات و${math(String(girlsWithout))} بلا نظارات. علمًا أنها بنت، ما احتمال أن تلبس نظارات؟`
+        `الأولاد: ${math(String(boysGlasses))} بنظارات و${math(String(boysWithout))} بلا نظارات. البنات: ${math(String(girlsGlasses))} بنظارات و${math(String(girlsWithout))} بلا نظارات. علمًا أنها بنت، ما احتمال أن تلبس نظارات؟`, `Boys: ${math(String(boysGlasses))} with glasses and ${math(String(boysWithout))} without glasses. Girls: ${math(String(girlsGlasses))} with glasses and ${math(String(girlsWithout))} without glasses. Knowing that the person is a girl, what is the probability that she wears glasses?`
     ), choices, answer, same(`\\frac{${girlsGlasses}}{${girlsGlasses}+${girlsWithout}}=${written(answer, true)}`), { boysGlasses, girlsGlasses, boysWithout, girlsWithout })
 }
 
@@ -393,7 +393,7 @@ function atLeastQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | n
     return choices && build(4, 'at-least', say(
         `Erruleta batek ${math(String(k))} sektore berdin ditu, bat gorria. Bi aldiz biratzen da. Zein da gutxienez behin gorria ateratzeko probabilitatea?`,
         `Una ruleta tiene ${math(String(k))} sectores iguales, uno rojo. Se gira dos veces. ¿Cuál es la probabilidad de sacar rojo al menos una vez?`,
-        `لدولاب ${math(String(k))} قطاعات متساوية، أحدها أحمر. يُدار مرتين. ما احتمال ظهور الأحمر مرة واحدة على الأقل؟`
+        `لدولاب ${math(String(k))} قطاعات متساوية، أحدها أحمر. يُدار مرتين. ما احتمال ظهور الأحمر مرة واحدة على الأقل؟`, `A spinner has ${math(String(k))} equal sections, one of them red. It is spun twice. What is the probability of getting red at least once?`
     ), choices, answer, same(`1-\\frac{${k - 1}}{${k}}\\cdot\\frac{${k - 1}}{${k}}=${written(answer, true)}`), { k })
 }
 
@@ -425,32 +425,32 @@ export function statisticsParTime(circuit: number): number {
 }
 
 export const statisticsRaceErrorTips: Record<StatisticsRaceError, LocalizedText> = {
-    range: say('Hori ibiltartea da (edo r′); zabalera r′ zati tarte kopurua da.', 'Eso es el recorrido (o r′); la amplitud es r′ entre el número de intervalos.', 'هذا المدى (أو r′)؛ وطول الفئة r′ على عدد الفئات.'),
-    count: say('Hori tarte kopurua da, ez zabalera.', 'Ese es el número de intervalos, no la amplitud.', 'هذا عدد الفئات لا طولها.'),
-    limit: say('Hori tartearen muga da; klase-marka erdiko puntua da.', 'Eso es un extremo del intervalo; la marca de clase es el punto medio.', 'هذا حدّ الفئة؛ ومركز الفئة نقطتها الوسطى.'),
-    width: say('Hori tartearen zabalera da, ez klase-marka.', 'Esa es la amplitud del intervalo, no la marca de clase.', 'هذا طول الفئة لا مركزها.'),
-    'percent-degrees': say('Angelua: zatia bider 360°, ez 100.', 'Ángulo: la parte por 360°, no por 100.', 'الزاوية: الجزء في 360° لا في 100.'),
-    percent: say('Ehunekoa eta maiztasun erlatiboa ez dira gauza bera: % 15 = 0,15.', 'El porcentaje y la frecuencia relativa no son lo mismo: 15 % = 0,15.', 'النسبة المئوية والتكرار النسبي ليسا الشيء نفسه: 15 % = 0.15.'),
-    'ignore-frequency': say('Klase-marka bakoitza bere maiztasunaz biderkatu behar da.', 'Hay que multiplicar cada marca de clase por su frecuencia.', 'يجب ضرب كل مركز فئة في تكراره.'),
-    neighbour: say('Bilatu N · k / 100 postua maiztasun metatuetan: osoa bada, posizio horretako eta hurrengoaren batez bestekoa.', 'Busca la posición N · k / 100 en las acumuladas: si es entera, la media de esa posición y la siguiente.', 'ابحث عن الموقع N · k / 100 في المتجمّعة: إذا كان صحيحًا فمتوسط ذلك الموقع والذي يليه.'),
-    'no-factor': say('Biboteak kutxa bider 1,5 dira, ez kutxa bera.', 'Los bigotes son 1,5 veces la caja, no la caja.', 'الشاربان 1.5 مرة الصندوق، لا الصندوق نفسه.'),
-    box: say('Hori luzapena da; gehitu Q₃-ri edo kendu Q₁-i.', 'Eso es el alargamiento; súmalo a Q₃ o réstalo a Q₁.', 'هذا الامتداد؛ أضفه إلى Q₃ أو اطرحه من Q₁.'),
-    'other-side': say('Beste aldeko muga da hori.', 'Ese es el límite del otro lado.', 'هذا حدّ الجهة الأخرى.'),
-    'no-square': say('Desbideratzeak karratura jaso behar dira.', 'Las desviaciones hay que elevarlas al cuadrado.', 'يجب تربيع الانحرافات.'),
-    'no-divide': say('Karratuen batura zati datu kopurua.', 'La suma de cuadrados, entre el número de datos.', 'مجموع المربعات على عدد البيانات.'),
-    variance: say('σ² eta σ nahastu dituzu: σ = √σ².', 'Has mezclado σ² y σ: σ = √σ².', 'خلطت بين σ² وσ: σ = √σ².'),
-    'mean-square': say('Bariantza = Σ fᵢxᵢ² : N − x̄²: batez bestekoaren karratua kendu.', 'Varianza = Σ fᵢxᵢ² : N − x̄²: resta el cuadrado de la media.', 'التباين = Σ fᵢxᵢ² : N − x̄²: اطرح مربع المتوسط.'),
-    'inverse-ratio': say('Zatiketa alderantziz: CV = σ : x̄.', 'División al revés: CV = σ : x̄.', 'قسمة معكوسة: CV = σ : x̄.'),
-    'no-fixed': say('Ez ahaztu zuzenaren n zatia.', 'No olvides la parte n de la recta.', 'لا تنسَ الجزء n من المستقيم.'),
-    sign: say('Kontuz zeinuarekin: n = ȳ − m · x̄.', 'Cuidado con el signo: n = ȳ − m · x̄.', 'انتبه للإشارة: n = ȳ − m · x̄.'),
-    weak: say('Zeinua: hodeia gora ala behera. Balio absolutua: zenbat eta hurbilago zuzenetik, orduan eta 1etik hurbilago.', 'El signo: la nube sube o baja. El valor absoluto: cuanto más cerca de una recta, más cerca de 1.', 'الإشارة: السحابة تصعد أو تهبط. والقيمة المطلقة: كلما اقتربت من مستقيم اقتربت من 1.'),
-    'no-common': say('Bateragarriak badira, kendu P(A ∩ B) behin.', 'Si son compatibles, resta P(A ∩ B) una vez.', 'إذا كانا متوافقين فاطرح P(A ∩ B) مرة.'),
-    common: say('Zati komuna behin bakarrik kendu.', 'La parte común se resta una sola vez.', 'يُطرح الجزء المشترك مرة واحدة.'),
-    replacement: say('Itzuli gabe, bigarrenean bola bat gutxiago dago.', 'Sin devolver, en la segunda hay una bola menos.', 'دون إرجاع تكون في السحبة الثانية كرة أقل.'),
-    'one-draw': say('Bi ateraldi dira: biderkatu bi adarrak.', 'Son dos extracciones: multiplica las dos ramas.', 'سحبتان: اضرب الفرعين.'),
-    joint: say('Baldintzatuan, kasu posibleak baldintzarenak bakarrik dira.', 'En la condicionada, los casos posibles son solo los de la condición.', 'في المشروط الحالات الممكنة هي حالات الشرط فقط.'),
-    reversed: say('Alderantziz irakurri duzu: P(A / B) = P(A ∩ B) : P(B).', 'Lo has leído al revés: P(A / B) = P(A ∩ B) : P(B).', 'قرأته بالعكس: P(A / B) = P(A ∩ B) : P(B).'),
-    double: say('Probabilitateak ez dira batzen aldi bakoitzean: erabili aurkakoa.', 'Las probabilidades no se suman en cada intento: usa el contrario.', 'لا تُجمع الاحتمالات في كل محاولة: استعمل المعاكس.'),
-    'no-complement': say('«Gutxienez behin» = 1 − P(behin ere ez).', '«Al menos una vez» = 1 − P(ninguna vez).', '«مرة على الأقل» = 1 − P(ولا مرة).'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    range: say('Hori ibiltartea da (edo r′); zabalera r′ zati tarte kopurua da.', 'Eso es el recorrido (o r′); la amplitud es r′ entre el número de intervalos.', 'هذا المدى (أو r′)؛ وطول الفئة r′ على عدد الفئات.', 'That is the range (or r′); the class width is r′ divided by the number of intervals.'),
+    count: say('Hori tarte kopurua da, ez zabalera.', 'Ese es el número de intervalos, no la amplitud.', 'هذا عدد الفئات لا طولها.', 'That is the number of intervals, not the class width.'),
+    limit: say('Hori tartearen muga da; klase-marka erdiko puntua da.', 'Eso es un extremo del intervalo; la marca de clase es el punto medio.', 'هذا حدّ الفئة؛ ومركز الفئة نقطتها الوسطى.', 'That is one end of the interval; the class midpoint is the middle of the interval.'),
+    width: say('Hori tartearen zabalera da, ez klase-marka.', 'Esa es la amplitud del intervalo, no la marca de clase.', 'هذا طول الفئة لا مركزها.', 'That is the class width, not the class midpoint.'),
+    'percent-degrees': say('Angelua: zatia bider 360°, ez 100.', 'Ángulo: la parte por 360°, no por 100.', 'الزاوية: الجزء في 360° لا في 100.', 'Angle: the part times 360°, not times 100.'),
+    percent: say('Ehunekoa eta maiztasun erlatiboa ez dira gauza bera: % 15 = 0,15.', 'El porcentaje y la frecuencia relativa no son lo mismo: 15 % = 0,15.', 'النسبة المئوية والتكرار النسبي ليسا الشيء نفسه: 15 % = 0.15.', 'The percentage and the relative frequency are not the same: 15% = 0.15.'),
+    'ignore-frequency': say('Klase-marka bakoitza bere maiztasunaz biderkatu behar da.', 'Hay que multiplicar cada marca de clase por su frecuencia.', 'يجب ضرب كل مركز فئة في تكراره.', 'You need to multiply each class midpoint by its frequency.'),
+    neighbour: say('Bilatu N · k / 100 postua maiztasun metatuetan: osoa bada, posizio horretako eta hurrengoaren batez bestekoa.', 'Busca la posición N · k / 100 en las acumuladas: si es entera, la media de esa posición y la siguiente.', 'ابحث عن الموقع N · k / 100 في المتجمّعة: إذا كان صحيحًا فمتوسط ذلك الموقع والذي يليه.', 'Find the position N · k / 100 in the cumulative values: if it is a whole number, take the mean of that position and the next one.'),
+    'no-factor': say('Biboteak kutxa bider 1,5 dira, ez kutxa bera.', 'Los bigotes son 1,5 veces la caja, no la caja.', 'الشاربان 1.5 مرة الصندوق، لا الصندوق نفسه.', 'The whiskers are 1.5 times the length of the box, not the box itself.'),
+    box: say('Hori luzapena da; gehitu Q₃-ri edo kendu Q₁-i.', 'Eso es el alargamiento; súmalo a Q₃ o réstalo a Q₁.', 'هذا الامتداد؛ أضفه إلى Q₃ أو اطرحه من Q₁.', 'That is the extension; add it to Q₃ or subtract it from Q₁.'),
+    'other-side': say('Beste aldeko muga da hori.', 'Ese es el límite del otro lado.', 'هذا حدّ الجهة الأخرى.', 'That is the limit on the other side.'),
+    'no-square': say('Desbideratzeak karratura jaso behar dira.', 'Las desviaciones hay que elevarlas al cuadrado.', 'يجب تربيع الانحرافات.', 'The deviations must be squared.'),
+    'no-divide': say('Karratuen batura zati datu kopurua.', 'La suma de cuadrados, entre el número de datos.', 'مجموع المربعات على عدد البيانات.', 'The sum of the squares, divided by the number of values.'),
+    variance: say('σ² eta σ nahastu dituzu: σ = √σ².', 'Has mezclado σ² y σ: σ = √σ².', 'خلطت بين σ² وσ: σ = √σ².', 'You have mixed up σ² and σ: σ = √σ².'),
+    'mean-square': say('Bariantza = Σ fᵢxᵢ² : N − x̄²: batez bestekoaren karratua kendu.', 'Varianza = Σ fᵢxᵢ² : N − x̄²: resta el cuadrado de la media.', 'التباين = Σ fᵢxᵢ² : N − x̄²: اطرح مربع المتوسط.', 'Variance = Σ fᵢxᵢ² : N − x̄²: subtract the square of the mean.'),
+    'inverse-ratio': say('Zatiketa alderantziz: CV = σ : x̄.', 'División al revés: CV = σ : x̄.', 'قسمة معكوسة: CV = σ : x̄.', 'Division the wrong way round: CV = σ : x̄.'),
+    'no-fixed': say('Ez ahaztu zuzenaren n zatia.', 'No olvides la parte n de la recta.', 'لا تنسَ الجزء n من المستقيم.', 'Don\'t forget the y-intercept, n.'),
+    sign: say('Kontuz zeinuarekin: n = ȳ − m · x̄.', 'Cuidado con el signo: n = ȳ − m · x̄.', 'انتبه للإشارة: n = ȳ − m · x̄.', 'Be careful with the sign: n = ȳ − m · x̄.'),
+    weak: say('Zeinua: hodeia gora ala behera. Balio absolutua: zenbat eta hurbilago zuzenetik, orduan eta 1etik hurbilago.', 'El signo: la nube sube o baja. El valor absoluto: cuanto más cerca de una recta, más cerca de 1.', 'الإشارة: السحابة تصعد أو تهبط. والقيمة المطلقة: كلما اقتربت من مستقيم اقتربت من 1.', 'The sign: the cloud goes up or down. The absolute value: the closer the points are to a straight line, the closer it is to 1.'),
+    'no-common': say('Bateragarriak badira, kendu P(A ∩ B) behin.', 'Si son compatibles, resta P(A ∩ B) una vez.', 'إذا كانا متوافقين فاطرح P(A ∩ B) مرة.', 'If they are not mutually exclusive, subtract P(A ∩ B) once.'),
+    common: say('Zati komuna behin bakarrik kendu.', 'La parte común se resta una sola vez.', 'يُطرح الجزء المشترك مرة واحدة.', 'The shared part is subtracted only once.'),
+    replacement: say('Itzuli gabe, bigarrenean bola bat gutxiago dago.', 'Sin devolver, en la segunda hay una bola menos.', 'دون إرجاع تكون في السحبة الثانية كرة أقل.', 'Without replacement, there is one ball fewer in the second draw.'),
+    'one-draw': say('Bi ateraldi dira: biderkatu bi adarrak.', 'Son dos extracciones: multiplica las dos ramas.', 'سحبتان: اضرب الفرعين.', 'There are two draws: multiply the two branches.'),
+    joint: say('Baldintzatuan, kasu posibleak baldintzarenak bakarrik dira.', 'En la condicionada, los casos posibles son solo los de la condición.', 'في المشروط الحالات الممكنة هي حالات الشرط فقط.', 'In conditional probability, the possible cases are only those in the condition.'),
+    reversed: say('Alderantziz irakurri duzu: P(A / B) = P(A ∩ B) : P(B).', 'Lo has leído al revés: P(A / B) = P(A ∩ B) : P(B).', 'قرأته بالعكس: P(A / B) = P(A ∩ B) : P(B).', 'You have read it the wrong way round: P(A / B) = P(A ∩ B) : P(B).'),
+    double: say('Probabilitateak ez dira batzen aldi bakoitzean: erabili aurkakoa.', 'Las probabilidades no se suman en cada intento: usa el contrario.', 'لا تُجمع الاحتمالات في كل محاولة: استعمل المعاكس.', 'Probabilities are not added up at each attempt: use the complement.'),
+    'no-complement': say('«Gutxienez behin» = 1 − P(behin ere ez).', '«Al menos una vez» = 1 − P(ninguna vez).', '«مرة على الأقل» = 1 − P(ولا مرة).', '‘At least once’ = 1 − P(not once).'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

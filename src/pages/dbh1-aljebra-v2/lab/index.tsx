@@ -29,7 +29,7 @@ export function AlgebraIntroLaboratory(props: {
             tools={algebraLabTools}
             stages={algebraIntroStages}
             components={toolComponents}
-            title={{ eu: 'Letrak ukitu eta orekatu', es: 'Toca las letras y equilibra', ar: 'المس الحروف ووازن' }}
+            title={{ eu: 'Letrak ukitu eta orekatu', es: 'Toca las letras y equilibra', en: 'Tap the letters and balance', ar: 'المس الحروف ووازن' }}
         />
     )
 }

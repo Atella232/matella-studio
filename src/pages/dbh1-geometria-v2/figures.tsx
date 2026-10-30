@@ -1,5 +1,6 @@
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
 import { Caption, Figure } from '../dbh2-zatikiak-prototype/figures'
+import { decimalSeparatorFor } from '../../utils/numberFormat'
 
 /* ==========================================================================
    Geometria · 1. DBH — lesson figures in the notebook style: lines, angles,
@@ -50,32 +51,32 @@ function Ray({ x, y, angle, length }: { x: number; y: number; angle: number; len
 
 export function LinesFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={250} label={pick(language, { eu: 'Zuzena, zuzerdia, zuzenkia eta zuzenen posizioak', es: 'Recta, semirrecta, segmento y posiciones de rectas', ar: 'المستقيم ونصف المستقيم والقطعة وأوضاع المستقيمات' })}>
+        <Figure height={250} label={pick(language, { eu: 'Zuzena, zuzerdia, zuzenkia eta zuzenen posizioak', es: 'Recta, semirrecta, segmento y posiciones de rectas', en: 'Straight line, ray, line segment and positions of lines.', ar: 'المستقيم ونصف المستقيم والقطعة وأوضاع المستقيمات' })}>
             <defs>
                 <marker id="geometry-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                     <path d="M0 0 L10 5 L0 10 z" fill={INK} />
                 </marker>
             </defs>
             <line x1={40} x2={220} y1={40} y2={40} stroke={INK} strokeWidth={2.4} markerStart="url(#geometry-arrow)" markerEnd="url(#geometry-arrow)" />
-            <text x={130} y={70} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'zuzena', es: 'recta', ar: 'مستقيم' })}</text>
+            <text x={130} y={70} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'zuzena', es: 'recta', en: 'straight line', ar: 'مستقيم' })}</text>
             <line x1={270} x2={450} y1={40} y2={40} stroke={INK} strokeWidth={2.4} markerEnd="url(#geometry-arrow)" />
             <circle cx={270} cy={40} r={5} fill={STAGE} />
-            <text x={360} y={70} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'zuzerdia', es: 'semirrecta', ar: 'نصف مستقيم' })}</text>
+            <text x={360} y={70} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'zuzerdia', es: 'semirrecta', en: 'ray', ar: 'نصف مستقيم' })}</text>
             <line x1={500} x2={680} y1={40} y2={40} stroke={INK} strokeWidth={2.4} />
             <circle cx={500} cy={40} r={5} fill={STAGE} />
             <circle cx={680} cy={40} r={5} fill={STAGE} />
-            <text x={590} y={70} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'zuzenkia', es: 'segmento', ar: 'قطعة مستقيمة' })}</text>
+            <text x={590} y={70} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'zuzenkia', es: 'segmento', en: 'line segment', ar: 'قطعة مستقيمة' })}</text>
             <line x1={60} x2={220} y1={120} y2={120} stroke={STAGE} strokeWidth={2.4} />
             <line x1={60} x2={220} y1={150} y2={150} stroke={STAGE} strokeWidth={2.4} />
-            <text x={140} y={190} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'paraleloak', es: 'paralelas', ar: 'متوازيان' })}</text>
+            <text x={140} y={190} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'paraleloak', es: 'paralelas', en: 'parallel', ar: 'متوازيان' })}</text>
             <line x1={290} x2={440} y1={110} y2={170} stroke={STAGE} strokeWidth={2.4} />
             <line x1={290} x2={440} y1={170} y2={110} stroke={STAGE} strokeWidth={2.4} />
-            <text x={365} y={190} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'ebakitzaileak', es: 'secantes', ar: 'متقاطعان' })}</text>
+            <text x={365} y={190} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'ebakitzaileak', es: 'secantes', en: 'intersecting', ar: 'متقاطعان' })}</text>
             <line x1={520} x2={660} y1={140} y2={140} stroke={STAGE} strokeWidth={2.4} />
             <line x1={590} x2={590} y1={100} y2={176} stroke={STAGE} strokeWidth={2.4} />
             <AngleMark x={590} y={140} from={0} size={90} radius={18} color={SECOND} />
-            <text x={590} y={196} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'perpendikularrak', es: 'perpendiculares', ar: 'متعامدان' })}</text>
-            <Caption y={236}>{pick(language, { eu: 'Zuzenak ez du ez hasierarik ez amaierarik; zuzenkiak bi mutur ditu', es: 'La recta no tiene principio ni fin; el segmento tiene dos extremos', ar: 'المستقيم لا بداية له ولا نهاية؛ والقطعة لها طرفان' })}</Caption>
+            <text x={590} y={196} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'perpendikularrak', es: 'perpendiculares', en: 'perpendicular', ar: 'متعامدان' })}</text>
+            <Caption y={236}>{pick(language, { eu: 'Zuzenak ez du ez hasierarik ez amaierarik; zuzenkiak bi mutur ditu', es: 'La recta no tiene principio ni fin; el segmento tiene dos extremos', en: 'The straight line has no beginning or end; the line segment has two endpoints.', ar: 'المستقيم لا بداية له ولا نهاية؛ والقطعة لها طرفان' })}</Caption>
         </Figure>
     )
 }
@@ -84,13 +85,13 @@ export function LinesFigure({ language }: { language: UnitLanguage }) {
 
 export function AngleTypesFigure({ language }: { language: UnitLanguage }) {
     const types = [
-        { size: 45, name: { eu: 'zorrotza', es: 'agudo', ar: 'حادة' }, note: '< 90°' },
-        { size: 90, name: { eu: 'zuzena', es: 'recto', ar: 'قائمة' }, note: '= 90°' },
-        { size: 135, name: { eu: 'kamutsa', es: 'obtuso', ar: 'منفرجة' }, note: '> 90°' },
-        { size: 180, name: { eu: 'laua', es: 'llano', ar: 'مستقيمة' }, note: '= 180°' }
+        { size: 45, name: { eu: 'zorrotza', es: 'agudo', en: 'acute', ar: 'حادة' }, note: '< 90°' },
+        { size: 90, name: { eu: 'zuzena', es: 'recto', en: 'right', ar: 'قائمة' }, note: '= 90°' },
+        { size: 135, name: { eu: 'kamutsa', es: 'obtuso', en: 'obtuse', ar: 'منفرجة' }, note: '> 90°' },
+        { size: 180, name: { eu: 'laua', es: 'llano', en: 'straight', ar: 'مستقيمة' }, note: '= 180°' }
     ]
     return (
-        <Figure height={220} label={pick(language, { eu: 'Angelu motak', es: 'Tipos de ángulos', ar: 'أنواع الزوايا' })}>
+        <Figure height={220} label={pick(language, { eu: 'Angelu motak', es: 'Tipos de ángulos', en: 'Types of angles.', ar: 'أنواع الزوايا' })}>
             {types.map((type, index) => {
                 const x = 60 + index * 170
                 return (
@@ -104,7 +105,7 @@ export function AngleTypesFigure({ language }: { language: UnitLanguage }) {
                     </g>
                 )
             })}
-            <Caption y={214}>{pick(language, { eu: 'Angeluak graduetan (°) neurtzen dira garraiagailuarekin', es: 'Los ángulos se miden en grados (°) con el transportador', ar: 'تُقاس الزوايا بالدرجات (°) بالمنقلة' })}</Caption>
+            <Caption y={214}>{pick(language, { eu: 'Angeluak graduetan (°) neurtzen dira garraiagailuarekin', es: 'Los ángulos se miden en grados (°) con el transportador', en: 'Angles are measured in degrees (°) with a protractor.', ar: 'تُقاس الزوايا بالدرجات (°) بالمنقلة' })}</Caption>
         </Figure>
     )
 }
@@ -113,7 +114,7 @@ export function AngleTypesFigure({ language }: { language: UnitLanguage }) {
 
 export function AnglePairsFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={220} label={pick(language, { eu: 'Angelu osagarriak eta betegarriak', es: 'Ángulos complementarios y suplementarios', ar: 'زاويتان متتامتان ومتكاملتان' })}>
+        <Figure height={220} label={pick(language, { eu: 'Angelu osagarriak eta betegarriak', es: 'Ángulos complementarios y suplementarios', en: 'Complementary and supplementary angles.', ar: 'زاويتان متتامتان ومتكاملتان' })}>
             <Ray x={80} y={160} angle={0} length={150} />
             <Ray x={80} y={160} angle={35} length={150} />
             <Ray x={80} y={160} angle={90} length={130} />
@@ -126,8 +127,8 @@ export function AnglePairsFigure({ language }: { language: UnitLanguage }) {
             <AngleMark x={500} y={160} from={0} size={120} radius={34} label="120°" />
             <AngleMark x={500} y={160} from={120} size={60} radius={50} color={SECOND} label="60°" />
             <text x={500} y={200} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>120° + 60° = 180°</text>
-            <text x={170} y={30} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'osagarriak', es: 'complementarios', ar: 'متتامتان' })}</text>
-            <text x={500} y={30} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'betegarriak', es: 'suplementarios', ar: 'متكاملتان' })}</text>
+            <text x={170} y={30} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'osagarriak', es: 'complementarios', en: 'complementary', ar: 'متتامتان' })}</text>
+            <text x={500} y={30} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'betegarriak', es: 'suplementarios', en: 'supplementary', ar: 'متكاملتان' })}</text>
         </Figure>
     )
 }
@@ -138,15 +139,15 @@ export function PolygonFigure({ language }: { language: UnitLanguage }) {
     const points: Array<[number, number]> = [[140, 40], [240, 90], [220, 190], [90, 200], [50, 110]]
     const path = points.map(([x, y], index) => `${index === 0 ? 'M' : 'L'}${x} ${y}`).join(' ') + ' Z'
     return (
-        <Figure height={240} label={pick(language, { eu: 'Pentagono baten elementuak', es: 'Elementos de un pentágono', ar: 'عناصر مخمس' })}>
+        <Figure height={240} label={pick(language, { eu: 'Pentagono baten elementuak', es: 'Elementos de un pentágono', en: 'Parts of a pentagon.', ar: 'عناصر مخمس' })}>
             <path d={path} fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} />
             <line x1={140} y1={40} x2={220} y2={190} stroke={SECOND} strokeWidth={2} strokeDasharray="6 5" />
             {points.map(([x, y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r={5} fill={INK} />)}
-            <text x={330} y={60} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: '● erpinak: 5', es: '● vértices: 5', ar: '● الرؤوس: 5' })}</text>
-            <text x={330} y={95} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: '— aldeak: 5', es: '— lados: 5', ar: '— الأضلاع: 5' })}</text>
-            <text x={330} y={130} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, { eu: '- - diagonala', es: '- - diagonal', ar: '- - قطر' })}</text>
-            <text x={330} y={165} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'angeluak: 5', es: 'ángulos: 5', ar: 'الزوايا: 5' })}</text>
-            <Caption y={232}>{pick(language, { eu: 'Poligonoa: zuzenki-lerro itxi batek mugatutako planoaren zatia', es: 'Polígono: parte del plano limitada por una línea poligonal cerrada', ar: 'المضلع: جزء من المستوي تحدّه خطوط مستقيمة مغلقة' })}</Caption>
+            <text x={330} y={60} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: '● erpinak: 5', es: '● vértices: 5', en: '● vertices: 5', ar: '● الرؤوس: 5' })}</text>
+            <text x={330} y={95} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: '— aldeak: 5', es: '— lados: 5', en: '— sides: 5', ar: '— الأضلاع: 5' })}</text>
+            <text x={330} y={130} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, { eu: '- - diagonala', es: '- - diagonal', en: '- - diagonal', ar: '- - قطر' })}</text>
+            <text x={330} y={165} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'angeluak: 5', es: 'ángulos: 5', en: 'angles: 5', ar: 'الزوايا: 5' })}</text>
+            <Caption y={232}>{pick(language, { eu: 'Poligonoa: zuzenki-lerro itxi batek mugatutako planoaren zatia', es: 'Polígono: parte del plano limitada por una línea poligonal cerrada', en: 'Polygon: part of the plane bounded by a closed polygonal line.', ar: 'المضلع: جزء من المستوي تحدّه خطوط مستقيمة مغلقة' })}</Caption>
         </Figure>
     )
 }
@@ -155,7 +156,7 @@ export function PolygonFigure({ language }: { language: UnitLanguage }) {
 
 export function TriangleSumFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={240} label={pick(language, { eu: 'Triangelu baten angeluen batura 180° da', es: 'Los ángulos de un triángulo suman 180°', ar: 'مجموع زوايا المثلث 180°' })}>
+        <Figure height={240} label={pick(language, { eu: 'Triangelu baten angeluen batura 180° da', es: 'Los ángulos de un triángulo suman 180°', en: 'The angles of a triangle add up to 180°.', ar: 'مجموع زوايا المثلث 180°' })}>
             <path d="M80 190 L320 190 L200 50 Z" fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} />
             <AngleMark x={80} y={190} from={0} size={49} radius={34} label="A" />
             <AngleMark x={320} y={190} from={131} size={49} radius={34} color={SECOND} label="B" />
@@ -165,7 +166,7 @@ export function TriangleSumFigure({ language }: { language: UnitLanguage }) {
             <AngleMark x={540} y={150} from={49} size={82} radius={50} color="var(--mustard, #e0a100)" label="C" />
             <AngleMark x={540} y={150} from={131} size={49} radius={50} color={SECOND} label="B" />
             <text x={540} y={190} textAnchor="middle" fontSize={18} fontWeight={700} fill={INK}>A + B + C = 180°</text>
-            <Caption y={232}>{pick(language, { eu: 'Hiru angeluak elkartuta angelu laua osatzen dute', es: 'Los tres ángulos juntos forman un ángulo llano', ar: 'الزوايا الثلاث معًا تكوّن زاوية مستقيمة' })}</Caption>
+            <Caption y={232}>{pick(language, { eu: 'Hiru angeluak elkartuta angelu laua osatzen dute', es: 'Los tres ángulos juntos forman un ángulo llano', en: 'The three angles together form a straight angle.', ar: 'الزوايا الثلاث معًا تكوّن زاوية مستقيمة' })}</Caption>
         </Figure>
     )
 }
@@ -174,17 +175,17 @@ export function TriangleSumFigure({ language }: { language: UnitLanguage }) {
 
 export function TriangleTypesFigure({ language }: { language: UnitLanguage }) {
     const shapes = [
-        { d: 'M40 150 L140 150 L90 63 Z', name: { eu: 'aldeberdina', es: 'equilátero', ar: 'متساوي الأضلاع' } },
-        { d: 'M200 150 L290 150 L245 40 Z', name: { eu: 'isoszelea', es: 'isósceles', ar: 'متساوي الساقين' } },
-        { d: 'M350 150 L480 150 L380 80 Z', name: { eu: 'eskalenoa', es: 'escaleno', ar: 'مختلف الأضلاع' } },
-        { d: 'M540 150 L660 150 L540 60 Z', name: { eu: 'angeluzuzena', es: 'rectángulo', ar: 'قائم الزاوية' } }
+        { d: 'M40 150 L140 150 L90 63 Z', name: { eu: 'aldeberdina', es: 'equilátero', en: 'equilateral', ar: 'متساوي الأضلاع' } },
+        { d: 'M200 150 L290 150 L245 40 Z', name: { eu: 'isoszelea', es: 'isósceles', en: 'isosceles', ar: 'متساوي الساقين' } },
+        { d: 'M350 150 L480 150 L380 80 Z', name: { eu: 'eskalenoa', es: 'escaleno', en: 'scalene', ar: 'مختلف الأضلاع' } },
+        { d: 'M540 150 L660 150 L540 60 Z', name: { eu: 'angeluzuzena', es: 'rectángulo', en: 'right-angled', ar: 'قائم الزاوية' } }
     ]
     return (
-        <Figure height={220} label={pick(language, { eu: 'Triangelu motak', es: 'Tipos de triángulos', ar: 'أنواع المثلثات' })}>
+        <Figure height={220} label={pick(language, { eu: 'Triangelu motak', es: 'Tipos de triángulos', en: 'Types of triangles.', ar: 'أنواع المثلثات' })}>
             {shapes.map((shape) => <path key={shape.d} d={shape.d} fill={STAGE_TINT} stroke={INK} strokeWidth={2.2} />)}
             <AngleMark x={540} y={150} from={0} size={90} radius={18} color={SECOND} />
             {shapes.map((shape, index) => <text key={index} x={[90, 245, 415, 600][index]} y={180} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, shape.name)}</text>)}
-            <Caption y={210}>{pick(language, { eu: 'Aldeen arabera (berdinak) edo angeluen arabera (zorrotza, zuzena, kamutsa)', es: 'Según sus lados (iguales) o según sus ángulos (agudo, recto, obtuso)', ar: 'حسب الأضلاع (المتساوية) أو حسب الزوايا (حادة، قائمة، منفرجة)' })}</Caption>
+            <Caption y={210}>{pick(language, { eu: 'Aldeen arabera (berdinak) edo angeluen arabera (zorrotza, zuzena, kamutsa)', es: 'Según sus lados (iguales) o según sus ángulos (agudo, recto, obtuso)', en: 'By their sides (equal) or by their angles (acute, right, obtuse).', ar: 'حسب الأضلاع (المتساوية) أو حسب الزوايا (حادة، قائمة، منفرجة)' })}</Caption>
         </Figure>
     )
 }
@@ -197,7 +198,7 @@ export function PythagorasFigure({ language }: { language: UnitLanguage }) {
         <rect key={index} x={x + (index % n) * cell} y={y + Math.floor(index / n) * cell} width={cell} height={cell} fill={color} stroke={INK} strokeWidth={0.8} />
     ))
     return (
-        <Figure height={290} label={pick(language, { eu: '3, 4 eta 5eko triangelua: 9 + 16 = 25', es: 'Triángulo 3, 4, 5: 9 + 16 = 25', ar: 'مثلث 3 و4 و5: 9 + 16 = 25' })}>
+        <Figure height={290} label={pick(language, { eu: '3, 4 eta 5eko triangelua: 9 + 16 = 25', es: 'Triángulo 3, 4, 5: 9 + 16 = 25', en: 'Triangle 3, 4, 5: 9 + 16 = 25', ar: 'مثلث 3 و4 و5: 9 + 16 = 25' })}>
             <path d="M120 200 L184 200 L120 152 Z" fill="none" stroke={INK} strokeWidth={2.4} />
             {grid(72, 152, 3, 'var(--mustard-tint, #fbebc0)')}
             {grid(120, 200, 4, STAGE_TINT)}
@@ -212,8 +213,8 @@ export function PythagorasFigure({ language }: { language: UnitLanguage }) {
             <text x={250} y={120} fontSize={16} fontWeight={700} fill={INK}>5² = 25</text>
             <text x={60} y={180} textAnchor="end" fontSize={16} fontWeight={700} fill={INK}>3² = 9</text>
             <text x={152} y={290 - 8} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>4² = 16</text>
-            <text x={420} y={90} fontSize={18} fontWeight={700} fill={INK}>{pick(language, { eu: 'katetoak: 3 eta 4', es: 'catetos: 3 y 4', ar: 'الضلعان القائمان: 3 و4' })}</text>
-            <text x={420} y={125} fontSize={18} fontWeight={700} fill={INK}>{pick(language, { eu: 'hipotenusa: 5', es: 'hipotenusa: 5', ar: 'الوتر: 5' })}</text>
+            <text x={420} y={90} fontSize={18} fontWeight={700} fill={INK}>{pick(language, { eu: 'katetoak: 3 eta 4', es: 'catetos: 3 y 4', en: 'legs: 3 and 4', ar: 'الضلعان القائمان: 3 و4' })}</text>
+            <text x={420} y={125} fontSize={18} fontWeight={700} fill={INK}>{pick(language, { eu: 'hipotenusa: 5', es: 'hipotenusa: 5', en: 'hypotenuse: 5', ar: 'الوتر: 5' })}</text>
             <text x={420} y={170} fontSize={22} fontWeight={700} fill={STAGE}>a² = b² + c²</text>
             <text x={420} y={205} fontSize={20} fontWeight={700} fill={INK}>25 = 9 + 16</text>
         </Figure>
@@ -224,17 +225,17 @@ export function PythagorasFigure({ language }: { language: UnitLanguage }) {
 
 export function QuadrilateralsFigure({ language }: { language: UnitLanguage }) {
     const shapes = [
-        { d: 'M30 60 L110 60 L110 140 L30 140 Z', name: { eu: 'karratua', es: 'cuadrado', ar: 'مربع' } },
-        { d: 'M150 70 L270 70 L270 140 L150 140 Z', name: { eu: 'laukizuzena', es: 'rectángulo', ar: 'مستطيل' } },
-        { d: 'M340 40 L380 100 L340 160 L300 100 Z', name: { eu: 'erronboa', es: 'rombo', ar: 'معيّن' } },
-        { d: 'M420 140 L450 70 L550 70 L520 140 Z', name: { eu: 'erronboidea', es: 'romboide', ar: 'متوازي أضلاع' } },
-        { d: 'M580 140 L610 70 L660 70 L700 140 Z', name: { eu: 'trapezioa', es: 'trapecio', ar: 'شبه منحرف' } }
+        { d: 'M30 60 L110 60 L110 140 L30 140 Z', name: { eu: 'karratua', es: 'cuadrado', en: 'square', ar: 'مربع' } },
+        { d: 'M150 70 L270 70 L270 140 L150 140 Z', name: { eu: 'laukizuzena', es: 'rectángulo', en: 'rectangle', ar: 'مستطيل' } },
+        { d: 'M340 40 L380 100 L340 160 L300 100 Z', name: { eu: 'erronboa', es: 'rombo', en: 'rhombus', ar: 'معيّن' } },
+        { d: 'M420 140 L450 70 L550 70 L520 140 Z', name: { eu: 'erronboidea', es: 'romboide', en: 'rhomboid', ar: 'متوازي أضلاع' } },
+        { d: 'M580 140 L610 70 L660 70 L700 140 Z', name: { eu: 'trapezioa', es: 'trapecio', en: 'trapezium', ar: 'شبه منحرف' } }
     ]
     return (
-        <Figure height={220} label={pick(language, { eu: 'Laukiak', es: 'Cuadriláteros', ar: 'الرباعيات' })}>
+        <Figure height={220} label={pick(language, { eu: 'Laukiak', es: 'Cuadriláteros', en: 'Quadrilaterals', ar: 'الرباعيات' })}>
             {shapes.map((shape, index) => <path key={index} d={shape.d} fill={index < 4 ? STAGE_TINT : 'var(--mustard-tint, #fbebc0)'} stroke={INK} strokeWidth={2.2} />)}
             {shapes.map((shape, index) => <text key={`t${index}`} x={[70, 210, 340, 485, 640][index]} y={185} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, shape.name)}</text>)}
-            <Caption y={212}>{pick(language, { eu: 'Urdinak: paralelogramoak (aurkako aldeak paraleloak bikoteka)', es: 'En azul: paralelogramos (lados opuestos paralelos dos a dos)', ar: 'بالأزرق: متوازيات أضلاع (كل ضلعين متقابلين متوازيان)' })}</Caption>
+            <Caption y={212}>{pick(language, { eu: 'Urdinak: paralelogramoak (aurkako aldeak paraleloak bikoteka)', es: 'En azul: paralelogramos (lados opuestos paralelos dos a dos)', en: 'In blue: parallelograms (opposite sides parallel in pairs).', ar: 'بالأزرق: متوازيات أضلاع (كل ضلعين متقابلين متوازيان)' })}</Caption>
         </Figure>
     )
 }
@@ -243,16 +244,16 @@ export function QuadrilateralsFigure({ language }: { language: UnitLanguage }) {
 
 export function CircleFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={240} label={pick(language, { eu: 'Zirkunferentzia, zirkulua eta haien elementuak', es: 'Circunferencia, círculo y sus elementos', ar: 'الدائرة والقرص وعناصرهما' })}>
+        <Figure height={240} label={pick(language, { eu: 'Zirkunferentzia, zirkulua eta haien elementuak', es: 'Circunferencia, círculo y sus elementos', en: 'Circumference, circle and their parts.', ar: 'الدائرة والقرص وعناصرهما' })}>
             <circle cx={160} cy={120} r={90} fill={STAGE_TINT} stroke={INK} strokeWidth={2.6} />
             <circle cx={160} cy={120} r={4} fill={INK} />
             <line x1={160} y1={120} x2={250} y2={120} stroke={SECOND} strokeWidth={2.4} />
             <line x1={160 - 90 * Math.cos(rad(60))} y1={120 - 90 * Math.sin(rad(60))} x2={160 + 90 * Math.cos(rad(60))} y2={120 + 90 * Math.sin(rad(60))} stroke={STAGE} strokeWidth={2.4} />
             <text x={205} y={112} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>r</text>
-            <text x={400} y={60} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'Zirkunferentzia: ertza (lerroa)', es: 'Circunferencia: el borde (línea)', ar: 'الدائرة: الحافة (خط)' })}</text>
-            <text x={400} y={95} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'Zirkulua: barrualdea ere bai', es: 'Círculo: también el interior', ar: 'القرص: والداخل أيضًا' })}</text>
-            <text x={400} y={130} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, { eu: 'r: erradioa', es: 'r: radio', ar: 'r: نصف القطر' })}</text>
-            <text x={400} y={165} fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'd = 2r: diametroa', es: 'd = 2r: diámetro', ar: 'd = 2r: القطر' })}</text>
+            <text x={400} y={60} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'Zirkunferentzia: ertza (lerroa)', es: 'Circunferencia: el borde (línea)', en: 'Circumference: the edge (a line).', ar: 'الدائرة: الحافة (خط)' })}</text>
+            <text x={400} y={95} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'Zirkulua: barrualdea ere bai', es: 'Círculo: también el interior', en: 'Circle: the inside as well.', ar: 'القرص: والداخل أيضًا' })}</text>
+            <text x={400} y={130} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, { eu: 'r: erradioa', es: 'r: radio', en: 'r: radius', ar: 'r: نصف القطر' })}</text>
+            <text x={400} y={165} fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'd = 2r: diametroa', es: 'd = 2r: diámetro', en: 'd = 2r: diameter', ar: 'd = 2r: القطر' })}</text>
         </Figure>
     )
 }
@@ -260,16 +261,17 @@ export function CircleFigure({ language }: { language: UnitLanguage }) {
 /* ---------- Perimeter ---------- */
 
 export function PerimeterFigure({ language }: { language: UnitLanguage }) {
+    const decimalMark = decimalSeparatorFor(language)
     return (
-        <Figure height={220} label={pick(language, { eu: 'Perimetroa: alde guztien batura', es: 'Perímetro: suma de todos los lados', ar: 'المحيط: مجموع كل الأضلاع' })}>
+        <Figure height={220} label={pick(language, { eu: 'Perimetroa: alde guztien batura', es: 'Perímetro: suma de todos los lados', en: 'Perimeter: sum of all the sides.', ar: 'المحيط: مجموع كل الأضلاع' })}>
             <path d="M80 160 L260 160 L220 60 L120 60 Z" fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} />
             <text x={170} y={182} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>9 cm</text>
             <text x={170} y={50} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>5 cm</text>
-            <text x={82} y={110} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>5,4</text>
-            <text x={262} y={110} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>5,4</text>
-            <text x={360} y={100} fontSize={20} fontWeight={700} fill={STAGE}>P = 9 + 5,4 + 5 + 5,4</text>
-            <text x={360} y={135} fontSize={20} fontWeight={700} fill={INK}>P = 24,8 cm</text>
-            <Caption y={210}>{pick(language, { eu: 'Perimetroa luzera bat da: cm, m… Zirkunferentziarena: L = 2πr', es: 'El perímetro es una longitud: cm, m… El de la circunferencia: L = 2πr', ar: 'المحيط طول: سم، م… ومحيط الدائرة: L = 2πr' })}</Caption>
+            <text x={82} y={110} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{`5${decimalMark}4`}</text>
+            <text x={262} y={110} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{`5${decimalMark}4`}</text>
+            <text x={360} y={100} fontSize={20} fontWeight={700} fill={STAGE}>{`P = 9 + 5${decimalMark}4 + 5 + 5${decimalMark}4`}</text>
+            <text x={360} y={135} fontSize={20} fontWeight={700} fill={INK}>{`P = 24${decimalMark}8 cm`}</text>
+            <Caption y={210}>{pick(language, { eu: 'Perimetroa luzera bat da: cm, m… Zirkunferentziarena: L = 2πr', es: 'El perímetro es una longitud: cm, m… El de la circunferencia: L = 2πr', en: 'The perimeter is a length: cm, m… The circumference: L = 2πr.', ar: 'المحيط طول: سم، م… ومحيط الدائرة: L = 2πr' })}</Caption>
         </Figure>
     )
 }
@@ -279,7 +281,7 @@ export function PerimeterFigure({ language }: { language: UnitLanguage }) {
 export function AreaFigure({ language }: { language: UnitLanguage }) {
     const cell = 22
     return (
-        <Figure height={240} label={pick(language, { eu: 'Laukizuzenaren azalera eta triangeluarena', es: 'Área del rectángulo y del triángulo', ar: 'مساحة المستطيل والمثلث' })}>
+        <Figure height={240} label={pick(language, { eu: 'Laukizuzenaren azalera eta triangeluarena', es: 'Área del rectángulo y del triángulo', en: 'Area of the rectangle and of the triangle.', ar: 'مساحة المستطيل والمثلث' })}>
             {Array.from({ length: 18 }, (_, index) => <rect key={index} x={50 + (index % 6) * cell} y={40 + Math.floor(index / 6) * cell} width={cell} height={cell} fill={STAGE_TINT} stroke={INK} strokeWidth={1} />)}
             <rect x={50} y={40} width={6 * cell} height={3 * cell} fill="none" stroke={INK} strokeWidth={2.4} />
             <text x={50 + 3 * cell} y={40 + 3 * cell + 26} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>A = 6 · 3 = 18</text>
@@ -287,7 +289,7 @@ export function AreaFigure({ language }: { language: UnitLanguage }) {
             <path d={`M380 ${40 + 3 * cell} L${380 + 6 * cell} ${40 + 3 * cell} L${380 + 2 * cell} 40 Z`} fill={STAGE_TINT} fillOpacity={0.8} stroke={INK} strokeWidth={2.4} />
             <line x1={380 + 2 * cell} x2={380 + 2 * cell} y1={40} y2={40 + 3 * cell} stroke={SECOND} strokeWidth={2} strokeDasharray="5 4" />
             <text x={380 + 3 * cell} y={40 + 3 * cell + 26} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>A = (6 · 3) : 2 = 9</text>
-            <Caption y={225}>{pick(language, { eu: 'Triangelua bere laukizuzenaren erdia da: oinarria · altuera : 2', es: 'El triángulo es la mitad de su rectángulo: base · altura : 2', ar: 'المثلث نصف مستطيله: القاعدة · الارتفاع : 2' })}</Caption>
+            <Caption y={225}>{pick(language, { eu: 'Triangelua bere laukizuzenaren erdia da: oinarria · altuera : 2', es: 'El triángulo es la mitad de su rectángulo: base · altura : 2', en: 'The triangle is half of its rectangle: base · height : 2.', ar: 'المثلث نصف مستطيله: القاعدة · الارتفاع : 2' })}</Caption>
         </Figure>
     )
 }

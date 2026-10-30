@@ -28,8 +28,8 @@ export type AreasVolumesRaceError = OwnError | `fig:${FiguresRaceError}` | `pyt:
 export type AreasVolumesRaceQuestion = RaceQuestion<AreasVolumesRaceError>
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, ar: latex.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, en: latex, ar: latex.replace(/\{,\}/g, '.') })
 const math = (latex: string) => `$${latex}$`
 /** Hundredths as an exact value */
 const h = (hundredths: number) => fraction(hundredths, 100)
@@ -81,7 +81,7 @@ function circleQuestion(random: Random, tier: Tier): AreasVolumesRaceQuestion | 
     const fromDiameter = tier > 0 && random() < 0.4
     const shown = fromDiameter ? 2 * r : r
     const whole = 628 * r
-    const data = fromDiameter ? say(`${math(String(shown))} cm-ko diametroa`, `${math(String(shown))} cm de diámetro`, `قطرها ${math(String(shown))} سم`) : say(`${math(String(shown))} cm-ko erradioa`, `${math(String(shown))} cm de radio`, `نصف قطرها ${math(String(shown))} سم`)
+    const data = fromDiameter ? say(`${math(String(shown))} cm-ko diametroa`, `${math(String(shown))} cm de diámetro`, `قطرها ${math(String(shown))} سم`, `${math(String(shown))} cm diameter`) : say(`${math(String(shown))} cm-ko erradioa`, `${math(String(shown))} cm de radio`, `نصف قطرها ${math(String(shown))} سم`, `${math(String(shown))} cm radius`)
     if (tier === 2 || (tier === 1 && random() < 0.5)) {
         const angle = pick(random, [30, 45, 60, 90, 120, 180, 270])
         if ((whole * angle) % 360 !== 0) return null
@@ -96,7 +96,7 @@ function circleQuestion(random: Random, tier: Tier): AreasVolumesRaceQuestion | 
         return choices && question(0, 'arc', say(
             `Zirkunferentzia batek ${data.eu} du. Zenbat neurtzen du ${math(`${angle}^{\\circ}`)}-ko arkuak? (${math('\\pi\\approx 3{,}14')})`,
             `Una circunferencia tiene ${data.es}. ¿Cuánto mide un arco de ${math(`${angle}^{\\circ}`)}? (${math('\\pi\\approx 3{,}14')})`,
-            `دائرة ${data.ar}. كم طول قوس ${math(`${angle}^{\\circ}`)}؟ (${math('\\pi\\approx 3{,}14')})`
+            `دائرة ${data.ar}. كم طول قوس ${math(`${angle}^{\\circ}`)}؟ (${math('\\pi\\approx 3{,}14')})`, `A circle has ${data.en}. How long is an arc of ${math(`${angle}^{\\circ}`)}? (${math('\\pi\\approx 3{,}14')})`
         ), choices, answer, same(math(`\\frac{2\\cdot 3{,}14\\cdot ${r}\\cdot ${angle}}{360}=${w(answer)}`)))
     }
     const choices = options(random, whole, [
@@ -108,7 +108,7 @@ function circleQuestion(random: Random, tier: Tier): AreasVolumesRaceQuestion | 
     return choices && question(0, 'circumference', say(
         `Zenbat neurtzen du ${data.eu} duen zirkunferentziak? (${math('\\pi\\approx 3{,}14')})`,
         `¿Cuánto mide una circunferencia de ${data.es}? (${math('\\pi\\approx 3{,}14')})`,
-        `كم طول دائرة ${data.ar}؟ (${math('\\pi\\approx 3{,}14')})`
+        `كم طول دائرة ${data.ar}؟ (${math('\\pi\\approx 3{,}14')})`, `What is the circumference of a circle with ${data.en}? (${math('\\pi\\approx 3{,}14')})`
     ), choices, whole, same(math(`2\\cdot 3{,}14\\cdot ${r}=${w(whole)}`)))
 }
 
@@ -116,9 +116,9 @@ function circleQuestion(random: Random, tier: Tier): AreasVolumesRaceQuestion | 
 
 type Shape = 'triangle' | 'rhombus' | 'trapezoid' | 'regular'
 const regularNames: Record<number, LocalizedText> = {
-    5: say('pentagono', 'pentágono', 'مخمس'),
-    6: say('hexagono', 'hexágono', 'مسدس'),
-    8: say('oktogono', 'octógono', 'مثمن')
+    5: say('pentagono', 'pentágono', 'مخمس', 'pentagon'),
+    6: say('hexagono', 'hexágono', 'مسدس', 'hexagon'),
+    8: say('oktogono', 'octógono', 'مثمن', 'octagon')
 }
 
 function polygonAreaQuestion(random: Random, tier: Tier): AreasVolumesRaceQuestion | null {
@@ -131,7 +131,7 @@ function polygonAreaQuestion(random: Random, tier: Tier): AreasVolumesRaceQuesti
         return choices && question(2, 'triangle', say(
             `Triangelu baten oinarria ${math(String(b))} cm da eta altuera ${math(String(height))} cm. Zein da azalera?`,
             `Un triángulo tiene ${math(String(b))} cm de base y ${math(String(height))} cm de altura. ¿Cuál es su área?`,
-            `مثلث قاعدته ${math(String(b))} سم وارتفاعه ${math(String(height))} سم. ما مساحته؟`
+            `مثلث قاعدته ${math(String(b))} سم وارتفاعه ${math(String(height))} سم. ما مساحته؟`, `A triangle has a base of ${math(String(b))} cm and a height of ${math(String(height))} cm. What is its area?`
         ), choices, answer, same(math(`\\frac{${b}\\cdot ${height}}{2}=${w(answer)}`)))
     }
     if (shape === 'rhombus') {
@@ -142,7 +142,7 @@ function polygonAreaQuestion(random: Random, tier: Tier): AreasVolumesRaceQuesti
         return choices && question(2, 'rhombus', say(
             `Erronbo baten diagonalak ${math(String(D))} cm eta ${math(String(d))} cm dira. Zein da azalera?`,
             `Las diagonales de un rombo miden ${math(String(D))} cm y ${math(String(d))} cm. ¿Cuál es su área?`,
-            `قطرا معيّن ${math(String(D))} سم و${math(String(d))} سم. ما مساحته؟`
+            `قطرا معيّن ${math(String(D))} سم و${math(String(d))} سم. ما مساحته؟`, `The diagonals of a rhombus measure ${math(String(D))} cm and ${math(String(d))} cm. What is its area?`
         ), choices, answer, same(math(`\\frac{${D}\\cdot ${d}}{2}=${w(answer)}`)))
     }
     if (shape === 'trapezoid') {
@@ -154,7 +154,7 @@ function polygonAreaQuestion(random: Random, tier: Tier): AreasVolumesRaceQuesti
         return choices && question(2, 'trapezoid', say(
             `Trapezio baten oinarriak ${math(String(B))} cm eta ${math(String(b))} cm dira, eta altuera ${math(String(height))} cm. Zein da azalera?`,
             `Un trapecio tiene bases de ${math(String(B))} cm y ${math(String(b))} cm y ${math(String(height))} cm de altura. ¿Cuál es su área?`,
-            `شبه منحرف قاعدتاه ${math(String(B))} سم و${math(String(b))} سم وارتفاعه ${math(String(height))} سم. ما مساحته؟`
+            `شبه منحرف قاعدتاه ${math(String(B))} سم و${math(String(b))} سم وارتفاعه ${math(String(height))} سم. ما مساحته؟`, `A trapezium has bases of ${math(String(B))} cm and ${math(String(b))} cm and a height of ${math(String(height))} cm. What is its area?`
         ), choices, answer, same(math(`\\frac{(${B}+${b})\\cdot ${height}}{2}=${w(answer)}`)))
     }
     // Regular polygon with an apothem of one decimal, as the textbook gives it
@@ -169,7 +169,7 @@ function polygonAreaQuestion(random: Random, tier: Tier): AreasVolumesRaceQuesti
     return choices && question(2, 'regular', say(
         `${regularNames[sides].eu.replace(/^./, (letter) => letter.toUpperCase())} erregular baten aldea ${math(String(side))} cm da eta apotema ${math(a)} cm. Zein da azalera?`,
         `Un ${regularNames[sides].es} regular tiene ${math(String(side))} cm de lado y ${math(a)} cm de apotema. ¿Cuál es su área?`,
-        `${regularNames[sides].ar} منتظم طول ضلعه ${math(String(side))} سم وعامده ${math(a)} سم. ما مساحته؟`
+        `${regularNames[sides].ar} منتظم طول ضلعه ${math(String(side))} سم وعامده ${math(a)} سم. ما مساحته؟`, `A regular ${regularNames[sides].en} has a side of ${math(String(side))} cm and an apothem of ${math(a)} cm. What is its area?`
     ), choices, answer, same(math(`\\frac{${perimeter}\\cdot ${a}}{2}=${w(answer)}`)))
 }
 
@@ -203,7 +203,7 @@ function compoundQuestion(random: Random, tier: Tier): AreasVolumesRaceQuestion 
         prompt = say(
             `Izozki-kono batek ${math(String(r))} cm-ko erradioa eta ${math(String(height))} cm-ko altuera ditu, eta gainean esfera-erdi bat. Zenbat cm³ izozki dauzka?`,
             `Un cucurucho tiene ${math(String(r))} cm de radio y ${math(String(height))} cm de altura, con una semiesfera encima. ¿Cuántos cm³ de helado contiene?`,
-            `مخروط مثلّجة نصف قطره ${math(String(r))} سم وارتفاعه ${math(String(height))} سم وفوقه نصف كرة. كم سم³ من المثلّجات فيه؟`
+            `مخروط مثلّجة نصف قطره ${math(String(r))} سم وارتفاعه ${math(String(height))} سم وفوقه نصف كرة. كم سم³ من المثلّجات فيه؟`, `An ice cream cone has a radius of ${math(String(r))} cm and a height of ${math(String(height))} cm, with a hemisphere on top. How many cm³ of ice cream does it hold?`
         )
         solution = `\\frac{3{,}14\\cdot ${r * r}\\cdot ${height}}{3}+\\frac{2\\cdot 3{,}14\\cdot ${r ** 3}}{3}=${w(answer)}`
     } else if (kind === 'capsule') {
@@ -218,7 +218,7 @@ function compoundQuestion(random: Random, tier: Tier): AreasVolumesRaceQuestion 
         prompt = say(
             `Kapsula bat ${math(String(r))} m-ko erradioko eta ${math(String(height))} m-ko zilindroa da, muturretan esfera-erdi banarekin. Zein da bolumena m³-tan?`,
             `Una cápsula es un cilindro de ${math(String(r))} m de radio y ${math(String(height))} m de largo con una semiesfera en cada extremo. ¿Cuál es su volumen en m³?`,
-            `كبسولة أسطوانة نصف قطرها ${math(String(r))} م وطولها ${math(String(height))} م مع نصف كرة في كل طرف. ما حجمها بالمتر المكعب؟`
+            `كبسولة أسطوانة نصف قطرها ${math(String(r))} م وطولها ${math(String(height))} م مع نصف كرة في كل طرف. ما حجمها بالمتر المكعب؟`, `A capsule is a cylinder with a radius of ${math(String(r))} m and a length of ${math(String(height))} m, with a hemisphere at each end. What is its volume in m³?`
         )
         solution = `3{,}14\\cdot ${r * r}\\cdot ${height}+\\frac{4\\cdot 3{,}14\\cdot ${r ** 3}}{3}=${w(answer)}`
     } else {
@@ -234,14 +234,14 @@ function compoundQuestion(random: Random, tier: Tier): AreasVolumesRaceQuestion 
         prompt = say(
             `Dorre bat ${math(String(r))} m-ko erradioko eta ${math(String(height))} m-ko altuerako zilindroa da, gainean ${math(String(roof))} m-ko altuerako teilatu konikoa duela. Zein da bolumena m³-tan?`,
             `Una torre es un cilindro de ${math(String(r))} m de radio y ${math(String(height))} m de altura con un tejado cónico de ${math(String(roof))} m de altura. ¿Cuál es su volumen en m³?`,
-            `برج أسطوانة نصف قطرها ${math(String(r))} م وارتفاعها ${math(String(height))} م فوقها سقف مخروطي ارتفاعه ${math(String(roof))} م. ما حجمه بالمتر المكعب؟`
+            `برج أسطوانة نصف قطرها ${math(String(r))} م وارتفاعها ${math(String(height))} م فوقها سقف مخروطي ارتفاعه ${math(String(roof))} م. ما حجمه بالمتر المكعب؟`, `A tower is a cylinder with a radius of ${math(String(r))} m and a height of ${math(String(height))} m, with a conical roof that is ${math(String(roof))} m high. What is its volume in m³?`
         )
         solution = `3{,}14\\cdot ${r * r}\\cdot ${height}+\\frac{3{,}14\\cdot ${r * r}\\cdot ${roof}}{3}=${w(answer)}`
     }
     const answer = fromThirds(parts[0] + parts[1])!
     const choices = options(random, answer, [...candidates, ...near(answer)])
     const piNote = ` (${math('\\pi\\approx 3{,}14')})`
-    const withPi = say(prompt.eu + piNote, prompt.es + piNote, prompt.ar + piNote)
+    const withPi = say(prompt.eu + piNote, prompt.es + piNote, prompt.ar + piNote, prompt.en + piNote)
     return choices && question(4, kind, withPi, choices, answer, same(math(solution)))
 }
 
@@ -281,15 +281,15 @@ export const areasVolumesRaceErrorTips: Record<AreasVolumesRaceError, LocalizedT
     ...(prefixed('fig', figuresRaceErrorTips) as Record<`fig:${FiguresRaceError}`, LocalizedText>),
     ...(prefixed('pyt', pythagorasRaceErrorTips) as Record<`pyt:${PythagorasRaceError}`, LocalizedText>),
     ...(prefixed('sol', solidsRaceErrorTips) as Record<`sol:${SolidsRaceError}`, LocalizedText>),
-    'circle-area': say('Hori azalera da ($\\pi r^{2}$); luzerarako $2\\pi r$.', 'Eso es el área ($\\pi r^{2}$); para la longitud, $2\\pi r$.', 'هذه المساحة ($\\pi r^{2}$)؛ وللطول $2\\pi r$.'),
-    'circle-half': say('Bider 2 falta da: $2\\pi r$.', 'Falta multiplicar por 2: $2\\pi r$.', 'ينقص الضرب في 2: $2\\pi r$.'),
-    'circle-diameter': say('Diametroa erabili duzu erradioaren ordez: erdia hartu.', 'Has usado el diámetro como radio: toma la mitad.', 'استعملت القطر مكان نصف القطر: خذ النصف.'),
-    'arc-whole': say('Hori zirkunferentzia osoa da: hartu angelua zati 360.', 'Esa es la circunferencia entera: toma el ángulo entre 360.', 'هذه الدائرة كاملة: خذ الزاوية على 360.'),
-    'area-no-half': say('Formula honetan zati 2 egin behar da.', 'En esta fórmula hay que dividir entre 2.', 'في هذه الصيغة يجب القسمة على 2.'),
-    'perimeter-only': say('Hori ez da azalera: biderkatu altuerarekin edo apotemarekin.', 'Eso no es el área: multiplica por la altura o la apotema.', 'هذه ليست المساحة: اضرب في الارتفاع أو العامد.'),
-    'trapezoid-one-base': say('Trapezioan bi oinarriak batu behar dira: $(B+b)$.', 'En el trapecio se suman las dos bases: $(B+b)$.', 'في شبه المنحرف تُجمع القاعدتان: $(B+b)$.'),
-    'missing-part': say('Zati bat ahaztu duzu: batu gorputzaren zati guztiak.', 'Has olvidado una parte: suma todas las partes del cuerpo.', 'نسيت جزءًا: اجمع كل أجزاء الجسم.'),
-    'whole-sphere': say('Begiratu zenbat esfera-erdi dauden: bi esfera-erdi esfera oso bat dira.', 'Mira cuántas semiesferas hay: dos semiesferas son una esfera entera.', 'انظر كم نصف كرة هناك: نصفا الكرة كرة كاملة.'),
-    'cone-third': say('Konoaren bolumena zati 3 da.', 'El volumen del cono se divide entre 3.', 'حجم المخروط يُقسم على 3.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    'circle-area': say('Hori azalera da ($\\pi r^{2}$); luzerarako $2\\pi r$.', 'Eso es el área ($\\pi r^{2}$); para la longitud, $2\\pi r$.', 'هذه المساحة ($\\pi r^{2}$)؛ وللطول $2\\pi r$.', 'That is the area ($\\pi r^{2}$); for the length, use $2\\pi r$.'),
+    'circle-half': say('Bider 2 falta da: $2\\pi r$.', 'Falta multiplicar por 2: $2\\pi r$.', 'ينقص الضرب في 2: $2\\pi r$.', 'You need to multiply by 2: $2\\pi r$.'),
+    'circle-diameter': say('Diametroa erabili duzu erradioaren ordez: erdia hartu.', 'Has usado el diámetro como radio: toma la mitad.', 'استعملت القطر مكان نصف القطر: خذ النصف.', 'You used the diameter as the radius: take half of it.'),
+    'arc-whole': say('Hori zirkunferentzia osoa da: hartu angelua zati 360.', 'Esa es la circunferencia entera: toma el ángulo entre 360.', 'هذه الدائرة كاملة: خذ الزاوية على 360.', 'That is the whole circumference: take the angle divided by 360.'),
+    'area-no-half': say('Formula honetan zati 2 egin behar da.', 'En esta fórmula hay que dividir entre 2.', 'في هذه الصيغة يجب القسمة على 2.', 'In this formula, you need to divide by 2.'),
+    'perimeter-only': say('Hori ez da azalera: biderkatu altuerarekin edo apotemarekin.', 'Eso no es el área: multiplica por la altura o la apotema.', 'هذه ليست المساحة: اضرب في الارتفاع أو العامد.', 'That is not the area: multiply by the height or the apothem.'),
+    'trapezoid-one-base': say('Trapezioan bi oinarriak batu behar dira: $(B+b)$.', 'En el trapecio se suman las dos bases: $(B+b)$.', 'في شبه المنحرف تُجمع القاعدتان: $(B+b)$.', 'In the trapezium, add the two bases: $(B+b)$.'),
+    'missing-part': say('Zati bat ahaztu duzu: batu gorputzaren zati guztiak.', 'Has olvidado una parte: suma todas las partes del cuerpo.', 'نسيت جزءًا: اجمع كل أجزاء الجسم.', 'You have forgotten a part: add up all the parts of the solid.'),
+    'whole-sphere': say('Begiratu zenbat esfera-erdi dauden: bi esfera-erdi esfera oso bat dira.', 'Mira cuántas semiesferas hay: dos semiesferas son una esfera entera.', 'انظر كم نصف كرة هناك: نصفا الكرة كرة كاملة.', 'Check how many hemispheres there are: two hemispheres make a whole sphere.'),
+    'cone-third': say('Konoaren bolumena zati 3 da.', 'El volumen del cono se divide entre 3.', 'حجم المخروط يُقسم على 3.', 'Divide the volume of the cone by 3.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

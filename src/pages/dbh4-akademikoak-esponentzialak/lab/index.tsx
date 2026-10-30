@@ -34,7 +34,7 @@ export function ExponentialAkLaboratory(props: {
             tools={exponentialAkLabTools}
             stages={exponentialAkStages}
             components={toolComponents}
-            title={{ eu: 'Hazi, tolestu eta uhindu', es: 'Crece, invierte y ondula', ar: 'انمُ واعكس وتموّج' }}
+            title={{ eu: 'Hazi, tolestu eta uhindu', es: 'Crece, invierte y ondula', en: 'Grow, flip and wave.', ar: 'انمُ واعكس وتموّج' }}
         />
     )
 }

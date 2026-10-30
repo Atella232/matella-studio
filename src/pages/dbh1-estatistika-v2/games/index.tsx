@@ -31,7 +31,7 @@ export function StatisticsIntroGames({ language, pathname, openGame, completedId
             language={language}
             games={hubGames}
             recordsKey={STATISTICS_GAME_RECORDS_KEY}
-            title={{ eu: 'Jolastu datuekin eta zoriarekin', es: 'Juega con datos y azar', ar: 'العب بالبيانات والصدفة' }}
+            title={{ eu: 'Jolastu datuekin eta zoriarekin', es: 'Juega con datos y azar', en: 'Play with data and chance', ar: 'العب بالبيانات والصدفة' }}
             completedIds={completedIds}
             onComplete={onComplete}
             mode={statisticsGameModeForPath(pathname)}

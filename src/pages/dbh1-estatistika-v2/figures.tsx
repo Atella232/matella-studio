@@ -1,6 +1,7 @@
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
 import { Caption, Figure } from '../dbh2-zatikiak-prototype/figures'
 import { sportSurvey } from './survey'
+import { decimalSeparatorFor } from '../../utils/numberFormat'
 
 /* ==========================================================================
    Estatistika · 1. DBH — lesson figures in the notebook style: population
@@ -23,7 +24,7 @@ const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language,
 
 export function PopulationFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={230} label={pick(language, { eu: 'Populazioa eta lagina', es: 'Población y muestra', ar: 'المجتمع والعيّنة' })}>
+        <Figure height={230} label={pick(language, { eu: 'Populazioa eta lagina', es: 'Población y muestra', en: 'Population and sample', ar: 'المجتمع والعيّنة' })}>
             <rect x={40} y={30} width={380} height={160} rx={20} fill={STAGE_TINT} fillOpacity={0.5} stroke={INK} strokeWidth={2} />
             {Array.from({ length: 40 }, (_, index) => {
                 const x = 64 + (index % 10) * 36
@@ -32,10 +33,10 @@ export function PopulationFigure({ language }: { language: UnitLanguage }) {
                 return <circle key={index} cx={x} cy={y} r={10} fill={inSample ? SECOND : PAPER} stroke={INK} strokeWidth={1.6} />
             })}
             <rect x={48} y={40} width={116} height={78} rx={12} fill="none" stroke={SECOND} strokeWidth={2.4} strokeDasharray="6 4" />
-            <text x={470} y={80} fontSize={17} fontWeight={700} fill={INK}>{pick(language, { eu: 'Populazioa: denak (40)', es: 'Población: todos (40)', ar: 'المجتمع: الجميع (40)' })}</text>
-            <text x={470} y={115} fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, { eu: 'Lagina: zati bat (6)', es: 'Muestra: una parte (6)', ar: 'العيّنة: جزء (6)' })}</text>
-            <text x={470} y={150} fontSize={17} fontWeight={700} fill={MUTED}>{pick(language, { eu: '● banakoa', es: '● individuo', ar: '● فرد' })}</text>
-            <Caption y={220}>{pick(language, { eu: 'Laginak populazioa ondo ordezkatu behar du', es: 'La muestra tiene que representar bien a la población', ar: 'يجب أن تمثّل العيّنة المجتمع تمثيلًا جيدًا' })}</Caption>
+            <text x={470} y={80} fontSize={17} fontWeight={700} fill={INK}>{pick(language, { eu: 'Populazioa: denak (40)', es: 'Población: todos (40)', en: 'Population: everyone (40)', ar: 'المجتمع: الجميع (40)' })}</text>
+            <text x={470} y={115} fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, { eu: 'Lagina: zati bat (6)', es: 'Muestra: una parte (6)', en: 'Sample: part of them (6)', ar: 'العيّنة: جزء (6)' })}</text>
+            <text x={470} y={150} fontSize={17} fontWeight={700} fill={MUTED}>{pick(language, { eu: '● banakoa', es: '● individuo', en: '● individual', ar: '● فرد' })}</text>
+            <Caption y={220}>{pick(language, { eu: 'Laginak populazioa ondo ordezkatu behar du', es: 'La muestra tiene que representar bien a la población', en: 'The sample has to represent the population well', ar: 'يجب أن تمثّل العيّنة المجتمع تمثيلًا جيدًا' })}</Caption>
         </Figure>
     )
 }
@@ -44,11 +45,11 @@ export function PopulationFigure({ language }: { language: UnitLanguage }) {
 
 export function FrequencyTableFigure({ language }: { language: UnitLanguage }) {
     const total = sportSurvey.reduce((sum, row) => sum + row.count, 0)
-    const decimal = (value: number) => (language === 'ar' ? String(value) : String(value).replace('.', ','))
+    const decimal = (value: number) => (language === 'ar' ? String(value) : String(value).replace('.', decimalSeparatorFor(language)))
     const columns = [140, 300, 420, 540]
     return (
-        <Figure height={250} label={pick(language, { eu: 'Maiztasun-taula', es: 'Tabla de frecuencias', ar: 'جدول التكرارات' })}>
-            {[pick(language, { eu: 'Kirola', es: 'Deporte', ar: 'الرياضة' }), 'fᵢ', 'hᵢ', '%'].map((title, index) => (
+        <Figure height={250} label={pick(language, { eu: 'Maiztasun-taula', es: 'Tabla de frecuencias', en: 'Frequency table', ar: 'جدول التكرارات' })}>
+            {[pick(language, { eu: 'Kirola', es: 'Deporte', en: 'Sport', ar: 'الرياضة' }), 'fᵢ', 'hᵢ', '%'].map((title, index) => (
                 <text key={title} x={columns[index]} y={30} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{title}</text>
             ))}
             <line x1={50} x2={620} y1={42} y2={42} stroke={INK} strokeWidth={2} />
@@ -61,11 +62,11 @@ export function FrequencyTableFigure({ language }: { language: UnitLanguage }) {
                 </g>
             ))}
             <line x1={50} x2={620} y1={196} y2={196} stroke={INK} strokeWidth={1.6} />
-            <text x={columns[0]} y={220} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'Guztira', es: 'Total', ar: 'المجموع' })}</text>
+            <text x={columns[0]} y={220} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'Guztira', es: 'Total', en: 'Total', ar: 'المجموع' })}</text>
             <text x={columns[1]} y={220} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>N = {total}</text>
             <text x={columns[2]} y={220} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>1</text>
             <text x={columns[3]} y={220} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>100</text>
-            <Caption y={244}>{pick(language, { eu: 'hᵢ = fᵢ : N · Ehunekoa = hᵢ · 100', es: 'hᵢ = fᵢ : N · Porcentaje = hᵢ · 100', ar: 'hᵢ = fᵢ : N · النسبة المئوية = hᵢ · 100' })}</Caption>
+            <Caption y={244}>{pick(language, { eu: 'hᵢ = fᵢ : N · Ehunekoa = hᵢ · 100', es: 'hᵢ = fᵢ : N · Porcentaje = hᵢ · 100', en: 'hᵢ = fᵢ : N · Percentage = hᵢ · 100', ar: 'hᵢ = fᵢ : N · النسبة المئوية = hᵢ · 100' })}</Caption>
         </Figure>
     )
 }
@@ -75,7 +76,7 @@ export function FrequencyTableFigure({ language }: { language: UnitLanguage }) {
 export function BarChartFigure({ language }: { language: UnitLanguage }) {
     const unit = 18
     return (
-        <Figure height={250} label={pick(language, { eu: 'Barra-diagrama', es: 'Diagrama de barras', ar: 'مخطط الأعمدة' })}>
+        <Figure height={250} label={pick(language, { eu: 'Barra-diagrama', es: 'Diagrama de barras', en: 'Bar chart', ar: 'مخطط الأعمدة' })}>
             <line x1={80} x2={80} y1={20} y2={200} stroke={INK} strokeWidth={2} />
             <line x1={80} x2={620} y1={200} y2={200} stroke={INK} strokeWidth={2} />
             {[0, 2, 4, 6, 8].map((value) => (
@@ -91,7 +92,7 @@ export function BarChartFigure({ language }: { language: UnitLanguage }) {
                     <text x={155 + index * 125} y={222} textAnchor="middle" fontSize={14} fontWeight={700} fill={INK}>{pick(language, row.name)}</text>
                 </g>
             ))}
-            <Caption y={246}>{pick(language, { eu: 'Barra bakoitzaren altuera bere maiztasun absolutua da', es: 'La altura de cada barra es su frecuencia absoluta', ar: 'ارتفاع كل عمود هو تكراره المطلق' })}</Caption>
+            <Caption y={246}>{pick(language, { eu: 'Barra bakoitzaren altuera bere maiztasun absolutua da', es: 'La altura de cada barra es su frecuencia absoluta', en: 'The height of each bar is its absolute frequency', ar: 'ارتفاع كل عمود هو تكراره المطلق' })}</Caption>
         </Figure>
     )
 }
@@ -105,7 +106,7 @@ export function PieChartFigure({ language }: { language: UnitLanguage }) {
     const r = 95
     const starts = sportSurvey.map((_, index) => -90 + sportSurvey.slice(0, index).reduce((sum, row) => sum + (row.count / total) * 360, 0))
     return (
-        <Figure height={250} label={pick(language, { eu: 'Sektore-diagrama', es: 'Diagrama de sectores', ar: 'المخطط الدائري' })}>
+        <Figure height={250} label={pick(language, { eu: 'Sektore-diagrama', es: 'Diagrama de sectores', en: 'Pie chart', ar: 'المخطط الدائري' })}>
             {sportSurvey.map((row, index) => {
                 const start = starts[index]
                 const angle = (row.count / total) * 360
@@ -129,7 +130,7 @@ export function PieChartFigure({ language }: { language: UnitLanguage }) {
                     <text x={358} y={57 + index * 36} fontSize={15} fill={INK}>{pick(language, row.name)}: {row.count} → {row.count} · 18° = {(row.count / total) * 360}°</text>
                 </g>
             ))}
-            <Caption y={242}>{pick(language, { eu: 'Sektore bakoitzaren angelua: hᵢ · 360° (hemen, pertsona bakoitzeko 18°)', es: 'El ángulo de cada sector: hᵢ · 360° (aquí, 18° por persona)', ar: 'زاوية كل قطاع: hᵢ · 360° (هنا 18° لكل شخص)' })}</Caption>
+            <Caption y={242}>{pick(language, { eu: 'Sektore bakoitzaren angelua: hᵢ · 360° (hemen, pertsona bakoitzeko 18°)', es: 'El ángulo de cada sector: hᵢ · 360° (aquí, 18° por persona)', en: 'The angle of each sector: hᵢ · 360° (here, 18° per person)', ar: 'زاوية كل قطاع: hᵢ · 360° (هنا 18° لكل شخص)' })}</Caption>
         </Figure>
     )
 }
@@ -138,11 +139,11 @@ export function PieChartFigure({ language }: { language: UnitLanguage }) {
 
 export function LineChartFigure({ language }: { language: UnitLanguage }) {
     const temperatures = [14, 16, 15, 18, 21, 20, 17]
-    const days = { eu: ['Al', 'Ar', 'Az', 'Og', 'Or', 'La', 'Ig'], es: ['L', 'M', 'X', 'J', 'V', 'S', 'D'], ar: ['1', '2', '3', '4', '5', '6', '7'] }[language]
+    const days = { eu: ['Al', 'Ar', 'Az', 'Og', 'Or', 'La', 'Ig'], es: ['L', 'M', 'X', 'J', 'V', 'S', 'D'], en: ['M', 'T', 'W', 'T', 'F', 'S', 'S'], ar: ['1', '2', '3', '4', '5', '6', '7'] }[language]
     const x = (index: number) => 110 + index * 75
     const y = (value: number) => 200 - (value - 10) * 14
     return (
-        <Figure height={250} label={pick(language, { eu: 'Aste bateko tenperaturak lerro-diagraman', es: 'Temperaturas de una semana en un diagrama de líneas', ar: 'درجات حرارة أسبوع في مخطط خطي' })}>
+        <Figure height={250} label={pick(language, { eu: 'Aste bateko tenperaturak lerro-diagraman', es: 'Temperaturas de una semana en un diagrama de líneas', en: 'Temperatures for one week on a line chart', ar: 'درجات حرارة أسبوع في مخطط خطي' })}>
             <line x1={80} x2={80} y1={20} y2={200} stroke={INK} strokeWidth={2} />
             <line x1={80} x2={640} y1={200} y2={200} stroke={INK} strokeWidth={2} />
             {[10, 15, 20].map((value) => <text key={value} x={70} y={y(value) + 5} textAnchor="end" fontSize={14} fill={MUTED}>{value}°</text>)}
@@ -154,7 +155,7 @@ export function LineChartFigure({ language }: { language: UnitLanguage }) {
                     <text x={x(index)} y={222} textAnchor="middle" fontSize={14} fill={INK}>{days[index]}</text>
                 </g>
             ))}
-            <Caption y={246}>{pick(language, { eu: 'Lerroak denboran zehar nola aldatzen den erakusten du', es: 'La línea muestra cómo cambia a lo largo del tiempo', ar: 'يُظهر الخط كيف تتغيّر القيمة مع الزمن' })}</Caption>
+            <Caption y={246}>{pick(language, { eu: 'Lerroak denboran zehar nola aldatzen den erakusten du', es: 'La línea muestra cómo cambia a lo largo del tiempo', en: 'The line shows how it changes over time', ar: 'يُظهر الخط كيف تتغيّر القيمة مع الزمن' })}</Caption>
         </Figure>
     )
 }
@@ -166,7 +167,7 @@ export function MeanFigure({ language }: { language: UnitLanguage }) {
     const x = (value: number) => 100 + (value - 4) * 90
     const stacks = new Map<number, number>()
     return (
-        <Figure height={240} label={pick(language, { eu: 'Batez bestekoa oreka-puntua da', es: 'La media es el punto de equilibrio', ar: 'المتوسط هو نقطة التوازن' })}>
+        <Figure height={240} label={pick(language, { eu: 'Batez bestekoa oreka-puntua da', es: 'La media es el punto de equilibrio', en: 'The mean is the balance point', ar: 'المتوسط هو نقطة التوازن' })}>
             <line x1={70} x2={650} y1={150} y2={150} stroke={INK} strokeWidth={3} />
             {[4, 5, 6, 7, 8, 9, 10].map((value) => (
                 <g key={value}>
@@ -180,7 +181,7 @@ export function MeanFigure({ language }: { language: UnitLanguage }) {
                 return <circle key={index} cx={x(value)} cy={132 - level * 24} r={10} fill={STAGE} fillOpacity={0.7} stroke={INK} strokeWidth={1.6} />
             })}
             <polygon points={`${x(7)},153 ${x(7) - 12},178 ${x(7) + 12},178`} fill={SECOND} stroke={INK} strokeWidth={1.6} />
-            <text x={360} y={34} textAnchor="middle" fontSize={17} fontWeight={700} fill={INK}>{pick(language, { eu: 'Notak: 5, 7, 7, 8, 9, 6', es: 'Notas: 5, 7, 7, 8, 9, 6', ar: 'العلامات: 5، 7، 7، 8، 9، 6' })}</text>
+            <text x={360} y={34} textAnchor="middle" fontSize={17} fontWeight={700} fill={INK}>{pick(language, { eu: 'Notak: 5, 7, 7, 8, 9, 6', es: 'Notas: 5, 7, 7, 8, 9, 6', en: 'Marks: 5, 7, 7, 8, 9, 6', ar: 'العلامات: 5، 7، 7، 8، 9، 6' })}</text>
             <text x={360} y={225} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>x̄ = (5 + 7 + 7 + 8 + 9 + 6) : 6 = 42 : 6 = 7</text>
         </Figure>
     )
@@ -194,7 +195,7 @@ export function DiceFigure({ language }: { language: UnitLanguage }) {
         5: [[-1, -1], [1, -1], [0, 0], [-1, 1], [1, 1]], 6: [[-1, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [1, 1]]
     }
     return (
-        <Figure height={230} label={pick(language, { eu: 'Dado baten lagin-espazioa', es: 'Espacio muestral de un dado', ar: 'فضاء العيّنة لنرد' })}>
+        <Figure height={230} label={pick(language, { eu: 'Dado baten lagin-espazioa', es: 'Espacio muestral de un dado', en: 'Sample space of a die', ar: 'فضاء العيّنة لنرد' })}>
             {[1, 2, 3, 4, 5, 6].map((face, index) => {
                 const cx = 80 + index * 110
                 const even = face % 2 === 0
@@ -206,8 +207,8 @@ export function DiceFigure({ language }: { language: UnitLanguage }) {
                 )
             })}
             <text x={360} y={150} textAnchor="middle" fontSize={18} fontWeight={700} fill={INK}>E = {'{1, 2, 3, 4, 5, 6}'}</text>
-            <text x={360} y={185} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'Bikoitia atera: 3 aldeko kasu → P = 3/6 = 1/2', es: 'Sacar par: 3 casos favorables → P = 3/6 = 1/2', ar: 'الحصول على عدد زوجي: 3 حالات ملائمة ← P = 3/6 = 1/2' })}</text>
-            <Caption y={220}>{pick(language, { eu: 'Laplaceren erregela: aldeko kasuak : kasu posibleak', es: 'Regla de Laplace: casos favorables : casos posibles', ar: 'قاعدة لابلاس: الحالات الملائمة : الحالات الممكنة' })}</Caption>
+            <text x={360} y={185} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'Bikoitia atera: 3 aldeko kasu → P = 3/6 = 1/2', es: 'Sacar par: 3 casos favorables → P = 3/6 = 1/2', en: 'Roll an even number: 3 favourable cases → P = 3/6 = 1/2', ar: 'الحصول على عدد زوجي: 3 حالات ملائمة ← P = 3/6 = 1/2' })}</text>
+            <Caption y={220}>{pick(language, { eu: 'Laplaceren erregela: aldeko kasuak : kasu posibleak', es: 'Regla de Laplace: casos favorables : casos posibles', en: 'Laplace\'s rule: favourable cases : possible cases', ar: 'قاعدة لابلاس: الحالات الملائمة : الحالات الممكنة' })}</Caption>
         </Figure>
     )
 }

@@ -32,7 +32,7 @@ const CARD = 'var(--card, #fffcf6)'
 const PAPER = '#fffcf6'
 const REGION = 'rgba(38, 123, 83, 0.22)'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const useText = (language: UnitLanguage) => (text: LocalizedText) => pickText(language, text)
 
 function Caption({ y, children }: { y: number; children: ReactNode }) {
@@ -88,12 +88,12 @@ const sample = (f: (t: number) => Point, t0: number, t1: number, steps = 120): P
 export function CoefficientsFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const cases = [
-        { tint: GREEN_TINT, lines: ['2x + y = 7', 'x − y = 2'], ratio: '2/1 ≠ 1/(−1)', title: say('Bateragarri determinatua', 'Compatible determinado', 'متوافق محدد'), text: say('ebazpen bat', 'una solución', 'حل واحد') },
-        { tint: CORAL_TINT, lines: ['x + 2y = 3', '2x + 4y = 5'], ratio: '1/2 = 2/4 ≠ 3/5', title: say('Bateraezina', 'Incompatible', 'غير متوافق'), text: say('ebazpenik ez', 'ninguna solución', 'لا حل') },
-        { tint: STAGE_TINT, lines: ['x + 2y = 3', '2x + 4y = 6'], ratio: '1/2 = 2/4 = 3/6', title: say('Bateragarri indeterminatua', 'Compatible indeterminado', 'متوافق غير محدد'), text: say('infinitu ebazpen', 'infinitas soluciones', 'حلول لا نهاية لها') }
+        { tint: GREEN_TINT, lines: ['2x + y = 7', 'x − y = 2'], ratio: '2/1 ≠ 1/(−1)', title: say('Bateragarri determinatua', 'Compatible determinado', 'متوافق محدد', 'Consistent and independent'), text: say('ebazpen bat', 'una solución', 'حل واحد', 'one solution') },
+        { tint: CORAL_TINT, lines: ['x + 2y = 3', '2x + 4y = 5'], ratio: '1/2 = 2/4 ≠ 3/5', title: say('Bateraezina', 'Incompatible', 'غير متوافق', 'Inconsistent'), text: say('ebazpenik ez', 'ninguna solución', 'لا حل', 'no solution') },
+        { tint: STAGE_TINT, lines: ['x + 2y = 3', '2x + 4y = 6'], ratio: '1/2 = 2/4 = 3/6', title: say('Bateragarri indeterminatua', 'Compatible indeterminado', 'متوافق غير محدد', 'Consistent and dependent'), text: say('infinitu ebazpen', 'infinitas soluciones', 'حلول لا نهاية لها', 'infinitely many solutions') }
     ]
     return (
-        <Figure height={300} label={t(say('Sistema koefizienteekin sailkatzea: a/a′, b/b′ eta c/c′', 'Clasificar un sistema con los coeficientes: a/a′, b/b′ y c/c′', 'تصنيف النظام بالمعاملات: a/a′ وb/b′ وc/c′'))}>
+        <Figure height={300} label={t(say('Sistema koefizienteekin sailkatzea: a/a′, b/b′ eta c/c′', 'Clasificar un sistema con los coeficientes: a/a′, b/b′ y c/c′', 'تصنيف النظام بالمعاملات: a/a′ وb/b′ وc/c′', 'Classify a system using the coefficients: a/a′, b/b′ and c/c′'))}>
             {cases.map((item, index) => {
                 const x = 16 + index * 236
                 return (
@@ -106,8 +106,8 @@ export function CoefficientsFigure({ language }: { language: UnitLanguage }) {
                     </Card>
                 )
             })}
-            <Caption y={268}>{t(say('ax + by = c eta a′x + b′y = c′: alderatu koefizienteen arteko zatidurak', 'ax + by = c y a′x + b′y = c′: compara los cocientes de los coeficientes', 'ax + by = c وa′x + b′y = c′: قارن نسب المعاملات'))}</Caption>
-            <Caption y={292}>{t(say('a/a′ ≠ b/b′ bada, zuzenak puntu batean ebakitzen dira', 'Si a/a′ ≠ b/b′, las rectas se cortan en un punto', 'إذا كان a/a′ ≠ b/b′ يتقاطع المستقيمان في نقطة'))}</Caption>
+            <Caption y={268}>{t(say('ax + by = c eta a′x + b′y = c′: alderatu koefizienteen arteko zatidurak', 'ax + by = c y a′x + b′y = c′: compara los cocientes de los coeficientes', 'ax + by = c وa′x + b′y = c′: قارن نسب المعاملات', 'ax + by = c and a′x + b′y = c′: compare the ratios of the coefficients'))}</Caption>
+            <Caption y={292}>{t(say('a/a′ ≠ b/b′ bada, zuzenak puntu batean ebakitzen dira', 'Si a/a′ ≠ b/b′, las rectas se cortan en un punto', 'إذا كان a/a′ ≠ b/b′ يتقاطع المستقيمان في نقطة', 'If a/a′ ≠ b/b′, the straight lines meet at one point'))}</Caption>
         </Figure>
     )
 }
@@ -121,7 +121,7 @@ export function SimplifyFirstFigure({ language }: { language: UnitLanguage }) {
         { from: '−2(x + y) = 1 − x/2', step: '· 2', to: '−3x − 4y = 2' }
     ]
     return (
-        <Figure height={290} label={t(say('Parentesiak eta izendatzaileak kendu, sistema ax + by = c moduan idazteko', 'Quitar paréntesis y denominadores para escribir el sistema como ax + by = c', 'إزالة الأقواس والمقامات لكتابة النظام على الصورة ax + by = c'))}>
+        <Figure height={290} label={t(say('Parentesiak eta izendatzaileak kendu, sistema ax + by = c moduan idazteko', 'Quitar paréntesis y denominadores para escribir el sistema como ax + by = c', 'إزالة الأقواس والمقامات لكتابة النظام على الصورة ax + by = c', 'Remove brackets and denominators to write the system as ax + by = c'))}>
             {rows.map((row, index) => (
                 <g key={index}>
                     <Card x={20} y={20 + index * 84} width={290} height={64} tint={MUSTARD_TINT}>
@@ -137,7 +137,7 @@ export function SimplifyFirstFigure({ language }: { language: UnitLanguage }) {
             <Card x={210} y={196} width={300} height={50} tint={GREEN_TINT}>
                 <F x={360} y={229} anchor="middle" size={21} color={GREEN}>x = 10,  y = −8</F>
             </Card>
-            <Caption y={276}>{t(say('Lehenik, ekuazio bakoitza ax + by = c moduan; gero, metodo bat', 'Primero, cada ecuación en la forma ax + by = c; después, un método', 'أولًا كل معادلة على الصورة ax + by = c؛ ثم طريقة من الطرق'))}</Caption>
+            <Caption y={276}>{t(say('Lehenik, ekuazio bakoitza ax + by = c moduan; gero, metodo bat', 'Primero, cada ecuación en la forma ax + by = c; después, un método', 'أولًا كل معادلة على الصورة ax + by = c؛ ثم طريقة من الطرق', 'First, write each equation in the form ax + by = c; then, use a method'))}</Caption>
         </Figure>
     )
 }
@@ -148,7 +148,7 @@ export function LineCircleFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const box: PlaneBox = { xMin: -6, xMax: 7, yMin: -6, yMax: 7 }
     return (
-        <Figure height={340} label={t(say('x² + y² = 25 zirkunferentzia eta x + y = 7 zuzena (3, 4) eta (4, 3) puntuetan ebakitzen dira', 'La circunferencia x² + y² = 25 y la recta x + y = 7 se cortan en (3, 4) y (4, 3)', 'تتقاطع الدائرة x² + y² = 25 والمستقيم x + y = 7 في (3, 4) و(4, 3)'))}>
+        <Figure height={340} label={t(say('x² + y² = 25 zirkunferentzia eta x + y = 7 zuzena (3, 4) eta (4, 3) puntuetan ebakitzen dira', 'La circunferencia x² + y² = 25 y la recta x + y = 7 se cortan en (3, 4) y (4, 3)', 'تتقاطع الدائرة x² + y² = 25 والمستقيم x + y = 7 في (3, 4) و(4, 3)', 'The circle x² + y² = 25 and the straight line x + y = 7 meet at (3, 4) and (4, 3)'))}>
             <Frame box={box} cell={20} ox={30} oy={34} labelStep={2}>
                 {(map, clip) => (
                     <g>
@@ -164,8 +164,8 @@ export function LineCircleFigure({ language }: { language: UnitLanguage }) {
             <F x={360} y={170} size={18}>x² + (7 − x)² = 25</F>
             <F x={360} y={204} size={18}>x² − 7x + 12 = 0</F>
             <F x={360} y={244} size={19} color={GREEN}>(3, 4)   (4, 3)</F>
-            <Caption y={312}>{t(say('Askatu lehen mailakoan eta ordeztu bigarren mailakoan', 'Despeja en la de primer grado y sustituye en la de segundo', 'اعزل في معادلة الدرجة الأولى وعوّض في الثانية'))}</Caption>
-            <Caption y={334}>{t(say('Ebazpenak zirkunferentziaren eta zuzenaren ebaki-puntuak dira', 'Las soluciones son los puntos de corte de la circunferencia y la recta', 'الحلول هي نقاط تقاطع الدائرة والمستقيم'))}</Caption>
+            <Caption y={312}>{t(say('Askatu lehen mailakoan eta ordeztu bigarren mailakoan', 'Despeja en la de primer grado y sustituye en la de segundo', 'اعزل في معادلة الدرجة الأولى وعوّض في الثانية', 'Solve for one unknown in the linear equation and substitute into the quadratic one'))}</Caption>
+            <Caption y={334}>{t(say('Ebazpenak zirkunferentziaren eta zuzenaren ebaki-puntuak dira', 'Las soluciones son los puntos de corte de la circunferencia y la recta', 'الحلول هي نقاط تقاطع الدائرة والمستقيم', 'The solutions are the points where the circle and the straight line meet'))}</Caption>
         </Figure>
     )
 }
@@ -178,7 +178,7 @@ export function SquaresReductionFigure({ language }: { language: UnitLanguage })
     const branch = (sign: number) => sample((y) => [sign * Math.sqrt(9 + y * y), y], -7.5, 7.5)
     const points: Point[] = [[5, 4], [5, -4], [-5, 4], [-5, -4]]
     return (
-        <Figure height={340} label={t(say('x² + y² = 41 eta x² − y² = 9: lau ebazpen, (±5, ±4)', 'x² + y² = 41 y x² − y² = 9: cuatro soluciones, (±5, ±4)', 'x² + y² = 41 وx² − y² = 9: أربعة حلول (±5, ±4)'))}>
+        <Figure height={340} label={t(say('x² + y² = 41 eta x² − y² = 9: lau ebazpen, (±5, ±4)', 'x² + y² = 41 y x² − y² = 9: cuatro soluciones, (±5, ±4)', 'x² + y² = 41 وx² − y² = 9: أربعة حلول (±5, ±4)', 'x² + y² = 41 and x² − y² = 9: four solutions, (±5, ±4)'))}>
             <Frame box={box} cell={18} ox={30} oy={34} labelStep={2}>
                 {(map, clip) => (
                     <g>
@@ -194,8 +194,8 @@ export function SquaresReductionFigure({ language }: { language: UnitLanguage })
             <F x={360} y={170} size={18}>25 + y² = 41  →  y = ±4</F>
             <F x={360} y={214} size={19} color={GREEN}>(5, 4)  (5, −4)</F>
             <F x={360} y={244} size={19} color={GREEN}>(−5, 4)  (−5, −4)</F>
-            <Caption y={312}>{t(say('x² eta y² ezezagun berriak balira bezala: batu eta y² desagertzen da', 'Como si x² e y² fueran incógnitas nuevas: se suman y desaparece y²', 'كأن x² وy² مجهولان جديدان: نجمع فيختفي y²'))}</Caption>
-            <Caption y={334}>{t(say('Erro bakoitzak bi zeinu ditu: lau ebazpen', 'Cada raíz tiene dos signos: cuatro soluciones', 'لكل جذر إشارتان: أربعة حلول'))}</Caption>
+            <Caption y={312}>{t(say('x² eta y² ezezagun berriak balira bezala: batu eta y² desagertzen da', 'Como si x² e y² fueran incógnitas nuevas: se suman y desaparece y²', 'كأن x² وy² مجهولان جديدان: نجمع فيختفي y²', 'Treat x² and y² as if they were new unknowns: add the equations and y² disappears'))}</Caption>
+            <Caption y={334}>{t(say('Erro bakoitzak bi zeinu ditu: lau ebazpen', 'Cada raíz tiene dos signos: cuatro soluciones', 'لكل جذر إشارتان: أربعة حلول', 'Each square root has two signs: four solutions'))}</Caption>
         </Figure>
     )
 }
@@ -206,7 +206,7 @@ export function HyperbolaFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const box: PlaneBox = { xMin: -6, xMax: 6, yMin: -6, yMax: 6 }
     return (
-        <Figure height={346} label={t(say('xy = 6 hiperbola eta y = x − 1 zuzena (3, 2) eta (−2, −3) puntuetan ebakitzen dira', 'La hipérbola xy = 6 y la recta y = x − 1 se cortan en (3, 2) y (−2, −3)', 'يتقاطع القطع الزائد xy = 6 والمستقيم y = x − 1 في (3, 2) و(−2, −3)'))}>
+        <Figure height={346} label={t(say('xy = 6 hiperbola eta y = x − 1 zuzena (3, 2) eta (−2, −3) puntuetan ebakitzen dira', 'La hipérbola xy = 6 y la recta y = x − 1 se cortan en (3, 2) y (−2, −3)', 'يتقاطع القطع الزائد xy = 6 والمستقيم y = x − 1 في (3, 2) و(−2, −3)', 'The hyperbola xy = 6 and the straight line y = x − 1 meet at (3, 2) and (−2, −3)'))}>
             <Frame box={box} cell={21} ox={30} oy={34} labelStep={2}>
                 {(map, clip) => (
                     <g>
@@ -223,8 +223,8 @@ export function HyperbolaFigure({ language }: { language: UnitLanguage }) {
             <F x={360} y={170} size={18}>x² − x − 6 = 0</F>
             <F x={360} y={204} size={18}>x = 3  →  y = 2</F>
             <F x={360} y={238} size={18}>x = −2  →  y = −3</F>
-            <Caption y={318}>{t(say('Zatikiak edo erroak badaude, egiaztatu ebazpen bakoitza hasierako sisteman', 'Si hay fracciones o raíces, comprueba cada solución en el sistema inicial', 'إذا وُجدت كسور أو جذور فتحقّق من كل حل في النظام الأصلي'))}</Caption>
-            <Caption y={340}>{t(say('Ebazpen bakoitza bikote bat da: x eta bere y', 'Cada solución es una pareja: x y su y', 'كل حل زوج: x وقيمة y المقابلة'))}</Caption>
+            <Caption y={318}>{t(say('Zatikiak edo erroak badaude, egiaztatu ebazpen bakoitza hasierako sisteman', 'Si hay fracciones o raíces, comprueba cada solución en el sistema inicial', 'إذا وُجدت كسور أو جذور فتحقّق من كل حل في النظام الأصلي', 'If there are fractions or square roots, check each solution in the original system'))}</Caption>
+            <Caption y={340}>{t(say('Ebazpen bakoitza bikote bat da: x eta bere y', 'Cada solución es una pareja: x y su y', 'كل حل زوج: x وقيمة y المقابلة', 'Each solution is a pair: x and its own y'))}</Caption>
         </Figure>
     )
 }
@@ -237,7 +237,7 @@ export function HalfPlaneFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const box: PlaneBox = { xMin: -3, xMax: 5, yMin: -3, yMax: 6 }
     return (
-        <Figure height={330} label={t(say('2x + y ≤ 4: (0, 0) puntua duen erdiplanoa', '2x + y ≤ 4: el semiplano que contiene el punto (0, 0)', '2x + y ≤ 4: نصف المستوى الذي يحوي النقطة (0, 0)'))}>
+        <Figure height={330} label={t(say('2x + y ≤ 4: (0, 0) puntua duen erdiplanoa', '2x + y ≤ 4: el semiplano que contiene el punto (0, 0)', '2x + y ≤ 4: نصف المستوى الذي يحوي النقطة (0, 0)', '2x + y ≤ 4: the half-plane that contains the point (0, 0)'))}>
             <Frame box={box} cell={26} ox={30} oy={34}>
                 {(map, clip) => (
                     <g>
@@ -251,18 +251,18 @@ export function HalfPlaneFigure({ language }: { language: UnitLanguage }) {
             </Frame>
             <F x={300} y={50} size={24}>2x + y ≤ 4</F>
             <Card x={300} y={72} width={400} height={56} tint={CORAL_TINT}>
-                <Label x={500} y={92} textAnchor="middle" fontSize={13} fill={MUTED}>{t(say('1. Muga-zuzena: bi puntu', '1. La recta frontera: dos puntos', '1. المستقيم الحدّي: نقطتان'))}</Label>
+                <Label x={500} y={92} textAnchor="middle" fontSize={13} fill={MUTED}>{t(say('1. Muga-zuzena: bi puntu', '1. La recta frontera: dos puntos', '1. المستقيم الحدّي: نقطتان', '1. The boundary line: two points'))}</Label>
                 <F x={500} y={118} anchor="middle" size={18}>2x + y = 4:  (0, 4),  (2, 0)</F>
             </Card>
             <Card x={300} y={138} width={400} height={56} tint={PAPER}>
-                <Label x={500} y={158} textAnchor="middle" fontSize={13} fill={MUTED}>{t(say('2. Proba-puntua', '2. Un punto de prueba', '2. نقطة اختبار'))}</Label>
+                <Label x={500} y={158} textAnchor="middle" fontSize={13} fill={MUTED}>{t(say('2. Proba-puntua', '2. Un punto de prueba', '2. نقطة اختبار', '2. A test point'))}</Label>
                 <F x={500} y={184} anchor="middle" size={18}>(0, 0):  0 ≤ 4  ✓</F>
             </Card>
             <Card x={300} y={204} width={400} height={56} tint={GREEN_TINT}>
-                <Label x={500} y={238} textAnchor="middle" fontSize={15} fontWeight={700} fill={GREEN}>{t(say('3. (0, 0) duen erdiplanoa', '3. El semiplano que contiene (0, 0)', '3. نصف المستوى الذي يحوي (0, 0)'))}</Label>
+                <Label x={500} y={238} textAnchor="middle" fontSize={15} fontWeight={700} fill={GREEN}>{t(say('3. (0, 0) duen erdiplanoa', '3. El semiplano que contiene (0, 0)', '3. نصف المستوى الذي يحوي (0, 0)', '3. The half-plane that contains (0, 0)'))}</Label>
             </Card>
-            <Caption y={300}>{t(say('≤ edo ≥ bada, zuzena ebazpenean dago; < edo > bada, ez (marra etena)', 'Con ≤ o ≥ la recta es parte de la solución; con < o >, no (línea discontinua)', 'مع ≤ أو ≥ يكون المستقيم من الحل؛ ومع < أو > لا (خط متقطع)'))}</Caption>
-            <Caption y={322}>{t(say('Proba-puntuak betetzen ez badu, beste erdiplanoa da', 'Si el punto de prueba no la cumple, es el otro semiplano', 'إذا لم تحققها نقطة الاختبار فالحل نصف المستوى الآخر'))}</Caption>
+            <Caption y={300}>{t(say('≤ edo ≥ bada, zuzena ebazpenean dago; < edo > bada, ez (marra etena)', 'Con ≤ o ≥ la recta es parte de la solución; con < o >, no (línea discontinua)', 'مع ≤ أو ≥ يكون المستقيم من الحل؛ ومع < أو > لا (خط متقطع)', 'With ≤ or ≥, the line is part of the solution; with < or >, it is not (dashed line)'))}</Caption>
+            <Caption y={322}>{t(say('Proba-puntuak betetzen ez badu, beste erdiplanoa da', 'Si el punto de prueba no la cumple, es el otro semiplano', 'إذا لم تحققها نقطة الاختبار فالحل نصف المستوى الآخر', 'If the test point does not satisfy it, the solution is the other half-plane'))}</Caption>
         </Figure>
     )
 }
@@ -279,7 +279,7 @@ export function RegionFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const box: PlaneBox = { xMin: -1, xMax: 6, yMin: -1, yMax: 6 }
     return (
-        <Figure height={310} label={t(say('y ≥ 1, x ≤ 4 eta y ≤ x: erpinak (1, 1), (4, 1) eta (4, 4) dituen triangelua', 'y ≥ 1, x ≤ 4 e y ≤ x: el triángulo de vértices (1, 1), (4, 1) y (4, 4)', 'y ≥ 1 وx ≤ 4 وy ≤ x: المثلث ذو الرؤوس (1, 1) و(4, 1) و(4, 4)'))}>
+        <Figure height={310} label={t(say('y ≥ 1, x ≤ 4 eta y ≤ x: erpinak (1, 1), (4, 1) eta (4, 4) dituen triangelua', 'y ≥ 1, x ≤ 4 e y ≤ x: el triángulo de vértices (1, 1), (4, 1) y (4, 4)', 'y ≥ 1 وx ≤ 4 وy ≤ x: المثلث ذو الرؤوس (1, 1) و(4, 1) و(4, 4)', 'y ≥ 1, x ≤ 4 and y ≤ x: the triangle with vertices (1, 1), (4, 1) and (4, 4)'))}>
             <Frame box={box} cell={30} ox={30} oy={34}>
                 {(map, clip) => (
                     <g>
@@ -293,11 +293,11 @@ export function RegionFigure({ language }: { language: UnitLanguage }) {
             </Frame>
             <Brace x={330} y={56} lines={['y ≥ 1', 'x ≤ 4', 'y ≤ x']} size={21} />
             <Card x={330} y={170} width={360} height={70} tint={GREEN_TINT}>
-                <Label x={510} y={196} textAnchor="middle" fontSize={14} fill={MUTED}>{t(say('Erpinak', 'Vértices', 'الرؤوس'))}</Label>
+                <Label x={510} y={196} textAnchor="middle" fontSize={14} fill={MUTED}>{t(say('Erpinak', 'Vértices', 'الرؤوس', 'Vertices'))}</Label>
                 <F x={510} y={226} anchor="middle" size={19}>(1, 1)   (4, 1)   (4, 4)</F>
             </Card>
-            <Caption y={276}>{t(say('Ebazpena hiru erdiplanoen zati komuna da', 'La solución es la parte común de los tres semiplanos', 'الحل هو الجزء المشترك بين أنصاف المستويات الثلاثة'))}</Caption>
-            <Caption y={298}>{t(say('Erpinak bi muga-zuzenen ebaki-puntuak dira', 'Los vértices son los cortes de dos rectas frontera', 'الرؤوس هي نقاط تقاطع مستقيمين حدّيين'))}</Caption>
+            <Caption y={276}>{t(say('Ebazpena hiru erdiplanoen zati komuna da', 'La solución es la parte común de los tres semiplanos', 'الحل هو الجزء المشترك بين أنصاف المستويات الثلاثة', 'The solution is the region common to all three half-planes'))}</Caption>
+            <Caption y={298}>{t(say('Erpinak bi muga-zuzenen ebaki-puntuak dira', 'Los vértices son los cortes de dos rectas frontera', 'الرؤوس هي نقاط تقاطع مستقيمين حدّيين', 'The vertices are where two boundary lines meet'))}</Caption>
         </Figure>
     )
 }
@@ -311,7 +311,7 @@ export function NonlinearProblemFigure({ language }: { language: UnitLanguage })
     const width = 288
     const height = 120
     return (
-        <Figure height={280} label={t(say('Laukizuzena: perimetroa 34 cm eta diagonala 13 cm; aldeak 12 eta 5 cm', 'Rectángulo de perímetro 34 cm y diagonal 13 cm: los lados miden 12 y 5 cm', 'مستطيل محيطه 34 سم وقطره 13 سم: ضلعاه 12 و5 سم'))}>
+        <Figure height={280} label={t(say('Laukizuzena: perimetroa 34 cm eta diagonala 13 cm; aldeak 12 eta 5 cm', 'Rectángulo de perímetro 34 cm y diagonal 13 cm: los lados miden 12 y 5 cm', 'مستطيل محيطه 34 سم وقطره 13 سم: ضلعاه 12 و5 سم', 'Rectangle with a perimeter of 34 cm and a diagonal of 13 cm: the sides are 12 cm and 5 cm'))}>
             <rect x={x0} y={y0} width={width} height={height} fill={STAGE_TINT} stroke={INK} strokeWidth={2} />
             <line x1={x0} y1={y0 + height} x2={x0 + width} y2={y0} stroke={SECOND} strokeWidth={3} />
             <F x={x0 + width / 2} y={y0 + height + 26} anchor="middle" size={20} color={STAGE}>x</F>
@@ -321,7 +321,7 @@ export function NonlinearProblemFigure({ language }: { language: UnitLanguage })
             <F x={410} y={160} size={18}>x² + (17 − x)² = 169</F>
             <F x={410} y={194} size={18}>x² − 17x + 60 = 0</F>
             <F x={410} y={230} size={19} color={GREEN}>x = 12,  y = 5</F>
-            <Caption y={266}>{t(say('Perimetroak lehen mailako ekuazioa ematen du, eta Pitagorasek bigarren mailakoa', 'El perímetro da una ecuación de primer grado y Pitágoras una de segundo', 'يعطي المحيط معادلة من الدرجة الأولى ويعطي فيثاغورس معادلة من الدرجة الثانية'))}</Caption>
+            <Caption y={266}>{t(say('Perimetroak lehen mailako ekuazioa ematen du, eta Pitagorasek bigarren mailakoa', 'El perímetro da una ecuación de primer grado y Pitágoras una de segundo', 'يعطي المحيط معادلة من الدرجة الأولى ويعطي فيثاغورس معادلة من الدرجة الثانية', 'The perimeter gives a linear equation and Pythagoras\' theorem gives a quadratic one'))}</Caption>
         </Figure>
     )
 }
@@ -339,7 +339,7 @@ export function RegionProblemFigure({ language }: { language: UnitLanguage }) {
     const box: PlaneBox = { xMin: 0, xMax: 5, yMin: 0, yMax: 7 }
     const points = latticePoints(box, SNACKS)
     return (
-        <Figure height={310} label={t(say('3x + 2y ≤ 12, x ≥ 0, y ≥ 0: 12 €-rekin eros daitezkeen ogitarteko eta freskagarriak', '3x + 2y ≤ 12, x ≥ 0, y ≥ 0: los bocadillos y refrescos que se pueden comprar con 12 €', '3x + 2y ≤ 12 وx ≥ 0 وy ≥ 0: الشطائر والمشروبات التي يمكن شراؤها بـ12 €'))}>
+        <Figure height={310} label={t(say('3x + 2y ≤ 12, x ≥ 0, y ≥ 0: 12 €-rekin eros daitezkeen ogitarteko eta freskagarriak', '3x + 2y ≤ 12, x ≥ 0, y ≥ 0: los bocadillos y refrescos que se pueden comprar con 12 €', '3x + 2y ≤ 12 وx ≥ 0 وy ≥ 0: الشطائر والمشروبات التي يمكن شراؤها بـ12 €', '3x + 2y ≤ 12, x ≥ 0, y ≥ 0: the sandwiches and soft drinks you can buy with €12'))}>
             <Frame box={box} cell={30} ox={40} oy={36}>
                 {(map, clip) => (
                     <g>
@@ -349,12 +349,12 @@ export function RegionProblemFigure({ language }: { language: UnitLanguage }) {
                     </g>
                 )}
             </Frame>
-            <Label x={300} y={50} fontSize={15} fill={MUTED}>{t(say('x ogitarteko (3 €), y freskagarri (2 €)', 'x bocadillos (3 €), y refrescos (2 €)', 'x شطيرة (3 €) وy مشروب (2 €)'))}</Label>
+            <Label x={300} y={50} fontSize={15} fill={MUTED}>{t(say('x ogitarteko (3 €), y freskagarri (2 €)', 'x bocadillos (3 €), y refrescos (2 €)', 'x شطيرة (3 €) وy مشروب (2 €)', 'x sandwiches (€3), y soft drinks (€2)'))}</Label>
             <Brace x={300} y={94} lines={['3x + 2y ≤ 12', 'x ≥ 0', 'y ≥ 0']} size={20} />
             <Card x={300} y={196} width={400} height={50} tint={GREEN_TINT}>
-                <Label x={500} y={227} textAnchor="middle" fontSize={15} fontWeight={700} fill={GREEN}>{t(say('Puntu berde bakoitza erosketa posible bat da', 'Cada punto verde es una compra posible', 'كل نقطة خضراء شراء ممكن'))}</Label>
+                <Label x={500} y={227} textAnchor="middle" fontSize={15} fontWeight={700} fill={GREEN}>{t(say('Puntu berde bakoitza erosketa posible bat da', 'Cada punto verde es una compra posible', 'كل نقطة خضراء شراء ممكن', 'Each green point is a possible purchase'))}</Label>
             </Card>
-            <Caption y={290}>{t(say('Zenbaki osoko problemetan, eskualdeko puntu osoak bakarrik balio dute', 'En los problemas de cantidades enteras, solo valen los puntos enteros de la región', 'في مسائل الكميات الصحيحة لا تصلح إلا النقاط الصحيحة من المنطقة'))}</Caption>
+            <Caption y={290}>{t(say('Zenbaki osoko problemetan, eskualdeko puntu osoak bakarrik balio dute', 'En los problemas de cantidades enteras, solo valen los puntos enteros de la región', 'في مسائل الكميات الصحيحة لا تصلح إلا النقاط الصحيحة من المنطقة', 'In problems with whole quantities, only the integer points of the region are valid'))}</Caption>
         </Figure>
     )
 }

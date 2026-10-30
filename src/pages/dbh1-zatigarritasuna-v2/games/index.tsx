@@ -41,7 +41,7 @@ export function DivisibilityIntroGames({ language, pathname, openGame, completed
             language={language}
             games={hubGames}
             recordsKey={INTRO_DIVISIBILITY_GAME_RECORDS_KEY}
-            title={{ eu: 'Jolastu zenbakien barrenarekin', es: 'Juega con los números por dentro', ar: 'العب بالأعداد من الداخل' }}
+            title={{ eu: 'Jolastu zenbakien barrenarekin', es: 'Juega con los números por dentro', en: 'Play with what is inside the numbers', ar: 'العب بالأعداد من الداخل' }}
             completedIds={completedIds}
             onComplete={onComplete}
             mode={introDivisibilityGameModeForPath(pathname)}

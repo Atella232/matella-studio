@@ -37,36 +37,36 @@ export function CompareTool(props: ToolProps & { challenges?: LabChallenge<Compa
     const crossSecond = second.numerator * first.denominator
 
     const relationNames: Record<Relation, string> = {
-        '<': l({ eu: 'txikiagoa da', es: 'es menor que', ar: 'أصغر من' }),
-        '=': l({ eu: 'berdina da', es: 'es igual a', ar: 'يساوي' }),
-        '>': l({ eu: 'handiagoa da', es: 'es mayor que', ar: 'أكبر من' })
+        '<': l({ eu: 'txikiagoa da', es: 'es menor que', en: 'is less than', ar: 'أصغر من' }),
+        '=': l({ eu: 'berdina da', es: 'es igual a', en: 'is equal to', ar: 'يساوي' }),
+        '>': l({ eu: 'handiagoa da', es: 'es mayor que', en: 'is greater than', ar: 'أكبر من' })
     }
 
     const fractionControls = (which: 'first' | 'second', value: FractionValue, title: string) => (
         <>
             <h3>{title}</h3>
-            <Stepper label={l({ eu: 'Zenbakitzailea', es: 'Numerador', ar: 'البسط' })} value={value.numerator} min={1} max={value.denominator} onChange={(next) => setState((current) => setCompareFraction(current, which, next, current[which].denominator))} language={props.language} />
-            <Stepper label={l({ eu: 'Izendatzailea', es: 'Denominador', ar: 'المقام' })} value={value.denominator} min={COMPARE_LIMITS.minDenominator} max={COMPARE_LIMITS.maxDenominator} onChange={(next) => setState((current) => setCompareFraction(current, which, current[which].numerator, next))} language={props.language} />
+            <Stepper label={l({ eu: 'Zenbakitzailea', es: 'Numerador', en: 'Numerator', ar: 'البسط' })} value={value.numerator} min={1} max={value.denominator} onChange={(next) => setState((current) => setCompareFraction(current, which, next, current[which].denominator))} language={props.language} />
+            <Stepper label={l({ eu: 'Izendatzailea', es: 'Denominador', en: 'Denominator', ar: 'المقام' })} value={value.denominator} min={COMPARE_LIMITS.minDenominator} max={COMPARE_LIMITS.maxDenominator} onChange={(next) => setState((current) => setCompareFraction(current, which, current[which].numerator, next))} language={props.language} />
         </>
     )
 
     const strategyOptions: Array<{ value: CompareStrategy; label: string }> = [
-        { value: 'common', label: l({ eu: 'Izend. komuna', es: 'Denom. común', ar: 'مقام مشترك' }) },
-        { value: 'line', label: l({ eu: 'Zuzena', es: 'Recta', ar: 'الخط' }) },
-        { value: 'cross', label: l({ eu: 'Gurutzatua', es: 'Cruzados', ar: 'تبادلي' }) }
+        { value: 'common', label: l({ eu: 'Izend. komuna', es: 'Denom. común', en: 'Common denom.', ar: 'مقام مشترك' }) },
+        { value: 'line', label: l({ eu: 'Zuzena', es: 'Recta', en: 'Straight line', ar: 'الخط' }) },
+        { value: 'cross', label: l({ eu: 'Gurutzatua', es: 'Cruzados', en: 'Cross products', ar: 'تبادلي' }) }
     ]
 
     const controls = (
         <>
-            {fractionControls('first', first, l({ eu: 'Lehen zatikia', es: 'Primera fracción', ar: 'الكسر الأول' }))}
-            {fractionControls('second', second, l({ eu: 'Bigarren zatikia', es: 'Segunda fracción', ar: 'الكسر الثاني' }))}
-            <Segmented label={l({ eu: 'Estrategia', es: 'Estrategia', ar: 'الاستراتيجية' })} value={strategy} options={strategyOptions} onChange={(next) => setState((current) => ({ ...current, strategy: next }))} />
+            {fractionControls('first', first, l({ eu: 'Lehen zatikia', es: 'Primera fracción', en: 'First fraction', ar: 'الكسر الأول' }))}
+            {fractionControls('second', second, l({ eu: 'Bigarren zatikia', es: 'Segunda fracción', en: 'Second fraction', ar: 'الكسر الثاني' }))}
+            <Segmented label={l({ eu: 'Estrategia', es: 'Estrategia', en: 'Strategy', ar: 'الاستراتيجية' })} value={strategy} options={strategyOptions} onChange={(next) => setState((current) => ({ ...current, strategy: next }))} />
         </>
     )
 
     const readout = (
         <>
-            <div className="fraction-v2-cmp-guess" role="group" aria-label={l({ eu: 'Zure iragarpena', es: 'Tu predicción', ar: 'توقّعك' })}>
+            <div className="fraction-v2-cmp-guess" role="group" aria-label={l({ eu: 'Zure iragarpena', es: 'Tu predicción', en: 'Your prediction', ar: 'توقّعك' })}>
                 <MathText text={`$${latex(first)}$`} />
                 {(['<', '=', '>'] as Relation[]).map((option) => (
                     <button
@@ -84,16 +84,16 @@ export function CompareTool(props: ToolProps & { challenges?: LabChallenge<Compa
             </div>
             <span className="fraction-v2-lab-readout-note" aria-live="polite">
                 {guess === null
-                    ? l({ eu: 'Aukeratu zure iragarpena: <, = edo >.', es: 'Elige tu predicción: <, = o >.', ar: 'اختر توقّعك: < أو = أو >.' })
+                    ? l({ eu: 'Aukeratu zure iragarpena: <, = edo >.', es: 'Elige tu predicción: <, = o >.', en: 'Choose your prediction: <, = or >.', ar: 'اختر توقّعك: < أو = أو >.' })
                     : guess === relation
-                        ? l({ eu: 'Ondo ikusita!', es: '¡Bien visto!', ar: 'أحسنت الملاحظة!' })
-                        : l({ eu: 'Ez da horrela: begiratu estrategiari eta saiatu berriro.', es: 'No es así: mira la estrategia y vuelve a intentarlo.', ar: 'ليس كذلك: انظر إلى الاستراتيجية وحاول مجددًا.' })}
+                        ? l({ eu: 'Ondo ikusita!', es: '¡Bien visto!', en: 'Well spotted!', ar: 'أحسنت الملاحظة!' })
+                        : l({ eu: 'Ez da horrela: begiratu estrategiari eta saiatu berriro.', es: 'No es así: mira la estrategia y vuelve a intentarlo.', en: 'That’s not right: look at the strategy and try again.', ar: 'ليس كذلك: انظر إلى الاستراتيجية وحاول مجددًا.' })}
             </span>
         </>
     )
 
-    const firstLabel = `${l({ eu: 'Lehen zatikia', es: 'Primera fracción', ar: 'الكسر الأول' })}: ${first.numerator}/${first.denominator}`
-    const secondLabel = `${l({ eu: 'Bigarren zatikia', es: 'Segunda fracción', ar: 'الكسر الثاني' })}: ${second.numerator}/${second.denominator}`
+    const firstLabel = `${l({ eu: 'Lehen zatikia', es: 'Primera fracción', en: 'First fraction', ar: 'الكسر الأول' })}: ${first.numerator}/${first.denominator}`
+    const secondLabel = `${l({ eu: 'Bigarren zatikia', es: 'Segunda fracción', en: 'Second fraction', ar: 'الكسر الثاني' })}: ${second.numerator}/${second.denominator}`
 
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? compareChallenges}
@@ -112,6 +112,7 @@ export function CompareTool(props: ToolProps & { challenges?: LabChallenge<Compa
                         {l({
                             eu: `Biak ${common} zatitan banatuta: ${firstScaled} eta ${secondScaled} zati. Alderatu zenbakitzaileak.`,
                             es: `Las dos en ${common} partes: ${firstScaled} y ${secondScaled} trozos. Compara los numeradores.`,
+                            en: `Both in ${common} parts: ${firstScaled} and ${secondScaled} pieces. Compare the numerators.`,
                             ar: `كلاهما بـ ${common} أجزاء: ${firstScaled} و${secondScaled} قطعة. قارن البسطين.`
                         })}
                     </p>
@@ -144,6 +145,7 @@ export function CompareTool(props: ToolProps & { challenges?: LabChallenge<Compa
                     <p className="fraction-v2-insight">{l({
                         eu: 'Biderkatu zenbakitzaile bakoitza beste zatikiaren izendatzailearekin: emaitzen ordena bera da zatikien ordena.',
                         es: 'Multiplica cada numerador por el denominador de la otra fracción: los productos quedan en el mismo orden que las fracciones.',
+                        en: 'Multiply each numerator by the denominator of the other fraction: the products keep the same order as the fractions.',
                         ar: 'اضرب كل بسط في مقام الكسر الآخر: يأتي الناتجان بترتيب الكسرين نفسه.'
                     })}</p>
                 </div>

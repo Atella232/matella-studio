@@ -75,21 +75,22 @@ function operandLatex(value: FractionValue): string {
 
 const math = (latex: string) => `$${latex}$`
 
-function text(eu: string, es: string, ar: string): LocalizedText {
-    return { eu, es, ar }
+function text(eu: string, es: string, ar: string, en: string): LocalizedText {
+    return { eu, es, en, ar }
 }
 
 /** Same sentence in every language around the same formula */
-function sameFormula(before: LocalizedText, latex: string, after: LocalizedText = text('', '', '')): LocalizedText {
+function sameFormula(before: LocalizedText, latex: string, after: LocalizedText = text('', '', '', '')): LocalizedText {
     return {
         eu: `${before.eu}${math(latex)}${after.eu}`,
         es: `${before.es}${math(latex)}${after.es}`,
+        en: `${before.en}${math(latex)}${after.en}`,
         ar: `${before.ar}${math(latex)}${after.ar}`
     }
 }
 
 function formula(latex: string): LocalizedText {
-    return { eu: math(latex), es: math(latex), ar: math(latex) }
+    return { eu: math(latex), es: math(latex), en: math(latex), ar: math(latex) }
 }
 
 /* ---------- Options ---------- */
@@ -178,7 +179,7 @@ function simplifyQuestion(random: Random, tier: Tier): RaceQuestion {
     return {
         circuit: 0,
         kind: 'simplify',
-        prompt: sameFormula(text('Sinplifikatu guztiz: ', 'Simplifica del todo: ', 'بسّط تمامًا: '), writtenLatex(top, bottom)),
+        prompt: sameFormula(text('Sinplifikatu guztiz: ', 'Simplifica del todo: ', 'بسّط تمامًا: ', 'Simplify fully: '), writtenLatex(top, bottom)),
         options: buildOptions(random, { latex: valueLatex(base), value: base }, candidates, true),
         answer: base,
         answerForm: 'simplified',
@@ -207,7 +208,7 @@ function missingTermQuestion(random: Random, tier: Tier): RaceQuestion {
     return {
         circuit: 0,
         kind: 'missing-term',
-        prompt: sameFormula(text('Osatu: ', 'Completa: ', 'أكمل: '), promptLatex),
+        prompt: sameFormula(text('Osatu: ', 'Completa: ', 'أكمل: ', 'Complete: '), promptLatex),
         options: buildOptions(random, { latex: String(answer), value: fraction(answer) }, candidates),
         answer: fraction(answer),
         answerForm: 'any',
@@ -234,7 +235,7 @@ function equivalentToQuestion(random: Random, tier: Tier): RaceQuestion {
     return {
         circuit: 0,
         kind: 'equivalent-to',
-        prompt: sameFormula(text('Zein da honen baliokidea? ', '¿Cuál es equivalente a ', 'أيّها يكافئ '), valueLatex(signed), text('', '?', '؟')),
+        prompt: sameFormula(text('Zein da honen baliokidea? ', '¿Cuál es equivalente a ', 'أيّها يكافئ ', 'Which is equivalent to '), valueLatex(signed), text('', '?', '؟', '?')),
         options: buildOptions(random, { latex: writtenLatex(top, bottom), value: signed }, [
             ...shuffle(random, candidates.filter((item) => item?.error !== 'sign')),
             candidates[3]
@@ -299,8 +300,8 @@ function extremeQuestion(random: Random, tier: Tier, largest: boolean): RaceQues
         circuit: 1,
         kind: largest ? 'largest' : 'smallest',
         prompt: largest
-            ? text('Zein da handiena?', '¿Cuál es la mayor?', 'أيّها الأكبر؟')
-            : text('Zein da txikiena?', '¿Cuál es la menor?', 'أيّها الأصغر؟'),
+            ? text('Zein da handiena?', '¿Cuál es la mayor?', 'أيّها الأكبر؟', 'Which one is the largest?')
+            : text('Zein da txikiena?', '¿Cuál es la menor?', 'أيّها الأصغر؟', 'Which is the smallest?'),
         options,
         answer,
         answerForm: 'any',
@@ -329,6 +330,7 @@ function betweenQuestion(random: Random, tier: Tier): RaceQuestion {
         prompt: {
             eu: `Zein dago ${math(valueLatex(low))} eta ${math(valueLatex(high))} artean?`,
             es: `¿Cuál está entre ${math(valueLatex(low))} y ${math(valueLatex(high))}?`,
+            en: `Which one is between ${math(valueLatex(low))} and ${math(valueLatex(high))}?`,
             ar: `أيّها يقع بين ${math(valueLatex(low))} و${math(valueLatex(high))}؟`
         },
         options: buildOptions(random, { latex: valueLatex(middle), value: middle }, shuffle(random, candidates)),
@@ -524,6 +526,7 @@ function quantityQuestion(random: Random, tier: Tier): RaceQuestion {
                 prompt: {
                     eu: `${math(String(total))}-ren ${math(valueLatex(part))}?`,
                     es: `¿${math(valueLatex(part))} de ${math(String(total))}?`,
+                    en: `What is ${math(valueLatex(part))} of ${math(String(total))}?`,
                     ar: `${math(valueLatex(part))} من ${math(String(total))}؟`
                 },
                 options: buildOptions(random, whole(answer), [
@@ -548,6 +551,7 @@ function quantityQuestion(random: Random, tier: Tier): RaceQuestion {
                 prompt: {
                     eu: `${math(String(total))}-ren ${math(`${percent}\\%`)}?`,
                     es: `¿${math(`${percent}\\%`)} de ${math(String(total))}?`,
+                    en: `What is ${math(`${percent}\\%`)} of ${math(String(total))}?`,
                     ar: `${math(`${percent}\\%`)} من ${math(String(total))}؟`
                 },
                 options: buildOptions(random, { latex: valueLatex(answer), value: answer }, [
@@ -575,7 +579,7 @@ function quantityQuestion(random: Random, tier: Tier): RaceQuestion {
             return {
                 circuit: 5,
                 kind,
-                prompt: sameFormula(text('Ehunekotan: ', 'En porcentaje: ', 'كنسبة مئوية: '), `${valueLatex(base)}=\\,?\\%`),
+                prompt: sameFormula(text('Ehunekotan: ', 'En porcentaje: ', 'كنسبة مئوية: ', 'As a percentage: '), `${valueLatex(base)}=\\,?\\%`),
                 options: buildOptions(random, { latex: percentLatex(percent), value: percent }, options),
                 answer: percent,
                 answerForm: 'any',
@@ -594,6 +598,7 @@ function quantityQuestion(random: Random, tier: Tier): RaceQuestion {
                 prompt: {
                     eu: `Zenbaki baten ${math(valueLatex(part))} ${math(String(known))} da. Zein da zenbakia?`,
                     es: `${math(valueLatex(part))} de un número es ${math(String(known))}. ¿Cuál es el número?`,
+                    en: `${math(valueLatex(part))} of a number is ${math(String(known))}. What is the number?`,
                     ar: `${math(valueLatex(part))} من عدد يساوي ${math(String(known))}. ما هو العدد؟`
                 },
                 options: buildOptions(random, whole(total), [
@@ -621,6 +626,7 @@ function quantityQuestion(random: Random, tier: Tier): RaceQuestion {
                 prompt: {
                     eu: `${math(String(total))}-tik, zein zati da ${math(String(part))}?`,
                     es: `¿Qué fracción de ${math(String(total))} es ${math(String(part))}?`,
+                    en: `What fraction of ${math(String(total))} is ${math(String(part))}?`,
                     ar: `ما الكسر الذي يمثله ${math(String(part))} من ${math(String(total))}؟`
                 },
                 options: buildOptions(random, { latex: valueLatex(answer), value: answer }, [
@@ -689,33 +695,33 @@ export function racePosition(circuit: number, timeMs: number): number {
 }
 
 export const raceErrorTips: Record<RaceErrorKind, LocalizedText> = {
-    'not-irreducible': text('Oraindik sinplifika daiteke: zatitu berriro zatitzaile komun batez.', 'Aún se puede simplificar: divide otra vez por un divisor común.', 'لا يزال يمكن تبسيطه: اقسم مجددًا على قاسم مشترك.'),
-    'one-term': text('Zenbakitzailea eta izendatzailea zenbaki berarekin biderkatu edo zatitu behar dira.', 'Numerador y denominador se multiplican o dividen por el mismo número.', 'يُضرب البسط والمقام أو يُقسمان على العدد نفسه.'),
-    reciprocal: text('Zenbakitzailea eta izendatzailea trukatu dituzu.', 'Has intercambiado numerador y denominador.', 'لقد بدّلت البسط والمقام.'),
-    'added-same': text('Bi gaiei zenbaki bera batzeak ez du balioa mantentzen: biderkatu behar da.', 'Sumar lo mismo a los dos términos no conserva el valor: hay que multiplicar.', 'إضافة العدد نفسه إلى الحدين لا تحافظ على القيمة: يجب الضرب.'),
-    'bigger-denominator': text('Izendatzaile handiagoak zati txikiagoak esan nahi du.', 'Un denominador mayor significa partes más pequeñas.', 'المقام الأكبر يعني أجزاء أصغر.'),
-    'bigger-numerator': text('Zenbakitzailea bakarrik ez da nahikoa: alderatu izendatzaile komunarekin.', 'El numerador solo no basta: compara con denominador común.', 'البسط وحده لا يكفي: قارن بمقام مشترك.'),
-    'negative-order': text('Zenbaki negatiboetan, zerotik urrunago dagoena txikiagoa da.', 'En los negativos, el que está más lejos del cero es menor.', 'في الأعداد السالبة، الأبعد عن الصفر هو الأصغر.'),
-    compare: text('Konparatzeko, jarri izendatzaile bera edo pasatu hamartarrera.', 'Para comparar, pon el mismo denominador o pásalas a decimal.', 'للمقارنة، وحّد المقامات أو حوّل إلى أعداد عشرية.'),
-    endpoint: text('Muturretako bat da, ez dago tartean.', 'Es uno de los extremos, no está entre ellos.', 'إنه أحد الطرفين، وليس بينهما.'),
-    outside: text('Tartetik kanpo dago. Bikoiztu izendatzailea tarteko zatikiak ikusteko.', 'Queda fuera del intervalo. Duplica el denominador para ver fracciones intermedias.', 'يقع خارج المجال. ضاعف المقام لترى كسورًا وسيطة.'),
-    'added-denominators': text('Izendatzaileak ez dira batzen: bilatu izendatzaile komuna.', 'Los denominadores no se suman: busca un denominador común.', 'لا تُجمع المقامات: ابحث عن مقام مشترك.'),
-    'numerator-only': text('Izendatzailea aldatzean, zenbakitzailea ere biderkatu behar da.', 'Al cambiar el denominador, también hay que multiplicar el numerador.', 'عند تغيير المقام يجب ضرب البسط أيضًا.'),
-    sign: text('Zeinua galdu duzu. Begiratu zein zenbaki den handiagoa eta zein eragiketa den.', 'Has perdido el signo. Mira qué número es mayor y qué operación es.', 'فقدت الإشارة. انظر أي العددين أكبر وما العملية.'),
-    'cross-multiplied': text('Biderketan zuzenean biderkatzen da: goikoak elkarren artean, behekoak elkarren artean.', 'En el producto se multiplica en línea: arriba con arriba y abajo con abajo.', 'في الضرب نضرب مباشرة: البسط في البسط والمقام في المقام.'),
-    'kept-denominator': text('Biderketan izendatzaileak ere biderkatzen dira.', 'En el producto también se multiplican los denominadores.', 'في الضرب تُضرب المقامات أيضًا.'),
-    'no-invert': text('Zatitzeko, bigarren zatikia alderantzikatu eta biderkatu.', 'Para dividir, invierte la segunda fracción y multiplica.', 'للقسمة، اقلب الكسر الثاني ثم اضرب.'),
-    'inverted-first': text('Bigarren zatikia alderantzikatzen da, ez lehena.', 'Se invierte la segunda fracción, no la primera.', 'يُقلب الكسر الثاني، لا الأول.'),
-    priority: text('Biderketak eta zatiketak batuketak eta kenketak baino lehen, parentesiak lehenik.', 'Productos y cocientes antes que sumas y restas; los paréntesis, lo primero.', 'الضرب والقسمة قبل الجمع والطرح، والأقواس أولًا.'),
-    'power-numerator': text('Berretura zenbakitzaileari eta izendatzaileari aplikatzen zaie.', 'La potencia se aplica al numerador y al denominador.', 'تُطبق القوة على البسط والمقام.'),
-    'power-times': text('Berretzea ez da berretzailearekin biderkatzea.', 'Elevar a una potencia no es multiplicar por el exponente.', 'الرفع إلى قوة ليس ضربًا في الأس.'),
-    'forgot-numerator': text('Izendatzailearekin zatitu ondoren, biderkatu zenbakitzailearekin.', 'Después de dividir por el denominador, multiplica por el numerador.', 'بعد القسمة على المقام، اضرب في البسط.'),
-    'divided-by-numerator': text('Zatiketa eta biderketa trukatu dituzu.', 'Has cambiado la división por la multiplicación.', 'لقد بدّلت القسمة والضرب.'),
-    complement: text('Hori gelditzen den zatia da, ez eskatutakoa.', 'Esa es la parte que sobra, no la que se pide.', 'هذا هو الجزء المتبقي، وليس المطلوب.'),
-    'no-hundred': text('Ehuneko bat ehuneko zati bat da: zatitu 100ez.', 'Un porcentaje son partes de cien: divide entre 100.', 'النسبة المئوية أجزاء من مئة: اقسم على 100.'),
-    'decimal-place': text('Koma leku batean mugitu da: egiaztatu 10ez biderkatu edo zatitu duzun.', 'La coma se ha movido un lugar: revisa si has multiplicado o dividido por 10.', 'تحركت الفاصلة منزلة واحدة: تحقق من الضرب أو القسمة على 10.'),
-    digits: text('Zifrak elkartzeak ez du ehunekoa ematen: biderkatu 100ez.', 'Juntar las cifras no da el porcentaje: multiplica por 100.', 'ضم الأرقام لا يعطي النسبة المئوية: اضرب في 100.'),
-    'multiplied-instead': text('Ezagutzen duzu zatia, ez osoa: zatitu zatikiarekin.', 'Conoces la parte, no el total: divide entre la fracción.', 'أنت تعرف الجزء لا الكل: اقسم على الكسر.'),
-    'part-of-rest': text('Zatia osoarekin alderatzen da, ez gainerakoarekin.', 'La parte se compara con el total, no con el resto.', 'يُقارن الجزء بالكل، لا بالباقي.'),
-    calculation: text('Kalkulu-akatsa. Egin urratsak poliki.', 'Error de cálculo. Haz los pasos con calma.', 'خطأ حسابي. قم بالخطوات بهدوء.')
+    'not-irreducible': text('Oraindik sinplifika daiteke: zatitu berriro zatitzaile komun batez.', 'Aún se puede simplificar: divide otra vez por un divisor común.', 'لا يزال يمكن تبسيطه: اقسم مجددًا على قاسم مشترك.', 'It can still be simplified: divide by a common divisor again.'),
+    'one-term': text('Zenbakitzailea eta izendatzailea zenbaki berarekin biderkatu edo zatitu behar dira.', 'Numerador y denominador se multiplican o dividen por el mismo número.', 'يُضرب البسط والمقام أو يُقسمان على العدد نفسه.', 'The numerator and the denominator are multiplied or divided by the same number.'),
+    reciprocal: text('Zenbakitzailea eta izendatzailea trukatu dituzu.', 'Has intercambiado numerador y denominador.', 'لقد بدّلت البسط والمقام.', 'You have swapped the numerator and the denominator.'),
+    'added-same': text('Bi gaiei zenbaki bera batzeak ez du balioa mantentzen: biderkatu behar da.', 'Sumar lo mismo a los dos términos no conserva el valor: hay que multiplicar.', 'إضافة العدد نفسه إلى الحدين لا تحافظ على القيمة: يجب الضرب.', 'Adding the same number to the numerator and the denominator does not keep the value: you have to multiply.'),
+    'bigger-denominator': text('Izendatzaile handiagoak zati txikiagoak esan nahi du.', 'Un denominador mayor significa partes más pequeñas.', 'المقام الأكبر يعني أجزاء أصغر.', 'A bigger denominator means smaller parts.'),
+    'bigger-numerator': text('Zenbakitzailea bakarrik ez da nahikoa: alderatu izendatzaile komunarekin.', 'El numerador solo no basta: compara con denominador común.', 'البسط وحده لا يكفي: قارن بمقام مشترك.', 'The numerator alone is not enough: compare with a common denominator.'),
+    'negative-order': text('Zenbaki negatiboetan, zerotik urrunago dagoena txikiagoa da.', 'En los negativos, el que está más lejos del cero es menor.', 'في الأعداد السالبة، الأبعد عن الصفر هو الأصغر.', 'With negative numbers, the one further from zero is smaller.'),
+    compare: text('Konparatzeko, jarri izendatzaile bera edo pasatu hamartarrera.', 'Para comparar, pon el mismo denominador o pásalas a decimal.', 'للمقارنة، وحّد المقامات أو حوّل إلى أعداد عشرية.', 'To compare, use the same denominator or change them to decimals.'),
+    endpoint: text('Muturretako bat da, ez dago tartean.', 'Es uno de los extremos, no está entre ellos.', 'إنه أحد الطرفين، وليس بينهما.', 'It is one of the endpoints, not between them.'),
+    outside: text('Tartetik kanpo dago. Bikoiztu izendatzailea tarteko zatikiak ikusteko.', 'Queda fuera del intervalo. Duplica el denominador para ver fracciones intermedias.', 'يقع خارج المجال. ضاعف المقام لترى كسورًا وسيطة.', 'It is outside the interval. Double the denominator to see fractions in between.'),
+    'added-denominators': text('Izendatzaileak ez dira batzen: bilatu izendatzaile komuna.', 'Los denominadores no se suman: busca un denominador común.', 'لا تُجمع المقامات: ابحث عن مقام مشترك.', 'Denominators are not added: look for a common denominator.'),
+    'numerator-only': text('Izendatzailea aldatzean, zenbakitzailea ere biderkatu behar da.', 'Al cambiar el denominador, también hay que multiplicar el numerador.', 'عند تغيير المقام يجب ضرب البسط أيضًا.', 'When you change the denominator, you must also multiply the numerator.'),
+    sign: text('Zeinua galdu duzu. Begiratu zein zenbaki den handiagoa eta zein eragiketa den.', 'Has perdido el signo. Mira qué número es mayor y qué operación es.', 'فقدت الإشارة. انظر أي العددين أكبر وما العملية.', 'You have lost the sign. Check which number is bigger and which operation it is.'),
+    'cross-multiplied': text('Biderketan zuzenean biderkatzen da: goikoak elkarren artean, behekoak elkarren artean.', 'En el producto se multiplica en línea: arriba con arriba y abajo con abajo.', 'في الضرب نضرب مباشرة: البسط في البسط والمقام في المقام.', 'For a product, multiply straight across: top with top and bottom with bottom.'),
+    'kept-denominator': text('Biderketan izendatzaileak ere biderkatzen dira.', 'En el producto también se multiplican los denominadores.', 'في الضرب تُضرب المقامات أيضًا.', 'For a product, you also multiply the denominators.'),
+    'no-invert': text('Zatitzeko, bigarren zatikia alderantzikatu eta biderkatu.', 'Para dividir, invierte la segunda fracción y multiplica.', 'للقسمة، اقلب الكسر الثاني ثم اضرب.', 'To divide, flip the second fraction and multiply.'),
+    'inverted-first': text('Bigarren zatikia alderantzikatzen da, ez lehena.', 'Se invierte la segunda fracción, no la primera.', 'يُقلب الكسر الثاني، لا الأول.', 'Invert the second fraction, not the first.'),
+    priority: text('Biderketak eta zatiketak batuketak eta kenketak baino lehen, parentesiak lehenik.', 'Productos y cocientes antes que sumas y restas; los paréntesis, lo primero.', 'الضرب والقسمة قبل الجمع والطرح، والأقواس أولًا.', 'Multiplications and divisions come before additions and subtractions; brackets come first.'),
+    'power-numerator': text('Berretura zenbakitzaileari eta izendatzaileari aplikatzen zaie.', 'La potencia se aplica al numerador y al denominador.', 'تُطبق القوة على البسط والمقام.', 'The power applies to the numerator and the denominator.'),
+    'power-times': text('Berretzea ez da berretzailearekin biderkatzea.', 'Elevar a una potencia no es multiplicar por el exponente.', 'الرفع إلى قوة ليس ضربًا في الأس.', 'Raising to a power is not the same as multiplying by the exponent.'),
+    'forgot-numerator': text('Izendatzailearekin zatitu ondoren, biderkatu zenbakitzailearekin.', 'Después de dividir por el denominador, multiplica por el numerador.', 'بعد القسمة على المقام، اضرب في البسط.', 'After dividing by the denominator, multiply by the numerator.'),
+    'divided-by-numerator': text('Zatiketa eta biderketa trukatu dituzu.', 'Has cambiado la división por la multiplicación.', 'لقد بدّلت القسمة والضرب.', 'You have changed the division into a multiplication.'),
+    complement: text('Hori gelditzen den zatia da, ez eskatutakoa.', 'Esa es la parte que sobra, no la que se pide.', 'هذا هو الجزء المتبقي، وليس المطلوب.', 'That is the part that is left over, not the one asked for.'),
+    'no-hundred': text('Ehuneko bat ehuneko zati bat da: zatitu 100ez.', 'Un porcentaje son partes de cien: divide entre 100.', 'النسبة المئوية أجزاء من مئة: اقسم على 100.', 'A percentage is a number of parts out of one hundred: divide by 100.'),
+    'decimal-place': text('Koma leku batean mugitu da: egiaztatu 10ez biderkatu edo zatitu duzun.', 'La coma se ha movido un lugar: revisa si has multiplicado o dividido por 10.', 'تحركت الفاصلة منزلة واحدة: تحقق من الضرب أو القسمة على 10.', 'The decimal point has moved one place: check whether you have multiplied or divided by 10.'),
+    digits: text('Zifrak elkartzeak ez du ehunekoa ematen: biderkatu 100ez.', 'Juntar las cifras no da el porcentaje: multiplica por 100.', 'ضم الأرقام لا يعطي النسبة المئوية: اضرب في 100.', 'Putting the numbers together does not give the percentage: multiply by 100.'),
+    'multiplied-instead': text('Ezagutzen duzu zatia, ez osoa: zatitu zatikiarekin.', 'Conoces la parte, no el total: divide entre la fracción.', 'أنت تعرف الجزء لا الكل: اقسم على الكسر.', 'You know the part, not the total: divide by the fraction.'),
+    'part-of-rest': text('Zatia osoarekin alderatzen da, ez gainerakoarekin.', 'La parte se compara con el total, no con el resto.', 'يُقارن الجزء بالكل، لا بالباقي.', 'The part is compared with the total, not with the rest.'),
+    calculation: text('Kalkulu-akatsa. Egin urratsak poliki.', 'Error de cálculo. Haz los pasos con calma.', 'خطأ حسابي. قم بالخطوات بهدوء.', 'Calculation error. Go through the steps carefully.')
 }

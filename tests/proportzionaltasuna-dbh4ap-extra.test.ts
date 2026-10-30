@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
@@ -126,12 +127,12 @@ test('proportzionaltasuna 4. DBH ap lab: endless texts in three languages, formu
     for (const [name, maker] of makers) {
         for (let seed = 1; seed <= 150; seed += 1) {
             const challenge = maker(createRandom(seed * 31337))
-            for (const language of ['eu', 'es', 'ar'] as const) {
+            for (const language of ['eu', 'es', 'en', 'ar'] as const) {
                 for (const text of [challenge.prompt[language], challenge.hint[language]]) {
                     assert.ok(text.trim().length > 0, `${name} ${language}`)
                     assert.equal(text.split('$').length % 2, 1, `${name} unbalanced $: ${text}`)
                     for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) {
-                        katex.renderToString(formula, { throwOnError: true })
+                        katex.renderToString(formulaFor(language, formula), { throwOnError: true })
                         assert.ok(!/[؀-ۿ]/.test(formula), `${name} ${formula}`)
                     }
                     if (language === 'ar') assert.ok(!text.includes('{,}') && !/\d,\d/.test(text), `${name} Arabic comma: ${text}`)

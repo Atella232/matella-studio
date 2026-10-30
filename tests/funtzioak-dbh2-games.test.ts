@@ -259,7 +259,7 @@ test('funtzioak 2. DBH plotting game: targets are valid and score fairly', () =>
                     const values = target.worked.replace(/\\ \\to\\ .*/, '').split('=').map(evaluate).filter((value): value is number => value !== null)
                     assert.ok(values.length >= 2 && values.every((value) => value === y), target.worked)
                 }
-                for (const language of ['eu', 'es', 'ar'] as const) assert.ok(target.prompt[language].length > 0)
+                for (const language of ['eu', 'es', 'en', 'ar'] as const) assert.ok(target.prompt[language].length > 0)
             }
         }
     }
@@ -311,7 +311,7 @@ test('funtzioak 2. DBH games: everything the games show renders in KaTeX', () =>
             for (const tier of [0, 1, 2] as const) {
                 const question = generateFunctionsRaceQuestion(createRandom(seed * 11 + circuit), circuit, tier)
                 for (const option of question.options) render(option.latex)
-                for (const text of [question.prompt, question.solution]) for (const language of ['eu', 'es', 'ar'] as const) {
+                for (const text of [question.prompt, question.solution]) for (const language of ['eu', 'es', 'en', 'ar'] as const) {
                     assert.ok(text[language].length > 0)
                     for (const formula of formulas(text[language])) render(formula)
                 }
@@ -320,7 +320,7 @@ test('funtzioak 2. DBH games: everything the games show renders in KaTeX', () =>
     }
     for (let level = 0; level < plotLevels.length; level += 1) {
         for (const target of createPlotRound(createRandom(level + 5), level)) {
-            for (const language of ['eu', 'es', 'ar'] as const) for (const formula of formulas(target.prompt[language])) render(formula)
+            for (const language of ['eu', 'es', 'en', 'ar'] as const) for (const formula of formulas(target.prompt[language])) render(formula)
             render(target.worked)
         }
     }

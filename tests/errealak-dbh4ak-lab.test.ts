@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
@@ -39,9 +40,9 @@ test('errealak eta ehunekoak 4. DBH lab: tools, topics and challenge ids', () =>
     for (const topic of topics) assert.ok(realsPercentLabToolForTopic[topic], topic)
     assert.equal(new Set(realsPercentLabChallengeIds).size, realsPercentLabChallengeIds.length)
     for (const challenge of [...pythagorasChallenges, ...percentChallenges, ...interestChallenges] as Array<LabChallenge<unknown>>) {
-        for (const language of ['eu', 'es', 'ar'] as const) {
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) {
             for (const text of [challenge.prompt[language], challenge.hint[language]]) {
-                for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formula, { throwOnError: true, strict: 'error' })
+                for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formulaFor(language, formula), { throwOnError: true, strict: 'error' })
                 if (language === 'ar') assert.ok(!text.includes('{,}') && !/\d,\d/.test(text.replace(/\$[^$]*\$/g, '')), text)
             }
         }

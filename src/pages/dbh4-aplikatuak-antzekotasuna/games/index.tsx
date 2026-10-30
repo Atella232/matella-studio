@@ -1,4 +1,4 @@
-import type { JSX } from 'react'
+import { useMemo, type JSX } from 'react'
 import { GamesHub, type GameProps, type HubGame } from '../../../features/unit-v2/games/GamesHub'
 import { PairsMemoryGame } from '../../../features/unit-v2/games/PairsMemoryGame'
 import type { UnitLanguage } from '../../../features/unit-v2/types'
@@ -12,10 +12,10 @@ const memoryGame = similarityGames.find((game) => game.id === 'memory')!
 
 const components: Record<SimilarityGameId, (props: GameProps) => JSX.Element> = {
     race: SimilarityRaceGame,
-    memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <SimilarityGameArt game="memory" />, pairs: SIMILARITY_MEMORY_PAIRS, createBoard: createSimilarityMemoryBoard }} />
+    memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <SimilarityGameArt game="memory" language={props.language} />, pairs: SIMILARITY_MEMORY_PAIRS, createBoard: createSimilarityMemoryBoard }} />
 }
 
-const hubGames: HubGame<SimilarityGameId>[] = similarityGames.map((info) => ({ info, art: <SimilarityGameArt game={info.id} />, component: components[info.id] }))
+const hubGames = (language: UnitLanguage): HubGame<SimilarityGameId>[] => similarityGames.map((info) => ({ info, art: <SimilarityGameArt game={info.id} language={language} />, component: components[info.id] }))
 
 export function SimilarityGames({ language, pathname, openGame, completedIds, onComplete }: {
     language: UnitLanguage
@@ -24,12 +24,13 @@ export function SimilarityGames({ language, pathname, openGame, completedIds, on
     completedIds: number[]
     onComplete: (id: number) => void
 }) {
+    const games = useMemo(() => hubGames(language), [language])
     return (
         <GamesHub
             language={language}
-            games={hubGames}
+            games={games}
             recordsKey={SIMILARITY_GAME_RECORDS_KEY}
-            title={{ eu: 'Jolastu eta hobetu zure marka', es: 'Juega y mejora tu marca', ar: 'العب وحسّن رقمك' }}
+            title={{ eu: 'Jolastu eta hobetu zure marka', es: 'Juega y mejora tu marca', en: 'Play and improve your personal best', ar: 'العب وحسّن رقمك' }}
             completedIds={completedIds}
             onComplete={onComplete}
             mode={similarityGameModeForPath(pathname)}

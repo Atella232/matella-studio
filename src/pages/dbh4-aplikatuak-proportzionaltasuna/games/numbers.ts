@@ -1,5 +1,6 @@
 import { fraction, toExactDecimal, toLatex, type FractionValue } from '../../../features/unit-v2/math/fraction.ts'
 import type { UnitLanguage } from '../../../features/unit-v2/types.ts'
+import { decimalSeparatorFor, thousandsSeparatorFor } from '../../../utils/numberFormat.ts'
 
 /* ==========================================================================
    Numbers for the games: LaTeX with a decimal comma, euros for a sentence
@@ -20,11 +21,11 @@ export function latexNumber(value: number): string {
     return `${rounded < 0 ? '-' : ''}${grouped}${decimals ? `{,}${decimals}` : ''}`
 }
 
-/** Euros to the cent for a sentence: 4440,73 (4440.73 in Arabic); 13 488,50 with a narrow space */
+/** Euros to the cent for a sentence: 4440,73 (4440.73 in Arabic and English); 13 488,50 with a narrow space, 13,488.50 in English */
 export function moneyText(value: number, language: UnitLanguage): string {
     const [whole, cents] = (Math.round(value * 100) / 100).toFixed(2).split('.')
-    const grouped = Number(whole) >= 10000 ? whole.replace(/\B(?=(\d{3})+(?!\d))/g, '\u202f') : whole
-    return cents === '00' ? grouped : `${grouped}${language === 'ar' ? '.' : ','}${cents}`
+    const grouped = Number(whole) >= 10000 ? whole.replace(/\B(?=(\d{3})+(?!\d))/g, language === 'en' ? thousandsSeparatorFor(language) : '\u202f') : whole
+    return cents === '00' ? grouped : `${grouped}${language === 'ar' ? '.' : decimalSeparatorFor(language)}${cents}`
 }
 
 /** Minutes as «1 h 20 min» («1 س 20 د» in Arabic), to the minute */

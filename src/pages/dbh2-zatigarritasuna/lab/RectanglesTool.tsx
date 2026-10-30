@@ -18,8 +18,8 @@ export function RectanglesTool(props: DivisibilityToolProps & { challenges?: Lab
 
     const controls = (
         <>
-            <Stepper label={l({ eu: 'Karratuak', es: 'Cuadrados', ar: 'المربعات' })} value={total} min={RECTANGLE_LIMITS.min} max={RECTANGLE_LIMITS.max} onChange={(next) => setState((current) => setRectangles(current, { total: next }))} language={props.language} />
-            <Stepper label={l({ eu: 'Ilara bakoitzean', es: 'En cada fila', ar: 'في كل صف' })} value={perRow} min={1} max={total} onChange={(next) => setState((current) => setRectangles(current, { perRow: next }))} language={props.language} />
+            <Stepper label={l({ eu: 'Karratuak', es: 'Cuadrados', en: 'Squares', ar: 'المربعات' })} value={total} min={RECTANGLE_LIMITS.min} max={RECTANGLE_LIMITS.max} onChange={(next) => setState((current) => setRectangles(current, { total: next }))} language={props.language} />
+            <Stepper label={l({ eu: 'Ilara bakoitzean', es: 'En cada fila', en: 'In each row', ar: 'في كل صف' })} value={perRow} min={1} max={total} onChange={(next) => setState((current) => setRectangles(current, { perRow: next }))} language={props.language} />
         </>
     )
 
@@ -30,12 +30,12 @@ export function RectanglesTool(props: DivisibilityToolProps & { challenges?: Lab
             </span>
             <span className="fraction-v2-lab-readout-note">
                 {exact
-                    ? l({ eu: `Laukizuzena osatu da: ${perRow} eta ${rows} ${total}ren zatitzaileak dira.`, es: `Rectángulo completo: ${perRow} y ${rows} son divisores de ${total}.`, ar: `اكتمل المستطيل: ${perRow} و${rows} قاسمان للعدد ${total}.` })
-                    : l({ eu: `${rest} karratu soberan: ${perRow} ez da ${total}ren zatitzailea (hondarra ${rest}).`, es: `Sobran ${rest} cuadrados: ${perRow} no es divisor de ${total} (resto ${rest}).`, ar: `يبقى ${rest} مربعات: ${perRow} ليس قاسمًا للعدد ${total} (الباقي ${rest}).` })}
+                    ? l({ eu: `Laukizuzena osatu da: ${perRow} eta ${rows} ${total}ren zatitzaileak dira.`, es: `Rectángulo completo: ${perRow} y ${rows} son divisores de ${total}.`, en: `Complete rectangle: ${perRow} and ${rows} are divisors of ${total}.`, ar: `اكتمل المستطيل: ${perRow} و${rows} قاسمان للعدد ${total}.` })
+                    : l({ eu: `${rest} karratu soberan: ${perRow} ez da ${total}ren zatitzailea (hondarra ${rest}).`, es: `Sobran ${rest} cuadrados: ${perRow} no es divisor de ${total} (resto ${rest}).`, en: `${rest} squares left over: ${perRow} is not a divisor of ${total} (remainder ${rest}).`, ar: `يبقى ${rest} مربعات: ${perRow} ليس قاسمًا للعدد ${total} (الباقي ${rest}).` })}
             </span>
             <span className="divisibility-found">
                 <MathText text={`$${divisorsLatex(props.language)}(${total})=\\{${all.map((value) => (found.includes(value) ? String(value) : '\\square')).join(',\\ ')}\\}$`} />
-                <small>{l({ eu: `${found.length} / ${all.length} aurkituta`, es: `${found.length} de ${all.length} encontrados`, ar: `وُجد ${found.length} من ${all.length}` })}</small>
+                <small>{l({ eu: `${found.length} / ${all.length} aurkituta`, es: `${found.length} de ${all.length} encontrados`, en: `${found.length} of ${all.length} found`, ar: `وُجد ${found.length} من ${all.length}` })}</small>
             </span>
         </>
     )

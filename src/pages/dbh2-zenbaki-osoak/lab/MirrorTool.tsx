@@ -17,7 +17,7 @@ export function MirrorTool(props: IntegerToolProps & { challenges?: LabChallenge
     const controls = (
         <>
             <Stepper
-                label={l({ eu: 'Zenbakia', es: 'Número', ar: 'العدد' })}
+                label={l({ eu: 'Zenbakia', es: 'Número', en: 'Number', ar: 'العدد' })}
                 value={value}
                 min={LINE_LIMITS.min}
                 max={LINE_LIMITS.max}
@@ -26,7 +26,7 @@ export function MirrorTool(props: IntegerToolProps & { challenges?: LabChallenge
                 language={props.language}
             />
             <Segmented
-                label={l({ eu: 'Aurkakoa erakutsi', es: 'Mostrar el opuesto', ar: 'اعرض المعاكس' })}
+                label={l({ eu: 'Aurkakoa erakutsi', es: 'Mostrar el opuesto', en: 'Show the opposite', ar: 'اعرض المعاكس' })}
                 value={showOpposite ? 'yes' : 'no'}
                 options={[{ value: 'no', label: yesNo(props.language, false) }, { value: 'yes', label: yesNo(props.language, true) }]}
                 onChange={(next) => setState((current) => ({ ...current, showOpposite: next === 'yes' }))}
@@ -42,11 +42,11 @@ export function MirrorTool(props: IntegerToolProps & { challenges?: LabChallenge
             </span>
             {showOpposite && value !== 0 && (
                 <span className="fraction-v2-lab-readout-note">
-                    {l({ eu: `Biak zerotik ${distance} unitatera daude, eta euren artean ${distance * 2} unitate daude.`, es: `Los dos están a ${distance} unidades del cero, y entre ellos hay ${distance * 2} unidades.`, ar: `كلاهما على بعد ${distance} وحدات من الصفر، والمسافة بينهما ${distance * 2} وحدة.` })}
+                    {l({ eu: `Biak zerotik ${distance} unitatera daude, eta euren artean ${distance * 2} unitate daude.`, es: `Los dos están a ${distance} unidades del cero, y entre ellos hay ${distance * 2} unidades.`, en: `Both are ${distance} units from zero, and there are ${distance * 2} units between them.`, ar: `كلاهما على بعد ${distance} وحدات من الصفر، والمسافة بينهما ${distance * 2} وحدة.` })}
                 </span>
             )}
             {value === 0 && (
-                <span className="fraction-v2-lab-readout-note">{l({ eu: 'Zeroa ispiluaren gainean dago: bere aurkakoa bera da.', es: 'El cero está sobre el espejo: es su propio opuesto.', ar: 'الصفر فوق المرآة: إنه معاكس نفسه.' })}</span>
+                <span className="fraction-v2-lab-readout-note">{l({ eu: 'Zeroa ispiluaren gainean dago: bere aurkakoa bera da.', es: 'El cero está sobre el espejo: es su propio opuesto.', en: 'Zero is on the mirror: it is its own opposite.', ar: 'الصفر فوق المرآة: إنه معاكس نفسه.' })}</span>
             )}
         </>
     )

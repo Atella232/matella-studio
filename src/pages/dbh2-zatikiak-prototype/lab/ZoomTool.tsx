@@ -164,18 +164,18 @@ export function ZoomTool(props: ToolProps) {
     const fractionControls = (which: 'first' | 'second', value: FractionValue, title: string) => (
         <>
             <h3>{title}</h3>
-            <Stepper label={l({ eu: 'Zenbakitzailea', es: 'Numerador', ar: 'البسط' })} value={value.numerator} min={0} max={ZOOM_LIMITS.maxUnits * value.denominator} onChange={(next) => setState((current) => setZoomFraction(current, which, next, current[which].denominator))} language={props.language} />
-            <Stepper label={l({ eu: 'Izendatzailea', es: 'Denominador', ar: 'المقام' })} value={value.denominator} min={ZOOM_LIMITS.minDenominator} max={ZOOM_LIMITS.maxDenominator} onChange={(next) => setState((current) => setZoomFraction(current, which, current[which].numerator, next))} language={props.language} />
+            <Stepper label={l({ eu: 'Zenbakitzailea', es: 'Numerador', en: 'Numerator', ar: 'البسط' })} value={value.numerator} min={0} max={ZOOM_LIMITS.maxUnits * value.denominator} onChange={(next) => setState((current) => setZoomFraction(current, which, next, current[which].denominator))} language={props.language} />
+            <Stepper label={l({ eu: 'Izendatzailea', es: 'Denominador', en: 'Denominator', ar: 'المقام' })} value={value.denominator} min={ZOOM_LIMITS.minDenominator} max={ZOOM_LIMITS.maxDenominator} onChange={(next) => setState((current) => setZoomFraction(current, which, current[which].numerator, next))} language={props.language} />
         </>
     )
 
     const controls = (
         <>
-            {fractionControls('first', first, l({ eu: 'Lehen zatikia', es: 'Primera fracción', ar: 'الكسر الأول' }))}
-            {fractionControls('second', second, l({ eu: 'Bigarren zatikia', es: 'Segunda fracción', ar: 'الكسر الثاني' }))}
-            <h3>{l({ eu: 'Marrak', es: 'Marcas', ar: 'العلامات' })}</h3>
-            <Stepper label={l({ eu: 'Zati bakoitza, zenbat zatitan', es: 'Partir cada trozo en', ar: 'قسّم كل جزء إلى' })} value={state.split} min={ZOOM_LIMITS.minSplit} max={ZOOM_LIMITS.maxSplit} onChange={(next) => setState((current) => setZoomSplit(current, next))} language={props.language} />
-            <p className="fraction-v2-lab-tip">{l({ eu: 'Sakatu edo arrastatu zenbaki-zuzenean marra bat aukeratzeko; teklatuarekin, geziak.', es: 'Toca o arrastra en la recta para elegir una marca; con el teclado, las flechas.', ar: 'اضغط على الخط أو اسحب لاختيار علامة؛ وبلوحة المفاتيح استعمل الأسهم.' })}</p>
+            {fractionControls('first', first, l({ eu: 'Lehen zatikia', es: 'Primera fracción', en: 'First fraction', ar: 'الكسر الأول' }))}
+            {fractionControls('second', second, l({ eu: 'Bigarren zatikia', es: 'Segunda fracción', en: 'Second fraction', ar: 'الكسر الثاني' }))}
+            <h3>{l({ eu: 'Marrak', es: 'Marcas', en: 'Marks', ar: 'العلامات' })}</h3>
+            <Stepper label={l({ eu: 'Zati bakoitza, zenbat zatitan', es: 'Partir cada trozo en', en: 'Split each piece into', ar: 'قسّم كل جزء إلى' })} value={state.split} min={ZOOM_LIMITS.minSplit} max={ZOOM_LIMITS.maxSplit} onChange={(next) => setState((current) => setZoomSplit(current, next))} language={props.language} />
+            <p className="fraction-v2-lab-tip">{l({ eu: 'Sakatu edo arrastatu zenbaki-zuzenean marra bat aukeratzeko; teklatuarekin, geziak.', es: 'Toca o arrastra en la recta para elegir una marca; con el teclado, las flechas.', en: 'Tap or drag on the number line to choose a mark; with the keyboard, use the arrows.', ar: 'اضغط على الخط أو اسحب لاختيار علامة؛ وبلوحة المفاتيح استعمل الأسهم.' })}</p>
         </>
     )
 
@@ -214,19 +214,19 @@ export function ZoomTool(props: ToolProps) {
         </span>
     )
 
-    const ends = pair ? l({ eu: `${plain(pair[0])} eta ${plain(pair[1])}`, es: `${plain(pair[0])} y ${plain(pair[1])}`, ar: `${ltr(plain(pair[0]))} و${ltr(plain(pair[1]))}` }) : ''
+    const ends = pair ? l({ eu: `${plain(pair[0])} eta ${plain(pair[1])}`, es: `${plain(pair[0])} y ${plain(pair[1])}`, en: `${plain(pair[0])} and ${plain(pair[1])}`, ar: `${ltr(plain(pair[0]))} و${ltr(plain(pair[1]))}` }) : ''
     const line = (
         <div
             className="zoom-track"
             ref={trackRef}
             role="slider"
             tabIndex={0}
-            aria-label={pair ? l({ eu: `Marra, ${ends} artean`, es: `Marca entre ${ends}`, ar: `علامة بين ${ends}` }) : l({ eu: 'Marra', es: 'Marca', ar: 'علامة' })}
+            aria-label={pair ? l({ eu: `Marra, ${ends} artean`, es: `Marca entre ${ends}`, en: `Mark between ${ends}`, ar: `علامة بين ${ends}` }) : l({ eu: 'Marra', es: 'Marca', en: 'Mark', ar: 'علامة' })}
             aria-disabled={between < 1}
             aria-valuemin={lowMark + 1}
             aria-valuemax={Math.max(lowMark + 1, highMark - 1)}
             aria-valuenow={state.picked ?? undefined}
-            aria-valuetext={chosen ? plain(chosen) : l({ eu: 'bat ere ez', es: 'ninguna', ar: 'لا شيء' })}
+            aria-valuetext={chosen ? plain(chosen) : l({ eu: 'bat ere ez', es: 'ninguna', en: 'none', ar: 'لا شيء' })}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}
@@ -266,11 +266,11 @@ export function ZoomTool(props: ToolProps) {
     /* ---------- Zoom buttons and the trail of views ---------- */
 
     const lensBetween = (left: FractionValue, right: FractionValue) =>
-        l({ eu: `Lupa: ${plain(left)} eta ${plain(right)} artean`, es: `Lupa entre ${plain(left)} y ${plain(right)}`, ar: `العدسة بين ${ltr(plain(left))} و${ltr(plain(right))}` })
+        l({ eu: `Lupa: ${plain(left)} eta ${plain(right)} artean`, es: `Lupa entre ${plain(left)} y ${plain(right)}`, en: `Zoom between ${plain(left)} and ${plain(right)}`, ar: `العدسة بين ${ltr(plain(left))} و${ltr(plain(right))}` })
     const actions = pair && (
         <div className="zoom-actions">
             {canZoomIn(state) && (
-                <button type="button" className="fraction-v2-primary" onClick={() => act(zoomIn)}>{l({ eu: 'Hurbildu lupa', es: 'Acercar la lupa', ar: 'قرّب العدسة' })}</button>
+                <button type="button" className="fraction-v2-primary" onClick={() => act(zoomIn)}>{l({ eu: 'Hurbildu lupa', es: 'Acercar la lupa', en: 'Zoom in', ar: 'قرّب العدسة' })}</button>
             )}
             {chosen && zooms < ZOOM_LIMITS.maxZooms && (
                 <>
@@ -279,18 +279,18 @@ export function ZoomTool(props: ToolProps) {
                 </>
             )}
             {zooms > 0 && (
-                <button type="button" className="fraction-v2-secondary" onClick={() => act((current) => zoomBack(current))}>{l({ eu: 'Pauso bat atzera', es: 'Un paso atrás', ar: 'خطوة إلى الوراء' })}</button>
+                <button type="button" className="fraction-v2-secondary" onClick={() => act((current) => zoomBack(current))}>{l({ eu: 'Pauso bat atzera', es: 'Un paso atrás', en: 'One step back', ar: 'خطوة إلى الوراء' })}</button>
             )}
             {state.lens && (
-                <button type="button" className="fraction-v2-secondary" onClick={() => act(zoomOut)}>{l({ eu: 'Urrundu lupa', es: 'Alejar la lupa', ar: 'أبعِد العدسة' })}</button>
+                <button type="button" className="fraction-v2-secondary" onClick={() => act(zoomOut)}>{l({ eu: 'Urrundu lupa', es: 'Alejar la lupa', en: 'Zoom out', ar: 'أبعِد العدسة' })}</button>
             )}
         </div>
     )
 
     // Each view left behind, then the one on screen: the stretch keeps getting smaller
     const trail = zooms > 0 && (
-        <nav className="zoom-trail" aria-label={l({ eu: 'Luparen bidea', es: 'Camino de la lupa', ar: 'مسار العدسة' })}>
-            <span className="zoom-trail-title">{l({ eu: 'Luparen bidea', es: 'Camino de la lupa', ar: 'مسار العدسة' })}</span>
+        <nav className="zoom-trail" aria-label={l({ eu: 'Luparen bidea', es: 'Camino de la lupa', en: 'Zoom path', ar: 'مسار العدسة' })}>
+            <span className="zoom-trail-title">{l({ eu: 'Luparen bidea', es: 'Camino de la lupa', en: 'Zoom path', ar: 'مسار العدسة' })}</span>
             <ol>
                 {[...state.trail, null].map((view, index) => {
                     const shown = view === null ? state : { ...state, ...view }
@@ -312,18 +312,18 @@ export function ZoomTool(props: ToolProps) {
     const meanBlock = pair && chosen && mean && (
         <div className="zoom-mean-box">
             <button type="button" className="zoom-mean-toggle" aria-expanded={showMean} onClick={() => setShowMean((open) => !open)}>
-                {l({ eu: 'Beste modu bat: batez bestekoa', es: 'Otra forma: la media', ar: 'طريقة أخرى: المتوسط' })}
+                {l({ eu: 'Beste modu bat: batez bestekoa', es: 'Otra forma: la media', en: 'Another way: the mean', ar: 'طريقة أخرى: المتوسط' })}
                 <span aria-hidden="true">{showMean ? '−' : '+'}</span>
             </button>
             {showMean && (
                 <div className="zoom-mean-body">
-                    <p>{l({ eu: 'Bi zatikiren batez bestekoa beti dago justu erdian: batu biak eta hartu erdia.', es: 'La media de dos fracciones queda siempre justo en medio: suma las dos y toma la mitad.', ar: 'متوسط كسرين يقع دائمًا في المنتصف تمامًا: اجمعهما وخذ النصف.' })}</p>
+                    <p>{l({ eu: 'Bi zatikiren batez bestekoa beti dago justu erdian: batu biak eta hartu erdia.', es: 'La media de dos fracciones queda siempre justo en medio: suma las dos y toma la mitad.', en: 'The mean of two fractions is always exactly in the middle: add the two and take half.', ar: 'متوسط كسرين يقع دائمًا في المنتصف تمامًا: اجمعهما وخذ النصف.' })}</p>
                     <p className="zoom-mean-formula" dir="ltr"><MathText inline text={`$\\frac{1}{2}\\cdot\\left(${latex(pair[0])}+${latex(pair[1])}\\right)=\\frac{1}{2}\\cdot${latex(add(pair[0], pair[1]))}=${latex(mean)}$`.replaceAll('\\frac', '\\dfrac')} /></p>
                     <p>
                         <span className="zoom-mean-key" aria-hidden="true" />
                         {equals(mean, chosen)
-                            ? l({ eu: 'Zuk aukeratutakoa da, hain zuzen!', es: '¡Es justo la que has elegido!', ar: 'إنه بالضبط الكسر الذي اخترته!' })
-                            : l({ eu: 'Bien arteko beste zatiki bat da, zurea ez bezalakoa.', es: 'Es otra fracción entre las dos, distinta de la tuya.', ar: 'إنه كسر آخر بينهما غير الذي اخترته.' })}
+                            ? l({ eu: 'Zuk aukeratutakoa da, hain zuzen!', es: '¡Es justo la que has elegido!', en: 'That is exactly the one you chose!', ar: 'إنه بالضبط الكسر الذي اخترته!' })
+                            : l({ eu: 'Bien arteko beste zatiki bat da, zurea ez bezalakoa.', es: 'Es otra fracción entre las dos, distinta de la tuya.', en: 'It is another fraction between the two, different from yours.', ar: 'إنه كسر آخر بينهما غير الذي اخترته.' })}
                     </p>
                 </div>
             )}
@@ -331,15 +331,15 @@ export function ZoomTool(props: ToolProps) {
     )
 
     const message = (() => {
-        if (!pair) return l({ eu: 'Balio bera dute: zenbaki-zuzeneko puntu bera dira, eta ez dago ezer bien artean.', es: 'Valen lo mismo: son el mismo punto de la recta y entre ellas no hay nada.', ar: 'لهما القيمة نفسها: هما النقطة نفسها على الخط ولا شيء بينهما.' })
+        if (!pair) return l({ eu: 'Balio bera dute: zenbaki-zuzeneko puntu bera dira, eta ez dago ezer bien artean.', es: 'Valen lo mismo: son el mismo punto de la recta y entre ellas no hay nada.', en: 'They are equal: they are the same point on the number line and there is nothing between them.', ar: 'لهما القيمة نفسها: هما النقطة نفسها على الخط ولا شيء بينهما.' })
         if (chosen) {
-            const found = l({ eu: `Bat aurkitu duzu: ${plain(chosen)}. ${plain(pair[0])} eta ${plain(pair[1])} artean dago.`, es: `¡Ya tienes una! ${plain(chosen)} está entre ${plain(pair[0])} y ${plain(pair[1])}.`, ar: `وجدت واحدًا: ${ltr(plain(chosen))}، وهو بين ${ltr(plain(pair[0]))} و${ltr(plain(pair[1]))}.` })
-            if (zooms >= ZOOM_LIMITS.maxZooms) return `${found} ${l({ eu: 'Amaierarik gabe jarrai dezakezu: bi zatiki desberdinen artean beti dago beste bat.', es: 'Podrías seguir sin fin: entre dos fracciones distintas siempre hay otra.', ar: 'يمكنك أن تستمر بلا نهاية: بين كسرين مختلفين يوجد دائمًا كسر آخر.' })}`
-            if (canZoomIn(state)) return `${found} ${l({ eu: 'Hurbildu lupa, hurbiletik ikusteko.', es: 'Acerca la lupa para verla de cerca.', ar: 'قرّب العدسة لتراه عن قرب.' })}`
-            return `${found} ${l({ eu: 'Hurbildu lupa haren eta mutur baten artean: berriro egongo da hutsunea.', es: 'Acerca la lupa entre ella y uno de los extremos: volverá a haber hueco.', ar: 'قرّب العدسة بينه وبين أحد الطرفين: سيظهر فراغ من جديد.' })}`
+            const found = l({ eu: `Bat aurkitu duzu: ${plain(chosen)}. ${plain(pair[0])} eta ${plain(pair[1])} artean dago.`, es: `¡Ya tienes una! ${plain(chosen)} está entre ${plain(pair[0])} y ${plain(pair[1])}.`, en: `You have found one! ${plain(chosen)} is between ${plain(pair[0])} and ${plain(pair[1])}.`, ar: `وجدت واحدًا: ${ltr(plain(chosen))}، وهو بين ${ltr(plain(pair[0]))} و${ltr(plain(pair[1]))}.` })
+            if (zooms >= ZOOM_LIMITS.maxZooms) return `${found} ${l({ eu: 'Amaierarik gabe jarrai dezakezu: bi zatiki desberdinen artean beti dago beste bat.', es: 'Podrías seguir sin fin: entre dos fracciones distintas siempre hay otra.', en: 'You could keep going forever: between two different fractions there is always another one.', ar: 'يمكنك أن تستمر بلا نهاية: بين كسرين مختلفين يوجد دائمًا كسر آخر.' })}`
+            if (canZoomIn(state)) return `${found} ${l({ eu: 'Hurbildu lupa, hurbiletik ikusteko.', es: 'Acerca la lupa para verla de cerca.', en: 'Zoom in to see it up close.', ar: 'قرّب العدسة لتراه عن قرب.' })}`
+            return `${found} ${l({ eu: 'Hurbildu lupa haren eta mutur baten artean: berriro egongo da hutsunea.', es: 'Acerca la lupa entre ella y uno de los extremos: volverá a haber hueco.', en: 'Zoom in between it and one of the ends: there will be a gap again.', ar: 'قرّب العدسة بينه وبين أحد الطرفين: سيظهر فراغ من جديد.' })}`
         }
-        if (between === 0) return l({ eu: `${denominator} izendatzailearekin ez dago marrarik bien artean. Zatitu zati bakoitza bitan: bi zatikien gaiak bikoiztea da.`, es: `Con denominador ${denominator} no queda ninguna marca entre las dos. Parte cada trozo en 2: es multiplicar por 2 los términos de las dos fracciones.`, ar: `بالمقام ${denominator} لا توجد أي علامة بينهما. قسّم كل جزء إلى 2: هذا ضرب حدّي كل كسر في 2.` })
-        return l({ eu: `Bien artean ${between === 1 ? 'marra bat dago' : `${between} marra daude`}. Sakatu horietako bat, tarteko zatiki bat aukeratzeko.`, es: `Entre las dos hay ${between === 1 ? '1 marca' : `${between} marcas`}. Toca una para elegir una fracción en medio.`, ar: `عدد العلامات بينهما: ${between}. اضغط على إحداها لتختار كسرًا في الوسط.` })
+        if (between === 0) return l({ eu: `${denominator} izendatzailearekin ez dago marrarik bien artean. Zatitu zati bakoitza bitan: bi zatikien gaiak bikoiztea da.`, es: `Con denominador ${denominator} no queda ninguna marca entre las dos. Parte cada trozo en 2: es multiplicar por 2 los términos de las dos fracciones.`, en: `With denominator ${denominator} there is no mark left between the two. Split each piece into 2: it means multiplying both terms of both fractions by 2.`, ar: `بالمقام ${denominator} لا توجد أي علامة بينهما. قسّم كل جزء إلى 2: هذا ضرب حدّي كل كسر في 2.` })
+        return l({ eu: `Bien artean ${between === 1 ? 'marra bat dago' : `${between} marra daude`}. Sakatu horietako bat, tarteko zatiki bat aukeratzeko.`, es: `Entre las dos hay ${between === 1 ? '1 marca' : `${between} marcas`}. Toca una para elegir una fracción en medio.`, en: `There are ${between === 1 ? '1 marca' : `${between} marcas`} between the two. Tap one to choose a fraction in between.`, ar: `عدد العلامات بينهما: ${between}. اضغط على إحداها لتختار كسرًا في الوسط.` })
     })()
 
     /* ---------- Readout: the chain in the common denominator, in pieces that can wrap ---------- */
@@ -369,9 +369,9 @@ export function ZoomTool(props: ToolProps) {
             </span>
             {pair && (
                 <span className="fraction-v2-lab-readout-note">
-                    {l({ eu: 'Izendatzaile komuna', es: 'Denominador común', ar: 'المقام المشترك' })}: <bdi dir="ltr">{denominator}</bdi>
-                    {state.lens && <> · {l({ eu: 'handipena', es: 'aumento', ar: 'التكبير' })}: <bdi dir="ltr">{times(zoomFactor)}</bdi></>}
-                    {zooms > 0 && <> · {l({ eu: 'hurbilketak', es: 'acercamientos', ar: 'مرات التقريب' })}: <bdi dir="ltr">{zooms}</bdi></>}
+                    {l({ eu: 'Izendatzaile komuna', es: 'Denominador común', en: 'Common denominator', ar: 'المقام المشترك' })}: <bdi dir="ltr">{denominator}</bdi>
+                    {state.lens && <> · {l({ eu: 'handipena', es: 'aumento', en: 'magnification', ar: 'التكبير' })}: <bdi dir="ltr">{times(zoomFactor)}</bdi></>}
+                    {zooms > 0 && <> · {l({ eu: 'hurbilketak', es: 'acercamientos', en: 'zoom-ins', ar: 'مرات التقريب' })}: <bdi dir="ltr">{zooms}</bdi></>}
                 </span>
             )}
         </>
@@ -382,7 +382,7 @@ export function ZoomTool(props: ToolProps) {
             <div className="zoom">
                 {overviewBlock}
                 <div className="zoom-line">{line}</div>
-                {!drawAll && <p className="zoom-dense-note">{l({ eu: 'Marra gehiegi daude denak marrazteko: hurbildu lupa.', es: 'Demasiadas marcas para dibujarlas todas: acerca la lupa.', ar: 'العلامات أكثر من أن تُرسم كلها: قرّب العدسة.' })}</p>}
+                {!drawAll && <p className="zoom-dense-note">{l({ eu: 'Marra gehiegi daude denak marrazteko: hurbildu lupa.', es: 'Demasiadas marcas para dibujarlas todas: acerca la lupa.', en: 'Too many marks to draw them all: zoom in.', ar: 'العلامات أكثر من أن تُرسم كلها: قرّب العدسة.' })}</p>}
                 {actions}
                 {meanBlock}
                 {trail}

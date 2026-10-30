@@ -9,6 +9,7 @@ import { percentBarChallenges } from './percentBar.ts'
 import { receiptChallenges } from './receipt.ts'
 import { roadGraphChallenges } from './roadGraph.ts'
 import { ruleChallenges } from './ruleOfThree.ts'
+import { decimalSeparatorFor, thousandsSeparatorFor } from '../../../utils/numberFormat.ts'
 
 /* ==========================================================================
    Proportzionaltasuna (4. DBH aplikatuak) laboratory. The magnitude sorter
@@ -31,7 +32,7 @@ export interface ProportionDbh4ApLabTool extends LabToolInfo {
 }
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string) => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string) => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, Math.round(value)))
 const n = (value: number) => fraction(value)
 
@@ -56,34 +57,34 @@ function freshFrom<State>(start: State, maker: LabChallengeMaker<State>): LabCha
     }
 }
 
-/** A number for a sentence: 10 000 with a space in Basque and Spanish, plain in Arabic */
-const big = (value: number) => (value >= 10000 ? String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : String(value))
-/** Cents as euros for a sentence: 12,40 (12.40 in Arabic) */
-const euros = (cents: number, point = false) => {
+/** A number for a sentence: 10 000 with a space in Basque and Spanish, 10,000 in English; Arabic writes plain digits */
+const big = (value: number, language: string) => (value >= 10000 ? String(value).replace(/\B(?=(\d{3})+(?!\d))/g, language === 'en' ? thousandsSeparatorFor(language) : ' ') : String(value))
+/** Cents as euros for a sentence: 12,40 (12.40 in Arabic and English) */
+const euros = (cents: number, language: string) => {
     const text = cents % 100 === 0 ? String(cents / 100) : (cents / 100).toFixed(2)
-    return point ? text : text.replace('.', ',')
+    return language === 'ar' ? text : text.replace('.', decimalSeparatorFor(language))
 }
 /** Cents as euros inside LaTeX: 12{,}40 */
-const eurosLatex = (cents: number) => euros(cents).replace(',', '{,}')
+const eurosLatex = (cents: number) => euros(cents, 'eu').replace(',', '{,}')
 /** An exact decimal inside LaTeX: 1{,}05 */
 const decimalLatex = (value: FractionValue) => (toExactDecimal(value, ',') ?? String(toNumber(value))).replace(',', '{,}')
 const fracLatex = (value: FractionValue) => (value.denominator === 1 ? String(value.numerator) : `\\frac{${value.numerator}}{${value.denominator}}`)
 const sameSet = (values: readonly number[], wanted: number[]) => [...values].sort((a, b) => a - b).join() === [...wanted].sort((a, b) => a - b).join()
 
 export const proportionDbh4ApLabTools: ProportionDbh4ApLabTool[] = [
-    { id: 'classify', stage: 'simple', lessonTopic: 'relations', title: say('Zuzena, alderantzizkoa ala bat ere ez', 'Directa, inversa o ninguna', 'طردي أم عكسي أم لا شيء'), observe: say('Bikoitza → bikoitza: zuzena. Bikoitza → erdia: alderantzizkoa. Handitzea bakarrik ez da nahikoa: proportzio berean handitu behar du.', 'Doble → doble: directa. Doble → mitad: inversa. No basta con crecer: tiene que crecer en la misma proporción.', 'الضعف ← الضعف: طردي. الضعف ← النصف: عكسي. ولا تكفي الزيادة: يجب أن تكون بالنسبة نفسها.') },
-    { id: 'rule', stage: 'simple', lessonTopic: 'direct-rule', title: say('Gezidun hiruko erregela', 'Regla de tres con flechas', 'قاعدة الثلاثة بالأسهم'), observe: say('Goian, lehen magnitudea zenbaki batez biderkatzen da. Erlazioa zuzena bada, behean zenbaki beraz biderkatzen da; alderantzizkoa bada, behean zatitu egiten da. Unitatera laburtuz: lehenik unitate baten balioa, gero eskatzen dena.', 'Arriba, la primera magnitud se multiplica por un número. Si la relación es directa, abajo se multiplica por el mismo; si es inversa, abajo se divide. Por la unidad: primero el valor de 1, luego el que se pide.', 'في الأعلى يُضرب المقدار الأول في عدد. إذا كانت العلاقة طردية نضرب في الأسفل في العدد نفسه، وإذا كانت عكسية نقسم في الأسفل. وبالإرجاع إلى الوحدة: أولًا قيمة الواحد ثم المطلوب.') },
-    { id: 'compound', stage: 'compound', lessonTopic: 'compound', title: say('Proportzionaltasun konposatuaren makina', 'La máquina de proporcionalidad compuesta', 'آلة التناسب المركّب'), observe: say('Magnitude bakoitzeko erabaki: zuzena (berria/zaharra) ala alderantzizkoa (zaharra/berria). Ezezaguna zatiki guztiez biderkatzen da.', 'Para cada magnitud decide: directa (nuevo/viejo) o inversa (viejo/nuevo). La incógnita se multiplica por todas las fracciones.', 'قرّر لكل مقدار: طردي (الجديد/القديم) أم عكسي (القديم/الجديد). ويُضرب المجهول في كل الكسور.') },
-    { id: 'share', stage: 'compound', lessonTopic: 'direct-share', title: say('Banaketak', 'Repartos', 'التوزيعات'), observe: say('Zuzenean zenbaki handienak zati handiena hartzen du; alderantzizkoan, txikiena. Zatien batura beti kantitate osoa da.', 'En el directo el número mayor se lleva la parte mayor; en el inverso, la menor. Las partes siempre suman la cantidad entera.', 'في الطردي يأخذ العدد الأكبر الجزء الأكبر؛ وفي العكسي الأصغر. ومجموع الأجزاء يساوي الكمية كلها دائمًا.') },
-    { id: 'percentbar', stage: 'percent', lessonTopic: 'percent-calc', title: say('Ehunekoen barra', 'La barra del 100 %', 'شريط 100٪'), observe: say('Goiko barra % 100 da; behekoa, ehunekoa, eskala berean. % 21 igotzean barra % 121 arte luzatzen da; % 25 merketzean % 75 geratzen da. Atzera egiteko, indizeaz zatitzen da.', 'La barra de arriba es el 100 %; la de abajo, el porcentaje, en la misma escala. Subir un 21 % alarga la barra hasta el 121 %; rebajar un 25 % la deja en el 75 %. Hacia atrás se divide entre el índice.', 'الشريط العلوي هو 100٪، والسفلي هو النسبة بالمقياس نفسه. رفع 21٪ يمدّ الشريط إلى 121٪، وتخفيض 25٪ يتركه عند 75٪. وللرجوع نقسم على المؤشر.') },
-    { id: 'chain', stage: 'percent', lessonTopic: 'chained', title: say('Ehuneko kateatuak', 'Porcentajes encadenados', 'النسب المتتالية'), observe: say('Aldaketa bakoitza bere indizeaz biderkatzen da. % 10 igo eta % 10 jaitsiz gero, ez da hasierara itzultzen.', 'Cada cambio multiplica por su índice. Si subes un 10 % y bajas un 10 %, no vuelves al principio.', 'كل تغيّر يضرب في مؤشره. إذا زدت 10٪ ثم خفّضت 10٪ فلن تعود إلى البداية.') },
-    { id: 'receipt', stage: 'percent', lessonTopic: 'chained', title: say('Erosketaren tiketa', 'El tique de la compra', 'إيصال الشراء'), observe: say('Deskontuak eta BEZak beren indizeaz biderkatzen dute; beraz, haien ordenak ez du axola. Kupoiak euro finkoak kentzen ditu, eta aurrezten duena atzetik datozen indizeez biderkatzen da: BEZaren aurretik, haren BEZa ere aurrezten duzu.', 'El descuento y el IVA multiplican por su índice, así que su orden da igual. El cupón resta euros fijos, y lo que ahorra se multiplica por los índices que vienen detrás: antes del IVA, te ahorras también su IVA.', 'الخصم والضريبة يضربان في مؤشريهما، فلا يهمّ ترتيبهما. أما القسيمة فتطرح يوروهات ثابتة، ويُضرب ما توفّره في المؤشرات التي تأتي بعدها: قبل الضريبة توفّر ضريبتها أيضًا.') },
-    { id: 'interest', stage: 'interest', lessonTopic: 'simple-interest', title: say('Interes bakuna', 'Interés simple', 'الفائدة البسيطة'), observe: say('Urtero interes bera gehitzen da, hasierako kapitalaren % r. Urte bikoitza edo tasa bikoitza → interes bikoitza.', 'Cada año se suma el mismo interés, el r % del capital inicial. El doble de años o el doble de tipo → el doble de interés.', 'تُضاف كل سنة الفائدة نفسها، r٪ من رأس المال الأصلي. ضعف السنوات أو ضعف السعر ← ضعف الفائدة.') },
-    { id: 'growth', stage: 'interest', lessonTopic: 'compound-interest', title: say('Bakuna ala konposatua', 'Simple o compuesto', 'بسيطة أم مركّبة'), observe: say('Lehen urtean biak berdinak dira; gero konposatua aurrera doa, interesak ere interesa sortzen duelako. Aldi gehiago (k) → apur bat gehiago.', 'El primer año los dos coinciden; después el compuesto se adelanta, porque el interés también produce interés. Más periodos (k) → algo más.', 'في السنة الأولى يتساويان؛ ثم تتقدم المركّبة لأن الفائدة تُنتج فائدة. فترات أكثر (k) ← أكثر قليلًا.') },
-    { id: 'mixture', stage: 'problems', lessonTopic: 'mixtures', title: say('Nahasketa', 'La mezcla', 'الخليط'), observe: say('Prezio ertaina beti bi prezioen artean dago, eta kantitate handiena duenetik hurbilago. Kantitate berdinekin, erdian.', 'El precio medio siempre queda entre los dos precios, y más cerca del que tiene más cantidad. Con cantidades iguales, justo en medio.', 'يقع السعر المتوسط دائمًا بين السعرين، وأقرب إلى الأكثر كمية. وبكميتين متساويتين في المنتصف تمامًا.') },
-    { id: 'motion', stage: 'problems', lessonTopic: 'motion', title: say('Bi ibilgailu errepidean', 'Dos vehículos en la carretera', 'مركبتان على الطريق'), observe: say('Elkarrengana doazenean tartea abiaduren baturan txikitzen da; atzetik doazenean, abiaduren kenduran. Azkarrena atzean ez badago, ez dira inoiz elkartzen.', 'Al encuentro, la distancia se acorta a la suma de las velocidades; en una persecución, a su diferencia. Si el rápido no va detrás, no se encuentran nunca.', 'في التلاقي تقصر المسافة بمجموع السرعتين، وفي المطاردة بفرقهما. وإذا لم يكن الأسرع في الخلف فلن يلتقيا أبدًا.') },
-    { id: 'graph', stage: 'problems', lessonTopic: 'motion', title: say('Distantzia-denbora grafikoa', 'Gráfica distancia–tiempo', 'منحنى المسافة والزمن'), observe: say('Ibilgailu bakoitza zuzen bat da: zenbat eta inklinatuagoa, orduan eta azkarrago. Bata zain dagoen bitartean, bere zuzena horizontala da. Zuzenak ebakitzen diren puntuan elkartzen dira: puntu horrek minutua eta kilometroa ematen ditu.', 'Cada vehículo es una recta: cuanto más inclinada, más rápido va. Mientras uno espera, su recta es horizontal. Donde se cortan las rectas se encuentran: ese punto da el minuto y el kilómetro.', 'كل مركبة مستقيم: كلما كان أشدّ ميلًا كانت أسرع. وما دامت تنتظر يكون مستقيمها أفقيًا. وحيث يتقاطع المستقيمان تلتقيان: تلك النقطة تعطي الدقيقة والكيلومتر.') },
-    { id: 'taps', stage: 'problems', lessonTopic: 'taps', title: say('Txorrotak eta hustubidea', 'Grifos y desagüe', 'الصنابير والمصرف'), observe: say('Ordu bateko zatiak batzen dira (eta hustubidearena kendu). Denbora osoa zati horren alderantzizkoa da.', 'Se suman las partes de una hora (y se resta la del desagüe). El tiempo total es el inverso de esa parte.', 'نجمع أجزاء الساعة (ونطرح جزء المصرف). والزمن الكلي مقلوب ذلك الجزء.') }
+    { id: 'classify', stage: 'simple', lessonTopic: 'relations', title: say('Zuzena, alderantzizkoa ala bat ere ez', 'Directa, inversa o ninguna', 'طردي أم عكسي أم لا شيء', 'Direct, inverse or neither'), observe: say('Bikoitza → bikoitza: zuzena. Bikoitza → erdia: alderantzizkoa. Handitzea bakarrik ez da nahikoa: proportzio berean handitu behar du.', 'Doble → doble: directa. Doble → mitad: inversa. No basta con crecer: tiene que crecer en la misma proporción.', 'الضعف ← الضعف: طردي. الضعف ← النصف: عكسي. ولا تكفي الزيادة: يجب أن تكون بالنسبة نفسها.', 'Double → double: direct. Double → half: inverse. It is not enough to grow: it must grow in the same proportion.') },
+    { id: 'rule', stage: 'simple', lessonTopic: 'direct-rule', title: say('Gezidun hiruko erregela', 'Regla de tres con flechas', 'قاعدة الثلاثة بالأسهم', 'Rule of three with arrows'), observe: say('Goian, lehen magnitudea zenbaki batez biderkatzen da. Erlazioa zuzena bada, behean zenbaki beraz biderkatzen da; alderantzizkoa bada, behean zatitu egiten da. Unitatera laburtuz: lehenik unitate baten balioa, gero eskatzen dena.', 'Arriba, la primera magnitud se multiplica por un número. Si la relación es directa, abajo se multiplica por el mismo; si es inversa, abajo se divide. Por la unidad: primero el valor de 1, luego el que se pide.', 'في الأعلى يُضرب المقدار الأول في عدد. إذا كانت العلاقة طردية نضرب في الأسفل في العدد نفسه، وإذا كانت عكسية نقسم في الأسفل. وبالإرجاع إلى الوحدة: أولًا قيمة الواحد ثم المطلوب.', 'Top: the first quantity is multiplied by a number. If the relationship is direct, the bottom is multiplied by the same number; if it is inverse, the bottom is divided. Using the unit: first the value for 1, then the one you are asked for.') },
+    { id: 'compound', stage: 'compound', lessonTopic: 'compound', title: say('Proportzionaltasun konposatuaren makina', 'La máquina de proporcionalidad compuesta', 'آلة التناسب المركّب', 'The compound proportion machine'), observe: say('Magnitude bakoitzeko erabaki: zuzena (berria/zaharra) ala alderantzizkoa (zaharra/berria). Ezezaguna zatiki guztiez biderkatzen da.', 'Para cada magnitud decide: directa (nuevo/viejo) o inversa (viejo/nuevo). La incógnita se multiplica por todas las fracciones.', 'قرّر لكل مقدار: طردي (الجديد/القديم) أم عكسي (القديم/الجديد). ويُضرب المجهول في كل الكسور.', 'For each quantity, decide: direct (new/old) or inverse (old/new). The unknown is multiplied by all the fractions.') },
+    { id: 'share', stage: 'compound', lessonTopic: 'direct-share', title: say('Banaketak', 'Repartos', 'التوزيعات', 'Sharing out'), observe: say('Zuzenean zenbaki handienak zati handiena hartzen du; alderantzizkoan, txikiena. Zatien batura beti kantitate osoa da.', 'En el directo el número mayor se lleva la parte mayor; en el inverso, la menor. Las partes siempre suman la cantidad entera.', 'في الطردي يأخذ العدد الأكبر الجزء الأكبر؛ وفي العكسي الأصغر. ومجموع الأجزاء يساوي الكمية كلها دائمًا.', 'In direct sharing the larger number gets the larger share; in inverse sharing, the smaller one. The shares always add up to the whole amount.') },
+    { id: 'percentbar', stage: 'percent', lessonTopic: 'percent-calc', title: say('Ehunekoen barra', 'La barra del 100 %', 'شريط 100٪', 'The 100% bar'), observe: say('Goiko barra % 100 da; behekoa, ehunekoa, eskala berean. % 21 igotzean barra % 121 arte luzatzen da; % 25 merketzean % 75 geratzen da. Atzera egiteko, indizeaz zatitzen da.', 'La barra de arriba es el 100 %; la de abajo, el porcentaje, en la misma escala. Subir un 21 % alarga la barra hasta el 121 %; rebajar un 25 % la deja en el 75 %. Hacia atrás se divide entre el índice.', 'الشريط العلوي هو 100٪، والسفلي هو النسبة بالمقياس نفسه. رفع 21٪ يمدّ الشريط إلى 121٪، وتخفيض 25٪ يتركه عند 75٪. وللرجوع نقسم على المؤشر.', 'The top bar is 100%; the bottom one is the percentage, on the same scale. Increasing by 21% stretches the bar to 121%; decreasing by 25% leaves it at 75%. Going backwards, you divide by the multiplier.') },
+    { id: 'chain', stage: 'percent', lessonTopic: 'chained', title: say('Ehuneko kateatuak', 'Porcentajes encadenados', 'النسب المتتالية', 'Chained percentages'), observe: say('Aldaketa bakoitza bere indizeaz biderkatzen da. % 10 igo eta % 10 jaitsiz gero, ez da hasierara itzultzen.', 'Cada cambio multiplica por su índice. Si subes un 10 % y bajas un 10 %, no vuelves al principio.', 'كل تغيّر يضرب في مؤشره. إذا زدت 10٪ ثم خفّضت 10٪ فلن تعود إلى البداية.', 'Each change multiplies by its multiplier. If you go up 10% and then down 10%, you do not get back to the start.') },
+    { id: 'receipt', stage: 'percent', lessonTopic: 'chained', title: say('Erosketaren tiketa', 'El tique de la compra', 'إيصال الشراء', 'The shopping receipt'), observe: say('Deskontuak eta BEZak beren indizeaz biderkatzen dute; beraz, haien ordenak ez du axola. Kupoiak euro finkoak kentzen ditu, eta aurrezten duena atzetik datozen indizeez biderkatzen da: BEZaren aurretik, haren BEZa ere aurrezten duzu.', 'El descuento y el IVA multiplican por su índice, así que su orden da igual. El cupón resta euros fijos, y lo que ahorra se multiplica por los índices que vienen detrás: antes del IVA, te ahorras también su IVA.', 'الخصم والضريبة يضربان في مؤشريهما، فلا يهمّ ترتيبهما. أما القسيمة فتطرح يوروهات ثابتة، ويُضرب ما توفّره في المؤشرات التي تأتي بعدها: قبل الضريبة توفّر ضريبتها أيضًا.', 'The discount and the VAT multiply by their multipliers, so their order does not matter. The coupon takes off a fixed amount in euros, and what it saves is multiplied by the multipliers that come after it: before the VAT, you also save the VAT on it.') },
+    { id: 'interest', stage: 'interest', lessonTopic: 'simple-interest', title: say('Interes bakuna', 'Interés simple', 'الفائدة البسيطة', 'Simple interest'), observe: say('Urtero interes bera gehitzen da, hasierako kapitalaren % r. Urte bikoitza edo tasa bikoitza → interes bikoitza.', 'Cada año se suma el mismo interés, el r % del capital inicial. El doble de años o el doble de tipo → el doble de interés.', 'تُضاف كل سنة الفائدة نفسها، r٪ من رأس المال الأصلي. ضعف السنوات أو ضعف السعر ← ضعف الفائدة.', 'Each year the same interest is added: r% of the original principal. Double the years or double the rate → double the interest.') },
+    { id: 'growth', stage: 'interest', lessonTopic: 'compound-interest', title: say('Bakuna ala konposatua', 'Simple o compuesto', 'بسيطة أم مركّبة', 'Simple or compound'), observe: say('Lehen urtean biak berdinak dira; gero konposatua aurrera doa, interesak ere interesa sortzen duelako. Aldi gehiago (k) → apur bat gehiago.', 'El primer año los dos coinciden; después el compuesto se adelanta, porque el interés también produce interés. Más periodos (k) → algo más.', 'في السنة الأولى يتساويان؛ ثم تتقدم المركّبة لأن الفائدة تُنتج فائدة. فترات أكثر (k) ← أكثر قليلًا.', 'In the first year the two match; after that compound interest pulls ahead, because interest also earns interest. More periods (k) → a little more.') },
+    { id: 'mixture', stage: 'problems', lessonTopic: 'mixtures', title: say('Nahasketa', 'La mezcla', 'الخليط', 'The mixture'), observe: say('Prezio ertaina beti bi prezioen artean dago, eta kantitate handiena duenetik hurbilago. Kantitate berdinekin, erdian.', 'El precio medio siempre queda entre los dos precios, y más cerca del que tiene más cantidad. Con cantidades iguales, justo en medio.', 'يقع السعر المتوسط دائمًا بين السعرين، وأقرب إلى الأكثر كمية. وبكميتين متساويتين في المنتصف تمامًا.', 'The average price always lies between the two prices, closer to the one with the larger amount. With equal amounts, it is exactly in the middle.') },
+    { id: 'motion', stage: 'problems', lessonTopic: 'motion', title: say('Bi ibilgailu errepidean', 'Dos vehículos en la carretera', 'مركبتان على الطريق', 'Two vehicles on the road'), observe: say('Elkarrengana doazenean tartea abiaduren baturan txikitzen da; atzetik doazenean, abiaduren kenduran. Azkarrena atzean ez badago, ez dira inoiz elkartzen.', 'Al encuentro, la distancia se acorta a la suma de las velocidades; en una persecución, a su diferencia. Si el rápido no va detrás, no se encuentran nunca.', 'في التلاقي تقصر المسافة بمجموع السرعتين، وفي المطاردة بفرقهما. وإذا لم يكن الأسرع في الخلف فلن يلتقيا أبدًا.', 'When they are moving towards each other, the gap closes at the sum of the speeds; in a chase, at their difference. If the faster one is not behind, they never meet.') },
+    { id: 'graph', stage: 'problems', lessonTopic: 'motion', title: say('Distantzia-denbora grafikoa', 'Gráfica distancia–tiempo', 'منحنى المسافة والزمن', 'Distance–time graph'), observe: say('Ibilgailu bakoitza zuzen bat da: zenbat eta inklinatuagoa, orduan eta azkarrago. Bata zain dagoen bitartean, bere zuzena horizontala da. Zuzenak ebakitzen diren puntuan elkartzen dira: puntu horrek minutua eta kilometroa ematen ditu.', 'Cada vehículo es una recta: cuanto más inclinada, más rápido va. Mientras uno espera, su recta es horizontal. Donde se cortan las rectas se encuentran: ese punto da el minuto y el kilómetro.', 'كل مركبة مستقيم: كلما كان أشدّ ميلًا كانت أسرع. وما دامت تنتظر يكون مستقيمها أفقيًا. وحيث يتقاطع المستقيمان تلتقيان: تلك النقطة تعطي الدقيقة والكيلومتر.', 'Each vehicle is a straight line: the steeper it is, the faster it goes. While one waits, its line is horizontal. Where the lines cross, they meet: that point gives the minute and the kilometre.') },
+    { id: 'taps', stage: 'problems', lessonTopic: 'taps', title: say('Txorrotak eta hustubidea', 'Grifos y desagüe', 'الصنابير والمصرف', 'Taps and drain'), observe: say('Ordu bateko zatiak batzen dira (eta hustubidearena kendu). Denbora osoa zati horren alderantzizkoa da.', 'Se suman las partes de una hora (y se resta la del desagüe). El tiempo total es el inverso de esa parte.', 'نجمع أجزاء الساعة (ونطرح جزء المصرف). والزمن الكلي مقلوب ذلك الجزء.', 'Add up the parts of an hour (and subtract the drain\'s part). The total time is the reciprocal of that part.') }
 ]
 
 export const proportionDbh4ApLabToolForTopic: Record<string, ProportionDbh4ApLabToolId | undefined> = {
@@ -143,10 +144,10 @@ export const cents = (value: number) => Math.round(value * 100) / 100
 export const growthPrediction = (state: GrowthState): Prediction => compareTo(cents(compoundAfter(state, state.years)), 2 * state.capital)
 
 export const growthChallenges: LabChallenge<GrowthState>[] = [
-    { id: 43101, prompt: say('Ikusi lezioaren adibidea: 1000 € % 10ean 3 urtez, urtean behin. Zenbat konposatuan?', 'Mira el ejemplo de la lección: 1000 € al 10 % durante 3 años, anual. ¿Cuánto en compuesto?', 'شاهد مثال الدرس: 1000 € بفائدة 10٪ مدة 3 سنوات سنويًا. كم في المركّبة؟'), hint: say('$1000\\cdot 1{,}1^{3}=1331$.', '$1000\\cdot 1{,}1^{3}=1331$.', '$1000\\cdot 1{,}1^{3}=1331$.'), isSolved: (state) => state.capital === 1000 && state.rate === 10 && state.years === 3 && state.periods === 1 },
-    { id: 43102, prompt: say('Lortu konposatuak bakunari 5000 € baino gehiago ateratzea.', 'Consigue que el compuesto saque más de 5000 € al simple.', 'اجعل المركّبة تزيد على البسيطة بأكثر من 5000 €.'), hint: say('Kapital handia, tasa handia eta urte asko.', 'Capital grande, tipo alto y muchos años.', 'رأس مال كبير وسعر مرتفع وسنوات كثيرة.'), isSolved: (state) => compoundAfter(state, state.years) - toNumber(simpleAfter(state, state.years)) > 5000 },
-    { id: 43103, prompt: say('% 12an, urtean behin: zenbat urtetan bikoizten da kapitala lehen aldiz?', 'Al 12 %, anual: ¿en cuántos años se dobla el capital por primera vez?', 'بفائدة 12٪ سنويًا: بعد كم سنة يتضاعف رأس المال أول مرة؟'), hint: say('$1{,}12^{6}<2<1{,}12^{7}$.', '$1{,}12^{6}<2<1{,}12^{7}$.', '$1{,}12^{6}<2<1{,}12^{7}$.'), isSolved: (state) => state.rate === 12 && state.periods === 1 && compoundAfter(state, state.years) >= 2 * state.capital && compoundAfter(state, state.years - 1) < 2 * state.capital },
-    { id: 43104, prompt: say('10 000 € % 12an urtebetez, interesak hilero. Zenbat?', '10 000 € al 12 % durante un año, con intereses mensuales. ¿Cuánto?', '10000 € بفائدة 12٪ سنة واحدة مع فوائد شهرية. كم؟'), hint: say('$k=12$: % 1 hilero.', '$k=12$: un 1 % cada mes.', '$k=12$: 1٪ كل شهر.'), isSolved: (state) => state.capital === 10000 && state.rate === 12 && state.years === 1 && state.periods === 12 }
+    { id: 43101, prompt: say('Ikusi lezioaren adibidea: 1000 € % 10ean 3 urtez, urtean behin. Zenbat konposatuan?', 'Mira el ejemplo de la lección: 1000 € al 10 % durante 3 años, anual. ¿Cuánto en compuesto?', 'شاهد مثال الدرس: 1000 € بفائدة 10٪ مدة 3 سنوات سنويًا. كم في المركّبة؟', 'Look at the example in the lesson: €1,000 at 10% annual interest for 3 years. How much is it with compound interest?'), hint: say('$1000\\cdot 1{,}1^{3}=1331$.', '$1000\\cdot 1{,}1^{3}=1331$.', '$1000\\cdot 1{,}1^{3}=1331$.', '$1000\\cdot 1{,}1^{3}=1331$.'), isSolved: (state) => state.capital === 1000 && state.rate === 10 && state.years === 3 && state.periods === 1 },
+    { id: 43102, prompt: say('Lortu konposatuak bakunari 5000 € baino gehiago ateratzea.', 'Consigue que el compuesto saque más de 5000 € al simple.', 'اجعل المركّبة تزيد على البسيطة بأكثر من 5000 €.', 'Make compound interest beat simple interest by more than €5,000.'), hint: say('Kapital handia, tasa handia eta urte asko.', 'Capital grande, tipo alto y muchos años.', 'رأس مال كبير وسعر مرتفع وسنوات كثيرة.', 'A large capital, a high rate and many years.'), isSolved: (state) => compoundAfter(state, state.years) - toNumber(simpleAfter(state, state.years)) > 5000 },
+    { id: 43103, prompt: say('% 12an, urtean behin: zenbat urtetan bikoizten da kapitala lehen aldiz?', 'Al 12 %, anual: ¿en cuántos años se dobla el capital por primera vez?', 'بفائدة 12٪ سنويًا: بعد كم سنة يتضاعف رأس المال أول مرة؟', 'At 12% annual interest, in how many years does the capital first double?'), hint: say('$1{,}12^{6}<2<1{,}12^{7}$.', '$1{,}12^{6}<2<1{,}12^{7}$.', '$1{,}12^{6}<2<1{,}12^{7}$.', '$1{,}12^{6}<2<1{,}12^{7}$.'), isSolved: (state) => state.rate === 12 && state.periods === 1 && compoundAfter(state, state.years) >= 2 * state.capital && compoundAfter(state, state.years - 1) < 2 * state.capital },
+    { id: 43104, prompt: say('10 000 € % 12an urtebetez, interesak hilero. Zenbat?', '10 000 € al 12 % durante un año, con intereses mensuales. ¿Cuánto?', '10000 € بفائدة 12٪ سنة واحدة مع فوائد شهرية. كم؟', '€10,000 at 12% for one year, with interest added monthly. How much?'), hint: say('$k=12$: % 1 hilero.', '$k=12$: un 1 % cada mes.', '$k=12$: 1٪ كل شهر.', '$k=12$: 1% each month.'), isSolved: (state) => state.capital === 10000 && state.rate === 12 && state.years === 1 && state.periods === 12 }
 ]
 
 /* ---------- 2. A mixture of two ingredients, or an alloy of two pieces of gold ---------- */
@@ -203,18 +204,18 @@ export const mixturePrediction = (state: MixtureState): Prediction => compareTo(
 const coffee = (state: MixtureState) => state.kind === 'coffee'
 
 export const mixtureChallenges: LabChallenge<MixtureState>[] = [
-    { id: 43201, prompt: say('Egin lezioaren kafea: 12 kg 12,40 €-an eta 8 kg 7,40 €-an.', 'Haz el café de la lección: 12 kg a 12,40 € y 8 kg a 7,40 €.', 'اصنع بن الدرس: 12 كغ بـ12.40 € و8 كغ بـ7.40 €.'), hint: say('Prezio ertaina 10,40 €/kg.', 'El precio medio es 10,40 €/kg.', 'السعر المتوسط 10.40 €/كغ.'), isSolved: (state) => coffee(state) && equals(mixturePrice(state), fraction(1040, 100)) && state.kilos.includes(12) && state.kilos.includes(8) },
-    { id: 43202, prompt: say('Lortu prezio ertaina bi prezioen erdian geratzea, prezio desberdinekin.', 'Consigue que el precio medio quede justo en medio de los dos, con precios distintos.', 'اجعل السعر المتوسط في منتصف السعرين تمامًا، بسعرين مختلفين.'), hint: say('Kantitate berdinak.', 'Cantidades iguales.', 'كميتان متساويتان.'), isSolved: (state) => coffee(state) && state.prices[0] !== state.prices[1] && equals(mixturePrice(state), fraction(state.prices[0] + state.prices[1], 200)) },
-    { id: 43203, prompt: say('10 kg kafe 9,50 €-an daude. Zenbat kg 15 €-ko kafe gehitu behar dira 12,50 €/kg lortzeko?', 'Hay 10 kg de café a 9,50 €. ¿Cuántos kg de café a 15 € hay que añadir para que salga a 12,50 €/kg?', 'لدينا 10 كغ من البن بـ9.50 €. كم كيلوغرامًا من البن بـ15 € نضيف ليصير السعر 12.50 €/كغ؟'), hint: say('$15x+95=12{,}5\\cdot(10+x)$.', '$15x+95=12{,}5\\cdot(10+x)$.', '$15x+95=12{,}5\\cdot(10+x)$.'), isSolved: (state) => coffee(state) && equals(mixturePrice(state), fraction(1250, 100)) && state.prices.includes(1500) && state.prices.includes(950) },
-    { id: 43204, prompt: say('Egin 5,75 €-an saltzeko nahasketa: 7,40 €-ko ardoa eta 5,20 €-koa.', 'Haz una mezcla que salga a 5,75 €: vino de 7,40 € y de 5,20 €.', 'اصنع خليطًا سعره 5.75 €: نبيذ بـ7.40 € وآخر بـ5.20 €.'), hint: say('1 eta 3 arteko proportzioa.', 'En proporción 1 a 3.', 'بنسبة 1 إلى 3.'), isSolved: (state) => coffee(state) && equals(mixturePrice(state), fraction(575, 100)) && state.prices.includes(740) && state.prices.includes(520) },
+    { id: 43201, prompt: say('Egin lezioaren kafea: 12 kg 12,40 €-an eta 8 kg 7,40 €-an.', 'Haz el café de la lección: 12 kg a 12,40 € y 8 kg a 7,40 €.', 'اصنع بن الدرس: 12 كغ بـ12.40 € و8 كغ بـ7.40 €.', 'Make the coffee from the lesson: 12 kg at €12.40 and 8 kg at €7.40.'), hint: say('Prezio ertaina 10,40 €/kg.', 'El precio medio es 10,40 €/kg.', 'السعر المتوسط 10.40 €/كغ.', 'The average price is €10.40/kg.'), isSolved: (state) => coffee(state) && equals(mixturePrice(state), fraction(1040, 100)) && state.kilos.includes(12) && state.kilos.includes(8) },
+    { id: 43202, prompt: say('Lortu prezio ertaina bi prezioen erdian geratzea, prezio desberdinekin.', 'Consigue que el precio medio quede justo en medio de los dos, con precios distintos.', 'اجعل السعر المتوسط في منتصف السعرين تمامًا، بسعرين مختلفين.', 'Make the average price land exactly halfway between the two, with different prices.'), hint: say('Kantitate berdinak.', 'Cantidades iguales.', 'كميتان متساويتان.', 'Equal amounts.'), isSolved: (state) => coffee(state) && state.prices[0] !== state.prices[1] && equals(mixturePrice(state), fraction(state.prices[0] + state.prices[1], 200)) },
+    { id: 43203, prompt: say('10 kg kafe 9,50 €-an daude. Zenbat kg 15 €-ko kafe gehitu behar dira 12,50 €/kg lortzeko?', 'Hay 10 kg de café a 9,50 €. ¿Cuántos kg de café a 15 € hay que añadir para que salga a 12,50 €/kg?', 'لدينا 10 كغ من البن بـ9.50 €. كم كيلوغرامًا من البن بـ15 € نضيف ليصير السعر 12.50 €/كغ؟', 'There are 10 kg of coffee at €9.50. How many kg of coffee at €15 do you need to add so that it comes out at €12.50/kg?'), hint: say('$15x+95=12{,}5\\cdot(10+x)$.', '$15x+95=12{,}5\\cdot(10+x)$.', '$15x+95=12{,}5\\cdot(10+x)$.', '$15x+95=12{,}5\\cdot(10+x)$.'), isSolved: (state) => coffee(state) && equals(mixturePrice(state), fraction(1250, 100)) && state.prices.includes(1500) && state.prices.includes(950) },
+    { id: 43204, prompt: say('Egin 5,75 €-an saltzeko nahasketa: 7,40 €-ko ardoa eta 5,20 €-koa.', 'Haz una mezcla que salga a 5,75 €: vino de 7,40 € y de 5,20 €.', 'اصنع خليطًا سعره 5.75 €: نبيذ بـ7.40 € وآخر بـ5.20 €.', 'Make a mixture that comes out at €5.75: wine at €7.40 and wine at €5.20.'), hint: say('1 eta 3 arteko proportzioa.', 'En proporción 1 a 3.', 'بنسبة 1 إلى 3.', 'In the ratio 1 to 3.'), isSolved: (state) => coffee(state) && equals(mixturePrice(state), fraction(575, 100)) && state.prices.includes(740) && state.prices.includes(520) },
     {
         id: 43205,
         prompt: say(
             'Urtu 4 kg urre (purutasuna: 0,85) eta 3 kg urre (purutasuna: 0,9). Ikasgaiko lingotea da, bi aldiz handiagoa. Zer purutasun ateratzen da?',
             'Funde 4 kg de oro de ley 0,85 con 3 kg de ley 0,9: es el lingote de la lección, el doble de grande. ¿Qué ley sale?',
-            'اصهر 4 كغ من الذهب عياره 0.85 مع 3 كغ عياره 0.9: إنها سبيكة الدرس بضعف الحجم. ما العيار الناتج؟'
+            'اصهر 4 كغ من الذهب عياره 0.85 مع 3 كغ عياره 0.9: إنها سبيكة الدرس بضعف الحجم. ما العيار الناتج؟', 'Melt 4 kg of gold with a fineness of 0.85 together with 3 kg with a fineness of 0.9: this is the ingot from the lesson, twice as big. What fineness do you get?'
         ),
-        hint: say('Urre garbia: $4\\cdot 0{,}85+3\\cdot 0{,}9=6{,}1$ kg, 7 kilotan.', 'Oro puro: $4\\cdot 0{,}85+3\\cdot 0{,}9=6{,}1$ kg en 7 kg.', 'الذهب الخالص: $4\\cdot 0{,}85+3\\cdot 0{,}9=6{,}1$ كغ من 7 كغ.'),
+        hint: say('Urre garbia: $4\\cdot 0{,}85+3\\cdot 0{,}9=6{,}1$ kg, 7 kilotan.', 'Oro puro: $4\\cdot 0{,}85+3\\cdot 0{,}9=6{,}1$ kg en 7 kg.', 'الذهب الخالص: $4\\cdot 0{,}85+3\\cdot 0{,}9=6{,}1$ كغ من 7 كغ.', 'Pure gold: $4\\cdot 0{,}85+3\\cdot 0{,}9=6{,}1$ kg in 7 kg.'),
         isSolved: (state) => state.kind === 'alloy' && ([0, 1] as const).some((slot) => state.kilos[slot] === 4 && state.prices[slot] === 850 && state.kilos[1 - slot] === 3 && state.prices[1 - slot] === 900)
     }
 ]
@@ -282,10 +283,10 @@ export const atMeeting = (state: MotionState) => {
 }
 
 export const motionChallenges: LabChallenge<MotionState>[] = [
-    { id: 43301, prompt: say('240 km, 70 eta 110 km/h, elkarrengana: jarri erlojua gurutzatzen diren unean.', '240 km, a 70 y 110 km/h, al encuentro: pon el reloj en el momento en que se cruzan.', '240 كم، بسرعة 70 و110 كم/س، تلاقٍ: ضع الساعة لحظة التقاطع.'), hint: say('$240\\mathbin{:}180$ h = 80 min.', '$240\\mathbin{:}180$ h = 80 min.', '$240\\mathbin{:}180$ س = 80 د.'), isSolved: (state) => state.mode === 'meet' && state.distance === 240 && state.speeds[0] === 70 && state.speeds[1] === 110 && atMeeting(state) },
-    { id: 43302, prompt: say('Jazarpena: autoa 120 km/h-ra, kamioia 90 km/h-ra 75 km aurrerago. Jarri erlojua harrapatzen duen unean.', 'Persecución: coche a 120 km/h, camión a 90 km/h 75 km por delante. Pon el reloj cuando lo alcanza.', 'مطاردة: سيارة بسرعة 120 كم/س وشاحنة بسرعة 90 كم/س أمامها بـ75 كم. ضع الساعة لحظة اللحاق.'), hint: say('$75\\mathbin{:}30=2{,}5$ h.', '$75\\mathbin{:}30=2{,}5$ h.', '$75\\mathbin{:}30=2{,}5$ س.'), isSolved: (state) => state.mode === 'chase' && state.distance === 75 && state.speeds[0] === 120 && state.speeds[1] === 90 && atMeeting(state) },
-    { id: 43303, prompt: say('Elkarrengana, lortu zehazki ordu betean elkartzea.', 'Al encuentro, consigue que se crucen justo en una hora.', 'في التلاقي، اجعلهما يتقاطعان بعد ساعة تمامًا.'), hint: say('Abiaduren batura = distantzia.', 'La suma de las velocidades = la distancia.', 'مجموع السرعتين = المسافة.'), isSolved: (state) => state.mode === 'meet' && equals(meetingMinutes(state) ?? n(-1), n(60)) },
-    { id: 43304, prompt: say('Jazarpenean, prestatu inoiz elkartzen ez diren kasu bat.', 'En la persecución, prepara un caso en el que no se encuentren nunca.', 'في المطاردة، جهّز حالة لا يلتقيان فيها أبدًا.'), hint: say('Atzekoa ez da azkarragoa.', 'El de atrás no es más rápido.', 'الخلفي ليس أسرع.'), isSolved: (state) => state.mode === 'chase' && meetingMinutes(state) === null }
+    { id: 43301, prompt: say('240 km, 70 eta 110 km/h, elkarrengana: jarri erlojua gurutzatzen diren unean.', '240 km, a 70 y 110 km/h, al encuentro: pon el reloj en el momento en que se cruzan.', '240 كم، بسرعة 70 و110 كم/س، تلاقٍ: ضع الساعة لحظة التقاطع.', '240 km, at 70 and 110 km/h, towards each other: set the clock to the moment they meet.'), hint: say('$240\\mathbin{:}180$ h = 80 min.', '$240\\mathbin{:}180$ h = 80 min.', '$240\\mathbin{:}180$ س = 80 د.', '$240\\mathbin{:}180$ h = 80 min.'), isSolved: (state) => state.mode === 'meet' && state.distance === 240 && state.speeds[0] === 70 && state.speeds[1] === 110 && atMeeting(state) },
+    { id: 43302, prompt: say('Jazarpena: autoa 120 km/h-ra, kamioia 90 km/h-ra 75 km aurrerago. Jarri erlojua harrapatzen duen unean.', 'Persecución: coche a 120 km/h, camión a 90 km/h 75 km por delante. Pon el reloj cuando lo alcanza.', 'مطاردة: سيارة بسرعة 120 كم/س وشاحنة بسرعة 90 كم/س أمامها بـ75 كم. ضع الساعة لحظة اللحاق.', 'Chase: car at 120 km/h, lorry at 90 km/h, 75 km ahead. Set the clock when the car catches up.'), hint: say('$75\\mathbin{:}30=2{,}5$ h.', '$75\\mathbin{:}30=2{,}5$ h.', '$75\\mathbin{:}30=2{,}5$ س.', '$75\\mathbin{:}30=2{,}5$ h.'), isSolved: (state) => state.mode === 'chase' && state.distance === 75 && state.speeds[0] === 120 && state.speeds[1] === 90 && atMeeting(state) },
+    { id: 43303, prompt: say('Elkarrengana, lortu zehazki ordu betean elkartzea.', 'Al encuentro, consigue que se crucen justo en una hora.', 'في التلاقي، اجعلهما يتقاطعان بعد ساعة تمامًا.', 'Towards each other: make them meet in exactly one hour.'), hint: say('Abiaduren batura = distantzia.', 'La suma de las velocidades = la distancia.', 'مجموع السرعتين = المسافة.', 'The sum of the speeds = the distance.'), isSolved: (state) => state.mode === 'meet' && equals(meetingMinutes(state) ?? n(-1), n(60)) },
+    { id: 43304, prompt: say('Jazarpenean, prestatu inoiz elkartzen ez diren kasu bat.', 'En la persecución, prepara un caso en el que no se encuentren nunca.', 'في المطاردة، جهّز حالة لا يلتقيان فيها أبدًا.', 'For the chase, set up a case where they never meet.'), hint: say('Atzekoa ez da azkarragoa.', 'El de atrás no es más rápido.', 'الخلفي ليس أسرع.', 'The one behind is not faster.'), isSolved: (state) => state.mode === 'chase' && meetingMinutes(state) === null }
 ]
 
 /* ---------- 4. Taps and a drain ---------- */
@@ -330,15 +331,15 @@ export function tapsPrediction(state: TapsState): Prediction {
 }
 
 export const tapsChallenges: LabChallenge<TapsState>[] = [
-    { id: 43401, prompt: say('Lezioaren biltegia: A 5 h-tan eta B 7 h-tan. Zenbat biak batera?', 'El depósito de la lección: A en 5 h y B en 7 h. ¿Cuánto los dos juntos?', 'خزان الدرس: أ في 5 س وب في 7 س. كم معًا؟'), hint: say('$\\frac{35}{12}$ h.', '$\\frac{35}{12}$ h.', '$\\frac{35}{12}$ س.'), isSolved: (state) => [...state.taps].sort((a, b) => a - b).join() === '5,7' && state.drain === 0 },
-    { id: 43402, prompt: say('Bi txorrotarekin, bete biltegia zehazki 2 orduan.', 'Con dos grifos, llena el depósito en 2 horas justas.', 'بصنبورين، املأ الخزان في ساعتين تمامًا.'), hint: say('$\\frac{1}{3}+\\frac{1}{6}=\\frac{1}{2}$.', '$\\frac{1}{3}+\\frac{1}{6}=\\frac{1}{2}$.', '$\\frac{1}{3}+\\frac{1}{6}=\\frac{1}{2}$.'), isSolved: (state) => state.taps[1] > 0 && state.drain === 0 && equals(fillHours(state) ?? n(0), n(2)) },
-    { id: 43403, prompt: say('Ireki hustubidea eta lortu biltegia inoiz ez betetzea.', 'Abre el desagüe y consigue que el depósito no se llene nunca.', 'افتح المصرف واجعل الخزان لا يمتلئ أبدًا.'), hint: say('Hustubideak txorrotek baino gehiago atera behar du.', 'El desagüe tiene que sacar más de lo que entra.', 'يجب أن يُخرج المصرف أكثر مما يدخل.'), isSolved: (state) => state.drain > 0 && fillHours(state) === null },
-    { id: 43404, prompt: say('Hustubidea irekita, bete biltegia zehazki ordu eta erdian.', 'Con el desagüe abierto, llena el depósito en hora y media justa.', 'والمصرف مفتوح، املأ الخزان في ساعة ونصف تمامًا.'), hint: say('$\\frac{1}{2}+\\frac{1}{3}-\\frac{1}{6}=\\frac{2}{3}$.', '$\\frac{1}{2}+\\frac{1}{3}-\\frac{1}{6}=\\frac{2}{3}$.', '$\\frac{1}{2}+\\frac{1}{3}-\\frac{1}{6}=\\frac{2}{3}$.'), isSolved: (state) => state.drain > 0 && equals(fillHours(state) ?? n(0), fraction(3, 2)) }
+    { id: 43401, prompt: say('Lezioaren biltegia: A 5 h-tan eta B 7 h-tan. Zenbat biak batera?', 'El depósito de la lección: A en 5 h y B en 7 h. ¿Cuánto los dos juntos?', 'خزان الدرس: أ في 5 س وب في 7 س. كم معًا؟', 'The tank from the lesson: A in 5 h and B in 7 h. How long do they take together?'), hint: say('$\\frac{35}{12}$ h.', '$\\frac{35}{12}$ h.', '$\\frac{35}{12}$ س.', '$\\frac{35}{12}$ h.'), isSolved: (state) => [...state.taps].sort((a, b) => a - b).join() === '5,7' && state.drain === 0 },
+    { id: 43402, prompt: say('Bi txorrotarekin, bete biltegia zehazki 2 orduan.', 'Con dos grifos, llena el depósito en 2 horas justas.', 'بصنبورين، املأ الخزان في ساعتين تمامًا.', 'With two taps, fill the tank in exactly 2 hours.'), hint: say('$\\frac{1}{3}+\\frac{1}{6}=\\frac{1}{2}$.', '$\\frac{1}{3}+\\frac{1}{6}=\\frac{1}{2}$.', '$\\frac{1}{3}+\\frac{1}{6}=\\frac{1}{2}$.', '$\\frac{1}{3}+\\frac{1}{6}=\\frac{1}{2}$.'), isSolved: (state) => state.taps[1] > 0 && state.drain === 0 && equals(fillHours(state) ?? n(0), n(2)) },
+    { id: 43403, prompt: say('Ireki hustubidea eta lortu biltegia inoiz ez betetzea.', 'Abre el desagüe y consigue que el depósito no se llene nunca.', 'افتح المصرف واجعل الخزان لا يمتلئ أبدًا.', 'Open the drain and make sure the tank never fills up.'), hint: say('Hustubideak txorrotek baino gehiago atera behar du.', 'El desagüe tiene que sacar más de lo que entra.', 'يجب أن يُخرج المصرف أكثر مما يدخل.', 'The drain must take out more than what comes in.'), isSolved: (state) => state.drain > 0 && fillHours(state) === null },
+    { id: 43404, prompt: say('Hustubidea irekita, bete biltegia zehazki ordu eta erdian.', 'Con el desagüe abierto, llena el depósito en hora y media justa.', 'والمصرف مفتوح، املأ الخزان في ساعة ونصف تمامًا.', 'With the drain open, fill the tank in exactly one and a half hours.'), hint: say('$\\frac{1}{2}+\\frac{1}{3}-\\frac{1}{6}=\\frac{2}{3}$.', '$\\frac{1}{2}+\\frac{1}{3}-\\frac{1}{6}=\\frac{2}{3}$.', '$\\frac{1}{2}+\\frac{1}{3}-\\frac{1}{6}=\\frac{2}{3}$.', '$\\frac{1}{2}+\\frac{1}{3}-\\frac{1}{6}=\\frac{2}{3}$.'), isSolved: (state) => state.drain > 0 && equals(fillHours(state) ?? n(0), fraction(3, 2)) }
 ]
 
 /* ---------- Endless challenges for the new tools ---------- */
 
-const text = (eu: string, es: string, ar: string): LocalizedText => say(eu, es, ar)
+const text = (eu: string, es: string, ar: string, en: string): LocalizedText => say(eu, es, ar, en)
 
 /** Growth: the first year past an amount, the gap over simple interest, doubling, or a setting with periods */
 export const growthExtra: LabChallengeMaker<GrowthState> = freshFrom(initialGrowthState, (random) => {
@@ -353,14 +354,14 @@ export const growthExtra: LabChallengeMaker<GrowthState> = freshFrom(initialGrow
             const index = decimalLatex(fraction(100 + rate, 100))
             return {
                 prompt: text(
-                    `Kapitala: ${big(capital)} €; interes konposatua, urtekoa: % ${rate}. Zenbat urteren buruan izango da lehen aldiz ${big(target)} € baino gehiago? Jarri urte horiek tresnan.`,
-                    `Con ${big(capital)} € al ${rate} % de interés compuesto anual, ¿al cabo de cuántos años habrá por primera vez más de ${big(target)} €? Pon esos años en la herramienta.`,
-                    `رأس المال ${capital} € بفائدة مركّبة سنوية ${rate}٪. بعد كم سنة يصبح المبلغ أكثر من ${target} € أول مرة؟ ضع عدد السنوات في الأداة.`
+                    `Kapitala: ${big(capital, 'eu')} €; interes konposatua, urtekoa: % ${rate}. Zenbat urteren buruan izango da lehen aldiz ${big(target, 'eu')} € baino gehiago? Jarri urte horiek tresnan.`,
+                    `Con ${big(capital, 'es')} € al ${rate} % de interés compuesto anual, ¿al cabo de cuántos años habrá por primera vez más de ${big(target, 'es')} €? Pon esos años en la herramienta.`,
+                    `رأس المال ${capital} € بفائدة مركّبة سنوية ${rate}٪. بعد كم سنة يصبح المبلغ أكثر من ${target} € أول مرة؟ ضع عدد السنوات في الأداة.`, `With €${big(capital, 'en')} at ${rate}% compound annual interest, after how many years will there be more than €${big(target, 'en')} for the first time? Enter those years in the tool.`
                 ),
                 hint: text(
                     `Urtero dirua $${index}$ zenbakiaz biderkatzen da: begiratu barra berdeak urtez urte.`,
                     `Cada año el dinero se multiplica por $${index}$: mira las barras verdes año a año.`,
-                    `كل سنة يُضرب المال في $${index}$: انظر إلى الأعمدة الخضراء سنة بعد سنة.`
+                    `كل سنة يُضرب المال في $${index}$: انظر إلى الأعمدة الخضراء سنة بعد سنة.`, `Each year the money is multiplied by $${index}$: look at the green bars year by year.`
                 ),
                 isSolved: (state) => state.capital === capital && state.rate === rate && state.periods === 1 && state.years === years,
                 solution
@@ -377,14 +378,14 @@ export const growthExtra: LabChallengeMaker<GrowthState> = freshFrom(initialGrow
             const { capital } = solution
             return {
                 prompt: text(
-                    `Kapitala: ${big(capital)} €. Lortu konposatuak bakunari ${big(target)} € baino gehiago ateratzea.`,
-                    `Con ${big(capital)} €, consigue que el interés compuesto saque más de ${big(target)} € al simple.`,
-                    `برأس مال ${capital} €، اجعل المركّبة تزيد على البسيطة بأكثر من ${target} €.`
+                    `Kapitala: ${big(capital, 'eu')} €. Lortu konposatuak bakunari ${big(target, 'eu')} € baino gehiago ateratzea.`,
+                    `Con ${big(capital, 'es')} €, consigue que el interés compuesto saque más de ${big(target, 'es')} € al simple.`,
+                    `برأس مال ${capital} €، اجعل المركّبة تزيد على البسيطة بأكثر من ${target} €.`, `With €${big(capital, 'en')}, make compound interest beat simple interest by more than €${big(target, 'en')}.`
                 ),
                 hint: text(
                     'Tasa handia, urte asko eta, nahi baduzu, kapitalizazio maizagoa: aldea urtez urte hazten da.',
                     'Tipo alto, muchos años y, si quieres, capitalización más frecuente: la diferencia crece cada año.',
-                    'سعر مرتفع وسنوات كثيرة، وإن شئت رسملة أكثر تكرارًا: الفرق يكبر كل سنة.'
+                    'سعر مرتفع وسنوات كثيرة، وإن شئت رسملة أكثر تكرارًا: الفرق يكبر كل سنة.', 'A high rate, many years and, if you like, more frequent compounding: the difference grows every year.'
                 ),
                 isSolved: (state) => state.capital === capital && compoundAfter(state, state.years) - toNumber(simpleAfter(state, state.years)) > target,
                 solution
@@ -400,12 +401,12 @@ export const growthExtra: LabChallengeMaker<GrowthState> = freshFrom(initialGrow
             prompt: text(
                 `Interes konposatua, urtekoa: % ${rate}. Zenbat urtetan bikoizten da kapitala lehen aldiz?`,
                 `Al ${rate} % de interés compuesto anual, ¿en cuántos años se dobla el capital por primera vez?`,
-                `بفائدة مركّبة سنوية ${rate}٪: بعد كم سنة يتضاعف رأس المال أول مرة؟`
+                `بفائدة مركّبة سنوية ${rate}٪: بعد كم سنة يتضاعف رأس المال أول مرة؟`, `At ${rate}% compound annual interest, in how many years does the capital first double?`
             ),
             hint: text(
                 `Arau erabilgarria: $72\\mathbin{:}${rate}\\approx ${rule}$ urte inguru. Egiaztatu barrekin.`,
                 `Una regla útil: unos $72\\mathbin{:}${rate}\\approx ${rule}$ años. Compruébalo con las barras.`,
-                `قاعدة مفيدة: نحو $72\\mathbin{:}${rate}\\approx ${rule}$ سنة. تحقّق منها بالأعمدة.`
+                `قاعدة مفيدة: نحو $72\\mathbin{:}${rate}\\approx ${rule}$ سنة. تحقّق منها بالأعمدة.`, `A useful rule: about $72\\mathbin{:}${rate}\\approx ${rule}$ years. Check it with the bars.`
             ),
             isSolved: (state) => state.rate === rate && state.periods === 1 && compoundAfter(state, state.years) >= 2 * state.capital && compoundAfter(state, state.years - 1) < 2 * state.capital,
             solution: { capital: pick(random, GROWTH_CAPITALS), rate, years, periods: 1, prediction: null }
@@ -414,20 +415,20 @@ export const growthExtra: LabChallengeMaker<GrowthState> = freshFrom(initialGrow
     const solution: GrowthState = { capital: pick(random, GROWTH_CAPITALS), rate: pick(random, [4, 6, 8, 12]), years: randomInt(random, 1, 5), periods: pick(random, [2, 4, 12]), prediction: null }
     const { capital, rate, years, periods } = solution
     const names: Record<number, LocalizedText> = {
-        2: text('sei hilabetez behin', 'semestrales', 'نصف سنوية'),
-        4: text('hiru hilabetez behin', 'trimestrales', 'ربع سنوية'),
-        12: text('hilero', 'mensuales', 'شهرية')
+        2: text('sei hilabetez behin', 'semestrales', 'نصف سنوية', 'half-yearly'),
+        4: text('hiru hilabetez behin', 'trimestrales', 'ربع سنوية', 'quarterly'),
+        12: text('hilero', 'mensuales', 'شهرية', 'monthly')
     }
     return {
         prompt: text(
-            `Prestatu: ${big(capital)} €, % ${rate}, ${years} urte, interesak ${names[periods].eu}. Zenbat irabazten da gehiago urteko kapitalizazioarekin baino?`,
-            `Prepara ${big(capital)} € al ${rate} % durante ${years} ${years === 1 ? 'año' : 'años'}, con intereses ${names[periods].es}. ¿Cuánto ganas de más que con capitalización anual?`,
-            `جهّز: رأس المال ${capital} €، الفائدة ${rate}٪، عدد السنوات ${years}، والفوائد ${names[periods].ar}. كم تربح أكثر من الرسملة السنوية؟`
+            `Prestatu: ${big(capital, 'eu')} €, % ${rate}, ${years} urte, interesak ${names[periods].eu}. Zenbat irabazten da gehiago urteko kapitalizazioarekin baino?`,
+            `Prepara ${big(capital, 'es')} € al ${rate} % durante ${years} ${years === 1 ? 'año' : 'años'}, con intereses ${names[periods].es}. ¿Cuánto ganas de más que con capitalización anual?`,
+            `جهّز: رأس المال ${capital} €، الفائدة ${rate}٪، عدد السنوات ${years}، والفوائد ${names[periods].ar}. كم تربح أكثر من الرسملة السنوية؟`, `Set up €${big(capital, 'en')} at ${rate}% for ${years} ${years === 1 ? 'year' : 'years'}, with ${names[periods].en} interest. How much more do you earn than with annual compounding?`
         ),
         hint: text(
             `Aldi bakoitzean $\\frac{${rate}}{${periods}}$ ehuneko aplikatzen da, eta $${periods}\\cdot ${years}$ aldi daude.`,
             `En cada periodo se aplica $\\frac{${rate}}{${periods}}$ por ciento, y hay $${periods}\\cdot ${years}$ periodos.`,
-            `في كل فترة تُطبَّق $\\frac{${rate}}{${periods}}$ بالمئة، وعدد الفترات $${periods}\\cdot ${years}$.`
+            `في كل فترة تُطبَّق $\\frac{${rate}}{${periods}}$ بالمئة، وعدد الفترات $${periods}\\cdot ${years}$.`, `In each period, $\\frac{${rate}}{${periods}}$ per cent is applied, and there are $${periods}\\cdot ${years}$ periods.`
         ),
         isSolved: (state) => state.capital === capital && state.rate === rate && state.years === years && state.periods === periods,
         solution
@@ -455,17 +456,17 @@ export const mixtureExtra: LabChallengeMaker<MixtureState> = freshFrom(initialMi
             const total = a * low + b * high
             if (low >= high || gcd(a, b) !== 1 || total % (a + b) !== 0) continue
             const mean = total / (a + b)
-            const fineness = (thousandths: number, point = false) => { const text = String(thousandths / 1000); return point ? text : text.replace('.', ',') }
+            const fineness = (thousandths: number, language: string) => { const text = String(thousandths / 1000); return language === 'ar' ? text : text.replace('.', decimalSeparatorFor(language)) }
             return {
                 prompt: text(
-                    `Urtu urrea (purutasuna: ${fineness(low)}) eta urrea (purutasuna: ${fineness(high)}), ${fineness(mean)} purutasuneko lingote bat lortzeko.`,
-                    `Funde oro de ley ${fineness(low)} con oro de ley ${fineness(high)} para conseguir un lingote de ley ${fineness(mean)}.`,
-                    `اصهر ذهبًا عياره ${fineness(low, true)} مع ذهب عياره ${fineness(high, true)} لتحصل على سبيكة عيارها ${fineness(mean, true)}.`
+                    `Urtu urrea (purutasuna: ${fineness(low, 'eu')}) eta urrea (purutasuna: ${fineness(high, 'eu')}), ${fineness(mean, 'eu')} purutasuneko lingote bat lortzeko.`,
+                    `Funde oro de ley ${fineness(low, 'es')} con oro de ley ${fineness(high, 'es')} para conseguir un lingote de ley ${fineness(mean, 'es')}.`,
+                    `اصهر ذهبًا عياره ${fineness(low, 'ar')} مع ذهب عياره ${fineness(high, 'ar')} لتحصل على سبيكة عيارها ${fineness(mean, 'ar')}.`, `Melt gold of fineness ${fineness(low, 'en')} with gold of fineness ${fineness(high, 'en')} to make an ingot of fineness ${fineness(mean, 'en')}.`
                 ),
                 hint: text(
                     'Pisu handiena duen zatiaren purutasunetik hurbilago geratzen da: probatu kilo kopuru desberdinak.',
                     'La ley queda más cerca de la del trozo que pesa más: prueba con distintos kilos.',
-                    'يقترب العيار من عيار القطعة الأثقل: جرّب أوزانًا مختلفة.'
+                    'يقترب العيار من عيار القطعة الأثقل: جرّب أوزانًا مختلفة.', 'The fineness ends up closer to that of the piece that weighs more: try different amounts in kg.'
                 ),
                 isSolved: (state) => state.kind === 'alloy' && sameSet(state.prices, [low, high]) && equals(mixtureMean(state), n(mean)),
                 solution: { kind: 'alloy', kilos: [a, b], prices: [low, high], prediction: null }
@@ -482,14 +483,14 @@ export const mixtureExtra: LabChallengeMaker<MixtureState> = freshFrom(initialMi
             const mean = total / (a + b)
             return {
                 prompt: text(
-                    `Bi kafe: bat ${euros(cheap)} €/kg, bestea ${euros(dear)} €/kg. Nahastu, nahasketa ${euros(mean)} €/kg atera dadin.`,
-                    `Mezcla café de ${euros(cheap)} €/kg con café de ${euros(dear)} €/kg para que la mezcla salga a ${euros(mean)} €/kg.`,
-                    `بنّان: الأول ${euros(cheap, true)} €/كغ والثاني ${euros(dear, true)} €/كغ. اخلطهما ليصبح سعر الخليط ${euros(mean, true)} €/كغ.`
+                    `Bi kafe: bat ${euros(cheap, 'eu')} €/kg, bestea ${euros(dear, 'eu')} €/kg. Nahastu, nahasketa ${euros(mean, 'eu')} €/kg atera dadin.`,
+                    `Mezcla café de ${euros(cheap, 'es')} €/kg con café de ${euros(dear, 'es')} €/kg para que la mezcla salga a ${euros(mean, 'es')} €/kg.`,
+                    `بنّان: الأول ${euros(cheap, 'ar')} €/كغ والثاني ${euros(dear, 'ar')} €/كغ. اخلطهما ليصبح سعر الخليط ${euros(mean, 'ar')} €/كغ.`, `Mix coffee at €${euros(cheap, 'en')}/kg with coffee at €${euros(dear, 'en')}/kg so that the mixture comes out at €${euros(mean, 'en')}/kg.`
                 ),
                 hint: text(
                     `Kilo merke bakoitza prezio ertainetik $${eurosLatex(mean - cheap)}$ € beherago dago, eta garesti bakoitza $${eurosLatex(dear - mean)}$ € gorago: orekatu behar dira.`,
                     `Cada kilo del barato queda $${eurosLatex(mean - cheap)}$ € por debajo del precio medio, y cada kilo del caro, $${eurosLatex(dear - mean)}$ € por encima: tienen que compensarse.`,
-                    `كل كيلو من الرخيص أقل من السعر المتوسط بمقدار $${eurosLatex(mean - cheap)}$ €، وكل كيلو من الغالي أعلى منه بمقدار $${eurosLatex(dear - mean)}$ €: يجب أن يتوازنا.`
+                    `كل كيلو من الرخيص أقل من السعر المتوسط بمقدار $${eurosLatex(mean - cheap)}$ €، وكل كيلو من الغالي أعلى منه بمقدار $${eurosLatex(dear - mean)}$ €: يجب أن يتوازنا.`, `Each kilo of the cheap one is €$${eurosLatex(mean - cheap)}$ below the average price, and each kilo of the expensive one is €$${eurosLatex(dear - mean)}$ above it: they must balance out.`
                 ),
                 isSolved: (state) => coffee(state) && sameSet(state.prices, [cheap, dear]) && equals(mixturePrice(state), fraction(mean, 100)),
                 solution: { kind: 'coffee', kilos: [a, b], prices: [cheap, dear], prediction: null }
@@ -506,14 +507,14 @@ export const mixtureExtra: LabChallengeMaker<MixtureState> = freshFrom(initialMi
         const mean = total / (kilos + added)
         return {
             prompt: text(
-                `A kafea: ${kilos} kg, ${euros(first)} €/kg. B kafea: ${euros(second)} €/kg. Zenbat kg B gehitu behar dira, nahasketa ${euros(mean)} €/kg atera dadin?`,
-                `Café A: ${kilos} kg a ${euros(first)} €/kg. Café B: ${euros(second)} €/kg. ¿Cuántos kg de B hay que añadir para que la mezcla salga a ${euros(mean)} €/kg?`,
-                `البن أ: ${kilos} كغ بسعر ${euros(first, true)} €/كغ. البن ب: ${euros(second, true)} €/كغ. كم كيلوغرامًا من ب يجب إضافتها ليصبح سعر الخليط ${euros(mean, true)} €/كغ؟`
+                `A kafea: ${kilos} kg, ${euros(first, 'eu')} €/kg. B kafea: ${euros(second, 'eu')} €/kg. Zenbat kg B gehitu behar dira, nahasketa ${euros(mean, 'eu')} €/kg atera dadin?`,
+                `Café A: ${kilos} kg a ${euros(first, 'es')} €/kg. Café B: ${euros(second, 'es')} €/kg. ¿Cuántos kg de B hay que añadir para que la mezcla salga a ${euros(mean, 'es')} €/kg?`,
+                `البن أ: ${kilos} كغ بسعر ${euros(first, 'ar')} €/كغ. البن ب: ${euros(second, 'ar')} €/كغ. كم كيلوغرامًا من ب يجب إضافتها ليصبح سعر الخليط ${euros(mean, 'ar')} €/كغ؟`, `Coffee A: ${kilos} kg at €${euros(first, 'en')}/kg. Coffee B: €${euros(second, 'en')}/kg. How many kg of B do you need to add so that the mixture comes out at €${euros(mean, 'en')}/kg?`
             ),
             hint: text(
                 `Kostu osoa zati kilo guztiak: $\\frac{${kilos}\\cdot ${eurosLatex(first)}+${eurosLatex(second)}\\cdot x}{${kilos}+x}=${eurosLatex(mean)}$.`,
                 `Coste total entre kilos totales: $\\frac{${kilos}\\cdot ${eurosLatex(first)}+${eurosLatex(second)}\\cdot x}{${kilos}+x}=${eurosLatex(mean)}$.`,
-                `الكلفة الكلية على عدد الكيلوغرامات: $\\frac{${kilos}\\cdot ${eurosLatex(first)}+${eurosLatex(second)}\\cdot x}{${kilos}+x}=${eurosLatex(mean)}$.`
+                `الكلفة الكلية على عدد الكيلوغرامات: $\\frac{${kilos}\\cdot ${eurosLatex(first)}+${eurosLatex(second)}\\cdot x}{${kilos}+x}=${eurosLatex(mean)}$.`, `Total cost divided by total kilos: $\\frac{${kilos}\\cdot ${eurosLatex(first)}+${eurosLatex(second)}\\cdot x}{${kilos}+x}=${eurosLatex(mean)}$.`
             ),
             isSolved: (state) => coffee(state) && ([0, 1] as const).some((slot) => state.kilos[slot] === kilos && state.prices[slot] === first && state.prices[1 - slot] === second) && equals(mixturePrice(state), fraction(mean, 100)),
             solution: { kind: 'coffee', kilos: [kilos, added], prices: [first, second], prediction: null }
@@ -541,12 +542,12 @@ export const motionExtra: LabChallengeMaker<MotionState> = freshFrom(initialMoti
                 prompt: text(
                     `Elkarrengana: ${distance} km daude artean. A: ${fast} km/h; B: ${slow} km/h. Jarri erlojua gurutzatzen diren unean.`,
                     `Al encuentro: los separan ${distance} km; A va a ${fast} km/h y B, a ${slow} km/h. Pon el reloj en el momento en que se cruzan.`,
-                    `تلاقٍ: المسافة بينهما ${distance} كم؛ أ بسرعة ${fast} كم/س وب بسرعة ${slow} كم/س. ضع الساعة لحظة التقاطع.`
+                    `تلاقٍ: المسافة بينهما ${distance} كم؛ أ بسرعة ${fast} كم/س وب بسرعة ${slow} كم/س. ضع الساعة لحظة التقاطع.`, `Towards each other: they are ${distance} km apart; A goes at ${fast} km/h and B at ${slow} km/h. Set the clock to the moment they meet.`
                 ),
                 hint: text(
                     `Abiadura honetan hurbiltzen dira: $${fast}+${slow}=${sum}$ km/h. Denbora: $${distance}\\mathbin{:}${sum}$ h. Pasatu minututara.`,
                     `Se acercan a $${fast}+${slow}=${sum}$ km/h. Tiempo: $${distance}\\mathbin{:}${sum}$ h. Pásalo a minutos.`,
-                    `يقتربان بسرعة $${fast}+${slow}=${sum}$ كم/س. الزمن: $${distance}\\mathbin{:}${sum}$ س. حوّله إلى دقائق.`
+                    `يقتربان بسرعة $${fast}+${slow}=${sum}$ كم/س. الزمن: $${distance}\\mathbin{:}${sum}$ س. حوّله إلى دقائق.`, `They close in at $${fast}+${slow}=${sum}$ km/h. Time: $${distance}\\mathbin{:}${sum}$ h. Convert it to minutes.`
                 ),
                 isSolved: (state) => state.mode === 'meet' && state.distance === distance && state.speeds[0] === fast && state.speeds[1] === slow && atMeeting(state),
                 solution: { mode: 'meet', distance, speeds: [fast, slow], minutes, prediction: null }
@@ -560,12 +561,12 @@ export const motionExtra: LabChallengeMaker<MotionState> = freshFrom(initialMoti
                 prompt: text(
                     `Atzetik: A ${fast} km/h abiaduran; B ${distance} km aurrerago, ${slow} km/h abiaduran. Jarri erlojua A-k B harrapatzen duen unean.`,
                     `Persecución: A va a ${fast} km/h y B, ${distance} km por delante, a ${slow} km/h. Pon el reloj cuando A alcanza a B.`,
-                    `مطاردة: أ بسرعة ${fast} كم/س، وب أمامه بمسافة ${distance} كم بسرعة ${slow} كم/س. ضع الساعة لحظة لحاق أ بالمركبة ب.`
+                    `مطاردة: أ بسرعة ${fast} كم/س، وب أمامه بمسافة ${distance} كم بسرعة ${slow} كم/س. ضع الساعة لحظة لحاق أ بالمركبة ب.`, `Chase: A goes at ${fast} km/h and B, ${distance} km ahead, goes at ${slow} km/h. Set the clock when A catches B.`
                 ),
                 hint: text(
                     `A-k orduko hainbeste kilometro murrizten ditu: $${fast}-${slow}=${difference}$. Denbora: $${distance}\\mathbin{:}${difference}$ h.`,
                     `A recorta $${fast}-${slow}=${difference}$ km cada hora. Tiempo: $${distance}\\mathbin{:}${difference}$ h.`,
-                    `يقلّص أ المسافة $${fast}-${slow}=${difference}$ كم كل ساعة. الزمن: $${distance}\\mathbin{:}${difference}$ س.`
+                    `يقلّص أ المسافة $${fast}-${slow}=${difference}$ كم كل ساعة. الزمن: $${distance}\\mathbin{:}${difference}$ س.`, `A closes the gap by $${fast}-${slow}=${difference}$ km every hour. Time: $${distance}\\mathbin{:}${difference}$ h.`
                 ),
                 isSolved: (state) => state.mode === 'chase' && state.distance === distance && state.speeds[0] === fast && state.speeds[1] === slow && atMeeting(state),
                 solution: { mode: 'chase', distance, speeds: [fast, slow], minutes, prediction: null }
@@ -577,12 +578,12 @@ export const motionExtra: LabChallengeMaker<MotionState> = freshFrom(initialMoti
             prompt: text(
                 `Elkarrengana, ${distance} km artean: aukeratu abiadurak, zehazki ${minutes} minutu igarotzean gurutza daitezen.`,
                 `Al encuentro, con ${distance} km entre los dos: elige las velocidades para que se crucen justo a los ${minutes} minutos.`,
-                `في التلاقي، والمسافة بينهما ${distance} كم: اختر السرعتين ليتقاطعا بعد ${minutes} دقيقة تمامًا.`
+                `في التلاقي، والمسافة بينهما ${distance} كم: اختر السرعتين ليتقاطعا بعد ${minutes} دقيقة تمامًا.`, `Towards each other, with ${distance} km between them: choose the speeds so that they meet at exactly ${minutes} minutes.`
             ),
             hint: text(
                 `Abiaduren batura: $${distance}\\mathbin{:}\\frac{${minutes}}{60}$ km/h.`,
                 `La suma de las velocidades: $${distance}\\mathbin{:}\\frac{${minutes}}{60}$ km/h.`,
-                `مجموع السرعتين: $${distance}\\mathbin{:}\\frac{${minutes}}{60}$ كم/س.`
+                `مجموع السرعتين: $${distance}\\mathbin{:}\\frac{${minutes}}{60}$ كم/س.`, `The sum of the speeds: $${distance}\\mathbin{:}\\frac{${minutes}}{60}$ km/h.`
             ),
             isSolved: (state) => state.mode === 'meet' && state.distance === distance && equals(meetingMinutes(state) ?? n(-1), n(minutes)),
             solution: { mode: 'meet', distance, speeds: [fast, slow], minutes: 0, prediction: null }
@@ -597,7 +598,7 @@ function duration(hours: FractionValue): LocalizedText {
     const rest = minutes % 60
     const latin = whole === 0 ? `${rest} min` : rest === 0 ? `${whole} h` : `${whole} h ${rest} min`
     const arabic = whole === 0 ? `${rest} د` : rest === 0 ? `${whole} س` : `${whole} س ${rest} د`
-    return { eu: latin, es: latin, ar: arabic }
+    return { eu: latin, es: latin, en: latin, ar: arabic }
 }
 const wholeMinutes = (hours: FractionValue) => multiply(hours, n(60)).denominator === 1
 
@@ -616,12 +617,12 @@ export const tapsExtra: LabChallengeMaker<TapsState> = freshFrom(initialTapsStat
                 prompt: text(
                     `A txorrotak ${a} h behar ditu biltegia betetzeko. Aukeratu B txorrota, biek batera ${time.eu} behar izan dezaten.`,
                     `El grifo A llena el depósito en ${a} h. Elige el grifo B para que los dos juntos lo llenen en ${time.es}.`,
-                    `يملأ الصنبور أ الخزان في ${a} س. اختر الصنبور ب ليملآه معًا في ${time.ar}.`
+                    `يملأ الصنبور أ الخزان في ${a} س. اختر الصنبور ب ليملآه معًا في ${time.ar}.`, `Tap A fills the tank in ${a} h. Choose tap B so that both together fill it in ${time.en}.`
                 ),
                 hint: text(
                     `Biek batera $${fracLatex(rate)}$ betetzen dute orduko, eta A-k $\\frac{1}{${a}}$. Falta dena B-ren zatia da.`,
                     `Juntos llenan $${fracLatex(rate)}$ por hora, y A, $\\frac{1}{${a}}$. Lo que falta es la parte de B.`,
-                    `معًا يملآن $${fracLatex(rate)}$ في الساعة، وأ يملأ $\\frac{1}{${a}}$. الباقي هو جزء ب.`
+                    `معًا يملآن $${fracLatex(rate)}$ في الساعة، وأ يملأ $\\frac{1}{${a}}$. الباقي هو جزء ب.`, `Together they fill $${fracLatex(rate)}$ per hour, and A fills $\\frac{1}{${a}}$. What is left over is B's part.`
                 ),
                 isSolved: (state) => state.drain === 0 && state.taps[1] > 0 && state.taps.includes(a) && equals(fillHours(state) ?? n(0), hours),
                 solution
@@ -637,12 +638,12 @@ export const tapsExtra: LabChallengeMaker<TapsState> = freshFrom(initialTapsStat
             prompt: text(
                 `Txorrotak: ${a} h eta ${b} h. Ireki hustubidea, biltegia betetzeko zehazki ${time.eu} behar izan daitezen.`,
                 `Grifos de ${a} h y de ${b} h. Abre el desagüe para que el depósito tarde justo ${time.es} en llenarse.`,
-                `صنبوران: ${a} س و${b} س. افتح المصرف ليستغرق ملء الخزان ${time.ar} تمامًا.`
+                `صنبوران: ${a} س و${b} س. افتح المصرف ليستغرق ملء الخزان ${time.ar} تمامًا.`, `Taps taking ${a} h and ${b} h. Open the drain so that the tank takes exactly ${time.en} to fill.`
             ),
             hint: text(
                 `Orduko: $\\frac{1}{${a}}+\\frac{1}{${b}}-\\frac{1}{x}=${fracLatex(rate)}$.`,
                 `Por hora: $\\frac{1}{${a}}+\\frac{1}{${b}}-\\frac{1}{x}=${fracLatex(rate)}$.`,
-                `في الساعة: $\\frac{1}{${a}}+\\frac{1}{${b}}-\\frac{1}{x}=${fracLatex(rate)}$.`
+                `في الساعة: $\\frac{1}{${a}}+\\frac{1}{${b}}-\\frac{1}{x}=${fracLatex(rate)}$.`, `Per hour: $\\frac{1}{${a}}+\\frac{1}{${b}}-\\frac{1}{x}=${fracLatex(rate)}$.`
             ),
             isSolved: (state) => sameSet(state.taps, [a, b]) && state.drain > 0 && equals(fillHours(state) ?? n(0), hours),
             solution

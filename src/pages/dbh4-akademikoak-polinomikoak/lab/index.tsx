@@ -37,7 +37,7 @@ export function PolynomialAkLaboratory(props: {
             tools={polynomialAkLabTools}
             stages={polynomialAkStages}
             components={toolComponents}
-            title={{ eu: 'Mugitu, ebaki eta tolestu', es: 'Mueve, corta y dobla', ar: 'حرّك واقطع واطوِ' }}
+            title={{ eu: 'Mugitu, ebaki eta tolestu', es: 'Mueve, corta y dobla', en: 'Move, cut and fold', ar: 'حرّك واقطع واطوِ' }}
         />
     )
 }

@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
@@ -105,7 +106,7 @@ test('trigonometria 4. DBH ak lab: tools, topics and challenge ids', () => {
         assert.ok(stages.includes(tool.stage), tool.id)
         assert.ok(topicIds.includes(tool.lessonTopic), tool.id)
         assert.equal(trigonometryTopics.find((topic) => topic.id === tool.lessonTopic)?.stage, tool.stage, tool.id)
-        for (const language of ['eu', 'es', 'ar'] as const) assert.ok(!tool.observe[language].includes('$') && tool.observe[language].length > 0, tool.id)
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) assert.ok(!tool.observe[language].includes('$') && tool.observe[language].length > 0, tool.id)
     }
     for (const stage of stages) assert.equal(trigonometryLabTools.filter((tool) => tool.stage === stage).length, 2, stage)
     // Every lesson opens a tool of its own stage
@@ -119,10 +120,10 @@ test('trigonometria 4. DBH ak lab: tools, topics and challenge ids', () => {
     for (const challenges of allChallenges) {
         for (const challenge of challenges) {
             assert.ok(challenge.id >= 71001 && challenge.id <= 71999, `${challenge.id}`)
-            for (const language of ['eu', 'es', 'ar'] as const) {
+            for (const language of ['eu', 'es', 'en', 'ar'] as const) {
                 for (const text of [challenge.prompt[language], challenge.hint[language]]) {
                     assert.ok(!text.includes('\\sen') && !text.includes('\\tg'), `${challenge.id} ${language}: names not localized`)
-                    for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formula, { throwOnError: true })
+                    for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formulaFor(language, formula), { throwOnError: true })
                 }
             }
             assert.ok(!challenge.prompt.ar.includes('{,}') && !challenge.hint.ar.includes('{,}'), `${challenge.id}`)

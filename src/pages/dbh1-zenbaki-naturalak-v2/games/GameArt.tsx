@@ -1,8 +1,10 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
+import type { UnitLanguage } from '../../../features/unit-v2/types'
+import { formatNatural } from '../format'
 import type { NaturalsGameId } from './info'
 
 /** Small illustration of each natural numbers game, in the notebook style */
-export function NaturalsGameArt({ game }: { game: NaturalsGameId }) {
+export function NaturalsGameArt({ game, language }: { game: NaturalsGameId; language: UnitLanguage }) {
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
@@ -20,15 +22,16 @@ export function NaturalsGameArt({ game }: { game: NaturalsGameId }) {
         )
     }
     if (game === 'hunt') {
-        const values = ['27.310', '17.402', '41.700', '70.113', '93.705', '85.700', '12.706', '57.004']
+        const values = [27310, 17402, 41700, 70113, 93705, 85700, 12706, 57004]
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
                 {values.map((value, index) => {
-                    const hit = value[value.length - 3] === '7'
+                    const digits = String(value)
+                    const hit = digits[digits.length - 3] === '7'
                     return (
                         <g key={value}>
                             <rect x={8 + (index % 4) * 52} y={14 + Math.floor(index / 4) * 50} width="48" height="42" rx="9" fill={hit ? 'var(--blue-tint)' : '#fffcf6'} stroke="var(--ink)" strokeWidth={hit ? 2.4 : 1.6} />
-                            <text x={32 + (index % 4) * 52} y={40 + Math.floor(index / 4) * 50} textAnchor="middle" fontSize="11" fontWeight="700" fill="var(--ink)">{value}</text>
+                            <text x={32 + (index % 4) * 52} y={40 + Math.floor(index / 4) * 50} textAnchor="middle" fontSize="11" fontWeight="700" fill="var(--ink)">{formatNatural(value, language)}</text>
                         </g>
                     )
                 })}

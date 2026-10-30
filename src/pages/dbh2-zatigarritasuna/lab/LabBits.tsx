@@ -7,8 +7,8 @@ export function WholeAnswer(props: Omit<ComponentProps<typeof ResultAnswer>, 'pl
     return (
         <ResultAnswer
             {...props}
-            placeholder={{ eu: 'Adib.: 12', es: 'Ej.: 12', ar: 'مثال: 12' }}
-            unreadable={{ eu: 'Idatzi zenbaki oso bat, adibidez 12.', es: 'Escribe un número entero, por ejemplo 12.', ar: 'اكتب عددًا صحيحًا، مثل 12.' }}
+            placeholder={{ eu: 'Adib.: 12', es: 'Ej.: 12', en: 'E.g.: 12', ar: 'مثال: 12' }}
+            unreadable={{ eu: 'Idatzi zenbaki oso bat, adibidez 12.', es: 'Escribe un número entero, por ejemplo 12.', en: 'Write an integer, for example 12.', ar: 'اكتب عددًا صحيحًا، مثل 12.' }}
         />
     )
 }

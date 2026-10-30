@@ -48,7 +48,7 @@ export function IntegerIntroLaboratory(props: {
             tools={introLabTools}
             stages={integerIntroStages}
             components={toolComponents}
-            title={{ eu: 'Ukitu zenbaki osoak', es: 'Toca los números enteros', ar: 'المس الأعداد الصحيحة' }}
+            title={{ eu: 'Ukitu zenbaki osoak', es: 'Toca los números enteros', en: 'Touch the integers', ar: 'المس الأعداد الصحيحة' }}
         />
     )
 }

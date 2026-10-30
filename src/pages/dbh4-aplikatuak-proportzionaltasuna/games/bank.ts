@@ -32,7 +32,7 @@ export interface BankRound {
 
 export const BANK_ROUNDS = 6
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
 const math = (latex: string) => `$${latex}$`
 const percent = (rate: number) => math(`${num(rate)}\\,\\%`)
 const percentEu = (rate: number) => math(`\\%\\,${num(rate)}`)
@@ -135,32 +135,32 @@ export function bankStars(score: number): Stars {
 
 /* ---------- Texts ---------- */
 
-export const BANK_LETTERS = [say('A', 'A', 'أ'), say('B', 'B', 'ب'), say('C', 'C', 'ج')]
+export const BANK_LETTERS = [say('A', 'A', 'أ', 'A'), say('B', 'B', 'ب', 'B'), say('C', 'C', 'ج', 'C')]
 
 export const bankName = (index: number): LocalizedText => {
     const letter = BANK_LETTERS[index]
-    return { eu: `${letter.eu} bankua`, es: `Banco ${letter.es}`, ar: `المصرف ${letter.ar}` }
+    return { eu: `${letter.eu} bankua`, es: `Banco ${letter.es}`, en: `Bank ${letter.en}`, ar: `المصرف ${letter.ar}` }
 }
 
 export const bankPrompt = (round: BankRound) => say(
     `${math(num(round.capital))} € dituzu ${math(String(round.years))} urterako. Zein eskaintzak ematen dizu diru gehien?`,
     `Tienes ${math(num(round.capital))} € para ${math(String(round.years))} años. ¿Qué oferta te da más dinero?`,
-    `لديك ${math(num(round.capital))} € لمدة ${math(String(round.years))} سنوات. أي عرض يعطيك مالًا أكثر؟`
+    `لديك ${math(num(round.capital))} € لمدة ${math(String(round.years))} سنوات. أي عرض يعطيك مالًا أكثر؟`, `You have €${math(num(round.capital))} for ${math(String(round.years))} years. Which offer gives you more money?`
 )
 
 const PERIOD_TEXT: Record<BankPeriods, LocalizedText> = {
-    1: say('Interesak urtean behin', 'Intereses cada año', 'تُضاف الفوائد كل سنة'),
-    2: say('Interesak sei hilean behin', 'Intereses cada semestre', 'تُضاف الفوائد كل ستة أشهر'),
-    4: say('Interesak hiru hilean behin', 'Intereses cada trimestre', 'تُضاف الفوائد كل ثلاثة أشهر'),
-    12: say('Interesak hilean behin', 'Intereses cada mes', 'تُضاف الفوائد كل شهر')
+    1: say('Interesak urtean behin', 'Intereses cada año', 'تُضاف الفوائد كل سنة', 'Interest every year'),
+    2: say('Interesak sei hilean behin', 'Intereses cada semestre', 'تُضاف الفوائد كل ستة أشهر', 'Interest every six months'),
+    4: say('Interesak hiru hilean behin', 'Intereses cada trimestre', 'تُضاف الفوائد كل ثلاثة أشهر', 'Interest every three months'),
+    12: say('Interesak hilean behin', 'Intereses cada mes', 'تُضاف الفوائد كل شهر', 'Interest every month')
 }
 
 /** What the card of an offer says: the kind of interest, the rate and how often it is paid */
 export function bankOfferTexts(offer: BankOffer): [LocalizedText, LocalizedText, LocalizedText] {
     return [
-        offer.simple ? say('Interes bakuna', 'Interés simple', 'فائدة بسيطة') : say('Interes konposatua', 'Interés compuesto', 'فائدة مركّبة'),
-        say(`Urteko ${percentEu(offer.rate)}`, `${percent(offer.rate)} anual`, `${percent(offer.rate)} سنويًا`),
-        offer.simple ? say('Interesak ez dira kapitalari gehitzen', 'Los intereses no se suman al capital', 'لا تُضاف الفوائد إلى رأس المال') : PERIOD_TEXT[offer.periods]
+        offer.simple ? say('Interes bakuna', 'Interés simple', 'فائدة بسيطة', 'Simple interest') : say('Interes konposatua', 'Interés compuesto', 'فائدة مركّبة', 'Compound interest'),
+        say(`Urteko ${percentEu(offer.rate)}`, `${percent(offer.rate)} anual`, `${percent(offer.rate)} سنويًا`, `${percent(offer.rate)} a year`),
+        offer.simple ? say('Interesak ez dira kapitalari gehitzen', 'Los intereses no se suman al capital', 'لا تُضاف الفوائد إلى رأس المال', 'The interest is not added to the capital') : PERIOD_TEXT[offer.periods]
     ]
 }
 
@@ -184,38 +184,38 @@ export function bankLesson(round: BankRound): LocalizedText {
             ? say(
                 `${years} urtean, konposatuak irabazten du, tasa txikiagoa izan arren: interesek ere interesak sortzen dituzte.`,
                 `En ${years} años, el compuesto gana aunque su tipo sea menor: los intereses también dan intereses.`,
-                `في ${years} سنوات تربح المركّبة رغم أن سعرها أقل: الفوائد تُنتج فوائد أيضًا.`
+                `في ${years} سنوات تربح المركّبة رغم أن سعرها أقل: الفوائد تُنتج فوائد أيضًا.`, `In ${years} years, compound interest wins even with a lower rate: the interest also earns interest.`
             )
             : say(
                 'Tasa berdinarekin edo handiagoarekin, konposatuak irabazten du bigarren urtetik aurrera.',
                 'Con el mismo tipo o mayor, el compuesto gana a partir del segundo año.',
-                'بالسعر نفسه أو بسعر أعلى تربح المركّبة ابتداءً من السنة الثانية.'
+                'بالسعر نفسه أو بسعر أعلى تربح المركّبة ابتداءً من السنة الثانية.', 'With the same or a higher rate, compound interest wins from the second year onwards.'
             )
     }
     if (best.simple) {
         return say(
             `Hemen tasak gehiago balio du: ${years} urtean, interesen interesek ez dute aldea berdintzen.`,
             `Aquí pesa más el tipo: en ${years} años, el interés de los intereses no llega a compensarlo.`,
-            `هنا يغلب السعر: في ${years} سنوات لا تعوّضه فوائد الفوائد.`
+            `هنا يغلب السعر: في ${years} سنوات لا تعوّضه فوائد الفوائد.`, `Here the rate matters more: in ${years} years, the interest on the interest is not enough to make up for it.`
         )
     }
     if (best.periods > next.periods && best.rate <= next.rate) {
         return say(
             'Interesak maizago sartzeak zerbait gehiago ematen du, tasa berdina edo txikiagoa izan arren.',
             'Abonar los intereses más a menudo da un poco más, aunque el tipo sea igual o menor.',
-            'إضافة الفوائد بوتيرة أكبر تعطي أكثر قليلًا، ولو كان السعر مساويًا أو أقل.'
+            'إضافة الفوائد بوتيرة أكبر تعطي أكثر قليلًا، ولو كان السعر مساويًا أو أقل.', 'Adding interest more often gives a little more, even if the rate is the same or lower.'
         )
     }
     if (best.rate > next.rate && best.periods <= next.periods) {
         return say(
             'Hemen tasak gehiago balio du: interesak maizago sartzeak ez du tasa txikiagoa berdintzen.',
             'Aquí pesa más el tipo: abonar los intereses más a menudo no compensa un tipo menor.',
-            'هنا يغلب السعر: إضافة الفوائد بوتيرة أكبر لا تعوّض سعرًا أقل.'
+            'هنا يغلب السعر: إضافة الفوائد بوتيرة أكبر لا تعوّض سعرًا أقل.', 'Here the rate matters more: adding interest more often does not make up for a lower rate.'
         )
     }
     return say(
         'Tasa handiagoa eta interesak maizago: bi arrazoiengatik irabazten du.',
         'Tipo mayor e intereses más a menudo: gana por las dos cosas.',
-        'سعر أعلى وإضافة أكثر تواترًا: يربح للسببين.'
+        'سعر أعلى وإضافة أكثر تواترًا: يربح للسببين.', 'Higher rate and interest added more often: it wins for both reasons.'
     )
 }

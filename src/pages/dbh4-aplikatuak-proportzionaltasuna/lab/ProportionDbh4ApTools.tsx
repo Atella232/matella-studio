@@ -5,6 +5,7 @@ import { NumberField } from '../../../features/unit-v2/lab/NumberField'
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { fraction, toExactDecimal, toNumber, type FractionValue } from '../../../features/unit-v2/math/fraction'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { PredictionStep } from '../../dbh2-zatikiak-prototype/lab/PredictionStep'
 import {
@@ -76,15 +77,15 @@ const BLUE = '#2f6fdb'
 const CARD = 'var(--card, #fffcf6)'
 const GREY = '#d9d6cf'
 
-type Text = { eu: string; es: string; ar: string }
-const say = (eu: string, es: string, ar: string): Text => ({ eu, es, ar })
+type Text = { eu: string; es: string; en: string; ar: string }
+const say = (eu: string, es: string, ar: string, en: string): Text => ({ eu, es, en, ar })
 /** {,} in LaTeX becomes the point in Arabic */
 const localLatex = (language: string, latex: string) => (language === 'ar' ? latex.replace(/\{,\}/g, '.') : latex)
-/** Money or any number rounded to the cent, with the comma (point in Arabic) */
+/** Money or any number rounded to the cent, with the language's decimal mark (point in Arabic and English) */
 const money = (language: string, value: number) => {
     const rounded = cents(value)
     const text = Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(2)
-    return language === 'ar' ? text : text.replace('.', ',')
+    return language === 'ar' ? text : text.replace('.', decimalSeparatorFor(language))
 }
 /** The same for LaTeX */
 const moneyLatex = (value: number) => money('eu', value).replace(',', '{,}')
@@ -125,7 +126,7 @@ function Readout({ language, latex, note }: { language: string; latex: string; n
     )
 }
 
-const seeAfter = say('Iragarri lehenik; gero ikusiko duzu emaitza.', 'Primero predice; después verás el resultado.', 'توقّع أولًا، ثم سترى النتيجة.')
+const seeAfter = say('Iragarri lehenik; gero ikusiko duzu emaitza.', 'Primero predice; después verás el resultado.', 'توقّع أولًا، ثم سترى النتيجة.', 'First predict; then you will see the result.')
 
 /** The result waits behind a prediction, as in the Zatikiak tools */
 function Predict({ language, question, labels, actual, choice, tip, onChoose, children }: {
@@ -156,10 +157,10 @@ const Hidden = ({ x, y, size = 34 }: { x: number; y: number; size?: number }) =>
 /* ---------- 1. Simple or compound interest ---------- */
 
 const periodNames: Record<number, Text> = {
-    1: say('urtekoa', 'anual', 'سنوية'),
-    2: say('seihilekoa', 'semestral', 'نصف سنوية'),
-    4: say('hiruhilekoa', 'trimestral', 'ربع سنوية'),
-    12: say('hilekoa', 'mensual', 'شهرية')
+    1: say('urtekoa', 'anual', 'سنوية', 'annual'),
+    2: say('seihilekoa', 'semestral', 'نصف سنوية', 'half-yearly'),
+    4: say('hiruhilekoa', 'trimestral', 'ربع سنوية', 'quarterly'),
+    12: say('hilekoa', 'mensual', 'شهرية', 'monthly')
 }
 
 export function GrowthTool(props: LabToolProps) {
@@ -167,10 +168,10 @@ export function GrowthTool(props: LabToolProps) {
     const [state, setState] = useState<GrowthState>(initialGrowthState)
     const controls = (
         <>
-            <Segmented label={l(say('Kapitala', 'Capital', 'رأس المال'))} value={String(state.capital)} options={GROWTH_CAPITALS.map((capital) => ({ value: String(capital), label: `${capital} €` }))} onChange={(capital) => setState((s) => setGrowth(s, { capital: Number(capital) }))} />
-            <Stepper label={l(say('Interes-tasa (%)', 'Tipo de interés (%)', 'سعر الفائدة (٪)'))} value={state.rate} min={1} max={GROWTH_RATE_MAX} onChange={(rate) => setState((s) => setGrowth(s, { rate }))} language={props.language} />
-            <Stepper label={l(say('Urteak', 'Años', 'السنوات'))} value={state.years} min={1} max={GROWTH_YEARS_MAX} onChange={(years) => setState((s) => setGrowth(s, { years }))} language={props.language} />
-            <Segmented label={l(say('Kapitalizazioa (k)', 'Capitalización (k)', 'الرسملة (k)'))} value={String(state.periods)} options={GROWTH_PERIODS.map((k) => ({ value: String(k), label: `${k} · ${l(periodNames[k])}` }))} onChange={(periods) => setState((s) => setGrowth(s, { periods: Number(periods) }))} />
+            <Segmented label={l(say('Kapitala', 'Capital', 'رأس المال', 'Capital'))} value={String(state.capital)} options={GROWTH_CAPITALS.map((capital) => ({ value: String(capital), label: `${capital} €` }))} onChange={(capital) => setState((s) => setGrowth(s, { capital: Number(capital) }))} />
+            <Stepper label={l(say('Interes-tasa (%)', 'Tipo de interés (%)', 'سعر الفائدة (٪)', 'Interest rate (%)'))} value={state.rate} min={1} max={GROWTH_RATE_MAX} onChange={(rate) => setState((s) => setGrowth(s, { rate }))} language={props.language} />
+            <Stepper label={l(say('Urteak', 'Años', 'السنوات', 'Years'))} value={state.years} min={1} max={GROWTH_YEARS_MAX} onChange={(years) => setState((s) => setGrowth(s, { years }))} language={props.language} />
+            <Segmented label={l(say('Kapitalizazioa (k)', 'Capitalización (k)', 'الرسملة (k)', 'Compounding (k)'))} value={String(state.periods)} options={GROWTH_PERIODS.map((k) => ({ value: String(k), label: `${k} · ${l(periodNames[k])}` }))} onChange={(periods) => setState((s) => setGrowth(s, { periods: Number(periods) }))} />
         </>
     )
     const shown = state.prediction !== null
@@ -185,7 +186,7 @@ export function GrowthTool(props: LabToolProps) {
     const note = l(say(
         `Bakuna: ${money('eu', finalSimple)} €. Konposatua: ${money('eu', finalCompound)} €. Gehiagoko ${money('eu', finalCompound - finalSimple)} € interesen interesa da.`,
         `Simple: ${money('es', finalSimple)} €. Compuesto: ${money('es', finalCompound)} €. Los ${money('es', finalCompound - finalSimple)} € de más son el interés de los intereses.`,
-        `البسيطة: ${money('ar', finalSimple)} €. المركّبة: ${money('ar', finalCompound)} €. والزيادة ${money('ar', finalCompound - finalSimple)} € هي فائدة الفوائد.`
+        `البسيطة: ${money('ar', finalSimple)} €. المركّبة: ${money('ar', finalCompound)} €. والزيادة ${money('ar', finalCompound - finalSimple)} € هي فائدة الفوائد.`, `Simple: €${money('en', finalSimple)}. Compound: €${money('en', finalCompound)}. The extra €${money('en', finalCompound - finalSimple)} is interest on interest.`
     ))
     const growthPlayback = usePlayback(`${state.capital}-${state.rate}-${state.years}-${state.periods}`, 450 * state.years + 300)
     const rule = Math.round((72 / state.rate) * 10) / 10
@@ -193,14 +194,14 @@ export function GrowthTool(props: LabToolProps) {
     const readout = (
         <Predict
             language={props.language}
-            question={say('Emaitza ikusi aurretik: amaieran, konposatua kapitalaren bikoitzera iritsiko da?', 'Antes de ver el resultado: al final, ¿el compuesto llegará al doble del capital?', 'قبل رؤية النتيجة: في النهاية، هل تبلغ المركّبة ضعف رأس المال؟')}
-            labels={{ '<': say('Ez da iristen', 'No llega', 'لا تبلغه'), '=': say('Justu bikoitza', 'Justo el doble', 'الضعف تمامًا'), '>': say('Gainditzen du', 'Lo pasa', 'تتجاوزه') }}
+            question={say('Emaitza ikusi aurretik: amaieran, konposatua kapitalaren bikoitzera iritsiko da?', 'Antes de ver el resultado: al final, ¿el compuesto llegará al doble del capital?', 'قبل رؤية النتيجة: في النهاية، هل تبلغ المركّبة ضعف رأس المال؟', 'Before you see the result: at the end, will compound interest reach double the capital?')}
+            labels={{ '<': say('Ez da iristen', 'No llega', 'لا تبلغه', 'It doesn\'t reach it'), '=': say('Justu bikoitza', 'Justo el doble', 'الضعف تمامًا', 'Exactly double'), '>': say('Gainditzen du', 'Lo pasa', 'تتجاوزه', 'It goes past it') }}
             actual={growthPrediction(state)}
             choice={state.prediction}
             tip={say(
                 `Arau erabilgarria: interes-tasa % ${state.rate} bada, dirua $${ruleLatex}$ urtetan bikoizten da, gutxi gorabehera. Hemen: ${state.years} urte.`,
                 `Una regla útil: al ${state.rate} %, el dinero se dobla en unos $${ruleLatex}$ años. Aquí son ${state.years}.`,
-                `قاعدة مفيدة: بفائدة ${state.rate}٪ يتضاعف المال في نحو $${ruleLatex}$ سنة. وهنا عدد السنوات ${state.years}.`
+                `قاعدة مفيدة: بفائدة ${state.rate}٪ يتضاعف المال في نحو $${ruleLatex}$ سنة. وهنا عدد السنوات ${state.years}.`, `A useful rule: at ${state.rate}%, money doubles in about $${ruleLatex}$ years. Here it is ${state.years}.`
             )}
             onChoose={(prediction) => setState((s) => setPrediction(s, prediction))}
         >
@@ -220,13 +221,13 @@ export function GrowthTool(props: LabToolProps) {
         height > 0.2 && <rect x={x} y={bottom - height} width={bar} height={height} fill={fill} fillOpacity={opacity} stroke={INK} strokeWidth={1.1} />
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={growthChallenges} extraChallenges={growthExtra} state={state}>
-            <Board height={252} label={l(say('Kapitala, kapitalaren interesa eta interesen interesa urtez urte', 'Capital, interés del capital e interés de los intereses año a año', 'رأس المال وفائدته وفائدة الفوائد سنة بعد سنة'))}>
+            <Board height={252} label={l(say('Kapitala, kapitalaren interesa eta interesen interesa urtez urte', 'Capital, interés del capital e interés de los intereses año a año', 'رأس المال وفائدته وفائدة الفوائد سنة بعد سنة', 'Capital, interest on capital and interest on interest, year by year'))}>
                 <rect x={10} y={6} width={13} height={13} fill={GREY} stroke={INK} />
-                <Label x={28} y={17} fontSize={14} fontWeight={700} fill={MUTED}>{`${l(say('kapitala', 'capital', 'رأس المال'))}: \u2066${state.capital} €\u2069`}</Label>
+                <Label x={28} y={17} fontSize={14} fontWeight={700} fill={MUTED}>{`${l(say('kapitala', 'capital', 'رأس المال', 'capital'))}: \u2066${state.capital} €\u2069`}</Label>
                 <rect x={170} y={6} width={13} height={13} fill={BLUE} fillOpacity={0.45} stroke={INK} />
-                <Label x={188} y={17} fontSize={14} fontWeight={700} fill={BLUE}>{l(say('kapitalaren interesa', 'interés del capital', 'فائدة رأس المال'))}</Label>
+                <Label x={188} y={17} fontSize={14} fontWeight={700} fill={BLUE}>{l(say('kapitalaren interesa', 'interés del capital', 'فائدة رأس المال', 'interest on capital'))}</Label>
                 <rect x={10} y={25} width={13} height={13} fill={GREEN} fillOpacity={0.65} stroke={INK} />
-                <Label x={28} y={36} fontSize={14} fontWeight={700} fill={GREEN}>{l(say('interesen interesa', 'interés de los intereses', 'فائدة الفوائد'))}</Label>
+                <Label x={28} y={36} fontSize={14} fontWeight={700} fill={GREEN}>{l(say('interesen interesa', 'interés de los intereses', 'فائدة الفوائد', 'interest on interest'))}</Label>
                 <line x1={20} x2={354} y1={base} y2={base} stroke={INK} strokeWidth={2} />
                 {years.map((year) => {
                     const x = 28 + year * slot + slot / 2
@@ -251,21 +252,21 @@ export function GrowthTool(props: LabToolProps) {
                 {shown
                     ? visible === state.years && <text x={Math.min(lastX, 352)} y={base - capitalHeight - (finalCompound - state.capital) * scale - 7} textAnchor={lastX > 330 ? 'end' : 'middle'} fontSize={15} fontWeight={700} fill={GREEN}>{money(props.language, finalCompound)}</text>
                     : <Hidden x={200} y={130} />}
-                <Label x={10} y={246} fontSize={13} fill={MUTED}>{l(say('Ezkerrean bakuna; eskuinean konposatua.', 'A la izquierda, simple; a la derecha, compuesto.', 'على اليسار البسيطة، وعلى اليمين المركّبة.'))}</Label>
-                <Label x={352} y={246} textAnchor="end" fontSize={13} fill={MUTED}>{l(say('urteak', 'años', 'السنوات'))}</Label>
+                <Label x={10} y={246} fontSize={13} fill={MUTED}>{l(say('Ezkerrean bakuna; eskuinean konposatua.', 'A la izquierda, simple; a la derecha, compuesto.', 'على اليسار البسيطة، وعلى اليمين المركّبة.', 'On the left, simple; on the right, compound.'))}</Label>
+                <Label x={352} y={246} textAnchor="end" fontSize={13} fill={MUTED}>{l(say('urteak', 'años', 'السنوات', 'years'))}</Label>
             </Board>
-            <PlayButton disabled={!shown} playing={growthPlayback.playing} onPlay={growthPlayback.play} label={l(say('Urtez urte', 'Año a año', 'سنة بعد سنة'))} />
+            <PlayButton disabled={!shown} playing={growthPlayback.playing} onPlay={growthPlayback.play} label={l(say('Urtez urte', 'Año a año', 'سنة بعد سنة', 'Year by year'))} />
         </ToolFrame>
     )
 }
 
 /* ---------- 2. The mixture ---------- */
 
-/** Fineness of gold for a sentence: 850 thousandths → 0,85 (0.85 in Arabic); means are rounded to the thousandths */
+/** Fineness of gold for a sentence: 850 thousandths → 0,85 (0.85 in Arabic and English); means are rounded to the thousandths */
 const fineness = (language: string, thousandths: number) => {
     const rounded = Math.round(thousandths) / 1000
     const text = String(rounded)
-    return language === 'ar' ? text : text.replace('.', ',')
+    return language === 'ar' ? text : text.replace('.', decimalSeparatorFor(language))
 }
 
 export function MixtureTool(props: LabToolProps) {
@@ -276,12 +277,12 @@ export function MixtureTool(props: LabToolProps) {
     const valueLatex = (value: number) => (gold ? fineness('eu', value) : money('eu', value / 100)).replace(',', '{,}')
     const controls = (
         <>
-            <Segmented label={l(say('Zer nahasten da?', '¿Qué se mezcla?', 'ماذا نخلط؟'))} value={state.kind} options={[{ value: 'coffee', label: l(say('Kafea', 'Café', 'البن')) }, { value: 'alloy', label: l(say('Urrea', 'Oro', 'الذهب')) }]} onChange={(kind) => setState((s) => setMixture(s, { kind: kind as MixtureKind }))} />
+            <Segmented label={l(say('Zer nahasten da?', '¿Qué se mezcla?', 'ماذا نخلط؟', 'What is being mixed?'))} value={state.kind} options={[{ value: 'coffee', label: l(say('Kafea', 'Café', 'البن', 'Coffee')) }, { value: 'alloy', label: l(say('Urrea', 'Oro', 'الذهب', 'Gold')) }]} onChange={(kind) => setState((s) => setMixture(s, { kind: kind as MixtureKind }))} />
             {[0, 1].map((index) => (
                 <Fragment key={index}>
                     <Stepper label={`${index === 0 ? 'A' : 'B'} · kg`} value={state.kilos[index]} min={1} max={MIXTURE_KILOS_MAX} onChange={(kilos) => setState((s) => setMixture(s, { kilos: [index as 0 | 1, kilos] }))} language={props.language} />
                     <Segmented
-                        label={gold ? `${index === 0 ? 'A' : 'B'} · ${l(say('purutasuna', 'ley', 'العيار'))}` : `${index === 0 ? 'A' : 'B'} · €/kg`}
+                        label={gold ? `${index === 0 ? 'A' : 'B'} · ${l(say('purutasuna', 'ley', 'العيار', 'fineness'))}` : `${index === 0 ? 'A' : 'B'} · €/kg`}
                         value={String(state.prices[index])}
                         options={(gold ? ALLOY_PURITIES : MIXTURE_PRICES).map((value) => ({ value: String(value), label: gold ? valueText(value) : `${valueText(value)} €` }))}
                         onChange={(price) => setState((s) => setMixture(s, { price: [index as 0 | 1, Number(price)] }))}
@@ -300,8 +301,8 @@ export function MixtureTool(props: LabToolProps) {
         const pure = (ka * pa + kb * pb) / 1000
         const exact = Number.isInteger(meanValue)
         latex = `\\frac{${ka}\\cdot ${valueLatex(pa)}+${kb}\\cdot ${valueLatex(pb)}}{${ka + kb}}=\\frac{${String(pure).replace('.', '{,}')}}{${ka + kb}}${exact ? '=' : '\\approx '}${valueLatex(meanValue)}`
-        const pureText = props.language === 'ar' ? String(pure) : String(pure).replace('.', ',')
-        note = l(say(`${ka + kb} kg urre, eta horietatik ${pureText} kg urre garbia: purutasuna ${valueText(meanValue)}.`, `${ka + kb} kg de oro, de los que ${pureText} kg son oro puro: ley ${valueText(meanValue)}.`, `${ka + kb} كغ من الذهب، منها ${pureText} كغ ذهب خالص: العيار ${valueText(meanValue)}.`))
+        const pureText = props.language === 'ar' ? String(pure) : String(pure).replace('.', decimalSeparatorFor(props.language))
+        note = l(say(`${ka + kb} kg urre, eta horietatik ${pureText} kg urre garbia: purutasuna ${valueText(meanValue)}.`, `${ka + kb} kg de oro, de los que ${pureText} kg son oro puro: ley ${valueText(meanValue)}.`, `${ka + kb} كغ من الذهب، منها ${pureText} كغ ذهب خالص: العيار ${valueText(meanValue)}.`, `${ka + kb} kg of gold, of which ${pureText} kg are pure gold: fineness ${valueText(meanValue)}.`))
     } else {
         const cost = mixtureCost(state)
         const mean = mixturePrice(state)
@@ -309,7 +310,7 @@ export function MixtureTool(props: LabToolProps) {
         note = l(say(
             `${ka + kb} kg: ${money('eu', toNumber(cost))} €. Kiloa: ${money('eu', toNumber(mean))} €.`,
             `${ka + kb} kg cuestan ${money('es', toNumber(cost))} €: ${money('es', toNumber(mean))} €/kg.`,
-            `${ka + kb} كغ تكلّف ${money('ar', toNumber(cost))} €، أي ${money('ar', toNumber(mean))} € للكيلوغرام.`
+            `${ka + kb} كغ تكلّف ${money('ar', toNumber(cost))} €، أي ${money('ar', toNumber(mean))} € للكيلوغرام.`, `${ka + kb} kg cost €${money('en', toNumber(cost))}: €${money('en', toNumber(mean))}/kg.`
         ))
     }
     // The seesaw: kilos times the distance to the support are equal on both sides
@@ -317,19 +318,19 @@ export function MixtureTool(props: LabToolProps) {
     // Written exactly only when the mean is a whole number of cents (or thousandths); otherwise the distances are rounded
     const exactMean = Math.abs(meanValue - Math.round(meanValue)) < 1e-9
     const balance = `\u2066${ka} · ${distance(pa)} ${exactMean ? '=' : '≈'} ${kb} · ${distance(pb)}\u2069`
-    const balanceNote = l(say(` Balantza: ${balance} (kiloak bider distantzia).`, ` Balancín: ${balance} (kilos por distancia).`, ` الميزان: ${balance} (الكيلوغرامات في المسافة).`))
+    const balanceNote = l(say(` Balantza: ${balance} (kiloak bider distantzia).`, ` Balancín: ${balance} (kilos por distancia).`, ` الميزان: ${balance} (الكيلوغرامات في المسافة).`, ` Seesaw: ${balance} (kilos times distance).`))
     const readout = (
         <Predict
             language={props.language}
-            question={say('Emaitza ikusi aurretik: non geratuko da balantzaren euskarria?', 'Antes de ver el resultado: ¿dónde quedará el apoyo del balancín?', 'قبل رؤية النتيجة: أين ستقع نقطة ارتكاز الميزان؟')}
+            question={say('Emaitza ikusi aurretik: non geratuko da balantzaren euskarria?', 'Antes de ver el resultado: ¿dónde quedará el apoyo del balancín?', 'قبل رؤية النتيجة: أين ستقع نقطة ارتكاز الميزان؟', 'Before you see the result: where will the seesaw\'s pivot end up?')}
             labels={gold
-                ? { '<': say('Purutasun txikirantz', 'Hacia la ley baja', 'نحو العيار الأدنى'), '=': say('Justu erdian', 'Justo en medio', 'في المنتصف تمامًا'), '>': say('Purutasun handirantz', 'Hacia la ley alta', 'نحو العيار الأعلى') }
-                : { '<': say('Merkerantz', 'Hacia el barato', 'نحو الرخيص'), '=': say('Justu erdian', 'Justo en medio', 'في المنتصف تمامًا'), '>': say('Garestirantz', 'Hacia el caro', 'نحو الغالي') }}
+                ? { '<': say('Purutasun txikirantz', 'Hacia la ley baja', 'نحو العيار الأدنى', 'Towards low fineness'), '=': say('Justu erdian', 'Justo en medio', 'في المنتصف تمامًا', 'Exactly in the middle'), '>': say('Purutasun handirantz', 'Hacia la ley alta', 'نحو العيار الأعلى', 'Towards high fineness') }
+                : { '<': say('Merkerantz', 'Hacia el barato', 'نحو الرخيص', 'Towards the cheap one'), '=': say('Justu erdian', 'Justo en medio', 'في المنتصف تمامًا', 'Exactly in the middle'), '>': say('Garestirantz', 'Hacia el caro', 'نحو الغالي', 'Towards the expensive one') }}
             actual={mixturePrediction(state)}
             choice={state.prediction}
             tip={gold
-                ? say('Aleazioaren purutasuna pisu handiena duen zatiarenera hurbiltzen da; kilo berdinekin, erdian geratzen da.', 'La ley de la aleación se acerca a la del trozo que pesa más; con los mismos kilos, queda justo en medio.', 'يقترب عيار السبيكة من عيار القطعة الأثقل؛ وبوزنين متساويين يقع في المنتصف تمامًا.')
-                : say('Prezio ertaina kilo gehien dituen produktura hurbiltzen da; kilo berdinekin, justu erdian geratzen da.', 'El precio medio se acerca al producto del que hay más kilos; con los mismos kilos, queda justo en medio.', 'يقترب السعر المتوسط من المنتج الذي كمّيته أكبر؛ وبكميتين متساويتين يقع في المنتصف تمامًا.')}
+                ? say('Aleazioaren purutasuna pisu handiena duen zatiarenera hurbiltzen da; kilo berdinekin, erdian geratzen da.', 'La ley de la aleación se acerca a la del trozo que pesa más; con los mismos kilos, queda justo en medio.', 'يقترب عيار السبيكة من عيار القطعة الأثقل؛ وبوزنين متساويين يقع في المنتصف تمامًا.', 'The fineness of the alloy is closer to that of the piece that weighs more; with equal weights, it ends up exactly in the middle.')
+                : say('Prezio ertaina kilo gehien dituen produktura hurbiltzen da; kilo berdinekin, justu erdian geratzen da.', 'El precio medio se acerca al producto del que hay más kilos; con los mismos kilos, queda justo en medio.', 'يقترب السعر المتوسط من المنتج الذي كمّيته أكبر؛ وبكميتين متساويتين يقع في المنتصف تمامًا.', 'The average price is closer to the one you have more kilos of; with equal kilos, it is exactly in the middle.')}
             onChoose={(prediction) => setState((s) => setPrediction(s, prediction))}
         >
             <Readout language={props.language} latex={latex} note={`${note}${balanceNote}`} />
@@ -348,7 +349,7 @@ export function MixtureTool(props: LabToolProps) {
     const ends = gold ? [700, 1000] : [500, 1500]
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={mixtureChallenges} extraChallenges={mixtureExtra} state={state}>
-            <Board height={228} label={l(gold ? say('Bi urre-zati balantza batean', 'Dos trozos de oro en un balancín', 'قطعتا ذهب على ميزان') : say('Bi kafe balantza batean', 'Dos cafés en un balancín', 'نوعان من البن على ميزان'))}>
+            <Board height={228} label={l(gold ? say('Bi urre-zati balantza batean', 'Dos trozos de oro en un balancín', 'قطعتا ذهب على ميزان', 'Two pieces of gold on a balance') : say('Bi kafe balantza batean', 'Dos cafés en un balancín', 'نوعان من البن على ميزان', 'Two coffees on a seesaw'))}>
                 {[0, 1].map((index) => {
                     const x = loadX[index]
                     const height = 22 + state.kilos[index] * 2
@@ -385,7 +386,7 @@ export function MixtureTool(props: LabToolProps) {
                                     </g>
                                 )
                             })}
-                            <text x={Math.min(300, Math.max(60, meanX))} y={beam + 96} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{gold ? `${l(say('purutasuna', 'ley', 'العيار'))} ${valueText(meanValue)}` : `${valueText(meanValue)} €/kg`}</text>
+                            <text x={Math.min(300, Math.max(60, meanX))} y={beam + 96} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{gold ? `${l(say('purutasuna', 'ley', 'العيار', 'fineness'))} ${valueText(meanValue)}` : `${valueText(meanValue)} €/kg`}</text>
                         </>
                     )
                     : <Hidden x={180} y={beam + 70} size={28} />}
@@ -412,12 +413,12 @@ export function MotionTool(props: LabToolProps) {
     const [state, setState] = useState<MotionState>(initialMotionState)
     const controls = (
         <>
-            <Segmented label={l(say('Nola', 'Cómo', 'كيف'))} value={state.mode} options={[{ value: 'meet', label: l(say('Elkarrengana', 'Al encuentro', 'تلاقٍ')) }, { value: 'chase', label: l(say('Atzetik', 'Persecución', 'مطاردة')) }]} onChange={(mode) => setState((s) => setMotion(s, { mode: mode as MotionMode }))} />
-            <Segmented label={l(say('Distantzia (km)', 'Distancia (km)', 'المسافة (كم)'))} value={String(state.distance)} options={MOTION_DISTANCES.map((distance) => ({ value: String(distance), label: String(distance) }))} onChange={(distance) => setState((s) => setMotion(s, { distance: Number(distance) }))} />
+            <Segmented label={l(say('Nola', 'Cómo', 'كيف', 'How'))} value={state.mode} options={[{ value: 'meet', label: l(say('Elkarrengana', 'Al encuentro', 'تلاقٍ', 'Towards each other')) }, { value: 'chase', label: l(say('Atzetik', 'Persecución', 'مطاردة', 'Chase')) }]} onChange={(mode) => setState((s) => setMotion(s, { mode: mode as MotionMode }))} />
+            <Segmented label={l(say('Distantzia (km)', 'Distancia (km)', 'المسافة (كم)', 'Distance (km)'))} value={String(state.distance)} options={MOTION_DISTANCES.map((distance) => ({ value: String(distance), label: String(distance) }))} onChange={(distance) => setState((s) => setMotion(s, { distance: Number(distance) }))} />
             <Stepper label="A · km/h" value={state.speeds[0]} min={SPEED_MIN} max={SPEED_MAX} step={SPEED_STEP} onChange={(speed) => setState((s) => setMotion(s, { speed: [0, speed] }))} language={props.language} />
             <Stepper label="B · km/h" value={state.speeds[1]} min={SPEED_MIN} max={SPEED_MAX} step={SPEED_STEP} onChange={(speed) => setState((s) => setMotion(s, { speed: [1, speed] }))} language={props.language} />
             {/* The minutes are typed: a meeting after 225 minutes would take 45 taps of five */}
-            <NumberField label={l(say('Erlojua (min)', 'Reloj (min)', 'الساعة (د)'))} value={state.minutes} min={0} max={CLOCK_MAX} onChange={(minutes) => setState((s) => setMotion(s, { minutes }))} language={props.language} />
+            <NumberField label={l(say('Erlojua (min)', 'Reloj (min)', 'الساعة (د)', 'Clock (min)'))} value={state.minutes} min={0} max={CLOCK_MAX} onChange={(minutes) => setState((s) => setMotion(s, { minutes }))} language={props.language} />
         </>
     )
     const meeting = meetingMinutes(state)
@@ -431,13 +432,13 @@ export function MotionTool(props: LabToolProps) {
     const gap = Math.abs(toNumber(b) - toNumber(a))
     const when = meeting === null ? '' : hoursText(toNumber(meeting) / 60, props.language)
     const note = meeting === null
-        ? l(say('Ez dira inoiz elkartzen: aurrekoa ez da motelagoa.', 'No se encuentran nunca: el de delante no es más lento.', 'لن يلتقيا أبدًا: الأمامي ليس أبطأ.'))
+        ? l(say('Ez dira inoiz elkartzen: aurrekoa ez da motelagoa.', 'No se encuentran nunca: el de delante no es más lento.', 'لن يلتقيا أبدًا: الأمامي ليس أبطأ.', 'They never meet: the one in front is not slower.'))
         : atMeeting(state)
-            ? l(say(`Elkartu dira! ${when} igaro dira.`, `¡Se encuentran! Al cabo de ${when}.`, `التقيا! بعد ${when}.`))
+            ? l(say(`Elkartu dira! ${when} igaro dira.`, `¡Se encuentran! Al cabo de ${when}.`, `التقيا! بعد ${when}.`, `They meet! After ${when}.`))
             : l(say(
                 `${state.minutes} min: ${money('eu', gap)} km falta dira. Elkartzeko: ${when}.`,
                 `${state.minutes} min: faltan ${money('es', gap)} km. Se encuentran al cabo de ${when}.`,
-                `بعد ${state.minutes} د: بقي ${money('ar', gap)} كم. يلتقيان بعد ${when}.`
+                `بعد ${state.minutes} د: بقي ${money('ar', gap)} كم. يلتقيان بعد ${when}.`, `${state.minutes} min: ${money('en', gap)} km still to go. They meet after ${when}.`
             ))
     const actual = motionPrediction(state)
     const result = <Readout language={props.language} latex={latex} note={note} />
@@ -446,13 +447,13 @@ export function MotionTool(props: LabToolProps) {
         : (
             <Predict
                 language={props.language}
-                question={say('Emaitza ikusi aurretik: noiz elkartuko dira?', 'Antes de ver el resultado: ¿cuándo se encontrarán?', 'قبل رؤية النتيجة: متى سيلتقيان؟')}
-                labels={{ '<': say('Ordubete baino lehen', 'Antes de 1 h', 'قبل ساعة'), '=': say('Justu ordubetean', 'Justo en 1 h', 'بعد ساعة تمامًا'), '>': say('Ordubete baino geroago', 'Después de 1 h', 'بعد أكثر من ساعة') }}
+                question={say('Emaitza ikusi aurretik: noiz elkartuko dira?', 'Antes de ver el resultado: ¿cuándo se encontrarán?', 'قبل رؤية النتيجة: متى سيلتقيان؟', 'Before you see the result: when will they meet?')}
+                labels={{ '<': say('Ordubete baino lehen', 'Antes de 1 h', 'قبل ساعة', 'Before 1 h'), '=': say('Justu ordubetean', 'Justo en 1 h', 'بعد ساعة تمامًا', 'Exactly at 1 h'), '>': say('Ordubete baino geroago', 'Después de 1 h', 'بعد أكثر من ساعة', 'After 1 h') }}
                 actual={actual}
                 choice={state.prediction}
                 tip={state.mode === 'meet'
-                    ? say(`Ordubetean $${v1}+${v2}=${speed}$ km hurbiltzen dira, eta ${state.distance} km daude artean.`, `En una hora se acercan $${v1}+${v2}=${speed}$ km, y los separan ${state.distance} km.`, `في ساعة يقتربان $${v1}+${v2}=${speed}$ كم، والمسافة بينهما ${state.distance} كم.`)
-                    : say(`Ordubetean A-k $${v1}-${v2}=${speed}$ km murrizten ditu, eta B ${state.distance} km aurrerago doa.`, `En una hora A recorta $${v1}-${v2}=${speed}$ km, y B va ${state.distance} km por delante.`, `في ساعة يقلّص أ المسافة $${v1}-${v2}=${speed}$ كم، وب أمامه بمسافة ${state.distance} كم.`)}
+                    ? say(`Ordubetean $${v1}+${v2}=${speed}$ km hurbiltzen dira, eta ${state.distance} km daude artean.`, `En una hora se acercan $${v1}+${v2}=${speed}$ km, y los separan ${state.distance} km.`, `في ساعة يقتربان $${v1}+${v2}=${speed}$ كم، والمسافة بينهما ${state.distance} كم.`, `In one hour they close in by $${v1}+${v2}=${speed}$ km, and they are ${state.distance} km apart.`)
+                    : say(`Ordubetean A-k $${v1}-${v2}=${speed}$ km murrizten ditu, eta B ${state.distance} km aurrerago doa.`, `En una hora A recorta $${v1}-${v2}=${speed}$ km, y B va ${state.distance} km por delante.`, `في ساعة يقلّص أ المسافة $${v1}-${v2}=${speed}$ كم، وب أمامه بمسافة ${state.distance} كم.`, `In one hour A closes the gap by $${v1}-${v2}=${speed}$ km, and B is ${state.distance} km ahead.`)}
                 onChoose={(prediction) => setState((s) => setPrediction(s, prediction))}
             >
                 {result}
@@ -471,7 +472,7 @@ export function MotionTool(props: LabToolProps) {
     const road = (km: number) => 20 + (Math.max(0, Math.min(km, far)) / far) * 316
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={motionChallenges} extraChallenges={motionExtra} state={state}>
-            <Board height={150} label={l(say('Errepidea eta bi ibilgailuak', 'La carretera y los dos vehículos', 'الطريق والمركبتان'))}>
+            <Board height={150} label={l(say('Errepidea eta bi ibilgailuak', 'La carretera y los dos vehículos', 'الطريق والمركبتان', 'The road and the two vehicles'))}>
                 <line x1={12} x2={348} y1={88} y2={88} stroke={INK} strokeWidth={3} />
                 <line x1={12} x2={348} y1={88} y2={88} stroke={CARD} strokeWidth={1} strokeDasharray="10 10" />
                 <line x1={road(0)} x2={road(0)} y1={80} y2={98} stroke={STAGE} strokeWidth={2} />
@@ -485,7 +486,7 @@ export function MotionTool(props: LabToolProps) {
                 <text x={road(bKm)} y={Math.abs(road(bKm) - road(aKm)) < 22 ? 22 : 42} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>B</text>
                 <text x={180} y={142} textAnchor="middle" fontSize={17} fontWeight={700} fill={met ? GREEN : INK}>{race.progress === null ? `${state.minutes} min` : hoursText(clock / 60)}</text>
             </Board>
-            <PlayButton disabled={actual !== null && state.prediction === null} playing={race.playing} onPlay={race.play} label={l(say('Ikusi bidaia', 'Ver el viaje', 'شاهد الرحلة'))} />
+            <PlayButton disabled={actual !== null && state.prediction === null} playing={race.playing} onPlay={race.play} label={l(say('Ikusi bidaia', 'Ver el viaje', 'شاهد الرحلة', 'Watch the journey'))} />
         </ToolFrame>
     )
 }
@@ -495,12 +496,12 @@ export function MotionTool(props: LabToolProps) {
 export function TapsTool(props: LabToolProps) {
     const l = useLabText(props.language)
     const [state, setState] = useState<TapsState>(initialTapsState)
-    const closed = l(say('itxita', 'cerrado', 'مغلق'))
+    const closed = l(say('itxita', 'cerrado', 'مغلق', 'closed'))
     const controls = (
         <>
-            <Stepper label={l(say('A txorrota (h)', 'Grifo A (h)', 'الصنبور أ (س)'))} value={state.taps[0]} min={1} max={TAP_HOURS_MAX} onChange={(hours) => setState((s) => setTaps(s, { tap: [0, hours] }))} language={props.language} />
-            <Stepper label={l(say('B txorrota (h)', 'Grifo B (h)', 'الصنبور ب (س)'))} value={state.taps[1]} min={0} max={TAP_HOURS_MAX} format={(hours) => (hours === 0 ? closed : String(hours))} onChange={(hours) => setState((s) => setTaps(s, { tap: [1, hours] }))} language={props.language} />
-            <Stepper label={l(say('Hustubidea (h)', 'Desagüe (h)', 'المصرف (س)'))} value={state.drain} min={0} max={TAP_HOURS_MAX} format={(hours) => (hours === 0 ? closed : String(hours))} onChange={(drain) => setState((s) => setTaps(s, { drain }))} language={props.language} />
+            <Stepper label={l(say('A txorrota (h)', 'Grifo A (h)', 'الصنبور أ (س)', 'Tap A (h)'))} value={state.taps[0]} min={1} max={TAP_HOURS_MAX} onChange={(hours) => setState((s) => setTaps(s, { tap: [0, hours] }))} language={props.language} />
+            <Stepper label={l(say('B txorrota (h)', 'Grifo B (h)', 'الصنبور ب (س)', 'Tap B (h)'))} value={state.taps[1]} min={0} max={TAP_HOURS_MAX} format={(hours) => (hours === 0 ? closed : String(hours))} onChange={(hours) => setState((s) => setTaps(s, { tap: [1, hours] }))} language={props.language} />
+            <Stepper label={l(say('Hustubidea (h)', 'Desagüe (h)', 'المصرف (س)', 'Drain (h)'))} value={state.drain} min={0} max={TAP_HOURS_MAX} format={(hours) => (hours === 0 ? closed : String(hours))} onChange={(drain) => setState((s) => setTaps(s, { drain }))} language={props.language} />
         </>
     )
     const shown = state.prediction !== null
@@ -509,23 +510,23 @@ export function TapsTool(props: LabToolProps) {
     const terms = [`\\frac{1}{${state.taps[0]}}`, ...(state.taps[1] > 0 ? [`+\\frac{1}{${state.taps[1]}}`] : []), ...(state.drain > 0 ? [`-\\frac{1}{${state.drain}}`] : [])].join('')
     const latex = `${terms}=${exactLatex(rate)}${hours ? `\\ \\to\\ ${exactLatex(hours)}\\ \\text{h}` : ''}`
     const note = hours
-        ? l(say(`Biltegia ${hoursText(toNumber(hours))} igarotzean betetzen da.`, `El depósito se llena en ${hoursText(toNumber(hours))}.`, `يمتلئ الخزان في ${hoursText(toNumber(hours), 'ar')}.`))
-        : l(say('Hustubideak sartzen dena baino gehiago ateratzen du: ez da inoiz beteko.', 'El desagüe saca más de lo que entra: no se llenará nunca.', 'يُخرج المصرف أكثر مما يدخل: لن يمتلئ أبدًا.'))
+        ? l(say(`Biltegia ${hoursText(toNumber(hours))} igarotzean betetzen da.`, `El depósito se llena en ${hoursText(toNumber(hours))}.`, `يمتلئ الخزان في ${hoursText(toNumber(hours), 'ar')}.`, `The tank fills in ${hoursText(toNumber(hours))}.`))
+        : l(say('Hustubideak sartzen dena baino gehiago ateratzen du: ez da inoiz beteko.', 'El desagüe saca más de lo que entra: no se llenará nunca.', 'يُخرج المصرف أكثر مما يدخل: لن يمتلئ أبدًا.', 'The drain takes out more than comes in: it will never fill up.'))
     const readout = (
         <Predict
             language={props.language}
             question={say(
                 `Emaitza ikusi aurretik: txorrota azkarrenak bakarrik ${fastestTap(state)} h behar ditu. Biltegia lehenago beteko da?`,
                 `Antes de ver el resultado: el grifo más rápido solo tarda ${fastestTap(state)} h. ¿Se llenará antes?`,
-                `قبل رؤية النتيجة: الصنبور الأسرع وحده يحتاج إلى ${fastestTap(state)} س. هل يمتلئ الخزان أسرع؟`
+                `قبل رؤية النتيجة: الصنبور الأسرع وحده يحتاج إلى ${fastestTap(state)} س. هل يمتلئ الخزان أسرع؟`, `Before you see the result: the fastest tap on its own takes ${fastestTap(state)} h. Will it fill up sooner?`
             )}
-            labels={{ '<': say('Lehenago', 'Antes', 'أسرع'), '=': say('Berdin', 'Igual', 'بالقدر نفسه'), '>': say('Geroago, edo inoiz ez', 'Después, o nunca', 'أبطأ، أو لا يمتلئ') }}
+            labels={{ '<': say('Lehenago', 'Antes', 'أسرع', 'Sooner'), '=': say('Berdin', 'Igual', 'بالقدر نفسه', 'Same'), '>': say('Geroago, edo inoiz ez', 'Después, o nunca', 'أبطأ، أو لا يمتلئ', 'Later, or never') }}
             actual={tapsPrediction(state)}
             choice={state.prediction}
             tip={say(
                 'Irekitako txorrota bakoitzak bere zatia gehitzen du ordu bakoitzean: biek batera azkarrena bakarrik baino lehenago betetzen dute. Hustubideak kendu egiten du, eta geroago bete daiteke, edo inoiz ez.',
                 'Cada grifo abierto suma su parte de cada hora: juntos llenan antes que el más rápido solo. El desagüe resta, y puede hacer que tarde más, o que no se llene nunca.',
-                'كل صنبور مفتوح يضيف جزءه في كل ساعة: معًا يملآن أسرع من الأسرع وحده. أما المصرف فيطرح، وقد يجعل الملء أبطأ أو مستحيلًا.'
+                'كل صنبور مفتوح يضيف جزءه في كل ساعة: معًا يملآن أسرع من الأسرع وحده. أما المصرف فيطرح، وقد يجعل الملء أبطأ أو مستحيلًا.', 'Each open tap adds its share of each hour: together they fill the tank faster than the fastest one alone. The drain takes away, and it can make it take longer, or mean it never fills up.'
             )}
             onChoose={(prediction) => setState((s) => setPrediction(s, prediction))}
         >
@@ -550,8 +551,8 @@ export function TapsTool(props: LabToolProps) {
     ]
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={tapsChallenges} extraChallenges={tapsExtra} state={state}>
-            <Board height={216} label={l(say('Ordu bateko zatiak eta biltegia', 'Las partes de una hora y el depósito', 'أجزاء الساعة والخزان'))}>
-                <Label x={12} y={20} fontSize={14} fontWeight={700} fill={MUTED}>{l(say('Ordu batean', 'En una hora', 'في ساعة'))}</Label>
+            <Board height={216} label={l(say('Ordu bateko zatiak eta biltegia', 'Las partes de una hora y el depósito', 'أجزاء الساعة والخزان', 'Parts of an hour and the tank'))}>
+                <Label x={12} y={20} fontSize={14} fontWeight={700} fill={MUTED}>{l(say('Ordu batean', 'En una hora', 'في ساعة', 'In one hour'))}</Label>
                 {parts.map((part, index) => {
                     const y = 34 + index * 40
                     const width = Math.abs(part.width) * 160
@@ -575,7 +576,7 @@ export function TapsTool(props: LabToolProps) {
                     ? <text x={tankX + 66} y={tankY + tankHeight + 20} textAnchor="middle" fontSize={15} fontWeight={700} fill={hours ? STAGE : SECOND}>{hours ? hoursText(filling ? elapsed : toNumber(hours)) : '∞'}</text>
                     : <Hidden x={tankX + 66} y={tankY + tankHeight / 2 + 12} />}
             </Board>
-            <PlayButton disabled={!shown || hours === null} playing={filling} onPlay={fill.play} label={l(say('Bete biltegia', 'Llenar el depósito', 'املأ الخزان'))} />
+            <PlayButton disabled={!shown || hours === null} playing={filling} onPlay={fill.play} label={l(say('Bete biltegia', 'Llenar el depósito', 'املأ الخزان', 'Fill the tank'))} />
         </ToolFrame>
     )
 }

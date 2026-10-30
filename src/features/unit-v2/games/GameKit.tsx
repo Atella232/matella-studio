@@ -10,7 +10,7 @@ type PrototypeLanguage = UnitLanguage
 export function StarRow({ stars, language, size = 20, count = 3 }: { stars: number; language: PrototypeLanguage; size?: number; count?: number }) {
     const l = useGameText(language)
     return (
-        <span className="fraction-v2-stars" role="img" aria-label={count === 3 ? l({ eu: `${stars} izar 3tik`, es: `${stars} de 3 estrellas`, ar: `${stars} من 3 نجوم` }) : undefined} aria-hidden={count === 3 ? undefined : true}>
+        <span className="fraction-v2-stars" role="img" aria-label={count === 3 ? l({ eu: `${stars} izar 3tik`, es: `${stars} de 3 estrellas`, en: `${stars} of 3 stars`, ar: `${stars} من 3 نجوم` }) : undefined} aria-hidden={count === 3 ? undefined : true}>
             {Array.from({ length: count }, (_, index) => index).map((index) => (
                 <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden="true" className={index < stars ? 'on' : ''} key={index}>
                     <path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.1l-5.7 3.2 1.2-6.4-4.7-4.4 6.4-.8z" />
@@ -26,7 +26,7 @@ export function GameTopbar({ game, language, onExit, children }: { game: GameInf
         <div className="fraction-v2-game-topbar">
             <button type="button" className="fraction-v2-game-back" onClick={onExit}>
                 <Icon name="back" size={18} className="fraction-v2-icon-flip" />
-                {l({ eu: 'Jokoak', es: 'Juegos', ar: 'الألعاب' })}
+                {l({ eu: 'Jokoak', es: 'Juegos', en: 'Games', ar: 'الألعاب' })}
             </button>
             <h1>{l(game.title)}</h1>
             {children && <div className="fraction-v2-game-stats">{children}</div>}
@@ -71,7 +71,7 @@ export function LevelPicker({
                 </div>
             </div>
             <h2 className="fraction-v2-game-levels-title">
-                {levelsTitle ?? l({ eu: 'Aukeratu maila', es: 'Elige nivel', ar: 'اختر المستوى' })}
+                {levelsTitle ?? l({ eu: 'Aukeratu maila', es: 'Elige nivel', en: 'Choose a level', ar: 'اختر المستوى' })}
             </h2>
             <ol className="fraction-v2-game-levels">
                 {game.levels.map((level, index) => {
@@ -85,7 +85,7 @@ export function LevelPicker({
                                 <span className="fraction-v2-game-level-foot">
                                     <StarRow stars={record?.stars ?? 0} language={language} size={18} />
                                     {record && <small>{bestLabel(record)}</small>}
-                                    {!record && index === nextLevel && <small>{l({ eu: 'Gomendatua', es: 'Recomendado', ar: 'مُوصى به' })}</small>}
+                                    {!record && index === nextLevel && <small>{l({ eu: 'Gomendatua', es: 'Recomendado', en: 'Recommended', ar: 'مُوصى به' })}</small>}
                                 </span>
                             </button>
                         </li>
@@ -133,9 +133,9 @@ export function ResultPanel({
             </dl>
             {children}
             <div className="fraction-v2-game-result-actions">
-                <button type="button" className="fraction-v2-primary" onClick={onReplay}>{l({ eu: 'Berriro jokatu', es: 'Jugar otra vez', ar: 'العب مجددًا' })}</button>
-                {onNext && <button type="button" className="fraction-v2-secondary" onClick={onNext}>{l({ eu: 'Hurrengo maila', es: 'Siguiente nivel', ar: 'المستوى التالي' })}</button>}
-                <button type="button" className="fraction-v2-secondary" onClick={onLevels}>{l({ eu: 'Beste maila bat', es: 'Otro nivel', ar: 'مستوى آخر' })}</button>
+                <button type="button" className="fraction-v2-primary" onClick={onReplay}>{l({ eu: 'Berriro jokatu', es: 'Jugar otra vez', en: 'Play again', ar: 'العب مجددًا' })}</button>
+                {onNext && <button type="button" className="fraction-v2-secondary" onClick={onNext}>{l({ eu: 'Hurrengo maila', es: 'Siguiente nivel', en: 'Next level', ar: 'المستوى التالي' })}</button>}
+                <button type="button" className="fraction-v2-secondary" onClick={onLevels}>{l({ eu: 'Beste maila bat', es: 'Otro nivel', en: 'Another level', ar: 'مستوى آخر' })}</button>
             </div>
         </section>
     )

@@ -5,6 +5,7 @@ import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { fraction, type FractionValue } from '../../../features/unit-v2/math/fraction'
 import type { LocalizedText, UnitLanguage } from '../../../features/unit-v2/types'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import { evaluate, polyLatex, ruffini, tartaglia, type Poly } from '../polynomials'
 import {
     BINOMIAL_LIMITS,
@@ -80,7 +81,7 @@ const GREEN_TINT = '#d6eddf'
 const MUSTARD_TINT = 'var(--mustard-tint, #fbebc0)'
 const PAPER = '#fffcf6'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 /** Negative numbers with the true minus sign */
 const signed = (value: number) => (value < 0 ? `−${-value}` : String(value))
 const SUPERSCRIPT: Record<string, string> = { 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' }
@@ -93,7 +94,7 @@ const plain = (latex: string) => latex
 /** A fraction in LaTeX */
 const texFraction = (value: FractionValue) => (value.denominator === 1 ? String(value.numerator) : `${value.numerator < 0 ? '-' : ''}\\frac{${Math.abs(value.numerator)}}{${value.denominator}}`)
 const textFraction = (value: FractionValue) => (value.denominator === 1 ? signed(value.numerator) : `${signed(value.numerator)}/${value.denominator}`)
-const decimal = (value: number, language: UnitLanguage) => signed(Math.round(value * 10) / 10).replace('.', language === 'ar' ? '.' : ',')
+const decimal = (value: number, language: UnitLanguage) => signed(Math.round(value * 10) / 10).replace('.', language === 'ar' ? '.' : decimalSeparatorFor(language))
 /** A denominator as the learner writes it: expanded when it is one factor, else the factors */
 const FACTOR_NAMES = ['x', 'x − 1', 'x + 1', 'x + 2']
 
@@ -168,12 +169,12 @@ export function BinomialTool(props: LabToolProps) {
     )
     const sum = binomialSum(state)
     const latex = `(x${state.b < 0 ? '-' : '+'}${Math.abs(state.b)})^{${state.n}}\\ \\to\\ (1${state.b < 0 ? '-' : '+'}${Math.abs(state.b)})^{${state.n}}=${sum}`
-    const note = l(say(`${state.n}. errenkada: ${row.join(' ')}. Koefizienteen batura: ${signed(sum)}.`, `Fila ${state.n}: ${row.join(' ')}. Los coeficientes suman ${signed(sum)}.`, `الصف ${state.n}: ${row.join(' ')}. مجموع المعاملات ${signed(sum)}.`))
+    const note = l(say(`${state.n}. errenkada: ${row.join(' ')}. Koefizienteen batura: ${signed(sum)}.`, `Fila ${state.n}: ${row.join(' ')}. Los coeficientes suman ${signed(sum)}.`, `الصف ${state.n}: ${row.join(' ')}. مجموع المعاملات ${signed(sum)}.`, `Row ${state.n}: ${row.join(' ')}. The coefficients add up to ${signed(sum)}.`))
     const cell = Math.min(78, 600 / (state.n + 1))
     const x0 = 320 - (cell * (state.n + 1)) / 2
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={binomialChallenges} state={state}>
-            <Board height={300} label={l(say('Tartagliaren triangelua eta garapena', 'Triángulo de Tartaglia y desarrollo', 'مثلث تارتاليا والنشر'))}>
+            <Board height={300} label={l(say('Tartagliaren triangelua eta garapena', 'Triángulo de Tartaglia y desarrollo', 'مثلث تارتاليا والنشر', 'Tartaglia\'s triangle and expansion'))}>
                 {Array.from({ length: state.n + 1 }, (_, r) => tartaglia(r).map((value, k) => (
                     <Text key={`${r}-${k}`} x={320 + (k - r / 2) * 40} y={24 + r * 22} size={r === state.n ? 16 : 14} color={r === state.n ? SECOND : MUTED} weight={r === state.n ? 700 : 400}>{value}</Text>
                 )))}
@@ -230,7 +231,7 @@ export function ParameterTool(props: LabToolProps) {
     const [slope, constant] = remainderInM(state)
     const controls = (
         <>
-            <Segmented label={l(say('Polinomioa', 'Polinomio', 'الحدودية'))} value={String(state.family)} options={parameterFamilies.map((_, index) => ({ value: String(index), label: `P${index + 1}` }))} onChange={(family) => setState((s) => setParameter(s, { family: Number(family) }))} />
+            <Segmented label={l(say('Polinomioa', 'Polinomio', 'الحدودية', 'Polynomial'))} value={String(state.family)} options={parameterFamilies.map((_, index) => ({ value: String(index), label: `P${index + 1}` }))} onChange={(family) => setState((s) => setParameter(s, { family: Number(family) }))} />
             <p className="fraction-v2-lab-tip"><MathText text={`$P(x)=${parameterFamilies[state.family].latex}$`} /></p>
             <Stepper label="m" value={state.m} min={PARAMETER_LIMITS.m.min} max={PARAMETER_LIMITS.m.max} format={signed} onChange={(m) => setState((s) => setParameter(s, { m }))} language={props.language} />
             <Stepper label="a" value={state.a} min={PARAMETER_LIMITS.a.min} max={PARAMETER_LIMITS.a.max} format={signed} onChange={(a) => setState((s) => setParameter(s, { a }))} language={props.language} />
@@ -239,11 +240,11 @@ export function ParameterTool(props: LabToolProps) {
     const inM = polyLatex([slope, constant], 'm')
     const latex = `R=P(${state.a})=${inM}=${remainder}`
     const note = remainder === 0
-        ? l(say(`Hondarra 0: x − a = ${plain(`x${state.a < 0 ? '+' : '-'}${Math.abs(state.a)}`)} faktorea da.`, `Resto 0: ${plain(`x${state.a < 0 ? '+' : '-'}${Math.abs(state.a)}`)} es un factor.`, `الباقي 0: ${plain(`x${state.a < 0 ? '+' : '-'}${Math.abs(state.a)}`)} عامل.`))
-        : l(say(`m = ${signed(state.m)} denean. m bat handitzean, hondarra ${signed(slope)} aldatzen da.`, `Con m = ${signed(state.m)}. Si m sube 1, el resto cambia ${signed(slope)}.`, `عندما m = ${signed(state.m)}. إذا زادت m بواحد تغيّر الباقي بمقدار ${signed(slope)}.`))
+        ? l(say(`Hondarra 0: x − a = ${plain(`x${state.a < 0 ? '+' : '-'}${Math.abs(state.a)}`)} faktorea da.`, `Resto 0: ${plain(`x${state.a < 0 ? '+' : '-'}${Math.abs(state.a)}`)} es un factor.`, `الباقي 0: ${plain(`x${state.a < 0 ? '+' : '-'}${Math.abs(state.a)}`)} عامل.`, `Remainder 0: ${plain(`x${state.a < 0 ? '+' : '-'}${Math.abs(state.a)}`)} is a factor.`))
+        : l(say(`m = ${signed(state.m)} denean. m bat handitzean, hondarra ${signed(slope)} aldatzen da.`, `Con m = ${signed(state.m)}. Si m sube 1, el resto cambia ${signed(slope)}.`, `عندما m = ${signed(state.m)}. إذا زادت m بواحد تغيّر الباقي بمقدار ${signed(slope)}.`, `With m = ${signed(state.m)}. If m goes up by 1, the remainder changes by ${signed(slope)}.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={parameterChallenges} state={state}>
-            <Board height={210} label={l(say('Ruffini parametroarekin', 'Ruffini con parámetro', 'روفيني مع وسيط'))}>
+            <Board height={210} label={l(say('Ruffini parametroarekin', 'Ruffini con parámetro', 'روفيني مع وسيط', 'Ruffini with a parameter'))}>
                 <Text x={320} y={24} size={17} color={MUTED} weight={400}>{`P(x) = ${plain(polyLatex(coefficients))}`}</Text>
                 <RuffiniBoard coefficients={coefficients} a={state.a} y={66} />
                 <Text x={320} y={200} size={16} color={STAGE}>{`R = ${plain(inM)}`}</Text>
@@ -268,14 +269,14 @@ export function QuadraticTool(props: LabToolProps) {
         </>
     )
     const latex = factors.latex ? `${polynomial}=${factors.latex}` : `\\Delta=${delta}`
-    const roots = factors.roots.map(textFraction).join(l(say(' eta ', ' y ', ' و')))
+    const roots = factors.roots.map(textFraction).join(l(say(' eta ', ' y ', ' و', ' and ')))
     const note = factors.kind === 'irreducible'
-        ? l(say(`Δ = ${signed(delta)} < 0: ez du erro errealik, irreduziblea da.`, `Δ = ${signed(delta)} < 0: no tiene raíces reales, es irreducible.`, `Δ = ${signed(delta)} < 0: لا جذور حقيقية، غير قابلة للتحليل.`))
+        ? l(say(`Δ = ${signed(delta)} < 0: ez du erro errealik, irreduziblea da.`, `Δ = ${signed(delta)} < 0: no tiene raíces reales, es irreducible.`, `Δ = ${signed(delta)} < 0: لا جذور حقيقية، غير قابلة للتحليل.`, `Δ = ${signed(delta)} < 0: it has no real roots, so it is irreducible.`))
         : factors.kind === 'irrational'
-            ? l(say(`Δ = ${delta} ez da karratu perfektua: erro irrazionalak, ez dago faktore osorik.`, `Δ = ${delta} no es un cuadrado perfecto: raíces irracionales, sin factores enteros.`, `Δ = ${delta} ليس مربعًا تامًا: جذور غير نسبية ولا عوامل صحيحة.`))
+            ? l(say(`Δ = ${delta} ez da karratu perfektua: erro irrazionalak, ez dago faktore osorik.`, `Δ = ${delta} no es un cuadrado perfecto: raíces irracionales, sin factores enteros.`, `Δ = ${delta} ليس مربعًا تامًا: جذور غير نسبية ولا عوامل صحيحة.`, `Δ = ${delta} is not a perfect square: irrational roots, no integer factors.`))
             : factors.kind === 'double'
-                ? l(say(`Δ = 0: erro bikoitza ${roots}.`, `Δ = 0: raíz doble ${roots}.`, `Δ = 0: جذر مضاعف ${roots}.`))
-                : l(say(`Δ = ${delta}: erroak ${roots}.`, `Δ = ${delta}: raíces ${roots}.`, `Δ = ${delta}: الجذران ${roots}.`))
+                ? l(say(`Δ = 0: erro bikoitza ${roots}.`, `Δ = 0: raíz doble ${roots}.`, `Δ = 0: جذر مضاعف ${roots}.`, `Δ = 0: double root ${roots}.`))
+                : l(say(`Δ = ${delta}: erroak ${roots}.`, `Δ = ${delta}: raíces ${roots}.`, `Δ = ${delta}: الجذران ${roots}.`, `Δ = ${delta}: roots ${roots}.`))
     // The graph of y = ax² + bx + c for −5 ≤ x ≤ 5
     const ox = 320
     const oy = 110
@@ -288,7 +289,7 @@ export function QuadraticTool(props: LabToolProps) {
         : factors.kind === 'irrational' ? [(-state.b - Math.sqrt(delta)) / (2 * state.a), (-state.b + Math.sqrt(delta)) / (2 * state.a)] : []
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={quadraticChallenges} state={state}>
-            <Board height={220} label={l(say('Parabola eta haren erroak', 'La parábola y sus raíces', 'القطع المكافئ وجذوره'))}>
+            <Board height={220} label={l(say('Parabola eta haren erroak', 'La parábola y sus raíces', 'القطع المكافئ وجذوره', 'The parabola and its roots'))}>
                 <defs><clipPath id="quadratic-clip"><rect x={0} y={0} width={640} height={220} /></clipPath></defs>
                 <line x1={40} x2={600} y1={oy} y2={oy} stroke={INK} strokeWidth={1.6} />
                 <line x1={ox} x2={ox} y1={6} y2={214} stroke={INK} strokeWidth={1.2} />
@@ -310,27 +311,27 @@ export function GcdTool(props: LabToolProps) {
     const lcm = lcmOf(state.p, state.q)
     const controls = (
         <>
-            <Segmented label={l(say('Aldatu', 'Cambia', 'غيّر'))} value={editing} options={[{ value: 'p', label: 'P' }, { value: 'q', label: 'Q' }]} onChange={(value) => setEditing(value as 'p' | 'q')} />
+            <Segmented label={l(say('Aldatu', 'Cambia', 'غيّر', 'Change'))} value={editing} options={[{ value: 'p', label: 'P' }, { value: 'q', label: 'Q' }]} onChange={(value) => setEditing(value as 'p' | 'q')} />
             <FactorSteppers exponents={state[editing]} onChange={(index, value) => setState((s) => setGcd(s, editing, index, value))} language={props.language} />
         </>
     )
     const readout = (
         <>
-            <span className="fraction-v2-lab-readout-main"><MathText text={`${l(say('z.k.h.', 'm.c.d.', 'ق.م.أ'))} $=${factorsLatex(gcd)}$ · ${l(say('m.k.t.', 'm.c.m.', 'م.م.أ'))} $=${factorsLatex(lcm)}$`} /></span>
+            <span className="fraction-v2-lab-readout-main"><MathText text={`${l(say('z.k.h.', 'm.c.d.', 'ق.م.أ', 'GCD'))} $=${factorsLatex(gcd)}$ · ${l(say('m.k.t.', 'm.c.m.', 'م.م.أ', 'LCM'))} $=${factorsLatex(lcm)}$`} /></span>
             <span className="fraction-v2-lab-readout-note">{`P = ${plain(polyLatex(expandFactors(state.p)))} · Q = ${plain(polyLatex(expandFactors(state.q)))}`}</span>
         </>
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={gcdChallenges} state={state}>
-            <Board height={250} label={l(say('Bi polinomioen faktoreak', 'Los factores de los dos polinomios', 'عوامل الحدوديتين'))}>
+            <Board height={250} label={l(say('Bi polinomioen faktoreak', 'Los factores de los dos polinomios', 'عوامل الحدوديتين', 'The factors of the two polynomials'))}>
                 <Text x={30} y={40} size={20} color={editing === 'p' ? STAGE : INK}>P</Text>
                 <FactorChips x={60} y={16} exponents={state.p} highlight={gcd} />
                 <Text x={30} y={94} size={20} color={editing === 'q' ? STAGE : INK}>Q</Text>
                 <FactorChips x={60} y={70} exponents={state.q} highlight={gcd} />
                 <line x1={20} x2={620} y1={124} y2={124} stroke={MUTED} strokeWidth={1} strokeDasharray="4 4" />
-                <Text x={30} y={162} size={13} color={GREEN} anchor="start">{l(say('z.k.h.', 'm.c.d.', 'ق.م.أ'))}</Text>
+                <Text x={30} y={162} size={13} color={GREEN} anchor="start">{l(say('z.k.h.', 'm.c.d.', 'ق.م.أ', 'GCD'))}</Text>
                 <FactorChips x={90} y={140} exponents={gcd} highlight={gcd} />
-                <Text x={30} y={216} size={13} color={SECOND} anchor="start">{l(say('m.k.t.', 'm.c.m.', 'م.م.أ'))}</Text>
+                <Text x={30} y={216} size={13} color={SECOND} anchor="start">{l(say('m.k.t.', 'm.c.m.', 'م.م.أ', 'LCM'))}</Text>
                 <FactorChips x={90} y={194} exponents={lcm} />
             </Board>
         </ToolFrame>
@@ -349,19 +350,19 @@ export function DomainTool(props: LabToolProps) {
     const holes = domainHoles(state.fraction)
     const controls = (
         <>
-            <Segmented label={l(say('Zatikia', 'Fracción', 'الكسر'))} value={String(state.fraction)} options={domainFractions.map((item, index) => ({ value: String(index), label: `${plain(polyLatex(item.numerator))} / ${plain(polyLatex(item.denominator))}` }))} onChange={(index) => setState((s) => setDomain(s, { fraction: Number(index) }))} />
+            <Segmented label={l(say('Zatikia', 'Fracción', 'الكسر', 'Fraction'))} value={String(state.fraction)} options={domainFractions.map((item, index) => ({ value: String(index), label: `${plain(polyLatex(item.numerator))} / ${plain(polyLatex(item.denominator))}` }))} onChange={(index) => setState((s) => setDomain(s, { fraction: Number(index) }))} />
             <Stepper label="x" value={state.x} min={-DOMAIN_LIMIT} max={DOMAIN_LIMIT} format={signed} onChange={(x) => setState((s) => setDomain(s, { x }))} language={props.language} />
         </>
     )
     const latex = `\\frac{${polyLatex(numerator)}}{${polyLatex(denominator)}}\\ \\to\\ \\frac{${top}}{${bottom}}${value ? `=${texFraction(value)}` : ''}`
     const note = value === null
-        ? l(say(`x = ${signed(state.x)} denean izendatzailea 0 da: zatikia ez dago.`, `Para x = ${signed(state.x)} el denominador es 0: la fracción no existe.`, `عندما x = ${signed(state.x)} يكون المقام 0: الكسر غير معرّف.`))
-        : l(say(`Ez dago x hauetan: ${holes.map(signed).join(', ')}.`, `No existe en: ${holes.map(signed).join(', ')}.`, `غير معرّف عند: ${holes.map(signed).join('، ')}.`))
+        ? l(say(`x = ${signed(state.x)} denean izendatzailea 0 da: zatikia ez dago.`, `Para x = ${signed(state.x)} el denominador es 0: la fracción no existe.`, `عندما x = ${signed(state.x)} يكون المقام 0: الكسر غير معرّف.`, `For x = ${signed(state.x)} the denominator is 0: the fraction does not exist.`))
+        : l(say(`Ez dago x hauetan: ${holes.map(signed).join(', ')}.`, `No existe en: ${holes.map(signed).join(', ')}.`, `غير معرّف عند: ${holes.map(signed).join('، ')}.`, `Does not exist at: ${holes.map(signed).join(', ')}.`))
     const ox = 320
     const unit = 54
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={domainChallenges} state={state}>
-            <Board height={170} label={l(say('Zenbaki-zuzena', 'La recta numérica', 'مستقيم الأعداد'))}>
+            <Board height={170} label={l(say('Zenbaki-zuzena', 'La recta numérica', 'مستقيم الأعداد', 'The number line'))}>
                 <Frac x={90} y={40} top={plain(polyLatex(numerator))} bottom={plain(polyLatex(denominator))} width={130} size={19} />
                 <line x1={30} x2={610} y1={118} y2={118} stroke={INK} strokeWidth={2} />
                 {Array.from({ length: 2 * DOMAIN_LIMIT + 1 }, (_, k) => k - DOMAIN_LIMIT).map((x) => (
@@ -388,7 +389,7 @@ export function SimplifyTool(props: LabToolProps) {
     const result = simplified(state)
     const controls = (
         <>
-            <Segmented label={l(say('Aldatu', 'Cambia', 'غيّر'))} value={editing} options={[{ value: 'numerator', label: l(say('Zenbakitzailea', 'Numerador', 'البسط')) }, { value: 'denominator', label: l(say('Izendatzailea', 'Denominador', 'المقام')) }]} onChange={(value) => setEditing(value as 'numerator' | 'denominator')} />
+            <Segmented label={l(say('Aldatu', 'Cambia', 'غيّر', 'Change'))} value={editing} options={[{ value: 'numerator', label: l(say('Zenbakitzailea', 'Numerador', 'البسط', 'Numerator')) }, { value: 'denominator', label: l(say('Izendatzailea', 'Denominador', 'المقام', 'Denominator')) }]} onChange={(value) => setEditing(value as 'numerator' | 'denominator')} />
             <FactorSteppers exponents={state[editing]} onChange={(index, value) => setState((s) => setSimplify(s, editing, index, value))} language={props.language} maxDegree={SIMPLIFY_DEGREE} />
         </>
     )
@@ -398,16 +399,16 @@ export function SimplifyTool(props: LabToolProps) {
     const latex = `\\frac{${expandedTop}}{${expandedBottom}}=${simplifiedLatex}`
     const commonDegree = common.reduce((sum, count) => sum + count, 0)
     const note = commonDegree === 0
-        ? l(say('Faktore komunik ez: zatikia irreduziblea da.', 'Ningún factor común: la fracción es irreducible.', 'لا عامل مشترك: الكسر غير قابل للتبسيط.'))
-        : l(say(`Faktore komuna: ${plain(factorsLatex(common))}. Goian eta behean ezabatzen da.`, `Factor común: ${plain(factorsLatex(common))}. Se elimina arriba y abajo.`, `العامل المشترك: ${plain(factorsLatex(common))}. يُحذف من البسط والمقام.`))
+        ? l(say('Faktore komunik ez: zatikia irreduziblea da.', 'Ningún factor común: la fracción es irreducible.', 'لا عامل مشترك: الكسر غير قابل للتبسيط.', 'No common factor: the fraction is in simplest form.'))
+        : l(say(`Faktore komuna: ${plain(factorsLatex(common))}. Goian eta behean ezabatzen da.`, `Factor común: ${plain(factorsLatex(common))}. Se elimina arriba y abajo.`, `العامل المشترك: ${plain(factorsLatex(common))}. يُحذف من البسط والمقام.`, `Common factor: ${plain(factorsLatex(common))}. It is cancelled from the top and bottom.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={simplifyChallenges} state={state}>
-            <Board height={210} label={l(say('Zenbakitzailearen eta izendatzailearen faktoreak', 'Factores del numerador y del denominador', 'عوامل البسط والمقام'))}>
+            <Board height={210} label={l(say('Zenbakitzailearen eta izendatzailearen faktoreak', 'Factores del numerador y del denominador', 'عوامل البسط والمقام', 'Factors of the numerator and the denominator'))}>
                 <FactorChips x={60} y={30} exponents={state.numerator} highlight={common} />
                 <line x1={40} x2={600} y1={84} y2={84} stroke={INK} strokeWidth={2.4} />
                 <FactorChips x={60} y={100} exponents={state.denominator} highlight={common} />
                 <Text x={320} y={178} size={17} color={GREEN}>{`= ${plain(simplifiedLatex)}`}</Text>
-                <Text x={320} y={202} size={13} color={GREEN} weight={400}>{l(say('berdez: ezabatzen diren faktoreak', 'en verde: los factores que se eliminan', 'بالأخضر: العوامل التي تُحذف'))}</Text>
+                <Text x={320} y={202} size={13} color={GREEN} weight={400}>{l(say('berdez: ezabatzen diren faktoreak', 'en verde: los factores que se eliminan', 'بالأخضر: العوامل التي تُحذف', 'in green: the factors that are cancelled'))}</Text>
             </Board>
         </ToolFrame>
     )
@@ -424,19 +425,19 @@ export function CommonTool(props: LabToolProps) {
     const options = commonDenominators.map((_, index) => ({ value: String(index), label: plain(denominatorLatex(index)) }))
     const controls = (
         <>
-            <Stepper label={l(say('1. zenbakitzailea', '1.er numerador', 'البسط الأول'))} value={state.k1} min={-NUMERATOR_LIMIT} max={NUMERATOR_LIMIT} format={signed} onChange={(k1) => setState((s) => setCommon(s, { k1 }))} language={props.language} />
-            <Segmented label={l(say('1. izendatzailea', '1.er denominador', 'المقام الأول'))} value={String(state.first)} options={options} onChange={(first) => setState((s) => setCommon(s, { first: Number(first) }))} />
-            <Stepper label={l(say('2. zenbakitzailea', '2.º numerador', 'البسط الثاني'))} value={state.k2} min={-NUMERATOR_LIMIT} max={NUMERATOR_LIMIT} format={signed} onChange={(k2) => setState((s) => setCommon(s, { k2 }))} language={props.language} />
-            <Segmented label={l(say('2. izendatzailea', '2.º denominador', 'المقام الثاني'))} value={String(state.second)} options={options} onChange={(second) => setState((s) => setCommon(s, { second: Number(second) }))} />
+            <Stepper label={l(say('1. zenbakitzailea', '1.er numerador', 'البسط الأول', '1st numerator'))} value={state.k1} min={-NUMERATOR_LIMIT} max={NUMERATOR_LIMIT} format={signed} onChange={(k1) => setState((s) => setCommon(s, { k1 }))} language={props.language} />
+            <Segmented label={l(say('1. izendatzailea', '1.er denominador', 'المقام الأول', '1st denominator'))} value={String(state.first)} options={options} onChange={(first) => setState((s) => setCommon(s, { first: Number(first) }))} />
+            <Stepper label={l(say('2. zenbakitzailea', '2.º numerador', 'البسط الثاني', '2nd numerator'))} value={state.k2} min={-NUMERATOR_LIMIT} max={NUMERATOR_LIMIT} format={signed} onChange={(k2) => setState((s) => setCommon(s, { k2 }))} language={props.language} />
+            <Segmented label={l(say('2. izendatzailea', '2.º denominador', 'المقام الثاني', '2nd denominator'))} value={String(state.second)} options={options} onChange={(second) => setState((s) => setCommon(s, { second: Number(second) }))} />
         </>
     )
     const first = `\\frac{${state.k1}}{${denominatorLatex(state.first)}}`
     const second = `\\frac{${Math.abs(state.k2)}}{${denominatorLatex(state.second)}}`
     const latex = `${first}${state.k2 < 0 ? '-' : '+'}${second}=\\frac{${polyLatex(numerator)}}{${factorsLatex(lcm)}}`
-    const note = l(say(`M.k.t. = ${plain(factorsLatex(lcm))}. Lehenengoari ${plain(factorsLatex(missingFirst))} falta zaio, bigarrenari ${plain(factorsLatex(missingSecond))}.`, `M.c.m. = ${plain(factorsLatex(lcm))}. Al primero le falta ${plain(factorsLatex(missingFirst))} y al segundo ${plain(factorsLatex(missingSecond))}.`, `م.م.أ = ${plain(factorsLatex(lcm))}. ينقص الأول ${plain(factorsLatex(missingFirst))} وينقص الثاني ${plain(factorsLatex(missingSecond))}.`))
+    const note = l(say(`M.k.t. = ${plain(factorsLatex(lcm))}. Lehenengoari ${plain(factorsLatex(missingFirst))} falta zaio, bigarrenari ${plain(factorsLatex(missingSecond))}.`, `M.c.m. = ${plain(factorsLatex(lcm))}. Al primero le falta ${plain(factorsLatex(missingFirst))} y al segundo ${plain(factorsLatex(missingSecond))}.`, `م.م.أ = ${plain(factorsLatex(lcm))}. ينقص الأول ${plain(factorsLatex(missingFirst))} وينقص الثاني ${plain(factorsLatex(missingSecond))}.`, `LCM = ${plain(factorsLatex(lcm))}. The first is missing ${plain(factorsLatex(missingFirst))} and the second is missing ${plain(factorsLatex(missingSecond))}.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={commonChallenges} state={state}>
-            <Board height={200} label={l(say('Bi zatiki izendatzaile komunera', 'Dos fracciones a común denominador', 'كسران إلى مقام مشترك'))}>
+            <Board height={200} label={l(say('Bi zatiki izendatzaile komunera', 'Dos fracciones a común denominador', 'كسران إلى مقام مشترك', 'Two fractions over a common denominator'))}>
                 <Frac x={110} y={60} top={signed(state.k1)} bottom={plain(denominatorLatex(state.first))} width={100} size={20} />
                 <Text x={190} y={68} size={22}>{state.k2 < 0 ? '−' : '+'}</Text>
                 <Frac x={270} y={60} top={String(Math.abs(state.k2))} bottom={plain(denominatorLatex(state.second))} width={100} size={20} />
@@ -445,7 +446,7 @@ export function CommonTool(props: LabToolProps) {
                 <Text x={110} y={136} size={14} color={STAGE} weight={400}>{`· ${plain(factorsLatex(missingFirst))}`}</Text>
                 <Text x={270} y={136} size={14} color={STAGE} weight={400}>{`· ${plain(factorsLatex(missingSecond))}`}</Text>
                 <rect x={150} y={154} width={340} height={34} rx={10} fill={MUSTARD_TINT} stroke={INK} strokeWidth={1.4} />
-                <Text x={320} y={177} size={16}>{`${l(say('m.k.t.', 'm.c.m.', 'م.م.أ'))} = ${plain(factorsLatex(lcm))}`}</Text>
+                <Text x={320} y={177} size={16}>{`${l(say('m.k.t.', 'm.c.m.', 'م.م.أ', 'LCM'))} = ${plain(factorsLatex(lcm))}`}</Text>
             </Board>
         </ToolFrame>
     )
@@ -460,13 +461,13 @@ export function TapsTool(props: LabToolProps) {
     const perMinute = fraction(state.a + state.b, state.a * state.b)
     const controls = (
         <>
-            <Stepper label={l(say('A txorrota (min)', 'Grifo A (min)', 'الصنبور A (د)'))} value={state.a} min={TAPS_LIMITS.min} max={TAPS_LIMITS.max} onChange={(a) => setState((s) => setTaps(s, { a }))} language={props.language} />
-            <Stepper label={l(say('B txorrota (min)', 'Grifo B (min)', 'الصنبور B (د)'))} value={state.b} min={TAPS_LIMITS.min} max={TAPS_LIMITS.max} onChange={(b) => setState((s) => setTaps(s, { b }))} language={props.language} />
+            <Stepper label={l(say('A txorrota (min)', 'Grifo A (min)', 'الصنبور A (د)', 'Tap A (min)'))} value={state.a} min={TAPS_LIMITS.min} max={TAPS_LIMITS.max} onChange={(a) => setState((s) => setTaps(s, { a }))} language={props.language} />
+            <Stepper label={l(say('B txorrota (min)', 'Grifo B (min)', 'الصنبور B (د)', 'Tap B (min)'))} value={state.b} min={TAPS_LIMITS.min} max={TAPS_LIMITS.max} onChange={(b) => setState((s) => setTaps(s, { b }))} language={props.language} />
         </>
     )
     const latex = `\\frac{1}{${state.a}}+\\frac{1}{${state.b}}=${texFraction(perMinute)}`
     const minutes = together.denominator === 1 ? String(together.numerator) : `${textFraction(together)} ≈ ${decimal(together.numerator / together.denominator, props.language)}`
-    const note = l(say(`Minutu bakoitzean ${textFraction(perMinute)} betetzen dute: batera ${minutes} min.`, `Cada minuto llenan ${textFraction(perMinute)}: juntos tardan ${minutes} min.`, `يملآن في كل دقيقة ${textFraction(perMinute)}: معًا يحتاجان ${minutes} د.`))
+    const note = l(say(`Minutu bakoitzean ${textFraction(perMinute)} betetzen dute: batera ${minutes} min.`, `Cada minuto llenan ${textFraction(perMinute)}: juntos tardan ${minutes} min.`, `يملآن في كل دقيقة ${textFraction(perMinute)}: معًا يحتاجان ${minutes} د.`, `Each minute they fill ${textFraction(perMinute)}: together they take ${minutes} min.`))
     const scale = 12
     const bars = [
         { label: 'A', minutes: state.a, color: STAGE },
@@ -475,7 +476,7 @@ export function TapsTool(props: LabToolProps) {
     ]
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={tapsChallenges} state={state}>
-            <Board height={200} label={l(say('Depositua betetzeko minutuak', 'Minutos para llenar el depósito', 'الدقائق اللازمة لملء الخزان'))}>
+            <Board height={200} label={l(say('Depositua betetzeko minutuak', 'Minutos para llenar el depósito', 'الدقائق اللازمة لملء الخزان', 'Minutes to fill the tank'))}>
                 {bars.map((bar, index) => (
                     <g key={bar.label}>
                         <Text x={56} y={44 + index * 52} size={16} color={bar.color} anchor="end">{bar.label}</Text>

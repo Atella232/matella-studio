@@ -34,7 +34,7 @@ export function RationalsGames({ language, pathname, openGame, completedIds, onC
             language={language}
             games={hubGames}
             recordsKey={RATIONALS_GAME_RECORDS_KEY}
-            title={{ eu: 'Jolastu zenbaki arrazionalekin', es: 'Juega con los números racionales', ar: 'العب بالأعداد النسبية' }}
+            title={{ eu: 'Jolastu zenbaki arrazionalekin', es: 'Juega con los números racionales', en: 'Play with rational numbers', ar: 'العب بالأعداد النسبية' }}
             completedIds={completedIds}
             onComplete={onComplete}
             mode={rationalsGameModeForPath(pathname)}

@@ -3,6 +3,7 @@ import { pick, randomInt } from '../../../features/unit-v2/games/random.ts'
 import type { LabChallenge, LabChallengeMaker, LabToolInfo } from '../../../features/unit-v2/lab/types.ts'
 import type { ProportionDbh2StageId } from '../lessons.tsx'
 import { percentChallenges, tableChallenges } from '../../dbh1-proportzionaltasuna-v2/lab/labTools.ts'
+import { decimalSeparatorFor, thousandsSeparatorFor } from '../../../utils/numberFormat.ts'
 
 /* ==========================================================================
    Proportzionaltasuna eta ehunekoak (2. DBH) laboratory. The table and the
@@ -24,17 +25,17 @@ export interface ProportionDbh2LabTool extends LabToolInfo {
 }
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string) => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string) => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, Math.round(value)))
 const n = (value: number) => fraction(value)
 
 export const proportionDbh2LabTools: ProportionDbh2LabTool[] = [
-    { id: 'table', stage: 'proportions', lessonTopic: 'direct-review', title: say('Taula eta grafikoa', 'La tabla y su gráfica', 'الجدول والرسم البياني'), observe: say('Zuzenean zatidura konstantea da eta puntuak zuzen batean daude; alderantzizkoan biderkadura konstantea da eta puntuak kurba batean.', 'En la directa el cociente es constante y los puntos están en una recta; en la inversa el producto es constante y los puntos, en una curva.', 'في الطردي حاصل القسمة ثابت والنقاط على مستقيم؛ وفي العكسي حاصل الضرب ثابت والنقاط على منحنى.') },
-    { id: 'compound', stage: 'compound', lessonTopic: 'compound-mixed', title: say('Proportzionaltasun konposatuaren makina', 'La máquina de proporcionalidad compuesta', 'آلة التناسب المركّب'), observe: say('Magnitude bakoitzeko erabaki: zuzena (berria/zaharra) ala alderantzizkoa (zaharra/berria). Ezezaguna zatiki guztiez biderkatzen da.', 'Para cada magnitud decide: directa (nuevo/viejo) o inversa (viejo/nuevo). La incógnita se multiplica por todas las fracciones.', 'قرّر لكل مقدار: طردي (الجديد/القديم) أم عكسي (القديم/الجديد). ويُضرب المجهول في كل الكسور.') },
-    { id: 'share', stage: 'shares', lessonTopic: 'direct-share', title: say('Banaketak', 'Repartos', 'التوزيعات'), observe: say('Zuzenean zenbaki handienak zati handiena hartzen du; alderantzizkoan, txikiena. Zatien batura beti kantitate osoa da.', 'En el directo el número mayor se lleva la parte mayor; en el inverso, la menor. Las partes siempre suman la cantidad entera.', 'في الطردي يأخذ العدد الأكبر الجزء الأكبر؛ وفي العكسي الأصغر. ومجموع الأجزاء يساوي الكمية كلها دائمًا.') },
-    { id: 'percent', stage: 'percent', lessonTopic: 'percent-forms', title: say('Ehunekoak', 'Porcentajes', 'النسب المئوية'), observe: say('Kantitate baten % p kalkulatzeko, biderkatu p : 100 hamartarraz. «Hiru forma» moduan zatiki bera hamartar eta ehuneko gisa ikusten da.', 'Para el p % de una cantidad, multiplica por el decimal p : 100. En «Tres formas» se ve la misma fracción como decimal y como porcentaje.', 'لحساب p٪ من كمية اضرب في العدد العشري p : 100. وفي «ثلاث صيغ» يظهر الكسر نفسه عددًا عشريًا ونسبة مئوية.') },
-    { id: 'chain', stage: 'changes', lessonTopic: 'chained', title: say('Ehuneko kateatuak', 'Porcentajes encadenados', 'النسب المتتالية'), observe: say('Aldaketa bakoitza bere indizeaz biderkatzen da. % 10 igo eta % 10 jaitsiz gero, ez da hasierara itzultzen.', 'Cada cambio multiplica por su índice. Si subes un 10 % y bajas un 10 %, no vuelves al principio.', 'كل تغيّر يضرب في مؤشره. إذا زدت 10٪ ثم خفّضت 10٪ فلن تعود إلى البداية.') },
-    { id: 'interest', stage: 'changes', lessonTopic: 'interest', title: say('Interes bakuna', 'Interés simple', 'الفائدة البسيطة'), observe: say('Urtero interes bera gehitzen da, hasierako kapitalaren % r. Urte bikoitza edo tasa bikoitza → interes bikoitza.', 'Cada año se suma el mismo interés, el r % del capital inicial. El doble de años o el doble de tipo → el doble de interés.', 'تُضاف كل سنة الفائدة نفسها، r٪ من رأس المال الأصلي. ضعف السنوات أو ضعف السعر ← ضعف الفائدة.') }
+    { id: 'table', stage: 'proportions', lessonTopic: 'direct-review', title: say('Taula eta grafikoa', 'La tabla y su gráfica', 'الجدول والرسم البياني', 'The table and its graph'), observe: say('Zuzenean zatidura konstantea da eta puntuak zuzen batean daude; alderantzizkoan biderkadura konstantea da eta puntuak kurba batean.', 'En la directa el cociente es constante y los puntos están en una recta; en la inversa el producto es constante y los puntos, en una curva.', 'في الطردي حاصل القسمة ثابت والنقاط على مستقيم؛ وفي العكسي حاصل الضرب ثابت والنقاط على منحنى.', 'In direct proportion the quotient is constant and the points lie on a straight line; in inverse proportion the product is constant and the points lie on a curve.') },
+    { id: 'compound', stage: 'compound', lessonTopic: 'compound-mixed', title: say('Proportzionaltasun konposatuaren makina', 'La máquina de proporcionalidad compuesta', 'آلة التناسب المركّب', 'The compound proportion machine'), observe: say('Magnitude bakoitzeko erabaki: zuzena (berria/zaharra) ala alderantzizkoa (zaharra/berria). Ezezaguna zatiki guztiez biderkatzen da.', 'Para cada magnitud decide: directa (nuevo/viejo) o inversa (viejo/nuevo). La incógnita se multiplica por todas las fracciones.', 'قرّر لكل مقدار: طردي (الجديد/القديم) أم عكسي (القديم/الجديد). ويُضرب المجهول في كل الكسور.', 'For each quantity, decide: direct (new/old) or inverse (old/new). The unknown is multiplied by all the fractions.') },
+    { id: 'share', stage: 'shares', lessonTopic: 'direct-share', title: say('Banaketak', 'Repartos', 'التوزيعات', 'Sharing out'), observe: say('Zuzenean zenbaki handienak zati handiena hartzen du; alderantzizkoan, txikiena. Zatien batura beti kantitate osoa da.', 'En el directo el número mayor se lleva la parte mayor; en el inverso, la menor. Las partes siempre suman la cantidad entera.', 'في الطردي يأخذ العدد الأكبر الجزء الأكبر؛ وفي العكسي الأصغر. ومجموع الأجزاء يساوي الكمية كلها دائمًا.', 'In direct sharing the larger number gets the larger share; in inverse sharing, the smaller one. The shares always add up to the whole amount.') },
+    { id: 'percent', stage: 'percent', lessonTopic: 'percent-forms', title: say('Ehunekoak', 'Porcentajes', 'النسب المئوية', 'Percentages'), observe: say('Kantitate baten % p kalkulatzeko, biderkatu p : 100 hamartarraz. «Hiru forma» moduan zatiki bera hamartar eta ehuneko gisa ikusten da.', 'Para el p % de una cantidad, multiplica por el decimal p : 100. En «Tres formas» se ve la misma fracción como decimal y como porcentaje.', 'لحساب p٪ من كمية اضرب في العدد العشري p : 100. وفي «ثلاث صيغ» يظهر الكسر نفسه عددًا عشريًا ونسبة مئوية.', 'To find p% of an amount, multiply by the decimal p : 100. In “Three ways” the same fraction is shown as a decimal and as a percentage.') },
+    { id: 'chain', stage: 'changes', lessonTopic: 'chained', title: say('Ehuneko kateatuak', 'Porcentajes encadenados', 'النسب المتتالية', 'Chained percentages'), observe: say('Aldaketa bakoitza bere indizeaz biderkatzen da. % 10 igo eta % 10 jaitsiz gero, ez da hasierara itzultzen.', 'Cada cambio multiplica por su índice. Si subes un 10 % y bajas un 10 %, no vuelves al principio.', 'كل تغيّر يضرب في مؤشره. إذا زدت 10٪ ثم خفّضت 10٪ فلن تعود إلى البداية.', 'Each change multiplies by its multiplier. If you go up 10% and then down 10%, you do not get back to the start.') },
+    { id: 'interest', stage: 'changes', lessonTopic: 'interest', title: say('Interes bakuna', 'Interés simple', 'الفائدة البسيطة', 'Simple interest'), observe: say('Urtero interes bera gehitzen da, hasierako kapitalaren % r. Urte bikoitza edo tasa bikoitza → interes bikoitza.', 'Cada año se suma el mismo interés, el r % del capital inicial. El doble de años o el doble de tipo → el doble de interés.', 'تُضاف كل سنة الفائدة نفسها، r٪ من رأس المال الأصلي. ضعف السنوات أو ضعف السعر ← ضعف الفائدة.', 'Each year the same interest is added: r% of the original principal. Double the years or double the rate → double the interest.') }
 ]
 
 export const proportionDbh2LabToolForTopic: Record<string, ProportionDbh2LabToolId | undefined> = {
@@ -60,15 +61,15 @@ export const proportionDbh2LabToolForTopic: Record<string, ProportionDbh2LabTool
 export type Relation = 'direct' | 'inverse'
 
 interface Magnitude {
-    name: { eu: string; es: string; ar: string }
+    name: { eu: string; es: string; en: string; ar: string }
     old: FractionValue
     next: FractionValue
     relation: Relation
 }
 
 export interface CompoundProblem {
-    text: { eu: string; es: string; ar: string }
-    unknown: { eu: string; es: string; ar: string }
+    text: { eu: string; es: string; en: string; ar: string }
+    unknown: { eu: string; es: string; en: string; ar: string }
     known: FractionValue
     magnitudes: [Magnitude, Magnitude]
 }
@@ -77,39 +78,39 @@ const decimal = (whole: number, tenths: number) => fraction(whole * 10 + tenths,
 
 export const compoundProblems: CompoundProblem[] = [
     {
-        text: say('Igeltseroak: egunean 10 h, 18 egun → 600 m². Egunean 8 h, 15 egun → ?', 'Albañiles: 10 h/día, 18 días → 600 m². 8 h/día, 15 días → ?', 'بنّاؤون: 10 س/يوم، 18 يومًا ← 600 م². 8 س/يوم، 15 يومًا ← ؟'),
-        unknown: say('m²', 'm²', 'م²'),
+        text: say('Igeltseroak: egunean 10 h, 18 egun → 600 m². Egunean 8 h, 15 egun → ?', 'Albañiles: 10 h/día, 18 días → 600 m². 8 h/día, 15 días → ?', 'بنّاؤون: 10 س/يوم، 18 يومًا ← 600 م². 8 س/يوم، 15 يومًا ← ؟', 'Bricklayers: 10 h/day, 18 days → 600 m². 8 h/day, 15 days → ?'),
+        unknown: say('m²', 'm²', 'م²', 'm²'),
         known: n(600),
         magnitudes: [
-            { name: say('h/egun', 'h/día', 'س/يوم'), old: n(10), next: n(8), relation: 'direct' },
-            { name: say('Egunak', 'Días', 'الأيام'), old: n(18), next: n(15), relation: 'direct' }
+            { name: say('h/egun', 'h/día', 'س/يوم', 'h/day'), old: n(10), next: n(8), relation: 'direct' },
+            { name: say('Egunak', 'Días', 'الأيام', 'Days'), old: n(18), next: n(15), relation: 'direct' }
         ]
     },
     {
-        text: say('Pentsua: 294 kg, 15 behi → 7 egun. 840 kg, 10 behi → ?', 'Pienso: 294 kg, 15 vacas → 7 días. 840 kg, 10 vacas → ?', 'العلف: 294 كغ، 15 بقرة ← 7 أيام. 840 كغ، 10 أبقار ← ؟'),
-        unknown: say('Egunak', 'Días', 'الأيام'),
+        text: say('Pentsua: 294 kg, 15 behi → 7 egun. 840 kg, 10 behi → ?', 'Pienso: 294 kg, 15 vacas → 7 días. 840 kg, 10 vacas → ?', 'العلف: 294 كغ، 15 بقرة ← 7 أيام. 840 كغ، 10 أبقار ← ؟', 'Feed: 294 kg, 15 cows → 7 days. 840 kg, 10 cows → ?'),
+        unknown: say('Egunak', 'Días', 'الأيام', 'Days'),
         known: n(7),
         magnitudes: [
-            { name: say('Pentsua (kg)', 'Pienso (kg)', 'العلف (كغ)'), old: n(294), next: n(840), relation: 'direct' },
-            { name: say('Behiak', 'Vacas', 'الأبقار'), old: n(15), next: n(10), relation: 'inverse' }
+            { name: say('Pentsua (kg)', 'Pienso (kg)', 'العلف (كغ)', 'Feed (kg)'), old: n(294), next: n(840), relation: 'direct' },
+            { name: say('Behiak', 'Vacas', 'الأبقار', 'Cows'), old: n(15), next: n(10), relation: 'inverse' }
         ]
     },
     {
-        text: say('Hondeamakina: 1000 m, egunean 10 h → 8 egun. 600 m, egunean 12 h → ?', 'Excavadora: 1000 m, 10 h/día → 8 días. 600 m, 12 h/día → ?', 'حفّارة: 1000 م، 10 س/يوم ← 8 أيام. 600 م، 12 س/يوم ← ؟'),
-        unknown: say('Egunak', 'Días', 'الأيام'),
+        text: say('Hondeamakina: 1000 m, egunean 10 h → 8 egun. 600 m, egunean 12 h → ?', 'Excavadora: 1000 m, 10 h/día → 8 días. 600 m, 12 h/día → ?', 'حفّارة: 1000 م، 10 س/يوم ← 8 أيام. 600 م، 12 س/يوم ← ؟', 'Digger: 1,000 m, 10 h/day → 8 days. 600 m, 12 h/day → ?'),
+        unknown: say('Egunak', 'Días', 'الأيام', 'Days'),
         known: n(8),
         magnitudes: [
-            { name: say('Metroak', 'Metros', 'الأمتار'), old: n(1000), next: n(600), relation: 'direct' },
-            { name: say('h/egun', 'h/día', 'س/يوم'), old: n(10), next: n(12), relation: 'inverse' }
+            { name: say('Metroak', 'Metros', 'الأمتار', 'Metres'), old: n(1000), next: n(600), relation: 'direct' },
+            { name: say('h/egun', 'h/día', 'س/يوم', 'h/day'), old: n(10), next: n(12), relation: 'inverse' }
         ]
     },
     {
-        text: say('Aspertsoreak: 3, 1,5 l/s → 8 h. 4, 0,9 l/s → ?', 'Aspersores: 3, 1,5 l/s → 8 h. 4, 0,9 l/s → ?', 'رشّاشات: 3، 1.5 ل/ث ← 8 س. 4، 0.9 ل/ث ← ؟'),
-        unknown: say('Orduak', 'Horas', 'الساعات'),
+        text: say('Aspertsoreak: 3, 1,5 l/s → 8 h. 4, 0,9 l/s → ?', 'Aspersores: 3, 1,5 l/s → 8 h. 4, 0,9 l/s → ?', 'رشّاشات: 3، 1.5 ل/ث ← 8 س. 4، 0.9 ل/ث ← ؟', 'Pumps: 3, 1.5 L/s → 8 h. 4, 0.9 L/s → ?'),
+        unknown: say('Orduak', 'Horas', 'الساعات', 'Hours'),
         known: n(8),
         magnitudes: [
-            { name: say('Aspertsoreak', 'Aspersores', 'الرشّاشات'), old: n(3), next: n(4), relation: 'inverse' },
-            { name: say('Emaria (l/s)', 'Caudal (l/s)', 'التدفق (ل/ث)'), old: decimal(1, 5), next: decimal(0, 9), relation: 'inverse' }
+            { name: say('Aspertsoreak', 'Aspersores', 'الرشّاشات', 'Pumps'), old: n(3), next: n(4), relation: 'inverse' },
+            { name: say('Emaria (l/s)', 'Caudal (l/s)', 'التدفق (ل/ث)', 'Flow rate (L/s)'), old: decimal(1, 5), next: decimal(0, 9), relation: 'inverse' }
         ]
     }
 ]
@@ -146,10 +147,10 @@ export function chooseRelation(state: CompoundState, index: 0 | 1, relation: Rel
 }
 
 export const compoundChallenges: LabChallenge<CompoundState>[] = [
-    { id: 21201, prompt: say('Ebatzi igeltseroen problema.', 'Resuelve el problema de los albañiles.', 'حلّ مسألة البنّائين.'), hint: say('Ordu gehiago eta egun gehiago → m² gehiago.', 'Más horas y más días → más m².', 'ساعات أكثر وأيام أكثر ← م² أكثر.'), isSolved: (state) => state.solved.includes(0) },
-    { id: 21202, prompt: say('Ebatzi zuzena eta alderantzizkoa nahasten dituen problema bat.', 'Resuelve un problema que mezcle directa e inversa.', 'حلّ مسألة تمزج الطردي والعكسي.'), hint: say('Pentsua edo hondeamakina.', 'El pienso o la excavadora.', 'العلف أو الحفّارة.'), isSolved: (state) => state.solved.includes(1) || state.solved.includes(2) },
-    { id: 21203, prompt: say('Ebatzi bi erlazioak alderantzizkoak dituen problema.', 'Resuelve el problema con las dos relaciones inversas.', 'حلّ المسألة التي علاقتاها عكسيتان.'), hint: say('Aspertsore gehiago edo emari handiagoa → ordu gutxiago.', 'Más aspersores o más caudal → menos horas.', 'رشّاشات أكثر أو تدفق أكبر ← ساعات أقل.'), isSolved: (state) => state.solved.includes(3) },
-    { id: 21204, prompt: say('Ebatzi lau problemak.', 'Resuelve los cuatro problemas.', 'حلّ المسائل الأربع.'), hint: say('Galdetu beti: hau handitzean, ezezaguna handitu ala txikitu?', 'Pregúntate siempre: al crecer esta, ¿la incógnita crece o decrece?', 'اسأل دائمًا: حين يزيد هذا هل يزيد المجهول أم ينقص؟'), isSolved: (state) => compoundProblems.every((_, problem) => state.solved.includes(problem)) }
+    { id: 21201, prompt: say('Ebatzi igeltseroen problema.', 'Resuelve el problema de los albañiles.', 'حلّ مسألة البنّائين.', 'Solve the bricklayers\' problem.'), hint: say('Ordu gehiago eta egun gehiago → m² gehiago.', 'Más horas y más días → más m².', 'ساعات أكثر وأيام أكثر ← م² أكثر.', 'More hours and more days → more m².'), isSolved: (state) => state.solved.includes(0) },
+    { id: 21202, prompt: say('Ebatzi zuzena eta alderantzizkoa nahasten dituen problema bat.', 'Resuelve un problema que mezcle directa e inversa.', 'حلّ مسألة تمزج الطردي والعكسي.', 'Solve a problem that mixes direct and inverse proportion.'), hint: say('Pentsua edo hondeamakina.', 'El pienso o la excavadora.', 'العلف أو الحفّارة.', 'The feed or the digger.'), isSolved: (state) => state.solved.includes(1) || state.solved.includes(2) },
+    { id: 21203, prompt: say('Ebatzi bi erlazioak alderantzizkoak dituen problema.', 'Resuelve el problema con las dos relaciones inversas.', 'حلّ المسألة التي علاقتاها عكسيتان.', 'Solve the problem using the two inverse relationships.'), hint: say('Aspertsore gehiago edo emari handiagoa → ordu gutxiago.', 'Más aspersores o más caudal → menos horas.', 'رشّاشات أكثر أو تدفق أكبر ← ساعات أقل.', 'More pumps or more flow rate → fewer hours.'), isSolved: (state) => state.solved.includes(3) },
+    { id: 21204, prompt: say('Ebatzi lau problemak.', 'Resuelve los cuatro problemas.', 'حلّ المسائل الأربع.', 'Solve all four problems.'), hint: say('Galdetu beti: hau handitzean, ezezaguna handitu ala txikitu?', 'Pregúntate siempre: al crecer esta, ¿la incógnita crece o decrece?', 'اسأل دائمًا: حين يزيد هذا هل يزيد المجهول أم ينقص؟', 'Always ask yourself: if this one increases, does the unknown increase or decrease?'), isSolved: (state) => compoundProblems.every((_, problem) => state.solved.includes(problem)) }
 ]
 
 /* ---------- 2. Proportional shares ---------- */
@@ -188,10 +189,10 @@ const hasParts = (state: ShareState, wanted: number[]) => {
 const sortedMatch = (state: ShareState, numbers: number[]) => [...state.numbers].sort((a, b) => a - b).join() === [...numbers].sort((a, b) => a - b).join()
 
 export const shareChallenges: LabChallenge<ShareState>[] = [
-    { id: 21301, prompt: say('Banatu 180 zuzenki 2, 5 eta 8rekiko.', 'Reparte 180 directamente a 2, 5 y 8.', 'وزّع 180 طرديًا على 2 و5 و8.'), hint: say('Aukeratu 180, «Zuzena» eta zenbakiak.', 'Elige 180, «Directo» y los números.', 'اختر 180 و«طردي» والأعداد.'), isSolved: (state) => state.total === 180 && state.relation === 'direct' && sortedMatch(state, [2, 5, 8]) },
-    { id: 21302, prompt: say('Banatu 620 alderantziz 2, 3 eta 5ekiko.', 'Reparte 620 inversamente a 2, 3 y 5.', 'وزّع 620 عكسيًا على 2 و3 و5.'), hint: say('Zatiak: 300, 200 eta 120.', 'Las partes: 300, 200 y 120.', 'الأجزاء: 300 و200 و120.'), isSolved: (state) => state.total === 620 && state.relation === 'inverse' && sortedMatch(state, [2, 3, 5]) },
-    { id: 21303, prompt: say('Egin hiru zatiak berdinak diren banaketa bat.', 'Haz un reparto en el que las tres partes sean iguales.', 'أنشئ توزيعًا تتساوى فيه الأجزاء الثلاثة.'), hint: say('Zenbaki berdinak.', 'Números iguales.', 'أعداد متساوية.'), isSolved: (state) => { const parts = shareParts(state); return equals(parts[0], parts[1]) && equals(parts[1], parts[2]) } },
-    { id: 21304, prompt: say('Banatu 22 000 € saria: 12 000, 6000 eta 4000.', 'Reparte el premio de 22 000 €: 12 000, 6000 y 4000.', 'وزّع جائزة 22000 €: 12000 و6000 و4000.'), hint: say('Postuarekiko alderantziz: 1, 2 eta 3.', 'Inversamente al puesto: 1, 2 y 3.', 'عكسيًا مع الترتيب: 1 و2 و3.'), isSolved: (state) => state.total === 22000 && hasParts(state, [12000, 6000, 4000]) }
+    { id: 21301, prompt: say('Banatu 180 zuzenki 2, 5 eta 8rekiko.', 'Reparte 180 directamente a 2, 5 y 8.', 'وزّع 180 طرديًا على 2 و5 و8.', 'Share 180 directly in proportion to 2, 5 and 8.'), hint: say('Aukeratu 180, «Zuzena» eta zenbakiak.', 'Elige 180, «Directo» y los números.', 'اختر 180 و«طردي» والأعداد.', 'Choose 180, “Direct” and the numbers.'), isSolved: (state) => state.total === 180 && state.relation === 'direct' && sortedMatch(state, [2, 5, 8]) },
+    { id: 21302, prompt: say('Banatu 620 alderantziz 2, 3 eta 5ekiko.', 'Reparte 620 inversamente a 2, 3 y 5.', 'وزّع 620 عكسيًا على 2 و3 و5.', 'Share 620 inversely in proportion to 2, 3 and 5.'), hint: say('Zatiak: 300, 200 eta 120.', 'Las partes: 300, 200 y 120.', 'الأجزاء: 300 و200 و120.', 'The shares: 300, 200 and 120.'), isSolved: (state) => state.total === 620 && state.relation === 'inverse' && sortedMatch(state, [2, 3, 5]) },
+    { id: 21303, prompt: say('Egin hiru zatiak berdinak diren banaketa bat.', 'Haz un reparto en el que las tres partes sean iguales.', 'أنشئ توزيعًا تتساوى فيه الأجزاء الثلاثة.', 'Make a share in which all three parts are equal.'), hint: say('Zenbaki berdinak.', 'Números iguales.', 'أعداد متساوية.', 'Equal numbers.'), isSolved: (state) => { const parts = shareParts(state); return equals(parts[0], parts[1]) && equals(parts[1], parts[2]) } },
+    { id: 21304, prompt: say('Banatu 22 000 € saria: 12 000, 6000 eta 4000.', 'Reparte el premio de 22 000 €: 12 000, 6000 y 4000.', 'وزّع جائزة 22000 €: 12000 و6000 و4000.', 'Share the prize of €22,000: €12,000, €6,000 and €4,000.'), hint: say('Postuarekiko alderantziz: 1, 2 eta 3.', 'Inversamente al puesto: 1, 2 y 3.', 'عكسيًا مع الترتيب: 1 و2 و3.', 'Inversely by position: 1, 2 and 3.'), isSolved: (state) => state.total === 22000 && hasParts(state, [12000, 6000, 4000]) }
 ]
 
 /* ---------- 3. Chained percentages ---------- */
@@ -220,10 +221,10 @@ export const chainFinal = (state: ChainState) => multiply(n(state.start), chainI
 const activeChanges = (state: ChainState) => state.changes.filter((percent) => percent !== 0)
 
 export const chainChallenges: LabChallenge<ChainState>[] = [
-    { id: 21401, prompt: say('100etik abiatuta, igo % 10 eta jaitsi % 10.', 'Desde 100, sube un 10 % y baja un 10 %.', 'من 100، زِد 10٪ ثم خفّض 10٪.'), hint: say('Ez da 100 izango.', 'No dará 100.', 'لن تكون 100.'), isSolved: (state) => state.start === 100 && activeChanges(state).length === 2 && activeChanges(state).includes(10) && activeChanges(state).includes(-10) },
-    { id: 21402, prompt: say('Lortu $0{,}72$ indize osoa.', 'Consigue un índice total de $0{,}72$.', 'احصل على مؤشر كلي $0{,}72$.'), hint: say('$0{,}8\\cdot 0{,}9$.', '$0{,}8\\cdot 0{,}9$.', '$0{,}8\\cdot 0{,}9$.'), isSolved: (state) => equals(chainIndex(state), fraction(72, 100)) },
-    { id: 21403, prompt: say('Bi aldaketarekin, itzuli hasierako prezio berera.', 'Con dos cambios, vuelve exactamente al precio inicial.', 'بتغيّرين، عُد إلى السعر الأصلي تمامًا.'), hint: say('Probatu % 25 igo eta % 20 jaitsi.', 'Prueba a subir un 25 % y bajar un 20 %.', 'جرّب زيادة 25٪ ثم تخفيض 20٪.'), isSolved: (state) => activeChanges(state).length === 2 && equals(chainIndex(state), n(1)) },
-    { id: 21404, prompt: say('200etik abiatuta, iritsi 180ra bi aldaketarekin.', 'Desde 200, llega a 180 con dos cambios.', 'من 200، صِل إلى 180 بتغيّرين.'), hint: say('% 20 igo eta % 25 jaitsi.', 'Sube un 20 % y baja un 25 %.', 'زِد 20٪ ثم خفّض 25٪.'), isSolved: (state) => state.start === 200 && activeChanges(state).length === 2 && equals(chainFinal(state), n(180)) }
+    { id: 21401, prompt: say('100etik abiatuta, igo % 10 eta jaitsi % 10.', 'Desde 100, sube un 10 % y baja un 10 %.', 'من 100، زِد 10٪ ثم خفّض 10٪.', 'Starting from 100, go up 10% and then down 10%.'), hint: say('Ez da 100 izango.', 'No dará 100.', 'لن تكون 100.', 'It will not be 100.'), isSolved: (state) => state.start === 100 && activeChanges(state).length === 2 && activeChanges(state).includes(10) && activeChanges(state).includes(-10) },
+    { id: 21402, prompt: say('Lortu $0{,}72$ indize osoa.', 'Consigue un índice total de $0{,}72$.', 'احصل على مؤشر كلي $0{,}72$.', 'Get a total multiplier of $0{,}72$.'), hint: say('$0{,}8\\cdot 0{,}9$.', '$0{,}8\\cdot 0{,}9$.', '$0{,}8\\cdot 0{,}9$.', '$0{,}8\\cdot 0{,}9$.'), isSolved: (state) => equals(chainIndex(state), fraction(72, 100)) },
+    { id: 21403, prompt: say('Bi aldaketarekin, itzuli hasierako prezio berera.', 'Con dos cambios, vuelve exactamente al precio inicial.', 'بتغيّرين، عُد إلى السعر الأصلي تمامًا.', 'With two changes, get back exactly to the original price.'), hint: say('Probatu % 25 igo eta % 20 jaitsi.', 'Prueba a subir un 25 % y bajar un 20 %.', 'جرّب زيادة 25٪ ثم تخفيض 20٪.', 'Try going up 25% and then down 20%.'), isSolved: (state) => activeChanges(state).length === 2 && equals(chainIndex(state), n(1)) },
+    { id: 21404, prompt: say('200etik abiatuta, iritsi 180ra bi aldaketarekin.', 'Desde 200, llega a 180 con dos cambios.', 'من 200، صِل إلى 180 بتغيّرين.', 'Starting from 200, get to 180 with two changes.'), hint: say('% 20 igo eta % 25 jaitsi.', 'Sube un 20 % y baja un 25 %.', 'زِد 20٪ ثم خفّض 25٪.', 'Go up 20% and then down 25%.'), isSolved: (state) => state.start === 200 && activeChanges(state).length === 2 && equals(chainFinal(state), n(180)) }
 ]
 
 /* ---------- 4. Simple interest ---------- */
@@ -249,10 +250,10 @@ export const setInterest = (state: InterestState, patch: Partial<InterestState>)
 export const interestOf = (state: InterestState) => fraction(state.capital * state.rate * state.years, 100)
 
 export const interestChallenges: LabChallenge<InterestState>[] = [
-    { id: 21501, prompt: say('Kalkulatu 8000 €-ren interesa % 5ean 3 urtez.', 'Calcula el interés de 8000 € al 5 % durante 3 años.', 'احسب فائدة 8000 € بنسبة 5٪ مدة 3 سنوات.'), hint: say('Aukeratu datuak.', 'Elige los datos.', 'اختر المعطيات.'), isSolved: (state) => state.capital === 8000 && state.rate === 5 && state.years === 3 },
-    { id: 21502, prompt: say('3000 €-rekin, lortu zehazki 600 € interes.', 'Con 3000 €, consigue exactamente 600 € de interés.', 'بـ3000 € احصل على فائدة 600 € تمامًا.'), hint: say('$r\\cdot t=20$.', '$r\\cdot t=20$.', '$r\\cdot t=20$.'), isSolved: (state) => state.capital === 3000 && equals(interestOf(state), n(600)) },
-    { id: 21503, prompt: say('Bikoiztu kapitala: interesa kapitalaren berdina izan dadila.', 'Dobla el capital: que el interés sea igual al capital.', 'ضاعف رأس المال: لتكن الفائدة مساوية لرأس المال.'), hint: say('$r\\cdot t=100$.', '$r\\cdot t=100$.', '$r\\cdot t=100$.'), isSolved: (state) => equals(interestOf(state), n(state.capital)) },
-    { id: 21504, prompt: say('5000 €-rekin, lortu 1000 € interes.', 'Con 5000 €, consigue 1000 € de interés.', 'بـ5000 € احصل على فائدة 1000 €.'), hint: say('Urteko 250 € → % 5, 4 urte.', '250 € al año → 5 %, 4 años.', '250 € سنويًا ← 5٪، 4 سنوات.'), isSolved: (state) => state.capital === 5000 && equals(interestOf(state), n(1000)) }
+    { id: 21501, prompt: say('Kalkulatu 8000 €-ren interesa % 5ean 3 urtez.', 'Calcula el interés de 8000 € al 5 % durante 3 años.', 'احسب فائدة 8000 € بنسبة 5٪ مدة 3 سنوات.', 'Calculate the interest on €8,000 at 5% over 3 years.'), hint: say('Aukeratu datuak.', 'Elige los datos.', 'اختر المعطيات.', 'Choose the data.'), isSolved: (state) => state.capital === 8000 && state.rate === 5 && state.years === 3 },
+    { id: 21502, prompt: say('3000 €-rekin, lortu zehazki 600 € interes.', 'Con 3000 €, consigue exactamente 600 € de interés.', 'بـ3000 € احصل على فائدة 600 € تمامًا.', 'With €3,000, get exactly €600 in interest.'), hint: say('$r\\cdot t=20$.', '$r\\cdot t=20$.', '$r\\cdot t=20$.', '$r\\cdot t=20$.'), isSolved: (state) => state.capital === 3000 && equals(interestOf(state), n(600)) },
+    { id: 21503, prompt: say('Bikoiztu kapitala: interesa kapitalaren berdina izan dadila.', 'Dobla el capital: que el interés sea igual al capital.', 'ضاعف رأس المال: لتكن الفائدة مساوية لرأس المال.', 'Double the principal: make the interest equal to the principal.'), hint: say('$r\\cdot t=100$.', '$r\\cdot t=100$.', '$r\\cdot t=100$.', '$r\\cdot t=100$.'), isSolved: (state) => equals(interestOf(state), n(state.capital)) },
+    { id: 21504, prompt: say('5000 €-rekin, lortu 1000 € interes.', 'Con 5000 €, consigue 1000 € de interés.', 'بـ5000 € احصل على فائدة 1000 €.', 'With €5,000, get €1,000 in interest.'), hint: say('Urteko 250 € → % 5, 4 urte.', '250 € al año → 5 %, 4 años.', '250 € سنويًا ← 5٪، 4 سنوات.', '€250 a year → 5%, 4 years.'), isSolved: (state) => state.capital === 5000 && equals(interestOf(state), n(1000)) }
 ]
 
 /* ---------- Endless challenges: shares, chained percentages and interest ---------- */
@@ -267,11 +268,12 @@ function freshFrom<State>(start: State, maker: LabChallengeMaker<State>): LabCha
     }
 }
 
-/** 22 000 with a space in Basque and Spanish; Arabic keeps the plain digits */
-const big = (value: number) => (value >= 10000 ? String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : String(value))
-/** An exact decimal for a sentence (comma, or the point in Arabic) and inside LaTeX */
-const decimalText = (value: FractionValue, point = false) => (toExactDecimal(value, point ? '.' : ',') ?? String(toNumber(value)))
-const decimalLatex = (value: FractionValue) => decimalText(value).replace(',', '{,}')
+/** Thousands in the language's own mark: 22.000 in Basque and Spanish, 22,000 in English */
+const big = (value: number, language: string) => (value >= 10000 ? String(value).replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSeparatorFor(language)) : String(value))
+/** An exact decimal for a sentence, with the language's mark (the point in Arabic and English) */
+const decimalText = (value: FractionValue, language: string) => (toExactDecimal(value, language === 'ar' ? '.' : decimalSeparatorFor(language)) ?? String(toNumber(value)))
+/** LaTeX always keeps the comma ({,}); the page writes the point where the language needs it */
+const decimalLatex = (value: FractionValue) => decimalText(value, 'es').replace(',', '{,}')
 const sameParts = (state: ShareState, wanted: number[]) => {
     const parts = shareParts(state).map(toNumber).sort((a, b) => a - b)
     const sorted = [...wanted].sort((a, b) => a - b)
@@ -292,14 +294,14 @@ export const shareExtra: LabChallengeMaker<ShareState> = freshFrom(initialShareS
             const [p1, p2, p3] = [...values].sort((a, b) => b - a)
             return {
                 prompt: say(
-                    `Banatu ${big(total)}, zatiak ${big(p1)}, ${big(p2)} eta ${big(p3)} izan daitezen.`,
-                    `Reparte ${big(total)} de forma que las partes sean ${big(p1)}, ${big(p2)} y ${big(p3)}.`,
-                    `وزّع ${total} بحيث تكون الأجزاء ${p1} و${p2} و${p3}.`
+                    `Banatu ${big(total, 'eu')}, zatiak ${big(p1, 'eu')}, ${big(p2, 'eu')} eta ${big(p3, 'eu')} izan daitezen.`,
+                    `Reparte ${big(total, 'es')} de forma que las partes sean ${big(p1, 'es')}, ${big(p2, 'es')} y ${big(p3, 'es')}.`,
+                    `وزّع ${total} بحيث تكون الأجزاء ${p1} و${p2} و${p3}.`, `Share ${big(total, 'en')} so that the parts are ${big(p1, 'en')}, ${big(p2, 'en')} and ${big(p3, 'en')}.`
                 ),
                 hint: say(
                     'Zatitu hiru zatiak beren ZKH-az. 10 baino handiagoak ateratzen badira, probatu alderantzizko banaketa.',
                     'Divide las tres partes entre su m.c.d. Si salen números mayores que 10, prueba el reparto inverso.',
-                    'اقسم الأجزاء الثلاثة على قاسمها المشترك الأكبر. إذا خرجت أعداد أكبر من 10، جرّب التوزيع العكسي.'
+                    'اقسم الأجزاء الثلاثة على قاسمها المشترك الأكبر. إذا خرجت أعداد أكبر من 10، جرّب التوزيع العكسي.', 'Divide the three parts by their GCD. If the numbers come out greater than 10, try the inverse share.'
                 ),
                 isSolved: (state) => state.total === total && sameParts(state, values),
                 solution
@@ -309,11 +311,11 @@ export const shareExtra: LabChallengeMaker<ShareState> = freshFrom(initialShareS
         const sum = a + b + c
         return {
             prompt: relation === 'direct'
-                ? say(`Banatu ${big(total)} zuzenki ${a}, ${b} eta ${c} zenbakiekiko. Zenbat dagokio bakoitzari?`, `Reparte ${big(total)} directamente a ${a}, ${b} y ${c}. ¿Cuánto le toca a cada uno?`, `وزّع ${total} طرديًا على ${a} و${b} و${c}. كم نصيب كل واحد؟`)
-                : say(`Banatu ${big(total)} alderantziz ${a}, ${b} eta ${c} zenbakiekiko. Zenbat dagokio bakoitzari?`, `Reparte ${big(total)} inversamente a ${a}, ${b} y ${c}. ¿Cuánto le toca a cada uno?`, `وزّع ${total} عكسيًا على ${a} و${b} و${c}. كم نصيب كل واحد؟`),
+                ? say(`Banatu ${big(total, 'eu')} zuzenki ${a}, ${b} eta ${c} zenbakiekiko. Zenbat dagokio bakoitzari?`, `Reparte ${big(total, 'es')} directamente a ${a}, ${b} y ${c}. ¿Cuánto le toca a cada uno?`, `وزّع ${total} طرديًا على ${a} و${b} و${c}. كم نصيب كل واحد؟`, `Share ${big(total, 'en')} directly in proportion to ${a}, ${b} and ${c}. How much does each one get?`)
+                : say(`Banatu ${big(total, 'eu')} alderantziz ${a}, ${b} eta ${c} zenbakiekiko. Zenbat dagokio bakoitzari?`, `Reparte ${big(total, 'es')} inversamente a ${a}, ${b} y ${c}. ¿Cuánto le toca a cada uno?`, `وزّع ${total} عكسيًا على ${a} و${b} و${c}. كم نصيب كل واحد؟`, `Share ${big(total, 'en')} inversely in proportion to ${a}, ${b} and ${c}. How much does each one get?`),
             hint: relation === 'direct'
-                ? say(`Batu zenbakiak eta zatitu: zati bakoitzak $${total}\\mathbin{:}${sum}$ balio du.`, `Suma los números y divide: cada parte vale $${total}\\mathbin{:}${sum}$.`, `اجمع الأعداد واقسم: كل جزء يساوي $${total}\\mathbin{:}${sum}$.`)
-                : say(`Banatu zuzenki alderantzizkoekiko: $\\frac{1}{${a}},\\ \\frac{1}{${b}},\\ \\frac{1}{${c}}$.`, `Reparte directamente a los inversos: $\\frac{1}{${a}},\\ \\frac{1}{${b}},\\ \\frac{1}{${c}}$.`, `وزّع طرديًا على المقلوبات: $\\frac{1}{${a}},\\ \\frac{1}{${b}},\\ \\frac{1}{${c}}$.`),
+                ? say(`Batu zenbakiak eta zatitu: zati bakoitzak $${total}\\mathbin{:}${sum}$ balio du.`, `Suma los números y divide: cada parte vale $${total}\\mathbin{:}${sum}$.`, `اجمع الأعداد واقسم: كل جزء يساوي $${total}\\mathbin{:}${sum}$.`, `Add the numbers and divide: each part is worth $${total}\\mathbin{:}${sum}$.`)
+                : say(`Banatu zuzenki alderantzizkoekiko: $\\frac{1}{${a}},\\ \\frac{1}{${b}},\\ \\frac{1}{${c}}$.`, `Reparte directamente a los inversos: $\\frac{1}{${a}},\\ \\frac{1}{${b}},\\ \\frac{1}{${c}}$.`, `وزّع طرديًا على المقلوبات: $\\frac{1}{${a}},\\ \\frac{1}{${b}},\\ \\frac{1}{${c}}$.`, `Share directly in proportion to the reciprocals: $\\frac{1}{${a}},\\ \\frac{1}{${b}},\\ \\frac{1}{${c}}$.`),
             isSolved: (state) => state.total === total && state.relation === relation && sortedMatch(state, numbers),
             solution
         }
@@ -342,14 +344,14 @@ export const chainExtra: LabChallengeMaker<ChainState> = freshFrom(initialChainS
             if (equals(final, n(start)) || toExactDecimal(final, ',') === null || (toExactDecimal(final, ',')!.split(',')[1] ?? '').length > 2) continue
             return {
                 prompt: say(
-                    `Hasierako prezioa: ${start} €. Bi aldaketarekin, lortu azken prezioa ${decimalText(final)} € izatea.`,
-                    `Precio inicial: ${start} €. Con dos cambios, consigue que el precio final sea ${decimalText(final)} €.`,
-                    `السعر الأصلي ${start} €. بتغيّرين اجعل السعر النهائي ${decimalText(final, true)} €.`
+                    `Hasierako prezioa: ${start} €. Bi aldaketarekin, lortu azken prezioa ${decimalText(final, 'eu')} € izatea.`,
+                    `Precio inicial: ${start} €. Con dos cambios, consigue que el precio final sea ${decimalText(final, 'es')} €.`,
+                    `السعر الأصلي ${start} €. بتغيّرين اجعل السعر النهائي ${decimalText(final, 'ar')} €.`, `Original price: €${start}. With two changes, make the final price €${decimalText(final, 'en')}.`
                 ),
                 hint: say(
                     `Indize osoa: $${decimalLatex(final)}\\mathbin{:}${start}=${decimalLatex(index)}$. Bilatu biderkatuta hori ematen duten bi indize.`,
                     `Índice total: $${decimalLatex(final)}\\mathbin{:}${start}=${decimalLatex(index)}$. Busca dos índices que multiplicados den eso.`,
-                    `المؤشر الكلي: $${decimalLatex(final)}\\mathbin{:}${start}=${decimalLatex(index)}$. ابحث عن مؤشرين حاصل ضربهما هذا.`
+                    `المؤشر الكلي: $${decimalLatex(final)}\\mathbin{:}${start}=${decimalLatex(index)}$. ابحث عن مؤشرين حاصل ضربهما هذا.`, `Total multiplier: $${decimalLatex(final)}\\mathbin{:}${start}=${decimalLatex(index)}$. Find two multipliers that give that when multiplied together.`
                 ),
                 isSolved: (state) => state.start === start && activeChanges(state).length === 2 && equals(chainFinal(state), final),
                 solution
@@ -358,11 +360,11 @@ export const chainExtra: LabChallengeMaker<ChainState> = freshFrom(initialChainS
         if (kind < 0.75) {
             if (equals(index, n(1))) continue
             return {
-                prompt: say(`Lortu $${decimalLatex(index)}$ indize osoa.`, `Consigue un índice total de $${decimalLatex(index)}$.`, `احصل على مؤشر كلي $${decimalLatex(index)}$.`),
+                prompt: say(`Lortu $${decimalLatex(index)}$ indize osoa.`, `Consigue un índice total de $${decimalLatex(index)}$.`, `احصل على مؤشر كلي $${decimalLatex(index)}$.`, `Get a total multiplier of $${decimalLatex(index)}$.`),
                 hint: say(
                     `Aldaketa bakoitzaren indizea $1+\\frac{p}{100}$ da, eta indizeak biderkatzen dira.`,
                     `Cada cambio tiene índice $1+\\frac{p}{100}$, y los índices se multiplican.`,
-                    `لكل تغيّر مؤشر $1+\\frac{p}{100}$، والمؤشرات تُضرب.`
+                    `لكل تغيّر مؤشر $1+\\frac{p}{100}$، والمؤشرات تُضرب.`, 'Each change has the multiplier $1+\\frac{p}{100}$, and the multipliers are multiplied together.'
                 ),
                 isSolved: (state) => equals(chainIndex(state), index),
                 solution
@@ -373,12 +375,12 @@ export const chainExtra: LabChallengeMaker<ChainState> = freshFrom(initialChainS
             prompt: say(
                 `Hasierako prezioa: ${start} €. Igo % ${up} eta gero jaitsi % ${up}. Hasierako preziora itzultzen zara?`,
                 `Desde ${start} €, sube un ${up} % y después baja un ${up} %. ¿Vuelves al precio inicial?`,
-                `السعر الأصلي ${start} €. زِده ${up}٪ ثم خفّضه ${up}٪. هل تعود إلى السعر الأصلي؟`
+                `السعر الأصلي ${start} €. زِده ${up}٪ ثم خفّضه ${up}٪. هل تعود إلى السعر الأصلي؟`, `Starting from €${start}, go up by ${up}% and then down by ${up}%. Do you get back to the original price?`
             ),
             hint: say(
                 `Biderkatu indizeak: $${decimalLatex(changeIndex(up))}\\cdot ${decimalLatex(changeIndex(-up))}$.`,
                 `Multiplica los índices: $${decimalLatex(changeIndex(up))}\\cdot ${decimalLatex(changeIndex(-up))}$.`,
-                `اضرب المؤشرين: $${decimalLatex(changeIndex(up))}\\cdot ${decimalLatex(changeIndex(-up))}$.`
+                `اضرب المؤشرين: $${decimalLatex(changeIndex(up))}\\cdot ${decimalLatex(changeIndex(-up))}$.`, `Multiply the multipliers: $${decimalLatex(changeIndex(up))}\\cdot ${decimalLatex(changeIndex(-up))}$.`
             ),
             isSolved: (state) => state.start === start && activeChanges(state).join() === `${up},${-up}`,
             solution: { start, changes: [up, -up, 0] }
@@ -394,11 +396,11 @@ export const interestExtra: LabChallengeMaker<InterestState> = freshFrom(initial
     const kind = random()
     if (kind < 0.4) {
         return {
-            prompt: say(`Kapitala: ${capital} €. Lortu zehazki ${interest} € interes.`, `Con ${capital} €, consigue exactamente ${interest} € de interés.`, `برأس مال ${capital} € احصل على فائدة ${interest} € تمامًا.`),
+            prompt: say(`Kapitala: ${capital} €. Lortu zehazki ${interest} € interes.`, `Con ${capital} €, consigue exactamente ${interest} € de interés.`, `برأس مال ${capital} € احصل على فائدة ${interest} € تمامًا.`, `With €${capital}, get exactly €${interest} in interest.`),
             hint: say(
                 `$I=\\frac{${capital}\\cdot r\\cdot t}{100}$: behar duzu $r\\cdot t=${rate * years}$.`,
                 `$I=\\frac{${capital}\\cdot r\\cdot t}{100}$: necesitas $r\\cdot t=${rate * years}$.`,
-                `$I=\\frac{${capital}\\cdot r\\cdot t}{100}$: تحتاج إلى $r\\cdot t=${rate * years}$.`
+                `$I=\\frac{${capital}\\cdot r\\cdot t}{100}$: تحتاج إلى $r\\cdot t=${rate * years}$.`, `$I=\\frac{${capital}\\cdot r\\cdot t}{100}$: you need $r\\cdot t=${rate * years}$.`
             ),
             isSolved: (state) => state.capital === capital && equals(interestOf(state), n(interest)),
             solution
@@ -410,12 +412,12 @@ export const interestExtra: LabChallengeMaker<InterestState> = freshFrom(initial
             prompt: say(
                 `Kapitala: ${capital} €; interes-tasa: % ${rate}. Zenbat urte behar dira ${interest} € interes lortzeko?`,
                 `¿Cuántos años tienen que estar ${capital} € al ${rate} % para producir ${interest} € de interés?`,
-                `رأس المال ${capital} € بفائدة ${rate}٪. كم سنة يلزم للحصول على فائدة ${interest} €؟`
+                `رأس المال ${capital} € بفائدة ${rate}٪. كم سنة يلزم للحصول على فائدة ${interest} €؟`, `For how many years must €${capital} be deposited at ${rate}% to earn €${interest} in interest?`
             ),
             hint: say(
                 `Urtero $\\frac{${capital}\\cdot ${rate}}{100}=${decimalLatex(fraction(capital * rate, 100))}$ € sortzen ditu.`,
                 `Cada año produce $\\frac{${capital}\\cdot ${rate}}{100}=${decimalLatex(fraction(capital * rate, 100))}$ €.`,
-                `ينتج كل سنة $\\frac{${capital}\\cdot ${rate}}{100}=${decimalLatex(fraction(capital * rate, 100))}$ €.`
+                `ينتج كل سنة $\\frac{${capital}\\cdot ${rate}}{100}=${decimalLatex(fraction(capital * rate, 100))}$ €.`, `Each year it earns €$\\frac{${capital}\\cdot ${rate}}{100}=${decimalLatex(fraction(capital * rate, 100))}$.`
             ),
             isSolved: (state) => state.capital === capital && state.rate === rate && equals(interestOf(state), n(interest)),
             solution
@@ -425,12 +427,12 @@ export const interestExtra: LabChallengeMaker<InterestState> = freshFrom(initial
         prompt: say(
             `Kapitala: ${capital} €; ${years} urte. Zer interes-tasarekin lortzen da ${interest} € interes?`,
             `¿A qué tipo de interés producen ${capital} € en ${years} ${years === 1 ? 'año' : 'años'} un interés de ${interest} €?`,
-            `رأس المال ${capital} € وعدد السنوات ${years}. بأي سعر فائدة نحصل على فائدة ${interest} €؟`
+            `رأس المال ${capital} € وعدد السنوات ${years}. بأي سعر فائدة نحصل على فائدة ${interest} €؟`, `At what interest rate will €${capital} earn €${interest} in interest in ${years} ${years === 1 ? 'año' : 'años'}?`
         ),
         hint: say(
             `Urtero $${interest}\\mathbin{:}${years}=${yearly}$ € sortu behar ditu.`,
             `Cada año tiene que producir $${interest}\\mathbin{:}${years}=${yearly}$ €.`,
-            `يجب أن ينتج كل سنة $${interest}\\mathbin{:}${years}=${yearly}$ €.`
+            `يجب أن ينتج كل سنة $${interest}\\mathbin{:}${years}=${yearly}$ €.`, `Each year it has to earn €$${interest}\\mathbin{:}${years}=${yearly}$.`
         ),
         isSolved: (state) => state.capital === capital && state.years === years && equals(interestOf(state), n(interest)),
         solution

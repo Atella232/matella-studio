@@ -5,6 +5,7 @@ import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { fraction } from '../../../features/unit-v2/math/fraction'
 import type { LocalizedText, UnitLanguage } from '../../../features/unit-v2/types'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import { Plane, PlaneLine, PlanePath, PlanePoint } from '../../dbh2-funtzioak-v2/plane'
 import type { PlaneMap } from '../../dbh2-funtzioak-v2/planeMap'
 import { region, type HalfPlane, type Linear, type Point, type Sense } from '../systems'
@@ -83,10 +84,10 @@ const STAGE_TINT = 'var(--stage-tint, #dde7f7)'
 const MUSTARD_TINT = 'var(--mustard-tint, #fbebc0)'
 const REGION = 'rgba(38, 123, 83, 0.2)'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 /** Negative numbers with the true minus sign */
 const signed = (value: number) => (value < 0 ? `−${-value}` : String(value))
-const decimal = (value: number, language: UnitLanguage) => signed(Math.round(value * 100) / 100).replace('.', language === 'ar' ? '.' : ',')
+const decimal = (value: number, language: UnitLanguage) => signed(Math.round(value * 100) / 100).replace('.', language === 'ar' ? '.' : decimalSeparatorFor(language))
 /** A point as text, with whole numbers when they are whole */
 const pointText = ([x, y]: Point, language: UnitLanguage) => `(${decimal(x, language)}, ${decimal(y, language)})`
 /** The plain text of ax + by = c: x + 2y = 3 */
@@ -127,7 +128,7 @@ export function ClassifyTool(props: LabToolProps) {
     const limit = COEFFICIENT_LIMIT
     const controls = (
         <>
-            <Segmented label={l(say('Lehen zuzena', 'Primera recta', 'المستقيم الأول'))} value={String(state.first)} options={classifyFirstLines.map((line, index) => ({ value: String(index), label: plain(linearLatex(line)) }))} onChange={(value) => setState((s) => setClassify(s, { first: Number(value) }))} />
+            <Segmented label={l(say('Lehen zuzena', 'Primera recta', 'المستقيم الأول', 'First straight line'))} value={String(state.first)} options={classifyFirstLines.map((line, index) => ({ value: String(index), label: plain(linearLatex(line)) }))} onChange={(value) => setState((s) => setClassify(s, { first: Number(value) }))} />
             <Stepper label="a′" value={state.second.a} min={-limit} max={limit} format={signed} onChange={(a) => setState((s) => setClassify(s, { a }))} language={props.language} />
             <Stepper label="b′" value={state.second.b} min={-limit} max={limit} format={signed} onChange={(b) => setState((s) => setClassify(s, { b }))} language={props.language} />
             <Stepper label="c′" value={state.second.c} min={-limit} max={limit} format={signed} onChange={(c) => setState((s) => setClassify(s, { c }))} language={props.language} />
@@ -135,13 +136,13 @@ export function ClassifyTool(props: LabToolProps) {
     )
     const latex = `${linearLatex(first)}\\qquad ${linearLatex(state.second)}`
     const note = kind === 'one' && solution
-        ? l(say(`Bateragarri determinatua: ${pointText(solution, props.language)} puntuan ebakitzen dira.`, `Compatible determinado: se cortan en ${pointText(solution, props.language)}.`, `متوافق محدد: يتقاطعان في ${pointText(solution, props.language)}.`))
+        ? l(say(`Bateragarri determinatua: ${pointText(solution, props.language)} puntuan ebakitzen dira.`, `Compatible determinado: se cortan en ${pointText(solution, props.language)}.`, `متوافق محدد: يتقاطعان في ${pointText(solution, props.language)}.`, `Consistent and independent: they meet at ${pointText(solution, props.language)}.`))
         : kind === 'none'
-            ? l(say('Bateraezina: zuzen paraleloak, ebazpenik ez.', 'Incompatible: rectas paralelas, sin solución.', 'غير متوافق: مستقيمان متوازيان، لا حل.'))
-            : l(say('Bateragarri indeterminatua: zuzen bera, infinitu ebazpen.', 'Compatible indeterminado: la misma recta, infinitas soluciones.', 'متوافق غير محدد: المستقيم نفسه، حلول لا نهاية لها.'))
+            ? l(say('Bateraezina: zuzen paraleloak, ebazpenik ez.', 'Incompatible: rectas paralelas, sin solución.', 'غير متوافق: مستقيمان متوازيان، لا حل.', 'Inconsistent: parallel straight lines, no solution.'))
+            : l(say('Bateragarri indeterminatua: zuzen bera, infinitu ebazpen.', 'Compatible indeterminado: la misma recta, infinitas soluciones.', 'متوافق غير محدد: المستقيم نفسه، حلول لا نهاية لها.', 'Consistent and dependent: the same straight line, infinitely many solutions.'))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={classifyChallenges} state={state}>
-            <Plane box={{ xMin: -6, xMax: 6, yMin: -6, yMax: 6 }} cell={24} labelStep={2} label={l(say('Sistemaren bi zuzenak', 'Las dos rectas del sistema', 'مستقيما النظام'))}>
+            <Plane box={{ xMin: -6, xMax: 6, yMin: -6, yMax: 6 }} cell={24} labelStep={2} label={l(say('Sistemaren bi zuzenak', 'Las dos rectas del sistema', 'مستقيما النظام', 'The two straight lines of the system'))}>
                 {(map, clip) => (
                     <g>
                         <LineOf map={map} line={first} color={STAGE} clip={clip} />
@@ -168,21 +169,21 @@ export function SubstitutionTool(props: LabToolProps) {
     const { k, c, value, solution } = substituted(state)
     const controls = (
         <>
-            <Segmented label={l(say('Sistema', 'Sistema', 'النظام'))} value={String(state.system)} options={substitutionSystems.map((_, index) => ({ value: String(index), label: `S${index + 1}` }))} onChange={(value) => setState((s) => setSubstitution(s, { system: Number(value) }))} />
+            <Segmented label={l(say('Sistema', 'Sistema', 'النظام', 'System'))} value={String(state.system)} options={substitutionSystems.map((_, index) => ({ value: String(index), label: `S${index + 1}` }))} onChange={(value) => setState((s) => setSubstitution(s, { system: Number(value) }))} />
             <p className="fraction-v2-lab-tip"><MathText text={`$${linearLatex(first)}\\qquad ${linearLatex(second)}$`} /></p>
-            <Segmented label={l(say('Ekuazioa', 'Ecuación', 'المعادلة'))} value={String(state.equation)} options={[{ value: '0', label: l(say('1.a', '1.ª', 'الأولى')) }, { value: '1', label: l(say('2.a', '2.ª', 'الثانية')) }]} onChange={(value) => setState((s) => setSubstitution(s, { equation: value === '0' ? 0 : 1 }))} />
-            <Segmented label={l(say('Askatu', 'Despeja', 'اعزل'))} value={state.unknown} options={[{ value: 'x', label: 'x' }, { value: 'y', label: 'y' }]} onChange={(value) => setState((s) => setSubstitution(s, { unknown: value as Unknown }))} />
+            <Segmented label={l(say('Ekuazioa', 'Ecuación', 'المعادلة', 'Equation'))} value={String(state.equation)} options={[{ value: '0', label: l(say('1.a', '1.ª', 'الأولى', '1st')) }, { value: '1', label: l(say('2.a', '2.ª', 'الثانية', '2nd')) }]} onChange={(value) => setState((s) => setSubstitution(s, { equation: value === '0' ? 0 : 1 }))} />
+            <Segmented label={l(say('Askatu', 'Despeja', 'اعزل', 'Solve for'))} value={state.unknown} options={[{ value: 'x', label: 'x' }, { value: 'y', label: 'y' }]} onChange={(value) => setState((s) => setSubstitution(s, { unknown: value as Unknown }))} />
         </>
     )
     const latex = isolatedLatex(state)
     const note = Math.abs(coefficient) === 1
-        ? l(say(`${state.unknown}-ren koefizientea ${signed(coefficient)} da: ez da zatikirik agertzen.`, `El coeficiente de ${state.unknown} es ${signed(coefficient)}: no salen fracciones.`, `معامل ${state.unknown} هو ${signed(coefficient)}: لا تظهر كسور.`))
-        : l(say(`${state.unknown}-ren koefizientea ${signed(coefficient)} da: zatikiak agertzen dira.`, `El coeficiente de ${state.unknown} es ${signed(coefficient)}: salen fracciones.`, `معامل ${state.unknown} هو ${signed(coefficient)}: تظهر كسور.`))
+        ? l(say(`${state.unknown}-ren koefizientea ${signed(coefficient)} da: ez da zatikirik agertzen.`, `El coeficiente de ${state.unknown} es ${signed(coefficient)}: no salen fracciones.`, `معامل ${state.unknown} هو ${signed(coefficient)}: لا تظهر كسور.`, `The coefficient of ${state.unknown} is ${signed(coefficient)}: no fractions appear.`))
+        : l(say(`${state.unknown}-ren koefizientea ${signed(coefficient)} da: zatikiak agertzen dira.`, `El coeficiente de ${state.unknown} es ${signed(coefficient)}: salen fracciones.`, `معامل ${state.unknown} هو ${signed(coefficient)}: تظهر كسور.`, `The coefficient of ${state.unknown} is ${signed(coefficient)}: fractions appear.`))
     const steps = [
-        { text: say('Askatu', 'Despeja', 'اعزل'), math: latex },
-        { text: say('Ordeztu beste ekuazioan', 'Sustituye en la otra ecuación', 'عوّض في المعادلة الأخرى'), math: `${termLatex(k, other)}=${texFraction(c)}` },
-        { text: say('Ebatzi', 'Resuelve', 'حلّ'), math: `${other}=${texFraction(value)}` },
-        { text: say('Ebazpena', 'La solución', 'الحل'), math: `x=${texFraction(fraction(Math.round(solution[0] * 12), 12))},\\ y=${texFraction(fraction(Math.round(solution[1] * 12), 12))}` }
+        { text: say('Askatu', 'Despeja', 'اعزل', 'Solve for'), math: latex },
+        { text: say('Ordeztu beste ekuazioan', 'Sustituye en la otra ecuación', 'عوّض في المعادلة الأخرى', 'Substitute into the other equation'), math: `${termLatex(k, other)}=${texFraction(c)}` },
+        { text: say('Ebatzi', 'Resuelve', 'حلّ', 'Solve'), math: `${other}=${texFraction(value)}` },
+        { text: say('Ebazpena', 'La solución', 'الحل', 'The solution'), math: `x=${texFraction(fraction(Math.round(solution[0] * 12), 12))},\\ y=${texFraction(fraction(Math.round(solution[1] * 12), 12))}` }
     ]
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={substitutionChallenges} state={state}>
@@ -208,21 +209,21 @@ export function CircleTool(props: LabToolProps) {
     const points = circlePoints(state)
     const controls = (
         <>
-            <Stepper label={l(say('Erradioa', 'Radio', 'نصف القطر'))} value={state.r} min={CIRCLE_LIMITS.r.min} max={CIRCLE_LIMITS.r.max} onChange={(r) => setState((s) => setCircle(s, { r }))} language={props.language} />
+            <Stepper label={l(say('Erradioa', 'Radio', 'نصف القطر', 'Radius'))} value={state.r} min={CIRCLE_LIMITS.r.min} max={CIRCLE_LIMITS.r.max} onChange={(r) => setState((s) => setCircle(s, { r }))} language={props.language} />
             <Stepper label="m" value={state.m} min={CIRCLE_LIMITS.m.min} max={CIRCLE_LIMITS.m.max} format={signed} onChange={(m) => setState((s) => setCircle(s, { m }))} language={props.language} />
             <Stepper label="n" value={state.n} min={CIRCLE_LIMITS.n.min} max={CIRCLE_LIMITS.n.max} format={signed} onChange={(n) => setState((s) => setCircle(s, { n }))} language={props.language} />
         </>
     )
     const latex = `x^{2}+y^{2}=${state.r * state.r}\\qquad ${lineLatex(state.m, state.n)}`
-    const list = points.map((point) => pointText(point, props.language)).join(props.language === 'ar' ? ' و' : props.language === 'eu' ? ' eta ' : ' y ')
+    const list = points.map((point) => pointText(point, props.language)).join(props.language === 'ar' ? ' و' : props.language === 'eu' ? ' eta ' : props.language === 'en' ? ' and ' : ' y ')
     const note = points.length === 0
-        ? l(say('Ez dira mozten: sistemak ez du ebazpenik.', 'No se cortan: el sistema no tiene solución.', 'لا يتقاطعان: لا حل للنظام.'))
+        ? l(say('Ez dira mozten: sistemak ez du ebazpenik.', 'No se cortan: el sistema no tiene solución.', 'لا يتقاطعان: لا حل للنظام.', 'They do not meet: the system has no solution.'))
         : points.length === 1
-            ? l(say(`Ukitzailea: ebazpen bakarra, ${list}.`, `Tangente: una sola solución, ${list}.`, `مماس: حل واحد ${list}.`))
-            : l(say(`Bi ebazpen: ${list}.`, `Dos soluciones: ${list}.`, `حلّان: ${list}.`))
+            ? l(say(`Ukitzailea: ebazpen bakarra, ${list}.`, `Tangente: una sola solución, ${list}.`, `مماس: حل واحد ${list}.`, `Tangent: one solution, ${list}.`))
+            : l(say(`Bi ebazpen: ${list}.`, `Dos soluciones: ${list}.`, `حلّان: ${list}.`, `Two solutions: ${list}.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={circleChallenges} state={state}>
-            <Plane box={{ xMin: -7, xMax: 7, yMin: -7, yMax: 7 }} cell={20} labelStep={2} label={l(say('Zirkunferentzia eta zuzena', 'La circunferencia y la recta', 'الدائرة والمستقيم'))}>
+            <Plane box={{ xMin: -7, xMax: 7, yMin: -7, yMax: 7 }} cell={20} labelStep={2} label={l(say('Zirkunferentzia eta zuzena', 'La circunferencia y la recta', 'الدائرة والمستقيم', 'The circle and the straight line'))}>
                 {(map, clip) => (
                     <g>
                         <circle cx={map.x(0)} cy={map.y(0)} r={state.r * map.cell} fill="none" stroke={STAGE} strokeWidth={3} />
@@ -251,14 +252,14 @@ export function SquaresTool(props: LabToolProps) {
     )
     const latex = `x^{2}=${texFraction(fraction(state.A + state.B, 2))},\\ y^{2}=${texFraction(fraction(state.A - state.B, 2))}`
     const note = solutions.length === 0
-        ? l(say('Karratu bat negatiboa da: ebazpenik ez.', 'Un cuadrado es negativo: no hay solución.', 'أحد المربعين سالب: لا حل.'))
-        : l(say(`${solutions.length} ebazpen: ${solutions.map((point) => pointText(point, props.language)).join(' ')}`, `${solutions.length} ${solutions.length === 1 ? 'solución' : 'soluciones'}: ${solutions.map((point) => pointText(point, props.language)).join(' ')}`, `عدد الحلول ${solutions.length}: ${solutions.map((point) => pointText(point, props.language)).join(' ')}`))
+        ? l(say('Karratu bat negatiboa da: ebazpenik ez.', 'Un cuadrado es negativo: no hay solución.', 'أحد المربعين سالب: لا حل.', 'A squared value is negative: there is no solution.'))
+        : l(say(`${solutions.length} ebazpen: ${solutions.map((point) => pointText(point, props.language)).join(' ')}`, `${solutions.length} ${solutions.length === 1 ? 'solución' : 'soluciones'}: ${solutions.map((point) => pointText(point, props.language)).join(' ')}`, `عدد الحلول ${solutions.length}: ${solutions.map((point) => pointText(point, props.language)).join(' ')}`, `${solutions.length} ${solutions.length === 1 ? 'solution' : 'solutions'}: ${solutions.map((point) => pointText(point, props.language)).join(' ')}`))
     const B = state.B
     const branch = (sign: number): Point[] => Array.from({ length: 121 }, (_, k) => -9 + k * 0.15).map((t) => (B >= 0 ? [sign * Math.sqrt(B + t * t), t] : [t, sign * Math.sqrt(-B + t * t)]))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={squaresChallenges} state={state}>
             <p className="fraction-v2-lab-tip" style={{ textAlign: 'center' }}><MathText text={`$x^{2}+y^{2}=${state.A}\\qquad x^{2}-y^{2}=${state.B}$`} /></p>
-            <Plane box={{ xMin: -8, xMax: 8, yMin: -8, yMax: 8 }} cell={17} labelStep={2} label={l(say('Zirkunferentzia eta hiperbola', 'La circunferencia y la hipérbola', 'الدائرة والقطع الزائد'))}>
+            <Plane box={{ xMin: -8, xMax: 8, yMin: -8, yMax: 8 }} cell={17} labelStep={2} label={l(say('Zirkunferentzia eta hiperbola', 'La circunferencia y la hipérbola', 'الدائرة والقطع الزائد', 'The circle and the hyperbola'))}>
                 {(map, clip) => (
                     <g>
                         <circle cx={map.x(0)} cy={map.y(0)} r={Math.sqrt(state.A) * map.cell} fill="none" stroke={STAGE} strokeWidth={3} />
@@ -286,24 +287,24 @@ export function HalfPlaneTool(props: LabToolProps) {
         <>
             <Stepper label="a" value={state.a} min={-k} max={k} format={signed} onChange={(a) => setState((s) => setHalfPlane(s, { a }))} language={props.language} />
             <Stepper label="b" value={state.b} min={-k} max={k} format={signed} onChange={(b) => setState((s) => setHalfPlane(s, { b }))} language={props.language} />
-            <Segmented label={l(say('Zeinua', 'Signo', 'الرمز'))} value={state.sense} options={SENSES.map((sense) => ({ value: sense, label: sense }))} onChange={(sense) => setState((s) => setHalfPlane(s, { sense: sense as Sense }))} />
+            <Segmented label={l(say('Zeinua', 'Signo', 'الرمز', 'Sign'))} value={state.sense} options={SENSES.map((sense) => ({ value: sense, label: sense }))} onChange={(sense) => setState((s) => setHalfPlane(s, { sense: sense as Sense }))} />
             <Stepper label="c" value={state.c} min={-HALF_LIMITS.c} max={HALF_LIMITS.c} format={signed} onChange={(c) => setState((s) => setHalfPlane(s, { c }))} language={props.language} />
-            <Stepper label={l(say('Proba-puntua: x', 'Punto de prueba: x', 'نقطة الاختبار: x'))} value={state.px} min={-HALF_LIMITS.point} max={HALF_LIMITS.point} format={signed} onChange={(px) => setState((s) => setHalfPlane(s, { px }))} language={props.language} />
-            <Stepper label={l(say('Proba-puntua: y', 'Punto de prueba: y', 'نقطة الاختبار: y'))} value={state.py} min={-HALF_LIMITS.point} max={HALF_LIMITS.point} format={signed} onChange={(py) => setState((s) => setHalfPlane(s, { py }))} language={props.language} />
+            <Stepper label={l(say('Proba-puntua: x', 'Punto de prueba: x', 'نقطة الاختبار: x', 'Test point: x'))} value={state.px} min={-HALF_LIMITS.point} max={HALF_LIMITS.point} format={signed} onChange={(px) => setState((s) => setHalfPlane(s, { px }))} language={props.language} />
+            <Stepper label={l(say('Proba-puntua: y', 'Punto de prueba: y', 'نقطة الاختبار: y', 'Test point: y'))} value={state.py} min={-HALF_LIMITS.point} max={HALF_LIMITS.point} format={signed} onChange={(py) => setState((s) => setHalfPlane(s, { py }))} language={props.language} />
         </>
     )
     const value = state.a * state.px + state.b * state.py
     const latex = `${linearLatex(state, SENSE_LATEX[state.sense])}\\qquad ${value}${SENSE_LATEX[state.sense]}${state.c}\\ ${holds ? '\\checkmark' : '\\times'}`
     const onBoundary = value === state.c
     const note = holds
-        ? l(say('Proba-puntua ebazpena da: bere erdiplanoa da ebazpena.', 'El punto de prueba es solución: su semiplano es la solución.', 'نقطة الاختبار حل: نصف مستواها هو الحل.'))
+        ? l(say('Proba-puntua ebazpena da: bere erdiplanoa da ebazpena.', 'El punto de prueba es solución: su semiplano es la solución.', 'نقطة الاختبار حل: نصف مستواها هو الحل.', 'The test point is a solution: its half-plane is the solution.'))
         : onBoundary
-            ? l(say('Puntua muga-zuzenean dago, eta inekuazio hertsi batean ertza ez dago barruan.', 'El punto está en la recta frontera, y en una inecuación estricta el borde no entra.', 'النقطة على المستقيم الحدّي، وفي المتراجحة الصارمة لا يدخل الحد.'))
-            : l(say('Proba-puntua ez da ebazpena: ebazpena beste erdiplanoa da.', 'El punto de prueba no es solución: la solución es el otro semiplano.', 'نقطة الاختبار ليست حلًّا: الحل نصف المستوى الآخر.'))
+            ? l(say('Puntua muga-zuzenean dago, eta inekuazio hertsi batean ertza ez dago barruan.', 'El punto está en la recta frontera, y en una inecuación estricta el borde no entra.', 'النقطة على المستقيم الحدّي، وفي المتراجحة الصارمة لا يدخل الحد.', 'The point is on the boundary line, and with a strict inequality the boundary is not included.'))
+            : l(say('Proba-puntua ez da ebazpena: ebazpena beste erdiplanoa da.', 'El punto de prueba no es solución: la solución es el otro semiplano.', 'نقطة الاختبار ليست حلًّا: الحل نصف المستوى الآخر.', 'The test point is not a solution: the solution is the other half-plane.'))
     const strict = state.sense === '<' || state.sense === '>'
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={halfPlaneChallenges} state={state}>
-            <Plane box={box} cell={24} labelStep={2} label={l(say('Erdiplanoa eta proba-puntua', 'El semiplano y el punto de prueba', 'نصف المستوى ونقطة الاختبار'))} onPick={([x, y]) => setState((s) => setHalfPlane(s, { px: Math.round(x), py: Math.round(y) }))}>
+            <Plane box={box} cell={24} labelStep={2} label={l(say('Erdiplanoa eta proba-puntua', 'El semiplano y el punto de prueba', 'نصف المستوى ونقطة الاختبار', 'The half-plane and the test point'))} onPick={([x, y]) => setState((s) => setHalfPlane(s, { px: Math.round(x), py: Math.round(y) }))}>
                 {(map, clip) => (
                     <g>
                         <polygon points={polygon(map, region(box, [half]))} fill={REGION} />
@@ -335,10 +336,10 @@ export function RegionTool(props: LabToolProps) {
     )
     const latex = `${linearLatex(state, '\\le ')}\\qquad (${texFraction(vx)},0)\\ \\ (0,${texFraction(vy)})`
     const areaText = decimal(area.numerator / area.denominator, props.language)
-    const note = l(say(`${points.length} puntu oso. Azalera: ${areaText}.`, `${points.length} puntos enteros. Área: ${areaText}.`, `عدد النقاط الصحيحة ${points.length}. المساحة: ${areaText}.`))
+    const note = l(say(`${points.length} puntu oso. Azalera: ${areaText}.`, `${points.length} puntos enteros. Área: ${areaText}.`, `عدد النقاط الصحيحة ${points.length}. المساحة: ${areaText}.`, `${points.length} integer points. Area: ${areaText}.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={regionChallenges} state={state}>
-            <Plane box={box} cell={22} labelStep={2} label={l(say('Triangelua eta haren puntu osoak', 'El triángulo y sus puntos enteros', 'المثلث ونقاطه الصحيحة'))}>
+            <Plane box={box} cell={22} labelStep={2} label={l(say('Triangelua eta haren puntu osoak', 'El triángulo y sus puntos enteros', 'المثلث ونقاطه الصحيحة', 'The triangle and its integer points'))}>
                 {(map, clip) => (
                     <g>
                         <polygon points={polygon(map, region(box, regionHalves(state)))} fill={REGION} stroke={GREEN} strokeWidth={2} />
@@ -362,7 +363,7 @@ export function MixtureTool(props: LabToolProps) {
     const right = total === scenario.total
     const controls = (
         <>
-            <Segmented label={l(say('Egoera', 'Situación', 'الحالة'))} value={String(state.scenario)} options={mixtureScenarios.map((item, index) => ({ value: String(index), label: l(item.title) }))} onChange={(value) => setState((s) => setMixture(s, { scenario: Number(value) }))} />
+            <Segmented label={l(say('Egoera', 'Situación', 'الحالة', 'Situation'))} value={String(state.scenario)} options={mixtureScenarios.map((item, index) => ({ value: String(index), label: l(item.title) }))} onChange={(value) => setState((s) => setMixture(s, { scenario: Number(value) }))} />
             <p className="fraction-v2-lab-tip"><MathText text={`$x+y=${scenario.count}\\qquad ${scenario.first}x+${scenario.second}y=${scenario.total}$`} /></p>
             <Stepper label={`x (${l(scenario.things[0])})`} value={state.x} min={0} max={scenario.count} step={scenario.step} onChange={(x) => setState((s) => setMixture(s, { x }))} language={props.language} />
         </>
@@ -371,14 +372,14 @@ export function MixtureTool(props: LabToolProps) {
     const gap = total - scenario.total
     const perStep = scenario.first - scenario.second
     const note = right
-        ? l(say(`Hori da: x = ${state.x} eta y = ${y}.`, `¡Eso es! x = ${state.x} e y = ${y}.`, `هذا هو: x = ${state.x} وy = ${y}.`))
-        : l(say(`${Math.abs(gap)} ${gap > 0 ? 'soberan' : 'falta'}. x bat igotzean, guztizkoa ${signed(perStep)} aldatzen da.`, `${gap > 0 ? 'Sobran' : 'Faltan'} ${Math.abs(gap)}. Al subir x en 1, el total cambia ${signed(perStep)}.`, `${gap > 0 ? 'زائد' : 'ناقص'} ${Math.abs(gap)}. عند زيادة x بواحد يتغيّر المجموع بمقدار ${signed(perStep)}.`))
+        ? l(say(`Hori da: x = ${state.x} eta y = ${y}.`, `¡Eso es! x = ${state.x} e y = ${y}.`, `هذا هو: x = ${state.x} وy = ${y}.`, `That's it! x = ${state.x} and y = ${y}.`))
+        : l(say(`${Math.abs(gap)} ${gap > 0 ? 'soberan' : 'falta'}. x bat igotzean, guztizkoa ${signed(perStep)} aldatzen da.`, `${gap > 0 ? 'Sobran' : 'Faltan'} ${Math.abs(gap)}. Al subir x en 1, el total cambia ${signed(perStep)}.`, `${gap > 0 ? 'زائد' : 'ناقص'} ${Math.abs(gap)}. عند زيادة x بواحد يتغيّر المجموع بمقدار ${signed(perStep)}.`, `${Math.abs(gap)} ${gap > 0 ? 'left over' : 'short'}. When x goes up by 1, the total changes by ${signed(perStep)}.`))
     const width = 520
     const fill = Math.min(1, total / (scenario.total * 1.6))
     const target = 1 / 1.6
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={mixtureChallenges} state={state}>
-            <Board height={190} label={l(say('Bi motak eta guztizkoa', 'Las dos clases y el total', 'الصنفان والمجموع'))}>
+            <Board height={190} label={l(say('Bi motak eta guztizkoa', 'Las dos clases y el total', 'الصنفان والمجموع', 'The two types and the total'))}>
                 <rect x={60} y={20} width={240} height={64} rx={14} fill={STAGE_TINT} stroke={INK} strokeWidth={1.5} />
                 <text x={180} y={48} textAnchor="middle" fontSize={15} fill={MUTED}>{l(scenario.things[0])}</text>
                 <text x={180} y={74} textAnchor="middle" fontSize={22} fontWeight={700} fill={STAGE}>{`x = ${state.x}`}</text>
@@ -406,21 +407,21 @@ export function ShoppingTool(props: LabToolProps) {
     const affordable = cost <= state.budget
     const controls = (
         <>
-            <Stepper label={l(say('Aurrekontua (€)', 'Presupuesto (€)', 'الميزانية (€)'))} value={state.budget} min={SHOPPING_LIMITS.budget.min} max={SHOPPING_LIMITS.budget.max} onChange={(budget) => setState((s) => setShopping(s, { budget }))} language={props.language} />
-            <Stepper label={l(say('Ogitartekoa (€)', 'Bocadillo (€)', 'الشطيرة (€)'))} value={state.p} min={SHOPPING_LIMITS.price.min} max={SHOPPING_LIMITS.price.max} onChange={(p) => setState((s) => setShopping(s, { p }))} language={props.language} />
-            <Stepper label={l(say('Freskagarria (€)', 'Refresco (€)', 'المشروب (€)'))} value={state.q} min={SHOPPING_LIMITS.price.min} max={SHOPPING_LIMITS.price.max} onChange={(q) => setState((s) => setShopping(s, { q }))} language={props.language} />
-            <Stepper label={l(say('x ogitarteko', 'x bocadillos', 'x شطائر'))} value={state.x} min={0} max={max} onChange={(x) => setState((s) => setShopping(s, { x }))} language={props.language} />
-            <Stepper label={l(say('y freskagarri', 'y refrescos', 'y مشروبات'))} value={state.y} min={0} max={max} onChange={(y) => setState((s) => setShopping(s, { y }))} language={props.language} />
+            <Stepper label={l(say('Aurrekontua (€)', 'Presupuesto (€)', 'الميزانية (€)', 'Budget (€)'))} value={state.budget} min={SHOPPING_LIMITS.budget.min} max={SHOPPING_LIMITS.budget.max} onChange={(budget) => setState((s) => setShopping(s, { budget }))} language={props.language} />
+            <Stepper label={l(say('Ogitartekoa (€)', 'Bocadillo (€)', 'الشطيرة (€)', 'Sandwich (€)'))} value={state.p} min={SHOPPING_LIMITS.price.min} max={SHOPPING_LIMITS.price.max} onChange={(p) => setState((s) => setShopping(s, { p }))} language={props.language} />
+            <Stepper label={l(say('Freskagarria (€)', 'Refresco (€)', 'المشروب (€)', 'Soft drink (€)'))} value={state.q} min={SHOPPING_LIMITS.price.min} max={SHOPPING_LIMITS.price.max} onChange={(q) => setState((s) => setShopping(s, { q }))} language={props.language} />
+            <Stepper label={l(say('x ogitarteko', 'x bocadillos', 'x شطائر', 'x sandwiches'))} value={state.x} min={0} max={max} onChange={(x) => setState((s) => setShopping(s, { x }))} language={props.language} />
+            <Stepper label={l(say('y freskagarri', 'y refrescos', 'y مشروبات', 'y soft drinks'))} value={state.y} min={0} max={max} onChange={(y) => setState((s) => setShopping(s, { y }))} language={props.language} />
         </>
     )
     const latex = `${state.p}\\cdot ${state.x}+${state.q}\\cdot ${state.y}=${cost}${affordable ? '\\le' : '>'}${state.budget}`
     const options = shoppingPoints(state).length
     const note = affordable
-        ? l(say(`Ordain daiteke${cost === state.budget ? ', eta aurrekontu osoa gastatzen da' : ''}. ${options} erosketa posible daude.`, `Se puede pagar${cost === state.budget ? ' y se gasta todo el presupuesto' : ''}. Hay ${options} compras posibles.`, `يمكن دفعه${cost === state.budget ? ' وتُنفق الميزانية كلها' : ''}. هناك ${options} عملية شراء ممكنة.`))
-        : l(say(`Ezin da ordaindu: ${cost - state.budget} € falta dira.`, `No se puede pagar: faltan ${cost - state.budget} €.`, `لا يمكن الدفع: ينقص ${cost - state.budget} €.`))
+        ? l(say(`Ordain daiteke${cost === state.budget ? ', eta aurrekontu osoa gastatzen da' : ''}. ${options} erosketa posible daude.`, `Se puede pagar${cost === state.budget ? ' y se gasta todo el presupuesto' : ''}. Hay ${options} compras posibles.`, `يمكن دفعه${cost === state.budget ? ' وتُنفق الميزانية كلها' : ''}. هناك ${options} عملية شراء ممكنة.`, `You can pay for it${cost === state.budget ? ' and the whole budget is spent' : ''}. There are ${options} possible purchases.`))
+        : l(say(`Ezin da ordaindu: ${cost - state.budget} € falta dira.`, `No se puede pagar: faltan ${cost - state.budget} €.`, `لا يمكن الدفع: ينقص ${cost - state.budget} €.`, `You cannot pay: you are short by €${cost - state.budget}.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={shoppingChallenges} state={state}>
-            <Plane box={box} cell={24} labelStep={2} xName="x" yName="y" label={l(say('Ordain daitezkeen erosketak', 'Las compras que se pueden pagar', 'عمليات الشراء الممكنة'))} onPick={([x, y]) => setState((s) => setShopping(s, { x: Math.round(x), y: Math.round(y) }))}>
+            <Plane box={box} cell={24} labelStep={2} xName="x" yName="y" label={l(say('Ordain daitezkeen erosketak', 'Las compras que se pueden pagar', 'عمليات الشراء الممكنة', 'The purchases you can pay for'))} onPick={([x, y]) => setState((s) => setShopping(s, { x: Math.round(x), y: Math.round(y) }))}>
                 {(map, clip) => (
                     <g>
                         <polygon points={polygon(map, region(box, shoppingHalves(state)))} fill={REGION} />

@@ -12,8 +12,8 @@ const equationsSystemsRace: RaceRules<EquationsSystemsRaceError> = {
     parTime: equationsSystemsParTime,
     errorTip: (error) => equationsSystemsRaceErrorTips[error ?? 'calculation'],
     pitPlaceholder: () => '−4',
-    pitUnreadable: { eu: 'Idatzi zenbaki oso bat, adibidez −4.', es: 'Escribe un número entero, por ejemplo −4.', ar: 'اكتب عددًا صحيحًا، مثل ⁦−4⁩.' },
-    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', ar: 'اكتبه عددًا.' }
+    pitUnreadable: { eu: 'Idatzi zenbaki oso bat, adibidez −4.', es: 'Escribe un número entero, por ejemplo −4.', en: 'Write an integer, for example −4.', ar: 'اكتب عددًا صحيحًا، مثل ⁦−4⁩.' },
+    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', en: 'Write it as a number.', ar: 'اكتبه عددًا.' }
 }
 
 export function EquationsSystemsRaceGame(props: GameProps) {

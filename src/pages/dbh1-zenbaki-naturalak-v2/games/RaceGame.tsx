@@ -12,10 +12,10 @@ const naturalsRace: RaceRules<NaturalsRaceError> = {
     parTime: naturalsParTime,
     errorTip: (error) => naturalsRaceErrorTips[error ?? 'calculation'],
     pitPlaceholder: () => '15.000',
-    pitUnreadable: { eu: 'Idatzi zenbaki natural bat, adibidez 15.000.', es: 'Escribe un número natural, por ejemplo 15.000.', ar: 'اكتب عددًا طبيعيًا، مثل 15.000.' },
-    pitWrongForm: { eu: 'Idatzi zenbaki natural gisa.', es: 'Escríbelo como número natural.', ar: 'اكتبه عددًا طبيعيًا.' }
+    pitUnreadable: { eu: 'Idatzi zenbaki natural bat, adibidez 15.000.', es: 'Escribe un número natural, por ejemplo 15.000.', en: 'Write a natural number, for example 15,000.', ar: 'اكتب عددًا طبيعيًا، مثل 15.000.' },
+    pitWrongForm: { eu: 'Idatzi zenbaki natural gisa.', es: 'Escríbelo como número natural.', en: 'Write it as a natural number.', ar: 'اكتبه عددًا طبيعيًا.' }
 }
 
 export function NaturalsRaceGame(props: GameProps) {
-    return <RaceGame {...props} rules={naturalsRace} art={<NaturalsGameArt game="race" />} />
+    return <RaceGame {...props} rules={naturalsRace} art={<NaturalsGameArt game="race" language={props.language} />} />
 }

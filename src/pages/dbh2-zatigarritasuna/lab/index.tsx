@@ -36,7 +36,7 @@ export function DivisibilityLaboratory(props: {
             tools={divisibilityLabTools}
             stages={divisibilityStages}
             components={toolComponents}
-            title={{ eu: 'Ikusi zenbakiak barrutik', es: 'Mira los números por dentro', ar: 'انظر إلى الأعداد من الداخل' }}
+            title={{ eu: 'Ikusi zenbakiak barrutik', es: 'Mira los números por dentro', en: 'Look inside the numbers', ar: 'انظر إلى الأعداد من الداخل' }}
         />
     )
 }

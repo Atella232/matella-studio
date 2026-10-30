@@ -89,12 +89,12 @@ export function HuntGame({ language, records, onResult, onExit, config }: GamePr
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => (record.timeMs === null ? '' : `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${formatTime(record.timeMs)}`)}
+                bestLabel={(record) => (record.timeMs === null ? '' : `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${formatTime(record.timeMs)}`)}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: `${HUNT_ROUNDS} txanda. Sakatu baldintza betetzen duten zenbaki guztiak; txanda amaitzen da denak aurkitzean.`, es: `${HUNT_ROUNDS} rondas. Pulsa todos los números que cumplen la condición; la ronda acaba cuando los encuentras todos.`, ar: `${HUNT_ROUNDS} جولات. اضغط كل الأعداد التي تحقق الشرط؛ تنتهي الجولة عندما تجدها كلها.` })}</li>
-                        <li>{l({ eu: `Zenbaki oker bakoitzak +${HUNT_PENALTY_MS / 1000} s gehitzen ditu.`, es: `Cada número equivocado suma +${HUNT_PENALTY_MS / 1000} s.`, ar: `كل عدد خاطئ يضيف ${HUNT_PENALTY_MS / 1000} ث.` })}</li>
-                        <li>{l({ eu: 'Erabili irizpideak zatiketak egin gabe.', es: 'Usa los criterios en vez de dividir.', ar: 'استعمل القواعد بدل القسمة.' })}</li>
+                        <li>{l({ eu: `${HUNT_ROUNDS} txanda. Sakatu baldintza betetzen duten zenbaki guztiak; txanda amaitzen da denak aurkitzean.`, es: `${HUNT_ROUNDS} rondas. Pulsa todos los números que cumplen la condición; la ronda acaba cuando los encuentras todos.`, en: `${HUNT_ROUNDS} rounds. Press all the numbers that meet the condition; each round ends when you have found them all.`, ar: `${HUNT_ROUNDS} جولات. اضغط كل الأعداد التي تحقق الشرط؛ تنتهي الجولة عندما تجدها كلها.` })}</li>
+                        <li>{l({ eu: `Zenbaki oker bakoitzak +${HUNT_PENALTY_MS / 1000} s gehitzen ditu.`, es: `Cada número equivocado suma +${HUNT_PENALTY_MS / 1000} s.`, en: `Each wrong number adds +${HUNT_PENALTY_MS / 1000} s.`, ar: `كل عدد خاطئ يضيف ${HUNT_PENALTY_MS / 1000} ث.` })}</li>
+                        <li>{l({ eu: 'Erabili irizpideak zatiketak egin gabe.', es: 'Usa los criterios en vez de dividir.', en: 'Use the divisibility rules instead of dividing.', ar: 'استعمل القواعد بدل القسمة.' })}</li>
                     </ul>
                 )}
             />
@@ -109,14 +109,14 @@ export function HuntGame({ language, records, onResult, onExit, config }: GamePr
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span>{Math.min(roundIndex + 1, HUNT_ROUNDS)} / {HUNT_ROUNDS}</span>
                 <span>{formatTime(total)}</span>
-                <span>{l({ eu: 'Akatsak', es: 'Fallos', ar: 'الأخطاء' })}: {mistakes}</span>
+                <span>{l({ eu: 'Akatsak', es: 'Fallos', en: 'Mistakes', ar: 'الأخطاء' })}: {mistakes}</span>
             </GameTopbar>
 
             {phase === 'playing' && round && (
                 <>
                     <p className="divisibility-hunt-rule" aria-live="polite">
                         <strong>{l(round.rule.label)}</strong>
-                        <span>{l({ eu: `${targetsLeft(round, found)} falta dira`, es: `Faltan ${targetsLeft(round, found)}`, ar: `بقي ${targetsLeft(round, found)}` })}</span>
+                        <span>{l({ eu: `${targetsLeft(round, found)} falta dira`, es: `Faltan ${targetsLeft(round, found)}`, en: `${targetsLeft(round, found)} left`, ar: `بقي ${targetsLeft(round, found)}` })}</span>
                     </p>
                     <div className="divisibility-hunt-grid" dir="ltr">
                         {round.numbers.map((value) => (
@@ -134,7 +134,7 @@ export function HuntGame({ language, records, onResult, onExit, config }: GamePr
                     <div aria-live="polite">
                         {missed !== null && (
                             <div className="fraction-v2-feedback error">
-                                {l({ eu: `${missed} ez: `, es: `${missed} no: `, ar: `${missed} لا: ` })}{l(round.rule.why(missed))} +{HUNT_PENALTY_MS / 1000} s
+                                {l({ eu: `${missed} ez: `, es: `${missed} no: `, en: `${missed} missed: `, ar: `${missed} لا: ` })}{l(round.rule.why(missed))} +{HUNT_PENALTY_MS / 1000} s
                             </div>
                         )}
                     </div>
@@ -145,11 +145,11 @@ export function HuntGame({ language, records, onResult, onExit, config }: GamePr
                 <ResultPanel
                     language={language}
                     stars={huntStars(level, total, mistakes, levels)}
-                    title={l({ eu: 'Ehiza amaituta!', es: '¡Caza terminada!', ar: 'انتهى الصيد!' })}
-                    subtitle={l({ eu: `3 izar: ${formatTime(par * 0.8)} baino gutxiago eta akats bat gehienez · 2 izar: ${formatTime(par)} baino gutxiago`, es: `3 estrellas: menos de ${formatTime(par * 0.8)} y como mucho un fallo · 2: menos de ${formatTime(par)}`, ar: `3 نجوم: أقل من ${formatTime(par * 0.8)} وخطأ واحد على الأكثر · 2: أقل من ${formatTime(par)}` })}
+                    title={l({ eu: 'Ehiza amaituta!', es: '¡Caza terminada!', en: 'Hunt finished!', ar: 'انتهى الصيد!' })}
+                    subtitle={l({ eu: `3 izar: ${formatTime(par * 0.8)} baino gutxiago eta akats bat gehienez · 2 izar: ${formatTime(par)} baino gutxiago`, es: `3 estrellas: menos de ${formatTime(par * 0.8)} y como mucho un fallo · 2: menos de ${formatTime(par)}`, en: `3 stars: under ${formatTime(par * 0.8)} and at most one mistake · 2: under ${formatTime(par)}`, ar: `3 نجوم: أقل من ${formatTime(par * 0.8)} وخطأ واحد على الأكثر · 2: أقل من ${formatTime(par)}` })}
                     stats={[
-                        { label: l({ eu: 'Denbora', es: 'Tiempo', ar: 'الوقت' }), value: formatTime(total) },
-                        { label: l({ eu: 'Akatsak', es: 'Fallos', ar: 'الأخطاء' }), value: String(mistakes) }
+                        { label: l({ eu: 'Denbora', es: 'Tiempo', en: 'Time', ar: 'الوقت' }), value: formatTime(total) },
+                        { label: l({ eu: 'Akatsak', es: 'Fallos', en: 'Mistakes', ar: 'الأخطاء' }), value: String(mistakes) }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}

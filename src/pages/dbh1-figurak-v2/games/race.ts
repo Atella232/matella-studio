@@ -41,8 +41,8 @@ export type FiguresRaceError =
 export type FiguresRaceQuestion = RaceQuestion<FiguresRaceError>
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, ar: latex.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, en: latex, ar: latex.replace(/\{,\}/g, '.') })
 const math = (latex: string) => `$${latex}$`
 const deg = (value: number | string) => `${value}^{\\circ}`
 
@@ -99,7 +99,7 @@ function diagonalsQuestion(random: Random, tier: Tier): FiguresRaceQuestion | nu
     return question(0, 'diagonals', say(
         `Zenbat diagonal ditu ${math(`${sides}`)} aldeko poligono batek?`,
         `¿Cuántas diagonales tiene un polígono de ${math(`${sides}`)} lados?`,
-        `كم قطرًا لمضلع له ${math(`${sides}`)} ضلعًا؟`
+        `كم قطرًا لمضلع له ${math(`${sides}`)} ضلعًا؟`, `How many diagonals does a polygon with ${math(`${sides}`)} sides have?`
     ), choices, n(answer), same(math(`\\frac{${sides}\\cdot ${sides - 3}}{2}=\\frac{${sides * (sides - 3)}}{2}=${answer}`)))
 }
 
@@ -116,7 +116,7 @@ function angleSumQuestion(random: Random, tier: Tier): FiguresRaceQuestion | nul
     return question(0, 'angle-sum', say(
         `Zenbat egiten dute ${math(`${sides}`)} aldeko poligono baten barne-angeluek? (graduak)`,
         `¿Cuánto suman los ángulos interiores de un polígono de ${math(`${sides}`)} lados? (grados)`,
-        `كم مجموع الزوايا الداخلية لمضلع له ${math(`${sides}`)} ضلعًا؟ (بالدرجات)`
+        `كم مجموع الزوايا الداخلية لمضلع له ${math(`${sides}`)} ضلعًا؟ (بالدرجات)`, `What is the sum of the interior angles of a polygon with ${math(`${sides}`)} sides? (degrees)`
     ), choices, n(answer), same(math(`(${sides}-2)\\cdot 180=${sides - 2}\\cdot 180=${answer}`)))
 }
 
@@ -134,8 +134,8 @@ function regularQuestion(random: Random, tier: Tier): FiguresRaceQuestion | null
     ])
     if (!choices) return null
     return question(0, askCentral ? 'central' : 'interior', askCentral
-        ? say(`Zenbat da ${math(`${sides}`)} aldeko poligono erregular baten angelu zentrala? (graduak)`, `¿Cuánto mide el ángulo central de un polígono regular de ${math(`${sides}`)} lados? (grados)`, `كم قياس الزاوية المركزية لمضلع منتظم له ${math(`${sides}`)} ضلعًا؟ (بالدرجات)`)
-        : say(`Zenbat da ${math(`${sides}`)} aldeko poligono erregular baten barne-angelua? (graduak)`, `¿Cuánto mide el ángulo interior de un polígono regular de ${math(`${sides}`)} lados? (grados)`, `كم قياس الزاوية الداخلية لمضلع منتظم له ${math(`${sides}`)} ضلعًا؟ (بالدرجات)`),
+        ? say(`Zenbat da ${math(`${sides}`)} aldeko poligono erregular baten angelu zentrala? (graduak)`, `¿Cuánto mide el ángulo central de un polígono regular de ${math(`${sides}`)} lados? (grados)`, `كم قياس الزاوية المركزية لمضلع منتظم له ${math(`${sides}`)} ضلعًا؟ (بالدرجات)`, `What is the central angle of a regular polygon with ${math(`${sides}`)} sides? (degrees)`)
+        : say(`Zenbat da ${math(`${sides}`)} aldeko poligono erregular baten barne-angelua? (graduak)`, `¿Cuánto mide el ángulo interior de un polígono regular de ${math(`${sides}`)} lados? (grados)`, `كم قياس الزاوية الداخلية لمضلع منتظم له ${math(`${sides}`)} ضلعًا؟ (بالدرجات)`, `What is the interior angle of a regular polygon with ${math(`${sides}`)} sides? (degrees)`),
     choices, n(answer), same(math(askCentral ? `360\\mathbin{:}${sides}=${central}` : `(${sides}-2)\\cdot 180\\mathbin{:}${sides}=${(sides - 2) * 180}\\mathbin{:}${sides}=${interior}`)))
 }
 
@@ -156,7 +156,7 @@ function isoscelesQuestion(random: Random, tier: Tier): FiguresRaceQuestion | nu
         return question(1, 'isosceles-base', say(
             `Triangelu isoszele baten angelu desberdina ${math(deg(apex))} da. Zenbat da oinarriko angelu bakoitza?`,
             `El ángulo desigual de un isósceles mide ${math(deg(apex))}. ¿Cuánto mide cada ángulo de la base?`,
-            `زاوية الرأس في مثلث متساوي الساقين ${math(deg(apex))}. كم قياس كل زاوية من زاويتي القاعدة؟`
+            `زاوية الرأس في مثلث متساوي الساقين ${math(deg(apex))}. كم قياس كل زاوية من زاويتي القاعدة؟`, `The unequal angle of an isosceles triangle measures ${math(deg(apex))}. What is each base angle?`
         ), choices, n(answer), same(math(`(180-${apex})\\mathbin{:}2=${180 - apex}\\mathbin{:}2=${answer}`)))
     }
     const base = randomInt(random, tier === 0 ? 50 : 20, 85)
@@ -171,7 +171,7 @@ function isoscelesQuestion(random: Random, tier: Tier): FiguresRaceQuestion | nu
     return question(1, 'isosceles-apex', say(
         `Triangelu isoszele baten oinarriko angelu bakoitza ${math(deg(base))} da. Zenbat da angelu desberdina?`,
         `Cada ángulo de la base de un isósceles mide ${math(deg(base))}. ¿Cuánto mide el ángulo desigual?`,
-        `كل زاوية من زاويتي القاعدة في مثلث متساوي الساقين ${math(deg(base))}. كم قياس زاوية الرأس؟`
+        `كل زاوية من زاويتي القاعدة في مثلث متساوي الساقين ${math(deg(base))}. كم قياس زاوية الرأس؟`, `Each base angle of an isosceles triangle measures ${math(deg(base))}. What is the unequal angle?`
     ), choices, n(answer), same(math(`180-2\\cdot ${base}=180-${2 * base}=${answer}`)))
 }
 
@@ -185,8 +185,8 @@ function sideQuestion(random: Random, tier: Tier): FiguresRaceQuestion | null {
         : [{ value: n(Math.abs(a - b)), error: 'flat-allowed' }, { value: n(a + b - 1), error: 'calculation' }, { value: n(a + b), error: 'calculation' }, ...near(answer)])
     if (!choices) return null
     return question(1, largest ? 'side-max' : 'side-min', largest
-        ? say(`Triangelu baten bi aldeak ${math(`${a}`)} cm eta ${math(`${b}`)} cm dira. Zein da hirugarrenaren luzera osorik handiena?`, `Dos lados de un triángulo miden ${math(`${a}`)} cm y ${math(`${b}`)} cm. ¿Cuál es la mayor longitud entera del tercero?`, `ضلعان في مثلث ${math(`${a}`)} سم و${math(`${b}`)} سم. ما أكبر طول صحيح للضلع الثالث؟`)
-        : say(`Triangelu baten bi aldeak ${math(`${a}`)} cm eta ${math(`${b}`)} cm dira. Zein da hirugarrenaren luzera osorik txikiena?`, `Dos lados de un triángulo miden ${math(`${a}`)} cm y ${math(`${b}`)} cm. ¿Cuál es la menor longitud entera del tercero?`, `ضلعان في مثلث ${math(`${a}`)} سم و${math(`${b}`)} سم. ما أصغر طول صحيح للضلع الثالث؟`),
+        ? say(`Triangelu baten bi aldeak ${math(`${a}`)} cm eta ${math(`${b}`)} cm dira. Zein da hirugarrenaren luzera osorik handiena?`, `Dos lados de un triángulo miden ${math(`${a}`)} cm y ${math(`${b}`)} cm. ¿Cuál es la mayor longitud entera del tercero?`, `ضلعان في مثلث ${math(`${a}`)} سم و${math(`${b}`)} سم. ما أكبر طول صحيح للضلع الثالث؟`, `Two sides of a triangle measure ${math(`${a}`)} cm and ${math(`${b}`)} cm. What is the largest whole-number length of the third side?`)
+        : say(`Triangelu baten bi aldeak ${math(`${a}`)} cm eta ${math(`${b}`)} cm dira. Zein da hirugarrenaren luzera osorik txikiena?`, `Dos lados de un triángulo miden ${math(`${a}`)} cm y ${math(`${b}`)} cm. ¿Cuál es la menor longitud entera del tercero?`, `ضلعان في مثلث ${math(`${a}`)} سم و${math(`${b}`)} سم. ما أصغر طول صحيح للضلع الثالث؟`, `Two sides of a triangle measure ${math(`${a}`)} cm and ${math(`${b}`)} cm. What is the smallest whole-number length of the third side?`),
     choices, n(answer), same(math(largest ? `x<${a}+${b}=${a + b}\\ \\to\\ x=${answer}` : `x>${Math.max(a, b)}-${Math.min(a, b)}=${Math.abs(a - b)}\\ \\to\\ x=${answer}`)))
 }
 
@@ -203,7 +203,7 @@ function circumradiusQuestion(random: Random, tier: Tier): FiguresRaceQuestion |
     return question(1, 'circumradius', say(
         `Triangelu angeluzuzen baten hipotenusa ${math(`${h}`)} cm da. Zenbat da zirkunferentzia zirkunskribatuaren erradioa?`,
         `La hipotenusa de un triángulo rectángulo mide ${math(`${h}`)} cm. ¿Cuánto mide el radio de la circunferencia circunscrita?`,
-        `وتر مثلث قائم ${math(`${h}`)} سم. كم نصف قطر الدائرة المحيطة؟`
+        `وتر مثلث قائم ${math(`${h}`)} سم. كم نصف قطر الدائرة المحيطة؟`, `The hypotenuse of a right-angled triangle measures ${math(`${h}`)} cm. What is the radius of the circumscribed circle?`
     ), choices, answer, same(math(`${h}\\mathbin{:}2=${written(answer)}`)))
 }
 
@@ -223,7 +223,7 @@ function parallelogramQuestion(random: Random, tier: Tier): FiguresRaceQuestion 
     return question(2, 'parallelogram', say(
         `Paralelogramo baten angelu bat ${math(deg(angle))} da. Zenbat da ondoko angelua?`,
         `Un ángulo de un paralelogramo mide ${math(deg(angle))}. ¿Cuánto mide el consecutivo?`,
-        `زاوية في متوازي أضلاع ${math(deg(angle))}. كم قياس المتتالية معها؟`
+        `زاوية في متوازي أضلاع ${math(deg(angle))}. كم قياس المتتالية معها؟`, `One angle of a parallelogram measures ${math(deg(angle))}. What is the consecutive angle?`
     ), choices, n(answer), same(math(`180-${angle}=${answer}`)))
 }
 
@@ -243,7 +243,7 @@ function quadMissingQuestion(random: Random, tier: Tier): FiguresRaceQuestion | 
     return question(2, 'quad-missing', say(
         `Lauki baten hiru angeluak ${math(deg(a))}, ${math(deg(b))} eta ${math(deg(c))} dira. Zenbat da laugarrena?`,
         `Tres ángulos de un cuadrilátero miden ${math(deg(a))}, ${math(deg(b))} y ${math(deg(c))}. ¿Cuánto mide el cuarto?`,
-        `ثلاث زوايا في رباعي ${math(deg(a))} و${math(deg(b))} و${math(deg(c))}. كم قياس الرابعة؟`
+        `ثلاث زوايا في رباعي ${math(deg(a))} و${math(deg(b))} و${math(deg(c))}. كم قياس الرابعة؟`, `Three angles of a quadrilateral measure ${math(deg(a))}, ${math(deg(b))} and ${math(deg(c))}. What is the fourth angle?`
     ), choices, n(answer), same(math(`360-(${a}+${b}+${c})=360-${a + b + c}=${answer}`)))
 }
 
@@ -260,7 +260,7 @@ function axesQuestion(random: Random, tier: Tier): FiguresRaceQuestion | null {
     return question(2, 'axes', say(
         `Zer angelu eratzen dute ${math(`${sides}`)} aldeko poligono erregular baten ondoz ondoko bi simetria-ardatzek? (graduak)`,
         `¿Qué ángulo forman dos ejes de simetría contiguos de un polígono regular de ${math(`${sides}`)} lados? (grados)`,
-        `ما الزاوية بين محوري تناظر متجاورين في مضلع منتظم له ${math(`${sides}`)} ضلعًا؟ (بالدرجات)`
+        `ما الزاوية بين محوري تناظر متجاورين في مضلع منتظم له ${math(`${sides}`)} ضلعًا؟ (بالدرجات)`, `What angle is formed by two adjacent lines of symmetry of a regular polygon with ${math(`${sides}`)} sides? (degrees)`
     ), choices, answer, same(math(`180\\mathbin{:}${sides}=${written(answer)}`)))
 }
 
@@ -279,8 +279,8 @@ function tangentQuestion(random: Random, tier: Tier): FiguresRaceQuestion | null
     ])
     if (!choices) return null
     return question(3, exterior ? 'tangent-exterior' : 'tangent-interior', exterior
-        ? say(`${math(`${big}`)} cm eta ${math(`${small}`)} cm-ko erradioak dituzten bi zirkunferentzia kanpotik ukitzaileak dira. Zer distantziara daude zentroak?`, `Dos circunferencias de radios ${math(`${big}`)} cm y ${math(`${small}`)} cm son tangentes exteriores. ¿A qué distancia están sus centros?`, `دائرتان نصفا قطريهما ${math(`${big}`)} سم و${math(`${small}`)} سم متماستان من الخارج. كم البعد بين المركزين؟`)
-        : say(`${math(`${big}`)} cm eta ${math(`${small}`)} cm-ko erradioak dituzten bi zirkunferentzia barrutik ukitzaileak dira. Zer distantziara daude zentroak?`, `Dos circunferencias de radios ${math(`${big}`)} cm y ${math(`${small}`)} cm son tangentes interiores. ¿A qué distancia están sus centros?`, `دائرتان نصفا قطريهما ${math(`${big}`)} سم و${math(`${small}`)} سم متماستان من الداخل. كم البعد بين المركزين؟`),
+        ? say(`${math(`${big}`)} cm eta ${math(`${small}`)} cm-ko erradioak dituzten bi zirkunferentzia kanpotik ukitzaileak dira. Zer distantziara daude zentroak?`, `Dos circunferencias de radios ${math(`${big}`)} cm y ${math(`${small}`)} cm son tangentes exteriores. ¿A qué distancia están sus centros?`, `دائرتان نصفا قطريهما ${math(`${big}`)} سم و${math(`${small}`)} سم متماستان من الخارج. كم البعد بين المركزين؟`, `Two circles with radii ${math(`${big}`)} cm and ${math(`${small}`)} cm are externally tangent. How far apart are their centres?`)
+        : say(`${math(`${big}`)} cm eta ${math(`${small}`)} cm-ko erradioak dituzten bi zirkunferentzia barrutik ukitzaileak dira. Zer distantziara daude zentroak?`, `Dos circunferencias de radios ${math(`${big}`)} cm y ${math(`${small}`)} cm son tangentes interiores. ¿A qué distancia están sus centros?`, `دائرتان نصفا قطريهما ${math(`${big}`)} سم و${math(`${small}`)} سم متماستان من الداخل. كم البعد بين المركزين؟`, `Two circles with radii ${math(`${big}`)} cm and ${math(`${small}`)} cm are internally tangent. How far apart are their centres?`),
     choices, n(answer), same(math(`${big}${exterior ? '+' : '-'}${small}=${answer}`)))
 }
 
@@ -297,8 +297,8 @@ function inscribedQuestion(random: Random, tier: Tier): FiguresRaceQuestion | nu
     ])
     if (!choices) return null
     return question(3, fromCentral ? 'inscribed' : 'central', fromCentral
-        ? say(`Angelu zentral bat ${math(deg(central))} da. Zenbat da arku bera hartzen duen angelu inskribatua?`, `Un ángulo central mide ${math(deg(central))}. ¿Cuánto mide el inscrito que abarca el mismo arco?`, `زاوية مركزية ${math(deg(central))}. كم قياس المحيطية التي تحصر القوس نفسه؟`)
-        : say(`Angelu inskribatu bat ${math(deg(inscribed))} da. Zenbat da arku bera hartzen duen angelu zentrala?`, `Un ángulo inscrito mide ${math(deg(inscribed))}. ¿Cuánto mide el central que abarca el mismo arco?`, `زاوية محيطية ${math(deg(inscribed))}. كم قياس المركزية التي تحصر القوس نفسه؟`),
+        ? say(`Angelu zentral bat ${math(deg(central))} da. Zenbat da arku bera hartzen duen angelu inskribatua?`, `Un ángulo central mide ${math(deg(central))}. ¿Cuánto mide el inscrito que abarca el mismo arco?`, `زاوية مركزية ${math(deg(central))}. كم قياس المحيطية التي تحصر القوس نفسه؟`, `A central angle measures ${math(deg(central))}. What is the inscribed angle that spans the same arc?`)
+        : say(`Angelu inskribatu bat ${math(deg(inscribed))} da. Zenbat da arku bera hartzen duen angelu zentrala?`, `Un ángulo inscrito mide ${math(deg(inscribed))}. ¿Cuánto mide el central que abarca el mismo arco?`, `زاوية محيطية ${math(deg(inscribed))}. كم قياس المركزية التي تحصر القوس نفسه؟`, `An inscribed angle measures ${math(deg(inscribed))}. What is the central angle that spans the same arc?`),
     choices, n(answer), same(math(fromCentral ? `${central}\\mathbin{:}2=${inscribed}` : `2\\cdot ${inscribed}=${central}`)))
 }
 
@@ -322,7 +322,7 @@ function sectorQuestion(random: Random, tier: Tier): FiguresRaceQuestion | null 
     return question(4, 'sector', say(
         `Sektore baten erradioa ${math(`${radius}`)} cm da, eta angelua ${math(deg(angle))}. Kalkulatu haren azalera (${math('\\pi\\approx 3{,}14')}).`,
         `Calcula el área de un sector de ${math(`${radius}`)} cm de radio y ${math(deg(angle))} (${math('\\pi\\approx 3{,}14')}).`,
-        `احسب مساحة قطاع نصف قطره ${math(`${radius}`)} سم وزاويته ${math(deg(angle))} (${math('\\pi\\approx 3{,}14')}).`
+        `احسب مساحة قطاع نصف قطره ${math(`${radius}`)} سم وزاويته ${math(deg(angle))} (${math('\\pi\\approx 3{,}14')}).`, `Calculate the area of a sector with a radius of ${math(`${radius}`)} cm and an angle of ${math(deg(angle))} (${math('\\pi\\approx 3{,}14')}).`
     ), choices, answer, same(math(`\\frac{3{,}14\\cdot ${radius}^{2}\\cdot ${angle}}{360}=${written(answer)}`)))
 }
 
@@ -340,7 +340,7 @@ function ringQuestion(random: Random, tier: Tier): FiguresRaceQuestion | null {
     return question(4, 'ring', say(
         `Kalkulatu ${math(`${outer}`)} cm eta ${math(`${inner}`)} cm-ko erradioak dituen koroa zirkularraren azalera (${math('\\pi\\approx 3{,}14')}).`,
         `Calcula el área de la corona circular de radios ${math(`${outer}`)} cm y ${math(`${inner}`)} cm (${math('\\pi\\approx 3{,}14')}).`,
-        `احسب مساحة الحلقة الدائرية التي نصفا قطريها ${math(`${outer}`)} سم و${math(`${inner}`)} سم (${math('\\pi\\approx 3{,}14')}).`
+        `احسب مساحة الحلقة الدائرية التي نصفا قطريها ${math(`${outer}`)} سم و${math(`${inner}`)} سم (${math('\\pi\\approx 3{,}14')}).`, `Calculate the area of the annulus with radii ${math(`${outer}`)} cm and ${math(`${inner}`)} cm (${math('\\pi\\approx 3{,}14')}).`
     ), choices, answer, same(math(`3{,}14\\cdot(${outer * outer}-${inner * inner})=3{,}14\\cdot ${outer * outer - inner * inner}=${written(answer)}`)))
 }
 
@@ -360,7 +360,7 @@ function lShapeQuestion(random: Random, tier: Tier): FiguresRaceQuestion | null 
     return question(4, 'l-shape', say(
         `${math(`${width}\\times ${height}`)} cm-ko laukizuzen bati ${math(`${cutWidth}\\times ${cutHeight}`)} cm-ko izkina bat kendu zaio. Zein da azalera (cm²)?`,
         `A un rectángulo de ${math(`${width}\\times ${height}`)} cm se le quita una esquina de ${math(`${cutWidth}\\times ${cutHeight}`)} cm. ¿Cuál es el área (cm²)?`,
-        `أُزيل من مستطيل ${math(`${width}\\times ${height}`)} سم ركن ${math(`${cutWidth}\\times ${cutHeight}`)} سم. ما المساحة (سم²)؟`
+        `أُزيل من مستطيل ${math(`${width}\\times ${height}`)} سم ركن ${math(`${cutWidth}\\times ${cutHeight}`)} سم. ما المساحة (سم²)؟`, `From a rectangle measuring ${math(`${width}\\times ${height}`)} cm, a corner of ${math(`${cutWidth}\\times ${cutHeight}`)} cm is removed. What is the area (cm²)?`
     ), choices, n(answer), same(math(`${width}\\cdot ${height}-${cutWidth}\\cdot ${cutHeight}=${width * height}-${cutWidth * cutHeight}=${answer}`)))
 }
 
@@ -394,23 +394,23 @@ export function figuresParTime(circuit: number): number {
 }
 
 export const figuresRaceErrorTips: Record<FiguresRaceError, LocalizedText> = {
-    'counted-twice': say('Diagonal bakoitza bi aldiz zenbatu duzu (mutur bakoitzetik): zatitu bitan.', 'Has contado cada diagonal dos veces (una desde cada extremo): divide entre dos.', 'حسبت كل قطر مرتين (من كل طرف): اقسم على اثنين.'),
-    'from-vertex': say('Hori erpin bakar batetik da. Poligono osoan: $\\frac{n\\cdot(n-3)}{2}$ diagonal eta $n-2$ triangelu.', 'Eso es desde un solo vértice. En todo el polígono: $\\frac{n\\cdot(n-3)}{2}$ diagonales y $n-2$ triángulos.', 'هذا من رأس واحد فقط. في المضلع كله: $\\frac{n\\cdot(n-3)}{2}$ قطرًا و$n-2$ مثلثات.'),
-    'n-times': say('Ez dira $n$ triangelu, $n-2$ baizik: $(n-2)\\cdot 180^{\\circ}$.', 'No son $n$ triángulos, sino $n-2$: $(n-2)\\cdot 180^{\\circ}$.', 'ليست $n$ مثلثات بل $n-2$: $(n-2)\\cdot 180^{\\circ}$.'),
-    'central-interior': say('Nahastu dituzu: zentrala $\\frac{360^{\\circ}}{n}$ da, eta barnekoa $\\frac{(n-2)\\cdot 180^{\\circ}}{n}$.', 'Los has confundido: el central es $\\frac{360^{\\circ}}{n}$ y el interior $\\frac{(n-2)\\cdot 180^{\\circ}}{n}$.', 'خلطت بينهما: المركزية $\\frac{360^{\\circ}}{n}$ والداخلية $\\frac{(n-2)\\cdot 180^{\\circ}}{n}$.'),
-    'sum-not-each': say('Batura eta angelu bakoitza bereizi: poligono erregularrean, bakoitza = batura : $n$.', 'Distingue la suma y cada ángulo: en el polígono regular, cada uno = suma : $n$.', 'ميّز بين المجموع وكل زاوية: في المضلع المنتظم كل زاوية = المجموع : $n$.'),
-    'no-half': say('Oinarriko bi angelu daude: kendu ondoren, zatitu bitan.', 'Hay dos ángulos en la base: después de restar, divide entre dos.', 'هناك زاويتان في القاعدة: بعد الطرح اقسم على اثنين.'),
-    'one-angle': say('Oinarriko bi angeluak kendu behar dira: $180^{\\circ}-2\\cdot\\hat{B}$.', 'Hay que restar los dos ángulos de la base: $180^{\\circ}-2\\cdot\\hat{B}$.', 'يجب طرح زاويتي القاعدة كلتيهما: $180^{\\circ}-2\\cdot\\hat{B}$.'),
-    'flat-allowed': say('Berdina bada, aldeak zuzen baten gainean geratzen dira: hirugarrena batura baino txikiagoa (eta kendura baino handiagoa) izan behar da.', 'Si es igual, los lados quedan sobre una recta: el tercero tiene que ser menor que la suma (y mayor que la diferencia).', 'إذا تساوى انطبقت الأضلاع على مستقيم: يجب أن يكون الثالث أصغر من المجموع (وأكبر من الفرق).'),
-    diameter: say('Hipotenusa diametroa da; erradioa haren erdia.', 'La hipotenusa es el diámetro; el radio es la mitad.', 'الوتر هو القطر؛ ونصف القطر نصفه.'),
-    opposite: say('Aurkakoa berdina da; ondokoak $180^{\\circ}$ osatzen du.', 'El opuesto es igual; el consecutivo completa $180^{\\circ}$.', 'المقابلة مساوية؛ والمتتالية تكمل $180^{\\circ}$.'),
-    'triangle-sum': say('Laukian angeluek $360^{\\circ}$ egiten dute, ez $180^{\\circ}$.', 'En un cuadrilátero los ángulos suman $360^{\\circ}$, no $180^{\\circ}$.', 'في الرباعي مجموع الزوايا $360^{\\circ}$ لا $180^{\\circ}$.'),
-    'axes-360': say('$n$ ardatzek $180^{\\circ}$ banatzen dute (ardatz bakoitza zuzen oso bat da): $\\frac{180^{\\circ}}{n}$.', 'Los $n$ ejes se reparten $180^{\\circ}$ (cada eje es una recta entera): $\\frac{180^{\\circ}}{n}$.', 'تتقاسم المحاور الـ$n$ زاوية $180^{\\circ}$ (كل محور مستقيم كامل): $\\frac{180^{\\circ}}{n}$.'),
-    'sum-difference': say('Kanpotik ukitzaileak: $r_1+r_2$. Barrutik: $r_1-r_2$.', 'Tangentes exteriores: $r_1+r_2$. Interiores: $r_1-r_2$.', 'التماس من الخارج: $r_1+r_2$. ومن الداخل: $r_1-r_2$.'),
-    'double-half': say('Inskribatua zentralaren erdia da; zentrala, inskribatuaren bikoitza.', 'El inscrito es la mitad del central; el central, el doble del inscrito.', 'المحيطية نصف المركزية؛ والمركزية ضعف المحيطية.'),
-    'no-square': say('Azaleran erradioa karratura: $\\pi\\cdot r^{2}$.', 'En el área el radio va al cuadrado: $\\pi\\cdot r^{2}$.', 'في المساحة يُربَّع نصف القطر: $\\pi\\cdot r^{2}$.'),
-    'arc-area': say('Hori arkuaren luzera da ($2\\pi r$-ren zatia); azalerarako $\\pi r^{2}$-ren zatia.', 'Eso es la longitud del arco (parte de $2\\pi r$); para el área, parte de $\\pi r^{2}$.', 'هذا طول القوس (جزء من $2\\pi r$)؛ وللمساحة جزء من $\\pi r^{2}$.'),
-    whole: say('Hori irudi osoa da; kendu edo hartu dagokion zatia bakarrik.', 'Eso es la figura entera; quita o toma solo la parte que corresponde.', 'هذا الشكل كاملًا؛ اطرح أو خذ الجزء المطلوب فقط.'),
-    'subtract-first': say('Lehenik karratuak, gero kendu: $R^{2}-r^{2}$, ez $(R-r)^{2}$.', 'Primero los cuadrados, luego la resta: $R^{2}-r^{2}$, no $(R-r)^{2}$.', 'المربعات أولًا ثم الطرح: $R^{2}-r^{2}$ لا $(R-r)^{2}$.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    'counted-twice': say('Diagonal bakoitza bi aldiz zenbatu duzu (mutur bakoitzetik): zatitu bitan.', 'Has contado cada diagonal dos veces (una desde cada extremo): divide entre dos.', 'حسبت كل قطر مرتين (من كل طرف): اقسم على اثنين.', 'You have counted each diagonal twice (once from each end): divide by two.'),
+    'from-vertex': say('Hori erpin bakar batetik da. Poligono osoan: $\\frac{n\\cdot(n-3)}{2}$ diagonal eta $n-2$ triangelu.', 'Eso es desde un solo vértice. En todo el polígono: $\\frac{n\\cdot(n-3)}{2}$ diagonales y $n-2$ triángulos.', 'هذا من رأس واحد فقط. في المضلع كله: $\\frac{n\\cdot(n-3)}{2}$ قطرًا و$n-2$ مثلثات.', 'That is from a single vertex. For the whole polygon: $\\frac{n\\cdot(n-3)}{2}$ diagonals and $n-2$ triangles.'),
+    'n-times': say('Ez dira $n$ triangelu, $n-2$ baizik: $(n-2)\\cdot 180^{\\circ}$.', 'No son $n$ triángulos, sino $n-2$: $(n-2)\\cdot 180^{\\circ}$.', 'ليست $n$ مثلثات بل $n-2$: $(n-2)\\cdot 180^{\\circ}$.', 'They are not $n$ triangles, but $n-2$: $(n-2)\\cdot 180^{\\circ}$.'),
+    'central-interior': say('Nahastu dituzu: zentrala $\\frac{360^{\\circ}}{n}$ da, eta barnekoa $\\frac{(n-2)\\cdot 180^{\\circ}}{n}$.', 'Los has confundido: el central es $\\frac{360^{\\circ}}{n}$ y el interior $\\frac{(n-2)\\cdot 180^{\\circ}}{n}$.', 'خلطت بينهما: المركزية $\\frac{360^{\\circ}}{n}$ والداخلية $\\frac{(n-2)\\cdot 180^{\\circ}}{n}$.', 'You have mixed them up: the central angle is $\\frac{360^{\\circ}}{n}$ and the interior angle is $\\frac{(n-2)\\cdot 180^{\\circ}}{n}$.'),
+    'sum-not-each': say('Batura eta angelu bakoitza bereizi: poligono erregularrean, bakoitza = batura : $n$.', 'Distingue la suma y cada ángulo: en el polígono regular, cada uno = suma : $n$.', 'ميّز بين المجموع وكل زاوية: في المضلع المنتظم كل زاوية = المجموع : $n$.', 'Tell the sum and each angle apart: in a regular polygon, each angle = sum : $n$.'),
+    'no-half': say('Oinarriko bi angelu daude: kendu ondoren, zatitu bitan.', 'Hay dos ángulos en la base: después de restar, divide entre dos.', 'هناك زاويتان في القاعدة: بعد الطرح اقسم على اثنين.', 'There are two base angles: after subtracting, divide by two.'),
+    'one-angle': say('Oinarriko bi angeluak kendu behar dira: $180^{\\circ}-2\\cdot\\hat{B}$.', 'Hay que restar los dos ángulos de la base: $180^{\\circ}-2\\cdot\\hat{B}$.', 'يجب طرح زاويتي القاعدة كلتيهما: $180^{\\circ}-2\\cdot\\hat{B}$.', 'You have to subtract the two base angles: $180^{\\circ}-2\\cdot\\hat{B}$.'),
+    'flat-allowed': say('Berdina bada, aldeak zuzen baten gainean geratzen dira: hirugarrena batura baino txikiagoa (eta kendura baino handiagoa) izan behar da.', 'Si es igual, los lados quedan sobre una recta: el tercero tiene que ser menor que la suma (y mayor que la diferencia).', 'إذا تساوى انطبقت الأضلاع على مستقيم: يجب أن يكون الثالث أصغر من المجموع (وأكبر من الفرق).', 'If it is equal, the sides lie on a straight line: the third side must be less than the sum (and greater than the difference).'),
+    diameter: say('Hipotenusa diametroa da; erradioa haren erdia.', 'La hipotenusa es el diámetro; el radio es la mitad.', 'الوتر هو القطر؛ ونصف القطر نصفه.', 'The hypotenuse is the diameter; the radius is half of it.'),
+    opposite: say('Aurkakoa berdina da; ondokoak $180^{\\circ}$ osatzen du.', 'El opuesto es igual; el consecutivo completa $180^{\\circ}$.', 'المقابلة مساوية؛ والمتتالية تكمل $180^{\\circ}$.', 'The opposite angle is equal; the consecutive angle makes up $180^{\\circ}$.'),
+    'triangle-sum': say('Laukian angeluek $360^{\\circ}$ egiten dute, ez $180^{\\circ}$.', 'En un cuadrilátero los ángulos suman $360^{\\circ}$, no $180^{\\circ}$.', 'في الرباعي مجموع الزوايا $360^{\\circ}$ لا $180^{\\circ}$.', 'In a quadrilateral the angles add up to $360^{\\circ}$, not $180^{\\circ}$.'),
+    'axes-360': say('$n$ ardatzek $180^{\\circ}$ banatzen dute (ardatz bakoitza zuzen oso bat da): $\\frac{180^{\\circ}}{n}$.', 'Los $n$ ejes se reparten $180^{\\circ}$ (cada eje es una recta entera): $\\frac{180^{\\circ}}{n}$.', 'تتقاسم المحاور الـ$n$ زاوية $180^{\\circ}$ (كل محور مستقيم كامل): $\\frac{180^{\\circ}}{n}$.', 'The $n$ lines of symmetry share $180^{\\circ}$ (each line is a full straight line): $\\frac{180^{\\circ}}{n}$.'),
+    'sum-difference': say('Kanpotik ukitzaileak: $r_1+r_2$. Barrutik: $r_1-r_2$.', 'Tangentes exteriores: $r_1+r_2$. Interiores: $r_1-r_2$.', 'التماس من الخارج: $r_1+r_2$. ومن الداخل: $r_1-r_2$.', 'Externally tangent: $r_1+r_2$. Internally tangent: $r_1-r_2$.'),
+    'double-half': say('Inskribatua zentralaren erdia da; zentrala, inskribatuaren bikoitza.', 'El inscrito es la mitad del central; el central, el doble del inscrito.', 'المحيطية نصف المركزية؛ والمركزية ضعف المحيطية.', 'The inscribed angle is half the central angle; the central angle is twice the inscribed angle.'),
+    'no-square': say('Azaleran erradioa karratura: $\\pi\\cdot r^{2}$.', 'En el área el radio va al cuadrado: $\\pi\\cdot r^{2}$.', 'في المساحة يُربَّع نصف القطر: $\\pi\\cdot r^{2}$.', 'For the area, the radius is squared: $\\pi\\cdot r^{2}$.'),
+    'arc-area': say('Hori arkuaren luzera da ($2\\pi r$-ren zatia); azalerarako $\\pi r^{2}$-ren zatia.', 'Eso es la longitud del arco (parte de $2\\pi r$); para el área, parte de $\\pi r^{2}$.', 'هذا طول القوس (جزء من $2\\pi r$)؛ وللمساحة جزء من $\\pi r^{2}$.', 'That is the arc length (a part of $2\\pi r$); for the area, use a part of $\\pi r^{2}$.'),
+    whole: say('Hori irudi osoa da; kendu edo hartu dagokion zatia bakarrik.', 'Eso es la figura entera; quita o toma solo la parte que corresponde.', 'هذا الشكل كاملًا؛ اطرح أو خذ الجزء المطلوب فقط.', 'That is the whole shape; take away or take only the part that applies.'),
+    'subtract-first': say('Lehenik karratuak, gero kendu: $R^{2}-r^{2}$, ez $(R-r)^{2}$.', 'Primero los cuadrados, luego la resta: $R^{2}-r^{2}$, no $(R-r)^{2}$.', 'المربعات أولًا ثم الطرح: $R^{2}-r^{2}$ لا $(R-r)^{2}$.', 'First the squares, then the subtraction: $R^{2}-r^{2}$, not $(R-r)^{2}$.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

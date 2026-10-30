@@ -14,8 +14,8 @@ export function SieveTool(props: DivisibilityToolProps & { challenges?: LabChall
 
     const controls = (
         <>
-            <p className="fraction-v2-lab-tip">{l({ eu: 'Sakatu ratatu gabeko zenbaki bat: lehena da, eta haren multiploak ratatuko dira.', es: 'Pulsa un número sin tachar: es primo, y se tacharán sus múltiplos.', ar: 'اضغط عددًا غير مشطوب: إنه أولي، وستُشطب مضاعفاته.' })}</p>
-            <button type="button" className="fraction-v2-secondary" onClick={() => setState(initialSieveState)}>{l({ eu: 'Berriro hasi', es: 'Empezar de nuevo', ar: 'ابدأ من جديد' })}</button>
+            <p className="fraction-v2-lab-tip">{l({ eu: 'Sakatu ratatu gabeko zenbaki bat: lehena da, eta haren multiploak ratatuko dira.', es: 'Pulsa un número sin tachar: es primo, y se tacharán sus múltiplos.', en: 'Tap a number that is not crossed out: it is prime, and its multiples will be crossed out.', ar: 'اضغط عددًا غير مشطوب: إنه أولي، وستُشطب مضاعفاته.' })}</p>
+            <button type="button" className="fraction-v2-secondary" onClick={() => setState(initialSieveState)}>{l({ eu: 'Berriro hasi', es: 'Empezar de nuevo', en: 'Start again', ar: 'ابدأ من جديد' })}</button>
         </>
     )
 
@@ -23,8 +23,8 @@ export function SieveTool(props: DivisibilityToolProps & { challenges?: LabChall
         <>
             <span className="fraction-v2-lab-readout-note">
                 {complete
-                    ? l({ eu: 'Bahea osatuta: ratatu gabe geratzen direnak lehenak dira.', es: 'Criba completa: los que quedan sin tachar son primos.', ar: 'اكتمل الغربال: الأعداد غير المشطوبة أولية.' })
-                    : l({ eu: `Aukeratutako lehenak: ${state.circled.join(', ') || '—'}. Ratatu gabe: ${left}.`, es: `Primos elegidos: ${state.circled.join(', ') || '—'}. Sin tachar: ${left}.`, ar: `الأعداد الأولية المختارة: ${state.circled.join('، ') || '—'}. غير المشطوبة: ${left}.` })}
+                    ? l({ eu: 'Bahea osatuta: ratatu gabe geratzen direnak lehenak dira.', es: 'Criba completa: los que quedan sin tachar son primos.', en: 'Sieve complete: the ones left uncrossed are primes.', ar: 'اكتمل الغربال: الأعداد غير المشطوبة أولية.' })
+                    : l({ eu: `Aukeratutako lehenak: ${state.circled.join(', ') || '—'}. Ratatu gabe: ${left}.`, es: `Primos elegidos: ${state.circled.join(', ') || '—'}. Sin tachar: ${left}.`, en: `Primes chosen: ${state.circled.join(', ') || '—'}. Not crossed out: ${left}.`, ar: `الأعداد الأولية المختارة: ${state.circled.join('، ') || '—'}. غير المشطوبة: ${left}.` })}
             </span>
             {complete && <WholeAnswer language={props.language} state={state} expected={{ numerator: PRIMES_UP_TO_100, denominator: 1 }} onChange={(patch) => setState((current) => ({ ...current, ...patch }))} />}
         </>
@@ -41,7 +41,7 @@ export function SieveTool(props: DivisibilityToolProps & { challenges?: LabChall
                             type="button"
                             className={`${isCrossed ? 'crossed' : ''} ${isCircled ? 'circled' : ''} ${complete && !isCrossed ? 'prime' : ''}`}
                             disabled={isCrossed || isCircled}
-                            aria-label={`${value}${isCrossed ? ` · ${l({ eu: 'ratatua', es: 'tachado', ar: 'مشطوب' })}` : ''}${isCircled ? ` · ${l({ eu: 'lehena', es: 'primo', ar: 'أولي' })}` : ''}`}
+                            aria-label={`${value}${isCrossed ? ` · ${l({ eu: 'ratatua', es: 'tachado', en: 'crossed out', ar: 'مشطوب' })}` : ''}${isCircled ? ` · ${l({ eu: 'lehena', es: 'primo', en: 'prime', ar: 'أولي' })}` : ''}`}
                             onClick={() => setState((current) => circleNumber(current, value))}
                             key={value}
                         >

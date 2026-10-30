@@ -28,54 +28,55 @@ export interface HuntRound {
 
 export const multipleRule = (n: number): HuntRule => ({
     id: `multiple-${n}`,
-    label: { eu: `${ren(n)} multiploak`, es: `Múltiplos de ${n}`, ar: `مضاعفات ${n}` },
+    label: { eu: `${ren(n)} multiploak`, es: `Múltiplos de ${n}`, en: `Multiples of ${n}`, ar: `مضاعفات ${n}` },
     test: (value) => value % n === 0,
     why: (value) => (value % n === 0
-        ? { eu: `${value} = ${n} · ${value / n}`, es: `${value} = ${n} · ${value / n}`, ar: `${value} = ${n} · ${value / n}` }
-        : { eu: `${value} = ${n} · ${Math.floor(value / n)} + ${value % n}: hondarra ez da 0.`, es: `${value} = ${n} · ${Math.floor(value / n)} + ${value % n}: el resto no es 0.`, ar: `${value} = ${n} · ${Math.floor(value / n)} + ${value % n}: الباقي ليس 0.` })
+        ? { eu: `${value} = ${n} · ${value / n}`, es: `${value} = ${n} · ${value / n}`, en: `${value} = ${n} · ${value / n}`, ar: `${value} = ${n} · ${value / n}` }
+        : { eu: `${value} = ${n} · ${Math.floor(value / n)} + ${value % n}: hondarra ez da 0.`, es: `${value} = ${n} · ${Math.floor(value / n)} + ${value % n}: el resto no es 0.`, en: `${value} = ${n} · ${Math.floor(value / n)} + ${value % n}: the remainder is not 0.`, ar: `${value} = ${n} · ${Math.floor(value / n)} + ${value % n}: الباقي ليس 0.` })
 })
 
 export const divisorRule = (n: number): HuntRule => ({
     id: `divisor-${n}`,
-    label: { eu: `${ren(n)} zatitzaileak`, es: `Divisores de ${n}`, ar: `قواسم ${n}` },
+    label: { eu: `${ren(n)} zatitzaileak`, es: `Divisores de ${n}`, en: `Divisors of ${n}`, ar: `قواسم ${n}` },
     test: (value) => n % value === 0,
     why: (value) => (n % value === 0
-        ? { eu: `${n} = ${value} · ${n / value}`, es: `${n} = ${value} · ${n / value}`, ar: `${n} = ${value} · ${n / value}` }
-        : { eu: `${n} : ${value} ez da zehatza (hondarra ${n % value}).`, es: `${n} : ${value} no es exacta (resto ${n % value}).`, ar: `${n} : ${value} ليست تامة (الباقي ${n % value}).` })
+        ? { eu: `${n} = ${value} · ${n / value}`, es: `${n} = ${value} · ${n / value}`, en: `${n} = ${value} · ${n / value}`, ar: `${n} = ${value} · ${n / value}` }
+        : { eu: `${n} : ${value} ez da zehatza (hondarra ${n % value}).`, es: `${n} : ${value} no es exacta (resto ${n % value}).`, en: `${n} : ${value} is not exact (remainder ${n % value}).`, ar: `${n} : ${value} ليست تامة (الباقي ${n % value}).` })
 })
 
 const digitSumText = (value: number) => `${String(value).split('').join(' + ')} = ${String(value).split('').reduce((sum, digit) => sum + Number(digit), 0)}`
 
 export const byRule = (d: number): HuntRule => ({
     id: `by-${d}`,
-    label: { eu: `${rekin(d)} zatigarriak`, es: `Divisibles por ${d}`, ar: `تقبل القسمة على ${d}` },
+    label: { eu: `${rekin(d)} zatigarriak`, es: `Divisibles por ${d}`, en: `Divisible by ${d}`, ar: `تقبل القسمة على ${d}` },
     test: (value) => value % d === 0,
     why: (value) => {
-        if (d === 3 || d === 9) return { eu: digitSumText(value), es: digitSumText(value), ar: digitSumText(value) }
+        if (d === 3 || d === 9) return { eu: digitSumText(value), es: digitSumText(value), en: digitSumText(value), ar: digitSumText(value) }
         return value % d === 0
-            ? { eu: `${value} = ${d} · ${value / d}`, es: `${value} = ${d} · ${value / d}`, ar: `${value} = ${d} · ${value / d}` }
-            : { eu: `${value} ez da ${rekin(d)} zatigarria (hondarra ${value % d}).`, es: `${value} no es divisible por ${d} (resto ${value % d}).`, ar: `${value} لا يقبل القسمة على ${d} (الباقي ${value % d}).` }
+            ? { eu: `${value} = ${d} · ${value / d}`, es: `${value} = ${d} · ${value / d}`, en: `${value} = ${d} · ${value / d}`, ar: `${value} = ${d} · ${value / d}` }
+            : { eu: `${value} ez da ${rekin(d)} zatigarria (hondarra ${value % d}).`, es: `${value} no es divisible por ${d} (resto ${value % d}).`, en: `${value} is not divisible by ${d} (remainder ${value % d}).`, ar: `${value} لا يقبل القسمة على ${d} (الباقي ${value % d}).` }
     }
 })
 
 export const primeRule: HuntRule = {
     id: 'primes',
-    label: { eu: 'Zenbaki lehenak', es: 'Números primos', ar: 'الأعداد الأولية' },
+    label: { eu: 'Zenbaki lehenak', es: 'Números primos', en: 'Prime numbers', ar: 'الأعداد الأولية' },
     test: isPrime,
     why: (value) => {
-        if (isPrime(value)) return { eu: `${value}: 1 eta ${value} bakarrik.`, es: `${value}: solo 1 y ${value}.`, ar: `${value}: قاسماه 1 و${value} فقط.` }
+        if (isPrime(value)) return { eu: `${value}: 1 eta ${value} bakarrik.`, es: `${value}: solo 1 y ${value}.`, en: `${value}: only 1 and ${value}.`, ar: `${value}: قاسماه 1 و${value} فقط.` }
         const smallest = divisors(value).find((divisor) => divisor > 1 && divisor < value) ?? value
-        return { eu: `${value} = ${smallest} · ${value / smallest}: konposatua.`, es: `${value} = ${smallest} · ${value / smallest}: compuesto.`, ar: `${value} = ${smallest} · ${value / smallest}: مؤلف.` }
+        return { eu: `${value} = ${smallest} · ${value / smallest}: konposatua.`, es: `${value} = ${smallest} · ${value / smallest}: compuesto.`, en: `${value} = ${smallest} · ${value / smallest}: composite.`, ar: `${value} = ${smallest} · ${value / smallest}: مؤلف.` }
     }
 }
 
 export const bothRule = (a: number, b: number): HuntRule => ({
     id: `both-${a}-${b}`,
-    label: { eu: `${rekin(a)} eta ${rekin(b)} zatigarriak`, es: `Divisibles por ${a} y por ${b}`, ar: `تقبل القسمة على ${a} و${b}` },
+    label: { eu: `${rekin(a)} eta ${rekin(b)} zatigarriak`, es: `Divisibles por ${a} y por ${b}`, en: `Divisible by ${a} and by ${b}`, ar: `تقبل القسمة على ${a} و${b}` },
     test: (value) => value % a === 0 && value % b === 0,
     why: (value) => ({
         eu: `${a}: ${value % a === 0 ? 'bai' : 'ez'} · ${b}: ${value % b === 0 ? 'bai' : 'ez'}`,
         es: `${a}: ${value % a === 0 ? 'sí' : 'no'} · ${b}: ${value % b === 0 ? 'sí' : 'no'}`,
+        en: `${a}: ${value % a === 0 ? 'yes' : 'no'} · ${b}: ${value % b === 0 ? 'yes' : 'no'}`,
         ar: `${a}: ${value % a === 0 ? 'نعم' : 'لا'} · ${b}: ${value % b === 0 ? 'نعم' : 'لا'}`
     })
 })

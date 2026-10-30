@@ -68,21 +68,21 @@ export function createGuardItems(random: Random, level: number): GuardItem[] {
 }
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
 
 /** Why the number is rational or irrational */
 export function guardWhy(item: GuardItem): LocalizedText {
     const eq = item.equals ? ` $${item.latex}=${item.equals}$.` : ''
     switch (item.kind) {
-        case 'fraction': return say('Zatiki bat da: arrazionala.', 'Es una fracción: racional.', 'إنه كسر: نسبي.')
-        case 'exact-decimal': return say(`Hamartar zehatza: zatiki bat da.${eq}`, `Decimal exacto: se puede escribir como fracción.${eq}`, `عشري صحيح: يمكن كتابته كسرًا.${eq}`)
-        case 'periodic': return say(`Hamartar periodikoa: zatiki sortzailea du.${eq}`, `Decimal periódico: tiene fracción generatriz.${eq}`, `عشري دوري: له كسر مولّد.${eq}`)
-        case 'root-exact': return say(`Karratu perfektuaren erroa: zenbaki arrazionala.${eq}`, `Raíz de un cuadrado perfecto: número racional.${eq}`, `جذر مربع كامل: عدد نسبي.${eq}`)
-        case 'root-inexact': return say(`Karratu perfektua ez denaren erroa: irrazionala.${eq}`, `Raíz de un número que no es cuadrado perfecto: irracional.${eq}`, `جذر عدد ليس مربعًا كاملًا: غير نسبي.${eq}`)
-        case 'pi': return say('$\\pi$ irrazionala da; hari batuz edo biderkatuz ere irrazionala da.', '$\\pi$ es irracional; sumarle algo o multiplicarlo por un racional sigue siendo irracional.', '$\\pi$ غير نسبي؛ وجمعه أو ضربه في نسبي يبقى غير نسبي.')
-        case 'endless': return say('Zifra infinituak, periodorik gabe: irrazionala.', 'Infinitas cifras sin periodo: irracional.', 'أرقام لا نهائية بلا دور: غير نسبي.')
-        case 'whole-result': return say(`Emaitza zenbaki bat da: arrazionala.${eq}`, `El resultado es un número entero: racional.${eq}`, `النتيجة عدد صحيح: نسبي.${eq}`)
-        case 'irrational-result': return say(`Erro irrazionala geratzen da: irrazionala.${eq}`, `Queda una raíz que no sale: irracional.${eq}`, `يبقى جذر لا يخرج: غير نسبي.${eq}`)
+        case 'fraction': return say('Zatiki bat da: arrazionala.', 'Es una fracción: racional.', 'إنه كسر: نسبي.', 'It is a fraction: rational.')
+        case 'exact-decimal': return say(`Hamartar zehatza: zatiki bat da.${eq}`, `Decimal exacto: se puede escribir como fracción.${eq}`, `عشري صحيح: يمكن كتابته كسرًا.${eq}`, `Terminating decimal: it can be written as a fraction.${eq}`)
+        case 'periodic': return say(`Hamartar periodikoa: zatiki sortzailea du.${eq}`, `Decimal periódico: tiene fracción generatriz.${eq}`, `عشري دوري: له كسر مولّد.${eq}`, `Recurring decimal: it has a generating fraction.${eq}`)
+        case 'root-exact': return say(`Karratu perfektuaren erroa: zenbaki arrazionala.${eq}`, `Raíz de un cuadrado perfecto: número racional.${eq}`, `جذر مربع كامل: عدد نسبي.${eq}`, `Root of a perfect square: rational number.${eq}`)
+        case 'root-inexact': return say(`Karratu perfektua ez denaren erroa: irrazionala.${eq}`, `Raíz de un número que no es cuadrado perfecto: irracional.${eq}`, `جذر عدد ليس مربعًا كاملًا: غير نسبي.${eq}`, `Root of a number that is not a perfect square: irrational.${eq}`)
+        case 'pi': return say('$\\pi$ irrazionala da; hari batuz edo biderkatuz ere irrazionala da.', '$\\pi$ es irracional; sumarle algo o multiplicarlo por un racional sigue siendo irracional.', '$\\pi$ غير نسبي؛ وجمعه أو ضربه في نسبي يبقى غير نسبي.', '$\\pi$ is irrational; adding something to it or multiplying it by a rational number keeps it irrational.')
+        case 'endless': return say('Zifra infinituak, periodorik gabe: irrazionala.', 'Infinitas cifras sin periodo: irracional.', 'أرقام لا نهائية بلا دور: غير نسبي.', 'Infinitely many digits with no repeating pattern: irrational.')
+        case 'whole-result': return say(`Emaitza zenbaki bat da: arrazionala.${eq}`, `El resultado es un número entero: racional.${eq}`, `النتيجة عدد صحيح: نسبي.${eq}`, `The result is an integer: rational.${eq}`)
+        case 'irrational-result': return say(`Erro irrazionala geratzen da: irrazionala.${eq}`, `Queda una raíz que no sale: irracional.${eq}`, `يبقى جذر لا يخرج: غير نسبي.${eq}`, `A root is left that cannot be simplified: irrational.${eq}`)
     }
 }
 

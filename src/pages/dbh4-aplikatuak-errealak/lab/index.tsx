@@ -31,7 +31,7 @@ export function RealsLaboratory(props: {
             tools={realsLabTools}
             stages={realsStages}
             components={toolComponents}
-            title={{ eu: 'Zatitu, kokatu eta hurbildu', es: 'Divide, sitúa y aproxima', ar: 'اقسم وحدّد وقرّب' }}
+            title={{ eu: 'Zatitu, kokatu eta hurbildu', es: 'Divide, sitúa y aproxima', en: 'Divide, place and approximate', ar: 'اقسم وحدّد وقرّب' }}
         />
     )
 }

@@ -9,6 +9,7 @@ import { Plane, PlanePath, PlanePoint } from '../../dbh2-funtzioak-v2/plane'
 import type { PlaneMap } from '../../dbh2-funtzioak-v2/planeMap'
 import { sampled } from '../../dbh4-aplikatuak-grafikoa/functions'
 import { localize } from '../../dbh4-akademikoak-trigonometria/text'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import {
     GROWTH_RATE,
     GROWTH_STARTS,
@@ -89,7 +90,7 @@ export function ShiftTool(props: LabToolProps) {
     const box = { xMin: -5, xMax: 5, yMin: -5, yMax: 7 }
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Oinarria', es: 'Base', ar: 'الأساس' })} value={String(state.base)} options={SHIFT_BASES.map((value, index) => ({ value: String(index), label: baseLabel(value) }))} onChange={(value) => setState((s) => setShift(s, { base: Number(value) }))} />
+            <Segmented label={l({ eu: 'Oinarria', es: 'Base', en: 'Base', ar: 'الأساس' })} value={String(state.base)} options={SHIFT_BASES.map((value, index) => ({ value: String(index), label: baseLabel(value) }))} onChange={(value) => setState((s) => setShift(s, { base: Number(value) }))} />
             <Stepper label="p" value={state.p} min={-SHIFT_P_LIMIT} max={SHIFT_P_LIMIT} format={signed} onChange={(value) => setState((s) => setShift(s, { p: value }))} language={props.language} />
             <Stepper label="q" value={state.q} min={-SHIFT_Q_LIMIT} max={SHIFT_Q_LIMIT} format={signed} onChange={(value) => setState((s) => setShift(s, { q: value }))} language={props.language} />
         </>
@@ -97,11 +98,11 @@ export function ShiftTool(props: LabToolProps) {
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${formula}$`} /></span>
-            <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `Asintota: $y=${state.q}$ · $(0,\\,1)\\to(${state.p},\\,${1 + state.q})$`, es: `Asíntota: $y=${state.q}$ · $(0,\\,1)\\to(${state.p},\\,${1 + state.q})$`, ar: `المقارب: $y=${state.q}$ · $(0,\\,1)\\to(${state.p},\\,${1 + state.q})$` })} /></span>
+            <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `Asintota: $y=${state.q}$ · $(0,\\,1)\\to(${state.p},\\,${1 + state.q})$`, es: `Asíntota: $y=${state.q}$ · $(0,\\,1)\\to(${state.p},\\,${1 + state.q})$`, en: `Asymptote: $y=${state.q}$ · $(0,\\,1)\\to(${state.p},\\,${1 + state.q})$`, ar: `المقارب: $y=${state.q}$ · $(0,\\,1)\\to(${state.p},\\,${1 + state.q})$` })} /></span>
             <span className="fraction-v2-lab-readout-note">
                 {zero === null
-                    ? l({ eu: 'Ez du X ardatza ebakitzen', es: 'No corta al eje X', ar: 'لا تقطع محور X' })
-                    : <MathText text={l({ eu: `X ardatza: $x=${decimal(props.language, zero)}$`, es: `Eje X: $x=${decimal(props.language, zero)}$`, ar: `محور X: $x=${decimal(props.language, zero)}$` })} />}
+                    ? l({ eu: 'Ez du X ardatza ebakitzen', es: 'No corta al eje X', en: 'It does not cross the x-axis.', ar: 'لا تقطع محور X' })
+                    : <MathText text={l({ eu: `X ardatza: $x=${decimal(props.language, zero)}$`, es: `Eje X: $x=${decimal(props.language, zero)}$`, en: `x-axis: $x=${decimal(props.language, zero)}$`, ar: `محور X: $x=${decimal(props.language, zero)}$` })} />}
             </span>
         </>
     )
@@ -133,9 +134,9 @@ export function GrowthTool(props: LabToolProps) {
     const factorLatex = decimal(props.language, growthFactor(state))
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Hasierako balioa', es: 'Valor inicial', ar: 'القيمة الابتدائية' })} value={String(state.k)} options={GROWTH_STARTS.map((value, index) => ({ value: String(index), label: String(value) }))} onChange={(value) => setState((s) => setGrowth(s, { k: Number(value) }))} />
-            <Stepper label={l({ eu: 'Ehunekoa urrats bakoitzean', es: 'Porcentaje en cada paso', ar: 'النسبة في كل خطوة' })} value={state.r} min={GROWTH_RATE.min} max={GROWTH_RATE.max} step={GROWTH_RATE.step} format={(value) => `${signed(value)} %`} onChange={(value) => setState((s) => setGrowth(s, { r: value }))} language={props.language} />
-            <Stepper label={l({ eu: 'Urratsak (t)', es: 'Pasos (t)', ar: 'الخطوات (t)' })} value={state.t} min={0} max={GROWTH_T_MAX} format={String} onChange={(value) => setState((s) => setGrowth(s, { t: value }))} language={props.language} />
+            <Segmented label={l({ eu: 'Hasierako balioa', es: 'Valor inicial', en: 'Starting value', ar: 'القيمة الابتدائية' })} value={String(state.k)} options={GROWTH_STARTS.map((value, index) => ({ value: String(index), label: String(value) }))} onChange={(value) => setState((s) => setGrowth(s, { k: Number(value) }))} />
+            <Stepper label={l({ eu: 'Ehunekoa urrats bakoitzean', es: 'Porcentaje en cada paso', en: 'Percentage at each step', ar: 'النسبة في كل خطوة' })} value={state.r} min={GROWTH_RATE.min} max={GROWTH_RATE.max} step={GROWTH_RATE.step} format={(value) => `${signed(value)} %`} onChange={(value) => setState((s) => setGrowth(s, { r: value }))} language={props.language} />
+            <Stepper label={l({ eu: 'Urratsak (t)', es: 'Pasos (t)', en: 'Steps (t)', ar: 'الخطوات (t)' })} value={state.t} min={0} max={GROWTH_T_MAX} format={String} onChange={(value) => setState((s) => setGrowth(s, { t: value }))} language={props.language} />
         </>
     )
     const readout = (
@@ -143,7 +144,7 @@ export function GrowthTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-main"><MathText text={`$y=${start}\\cdot ${factorLatex}^{t}$`} /></span>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$t=${state.t}\\ \\to\\ y=${decimal(props.language, growthValue(state))}$`} /></span>
             <span className="fraction-v2-lab-readout-note">
-                {state.r > 0 ? l({ eu: 'Hazkundea', es: 'Crecimiento', ar: 'نمو' }) : state.r < 0 ? l({ eu: 'Beherakuntza', es: 'Decrecimiento', ar: 'تناقص' }) : l({ eu: 'Konstantea', es: 'Constante', ar: 'ثابتة' })}
+                {state.r > 0 ? l({ eu: 'Hazkundea', es: 'Crecimiento', en: 'Growth', ar: 'نمو' }) : state.r < 0 ? l({ eu: 'Beherakuntza', es: 'Decrecimiento', en: 'Decay', ar: 'تناقص' }) : l({ eu: 'Konstantea', es: 'Constante', en: 'Constant', ar: 'ثابتة' })}
             </span>
         </>
     )
@@ -154,7 +155,7 @@ export function GrowthTool(props: LabToolProps) {
     const scale = (value: number) => (value / top) * (height - 30)
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={growthChallenges} state={state}>
-            <svg viewBox={`0 0 ${width} ${height + 30}`} role="img" aria-label={l({ eu: 'Balioa urrats bakoitzean', es: 'El valor en cada paso', ar: 'القيمة في كل خطوة' })} style={{ width: '100%', maxWidth: 520, display: 'block', margin: '0 auto' }} direction="ltr">
+            <svg viewBox={`0 0 ${width} ${height + 30}`} role="img" aria-label={l({ eu: 'Balioa urrats bakoitzean', es: 'El valor en cada paso', en: 'The value at each step', ar: 'القيمة في كل خطوة' })} style={{ width: '100%', maxWidth: 520, display: 'block', margin: '0 auto' }} direction="ltr">
                 <rect x={0} y={0} width={width} height={height + 30} fill={CARD} />
                 <line x1={20} y1={height} x2={width - 10} y2={height} stroke={INK} strokeWidth={2} />
                 {values.map((value, t) => {
@@ -166,7 +167,7 @@ export function GrowthTool(props: LabToolProps) {
                         </g>
                     )
                 })}
-                <text x={24} y={18} fontSize={14} fontWeight={700} fill={INK}>{props.language === 'ar' ? growthValue(state) : String(growthValue(state)).replace('.', ',')}</text>
+                <text x={24} y={18} fontSize={14} fontWeight={700} fill={INK}>{props.language === 'ar' ? growthValue(state) : String(growthValue(state)).replace('.', decimalSeparatorFor(props.language))}</text>
             </svg>
         </ToolFrame>
     )
@@ -184,7 +185,7 @@ export function LogShiftTool(props: LabToolProps) {
     const box = { xMin: -5, xMax: 7, yMin: -5, yMax: 5 }
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Oinarria', es: 'Base', ar: 'الأساس' })} value={String(state.base)} options={LOG_BASES.map((value, index) => ({ value: String(index), label: baseLabel(value) }))} onChange={(value) => setState((s) => setLogShift(s, { base: Number(value) }))} />
+            <Segmented label={l({ eu: 'Oinarria', es: 'Base', en: 'Base', ar: 'الأساس' })} value={String(state.base)} options={LOG_BASES.map((value, index) => ({ value: String(index), label: baseLabel(value) }))} onChange={(value) => setState((s) => setLogShift(s, { base: Number(value) }))} />
             <Stepper label="p" value={state.p} min={-LOG_P_LIMIT} max={LOG_P_LIMIT} format={signed} onChange={(value) => setState((s) => setLogShift(s, { p: value }))} language={props.language} />
             <Stepper label="q" value={state.q} min={-LOG_Q_LIMIT} max={LOG_Q_LIMIT} format={signed} onChange={(value) => setState((s) => setLogShift(s, { q: value }))} language={props.language} />
         </>
@@ -193,7 +194,7 @@ export function LogShiftTool(props: LabToolProps) {
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${formula}$`} /></span>
             <span className="fraction-v2-lab-readout-note"><MathText text={`$\\text{Dom}\\,f=(${state.p},\\,+\\infty)$ · $x=${state.p}$`} /></span>
-            <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `$(1,\\,0)\\to(${state.p + 1},\\,${state.q})$ · X ardatza: $x=${decimal(props.language, zero, 3)}$`, es: `$(1,\\,0)\\to(${state.p + 1},\\,${state.q})$ · eje X: $x=${decimal(props.language, zero, 3)}$`, ar: `$(1,\\,0)\\to(${state.p + 1},\\,${state.q})$ · محور X: $x=${decimal(props.language, zero, 3)}$` })} /></span>
+            <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `$(1,\\,0)\\to(${state.p + 1},\\,${state.q})$ · X ardatza: $x=${decimal(props.language, zero, 3)}$`, es: `$(1,\\,0)\\to(${state.p + 1},\\,${state.q})$ · eje X: $x=${decimal(props.language, zero, 3)}$`, en: `$(1,\\,0)\\to(${state.p + 1},\\,${state.q})$ · x-axis: $x=${decimal(props.language, zero, 3)}$`, ar: `$(1,\\,0)\\to(${state.p + 1},\\,${state.q})$ · محور X: $x=${decimal(props.language, zero, 3)}$` })} /></span>
         </>
     )
     return (
@@ -260,7 +261,7 @@ export function WaveTool(props: LabToolProps) {
     ]
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Funtzioa', es: 'Función', ar: 'الدالة' })} value={state.fn} options={fns} onChange={(value) => setState((s) => setWave(s, { fn: value }))} />
+            <Segmented label={l({ eu: 'Funtzioa', es: 'Función', en: 'Function', ar: 'الدالة' })} value={state.fn} options={fns} onChange={(value) => setState((s) => setWave(s, { fn: value }))} />
             <Stepper label="A" value={state.a} min={-WAVE_A_LIMIT} max={WAVE_A_LIMIT} format={signed} onChange={(value) => setState((s) => setWave(s, { a: value }))} language={props.language} />
             <Segmented label="k" value={String(state.k)} options={WAVE_KS.map((value, index) => ({ value: String(index), label: value === 0.5 ? '1/2' : String(value) }))} onChange={(value) => setState((s) => setWave(s, { k: Number(value) }))} />
             <Stepper label="d" value={state.d} min={-WAVE_D_LIMIT} max={WAVE_D_LIMIT} format={signed} onChange={(value) => setState((s) => setWave(s, { d: value }))} language={props.language} />
@@ -269,8 +270,8 @@ export function WaveTool(props: LabToolProps) {
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${formula}$`} /></span>
-            <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `Periodoa: $T=${periodLatex}$`, es: `Periodo: $T=${periodLatex}$`, ar: `الدور: $T=${periodLatex}$` })} /></span>
-            <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `Ibiltartea: $[${low},\\,${high}]$`, es: `Recorrido: $[${low},\\,${high}]$`, ar: `المدى: $[${low},\\,${high}]$` })} /></span>
+            <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `Periodoa: $T=${periodLatex}$`, es: `Periodo: $T=${periodLatex}$`, en: `Period: $T=${periodLatex}$`, ar: `الدور: $T=${periodLatex}$` })} /></span>
+            <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `Ibiltartea: $[${low},\\,${high}]$`, es: `Recorrido: $[${low},\\,${high}]$`, en: `Range: $[${low},\\,${high}]$`, ar: `المدى: $[${low},\\,${high}]$` })} /></span>
         </>
     )
     return (

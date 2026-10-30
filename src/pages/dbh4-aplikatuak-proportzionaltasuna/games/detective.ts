@@ -56,71 +56,71 @@ export const proportionDetectiveLevels: ProportionDetectiveError[][] = [
 export const PROPORTION_DETECTIVE_CASES = 6
 
 /** Arabic writes the decimal point, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
 const math = (value: number | string) => `$${typeof value === 'number' ? num(value) : value}$`
 const percent = (value: number) => math(`${num(value)}\\,\\%`)
 const percentEu = (value: number) => math(`\\%\\,${num(value)}`)
 
 export const proportionDetectiveErrorNames: Record<ProportionDetectiveError, LocalizedText> = {
-    'direct-inverse': say('Zuzena eta alderantzizkoa nahastu', 'Confundió directa e inversa', 'خلط الطردي بالعكسي'),
-    'added-percents': say('Ehunekoak batu ditu', 'Sumó los porcentajes', 'جمع النسب المئوية'),
-    'percent-of-final': say('% azken prezioaren gainean', 'Hizo el % del precio final', 'حسب النسبة من السعر النهائي'),
-    index: say('Indizea gaizki idatzi du', 'Escribió mal el índice', 'كتب المؤشر خطأً'),
-    'months-years': say('Hilabeteak urtetzat hartu ditu', 'Tomó los meses como años', 'عدّ الأشهر سنوات'),
-    'simple-for-compound': say('Interes bakuna erabili du', 'Usó interés simple', 'استعمل الفائدة البسيطة'),
-    'rate-not-split': say('Ez du tasa aldietan banatu', 'No repartió el tipo anual', 'لم يقسم السعر على الفترات'),
-    'mean-prices': say('Prezioen batez bestekoa egin du', 'Hizo la media de los precios', 'أخذ متوسط السعرين'),
-    'added-hours': say('Orduak batu ditu', 'Sumó las horas', 'جمع الساعات'),
-    speeds: say('Topaketa eta jazarpena nahastu', 'Confundió encuentro y persecución', 'خلط التلاقي بالمطاردة'),
-    'upside-down': say('Alderantziz zatitu du', 'Dividió al revés', 'قسم بالعكس'),
-    calculation: say('Kalkulu-akatsa', 'Error de cálculo', 'خطأ حسابي')
+    'direct-inverse': say('Zuzena eta alderantzizkoa nahastu', 'Confundió directa e inversa', 'خلط الطردي بالعكسي', 'Mixed up direct and inverse'),
+    'added-percents': say('Ehunekoak batu ditu', 'Sumó los porcentajes', 'جمع النسب المئوية', 'Added the percentages'),
+    'percent-of-final': say('% azken prezioaren gainean', 'Hizo el % del precio final', 'حسب النسبة من السعر النهائي', 'Took the % of the final price'),
+    index: say('Indizea gaizki idatzi du', 'Escribió mal el índice', 'كتب المؤشر خطأً', 'Got the multiplier wrong'),
+    'months-years': say('Hilabeteak urtetzat hartu ditu', 'Tomó los meses como años', 'عدّ الأشهر سنوات', 'Took months as years'),
+    'simple-for-compound': say('Interes bakuna erabili du', 'Usó interés simple', 'استعمل الفائدة البسيطة', 'Used simple interest'),
+    'rate-not-split': say('Ez du tasa aldietan banatu', 'No repartió el tipo anual', 'لم يقسم السعر على الفترات', 'Did not divide the annual rate'),
+    'mean-prices': say('Prezioen batez bestekoa egin du', 'Hizo la media de los precios', 'أخذ متوسط السعرين', 'Took the mean of the prices'),
+    'added-hours': say('Orduak batu ditu', 'Sumó las horas', 'جمع الساعات', 'Added the hours'),
+    speeds: say('Topaketa eta jazarpena nahastu', 'Confundió encuentro y persecución', 'خلط التلاقي بالمطاردة', 'Mixed up meeting and chasing'),
+    'upside-down': say('Alderantziz zatitu du', 'Dividió al revés', 'قسم بالعكس', 'Divided the wrong way round'),
+    calculation: say('Kalkulu-akatsa', 'Error de cálculo', 'خطأ حسابي', 'Calculation error')
 }
 
 export const proportionDetectiveErrorTips: Record<ProportionDetectiveError, LocalizedText> = {
     'direct-inverse': say(
         'Lehenik, erabaki: bata handitzean bestea txikitzen bada, alderantzizkoa da eta biderkadurak berdinak dira; biak batera handitzen badira, zuzena da eta zatidurak berdinak dira.',
         'Primero decide: si al crecer una la otra disminuye, es inversa y los productos son iguales; si crecen juntas, es directa y los cocientes son iguales.',
-        'قرّر أولًا: إذا نقص أحد المقدارين عندما يزيد الآخر فالتناسب عكسي وحاصلا الضرب متساويان؛ وإذا زادا معًا فهو طردي وخارجا القسمة متساويان.'
+        'قرّر أولًا: إذا نقص أحد المقدارين عندما يزيد الآخر فالتناسب عكسي وحاصلا الضرب متساويان؛ وإذا زادا معًا فهو طردي وخارجا القسمة متساويان.', 'First decide: if, as one grows, the other shrinks, it is inverse and the products are equal; if they grow together, it is direct and the quotients are equal.'
     ),
-    'added-percents': say('Ehuneko kateatuak ez dira batzen: indizeak biderkatzen dira.', 'Los porcentajes encadenados no se suman: se multiplican los índices.', 'النسب المتتالية لا تُجمع: نضرب المؤشرات.'),
+    'added-percents': say('Ehuneko kateatuak ez dira batzen: indizeak biderkatzen dira.', 'Los porcentajes encadenados no se suman: se multiplican los índices.', 'النسب المتتالية لا تُجمع: نضرب المؤشرات.', 'Percentage changes one after another are not added: you multiply the multipliers.'),
     'percent-of-final': say(
         'Ehunekoa hasierako prezioarena da, ez azkenekoarena: atzera egiteko, zatitu indizeaz.',
         'El porcentaje es del precio inicial, no del final: para volver atrás, divide entre el índice.',
-        'النسبة من السعر الأصلي لا من النهائي: للرجوع اقسم على المؤشر.'
+        'النسبة من السعر الأصلي لا من النهائي: للرجوع اقسم على المؤشر.', 'The percentage is of the starting price, not the final one: to go back, divide by the multiplier.'
     ),
     index: say(
         `${percentEu(3)} igotzeak $1{,}03$ indizea ematen du; ${percentEu(20)} jaisteak, $0{,}8$.`,
         `Una subida del ${percent(3)} da el índice $1{,}03$; una bajada del ${percent(20)}, $0{,}8$.`,
-        `زيادة ${percent(3)} تعطي المؤشر $1{,}03$، وتخفيض ${percent(20)} يعطي $0{,}8$.`
+        `زيادة ${percent(3)} تعطي المؤشر $1{,}03$، وتخفيض ${percent(20)} يعطي $0{,}8$.`, `An increase of ${percent(3)} gives the multiplier $1{,}03$; a decrease of ${percent(20)}, $0{,}8$.`
     ),
-    'months-years': say('Tasa urtekoa da: hilabeteak urte bihurtzeko, hamabiz zatitu.', 'El tipo es anual: los meses se pasan a años dividiendo entre 12.', 'السعر سنوي: نحوّل الأشهر إلى سنوات بالقسمة على 12.'),
+    'months-years': say('Tasa urtekoa da: hilabeteak urte bihurtzeko, hamabiz zatitu.', 'El tipo es anual: los meses se pasan a años dividiendo entre 12.', 'السعر سنوي: نحوّل الأشهر إلى سنوات بالقسمة على 12.', 'The interest rate is annual: convert months to years by dividing by 12.'),
     'simple-for-compound': say(
         'Konposatuan, interesek ere interesak sortzen dituzte: urtero indizeaz biderkatzen da, $C\\cdot(1+r)^{t}$.',
         'En el compuesto, los intereses también dan intereses: cada año se multiplica por el índice, $C\\cdot(1+r)^{t}$.',
-        'في المركّبة تُنتج الفوائد فوائد أيضًا: نضرب كل سنة في المؤشر $C\\cdot(1+r)^{t}$.'
+        'في المركّبة تُنتج الفوائد فوائد أيضًا: نضرب كل سنة في المؤشر $C\\cdot(1+r)^{t}$.', 'With compound interest, the interest also earns interest: each year you multiply by the multiplier, $C\\cdot(1+r)^{t}$.'
     ),
     'rate-not-split': say(
         'Interesak urtean $k$ aldiz sartzen badira, aldi bakoitzean urteko tasa zati $k$ aplikatzen da.',
         'Si los intereses se abonan $k$ veces al año, en cada periodo se aplica el tipo anual entre $k$.',
-        'إذا أُضيفت الفوائد $k$ مرات في السنة، نطبّق في كل فترة السعر السنوي مقسومًا على $k$.'
+        'إذا أُضيفت الفوائد $k$ مرات في السنة، نطبّق في كل فترة السعر السنوي مقسومًا على $k$.', 'If the interest is added $k$ times a year, each period uses the annual rate divided by $k$.'
     ),
     'mean-prices': say(
         'Nahasketaren prezioa ez da prezioen batez bestekoa: kostu osoa zati kilo guztiak.',
         'La mezcla no sale a la media de los precios: coste total entre kilos totales.',
-        'سعر الخليط ليس متوسط السعرين: الكلفة الكلية على مجموع الكيلوغرامات.'
+        'سعر الخليط ليس متوسط السعرين: الكلفة الكلية على مجموع الكيلوغرامات.', 'The mixture does not come out at the average of the prices: total cost divided by total kilos.'
     ),
     'added-hours': say(
         'Biak batera bakoitza bera baino azkarrago doaz: batu ordu batean betetzen dutena, $\\frac{1}{a}+\\frac{1}{b}$.',
         'Juntos tardan menos que cada uno solo: suma lo que llena cada grifo en una hora, $\\frac{1}{a}+\\frac{1}{b}$.',
-        'معًا يستغرقان أقل من كل واحد وحده: اجمع ما يملؤه كل صنبور في ساعة $\\frac{1}{a}+\\frac{1}{b}$.'
+        'معًا يستغرقان أقل من كل واحد وحده: اجمع ما يملؤه كل صنبور في ساعة $\\frac{1}{a}+\\frac{1}{b}$.', 'Together they take less time than each one alone: add up what each tap fills in one hour, $\\frac{1}{a}+\\frac{1}{b}$.'
     ),
-    speeds: say('Elkarrengana badoaz, abiadurak batu; bata bestearen atzetik badoa, kendu.', 'Si van al encuentro, las velocidades se suman; si uno persigue al otro, se restan.', 'إذا تلاقيا نجمع السرعتين، وإذا لاحق أحدهما الآخر نطرحهما.'),
+    speeds: say('Elkarrengana badoaz, abiadurak batu; bata bestearen atzetik badoa, kendu.', 'Si van al encuentro, las velocidades se suman; si uno persigue al otro, se restan.', 'إذا تلاقيا نجمع السرعتين، وإذا لاحق أحدهما الآخر نطرحهما.', 'If they are moving towards each other, the speeds are added; if one is chasing the other, they are subtracted.'),
     'upside-down': say(
         'Begiratu zatiketaren ordena: kostua zati kiloak, distantzia zati abiadura, 1 zati ordu batean betetzen dena.',
         'Mira el orden de la división: coste entre kilos, distancia entre velocidad, 1 entre lo que se llena en una hora.',
-        'انتبه لترتيب القسمة: الكلفة على الكيلوغرامات، والمسافة على السرعة، و1 على ما يُملأ في ساعة.'
+        'انتبه لترتيب القسمة: الكلفة على الكيلوغرامات، والمسافة على السرعة، و1 على ما يُملأ في ساعة.', 'Check the order of the division: cost divided by kilos, distance divided by speed, 1 divided by what fills in one hour.'
     ),
-    calculation: say('Planteamendua ondo dago; berrikusi lerro horretako eragiketa.', 'El planteamiento está bien; repasa la operación de esa línea.', 'الطريقة صحيحة؛ راجع العملية في ذلك السطر.')
+    calculation: say('Planteamendua ondo dago; berrikusi lerro horretako eragiketa.', 'El planteamiento está bien; repasa la operación de esa línea.', 'الطريقة صحيحة؛ راجع العملية في ذلك السطر.', 'Your set-up is right; check the calculation on that line.')
 }
 
 /* ---------- Solving a sheet ---------- */
@@ -180,7 +180,7 @@ const proportionContexts: Record<ProportionContext, { direct: boolean; values: (
         problem: (a, b, c) => say(
             `${math(a)} margolarik etxe bat ${math(b)} egunetan margotzen dute. Zenbat egun beharko dituzte ${math(c)} margolarik?`,
             `${math(a)} pintores pintan una casa en ${math(b)} días. ¿Cuántos días tardarán ${math(c)} pintores?`,
-            `يدهن ${math(a)} دهّانين بيتًا في ${math(b)} أيام. كم يومًا يحتاج ${math(c)} دهّانين؟`
+            `يدهن ${math(a)} دهّانين بيتًا في ${math(b)} أيام. كم يومًا يحتاج ${math(c)} دهّانين؟`, `${math(a)} painters paint a house in ${math(b)} days. How many days will ${math(c)} painters take?`
         )
     },
     speed: {
@@ -189,7 +189,7 @@ const proportionContexts: Record<ProportionContext, { direct: boolean; values: (
         problem: (a, b, c) => say(
             `Abiadura ${math(a)} km/h bada, bidaiak ${math(b)} ordu irauten du. Zenbat ordu iraungo du abiadura ${math(c)} km/h bada?`,
             `A ${math(a)} km/h, un viaje dura ${math(b)} horas. ¿Cuántas horas dura a ${math(c)} km/h?`,
-            `بسرعة ${math(a)} كم/س تستغرق الرحلة ${math(b)} ساعات. كم ساعة تستغرق بسرعة ${math(c)} كم/س؟`
+            `بسرعة ${math(a)} كم/س تستغرق الرحلة ${math(b)} ساعات. كم ساعة تستغرق بسرعة ${math(c)} كم/س؟`, `At ${math(a)} km/h, a journey takes ${math(b)} hours. How many hours does it take at ${math(c)} km/h?`
         )
     },
     price: {
@@ -198,7 +198,7 @@ const proportionContexts: Record<ProportionContext, { direct: boolean; values: (
         problem: (a, b, c) => say(
             `${math(a)} kg laranja ${math(b)} € balio dute. Zenbat balio dute ${math(c)} kg?`,
             `${math(a)} kg de naranjas cuestan ${math(b)} €. ¿Cuánto cuestan ${math(c)} kg?`,
-            `ثمن ${math(a)} كغ من البرتقال ${math(b)} €. كم ثمن ${math(c)} كغ؟`
+            `ثمن ${math(a)} كغ من البرتقال ${math(b)} €. كم ثمن ${math(c)} كغ؟`, `${math(a)} kg of oranges cost €${math(b)}. How much do ${math(c)} kg cost?`
         )
     },
     fuel: {
@@ -207,7 +207,7 @@ const proportionContexts: Record<ProportionContext, { direct: boolean; values: (
         problem: (a, b, c) => say(
             `Auto batek ${math(b)} litro gastatzen ditu ${math(a)} km egiteko. Zenbat litro gastatuko ditu ${math(c)} km egiteko?`,
             `Un coche gasta ${math(b)} litros en ${math(a)} km. ¿Cuántos litros gasta en ${math(c)} km?`,
-            `تستهلك سيارة ${math(b)} لترات في ${math(a)} كم. كم لترًا تستهلك في ${math(c)} كم؟`
+            `تستهلك سيارة ${math(b)} لترات في ${math(a)} كم. كم لترًا تستهلك في ${math(c)} كم؟`, `A car uses ${math(b)} litres in ${math(a)} km. How many litres does it use in ${math(c)} km?`
         )
     }
 }
@@ -221,7 +221,7 @@ const proportionTemplate: Template = {
         if (a === c) return null
         return {
             problem: problem(a, b, c),
-            labels: [say('Proportzioa', 'Proporción', 'التناسب'), say('x bakandu', 'Despejo x', 'نعزل x'), say('Emaitza', 'Resultado', 'النتيجة')],
+            labels: [say('Proportzioa', 'Proporción', 'التناسب', 'Proportion'), say('x bakandu', 'Despejo x', 'نعزل x', 'Solve for x'), say('Emaitza', 'Resultado', 'النتيجة', 'Result')],
             solve(mistake) {
                 const s = sheet(mistake)
                 const asDirect = mistake.error === 'direct-inverse' ? !direct : direct
@@ -249,6 +249,7 @@ const chainedTemplate: Template = {
         const words = (change: number) => ({
             eu: `${percentEu(Math.abs(change))} ${change > 0 ? 'igotzen' : 'jaisten'} da`,
             es: `${change > 0 ? 'sube' : 'baja'} un ${percent(Math.abs(change))}`,
+            en: `${change > 0 ? 'goes up' : 'goes down'} by ${percent(Math.abs(change))}`,
             ar: `${change > 0 ? 'يرتفع' : 'ينخفض'} ${percent(Math.abs(change))}`
         })
         const [first, second] = changes.map(words)
@@ -256,9 +257,9 @@ const chainedTemplate: Template = {
             problem: say(
                 `Prezio bat ${math(price)} € da. Lehenik ${first.eu}, eta gero ${second.eu}. Zein da azken prezioa? Zenbat aldatu da guztira, ehunekotan?`,
                 `Un precio de ${math(price)} € ${first.es} y después ${second.es}. ¿Cuál es el precio final? ¿Cuánto ha cambiado en total, en %?`,
-                `سعر ${math(price)} € ${first.ar} ثم ${second.ar}. ما السعر النهائي؟ وكم تغيّر إجمالًا بالنسبة المئوية؟`
+                `سعر ${math(price)} € ${first.ar} ثم ${second.ar}. ما السعر النهائي؟ وكم تغيّر إجمالًا بالنسبة المئوية؟`, `A price of €${math(price)} ${first.en} and then ${second.en}. What is the final price? How much has it changed overall, as a percentage?`
             ),
-            labels: [say('Indize osoa', 'Índice total', 'المؤشر الكلي'), say('Azken prezioa (€)', 'Precio final (€)', 'السعر النهائي (€)'), say('Aldaketa (%)', 'Cambio total (%)', 'التغيّر الكلي (٪)')],
+            labels: [say('Indize osoa', 'Índice total', 'المؤشر الكلي', 'Total multiplier'), say('Azken prezioa (€)', 'Precio final (€)', 'السعر النهائي (€)', 'Final price (€)'), say('Aldaketa (%)', 'Cambio total (%)', 'التغيّر الكلي (٪)', 'Total change (%)')],
             solve(mistake) {
                 const s = sheet(mistake)
                 const indices = changes.map((change) => round4(1 + change / 100))
@@ -297,25 +298,25 @@ const reverseTemplate: Template = {
             vat21: say(
                 `BEZa barne (${percentEu(21)}), mugikor batek ${math(final)} € balio du. Zenbat balio du BEZik gabe? Zenbat BEZ ordaintzen da?`,
                 `Con el ${percent(21)} de IVA incluido, un móvil cuesta ${math(final)} €. ¿Cuánto cuesta sin IVA? ¿Cuánto IVA se paga?`,
-                `ثمن هاتف ${math(final)} € شاملًا ضريبة القيمة المضافة ${percent(21)}. كم ثمنه دون الضريبة؟ وكم الضريبة المدفوعة؟`
+                `ثمن هاتف ${math(final)} € شاملًا ضريبة القيمة المضافة ${percent(21)}. كم ثمنه دون الضريبة؟ وكم الضريبة المدفوعة؟`, `With ${percent(21)} VAT included, a phone costs €${math(final)}. How much does it cost without VAT? How much VAT do you pay?`
             ),
             vat10: say(
                 `BEZa barne (${percentEu(10)}), afari batek ${math(final)} € balio du. Zenbat balio du BEZik gabe? Zenbat BEZ ordaintzen da?`,
                 `Con el ${percent(10)} de IVA incluido, una cena cuesta ${math(final)} €. ¿Cuánto cuesta sin IVA? ¿Cuánto IVA se paga?`,
-                `ثمن عشاء ${math(final)} € شاملًا ضريبة ${percent(10)}. كم ثمنه دون الضريبة؟ وكم الضريبة المدفوعة؟`
+                `ثمن عشاء ${math(final)} € شاملًا ضريبة ${percent(10)}. كم ثمنه دون الضريبة؟ وكم الضريبة المدفوعة؟`, `With ${percent(10)} VAT included, a meal costs €${math(final)}. How much does it cost without VAT? How much VAT do you pay?`
             ),
             discount: say(
                 `Beherapena eginda (${percentEu(rate)}), zapatila batzuek ${math(final)} € balio dute. Zenbat balio zuten lehen? Zenbatekoa da beherapena?`,
                 `Con una rebaja del ${percent(rate)}, unas zapatillas cuestan ${math(final)} €. ¿Cuánto costaban antes? ¿Cuánto es la rebaja?`,
-                `بعد تخفيض ${percent(rate)} صار ثمن حذاء رياضي ${math(final)} €. كم كان ثمنه قبل التخفيض؟ وكم مقدار التخفيض؟`
+                `بعد تخفيض ${percent(rate)} صار ثمن حذاء رياضي ${math(final)} €. كم كان ثمنه قبل التخفيض؟ وكم مقدار التخفيض؟`, `After a ${percent(rate)} discount, a pair of trainers costs €${math(final)}. How much did they cost before? How much is the discount?`
             )
         }
         return {
             problem: problems[variant],
             labels: [
-                say('Indizea', 'Índice', 'المؤشر'),
-                vat ? say('BEZik gabe (€)', 'Sin IVA (€)', 'دون الضريبة (€)') : say('Lehengo prezioa (€)', 'Precio de antes (€)', 'السعر السابق (€)'),
-                vat ? say('BEZa (€)', 'IVA (€)', 'الضريبة (€)') : say('Beherapena (€)', 'Rebaja (€)', 'التخفيض (€)')
+                say('Indizea', 'Índice', 'المؤشر', 'Index'),
+                vat ? say('BEZik gabe (€)', 'Sin IVA (€)', 'دون الضريبة (€)', 'Without VAT (€)') : say('Lehengo prezioa (€)', 'Precio de antes (€)', 'السعر السابق (€)', 'Original price (€)'),
+                vat ? say('BEZa (€)', 'IVA (€)', 'الضريبة (€)', 'VAT (€)') : say('Beherapena (€)', 'Rebaja (€)', 'التخفيض (€)', 'Discount (€)')
             ],
             solve(mistake) {
                 const s = sheet(mistake)
@@ -336,8 +337,8 @@ const reverseTemplate: Template = {
 
 /* ---------- Level 2: interest ---------- */
 
-const capitalLabel = say('Azken kapitala (€)', 'Capital final (€)', 'رأس المال النهائي (€)')
-const interestLabel = say('Interesak (€)', 'Intereses (€)', 'الفوائد (€)')
+const capitalLabel = say('Azken kapitala (€)', 'Capital final (€)', 'رأس المال النهائي (€)', 'Final amount (€)')
+const interestLabel = say('Interesak (€)', 'Intereses (€)', 'الفوائد (€)', 'Interest (€)')
 
 const monthsTemplate: Template = {
     errors: ['months-years', 'calculation'],
@@ -350,9 +351,9 @@ const monthsTemplate: Template = {
             problem: say(
                 `${math(capital)} € gordetzen dira bankuan, interes bakunarekin: urteko ${percentEu(rate)}, ${math(months)} hilabetez. Zenbat diru dago amaieran?`,
                 `Se depositan ${math(capital)} € al ${percent(rate)} de interés simple anual durante ${math(months)} meses. ¿Cuánto dinero hay al final?`,
-                `نودع ${math(capital)} € بفائدة بسيطة ${percent(rate)} سنويًا مدة ${math(months)} أشهر. كم يصبح المال في النهاية؟`
+                `نودع ${math(capital)} € بفائدة بسيطة ${percent(rate)} سنويًا مدة ${math(months)} أشهر. كم يصبح المال في النهاية؟`, `€${math(capital)} is deposited at ${percent(rate)} simple annual interest for ${math(months)} months. How much money is there at the end?`
             ),
-            labels: [say('Denbora (urteak)', 'Tiempo (años)', 'الزمن (سنوات)'), say('Interesa (€)', 'Interés (€)', 'الفائدة (€)'), say('Amaieran (€)', 'Al final (€)', 'في النهاية (€)')],
+            labels: [say('Denbora (urteak)', 'Tiempo (años)', 'الزمن (سنوات)', 'Time (years)'), say('Interesa (€)', 'Interés (€)', 'الفائدة (€)', 'Interest (€)'), say('Amaieran (€)', 'Al final (€)', 'في النهاية (€)', 'Total at the end (€)')],
             solve(mistake) {
                 const s = sheet(mistake)
                 const asYears = mistake.error === 'months-years'
@@ -381,9 +382,9 @@ const compoundTemplate: Template = {
             problem: say(
                 `${math(capital)} € jartzen dira interes konposatuan, urteko ${percentEu(rate)}, ${math(years)} urtez. Zenbat diru egongo da amaieran? Zenbat interes ematen dute?`,
                 `Se colocan ${math(capital)} € al ${percent(rate)} de interés compuesto anual durante ${math(years)} años. ¿Cuánto dinero habrá al final? ¿Cuántos intereses dan?`,
-                `نودع ${math(capital)} € بفائدة مركّبة ${percent(rate)} سنويًا مدة ${math(years)} سنوات. كم يصبح المال في النهاية؟ وكم الفوائد؟`
+                `نودع ${math(capital)} € بفائدة مركّبة ${percent(rate)} سنويًا مدة ${math(years)} سنوات. كم يصبح المال في النهاية؟ وكم الفوائد؟`, `€${math(capital)} is invested at ${percent(rate)} annual compound interest for ${math(years)} years. How much money will there be at the end? How much interest will it earn?`
             ),
-            labels: [say('Indizea', 'Índice', 'المؤشر'), capitalLabel, interestLabel],
+            labels: [say('Indizea', 'Índice', 'المؤشر', 'Index'), capitalLabel, interestLabel],
             solve(mistake) {
                 const s = sheet(mistake)
                 const step = mistake.error === 'index' ? rate / 10 : rate / 100
@@ -410,9 +411,9 @@ const PERIOD_PLANS = [
 ] as const
 
 const periodNames: Record<2 | 4 | 12, LocalizedText> = {
-    2: say('sei hilean behin', 'cada semestre', 'كل ستة أشهر'),
-    4: say('hiru hilean behin', 'cada trimestre', 'كل ثلاثة أشهر'),
-    12: say('hilean behin', 'cada mes', 'كل شهر')
+    2: say('sei hilean behin', 'cada semestre', 'كل ستة أشهر', 'every six months'),
+    4: say('hiru hilean behin', 'cada trimestre', 'كل ثلاثة أشهر', 'every three months'),
+    12: say('hilean behin', 'cada mes', 'كل شهر', 'every month')
 }
 
 const periodsTemplate: Template = {
@@ -425,15 +426,15 @@ const periodsTemplate: Template = {
         const months = (12 * plan.count) / plan.periods
         const when = periodNames[plan.periods]
         const time = months === 12
-            ? { eu: 'urtebetez', es: 'un año', ar: 'مدة سنة' }
-            : { eu: `${math(months)} hilabetez`, es: `${math(months)} meses`, ar: `مدة ${math(months)} أشهر` }
+            ? { eu: 'urtebetez', es: 'un año', en: 'one year', ar: 'مدة سنة' }
+            : { eu: `${math(months)} hilabetez`, es: `${math(months)} meses`, en: `${math(months)} months`, ar: `مدة ${math(months)} أشهر` }
         return {
             problem: say(
                 `Banku batek urteko ${percentEu(rate)} ordaintzen du, interes konposatuan, eta interesak ${when.eu} sartzen ditu. ${math(capital)} € gordetzen dira ${time.eu}. Zenbat diru dago amaieran?`,
                 `Un banco paga un ${percent(rate)} anual de interés compuesto y abona los intereses ${when.es}. Se depositan ${math(capital)} € durante ${time.es}. ¿Cuánto dinero hay al final?`,
-                `يدفع مصرف فائدة مركّبة ${percent(rate)} سنويًا ويضيف الفوائد ${when.ar}. نودع ${math(capital)} € ${time.ar}. كم يصبح المال في النهاية؟`
+                `يدفع مصرف فائدة مركّبة ${percent(rate)} سنويًا ويضيف الفوائد ${when.ar}. نودع ${math(capital)} € ${time.ar}. كم يصبح المال في النهاية؟`, `A bank pays ${percent(rate)} a year in compound interest and adds the interest ${when.en}. €${math(capital)} is deposited for ${time.en}. How much money is there at the end?`
             ),
-            labels: [say('Aldiko indizea', 'Índice por periodo', 'مؤشر الفترة'), capitalLabel, interestLabel],
+            labels: [say('Aldiko indizea', 'Índice por periodo', 'مؤشر الفترة', 'Multiplier per period'), capitalLabel, interestLabel],
             solve(mistake) {
                 const s = sheet(mistake)
                 const whole = mistake.error === 'rate-not-split'
@@ -464,9 +465,9 @@ const mixtureTemplate: Template = {
             problem: say(
                 `Kafe bi nahasten dira: ${math(kilos[0])} kg, kiloa ${math(prices[0])} €, eta ${math(kilos[1])} kg, kiloa ${math(prices[1])} €. Nahasketaren poltsa batek ${math(bag)} kg ditu. Zenbat balio du?`,
                 `Se mezclan ${math(kilos[0])} kg de café de ${math(prices[0])} €/kg con ${math(kilos[1])} kg de ${math(prices[1])} €/kg. ¿Cuánto cuesta una bolsa de ${math(bag)} kg de la mezcla?`,
-                `نخلط ${math(kilos[0])} كغ من البن بسعر ${math(prices[0])} €/كغ مع ${math(kilos[1])} كغ بسعر ${math(prices[1])} €/كغ. كم ثمن كيس من الخليط وزنه ${math(bag)} كغ؟`
+                `نخلط ${math(kilos[0])} كغ من البن بسعر ${math(prices[0])} €/كغ مع ${math(kilos[1])} كغ بسعر ${math(prices[1])} €/كغ. كم ثمن كيس من الخليط وزنه ${math(bag)} كغ؟`, `Mix ${math(kilos[0])} kg of coffee at €${math(prices[0])}/kg with ${math(kilos[1])} kg at €${math(prices[1])}/kg. How much does a ${math(bag)} kg bag of the mixture cost?`
             ),
-            labels: [say('Kostu osoa (€)', 'Coste total (€)', 'الكلفة الكلية (€)'), say('Kiloaren prezioa (€)', 'Precio del kilo (€)', 'سعر الكيلو (€)'), say('Poltsa (€)', 'La bolsa (€)', 'الكيس (€)')],
+            labels: [say('Kostu osoa (€)', 'Coste total (€)', 'الكلفة الكلية (€)', 'Total cost (€)'), say('Kiloaren prezioa (€)', 'Precio del kilo (€)', 'سعر الكيلو (€)', 'Price per kilo (€)'), say('Poltsa (€)', 'La bolsa (€)', 'الكيس (€)', 'The bag (€)')],
             solve(mistake) {
                 const s = sheet(mistake)
                 const mean = mistake.error === 'mean-prices'
@@ -498,9 +499,9 @@ const tapsTemplate: Template = {
             problem: say(
                 `A txorrotak biltegia ${math(a)} orduan betetzen du, eta B txorrotak, ${math(b)} orduan. Zenbat denbora behar dute biek batera, ordutan eta minututan?`,
                 `El grifo A llena un depósito en ${math(a)} horas, y el grifo B, en ${math(b)} horas. ¿Cuánto tardan los dos juntos, en horas y en minutos?`,
-                `يملأ الصنبور أ خزانًا في ${math(a)} ساعات، والصنبور ب في ${math(b)} ساعات. كم يحتاجان معًا بالساعات والدقائق؟`
+                `يملأ الصنبور أ خزانًا في ${math(a)} ساعات، والصنبور ب في ${math(b)} ساعات. كم يحتاجان معًا بالساعات والدقائق؟`, `Tap A fills a tank in ${math(a)} hours, and tap B fills it in ${math(b)} hours. How long do the two taps take together, in hours and minutes?`
             ),
-            labels: [say('Batera, ordu batean', 'Juntos en 1 hora', 'معًا في ساعة'), say('Denbora (h)', 'Tiempo (h)', 'الزمن (س)'), say('Denbora (min)', 'Tiempo (min)', 'الزمن (د)')],
+            labels: [say('Batera, ordu batean', 'Juntos en 1 hora', 'معًا في ساعة', 'Together in 1 hour'), say('Denbora (h)', 'Tiempo (h)', 'الزمن (س)', 'Time (h)'), say('Denbora (min)', 'Tiempo (min)', 'الزمن (د)', 'Time (min)')],
             solve(mistake) {
                 const s = sheet(mistake)
                 const added = mistake.error === 'added-hours'
@@ -521,8 +522,8 @@ const tapsTemplate: Template = {
     }
 }
 
-const timeLabel = say('Denbora (h)', 'Tiempo (h)', 'الزمن (س)')
-const closingLabel = say('Hurbiltzea (km/h)', 'Se acercan (km/h)', 'سرعة الاقتراب (كم/س)')
+const timeLabel = say('Denbora (h)', 'Tiempo (h)', 'الزمن (س)', 'Time (h)')
+const closingLabel = say('Hurbiltzea (km/h)', 'Se acercan (km/h)', 'سرعة الاقتراب (كم/س)', 'Closing speed (km/h)')
 
 /** A chase: a lorry leaves, a car follows later from the same place, faster */
 function chaseProblem(random: Random): Problem {
@@ -533,9 +534,9 @@ function chaseProblem(random: Random): Problem {
         problem: say(
             `Kamioi bat herri batetik ateratzen da, abiadura ${math(slow)} km/h. ${math(delay)} ordu geroago, auto bat herri beretik ateratzen da errepide beretik, abiadura ${math(fast)} km/h. Zenbat ordu behar ditu autoak kamioia harrapatzeko?`,
             `Un camión sale de un pueblo a ${math(slow)} km/h. ${math(delay)} horas después sale del mismo pueblo, por la misma carretera, un coche a ${math(fast)} km/h. ¿Cuántas horas tarda el coche en alcanzarlo?`,
-            `تنطلق شاحنة من قرية بسرعة ${math(slow)} كم/س. بعد ${math(delay)} ساعات تنطلق سيارة من القرية نفسها وعلى الطريق نفسها بسرعة ${math(fast)} كم/س. كم ساعة تحتاج السيارة لتلحق بالشاحنة؟`
+            `تنطلق شاحنة من قرية بسرعة ${math(slow)} كم/س. بعد ${math(delay)} ساعات تنطلق سيارة من القرية نفسها وعلى الطريق نفسها بسرعة ${math(fast)} كم/س. كم ساعة تحتاج السيارة لتلحق بالشاحنة؟`, `A lorry leaves a village at ${math(slow)} km/h. ${math(delay)} hours later, a car leaves the same village, on the same road, at ${math(fast)} km/h. How many hours will the car take to catch up with it?`
         ),
-        labels: [say('Aurrea (km)', 'Ventaja (km)', 'الفارق (كم)'), closingLabel, timeLabel],
+        labels: [say('Aurrea (km)', 'Ventaja (km)', 'الفارق (كم)', 'Lead (km)'), closingLabel, timeLabel],
         solve(mistake) {
             const s = sheet(mistake)
             const added = mistake.error === 'speeds'
@@ -562,9 +563,9 @@ function meetProblem(random: Random): Problem | null {
         problem: say(
             `A eta B hirien arteko distantzia ${math(distance)} km da. Aldi berean, auto bana ateratzen da hiri bakoitzetik bestearengana: A-koaren abiadura ${math(speeds[0])} km/h da, eta B-koarena, ${math(speeds[1])} km/h. Zenbat ordu behar dute gurutzatzeko, eta A-tik zenbat kilometrotara gurutzatzen dira?`,
             `Dos ciudades, A y B, están a ${math(distance)} km. A la vez sale un coche de cada una hacia la otra: el de A a ${math(speeds[0])} km/h y el de B a ${math(speeds[1])} km/h. ¿Cuántas horas tardan en cruzarse y a cuántos km de A?`,
-            `المسافة بين المدينتين أ وب ${math(distance)} كم. تنطلق في اللحظة نفسها سيارة من كل مدينة نحو الأخرى: سيارة أ بسرعة ${math(speeds[0])} كم/س وسيارة ب بسرعة ${math(speeds[1])} كم/س. بعد كم ساعة تتقاطعان، وعلى بعد كم كيلومترًا من أ؟`
+            `المسافة بين المدينتين أ وب ${math(distance)} كم. تنطلق في اللحظة نفسها سيارة من كل مدينة نحو الأخرى: سيارة أ بسرعة ${math(speeds[0])} كم/س وسيارة ب بسرعة ${math(speeds[1])} كم/س. بعد كم ساعة تتقاطعان، وعلى بعد كم كيلومترًا من أ؟`, `Two cities, A and B, are ${math(distance)} km apart. At the same time, a car leaves each city towards the other: the car from A at ${math(speeds[0])} km/h and the car from B at ${math(speeds[1])} km/h. How many hours do they take to meet, and how many km from A is the meeting point?`
         ),
-        labels: [closingLabel, timeLabel, say('A-tik (km)', 'Desde A (km)', 'من أ (كم)')],
+        labels: [closingLabel, timeLabel, say('A-tik (km)', 'Desde A (km)', 'من أ (كم)', 'From A (km)')],
         solve(mistake) {
             const s = sheet(mistake)
             const subtracted = mistake.error === 'speeds'

@@ -32,7 +32,7 @@ const CARD = 'var(--card, #fffcf6)'
 const PAPER = '#fffcf6'
 const SERIF = 'Fraunces, serif'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const useText = (language: UnitLanguage) => (text: LocalizedText) => pickText(language, text)
 
 function Caption({ y, children, x = 360 }: { y: number; children: ReactNode; x?: number }) {
@@ -99,7 +99,7 @@ export function VectorFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const box: PlaneBox = { xMin: -4, xMax: 7, yMin: -2, yMax: 7 }
     return (
-        <Figure height={330} label={t(say('A(1, 2) puntutik B(5, 5) puntura doan bektorea: koordenatuak (4, 3) eta modulua 5; bektore berdin bat beste puntu batetik', 'El vector de A(1, 2) a B(5, 5): coordenadas (4, 3) y módulo 5; un vector igual desde otro punto', 'المتجه من A(1, 2) إلى B(5, 5): مركّبتاه (4, 3) وطوله 5؛ ومتجه مساوٍ له من نقطة أخرى'))}>
+        <Figure height={330} label={t(say('A(1, 2) puntutik B(5, 5) puntura doan bektorea: koordenatuak (4, 3) eta modulua 5; bektore berdin bat beste puntu batetik', 'El vector de A(1, 2) a B(5, 5): coordenadas (4, 3) y módulo 5; un vector igual desde otro punto', 'المتجه من A(1, 2) إلى B(5, 5): مركّبتاه (4, 3) وطوله 5؛ ومتجه مساوٍ له من نقطة أخرى', 'The vector from A(1, 2) to B(5, 5): coordinates (4, 3) and magnitude 5; an equal vector from another point'))}>
             <Frame box={box} cell={26} ox={24} oy={20}>
                 {(map) => (
                     <g>
@@ -117,9 +117,9 @@ export function VectorFigure({ language }: { language: UnitLanguage }) {
             <F x={350} y={70} size={20}>AB = (5 − 1, 5 − 2)</F>
             <F x={384} y={104} size={20} color={STAGE}>= (4, 3)</F>
             <F x={350} y={160} size={20}>|AB| = √(4² + 3²) = 5</F>
-            <Label x={350} y={214} fontSize={15} fill={MUTED}>{t(say('Gris koloreko bektorea berdina da:', 'El vector gris es igual:', 'المتجه الرمادي مساوٍ له:'))}</Label>
-            <Label x={350} y={238} fontSize={15} fill={MUTED}>{t(say('modulu, norabide eta noranzko bera', 'mismo módulo, dirección y sentido', 'الطول والاتجاه والمنحى نفسها'))}</Label>
-            <Caption y={316}>{t(say('Koordenatuak: muturra ken jatorria', 'Coordenadas: extremo menos origen', 'المركّبتان: الطرف ناقص الأصل'))}</Caption>
+            <Label x={350} y={214} fontSize={15} fill={MUTED}>{t(say('Gris koloreko bektorea berdina da:', 'El vector gris es igual:', 'المتجه الرمادي مساوٍ له:', 'The grey vector is equal:'))}</Label>
+            <Label x={350} y={238} fontSize={15} fill={MUTED}>{t(say('modulu, norabide eta noranzko bera', 'mismo módulo, dirección y sentido', 'الطول والاتجاه والمنحى نفسها', 'same magnitude, direction and sense'))}</Label>
+            <Caption y={316}>{t(say('Koordenatuak: muturra ken jatorria', 'Coordenadas: extremo menos origen', 'المركّبتان: الطرف ناقص الأصل', 'Coordinates: end point minus start point'))}</Caption>
         </Figure>
     )
 }
@@ -130,7 +130,7 @@ export function OperationsFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const box: PlaneBox = { xMin: -3, xMax: 5, yMin: -2, yMax: 5 }
     return (
-        <Figure height={300} label={t(say('u = (3, −1) eta v = (−2, 4) bektoreen batura paralelogramoaren diagonala da: (1, 3)', 'La suma de u = (3, −1) y v = (−2, 4) es la diagonal del paralelogramo: (1, 3)', 'مجموع u = (3, −1) وv = (−2, 4) هو قطر متوازي الأضلاع: (1, 3)'))}>
+        <Figure height={300} label={t(say('u = (3, −1) eta v = (−2, 4) bektoreen batura paralelogramoaren diagonala da: (1, 3)', 'La suma de u = (3, −1) y v = (−2, 4) es la diagonal del paralelogramo: (1, 3)', 'مجموع u = (3, −1) وv = (−2, 4) هو قطر متوازي الأضلاع: (1, 3)', 'The sum of u = (3, −1) and v = (−2, 4) is the diagonal of the parallelogram: (1, 3)'))}>
             <Frame box={box} cell={30} ox={24} oy={18}>
                 {(map) => (
                     <g>
@@ -146,8 +146,8 @@ export function OperationsFigure({ language }: { language: UnitLanguage }) {
             <F x={330} y={70} size={20}>(3, −1) + (−2, 4) = (1, 3)</F>
             <F x={330} y={124} size={20}>3 · (2, −1) = (6, −3)</F>
             <F x={330} y={178} size={20}>2u − v = (8, −6)</F>
-            <Caption y={240} x={510}>{t(say('Koordenatuz koordenatu', 'Coordenada a coordenada', 'مركّبةً مركّبة'))}</Caption>
-            <Caption y={288}>{t(say('Grafikoki: bata bestearen muturrean, edo paralelogramoaren diagonala', 'Gráficamente: uno a continuación del otro, o la diagonal del paralelogramo', 'بيانيًا: أحدهما بعد الآخر، أو قطر متوازي الأضلاع'))}</Caption>
+            <Caption y={240} x={510}>{t(say('Koordenatuz koordenatu', 'Coordenada a coordenada', 'مركّبةً مركّبة', 'Coordinate by coordinate'))}</Caption>
+            <Caption y={288}>{t(say('Grafikoki: bata bestearen muturrean, edo paralelogramoaren diagonala', 'Gráficamente: uno a continuación del otro, o la diagonal del paralelogramo', 'بيانيًا: أحدهما بعد الآخر، أو قطر متوازي الأضلاع', 'Graphically: one after the other, or as the diagonal of the parallelogram'))}</Caption>
         </Figure>
     )
 }
@@ -158,7 +158,7 @@ export function ParallelFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const box: PlaneBox = { xMin: -4, xMax: 5, yMin: -1, yMax: 7 }
     return (
-        <Figure height={300} label={t(say('(2, 3) eta (4, 6) paraleloak dira; (−3, 2) perpendikularra da', '(2, 3) y (4, 6) son paralelos; (−3, 2) es perpendicular', '(2, 3) و(4, 6) متوازيان؛ و(−3, 2) عمودي عليهما'))}>
+        <Figure height={300} label={t(say('(2, 3) eta (4, 6) paraleloak dira; (−3, 2) perpendikularra da', '(2, 3) y (4, 6) son paralelos; (−3, 2) es perpendicular', '(2, 3) و(4, 6) متوازيان؛ و(−3, 2) عمودي عليهما', '(2, 3) and (4, 6) are parallel; (−3, 2) is perpendicular'))}>
             <Frame box={box} cell={30} ox={24} oy={18}>
                 {(map) => (
                     <g>
@@ -169,13 +169,13 @@ export function ParallelFigure({ language }: { language: UnitLanguage }) {
                     </g>
                 )}
             </Frame>
-            <Label x={340} y={64} fontSize={16} fontWeight={700} fill={GREEN}>{t(say('Paraleloak', 'Paralelos', 'متوازيان'))}</Label>
+            <Label x={340} y={64} fontSize={16} fontWeight={700} fill={GREEN}>{t(say('Paraleloak', 'Paralelos', 'متوازيان', 'Parallel'))}</Label>
             <F x={340} y={96} size={19}>4 / 2 = 6 / 3 = 2</F>
             <F x={340} y={128} size={19}>2 · 6 = 3 · 4</F>
-            <Label x={340} y={180} fontSize={16} fontWeight={700} fill={SECOND}>{t(say('Perpendikularra', 'Perpendicular', 'عمودي'))}</Label>
+            <Label x={340} y={180} fontSize={16} fontWeight={700} fill={SECOND}>{t(say('Perpendikularra', 'Perpendicular', 'عمودي', 'Perpendicular'))}</Label>
             <F x={340} y={212} size={19}>(a, b)  →  (−b, a)</F>
             <F x={340} y={244} size={19}>(2, 3)  →  (−3, 2)</F>
-            <Caption y={290}>{t(say('Proportzionalak: norabide bera. Trukatu eta aldatu zeinu bat: perpendikularra', 'Proporcionales: misma dirección. Intercambia y cambia un signo: perpendicular', 'متناسبان: الاتجاه نفسه. بدّل وغيّر إشارة: عمودي'))}</Caption>
+            <Caption y={290}>{t(say('Proportzionalak: norabide bera. Trukatu eta aldatu zeinu bat: perpendikularra', 'Proporcionales: misma dirección. Intercambia y cambia un signo: perpendicular', 'متناسبان: الاتجاه نفسه. بدّل وغيّر إشارة: عمودي', 'Proportional: same direction. Swap the coordinates and change one sign: perpendicular'))}</Caption>
         </Figure>
     )
 }
@@ -186,7 +186,7 @@ export function DistanceFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const box: PlaneBox = { xMin: 0, xMax: 6, yMin: 0, yMax: 6 }
     return (
-        <Figure height={290} label={t(say('A(1, 1) eta B(4, 5) puntuen arteko distantzia: 3 eta 4 katetoak dituen triangeluaren hipotenusa, 5', 'La distancia entre A(1, 1) y B(4, 5): la hipotenusa del triángulo de catetos 3 y 4, que mide 5', 'المسافة بين A(1, 1) وB(4, 5): وتر المثلث الذي ضلعاه 3 و4، وطوله 5'))}>
+        <Figure height={290} label={t(say('A(1, 1) eta B(4, 5) puntuen arteko distantzia: 3 eta 4 katetoak dituen triangeluaren hipotenusa, 5', 'La distancia entre A(1, 1) y B(4, 5): la hipotenusa del triángulo de catetos 3 y 4, que mide 5', 'المسافة بين A(1, 1) وB(4, 5): وتر المثلث الذي ضلعاه 3 و4، وطوله 5', 'The distance between A(1, 1) and B(4, 5): the hypotenuse of the triangle with legs 3 and 4, which measures 5'))}>
             <Frame box={box} cell={38} ox={24} oy={18}>
                 {(map) => (
                     <g>
@@ -204,7 +204,7 @@ export function DistanceFigure({ language }: { language: UnitLanguage }) {
             <F x={330} y={92} size={20}>d(A, B) = √(3² + 4²)</F>
             <F x={386} y={128} size={20} color={STAGE}>= √25 = 5</F>
             <F x={330} y={196} size={17} color={MUTED}>√((x₂ − x₁)² + (y₂ − y₁)²)</F>
-            <Caption y={280}>{t(say('Pitagoras: abzisen kendura eta ordenatuen kendura dira katetoak', 'Pitágoras: los catetos son la diferencia de abscisas y la de ordenadas', 'فيثاغورس: الضلعان القائمان هما فرق السينات وفرق الصادات'))}</Caption>
+            <Caption y={280}>{t(say('Pitagoras: abzisen kendura eta ordenatuen kendura dira katetoak', 'Pitágoras: los catetos son la diferencia de abscisas y la de ordenadas', 'فيثاغورس: الضلعان القائمان هما فرق السينات وفرق الصادات', 'Pythagoras\' theorem: the legs are the difference of the x-coordinates and that of the y-coordinates'))}</Caption>
         </Figure>
     )
 }
@@ -215,7 +215,7 @@ export function MidpointFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const box: PlaneBox = { xMin: 0, xMax: 8, yMin: -4, yMax: 6 }
     return (
-        <Figure height={340} label={t(say('A(2, −3) eta B(6, 5) muturreko zuzenkiaren erdiko puntua M(4, 1) da', 'El punto medio del segmento de extremos A(2, −3) y B(6, 5) es M(4, 1)', 'منتصف القطعة التي طرفاها A(2, −3) وB(6, 5) هو M(4, 1)'))}>
+        <Figure height={340} label={t(say('A(2, −3) eta B(6, 5) muturreko zuzenkiaren erdiko puntua M(4, 1) da', 'El punto medio del segmento de extremos A(2, −3) y B(6, 5) es M(4, 1)', 'منتصف القطعة التي طرفاها A(2, −3) وB(6, 5) هو M(4, 1)', 'The midpoint of the segment with endpoints A(2, −3) and B(6, 5) is M(4, 1)'))}>
             <Frame box={box} cell={27} ox={24} oy={20}>
                 {(map) => (
                     <g>
@@ -230,9 +230,9 @@ export function MidpointFigure({ language }: { language: UnitLanguage }) {
             </Frame>
             <F x={300} y={80} size={20}>M = ((2 + 6) / 2, (−3 + 5) / 2)</F>
             <F x={348} y={116} size={20} color={SECOND}>= (4, 1)</F>
-            <Label x={300} y={178} fontSize={16} fontWeight={700} fill={INK}>{t(say('Simetrikoa P-rekiko', 'Simétrico respecto de P', 'النظيرة بالنسبة إلى P'))}</Label>
+            <Label x={300} y={178} fontSize={16} fontWeight={700} fill={INK}>{t(say('Simetrikoa P-rekiko', 'Simétrico respecto de P', 'النظيرة بالنسبة إلى P', 'Symmetric with respect to P'))}</Label>
             <F x={300} y={210} size={20}>A′ = 2P − A</F>
-            <Caption y={332}>{t(say('Erdiko puntua: muturren koordenatuen batez bestekoa', 'Punto medio: la media de las coordenadas de los extremos', 'المنتصف: متوسط إحداثيات الطرفين'))}</Caption>
+            <Caption y={332}>{t(say('Erdiko puntua: muturren koordenatuen batez bestekoa', 'Punto medio: la media de las coordenadas de los extremos', 'المنتصف: متوسط إحداثيات الطرفين', 'Midpoint: the mean of the coordinates of the endpoints'))}</Caption>
         </Figure>
     )
 }
@@ -243,7 +243,7 @@ export function CollinearFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const box: PlaneBox = { xMin: 0, xMax: 6, yMin: 0, yMax: 11 }
     return (
-        <Figure height={345} label={t(say('A(1, 2), B(3, 6) eta C(5, 10) lerrokatuta daude: AB = (2, 4) eta AC = (4, 8) proportzionalak dira', 'A(1, 2), B(3, 6) y C(5, 10) están alineados: AB = (2, 4) y AC = (4, 8) son proporcionales', 'النقاط A(1, 2) وB(3, 6) وC(5, 10) على استقامة واحدة: AB = (2, 4) وAC = (4, 8) متناسبان'))}>
+        <Figure height={345} label={t(say('A(1, 2), B(3, 6) eta C(5, 10) lerrokatuta daude: AB = (2, 4) eta AC = (4, 8) proportzionalak dira', 'A(1, 2), B(3, 6) y C(5, 10) están alineados: AB = (2, 4) y AC = (4, 8) son proporcionales', 'النقاط A(1, 2) وB(3, 6) وC(5, 10) على استقامة واحدة: AB = (2, 4) وAC = (4, 8) متناسبان', 'A(1, 2), B(3, 6) and C(5, 10) are collinear: AB = (2, 4) and AC = (4, 8) are proportional'))}>
             <Frame box={box} cell={24} ox={60} oy={20} labelStep={2}>
                 {(map, clip) => (
                     <g>
@@ -259,8 +259,8 @@ export function CollinearFigure({ language }: { language: UnitLanguage }) {
             <F x={320} y={84} size={20} color={STAGE}>AB = (2, 4)</F>
             <F x={320} y={120} size={20} color={GREEN}>AC = (4, 8)</F>
             <F x={320} y={176} size={20}>4 / 2 = 8 / 4</F>
-            <Label x={320} y={212} fontSize={16} fill={MUTED}>{t(say('proportzionalak: lerrokatuta', 'proporcionales: alineados', 'متناسبان: على استقامة واحدة'))}</Label>
-            <Caption y={335}>{t(say('Lerrokatuta: A-tik ateratako bi bektoreek norabide bera dute', 'Alineados: los dos vectores que salen de A tienen la misma dirección', 'على استقامة واحدة: للمتجهين الخارجين من A الاتجاه نفسه'))}</Caption>
+            <Label x={320} y={212} fontSize={16} fill={MUTED}>{t(say('proportzionalak: lerrokatuta', 'proporcionales: alineados', 'متناسبان: على استقامة واحدة', 'proportional: collinear'))}</Label>
+            <Caption y={335}>{t(say('Lerrokatuta: A-tik ateratako bi bektoreek norabide bera dute', 'Alineados: los dos vectores que salen de A tienen la misma dirección', 'على استقامة واحدة: للمتجهين الخارجين من A الاتجاه نفسه', 'Collinear: the two vectors leaving A have the same direction'))}</Caption>
         </Figure>
     )
 }
@@ -272,7 +272,7 @@ export function ParametricFigure({ language }: { language: UnitLanguage }) {
     const box: PlaneBox = { xMin: -3, xMax: 6, yMin: -5, yMax: 9 }
     const marks: Array<[number, Point]> = [[-1, [-2, 8]], [0, [1, 2]], [1, [4, -4]]]
     return (
-        <Figure height={330} label={t(say('x = 1 + 3t, y = 2 − 6t zuzena: t = −1, 0 eta 1 balioek (−2, 8), (1, 2) eta (4, −4) puntuak ematen dituzte', 'La recta x = 1 + 3t, y = 2 − 6t: t = −1, 0 y 1 dan los puntos (−2, 8), (1, 2) y (4, −4)', 'المستقيم x = 1 + 3t وy = 2 − 6t: القيم t = −1 و0 و1 تعطي النقاط (−2, 8) و(1, 2) و(4, −4)'))}>
+        <Figure height={330} label={t(say('x = 1 + 3t, y = 2 − 6t zuzena: t = −1, 0 eta 1 balioek (−2, 8), (1, 2) eta (4, −4) puntuak ematen dituzte', 'La recta x = 1 + 3t, y = 2 − 6t: t = −1, 0 y 1 dan los puntos (−2, 8), (1, 2) y (4, −4)', 'المستقيم x = 1 + 3t وy = 2 − 6t: القيم t = −1 و0 و1 تعطي النقاط (−2, 8) و(1, 2) و(4, −4)', 'The straight line x = 1 + 3t, y = 2 − 6t: t = −1, 0 and 1 give the points (−2, 8), (1, 2) and (4, −4)'))}>
             <Frame box={box} cell={20} ox={30} oy={20} labelStep={2}>
                 {(map, clip) => (
                     <g>
@@ -286,7 +286,7 @@ export function ParametricFigure({ language }: { language: UnitLanguage }) {
             <F x={290} y={128} size={20}>x = 1 + 3t</F>
             <F x={290} y={160} size={20}>y = 2 − 6t</F>
             <F x={290} y={220} size={18} color={GREEN}>t = −1  →  (−2, 8)</F>
-            <Caption y={318}>{t(say('t-ren balio bakoitzak zuzenaren puntu bat ematen du', 'Cada valor de t da un punto de la recta', 'كل قيمة لـ t تعطي نقطة من المستقيم'))}</Caption>
+            <Caption y={318}>{t(say('t-ren balio bakoitzak zuzenaren puntu bat ematen du', 'Cada valor de t da un punto de la recta', 'كل قيمة لـ t تعطي نقطة من المستقيم', 'Each value of t gives a point on the straight line'))}</Caption>
         </Figure>
     )
 }
@@ -296,15 +296,15 @@ export function ParametricFigure({ language }: { language: UnitLanguage }) {
 export function FormsFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const rows: Array<{ name: LocalizedText; formula: string; tint: string }> = [
-        { name: say('Bektoriala', 'Vectorial', 'المتجهية'), formula: '(x, y) = (2, −1) + t · (4, 6)', tint: STAGE_TINT },
-        { name: say('Parametrikoak', 'Paramétricas', 'الوسيطيتان'), formula: 'x = 2 + 4t,  y = −1 + 6t', tint: STAGE_TINT },
-        { name: say('Jarraitua', 'Continua', 'المتصلة'), formula: '(x − 2) / 4 = (y + 1) / 6', tint: MUSTARD_TINT },
-        { name: say('Puntu-malda', 'Punto-pendiente', 'النقطة والميل'), formula: 'y + 1 = 3/2 · (x − 2)', tint: MUSTARD_TINT },
-        { name: say('Orokorra', 'General', 'العامة'), formula: '3x − 2y − 8 = 0', tint: GREEN_TINT },
-        { name: say('Esplizitua', 'Explícita', 'الصريحة'), formula: 'y = 3/2 · x − 4', tint: GREEN_TINT }
+        { name: say('Bektoriala', 'Vectorial', 'المتجهية', 'Vector form'), formula: '(x, y) = (2, −1) + t · (4, 6)', tint: STAGE_TINT },
+        { name: say('Parametrikoak', 'Paramétricas', 'الوسيطيتان', 'Parametric form'), formula: 'x = 2 + 4t,  y = −1 + 6t', tint: STAGE_TINT },
+        { name: say('Jarraitua', 'Continua', 'المتصلة', 'Continuous'), formula: '(x − 2) / 4 = (y + 1) / 6', tint: MUSTARD_TINT },
+        { name: say('Puntu-malda', 'Punto-pendiente', 'النقطة والميل', 'Point-slope form'), formula: 'y + 1 = 3/2 · (x − 2)', tint: MUSTARD_TINT },
+        { name: say('Orokorra', 'General', 'العامة', 'General form'), formula: '3x − 2y − 8 = 0', tint: GREEN_TINT },
+        { name: say('Esplizitua', 'Explícita', 'الصريحة', 'Explicit form'), formula: 'y = 3/2 · x − 4', tint: GREEN_TINT }
     ]
     return (
-        <Figure height={330} label={t(say('P(2, −1) eta d = (4, 6) zuzenaren sei ekuazioak, bata bestearen ondoren', 'Las seis ecuaciones de la recta de P(2, −1) y d = (4, 6), una tras otra', 'المعادلات الست للمستقيم المار بـ P(2, −1) ومتجه توجيهه d = (4, 6)، واحدة تلو الأخرى'))}>
+        <Figure height={330} label={t(say('P(2, −1) eta d = (4, 6) zuzenaren sei ekuazioak, bata bestearen ondoren', 'Las seis ecuaciones de la recta de P(2, −1) y d = (4, 6), una tras otra', 'المعادلات الست للمستقيم المار بـ P(2, −1) ومتجه توجيهه d = (4, 6)، واحدة تلو الأخرى', 'The six equations of the straight line with point P(2, −1) and direction d = (4, 6), one after another'))}>
             {rows.map((row, index) => {
                 const y = 14 + index * 48
                 return (
@@ -314,7 +314,7 @@ export function FormsFigure({ language }: { language: UnitLanguage }) {
                     </Card>
                 )
             })}
-            <Caption y={318}>{t(say('Zuzen bera: puntu bat eta norabide bat, sei eratara idatzita', 'La misma recta: un punto y una dirección, escrita de seis formas', 'المستقيم نفسه: نقطة واتجاه، مكتوبًا بست صيغ'))}</Caption>
+            <Caption y={318}>{t(say('Zuzen bera: puntu bat eta norabide bat, sei eratara idatzita', 'La misma recta: un punto y una dirección, escrita de seis formas', 'المستقيم نفسه: نقطة واتجاه، مكتوبًا بست صيغ', 'The same straight line: one point and one direction, written in six ways'))}</Caption>
         </Figure>
     )
 }
@@ -325,7 +325,7 @@ export function GeneralFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const box: PlaneBox = { xMin: -5, xMax: 4, yMin: -2, yMax: 5 }
     return (
-        <Figure height={290} label={t(say('2x − 3y + 6 = 0 zuzenak X ardatza (−3, 0) puntuan eta Y ardatza (0, 2) puntuan ebakitzen ditu', 'La recta 2x − 3y + 6 = 0 corta al eje X en (−3, 0) y al eje Y en (0, 2)', 'يقطع المستقيم 2x − 3y + 6 = 0 محور X في (−3, 0) ومحور Y في (0, 2)'))}>
+        <Figure height={290} label={t(say('2x − 3y + 6 = 0 zuzenak X ardatza (−3, 0) puntuan eta Y ardatza (0, 2) puntuan ebakitzen ditu', 'La recta 2x − 3y + 6 = 0 corta al eje X en (−3, 0) y al eje Y en (0, 2)', 'يقطع المستقيم 2x − 3y + 6 = 0 محور X في (−3, 0) ومحور Y في (0, 2)', 'The straight line 2x − 3y + 6 = 0 crosses the x-axis at (−3, 0) and the y-axis at (0, 2)'))}>
             <Frame box={box} cell={30} ox={24} oy={18}>
                 {(map, clip) => (
                     <g>
@@ -339,7 +339,7 @@ export function GeneralFigure({ language }: { language: UnitLanguage }) {
             <F x={320} y={110} size={20}>y = 2/3 · x + 2</F>
             <F x={320} y={160} size={18} color={STAGE}>m = 2/3,   n = 2</F>
             <F x={320} y={196} size={18} color={MUTED}>d = (−B, A) = (3, 2)</F>
-            <Caption y={278}>{t(say('x = 0: Y ardatzarekiko ebakidura. y = 0: X ardatzarekikoa', 'x = 0: corte con el eje Y. y = 0: corte con el eje X', 'x = 0: التقاطع مع محور Y. y = 0: التقاطع مع محور X'))}</Caption>
+            <Caption y={278}>{t(say('x = 0: Y ardatzarekiko ebakidura. y = 0: X ardatzarekikoa', 'x = 0: corte con el eje Y. y = 0: corte con el eje X', 'x = 0: التقاطع مع محور Y. y = 0: التقاطع مع محور X', 'x = 0: crossing with the y-axis. y = 0: crossing with the x-axis'))}</Caption>
         </Figure>
     )
 }
@@ -350,7 +350,7 @@ export function SlopeFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const box: PlaneBox = { xMin: -2, xMax: 4, yMin: -6, yMax: 4 }
     return (
-        <Figure height={340} label={t(say('A(−1, 3) eta B(3, −5) puntuetatik pasatzen den zuzena: 4 aurreratu eta 8 jaisten da, malda −2', 'La recta por A(−1, 3) y B(3, −5): avanza 4 y baja 8, pendiente −2', 'المستقيم المار بـ A(−1, 3) وB(3, −5): يتقدم 4 وينزل 8، الميل −2'))}>
+        <Figure height={340} label={t(say('A(−1, 3) eta B(3, −5) puntuetatik pasatzen den zuzena: 4 aurreratu eta 8 jaisten da, malda −2', 'La recta por A(−1, 3) y B(3, −5): avanza 4 y baja 8, pendiente −2', 'المستقيم المار بـ A(−1, 3) وB(3, −5): يتقدم 4 وينزل 8، الميل −2', 'The straight line through A(−1, 3) and B(3, −5): move 4 to the right and 8 down, slope −2'))}>
             <Frame box={box} cell={27} ox={30} oy={20}>
                 {(map, clip) => (
                     <g>
@@ -367,8 +367,8 @@ export function SlopeFigure({ language }: { language: UnitLanguage }) {
             <F x={250} y={80} size={20}>m = (−5 − 3) / (3 − (−1))</F>
             <F x={298} y={116} size={20} color={STAGE}>= −8 / 4 = −2</F>
             <F x={250} y={176} size={20}>y = −2x + 1</F>
-            <Label x={250} y={226} fontSize={15} fill={MUTED}>{t(say('m < 0: zuzena beherakorra da', 'm < 0: la recta es decreciente', 'm < 0: المستقيم متناقص'))}</Label>
-            <Caption y={332}>{t(say('Malda: zenbat igotzen edo jaisten den, zati zenbat aurreratzen den', 'Pendiente: lo que sube o baja entre lo que avanza', 'الميل: مقدار الصعود أو النزول على مقدار التقدّم'))}</Caption>
+            <Label x={250} y={226} fontSize={15} fill={MUTED}>{t(say('m < 0: zuzena beherakorra da', 'm < 0: la recta es decreciente', 'm < 0: المستقيم متناقص', 'm < 0: the straight line is decreasing'))}</Label>
+            <Caption y={332}>{t(say('Malda: zenbat igotzen edo jaisten den, zati zenbat aurreratzen den', 'Pendiente: lo que sube o baja entre lo que avanza', 'الميل: مقدار الصعود أو النزول على مقدار التقدّم', 'Slope: how much it goes up or down, divided by how far it goes across'))}</Caption>
         </Figure>
     )
 }
@@ -379,7 +379,7 @@ export function ParallelLinesFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const box: PlaneBox = { xMin: -1, xMax: 5, yMin: -3, yMax: 5 }
     return (
-        <Figure height={300} label={t(say('y = 3x − 4 zuzena, haren paraleloa y = 3x − 5 eta haren perpendikularra P(2, 1) puntutik', 'La recta y = 3x − 4, su paralela y = 3x − 5 y su perpendicular por P(2, 1)', 'المستقيم y = 3x − 4 وموازيه y = 3x − 5 والعمودي عليه مرورًا بـ P(2, 1)'))}>
+        <Figure height={300} label={t(say('y = 3x − 4 zuzena, haren paraleloa y = 3x − 5 eta haren perpendikularra P(2, 1) puntutik', 'La recta y = 3x − 4, su paralela y = 3x − 5 y su perpendicular por P(2, 1)', 'المستقيم y = 3x − 4 وموازيه y = 3x − 5 والعمودي عليه مرورًا بـ P(2, 1)', 'The straight line y = 3x − 4, its parallel y = 3x − 5 and its perpendicular through P(2, 1)'))}>
             <Frame box={box} cell={32} ox={24} oy={20}>
                 {(map, clip) => (
                     <g>
@@ -394,7 +394,7 @@ export function ParallelLinesFigure({ language }: { language: UnitLanguage }) {
             <F x={250} y={112} size={19} color={GREEN}>y = 3x − 5   (m′ = 3)</F>
             <F x={250} y={152} size={19} color={SECOND}>y = −1/3 · x + 5/3</F>
             <F x={250} y={204} size={19}>m · m′ = 3 · (−1/3) = −1</F>
-            <Caption y={288}>{t(say('Paraleloak: malda bera. Perpendikularrak: malden biderkadura −1', 'Paralelas: la misma pendiente. Perpendiculares: el producto de pendientes es −1', 'متوازيان: الميل نفسه. متعامدان: جداء الميلين −1'))}</Caption>
+            <Caption y={288}>{t(say('Paraleloak: malda bera. Perpendikularrak: malden biderkadura −1', 'Paralelas: la misma pendiente. Perpendiculares: el producto de pendientes es −1', 'متوازيان: الميل نفسه. متعامدان: جداء الميلين −1', 'Parallel: the same slope. Perpendicular: the product of the slopes is −1'))}</Caption>
         </Figure>
     )
 }
@@ -404,12 +404,12 @@ export function ParallelLinesFigure({ language }: { language: UnitLanguage }) {
 export function PositionsFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const cases: Array<{ tint: string; title: LocalizedText; text: LocalizedText; lines: Array<[number, number, number, number, string, boolean]> }> = [
-        { tint: GREEN_TINT, title: say('Ebakitzaileak', 'Secantes', 'متقاطعان'), text: say('malda desberdinak', 'pendientes distintas', 'ميلان مختلفان'), lines: [[20, 150, 200, 40, STAGE, false], [20, 50, 200, 160, SECOND, false]] },
-        { tint: CORAL_TINT, title: say('Paraleloak', 'Paralelas', 'متوازيان'), text: say('malda bera, n desberdina', 'misma pendiente, distinta n', 'الميل نفسه وn مختلف'), lines: [[20, 120, 200, 40, STAGE, false], [20, 170, 200, 90, SECOND, false]] },
-        { tint: STAGE_TINT, title: say('Bat datozenak', 'Coincidentes', 'منطبقان'), text: say('dena berdina', 'todo igual', 'كل شيء متساوٍ'), lines: [[20, 150, 200, 60, STAGE, false], [20, 150, 200, 60, SECOND, true]] }
+        { tint: GREEN_TINT, title: say('Ebakitzaileak', 'Secantes', 'متقاطعان', 'Intersecting'), text: say('malda desberdinak', 'pendientes distintas', 'ميلان مختلفان', 'Different slopes'), lines: [[20, 150, 200, 40, STAGE, false], [20, 50, 200, 160, SECOND, false]] },
+        { tint: CORAL_TINT, title: say('Paraleloak', 'Paralelas', 'متوازيان', 'Parallel'), text: say('malda bera, n desberdina', 'misma pendiente, distinta n', 'الميل نفسه وn مختلف', 'Same slope, different n'), lines: [[20, 120, 200, 40, STAGE, false], [20, 170, 200, 90, SECOND, false]] },
+        { tint: STAGE_TINT, title: say('Bat datozenak', 'Coincidentes', 'منطبقان', 'Coincident'), text: say('dena berdina', 'todo igual', 'كل شيء متساوٍ', 'Everything the same'), lines: [[20, 150, 200, 60, STAGE, false], [20, 150, 200, 60, SECOND, true]] }
     ]
     return (
-        <Figure height={320} label={t(say('Bi zuzenen hiru posizio erlatiboak: ebakitzaileak, paraleloak eta bat datozenak', 'Las tres posiciones relativas de dos rectas: secantes, paralelas y coincidentes', 'الأوضاع النسبية الثلاثة لمستقيمين: متقاطعان ومتوازيان ومنطبقان'))}>
+        <Figure height={320} label={t(say('Bi zuzenen hiru posizio erlatiboak: ebakitzaileak, paraleloak eta bat datozenak', 'Las tres posiciones relativas de dos rectas: secantes, paralelas y coincidentes', 'الأوضاع النسبية الثلاثة لمستقيمين: متقاطعان ومتوازيان ومنطبقان', 'The three relative positions of two straight lines: intersecting, parallel and coincident'))}>
             {cases.map((item, index) => {
                 const x = 16 + index * 236
                 return (
@@ -423,7 +423,7 @@ export function PositionsFigure({ language }: { language: UnitLanguage }) {
                     </Card>
                 )
             })}
-            <Caption y={292}>{t(say('Ebakitzaileen ebaki-puntua: bi ekuazioen sistemaren ebazpena', 'El punto de corte de dos secantes: la solución del sistema de sus ecuaciones', 'نقطة تقاطع المتقاطعين: حل نظام معادلتيهما'))}</Caption>
+            <Caption y={292}>{t(say('Ebakitzaileen ebaki-puntua: bi ekuazioen sistemaren ebazpena', 'El punto de corte de dos secantes: la solución del sistema de sus ecuaciones', 'نقطة تقاطع المتقاطعين: حل نظام معادلتيهما', 'The intersection point of two intersecting straight lines: the solution of the system of their equations'))}</Caption>
             <F x={360} y={316} anchor="middle" size={16} color={MUTED}>x + 2y = 5,  3x − y = 1  →  (1, 2)</F>
         </Figure>
     )
@@ -435,7 +435,7 @@ export function BisectorFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const box: PlaneBox = { xMin: 0, xMax: 6, yMin: 0, yMax: 8 }
     return (
-        <Figure height={340} label={t(say('A(1, 1) eta B(5, 3) muturreko zuzenkiaren erdibitzailea: M(3, 2) puntutik pasatzen den y = −2x + 8 zuzen perpendikularra', 'La mediatriz del segmento de extremos A(1, 1) y B(5, 3): la perpendicular y = −2x + 8 por M(3, 2)', 'محور القطعة التي طرفاها A(1, 1) وB(5, 3): العمودي y = −2x + 8 المار بـ M(3, 2)'))}>
+        <Figure height={340} label={t(say('A(1, 1) eta B(5, 3) muturreko zuzenkiaren erdibitzailea: M(3, 2) puntutik pasatzen den y = −2x + 8 zuzen perpendikularra', 'La mediatriz del segmento de extremos A(1, 1) y B(5, 3): la perpendicular y = −2x + 8 por M(3, 2)', 'محور القطعة التي طرفاها A(1, 1) وB(5, 3): العمودي y = −2x + 8 المار بـ M(3, 2)', 'The perpendicular bisector of the segment with endpoints A(1, 1) and B(5, 3): the perpendicular y = −2x + 8 through M(3, 2)'))}>
             <Frame box={box} cell={33} ox={24} oy={20}>
                 {(map, clip) => (
                     <g>
@@ -454,7 +454,7 @@ export function BisectorFigure({ language }: { language: UnitLanguage }) {
             <F x={270} y={108} size={19}>m(AB) = 2/4 = 1/2   →   m′ = −2</F>
             <F x={270} y={150} size={20} color={SECOND}>y = −2x + 8</F>
             <F x={270} y={204} size={18} color={GREEN}>d(X, A) = d(X, B) = √10</F>
-            <Caption y={330}>{t(say('Erdibitzailearen puntu guztiak A-tik eta B-tik distantzia berera daude', 'Todos los puntos de la mediatriz están a la misma distancia de A y de B', 'كل نقاط المحور على المسافة نفسها من A ومن B'))}</Caption>
+            <Caption y={330}>{t(say('Erdibitzailearen puntu guztiak A-tik eta B-tik distantzia berera daude', 'Todos los puntos de la mediatriz están a la misma distancia de A y de B', 'كل نقاط المحور على المسافة نفسها من A ومن B', 'All the points on the perpendicular bisector are the same distance from A and from B'))}</Caption>
         </Figure>
     )
 }
@@ -465,7 +465,7 @@ export function CircleFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const box: PlaneBox = { xMin: -4, xMax: 8, yMin: -7, yMax: 5 }
     return (
-        <Figure height={300} label={t(say('C(2, −1) zentroko eta P(5, 3) puntutik pasatzen den zirkunferentzia: erradioa 5', 'La circunferencia de centro C(2, −1) que pasa por P(5, 3): radio 5', 'الدائرة التي مركزها C(2, −1) وتمر بـ P(5, 3): نصف القطر 5'))}>
+        <Figure height={300} label={t(say('C(2, −1) zentroko eta P(5, 3) puntutik pasatzen den zirkunferentzia: erradioa 5', 'La circunferencia de centro C(2, −1) que pasa por P(5, 3): radio 5', 'الدائرة التي مركزها C(2, −1) وتمر بـ P(5, 3): نصف القطر 5', 'The circumference with centre C(2, −1) that passes through P(5, 3): radius 5'))}>
             <Frame box={box} cell={21} ox={24} oy={16} labelStep={2}>
                 {(map) => (
                     <g>
@@ -478,8 +478,8 @@ export function CircleFigure({ language }: { language: UnitLanguage }) {
             </Frame>
             <F x={310} y={70} size={19}>r = √((5 − 2)² + (3 + 1)²) = 5</F>
             <F x={310} y={122} size={20} color={STAGE}>(x − 2)² + (y + 1)² = 25</F>
-            <Label x={310} y={180} fontSize={15} fill={MUTED}>{t(say('d(Q, C) < r: barruan;  = r: gainean;  > r: kanpoan', 'd(Q, C) < r: dentro;  = r: sobre ella;  > r: fuera', 'd(Q, C) < r: داخلها؛ = r: عليها؛ > r: خارجها'))}</Label>
-            <Caption y={290}>{t(say('Zentrotik r distantziara dauden puntuak', 'Los puntos que están a distancia r del centro', 'النقاط التي تبعد مسافة r عن المركز'))}</Caption>
+            <Label x={310} y={180} fontSize={15} fill={MUTED}>{t(say('d(Q, C) < r: barruan;  = r: gainean;  > r: kanpoan', 'd(Q, C) < r: dentro;  = r: sobre ella;  > r: fuera', 'd(Q, C) < r: داخلها؛ = r: عليها؛ > r: خارجها', 'd(Q, C) < r: inside;  = r: on it;  > r: outside'))}</Label>
+            <Caption y={290}>{t(say('Zentrotik r distantziara dauden puntuak', 'Los puntos que están a distancia r del centro', 'النقاط التي تبعد مسافة r عن المركز', 'The points that are at distance r from the centre'))}</Caption>
         </Figure>
     )
 }
@@ -491,7 +491,7 @@ export function ParallelogramFigure({ language }: { language: UnitLanguage }) {
     const box: PlaneBox = { xMin: 0, xMax: 7, yMin: 0, yMax: 7 }
     const corners: Array<[string, Point]> = [['A', [1, 1]], ['B', [5, 2]], ['C', [6, 6]], ['D', [2, 5]]]
     return (
-        <Figure height={325} label={t(say('ABCD paralelogramoa: A(1, 1), B(5, 2), C(6, 6) eta D(2, 5); diagonalak (3,5; 3,5) puntuan ebakitzen dira', 'El paralelogramo ABCD: A(1, 1), B(5, 2), C(6, 6) y D(2, 5); las diagonales se cortan en (3,5; 3,5)', 'متوازي الأضلاع ABCD: A(1, 1) وB(5, 2) وC(6, 6) وD(2, 5)؛ يتقاطع القطران في (3.5; 3.5)'))}>
+        <Figure height={325} label={t(say('ABCD paralelogramoa: A(1, 1), B(5, 2), C(6, 6) eta D(2, 5); diagonalak (3,5; 3,5) puntuan ebakitzen dira', 'El paralelogramo ABCD: A(1, 1), B(5, 2), C(6, 6) y D(2, 5); las diagonales se cortan en (3,5; 3,5)', 'متوازي الأضلاع ABCD: A(1, 1) وB(5, 2) وC(6, 6) وD(2, 5)؛ يتقاطع القطران في (3.5; 3.5)', 'The parallelogram ABCD: A(1, 1), B(5, 2), C(6, 6) and D(2, 5); the diagonals cross at (3.5, 3.5)'))}>
             <Frame box={box} cell={36} ox={24} oy={16}>
                 {(map) => (
                     <g>
@@ -505,8 +505,8 @@ export function ParallelogramFigure({ language }: { language: UnitLanguage }) {
             </Frame>
             <F x={320} y={72} size={20}>D = A + C − B</F>
             <F x={320} y={108} size={20} color={GREEN}>= (1 + 6 − 5, 1 + 6 − 2) = (2, 5)</F>
-            <F x={320} y={170} size={19} color={SECOND}>{`M(AC) = M(BD) = ${language === 'ar' ? '(3.5; 3.5)' : '(3,5; 3,5)'}`}</F>
-            <Caption y={316}>{t(say('Paralelogramoan AB = DC, eta diagonalak elkar erdibitzen dira', 'En el paralelogramo AB = DC, y las diagonales se cortan en su punto medio', 'في متوازي الأضلاع AB = DC، والقطران متناصفان'))}</Caption>
+            <F x={320} y={170} size={19} color={SECOND}>{`M(AC) = M(BD) = ${language === 'ar' ? '(3.5; 3.5)' : language === 'en' ? '(3.5, 3.5)' : '(3,5; 3,5)'}`}</F>
+            <Caption y={316}>{t(say('Paralelogramoan AB = DC, eta diagonalak elkar erdibitzen dira', 'En el paralelogramo AB = DC, y las diagonales se cortan en su punto medio', 'في متوازي الأضلاع AB = DC، والقطران متناصفان', 'In the parallelogram, AB = DC, and the diagonals cross at their midpoint'))}</Caption>
         </Figure>
     )
 }

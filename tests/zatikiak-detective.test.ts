@@ -45,7 +45,7 @@ test('zatikiak detective: a level mixes its mistakes, and every mistake has a na
         assert.equal(cases.length, DETECTIVE_CASES)
         assert.ok(new Set(cases.map((item) => item.error)).size >= Math.min(kinds.length, DETECTIVE_CASES) - 1)
         for (const kind of kinds) {
-            for (const language of ['eu', 'es', 'ar'] as const) {
+            for (const language of ['eu', 'es', 'en', 'ar'] as const) {
                 assert.ok(detectiveErrorNames[kind][language].length > 0 && detectiveErrorTips[kind][language].length > 0)
             }
         }

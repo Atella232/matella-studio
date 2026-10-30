@@ -7,6 +7,8 @@ import { lineLatex, numberLatex, signed } from '../../dbh2-funtzioak-v2/function
 import { Plane, PlaneGuides, PlaneLine, PlanePath, PlanePoint } from '../../dbh2-funtzioak-v2/plane'
 import type { PlaneMap } from '../../dbh2-funtzioak-v2/planeMap'
 import { hyperbolaBranches, rootCurve, sampled } from '../functions'
+import { formulaFor } from '../../../utils/latexLanguage'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import {
     A_LIMIT,
     baseOf,
@@ -75,7 +77,7 @@ const latex = (language: string, value: number) => {
 /** A number in LaTeX always as a decimal (1,5 rather than 3/2) */
 const decimal = (language: string, value: number) => String(Math.round(value * 1000) / 1000).replace('.', language === 'ar' ? '.' : '{,}')
 /** A decimal number for plain readouts: comma, point in Arabic, true minus */
-const plain = (language: string, value: number) => signed(Math.round(value * 100) / 100).replace('.', language === 'ar' ? '.' : ',')
+const plain = (language: string, value: number) => signed(Math.round(value * 100) / 100).replace('.', language === 'ar' ? '.' : decimalSeparatorFor(language))
 /** Halves written as 0,5 on the steppers */
 const half = (language: string) => (value: number) => plain(language, value)
 
@@ -108,7 +110,7 @@ export function PointSlopeTool(props: LabToolProps) {
         <>
             <Stepper label="x₀" value={state.x0} min={-POINT_LIMIT} max={POINT_LIMIT} format={signed} onChange={(x0) => setState((s) => setPointSlope(s, { x0 }))} language={props.language} />
             <Stepper label="y₀" value={state.y0} min={-POINT_LIMIT} max={POINT_LIMIT} format={signed} onChange={(y0) => setState((s) => setPointSlope(s, { y0 }))} language={props.language} />
-            <Stepper label={l({ eu: 'Malda m', es: 'Pendiente m', ar: 'الميل m' })} value={state.m} min={-SLOPE_STEP_LIMIT} max={SLOPE_STEP_LIMIT} step={0.5} format={half(props.language)} onChange={(m) => setState((s) => setPointSlope(s, { m }))} language={props.language} />
+            <Stepper label={l({ eu: 'Malda m', es: 'Pendiente m', en: 'Slope m', ar: 'الميل m' })} value={state.m} min={-SLOPE_STEP_LIMIT} max={SLOPE_STEP_LIMIT} step={0.5} format={half(props.language)} onChange={(m) => setState((s) => setPointSlope(s, { m }))} language={props.language} />
         </>
     )
     const readout = (
@@ -120,7 +122,7 @@ export function PointSlopeTool(props: LabToolProps) {
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={pointSlopeChallenges} state={state}>
-            <Plane box={{ xMin: -6, xMax: 6, yMin: -6, yMax: 6 }} cell={26} label={l({ eu: 'Puntu batetik pasatzen den zuzena', es: 'La recta que pasa por un punto', 'ar': 'المستقيم المار بنقطة' })}>
+            <Plane box={{ xMin: -6, xMax: 6, yMin: -6, yMax: 6 }} cell={26} label={l({ eu: 'Puntu batetik pasatzen den zuzena', es: 'La recta que pasa por un punto', en: 'The straight line through a point', 'ar': 'المستقيم المار بنقطة' })}>
                 {(map, clip) => (
                     <g>
                         <PlaneLine map={map} m={state.m} n={n} color={STAGE} clip={clip} />
@@ -143,15 +145,15 @@ export function TwoLinesTool(props: LabToolProps) {
     const relation = linesRelation(state)
     const controls = (
         <>
-            <Stepper label={l({ eu: 's-ren malda m', es: 'Pendiente m de s', ar: 'ميل s ‏m' })} value={state.m} min={-SLOPE_STEP_LIMIT} max={SLOPE_STEP_LIMIT} step={0.5} format={half(props.language)} onChange={(m) => setState((s) => setTwoLines(s, { m }))} language={props.language} />
-            <Stepper label={l({ eu: 's-ren n', es: 'n de s', ar: 'n للمستقيم s' })} value={state.n} min={-LINE_N_LIMIT} max={LINE_N_LIMIT} format={signed} onChange={(n) => setState((s) => setTwoLines(s, { n }))} language={props.language} />
+            <Stepper label={l({ eu: 's-ren malda m', es: 'Pendiente m de s', en: 'Slope m of s', ar: 'ميل s ‏m' })} value={state.m} min={-SLOPE_STEP_LIMIT} max={SLOPE_STEP_LIMIT} step={0.5} format={half(props.language)} onChange={(m) => setState((s) => setTwoLines(s, { m }))} language={props.language} />
+            <Stepper label={l({ eu: 's-ren n', es: 'n de s', en: 'n of s', ar: 'n للمستقيم s' })} value={state.n} min={-LINE_N_LIMIT} max={LINE_N_LIMIT} format={signed} onChange={(n) => setState((s) => setTwoLines(s, { n }))} language={props.language} />
         </>
     )
     const verdict = relation.kind === 'same'
-        ? l({ eu: 'Zuzen bera dira', es: 'Son la misma recta', ar: 'إنهما المستقيم نفسه' })
+        ? l({ eu: 'Zuzen bera dira', es: 'Son la misma recta', en: 'They are the same straight line.', ar: 'إنهما المستقيم نفسه' })
         : relation.kind === 'parallel'
-            ? l({ eu: 'Paraleloak: ez dira inoiz ebakitzen', es: 'Paralelas: no se cortan nunca', ar: 'متوازيان: لا يتقاطعان أبدًا' })
-            : l({ eu: 'Ebakitzaileak: puntu bakarrean ebakitzen dira', es: 'Secantes: se cortan en un solo punto', ar: 'متقاطعان: يلتقيان في نقطة واحدة' })
+            ? l({ eu: 'Paraleloak: ez dira inoiz ebakitzen', es: 'Paralelas: no se cortan nunca', en: 'Parallel: they never intersect.', ar: 'متوازيان: لا يتقاطعان أبدًا' })
+            : l({ eu: 'Ebakitzaileak: puntu bakarrean ebakitzen dira', es: 'Secantes: se cortan en un solo punto', en: 'Intersecting: they cross at one point.', ar: 'متقاطعان: يلتقيان في نقطة واحدة' })
     const at = relation.kind === 'secant' ? relation.at : null
     const lineText = (m: number, n: number) => lineLatex(m, n).replace(/\{,\}/g, props.language === 'ar' ? '.' : '{,}')
     const readout = (
@@ -166,7 +168,7 @@ export function TwoLinesTool(props: LabToolProps) {
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={twoLinesChallenges} state={state}>
-            <Plane box={{ xMin: -6, xMax: 6, yMin: -6, yMax: 6 }} cell={26} label={l({ eu: 'r eta s zuzenak', es: 'Las rectas r y s', ar: 'المستقيمان r وs' })}>
+            <Plane box={{ xMin: -6, xMax: 6, yMin: -6, yMax: 6 }} cell={26} label={l({ eu: 'r eta s zuzenak', es: 'Las rectas r y s', en: 'The straight lines r and s', ar: 'المستقيمان r وs' })}>
                 {(map, clip) => (
                     <g>
                         <PlaneLine map={map} m={FIXED_LINE.m} n={FIXED_LINE.n} color={STAGE} width={relation.kind === 'same' ? 7 : 3.5} clip={clip} />
@@ -214,11 +216,11 @@ export function ParabolaTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-note">
                 <MathText text={`$V(${p},\\,${q})$`} />
                 {' · '}
-                {a > 0 ? l({ eu: 'minimoa', es: 'mínimo', ar: 'قيمة صغرى' }) : l({ eu: 'maximoa', es: 'máximo', ar: 'قيمة عظمى' })}
+                {a > 0 ? l({ eu: 'minimoa', es: 'mínimo', en: 'minimum', ar: 'قيمة صغرى' }) : l({ eu: 'maximoa', es: 'máximo', en: 'maximum', ar: 'قيمة عظمى' })}
                 {' · '}
                 {roots.length === 0
-                    ? l({ eu: 'ez du X ardatza ebakitzen', es: 'no corta al eje X', ar: 'لا يقطع محور X' })
-                    : <MathText text={l({ eu: `X ardatza: $x=${cuts}$`, es: `Eje X: $x=${cuts}$`, ar: `محور X: $x=${cuts}$` })} />}
+                    ? l({ eu: 'ez du X ardatza ebakitzen', es: 'no corta al eje X', en: 'does not cross the x-axis', ar: 'لا يقطع محور X' })
+                    : <MathText text={l({ eu: `X ardatza: $x=${cuts}$`, es: `Eje X: $x=${cuts}$`, en: `X-axis: $x=${cuts}$`, ar: `محور X: $x=${cuts}$` })} />}
             </span>
         </>
     )
@@ -256,7 +258,7 @@ export function HyperbolaTool(props: LabToolProps) {
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${formula}$`} /></span>
-            <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `Asintotak: $x=${a}$ eta $y=${b}$`, es: `Asíntotas: $x=${a}$ e $y=${b}$`, ar: `المقاربان: $x=${a}$ و$y=${b}$` })} /></span>
+            <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `Asintotak: $x=${a}$ eta $y=${b}$`, es: `Asíntotas: $x=${a}$ e $y=${b}$`, en: `Asymptotes: $x=${a}$ and $y=${b}$`, ar: `المقاربان: $x=${a}$ و$y=${b}$` })} /></span>
             <span className="fraction-v2-lab-readout-note"><MathText text={`$\\text{Dom}\\,f=\\mathbb{R}-\\{${a}\\}$`} /></span>
         </>
     )
@@ -287,7 +289,7 @@ export function RootTool(props: LabToolProps) {
     const formula = b === 0 ? `y=${s < 0 ? '-' : ''}\\sqrt{${inside}}` : `y=${b}${s < 0 ? '-' : '+'}\\sqrt{${inside}}`
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Norabidea', es: 'Sentido', ar: 'الاتجاه' })} value={String(s)} options={[{ value: '1', label: l({ eu: 'Gora (+√)', es: 'Arriba (+√)', ar: 'للأعلى (+√)' }) }, { value: '-1', label: l({ eu: 'Behera (−√)', es: 'Abajo (−√)', ar: 'للأسفل (−√)' }) }]} onChange={(next) => setState((current) => setRoot(current, { s: next === '-1' ? -1 : 1 }))} />
+            <Segmented label={l({ eu: 'Norabidea', es: 'Sentido', en: 'Direction', ar: 'الاتجاه' })} value={String(s)} options={[{ value: '1', label: l({ eu: 'Gora (+√)', es: 'Arriba (+√)', en: 'Up (+√)', ar: 'للأعلى (+√)' }) }, { value: '-1', label: l({ eu: 'Behera (−√)', es: 'Abajo (−√)', en: 'Down (−√)', ar: 'للأسفل (−√)' }) }]} onChange={(next) => setState((current) => setRoot(current, { s: next === '-1' ? -1 : 1 }))} />
             <Stepper label="a" value={a} min={-SHIFT_LIMIT} max={SHIFT_LIMIT} format={signed} onChange={(value) => setState((current) => setRoot(current, { a: value }))} language={props.language} />
             <Stepper label="b" value={b} min={-SHIFT_LIMIT} max={SHIFT_LIMIT} format={signed} onChange={(value) => setState((current) => setRoot(current, { b: value }))} language={props.language} />
         </>
@@ -295,7 +297,7 @@ export function RootTool(props: LabToolProps) {
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${formula}$`} /></span>
-            <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `Hasiera: $(${a},\\,${b})$ · Dom $f=[${a},\\,+\\infty)$`, es: `Empieza en $(${a},\\,${b})$ · Dom $f=[${a},\\,+\\infty)$`, ar: `يبدأ من $(${a},\\,${b})$ · Dom $f=[${a},\\,+\\infty)$` })} /></span>
+            <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `Hasiera: $(${a},\\,${b})$ · Dom $f=[${a},\\,+\\infty)$`, es: `Empieza en $(${a},\\,${b})$ · Dom $f=[${a},\\,+\\infty)$`, en: `Starts at $(${a},\\,${b})$ · Domain $f=[${a},\\,+\\infty)$`, ar: `يبدأ من $(${a},\\,${b})$ · Dom $f=[${a},\\,+\\infty)$` })} /></span>
         </>
     )
     // Whole points of the curve: x − a = 0, 1, 4, 9
@@ -328,8 +330,8 @@ export function ExponentialTool(props: LabToolProps) {
     const controls = (
         <>
             <Stepper label="k" value={state.k} min={1} max={K_MAX} onChange={(k) => setState((s) => setExponential(s, { k }))} language={props.language} />
-            <Segmented label={l({ eu: 'Oinarria a', es: 'Base a', ar: 'الأساس a' })} value={String(state.base)} options={EXPONENTIAL_BASES.map((item, index) => ({ value: String(index), label: plain(props.language, item) }))} onChange={(next) => setState((s) => setExponential(s, { base: Number(next) }))} />
-            <Stepper label={l({ eu: 'Kurtsorea: x =', es: 'Cursor: x =', ar: 'المؤشر: x =' })} value={state.x} min={X_RANGE.min} max={X_RANGE.max} format={signed} onChange={(x) => setState((s) => setExponential(s, { x }))} language={props.language} />
+            <Segmented label={l({ eu: 'Oinarria a', es: 'Base a', en: 'Base a', ar: 'الأساس a' })} value={String(state.base)} options={EXPONENTIAL_BASES.map((item, index) => ({ value: String(index), label: plain(props.language, item) }))} onChange={(next) => setState((s) => setExponential(s, { base: Number(next) }))} />
+            <Stepper label={l({ eu: 'Kurtsorea: x =', es: 'Cursor: x =', en: 'Cursor: x =', ar: 'المؤشر: x =' })} value={state.x} min={X_RANGE.min} max={X_RANGE.max} format={signed} onChange={(x) => setState((s) => setExponential(s, { x }))} language={props.language} />
         </>
     )
     const readout = (
@@ -337,18 +339,18 @@ export function ExponentialTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${formula}$`} /></span>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$y(${state.x})${exact ? '=' : '\\approx '}${decimal(props.language, exact ? value : Math.round(value * 100) / 100)}$`} /></span>
             <span className="fraction-v2-lab-readout-note">
-                {base > 1 ? l({ eu: 'Gorakorra', es: 'Creciente', ar: 'متزايدة' }) : l({ eu: 'Beherakorra', es: 'Decreciente', ar: 'متناقصة' })}
+                {base > 1 ? l({ eu: 'Gorakorra', es: 'Creciente', en: 'Increasing', ar: 'متزايدة' }) : l({ eu: 'Beherakorra', es: 'Decreciente', en: 'Decreasing', ar: 'متناقصة' })}
                 {' · '}
                 {base > 1
-                    ? l({ eu: `% ${Math.round((base - 1) * 100)} gehiago urrats bakoitzean`, es: `un ${Math.round((base - 1) * 100)} % más cada paso`, ar: `تزيد ${Math.round((base - 1) * 100)} % كل خطوة` })
-                    : l({ eu: `% ${Math.round((1 - base) * 100)} gutxiago urrats bakoitzean`, es: `un ${Math.round((1 - base) * 100)} % menos cada paso`, ar: `تنقص ${Math.round((1 - base) * 100)} % كل خطوة` })}
+                    ? l({ eu: `% ${Math.round((base - 1) * 100)} gehiago urrats bakoitzean`, es: `un ${Math.round((base - 1) * 100)} % más cada paso`, en: `a ${Math.round((base - 1) * 100)}% more each step`, ar: `تزيد ${Math.round((base - 1) * 100)} % كل خطوة` })
+                    : l({ eu: `% ${Math.round((1 - base) * 100)} gutxiago urrats bakoitzean`, es: `un ${Math.round((1 - base) * 100)} % menos cada paso`, en: `a ${Math.round((1 - base) * 100)}% less each step`, ar: `تنقص ${Math.round((1 - base) * 100)} % كل خطوة` })}
             </span>
         </>
     )
     const yMax = 10
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={exponentialChallenges} state={state}>
-            <Plane box={{ xMin: -3, xMax: 4, yMin: 0, yMax }} cell={30} label={formula}>
+            <Plane box={{ xMin: -3, xMax: 4, yMin: 0, yMax }} cell={30} label={formulaFor(props.language, formula)}>
                 {(map, clip) => (
                     <g>
                         <PlanePath map={map} points={sampled((x) => state.k * base ** x, -3, 4)} color={STAGE} width={3.4} clip={clip} />
@@ -377,8 +379,8 @@ export function FrameTool(props: LabToolProps) {
     const maxArea = (semi / 2) ** 2
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Perimetroa', es: 'Perímetro', ar: 'المحيط' })} value={String(state.perimeter)} options={PERIMETERS.map((item, index) => ({ value: String(index), label: l({ eu: `${item} m`, es: `${item} m`, ar: `${item} م` }) }))} onChange={(next) => setState((s) => setFrame(s, { perimeter: Number(next) }))} />
-            <Stepper label={l({ eu: 'Oinarria x (m)', es: 'Base x (m)', ar: 'القاعدة x (م)' })} value={state.x} min={0.5} max={semi - 0.5} step={0.5} format={half(props.language)} onChange={(x) => setState((s) => setFrame(s, { x }))} language={props.language} />
+            <Segmented label={l({ eu: 'Perimetroa', es: 'Perímetro', en: 'Perimeter', ar: 'المحيط' })} value={String(state.perimeter)} options={PERIMETERS.map((item, index) => ({ value: String(index), label: l({ eu: `${item} m`, es: `${item} m`, en: `${item} m`, ar: `${item} م` }) }))} onChange={(next) => setState((s) => setFrame(s, { perimeter: Number(next) }))} />
+            <Stepper label={l({ eu: 'Oinarria x (m)', es: 'Base x (m)', en: 'Base x (m)', ar: 'القاعدة x (م)' })} value={state.x} min={0.5} max={semi - 0.5} step={0.5} format={half(props.language)} onChange={(x) => setState((s) => setFrame(s, { x }))} language={props.language} />
         </>
     )
     const readout = (
@@ -392,12 +394,12 @@ export function FrameTool(props: LabToolProps) {
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={frameChallenges} state={state}>
             <div className="functions-lab-pair" style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'center', justifyContent: 'center' }}>
-                <svg viewBox="0 0 250 230" width={250} height={230} role="img" aria-label={l({ eu: 'Laukizuzena', es: 'El rectángulo', ar: 'المستطيل' })} direction="ltr">
+                <svg viewBox="0 0 250 230" width={250} height={230} role="img" aria-label={l({ eu: 'Laukizuzena', es: 'El rectángulo', en: 'The rectangle', ar: 'المستطيل' })} direction="ltr">
                     <rect x={25} y={25} width={state.x * scale} height={height * scale} fill={STAGE_TINT} stroke={STAGE} strokeWidth={3} />
                     <text x={25 + (state.x * scale) / 2} y={18} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{plain(props.language, state.x)}</text>
                     <text x={30 + state.x * scale} y={25 + (height * scale) / 2} fontSize={16} fontWeight={700} fill={INK}>{plain(props.language, height)}</text>
                 </svg>
-                <Plane box={{ xMin: 0, xMax: semi, yMin: 0, yMax: Math.ceil(maxArea / 5) }} cell={Math.floor(320 / semi)} yUnit={5} labelStep={semi > 10 ? 3 : 2} xTitle="x" yTitle="A" label={l({ eu: 'Azalera oinarriaren arabera', es: 'El área según la base', ar: 'المساحة بحسب القاعدة' })}>
+                <Plane box={{ xMin: 0, xMax: semi, yMin: 0, yMax: Math.ceil(maxArea / 5) }} cell={Math.floor(320 / semi)} yUnit={5} labelStep={semi > 10 ? 3 : 2} xTitle="x" yTitle="A" label={l({ eu: 'Azalera oinarriaren arabera', es: 'El área según la base', en: 'The area depending on the base', ar: 'المساحة بحسب القاعدة' })}>
                     {(map, clip) => (
                         <g>
                             <PlanePath map={map} points={sampled((x) => (x * (semi - x)) / 5, 0, semi, 0.1)} color={STAGE} width={3.2} clip={clip} />

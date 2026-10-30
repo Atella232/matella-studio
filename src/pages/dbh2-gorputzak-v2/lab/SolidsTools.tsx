@@ -93,9 +93,9 @@ import {
     type VolumeState
 } from './labTools'
 
-type Text = { eu: string; es: string; ar: string }
+type Text = { eu: string; es: string; en: string; ar: string }
 
-const say = (eu: string, es: string, ar: string): Text => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): Text => ({ eu, es, en, ar })
 /** {,} in LaTeX becomes the point in Arabic */
 const localLatex = (language: string, latex: string) => (language === 'ar' ? latex.replace(/\{,\}/g, '.') : latex)
 /** A decimal with the comma, ready for LaTeX */
@@ -130,9 +130,9 @@ function Label({ x, y, children, color = INK, size = 16, anchor = 'middle' }: { 
 /* ---------- 1. Prisms and pyramids ---------- */
 
 const kindNames: Record<PolyhedronKind, Text> = {
-    prism: say('Prisma', 'Prisma', 'منشور'),
-    pyramid: say('Piramidea', 'Pirámide', 'هرم'),
-    frustum: say('Enborra', 'Tronco', 'جذع')
+    prism: say('Prisma', 'Prisma', 'منشور', 'Prism'),
+    pyramid: say('Piramidea', 'Pirámide', 'هرم', 'Pyramid'),
+    frustum: say('Enborra', 'Tronco', 'جذع', 'Truncated')
 }
 
 export function PolyhedronTool(props: LabToolProps) {
@@ -146,14 +146,14 @@ export function PolyhedronTool(props: LabToolProps) {
     const face = frontFace(hullFaces(vertices))
     const controls = (
         <>
-            <Segmented label={l(say('Gorputza', 'Cuerpo', 'الجسم'))} value={kind} options={(['prism', 'pyramid', 'frustum'] as PolyhedronKind[]).map((value) => ({ value, label: l(kindNames[value]) }))} onChange={(value) => setState((s) => setPolyhedron(s, { kind: value }))} />
-            <Stepper label={l(say('Oinarriaren aldeak', 'Lados de la base', 'أضلاع القاعدة'))} value={n} min={BASE_MIN} max={BASE_MAX} onChange={(value) => setState((s) => setPolyhedron(s, { n: value }))} language={props.language} />
+            <Segmented label={l(say('Gorputza', 'Cuerpo', 'الجسم', 'Solid'))} value={kind} options={(['prism', 'pyramid', 'frustum'] as PolyhedronKind[]).map((value) => ({ value, label: l(kindNames[value]) }))} onChange={(value) => setState((s) => setPolyhedron(s, { kind: value }))} />
+            <Stepper label={l(say('Oinarriaren aldeak', 'Lados de la base', 'أضلاع القاعدة', 'Base sides'))} value={n} min={BASE_MIN} max={BASE_MAX} onChange={(value) => setState((s) => setPolyhedron(s, { n: value }))} language={props.language} />
         </>
     )
-    const note = l(say(`${counts.faces} aurpegi, ${counts.edges} ertz eta ${counts.vertices} erpin.`, `${counts.faces} caras, ${counts.edges} aristas y ${counts.vertices} vértices.`, `${counts.faces} أوجه و${counts.edges} حرفًا و${counts.vertices} رؤوس.`))
+    const note = l(say(`${counts.faces} aurpegi, ${counts.edges} ertz eta ${counts.vertices} erpin.`, `${counts.faces} caras, ${counts.edges} aristas y ${counts.vertices} vértices.`, `${counts.faces} أوجه و${counts.edges} حرفًا و${counts.vertices} رؤوس.`, `${counts.faces} faces, ${counts.edges} edges and ${counts.vertices} vertices.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={`${counts.faces}+${counts.vertices}=${counts.edges}+2`} note={note} />} challenges={polyhedronChallenges} state={state}>
-            <Board height={320} label={l(say('Aukeratutako poliedroa', 'El poliedro elegido', 'متعدد الأوجه المختار'))}>
+            <Board height={320} label={l(say('Aukeratutako poliedroa', 'El poliedro elegido', 'متعدد الأوجه المختار', 'The chosen polyhedron'))}>
                 <Solid cam={cam} vertices={vertices} fill={PAPER} faceFill={(item) => (item === face ? STAGE_TINT : undefined)} width={2.4} />
                 {vertices.map((p, index) => {
                     const [x, y] = cam.at(p)
@@ -167,16 +167,16 @@ export function PolyhedronTool(props: LabToolProps) {
 /* ---------- 2. The five regular polyhedra ---------- */
 
 const platonicNames: Record<PlatonicId, Text> = {
-    tetra: say('Tetraedroa', 'Tetraedro', 'رباعي'),
-    cube: say('Kuboa', 'Cubo', 'مكعب'),
-    octa: say('Oktaedroa', 'Octaedro', 'ثماني'),
-    dodeca: say('Dodekaedroa', 'Dodecaedro', 'اثنا عشري'),
-    icosa: say('Ikosaedroa', 'Icosaedro', 'عشريني')
+    tetra: say('Tetraedroa', 'Tetraedro', 'رباعي', 'Tetrahedron'),
+    cube: say('Kuboa', 'Cubo', 'مكعب', 'Cube'),
+    octa: say('Oktaedroa', 'Octaedro', 'ثماني', 'Octahedron'),
+    dodeca: say('Dodekaedroa', 'Dodecaedro', 'اثنا عشري', 'Dodecahedron'),
+    icosa: say('Ikosaedroa', 'Icosaedro', 'عشريني', 'Icosahedron')
 }
 const polygonNames: Record<number, Text> = {
-    3: say('triangelu aldeberdinak', 'triángulos equiláteros', 'مثلثات متساوية الأضلاع'),
-    4: say('karratuak', 'cuadrados', 'مربعات'),
-    5: say('pentagono erregularrak', 'pentágonos regulares', 'مخمسات منتظمة')
+    3: say('triangelu aldeberdinak', 'triángulos equiláteros', 'مثلثات متساوية الأضلاع', 'equilateral triangles'),
+    4: say('karratuak', 'cuadrados', 'مربعات', 'squares'),
+    5: say('pentagono erregularrak', 'pentágonos regulares', 'مخمسات منتظمة', 'regular pentagons')
 }
 const platonicFill: Record<PlatonicId, string> = { tetra: ROSE, cube: SOFT, octa: SKY, dodeca: MINT, icosa: STAGE_TINT }
 
@@ -190,14 +190,14 @@ export function PlatonicTool(props: LabToolProps) {
     const cam = camera(320, 165, 120 / radius, -0.4 + (turn * Math.PI) / 12, 0.42)
     const controls = (
         <>
-            <Segmented label={l(say('Poliedroa', 'Poliedro', 'متعدد الأوجه'))} value={solid} options={PLATONIC_IDS.map((value) => ({ value, label: l(platonicNames[value]) }))} onChange={(value) => setState((s) => setPlatonic(s, { solid: value }))} />
-            <Stepper label={l(say('Biratu', 'Girar', 'تدوير'))} value={turn} min={0} max={23} format={(value) => `${value * 15}°`} onChange={(value) => setState((s) => setPlatonic(s, { turn: value }))} language={props.language} />
+            <Segmented label={l(say('Poliedroa', 'Poliedro', 'متعدد الأوجه', 'Polyhedron'))} value={solid} options={PLATONIC_IDS.map((value) => ({ value, label: l(platonicNames[value]) }))} onChange={(value) => setState((s) => setPlatonic(s, { solid: value }))} />
+            <Stepper label={l(say('Biratu', 'Girar', 'تدوير', 'Rotate'))} value={turn} min={0} max={23} format={(value) => `${value * 15}°`} onChange={(value) => setState((s) => setPlatonic(s, { turn: value }))} language={props.language} />
         </>
     )
     const note = l(say(
         `Aurpegiak: ${data.faces} ${polygonNames[data.sides].eu}. Erpin bakoitzean ${data.perVertex}: ${data.perVertex} · ${faceAngle(solid)}° = ${vertexAngleSum(solid)}°.`,
         `Caras: ${data.faces} ${polygonNames[data.sides].es}. En cada vértice ${data.perVertex}: ${data.perVertex} · ${faceAngle(solid)}° = ${vertexAngleSum(solid)}°.`,
-        `الأوجه: ${data.faces} ${polygonNames[data.sides].ar}. عند كل رأس ${data.perVertex}: ${data.perVertex} · ${faceAngle(solid)}° = ${vertexAngleSum(solid)}°.`
+        `الأوجه: ${data.faces} ${polygonNames[data.sides].ar}. عند كل رأس ${data.perVertex}: ${data.perVertex} · ${faceAngle(solid)}° = ${vertexAngleSum(solid)}°.`, `Faces: ${data.faces} ${polygonNames[data.sides].en}. At each vertex ${data.perVertex}: ${data.perVertex} · ${faceAngle(solid)}° = ${vertexAngleSum(solid)}°.`
     ))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={`${data.faces}+${data.vertices}=${data.edges}+2`} note={note} />} challenges={platonicChallenges} state={state}>
@@ -230,15 +230,15 @@ export function BoxTool(props: LabToolProps) {
     const tops = rows.map((_, index) => y0 + rows.slice(0, index).reduce((sum, value) => sum + value, 0) * u)
     const controls = (
         <>
-            <Stepper label={l(say('Luzera', 'Largo', 'الطول'))} value={a} min={1} max={BOX_MAX} onChange={(value) => setState((s) => setBox(s, { a: value }))} language={props.language} />
-            <Stepper label={l(say('Zabalera', 'Ancho', 'العرض'))} value={b} min={1} max={BOX_MAX} onChange={(value) => setState((s) => setBox(s, { b: value }))} language={props.language} />
-            <Stepper label={l(say('Altuera', 'Alto', 'الارتفاع'))} value={c} min={1} max={BOX_MAX} onChange={(value) => setState((s) => setBox(s, { c: value }))} language={props.language} />
+            <Stepper label={l(say('Luzera', 'Largo', 'الطول', 'Length'))} value={a} min={1} max={BOX_MAX} onChange={(value) => setState((s) => setBox(s, { a: value }))} language={props.language} />
+            <Stepper label={l(say('Zabalera', 'Ancho', 'العرض', 'Width'))} value={b} min={1} max={BOX_MAX} onChange={(value) => setState((s) => setBox(s, { b: value }))} language={props.language} />
+            <Stepper label={l(say('Altuera', 'Alto', 'الارتفاع', 'Height'))} value={c} min={1} max={BOX_MAX} onChange={(value) => setState((s) => setBox(s, { c: value }))} language={props.language} />
         </>
     )
-    const note = l(say(`Alboko azalera: ${boxLateral(state)} cm². Azalera osoa: ${total} cm².`, `Área lateral: ${boxLateral(state)} cm². Área total: ${total} cm².`, `المساحة الجانبية: ${boxLateral(state)} سم². المساحة الكلية: ${total} سم².`))
+    const note = l(say(`Alboko azalera: ${boxLateral(state)} cm². Azalera osoa: ${total} cm².`, `Área lateral: ${boxLateral(state)} cm². Área total: ${total} cm².`, `المساحة الجانبية: ${boxLateral(state)} سم². المساحة الكلية: ${total} سم².`, `Lateral area: ${boxLateral(state)} cm². Total area: ${total} cm².`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={`2\\cdot (${a}\\cdot ${b}+${a}\\cdot ${c}+${b}\\cdot ${c})=${total}`} note={note} />} challenges={boxChallenges} state={state}>
-            <Board height={330} label={l(say('Kaxa eta haren garapena', 'La caja y su desarrollo', 'الصندوق ونشره'))}>
+            <Board height={330} label={l(say('Kaxa eta haren garapena', 'La caja y su desarrollo', 'الصندوق ونشره', 'The box and its net'))}>
                 <GridBox cam={cam} a={a} b={b} c={c} fill={SKY} />
                 {rows.map((height, index) => rect(x0, tops[index], a * u, height * u, index % 2 === 0 ? STAGE_TINT : SOFT, index % 2 === 0 ? a * c : a * b))}
                 {rect(x0 - c * u, tops[1], c * u, b * u, ROSE, b * c)}
@@ -268,16 +268,16 @@ export function PyramidTool(props: LabToolProps) {
     const total = pyramidTotal(state)
     const controls = (
         <>
-            <Stepper label={l(say('Oinarriaren aldea', 'Lado de la base', 'ضلع القاعدة'))} value={side} min={2} max={PYRAMID_SIDE_MAX} step={2} onChange={(value) => setState((s) => setPyramid(s, { side: value }))} language={props.language} />
-            <Stepper label={l(say('Altuera', 'Altura', 'الارتفاع'))} value={height} min={1} max={PYRAMID_HEIGHT_MAX} onChange={(value) => setState((s) => setPyramid(s, { height: value }))} language={props.language} />
+            <Stepper label={l(say('Oinarriaren aldea', 'Lado de la base', 'ضلع القاعدة', 'Base side'))} value={side} min={2} max={PYRAMID_SIDE_MAX} step={2} onChange={(value) => setState((s) => setPyramid(s, { side: value }))} language={props.language} />
+            <Stepper label={l(say('Altuera', 'Altura', 'الارتفاع', 'Height'))} value={height} min={1} max={PYRAMID_HEIGHT_MAX} onChange={(value) => setState((s) => setPyramid(s, { height: value }))} language={props.language} />
         </>
     )
     const note = lateral !== null && total !== null
-        ? l(say(`Alboko azalera: ${lateral} cm². Azalera osoa: ${total} cm².`, `Área lateral: ${lateral} cm². Área total: ${total} cm².`, `المساحة الجانبية: ${lateral} سم². المساحة الكلية: ${total} سم².`))
-        : l(say('Apotema ez da zenbaki osoa: bilatu hirukote pitagoriko bat.', 'La apotema no es entera: busca una terna pitagórica.', 'العامد ليس عددًا صحيحًا: ابحث عن ثلاثية فيثاغورية.'))
+        ? l(say(`Alboko azalera: ${lateral} cm². Azalera osoa: ${total} cm².`, `Área lateral: ${lateral} cm². Área total: ${total} cm².`, `المساحة الجانبية: ${lateral} سم². المساحة الكلية: ${total} سم².`, `Lateral area: ${lateral} cm². Total area: ${total} cm².`))
+        : l(say('Apotema ez da zenbaki osoa: bilatu hirukote pitagoriko bat.', 'La apotema no es entera: busca una terna pitagórica.', 'العامد ليس عددًا صحيحًا: ابحث عن ثلاثية فيثاغورية.', 'The slant height is not a whole number: look for a Pythagorean triple.'))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={`a=\\sqrt{${height}^{2}+${half}^{2}}=${rootLatex(square)}`} note={note} />} challenges={pyramidChallenges} state={state}>
-            <Board height={320} label={l(say('Piramidea eta haren triangelu angeluzuzena', 'La pirámide y su triángulo rectángulo', 'الهرم ومثلثه القائم'))}>
+            <Board height={320} label={l(say('Piramidea eta haren triangelu angeluzuzena', 'La pirámide y su triángulo rectángulo', 'الهرم ومثلثه القائم', 'The pyramid and its right-angled triangle'))}>
                 <Solid cam={cam} vertices={pyramid} fill={SOFT} />
                 <polygon points={points([o, m, top])} fill={ROSE} fillOpacity={0.8} />
                 <line x1={o[0]} y1={o[1]} x2={top[0]} y2={top[1]} stroke={STAGE} strokeWidth={2.2} strokeDasharray="6 4" />
@@ -300,9 +300,9 @@ export function PyramidTool(props: LabToolProps) {
 /* ---------- 5. Cylinder, cone and sphere ---------- */
 
 const roundNames: Record<RoundBody, Text> = {
-    cylinder: say('Zilindroa', 'Cilindro', 'أسطوانة'),
-    cone: say('Konoa', 'Cono', 'مخروط'),
-    sphere: say('Esfera', 'Esfera', 'كرة')
+    cylinder: say('Zilindroa', 'Cilindro', 'أسطوانة', 'Cylinder'),
+    cone: say('Konoa', 'Cono', 'مخروط', 'Cone'),
+    sphere: say('Esfera', 'Esfera', 'كرة', 'Sphere')
 }
 
 export function RoundTool(props: LabToolProps) {
@@ -348,9 +348,9 @@ export function RoundTool(props: LabToolProps) {
     }
     const controls = (
         <>
-            <Segmented label={l(say('Gorputza', 'Cuerpo', 'الجسم'))} value={body} options={(['cylinder', 'cone', 'sphere'] as RoundBody[]).map((value) => ({ value, label: l(roundNames[value]) }))} onChange={(value) => setState((s) => setRound(s, { body: value }))} />
-            <Stepper label={l(say('Erradioa', 'Radio', 'نصف القطر'))} value={r} min={1} max={ROUND_MAX} onChange={(value) => setState((s) => setRound(s, { r: value }))} language={props.language} />
-            {body !== 'sphere' && <Stepper label={l(say('Altuera', 'Altura', 'الارتفاع'))} value={h} min={1} max={ROUND_MAX} onChange={(value) => setState((s) => setRound(s, { h: value }))} language={props.language} />}
+            <Segmented label={l(say('Gorputza', 'Cuerpo', 'الجسم', 'Solid'))} value={body} options={(['cylinder', 'cone', 'sphere'] as RoundBody[]).map((value) => ({ value, label: l(roundNames[value]) }))} onChange={(value) => setState((s) => setRound(s, { body: value }))} />
+            <Stepper label={l(say('Erradioa', 'Radio', 'نصف القطر', 'Radius'))} value={r} min={1} max={ROUND_MAX} onChange={(value) => setState((s) => setRound(s, { r: value }))} language={props.language} />
+            {body !== 'sphere' && <Stepper label={l(say('Altuera', 'Altura', 'الارتفاع', 'Height'))} value={h} min={1} max={ROUND_MAX} onChange={(value) => setState((s) => setRound(s, { h: value }))} language={props.language} />}
         </>
     )
     let latex: string
@@ -358,8 +358,8 @@ export function RoundTool(props: LabToolProps) {
     else if (body === 'sphere') latex = `A=4\\pi\\cdot ${r}^{2}=${lateral}\\pi\\approx ${tex(timesPi(lateral!))}`
     else latex = `g=${rootLatex(g2)}` + (lateral !== null ? `\\qquad A_L=\\pi\\cdot ${r}\\cdot ${exactRoot(g2)}=${lateral}\\pi` : '')
     const note = total !== null
-        ? l(say(`Azalera osoa: ${total}π ≈ ${timesPi(total)} cm².`, `Área total: ${total}π ≈ ${timesPi(total)} cm².`, `المساحة الكلية: ${total}π ≈ ${timesPi(total).replace(',', '.')} سم².`))
-        : l(say('Sortzailea ez da osoa: bilatu hirukote pitagoriko bat.', 'La generatriz no es entera: busca una terna pitagórica.', 'الراسم ليس عددًا صحيحًا: ابحث عن ثلاثية فيثاغورية.'))
+        ? l(say(`Azalera osoa: ${total}π ≈ ${timesPi(total)} cm².`, `Área total: ${total}π ≈ ${timesPi(total)} cm².`, `المساحة الكلية: ${total}π ≈ ${timesPi(total).replace(',', '.')} سم².`, `Total area: ${total}π ≈ ${timesPi(total).replace(',', '.')} cm².`))
+        : l(say('Sortzailea ez da osoa: bilatu hirukote pitagoriko bat.', 'La generatriz no es entera: busca una terna pitagórica.', 'الراسم ليس عددًا صحيحًا: ابحث عن ثلاثية فيثاغورية.', 'The slant height is not a whole number: look for a Pythagorean triple.'))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={roundChallenges} state={state}>
             <Board height={330} label={l(roundNames[body])}>
@@ -394,16 +394,16 @@ export function TankTool(props: LabToolProps) {
     const cam = fitCamera(boxVertices(a, b, c), [140, 30, 500, 300], 26)
     const controls = (
         <>
-            <Stepper label={l(say('Luzera (dm)', 'Largo (dm)', 'الطول (دسم)'))} value={a} min={1} max={TANK_MAX} onChange={(value) => setState((s) => setTank(s, { a: value }))} language={props.language} />
-            <Stepper label={l(say('Zabalera (dm)', 'Ancho (dm)', 'العرض (دسم)'))} value={b} min={1} max={TANK_MAX} onChange={(value) => setState((s) => setTank(s, { b: value }))} language={props.language} />
-            <Stepper label={l(say('Altuera (dm)', 'Alto (dm)', 'الارتفاع (دسم)'))} value={c} min={1} max={TANK_MAX} onChange={(value) => setState((s) => setTank(s, { c: value }))} language={props.language} />
+            <Stepper label={l(say('Luzera (dm)', 'Largo (dm)', 'الطول (دسم)', 'Length (dm)'))} value={a} min={1} max={TANK_MAX} onChange={(value) => setState((s) => setTank(s, { a: value }))} language={props.language} />
+            <Stepper label={l(say('Zabalera (dm)', 'Ancho (dm)', 'العرض (دسم)', 'Width (dm)'))} value={b} min={1} max={TANK_MAX} onChange={(value) => setState((s) => setTank(s, { b: value }))} language={props.language} />
+            <Stepper label={l(say('Altuera (dm)', 'Alto (dm)', 'الارتفاع (دسم)', 'Height (dm)'))} value={c} min={1} max={TANK_MAX} onChange={(value) => setState((s) => setTank(s, { c: value }))} language={props.language} />
         </>
     )
     const cubic = String(litres / 1000).replace('.', ',')
-    const note = l(say(`${litres} L = ${cubic} m³ = ${litres * 1000} cm³. Ur-geruza bakoitzak ${a * b} L ditu.`, `${litres} L = ${cubic} m³ = ${litres * 1000} cm³. Cada capa de agua tiene ${a * b} L.`, `${litres} L = ${cubic.replace(',', '.')} m³ = ${litres * 1000} cm³. في كل طبقة ماء ${a * b} L.`))
+    const note = l(say(`${litres} L = ${cubic} m³ = ${litres * 1000} cm³. Ur-geruza bakoitzak ${a * b} L ditu.`, `${litres} L = ${cubic} m³ = ${litres * 1000} cm³. Cada capa de agua tiene ${a * b} L.`, `${litres} L = ${cubic.replace(',', '.')} m³ = ${litres * 1000} cm³. في كل طبقة ماء ${a * b} L.`, `${litres} L = ${cubic.replace(',', '.')} m³ = ${litres * 1000} cm³. Each layer of water holds ${a * b} L.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={`${a}\\cdot ${b}\\cdot ${c}=${litres}\\ \\text{dm}^{3}=${litres}\\ \\text{L}`} note={note} />} challenges={tankChallenges} state={state}>
-            <Board height={320} label={l(say('Depositua dezimetro kubikoetan', 'El depósito en decímetros cúbicos', 'الخزان بالديسيمترات المكعبة'))}>
+            <Board height={320} label={l(say('Depositua dezimetro kubikoetan', 'El depósito en decímetros cúbicos', 'الخزان بالديسيمترات المكعبة', 'The tank in cubic decimetres'))}>
                 <GridBox cam={cam} a={a} b={b} c={c} fill={SKY} />
             </Board>
         </ToolFrame>
@@ -413,11 +413,11 @@ export function TankTool(props: LabToolProps) {
 /* ---------- 7. Comparing volumes ---------- */
 
 const volumeNames: Record<VolumeBody, Text> = {
-    prism: say('Prisma', 'Prisma', 'منشور'),
-    pyramid: say('Piramidea', 'Pirámide', 'هرم'),
-    cylinder: say('Zilindroa', 'Cilindro', 'أسطوانة'),
-    cone: say('Konoa', 'Cono', 'مخروط'),
-    sphere: say('Esfera', 'Esfera', 'كرة')
+    prism: say('Prisma', 'Prisma', 'منشور', 'Prism'),
+    pyramid: say('Piramidea', 'Pirámide', 'هرم', 'Pyramid'),
+    cylinder: say('Zilindroa', 'Cilindro', 'أسطوانة', 'Cylinder'),
+    cone: say('Konoa', 'Cono', 'مخروط', 'Cone'),
+    sphere: say('Esfera', 'Esfera', 'كرة', 'Sphere')
 }
 
 export function VolumeTool(props: LabToolProps) {
@@ -432,9 +432,9 @@ export function VolumeTool(props: LabToolProps) {
     const ghost = square ? <Solid cam={cam} vertices={boxVertices(r, r, h)} fill="none" opacity={0} stroke={MUTED} width={1.3} /> : null
     const controls = (
         <>
-            <Segmented label={l(say('Gorputza', 'Cuerpo', 'الجسم'))} value={body} options={(['prism', 'pyramid', 'cylinder', 'cone', 'sphere'] as VolumeBody[]).map((item) => ({ value: item, label: l(volumeNames[item]) }))} onChange={(item) => setState((s) => setVolume(s, { body: item }))} />
-            <Stepper label={square ? l(say('Oinarriaren aldea', 'Lado de la base', 'ضلع القاعدة')) : l(say('Erradioa', 'Radio', 'نصف القطر'))} value={r} min={1} max={VOLUME_MAX} onChange={(item) => setState((s) => setVolume(s, { r: item }))} language={props.language} />
-            {body !== 'sphere' && <Stepper label={l(say('Altuera', 'Altura', 'الارتفاع'))} value={h} min={1} max={VOLUME_MAX} onChange={(item) => setState((s) => setVolume(s, { h: item }))} language={props.language} />}
+            <Segmented label={l(say('Gorputza', 'Cuerpo', 'الجسم', 'Solid'))} value={body} options={(['prism', 'pyramid', 'cylinder', 'cone', 'sphere'] as VolumeBody[]).map((item) => ({ value: item, label: l(volumeNames[item]) }))} onChange={(item) => setState((s) => setVolume(s, { body: item }))} />
+            <Stepper label={square ? l(say('Oinarriaren aldea', 'Lado de la base', 'ضلع القاعدة', 'Base side')) : l(say('Erradioa', 'Radio', 'نصف القطر', 'Radius'))} value={r} min={1} max={VOLUME_MAX} onChange={(item) => setState((s) => setVolume(s, { r: item }))} language={props.language} />
+            {body !== 'sphere' && <Stepper label={l(say('Altuera', 'Altura', 'الارتفاع', 'Height'))} value={h} min={1} max={VOLUME_MAX} onChange={(item) => setState((s) => setVolume(s, { h: item }))} language={props.language} />}
         </>
     )
     const piText = pi ? '\\pi' : ''
@@ -450,7 +450,7 @@ export function VolumeTool(props: LabToolProps) {
     const note = l(say(
         `Bolumena: ${fromHundredths(value)} cm³${exact ? '' : ' gutxi gorabehera'}.`,
         `Volumen: ${exact ? '' : 'unos '}${fromHundredths(value)} cm³.`,
-        `الحجم: ${exact ? '' : 'نحو '}${fromHundredths(value).replace(',', '.')} سم³.`
+        `الحجم: ${exact ? '' : 'نحو '}${fromHundredths(value).replace(',', '.')} سم³.`, `Volume: ${exact ? '' : 'about '}${fromHundredths(value).replace(',', '.')} cm³.`
     ))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={volumeChallenges} state={state}>

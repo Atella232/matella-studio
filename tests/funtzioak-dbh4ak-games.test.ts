@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
@@ -115,10 +116,10 @@ test('funtzioak 4. DBH ak race: valid options and every answer recomputed', () =
                         assert.ok(functionsAkRaceErrorTips[option.error], option.error)
                     }
                 }
-                for (const language of ['eu', 'es', 'ar'] as const) {
+                for (const language of ['eu', 'es', 'en', 'ar'] as const) {
                     for (const text of [question.prompt[language], question.solution[language]]) {
                         for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) {
-                            katex.renderToString(formula, { throwOnError: true })
+                            katex.renderToString(formulaFor(language, formula), { throwOnError: true })
                             assert.ok(!/[؀-ۿ]/.test(formula), formula)
                             assert.ok(!formula.includes('+-') && !formula.includes('--'), formula)
                         }
@@ -158,8 +159,8 @@ test('funtzioak 4. DBH ak race: writing helpers and tips', () => {
     assert.equal(withoutLatex([2, -4]), '\\mathbb{R}-\\{-4,\\,2\\}')
     assert.equal(checkFunctionsAkPitAnswer(generateFunctionsAkRaceQuestion(createRandom(5), 0, 0, true), 'zzz'), 'unreadable')
     for (const tip of Object.values(functionsAkRaceErrorTips)) {
-        for (const language of ['eu', 'es', 'ar'] as const) {
-            for (const [, formula] of tip[language].matchAll(/\$([^$]+)\$/g)) katex.renderToString(formula, { throwOnError: true })
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) {
+            for (const [, formula] of tip[language].matchAll(/\$([^$]+)\$/g)) katex.renderToString(formulaFor(language, formula), { throwOnError: true })
             assert.equal((tip[language].match(/\$/g) ?? []).length % 2, 0, tip[language])
         }
     }

@@ -24,8 +24,8 @@ export type SimilarityRaceError = 'cross-wrong' | 'whole-side' | 'ratio-inverse'
 export type SimilarityRaceQuestion = RaceQuestion<SimilarityRaceError>
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, ar: latex.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, en: latex, ar: latex.replace(/\{,\}/g, '.') })
 const math = (latex: string) => `$${latex}$`
 /** A number in LaTeX with the comma ({,}) and thousands grouped */
 const tex = (value: number) => written(fraction(Math.round(value * 1000), 1000)) ?? String(value)
@@ -77,7 +77,7 @@ function thalesQuestion(random: Random, tier: Tier): SimilarityRaceQuestion | nu
     return choices && question(0, 'thales', say(
         `Paraleloek zuzen batean ${math(String(a))} eta ${math(String(b))} cm-ko zatiak mozten dituzte, eta bestean ${math(String(c))} cm eta x. Zenbat da x?`,
         `Unas paralelas cortan en una recta segmentos de ${math(String(a))} y ${math(String(b))} cm, y en otra de ${math(String(c))} cm y x. ¿Cuánto vale x?`,
-        `تقطع متوازيات على مستقيم قطعتين ${math(String(a))} و${math(String(b))} سم، وعلى آخر ${math(String(c))} سم وx. كم x؟`
+        `تقطع متوازيات على مستقيم قطعتين ${math(String(a))} و${math(String(b))} سم، وعلى آخر ${math(String(c))} سم وx. كم x؟`, `Some parallel lines cut one line in segments of ${math(String(a))} and ${math(String(b))} cm, and another line in segments of ${math(String(c))} cm and x. What is x?`
     ), choices, answer, same(math(`\\frac{${a}}{${c}}=\\frac{${b}}{x}\\to x=\\frac{${b}\\cdot ${c}}{${a}}=${written(answer)}`)))
 }
 
@@ -95,13 +95,13 @@ function partsQuestion(random: Random, tier: Tier): SimilarityRaceQuestion | nul
         return choices && question(0, 'equal-parts', say(
             `${math(lengthTex)} cm-ko zuzenki bat ${math(String(weights.length))} zati berdinetan banatzen da. Zenbat neurtzen du zati bakoitzak?`,
             `Un segmento de ${math(lengthTex)} cm se divide en ${math(String(weights.length))} partes iguales. ¿Cuánto mide cada parte?`,
-            `تُقسم قطعة طولها ${math(lengthTex)} سم إلى ${math(String(weights.length))} أجزاء متساوية. كم طول كل جزء؟`
+            `تُقسم قطعة طولها ${math(lengthTex)} سم إلى ${math(String(weights.length))} أجزاء متساوية. كم طول كل جزء؟`, `A segment of ${math(lengthTex)} cm is divided into ${math(String(weights.length))} equal parts. How long is each part?`
         ), choices, answer, same(math(`${lengthTex}\\mathbin{:}${weights.length}=${written(answer)}`)))
     }
     return choices && question(0, 'proportional-parts', say(
         `Banatu ${math(lengthTex)} cm ${math(weights.join(',\\ '))} zenbakien zati proportzionaletan. Zenbat neurtzen du zati handienak?`,
         `Divide ${math(lengthTex)} cm en partes proporcionales a ${math(weights.join(',\\ '))}. ¿Cuánto mide la parte mayor?`,
-        `قسّم ${math(lengthTex)} سم إلى أجزاء متناسبة مع ${math(weights.join(',\\ '))}. كم أكبر جزء؟`
+        `قسّم ${math(lengthTex)} سم إلى أجزاء متناسبة مع ${math(weights.join(',\\ '))}. كم أكبر جزء؟`, `Divide ${math(lengthTex)} cm into parts proportional to ${math(weights.join(',\\ '))}. How long is the largest part?`
     ), choices, answer, same(math(`\\frac{${lengthTex}\\cdot ${largest}}{${sum}}=${written(answer)}`)))
 }
 
@@ -118,7 +118,7 @@ function sideQuestion(random: Random, tier: Tier): SimilarityRaceQuestion | null
     return choices && question(1, 'side', say(
         `Bi poligono antzekotan, ${math(String(a))} cm-ko aldeari ${math(tex(a2))} cm-koa dagokio. Zenbat neurtzen du ${math(String(b))} cm-ko aldearen homologoak?`,
         `En dos polígonos semejantes, al lado de ${math(String(a))} cm le corresponde uno de ${math(tex(a2))} cm. ¿Cuánto mide el homólogo del lado de ${math(String(b))} cm?`,
-        `في مضلعين متشابهين يقابل الضلعَ ${math(String(a))} سم ضلعٌ ${math(tex(a2))} سم. كم يقابل الضلعَ ${math(String(b))} سم؟`
+        `في مضلعين متشابهين يقابل الضلعَ ${math(String(a))} سم ضلعٌ ${math(tex(a2))} سم. كم يقابل الضلعَ ${math(String(b))} سم؟`, `In two similar polygons, the side of ${math(String(a))} cm corresponds to one of ${math(tex(a2))} cm. How long is the side that corresponds to the ${math(String(b))} cm side?`
     ), choices, answer, same(math(`r=\\frac{${tex(a2)}}{${a}}=${tex(r)}\\to ${b}\\cdot ${tex(r)}=${written(answer)}`)))
 }
 
@@ -131,7 +131,7 @@ function ratioQuestion(random: Random, tier: Tier): SimilarityRaceQuestion | nul
     return choices && question(1, 'ratio', say(
         `Karratu baten aldea ${math(String(a))} cm da eta antzeko batena ${math(tex(a2))} cm. Zein da bigarrenaren eta lehenengoaren arteko arrazoia?`,
         `Un cuadrado tiene ${math(String(a))} cm de lado y otro ${math(tex(a2))} cm. ¿Cuál es la razón del segundo al primero?`,
-        `مربع ضلعه ${math(String(a))} سم وآخر ${math(tex(a2))} سم. ما نسبة الثاني إلى الأول؟`
+        `مربع ضلعه ${math(String(a))} سم وآخر ${math(tex(a2))} سم. ما نسبة الثاني إلى الأول؟`, `One square has a side of ${math(String(a))} cm and another has a side of ${math(tex(a2))} cm. What is the ratio of the second to the first?`
     ), choices, answer, same(math(`\\frac{${tex(a2)}}{${a}}=${written(answer)}`)))
 }
 
@@ -143,7 +143,7 @@ function homothetyQuestion(random: Random, tier: Tier): SimilarityRaceQuestion |
     return choices && question(1, 'homothety', say(
         `O zentroko eta ${math(tex(r))} arrazoiko homotezia batean, ${math(`OA=${tex(oa)}`)} cm. Zenbat da ${math("OA'")}?`,
         `En una homotecia de centro O y razón ${math(tex(r))}, ${math(`OA=${tex(oa)}`)} cm. ¿Cuánto mide ${math("OA'")}?`,
-        `في تحاكٍ مركزه O ونسبته ${math(tex(r))}، ${math(`OA=${tex(oa)}`)} سم. كم ${math("OA'")}؟`
+        `في تحاكٍ مركزه O ونسبته ${math(tex(r))}، ${math(`OA=${tex(oa)}`)} سم. كم ${math("OA'")}؟`, `In a homothety with centre O and scale factor ${math(tex(r))}, ${math(`OA=${tex(oa)}`)} cm. How long is ${math("OA'")}?`
     ), choices, answer, same(math(`${tex(r)}\\cdot ${tex(oa)}=${written(answer)}`)))
 }
 
@@ -166,14 +166,14 @@ function measureQuestion(random: Random, tier: Tier): SimilarityRaceQuestion | n
     ])
     const unit = measure === 'perimeter' ? 'cm' : measure === 'area' ? 'cm²' : 'cm³'
     const names: Record<Measure, LocalizedText> = {
-        perimeter: say('perimetroa', 'perímetro', 'المحيط'),
-        area: say('azalera', 'área', 'المساحة'),
-        volume: say('bolumena', 'volumen', 'الحجم')
+        perimeter: say('perimetroa', 'perímetro', 'المحيط', 'perimeter'),
+        area: say('azalera', 'área', 'المساحة', 'area'),
+        volume: say('bolumena', 'volumen', 'الحجم', 'volume')
     }
     return choices && question(2, measure, say(
         `Irudi baten ${names[measure].eu} ${math(String(start))} ${unit} da. Zein da ${math(tex(r))} arrazoiko irudi antzekoarena?`,
         `Una figura tiene ${math(String(start))} ${unit} de ${names[measure].es}. ¿Cuál es el de una semejante de razón ${math(tex(r))}?`,
-        `${names[measure].ar} لشكل ${math(String(start))} ${unit}. ما ${names[measure].ar} لشكل مشابه نسبته ${math(tex(r))}؟`
+        `${names[measure].ar} لشكل ${math(String(start))} ${unit}. ما ${names[measure].ar} لشكل مشابه نسبته ${math(tex(r))}؟`, `A figure has ${math(String(start))} ${unit} of ${names[measure].en}. What is that measure for a similar figure with scale factor ${math(tex(r))}?`
     ), choices, answer, same(math(`${start}\\cdot ${tex(r)}${power === 1 ? '' : `^{${power}}`}=${written(answer)}`)))
 }
 
@@ -187,7 +187,7 @@ function rootQuestion(random: Random): SimilarityRaceQuestion | null {
     return choices && question(2, volume ? 'volume-root' : 'area-root', say(
         `Bi irudi antzekoren ${volume ? 'bolumenen' : 'azaleren'} arrazoia ${math(tex(factor))} da. Zein da luzeren arrazoia?`,
         `La razón de ${volume ? 'los volúmenes' : 'las áreas'} de dos figuras semejantes es ${math(tex(factor))}. ¿Cuál es la razón de las longitudes?`,
-        `نسبة ${volume ? 'حجمي' : 'مساحتي'} شكلين متشابهين ${math(tex(factor))}. ما نسبة الأطوال؟`
+        `نسبة ${volume ? 'حجمي' : 'مساحتي'} شكلين متشابهين ${math(tex(factor))}. ما نسبة الأطوال؟`, `The ratio of ${volume ? 'los volúmenes' : 'las áreas'} of two similar figures is ${math(tex(factor))}. What is the ratio of the lengths?`
     ), choices, answer, same(math(`r^{${volume ? 3 : 2}}=${tex(factor)}\\to r=${written(answer)}`)))
 }
 
@@ -203,7 +203,7 @@ function mapToRealQuestion(random: Random, tier: Tier): SimilarityRaceQuestion |
     return choices && question(3, 'map-to-real', say(
         `${math(`1\\mathbin{:}${tex(n)}`)} eskalako mapa batean, bi puntu ${math(tex(cm))} cm-ra daude. Zenbat km daude benetan?`,
         `En un mapa a escala ${math(`1\\mathbin{:}${tex(n)}`)}, dos puntos están a ${math(tex(cm))} cm. ¿A cuántos km están en realidad?`,
-        `في خريطة بمقياس ${math(`1\\mathbin{:}${tex(n)}`)} تبعد نقطتان ${math(tex(cm))} سم. كم كيلومترًا تبعدان في الواقع؟`
+        `في خريطة بمقياس ${math(`1\\mathbin{:}${tex(n)}`)} تبعد نقطتان ${math(tex(cm))} سم. كم كيلومترًا تبعدان في الواقع؟`, `On a map with scale ${math(`1\\mathbin{:}${tex(n)}`)}, two points are ${math(tex(cm))} cm apart. How many km apart are they in reality?`
     ), choices, answer, same(math(`${tex(cm)}\\cdot ${tex(n)}=${tex(cm * n)}\\ \\text{cm}=${written(answer)}\\ \\text{km}`)))
 }
 
@@ -215,7 +215,7 @@ function realToMapQuestion(random: Random, tier: Tier): SimilarityRaceQuestion |
     return choices && question(3, 'real-to-map', say(
         `Bi herri ${math(String(km))} km-ra daude. Zenbat cm-ra egongo dira ${math(`1\\mathbin{:}${tex(n)}`)} eskalako mapa batean?`,
         `Dos pueblos están a ${math(String(km))} km. ¿A cuántos cm estarán en un mapa a escala ${math(`1\\mathbin{:}${tex(n)}`)}?`,
-        `تبعد قريتان ${math(String(km))} كم. كم سنتيمترًا تبعدان في خريطة بمقياس ${math(`1\\mathbin{:}${tex(n)}`)}؟`
+        `تبعد قريتان ${math(String(km))} كم. كم سنتيمترًا تبعدان في خريطة بمقياس ${math(`1\\mathbin{:}${tex(n)}`)}؟`, `Two villages are ${math(String(km))} km apart. How many cm apart will they be on a map with scale ${math(`1\\mathbin{:}${tex(n)}`)}?`
     ), choices, answer, same(math(`${tex(km * 100000)}\\mathbin{:}${tex(n)}=${written(answer)}`)))
 }
 
@@ -228,7 +228,7 @@ function findScaleQuestion(random: Random): SimilarityRaceQuestion | null {
     return choices && question(3, 'find-scale', say(
         `${math(tex(realCm / 100))} m-ko objektu baten maketak ${math(tex(model))} cm neurtzen ditu. Zein da eskala ${math('1\\mathbin{:}n')}? Idatzi n.`,
         `La maqueta de un objeto de ${math(tex(realCm / 100))} m mide ${math(tex(model))} cm. ¿Cuál es la escala ${math('1\\mathbin{:}n')}? Escribe n.`,
-        `مجسّم جسم طوله ${math(tex(realCm / 100))} م يبلغ ${math(tex(model))} سم. ما المقياس ${math('1\\mathbin{:}n')}؟ اكتب n.`
+        `مجسّم جسم طوله ${math(tex(realCm / 100))} م يبلغ ${math(tex(model))} سم. ما المقياس ${math('1\\mathbin{:}n')}؟ اكتب n.`, `A model of an object ${math(tex(realCm / 100))} m long measures ${math(tex(model))} cm. What is the scale ${math('1\\mathbin{:}n')}? Write n.`
     ), choices, answer, same(math(`${tex(realCm)}\\mathbin{:}${tex(model)}=${tex(n)}`)))
 }
 
@@ -244,7 +244,7 @@ function shadowQuestion(random: Random, tier: Tier): SimilarityRaceQuestion | nu
     return choices && question(4, 'shadow', say(
         `${math(tex(stick))} m-ko makila batek ${math(tex(stickShadow))} m-ko itzala du, eta zuhaitz batek ${math(String(treeShadow))} m-koa. Zenbat neurtzen du zuhaitzak?`,
         `Un palo de ${math(tex(stick))} m da una sombra de ${math(tex(stickShadow))} m y un árbol, una de ${math(String(treeShadow))} m. ¿Cuánto mide el árbol?`,
-        `عصا طولها ${math(tex(stick))} م ظلها ${math(tex(stickShadow))} م، وظل شجرة ${math(String(treeShadow))} م. كم طول الشجرة؟`
+        `عصا طولها ${math(tex(stick))} م ظلها ${math(tex(stickShadow))} م، وظل شجرة ${math(String(treeShadow))} م. كم طول الشجرة؟`, `A ${math(tex(stick))} m stick casts a shadow of ${math(tex(stickShadow))} m, and a tree casts one of ${math(String(treeShadow))} m. How tall is the tree?`
     ), choices, answer, same(math(`\\frac{${tex(stick)}\\cdot ${treeShadow}}{${tex(stickShadow)}}=${written(answer)}`)))
 }
 
@@ -257,7 +257,7 @@ function mirrorQuestion(random: Random): SimilarityRaceQuestion | null {
     return choices && question(4, 'mirror', say(
         `Begiak ${math(tex(eyes))} m-ra dituen pertsona bat ispilutik ${math(tex(near_))} m-ra dago, eta ispilua eraikinetik ${math(String(far))} m-ra. Zenbat neurtzen du eraikinak?`,
         `Una persona con los ojos a ${math(tex(eyes))} m está a ${math(tex(near_))} m de un espejo, y el espejo a ${math(String(far))} m del edificio. ¿Cuánto mide el edificio?`,
-        `شخص عيناه على ${math(tex(eyes))} م وعلى بعد ${math(tex(near_))} م من مرآة، والمرآة على بعد ${math(String(far))} م من المبنى. كم ارتفاع المبنى؟`
+        `شخص عيناه على ${math(tex(eyes))} م وعلى بعد ${math(tex(near_))} م من مرآة، والمرآة على بعد ${math(String(far))} م من المبنى. كم ارتفاع المبنى؟`, `A person with eyes at a height of ${math(tex(eyes))} m stands ${math(tex(near_))} m from a mirror, and the mirror is ${math(String(far))} m from the building. How tall is the building?`
     ), choices, answer, same(math(`\\frac{${tex(eyes)}\\cdot ${far}}{${tex(near_)}}=${written(answer)}`)))
 }
 
@@ -272,7 +272,7 @@ function sightQuestion(random: Random): SimilarityRaceQuestion | null {
     return choices && question(4, 'sight', say(
         `Begiak ${math(tex(eyes))} m-ra dituen pertsona bat ${math(tex(post))} m-ko zutoin batetik ${math(String(toPost))} m-ra dago, eta zutoinaren punta eta ${math(String(toBuilding))} m-ra dagoen eraikinaren goialdea lerrokatuta ikusten ditu. Zenbat neurtzen du eraikinak?`,
         `Una persona con los ojos a ${math(tex(eyes))} m está a ${math(String(toPost))} m de un poste de ${math(tex(post))} m y ve alineados la punta del poste y lo alto de un edificio a ${math(String(toBuilding))} m. ¿Cuánto mide el edificio?`,
-        `شخص عيناه على ${math(tex(eyes))} م على بعد ${math(String(toPost))} م من عمود ${math(tex(post))} م، يرى رأسه وأعلى مبنى على بعد ${math(String(toBuilding))} م على استقامة. كم ارتفاع المبنى؟`
+        `شخص عيناه على ${math(tex(eyes))} م على بعد ${math(String(toPost))} م من عمود ${math(tex(post))} م، يرى رأسه وأعلى مبنى على بعد ${math(String(toBuilding))} م على استقامة. كم ارتفاع المبنى؟`, `A person with eyes at a height of ${math(tex(eyes))} m stands ${math(String(toPost))} m from a ${math(tex(post))} m pole and sees the tip of the pole and the top of a building ${math(String(toBuilding))} m away lined up. How tall is the building?`
     ), choices, answer, same(math(`\\frac{${tex(post - eyes)}\\cdot ${toBuilding}}{${toPost}}+${tex(eyes)}=${written(answer)}`)))
 }
 
@@ -306,13 +306,13 @@ export function similarityParTime(circuit: number): number {
 }
 
 export const similarityRaceErrorTips: Record<SimilarityRaceError, LocalizedText> = {
-    'cross-wrong': say('Proportzioa alderantziz jarri duzu: parekatu zatiak ordena berean.', 'Has puesto la proporción al revés: empareja los segmentos en el mismo orden.', 'وضعت التناسب بالعكس: قابل القطع بالترتيب نفسه.'),
-    'whole-side': say('Tales posizioan, erabili alde osoa, ez zati bat.', 'En posición de Tales, usa el lado entero, no un trozo.', 'في وضع طاليس استعمل الضلع كاملًا لا جزءًا منه.'),
-    'ratio-inverse': say('Arrazoiaz zatitu duzu biderkatu beharrean (edo alderantziz).', 'Has dividido entre la razón en lugar de multiplicar (o al revés).', 'قسمت على النسبة بدل الضرب (أو العكس).'),
-    'r-not-squared': say('Azaleretan r², bolumenetan r³; luzeretan bakarrik r.', 'En áreas r², en volúmenes r³; solo en longitudes r.', 'في المساحات r² وفي الحجوم r³؛ وفي الأطوال فقط r.'),
-    'r-squared-volume': say('Bolumena r³ bider handitzen da, ez r² bider.', 'El volumen se multiplica por r³, no por r².', 'الحجم يُضرب في r³ لا في r².'),
-    unit: say('Begiratu unitateak: 1 km = 100 000 cm eta 1 m = 100 cm.', 'Mira las unidades: 1 km = 100 000 cm y 1 m = 100 cm.', 'انتبه إلى الوحدات: 1 كم = 100 000 سم و1 م = 100 سم.'),
-    eyes: say('Kendu begien altuera triangeluan, eta amaieran gehitu berriro.', 'Resta la altura de los ojos en el triángulo y súmala al final.', 'اطرح ارتفاع العينين في المثلث وأضفه في النهاية.'),
-    'one-part': say('Hori zati bakarra da; zati handienak pisu handiena du.', 'Eso es una sola parte; la mayor lleva el peso mayor.', 'هذا جزء واحد؛ والأكبر يأخذ الوزن الأكبر.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    'cross-wrong': say('Proportzioa alderantziz jarri duzu: parekatu zatiak ordena berean.', 'Has puesto la proporción al revés: empareja los segmentos en el mismo orden.', 'وضعت التناسب بالعكس: قابل القطع بالترتيب نفسه.', 'You have set up the proportion the wrong way round: match the segments in the same order.'),
+    'whole-side': say('Tales posizioan, erabili alde osoa, ez zati bat.', 'En posición de Tales, usa el lado entero, no un trozo.', 'في وضع طاليس استعمل الضلع كاملًا لا جزءًا منه.', 'In Thales\' position, use the whole side, not a piece of it.'),
+    'ratio-inverse': say('Arrazoiaz zatitu duzu biderkatu beharrean (edo alderantziz).', 'Has dividido entre la razón en lugar de multiplicar (o al revés).', 'قسمت على النسبة بدل الضرب (أو العكس).', 'You have divided by the scale factor instead of multiplying (or the other way round).'),
+    'r-not-squared': say('Azaleretan r², bolumenetan r³; luzeretan bakarrik r.', 'En áreas r², en volúmenes r³; solo en longitudes r.', 'في المساحات r² وفي الحجوم r³؛ وفي الأطوال فقط r.', 'For areas use r², for volumes r³; only for lengths use r.'),
+    'r-squared-volume': say('Bolumena r³ bider handitzen da, ez r² bider.', 'El volumen se multiplica por r³, no por r².', 'الحجم يُضرب في r³ لا في r².', 'The volume is multiplied by r³, not by r².'),
+    unit: say('Begiratu unitateak: 1 km = 100 000 cm eta 1 m = 100 cm.', 'Mira las unidades: 1 km = 100 000 cm y 1 m = 100 cm.', 'انتبه إلى الوحدات: 1 كم = 100 000 سم و1 م = 100 سم.', 'Check the units: 1 km = 100,000 cm and 1 m = 100 cm.'),
+    eyes: say('Kendu begien altuera triangeluan, eta amaieran gehitu berriro.', 'Resta la altura de los ojos en el triángulo y súmala al final.', 'اطرح ارتفاع العينين في المثلث وأضفه في النهاية.', 'Subtract the eye height in the triangle, then add it back at the end.'),
+    'one-part': say('Hori zati bakarra da; zati handienak pisu handiena du.', 'Eso es una sola parte; la mayor lleva el peso mayor.', 'هذا جزء واحد؛ والأكبر يأخذ الوزن الأكبر.', 'That is only one part; the largest part has the largest weight.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

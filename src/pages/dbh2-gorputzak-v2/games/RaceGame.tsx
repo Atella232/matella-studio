@@ -12,8 +12,8 @@ const solidsRace: RaceRules<SolidsRaceError> = {
     parTime: solidsParTime,
     errorTip: (error) => solidsRaceErrorTips[error ?? 'calculation'],
     pitPlaceholder: () => '188,4',
-    pitUnreadable: { eu: 'Idatzi zenbaki bat, adibidez 96 edo 188,4.', es: 'Escribe un número, por ejemplo 96 o 188,4.', ar: 'اكتب عددًا، مثل 96 أو 188.4.' },
-    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', ar: 'اكتبه عددًا.' }
+    pitUnreadable: { eu: 'Idatzi zenbaki bat, adibidez 96 edo 188,4.', es: 'Escribe un número, por ejemplo 96 o 188,4.', en: 'Write a number, for example 96 or 188.4.', ar: 'اكتب عددًا، مثل 96 أو 188.4.' },
+    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', en: 'Write it as a number.', ar: 'اكتبه عددًا.' }
 }
 
 export function SolidsRaceGame(props: GameProps) {

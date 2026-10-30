@@ -11,8 +11,6 @@ import './NaturalsGames.css'
 
 const components = { race: NaturalsRaceGame, hunt: HuntGame, sprint: SprintGame, memory: NaturalsMemoryGame }
 
-const hubGames: HubGame<NaturalsGameId>[] = naturalsGames.map((info) => ({ info, art: <NaturalsGameArt game={info.id} />, component: components[info.id] }))
-
 export function NaturalsGames({ language, pathname, openGame, completedIds, onComplete }: {
     language: UnitLanguage
     pathname: string
@@ -20,12 +18,13 @@ export function NaturalsGames({ language, pathname, openGame, completedIds, onCo
     completedIds: number[]
     onComplete: (id: number) => void
 }) {
+    const hubGames: HubGame<NaturalsGameId>[] = naturalsGames.map((info) => ({ info, art: <NaturalsGameArt game={info.id} language={language} />, component: components[info.id] }))
     return (
         <GamesHub
             language={language}
             games={hubGames}
             recordsKey={NATURALS_GAME_RECORDS_KEY}
-            title={{ eu: 'Jolastu zenbaki naturalekin', es: 'Juega con los números naturales', ar: 'العب بالأعداد الطبيعية' }}
+            title={{ eu: 'Jolastu zenbaki naturalekin', es: 'Juega con los números naturales', en: 'Play with natural numbers', ar: 'العب بالأعداد الطبيعية' }}
             completedIds={completedIds}
             onComplete={onComplete}
             mode={naturalsGameModeForPath(pathname)}

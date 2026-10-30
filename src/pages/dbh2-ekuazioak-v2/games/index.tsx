@@ -31,7 +31,7 @@ export function EquationsGames({ language, pathname, openGame, completedIds, onC
             language={language}
             games={hubGames}
             recordsKey={EQUATIONS_GAME_RECORDS_KEY}
-            title={{ eu: 'Jolastu ekuazioekin', es: 'Juega con ecuaciones', ar: 'العب بالمعادلات' }}
+            title={{ eu: 'Jolastu ekuazioekin', es: 'Juega con ecuaciones', en: 'Play with equations', ar: 'العب بالمعادلات' }}
             completedIds={completedIds}
             onComplete={onComplete}
             mode={equationsGameModeForPath(pathname)}

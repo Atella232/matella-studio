@@ -12,8 +12,8 @@ const fractionRace: RaceRules<RaceErrorKind> = {
     parTime,
     errorTip: (error) => raceErrorTips[error ?? 'calculation'],
     pitPlaceholder: (question) => (question.percentAnswer ? '60' : '3/4'),
-    pitUnreadable: { eu: 'Idatzi zatiki gisa (3/4), zenbaki oso gisa edo hamartar gisa.', es: 'Escríbelo como fracción (3/4), entero o decimal.', ar: 'اكتبه ككسر (3/4) أو عدد صحيح أو عشري.' },
-    pitWrongForm: { eu: 'Balioa zuzena da, baina sinplifikatu guztiz.', es: 'El valor es correcto, pero simplifícalo del todo.', ar: 'القيمة صحيحة، لكن بسّطها تمامًا.' }
+    pitUnreadable: { eu: 'Idatzi zatiki gisa (3/4), zenbaki oso gisa edo hamartar gisa.', es: 'Escríbelo como fracción (3/4), entero o decimal.', en: 'Write it as a fraction (3/4), an integer or a decimal.', ar: 'اكتبه ككسر (3/4) أو عدد صحيح أو عشري.' },
+    pitWrongForm: { eu: 'Balioa zuzena da, baina sinplifikatu guztiz.', es: 'El valor es correcto, pero simplifícalo del todo.', en: 'The value is correct, but simplify it fully.', ar: 'القيمة صحيحة، لكن بسّطها تمامًا.' }
 }
 
 export function RaceGame(props: GameProps) {

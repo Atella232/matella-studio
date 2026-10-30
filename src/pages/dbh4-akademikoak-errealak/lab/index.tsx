@@ -32,7 +32,7 @@ export function RealsPercentLaboratory(props: {
             tools={realsPercentLabTools}
             stages={realsPercentStages}
             components={toolComponents}
-            title={{ eu: 'Kokatu, hurbildu eta kalkulatu', es: 'Sitúa, aproxima y calcula', ar: 'حدّد وقرّب واحسب' }}
+            title={{ eu: 'Kokatu, hurbildu eta kalkulatu', es: 'Sitúa, aproxima y calcula', en: 'Place, approximate and calculate', ar: 'حدّد وقرّب واحسب' }}
         />
     )
 }

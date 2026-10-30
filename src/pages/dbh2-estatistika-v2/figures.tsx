@@ -14,7 +14,7 @@ import { COLORS, INK, LINE, MUTED, num, PAPER, SECOND, STAGE, STAGE_TINT } from 
    table. Arabic captions carry words only; numbers go in their own text.
    ========================================================================== */
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language, text)
 export function Caption({ x = 360, y, language, text, color = MUTED, size = 15 }: { x?: number; y: number; language: UnitLanguage; text: LocalizedText; color?: string; size?: number }) {
     return <Label x={x} y={y} textAnchor="middle" fontSize={size} fontWeight={700} fill={color}>{pick(language, text)}</Label>
@@ -74,7 +74,7 @@ export function Table({ x0, y0, columns, headers, rows, highlight, rowHeight = 3
 /* ---------- Sample: representative or biased ---------- */
 
 export function SampleFigure({ language }: { language: UnitLanguage }) {
-    const groups = [say('1. DBH', '1.º', 'الأول'), say('2. DBH', '2.º', 'الثاني'), say('3. DBH', '3.º', 'الثالث')]
+    const groups = [say('1. DBH', '1.º', 'الأول', '1st'), say('2. DBH', '2.º', 'الثاني', '2nd'), say('3. DBH', '3.º', 'الثالث', '3rd')]
     const dot = (cx: number, cy: number, group: number, chosen: boolean, key: string) => (
         <circle key={key} cx={cx} cy={cy} r={8} fill={chosen ? COLORS[group] : PAPER} fillOpacity={chosen ? 0.85 : 1} stroke={COLORS[group]} strokeWidth={2} />
     )
@@ -91,10 +91,10 @@ export function SampleFigure({ language }: { language: UnitLanguage }) {
         </g>
     )
     return (
-        <Figure height={240} label={pick(language, say('Lagin adierazgarria eta lagin alboratua', 'Muestra representativa y muestra sesgada', 'عيّنة ممثِّلة وعيّنة متحيّزة'))}>
-            {panel(30, say('Adierazgarria: talde guztietatik', 'Representativa: de todos los grupos', 'ممثِّلة: من كل الفئات'), (_, index) => index % 5 === 1, STAGE)}
-            {panel(370, say('Alboratua: talde bakarretik', 'Sesgada: de un solo grupo', 'متحيّزة: من فئة واحدة'), (group, index) => group === 2 && index < 6, SECOND)}
-            <Caption y={232} language={language} text={say('Bietan 6 ikasle, baina bakarrak ordezkatzen du ikastetxea', 'En las dos hay 6 alumnos, pero solo una representa al instituto', 'في الاثنتين 6 تلاميذ، لكن واحدة فقط تمثّل المدرسة')} size={14} />
+        <Figure height={240} label={pick(language, say('Lagin adierazgarria eta lagin alboratua', 'Muestra representativa y muestra sesgada', 'عيّنة ممثِّلة وعيّنة متحيّزة', 'Representative sample and biased sample'))}>
+            {panel(30, say('Adierazgarria: talde guztietatik', 'Representativa: de todos los grupos', 'ممثِّلة: من كل الفئات', 'Representative: from all the groups'), (_, index) => index % 5 === 1, STAGE)}
+            {panel(370, say('Alboratua: talde bakarretik', 'Sesgada: de un solo grupo', 'متحيّزة: من فئة واحدة', 'Biased: from just one group'), (group, index) => group === 2 && index < 6, SECOND)}
+            <Caption y={232} language={language} text={say('Bietan 6 ikasle, baina bakarrak ordezkatzen du ikastetxea', 'En las dos hay 6 alumnos, pero solo una representa al instituto', 'في الاثنتين 6 تلاميذ، لكن واحدة فقط تمثّل المدرسة', 'Both have 6 students, but only one represents the school')} size={14} />
         </Figure>
     )
 }
@@ -108,7 +108,7 @@ export function CumulativeFigure({ language }: { language: UnitLanguage }) {
         return [row.value, row.count, cumulative, row.count / total, cumulative / total]
     })
     return (
-        <Figure height={270} label={pick(language, say('Maiztasun metatuen taula', 'Tabla de frecuencias acumuladas', 'جدول التكرارات المتجمّعة'))}>
+        <Figure height={270} label={pick(language, say('Maiztasun metatuen taula', 'Tabla de frecuencias acumuladas', 'جدول التكرارات المتجمّعة', 'Cumulative frequency table'))}>
             <Table
                 x0={70}
                 y0={34}
@@ -120,7 +120,7 @@ export function CumulativeFigure({ language }: { language: UnitLanguage }) {
             />
             <line x1={70} x2={620} y1={200} y2={200} stroke={INK} strokeWidth={1.4} />
             <Formula x={345} y={224} color={STAGE}>N = {total} · 9 + 5 = 14</Formula>
-            <Caption y={258} language={language} text={say('Aurreko metatua gehi errenkada honetako maiztasuna; azkena N da', 'La acumulada anterior más la frecuencia de esta fila; la última es N', 'المتجمّع السابق زائد تكرار هذا السطر؛ والأخير هو N')} />
+            <Caption y={258} language={language} text={say('Aurreko metatua gehi errenkada honetako maiztasuna; azkena N da', 'La acumulada anterior más la frecuencia de esta fila; la última es N', 'المتجمّع السابق زائد تكرار هذا السطر؛ والأخير هو N', 'The previous cumulative frequency plus this row\'s frequency; the last one is N')} />
         </Figure>
     )
 }
@@ -130,7 +130,7 @@ export function CumulativeFigure({ language }: { language: UnitLanguage }) {
 export function GroupedFigure({ language }: { language: UnitLanguage }) {
     const x = (value: number) => 90 + (value - 140) * 13.5
     return (
-        <Figure height={240} label={pick(language, say('Altuerak tartetan eta klase-markak', 'Alturas en intervalos y marcas de clase', 'الأطوال في فئات ومراكز الفئات'))}>
+        <Figure height={240} label={pick(language, say('Altuerak tartetan eta klase-markak', 'Alturas en intervalos y marcas de clase', 'الأطوال في فئات ومراكز الفئات', 'Heights in intervals and class marks'))}>
             <line x1={x(138)} x2={x(182)} y1={130} y2={130} stroke={INK} strokeWidth={2.4} />
             {[140, 150, 160, 170, 180].map((value) => (
                 <g key={value}>
@@ -152,7 +152,7 @@ export function GroupedFigure({ language }: { language: UnitLanguage }) {
                 )
             })}
             <text x={40} y={188} fontSize={15} fontWeight={700} fill={MUTED}><Sub letter="x" index="i" /></text>
-            <Caption y={226} language={language} text={say('160 hurrengo tartean doa · ● klase-marka: tartearen erdia', 'El 160 va en el intervalo siguiente · ● marca de clase: el centro del intervalo', 'العدد 160 في الفئة التالية · ● مركز الفئة: منتصفها')} />
+            <Caption y={226} language={language} text={say('160 hurrengo tartean doa · ● klase-marka: tartearen erdia', 'El 160 va en el intervalo siguiente · ● marca de clase: el centro del intervalo', 'العدد 160 في الفئة التالية · ● مركز الفئة: منتصفها', '160 goes in the next interval · ● class mark: the centre of the interval')} />
         </Figure>
     )
 }
@@ -164,7 +164,7 @@ export function HistogramFigure({ language }: { language: UnitLanguage }) {
     const y = (count: number) => 200 - count * 13
     const polygon = [[135, 0], ...heightClasses.map((row) => [(row.from + row.to) / 2, row.count]), [185, 0]]
     return (
-        <Figure height={260} label={pick(language, say('Histograma eta maiztasun-poligonoa', 'Histograma y polígono de frecuencias', 'المدرّج والمضلّع التكراري'))}>
+        <Figure height={260} label={pick(language, say('Histograma eta maiztasun-poligonoa', 'Histograma y polígono de frecuencias', 'المدرّج والمضلّع التكراري', 'Histogram and frequency polygon'))}>
             <line x1={x(130)} x2={x(130)} y1={24} y2={200} stroke={INK} strokeWidth={2} />
             <line x1={x(130)} x2={x(192)} y1={200} y2={200} stroke={INK} strokeWidth={2} />
             {[0, 3, 6, 9, 12].map((value) => (
@@ -180,11 +180,11 @@ export function HistogramFigure({ language }: { language: UnitLanguage }) {
             <polyline points={polygon.map(([value, count]) => `${x(value)},${y(count)}`).join(' ')} fill="none" stroke={SECOND} strokeWidth={3} />
             {polygon.map(([value, count], index) => <circle key={index} cx={x(value)} cy={y(count)} r={5} fill={SECOND} stroke={INK} strokeWidth={1.2} />)}
             <rect x={x(196) - 4} y={46} width={16} height={16} fill={STAGE} fillOpacity={0.3} stroke={INK} strokeWidth={1.4} />
-            <Label x={x(196) + 20} y={60} fontSize={15} fontWeight={700} fill={INK}>{pick(language, say('Histograma', 'Histograma', 'المدرّج'))}</Label>
+            <Label x={x(196) + 20} y={60} fontSize={15} fontWeight={700} fill={INK}>{pick(language, say('Histograma', 'Histograma', 'المدرّج', 'Histogram'))}</Label>
             <line x1={x(196) - 4} x2={x(196) + 12} y1={92} y2={92} stroke={SECOND} strokeWidth={3} />
-            <Label x={x(196) + 20} y={97} fontSize={15} fontWeight={700} fill={SECOND}>{pick(language, say('Poligonoa', 'Polígono', 'المضلّع'))}</Label>
-            <Label x={x(196) + 20} y={140} fontSize={14} fill={MUTED}>{pick(language, say('Altuera (cm)', 'Altura (cm)', 'الطول (سم)'))}</Label>
-            <Caption y={250} language={language} text={say('Laukizuzenak itsatsita; poligonoa klase-marken gainetik doa', 'Rectángulos pegados; el polígono pasa sobre las marcas de clase', 'مستطيلات متلاصقة؛ والمضلّع يمرّ فوق مراكز الفئات')} />
+            <Label x={x(196) + 20} y={97} fontSize={15} fontWeight={700} fill={SECOND}>{pick(language, say('Poligonoa', 'Polígono', 'المضلّع', 'Polygon'))}</Label>
+            <Label x={x(196) + 20} y={140} fontSize={14} fill={MUTED}>{pick(language, say('Altuera (cm)', 'Altura (cm)', 'الطول (سم)', 'Height (cm)'))}</Label>
+            <Caption y={250} language={language} text={say('Laukizuzenak itsatsita; poligonoa klase-marken gainetik doa', 'Rectángulos pegados; el polígono pasa sobre las marcas de clase', 'مستطيلات متلاصقة؛ والمضلّع يمرّ فوق مراكز الفئات', 'Touching rectangles; the polygon passes through the class marks')} />
         </Figure>
     )
 }
@@ -198,7 +198,7 @@ export function PieFigure({ language }: { language: UnitLanguage }) {
     const point = (degrees: number, radius = r) => [cx + radius * Math.cos((degrees * Math.PI) / 180), cy + radius * Math.sin((degrees * Math.PI) / 180)]
     const starts = transportSurvey.map((_, index) => -90 + transportSurvey.slice(0, index).reduce((sum, row) => sum + row.percent * 3.6, 0))
     return (
-        <Figure height={250} label={pick(language, say('Sektore-diagrama ehunekoetatik', 'Diagrama de sectores a partir de porcentajes', 'مخطط دائري من النسب المئوية'))}>
+        <Figure height={250} label={pick(language, say('Sektore-diagrama ehunekoetatik', 'Diagrama de sectores a partir de porcentajes', 'مخطط دائري من النسب المئوية', 'Pie chart from percentages'))}>
             {transportSurvey.map((row, index) => {
                 const angle = row.percent * 3.6
                 const start = starts[index]
@@ -217,10 +217,10 @@ export function PieFigure({ language }: { language: UnitLanguage }) {
                 <g key={`legend${index}`}>
                     <rect x={320} y={40 + index * 38} width={18} height={18} fill={COLORS[index]} fillOpacity={0.72} stroke={INK} strokeWidth={1.4} />
                     <Label x={348} y={55 + index * 38} fontSize={15} fontWeight={700} fill={INK}>{pick(language, row.name)}</Label>
-                    <Formula x={690} y={55 + index * 38} anchor="end" size={15}>{row.percent} % · {num(language, '3,6')}° = {Math.round(row.percent * 3.6)}°</Formula>
+                    <Formula x={690} y={55 + index * 38} anchor="end" size={15}>{row.percent}{language === 'en' ? '%' : ' %'} · {num(language, '3,6')}° = {Math.round(row.percent * 3.6)}°</Formula>
                 </g>
             ))}
-            <Caption y={240} language={language} text={say('Ehuneko bakoitza bider 3,6°; guztira 360°', 'Cada porcentaje por 3,6°; en total, 360°', 'كل نسبة في 3.6°؛ والمجموع 360°')} />
+            <Caption y={240} language={language} text={say('Ehuneko bakoitza bider 3,6°; guztira 360°', 'Cada porcentaje por 3,6°; en total, 360°', 'كل نسبة في 3.6°؛ والمجموع 360°', 'Multiply each percentage by 3.6°; in total, 360°')} />
         </Figure>
     )
 }
@@ -248,10 +248,10 @@ export function MisleadingFigure({ language }: { language: UnitLanguage }) {
         )
     }
     return (
-        <Figure height={250} label={pick(language, say('Ardatz moztua: grafiko engainagarria', 'Eje cortado: un gráfico engañoso', 'محور مقطوع: تمثيل مضلِّل'))}>
-            {chart(80, 2900, say('Ardatza 2900etik: hirukoitza dirudi', 'Eje desde 2900: parece el triple', 'المحور من 2900: يبدو ثلاثة أضعاف'), SECOND)}
-            {chart(440, 0, say('Ardatza 0tik: benetako aldaketa', 'Eje desde 0: el cambio real', 'المحور من 0: التغيّر الحقيقي'), STAGE)}
-            <Caption y={240} language={language} text={say('Datu berak: 3000 → 3200, % 7 inguru gehiago', 'Los mismos datos: 3000 → 3200, alrededor de un 7 % más', 'البيانات نفسها: 3000 ← 3200، زيادة نحو 7 %')} />
+        <Figure height={250} label={pick(language, say('Ardatz moztua: grafiko engainagarria', 'Eje cortado: un gráfico engañoso', 'محور مقطوع: تمثيل مضلِّل', 'Broken axis: a misleading chart'))}>
+            {chart(80, 2900, say('Ardatza 2900etik: hirukoitza dirudi', 'Eje desde 2900: parece el triple', 'المحور من 2900: يبدو ثلاثة أضعاف', 'Axis starting at 2900: looks three times as big'), SECOND)}
+            {chart(440, 0, say('Ardatza 0tik: benetako aldaketa', 'Eje desde 0: el cambio real', 'المحور من 0: التغيّر الحقيقي', 'Axis from 0: the real change'), STAGE)}
+            <Caption y={240} language={language} text={say('Datu berak: 3000 → 3200, % 7 inguru gehiago', 'Los mismos datos: 3000 → 3200, alrededor de un 7 % más', 'البيانات نفسها: 3000 ← 3200، زيادة نحو 7 %', 'The same data: 3000 → 3200, about 7% more')} />
         </Figure>
     )
 }
@@ -261,7 +261,7 @@ export function MisleadingFigure({ language }: { language: UnitLanguage }) {
 export function MeanTableFigure({ language }: { language: UnitLanguage }) {
     const rows = bookSurvey.map((row) => [row.value, row.count, row.value * row.count])
     return (
-        <Figure height={270} label={pick(language, say('Batez bestekoa taula batetik', 'La media desde una tabla', 'المتوسط من جدول'))}>
+        <Figure height={270} label={pick(language, say('Batez bestekoa taula batetik', 'La media desde una tabla', 'المتوسط من جدول', 'The mean from a table'))}>
             <Table
                 x0={60}
                 y0={34}
@@ -277,7 +277,7 @@ export function MeanTableFigure({ language }: { language: UnitLanguage }) {
             <rect x={450} y={80} width={230} height={100} rx={16} fill={PAPER} stroke={INK} strokeWidth={2} />
             <Formula x={565} y={118} size={19}><XBar /> = 36 : 20</Formula>
             <Formula x={565} y={156} size={22} color={SECOND}><XBar /> = {num(language, '1,8')}</Formula>
-            <Caption y={258} language={language} text={say('Biderkatu balio bakoitza bere maiztasunaz, batu eta zatitu N-z', 'Multiplica cada valor por su frecuencia, suma y divide entre N', 'اضرب كل قيمة في تكرارها واجمع واقسم على N')} />
+            <Caption y={258} language={language} text={say('Biderkatu balio bakoitza bere maiztasunaz, batu eta zatitu N-z', 'Multiplica cada valor por su frecuencia, suma y divide entre N', 'اضرب كل قيمة في تكرارها واجمع واقسم على N', 'Multiply each value by its frequency, add up and divide by N')} />
         </Figure>
     )
 }
@@ -290,7 +290,7 @@ export function MedianTableFigure({ language }: { language: UnitLanguage }) {
     const size = 25
     const x0 = 60
     return (
-        <Figure height={230} label={pick(language, say('Mediana maiztasun metatuekin', 'La mediana con las frecuencias acumuladas', 'الوسيط بالتكرارات المتجمّعة'))}>
+        <Figure height={230} label={pick(language, say('Mediana maiztasun metatuekin', 'La mediana con las frecuencias acumuladas', 'الوسيط بالتكرارات المتجمّعة', 'The median using the cumulative frequencies'))}>
             {data.map((value, index) => {
                 const central = index === 11 || index === 12
                 return (
@@ -310,9 +310,9 @@ export function MedianTableFigure({ language }: { language: UnitLanguage }) {
                     </g>
                 )
             })}
-            <text x={x0 + 12 * size} y={62} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{pick(language, say('12. · 13.', '12.º · 13.º', '12 · 13'))}</text>
+            <text x={x0 + 12 * size} y={62} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{pick(language, say('12. · 13.', '12.º · 13.º', '12 · 13', '12th · 13th'))}</text>
             <Formula x={360} y={180} color={SECOND}>N = 24 → Me = (2 + 2) : 2 = 2 · Mo = 2</Formula>
-            <Caption y={216} language={language} text={say('12. eta 13. datuak 2ren blokean daude: F 7tik 15era doa', 'Los datos 12.º y 13.º están en el bloque del 2: F va de 7 a 15', 'البيانان 12 و13 في كتلة العدد 2: يمتد F من 7 إلى 15')} />
+            <Caption y={216} language={language} text={say('12. eta 13. datuak 2ren blokean daude: F 7tik 15era doa', 'Los datos 12.º y 13.º están en el bloque del 2: F va de 7 a 15', 'البيانان 12 و13 في كتلة العدد 2: يمتد F من 7 إلى 15', 'The 12th and 13th values are in the group of 2s: F goes from 7 to 15')} />
         </Figure>
     )
 }
@@ -340,14 +340,14 @@ export function SymmetryFigure({ language }: { language: UnitLanguage }) {
         )
     }
     return (
-        <Figure height={280} label={pick(language, say('Banaketa simetrikoa eta asimetrikoa', 'Distribución simétrica y asimétrica', 'توزيع متماثل وغير متماثل'))}>
-            {strip(80, [3, 4, 4, 5, 5, 5, 6, 6, 7], 2, 8, 5, 5, [2, 3, 4, 5, 6, 7, 8], say('Simetrikoa', 'Simétrica', 'متماثل'))}
-            {strip(204, [1200, 1200, 1200, 1200, 6000], 1000, 6200, 2160, 1200, [1200, 2160, 6000], say('Asimetrikoa (€)', 'Asimétrica (€)', 'غير متماثل (€)'))}
+        <Figure height={280} label={pick(language, say('Banaketa simetrikoa eta asimetrikoa', 'Distribución simétrica y asimétrica', 'توزيع متماثل وغير متماثل', 'Symmetrical and asymmetrical distributions'))}>
+            {strip(80, [3, 4, 4, 5, 5, 5, 6, 6, 7], 2, 8, 5, 5, [2, 3, 4, 5, 6, 7, 8], say('Simetrikoa', 'Simétrica', 'متماثل', 'Symmetrical'))}
+            {strip(204, [1200, 1200, 1200, 1200, 6000], 1000, 6200, 2160, 1200, [1200, 2160, 6000], say('Asimetrikoa (€)', 'Asimétrica (€)', 'غير متماثل (€)', 'Asymmetrical (€)'))}
             <polygon points="470,256 463,268 477,268" fill={STAGE} />
-            <Label x={486} y={267} fontSize={14} fontWeight={700} fill={STAGE}>{pick(language, say('mediana', 'mediana', 'الوسيط'))}</Label>
+            <Label x={486} y={267} fontSize={14} fontWeight={700} fill={STAGE}>{pick(language, say('mediana', 'mediana', 'الوسيط', 'median'))}</Label>
             <polygon points="590,256 583,268 597,268" fill={SECOND} />
-            <Label x={606} y={267} fontSize={14} fontWeight={700} fill={SECOND}>{pick(language, say('batez bestekoa', 'media', 'المتوسط'))}</Label>
-            <Caption x={230} y={267} language={language} text={say('6000ak batez bestekoa eskuinera eramaten du', 'El 6000 arrastra la media a la derecha', 'العدد 6000 يسحب المتوسط إلى اليمين')} size={14} />
+            <Label x={606} y={267} fontSize={14} fontWeight={700} fill={SECOND}>{pick(language, say('batez bestekoa', 'media', 'المتوسط', 'mean'))}</Label>
+            <Caption x={230} y={267} language={language} text={say('6000ak batez bestekoa eskuinera eramaten du', 'El 6000 arrastra la media a la derecha', 'العدد 6000 يسحب المتوسط إلى اليمين', 'The 6000 pulls the mean to the right')} size={14} />
         </Figure>
     )
 }
@@ -358,7 +358,7 @@ export function DeviationFigure({ language }: { language: UnitLanguage }) {
     const marks = [4, 6, 7, 8, 10]
     const x = (value: number) => 110 + (value - 3) * 70
     return (
-        <Figure height={240} label={pick(language, say('Batez bestekoarekiko distantziak', 'Distancias a la media', 'المسافات عن المتوسط'))}>
+        <Figure height={240} label={pick(language, say('Batez bestekoarekiko distantziak', 'Distancias a la media', 'المسافات عن المتوسط', 'Distances from the mean'))}>
             <line x1={x(3)} x2={x(11)} y1={150} y2={150} stroke={INK} strokeWidth={2.4} />
             {[3, 4, 5, 6, 7, 8, 9, 10, 11].map((value) => (
                 <g key={value}>
@@ -381,7 +381,7 @@ export function DeviationFigure({ language }: { language: UnitLanguage }) {
                 )
             })}
             <Formula x={360} y={206} color={STAGE}>DM = (3 + 1 + 0 + 1 + 3) : 5 = {num(language, '1,6')}</Formula>
-            <Caption y={232} language={language} text={say('Ibiltartea 10 − 4 = 6 · DM: distantzien batez bestekoa', 'Recorrido 10 − 4 = 6 · DM: media de las distancias', 'المدى 10 − 4 = 6 · DM: متوسط المسافات')} />
+            <Caption y={232} language={language} text={say('Ibiltartea 10 − 4 = 6 · DM: distantzien batez bestekoa', 'Recorrido 10 − 4 = 6 · DM: media de las distancias', 'المدى 10 − 4 = 6 · DM: متوسط المسافات', 'Range 10 − 4 = 6 · MD: mean of the distances')} />
         </Figure>
     )
 }
@@ -394,7 +394,7 @@ export function QuartilesFigure({ language }: { language: UnitLanguage }) {
     const x0 = 62
     const marks: Record<number, string> = { 3: 'Q₁', 7: 'Me', 11: 'Q₃' }
     return (
-        <Figure height={220} label={pick(language, say('Kuartilak: datuak lau zatitan', 'Cuartiles: los datos en cuatro partes', 'الربيعيات: البيانات في أربعة أجزاء'))}>
+        <Figure height={220} label={pick(language, say('Kuartilak: datuak lau zatitan', 'Cuartiles: los datos en cuatro partes', 'الربيعيات: البيانات في أربعة أجزاء', 'Quartiles: the data split into four parts'))}>
             {data.map((value, index) => {
                 const mark = marks[index]
                 return (
@@ -416,7 +416,7 @@ export function QuartilesFigure({ language }: { language: UnitLanguage }) {
                     </g>
                 )
             })}
-            <Caption y={204} language={language} text={say('Me: 8. datua · Q₁ eta Q₃: beheko eta goiko erdien erdikoak', 'Me: el dato 8.º · Q₁ y Q₃: los centrales de la mitad de abajo y la de arriba', 'Me: البيان الثامن · Q₁ وQ₃: أوسطا النصف الأدنى والنصف الأعلى')} />
+            <Caption y={204} language={language} text={say('Me: 8. datua · Q₁ eta Q₃: beheko eta goiko erdien erdikoak', 'Me: el dato 8.º · Q₁ y Q₃: los centrales de la mitad de abajo y la de arriba', 'Me: البيان الثامن · Q₁ وQ₃: أوسطا النصف الأدنى والنصف الأعلى', 'Med: the 8th value · Q₁ and Q₃: the middle values of the lower half and of the upper half')} />
         </Figure>
     )
 }
@@ -427,7 +427,7 @@ export function BoxPlotFigure({ language }: { language: UnitLanguage }) {
     const x = (value: number) => 90 + value * 55
     const summary = [1, 3.5, 5, 6, 9]
     return (
-        <Figure height={240} label={pick(language, say('Kutxa-diagrama', 'Diagrama de caja y bigotes', 'مخطط الصندوق'))}>
+        <Figure height={240} label={pick(language, say('Kutxa-diagrama', 'Diagrama de caja y bigotes', 'مخطط الصندوق', 'Box-and-whisker plot'))}>
             <line x1={x(0)} x2={x(10)} y1={170} y2={170} stroke={INK} strokeWidth={2} />
             {Array.from({ length: 11 }, (_, value) => (
                 <g key={value}>
@@ -447,7 +447,7 @@ export function BoxPlotFigure({ language }: { language: UnitLanguage }) {
             {[[1, 3.5], [3.5, 5], [5, 6], [6, 9]].map(([from, to], index) => (
                 <text key={index} x={(x(from) + x(to)) / 2} y={154} textAnchor="middle" fontSize={13} fontWeight={700} fill={COLORS[index]}>25 %</text>
             ))}
-            <Caption y={228} language={language} text={say('Zati bakoitzean datuen % 25; zati laburra = datuak bilduta', 'En cada parte, el 25 % de los datos; parte corta = datos agrupados', 'في كل جزء 25 % من البيانات؛ الجزء القصير = بيانات متجمّعة')} />
+            <Caption y={228} language={language} text={say('Zati bakoitzean datuen % 25; zati laburra = datuak bilduta', 'En cada parte, el 25 % de los datos; parte corta = datos agrupados', 'في كل جزء 25 % من البيانات؛ الجزء القصير = بيانات متجمّعة', 'In each part, 25% of the data; a short part = data grouped together')} />
         </Figure>
     )
 }
@@ -457,7 +457,7 @@ export function BoxPlotFigure({ language }: { language: UnitLanguage }) {
 export function EventsFigure({ language }: { language: UnitLanguage }) {
     const inA = (value: number) => value % 3 === 0
     return (
-        <Figure height={230} label={pick(language, say('Gertaera bat eta haren aurkakoa', 'Un suceso y su contrario', 'حدث ومعاكسه'))}>
+        <Figure height={230} label={pick(language, say('Gertaera bat eta haren aurkakoa', 'Un suceso y su contrario', 'حدث ومعاكسه', 'An event and its complementary event'))}>
             <rect x={40} y={30} width={640} height={120} rx={20} fill="none" stroke={INK} strokeWidth={2} />
             <text x={60} y={56} fontSize={17} fontWeight={700} fill={INK}>E</text>
             {Array.from({ length: 10 }, (_, index) => {
@@ -472,7 +472,7 @@ export function EventsFigure({ language }: { language: UnitLanguage }) {
             })}
             <Formula x={200} y={186} color={SECOND}>A = {'{3, 6, 9}'} → P(A) = 3/10</Formula>
             <Formula x={520} y={186} color={STAGE}>P(Ā) = 1 − 3/10 = 7/10</Formula>
-            <Caption y={218} language={language} text={say('A eta bere aurkakoa elkarrekin: lagin-espazio osoa', 'A y su contrario juntos: todo el espacio muestral', 'A ومعاكسه معًا: فضاء العيّنة كله')} />
+            <Caption y={218} language={language} text={say('A eta bere aurkakoa elkarrekin: lagin-espazio osoa', 'A y su contrario juntos: todo el espacio muestral', 'A ومعاكسه معًا: فضاء العيّنة كله', 'A and its complementary event together: the whole sample space')} />
         </Figure>
     )
 }
@@ -480,7 +480,7 @@ export function EventsFigure({ language }: { language: UnitLanguage }) {
 /* ---------- Tree of three coins ---------- */
 
 export function TreeFigure({ language }: { language: UnitLanguage }) {
-    const [heads, tails] = language === 'eu' ? ['A', 'X'] : ['C', '+']
+    const [heads, tails] = language === 'eu' ? ['A', 'X'] : language === 'en' ? ['H', 'T'] : ['C', '+']
     const levelX = [60, 220, 380, 540]
     const leafY = (index: number) => 22 + index * 28
     const yAt = (level: number, index: number) => {
@@ -505,7 +505,7 @@ export function TreeFigure({ language }: { language: UnitLanguage }) {
     }
     const outcomes = Array.from({ length: 8 }, (_, index) => [0, 1, 2].map((bit) => ((index >> (2 - bit)) & 1 ? tails : heads)).join(''))
     return (
-        <Figure height={280} label={pick(language, say('Hiru txanponen zuhaitz-diagrama', 'Diagrama de árbol de tres monedas', 'المخطط الشجري لثلاث قطع نقود'))}>
+        <Figure height={280} label={pick(language, say('Hiru txanponen zuhaitz-diagrama', 'Diagrama de árbol de tres monedas', 'المخطط الشجري لثلاث قطع نقود', 'Tree diagram for three coins'))}>
             <circle cx={levelX[0]} cy={yAt(0, 0)} r={6} fill={INK} />
             {lines}
             {labels}
@@ -516,7 +516,7 @@ export function TreeFigure({ language }: { language: UnitLanguage }) {
                 )
             })}
             <Formula x={650} y={262} color={SECOND} size={15} anchor="end">P = 3/8</Formula>
-            <Caption x={300} y={266} language={language} text={say('2 · 2 · 2 = 8 emaitza; gorriz, aurpegi bakarrekoak', '2 · 2 · 2 = 8 resultados; en rojo, los de una sola cara', '2 · 2 · 2 = 8 نتائج؛ بالأحمر ذات الوجه الواحد')} />
+            <Caption x={300} y={266} language={language} text={say('2 · 2 · 2 = 8 emaitza; gorriz, aurpegi bakarrekoak', '2 · 2 · 2 = 8 resultados; en rojo, los de una sola cara', '2 · 2 · 2 = 8 نتائج؛ بالأحمر ذات الوجه الواحد', '2 · 2 · 2 = 8 outcomes; in red, the ones with exactly one head')} />
         </Figure>
     )
 }
@@ -524,15 +524,15 @@ export function TreeFigure({ language }: { language: UnitLanguage }) {
 /* ---------- Double-entry table ---------- */
 
 export function DoubleTableFigure({ language }: { language: UnitLanguage }) {
-    const columns = [say('Katua', 'Gato', 'قط'), say('Txakurra', 'Perro', 'كلب'), say('Guztira', 'Total', 'المجموع')]
+    const columns = [say('Katua', 'Gato', 'قط', 'Cat'), say('Txakurra', 'Perro', 'كلب', 'Dog'), say('Guztira', 'Total', 'المجموع', 'Total')]
     const rows = [
-        { name: say('Osasuntsua', 'Sano', 'سليم'), values: [12, 17, 29] },
-        { name: say('Gaixorik', 'Enfermo', 'مريض'), values: [4, 7, 11] },
-        { name: say('Guztira', 'Total', 'المجموع'), values: [16, 24, 40] }
+        { name: say('Osasuntsua', 'Sano', 'سليم', 'Healthy'), values: [12, 17, 29] },
+        { name: say('Gaixorik', 'Enfermo', 'مريض', 'Sick'), values: [4, 7, 11] },
+        { name: say('Guztira', 'Total', 'المجموع', 'Total'), values: [16, 24, 40] }
     ]
     const colX = [330, 450, 570]
     return (
-        <Figure height={240} label={pick(language, say('Sarrera bikoitzeko taula', 'Tabla de doble entrada', 'جدول ذو مدخلين'))}>
+        <Figure height={240} label={pick(language, say('Sarrera bikoitzeko taula', 'Tabla de doble entrada', 'جدول ذو مدخلين', 'Two-way table'))}>
             <rect x={110} y={104} width={520} height={38} rx={8} fill={STAGE_TINT} />
             <rect x={300} y={104} width={60} height={38} rx={8} fill={SECOND} fillOpacity={0.25} stroke={SECOND} strokeWidth={2} />
             {columns.map((column, index) => (
@@ -551,7 +551,7 @@ export function DoubleTableFigure({ language }: { language: UnitLanguage }) {
                 </g>
             ))}
             <Formula x={360} y={216} color={SECOND}>P = 4/11</Formula>
-            <Caption y={234} language={language} text={say('Gaixorik dagoela jakinda: kasu posibleak 11 gaixoak bakarrik', 'Sabiendo que está enfermo: los casos posibles son solo los 11 enfermos', 'علمًا أنه مريض: الحالات الممكنة هي المرضى الأحد عشر فقط')} size={14} />
+            <Caption y={234} language={language} text={say('Gaixorik dagoela jakinda: kasu posibleak 11 gaixoak bakarrik', 'Sabiendo que está enfermo: los casos posibles son solo los 11 enfermos', 'علمًا أنه مريض: الحالات الممكنة هي المرضى الأحد عشر فقط', 'Knowing that it is sick: the possible outcomes are only the 11 sick ones')} size={14} />
         </Figure>
     )
 }

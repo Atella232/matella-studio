@@ -20,10 +20,11 @@ export const geometryLabTools: GeometryLabTool[] = [
         id: 'protractor',
         stage: 'angles',
         lessonTopic: 'angles',
-        title: { eu: 'Garraiagailua', es: 'Transportador', ar: 'المنقلة' },
+        title: { eu: 'Garraiagailua', es: 'Transportador', en: 'Protractor', ar: 'المنقلة' },
         observe: {
             eu: 'Ireki angelua eta begiratu nola aldatzen den izena 90°-an eta 180°-an. Osagarriak 90° osatzen du, eta betegarriak 180°.',
             es: 'Abre el ángulo y mira cómo cambia su nombre en 90° y en 180°. El complementario completa 90° y el suplementario, 180°.',
+            en: 'Open the angle and see how its name changes at 90° and at 180°. The complementary angle completes 90°, and the supplementary one, 180°.',
             ar: 'افتح الزاوية ولاحظ كيف يتغيّر اسمها عند 90° و180°. المتممة تكمل 90° والمكملة 180°.'
         }
     },
@@ -31,10 +32,11 @@ export const geometryLabTools: GeometryLabTool[] = [
         id: 'triangle',
         stage: 'polygons',
         lessonTopic: 'triangles',
-        title: { eu: 'Triangelu-sortzailea', es: 'Constructor de triángulos', ar: 'باني المثلثات' },
+        title: { eu: 'Triangelu-sortzailea', es: 'Constructor de triángulos', en: 'Triangle builder', ar: 'باني المثلثات' },
         observe: {
             eu: 'Aukeratu bi angelu: hirugarrena beti da falta dena 180° osatzeko. Bi angeluak 180° edo gehiago badira, ezin da triangelurik egin.',
             es: 'Elige dos ángulos: el tercero siempre es lo que falta para 180°. Si los dos suman 180° o más, no hay triángulo.',
+            en: 'Choose two angles: the third is always what is missing to reach 180°. If the two add up to 180° or more, there is no triangle.',
             ar: 'اختر زاويتين: الثالثة دائمًا ما ينقص لإكمال 180°. وإذا كان مجموع الاثنتين 180° أو أكثر فلا يوجد مثلث.'
         }
     },
@@ -42,10 +44,11 @@ export const geometryLabTools: GeometryLabTool[] = [
         id: 'pythagoras',
         stage: 'pythagoras',
         lessonTopic: 'pythagoras-use',
-        title: { eu: 'Pitagorasen karratuak', es: 'Los cuadrados de Pitágoras', ar: 'مربعات فيثاغورس' },
+        title: { eu: 'Pitagorasen karratuak', es: 'Los cuadrados de Pitágoras', en: 'Pythagoras\' squares', ar: 'مربعات فيثاغورس' },
         observe: {
             eu: 'Katetoen gaineko bi karratu txikien azalerak batuta, hipotenusaren gaineko karratuaren azalera ematen dute. Haren aldea erro karratua da.',
             es: 'Las áreas de los dos cuadrados pequeños sobre los catetos suman el área del cuadrado sobre la hipotenusa. Su lado es la raíz cuadrada.',
+            en: 'The areas of the two small squares on the legs add up to the area of the square on the hypotenuse. Its side is the square root.',
             ar: 'مساحتا المربعين الصغيرين على الضلعين القائمين مجموعهما مساحة المربع على الوتر. وضلعه هو الجذر التربيعي.'
         }
     },
@@ -53,10 +56,11 @@ export const geometryLabTools: GeometryLabTool[] = [
         id: 'area',
         stage: 'areas',
         lessonTopic: 'area-triangle',
-        title: { eu: 'Azalera-sarea', es: 'Cuadrícula de áreas', ar: 'شبكة المساحات' },
+        title: { eu: 'Azalera-sarea', es: 'Cuadrícula de áreas', en: 'Area grid', ar: 'شبكة المساحات' },
         observe: {
             eu: 'Zenbatu laukitxoak. Paralelogramoak bere laukizuzenaren azalera bera du; triangeluak, erdia.',
             es: 'Cuenta los cuadraditos. El paralelogramo tiene la misma área que su rectángulo; el triángulo, la mitad.',
+            en: 'Count the little squares. The parallelogram has the same area as its rectangle; the triangle, half.',
             ar: 'عُدّ المربعات الصغيرة. لمتوازي الأضلاع مساحة مستطيله نفسها، وللمثلث نصفها.'
         }
     },
@@ -64,10 +68,11 @@ export const geometryLabTools: GeometryLabTool[] = [
         id: 'circle',
         stage: 'perimeters',
         lessonTopic: 'circumference',
-        title: { eu: 'Zirkulua eta π', es: 'El círculo y π', ar: 'الدائرة وπ' },
+        title: { eu: 'Zirkulua eta π', es: 'El círculo y π', en: 'The circle and π', ar: 'الدائرة وπ' },
         observe: {
             eu: 'Erradioa bikoizten baduzu, luzera bikoizten da, baina azalera lau aldiz handiagoa da: r karratu egiten baita.',
             es: 'Si duplicas el radio, la longitud se duplica, pero el área se hace cuatro veces mayor: el radio va al cuadrado.',
+            en: 'If you double the radius, the length doubles, but the area becomes four times bigger: the radius is squared.',
             ar: 'إذا ضاعفت نصف القطر تضاعف الطول، لكن المساحة تصبح أربعة أضعاف: لأن نصف القطر مربّع.'
         }
     }
@@ -125,26 +130,26 @@ export function setAngle(state: ProtractorState, angle: number): ProtractorState
 export const protractorChallenges: LabChallenge<ProtractorState>[] = [
     {
         id: 9101,
-        prompt: { eu: 'Egin angelu zuzen bat.', es: 'Construye un ángulo recto.', ar: 'ابنِ زاوية قائمة.' },
-        hint: { eu: 'Angelu zuzena: 90°.', es: 'Ángulo recto: 90°.', ar: 'الزاوية القائمة: 90°.' },
+        prompt: { eu: 'Egin angelu zuzen bat.', es: 'Construye un ángulo recto.', en: 'Build a right angle.', ar: 'ابنِ زاوية قائمة.' },
+        hint: { eu: 'Angelu zuzena: 90°.', es: 'Ángulo recto: 90°.', en: 'Right angle: 90°.', ar: 'الزاوية القائمة: 90°.' },
         isSolved: (state) => state.angle === 90
     },
     {
         id: 9102,
-        prompt: { eu: 'Egin 35°-ko angeluaren osagarria.', es: 'Construye el complementario de 35°.', ar: 'ابنِ متممة 35°.' },
-        hint: { eu: '$90^{\\circ}-35^{\\circ}$', es: '$90^{\\circ}-35^{\\circ}$', ar: '$90^{\\circ}-35^{\\circ}$' },
+        prompt: { eu: 'Egin 35°-ko angeluaren osagarria.', es: 'Construye el complementario de 35°.', en: 'Build the complementary angle of 35°.', ar: 'ابنِ متممة 35°.' },
+        hint: { eu: '$90^{\\circ}-35^{\\circ}$', es: '$90^{\\circ}-35^{\\circ}$', en: '$90^{\\circ}-35^{\\circ}$', ar: '$90^{\\circ}-35^{\\circ}$' },
         isSolved: (state) => state.angle === 55
     },
     {
         id: 9103,
-        prompt: { eu: 'Egin 72°-ko angeluaren betegarria.', es: 'Construye el suplementario de 72°.', ar: 'ابنِ مكملة 72°.' },
-        hint: { eu: '$180^{\\circ}-72^{\\circ}$', es: '$180^{\\circ}-72^{\\circ}$', ar: '$180^{\\circ}-72^{\\circ}$' },
+        prompt: { eu: 'Egin 72°-ko angeluaren betegarria.', es: 'Construye el suplementario de 72°.', en: 'Build the supplementary angle of 72°.', ar: 'ابنِ مكملة 72°.' },
+        hint: { eu: '$180^{\\circ}-72^{\\circ}$', es: '$180^{\\circ}-72^{\\circ}$', en: '$180^{\\circ}-72^{\\circ}$', ar: '$180^{\\circ}-72^{\\circ}$' },
         isSolved: (state) => state.angle === 108
     },
     {
         id: 9104,
-        prompt: { eu: 'Egin angelu zorrotz bat, kamuts bat eta laua bat.', es: 'Construye un ángulo agudo, uno obtuso y uno llano.', ar: 'ابنِ زاوية حادة وأخرى منفرجة وأخرى مستقيمة.' },
-        hint: { eu: '90°-tik behera, 90° eta 180° artean, eta 180°.', es: 'Por debajo de 90°, entre 90° y 180°, y 180°.', ar: 'أقل من 90°، وبين 90° و180°، و180°.' },
+        prompt: { eu: 'Egin angelu zorrotz bat, kamuts bat eta laua bat.', es: 'Construye un ángulo agudo, uno obtuso y uno llano.', en: 'Build an acute angle, an obtuse angle and a straight angle.', ar: 'ابنِ زاوية حادة وأخرى منفرجة وأخرى مستقيمة.' },
+        hint: { eu: '90°-tik behera, 90° eta 180° artean, eta 180°.', es: 'Por debajo de 90°, entre 90° y 180°, y 180°.', en: 'Below 90°, between 90° and 180°, and 180°.', ar: 'أقل من 90°، وبين 90° و180°، و180°.' },
         isSolved: (state) => state.history.some((angle) => angleKind(angle) === 'acute') && state.history.some((angle) => angleKind(angle) === 'obtuse') && state.history.includes(180)
     }
 ]
@@ -181,26 +186,26 @@ export function classifyTriangle(state: TriangleState): { angles: TriangleByAngl
 export const triangleChallenges: LabChallenge<TriangleState>[] = [
     {
         id: 9201,
-        prompt: { eu: 'Egin triangelu angeluzuzen bat.', es: 'Construye un triángulo rectángulo.', ar: 'ابنِ مثلثًا قائم الزاوية.' },
-        hint: { eu: 'Angeluetako batek 90° izan behar du.', es: 'Uno de los ángulos tiene que medir 90°.', ar: 'يجب أن تكون إحدى الزوايا 90°.' },
+        prompt: { eu: 'Egin triangelu angeluzuzen bat.', es: 'Construye un triángulo rectángulo.', en: 'Build a right-angled triangle.', ar: 'ابنِ مثلثًا قائم الزاوية.' },
+        hint: { eu: 'Angeluetako batek 90° izan behar du.', es: 'Uno de los ángulos tiene que medir 90°.', en: 'One of the angles must measure 90°.', ar: 'يجب أن تكون إحدى الزوايا 90°.' },
         isSolved: (state) => classifyTriangle(state)?.angles === 'right'
     },
     {
         id: 9202,
-        prompt: { eu: 'Egin triangelu aldeberdin bat.', es: 'Construye un triángulo equilátero.', ar: 'ابنِ مثلثًا متساوي الأضلاع.' },
-        hint: { eu: 'Hiru angelu berdin: $180\\mathbin{:}3$.', es: 'Tres ángulos iguales: $180\\mathbin{:}3$.', ar: 'ثلاث زوايا متساوية: $180\\mathbin{:}3$.' },
+        prompt: { eu: 'Egin triangelu aldeberdin bat.', es: 'Construye un triángulo equilátero.', en: 'Build an equilateral triangle.', ar: 'ابنِ مثلثًا متساوي الأضلاع.' },
+        hint: { eu: 'Hiru angelu berdin: $180\\mathbin{:}3$.', es: 'Tres ángulos iguales: $180\\mathbin{:}3$.', en: 'Three equal angles: $180\\mathbin{:}3$.', ar: 'ثلاث زوايا متساوية: $180\\mathbin{:}3$.' },
         isSolved: (state) => classifyTriangle(state)?.sides === 'equilateral'
     },
     {
         id: 9203,
-        prompt: { eu: 'Egin triangelu isoszele bat, angelu desberdina 40° duena.', es: 'Construye un triángulo isósceles con el ángulo desigual de 40°.', ar: 'ابنِ مثلثًا متساوي الساقين زاويته المختلفة 40°.' },
-        hint: { eu: 'Beste biak berdinak: $(180-40)\\mathbin{:}2$.', es: 'Los otros dos iguales: $(180-40)\\mathbin{:}2$.', ar: 'الأخريان متساويتان: $(180-40)\\mathbin{:}2$.' },
+        prompt: { eu: 'Egin triangelu isoszele bat, angelu desberdina 40° duena.', es: 'Construye un triángulo isósceles con el ángulo desigual de 40°.', en: 'Build an isosceles triangle whose unequal angle is 40°.', ar: 'ابنِ مثلثًا متساوي الساقين زاويته المختلفة 40°.' },
+        hint: { eu: 'Beste biak berdinak: $(180-40)\\mathbin{:}2$.', es: 'Los otros dos iguales: $(180-40)\\mathbin{:}2$.', en: 'The other two are equal: $(180-40)\\mathbin{:}2$.', ar: 'الأخريان متساويتان: $(180-40)\\mathbin{:}2$.' },
         isSolved: (state) => [state.a, state.b, thirdAngle(state) ?? 0].sort((x, y) => x - y).join() === '40,70,70'
     },
     {
         id: 9204,
-        prompt: { eu: 'Egin triangelu angelu-kamuts eta eskaleno bat.', es: 'Construye un triángulo obtusángulo y escaleno.', ar: 'ابنِ مثلثًا منفرج الزاوية ومختلف الأضلاع.' },
-        hint: { eu: 'Angelu bat 90° baino handiagoa eta hiruak desberdinak.', es: 'Un ángulo de más de 90° y los tres distintos.', ar: 'زاوية أكبر من 90° والثلاث مختلفة.' },
+        prompt: { eu: 'Egin triangelu angelu-kamuts eta eskaleno bat.', es: 'Construye un triángulo obtusángulo y escaleno.', en: 'Build an obtuse-angled and scalene triangle.', ar: 'ابنِ مثلثًا منفرج الزاوية ومختلف الأضلاع.' },
+        hint: { eu: 'Angelu bat 90° baino handiagoa eta hiruak desberdinak.', es: 'Un ángulo de más de 90° y los tres distintos.', en: 'One angle over 90° and all three different.', ar: 'زاوية أكبر من 90° والثلاث مختلفة.' },
         isSolved: (state) => { const kind = classifyTriangle(state); return kind?.angles === 'obtuse' && kind.sides === 'scalene' }
     }
 ]
@@ -240,26 +245,26 @@ export function answerHypotenuse(state: PythagorasState, patch: Partial<Operatio
 export const pythagorasChallenges: LabChallenge<PythagorasState>[] = [
     {
         id: 9301,
-        prompt: { eu: 'Katetoak 3 eta 4: idatzi hipotenusa.', es: 'Catetos 3 y 4: escribe la hipotenusa.', ar: 'الضلعان القائمان 3 و4: اكتب الوتر.' },
-        hint: { eu: '$9+16=25$', es: '$9+16=25$', ar: '$9+16=25$' },
+        prompt: { eu: 'Katetoak 3 eta 4: idatzi hipotenusa.', es: 'Catetos 3 y 4: escribe la hipotenusa.', en: 'Legs 3 and 4: write the hypotenuse.', ar: 'الضلعان القائمان 3 و4: اكتب الوتر.' },
+        hint: { eu: '$9+16=25$', es: '$9+16=25$', en: '$9+16=25$', ar: '$9+16=25$' },
         isSolved: (state) => state.solved.includes('3-4')
     },
     {
         id: 9302,
-        prompt: { eu: 'Katetoak 6 eta 8: idatzi hipotenusa.', es: 'Catetos 6 y 8: escribe la hipotenusa.', ar: 'الضلعان القائمان 6 و8: اكتب الوتر.' },
-        hint: { eu: '$36+64=100$', es: '$36+64=100$', ar: '$36+64=100$' },
+        prompt: { eu: 'Katetoak 6 eta 8: idatzi hipotenusa.', es: 'Catetos 6 y 8: escribe la hipotenusa.', en: 'Legs 6 and 8: write the hypotenuse.', ar: 'الضلعان القائمان 6 و8: اكتب الوتر.' },
+        hint: { eu: '$36+64=100$', es: '$36+64=100$', en: '$36+64=100$', ar: '$36+64=100$' },
         isSolved: (state) => state.solved.includes('6-8')
     },
     {
         id: 9303,
-        prompt: { eu: 'Katetoak 5 eta 12: idatzi hipotenusa.', es: 'Catetos 5 y 12: escribe la hipotenusa.', ar: 'الضلعان القائمان 5 و12: اكتب الوتر.' },
-        hint: { eu: '$25+144=169$', es: '$25+144=169$', ar: '$25+144=169$' },
+        prompt: { eu: 'Katetoak 5 eta 12: idatzi hipotenusa.', es: 'Catetos 5 y 12: escribe la hipotenusa.', en: 'Legs 5 and 12: write the hypotenuse.', ar: 'الضلعان القائمان 5 و12: اكتب الوتر.' },
+        hint: { eu: '$25+144=169$', es: '$25+144=169$', en: '$25+144=169$', ar: '$25+144=169$' },
         isSolved: (state) => state.solved.includes('5-12')
     },
     {
         id: 9304,
-        prompt: { eu: 'Aurkitu hipotenusa osoa duten beste bi kateto-bikote (ez 3-4, 6-8 edo 5-12) eta idatzi hipotenusak.', es: 'Encuentra otras dos parejas de catetos con hipotenusa entera (no 3-4, 6-8 ni 5-12) y escribe sus hipotenusas.', ar: 'جد زوجين آخرين من الضلعين القائمين وترهما عدد صحيح (غير 3-4 و6-8 و5-12) واكتب الوترين.' },
-        hint: { eu: 'Probatu 9 eta 12, edo 8 eta 15.', es: 'Prueba 9 y 12, u 8 y 15.', ar: 'جرّب 9 و12، أو 8 و15.' },
+        prompt: { eu: 'Aurkitu hipotenusa osoa duten beste bi kateto-bikote (ez 3-4, 6-8 edo 5-12) eta idatzi hipotenusak.', es: 'Encuentra otras dos parejas de catetos con hipotenusa entera (no 3-4, 6-8 ni 5-12) y escribe sus hipotenusas.', en: 'Find two other pairs of legs with a whole-number hypotenuse (not 3-4, 6-8 or 5-12) and write their hypotenuses.', ar: 'جد زوجين آخرين من الضلعين القائمين وترهما عدد صحيح (غير 3-4 و6-8 و5-12) واكتب الوترين.' },
+        hint: { eu: 'Probatu 9 eta 12, edo 8 eta 15.', es: 'Prueba 9 y 12, u 8 y 15.', en: 'Try 9 and 12, or 8 and 15.', ar: 'جرّب 9 و12، أو 8 و15.' },
         isSolved: (state) => state.solved.filter((key) => !['3-4', '6-8', '5-12'].includes(key)).length >= 2
     }
 ]
@@ -297,26 +302,26 @@ export function answerArea(state: AreaState, patch: Partial<OperationAnswer>): A
 export const areaChallenges: LabChallenge<AreaState>[] = [
     {
         id: 9401,
-        prompt: { eu: 'Laukizuzena: oinarria 6 eta altuera 3. Idatzi azalera.', es: 'Rectángulo de base 6 y altura 3. Escribe su área.', ar: 'مستطيل قاعدته 6 وارتفاعه 3. اكتب مساحته.' },
-        hint: { eu: 'Zenbatu laukitxoak: 3 ilara 6ko.', es: 'Cuenta los cuadraditos: 3 filas de 6.', ar: 'عُدّ المربعات: 3 صفوف من 6.' },
+        prompt: { eu: 'Laukizuzena: oinarria 6 eta altuera 3. Idatzi azalera.', es: 'Rectángulo de base 6 y altura 3. Escribe su área.', en: 'Rectangle with base 6 and height 3. Write its area.', ar: 'مستطيل قاعدته 6 وارتفاعه 3. اكتب مساحته.' },
+        hint: { eu: 'Zenbatu laukitxoak: 3 ilara 6ko.', es: 'Cuenta los cuadraditos: 3 filas de 6.', en: 'Count the little squares: 3 rows of 6.', ar: 'عُدّ المربعات: 3 صفوف من 6.' },
         isSolved: (state) => state.solved.includes('rectangle-6-3')
     },
     {
         id: 9402,
-        prompt: { eu: 'Paralelogramoa: oinarria 5 eta altuera 4. Idatzi azalera.', es: 'Paralelogramo de base 5 y altura 4. Escribe su área.', ar: 'متوازي أضلاع قاعدته 5 وارتفاعه 4. اكتب مساحته.' },
-        hint: { eu: 'Laukizuzen bera bezala: oinarria · altuera.', es: 'Como su rectángulo: base · altura.', ar: 'مثل مستطيله: القاعدة · الارتفاع.' },
+        prompt: { eu: 'Paralelogramoa: oinarria 5 eta altuera 4. Idatzi azalera.', es: 'Paralelogramo de base 5 y altura 4. Escribe su área.', en: 'Parallelogram with base 5 and height 4. Write its area.', ar: 'متوازي أضلاع قاعدته 5 وارتفاعه 4. اكتب مساحته.' },
+        hint: { eu: 'Laukizuzen bera bezala: oinarria · altuera.', es: 'Como su rectángulo: base · altura.', en: 'Like its rectangle: base · height.', ar: 'مثل مستطيله: القاعدة · الارتفاع.' },
         isSolved: (state) => state.solved.includes('parallelogram-5-4')
     },
     {
         id: 9403,
-        prompt: { eu: 'Triangelua: oinarria 6 eta altuera 3. Idatzi azalera.', es: 'Triángulo de base 6 y altura 3. Escribe su área.', ar: 'مثلث قاعدته 6 وارتفاعه 3. اكتب مساحته.' },
-        hint: { eu: 'Laukizuzenaren erdia.', es: 'La mitad del rectángulo.', ar: 'نصف المستطيل.' },
+        prompt: { eu: 'Triangelua: oinarria 6 eta altuera 3. Idatzi azalera.', es: 'Triángulo de base 6 y altura 3. Escribe su área.', en: 'Triangle with base 6 and height 3. Write its area.', ar: 'مثلث قاعدته 6 وارتفاعه 3. اكتب مساحته.' },
+        hint: { eu: 'Laukizuzenaren erdia.', es: 'La mitad del rectángulo.', en: 'Half of the rectangle.', ar: 'نصف المستطيل.' },
         isSolved: (state) => state.solved.includes('triangle-6-3')
     },
     {
         id: 9404,
-        prompt: { eu: 'Egin 12ko azalera duen triangelu bat eta idatzi azalera.', es: 'Construye un triángulo de área 12 y escribe su área.', ar: 'ابنِ مثلثًا مساحته 12 واكتب مساحته.' },
-        hint: { eu: 'Oinarria · altuera 24 izan behar da.', es: 'Base · altura tiene que dar 24.', ar: 'يجب أن يكون القاعدة · الارتفاع = 24.' },
+        prompt: { eu: 'Egin 12ko azalera duen triangelu bat eta idatzi azalera.', es: 'Construye un triángulo de área 12 y escribe su área.', en: 'Build a triangle with an area of 12 and write its area.', ar: 'ابنِ مثلثًا مساحته 12 واكتب مساحته.' },
+        hint: { eu: 'Oinarria · altuera 24 izan behar da.', es: 'Base · altura tiene que dar 24.', en: 'Base · height must equal 24.', ar: 'يجب أن يكون القاعدة · الارتفاع = 24.' },
         isSolved: (state) => state.solved.some((key) => key.startsWith('triangle-') && Number(key.split('-')[1]) * Number(key.split('-')[2]) === 24)
     }
 ]
@@ -344,26 +349,26 @@ export function setCircle(state: CircleState, patch: Partial<Pick<CircleState, '
 export const circleChallenges: LabChallenge<CircleState>[] = [
     {
         id: 9501,
-        prompt: { eu: 'Erradioa 5: idatzi zirkunferentziaren luzera.', es: 'Radio 5: escribe la longitud de la circunferencia.', ar: 'نصف القطر 5: اكتب طول الدائرة.' },
-        hint: { eu: '$2\\cdot 3{,}14\\cdot 5$', es: '$2\\cdot 3{,}14\\cdot 5$', ar: '$2\\cdot 3.14\\cdot 5$' },
+        prompt: { eu: 'Erradioa 5: idatzi zirkunferentziaren luzera.', es: 'Radio 5: escribe la longitud de la circunferencia.', en: 'Radius 5: write the length of the circumference.', ar: 'نصف القطر 5: اكتب طول الدائرة.' },
+        hint: { eu: '$2\\cdot 3{,}14\\cdot 5$', es: '$2\\cdot 3{,}14\\cdot 5$', en: '$2\\cdot 3{,}14\\cdot 5$', ar: '$2\\cdot 3.14\\cdot 5$' },
         isSolved: (state) => state.radius === 5 && state.ask === 'length' && answered(state, circleLength(5))
     },
     {
         id: 9502,
-        prompt: { eu: 'Erradioa 10: idatzi zirkuluaren azalera.', es: 'Radio 10: escribe el área del círculo.', ar: 'نصف القطر 10: اكتب مساحة القرص.' },
-        hint: { eu: '$3{,}14\\cdot 10^{2}$', es: '$3{,}14\\cdot 10^{2}$', ar: '$3.14\\cdot 10^{2}$' },
+        prompt: { eu: 'Erradioa 10: idatzi zirkuluaren azalera.', es: 'Radio 10: escribe el área del círculo.', en: 'Radius 10: write the area of the circle.', ar: 'نصف القطر 10: اكتب مساحة القرص.' },
+        hint: { eu: '$3{,}14\\cdot 10^{2}$', es: '$3{,}14\\cdot 10^{2}$', en: '$3{,}14\\cdot 10^{2}$', ar: '$3.14\\cdot 10^{2}$' },
         isSolved: (state) => state.radius === 10 && state.ask === 'area' && answered(state, circleArea(10))
     },
     {
         id: 9503,
-        prompt: { eu: 'Diametroa 60 (bizikleta-gurpila): idatzi luzera.', es: 'Diámetro 60 (rueda de bici): escribe la longitud.', ar: 'القطر 60 (عجلة دراجة): اكتب الطول.' },
-        hint: { eu: 'Erradioa diametroaren erdia da.', es: 'El radio es la mitad del diámetro.', ar: 'نصف القطر نصف القطر الكامل.' },
+        prompt: { eu: 'Diametroa 60 (bizikleta-gurpila): idatzi luzera.', es: 'Diámetro 60 (rueda de bici): escribe la longitud.', en: 'Diameter 60 (bicycle wheel): write the length.', ar: 'القطر 60 (عجلة دراجة): اكتب الطول.' },
+        hint: { eu: 'Erradioa diametroaren erdia da.', es: 'El radio es la mitad del diámetro.', en: 'The radius is half the diameter.', ar: 'نصف القطر نصف القطر الكامل.' },
         isSolved: (state) => state.radius === 30 && state.ask === 'length' && answered(state, circleLength(30))
     },
     {
         id: 9504,
-        prompt: { eu: 'Erradioa 2: idatzi azalera. Gero bikoiztu erradioa eta idatzi berriro. Zenbat aldiz handitu da?', es: 'Radio 2: escribe el área. Después duplica el radio y escríbela otra vez. ¿Cuántas veces ha crecido?', ar: 'نصف القطر 2: اكتب المساحة. ثم ضاعف نصف القطر واكتبها مجددًا. كم مرة كبرت؟' },
-        hint: { eu: '$3{,}14\\cdot 4$ eta $3{,}14\\cdot 16$.', es: '$3{,}14\\cdot 4$ y $3{,}14\\cdot 16$.', ar: '$3.14\\cdot 4$ و$3.14\\cdot 16$.' },
+        prompt: { eu: 'Erradioa 2: idatzi azalera. Gero bikoiztu erradioa eta idatzi berriro. Zenbat aldiz handitu da?', es: 'Radio 2: escribe el área. Después duplica el radio y escríbela otra vez. ¿Cuántas veces ha crecido?', en: 'Radius 2: write the area. Then double the radius and write it again. How many times has it grown?', ar: 'نصف القطر 2: اكتب المساحة. ثم ضاعف نصف القطر واكتبها مجددًا. كم مرة كبرت؟' },
+        hint: { eu: '$3{,}14\\cdot 4$ eta $3{,}14\\cdot 16$.', es: '$3{,}14\\cdot 4$ y $3{,}14\\cdot 16$.', en: '$3{,}14\\cdot 4$ and $3{,}14\\cdot 16$.', ar: '$3.14\\cdot 4$ و$3.14\\cdot 16$.' },
         isSolved: (state) => state.radius === 4 && state.ask === 'area' && answered(state, circleArea(4))
     }
 ]

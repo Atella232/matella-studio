@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
@@ -63,11 +64,11 @@ test('proportzionaltasuna 4. DBH ap graph: endless challenges and texts', () => 
     }
     assert.ok(prompts.size > 150, String(prompts.size))
     for (const text of texts) {
-        for (const language of ['eu', 'es', 'ar'] as const) {
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) {
             const line = text[language]
             assert.equal(line.split('$').length % 2, 1, line)
             for (const [, formula] of line.matchAll(/\$([^$]+)\$/g)) {
-                katex.renderToString(formula, { throwOnError: true })
+                katex.renderToString(formulaFor(language, formula), { throwOnError: true })
                 assert.ok(!/[؀-ۿ]/.test(formula), formula)
             }
             if (language === 'eu') assert.ok(!/\d-?(an|ean|ra|era|tik|etik|ko|eko|rekin|ekin|k)\b/.test(line), line)

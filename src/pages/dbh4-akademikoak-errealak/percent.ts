@@ -5,6 +5,8 @@
    intervals come from the applied unit (../dbh4-aplikatuak-errealak/reals.ts).
    ========================================================================== */
 
+import { decimalSeparatorFor } from '../../utils/numberFormat.ts'
+
 /** A value without floating noise (0.1 + 0.2 → 0.3) */
 export const tidy = (value: number, places = 9) => Number(value.toFixed(places))
 
@@ -43,8 +45,8 @@ export function interestTable(capital: number, rate: number, years: number): Arr
     return Array.from({ length: years + 1 }, (_, year) => ({ year, simple: cents(capital + simpleInterest(capital, rate, year)), compound: compoundFinal(capital, rate, year) }))
 }
 
-/** A decimal written with a comma, without trailing zeros: 1.2100 → "1,21" */
-export const commaNumber = (value: number) => String(tidy(value, 6)).replace('.', ',')
+/** A decimal with the language's mark, without trailing zeros: 1.2100 → "1,21" (English "1.21") */
+export const commaNumber = (value: number, language: string) => String(tidy(value, 6)).replace('.', decimalSeparatorFor(language))
 
-/** Money written with two decimals and a comma: 1104.08 → "1104,08" */
-export const money = (value: number) => cents(value).toFixed(2).replace('.', ',')
+/** Money written with two decimals and the language's mark: 1104.08 → "1104,08" (English "1104.08") */
+export const money = (value: number, language: string) => cents(value).toFixed(2).replace('.', decimalSeparatorFor(language))

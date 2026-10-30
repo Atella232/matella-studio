@@ -75,13 +75,13 @@ export interface SaleRound {
 export type ProductId = 'backpack' | 'trainers' | 'book' | 'headphones' | 'ball' | 'jacket' | 'game'
 
 export const products: Record<ProductId, LocalizedText> = {
-    backpack: { eu: 'Motxila', es: 'Mochila', ar: 'حقيبة ظهر' },
-    trainers: { eu: 'Zapatilak', es: 'Zapatillas', ar: 'حذاء رياضي' },
-    book: { eu: 'Liburua', es: 'Libro', ar: 'كتاب' },
-    headphones: { eu: 'Entzungailuak', es: 'Auriculares', ar: 'سماعات' },
-    ball: { eu: 'Baloia', es: 'Balón', ar: 'كرة' },
-    jacket: { eu: 'Jaka', es: 'Chaqueta', ar: 'سترة' },
-    game: { eu: 'Mahai-jokoa', es: 'Juego de mesa', ar: 'لعبة لوحية' }
+    backpack: { eu: 'Motxila', es: 'Mochila', en: 'Backpack', ar: 'حقيبة ظهر' },
+    trainers: { eu: 'Zapatilak', es: 'Zapatillas', en: 'Trainers', ar: 'حذاء رياضي' },
+    book: { eu: 'Liburua', es: 'Libro', en: 'Book', ar: 'كتاب' },
+    headphones: { eu: 'Entzungailuak', es: 'Auriculares', en: 'Headphones', ar: 'سماعات' },
+    ball: { eu: 'Baloia', es: 'Balón', en: 'Ball', ar: 'كرة' },
+    jacket: { eu: 'Jaka', es: 'Chaqueta', en: 'Jacket', ar: 'سترة' },
+    game: { eu: 'Mahai-jokoa', es: 'Juego de mesa', en: 'Board game', ar: 'لعبة لوحية' }
 }
 
 const productIds = Object.keys(products) as ProductId[]
@@ -105,15 +105,15 @@ export function payShare(offer: Offer): FractionValue {
 export function offerLabel(offer: Offer): LocalizedText {
     switch (offer.type) {
         case 'percent':
-            return { eu: `Deskontua: % ${offer.percent}`, es: `${offer.percent} % de descuento`, ar: `خصم ${offer.percent}٪` }
+            return { eu: `Deskontua: % ${offer.percent}`, es: `${offer.percent} % de descuento`, en: `${offer.percent}% off`, ar: `خصم ${offer.percent}٪` }
         case 'fraction':
-            return { eu: `Deskontua: ${frac(offer.off)}`, es: `${frac(offer.off)} de descuento`, ar: `خصم ${frac(offer.off)}` }
+            return { eu: `Deskontua: ${frac(offer.off)}`, es: `${frac(offer.off)} de descuento`, en: `${frac(offer.off)} off`, ar: `خصم ${frac(offer.off)}` }
         case 'pay':
-            return { eu: `Prezioaren ${frac(offer.pay)} ordaintzen duzu`, es: `Pagas ${frac(offer.pay)} del precio`, ar: `تدفع ${frac(offer.pay)} من السعر` }
+            return { eu: `Prezioaren ${frac(offer.pay)} ordaintzen duzu`, es: `Pagas ${frac(offer.pay)} del precio`, en: `You pay ${frac(offer.pay)} of the price`, ar: `تدفع ${frac(offer.pay)} من السعر` }
         case 'take':
-            return { eu: `${offer.take} × ${offer.pay}: eraman ${offer.take}, ordaindu ${offer.pay}`, es: `${offer.take} × ${offer.pay}: llévate ${offer.take} y paga ${offer.pay}`, ar: `${offer.take} × ${offer.pay}: خذ ${offer.take} وادفع ثمن ${offer.pay}` }
+            return { eu: `${offer.take} × ${offer.pay}: eraman ${offer.take}, ordaindu ${offer.pay}`, es: `${offer.take} × ${offer.pay}: llévate ${offer.take} y paga ${offer.pay}`, en: `${offer.take} × ${offer.pay}: take ${offer.take} and pay ${offer.pay}`, ar: `${offer.take} × ${offer.pay}: خذ ${offer.take} وادفع ثمن ${offer.pay}` }
         case 'chain':
-            return { eu: `% ${offer.first}, eta gero beste % ${offer.second}`, es: `${offer.first} % y luego otro ${offer.second} %`, ar: `${offer.first}٪ ثم ${offer.second}٪ إضافية` }
+            return { eu: `% ${offer.first}, eta gero beste % ${offer.second}`, es: `${offer.first} % y luego otro ${offer.second} %`, en: `${offer.first}% and then another ${offer.second}%`, ar: `${offer.first}٪ ثم ${offer.second}٪ إضافية` }
     }
 }
 
@@ -126,7 +126,7 @@ export function offerParts(offer: Offer): { parts: number; paid: number } {
 
 /* ---------- Money ---------- */
 
-const euros = (value: number): LocalizedText => ({ eu: `${value} €`, es: `${value} €`, ar: `${value} €` })
+const euros = (value: number): LocalizedText => ({ eu: `${value} €`, es: `${value} €`, en: `€${value}`, ar: `${value} €` })
 const isWhole = (value: FractionValue) => value.denominator === 1
 const amount = (total: number, share: FractionValue) => multiply(fraction(total), share)
 
@@ -156,7 +156,7 @@ function moneyOptions(random: Random, right: number, mistakes: Array<[number | F
 }
 
 /** In Arabic a formula and the € after it are kept together, reading left to right (LRI … PDI) */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\$([^$]+)\$ €/g, '\u2066$$$1$ €\u2069') })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\$([^$]+)\$ €/g, '\u2066$$$1$ €\u2069') })
 
 /* ---------- Level 1: how much do I pay, how much do I save ---------- */
 
@@ -184,26 +184,26 @@ function simpleRound(random: Random): SaleRound | null {
         if (offer.type === 'percent') {
             options = moneyOptions(random, pay, [[price - offer.percent, 'euros-as-percent'], [save, 'discount-not-price']])
             steps = [
-                say(`Deskontua: $\\frac{${offer.percent}}{100}\\cdot ${price}=${save}$ €.`, `Descuento: $\\frac{${offer.percent}}{100}\\cdot ${price}=${save}$ €.`, `الخصم: $\\frac{${offer.percent}}{100}\\cdot ${price}=${save}$ €.`),
-                say(`Ordaintzen duzu: $${price}-${save}=${pay}$ €.`, `Pagas: $${price}-${save}=${pay}$ €.`, `تدفع: $${price}-${save}=${pay}$ €.`)
+                say(`Deskontua: $\\frac{${offer.percent}}{100}\\cdot ${price}=${save}$ €.`, `Descuento: $\\frac{${offer.percent}}{100}\\cdot ${price}=${save}$ €.`, `الخصم: $\\frac{${offer.percent}}{100}\\cdot ${price}=${save}$ €.`, `Discount: $\\frac{${offer.percent}}{100}\\cdot ${price}=${save}$ euros.`),
+                say(`Ordaintzen duzu: $${price}-${save}=${pay}$ €.`, `Pagas: $${price}-${save}=${pay}$ €.`, `تدفع: $${price}-${save}=${pay}$ €.`, `You pay: $${price}-${save}=${pay}$ euros.`)
             ]
         } else if (offer.type === 'fraction') {
             // With one part off, taking a single part is the right method, so only the discount is a typical mistake
             options = moneyOptions(random, pay, offer.off.numerator > 1 ? [[save, 'discount-not-price'], [price - part, 'one-part']] : [[save, 'discount-not-price']])
             steps = offer.off.numerator === 1
                 ? [
-                    say(`Deskontua, zati bat: $${price}\\div ${parts}=${part}$ €.`, `Descuento, una parte: $${price}\\div ${parts}=${part}$ €.`, `الخصم جزء واحد: $${price}\\div ${parts}=${part}$ €.`),
-                    say(`Ordaintzen duzu: $${price}-${save}=${pay}$ €.`, `Pagas: $${price}-${save}=${pay}$ €.`, `تدفع: $${price}-${save}=${pay}$ €.`)
+                    say(`Deskontua, zati bat: $${price}\\div ${parts}=${part}$ €.`, `Descuento, una parte: $${price}\\div ${parts}=${part}$ €.`, `الخصم جزء واحد: $${price}\\div ${parts}=${part}$ €.`, `Discount for one part: $${price}\\div ${parts}=${part}$ euros.`),
+                    say(`Ordaintzen duzu: $${price}-${save}=${pay}$ €.`, `Pagas: $${price}-${save}=${pay}$ €.`, `تدفع: $${price}-${save}=${pay}$ €.`, `You pay: $${price}-${save}=${pay}$ euros.`)
                 ]
                 : [
-                    say(`Zati bat: $${price}\\div ${parts}=${part}$ €.`, `Una parte: $${price}\\div ${parts}=${part}$ €.`, `جزء واحد: $${price}\\div ${parts}=${part}$ €.`),
-                    say(`Deskontua: $${offer.off.numerator}\\cdot ${part}=${save}$ €; ordaintzen duzu $${price}-${save}=${pay}$ €.`, `Descuento: $${offer.off.numerator}\\cdot ${part}=${save}$ €; pagas $${price}-${save}=${pay}$ €.`, `الخصم: $${offer.off.numerator}\\cdot ${part}=${save}$ €؛ تدفع $${price}-${save}=${pay}$ €.`)
+                    say(`Zati bat: $${price}\\div ${parts}=${part}$ €.`, `Una parte: $${price}\\div ${parts}=${part}$ €.`, `جزء واحد: $${price}\\div ${parts}=${part}$ €.`, `One part: $${price}\\div ${parts}=${part}$ euros.`),
+                    say(`Deskontua: $${offer.off.numerator}\\cdot ${part}=${save}$ €; ordaintzen duzu $${price}-${save}=${pay}$ €.`, `Descuento: $${offer.off.numerator}\\cdot ${part}=${save}$ €; pagas $${price}-${save}=${pay}$ €.`, `الخصم: $${offer.off.numerator}\\cdot ${part}=${save}$ €؛ تدفع $${price}-${save}=${pay}$ €.`, `Discount: $${offer.off.numerator}\\cdot ${part}=${save}$ euros; you pay $${price}-${save}=${pay}$ euros.`)
                 ]
         } else {
             options = moneyOptions(random, pay, [[save, 'pay-as-discount'], [share.numerator > 1 ? part : price - share.numerator, share.numerator > 1 ? 'one-part' : 'calculation']])
             steps = [
-                say(`Zati bat: $${price}\\div ${parts}=${part}$ €.`, `Una parte: $${price}\\div ${parts}=${part}$ €.`, `جزء واحد: $${price}\\div ${parts}=${part}$ €.`),
-                say(`Ordaintzen duzu: $${share.numerator}\\cdot ${part}=${pay}$ €.`, `Pagas: $${share.numerator}\\cdot ${part}=${pay}$ €.`, `تدفع: $${share.numerator}\\cdot ${part}=${pay}$ €.`)
+                say(`Zati bat: $${price}\\div ${parts}=${part}$ €.`, `Una parte: $${price}\\div ${parts}=${part}$ €.`, `جزء واحد: $${price}\\div ${parts}=${part}$ €.`, `One part: $${price}\\div ${parts}=${part}$ euros.`),
+                say(`Ordaintzen duzu: $${share.numerator}\\cdot ${part}=${pay}$ €.`, `Pagas: $${share.numerator}\\cdot ${part}=${pay}$ €.`, `تدفع: $${share.numerator}\\cdot ${part}=${pay}$ €.`, `You pay: $${share.numerator}\\cdot ${part}=${pay}$ euros.`)
             ]
         }
     } else {
@@ -214,12 +214,12 @@ function simpleRound(random: Random): SaleRound | null {
             percentNumber !== null ? [percentNumber, 'euros-as-percent'] : [offParts > 1 ? part : price - part, offParts > 1 ? 'one-part' : 'price-not-discount']
         ])
         steps = offer.type === 'percent'
-            ? [say(`Aurrezten duzu: $\\frac{${offer.percent}}{100}\\cdot ${price}=${save}$ €.`, `Ahorras: $\\frac{${offer.percent}}{100}\\cdot ${price}=${save}$ €.`, `توفّر: $\\frac{${offer.percent}}{100}\\cdot ${price}=${save}$ €.`)]
+            ? [say(`Aurrezten duzu: $\\frac{${offer.percent}}{100}\\cdot ${price}=${save}$ €.`, `Ahorras: $\\frac{${offer.percent}}{100}\\cdot ${price}=${save}$ €.`, `توفّر: $\\frac{${offer.percent}}{100}\\cdot ${price}=${save}$ €.`, `You save: $\\frac{${offer.percent}}{100}\\cdot ${price}=${save}$ euros.`)]
             : offParts === 1
-                ? [say(`Aurrezten duzu zati bat: $${price}\\div ${parts}=${save}$ €.`, `Ahorras una parte: $${price}\\div ${parts}=${save}$ €.`, `توفّر جزءًا واحدًا: $${price}\\div ${parts}=${save}$ €.`)]
+                ? [say(`Aurrezten duzu zati bat: $${price}\\div ${parts}=${save}$ €.`, `Ahorras una parte: $${price}\\div ${parts}=${save}$ €.`, `توفّر جزءًا واحدًا: $${price}\\div ${parts}=${save}$ €.`, `You save one part: $${price}\\div ${parts}=${save}$ euros.`)]
                 : [
-                    say(`Zati bat: $${price}\\div ${parts}=${part}$ €.`, `Una parte: $${price}\\div ${parts}=${part}$ €.`, `جزء واحد: $${price}\\div ${parts}=${part}$ €.`),
-                    say(`Aurrezten duzu: $${offParts}\\cdot ${part}=${save}$ €.`, `Ahorras: $${offParts}\\cdot ${part}=${save}$ €.`, `توفّر: $${offParts}\\cdot ${part}=${save}$ €.`)
+                    say(`Zati bat: $${price}\\div ${parts}=${part}$ €.`, `Una parte: $${price}\\div ${parts}=${part}$ €.`, `جزء واحد: $${price}\\div ${parts}=${part}$ €.`, `One part: $${price}\\div ${parts}=${part}$ euros.`),
+                    say(`Aurrezten duzu: $${offParts}\\cdot ${part}=${save}$ €.`, `Ahorras: $${offParts}\\cdot ${part}=${save}$ €.`, `توفّر: $${offParts}\\cdot ${part}=${save}$ €.`, `You save: $${offParts}\\cdot ${part}=${save}$ euros.`)
                 ]
     }
     if (!options) return null
@@ -231,8 +231,8 @@ function simpleRound(random: Random): SaleRound | null {
         offers: [offer],
         paid: null,
         question: kind === 'pay'
-            ? say('Zenbat ordaintzen duzu?', '¿Cuánto pagas?', 'كم تدفع؟')
-            : say('Zenbat aurrezten duzu?', '¿Cuánto te ahorras?', 'كم توفّر؟'),
+            ? say('Zenbat ordaintzen duzu?', '¿Cuánto pagas?', 'كم تدفع؟', 'How much do you pay?')
+            : say('Zenbat aurrezten duzu?', '¿Cuánto te ahorras?', 'كم توفّر؟', 'How much do you save?'),
         options,
         steps,
         bars: [{ total: price, ...offerParts(offer), paidValue: pay, savedValue: save }]
@@ -294,13 +294,13 @@ function compareRound(random: Random, kind: 'compare' | 'chained-compare'): Sale
         const share = payShare(offer)
         const label = offerLabel(offer)
         const formula = `$\\frac{${share.numerator}}{${share.denominator}}\\cdot ${total}=${prices[index]}$`
-        return say(`${label.eu}: ${formula} €`, `${label.es}: ${formula} €`, `${label.ar}: ${formula} €`)
+        return say(`${label.eu}: ${formula} €`, `${label.es}: ${formula} €`, `${label.ar}: ${formula} €`, `${label.en}: ${formula} euros`)
     })
     if (kind === 'chained-compare') {
         steps.push(say(
             'Bigarren deskontua prezio merkatuari aplikatzen zaio: ehunekoak ez dira batzen.',
             'El segundo descuento se aplica sobre el precio ya rebajado: los porcentajes no se suman.',
-            'الخصم الثاني يُطبَّق على السعر المخفَّض: النسب لا تُجمع.'
+            'الخصم الثاني يُطبَّق على السعر المخفَّض: النسب لا تُجمع.', 'The second discount is applied to the already reduced price: the percentages are not added together.'
         ))
     }
     return {
@@ -310,7 +310,7 @@ function compareRound(random: Random, kind: 'compare' | 'chained-compare'): Sale
         quantity,
         offers,
         paid: null,
-        question: say('Zein eskaintza da merkeagoa?', '¿Qué oferta es más barata?', 'أي عرض أرخص؟'),
+        question: say('Zein eskaintza da merkeagoa?', '¿Qué oferta es más barata?', 'أي عرض أرخص؟', 'Which offer is cheaper?'),
         options: offers.map((offer, index) => ({ label: offerLabel(offer), correct: index === best, error: index === best ? null : 'worse-offer' })),
         steps,
         bars: offers.map((offer, index) => ({ total, ...offerParts(offer), paidValue: prices[index], savedValue: total - prices[index], offer }))
@@ -338,11 +338,11 @@ function chainedRound(random: Random): SaleRound | null {
         quantity: 1,
         offers: [offer],
         paid: null,
-        question: say('Zenbat ordaintzen duzu azkenean?', '¿Cuánto pagas al final?', 'كم تدفع في النهاية؟'),
+        question: say('Zenbat ordaintzen duzu azkenean?', '¿Cuánto pagas al final?', 'كم تدفع في النهاية؟', 'How much do you pay in the end?'),
         options,
         steps: [
-            say(`Lehen deskontua: $${price}-\\frac{${offer.first}}{100}\\cdot ${price}=${p1}$ €.`, `Primer descuento: $${price}-\\frac{${offer.first}}{100}\\cdot ${price}=${p1}$ €.`, `الخصم الأول: $${price}-\\frac{${offer.first}}{100}\\cdot ${price}=${p1}$ €.`),
-            say(`Bigarrena, ${p1} € horien gainean: $${p1}-\\frac{${offer.second}}{100}\\cdot ${p1}=${pay}$ €.`, `El segundo, sobre esos ${p1} €: $${p1}-\\frac{${offer.second}}{100}\\cdot ${p1}=${pay}$ €.`, `الثاني على تلك الـ${p1} €: $${p1}-\\frac{${offer.second}}{100}\\cdot ${p1}=${pay}$ €.`)
+            say(`Lehen deskontua: $${price}-\\frac{${offer.first}}{100}\\cdot ${price}=${p1}$ €.`, `Primer descuento: $${price}-\\frac{${offer.first}}{100}\\cdot ${price}=${p1}$ €.`, `الخصم الأول: $${price}-\\frac{${offer.first}}{100}\\cdot ${price}=${p1}$ €.`, `First discount: $${price}-\\frac{${offer.first}}{100}\\cdot ${price}=${p1}$ euros.`),
+            say(`Bigarrena, ${p1} € horien gainean: $${p1}-\\frac{${offer.second}}{100}\\cdot ${p1}=${pay}$ €.`, `El segundo, sobre esos ${p1} €: $${p1}-\\frac{${offer.second}}{100}\\cdot ${p1}=${pay}$ €.`, `الثاني على تلك الـ${p1} €: $${p1}-\\frac{${offer.second}}{100}\\cdot ${p1}=${pay}$ €.`, `The second one, on that €${p1}: $${p1}-\\frac{${offer.second}}{100}\\cdot ${p1}=${pay}$ euros.`)
         ],
         bars: [
             { total: price, ...first, paidValue: p1, savedValue: price - p1 },
@@ -371,13 +371,13 @@ function originalRound(random: Random): SaleRound | null {
         quantity: 1,
         offers: [{ type: 'percent', percent }],
         paid,
-        question: say('Zenbat balio zuen merkealdien aurretik?', '¿Cuánto costaba antes de la rebaja?', 'كم كان سعره قبل التخفيض؟'),
+        question: say('Zenbat balio zuen merkealdien aurretik?', '¿Cuánto costaba antes de la rebaja?', 'كم كان سعره قبل التخفيض؟', 'How much did it cost before the sale?'),
         options,
         steps: [
-            say(`Ordaindutakoa prezioaren % ${100 - percent} da, hau da, $\\frac{${share.numerator}}{${share.denominator}}$.`, `Lo pagado es el ${100 - percent} % del precio, es decir, $\\frac{${share.numerator}}{${share.denominator}}$.`, `المدفوع هو ${100 - percent}٪ من السعر، أي $\\frac{${share.numerator}}{${share.denominator}}$.`),
+            say(`Ordaindutakoa prezioaren % ${100 - percent} da, hau da, $\\frac{${share.numerator}}{${share.denominator}}$.`, `Lo pagado es el ${100 - percent} % del precio, es decir, $\\frac{${share.numerator}}{${share.denominator}}$.`, `المدفوع هو ${100 - percent}٪ من السعر، أي $\\frac{${share.numerator}}{${share.denominator}}$.`, `What you paid is ${100 - percent}% of the price, that is, $\\frac{${share.numerator}}{${share.denominator}}$.`),
             share.numerator === 1
-                ? say(`Ordaindutakoa zati bat da; prezioa: $${share.denominator}\\cdot ${part}=${price}$ €.`, `Lo pagado es una parte; el precio: $${share.denominator}\\cdot ${part}=${price}$ €.`, `المدفوع جزء واحد؛ السعر: $${share.denominator}\\cdot ${part}=${price}$ €.`)
-                : say(`Zati bat: $${paid}\\div ${share.numerator}=${part}$ €; prezioa: $${share.denominator}\\cdot ${part}=${price}$ €.`, `Una parte: $${paid}\\div ${share.numerator}=${part}$ €; el precio: $${share.denominator}\\cdot ${part}=${price}$ €.`, `جزء واحد: $${paid}\\div ${share.numerator}=${part}$ €؛ السعر: $${share.denominator}\\cdot ${part}=${price}$ €.`)
+                ? say(`Ordaindutakoa zati bat da; prezioa: $${share.denominator}\\cdot ${part}=${price}$ €.`, `Lo pagado es una parte; el precio: $${share.denominator}\\cdot ${part}=${price}$ €.`, `المدفوع جزء واحد؛ السعر: $${share.denominator}\\cdot ${part}=${price}$ €.`, `What you paid is one part; the price: $${share.denominator}\\cdot ${part}=${price}$ euros.`)
+                : say(`Zati bat: $${paid}\\div ${share.numerator}=${part}$ €; prezioa: $${share.denominator}\\cdot ${part}=${price}$ €.`, `Una parte: $${paid}\\div ${share.numerator}=${part}$ €; el precio: $${share.denominator}\\cdot ${part}=${price}$ €.`, `جزء واحد: $${paid}\\div ${share.numerator}=${part}$ €؛ السعر: $${share.denominator}\\cdot ${part}=${price}$ €.`, `One part: $${paid}\\div ${share.numerator}=${part}$ euros; the price: $${share.denominator}\\cdot ${part}=${price}$ euros.`)
         ],
         bars: [{ total: price, parts: share.denominator, paid: share.numerator, paidValue: paid, savedValue: price - paid }]
     }
@@ -407,16 +407,16 @@ export function createSaleRounds(random: Random, levelIndex: number): SaleRound[
 }
 
 export const saleErrorTips: Record<SaleError, LocalizedText> = {
-    'euros-as-percent': { eu: 'Ehunekoa ez da euroak: kalkulatu lehenik deskontua.', es: 'Un porcentaje no son euros: calcula primero el descuento.', ar: 'النسبة المئوية ليست يوروهات: احسب الخصم أولًا.' },
-    'discount-not-price': { eu: 'Hori deskontua da, ez ordaintzen duzuna: kendu prezioari.', es: 'Eso es el descuento, no lo que pagas: réstalo del precio.', ar: 'هذا هو الخصم لا ما تدفعه: اطرحه من السعر.' },
-    'price-not-discount': { eu: 'Hori ordaintzen duzuna da; aurrezten duzuna deskontua da.', es: 'Eso es lo que pagas; lo que te ahorras es el descuento.', ar: 'هذا ما تدفعه؛ أما ما توفّره فهو الخصم.' },
-    'pay-as-discount': { eu: 'Prezioaren zatiki bat ordaintzen baduzu, zatiki hori ordaintzen duzu, ez deskontua.', es: 'Si pagas una fracción del precio, esa fracción es lo que pagas, no el descuento.', ar: 'إذا دفعت كسرًا من السعر فذلك الكسر هو ما تدفعه لا الخصم.' },
-    'one-part': { eu: 'Zati bakarra hartu duzu: kalkulatu zati bat eta biderkatu zenbakitzaileaz.', es: 'Has tomado una sola parte: calcula una parte y multiplícala por el numerador.', ar: 'أخذت جزءًا واحدًا فقط: احسب جزءًا ثم اضربه في البسط.' },
-    'added-percents': { eu: 'Bigarren deskontua prezio merkatuari aplikatzen zaio: ehunekoak ez dira batzen.', es: 'El segundo descuento se aplica sobre el precio ya rebajado: los porcentajes no se suman.', ar: 'الخصم الثاني يُطبَّق على السعر المخفَّض: النسب لا تُجمع.' },
-    'only-first': { eu: 'Bigarren deskontua aplikatzea falta da.', es: 'Falta aplicar el segundo descuento.', ar: 'لم تطبّق الخصم الثاني.' },
-    'added-to-paid': { eu: 'Deskontua jatorrizko prezioaren gainean kalkulatu zen, ez ordaindutakoaren gainean: ordaindutakoa prezioaren zati bat da.', es: 'El descuento se calculó sobre el precio original, no sobre lo pagado: lo pagado es una parte del precio.', ar: 'حُسب الخصم على السعر الأصلي لا على المدفوع: المدفوع جزء من السعر.' },
-    calculation: { eu: 'Berrikusi kalkuluak.', es: 'Repasa las cuentas.', ar: 'راجع الحسابات.' },
-    'worse-offer': { eu: 'Eskaintza horrekin gehiago ordaintzen duzu: kalkulatu bakoitzarekin zenbat ordaintzen duzun.', es: 'Con esa oferta pagas más: calcula lo que pagas con cada una.', ar: 'بهذا العرض تدفع أكثر: احسب ما تدفعه مع كل عرض.' }
+    'euros-as-percent': { eu: 'Ehunekoa ez da euroak: kalkulatu lehenik deskontua.', es: 'Un porcentaje no son euros: calcula primero el descuento.', en: 'A percentage is not an amount in euros: work out the discount first.', ar: 'النسبة المئوية ليست يوروهات: احسب الخصم أولًا.' },
+    'discount-not-price': { eu: 'Hori deskontua da, ez ordaintzen duzuna: kendu prezioari.', es: 'Eso es el descuento, no lo que pagas: réstalo del precio.', en: 'That is the discount, not what you pay: subtract it from the price.', ar: 'هذا هو الخصم لا ما تدفعه: اطرحه من السعر.' },
+    'price-not-discount': { eu: 'Hori ordaintzen duzuna da; aurrezten duzuna deskontua da.', es: 'Eso es lo que pagas; lo que te ahorras es el descuento.', en: 'That is what you pay; what you save is the discount.', ar: 'هذا ما تدفعه؛ أما ما توفّره فهو الخصم.' },
+    'pay-as-discount': { eu: 'Prezioaren zatiki bat ordaintzen baduzu, zatiki hori ordaintzen duzu, ez deskontua.', es: 'Si pagas una fracción del precio, esa fracción es lo que pagas, no el descuento.', en: 'If you pay a fraction of the price, that fraction is what you pay, not the discount.', ar: 'إذا دفعت كسرًا من السعر فذلك الكسر هو ما تدفعه لا الخصم.' },
+    'one-part': { eu: 'Zati bakarra hartu duzu: kalkulatu zati bat eta biderkatu zenbakitzaileaz.', es: 'Has tomado una sola parte: calcula una parte y multiplícala por el numerador.', en: 'You have taken just one part: work out one part and multiply it by the numerator.', ar: 'أخذت جزءًا واحدًا فقط: احسب جزءًا ثم اضربه في البسط.' },
+    'added-percents': { eu: 'Bigarren deskontua prezio merkatuari aplikatzen zaio: ehunekoak ez dira batzen.', es: 'El segundo descuento se aplica sobre el precio ya rebajado: los porcentajes no se suman.', en: 'The second discount is applied to the already reduced price: the percentages are not added together.', ar: 'الخصم الثاني يُطبَّق على السعر المخفَّض: النسب لا تُجمع.' },
+    'only-first': { eu: 'Bigarren deskontua aplikatzea falta da.', es: 'Falta aplicar el segundo descuento.', en: 'You still need to apply the second discount.', ar: 'لم تطبّق الخصم الثاني.' },
+    'added-to-paid': { eu: 'Deskontua jatorrizko prezioaren gainean kalkulatu zen, ez ordaindutakoaren gainean: ordaindutakoa prezioaren zati bat da.', es: 'El descuento se calculó sobre el precio original, no sobre lo pagado: lo pagado es una parte del precio.', en: 'The discount was worked out on the original price, not on what you paid: what you paid is a part of the price.', ar: 'حُسب الخصم على السعر الأصلي لا على المدفوع: المدفوع جزء من السعر.' },
+    calculation: { eu: 'Berrikusi kalkuluak.', es: 'Repasa las cuentas.', en: 'Check your working.', ar: 'راجع الحسابات.' },
+    'worse-offer': { eu: 'Eskaintza horrekin gehiago ordaintzen duzu: kalkulatu bakoitzarekin zenbat ordaintzen duzun.', es: 'Con esa oferta pagas más: calcula lo que pagas con cada una.', en: 'With that offer you pay more: work out what you pay with each one.', ar: 'بهذا العرض تدفع أكثر: احسب ما تدفعه مع كل عرض.' }
 }
 
 /** Right answers out of six */

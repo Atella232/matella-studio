@@ -4,6 +4,7 @@ import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/Lab
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { toLatex } from '../../../features/unit-v2/math/fraction'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import { signed, trendWord } from '../../dbh2-funtzioak-v2/functions'
 import { Plane, PlaneGuides, PlanePath, PlanePoint } from '../../dbh2-funtzioak-v2/plane'
 import { numberLatex, sampled, smoothThrough, type Point } from '../functions'
@@ -60,8 +61,8 @@ const GREEN = 'var(--success, #267b53)'
 const MUTED = 'var(--muted, #58616e)'
 const STAGE_TINT = 'var(--stage-tint, #dde7f7)'
 
-/** A number for the readouts: decimal comma, decimal point in Arabic, true minus sign */
-const plain = (language: string, value: number) => signed(Math.round(value * 100) / 100).replace('.', language === 'ar' ? '.' : ',')
+/** A number for the readouts: the language's decimal mark (a point in Arabic and English), true minus sign */
+const plain = (language: string, value: number) => signed(Math.round(value * 100) / 100).replace('.', language === 'ar' ? '.' : decimalSeparatorFor(language))
 /** The same in LaTeX */
 const latexNumber = (language: string, value: number) => (language === 'ar' ? numberLatex(value).replace('{,}', '.') : numberLatex(value))
 
@@ -76,11 +77,11 @@ export function DomainTool(props: LabToolProps) {
     )
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Grafikoa', es: 'Gráfica', ar: 'الرسم' })} value={String(state.graph)} options={domainGraphs.map((item, index) => ({ value: String(index), label: l(item.short) }))} onChange={(next) => setState((s) => setDomain(s, { graph: Number(next) }))} />
-            {step('from', l({ eu: 'Izate-eremua: hasiera', es: 'Dominio: desde', ar: 'المجال: من' }))}
-            {step('to', l({ eu: 'Izate-eremua: amaiera', es: 'Dominio: hasta', ar: 'المجال: إلى' }))}
-            {step('low', l({ eu: 'Ibiltartea: txikiena', es: 'Recorrido: desde', ar: 'المدى: من' }))}
-            {step('high', l({ eu: 'Ibiltartea: handiena', es: 'Recorrido: hasta', ar: 'المدى: إلى' }))}
+            <Segmented label={l({ eu: 'Grafikoa', es: 'Gráfica', en: 'Graph', ar: 'الرسم' })} value={String(state.graph)} options={domainGraphs.map((item, index) => ({ value: String(index), label: l(item.short) }))} onChange={(next) => setState((s) => setDomain(s, { graph: Number(next) }))} />
+            {step('from', l({ eu: 'Izate-eremua: hasiera', es: 'Dominio: desde', en: 'Domain: from', ar: 'المجال: من' }))}
+            {step('to', l({ eu: 'Izate-eremua: amaiera', es: 'Dominio: hasta', en: 'Domain: to', ar: 'المجال: إلى' }))}
+            {step('low', l({ eu: 'Ibiltartea: txikiena', es: 'Recorrido: desde', en: 'Range: from', ar: 'المدى: من' }))}
+            {step('high', l({ eu: 'Ibiltartea: handiena', es: 'Recorrido: hasta', en: 'Range: to', ar: 'المدى: إلى' }))}
         </>
     )
     const mark = (right: boolean) => (right ? ' ✓' : '')
@@ -89,15 +90,15 @@ export function DomainTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-main"><MathText text={`$\\text{Dom}\\,f=[${state.from},\\,${state.to}]$`} /></span>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$\\text{Rec}\\,f=[${state.low},\\,${state.high}]$`} /></span>
             <span className="fraction-v2-lab-readout-note">
-                {l({ eu: 'Izate-eremua', es: 'Dominio', ar: 'المجال' })}{mark(domainRight(state))}
+                {l({ eu: 'Izate-eremua', es: 'Dominio', en: 'Domain', ar: 'المجال' })}{mark(domainRight(state))}
                 {' · '}
-                {l({ eu: 'Ibiltartea', es: 'Recorrido', ar: 'المدى' })}{mark(rangeRight(state))}
+                {l({ eu: 'Ibiltartea', es: 'Recorrido', en: 'Range', ar: 'المدى' })}{mark(rangeRight(state))}
             </span>
         </>
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={domainChallenges} state={state}>
-            <Plane box={{ xMin: -DOMAIN_LIMIT, xMax: DOMAIN_LIMIT, yMin: -DOMAIN_LIMIT + 2, yMax: DOMAIN_LIMIT - 1 }} cell={28} label={l({ eu: 'Grafikoa eta haren itzalak ardatzetan', es: 'La gráfica y sus sombras en los ejes', ar: 'الرسم وظلاله على المحورين' })}>
+            <Plane box={{ xMin: -DOMAIN_LIMIT, xMax: DOMAIN_LIMIT, yMin: -DOMAIN_LIMIT + 2, yMax: DOMAIN_LIMIT - 1 }} cell={28} label={l({ eu: 'Grafikoa eta haren itzalak ardatzetan', es: 'La gráfica y sus sombras en los ejes', en: 'The graph and its shadows on the axes', ar: 'الرسم وظلاله على المحورين' })}>
                 {(map) => (
                     <g>
                         <line x1={map.x(state.from)} y1={map.y(0)} x2={map.x(state.to)} y2={map.y(0)} stroke={STAGE} strokeWidth={9} strokeLinecap="round" opacity={0.45} />
@@ -131,13 +132,13 @@ export function InterceptsTool(props: LabToolProps) {
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${formula}$`} /></span>
-            <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `Y ardatza: $(0,\\,${c})$`, es: `Eje Y: $(0,\\,${c})$`, ar: `محور Y: $(0,\\,${c})$` })} /></span>
+            <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `Y ardatza: $(0,\\,${c})$`, es: `Eje Y: $(0,\\,${c})$`, en: `Y-axis: $(0,\\,${c})$`, ar: `محور Y: $(0,\\,${c})$` })} /></span>
             <span className="fraction-v2-lab-readout-note">
                 <MathText text={`$b^{2}-4c=${delta}$`} />
                 {' · '}
                 {xs.length === 0
-                    ? l({ eu: 'X ardatza ez du ebakitzen', es: 'no corta al eje X', ar: 'لا يقطع محور X' })
-                    : <MathText text={l({ eu: `X ardatza: $${cuts}$`, es: `Eje X: $${cuts}$`, ar: `محور X: $${cuts}$` })} />}
+                    ? l({ eu: 'X ardatza ez du ebakitzen', es: 'no corta al eje X', en: 'does not cross the x-axis', ar: 'لا يقطع محور X' })
+                    : <MathText text={l({ eu: `X ardatza: $${cuts}$`, es: `Eje X: $${cuts}$`, en: `X-axis: $${cuts}$`, ar: `محور X: $${cuts}$` })} />}
             </span>
         </>
     )
@@ -169,23 +170,23 @@ export function ExplorerTool(props: LabToolProps) {
     const box = { xMin: Math.min(0, from), xMax: Math.max(0, to), yMin: Math.min(0, ...ys) - (Math.min(...ys) < 0 ? 1 : 0), yMax: Math.max(...ys) + 1 }
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Grafikoa', es: 'Gráfica', ar: 'الرسم' })} value={String(state.graph)} options={explorerGraphs.map((item, index) => ({ value: String(index), label: l(item.short) }))} onChange={(next) => setState((s) => setExplorer(s, { graph: Number(next) }))} />
-            <Stepper label={l({ eu: 'Kurtsorea: x =', es: 'Cursor: x =', ar: 'المؤشر: x =' })} value={state.x} min={from} max={to} format={signed} onChange={(x) => setState((s) => setExplorer(s, { x }))} language={props.language} />
+            <Segmented label={l({ eu: 'Grafikoa', es: 'Gráfica', en: 'Graph', ar: 'الرسم' })} value={String(state.graph)} options={explorerGraphs.map((item, index) => ({ value: String(index), label: l(item.short) }))} onChange={(next) => setState((s) => setExplorer(s, { graph: Number(next) }))} />
+            <Stepper label={l({ eu: 'Kurtsorea: x =', es: 'Cursor: x =', en: 'Cursor: x =', ar: 'المؤشر: x =' })} value={state.x} min={from} max={to} format={signed} onChange={(x) => setState((s) => setExplorer(s, { x }))} language={props.language} />
         </>
     )
     const tags: string[] = []
-    if (info.relative === 'max') tags.push(l({ eu: 'maximo erlatiboa', es: 'máximo relativo', ar: 'عظمى نسبية' }))
-    if (info.relative === 'min') tags.push(l({ eu: 'minimo erlatiboa', es: 'mínimo relativo', ar: 'صغرى نسبية' }))
-    if (info.absolute === 'max') tags.push(l({ eu: 'maximo absolutua', es: 'máximo absoluto', ar: 'عظمى مطلقة' }))
-    if (info.absolute === 'min') tags.push(l({ eu: 'minimo absolutua', es: 'mínimo absoluto', ar: 'صغرى مطلقة' }))
+    if (info.relative === 'max') tags.push(l({ eu: 'maximo erlatiboa', es: 'máximo relativo', en: 'relative maximum', ar: 'عظمى نسبية' }))
+    if (info.relative === 'min') tags.push(l({ eu: 'minimo erlatiboa', es: 'mínimo relativo', en: 'relative minimum', ar: 'صغرى نسبية' }))
+    if (info.absolute === 'max') tags.push(l({ eu: 'maximo absolutua', es: 'máximo absoluto', en: 'absolute maximum', ar: 'عظمى مطلقة' }))
+    if (info.absolute === 'min') tags.push(l({ eu: 'minimo absolutua', es: 'mínimo absoluto', en: 'absolute minimum', ar: 'صغرى مطلقة' }))
     const exact = Math.abs(info.y - Math.round(info.y * 10) / 10) < 1e-9
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$f(${state.x})${exact ? '=' : '\\approx '}${latexNumber(props.language, Math.round(info.y * 10) / 10)}$`} /></span>
             <span className="fraction-v2-lab-readout-note">
                 {state.x < to
-                    ? l({ eu: `Hemendik aurrera ${l(trendWord[info.trend])} da`, es: `A partir de aquí es ${l(trendWord[info.trend])}`, ar: `من هنا تكون ${l(trendWord[info.trend])}` })
-                    : l({ eu: 'Grafikoaren amaiera', es: 'Final de la gráfica', ar: 'نهاية الرسم' })}
+                    ? l({ eu: `Hemendik aurrera ${l(trendWord[info.trend])} da`, es: `A partir de aquí es ${l(trendWord[info.trend])}`, en: `From here on it is ${l(trendWord[info.trend])}`, ar: `من هنا تكون ${l(trendWord[info.trend])}` })
+                    : l({ eu: 'Grafikoaren amaiera', es: 'Final de la gráfica', en: 'End of the graph', ar: 'نهاية الرسم' })}
                 {tags.length > 0 ? ` · ${tags.join(' · ')}` : ''}
             </span>
         </>
@@ -224,7 +225,7 @@ export function RateTool(props: LabToolProps) {
     const box = { xMin: Math.min(0, fn.from), xMax: fn.to, yMin: Math.floor(Math.min(0, ...values)), yMax: Math.ceil(Math.max(...values)) + 1 }
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Funtzioa', es: 'Función', ar: 'الدالة' })} value={String(state.fn)} options={rateFunctions.map((item, index) => ({ value: String(index), label: item.label }))} onChange={(next) => setState((s) => setRate(s, { fn: Number(next) }))} />
+            <Segmented label={l({ eu: 'Funtzioa', es: 'Función', en: 'Function', ar: 'الدالة' })} value={String(state.fn)} options={rateFunctions.map((item, index) => ({ value: String(index), label: item.label }))} onChange={(next) => setState((s) => setRate(s, { fn: Number(next) }))} />
             <Stepper label="a" value={state.a} min={fn.from} max={fn.to} format={signed} onChange={(value) => setState((s) => setRate(s, { a: value }))} language={props.language} />
             <Stepper label="b" value={state.b} min={fn.from} max={fn.to} format={signed} onChange={(value) => setState((s) => setRate(s, { b: value }))} language={props.language} />
         </>
@@ -235,7 +236,7 @@ export function RateTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${fn.latex}$`} /></span>
             <span className="fraction-v2-lab-readout-main">
                 {rate === null
-                    ? l({ eu: 'a eta b desberdinak izan behar dira.', es: 'a y b tienen que ser distintos.', ar: 'يجب أن يختلف a وb.' })
+                    ? l({ eu: 'a eta b desberdinak izan behar dira.', es: 'a y b tienen que ser distintos.', en: 'a and b must be different.', ar: 'يجب أن يختلف a وb.' })
                     : <MathText text={`$\\text{T.V.M.}\\,[${a},\\,${b}]=\\frac{${name}(${b})-${name}(${a})}{${b}-${a < 0 ? `(${a})` : a}}$`} />}
             </span>
             <span className="fraction-v2-lab-readout-main">
@@ -244,10 +245,10 @@ export function RateTool(props: LabToolProps) {
             {rate !== null && (
                 <span className="fraction-v2-lab-readout-note">
                     {rate.numerator > 0
-                        ? l({ eu: 'Positiboa: batez beste hazten da.', es: 'Positiva: crece de media.', ar: 'موجب: تتزايد في المتوسط.' })
+                        ? l({ eu: 'Positiboa: batez beste hazten da.', es: 'Positiva: crece de media.', en: 'Positive: it increases on average.', ar: 'موجب: تتزايد في المتوسط.' })
                         : rate.numerator < 0
-                            ? l({ eu: 'Negatiboa: batez beste txikitzen da.', es: 'Negativa: decrece de media.', ar: 'سالب: تتناقص في المتوسط.' })
-                            : l({ eu: '0: bi muturretan balio bera.', es: '0: el mismo valor en los dos extremos.', ar: '0: القيمة نفسها عند الطرفين.' })}
+                            ? l({ eu: 'Negatiboa: batez beste txikitzen da.', es: 'Negativa: decrece de media.', en: 'Negative: it decreases on average.', ar: 'سالب: تتناقص في المتوسط.' })
+                            : l({ eu: '0: bi muturretan balio bera.', es: '0: el mismo valor en los dos extremos.', en: '0: the same value at both ends.', ar: '0: القيمة نفسها عند الطرفين.' })}
                 </span>
             )}
         </>
@@ -296,7 +297,7 @@ export function PeriodicTool(props: LabToolProps) {
     }
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Funtzioa', es: 'Función', ar: 'الدالة' })} value={String(state.pattern)} options={periodicPatterns.map((item, index) => ({ value: String(index), label: l(item.short) }))} onChange={(next) => setState((s) => setPeriodic(s, { pattern: Number(next) }))} />
+            <Segmented label={l({ eu: 'Funtzioa', es: 'Función', en: 'Function', ar: 'الدالة' })} value={String(state.pattern)} options={periodicPatterns.map((item, index) => ({ value: String(index), label: l(item.short) }))} onChange={(next) => setState((s) => setPeriodic(s, { pattern: Number(next) }))} />
             <Stepper label="x" value={state.x} min={0} max={PERIODIC_MAX} step={pattern.step} format={(value) => plain(props.language, value)} onChange={(x) => setState((s) => setPeriodic(s, { x }))} language={props.language} />
         </>
     )
@@ -305,7 +306,7 @@ export function PeriodicTool(props: LabToolProps) {
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${n(state.x)}=${q}\\cdot ${pattern.period}+${n(r)}$`} /></span>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$f(${n(state.x)})=f(${n(r)})=${n(y)}$`} /></span>
-            <span className="fraction-v2-lab-readout-note">{l({ eu: `Periodoa: T = ${pattern.period}`, es: `Periodo: T = ${pattern.period}`, ar: `الدور: T = ${pattern.period}` })}{state.pattern === 0 ? l({ eu: ' · x minututan, y litrotan', es: ' · x en minutos, y en litros', ar: ' · x بالدقائق وy باللترات' }) : ''}</span>
+            <span className="fraction-v2-lab-readout-note">{l({ eu: `Periodoa: T = ${pattern.period}`, es: `Periodo: T = ${pattern.period}`, en: `Period: T = ${pattern.period}`, ar: `الدور: T = ${pattern.period}` })}{state.pattern === 0 ? l({ eu: ' · x minututan, y litrotan', es: ' · x en minutos, y en litros', en: ' · x in minutes, y in litres', ar: ' · x بالدقائق وy باللترات' }) : ''}</span>
         </>
     )
     const box = { xMin: start, xMax: start + span, yMin: 0, yMax: state.pattern === 0 ? 5 : 4 }
@@ -341,13 +342,13 @@ export function BoxTool(props: LabToolProps) {
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$V(${n(state.x)})=${n(BOX_WIDTH - 2 * state.x)}\\cdot ${n(BOX_HEIGHT - 2 * state.x)}\\cdot ${n(state.x)}=${n(volume)}$`} /></span>
-            <span className="fraction-v2-lab-readout-note">{l({ eu: 'cm³ · izate-eremua: 0 < x < 15', es: 'cm³ · dominio: 0 < x < 15', ar: 'سم³ · المجال: 0 < x < 15' })}</span>
+            <span className="fraction-v2-lab-readout-note">{l({ eu: 'cm³ · izate-eremua: 0 < x < 15', es: 'cm³ · dominio: 0 < x < 15', en: 'cm³ · domain: 0 < x < 15', ar: 'سم³ · المجال: 0 < x < 15' })}</span>
         </>
     )
     const curve = sampled((x) => ((BOX_WIDTH - 2 * x) * (BOX_HEIGHT - 2 * x) * x) / 500, 0, 15, 0.25)
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={boxChallenges} state={state}>
-            <svg viewBox="0 0 230 180" className="functions-plane" role="img" aria-label={l({ eu: 'Kartulina ebakita', es: 'La cartulina recortada', ar: 'الورق المقوى مقصوصًا' })} style={{ maxWidth: 300 }}>
+            <svg viewBox="0 0 230 180" className="functions-plane" role="img" aria-label={l({ eu: 'Kartulina ebakita', es: 'La cartulina recortada', en: 'The cut-out cardboard', ar: 'الورق المقوى مقصوصًا' })} style={{ maxWidth: 300 }}>
                 <rect x={15} y={15} width={BOX_WIDTH * s} height={BOX_HEIGHT * s} fill={STAGE_TINT} stroke={INK} strokeWidth={2} />
                 {[[15, 15], [15 + BOX_WIDTH * s - cut, 15], [15, 15 + BOX_HEIGHT * s - cut], [15 + BOX_WIDTH * s - cut, 15 + BOX_HEIGHT * s - cut]].map(([x, y], index) => (
                     <rect key={index} x={x} y={y} width={cut} height={cut} fill="#fffcf6" stroke={SECOND} strokeWidth={1.6} strokeDasharray="4 3" />

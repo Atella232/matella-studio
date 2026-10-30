@@ -97,12 +97,12 @@ export function OrderGame({ language, records, onResult, onExit , config }: Game
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => (record.timeMs === null ? '' : `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${formatTime(record.timeMs)}`)}
+                bestLabel={(record) => (record.timeMs === null ? '' : `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${formatTime(record.timeMs)}`)}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: `${ORDER_ROUNDS} txanda. Sakatu kartak ordenan: txikienetik handienera, edo gezia beste aldera begira badago, handienetik txikienera.`, es: `${ORDER_ROUNDS} rondas. Pulsa las cartas en orden: de menor a mayor o, si la flecha mira al otro lado, de mayor a menor.`, ar: `${ORDER_ROUNDS} جولات. اضغط البطاقات بالترتيب: من الأصغر إلى الأكبر، أو من الأكبر إلى الأصغر إذا اتجه السهم إلى الجهة الأخرى.` })}</li>
-                        <li>{l({ eu: `Karta okerrak +${ORDER_PENALTY_MS / 1000} s gehitzen ditu.`, es: `Cada carta equivocada suma +${ORDER_PENALTY_MS / 1000} s.`, ar: `كل بطاقة خاطئة تضيف ${ORDER_PENALTY_MS / 1000} ث.` })}</li>
-                        <li>{l({ eu: 'Gogoratu: −9 < −2, zerotik urrunago dagoelako.', es: 'Recuerda: −9 < −2, porque está más lejos del cero.', ar: 'تذكّر: ⁦−9 < −2⁩ لأنه أبعد عن الصفر.' })}</li>
+                        <li>{l({ eu: `${ORDER_ROUNDS} txanda. Sakatu kartak ordenan: txikienetik handienera, edo gezia beste aldera begira badago, handienetik txikienera.`, es: `${ORDER_ROUNDS} rondas. Pulsa las cartas en orden: de menor a mayor o, si la flecha mira al otro lado, de mayor a menor.`, en: `${ORDER_ROUNDS} rounds. Tap the cards in order: from smallest to largest or, if the arrow points the other way, from largest to smallest.`, ar: `${ORDER_ROUNDS} جولات. اضغط البطاقات بالترتيب: من الأصغر إلى الأكبر، أو من الأكبر إلى الأصغر إذا اتجه السهم إلى الجهة الأخرى.` })}</li>
+                        <li>{l({ eu: `Karta okerrak +${ORDER_PENALTY_MS / 1000} s gehitzen ditu.`, es: `Cada carta equivocada suma +${ORDER_PENALTY_MS / 1000} s.`, en: `Each wrong card adds +${ORDER_PENALTY_MS / 1000} s.`, ar: `كل بطاقة خاطئة تضيف ${ORDER_PENALTY_MS / 1000} ث.` })}</li>
+                        <li>{l({ eu: 'Gogoratu: −9 < −2, zerotik urrunago dagoelako.', es: 'Recuerda: −9 < −2, porque está más lejos del cero.', en: 'Remember: −9 < −2, because it is further from zero.', ar: 'تذكّر: ⁦−9 < −2⁩ لأنه أبعد عن الصفر.' })}</li>
                     </ul>
                 )}
             />
@@ -119,6 +119,7 @@ export function OrderGame({ language, records, onResult, onExit , config }: Game
         return {
             eu: `Oraindik ez. ${shown}Lehenik $${signedLatex(expected)}$ doa. ${penaltyText}`,
             es: `Todavía no. ${shown}Antes va el $${signedLatex(expected)}$. ${penaltyText}`,
+            en: `Not yet. ${shown}The $${signedLatex(expected)}$ goes first. ${penaltyText}`,
             ar: `ليس بعد. ${shown}قبله يأتي $${signedLatex(expected)}$. ‏${penaltyText.replace('s', 'ث')}`
         }
     }
@@ -128,7 +129,7 @@ export function OrderGame({ language, records, onResult, onExit , config }: Game
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span>{Math.min(roundIndex + 1, ORDER_ROUNDS)} / {ORDER_ROUNDS}</span>
                 <span>{formatTime(elapsed + penalty)}</span>
-                <span>{l({ eu: 'Akatsak', es: 'Fallos', ar: 'الأخطاء' })}: {mistakes}</span>
+                <span>{l({ eu: 'Akatsak', es: 'Fallos', en: 'Mistakes', ar: 'الأخطاء' })}: {mistakes}</span>
             </GameTopbar>
 
             {phase === 'playing' && round && (
@@ -136,11 +137,11 @@ export function OrderGame({ language, records, onResult, onExit , config }: Game
                     <p className="integers-order-direction" aria-live="polite">
                         <span aria-hidden="true" dir="ltr">{round.descending ? '← ' : ''}</span>
                         {round.descending
-                            ? l({ eu: 'Handienetik txikienera', es: 'De mayor a menor', ar: 'من الأكبر إلى الأصغر' })
-                            : l({ eu: 'Txikienetik handienera', es: 'De menor a mayor', ar: 'من الأصغر إلى الأكبر' })}
+                            ? l({ eu: 'Handienetik txikienera', es: 'De mayor a menor', en: 'Largest to smallest', ar: 'من الأكبر إلى الأصغر' })
+                            : l({ eu: 'Txikienetik handienera', es: 'De menor a mayor', en: 'Smallest to largest', ar: 'من الأصغر إلى الأكبر' })}
                         <span aria-hidden="true" dir="ltr">{round.descending ? '' : ' →'}</span>
                     </p>
-                    <div className="integers-order-row" dir="ltr" aria-label={l({ eu: 'Ordenatutakoak', es: 'Ya ordenadas', ar: 'المرتبة' })}>
+                    <div className="integers-order-row" dir="ltr" aria-label={l({ eu: 'Ordenatutakoak', es: 'Ya ordenadas', en: 'Already sorted', ar: 'المرتبة' })}>
                         {tapped.map((id) => {
                             const card = round.cards.find((item) => item.id === id)!
                             return <span className="integers-order-slot" key={id}>{signed(card.value)}</span>
@@ -178,11 +179,11 @@ export function OrderGame({ language, records, onResult, onExit , config }: Game
                 <ResultPanel
                     language={language}
                     stars={orderStars(level, elapsed + penalty, mistakes, levels)}
-                    title={l({ eu: 'Ilarak osatuta!', es: '¡Filas completas!', ar: 'اكتملت الصفوف!' })}
-                    subtitle={l({ eu: `3 izar: ${formatTime(par * 0.8)} baino gutxiago eta akats bat gehienez · 2 izar: ${formatTime(par)} baino gutxiago`, es: `3 estrellas: menos de ${formatTime(par * 0.8)} y como mucho un fallo · 2: menos de ${formatTime(par)}`, ar: `3 نجوم: أقل من ${formatTime(par * 0.8)} وخطأ واحد على الأكثر · 2: أقل من ${formatTime(par)}` })}
+                    title={l({ eu: 'Ilarak osatuta!', es: '¡Filas completas!', en: 'Rows complete!', ar: 'اكتملت الصفوف!' })}
+                    subtitle={l({ eu: `3 izar: ${formatTime(par * 0.8)} baino gutxiago eta akats bat gehienez · 2 izar: ${formatTime(par)} baino gutxiago`, es: `3 estrellas: menos de ${formatTime(par * 0.8)} y como mucho un fallo · 2: menos de ${formatTime(par)}`, en: `3 stars: under ${formatTime(par * 0.8)} and at most one mistake · 2: under ${formatTime(par)}`, ar: `3 نجوم: أقل من ${formatTime(par * 0.8)} وخطأ واحد على الأكثر · 2: أقل من ${formatTime(par)}` })}
                     stats={[
-                        { label: l({ eu: 'Denbora', es: 'Tiempo', ar: 'الوقت' }), value: formatTime(elapsed + penalty) },
-                        { label: l({ eu: 'Akatsak', es: 'Fallos', ar: 'الأخطاء' }), value: String(mistakes) }
+                        { label: l({ eu: 'Denbora', es: 'Tiempo', en: 'Time', ar: 'الوقت' }), value: formatTime(elapsed + penalty) },
+                        { label: l({ eu: 'Akatsak', es: 'Fallos', en: 'Mistakes', ar: 'الأخطاء' }), value: String(mistakes) }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}

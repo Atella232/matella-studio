@@ -12,8 +12,8 @@ const algebraRace: RaceRules<AlgebraRaceError> = {
     parTime: algebraParTime,
     errorTip: (error) => algebraRaceErrorTips[error ?? 'calculation'],
     pitPlaceholder: () => '−45',
-    pitUnreadable: { eu: 'Idatzi zenbaki oso bat.', es: 'Escribe un número entero.', ar: 'اكتب عددًا صحيحًا.' },
-    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', ar: 'اكتبه عددًا.' }
+    pitUnreadable: { eu: 'Idatzi zenbaki oso bat.', es: 'Escribe un número entero.', en: 'Write an integer.', ar: 'اكتب عددًا صحيحًا.' },
+    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', en: 'Write it as a number.', ar: 'اكتبه عددًا.' }
 }
 
 export function AlgebraRaceGame(props: GameProps) {

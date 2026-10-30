@@ -2,6 +2,7 @@ import type { LabChallenge, LabChallengeMaker } from '../../../features/unit-v2/
 import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
 import { MathText } from '../../../components/MathText'
 import { fraction, toExactDecimal, toNumber, type FractionValue } from '../math/fraction'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import {
     initialNumberLineState,
     moveNumberLinePoint,
@@ -64,7 +65,7 @@ export function NumberLineTool(props: ToolProps & { challenges?: LabChallenge<Nu
 
     const value: FractionValue = { numerator, denominator }
     const reduced = fraction(numerator, denominator)
-    const separator = props.language === 'ar' ? '.' : ','
+    const separator = props.language === 'ar' ? '.' : decimalSeparatorFor(props.language)
     const exactDecimal = toExactDecimal(value, separator)
     const decimal = exactDecimal ?? toNumber(value).toFixed(3).replace('.', separator)
     const lower = Math.floor(numerator / denominator)
@@ -123,9 +124,9 @@ export function NumberLineTool(props: ToolProps & { challenges?: LabChallenge<Nu
 
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Tartea', es: 'Tramo', ar: 'المجال' })} value={state.range} options={rangeOptions} onChange={(next) => setState((current) => setNumberLineRange(current, next))} />
+            <Segmented label={l({ eu: 'Tartea', es: 'Tramo', en: 'Range', ar: 'المجال' })} value={state.range} options={rangeOptions} onChange={(next) => setState((current) => setNumberLineRange(current, next))} />
             <Stepper
-                label={l({ eu: 'Jauziak unitateko', es: 'Saltos por unidad', ar: 'القفزات في كل وحدة' })}
+                label={l({ eu: 'Jauziak unitateko', es: 'Saltos por unidad', en: 'Jumps per unit', ar: 'القفزات في كل وحدة' })}
                 value={denominator}
                 min={NUMBER_LINE_LIMITS.minDenominator}
                 max={NUMBER_LINE_LIMITS.maxDenominator}
@@ -133,14 +134,14 @@ export function NumberLineTool(props: ToolProps & { challenges?: LabChallenge<Nu
                 language={props.language}
             />
             <Stepper
-                label={l({ eu: 'Jauziak 0tik', es: 'Saltos desde el 0', ar: 'القفزات من 0' })}
+                label={l({ eu: 'Jauziak 0tik', es: 'Saltos desde el 0', en: 'Jumps from 0', ar: 'القفزات من 0' })}
                 value={numerator}
                 min={minStep}
                 max={maxStep}
                 onChange={(next) => setState((current) => moveNumberLinePoint(current, next))}
                 language={props.language}
             />
-            <p className="fraction-v2-lab-tip">{l({ eu: 'Arrastatu puntua edo erabili teklatuko geziak.', es: 'Arrastra el punto o usa las flechas del teclado.', ar: 'اسحب النقطة أو استعمل أسهم لوحة المفاتيح.' })}</p>
+            <p className="fraction-v2-lab-tip">{l({ eu: 'Arrastatu puntua edo erabili teklatuko geziak.', es: 'Arrastra el punto o usa las flechas del teclado.', en: 'Drag the point or use the arrow keys on the keyboard.', ar: 'اسحب النقطة أو استعمل أسهم لوحة المفاتيح.' })}</p>
         </>
     )
 
@@ -169,8 +170,8 @@ export function NumberLineTool(props: ToolProps & { challenges?: LabChallenge<Nu
             </span>
             <span className="fraction-v2-lab-readout-note">
                 {isWhole
-                    ? l({ eu: 'Zenbaki osoa da.', es: 'Es un número entero.', ar: 'إنه عدد صحيح.' })
-                    : l({ eu: `${lower} eta ${lower + 1} artean dago.`, es: `Está entre ${lower} y ${lower + 1}.`, ar: `يقع بين ${lower} و${lower + 1}.` })}
+                    ? l({ eu: 'Zenbaki osoa da.', es: 'Es un número entero.', en: 'It is an integer.', ar: 'إنه عدد صحيح.' })
+                    : l({ eu: `${lower} eta ${lower + 1} artean dago.`, es: `Está entre ${lower} y ${lower + 1}.`, en: `It is between ${lower} and ${lower + 1}.`, ar: `يقع بين ${lower} و${lower + 1}.` })}
             </span>
         </>
     )
@@ -241,7 +242,7 @@ export function NumberLineTool(props: ToolProps & { challenges?: LabChallenge<Nu
                         style={{ left: `${point}%` }}
                         role="slider"
                         tabIndex={0}
-                        aria-label={l({ eu: 'Zuzeneko puntua', es: 'Punto en la recta', ar: 'النقطة على خط الأعداد' })}
+                        aria-label={l({ eu: 'Zuzeneko puntua', es: 'Punto en la recta', en: 'Point on the number line', ar: 'النقطة على خط الأعداد' })}
                         aria-valuemin={minStep}
                         aria-valuemax={maxStep}
                         aria-valuenow={numerator}

@@ -261,6 +261,7 @@ const presetLatex = (preset: number) => expressionLatex(parseTokens(EXPRESSION_P
 const calculate = (preset: number): LocalizedText => ({
     eu: `Kalkulatu $${presetLatex(preset)}$ urratsez urrats, akatsik gabe.`,
     es: `Calcula $${presetLatex(preset)}$ paso a paso, sin ningún error.`,
+    en: `Calculate $${presetLatex(preset)}$ step by step, without any mistakes.`,
     ar: `احسب $${presetLatex(preset)}$ خطوة بخطوة من دون أي خطأ.`
 })
 
@@ -270,25 +271,25 @@ export const expressionChallenges: LabChallenge<ExpressionState>[] = [
     {
         id: 1601,
         prompt: calculate(0),
-        hint: { eu: '1. adierazpena da. Biderketa batuketaren aurretik egiten da.', es: 'Es la expresión 1. La multiplicación se hace antes que la suma.', ar: 'إنها العبارة 1. الضرب يسبق الجمع.' },
+        hint: { eu: '1. adierazpena da. Biderketa batuketaren aurretik egiten da.', es: 'Es la expresión 1. La multiplicación se hace antes que la suma.', en: 'This is expression 1. Multiplication is done before addition.', ar: 'إنها العبارة 1. الضرب يسبق الجمع.' },
         isSolved: (state) => cleanRun(state, 0)
     },
     {
         id: 1602,
         prompt: calculate(1),
-        hint: { eu: '2. adierazpena da. Batuketak eta kenketak ezkerretik eskuinera egiten dira.', es: 'Es la expresión 2. Las sumas y las restas se hacen de izquierda a derecha.', ar: 'إنها العبارة 2. الجمع والطرح من اليسار إلى اليمين.' },
+        hint: { eu: '2. adierazpena da. Batuketak eta kenketak ezkerretik eskuinera egiten dira.', es: 'Es la expresión 2. Las sumas y las restas se hacen de izquierda a derecha.', en: 'This is expression 2. Additions and subtractions are done from left to right.', ar: 'إنها العبارة 2. الجمع والطرح من اليسار إلى اليمين.' },
         isSolved: (state) => cleanRun(state, 1)
     },
     {
         id: 1603,
         prompt: calculate(3),
-        hint: { eu: '4. adierazpena da. Lehenik parentesia eta berretura; gero biderketa; azkenik batuketa.', es: 'Es la expresión 4. Primero el paréntesis y la potencia; después el producto; al final la suma.', ar: 'إنها العبارة 4. أولًا القوسان والقوة، ثم الضرب، وأخيرًا الجمع.' },
+        hint: { eu: '4. adierazpena da. Lehenik parentesia eta berretura; gero biderketa; azkenik batuketa.', es: 'Es la expresión 4. Primero el paréntesis y la potencia; después el producto; al final la suma.', en: 'This is expression 4. First the brackets and the power; then the multiplication; finally the addition.', ar: 'إنها العبارة 4. أولًا القوسان والقوة، ثم الضرب، وأخيرًا الجمع.' },
         isSolved: (state) => cleanRun(state, 3)
     },
     {
         id: 1604,
         prompt: calculate(6),
-        hint: { eu: '7. adierazpena da. Berretzaile bakoitiak zeinu negatiboa mantentzen du; gero zatiketa eta azkenik kenketa.', es: 'Es la expresión 7. Un exponente impar mantiene el signo negativo; después la división y al final la resta.', ar: 'إنها العبارة 7. الأس الفردي يُبقي الإشارة السالبة، ثم القسمة، وأخيرًا الطرح.' },
+        hint: { eu: '7. adierazpena da. Berretzaile bakoitiak zeinu negatiboa mantentzen du; gero zatiketa eta azkenik kenketa.', es: 'Es la expresión 7. Un exponente impar mantiene el signo negativo; después la división y al final la resta.', en: 'This is expression 7. An odd exponent keeps the negative sign; then the division; finally the subtraction.', ar: 'إنها العبارة 7. الأس الفردي يُبقي الإشارة السالبة، ثم القسمة، وأخيرًا الطرح.' },
         isSolved: (state) => cleanRun(state, 6)
     }
 ]

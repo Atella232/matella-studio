@@ -35,7 +35,7 @@ export function PowersLaboratory(props: {
             tools={powersLabTools}
             stages={powersStages}
             components={toolComponents}
-            title={{ eu: 'Fitxak, karratuak eta espiralak', es: 'Fichas, cuadrados y espirales', ar: 'رقاقات ومربعات وحلزونات' }}
+            title={{ eu: 'Fitxak, karratuak eta espiralak', es: 'Fichas, cuadrados y espirales', en: 'Cards, squares and spirals', ar: 'رقاقات ومربعات وحلزونات' }}
         />
     )
 }

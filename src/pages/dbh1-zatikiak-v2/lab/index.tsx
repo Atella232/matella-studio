@@ -53,7 +53,7 @@ export function FractionsIntroLaboratory(props: {
             tools={fractionsIntroLabTools}
             stages={fractionsIntroStages}
             components={toolComponents}
-            title={{ eu: 'Ikusi balioa, ez soilik ikurra', es: 'Observa el valor, no solo el símbolo', ar: 'شاهد القيمة لا الرمز فقط' }}
+            title={{ eu: 'Ikusi balioa, ez soilik ikurra', es: 'Observa el valor, no solo el símbolo', en: 'Look at the value, not just the symbol', ar: 'شاهد القيمة لا الرمز فقط' }}
         />
     )
 }

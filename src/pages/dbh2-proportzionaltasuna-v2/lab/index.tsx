@@ -33,7 +33,7 @@ export function ProportionDbh2Laboratory(props: {
             tools={proportionDbh2LabTools}
             stages={proportionDbh2Stages}
             components={toolComponents}
-            title={{ eu: 'Zuzena, alderantzizkoa ala biak?', es: '¿Directa, inversa o las dos?', ar: 'طردي أم عكسي أم كلاهما؟' }}
+            title={{ eu: 'Zuzena, alderantzizkoa ala biak?', es: '¿Directa, inversa o las dos?', en: 'Direct, inverse or both?', ar: 'طردي أم عكسي أم كلاهما؟' }}
         />
     )
 }

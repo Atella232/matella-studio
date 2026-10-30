@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
@@ -55,7 +56,7 @@ test('funtzioak 4. DBH ak lab: tools, topics and challenge ids', () => {
         assert.ok(stages.includes(tool.stage), tool.id)
         assert.ok(topics.includes(tool.lessonTopic), tool.id)
         assert.ok(!tool.observe.es.includes('$'), tool.id)
-        for (const language of ['eu', 'es', 'ar'] as const) assert.ok(tool.title[language] && tool.observe[language], `${tool.id} ${language}`)
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) assert.ok(tool.title[language] && tool.observe[language], `${tool.id} ${language}`)
     }
     for (const stage of stages) assert.ok(functionsAkLabTools.some((tool) => tool.stage === stage), stage)
     for (const topic of topics) assert.ok(functionsAkLabTools.some((tool) => tool.id === functionsAkLabToolForTopic[topic]), topic)
@@ -67,7 +68,7 @@ test('funtzioak 4. DBH ak lab: tools, topics and challenge ids', () => {
         for (const challenge of challenges) {
             assert.ok(challenge.id >= 75000 && challenge.id < 76000, `${challenge.id}`)
             assert.ok(!challenge.prompt.ar.includes('{,}') && !challenge.hint.ar.includes('{,}'), `${challenge.id}`)
-            for (const language of ['eu', 'es', 'ar']) for (const text of [challenge.prompt[language], challenge.hint[language]]) for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formula, { throwOnError: true })
+            for (const language of ['eu', 'es', 'en', 'ar']) for (const text of [challenge.prompt[language], challenge.hint[language]]) for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formulaFor(language, formula), { throwOnError: true })
         }
     }
 })

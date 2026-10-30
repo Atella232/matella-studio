@@ -119,7 +119,7 @@ export function integerCardLatex(card: IntegerCard, language: UnitLanguage): str
     switch (card.kind) {
         case 'value': return signed(card.value)
         case 'absolute': return `\\lvert ${signed(first)}\\rvert`
-        case 'opposite': return `\\mathrm{${language === 'es' ? 'Op' : 'Aur'}}(${signed(first)})`
+        case 'opposite': return `\\mathrm{${language === 'es' || language === 'en' ? 'Op' : 'Aur'}}(${signed(first)})`
         case 'add': return `${bracket(first)}+${bracket(second)}`
         case 'subtract': return `${bracket(first)}-${bracket(second)}`
         case 'multiply': return `${bracket(first)}\\cdot${bracket(second)}`

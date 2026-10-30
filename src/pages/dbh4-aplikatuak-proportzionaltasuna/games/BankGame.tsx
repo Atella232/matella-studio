@@ -69,21 +69,22 @@ export function ProportionDbh4ApBankGame({ language, records, onResult, onExit }
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${record.score} / ${BANK_ROUNDS}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${record.score} / ${BANK_ROUNDS}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: 'Kapital bera eta urte berak: aukeratu diru gehien ematen duen eskaintza.', es: 'El mismo capital y los mismos años: elige la oferta que más dinero da.', ar: 'رأس المال نفسه والسنوات نفسها: اختر العرض الذي يعطي مالًا أكثر.' })}</li>
+                        <li>{l({ eu: 'Kapital bera eta urte berak: aukeratu diru gehien ematen duen eskaintza.', es: 'El mismo capital y los mismos años: elige la oferta que más dinero da.', en: 'The same principal and the same years: choose the offer that gives the most money.', ar: 'رأس المال نفسه والسنوات نفسها: اختر العرض الذي يعطي مالًا أكثر.' })}</li>
                         <li>
                             <MathText
                                 inline
                                 text={l({
                                     eu: 'Kalkulatu: bakuna, $C\\cdot(1+r\\cdot t)$; konposatua, $C\\cdot(1+r)^{t}$; hilean behin, $\\frac{r}{12}$ eta $12t$ aldi.',
                                     es: 'Calcula: simple, $C\\cdot(1+r\\cdot t)$; compuesto, $C\\cdot(1+r)^{t}$; cada mes, $\\frac{r}{12}$ y $12t$ periodos.',
+                                    en: 'Calculate: simple, $C\\cdot(1+r\\cdot t)$; compound, $C\\cdot(1+r)^{t}$; each month, $\\frac{r}{12}$ and $12t$ periods.',
                                     ar: 'احسب: البسيطة $C\\cdot(1+r\\cdot t)$، والمركّبة $C\\cdot(1+r)^{t}$، وكل شهر $\\frac{r}{12}$ و$12t$ فترة.'
                                 })}
                             />
                         </li>
-                        <li>{l({ eu: `${BANK_ROUNDS} txanda; puntu 1 asmatutako bakoitzeko.`, es: `${BANK_ROUNDS} rondas; 1 punto por cada acierto.`, ar: `${BANK_ROUNDS} جولات؛ نقطة لكل اختيار صحيح.` })}</li>
+                        <li>{l({ eu: `${BANK_ROUNDS} txanda; puntu 1 asmatutako bakoitzeko.`, es: `${BANK_ROUNDS} rondas; 1 punto por cada acierto.`, en: `${BANK_ROUNDS} rounds; 1 point for each correct answer.`, ar: `${BANK_ROUNDS} جولات؛ نقطة لكل اختيار صحيح.` })}</li>
                     </ul>
                 )}
             />
@@ -98,10 +99,10 @@ export function ProportionDbh4ApBankGame({ language, records, onResult, onExit }
                     language={language}
                     stars={bankStars(score)}
                     title={`${score} / ${BANK_ROUNDS}`}
-                    subtitle={l({ eu: '3 izar: 6 · 2 izar: 5 · izar 1: 4', es: '3 estrellas: 6 · 2: 5 · 1: 4', ar: '3 نجوم: 6 · 2: 5 · 1: 4' })}
+                    subtitle={l({ eu: '3 izar: 6 · 2 izar: 5 · izar 1: 4', es: '3 estrellas: 6 · 2: 5 · 1: 4', en: '3 stars: 6 · 2: 5 · 1: 4', ar: '3 نجوم: 6 · 2: 5 · 1: 4' })}
                     stats={[
-                        { label: l({ eu: 'Asmatutakoak', es: 'Aciertos', ar: 'الاختيارات الصحيحة' }), value: `${score} / ${BANK_ROUNDS}` },
-                        { label: l({ eu: 'Bankuan utzitako dirua', es: 'Dinero que dejaste en el banco', ar: 'المال الذي تركته في المصرف' }), value: euros(lost) }
+                        { label: l({ eu: 'Asmatutakoak', es: 'Aciertos', en: 'Correct answers', ar: 'الاختيارات الصحيحة' }), value: `${score} / ${BANK_ROUNDS}` },
+                        { label: l({ eu: 'Bankuan utzitako dirua', es: 'Dinero que dejaste en el banco', en: 'Money you left in the bank', ar: 'المال الذي تركته في المصرف' }), value: euros(lost) }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}
@@ -124,7 +125,7 @@ export function ProportionDbh4ApBankGame({ language, records, onResult, onExit }
         <div className="bank-game" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span>{index + 1} / {BANK_ROUNDS}</span>
-                <span><strong>{score}</strong> {l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}</span>
+                <span><strong>{score}</strong> {l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}</span>
             </GameTopbar>
 
             <p className="bank-prompt"><MathText text={l(bankPrompt(round))} inline /></p>
@@ -155,8 +156,8 @@ export function ProportionDbh4ApBankGame({ language, records, onResult, onExit }
 
             {revealed && (
                 <>
-                    <section className="bank-bars" aria-label={l({ eu: 'Interesak', es: 'Intereses', ar: 'الفوائد' })}>
-                        <h3><MathText text={l({ eu: `Interesak ${years} urtean`, es: `Intereses en ${years} años`, ar: `الفوائد في ${years} سنوات` })} inline /></h3>
+                    <section className="bank-bars" aria-label={l({ eu: 'Interesak', es: 'Intereses', en: 'Interest', ar: 'الفوائد' })}>
+                        <h3><MathText text={l({ eu: `Interesak ${years} urtean`, es: `Intereses en ${years} años`, en: `Interest in ${years} years`, ar: `الفوائد في ${years} سنوات` })} inline /></h3>
                         {round.offers.map((_, position) => (
                             <div key={position} className={`bank-bar-row ${position === round.best ? 'best' : ''}`} data-color={COLORS[position]}>
                                 <span className="bank-bar-name">{l(BANK_LETTERS[position])}</span>
@@ -172,17 +173,19 @@ export function ProportionDbh4ApBankGame({ language, records, onResult, onExit }
                             ? l({
                                 eu: `Ondo aukeratuta! ${BANK_LETTERS[round.best].eu} bankua da onena: hurrengoak baino ${euros(finals[round.best] - second)} gehiago ematen ditu.`,
                                 es: `¡Bien elegido! El ${bankName(round.best).es} da ${euros(finals[round.best] - second)} más que la siguiente oferta.`,
+                                en: `Well chosen! ${bankName(round.best).en} gives ${euros(finals[round.best] - second)} more than the next offer.`,
                                 ar: `أحسنت الاختيار! ${bankName(round.best).ar} يعطي ${euros(finals[round.best] - second)} أكثر من العرض التالي.`
                             })
                             : l({
                                 eu: `Ez: ${BANK_LETTERS[round.best].eu} bankua zen onena; zuk aukeratutakoak baino ${euros(finals[round.best] - finals[chosen])} gehiago ematen zituen.`,
                                 es: `No: el mejor era el ${bankName(round.best).es}, que daba ${euros(finals[round.best] - finals[chosen])} más que el que elegiste.`,
+                                en: `No: the best was ${bankName(round.best).en}, which gave ${euros(finals[round.best] - finals[chosen])} more than the one you chose.`,
                                 ar: `لا: الأفضل كان ${bankName(round.best).ar}، ويعطي ${euros(finals[round.best] - finals[chosen])} أكثر من الذي اخترته.`
                             })}
                     </p>
                     <p className="bank-lesson"><MathText text={l(bankLesson(round))} inline /></p>
                     <button type="button" className="fraction-v2-primary bank-next" onClick={next} ref={(node) => node?.focus({ preventScroll: true })}>
-                        {index + 1 >= BANK_ROUNDS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', ar: 'التالي' })}
+                        {index + 1 >= BANK_ROUNDS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', en: 'See the result', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', en: 'Next', ar: 'التالي' })}
                     </button>
                 </>
             )}

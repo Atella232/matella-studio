@@ -8,8 +8,8 @@ export function NaturalAnswer(props: Omit<ComponentProps<typeof ResultAnswer>, '
         <ResultAnswer
             {...props}
             normalizeInput={readNaturalAnswer}
-            placeholder={{ eu: 'Adib.: 15.000', es: 'Ej.: 15.000', ar: 'مثال: 15.000' }}
-            unreadable={{ eu: 'Idatzi zenbaki natural bat, adibidez 15.000.', es: 'Escribe un número natural, por ejemplo 15.000.', ar: 'اكتب عددًا طبيعيًا، مثل 15.000.' }}
+            placeholder={{ eu: 'Adib.: 15.000', es: 'Ej.: 15.000', en: 'e.g. 15,000', ar: 'مثال: 15.000' }}
+            unreadable={{ eu: 'Idatzi zenbaki natural bat, adibidez 15.000.', es: 'Escribe un número natural, por ejemplo 15.000.', en: 'Write a natural number, for example 15,000.', ar: 'اكتب عددًا طبيعيًا، مثل 15.000.' }}
         />
     )
 }

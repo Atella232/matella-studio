@@ -23,10 +23,11 @@ export const naturalsLabTools: NaturalsLabTool[] = [
         id: 'abacus',
         stage: 'numbering',
         lessonTopic: 'place-value',
-        title: { eu: 'Posizio-taula', es: 'Tabla de posiciones', ar: 'جدول المراتب' },
+        title: { eu: 'Posizio-taula', es: 'Tabla de posiciones', en: 'Place-value table', ar: 'جدول المراتب' },
         observe: {
             eu: 'Zutabe bakoitzak eskuinekoak baino 10 aldiz gehiago balio du. Zutabe bat 9tik pasatzen denean, 10 unitate hurrengo zutabeko unitate 1 bihurtzen dira.',
             es: 'Cada columna vale 10 veces más que la de su derecha. Cuando una columna pasa de 9, 10 unidades se cambian por 1 unidad de la columna siguiente.',
+            en: 'Each column is worth 10 times more than the one on its right. When a column goes past 9, 10 units are swapped for 1 unit of the next column.',
             ar: 'كل عمود يساوي 10 أضعاف العمود الذي على يمينه. وعندما يتجاوز عمود الرقم 9 تُستبدل 10 وحدات بوحدة واحدة من العمود التالي.'
         }
     },
@@ -34,10 +35,11 @@ export const naturalsLabTools: NaturalsLabTool[] = [
         id: 'line',
         stage: 'numbering',
         lessonTopic: 'order',
-        title: { eu: 'Zuzeneko saltoak', es: 'Saltos en la recta', ar: 'القفزات على المستقيم' },
+        title: { eu: 'Zuzeneko saltoak', es: 'Saltos en la recta', en: 'Jumps on the number line', ar: 'القفزات على المستقيم' },
         observe: {
             eu: 'Salto guztiak berdinak dira: bi muturren arteko distantzia zati salto kopurua. Marka bakoitza aurrekoa gehi salto bat da.',
             es: 'Todos los saltos son iguales: la distancia entre los extremos entre el número de saltos. Cada marca es la anterior más un salto.',
+            en: 'All the jumps are equal: the distance between the ends divided by the number of jumps. Each mark is the previous one plus one jump.',
             ar: 'كل القفزات متساوية: المسافة بين الطرفين مقسومة على عدد القفزات. وكل علامة هي السابقة زائد قفزة.'
         }
     },
@@ -45,10 +47,11 @@ export const naturalsLabTools: NaturalsLabTool[] = [
         id: 'roman',
         stage: 'numbering',
         lessonTopic: 'roman',
-        title: { eu: 'Erromatar zenbakiak idazten', es: 'Escribir números romanos', ar: 'كتابة الأرقام الرومانية' },
+        title: { eu: 'Erromatar zenbakiak idazten', es: 'Escribir números romanos', en: 'Writing Roman numerals', ar: 'كتابة الأرقام الرومانية' },
         observe: {
             eu: 'Ikurrak ezkerretik eskuinera irakurtzen dira eta batu egiten dira; txiki bat handiago baten aurretik badago, kendu egiten da. Ikur bera ezin da lau aldiz jarraian idatzi.',
             es: 'Los símbolos se leen de izquierda a derecha y se suman; si uno pequeño va delante de uno mayor, se resta. El mismo símbolo no puede ir cuatro veces seguidas.',
+            en: 'The symbols are read from left to right and added together; if a smaller one comes before a larger one, it is subtracted. The same symbol cannot appear four times in a row.',
             ar: 'تُقرأ الرموز من اليسار إلى اليمين وتُجمع؛ وإذا جاء رمز صغير قبل رمز أكبر يُطرح. ولا يتكرر الرمز نفسه أربع مرات متتالية.'
         }
     },
@@ -56,10 +59,11 @@ export const naturalsLabTools: NaturalsLabTool[] = [
         id: 'rounding',
         stage: 'rounding',
         lessonTopic: 'rounding',
-        title: { eu: 'Biribiltze-zuzena', es: 'La recta del redondeo', ar: 'مستقيم التقريب' },
+        title: { eu: 'Biribiltze-zuzena', es: 'La recta del redondeo', en: 'The number line for rounding', ar: 'مستقيم التقريب' },
         observe: {
             eu: 'Zenbakia bi zenbaki biribilen artean dago. Erdia gainditzen badu (edo erdian badago), handienera doa; bestela, txikienera.',
             es: 'El número está entre dos números redondos. Si pasa de la mitad (o está justo en ella), va al mayor; si no, al menor.',
+            en: 'The number lies between two round numbers. If it is past the halfway point (or exactly on it), it goes to the larger one; if not, to the smaller one.',
             ar: 'يقع العدد بين عددين مدوَّرين. إذا تجاوز المنتصف (أو كان عليه تمامًا) يذهب إلى الأكبر، وإلا فإلى الأصغر.'
         }
     },
@@ -67,10 +71,11 @@ export const naturalsLabTools: NaturalsLabTool[] = [
         id: 'distributive',
         stage: 'operations',
         lessonTopic: 'multiply',
-        title: { eu: 'Laukizuzena zatitzen', es: 'Partir el rectángulo', ar: 'تقسيم المستطيل' },
+        title: { eu: 'Laukizuzena zatitzen', es: 'Partir el rectángulo', en: 'Split the rectangle', ar: 'تقسيم المستطيل' },
         observe: {
             eu: 'Laukizuzen osoa bi zatitan banatzean, karratu kopurua ez da aldatzen: a · (b + c) = a · b + a · c. Hori da 9z edo 11z buruz biderkatzeko trikimailua.',
             es: 'Al partir el rectángulo en dos trozos, el número de cuadrados no cambia: a · (b + c) = a · b + a · c. Es el truco para multiplicar mentalmente.',
+            en: 'When you split the rectangle into two pieces, the number of squares does not change: a · (b + c) = a · b + a · c. It is the trick for multiplying in your head.',
             ar: 'عند تقسيم المستطيل إلى جزأين لا يتغير عدد المربعات: a · (b + c) = a · b + a · c. هذه حيلة الضرب الذهني.'
         }
     },
@@ -78,10 +83,11 @@ export const naturalsLabTools: NaturalsLabTool[] = [
         id: 'division',
         stage: 'operations',
         lessonTopic: 'divide',
-        title: { eu: 'Banaketak', es: 'Repartos', ar: 'التوزيع' },
+        title: { eu: 'Banaketak', es: 'Repartos', en: 'Sharing out', ar: 'التوزيع' },
         observe: {
             eu: 'Fitxak zatitzailearen tamainako taldetan jartzen dira. Talde osoak zatidura dira, eta soberan geratzen direnak hondarra, beti zatitzailea baino gutxiago.',
             es: 'Las fichas se colocan en grupos del tamaño del divisor. Los grupos completos son el cociente y las que sobran, el resto, siempre menos que el divisor.',
+            en: 'The counters are placed in groups the same size as the divisor. The complete groups are the quotient, and the ones left over are the remainder, which is always less than the divisor.',
             ar: 'تُرتّب القطع في مجموعات بحجم المقسوم عليه. المجموعات الكاملة هي خارج القسمة، وما يبقى هو الباقي، وهو دائمًا أقل من المقسوم عليه.'
         }
     },
@@ -89,10 +95,11 @@ export const naturalsLabTools: NaturalsLabTool[] = [
         id: 'semaphore',
         stage: 'combined',
         lessonTopic: 'hierarchy',
-        title: { eu: 'Semaforoa', es: 'El semáforo', ar: 'إشارة المرور' },
+        title: { eu: 'Semaforoa', es: 'El semáforo', en: 'The traffic light', ar: 'إشارة المرور' },
         observe: {
             eu: 'Gorria (parentesiak) lehenik, gero horia (· eta :) eta azkenik berdea (+ eta −). Maila bereko eragiketak ezkerretik eskuinera egiten dira.',
             es: 'Primero el rojo (paréntesis), luego el amarillo (· y :) y al final el verde (+ y −). Las operaciones del mismo nivel, de izquierda a derecha.',
+            en: 'First the red (round brackets), then the yellow (· and :), and finally the green (+ and −). Operations at the same level are done from left to right.',
             ar: 'الأحمر (الأقواس) أولًا، ثم الأصفر (· و:) وأخيرًا الأخضر (+ و−). والعمليات من المستوى نفسه من اليسار إلى اليمين.'
         }
     },
@@ -100,10 +107,11 @@ export const naturalsLabTools: NaturalsLabTool[] = [
         id: 'powers',
         stage: 'powers',
         lessonTopic: 'powers',
-        title: { eu: 'Berretura-makina', es: 'La máquina de potencias', ar: 'آلة القوى' },
+        title: { eu: 'Berretura-makina', es: 'La máquina de potencias', en: 'The power machine', ar: 'آلة القوى' },
         observe: {
             eu: 'Berretzailea 1 handitzean, emaitza oinarriarekin biderkatzen da. Oinarria 10 denean, berretzaileak zero kopurua ematen du.',
             es: 'Al subir el exponente en 1, el resultado se multiplica por la base. Con base 10, el exponente da el número de ceros.',
+            en: 'When you increase the exponent by 1, the result is multiplied by the base. With base 10, the exponent gives the number of zeros.',
             ar: 'عند زيادة الأس بواحد تُضرب النتيجة في الأساس. وعندما يكون الأساس 10 يعطي الأس عدد الأصفار.'
         }
     }
@@ -165,26 +173,26 @@ export const setAbacus = (value: number): AbacusState => ({ value: clamp(value, 
 export const abacusChallenges: LabChallenge<AbacusState>[] = [
     {
         id: 2101,
-        prompt: { eu: 'Osatu 40.001 zenbakia taulan.', es: 'Forma el número 40.001 en la tabla.', ar: 'كوّن العدد 40.001 في الجدول.' },
-        hint: { eu: '4 hamar milakoetan eta 1 unitateetan; beste guztiak 0.', es: 'Un 4 en las decenas de millar y un 1 en las unidades; el resto, 0.', ar: '4 في عشرات الآلاف و1 في الآحاد؛ والباقي 0.' },
+        prompt: { eu: 'Osatu 40.001 zenbakia taulan.', es: 'Forma el número 40.001 en la tabla.', en: 'Build the number 40,001 in the table.', ar: 'كوّن العدد 40.001 في الجدول.' },
+        hint: { eu: '4 hamar milakoetan eta 1 unitateetan; beste guztiak 0.', es: 'Un 4 en las decenas de millar y un 1 en las unidades; el resto, 0.', en: 'A 4 in the ten thousands and a 1 in the units; the rest, 0.', ar: '4 في عشرات الآلاف و1 في الآحاد؛ والباقي 0.' },
         isSolved: (state) => state.value === 40001
     },
     {
         id: 2102,
-        prompt: { eu: 'Osatu zenbaki bat non 7 zifrak 70.000 balio duen.', es: 'Forma un número en el que la cifra 7 valga 70.000.', ar: 'كوّن عددًا تكون فيه قيمة الرقم 7 هي 70.000.' },
-        hint: { eu: '70.000 = 7 hamar milako.', es: '70.000 = 7 decenas de millar.', ar: '70.000 = 7 عشرات آلاف.' },
+        prompt: { eu: 'Osatu zenbaki bat non 7 zifrak 70.000 balio duen.', es: 'Forma un número en el que la cifra 7 valga 70.000.', en: 'Build a number in which the digit 7 is worth 70,000.', ar: 'كوّن عددًا تكون فيه قيمة الرقم 7 هي 70.000.' },
+        hint: { eu: '70.000 = 7 hamar milako.', es: '70.000 = 7 decenas de millar.', en: '70,000 = 7 ten thousands.', ar: '70.000 = 7 عشرات آلاف.' },
         isSolved: (state) => abacusDigits(state.value)[PLACES - 5] === 7
     },
     {
         id: 2103,
-        prompt: { eu: 'Osatu bost zifrako zenbakirik handiena, zifren batura 5 izanik.', es: 'Forma el mayor número de cinco cifras cuyas cifras sumen 5.', ar: 'كوّن أكبر عدد من خمسة أرقام مجموع أرقامه 5.' },
-        hint: { eu: 'Zifra handiena ezkerrean jarri behar da.', es: 'La cifra grande tiene que ir lo más a la izquierda posible.', ar: 'يجب وضع الرقم الكبير أقصى اليسار.' },
+        prompt: { eu: 'Osatu bost zifrako zenbakirik handiena, zifren batura 5 izanik.', es: 'Forma el mayor número de cinco cifras cuyas cifras sumen 5.', en: 'Build the largest five-digit number whose digits add up to 5.', ar: 'كوّن أكبر عدد من خمسة أرقام مجموع أرقامه 5.' },
+        hint: { eu: 'Zifra handiena ezkerrean jarri behar da.', es: 'La cifra grande tiene que ir lo más a la izquierda posible.', en: 'The largest digit has to go as far to the left as possible.', ar: 'يجب وضع الرقم الكبير أقصى اليسار.' },
         isSolved: (state) => state.value === 50000
     },
     {
         id: 2104,
-        prompt: { eu: 'Osatu 99.999 eta gehitu unitate bat unitateen ▲ botoiarekin. Zer gertatzen da?', es: 'Forma 99.999 y suma una unidad con el ▲ de las unidades. ¿Qué pasa?', ar: 'كوّن 99.999 وأضف وحدة بزر ▲ في الآحاد. ماذا يحدث؟' },
-        hint: { eu: 'Lehenik 9 bat zutabe bakoitzean, bosgarrenetik unitateetara.', es: 'Primero un 9 en cada columna, de las decenas de millar a las unidades.', ar: 'أولًا 9 في كل عمود، من عشرات الآلاف إلى الآحاد.' },
+        prompt: { eu: 'Osatu 99.999 eta gehitu unitate bat unitateen ▲ botoiarekin. Zer gertatzen da?', es: 'Forma 99.999 y suma una unidad con el ▲ de las unidades. ¿Qué pasa?', en: 'Build 99,999 and add one unit with the ▲ in the units column. What happens?', ar: 'كوّن 99.999 وأضف وحدة بزر ▲ في الآحاد. ماذا يحدث؟' },
+        hint: { eu: 'Lehenik 9 bat zutabe bakoitzean, bosgarrenetik unitateetara.', es: 'Primero un 9 en cada columna, de las decenas de millar a las unidades.', en: 'First a 9 in each column, from the ten thousands to the units.', ar: 'أولًا 9 في كل عمود، من عشرات الآلاف إلى الآحاد.' },
         isSolved: (state) => state.value === 100000 && state.lastPlace === 0
     }
 ]
@@ -227,26 +235,26 @@ const lineIs = (state: LineState, from: number, to: number, parts: number) => st
 export const lineChallenges: LabChallenge<LineState>[] = [
     {
         id: 2201,
-        prompt: { eu: '430etik 830era 4 salto: zein zenbaki dago 3. markan? Idatzi.', es: 'De 430 a 830 en 4 saltos: ¿qué número hay en la 3.ª marca? Escríbelo.', ar: 'من 430 إلى 830 في 4 قفزات: ما العدد عند العلامة الثالثة؟ اكتبه.' },
-        hint: { eu: '(830 − 430) : 4 = 100. Hiru salto 430etik.', es: '(830 − 430) : 4 = 100. Tres saltos desde 430.', ar: '(830 − 430) : 4 = 100. ثلاث قفزات من 430.' },
+        prompt: { eu: '430etik 830era 4 salto: zein zenbaki dago 3. markan? Idatzi.', es: 'De 430 a 830 en 4 saltos: ¿qué número hay en la 3.ª marca? Escríbelo.', en: 'From 430 to 830 in 4 jumps: what number is on the 3rd mark? Write it down.', ar: 'من 430 إلى 830 في 4 قفزات: ما العدد عند العلامة الثالثة؟ اكتبه.' },
+        hint: { eu: '(830 − 430) : 4 = 100. Hiru salto 430etik.', es: '(830 − 430) : 4 = 100. Tres saltos desde 430.', en: '(830 − 430) : 4 = 100. Three jumps from 430.', ar: '(830 − 430) : 4 = 100. ثلاث قفزات من 430.' },
         isSolved: (state) => lineIs(state, 430, 830, 4) && state.mark === 3 && answered(state, 730)
     },
     {
         id: 2202,
-        prompt: { eu: '5.000tik 6.000ra 4 zatitan: zein zenbaki dago lehen markan? Idatzi.', es: 'De 5.000 a 6.000 en 4 partes: ¿qué número hay en la primera marca? Escríbelo.', ar: 'من 5.000 إلى 6.000 في 4 أجزاء: ما العدد عند العلامة الأولى؟ اكتبه.' },
-        hint: { eu: '1.000 : 4 = 250.', es: '1.000 : 4 = 250.', ar: '1.000 : 4 = 250.' },
+        prompt: { eu: '5.000tik 6.000ra 4 zatitan: zein zenbaki dago lehen markan? Idatzi.', es: 'De 5.000 a 6.000 en 4 partes: ¿qué número hay en la primera marca? Escríbelo.', en: 'From 5,000 to 6,000 in 4 parts: what number is on the first mark? Write it down.', ar: 'من 5.000 إلى 6.000 في 4 أجزاء: ما العدد عند العلامة الأولى؟ اكتبه.' },
+        hint: { eu: '1.000 : 4 = 250.', es: '1.000 : 4 = 250.', en: '1,000 : 4 = 250.', ar: '1.000 : 4 = 250.' },
         isSolved: (state) => lineIs(state, 5000, 6000, 4) && state.mark === 1 && answered(state, 5250)
     },
     {
         id: 2203,
-        prompt: { eu: 'Egin 0tik 1.000ra doan zuzen bat, salto bakoitza 125 izan dadin.', es: 'Haz una recta de 0 a 1.000 en la que cada salto valga 125.', ar: 'ارسم مستقيمًا من 0 إلى 1.000 تكون فيه كل قفزة 125.' },
-        hint: { eu: 'Zenbat aldiz sartzen da 125 1.000n?', es: '¿Cuántas veces cabe 125 en 1.000?', ar: 'كم مرة يدخل 125 في 1.000؟' },
+        prompt: { eu: 'Egin 0tik 1.000ra doan zuzen bat, salto bakoitza 125 izan dadin.', es: 'Haz una recta de 0 a 1.000 en la que cada salto valga 125.', en: 'Make a number line from 0 to 1,000 where each jump is 125.', ar: 'ارسم مستقيمًا من 0 إلى 1.000 تكون فيه كل قفزة 125.' },
+        hint: { eu: 'Zenbat aldiz sartzen da 125 1.000n?', es: '¿Cuántas veces cabe 125 en 1.000?', en: 'How many times does 125 go into 1,000?', ar: 'كم مرة يدخل 125 في 1.000؟' },
         isSolved: (state) => state.from === 0 && state.to === 1000 && lineJump(state) === 125
     },
     {
         id: 2204,
-        prompt: { eu: '2.000.000tik 3.000.000ra 5 salto: zein zenbaki dago 2. markan? Idatzi.', es: 'De 2.000.000 a 3.000.000 en 5 saltos: ¿qué número hay en la 2.ª marca? Escríbelo.', ar: 'من 2.000.000 إلى 3.000.000 في 5 قفزات: ما العدد عند العلامة الثانية؟ اكتبه.' },
-        hint: { eu: 'Salto bakoitza 200.000 da.', es: 'Cada salto vale 200.000.', ar: 'كل قفزة تساوي 200.000.' },
+        prompt: { eu: '2.000.000tik 3.000.000ra 5 salto: zein zenbaki dago 2. markan? Idatzi.', es: 'De 2.000.000 a 3.000.000 en 5 saltos: ¿qué número hay en la 2.ª marca? Escríbelo.', en: 'From 2,000,000 to 3,000,000 in 5 jumps: what number is on the 2nd mark? Write it down.', ar: 'من 2.000.000 إلى 3.000.000 في 5 قفزات: ما العدد عند العلامة الثانية؟ اكتبه.' },
+        hint: { eu: 'Salto bakoitza 200.000 da.', es: 'Cada salto vale 200.000.', en: 'Each jump is 200,000.', ar: 'كل قفزة تساوي 200.000.' },
         isSolved: (state) => lineIs(state, 2000000, 3000000, 5) && state.mark === 2 && answered(state, 2400000)
     }
 ]
@@ -287,26 +295,26 @@ export function romanVerdict(written: string): { value: number | null; suggestio
 export const romanChallenges: LabChallenge<RomanState>[] = [
     {
         id: 2301,
-        prompt: { eu: 'Idatzi aurtengo urtea, 2026, erromatar zenbakiz.', es: 'Escribe el año 2026 en números romanos.', ar: 'اكتب السنة 2026 بالأرقام الرومانية.' },
-        hint: { eu: '2.000 = MM, 20 = XX, 6 = VI.', es: '2.000 = MM, 20 = XX, 6 = VI.', ar: '2.000 = MM، 20 = XX، 6 = VI.' },
+        prompt: { eu: 'Idatzi aurtengo urtea, 2026, erromatar zenbakiz.', es: 'Escribe el año 2026 en números romanos.', en: 'Write the year 2026 in Roman numerals.', ar: 'اكتب السنة 2026 بالأرقام الرومانية.' },
+        hint: { eu: '2.000 = MM, 20 = XX, 6 = VI.', es: '2.000 = MM, 20 = XX, 6 = VI.', en: '2,000 = MM, 20 = XX, 6 = VI.', ar: '2.000 = MM، 20 = XX، 6 = VI.' },
         isSolved: (state) => fromRoman(state.written) === 2026
     },
     {
         id: 2302,
-        prompt: { eu: 'Idatzi 49. Kontuz: ez da IL.', es: 'Escribe el 49. Cuidado: no es IL.', ar: 'اكتب 49. انتبه: ليس IL.' },
-        hint: { eu: '49 = 40 + 9 = XL + IX.', es: '49 = 40 + 9 = XL + IX.', ar: '49 = 40 + 9 = XL + IX.' },
+        prompt: { eu: 'Idatzi 49. Kontuz: ez da IL.', es: 'Escribe el 49. Cuidado: no es IL.', en: 'Write 49. Be careful: it is not IL.', ar: 'اكتب 49. انتبه: ليس IL.' },
+        hint: { eu: '49 = 40 + 9 = XL + IX.', es: '49 = 40 + 9 = XL + IX.', en: '49 = 40 + 9 = XL + IX.', ar: '49 = 40 + 9 = XL + IX.' },
         isSolved: (state) => fromRoman(state.written) === 49
     },
     {
         id: 2303,
-        prompt: { eu: 'Idatzi 944: hiru kenketa behar dira.', es: 'Escribe el 944: hacen falta tres restas.', ar: 'اكتب 944: تحتاج ثلاث عمليات طرح.' },
-        hint: { eu: '900 = CM, 40 = XL, 4 = IV.', es: '900 = CM, 40 = XL, 4 = IV.', ar: '900 = CM، 40 = XL، 4 = IV.' },
+        prompt: { eu: 'Idatzi 944: hiru kenketa behar dira.', es: 'Escribe el 944: hacen falta tres restas.', en: 'Write 944: you need three subtractions.', ar: 'اكتب 944: تحتاج ثلاث عمليات طرح.' },
+        hint: { eu: '900 = CM, 40 = XL, 4 = IV.', es: '900 = CM, 40 = XL, 4 = IV.', en: '900 = CM, 40 = XL, 4 = IV.', ar: '900 = CM، 40 = XL، 4 = IV.' },
         isSolved: (state) => fromRoman(state.written) === 944
     },
     {
         id: 2304,
-        prompt: { eu: 'Idatzi ikur gehien behar dituen 100 baino txikiagoa den zenbakia.', es: 'Escribe el número menor que 100 que necesita más símbolos.', ar: 'اكتب العدد الأصغر من 100 الذي يحتاج أكبر عدد من الرموز.' },
-        hint: { eu: 'Hamarrekoetan eta unitateetan ahalik eta ikur gehien: LXXX eta VIII.', es: 'Los máximos símbolos en decenas y unidades: LXXX y VIII.', ar: 'أكبر عدد من الرموز في العشرات والآحاد: LXXX وVIII.' },
+        prompt: { eu: 'Idatzi ikur gehien behar dituen 100 baino txikiagoa den zenbakia.', es: 'Escribe el número menor que 100 que necesita más símbolos.', en: 'Write the number less than 100 that needs the most symbols.', ar: 'اكتب العدد الأصغر من 100 الذي يحتاج أكبر عدد من الرموز.' },
+        hint: { eu: 'Hamarrekoetan eta unitateetan ahalik eta ikur gehien: LXXX eta VIII.', es: 'Los máximos símbolos en decenas y unidades: LXXX y VIII.', en: 'The most symbols possible in the tens and units: LXXX and VIII.', ar: 'أكبر عدد من الرموز في العشرات والآحاد: LXXX وVIII.' },
         isSolved: (state) => fromRoman(state.written) === 88
     }
 ]
@@ -337,26 +345,26 @@ export function roundTo(value: number, place: number): number {
 export const roundingChallenges: LabChallenge<RoundingState>[] = [
     {
         id: 2401,
-        prompt: { eu: 'Biribildu 26.421 milakoetara eta idatzi emaitza.', es: 'Redondea 26.421 a los millares y escribe el resultado.', ar: 'قرّب 26.421 إلى الآلاف واكتب النتيجة.' },
-        hint: { eu: 'Milakoen eskuinean 4 dago.', es: 'A la derecha de los millares hay un 4.', ar: 'على يمين الآلاف يوجد 4.' },
+        prompt: { eu: 'Biribildu 26.421 milakoetara eta idatzi emaitza.', es: 'Redondea 26.421 a los millares y escribe el resultado.', en: 'Round 26,421 to the nearest thousand and write the result.', ar: 'قرّب 26.421 إلى الآلاف واكتب النتيجة.' },
+        hint: { eu: 'Milakoen eskuinean 4 dago.', es: 'A la derecha de los millares hay un 4.', en: 'To the right of the thousands there is a 4.', ar: 'على يمين الآلاف يوجد 4.' },
         isSolved: (state) => state.value === 26421 && state.place === 1000 && answered(state, 26000)
     },
     {
         id: 2402,
-        prompt: { eu: 'Biribildu 359.481 hamar milakoetara eta idatzi emaitza.', es: 'Redondea 359.481 a las decenas de millar y escribe el resultado.', ar: 'قرّب 359.481 إلى عشرات الآلاف واكتب النتيجة.' },
-        hint: { eu: 'Hamar milakoak: 5. Eskuinean 9.', es: 'Decenas de millar: 5. A su derecha, 9.', ar: 'عشرات الآلاف: 5. وعلى يمينها 9.' },
+        prompt: { eu: 'Biribildu 359.481 hamar milakoetara eta idatzi emaitza.', es: 'Redondea 359.481 a las decenas de millar y escribe el resultado.', en: 'Round 359,481 to the nearest ten thousand and write the result.', ar: 'قرّب 359.481 إلى عشرات الآلاف واكتب النتيجة.' },
+        hint: { eu: 'Hamar milakoak: 5. Eskuinean 9.', es: 'Decenas de millar: 5. A su derecha, 9.', en: 'Ten thousands: 5. The digit to its right is 9.', ar: 'عشرات الآلاف: 5. وعلى يمينها 9.' },
         isSolved: (state) => state.value === 359481 && state.place === 10000 && answered(state, 360000)
     },
     {
         id: 2403,
-        prompt: { eu: 'Jarri zenbaki bat erdi-erdian (adibidez, 3.500 milakoetara) eta idatzi nola biribiltzen den.', es: 'Pon un número justo en la mitad (por ejemplo, 3.500 a los millares) y escribe cómo se redondea.', ar: 'ضع عددًا في المنتصف تمامًا (مثل 3.500 إلى الآلاف) واكتب كيف يُقرَّب.' },
-        hint: { eu: 'Eskuineko zifra 5 da: gora.', es: 'La cifra de la derecha es 5: hacia arriba.', ar: 'الرقم الذي على اليمين 5: نرفع.' },
+        prompt: { eu: 'Jarri zenbaki bat erdi-erdian (adibidez, 3.500 milakoetara) eta idatzi nola biribiltzen den.', es: 'Pon un número justo en la mitad (por ejemplo, 3.500 a los millares) y escribe cómo se redondea.', en: 'Choose a number that is exactly halfway (for example, 3,500 to the nearest thousand) and write how it is rounded.', ar: 'ضع عددًا في المنتصف تمامًا (مثل 3.500 إلى الآلاف) واكتب كيف يُقرَّب.' },
+        hint: { eu: 'Eskuineko zifra 5 da: gora.', es: 'La cifra de la derecha es 5: hacia arriba.', en: 'The digit on the right is 5: round up.', ar: 'الرقم الذي على اليمين 5: نرفع.' },
         isSolved: (state) => state.value % state.place === state.place / 2 && answered(state, roundTo(state.value, state.place))
     },
     {
         id: 2404,
-        prompt: { eu: 'Aurkitu zenbaki bat (100en multiploa ez dena), ehunekoetara eta milakoetara biribiltzean emaitza bera ematen duena. Idatzi.', es: 'Encuentra un número (que no sea múltiplo de 100) que al redondearlo a las centenas y a los millares dé lo mismo. Escríbelo.', ar: 'جد عددًا (ليس مضاعفًا لـ 100) يعطي النتيجة نفسها عند تقريبه إلى المئات وإلى الآلاف. اكتبها.' },
-        hint: { eu: 'Probatu 7.980: ehunekoetara 8.000, milakoetara ere bai.', es: 'Prueba con 7.980: a las centenas da 8.000, y a los millares también.', ar: 'جرّب 7.980: إلى المئات 8.000، وإلى الآلاف أيضًا.' },
+        prompt: { eu: 'Aurkitu zenbaki bat (100en multiploa ez dena), ehunekoetara eta milakoetara biribiltzean emaitza bera ematen duena. Idatzi.', es: 'Encuentra un número (que no sea múltiplo de 100) que al redondearlo a las centenas y a los millares dé lo mismo. Escríbelo.', en: 'Find a number (that is not a multiple of 100) that gives the same result when rounded to the nearest hundred and to the nearest thousand. Write it down.', ar: 'جد عددًا (ليس مضاعفًا لـ 100) يعطي النتيجة نفسها عند تقريبه إلى المئات وإلى الآلاف. اكتبها.' },
+        hint: { eu: 'Probatu 7.980: ehunekoetara 8.000, milakoetara ere bai.', es: 'Prueba con 7.980: a las centenas da 8.000, y a los millares también.', en: 'Try 7,980: to the nearest hundred it gives 8,000, and to the nearest thousand it gives 8,000 too.', ar: 'جرّب 7.980: إلى المئات 8.000، وإلى الآلاف أيضًا.' },
         isSolved: (state) => state.value % 100 !== 0 && roundTo(state.value, 100) === roundTo(state.value, 1000) && answered(state, roundTo(state.value, state.place))
     }
 ]
@@ -390,26 +398,26 @@ const splitIs = (state: DistributiveState, factor: number, first: number, second
 export const distributiveChallenges: LabChallenge<DistributiveState>[] = [
     {
         id: 2501,
-        prompt: { eu: 'Egin 6 · (8 + 2) eta idatzi karratu kopurua.', es: 'Haz 6 · (8 + 2) y escribe cuántos cuadrados hay.', ar: 'كوّن 6 · (8 + 2) واكتب عدد المربعات.' },
-        hint: { eu: '6 · 8 + 6 · 2.', es: '6 · 8 + 6 · 2.', ar: '6 · 8 + 6 · 2.' },
+        prompt: { eu: 'Egin 6 · (8 + 2) eta idatzi karratu kopurua.', es: 'Haz 6 · (8 + 2) y escribe cuántos cuadrados hay.', en: 'Make 6 · (8 + 2) and write how many squares there are.', ar: 'كوّن 6 · (8 + 2) واكتب عدد المربعات.' },
+        hint: { eu: '6 · 8 + 6 · 2.', es: '6 · 8 + 6 · 2.', en: '6 · 8 + 6 · 2.', ar: '6 · 8 + 6 · 2.' },
         isSolved: (state) => splitIs(state, 6, 8, 2) && answered(state, 60)
     },
     {
         id: 2502,
-        prompt: { eu: 'Kalkulatu 7 · 12, 12 = 10 + 2 banatuta. Idatzi emaitza.', es: 'Calcula 7 · 12 partiendo 12 = 10 + 2. Escribe el resultado.', ar: 'احسب 7 · 12 بتقسيم 12 = 10 + 2. اكتب النتيجة.' },
-        hint: { eu: '7 · 10 + 7 · 2 = 70 + 14.', es: '7 · 10 + 7 · 2 = 70 + 14.', ar: '7 · 10 + 7 · 2 = 70 + 14.' },
+        prompt: { eu: 'Kalkulatu 7 · 12, 12 = 10 + 2 banatuta. Idatzi emaitza.', es: 'Calcula 7 · 12 partiendo 12 = 10 + 2. Escribe el resultado.', en: 'Work out 7 · 12 by splitting 12 = 10 + 2. Write the result.', ar: 'احسب 7 · 12 بتقسيم 12 = 10 + 2. اكتب النتيجة.' },
+        hint: { eu: '7 · 10 + 7 · 2 = 70 + 14.', es: '7 · 10 + 7 · 2 = 70 + 14.', en: '7 · 10 + 7 · 2 = 70 + 14.', ar: '7 · 10 + 7 · 2 = 70 + 14.' },
         isSolved: (state) => splitIs(state, 7, 10, 2) && answered(state, 84)
     },
     {
         id: 2503,
-        prompt: { eu: 'Kalkulatu 8 · 15, 15 = 10 + 5 banatuta. Idatzi emaitza.', es: 'Calcula 8 · 15 partiendo 15 = 10 + 5. Escribe el resultado.', ar: 'احسب 8 · 15 بتقسيم 15 = 10 + 5. اكتب النتيجة.' },
-        hint: { eu: '8 · 10 + 8 · 5 = 80 + 40.', es: '8 · 10 + 8 · 5 = 80 + 40.', ar: '8 · 10 + 8 · 5 = 80 + 40.' },
+        prompt: { eu: 'Kalkulatu 8 · 15, 15 = 10 + 5 banatuta. Idatzi emaitza.', es: 'Calcula 8 · 15 partiendo 15 = 10 + 5. Escribe el resultado.', en: 'Work out 8 · 15 by splitting 15 = 10 + 5. Write the result.', ar: 'احسب 8 · 15 بتقسيم 15 = 10 + 5. اكتب النتيجة.' },
+        hint: { eu: '8 · 10 + 8 · 5 = 80 + 40.', es: '8 · 10 + 8 · 5 = 80 + 40.', en: '8 · 10 + 8 · 5 = 80 + 40.', ar: '8 · 10 + 8 · 5 = 80 + 40.' },
         isSolved: (state) => splitIs(state, 8, 10, 5) && answered(state, 120)
     },
     {
         id: 2504,
-        prompt: { eu: 'Egin laukizuzen bat: zati urdinean 40 karratu eta gorrian 12. Idatzi guztira zenbat diren.', es: 'Haz un rectángulo con 40 cuadrados en la parte azul y 12 en la roja. Escribe cuántos hay en total.', ar: 'كوّن مستطيلًا فيه 40 مربعًا في الجزء الأزرق و12 في الأحمر. اكتب المجموع.' },
-        hint: { eu: 'Bi zatiek ilara kopuru bera dute: 40 eta 12ren zatitzaile komun bat.', es: 'Las dos partes tienen el mismo número de filas: un divisor común de 40 y 12.', ar: 'للجزأين عدد الصفوف نفسه: قاسم مشترك لـ 40 و12.' },
+        prompt: { eu: 'Egin laukizuzen bat: zati urdinean 40 karratu eta gorrian 12. Idatzi guztira zenbat diren.', es: 'Haz un rectángulo con 40 cuadrados en la parte azul y 12 en la roja. Escribe cuántos hay en total.', en: 'Make a rectangle with 40 squares in the blue part and 12 in the red. Write how many there are in total.', ar: 'كوّن مستطيلًا فيه 40 مربعًا في الجزء الأزرق و12 في الأحمر. اكتب المجموع.' },
+        hint: { eu: 'Bi zatiek ilara kopuru bera dute: 40 eta 12ren zatitzaile komun bat.', es: 'Las dos partes tienen el mismo número de filas: un divisor común de 40 y 12.', en: 'The two parts have the same number of rows: a common divisor of 40 and 12.', ar: 'للجزأين عدد الصفوف نفسه: قاسم مشترك لـ 40 و12.' },
         isSolved: (state) => state.factor * state.first === 40 && state.factor * state.second === 12 && answered(state, 52)
     }
 ]
@@ -439,26 +447,26 @@ export const divisionParts = (state: Pick<DivisionState, 'dividend' | 'divisor'>
 export const divisionChallenges: LabChallenge<DivisionState>[] = [
     {
         id: 2601,
-        prompt: { eu: 'Banatu 17 fitxa 5eko taldetan. Idatzi zatidura.', es: 'Reparte 17 fichas en grupos de 5. Escribe el cociente.', ar: 'وزّع 17 قطعة في مجموعات من 5. اكتب خارج القسمة.' },
-        hint: { eu: 'Zenbat talde oso osatzen dira?', es: '¿Cuántos grupos completos se forman?', ar: 'كم مجموعة كاملة تتكوّن؟' },
+        prompt: { eu: 'Banatu 17 fitxa 5eko taldetan. Idatzi zatidura.', es: 'Reparte 17 fichas en grupos de 5. Escribe el cociente.', en: 'Share 17 counters into groups of 5. Write the quotient.', ar: 'وزّع 17 قطعة في مجموعات من 5. اكتب خارج القسمة.' },
+        hint: { eu: 'Zenbat talde oso osatzen dira?', es: '¿Cuántos grupos completos se forman?', en: 'How many complete groups are made?', ar: 'كم مجموعة كاملة تتكوّن؟' },
         isSolved: (state) => state.dividend === 17 && state.divisor === 5 && answered(state, 3)
     },
     {
         id: 2602,
-        prompt: { eu: '7ko taldeekin, lortu ahalik eta hondar handiena.', es: 'Con grupos de 7, consigue el mayor resto posible.', ar: 'بمجموعات من 7، احصل على أكبر باقٍ ممكن.' },
-        hint: { eu: 'Hondarra beti da zatitzailea baino txikiagoa.', es: 'El resto siempre es menor que el divisor.', ar: 'الباقي دائمًا أصغر من المقسوم عليه.' },
+        prompt: { eu: '7ko taldeekin, lortu ahalik eta hondar handiena.', es: 'Con grupos de 7, consigue el mayor resto posible.', en: 'With groups of 7, get the largest possible remainder.', ar: 'بمجموعات من 7، احصل على أكبر باقٍ ممكن.' },
+        hint: { eu: 'Hondarra beti da zatitzailea baino txikiagoa.', es: 'El resto siempre es menor que el divisor.', en: 'The remainder is always less than the divisor.', ar: 'الباقي دائمًا أصغر من المقسوم عليه.' },
         isSolved: (state) => state.divisor === 7 && divisionParts(state).remainder === 6
     },
     {
         id: 2603,
-        prompt: { eu: 'Banatu 48 fitxa, 6 talde oso gera daitezen eta ezer soberan ez.', es: 'Reparte 48 fichas de forma que salgan 6 grupos completos y no sobre nada.', ar: 'وزّع 48 قطعة بحيث تتكوّن 6 مجموعات كاملة ولا يبقى شيء.' },
-        hint: { eu: '48 = ? · 6.', es: '48 = ? · 6.', ar: '48 = ? · 6.' },
+        prompt: { eu: 'Banatu 48 fitxa, 6 talde oso gera daitezen eta ezer soberan ez.', es: 'Reparte 48 fichas de forma que salgan 6 grupos completos y no sobre nada.', en: 'Share 48 counters so that you get 6 complete groups and nothing is left over.', ar: 'وزّع 48 قطعة بحيث تتكوّن 6 مجموعات كاملة ولا يبقى شيء.' },
+        hint: { eu: '48 = ? · 6.', es: '48 = ? · 6.', en: '48 = ? · 6.', ar: '48 = ? · 6.' },
         isSolved: (state) => state.dividend === 48 && divisionParts(state).quotient === 6 && divisionParts(state).remainder === 0
     },
     {
         id: 2604,
-        prompt: { eu: '38 fitxarekin, aurkitu 3 hondarra uzten duen talde-tamaina bat (3 baino handiagoa). Idatzi zatidura.', es: 'Con 38 fichas, encuentra un tamaño de grupo (mayor que 3) que deje resto 3. Escribe el cociente.', ar: 'بـ 38 قطعة، جد حجم مجموعة (أكبر من 3) يترك باقيًا 3. اكتب خارج القسمة.' },
-        hint: { eu: '38 − 3 = 35: zein zenbakik zatitzen du 35 zehazki?', es: '38 − 3 = 35: ¿qué números dividen exactamente a 35?', ar: '38 − 3 = 35: ما الأعداد التي تقسم 35 قسمة تامة؟' },
+        prompt: { eu: '38 fitxarekin, aurkitu 3 hondarra uzten duen talde-tamaina bat (3 baino handiagoa). Idatzi zatidura.', es: 'Con 38 fichas, encuentra un tamaño de grupo (mayor que 3) que deje resto 3. Escribe el cociente.', en: 'With 38 counters, find a group size (larger than 3) that leaves a remainder of 3. Write the quotient.', ar: 'بـ 38 قطعة، جد حجم مجموعة (أكبر من 3) يترك باقيًا 3. اكتب خارج القسمة.' },
+        hint: { eu: '38 − 3 = 35: zein zenbakik zatitzen du 35 zehazki?', es: '38 − 3 = 35: ¿qué números dividen exactamente a 35?', en: '38 − 3 = 35: which numbers divide 35 exactly?', ar: '38 − 3 = 35: ما الأعداد التي تقسم 35 قسمة تامة؟' },
         isSolved: (state) => state.dividend === 38 && state.divisor > 3 && divisionParts(state).remainder === 3 && answered(state, divisionParts(state).quotient)
     }
 ]
@@ -486,26 +494,26 @@ export const initialSemaphoreState: HierarchyState = startSemaphore(1)
 export const semaphoreChallenges: LabChallenge<HierarchyState>[] = [
     {
         id: 2701,
-        prompt: { eu: 'Amaitu 1. eragiketa (klaseko gidaren adibidea).', es: 'Termina la operación 1 (el ejemplo de la guía de clase).', ar: 'أكمل العملية 1 (مثال دليل القسم).' },
-        hint: { eu: 'Hiru eragiketa horiak daude: horiek lehenik.', es: 'Hay tres operaciones amarillas: esas primero.', ar: 'هناك ثلاث عمليات صفراء: ابدأ بها.' },
+        prompt: { eu: 'Amaitu 1. eragiketa (klaseko gidaren adibidea).', es: 'Termina la operación 1 (el ejemplo de la guía de clase).', en: 'Finish operation 1 (the example from the class guide).', ar: 'أكمل العملية 1 (مثال دليل القسم).' },
+        hint: { eu: 'Hiru eragiketa horiak daude: horiek lehenik.', es: 'Hay tres operaciones amarillas: esas primero.', en: 'There are three yellow operations: do those first.', ar: 'هناك ثلاث عمليات صفراء: ابدأ بها.' },
         isSolved: (state) => finishedWith(state, 1, () => true)
     },
     {
         id: 2702,
-        prompt: { eu: 'Amaitu 2. eragiketa ordenan hutsik egin gabe.', es: 'Termina la operación 2 sin equivocarte de orden.', ar: 'أكمل العملية 2 دون خطأ في الترتيب.' },
-        hint: { eu: 'Gorria (parentesia), gero bi horiak, azkenik berdeak ezkerretik.', es: 'Rojo (el paréntesis), luego los dos amarillos y al final los verdes de izquierda a derecha.', ar: 'الأحمر (القوس)، ثم الأصفران، وأخيرًا الأخضران من اليسار.' },
+        prompt: { eu: 'Amaitu 2. eragiketa ordenan hutsik egin gabe.', es: 'Termina la operación 2 sin equivocarte de orden.', en: 'Finish operation 2 without getting the order wrong.', ar: 'أكمل العملية 2 دون خطأ في الترتيب.' },
+        hint: { eu: 'Gorria (parentesia), gero bi horiak, azkenik berdeak ezkerretik.', es: 'Rojo (el paréntesis), luego los dos amarillos y al final los verdes de izquierda a derecha.', en: 'Red (the round brackets), then the two yellows, and finally the greens, from left to right.', ar: 'الأحمر (القوس)، ثم الأصفران، وأخيرًا الأخضران من اليسار.' },
         isSolved: (state) => finishedWith(state, 2, (mistakes) => mistakes.order === 0)
     },
     {
         id: 2703,
-        prompt: { eu: 'Amaitu 3. eragiketa: parentesia kako zuzen baten barruan.', es: 'Termina la operación 3: un paréntesis dentro de un corchete.', ar: 'أكمل العملية 3: قوس داخل قوس معقوف.' },
-        hint: { eu: 'Barrutik kanpora: ( ), gero [ ] barruko biderketa, gero kenketa.', es: 'De dentro hacia fuera: ( ), luego la multiplicación del [ ] y después la resta.', ar: 'من الداخل إلى الخارج: ( )، ثم الضرب داخل [ ]، ثم الطرح.' },
+        prompt: { eu: 'Amaitu 3. eragiketa: parentesia kako zuzen baten barruan.', es: 'Termina la operación 3: un paréntesis dentro de un corchete.', en: 'Finish operation 3: round brackets inside square brackets.', ar: 'أكمل العملية 3: قوس داخل قوس معقوف.' },
+        hint: { eu: 'Barrutik kanpora: ( ), gero [ ] barruko biderketa, gero kenketa.', es: 'De dentro hacia fuera: ( ), luego la multiplicación del [ ] y después la resta.', en: 'From the inside out: ( ), then the multiplication in the [ ], and then the subtraction.', ar: 'من الداخل إلى الخارج: ( )، ثم الضرب داخل [ ]، ثم الطرح.' },
         isSolved: (state) => finishedWith(state, 3, () => true)
     },
     {
         id: 2704,
-        prompt: { eu: 'Amaitu 4. eragiketa akatsik gabe: ez ordenan, ez kalkuluetan.', es: 'Termina la operación 4 sin ningún error: ni de orden ni de cálculo.', ar: 'أكمل العملية 4 دون أي خطأ: لا في الترتيب ولا في الحساب.' },
-        hint: { eu: 'Parentesi barruan ere biderketa batuketa baino lehen.', es: 'Dentro del paréntesis también va la multiplicación antes que la suma.', ar: 'داخل القوس أيضًا يأتي الضرب قبل الجمع.' },
+        prompt: { eu: 'Amaitu 4. eragiketa akatsik gabe: ez ordenan, ez kalkuluetan.', es: 'Termina la operación 4 sin ningún error: ni de orden ni de cálculo.', en: 'Finish operation 4 with no mistakes, either in the order or in the calculation.', ar: 'أكمل العملية 4 دون أي خطأ: لا في الترتيب ولا في الحساب.' },
+        hint: { eu: 'Parentesi barruan ere biderketa batuketa baino lehen.', es: 'Dentro del paréntesis también va la multiplicación antes que la suma.', en: 'Inside the round brackets, multiplication also comes before addition.', ar: 'داخل القوس أيضًا يأتي الضرب قبل الجمع.' },
         isSolved: (state) => finishedWith(state, 4, (mistakes) => mistakes.order === 0 && mistakes.calc === 0)
     }
 ]
@@ -549,26 +557,26 @@ const powerIs = (state: PowersState, base: number, exponent: number) => state.ba
 export const powersChallenges: LabChallenge<PowersState>[] = [
     {
         id: 2801,
-        prompt: { eu: 'Kalkulatu $2^5$ eta idatzi emaitza.', es: 'Calcula $2^5$ y escribe el resultado.', ar: 'احسب $2^5$ واكتب النتيجة.' },
-        hint: { eu: '2 · 2 · 2 · 2 · 2: bikoiztu bost aldiz 1etik.', es: '2 · 2 · 2 · 2 · 2: dobla cinco veces empezando en 1.', ar: '2 · 2 · 2 · 2 · 2: ضاعف خمس مرات بدءًا من 1.' },
+        prompt: { eu: 'Kalkulatu $2^5$ eta idatzi emaitza.', es: 'Calcula $2^5$ y escribe el resultado.', en: 'Work out $2^5$ and write the result.', ar: 'احسب $2^5$ واكتب النتيجة.' },
+        hint: { eu: '2 · 2 · 2 · 2 · 2: bikoiztu bost aldiz 1etik.', es: '2 · 2 · 2 · 2 · 2: dobla cinco veces empezando en 1.', en: '2 · 2 · 2 · 2 · 2: double five times, starting from 1.', ar: '2 · 2 · 2 · 2 · 2: ضاعف خمس مرات بدءًا من 1.' },
         isSolved: (state) => powerIs(state, 2, 5) && answered(state, 32)
     },
     {
         id: 2802,
-        prompt: { eu: 'Zenbat kubo txiki ditu 5eko kubo handi batek? Egin $5^3$ eta idatzi.', es: '¿Cuántos cubitos tiene un cubo de lado 5? Haz $5^3$ y escríbelo.', ar: 'كم مكعبًا صغيرًا في مكعب ضلعه 5؟ كوّن $5^3$ واكتبه.' },
-        hint: { eu: '5 · 5 = 25 geruza bakoitzean, eta 5 geruza.', es: '5 · 5 = 25 en cada capa, y hay 5 capas.', ar: '5 · 5 = 25 في كل طبقة، وهناك 5 طبقات.' },
+        prompt: { eu: 'Zenbat kubo txiki ditu 5eko kubo handi batek? Egin $5^3$ eta idatzi.', es: '¿Cuántos cubitos tiene un cubo de lado 5? Haz $5^3$ y escríbelo.', en: 'How many small cubes does a cube with side 5 have? Work out $5^3$ and write it down.', ar: 'كم مكعبًا صغيرًا في مكعب ضلعه 5؟ كوّن $5^3$ واكتبه.' },
+        hint: { eu: '5 · 5 = 25 geruza bakoitzean, eta 5 geruza.', es: '5 · 5 = 25 en cada capa, y hay 5 capas.', en: '5 · 5 = 25 in each layer, and there are 5 layers.', ar: '5 · 5 = 25 في كل طبقة، وهناك 5 طبقات.' },
         isSolved: (state) => powerIs(state, 5, 3) && answered(state, 125)
     },
     {
         id: 2803,
-        prompt: { eu: 'Idatzi $10^6$ zenbaki gisa. Zenbat zero ditu?', es: 'Escribe $10^6$ como número. ¿Cuántos ceros tiene?', ar: 'اكتب $10^6$ عددًا. كم صفرًا فيه؟' },
-        hint: { eu: '1 eta sei zero: milioi bat.', es: 'Un 1 y seis ceros: un millón.', ar: '1 وستة أصفار: مليون.' },
+        prompt: { eu: 'Idatzi $10^6$ zenbaki gisa. Zenbat zero ditu?', es: 'Escribe $10^6$ como número. ¿Cuántos ceros tiene?', en: 'Write $10^6$ as a number. How many zeros does it have?', ar: 'اكتب $10^6$ عددًا. كم صفرًا فيه؟' },
+        hint: { eu: '1 eta sei zero: milioi bat.', es: 'Un 1 y seis ceros: un millón.', en: 'A 1 and six zeros: one million.', ar: '1 وستة أصفار: مليون.' },
         isSolved: (state) => powerIs(state, 10, 6) && answered(state, 1000000)
     },
     {
         id: 2804,
-        prompt: { eu: 'Idatzi 64 berretura gisa bi modu desberdinetan (kalkulatu biak).', es: 'Escribe 64 como potencia de dos formas distintas (calcula las dos).', ar: 'اكتب 64 على صورة قوة بطريقتين مختلفتين (احسب الاثنتين).' },
-        hint: { eu: '64 = 8 · 8, eta 64 = 4 · 4 · 4…', es: '64 = 8 · 8, y 64 = 4 · 4 · 4…', ar: '64 = 8 · 8، و64 = 4 · 4 · 4…' },
+        prompt: { eu: 'Idatzi 64 berretura gisa bi modu desberdinetan (kalkulatu biak).', es: 'Escribe 64 como potencia de dos formas distintas (calcula las dos).', en: 'Write 64 as a power in two different ways (work out both).', ar: 'اكتب 64 على صورة قوة بطريقتين مختلفتين (احسب الاثنتين).' },
+        hint: { eu: '64 = 8 · 8, eta 64 = 4 · 4 · 4…', es: '64 = 8 · 8, y 64 = 4 · 4 · 4…', en: '64 = 8 · 8, and 64 = 4 · 4 · 4…', ar: '64 = 8 · 8، و64 = 4 · 4 · 4…' },
         isSolved: (state) => state.solved.filter((key) => {
             const [base, exponent] = key.split('^').map(Number)
             return base ** exponent === 64

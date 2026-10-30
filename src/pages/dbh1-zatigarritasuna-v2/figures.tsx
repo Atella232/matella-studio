@@ -39,20 +39,20 @@ export function BagsFigure({ language }: { language: UnitLanguage }) {
         </g>
     )
     return (
-        <svg viewBox="0 0 630 220" role="img" aria-label={pick(language, { eu: '18 arkatz poltsetan: 3 poltsatan ez da ezer soberan geratzen; 4 poltsatan 2 geratzen dira', es: '18 lápices en bolsas: en 3 bolsas no sobra nada; en 4 bolsas sobran 2', ar: '18 قلمًا في أكياس: في 3 أكياس لا يبقى شيء، وفي 4 أكياس يبقى قلمان' })} className="divisibility-figure">
-            <text x={145} y={24} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: '3 poltsa', es: '3 bolsas', ar: '3 أكياس' })}</text>
+        <svg viewBox="0 0 630 220" role="img" aria-label={pick(language, { eu: '18 arkatz poltsetan: 3 poltsatan ez da ezer soberan geratzen; 4 poltsatan 2 geratzen dira', es: '18 lápices en bolsas: en 3 bolsas no sobra nada; en 4 bolsas sobran 2', en: '18 pencils in bags: with 3 bags, none are left over; with 4 bags, 2 are left over.', ar: '18 قلمًا في أكياس: في 3 أكياس لا يبقى شيء، وفي 4 أكياس يبقى قلمان' })} className="divisibility-figure">
+            <text x={145} y={24} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: '3 poltsa', es: '3 bolsas', en: '3 bags', ar: '3 أكياس' })}</text>
             {[20, 110, 200].map((x) => bag(x, 70, 6, 3))}
             <text x={145} y={168} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>18 : 3 = 6</text>
-            <text x={145} y={194} textAnchor="middle" fontSize={15} fill={STAGE} fontWeight={700}>{pick(language, { eu: 'hondarra 0 ✓', es: 'resto 0 ✓', ar: 'الباقي 0 ✓' })}</text>
+            <text x={145} y={194} textAnchor="middle" fontSize={15} fill={STAGE} fontWeight={700}>{pick(language, { eu: 'hondarra 0 ✓', es: 'resto 0 ✓', en: 'remainder 0 ✓', ar: 'الباقي 0 ✓' })}</text>
 
             <line x1={296} x2={296} y1={20} y2={200} stroke={MUTED} strokeWidth={1.4} strokeDasharray="5 6" />
 
-            <text x={462} y={24} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: '4 poltsa', es: '4 bolsas', ar: '4 أكياس' })}</text>
+            <text x={462} y={24} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: '4 poltsa', es: '4 bolsas', en: '4 bags', ar: '4 أكياس' })}</text>
             {[320, 384, 448, 512].map((x) => bag(x, 56, 4, 2))}
             <Pencil x={582} y={56} color={SECOND} />
             <Pencil x={600} y={56} color={SECOND} />
             <text x={462} y={168} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>18 : 4 = 4</text>
-            <text x={462} y={194} textAnchor="middle" fontSize={15} fill={SECOND} fontWeight={700}>{pick(language, { eu: 'hondarra 2 ✗', es: 'resto 2 ✗', ar: 'الباقي 2 ✗' })}</text>
+            <text x={462} y={194} textAnchor="middle" fontSize={15} fill={SECOND} fontWeight={700}>{pick(language, { eu: 'hondarra 2 ✗', es: 'resto 2 ✗', en: 'remainder 2 ✗', ar: 'الباقي 2 ✗' })}</text>
         </svg>
     )
 }
@@ -76,7 +76,7 @@ export function DivisorTableFigure({ n = 36, language }: { n?: number; language:
     const all = divisors(n)
     const caption = (name: string, separator: string) => `${name}(${n}) = {${all.join(separator)}}`
     return (
-        <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={pick(language, { eu: `${n}ren zatitzaileen taula`, es: `Tabla de los divisores de ${n}`, ar: `جدول قواسم ${n}` })} className="divisibility-figure">
+        <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={pick(language, { eu: `${n}ren zatitzaileen taula`, es: `Tabla de los divisores de ${n}`, en: `Table of the divisors of ${n}`, ar: `جدول قواسم ${n}` })} className="divisibility-figure">
             {rows.map((row, rowIndex) => (
                 <g key={row.factor}>
                     <text x={left - 18} y={top + rowIndex * cell + 40} textAnchor="end" fontSize={17} fontWeight={700} fill={rowIndex === 0 ? MUTED : SECOND}>{rowIndex === 0 ? '' : `· ${row.factor}`}</text>
@@ -92,7 +92,7 @@ export function DivisorTableFigure({ n = 36, language }: { n?: number; language:
                 {firstExponent > 1 ? `1, ${firstPrime}…${firstPrime}${firstExponent === 2 ? '²' : firstExponent === 3 ? '³' : ''}` : `1, ${firstPrime}`}
             </text>
             <text x={width / 2} y={height - 16} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>
-                {pick(language, { eu: caption('Zat', ', '), es: caption('Div', ', '), ar: caption('Zat', '، ') })}
+                {pick(language, { eu: caption('Zat', ', '), es: caption('Div', ', '), en: caption('Div', ', '), ar: caption('Zat', '، ') })}
             </text>
         </svg>
     )
@@ -112,7 +112,7 @@ export function PoolCalendarFigure({ language }: { language: UnitLanguage }) {
     ]
     const x = (day: number) => left + (day - 1) * cell
     return (
-        <svg viewBox="0 0 740 230" role="img" aria-label={pick(language, { eu: 'Ana 2 egunean behin eta Eva 3 egunean behin: 6., 12. eta 18. egunetan bat egiten dute', es: 'Ana va cada 2 días y Eva cada 3: coinciden los días 6, 12 y 18', ar: 'آنا تذهب كل يومين وإيفا كل 3 أيام: تلتقيان في الأيام 6 و12 و18' })} className="divisibility-figure">
+        <svg viewBox="0 0 740 230" role="img" aria-label={pick(language, { eu: 'Ana 2 egunean behin eta Eva 3 egunean behin: 6., 12. eta 18. egunetan bat egiten dute', es: 'Ana va cada 2 días y Eva cada 3: coinciden los días 6, 12 y 18', en: 'Ana goes every 2 days and Eva every 3: they coincide on days 6, 12 and 18.', ar: 'آنا تذهب كل يومين وإيفا كل 3 أيام: تلتقيان في الأيام 6 و12 و18' })} className="divisibility-figure">
             {[6, 12, 18].map((day) => (
                 <rect key={day} x={x(day) - 4} y={30} width={cell} height={112} rx={10} fill="var(--mustard-tint, #fbebc0)" stroke={INK} strokeWidth={1.6} />
             ))}
@@ -134,7 +134,7 @@ export function PoolCalendarFigure({ language }: { language: UnitLanguage }) {
                 <text key={day} x={x(day) + (cell - 8) / 2} y={166} textAnchor="middle" fontSize={13} fontWeight={day % 6 === 0 ? 700 : 400} fill={day % 6 === 0 ? INK : MUTED}>{day}</text>
             ))}
             <text x={370} y={204} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>
-                {pick(language, { eu: '6, 12, 18… 2ren eta 3ren multiplo komunak → MKT(2, 3) = 6', es: '6, 12, 18… múltiplos comunes de 2 y 3 → m.c.m.(2, 3) = 6', ar: '6، 12، 18… مضاعفات مشتركة لـ 2 و3 ← م.م.أ(2، 3) = 6' })}
+                {pick(language, { eu: '6, 12, 18… 2ren eta 3ren multiplo komunak → MKT(2, 3) = 6', es: '6, 12, 18… múltiplos comunes de 2 y 3 → m.c.m.(2, 3) = 6', en: '6, 12, 18… common multiples of 2 and 3 → LCM(2, 3) = 6', ar: '6، 12، 18… مضاعفات مشتركة لـ 2 و3 ← م.م.أ(2، 3) = 6' })}
             </text>
         </svg>
     )

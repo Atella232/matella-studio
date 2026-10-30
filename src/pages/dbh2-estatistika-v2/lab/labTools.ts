@@ -19,73 +19,73 @@ export interface StatisticsLabTool extends LabToolInfo {
     stage: StatisticsStageId
 }
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 
 export const statisticsLabTools: StatisticsLabTool[] = [
     {
         id: 'cumulative',
         stage: 'tables',
         lessonTopic: 'cumulative',
-        title: say('Maiztasun metatuak', 'Frecuencias acumuladas', 'التكرارات المتجمّعة'),
+        title: say('Maiztasun metatuak', 'Frecuencias acumuladas', 'التكرارات المتجمّعة', 'Cumulative frequencies'),
         observe: say(
             'Maiztasun bat aldatzean, haren azpiko metatu guztiak aldatzen dira, baina gainekoak ez. Azken metatua beti N da, eta erlatibo metatuaren azkena 1.',
             'Al cambiar una frecuencia, cambian todas las acumuladas de debajo, pero no las de arriba. La última acumulada es siempre N, y la última relativa acumulada, 1.',
-            'عند تغيير تكرار تتغيّر كل المتجمّعات التي تحته، لا التي فوقه. وآخر متجمّع دائمًا N، وآخر متجمّع نسبي 1.'
+            'عند تغيير تكرار تتغيّر كل المتجمّعات التي تحته، لا التي فوقه. وآخر متجمّع دائمًا N، وآخر متجمّع نسبي 1.', 'When you change a frequency, all the cumulative frequencies below it change, but not those above. The last cumulative frequency is always N, and the last cumulative relative frequency is 1.'
         )
     },
     {
         id: 'histogram',
         stage: 'graphs',
         lessonTopic: 'histogram',
-        title: say('Histograma eta poligonoak', 'Histograma y polígonos', 'المدرّج والمضلّعات'),
+        title: say('Histograma eta poligonoak', 'Histograma y polígonos', 'المدرّج والمضلّعات', 'Histogram and polygons'),
         observe: say(
             'Laukizuzenak itsatsita daude. Maiztasun-poligonoa klase-marken gainetik doa; poligono metatua beti gorantz doa eta N-n amaitzen da.',
             'Los rectángulos están pegados. El polígono de frecuencias pasa sobre las marcas de clase; el acumulado siempre sube y termina en N.',
-            'المستطيلات متلاصقة. يمرّ المضلّع التكراري فوق مراكز الفئات، والمتجمّع يصعد دائمًا وينتهي عند N.'
+            'المستطيلات متلاصقة. يمرّ المضلّع التكراري فوق مراكز الفئات، والمتجمّع يصعد دائمًا وينتهي عند N.', 'The rectangles touch. The frequency polygon passes through the class marks; the cumulative frequency always goes up and ends at N.'
         )
     },
     {
         id: 'pie',
         stage: 'graphs',
         lessonTopic: 'pie',
-        title: say('Ehunekoetatik sektoreetara', 'De porcentajes a sectores', 'من النسب إلى القطاعات'),
+        title: say('Ehunekoetatik sektoreetara', 'De porcentajes a sectores', 'من النسب إلى القطاعات', 'From percentages to a pie chart'),
         observe: say(
             '% 1 zirkuluaren 3,6° da. Ehunekoek 100 eman behar dute; bestela, diagramak ez du osoa erakusten.',
             'El 1 % del círculo son 3,6°. Los porcentajes tienen que sumar 100; si no, el diagrama no muestra el total.',
-            '1 % من الدائرة 3.6°. يجب أن يكون مجموع النسب 100، وإلا فلن يُظهر المخطط الكل.'
+            '1 % من الدائرة 3.6°. يجب أن يكون مجموع النسب 100، وإلا فلن يُظهر المخطط الكل.', '1% of the circle is 3.6°. The percentages must add up to 100; if not, the chart does not show the total.'
         )
     },
     {
         id: 'centre',
         stage: 'centre',
         lessonTopic: 'mean-table',
-        title: say('Taula baten erdigunea', 'El centro de una tabla', 'مركز الجدول'),
+        title: say('Taula baten erdigunea', 'El centro de una tabla', 'مركز الجدول', 'The centre of a table'),
         observe: say(
             'Batez bestekoa oreka-puntua da: muturreko balio batek asko mugitzen du. Mediana erdiko datua da, eta moda barra altuena.',
             'La media es el punto de equilibrio: un valor extremo la mueve mucho. La mediana es el dato central, y la moda, la barra más alta.',
-            'المتوسط نقطة التوازن: تحرّكه قيمة متطرفة كثيرًا. والوسيط البيان الأوسط، والمنوال العمود الأعلى.'
+            'المتوسط نقطة التوازن: تحرّكه قيمة متطرفة كثيرًا. والوسيط البيان الأوسط، والمنوال العمود الأعلى.', 'The mean is the balance point: an extreme value moves it a lot. The median is the middle value, and the mode is the tallest bar.'
         )
     },
     {
         id: 'box',
         stage: 'spread',
         lessonTopic: 'box-plot',
-        title: say('Kutxa eta biboteak', 'Caja y bigotes', 'الصندوق والشاربان'),
+        title: say('Kutxa eta biboteak', 'Caja y bigotes', 'الصندوق والشاربان', 'Box-and-whisker plot'),
         observe: say(
             'Zazpi datu: mediana 4.a da, Q₁ 2.a eta Q₃ 6.a. Zati bakoitzean datuen % 25 dago, nahiz eta luzera desberdina izan.',
             'Siete datos: la mediana es el 4.º, Q₁ el 2.º y Q₃ el 6.º. En cada parte está el 25 % de los datos, aunque midan distinto.',
-            'سبعة بيانات: الوسيط الرابع، وQ₁ الثاني، وQ₃ السادس. في كل جزء 25 % من البيانات وإن اختلفت أطوالها.'
+            'سبعة بيانات: الوسيط الرابع، وQ₁ الثاني، وQ₃ السادس. في كل جزء 25 % من البيانات وإن اختلفت أطوالها.', 'Seven values: the median is the 4th, Q₁ the 2nd and Q₃ the 6th. Each part contains 25% of the data, even if they have different lengths.'
         )
     },
     {
         id: 'dice',
         stage: 'chance',
         lessonTopic: 'tree',
-        title: say('Bi dadoren taula', 'La tabla de dos dados', 'جدول النردين'),
+        title: say('Bi dadoren taula', 'La tabla de dos dados', 'جدول النردين', 'The table of two dice'),
         observe: say(
             '36 gelaxkak aukera bera dute. Batura batzuk gelaxka askotan agertzen dira (7: sei aldiz) eta beste batzuk bakarrean (2 eta 12).',
             'Las 36 casillas tienen la misma posibilidad. Algunas sumas aparecen en muchas casillas (el 7, seis veces) y otras en una sola (2 y 12).',
-            'للخانات الست والثلاثين الإمكان نفسه. بعض المجاميع تظهر في خانات كثيرة (7 ست مرات) وبعضها في خانة واحدة (2 و12).'
+            'للخانات الست والثلاثين الإمكان نفسه. بعض المجاميع تظهر في خانات كثيرة (7 ست مرات) وبعضها في خانة واحدة (2 و12).', 'All 36 cells are equally likely. Some sums appear in many cells (7 appears six times) and others in just one (2 and 12).'
         )
     }
 ]
@@ -138,20 +138,20 @@ export const relativeCumulative = (counts: number[], index: number): FractionVal
 export const cumulativeChallenges: LabChallenge<CumulativeState>[] = [
     {
         id: 26101,
-        prompt: say('Lortu 25 datu, eta 2 liburu edo gutxiago 15 ikaslek.', 'Consigue 25 datos, con 15 alumnos de 2 libros o menos.', 'احصل على 25 بيانًا، منهم 15 تلميذًا قرؤوا كتابين أو أقل.'),
-        hint: say('Azken metatua 25 izan behar da, eta 2ren metatua 15.', 'La última acumulada tiene que ser 25, y la del 2, 15.', 'يجب أن يكون آخر متجمّع 25، ومتجمّع العدد 2 هو 15.'),
+        prompt: say('Lortu 25 datu, eta 2 liburu edo gutxiago 15 ikaslek.', 'Consigue 25 datos, con 15 alumnos de 2 libros o menos.', 'احصل على 25 بيانًا، منهم 15 تلميذًا قرؤوا كتابين أو أقل.', 'Get 25 values, with 15 students who read 2 books or fewer.'),
+        hint: say('Azken metatua 25 izan behar da, eta 2ren metatua 15.', 'La última acumulada tiene que ser 25, y la del 2, 15.', 'يجب أن يكون آخر متجمّع 25، ومتجمّع العدد 2 هو 15.', 'The last cumulative frequency must be 25, and the one for 2 must be 15.'),
         isSolved: (state) => sum(state.counts) === 25 && cumulativeOf(state.counts)[2] === 15
     },
     {
         id: 26102,
-        prompt: say('Egin 1 baliora arteko maiztasun erlatibo metatua 0,5 izatea, gutxienez 10 daturekin.', 'Haz que la frecuencia relativa acumulada hasta el valor 1 sea 0,5, con al menos 10 datos.', 'اجعل التكرار النسبي المتجمّع حتى القيمة 1 يساوي 0.5، بعشرة بيانات على الأقل.'),
-        hint: say('0 eta 1 balioen maiztasunak gainerakoenak adina izan behar dira.', 'Las frecuencias del 0 y el 1 tienen que sumar lo mismo que las demás.', 'يجب أن يساوي مجموع تكراري 0 و1 مجموع البقية.'),
+        prompt: say('Egin 1 baliora arteko maiztasun erlatibo metatua 0,5 izatea, gutxienez 10 daturekin.', 'Haz que la frecuencia relativa acumulada hasta el valor 1 sea 0,5, con al menos 10 datos.', 'اجعل التكرار النسبي المتجمّع حتى القيمة 1 يساوي 0.5، بعشرة بيانات على الأقل.', 'Make the cumulative relative frequency up to the value 1 equal 0.5, with at least 10 data values.'),
+        hint: say('0 eta 1 balioen maiztasunak gainerakoenak adina izan behar dira.', 'Las frecuencias del 0 y el 1 tienen que sumar lo mismo que las demás.', 'يجب أن يساوي مجموع تكراري 0 و1 مجموع البقية.', 'The frequencies of 0 and 1 must add up to the same as the others.'),
         isSolved: (state) => sum(state.counts) >= 10 && same(relativeCumulative(state.counts, 1), 1, 2)
     },
     {
         id: 26103,
-        prompt: say('Lortu datuen % 75ek gehienez 2 liburu irakurri izana, eta 4 liburu irakurri dituen norbait egotea.', 'Consigue que el 75 % de los datos sea de 2 libros como mucho, y que alguien haya leído 4.', 'اجعل 75 % من البيانات كتابين على الأكثر، وأن يكون هناك من قرأ 4.'),
-        hint: say('2ren erlatibo metatua: 0,75. Adibidez, 20 datutik 15.', 'La relativa acumulada del 2: 0,75. Por ejemplo, 15 de 20 datos.', 'المتجمّع النسبي للعدد 2: 0.75. مثلًا 15 من 20 بيانًا.'),
+        prompt: say('Lortu datuen % 75ek gehienez 2 liburu irakurri izana, eta 4 liburu irakurri dituen norbait egotea.', 'Consigue que el 75 % de los datos sea de 2 libros como mucho, y que alguien haya leído 4.', 'اجعل 75 % من البيانات كتابين على الأكثر، وأن يكون هناك من قرأ 4.', 'Make sure 75% of the data is 2 books or fewer, and someone has read 4 books.'),
+        hint: say('2ren erlatibo metatua: 0,75. Adibidez, 20 datutik 15.', 'La relativa acumulada del 2: 0,75. Por ejemplo, 15 de 20 datos.', 'المتجمّع النسبي للعدد 2: 0.75. مثلًا 15 من 20 بيانًا.', 'The cumulative relative frequency for 2 is 0.75. For example, 15 out of 20 data values.'),
         isSolved: (state) => state.counts[4] >= 1 && same(relativeCumulative(state.counts, 2), 3, 4)
     }
 ]
@@ -186,20 +186,20 @@ export const groupedMean = (counts: number[]): FractionValue | null => {
 export const histogramChallenges: LabChallenge<HistogramState>[] = [
     {
         id: 26201,
-        prompt: say('Egin $[150,160)$ tarteko laukizuzena besteak baino altuagoa.', 'Haz que el rectángulo de $[150,160)$ sea más alto que los demás.', 'اجعل مستطيل $[150,160)$ أعلى من البقية.'),
-        hint: say('Bere maiztasunak beste guztienak gainditu behar ditu.', 'Su frecuencia tiene que superar a todas las demás.', 'يجب أن يتجاوز تكراره كل التكرارات الأخرى.'),
+        prompt: say('Egin $[150,160)$ tarteko laukizuzena besteak baino altuagoa.', 'Haz que el rectángulo de $[150,160)$ sea más alto que los demás.', 'اجعل مستطيل $[150,160)$ أعلى من البقية.', 'Make the rectangle for $[150,160)$ taller than the others.'),
+        hint: say('Bere maiztasunak beste guztienak gainditu behar ditu.', 'Su frecuencia tiene que superar a todas las demás.', 'يجب أن يتجاوز تكراره كل التكرارات الأخرى.', 'Its frequency must be higher than all the others.'),
         isSolved: (state) => state.counts.every((count, index) => index === 1 || count < state.counts[1])
     },
     {
         id: 26202,
-        prompt: say('Egin histograma simetriko bat, erdiko bi tarteak muturretakoak baino altuago.', 'Haz un histograma simétrico, con los dos intervalos centrales más altos que los extremos.', 'اصنع مدرّجًا متماثلًا، بفئتين وسطيين أعلى من الطرفيتين.'),
-        hint: say('Lehena eta laugarrena berdinak; bigarrena eta hirugarrena berdinak eta handiagoak. Batez bestekoa 160 izango da.', 'El primero igual al cuarto; el segundo igual al tercero y mayores. La media será 160.', 'الأولى تساوي الرابعة، والثانية تساوي الثالثة وهما أكبر. وسيكون المتوسط 160.'),
+        prompt: say('Egin histograma simetriko bat, erdiko bi tarteak muturretakoak baino altuago.', 'Haz un histograma simétrico, con los dos intervalos centrales más altos que los extremos.', 'اصنع مدرّجًا متماثلًا، بفئتين وسطيين أعلى من الطرفيتين.', 'Make a symmetric histogram, with the two central intervals taller than the end ones.'),
+        hint: say('Lehena eta laugarrena berdinak; bigarrena eta hirugarrena berdinak eta handiagoak. Batez bestekoa 160 izango da.', 'El primero igual al cuarto; el segundo igual al tercero y mayores. La media será 160.', 'الأولى تساوي الرابعة، والثانية تساوي الثالثة وهما أكبر. وسيكون المتوسط 160.', 'The first equals the fourth; the second equals the third, and both are larger than the first. The mean will be 160.'),
         isSolved: (state) => state.counts[0] === state.counts[3] && state.counts[1] === state.counts[2] && state.counts[1] > state.counts[0]
     },
     {
         id: 26203,
-        prompt: say('Poligono metatuarekin: 30 ikasle, eta 170 cm baino gutxiago 20k.', 'Con el polígono acumulado: 30 alumnos, y 20 de menos de 170 cm.', 'بالمضلّع المتجمّع: 30 تلميذًا، و20 منهم أقل من 170 سم.'),
-        hint: say('Aukeratu poligono metatua. Hirugarren metatua 20 eta azkena 30.', 'Elige el polígono acumulado. La tercera acumulada 20 y la última 30.', 'اختر المضلّع المتجمّع. المتجمّع الثالث 20 والأخير 30.'),
+        prompt: say('Poligono metatuarekin: 30 ikasle, eta 170 cm baino gutxiago 20k.', 'Con el polígono acumulado: 30 alumnos, y 20 de menos de 170 cm.', 'بالمضلّع المتجمّع: 30 تلميذًا، و20 منهم أقل من 170 سم.', 'With the cumulative polygon: 30 students, and 20 under 170 cm.'),
+        hint: say('Aukeratu poligono metatua. Hirugarren metatua 20 eta azkena 30.', 'Elige el polígono acumulado. La tercera acumulada 20 y la última 30.', 'اختر المضلّع المتجمّع. المتجمّع الثالث 20 والأخير 30.', 'Choose the cumulative polygon. The third cumulative value is 20 and the last one is 30.'),
         isSolved: (state) => state.polygon === 'cumulative' && sum(state.counts) === 30 && cumulativeOf(state.counts)[2] === 20
     }
 ]
@@ -225,20 +225,20 @@ export const percentTotal = (state: PieState) => sum(state.percents)
 export const pieChallenges: LabChallenge<PieState>[] = [
     {
         id: 26301,
-        prompt: say('Egin autobusaren sektoreak 90° izatea, ehunekoek 100 emanda.', 'Haz que el sector del autobús mida 90°, con los porcentajes sumando 100.', 'اجعل قطاع الحافلة 90°، مع مجموع نسب 100.'),
-        hint: say('90° zirkuluaren laurdena da: % 25.', '90° es un cuarto del círculo: el 25 %.', '90° ربع الدائرة: 25 %.'),
+        prompt: say('Egin autobusaren sektoreak 90° izatea, ehunekoek 100 emanda.', 'Haz que el sector del autobús mida 90°, con los porcentajes sumando 100.', 'اجعل قطاع الحافلة 90°، مع مجموع نسب 100.', 'Make the bus sector measure 90°, with the percentages adding up to 100.'),
+        hint: say('90° zirkuluaren laurdena da: % 25.', '90° es un cuarto del círculo: el 25 %.', '90° ربع الدائرة: 25 %.', '90° is a quarter of the circle: 25%.'),
         isSolved: (state) => percentTotal(state) === 100 && state.percents[1] === 25
     },
     {
         id: 26302,
-        prompt: say('Egin lau sektore berdin.', 'Haz cuatro sectores iguales.', 'اصنع أربعة قطاعات متساوية.'),
-        hint: say('Bakoitza % 25: 90°.', 'Cada uno el 25 %: 90°.', 'كل منها 25 %: 90°.'),
+        prompt: say('Egin lau sektore berdin.', 'Haz cuatro sectores iguales.', 'اصنع أربعة قطاعات متساوية.', 'Make four equal sectors.'),
+        hint: say('Bakoitza % 25: 90°.', 'Cada uno el 25 %: 90°.', 'كل منها 25 %: 90°.', 'Each one 25%: 90°.'),
         isSolved: (state) => state.percents.every((percent) => percent === 25)
     },
     {
         id: 26303,
-        prompt: say('Egin oinezkoen sektoreak 162° eta autoarenak 54° izatea, ehunekoek 100 emanda.', 'Haz que el sector de a pie mida 162° y el del coche 54°, con los porcentajes sumando 100.', 'اجعل قطاع المشي 162° وقطاع السيارة 54°، مع مجموع نسب 100.'),
-        hint: say('Zatitu angelua 3,6z: % 45 eta % 15.', 'Divide el ángulo entre 3,6: 45 % y 15 %.', 'اقسم الزاوية على 3.6: 45 % و15 %.'),
+        prompt: say('Egin oinezkoen sektoreak 162° eta autoarenak 54° izatea, ehunekoek 100 emanda.', 'Haz que el sector de a pie mida 162° y el del coche 54°, con los porcentajes sumando 100.', 'اجعل قطاع المشي 162° وقطاع السيارة 54°، مع مجموع نسب 100.', 'Make the walking sector measure 162° and the car sector 54°, with the percentages adding up to 100.'),
+        hint: say('Zatitu angelua 3,6z: % 45 eta % 15.', 'Divide el ángulo entre 3,6: 45 % y 15 %.', 'اقسم الزاوية على 3.6: 45 % و15 %.', 'Divide the angle by 3.6: 45% and 15%.'),
         isSolved: (state) => percentTotal(state) === 100 && state.percents[0] === 45 && state.percents[2] === 15
     }
 ]
@@ -283,14 +283,14 @@ export const tableModes = (counts: number[]) => {
 export const centreChallenges: LabChallenge<CentreState>[] = [
     {
         id: 26401,
-        prompt: say('Egin batez bestekoa zehazki 2 izatea, gutxienez 10 daturekin.', 'Haz que la media sea exactamente 2, con al menos 10 datos.', 'اجعل المتوسط 2 تمامًا، بعشرة بيانات على الأقل.'),
-        hint: say('$\\sum x_i f_i$ datu kopuruaren bikoitza izan behar da.', '$\\sum x_i f_i$ tiene que ser el doble del número de datos.', 'يجب أن يكون $\\sum x_i f_i$ ضعف عدد البيانات.'),
+        prompt: say('Egin batez bestekoa zehazki 2 izatea, gutxienez 10 daturekin.', 'Haz que la media sea exactamente 2, con al menos 10 datos.', 'اجعل المتوسط 2 تمامًا، بعشرة بيانات على الأقل.', 'Make the mean exactly 2, with at least 10 data values.'),
+        hint: say('$\\sum x_i f_i$ datu kopuruaren bikoitza izan behar da.', '$\\sum x_i f_i$ tiene que ser el doble del número de datos.', 'يجب أن يكون $\\sum x_i f_i$ ضعف عدد البيانات.', '$\\sum x_i f_i$ must be twice the number of data values.'),
         isSolved: (state) => sum(state.counts) >= 10 && same(tableMean(state.counts), 2)
     },
     {
         id: 26402,
-        prompt: say('Egin banaketa asimetriko bat: mediana 1 eta batez bestekoa 2 edo gehiago.', 'Haz una distribución asimétrica: mediana 1 y media 2 o más.', 'اصنع توزيعًا غير متماثل: الوسيط 1 والمتوسط 2 أو أكثر.'),
-        hint: say('Datu gehienak txikiak, eta batzuk oso handiak (5).', 'La mayoría de los datos pequeños, y unos pocos muy grandes (5).', 'معظم البيانات صغيرة وقليل منها كبير جدًا (5).'),
+        prompt: say('Egin banaketa asimetriko bat: mediana 1 eta batez bestekoa 2 edo gehiago.', 'Haz una distribución asimétrica: mediana 1 y media 2 o más.', 'اصنع توزيعًا غير متماثل: الوسيط 1 والمتوسط 2 أو أكثر.', 'Make an asymmetric distribution: median 1 and mean 2 or more.'),
+        hint: say('Datu gehienak txikiak, eta batzuk oso handiak (5).', 'La mayoría de los datos pequeños, y unos pocos muy grandes (5).', 'معظم البيانات صغيرة وقليل منها كبير جدًا (5).', 'Most of the values are small, and a few very large ones (5).'),
         isSolved: (state) => {
             const mean = tableMean(state.counts)
             return same(tableMedian(state.counts), 1) && mean !== null && mean.numerator >= 2 * mean.denominator
@@ -298,8 +298,8 @@ export const centreChallenges: LabChallenge<CentreState>[] = [
     },
     {
         id: 26403,
-        prompt: say('Egin banaketa bimodal bat: bi moda, eta haien artean batez bestekoa.', 'Haz una distribución bimodal: dos modas, y la media entre ellas.', 'اصنع توزيعًا ثنائي المنوال: منوالان والمتوسط بينهما.'),
-        hint: say('Bi barra altuenak berdinak; adibidez, 1 eta 4.', 'Las dos barras más altas iguales; por ejemplo, el 1 y el 4.', 'العمودان الأعلى متساويان؛ مثلًا 1 و4.'),
+        prompt: say('Egin banaketa bimodal bat: bi moda, eta haien artean batez bestekoa.', 'Haz una distribución bimodal: dos modas, y la media entre ellas.', 'اصنع توزيعًا ثنائي المنوال: منوالان والمتوسط بينهما.', 'Make a bimodal distribution: two modes, and the mean between them.'),
+        hint: say('Bi barra altuenak berdinak; adibidez, 1 eta 4.', 'Las dos barras más altas iguales; por ejemplo, el 1 y el 4.', 'العمودان الأعلى متساويان؛ مثلًا 1 و4.', 'The two tallest bars should be equal, for example 1 and 4.'),
         isSolved: (state) => {
             const modes = tableModes(state.counts)
             const mean = tableMean(state.counts)
@@ -342,8 +342,8 @@ export function meanDeviation(values: number[]): FractionValue {
 export const boxChallenges: LabChallenge<BoxState>[] = [
     {
         id: 26501,
-        prompt: say('Egin mediana 5 eta ibiltartea 6.', 'Haz que la mediana sea 5 y el recorrido 6.', 'اجعل الوسيط 5 والمدى 6.'),
-        hint: say('Ordenatuta, 4. datua 5; handiena ken txikiena, 6.', 'Ordenados, el 4.º dato es 5; el mayor menos el menor, 6.', 'بعد الترتيب البيان الرابع 5، والأكبر ناقص الأصغر 6.'),
+        prompt: say('Egin mediana 5 eta ibiltartea 6.', 'Haz que la mediana sea 5 y el recorrido 6.', 'اجعل الوسيط 5 والمدى 6.', 'Make the median 5 and the range 6.'),
+        hint: say('Ordenatuta, 4. datua 5; handiena ken txikiena, 6.', 'Ordenados, el 4.º dato es 5; el mayor menos el menor, 6.', 'بعد الترتيب البيان الرابع 5، والأكبر ناقص الأصغر 6.', 'Ordered, the 4th value is 5; the largest minus the smallest is 6.'),
         isSolved: (state) => {
             const summary = fiveNumbers(state.values)
             return summary.median === 5 && summary.max - summary.min === 6
@@ -351,8 +351,8 @@ export const boxChallenges: LabChallenge<BoxState>[] = [
     },
     {
         id: 26502,
-        prompt: say('Egin kutxa labur bat (2) eta bibote luzeak: ibiltartea gutxienez 8.', 'Haz una caja corta (2) y bigotes largos: recorrido de al menos 8.', 'اصنع صندوقًا قصيرًا (2) وشاربين طويلين: مدى 8 على الأقل.'),
-        hint: say('$Q_3-Q_1=2$, baina txikiena eta handiena urrun.', '$Q_3-Q_1=2$, pero el mínimo y el máximo lejos.', '$Q_3-Q_1=2$، لكن الأصغر والأكبر بعيدان.'),
+        prompt: say('Egin kutxa labur bat (2) eta bibote luzeak: ibiltartea gutxienez 8.', 'Haz una caja corta (2) y bigotes largos: recorrido de al menos 8.', 'اصنع صندوقًا قصيرًا (2) وشاربين طويلين: مدى 8 على الأقل.', 'Make a short box (2) and long whiskers: a range of at least 8.'),
+        hint: say('$Q_3-Q_1=2$, baina txikiena eta handiena urrun.', '$Q_3-Q_1=2$, pero el mínimo y el máximo lejos.', '$Q_3-Q_1=2$، لكن الأصغر والأكبر بعيدان.', '$Q_3-Q_1=2$, but the minimum and maximum are far from the box.'),
         isSolved: (state) => {
             const summary = fiveNumbers(state.values)
             return summary.q3 - summary.q1 === 2 && summary.max - summary.min >= 8
@@ -360,8 +360,8 @@ export const boxChallenges: LabChallenge<BoxState>[] = [
     },
     {
         id: 26503,
-        prompt: say('Egin batez bestekoa eta mediana 5 izatea, ibiltartea 8 dela.', 'Haz que la media y la mediana sean 5, con recorrido 8.', 'اجعل المتوسط والوسيط 5، مع مدى 8.'),
-        hint: say('Zazpi datuen batura 35; adibidez, 1 eta 9 muturretan, simetrikoki.', 'La suma de los siete datos, 35; por ejemplo, 1 y 9 en los extremos, de forma simétrica.', 'مجموع البيانات السبعة 35؛ مثلًا 1 و9 في الطرفين بشكل متماثل.'),
+        prompt: say('Egin batez bestekoa eta mediana 5 izatea, ibiltartea 8 dela.', 'Haz que la media y la mediana sean 5, con recorrido 8.', 'اجعل المتوسط والوسيط 5، مع مدى 8.', 'Make the mean and the median 5, with a range of 8.'),
+        hint: say('Zazpi datuen batura 35; adibidez, 1 eta 9 muturretan, simetrikoki.', 'La suma de los siete datos, 35; por ejemplo, 1 y 9 en los extremos, de forma simétrica.', 'مجموع البيانات السبعة 35؛ مثلًا 1 و9 في الطرفين بشكل متماثل.', 'The sum of the seven values is 35; for example, 1 and 9 at the ends, symmetrically.'),
         isSolved: (state) => {
             const summary = fiveNumbers(state.values)
             return sum(state.values) === 35 && summary.median === 5 && summary.max - summary.min === 8
@@ -399,20 +399,20 @@ export const diceProbability = (state: DiceState) => fraction(diceFavourable(sta
 export const diceChallenges: LabChallenge<DiceState>[] = [
     {
         id: 26601,
-        prompt: say('Aurkitu batura probableena: «batura = …» gertaerarik onena.', 'Encuentra la suma más probable: el mejor suceso «suma = …».', 'أوجد المجموع الأكثر احتمالًا: أفضل حدث «المجموع = …».'),
-        hint: say('Begiratu diagonalak: zein da luzeena?', 'Mira las diagonales: ¿cuál es la más larga?', 'انظر إلى الأقطار: أيها الأطول؟'),
+        prompt: say('Aurkitu batura probableena: «batura = …» gertaerarik onena.', 'Encuentra la suma más probable: el mejor suceso «suma = …».', 'أوجد المجموع الأكثر احتمالًا: أفضل حدث «المجموع = …».', 'Find the most likely sum: the best event “sum = …”.'),
+        hint: say('Begiratu diagonalak: zein da luzeena?', 'Mira las diagonales: ¿cuál es la más larga?', 'انظر إلى الأقطار: أيها الأطول؟', 'Look at the diagonals: which one is the longest?'),
         isSolved: (state) => state.rule === 'equal' && state.target === 7
     },
     {
         id: 26602,
-        prompt: say('Aurkitu $\\frac{1}{12}$ probabilitateko gertaera bat.', 'Encuentra un suceso de probabilidad $\\frac{1}{12}$.', 'أوجد حدثًا احتماله $\\frac{1}{12}$.'),
-        hint: say('$\\frac{1}{12}=\\frac{3}{36}$: hiru gelaxka.', '$\\frac{1}{12}=\\frac{3}{36}$: tres casillas.', '$\\frac{1}{12}=\\frac{3}{36}$: ثلاث خانات.'),
+        prompt: say('Aurkitu $\\frac{1}{12}$ probabilitateko gertaera bat.', 'Encuentra un suceso de probabilidad $\\frac{1}{12}$.', 'أوجد حدثًا احتماله $\\frac{1}{12}$.', 'Find an event with probability $\\frac{1}{12}$.'),
+        hint: say('$\\frac{1}{12}=\\frac{3}{36}$: hiru gelaxka.', '$\\frac{1}{12}=\\frac{3}{36}$: tres casillas.', '$\\frac{1}{12}=\\frac{3}{36}$: ثلاث خانات.', '$\\frac{1}{12}=\\frac{3}{36}$: three cells.'),
         isSolved: (state) => diceFavourable(state) === 3
     },
     {
         id: 26603,
-        prompt: say('Aurkitu «batura ≥ …» gertaera bat, haren aurkakoaren probabilitatea $\\frac{5}{6}$ izanik.', 'Encuentra un suceso «suma ≥ …» cuyo contrario tenga probabilidad $\\frac{5}{6}$.', 'أوجد حدثًا «المجموع ≥ …» احتمال معاكسه $\\frac{5}{6}$.'),
-        hint: say('Gertaerak $\\frac{1}{6}=\\frac{6}{36}$ izan behar du: sei gelaxka goiko izkinan.', 'El suceso tiene que valer $\\frac{1}{6}=\\frac{6}{36}$: seis casillas en la esquina de arriba.', 'يجب أن يكون احتمال الحدث $\\frac{1}{6}=\\frac{6}{36}$: ست خانات في الزاوية.'),
+        prompt: say('Aurkitu «batura ≥ …» gertaera bat, haren aurkakoaren probabilitatea $\\frac{5}{6}$ izanik.', 'Encuentra un suceso «suma ≥ …» cuyo contrario tenga probabilidad $\\frac{5}{6}$.', 'أوجد حدثًا «المجموع ≥ …» احتمال معاكسه $\\frac{5}{6}$.', 'Find an event “sum ≥ …” whose complementary event has probability $\\frac{5}{6}$.'),
+        hint: say('Gertaerak $\\frac{1}{6}=\\frac{6}{36}$ izan behar du: sei gelaxka goiko izkinan.', 'El suceso tiene que valer $\\frac{1}{6}=\\frac{6}{36}$: seis casillas en la esquina de arriba.', 'يجب أن يكون احتمال الحدث $\\frac{1}{6}=\\frac{6}{36}$: ست خانات في الزاوية.', 'The event must equal $\\frac{1}{6}=\\frac{6}{36}$: six cells in the top corner.'),
         isSolved: (state) => state.rule === 'atLeast' && diceFavourable(state) === 6
     }
 ]

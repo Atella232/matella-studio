@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { ToolFrame } from '../../../features/unit-v2/lab/LabKit'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
-import { formatNatural } from '../format'
+import { formatNatural, formatNaturalLatex } from '../format'
 import { addRomanSymbol, initialRomanState, removeRomanSymbol, ROMAN_MAX_LENGTH, ROMAN_SYMBOLS, ROMAN_VALUES, romanChallenges, romanVerdict, type NaturalsToolProps, type RomanState } from './labTools'
 
 export function RomanTool(props: NaturalsToolProps) {
@@ -13,35 +13,35 @@ export function RomanTool(props: NaturalsToolProps) {
 
     const controls = (
         <>
-            <div className="naturals-roman-keys" role="group" aria-label={l({ eu: 'Ikurrak', es: 'Símbolos', ar: 'الرموز' })}>
+            <div className="naturals-roman-keys" role="group" aria-label={l({ eu: 'Ikurrak', es: 'Símbolos', en: 'Symbols', ar: 'الرموز' })}>
                 {ROMAN_SYMBOLS.map((symbol) => (
                     <button type="button" onClick={() => setState((current) => addRomanSymbol(current, symbol))} disabled={state.written.length >= ROMAN_MAX_LENGTH} key={symbol}>
                         <strong>{symbol}</strong>
-                        <small>{formatNatural(ROMAN_VALUES[symbol])}</small>
+                        <small>{formatNatural(ROMAN_VALUES[symbol], props.language)}</small>
                     </button>
                 ))}
             </div>
             <div className="naturals-roman-edit">
-                <button type="button" className="fraction-v2-secondary" onClick={() => setState(removeRomanSymbol)} disabled={state.written === ''}>{l({ eu: '⌫ Ezabatu azkena', es: '⌫ Borrar el último', ar: '⌫ احذف الأخير' })}</button>
-                <button type="button" className="fraction-v2-secondary" onClick={() => setState({ written: '' })} disabled={state.written === ''}>{l({ eu: 'Garbitu', es: 'Borrar todo', ar: 'امسح الكل' })}</button>
+                <button type="button" className="fraction-v2-secondary" onClick={() => setState(removeRomanSymbol)} disabled={state.written === ''}>{l({ eu: '⌫ Ezabatu azkena', es: '⌫ Borrar el último', en: '⌫ Delete last', ar: '⌫ احذف الأخير' })}</button>
+                <button type="button" className="fraction-v2-secondary" onClick={() => setState({ written: '' })} disabled={state.written === ''}>{l({ eu: 'Garbitu', es: 'Borrar todo', en: 'Clear all', ar: 'امسح الكل' })}</button>
             </div>
         </>
     )
 
     const readout = state.written === ''
-        ? <span className="fraction-v2-lab-readout-note">{l({ eu: 'Sakatu ikurrak zenbaki bat idazteko.', es: 'Pulsa los símbolos para escribir un número.', ar: 'اضغط الرموز لكتابة عدد.' })}</span>
+        ? <span className="fraction-v2-lab-readout-note">{l({ eu: 'Sakatu ikurrak zenbaki bat idazteko.', es: 'Pulsa los símbolos para escribir un número.', en: 'Press the symbols to write a number.', ar: 'اضغط الرموز لكتابة عدد.' })}</span>
         : verdict.value !== null
             ? (
                 <>
-                    <span className="fraction-v2-lab-readout-main"><MathText text={`$\\mathrm{${state.written}}=${formatNatural(verdict.value)}$`} /></span>
-                    <span className="fraction-v2-lab-readout-note">{l({ eu: 'Ondo idatzita dago.', es: 'Está bien escrito.', ar: 'مكتوب بشكل صحيح.' })}</span>
+                    <span className="fraction-v2-lab-readout-main"><MathText text={`$\\mathrm{${state.written}}=${formatNaturalLatex(verdict.value)}$`} /></span>
+                    <span className="fraction-v2-lab-readout-note">{l({ eu: 'Ondo idatzita dago.', es: 'Está bien escrito.', en: 'It is written correctly.', ar: 'مكتوب بشكل صحيح.' })}</span>
                 </>
             )
             : (
                 <span className="fraction-v2-lab-readout-note naturals-lab-warning">
                     {verdict.suggestion
-                        ? l({ eu: `Horrela ez da idazten. Kantitate hori ${verdict.suggestion} idazten da.`, es: `Así no se escribe. Esa cantidad se escribe ${verdict.suggestion}.`, ar: `لا يُكتب هكذا. هذه الكمية تُكتب ${verdict.suggestion}.` })
-                        : l({ eu: 'Horrela ez da idazten. Berrikusi arauak.', es: 'Así no se escribe. Repasa las reglas.', ar: 'لا يُكتب هكذا. راجع القواعد.' })}
+                        ? l({ eu: `Horrela ez da idazten. Kantitate hori ${verdict.suggestion} idazten da.`, es: `Así no se escribe. Esa cantidad se escribe ${verdict.suggestion}.`, en: `It is not written like that. That number is written ${verdict.suggestion}.`, ar: `لا يُكتب هكذا. هذه الكمية تُكتب ${verdict.suggestion}.` })
+                        : l({ eu: 'Horrela ez da idazten. Berrikusi arauak.', es: 'Así no se escribe. Repasa las reglas.', en: 'It is not written like that. Review the rules.', ar: 'لا يُكتب هكذا. راجع القواعد.' })}
                 </span>
             )
 
@@ -55,7 +55,7 @@ export function RomanTool(props: NaturalsToolProps) {
                     return (
                         <span className={`naturals-roman-tile ${subtracts ? 'minus' : ''}`} key={index}>
                             <strong>{symbol}</strong>
-                            <small>{subtracts ? '−' : '+'}{formatNatural(value)}</small>
+                            <small>{subtracts ? '−' : '+'}{formatNatural(value, props.language)}</small>
                         </span>
                     )
                 })}

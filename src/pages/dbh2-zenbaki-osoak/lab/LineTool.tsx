@@ -17,18 +17,18 @@ export function LineTool(props: IntegerToolProps & { challenges?: LabChallenge<L
     const controls = (
         <>
             <Segmented
-                label={l({ eu: 'Egoera', es: 'Situación', ar: 'الموقف' })}
+                label={l({ eu: 'Egoera', es: 'Situación', en: 'Situation', ar: 'الموقف' })}
                 value={context}
                 options={[
-                    { value: 'plain', label: l({ eu: 'Zuzena', es: 'Recta', ar: 'الخط' }) },
-                    { value: 'temperature', label: l({ eu: 'Termometroa', es: 'Termómetro', ar: 'ميزان الحرارة' }) },
-                    { value: 'floors', label: l({ eu: 'Eraikina', es: 'Edificio', ar: 'المبنى' }) },
-                    { value: 'sea', label: l({ eu: 'Itsasoa', es: 'Mar', ar: 'البحر' }) }
+                    { value: 'plain', label: l({ eu: 'Zuzena', es: 'Recta', en: 'Straight line', ar: 'الخط' }) },
+                    { value: 'temperature', label: l({ eu: 'Termometroa', es: 'Termómetro', en: 'Thermometer', ar: 'ميزان الحرارة' }) },
+                    { value: 'floors', label: l({ eu: 'Eraikina', es: 'Edificio', en: 'Building', ar: 'المبنى' }) },
+                    { value: 'sea', label: l({ eu: 'Itsasoa', es: 'Mar', en: 'Sea', ar: 'البحر' }) }
                 ]}
                 onChange={(next) => setState((current) => ({ ...current, context: next }))}
             />
             <Stepper
-                label={l({ eu: 'Zenbakia', es: 'Número', ar: 'العدد' })}
+                label={l({ eu: 'Zenbakia', es: 'Número', en: 'Number', ar: 'العدد' })}
                 value={value}
                 min={LINE_LIMITS.min}
                 max={LINE_LIMITS.max}
@@ -36,7 +36,7 @@ export function LineTool(props: IntegerToolProps & { challenges?: LabChallenge<L
                 onChange={(next) => setState((current) => setLineValue(current, next))}
                 language={props.language}
             />
-            <p className="fraction-v2-lab-tip">{l({ eu: 'Zuzenean sakatu edo arrastatu ere egin dezakezu.', es: 'También puedes pulsar o arrastrar sobre la recta.', ar: 'يمكنك أيضًا الضغط على الخط أو السحب عليه.' })}</p>
+            <p className="fraction-v2-lab-tip">{l({ eu: 'Zuzenean sakatu edo arrastatu ere egin dezakezu.', es: 'También puedes pulsar o arrastrar sobre la recta.', en: 'You can also tap or drag on the number line.', ar: 'يمكنك أيضًا الضغط على الخط أو السحب عليه.' })}</p>
         </>
     )
 
@@ -48,10 +48,10 @@ export function LineTool(props: IntegerToolProps & { challenges?: LabChallenge<L
     )
 
     const zeroName = {
-        plain: { eu: 'Zeroa', es: 'El cero', ar: 'الصفر' },
-        temperature: { eu: '0 °C', es: '0 °C', ar: '0 °م' },
-        floors: { eu: 'Behe solairua = 0', es: 'Planta baja = 0', ar: 'الطابق الأرضي = 0' },
-        sea: { eu: 'Itsas maila = 0', es: 'Nivel del mar = 0', ar: 'مستوى سطح البحر = 0' }
+        plain: { eu: 'Zeroa', es: 'El cero', en: 'Zero', ar: 'الصفر' },
+        temperature: { eu: '0 °C', es: '0 °C', en: '0 °C', ar: '0 °م' },
+        floors: { eu: 'Behe solairua = 0', es: 'Planta baja = 0', en: 'Ground floor = 0', ar: 'الطابق الأرضي = 0' },
+        sea: { eu: 'Itsas maila = 0', es: 'Nivel del mar = 0', en: 'Sea level = 0', ar: 'مستوى سطح البحر = 0' }
     }[context]
 
     return (

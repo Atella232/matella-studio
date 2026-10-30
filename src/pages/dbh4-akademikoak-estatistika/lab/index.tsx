@@ -38,7 +38,7 @@ export function StatisticsAkLaboratory(props: {
             tools={statisticsAkLabTools}
             stages={statisticsAkStages}
             components={toolComponents}
-            title={{ eu: 'Lagindu, orekatu eta neurtu', es: 'Muestrea, equilibra y mide', ar: 'خذ عيّنة ووازن وقِس' }}
+            title={{ eu: 'Lagindu, orekatu eta neurtu', es: 'Muestrea, equilibra y mide', en: 'Sample, balance and measure', ar: 'خذ عيّنة ووازن وقِس' }}
         />
     )
 }

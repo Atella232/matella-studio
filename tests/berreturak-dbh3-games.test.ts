@@ -15,7 +15,7 @@ import { POWERS_GAME_RECORDS_KEY, powersGameModeForPath, powersGameProgressIds, 
 import { createOrderRounds, nextCard, ORDER_CARDS, ORDER_ROUNDS, orderPoints, orderSolution, orderStars } from '../src/pages/dbh3-berreturak/games/order.ts'
 import { checkPowersPitAnswer, generatePowersRaceQuestion, POWERS_RACE_CIRCUITS, powersParTime, powersRaceErrorTips, written, type PowersRaceQuestion } from '../src/pages/dbh3-berreturak/games/race.ts'
 
-const languages = ['eu', 'es', 'ar'] as const
+const languages = ['eu', 'es', 'en', 'ar'] as const
 
 /** Plain arithmetic in LaTeX: powers, fractions, roots, products, divisions and decimal commas */
 function evaluate(latex: string): number | null {

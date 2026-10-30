@@ -12,8 +12,8 @@ const introRace: RaceRules<IntroRaceError> = {
     parTime: introParTime,
     errorTip: (error) => introRaceErrorTips[error ?? 'calculation'],
     pitPlaceholder: () => '−7',
-    pitUnreadable: { eu: 'Idatzi zenbaki oso bat, adibidez −7 edo +12.', es: 'Escribe un número entero, por ejemplo −7 o +12.', ar: 'اكتب عددًا صحيحًا، مثل ⁦−7⁩ أو ⁦+12⁩.' },
-    pitWrongForm: { eu: 'Idatzi zenbaki oso gisa.', es: 'Escríbelo como número entero.', ar: 'اكتبه عددًا صحيحًا.' }
+    pitUnreadable: { eu: 'Idatzi zenbaki oso bat, adibidez −7 edo +12.', es: 'Escribe un número entero, por ejemplo −7 o +12.', en: 'Write an integer, for example −7 or +12.', ar: 'اكتب عددًا صحيحًا، مثل ⁦−7⁩ أو ⁦+12⁩.' },
+    pitWrongForm: { eu: 'Idatzi zenbaki oso gisa.', es: 'Escríbelo como número entero.', en: 'Write it as an integer.', ar: 'اكتبه عددًا صحيحًا.' }
 }
 
 export function IntroRaceGame(props: GameProps) {

@@ -28,7 +28,7 @@ const CARD = 'var(--card, #fffcf6)'
 const PAPER = '#fffcf6'
 const SERIF = 'Fraunces, serif'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const useText = (language: UnitLanguage) => (text: LocalizedText) => pickText(language, text)
 
 function Caption({ y, children, x = 360 }: { y: number; children: ReactNode; x?: number }) {
@@ -73,12 +73,12 @@ function Asymptote({ map, x, y }: { map: PlaneMap; x?: number; y?: number }) {
 export function LineKindsFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const lines = [
-        { m: 2, n: 0, color: STAGE, formula: 'y = 2x', name: say('Proportzionaltasun zuzena', 'Proporcionalidad directa', 'تناسب طردي'), condition: 'n = 0' },
-        { m: -1, n: 3, color: SECOND, formula: 'y = −x + 3', name: say('Lineala', 'Lineal', 'خطية'), condition: 'm ≠ 0,  n ≠ 0' },
-        { m: 0, n: -2, color: MUSTARD, formula: 'y = −2', name: say('Konstantea', 'Constante', 'ثابتة'), condition: 'm = 0' }
+        { m: 2, n: 0, color: STAGE, formula: 'y = 2x', name: say('Proportzionaltasun zuzena', 'Proporcionalidad directa', 'تناسب طردي', 'Direct proportion'), condition: 'n = 0' },
+        { m: -1, n: 3, color: SECOND, formula: 'y = −x + 3', name: say('Lineala', 'Lineal', 'خطية', 'Linear'), condition: 'm ≠ 0,  n ≠ 0' },
+        { m: 0, n: -2, color: MUSTARD, formula: 'y = −2', name: say('Konstantea', 'Constante', 'ثابتة', 'Constant'), condition: 'm = 0' }
     ]
     return (
-        <Figure height={318} label={t(say('Hiru funtzio lineal mota', 'Tres tipos de función lineal', 'ثلاثة أنواع من الدوال الخطية'))}>
+        <Figure height={318} label={t(say('Hiru funtzio lineal mota', 'Tres tipos de función lineal', 'ثلاثة أنواع من الدوال الخطية', 'Three types of linear function'))}>
             <Frame box={{ xMin: -4, xMax: 4, yMin: -4, yMax: 5 }} cell={28} ox={40} oy={30}>
                 {(map, clip) => (
                     <g>
@@ -98,7 +98,7 @@ export function LineKindsFigure({ language }: { language: UnitLanguage }) {
                     <Label x={300} y={134 + index * 62} fontSize={15} fill={INK}>{t(line.name)}</Label>
                 </g>
             ))}
-            <Caption y={306}>{t(say('m: malda · n: jatorriko ordenatua, (0, n) puntua', 'm: pendiente · n: ordenada en el origen, el punto (0, n)', 'm: الميل · n: الجزء المقطوع، النقطة (0, n)'))}</Caption>
+            <Caption y={306}>{t(say('m: malda · n: jatorriko ordenatua, (0, n) puntua', 'm: pendiente · n: ordenada en el origen, el punto (0, n)', 'm: الميل · n: الجزء المقطوع، النقطة (0, n)', 'm: slope · n: y-intercept, the point (0, n)'))}</Caption>
         </Figure>
     )
 }
@@ -108,12 +108,12 @@ export function LineKindsFigure({ language }: { language: UnitLanguage }) {
 export function ParabolaCutsFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const panels = [
-        { f: (x: number) => x * x - 4, formula: 'y = x² − 4', delta: 'Δ = 16 > 0', roots: [-2, 2], name: say('Bi ebaki-puntu', 'Dos cortes', 'نقطتا تقاطع'), color: STAGE },
-        { f: (x: number) => x * x - 2 * x + 1, formula: 'y = x² − 2x + 1', delta: 'Δ = 0', roots: [1], name: say('Bat: erpina ardatzean', 'Uno: el vértice en el eje', 'واحدة: الرأس على المحور'), color: SECOND },
-        { f: (x: number) => x * x + 2, formula: 'y = x² + 2', delta: 'Δ = −8 < 0', roots: [], name: say('Batere ez', 'Ninguno', 'لا شيء'), color: GREEN }
+        { f: (x: number) => x * x - 4, formula: 'y = x² − 4', delta: 'Δ = 16 > 0', roots: [-2, 2], name: say('Bi ebaki-puntu', 'Dos cortes', 'نقطتا تقاطع', 'Two crossing points'), color: STAGE },
+        { f: (x: number) => x * x - 2 * x + 1, formula: 'y = x² − 2x + 1', delta: 'Δ = 0', roots: [1], name: say('Bat: erpina ardatzean', 'Uno: el vértice en el eje', 'واحدة: الرأس على المحور', 'One: the vertex on the axis'), color: SECOND },
+        { f: (x: number) => x * x + 2, formula: 'y = x² + 2', delta: 'Δ = −8 < 0', roots: [], name: say('Batere ez', 'Ninguno', 'لا شيء', 'None'), color: GREEN }
     ]
     return (
-        <Figure height={326} label={t(say('Parabola baten ebaki-puntuak X ardatzarekin', 'Los cortes de una parábola con el eje X', 'تقاطعات القطع المكافئ مع محور X'))}>
+        <Figure height={326} label={t(say('Parabola baten ebaki-puntuak X ardatzarekin', 'Los cortes de una parábola con el eje X', 'تقاطعات القطع المكافئ مع محور X', 'Where a parabola crosses the x-axis'))}>
             {panels.map((panel, index) => (
                 <g key={panel.formula}>
                     <Frame box={{ xMin: -3, xMax: 3, yMin: -5, yMax: 5 }} cell={19} ox={68 + index * 220} oy={32} labels={false}>
@@ -139,7 +139,7 @@ export function ParabolaCutsFigure({ language }: { language: UnitLanguage }) {
 export function VertexPointFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={320} label={t(say('Erpina (1, −4) eta (3, 0) puntua dituen parabola', 'La parábola de vértice (1, −4) que pasa por (3, 0)', 'القطع المكافئ ذو الرأس (1, −4) المار بـ (3, 0)'))}>
+        <Figure height={320} label={t(say('Erpina (1, −4) eta (3, 0) puntua dituen parabola', 'La parábola de vértice (1, −4) que pasa por (3, 0)', 'القطع المكافئ ذو الرأس (1, −4) المار بـ (3, 0)', 'The parabola with vertex (1, −4) that passes through (3, 0)'))}>
             <Frame box={{ xMin: -3, xMax: 5, yMin: -5, yMax: 4 }} cell={28} ox={40} oy={30}>
                 {(map, clip) => (
                     <g>
@@ -152,13 +152,13 @@ export function VertexPointFigure({ language }: { language: UnitLanguage }) {
                 )}
             </Frame>
             <F x={312} y={60} size={20}>y = a(x − p)² + q</F>
-            <Label x={312} y={96} fontSize={16} fill={SECOND}>{t(say('1. Erpina ordeztu:', '1. Pon el vértice:', '1. ضع الرأس:'))}</Label>
+            <Label x={312} y={96} fontSize={16} fill={SECOND}>{t(say('1. Erpina ordeztu:', '1. Pon el vértice:', '1. ضع الرأس:', '1. Put in the vertex:'))}</Label>
             <F x={330} y={124} color={SECOND}>y = a(x − 1)² − 4</F>
-            <Label x={312} y={160} fontSize={16} fill={GREEN}>{t(say('2. P(3, 0) puntua ordeztu:', '2. Sustituye el punto P(3, 0):', '2. عوّض النقطة P(3, 0):'))}</Label>
+            <Label x={312} y={160} fontSize={16} fill={GREEN}>{t(say('2. P(3, 0) puntua ordeztu:', '2. Sustituye el punto P(3, 0):', '2. عوّض النقطة P(3, 0):', '2. Substitute the point P(3, 0):'))}</Label>
             <F x={330} y={188} color={GREEN}>0 = 4a − 4  →  a = 1</F>
-            <Label x={312} y={224} fontSize={16} fill={STAGE}>{t(say('3. Garatu:', '3. Desarrolla:', '3. انشر:'))}</Label>
+            <Label x={312} y={224} fontSize={16} fill={STAGE}>{t(say('3. Garatu:', '3. Desarrolla:', '3. انشر:', '3. Expand:'))}</Label>
             <F x={330} y={252} color={STAGE}>y = x² − 2x − 3</F>
-            <Caption y={306}>{t(say('Simetria: (3, 0) puntuaren bikia (−1, 0) da', 'Por simetría, la pareja de (3, 0) es (−1, 0)', 'بالتماثل، نظيرة (3, 0) هي (−1, 0)'))}</Caption>
+            <Caption y={306}>{t(say('Simetria: (3, 0) puntuaren bikia (−1, 0) da', 'Por simetría, la pareja de (3, 0) es (−1, 0)', 'بالتماثل، نظيرة (3, 0) هي (−1, 0)', 'By symmetry, the pair of (3, 0) is (−1, 0)'))}</Caption>
         </Figure>
     )
 }
@@ -168,7 +168,7 @@ export function VertexPointFigure({ language }: { language: UnitLanguage }) {
 export function LineParabolaFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={322} label={t(say('y = x² − 1 parabola eta y = x + 1 zuzena', 'La parábola y = x² − 1 y la recta y = x + 1', 'القطع المكافئ y = x² − 1 والمستقيم y = x + 1'))}>
+        <Figure height={322} label={t(say('y = x² − 1 parabola eta y = x + 1 zuzena', 'La parábola y = x² − 1 y la recta y = x + 1', 'القطع المكافئ y = x² − 1 والمستقيم y = x + 1', 'The parabola y = x² − 1 and the straight line y = x + 1'))}>
             <Frame box={{ xMin: -3, xMax: 4, yMin: -2, yMax: 6 }} cell={30} ox={40} oy={30}>
                 {(map, clip) => (
                     <g>
@@ -183,12 +183,12 @@ export function LineParabolaFigure({ language }: { language: UnitLanguage }) {
             <F x={336} y={62} color={STAGE}>y = x² − 1</F>
             <Key x={300} y={94} color={SECOND} />
             <F x={336} y={94} color={SECOND}>y = x + 1</F>
-            <Label x={300} y={136} fontSize={16} fill={INK}>{t(say('Berdindu bi adierazpenak:', 'Iguala las dos expresiones:', 'ساوِ بين العبارتين:'))}</Label>
+            <Label x={300} y={136} fontSize={16} fill={INK}>{t(say('Berdindu bi adierazpenak:', 'Iguala las dos expresiones:', 'ساوِ بين العبارتين:', 'Set the two expressions equal:'))}</Label>
             <F x={316} y={166}>x² − 1 = x + 1</F>
             <F x={316} y={196}>x² − x − 2 = 0</F>
             <F x={316} y={226}>x = 2,  x = −1</F>
-            <Label x={300} y={262} fontSize={16} fill={INK}>{t(say('y zuzenean kalkulatu', 'Calcula la y en la recta', 'احسب y على المستقيم'))}</Label>
-            <Caption y={310}>{t(say('Bigarren mailako ekuazioa: 2, 1 edo 0 ebaki-puntu', 'Una ecuación de segundo grado: 2, 1 o 0 puntos de corte', 'معادلة من الدرجة الثانية: 2 أو 1 أو 0 نقطة تقاطع'))}</Caption>
+            <Label x={300} y={262} fontSize={16} fill={INK}>{t(say('y zuzenean kalkulatu', 'Calcula la y en la recta', 'احسب y على المستقيم', 'Work out y on the straight line'))}</Label>
+            <Caption y={310}>{t(say('Bigarren mailako ekuazioa: 2, 1 edo 0 ebaki-puntu', 'Una ecuación de segundo grado: 2, 1 o 0 puntos de corte', 'معادلة من الدرجة الثانية: 2 أو 1 أو 0 نقطة تقاطع', 'A quadratic equation: 2, 1 or 0 crossing points'))}</Caption>
         </Figure>
     )
 }
@@ -198,7 +198,7 @@ export function LineParabolaFigure({ language }: { language: UnitLanguage }) {
 export function AbsLinearFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={318} label={t(say('y = |x − 2| funtzioaren grafikoa', 'La gráfica de y = |x − 2|', 'رسم y = |x − 2|'))}>
+        <Figure height={318} label={t(say('y = |x − 2| funtzioaren grafikoa', 'La gráfica de y = |x − 2|', 'رسم y = |x − 2|', 'The graph of y = |x − 2|'))}>
             <Frame box={{ xMin: -2, xMax: 6, yMin: -4, yMax: 5 }} cell={28} ox={40} oy={30}>
                 {(map, clip) => (
                     <g>
@@ -214,11 +214,11 @@ export function AbsLinearFigure({ language }: { language: UnitLanguage }) {
             <F x={336} y={62} color={MUTED}>y = x − 2</F>
             <Key x={300} y={96} color={STAGE} />
             <F x={336} y={96} color={STAGE}>y = |x − 2|</F>
-            <Label x={300} y={140} fontSize={16} fill={INK}>{t(say('X ardatzaren azpiko zatia', 'El trozo por debajo del eje X', 'الجزء الواقع تحت محور X'))}</Label>
-            <Label x={300} y={166} fontSize={16} fill={INK}>{t(say('gora islatzen da, ispilu batean bezala', 'se refleja hacia arriba, como en un espejo', 'ينعكس إلى الأعلى كما في مرآة'))}</Label>
+            <Label x={300} y={140} fontSize={16} fill={INK}>{t(say('X ardatzaren azpiko zatia', 'El trozo por debajo del eje X', 'الجزء الواقع تحت محور X', 'The part below the x-axis'))}</Label>
+            <Label x={300} y={166} fontSize={16} fill={INK}>{t(say('gora islatzen da, ispilu batean bezala', 'se refleja hacia arriba, como en un espejo', 'ينعكس إلى الأعلى كما في مرآة', 'it is reflected upwards, as if in a mirror'))}</Label>
             <F x={300} y={206} color={MUSTARD}>(0, −2)  →  (0, 2)</F>
-            <Label x={300} y={244} fontSize={16} fontWeight={700} fill={SECOND}>{t(say('Erpina: x − 2 = 0 → x = 2', 'El pico: x − 2 = 0 → x = 2', 'الرأس: x − 2 = 0 → x = 2'))}</Label>
-            <Caption y={306}>{t(say('|y| ≥ 0 beti: grafikoa ez da inoiz X ardatzaren azpitik joaten', '|y| ≥ 0 siempre: la gráfica nunca baja del eje X', 'القيمة المطلقة لا تكون سالبة: لا ينزل الرسم تحت محور X'))}</Caption>
+            <Label x={300} y={244} fontSize={16} fontWeight={700} fill={SECOND}>{t(say('Erpina: x − 2 = 0 → x = 2', 'El pico: x − 2 = 0 → x = 2', 'الرأس: x − 2 = 0 → x = 2', 'The corner: x − 2 = 0 → x = 2'))}</Label>
+            <Caption y={306}>{t(say('|y| ≥ 0 beti: grafikoa ez da inoiz X ardatzaren azpitik joaten', '|y| ≥ 0 siempre: la gráfica nunca baja del eje X', 'القيمة المطلقة لا تكون سالبة: لا ينزل الرسم تحت محور X', '|y| ≥ 0 always: the graph never goes below the x-axis'))}</Caption>
         </Figure>
     )
 }
@@ -228,7 +228,7 @@ export function AbsLinearFigure({ language }: { language: UnitLanguage }) {
 export function AbsPiecesFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={318} label={t(say('y = |2x − 4| zatika idatzita', 'y = |2x − 4| escrita a trozos', 'y = |2x − 4| مكتوبة على أجزاء'))}>
+        <Figure height={318} label={t(say('y = |2x − 4| zatika idatzita', 'y = |2x − 4| escrita a trozos', 'y = |2x − 4| مكتوبة على أجزاء', 'y = |2x − 4| written as a piecewise function'))}>
             <Frame box={{ xMin: -2, xMax: 5, yMin: -1, yMax: 8 }} cell={28} ox={40} oy={30}>
                 {(map, clip) => (
                     <g>
@@ -241,15 +241,15 @@ export function AbsPiecesFigure({ language }: { language: UnitLanguage }) {
                 )}
             </Frame>
             <F x={290} y={60} size={20}>y = |2x − 4|</F>
-            <Label x={290} y={98} fontSize={16} fill={INK}>{t(say('Barrukoa 0 da hemen:', 'Lo de dentro es 0 en:', 'ما بالداخل يساوي 0 عند:'))}</Label>
+            <Label x={290} y={98} fontSize={16} fill={INK}>{t(say('Barrukoa 0 da hemen:', 'Lo de dentro es 0 en:', 'ما بالداخل يساوي 0 عند:', 'The expression inside is 0 at:'))}</Label>
             <F x={306} y={126}>2x − 4 = 0  →  x = 2</F>
-            <Label x={290} y={164} fontSize={16} fill={SECOND}>{t(say('Ezkerrean negatiboa: aldatu zeinua', 'A la izquierda es negativo: cambia el signo', 'إلى اليسار سالب: غيّر الإشارة'))}</Label>
+            <Label x={290} y={164} fontSize={16} fill={SECOND}>{t(say('Ezkerrean negatiboa: aldatu zeinua', 'A la izquierda es negativo: cambia el signo', 'إلى اليسار سالب: غيّر الإشارة', 'To the left it is negative: change the sign'))}</Label>
             <F x={306} y={192} color={SECOND}>−2x + 4</F>
             <F x={420} y={192} color={SECOND} weight={400}>x &lt; 2</F>
-            <Label x={290} y={226} fontSize={16} fill={STAGE}>{t(say('Eskuinean positiboa: utzi den bezala', 'A la derecha es positivo: déjalo igual', 'إلى اليمين موجب: اتركه كما هو'))}</Label>
+            <Label x={290} y={226} fontSize={16} fill={STAGE}>{t(say('Eskuinean positiboa: utzi den bezala', 'A la derecha es positivo: déjalo igual', 'إلى اليمين موجب: اتركه كما هو', 'To the right it is positive: leave it as it is'))}</Label>
             <F x={306} y={254} color={STAGE}>2x − 4</F>
             <F x={420} y={254} color={STAGE} weight={400}>x ≥ 2</F>
-            <Caption y={306}>{t(say('Bi zuzen-zati, erpina (2, 0) puntuan', 'Dos trozos de recta con el pico en (2, 0)', 'قطعتان مستقيمتان رأسهما في (2, 0)'))}</Caption>
+            <Caption y={306}>{t(say('Bi zuzen-zati, erpina (2, 0) puntuan', 'Dos trozos de recta con el pico en (2, 0)', 'قطعتان مستقيمتان رأسهما في (2, 0)', 'Two straight pieces with the corner at (2, 0)'))}</Caption>
         </Figure>
     )
 }
@@ -259,7 +259,7 @@ export function AbsPiecesFigure({ language }: { language: UnitLanguage }) {
 export function AbsQuadraticFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={318} label={t(say('y = |x² − 4| funtzioaren grafikoa', 'La gráfica de y = |x² − 4|', 'رسم y = |x² − 4|'))}>
+        <Figure height={318} label={t(say('y = |x² − 4| funtzioaren grafikoa', 'La gráfica de y = |x² − 4|', 'رسم y = |x² − 4|', 'The graph of y = |x² − 4|'))}>
             <Frame box={{ xMin: -4, xMax: 4, yMin: -5, yMax: 6 }} cell={22} ox={40} oy={32} labelStep={2}>
                 {(map, clip) => (
                     <g>
@@ -275,12 +275,12 @@ export function AbsQuadraticFigure({ language }: { language: UnitLanguage }) {
             <F x={326} y={56} color={MUTED}>y = x² − 4</F>
             <Key x={290} y={88} color={STAGE} />
             <F x={326} y={88} color={STAGE}>y = |x² − 4|</F>
-            <Label x={290} y={130} fontSize={16} fill={SECOND}>{t(say('Ebaki-puntuak X ardatzarekin:', 'Cortes con el eje X:', 'التقاطع مع محور X:'))}</Label>
+            <Label x={290} y={130} fontSize={16} fill={SECOND}>{t(say('Ebaki-puntuak X ardatzarekin:', 'Cortes con el eje X:', 'التقاطع مع محور X:', 'Crossings with the x-axis:'))}</Label>
             <F x={306} y={158} color={SECOND}>x = −2,  x = 2</F>
-            <Label x={290} y={196} fontSize={16} fill={GREEN}>{t(say('Tartean, erpina gora islatzen da:', 'Entre ellos, el vértice sube:', 'بينهما يصعد الرأس:'))}</Label>
+            <Label x={290} y={196} fontSize={16} fill={GREEN}>{t(say('Tartean, erpina gora islatzen da:', 'Entre ellos, el vértice sube:', 'بينهما يصعد الرأس:', 'Between them, the vertex goes up:'))}</Label>
             <F x={306} y={224} color={GREEN}>(0, −4)  →  (0, 4)</F>
-            <Label x={290} y={262} fontSize={16} fill={INK}>{t(say('Bi minimo eta maximo bat', 'Dos mínimos y un máximo', 'قيمتان صغريان وقيمة عظمى'))}</Label>
-            <Caption y={306}>{t(say('Lehenik marraztu barrukoa, gero islatu negatiboa', 'Primero dibuja lo de dentro, luego refleja lo negativo', 'ارسم ما بالداخل أولًا ثم اعكس الجزء السالب'))}</Caption>
+            <Label x={290} y={262} fontSize={16} fill={INK}>{t(say('Bi minimo eta maximo bat', 'Dos mínimos y un máximo', 'قيمتان صغريان وقيمة عظمى', 'Two minima and one maximum'))}</Label>
+            <Caption y={306}>{t(say('Lehenik marraztu barrukoa, gero islatu negatiboa', 'Primero dibuja lo de dentro, luego refleja lo negativo', 'ارسم ما بالداخل أولًا ثم اعكس الجزء السالب', 'First draw the inside part, then reflect the negative part'))}</Caption>
         </Figure>
     )
 }
@@ -290,7 +290,7 @@ export function AbsQuadraticFigure({ language }: { language: UnitLanguage }) {
 export function RationalFormFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={322} label={t(say('y = (2x + 1)/(x − 1) eta bere asintotak', 'y = (2x + 1)/(x − 1) y sus asíntotas', 'y = (2x + 1)/(x − 1) ومقارباه'))}>
+        <Figure height={322} label={t(say('y = (2x + 1)/(x − 1) eta bere asintotak', 'y = (2x + 1)/(x − 1) y sus asíntotas', 'y = (2x + 1)/(x − 1) ومقارباه', 'y = (2x + 1)/(x − 1) and its asymptotes'))}>
             <Frame box={{ xMin: -4, xMax: 6, yMin: -3, yMax: 7 }} cell={24} ox={40} oy={30}>
                 {(map, clip) => (
                     <g>
@@ -305,13 +305,13 @@ export function RationalFormFigure({ language }: { language: UnitLanguage }) {
                 )}
             </Frame>
             <F x={312} y={60} size={20}>y = (2x + 1) / (x − 1)</F>
-            <Label x={312} y={96} fontSize={16} fill={INK}>{t(say('Zatitu: zatidura 2, hondarra 3', 'Divide: cociente 2, resto 3', 'اقسم: الناتج 2 والباقي 3'))}</Label>
+            <Label x={312} y={96} fontSize={16} fill={INK}>{t(say('Zatitu: zatidura 2, hondarra 3', 'Divide: cociente 2, resto 3', 'اقسم: الناتج 2 والباقي 3', 'Divide: quotient 2, remainder 3'))}</Label>
             <F x={330} y={126} color={STAGE}>y = 2 + 3 / (x − 1)</F>
-            <Label x={312} y={164} fontSize={16} fill={MUTED}>{t(say('Asintota bertikala:', 'Asíntota vertical:', 'المقارب الرأسي:'))}</Label>
+            <Label x={312} y={164} fontSize={16} fill={MUTED}>{t(say('Asintota bertikala:', 'Asíntota vertical:', 'المقارب الرأسي:', 'Vertical asymptote:'))}</Label>
             <F x={330} y={190} color={MUTED}>x − 1 = 0  →  x = 1</F>
-            <Label x={312} y={226} fontSize={16} fill={MUTED}>{t(say('Asintota horizontala:', 'Asíntota horizontal:', 'المقارب الأفقي:'))}</Label>
+            <Label x={312} y={226} fontSize={16} fill={MUTED}>{t(say('Asintota horizontala:', 'Asíntota horizontal:', 'المقارب الأفقي:', 'Horizontal asymptote:'))}</Label>
             <F x={330} y={252} color={MUTED}>y = 2 / 1 = 2</F>
-            <Caption y={310}>{t(say('y = 3/x hiperbola, 1 eskuinera eta 2 gora', 'La hipérbola y = 3/x, 1 a la derecha y 2 hacia arriba', 'القطع الزائد y = 3/x، 1 يمينًا و2 إلى الأعلى'))}</Caption>
+            <Caption y={310}>{t(say('y = 3/x hiperbola, 1 eskuinera eta 2 gora', 'La hipérbola y = 3/x, 1 a la derecha y 2 hacia arriba', 'القطع الزائد y = 3/x، 1 يمينًا و2 إلى الأعلى', 'The hyperbola y = 3/x, moved 1 to the right and 2 up'))}</Caption>
         </Figure>
     )
 }

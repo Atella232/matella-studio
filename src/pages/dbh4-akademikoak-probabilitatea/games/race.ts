@@ -59,8 +59,8 @@ export type ProbabilityAkRaceError =
 export type ProbabilityAkRaceQuestion = RaceQuestion<ProbabilityAkRaceError> & { meta: Record<string, number> }
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => ({ eu: `$${latex}$`, es: `$${latex}$`, ar: `$${latex.replace(/\{,\}/g, '.')}$` })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => ({ eu: `$${latex}$`, es: `$${latex}$`, en: `$${latex}$`, ar: `$${latex.replace(/\{,\}/g, '.')}$` })
 const math = (latex: string | number) => `$${latex}$`
 const f = (numerator: number, denominator = 1) => fraction(numerator, denominator)
 const valueOf = (value: FractionValue) => value.numerator / value.denominator
@@ -133,9 +133,9 @@ const lcm = (a: number, b: number) => (a * b) / gcd(a, b)
 const ballsIntro = (total: number) => say(
     `${math(total)} bola daude, 1etik hasita zenbakituta.`,
     `Hay ${math(total)} bolas numeradas desde el 1.`,
-    `هناك ${math(total)} كرة مرقّمة بدءًا من 1.`
+    `هناك ${math(total)} كرة مرقّمة بدءًا من 1.`, `There are ${math(total)} balls numbered from 1.`
 )
-const join = (first: LocalizedText, second: LocalizedText): LocalizedText => ({ eu: `${first.eu} ${second.eu}`, es: `${first.es} ${second.es}`, ar: `${first.ar} ${second.ar}` })
+const join = (first: LocalizedText, second: LocalizedText): LocalizedText => ({ eu: `${first.eu} ${second.eu}`, es: `${first.es} ${second.es}`, en: `${first.en} ${second.en}`, ar: `${first.ar} ${second.ar}` })
 
 function unionCountQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuestion | null {
     const total = pick(random, tier === 0 ? [20, 30] : [20, 24, 30, 36, 40])
@@ -148,7 +148,7 @@ function unionCountQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuesti
     const prompt = join(ballsIntro(total), say(
         `$A$ = «${math(a)} zenbakiaren multiploa» eta $B$ = «${math(b)} zenbakiaren multiploa». Zenbat elementu ditu ${math('A\\cup B')} gertaerak?`,
         `$A$ = «múltiplo de ${math(a)}» y $B$ = «múltiplo de ${math(b)}». ¿Cuántos elementos tiene ${math('A\\cup B')}?`,
-        `$A$ = «مضاعف للعدد ${math(a)}» و$B$ = «مضاعف للعدد ${math(b)}». كم عنصرًا في ${math('A\\cup B')}؟`
+        `$A$ = «مضاعف للعدد ${math(a)}» و$B$ = «مضاعف للعدد ${math(b)}». كم عنصرًا في ${math('A\\cup B')}؟`, `$A$ = ‘multiple of ${math(a)}’ and $B$ = ‘multiple of ${math(b)}’. How many elements does ${math('A\\cup B')} have?`
     ))
     return build(0, 'union-count', prompt, options(random, f(right), [wrong(fa + fb, 'double-count'), wrong(both, 'intersection'), wrong(total - right, 'contrary'), ...near(f(right))], 'count'), f(right), `${fa}+${fb}-${both}=${right}`, { total, a, b })
 }
@@ -161,7 +161,7 @@ function sampleSpaceQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuest
     return build(0, 'sample-space', say(
         `Txanponak eta daduak batera botatzen dira. Txanponak: ${math(coins)}. Daduak: ${math(dice)}. Zenbat emaitza ditu lagin-espazioak?`,
         `Se lanzan a la vez monedas y dados. Monedas: ${math(coins)}. Dados: ${math(dice)}. ¿Cuántos resultados tiene el espacio muestral?`,
-        `تُرمى قطع نقود ونرود معًا. عدد القطع: ${math(coins)}. عدد النرود: ${math(dice)}. كم نتيجة في فضاء العيّنة؟`
+        `تُرمى قطع نقود ونرود معًا. عدد القطع: ${math(coins)}. عدد النرود: ${math(dice)}. كم نتيجة في فضاء العيّنة؟`, `Coins are tossed and dice are rolled at the same time. Coins: ${math(coins)}. Dice: ${math(dice)}. How many outcomes does the sample space have?`
     ), options(random, f(right), [wrong(2 * coins + 6 * dice, 'sum'), wrong(2 * coins * 6 * dice, 'power'), wrong(2 ** coins + 6 ** dice, 'sum'), ...near(f(right))], 'count'), f(right), `${factors.join('\\cdot ')}=${right}`, { coins, dice })
 }
 
@@ -174,7 +174,7 @@ function neitherQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuestion 
         return build(0, 'neither', join(ballsIntro(total), say(
             `Zenbat bolak osatzen dute «${math(a)} zenbakiaren multiploa» gertaeraren aurkakoa?`,
             `¿Cuántas forman el suceso contrario de «múltiplo de ${math(a)}»?`,
-            `كم كرة في الحدث المعاكس للحدث «مضاعف للعدد ${math(a)}»؟`
+            `كم كرة في الحدث المعاكس للحدث «مضاعف للعدد ${math(a)}»؟`, `How many form the complementary event of ‘multiple of ${math(a)}’?`
         )), options(random, f(right), [wrong(fa, 'contrary'), ...near(f(right))], 'count'), f(right), `${total}-${fa}=${right}`, { total, a, b: 0 })
     }
     const b = pick(random, [3, 4, 5, 6].filter((value) => value > a))
@@ -185,7 +185,7 @@ function neitherQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuestion 
     return build(0, 'neither', join(ballsIntro(total), say(
         `Zenbat bola ez dira ${math(a)} zenbakiaren multiplo, ezta ${math(b)} zenbakiarena ere?`,
         `¿Cuántas no son múltiplo ni de ${math(a)} ni de ${math(b)}?`,
-        `كم كرة ليست مضاعفًا للعدد ${math(a)} ولا للعدد ${math(b)}؟`
+        `كم كرة ليست مضاعفًا للعدد ${math(a)} ولا للعدد ${math(b)}؟`, `How many are not a multiple of either ${math(a)} or ${math(b)}?`
     )), options(random, f(right), [wrong(total - fa - fb, 'double-count'), wrong(union, 'contrary'), wrong(total - both, 'intersection'), ...near(f(right))], 'count'), f(right), `${total}-(${fa}+${fb}-${both})=${right}`, { total, a, b })
 }
 
@@ -198,19 +198,19 @@ function twoDiceQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuestion 
     return build(1, 'two-dice', say(
         `Bi dado botatzen dira. Zein da batura ${math(total)} izateko probabilitatea?`,
         `Se lanzan dos dados. ¿Cuál es la probabilidad de que la suma sea ${math(total)}?`,
-        `يُرمى نردان. ما احتمال أن يكون المجموع ${math(total)}؟`
+        `يُرمى نردان. ما احتمال أن يكون المجموع ${math(total)}؟`, `Two dice are rolled. What is the probability that the sum is ${math(total)}?`
     ), options(random, right, [wrong(f(1, 11), 'equiprobable'), wrong(f(total, 36), 'value'), ...near(right, 36)], 'fraction'), right, `\\frac{${cases}}{36}${simplified(cases, 36)}`, { total })
 }
 
 /** Events of a card from the Spanish deck, with the count of cards and the typical slip */
 export const deckEvents: Array<{ count: number; hard: boolean; slip?: Candidate; name: LocalizedText }> = [
-    { count: 4, hard: false, name: say('batekoa', 'un as', 'آس') },
-    { count: 10, hard: false, name: say('urre bat', 'una carta de oros', 'ورقة من الذهب') },
-    { count: 12, hard: false, name: say('irudi bat', 'una figura', 'صورة') },
-    { count: 30, hard: false, slip: wrong(f(10, 40), 'contrary'), name: say('urrea ez den karta bat', 'una carta que no sea de oros', 'ورقة ليست من الذهب') },
-    { count: 13, hard: true, slip: wrong(f(14, 40), 'double-count'), name: say('batekoa edo urre bat', 'un as o una carta de oros', 'آس أو ورقة من الذهب') },
-    { count: 19, hard: true, slip: wrong(f(22, 40), 'double-count'), name: say('irudi bat edo kopa bat', 'una figura o una carta de copas', 'صورة أو ورقة من الكؤوس') },
-    { count: 24, hard: true, slip: wrong(f(16, 40), 'contrary'), name: say('ez batekoa ez irudia den karta bat', 'una carta que no sea ni as ni figura', 'ورقة ليست آسًا ولا صورة') }
+    { count: 4, hard: false, name: say('batekoa', 'un as', 'آس', 'an ace') },
+    { count: 10, hard: false, name: say('urre bat', 'una carta de oros', 'ورقة من الذهب', 'a card of coins') },
+    { count: 12, hard: false, name: say('irudi bat', 'una figura', 'صورة', 'a court card') },
+    { count: 30, hard: false, slip: wrong(f(10, 40), 'contrary'), name: say('urrea ez den karta bat', 'una carta que no sea de oros', 'ورقة ليست من الذهب', 'a card that is not of coins') },
+    { count: 13, hard: true, slip: wrong(f(14, 40), 'double-count'), name: say('batekoa edo urre bat', 'un as o una carta de oros', 'آس أو ورقة من الذهب', 'an ace or a card of coins') },
+    { count: 19, hard: true, slip: wrong(f(22, 40), 'double-count'), name: say('irudi bat edo kopa bat', 'una figura o una carta de copas', 'صورة أو ورقة من الكؤوس', 'a court card or a card of cups') },
+    { count: 24, hard: true, slip: wrong(f(16, 40), 'contrary'), name: say('ez batekoa ez irudia den karta bat', 'una carta que no sea ni as ni figura', 'ورقة ليست آسًا ولا صورة', 'a card that is neither an ace nor a court card') }
 ]
 
 function deckQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuestion | null {
@@ -220,7 +220,7 @@ function deckQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuestion | n
     return build(1, 'deck', say(
         `40 kartako sorta espainiar batetik karta bat ateratzen da. Zein da ${name.eu} ateratzeko probabilitatea?`,
         `Se saca una carta de una baraja española de 40. ¿Cuál es la probabilidad de sacar ${name.es}?`,
-        `تُسحب ورقة من مجموعة ورق إسباني من 40 ورقة. ما احتمال سحب ${name.ar}؟`
+        `تُسحب ورقة من مجموعة ورق إسباني من 40 ورقة. ما احتمال سحب ${name.ar}؟`, `A card is drawn from a 40-card Spanish deck. What is the probability of drawing ${name.en}?`
     ), options(random, right, [...(slip ? [slip] : []), ...near(right, 40)], 'fraction'), right, `\\frac{${count}}{40}${simplified(count, 40)}`, { event })
 }
 
@@ -234,13 +234,13 @@ function unionProbabilityQuestion(random: Random, tier: Tier): ProbabilityAkRace
         return build(1, 'union', say(
             `${math(`P(A)=${hundredths(p)}`)}, ${math(`P(B)=${hundredths(q)}`)} eta ${math(`P(A\\cap B)=${hundredths(i)}`)}. Kalkulatu ${math('P(A\\cup B)')}.`,
             `${math(`P(A)=${hundredths(p)}`)}, ${math(`P(B)=${hundredths(q)}`)} y ${math(`P(A\\cap B)=${hundredths(i)}`)}. Calcula ${math('P(A\\cup B)')}.`,
-            `${math(`P(A)=${hundredths(p)}`)} و${math(`P(B)=${hundredths(q)}`)} و${math(`P(A\\cap B)=${hundredths(i)}`)}. احسب ${math('P(A\\cup B)')}.`
+            `${math(`P(A)=${hundredths(p)}`)} و${math(`P(B)=${hundredths(q)}`)} و${math(`P(A\\cap B)=${hundredths(i)}`)}. احسب ${math('P(A\\cup B)')}.`, `${math(`P(A)=${hundredths(p)}`)}, ${math(`P(B)=${hundredths(q)}`)} and ${math(`P(A\\cap B)=${hundredths(i)}`)}. Calculate ${math('P(A\\cup B)')}.`
         ), options(random, f(u, 100), [wrong(f(p + q, 100), 'no-subtract'), wrong(f(p * q, 10000), 'independent'), wrong(f(100 - u, 100), 'contrary'), ...near(f(u, 100), 100)], 'decimal'), f(u, 100), `${hundredths(p)}+${hundredths(q)}-${hundredths(i)}=${hundredths(u)}`, { p, q, i, form: 0 })
     }
     return build(1, 'union', say(
         `${math(`P(A)=${hundredths(p)}`)}, ${math(`P(B)=${hundredths(q)}`)} eta ${math(`P(A\\cup B)=${hundredths(u)}`)}. Kalkulatu ${math('P(A\\cap B)')}.`,
         `${math(`P(A)=${hundredths(p)}`)}, ${math(`P(B)=${hundredths(q)}`)} y ${math(`P(A\\cup B)=${hundredths(u)}`)}. Calcula ${math('P(A\\cap B)')}.`,
-        `${math(`P(A)=${hundredths(p)}`)} و${math(`P(B)=${hundredths(q)}`)} و${math(`P(A\\cup B)=${hundredths(u)}`)}. احسب ${math('P(A\\cap B)')}.`
+        `${math(`P(A)=${hundredths(p)}`)} و${math(`P(B)=${hundredths(q)}`)} و${math(`P(A\\cup B)=${hundredths(u)}`)}. احسب ${math('P(A\\cap B)')}.`, `${math(`P(A)=${hundredths(p)}`)}, ${math(`P(B)=${hundredths(q)}`)} and ${math(`P(A\\cup B)=${hundredths(u)}`)}. Calculate ${math('P(A\\cap B)')}.`
     ), options(random, f(i, 100), [wrong(f(p * q, 10000), 'independent'), wrong(f(100 - i, 100), 'contrary'), ...near(f(i, 100), 100)], 'decimal'), f(i, 100), `${hundredths(p)}+${hundredths(q)}-${hundredths(u)}=${hundredths(i)}`, { p, q, i, form: 1 })
 }
 
@@ -248,11 +248,11 @@ function unionProbabilityQuestion(random: Random, tier: Tier): ProbabilityAkRace
 
 /** Events of one die, with their faces */
 export const dieEvents: Array<{ faces: number[]; name: LocalizedText }> = [
-    { faces: [6], name: say('6 bat', 'un 6', 'العدد 6') },
-    { faces: [2, 4, 6], name: say('zenbaki bikoiti bat', 'un número par', 'عدد زوجي') },
-    { faces: [3, 6], name: say('3ren multiplo bat', 'un múltiplo de 3', 'مضاعف للعدد 3') },
-    { faces: [1, 2, 3, 4], name: say('5 baino txikiagoa den zenbaki bat', 'un número menor que 5', 'عدد أصغر من 5') },
-    { faces: [2, 3, 5], name: say('zenbaki lehen bat', 'un número primo', 'عدد أولي') }
+    { faces: [6], name: say('6 bat', 'un 6', 'العدد 6', 'a 6') },
+    { faces: [2, 4, 6], name: say('zenbaki bikoiti bat', 'un número par', 'عدد زوجي', 'an even number') },
+    { faces: [3, 6], name: say('3ren multiplo bat', 'un múltiplo de 3', 'مضاعف للعدد 3', 'a multiple of 3') },
+    { faces: [1, 2, 3, 4], name: say('5 baino txikiagoa den zenbaki bat', 'un número menor que 5', 'عدد أصغر من 5', 'a number less than 5') },
+    { faces: [2, 3, 5], name: say('zenbaki lehen bat', 'un número primo', 'عدد أولي', 'a prime number') }
 ]
 
 function independentQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuestion | null {
@@ -264,7 +264,7 @@ function independentQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuest
         return build(2, 'independent', say(
             `Txanpon bat eta dado bat botatzen dira. Zein da aurpegia eta ${name.eu} ateratzeko probabilitatea?`,
             `Se lanzan una moneda y un dado. ¿Cuál es la probabilidad de sacar cara y ${name.es}?`,
-            `تُرمى قطعة نقود ونرد. ما احتمال الحصول على الوجه و${name.ar}؟`
+            `تُرمى قطعة نقود ونرد. ما احتمال الحصول على الوجه و${name.ar}؟`, `A coin and a die are thrown. What is the probability of getting heads and ${name.en}?`
         ), options(random, right, [wrong(add(f(1, 2), p2), 'add'), wrong(p2, 'missing'), ...near(right)], 'fraction'), right, `\\frac{1}{2}\\cdot\\frac{${dieEvents[second].faces.length}}{6}${simplified(dieEvents[second].faces.length, 12)}`, { coin: 1, first: -1, second })
     }
     const first = randomInt(random, 0, dieEvents.length - 1)
@@ -275,7 +275,7 @@ function independentQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuest
     return build(2, 'independent', say(
         `Bi dado botatzen dira. Zein da lehenengoan ${n1.eu} eta bigarrenean ${n2.eu} ateratzeko probabilitatea?`,
         `Se lanzan dos dados. ¿Cuál es la probabilidad de sacar ${n1.es} en el primero y ${n2.es} en el segundo?`,
-        `يُرمى نردان. ما احتمال الحصول على ${n1.ar} في الأول و${n2.ar} في الثاني؟`
+        `يُرمى نردان. ما احتمال الحصول على ${n1.ar} في الأول و${n2.ar} في الثاني؟`, `Two dice are rolled. What is the probability of getting ${n1.en} on the first one and ${n2.en} on the second?`
     ), options(random, right, [wrong(add(p1, p2), 'add'), wrong(p1, 'missing'), wrong(p2, 'missing'), ...near(right)], 'fraction'), right, `\\frac{${dieEvents[first].faces.length}}{6}\\cdot\\frac{${dieEvents[second].faces.length}}{6}${simplified(cases, 36)}`, { coin: 0, first, second })
 }
 
@@ -289,14 +289,14 @@ function withoutReplacementQuestion(random: Random, tier: Tier): ProbabilityAkRa
         return build(2, 'no-replacement', say(
             `Kutxa batean ${math(red)} bola gorri eta ${math(blue)} urdin daude. Bi ateratzen dira, itzuli gabe. Zein da biak gorriak izateko probabilitatea?`,
             `Una urna tiene ${math(red)} bolas rojas y ${math(blue)} azules. Se sacan dos sin devolver. ¿Cuál es la probabilidad de que las dos sean rojas?`,
-            `في جرّة ${math(red)} كرات حمراء و${math(blue)} زرقاء. تُسحب كرتان دون إرجاع. ما احتمال أن تكون الكرتان حمراوين؟`
+            `في جرّة ${math(red)} كرات حمراء و${math(blue)} زرقاء. تُسحب كرتان دون إرجاع. ما احتمال أن تكون الكرتان حمراوين؟`, `An urn has ${math(red)} red balls and ${math(blue)} blue ones. Two are drawn without replacement. What is the probability that both are red?`
         ), options(random, right, [wrong(f(red * red, total * total), 'replacement'), wrong(f(red * (red - 1), total * total), 'denominator'), ...near(right)], 'fraction'), right, `\\frac{${red}}{${total}}\\cdot\\frac{${red - 1}}{${total - 1}}${simplified(red * (red - 1), total * (total - 1))}`, { red, blue, oneOfEach: 0 })
     }
     const right = f(2 * red * blue, total * (total - 1))
     return build(2, 'no-replacement', say(
         `Kutxa batean ${math(red)} bola gorri eta ${math(blue)} urdin daude. Bi ateratzen dira, itzuli gabe. Zein da kolore bakoitzeko bat ateratzeko probabilitatea?`,
         `Una urna tiene ${math(red)} bolas rojas y ${math(blue)} azules. Se sacan dos sin devolver. ¿Cuál es la probabilidad de sacar una de cada color?`,
-        `في جرّة ${math(red)} كرات حمراء و${math(blue)} زرقاء. تُسحب كرتان دون إرجاع. ما احتمال سحب كرة من كل لون؟`
+        `في جرّة ${math(red)} كرات حمراء و${math(blue)} زرقاء. تُسحب كرتان دون إرجاع. ما احتمال سحب كرة من كل لون؟`, `An urn has ${math(red)} red balls and ${math(blue)} blue ones. Two are drawn without replacement. What is the probability of drawing one of each colour?`
     ), options(random, right, [wrong(f(red * blue, total * (total - 1)), 'one-path'), wrong(f(2 * red * blue, total * total), 'replacement'), ...near(right)], 'fraction'), right, `2\\cdot\\frac{${red}}{${total}}\\cdot\\frac{${blue}}{${total - 1}}${simplified(2 * red * blue, total * (total - 1))}`, { red, blue, oneOfEach: 1 })
 }
 
@@ -307,8 +307,8 @@ function atLeastOnceQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuest
     const q = subtract(f(1), p)
     const right = subtract(f(1), power(q, times))
     const prompt = die
-        ? say(`Dado bat ${math(times)} aldiz botatzen da. Zein da gutxienez 6 bat ateratzeko probabilitatea?`, `Se lanza un dado ${math(times)} veces. ¿Cuál es la probabilidad de sacar al menos un 6?`, `يُرمى نرد ${math(times)} مرات. ما احتمال الحصول على 6 مرة على الأقل؟`)
-        : say(`Txanpon bat ${math(times)} aldiz botatzen da. Zein da gutxienez aurpegi bat ateratzeko probabilitatea?`, `Se lanza una moneda ${math(times)} veces. ¿Cuál es la probabilidad de sacar al menos una cara?`, `تُرمى قطعة نقود ${math(times)} مرات. ما احتمال ظهور الوجه مرة على الأقل؟`)
+        ? say(`Dado bat ${math(times)} aldiz botatzen da. Zein da gutxienez 6 bat ateratzeko probabilitatea?`, `Se lanza un dado ${math(times)} veces. ¿Cuál es la probabilidad de sacar al menos un 6?`, `يُرمى نرد ${math(times)} مرات. ما احتمال الحصول على 6 مرة على الأقل؟`, `A die is rolled ${math(times)} times. What is the probability of rolling at least one 6?`)
+        : say(`Txanpon bat ${math(times)} aldiz botatzen da. Zein da gutxienez aurpegi bat ateratzeko probabilitatea?`, `Se lanza una moneda ${math(times)} veces. ¿Cuál es la probabilidad de sacar al menos una cara?`, `تُرمى قطعة نقود ${math(times)} مرات. ما احتمال ظهور الوجه مرة على الأقل؟`, `A coin is tossed ${math(times)} times. What is the probability of getting at least one head?`)
     return build(2, 'at-least', prompt, options(random, right, [wrong(multiply(f(times), p), 'add-probabilities'), wrong(power(q, times), 'none'), wrong(subtract(f(1), power(p, times)), 'all'), ...near(right)], 'fraction'), right, `1-\\left(\\frac{${q.numerator}}{${q.denominator}}\\right)^{${times}}=${written(right, 'fraction')}`, { die: die ? 1 : 0, times })
 }
 
@@ -322,14 +322,14 @@ function tableQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuestion | 
     const intro = say(
         `Mutilak: ${math(a)} betaurrekoekin eta ${math(b)} betaurrekorik gabe. Neskak: ${math(c)} betaurrekoekin eta ${math(d)} betaurrekorik gabe.`,
         `Chicos: ${math(a)} con gafas y ${math(b)} sin gafas. Chicas: ${math(c)} con gafas y ${math(d)} sin gafas.`,
-        `الأولاد: ${math(a)} بنظارات و${math(b)} بلا نظارات. البنات: ${math(c)} بنظارات و${math(d)} بلا نظارات.`
+        `الأولاد: ${math(a)} بنظارات و${math(b)} بلا نظارات. البنات: ${math(c)} بنظارات و${math(d)} بلا نظارات.`, `Boys: ${math(a)} with glasses and ${math(b)} without glasses. Girls: ${math(c)} with glasses and ${math(d)} without glasses.`
     )
     if (givenGirl) {
         const right = f(c, c + d)
-        return build(3, 'table', join(intro, say('Neska bat zoriz aukeratzen da: zein da betaurrekoak eramateko probabilitatea?', 'Se elige al azar una chica: ¿cuál es la probabilidad de que lleve gafas?', 'تُختار بنت عشوائيًا: ما احتمال أن تلبس نظارات؟')), options(random, right, [wrong(f(c, all), 'joint'), wrong(f(c, a + c), 'swap-condition'), wrong(f(a + c, all), 'simple'), ...near(right)], 'fraction'), right, `\\frac{${c}}{${c}+${d}}=${written(right, 'fraction')}`, { a, b, c, d, givenGirl: 1 })
+        return build(3, 'table', join(intro, say('Neska bat zoriz aukeratzen da: zein da betaurrekoak eramateko probabilitatea?', 'Se elige al azar una chica: ¿cuál es la probabilidad de que lleve gafas?', 'تُختار بنت عشوائيًا: ما احتمال أن تلبس نظارات؟', 'A girl is chosen at random. What is the probability that she wears glasses?')), options(random, right, [wrong(f(c, all), 'joint'), wrong(f(c, a + c), 'swap-condition'), wrong(f(a + c, all), 'simple'), ...near(right)], 'fraction'), right, `\\frac{${c}}{${c}+${d}}=${written(right, 'fraction')}`, { a, b, c, d, givenGirl: 1 })
     }
     const right = f(c, a + c)
-    return build(3, 'table', join(intro, say('Betaurrekoak dituen norbait zoriz aukeratzen da: zein da neska izateko probabilitatea?', 'Se elige al azar a alguien con gafas: ¿cuál es la probabilidad de que sea chica?', 'يُختار عشوائيًا شخص يلبس نظارات: ما احتمال أن يكون بنتًا؟')), options(random, right, [wrong(f(c, all), 'joint'), wrong(f(c, c + d), 'swap-condition'), wrong(f(c + d, all), 'simple'), ...near(right)], 'fraction'), right, `\\frac{${c}}{${a}+${c}}=${written(right, 'fraction')}`, { a, b, c, d, givenGirl: 0 })
+    return build(3, 'table', join(intro, say('Betaurrekoak dituen norbait zoriz aukeratzen da: zein da neska izateko probabilitatea?', 'Se elige al azar a alguien con gafas: ¿cuál es la probabilidad de que sea chica?', 'يُختار عشوائيًا شخص يلبس نظارات: ما احتمال أن يكون بنتًا؟', 'Someone wearing glasses is chosen at random. What is the probability that they are a girl?')), options(random, right, [wrong(f(c, all), 'joint'), wrong(f(c, c + d), 'swap-condition'), wrong(f(c + d, all), 'simple'), ...near(right)], 'fraction'), right, `\\frac{${c}}{${a}+${c}}=${written(right, 'fraction')}`, { a, b, c, d, givenGirl: 0 })
 }
 
 function formulaQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuestion | null {
@@ -343,7 +343,7 @@ function formulaQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuestion 
     return build(3, 'formula', say(
         `${math(`P(A)=${hundredths(z)}`)}, ${math(`P(B)=${hundredths(y)}`)} eta ${math(`P(A\\cap B)=${hundredths(x)}`)}. Kalkulatu ${math('P(A/B)')}.`,
         `${math(`P(A)=${hundredths(z)}`)}, ${math(`P(B)=${hundredths(y)}`)} y ${math(`P(A\\cap B)=${hundredths(x)}`)}. Calcula ${math('P(A/B)')}.`,
-        `${math(`P(A)=${hundredths(z)}`)} و${math(`P(B)=${hundredths(y)}`)} و${math(`P(A\\cap B)=${hundredths(x)}`)}. احسب ${math('P(A/B)')}.`
+        `${math(`P(A)=${hundredths(z)}`)} و${math(`P(B)=${hundredths(y)}`)} و${math(`P(A\\cap B)=${hundredths(x)}`)}. احسب ${math('P(A/B)')}.`, `${math(`P(A)=${hundredths(z)}`)}, ${math(`P(B)=${hundredths(y)}`)} and ${math(`P(A\\cap B)=${hundredths(x)}`)}. Calculate ${math('P(A/B)')}.`
     ), options(random, ratio, [wrong(f(x, z), 'swap-condition'), wrong(f(x, 100), 'joint'), wrong(f(x * y, 10000), 'product'), ...near(ratio, 20)], 'decimal'), ratio, `\\frac{${hundredths(x)}}{${hundredths(y)}}=${written(ratio, 'decimal')}`, { x, y, z })
 }
 
@@ -360,7 +360,7 @@ function totalQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuestion | 
     return build(3, 'total', say(
         `Dado bat botatzen da. ${math(faces)} edo txikiagoa ateratzen bada, I kutxatik bola bat ateratzen da (${math(size1)} bolatatik ${math(red1)} gorri); bestela, II kutxatik (${math(size2)} bolatatik ${math(red2)} gorri). Zein da gorria ateratzeko probabilitatea?`,
         `Se lanza un dado. Si sale un número menor o igual que ${math(faces)}, se saca una bola de la urna I (${math(red1)} rojas de ${math(size1)}); si no, de la urna II (${math(red2)} rojas de ${math(size2)}). ¿Cuál es la probabilidad de sacar roja?`,
-        `يُرمى نرد. إذا ظهر عدد أصغر من ${math(faces)} أو يساويه تُسحب كرة من الجرّة I (فيها ${math(red1)} حمراء من ${math(size1)})، وإلا فمن الجرّة II (فيها ${math(red2)} حمراء من ${math(size2)}). ما احتمال سحب كرة حمراء؟`
+        `يُرمى نرد. إذا ظهر عدد أصغر من ${math(faces)} أو يساويه تُسحب كرة من الجرّة I (فيها ${math(red1)} حمراء من ${math(size1)})، وإلا فمن الجرّة II (فيها ${math(red2)} حمراء من ${math(size2)}). ما احتمال سحب كرة حمراء؟`, `A die is rolled. If it shows a number less than or equal to ${math(faces)}, a ball is drawn from urn I (${math(red1)} red out of ${math(size1)}); otherwise, from urn II (${math(red2)} red out of ${math(size2)}). What is the probability of drawing a red ball?`
     ), options(random, right, [wrong(path1, 'one-path'), wrong(multiply(f(1, 2), add(f(red1, size1), f(red2, size2))), 'unweighted'), wrong(f(red1 + red2, size1 + size2), 'merge'), ...near(right)], 'fraction'), right, `\\frac{${faces}}{6}\\cdot\\frac{${red1}}{${size1}}+\\frac{${6 - faces}}{6}\\cdot\\frac{${red2}}{${size2}}=${written(right, 'fraction')}`, { faces, red1, size1, red2, size2 })
 }
 
@@ -376,7 +376,7 @@ function drawAllQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuestion 
     return build(4, 'draw-all', say(
         `Kutxa batean ${math(total)} bola daude, horietatik ${math(red)} gorriak. ${math(drawn)} ateratzen dira batera. Zein da denak gorriak izateko probabilitatea?`,
         `Una urna tiene ${math(total)} bolas, ${math(red)} de ellas rojas. Se sacan ${math(drawn)} a la vez. ¿Cuál es la probabilidad de que todas sean rojas?`,
-        `في جرّة ${math(total)} كرات، منها ${math(red)} حمراء. تُسحب ${math(drawn)} معًا. ما احتمال أن تكون كلها حمراء؟`
+        `في جرّة ${math(total)} كرات، منها ${math(red)} حمراء. تُسحب ${math(drawn)} معًا. ما احتمال أن تكون كلها حمراء؟`, `An urn has ${math(total)} balls, ${math(red)} of them red. ${math(drawn)} are drawn at once. What is the probability that all of them are red?`
     ), options(random, right, [wrong(power(f(red, total), drawn), 'replacement'), wrong(f(red, total), 'single'), ...near(right)], 'fraction'), right, `\\frac{\\text{C}_{${red},${drawn}}}{\\text{C}_{${total},${drawn}}}=\\frac{${choose(red, drawn)}}{${choose(total, drawn)}}${simplified(choose(red, drawn), choose(total, drawn))}`, { total, red, drawn })
 }
 
@@ -388,7 +388,7 @@ function maxDiceQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuestion 
     return build(4, 'max-dice', say(
         `${math(dice)} dado botatzen dira. Zein da puntuazio handiena ${math(top)} izateko probabilitatea?`,
         `Se lanzan ${math(dice)} dados. ¿Cuál es la probabilidad de que la mayor puntuación sea ${math(top)}?`,
-        `تُرمى ${math(dice)} نرود. ما احتمال أن تكون أكبر نتيجة ${math(top)}؟`
+        `تُرمى ${math(dice)} نرود. ما احتمال أن تكون أكبر نتيجة ${math(top)}؟`, `${math(dice)} dice are rolled. What is the probability that the highest score is ${math(top)}?`
     ), options(random, right, [wrong(f(top ** dice, 6 ** dice), 'at-most'), wrong(f(1, 6), 'one-die'), ...near(right, 6 ** dice)], 'fraction'), right, `\\frac{${top}^{${dice}}-${top - 1}^{${dice}}}{${6 ** dice}}=\\frac{${cases}}{${6 ** dice}}${simplified(cases, 6 ** dice)}`, { dice, top })
 }
 
@@ -400,7 +400,7 @@ function expectationQuestion(random: Random, tier: Tier): ProbabilityAkRaceQuest
     return build(4, 'expectation', say(
         `Dado bat botatzen duzu: ${math(faces)} edo txikiagoa ateratzen bada, ${math(prize)} € irabazten dituzu; bestela, ${math(loss)} € galtzen dituzu. Zein da irabazi itxaropena?`,
         `Lanzas un dado: si sale un número menor o igual que ${math(faces)}, ganas ${math(prize)} €; si no, pierdes ${math(loss)} €. ¿Cuál es la ganancia esperada?`,
-        `ترمي نردًا: إذا ظهر عدد أصغر من ${math(faces)} أو يساويه تربح ${math(prize)} €، وإلا تخسر ${math(loss)} €. ما الربح المتوقع؟`
+        `ترمي نردًا: إذا ظهر عدد أصغر من ${math(faces)} أو يساويه تربح ${math(prize)} €، وإلا تخسر ${math(loss)} €. ما الربح المتوقع؟`, `You roll a die: if it shows a number less than or equal to ${math(faces)}, you win €${math(prize)}; otherwise, you lose €${math(loss)}. What is the expected gain?`
     ), options(random, right, [wrong(prize - loss, 'no-probabilities'), wrong(f(prize * faces + loss * (6 - faces), 6), 'sign'), wrong(f(prize * faces, 6), 'missing-loss'), ...near(right, 6)], 'fraction', [-20, 20]), right, `${prize}\\cdot\\frac{${faces}}{6}-${loss}\\cdot\\frac{${6 - faces}}{6}=${written(right, 'fraction')}`, { faces, prize, loss })
 }
 
@@ -434,34 +434,34 @@ export function probabilityAkParTime(circuit: number): number {
 }
 
 export const probabilityAkRaceErrorTips: Record<ProbabilityAkRaceError, LocalizedText> = {
-    'double-count': say('Bien zati komuna bi aldiz zenbatu duzu: kendu behin.', 'Has contado dos veces la parte común: réstala una vez.', 'عددت الجزء المشترك مرتين: اطرحه مرة.'),
-    intersection: say('Hori bietan dauden elementuak dira bakarrik ($A\\cap B$).', 'Eso son solo los que están en los dos ($A\\cap B$).', 'هذه العناصر الموجودة في كليهما فقط ($A\\cap B$).'),
-    contrary: say('Hori galdetutakoaren aurkakoa da: begiratu ondo «ez» dagoen.', 'Eso es el contrario de lo que se pregunta: mira bien si hay un «no».', 'هذا معاكس المطلوب: انتبه لوجود «لا».'),
-    sum: say('Emaitzak ez dira batzen: txanpon bakoitzak 2 aldiz biderkatzen du eta dado bakoitzak 6 aldiz.', 'Los resultados no se suman: cada moneda multiplica por 2 y cada dado por 6.', 'النتائج لا تُجمع: كل قطعة تضرب في 2 وكل نرد في 6.'),
-    power: say('Hiru txanpon: $2\\cdot 2\\cdot 2$, ez $2\\cdot 3$. Berreturak dira.', 'Tres monedas: $2\\cdot 2\\cdot 2$, no $2\\cdot 3$. Son potencias.', 'ثلاث قطع: $2\\cdot 2\\cdot 2$ لا $2\\cdot 3$. إنها قوى.'),
-    equiprobable: say('Baturak ez dira ekiprobableak: zenbatu 36 laukietatik zenbat diren aldekoak.', 'Las sumas no son equiprobables: cuenta las casillas favorables de las 36.', 'المجاميع ليست متساوية الاحتمال: عُدّ الخانات الملائمة من 36.'),
-    value: say('Aldeko kasuak batura hori duten laukiak dira, ez baturaren balioa.', 'Los casos favorables son las casillas con esa suma, no el valor de la suma.', 'الحالات الملائمة هي الخانات ذات ذلك المجموع، لا قيمة المجموع.'),
-    'no-subtract': say('Bateragarriak dira: $P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$.', 'Son compatibles: $P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$.', 'هما متوافقان: $P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$.'),
-    independent: say('Ez dakigu independenteak diren: erabili emandako datuak, ez $P(A)\\cdot P(B)$.', 'No sabemos si son independientes: usa los datos dados, no $P(A)\\cdot P(B)$.', 'لا نعرف أنهما مستقلان: استعمل المعطيات لا $P(A)\\cdot P(B)$.'),
-    add: say('«Eta» aldi berean gertatzea da: probabilitateak biderkatu, ez batu.', '«Y» es que ocurran a la vez: multiplica las probabilidades, no las sumes.', '«و» تعني الوقوع معًا: اضرب الاحتمالات ولا تجمعها.'),
-    missing: say('Bi esperientziek parte hartzen dute: biderkatu bien probabilitateak.', 'Intervienen las dos experiencias: multiplica las dos probabilidades.', 'تشارك التجربتان: اضرب الاحتمالين.'),
-    replacement: say('Bola ez da itzultzen: bigarrenean bola bat gutxiago dago.', 'La bola no se devuelve: en la segunda hay una bola menos.', 'الكرة لا تُعاد: في السحبة الثانية كرة أقل.'),
-    denominator: say('Bigarren ateratzean izendatzailea ere jaisten da: $n-1$.', 'En la segunda extracción también baja el denominador: $n-1$.', 'في السحبة الثانية ينقص المقام أيضًا: $n-1$.'),
-    'one-path': say('Bi bide daude (gorria-urdina eta urdina-gorria): batu biak.', 'Hay dos caminos (roja-azul y azul-roja): suma los dos.', 'هناك مساران: اجمعهما.'),
-    'add-probabilities': say('Probabilitateak ezin dira $n$ aldiz batu: erabili aurkakoa, $1-(1-p)^{n}$.', 'Las probabilidades no se suman $n$ veces: usa el contrario, $1-(1-p)^{n}$.', 'لا تُجمع الاحتمالات $n$ مرة: استعمل المعاكس $1-(1-p)^{n}$.'),
-    none: say('Hori «behin ere ez» da: kendu 1etik.', 'Eso es «ninguna vez»: réstalo de 1.', 'هذا «ولا مرة»: اطرحه من 1.'),
-    all: say('«Gutxienez behin» gertaeraren aurkakoa «behin ere ez» da, ez «beti».', 'El contrario de «al menos una vez» es «ninguna vez», no «todas».', 'معاكس «مرة على الأقل» هو «ولا مرة» لا «كل مرة».'),
-    joint: say('Hori ebakidura da, guztizko nagusiaren gainean; baldintzatuan kasu posibleak baldintzarenak dira.', 'Eso es la intersección sobre el total; en la condicionada los casos posibles son los de la condición.', 'هذا التقاطع على المجموع العام؛ وفي المشروط الحالات الممكنة هي حالات الشرط.'),
-    'swap-condition': say('Baldintza aldatu duzu: $P(A/B)$-n $B$-ren guztizkoaz zatitzen da.', 'Has cambiado la condición: en $P(A/B)$ se divide entre lo de $B$.', 'بدّلت الشرط: في $P(A/B)$ نقسم على ما يخص $B$.'),
-    simple: say('Hori probabilitate soila da; baldintza ahaztu duzu.', 'Eso es la probabilidad simple; has olvidado la condición.', 'هذا احتمال بسيط؛ نسيت الشرط.'),
-    product: say('$P(A/B)$ zatiketa bat da: $\\frac{P(A\\cap B)}{P(B)}$.', '$P(A/B)$ es una división: $\\frac{P(A\\cap B)}{P(B)}$.', '$P(A/B)$ قسمة: $\\frac{P(A\\cap B)}{P(B)}$.'),
-    unweighted: say('Kutxek ez dute probabilitate bera: biderkatu bide bakoitza bere adarrarekin.', 'Las urnas no tienen la misma probabilidad: multiplica cada camino por su rama.', 'الجرّتان ليستا متساويتي الاحتمال: اضرب كل مسار في فرعه.'),
-    merge: say('Kutxak ez dira batzen: bide bakoitzak bere probabilitatea du.', 'Las urnas no se juntan: cada camino tiene su probabilidad.', 'لا تُدمج الجرّتان: لكل مسار احتماله.'),
-    single: say('Hori bola bakar batena da; batera hainbat ateratzen dira: konbinazioak.', 'Eso es para una sola bola; se sacan varias a la vez: combinaciones.', 'هذا لكرة واحدة؛ تُسحب عدة كرات معًا: توافيق.'),
-    'at-most': say('Hori «handiena gehienez» da; kendu txikiagoen kasuak.', 'Eso es «el mayor como mucho»; resta los casos del valor anterior.', 'هذا «الأكبر على الأكثر»؛ اطرح حالات القيمة السابقة.'),
-    'one-die': say('Dado bakarrarentzat da; hainbat daduren kasuak zenbatu behar dira.', 'Eso vale para un solo dado; hay que contar los casos de varios dados.', 'هذا لنرد واحد؛ يجب عدّ حالات عدة نرود.'),
-    'no-probabilities': say('Irabaziak eta galerak bakoitza bere probabilitateaz biderkatzen dira.', 'Ganancias y pérdidas se multiplican cada una por su probabilidad.', 'يُضرب كل ربح وكل خسارة في احتماله.'),
-    sign: say('Galera negatiboa da: kendu egiten da.', 'La pérdida es negativa: se resta.', 'الخسارة سالبة: تُطرح.'),
-    'missing-loss': say('Galerak ere itxaropenean sartzen dira.', 'Las pérdidas también entran en la esperanza.', 'الخسائر تدخل أيضًا في الأمل.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    'double-count': say('Bien zati komuna bi aldiz zenbatu duzu: kendu behin.', 'Has contado dos veces la parte común: réstala una vez.', 'عددت الجزء المشترك مرتين: اطرحه مرة.', 'You have counted the overlap twice: subtract it once.'),
+    intersection: say('Hori bietan dauden elementuak dira bakarrik ($A\\cap B$).', 'Eso son solo los que están en los dos ($A\\cap B$).', 'هذه العناصر الموجودة في كليهما فقط ($A\\cap B$).', 'Those are only the ones in both ($A\\cap B$).'),
+    contrary: say('Hori galdetutakoaren aurkakoa da: begiratu ondo «ez» dagoen.', 'Eso es el contrario de lo que se pregunta: mira bien si hay un «no».', 'هذا معاكس المطلوب: انتبه لوجود «لا».', 'That is the opposite of what is asked: check carefully whether there is a “not”.'),
+    sum: say('Emaitzak ez dira batzen: txanpon bakoitzak 2 aldiz biderkatzen du eta dado bakoitzak 6 aldiz.', 'Los resultados no se suman: cada moneda multiplica por 2 y cada dado por 6.', 'النتائج لا تُجمع: كل قطعة تضرب في 2 وكل نرد في 6.', 'The outcomes are not added: each coin multiplies by 2 and each die by 6.'),
+    power: say('Hiru txanpon: $2\\cdot 2\\cdot 2$, ez $2\\cdot 3$. Berreturak dira.', 'Tres monedas: $2\\cdot 2\\cdot 2$, no $2\\cdot 3$. Son potencias.', 'ثلاث قطع: $2\\cdot 2\\cdot 2$ لا $2\\cdot 3$. إنها قوى.', 'Three coins: $2\\cdot 2\\cdot 2$, not $2\\cdot 3$. They are powers.'),
+    equiprobable: say('Baturak ez dira ekiprobableak: zenbatu 36 laukietatik zenbat diren aldekoak.', 'Las sumas no son equiprobables: cuenta las casillas favorables de las 36.', 'المجاميع ليست متساوية الاحتمال: عُدّ الخانات الملائمة من 36.', 'The sums are not equally likely: count the favourable cells out of the 36.'),
+    value: say('Aldeko kasuak batura hori duten laukiak dira, ez baturaren balioa.', 'Los casos favorables son las casillas con esa suma, no el valor de la suma.', 'الحالات الملائمة هي الخانات ذات ذلك المجموع، لا قيمة المجموع.', 'The favourable outcomes are the cells with that sum, not the value of the sum.'),
+    'no-subtract': say('Bateragarriak dira: $P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$.', 'Son compatibles: $P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$.', 'هما متوافقان: $P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$.', 'They are compatible: $P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$.'),
+    independent: say('Ez dakigu independenteak diren: erabili emandako datuak, ez $P(A)\\cdot P(B)$.', 'No sabemos si son independientes: usa los datos dados, no $P(A)\\cdot P(B)$.', 'لا نعرف أنهما مستقلان: استعمل المعطيات لا $P(A)\\cdot P(B)$.', 'We do not know whether they are independent: use the data given, not $P(A)\\cdot P(B)$.'),
+    add: say('«Eta» aldi berean gertatzea da: probabilitateak biderkatu, ez batu.', '«Y» es que ocurran a la vez: multiplica las probabilidades, no las sumes.', '«و» تعني الوقوع معًا: اضرب الاحتمالات ولا تجمعها.', '“And” means that both happen at the same time: multiply the probabilities, do not add them.'),
+    missing: say('Bi esperientziek parte hartzen dute: biderkatu bien probabilitateak.', 'Intervienen las dos experiencias: multiplica las dos probabilidades.', 'تشارك التجربتان: اضرب الاحتمالين.', 'Both experiments are involved: multiply the two probabilities.'),
+    replacement: say('Bola ez da itzultzen: bigarrenean bola bat gutxiago dago.', 'La bola no se devuelve: en la segunda hay una bola menos.', 'الكرة لا تُعاد: في السحبة الثانية كرة أقل.', 'The ball is not put back: there is one ball fewer in the second draw.'),
+    denominator: say('Bigarren ateratzean izendatzailea ere jaisten da: $n-1$.', 'En la segunda extracción también baja el denominador: $n-1$.', 'في السحبة الثانية ينقص المقام أيضًا: $n-1$.', 'In the second draw the denominator also goes down: $n-1$.'),
+    'one-path': say('Bi bide daude (gorria-urdina eta urdina-gorria): batu biak.', 'Hay dos caminos (roja-azul y azul-roja): suma los dos.', 'هناك مساران: اجمعهما.', 'There are two paths (red-blue and blue-red): add them.'),
+    'add-probabilities': say('Probabilitateak ezin dira $n$ aldiz batu: erabili aurkakoa, $1-(1-p)^{n}$.', 'Las probabilidades no se suman $n$ veces: usa el contrario, $1-(1-p)^{n}$.', 'لا تُجمع الاحتمالات $n$ مرة: استعمل المعاكس $1-(1-p)^{n}$.', 'Probabilities are not added $n$ times: use the complementary event, $1-(1-p)^{n}$.'),
+    none: say('Hori «behin ere ez» da: kendu 1etik.', 'Eso es «ninguna vez»: réstalo de 1.', 'هذا «ولا مرة»: اطرحه من 1.', 'That is “not once”: subtract it from 1.'),
+    all: say('«Gutxienez behin» gertaeraren aurkakoa «behin ere ez» da, ez «beti».', 'El contrario de «al menos una vez» es «ninguna vez», no «todas».', 'معاكس «مرة على الأقل» هو «ولا مرة» لا «كل مرة».', 'The opposite of “at least once” is “not once”, not “every time”.'),
+    joint: say('Hori ebakidura da, guztizko nagusiaren gainean; baldintzatuan kasu posibleak baldintzarenak dira.', 'Eso es la intersección sobre el total; en la condicionada los casos posibles son los de la condición.', 'هذا التقاطع على المجموع العام؛ وفي المشروط الحالات الممكنة هي حالات الشرط.', 'That is the intersection divided by the total; in conditional probability, the possible outcomes are those of the condition.'),
+    'swap-condition': say('Baldintza aldatu duzu: $P(A/B)$-n $B$-ren guztizkoaz zatitzen da.', 'Has cambiado la condición: en $P(A/B)$ se divide entre lo de $B$.', 'بدّلت الشرط: في $P(A/B)$ نقسم على ما يخص $B$.', 'You have changed the condition: in $P(A/B)$ you divide by the total for $B$.'),
+    simple: say('Hori probabilitate soila da; baldintza ahaztu duzu.', 'Eso es la probabilidad simple; has olvidado la condición.', 'هذا احتمال بسيط؛ نسيت الشرط.', 'That is the simple probability; you have forgotten the condition.'),
+    product: say('$P(A/B)$ zatiketa bat da: $\\frac{P(A\\cap B)}{P(B)}$.', '$P(A/B)$ es una división: $\\frac{P(A\\cap B)}{P(B)}$.', '$P(A/B)$ قسمة: $\\frac{P(A\\cap B)}{P(B)}$.', '$P(A/B)$ is a division: $\\frac{P(A\\cap B)}{P(B)}$.'),
+    unweighted: say('Kutxek ez dute probabilitate bera: biderkatu bide bakoitza bere adarrarekin.', 'Las urnas no tienen la misma probabilidad: multiplica cada camino por su rama.', 'الجرّتان ليستا متساويتي الاحتمال: اضرب كل مسار في فرعه.', 'The urns do not have the same probability: multiply each path by its branch.'),
+    merge: say('Kutxak ez dira batzen: bide bakoitzak bere probabilitatea du.', 'Las urnas no se juntan: cada camino tiene su probabilidad.', 'لا تُدمج الجرّتان: لكل مسار احتماله.', 'The urns are not combined: each path has its own probability.'),
+    single: say('Hori bola bakar batena da; batera hainbat ateratzen dira: konbinazioak.', 'Eso es para una sola bola; se sacan varias a la vez: combinaciones.', 'هذا لكرة واحدة؛ تُسحب عدة كرات معًا: توافيق.', 'That is for a single ball; several are drawn at once: combinations.'),
+    'at-most': say('Hori «handiena gehienez» da; kendu txikiagoen kasuak.', 'Eso es «el mayor como mucho»; resta los casos del valor anterior.', 'هذا «الأكبر على الأكثر»؛ اطرح حالات القيمة السابقة.', 'That is “the highest is at most …”; subtract the outcomes for the previous value.'),
+    'one-die': say('Dado bakarrarentzat da; hainbat daduren kasuak zenbatu behar dira.', 'Eso vale para un solo dado; hay que contar los casos de varios dados.', 'هذا لنرد واحد؛ يجب عدّ حالات عدة نرود.', 'That only works for one die; you have to count the outcomes for several dice.'),
+    'no-probabilities': say('Irabaziak eta galerak bakoitza bere probabilitateaz biderkatzen dira.', 'Ganancias y pérdidas se multiplican cada una por su probabilidad.', 'يُضرب كل ربح وكل خسارة في احتماله.', 'Gains and losses are each multiplied by their own probability.'),
+    sign: say('Galera negatiboa da: kendu egiten da.', 'La pérdida es negativa: se resta.', 'الخسارة سالبة: تُطرح.', 'The loss is negative: subtract it.'),
+    'missing-loss': say('Galerak ere itxaropenean sartzen dira.', 'Las pérdidas también entran en la esperanza.', 'الخسائر تدخل أيضًا في الأمل.', 'Losses also count in the expected value.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

@@ -3,6 +3,7 @@ import { pick, randomInt, shuffle, type Random } from '../../../features/unit-v2
 import type { Stars } from '../../../features/unit-v2/games/records.ts'
 import type { LocalizedText, UnitLanguage } from '../../../features/unit-v2/types.ts'
 import { latexNumber, moneyText } from './numbers.ts'
+import { decimalSeparatorFor } from '../../../utils/numberFormat.ts'
 
 /* ==========================================================================
    Nahasketa perfektua (Mezcla perfecta, 4. DBH aplikatuak): two qualities of
@@ -50,7 +51,7 @@ const GOLD = [600, 650, 700, 750, 800, 850, 900, 950, 1000] as const
 const GOODS_PRODUCTS: MixProduct[] = ['coffee', 'tea', 'sweets', 'nuts']
 
 /** Arabic writes the decimal point inside its formulas too */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
 
 const isGold = (round: MixRound) => round.product === 'gold'
 /** Cents in a euro, or thousandths in a fineness of 1 */
@@ -155,13 +156,13 @@ export function amountText(round: MixRound, value: number, language: UnitLanguag
 export function valueText(round: MixRound, value: number, language: UnitLanguage): string {
     if (!isGold(round)) return `${moneyText(Math.round(value) / 100, language)} €/${language === 'ar' ? 'كغ' : 'kg'}`
     const text = String(Math.round(value) / 1000)
-    return language === 'ar' ? text : text.replace('.', ',')
+    return language === 'ar' ? text : text.replace('.', decimalSeparatorFor(language))
 }
 
 /** A value in a sentence: «8 €/kg», or «ley 0,82» for gold */
 function valuePhrase(round: MixRound, value: number, language: UnitLanguage): string {
     if (!isGold(round)) return valueText(round, value, language)
-    return `${say('purutasuna', 'ley', 'عيار')[language]} ${valueText(round, value, language)}`
+    return `${say('purutasuna', 'ley', 'عيار', 'fineness')[language]} ${valueText(round, value, language)}`
 }
 
 /** A distance on the seesaw: «2 €», «1,50 €», «0,05» */
@@ -169,14 +170,14 @@ export function distanceText(round: MixRound, value: number, language: UnitLangu
     return isGold(round) ? valueText(round, value, language) : `${moneyText(value / 100, language)} €`
 }
 
-const forLanguages = (make: (language: UnitLanguage) => string) => say(make('eu'), make('es'), make('ar'))
+const forLanguages = (make: (language: UnitLanguage) => string) => say(make('eu'), make('es'), make('ar'), make('en'))
 
 const HEADINGS: Record<MixProduct, LocalizedText> = {
-    coffee: say('Kafe nahasketa, kiloa:', 'Mezcla de café a:', 'خليط من البن بسعر:'),
-    tea: say('Te nahasketa, kiloa:', 'Mezcla de té a:', 'خليط من الشاي بسعر:'),
-    sweets: say('Gozoki nahasketa, kiloa:', 'Mezcla de caramelos a:', 'خليط من الحلوى بسعر:'),
-    nuts: say('Fruitu lehor nahasketa, kiloa:', 'Mezcla de frutos secos a:', 'خليط من المكسرات بسعر:'),
-    gold: say('Urre-aleazioa, purutasuna:', 'Aleación de oro de ley:', 'سبيكة من الذهب عيارها:')
+    coffee: say('Kafe nahasketa, kiloa:', 'Mezcla de café a:', 'خليط من البن بسعر:', 'Coffee blend at:'),
+    tea: say('Te nahasketa, kiloa:', 'Mezcla de té a:', 'خليط من الشاي بسعر:', 'Tea blend at:'),
+    sweets: say('Gozoki nahasketa, kiloa:', 'Mezcla de caramelos a:', 'خليط من الحلوى بسعر:', 'Sweet mix at:'),
+    nuts: say('Fruitu lehor nahasketa, kiloa:', 'Mezcla de frutos secos a:', 'خليط من المكسرات بسعر:', 'Nut mix at:'),
+    gold: say('Urre-aleazioa, purutasuna:', 'Aleación de oro de ley:', 'سبيكة من الذهب عيارها:', 'Gold alloy of fineness:')
 }
 
 /** Above the value to reach: what is being made */
@@ -192,7 +193,7 @@ export function mixTask(round: MixRound): LocalizedText {
         return say(
             `Guztira: ${amount('eu')}. Zenbat jarri bakoitzetik?`,
             `En total, ${amount('es')}. ¿Cuánto pones de cada uno?`,
-            `المجموع ${amount('ar')}. كم تضع من كلٍّ منهما؟`
+            `المجموع ${amount('ar')}. كم تضع من كلٍّ منهما؟`, `In total, ${amount('en')}. How much of each do you put in?`
         )
     }
     const given = (language: UnitLanguage) => valuePhrase(round, round.values[round.given], language)
@@ -200,7 +201,7 @@ export function mixTask(round: MixRound): LocalizedText {
     return say(
         `Dagoeneko ${amount('eu')} daude (${given('eu')}). Zenbat gehitzen duzu bestetik (${other('eu')})?`,
         `Ya hay ${amount('es')} (${given('es')}). ¿Cuánto añades del otro (${other('es')})?`,
-        `لديك ${amount('ar')} (${given('ar')}). كم تضيف من الآخر (${other('ar')})؟`
+        `لديك ${amount('ar')} (${given('ar')}). كم تضيف من الآخر (${other('ar')})؟`, `There is already ${amount('en')} (${given('en')}). How much of the other (${other('en')}) do you add?`
     )
 }
 
@@ -227,15 +228,15 @@ export function mixVerdict(round: MixRound, amounts: [number, number]): { right:
         return language === 'ar' ? `\u2066${text}\u2069` : text
     }
     if (isGold(round)) {
-        if (side === 0) return { right: true, text: say(`Aleazio perfektua: purutasuna ${value('eu')}!`, `¡Aleación perfecta! Ley ${value('es')}.`, `سبيكة مثالية: العيار ${value('ar')}!`) }
+        if (side === 0) return { right: true, text: say(`Aleazio perfektua: purutasuna ${value('eu')}!`, `¡Aleación perfecta! Ley ${value('es')}.`, `سبيكة مثالية: العيار ${value('ar')}!`, `Perfect alloy! Fineness ${value('en')}.`) }
         return side > 0
-            ? { right: false, text: say(`Purutasuna: ${value('eu')}. Altuegia!`, `Ley ${value('es')}: demasiado alta.`, `العيار ${value('ar')}: مرتفع جدًا.`) }
-            : { right: false, text: say(`Purutasuna: ${value('eu')}. Baxuegia!`, `Ley ${value('es')}: demasiado baja.`, `العيار ${value('ar')}: منخفض جدًا.`) }
+            ? { right: false, text: say(`Purutasuna: ${value('eu')}. Altuegia!`, `Ley ${value('es')}: demasiado alta.`, `العيار ${value('ar')}: مرتفع جدًا.`, `Fineness ${value('en')}: too high.`) }
+            : { right: false, text: say(`Purutasuna: ${value('eu')}. Baxuegia!`, `Ley ${value('es')}: demasiado baja.`, `العيار ${value('ar')}: منخفض جدًا.`, `Fineness ${value('en')}: too low.`) }
     }
-    if (side === 0) return { right: true, text: say(`Nahasketa perfektua: ${value('eu')}!`, `¡Mezcla perfecta! Sale a ${value('es')}.`, `خليط مثالي: ${value('ar')}!`) }
+    if (side === 0) return { right: true, text: say(`Nahasketa perfektua: ${value('eu')}!`, `¡Mezcla perfecta! Sale a ${value('es')}.`, `خليط مثالي: ${value('ar')}!`, `Perfect mix! It comes out at ${value('en')}.`) }
     return side > 0
-        ? { right: false, text: say(`Prezioa: ${value('eu')}. Garestiegia!`, `Sale a ${value('es')}: demasiado cara.`, `السعر ${value('ar')}: غالٍ جدًا.`) }
-        : { right: false, text: say(`Prezioa: ${value('eu')}. Merkeegia!`, `Sale a ${value('es')}: demasiado barata.`, `السعر ${value('ar')}: رخيص جدًا.`) }
+        ? { right: false, text: say(`Prezioa: ${value('eu')}. Garestiegia!`, `Sale a ${value('es')}: demasiado cara.`, `السعر ${value('ar')}: غالٍ جدًا.`, `It comes out at ${value('en')}: too expensive.`) }
+        : { right: false, text: say(`Prezioa: ${value('eu')}. Merkeegia!`, `Sale a ${value('es')}: demasiado barata.`, `السعر ${value('ar')}: رخيص جدًا.`, `It comes out at ${value('en')}: too cheap.`) }
 }
 
 /** Kilos times distance on one side, in LaTeX: 5 · 2 = 10 */
@@ -253,12 +254,12 @@ export function mixHint(round: MixRound, amounts: [number, number]): LocalizedTe
         ? say(
             `Balantza: gramoak bider distantzia, berdin bi aldeetan. Orain: $${left}$ eta $${right}$.`,
             `Balancín: gramos por distancia, igual a los dos lados. Ahora: $${left}$ y $${right}$.`,
-            `الميزان: الغرامات في المسافة متساوية في الجهتين. الآن: $${left}$ و$${right}$.`
+            `الميزان: الغرامات في المسافة متساوية في الجهتين. الآن: $${left}$ و$${right}$.`, `Seesaw: grams times distance must be equal on both sides. Now: $${left}$ and $${right}$.`
         )
         : say(
             `Balantza: kiloak bider distantzia, berdin bi aldeetan. Orain: $${left}$ eta $${right}$.`,
             `Balancín: kilos por distancia, igual a los dos lados. Ahora: $${left}$ y $${right}$.`,
-            `الميزان: الكيلوغرامات في المسافة متساوية في الجهتين. الآن: $${left}$ و$${right}$.`
+            `الميزان: الكيلوغرامات في المسافة متساوية في الجهتين. الآن: $${left}$ و$${right}$.`, `Seesaw: kilos times distance must be equal on both sides. Now: $${left}$ and $${right}$.`
         )
 }
 
@@ -278,12 +279,12 @@ export function mixSolutionText(round: MixRound): LocalizedText {
         return say(
             `Gehitu behar zena: ${amount(other, 'eu')} (${value(other, 'eu')}).`,
             `Había que añadir ${amount(other, 'es')} (${value(other, 'es')}).`,
-            `كان يجب إضافة ${amount(other, 'ar')} (${value(other, 'ar')}).`
+            `كان يجب إضافة ${amount(other, 'ar')} (${value(other, 'ar')}).`, `You had to add ${amount(other, 'en')} (${value(other, 'en')}).`
         )
     }
     return say(
         `Jarri behar zena: ${amount(0, 'eu')} (${value(0, 'eu')}) eta ${amount(1, 'eu')} (${value(1, 'eu')}).`,
         `Había que poner ${amount(0, 'es')} (${value(0, 'es')}) y ${amount(1, 'es')} (${value(1, 'es')}).`,
-        `كان يجب وضع ${amount(0, 'ar')} (${value(0, 'ar')}) و${amount(1, 'ar')} (${value(1, 'ar')}).`
+        `كان يجب وضع ${amount(0, 'ar')} (${value(0, 'ar')}) و${amount(1, 'ar')} (${value(1, 'ar')}).`, `You had to put in ${amount(0, 'en')} (${value(0, 'en')}) and ${amount(1, 'en')} (${value(1, 'en')}).`
     )
 }

@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
@@ -72,10 +73,10 @@ test('polinomioak 4. DBH ak lab: tools, topics and challenge ids', () => {
     for (const challenges of [binomialChallenges, parameterChallenges, quadraticChallenges, gcdChallenges, domainChallenges, simplifyChallenges, commonChallenges, tapsChallenges] as Array<Array<{ id: number; prompt: Record<string, string>; hint: Record<string, string> }>>) {
         for (const challenge of challenges) {
             assert.ok(challenge.id >= 63000 && challenge.id < 64000, `${challenge.id}`)
-            for (const language of ['eu', 'es', 'ar']) {
+            for (const language of ['eu', 'es', 'en', 'ar']) {
                 for (const text of [challenge.prompt[language], challenge.hint[language]]) {
                     for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) {
-                        katex.renderToString(formula, { throwOnError: true })
+                        katex.renderToString(formulaFor(language, formula), { throwOnError: true })
                         assert.ok(!/[؀-ۿ]/.test(formula), `${challenge.id} ${formula}`)
                     }
                 }

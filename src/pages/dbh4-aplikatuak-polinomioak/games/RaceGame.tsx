@@ -12,8 +12,8 @@ const polynomialsRace: RaceRules<PolynomialsRaceError> = {
     parTime: polynomialsParTime,
     errorTip: (error) => polynomialsRaceErrorTips[error ?? 'calculation'],
     pitPlaceholder: () => '−8',
-    pitUnreadable: { eu: 'Idatzi zenbaki oso bat, adibidez −8.', es: 'Escribe un número entero, por ejemplo −8.', ar: 'اكتب عددًا صحيحًا، مثل ⁦−8⁩.' },
-    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', ar: 'اكتبه عددًا.' }
+    pitUnreadable: { eu: 'Idatzi zenbaki oso bat, adibidez −8.', es: 'Escribe un número entero, por ejemplo −8.', en: 'Write an integer, for example −8.', ar: 'اكتب عددًا صحيحًا، مثل ⁦−8⁩.' },
+    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', en: 'Write it as a number.', ar: 'اكتبه عددًا.' }
 }
 
 export function PolynomialsRaceGame(props: GameProps) {

@@ -5,6 +5,7 @@ import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { toExactDecimal, type FractionValue } from '../../../features/unit-v2/math/fraction'
 import type { LocalizedText } from '../../../features/unit-v2/types'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import { linearLatex, type Linear } from '../../dbh1-aljebra-v2/algebra'
 import {
     answerProblem,
@@ -59,8 +60,8 @@ const LINE = 'var(--line, #d6cfc2)'
 
 const signed = (value: number) => (value < 0 ? `−${-value}` : String(value))
 const answerTexts = {
-    placeholder: { eu: 'Adib.: −3', es: 'Ej.: −3', ar: 'مثال: ⁦−3⁩' },
-    unreadable: { eu: 'Idatzi zenbaki bat edo zatiki bat.', es: 'Escribe un número o una fracción.', ar: 'اكتب عددًا أو كسرًا.' }
+    placeholder: { eu: 'Adib.: −3', es: 'Ej.: −3', en: 'E.g.: −3', ar: 'مثال: ⁦−3⁩' },
+    unreadable: { eu: 'Idatzi zenbaki bat edo zatiki bat.', es: 'Escribe un número o una fracción.', en: 'Write a number or a fraction.', ar: 'اكتب عددًا أو كسرًا.' }
 }
 
 /** A value as LaTeX: integer, exact decimal or fraction */
@@ -81,16 +82,16 @@ export function TrialTool(props: LabToolProps) {
     const tried = state.tried[state.equation] ?? []
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Ekuazioa', es: 'Ecuación', ar: 'المعادلة' })} value={String(state.equation)} options={trialEquations.map((_, index) => ({ value: String(index), label: String(index + 1) }))} onChange={(next) => setState((current) => setTrialEquation(current, Number(next)))} />
-            <Stepper label={l({ eu: 'Probatu x =', es: 'Prueba x =', ar: 'جرّب x =' })} value={state.x} min={TRIAL_LIMITS.min} max={TRIAL_LIMITS.max} format={signed} onChange={(next) => setState((current) => tryValue(current, next))} language={props.language} />
-            <p className="fraction-v2-lab-tip">{l({ eu: `Probak: ${tried.length ? tried.map(signed).join(', ') : '—'}`, es: `Intentos: ${tried.length ? tried.map(signed).join(', ') : '—'}`, ar: `المحاولات: ${tried.length ? tried.map(signed).join('، ') : '—'}` })}</p>
+            <Segmented label={l({ eu: 'Ekuazioa', es: 'Ecuación', en: 'Equation', ar: 'المعادلة' })} value={String(state.equation)} options={trialEquations.map((_, index) => ({ value: String(index), label: String(index + 1) }))} onChange={(next) => setState((current) => setTrialEquation(current, Number(next)))} />
+            <Stepper label={l({ eu: 'Probatu x =', es: 'Prueba x =', en: 'Try x =', ar: 'جرّب x =' })} value={state.x} min={TRIAL_LIMITS.min} max={TRIAL_LIMITS.max} format={signed} onChange={(next) => setState((current) => tryValue(current, next))} language={props.language} />
+            <p className="fraction-v2-lab-tip">{l({ eu: `Probak: ${tried.length ? tried.map(signed).join(', ') : '—'}`, es: `Intentos: ${tried.length ? tried.map(signed).join(', ') : '—'}`, en: `Tries: ${tried.length ? tried.map(signed).join(', ') : '—'}`, ar: `المحاولات: ${tried.length ? tried.map(signed).join('، ') : '—'}` })}</p>
         </>
     )
     const readout = (
         <span className="fraction-v2-lab-readout-note">
             {relation === '='
-                ? l({ eu: `Bi atalek ${signed(left)} balio dute: x = ${signed(state.x)} ebazpena da.`, es: `Los dos miembros valen ${signed(left)}: x = ${signed(state.x)} es solución.`, ar: `الطرفان يساويان ${signed(left)}: x = ${signed(state.x)} حل.` })
-                : l({ eu: `Ez dira berdinak: x = ${signed(state.x)} ez da ebazpena.`, es: `No son iguales: x = ${signed(state.x)} no es solución.`, ar: `ليسا متساويين: x = ${signed(state.x)} ليس حلًّا.` })}
+                ? l({ eu: `Bi atalek ${signed(left)} balio dute: x = ${signed(state.x)} ebazpena da.`, es: `Los dos miembros valen ${signed(left)}: x = ${signed(state.x)} es solución.`, en: `Both sides equal ${signed(left)}: x = ${signed(state.x)} is a solution.`, ar: `الطرفان يساويان ${signed(left)}: x = ${signed(state.x)} حل.` })
+                : l({ eu: `Ez dira berdinak: x = ${signed(state.x)} ez da ebazpena.`, es: `No son iguales: x = ${signed(state.x)} no es solución.`, en: `They are not equal: x = ${signed(state.x)} is not a solution.`, ar: `ليسا متساويين: x = ${signed(state.x)} ليس حلًّا.` })}
         </span>
     )
     return (
@@ -117,15 +118,15 @@ interface SolverLine {
 function solverLines(index: number): SolverLine[] {
     const equation = solverEquations[index]
     const { left, right } = equation
-    const lines: SolverLine[] = [{ latex: equation.latex, note: { eu: 'Hasierako ekuazioa', es: 'Ecuación inicial', ar: 'المعادلة الأصلية' } }]
-    if (equation.expanded) lines.push({ latex: equation.expanded, note: { eu: 'Parentesiak kendu', es: 'Quitar paréntesis', ar: 'حذف الأقواس' } })
+    const lines: SolverLine[] = [{ latex: equation.latex, note: { eu: 'Hasierako ekuazioa', es: 'Ecuación inicial', en: 'Starting equation', ar: 'المعادلة الأصلية' } }]
+    if (equation.expanded) lines.push({ latex: equation.expanded, note: { eu: 'Parentesiak kendu', es: 'Quitar paréntesis', en: 'Remove brackets', ar: 'حذف الأقواس' } })
     const xLeft = [left.a !== 0 ? linearLatex({ a: left.a, b: 0 }) : '', right.a !== 0 ? linearLatex({ a: -right.a, b: 0 }) : ''].filter(Boolean).join('+').replace('+-', '-')
     const numbers = [right.b !== 0 ? String(right.b) : '', left.b !== 0 ? String(-left.b) : ''].filter(Boolean).join('+').replace('+-', '-')
-    lines.push({ latex: `${xLeft}=${numbers || '0'}`, note: { eu: 'x-ak ezkerrean, zenbakiak eskuinean (zeinua aldatuz)', es: 'Las x a la izquierda, los números a la derecha (cambiando el signo)', ar: 'x إلى اليسار والأعداد إلى اليمين (مع تغيير الإشارة)' } })
+    lines.push({ latex: `${xLeft}=${numbers || '0'}`, note: { eu: 'x-ak ezkerrean, zenbakiak eskuinean (zeinua aldatuz)', es: 'Las x a la izquierda, los números a la derecha (cambiando el signo)', en: 'The x terms on the left, the numbers on the right (changing their sign)', ar: 'x إلى اليسار والأعداد إلى اليمين (مع تغيير الإشارة)' } })
     const a = left.a - right.a
     const b = right.b - left.b
-    lines.push({ latex: `${linearLatex({ a, b: 0 })}=${b}`, note: { eu: 'Laburtu', es: 'Reducir', ar: 'التبسيط' } })
-    lines.push({ latex: `x=${valueLatex(solverSolution(equation))}`, note: { eu: `Askatu x: ${a} zatitzen pasatzen da`, es: `Despejar x: el ${a} pasa dividiendo`, ar: `عزل x: ينتقل ${a} قاسمًا` } })
+    lines.push({ latex: `${linearLatex({ a, b: 0 })}=${b}`, note: { eu: 'Laburtu', es: 'Reducir', en: 'Simplify', ar: 'التبسيط' } })
+    lines.push({ latex: `x=${valueLatex(solverSolution(equation))}`, note: { eu: `Askatu x: ${a} zatitzen pasatzen da`, es: `Despejar x: el ${a} pasa dividiendo`, en: `Solve for x: the ${a} moves across, dividing.`, ar: `عزل x: ينتقل ${a} قاسمًا` } })
     return lines
 }
 
@@ -137,8 +138,8 @@ export function SolverTool(props: LabToolProps) {
     const total = solverStepCount(equation)
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Ekuazioa', es: 'Ecuación', ar: 'المعادلة' })} value={String(state.equation)} options={solverEquations.map((_, index) => ({ value: String(index), label: String(index + 1) }))} onChange={(next) => setState((current) => setSolverEquation(current, Number(next)))} />
-            <button type="button" className="fraction-v2-secondary" disabled={state.shown >= total} onClick={() => setState(nextSolverStep)}>{l({ eu: 'Hurrengo urratsa', es: 'Siguiente paso', ar: 'الخطوة التالية' })}</button>
+            <Segmented label={l({ eu: 'Ekuazioa', es: 'Ecuación', en: 'Equation', ar: 'المعادلة' })} value={String(state.equation)} options={solverEquations.map((_, index) => ({ value: String(index), label: String(index + 1) }))} onChange={(next) => setState((current) => setSolverEquation(current, Number(next)))} />
+            <button type="button" className="fraction-v2-secondary" disabled={state.shown >= total} onClick={() => setState(nextSolverStep)}>{l({ eu: 'Hurrengo urratsa', es: 'Siguiente paso', en: 'Next step', ar: 'الخطوة التالية' })}</button>
         </>
     )
     const readout = (
@@ -190,8 +191,8 @@ export function LcmTool(props: LabToolProps) {
     const right: Linear = clearedSide(equation.right, state.multiplier)
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Ekuazioa', es: 'Ecuación', ar: 'المعادلة' })} value={String(state.equation)} options={lcmEquations.map((_, index) => ({ value: String(index), label: String(index + 1) }))} onChange={(next) => setState((current) => setLcm(current, { equation: Number(next) }))} />
-            <Stepper label={l({ eu: 'Biderkatu …z', es: 'Multiplica por', ar: 'اضرب في' })} value={state.multiplier} min={MULTIPLIER_LIMITS.min} max={MULTIPLIER_LIMITS.max} onChange={(next) => setState((current) => setLcm(current, { multiplier: next }))} language={props.language} />
+            <Segmented label={l({ eu: 'Ekuazioa', es: 'Ecuación', en: 'Equation', ar: 'المعادلة' })} value={String(state.equation)} options={lcmEquations.map((_, index) => ({ value: String(index), label: String(index + 1) }))} onChange={(next) => setState((current) => setLcm(current, { equation: Number(next) }))} />
+            <Stepper label={l({ eu: 'Biderkatu …z', es: 'Multiplica por', en: 'Multiply by', ar: 'اضرب في' })} value={state.multiplier} min={MULTIPLIER_LIMITS.min} max={MULTIPLIER_LIMITS.max} onChange={(next) => setState((current) => setLcm(current, { multiplier: next }))} language={props.language} />
         </>
     )
     const readout = (
@@ -203,10 +204,10 @@ export function LcmTool(props: LabToolProps) {
             )}
             <span className="fraction-v2-lab-readout-note">
                 {!cleared
-                    ? l({ eu: 'Zatikiren bat geratzen da: zenbaki hori ez da izendatzaile guztien multiploa.', es: 'Queda alguna fracción: ese número no es múltiplo de todos los denominadores.', ar: 'بقي كسر: هذا العدد ليس مضاعفًا لكل المقامات.' })
+                    ? l({ eu: 'Zatikiren bat geratzen da: zenbaki hori ez da izendatzaile guztien multiploa.', es: 'Queda alguna fracción: ese número no es múltiplo de todos los denominadores.', en: 'There\'s still a fraction left: that number is not a multiple of all the denominators.', ar: 'بقي كسر: هذا العدد ليس مضاعفًا لكل المقامات.' })
                     : state.multiplier === lcm
-                        ? l({ eu: `Zatikirik gabe, zenbakirik txikienarekin: MKTa ${lcm} da.`, es: `Sin fracciones, con el menor número: el m.c.m. es ${lcm}.`, ar: `بلا كسور وبأصغر عدد: م.م.أ هو ${lcm}.` })
-                        : l({ eu: `Zatikirik gabe, baina ${lcm} txikiagoa da (MKTa): zenbaki handiagoak geratzen dira.`, es: `Sin fracciones, pero ${lcm} es menor (el m.c.m.): quedan números más grandes.`, ar: `بلا كسور، لكن ${lcm} أصغر (م.م.أ): تبقى أعداد أكبر.` })}
+                        ? l({ eu: `Zatikirik gabe, zenbakirik txikienarekin: MKTa ${lcm} da.`, es: `Sin fracciones, con el menor número: el m.c.m. es ${lcm}.`, en: `No fractions, with the smallest number: the LCM is ${lcm}.`, ar: `بلا كسور وبأصغر عدد: م.م.أ هو ${lcm}.` })
+                        : l({ eu: `Zatikirik gabe, baina ${lcm} txikiagoa da (MKTa): zenbaki handiagoak geratzen dira.`, es: `Sin fracciones, pero ${lcm} es menor (el m.c.m.): quedan números más grandes.`, en: `No fractions, but ${lcm} is smaller (the LCM): you are left with bigger numbers.`, ar: `بلا كسور، لكن ${lcm} أصغر (م.م.أ): تبقى أعداد أكبر.` })}
             </span>
         </>
     )
@@ -234,26 +235,26 @@ export function ProblemsTool(props: LabToolProps) {
     const ready = planned(state, state.problem)
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Buruketa', es: 'Problema', ar: 'المسألة' })} value={String(state.problem)} options={problemCards.map((_, index) => ({ value: String(index), label: String(index + 1) }))} onChange={(next) => setState((current) => setProblem(current, Number(next)))} />
-            <p className="fraction-v2-lab-tip">{l({ eu: `Ebatzita: ${state.solved.length} / ${problemCards.length}`, es: `Resueltos: ${state.solved.length} / ${problemCards.length}`, ar: `المحلولة: ${state.solved.length} / ${problemCards.length}` })}</p>
+            <Segmented label={l({ eu: 'Buruketa', es: 'Problema', en: 'Problem', ar: 'المسألة' })} value={String(state.problem)} options={problemCards.map((_, index) => ({ value: String(index), label: String(index + 1) }))} onChange={(next) => setState((current) => setProblem(current, Number(next)))} />
+            <p className="fraction-v2-lab-tip">{l({ eu: `Ebatzita: ${state.solved.length} / ${problemCards.length}`, es: `Resueltos: ${state.solved.length} / ${problemCards.length}`, en: `Solved: ${state.solved.length} / ${problemCards.length}`, ar: `المحلولة: ${state.solved.length} / ${problemCards.length}` })}</p>
         </>
     )
     const readout = ready
         ? <ResultAnswer language={props.language} state={state} expected={card.answer} placeholder={answerTexts.placeholder} unreadable={answerTexts.unreadable} onChange={(patch) => setState((current) => answerProblem(current, patch))} />
-        : <span className="fraction-v2-lab-readout-note">{l({ eu: 'Lehenik aukeratu ekuazio zuzena.', es: 'Primero elige la ecuación correcta.', ar: 'اختر المعادلة الصحيحة أولًا.' })}</span>
+        : <span className="fraction-v2-lab-readout-note">{l({ eu: 'Lehenik aukeratu ekuazio zuzena.', es: 'Primero elige la ecuación correcta.', en: 'First choose the correct equation.', ar: 'اختر المعادلة الصحيحة أولًا.' })}</span>
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={problemsChallenges} state={state}>
             <div className="equations-lab-problem">
                 <p className="equations-lab-statement">{l(card.statement)}</p>
                 <p className="equations-lab-unknown">{l(card.unknown)}</p>
-                <div className="equations-lab-options" role="group" aria-label={l({ eu: 'Ekuazioa', es: 'Ecuación', ar: 'المعادلة' })}>
+                <div className="equations-lab-options" role="group" aria-label={l({ eu: 'Ekuazioa', es: 'Ecuación', en: 'Equation', ar: 'المعادلة' })}>
                     {optionOrder(state.problem).map((option) => (
                         <button type="button" key={option} aria-pressed={chosen === option} className={chosen === option ? (option === 0 ? 'right' : 'wrong') : ''} onClick={() => setState((current) => chooseEquation(current, option))} dir="ltr">
                             <MathText text={`$${card.options[option]}$`} />
                         </button>
                     ))}
                 </div>
-                {chosen !== undefined && chosen !== 0 && <p className="fraction-v2-feedback error">{l({ eu: 'Ekuazio horrek ez du enuntziatua itzultzen. Irakurri berriro zatika.', es: 'Esa ecuación no traduce el enunciado. Vuelve a leerlo por partes.', ar: 'هذه المعادلة لا تترجم النص. أعد قراءته جزءًا جزءًا.' })}</p>}
+                {chosen !== undefined && chosen !== 0 && <p className="fraction-v2-feedback error">{l({ eu: 'Ekuazio horrek ez du enuntziatua itzultzen. Irakurri berriro zatika.', es: 'Esa ecuación no traduce el enunciado. Vuelve a leerlo por partes.', en: 'That equation does not translate the problem. Read it again, part by part.', ar: 'هذه المعادلة لا تترجم النص. أعد قراءته جزءًا جزءًا.' })}</p>}
             </div>
         </ToolFrame>
     )
@@ -266,7 +267,7 @@ export function QuadraticTool(props: LabToolProps) {
     const [state, setState] = useState<QuadraticState>(initialQuadraticState)
     const delta = discriminant(state)
     const roots = quadraticSolutions(state)
-    const shown = (value: number) => (Math.abs(value - Math.round(value)) < 1e-9 ? signed(Math.round(value)) : `≈ ${(Math.round(value * 100) / 100).toString().replace('.', props.language === 'ar' ? '.' : ',')}`)
+    const shown = (value: number) => (Math.abs(value - Math.round(value)) < 1e-9 ? signed(Math.round(value)) : `≈ ${(Math.round(value * 100) / 100).toString().replace('.', props.language === 'ar' ? '.' : decimalSeparatorFor(props.language))}`)
     const equation = `${linearLatex({ a: state.a, b: 0 }).replace('x', 'x^{2}')}${state.b === 0 ? '' : linearLatex({ a: state.b, b: 0 }).startsWith('-') ? linearLatex({ a: state.b, b: 0 }) : `+${linearLatex({ a: state.b, b: 0 })}`}${state.c === 0 ? '' : state.c < 0 ? state.c : `+${state.c}`}=0`
     // Graph: x from −8 to 8, y clipped to the box
     const width = 420
@@ -288,10 +289,10 @@ export function QuadraticTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-main"><MathText text={`$\\Delta=${state.b < 0 ? `(${state.b})` : state.b}^{2}-4\\cdot ${state.a < 0 ? `(${state.a})` : state.a}\\cdot ${state.c < 0 ? `(${state.c})` : state.c}=${delta}$`} /></span>
             <span className="fraction-v2-lab-readout-note">
                 {delta > 0
-                    ? l({ eu: `Bi ebazpen: x = ${shown(roots[0])} eta x = ${shown(roots[1])}.`, es: `Dos soluciones: x = ${shown(roots[0])} y x = ${shown(roots[1])}.`, ar: `حلان: x = ${shown(roots[0])} وx = ${shown(roots[1])}.` })
+                    ? l({ eu: `Bi ebazpen: x = ${shown(roots[0])} eta x = ${shown(roots[1])}.`, es: `Dos soluciones: x = ${shown(roots[0])} y x = ${shown(roots[1])}.`, en: `Two solutions: x = ${shown(roots[0])} and x = ${shown(roots[1])}.`, ar: `حلان: x = ${shown(roots[0])} وx = ${shown(roots[1])}.` })
                     : delta === 0
-                        ? l({ eu: `Ebazpen bat (bikoitza): x = ${shown(roots[0])}.`, es: `Una solución (doble): x = ${shown(roots[0])}.`, ar: `حل واحد (مضاعف): x = ${shown(roots[0])}.` })
-                        : l({ eu: 'Δ negatiboa: ez dago ebazpenik.', es: 'Δ negativo: no hay solución.', ar: 'Δ سالب: لا حل.' })}
+                        ? l({ eu: `Ebazpen bat (bikoitza): x = ${shown(roots[0])}.`, es: `Una solución (doble): x = ${shown(roots[0])}.`, en: `One solution (double): x = ${shown(roots[0])}.`, ar: `حل واحد (مضاعف): x = ${shown(roots[0])}.` })
+                        : l({ eu: 'Δ negatiboa: ez dago ebazpenik.', es: 'Δ negativo: no hay solución.', en: 'Δ negative: there is no solution.', ar: 'Δ سالب: لا حل.' })}
             </span>
         </>
     )

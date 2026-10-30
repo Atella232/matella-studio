@@ -1,17 +1,18 @@
 import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { formatDecimal, fraction as createFraction } from '../../fractions/fractionMath'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import './NumberLineLab.css'
 
 export function NumberLineLab() {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
     const [numerator, setNumerator] = useState(1)
     const [denominator, setDenominator] = useState(2)
     const [zoomLevel, setZoomLevel] = useState(1)
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
     const fraction = numerator / denominator
-    const decimal = formatDecimal(createFraction(numerator, denominator))
+    const decimal = formatDecimal(createFraction(numerator, denominator), decimalSeparatorFor(i18n.language))
     const gcd = (a: number, b: number): number => (b === 0 ? a : gcd(b, a % b))
     const commonDivisor = gcd(numerator, denominator)
     const simplifiedNum = numerator / commonDivisor

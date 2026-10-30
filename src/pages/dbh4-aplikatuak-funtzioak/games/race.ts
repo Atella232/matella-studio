@@ -46,8 +46,8 @@ export type FunctionsRaceError =
 export type FunctionsRaceQuestion = RaceQuestion<FunctionsRaceError> & { meta: Record<string, number | number[]>; graph?: GraphSpec }
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => ({ eu: `$${latex}$`, es: `$${latex}$`, ar: `$${latex.replace(/\{,\}/g, '.')}$` })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => ({ eu: `$${latex}$`, es: `$${latex}$`, en: `$${latex}$`, ar: `$${latex.replace(/\{,\}/g, '.')}$` })
 const math = (latex: string) => `$${latex}$`
 const exact = (value: number) => fraction(Math.round(value * 1000), 1000)
 const tex = (value: number) => written(exact(value)) ?? String(value)
@@ -109,7 +109,7 @@ function evaluateQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | n
     return choices && build(0, 'evaluate', say(
         `${math(`f(x)=${polyLatex(a, b, c)}`)} bada, zenbat da ${math(`f(${k})`)}?`,
         `Si ${math(`f(x)=${polyLatex(a, b, c)}`)}, ¿cuánto vale ${math(`f(${k})`)}?`,
-        `إذا كانت ${math(`f(x)=${polyLatex(a, b, c)}`)} فكم تساوي ${math(`f(${k})`)}؟`
+        `إذا كانت ${math(`f(x)=${polyLatex(a, b, c)}`)} فكم تساوي ${math(`f(${k})`)}؟`, `If ${math(`f(x)=${polyLatex(a, b, c)}`)}, what is the value of ${math(`f(${k})`)}?`
     ), choices, answer, same(`${br(k)}^{2}=${k * k}\\to f(${k})=${tex(answer)}`), { a, b, c, k })
 }
 
@@ -122,7 +122,7 @@ function fareQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | null 
     return choices && build(0, 'fare', say(
         `Taxi batek ${math(`y=${tex(rate)}x+${tex(fixed)}`)} kobratzen du (${math('x')} km, ${math('y')} €). Zenbat balio du ${math(String(km))} km-ko bidaiak?`,
         `Un taxi cobra ${math(`y=${tex(rate)}x+${tex(fixed)}`)} (${math('x')} en km, ${math('y')} en €). ¿Cuánto cuesta un viaje de ${math(String(km))} km?`,
-        `تأخذ سيارة أجرة ${math(`y=${tex(rate)}x+${tex(fixed)}`)} (${math('x')} بالكيلومتر و${math('y')} باليورو). كم تكلف رحلة ${math(String(km))} كم؟`
+        `تأخذ سيارة أجرة ${math(`y=${tex(rate)}x+${tex(fixed)}`)} (${math('x')} بالكيلومتر و${math('y')} باليورو). كم تكلف رحلة ${math(String(km))} كم؟`, `A taxi charges ${math(`y=${tex(rate)}x+${tex(fixed)}`)} (${math('x')} in km, ${math('y')} in €). How much does a trip of ${math(String(km))} km cost?`
     ), choices, answer, same(`${tex(rate)}\\cdot ${km}+${tex(fixed)}=${tex(answer)}`), { rate, fixed, km })
 }
 
@@ -135,7 +135,7 @@ function preimageQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | n
     return choices && build(0, 'preimage', say(
         `${math(`f(x)=${polyLatex(0, m, n)}`)} funtzioan, zein ${math('x')}-k du ${math(String(value))} irudia?`,
         `En ${math(`f(x)=${polyLatex(0, m, n)}`)}, ¿qué ${math('x')} tiene imagen ${math(String(value))}?`,
-        `في ${math(`f(x)=${polyLatex(0, m, n)}`)}، ما قيمة ${math('x')} التي صورتها ${math(String(value))}؟`
+        `في ${math(`f(x)=${polyLatex(0, m, n)}`)}، ما قيمة ${math('x')} التي صورتها ${math(String(value))}؟`, `In ${math(`f(x)=${polyLatex(0, m, n)}`)}, which ${math('x')} has the image ${math(String(value))}?`
     ), choices, x, same(`${polyLatex(0, m, n)}=${value}\\to x=${x}`), { m, n, value })
 }
 
@@ -150,7 +150,7 @@ function excludedQuestion(random: Random): FunctionsRaceQuestion | null {
     return choices && build(1, 'excluded', say(
         `Zein ${math('x')} ez dago ${math(fractionTex)} funtzioaren izate-eremuan?`,
         `¿Qué ${math('x')} no está en el dominio de ${math(fractionTex)}?`,
-        `ما قيمة ${math('x')} التي ليست في مجال ${math(fractionTex)}؟`
+        `ما قيمة ${math('x')} التي ليست في مجال ${math(fractionTex)}؟`, `Which ${math('x')} is not in the domain of ${math(fractionTex)}?`
     ), choices, q, same(`${polyLatex(0, 1, -q)}=0\\to x=${q}`), { p, q })
 }
 
@@ -162,7 +162,7 @@ function rootQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | null 
     return choices && build(1, 'root', say(
         `${math(`y=\\sqrt{${inside}}`)} funtzioaren izate-eremua ${math('[a,\\,+\\infty)')} da. Zenbat da ${math('a')}?`,
         `El dominio de ${math(`y=\\sqrt{${inside}}`)} es ${math('[a,\\,+\\infty)')}. ¿Cuánto vale ${math('a')}?`,
-        `مجال ${math(`y=\\sqrt{${inside}}`)} هو ${math('[a,\\,+\\infty)')}. كم تساوي ${math('a')}؟`
+        `مجال ${math(`y=\\sqrt{${inside}}`)} هو ${math('[a,\\,+\\infty)')}. كم تساوي ${math('a')}؟`, `The domain of ${math(`y=\\sqrt{${inside}}`)} is ${math('[a,\\,+\\infty)')}. What is the value of ${math('a')}?`
     ), choices, start, same(`${inside}\\ge 0\\to x\\ge ${start}`), { k, start })
 }
 
@@ -174,7 +174,7 @@ function yInterceptQuestion(random: Random): FunctionsRaceQuestion | null {
     return choices && build(1, 'y-intercept', say(
         `Zein da ${math(`y=${polyLatex(a, b, c)}`)} funtzioaren Y ardatzeko ebaki-puntuaren ordenatua?`,
         `¿Cuál es la ordenada del corte de ${math(`y=${polyLatex(a, b, c)}`)} con el eje Y?`,
-        `ما ترتيبة تقاطع ${math(`y=${polyLatex(a, b, c)}`)} مع محور Y؟`
+        `ما ترتيبة تقاطع ${math(`y=${polyLatex(a, b, c)}`)} مع محور Y؟`, `What is the y-intercept of ${math(`y=${polyLatex(a, b, c)}`)}?`
     ), choices, c, same(`x=0\\to y=${c}`), { a, b, c })
 }
 
@@ -186,7 +186,7 @@ function xInterceptQuestion(random: Random): FunctionsRaceQuestion | null {
     return choices && build(1, 'x-intercept', say(
         `Non ebakitzen du ${math(`y=${polyLatex(0, m, n)}`)} funtzioak X ardatza? Idatzi ${math('x')}.`,
         `¿Dónde corta ${math(`y=${polyLatex(0, m, n)}`)} al eje X? Escribe la ${math('x')}.`,
-        `أين يقطع ${math(`y=${polyLatex(0, m, n)}`)} محور X؟ اكتب ${math('x')}.`
+        `أين يقطع ${math(`y=${polyLatex(0, m, n)}`)} محور X؟ اكتب ${math('x')}.`, `Where does ${math(`y=${polyLatex(0, m, n)}`)} cross the x-axis? Write the ${math('x')}-value.`
     ), choices, x, same(`${polyLatex(0, m, n)}=0\\to x=${x}`), { m, n })
 }
 
@@ -204,7 +204,7 @@ function rateQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | null 
     return choices && build(2, 'rate', say(
         `Kalkulatu ${math(`f(x)=${polyLatex(1, b, c)}`)} funtzioaren BAT ${math(`[${from},\\,${to}]`)} tartean.`,
         `Calcula la T.V.M. de ${math(`f(x)=${polyLatex(1, b, c)}`)} en ${math(`[${from},\\,${to}]`)}.`,
-        `احسب معدل التغير المتوسط للدالة ${math(`f(x)=${polyLatex(1, b, c)}`)} في ${math(`[${from},\\,${to}]`)}.`
+        `احسب معدل التغير المتوسط للدالة ${math(`f(x)=${polyLatex(1, b, c)}`)} في ${math(`[${from},\\,${to}]`)}.`, `Calculate the average rate of change of ${math(`f(x)=${polyLatex(1, b, c)}`)} on ${math(`[${from},\\,${to}]`)}.`
     ), choices, answer, same(`\\frac{${f(to)}-${br(f(from))}}{${to}-${br(from)}}=${tex(answer)}`), { b, c, from, to })
 }
 
@@ -220,7 +220,7 @@ function speedQuestion(random: Random): FunctionsRaceQuestion | null {
     return choices && build(2, 'speed', say(
         `Mugikor bat ${math(String(d1))} m-ra dago ${math(String(t1))} s-tan eta ${math(String(d2))} m-ra ${math(String(t2))} s-tan. Zein da batez besteko abiadura (m/s)?`,
         `Un móvil está a ${math(String(d1))} m en el segundo ${math(String(t1))} y a ${math(String(d2))} m en el ${math(String(t2))}. ¿Cuál es su velocidad media (m/s)?`,
-        `جسم على بعد ${math(String(d1))} م في الثانية ${math(String(t1))} وعلى بعد ${math(String(d2))} م في الثانية ${math(String(t2))}. ما سرعته المتوسطة (م/ث)؟`
+        `جسم على بعد ${math(String(d1))} م في الثانية ${math(String(t1))} وعلى بعد ${math(String(d2))} م في الثانية ${math(String(t2))}. ما سرعته المتوسطة (م/ث)؟`, `A moving object is at ${math(String(d1))} m at second ${math(String(t1))} and at ${math(String(d2))} m at second ${math(String(t2))}. What is its average velocity (m/s)?`
     ), choices, v, same(`\\frac{${d2}-${d1}}{${t2}-${t1}}=${v}`), { d1, d2, t1, t2 })
 }
 
@@ -241,8 +241,8 @@ function extremeQuestion(random: Random): FunctionsRaceQuestion | null {
     const choices = options(random, answer, [{ value: middle[1], error: 'y-instead' }, { value: first[0], error: 'wrong-extreme' }, { value: third[0], error: 'wrong-extreme' }, ...near(answer)])
     const graph: GraphSpec = { box: { xMin: 0, xMax: 8, yMin: 0, yMax: 6 }, cell: 26, curves: [{ points: smoothThrough(knots) }] }
     return choices && build(2, askMin ? 'relative-min' : 'relative-max', askMin
-        ? say('Grafikoan, zein ' + math('x') + ' puntutan dago minimo erlatiboa?', 'En la gráfica, ¿en qué ' + math('x') + ' está el mínimo relativo?', 'في الرسم، عند أي ' + math('x') + ' توجد القيمة الصغرى النسبية؟')
-        : say('Grafikoan, zein ' + math('x') + ' puntutan dago maximo erlatiboa?', 'En la gráfica, ¿en qué ' + math('x') + ' está el máximo relativo?', 'في الرسم، عند أي ' + math('x') + ' توجد القيمة العظمى النسبية؟'),
+        ? say('Grafikoan, zein ' + math('x') + ' puntutan dago minimo erlatiboa?', 'En la gráfica, ¿en qué ' + math('x') + ' está el mínimo relativo?', 'في الرسم، عند أي ' + math('x') + ' توجد القيمة الصغرى النسبية؟', 'On the graph, at which ' + math('x') + ' is the relative minimum?')
+        : say('Grafikoan, zein ' + math('x') + ' puntutan dago maximo erlatiboa?', 'En la gráfica, ¿en qué ' + math('x') + ' está el máximo relativo?', 'في الرسم، عند أي ' + math('x') + ' توجد القيمة العظمى النسبية؟', 'On the graph, at which ' + math('x') + ' is the relative maximum?'),
     choices, answer, same(`(${middle[0]},\\,${middle[1]})\\to x=${answer}`), { knots: knots.flat() }, graph)
 }
 
@@ -261,7 +261,7 @@ function periodicQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | n
     return choices && build(3, 'periodic', say(
         `Funtzio baten periodoa ${math(`T=${period}`)} da eta ${math(table)}. Zenbat da ${math(`f(${x})`)}?`,
         `Una función tiene periodo ${math(`T=${period}`)} y ${math(table)}. ¿Cuánto vale ${math(`f(${x})`)}?`,
-        `دالة دورها ${math(`T=${period}`)} و${math(table)}. كم تساوي ${math(`f(${x})`)}؟`
+        `دالة دورها ${math(`T=${period}`)} و${math(table)}. كم تساوي ${math(`f(${x})`)}؟`, `A function has period ${math(`T=${period}`)} and ${math(table)}. What is the value of ${math(`f(${x})`)}?`
     ), choices, answer, same(`${x}=${q}\\cdot ${period}+${rest}\\to f(${x})=f(${rest})=${answer}`), { period, values, x })
 }
 
@@ -274,7 +274,7 @@ function parkingQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | nu
     return choices && build(3, 'parking', say(
         `Aparkaleku batek ${math(tex(price))} € kobratzen ditu hasitako ordu bakoitzeko. Zenbat ordaintzen da ${math(String(hours))} h eta ${math(String(minutes))} min-engatik?`,
         `Un aparcamiento cobra ${math(tex(price))} € por cada hora empezada. ¿Cuánto se paga por ${math(String(hours))} h y ${math(String(minutes))} min?`,
-        `يأخذ موقف ${math(tex(price))} € عن كل ساعة بدأت. كم يُدفع عن ${math(String(hours))} س و${math(String(minutes))} د؟`
+        `يأخذ موقف ${math(tex(price))} € عن كل ساعة بدأت. كم يُدفع عن ${math(String(hours))} س و${math(String(minutes))} د؟`, `A car park charges €${math(tex(price))} for each hour started. How much do you pay for ${math(String(hours))} h and ${math(String(minutes))} min?`
     ), choices, answer, same(`${hours + 1}\\cdot ${tex(price)}=${tex(answer)}`), { price, hours, minutes })
 }
 
@@ -286,7 +286,7 @@ function halvingQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | nu
     return choices && build(3, 'halving', say(
         `Substantzia batek ${math(String(start))} unitate ditu eta urtero erdia galtzen du. Zenbat geratzen dira ${math(String(years))} urtean?`,
         `Una sustancia tiene ${math(String(start))} unidades y cada año pierde la mitad. ¿Cuántas quedan a los ${math(String(years))} años?`,
-        `مادة فيها ${math(String(start))} وحدة وتفقد نصفها كل سنة. كم يبقى بعد ${math(String(years))} سنوات؟`
+        `مادة فيها ${math(String(start))} وحدة وتفقد نصفها كل سنة. كم يبقى بعد ${math(String(years))} سنوات؟`, `A substance has ${math(String(start))} units and loses half of them every year. How many are left after ${math(String(years))} years?`
     ), choices, left, same(`\\frac{${start}}{2^{${years}}}=${left}`), { start, years })
 }
 
@@ -303,7 +303,7 @@ function readGraphQuestion(random: Random): FunctionsRaceQuestion | null {
     return choices && build(4, 'read-max', say(
         `Grafikoan, zenbat da ${math('y')}-ren balio maximoa? Begiratu eskala.`,
         `En la gráfica, ¿cuál es el valor máximo de ${math('y')}? Mira la escala.`,
-        `في الرسم، ما أكبر قيمة لـ ${math('y')}؟ انظر إلى التدريج.`
+        `في الرسم، ما أكبر قيمة لـ ${math('y')}؟ انظر إلى التدريج.`, `On the graph, what is the maximum value of ${math('y')}? Look at the scale.`
     ), choices, answer, same(`${top[1]}\\cdot ${unit}=${answer}`), { knots: knots.flat(), unit }, graph)
 }
 
@@ -316,7 +316,7 @@ function boxQuestion(random: Random, tier: Tier): FunctionsRaceQuestion | null {
     return choices && build(4, 'box', say(
         `${math(`${width}\\times ${height}`)} cm-ko kartulina bati ${math(`x=${x}`)} cm-ko karratu bat mozten zaio izkina bakoitzean. Zein da kutxaren bolumena (cm³)?`,
         `A una cartulina de ${math(`${width}\\times ${height}`)} cm se le corta un cuadrado de ${math(`x=${x}`)} cm en cada esquina. ¿Cuál es el volumen de la caja (cm³)?`,
-        `يُقص من ورق مقوى ${math(`${width}\\times ${height}`)} سم مربع ضلعه ${math(`x=${x}`)} سم في كل زاوية. ما حجم العلبة (سم³)؟`
+        `يُقص من ورق مقوى ${math(`${width}\\times ${height}`)} سم مربع ضلعه ${math(`x=${x}`)} سم في كل زاوية. ما حجم العلبة (سم³)؟`, `A sheet of card measuring ${math(`${width}\\times ${height}`)} cm has a square of ${math(`x=${x}`)} cm cut from each corner. What is the volume of the box (cm³)?`
     ), choices, answer, same(`${width - 2 * x}\\cdot ${height - 2 * x}\\cdot ${x}=${tex(answer)}`), { width, height, x })
 }
 
@@ -332,7 +332,7 @@ function graphRateQuestion(random: Random): FunctionsRaceQuestion | null {
     return choices && build(4, 'graph-rate', say(
         `Grafikoan, zenbat da BAT ${math('A')} eta ${math('B')} puntuen artean?`,
         `En la gráfica, ¿cuánto vale la T.V.M. entre los puntos ${math('A')} y ${math('B')}?`,
-        `في الرسم، كم معدل التغير المتوسط بين النقطتين ${math('A')} و${math('B')}؟`
+        `في الرسم، كم معدل التغير المتوسط بين النقطتين ${math('A')} و${math('B')}؟`, `On the graph, what is the average rate of change between the points ${math('A')} and ${math('B')}?`
     ), choices, answer, same(`\\frac{${b[1] * unit}-${a[1] * unit}}{${b[0]}-${a[0]}}=${tex(answer)}`), { knots: knots.flat(), unit, i, j }, graph)
 }
 
@@ -364,24 +364,24 @@ export function functionsParTime(circuit: number): number {
 }
 
 export const functionsRaceErrorTips: Record<FunctionsRaceError, LocalizedText> = {
-    'sign-square': say('Ordeztu parentesi artean: (−3)² = 9, ez −9.', 'Sustituye entre paréntesis: (−3)² = 9, no −9.', 'عوّض بين قوسين: (−3)² = 9 لا −9.'),
-    sign: say('Kontuz zeinuekin: − bider − = +.', 'Cuidado con los signos: − por − = +.', 'انتبه للإشارات: − في − = +.'),
-    'no-fixed': say('Ahaztu duzu zati finkoa (igotzeagatik ordaintzen dena).', 'Te has olvidado de la parte fija (lo que se paga al subir).', 'نسيت الجزء الثابت (ما يُدفع عند الركوب).'),
-    'image-instead': say('Irudia kalkulatu duzu; x-a eskatzen da: ebatzi f(x) = balioa.', 'Has calculado la imagen; se pide la x: resuelve f(x) = valor.', 'حسبت الصورة؛ والمطلوب x: حُلّ f(x) = القيمة.'),
-    'numerator-zero': say('Zenbakitzailea 0 izan daiteke; izendatzailea da 0 izan ezin dena.', 'El numerador sí puede ser 0; lo que no puede ser 0 es el denominador.', 'يمكن أن يكون البسط 0؛ أما المقام فلا.'),
-    'sign-flip': say('Zeinua aldatu zaizu: x − 3 = 0 bada, x = 3.', 'Se te ha cambiado el signo: si x − 3 = 0, x = 3.', 'تغيّرت الإشارة: إذا كان x − 3 = 0 فإن x = 3.'),
-    'value-at-one': say('Y ardatzean x = 0 da, ez x = 1.', 'En el eje Y, x = 0, no x = 1.', 'على محور Y تكون x = 0 لا x = 1.'),
-    'y-intercept': say('Hori Y ardatzeko ebakidura da; X ardatzean y = 0 jarri.', 'Eso es el corte con el eje Y; para el eje X pon y = 0.', 'هذا التقاطع مع محور Y؛ لمحور X ضع y = 0.'),
-    'no-divide': say('Zatitu x-ren aldaketaz: BAT = (f(b) − f(a)) / (b − a).', 'Divide entre el cambio de x: T.V.M. = (f(b) − f(a)) / (b − a).', 'اقسم على تغير x: المعدل = (f(b) − f(a)) / (b − a).'),
-    order: say('Kendu ordena berean: amaierakoa ken hasierakoa, bietan.', 'Resta en el mismo orden: el final menos el principio, en los dos.', 'اطرح بالترتيب نفسه: النهاية ناقص البداية في الحالتين.'),
-    total: say('Hori hasieratik batez bestekoa da, ez tarte horretakoa.', 'Esa es la media desde el principio, no la de ese intervalo.', 'هذا المتوسط منذ البداية لا في تلك الفترة.'),
-    'y-instead': say('Puntu baten x-a eta y-a nahastu dituzu.', 'Has confundido la x y la y del punto.', 'خلطت بين x وy للنقطة.'),
-    'wrong-extreme': say('Maximoa: igotzetik jaistera. Minimoa: jaistetik igotzera.', 'Máximo: de subir a bajar. Mínimo: de bajar a subir.', 'العظمى: من الصعود إلى النزول. الصغرى: من النزول إلى الصعود.'),
-    'wrong-rest': say('Zatitu x periodoaz eta erabili hondarra: x = q · T + r.', 'Divide x entre el periodo y usa el resto: x = q · T + r.', 'اقسم x على الدور واستعمل الباقي: x = q · T + r.'),
-    'no-round-up': say('Hasitako ordu bakoitza oso-osorik ordaintzen da: biribildu gora.', 'Cada hora empezada se paga entera: redondea hacia arriba.', 'كل ساعة بدأت تُدفع كاملة: قرّب إلى الأعلى.'),
-    'half-once': say('Urtero erdira: zatitu 2z urte adina aldiz (2ⁿ).', 'Cada año a la mitad: divide entre 2 tantas veces como años (2ⁿ).', 'كل سنة إلى النصف: اقسم على 2 بعدد السنوات (2ⁿ).'),
-    squares: say('Laukiak zenbatu dituzu: biderkatu eskalaz.', 'Has contado cuadros: multiplica por la escala.', 'عددت الخانات: اضرب في التدريج.'),
-    'one-cut': say('Alde bakoitzari bi karratu kentzen zaizkio: 40 − 2x.', 'A cada lado se le quitan dos cuadrados: 40 − 2x.', 'يُطرح من كل ضلع مربعان: 40 − 2x.'),
-    'no-height': say('Hori oinarriaren azalera da; biderkatu altueraz, x.', 'Eso es el área de la base; multiplica por la altura, x.', 'هذه مساحة القاعدة؛ اضرب في الارتفاع x.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    'sign-square': say('Ordeztu parentesi artean: (−3)² = 9, ez −9.', 'Sustituye entre paréntesis: (−3)² = 9, no −9.', 'عوّض بين قوسين: (−3)² = 9 لا −9.', 'Substitute in brackets: (−3)² = 9, not −9.'),
+    sign: say('Kontuz zeinuekin: − bider − = +.', 'Cuidado con los signos: − por − = +.', 'انتبه للإشارات: − في − = +.', 'Watch the signs: − times − = +.'),
+    'no-fixed': say('Ahaztu duzu zati finkoa (igotzeagatik ordaintzen dena).', 'Te has olvidado de la parte fija (lo que se paga al subir).', 'نسيت الجزء الثابت (ما يُدفع عند الركوب).', 'You forgot the fixed part (what you pay when you get in).'),
+    'image-instead': say('Irudia kalkulatu duzu; x-a eskatzen da: ebatzi f(x) = balioa.', 'Has calculado la imagen; se pide la x: resuelve f(x) = valor.', 'حسبت الصورة؛ والمطلوب x: حُلّ f(x) = القيمة.', 'You worked out the image; the question asks for x. Solve f(x) = value.'),
+    'numerator-zero': say('Zenbakitzailea 0 izan daiteke; izendatzailea da 0 izan ezin dena.', 'El numerador sí puede ser 0; lo que no puede ser 0 es el denominador.', 'يمكن أن يكون البسط 0؛ أما المقام فلا.', 'The numerator can be 0; what cannot be 0 is the denominator.'),
+    'sign-flip': say('Zeinua aldatu zaizu: x − 3 = 0 bada, x = 3.', 'Se te ha cambiado el signo: si x − 3 = 0, x = 3.', 'تغيّرت الإشارة: إذا كان x − 3 = 0 فإن x = 3.', 'You changed the sign: if x − 3 = 0, then x = 3.'),
+    'value-at-one': say('Y ardatzean x = 0 da, ez x = 1.', 'En el eje Y, x = 0, no x = 1.', 'على محور Y تكون x = 0 لا x = 1.', 'On the y-axis, x = 0, not x = 1.'),
+    'y-intercept': say('Hori Y ardatzeko ebakidura da; X ardatzean y = 0 jarri.', 'Eso es el corte con el eje Y; para el eje X pon y = 0.', 'هذا التقاطع مع محور Y؛ لمحور X ضع y = 0.', 'That is the y-intercept; for the x-intercepts, put y = 0.'),
+    'no-divide': say('Zatitu x-ren aldaketaz: BAT = (f(b) − f(a)) / (b − a).', 'Divide entre el cambio de x: T.V.M. = (f(b) − f(a)) / (b − a).', 'اقسم على تغير x: المعدل = (f(b) − f(a)) / (b − a).', 'Divide by the change in x: average rate of change = (f(b) − f(a)) / (b − a).'),
+    order: say('Kendu ordena berean: amaierakoa ken hasierakoa, bietan.', 'Resta en el mismo orden: el final menos el principio, en los dos.', 'اطرح بالترتيب نفسه: النهاية ناقص البداية في الحالتين.', 'Subtract in the same order: end minus start, in both.'),
+    total: say('Hori hasieratik batez bestekoa da, ez tarte horretakoa.', 'Esa es la media desde el principio, no la de ese intervalo.', 'هذا المتوسط منذ البداية لا في تلك الفترة.', 'That is the average from the start, not the one for that interval.'),
+    'y-instead': say('Puntu baten x-a eta y-a nahastu dituzu.', 'Has confundido la x y la y del punto.', 'خلطت بين x وy للنقطة.', 'You have mixed up the x and y of the point.'),
+    'wrong-extreme': say('Maximoa: igotzetik jaistera. Minimoa: jaistetik igotzera.', 'Máximo: de subir a bajar. Mínimo: de bajar a subir.', 'العظمى: من الصعود إلى النزول. الصغرى: من النزول إلى الصعود.', 'Maximum: from going up to going down. Minimum: from going down to going up.'),
+    'wrong-rest': say('Zatitu x periodoaz eta erabili hondarra: x = q · T + r.', 'Divide x entre el periodo y usa el resto: x = q · T + r.', 'اقسم x على الدور واستعمل الباقي: x = q · T + r.', 'Divide x by the period and use the remainder: x = q · T + r.'),
+    'no-round-up': say('Hasitako ordu bakoitza oso-osorik ordaintzen da: biribildu gora.', 'Cada hora empezada se paga entera: redondea hacia arriba.', 'كل ساعة بدأت تُدفع كاملة: قرّب إلى الأعلى.', 'Each hour started is paid in full: round up.'),
+    'half-once': say('Urtero erdira: zatitu 2z urte adina aldiz (2ⁿ).', 'Cada año a la mitad: divide entre 2 tantas veces como años (2ⁿ).', 'كل سنة إلى النصف: اقسم على 2 بعدد السنوات (2ⁿ).', 'Halved every year: divide by 2 as many times as there are years (2ⁿ).'),
+    squares: say('Laukiak zenbatu dituzu: biderkatu eskalaz.', 'Has contado cuadros: multiplica por la escala.', 'عددت الخانات: اضرب في التدريج.', 'You counted squares: multiply by the scale.'),
+    'one-cut': say('Alde bakoitzari bi karratu kentzen zaizkio: 40 − 2x.', 'A cada lado se le quitan dos cuadrados: 40 − 2x.', 'يُطرح من كل ضلع مربعان: 40 − 2x.', 'Remove two squares from each side: 40 − 2x.'),
+    'no-height': say('Hori oinarriaren azalera da; biderkatu altueraz, x.', 'Eso es el área de la base; multiplica por la altura, x.', 'هذه مساحة القاعدة؛ اضرب في الارتفاع x.', 'That is the area of the base; multiply by the height, x.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

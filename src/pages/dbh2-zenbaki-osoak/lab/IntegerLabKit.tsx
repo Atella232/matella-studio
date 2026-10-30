@@ -6,8 +6,8 @@ export function IntegerAnswer(props: Omit<ComponentProps<typeof ResultAnswer>, '
     return (
         <ResultAnswer
             {...props}
-            placeholder={{ eu: 'Adib.: −7', es: 'Ej.: −7', ar: 'مثال: ⁦−7⁩' }}
-            unreadable={{ eu: 'Idatzi zenbaki oso bat, adibidez −7 edo 12.', es: 'Escribe un número entero, por ejemplo −7 o 12.', ar: 'اكتب عددًا صحيحًا، مثل ⁦−7⁩ أو 12.' }}
+            placeholder={{ eu: 'Adib.: −7', es: 'Ej.: −7', en: 'Example: −7', ar: 'مثال: ⁦−7⁩' }}
+            unreadable={{ eu: 'Idatzi zenbaki oso bat, adibidez −7 edo 12.', es: 'Escribe un número entero, por ejemplo −7 o 12.', en: 'Write an integer, for example −7 or 12.', ar: 'اكتب عددًا صحيحًا، مثل ⁦−7⁩ أو 12.' }}
         />
     )
 }

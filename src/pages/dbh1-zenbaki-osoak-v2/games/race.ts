@@ -16,7 +16,7 @@ export const INTRO_RACE_CIRCUITS = 5
 export type IntroRaceError = IntegerRaceError | 'situation'
 export type IntroRaceQuestion = RaceQuestion<IntroRaceError>
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 
 interface Situation {
     sign: 1 | -1
@@ -24,16 +24,16 @@ interface Situation {
 }
 
 const situations: Situation[] = [
-    { sign: -1, text: (size) => say(`Autoa ${size}. sotoan dago.`, `El coche está en el sótano ${size}.`, `السيارة في القبو ${size}.`) },
-    { sign: 1, text: (size) => say(`Bulegoa ${size}. solairuan dago.`, `La oficina está en la planta ${size}.`, `المكتب في الطابق ${size}.`) },
-    { sign: -1, text: (size) => say(`Zero azpitik ${size} gradu daude.`, `Hace ${size} grados bajo cero.`, `الحرارة ${size} درجات تحت الصفر.`) },
-    { sign: 1, text: (size) => say(`Zero gainetik ${size} gradu daude.`, `Hace ${size} grados sobre cero.`, `الحرارة ${size} درجات فوق الصفر.`) },
-    { sign: -1, text: (size) => say(`${size} € zor ditut.`, `Debo ${size} €.`, `عليّ ${size} €.`) },
-    { sign: 1, text: (size) => say(`${size} € aurreztuta ditut.`, `Tengo ${size} € ahorrados.`, `لديّ ${size} € مدّخرة.`) },
-    { sign: -1, text: (size) => say(`Itsaspeko bat ${size} metroko sakoneran dago.`, `Un submarino está a ${size} metros de profundidad.`, `غواصة على عمق ${size} مترًا.`) },
-    { sign: 1, text: (size) => say(`Kaio bat itsasotik ${size} metrora hegan dabil.`, `Una gaviota vuela a ${size} metros sobre el mar.`, `نورس يطير على ارتفاع ${size} مترًا فوق البحر.`) },
-    { sign: 1, text: (size) => say(`Igogailua ${size} solairu igo da.`, `El ascensor ha subido ${size} plantas.`, `صعد المصعد ${size} طوابق.`) },
-    { sign: -1, text: (size) => say(`Tenperatura ${size} gradu jaitsi da.`, `La temperatura ha bajado ${size} grados.`, `انخفضت الحرارة ${size} درجات.`) }
+    { sign: -1, text: (size) => say(`Autoa ${size}. sotoan dago.`, `El coche está en el sótano ${size}.`, `السيارة في القبو ${size}.`, `The car is in basement ${size}.`) },
+    { sign: 1, text: (size) => say(`Bulegoa ${size}. solairuan dago.`, `La oficina está en la planta ${size}.`, `المكتب في الطابق ${size}.`, `The office is on floor ${size}.`) },
+    { sign: -1, text: (size) => say(`Zero azpitik ${size} gradu daude.`, `Hace ${size} grados bajo cero.`, `الحرارة ${size} درجات تحت الصفر.`, `It is ${size} degrees below zero.`) },
+    { sign: 1, text: (size) => say(`Zero gainetik ${size} gradu daude.`, `Hace ${size} grados sobre cero.`, `الحرارة ${size} درجات فوق الصفر.`, `It is ${size} degrees above zero.`) },
+    { sign: -1, text: (size) => say(`${size} € zor ditut.`, `Debo ${size} €.`, `عليّ ${size} €.`, `I owe €${size}.`) },
+    { sign: 1, text: (size) => say(`${size} € aurreztuta ditut.`, `Tengo ${size} € ahorrados.`, `لديّ ${size} € مدّخرة.`, `I have €${size} saved.`) },
+    { sign: -1, text: (size) => say(`Itsaspeko bat ${size} metroko sakoneran dago.`, `Un submarino está a ${size} metros de profundidad.`, `غواصة على عمق ${size} مترًا.`, `A submarine is at a depth of ${size} metres.`) },
+    { sign: 1, text: (size) => say(`Kaio bat itsasotik ${size} metrora hegan dabil.`, `Una gaviota vuela a ${size} metros sobre el mar.`, `نورس يطير على ارتفاع ${size} مترًا فوق البحر.`, `A seagull flies ${size} metres above the sea.`) },
+    { sign: 1, text: (size) => say(`Igogailua ${size} solairu igo da.`, `El ascensor ha subido ${size} plantas.`, `صعد المصعد ${size} طوابق.`, `The lift has gone up ${size} floors.`) },
+    { sign: -1, text: (size) => say(`Tenperatura ${size} gradu jaitsi da.`, `La temperatura ha bajado ${size} grados.`, `انخفضت الحرارة ${size} درجات.`, `The temperature has dropped ${size} degrees.`) }
 ]
 
 function situationQuestion(random: Random, tier: Tier): IntroRaceQuestion | null {
@@ -50,13 +50,13 @@ function situationQuestion(random: Random, tier: Tier): IntroRaceQuestion | null
     return {
         circuit: 0,
         kind: 'situation',
-        prompt: say(`${sentence.eu} Zein zenbaki oso da?`, `${sentence.es} ¿Qué número entero es?`, `${sentence.ar} ما العدد الصحيح؟`),
+        prompt: say(`${sentence.eu} Zein zenbaki oso da?`, `${sentence.es} ¿Qué número entero es?`, `${sentence.ar} ما العدد الصحيح؟`, `${sentence.en} What integer is it?`),
         options,
         answer: fraction(answer),
         answerForm: 'any',
         percentAnswer: false,
         writable: true,
-        solution: { eu: `$${signedLatex(answer)}$`, es: `$${signedLatex(answer)}$`, ar: `$${signedLatex(answer)}$` }
+        solution: { eu: `$${signedLatex(answer)}$`, es: `$${signedLatex(answer)}$`, en: `$${signedLatex(answer)}$`, ar: `$${signedLatex(answer)}$` }
     }
 }
 
@@ -86,5 +86,5 @@ export function introParTime(circuit: number): number {
 
 export const introRaceErrorTips: Record<IntroRaceError, LocalizedText> = {
     ...integerRaceErrorTips,
-    situation: say('Zeinua da kontua: zero azpitik, zorrak, sotoak eta jaitsierak negatiboak dira.', 'Fíjate en el signo: bajo cero, deudas, sótanos y bajadas son negativos.', 'انتبه للإشارة: تحت الصفر والديون والأقبية والنزول سالبة.')
+    situation: say('Zeinua da kontua: zero azpitik, zorrak, sotoak eta jaitsierak negatiboak dira.', 'Fíjate en el signo: bajo cero, deudas, sótanos y bajadas son negativos.', 'انتبه للإشارة: تحت الصفر والديون والأقبية والنزول سالبة.', 'Look at the sign: below zero, debts, basements and drops are negative.')
 }

@@ -163,11 +163,13 @@ export const decimalsChallenges: LabChallenge<DecimalsState>[] = [
         prompt: {
             eu: 'Zatitu 3/8 zifraz zifra, hondarra 0 izan arte.',
             es: 'Divide 3/8 cifra a cifra hasta que el resto sea 0.',
+            en: 'Divide 3/8 digit by digit until the remainder is 0.',
             ar: 'اقسم 3/8 رقمًا رقمًا حتى يصبح الباقي 0.'
         },
         hint: {
             eu: 'Jarri 3 goian eta 8 behean, iragarri eta sakatu «Hurrengo zifra».',
             es: 'Pon 3 arriba y 8 abajo, predice y pulsa «Siguiente cifra».',
+            en: 'Put 3 on top and 8 below, predict and press ‘Next digit’.',
             ar: 'ضع 3 في الأعلى و8 في الأسفل، ثم توقّع واضغط «الرقم التالي».'
         },
         isSolved: (state) => state.numerator === 3 && state.denominator === 8 && divisionDone(state)
@@ -177,11 +179,13 @@ export const decimalsChallenges: LabChallenge<DecimalsState>[] = [
         prompt: {
             eu: 'Lortu 6 zifrako periodoa duen hamartar periodiko huts bat.',
             es: 'Consigue un decimal periódico puro con un periodo de 6 cifras.',
+            en: 'Get a pure recurring decimal with a repeating block of 6 digits.',
             ar: 'احصل على عدد عشري دوري بحت دوره من 6 أرقام.'
         },
         hint: {
             eu: 'Probatu zazpirenekin: 7 zatitzean 6 hondar posible baino ez daude.',
             es: 'Prueba con séptimos: al dividir entre 7 solo hay 6 restos posibles.',
+            en: 'Try sevenths: when dividing by 7 there are only 6 possible remainders.',
             ar: 'جرّب الأسباع: عند القسمة على 7 لا يوجد إلا 6 بواقٍ ممكنة.'
         },
         isSolved: (state) => {
@@ -194,11 +198,13 @@ export const decimalsChallenges: LabChallenge<DecimalsState>[] = [
         prompt: {
             eu: 'Lortu periodiko misto bat, periodoaren aurretik bi zifra dituena.',
             es: 'Consigue un periódico mixto con dos cifras antes del periodo.',
+            en: 'Get a mixed recurring decimal with two digits before the repeating block.',
             ar: 'احصل على عدد دوري مختلط قبل دوره رقمان.'
         },
         hint: {
             eu: 'Izendatzaileak bi 2 (edo bi 5) eta beste faktore bat behar ditu. Adibidez: 1/12.',
             es: 'El denominador necesita dos doses (o dos cincos) y otro factor. Por ejemplo, 1/12.',
+            en: 'The denominator needs two 2s (or two 5s) and another factor. For example, 1/12.',
             ar: `يحتاج المقام إلى عاملين 2 (أو عاملين 5) وعامل آخر. مثلًا ${ltr('1/12')}.`
         },
         isSolved: (state) => {
@@ -211,11 +217,13 @@ export const decimalsChallenges: LabChallenge<DecimalsState>[] = [
         prompt: {
             eu: 'Aurkitu izendatzailean 3 duen zatiki bat, hamartar zehatza ematen duena (ez zenbaki osoa).',
             es: 'Encuentra una fracción con un 3 en el denominador que dé un decimal exacto (no un entero).',
+            en: 'Find a fraction with a 3 in the denominator that gives an exact decimal (not an integer).',
             ar: 'جد كسرًا في مقامه العامل 3 ويعطي عددًا عشريًا منتهيًا (لا عددًا صحيحًا).'
         },
         hint: {
             eu: 'Sinplifikatu lehenik: 3 zenbakitzailearekin joan daiteke. Adibidez: 3/6.',
             es: 'Simplifica primero: el 3 se puede ir con el numerador. Prueba con 3/6.',
+            en: 'Simplify first: the 3 can cancel out with the numerator. Try 3/6.',
             ar: `اختزل أولًا: قد يذهب العامل 3 مع البسط. جرّب ${ltr('3/6')}.`
         },
         isSolved: (state) => state.denominator % 3 === 0 && divisionDone(state) && kindOf(state) === 'exact' && state.numerator % state.denominator !== 0
@@ -258,11 +266,13 @@ export const decimalsExtra: LabChallengeMaker<DecimalsState> = (random) => {
         prompt: {
             eu: `Iragarri ondo zer hamartar emango duen ${numerator}/${denominator} zatikiak, eta zatitu amaierara arte.`,
             es: `Predice bien qué decimal da ${numerator}/${denominator} y divide hasta el final.`,
+            en: `Predict carefully which decimal ${numerator}/${denominator} gives, and divide until the end.`,
             ar: `توقّع بشكل صحيح نوع العدد العشري للكسر ${numerator}/${denominator}، ثم اقسم حتى النهاية.`
         },
         hint: {
             eu: `Izendatzaile sinplifikatua: ${simplified} = ${product}. 2 eta 5 bakarrik → zehatza; ez 2 ez 5 → hutsa; biak → mistoa.`,
             es: `Denominador simplificado: ${simplified} = ${product}. Solo 2 y 5 → exacto; ni 2 ni 5 → puro; de los dos tipos → mixto.`,
+            en: `Simplified denominator: ${simplified} = ${product}. Only 2s and 5s → exact; neither 2 nor 5 → pure; both kinds → mixed.`,
             ar: `المقام بعد الاختزال: ${ltr(`${simplified} = ${product}`)}. 2 و5 فقط ← منتهٍ؛ لا 2 ولا 5 ← دوري بحت؛ كلاهما ← دوري مختلط.`
         },
         isSolved: (state) => state.numerator === numerator && state.denominator === denominator && divisionDone(state) && state.prediction === kind,

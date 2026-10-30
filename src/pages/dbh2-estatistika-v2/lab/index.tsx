@@ -30,7 +30,7 @@ export function StatisticsLaboratory(props: {
             tools={statisticsLabTools}
             stages={statisticsStages}
             components={toolComponents}
-            title={{ eu: 'Antolatu, irudikatu eta jaurti', es: 'Organiza, representa y lanza', ar: 'نظّم ومثّل وارمِ' }}
+            title={{ eu: 'Antolatu, irudikatu eta jaurti', es: 'Organiza, representa y lanza', en: 'Organise, represent and roll', ar: 'نظّم ومثّل وارمِ' }}
         />
     )
 }

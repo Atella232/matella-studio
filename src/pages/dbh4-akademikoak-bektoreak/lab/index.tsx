@@ -34,7 +34,7 @@ export function VectorsLaboratory(props: {
             tools={vectorsLabTools}
             stages={vectorsStages}
             components={toolComponents}
-            title={{ eu: 'Mugitu, marraztu eta neurtu', es: 'Mueve, traza y mide', ar: 'حرّك وارسم وقِس' }}
+            title={{ eu: 'Mugitu, marraztu eta neurtu', es: 'Mueve, traza y mide', en: 'Move, draw and measure', ar: 'حرّك وارسم وقِس' }}
         />
     )
 }

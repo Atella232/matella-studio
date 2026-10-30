@@ -25,8 +25,8 @@ export function JumpsTool(props: DivisibilityToolProps & { challenges?: LabChall
 
     const controls = (
         <>
-            <Stepper label={l({ eu: 'Igel urdinaren jauzia', es: 'Salto de la rana azul', ar: 'قفزة الضفدع الأزرق' })} value={first} min={JUMP_LIMITS.min} max={JUMP_LIMITS.max} onChange={(next) => setState((current) => setJumps(current, { first: next }))} language={props.language} />
-            <Stepper label={l({ eu: 'Igel gorriaren jauzia', es: 'Salto de la rana roja', ar: 'قفزة الضفدع الأحمر' })} value={second} min={JUMP_LIMITS.min} max={JUMP_LIMITS.max} onChange={(next) => setState((current) => setJumps(current, { second: next }))} language={props.language} />
+            <Stepper label={l({ eu: 'Igel urdinaren jauzia', es: 'Salto de la rana azul', en: 'Blue frog\'s jump', ar: 'قفزة الضفدع الأزرق' })} value={first} min={JUMP_LIMITS.min} max={JUMP_LIMITS.max} onChange={(next) => setState((current) => setJumps(current, { first: next }))} language={props.language} />
+            <Stepper label={l({ eu: 'Igel gorriaren jauzia', es: 'Salto de la rana roja', en: 'Red frog\'s jump', ar: 'قفزة الضفدع الأحمر' })} value={second} min={JUMP_LIMITS.min} max={JUMP_LIMITS.max} onChange={(next) => setState((current) => setJumps(current, { second: next }))} language={props.language} />
         </>
     )
 
@@ -46,7 +46,7 @@ export function JumpsTool(props: DivisibilityToolProps & { challenges?: LabChall
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? jumpsChallenges} state={state}>
             <div className="divisibility-figure-box">
-                <svg viewBox={`0 0 ${width} 170`} className="divisibility-figure" role="img" aria-label={l({ eu: `Multiplo komunak: ${common.join(', ')}`, es: `Múltiplos comunes: ${common.join(', ')}`, ar: `المضاعفات المشتركة: ${common.join('، ')}` })}>
+                <svg viewBox={`0 0 ${width} 170`} className="divisibility-figure" role="img" aria-label={l({ eu: `Multiplo komunak: ${common.join(', ')}`, es: `Múltiplos comunes: ${common.join(', ')}`, en: `Common multiples: ${common.join(', ')}`, ar: `المضاعفات المشتركة: ${common.join('، ')}` })}>
                     {shown && common.map((value) => <rect key={value} x={x(value) - 12} y={30} width={24} height={110} rx={8} fill="var(--mustard-tint, #fbebc0)" stroke="var(--ink)" strokeWidth={1.4} />)}
                     {arcs(first, true)}
                     {arcs(second, false)}

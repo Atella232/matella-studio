@@ -51,8 +51,8 @@ export type EquationsRaceError =
 export type EquationsRaceQuestion = RaceQuestion<EquationsRaceError> & { meta: Record<string, number> }
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => ({ eu: `$${latex}$`, es: `$${latex}$`, ar: `$${latex}$` })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => ({ eu: `$${latex}$`, es: `$${latex}$`, en: `$${latex}$`, ar: `$${latex}$` })
 const math = (latex: string) => `$${latex}$`
 /** A number inside a sum: +3, −3, and nothing for 0 */
 const plus = (value: number) => (value === 0 ? '' : value < 0 ? `-${-value}` : `+${value}`)
@@ -103,9 +103,9 @@ function build(circuit: number, kind: string, prompt: LocalizedText, choices: Ra
     return { circuit, kind, prompt, options: choices, answer, answerForm: 'any', percentAnswer: false, writable, solution, meta }
 }
 
-const greatestSolution = (equation: string) => say(`Zein da ${math(equation)} ekuazioaren ebazpenik handiena?`, `¿Cuál es la mayor solución de ${math(equation)}?`, `ما أكبر حل للمعادلة ${math(equation)}؟`)
-const onlySolution = (equation: string) => say(`Zein da ${math(equation)} ekuazioaren ebazpena?`, `¿Cuál es la solución de ${math(equation)}?`, `ما حل المعادلة ${math(equation)}؟`)
-const howManyIntegers = (condition: string) => say(`Zenbat zenbaki osok betetzen dute ${math(condition)}?`, `¿Cuántos números enteros cumplen ${math(condition)}?`, `كم عددًا صحيحًا يحقق ${math(condition)}؟`)
+const greatestSolution = (equation: string) => say(`Zein da ${math(equation)} ekuazioaren ebazpenik handiena?`, `¿Cuál es la mayor solución de ${math(equation)}?`, `ما أكبر حل للمعادلة ${math(equation)}؟`, `What is the largest solution of ${math(equation)}?`)
+const onlySolution = (equation: string) => say(`Zein da ${math(equation)} ekuazioaren ebazpena?`, `¿Cuál es la solución de ${math(equation)}?`, `ما حل المعادلة ${math(equation)}؟`, `What is the solution of ${math(equation)}?`)
+const howManyIntegers = (condition: string) => say(`Zenbat zenbaki osok betetzen dute ${math(condition)}?`, `¿Cuántos números enteros cumplen ${math(condition)}?`, `كم عددًا صحيحًا يحقق ${math(condition)}؟`, `How many integers satisfy ${math(condition)}?`)
 
 /* ---------- Circuit 0: second degree ---------- */
 
@@ -118,7 +118,7 @@ function discriminantQuestion(random: Random, tier: Tier): EquationsRaceQuestion
     return choices && build(0, 'discriminant', say(
         `Zenbat da ${math(`${polyLatex([a, b, c])}=0`)} ekuazioaren diskriminatzailea?`,
         `¿Cuánto vale el discriminante de ${math(`${polyLatex([a, b, c])}=0`)}?`,
-        `كم يساوي مميّز المعادلة ${math(`${polyLatex([a, b, c])}=0`)}؟`
+        `كم يساوي مميّز المعادلة ${math(`${polyLatex([a, b, c])}=0`)}؟`, `What is the discriminant of ${math(`${polyLatex([a, b, c])}=0`)}?`
     ), choices, fraction(value), same(`\\Delta=${bracket(b)}^{2}-4\\cdot ${bracket(a)}\\cdot ${bracket(c)}=${value}`), { a, b, c })
 }
 
@@ -146,14 +146,14 @@ function sumProductQuestion(random: Random, tier: Tier): EquationsRaceQuestion |
         return choices && build(0, 'sum-product', say(
             `Ebatzi gabe, zenbat da ${math(equation)} ekuazioaren ebazpenen batura?`,
             `Sin resolverla, ¿cuánto suman las soluciones de ${math(equation)}?`,
-            `دون حلّها، كم مجموع حلول ${math(equation)}؟`
+            `دون حلّها، كم مجموع حلول ${math(equation)}؟`, `Without solving it, what is the sum of the solutions of ${math(equation)}?`
         ), choices, fraction(sum), same(`x_1+x_2=-\\frac{b}{a}=${a === 1 ? -b : `\\frac{${-b}}{${a}}`}${a === 1 ? '' : `=${sum}`}`), { a, r, s, which })
     }
     const choices = options(random, fraction(product), [whole(-product, 'sum-sign'), whole(sum, 'sum-product'), whole(a * product, 'divide-a'), ...near(product)])
     return choices && build(0, 'sum-product', say(
         `Ebatzi gabe, zenbat da ${math(equation)} ekuazioaren ebazpenen biderkadura?`,
         `Sin resolverla, ¿cuánto vale el producto de las soluciones de ${math(equation)}?`,
-        `دون حلّها، كم جداء حلول ${math(equation)}؟`
+        `دون حلّها، كم جداء حلول ${math(equation)}؟`, `Without solving it, what is the product of the solutions of ${math(equation)}?`
     ), choices, fraction(product), same(`x_1\\cdot x_2=\\frac{c}{a}=${a === 1 ? c : `\\frac{${c}}{${a}}`}${a === 1 ? '' : `=${product}`}`), { a, r, s, which })
 }
 
@@ -166,7 +166,7 @@ function rectangleQuestion(random: Random, tier: Tier): EquationsRaceQuestion | 
     return choices && build(0, 'rectangle', say(
         `Laukizuzen baten perimetroa ${perimeter} cm da eta azalera ${area} cm². Zenbat neurtzen du alde luzeenak (cm)?`,
         `Un rectángulo tiene ${perimeter} cm de perímetro y ${area} cm² de área. ¿Cuánto mide el lado mayor (cm)?`,
-        `مستطيل محيطه ${perimeter} سم ومساحته ${area} سم². كم طول ضلعه الأكبر (سم)؟`
+        `مستطيل محيطه ${perimeter} سم ومساحته ${area} سم². كم طول ضلعه الأكبر (سم)؟`, `A rectangle has a perimeter of ${perimeter} cm and an area of ${area} cm². How long is the longer side (cm)?`
     ), choices, fraction(q), same(`x(${p + q}-x)=${area}\\ \\to\\ x=${p},\\ x=${q}`), { p, q })
 }
 
@@ -189,7 +189,7 @@ function biquadraticCountQuestion(random: Random): EquationsRaceQuestion | null 
     return choices && build(1, 'biquadratic-count', say(
         `Zenbat ebazpen erreal ditu ${math(equation)} ekuazioak?`,
         `¿Cuántas soluciones reales tiene ${math(equation)}?`,
-        `كم حلًّا حقيقيًا للمعادلة ${math(equation)}؟`
+        `كم حلًّا حقيقيًا للمعادلة ${math(equation)}؟`, `How many real solutions does ${math(equation)} have?`
     ), choices, fraction(count), same(`x^{2}=t\\ \\to\\ ${polyLatex([1, -(t1 + t2), t1 * t2], 't')}=0\\ \\to\\ t=${t1},\\ t=${t2}`), { t1, t2 })
 }
 
@@ -210,7 +210,7 @@ function factoredQuestion(random: Random, tier: Tier): EquationsRaceQuestion | n
     return choices && build(1, 'factored', say(
         `Zenbat da ${math(equation)} ekuazioaren ebazpenen batura?`,
         `¿Cuánto suman las soluciones de ${math(equation)}?`,
-        `كم مجموع حلول ${math(equation)}؟`
+        `كم مجموع حلول ${math(equation)}؟`, `What is the sum of the solutions of ${math(equation)}?`
     ), choices, fraction(sum), same(roots.map((root) => `x=${root}`).join(',\\ ')), { r0: roots[0], r1: roots[1], r2: roots[2] ?? 0 })
 }
 
@@ -302,8 +302,8 @@ function integerSolutionQuestion(random: Random, tier: Tier): EquationsRaceQuest
     const choices = options(random, fraction(answer), [whole(boundary, 'endpoint'), whole(-answer, 'sign'), ...near(answer)])
     const inequality = inequalityLatex(a, b, relation, c)
     const prompt = upper(solved)
-        ? say(`Zein da ${math(inequality)} inekuazioaren ebazpen oso handiena?`, `¿Cuál es la mayor solución entera de ${math(inequality)}?`, `ما أكبر حل صحيح للمتراجحة ${math(inequality)}؟`)
-        : say(`Zein da ${math(inequality)} inekuazioaren ebazpen oso txikiena?`, `¿Cuál es la menor solución entera de ${math(inequality)}?`, `ما أصغر حل صحيح للمتراجحة ${math(inequality)}؟`)
+        ? say(`Zein da ${math(inequality)} inekuazioaren ebazpen oso handiena?`, `¿Cuál es la mayor solución entera de ${math(inequality)}?`, `ما أكبر حل صحيح للمتراجحة ${math(inequality)}؟`, `What is the largest integer solution of ${math(inequality)}?`)
+        : say(`Zein da ${math(inequality)} inekuazioaren ebazpen oso txikiena?`, `¿Cuál es la menor solución entera de ${math(inequality)}?`, `ما أصغر حل صحيح للمتراجحة ${math(inequality)}؟`, `What is the smallest integer solution of ${math(inequality)}?`)
     return choices && build(3, 'integer-solution', prompt, choices, fraction(answer), same(`x${relationLatex[solved]}${written(end)}\\ \\to\\ ${answer}`), { a, b, c, relation: RELATIONS.indexOf(relation) })
 }
 
@@ -330,7 +330,7 @@ function probeQuestion(random: Random, tier: Tier): EquationsRaceQuestion | null
     return choices && build(3, 'probe', say(
         `Zenbaki hauetako zein da ${math(inequality)} inekuazioaren ebazpena?`,
         `¿Cuál de estos números es solución de ${math(inequality)}?`,
-        `أيّ هذه الأعداد حلّ للمتراجحة ${math(inequality)}؟`
+        `أيّ هذه الأعداد حلّ للمتراجحة ${math(inequality)}؟`, `Which of these numbers is a solution of ${math(inequality)}?`
     ), choices, fraction(answer), same(`x${relationLatex[solved]}${written(end)}`), { a, b, c, relation: RELATIONS.indexOf(relation) }, false)
 }
 
@@ -344,7 +344,7 @@ function budgetQuestion(random: Random): EquationsRaceQuestion | null {
     return choices && build(3, 'budget', say(
         `Taxi batek ${fixed} € finko kobratzen ditu eta ${rate} € km bakoitzeko. Gehienez ${budget} € badituzu, gehienez zenbat km oso egin ditzakezu?`,
         `Un taxi cobra ${fixed} € fijos y ${rate} € por km. Si tienes como mucho ${budget} €, ¿cuántos km enteros puedes recorrer como máximo?`,
-        `تتقاضى سيارة أجرة ${fixed} € ثابتة و${rate} € لكل كم. إذا كان معك ${budget} € على الأكثر، فكم كم صحيحًا يمكنك أن تقطع على الأكثر؟`
+        `تتقاضى سيارة أجرة ${fixed} € ثابتة و${rate} € لكل كم. إذا كان معك ${budget} € على الأكثر، فكم كم صحيحًا يمكنك أن تقطع على الأكثر؟`, `A taxi charges a fixed fee of €${fixed} plus €${rate} per km. If you have at most €${budget}, what is the greatest whole number of km you can travel?`
     ), choices, fraction(answer), same(`${fixed}+${times(rate)}\\le ${budget}\\ \\to\\ x\\le ${written(fraction(budget - fixed, rate))}`), { fixed, rate, budget })
 }
 
@@ -358,7 +358,7 @@ function tariffsQuestion(random: Random): EquationsRaceQuestion | null {
     return choices && build(3, 'tariffs', say(
         `A tarifa: ${fee} € hilean eta ${rateA} € orduko. B tarifa: ${rateB} € orduko. Gutxienez zenbat ordu (zenbaki osoa) behar dira A merkeagoa izateko?`,
         `Tarifa A: ${fee} € al mes y ${rateA} € por hora. Tarifa B: ${rateB} € por hora. ¿Cuántas horas (número entero) hacen falta como mínimo para que la A sea más barata?`,
-        `التعرفة A: ${fee} € شهريًا و${rateA} € للساعة. التعرفة B: ${rateB} € للساعة. كم ساعة (عددًا صحيحًا) على الأقل حتى تصبح A أرخص؟`
+        `التعرفة A: ${fee} € شهريًا و${rateA} € للساعة. التعرفة B: ${rateB} € للساعة. كم ساعة (عددًا صحيحًا) على الأقل حتى تصبح A أرخص؟`, `Plan A: €${fee} a month and €${rateA} per hour. Plan B: €${rateB} per hour. What is the least number of hours (an integer) needed for plan A to be cheaper?`
     ), choices, fraction(answer), same(`${fee}+${times(rateA)}<${times(rateB)}\\ \\to\\ x>${written(cross)}`), { fee, rateA, rateB })
 }
 
@@ -395,7 +395,7 @@ function quadraticGreatestQuestion(random: Random, tier: Tier): EquationsRaceQue
     return choices && build(4, 'quadratic-greatest', say(
         `Zein da ${math(data.inequality)} inekuazioaren ebazpen oso handiena?`,
         `¿Cuál es la mayor solución entera de ${math(data.inequality)}?`,
-        `ما أكبر حل صحيح للمتراجحة ${math(data.inequality)}؟`
+        `ما أكبر حل صحيح للمتراجحة ${math(data.inequality)}؟`, `What is the largest integer solution of ${math(data.inequality)}?`
     ), choices, fraction(answer), same(data.solution), { r, s, a, relation: RELATIONS.indexOf(data.relation) })
 }
 
@@ -418,7 +418,7 @@ function systemCountQuestion(random: Random, tier: Tier): EquationsRaceQuestion 
     return choices && build(4, 'system-count', say(
         `Zenbat zenbaki osok betetzen dituzte batera ${math(first)} eta ${math(other)}?`,
         `¿Cuántos números enteros cumplen a la vez ${math(first)} y ${math(other)}?`,
-        `كم عددًا صحيحًا يحقق معًا ${math(first)} و${math(other)}؟`
+        `كم عددًا صحيحًا يحقق معًا ${math(first)} و${math(other)}؟`, `How many integers satisfy ${math(first)} and ${math(other)} at the same time?`
     ), choices, fraction(count), same(`x${relationLatex[lower]}${p},\\ x${relationLatex[higher]}${q}\\ \\to\\ ${setLatex([span(p, q, lower === '≥', higher === '≤')])}`), { a1, b1, c1: a1 * p + b1, rel1: RELATIONS.indexOf(lower), a2, b2, c2: a2 * q + b2, rel2: RELATIONS.indexOf(second) })
 }
 
@@ -433,7 +433,7 @@ function graphicLengthQuestion(random: Random): EquationsRaceQuestion | null {
     return choices && build(4, 'graphic-length', say(
         `${math('y=x^{2}')} parabola ${math(`y=${polyLatex([m, n])}`)} zuzenaren azpitik dago tarte batean. Zenbat neurtzen du tarte horrek?`,
         `La parábola ${math('y=x^{2}')} queda por debajo de la recta ${math(`y=${polyLatex([m, n])}`)} en un intervalo. ¿Cuánto mide ese intervalo?`,
-        `يكون القطع المكافئ ${math('y=x^{2}')} تحت المستقيم ${math(`y=${polyLatex([m, n])}`)} في مجال. كم طول هذا المجال؟`
+        `يكون القطع المكافئ ${math('y=x^{2}')} تحت المستقيم ${math(`y=${polyLatex([m, n])}`)} في مجال. كم طول هذا المجال؟`, `The parabola ${math('y=x^{2}')} is below the straight line ${math(`y=${polyLatex([m, n])}`)} over an interval. What is the length of that interval?`
     ), choices, fraction(length), same(`${polyLatex([1, -m, -n])}=0\\ \\to\\ x=${r},\\ x=${s}`), { m, n })
 }
 
@@ -465,25 +465,25 @@ export function equationsParTime(circuit: number): number {
 }
 
 export const equationsRaceErrorTips: Record<EquationsRaceError, LocalizedText> = {
-    double: say('b² karratua da, b · b; ez 2b.', 'b² es un cuadrado, b · b; no 2b.', 'b² مربع أي b · b وليس 2b.'),
-    sign: say('Kontuz zeinuarekin: (−b)² positiboa da, eta negatiboak parentesi artean.', 'Cuidado con el signo: (−b)² es positivo, y los negativos van entre paréntesis.', 'انتبه للإشارة: (−b)² موجب، والسالب بين قوسين.'),
-    'other-root': say('Bi ebazpen daude: begiratu zein eskatzen den.', 'Hay dos soluciones: mira cuál se pide.', 'هناك حلّان: انظر أيّهما المطلوب.'),
-    'sum-sign': say('Batura −b/a da, minus zeinuarekin; biderkadura c/a.', 'La suma es −b/a, con el signo menos; el producto, c/a.', 'المجموع −b/a بإشارة سالبة؛ والجداء c/a.'),
-    'sum-product': say('Ez nahastu batura eta biderkadura: batura −b/a, biderkadura c/a.', 'No confundas suma y producto: la suma es −b/a y el producto c/a.', 'لا تخلط بين المجموع والجداء: المجموع −b/a والجداء c/a.'),
-    'divide-a': say('Ez ahaztu a-z zatitzea.', 'No olvides dividir entre a.', 'لا تنسَ القسمة على a.'),
-    'negative-t': say('t negatibo batek ez du x-rik ematen: x² ezin da negatiboa izan.', 'Una t negativa no da ninguna x: x² no puede ser negativo.', 'لا تعطي t السالبة أي x: لا يمكن أن يكون x² سالبًا.'),
-    'zero-t': say('t = 0 balioak x bakarra ematen du: x = 0.', 't = 0 da una sola x: x = 0.', 't = 0 تعطي قيمة واحدة: x = 0.'),
-    't-not-x': say('t = x²: t aurkitu ondoren, atera erro karratua x lortzeko.', 't = x²: después de hallar t, saca la raíz cuadrada para obtener x.', 't = x²: بعد إيجاد t خذ الجذر التربيعي لتحصل على x.'),
-    'binomial-sign': say('x − a = 0 bada, x = a; x + a = 0 bada, x = −a.', 'Si x − a = 0, x = a; si x + a = 0, x = −a.', 'إذا كان x − a = 0 فإن x = a؛ وإذا كان x + a = 0 فإن x = −a.'),
-    excluded: say('Izendatzailea 0 egiten duen balioa ez da inoiz ebazpena.', 'El valor que anula el denominador nunca es solución.', 'القيمة التي تعدم المقام ليست حلًّا أبدًا.'),
-    'upside-down': say('Zatikiari ez eman buelta: a/(x − p) = b bada, x − p = a/b.', 'No le des la vuelta a la fracción: si a/(x − p) = b, entonces x − p = a/b.', 'لا تقلب الكسر: إذا كان a/(x − p) = b فإن x − p = a/b.'),
-    'no-square': say('Erroa kentzeko, bi aldeak karratura jaso.', 'Para quitar la raíz, eleva los dos lados al cuadrado.', 'لإزالة الجذر ربّع الطرفين.'),
-    'false-solution': say('Egiaztatu: erro batek ezin du negatiboa eman, eta logaritmoak argumentu positiboa behar du.', 'Comprueba: una raíz no puede dar negativo, y el logaritmo necesita un argumento positivo.', 'تحقّق: لا يعطي الجذر عددًا سالبًا، واللوغاريتم يحتاج إلى عدد موجب.'),
-    power: say('Idatzi zenbakia oinarriaren berretura gisa eta berdindu berretzaileak.', 'Escribe el número como potencia de la base e iguala los exponentes.', 'اكتب العدد قوةً للأساس وساوِ بين الأسّين.'),
-    'log-times': say('log_b(A) = k bada, A = bᵏ; ez b · k. Eta log A + log B = log(A · B).', 'Si log_b(A) = k, entonces A = bᵏ; no b · k. Y log A + log B = log(A · B).', 'إذا كان log_b(A) = k فإن A = bᵏ لا b · k. وlog A + log B = log(A · B).'),
-    endpoint: say('< eta > zeinuekin muturra ez da sartzen; ≤ eta ≥ zeinuekin bai.', 'Con < y > el extremo no entra; con ≤ y ≥ sí.', 'مع < و> لا يدخل الطرف؛ ومع ≤ و≥ يدخل.'),
-    flip: say('Negatibo batez zatitzean, zentzua aldatu.', 'Al dividir entre un negativo, cambia el sentido.', 'عند القسمة على عدد سالب اقلب الاتجاه.'),
-    'no-fixed': say('Ez ahaztu zati finkoa: hura ere ordaindu behar da.', 'No olvides la parte fija: también se paga.', 'لا تنسَ الجزء الثابت: يُدفع أيضًا.'),
-    'round-up': say('«Gehienez» bada, biribildu behera: gora eginez gero, aurrekontua gainditzen da.', 'Si es «como mucho», redondea hacia abajo: hacia arriba te pasas del presupuesto.', 'إذا كان «على الأكثر» فقرّب إلى الأسفل: إلى الأعلى تتجاوز الميزانية.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    double: say('b² karratua da, b · b; ez 2b.', 'b² es un cuadrado, b · b; no 2b.', 'b² مربع أي b · b وليس 2b.', 'b² is b squared: b · b, not 2b.'),
+    sign: say('Kontuz zeinuarekin: (−b)² positiboa da, eta negatiboak parentesi artean.', 'Cuidado con el signo: (−b)² es positivo, y los negativos van entre paréntesis.', 'انتبه للإشارة: (−b)² موجب، والسالب بين قوسين.', 'Be careful with the sign: (−b)² is positive, and negative values go in brackets.'),
+    'other-root': say('Bi ebazpen daude: begiratu zein eskatzen den.', 'Hay dos soluciones: mira cuál se pide.', 'هناك حلّان: انظر أيّهما المطلوب.', 'There are two solutions: check which one is asked for.'),
+    'sum-sign': say('Batura −b/a da, minus zeinuarekin; biderkadura c/a.', 'La suma es −b/a, con el signo menos; el producto, c/a.', 'المجموع −b/a بإشارة سالبة؛ والجداء c/a.', 'The sum is −b/a, with a minus sign; the product is c/a.'),
+    'sum-product': say('Ez nahastu batura eta biderkadura: batura −b/a, biderkadura c/a.', 'No confundas suma y producto: la suma es −b/a y el producto c/a.', 'لا تخلط بين المجموع والجداء: المجموع −b/a والجداء c/a.', 'Do not mix up sum and product: the sum is −b/a and the product is c/a.'),
+    'divide-a': say('Ez ahaztu a-z zatitzea.', 'No olvides dividir entre a.', 'لا تنسَ القسمة على a.', 'Do not forget to divide by a.'),
+    'negative-t': say('t negatibo batek ez du x-rik ematen: x² ezin da negatiboa izan.', 'Una t negativa no da ninguna x: x² no puede ser negativo.', 'لا تعطي t السالبة أي x: لا يمكن أن يكون x² سالبًا.', 'A negative t gives no x: x² cannot be negative.'),
+    'zero-t': say('t = 0 balioak x bakarra ematen du: x = 0.', 't = 0 da una sola x: x = 0.', 't = 0 تعطي قيمة واحدة: x = 0.', 't = 0 gives only one x: x = 0.'),
+    't-not-x': say('t = x²: t aurkitu ondoren, atera erro karratua x lortzeko.', 't = x²: después de hallar t, saca la raíz cuadrada para obtener x.', 't = x²: بعد إيجاد t خذ الجذر التربيعي لتحصل على x.', 't = x²: after finding t, take the square root to get x.'),
+    'binomial-sign': say('x − a = 0 bada, x = a; x + a = 0 bada, x = −a.', 'Si x − a = 0, x = a; si x + a = 0, x = −a.', 'إذا كان x − a = 0 فإن x = a؛ وإذا كان x + a = 0 فإن x = −a.', 'If x − a = 0, then x = a; if x + a = 0, then x = −a.'),
+    excluded: say('Izendatzailea 0 egiten duen balioa ez da inoiz ebazpena.', 'El valor que anula el denominador nunca es solución.', 'القيمة التي تعدم المقام ليست حلًّا أبدًا.', 'The value that makes the denominator zero is never a solution.'),
+    'upside-down': say('Zatikiari ez eman buelta: a/(x − p) = b bada, x − p = a/b.', 'No le des la vuelta a la fracción: si a/(x − p) = b, entonces x − p = a/b.', 'لا تقلب الكسر: إذا كان a/(x − p) = b فإن x − p = a/b.', 'Don\'t turn the fraction upside down: if a/(x − p) = b, then x − p = a/b.'),
+    'no-square': say('Erroa kentzeko, bi aldeak karratura jaso.', 'Para quitar la raíz, eleva los dos lados al cuadrado.', 'لإزالة الجذر ربّع الطرفين.', 'To remove the root, square both sides.'),
+    'false-solution': say('Egiaztatu: erro batek ezin du negatiboa eman, eta logaritmoak argumentu positiboa behar du.', 'Comprueba: una raíz no puede dar negativo, y el logaritmo necesita un argumento positivo.', 'تحقّق: لا يعطي الجذر عددًا سالبًا، واللوغاريتم يحتاج إلى عدد موجب.', 'Check: a square root cannot be negative, and a logarithm needs a positive argument.'),
+    power: say('Idatzi zenbakia oinarriaren berretura gisa eta berdindu berretzaileak.', 'Escribe el número como potencia de la base e iguala los exponentes.', 'اكتب العدد قوةً للأساس وساوِ بين الأسّين.', 'Write the number as a power of the base and set the exponents equal.'),
+    'log-times': say('log_b(A) = k bada, A = bᵏ; ez b · k. Eta log A + log B = log(A · B).', 'Si log_b(A) = k, entonces A = bᵏ; no b · k. Y log A + log B = log(A · B).', 'إذا كان log_b(A) = k فإن A = bᵏ لا b · k. وlog A + log B = log(A · B).', 'If log_b(A) = k, then A = bᵏ, not b · k. And log A + log B = log(A · B).'),
+    endpoint: say('< eta > zeinuekin muturra ez da sartzen; ≤ eta ≥ zeinuekin bai.', 'Con < y > el extremo no entra; con ≤ y ≥ sí.', 'مع < و> لا يدخل الطرف؛ ومع ≤ و≥ يدخل.', 'With < and >, the endpoint is not included; with ≤ and ≥ it is.'),
+    flip: say('Negatibo batez zatitzean, zentzua aldatu.', 'Al dividir entre un negativo, cambia el sentido.', 'عند القسمة على عدد سالب اقلب الاتجاه.', 'When you divide by a negative, the inequality sign flips.'),
+    'no-fixed': say('Ez ahaztu zati finkoa: hura ere ordaindu behar da.', 'No olvides la parte fija: también se paga.', 'لا تنسَ الجزء الثابت: يُدفع أيضًا.', 'Don\'t forget the fixed part: you also pay for it.'),
+    'round-up': say('«Gehienez» bada, biribildu behera: gora eginez gero, aurrekontua gainditzen da.', 'Si es «como mucho», redondea hacia abajo: hacia arriba te pasas del presupuesto.', 'إذا كان «على الأكثر» فقرّب إلى الأسفل: إلى الأعلى تتجاوز الميزانية.', 'If it says “at most”, round down: rounding up would take you over budget.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

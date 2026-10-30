@@ -31,8 +31,8 @@ export type ProportionRaceError =
 export type ProportionRaceQuestion = RaceQuestion<ProportionRaceError>
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, ar: latex.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, en: latex, ar: latex.replace(/\{,\}/g, '.') })
 const math = (latex: string) => `$${latex}$`
 
 /** An exact decimal in LaTeX with the comma ({,}); only values that end and are short */
@@ -85,7 +85,7 @@ function ratioQuestion(random: Random, tier: Tier): ProportionRaceQuestion | nul
     if (a === b) return null
     const choices = options(random, value, [{ value: fraction(b, a), error: 'inverted' }, { value: n(a * b), error: 'calculation' }, ...near(value)])
     if (!choices) return null
-    return question(0, 'ratio', say(`Zein da ${math(`${a}`)} eta ${math(`${b}`)} arteko arrazoiaren balioa?`, `¿Cuánto vale la razón entre ${math(`${a}`)} y ${math(`${b}`)}?`, `كم قيمة النسبة بين ${math(`${a}`)} و${math(`${b}`)}؟`), choices, value, same(math(`\\frac{${a}}{${b}}=${a}\\mathbin{:}${b}=${w(value)}`)))
+    return question(0, 'ratio', say(`Zein da ${math(`${a}`)} eta ${math(`${b}`)} arteko arrazoiaren balioa?`, `¿Cuánto vale la razón entre ${math(`${a}`)} y ${math(`${b}`)}?`, `كم قيمة النسبة بين ${math(`${a}`)} و${math(`${b}`)}؟`, `What is the value of the ratio between ${math(`${a}`)} and ${math(`${b}`)}?`), choices, value, same(math(`\\frac{${a}}{${b}}=${a}\\mathbin{:}${b}=${w(value)}`)))
 }
 
 function proportionQuestion(random: Random, tier: Tier): ProportionRaceQuestion | null {
@@ -103,10 +103,10 @@ function proportionQuestion(random: Random, tier: Tier): ProportionRaceQuestion 
 /* ---------- Circuits 1 and 2: direct and inverse problems ---------- */
 
 const directContexts = [
-    { thing: say('koaderno', 'cuadernos', 'دفاتر'), unit: '€', price: true },
-    { thing: say('txokolatina', 'chocolatinas', 'قطع شوكولاتة'), unit: 'g', price: false },
-    { thing: say('sarrera', 'entradas', 'تذاكر'), unit: '€', price: true },
-    { thing: say('jauzi', 'saltos', 'قفزات'), unit: 'm', price: false }
+    { thing: say('koaderno', 'cuadernos', 'دفاتر', 'notebooks'), unit: '€', price: true },
+    { thing: say('txokolatina', 'chocolatinas', 'قطع شوكولاتة', 'chocolate bars'), unit: 'g', price: false },
+    { thing: say('sarrera', 'entradas', 'تذاكر', 'tickets'), unit: '€', price: true },
+    { thing: say('jauzi', 'saltos', 'قفزات', 'jumps'), unit: 'm', price: false }
 ]
 
 function directQuestion(random: Random, tier: Tier): ProportionRaceQuestion | null {
@@ -128,15 +128,15 @@ function directQuestion(random: Random, tier: Tier): ProportionRaceQuestion | nu
     return question(1, 'direct', say(
         `${math(`${known}`)} ${context.thing.eu}: ${math(w(amount))} ${unitWord}. Zenbat dira ${math(`${wanted}`)} ${context.thing.eu}?`,
         `${math(`${known}`)} ${context.thing.es}: ${math(w(amount))} ${unitWord}. ¿Cuánto son ${math(`${wanted}`)} ${context.thing.es}?`,
-        `${math(`${known}`)} ${context.thing.ar}: ${math(w(amount))} ${unitWord}. كم لـ ${math(`${wanted}`)} ${context.thing.ar}؟`
+        `${math(`${known}`)} ${context.thing.ar}: ${math(w(amount))} ${unitWord}. كم لـ ${math(`${wanted}`)} ${context.thing.ar}؟`, `${math(`${known}`)} ${context.thing.en}: ${math(w(amount))} ${unitWord}. How much are ${math(`${wanted}`)} ${context.thing.en}?`
     ), choices, answer, same(math(`${w(amount)}\\mathbin{:}${known}=${w(each)}\\ \\to\\ ${w(each)}\\cdot ${wanted}=${w(answer)}`)))
 }
 
 const inverseContexts = [
-    { workers: say('margolari', 'pintores', 'رسّامين'), time: say('ordu', 'horas', 'ساعات'), howMany: 'Cuántas' },
-    { workers: say('txorrota', 'grifos', 'صنابير'), time: say('minutu', 'minutos', 'دقائق'), howMany: 'Cuántos' },
-    { workers: say('zaldi', 'caballos', 'خيول'), time: say('egun', 'días', 'أيام'), howMany: 'Cuántos' },
-    { workers: say('langile', 'obreros', 'عمال'), time: say('egun', 'días', 'أيام'), howMany: 'Cuántos' }
+    { workers: say('margolari', 'pintores', 'رسّامين', 'painters'), time: say('ordu', 'horas', 'ساعات', 'hours'), howMany: 'Cuántas' },
+    { workers: say('txorrota', 'grifos', 'صنابير', 'taps'), time: say('minutu', 'minutos', 'دقائق', 'minutes'), howMany: 'Cuántos' },
+    { workers: say('zaldi', 'caballos', 'خيول', 'horses'), time: say('egun', 'días', 'أيام', 'days'), howMany: 'Cuántos' },
+    { workers: say('langile', 'obreros', 'عمال', 'workers'), time: say('egun', 'días', 'أيام', 'days'), howMany: 'Cuántos' }
 ]
 
 function inverseQuestion(random: Random, tier: Tier): ProportionRaceQuestion | null {
@@ -158,7 +158,7 @@ function inverseQuestion(random: Random, tier: Tier): ProportionRaceQuestion | n
     return question(2, 'inverse', say(
         `${math(`${known}`)} ${context.workers.eu}: ${math(w(time))} ${context.time.eu}. Zenbat ${context.time.eu} ${math(`${wanted}`)} ${context.workers.eu} izanda?`,
         `${math(`${known}`)} ${context.workers.es}: ${math(w(time))} ${context.time.es}. ¿${context.howMany} ${context.time.es} con ${math(`${wanted}`)} ${context.workers.es}?`,
-        `${math(`${known}`)} ${context.workers.ar}: ${math(w(time))} ${context.time.ar}. كم ${context.time.ar} مع ${math(`${wanted}`)} ${context.workers.ar}؟`
+        `${math(`${known}`)} ${context.workers.ar}: ${math(w(time))} ${context.time.ar}. كم ${context.time.ar} مع ${math(`${wanted}`)} ${context.workers.ar}؟`, `${math(`${known}`)} ${context.workers.en}: ${math(w(time))} ${context.time.en}. How many ${context.time.en} with ${math(`${wanted}`)} ${context.workers.en}?`
     ), choices, answer, same(math(`${w(time)}\\cdot ${known}=${w(total)}\\ \\to\\ ${w(total)}\\mathbin{:}${wanted}=${w(answer)}`)))
 }
 
@@ -174,7 +174,7 @@ function percentOfQuestion(random: Random, tier: Tier): ProportionRaceQuestion |
     const answer = fraction(quantity * percent, 100)
     const choices = options(random, answer, [{ value: n(quantity * percent), error: 'times-100' }, { value: n(quantity - percent), error: 'percent-as-amount' }, { value: subtract(n(quantity), answer), error: 'change-only' }, ...near(answer)])
     if (!choices) return null
-    return question(3, 'percent-of', say(`Zenbat da ${math(`${quantity}`)} kantitatearen ${math(percentEu(percent))}?`, `¿Cuánto es el ${math(percentLatex(percent))} de ${math(`${quantity}`)}?`, `كم يساوي ${math(percentLatex(percent))} من ${math(`${quantity}`)}؟`), choices, answer, same(math(`${quantity}\\cdot ${percent}\\mathbin{:}100=${w(answer)}`)))
+    return question(3, 'percent-of', say(`Zenbat da ${math(`${quantity}`)} kantitatearen ${math(percentEu(percent))}?`, `¿Cuánto es el ${math(percentLatex(percent))} de ${math(`${quantity}`)}?`, `كم يساوي ${math(percentLatex(percent))} من ${math(`${quantity}`)}؟`, `What is ${math(percentLatex(percent))} of ${math(`${quantity}`)}?`), choices, answer, same(math(`${quantity}\\cdot ${percent}\\mathbin{:}100=${w(answer)}`)))
 }
 
 function whichPercentQuestion(random: Random, tier: Tier): ProportionRaceQuestion | null {
@@ -185,7 +185,7 @@ function whichPercentQuestion(random: Random, tier: Tier): ProportionRaceQuestio
     const answer = n(percent)
     const choices = options(random, answer, [{ value: fraction(part, total), error: 'times-100' }, { value: n(100 - percent), error: 'calculation' }, { value: fraction(total * 100, part), error: 'inverted' }, ...near(answer)])
     if (!choices) return null
-    return question(3, 'which-percent', say(`${math(`${total}`)} ikasletatik ${math(`${part}`)} bizikletaz datoz. Zer ehuneko da? (% gabe)`, `De ${math(`${total}`)} alumnos, ${math(`${part}`)} vienen en bici. ¿Qué porcentaje es? (sin %)`, `من ${math(`${total}`)} تلميذًا، ${math(`${part}`)} يأتون بالدراجة. ما النسبة المئوية؟ (بلا ٪)`), choices, answer, same(math(`${part}\\mathbin{:}${total}\\cdot 100=${percent}`)))
+    return question(3, 'which-percent', say(`${math(`${total}`)} ikasletatik ${math(`${part}`)} bizikletaz datoz. Zer ehuneko da? (% gabe)`, `De ${math(`${total}`)} alumnos, ${math(`${part}`)} vienen en bici. ¿Qué porcentaje es? (sin %)`, `من ${math(`${total}`)} تلميذًا، ${math(`${part}`)} يأتون بالدراجة. ما النسبة المئوية؟ (بلا ٪)`, `Of ${math(`${total}`)} students, ${math(`${part}`)} come by bike. What percentage is this? (without %)`), choices, answer, same(math(`${part}\\mathbin{:}${total}\\cdot 100=${percent}`)))
 }
 
 function totalQuestion(random: Random, tier: Tier): ProportionRaceQuestion | null {
@@ -196,7 +196,7 @@ function totalQuestion(random: Random, tier: Tier): ProportionRaceQuestion | nul
     const answer = n(total)
     const choices = options(random, answer, [{ value: fraction(part * percent, 100), error: 'percent-as-amount' }, { value: n(part * percent), error: 'calculation' }, { value: n(part + percent), error: 'calculation' }, ...near(answer)])
     if (!choices) return null
-    return question(3, 'total', say(`${math(`${part}`)} erlauntza dira erlategiaren ${math(percentEu(percent))}. Zenbat erlauntza ditu guztira?`, `${math(`${part}`)} colmenas son el ${math(percentLatex(percent))} del colmenar. ¿Cuántas colmenas tiene en total?`, `${math(`${part}`)} خلية هي ${math(percentLatex(percent))} من المنحل. كم خلية فيه؟`), choices, answer, same(math(`${part}\\mathbin{:}${percent}\\cdot 100=${total}`)))
+    return question(3, 'total', say(`${math(`${part}`)} erlauntza dira erlategiaren ${math(percentEu(percent))}. Zenbat erlauntza ditu guztira?`, `${math(`${part}`)} colmenas son el ${math(percentLatex(percent))} del colmenar. ¿Cuántas colmenas tiene en total?`, `${math(`${part}`)} خلية هي ${math(percentLatex(percent))} من المنحل. كم خلية فيه؟`, `${math(`${part}`)} hives are ${math(percentLatex(percent))} of the apiary. How many hives does the apiary have in total?`), choices, answer, same(math(`${part}\\mathbin{:}${percent}\\cdot 100=${total}`)))
 }
 
 /* ---------- Circuit 4: discounts and increases ---------- */
@@ -216,8 +216,8 @@ function changeQuestion(random: Random, tier: Tier): ProportionRaceQuestion | nu
     if (!choices) return null
     const sign = increase ? '+' : '-'
     return question(4, increase ? 'increase' : 'discount', increase
-        ? say(`Prezioa ${math(`${price}`)} €; ${math(percentEu(percent))} igo da. Zenbat balio du orain?`, `Costaba ${math(`${price}`)} € y sube un ${math(percentLatex(percent))}. ¿Cuánto cuesta ahora?`, `كان الثمن ${math(`${price}`)} € وارتفع ${math(percentLatex(percent))}. كم الثمن الآن؟`)
-        : say(`Prezioa ${math(`${price}`)} €; ${math(percentEu(percent))} merkatu da. Zenbat ordaintzen da?`, `Cuesta ${math(`${price}`)} € con un descuento del ${math(percentLatex(percent))}. ¿Cuánto se paga?`, `الثمن ${math(`${price}`)} € بخصم ${math(percentLatex(percent))}. كم يُدفع؟`),
+        ? say(`Prezioa ${math(`${price}`)} €; ${math(percentEu(percent))} igo da. Zenbat balio du orain?`, `Costaba ${math(`${price}`)} € y sube un ${math(percentLatex(percent))}. ¿Cuánto cuesta ahora?`, `كان الثمن ${math(`${price}`)} € وارتفع ${math(percentLatex(percent))}. كم الثمن الآن؟`, `It cost €${math(`${price}`)} and its price rises by ${math(percentLatex(percent))}. How much does it cost now?`)
+        : say(`Prezioa ${math(`${price}`)} €; ${math(percentEu(percent))} merkatu da. Zenbat ordaintzen da?`, `Cuesta ${math(`${price}`)} € con un descuento del ${math(percentLatex(percent))}. ¿Cuánto se paga?`, `الثمن ${math(`${price}`)} € بخصم ${math(percentLatex(percent))}. كم يُدفع؟`, `It costs €${math(`${price}`)} with a discount of ${math(percentLatex(percent))}. How much do you pay?`),
     choices, answer, same(math(`${price}\\cdot ${percent}\\mathbin{:}100=${w(change)}\\ \\to\\ ${price}${sign}${w(change)}=${w(answer)}`)))
 }
 
@@ -251,14 +251,14 @@ export function proportionParTime(circuit: number): number {
 }
 
 export const proportionRaceErrorTips: Record<ProportionRaceError, LocalizedText> = {
-    inverted: say('Arrazoia buruz behera dago: aurrekaria goian, ondorengoa behean (zatia goian, osoa behean).', 'La razón está al revés: el antecedente arriba y el consecuente abajo (la parte arriba, el total abajo).', 'النسبة مقلوبة: المقدَّم في الأعلى والتالي في الأسفل (الجزء في الأعلى والكل في الأسفل).'),
-    cross: say('Gurutzeko biderkadurak: muturrak elkarrekin eta erdikoak elkarrekin, $a\\cdot x=b\\cdot c$.', 'Productos cruzados: extremos con extremos y medios con medios, $a\\cdot x=b\\cdot c$.', 'الضرب التبادلي: الطرفان معًا والوسطان معًا، $a\\cdot x=b\\cdot c$.'),
-    'inverse-used': say('Zuzena da (gehiago → gehiago): lehenik zatitu, gero biderkatu.', 'Es directa (más → más): primero divide, luego multiplica.', 'إنه طردي (أكثر ← أكثر): اقسم أولًا ثم اضرب.'),
-    'direct-used': say('Alderantzizkoa da (gehiago → gutxiago): bakar batek gehiago behar du, lehenik biderkatu, gero zatitu.', 'Es inversa (más → menos): uno solo tarda más; primero multiplica, luego divide.', 'إنه عكسي (أكثر ← أقل): الواحد يحتاج وقتًا أطول؛ اضرب أولًا ثم اقسم.'),
-    'one-step': say('Bi urrats behar dira: lehenik bat bakarrarentzat, gero eskatzen direnentzat.', 'Hacen falta dos pasos: primero para uno solo, después para los que se piden.', 'نحتاج خطوتين: أولًا للواحد ثم للعدد المطلوب.'),
-    'percent-as-amount': say('Ehunekoa ez da euro kopuru bat: kalkulatu kantitatearen % hori, $Q\\cdot p\\mathbin{:}100$.', 'El porcentaje no es una cantidad de euros: calcula ese % de la cantidad, $Q\\cdot p\\mathbin{:}100$.', 'النسبة المئوية ليست مبلغًا من اليورو: احسب تلك النسبة من الكمية، $Q\\cdot p\\mathbin{:}100$.'),
-    'times-100': say('Ez ahaztu 100: ehunekoa = zatia : osoa · 100, eta kantitatearen % $p$ = kantitatea · $p$ : 100.', 'No olvides el 100: porcentaje = parte : total · 100, y el $p$ % de una cantidad = cantidad · $p$ : 100.', 'لا تنسَ 100: النسبة = الجزء : الكل · 100، و$p$٪ من كمية = الكمية · $p$ : 100.'),
-    'change-only': say('Hori aldaketa bakarrik da (beherapena edo igoera); orain kendu edo batu prezioari.', 'Eso es solo el cambio (el descuento o la subida); ahora réstalo o súmalo al precio.', 'هذا هو التغيّر فقط (الخصم أو الزيادة)؛ اطرحه الآن من السعر أو أضفه إليه.'),
-    opposite: say('Beherapenean kendu egiten da; igoeran, batu.', 'En un descuento se resta; en una subida, se suma.', 'في التخفيض نطرح؛ وفي الزيادة نجمع.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    inverted: say('Arrazoia buruz behera dago: aurrekaria goian, ondorengoa behean (zatia goian, osoa behean).', 'La razón está al revés: el antecedente arriba y el consecuente abajo (la parte arriba, el total abajo).', 'النسبة مقلوبة: المقدَّم في الأعلى والتالي في الأسفل (الجزء في الأعلى والكل في الأسفل).', 'The ratio is the wrong way round: the antecedent on top and the consequent at the bottom (the part on top, the total at the bottom).'),
+    cross: say('Gurutzeko biderkadurak: muturrak elkarrekin eta erdikoak elkarrekin, $a\\cdot x=b\\cdot c$.', 'Productos cruzados: extremos con extremos y medios con medios, $a\\cdot x=b\\cdot c$.', 'الضرب التبادلي: الطرفان معًا والوسطان معًا، $a\\cdot x=b\\cdot c$.', 'Cross products: extremes with extremes and means with means, $a\\cdot x=b\\cdot c$.'),
+    'inverse-used': say('Zuzena da (gehiago → gehiago): lehenik zatitu, gero biderkatu.', 'Es directa (más → más): primero divide, luego multiplica.', 'إنه طردي (أكثر ← أكثر): اقسم أولًا ثم اضرب.', 'It is direct (more → more): first divide, then multiply.'),
+    'direct-used': say('Alderantzizkoa da (gehiago → gutxiago): bakar batek gehiago behar du, lehenik biderkatu, gero zatitu.', 'Es inversa (más → menos): uno solo tarda más; primero multiplica, luego divide.', 'إنه عكسي (أكثر ← أقل): الواحد يحتاج وقتًا أطول؛ اضرب أولًا ثم اقسم.', 'It is inverse (more → less): one alone takes longer; first multiply, then divide.'),
+    'one-step': say('Bi urrats behar dira: lehenik bat bakarrarentzat, gero eskatzen direnentzat.', 'Hacen falta dos pasos: primero para uno solo, después para los que se piden.', 'نحتاج خطوتين: أولًا للواحد ثم للعدد المطلوب.', 'You need two steps: first for one, then for the amount asked for.'),
+    'percent-as-amount': say('Ehunekoa ez da euro kopuru bat: kalkulatu kantitatearen % hori, $Q\\cdot p\\mathbin{:}100$.', 'El porcentaje no es una cantidad de euros: calcula ese % de la cantidad, $Q\\cdot p\\mathbin{:}100$.', 'النسبة المئوية ليست مبلغًا من اليورو: احسب تلك النسبة من الكمية، $Q\\cdot p\\mathbin{:}100$.', 'A percentage is not an amount in euros: work out that percentage of the amount, $Q\\cdot p\\mathbin{:}100$.'),
+    'times-100': say('Ez ahaztu 100: ehunekoa = zatia : osoa · 100, eta kantitatearen % $p$ = kantitatea · $p$ : 100.', 'No olvides el 100: porcentaje = parte : total · 100, y el $p$ % de una cantidad = cantidad · $p$ : 100.', 'لا تنسَ 100: النسبة = الجزء : الكل · 100، و$p$٪ من كمية = الكمية · $p$ : 100.', 'Don\'t forget the 100: percentage = part : total · 100, and the $p$% of an amount = amount · $p$ : 100.'),
+    'change-only': say('Hori aldaketa bakarrik da (beherapena edo igoera); orain kendu edo batu prezioari.', 'Eso es solo el cambio (el descuento o la subida); ahora réstalo o súmalo al precio.', 'هذا هو التغيّر فقط (الخصم أو الزيادة)؛ اطرحه الآن من السعر أو أضفه إليه.', 'That is only the change (the discount or the increase); now subtract it from or add it to the price.'),
+    opposite: say('Beherapenean kendu egiten da; igoeran, batu.', 'En un descuento se resta; en una subida, se suma.', 'في التخفيض نطرح؛ وفي الزيادة نجمع.', 'With a discount you subtract; with an increase, you add.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

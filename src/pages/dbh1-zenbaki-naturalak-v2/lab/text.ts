@@ -4,5 +4,6 @@ import type { UnitLanguage } from '../../../features/unit-v2/types.ts'
 export const placeNames: Record<UnitLanguage, string[]> = {
     eu: ['unitateak', 'hamarrekoak', 'ehunekoak', 'milakoak', 'hamar milakoak', 'ehun milakoak', 'milioiak'],
     es: ['unidades', 'decenas', 'centenas', 'unidades de millar', 'decenas de millar', 'centenas de millar', 'unidades de millón'],
+    en: ['units', 'tens', 'hundreds', 'thousands', 'ten thousands', 'hundred thousands', 'millions'],
     ar: ['آحاد', 'عشرات', 'مئات', 'آلاف', 'عشرات الآلاف', 'مئات الآلاف', 'ملايين']
 }

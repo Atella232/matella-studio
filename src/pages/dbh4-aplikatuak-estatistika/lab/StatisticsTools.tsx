@@ -6,6 +6,7 @@ import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { toExactDecimal, toNumber, type FractionValue } from '../../../features/unit-v2/math/fraction'
 import type { LocalizedText, UnitLanguage } from '../../../features/unit-v2/types'
 import { COLORS, INK, LINE, MUTED, PAPER, SECOND, STAGE, STAGE_TINT } from '../../dbh2-estatistika-v2/palette'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import {
     cellsLabels,
     contingencyChallenges,
@@ -82,9 +83,13 @@ import {
     type WhiskersState
 } from './labTools'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const sum = (values: number[]) => values.reduce((total, value) => total + value, 0)
-const separator = (language: UnitLanguage) => (language === 'ar' ? '.' : ',')
+/** The decimal mark of the text the learner reads: 0,5 in Spanish and Basque, 0.5 in English and Arabic */
+const separator = (language: UnitLanguage) => (language === 'ar' ? '.' : decimalSeparatorFor(language))
+
+/** A text number as LaTeX: the decimal is {,} (MathText writes it as a point in English) and a point in Arabic */
+const toLatex = (text: string, language: UnitLanguage) => text.replace(separator(language), language === 'ar' ? '.' : '{,}')
 
 /** A number in the learner's language: exact when it has few decimals, otherwise rounded with ≈ */
 function plain(value: number, language: UnitLanguage, digits = 2): string {
@@ -95,14 +100,14 @@ function plain(value: number, language: UnitLanguage, digits = 2): string {
 
 /** "= value" or "\approx value" for LaTeX from a float */
 function texNumber(value: number, language: UnitLanguage, digits = 2) {
-    const text = plain(value, language, digits).replace(',', '{,}').replace('−', '-')
+    const text = toLatex(plain(value, language, digits), language).replace('−', '-')
     return text.startsWith('≈ ') ? `\\approx ${text.slice(2)}` : `=${text}`
 }
 
 /** "= value" for an exact fraction, as a decimal when short */
 function texFraction(value: FractionValue, language: UnitLanguage, digits = 2) {
     const exact = toExactDecimal(value, separator(language))
-    if (exact !== null && exact.replace(/^[^,.]*[,.]?/, '').length <= digits) return `=${exact.replace(',', '{,}')}`
+    if (exact !== null && exact.replace(/^[^,.]*[,.]?/, '').length <= digits) return `=${toLatex(exact, language)}`
     return texNumber(toNumber(value), language, digits)
 }
 
@@ -152,14 +157,13 @@ export function IntervalsTool(props: LabToolProps) {
     const top = Math.max(...plan.counts)
     const y = (count: number) => 200 - (count / Math.max(top, 1)) * 140
     const controls = (
-        <Segmented label={l(say('Tarte kopurua', 'Número de intervalos', 'عدد الفئات'))} value={String(state.count)} options={INTERVAL_COUNTS.map((count) => ({ value: String(count), label: String(count) }))} onChange={(value) => setState((s) => setIntervals(s, Number(value)))} />
+        <Segmented label={l(say('Tarte kopurua', 'Número de intervalos', 'عدد الفئات', 'Number of intervals'))} value={String(state.count)} options={INTERVAL_COUNTS.map((count) => ({ value: String(count), label: String(count) }))} onChange={(value) => setState((s) => setIntervals(s, Number(value)))} />
     )
-    const d = (value: number) => plain(value, props.language).replace(',', '{,}')
     const latex = `r=29\\quad r'=${plan.extended}\\quad ${plan.extended}:${state.count}=${plan.width}`
-    const note = l(say(`Hasiera: ${plain(plan.start, 'eu')}. Tarte modalaren klase-marka: ${plain(plan.marks[plan.modal], 'eu')}.`, `Empieza en ${plain(plan.start, 'es')}. Marca de clase del intervalo modal: ${plain(plan.marks[plan.modal], 'es')}.`, `البداية: ${plain(plan.start, 'ar')}. مركز الفئة المنوالية: ${plain(plan.marks[plan.modal], 'ar')}.`))
+    const note = l(say(`Hasiera: ${plain(plan.start, 'eu')}. Tarte modalaren klase-marka: ${plain(plan.marks[plan.modal], 'eu')}.`, `Empieza en ${plain(plan.start, 'es')}. Marca de clase del intervalo modal: ${plain(plan.marks[plan.modal], 'es')}.`, `البداية: ${plain(plan.start, 'ar')}. مركز الفئة المنوالية: ${plain(plan.marks[plan.modal], 'ar')}.`, `Starts at ${plain(plan.start, 'en')}. Class mark of the modal class: ${plain(plan.marks[plan.modal], 'en')}.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={intervalsChallenges} state={state}>
-            <Board height={280} label={l(say('40 altuerak tarteetan', 'Las 40 alturas en intervalos', 'الأطوال الأربعون في فئات'))}>
+            <Board height={280} label={l(say('40 altuerak tarteetan', 'Las 40 alturas en intervalos', 'الأطوال الأربعون في فئات', 'The 40 heights in intervals'))}>
                 {plan.counts.map((count, index) => (
                     <g key={index}>
                         <rect x={x(plan.edges[index])} y={y(count)} width={x(plan.edges[index + 1]) - x(plan.edges[index])} height={200 - y(count)} fill={index === plan.modal ? SECOND : STAGE} fillOpacity={0.3} stroke={INK} strokeWidth={1.6} />
@@ -178,7 +182,7 @@ export function IntervalsTool(props: LabToolProps) {
                     </g>
                 ))}
                 <Text x={600} y={30} anchor="end" size={13} color={MUTED}>cm</Text>
-                <text x={20} y={30} fontSize={13} fill={MUTED} direction="ltr">{`${d(plan.min).replace('{,}', ',')} – ${d(plan.max).replace('{,}', ',')}`}</text>
+                <text x={20} y={30} fontSize={13} fill={MUTED} direction="ltr">{`${plain(plan.min, props.language)} – ${plain(plan.max, props.language)}`}</text>
             </Board>
         </ToolFrame>
     )
@@ -199,13 +203,13 @@ export function PercentileTool(props: LabToolProps) {
             {PERCENTILE_VALUES.map((item, index) => (
                 <Stepper key={item} label={`${item} (fᵢ)`} value={state.counts[index]} min={0} max={PERCENTILE_COUNT_MAX} onChange={(next) => setState((s) => setPercentile(s, { index, count: next }))} language={props.language} />
             ))}
-            <Segmented label={l(say('Pertzentila', 'Percentil', 'المئين'))} value={String(state.k)} options={PERCENTILE_KS.map((k) => ({ value: String(k), label: `p${k}` }))} onChange={(next) => setState((s) => setPercentile(s, { k: Number(next) }))} />
+            <Segmented label={l(say('Pertzentila', 'Percentil', 'المئين', 'Percentile'))} value={String(state.k)} options={PERCENTILE_KS.map((k) => ({ value: String(k), label: `p${k}` }))} onChange={(next) => setState((s) => setPercentile(s, { k: Number(next) }))} />
         </>
     )
     const latex = value === null ? 'N=0' : `p_{${state.k}}=${value}`
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={`N = ${total} · Q₁ = ${quartiles[0] ?? '—'} · Me = ${quartiles[1] ?? '—'} · Q₃ = ${quartiles[2] ?? '—'}`} />} challenges={percentileChallenges} state={state}>
-            <Board height={230} label={l(say('Ehuneko metatuen zinta', 'Cinta de porcentajes acumulados', 'شريط النسب المتجمّعة'))}>
+            <Board height={230} label={l(say('Ehuneko metatuen zinta', 'Cinta de porcentajes acumulados', 'شريط النسب المتجمّعة', 'Cumulative percentage strip'))}>
                 {state.counts.map((count, index) => {
                     if (count === 0) return null
                     const start = index === 0 ? 0 : percents[index - 1]
@@ -241,16 +245,16 @@ export function WhiskersTool(props: LabToolProps) {
     const controls = (
         <>
             {state.values.map((value, index) => (
-                <Stepper key={index} label={l(say(`${index + 1}. datua`, `Dato ${index + 1}`, `البيان ${index + 1}`))} value={value} min={0} max={WHISKER_MAX} onChange={(next) => setState((s) => setWhisker(s, index, next))} language={props.language} />
+                <Stepper key={index} label={l(say(`${index + 1}. datua`, `Dato ${index + 1}`, `البيان ${index + 1}`, `Value ${index + 1}`))} value={value} min={0} max={WHISKER_MAX} onChange={(next) => setState((s) => setWhisker(s, index, next))} language={props.language} />
             ))}
         </>
     )
-    const t = (value: number) => plain(value, props.language).replace(',', '{,}')
+    const t = (value: number) => toLatex(plain(value, props.language), props.language)
     const latex = `Q_1=${t(box.q1)}\\quad \\text{Me}=${t(box.median)}\\quad Q_3=${t(box.q3)}`
-    const note = l(say(`Mugak: ${plain(box.low, 'eu')} eta ${plain(box.high, 'eu')}. Atipikoak: ${box.outliers.length}.`, `Límites: ${plain(box.low, 'es')} y ${plain(box.high, 'es')}. Atípicos: ${box.outliers.length}.`, `الحدّان: ${plain(box.low, 'ar')} و${plain(box.high, 'ar')}. الشواذ: ${box.outliers.length}.`))
+    const note = l(say(`Mugak: ${plain(box.low, 'eu')} eta ${plain(box.high, 'eu')}. Atipikoak: ${box.outliers.length}.`, `Límites: ${plain(box.low, 'es')} y ${plain(box.high, 'es')}. Atípicos: ${box.outliers.length}.`, `الحدّان: ${plain(box.low, 'ar')} و${plain(box.high, 'ar')}. الشواذ: ${box.outliers.length}.`, `Limits: ${plain(box.low, 'en')} and ${plain(box.high, 'en')}. Outliers: ${box.outliers.length}.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={whiskersChallenges} state={state}>
-            <Board height={280} label={l(say('Datuak eta kutxa-diagrama', 'Los datos y su diagrama de caja', 'البيانات ومخطط الصندوق'))}>
+            <Board height={280} label={l(say('Datuak eta kutxa-diagrama', 'Los datos y su diagrama de caja', 'البيانات ومخطط الصندوق', 'The data and its box plot'))}>
                 {state.values.map((value, index) => {
                     const level = stacks.get(value) ?? 0
                     stacks.set(value, level + 1)
@@ -285,16 +289,16 @@ export function SpreadTool(props: LabToolProps) {
     const controls = (
         <>
             {state.values.map((value, index) => (
-                <Stepper key={index} label={l(say(`${index + 1}. datua`, `Dato ${index + 1}`, `البيان ${index + 1}`))} value={value} min={0} max={SPREAD_MAX} onChange={(next) => setState((s) => setSpread(s, index, next))} language={props.language} />
+                <Stepper key={index} label={l(say(`${index + 1}. datua`, `Dato ${index + 1}`, `البيان ${index + 1}`, `Value ${index + 1}`))} value={value} min={0} max={SPREAD_MAX} onChange={(next) => setState((s) => setSpread(s, index, next))} language={props.language} />
             ))}
         </>
     )
     const latex = `\\bar{x}${texNumber(mean, props.language)}\\quad \\sigma^2${texFraction(varianceValue, props.language)}\\quad \\sigma${texNumber(sigma, props.language)}`
     const cv = mean === 0 ? '—' : plain(sigma / mean, props.language)
-    const note = l(say(`CV = σ : x̄ ${cv}. Karratuak: desbideratzeen karratuak.`, `CV = σ : x̄ ${cv}. Los cuadrados: las desviaciones al cuadrado.`, `CV = σ : x̄ ${cv}. المربعات: مربعات الانحرافات.`))
+    const note = l(say(`CV = σ : x̄ ${cv}. Karratuak: desbideratzeen karratuak.`, `CV = σ : x̄ ${cv}. Los cuadrados: las desviaciones al cuadrado.`, `CV = σ : x̄ ${cv}. المربعات: مربعات الانحرافات.`, `CV = σ : x̄ ${cv}. The squares: the squared deviations.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={spreadChallenges} state={state}>
-            <Board height={300} label={l(say('Datuak eta desbideratzeen karratuak', 'Los datos y los cuadrados de las desviaciones', 'البيانات ومربعات الانحرافات'))}>
+            <Board height={300} label={l(say('Datuak eta desbideratzeen karratuak', 'Los datos y los cuadrados de las desviaciones', 'البيانات ومربعات الانحرافات', 'The data and the squares of the deviations'))}>
                 <rect x={x(mean - sigma)} y={40} width={x(mean + sigma) - x(mean - sigma)} height={190} fill={SECOND} fillOpacity={0.07} />
                 <line x1={x(mean)} x2={x(mean)} y1={30} y2={236} stroke={SECOND} strokeWidth={2} strokeDasharray="5 4" />
                 <Text x={x(mean)} y={24} color={SECOND} size={14}>x̄</Text>
@@ -333,8 +337,8 @@ export function TableTool(props: LabToolProps) {
     )
     const latex = mean === null || varianceValue === null ? 'N=0' : `\\bar{x}${texFraction(mean, props.language)}\\quad \\sigma^2${texFraction(varianceValue, props.language)}\\quad \\sigma${texNumber(Math.sqrt(toNumber(varianceValue)), props.language)}`
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`N = ${sums.n} · Σ fᵢxᵢ = ${sums.fx} · Σ fᵢxᵢ² = ${sums.fx2}`, `N = ${sums.n} · Σ fᵢxᵢ = ${sums.fx} · Σ fᵢxᵢ² = ${sums.fx2}`, `N = ${sums.n} · Σ fᵢxᵢ = ${sums.fx} · Σ fᵢxᵢ² = ${sums.fx2}`))} />} challenges={tableChallenges} state={state}>
-            <Board height={280} label={l(say('Taula zutabe berriekin', 'La tabla con las columnas nuevas', 'الجدول بالأعمدة الجديدة'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`N = ${sums.n} · Σ fᵢxᵢ = ${sums.fx} · Σ fᵢxᵢ² = ${sums.fx2}`, `N = ${sums.n} · Σ fᵢxᵢ = ${sums.fx} · Σ fᵢxᵢ² = ${sums.fx2}`, `N = ${sums.n} · Σ fᵢxᵢ = ${sums.fx} · Σ fᵢxᵢ² = ${sums.fx2}`, `N = ${sums.n} · Σ fᵢxᵢ = ${sums.fx} · Σ fᵢxᵢ² = ${sums.fx2}`))} />} challenges={tableChallenges} state={state}>
+            <Board height={280} label={l(say('Taula zutabe berriekin', 'La tabla con las columnas nuevas', 'الجدول بالأعمدة الجديدة', 'The table with the new columns'))}>
                 <rect x={columns[3] - 55} y={14} width={110} height={226} rx={10} fill={STAGE_TINT} />
                 {['xᵢ', 'fᵢ', 'fᵢ·xᵢ', 'fᵢ·xᵢ²'].map((header, index) => <Text key={header} x={columns[index]} y={36} color={STAGE} size={16}>{header}</Text>)}
                 <line x1={20} x2={410} y1={46} y2={46} stroke={INK} strokeWidth={2} />
@@ -381,17 +385,17 @@ export function ScatterTool(props: LabToolProps) {
             {SCATTER_XS.map((value, index) => (
                 <Stepper key={value} label={`y (x = ${value})`} value={state.ys[index]} min={0} max={SCATTER_Y_MAX} onChange={(next) => setState((s) => setScatter(s, { index, y: next }))} language={props.language} />
             ))}
-            <Stepper label={l(say('Estimatu x =', 'Estimar en x =', 'التقدير عند x ='))} value={state.at} min={0} max={ESTIMATE_MAX} onChange={(next) => setState((s) => setScatter(s, { at: next }))} language={props.language} />
+            <Stepper label={l(say('Estimatu x =', 'Estimar en x =', 'التقدير عند x =', 'Estimate at x ='))} value={state.at} min={0} max={ESTIMATE_MAX} onChange={(next) => setState((s) => setScatter(s, { at: next }))} language={props.language} />
         </>
     )
     const latex = r === null ? 'r\\ \\text{—}' : `r${texNumber(r, props.language)}\\qquad \\hat{y}(${state.at})${texNumber(estimate, props.language)}`
     const reliable = isReliable(state)
     const note = r === null
-        ? l(say('y guztiak berdinak: ez dago korrelaziorik neurtzeko.', 'Todas las y iguales: no hay correlación que medir.', 'كل قيم y متساوية: لا ارتباط يُقاس.'))
-        : `ŷ = ${plain(line.slope, props.language)}x ${line.intercept < 0 ? '−' : '+'} ${plain(Math.abs(line.intercept), props.language).replace('≈ ', '')} · ${l(reliable ? say('estimazio fidagarria', 'estimación fiable', 'تقدير موثوق') : say('estimazio ez-fidagarria', 'estimación poco fiable', 'تقدير غير موثوق'))}`
+        ? l(say('y guztiak berdinak: ez dago korrelaziorik neurtzeko.', 'Todas las y iguales: no hay correlación que medir.', 'كل قيم y متساوية: لا ارتباط يُقاس.', 'All the y-values are the same: there is no correlation to measure.'))
+        : `ŷ = ${plain(line.slope, props.language)}x ${line.intercept < 0 ? '−' : '+'} ${plain(Math.abs(line.intercept), props.language).replace('≈ ', '')} · ${l(reliable ? say('estimazio fidagarria', 'estimación fiable', 'تقدير موثوق', 'reliable estimate') : say('estimazio ez-fidagarria', 'estimación poco fiable', 'تقدير غير موثوق', 'unreliable estimate'))}`
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={scatterChallenges} state={state}>
-            <Board height={290} label={l(say('Puntu-hodeia eta erregresio-zuzena', 'Nube de puntos y recta de regresión', 'سحابة النقاط ومستقيم الانحدار'))}>
+            <Board height={290} label={l(say('Puntu-hodeia eta erregresio-zuzena', 'Nube de puntos y recta de regresión', 'سحابة النقاط ومستقيم الانحدار', 'Scatter plot and regression line'))}>
                 <rect x={x(1)} y={y(10.5)} width={x(6) - x(1)} height={y(0) - y(10.5)} fill={STAGE_TINT} fillOpacity={0.5} />
                 {Array.from({ length: 13 }, (_, value) => <line key={`v${value}`} x1={x(value)} x2={x(value)} y1={y(0)} y2={y(10.5)} stroke={LINE} strokeWidth={1} />)}
                 {[0, 2, 4, 6, 8, 10].map((value) => (
@@ -432,11 +436,11 @@ export function UnionTool(props: LabToolProps) {
     )
     const latex = `\\frac{${result.A.length}}{6}+\\frac{${result.B.length}}{6}-\\frac{${result.both.length}}{6}=\\frac{${result.either.length}}{6}`
     const note = l(result.compatible
-        ? say(`Bateragarriak: ${result.both.join(', ')} bietan dago.`, `Compatibles: ${result.both.join(', ')} está en los dos.`, `متوافقان: ${result.both.join('، ')} في كليهما.`)
-        : say('Bateraezinak: ez dago zati komunik.', 'Incompatibles: no hay parte común.', 'متنافيان: لا جزء مشترك.'))
+        ? say(`Bateragarriak: ${result.both.join(', ')} bietan dago.`, `Compatibles: ${result.both.join(', ')} está en los dos.`, `متوافقان: ${result.both.join('، ')} في كليهما.`, `Compatible: ${result.both.join(', ')} is in both.`)
+        : say('Bateraezinak: ez dago zati komunik.', 'Incompatibles: no hay parte común.', 'متنافيان: لا جزء مشترك.', 'Incompatible: they have nothing in common.'))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={`P(A\\cup B)=${latex}`} note={note} />} challenges={unionChallenges} state={state}>
-            <Board height={220} label={l(say('Dadoaren sei aurpegiak', 'Las seis caras del dado', 'أوجه النرد الستة'))}>
+            <Board height={220} label={l(say('Dadoaren sei aurpegiak', 'Las seis caras del dado', 'أوجه النرد الستة', 'The six faces of the die'))}>
                 {[1, 2, 3, 4, 5, 6].map((face, index) => {
                     const inA = result.A.includes(face)
                     const inB = result.B.includes(face)
@@ -466,9 +470,9 @@ export function UrnTool(props: LabToolProps) {
     const paths = urnTree(state)
     const controls = (
         <>
-            <Stepper label={l(say('Bola gorriak', 'Bolas rojas', 'كرات حمراء'))} value={state.red} min={1} max={URN_MAX} onChange={(next) => setState((s) => setUrn(s, { red: next }))} language={props.language} />
-            <Stepper label={l(say('Bola urdinak', 'Bolas azules', 'كرات زرقاء'))} value={state.blue} min={1} max={URN_MAX} onChange={(next) => setState((s) => setUrn(s, { blue: next }))} language={props.language} />
-            <Segmented label={l(say('Lehen bola', 'La primera bola', 'الكرة الأولى'))} value={state.replace ? 'yes' : 'no'} options={[{ value: 'yes', label: l(say('Itzuli', 'Se devuelve', 'تُعاد')) }, { value: 'no', label: l(say('Ez itzuli', 'No se devuelve', 'لا تُعاد')) }]} onChange={(value) => setState((s) => setUrn(s, { replace: value === 'yes' }))} />
+            <Stepper label={l(say('Bola gorriak', 'Bolas rojas', 'كرات حمراء', 'Red balls'))} value={state.red} min={1} max={URN_MAX} onChange={(next) => setState((s) => setUrn(s, { red: next }))} language={props.language} />
+            <Stepper label={l(say('Bola urdinak', 'Bolas azules', 'كرات زرقاء', 'Blue balls'))} value={state.blue} min={1} max={URN_MAX} onChange={(next) => setState((s) => setUrn(s, { blue: next }))} language={props.language} />
+            <Segmented label={l(say('Lehen bola', 'La primera bola', 'الكرة الأولى', 'The first ball'))} value={state.replace ? 'yes' : 'no'} options={[{ value: 'yes', label: l(say('Itzuli', 'Se devuelve', 'تُعاد', 'Replaced')) }, { value: 'no', label: l(say('Ez itzuli', 'No se devuelve', 'لا تُعاد', 'Not replaced')) }]} onChange={(value) => setState((s) => setUrn(s, { replace: value === 'yes' }))} />
         </>
     )
     const latex = `P(RR)=${texRatio(twoRed(state))}\\qquad 1-P(RR)=${texRatio(someBlue(state))}`
@@ -482,8 +486,8 @@ export function UrnTool(props: LabToolProps) {
         </g>
     )
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`R: gorria. 1 − P(RR): gutxienez bat urdin. Kolore bera: ${same.numerator}/${same.denominator}.`, `R: roja. 1 − P(RR): al menos una azul. Mismo color: ${same.numerator}/${same.denominator}.`, `R: حمراء. 1 − P(RR): زرقاء واحدة على الأقل. اللون نفسه: ${same.numerator}/${same.denominator}.`))} />} challenges={urnChallenges} state={state}>
-            <Board height={290} label={l(say('Kutxa eta zuhaitz-diagrama', 'La urna y el diagrama de árbol', 'الجرّة والمخطط الشجري'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`R: gorria. 1 − P(RR): gutxienez bat urdin. Kolore bera: ${same.numerator}/${same.denominator}.`, `R: roja. 1 − P(RR): al menos una azul. Mismo color: ${same.numerator}/${same.denominator}.`, `R: حمراء. 1 − P(RR): زرقاء واحدة على الأقل. اللون نفسه: ${same.numerator}/${same.denominator}.`, `R: red. 1 − P(RR): at least one blue. Same colour: ${same.numerator}/${same.denominator}.`))} />} challenges={urnChallenges} state={state}>
+            <Board height={290} label={l(say('Kutxa eta zuhaitz-diagrama', 'La urna y el diagrama de árbol', 'الجرّة والمخطط الشجري', 'The urn and the tree diagram'))}>
                 <path d="M30 70 h80 v120 q0 16 -16 16 h-48 q-16 0 -16 -16 z" fill={PAPER} stroke={INK} strokeWidth={2} />
                 {Array.from({ length: state.red + state.blue }, (_, index) => (
                     <circle key={index} cx={46 + (index % 3) * 24} cy={190 - Math.floor(index / 3) * 24} r={10} fill={index < state.red ? SECOND : STAGE} fillOpacity={0.85} stroke={INK} strokeWidth={1.2} />
@@ -533,16 +537,16 @@ export function ContingencyTool(props: LabToolProps) {
     )
     const latex = `P(G)=${texRatio(table.pGlasses)}\\qquad P(G/N)=${texRatio(table.pGlassesGivenGirl)}`
     const girlGivenGlasses = table.pGirlGivenGlasses === null ? '—' : `${table.pGirlGivenGlasses.numerator}/${table.pGirlGivenGlasses.denominator}`
-    const columns = [say('Mutilak', 'Chicos', 'الأولاد'), say('Neskak', 'Chicas', 'البنات'), say('Guztira', 'Total', 'المجموع')]
+    const columns = [say('Mutilak', 'Chicos', 'الأولاد', 'Boys'), say('Neskak', 'Chicas', 'البنات', 'Girls'), say('Guztira', 'Total', 'المجموع', 'Total')]
     const rows = [
-        { name: say('Betaurrekoekin (G)', 'Con gafas (G)', 'بنظارات (G)'), values: [a, b, a + b] },
-        { name: say('Betaurrekorik gabe', 'Sin gafas', 'بلا نظارات'), values: [c, d, c + d] },
-        { name: say('Guztira', 'Total', 'المجموع'), values: [table.boys, table.girls, table.total] }
+        { name: say('Betaurrekoekin (G)', 'Con gafas (G)', 'بنظارات (G)', 'With glasses (G)'), values: [a, b, a + b] },
+        { name: say('Betaurrekorik gabe', 'Sin gafas', 'بلا نظارات', 'Without glasses'), values: [c, d, c + d] },
+        { name: say('Guztira', 'Total', 'المجموع', 'Total'), values: [table.boys, table.girls, table.total] }
     ]
     const colX = [340, 450, 560]
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`G: betaurrekoak. N: neska. P(N/G) = ${girlGivenGlasses}.`, `G: gafas. N: chica. P(N/G) = ${girlGivenGlasses}.`, `G: نظارات. N: بنت. P(N/G) = ${girlGivenGlasses}.`))} />} challenges={contingencyChallenges} state={state}>
-            <Board height={220} label={l(say('Kontingentzia-taula', 'Tabla de contingencia', 'جدول التوافق'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`G: betaurrekoak. N: neska. P(N/G) = ${girlGivenGlasses}.`, `G: gafas. N: chica. P(N/G) = ${girlGivenGlasses}.`, `G: نظارات. N: بنت. P(N/G) = ${girlGivenGlasses}.`, `G: glasses. N: girl. P(N/G) = ${girlGivenGlasses}.`))} />} challenges={contingencyChallenges} state={state}>
+            <Board height={220} label={l(say('Kontingentzia-taula', 'Tabla de contingencia', 'جدول التوافق', 'Contingency table'))}>
                 <rect x={colX[1] - 40} y={20} width={80} height={170} rx={8} fill={STAGE_TINT} />
                 {columns.map((column, index) => <Text key={index} x={colX[index]} y={44} color={STAGE} size={16}>{l(column)}</Text>)}
                 <line x1={20} x2={620} y1={58} y2={58} stroke={INK} strokeWidth={2} />

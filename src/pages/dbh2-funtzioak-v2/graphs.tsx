@@ -16,7 +16,7 @@ const colors: Record<GraphColor, string> = {
     ink: 'var(--ink, #1d2733)'
 }
 
-const graphLabel: LocalizedText = { eu: 'Grafikoa', es: 'Gráfica', ar: 'الرسم البياني' }
+const graphLabel: LocalizedText = { eu: 'Grafikoa', es: 'Gráfica', en: 'Graph', ar: 'الرسم البياني' }
 
 /** y = 2x − 1 written as plain text for a label on the plane */
 const plainLine = (m: number, n: number) => lineLatex(m, n)

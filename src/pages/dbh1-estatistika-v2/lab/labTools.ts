@@ -22,10 +22,11 @@ export const statisticsLabTools: StatisticsLabTool[] = [
         id: 'variables',
         stage: 'data',
         lessonTopic: 'variables',
-        title: { eu: 'Aldagai-sailkatzailea', es: 'Clasificador de variables', ar: 'مصنّف المتغيرات' },
+        title: { eu: 'Aldagai-sailkatzailea', es: 'Clasificador de variables', en: 'Variable classifier', ar: 'مصنّف المتغيرات' },
         observe: {
             eu: 'Galdetu zeure buruari: zenbaki bat da? Zenbatu egiten da ala neurtu? Zenbatzen bada diskretua da; neurtzen bada, jarraitua.',
             es: 'Pregúntate: ¿es un número? ¿Se cuenta o se mide? Si se cuenta es discreta; si se mide, continua.',
+            en: 'Ask yourself: is it a number? Is it counted or measured? If it is counted, it is discrete; if it is measured, it is continuous.',
             ar: 'اسأل نفسك: هل هو عدد؟ هل يُعَدّ أم يُقاس؟ إذا كان يُعَدّ فهو منفصل، وإذا كان يُقاس فهو متصل.'
         }
     },
@@ -33,10 +34,11 @@ export const statisticsLabTools: StatisticsLabTool[] = [
         id: 'table',
         stage: 'tables',
         lessonTopic: 'table',
-        title: { eu: 'Maiztasun-taula', es: 'Tabla de frecuencias', ar: 'جدول التكرارات' },
+        title: { eu: 'Maiztasun-taula', es: 'Tabla de frecuencias', en: 'Frequency table', ar: 'جدول التكرارات' },
         observe: {
             eu: 'Aldatu maiztasun absolutuak: N aldatzen da, eta maiztasun erlatibo guztiak ere bai. Haien batura beti da 1 (% 100).',
             es: 'Cambia las frecuencias absolutas: cambia N y también todas las relativas. Su suma siempre es 1 (100 %).',
+            en: 'Change the absolute frequencies: N changes, and so do all the relative frequencies. Their sum is always 1 (100%).',
             ar: 'غيّر التكرارات المطلقة: يتغيّر N وتتغيّر كل التكرارات النسبية. ومجموعها دائمًا 1 (100 %).'
         }
     },
@@ -44,10 +46,11 @@ export const statisticsLabTools: StatisticsLabTool[] = [
         id: 'charts',
         stage: 'graphs',
         lessonTopic: 'pie-chart',
-        title: { eu: 'Grafiko-egilea', es: 'Creador de gráficos', ar: 'صانع المخططات' },
+        title: { eu: 'Grafiko-egilea', es: 'Creador de gráficos', en: 'Chart maker', ar: 'صانع المخططات' },
         observe: {
             eu: 'Datu berak bi eratara: barra-diagramak zenbatzen du, sektore-diagramak osoaren zatiak erakusten ditu. Datu bakoitzak 360° : N balio du.',
             es: 'Los mismos datos de dos formas: el de barras cuenta y el de sectores muestra partes del total. Cada dato vale 360° : N.',
+            en: 'The same data in two forms: the bar chart counts, and the pie chart shows parts of the total. Each value is worth 360° : N.',
             ar: 'البيانات نفسها بطريقتين: مخطط الأعمدة يعدّ والمخطط الدائري يُظهر أجزاء الكل. كل قيمة تساوي 360° : N.'
         }
     },
@@ -55,10 +58,11 @@ export const statisticsLabTools: StatisticsLabTool[] = [
         id: 'mean',
         stage: 'parameters',
         lessonTopic: 'mean',
-        title: { eu: 'Batez bestekoaren balantza', es: 'La balanza de la media', ar: 'ميزان المتوسط' },
+        title: { eu: 'Batez bestekoaren balantza', es: 'La balanza de la media', en: 'The mean balance', ar: 'ميزان المتوسط' },
         observe: {
             eu: 'Batez bestekoa oreka-puntua da. Datu bakar bat asko igotzen baduzu, batez bestekoa mugitzen da, baina mediana ia ez.',
             es: 'La media es el punto de equilibrio. Si subes mucho un solo dato, la media se mueve, pero la mediana casi no.',
+            en: 'The mean is the balance point. If you raise one value a lot, the mean moves, but the median hardly does.',
             ar: 'المتوسط نقطة التوازن. إذا رفعت قيمة واحدة كثيرًا يتحرك المتوسط، أما الوسيط فبالكاد يتحرك.'
         }
     },
@@ -66,10 +70,11 @@ export const statisticsLabTools: StatisticsLabTool[] = [
         id: 'dice',
         stage: 'probability',
         lessonTopic: 'frequency-probability',
-        title: { eu: 'Dado-simulagailua', es: 'Simulador de dados', ar: 'محاكي النرد' },
+        title: { eu: 'Dado-simulagailua', es: 'Simulador de dados', en: 'Dice simulator', ar: 'محاكي النرد' },
         observe: {
             eu: 'Jaurtiketa gutxirekin maiztasun erlatiboa asko aldatzen da; asko jaurtita, Laplaceren probabilitatera hurbiltzen da.',
             es: 'Con pocos lanzamientos la frecuencia relativa cambia mucho; con muchos, se acerca a la probabilidad de Laplace.',
+            en: 'With few rolls the relative frequency changes a lot; with many, it gets closer to the Laplace probability.',
             ar: 'مع رميات قليلة يتغيّر التكرار النسبي كثيرًا، ومع رميات كثيرة يقترب من احتمال لابلاس.'
         }
     }
@@ -104,14 +109,14 @@ export interface VariableCard {
 }
 
 export const variableCards: VariableCard[] = [
-    { name: { eu: 'Kirol gogokoena', es: 'Deporte favorito', ar: 'الرياضة المفضلة' }, kind: 'qualitative' },
-    { name: { eu: 'Anai-arreba kopurua', es: 'Número de hermanos', ar: 'عدد الإخوة' }, kind: 'discrete' },
-    { name: { eu: 'Altuera', es: 'Altura', ar: 'الطول' }, kind: 'continuous' },
-    { name: { eu: 'Begien kolorea', es: 'Color de ojos', ar: 'لون العينين' }, kind: 'qualitative' },
-    { name: { eu: 'Oinetako-zenbakia', es: 'Número de pie', ar: 'مقاس الحذاء' }, kind: 'discrete' },
-    { name: { eu: 'Eskolara iristeko denbora', es: 'Tiempo en llegar al instituto', ar: 'زمن الوصول إلى المدرسة' }, kind: 'continuous' },
-    { name: { eu: 'Jaioterria', es: 'Lugar de nacimiento', ar: 'مكان الولادة' }, kind: 'qualitative' },
-    { name: { eu: 'Pisua', es: 'Peso', ar: 'الوزن' }, kind: 'continuous' }
+    { name: { eu: 'Kirol gogokoena', es: 'Deporte favorito', en: 'Favourite sport', ar: 'الرياضة المفضلة' }, kind: 'qualitative' },
+    { name: { eu: 'Anai-arreba kopurua', es: 'Número de hermanos', en: 'Number of siblings', ar: 'عدد الإخوة' }, kind: 'discrete' },
+    { name: { eu: 'Altuera', es: 'Altura', en: 'Height', ar: 'الطول' }, kind: 'continuous' },
+    { name: { eu: 'Begien kolorea', es: 'Color de ojos', en: 'Eye colour', ar: 'لون العينين' }, kind: 'qualitative' },
+    { name: { eu: 'Oinetako-zenbakia', es: 'Número de pie', en: 'Shoe size', ar: 'مقاس الحذاء' }, kind: 'discrete' },
+    { name: { eu: 'Eskolara iristeko denbora', es: 'Tiempo en llegar al instituto', en: 'Time to get to school', ar: 'زمن الوصول إلى المدرسة' }, kind: 'continuous' },
+    { name: { eu: 'Jaioterria', es: 'Lugar de nacimiento', en: 'Place of birth', ar: 'مكان الولادة' }, kind: 'qualitative' },
+    { name: { eu: 'Pisua', es: 'Peso', en: 'Weight', ar: 'الوزن' }, kind: 'continuous' }
 ]
 
 export interface VariablesState {
@@ -133,26 +138,26 @@ function kindSorted(state: VariablesState, kind: VariableKind): boolean {
 export const variablesChallenges: LabChallenge<VariablesState>[] = [
     {
         id: 11101,
-        prompt: { eu: 'Sailkatu aldagai kualitatibo guztiak.', es: 'Clasifica todas las variables cualitativas.', ar: 'صنّف كل المتغيرات النوعية.' },
-        hint: { eu: 'Ez dira zenbakiak: ezaugarriak dira.', es: 'No son números: son cualidades.', ar: 'ليست أعدادًا بل صفات.' },
+        prompt: { eu: 'Sailkatu aldagai kualitatibo guztiak.', es: 'Clasifica todas las variables cualitativas.', en: 'Classify all the qualitative variables.', ar: 'صنّف كل المتغيرات النوعية.' },
+        hint: { eu: 'Ez dira zenbakiak: ezaugarriak dira.', es: 'No son números: son cualidades.', en: 'They are not numbers: they are qualities.', ar: 'ليست أعدادًا بل صفات.' },
         isSolved: (state) => kindSorted(state, 'qualitative')
     },
     {
         id: 11102,
-        prompt: { eu: 'Sailkatu aldagai diskretu guztiak.', es: 'Clasifica todas las variables discretas.', ar: 'صنّف كل المتغيرات المنفصلة.' },
-        hint: { eu: 'Zenbatu egiten dira: 1, 2, 3…', es: 'Se cuentan: 1, 2, 3…', ar: 'تُعَدّ: 1، 2، 3…' },
+        prompt: { eu: 'Sailkatu aldagai diskretu guztiak.', es: 'Clasifica todas las variables discretas.', en: 'Classify all the discrete variables.', ar: 'صنّف كل المتغيرات المنفصلة.' },
+        hint: { eu: 'Zenbatu egiten dira: 1, 2, 3…', es: 'Se cuentan: 1, 2, 3…', en: 'They are counted: 1, 2, 3…', ar: 'تُعَدّ: 1، 2، 3…' },
         isSolved: (state) => kindSorted(state, 'discrete')
     },
     {
         id: 11103,
-        prompt: { eu: 'Sailkatu aldagai jarraitu guztiak.', es: 'Clasifica todas las variables continuas.', ar: 'صنّف كل المتغيرات المتصلة.' },
-        hint: { eu: 'Neurtu egiten dira, eta hamartarrak izan ditzakete.', es: 'Se miden y pueden tener decimales.', ar: 'تُقاس ويمكن أن تكون لها أجزاء عشرية.' },
+        prompt: { eu: 'Sailkatu aldagai jarraitu guztiak.', es: 'Clasifica todas las variables continuas.', en: 'Classify all the continuous variables.', ar: 'صنّف كل المتغيرات المتصلة.' },
+        hint: { eu: 'Neurtu egiten dira, eta hamartarrak izan ditzakete.', es: 'Se miden y pueden tener decimales.', en: 'They are measured and can have decimals.', ar: 'تُقاس ويمكن أن تكون لها أجزاء عشرية.' },
         isSolved: (state) => kindSorted(state, 'continuous')
     },
     {
         id: 11104,
-        prompt: { eu: 'Sailkatu zortzi aldagaiak ondo.', es: 'Clasifica bien las ocho variables.', ar: 'صنّف المتغيرات الثمانية تصنيفًا صحيحًا.' },
-        hint: { eu: 'Hiru kualitatibo, bi diskretu eta hiru jarraitu.', es: 'Tres cualitativas, dos discretas y tres continuas.', ar: 'ثلاثة نوعية واثنان منفصلان وثلاثة متصلة.' },
+        prompt: { eu: 'Sailkatu zortzi aldagaiak ondo.', es: 'Clasifica bien las ocho variables.', en: 'Classify all eight variables correctly.', ar: 'صنّف المتغيرات الثمانية تصنيفًا صحيحًا.' },
+        hint: { eu: 'Hiru kualitatibo, bi diskretu eta hiru jarraitu.', es: 'Tres cualitativas, dos discretas y tres continuas.', en: 'Three qualitative, two discrete and three continuous.', ar: 'ثلاثة نوعية واثنان منفصلان وثلاثة متصلة.' },
         isSolved: (state) => variableCards.every((card, index) => state.choices[index] === card.kind)
     }
 ]
@@ -182,26 +187,26 @@ const relativeIs = (counts: number[], index: number, numerator: number, denomina
 export const tableChallenges: LabChallenge<FrequencyState>[] = [
     {
         id: 11201,
-        prompt: { eu: 'Egin 25 datuko taula bat (N = 25).', es: 'Haz una tabla de 25 datos (N = 25).', ar: 'أنشئ جدولًا من 25 قيمة (N = 25).' },
-        hint: { eu: 'Maiztasun absolutu guztien batura N da.', es: 'La suma de todas las frecuencias absolutas es N.', ar: 'مجموع كل التكرارات المطلقة هو N.' },
+        prompt: { eu: 'Egin 25 datuko taula bat (N = 25).', es: 'Haz una tabla de 25 datos (N = 25).', en: 'Make a table of 25 values (N = 25).', ar: 'أنشئ جدولًا من 25 قيمة (N = 25).' },
+        hint: { eu: 'Maiztasun absolutu guztien batura N da.', es: 'La suma de todas las frecuencias absolutas es N.', en: 'The sum of all the absolute frequencies is N.', ar: 'مجموع كل التكرارات المطلقة هو N.' },
         isSolved: (state) => total(state.counts) === 25
     },
     {
         id: 11202,
-        prompt: { eu: 'Lortu futbolaren maiztasun erlatiboa 0,5 izatea.', es: 'Consigue que la frecuencia relativa del fútbol sea 0,5.', ar: 'اجعل التكرار النسبي لكرة القدم 0.5.' },
-        hint: { eu: 'Futbolak datuen erdia izan behar du.', es: 'El fútbol tiene que ser la mitad de los datos.', ar: 'يجب أن تكون كرة القدم نصف البيانات.' },
+        prompt: { eu: 'Lortu futbolaren maiztasun erlatiboa 0,5 izatea.', es: 'Consigue que la frecuencia relativa del fútbol sea 0,5.', en: 'Make the relative frequency of football 0.5.', ar: 'اجعل التكرار النسبي لكرة القدم 0.5.' },
+        hint: { eu: 'Futbolak datuen erdia izan behar du.', es: 'El fútbol tiene que ser la mitad de los datos.', en: 'Football has to be half of the values.', ar: 'يجب أن تكون كرة القدم نصف البيانات.' },
         isSolved: (state) => relativeIs(state.counts, 0, 1, 2)
     },
     {
         id: 11203,
-        prompt: { eu: 'Lortu lau kirolek % 25 izatea bakoitzak.', es: 'Consigue que cada uno de los cuatro deportes tenga el 25 %.', ar: 'اجعل لكل رياضة من الأربع 25 %.' },
-        hint: { eu: 'Lau maiztasun berdinak (ez zero).', es: 'Cuatro frecuencias iguales (no cero).', ar: 'أربعة تكرارات متساوية (غير صفرية).' },
+        prompt: { eu: 'Lortu lau kirolek % 25 izatea bakoitzak.', es: 'Consigue que cada uno de los cuatro deportes tenga el 25 %.', en: 'Make each of the four sports have 25%.', ar: 'اجعل لكل رياضة من الأربع 25 %.' },
+        hint: { eu: 'Lau maiztasun berdinak (ez zero).', es: 'Cuatro frecuencias iguales (no cero).', en: 'Four equal frequencies (not zero).', ar: 'أربعة تكرارات متساوية (غير صفرية).' },
         isSolved: (state) => state.counts.every((_, index) => relativeIs(state.counts, index, 1, 4))
     },
     {
         id: 11204,
-        prompt: { eu: 'Egin taula bat maiztasun erlatibo hauekin: 0,4, 0,3, 0,2 eta 0,1.', es: 'Haz una tabla con estas frecuencias relativas: 0,4, 0,3, 0,2 y 0,1.', ar: 'أنشئ جدولًا بهذه التكرارات النسبية: 0.4 و0.3 و0.2 و0.1.' },
-        hint: { eu: 'Probatu N = 10: 4, 3, 2 eta 1.', es: 'Prueba con N = 10: 4, 3, 2 y 1.', ar: 'جرّب N = 10: 4 و3 و2 و1.' },
+        prompt: { eu: 'Egin taula bat maiztasun erlatibo hauekin: 0,4, 0,3, 0,2 eta 0,1.', es: 'Haz una tabla con estas frecuencias relativas: 0,4, 0,3, 0,2 y 0,1.', en: 'Make a table with these relative frequencies: 0.4, 0.3, 0.2 and 0.1.', ar: 'أنشئ جدولًا بهذه التكرارات النسبية: 0.4 و0.3 و0.2 و0.1.' },
+        hint: { eu: 'Probatu N = 10: 4, 3, 2 eta 1.', es: 'Prueba con N = 10: 4, 3, 2 y 1.', en: 'Try N = 10: 4, 3, 2 and 1.', ar: 'جرّب N = 10: 4 و3 و2 و1.' },
         isSolved: (state) => [4, 3, 2, 1].every((tenths, index) => relativeIs(state.counts, index, tenths, 10))
     }
 ]
@@ -236,26 +241,26 @@ const angleIs = (counts: number[], index: number, degrees: number) => relativeIs
 export const chartsChallenges: LabChallenge<ChartsState>[] = [
     {
         id: 11301,
-        prompt: { eu: 'Sektore-diagrama batean, egin futbolaren sektorea 180°-koa.', es: 'En un diagrama de sectores, haz que el sector del fútbol mida 180°.', ar: 'في مخطط دائري اجعل قطاع كرة القدم 180°.' },
-        hint: { eu: '180° zirkuluaren erdia da.', es: '180° es medio círculo.', ar: '180° نصف الدائرة.' },
+        prompt: { eu: 'Sektore-diagrama batean, egin futbolaren sektorea 180°-koa.', es: 'En un diagrama de sectores, haz que el sector del fútbol mida 180°.', en: 'In a pie chart, make the football sector measure 180°.', ar: 'في مخطط دائري اجعل قطاع كرة القدم 180°.' },
+        hint: { eu: '180° zirkuluaren erdia da.', es: '180° es medio círculo.', en: '180° is half a circle.', ar: '180° نصف الدائرة.' },
         isSolved: (state) => state.chart === 'pie' && angleIs(state.counts, 0, 180)
     },
     {
         id: 11302,
-        prompt: { eu: 'Egin saskibaloiaren eta igeriketaren sektoreak 90°-koak.', es: 'Haz que los sectores del baloncesto y la natación midan 90°.', ar: 'اجعل قطاعي كرة السلة والسباحة 90° لكل منهما.' },
-        hint: { eu: 'Bakoitzak datuen laurdena.', es: 'Cada uno, un cuarto de los datos.', ar: 'لكل منهما ربع البيانات.' },
+        prompt: { eu: 'Egin saskibaloiaren eta igeriketaren sektoreak 90°-koak.', es: 'Haz que los sectores del baloncesto y la natación midan 90°.', en: 'Make the basketball and swimming sectors measure 90°.', ar: 'اجعل قطاعي كرة السلة والسباحة 90° لكل منهما.' },
+        hint: { eu: 'Bakoitzak datuen laurdena.', es: 'Cada uno, un cuarto de los datos.', en: 'Each one is a quarter of the values.', ar: 'لكل منهما ربع البيانات.' },
         isSolved: (state) => state.chart === 'pie' && angleIs(state.counts, 1, 90) && angleIs(state.counts, 2, 90)
     },
     {
         id: 11303,
-        prompt: { eu: 'Barra-diagrama batean, egin lau barrak altuera berekoak.', es: 'En un diagrama de barras, haz las cuatro barras de la misma altura.', ar: 'في مخطط الأعمدة اجعل الأعمدة الأربعة بالارتفاع نفسه.' },
-        hint: { eu: 'Lau maiztasun berdinak.', es: 'Cuatro frecuencias iguales.', ar: 'أربعة تكرارات متساوية.' },
+        prompt: { eu: 'Barra-diagrama batean, egin lau barrak altuera berekoak.', es: 'En un diagrama de barras, haz las cuatro barras de la misma altura.', en: 'In a bar chart, make all four bars the same height.', ar: 'في مخطط الأعمدة اجعل الأعمدة الأربعة بالارتفاع نفسه.' },
+        hint: { eu: 'Lau maiztasun berdinak.', es: 'Cuatro frecuencias iguales.', en: 'Four equal frequencies.', ar: 'أربعة تكرارات متساوية.' },
         isSolved: (state) => state.chart === 'bar' && state.counts[0] > 0 && state.counts.every((count) => count === state.counts[0])
     },
     {
         id: 11304,
-        prompt: { eu: 'Idatzi futbolaren sektorearen angelua bi taula desberdinetan.', es: 'Escribe el ángulo del sector del fútbol en dos tablas distintas.', ar: 'اكتب زاوية قطاع كرة القدم في جدولين مختلفين.' },
-        hint: { eu: '$\\frac{f}{N}\\cdot 360$', es: '$\\frac{f}{N}\\cdot 360$', ar: '$\\frac{f}{N}\\cdot 360$' },
+        prompt: { eu: 'Idatzi futbolaren sektorearen angelua bi taula desberdinetan.', es: 'Escribe el ángulo del sector del fútbol en dos tablas distintas.', en: 'Write the angle of the football sector in two different tables.', ar: 'اكتب زاوية قطاع كرة القدم في جدولين مختلفين.' },
+        hint: { eu: '$\\frac{f}{N}\\cdot 360$', es: '$\\frac{f}{N}\\cdot 360$', en: '$\\frac{f}{N}\\cdot 360$', ar: '$\\frac{f}{N}\\cdot 360$' },
         isSolved: (state) => state.solved.length >= 2
     }
 ]
@@ -305,26 +310,26 @@ const same = (left: FractionValue, right: FractionValue) => left.numerator * rig
 export const meanChallenges: LabChallenge<MeanState>[] = [
     {
         id: 11401,
-        prompt: { eu: 'Aldatu datuak batez bestekoa 6 izan dadin.', es: 'Cambia los datos para que la media sea 6.', ar: 'غيّر البيانات ليصبح المتوسط 6.' },
-        hint: { eu: 'Bost datuen batura 30 izan behar da.', es: 'La suma de los cinco datos tiene que ser 30.', ar: 'يجب أن يكون مجموع القيم الخمس 30.' },
+        prompt: { eu: 'Aldatu datuak batez bestekoa 6 izan dadin.', es: 'Cambia los datos para que la media sea 6.', en: 'Change the values so that the mean is 6.', ar: 'غيّر البيانات ليصبح المتوسط 6.' },
+        hint: { eu: 'Bost datuen batura 30 izan behar da.', es: 'La suma de los cinco datos tiene que ser 30.', en: 'The five values have to add up to 30.', ar: 'يجب أن يكون مجموع القيم الخمس 30.' },
         isSolved: (state) => same(meanOf(state.values), fraction(6))
     },
     {
         id: 11402,
-        prompt: { eu: 'Lortu ibiltartea 0 izatea. Zer gertatzen da batez bestekoarekin eta medianarekin?', es: 'Consigue que el rango sea 0. ¿Qué pasa con la media y la mediana?', ar: 'اجعل المدى 0. ماذا يحدث للمتوسط والوسيط؟' },
-        hint: { eu: 'Datu guztiak berdinak.', es: 'Todos los datos iguales.', ar: 'كل القيم متساوية.' },
+        prompt: { eu: 'Lortu ibiltartea 0 izatea. Zer gertatzen da batez bestekoarekin eta medianarekin?', es: 'Consigue que el rango sea 0. ¿Qué pasa con la media y la mediana?', en: 'Make the range 0. What happens to the mean and the median?', ar: 'اجعل المدى 0. ماذا يحدث للمتوسط والوسيط؟' },
+        hint: { eu: 'Datu guztiak berdinak.', es: 'Todos los datos iguales.', en: 'All the values are the same.', ar: 'كل القيم متساوية.' },
         isSolved: (state) => rangeOf(state.values) === 0
     },
     {
         id: 11403,
-        prompt: { eu: 'Egin datu-multzo bat mediana 5 eta batez bestekoa 6 dituena.', es: 'Haz un conjunto de datos con mediana 5 y media 6.', ar: 'أنشئ مجموعة بيانات وسيطها 5 ومتوسطها 6.' },
-        hint: { eu: 'Erdiko datua 5; handienak igo batura 30 izan arte.', es: 'El dato central 5; sube los mayores hasta que la suma sea 30.', ar: 'القيمة الوسطى 5؛ ارفع الكبرى حتى يصبح المجموع 30.' },
+        prompt: { eu: 'Egin datu-multzo bat mediana 5 eta batez bestekoa 6 dituena.', es: 'Haz un conjunto de datos con mediana 5 y media 6.', en: 'Make a data set with median 5 and mean 6.', ar: 'أنشئ مجموعة بيانات وسيطها 5 ومتوسطها 6.' },
+        hint: { eu: 'Erdiko datua 5; handienak igo batura 30 izan arte.', es: 'El dato central 5; sube los mayores hasta que la suma sea 30.', en: 'The middle value is 5; raise the largest values until the sum is 30.', ar: 'القيمة الوسطى 5؛ ارفع الكبرى حتى يصبح المجموع 30.' },
         isSolved: (state) => same(medianOf(state.values), fraction(5)) && same(meanOf(state.values), fraction(6))
     },
     {
         id: 11404,
-        prompt: { eu: 'Idatzi batez bestekoa zenbaki osoa ez denean.', es: 'Escribe la media cuando no sea un número entero.', ar: 'اكتب المتوسط عندما لا يكون عددًا صحيحًا.' },
-        hint: { eu: 'Adibidez, batura 32 bada: $32\\mathbin{:}5=6{,}4$.', es: 'Por ejemplo, si la suma es 32: $32\\mathbin{:}5=6{,}4$.', ar: 'مثلًا إذا كان المجموع 32: $32\\mathbin{:}5=6.4$.' },
+        prompt: { eu: 'Idatzi batez bestekoa zenbaki osoa ez denean.', es: 'Escribe la media cuando no sea un número entero.', en: 'Write the mean when it is not an integer.', ar: 'اكتب المتوسط عندما لا يكون عددًا صحيحًا.' },
+        hint: { eu: 'Adibidez, batura 32 bada: $32\\mathbin{:}5=6{,}4$.', es: 'Por ejemplo, si la suma es 32: $32\\mathbin{:}5=6{,}4$.', en: 'For example, if the sum is 32: $32\\mathbin{:}5=6{,}4$.', ar: 'مثلًا إذا كان المجموع 32: $32\\mathbin{:}5=6.4$.' },
         isSolved: (state) => state.solved.some((key) => total(key.split(',').map(Number)) % 5 !== 0)
     }
 ]
@@ -334,10 +339,10 @@ export const meanChallenges: LabChallenge<MeanState>[] = [
 export type DiceEvent = 'six' | 'even' | 'more-than-3' | 'less-than-5'
 
 export const diceEvents: Record<DiceEvent, { faces: number[]; name: LocalizedText }> = {
-    six: { faces: [6], name: { eu: '6 ateratzea', es: 'Sacar un 6', ar: 'الحصول على 6' } },
-    even: { faces: [2, 4, 6], name: { eu: 'Bikoitia', es: 'Par', ar: 'زوجي' } },
-    'more-than-3': { faces: [4, 5, 6], name: { eu: '3 baino gehiago', es: 'Más de 3', ar: 'أكثر من 3' } },
-    'less-than-5': { faces: [1, 2, 3, 4], name: { eu: '5 baino gutxiago', es: 'Menos de 5', ar: 'أقل من 5' } }
+    six: { faces: [6], name: { eu: '6 ateratzea', es: 'Sacar un 6', en: 'Roll a 6', ar: 'الحصول على 6' } },
+    even: { faces: [2, 4, 6], name: { eu: 'Bikoitia', es: 'Par', en: 'Even', ar: 'زوجي' } },
+    'more-than-3': { faces: [4, 5, 6], name: { eu: '3 baino gehiago', es: 'Más de 3', en: 'More than 3', ar: 'أكثر من 3' } },
+    'less-than-5': { faces: [1, 2, 3, 4], name: { eu: '5 baino gutxiago', es: 'Menos de 5', en: 'Less than 5', ar: 'أقل من 5' } }
 }
 
 export interface DiceState extends OperationAnswer {
@@ -378,26 +383,26 @@ export function answerDice(state: DiceState, patch: Partial<OperationAnswer>): D
 export const diceChallenges: LabChallenge<DiceState>[] = [
     {
         id: 11501,
-        prompt: { eu: 'Idatzi 6 ateratzeko probabilitatea.', es: 'Escribe la probabilidad de sacar un 6.', ar: 'اكتب احتمال الحصول على 6.' },
-        hint: { eu: 'Aldeko kasu bat, sei posible.', es: 'Un caso favorable de seis posibles.', ar: 'حالة ملائمة واحدة من ست ممكنة.' },
+        prompt: { eu: 'Idatzi 6 ateratzeko probabilitatea.', es: 'Escribe la probabilidad de sacar un 6.', en: 'Write the probability of rolling a 6.', ar: 'اكتب احتمال الحصول على 6.' },
+        hint: { eu: 'Aldeko kasu bat, sei posible.', es: 'Un caso favorable de seis posibles.', en: 'One favourable case out of six possible cases.', ar: 'حالة ملائمة واحدة من ست ممكنة.' },
         isSolved: (state) => state.solved.includes('six')
     },
     {
         id: 11502,
-        prompt: { eu: 'Idatzi 5 baino gutxiago ateratzeko probabilitatea.', es: 'Escribe la probabilidad de sacar menos de 5.', ar: 'اكتب احتمال الحصول على أقل من 5.' },
-        hint: { eu: 'Aldekoak: 1, 2, 3 eta 4.', es: 'Favorables: 1, 2, 3 y 4.', ar: 'الملائمة: 1 و2 و3 و4.' },
+        prompt: { eu: 'Idatzi 5 baino gutxiago ateratzeko probabilitatea.', es: 'Escribe la probabilidad de sacar menos de 5.', en: 'Write the probability of rolling less than 5.', ar: 'اكتب احتمال الحصول على أقل من 5.' },
+        hint: { eu: 'Aldekoak: 1, 2, 3 eta 4.', es: 'Favorables: 1, 2, 3 y 4.', en: 'Favourable: 1, 2, 3 and 4.', ar: 'الملائمة: 1 و2 و3 و4.' },
         isSolved: (state) => state.solved.includes('less-than-5')
     },
     {
         id: 11503,
-        prompt: { eu: 'Jaurti dadoa gutxienez 100 aldiz.', es: 'Lanza el dado al menos 100 veces.', ar: 'ارمِ النرد 100 مرة على الأقل.' },
-        hint: { eu: 'Erabili «×100» botoia.', es: 'Usa el botón «×100».', ar: 'استعمل زر «×100».' },
+        prompt: { eu: 'Jaurti dadoa gutxienez 100 aldiz.', es: 'Lanza el dado al menos 100 veces.', en: 'Roll the die at least 100 times.', ar: 'ارمِ النرد 100 مرة على الأقل.' },
+        hint: { eu: 'Erabili «×100» botoia.', es: 'Usa el botón «×100».', en: 'Use the “×100” button.', ar: 'استعمل زر «×100».' },
         isSolved: (state) => throwsOf(state) >= 100
     },
     {
         id: 11504,
-        prompt: { eu: '1.000 jaurtiketa edo gehiagorekin, lortu maiztasun erlatiboa probabilitatetik 0,05 baino gutxiagora egotea.', es: 'Con 1.000 lanzamientos o más, consigue que la frecuencia relativa quede a menos de 0,05 de la probabilidad.', ar: 'مع 1000 رمية أو أكثر اجعل التكرار النسبي على بعد أقل من 0.05 من الاحتمال.' },
-        hint: { eu: 'Jaurti askotan: maiztasuna probabilitatera hurbiltzen da.', es: 'Lanza muchas veces: la frecuencia se acerca a la probabilidad.', ar: 'ارمِ مرات كثيرة: يقترب التكرار من الاحتمال.' },
+        prompt: { eu: '1.000 jaurtiketa edo gehiagorekin, lortu maiztasun erlatiboa probabilitatetik 0,05 baino gutxiagora egotea.', es: 'Con 1.000 lanzamientos o más, consigue que la frecuencia relativa quede a menos de 0,05 de la probabilidad.', en: 'With 1,000 rolls or more, get the relative frequency within 0.05 of the probability.', ar: 'مع 1000 رمية أو أكثر اجعل التكرار النسبي على بعد أقل من 0.05 من الاحتمال.' },
+        hint: { eu: 'Jaurti askotan: maiztasuna probabilitatera hurbiltzen da.', es: 'Lanza muchas veces: la frecuencia se acerca a la probabilidad.', en: 'Roll many times: the frequency gets closer to the probability.', ar: 'ارمِ مرات كثيرة: يقترب التكرار من الاحتمال.' },
         isSolved: (state) => {
             const frequency = eventFrequency(state)
             const probability = probabilityOf(state.event)

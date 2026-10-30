@@ -8,9 +8,9 @@ import './Prediction.css'
 const RELATIONS: Relation[] = ['<', '=', '>']
 
 const defaultLabels: Record<Relation, LocalizedText> = {
-    '<': { eu: 'Txikiagoa', es: 'Menor', ar: 'أصغر' },
-    '=': { eu: 'Berdina', es: 'Igual', ar: 'يساوي' },
-    '>': { eu: 'Handiagoa', es: 'Mayor', ar: 'أكبر' }
+    '<': { eu: 'Txikiagoa', es: 'Menor', en: 'Smaller', ar: 'أصغر' },
+    '=': { eu: 'Berdina', es: 'Igual', en: 'Equal', ar: 'يساوي' },
+    '>': { eu: 'Handiagoa', es: 'Mayor', en: 'Bigger', ar: 'أكبر' }
 }
 
 /**
@@ -48,7 +48,7 @@ export function PredictionStep({
         <>
             <div className="prediction">
                 <p className="prediction-question"><MathText text={l(question)} /></p>
-                <div className="prediction-options" role="group" aria-label={l({ eu: 'Zure iragarpena', es: 'Tu predicción', ar: 'توقّعك' })}>
+                <div className="prediction-options" role="group" aria-label={l({ eu: 'Zure iragarpena', es: 'Tu predicción', en: 'Your prediction', ar: 'توقّعك' })}>
                     {RELATIONS.map((relation) => (
                         <button
                             type="button"
@@ -64,13 +64,13 @@ export function PredictionStep({
                 </div>
                 {choice !== null && (
                     <p className={`prediction-feedback ${right ? 'right' : 'wrong'}`} aria-live="polite">
-                        <strong>{right ? l({ eu: 'Ondo pentsatuta!', es: '¡Bien pensado!', ar: 'أحسنت التفكير!' }) : l({ eu: 'Ez da horrela.', es: 'No es así.', ar: 'ليس كذلك.' })}</strong>{' '}
+                        <strong>{right ? l({ eu: 'Ondo pentsatuta!', es: '¡Bien pensado!', en: 'Good thinking!', ar: 'أحسنت التفكير!' }) : l({ eu: 'Ez da horrela.', es: 'No es así.', en: 'That’s not right.', ar: 'ليس كذلك.' })}</strong>{' '}
                         <MathText text={l(tip)} />
                     </p>
                 )}
             </div>
             {choice === null
-                ? <p className="prediction-wait">{l(wait ?? { eu: 'Iragarri lehenik; gero idatzi emaitza.', es: 'Primero predice; después escribe el resultado.', ar: 'توقّع أولًا، ثم اكتب النتيجة.' })}</p>
+                ? <p className="prediction-wait">{l(wait ?? { eu: 'Iragarri lehenik; gero idatzi emaitza.', es: 'Primero predice; después escribe el resultado.', en: 'First predict; then write the result.', ar: 'توقّع أولًا، ثم اكتب النتيجة.' })}</p>
                 : children}
         </>
     )

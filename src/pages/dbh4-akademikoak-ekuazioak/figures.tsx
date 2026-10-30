@@ -27,7 +27,7 @@ const GREEN_TINT = '#d6eddf'
 const CORAL_TINT = '#f6dcd3'
 const PAPER = '#fffcf6'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const useText = (language: UnitLanguage) => (text: LocalizedText) => pickText(language, text)
 
 function Caption({ y, children }: { y: number; children: ReactNode }) {
@@ -94,22 +94,22 @@ const curve = (f: (x: number) => number, x0: number, x1: number, toX: (x: number
 export function SumProductFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={290} label={t(say('x² − 7x + 10 = 0: erroen batura 7 eta biderkadura 10', 'x² − 7x + 10 = 0: las raíces suman 7 y su producto es 10', 'x² − 7x + 10 = 0: مجموع الجذرين 7 وجداؤهما 10'))}>
+        <Figure height={290} label={t(say('x² − 7x + 10 = 0: erroen batura 7 eta biderkadura 10', 'x² − 7x + 10 = 0: las raíces suman 7 y su producto es 10', 'x² − 7x + 10 = 0: مجموع الجذرين 7 وجداؤهما 10', 'x² − 7x + 10 = 0: the roots add up to 7 and their product is 10'))}>
             <F x={360} y={40} anchor="middle" size={24}>x² − 7x + 10 = 0   →   x = 2,  x = 5</F>
             <Card x={40} y={66} width={300} height={110} tint={STAGE_TINT}>
-                <Label x={190} y={94} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Batura', 'Suma', 'المجموع'))}</Label>
+                <Label x={190} y={94} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Batura', 'Suma', 'المجموع', 'Sum'))}</Label>
                 <F x={190} y={128} anchor="middle" size={21}>x₁ + x₂ = −b/a</F>
                 <F x={190} y={160} anchor="middle" size={19} color={SECOND}>2 + 5 = 7</F>
             </Card>
             <Card x={380} y={66} width={300} height={110} tint={MUSTARD_TINT}>
-                <Label x={530} y={94} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Biderkadura', 'Producto', 'الجداء'))}</Label>
+                <Label x={530} y={94} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Biderkadura', 'Producto', 'الجداء', 'Product'))}</Label>
                 <F x={530} y={128} anchor="middle" size={21}>x₁ · x₂ = c/a</F>
                 <F x={530} y={160} anchor="middle" size={19} color={SECOND}>2 · 5 = 10</F>
             </Card>
             <Card x={110} y={196} width={500} height={50} tint={GREEN_TINT}>
                 <F x={360} y={228} anchor="middle" size={20}>x² − Sx + P = 0</F>
             </Card>
-            <Caption y={276}>{t(say('S batura eta P biderkadura jakinda, ekuazioa idatz daiteke', 'Conociendo la suma S y el producto P, se escribe la ecuación', 'بمعرفة المجموع S والجداء P نكتب المعادلة'))}</Caption>
+            <Caption y={276}>{t(say('S batura eta P biderkadura jakinda, ekuazioa idatz daiteke', 'Conociendo la suma S y el producto P, se escribe la ecuación', 'بمعرفة المجموع S والجداء P نكتب المعادلة', 'Knowing the sum S and the product P, you write the equation'))}</Caption>
         </Figure>
     )
 }
@@ -119,7 +119,7 @@ export function SumProductFigure({ language }: { language: UnitLanguage }) {
 export function TriangleProblemFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={300} label={t(say('Triangelu angeluzuzena: x, x + 3 eta x + 6; x = 9', 'Triángulo rectángulo de lados x, x + 3 y x + 6; x = 9', 'مثلث قائم أضلاعه x وx + 3 وx + 6؛ x = 9'))}>
+        <Figure height={300} label={t(say('Triangelu angeluzuzena: x, x + 3 eta x + 6; x = 9', 'Triángulo rectángulo de lados x, x + 3 y x + 6; x = 9', 'مثلث قائم أضلاعه x وx + 3 وx + 6؛ x = 9', 'Right-angled triangle with sides x, x + 3 and x + 6; x = 9'))}>
             <polygon points="60,230 300,230 60,50" fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} />
             <rect x={60} y={212} width={18} height={18} fill="none" stroke={INK} strokeWidth={1.6} />
             <F x={180} y={258} anchor="middle" size={20} color={STAGE}>x + 3</F>
@@ -131,7 +131,7 @@ export function TriangleProblemFigure({ language }: { language: UnitLanguage }) 
             <Card x={340} y={176} width={340} height={56} tint={GREEN_TINT}>
                 <F x={510} y={212} anchor="middle" size={20} color={GREEN}>9 cm, 12 cm, 15 cm</F>
             </Card>
-            <Caption y={286}>{t(say('−3 ez da baliozkoa: luzera bat ezin da negatiboa izan', '−3 no vale: una longitud no puede ser negativa', '−3 لا يصلح: لا يمكن أن يكون الطول سالبًا'))}</Caption>
+            <Caption y={286}>{t(say('−3 ez da baliozkoa: luzera bat ezin da negatiboa izan', '−3 no vale: una longitud no puede ser negativa', '−3 لا يصلح: لا يمكن أن يكون الطول سالبًا', '−3 doesn\'t work: a length cannot be negative'))}</Caption>
         </Figure>
     )
 }
@@ -141,9 +141,9 @@ export function TriangleProblemFigure({ language }: { language: UnitLanguage }) 
 export function BiquadraticFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={300} label={t(say('x⁴ − 10x² + 9 = 0, t = x² aldaketarekin: x = ±3, x = ±1', 'x⁴ − 10x² + 9 = 0 con el cambio t = x²: x = ±3, x = ±1', 'x⁴ − 10x² + 9 = 0 بالتعويض t = x²: x = ±3، x = ±1'))}>
+        <Figure height={300} label={t(say('x⁴ − 10x² + 9 = 0, t = x² aldaketarekin: x = ±3, x = ±1', 'x⁴ − 10x² + 9 = 0 con el cambio t = x²: x = ±3, x = ±1', 'x⁴ − 10x² + 9 = 0 بالتعويض t = x²: x = ±3، x = ±1', 'x⁴ − 10x² + 9 = 0 with the substitution t = x²: x = ±3, x = ±1'))}>
             <F x={360} y={40} anchor="middle" size={24}>x⁴ − 10x² + 9 = 0</F>
-            <Label x={360} y={76} textAnchor="middle" fontSize={15} fill={STAGE}>{t(say('aldaketa: t = x²', 'cambio: t = x²', 'التعويض: t = x²'))}</Label>
+            <Label x={360} y={76} textAnchor="middle" fontSize={15} fill={STAGE}>{t(say('aldaketa: t = x²', 'cambio: t = x²', 'التعويض: t = x²', 'substitution: t = x²'))}</Label>
             <Card x={190} y={92} width={340} height={56} tint={MUSTARD_TINT}>
                 <F x={360} y={128} anchor="middle" size={22}>t² − 10t + 9 = 0</F>
             </Card>
@@ -155,7 +155,7 @@ export function BiquadraticFigure({ language }: { language: UnitLanguage }) {
             <Card x={400} y={186} width={260} height={64} tint={STAGE_TINT}>
                 <F x={530} y={226} anchor="middle" size={21}>t = 1 → x = ±1</F>
             </Card>
-            <Caption y={284}>{t(say('t negatiboa bada, ez dago x errealik: x² ezin da negatiboa izan', 'Si t es negativo, no hay x real: x² no puede ser negativo', 'إذا كان t سالبًا فلا يوجد x حقيقي: لا يمكن أن يكون x² سالبًا'))}</Caption>
+            <Caption y={284}>{t(say('t negatiboa bada, ez dago x errealik: x² ezin da negatiboa izan', 'Si t es negativo, no hay x real: x² no puede ser negativo', 'إذا كان t سالبًا فلا يوجد x حقيقي: لا يمكن أن يكون x² سالبًا', 'If t is negative, there is no real x: x² cannot be negative'))}</Caption>
         </Figure>
     )
 }
@@ -165,9 +165,9 @@ export function BiquadraticFigure({ language }: { language: UnitLanguage }) {
 export function RationalEquationFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={300} label={t(say('x/(x − 2) + 2/x = 4/(x(x − 2)): x = −4; x = 2 baztertzen da', 'x/(x − 2) + 2/x = 4/(x(x − 2)): x = −4; x = 2 se descarta', 'x/(x − 2) + 2/x = 4/(x(x − 2)): x = −4؛ ويُستبعد x = 2'))}>
+        <Figure height={300} label={t(say('x/(x − 2) + 2/x = 4/(x(x − 2)): x = −4; x = 2 baztertzen da', 'x/(x − 2) + 2/x = 4/(x(x − 2)): x = −4; x = 2 se descarta', 'x/(x − 2) + 2/x = 4/(x(x − 2)): x = −4؛ ويُستبعد x = 2', 'x/(x − 2) + 2/x = 4/(x(x − 2)): x = −4; x = 2 is ruled out'))}>
             <F x={360} y={40} anchor="middle" size={22}>x/(x − 2) + 2/x = 4/(x(x − 2))</F>
-            <Label x={360} y={76} textAnchor="middle" fontSize={15} fill={STAGE}>{t(say('bider m.k.t. = x(x − 2)', 'por el m.c.m. = x(x − 2)', 'في م.م.أ = x(x − 2)'))}</Label>
+            <Label x={360} y={76} textAnchor="middle" fontSize={15} fill={STAGE}>{t(say('bider m.k.t. = x(x − 2)', 'por el m.c.m. = x(x − 2)', 'في م.م.أ = x(x − 2)', 'by the LCM = x(x − 2)'))}</Label>
             <F x={360} y={114} anchor="middle" size={21}>x² + 2(x − 2) = 4   →   x² + 2x − 8 = 0</F>
             <Card x={70} y={140} width={260} height={64} tint={CORAL_TINT}>
                 <F x={200} y={180} anchor="middle" size={22} color={SECOND}>x = 2  ✗</F>
@@ -175,8 +175,8 @@ export function RationalEquationFigure({ language }: { language: UnitLanguage })
             <Card x={390} y={140} width={260} height={64} tint={GREEN_TINT}>
                 <F x={520} y={180} anchor="middle" size={22} color={GREEN}>x = −4  ✓</F>
             </Card>
-            <Caption y={240}>{t(say('x = 2 denean izendatzailea 0 da: ez da ebazpena', 'Para x = 2 el denominador es 0: no es solución', 'عندما x = 2 يكون المقام 0: ليس حلًا'))}</Caption>
-            <Caption y={264}>{t(say('Beti egiaztatu ebazpenak hasierako ekuazioan', 'Comprueba siempre las soluciones en la ecuación inicial', 'تحقّق دائمًا من الحلول في المعادلة الأصلية'))}</Caption>
+            <Caption y={240}>{t(say('x = 2 denean izendatzailea 0 da: ez da ebazpena', 'Para x = 2 el denominador es 0: no es solución', 'عندما x = 2 يكون المقام 0: ليس حلًا', 'For x = 2 the denominator is 0: it is not a solution'))}</Caption>
+            <Caption y={264}>{t(say('Beti egiaztatu ebazpenak hasierako ekuazioan', 'Comprueba siempre las soluciones en la ecuación inicial', 'تحقّق دائمًا من الحلول في المعادلة الأصلية', 'Always check your solutions in the original equation'))}</Caption>
         </Figure>
     )
 }
@@ -186,23 +186,23 @@ export function RationalEquationFigure({ language }: { language: UnitLanguage })
 export function ExponentialFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={300} label={t(say('Ekuazio esponentzialak: oinarri bera, eta faktore komuna', 'Ecuaciones exponenciales: misma base, y factor común', 'المعادلات الأسية: الأساس نفسه، والعامل المشترك'))}>
+        <Figure height={300} label={t(say('Ekuazio esponentzialak: oinarri bera, eta faktore komuna', 'Ecuaciones exponenciales: misma base, y factor común', 'المعادلات الأسية: الأساس نفسه، والعامل المشترك', 'Exponential equations: same base, and common factor'))}>
             <Card x={20} y={20} width={330} height={210} tint={STAGE_TINT}>
-                <Label x={185} y={48} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Oinarri bera', 'Misma base', 'الأساس نفسه'))}</Label>
+                <Label x={185} y={48} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Oinarri bera', 'Misma base', 'الأساس نفسه', 'Same base'))}</Label>
                 <F x={185} y={92} anchor="middle" size={21}>3<Up>x² − 5</Up> = 81</F>
                 <F x={185} y={132} anchor="middle" size={21}>3<Up>x² − 5</Up> = 3<Up>4</Up></F>
                 <F x={185} y={172} anchor="middle" size={21}>x² − 5 = 4</F>
                 <F x={185} y={212} anchor="middle" size={21} color={SECOND}>x = ±3</F>
             </Card>
             <Card x={370} y={20} width={330} height={210} tint={MUSTARD_TINT}>
-                <Label x={535} y={48} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Faktore komuna', 'Factor común', 'العامل المشترك'))}</Label>
+                <Label x={535} y={48} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Faktore komuna', 'Factor común', 'العامل المشترك', 'Common factor'))}</Label>
                 <F x={535} y={92} anchor="middle" size={21}>2<Up>x</Up> + 2<Up>x + 3</Up> = 36</F>
                 <F x={535} y={132} anchor="middle" size={21}>2<Up>x</Up>(1 + 8) = 36</F>
                 <F x={535} y={172} anchor="middle" size={21}>2<Up>x</Up> = 4 = 2<Up>2</Up></F>
                 <F x={535} y={212} anchor="middle" size={21} color={SECOND}>x = 2</F>
             </Card>
-            <Caption y={262}>{t(say('Bi aldeak oinarri bereko berretura gisa idatzi, eta berretzaileak berdindu', 'Escribe los dos miembros como potencias de la misma base e iguala los exponentes', 'اكتب الطرفين قوتين للأساس نفسه وساوِ الأسس'))}</Caption>
-            <Caption y={286}>{t(say('Ezin bada, logaritmoak: 5ˣ = 193 → x = log 193 : log 5', 'Si no se puede, logaritmos: 5ˣ = 193 → x = log 193 : log 5', 'إن لم يمكن فاللوغاريتمات: 5ˣ = 193 ← x = log 193 : log 5'))}</Caption>
+            <Caption y={262}>{t(say('Bi aldeak oinarri bereko berretura gisa idatzi, eta berretzaileak berdindu', 'Escribe los dos miembros como potencias de la misma base e iguala los exponentes', 'اكتب الطرفين قوتين للأساس نفسه وساوِ الأسس', 'Write both sides as powers of the same base and set the exponents equal'))}</Caption>
+            <Caption y={286}>{t(say('Ezin bada, logaritmoak: 5ˣ = 193 → x = log 193 : log 5', 'Si no se puede, logaritmos: 5ˣ = 193 → x = log 193 : log 5', 'إن لم يمكن فاللوغاريتمات: 5ˣ = 193 ← x = log 193 : log 5', 'If not, use logarithms: 5ˣ = 193 → x = log 193 : log 5'))}</Caption>
         </Figure>
     )
 }
@@ -212,22 +212,22 @@ export function ExponentialFigure({ language }: { language: UnitLanguage }) {
 export function LogEquationFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
-        <Figure height={300} label={t(say('Ekuazio logaritmikoak: definizioa eta propietateak', 'Ecuaciones logarítmicas: definición y propiedades', 'المعادلات اللوغاريتمية: التعريف والخصائص'))}>
+        <Figure height={300} label={t(say('Ekuazio logaritmikoak: definizioa eta propietateak', 'Ecuaciones logarítmicas: definición y propiedades', 'المعادلات اللوغاريتمية: التعريف والخصائص', 'Logarithmic equations: definition and properties'))}>
             <Card x={20} y={20} width={330} height={210} tint={STAGE_TINT}>
-                <Label x={185} y={48} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Definizioa', 'Definición', 'التعريف'))}</Label>
+                <Label x={185} y={48} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Definizioa', 'Definición', 'التعريف', 'Definition'))}</Label>
                 <F x={185} y={92} anchor="middle" size={21}>log₂ (2x − 1) = 3</F>
                 <F x={185} y={132} anchor="middle" size={21}>2x − 1 = 2³ = 8</F>
                 <F x={185} y={186} anchor="middle" size={22} color={SECOND}>x = 9/2</F>
             </Card>
             <Card x={370} y={20} width={330} height={210} tint={MUSTARD_TINT}>
-                <Label x={535} y={48} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Propietateak', 'Propiedades', 'الخصائص'))}</Label>
+                <Label x={535} y={48} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Propietateak', 'Propiedades', 'الخصائص', 'Properties'))}</Label>
                 <F x={535} y={92} anchor="middle" size={20}>log x + log (x − 3) = 1</F>
                 <F x={535} y={132} anchor="middle" size={20}>x(x − 3) = 10</F>
                 <F x={535} y={172} anchor="middle" size={20}>x = 5,  x = −2</F>
                 <F x={535} y={212} anchor="middle" size={20} color={SECOND}>x = 5  (−2 ✗)</F>
             </Card>
-            <Caption y={262}>{t(say('Logaritmoak zenbaki positiboenak bakarrik dira', 'Solo hay logaritmos de números positivos', 'لا لوغاريتم إلا للأعداد الموجبة'))}</Caption>
-            <Caption y={286}>{t(say('Horregatik, ebazpen bakoitza hasierako ekuazioan egiaztatu', 'Por eso, cada solución se comprueba en la ecuación inicial', 'لذلك نتحقق من كل حل في المعادلة الأصلية'))}</Caption>
+            <Caption y={262}>{t(say('Logaritmoak zenbaki positiboenak bakarrik dira', 'Solo hay logaritmos de números positivos', 'لا لوغاريتم إلا للأعداد الموجبة', 'You can only take logarithms of positive numbers'))}</Caption>
+            <Caption y={286}>{t(say('Horregatik, ebazpen bakoitza hasierako ekuazioan egiaztatu', 'Por eso, cada solución se comprueba en la ecuación inicial', 'لذلك نتحقق من كل حل في المعادلة الأصلية', 'That is why every solution must be checked in the original equation'))}</Caption>
         </Figure>
     )
 }
@@ -243,7 +243,7 @@ export function IntervalsFigure({ language }: { language: UnitLanguage }) {
         { y: 220, text: '−1 ≤ x < 3', interval: '[−1, 3)', x1: at(-1), x2: at(3), open2: true }
     ]
     return (
-        <Figure height={310} label={t(say('Tarteak zenbaki-zuzenean', 'Intervalos en la recta numérica', 'المجالات على مستقيم الأعداد'))}>
+        <Figure height={310} label={t(say('Tarteak zenbaki-zuzenean', 'Intervalos en la recta numérica', 'المجالات على مستقيم الأعداد', 'Intervals on the number line'))}>
             {rows.map((row) => (
                 <g key={row.text}>
                     <F x={20} y={row.y - 14} size={18}>{row.text}</F>
@@ -253,8 +253,8 @@ export function IntervalsFigure({ language }: { language: UnitLanguage }) {
                     <Stretch y={row.y} x1={row.x1} x2={row.x2} open1={row.open1} open2={row.open2} ray1={row.ray1} ray2={row.ray2} />
                 </g>
             ))}
-            <Caption y={272}>{t(say('Puntu betea: muturra sartzen da [ ]. Puntu hutsa: ez da sartzen ( )', 'Punto lleno: el extremo entra [ ]. Punto hueco: no entra ( )', 'النقطة الممتلئة: الطرف داخل [ ]. النقطة الفارغة: الطرف خارج ( )'))}</Caption>
-            <Caption y={296}>{t(say('∞ inoiz ez da sartzen: beti parentesia', '∞ nunca entra: siempre paréntesis', '∞ لا يدخل أبدًا: دائمًا قوس'))}</Caption>
+            <Caption y={272}>{t(say('Puntu betea: muturra sartzen da [ ]. Puntu hutsa: ez da sartzen ( )', 'Punto lleno: el extremo entra [ ]. Punto hueco: no entra ( )', 'النقطة الممتلئة: الطرف داخل [ ]. النقطة الفارغة: الطرف خارج ( )', 'Filled dot: the endpoint is included [ ]. Open dot: it is not included ( )'))}</Caption>
+            <Caption y={296}>{t(say('∞ inoiz ez da sartzen: beti parentesia', '∞ nunca entra: siempre paréntesis', '∞ لا يدخل أبدًا: دائمًا قوس', '∞ is never included: always use round brackets'))}</Caption>
         </Figure>
     )
 }
@@ -265,17 +265,17 @@ export function FlipSignFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const at = (value: number) => 360 + value * 50
     return (
-        <Figure height={290} label={t(say('Negatibo batez biderkatzean edo zatitzean, desberdintzaren zentzua aldatzen da', 'Al multiplicar o dividir por un negativo, cambia el sentido de la desigualdad', 'عند الضرب أو القسمة على عدد سالب ينقلب اتجاه المتباينة'))}>
+        <Figure height={290} label={t(say('Negatibo batez biderkatzean edo zatitzean, desberdintzaren zentzua aldatzen da', 'Al multiplicar o dividir por un negativo, cambia el sentido de la desigualdad', 'عند الضرب أو القسمة على عدد سالب ينقلب اتجاه المتباينة', 'When you multiply or divide by a negative number, the inequality sign flips'))}>
             <NumberLine y={70} from={-6} to={6} unit={50} />
             {[[3, STAGE], [5, STAGE], [-3, SECOND], [-5, SECOND]].map(([value, color]) => <circle key={value} cx={at(value as number)} cy={70} r={8} fill={color as string} />)}
             <F x={at(4)} y={42} anchor="middle" size={18} color={STAGE}>3 &lt; 5</F>
             <F x={at(-4)} y={42} anchor="middle" size={18} color={SECOND}>−3 &gt; −5</F>
-            <Label x={360} y={130} textAnchor="middle" fontSize={15} fill={MUTED}>{t(say('bider (−1): ispiluan bezala', 'por (−1): como en un espejo', 'في (−1): كما في المرآة'))}</Label>
+            <Label x={360} y={130} textAnchor="middle" fontSize={15} fill={MUTED}>{t(say('bider (−1): ispiluan bezala', 'por (−1): como en un espejo', 'في (−1): كما في المرآة', 'by (−1): like in a mirror'))}</Label>
             <Card x={140} y={150} width={440} height={86} tint={MUSTARD_TINT}>
                 <F x={360} y={184} anchor="middle" size={22}>−2x &gt; 6</F>
                 <F x={360} y={220} anchor="middle" size={22} color={SECOND}>x &lt; 6 : (−2) = −3</F>
             </Card>
-            <Caption y={272}>{t(say('Batzean edo positibo batez biderkatzean, zentzua berdin geratzen da', 'Al sumar o multiplicar por un positivo, el sentido no cambia', 'عند الجمع أو الضرب في عدد موجب لا يتغير الاتجاه'))}</Caption>
+            <Caption y={272}>{t(say('Batzean edo positibo batez biderkatzean, zentzua berdin geratzen da', 'Al sumar o multiplicar por un positivo, el sentido no cambia', 'عند الجمع أو الضرب في عدد موجب لا يتغير الاتجاه', 'When you add or multiply by a positive number, the inequality sign stays the same'))}</Caption>
         </Figure>
     )
 }
@@ -287,7 +287,7 @@ export function QuadraticSignFigure({ language }: { language: UnitLanguage }) {
     const toX = (x: number) => 360 + x * 60
     const toY = (y: number) => 130 - y * 18
     return (
-        <Figure height={310} label={t(say('x² − 2x − 3 ≤ 0: −1 ≤ x ≤ 3', 'x² − 2x − 3 ≤ 0: −1 ≤ x ≤ 3', 'x² − 2x − 3 ≤ 0: −1 ≤ x ≤ 3'))}>
+        <Figure height={310} label={t(say('x² − 2x − 3 ≤ 0: −1 ≤ x ≤ 3', 'x² − 2x − 3 ≤ 0: −1 ≤ x ≤ 3', 'x² − 2x − 3 ≤ 0: −1 ≤ x ≤ 3', 'x² − 2x − 3 ≤ 0: −1 ≤ x ≤ 3'))}>
             <defs><clipPath id="quadratic-sign-clip"><rect x={0} y={10} width={720} height={196} /></clipPath></defs>
             <line x1={toX(-4)} x2={toX(5)} y1={toY(0)} y2={toY(0)} stroke={INK} strokeWidth={1.6} />
             {[-3, -2, -1, 0, 1, 2, 3, 4].map((x) => <F key={x} x={toX(x)} y={toY(0) + 22} anchor="middle" size={12} color={MUTED} weight={400}>{x < 0 ? `−${-x}` : x}</F>)}
@@ -299,7 +299,7 @@ export function QuadraticSignFigure({ language }: { language: UnitLanguage }) {
             <F x={toX(4.4)} y={toY(3)} anchor="middle" size={24} color={SECOND}>+</F>
             <F x={40} y={40} size={18}>y = x² − 2x − 3</F>
             <F x={360} y={244} anchor="middle" size={21}>x² − 2x − 3 ≤ 0   →   [−1, 3]</F>
-            <Caption y={286}>{t(say('Erroek zuzena hiru zatitan banatzen dute: zati bakoitzean zeinua ez da aldatzen', 'Las raíces parten la recta en tres trozos: en cada uno el signo no cambia', 'تقسم الجذور المستقيم إلى ثلاثة أجزاء: في كل جزء لا تتغير الإشارة'))}</Caption>
+            <Caption y={286}>{t(say('Erroek zuzena hiru zatitan banatzen dute: zati bakoitzean zeinua ez da aldatzen', 'Las raíces parten la recta en tres trozos: en cada uno el signo no cambia', 'تقسم الجذور المستقيم إلى ثلاثة أجزاء: في كل جزء لا تتغير الإشارة', 'The roots split the number line into three parts: in each one the sign does not change'))}</Caption>
         </Figure>
     )
 }
@@ -311,7 +311,7 @@ export function GraphicInequalityFigure({ language }: { language: UnitLanguage }
     const toX = (x: number) => 200 + x * 52
     const toY = (y: number) => 220 - y * 18
     return (
-        <Figure height={310} label={t(say('x² − 5x + 4 < x − 1: 1 < x < 5', 'x² − 5x + 4 < x − 1: 1 < x < 5', 'x² − 5x + 4 < x − 1: 1 < x < 5'))}>
+        <Figure height={310} label={t(say('x² − 5x + 4 < x − 1: 1 < x < 5', 'x² − 5x + 4 < x − 1: 1 < x < 5', 'x² − 5x + 4 < x − 1: 1 < x < 5', 'x² − 5x + 4 < x − 1: 1 < x < 5'))}>
             <defs><clipPath id="graphic-inequality-clip"><rect x={0} y={10} width={720} height={240} /></clipPath></defs>
             <rect x={toX(1)} y={20} width={toX(5) - toX(1)} height={toY(-2) - 20} fill={GREEN_TINT} />
             <line x1={toX(-1)} x2={toX(7)} y1={toY(0)} y2={toY(0)} stroke={INK} strokeWidth={1.6} />
@@ -323,8 +323,8 @@ export function GraphicInequalityFigure({ language }: { language: UnitLanguage }
             <F x={toX(6.2)} y={50} size={17} color={STAGE}>y = x² − 5x + 4</F>
             <F x={toX(6.2)} y={toY(5.4)} size={17} color={SECOND}>y = x − 1</F>
             <F x={toX(6.2)} y={toY(1.6)} size={18} color={GREEN}>1 &lt; x &lt; 5</F>
-            <Caption y={272}>{t(say('Parabola zuzenaren azpian dago bi ebaki-puntuen artean', 'La parábola queda por debajo de la recta entre los dos puntos de corte', 'يقع القطع المكافئ تحت المستقيم بين نقطتي التقاطع'))}</Caption>
-            <Caption y={296}>{t(say('Ebaki-puntuak: x² − 5x + 4 = x − 1 ekuazioaren ebazpenak', 'Puntos de corte: las soluciones de x² − 5x + 4 = x − 1', 'نقاط التقاطع: حلول x² − 5x + 4 = x − 1'))}</Caption>
+            <Caption y={272}>{t(say('Parabola zuzenaren azpian dago bi ebaki-puntuen artean', 'La parábola queda por debajo de la recta entre los dos puntos de corte', 'يقع القطع المكافئ تحت المستقيم بين نقطتي التقاطع', 'The parabola is below the straight line between the two intersection points'))}</Caption>
+            <Caption y={296}>{t(say('Ebaki-puntuak: x² − 5x + 4 = x − 1 ekuazioaren ebazpenak', 'Puntos de corte: las soluciones de x² − 5x + 4 = x − 1', 'نقاط التقاطع: حلول x² − 5x + 4 = x − 1', 'Intersection points: the solutions of x² − 5x + 4 = x − 1'))}</Caption>
         </Figure>
     )
 }
@@ -335,7 +335,7 @@ export function IntervalIntersectionFigure({ language }: { language: UnitLanguag
     const t = useText(language)
     const at = (value: number) => 360 + (value - 3) * 48
     return (
-        <Figure height={300} label={t(say('3x − 1 > 5 eta x + 4 ≤ 10: (2, 6]', '3x − 1 > 5 y x + 4 ≤ 10: (2, 6]', '3x − 1 > 5 وx + 4 ≤ 10: (2, 6]'))}>
+        <Figure height={300} label={t(say('3x − 1 > 5 eta x + 4 ≤ 10: (2, 6]', '3x − 1 > 5 y x + 4 ≤ 10: (2, 6]', '3x − 1 > 5 وx + 4 ≤ 10: (2, 6]', '3x − 1 > 5 and x + 4 ≤ 10: (2, 6]'))}>
             <F x={20} y={46} size={18}>3x − 1 &gt; 5  →  x &gt; 2</F>
             <F x={20} y={116} size={18}>x + 4 ≤ 10  →  x ≤ 6</F>
             {[58, 128, 210].map((y) => <line key={y} x1={at(-3)} x2={at(9) + 10} y1={y} y2={y} stroke={INK} strokeWidth={1.4} />)}
@@ -344,8 +344,8 @@ export function IntervalIntersectionFigure({ language }: { language: UnitLanguag
             <Stretch y={128} x1={at(-3)} x2={at(6)} ray1 color={SECOND} />
             <Stretch y={210} x1={at(2)} x2={at(6)} open1 color={GREEN} />
             <F x={at(4)} y={196} anchor="middle" size={20} color={GREEN}>(2, 6]</F>
-            <Caption y={266}>{t(say('Sistemaren ebazpena: bi ebazpen-multzoen ebakidura', 'La solución del sistema es la intersección de las dos soluciones', 'حل النظام هو تقاطع مجموعتي الحلول'))}</Caption>
-            <Caption y={290}>{t(say('Ez badute zati komunik, sistemak ez du ebazpenik', 'Si no tienen parte común, el sistema no tiene solución', 'إذا لم يكن بينهما جزء مشترك فلا حل للنظام'))}</Caption>
+            <Caption y={266}>{t(say('Sistemaren ebazpena: bi ebazpen-multzoen ebakidura', 'La solución del sistema es la intersección de las dos soluciones', 'حل النظام هو تقاطع مجموعتي الحلول', 'The solution of the system is the intersection of the two solutions'))}</Caption>
+            <Caption y={290}>{t(say('Ez badute zati komunik, sistemak ez du ebazpenik', 'Si no tienen parte común, el sistema no tiene solución', 'إذا لم يكن بينهما جزء مشترك فلا حل للنظام', 'If they have no common part, the system has no solution'))}</Caption>
         </Figure>
     )
 }

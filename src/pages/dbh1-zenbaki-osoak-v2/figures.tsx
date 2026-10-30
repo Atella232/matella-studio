@@ -19,19 +19,19 @@ export function ElevatorFigure({ language }: { language: UnitLanguage }) {
     const floors = [7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4]
     const row = 22
     return (
-        <svg viewBox="0 0 720 320" role="img" aria-label={pick(language, { eu: 'Igogailuaren botoiak', es: 'Botones del ascensor', ar: 'أزرار المصعد' })} className="integers-number-line">
+        <svg viewBox="0 0 720 320" role="img" aria-label={pick(language, { eu: 'Igogailuaren botoiak', es: 'Botones del ascensor', en: 'Lift buttons', ar: 'أزرار المصعد' })} className="integers-number-line">
             {/* Building section */}
             <g transform="translate(70 20)">
                 {floors.map((floor, index) => (
                     <g key={floor}>
                         <rect x={0} y={index * row} width={170} height={row} fill={floor < 0 ? '#efe7d6' : floor === 0 ? 'var(--stage-tint, #dde7f7)' : PAPER} stroke={INK} strokeWidth={1.4} />
                         <text x={85} y={index * row + 16} textAnchor="middle" fontSize={13} fill={floor < 0 ? SECOND : INK}>
-                            {floor === 0 ? pick(language, { eu: 'Beheko solairua', es: 'Planta baja', ar: 'الطابق الأرضي' }) : floor < 0 ? pick(language, { eu: `${-floor}. sotoa`, es: `Sótano ${-floor}`, ar: `القبو ${-floor}` }) : pick(language, { eu: `${floor}. solairua`, es: `Planta ${floor}`, ar: `الطابق ${floor}` })}
+                            {floor === 0 ? pick(language, { eu: 'Beheko solairua', es: 'Planta baja', en: 'Ground floor', ar: 'الطابق الأرضي' }) : floor < 0 ? pick(language, { eu: `${-floor}. sotoa`, es: `Sótano ${-floor}`, en: `Basement ${-floor}`, ar: `القبو ${-floor}` }) : pick(language, { eu: `${floor}. solairua`, es: `Planta ${floor}`, en: `Floor ${floor}`, ar: `الطابق ${floor}` })}
                         </text>
                     </g>
                 ))}
                 <line x1={-20} x2={190} y1={8 * row} y2={8 * row} stroke={INK} strokeWidth={3} />
-                <text x={-26} y={8 * row + 5} textAnchor="end" fontSize={13} fill={MUTED}>{pick(language, { eu: 'kalea', es: 'calle', ar: 'الشارع' })}</text>
+                <text x={-26} y={8 * row + 5} textAnchor="end" fontSize={13} fill={MUTED}>{pick(language, { eu: 'kalea', es: 'calle', en: 'street', ar: 'الشارع' })}</text>
             </g>
             {/* Lift panel */}
             <g transform="translate(360 20)">
@@ -50,9 +50,9 @@ export function ElevatorFigure({ language }: { language: UnitLanguage }) {
                 })}
             </g>
             <text x={660} y={60} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>+</text>
-            <text x={660} y={80} textAnchor="middle" fontSize={12} fill={MUTED}>{pick(language, { eu: 'gora', es: 'arriba', ar: 'أعلى' })}</text>
+            <text x={660} y={80} textAnchor="middle" fontSize={12} fill={MUTED}>{pick(language, { eu: 'gora', es: 'arriba', en: 'up', ar: 'أعلى' })}</text>
             <text x={660} y={270} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>−</text>
-            <text x={660} y={290} textAnchor="middle" fontSize={12} fill={MUTED}>{pick(language, { eu: 'behera', es: 'abajo', ar: 'أسفل' })}</text>
+            <text x={660} y={290} textAnchor="middle" fontSize={12} fill={MUTED}>{pick(language, { eu: 'behera', es: 'abajo', en: 'down', ar: 'أسفل' })}</text>
         </svg>
     )
 }
@@ -70,9 +70,9 @@ export function CountersFigure({ language, have = 5, owe = 3 }: { language: Unit
     )
     return (
         <svg viewBox="0 0 720 260" role="img" aria-label={`(${signed(have)}) + (${signed(-owe)}) = ${signed(result)}`} className="integers-number-line">
-            <text x={60} y={36} fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: `Daukat: ${have} €`, es: `Tengo: ${have} €`, ar: `لديّ: ${have} €` })}</text>
+            <text x={60} y={36} fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: `Daukat: ${have} €`, es: `Tengo: ${have} €`, en: `I have: €${have}`, ar: `لديّ: ${have} €` })}</text>
             {Array.from({ length: have }, (_, index) => counter(80 + index * 56, 76, true, index < pairs, `p${index}`))}
-            <text x={60} y={136} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, { eu: `Zor dut: ${owe} €`, es: `Debo: ${owe} €`, ar: `عليّ: ${owe} €` })}</text>
+            <text x={60} y={136} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, { eu: `Zor dut: ${owe} €`, es: `Debo: ${owe} €`, en: `I owe: €${owe}`, ar: `عليّ: ${owe} €` })}</text>
             {Array.from({ length: owe }, (_, index) => counter(80 + index * 56, 176, false, index < pairs, `n${index}`))}
             {Array.from({ length: pairs }, (_, index) => (
                 <line key={index} x1={80 + index * 56} x2={80 + index * 56} y1={98} y2={154} stroke={MUTED} strokeWidth={1.6} strokeDasharray="4 4" />
@@ -81,6 +81,7 @@ export function CountersFigure({ language, have = 5, owe = 3 }: { language: Unit
                 {pick(language, {
                     eu: `(${signed(have)}) + (${signed(-owe)}) = ${signed(result)}: bikote bakoitza (+1 eta −1) zero da.`,
                     es: `(${signed(have)}) + (${signed(-owe)}) = ${signed(result)}: cada pareja (+1 y −1) vale cero.`,
+                    en: `(${signed(have)}) + (${signed(-owe)}) = ${signed(result)}: each pair (+1 and −1) makes zero.`,
                     ar: `(${signed(have)}) + (${signed(-owe)}) = ${signed(result)}: كل زوج (+1 و−1) يساوي صفرًا.`
                 })}
             </text>
@@ -99,11 +100,11 @@ export function BracketsFigure({ language }: { language: UnitLanguage }) {
         </g>
     )
     return (
-        <svg viewBox="0 0 720 220" role="img" aria-label={pick(language, { eu: 'Parentesiak kentzea', es: 'Quitar paréntesis', ar: 'حذف الأقواس' })} className="integers-number-line">
+        <svg viewBox="0 0 720 220" role="img" aria-label={pick(language, { eu: 'Parentesiak kentzea', es: 'Quitar paréntesis', en: 'Removing brackets', ar: 'حذف الأقواس' })} className="integers-number-line">
             {rowText(70, '+', ['−5', '+3', '−2'], ['−5', '+3', '−2'], STAGE)}
             {rowText(150, '−', ['−5', '+3', '−2'], ['+5', '−3', '+2'], SECOND)}
             <text x={360} y={206} textAnchor="middle" fontSize={15} fill={MUTED}>
-                {pick(language, { eu: '+ aurretik: zeinuak berdin. − aurretik: zeinu guztiak aldatzen dira.', es: 'Delante un +: los signos se mantienen. Delante un −: cambian todos los signos.', ar: 'إذا سبقه +: تبقى الإشارات. إذا سبقه −: تتغير كل الإشارات.' })}
+                {pick(language, { eu: '+ aurretik: zeinuak berdin. − aurretik: zeinu guztiak aldatzen dira.', es: 'Delante un +: los signos se mantienen. Delante un −: cambian todos los signos.', en: 'Before a +: the signs stay the same. Before a −: all the signs change.', ar: 'إذا سبقه +: تبقى الإشارات. إذا سبقه −: تتغير كل الإشارات.' })}
             </text>
         </svg>
     )

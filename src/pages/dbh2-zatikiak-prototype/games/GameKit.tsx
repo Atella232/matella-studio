@@ -7,7 +7,7 @@ export { Car, GameTopbar, ResultPanel, StarRow } from '../../../features/unit-v2
 /** Level picker with the Zatikiak illustration of each game */
 export function LevelPicker(props: Omit<ComponentProps<typeof UnitLevelPicker>, 'art' | 'levelsTitle'>) {
     const isRace = props.game.id === 'race'
-    const circuitTitle = { eu: 'Aukeratu zirkuitua', es: 'Elige circuito', ar: 'اختر الحلبة' }[props.language]
+    const circuitTitle = { eu: 'Aukeratu zirkuitua', es: 'Elige circuito', en: 'Choose a circuit', ar: 'اختر الحلبة' }[props.language]
     return <UnitLevelPicker {...props} art={<GameArt game={props.game.id as GameId} />} levelsTitle={isRace ? circuitTitle : undefined} />
 }
 

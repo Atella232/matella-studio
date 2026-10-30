@@ -108,21 +108,22 @@ export function ProportionDbh4ApTankGame({ language, records, onResult, onExit }
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${record.score} / ${TANK_ROUNDS * TANK_TRIES}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${record.score} / ${TANK_ROUNDS * TANK_TRIES}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: 'Txorrota bakoitzaren orduak: bakarrik biltegia betetzeko behar dituenak. Hustubidearenak: biltegi betea husteko behar dituenak.', es: 'Las horas de cada grifo: lo que tarda él solo en llenar el depósito. Las del desagüe: lo que tarda en vaciarlo lleno.', ar: 'ساعات كل صنبور: ما يحتاجه وحده لملء الخزان. وساعات المصرف: ما يحتاجه لتفريغ الخزان الممتلئ.' })}</li>
+                        <li>{l({ eu: 'Txorrota bakoitzaren orduak: bakarrik biltegia betetzeko behar dituenak. Hustubidearenak: biltegi betea husteko behar dituenak.', es: 'Las horas de cada grifo: lo que tarda él solo en llenar el depósito. Las del desagüe: lo que tarda en vaciarlo lleno.', en: 'The hours for each tap: how long it takes on its own to fill the tank. For the drain: how long it takes to empty it when full.', ar: 'ساعات كل صنبور: ما يحتاجه وحده لملء الخزان. وساعات المصرف: ما يحتاجه لتفريغ الخزان الممتلئ.' })}</li>
                         <li>
                             <MathText
                                 inline
                                 text={l({
                                     eu: 'Ireki txorrotak biltegia denbora zehatzean betetzeko. Batu ordu bateko zatiak: $\\frac{1}{3}+\\frac{1}{6}=\\frac{1}{2}$, beraz 2 h.',
                                     es: 'Abre grifos para llenar el depósito en el tiempo exacto. Suma las partes de una hora: $\\frac{1}{3}+\\frac{1}{6}=\\frac{1}{2}$, luego 2 h.',
+                                    en: 'Open taps to fill the tank in exactly the right time. Add the parts of an hour: $\\frac{1}{3}+\\frac{1}{6}=\\frac{1}{2}$, so 2 h.',
                                     ar: 'افتح صنابير لتملأ الخزان في الوقت المحدد تمامًا. اجمع أجزاء الساعة: $\\frac{1}{3}+\\frac{1}{6}=\\frac{1}{2}$، إذن ساعتان.'
                                 })}
                             />
                         </li>
-                        <li>{l({ eu: `${TANK_ROUNDS} txanda eta ${TANK_TRIES} saiakera bakoitzean: 3 puntu lehenengoan, 2 bigarrenean, 1 hirugarrenean.`, es: `${TANK_ROUNDS} rondas y ${TANK_TRIES} intentos en cada una: 3 puntos a la primera, 2 a la segunda y 1 a la tercera.`, ar: `${TANK_ROUNDS} جولات و${TANK_TRIES} محاولات في كل جولة: 3 نقاط من المحاولة الأولى، و2 من الثانية، و1 من الثالثة.` })}</li>
+                        <li>{l({ eu: `${TANK_ROUNDS} txanda eta ${TANK_TRIES} saiakera bakoitzean: 3 puntu lehenengoan, 2 bigarrenean, 1 hirugarrenean.`, es: `${TANK_ROUNDS} rondas y ${TANK_TRIES} intentos en cada una: 3 puntos a la primera, 2 a la segunda y 1 a la tercera.`, en: `${TANK_ROUNDS} rounds and ${TANK_TRIES} attempts in each one: 3 points for the first attempt, 2 for the second and 1 for the third.`, ar: `${TANK_ROUNDS} جولات و${TANK_TRIES} محاولات في كل جولة: 3 نقاط من المحاولة الأولى، و2 من الثانية، و1 من الثالثة.` })}</li>
                     </ul>
                 )}
             />
@@ -137,10 +138,10 @@ export function ProportionDbh4ApTankGame({ language, records, onResult, onExit }
                     language={language}
                     stars={tankStars(total)}
                     title={`${total} / ${TANK_ROUNDS * TANK_TRIES}`}
-                    subtitle={l({ eu: '3 izar: 13 puntu · 2 izar: 10 · izar 1: 6', es: '3 estrellas: 13 puntos · 2: 10 · 1: 6', ar: '3 نجوم: 13 نقطة · 2: 10 · 1: 6' })}
+                    subtitle={l({ eu: '3 izar: 13 puntu · 2 izar: 10 · izar 1: 6', es: '3 estrellas: 13 puntos · 2: 10 · 1: 6', en: '3 stars: 13 points · 2: 10 · 1: 6', ar: '3 نجوم: 13 نقطة · 2: 10 · 1: 6' })}
                     stats={[
-                        { label: l({ eu: 'Lehenengoan', es: 'A la primera', ar: 'من المحاولة الأولى' }), value: `${points.filter((value) => value === TANK_TRIES).length} / ${TANK_ROUNDS}` },
-                        { label: l({ eu: 'Beteta garaiz', es: 'Llenados a tiempo', ar: 'امتلأ في الوقت' }), value: `${points.filter((value) => value > 0).length} / ${TANK_ROUNDS}` }
+                        { label: l({ eu: 'Lehenengoan', es: 'A la primera', en: 'First attempt', ar: 'من المحاولة الأولى' }), value: `${points.filter((value) => value === TANK_TRIES).length} / ${TANK_ROUNDS}` },
+                        { label: l({ eu: 'Beteta garaiz', es: 'Llenados a tiempo', en: 'Filled on time', ar: 'امتلأ في الوقت' }), value: `${points.filter((value) => value > 0).length} / ${TANK_ROUNDS}` }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}
@@ -167,21 +168,21 @@ export function ProportionDbh4ApTankGame({ language, records, onResult, onExit }
     const hourUnit = language === 'ar' ? 'س' : 'h'
     // While the tank fills, the try being poured; otherwise the next one
     const attempt = Math.min(tries.length + (pouring ? 0 : 1), TANK_TRIES)
-    const state = (isOpen: boolean) => (isOpen ? l({ eu: 'irekita', es: 'abierto', ar: 'مفتوح' }) : l({ eu: 'itxita', es: 'cerrado', ar: 'مغلق' }))
+    const state = (isOpen: boolean) => (isOpen ? l({ eu: 'irekita', es: 'abierto', en: 'open', ar: 'مفتوح' }) : l({ eu: 'itxita', es: 'cerrado', en: 'closed', ar: 'مغلق' }))
 
     return (
         <div className="tank-game" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span>{index + 1} / {TANK_ROUNDS}</span>
-                <span><strong>{counted}</strong> {l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}</span>
+                <span><strong>{counted}</strong> {l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}</span>
             </GameTopbar>
 
             <p className="tank-target">
-                <span>{l({ eu: 'Bete biltegia zehazki denbora honetan:', es: 'Llena el depósito en exactamente:', ar: 'املأ الخزان في هذا الوقت تمامًا:' })}</span>
+                <span>{l({ eu: 'Bete biltegia zehazki denbora honetan:', es: 'Llena el depósito en exactamente:', en: 'Fill the tank in exactly this time:', ar: 'املأ الخزان في هذا الوقت تمامًا:' })}</span>
                 <strong>{l(tankTarget(round))}</strong>
             </p>
 
-            <svg className="tank-board" viewBox="0 0 360 220" direction="ltr" role="img" aria-label={l({ eu: 'Biltegia, txorrotak eta hustubidea', es: 'El depósito, los grifos y el desagüe', ar: 'الخزان والصنابير والمصرف' })}>
+            <svg className="tank-board" viewBox="0 0 360 220" direction="ltr" role="img" aria-label={l({ eu: 'Biltegia, txorrotak eta hustubidea', es: 'El depósito, los grifos y el desagüe', en: 'The tank, the taps and the drain', ar: 'الخزان والصنابير والمصرف' })}>
                 {/* Water: it rises while the tank fills */}
                 {level01 > 0 && <rect x={TANK.x} y={surface} width={TANK.width} height={TANK.y + TANK.height - surface} fill={WATER} fillOpacity={0.35} />}
                 <rect x={TANK.x} y={TANK.y} width={TANK.width} height={TANK.height} fill="none" stroke={INK} strokeWidth={2.4} />
@@ -227,14 +228,14 @@ export function ProportionDbh4ApTankGame({ language, records, onResult, onExit }
                         disabled={pouring || over}
                         onClick={() => setChoice((current) => ({ ...current, taps: current.taps.map((value, other) => (other === position ? !value : value)) }))}
                     >
-                        <span className="tank-switch-name">{l({ eu: `${TANK_LETTERS[position].eu} txorrota`, es: `Grifo ${TANK_LETTERS[position].es}`, ar: `الصنبور ${TANK_LETTERS[position].ar}` })}</span>
+                        <span className="tank-switch-name">{l({ eu: `${TANK_LETTERS[position].eu} txorrota`, es: `Grifo ${TANK_LETTERS[position].es}`, en: `Tap ${TANK_LETTERS[position].en}`, ar: `الصنبور ${TANK_LETTERS[position].ar}` })}</span>
                         <span className="tank-switch-hours">{`${tapHours} ${hourUnit}`}</span>
                         <span className="tank-switch-state">{state(choice.taps[position])}</span>
                     </button>
                 ))}
                 {round.drain > 0 && (
                     <button type="button" className="tank-switch drain" aria-pressed={choice.drain} disabled={pouring || over} onClick={() => setChoice((current) => ({ ...current, drain: !current.drain }))}>
-                        <span className="tank-switch-name">{l({ eu: 'Hustubidea', es: 'Desagüe', ar: 'المصرف' })}</span>
+                        <span className="tank-switch-name">{l({ eu: 'Hustubidea', es: 'Desagüe', en: 'Drain', ar: 'المصرف' })}</span>
                         <span className="tank-switch-hours">{`${round.drain} ${hourUnit}`}</span>
                         <span className="tank-switch-state">{state(choice.drain)}</span>
                     </button>
@@ -244,12 +245,12 @@ export function ProportionDbh4ApTankGame({ language, records, onResult, onExit }
             {!over && (
                 <div className="tank-actions">
                     <button type="button" className="fraction-v2-primary" disabled={pouring || nothingOpen || tried} onClick={pour}>
-                        {l({ eu: 'Bete!', es: '¡Llenar!', ar: 'املأ!' })}
+                        {l({ eu: 'Bete!', es: '¡Llenar!', en: 'Fill!', ar: 'املأ!' })}
                     </button>
                     <span className="tank-tries">
                         {tried && !pouring
-                            ? l({ eu: 'Hori probatu duzu jada.', es: 'Eso ya lo has probado.', ar: 'جرّبت هذا من قبل.' })
-                            : l({ eu: `Saiakera: ${attempt} / ${TANK_TRIES}`, es: `Intento ${attempt} de ${TANK_TRIES}`, ar: `المحاولة ${attempt} من ${TANK_TRIES}` })}
+                            ? l({ eu: 'Hori probatu duzu jada.', es: 'Eso ya lo has probado.', en: 'You have already tried that.', ar: 'جرّبت هذا من قبل.' })
+                            : l({ eu: `Saiakera: ${attempt} / ${TANK_TRIES}`, es: `Intento ${attempt} de ${TANK_TRIES}`, en: `Attempt ${attempt} of ${TANK_TRIES}`, ar: `المحاولة ${attempt} من ${TANK_TRIES}` })}
                     </span>
                 </div>
             )}
@@ -265,13 +266,13 @@ export function ProportionDbh4ApTankGame({ language, records, onResult, onExit }
                             <MathText text={`$${localLatex(tankLatex(round, round.solution), language)}$`} />
                         </>
                     )}
-                    {over && <p className="tank-points"><bdi dir="ltr">+{points[index] ?? 0}</bdi> {l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}</p>}
+                    {over && <p className="tank-points"><bdi dir="ltr">+{points[index] ?? 0}</bdi> {l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}</p>}
                 </div>
             )}
 
             {over && (
                 <button type="button" className="fraction-v2-primary tank-next" onClick={next} ref={(node) => node?.focus({ preventScroll: true })}>
-                    {index + 1 >= TANK_ROUNDS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', ar: 'التالي' })}
+                    {index + 1 >= TANK_ROUNDS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', en: 'See the result', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', en: 'Next', ar: 'التالي' })}
                 </button>
             )}
         </div>

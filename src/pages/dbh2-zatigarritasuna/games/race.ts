@@ -36,7 +36,7 @@ export type DivisibilityRaceError =
 export type DivisibilityRaceQuestion = RaceQuestion<DivisibilityRaceError>
 
 /** Text per language; formulas may use the @GCD/@LCM/@DIV notation */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu: notation(eu).eu, es: notation(es).es, ar: notation(ar).ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu: notation(eu).eu, es: notation(es).es, en: notation(en).en, ar: notation(ar).ar })
 
 interface Candidate {
     latex: string
@@ -75,7 +75,7 @@ function multipleQuestion(random: Random, tier: Tier): DivisibilityRaceQuestion 
     const tempting = [answer + 1, answer - 1, answer + 2, answer - 2, answer + n - 1, 10 * randomInt(random, 2, 9) + (n % 10)]
     const options = buildOptions(random, String(answer), numberCandidates(tempting.filter((value) => value % n !== 0), 'not-multiple'))
     if (!options) return null
-    return question(0, 'multiple', say(`Zein da ${ren(n)} multiploa?`, `¿Cuál es múltiplo de ${n}?`, `أي عدد مضاعف لـ ${n}؟`), options, answer, say(`$${answer}=${n}\\cdot ${answer / n}$`, `$${answer}=${n}\\cdot ${answer / n}$`, `$${answer}=${n}\\cdot ${answer / n}$`), false)
+    return question(0, 'multiple', say(`Zein da ${ren(n)} multiploa?`, `¿Cuál es múltiplo de ${n}?`, `أي عدد مضاعف لـ ${n}؟`, `Which one is a multiple of ${n}?`), options, answer, say(`$${answer}=${n}\\cdot ${answer / n}$`, `$${answer}=${n}\\cdot ${answer / n}$`, `$${answer}=${n}\\cdot ${answer / n}$`, `$${answer}=${n}\\cdot ${answer / n}$`), false)
 }
 
 function divisorCountQuestion(random: Random, tier: Tier): DivisibilityRaceQuestion | null {
@@ -88,7 +88,7 @@ function divisorCountQuestion(random: Random, tier: Tier): DivisibilityRaceQuest
         ...nearMisses(count)
     ])
     if (!options) return null
-    return question(0, 'divisor-count', say(`Zenbat zatitzaile ditu ${n}k?`, `¿Cuántos divisores tiene ${n}?`, `كم قاسمًا للعدد ${n}؟`), options, count, say(`$@DIV(${n})=\\{${all.join(',')}\\}$`, `$@DIV(${n})=\\{${all.join(',')}\\}$`, `$@DIV(${n})=\\{${all.join(',')}\\}$`), true)
+    return question(0, 'divisor-count', say(`Zenbat zatitzaile ditu ${n}k?`, `¿Cuántos divisores tiene ${n}?`, `كم قاسمًا للعدد ${n}؟`, `How many divisors does ${n} have?`), options, count, say(`$@DIV(${n})=\\{${all.join(',')}\\}$`, `$@DIV(${n})=\\{${all.join(',')}\\}$`, `$@DIV(${n})=\\{${all.join(',')}\\}$`, `$@DIV(${n})=\\{${all.join(',')}\\}$`), true)
 }
 
 function notDivisorQuestion(random: Random, tier: Tier): DivisibilityRaceQuestion | null {
@@ -102,7 +102,7 @@ function notDivisorQuestion(random: Random, tier: Tier): DivisibilityRaceQuestio
     const options = buildOptions(random, String(answer), numberCandidates(chosen, 'is-divisor'))
     if (!options) return null
     const rest = n % answer
-    return question(0, 'not-divisor', say(`Zein EZ da ${ren(n)} zatitzailea?`, `¿Cuál NO es divisor de ${n}?`, `أي عدد ليس قاسمًا لـ ${n}؟`), options, answer, say(`$${n}=${answer}\\cdot ${Math.floor(n / answer)}+${rest}$: hondarra ez da 0.`, `$${n}=${answer}\\cdot ${Math.floor(n / answer)}+${rest}$: el resto no es 0.`, `$${n}=${answer}\\cdot ${Math.floor(n / answer)}+${rest}$: الباقي ليس 0.`), false)
+    return question(0, 'not-divisor', say(`Zein EZ da ${ren(n)} zatitzailea?`, `¿Cuál NO es divisor de ${n}?`, `أي عدد ليس قاسمًا لـ ${n}؟`, `Which one is NOT a divisor of ${n}?`), options, answer, say(`$${n}=${answer}\\cdot ${Math.floor(n / answer)}+${rest}$: hondarra ez da 0.`, `$${n}=${answer}\\cdot ${Math.floor(n / answer)}+${rest}$: el resto no es 0.`, `$${n}=${answer}\\cdot ${Math.floor(n / answer)}+${rest}$: الباقي ليس 0.`, `$${n}=${answer}\\cdot ${Math.floor(n / answer)}+${rest}$: the remainder is not 0.`), false)
 }
 
 /* ---------- Circuit 1: divisibility rules ---------- */
@@ -125,7 +125,7 @@ function divisibleQuestion(random: Random, tier: Tier): DivisibilityRaceQuestion
     const why = d === 3 || d === 9
         ? `$${String(answer).split('').join('+')}=${digitSum(answer)}$`
         : d === 11 ? `$${answer}=11\\cdot ${answer / 11}$` : `$${answer}=${d}\\cdot ${answer / d}$`
-    return question(1, `divisible-${d}`, say(`Zein da ${rekin(d)} zatigarria?`, `¿Cuál es divisible por ${d}?`, `أي عدد يقبل القسمة على ${d}؟`), options, answer, say(why, why, why), false)
+    return question(1, `divisible-${d}`, say(`Zein da ${rekin(d)} zatigarria?`, `¿Cuál es divisible por ${d}?`, `أي عدد يقبل القسمة على ${d}؟`, `Which one is divisible by ${d}?`), options, answer, say(why, why, why, why), false)
 }
 
 function missingDigitQuestion(random: Random): DivisibilityRaceQuestion | null {
@@ -138,7 +138,7 @@ function missingDigitQuestion(random: Random): DivisibilityRaceQuestion | null {
     const options = buildOptions(random, String(answer), [...numberCandidates(byThree, 'three-not-nine'), ...numberCandidates([answer + 1, answer - 1, answer + 2].filter((digit) => digit <= 9), 'digit-sum'), ...numberCandidates([0].filter((digit) => digit !== answer), 'digit-sum')])
     if (!options) return null
     const shape = `${first}\\square ${last}`
-    return question(1, 'missing-digit', say(`Zein zifra falta da $${shape}$ 9rekin zatigarria izateko?`, `¿Qué cifra falta en $${shape}$ para que sea divisible por 9?`, `ما الرقم الناقص في $${shape}$ ليقبل القسمة على 9؟`), options, answer, say(`$${first}+${answer}+${last}=${first + answer + last}$`, `$${first}+${answer}+${last}=${first + answer + last}$`, `$${first}+${answer}+${last}=${first + answer + last}$`), true)
+    return question(1, 'missing-digit', say(`Zein zifra falta da $${shape}$ 9rekin zatigarria izateko?`, `¿Qué cifra falta en $${shape}$ para que sea divisible por 9?`, `ما الرقم الناقص في $${shape}$ ليقبل القسمة على 9؟`, `Which digit is missing in $${shape}$ so that it is divisible by 9?`), options, answer, say(`$${first}+${answer}+${last}=${first + answer + last}$`, `$${first}+${answer}+${last}=${first + answer + last}$`, `$${first}+${answer}+${last}=${first + answer + last}$`, `$${first}+${answer}+${last}=${first + answer + last}$`), true)
 }
 
 /* ---------- Circuit 2: primes and factorization ---------- */
@@ -152,7 +152,7 @@ function primeQuestion(random: Random, tier: Tier): DivisibilityRaceQuestion | n
     const options = buildOptions(random, String(answer), numberCandidates(shuffle(random, lookPrime.filter((value) => value < limit + 10)), 'looks-prime'))
     if (!options) return null
     const others = options.filter((option) => !option.correct).map((option) => `${option.latex}=${factorLatex(factorize(Number(option.latex)))}`).join(',\\ ')
-    return question(2, 'prime', say('Zein da zenbaki lehena?', '¿Cuál es un número primo?', 'أي عدد أولي؟'), options, answer, say(`$${others}$`, `$${others}$`, `$${others}$`), false)
+    return question(2, 'prime', say('Zein da zenbaki lehena?', '¿Cuál es un número primo?', 'أي عدد أولي؟', 'Which one is a prime number?'), options, answer, say(`$${others}$`, `$${others}$`, `$${others}$`, `$${others}$`), false)
 }
 
 const toFactorize = [24, 36, 40, 48, 54, 60, 72, 84, 90, 96, 108, 120, 126, 150, 180, 200, 240, 252, 280, 300, 360]
@@ -176,7 +176,7 @@ function factorizationQuestion(random: Random, tier: Tier): DivisibilityRaceQues
         { latex: dropped, error: 'wrong-exponent' }
     ])
     if (!options) return null
-    return question(2, 'factorization', say(`Zein da ${ren(n)} deskonposizioa biderkagai lehenetan?`, `¿Cuál es la descomposición de ${n} en factores primos?`, `ما تحليل ${n} إلى عوامل أولية؟`), options, n, say(`$${n}=${right}$`, `$${n}=${right}$`, `$${n}=${right}$`), false)
+    return question(2, 'factorization', say(`Zein da ${ren(n)} deskonposizioa biderkagai lehenetan?`, `¿Cuál es la descomposición de ${n} en factores primos?`, `ما تحليل ${n} إلى عوامل أولية؟`, `What is the prime factorisation of ${n}?`), options, n, say(`$${n}=${right}$`, `$${n}=${right}$`, `$${n}=${right}$`, `$${n}=${right}$`), false)
 }
 
 function powerValueQuestion(random: Random, tier: Tier): DivisibilityRaceQuestion | null {
@@ -195,7 +195,7 @@ function powerValueQuestion(random: Random, tier: Tier): DivisibilityRaceQuestio
     if (!options) return null
     const latex = factorLatex(factors)
     const worked = factors.map(([prime, exponent]) => String(prime ** exponent)).join('\\cdot ')
-    return question(2, 'power-value', say(`Zein zenbaki da $${latex}$?`, `¿Qué número es $${latex}$?`, `ما العدد $${latex}$؟`), options, answer, say(`$${latex}=${worked}=${answer}$`, `$${latex}=${worked}=${answer}$`, `$${latex}=${worked}=${answer}$`), true)
+    return question(2, 'power-value', say(`Zein zenbaki da $${latex}$?`, `¿Qué número es $${latex}$?`, `ما العدد $${latex}$؟`, `What number is $${latex}$?`), options, answer, say(`$${latex}=${worked}=${answer}$`, `$${latex}=${worked}=${answer}$`, `$${latex}=${worked}=${answer}$`, `$${latex}=${worked}=${answer}$`), true)
 }
 
 /* ---------- Circuit 3: ZKH and MKT ---------- */
@@ -223,7 +223,7 @@ function gcdLcmQuestion(random: Random, tier: Tier, kind: 'gcd' | 'lcm'): Divisi
     if (!options) return null
     const token = kind === 'gcd' ? '@GCD' : '@LCM'
     const worked = `$${a}=${factorLatex(factorize(a))},\\ ${b}=${factorLatex(factorize(b))}\\ \\Rightarrow\\ ${token}(${a},${b})=${factorLatex(factorize(answer))}=${answer}$`
-    return question(3, kind, say(`Kalkulatu: $${token}(${a},${b})$`, `Calcula: $${token}(${a},${b})$`, `احسب: $${token}(${a},${b})$`), options, answer, say(worked, worked, worked), true)
+    return question(3, kind, say(`Kalkulatu: $${token}(${a},${b})$`, `Calcula: $${token}(${a},${b})$`, `احسب: $${token}(${a},${b})$`, `Calculate: $${token}(${a},${b})$`), options, answer, say(worked, worked, worked, worked), true)
 }
 
 /* ---------- Circuit 4: problems ---------- */
@@ -242,10 +242,10 @@ function problemQuestion(random: Random, tier: Tier): DivisibilityRaceQuestion |
     const B = b * scale
     const shown = answer * scale
     const prompts = {
-        tiles: say(`${A} cm × ${B} cm-ko gela bat ahalik eta handienak diren lauza karratuekin estali nahi da, bat ere moztu gabe. Zenbat cm izango ditu lauzaren aldeak?`, `Se quiere cubrir una sala de ${A} cm × ${B} cm con las baldosas cuadradas más grandes posible, sin cortar ninguna. ¿Cuántos cm medirá el lado de cada baldosa?`, `نريد تغطية غرفة ${A} سم × ${B} سم بأكبر بلاط مربع ممكن دون قص. كم سنتيمترًا طول ضلع البلاطة؟`),
-        bags: say(`${A} sagar eta ${B} udare ditugu. Poltsa berdinak egin nahi ditugu, fruta bakarrekoak eta ahalik eta pieza gehienekin. Zenbat pieza poltsa bakoitzean?`, `Tenemos ${A} manzanas y ${B} peras. Queremos bolsas iguales, de una sola fruta y con el mayor número de piezas. ¿Cuántas piezas por bolsa?`, `لدينا ${A} تفاحة و${B} إجاصة. نريد أكياسًا متساوية من نوع واحد وبأكبر عدد ممكن. كم قطعة في كل كيس؟`),
-        buses: say(`Bi autobus ${A} eta ${B} minuturo irteten dira, eta orain batera irten dira. Zenbat minutu barru irtengo dira berriro batera?`, `Dos autobuses salen cada ${A} y ${B} minutos, y ahora han salido juntos. ¿Dentro de cuántos minutos volverán a salir juntos?`, `حافلتان تنطلقان كل ${A} و${B} دقيقة، وقد انطلقتا معًا الآن. بعد كم دقيقة تنطلقان معًا مجددًا؟`),
-        lights: say(`Argi batek ${A} segundoro keinu egiten du eta beste batek ${B}ro. Batera egin dute. Zenbat segundo barru egingo dute berriro batera?`, `Una luz parpadea cada ${A} segundos y otra cada ${B}. Acaban de coincidir. ¿Dentro de cuántos segundos volverán a coincidir?`, `ضوء يومض كل ${A} ثانية وآخر كل ${B}. تزامنا الآن. بعد كم ثانية يتزامنان مجددًا؟`)
+        tiles: say(`${A} cm × ${B} cm-ko gela bat ahalik eta handienak diren lauza karratuekin estali nahi da, bat ere moztu gabe. Zenbat cm izango ditu lauzaren aldeak?`, `Se quiere cubrir una sala de ${A} cm × ${B} cm con las baldosas cuadradas más grandes posible, sin cortar ninguna. ¿Cuántos cm medirá el lado de cada baldosa?`, `نريد تغطية غرفة ${A} سم × ${B} سم بأكبر بلاط مربع ممكن دون قص. كم سنتيمترًا طول ضلع البلاطة؟`, `A room measuring ${A} cm × ${B} cm is to be covered with the largest possible square tiles, without cutting any. How long is the side of each tile, in cm?`),
+        bags: say(`${A} sagar eta ${B} udare ditugu. Poltsa berdinak egin nahi ditugu, fruta bakarrekoak eta ahalik eta pieza gehienekin. Zenbat pieza poltsa bakoitzean?`, `Tenemos ${A} manzanas y ${B} peras. Queremos bolsas iguales, de una sola fruta y con el mayor número de piezas. ¿Cuántas piezas por bolsa?`, `لدينا ${A} تفاحة و${B} إجاصة. نريد أكياسًا متساوية من نوع واحد وبأكبر عدد ممكن. كم قطعة في كل كيس؟`, `We have ${A} apples and ${B} pears. We want bags that are all the same, with only one type of fruit and with as many pieces as possible. How many pieces per bag?`),
+        buses: say(`Bi autobus ${A} eta ${B} minuturo irteten dira, eta orain batera irten dira. Zenbat minutu barru irtengo dira berriro batera?`, `Dos autobuses salen cada ${A} y ${B} minutos, y ahora han salido juntos. ¿Dentro de cuántos minutos volverán a salir juntos?`, `حافلتان تنطلقان كل ${A} و${B} دقيقة، وقد انطلقتا معًا الآن. بعد كم دقيقة تنطلقان معًا مجددًا؟`, `Two buses leave every ${A} and ${B} minutes, and they have just left together. In how many minutes will they leave together again?`),
+        lights: say(`Argi batek ${A} segundoro keinu egiten du eta beste batek ${B}ro. Batera egin dute. Zenbat segundo barru egingo dute berriro batera?`, `Una luz parpadea cada ${A} segundos y otra cada ${B}. Acaban de coincidir. ¿Dentro de cuántos segundos volverán a coincidir?`, `ضوء يومض كل ${A} ثانية وآخر كل ${B}. تزامنا الآن. بعد كم ثانية يتزامنان مجددًا؟`, `One light flashes every ${A} seconds and another every ${B}. They have just flashed together. In how many seconds will they flash together again?`)
     }
     const other = (usesGcd ? m : g) * scale
     const options = buildOptions(random, String(shown), [
@@ -257,7 +257,7 @@ function problemQuestion(random: Random, tier: Tier): DivisibilityRaceQuestion |
     if (!options) return null
     const token = usesGcd ? '@GCD' : '@LCM'
     const worked = `$${token}(${A},${B})=${shown}$`
-    return question(4, kind, prompts[kind], options, shown, say(worked, worked, worked), true)
+    return question(4, kind, prompts[kind], options, shown, say(worked, worked, worked, worked), true)
 }
 
 /* ---------- Public API ---------- */
@@ -289,24 +289,24 @@ export function divisibilityParTime(circuit: number): number {
     return parTimeFor([8, 9, 10, 13, 16][circuit] ?? 10)
 }
 
-const text = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const text = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 
 export const divisibilityRaceErrorTips: Record<DivisibilityRaceError, LocalizedText> = {
-    'not-multiple': text('Zatiketa ez da zehatza: hondarra ez da 0. Multiploak zenbakia bider 1, 2, 3… dira.', 'La división no es exacta: el resto no es 0. Los múltiplos son el número por 1, 2, 3…', 'القسمة ليست تامة: الباقي ليس 0. المضاعفات هي العدد مضروبًا في 1، 2، 3…'),
-    'is-divisor': text('Hori zatitzailea da: zatiketa zehatza da. Bilatu hondarra ematen duena.', 'Ese sí es divisor: la división es exacta. Busca el que deja resto.', 'هذا قاسم: القسمة تامة. ابحث عن العدد الذي يترك باقيًا.'),
-    'forgot-ends': text('Ez ahaztu 1 eta zenbakia bera: beti dira zatitzaileak.', 'No olvides el 1 y el propio número: siempre son divisores.', 'لا تنسَ 1 والعدد نفسه: هما قاسمان دائمًا.'),
-    'counted-pairs': text('Bikoteak zenbatu dituzu, ez zatitzaileak: bikote bakoitzak bi zatitzaile ditu (edo bat, 6 · 6 bezala).', 'Has contado parejas, no divisores: cada pareja son dos divisores (o uno, como 6 · 6).', 'عددت الأزواج لا القواسم: كل زوج فيه قاسمان (أو واحد مثل 6 · 6).'),
-    'last-digit': text('Irizpide horretan azken zifrari begiratu behar zaio: 2 (bikoitia), 5 (0 edo 5), 10 (0).', 'En ese criterio hay que mirar la última cifra: 2 (par), 5 (0 o 5), 10 (0).', 'في هذه القاعدة ننظر إلى الرقم الأخير: 2 (زوجي)، 5 (0 أو 5)، 10 (0).'),
-    'digit-sum': text('3 eta 9rako batu zifra guztiak; azken zifrak ez du balio.', 'Para el 3 y el 9 suma todas las cifras; la última cifra no sirve.', 'لـ 3 و9 اجمع كل الأرقام؛ الرقم الأخير لا يكفي.'),
-    'three-not-nine': text('3rekin zatigarria da, baina 9rekin ez: zifren batura 3ren multiploa da, ez 9rena.', 'Es divisible por 3 pero no por 9: la suma de cifras es múltiplo de 3, no de 9.', 'يقبل القسمة على 3 لا على 9: مجموع الأرقام مضاعف لـ 3 لا لـ 9.'),
-    eleven: text('11rentzat kendu posizio bikoitien eta bakoitien baturak: 0 edo 11ren multiploa izan behar du.', 'Para el 11 resta las sumas de los lugares pares e impares: tiene que dar 0 o múltiplo de 11.', 'لـ 11 اطرح مجموعي المواقع الزوجية والفردية: يجب أن يكون 0 أو مضاعفًا لـ 11.'),
-    'looks-prime': text('Lehena dirudi, baina ez da: probatu 3, 7 edo 11ren irizpideak.', 'Parece primo, pero no lo es: prueba los criterios del 3, del 7 o del 11.', 'يبدو أوليًا لكنه ليس كذلك: جرّب قواعد 3 أو 7 أو 11.'),
-    'not-prime-factor': text('Biderkadura zuzena da, baina biderkagai guztiak lehenak izan behar dira.', 'El producto es correcto, pero todos los factores tienen que ser primos.', 'الناتج صحيح، لكن يجب أن تكون كل العوامل أولية.'),
-    'wrong-exponent': text('Berretzaileren bat ez dago ondo: zenbatu zenbat aldiz zatitu duzun lehen bakoitzarekin.', 'Algún exponente no está bien: cuenta cuántas veces has dividido entre cada primo.', 'أحد الأسس غير صحيح: عدّ كم مرة قسمت على كل عدد أولي.'),
-    'power-times': text('Berretura ez da biderketa: $2^{3}=2\\cdot 2\\cdot 2=8$, ez $2\\cdot 3$.', 'Una potencia no es una multiplicación: $2^{3}=2\\cdot 2\\cdot 2=8$, no $2\\cdot 3$.', 'القوة ليست ضربًا: $2^{3}=2\\cdot 2\\cdot 2=8$ وليست $2\\cdot 3$.'),
-    swapped: text('ZKH eta MKT nahastu dituzu. ZKH: komunak, txikienak. MKT: guztiak, handienak.', 'Has confundido el m.c.d. y el m.c.m. m.c.d.: comunes, menor exponente. m.c.m.: todos, mayor exponente.', 'خلطت بين ق.م.أ وم.م.أ. ق.م.أ: المشتركة بأصغر أس. م.م.أ: الكل بأكبر أس.'),
-    product: text('Biderkadura multiplo komuna da, baina ez beti txikiena: faktore komunak behin bakarrik hartzen dira.', 'El producto es múltiplo común, pero no siempre el menor: los factores comunes se toman una sola vez.', 'حاصل الضرب مضاعف مشترك لكنه ليس دائمًا الأصغر: العوامل المشتركة تُؤخذ مرة واحدة.'),
-    'not-greatest': text('Zatitzaile komuna da, baina ez handiena.', 'Es un divisor común, pero no el mayor.', 'إنه قاسم مشترك لكنه ليس الأكبر.'),
-    'not-least': text('Multiplo komuna da, baina ez txikiena.', 'Es un múltiplo común, pero no el menor.', 'إنه مضاعف مشترك لكنه ليس الأصغر.'),
-    calculation: text('Metodoa ondo dago, baina kalkuluan akats bat dago. Egin berriro poliki.', 'El método está bien, pero hay un error de cálculo. Hazlo otra vez despacio.', 'الطريقة صحيحة لكن في الحساب خطأ. أعده ببطء.')
+    'not-multiple': text('Zatiketa ez da zehatza: hondarra ez da 0. Multiploak zenbakia bider 1, 2, 3… dira.', 'La división no es exacta: el resto no es 0. Los múltiplos son el número por 1, 2, 3…', 'القسمة ليست تامة: الباقي ليس 0. المضاعفات هي العدد مضروبًا في 1، 2، 3…', 'The division is not exact: the remainder is not 0. The multiples are the number times 1, 2, 3…'),
+    'is-divisor': text('Hori zatitzailea da: zatiketa zehatza da. Bilatu hondarra ematen duena.', 'Ese sí es divisor: la división es exacta. Busca el que deja resto.', 'هذا قاسم: القسمة تامة. ابحث عن العدد الذي يترك باقيًا.', 'That one is a divisor: the division is exact. Look for the one that leaves a remainder.'),
+    'forgot-ends': text('Ez ahaztu 1 eta zenbakia bera: beti dira zatitzaileak.', 'No olvides el 1 y el propio número: siempre son divisores.', 'لا تنسَ 1 والعدد نفسه: هما قاسمان دائمًا.', 'Don\'t forget 1 and the number itself: they are always divisors.'),
+    'counted-pairs': text('Bikoteak zenbatu dituzu, ez zatitzaileak: bikote bakoitzak bi zatitzaile ditu (edo bat, 6 · 6 bezala).', 'Has contado parejas, no divisores: cada pareja son dos divisores (o uno, como 6 · 6).', 'عددت الأزواج لا القواسم: كل زوج فيه قاسمان (أو واحد مثل 6 · 6).', 'You have counted pairs, not divisors: each pair gives two divisors (or one, like 6 · 6).'),
+    'last-digit': text('Irizpide horretan azken zifrari begiratu behar zaio: 2 (bikoitia), 5 (0 edo 5), 10 (0).', 'En ese criterio hay que mirar la última cifra: 2 (par), 5 (0 o 5), 10 (0).', 'في هذه القاعدة ننظر إلى الرقم الأخير: 2 (زوجي)، 5 (0 أو 5)، 10 (0).', 'For that rule, look at the last digit: 2 (even), 5 (0 or 5), 10 (0).'),
+    'digit-sum': text('3 eta 9rako batu zifra guztiak; azken zifrak ez du balio.', 'Para el 3 y el 9 suma todas las cifras; la última cifra no sirve.', 'لـ 3 و9 اجمع كل الأرقام؛ الرقم الأخير لا يكفي.', 'For 3 and 9, add up all the digits; the last digit is not used.'),
+    'three-not-nine': text('3rekin zatigarria da, baina 9rekin ez: zifren batura 3ren multiploa da, ez 9rena.', 'Es divisible por 3 pero no por 9: la suma de cifras es múltiplo de 3, no de 9.', 'يقبل القسمة على 3 لا على 9: مجموع الأرقام مضاعف لـ 3 لا لـ 9.', 'It is divisible by 3 but not by 9: the sum of the digits is a multiple of 3, not of 9.'),
+    eleven: text('11rentzat kendu posizio bikoitien eta bakoitien baturak: 0 edo 11ren multiploa izan behar du.', 'Para el 11 resta las sumas de los lugares pares e impares: tiene que dar 0 o múltiplo de 11.', 'لـ 11 اطرح مجموعي المواقع الزوجية والفردية: يجب أن يكون 0 أو مضاعفًا لـ 11.', 'For 11, subtract the sums of the even and odd places: the result must be 0 or a multiple of 11.'),
+    'looks-prime': text('Lehena dirudi, baina ez da: probatu 3, 7 edo 11ren irizpideak.', 'Parece primo, pero no lo es: prueba los criterios del 3, del 7 o del 11.', 'يبدو أوليًا لكنه ليس كذلك: جرّب قواعد 3 أو 7 أو 11.', 'It looks prime, but it is not: try the rules for 3, 7 or 11.'),
+    'not-prime-factor': text('Biderkadura zuzena da, baina biderkagai guztiak lehenak izan behar dira.', 'El producto es correcto, pero todos los factores tienen que ser primos.', 'الناتج صحيح، لكن يجب أن تكون كل العوامل أولية.', 'The product is correct, but all the factors must be prime.'),
+    'wrong-exponent': text('Berretzaileren bat ez dago ondo: zenbatu zenbat aldiz zatitu duzun lehen bakoitzarekin.', 'Algún exponente no está bien: cuenta cuántas veces has dividido entre cada primo.', 'أحد الأسس غير صحيح: عدّ كم مرة قسمت على كل عدد أولي.', 'One of the exponents is wrong: count how many times you have divided by each prime.'),
+    'power-times': text('Berretura ez da biderketa: $2^{3}=2\\cdot 2\\cdot 2=8$, ez $2\\cdot 3$.', 'Una potencia no es una multiplicación: $2^{3}=2\\cdot 2\\cdot 2=8$, no $2\\cdot 3$.', 'القوة ليست ضربًا: $2^{3}=2\\cdot 2\\cdot 2=8$ وليست $2\\cdot 3$.', 'A power is not a multiplication: $2^{3}=2\\cdot 2\\cdot 2=8$, not $2\\cdot 3$.'),
+    swapped: text('ZKH eta MKT nahastu dituzu. ZKH: komunak, txikienak. MKT: guztiak, handienak.', 'Has confundido el m.c.d. y el m.c.m. m.c.d.: comunes, menor exponente. m.c.m.: todos, mayor exponente.', 'خلطت بين ق.م.أ وم.م.أ. ق.م.أ: المشتركة بأصغر أس. م.م.أ: الكل بأكبر أس.', 'You have mixed up the GCD and the LCM. GCD: common factors, lowest exponent. LCM: all factors, highest exponent.'),
+    product: text('Biderkadura multiplo komuna da, baina ez beti txikiena: faktore komunak behin bakarrik hartzen dira.', 'El producto es múltiplo común, pero no siempre el menor: los factores comunes se toman una sola vez.', 'حاصل الضرب مضاعف مشترك لكنه ليس دائمًا الأصغر: العوامل المشتركة تُؤخذ مرة واحدة.', 'The product is a common multiple, but not always the smallest: common factors are only counted once.'),
+    'not-greatest': text('Zatitzaile komuna da, baina ez handiena.', 'Es un divisor común, pero no el mayor.', 'إنه قاسم مشترك لكنه ليس الأكبر.', 'It is a common divisor, but not the greatest.'),
+    'not-least': text('Multiplo komuna da, baina ez txikiena.', 'Es un múltiplo común, pero no el menor.', 'إنه مضاعف مشترك لكنه ليس الأصغر.', 'It is a common multiple, but not the smallest.'),
+    calculation: text('Metodoa ondo dago, baina kalkuluan akats bat dago. Egin berriro poliki.', 'El método está bien, pero hay un error de cálculo. Hazlo otra vez despacio.', 'الطريقة صحيحة لكن في الحساب خطأ. أعده ببطء.', 'Your method is right, but there is a calculation error. Do it again slowly.')
 }

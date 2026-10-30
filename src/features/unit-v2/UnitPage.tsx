@@ -76,7 +76,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
     const stageOf = (id: string) => unit.stages.find((stage) => stage.id === id) ?? unit.stages[0]
 
     const resetAllProgress = () => {
-        const confirmed = window.confirm(l({ eu: 'Unitate honetako aurrerapen guztia ezabatu nahi duzu?', es: '¿Quieres borrar todo el progreso de esta unidad?', ar: 'هل تريد حذف كل التقدم في هذه الوحدة؟' }))
+        const confirmed = window.confirm(l({ eu: 'Unitate honetako aurrerapen guztia ezabatu nahi duzu?', es: '¿Quieres borrar todo el progreso de esta unidad?', en: 'Do you want to delete all the progress in this unit?', ar: 'هل تريد حذف كل التقدم في هذه الوحدة؟' }))
         if (!confirmed) return
         diagnosticProgress.reset()
         diagnosticCorrect.reset()
@@ -114,28 +114,28 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
         <div className="fraction-v2" dir={isRtl ? 'rtl' : 'ltr'}>
             <header className="fraction-v2-header">
                 <div className="fraction-v2-topbar">
-                    <Link className="fraction-v2-brand" to="/" aria-label={l({ eu: 'Matella, hasiera', es: 'Matella, inicio', ar: 'Matella، الصفحة الرئيسية' })}>
+                    <Link className="fraction-v2-brand" to="/" aria-label={l({ eu: 'Matella, hasiera', es: 'Matella, inicio', en: 'Matella, home', ar: 'Matella، الصفحة الرئيسية' })}>
                         <span className="fraction-v2-brand-mark" aria-hidden="true"><span /><span /><span /><span /></span>
                         <span className="fraction-v2-brand-name">Matella</span>
                     </Link>
-                    <Link className="fraction-v2-mobile-back" to={unit.coursePath} aria-label={`${l({ eu: 'Itzuli', es: 'Volver a', ar: 'العودة إلى' })} ${courseTitle}`}>
+                    <Link className="fraction-v2-mobile-back" to={unit.coursePath} aria-label={`${l({ eu: 'Itzuli', es: 'Volver a', en: 'Back to', ar: 'العودة إلى' })} ${courseTitle}`}>
                         <Icon name="back" size={22} className="fraction-v2-icon-flip" />
                     </Link>
-                    <nav className="fraction-v2-breadcrumb" aria-label={l({ eu: 'Kokapena', es: 'Ruta de navegación', ar: 'مسار التنقل' })}>
-                        <Link to="/matematika">{l({ eu: 'Matematika', es: 'Matemáticas', ar: 'الرياضيات' })}</Link>
+                    <nav className="fraction-v2-breadcrumb" aria-label={l({ eu: 'Kokapena', es: 'Ruta de navegación', en: 'Breadcrumb', ar: 'مسار التنقل' })}>
+                        <Link to="/matematika">{l({ eu: 'Matematika', es: 'Matemáticas', en: 'Mathematics', ar: 'الرياضيات' })}</Link>
                         <span aria-hidden="true">/</span>
                         <Link to={unit.coursePath}>{courseTitle}</Link>
                         <span aria-hidden="true">/</span>
                         <span aria-current="page">{unitTitle}</span>
                     </nav>
                     <span className="fraction-v2-mobile-title">{unitTitle}</span>
-                    <div className="fraction-v2-language" role="group" aria-label={l({ eu: 'Hizkuntza', es: 'Idioma', ar: 'اللغة' })}>
-                        {([['eu', 'EU'], ['es', 'ES'], ['ar', 'عربي']] as const).map(([code, label]) => (
+                    <div className="fraction-v2-language" role="group" aria-label={l({ eu: 'Hizkuntza', es: 'Idioma', en: 'Language', ar: 'اللغة' })}>
+                        {([['eu', 'EU'], ['es', 'ES'], ['en', 'EN'], ['ar', 'عربي']] as const).map(([code, label]) => (
                             <button type="button" lang={code} aria-pressed={language === code} onClick={() => void i18n.changeLanguage(code)} key={code}>{label}</button>
                         ))}
                     </div>
                 </div>
-                <nav className="fraction-v2-nav" aria-label={l({ eu: 'Unitateko atalak', es: 'Secciones de la unidad', ar: 'أقسام الوحدة' })}>
+                <nav className="fraction-v2-nav" aria-label={l({ eu: 'Unitateko atalak', es: 'Secciones de la unidad', en: 'Unit sections', ar: 'أقسام الوحدة' })}>
                     {navSections.map((item) => (
                         <button
                             type="button"
@@ -157,7 +157,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                             onClick={() => setMoreOpen((open) => !open)}
                         >
                             <Icon name={moreOpen ? 'close' : 'more'} size={20} />
-                            <span>{l({ eu: 'Gehiago', es: 'Más', ar: 'المزيد' })}</span>
+                            <span>{l({ eu: 'Gehiago', es: 'Más', en: 'More', ar: 'المزيد' })}</span>
                         </button>
                     )}
                 </nav>
@@ -234,8 +234,8 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
 
     function lessonsLabel(count: number) {
         return count === 1
-            ? l({ eu: 'Ikasgai 1', es: '1 lección', ar: 'درس واحد' })
-            : l({ eu: `${count} ikasgai`, es: `${count} lecciones`, ar: `${count} دروس` })
+            ? l({ eu: 'Ikasgai 1', es: '1 lección', en: '1 lesson', ar: 'درس واحد' })
+            : l({ eu: `${count} ikasgai`, es: `${count} lecciones`, en: `${count} lessons`, ar: `${count} دروس` })
     }
 
     function openTopic(nextTopic: string) {
@@ -252,67 +252,67 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
         const guidedCount = unit.guidedPractice?.length ?? 0
         const bankCount = exerciseBankSize(unit)
         const tools: Array<{ id: UnitSection; title: LocalizedText; description: LocalizedText }> = []
-        if (unit.lab) tools.push({ id: 'lab', title: { eu: 'Laborategia', es: 'Laboratorio', ar: 'المختبر' }, description: unit.lab.description })
+        if (unit.lab) tools.push({ id: 'lab', title: { eu: 'Laborategia', es: 'Laboratorio', en: 'Lab', ar: 'المختبر' }, description: unit.lab.description })
         if (sections.includes('practice')) {
             tools.push({
                 id: 'practice',
-                title: { eu: 'Praktika', es: 'Práctica', ar: 'التدريب' },
+                title: { eu: 'Praktika', es: 'Práctica', en: 'Practice', ar: 'التدريب' },
                 description: bankCount > 0
-                    ? { eu: `${guidedCount} jarduera gidatu eta ${bankCount} ariketa zailtasunaren arabera.`, es: `${guidedCount} actividades guiadas y ${bankCount} ejercicios por dificultad.`, ar: `${guidedCount} أنشطة موجّهة و${bankCount} تمرينًا حسب الصعوبة.` }
-                    : { eu: `${guidedCount} jarduera gidatu, pistekin.`, es: `${guidedCount} actividades guiadas, con pistas.`, ar: `${guidedCount} أنشطة موجّهة مع تلميحات.` }
+                    ? { eu: `${guidedCount} jarduera gidatu eta ${bankCount} ariketa zailtasunaren arabera.`, es: `${guidedCount} actividades guiadas y ${bankCount} ejercicios por dificultad.`, en: `${guidedCount} guided activities and ${bankCount} exercises by difficulty.`, ar: `${guidedCount} أنشطة موجّهة و${bankCount} تمرينًا حسب الصعوبة.` }
+                    : { eu: `${guidedCount} jarduera gidatu, pistekin.`, es: `${guidedCount} actividades guiadas, con pistas.`, en: `${guidedCount} guided activities, with hints.`, ar: `${guidedCount} أنشطة موجّهة مع تلميحات.` }
             })
         }
-        if (unit.challenges?.length) tools.push({ id: 'challenges', title: { eu: 'Erronkak', es: 'Retos', ar: 'التحديات' }, description: { eu: `Bizitza errealeko ${unit.challenges.length} problema ikasitakoa aplikatzeko.`, es: `${unit.challenges.length} problemas de la vida real para aplicar lo aprendido.`, ar: `${unit.challenges.length} مسألة من الحياة الواقعية لتطبيق ما تعلّمته.` } })
-        if (unit.games) tools.push({ id: 'play', title: { eu: 'Jokoak', es: 'Juegos', ar: 'الألعاب' }, description: unit.games.description })
+        if (unit.challenges?.length) tools.push({ id: 'challenges', title: { eu: 'Erronkak', es: 'Retos', en: 'Challenges', ar: 'التحديات' }, description: { eu: `Bizitza errealeko ${unit.challenges.length} problema ikasitakoa aplikatzeko.`, es: `${unit.challenges.length} problemas de la vida real para aplicar lo aprendido.`, en: `${unit.challenges.length} real-life problems to apply what you have learnt.`, ar: `${unit.challenges.length} مسألة من الحياة الواقعية لتطبيق ما تعلّمته.` } })
+        if (unit.games) tools.push({ id: 'play', title: { eu: 'Jokoak', es: 'Juegos', en: 'Games', ar: 'الألعاب' }, description: unit.games.description })
 
         return (
             <div className="fraction-v2-route">
                 <section className="fraction-v2-hero" aria-labelledby="fraction-v2-unit-title">
                     <div className="fraction-v2-hero-copy">
-                        <span className="fraction-v2-chip fraction-v2-chip-coral">{courseTitle} · {l({ eu: 'Matematika', es: 'Matemáticas', ar: 'الرياضيات' })}</span>
+                        <span className="fraction-v2-chip fraction-v2-chip-coral">{courseTitle} · {l({ eu: 'Matematika', es: 'Matemáticas', en: 'Mathematics', ar: 'الرياضيات' })}</span>
                         <h1 id="fraction-v2-unit-title" style={{ '--hero-letters': Math.max(...unitTitle.split(/\s+/).map((word) => word.length)) } as CSSProperties}>{unitTitle}</h1>
                         <p>{l(unit.tagline)}</p>
                         <div className="fraction-v2-hero-actions">
                             <button type="button" className="fraction-v2-primary" onClick={() => diagnosticPending ? navigate('diagnostic') : openTopic(recommendedTopic.id)}>
                                 {diagnosticPending
-                                    ? l({ eu: 'Hasi diagnostikoarekin', es: 'Empezar con el diagnóstico', ar: 'ابدأ بالتشخيص' })
+                                    ? l({ eu: 'Hasi diagnostikoarekin', es: 'Empezar con el diagnóstico', en: 'Start with the diagnostic', ar: 'ابدأ بالتشخيص' })
                                     : hasStarted
-                                        ? l({ eu: 'Jarraitu hurrengo urratsarekin', es: 'Seguir con el siguiente paso', ar: 'تابع إلى الخطوة التالية' })
-                                        : l({ eu: 'Hasi lehen ikasgaiarekin', es: 'Empezar la primera lección', ar: 'ابدأ الدرس الأول' })}
+                                        ? l({ eu: 'Jarraitu hurrengo urratsarekin', es: 'Seguir con el siguiente paso', en: 'Continue with the next step', ar: 'تابع إلى الخطوة التالية' })
+                                        : l({ eu: 'Hasi lehen ikasgaiarekin', es: 'Empezar la primera lección', en: 'Start the first lesson', ar: 'ابدأ الدرس الأول' })}
                                 <Icon name="arrow" size={18} strokeWidth={2.4} className="fraction-v2-icon-flip" />
                             </button>
                             {unit.lab && (
                                 <button type="button" className="fraction-v2-secondary" onClick={() => navigate('lab')}>
-                                    {l({ eu: 'Ireki laborategia', es: 'Abrir el laboratorio', ar: 'افتح المختبر' })}
+                                    {l({ eu: 'Ireki laborategia', es: 'Abrir el laboratorio', en: 'Open the lab', ar: 'افتح المختبر' })}
                                 </button>
                             )}
                         </div>
                         {diagnosticPending && (
-                            <p className="fraction-v2-hero-note">{l({ eu: `${diagnosticCount} galdera, notarik gabe. Nondik hastea komeni zaizun esango dizugu.`, es: `${diagnosticCount} preguntas, sin nota. Te diremos por dónde te conviene empezar.`, ar: `${diagnosticCount} أسئلة بلا علامة. سنقترح عليك من أين تبدأ.` })}</p>
+                            <p className="fraction-v2-hero-note">{l({ eu: `${diagnosticCount} galdera, notarik gabe. Nondik hastea komeni zaizun esango dizugu.`, es: `${diagnosticCount} preguntas, sin nota. Te diremos por dónde te conviene empezar.`, en: `${diagnosticCount} questions, not graded. We'll tell you where it's best to start.`, ar: `${diagnosticCount} أسئلة بلا علامة. سنقترح عليك من أين تبدأ.` })}</p>
                         )}
                     </div>
                     {unit.heroArt}
                 </section>
 
-                <section className="fraction-v2-continue" aria-label={l({ eu: 'Zure aurrerapena', es: 'Tu progreso', ar: 'تقدمك' })}>
+                <section className="fraction-v2-continue" aria-label={l({ eu: 'Zure aurrerapena', es: 'Tu progreso', en: 'Your progress', ar: 'تقدمك' })}>
                     <div className="fraction-v2-ring" style={{ '--progress': `${progress}%` } as CSSProperties} role="img" aria-label={`${progress}%`}>
                         <span>{progress}%</span>
                     </div>
                     <div className="fraction-v2-continue-text">
                         <span>{hasStarted
-                            ? l({ eu: 'Jarraitu utzi zenuen lekutik', es: 'Continúa donde lo dejaste', ar: 'تابع من حيث توقفت' })
-                            : l({ eu: 'Hasi hemendik', es: 'Empieza por aquí', ar: 'ابدأ من هنا' })}</span>
-                        <strong>{l({ eu: 'Ikasgaia', es: 'Lección', ar: 'الدرس' })} {recommendedIndex + 1} · {l(recommendedTopic.title)}</strong>
+                            ? l({ eu: 'Jarraitu utzi zenuen lekutik', es: 'Continúa donde lo dejaste', en: 'Continue where you left off', ar: 'تابع من حيث توقفت' })
+                            : l({ eu: 'Hasi hemendik', es: 'Empieza por aquí', en: 'Start here', ar: 'ابدأ من هنا' })}</span>
+                        <strong>{l({ eu: 'Ikasgaia', es: 'Lección', en: 'Lesson', ar: 'الدرس' })} {recommendedIndex + 1} · {l(recommendedTopic.title)}</strong>
                     </div>
-                    <span className="fraction-v2-chip" data-stage={recommendedTopic.stage} data-tone={recommendedTone}>{l({ eu: `${recommendedStageIndex + 1}. etapa`, es: `Etapa ${recommendedStageIndex + 1}`, ar: `المرحلة ${recommendedStageIndex + 1}` })}</span>
+                    <span className="fraction-v2-chip" data-stage={recommendedTopic.stage} data-tone={recommendedTone}>{l({ eu: `${recommendedStageIndex + 1}. etapa`, es: `Etapa ${recommendedStageIndex + 1}`, en: `Stage ${recommendedStageIndex + 1}`, ar: `المرحلة ${recommendedStageIndex + 1}` })}</span>
                     <button type="button" className="fraction-v2-stage-button" data-stage={recommendedTopic.stage} data-tone={recommendedTone} onClick={() => openTopic(recommendedTopic.id)}>
-                        {hasStarted ? l({ eu: 'Jarraitu', es: 'Continuar', ar: 'تابع' }) : l({ eu: 'Hasi', es: 'Empezar', ar: 'ابدأ' })}
+                        {hasStarted ? l({ eu: 'Jarraitu', es: 'Continuar', en: 'Continue', ar: 'تابع' }) : l({ eu: 'Hasi', es: 'Empezar', en: 'Start', ar: 'ابدأ' })}
                     </button>
                 </section>
 
                 <section className="fraction-v2-overview" aria-labelledby="fraction-v2-path-title">
                     <div className="fraction-v2-section-heading">
-                        <h2 id="fraction-v2-path-title">{l({ eu: 'Zure ibilbidea', es: 'Tu ruta', ar: 'مسارك' })}</h2>
+                        <h2 id="fraction-v2-path-title">{l({ eu: 'Zure ibilbidea', es: 'Tu ruta', en: 'Your path', ar: 'مسارك' })}</h2>
                         <p>{l(unit.pathSubtitle)}</p>
                     </div>
                     <ol className="fraction-v2-path-grid" style={{ '--stages': unit.stages.length } as CSSProperties}>
@@ -337,9 +337,9 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                                             <span className="fraction-v2-meter"><span style={{ width: `${(learnedCount / stageTopics.length) * 100}%` }} /></span>
                                         )}
                                         <small>{complete
-                                            ? `${l({ eu: 'Osatuta', es: 'Completada', ar: 'مكتملة' })} · ${lessonsLabel(stageTopics.length)}`
+                                            ? `${l({ eu: 'Osatuta', es: 'Completada', en: 'Completed', ar: 'مكتملة' })} · ${lessonsLabel(stageTopics.length)}`
                                             : current
-                                                ? `${l({ eu: 'Martxan', es: 'En curso', ar: 'قيد التقدم' })} · ${learnedCount} / ${stageTopics.length}`
+                                                ? `${l({ eu: 'Martxan', es: 'En curso', en: 'In progress', ar: 'قيد التقدم' })} · ${learnedCount} / ${stageTopics.length}`
                                                 : lessonsLabel(stageTopics.length)}</small>
                                     </button>
                                 </li>
@@ -351,7 +351,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                 {tools.length > 0 && (
                     <section className="fraction-v2-tools" aria-labelledby="fraction-v2-tools-title">
                         <div className="fraction-v2-section-heading">
-                            <h2 id="fraction-v2-tools-title">{l({ eu: 'Ikasteko beste modu batzuk', es: 'Más formas de aprender', ar: 'طرق أخرى للتعلّم' })}</h2>
+                            <h2 id="fraction-v2-tools-title">{l({ eu: 'Ikasteko beste modu batzuk', es: 'Más formas de aprender', en: 'More ways to learn', ar: 'طرق أخرى للتعلّم' })}</h2>
                         </div>
                         <div className="fraction-v2-tools-grid">
                             {tools.map((tool) => (
@@ -366,12 +366,12 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                 )}
 
                 <div className="fraction-v2-route-footer">
-                    <nav aria-label={l({ eu: 'Informazio legala', es: 'Información legal', ar: 'معلومات قانونية' })}>
+                    <nav aria-label={l({ eu: 'Informazio legala', es: 'Información legal', en: 'Legal information', ar: 'معلومات قانونية' })}>
                         <Link to="/accesibilidad">{t('footer.accessibility')}</Link>
                         <Link to="/privacidad">{t('footer.privacy')}</Link>
                         <Link to="/creditos">{t('footer.credits')}</Link>
                     </nav>
-                    <button type="button" onClick={resetAllProgress}>{l({ eu: 'Aurrerapena berrezarri', es: 'Reiniciar el progreso', ar: 'إعادة ضبط التقدم' })}</button>
+                    <button type="button" onClick={resetAllProgress}>{l({ eu: 'Aurrerapena berrezarri', es: 'Reiniciar el progreso', en: 'Reset progress', ar: 'إعادة ضبط التقدم' })}</button>
                 </div>
             </div>
         )
@@ -389,7 +389,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
 
         return (
             <section className="fraction-v2-learning">
-                <nav className="fraction-v2-lesson-index" aria-label={l({ eu: 'Ikasgaiak', es: 'Lecciones', ar: 'الدروس' })}>
+                <nav className="fraction-v2-lesson-index" aria-label={l({ eu: 'Ikasgaiak', es: 'Lecciones', en: 'Lessons', ar: 'الدروس' })}>
                     {unit.stages.map((stage, stageIndex) => (
                         <div className="fraction-v2-lesson-group" data-stage={stage.id} data-tone={stage.tone} key={stage.id}>
                             <span className="fraction-v2-lesson-group-title"><span aria-hidden="true" />{stageIndex + 1} · {l(stage.title)}</span>
@@ -410,7 +410,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                 </nav>
 
                 <label className="fraction-v2-lesson-jump" data-stage={currentTopic.stage} data-tone={currentTone}>
-                    <span>{l({ eu: 'Joan ikasgaira', es: 'Ir a la lección', ar: 'انتقل إلى الدرس' })}</span>
+                    <span>{l({ eu: 'Joan ikasgaira', es: 'Ir a la lección', en: 'Go to lesson', ar: 'انتقل إلى الدرس' })}</span>
                     <select value={currentTopic.id} onChange={(event) => selectTopic(event.target.value)}>
                         {unit.stages.map((stage, stageIndex) => (
                             <optgroup label={`${stageIndex + 1} · ${l(stage.title)}`} key={stage.id}>
@@ -426,15 +426,15 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
 
                 <article className="fraction-v2-lesson" data-stage={currentTopic.stage} data-tone={currentTone} aria-labelledby="fraction-v2-lesson-title">
                     <div className="fraction-v2-lesson-meta">
-                        <span className="fraction-v2-chip" data-stage={currentTopic.stage} data-tone={currentTone}>{l({ eu: `${currentStageIndex + 1}. etapa`, es: `Etapa ${currentStageIndex + 1}`, ar: `المرحلة ${currentStageIndex + 1}` })} · {l(unit.stages[currentStageIndex].title)}</span>
-                        <span>{l({ eu: `${currentIndex + 1}. ikasgaia / ${unit.topics.length}`, es: `Lección ${currentIndex + 1} de ${unit.topics.length}`, ar: `الدرس ${currentIndex + 1} من ${unit.topics.length}` })}</span>
+                        <span className="fraction-v2-chip" data-stage={currentTopic.stage} data-tone={currentTone}>{l({ eu: `${currentStageIndex + 1}. etapa`, es: `Etapa ${currentStageIndex + 1}`, en: `Stage ${currentStageIndex + 1}`, ar: `المرحلة ${currentStageIndex + 1}` })} · {l(unit.stages[currentStageIndex].title)}</span>
+                        <span>{l({ eu: `${currentIndex + 1}. ikasgaia / ${unit.topics.length}`, es: `Lección ${currentIndex + 1} de ${unit.topics.length}`, en: `Lesson ${currentIndex + 1} of ${unit.topics.length}`, ar: `الدرس ${currentIndex + 1} من ${unit.topics.length}` })}</span>
                     </div>
                     <h1 id="fraction-v2-lesson-title">{l(currentTopic.title)}</h1>
-                    <p className="fraction-v2-lesson-goal"><strong>{l({ eu: 'Helburua:', es: 'Objetivo:', ar: 'الهدف:' })}</strong> <MathText text={l(currentTopic.goal)} /></p>
+                    <p className="fraction-v2-lesson-goal"><strong>{l({ eu: 'Helburua:', es: 'Objetivo:', en: 'Goal:', ar: 'الهدف:' })}</strong> <MathText text={l(currentTopic.goal)} /></p>
                     <p className="fraction-v2-lesson-body"><MathText text={l(currentTopic.explanation)} /></p>
                     {currentTopic.problem && (
                         <div className="fraction-v2-lesson-problem">
-                            <span>{l({ eu: 'Ebatz dezagun', es: 'Vamos a resolver', ar: 'لنحلّ' })}</span>
+                            <span>{l({ eu: 'Ebatz dezagun', es: 'Vamos a resolver', en: 'Let\'s solve', ar: 'لنحلّ' })}</span>
                             <p><MathText text={l(currentTopic.problem)} /></p>
                         </div>
                     )}
@@ -459,7 +459,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                     <aside className="fraction-v2-takeaway">
                         <span className="fraction-v2-takeaway-icon"><Icon name="bulb" size={22} /></span>
                         <div>
-                            <span>{l({ eu: 'Ideia nagusia', es: 'Idea clave', ar: 'الفكرة الأساسية' })}</span>
+                            <span>{l({ eu: 'Ideia nagusia', es: 'Idea clave', en: 'Key idea', ar: 'الفكرة الأساسية' })}</span>
                             <p><MathText text={l(currentTopic.takeaway)} /></p>
                         </div>
                     </aside>
@@ -467,23 +467,23 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                         <button type="button" className={`fraction-v2-primary ${isLearned ? 'done' : ''}`} onClick={() => learned.addId(currentTopic.id)} disabled={isLearned}>
                             {isLearned && <Icon name="check" size={18} strokeWidth={3} />}
                             {isLearned
-                                ? l({ eu: 'Ulertuta', es: 'Entendido', ar: 'تم الفهم' })
-                                : l({ eu: 'Ulertu dut', es: 'Lo he entendido', ar: 'فهمت' })}
+                                ? l({ eu: 'Ulertuta', es: 'Entendido', en: 'Got it', ar: 'تم الفهم' })
+                                : l({ eu: 'Ulertu dut', es: 'Lo he entendido', en: 'I understand', ar: 'فهمت' })}
                         </button>
                         {sections.includes('practice') && (
                             <button type="button" className="fraction-v2-secondary" onClick={() => { setLastTopicId(currentTopic.id); navigate('practice', currentTopic.id) }}>
-                                {l({ eu: 'Praktikatu', es: 'Practicar', ar: 'تدرّب' })}
+                                {l({ eu: 'Praktikatu', es: 'Practicar', en: 'Practice', ar: 'تدرّب' })}
                             </button>
                         )}
                         {labToolId && (
                             <button type="button" className="fraction-v2-secondary" onClick={() => { setLastTopicId(currentTopic.id); navigate('lab', labToolId) }}>
                                 <Icon name="lab" size={18} />
-                                {l({ eu: 'Esperimentatu laborategian', es: 'Experimentar en el laboratorio', ar: 'جرّب في المختبر' })}
+                                {l({ eu: 'Esperimentatu laborategian', es: 'Experimentar en el laboratorio', en: 'Experiment in the lab', ar: 'جرّب في المختبر' })}
                             </button>
                         )}
                         {nextTopic && (
                             <button type="button" className="fraction-v2-next" data-stage={nextTopic.stage} data-tone={stageOf(nextTopic.stage).tone} onClick={() => selectTopic(nextTopic.id)}>
-                                <span>{l({ eu: 'Hurrengoa:', es: 'Siguiente:', ar: 'التالي:' })} {l(nextTopic.title)}</span>
+                                <span>{l({ eu: 'Hurrengoa:', es: 'Siguiente:', en: 'Next:', ar: 'التالي:' })} {l(nextTopic.title)}</span>
                                 <Icon name="arrow" size={18} strokeWidth={2.4} className="fraction-v2-icon-flip" />
                             </button>
                         )}

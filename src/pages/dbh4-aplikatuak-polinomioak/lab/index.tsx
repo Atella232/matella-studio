@@ -33,7 +33,7 @@ export function PolynomialsLaboratory(props: {
             tools={polynomialsLabTools}
             stages={polynomialsStages}
             components={toolComponents}
-            title={{ eu: 'Bider a eta batu', es: 'Por a y suma', ar: 'في a ثم اجمع' }}
+            title={{ eu: 'Bider a eta batu', es: 'Por a y suma', en: 'Multiply by a and add', ar: 'في a ثم اجمع' }}
         />
     )
 }

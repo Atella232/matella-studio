@@ -4,6 +4,7 @@ import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/Lab
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { numberLatex, signed } from '../../dbh2-funtzioak-v2/functions'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import { Plane, PlaneLine, PlanePath, PlanePoint } from '../../dbh2-funtzioak-v2/plane'
 import type { PlaneMap } from '../../dbh2-funtzioak-v2/planeMap'
 import { hyperbolaBranches, sampled } from '../../dbh4-aplikatuak-grafikoa/functions'
@@ -71,8 +72,8 @@ const decimal = (language: string, value: number) => {
 }
 /** Keeps a short formula left to right inside Arabic text */
 const ltr = (text: string) => `\u2066${text}\u2069`
-/** Halves written as 0,5 on the steppers */
-const half = (language: string) => (value: number) => signed(Math.round(value * 100) / 100).replace('.', language === 'ar' ? '.' : ',')
+/** Halves written as 0,5 on the steppers (0.5 in English) */
+const half = (language: string) => (value: number) => signed(Math.round(value * 100) / 100).replace('.', language === 'ar' ? '.' : decimalSeparatorFor(language))
 
 /** "+ 3x", "− x", "" … one term of a polynomial written in LaTeX */
 function term(language: string, value: number, variable: string, first = false) {
@@ -107,8 +108,8 @@ export function FitTool(props: LabToolProps) {
     const controls = (
         <>
             <Stepper label="a" value={a} min={-FIT_A_LIMIT} max={FIT_A_LIMIT} step={0.5} format={half(props.language)} onChange={(value) => setState((s) => setFit(s, { a: value }))} language={props.language} />
-            <Stepper label={l({ eu: 'Lehen erroa', es: 'Primera raíz', ar: 'الجذر الأول' })} value={r} min={-FIT_ROOT_LIMIT} max={FIT_ROOT_LIMIT} format={signed} onChange={(value) => setState((s) => setFit(s, { r: value }))} language={props.language} />
-            <Stepper label={l({ eu: 'Bigarren erroa', es: 'Segunda raíz', ar: 'الجذر الثاني' })} value={t} min={-FIT_ROOT_LIMIT} max={FIT_ROOT_LIMIT} format={signed} onChange={(value) => setState((s) => setFit(s, { t: value }))} language={props.language} />
+            <Stepper label={l({ eu: 'Lehen erroa', es: 'Primera raíz', en: 'First root', ar: 'الجذر الأول' })} value={r} min={-FIT_ROOT_LIMIT} max={FIT_ROOT_LIMIT} format={signed} onChange={(value) => setState((s) => setFit(s, { r: value }))} language={props.language} />
+            <Stepper label={l({ eu: 'Bigarren erroa', es: 'Segunda raíz', en: 'Second root', ar: 'الجذر الثاني' })} value={t} min={-FIT_ROOT_LIMIT} max={FIT_ROOT_LIMIT} format={signed} onChange={(value) => setState((s) => setFit(s, { t: value }))} language={props.language} />
         </>
     )
     const readout = (
@@ -118,7 +119,7 @@ export function FitTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-note">
                 <MathText text={`$V(${latex(props.language, vx)},\\,${latex(props.language, vy)})$`} />
                 {' · '}
-                <MathText text={l({ eu: `Y ardatza: $(0,\\,${latex(props.language, expanded.c)})$`, es: `Eje Y: $(0,\\,${latex(props.language, expanded.c)})$`, ar: `محور Y: $(0,\\,${latex(props.language, expanded.c)})$` })} />
+                <MathText text={l({ eu: `Y ardatza: $(0,\\,${latex(props.language, expanded.c)})$`, es: `Eje Y: $(0,\\,${latex(props.language, expanded.c)})$`, en: `Y-axis: $(0,\\,${latex(props.language, expanded.c)})$`, ar: `محور Y: $(0,\\,${latex(props.language, expanded.c)})$` })} />
             </span>
         </>
     )
@@ -152,9 +153,9 @@ export function SecantTool(props: LabToolProps) {
     const line = `y=${polynomial(props.language, 0, m, n)}`
     const equation = `x^{2}${term(props.language, -m, 'x')}${term(props.language, -(n + 1), '')}=0`
     const names = {
-        secant: l({ eu: 'Ebakitzailea: 2 puntu', es: 'Secante: 2 puntos', ar: 'قاطع: نقطتان' }),
-        tangent: l({ eu: 'Ukitzailea: puntu 1', es: 'Tangente: 1 punto', ar: 'مماس: نقطة واحدة' }),
-        exterior: l({ eu: 'Kanpokoa: ez dute elkar ebakitzen', es: 'Exterior: no se cortan', ar: 'خارجي: لا يتقاطعان' })
+        secant: l({ eu: 'Ebakitzailea: 2 puntu', es: 'Secante: 2 puntos', en: 'Secant: 2 points', ar: 'قاطع: نقطتان' }),
+        tangent: l({ eu: 'Ukitzailea: puntu 1', es: 'Tangente: 1 punto', en: 'Tangent: 1 point', ar: 'مماس: نقطة واحدة' }),
+        exterior: l({ eu: 'Kanpokoa: ez dute elkar ebakitzen', es: 'Exterior: no se cortan', en: 'Outside: they don\'t intersect', ar: 'خارجي: لا يتقاطعان' })
     }
     const controls = (
         <>
@@ -200,7 +201,7 @@ export function AbsoluteTool(props: LabToolProps) {
     ]
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Barrukoa', es: 'Lo de dentro', ar: 'ما بالداخل' })} value={state.kind} options={kinds} onChange={(kind) => setState((s) => setAbsolute(s, { kind }))} />
+            <Segmented label={l({ eu: 'Barrukoa', es: 'Lo de dentro', en: 'Inside', ar: 'ما بالداخل' })} value={state.kind} options={kinds} onChange={(kind) => setState((s) => setAbsolute(s, { kind }))} />
             {state.kind === 'line'
                 ? (
                     <>
@@ -220,15 +221,15 @@ export function AbsoluteTool(props: LabToolProps) {
     const [fx, fy] = foldedVertex(state)
     const folds = state.kind === 'parabola' && zeros.length === 2
     const note = state.kind === 'line'
-        ? l({ eu: `Erpina: $x=${zerosText}$`, es: `Pico: $x=${zerosText}$`, ar: `الرأس: $x=${zerosText}$` })
+        ? l({ eu: `Erpina: $x=${zerosText}$`, es: `Pico: $x=${zerosText}$`, en: `Vertex: $x=${zerosText}$`, ar: `الرأس: $x=${zerosText}$` })
         : zeros.length === 0
-            ? l({ eu: 'Ez dago ezer islatzeko', es: 'No hay nada que reflejar', ar: 'لا شيء يُعكس' })
-            : l({ eu: `X ardatza: $x=${zerosText}$`, es: `Eje X: $x=${zerosText}$`, ar: `محور X: $x=${zerosText}$` })
+            ? l({ eu: 'Ez dago ezer islatzeko', es: 'No hay nada que reflejar', en: 'There is nothing to reflect.', ar: 'لا شيء يُعكس' })
+            : l({ eu: `X ardatza: $x=${zerosText}$`, es: `Eje X: $x=${zerosText}$`, en: `X-axis: $x=${zerosText}$`, ar: `محور X: $x=${zerosText}$` })
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${formula}$`} /></span>
             <span className="fraction-v2-lab-readout-note"><MathText text={note} /></span>
-            {folds && <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `Maximo erlatiboa: $(${decimal(props.language, fx)},\\,${decimal(props.language, fy)})$`, es: `Máximo relativo: $(${decimal(props.language, fx)},\\,${decimal(props.language, fy)})$`, ar: `عظمى نسبية: $(${decimal(props.language, fx)},\\,${decimal(props.language, fy)})$` })} /></span>}
+            {folds && <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `Maximo erlatiboa: $(${decimal(props.language, fx)},\\,${decimal(props.language, fy)})$`, es: `Máximo relativo: $(${decimal(props.language, fx)},\\,${decimal(props.language, fy)})$`, en: `Relative maximum: $(${decimal(props.language, fx)},\\,${decimal(props.language, fy)})$`, ar: `عظمى نسبية: $(${decimal(props.language, fx)},\\,${decimal(props.language, fy)})$` })} /></span>}
         </>
     )
     const box = { xMin: -6, xMax: 6, yMin: -5, yMax: 8 }
@@ -272,10 +273,10 @@ export function RationalTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${divided}$`} /></span>
             <span className="fraction-v2-lab-readout-note">
                 {k === 0
-                    ? <MathText text={l({ eu: `$k=0$: zuzen bat, $x=${-d}$ puntuan zuloa duena`, es: `$k=0$: una recta con un agujero en $x=${-d}$`, ar: `$k=0$: مستقيم فيه ثقب عند $x=${-d}$` })} />
-                    : <MathText text={l({ eu: `Asintotak: $x=${-d}$ eta $y=${a}$`, es: `Asíntotas: $x=${-d}$ e $y=${a}$`, ar: `المقاربان: $x=${-d}$ و$y=${a}$` })} />}
+                    ? <MathText text={l({ eu: `$k=0$: zuzen bat, $x=${-d}$ puntuan zuloa duena`, es: `$k=0$: una recta con un agujero en $x=${-d}$`, en: `$k=0$: a straight line with a hole at $x=${-d}$`, ar: `$k=0$: مستقيم فيه ثقب عند $x=${-d}$` })} />
+                    : <MathText text={l({ eu: `Asintotak: $x=${-d}$ eta $y=${a}$`, es: `Asíntotas: $x=${-d}$ e $y=${a}$`, en: `Asymptotes: $x=${-d}$ and $y=${a}$`, ar: `المقاربان: $x=${-d}$ و$y=${a}$` })} />}
             </span>
-            {zero !== null && <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `X ardatza: $x=${latex(props.language, zero)}$`, es: `Eje X: $x=${latex(props.language, zero)}$`, ar: `محور X: $x=${latex(props.language, zero)}$` })} /></span>}
+            {zero !== null && <span className="fraction-v2-lab-readout-note"><MathText text={l({ eu: `X ardatza: $x=${latex(props.language, zero)}$`, es: `Eje X: $x=${latex(props.language, zero)}$`, en: `X-axis: $x=${latex(props.language, zero)}$`, ar: `محور X: $x=${latex(props.language, zero)}$` })} /></span>}
         </>
     )
     const box = { xMin: -6, xMax: 6, yMin: -6, yMax: 6 }

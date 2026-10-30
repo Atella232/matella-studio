@@ -76,12 +76,12 @@ export function ExpansionGame({ language, records, onResult, onExit }: GameProps
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => (record.timeMs === null ? '' : `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${formatTime(record.timeMs)}`)}
+                bestLabel={(record) => (record.timeMs === null ? '' : `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${formatTime(record.timeMs)}`)}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: `${EXPANSIONS_PER_ROUND} biderkadura. Idatzi eskatzen den zenbakia (x-ren koefizientea edo gai askea) eta sakatu Enter.`, es: `${EXPANSIONS_PER_ROUND} productos. Escribe el número que se pide (coeficiente de x o término independiente) y pulsa Intro.`, ar: `${EXPANSIONS_PER_ROUND} جداءات. اكتب العدد المطلوب (معامل x أو الحد الثابت) واضغط إدخال.` })}</li>
-                        <li>{l({ eu: `Erantzun oker bakoitzak +${EXPANSION_PENALTY_MS / 1000} s gehitzen ditu.`, es: `Cada respuesta equivocada suma +${EXPANSION_PENALTY_MS / 1000} s.`, ar: `كل إجابة خاطئة تضيف ${EXPANSION_PENALTY_MS / 1000} ث.` })}</li>
-                        <li>{l({ eu: '(x + a)(x + b): x-ren koefizientea a + b, gai askea a · b.', es: '(x + a)(x + b): coeficiente de x, a + b; término independiente, a · b.', ar: '(x + a)(x + b): معامل x هو a + b والحد الثابت a · b.' })}</li>
+                        <li>{l({ eu: `${EXPANSIONS_PER_ROUND} biderkadura. Idatzi eskatzen den zenbakia (x-ren koefizientea edo gai askea) eta sakatu Enter.`, es: `${EXPANSIONS_PER_ROUND} productos. Escribe el número que se pide (coeficiente de x o término independiente) y pulsa Intro.`, en: `${EXPANSIONS_PER_ROUND} products. Write the number asked for (the coefficient of x or the constant term) and press Enter.`, ar: `${EXPANSIONS_PER_ROUND} جداءات. اكتب العدد المطلوب (معامل x أو الحد الثابت) واضغط إدخال.` })}</li>
+                        <li>{l({ eu: `Erantzun oker bakoitzak +${EXPANSION_PENALTY_MS / 1000} s gehitzen ditu.`, es: `Cada respuesta equivocada suma +${EXPANSION_PENALTY_MS / 1000} s.`, en: `Each wrong answer adds +${EXPANSION_PENALTY_MS / 1000} s.`, ar: `كل إجابة خاطئة تضيف ${EXPANSION_PENALTY_MS / 1000} ث.` })}</li>
+                        <li>{l({ eu: '(x + a)(x + b): x-ren koefizientea a + b, gai askea a · b.', es: '(x + a)(x + b): coeficiente de x, a + b; término independiente, a · b.', en: '(x + a)(x + b): coefficient of x, a + b; constant term, a · b.', ar: '(x + a)(x + b): معامل x هو a + b والحد الثابت a · b.' })}</li>
                     </ul>
                 )}
             />
@@ -97,7 +97,7 @@ export function ExpansionGame({ language, records, onResult, onExit }: GameProps
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span>{Math.min(index + 1, EXPANSIONS_PER_ROUND)} / {EXPANSIONS_PER_ROUND}</span>
                 <span>{formatTime(total)}</span>
-                <span>{l({ eu: 'Akatsak', es: 'Fallos', ar: 'الأخطاء' })}: {mistakes}</span>
+                <span>{l({ eu: 'Akatsak', es: 'Fallos', en: 'Mistakes', ar: 'الأخطاء' })}: {mistakes}</span>
             </GameTopbar>
 
             {phase === 'playing' && item && (
@@ -107,9 +107,9 @@ export function ExpansionGame({ language, records, onResult, onExit }: GameProps
                         <span>{l(expansionAskText[item.ask])} =</span>
                         <input value={answer} onChange={(event) => { setAnswer(event.target.value); setWrong(false) }} inputMode="text" autoFocus aria-invalid={wrong} dir="ltr" />
                     </label>
-                    <button type="submit" className="fraction-v2-primary">{l({ eu: 'Egiaztatu', es: 'Comprobar', ar: 'تحقّق' })}</button>
+                    <button type="submit" className="fraction-v2-primary">{l({ eu: 'Egiaztatu', es: 'Comprobar', en: 'Check', ar: 'تحقّق' })}</button>
                     <div aria-live="polite">
-                        {wrong && <div className="fraction-v2-feedback error">{l({ eu: `Ez da hori. Gogoratu: bikoitza bider biderkadura. +${EXPANSION_PENALTY_MS / 1000} s`, es: `No es eso. Recuerda: el doble del producto. +${EXPANSION_PENALTY_MS / 1000} s`, ar: `ليس هذا. تذكّر: ضعف الجداء. +${EXPANSION_PENALTY_MS / 1000} ث` })}</div>}
+                        {wrong && <div className="fraction-v2-feedback error">{l({ eu: `Ez da hori. Gogoratu: bikoitza bider biderkadura. +${EXPANSION_PENALTY_MS / 1000} s`, es: `No es eso. Recuerda: el doble del producto. +${EXPANSION_PENALTY_MS / 1000} s`, en: `That is not it. Remember: twice the product. +${EXPANSION_PENALTY_MS / 1000} s`, ar: `ليس هذا. تذكّر: ضعف الجداء. +${EXPANSION_PENALTY_MS / 1000} ث` })}</div>}
                     </div>
                 </form>
             )}
@@ -118,11 +118,11 @@ export function ExpansionGame({ language, records, onResult, onExit }: GameProps
                 <ResultPanel
                     language={language}
                     stars={expansionStars(level, total, mistakes)}
-                    title={l({ eu: 'Garapen guztiak eginda!', es: '¡Todos desarrollados!', ar: 'تم نشر الكل!' })}
-                    subtitle={l({ eu: `3 izar: ${formatTime(par * 0.8)} baino gutxiago eta akats bat gehienez · 2 izar: ${formatTime(par)} baino gutxiago`, es: `3 estrellas: menos de ${formatTime(par * 0.8)} y como mucho un fallo · 2: menos de ${formatTime(par)}`, ar: `3 نجوم: أقل من ${formatTime(par * 0.8)} وخطأ واحد على الأكثر · 2: أقل من ${formatTime(par)}` })}
+                    title={l({ eu: 'Garapen guztiak eginda!', es: '¡Todos desarrollados!', en: 'All expanded!', ar: 'تم نشر الكل!' })}
+                    subtitle={l({ eu: `3 izar: ${formatTime(par * 0.8)} baino gutxiago eta akats bat gehienez · 2 izar: ${formatTime(par)} baino gutxiago`, es: `3 estrellas: menos de ${formatTime(par * 0.8)} y como mucho un fallo · 2: menos de ${formatTime(par)}`, en: `3 stars: under ${formatTime(par * 0.8)} and at most one mistake · 2: under ${formatTime(par)}`, ar: `3 نجوم: أقل من ${formatTime(par * 0.8)} وخطأ واحد على الأكثر · 2: أقل من ${formatTime(par)}` })}
                     stats={[
-                        { label: l({ eu: 'Denbora', es: 'Tiempo', ar: 'الوقت' }), value: formatTime(total) },
-                        { label: l({ eu: 'Akatsak', es: 'Fallos', ar: 'الأخطاء' }), value: String(mistakes) }
+                        { label: l({ eu: 'Denbora', es: 'Tiempo', en: 'Time', ar: 'الوقت' }), value: formatTime(total) },
+                        { label: l({ eu: 'Akatsak', es: 'Fallos', en: 'Mistakes', ar: 'الأخطاء' }), value: String(mistakes) }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}

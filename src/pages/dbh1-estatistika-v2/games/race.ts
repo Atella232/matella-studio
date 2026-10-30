@@ -29,8 +29,8 @@ export type StatisticsRaceError =
 
 export type StatisticsRaceQuestion = RaceQuestion<StatisticsRaceError>
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
-const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, ar: latex.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
+const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, en: latex, ar: latex.replace(/\{,\}/g, '.') })
 
 /** A value as the options show it: an exact decimal with a comma, or a fraction when it does not end */
 export function written(value: FractionValue): string {
@@ -84,19 +84,19 @@ function frequencyQuestion(random: Random, tier: Tier): StatisticsRaceQuestion |
         const answer = size - sum
         const choices = options(random, whole(answer), [{ value: whole(sum), error: 'calculation' }, { value: whole(size + sum), error: 'calculation' }, ...near(whole(answer), whole(1))])
         if (!choices) return null
-        return question(0, kind, say(`N = ${size}. Maiztasun absolutuak ${list(parts)} eta x dira. Zenbat da x?`, `N = ${size}. Las frecuencias absolutas son ${list(parts)} y x. ¿Cuánto vale x?`, `N = ${size}. التكرارات المطلقة ${listAr(parts)} وx. كم x؟`), choices, whole(answer), same(`$${size}-${parts.join('-')}=${answer}$`))
+        return question(0, kind, say(`N = ${size}. Maiztasun absolutuak ${list(parts)} eta x dira. Zenbat da x?`, `N = ${size}. Las frecuencias absolutas son ${list(parts)} y x. ¿Cuánto vale x?`, `N = ${size}. التكرارات المطلقة ${listAr(parts)} وx. كم x؟`, `N = ${size}. The absolute frequencies are ${list(parts)} and x. What is the value of x?`), choices, whole(answer), same(`$${size}-${parts.join('-')}=${answer}$`))
     }
     const f = randomInt(random, 1, n - 1)
     const h = fraction(f, n)
     if (kind === 'relative') {
         const choices = options(random, h, [{ value: fraction(n, f), error: 'inverted' }, { value: fraction(f * 100, n), error: 'not-percent' }, { value: fraction(f, 100), error: 'calculation' }, ...near(h, fraction(1, 10))])
         if (!choices) return null
-        return question(0, kind, say(`${n} datutatik ${f} «bai» dira. Zein da maiztasun erlatiboa?`, `De ${n} datos, ${f} son «sí». ¿Cuál es la frecuencia relativa?`, `من ${n} قيمة، ${f} منها «نعم». ما التكرار النسبي؟`), choices, h, same(`$\\frac{${f}}{${n}}=${written(h)}$`))
+        return question(0, kind, say(`${n} datutatik ${f} «bai» dira. Zein da maiztasun erlatiboa?`, `De ${n} datos, ${f} son «sí». ¿Cuál es la frecuencia relativa?`, `من ${n} قيمة، ${f} منها «نعم». ما التكرار النسبي؟`, `Out of ${n} data values, ${f} are “yes”. What is the relative frequency?`), choices, h, same(`$\\frac{${f}}{${n}}=${written(h)}$`))
     }
     const percent = fraction(f * 100, n)
     const choices = options(random, percent, [{ value: h, error: 'not-percent' }, { value: whole(f), error: 'absolute' }, { value: fraction(n * 100, f), error: 'inverted' }, ...near(percent, whole(5))])
     if (!choices) return null
-    return question(0, kind, say(`${n} ikasletatik ${f}k bizikletaz etortzen dira. Zer ehuneko da?`, `De ${n} alumnos, ${f} vienen en bici. ¿Qué porcentaje es?`, `من ${n} تلميذًا يأتي ${f} بالدراجة. ما النسبة المئوية؟`), choices, percent, same(`$\\frac{${f}}{${n}}\\cdot 100=${written(percent)}$`))
+    return question(0, kind, say(`${n} ikasletatik ${f}k bizikletaz etortzen dira. Zer ehuneko da?`, `De ${n} alumnos, ${f} vienen en bici. ¿Qué porcentaje es?`, `من ${n} تلميذًا يأتي ${f} بالدراجة. ما النسبة المئوية؟`, `Out of ${n} students, ${f} come by bike. What percentage is that?`), choices, percent, same(`$\\frac{${f}}{${n}}\\cdot 100=${written(percent)}$`))
 }
 
 /* ---------- Circuit 1: pie charts ---------- */
@@ -108,11 +108,11 @@ function pieQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | null 
     if (tier === 2 && random() < 0.5) {
         const choices = options(random, whole(f), [{ value: whole(degrees), error: 'calculation' }, { value: whole(360 / n), error: 'per-datum' }, { value: fraction(n * degrees, 100), error: 'percent-degrees' }, ...near(whole(f), whole(1))])
         if (!choices) return null
-        return question(1, 'count', say(`${n} datuko sektore-diagrama batean sektore batek ${degrees}° ditu. Zenbat datu dira?`, `En un diagrama de sectores de ${n} datos, un sector mide ${degrees}°. ¿Cuántos datos son?`, `في مخطط دائري لـ ${n} قيمة قطاع قياسه ${degrees}°. كم قيمة؟`), choices, whole(f), same(`$${degrees}\\mathbin{:}${360 / n}=${f}$`))
+        return question(1, 'count', say(`${n} datuko sektore-diagrama batean sektore batek ${degrees}° ditu. Zenbat datu dira?`, `En un diagrama de sectores de ${n} datos, un sector mide ${degrees}°. ¿Cuántos datos son?`, `في مخطط دائري لـ ${n} قيمة قطاع قياسه ${degrees}°. كم قيمة؟`, `In a pie chart of ${n} data values, one sector measures ${degrees}°. How many data values does it represent?`), choices, whole(f), same(`$${degrees}\\mathbin{:}${360 / n}=${f}$`))
     }
     const choices = options(random, whole(degrees), [{ value: whole(f), error: 'absolute' }, { value: fraction(100 * f, n), error: 'percent-degrees' }, { value: whole(360 / n), error: 'per-datum' }, ...near(whole(degrees), whole(360 / n))])
     if (!choices) return null
-    return question(1, 'angle', say(`${n} ikasletatik ${f}k igeriketa nahiago dute. Zenbat gradu ditu sektoreak?`, `De ${n} alumnos, ${f} prefieren la natación. ¿Cuántos grados mide su sector?`, `من ${n} تلميذًا يفضّل ${f} السباحة. كم درجة قطاعها؟`), choices, whole(degrees), same(`$\\frac{${f}}{${n}}\\cdot 360=${degrees}$`))
+    return question(1, 'angle', say(`${n} ikasletatik ${f}k igeriketa nahiago dute. Zenbat gradu ditu sektoreak?`, `De ${n} alumnos, ${f} prefieren la natación. ¿Cuántos grados mide su sector?`, `من ${n} تلميذًا يفضّل ${f} السباحة. كم درجة قطاعها؟`, `Out of ${n} students, ${f} prefer swimming. How many degrees does the swimming sector measure?`), choices, whole(degrees), same(`$\\frac{${f}}{${n}}\\cdot 360=${degrees}$`))
 }
 
 /* ---------- Circuit 2: the mean ---------- */
@@ -127,7 +127,7 @@ function meanQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | null
     const median = count % 2 === 1 ? whole(ordered[(count - 1) / 2]) : fraction(ordered[count / 2 - 1] + ordered[count / 2], 2)
     const choices = options(random, mean, [{ value: whole(sum), error: 'no-divide' }, { value: fraction(sum, count - 1), error: 'wrong-count' }, { value: median, error: 'mixed-parameter' }, ...near(mean, whole(1))])
     if (!choices) return null
-    return question(2, 'mean', say(`Zein da ${list(values)} datuen batez bestekoa?`, `¿Cuál es la media de ${list(values)}?`, `ما متوسط ${listAr(values)}؟`), choices, mean, same(`$\\frac{${values.join('+')}}{${count}}=${written(mean)}$`))
+    return question(2, 'mean', say(`Zein da ${list(values)} datuen batez bestekoa?`, `¿Cuál es la media de ${list(values)}?`, `ما متوسط ${listAr(values)}؟`, `What is the mean of ${list(values)}?`), choices, mean, same(`$\\frac{${values.join('+')}}{${count}}=${written(mean)}$`))
 }
 
 /* ---------- Circuit 3: median, mode and range ---------- */
@@ -153,37 +153,37 @@ function positionQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | 
     const mean = fraction(values.reduce((total, value) => total + value, 0), n)
     const max = ordered[n - 1]
     const min = ordered[0]
-    const data = say(list(values), list(values), listAr(values))
+    const data = say(list(values), list(values), listAr(values), list(values))
     if (kind === 'median') {
         const choices = options(random, median, [{ value: unsortedMiddle, error: 'not-sorted' }, { value: mean, error: 'mixed-parameter' }, { value: whole(max - min), error: 'mixed-parameter' }, ...near(median, whole(1))])
         if (!choices) return null
-        return question(3, kind, say(`Zein da mediana? ${data.eu}`, `¿Cuál es la mediana? ${data.es}`, `ما الوسيط؟ ${data.ar}`), choices, median, say(`Ordenatuta: ${list(ordered)} → Me = ${written(median).replace('{,}', ',')}`, `Ordenados: ${list(ordered)} → Me = ${written(median).replace('{,}', ',')}`, `بعد الترتيب: ${listAr(ordered)} ← Me = ${written(median).replace('{,}', '.')}`))
+        return question(3, kind, say(`Zein da mediana? ${data.eu}`, `¿Cuál es la mediana? ${data.es}`, `ما الوسيط؟ ${data.ar}`, `What is the median? ${data.en}`), choices, median, say(`Ordenatuta: ${list(ordered)} → Me = ${written(median).replace('{,}', ',')}`, `Ordenados: ${list(ordered)} → Me = ${written(median).replace('{,}', ',')}`, `بعد الترتيب: ${listAr(ordered)} ← Me = ${written(median).replace('{,}', '.')}`, `In order: ${list(ordered)} → Median = ${written(median).replace('{,}', '.')}`))
     }
     if (kind === 'mode') {
         if (modes.length !== 1) return null
         const mode = whole(modes[0])
         const choices = options(random, mode, [{ value: whole(most), error: 'absolute' }, { value: median, error: 'mixed-parameter' }, { value: whole(max), error: 'calculation' }, ...near(mode, whole(1))])
         if (!choices) return null
-        return question(3, kind, say(`Zein da moda? ${data.eu}`, `¿Cuál es la moda? ${data.es}`, `ما المنوال؟ ${data.ar}`), choices, mode, say(`${modes[0]} ${most} aldiz agertzen da → Mo = ${modes[0]}`, `El ${modes[0]} aparece ${most} veces → Mo = ${modes[0]}`, `${modes[0]} يظهر ${most} مرات ← Mo = ${modes[0]}`))
+        return question(3, kind, say(`Zein da moda? ${data.eu}`, `¿Cuál es la moda? ${data.es}`, `ما المنوال؟ ${data.ar}`, `What is the mode? ${data.en}`), choices, mode, say(`${modes[0]} ${most} aldiz agertzen da → Mo = ${modes[0]}`, `El ${modes[0]} aparece ${most} veces → Mo = ${modes[0]}`, `${modes[0]} يظهر ${most} مرات ← Mo = ${modes[0]}`, `The ${modes[0]} appears ${most} times → Mode = ${modes[0]}`))
     }
     const range = max - min
     if (range === 0) return null
     const choices = options(random, whole(range), [{ value: whole(max), error: 'calculation' }, { value: whole(values[n - 1] - values[0]), error: 'not-sorted' }, { value: whole(max + min), error: 'calculation' }, ...near(whole(range), whole(1))])
     if (!choices) return null
-    return question(3, kind, say(`Zein da ibiltartea? ${data.eu}`, `¿Cuál es el rango? ${data.es}`, `ما المدى؟ ${data.ar}`), choices, whole(range), same(`$${max}-${min}=${range}$`))
+    return question(3, kind, say(`Zein da ibiltartea? ${data.eu}`, `¿Cuál es el rango? ${data.es}`, `ما المدى؟ ${data.ar}`, `What is the range? ${data.en}`), choices, whole(range), same(`$${max}-${min}=${range}$`))
 }
 
 /* ---------- Circuit 4: probability ---------- */
 
 const dieEvents: Array<{ faces: number[]; name: LocalizedText }> = [
-    { faces: [2, 4, 6], name: say('zenbaki bikoitia', 'un número par', 'عدد زوجي') },
-    { faces: [1, 3, 5], name: say('zenbaki bakoitia', 'un número impar', 'عدد فردي') },
-    { faces: [6], name: say('6 bat', 'un 6', 'العدد 6') },
-    { faces: [3, 6], name: say('3ren multiplo bat', 'un múltiplo de 3', 'مضاعفًا لـ 3') },
-    { faces: [5, 6], name: say('4 baino gehiago', 'más de 4', 'أكثر من 4') },
-    { faces: [1, 2, 3, 4], name: say('5 baino gutxiago', 'menos de 5', 'أقل من 5') },
-    { faces: [2, 3, 5], name: say('zenbaki lehen bat', 'un número primo', 'عددًا أوليًا') },
-    { faces: [1, 2, 3, 4, 5], name: say('6 ez den zenbaki bat', 'un número que no sea 6', 'عددًا غير 6') }
+    { faces: [2, 4, 6], name: say('zenbaki bikoitia', 'un número par', 'عدد زوجي', 'an even number') },
+    { faces: [1, 3, 5], name: say('zenbaki bakoitia', 'un número impar', 'عدد فردي', 'an odd number') },
+    { faces: [6], name: say('6 bat', 'un 6', 'العدد 6', 'a 6') },
+    { faces: [3, 6], name: say('3ren multiplo bat', 'un múltiplo de 3', 'مضاعفًا لـ 3', 'a multiple of 3') },
+    { faces: [5, 6], name: say('4 baino gehiago', 'más de 4', 'أكثر من 4', 'more than 4') },
+    { faces: [1, 2, 3, 4], name: say('5 baino gutxiago', 'menos de 5', 'أقل من 5', 'less than 5') },
+    { faces: [2, 3, 5], name: say('zenbaki lehen bat', 'un número primo', 'عددًا أوليًا', 'a prime number') },
+    { faces: [1, 2, 3, 4, 5], name: say('6 ez den zenbaki bat', 'un número que no sea 6', 'عددًا غير 6', 'a number that is not 6') }
 ]
 
 function probabilityQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | null {
@@ -194,7 +194,7 @@ function probabilityQuestion(random: Random, tier: Tier): StatisticsRaceQuestion
         const event = pick(random, dieEvents)
         favourable = event.faces.length
         possible = 6
-        prompt = say(`Dado bat jaurtitzen da. Zein da ${event.name.eu} ateratzeko probabilitatea?`, `Se lanza un dado. ¿Cuál es la probabilidad de sacar ${event.name.es}?`, `يُرمى نرد. ما احتمال الحصول على ${event.name.ar}؟`)
+        prompt = say(`Dado bat jaurtitzen da. Zein da ${event.name.eu} ateratzeko probabilitatea?`, `Se lanza un dado. ¿Cuál es la probabilidad de sacar ${event.name.es}?`, `يُرمى نرد. ما احتمال الحصول على ${event.name.ar}؟`, `You roll a die. What is the probability of rolling ${event.name.en}?`)
     } else {
         const red = randomInt(random, 1, 9)
         const blue = randomInt(random, 1, 9)
@@ -202,9 +202,9 @@ function probabilityQuestion(random: Random, tier: Tier): StatisticsRaceQuestion
         favourable = red
         possible = red + blue + green
         const bag = green > 0
-            ? say(`${red} bola gorri, ${blue} urdin eta ${green} berde`, `${red} bolas rojas, ${blue} azules y ${green} verdes`, `${red} كرات حمراء و${blue} زرقاء و${green} خضراء`)
-            : say(`${red} bola gorri eta ${blue} urdin`, `${red} bolas rojas y ${blue} azules`, `${red} كرات حمراء و${blue} زرقاء`)
-        prompt = say(`Poltsa batean ${bag.eu} daude. Zein da gorri bat ateratzeko probabilitatea?`, `En una bolsa hay ${bag.es}. ¿Cuál es la probabilidad de sacar una roja?`, `في كيس ${bag.ar}. ما احتمال سحب كرة حمراء؟`)
+            ? say(`${red} bola gorri, ${blue} urdin eta ${green} berde`, `${red} bolas rojas, ${blue} azules y ${green} verdes`, `${red} كرات حمراء و${blue} زرقاء و${green} خضراء`, `${red} red, ${blue} blue and ${green} green balls`)
+            : say(`${red} bola gorri eta ${blue} urdin`, `${red} bolas rojas y ${blue} azules`, `${red} كرات حمراء و${blue} زرقاء`, `${red} red balls and ${blue} blue`)
+        prompt = say(`Poltsa batean ${bag.eu} daude. Zein da gorri bat ateratzeko probabilitatea?`, `En una bolsa hay ${bag.es}. ¿Cuál es la probabilidad de sacar una roja?`, `في كيس ${bag.ar}. ما احتمال سحب كرة حمراء؟`, `A bag contains ${bag.en}. What is the probability of drawing a red one?`)
     }
     const answer = fraction(favourable, possible)
     const unfavourable = possible - favourable
@@ -245,16 +245,16 @@ export function statisticsParTime(circuit: number): number {
 }
 
 export const statisticsRaceErrorTips: Record<StatisticsRaceError, LocalizedText> = {
-    inverted: say('Zatikia buruz behera dago: goian zatia (fᵢ edo aldekoak), behean osoa (N edo posibleak).', 'La fracción está al revés: arriba la parte (fᵢ o favorables), abajo el total (N o posibles).', 'الكسر مقلوب: في الأعلى الجزء (fᵢ أو الملائمة) وفي الأسفل الكل (N أو الممكنة).'),
-    'not-percent': say('Maiztasun erlatiboa eta ehunekoa ez dira gauza bera: ehunekoa lortzeko, bider 100.', 'La frecuencia relativa y el porcentaje no son lo mismo: para el porcentaje, por 100.', 'التكرار النسبي والنسبة المئوية ليسا الشيء نفسه: للنسبة المئوية اضرب في 100.'),
-    absolute: say('Hori maiztasun absolutua da (zenbat aldiz), ez eskatzen dena.', 'Eso es la frecuencia absoluta (cuántas veces), no lo que se pide.', 'هذا هو التكرار المطلق (كم مرة)، وليس المطلوب.'),
-    'per-datum': say('Hori datu bakar baten graduak dira (360° : N); biderkatu maiztasunaz.', 'Esos son los grados de un solo dato (360° : N); multiplica por la frecuencia.', 'هذه درجات قيمة واحدة (360° : N)؛ اضرب في التكرار.'),
-    'percent-degrees': say('Sektore-diagraman 360° erabiltzen dira, ez 100.', 'En el diagrama de sectores se usan 360°, no 100.', 'في المخطط الدائري نستعمل 360° لا 100.'),
-    'no-divide': say('Batu ondoren, zatitu datu kopuruaz.', 'Después de sumar, divide entre el número de datos.', 'بعد الجمع اقسم على عدد البيانات.'),
-    'wrong-count': say('Zenbatu ondo zenbat datu dauden.', 'Cuenta bien cuántos datos hay.', 'عُدّ جيدًا كم قيمة هناك.'),
-    'not-sorted': say('Lehenik ordenatu datuak txikienetik handienera.', 'Primero ordena los datos de menor a mayor.', 'رتّب البيانات أولًا تصاعديًا.'),
-    'mixed-parameter': say('Ez nahastu: batez bestekoa (batu eta zatitu), mediana (erdikoa), moda (gehien errepikatzen dena), ibiltartea (handiena − txikiena).', 'No los confundas: media (sumar y dividir), mediana (el del centro), moda (el que más se repite), rango (mayor − menor).', 'لا تخلط: المتوسط (اجمع واقسم)، الوسيط (الأوسط)، المنوال (الأكثر تكرارًا)، المدى (الأكبر − الأصغر).'),
-    unfavourable: say('Behean kasu posible guztiak, ez aurkakoak bakarrik.', 'Abajo van todos los casos posibles, no solo los contrarios.', 'في الأسفل كل الحالات الممكنة، لا المخالفة فقط.'),
-    complement: say('Hori kontrako gertaeraren probabilitatea da.', 'Esa es la probabilidad del suceso contrario.', 'هذا احتمال الحدث المعاكس.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    inverted: say('Zatikia buruz behera dago: goian zatia (fᵢ edo aldekoak), behean osoa (N edo posibleak).', 'La fracción está al revés: arriba la parte (fᵢ o favorables), abajo el total (N o posibles).', 'الكسر مقلوب: في الأعلى الجزء (fᵢ أو الملائمة) وفي الأسفل الكل (N أو الممكنة).', 'The fraction is the wrong way round: the part (fᵢ or favourable) goes on top, the total (N or possible outcomes) on the bottom.'),
+    'not-percent': say('Maiztasun erlatiboa eta ehunekoa ez dira gauza bera: ehunekoa lortzeko, bider 100.', 'La frecuencia relativa y el porcentaje no son lo mismo: para el porcentaje, por 100.', 'التكرار النسبي والنسبة المئوية ليسا الشيء نفسه: للنسبة المئوية اضرب في 100.', 'Relative frequency and percentage are not the same: for the percentage, multiply by 100.'),
+    absolute: say('Hori maiztasun absolutua da (zenbat aldiz), ez eskatzen dena.', 'Eso es la frecuencia absoluta (cuántas veces), no lo que se pide.', 'هذا هو التكرار المطلق (كم مرة)، وليس المطلوب.', 'That is the absolute frequency (how many times), not what is asked for.'),
+    'per-datum': say('Hori datu bakar baten graduak dira (360° : N); biderkatu maiztasunaz.', 'Esos son los grados de un solo dato (360° : N); multiplica por la frecuencia.', 'هذه درجات قيمة واحدة (360° : N)؛ اضرب في التكرار.', 'That is the number of degrees for one data value (360° : N); multiply by the frequency.'),
+    'percent-degrees': say('Sektore-diagraman 360° erabiltzen dira, ez 100.', 'En el diagrama de sectores se usan 360°, no 100.', 'في المخطط الدائري نستعمل 360° لا 100.', 'A pie chart uses 360°, not 100.'),
+    'no-divide': say('Batu ondoren, zatitu datu kopuruaz.', 'Después de sumar, divide entre el número de datos.', 'بعد الجمع اقسم على عدد البيانات.', 'After adding, divide by the number of data values.'),
+    'wrong-count': say('Zenbatu ondo zenbat datu dauden.', 'Cuenta bien cuántos datos hay.', 'عُدّ جيدًا كم قيمة هناك.', 'Count carefully how many data values there are.'),
+    'not-sorted': say('Lehenik ordenatu datuak txikienetik handienera.', 'Primero ordena los datos de menor a mayor.', 'رتّب البيانات أولًا تصاعديًا.', 'First put the data values in order, from smallest to largest.'),
+    'mixed-parameter': say('Ez nahastu: batez bestekoa (batu eta zatitu), mediana (erdikoa), moda (gehien errepikatzen dena), ibiltartea (handiena − txikiena).', 'No los confundas: media (sumar y dividir), mediana (el del centro), moda (el que más se repite), rango (mayor − menor).', 'لا تخلط: المتوسط (اجمع واقسم)، الوسيط (الأوسط)، المنوال (الأكثر تكرارًا)، المدى (الأكبر − الأصغر).', 'Do not mix them up: mean (add and divide), median (the middle one), mode (the most frequent one), range (largest − smallest).'),
+    unfavourable: say('Behean kasu posible guztiak, ez aurkakoak bakarrik.', 'Abajo van todos los casos posibles, no solo los contrarios.', 'في الأسفل كل الحالات الممكنة، لا المخالفة فقط.', 'The bottom is all the possible outcomes, not just the unfavourable ones.'),
+    complement: say('Hori kontrako gertaeraren probabilitatea da.', 'Esa es la probabilidad del suceso contrario.', 'هذا احتمال الحدث المعاكس.', 'That is the probability of the complementary event.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

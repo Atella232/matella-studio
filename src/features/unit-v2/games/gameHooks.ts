@@ -45,5 +45,8 @@ export function nowMs(): number {
     return Date.now()
 }
 
-/** Option and card formulas are shared by the three languages: Arabic writes the decimal point instead of the comma */
+/**
+ * Option and card formulas are shared by every language: Arabic writes the decimal point instead of the comma here.
+ * English is converted once, by MathText, when it renders the formula.
+ */
 export const localLatex = (latex: string, language: string) => (language === 'ar' ? latex.replace(/\{,\}/g, '.') : latex)

@@ -31,8 +31,8 @@ export type DecimalsRaceError =
 export type DecimalsRaceQuestion = RaceQuestion<DecimalsRaceError>
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, ar: latex.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, en: latex, ar: latex.replace(/\{,\}/g, '.') })
 const math = (latex: string) => `$${latex}$`
 
 /** units / 10^places as an exact fraction */
@@ -82,11 +82,11 @@ const nudges = (value: FractionValue, places: number): Candidate[] => [1, -1, 10
 /* ---------- Circuit 0: place value ---------- */
 
 const placeNames = [
-    { power: 1, eu: 'hamarrekoak', es: 'decenas', ar: 'العشرات' },
-    { power: 0, eu: 'unitateak', es: 'unidades', ar: 'الآحاد' },
-    { power: -1, eu: 'hamarrenak', es: 'décimas', ar: 'الأعشار' },
-    { power: -2, eu: 'ehunenak', es: 'centésimas', ar: 'الأجزاء من مئة' },
-    { power: -3, eu: 'milarenak', es: 'milésimas', ar: 'الأجزاء من ألف' }
+    { power: 1, eu: 'hamarrekoak', es: 'decenas', en: 'tens', ar: 'العشرات' },
+    { power: 0, eu: 'unitateak', es: 'unidades', en: 'units', ar: 'الآحاد' },
+    { power: -1, eu: 'hamarrenak', es: 'décimas', en: 'tenths', ar: 'الأعشار' },
+    { power: -2, eu: 'ehunenak', es: 'centésimas', en: 'hundredths', ar: 'الأجزاء من مئة' },
+    { power: -3, eu: 'milarenak', es: 'milésimas', en: 'thousandths', ar: 'الأجزاء من ألف' }
 ]
 
 const tenPower = (power: number) => (power >= 0 ? fraction(10 ** power) : fraction(1, 10 ** -power))
@@ -103,7 +103,7 @@ function digitValueQuestion(random: Random, tier: Tier): DecimalsRaceQuestion | 
     const choices = options(random, answer, shuffle(random, [power + 1, power - 1, power + 2, power - 2]).map((wrong) => ({ value: multiply(fraction(digit), tenPower(wrong)), error: 'place' as const })))
     if (!choices) return null
     const place = placeNames.find((item) => item.power === power)!
-    return question(0, 'digit-value', say(`Zenbat balio du ${digit} zifrak ${math(written(number))} zenbakian?`, `¿Cuánto vale la cifra ${digit} en ${math(written(number))}?`, `كم قيمة الرقم ${digit} في ${math(written(number))}؟`), choices, answer, say(`${place.eu}: ${math(`${digit}\\cdot ${written(tenPower(power))}=${written(answer)}`)}`, `${place.es}: ${math(`${digit}\\cdot ${written(tenPower(power))}=${written(answer)}`)}`, `${place.ar}: ${math(`${digit}\\cdot ${written(tenPower(power))}=${written(answer)}`)}`))
+    return question(0, 'digit-value', say(`Zenbat balio du ${digit} zifrak ${math(written(number))} zenbakian?`, `¿Cuánto vale la cifra ${digit} en ${math(written(number))}?`, `كم قيمة الرقم ${digit} في ${math(written(number))}؟`, `What is the value of the digit ${digit} in ${math(written(number))}?`), choices, answer, say(`${place.eu}: ${math(`${digit}\\cdot ${written(tenPower(power))}=${written(answer)}`)}`, `${place.es}: ${math(`${digit}\\cdot ${written(tenPower(power))}=${written(answer)}`)}`, `${place.ar}: ${math(`${digit}\\cdot ${written(tenPower(power))}=${written(answer)}`)}`, `${place.en}: ${math(`${digit}\\cdot ${written(tenPower(power))}=${written(answer)}`)}`))
 }
 
 function composeQuestion(random: Random, tier: Tier): DecimalsRaceQuestion | null {
@@ -122,11 +122,11 @@ function composeQuestion(random: Random, tier: Tier): DecimalsRaceQuestion | nul
     ])
     if (!choices) return null
     const sum = parts.map((part) => written(multiply(fraction(part.digit), tenPower(part.power)))).join('+')
-    return question(0, 'compose', say(`Zein zenbaki da ${math(sum)}?`, `¿Qué número es ${math(sum)}?`, `ما العدد ${math(sum)}؟`), choices, value, same(math(`${sum}=${written(value)}`)))
+    return question(0, 'compose', say(`Zein zenbaki da ${math(sum)}?`, `¿Qué número es ${math(sum)}?`, `ما العدد ${math(sum)}؟`, `What number is ${math(sum)}?`), choices, value, same(math(`${sum}=${written(value)}`)))
 }
 
 function convertQuestion(random: Random, tier: Tier): DecimalsRaceQuestion | null {
-    const target = [{ power: -1, eu: 'hamarren', es: 'décimas', ar: 'عُشرًا' }, { power: -2, eu: 'ehunen', es: 'centésimas', ar: 'جزءًا من مئة' }, { power: -3, eu: 'milaren', es: 'milésimas', ar: 'جزءًا من ألف' }][tier]
+    const target = [{ power: -1, eu: 'hamarren', es: 'décimas', en: 'tenths', ar: 'عُشرًا' }, { power: -2, eu: 'ehunen', es: 'centésimas', en: 'hundredths', ar: 'جزءًا من مئة' }, { power: -3, eu: 'milaren', es: 'milésimas', en: 'thousandths', ar: 'جزءًا من ألف' }][tier]
     const places = randomInt(random, 1, -target.power)
     const units = randomInt(random, 1, places === 1 ? 9 : 99)
     if (units % 10 === 0) return null
@@ -134,7 +134,7 @@ function convertQuestion(random: Random, tier: Tier): DecimalsRaceQuestion | nul
     const answer = divide(value, tenPower(target.power))
     const choices = options(random, answer, [10, 1 / 10, 100, 1 / 100].map((factor) => ({ value: multiply(answer, factor >= 1 ? fraction(factor) : fraction(1, 1 / factor)), error: 'place' as const })))
     if (!choices) return null
-    return question(0, 'convert', say(`Zenbat ${target.eu} dira ${math(written(value))}?`, `¿Cuántas ${target.es} son ${math(written(value))}?`, `كم ${target.ar} في ${math(written(value))}؟`), choices, answer, same(math(`${written(value)}\\cdot ${written(tenPower(-target.power))}=${written(answer)}`)))
+    return question(0, 'convert', say(`Zenbat ${target.eu} dira ${math(written(value))}?`, `¿Cuántas ${target.es} son ${math(written(value))}?`, `كم ${target.ar} في ${math(written(value))}؟`, `How many ${target.en} are ${math(written(value))}?`), choices, answer, same(math(`${written(value)}\\cdot ${written(tenPower(-target.power))}=${written(answer)}`)))
 }
 
 /* ---------- Circuit 1: order ---------- */
@@ -151,7 +151,7 @@ function extremeQuestion(random: Random, tier: Tier): DecimalsRaceQuestion | nul
     const answer = largest ? sorted[3] : sorted[0]
     const choices = shuffle(random, values.map((value) => ({ latex: written(value), correct: value === answer, error: value === answer ? null : (largest ? placesOf(value) > placesOf(answer) : placesOf(value) < placesOf(answer)) ? 'more-digits' as const : 'calculation' as const })))
     const chain = sorted.map(written).join('<')
-    return question(1, largest ? 'largest' : 'smallest', largest ? say('Zein da handiena?', '¿Cuál es el mayor?', 'أيها الأكبر؟') : say('Zein da txikiena?', '¿Cuál es el menor?', 'أيها الأصغر؟'), choices, answer, same(math(chain)), false)
+    return question(1, largest ? 'largest' : 'smallest', largest ? say('Zein da handiena?', '¿Cuál es el mayor?', 'أيها الأكبر؟', 'Which is the largest?') : say('Zein da txikiena?', '¿Cuál es el menor?', 'أيها الأصغر؟', 'Which is the smallest?'), choices, answer, same(math(chain)), false)
 }
 
 function betweenQuestion(random: Random, tier: Tier): DecimalsRaceQuestion | null {
@@ -166,7 +166,7 @@ function betweenQuestion(random: Random, tier: Tier): DecimalsRaceQuestion | nul
     const swapped = dec((low + 1) * 100 + randomInt(random, 1, 99), places + 2)
     const choices = options(random, answer, shuffle(random, [{ value: below, error: 'outside' }, { value: above, error: 'outside' }, { value: farther, error: 'outside' }, { value: swapped, error: 'more-digits' }]))
     if (!choices) return null
-    return question(1, 'between', say(`Zein zenbaki dago ${math(written(a))} eta ${math(written(b))} artean?`, `¿Qué número está entre ${math(written(a))} y ${math(written(b))}?`, `أي عدد يقع بين ${math(written(a))} و${math(written(b))}؟`), choices, answer, same(math(`${written(a)}<${written(answer)}<${written(b)}`)), false)
+    return question(1, 'between', say(`Zein zenbaki dago ${math(written(a))} eta ${math(written(b))} artean?`, `¿Qué número está entre ${math(written(a))} y ${math(written(b))}?`, `أي عدد يقع بين ${math(written(a))} و${math(written(b))}؟`, `What number is between ${math(written(a))} and ${math(written(b))}?`), choices, answer, same(math(`${written(a)}<${written(answer)}<${written(b)}`)), false)
 }
 
 function midpointQuestion(random: Random, tier: Tier): DecimalsRaceQuestion | null {
@@ -178,7 +178,7 @@ function midpointQuestion(random: Random, tier: Tier): DecimalsRaceQuestion | nu
     const answer = divide(add(a, b), fraction(2))
     const choices = options(random, answer, [{ value: add(a, b), error: 'calculation' }, { value: subtract(b, a), error: 'calculation' }, { value: divide(subtract(b, a), fraction(2)), error: 'calculation' }, ...nudges(answer, placesOf(answer))])
     if (!choices) return null
-    return question(1, 'midpoint', say(`Zein zenbaki dago ${math(written(a))} eta ${math(written(b))} zenbakien erdi-erdian?`, `¿Qué número está justo en medio de ${math(written(a))} y ${math(written(b))}?`, `ما العدد الواقع في منتصف ${math(written(a))} و${math(written(b))} تمامًا؟`), choices, answer, same(math(`(${written(a)}+${written(b)})\\mathbin{:}2=${written(answer)}`)))
+    return question(1, 'midpoint', say(`Zein zenbaki dago ${math(written(a))} eta ${math(written(b))} zenbakien erdi-erdian?`, `¿Qué número está justo en medio de ${math(written(a))} y ${math(written(b))}?`, `ما العدد الواقع في منتصف ${math(written(a))} و${math(written(b))} تمامًا؟`, `What number is exactly halfway between ${math(written(a))} and ${math(written(b))}?`), choices, answer, same(math(`(${written(a)}+${written(b)})\\mathbin{:}2=${written(answer)}`)))
 }
 
 /* ---------- Circuit 2: fractions and rounding ---------- */
@@ -201,7 +201,7 @@ function toFractionQuestion(random: Random, tier: Tier): DecimalsRaceQuestion | 
     if (wrongs.length < 3) wrongs.push({ latex: `\\frac{${10 ** places}}{${units}}`, error: 'calculation' })
     const choices = shuffle(random, [{ latex: right, correct: true, error: null as DecimalsRaceError | null }, ...wrongs.slice(0, 3).map((item) => ({ latex: item.latex, correct: false, error: item.error }))])
     if (new Set(choices.map((choice) => choice.latex)).size < 4) return null
-    return question(2, 'to-fraction', say(`Zein zatiki hamartar da ${math(written(value))}?`, `¿Qué fracción decimal es ${math(written(value))}?`, `ما الكسر العشري المساوي لـ ${math(written(value))}؟`), choices, value, same(math(`${written(value)}=${right}`)), false)
+    return question(2, 'to-fraction', say(`Zein zatiki hamartar da ${math(written(value))}?`, `¿Qué fracción decimal es ${math(written(value))}?`, `ما الكسر العشري المساوي لـ ${math(written(value))}؟`, `What decimal fraction is ${math(written(value))}?`), choices, value, same(math(`${written(value)}=${right}`)), false)
 }
 
 const terminatingDenominators = [[2, 4, 5, 10], [4, 5, 8, 20, 25], [8, 16, 20, 25, 40, 50]]
@@ -220,7 +220,7 @@ function toDecimalQuestion(random: Random, tier: Tier): DecimalsRaceQuestion | n
         { value: divide(value, fraction(10)), error: 'place' }
     ] as Candidate[]).filter((candidate) => toExactDecimal(candidate.value) !== null && placesOf(candidate.value) <= 4))
     if (!choices) return null
-    return question(2, 'to-decimal', say(`Idatzi hamartar gisa: ${math(fractionLatex(value))}`, `Escribe como decimal: ${math(fractionLatex(value))}`, `اكتب عددًا عشريًا: ${math(fractionLatex(value))}`), choices, value, same(math(`${numerator}\\mathbin{:}${denominator}=${written(value)}`)))
+    return question(2, 'to-decimal', say(`Idatzi hamartar gisa: ${math(fractionLatex(value))}`, `Escribe como decimal: ${math(fractionLatex(value))}`, `اكتب عددًا عشريًا: ${math(fractionLatex(value))}`, `Write as a decimal: ${math(fractionLatex(value))}`), choices, value, same(math(`${numerator}\\mathbin{:}${denominator}=${written(value)}`)))
 }
 
 function roundQuestion(random: Random, tier: Tier): DecimalsRaceQuestion | null {
@@ -254,8 +254,8 @@ function roundQuestion(random: Random, tier: Tier): DecimalsRaceQuestion | null 
     const wrong = candidates.filter((item) => valueOfShown(item.latex) !== valueOfShown(right) && !seen.has(item.latex) && seen.add(item.latex)).slice(0, 3)
     if (wrong.length < 3) return null
     const choices = shuffle(random, [{ latex: right, correct: true, error: null as DecimalsRaceError | null }, ...wrong.map((item) => ({ latex: item.latex, correct: false, error: item.error }))])
-    const placeName = to === 1 ? say('hamarrenetara', 'a las décimas', 'إلى الأعشار') : say('ehunenetara', 'a las centésimas', 'إلى الأجزاء من مئة')
-    return question(2, 'round', say(`Biribildu ${math(written(value))} ${placeName.eu}.`, `Redondea ${math(written(value))} ${placeName.es}.`, `قرّب ${math(written(value))} ${placeName.ar}.`), choices, answer, same(math(`${written(value)}\\approx ${right}`)))
+    const placeName = to === 1 ? say('hamarrenetara', 'a las décimas', 'إلى الأعشار', 'to the tenths') : say('ehunenetara', 'a las centésimas', 'إلى الأجزاء من مئة', 'to the hundredths')
+    return question(2, 'round', say(`Biribildu ${math(written(value))} ${placeName.eu}.`, `Redondea ${math(written(value))} ${placeName.es}.`, `قرّب ${math(written(value))} ${placeName.ar}.`, `Round ${math(written(value))} ${placeName.en}.`), choices, answer, same(math(`${written(value)}\\approx ${right}`)))
 }
 
 /* ---------- Circuit 3: add, subtract and multiply ---------- */
@@ -355,7 +355,7 @@ function problemQuestion(random: Random, tier: Tier): DecimalsRaceQuestion | nul
         if (placesOf(answer) > 2) return null
         const choices = options(random, answer, [{ value: add(price, weight), error: 'calculation' }, { value: multiply(answer, fraction(10)), error: 'comma-count' }, { value: divide(answer, fraction(10)), error: 'comma-count' }, ...nudges(answer, 2)])
         if (!choices) return null
-        return question(4, 'price', say(`Kiloa ${math(written(price))} €. Zenbat balio dute ${math(written(weight))} kg-k?`, `El kilo cuesta ${math(written(price))} €. ¿Cuánto cuestan ${math(written(weight))} kg?`, `سعر الكيلو ${math(written(price))} €. كم ثمن ${math(written(weight))} كغ؟`), choices, answer, same(math(`${written(price)}\\cdot ${written(weight)}=${written(answer)}`)))
+        return question(4, 'price', say(`Kiloa ${math(written(price))} €. Zenbat balio dute ${math(written(weight))} kg-k?`, `El kilo cuesta ${math(written(price))} €. ¿Cuánto cuestan ${math(written(weight))} kg?`, `سعر الكيلو ${math(written(price))} €. كم ثمن ${math(written(weight))} كغ؟`, `A kilo costs €${math(written(price))}. How much do ${math(written(weight))} kg cost?`), choices, answer, same(math(`${written(price)}\\cdot ${written(weight)}=${written(answer)}`)))
     }
     // Sharing a bill equally
     const friends = randomInt(random, 2, tier === 0 ? 4 : 8)
@@ -363,7 +363,7 @@ function problemQuestion(random: Random, tier: Tier): DecimalsRaceQuestion | nul
     const total = multiply(share, fraction(friends))
     const choices = options(random, share, [{ value: subtract(total, fraction(friends)), error: 'calculation' }, { value: multiply(share, fraction(10)), error: 'place' }, { value: divide(share, fraction(10)), error: 'place' }, ...nudges(share, 2)])
     if (!choices) return null
-    return question(4, 'share', say(`${friends} lagunek ${math(written(total))} € ordaindu dituzte, denek berdin. Zenbat bakoitzak?`, `${friends} amigos pagan ${math(written(total))} € a partes iguales. ¿Cuánto paga cada uno?`, `دفع ${friends} أصدقاء ${math(written(total))} € بالتساوي. كم دفع كل واحد؟`), choices, share, same(math(`${written(total)}\\mathbin{:}${friends}=${written(share)}`)))
+    return question(4, 'share', say(`${friends} lagunek ${math(written(total))} € ordaindu dituzte, denek berdin. Zenbat bakoitzak?`, `${friends} amigos pagan ${math(written(total))} € a partes iguales. ¿Cuánto paga cada uno?`, `دفع ${friends} أصدقاء ${math(written(total))} € بالتساوي. كم دفع كل واحد؟`, `${friends} friends split €${math(written(total))} equally. How much does each one pay?`), choices, share, same(math(`${written(total)}\\mathbin{:}${friends}=${written(share)}`)))
 }
 
 /* ---------- Public API ---------- */
@@ -396,15 +396,15 @@ export function decimalsParTime(circuit: number): number {
 }
 
 export const decimalsRaceErrorTips: Record<DecimalsRaceError, LocalizedText> = {
-    place: say('Begiratu zifraren tokia: komaren ondoren hamarrenak, ehunenak eta milarenak datoz, ordena horretan.', 'Mira el lugar de la cifra: tras la coma vienen décimas, centésimas y milésimas, en ese orden.', 'انظر إلى منزلة الرقم: بعد الفاصلة الأعشار ثم الأجزاء من مئة ثم الأجزاء من ألف.'),
-    'more-digits': say('Zifra gehiago izateak ez du handiago egiten: idatzi denak zifra hamartar kopuru berarekin eta konparatu.', 'Tener más cifras no lo hace mayor: escríbelos con las mismas cifras decimales y compara.', 'كثرة الأرقام لا تجعله أكبر: اكتبها بالعدد نفسه من الأرقام العشرية ثم قارن.'),
-    outside: say('Zenbaki hori tartetik kanpo dago: gehitu zero bat bi muturrei eta aukeratu bien artekoa.', 'Ese número queda fuera del tramo: añade un cero a los extremos y elige uno entre ellos.', 'هذا العدد خارج القطعة: أضف صفرًا إلى الطرفين واختر عددًا بينهما.'),
-    'fraction-digits': say('Zifra hamartar bakoitzeko, zero bat izendatzailean: $0{,}47=\\frac{47}{100}$.', 'Por cada cifra decimal, un cero en el denominador: $0{,}47=\\frac{47}{100}$.', 'لكل رقم عشري صفر في المقام: $0{,}47=\\frac{47}{100}$.'),
-    truncate: say('Biribiltzean begiratu hurrengo zifrari: 5 edo gehiago bada, gehitu bat.', 'Al redondear mira la cifra siguiente: si es 5 o más, suma uno.', 'عند التقريب انظر إلى الرقم التالي: إذا كان 5 أو أكثر أضف واحدًا.'),
-    'comma-align': say('Batzeko eta kentzeko, koma komaren azpian: unitateak unitateen azpian, hamarrenak hamarrenen azpian.', 'Para sumar y restar, coma bajo coma: unidades bajo unidades, décimas bajo décimas.', 'للجمع والطرح فاصلة تحت فاصلة: الآحاد تحت الآحاد والأعشار تحت الأعشار.'),
-    'comma-count': say('Biderkaduran, emaitzak bi faktoreen zifra hamartar guztiak ditu.', 'En el producto, el resultado tiene todas las cifras decimales de los dos factores.', 'في الضرب، للناتج كل الأرقام العشرية للعاملين.'),
-    'shift-direction': say('Bider 10, 100…: koma eskuinera (handiagoa). Zati: ezkerrera (txikiagoa).', 'Por 10, 100…: la coma a la derecha (más grande). Entre: a la izquierda (más pequeño).', 'الضرب في 10 و100…: الفاصلة يمينًا (أكبر). القسمة: يسارًا (أصغر).'),
-    'shift-count': say('Koma zeroak adina toki mugitzen da: 100 → bi toki, 1000 → hiru.', 'La coma se mueve tantos lugares como ceros: 100 → dos lugares, 1000 → tres.', 'تتحرك الفاصلة بعدد الأصفار: 100 ← منزلتان، 1000 ← ثلاث.'),
-    'divisor-only': say('Biak biderkatu behar dira 10, 100… zenbakiaz, zatikizuna eta zatitzailea.', 'Hay que multiplicar los dos por 10, 100…: dividendo y divisor.', 'يجب ضرب الاثنين في 10 أو 100…: المقسوم والمقسوم عليه.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    place: say('Begiratu zifraren tokia: komaren ondoren hamarrenak, ehunenak eta milarenak datoz, ordena horretan.', 'Mira el lugar de la cifra: tras la coma vienen décimas, centésimas y milésimas, en ese orden.', 'انظر إلى منزلة الرقم: بعد الفاصلة الأعشار ثم الأجزاء من مئة ثم الأجزاء من ألف.', 'Look at the place of the digit: after the decimal point come tenths, hundredths and thousandths, in that order.'),
+    'more-digits': say('Zifra gehiago izateak ez du handiago egiten: idatzi denak zifra hamartar kopuru berarekin eta konparatu.', 'Tener más cifras no lo hace mayor: escríbelos con las mismas cifras decimales y compara.', 'كثرة الأرقام لا تجعله أكبر: اكتبها بالعدد نفسه من الأرقام العشرية ثم قارن.', 'Having more digits does not make it bigger: write them with the same number of decimal places and compare.'),
+    outside: say('Zenbaki hori tartetik kanpo dago: gehitu zero bat bi muturrei eta aukeratu bien artekoa.', 'Ese número queda fuera del tramo: añade un cero a los extremos y elige uno entre ellos.', 'هذا العدد خارج القطعة: أضف صفرًا إلى الطرفين واختر عددًا بينهما.', 'That number is outside the interval: add a zero to both endpoints and choose one between them.'),
+    'fraction-digits': say('Zifra hamartar bakoitzeko, zero bat izendatzailean: $0{,}47=\\frac{47}{100}$.', 'Por cada cifra decimal, un cero en el denominador: $0{,}47=\\frac{47}{100}$.', 'لكل رقم عشري صفر في المقام: $0{,}47=\\frac{47}{100}$.', 'For each decimal place, one zero in the denominator: $0{,}47=\\frac{47}{100}$.'),
+    truncate: say('Biribiltzean begiratu hurrengo zifrari: 5 edo gehiago bada, gehitu bat.', 'Al redondear mira la cifra siguiente: si es 5 o más, suma uno.', 'عند التقريب انظر إلى الرقم التالي: إذا كان 5 أو أكثر أضف واحدًا.', 'When rounding, look at the next digit: if it is 5 or more, add one.'),
+    'comma-align': say('Batzeko eta kentzeko, koma komaren azpian: unitateak unitateen azpian, hamarrenak hamarrenen azpian.', 'Para sumar y restar, coma bajo coma: unidades bajo unidades, décimas bajo décimas.', 'للجمع والطرح فاصلة تحت فاصلة: الآحاد تحت الآحاد والأعشار تحت الأعشار.', 'To add and subtract, decimal point under decimal point: units under units, tenths under tenths.'),
+    'comma-count': say('Biderkaduran, emaitzak bi faktoreen zifra hamartar guztiak ditu.', 'En el producto, el resultado tiene todas las cifras decimales de los dos factores.', 'في الضرب، للناتج كل الأرقام العشرية للعاملين.', 'In a product, the result has all the decimal places of both factors.'),
+    'shift-direction': say('Bider 10, 100…: koma eskuinera (handiagoa). Zati: ezkerrera (txikiagoa).', 'Por 10, 100…: la coma a la derecha (más grande). Entre: a la izquierda (más pequeño).', 'الضرب في 10 و100…: الفاصلة يمينًا (أكبر). القسمة: يسارًا (أصغر).', 'Times 10, 100…: the decimal point moves to the right (bigger). Divided by: to the left (smaller).'),
+    'shift-count': say('Koma zeroak adina toki mugitzen da: 100 → bi toki, 1000 → hiru.', 'La coma se mueve tantos lugares como ceros: 100 → dos lugares, 1000 → tres.', 'تتحرك الفاصلة بعدد الأصفار: 100 ← منزلتان، 1000 ← ثلاث.', 'The decimal point moves as many places as there are zeros: 100 → two places, 1000 → three.'),
+    'divisor-only': say('Biak biderkatu behar dira 10, 100… zenbakiaz, zatikizuna eta zatitzailea.', 'Hay que multiplicar los dos por 10, 100…: dividendo y divisor.', 'يجب ضرب الاثنين في 10 أو 100…: المقسوم والمقسوم عليه.', 'You have to multiply both by 10, 100…: the dividend and the divisor.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

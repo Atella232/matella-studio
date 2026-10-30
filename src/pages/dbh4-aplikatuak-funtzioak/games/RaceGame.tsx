@@ -13,8 +13,8 @@ const functionsRace: RaceRules<FunctionsRaceError> = {
     parTime: functionsParTime,
     errorTip: (error) => functionsRaceErrorTips[error ?? 'calculation'],
     pitPlaceholder: () => '−3',
-    pitUnreadable: { eu: 'Idatzi zenbaki bat, adibidez −3 edo 2,5.', es: 'Escribe un número, por ejemplo −3 o 2,5.', ar: 'اكتب عددًا، مثل ⁦−3⁩ أو 2.5.' },
-    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', ar: 'اكتبه عددًا.' },
+    pitUnreadable: { eu: 'Idatzi zenbaki bat, adibidez −3 edo 2,5.', es: 'Escribe un número, por ejemplo −3 o 2,5.', en: 'Write a number, for example −3 or 2.5.', ar: 'اكتب عددًا، مثل ⁦−3⁩ أو 2.5.' },
+    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', en: 'Write it as a number.', ar: 'اكتبه عددًا.' },
     figure: (question, language) => {
         const { graph } = question as FunctionsRaceQuestion
         return graph ? <div className="functions-race-graph"><GraphFigure spec={graph} language={language} maxHeight={250} /></div> : null

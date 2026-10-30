@@ -5,6 +5,7 @@ import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { toExactDecimal, toNumber, type FractionValue } from '../../../features/unit-v2/math/fraction'
 import type { LocalizedText, UnitLanguage } from '../../../features/unit-v2/types'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import { sportSurvey } from '../survey'
 import {
     addRolls,
@@ -60,7 +61,7 @@ const LINE = 'var(--line, #d6cfc2)'
 
 /** A value as a decimal in the learner's language: exact when it ends, otherwise rounded with ≈ */
 function decimal(value: FractionValue, language: UnitLanguage, digits = 2): string {
-    const separator = language === 'ar' ? '.' : ','
+    const separator = language === 'ar' ? '.' : decimalSeparatorFor(language)
     const exact = toExactDecimal(value, separator)
     if (exact !== null && exact.replace(/^[^,.]*[,.]?/, '').length <= digits) return exact
     const rounded = Math.round(toNumber(value) * 10 ** digits) / 10 ** digits
@@ -68,16 +69,16 @@ function decimal(value: FractionValue, language: UnitLanguage, digits = 2): stri
 }
 
 const answerTexts = {
-    placeholder: { eu: 'Adib.: 0,25 edo 1/4', es: 'Ej.: 0,25 o 1/4', ar: 'مثال: 0.25 أو 1/4' },
-    unreadable: { eu: 'Idatzi zenbaki bat edo zatiki bat.', es: 'Escribe un número o una fracción.', ar: 'اكتب عددًا أو كسرًا.' }
+    placeholder: { eu: 'Adib.: 0,25 edo 1/4', es: 'Ej.: 0,25 o 1/4', en: 'Ex.: 0.25 or 1/4', ar: 'مثال: 0.25 أو 1/4' },
+    unreadable: { eu: 'Idatzi zenbaki bat edo zatiki bat.', es: 'Escribe un número o una fracción.', en: 'Write a number or a fraction.', ar: 'اكتب عددًا أو كسرًا.' }
 }
 
 /* ---------- Variable sorter ---------- */
 
 const kindNames: Record<VariableKind, LocalizedText> = {
-    qualitative: { eu: 'Kualitatiboa', es: 'Cualitativa', ar: 'نوعي' },
-    discrete: { eu: 'Diskretua', es: 'Discreta', ar: 'منفصل' },
-    continuous: { eu: 'Jarraitua', es: 'Continua', ar: 'متصل' }
+    qualitative: { eu: 'Kualitatiboa', es: 'Cualitativa', en: 'Qualitative', ar: 'نوعي' },
+    discrete: { eu: 'Diskretua', es: 'Discreta', en: 'Discrete', ar: 'منفصل' },
+    continuous: { eu: 'Jarraitua', es: 'Continua', en: 'Continuous', ar: 'متصل' }
 }
 
 export function VariablesTool(props: LabToolProps) {
@@ -86,9 +87,9 @@ export function VariablesTool(props: LabToolProps) {
     const sortedCount = state.choices.filter((choice) => choice !== null).length
     const controls = (
         <>
-            <p className="fraction-v2-lab-tip">{l({ eu: 'Aldagai bakoitzerako, aukeratu mota. Gero begiratu erronkei.', es: 'Para cada variable, elige su tipo. Después mira los retos.', ar: 'لكل متغير اختر نوعه، ثم انظر إلى التحديات.' })}</p>
-            <p className="statistics-lab-score">{l({ eu: `Sailkatuta: ${sortedCount} / ${variableCards.length}`, es: `Clasificadas: ${sortedCount} / ${variableCards.length}`, ar: `المصنّفة: ${sortedCount} / ${variableCards.length}` })}</p>
-            <button type="button" className="fraction-v2-secondary" onClick={() => setState(initialVariablesState)}>{l({ eu: 'Berriro hasi', es: 'Empezar de nuevo', ar: 'ابدأ من جديد' })}</button>
+            <p className="fraction-v2-lab-tip">{l({ eu: 'Aldagai bakoitzerako, aukeratu mota. Gero begiratu erronkei.', es: 'Para cada variable, elige su tipo. Después mira los retos.', en: 'For each variable, choose its type. Then look at the challenges.', ar: 'لكل متغير اختر نوعه، ثم انظر إلى التحديات.' })}</p>
+            <p className="statistics-lab-score">{l({ eu: `Sailkatuta: ${sortedCount} / ${variableCards.length}`, es: `Clasificadas: ${sortedCount} / ${variableCards.length}`, en: `Classified: ${sortedCount} / ${variableCards.length}`, ar: `المصنّفة: ${sortedCount} / ${variableCards.length}` })}</p>
+            <button type="button" className="fraction-v2-secondary" onClick={() => setState(initialVariablesState)}>{l({ eu: 'Berriro hasi', es: 'Empezar de nuevo', en: 'Start again', ar: 'ابدأ من جديد' })}</button>
         </>
     )
     return (
@@ -131,7 +132,7 @@ export function TableTool(props: LabToolProps) {
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$N=${counts.join('+')}=${n}$`} /></span>
-            <span className="fraction-v2-lab-readout-note">{l({ eu: 'Maiztasun erlatiboa: fᵢ : N. Ehunekoa: hᵢ · 100.', es: 'Frecuencia relativa: fᵢ : N. Porcentaje: hᵢ · 100.', ar: 'التكرار النسبي: fᵢ : N. النسبة المئوية: hᵢ · 100.' })}</span>
+            <span className="fraction-v2-lab-readout-note">{l({ eu: 'Maiztasun erlatiboa: fᵢ : N. Ehunekoa: hᵢ · 100.', es: 'Frecuencia relativa: fᵢ : N. Porcentaje: hᵢ · 100.', en: 'Relative frequency: fᵢ : N. Percentage: hᵢ · 100.', ar: 'التكرار النسبي: fᵢ : N. النسبة المئوية: hᵢ · 100.' })}</span>
         </>
     )
     return (
@@ -140,7 +141,7 @@ export function TableTool(props: LabToolProps) {
                 <table className="statistics-lab-table">
                     <thead>
                         <tr>
-                            <th scope="col">{l({ eu: 'Kirola', es: 'Deporte', ar: 'الرياضة' })}</th>
+                            <th scope="col">{l({ eu: 'Kirola', es: 'Deporte', en: 'Sport', ar: 'الرياضة' })}</th>
                             <th scope="col">fᵢ</th>
                             <th scope="col">hᵢ</th>
                             <th scope="col">%</th>
@@ -161,7 +162,7 @@ export function TableTool(props: LabToolProps) {
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th scope="row">{l({ eu: 'Guztira', es: 'Total', ar: 'المجموع' })}</th>
+                            <th scope="row">{l({ eu: 'Guztira', es: 'Total', en: 'Total', ar: 'المجموع' })}</th>
                             <td>{n}</td>
                             <td>{n > 0 ? '1' : '—'}</td>
                             <td>{n > 0 ? '100' : '—'}</td>
@@ -252,17 +253,17 @@ export function ChartsTool(props: LabToolProps) {
     const angle = sectorAngle(counts, 0)
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Grafikoa', es: 'Gráfico', ar: 'المخطط' })} value={chart} options={(['pie', 'bar'] as ChartKind[]).map((value) => ({ value, label: value === 'pie' ? l({ eu: 'Sektoreak', es: 'Sectores', ar: 'دائري' }) : l({ eu: 'Barrak', es: 'Barras', ar: 'أعمدة' }) }))} onChange={(next) => setState((current) => setChart(current, { chart: next }))} />
+            <Segmented label={l({ eu: 'Grafikoa', es: 'Gráfico', en: 'Chart', ar: 'المخطط' })} value={chart} options={(['pie', 'bar'] as ChartKind[]).map((value) => ({ value, label: value === 'pie' ? l({ eu: 'Sektoreak', es: 'Sectores', en: 'Pie chart', ar: 'دائري' }) : l({ eu: 'Barrak', es: 'Barras', en: 'Bar chart', ar: 'أعمدة' }) }))} onChange={(next) => setState((current) => setChart(current, { chart: next }))} />
             <CountSteppers counts={counts} language={props.language} onChange={(index, count) => setState((current) => setChart(current, { index, count }))} />
         </>
     )
     const readout = angle && (
         <>
             <span className="fraction-v2-lab-readout-main">
-                {l({ eu: 'Futbolaren sektorea:', es: 'Sector del fútbol:', ar: 'قطاع كرة القدم:' })}{' '}
+                {l({ eu: 'Futbolaren sektorea:', es: 'Sector del fútbol:', en: 'Football sector:', ar: 'قطاع كرة القدم:' })}{' '}
                 <MathText text={`$\\frac{${counts[0]}}{${n}}\\cdot 360^{\\circ}${state.checked || state.revealed ? `=${decimal(angle, props.language).replace(',', '{,}').replace('≈ ', '\\approx ')}^{\\circ}` : ''}$`} />
             </span>
-            <ResultAnswer language={props.language} state={state} expected={angle} placeholder={{ eu: 'Adib.: 144', es: 'Ej.: 144', ar: 'مثال: 144' }} unreadable={answerTexts.unreadable} onChange={(patch) => setState((current) => answerChart(current, patch))} />
+            <ResultAnswer language={props.language} state={state} expected={angle} placeholder={{ eu: 'Adib.: 144', es: 'Ej.: 144', en: 'Ex.: 144', ar: 'مثال: 144' }} unreadable={answerTexts.unreadable} onChange={(patch) => setState((current) => answerChart(current, patch))} />
         </>
     )
     return (
@@ -292,7 +293,7 @@ export function MeanTool(props: LabToolProps) {
     const controls = (
         <>
             {values.map((value, index) => (
-                <Stepper key={index} label={l({ eu: `${index + 1}. datua`, es: `Dato ${index + 1}`, ar: `القيمة ${index + 1}` })} value={value} min={DATA_LIMITS.min} max={DATA_LIMITS.max} onChange={(next) => setState((current) => setValue(current, index, next))} language={props.language} />
+                <Stepper key={index} label={l({ eu: `${index + 1}. datua`, es: `Dato ${index + 1}`, en: `Value ${index + 1}`, ar: `القيمة ${index + 1}` })} value={value} min={DATA_LIMITS.min} max={DATA_LIMITS.max} onChange={(next) => setState((current) => setValue(current, index, next))} language={props.language} />
             ))}
         </>
     )
@@ -302,9 +303,9 @@ export function MeanTool(props: LabToolProps) {
                 <MathText text={`$\\bar{x}=\\frac{${values.join('+')}}{${values.length}}${shown ? `=${decimal(mean, props.language).replace(',', '{,}').replace('≈ ', '\\approx ')}` : ''}$`} />
             </span>
             <span className="fraction-v2-lab-readout-note">
-                {l({ eu: 'Mediana', es: 'Mediana', ar: 'الوسيط' })}: {decimal(medianOf(values), props.language)} · {l({ eu: 'Moda', es: 'Moda', ar: 'المنوال' })}: {modesOf(values).join(', ')} · {l({ eu: 'Ibiltartea', es: 'Rango', ar: 'المدى' })}: {rangeOf(values)}
+                {l({ eu: 'Mediana', es: 'Mediana', en: 'Median', ar: 'الوسيط' })}: {decimal(medianOf(values), props.language)} · {l({ eu: 'Moda', es: 'Moda', en: 'Mode', ar: 'المنوال' })}: {modesOf(values).join(', ')} · {l({ eu: 'Ibiltartea', es: 'Rango', en: 'Range', ar: 'المدى' })}: {rangeOf(values)}
             </span>
-            <ResultAnswer language={props.language} state={state} expected={mean} placeholder={{ eu: 'Adib.: 7,2', es: 'Ej.: 7,2', ar: 'مثال: 7.2' }} unreadable={answerTexts.unreadable} onChange={(patch) => setState((current) => answerMean(current, patch))} />
+            <ResultAnswer language={props.language} state={state} expected={mean} placeholder={{ eu: 'Adib.: 7,2', es: 'Ej.: 7,2', en: 'Ex.: 7.2', ar: 'مثال: 7.2' }} unreadable={answerTexts.unreadable} onChange={(patch) => setState((current) => answerMean(current, patch))} />
         </>
     )
     const meanX = x(toNumber(mean))
@@ -343,24 +344,24 @@ export function DiceTool(props: LabToolProps) {
     const top = Math.max(1, ...state.faces)
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Gertaera', es: 'Suceso', ar: 'الحدث' })} value={state.event} options={(Object.keys(diceEvents) as DiceEvent[]).map((value) => ({ value, label: l(diceEvents[value].name) }))} onChange={(next) => setState((current) => setEvent(current, next))} />
-            <span className="fraction-v2-stepper-label">{l({ eu: 'Jaurti', es: 'Lanzar', ar: 'ارمِ' })}</span>
+            <Segmented label={l({ eu: 'Gertaera', es: 'Suceso', en: 'Event', ar: 'الحدث' })} value={state.event} options={(Object.keys(diceEvents) as DiceEvent[]).map((value) => ({ value, label: l(diceEvents[value].name) }))} onChange={(next) => setState((current) => setEvent(current, next))} />
+            <span className="fraction-v2-stepper-label">{l({ eu: 'Jaurti', es: 'Lanzar', en: 'Roll', ar: 'ارمِ' })}</span>
             <div className="fraction-v2-lab-quick-actions">
                 {[1, 10, 100, 1000].map((times) => (
                     <button type="button" key={times} onClick={() => setState((current) => addRolls(current, rollDice(times)))}>×{times}</button>
                 ))}
             </div>
-            <button type="button" className="fraction-v2-secondary" onClick={() => setState(resetRolls)}>{l({ eu: 'Hustu', es: 'Vaciar', ar: 'إفراغ' })}</button>
+            <button type="button" className="fraction-v2-secondary" onClick={() => setState(resetRolls)}>{l({ eu: 'Hustu', es: 'Vaciar', en: 'Clear', ar: 'إفراغ' })}</button>
         </>
     )
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main">
-                {l({ eu: `${throws} jaurtiketa · aldekoak: ${favourableOf(state)}`, es: `${throws} lanzamientos · favorables: ${favourableOf(state)}`, ar: `${throws} رمية · الملائمة: ${favourableOf(state)}` })}
+                {l({ eu: `${throws} jaurtiketa · aldekoak: ${favourableOf(state)}`, es: `${throws} lanzamientos · favorables: ${favourableOf(state)}`, en: `${throws} rolls · favourable: ${favourableOf(state)}`, ar: `${throws} رمية · الملائمة: ${favourableOf(state)}` })}
                 {frequency && <> · h = {decimal(frequency, props.language, 3)}</>}
             </span>
             <span className="fraction-v2-lab-readout-note">
-                {l({ eu: 'Aldeko kasuak', es: 'Casos favorables', ar: 'الحالات الملائمة' })}: {`{${favourable.join(', ')}}`}
+                {l({ eu: 'Aldeko kasuak', es: 'Casos favorables', en: 'Favourable cases', ar: 'الحالات الملائمة' })}: {`{${favourable.join(', ')}}`}
                 {(state.checked || state.revealed) && <> · P = {decimal(probability, props.language, 3)}</>}
             </span>
             <ResultAnswer language={props.language} state={state} expected={probability} placeholder={answerTexts.placeholder} unreadable={answerTexts.unreadable} onChange={(patch) => setState((current) => answerDice(current, patch))} />

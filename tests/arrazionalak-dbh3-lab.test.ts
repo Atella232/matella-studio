@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
@@ -50,9 +51,9 @@ test('arrazionalak 3. DBH lab: tools, topics and challenge ids', () => {
     assert.equal(new Set(rationalsLabChallengeIds).size, rationalsLabChallengeIds.length)
     const own = [...rationalsNumberLineChallenges, ...rationalsEquivalenceChallenges, ...rationalsCompareChallenges, ...rationalsSumChallenges, ...rationalsProductChallenges, ...hierarchyChallenges] as Array<LabChallenge<unknown>>
     for (const challenge of own) {
-        for (const language of ['eu', 'es', 'ar'] as const) {
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) {
             for (const text of [challenge.prompt[language], challenge.hint[language]]) {
-                for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formula, { throwOnError: true, strict: 'error' })
+                for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formulaFor(language, formula), { throwOnError: true, strict: 'error' })
                 if (language === 'ar') assert.ok(!text.includes('{,}'), text)
             }
         }

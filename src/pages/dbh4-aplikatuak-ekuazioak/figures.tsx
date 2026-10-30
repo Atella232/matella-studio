@@ -29,7 +29,7 @@ const PAPER = '#fffcf6'
 const SOFT = '#fbebc0'
 const SERIF = 'Fraunces, serif'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language, text)
 
 /** A small Cartesian plane placed at (ox, oy) inside a figure */
@@ -51,12 +51,12 @@ function Frame({ box, cell, ox, oy, labels = true, children }: { box: PlaneBox; 
 
 export function SolutionCountFigure({ language }: { language: UnitLanguage }) {
     const cases = [
-        { lines: ['3x − 2 = x + 4', '2x = 6', 'x = 3'], color: GREEN, title: say('Ebazpen bat', 'Una solución', 'حل واحد') },
-        { lines: ['2(x + 1) = 2x + 5', '2x + 2 = 2x + 5', '0 = 3 ✗'], color: SECOND, title: say('Ebazpenik ez', 'Sin solución', 'لا حل') },
-        { lines: ['3(x − 1) = 3x − 3', '3x − 3 = 3x − 3', '0 = 0 ✓'], color: STAGE, title: say('Infinitu: identitatea', 'Infinitas: identidad', 'ما لا نهاية: متطابقة') }
+        { lines: ['3x − 2 = x + 4', '2x = 6', 'x = 3'], color: GREEN, title: say('Ebazpen bat', 'Una solución', 'حل واحد', 'One solution') },
+        { lines: ['2(x + 1) = 2x + 5', '2x + 2 = 2x + 5', '0 = 3 ✗'], color: SECOND, title: say('Ebazpenik ez', 'Sin solución', 'لا حل', 'No solution') },
+        { lines: ['3(x − 1) = 3x − 3', '3x − 3 = 3x − 3', '0 = 0 ✓'], color: STAGE, title: say('Infinitu: identitatea', 'Infinitas: identidad', 'ما لا نهاية: متطابقة', 'Infinitely many: identity') }
     ]
     return (
-        <Figure height={270} label={pick(language, say('Lehen mailako ekuazio baten hiru amaiera', 'Los tres finales de una ecuación de primer grado', 'النهايات الثلاث لمعادلة من الدرجة الأولى'))}>
+        <Figure height={270} label={pick(language, say('Lehen mailako ekuazio baten hiru amaiera', 'Los tres finales de una ecuación de primer grado', 'النهايات الثلاث لمعادلة من الدرجة الأولى', 'The three possible outcomes of a linear equation'))}>
             {cases.map((item, index) => {
                 const x = 20 + index * 232
                 return (
@@ -67,7 +67,7 @@ export function SolutionCountFigure({ language }: { language: UnitLanguage }) {
                     </g>
                 )
             })}
-            <Caption y={258} language={language} text={say('x desagertzen bada: 0 = 3 ezinezkoa da; 0 = 0 beti betetzen da', 'Si la x desaparece: 0 = 3 es imposible; 0 = 0 se cumple siempre', 'إذا اختفى x: 0 = 3 مستحيلة؛ و0 = 0 صحيحة دائمًا')} />
+            <Caption y={258} language={language} text={say('x desagertzen bada: 0 = 3 ezinezkoa da; 0 = 0 beti betetzen da', 'Si la x desaparece: 0 = 3 es imposible; 0 = 0 se cumple siempre', 'إذا اختفى x: 0 = 3 مستحيلة؛ و0 = 0 صحيحة دائمًا', 'If the x cancels out: 0 = 3 is impossible; 0 = 0 is always true')} />
         </Figure>
     )
 }
@@ -81,7 +81,7 @@ export function QuadraticFormulaFigure({ language }: { language: UnitLanguage })
         { x: 616, text: 'c = 6' }
     ]
     return (
-        <Figure height={300} label={pick(language, say('x² − 7x + 6 = 0 formula orokorrarekin: x = 6 eta x = 1', 'x² − 7x + 6 = 0 con la fórmula general: x = 6 y x = 1', 'x² − 7x + 6 = 0 بالصيغة العامة: x = 6 وx = 1'))}>
+        <Figure height={300} label={pick(language, say('x² − 7x + 6 = 0 formula orokorrarekin: x = 6 eta x = 1', 'x² − 7x + 6 = 0 con la fórmula general: x = 6 y x = 1', 'x² − 7x + 6 = 0 بالصيغة العامة: x = 6 وx = 1', 'x² − 7x + 6 = 0 with the general formula: x = 6 and x = 1'))}>
             <text x={70} y={46} fontSize={22} fontWeight={700} fill={INK} fontFamily={SERIF}>x² − 7x + 6 = 0</text>
             {chips.map((chip) => (
                 <g key={chip.text}>
@@ -96,7 +96,7 @@ export function QuadraticFormulaFigure({ language }: { language: UnitLanguage })
             <text x={70} y={216} fontSize={24} fontWeight={700} fill={INK}>=</text>
             <Frac x={150} y={208} n="7 ± 5" d="2" />
             <text x={230} y={216} fontSize={22} fontWeight={700} fill={GREEN}>→  x₁ = 12/2 = 6,   x₂ = 2/2 = 1</text>
-            <Caption y={284} language={language} text={say('Lehenik idatzi a, b eta c, zeinuekin', 'Primero escribe a, b y c, con sus signos', 'اكتب أولًا a وb وc بإشاراتها')} />
+            <Caption y={284} language={language} text={say('Lehenik idatzi a, b eta c, zeinuekin', 'Primero escribe a, b y c, con sus signos', 'اكتب أولًا a وb وc بإشاراتها', 'First write a, b and c, with their signs')} />
         </Figure>
     )
 }
@@ -105,7 +105,7 @@ export function QuadraticFormulaFigure({ language }: { language: UnitLanguage })
 
 export function FactoredFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={240} label={pick(language, say('(x + 1)(x² − 4) = 0: x = −1, x = 2, x = −2', '(x + 1)(x² − 4) = 0: x = −1, x = 2, x = −2', '(x + 1)(x² − 4) = 0: x = −1 وx = 2 وx = −2'))}>
+        <Figure height={240} label={pick(language, say('(x + 1)(x² − 4) = 0: x = −1, x = 2, x = −2', '(x + 1)(x² − 4) = 0: x = −1, x = 2, x = −2', '(x + 1)(x² − 4) = 0: x = −1 وx = 2 وx = −2', '(x + 1)(x² − 4) = 0: x = −1, x = 2, x = −2'))}>
             <text x={360} y={56} textAnchor="middle" fontSize={30} fontWeight={700} fill={INK} fontFamily={SERIF}>(x + 1) · (x² − 4) = 0</text>
             <path d="M290 72 L200 128" stroke={INK} strokeWidth={2} />
             <path d="M430 72 L520 128" stroke={INK} strokeWidth={2} />
@@ -113,7 +113,7 @@ export function FactoredFigure({ language }: { language: UnitLanguage }) {
             <rect x={380} y={132} width={280} height={52} rx={12} fill={SOFT} stroke={INK} strokeWidth={2} />
             <text x={200} y={166} textAnchor="middle" fontSize={21} fontWeight={700} fill={INK}>x + 1 = 0 → x = −1</text>
             <text x={520} y={166} textAnchor="middle" fontSize={21} fontWeight={700} fill={INK}>x² = 4 → x = 2, x = −2</text>
-            <Caption y={226} language={language} text={say('Faktore bakoitza 0 egin: hiru ebazpen', 'Iguala a 0 cada factor: tres soluciones', 'اجعل كل عامل 0: ثلاثة حلول')} />
+            <Caption y={226} language={language} text={say('Faktore bakoitza 0 egin: hiru ebazpen', 'Iguala a 0 cada factor: tres soluciones', 'اجعل كل عامل 0: ثلاثة حلول', 'Set each factor equal to 0: three solutions')} />
         </Figure>
     )
 }
@@ -122,11 +122,11 @@ export function FactoredFigure({ language }: { language: UnitLanguage }) {
 
 export function RadicalFigure({ language }: { language: UnitLanguage }) {
     const rows = [
-        { text: say('Erroa bakarrik dago: karratura jaso', 'La raíz está sola: eleva al cuadrado', 'الجذر وحده: ربّع الطرفين'), math: '√(x + 2) = x  →  x + 2 = x²' },
-        { text: say('Ebatzi 2. mailako ekuazioa', 'Resuelve la ecuación de 2.º grado', 'حلّ معادلة الدرجة الثانية'), math: 'x² − x − 2 = 0  →  x = 2,  x = −1' }
+        { text: say('Erroa bakarrik dago: karratura jaso', 'La raíz está sola: eleva al cuadrado', 'الجذر وحده: ربّع الطرفين', 'The root is on its own: square both sides'), math: '√(x + 2) = x  →  x + 2 = x²' },
+        { text: say('Ebatzi 2. mailako ekuazioa', 'Resuelve la ecuación de 2.º grado', 'حلّ معادلة الدرجة الثانية', 'Solve the quadratic equation'), math: 'x² − x − 2 = 0  →  x = 2,  x = −1' }
     ]
     return (
-        <Figure height={300} label={pick(language, say('√(x + 2) = x: x = 2 bakarrik da ebazpena', '√(x + 2) = x: solo x = 2 es solución', '√(x + 2) = x: الحل x = 2 فقط'))}>
+        <Figure height={300} label={pick(language, say('√(x + 2) = x: x = 2 bakarrik da ebazpena', '√(x + 2) = x: solo x = 2 es solución', '√(x + 2) = x: الحل x = 2 فقط', '√(x + 2) = x: only x = 2 is a solution'))}>
             {rows.map((row, index) => (
                 <g key={index}>
                     <Label x={360} y={34 + index * 70} textAnchor="middle" fontSize={15} fill={MUTED}>{pick(language, row.text)}</Label>
@@ -137,7 +137,7 @@ export function RadicalFigure({ language }: { language: UnitLanguage }) {
             <rect x={380} y={172} width={270} height={60} rx={12} fill="#f8dcd0" stroke={INK} strokeWidth={2} />
             <text x={205} y={210} textAnchor="middle" fontSize={20} fontWeight={700} fill={GREEN}>x = 2: √4 = 2 ✓</text>
             <text x={515} y={210} textAnchor="middle" fontSize={20} fontWeight={700} fill={SECOND}>x = −1: √1 = 1 ≠ −1 ✗</text>
-            <Caption y={272} language={language} text={say('Karratura jasotzean ebazpen faltsuak ager daitezke: egiaztatu beti', 'Al elevar al cuadrado pueden aparecer soluciones falsas: comprueba siempre', 'قد يظهر بالتربيع حل زائف: تحقّق دائمًا')} />
+            <Caption y={272} language={language} text={say('Karratura jasotzean ebazpen faltsuak ager daitezke: egiaztatu beti', 'Al elevar al cuadrado pueden aparecer soluciones falsas: comprueba siempre', 'قد يظهر بالتربيع حل زائف: تحقّق دائمًا', 'Squaring can create false solutions: always check')} />
         </Figure>
     )
 }
@@ -146,7 +146,7 @@ export function RadicalFigure({ language }: { language: UnitLanguage }) {
 
 export function AreaProblemFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={290} label={pick(language, say('Azalera 150 cm² eta perimetroa 50 cm: aldeak 15 eta 10', 'Área 150 cm² y perímetro 50 cm: lados 15 y 10', 'المساحة 150 سم² والمحيط 50 سم: الضلعان 15 و10'))}>
+        <Figure height={290} label={pick(language, say('Azalera 150 cm² eta perimetroa 50 cm: aldeak 15 eta 10', 'Área 150 cm² y perímetro 50 cm: lados 15 y 10', 'المساحة 150 سم² والمحيط 50 سم: الضلعان 15 و10', 'Area 150 cm² and perimeter 50 cm: sides 15 and 10'))}>
             <rect x={60} y={50} width={240} height={150} fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} />
             <text x={180} y={38} textAnchor="middle" fontSize={20} fontWeight={700} fill={STAGE} fontStyle="italic">x</text>
             <text x={312} y={132} fontSize={20} fontWeight={700} fill={SECOND}>25 − x</text>
@@ -154,8 +154,8 @@ export function AreaProblemFigure({ language }: { language: UnitLanguage }) {
             <text x={540} y={70} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>x(25 − x) = 150</text>
             <text x={540} y={116} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>x² − 25x + 150 = 0</text>
             <text x={540} y={162} textAnchor="middle" fontSize={20} fontWeight={700} fill={GREEN}>x = 15,  x = 10</text>
-            <Label x={540} y={200} textAnchor="middle" fontSize={15} fill={MUTED}>{pick(language, say('Bi ebazpenek laukizuzen bera ematen dute', 'Las dos soluciones dan el mismo rectángulo', 'الحلّان يعطيان المستطيل نفسه'))}</Label>
-            <Caption y={262} language={language} text={say('Perimetroa 50 bada, bi alde jarraiak 25 dira guztira', 'Si el perímetro es 50, dos lados contiguos suman 25', 'إذا كان المحيط 50 فمجموع ضلعين متجاورين 25')} />
+            <Label x={540} y={200} textAnchor="middle" fontSize={15} fill={MUTED}>{pick(language, say('Bi ebazpenek laukizuzen bera ematen dute', 'Las dos soluciones dan el mismo rectángulo', 'الحلّان يعطيان المستطيل نفسه', 'Both solutions give the same rectangle'))}</Label>
+            <Caption y={262} language={language} text={say('Perimetroa 50 bada, bi alde jarraiak 25 dira guztira', 'Si el perímetro es 50, dos lados contiguos suman 25', 'إذا كان المحيط 50 فمجموع ضلعين متجاورين 25', 'If the perimeter is 50, two adjacent sides add up to 25')} />
         </Figure>
     )
 }
@@ -165,7 +165,7 @@ export function AreaProblemFigure({ language }: { language: UnitLanguage }) {
 export function LinearSolutionsFigure({ language }: { language: UnitLanguage }) {
     const pairs = [[0, 5], [1, 4], [2, 3], [3, 2], [4, 1], [5, 0]] as const
     return (
-        <Figure height={290} label={pick(language, say('x + y = 5 ekuazioaren ebazpenak: taula eta zuzena', 'Las soluciones de x + y = 5: tabla y recta', 'حلول x + y = 5: جدول ومستقيم'))}>
+        <Figure height={290} label={pick(language, say('x + y = 5 ekuazioaren ebazpenak: taula eta zuzena', 'Las soluciones de x + y = 5: tabla y recta', 'حلول x + y = 5: جدول ومستقيم', 'The solutions of x + y = 5: table and straight line'))}>
             <text x={170} y={40} textAnchor="middle" fontSize={24} fontWeight={700} fill={INK} fontFamily={SERIF}>x + y = 5</text>
             {['x', 'y'].map((name, row) => (
                 <g key={name}>
@@ -179,7 +179,7 @@ export function LinearSolutionsFigure({ language }: { language: UnitLanguage }) 
                     ))}
                 </g>
             ))}
-            <Label x={170} y={190} textAnchor="middle" fontSize={15} fill={MUTED}>{pick(language, say('Bikote bakoitza ebazpen bat da', 'Cada pareja es una solución', 'كل زوج حلّ'))}</Label>
+            <Label x={170} y={190} textAnchor="middle" fontSize={15} fill={MUTED}>{pick(language, say('Bikote bakoitza ebazpen bat da', 'Cada pareja es una solución', 'كل زوج حلّ', 'Each pair is a solution'))}</Label>
             <Frame box={{ xMin: 0, xMax: 6, yMin: 0, yMax: 6 }} cell={32} ox={400} oy={34}>
                 {(map, clip) => (
                     <g>
@@ -188,7 +188,7 @@ export function LinearSolutionsFigure({ language }: { language: UnitLanguage }) 
                     </g>
                 )}
             </Frame>
-            <Caption y={272} language={language} text={say('Bi ezezaguneko ekuazio batek infinitu ebazpen ditu: zuzen bat', 'Una ecuación con dos incógnitas tiene infinitas soluciones: una recta', 'لمعادلة بمجهولين حلول لا نهاية لها: مستقيم')} />
+            <Caption y={272} language={language} text={say('Bi ezezaguneko ekuazio batek infinitu ebazpen ditu: zuzen bat', 'Una ecuación con dos incógnitas tiene infinitas soluciones: una recta', 'لمعادلة بمجهولين حلول لا نهاية لها: مستقيم', 'An equation with two unknowns has infinitely many solutions: a straight line')} />
         </Figure>
     )
 }
@@ -198,12 +198,12 @@ export function LinearSolutionsFigure({ language }: { language: UnitLanguage }) 
 export function SystemTypesFigure({ language }: { language: UnitLanguage }) {
     const box: PlaneBox = { xMin: -1, xMax: 5, yMin: -1, yMax: 5 }
     const cases = [
-        { ox: 54, lines: [{ m: -1, n: 4 }, { m: 1, n: -2 }], point: true, title: say('Bateragarri determinatua', 'Compatible determinado', 'متوافق محدد'), text: say('ebazpen bat: (3, 1)', 'una solución: (3, 1)', 'حل واحد: (3, 1)') },
-        { ox: 294, lines: [{ m: 1, n: 1 }, { m: 1, n: -2 }], point: false, title: say('Bateraezina', 'Incompatible', 'غير متوافق'), text: say('paraleloak: ebazpenik ez', 'paralelas: sin solución', 'متوازيان: لا حل') },
-        { ox: 534, lines: [{ m: -0.5, n: 3 }, { m: -0.5, n: 3 }], point: false, title: say('Bateragarri indeterminatua', 'Compatible indeterminado', 'متوافق غير محدد'), text: say('berdinak: infinitu ebazpen', 'coincidentes: infinitas', 'منطبقان: ما لا نهاية') }
+        { ox: 54, lines: [{ m: -1, n: 4 }, { m: 1, n: -2 }], point: true, title: say('Bateragarri determinatua', 'Compatible determinado', 'متوافق محدد', 'Consistent and independent'), text: say('ebazpen bat: (3, 1)', 'una solución: (3, 1)', 'حل واحد: (3, 1)', 'one solution: (3, 1)') },
+        { ox: 294, lines: [{ m: 1, n: 1 }, { m: 1, n: -2 }], point: false, title: say('Bateraezina', 'Incompatible', 'غير متوافق', 'Inconsistent'), text: say('paraleloak: ebazpenik ez', 'paralelas: sin solución', 'متوازيان: لا حل', 'parallel: no solution') },
+        { ox: 534, lines: [{ m: -0.5, n: 3 }, { m: -0.5, n: 3 }], point: false, title: say('Bateragarri indeterminatua', 'Compatible indeterminado', 'متوافق غير محدد', 'Consistent and dependent'), text: say('berdinak: infinitu ebazpen', 'coincidentes: infinitas', 'منطبقان: ما لا نهاية', 'coincident: infinitely many') }
     ]
     return (
-        <Figure height={280} label={pick(language, say('Sistema motak: zuzenak ebakitzen dira, paraleloak dira edo bat datoz', 'Tipos de sistemas: las rectas se cortan, son paralelas o coinciden', 'أنواع الأنظمة: المستقيمان متقاطعان أو متوازيان أو منطبقان'))}>
+        <Figure height={280} label={pick(language, say('Sistema motak: zuzenak ebakitzen dira, paraleloak dira edo bat datoz', 'Tipos de sistemas: las rectas se cortan, son paralelas o coinciden', 'أنواع الأنظمة: المستقيمان متقاطعان أو متوازيان أو منطبقان', 'Types of systems: the straight lines intersect, are parallel or coincide'))}>
             {cases.map((item, index) => (
                 <g key={index}>
                     <Frame box={box} cell={22} ox={item.ox} oy={32} labels={false}>
@@ -219,7 +219,7 @@ export function SystemTypesFigure({ language }: { language: UnitLanguage }) {
                     <Label x={item.ox + 66} y={214} textAnchor="middle" fontSize={14} fill={MUTED}>{pick(language, item.text)}</Label>
                 </g>
             ))}
-            <Caption y={262} language={language} text={say('Sistemaren ebazpena bi zuzenen ebaki-puntua da', 'La solución del sistema es el punto de corte de las dos rectas', 'حل النظام نقطة تقاطع المستقيمين')} />
+            <Caption y={262} language={language} text={say('Sistemaren ebazpena bi zuzenen ebaki-puntua da', 'La solución del sistema es el punto de corte de las dos rectas', 'حل النظام نقطة تقاطع المستقيمين', 'The solution of the system is the point where the two straight lines intersect')} />
         </Figure>
     )
 }
@@ -258,14 +258,14 @@ export function SubstitutionFigure({ language }: { language: UnitLanguage }) {
     return (
         <MethodFigure
             language={language}
-            label={say('Ordezkapen-metodoa: x = 3, y = 1', 'Método de sustitución: x = 3, y = 1', 'طريقة التعويض: x = 3 وy = 1')}
+            label={say('Ordezkapen-metodoa: x = 3, y = 1', 'Método de sustitución: x = 3, y = 1', 'طريقة التعويض: x = 3 وy = 1', 'Substitution method: x = 3, y = 1')}
             rows={[
-                { text: say('1. Askatu y lehen ekuazioan', '1. Despeja y en la primera ecuación', '1. اعزل y في المعادلة الأولى'), math: 'y = 7 − 2x' },
-                { text: say('2. Ordeztu bigarrenean', '2. Sustitúyela en la segunda', '2. عوّضها في الثانية'), math: 'x − (7 − 2x) = 2' },
-                { text: say('3. Ebatzi', '3. Resuelve', '3. حلّ'), math: '3x − 7 = 2  →  x = 3' },
-                { text: say('4. Kalkulatu y', '4. Calcula y', '4. احسب y'), math: 'y = 7 − 2 · 3 = 1' }
+                { text: say('1. Askatu y lehen ekuazioan', '1. Despeja y en la primera ecuación', '1. اعزل y في المعادلة الأولى', '1. Solve for y in the first equation'), math: 'y = 7 − 2x' },
+                { text: say('2. Ordeztu bigarrenean', '2. Sustitúyela en la segunda', '2. عوّضها في الثانية', '2. Substitute it into the second'), math: 'x − (7 − 2x) = 2' },
+                { text: say('3. Ebatzi', '3. Resuelve', '3. حلّ', '3. Solve'), math: '3x − 7 = 2  →  x = 3' },
+                { text: say('4. Kalkulatu y', '4. Calcula y', '4. احسب y', '4. Work out y'), math: 'y = 7 − 2 · 3 = 1' }
             ]}
-            caption={say('Askatu errazen askatzen den ezezaguna (koefizientea 1 edo −1)', 'Despeja la incógnita más fácil (coeficiente 1 o −1)', 'اعزل أسهل مجهول (معامله 1 أو −1)')}
+            caption={say('Askatu errazen askatzen den ezezaguna (koefizientea 1 edo −1)', 'Despeja la incógnita más fácil (coeficiente 1 o −1)', 'اعزل أسهل مجهول (معامله 1 أو −1)', 'Solve for the easiest unknown (coefficient 1 or −1)')}
         />
     )
 }
@@ -274,14 +274,14 @@ export function EqualizationFigure({ language }: { language: UnitLanguage }) {
     return (
         <MethodFigure
             language={language}
-            label={say('Berdinketa-metodoa: x = 3, y = 1', 'Método de igualación: x = 3, y = 1', 'طريقة المساواة: x = 3 وy = 1')}
+            label={say('Berdinketa-metodoa: x = 3, y = 1', 'Método de igualación: x = 3, y = 1', 'طريقة المساواة: x = 3 وy = 1', 'Comparison method: x = 3, y = 1')}
             rows={[
-                { text: say('1. Askatu y bi ekuazioetan', '1. Despeja y en las dos ecuaciones', '1. اعزل y في المعادلتين'), math: 'y = 7 − 2x,   y = x − 2' },
-                { text: say('2. Berdindu', '2. Iguala', '2. ساوِ بينهما'), math: '7 − 2x = x − 2' },
-                { text: say('3. Ebatzi', '3. Resuelve', '3. حلّ'), math: '9 = 3x  →  x = 3' },
-                { text: say('4. Kalkulatu y', '4. Calcula y', '4. احسب y'), math: 'y = 3 − 2 = 1' }
+                { text: say('1. Askatu y bi ekuazioetan', '1. Despeja y en las dos ecuaciones', '1. اعزل y في المعادلتين', '1. Solve for y in both equations'), math: 'y = 7 − 2x,   y = x − 2' },
+                { text: say('2. Berdindu', '2. Iguala', '2. ساوِ بينهما', '2. Equate them'), math: '7 − 2x = x − 2' },
+                { text: say('3. Ebatzi', '3. Resuelve', '3. حلّ', '3. Solve'), math: '9 = 3x  →  x = 3' },
+                { text: say('4. Kalkulatu y', '4. Calcula y', '4. احسب y', '4. Work out y'), math: 'y = 3 − 2 = 1' }
             ]}
-            caption={say('Ezezagun bera askatu bietan eta adierazpenak berdindu', 'Despeja la misma incógnita en las dos e iguala las expresiones', 'اعزل المجهول نفسه في المعادلتين وساوِ العبارتين')}
+            caption={say('Ezezagun bera askatu bietan eta adierazpenak berdindu', 'Despeja la misma incógnita en las dos e iguala las expresiones', 'اعزل المجهول نفسه في المعادلتين وساوِ العبارتين', 'Solve for the same unknown in both and equate the expressions')}
         />
     )
 }
@@ -290,13 +290,13 @@ export function ReductionFigure({ language }: { language: UnitLanguage }) {
     return (
         <MethodFigure
             language={language}
-            label={say('Laburketa-metodoa: x = 3, y = 1', 'Método de reducción: x = 3, y = 1', 'طريقة الحذف: x = 3 وy = 1')}
+            label={say('Laburketa-metodoa: x = 3, y = 1', 'Método de reducción: x = 3, y = 1', 'طريقة الحذف: x = 3 وy = 1', 'Elimination method: x = 3, y = 1')}
             rows={[
-                { text: say('1. y-ren koefizienteak aurkakoak dira: batu', '1. Los coeficientes de y son opuestos: suma', '1. معاملا y متعاكسان: اجمع'), math: '(2x + y) + (x − y) = 7 + 2' },
-                { text: say('2. y desagertu da', '2. La y ha desaparecido', '2. اختفى y'), math: '3x = 9  →  x = 3' },
-                { text: say('3. Ordeztu ekuazio batean', '3. Sustituye en una ecuación', '3. عوّض في معادلة'), math: '2 · 3 + y = 7  →  y = 1' }
+                { text: say('1. y-ren koefizienteak aurkakoak dira: batu', '1. Los coeficientes de y son opuestos: suma', '1. معاملا y متعاكسان: اجمع', '1. The coefficients of y are opposites: add'), math: '(2x + y) + (x − y) = 7 + 2' },
+                { text: say('2. y desagertu da', '2. La y ha desaparecido', '2. اختفى y', '2. The y has cancelled out'), math: '3x = 9  →  x = 3' },
+                { text: say('3. Ordeztu ekuazio batean', '3. Sustituye en una ecuación', '3. عوّض في معادلة', '3. Substitute into one equation'), math: '2 · 3 + y = 7  →  y = 1' }
             ]}
-            caption={say('Behar bada, biderkatu ekuazioak koefizienteak aurkako bihurtzeko', 'Si hace falta, multiplica las ecuaciones para que los coeficientes sean opuestos', 'اضرب المعادلتين عند الحاجة ليصير المعاملان متعاكسين')}
+            caption={say('Behar bada, biderkatu ekuazioak koefizienteak aurkako bihurtzeko', 'Si hace falta, multiplica las ecuaciones para que los coeficientes sean opuestos', 'اضرب المعادلتين عند الحاجة ليصير المعاملان متعاكسين', 'If needed, multiply the equations so that the coefficients are opposites')}
         />
     )
 }
@@ -304,14 +304,14 @@ export function ReductionFigure({ language }: { language: UnitLanguage }) {
 /* ---------- Hens and rabbits ---------- */
 
 export function SystemProblemFigure({ language }: { language: UnitLanguage }) {
-    const head = [say('buruak', 'cabezas', 'الرؤوس'), say('hankak', 'patas', 'الأرجل')]
+    const head = [say('buruak', 'cabezas', 'الرؤوس', 'heads'), say('hankak', 'patas', 'الأرجل', 'legs')]
     const rows = [
-        { name: say('oiloak', 'gallinas', 'الدجاج'), cells: ['x', '2x'] },
-        { name: say('untxiak', 'conejos', 'الأرانب'), cells: ['y', '4y'] },
-        { name: say('guztira', 'total', 'المجموع'), cells: ['20', '56'] }
+        { name: say('oiloak', 'gallinas', 'الدجاج', 'chickens'), cells: ['x', '2x'] },
+        { name: say('untxiak', 'conejos', 'الأرانب', 'rabbits'), cells: ['y', '4y'] },
+        { name: say('guztira', 'total', 'المجموع', 'total'), cells: ['20', '56'] }
     ]
     return (
-        <Figure height={270} label={pick(language, say('Oiloak eta untxiak: 20 buru eta 56 hanka', 'Gallinas y conejos: 20 cabezas y 56 patas', 'دجاج وأرانب: 20 رأسًا و56 رجلًا'))}>
+        <Figure height={270} label={pick(language, say('Oiloak eta untxiak: 20 buru eta 56 hanka', 'Gallinas y conejos: 20 cabezas y 56 patas', 'دجاج وأرانب: 20 رأسًا و56 رجلًا', 'Chickens and rabbits: 20 heads and 56 legs'))}>
             {head.map((text, column) => <Label key={column} x={210 + column * 100} y={40} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{pick(language, text)}</Label>)}
             {rows.map((row, index) => (
                 <g key={index}>
@@ -327,7 +327,7 @@ export function SystemProblemFigure({ language }: { language: UnitLanguage }) {
             ))}
             <SystemBrace x={410} y={78} top="x + y = 20" bottom="2x + 4y = 56" />
             <text x={530} y={186} textAnchor="middle" fontSize={21} fontWeight={700} fill={GREEN}>x = 12,  y = 8</text>
-            <Caption y={250} language={language} text={say('Taula batek bi ekuazioak idazten laguntzen du: 12 oilo eta 8 untxi', 'Una tabla ayuda a escribir las dos ecuaciones: 12 gallinas y 8 conejos', 'يساعد الجدول على كتابة المعادلتين: 12 دجاجة و8 أرانب')} />
+            <Caption y={250} language={language} text={say('Taula batek bi ekuazioak idazten laguntzen du: 12 oilo eta 8 untxi', 'Una tabla ayuda a escribir las dos ecuaciones: 12 gallinas y 8 conejos', 'يساعد الجدول على كتابة المعادلتين: 12 دجاجة و8 أرانب', 'A table helps you write the two equations: 12 chickens and 8 rabbits')} />
         </Figure>
     )
 }

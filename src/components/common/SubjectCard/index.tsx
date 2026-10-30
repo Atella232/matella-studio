@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { fixMaybeText } from '../../../utils/fixText'
 import './SubjectCard.css'
 
@@ -20,8 +21,9 @@ export function SubjectCard({
     description,
     color,
     disabled = false,
-    disabledLabel = 'Próximamente'
+    disabledLabel
 }: SubjectCardProps) {
+    const { t } = useTranslation()
     const cardStyle = { '--card-color': color } as CSSProperties
     const cardContent = (
         <>
@@ -33,7 +35,7 @@ export function SubjectCard({
                 <p className="subject-card-description">{fixMaybeText(description)}</p>
             </div>
             {disabled && (
-                <span className="subject-card-badge">{disabledLabel}</span>
+                <span className="subject-card-badge">{disabledLabel ?? t('subjects.comingSoon')}</span>
             )}
             {!disabled && (
                 <span className="subject-card-arrow">→</span>

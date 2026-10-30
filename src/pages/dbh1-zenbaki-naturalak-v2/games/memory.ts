@@ -1,6 +1,6 @@
 import { randomInt, shuffle, type Random } from '../../../features/unit-v2/games/random.ts'
 import type { Stars } from '../../../features/unit-v2/games/records.ts'
-import { formatNatural } from '../format.ts'
+import { formatNaturalLatex } from '../format.ts'
 import { fromRoman, toRoman } from '../numbers.ts'
 
 /* ==========================================================================
@@ -100,10 +100,10 @@ export function naturalsCardValue(card: NaturalsCard): number {
 
 export function naturalsCardLatex(card: NaturalsCard): string {
     switch (card.kind) {
-        case 'value': return formatNatural(card.value)
+        case 'value': return formatNaturalLatex(card.value)
         case 'roman': return `\\mathrm{${toRoman(card.value)}}`
         case 'power': return `${card.terms[0]}^{${card.terms[1]}}`
-        case 'expanded': return places(card.value).map((part) => formatNatural(part.digit * 10 ** part.power)).join('+')
+        case 'expanded': return places(card.value).map((part) => formatNaturalLatex(part.digit * 10 ** part.power)).join('+')
         // Each term in braces, so a long card only breaks after a +
         case 'tens': return places(card.value).map((part) => (part.power === 0 ? String(part.digit) : part.power === 1 ? `{${part.digit}\\cdot 10}` : `{${part.digit}\\cdot 10^{${part.power}}}`)).join('+')
     }

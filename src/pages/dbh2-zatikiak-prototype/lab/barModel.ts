@@ -47,10 +47,10 @@ export const initialBarModelState: BarModelState = {
 }
 
 export const barSegmentNames: Record<BarSegment, LocalizedText> = {
-    total: { eu: 'Osoa', es: 'Total', ar: 'الكل' },
-    first: { eu: '1. zatia', es: '1.ª parte', ar: 'الجزء الأول' },
-    second: { eu: '2. zatia', es: '2.ª parte', ar: 'الجزء الثاني' },
-    left: { eu: 'Soberakina', es: 'Sobra', ar: 'المتبقي' }
+    total: { eu: 'Osoa', es: 'Total', en: 'Whole', ar: 'الكل' },
+    first: { eu: '1. zatia', es: '1.ª parte', en: '1st part', ar: 'الجزء الأول' },
+    second: { eu: '2. zatia', es: '2.ª parte', en: '2nd part', ar: 'الجزء الثاني' },
+    left: { eu: 'Soberakina', es: 'Sobra', en: 'Left over', ar: 'المتبقي' }
 }
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value))
@@ -188,11 +188,13 @@ export const barChallenges: LabChallenge<BarModelState>[] = [
         prompt: {
             eu: 'Institutu bateko ikasleen 3/8 autobusez etortzen dira, eta 45 dira. Zenbat ikasle daude guztira? Marraztu problema barran eta idatzi erantzuna.',
             es: 'En un instituto, 3/8 del alumnado viene en autobús: son 45 estudiantes. ¿Cuántos estudiantes hay en total? Dibuja el problema en la barra y escribe la respuesta.',
+            en: 'In a secondary school, 3/8 of the students come by bus: that makes 45 students. How many students are there in total? Draw the problem on the bar and write the answer.',
             ar: 'في مدرسة، يأتي 3/8 من التلاميذ بالحافلة، وعددهم 45. كم عدد التلاميذ في المجموع؟ ارسم المسألة على الشريط واكتب الإجابة.'
         },
         hint: {
             eu: 'Barra 8 zatitan, 3 lehen zatian. Datua: 1. zatia = 45. Galdera: osoa. 3 zatik 45 balio badute, zenbat balio du batek?',
             es: 'Barra de 8 partes, 3 en la 1.ª parte. Dato: 1.ª parte = 45. Pregunta: el total. Si 3 partes valen 45, ¿cuánto vale una?',
+            en: 'Bar of 8 parts, 3 in the 1st part. Given: 1st part = 45. Question: the whole. If 3 parts are worth 45, how much is one part worth?',
             ar: 'شريط من 8 أجزاء، 3 منها في الجزء الأول. المعطى: الجزء الأول = 45. السؤال: الكل. إذا كانت 3 أجزاء تساوي 45، فكم يساوي جزء واحد؟'
         },
         isSolved: (state) => models(state, { first: fraction(3, 8), secondOf: 'none', known: 'first', value: 45, asked: 'total' }) && answered(state, 120)
@@ -202,11 +204,13 @@ export const barChallenges: LabChallenge<BarModelState>[] = [
         prompt: {
             eu: '120 litroko depositu bat beteta zegoen, eta 2/5 erabili dira. Zenbat litro geratzen dira?',
             es: 'Un depósito de 120 litros estaba lleno y se han gastado 2/5. ¿Cuántos litros quedan?',
+            en: 'A 120-litre tank was full and 2/5 of it has been used up. How many litres are left?',
             ar: 'كان خزان سعته 120 لترًا ممتلئًا، واستُهلك 2/5 منه. كم لترًا بقي؟'
         },
         hint: {
             eu: 'Barra 5 zatitan, 2 lehen zatian. Datua: osoa = 120. Galdera: soberakina.',
             es: 'Barra de 5 partes, 2 en la 1.ª parte. Dato: total = 120. Pregunta: lo que sobra.',
+            en: 'Bar of 5 parts, 2 in the 1st part. Given: whole = 120. Question: what is left over.',
             ar: 'شريط من 5 أجزاء، 2 منها في الجزء الأول. المعطى: الكل = 120. السؤال: المتبقي.'
         },
         isSolved: (state) => models(state, { first: fraction(2, 5), secondOf: 'none', known: 'total', value: 120, asked: 'left' }) && answered(state, 72)
@@ -216,11 +220,13 @@ export const barChallenges: LabChallenge<BarModelState>[] = [
         prompt: {
             eu: 'Anek bere pagaren 1/3 zineman gastatzen du, eta geratzen zaionaren 2/5 liburu batean. 36 € soberan ditu. Zenbat zen bere paga?',
             es: 'Ane gasta 1/3 de su paga en el cine y 2/5 de lo que le queda en un libro. Le sobran 36 €. ¿Cuánto era su paga?',
+            en: 'Ane spends 1/3 of her pocket money at the cinema and 2/5 of what is left on a book. She has €36 left over. How much was her pocket money?',
             ar: 'تنفق آنا 1/3 مصروفها في السينما و2/5 مما تبقّى لها في كتاب، فيبقى معها 36 €. كم كان مصروفها؟'
         },
         hint: {
             eu: '2. zatia geratzen denarena da: banatu geratzen dena 5 zatitan eta hartu 2. Datua: soberakina = 36.',
             es: 'La 2.ª parte es «de lo que queda»: parte lo que queda en 5 y toma 2. Dato: sobra = 36.',
+            en: 'The 2nd part is ‘of what is left’: split what is left into 5 and take 2. Given: left over = 36.',
             ar: 'الجزء الثاني «من الباقي»: قسّم الباقي إلى 5 أجزاء وخذ 2. المعطى: المتبقي = 36.'
         },
         isSolved: (state) => models(state, { first: fraction(1, 3), secondOf: 'rest', second: fraction(2, 5), known: 'left', value: 36, asked: 'total' }) && answered(state, 90)
@@ -230,11 +236,13 @@ export const barChallenges: LabChallenge<BarModelState>[] = [
         prompt: {
             eu: 'Gela bateko ikasleen 1/3 oinez etortzen dira eta 1/4 bizikletaz; beste 10 ikasleak autobusez. Zenbat ikasle daude gelan?',
             es: 'En una clase, 1/3 del alumnado viene andando y 1/4 en bici; los otros 10 vienen en autobús. ¿Cuántos son en la clase?',
+            en: 'In a class, 1/3 of the students walk and 1/4 come by bike; the other 10 come by bus. How many are there in the class?',
             ar: 'في صفّ، يأتي 1/3 من التلاميذ مشيًا و1/4 بالدراجة، والعشرة الآخرون بالحافلة. كم عدد تلاميذ الصف؟'
         },
         hint: {
             eu: 'Bi zatiak osoarenak dira. Herenak eta laurdenak sartzen diren barra bat behar duzu: 12 zatikoa.',
             es: 'Las dos partes son «del total». Necesitas una barra en la que quepan tercios y cuartos: de 12 partes.',
+            en: 'Both parts are ‘of the whole’. You need a bar in which thirds and quarters both fit: one with 12 parts.',
             ar: 'الجزآن «من الكل». تحتاج إلى شريط تتسع فيه الأثلاث والأرباع: من 12 جزءًا.'
         },
         isSolved: (state) => models(state, { first: fraction(1, 3), secondOf: 'whole', second: fraction(1, 4), known: 'left', value: 10, asked: 'total' }) && answered(state, 24)

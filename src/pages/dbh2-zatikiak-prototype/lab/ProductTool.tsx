@@ -39,12 +39,12 @@ function simplifiedTail(value: FractionValue): string {
 function productTip(op: ProductState['op'], relation: Relation): LocalizedText {
     if (relation === '=') {
         return op === 'multiply'
-            ? { eu: 'Bat zenbakiaz biderkatzeak ez du balioa aldatzen.', es: 'Multiplicar por 1 no cambia el valor.', ar: 'الضرب في 1 لا يغيّر القيمة.' }
-            : { eu: 'Bat zenbakiaz zatitzeak ez du balioa aldatzen.', es: 'Dividir entre 1 no cambia el valor.', ar: 'القسمة على 1 لا تغيّر القيمة.' }
+            ? { eu: 'Bat zenbakiaz biderkatzeak ez du balioa aldatzen.', es: 'Multiplicar por 1 no cambia el valor.', en: 'Multiplying by 1 does not change the value.', ar: 'الضرب في 1 لا يغيّر القيمة.' }
+            : { eu: 'Bat zenbakiaz zatitzeak ez du balioa aldatzen.', es: 'Dividir entre 1 no cambia el valor.', en: 'Dividing by 1 does not change the value.', ar: 'القسمة على 1 لا تغيّر القيمة.' }
     }
     return op === 'multiply'
-        ? { eu: '1 baino txikiagoa den zatiki batez biderkatzean emaitza txikiagoa da: zati bat baino ez duzu hartzen.', es: 'Multiplicar por una fracción menor que 1 hace el resultado más pequeño: tomas solo una parte.', ar: 'الضرب في كسر أصغر من 1 يصغّر النتيجة: فأنت تأخذ جزءًا منها فقط.' }
-        : { eu: '1 baino txikiagoa den zatiki batez zatitzean emaitza handiagoa da: behin baino gehiagotan sartzen da.', es: 'Dividir entre una fracción menor que 1 hace el resultado mayor: cabe más de una vez.', ar: 'القسمة على كسر أصغر من 1 تكبّر النتيجة: فهو يتّسع أكثر من مرة.' }
+        ? { eu: '1 baino txikiagoa den zatiki batez biderkatzean emaitza txikiagoa da: zati bat baino ez duzu hartzen.', es: 'Multiplicar por una fracción menor que 1 hace el resultado más pequeño: tomas solo una parte.', en: 'Multiplying by a fraction less than 1 makes the result smaller: you only take a part.', ar: 'الضرب في كسر أصغر من 1 يصغّر النتيجة: فأنت تأخذ جزءًا منها فقط.' }
+        : { eu: '1 baino txikiagoa den zatiki batez zatitzean emaitza handiagoa da: behin baino gehiagotan sartzen da.', es: 'Dividir entre una fracción menor que 1 hace el resultado mayor: cabe más de una vez.', en: 'Dividing by a fraction less than 1 makes the result bigger: it fits more than once.', ar: 'القسمة على كسر أصغر من 1 تكبّر النتيجة: فهو يتّسع أكثر من مرة.' }
 }
 
 export function ProductTool(props: ToolProps & { challenges?: LabChallenge<ProductState>[]; extraChallenges?: LabChallengeMaker<ProductState> }) {
@@ -57,16 +57,16 @@ export function ProductTool(props: ToolProps & { challenges?: LabChallenge<Produ
     const operandControls = (which: 'first' | 'second', value: FractionValue, title: string) => (
         <>
             <h3>{title}</h3>
-            <Stepper label={l({ eu: 'Zenbakitzailea', es: 'Numerador', ar: 'البسط' })} value={value.numerator} min={1} max={value.denominator} onChange={(next) => setState((current) => setProductOperand(current, which, next, current[which].denominator))} language={props.language} />
-            <Stepper label={l({ eu: 'Izendatzailea', es: 'Denominador', ar: 'المقام' })} value={value.denominator} min={OPERATION_LIMITS.minDenominator} max={OPERATION_LIMITS.maxDenominator} onChange={(next) => setState((current) => setProductOperand(current, which, current[which].numerator, next))} language={props.language} />
+            <Stepper label={l({ eu: 'Zenbakitzailea', es: 'Numerador', en: 'Numerator', ar: 'البسط' })} value={value.numerator} min={1} max={value.denominator} onChange={(next) => setState((current) => setProductOperand(current, which, next, current[which].denominator))} language={props.language} />
+            <Stepper label={l({ eu: 'Izendatzailea', es: 'Denominador', en: 'Denominator', ar: 'المقام' })} value={value.denominator} min={OPERATION_LIMITS.minDenominator} max={OPERATION_LIMITS.maxDenominator} onChange={(next) => setState((current) => setProductOperand(current, which, current[which].numerator, next))} language={props.language} />
         </>
     )
 
     const controls = (
         <>
-            {operandControls('first', first, l({ eu: 'Lehen zatikia', es: 'Primera fracción', ar: 'الكسر الأول' }))}
-            <Segmented label={l({ eu: 'Eragiketa', es: 'Operación', ar: 'العملية' })} value={op} options={[{ value: 'multiply', label: '×' }, { value: 'divide', label: '÷' }]} onChange={(next) => setState((current) => setProductOp(current, next))} />
-            {operandControls('second', second, l({ eu: 'Bigarren zatikia', es: 'Segunda fracción', ar: 'الكسر الثاني' }))}
+            {operandControls('first', first, l({ eu: 'Lehen zatikia', es: 'Primera fracción', en: 'First fraction', ar: 'الكسر الأول' }))}
+            <Segmented label={l({ eu: 'Eragiketa', es: 'Operación', en: 'Operation', ar: 'العملية' })} value={op} options={[{ value: 'multiply', label: '×' }, { value: 'divide', label: '÷' }]} onChange={(next) => setState((current) => setProductOp(current, next))} />
+            {operandControls('second', second, l({ eu: 'Bigarren zatikia', es: 'Segunda fracción', en: 'Second fraction', ar: 'الكسر الثاني' }))}
         </>
     )
 
@@ -82,8 +82,8 @@ export function ProductTool(props: ToolProps & { challenges?: LabChallenge<Produ
             <PredictionStep
                 language={props.language}
                 question={op === 'multiply'
-                    ? { eu: `Kalkulatu aurretik: biderkadura lehen zatikia ($${latex(first)}$) baino txikiagoa, berdina ala handiagoa izango da?`, es: `Antes de calcular: ¿el producto será menor, igual o mayor que la primera fracción, $${latex(first)}$?`, ar: `قبل الحساب: هل سيكون الناتج أصغر من الكسر الأول $${latex(first)}$ أم يساويه أم أكبر منه؟` }
-                    : { eu: `Kalkulatu aurretik: zatidura lehen zatikia ($${latex(first)}$) baino txikiagoa, berdina ala handiagoa izango da?`, es: `Antes de calcular: ¿el cociente será menor, igual o mayor que la primera fracción, $${latex(first)}$?`, ar: `قبل الحساب: هل سيكون خارج القسمة أصغر من الكسر الأول $${latex(first)}$ أم يساويه أم أكبر منه؟` }}
+                    ? { eu: `Kalkulatu aurretik: biderkadura lehen zatikia ($${latex(first)}$) baino txikiagoa, berdina ala handiagoa izango da?`, es: `Antes de calcular: ¿el producto será menor, igual o mayor que la primera fracción, $${latex(first)}$?`, en: `Before calculating: will the product be smaller than, equal to or bigger than the first fraction, $${latex(first)}$?`, ar: `قبل الحساب: هل سيكون الناتج أصغر من الكسر الأول $${latex(first)}$ أم يساويه أم أكبر منه؟` }
+                    : { eu: `Kalkulatu aurretik: zatidura lehen zatikia ($${latex(first)}$) baino txikiagoa, berdina ala handiagoa izango da?`, es: `Antes de calcular: ¿el cociente será menor, igual o mayor que la primera fracción, $${latex(first)}$?`, en: `Before calculating: will the quotient be smaller than, equal to or bigger than the first fraction, $${latex(first)}$?`, ar: `قبل الحساب: هل سيكون خارج القسمة أصغر من الكسر الأول $${latex(first)}$ أم يساويه أم أكبر منه؟` }}
                 actual={prediction.relation}
                 choice={state.prediction}
                 tip={productTip(op, prediction.relation)}
@@ -124,15 +124,15 @@ function AreaModel({ first, second, showResult, language }: { first: FractionVal
                     className="fraction-v2-area-grid"
                     style={{ gridTemplateColumns: `repeat(${first.denominator}, minmax(0, 1fr))`, gridTemplateRows: `repeat(${second.denominator}, minmax(0, 1fr))`, '--n': overlap } as CSSProperties}
                     role="img"
-                    aria-label={l({ eu: `${total} laukitatik ${overlap} gurutzean`, es: `${overlap} de ${total} casillas en el cruce`, ar: `${overlap} من ${total} خانة في التقاطع` })}
+                    aria-label={l({ eu: `${total} laukitatik ${overlap} gurutzean`, es: `${overlap} de ${total} casillas en el cruce`, en: `${overlap} of ${total} squares in the overlap`, ar: `${overlap} من ${total} خانة في التقاطع` })}
                 >
                     {cells.map((tone, index) => <span className={tone} key={index} style={tone === 'both' ? { '--i': cells.slice(0, index).filter((item) => item === 'both').length } as CSSProperties : undefined} />)}
                 </div>
             </div>
             <p className="fraction-v2-insight">
                 {showResult
-                    ? l({ eu: `Gurutzea: ${total} laukitatik ${overlap}.`, es: `El cruce ocupa ${overlap} de las ${total} casillas.`, ar: `يشغل التقاطع ${overlap} من ${total} خانة.` })
-                    : l({ eu: 'Zenbatu bi koloreak gurutzatzen diren laukiak eta lauki guztiak.', es: 'Cuenta las casillas donde se cruzan los dos colores y las casillas totales.', ar: 'عُدّ الخانات التي يتقاطع فيها اللونان وجميع الخانات.' })}
+                    ? l({ eu: `Gurutzea: ${total} laukitatik ${overlap}.`, es: `El cruce ocupa ${overlap} de las ${total} casillas.`, en: `The overlap takes up ${overlap} of the ${total} squares.`, ar: `يشغل التقاطع ${overlap} من ${total} خانة.` })
+                    : l({ eu: 'Zenbatu bi koloreak gurutzatzen diren laukiak eta lauki guztiak.', es: 'Cuenta las casillas donde se cruzan los dos colores y las casillas totales.', en: 'Count the squares where the two colours overlap, and the total number of squares.', ar: 'عُدّ الخانات التي يتقاطع فيها اللونان وجميع الخانات.' })}
             </p>
         </div>
     )
@@ -152,7 +152,7 @@ function MeasureModel({ first, second, showResult, language }: { first: Fraction
 
     return (
         <div className="fraction-v2-measure">
-            <div className="fraction-v2-measure-line" role="img" aria-label={l({ eu: `${fullJumps} jauzi oso eta hondar bat`, es: `${fullJumps} saltos completos y un resto`, ar: `${fullJumps} قفزات كاملة وباقٍ` })}>
+            <div className="fraction-v2-measure-line" role="img" aria-label={l({ eu: `${fullJumps} jauzi oso eta hondar bat`, es: `${fullJumps} saltos completos y un resto`, en: `${fullJumps} full jumps and a remainder`, ar: `${fullJumps} قفزات كاملة وباقٍ` })}>
                 <span className="fraction-v2-measure-target" style={{ width: position(target) }}>
                     <span><MathText text={`$${latex(first)}$`} /></span>
                 </span>
@@ -173,16 +173,18 @@ function MeasureModel({ first, second, showResult, language }: { first: Fraction
                         ? l({
                             eu: `Ez da jauzi oso bat ere sartzen: jauzi baten ${leftoverShare.numerator}/${leftoverShare.denominator} baino ez.`,
                             es: `No cabe ni un salto completo: solo cabe ${leftoverShare.numerator}/${leftoverShare.denominator} de salto.`,
+                            en: `Not even one full jump fits: only ${leftoverShare.numerator}/${leftoverShare.denominator} of a jump does.`,
                             ar: `لا تتسع ولو قفزة كاملة: يتسع فقط ${leftoverShare.numerator}/${leftoverShare.denominator} من قفزة.`
                         })
                         : leftover > 1e-9
                         ? l({
                             eu: `${fullJumps} jauzi oso sartzen dira, eta hondarra jauzi baten ${leftoverShare.numerator}/${leftoverShare.denominator} da.`,
                             es: `Caben ${fullJumps} saltos completos y lo que sobra es ${leftoverShare.numerator}/${leftoverShare.denominator} de salto.`,
+                            en: `${fullJumps} full jumps fit, and what is left over is ${leftoverShare.numerator}/${leftoverShare.denominator} of a jump.`,
                             ar: `تتسع ${fullJumps} قفزات كاملة، والباقي ${leftoverShare.numerator}/${leftoverShare.denominator} من قفزة.`
                         })
-                        : l({ eu: `Zehazki ${fullJumps} jauzi sartzen dira.`, es: `Caben exactamente ${fullJumps} saltos.`, ar: `تتسع ${fullJumps} قفزات تمامًا.` })
-                    : l({ eu: `Jauzi bakoitza ${second.numerator}/${second.denominator} bada, zenbat jauzi sartzen dira ${first.numerator}/${first.denominator} arte?`, es: `¿Cuántos saltos de ${second.numerator}/${second.denominator} caben hasta llegar a ${first.numerator}/${first.denominator}?`, ar: `كم قفزة بطول ${second.numerator}/${second.denominator} تتسع حتى تصل إلى ${first.numerator}/${first.denominator}؟` })}
+                        : l({ eu: `Zehazki ${fullJumps} jauzi sartzen dira.`, es: `Caben exactamente ${fullJumps} saltos.`, en: `Exactly ${fullJumps} jumps fit.`, ar: `تتسع ${fullJumps} قفزات تمامًا.` })
+                    : l({ eu: `Jauzi bakoitza ${second.numerator}/${second.denominator} bada, zenbat jauzi sartzen dira ${first.numerator}/${first.denominator} arte?`, es: `¿Cuántos saltos de ${second.numerator}/${second.denominator} caben hasta llegar a ${first.numerator}/${first.denominator}?`, en: `How many jumps of ${second.numerator}/${second.denominator} fit until you reach ${first.numerator}/${first.denominator}?`, ar: `كم قفزة بطول ${second.numerator}/${second.denominator} تتسع حتى تصل إلى ${first.numerator}/${first.denominator}؟` })}
             </p>
         </div>
     )

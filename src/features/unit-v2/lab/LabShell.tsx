@@ -53,12 +53,12 @@ export function LabShell<Tool extends LabToolInfo>({
     return (
         <section className="fraction-v2-lab" aria-labelledby="fraction-v2-lab-title">
             <div className="fraction-v2-page-intro">
-                <span>{l({ eu: 'LABORATEGIA', es: 'LABORATORIO', ar: 'المختبر' })}</span>
+                <span>{l({ eu: 'LABORATEGIA', es: 'LABORATORIO', en: 'LAB', ar: 'المختبر' })}</span>
                 <h1 id="fraction-v2-lab-title">{l(title)}</h1>
-                <p>{l({ eu: 'Aukeratu tresna bat, manipulatu eredua eta gainditu bere erronkak.', es: 'Elige una herramienta, manipula el modelo y supera sus retos.', ar: 'اختر أداة وتعامل مع النموذج وتغلّب على تحدياتها.' })}</p>
+                <p>{l({ eu: 'Aukeratu tresna bat, manipulatu eredua eta gainditu bere erronkak.', es: 'Elige una herramienta, manipula el modelo y supera sus retos.', en: 'Choose a tool, work with the model and complete its challenges.', ar: 'اختر أداة وتعامل مع النموذج وتغلّب على تحدياتها.' })}</p>
             </div>
 
-            <div className="fraction-v2-lab-picker" role="tablist" aria-label={l({ eu: 'Tresna aukeratu', es: 'Elegir herramienta', ar: 'اختر أداة' })}>
+            <div className="fraction-v2-lab-picker" role="tablist" aria-label={l({ eu: 'Tresna aukeratu', es: 'Elegir herramienta', en: 'Choose a tool', ar: 'اختر أداة' })}>
                 {tools.map((item) => (
                     <button
                         type="button"
@@ -84,7 +84,7 @@ export function LabShell<Tool extends LabToolInfo>({
                 key={current.id}
                 tool={current}
                 tone={stage?.tone}
-                stageLabel={`${l({ eu: `${stageIndex + 1}. etapa`, es: `Etapa ${stageIndex + 1}`, ar: `المرحلة ${stageIndex + 1}` })} · ${stage ? l(stage.title) : ''}`}
+                stageLabel={`${l({ eu: `${stageIndex + 1}. etapa`, es: `Etapa ${stageIndex + 1}`, en: `Stage ${stageIndex + 1}`, ar: `المرحلة ${stageIndex + 1}` })} · ${stage ? l(stage.title) : ''}`}
                 language={language}
                 completedIds={completedIds}
                 onComplete={onComplete}

@@ -37,12 +37,12 @@ const ltr = (text: string) => `\u2066${text}\u2069`
 const plain = (value: FractionValue) => (value.denominator === 1 ? String(value.numerator) : `${value.numerator}/${value.denominator}`)
 
 const positions = [
-    { eu: 'Goiko adreilua', es: 'Ladrillo de arriba', ar: 'اللبنة العليا' },
-    { eu: 'Erdiko adreilua, ezkerrean', es: 'Ladrillo de en medio, a la izquierda', ar: 'اللبنة الوسطى اليسرى' },
-    { eu: 'Erdiko adreilua, eskuinean', es: 'Ladrillo de en medio, a la derecha', ar: 'اللبنة الوسطى اليمنى' },
-    { eu: 'Beheko adreilua, ezkerrean', es: 'Ladrillo de abajo, a la izquierda', ar: 'اللبنة السفلى اليسرى' },
-    { eu: 'Beheko adreilua, erdian', es: 'Ladrillo de abajo, en el centro', ar: 'اللبنة السفلى الوسطى' },
-    { eu: 'Beheko adreilua, eskuinean', es: 'Ladrillo de abajo, a la derecha', ar: 'اللبنة السفلى اليمنى' }
+    { eu: 'Goiko adreilua', es: 'Ladrillo de arriba', en: 'Top brick', ar: 'اللبنة العليا' },
+    { eu: 'Erdiko adreilua, ezkerrean', es: 'Ladrillo de en medio, a la izquierda', en: 'Middle brick, on the left', ar: 'اللبنة الوسطى اليسرى' },
+    { eu: 'Erdiko adreilua, eskuinean', es: 'Ladrillo de en medio, a la derecha', en: 'Middle brick, on the right', ar: 'اللبنة الوسطى اليمنى' },
+    { eu: 'Beheko adreilua, ezkerrean', es: 'Ladrillo de abajo, a la izquierda', en: 'Bottom brick, on the left', ar: 'اللبنة السفلى اليسرى' },
+    { eu: 'Beheko adreilua, erdian', es: 'Ladrillo de abajo, en el centro', en: 'Bottom brick, in the centre', ar: 'اللبنة السفلى الوسطى' },
+    { eu: 'Beheko adreilua, eskuinean', es: 'Ladrillo de abajo, a la derecha', en: 'Bottom brick, on the right', ar: 'اللبنة السفلى اليمنى' }
 ]
 
 /** A fraction written stacked, as on the bricks */
@@ -59,13 +59,13 @@ type Feedback =
     | null
 
 /** What each typical slip means, said to the learner */
-const slipTips: Record<PyramidSlip, { eu: string; es: string; ar: string }> = {
-    across: { eu: 'Goikoak elkarrekin eta behekoak elkarrekin kalkulatu dituzu. Lehenik, izendatzaile komuna.', es: 'Has operado arriba con arriba y abajo con abajo. Primero, denominador común.', ar: 'حسبت البسطين معًا والمقامين معًا. حوّل أولًا إلى مقام مشترك.' },
-    added: { eu: 'Batu egin duzu, baina beherantz kendu egin behar da: goikoa ken ondokoa.', es: 'Has sumado, pero hacia abajo hay que restar: el de arriba menos el de al lado.', ar: 'لقد جمعت، لكن نزولًا يجب أن تطرح: العليا ناقص المجاورة.' },
-    subtracted: { eu: 'Kendu egin duzu, baina gorantz batu egiten da.', es: 'Has restado, pero hacia arriba se suma.', ar: 'لقد طرحت، لكن صعودًا نجمع.' },
-    multiplied: { eu: 'Biderkatu egin duzu, baina beherantz zatitu egin behar da: goikoa zati ondokoa.', es: 'Has multiplicado, pero hacia abajo hay que dividir: el de arriba entre el de al lado.', ar: 'لقد ضربت، لكن نزولًا يجب أن تقسم: العليا على المجاورة.' },
-    'upside-down': { eu: 'Alderantziz zatitu duzu: goikoa zati ondokoa da, ez alderantziz.', es: 'Has dividido al revés: es el de arriba entre el de al lado, no al contrario.', ar: 'قسمت بالعكس: العليا على المجاورة، لا العكس.' },
-    'added-not-multiplied': { eu: 'Batu egin duzu, baina piramide honetan adreilu bakoitza biderkadura da.', es: 'Has sumado, pero en esta pirámide cada ladrillo es un producto.', ar: 'لقد جمعت، لكن في هذا الهرم كل لبنة حاصل ضرب.' }
+const slipTips: Record<PyramidSlip, { eu: string; es: string; en: string; ar: string }> = {
+    across: { eu: 'Goikoak elkarrekin eta behekoak elkarrekin kalkulatu dituzu. Lehenik, izendatzaile komuna.', es: 'Has operado arriba con arriba y abajo con abajo. Primero, denominador común.', en: 'You have combined the tops with the tops and the bottoms with the bottoms. First, find a common denominator.', ar: 'حسبت البسطين معًا والمقامين معًا. حوّل أولًا إلى مقام مشترك.' },
+    added: { eu: 'Batu egin duzu, baina beherantz kendu egin behar da: goikoa ken ondokoa.', es: 'Has sumado, pero hacia abajo hay que restar: el de arriba menos el de al lado.', en: 'You added, but going down you must subtract: the top one minus the one beside it.', ar: 'لقد جمعت، لكن نزولًا يجب أن تطرح: العليا ناقص المجاورة.' },
+    subtracted: { eu: 'Kendu egin duzu, baina gorantz batu egiten da.', es: 'Has restado, pero hacia arriba se suma.', en: 'You subtracted, but going up you add.', ar: 'لقد طرحت، لكن صعودًا نجمع.' },
+    multiplied: { eu: 'Biderkatu egin duzu, baina beherantz zatitu egin behar da: goikoa zati ondokoa.', es: 'Has multiplicado, pero hacia abajo hay que dividir: el de arriba entre el de al lado.', en: 'You multiplied, but going down you have to divide: the top one divided by the one beside it.', ar: 'لقد ضربت، لكن نزولًا يجب أن تقسم: العليا على المجاورة.' },
+    'upside-down': { eu: 'Alderantziz zatitu duzu: goikoa zati ondokoa da, ez alderantziz.', es: 'Has dividido al revés: es el de arriba entre el de al lado, no al contrario.', en: 'You divided the wrong way round: it is the top one divided by the one beside it, not the other way round.', ar: 'قسمت بالعكس: العليا على المجاورة، لا العكس.' },
+    'added-not-multiplied': { eu: 'Batu egin duzu, baina piramide honetan adreilu bakoitza biderkadura da.', es: 'Has sumado, pero en esta pirámide cada ladrillo es un producto.', en: 'You added, but in this pyramid each brick is a product.', ar: 'لقد جمعت، لكن في هذا الهرم كل لبنة حاصل ضرب.' }
 }
 
 export function PyramidGame({ language, records, onResult, onExit }: GameProps) {
@@ -217,6 +217,7 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
     const starsText = l({
         eu: `3 izar: ${STARS.three} puntu · 2: ${STARS.two} · 1: ${STARS.one}.`,
         es: `3 estrellas: ${STARS.three} puntos · 2: ${STARS.two} · 1: ${STARS.one}.`,
+        en: `3 stars: ${STARS.three} points · 2: ${STARS.two} · 1: ${STARS.one}.`,
         ar: `3 نجوم: ${STARS.three} نقطة · 2: ${STARS.two} · 1: ${STARS.one}.`
     })
 
@@ -228,11 +229,11 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'أفضل نتيجة' })}: ${outOf(record.score, PYRAMID_MAX_SCORE)}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'أفضل نتيجة' })}: ${outOf(record.score, PYRAMID_MAX_SCORE)}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: `${PYRAMID_ROUNDS} piramide maila bakoitzean. Sakatu adreilu huts bat eta idatzi haren zatikia; zenbaki mistoak ere bai (1 1/2).`, es: `${PYRAMID_ROUNDS} pirámides por nivel. Toca un ladrillo vacío y escribe su fracción; también vale un número mixto (1 1/2).`, ar: `${PYRAMID_ROUNDS} أهرامات في كل مستوى. اضغط على لبنة فارغة واكتب كسرها؛ ويُقبل العدد الكسري أيضًا (${ltr('1 1/2')}).` })}</li>
-                        <li>{l({ eu: 'Lehen saiakeran asmatutako adreilu bakoitzak 2 puntu ematen ditu. Akats edo pista bakoitzak puntu bat kentzen du.', es: 'Cada ladrillo acertado a la primera vale 2 puntos. Cada error o pista resta uno.', ar: 'كل لبنة صحيحة من المحاولة الأولى بنقطتين. وكل خطأ أو تلميح يُنقص نقطة.' })}</li>
+                        <li>{l({ eu: `${PYRAMID_ROUNDS} piramide maila bakoitzean. Sakatu adreilu huts bat eta idatzi haren zatikia; zenbaki mistoak ere bai (1 1/2).`, es: `${PYRAMID_ROUNDS} pirámides por nivel. Toca un ladrillo vacío y escribe su fracción; también vale un número mixto (1 1/2).`, en: `${PYRAMID_ROUNDS} pyramids per level. Tap an empty brick and write its fraction; a mixed number (1 1/2) also counts.`, ar: `${PYRAMID_ROUNDS} أهرامات في كل مستوى. اضغط على لبنة فارغة واكتب كسرها؛ ويُقبل العدد الكسري أيضًا (${ltr('1 1/2')}).` })}</li>
+                        <li>{l({ eu: 'Lehen saiakeran asmatutako adreilu bakoitzak 2 puntu ematen ditu. Akats edo pista bakoitzak puntu bat kentzen du.', es: 'Cada ladrillo acertado a la primera vale 2 puntos. Cada error o pista resta uno.', en: 'Each brick you get right first time is worth 2 points. Each error or hint takes off one point.', ar: 'كل لبنة صحيحة من المحاولة الأولى بنقطتين. وكل خطأ أو تلميح يُنقص نقطة.' })}</li>
                         <li>{starsText}</li>
                     </ul>
                 )}
@@ -250,8 +251,8 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
                     title={outOf(score, PYRAMID_MAX_SCORE)}
                     subtitle={starsText}
                     stats={[
-                        { label: l({ eu: 'Puntuak', es: 'Puntos', ar: 'النقاط' }), value: outOf(score, PYRAMID_MAX_SCORE) },
-                        { label: l({ eu: 'Akatsik gabe', es: 'Sin fallos', ar: 'دون أخطاء' }), value: outOf(perfect, PYRAMID_ROUNDS) }
+                        { label: l({ eu: 'Puntuak', es: 'Puntos', en: 'Points', ar: 'النقاط' }), value: outOf(score, PYRAMID_MAX_SCORE) },
+                        { label: l({ eu: 'Akatsik gabe', es: 'Sin fallos', en: 'No mistakes', ar: 'دون أخطاء' }), value: outOf(perfect, PYRAMID_ROUNDS) }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}
@@ -265,8 +266,8 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
     if (!pyramid) return <></>
 
     const rule = pyramid.op === 'sum'
-        ? { eu: 'Adreilu bakoitza azpiko bi adreiluen batura da.', es: 'Cada ladrillo es la suma de los dos que tiene debajo.', ar: 'كل لبنة هي مجموع اللبنتين اللتين تحتها.' }
-        : { eu: 'Adreilu bakoitza azpiko bi adreiluen biderkadura da.', es: 'Cada ladrillo es el producto de los dos que tiene debajo.', ar: 'كل لبنة هي حاصل ضرب اللبنتين اللتين تحتها.' }
+        ? { eu: 'Adreilu bakoitza azpiko bi adreiluen batura da.', es: 'Cada ladrillo es la suma de los dos que tiene debajo.', en: 'Each brick is the sum of the two below it.', ar: 'كل لبنة هي مجموع اللبنتين اللتين تحتها.' }
+        : { eu: 'Adreilu bakoitza azpiko bi adreiluen biderkadura da.', es: 'Cada ladrillo es el producto de los dos que tiene debajo.', en: 'Each brick is the product of the two below it.', ar: 'كل لبنة هي حاصل ضرب اللبنتين اللتين تحتها.' }
     const tier = selected !== null ? hints[selected] : 0
     const lit: number[] = tier > 0 && step ? step.from : []
 
@@ -276,28 +277,29 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
             return l({
                 eu: `Ondo! +${feedback.points} puntu`,
                 es: `¡Bien! +${feedback.points} ${feedback.points === 1 ? 'punto' : 'puntos'}`,
+                en: `Good! +${feedback.points} ${feedback.points === 1 ? 'point' : 'points'}`,
                 ar: feedback.points === 0 ? 'صحيح!' : feedback.points === 1 ? 'صحيح! +نقطة واحدة' : 'صحيح! +نقطتان'
             })
         }
-        if (feedback.kind === 'unreadable') return l({ eu: 'Idatzi zatiki oso bat, adibidez 3/4 edo 1 1/2.', es: 'Escribe una fracción completa, como 3/4 o 1 1/2.', ar: `اكتب كسرًا كاملًا مثل ${ltr('3/4')} أو ${ltr('1 1/2')}.` })
+        if (feedback.kind === 'unreadable') return l({ eu: 'Idatzi zatiki oso bat, adibidez 3/4 edo 1 1/2.', es: 'Escribe una fracción completa, como 3/4 o 1 1/2.', en: 'Write a complete fraction, such as 3/4 or 1 1/2.', ar: `اكتب كسرًا كاملًا مثل ${ltr('3/4')} أو ${ltr('1 1/2')}.` })
         if (feedback.kind === 'wrong') {
             return feedback.slip
                 ? l(slipTips[feedback.slip])
-                : l({ eu: 'Ez da hori. Saiatu berriro edo eskatu pista bat.', es: 'No es eso. Prueba otra vez o pide una pista.', ar: 'ليس هذا. حاول مرة أخرى أو اطلب تلميحًا.' })
+                : l({ eu: 'Ez da hori. Saiatu berriro edo eskatu pista bat.', es: 'No es eso. Prueba otra vez o pide una pista.', en: 'That is not it. Try again or ask for a hint.', ar: 'ليس هذا. حاول مرة أخرى أو اطلب تلميحًا.' })
         }
-        return l({ eu: 'Adreilu hau ezin da oraindik kalkulatu: hasi beste batekin.', es: 'Este ladrillo todavía no se puede calcular: empieza por otro.', ar: 'لا يمكن حساب هذه اللبنة بعد: ابدأ بلبنة أخرى.' })
+        return l({ eu: 'Adreilu hau ezin da oraindik kalkulatu: hasi beste batekin.', es: 'Este ladrillo todavía no se puede calcular: empieza por otro.', en: 'This brick cannot be worked out yet: start with another one.', ar: 'لا يمكن حساب هذه اللبنة بعد: ابدأ بلبنة أخرى.' })
     })()
 
     return (
         <div className="pyramid-game" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span><bdi dir="ltr">{index + 1} / {PYRAMID_ROUNDS}</bdi></span>
-                <span>{l({ eu: 'Puntuak', es: 'Puntos', ar: 'النقاط' })}: <strong><bdi dir="ltr">{score}</bdi></strong></span>
+                <span>{l({ eu: 'Puntuak', es: 'Puntos', en: 'Points', ar: 'النقاط' })}: <strong><bdi dir="ltr">{score}</bdi></strong></span>
             </GameTopbar>
 
             <p className="pyramid-rule">{l(rule)}</p>
 
-            <div className="pyramid" dir="ltr" role="group" aria-label={l({ eu: 'Piramidea', es: 'Pirámide', ar: 'الهرم' })}>
+            <div className="pyramid" dir="ltr" role="group" aria-label={l({ eu: 'Piramidea', es: 'Pirámide', en: 'Pyramid', ar: 'الهرم' })}>
                 {ROWS.map((row, rowIndex) => (
                     <div className="pyramid-row" key={rowIndex}>
                         {row.map((brick) => {
@@ -320,7 +322,7 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
                                     className={`pyramid-brick ${done ? 'done' : 'open'} ${isSelected ? 'selected' : ''} ${wrong ? 'wrong' : ''} ${source}`}
                                     aria-pressed={isSelected}
                                     aria-disabled={done}
-                                    aria-label={`${where}: ${done ? plain(value) : typed ? input : l({ eu: 'hutsik', es: 'vacío', ar: 'فارغة' })}`}
+                                    aria-label={`${where}: ${done ? plain(value) : typed ? input : l({ eu: 'hutsik', es: 'vacío', en: 'Empty', ar: 'فارغة' })}`}
                                     onClick={() => choose(brick)}
                                 >
                                     {done
@@ -339,35 +341,35 @@ export function PyramidGame({ language, records, onResult, onExit }: GameProps) 
                 <div className="pyramid-entry">
                     <div className="pyramid-feedback" aria-live="polite">
                         {message && <p className={feedback?.kind ?? ''}>{message}</p>}
-                        {tier === 1 && step && <p className="pyramid-hint">{l({ eu: 'Pista: begiratu markatutako bi adreiluei.', es: 'Pista: fíjate en los dos ladrillos marcados.', ar: 'تلميح: انظر إلى اللبنتين المحدّدتين.' })}</p>}
-                        {tier === 2 && step && <p className="pyramid-hint">{l({ eu: 'Pista:', es: 'Pista:', ar: 'تلميح:' })} <bdi dir="ltr"><MathText inline text={`$${stepLatex(pyramid, step).replaceAll('\\frac', '\\dfrac')}$`} /></bdi></p>}
-                        {!message && tier === 0 && <p className="pyramid-entry-help">{l({ eu: 'Idatzi hautatutako adreiluaren zatikia.', es: 'Escribe la fracción del ladrillo seleccionado.', ar: 'اكتب كسر اللبنة المحدّدة.' })}</p>}
+                        {tier === 1 && step && <p className="pyramid-hint">{l({ eu: 'Pista: begiratu markatutako bi adreiluei.', es: 'Pista: fíjate en los dos ladrillos marcados.', en: 'Hint: look at the two marked bricks.', ar: 'تلميح: انظر إلى اللبنتين المحدّدتين.' })}</p>}
+                        {tier === 2 && step && <p className="pyramid-hint">{l({ eu: 'Pista:', es: 'Pista:', en: 'Hint:', ar: 'تلميح:' })} <bdi dir="ltr"><MathText inline text={`$${stepLatex(pyramid, step).replaceAll('\\frac', '\\dfrac')}$`} /></bdi></p>}
+                        {!message && tier === 0 && <p className="pyramid-entry-help">{l({ eu: 'Idatzi hautatutako adreiluaren zatikia.', es: 'Escribe la fracción del ladrillo seleccionado.', en: 'Write the fraction of the selected brick.', ar: 'اكتب كسر اللبنة المحدّدة.' })}</p>}
                     </div>
-                    <div className="pyramid-keypad" dir="ltr" role="group" aria-label={l({ eu: 'Teklatua', es: 'Teclado', ar: 'لوحة المفاتيح' })}>
+                    <div className="pyramid-keypad" dir="ltr" role="group" aria-label={l({ eu: 'Teklatua', es: 'Teclado', en: 'Keyboard', ar: 'لوحة المفاتيح' })}>
                         {KEYS.map((key) => (
                             <button
                                 type="button"
                                 key={key}
                                 className={key === '0' ? 'zero' : key === ' ' ? 'space' : ''}
                                 onClick={() => press(key)}
-                                aria-label={key === '⌫' ? l({ eu: 'Ezabatu', es: 'Borrar', ar: 'احذف' }) : key === ' ' ? l({ eu: 'Zuriunea (zenbaki mistoak)', es: 'Espacio (números mixtos)', ar: 'مسافة (للعدد الكسري)' }) : key}
+                                aria-label={key === '⌫' ? l({ eu: 'Ezabatu', es: 'Borrar', en: 'Delete', ar: 'احذف' }) : key === ' ' ? l({ eu: 'Zuriunea (zenbaki mistoak)', es: 'Espacio (números mixtos)', en: 'Space (mixed numbers)', ar: 'مسافة (للعدد الكسري)' }) : key}
                             >
                                 {key === ' ' ? '␣' : key}
                             </button>
                         ))}
                     </div>
                     <div className="pyramid-entry-actions">
-                        <button type="button" className="fraction-v2-secondary" disabled={tier >= 2} onClick={hint}>{tier === 1 ? l({ eu: 'Pista gehiago', es: 'Más pista', ar: 'تلميح آخر' }) : l({ eu: 'Pista', es: 'Pista', ar: 'تلميح' })}</button>
-                        <button type="button" className="fraction-v2-primary" disabled={!input.trim()} onClick={check}>{l({ eu: 'Egiaztatu', es: 'Comprobar', ar: 'تحقّق' })}</button>
+                        <button type="button" className="fraction-v2-secondary" disabled={tier >= 2} onClick={hint}>{tier === 1 ? l({ eu: 'Pista gehiago', es: 'Más pista', en: 'Another hint', ar: 'تلميح آخر' }) : l({ eu: 'Pista', es: 'Pista', en: 'Hint', ar: 'تلميح' })}</button>
+                        <button type="button" className="fraction-v2-primary" disabled={!input.trim()} onClick={check}>{l({ eu: 'Egiaztatu', es: 'Comprobar', en: 'Check', ar: 'تحقّق' })}</button>
                     </div>
                 </div>
             )}
 
             {complete && (
                 <div className="pyramid-done" role="status">
-                    <p><strong>{l({ eu: 'Piramidea osatu duzu!', es: '¡Pirámide completa!', ar: 'اكتمل الهرم!' })}</strong> {message}</p>
+                    <p><strong>{l({ eu: 'Piramidea osatu duzu!', es: '¡Pirámide completa!', en: 'Pyramid complete!', ar: 'اكتمل الهرم!' })}</strong> {message}</p>
                     <button type="button" className="fraction-v2-primary" onClick={next} ref={(node) => node?.focus({ preventScroll: true })}>
-                        {index + 1 >= PYRAMID_ROUNDS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', ar: 'التالي' })}
+                        {index + 1 >= PYRAMID_ROUNDS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', en: 'See the result', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', en: 'Next', ar: 'التالي' })}
                     </button>
                 </div>
             )}

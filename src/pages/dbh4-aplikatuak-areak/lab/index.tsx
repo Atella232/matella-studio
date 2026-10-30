@@ -39,7 +39,7 @@ export function AreasVolumesLaboratory(props: {
             tools={areasVolumesLabTools}
             stages={areasVolumesStages}
             components={toolComponents}
-            title={{ eu: 'Neurtu, zabaldu eta bete', es: 'Mide, despliega y llena', ar: 'قِس وانشر واملأ' }}
+            title={{ eu: 'Neurtu, zabaldu eta bete', es: 'Mide, despliega y llena', en: 'Measure, unfold and fill', ar: 'قِس وانشر واملأ' }}
         />
     )
 }

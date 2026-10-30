@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
+import { decimalSeparatorFor } from '../../utils/numberFormat'
 import { Figure, Frac } from '../dbh2-zatikiak-prototype/figures'
 import { Label } from '../dbh2-funtzioak-v2/plane'
 
@@ -7,7 +8,7 @@ import { Label } from '../dbh2-funtzioak-v2/plane'
    Proportzionaltasuna · 1. DBH — lesson figures in the notebook style.
    Tables of proportionality with their ×/: arrows, the rule of three, the
    hundred-square grid and the percentage bars. Numbers keep the decimal
-   comma in Basque and Spanish and the point in Arabic; Arabic captions
+   comma in Basque and Spanish and the point in Arabic and English; Arabic captions
    carry words only (Chrome ignores direction isolates inside SVG text).
    ========================================================================== */
 
@@ -19,12 +20,12 @@ const SECOND = 'var(--second, #c4432a)'
 const GREEN = 'var(--success, #267b53)'
 const PAPER = '#fffcf6'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language, text)
-/** A number written with the comma, shown with the point in Arabic */
-const num = (language: UnitLanguage, text: string) => (language === 'ar' ? text.replace(/,/g, '.') : text)
+/** A number written with the comma, shown with the point in Arabic and English */
+const num = (language: UnitLanguage, text: string) => (language === 'ar' ? text.replace(/,/g, '.') : text.replace(/,/g, decimalSeparatorFor(language)))
 /** A percentage as each language writes it */
-const pct = (language: UnitLanguage, value: string) => (language === 'eu' ? `% ${num(language, value)}` : language === 'ar' ? `${num(language, value)}٪` : `${value} %`)
+const pct = (language: UnitLanguage, value: string) => (language === 'eu' ? `% ${num(language, value)}` : language === 'ar' ? `${num(language, value)}٪` : language === 'en' ? `${num(language, value)}%` : `${value} %`)
 
 export function Caption({ y, language, text }: { y: number; language: UnitLanguage; text: LocalizedText }) {
     return <Label x={360} y={y} textAnchor="middle" fontSize={15} fill={MUTED}>{pick(language, text)}</Label>
@@ -70,17 +71,17 @@ const columnX = (x: number, c: number, cell = 64) => x + 150 + c * cell + cell /
 
 export function MagnitudesFigure({ language }: { language: UnitLanguage }) {
     const yes = [
-        { name: say('Luzera', 'Longitud', 'الطول'), unit: 'm' },
-        { name: say('Masa', 'Masa', 'الكتلة'), unit: 'kg' },
-        { name: say('Edukiera', 'Capacidad', 'السعة'), unit: 'l' },
-        { name: say('Prezioa', 'Precio', 'السعر'), unit: '€' },
-        { name: say('Abiadura', 'Velocidad', 'السرعة'), unit: 'km/h' }
+        { name: say('Luzera', 'Longitud', 'الطول', 'Length'), unit: 'm' },
+        { name: say('Masa', 'Masa', 'الكتلة', 'Mass'), unit: 'kg' },
+        { name: say('Edukiera', 'Capacidad', 'السعة', 'Capacity'), unit: 'l' },
+        { name: say('Prezioa', 'Precio', 'السعر', 'Price'), unit: '€' },
+        { name: say('Abiadura', 'Velocidad', 'السرعة', 'Speed'), unit: 'km/h' }
     ]
-    const no = [say('Maitasuna', 'El cariño', 'المحبة'), say('Edertasuna', 'La belleza', 'الجمال'), say('Barrea', 'La risa', 'الضحك')]
+    const no = [say('Maitasuna', 'El cariño', 'المحبة', 'Affection'), say('Edertasuna', 'La belleza', 'الجمال', 'Beauty'), say('Barrea', 'La risa', 'الضحك', 'Laughter')]
     return (
-        <Figure height={260} label={pick(language, say('Magnitudeak eta ez-magnitudeak', 'Magnitudes y no magnitudes', 'مقادير وغير مقادير'))}>
+        <Figure height={260} label={pick(language, say('Magnitudeak eta ez-magnitudeak', 'Magnitudes y no magnitudes', 'مقادير وغير مقادير', 'Quantities and non-quantities'))}>
             <rect x={30} y={14} width={400} height={210} rx={14} fill={STAGE_TINT} stroke={INK} strokeWidth={1.8} />
-            <Label x={230} y={42} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{pick(language, say('Neur daitezke: magnitudeak', 'Se pueden medir: magnitudes', 'يمكن قياسها: مقادير'))}</Label>
+            <Label x={230} y={42} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{pick(language, say('Neur daitezke: magnitudeak', 'Se pueden medir: magnitudes', 'يمكن قياسها: مقادير', 'Can be measured: quantities'))}</Label>
             {yes.map((item, index) => (
                 <g key={index}>
                     <Label x={170} y={78 + index * 32} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, item.name)}</Label>
@@ -88,9 +89,9 @@ export function MagnitudesFigure({ language }: { language: UnitLanguage }) {
                 </g>
             ))}
             <rect x={460} y={14} width={230} height={210} rx={14} fill={PAPER} stroke={MUTED} strokeWidth={1.8} strokeDasharray="6 5" />
-            <Label x={575} y={42} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, say('Ezin dira neurtu', 'No se pueden medir', 'لا يمكن قياسها'))}</Label>
+            <Label x={575} y={42} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, say('Ezin dira neurtu', 'No se pueden medir', 'لا يمكن قياسها', 'Cannot be measured'))}</Label>
             {no.map((item, index) => <Label key={index} x={575} y={90 + index * 40} textAnchor="middle" fontSize={16} fontWeight={700} fill={MUTED}>{pick(language, item)}</Label>)}
-            <Caption y={250} language={language} text={say('Magnitude bakoitza bere unitateetan neurtzen da', 'Cada magnitud se mide en sus unidades', 'يُقاس كل مقدار بوحداته')} />
+            <Caption y={250} language={language} text={say('Magnitude bakoitza bere unitateetan neurtzen da', 'Cada magnitud se mide en sus unidades', 'يُقاس كل مقدار بوحداته', 'Each quantity is measured in its own units')} />
         </Figure>
     )
 }
@@ -100,12 +101,12 @@ export function MagnitudesFigure({ language }: { language: UnitLanguage }) {
 export function RatioFigure({ language }: { language: UnitLanguage }) {
     const x = 40
     return (
-        <Figure height={250} label={pick(language, say('Ikasleak eta kroketak: arrazoia 0,5', 'Alumnos y croquetas: razón 0,5', 'التلاميذ والكروكيت: النسبة 0.5'))}>
-            <ValueTable x={x} y={20} heads={[say('Ikasleak', 'Alumnos', 'التلاميذ'), say('Kroketak', 'Croquetas', 'الكروكيت')]} rows={[['1', '2', '3', '4', '5', '…'], ['2', '4', '6', '8', '10', '…']]} language={language} />
+        <Figure height={250} label={pick(language, say('Ikasleak eta kroketak: arrazoia 0,5', 'Alumnos y croquetas: razón 0,5', 'التلاميذ والكروكيت: النسبة 0.5', 'Students and croquettes: ratio 0.5'))}>
+            <ValueTable x={x} y={20} heads={[say('Ikasleak', 'Alumnos', 'التلاميذ', 'Students'), say('Kroketak', 'Croquetas', 'الكروكيت', 'Croquettes')]} rows={[['1', '2', '3', '4', '5', '…'], ['2', '4', '6', '8', '10', '…']]} language={language} />
             {[0, 1, 2, 3, 4].map((c) => <Frac key={c} x={columnX(x, c)} y={160} n={c + 1} d={2 * (c + 1)} size={18} color={STAGE} />)}
             {[0, 1, 2, 3].map((c) => <text key={c} x={columnX(x, c) + 32} y={166} textAnchor="middle" fontSize={18} fontWeight={700} fill={INK}>=</text>)}
             <text x={columnX(x, 4) + 50} y={166} fontSize={20} fontWeight={700} fill={SECOND}>{`= ${num(language, '0,5')}`}</text>
-            <Caption y={234} language={language} text={say('Arrazoi guztiek balio bera dute: arrazoi berdinen seriea', 'Todas las razones valen lo mismo: una serie de razones iguales', 'كل النسب تساوي القيمة نفسها: سلسلة نسب متساوية')} />
+            <Caption y={234} language={language} text={say('Arrazoi guztiek balio bera dute: arrazoi berdinen seriea', 'Todas las razones valen lo mismo: una serie de razones iguales', 'كل النسب تساوي القيمة نفسها: سلسلة نسب متساوية', 'All the ratios are the same: a series of equal ratios')} />
         </Figure>
     )
 }
@@ -121,7 +122,7 @@ export function ProportionFigure({ language }: { language: UnitLanguage }) {
         </g>
     )
     return (
-        <Figure height={250} label={pick(language, say('1/2 = 2/4: 1 · 4 = 2 · 2', '1/2 = 2/4: 1 · 4 = 2 · 2', '1/2 = 2/4: 1 · 4 = 2 · 2'))}>
+        <Figure height={250} label={pick(language, say('1/2 = 2/4: 1 · 4 = 2 · 2', '1/2 = 2/4: 1 · 4 = 2 · 2', '1/2 = 2/4: 1 · 4 = 2 · 2', '1/2 = 2/4: 1 · 4 = 2 · 2'))}>
             {term(250, 70, '1', STAGE)}
             <line x1={215} x2={285} y1={92} y2={92} stroke={INK} strokeWidth={3} />
             {term(250, 146, '2', SECOND)}
@@ -129,11 +130,11 @@ export function ProportionFigure({ language }: { language: UnitLanguage }) {
             {term(470, 70, '2', SECOND)}
             <line x1={435} x2={505} y1={92} y2={92} stroke={INK} strokeWidth={3} />
             {term(470, 146, '4', STAGE)}
-            <Label x={110} y={64} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{pick(language, say('muturrak', 'extremos', 'الطرفان'))}</Label>
-            <Label x={110} y={140} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{pick(language, say('erdikoak', 'medios', 'الوسطان'))}</Label>
+            <Label x={110} y={64} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{pick(language, say('muturrak', 'extremos', 'الطرفان', 'extremes'))}</Label>
+            <Label x={110} y={140} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{pick(language, say('erdikoak', 'medios', 'الوسطان', 'means'))}</Label>
             <text x={250} y={210} textAnchor="middle" fontSize={22} fontWeight={700} fill={STAGE}>1 · 4 = 4</text>
             <text x={470} y={210} textAnchor="middle" fontSize={22} fontWeight={700} fill={SECOND}>2 · 2 = 4</text>
-            <Caption y={242} language={language} text={say('Muturren biderkadura = erdikoen biderkadura', 'Producto de extremos = producto de medios', 'حاصل ضرب الطرفين = حاصل ضرب الوسطين')} />
+            <Caption y={242} language={language} text={say('Muturren biderkadura = erdikoen biderkadura', 'Producto de extremos = producto de medios', 'حاصل ضرب الطرفين = حاصل ضرب الوسطين', 'Product of extremes = product of means')} />
         </Figure>
     )
 }
@@ -144,14 +145,14 @@ export function DirectTableFigure({ language }: { language: UnitLanguage }) {
     const x = 70
     const cell = 80
     return (
-        <Figure height={300} label={pick(language, say('Pentsua eta behiak: zuzenki proportzionalak', 'Pienso y vacas: directamente proporcionales', 'العلف والأبقار: متناسبان طرديًا'))}>
+        <Figure height={300} label={pick(language, say('Pentsua eta behiak: zuzenki proportzionalak', 'Pienso y vacas: directamente proporcionales', 'العلف والأبقار: متناسبان طرديًا', 'Feed and cows: directly proportional'))}>
             <Hop x1={columnX(x, 0, cell)} x2={columnX(x, 1, cell)} y={82} label="· 2" rise={22} />
             <Hop x1={columnX(x, 0, cell)} x2={columnX(x, 2, cell)} y={82} label="· 3" color={SECOND} rise={48} />
-            <ValueTable x={x} y={84} cell={cell} heads={[say('Pentsua (kg)', 'Pienso (kg)', 'العلف (كغ)'), say('Behiak', 'Vacas', 'الأبقار')]} rows={[['6', '12', '18', '24', '30'], ['10', '20', '30', '40', '50']]} language={language} />
+            <ValueTable x={x} y={84} cell={cell} heads={[say('Pentsua (kg)', 'Pienso (kg)', 'العلف (كغ)', 'Feed (kg)'), say('Behiak', 'Vacas', 'الأبقار', 'Cows')]} rows={[['6', '12', '18', '24', '30'], ['10', '20', '30', '40', '50']]} language={language} />
             <Hop x1={columnX(x, 0, cell)} x2={columnX(x, 1, cell)} y={174} label="· 2" below rise={22} />
             <Hop x1={columnX(x, 0, cell)} x2={columnX(x, 2, cell)} y={174} label="· 3" color={SECOND} below rise={48} />
             <text x={560} y={252} textAnchor="middle" fontSize={18} fontWeight={700} fill={STAGE}>{num(language, '6 : 10 = 12 : 20 = 0,6')}</text>
-            <Caption y={290} language={language} text={say('Bat bikoiztean bestea ere bikoizten da; arrazoia beti bera', 'Al doblar una se dobla la otra; la razón siempre igual', 'إذا تضاعف أحدهما تضاعف الآخر؛ والنسبة ثابتة')} />
+            <Caption y={290} language={language} text={say('Bat bikoiztean bestea ere bikoizten da; arrazoia beti bera', 'Al doblar una se dobla la otra; la razón siempre igual', 'إذا تضاعف أحدهما تضاعف الآخر؛ والنسبة ثابتة', 'When one doubles, the other doubles; the ratio is always the same')} />
         </Figure>
     )
 }
@@ -183,9 +184,9 @@ export function Steps({ language, rows, operations, colors }: { language: UnitLa
 
 export function UnitReductionFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={250} label={pick(language, say('3 txokolatina 90 g, 1 30 g, 2 60 g', '3 chocolatinas 90 g, 1 30 g, 2 60 g', '3 قطع 90 غ، قطعة 30 غ، قطعتان 60 غ'))}>
+        <Figure height={250} label={pick(language, say('3 txokolatina 90 g, 1 30 g, 2 60 g', '3 chocolatinas 90 g, 1 30 g, 2 60 g', '3 قطع 90 غ، قطعة 30 غ، قطعتان 60 غ', '3 chocolate bars 90 g, 1 30 g, 2 60 g'))}>
             <Steps language={language} rows={[['3', '90 g'], ['1', '30 g'], ['2', '60 g']]} operations={[': 3', '· 2']} colors={[STAGE, SECOND]} />
-            <Caption y={238} language={language} text={say('Lehenik bat (zatitu), gero nahi direnak (biderkatu)', 'Primero una (divide), luego las que quieras (multiplica)', 'أولًا الواحدة (اقسم) ثم ما تريد (اضرب)')} />
+            <Caption y={238} language={language} text={say('Lehenik bat (zatitu), gero nahi direnak (biderkatu)', 'Primero una (divide), luego las que quieras (multiplica)', 'أولًا الواحدة (اقسم) ثم ما تريد (اضرب)', 'First one (divide), then as many as you want (multiply)')} />
         </Figure>
     )
 }
@@ -194,8 +195,8 @@ export function UnitReductionFigure({ language }: { language: UnitLanguage }) {
 
 export function RuleOfThreeFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={260} label={pick(language, say('3 errotulagailu 6 €; 7 errotulagailu x €', '3 rotuladores 6 €; 7 rotuladores x €', '3 أقلام 6 €؛ 7 أقلام x €'))}>
-            <Label x={200} y={32} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, say('Errotulagailuak', 'Rotuladores', 'الأقلام'))}</Label>
+        <Figure height={260} label={pick(language, say('3 errotulagailu 6 €; 7 errotulagailu x €', '3 rotuladores 6 €; 7 rotuladores x €', '3 أقلام 6 €؛ 7 أقلام x €', '3 felt-tip pens €6; 7 felt-tip pens €x'))}>
+            <Label x={200} y={32} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, say('Errotulagailuak', 'Rotuladores', 'الأقلام', 'Felt-tip pens'))}</Label>
             <Label x={360} y={32} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>€</Label>
             <text x={200} y={82} textAnchor="middle" fontSize={30} fontWeight={700} fill={INK}>3</text>
             <text x={360} y={82} textAnchor="middle" fontSize={30} fontWeight={700} fill={INK}>6</text>
@@ -206,8 +207,8 @@ export function RuleOfThreeFigure({ language }: { language: UnitLanguage }) {
             <text x={560} y={76} textAnchor="middle" fontSize={22} fontWeight={700} fill={INK}>3 · x = 7 · 6</text>
             <text x={560} y={120} textAnchor="middle" fontSize={22} fontWeight={700} fill={INK}>3 · x = 42</text>
             <text x={560} y={164} textAnchor="middle" fontSize={24} fontWeight={700} fill={SECOND}>x = 42 : 3 = 14</text>
-            <Label x={280} y={200} textAnchor="middle" fontSize={15} fontWeight={700} fill={GREEN}>{pick(language, say('gehiago → gehiago: zuzena', 'más → más: directa', 'أكثر ← أكثر: طردي'))}</Label>
-            <Caption y={246} language={language} text={say('Arrazoiak berdinak: gurutzeko biderkadurak berdindu', 'Razones iguales: se igualan los productos cruzados', 'نسبتان متساويتان: نساوي حاصلي الضرب التبادلي')} />
+            <Label x={280} y={200} textAnchor="middle" fontSize={15} fontWeight={700} fill={GREEN}>{pick(language, say('gehiago → gehiago: zuzena', 'más → más: directa', 'أكثر ← أكثر: طردي', 'more → more: direct'))}</Label>
+            <Caption y={246} language={language} text={say('Arrazoiak berdinak: gurutzeko biderkadurak berdindu', 'Razones iguales: se igualan los productos cruzados', 'نسبتان متساويتان: نساوي حاصلي الضرب التبادلي', 'Equal ratios: set the cross products equal')} />
         </Figure>
     )
 }
@@ -218,14 +219,14 @@ export function InverseTableFigure({ language }: { language: UnitLanguage }) {
     const x = 90
     const cell = 90
     return (
-        <Figure height={300} label={pick(language, say('Emaria eta denbora: alderantziz proportzionalak', 'Caudal y tiempo: inversamente proporcionales', 'التدفق والزمن: متناسبان عكسيًا'))}>
+        <Figure height={300} label={pick(language, say('Emaria eta denbora: alderantziz proportzionalak', 'Caudal y tiempo: inversamente proporcionales', 'التدفق والزمن: متناسبان عكسيًا', 'Flow rate and time: inversely proportional'))}>
             <Hop x1={columnX(x, 0, cell)} x2={columnX(x, 1, cell)} y={82} label="· 2" rise={22} />
             <Hop x1={columnX(x, 0, cell)} x2={columnX(x, 2, cell)} y={82} label="· 3" rise={48} />
-            <ValueTable x={x} y={84} cell={cell} heads={[say('Emaria (l/min)', 'Caudal (l/min)', 'التدفق (ل/د)'), say('Denbora (min)', 'Tiempo (min)', 'الزمن (د)')]} rows={[['3', '6', '9', '12'], ['15', '7,5', '5', '3,75']]} language={language} />
+            <ValueTable x={x} y={84} cell={cell} heads={[say('Emaria (l/min)', 'Caudal (l/min)', 'التدفق (ل/د)', 'Flow rate (l/min)'), say('Denbora (min)', 'Tiempo (min)', 'الزمن (د)', 'Time (min)')]} rows={[['3', '6', '9', '12'], ['15', '7,5', '5', '3,75']]} language={language} />
             <Hop x1={columnX(x, 0, cell)} x2={columnX(x, 1, cell)} y={174} label=": 2" color={SECOND} below rise={22} />
             <Hop x1={columnX(x, 0, cell)} x2={columnX(x, 2, cell)} y={174} label=": 3" color={SECOND} below rise={48} />
             <text x={560} y={252} textAnchor="middle" fontSize={18} fontWeight={700} fill={STAGE}>{num(language, '3 · 15 = 6 · 7,5 = 9 · 5 = 45')}</text>
-            <Caption y={290} language={language} text={say('Bat bikoiztean bestea erdia egiten da; biderkadura beti bera', 'Al doblar una la otra se hace la mitad; el producto siempre igual', 'إذا تضاعف أحدهما صار الآخر النصف؛ وحاصل الضرب ثابت')} />
+            <Caption y={290} language={language} text={say('Bat bikoiztean bestea erdia egiten da; biderkadura beti bera', 'Al doblar una la otra se hace la mitad; el producto siempre igual', 'إذا تضاعف أحدهما صار الآخر النصف؛ وحاصل الضرب ثابت', 'When one doubles, the other halves; the product is always the same')} />
         </Figure>
     )
 }
@@ -234,9 +235,9 @@ export function InverseTableFigure({ language }: { language: UnitLanguage }) {
 
 export function InverseUnitFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={250} label={pick(language, say('2 margolari 9 h, 1 18 h, 3 6 h', '2 pintores 9 h, 1 18 h, 3 6 h', 'رسّامان 9 س، واحد 18 س، ثلاثة 6 س'))}>
+        <Figure height={250} label={pick(language, say('2 margolari 9 h, 1 18 h, 3 6 h', '2 pintores 9 h, 1 18 h, 3 6 h', 'رسّامان 9 س، واحد 18 س، ثلاثة 6 س', '2 painters 9 h, 1 18 h, 3 6 h'))}>
             <Steps language={language} rows={[['2', '9 h'], ['1', '18 h'], ['3', '6 h']]} operations={['· 2', ': 3']} colors={[SECOND, STAGE]} />
-            <Caption y={238} language={language} text={say('Margolari bakarrak denbora gehiago behar du (biderkatu), hiruk gutxiago (zatitu)', 'Un solo pintor tarda más (multiplica); tres, menos (divide)', 'الرسّام الواحد يحتاج وقتًا أطول (اضرب)، والثلاثة أقل (اقسم)')} />
+            <Caption y={238} language={language} text={say('Margolari bakarrak denbora gehiago behar du (biderkatu), hiruk gutxiago (zatitu)', 'Un solo pintor tarda más (multiplica); tres, menos (divide)', 'الرسّام الواحد يحتاج وقتًا أطول (اضرب)، والثلاثة أقل (اقسم)', 'One painter takes longer (multiply); three take less (divide)')} />
         </Figure>
     )
 }
@@ -245,9 +246,9 @@ export function InverseUnitFigure({ language }: { language: UnitLanguage }) {
 
 export function InverseRuleFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={260} label={pick(language, say('10 igeltsero 45 egun; x igeltsero 15 egun', '10 albañiles 45 días; x albañiles 15 días', '10 بنّائين 45 يومًا؛ x بنّاءً 15 يومًا'))}>
-            <Label x={200} y={32} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, say('Igeltseroak', 'Albañiles', 'البنّاؤون'))}</Label>
-            <Label x={360} y={32} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, say('Egunak', 'Días', 'الأيام'))}</Label>
+        <Figure height={260} label={pick(language, say('10 igeltsero 45 egun; x igeltsero 15 egun', '10 albañiles 45 días; x albañiles 15 días', '10 بنّائين 45 يومًا؛ x بنّاءً 15 يومًا', '10 bricklayers 45 days; x bricklayers 15 days'))}>
+            <Label x={200} y={32} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, say('Igeltseroak', 'Albañiles', 'البنّاؤون', 'Bricklayers'))}</Label>
+            <Label x={360} y={32} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, say('Egunak', 'Días', 'الأيام', 'Days'))}</Label>
             <text x={200} y={82} textAnchor="middle" fontSize={30} fontWeight={700} fill={INK}>10</text>
             <text x={360} y={82} textAnchor="middle" fontSize={30} fontWeight={700} fill={INK}>45</text>
             <text x={200} y={146} textAnchor="middle" fontSize={30} fontWeight={700} fill={SECOND}>x</text>
@@ -257,8 +258,8 @@ export function InverseRuleFigure({ language }: { language: UnitLanguage }) {
             <text x={560} y={76} textAnchor="middle" fontSize={22} fontWeight={700} fill={INK}>10 · 45 = x · 15</text>
             <text x={560} y={120} textAnchor="middle" fontSize={22} fontWeight={700} fill={INK}>450 = 15 · x</text>
             <text x={560} y={164} textAnchor="middle" fontSize={24} fontWeight={700} fill={SECOND}>x = 450 : 15 = 30</text>
-            <Label x={280} y={200} textAnchor="middle" fontSize={15} fontWeight={700} fill={GREEN}>{pick(language, say('egun gutxiago → igeltsero gehiago: alderantzizkoa', 'menos días → más albañiles: inversa', 'أيام أقل ← بنّاؤون أكثر: عكسي'))}</Label>
-            <Caption y={246} language={language} text={say('Biderkadurak berdinak: lerro bakoitzekoa', 'Productos iguales: los de cada fila', 'حاصلا الضرب متساويان: حاصل كل سطر')} />
+            <Label x={280} y={200} textAnchor="middle" fontSize={15} fontWeight={700} fill={GREEN}>{pick(language, say('egun gutxiago → igeltsero gehiago: alderantzizkoa', 'menos días → más albañiles: inversa', 'أيام أقل ← بنّاؤون أكثر: عكسي', 'fewer days → more bricklayers: inverse'))}</Label>
+            <Caption y={246} language={language} text={say('Biderkadurak berdinak: lerro bakoitzekoa', 'Productos iguales: los de cada fila', 'حاصلا الضرب متساويان: حاصل كل سطر', 'Equal products: the products in each row')} />
         </Figure>
     )
 }
@@ -268,7 +269,7 @@ export function InverseRuleFigure({ language }: { language: UnitLanguage }) {
 export function PercentGridFigure({ language }: { language: UnitLanguage }) {
     const size = 170
     return (
-        <Figure height={250} label={pick(language, say('% 85 = 85/100 = 0,85', '85 % = 85/100 = 0,85', '85٪ = 85/100 = 0.85'))}>
+        <Figure height={250} label={pick(language, say('% 85 = 85/100 = 0,85', '85 % = 85/100 = 0,85', '85٪ = 85/100 = 0.85', '85% = 85/100 = 0.85'))}>
             {Array.from({ length: 100 }, (_, index) => (
                 <rect key={index} x={70 + (index % 10) * (size / 10)} y={20 + Math.floor(index / 10) * (size / 10)} width={size / 10} height={size / 10} fill={index < 85 ? STAGE : PAPER} fillOpacity={index < 85 ? 0.42 : 1} stroke={INK} strokeWidth={0.8} />
             ))}
@@ -276,7 +277,7 @@ export function PercentGridFigure({ language }: { language: UnitLanguage }) {
             <text x={430} y={64} textAnchor="middle" fontSize={34} fontWeight={700} fill={STAGE}>{pct(language, '85')}</text>
             <Frac x={430} y={124} n={85} d={100} size={28} />
             <text x={430} y={196} textAnchor="middle" fontSize={30} fontWeight={700} fill={INK}>{num(language, '0,85')}</text>
-            <Caption y={238} language={language} text={say('Ehun lauki, 85 koloreztatuta: 100etik 85', 'Cien cuadros, 85 coloreados: 85 de cada 100', 'مئة مربع ملوّن منها خمسة وثمانون')} />
+            <Caption y={238} language={language} text={say('Ehun lauki, 85 koloreztatuta: 100etik 85', 'Cien cuadros, 85 coloreados: 85 de cada 100', 'مئة مربع ملوّن منها خمسة وثمانون', '100 squares, 85 coloured: 85 out of every 100')} />
         </Figure>
     )
 }
@@ -301,7 +302,7 @@ export function PercentBar({ y, share, color = STAGE, left, right, whole = 100 }
 
 export function PercentOfFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={240} label={pick(language, say('60ren % 15 = 9', '15 % de 60 = 9', '15٪ من 60 = 9'))}>
+        <Figure height={240} label={pick(language, say('60ren % 15 = 9', '15 % de 60 = 9', '15٪ من 60 = 9', '15% of 60 = 9'))}>
             <PercentBar y={50} share={15} left={<text x={90 + 540 * 0.075} y={78} textAnchor="middle" fontSize={18} fontWeight={700} fill={INK}>9 €</text>} right={<text x={90 + 540 * 0.575} y={78} textAnchor="middle" fontSize={18} fontWeight={700} fill={MUTED}>51 €</text>} />
             <text x={90} y={36} textAnchor="middle" fontSize={15} fontWeight={700} fill={MUTED}>0</text>
             <text x={630} y={36} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>60 €</text>
@@ -309,7 +310,7 @@ export function PercentOfFigure({ language }: { language: UnitLanguage }) {
             <text x={630} y={122} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pct(language, '100')}</text>
             <text x={200} y={176} textAnchor="middle" fontSize={21} fontWeight={700} fill={STAGE}>{num(language, '60 · 15 : 100 = 9')}</text>
             <text x={510} y={176} textAnchor="middle" fontSize={21} fontWeight={700} fill={STAGE}>{num(language, '60 : 100 · 15 = 0,6 · 15 = 9')}</text>
-            <Caption y={226} language={language} text={say('Kantitatea bider ehunekoa, zati 100', 'La cantidad por el tanto, entre 100', 'الكمية في النسبة، على مئة')} />
+            <Caption y={226} language={language} text={say('Kantitatea bider ehunekoa, zati 100', 'La cantidad por el tanto, entre 100', 'الكمية في النسبة، على مئة', 'The amount times the rate, divided by 100')} />
         </Figure>
     )
 }
@@ -318,7 +319,7 @@ export function PercentOfFigure({ language }: { language: UnitLanguage }) {
 
 export function WhichPercentFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={250} label={pick(language, say('480tik 120 = % 25', '120 de 480 = 25 %', '120 من 480 = 25٪'))}>
+        <Figure height={250} label={pick(language, say('480tik 120 = % 25', '120 de 480 = 25 %', '120 من 480 = 25٪', '120 of 480 = 25%'))}>
             {Array.from({ length: 4 }, (_, index) => (
                 <g key={index}>
                     <rect x={90 + index * 135} y={50} width={135} height={44} fill={index === 0 ? STAGE : PAPER} fillOpacity={index === 0 ? 0.35 : 1} stroke={INK} strokeWidth={2} />
@@ -328,7 +329,7 @@ export function WhichPercentFigure({ language }: { language: UnitLanguage }) {
             ))}
             <text x={630} y={36} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>480</text>
             <text x={360} y={172} textAnchor="middle" fontSize={22} fontWeight={700} fill={STAGE}>{num(language, '120 : 480 = 0,25 → 0,25 · 100 = 25')}</text>
-            <Caption y={226} language={language} text={say('Zatia zati osoa, bider 100: 480 ardietatik 120 laurdena dira', 'La parte entre el total, por 100: 120 de 480 ovejas son la cuarta parte', 'الجزء على الكل في مئة: مئة وعشرون من أربعمئة وثمانين هي الربع')} />
+            <Caption y={226} language={language} text={say('Zatia zati osoa, bider 100: 480 ardietatik 120 laurdena dira', 'La parte entre el total, por 100: 120 de 480 ovejas son la cuarta parte', 'الجزء على الكل في مئة: مئة وعشرون من أربعمئة وثمانين هي الربع', 'The part divided by the total, times 100: 120 of the 480 sheep are a quarter')} />
         </Figure>
     )
 }
@@ -337,13 +338,13 @@ export function WhichPercentFigure({ language }: { language: UnitLanguage }) {
 
 export function DiscountFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={250} label={pick(language, say('60 € − % 15 = 51 €', '60 € − 15 % = 51 €', '60 € − 15٪ = 51 €'))}>
+        <Figure height={250} label={pick(language, say('60 € − % 15 = 51 €', '60 € − 15 % = 51 €', '60 € − 15٪ = 51 €', '€60 − 15% = €51'))}>
             <PercentBar y={50} share={85} color={GREEN} left={<text x={90 + 540 * 0.425} y={78} textAnchor="middle" fontSize={18} fontWeight={700} fill={INK}>{`51 € · ${pct(language, '85')}`}</text>} right={<g><rect x={90 + 540 * 0.85} y={50} width={540 * 0.15} height={44} fill={SECOND} fillOpacity={0.3} stroke={INK} strokeWidth={2} /><text x={90 + 540 * 0.925} y={78} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>− 9 €</text></g>} />
             <text x={630} y={36} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>60 €</text>
             <text x={90 + 540 * 0.925} y={122} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{pct(language, '15')}</text>
             <text x={200} y={172} textAnchor="middle" fontSize={21} fontWeight={700} fill={STAGE}>{num(language, '60 − 9 = 51')}</text>
             <text x={510} y={172} textAnchor="middle" fontSize={21} fontWeight={700} fill={STAGE}>{num(language, '60 · 0,85 = 51')}</text>
-            <Caption y={226} language={language} text={say('% 15 deskontatzen badute, % 85 ordaintzen da', 'Si descuentan el 15 %, se paga el 85 %', 'إذا خُصم خمسة عشر بالمئة دفعتَ خمسة وثمانين بالمئة')} />
+            <Caption y={226} language={language} text={say('% 15 deskontatzen badute, % 85 ordaintzen da', 'Si descuentan el 15 %, se paga el 85 %', 'إذا خُصم خمسة عشر بالمئة دفعتَ خمسة وثمانين بالمئة', 'If 15% is taken off, you pay 85%')} />
         </Figure>
     )
 }
@@ -353,7 +354,7 @@ export function DiscountFigure({ language }: { language: UnitLanguage }) {
 export function IncreaseFigure({ language }: { language: UnitLanguage }) {
     const scale = 540 / 115
     return (
-        <Figure height={250} label={pick(language, say('75 € + % 15 = 86,25 €', '75 € + 15 % = 86,25 €', '75 € + 15٪ = 86.25 €'))}>
+        <Figure height={250} label={pick(language, say('75 € + % 15 = 86,25 €', '75 € + 15 % = 86,25 €', '75 € + 15٪ = 86.25 €', '€75 + 15% = €86.25'))}>
             <rect x={90} y={50} width={100 * scale} height={44} fill={STAGE} fillOpacity={0.3} stroke={INK} strokeWidth={2} />
             <text x={90 + 50 * scale} y={78} textAnchor="middle" fontSize={18} fontWeight={700} fill={INK}>{`75 € · ${pct(language, '100')}`}</text>
             <rect x={90 + 100 * scale} y={50} width={15 * scale} height={44} fill={SECOND} fillOpacity={0.35} stroke={INK} strokeWidth={2} />
@@ -362,7 +363,7 @@ export function IncreaseFigure({ language }: { language: UnitLanguage }) {
             <text x={630} y={36} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{num(language, '86,25 €')}</text>
             <text x={200} y={172} textAnchor="middle" fontSize={21} fontWeight={700} fill={STAGE}>{num(language, '75 + 11,25 = 86,25')}</text>
             <text x={510} y={172} textAnchor="middle" fontSize={21} fontWeight={700} fill={STAGE}>{num(language, '75 · 1,15 = 86,25')}</text>
-            <Caption y={226} language={language} text={say('% 15 igotzean % 115 ordaintzen da', 'Al subir un 15 % se paga el 115 %', 'عند الزيادة خمسة عشر بالمئة تدفع مئة وخمسة عشر بالمئة')} />
+            <Caption y={226} language={language} text={say('% 15 igotzean % 115 ordaintzen da', 'Al subir un 15 % se paga el 115 %', 'عند الزيادة خمسة عشر بالمئة تدفع مئة وخمسة عشر بالمئة', 'If the price goes up by 15%, you pay 115%')} />
         </Figure>
     )
 }
@@ -371,12 +372,12 @@ export function IncreaseFigure({ language }: { language: UnitLanguage }) {
 
 export function ChooseMethodFigure({ language }: { language: UnitLanguage }) {
     const boxes = [
-        { x: 30, color: STAGE, title: say('Zuzena', 'Directa', 'طردي'), rule: say('gehiago → gehiago', 'más → más', 'أكثر ← أكثر'), how: say('zatitu, gero biderkatu', 'divide y multiplica', 'اقسم ثم اضرب'), formula: 'a/b = c/x' },
-        { x: 260, color: SECOND, title: say('Alderantzizkoa', 'Inversa', 'عكسي'), rule: say('gehiago → gutxiago', 'más → menos', 'أكثر ← أقل'), how: say('biderkatu, gero zatitu', 'multiplica y divide', 'اضرب ثم اقسم'), formula: 'a · b = c · x' },
-        { x: 490, color: GREEN, title: say('Ehunekoa', 'Porcentaje', 'نسبة مئوية'), rule: say('100etik zenbat', 'de cada 100', 'من كل مئة'), how: say('zatia, osoa ala aldaketa', 'parte, total o cambio', 'الجزء أو الكل أو التغيّر'), formula: 'Q · p : 100' }
+        { x: 30, color: STAGE, title: say('Zuzena', 'Directa', 'طردي', 'Direct'), rule: say('gehiago → gehiago', 'más → más', 'أكثر ← أكثر', 'more → more'), how: say('zatitu, gero biderkatu', 'divide y multiplica', 'اقسم ثم اضرب', 'divide and multiply'), formula: 'a/b = c/x' },
+        { x: 260, color: SECOND, title: say('Alderantzizkoa', 'Inversa', 'عكسي', 'Inverse'), rule: say('gehiago → gutxiago', 'más → menos', 'أكثر ← أقل', 'more → less'), how: say('biderkatu, gero zatitu', 'multiplica y divide', 'اضرب ثم اقسم', 'multiply and divide'), formula: 'a · b = c · x' },
+        { x: 490, color: GREEN, title: say('Ehunekoa', 'Porcentaje', 'نسبة مئوية', 'Percentage'), rule: say('100etik zenbat', 'de cada 100', 'من كل مئة', 'out of every 100'), how: say('zatia, osoa ala aldaketa', 'parte, total o cambio', 'الجزء أو الكل أو التغيّر', 'part, total or change'), formula: 'Q · p : 100' }
     ]
     return (
-        <Figure height={250} label={pick(language, say('Zuzena, alderantzizkoa ala ehunekoa', 'Directa, inversa o porcentaje', 'طردي أم عكسي أم نسبة مئوية'))}>
+        <Figure height={250} label={pick(language, say('Zuzena, alderantzizkoa ala ehunekoa', 'Directa, inversa o porcentaje', 'طردي أم عكسي أم نسبة مئوية', 'Direct, inverse or percentage'))}>
             {boxes.map((box) => (
                 <g key={box.x}>
                     <rect x={box.x} y={20} width={200} height={180} rx={14} fill={PAPER} stroke={box.color} strokeWidth={2.4} />
@@ -386,7 +387,7 @@ export function ChooseMethodFigure({ language }: { language: UnitLanguage }) {
                     <text x={box.x + 100} y={172} textAnchor="middle" fontSize={18} fontWeight={700} fill={box.color}>{box.formula}</text>
                 </g>
             ))}
-            <Caption y={234} language={language} text={say('Lehenik galdetu: bat handitzean, bestea handitu ala txikitu egiten da?', 'Primero pregúntate: al crecer una, ¿la otra crece o decrece?', 'اسأل أولًا: حين يزيد أحدهما، هل يزيد الآخر أم ينقص؟')} />
+            <Caption y={234} language={language} text={say('Lehenik galdetu: bat handitzean, bestea handitu ala txikitu egiten da?', 'Primero pregúntate: al crecer una, ¿la otra crece o decrece?', 'اسأل أولًا: حين يزيد أحدهما، هل يزيد الآخر أم ينقص؟', 'First ask yourself: when one goes up, does the other go up or down?')} />
         </Figure>
     )
 }

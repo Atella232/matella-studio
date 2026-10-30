@@ -41,7 +41,7 @@ export function ProportionDbh4ApGames({ language, pathname, openGame, completedI
             language={language}
             games={hubGames}
             recordsKey={PROPORTION_DBH4AP_GAME_RECORDS_KEY}
-            title={{ eu: 'Jolastu eta hobetu zure marka', es: 'Juega y mejora tu marca', ar: 'العب وحسّن رقمك' }}
+            title={{ eu: 'Jolastu eta hobetu zure marka', es: 'Juega y mejora tu marca', en: 'Play and improve your personal best', ar: 'العب وحسّن رقمك' }}
             completedIds={completedIds}
             onComplete={onComplete}
             mode={proportionDbh4ApGameModeForPath(pathname)}

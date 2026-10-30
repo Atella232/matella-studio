@@ -19,6 +19,7 @@ export function NaturaTopicsPage() {
         switch (i18n.language) {
             case 'eu': return course.nameEu
             case 'ar': return course.nameAr
+            case 'en': return course.nameEn
             default: return course.name
         }
     }
@@ -27,6 +28,7 @@ export function NaturaTopicsPage() {
         switch (i18n.language) {
             case 'eu': return topic.nameEu
             case 'ar': return topic.nameAr
+            case 'en': return topic.nameEn
             default: return topic.name
         }
     }
@@ -36,14 +38,18 @@ export function NaturaTopicsPage() {
             ? 'متاح'
             : i18n.language === 'eu'
                 ? 'Eskuragarri'
-                : 'Disponible'
+                : i18n.language === 'en'
+                    ? 'Available'
+                    : 'Disponible'
 
     const subtitle =
         i18n.language === 'ar'
             ? `المواضيع المتاحة: ${course.topics.length}`
             : i18n.language === 'eu'
                 ? `Eskuragarri dauden gaiak: ${course.topics.length}`
-                : `Temas disponibles: ${course.topics.length}`
+                : i18n.language === 'en'
+                    ? `Available topics: ${course.topics.length}`
+                    : `Temas disponibles: ${course.topics.length}`
 
     return (
         <div className="topics-page">

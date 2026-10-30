@@ -12,8 +12,8 @@ const introRace: RaceRules<IntroFractionRaceError> = {
     parTime: introFractionParTime,
     errorTip: (error) => introFractionRaceErrorTips[error ?? 'calculation'],
     pitPlaceholder: (question) => (question.answerForm === 'mixed' ? '2 1/3' : '3/4'),
-    pitUnreadable: { eu: 'Idatzi zatiki gisa (3/4), zenbaki misto gisa (2 1/3) edo zenbaki gisa.', es: 'Escríbelo como fracción (3/4), número mixto (2 1/3) o número.', ar: 'اكتبه كسرًا (3/4) أو عددًا كسريًا (2 1/3) أو عددًا.' },
-    pitWrongForm: { eu: 'Balioa zuzena da, baina idatzi eskatzen den moduan (sinplifikatuta edo misto gisa).', es: 'El valor es correcto, pero escríbelo como se pide (simplificado o como mixto).', ar: 'القيمة صحيحة، لكن اكتبها كما هو مطلوب (مبسّطة أو عددًا كسريًا).' }
+    pitUnreadable: { eu: 'Idatzi zatiki gisa (3/4), zenbaki misto gisa (2 1/3) edo zenbaki gisa.', es: 'Escríbelo como fracción (3/4), número mixto (2 1/3) o número.', en: 'Write it as a fraction (3/4), a mixed number (2 1/3) or a number.', ar: 'اكتبه كسرًا (3/4) أو عددًا كسريًا (2 1/3) أو عددًا.' },
+    pitWrongForm: { eu: 'Balioa zuzena da, baina idatzi eskatzen den moduan (sinplifikatuta edo misto gisa).', es: 'El valor es correcto, pero escríbelo como se pide (simplificado o como mixto).', en: 'The value is correct, but write it as asked (simplified or as a mixed number).', ar: 'القيمة صحيحة، لكن اكتبها كما هو مطلوب (مبسّطة أو عددًا كسريًا).' }
 }
 
 export function IntroFractionRaceGame(props: GameProps) {

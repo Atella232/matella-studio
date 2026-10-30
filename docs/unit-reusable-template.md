@@ -55,7 +55,7 @@ Si una seccion es pequena puede empezar sin archivo `*Data.ts`, pero debe extrae
 
 - Tabs de teoria.
 - Tarjetas, formulas, tablas y bloques explicativos.
-- Textos localizados EU/ES/AR, con EU como referencia principal.
+- Textos localizados EU/ES/EN/AR, con EU como referencia principal.
 - Ejemplos paso a paso.
 
 ### `LabPage/index.tsx` y `labData.ts`
@@ -107,7 +107,7 @@ Si una seccion es pequena puede empezar sin archivo `*Data.ts`, pero debe extrae
 - Home, teoria, laboratorio, retos, juegos y ejercicios existen o tienen estado pendiente claro.
 - Rutas canonicas funcionan.
 - Home apunta solo a rutas canonicas.
-- EU/ES/AR no muestran textos rotos ni mojibake visible.
+- EU/ES/EN/AR no muestran textos rotos ni mojibake visible.
 - No hay dependencia nueva de `fixMaybeText`.
 - Teoria, laboratorio, juegos y ejercicios no contienen formulas LaTeX visibles sin renderizar.
 - Home, teoria, laboratorio, retos, juegos y ejercicios tienen iconos visuales coherentes, no letras provisionales.

@@ -38,7 +38,7 @@ export function NaturalsLaboratory(props: {
             tools={naturalsLabTools}
             stages={naturalsStages}
             components={toolComponents}
-            title={{ eu: 'Ukitu zenbakiak', es: 'Toca los números', ar: 'المس الأعداد' }}
+            title={{ eu: 'Ukitu zenbakiak', es: 'Toca los números', en: 'Get hands-on with numbers', ar: 'المس الأعداد' }}
         />
     )
 }

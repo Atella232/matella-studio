@@ -36,12 +36,13 @@ const lessonFigures: Partial<Record<TheoryTopicId, (language: UnitLanguage) => R
 const zatikiakUnit: UnitDefinition = {
     storagePrefix: 'matella-zatikiak-v2',
     coursePath: '/matematika/dbh2',
-    courseTitle: { eu: '2. DBH', es: '2.º ESO', ar: 'الصف الثاني' },
-    title: { eu: 'Zatikiak', es: 'Fracciones', ar: 'الكسور' },
-    documentTitle: { eu: 'Zatikiak · 2. DBH', es: 'Fracciones · 2.º ESO', ar: 'الكسور · الصف الثاني' },
+    courseTitle: { eu: '2. DBH', es: '2.º ESO', en: '2nd ESO', ar: 'الصف الثاني' },
+    title: { eu: 'Zatikiak', es: 'Fracciones', en: 'Fractions', ar: 'الكسور' },
+    documentTitle: { eu: 'Zatikiak · 2. DBH', es: 'Fracciones · 2.º ESO', en: 'Fractions · 2nd ESO', ar: 'الكسور · الصف الثاني' },
     tagline: {
         eu: 'Zatia, banaketa, neurria eta zenbakia: ezagutu zatiki batek izan dezakeen guztia eta ikasi harekin segurtasunez kalkulatzen.',
         es: 'Parte, reparto, medida y número: descubre todo lo que puede ser una fracción y aprende a calcular con ella con seguridad.',
+        en: 'Part, share, measure and number: discover everything a fraction can be and learn to calculate with confidence.',
         ar: 'جزء وتقسيم وقياس وعدد: اكتشف كل ما يمكن أن يكونه الكسر وتعلّم الحساب به بثقة.'
     },
     heroArt: (
@@ -58,7 +59,7 @@ const zatikiakUnit: UnitDefinition = {
             </div>
         </div>
     ),
-    pathSubtitle: { eu: 'Bost etapa, zatikiaren ideiatik proportzionaltasunera', es: 'Cinco etapas, de la idea de fracción a la proporcionalidad', ar: 'خمس مراحل، من فكرة الكسر إلى التناسب' },
+    pathSubtitle: { eu: 'Bost etapa, zatikiaren ideiatik proportzionaltasunera', es: 'Cinco etapas, de la idea de fracción a la proporcionalidad', en: 'Five stages, from the idea of a fraction to proportionality', ar: 'خمس مراحل، من فكرة الكسر إلى التناسب' },
     stages: learningStages,
     topics: theoryTopics.map((topic) => ({ ...topic, figure: lessonFigures[topic.id] })),
     diagnostic: diagnosticQuestions,
@@ -69,28 +70,28 @@ const zatikiakUnit: UnitDefinition = {
     })),
     challenges,
     answers: {
-        note: { eu: 'Enuntziatuak forma zehatzik eskatzen ez badu, zatiki baliokideak eta koma edo puntua duten hamartarrak onartzen dira.', es: 'Si el enunciado no pide una forma concreta, se aceptan fracciones equivalentes y decimales con coma o punto.', ar: 'إذا لم يطلب السؤال صيغة محددة، تُقبل الكسور المكافئة والأعداد العشرية بالفاصلة أو النقطة.' },
+        note: { eu: 'Enuntziatuak forma zehatzik eskatzen ez badu, zatiki baliokideak eta koma edo puntua duten hamartarrak onartzen dira.', es: 'Si el enunciado no pide una forma concreta, se aceptan fracciones equivalentes y decimales con coma o punto.', en: 'If the question does not ask for a specific form, equivalent fractions and decimals written with a point or a comma are accepted.', ar: 'إذا لم يطلب السؤال صيغة محددة، تُقبل الكسور المكافئة والأعداد العشرية بالفاصلة أو النقطة.' },
         defaultForm: 'any',
         inputMode: 'decimal',
         placeholder: (form) => form === 'mixed'
-            ? { eu: 'Adib.: 2 1/3', es: 'Ej.: 2 1/3', ar: 'مثال: 2 1/3' }
+            ? { eu: 'Adib.: 2 1/3', es: 'Ej.: 2 1/3', en: 'Example: 2 1/3', ar: 'مثال: 2 1/3' }
             : form === 'simplified'
-                ? { eu: 'Adib.: 3/4', es: 'Ej.: 3/4', ar: 'مثال: 3/4' }
-                : { eu: 'Adib.: 3/4 edo 0,75', es: 'Ej.: 3/4 o 0,75', ar: 'مثال: 3/4 أو 0.75' },
+                ? { eu: 'Adib.: 3/4', es: 'Ej.: 3/4', en: 'Example: 3/4', ar: 'مثال: 3/4' }
+                : { eu: 'Adib.: 3/4 edo 0,75', es: 'Ej.: 3/4 o 0,75', en: 'Example: 3/4 or 0.75', ar: 'مثال: 3/4 أو 0.75' },
         wrongForm: (form) => form === 'mixed'
-            ? { eu: 'Balioa zuzena da, baina idatzi zenbaki misto gisa: oso bat eta zatiki propio laburtezin bat, adibidez 2 1/3.', es: 'El valor es correcto, pero escríbelo como número mixto: un entero y una fracción propia irreducible, por ejemplo 2 1/3.', ar: 'القيمة صحيحة، لكن اكتبها عددًا كسريًا: عدد صحيح وكسر حقيقي في أبسط صورة، مثل 2 1/3.' }
-            : { eu: 'Balioa zuzena da, baina oraindik sinplifika daiteke. Idatzi zatiki laburtezina.', es: 'El valor es correcto, pero todavía se puede simplificar. Escribe la fracción irreducible.', ar: 'القيمة صحيحة، لكن يمكن تبسيطها أكثر. اكتب الكسر في أبسط صورة.' },
-        unreadable: { eu: 'Ez dut erantzun hori ulertzen. Idatzi zatiki bat (3/4), zenbaki misto bat (2 1/3) edo hamartar bat (0,75).', es: 'No entiendo esa respuesta. Escribe una fracción (3/4), un número mixto (2 1/3) o un decimal (0,75).', ar: 'لم أفهم هذه الإجابة. اكتب كسرًا (3/4) أو عددًا كسريًا (2 1/3) أو عددًا عشريًا (0.75).' }
+            ? { eu: 'Balioa zuzena da, baina idatzi zenbaki misto gisa: oso bat eta zatiki propio laburtezin bat, adibidez 2 1/3.', es: 'El valor es correcto, pero escríbelo como número mixto: un entero y una fracción propia irreducible, por ejemplo 2 1/3.', en: 'The value is correct, but write it as a mixed number: a whole number and a proper fraction in its simplest form, for example 2 1/3.', ar: 'القيمة صحيحة، لكن اكتبها عددًا كسريًا: عدد صحيح وكسر حقيقي في أبسط صورة، مثل 2 1/3.' }
+            : { eu: 'Balioa zuzena da, baina oraindik sinplifika daiteke. Idatzi zatiki laburtezina.', es: 'El valor es correcto, pero todavía se puede simplificar. Escribe la fracción irreducible.', en: 'The value is correct, but it can still be simplified. Write the fraction in its simplest form.', ar: 'القيمة صحيحة، لكن يمكن تبسيطها أكثر. اكتب الكسر في أبسط صورة.' },
+        unreadable: { eu: 'Ez dut erantzun hori ulertzen. Idatzi zatiki bat (3/4), zenbaki misto bat (2 1/3) edo hamartar bat (0,75).', es: 'No entiendo esa respuesta. Escribe una fracción (3/4), un número mixto (2 1/3) o un decimal (0,75).', en: 'I don\'t understand that answer. Write a fraction (3/4), a mixed number (2 1/3) or a decimal (0.75).', ar: 'لم أفهم هذه الإجابة. اكتب كسرًا (3/4) أو عددًا كسريًا (2 1/3) أو عددًا عشريًا (0.75).' }
     },
     errorByStage: {
-        meaning: { eu: 'Begiratu zer adierazten duten zenbakitzaileak eta izendatzaileak, eta ea unitate osoak dauden.', es: 'Revisa qué representan numerador y denominador y si hay unidades completas.', ar: 'راجع معنى البسط والمقام وهل توجد وحدات كاملة.' },
-        equivalence: { eu: 'Egiaztatu bi terminoetan faktore bera erabili duzula eta emaitza sinplifikatuta dagoela.', es: 'Comprueba que has usado el mismo factor en ambos términos y que el resultado está simplificado.', ar: 'تحقق من استعمال العامل نفسه في البسط والمقام ومن تبسيط النتيجة.' },
-        ordering: { eu: 'Begiratu zeinuari lehenik; gero erabili izendatzaile komuna edo biderketa gurutzatua.', es: 'Observa primero el signo; después usa denominador común o productos cruzados.', ar: 'ابدأ بالإشارة ثم استعمل مقامًا مشتركًا أو الضرب التبادلي.' },
-        operations: { eu: 'Berrikusi eragiketen ordena, zeinua eta azken sinplifikazioa.', es: 'Revisa el orden de operaciones, el signo y la simplificación final.', ar: 'راجع ترتيب العمليات والإشارة والتبسيط النهائي.' },
-        proportionality: { eu: 'Identifikatu zatiaren eta guztizkoaren arteko erlazioa, eta egiaztatu unitatea.', es: 'Identifica la relación entre la parte y el total y comprueba la unidad.', ar: 'حدّد العلاقة بين الجزء والكل وتحقق من الوحدة.' }
+        meaning: { eu: 'Begiratu zer adierazten duten zenbakitzaileak eta izendatzaileak, eta ea unitate osoak dauden.', es: 'Revisa qué representan numerador y denominador y si hay unidades completas.', en: 'Check what the numerator and denominator represent and whether there are whole units.', ar: 'راجع معنى البسط والمقام وهل توجد وحدات كاملة.' },
+        equivalence: { eu: 'Egiaztatu bi terminoetan faktore bera erabili duzula eta emaitza sinplifikatuta dagoela.', es: 'Comprueba que has usado el mismo factor en ambos términos y que el resultado está simplificado.', en: 'Check that you have used the same factor in both terms and that the result is simplified.', ar: 'تحقق من استعمال العامل نفسه في البسط والمقام ومن تبسيط النتيجة.' },
+        ordering: { eu: 'Begiratu zeinuari lehenik; gero erabili izendatzaile komuna edo biderketa gurutzatua.', es: 'Observa primero el signo; después usa denominador común o productos cruzados.', en: 'Look at the sign first; then use a common denominator or cross-multiplication.', ar: 'ابدأ بالإشارة ثم استعمل مقامًا مشتركًا أو الضرب التبادلي.' },
+        operations: { eu: 'Berrikusi eragiketen ordena, zeinua eta azken sinplifikazioa.', es: 'Revisa el orden de operaciones, el signo y la simplificación final.', en: 'Check the order of operations, the sign and the final simplification.', ar: 'راجع ترتيب العمليات والإشارة والتبسيط النهائي.' },
+        proportionality: { eu: 'Identifikatu zatiaren eta guztizkoaren arteko erlazioa, eta egiaztatu unitatea.', es: 'Identifica la relación entre la parte y el total y comprueba la unidad.', en: 'Identify the relationship between the part and the whole, and check the unit.', ar: 'حدّد العلاقة بين الجزء والكل وتحقق من الوحدة.' }
     },
     lab: {
-        description: { eu: `${labTools.length} tresna zatikiak manipulatzeko, erronkekin.`, es: `${labTools.length} herramientas para manipular fracciones, con retos.`, ar: `${labTools.length} أدوات للتعامل مع الكسور، مع تحديات.` },
+        description: { eu: `${labTools.length} tresna zatikiak manipulatzeko, erronkekin.`, es: `${labTools.length} herramientas para manipular fracciones, con retos.`, en: `${labTools.length} tools to handle fractions, with challenges.`, ar: `${labTools.length} أدوات للتعامل مع الكسور، مع تحديات.` },
         progressIds: labChallengeIds,
         toolForTopic: labToolForTopic,
         render: ({ language, tool, onToolChange, completedIds, onComplete, onOpenLesson }) => (
@@ -105,7 +106,7 @@ const zatikiakUnit: UnitDefinition = {
         )
     },
     games: {
-        description: { eu: `${games.length} joko abiadura, zehaztasuna eta estrategia entrenatzeko.`, es: `${games.length} juegos para entrenar rapidez, precisión y estrategia.`, ar: `${games.length} ألعاب لتدريب السرعة والدقة والاستراتيجية.` },
+        description: { eu: `${games.length} joko abiadura, zehaztasuna eta estrategia entrenatzeko.`, es: `${games.length} juegos para entrenar rapidez, precisión y estrategia.`, en: `${games.length} games to train speed, accuracy and strategy.`, ar: `${games.length} ألعاب لتدريب السرعة والدقة والاستراتيجية.` },
         progressIds: gameProgressIds,
         recordsKey: GAME_RECORDS_KEY,
         render: ({ language, pathname, openGame, completedIds, onComplete }) => (

@@ -1,12 +1,13 @@
 import type { ReactNode } from 'react'
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
+import { decimalSeparatorFor } from '../../utils/numberFormat'
 import { Figure, Frac } from '../dbh2-zatikiak-prototype/figures'
 import { Label } from '../dbh2-funtzioak-v2/plane'
 
 /* ==========================================================================
    Zenbaki hamartarrak · 1. DBH — lesson figures in the notebook style.
    Numbers keep the decimal comma in Basque and Spanish and the point in
-   Arabic. Arabic captions carry words only: formulas go in their own
+   Arabic and English. Arabic captions carry words only: formulas go in their own
    <text>, because Chrome ignores direction isolates inside SVG text.
    ========================================================================== */
 
@@ -17,10 +18,10 @@ const STAGE_TINT = 'var(--stage-tint, #dde7f7)'
 const SECOND = 'var(--second, #c4432a)'
 const PAPER = '#fffcf6'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language, text)
-/** A number written with the comma, shown with the point in Arabic */
-const num = (language: UnitLanguage, text: string) => (language === 'ar' ? text.replace(/,/g, '.') : text)
+/** A number written with the comma, shown with the point in Arabic and English */
+const num = (language: UnitLanguage, text: string) => (language === 'ar' ? text.replace(/,/g, '.') : text.replace(/,/g, decimalSeparatorFor(language)))
 
 function Caption({ y, language, text }: { y: number; language: UnitLanguage; text: LocalizedText }) {
     return <Label x={360} y={y} textAnchor="middle" fontSize={15} fill={MUTED}>{pick(language, text)}</Label>
@@ -116,12 +117,12 @@ function TickLine({ left, width, y, from, to, step, labelEvery, language, decima
 export function DecimalUnitsFigure({ language }: { language: UnitLanguage }) {
     const size = 150
     const squares = [
-        { x: 40, cells: 1, label: '1', name: say('unitatea', 'unidad', 'وحدة') },
-        { x: 285, cells: 10, label: '0,1', name: say('hamarrena', 'décima', 'عُشر') },
-        { x: 530, cells: 100, label: '0,01', name: say('ehunena', 'centésima', 'جزء من مئة') }
+        { x: 40, cells: 1, label: '1', name: say('unitatea', 'unidad', 'وحدة', 'unit') },
+        { x: 285, cells: 10, label: '0,1', name: say('hamarrena', 'décima', 'عُشر', 'tenth') },
+        { x: 530, cells: 100, label: '0,01', name: say('ehunena', 'centésima', 'جزء من مئة', 'hundredth') }
     ]
     return (
-        <Figure height={270} label={pick(language, say('Unitatea, hamarren bat eta ehunen bat', 'La unidad, una décima y una centésima', 'الوحدة والعُشر والجزء من مئة'))}>
+        <Figure height={270} label={pick(language, say('Unitatea, hamarren bat eta ehunen bat', 'La unidad, una décima y una centésima', 'الوحدة والعُشر والجزء من مئة', 'The unit, a tenth and a hundredth'))}>
             {squares.map((square) => {
                 const side = square.cells === 100 ? 10 : 1
                 const strips = square.cells === 10 ? 10 : side
@@ -142,7 +143,7 @@ export function DecimalUnitsFigure({ language }: { language: UnitLanguage }) {
             })}
             <text x={235} y={100} textAnchor="middle" fontSize={22} fontWeight={700} fill={MUTED}>: 10</text>
             <text x={480} y={100} textAnchor="middle" fontSize={22} fontWeight={700} fill={MUTED}>: 10</text>
-            <Caption y={258} language={language} text={say('Unitatea 10 zatitan: hamarrenak; hamarren bat 10 zatitan: ehunenak', 'La unidad en 10 partes: décimas; una décima en 10 partes: centésimas', 'الوحدة في عشرة أجزاء: أعشار؛ والعُشر في عشرة أجزاء: أجزاء من مئة')} />
+            <Caption y={258} language={language} text={say('Unitatea 10 zatitan: hamarrenak; hamarren bat 10 zatitan: ehunenak', 'La unidad en 10 partes: décimas; una décima en 10 partes: centésimas', 'الوحدة في عشرة أجزاء: أعشار؛ والعُشر في عشرة أجزاء: أجزاء من مئة', 'The unit in 10 parts: tenths; a tenth in 10 parts: hundredths')} />
         </Figure>
     )
 }
@@ -153,6 +154,7 @@ export function PlaceTableFigure({ language }: { language: UnitLanguage }) {
     const heads = {
         eu: ['E', 'H', 'U', 'h', 'e', 'm'],
         es: ['C', 'D', 'U', 'd', 'c', 'm'],
+    en: ['C', 'D', 'U', 'd', 'c', 'm'],
         ar: ['مئات', 'عشرات', 'آحاد', 'أعشار', 'ج. من مئة', 'ج. من ألف']
     }[language]
     const digits = ['4', '3', '0', '5', '8', '1']
@@ -161,9 +163,9 @@ export function PlaceTableFigure({ language }: { language: UnitLanguage }) {
     const left = 132
     const x = (index: number) => left + index * cell + (index >= 3 ? 24 : 0)
     return (
-        <Figure height={260} label={pick(language, say('430,581 posizio-taulan', '430,581 en la tabla de posiciones', '430.581 في جدول المنازل'))}>
-            <Label x={left + cell * 1.5} y={22} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, say('zati osoa', 'parte entera', 'الجزء الصحيح'))}</Label>
-            <Label x={x(3) + cell * 1.5} y={22} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{pick(language, say('zati hamartarra', 'parte decimal', 'الجزء العشري'))}</Label>
+        <Figure height={260} label={pick(language, say('430,581 posizio-taulan', '430,581 en la tabla de posiciones', '430.581 في جدول المنازل', '430.581 in the place-value table'))}>
+            <Label x={left + cell * 1.5} y={22} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, say('zati osoa', 'parte entera', 'الجزء الصحيح', 'whole-number part'))}</Label>
+            <Label x={x(3) + cell * 1.5} y={22} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{pick(language, say('zati hamartarra', 'parte decimal', 'الجزء العشري', 'decimal part'))}</Label>
             {digits.map((digit, index) => (
                 <g key={index}>
                     <rect x={x(index)} y={34} width={cell} height={40} fill={index >= 3 ? STAGE_TINT : PAPER} stroke={INK} strokeWidth={1.8} />
@@ -176,7 +178,7 @@ export function PlaceTableFigure({ language }: { language: UnitLanguage }) {
             ))}
             <text x={x(3) - 12} y={116} textAnchor="middle" fontSize={34} fontWeight={700} fill={SECOND}>{num(language, ',')}</text>
             <text x={360} y={206} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>{num(language, '430,581 = 400 + 30 + 0,5 + 0,08 + 0,001')}</text>
-            <Caption y={244} language={language} text={say('Zifra bakoitzak bere tokiaren arabera balio du', 'Cada cifra vale según el lugar que ocupa', 'كل رقم يساوي بحسب منزلته')} />
+            <Caption y={244} language={language} text={say('Zifra bakoitzak bere tokiaren arabera balio du', 'Cada cifra vale según el lugar que ocupa', 'كل رقم يساوي بحسب منزلته', 'Each digit\'s value depends on its place.')} />
         </Figure>
     )
 }
@@ -186,7 +188,7 @@ export function PlaceTableFigure({ language }: { language: UnitLanguage }) {
 export function SameValueFigure({ language }: { language: UnitLanguage }) {
     const size = 150
     return (
-        <Figure height={240} label={pick(language, say('0,3 = 0,30', '0,3 = 0,30', '0.3 = 0.30'))}>
+        <Figure height={240} label={pick(language, say('0,3 = 0,30', '0,3 = 0,30', '0.3 = 0.30', '0.3 = 0.30'))}>
             {Array.from({ length: 10 }, (_, index) => (
                 <rect key={index} x={130 + index * (size / 10)} y={20} width={size / 10} height={size} fill={index < 3 ? STAGE : PAPER} fillOpacity={index < 3 ? 0.4 : 1} stroke={INK} strokeWidth={1.2} />
             ))}
@@ -198,7 +200,7 @@ export function SameValueFigure({ language }: { language: UnitLanguage }) {
             <text x={360} y={104} textAnchor="middle" fontSize={34} fontWeight={700} fill={INK}>=</text>
             <text x={205} y={202} textAnchor="middle" fontSize={24} fontWeight={700} fill={STAGE}>{num(language, '0,3')}</text>
             <text x={515} y={202} textAnchor="middle" fontSize={24} fontWeight={700} fill={STAGE}>{num(language, '0,30')}</text>
-            <Caption y={232} language={language} text={say('3 hamarren = 30 ehunen: eskuineko zeroak ez du balioa aldatzen', '3 décimas = 30 centésimas: el cero a la derecha no cambia el valor', 'ثلاثة أعشار تساوي ثلاثين جزءًا من مئة: الصفر على اليمين لا يغيّر القيمة')} />
+            <Caption y={232} language={language} text={say('3 hamarren = 30 ehunen: eskuineko zeroak ez du balioa aldatzen', '3 décimas = 30 centésimas: el cero a la derecha no cambia el valor', 'ثلاثة أعشار تساوي ثلاثين جزءًا من مئة: الصفر على اليمين لا يغيّر القيمة', '3 tenths = 30 hundredths: the zero on the right does not change the value.')} />
         </Figure>
     )
 }
@@ -213,7 +215,7 @@ export function CompareDigitsFigure({ language }: { language: UnitLanguage }) {
     ]
     const right = 330
     return (
-        <Figure height={250} label={pick(language, say('3,17 > 3,16 > 2,95', '3,17 > 3,16 > 2,95', '3.17 > 3.16 > 2.95'))}>
+        <Figure height={250} label={pick(language, say('3,17 > 3,16 > 2,95', '3,17 > 3,16 > 2,95', '3.17 > 3.16 > 2.95', '3.17 > 3.16 > 2.95'))}>
             <rect x={right - widthOf('3,17') - 4} y={30} width={COLUMN + 8} height={150} rx={8} fill={STAGE_TINT} opacity={0.7} />
             <rect x={right - COLUMN - 4} y={30} width={COLUMN + 8} height={150} rx={8} fill={STAGE_TINT} opacity={0.7} />
             {rows.map((row, index) => (
@@ -226,7 +228,7 @@ export function CompareDigitsFigure({ language }: { language: UnitLanguage }) {
             <text x={540} y={80} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>2 &lt; 3</text>
             <text x={540} y={150} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>6 &lt; 7</text>
             <text x={540} y={202} textAnchor="middle" fontSize={22} fontWeight={700} fill={STAGE}>{num(language, '3,17 > 3,16 > 2,95')}</text>
-            <Caption y={240} language={language} text={say('Lehenik zati osoa; berdinak badira, hamarrenak, gero ehunenak…', 'Primero la parte entera; si son iguales, las décimas, después las centésimas…', 'أولًا الجزء الصحيح؛ وإذا تساوى فالأعشار ثم الأجزاء من مئة…')} />
+            <Caption y={240} language={language} text={say('Lehenik zati osoa; berdinak badira, hamarrenak, gero ehunenak…', 'Primero la parte entera; si son iguales, las décimas, después las centésimas…', 'أولًا الجزء الصحيح؛ وإذا تساوى فالأعشار ثم الأجزاء من مئة…', 'First the whole-number part; if they are equal, the tenths, then the hundredths…')} />
         </Figure>
     )
 }
@@ -239,7 +241,7 @@ export function ZoomLineFigure({ language }: { language: UnitLanguage }) {
     const top = (value: number) => left + (value - 2) * width
     const bottom = (value: number) => left + ((value - 2.3) / 0.1) * width
     return (
-        <Figure height={270} label={pick(language, say('2,35 zenbaki-zuzenean', '2,35 en la recta', '2.35 على خط الأعداد'))}>
+        <Figure height={270} label={pick(language, say('2,35 zenbaki-zuzenean', '2,35 en la recta', '2.35 على خط الأعداد', '2.35 on the number line'))}>
             <rect x={top(2.3)} y={38} width={top(2.4) - top(2.3)} height={24} fill={STAGE} opacity={0.25} />
             <TickLine left={left} width={width} y={50} from={2} to={3} step={0.1} labelEvery={1} language={language} decimals={1} size={14} />
             <line x1={top(2.3)} x2={bottom(2.3)} y1={86} y2={150} stroke={STAGE} strokeWidth={1.6} strokeDasharray="5 5" />
@@ -247,7 +249,7 @@ export function ZoomLineFigure({ language }: { language: UnitLanguage }) {
             <TickLine left={left} width={width} y={170} from={2.3} to={2.4} step={0.01} labelEvery={5} language={language} decimals={2} />
             <circle cx={bottom(2.35)} cy={170} r={9} fill={SECOND} stroke={INK} strokeWidth={2} />
             <text x={bottom(2.35)} y={146} textAnchor="middle" fontSize={20} fontWeight={700} fill={SECOND}>{num(language, '2,35')}</text>
-            <Caption y={258} language={language} text={say('Goian hamarrenak; behean, tarte bat handituta, ehunenak', 'Arriba, décimas; abajo, un tramo ampliado, centésimas', 'في الأعلى أعشار؛ وفي الأسفل قطعة مكبّرة بأجزاء من مئة')} />
+            <Caption y={258} language={language} text={say('Goian hamarrenak; behean, tarte bat handituta, ehunenak', 'Arriba, décimas; abajo, un tramo ampliado, centésimas', 'في الأعلى أعشار؛ وفي الأسفل قطعة مكبّرة بأجزاء من مئة', 'Above, tenths; below, an enlarged section, hundredths')} />
         </Figure>
     )
 }
@@ -260,7 +262,7 @@ export function BetweenFigure({ language }: { language: UnitLanguage }) {
     const x = (value: number) => left + ((value - 2.7) / 0.1) * width
     const marks = ['2,725', '2,75', '2,775']
     return (
-        <Figure height={220} label={pick(language, say('2,725; 2,75 eta 2,775 2,7 eta 2,8 artean', '2,725; 2,75 y 2,775 entre 2,7 y 2,8', '2.725 و2.75 و2.775 بين 2.7 و2.8'))}>
+        <Figure height={220} label={pick(language, say('2,725; 2,75 eta 2,775 2,7 eta 2,8 artean', '2,725; 2,75 y 2,775 entre 2,7 y 2,8', '2.725 و2.75 و2.775 بين 2.7 و2.8', '2.725; 2.75 and 2.775 between 2.7 and 2.8'))}>
             <line x1={left - 14} x2={left + width + 14} y1={110} y2={110} stroke={INK} strokeWidth={2.4} />
             {[2.7, 2.8].map((value) => (
                 <g key={value}>
@@ -287,7 +289,7 @@ export function BetweenFigure({ language }: { language: UnitLanguage }) {
                     </g>
                 )
             })}
-            <Caption y={200} language={language} text={say('Lau tarte berdin; erdikoa, 2,75, bi muturren erdia da', 'Cuatro tramos iguales; el del medio, 2,75, es la mitad de los extremos', 'أربع قطع متساوية؛ والعدد الأوسط منتصف الطرفين')} />
+            <Caption y={200} language={language} text={say('Lau tarte berdin; erdikoa, 2,75, bi muturren erdia da', 'Cuatro tramos iguales; el del medio, 2,75, es la mitad de los extremos', 'أربع قطع متساوية؛ والعدد الأوسط منتصف الطرفين', 'Four equal sections; the middle one, 2.75, is halfway between the ends.')} />
         </Figure>
     )
 }
@@ -297,7 +299,7 @@ export function BetweenFigure({ language }: { language: UnitLanguage }) {
 export function DecimalFractionFigure({ language }: { language: UnitLanguage }) {
     const size = 160
     return (
-        <Figure height={250} label={pick(language, say('0,45 = 45/100', '0,45 = 45/100', '0.45 = 45/100'))}>
+        <Figure height={250} label={pick(language, say('0,45 = 45/100', '0,45 = 45/100', '0.45 = 45/100', '0.45 = 45/100'))}>
             {Array.from({ length: 100 }, (_, index) => (
                 <rect key={index} x={50 + Math.floor(index / 10) * (size / 10)} y={20 + (index % 10) * (size / 10)} width={size / 10} height={size / 10} fill={index < 45 ? STAGE : PAPER} fillOpacity={index < 45 ? 0.4 : 1} stroke={INK} strokeWidth={0.8} />
             ))}
@@ -309,9 +311,9 @@ export function DecimalFractionFigure({ language }: { language: UnitLanguage }) 
             <Digits right={500} y={70} text="45,78" language={language} size={26} colors={{ 3: SECOND, 4: SECOND }} />
             <text x={530} y={70} fontSize={24} fontWeight={700} fill={INK}>=</text>
             <Frac x={610} y={60} n={4578} d={100} size={24} />
-            <Label x={555} y={140} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{pick(language, say('2 zifra hamartar', '2 cifras decimales', 'رقمان عشريان'))}</Label>
-            <Label x={555} y={162} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{pick(language, say('→ 2 zero', '→ 2 ceros', 'صفران'))}</Label>
-            <Caption y={240} language={language} text={say('Ehun lauki, 45 koloreztatuta; zifra hamartar bakoitzeko, zero bat izendatzailean', 'Cien cuadros, 45 coloreados; por cada cifra decimal, un cero en el denominador', 'مئة مربع ملوّن منها خمسة وأربعون؛ ولكل رقم عشري صفر في المقام')} />
+            <Label x={555} y={140} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{pick(language, say('2 zifra hamartar', '2 cifras decimales', 'رقمان عشريان', '2 decimal places'))}</Label>
+            <Label x={555} y={162} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{pick(language, say('→ 2 zero', '→ 2 ceros', 'صفران', '→ 2 zeros'))}</Label>
+            <Caption y={240} language={language} text={say('Ehun lauki, 45 koloreztatuta; zifra hamartar bakoitzeko, zero bat izendatzailean', 'Cien cuadros, 45 coloreados; por cada cifra decimal, un cero en el denominador', 'مئة مربع ملوّن منها خمسة وأربعون؛ ولكل رقم عشري صفر في المقام', 'One hundred squares, 45 coloured; for each decimal place, one zero in the denominator.')} />
         </Figure>
     )
 }
@@ -320,13 +322,13 @@ export function DecimalFractionFigure({ language }: { language: UnitLanguage }) 
 
 export function DivisionKindsFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={270} label={pick(language, say('7 : 2 = 3,5 eta 7 : 3 = 2,333…', '7 : 2 = 3,5 y 7 : 3 = 2,333…', '7 : 2 = 3.5 و7 : 3 = 2.333…'))}>
-            <Label x={170} y={24} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{pick(language, say('Zehatza', 'Exacto', 'منتهٍ'))}</Label>
+        <Figure height={270} label={pick(language, say('7 : 2 = 3,5 eta 7 : 3 = 2,333…', '7 : 2 = 3,5 y 7 : 3 = 2,333…', '7 : 2 = 3.5 و7 : 3 = 2.333…', '7 : 2 = 3.5 and 7 : 3 = 2.333…'))}>
+            <Label x={170} y={24} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{pick(language, say('Zehatza', 'Exacto', 'منتهٍ', 'Exact'))}</Label>
             <LongDivision x={110} y={70} dividend="7" divisor="2" quotient="3,5" rows={[{ text: '10', shift: 1 }, { text: '0', shift: 1 }]} language={language} highlight={[1]} />
-            <Label x={500} y={24} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, say('Periodikoa', 'Periódico', 'دوري'))}</Label>
+            <Label x={500} y={24} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, say('Periodikoa', 'Periódico', 'دوري', 'Recurring'))}</Label>
             <LongDivision x={400} y={70} dividend="7" divisor="3" quotient="2,333…" rows={[{ text: '10', shift: 1 }, { text: '10', shift: 2 }, { text: '10', shift: 3 }, { text: '1', shift: 3 }]} language={language} highlight={[0, 1, 2, 3]} />
             <line x1={360} x2={360} y1={30} y2={220} stroke={MUTED} strokeWidth={1.2} strokeDasharray="4 6" />
-            <Caption y={258} language={language} text={say('Hondarra 0 → zehatza. Hondarra errepikatzen da → zifrak ere bai: periodikoa', 'Resto 0 → exacto. El resto se repite → las cifras también: periódico', 'الباقي صفر ← منتهٍ. يتكرّر الباقي ← تتكرّر الأرقام: دوري')} />
+            <Caption y={258} language={language} text={say('Hondarra 0 → zehatza. Hondarra errepikatzen da → zifrak ere bai: periodikoa', 'Resto 0 → exacto. El resto se repite → las cifras también: periódico', 'الباقي صفر ← منتهٍ. يتكرّر الباقي ← تتكرّر الأرقام: دوري', 'Remainder 0 → terminating. The remainder repeats → the digits do too: recurring.')} />
         </Figure>
     )
 }
@@ -338,7 +340,7 @@ export function RoundingFigure({ language }: { language: UnitLanguage }) {
     const width = 560
     const x = (value: number) => left + ((value - 6.2) / 0.1) * width
     return (
-        <Figure height={252} label={pick(language, say('6,27 ≈ 6,3', '6,27 ≈ 6,3', '6.27 ≈ 6.3'))}>
+        <Figure height={252} label={pick(language, say('6,27 ≈ 6,3', '6,27 ≈ 6,3', '6.27 ≈ 6.3', '6.27 ≈ 6.3'))}>
             <TickLine left={left} width={width} y={110} from={6.2} to={6.3} step={0.01} labelEvery={10} language={language} decimals={1} size={20} />
             <line x1={x(6.25)} x2={x(6.25)} y1={70} y2={130} stroke={MUTED} strokeWidth={1.6} strokeDasharray="5 5" />
             <text x={x(6.25)} y={62} textAnchor="middle" fontSize={15} fontWeight={700} fill={MUTED}>{num(language, '6,25')}</text>
@@ -348,7 +350,7 @@ export function RoundingFigure({ language }: { language: UnitLanguage }) {
             <text x={(x(6.27) + x(6.3)) / 2} y={66} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>{num(language, '0,03')}</text>
             <path d={`M${x(6.2)} 162 Q ${(x(6.2) + x(6.27)) / 2} 196 ${x(6.27)} 162`} fill="none" stroke={MUTED} strokeWidth={1.6} />
             <text x={(x(6.2) + x(6.27)) / 2} y={206} textAnchor="middle" fontSize={15} fontWeight={700} fill={MUTED}>{num(language, '0,07')}</text>
-            <Caption y={240} language={language} text={say('6,27 hurbilago dago 6,3tik: ehunena 7 da, 5 edo handiagoa', '6,27 está más cerca de 6,3: la centésima es 7, 5 o más', 'العدد أقرب إلى الطرف الأيمن: رقم الأجزاء من مئة خمسة أو أكثر')} />
+            <Caption y={240} language={language} text={say('6,27 hurbilago dago 6,3tik: ehunena 7 da, 5 edo handiagoa', '6,27 está más cerca de 6,3: la centésima es 7, 5 o más', 'العدد أقرب إلى الطرف الأيمن: رقم الأجزاء من مئة خمسة أو أكثر', '6.27 is closer to 6.3: the hundredths digit, 7, is 5 or more.')} />
         </Figure>
     )
 }
@@ -360,7 +362,7 @@ export function ColumnAddFigure({ language }: { language: UnitLanguage }) {
     const rows = ['3,80', '4,17', '10,23', '5,10']
     const comma = right - widthOf(',10')
     return (
-        <Figure height={290} label={pick(language, say('3,8 + 4,17 + 10,23 + 5,1 = 23,3', '3,8 + 4,17 + 10,23 + 5,1 = 23,3', '3.8 + 4.17 + 10.23 + 5.1 = 23.3'))}>
+        <Figure height={290} label={pick(language, say('3,8 + 4,17 + 10,23 + 5,1 = 23,3', '3,8 + 4,17 + 10,23 + 5,1 = 23,3', '3.8 + 4.17 + 10.23 + 5.1 = 23.3', '3.8 + 4.17 + 10.23 + 5.1 = 23.3'))}>
             <rect x={comma} y={18} width={COLUMN / 2} height={210} rx={4} fill={SECOND} opacity={0.15} />
             {rows.map((row, index) => (
                 <Digits key={row} right={right} y={44 + index * 38} text={row} language={language} size={26} colors={index === 0 || index === 3 ? { [row.length - 1]: SECOND } : {}} />
@@ -369,10 +371,10 @@ export function ColumnAddFigure({ language }: { language: UnitLanguage }) {
             <line x1={right - widthOf('10,23') - 30} x2={right + 6} y1={182} y2={182} stroke={INK} strokeWidth={2.4} />
             <Digits right={right} y={216} text="23,30" language={language} size={26} color={STAGE} />
             <text x={right + 22} y={216} fontSize={20} fill={MUTED}>m</text>
-            <Label x={540} y={70} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('Komak zutabe berean', 'Comas en la misma columna', 'الفواصل في العمود نفسه'))}</Label>
-            <Label x={540} y={130} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('Zeroak gehitu', 'Se añaden ceros', 'نضيف أصفارًا'))}</Label>
-            <Label x={540} y={190} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, say('Koma toki berean', 'La coma en su lugar', 'الفاصلة في مكانها'))}</Label>
-            <Caption y={272} language={language} text={say('Unitateak unitateen azpian, hamarrenak hamarrenen azpian, ehunenak ehunenen azpian', 'Unidades bajo unidades, décimas bajo décimas, centésimas bajo centésimas', 'الآحاد تحت الآحاد والأعشار تحت الأعشار والأجزاء من مئة تحتها')} />
+            <Label x={540} y={70} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('Komak zutabe berean', 'Comas en la misma columna', 'الفواصل في العمود نفسه', 'Decimal points in the same column'))}</Label>
+            <Label x={540} y={130} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('Zeroak gehitu', 'Se añaden ceros', 'نضيف أصفارًا', 'Zeros are added'))}</Label>
+            <Label x={540} y={190} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, say('Koma toki berean', 'La coma en su lugar', 'الفاصلة في مكانها', 'The decimal point in its place'))}</Label>
+            <Caption y={272} language={language} text={say('Unitateak unitateen azpian, hamarrenak hamarrenen azpian, ehunenak ehunenen azpian', 'Unidades bajo unidades, décimas bajo décimas, centésimas bajo centésimas', 'الآحاد تحت الآحاد والأعشار تحت الأعشار والأجزاء من مئة تحتها', 'Units under units, tenths under tenths, hundredths under hundredths')} />
         </Figure>
     )
 }
@@ -382,7 +384,7 @@ export function ColumnAddFigure({ language }: { language: UnitLanguage }) {
 export function MultiplyFigure({ language }: { language: UnitLanguage }) {
     const right = 260
     return (
-        <Figure height={300} label={pick(language, say('2,75 · 1,3 = 3,575', '2,75 · 1,3 = 3,575', '2.75 · 1.3 = 3.575'))}>
+        <Figure height={300} label={pick(language, say('2,75 · 1,3 = 3,575', '2,75 · 1,3 = 3,575', '2.75 · 1.3 = 3.575', '2.75 · 1.3 = 3.575'))}>
             <Digits right={right} y={44} text="2,75" language={language} size={26} colors={{ 2: SECOND, 3: SECOND }} />
             <Digits right={right} y={82} text="1,3" language={language} size={26} colors={{ 2: SECOND }} />
             <text x={right - 100} y={82} textAnchor="middle" fontSize={24} fontWeight={700} fill={INK}>×</text>
@@ -392,10 +394,10 @@ export function MultiplyFigure({ language }: { language: UnitLanguage }) {
             <line x1={right - 116} x2={right + 6} y1={176} y2={176} stroke={INK} strokeWidth={2.2} />
             <Digits right={right} y={212} text="3,575" language={language} size={28} color={STAGE} colors={{ 2: SECOND, 3: SECOND, 4: SECOND }} />
             <text x={right + 20} y={212} fontSize={22} fontWeight={700} fill={STAGE}>€</text>
-            <Label x={530} y={60} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, say('2 zifra hamartar', '2 cifras decimales', 'رقمان عشريان'))}</Label>
-            <Label x={530} y={92} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, say('+ 1 zifra hamartar', '+ 1 cifra decimal', 'ورقم عشري واحد'))}</Label>
-            <Label x={530} y={212} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{pick(language, say('= 3 zifra hamartar', '= 3 cifras decimales', 'ثلاثة أرقام عشرية'))}</Label>
-            <Caption y={284} language={language} text={say('Biderkatu komarik gabe, 275 · 13 = 3575, eta jarri koma eskuinetik 3 toki zenbatuta', 'Multiplica sin coma, 275 · 13 = 3575, y pon la coma contando 3 lugares desde la derecha', 'اضرب بلا فاصلة ثم ضع الفاصلة بعدّ ثلاث منازل من اليمين')} />
+            <Label x={530} y={60} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, say('2 zifra hamartar', '2 cifras decimales', 'رقمان عشريان', '2 decimal places'))}</Label>
+            <Label x={530} y={92} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, say('+ 1 zifra hamartar', '+ 1 cifra decimal', 'ورقم عشري واحد', '+ 1 decimal place'))}</Label>
+            <Label x={530} y={212} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{pick(language, say('= 3 zifra hamartar', '= 3 cifras decimales', 'ثلاثة أرقام عشرية', '= 3 decimal places'))}</Label>
+            <Caption y={284} language={language} text={say('Biderkatu komarik gabe, 275 · 13 = 3575, eta jarri koma eskuinetik 3 toki zenbatuta', 'Multiplica sin coma, 275 · 13 = 3575, y pon la coma contando 3 lugares desde la derecha', 'اضرب بلا فاصلة ثم ضع الفاصلة بعدّ ثلاث منازل من اليمين', 'Multiply without the decimal point, 275 · 13 = 3575, and put the decimal point in by counting 3 places from the right')} />
         </Figure>
     )
 }
@@ -419,7 +421,7 @@ function ShiftRow({ y, before, after, operation, places, toRight, language }: { 
 
 export function ShiftFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={260} label={pick(language, say('4,739 · 1000 = 4739 eta 834,7 : 100 = 8,347', '4,739 · 1000 = 4739 y 834,7 : 100 = 8,347', '4.739 · 1000 = 4739 و834.7 : 100 = 8.347'))}>
+        <Figure height={260} label={pick(language, say('4,739 · 1000 = 4739 eta 834,7 : 100 = 8,347', '4,739 · 1000 = 4739 y 834,7 : 100 = 8,347', '4.739 · 1000 = 4739 و834.7 : 100 = 8.347', '4.739 · 1000 = 4739 and 834.7 : 100 = 8.347'))}>
             <defs>
                 <marker id="hamartar-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                     <path d="M0 0 L10 5 L0 10 Z" fill={SECOND} />
@@ -427,7 +429,7 @@ export function ShiftFigure({ language }: { language: UnitLanguage }) {
             </defs>
             <ShiftRow y={90} before="4,739" after="4739" operation="· 1000" places={3} toRight language={language} />
             <ShiftRow y={190} before="834,7" after="8,347" operation=": 100" places={2} toRight={false} language={language} />
-            <Caption y={244} language={language} text={say('Bider: koma eskuinera; zati: ezkerrera; zero bakoitzeko, toki bat', 'Por: la coma a la derecha; entre: a la izquierda; un lugar por cada cero', 'الضرب: الفاصلة يمينًا؛ القسمة: يسارًا؛ منزلة لكل صفر')} />
+            <Caption y={244} language={language} text={say('Bider: koma eskuinera; zati: ezkerrera; zero bakoitzeko, toki bat', 'Por: la coma a la derecha; entre: a la izquierda; un lugar por cada cero', 'الضرب: الفاصلة يمينًا؛ القسمة: يسارًا؛ منزلة لكل صفر', 'Times: the decimal point moves to the right; divided by: to the left; one place for each zero')} />
         </Figure>
     )
 }
@@ -436,12 +438,12 @@ export function ShiftFigure({ language }: { language: UnitLanguage }) {
 
 export function DivideNaturalFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={250} label={pick(language, say('125 : 20 = 6,25', '125 : 20 = 6,25', '125 : 20 = 6.25'))}>
+        <Figure height={250} label={pick(language, say('125 : 20 = 6,25', '125 : 20 = 6,25', '125 : 20 = 6.25', '125 : 20 = 6.25'))}>
             <LongDivision x={150} y={50} dividend="125" divisor="20" quotient="6,25" rows={[{ text: '50', shift: 1 }, { text: '100', shift: 2 }, { text: '0', shift: 2 }]} language={language} highlight={[2]} />
-            <Label x={530} y={60} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, say('Hondarra 5: koma eta zero bat', 'Resto 5: coma y un cero', 'الباقي 5: فاصلة وصفر'))}</Label>
-            <Label x={530} y={100} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, say('50 : 20 = 2, hondarra 10', '50 : 20 = 2, resto 10', 'ثم الباقي 10'))}</Label>
-            <Label x={530} y={140} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, say('100 : 20 = 5, hondarra 0', '100 : 20 = 5, resto 0', 'ثم الباقي صفر'))}</Label>
-            <Caption y={234} language={language} text={say('Zatiketa ez da zehatza? Jarri koma zatiduran eta jaitsi zero bat hondarrera', '¿La división no es exacta? Pon la coma en el cociente y baja un cero al resto', 'القسمة غير تامة؟ ضع الفاصلة في الناتج وأنزل صفرًا إلى الباقي')} />
+            <Label x={530} y={60} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, say('Hondarra 5: koma eta zero bat', 'Resto 5: coma y un cero', 'الباقي 5: فاصلة وصفر', 'Remainder 5: decimal point and a zero'))}</Label>
+            <Label x={530} y={100} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, say('50 : 20 = 2, hondarra 10', '50 : 20 = 2, resto 10', 'ثم الباقي 10', '50 : 20 = 2, remainder 10'))}</Label>
+            <Label x={530} y={140} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, say('100 : 20 = 5, hondarra 0', '100 : 20 = 5, resto 0', 'ثم الباقي صفر', '100 : 20 = 5, remainder 0'))}</Label>
+            <Caption y={234} language={language} text={say('Zatiketa ez da zehatza? Jarri koma zatiduran eta jaitsi zero bat hondarrera', '¿La división no es exacta? Pon la coma en el cociente y baja un cero al resto', 'القسمة غير تامة؟ ضع الفاصلة في الناتج وأنزل صفرًا إلى الباقي', 'Is the division not exact? Put a decimal point in the quotient and bring down a zero next to the remainder')} />
         </Figure>
     )
 }
@@ -450,7 +452,7 @@ export function DivideNaturalFigure({ language }: { language: UnitLanguage }) {
 
 export function DivideDecimalFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={240} label={pick(language, say('1,28 : 0,2 = 12,8 : 2 = 6,4', '1,28 : 0,2 = 12,8 : 2 = 6,4', '1.28 : 0.2 = 12.8 : 2 = 6.4'))}>
+        <Figure height={240} label={pick(language, say('1,28 : 0,2 = 12,8 : 2 = 6,4', '1,28 : 0,2 = 12,8 : 2 = 6,4', '1.28 : 0.2 = 12.8 : 2 = 6.4', '1.28 : 0.2 = 12.8 : 2 = 6.4'))}>
             <Digits right={190} y={70} text="1,28" language={language} size={30} colors={{ 1: SECOND }} />
             <text x={222} y={70} textAnchor="middle" fontSize={28} fontWeight={700} fill={INK}>:</text>
             <Digits right={300} y={70} text="0,2" language={language} size={30} colors={{ 1: SECOND }} />
@@ -463,9 +465,9 @@ export function DivideDecimalFigure({ language }: { language: UnitLanguage }) {
             <Digits right={470} y={176} text="6,4" language={language} size={30} color={STAGE} />
             <path d="M160 90 L160 146" stroke={SECOND} strokeWidth={2} strokeDasharray="4 4" />
             <path d="M285 90 L285 146" stroke={SECOND} strokeWidth={2} strokeDasharray="4 4" />
-            <Label x={590} y={80} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('Zatitzaileak zifra', 'El divisor tiene', 'للمقسوم عليه'))}</Label>
-            <Label x={590} y={102} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('hamartar bat du', 'una cifra decimal', 'رقم عشري واحد'))}</Label>
-            <Caption y={226} language={language} text={say('Biak 10ez biderkatuta zatidura ez da aldatzen, eta zatitzaileak ez du komarik', 'Multiplicando los dos por 10 el cociente no cambia y el divisor ya no tiene coma', 'بضرب الاثنين في عشرة لا يتغيّر الناتج وتختفي فاصلة المقسوم عليه')} />
+            <Label x={590} y={80} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('Zatitzaileak zifra', 'El divisor tiene', 'للمقسوم عليه', 'The divisor has'))}</Label>
+            <Label x={590} y={102} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('hamartar bat du', 'una cifra decimal', 'رقم عشري واحد', 'one decimal place'))}</Label>
+            <Caption y={226} language={language} text={say('Biak 10ez biderkatuta zatidura ez da aldatzen, eta zatitzaileak ez du komarik', 'Multiplicando los dos por 10 el cociente no cambia y el divisor ya no tiene coma', 'بضرب الاثنين في عشرة لا يتغيّر الناتج وتختفي فاصلة المقسوم عليه', 'Multiplying both by 10, the quotient does not change and the divisor no longer has a decimal point')} />
         </Figure>
     )
 }
@@ -474,13 +476,13 @@ export function DivideDecimalFigure({ language }: { language: UnitLanguage }) {
 
 export function ShoppingFigure({ language }: { language: UnitLanguage }) {
     const rows: Array<{ name: LocalizedText; work: string; total: string }> = [
-        { name: say('Esnea', 'Leche', 'حليب'), work: '5 · 1,05', total: '5,25' },
-        { name: say('Bakailaoa', 'Bacalao', 'سمك القد'), work: '0,92 · 13,25', total: '12,19' },
-        { name: say('Gailetak', 'Galletas', 'بسكويت'), work: '', total: '2,85' },
-        { name: say('Urdaiazpikoa', 'Jamón', 'لحم مقدّد'), work: '38,40 : 4', total: '9,60' }
+        { name: say('Esnea', 'Leche', 'حليب', 'Milk'), work: '5 · 1,05', total: '5,25' },
+        { name: say('Bakailaoa', 'Bacalao', 'سمك القد', 'Cod'), work: '0,92 · 13,25', total: '12,19' },
+        { name: say('Gailetak', 'Galletas', 'بسكويت', 'Biscuits'), work: '', total: '2,85' },
+        { name: say('Urdaiazpikoa', 'Jamón', 'لحم مقدّد', 'Ham'), work: '38,40 : 4', total: '9,60' }
     ]
     return (
-        <Figure height={300} label={pick(language, say('Erosketa: 29,89 €', 'La compra: 29,89 €', 'المشتريات: 29.89 €'))}>
+        <Figure height={300} label={pick(language, say('Erosketa: 29,89 €', 'La compra: 29,89 €', 'المشتريات: 29.89 €', 'Shopping: €29.89'))}>
             <rect x={150} y={14} width={420} height={250} rx={10} fill={PAPER} stroke={INK} strokeWidth={2} />
             {rows.map((row, index) => (
                 <g key={index}>
@@ -490,9 +492,9 @@ export function ShoppingFigure({ language }: { language: UnitLanguage }) {
                 </g>
             ))}
             <line x1={170} x2={550} y1={214} y2={214} stroke={INK} strokeWidth={1.6} strokeDasharray="6 4" />
-            <Label x={240} y={244} textAnchor="middle" fontSize={18} fontWeight={700} fill={STAGE}>{pick(language, say('Guztira', 'Total', 'المجموع'))}</Label>
+            <Label x={240} y={244} textAnchor="middle" fontSize={18} fontWeight={700} fill={STAGE}>{pick(language, say('Guztira', 'Total', 'المجموع', 'Total'))}</Label>
             <text x={540} y={244} textAnchor="end" fontSize={22} fontWeight={700} fill={STAGE}>{num(language, '29,89 €')}</text>
-            <Caption y={290} language={language} text={say('Prezioa bider kopurua; laurden kilo: zati 4', 'Precio por cantidad; un cuarto de kilo: entre 4', 'السعر في الكمية؛ ربع كيلو: القسمة على أربعة')} />
+            <Caption y={290} language={language} text={say('Prezioa bider kopurua; laurden kilo: zati 4', 'Precio por cantidad; un cuarto de kilo: entre 4', 'السعر في الكمية؛ ربع كيلو: القسمة على أربعة', 'Price per quantity; a quarter of a kilo: divide by 4')} />
         </Figure>
     )
 }

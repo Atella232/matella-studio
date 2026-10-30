@@ -33,6 +33,7 @@ Usar esta lista antes de dar una unidad por consolidada o tomarla como plantilla
 - [ ] ES completo.
 - [ ] EU completo.
 - [ ] AR completo.
+- [ ] EN completo (inglés británico; los números con punto decimal y coma de miles).
 - [ ] Sin mojibake visible.
 - [ ] No se depende de `fixMaybeText` para corregir contenido fuente nuevo.
 - [ ] Las fórmulas se renderizan correctamente con `MathText`.

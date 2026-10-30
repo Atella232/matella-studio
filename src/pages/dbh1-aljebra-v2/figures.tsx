@@ -35,7 +35,7 @@ function UnitTile({ x, y }: { x: number; y: number }) {
 export function MachineFigure({ language }: { language: UnitLanguage }) {
     const rows = [0, 1, 2, 5]
     return (
-        <Figure height={230} label={pick(language, { eu: '2x + 1 makina: x sartu, 2x + 1 atera', es: 'Máquina 2x + 1: entra x, sale 2x + 1', ar: 'آلة 2x + 1: يدخل x ويخرج 2x + 1' })}>
+        <Figure height={230} label={pick(language, { eu: '2x + 1 makina: x sartu, 2x + 1 atera', es: 'Máquina 2x + 1: entra x, sale 2x + 1', en: 'Machine 2x + 1: x goes in, 2x + 1 comes out', ar: 'آلة 2x + 1: يدخل x ويخرج 2x + 1' })}>
             <rect x={250} y={30} width={220} height={100} rx={18} fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} />
             <text x={360} y={90} textAnchor="middle" fontSize={32} fontWeight={700} fill={INK} fontFamily="Fraunces, serif">2x + 1</text>
             <path d="M150 80 L240 80" stroke={INK} strokeWidth={2.4} markerEnd="url(#algebra-arrow)" />
@@ -53,7 +53,7 @@ export function MachineFigure({ language }: { language: UnitLanguage }) {
                 </g>
             ))}
             <text x={620} y={88} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>?</text>
-            <Caption y={224}>{pick(language, { eu: 'Zenbakizko balioa: ordeztu letra zenbakiaz eta egin eragiketak', es: 'Valor numérico: sustituye la letra por el número y opera', ar: 'القيمة العددية: عوّض الحرف بالعدد وأجرِ العمليات' })}</Caption>
+            <Caption y={224}>{pick(language, { eu: 'Zenbakizko balioa: ordeztu letra zenbakiaz eta egin eragiketak', es: 'Valor numérico: sustituye la letra por el número y opera', en: 'Numerical value: substitute the number for the letter and work it out.', ar: 'القيمة العددية: عوّض الحرف بالعدد وأجرِ العمليات' })}</Caption>
         </Figure>
     )
 }
@@ -62,7 +62,7 @@ export function MachineFigure({ language }: { language: UnitLanguage }) {
 
 export function PerimeterFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={230} label={pick(language, { eu: 'Laukizuzenaren perimetroa: P = 2a + 2b', es: 'Perímetro del rectángulo: P = 2a + 2b', ar: 'محيط المستطيل: P = 2a + 2b' })}>
+        <Figure height={230} label={pick(language, { eu: 'Laukizuzenaren perimetroa: P = 2a + 2b', es: 'Perímetro del rectángulo: P = 2a + 2b', en: 'Perimeter of the rectangle: P = 2a + 2b', ar: 'محيط المستطيل: P = 2a + 2b' })}>
             <rect x={90} y={40} width={260} height={130} fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} />
             <text x={220} y={30} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK} fontStyle="italic">a</text>
             <text x={220} y={196} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK} fontStyle="italic">a</text>
@@ -71,7 +71,7 @@ export function PerimeterFigure({ language }: { language: UnitLanguage }) {
             <text x={420} y={80} fontSize={22} fontWeight={700} fill={INK}>P = a + b + a + b</text>
             <text x={420} y={120} fontSize={22} fontWeight={700} fill={STAGE}>P = 2a + 2b</text>
             <text x={420} y={160} fontSize={22} fontWeight={700} fill={INK}>A = a · b</text>
-            <Caption y={222}>{pick(language, { eu: 'Letrek edozein neurri adierazten dute: formula batek laukizuzen guztiak balio ditu', es: 'Las letras representan cualquier medida: una fórmula sirve para todos los rectángulos', ar: 'الحروف تمثّل أي قياس: صيغة واحدة تصلح لكل المستطيلات' })}</Caption>
+            <Caption y={222}>{pick(language, { eu: 'Letrek edozein neurri adierazten dute: formula batek laukizuzen guztiak balio ditu', es: 'Las letras representan cualquier medida: una fórmula sirve para todos los rectángulos', en: 'The letters represent any measurement: one formula works for all rectangles.', ar: 'الحروف تمثّل أي قياس: صيغة واحدة تصلح لكل المستطيلات' })}</Caption>
         </Figure>
     )
 }
@@ -80,18 +80,18 @@ export function PerimeterFigure({ language }: { language: UnitLanguage }) {
 
 export function MonomialFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={230} label={pick(language, { eu: '−4x²y monomioaren atalak', es: 'Partes del monomio −4x²y', ar: 'أجزاء وحيد الحد −4x²y' })}>
+        <Figure height={230} label={pick(language, { eu: '−4x²y monomioaren atalak', es: 'Partes del monomio −4x²y', en: 'Parts of the monomial −4x²y', ar: 'أجزاء وحيد الحد −4x²y' })}>
             <text x={290} y={112} textAnchor="end" fontSize={56} fontWeight={700} fill={SECOND} fontFamily="Fraunces, serif">−4</text>
             <text x={300} y={112} fontSize={56} fontWeight={700} fill={STAGE} fontFamily="Fraunces, serif" fontStyle="italic">x</text>
             <text x={334} y={80} fontSize={30} fontWeight={700} fill={STAGE} fontFamily="Fraunces, serif">2</text>
             <text x={356} y={112} fontSize={56} fontWeight={700} fill={STAGE} fontFamily="Fraunces, serif" fontStyle="italic">y</text>
             <line x1={250} x2={200} y1={124} y2={160} stroke={SECOND} strokeWidth={1.8} />
-            <text x={200} y={180} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, { eu: 'koefizientea: −4', es: 'coeficiente: −4', ar: 'المعامل: −4' })}</text>
+            <text x={200} y={180} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, { eu: 'koefizientea: −4', es: 'coeficiente: −4', en: 'coefficient: −4', ar: 'المعامل: −4' })}</text>
             <line x1={340} x2={420} y1={124} y2={160} stroke={STAGE} strokeWidth={1.8} />
-            <text x={440} y={180} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'zati literala: x²y', es: 'parte literal: x²y', ar: 'الجزء الحرفي: x²y' })}</text>
-            <text x={560} y={70} textAnchor="middle" fontSize={17} fontWeight={700} fill={INK}>{pick(language, { eu: 'maila', es: 'grado', ar: 'الدرجة' })}</text>
+            <text x={440} y={180} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'zati literala: x²y', es: 'parte literal: x²y', en: 'literal part: x²y', ar: 'الجزء الحرفي: x²y' })}</text>
+            <text x={560} y={70} textAnchor="middle" fontSize={17} fontWeight={700} fill={INK}>{pick(language, { eu: 'maila', es: 'grado', en: 'degree', ar: 'الدرجة' })}</text>
             <text x={560} y={100} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>2 + 1 = 3</text>
-            <Caption y={222}>{pick(language, { eu: 'Maila: letren berretzaileen batura (y-k 1 du)', es: 'Grado: suma de los exponentes de las letras (y tiene 1)', ar: 'الدرجة: مجموع أسس الحروف (أس y يساوي 1)' })}</Caption>
+            <Caption y={222}>{pick(language, { eu: 'Maila: letren berretzaileen batura (y-k 1 du)', es: 'Grado: suma de los exponentes de las letras (y tiene 1)', en: 'Degree: sum of the exponents of the letters (y has exponent 1)', ar: 'الدرجة: مجموع أسس الحروف (أس y يساوي 1)' })}</Caption>
         </Figure>
     )
 }
@@ -100,7 +100,7 @@ export function MonomialFigure({ language }: { language: UnitLanguage }) {
 
 export function TilesFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={240} label={pick(language, { eu: '3x + 2 + 2x + 1 = 5x + 3 fitxekin', es: '3x + 2 + 2x + 1 = 5x + 3 con fichas', ar: '3x + 2 + 2x + 1 = 5x + 3 بالبطاقات' })}>
+        <Figure height={240} label={pick(language, { eu: '3x + 2 + 2x + 1 = 5x + 3 fitxekin', es: '3x + 2 + 2x + 1 = 5x + 3 con fichas', en: '3x + 2 + 2x + 1 = 5x + 3 with algebra tiles', ar: '3x + 2 + 2x + 1 = 5x + 3 بالبطاقات' })}>
             {[0, 1, 2].map((index) => <XTile key={`a${index}`} x={40 + index * 34} y={30} />)}
             {[0, 1].map((index) => <UnitTile key={`b${index}`} x={150 + index * 34} y={74} />)}
             <text x={232} y={80} textAnchor="middle" fontSize={26} fontWeight={700} fill={INK}>+</text>
@@ -112,7 +112,7 @@ export function TilesFigure({ language }: { language: UnitLanguage }) {
             <text x={120} y={140} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>3x + 2</text>
             <text x={306} y={140} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>2x + 1</text>
             <text x={560} y={140} textAnchor="middle" fontSize={20} fontWeight={700} fill={STAGE}>5x + 3</text>
-            <Caption y={200}>{pick(language, { eu: 'x-ak x-ekin eta zenbakiak zenbakiekin: antzekoak bakarrik batzen dira', es: 'Las x con las x y los números con los números: solo se suman los semejantes', ar: 'الـ x مع الـ x والأعداد مع الأعداد: نجمع المتشابهة فقط' })}</Caption>
+            <Caption y={200}>{pick(language, { eu: 'x-ak x-ekin eta zenbakiak zenbakiekin: antzekoak bakarrik batzen dira', es: 'Las x con las x y los números con los números: solo se suman los semejantes', en: 'x\'s go with x\'s and numbers go with numbers: only like terms are added.', ar: 'الـ x مع الـ x والأعداد مع الأعداد: نجمع المتشابهة فقط' })}</Caption>
         </Figure>
     )
 }
@@ -121,7 +121,7 @@ export function TilesFigure({ language }: { language: UnitLanguage }) {
 
 export function BalanceFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={260} label={pick(language, { eu: 'Balantza orekatua: x + 2 = 8', es: 'Balanza en equilibrio: x + 2 = 8', ar: 'ميزان متوازن: x + 2 = 8' })}>
+        <Figure height={260} label={pick(language, { eu: 'Balantza orekatua: x + 2 = 8', es: 'Balanza en equilibrio: x + 2 = 8', en: 'Balance in equilibrium: x + 2 = 8', ar: 'ميزان متوازن: x + 2 = 8' })}>
             <polygon points="360,200 330,240 390,240" fill={PAPER} stroke={INK} strokeWidth={2.2} />
             <line x1={360} x2={360} y1={90} y2={200} stroke={INK} strokeWidth={3} />
             <line x1={130} x2={590} y1={90} y2={90} stroke={INK} strokeWidth={4} />
@@ -136,7 +136,7 @@ export function BalanceFigure({ language }: { language: UnitLanguage }) {
             <text x={160} y={200} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>x + 2</text>
             <text x={560} y={200} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>8</text>
             <text x={360} y={50} textAnchor="middle" fontSize={20} fontWeight={700} fill={STAGE}>x = 6</text>
-            <Caption y={254}>{pick(language, { eu: 'Bi aldeetatik 2 kendu: balantza orekatuta jarraitzen du', es: 'Quita 2 de los dos platos: la balanza sigue en equilibrio', ar: 'أزل 2 من الكفتين: يبقى الميزان متوازنًا' })}</Caption>
+            <Caption y={254}>{pick(language, { eu: 'Bi aldeetatik 2 kendu: balantza orekatuta jarraitzen du', es: 'Quita 2 de los dos platos: la balanza sigue en equilibrio', en: 'Take 2 off both pans: the balance stays in equilibrium.', ar: 'أزل 2 من الكفتين: يبقى الميزان متوازنًا' })}</Caption>
         </Figure>
     )
 }
@@ -145,7 +145,7 @@ export function BalanceFigure({ language }: { language: UnitLanguage }) {
 
 export function DistributiveFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={230} label={pick(language, { eu: '2(x + 3) = 2x + 6 azalera gisa', es: '2(x + 3) = 2x + 6 como área', ar: '2(x + 3) = 2x + 6 على شكل مساحة' })}>
+        <Figure height={230} label={pick(language, { eu: '2(x + 3) = 2x + 6 azalera gisa', es: '2(x + 3) = 2x + 6 como área', en: '2(x + 3) = 2x + 6 as an area', ar: '2(x + 3) = 2x + 6 على شكل مساحة' })}>
             <rect x={120} y={50} width={240} height={100} fill={STAGE_TINT} stroke={INK} strokeWidth={2.2} />
             <rect x={360} y={50} width={150} height={100} fill="var(--mustard-tint, #fbebc0)" stroke={INK} strokeWidth={2.2} />
             <text x={240} y={40} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK} fontStyle="italic">x</text>
@@ -155,7 +155,7 @@ export function DistributiveFigure({ language }: { language: UnitLanguage }) {
             <text x={435} y={108} textAnchor="middle" fontSize={22} fontWeight={700} fill={INK}>6</text>
             <text x={600} y={100} textAnchor="middle" fontSize={20} fontWeight={700} fill={STAGE}>2(x + 3)</text>
             <text x={600} y={128} textAnchor="middle" fontSize={20} fontWeight={700} fill={STAGE}>= 2x + 6</text>
-            <Caption y={200}>{pick(language, { eu: 'Parentesiaren aurreko zenbakiak barruko gai guztiak biderkatzen ditu', es: 'El número de delante del paréntesis multiplica a todos los términos de dentro', ar: 'العدد الذي أمام القوس يضرب كل الحدود داخله' })}</Caption>
+            <Caption y={200}>{pick(language, { eu: 'Parentesiaren aurreko zenbakiak barruko gai guztiak biderkatzen ditu', es: 'El número de delante del paréntesis multiplica a todos los términos de dentro', en: 'The number in front of the bracket multiplies all the terms inside.', ar: 'العدد الذي أمام القوس يضرب كل الحدود داخله' })}</Caption>
         </Figure>
     )
 }

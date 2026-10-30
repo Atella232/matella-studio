@@ -144,7 +144,7 @@ function imageQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestion | nu
     return build(0, 'image', say(
         `${math(`f(x)=${polynomialLatex([a, b, c])}`)} bada, zenbat da ${math(`f(${x})`)}?`,
         `Si ${math(`f(x)=${polynomialLatex([a, b, c])}`)}, ¿cuánto vale ${math(`f(${x})`)}?`,
-        `إذا كان ${math(`f(x)=${polynomialLatex([a, b, c])}`)} فكم تساوي ${math(`f(${x})`)}؟`
+        `إذا كان ${math(`f(x)=${polynomialLatex([a, b, c])}`)} فكم تساوي ${math(`f(${x})`)}؟`, `If ${math(`f(x)=${polynomialLatex([a, b, c])}`)}, what is ${math(`f(${x})`)}?`
     ), options(random, ofNumber(f(right)), [
         wrong(ofNumber(f(-a * x * x + b * x + c)), 'square-sign'),
         wrong(ofNumber(f(a * x * x - b * x + c)), 'sign'),
@@ -160,7 +160,7 @@ function preimageQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestion |
     return build(0, 'preimage', say(
         `${math(`f(x)=${polynomialLatex([m, n])}`)} bada, zein ${math('x')} baliori dagokio ${math(String(value))} irudia?`,
         `Si ${math(`f(x)=${polynomialLatex([m, n])}`)}, ¿qué ${math('x')} tiene imagen ${math(String(value))}?`,
-        `إذا كان ${math(`f(x)=${polynomialLatex([m, n])}`)} فما قيمة ${math('x')} التي صورتها ${math(String(value))}؟`
+        `إذا كان ${math(`f(x)=${polynomialLatex([m, n])}`)} فما قيمة ${math('x')} التي صورتها ${math(String(value))}؟`, `If ${math(`f(x)=${polynomialLatex([m, n])}`)}, which ${math('x')} has an image of ${math(String(value))}?`
     ), options(random, ofNumber(f(x)), [
         wrong(ofNumber(f(m * value + n)), 'image-for-preimage'),
         wrong(ofNumber(fraction(value + n, m)), 'sign'),
@@ -176,7 +176,7 @@ function rangeQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestion | nu
     return build(0, 'range-min', say(
         `Zein da ${math(`y=${polynomialLatex([1, -2 * h, c])}`)} funtzioaren ibiltarteko balio txikiena?`,
         `¿Cuál es el menor valor del recorrido de ${math(`y=${polynomialLatex([1, -2 * h, c])}`)}?`,
-        `ما أصغر قيمة في مدى ${math(`y=${polynomialLatex([1, -2 * h, c])}`)}؟`
+        `ما أصغر قيمة في مدى ${math(`y=${polynomialLatex([1, -2 * h, c])}`)}؟`, `What is the smallest value in the range of ${math(`y=${polynomialLatex([1, -2 * h, c])}`)}?`
     ), options(random, ofNumber(f(k)), [
         wrong(ofNumber(f(h)), 'vertex-x'),
         wrong(ofNumber(f(c)), 'constant'),
@@ -194,7 +194,7 @@ function domainEndQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestion 
     return build(1, 'domain-end', say(
         `Zein da ${math(`y=\\sqrt{${polynomialLatex([a, b])}}`)} funtzioaren izate-eremuko balio txikiena?`,
         `¿Cuál es el menor valor del dominio de ${math(`y=\\sqrt{${polynomialLatex([a, b])}}`)}?`,
-        `ما أصغر قيمة في مجال ${math(`y=\\sqrt{${polynomialLatex([a, b])}}`)}؟`
+        `ما أصغر قيمة في مجال ${math(`y=\\sqrt{${polynomialLatex([a, b])}}`)}؟`, `What is the smallest value in the domain of ${math(`y=\\sqrt{${polynomialLatex([a, b])}}`)}?`
     ), options(random, ofNumber(f(p)), [
         wrong(ofNumber(f(-p)), 'root-sign'),
         wrong(ofNumber(f(b)), 'constant'),
@@ -208,7 +208,7 @@ function excludedCountQuestion(random: Random, tier: Tier): FunctionsAkRaceQuest
     return build(1, 'excluded-count', say(
         `Zenbat zenbaki oso EZ daude ${math(`y=\\sqrt{${polynomialLatex([1, 0, -r * r])}}`)} funtzioaren izate-eremuan?`,
         `¿Cuántos números enteros NO están en el dominio de ${math(`y=\\sqrt{${polynomialLatex([1, 0, -r * r])}}`)}?`,
-        `كم عددًا صحيحًا ليس في مجال ${math(`y=\\sqrt{${polynomialLatex([1, 0, -r * r])}}`)}؟`
+        `كم عددًا صحيحًا ليس في مجال ${math(`y=\\sqrt{${polynomialLatex([1, 0, -r * r])}}`)}؟`, `How many integers are NOT in the domain of ${math(`y=\\sqrt{${polynomialLatex([1, 0, -r * r])}}`)}?`
     ), options(random, ofNumber(f(right)), [
         wrong(ofNumber(f(2 * r + 1)), 'bracket'),
         wrong(ofNumber(f(r * r)), 'square'),
@@ -224,7 +224,7 @@ function fractionDomainQuestion(random: Random, tier: Tier): FunctionsAkRaceQues
     return build(1, 'fraction-domain', say(
         `Zein da ${math(`y=\\frac{1}{${denominator}}`)} funtzioaren izate-eremua?`,
         `¿Cuál es el dominio de ${math(`y=\\frac{1}{${denominator}}`)}?`,
-        `ما مجال ${math(`y=\\frac{1}{${denominator}}`)}؟`
+        `ما مجال ${math(`y=\\frac{1}{${denominator}}`)}؟`, `What is the domain of ${math(`y=\\frac{1}{${denominator}}`)}?`
     ), options(random, ofLatex(withoutLatex([p, q])), [
         wrong(ofLatex(withoutLatex([-p, -q])), 'root-sign'),
         wrong(ofLatex('\\mathbb{R}'), 'whole-line'),
@@ -245,7 +245,7 @@ function linearRootQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestion
     return build(1, 'linear-root', say(
         `Zein da ${math(`y=\\sqrt{${polynomialLatex([a, b])}}`)} funtzioaren izate-eremua?`,
         `¿Cuál es el dominio de ${math(`y=\\sqrt{${polynomialLatex([a, b])}}`)}?`,
-        `ما مجال ${math(`y=\\sqrt{${polynomialLatex([a, b])}}`)}؟`
+        `ما مجال ${math(`y=\\sqrt{${polynomialLatex([a, b])}}`)}؟`, `What is the domain of ${math(`y=\\sqrt{${polynomialLatex([a, b])}}`)}?`
     ), options(random, ofLatex(right), [
         wrong(ofLatex(flipped), 'inequality-direction'),
         wrong(ofLatex(open), 'bracket'),
@@ -265,7 +265,7 @@ function quadraticRootQuestion(random: Random, tier: Tier): FunctionsAkRaceQuest
     return build(1, 'quadratic-root', say(
         `Zein da ${math(`y=\\sqrt{${radicand}}`)} funtzioaren izate-eremua?`,
         `¿Cuál es el dominio de ${math(`y=\\sqrt{${radicand}}`)}?`,
-        `ما مجال ${math(`y=\\sqrt{${radicand}}`)}؟`
+        `ما مجال ${math(`y=\\sqrt{${radicand}}`)}؟`, `What is the domain of ${math(`y=\\sqrt{${radicand}}`)}?`
     ), options(random, ofLatex(outside ? out : inside), [
         wrong(ofLatex(outside ? inside : out), 'inside-outside'),
         wrong(ofLatex(outside ? openOut : openInside), 'bracket'),
@@ -279,7 +279,7 @@ function rootDenominatorQuestion(random: Random, tier: Tier): FunctionsAkRaceQue
     return build(1, 'root-denominator', say(
         `Zein da ${math(`y=\\frac{1}{\\sqrt{${radicand}}}`)} funtzioaren izate-eremua?`,
         `¿Cuál es el dominio de ${math(`y=\\frac{1}{\\sqrt{${radicand}}}`)}?`,
-        `ما مجال ${math(`y=\\frac{1}{\\sqrt{${radicand}}}`)}؟`
+        `ما مجال ${math(`y=\\frac{1}{\\sqrt{${radicand}}}`)}؟`, `What is the domain of ${math(`y=\\frac{1}{\\sqrt{${radicand}}}`)}?`
     ), options(random, ofLatex(intervalLatex(p, 'inf')), [
         wrong(ofLatex(intervalLatex(p, 'inf', true)), 'strict'),
         wrong(ofLatex(withoutLatex([p])), 'fraction-only'),
@@ -303,7 +303,7 @@ function pieceValueQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestion
     return build(2, 'piece-value', say(
         `${math(`f(x)=${polynomialLatex([m1, n1])}`)} ${math(`x<${at}`)} denean, eta ${math(`f(x)=${polynomialLatex([m2, n2])}`)} ${math(`x\\ge ${at}`)} denean. Zenbat da ${math(`f(${x})`)}?`,
         `${math(`f(x)=${polynomialLatex([m1, n1])}`)} si ${math(`x<${at}`)} y ${math(`f(x)=${polynomialLatex([m2, n2])}`)} si ${math(`x\\ge ${at}`)}. ¿Cuánto vale ${math(`f(${x})`)}?`,
-        `${math(`f(x)=${polynomialLatex([m1, n1])}`)} إذا ${math(`x<${at}`)} و${math(`f(x)=${polynomialLatex([m2, n2])}`)} إذا ${math(`x\\ge ${at}`)}. كم تساوي ${math(`f(${x})`)}؟`
+        `${math(`f(x)=${polynomialLatex([m1, n1])}`)} إذا ${math(`x<${at}`)} و${math(`f(x)=${polynomialLatex([m2, n2])}`)} إذا ${math(`x\\ge ${at}`)}. كم تساوي ${math(`f(${x})`)}؟`, `${math(`f(x)=${polynomialLatex([m1, n1])}`)} if ${math(`x<${at}`)}, and ${math(`f(x)=${polynomialLatex([m2, n2])}`)} if ${math(`x\\ge ${at}`)}. What is ${math(`f(${x})`)}?`
     ), options(random, ofNumber(f(right)), [wrong(ofNumber(f(other)), 'wrong-piece'), ...nearNumbers(right)]), right, `f(${x})=${left ? m1 : m2}\\cdot ${paren(x)}${(left ? n1 : n2) >= 0 ? '+' : '-'}${Math.abs(left ? n1 : n2)}=${right}`, { at, m1, n1, m2, n2, x })
 }
 
@@ -316,7 +316,7 @@ function joinQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestion | nul
     return build(2, 'join', say(
         `Kalkulatu ${math('k')}, ${math(`f(x)=${polynomialLatex([1, 0, p])}`)} (${math(`x\\le ${at}`)}) eta ${math('f(x)=x+k')} (${math(`x>${at}`)}) jarraitua izan dadin.`,
         `Halla ${math('k')} para que ${math(`f(x)=${polynomialLatex([1, 0, p])}`)} (${math(`x\\le ${at}`)}), ${math('f(x)=x+k')} (${math(`x>${at}`)}) sea continua.`,
-        `أوجد ${math('k')} لتكون ${math(`f(x)=${polynomialLatex([1, 0, p])}`)} (${math(`x\\le ${at}`)})، ${math('f(x)=x+k')} (${math(`x>${at}`)}) متصلة.`
+        `أوجد ${math('k')} لتكون ${math(`f(x)=${polynomialLatex([1, 0, p])}`)} (${math(`x\\le ${at}`)})، ${math('f(x)=x+k')} (${math(`x>${at}`)}) متصلة.`, `Find ${math('k')} so that the function ${math(`f(x)=${polynomialLatex([1, 0, p])}`)} (${math(`x\\le ${at}`)}), ${math('f(x)=x+k')} (${math(`x>${at}`)}) is continuous.`
     ), options(random, ofNumber(f(k)), [
         wrong(ofNumber(f(left)), 'left-value'),
         wrong(ofNumber(f(left + at)), 'sign'),
@@ -337,7 +337,7 @@ function jumpQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestion | nul
     return build(2, 'jump', say(
         `${math(`f(x)=${polynomialLatex([m1, n1])}`)} ${math(`x<${at}`)} denean, eta ${math(`f(x)=${polynomialLatex([m2, n2])}`)} ${math(`x\\ge ${at}`)} denean. Zenbatekoa da jauzia (eskuina ken ezkerra) ${math(`x=${at}`)} puntuan?`,
         `${math(`f(x)=${polynomialLatex([m1, n1])}`)} si ${math(`x<${at}`)} y ${math(`f(x)=${polynomialLatex([m2, n2])}`)} si ${math(`x\\ge ${at}`)}. ¿Cuánto es el salto (derecha menos izquierda) en ${math(`x=${at}`)}?`,
-        `${math(`f(x)=${polynomialLatex([m1, n1])}`)} إذا ${math(`x<${at}`)} و${math(`f(x)=${polynomialLatex([m2, n2])}`)} إذا ${math(`x\\ge ${at}`)}. ما مقدار القفزة (اليمين ناقص اليسار) عند ${math(`x=${at}`)}؟`
+        `${math(`f(x)=${polynomialLatex([m1, n1])}`)} إذا ${math(`x<${at}`)} و${math(`f(x)=${polynomialLatex([m2, n2])}`)} إذا ${math(`x\\ge ${at}`)}. ما مقدار القفزة (اليمين ناقص اليسار) عند ${math(`x=${at}`)}؟`, `${math(`f(x)=${polynomialLatex([m1, n1])}`)} if ${math(`x<${at}`)}, and ${math(`f(x)=${polynomialLatex([m2, n2])}`)} if ${math(`x\\ge ${at}`)}. What is the size of the jump (right minus left) at ${math(`x=${at}`)}?`
     ), options(random, ofNumber(f(jump)), [wrong(ofNumber(f(-jump)), 'jump-order'), wrong(ofNumber(f(right + left)), 'sign'), ...nearNumbers(jump)]), jump, `${right}-${paren(left)}=${jump}`, { at, m1, n1, m2, n2 })
 }
 
@@ -347,7 +347,7 @@ function holeQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestion | nul
     return build(2, 'hole', say(
         `${math(`y=\\frac{${polynomialLatex([1, 0, -p * p])}}{${polynomialLatex([1, -p])}}`)} funtzioak zulo bat du ${math(`x=${p}`)} puntuan. Zein ordenatu falta da?`,
         `${math(`y=\\frac{${polynomialLatex([1, 0, -p * p])}}{${polynomialLatex([1, -p])}}`)} tiene un agujero en ${math(`x=${p}`)}. ¿Qué ordenada falta?`,
-        `للدالة ${math(`y=\\frac{${polynomialLatex([1, 0, -p * p])}}{${polynomialLatex([1, -p])}}`)} ثقب عند ${math(`x=${p}`)}. ما الإحداثي الصادي الناقص؟`
+        `للدالة ${math(`y=\\frac{${polynomialLatex([1, 0, -p * p])}}{${polynomialLatex([1, -p])}}`)} ثقب عند ${math(`x=${p}`)}. ما الإحداثي الصادي الناقص؟`, `${math(`y=\\frac{${polynomialLatex([1, 0, -p * p])}}{${polynomialLatex([1, -p])}}`)} has a hole at ${math(`x=${p}`)}. What is the missing y-value?`
     ), options(random, ofNumber(f(right)), [
         wrong(ofNumber(f(p)), 'hole-x'),
         wrong(ofNumber(f(p * p)), 'square'),
@@ -364,7 +364,7 @@ function yInterceptQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestion
     return build(3, 'y-intercept', say(
         `Zein ordenatutan ebakitzen du ${math(`y=${roots.map(factorLatex).join('')}`)} funtzioak Y ardatza?`,
         `¿En qué ordenada corta al eje Y la función ${math(`y=${roots.map(factorLatex).join('')}`)}?`,
-        `عند أي إحداثي صادي تقطع الدالة ${math(`y=${roots.map(factorLatex).join('')}`)} محور Y؟`
+        `عند أي إحداثي صادي تقطع الدالة ${math(`y=${roots.map(factorLatex).join('')}`)} محور Y؟`, `At what y-value does ${math(`y=${roots.map(factorLatex).join('')}`)} cross the y-axis?`
     ), options(random, ofNumber(f(right)), [
         wrong(ofNumber(f(-right)), 'sign'),
         wrong(ofNumber(f(roots[0] + roots[1] + roots[2])), 'sum-roots'),
@@ -378,7 +378,7 @@ function largestRootQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestio
         return build(3, 'cubic-root', say(
             `Zein da ${math(`y=${polynomialLatex([1, 0, -r * r, 0])}`)} funtzioak X ardatzarekin duen ebaki-puntu handienaren abszisa?`,
             `¿Cuál es la abscisa del mayor corte de ${math(`y=${polynomialLatex([1, 0, -r * r, 0])}`)} con el eje X?`,
-            `ما الإحداثي السيني لأكبر نقطة تقاطع لـ ${math(`y=${polynomialLatex([1, 0, -r * r, 0])}`)} مع محور X؟`
+            `ما الإحداثي السيني لأكبر نقطة تقاطع لـ ${math(`y=${polynomialLatex([1, 0, -r * r, 0])}`)} مع محور X؟`, `What is the largest x-intercept of ${math(`y=${polynomialLatex([1, 0, -r * r, 0])}`)}?`
         ), options(random, ofNumber(f(r)), [wrong(ofNumber(f(r * r)), 'square'), wrong(ofNumber(f(0)), 'calculation'), wrong(ofNumber(f(-r)), 'sign'), ...nearNumbers(r)]), r, `x(x-${r})(x+${r})=0\\ \\to\\ x=${r}`, { r, s: 0 })
     }
     const a = randomInt(random, 1, 3)
@@ -386,7 +386,7 @@ function largestRootQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestio
     return build(3, 'biquadratic-root', say(
         `Zein da ${math(`y=${polynomialLatex([1, 0, -(a * a + b * b), 0, a * a * b * b])}`)} funtzioak X ardatzarekin duen ebaki-puntu handienaren abszisa?`,
         `¿Cuál es la abscisa del mayor corte de ${math(`y=${polynomialLatex([1, 0, -(a * a + b * b), 0, a * a * b * b])}`)} con el eje X?`,
-        `ما الإحداثي السيني لأكبر نقطة تقاطع لـ ${math(`y=${polynomialLatex([1, 0, -(a * a + b * b), 0, a * a * b * b])}`)} مع محور X؟`
+        `ما الإحداثي السيني لأكبر نقطة تقاطع لـ ${math(`y=${polynomialLatex([1, 0, -(a * a + b * b), 0, a * a * b * b])}`)} مع محور X؟`, `What is the largest x-intercept of ${math(`y=${polynomialLatex([1, 0, -(a * a + b * b), 0, a * a * b * b])}`)}?`
     ), options(random, ofNumber(f(b)), [wrong(ofNumber(f(b * b)), 'square'), wrong(ofNumber(f(a)), 'calculation'), wrong(ofNumber(f(-b)), 'sign'), ...nearNumbers(b)]), b, `t^{2}-${a * a + b * b}t+${a * a * b * b}=0\\ \\to\\ t=${a * a},\\ t=${b * b}\\ \\to\\ x=\\pm ${a},\\ x=\\pm ${b}`, { r: a, s: b })
 }
 
@@ -398,7 +398,7 @@ function parityQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestion | n
     return build(3, 'parity', say(
         `${math('f')} funtzioa ${odd ? 'bakoitia' : 'bikoitia'} da eta ${math(`f(${a})=${value}`)}. Zenbat da ${math(`f(-${a})`)}?`,
         `La función ${math('f')} es ${odd ? 'impar' : 'par'} y ${math(`f(${a})=${value}`)}. ¿Cuánto vale ${math(`f(-${a})`)}?`,
-        `الدالة ${math('f')} ${odd ? 'فردية' : 'زوجية'} و${math(`f(${a})=${value}`)}. كم تساوي ${math(`f(-${a})`)}؟`
+        `الدالة ${math('f')} ${odd ? 'فردية' : 'زوجية'} و${math(`f(${a})=${value}`)}. كم تساوي ${math(`f(-${a})`)}؟`, `The function ${math('f')} is ${odd ? 'odd' : 'even'} and ${math(`f(${a})=${value}`)}. What is ${math(`f(-${a})`)}?`
     ), options(random, ofNumber(f(right)), [wrong(ofNumber(f(-right)), 'parity'), ...nearNumbers(right)]), right, `f(-${a})=${odd ? '-' : ''}f(${a})=${right}`, { a, value, odd: odd ? 1 : 0 })
 }
 
@@ -409,7 +409,7 @@ function negativeQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestion |
     return build(3, 'negative', say(
         `Non da negatiboa ${math(`f(x)=${polynomialLatex([1, -(r + s), r * s])}`)} funtzioa?`,
         `¿Dónde es negativa ${math(`f(x)=${polynomialLatex([1, -(r + s), r * s])}`)}?`,
-        `أين تكون ${math(`f(x)=${polynomialLatex([1, -(r + s), r * s])}`)} سالبة؟`
+        `أين تكون ${math(`f(x)=${polynomialLatex([1, -(r + s), r * s])}`)} سالبة؟`, `Where is ${math(`f(x)=${polynomialLatex([1, -(r + s), r * s])}`)} negative?`
     ), options(random, ofLatex(intervalLatex(r, s)), [
         wrong(ofLatex(`${intervalLatex('-inf', r)}\\cup${intervalLatex(s, 'inf')}`), 'inside-outside'),
         wrong(ofLatex(intervalLatex(-s, -r)), 'root-sign'),
@@ -431,7 +431,7 @@ function rateQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestion | nul
     return build(4, 'rate', say(
         `Kalkulatu ${math(`f(x)=${polynomialLatex([1, b, c])}`)} funtzioaren T.V.M. ${math(`[${from},\\,${to}]`)} tartean.`,
         `Halla la T.V.M. de ${math(`f(x)=${polynomialLatex([1, b, c])}`)} en ${math(`[${from},\\,${to}]`)}.`,
-        `أوجد معدل التغير المتوسط لـ ${math(`f(x)=${polynomialLatex([1, b, c])}`)} في ${math(`[${from},\\,${to}]`)}.`
+        `أوجد معدل التغير المتوسط لـ ${math(`f(x)=${polynomialLatex([1, b, c])}`)} في ${math(`[${from},\\,${to}]`)}.`, `Find the average rate of change of ${math(`f(x)=${polynomialLatex([1, b, c])}`)} on ${math(`[${from},\\,${to}]`)}.`
     ), options(random, ofNumber(f(right)), [
         wrong(ofNumber(f(difference)), 'no-divide'),
         wrong(ofNumber(f(-right)), 'sign'),
@@ -448,7 +448,7 @@ function extremeQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestion | 
     return build(4, 'extreme', say(
         `Zein da ${math(`y=${polynomialLatex([a, -2 * a * h, c])}`)} funtzioaren ${a > 0 ? 'balio minimoa' : 'balio maximoa'}?`,
         `¿Cuál es el valor ${a > 0 ? 'mínimo' : 'máximo'} de ${math(`y=${polynomialLatex([a, -2 * a * h, c])}`)}?`,
-        `ما القيمة ${a > 0 ? 'الصغرى' : 'العظمى'} لـ ${math(`y=${polynomialLatex([a, -2 * a * h, c])}`)}؟`
+        `ما القيمة ${a > 0 ? 'الصغرى' : 'العظمى'} لـ ${math(`y=${polynomialLatex([a, -2 * a * h, c])}`)}؟`, `What is the ${a > 0 ? 'minimum' : 'maximum'} value of ${math(`y=${polynomialLatex([a, -2 * a * h, c])}`)}?`
     ), options(random, ofNumber(f(k)), [
         wrong(ofNumber(f(h)), 'vertex-x'),
         wrong(ofNumber(f(c)), 'constant'),
@@ -466,7 +466,7 @@ function periodQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestion | n
     return build(4, 'period', say(
         `Funtzio baten periodoa ${math(String(period))} da. ${math(`[0,\\,${period})`)} tarteko zein ${math('x')} balioak ematen du ${math(`f(${x})`)} balio bera?`,
         `Una función tiene periodo ${math(String(period))}. ¿Qué ${math('x')} de ${math(`[0,\\,${period})`)} tiene el mismo valor que ${math(`f(${x})`)}?`,
-        `دور دالة ${math(String(period))}. ما قيمة ${math('x')} في ${math(`[0,\\,${period})`)} التي لها قيمة ${math(`f(${x})`)} نفسها؟`
+        `دور دالة ${math(String(period))}. ما قيمة ${math('x')} في ${math(`[0,\\,${period})`)} التي لها قيمة ${math(`f(${x})`)} نفسها؟`, `A function has period ${math(String(period))}. Which ${math('x')} in ${math(`[0,\\,${period})`)} has the same value as ${math(`f(${x})`)}?`
     ), options(random, ofNumber(f(rest)), [
         wrong(ofNumber(f(quotient)), 'quotient'),
         wrong(ofNumber(f(period - rest)), 'calculation'),
@@ -490,7 +490,7 @@ function speedQuestion(random: Random, tier: Tier): FunctionsAkRaceQuestion | nu
     return build(4, 'speed', say(
         `Bola batek ${math(`e=${alpha}t^{2}`)} metro egiten ditu ${math('t')} segundotan. Zein da haren abiadura ertaina ${math(`[${from},\\,${to}]`)} tartean, m/s-tan?`,
         `Una bola recorre ${math(`e=${alpha}t^{2}`)} metros en ${math('t')} segundos. ¿Cuál es su velocidad media en ${math(`[${from},\\,${to}]`)}, en m/s?`,
-        `تقطع كرة ${math(`e=${alpha}t^{2}`)} مترًا في ${math('t')} ثانية. ما سرعتها المتوسطة في ${math(`[${from},\\,${to}]`)} بالمتر في الثانية؟`
+        `تقطع كرة ${math(`e=${alpha}t^{2}`)} مترًا في ${math('t')} ثانية. ما سرعتها المتوسطة في ${math(`[${from},\\,${to}]`)} بالمتر في الثانية؟`, `A ball travels ${math(`e=${alpha}t^{2}`)} metres in ${math('t')} seconds. What is its average speed over ${math(`[${from},\\,${to}]`)}, in m/s?`
     ), options(random, ofNumber(f(right)), [
         wrong(ofNumber(f(fromZero)), 'from-zero'),
         wrong(ofNumber(f(alpha * (to * to - from * from))), 'no-divide'),
@@ -528,27 +528,27 @@ export function functionsAkParTime(circuit: number): number {
 }
 
 export const functionsAkRaceErrorTips: Record<FunctionsAkRaceError, LocalizedText> = {
-    'square-sign': say('Ordeztu parentesi artean: $(-3)^{2}=9$, ez $-9$.', 'Sustituye entre paréntesis: $(-3)^{2}=9$, no $-9$.', 'عوّض بين قوسين: $(-3)^{2}=9$ وليس $-9$.'),
-    'image-for-preimage': say('Irudia kalkulatu duzu. Aurreirudia: ebatzi $f(x)=b$.', 'Has calculado la imagen. La antiimagen: resuelve $f(x)=b$.', 'حسبت الصورة. الأصل: حُلّ $f(x)=b$.'),
-    sign: say('Begiratu zeinuari: gai bat aldatu da.', 'Mira el signo: ha cambiado algún término.', 'انتبه للإشارة: تغيّر أحد الحدود.'),
-    'vertex-x': say('Hori erpinaren abszisa da; balioa haren ordenatua da.', 'Esa es la abscisa del vértice; el valor es su ordenada.', 'هذا الإحداثي السيني للرأس؛ والقيمة هي إحداثيه الصادي.'),
-    constant: say('Gai askea $f(0)$ da, ez muturra: kalkulatu $f$ erpinean.', 'El término independiente es $f(0)$, no el extremo: calcula $f$ en el vértice.', 'الحد الثابت هو $f(0)$ لا القيمة القصوى: احسب $f$ عند الرأس.'),
-    'root-sign': say('Erroek aurkako zeinua dute: $(x-3)=0$ bada, $x=3$.', 'Las raíces tienen el signo contrario: si $(x-3)=0$, $x=3$.', 'للجذر الإشارة المعاكسة: إذا $(x-3)=0$ فإن $x=3$.'),
-    'whole-line': say('Izendatzailea anulatu egiten da: kendu haren erroak.', 'El denominador sí se anula: quita sus raíces.', 'المقام ينعدم: احذف جذريه.'),
-    'inequality-direction': say('Zenbaki negatibo batez zatitzean, desberdintzaren noranzkoa aldatzen da.', 'Al dividir entre un número negativo cambia el sentido de la desigualdad.', 'عند القسمة على عدد سالب يتغير اتجاه المتراجحة.'),
-    bracket: say('Erroa: $\\ge 0$, muturrak barne, kortxetearekin.', 'Raíz: $\\ge 0$, extremos incluidos, con corchete.', 'الجذر: $\\ge 0$، الطرفان ضمنها، بقوس معقوف.'),
-    'inside-outside': say('Begiratu parabolaren zeinua: $x^{2}-r^{2}$ positiboa da erroetatik kanpo, eta $r^{2}-x^{2}$ barruan.', 'Mira el signo de la parábola: $x^{2}-r^{2}$ es positivo fuera de las raíces, y $r^{2}-x^{2}$ dentro.', 'انظر إلى إشارة القطع: $x^{2}-r^{2}$ موجب خارج الجذرين و$r^{2}-x^{2}$ داخلهما.'),
-    strict: say('Erroa izendatzailean: $>0$ hertsia, 0z ezin delako zatitu.', 'Raíz en el denominador: $>0$ estricto, porque no se divide entre 0.', 'الجذر في المقام: $>0$ تمامًا لأن القسمة على 0 لا تجوز.'),
-    'fraction-only': say('Hori zatiki baten izate-eremua da; erroan zeinua ere begiratu behar da.', 'Ese es el dominio de una fracción; en la raíz también cuenta el signo.', 'هذا مجال كسر؛ في الجذر تهم الإشارة أيضًا.'),
-    'wrong-piece': say('Beste zatia erabili duzu: begiratu lehenik zein tartetan dagoen $x$.', 'Has usado el otro trozo: mira primero en qué intervalo está $x$.', 'استعملت الجزء الآخر: انظر أولًا في أي فترة تقع $x$.'),
-    'left-value': say('Hori ezkerreko zatiaren balioa da; $k$ askatu behar da: $a+k=$ balio hori.', 'Ese es el valor del trozo izquierdo; hay que despejar $k$: $a+k=$ ese valor.', 'هذه قيمة الجزء الأيسر؛ يجب عزل $k$: $a+k=$ تلك القيمة.'),
-    'jump-order': say('Jauzia: eskuineko balioa ken ezkerrekoa.', 'El salto: valor de la derecha menos el de la izquierda.', 'القفزة: قيمة اليمين ناقص قيمة اليسار.'),
-    'hole-x': say('Hori zuloaren abszisa da; ordenatua sinplifikatutako formulatik ateratzen da.', 'Esa es la abscisa del agujero; la ordenada sale de la fórmula simplificada.', 'هذا الإحداثي السيني للثقب؛ والصادي من الصيغة المبسّطة.'),
-    square: say('Hori karratua da: erroa falta da.', 'Eso es el cuadrado: falta la raíz.', 'هذا هو المربع: ينقص الجذر.'),
-    'sum-roots': say('Y ardatzean $x=0$: biderkatu, ez batu.', 'En el eje Y, $x=0$: multiplica, no sumes.', 'على محور Y يكون $x=0$: اضرب ولا تجمع.'),
-    parity: say('Bikoitia: $f(-x)=f(x)$. Bakoitia: $f(-x)=-f(x)$.', 'Par: $f(-x)=f(x)$. Impar: $f(-x)=-f(x)$.', 'الزوجية: $f(-x)=f(x)$. الفردية: $f(-x)=-f(x)$.'),
-    'no-divide': say('Kendura falta da tartearen luzeraz zatitzea: $\\frac{f(b)-f(a)}{b-a}$.', 'Falta dividir la diferencia entre la longitud del intervalo: $\\frac{f(b)-f(a)}{b-a}$.', 'ينقص قسمة الفرق على طول الفترة: $\\frac{f(b)-f(a)}{b-a}$.'),
-    quotient: say('Hori zatidura da; behar dena hondarra da.', 'Ese es el cociente; lo que hace falta es el resto.', 'هذا خارج القسمة؛ والمطلوب الباقي.'),
-    'from-zero': say('Hori $[0,\\,b]$ tarteko abiadura ertaina da; kendu $e(a)$ eta zatitu $b-a$-z.', 'Esa es la velocidad media en $[0,\\,b]$; resta $e(a)$ y divide entre $b-a$.', 'هذه السرعة المتوسطة في $[0,\\,b]$؛ اطرح $e(a)$ واقسم على $b-a$.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    'square-sign': say('Ordeztu parentesi artean: $(-3)^{2}=9$, ez $-9$.', 'Sustituye entre paréntesis: $(-3)^{2}=9$, no $-9$.', 'عوّض بين قوسين: $(-3)^{2}=9$ وليس $-9$.', 'Substitute in brackets: $(-3)^{2}=9$, not $-9$.'),
+    'image-for-preimage': say('Irudia kalkulatu duzu. Aurreirudia: ebatzi $f(x)=b$.', 'Has calculado la imagen. La antiimagen: resuelve $f(x)=b$.', 'حسبت الصورة. الأصل: حُلّ $f(x)=b$.', 'You have calculated the image. For the pre-image, solve $f(x)=b$.'),
+    sign: say('Begiratu zeinuari: gai bat aldatu da.', 'Mira el signo: ha cambiado algún término.', 'انتبه للإشارة: تغيّر أحد الحدود.', 'Check the signs: a term has changed sign.'),
+    'vertex-x': say('Hori erpinaren abszisa da; balioa haren ordenatua da.', 'Esa es la abscisa del vértice; el valor es su ordenada.', 'هذا الإحداثي السيني للرأس؛ والقيمة هي إحداثيه الصادي.', 'That is the x-coordinate of the vertex; the value is its y-coordinate.'),
+    constant: say('Gai askea $f(0)$ da, ez muturra: kalkulatu $f$ erpinean.', 'El término independiente es $f(0)$, no el extremo: calcula $f$ en el vértice.', 'الحد الثابت هو $f(0)$ لا القيمة القصوى: احسب $f$ عند الرأس.', 'The constant term is $f(0)$, not the extreme value: calculate $f$ at the vertex.'),
+    'root-sign': say('Erroek aurkako zeinua dute: $(x-3)=0$ bada, $x=3$.', 'Las raíces tienen el signo contrario: si $(x-3)=0$, $x=3$.', 'للجذر الإشارة المعاكسة: إذا $(x-3)=0$ فإن $x=3$.', 'The roots have the opposite sign: if $(x-3)=0$, then $x=3$.'),
+    'whole-line': say('Izendatzailea anulatu egiten da: kendu haren erroak.', 'El denominador sí se anula: quita sus raíces.', 'المقام ينعدم: احذف جذريه.', 'The denominator does become 0: remove its roots.'),
+    'inequality-direction': say('Zenbaki negatibo batez zatitzean, desberdintzaren noranzkoa aldatzen da.', 'Al dividir entre un número negativo cambia el sentido de la desigualdad.', 'عند القسمة على عدد سالب يتغير اتجاه المتراجحة.', 'When you divide by a negative number, the inequality sign changes direction.'),
+    bracket: say('Erroa: $\\ge 0$, muturrak barne, kortxetearekin.', 'Raíz: $\\ge 0$, extremos incluidos, con corchete.', 'الجذر: $\\ge 0$، الطرفان ضمنها، بقوس معقوف.', 'Square root: $\\ge 0$, end points included, with square brackets.'),
+    'inside-outside': say('Begiratu parabolaren zeinua: $x^{2}-r^{2}$ positiboa da erroetatik kanpo, eta $r^{2}-x^{2}$ barruan.', 'Mira el signo de la parábola: $x^{2}-r^{2}$ es positivo fuera de las raíces, y $r^{2}-x^{2}$ dentro.', 'انظر إلى إشارة القطع: $x^{2}-r^{2}$ موجب خارج الجذرين و$r^{2}-x^{2}$ داخلهما.', 'Check the sign of the parabola: $x^{2}-r^{2}$ is positive outside the roots, and $r^{2}-x^{2}$ inside.'),
+    strict: say('Erroa izendatzailean: $>0$ hertsia, 0z ezin delako zatitu.', 'Raíz en el denominador: $>0$ estricto, porque no se divide entre 0.', 'الجذر في المقام: $>0$ تمامًا لأن القسمة على 0 لا تجوز.', 'Square root in the denominator: $>0$ strictly, because you cannot divide by 0.'),
+    'fraction-only': say('Hori zatiki baten izate-eremua da; erroan zeinua ere begiratu behar da.', 'Ese es el dominio de una fracción; en la raíz también cuenta el signo.', 'هذا مجال كسر؛ في الجذر تهم الإشارة أيضًا.', 'That is the domain of a fraction; with a square root, the sign matters too.'),
+    'wrong-piece': say('Beste zatia erabili duzu: begiratu lehenik zein tartetan dagoen $x$.', 'Has usado el otro trozo: mira primero en qué intervalo está $x$.', 'استعملت الجزء الآخر: انظر أولًا في أي فترة تقع $x$.', 'You have used the other piece: first check which interval $x$ is in.'),
+    'left-value': say('Hori ezkerreko zatiaren balioa da; $k$ askatu behar da: $a+k=$ balio hori.', 'Ese es el valor del trozo izquierdo; hay que despejar $k$: $a+k=$ ese valor.', 'هذه قيمة الجزء الأيسر؛ يجب عزل $k$: $a+k=$ تلك القيمة.', 'That is the value of the left-hand piece; you need to solve for $k$: $a+k=$ that value.'),
+    'jump-order': say('Jauzia: eskuineko balioa ken ezkerrekoa.', 'El salto: valor de la derecha menos el de la izquierda.', 'القفزة: قيمة اليمين ناقص قيمة اليسار.', 'The jump: value on the right minus value on the left.'),
+    'hole-x': say('Hori zuloaren abszisa da; ordenatua sinplifikatutako formulatik ateratzen da.', 'Esa es la abscisa del agujero; la ordenada sale de la fórmula simplificada.', 'هذا الإحداثي السيني للثقب؛ والصادي من الصيغة المبسّطة.', 'That is the x-coordinate of the hole; the y-coordinate comes from the simplified formula.'),
+    square: say('Hori karratua da: erroa falta da.', 'Eso es el cuadrado: falta la raíz.', 'هذا هو المربع: ينقص الجذر.', 'That is the square: you still need the square root.'),
+    'sum-roots': say('Y ardatzean $x=0$: biderkatu, ez batu.', 'En el eje Y, $x=0$: multiplica, no sumes.', 'على محور Y يكون $x=0$: اضرب ولا تجمع.', 'On the y-axis, $x=0$: multiply, do not add.'),
+    parity: say('Bikoitia: $f(-x)=f(x)$. Bakoitia: $f(-x)=-f(x)$.', 'Par: $f(-x)=f(x)$. Impar: $f(-x)=-f(x)$.', 'الزوجية: $f(-x)=f(x)$. الفردية: $f(-x)=-f(x)$.', 'Even: $f(-x)=f(x)$. Odd: $f(-x)=-f(x)$.'),
+    'no-divide': say('Kendura falta da tartearen luzeraz zatitzea: $\\frac{f(b)-f(a)}{b-a}$.', 'Falta dividir la diferencia entre la longitud del intervalo: $\\frac{f(b)-f(a)}{b-a}$.', 'ينقص قسمة الفرق على طول الفترة: $\\frac{f(b)-f(a)}{b-a}$.', 'You still need to divide the difference by the length of the interval: $\\frac{f(b)-f(a)}{b-a}$.'),
+    quotient: say('Hori zatidura da; behar dena hondarra da.', 'Ese es el cociente; lo que hace falta es el resto.', 'هذا خارج القسمة؛ والمطلوب الباقي.', 'That is the quotient; what you need is the remainder.'),
+    'from-zero': say('Hori $[0,\\,b]$ tarteko abiadura ertaina da; kendu $e(a)$ eta zatitu $b-a$-z.', 'Esa es la velocidad media en $[0,\\,b]$; resta $e(a)$ y divide entre $b-a$.', 'هذه السرعة المتوسطة في $[0,\\,b]$؛ اطرح $e(a)$ واقسم على $b-a$.', 'That is the average speed over $[0,\\,b]$; subtract $e(a)$ and divide by $b-a$.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

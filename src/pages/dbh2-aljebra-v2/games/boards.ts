@@ -42,8 +42,8 @@ export interface ExpansionItem {
 }
 
 export const expansionAskText: Record<ExpansionAsk, LocalizedText> = {
-    middle: { eu: 'x-ren koefizientea', es: 'Coeficiente de x', ar: 'معامل x' },
-    constant: { eu: 'Gai askea', es: 'Término independiente', ar: 'الحد الثابت' }
+    middle: { eu: 'x-ren koefizientea', es: 'Coeficiente de x', en: 'Coefficient of x', ar: 'معامل x' },
+    constant: { eu: 'Gai askea', es: 'Término independiente', en: 'Constant term', ar: 'الحد الثابت' }
 }
 
 const t = (coefficient: number, power: number): Term => ({ coefficient, power })

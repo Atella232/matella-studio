@@ -31,7 +31,7 @@ export function FunctionsGames({ language, pathname, openGame, completedIds, onC
             language={language}
             games={hubGames}
             recordsKey={FUNCTIONS_GAME_RECORDS_KEY}
-            title={{ eu: 'Jolastu funtzioekin', es: 'Juega con funciones', ar: 'العب بالدوال' }}
+            title={{ eu: 'Jolastu funtzioekin', es: 'Juega con funciones', en: 'Play with functions', ar: 'العب بالدوال' }}
             completedIds={completedIds}
             onComplete={onComplete}
             mode={functionsGameModeForPath(pathname)}

@@ -4,7 +4,8 @@ import { GameTopbar, LevelPicker, ResultPanel } from '../../../features/unit-v2/
 import { formatTime, nowMs, useGameText } from '../../../features/unit-v2/games/gameHooks'
 import type { GameProps } from '../../../features/unit-v2/games/GamesHub'
 import { createRandom, randomSeed } from '../../../features/unit-v2/games/random'
-import { formatNatural } from '../format'
+import { thousandsSeparatorFor } from '../../../utils/numberFormat'
+import { formatNaturalLatex } from '../format'
 import { NaturalsGameArt } from './GameArt'
 import { naturalsGames } from './info'
 import { createNaturalsMemoryBoard, evaluateNaturalsFlip, naturalsCardLatex, naturalsMemoryLevels, naturalsMemoryStars, type NaturalsCard } from './memory'
@@ -14,9 +15,10 @@ type Phase = 'pick' | 'playing' | 'finished'
 const game = naturalsGames.find((item) => item.id === 'memory')!
 const MISMATCH_MS = 1300
 
-/** What a screen reader says for a card: the LaTeX made readable */
-function spokenCard(latex: string): string {
+/** What a screen reader says for a card: the LaTeX made readable, with the thousands mark of the language */
+function spokenCard(latex: string, language: string): string {
     return latex
+        .replace(/(\d)\.(?=\d{3}(?!\d))/g, `$1${thousandsSeparatorFor(language)}`)
         .replace(/\\text\{([^}]*)\}/g, '$1')
         .replace(/\\mathrm\{(\w+)\}/g, '$1')
         .replace(/\^\{(\d+)\}/g, '^$1')
@@ -83,7 +85,7 @@ export function NaturalsMemoryGame({ language, records, onResult, onExit }: Game
         }
         const [first] = next
         // Operations show their value; plain numbers are shown once
-        const reading = (item: NaturalsCard) => (item.kind === 'value' ? formatNatural(item.value) : `${naturalsCardLatex(item)}=${formatNatural(item.value)}`)
+        const reading = (item: NaturalsCard) => (item.kind === 'value' ? formatNaturalLatex(item.value) : `${naturalsCardLatex(item)}=${formatNaturalLatex(item.value)}`)
         setMessage({ tone: 'error', latex: `${reading(cards[first])}\\quad\\neq\\quad ${reading(card)}` })
         setLocked(true)
         window.setTimeout(() => {
@@ -96,17 +98,17 @@ export function NaturalsMemoryGame({ language, records, onResult, onExit }: Game
         return (
             <LevelPicker
                 game={game}
-                art={<NaturalsGameArt game="memory" />}
+                art={<NaturalsGameArt game="memory" language={language} />}
                 language={language}
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${-record.score} ${l({ eu: 'txanda', es: 'turnos', ar: 'أدوار' })}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${-record.score} ${l({ eu: 'txanda', es: 'turnos', en: 'turns', ar: 'أدوار' })}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: 'Buelta eman kartei eta aurkitu balio bera duten bikoteak (edo hirukoteak).', es: 'Da la vuelta a las cartas y encuentra las parejas (o tríos) con el mismo valor.', ar: 'اقلب البطاقات وجد الأزواج (أو الثلاثيات) ذات القيمة نفسها.' })}</li>
-                        <li>{l({ eu: 'Kontuz tranpekin: IX eta XI, 2³ eta 3², 3.402 eta 3.042 elkarrekin egon daitezke taulan.', es: 'Cuidado con las trampas: IX y XI, 2³ y 3², 3.402 y 3.042 pueden estar juntos en el tablero.', ar: 'احذر الفخاخ: قد توجد IX وXI، و2³ و3²، و3.402 و3.042 معًا على اللوحة.' })}</li>
-                        <li>{l({ eu: 'Zenbat eta txanda gutxiago, orduan eta izar gehiago.', es: 'Cuantos menos turnos, más estrellas.', ar: 'كلما قلت الأدوار زادت النجوم.' })}</li>
+                        <li>{l({ eu: 'Buelta eman kartei eta aurkitu balio bera duten bikoteak (edo hirukoteak).', es: 'Da la vuelta a las cartas y encuentra las parejas (o tríos) con el mismo valor.', en: 'Turn the cards over and find the pairs (or trios) with the same value.', ar: 'اقلب البطاقات وجد الأزواج (أو الثلاثيات) ذات القيمة نفسها.' })}</li>
+                        <li>{l({ eu: 'Kontuz tranpekin: IX eta XI, 2³ eta 3², 3.402 eta 3.042 elkarrekin egon daitezke taulan.', es: 'Cuidado con las trampas: IX y XI, 2³ y 3², 3.402 y 3.042 pueden estar juntos en el tablero.', en: 'Watch out for traps: IX and XI, 2³ and 3², 3,402 and 3,042 can be on the board together.', ar: 'احذر الفخاخ: قد توجد IX وXI، و2³ و3²، و3.402 و3.042 معًا على اللوحة.' })}</li>
+                        <li>{l({ eu: 'Zenbat eta txanda gutxiago, orduan eta izar gehiago.', es: 'Cuantos menos turnos, más estrellas.', en: 'The fewer turns, the more stars.', ar: 'كلما قلت الأدوار زادت النجوم.' })}</li>
                     </ul>
                 )}
             />
@@ -117,7 +119,7 @@ export function NaturalsMemoryGame({ language, records, onResult, onExit }: Game
         <div className="fraction-v2-memory" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span><strong>{matched.length}</strong> / {groups}</span>
-                <span>{moves} {l({ eu: 'txanda', es: 'turnos', ar: 'أدوار' })}</span>
+                <span>{moves} {l({ eu: 'txanda', es: 'turnos', en: 'turns', ar: 'أدوار' })}</span>
                 <span>{formatTime(elapsed)}</span>
             </GameTopbar>
 
@@ -133,8 +135,8 @@ export function NaturalsMemoryGame({ language, records, onResult, onExit }: Game
                                     type="button"
                                     className={`fraction-v2-memory-card ${visible ? 'visible' : ''} ${isMatched ? 'matched' : ''}`}
                                     aria-label={visible
-                                        ? `${l({ eu: `${index + 1}. karta`, es: `Carta ${index + 1}`, ar: `البطاقة ${index + 1}` })}: ${spokenCard(latex)}`
-                                        : l({ eu: `${index + 1}. karta, ezkutuan`, es: `Carta ${index + 1}, oculta`, ar: `البطاقة ${index + 1}، مخفية` })}
+                                        ? `${l({ eu: `${index + 1}. karta`, es: `Carta ${index + 1}`, en: `Card ${index + 1}`, ar: `البطاقة ${index + 1}` })}: ${spokenCard(latex, language)}`
+                                        : l({ eu: `${index + 1}. karta, ezkutuan`, es: `Carta ${index + 1}, oculta`, en: `Card ${index + 1}, face down`, ar: `البطاقة ${index + 1}، مخفية` })}
                                     aria-pressed={visible}
                                     onClick={() => select(index)}
                                     key={card.id}
@@ -151,11 +153,11 @@ export function NaturalsMemoryGame({ language, records, onResult, onExit }: Game
                         {message
                             ? (
                                 <>
-                                    <span>{message.tone === 'success' ? l({ eu: 'Balio bera!', es: '¡Mismo valor!', ar: 'القيمة نفسها!' }) : l({ eu: 'Ez dute balio bera:', es: 'No valen lo mismo:', ar: 'ليست بالقيمة نفسها:' })}</span>
+                                    <span>{message.tone === 'success' ? l({ eu: 'Balio bera!', es: '¡Mismo valor!', en: 'Same value!', ar: 'القيمة نفسها!' }) : l({ eu: 'Ez dute balio bera:', es: 'No valen lo mismo:', en: 'Not the same value:', ar: 'ليست بالقيمة نفسها:' })}</span>
                                     <MathText text={`$${message.latex}$`} />
                                 </>
                             )
-                            : <span>{groupSize === 3 ? l({ eu: 'Aukeratu balio bera duten hiru karta.', es: 'Elige tres cartas con el mismo valor.', ar: 'اختر ثلاث بطاقات لها القيمة نفسها.' }) : l({ eu: 'Aukeratu balio bera duten bi karta.', es: 'Elige dos cartas con el mismo valor.', ar: 'اختر بطاقتين لهما القيمة نفسها.' })}</span>}
+                            : <span>{groupSize === 3 ? l({ eu: 'Aukeratu balio bera duten hiru karta.', es: 'Elige tres cartas con el mismo valor.', en: 'Choose three cards with the same value.', ar: 'اختر ثلاث بطاقات لها القيمة نفسها.' }) : l({ eu: 'Aukeratu balio bera duten bi karta.', es: 'Elige dos cartas con el mismo valor.', en: 'Choose two cards with the same value.', ar: 'اختر بطاقتين لهما القيمة نفسها.' })}</span>}
                     </div>
                 </>
             )}
@@ -164,11 +166,11 @@ export function NaturalsMemoryGame({ language, records, onResult, onExit }: Game
                 <ResultPanel
                     language={language}
                     stars={naturalsMemoryStars(level, moves)}
-                    title={l({ eu: `${moves} txandatan osatuta`, es: `Completado en ${moves} turnos`, ar: `اكتملت في ${moves} أدوار` })}
-                    subtitle={l({ eu: `3 izar: ${Math.ceil(groups * 1.6)} txanda edo gutxiago · 2 izar: ${Math.ceil(groups * 2.3)}`, es: `3 estrellas: ${Math.ceil(groups * 1.6)} turnos o menos · 2: ${Math.ceil(groups * 2.3)}`, ar: `3 نجوم: ${Math.ceil(groups * 1.6)} أدوار أو أقل · 2: ${Math.ceil(groups * 2.3)}` })}
+                    title={l({ eu: `${moves} txandatan osatuta`, es: `Completado en ${moves} turnos`, en: `Completed in ${moves} turns`, ar: `اكتملت في ${moves} أدوار` })}
+                    subtitle={l({ eu: `3 izar: ${Math.ceil(groups * 1.6)} txanda edo gutxiago · 2 izar: ${Math.ceil(groups * 2.3)}`, es: `3 estrellas: ${Math.ceil(groups * 1.6)} turnos o menos · 2: ${Math.ceil(groups * 2.3)}`, en: `3 stars: ${Math.ceil(groups * 1.6)} turns or fewer · 2 stars: ${Math.ceil(groups * 2.3)}`, ar: `3 نجوم: ${Math.ceil(groups * 1.6)} أدوار أو أقل · 2: ${Math.ceil(groups * 2.3)}` })}
                     stats={[
-                        { label: l({ eu: 'Txandak', es: 'Turnos', ar: 'الأدوار' }), value: String(moves) },
-                        { label: l({ eu: 'Denbora', es: 'Tiempo', ar: 'الوقت' }), value: formatTime(elapsed) }
+                        { label: l({ eu: 'Txandak', es: 'Turnos', en: 'Turns', ar: 'الأدوار' }), value: String(moves) },
+                        { label: l({ eu: 'Denbora', es: 'Tiempo', en: 'Time', ar: 'الوقت' }), value: formatTime(elapsed) }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}

@@ -31,7 +31,7 @@ export function SolidsLaboratory(props: {
             tools={solidsLabTools}
             stages={solidsStages}
             components={toolComponents}
-            title={{ eu: 'Eraiki, garatu eta bete', es: 'Construye, desarrolla y llena', ar: 'أنشئ وانشر واملأ' }}
+            title={{ eu: 'Eraiki, garatu eta bete', es: 'Construye, desarrolla y llena', en: 'Build, unfold and fill', ar: 'أنشئ وانشر واملأ' }}
         />
     )
 }

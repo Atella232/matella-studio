@@ -30,8 +30,7 @@ export interface HuntRound {
     numbers: number[]
 }
 
-const f = formatNatural
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 
 /** Digit of `value` at `place` (0 = units) */
 export const digitAt = (value: number, place: number) => Math.floor(value / 10 ** place) % 10
@@ -44,17 +43,17 @@ function digitRule(digit: number, place: number): HuntRule {
     const worth = digit * 10 ** place
     return {
         id: `digit-${digit}-${place}`,
-        label: say(`${digit} zifrak ${f(worth)} balio du`, `La cifra ${digit} vale ${f(worth)}`, `قيمة الرقم ${digit} هي ${f(worth)}`),
+        label: say(`${digit} zifrak ${formatNatural(worth, 'eu')} balio du`, `La cifra ${digit} vale ${formatNatural(worth, 'es')}`, `قيمة الرقم ${digit} هي ${formatNatural(worth, 'ar')}`, `La cifra ${digit} vale ${formatNatural(worth, 'en')}`),
         test: (value) => digitAt(value, place) === digit,
         why: (value) => {
             const places = [0, 1, 2, 3, 4].filter((index) => digitAt(value, index) === digit)
-            if (places.includes(place)) return say(`${digit} ${placesIn[place]} dago.`, `El ${digit} está en las ${placeNames.es[place]}.`, `الرقم ${digit} في مرتبة ${placeNames.ar[place]}.`)
-            if (places.length === 0) return say(`Ez du ${digit} zifrarik.`, `No tiene ningún ${digit}.`, `لا يحتوي على الرقم ${digit}.`)
+            if (places.includes(place)) return say(`${digit} ${placesIn[place]} dago.`, `El ${digit} está en las ${placeNames.es[place]}.`, `الرقم ${digit} في مرتبة ${placeNames.ar[place]}.`, `The ${digit} is in the ${placeNames.en[place]} place.`)
+            if (places.length === 0) return say(`Ez du ${digit} zifrarik.`, `No tiene ningún ${digit}.`, `لا يحتوي على الرقم ${digit}.`, `It has no ${digit}.`)
             const other = places[0]
             return say(
-                `Hemen ${digit} zifrak ${f(digit * 10 ** other)} balio du (${placeNames.eu[other]}).`,
-                `Aquí el ${digit} vale ${f(digit * 10 ** other)} (${placeNames.es[other]}).`,
-                `هنا قيمة ${digit} هي ${f(digit * 10 ** other)} (${placeNames.ar[other]}).`
+                `Hemen ${digit} zifrak ${formatNatural(digit * 10 ** other, 'eu')} balio du (${placeNames.eu[other]}).`,
+                `Aquí el ${digit} vale ${formatNatural(digit * 10 ** other, 'es')} (${placeNames.es[other]}).`,
+                `هنا قيمة ${digit} هي ${formatNatural(digit * 10 ** other, 'ar')} (${placeNames.ar[other]}).`, `Aquí el ${digit} vale ${formatNatural(digit * 10 ** other, 'en')} (${placeNames.en[other]}).`
             )
         },
         sample: (random) => {
@@ -71,18 +70,25 @@ function digitRule(digit: number, place: number): HuntRule {
 }
 
 const roundWords: Record<number, LocalizedText> = {
-    100: say('ehunekoetara', 'a las centenas', 'إلى المئات'),
-    1000: say('milakoetara', 'a los millares', 'إلى الآلاف')
+    100: say('ehunekoetara', 'a las centenas', 'إلى المئات', 'to the nearest hundred'),
+    1000: say('milakoetara', 'a los millares', 'إلى الآلاف', 'to the nearest thousand')
 }
+
+/** "value ≈ rounded", with each language's grouping of thousands */
+const approximately = (value: number, rounded: number): LocalizedText => say(
+    `${formatNatural(value, 'eu')} ≈ ${formatNatural(rounded, 'eu')}`,
+    `${formatNatural(value, 'es')} ≈ ${formatNatural(rounded, 'es')}`,
+    `${formatNatural(value, 'ar')} ≈ ${formatNatural(rounded, 'ar')}`, `${formatNatural(value, 'en')} ≈ ${formatNatural(rounded, 'en')}`
+)
 
 /** "Rounded to the place, they give target" */
 function roundingRule(target: number, place: number): HuntRule {
     const words = roundWords[place]
     return {
         id: `round-${target}-${place}`,
-        label: say(`${words.eu} biribilduta: ${f(target)}`, `Redondeados ${words.es} dan ${f(target)}`, `مقرَّبة ${words.ar} تعطي ${f(target)}`),
+        label: say(`${words.eu} biribilduta: ${formatNatural(target, 'eu')}`, `Redondeados ${words.es} dan ${formatNatural(target, 'es')}`, `مقرَّبة ${words.ar} تعطي ${formatNatural(target, 'ar')}`, `Redondeados ${words.en} dan ${formatNatural(target, 'en')}`),
         test: (value) => roundTo(value, place) === target,
-        why: (value) => say(`${f(value)} ≈ ${f(roundTo(value, place))}`, `${f(value)} ≈ ${f(roundTo(value, place))}`, `${f(value)} ≈ ${f(roundTo(value, place))}`),
+        why: (value) => approximately(value, roundTo(value, place)),
         // Close to the target, and often just around the halves
         sample: (random) => (random() < 0.4
             ? target + pick(random, [-1, 1]) * (place / 2) + randomInt(random, -3, 3) * (place / 100)
@@ -95,13 +101,13 @@ const isCube = (value: number) => Math.round(Math.cbrt(value)) ** 3 === value
 
 const squaresRule: HuntRule = {
     id: 'squares',
-    label: say('Karratuak (n²)', 'Cuadrados (n²)', 'المربعات (n²)'),
+    label: say('Karratuak (n²)', 'Cuadrados (n²)', 'المربعات (n²)', 'Squares (n²)'),
     test: isSquare,
     why: (value) => {
         const root = Math.floor(Math.sqrt(value))
         return isSquare(value)
             ? same(`${value} = ${root}²`)
-            : say(`${root}² = ${root * root} eta ${root + 1}² = ${(root + 1) ** 2}: tartean dago.`, `${root}² = ${root * root} y ${root + 1}² = ${(root + 1) ** 2}: está entre medias.`, `${root}² = ${root * root} و${root + 1}² = ${(root + 1) ** 2}: يقع بينهما.`)
+            : say(`${root}² = ${root * root} eta ${root + 1}² = ${(root + 1) ** 2}: tartean dago.`, `${root}² = ${root * root} y ${root + 1}² = ${(root + 1) ** 2}: está entre medias.`, `${root}² = ${root * root} و${root + 1}² = ${(root + 1) ** 2}: يقع بينهما.`, `${root}² = ${root * root} and ${root + 1}² = ${(root + 1) ** 2}: it lies in between.`)
     },
     sample: (random) => {
         const root = randomInt(random, 2, 12)
@@ -111,13 +117,13 @@ const squaresRule: HuntRule = {
 
 const cubesRule: HuntRule = {
     id: 'cubes',
-    label: say('Kuboak (n³)', 'Cubos (n³)', 'المكعبات (n³)'),
+    label: say('Kuboak (n³)', 'Cubos (n³)', 'المكعبات (n³)', 'Cubes (n³)'),
     test: isCube,
     why: (value) => {
         const root = Math.floor(Math.cbrt(value + 0.5))
         return isCube(value)
             ? same(`${value} = ${root}³`)
-            : say(`${root}³ = ${root ** 3} eta ${root + 1}³ = ${(root + 1) ** 3}: tartean dago.`, `${root}³ = ${root ** 3} y ${root + 1}³ = ${(root + 1) ** 3}: está entre medias.`, `${root}³ = ${root ** 3} و${root + 1}³ = ${(root + 1) ** 3}: يقع بينهما.`)
+            : say(`${root}³ = ${root ** 3} eta ${root + 1}³ = ${(root + 1) ** 3}: tartean dago.`, `${root}³ = ${root ** 3} y ${root + 1}³ = ${(root + 1) ** 3}: está entre medias.`, `${root}³ = ${root ** 3} و${root + 1}³ = ${(root + 1) ** 3}: يقع بينهما.`, `${root}³ = ${root ** 3} and ${root + 1}³ = ${(root + 1) ** 3}: it lies in between.`)
     },
     sample: (random) => {
         const root = randomInt(random, 1, 7)
@@ -127,7 +133,7 @@ const cubesRule: HuntRule = {
 }
 
 function same(value: string): LocalizedText {
-    return { eu: value, es: value, ar: value }
+    return { eu: value, es: value, en: value, ar: value }
 }
 
 export interface HuntLevel {

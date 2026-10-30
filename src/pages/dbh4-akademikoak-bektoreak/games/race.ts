@@ -153,7 +153,7 @@ function vectorQuestion(random: Random, tier: Tier): VectorsRaceQuestion | null 
     return build(0, 'vector', say(
         `${math(named('A', a))} eta ${math(named('B', b))} izanda, zein dira ${math(vec('AB'))} bektorearen koordenatuak?`,
         `Si ${math(named('A', a))} y ${math(named('B', b))}, ¿cuáles son las coordenadas de ${math(vec('AB'))}?`,
-        `إذا كانت ${math(named('A', a))} و${math(named('B', b))}، فما مركّبتا ${math(vec('AB'))}؟`
+        `إذا كانت ${math(named('A', a))} و${math(named('B', b))}، فما مركّبتا ${math(vec('AB'))}؟`, `Given ${math(named('A', a))} and ${math(named('B', b))}, what are the coordinates of ${math(vec('AB'))}?`
     ), options(random, ofPair(v), [wrong(ofPair(minus(a, b)), 'reversed'), wrong(ofPair(plus(a, b)), 'added'), ...nearPairs(v)]), null, `${vec('AB')}=B-A=${pairLatex(v)}`, { ax: a[0], ay: a[1], bx: b[0], by: b[1] })
 }
 
@@ -163,7 +163,7 @@ function modulusQuestion(random: Random, tier: Tier): VectorsRaceQuestion | null
     return build(0, 'modulus', say(
         `${math(`${vec('u')}=${pairLatex(vector)}`)} izanda, zenbat da ${math(`|${vec('u')}|`)}?`,
         `Si ${math(`${vec('u')}=${pairLatex(vector)}`)}, ¿cuánto vale ${math(`|${vec('u')}|`)}?`,
-        `إذا كان ${math(`${vec('u')}=${pairLatex(vector)}`)}، فكم يساوي ${math(`|${vec('u')}|`)}؟`
+        `إذا كان ${math(`${vec('u')}=${pairLatex(vector)}`)}، فكم يساوي ${math(`|${vec('u')}|`)}؟`, `Given ${math(`${vec('u')}=${pairLatex(vector)}`)}, what is the value of ${math(`|${vec('u')}|`)}?`
     ), options(random, ofNumber(f(length)), [
         wrong(ofNumber(f(x * x + y * y)), 'no-root'),
         wrong(ofNumber(f(Math.abs(x) + Math.abs(y))), 'sum-sides'),
@@ -181,7 +181,7 @@ function combinationQuestion(random: Random, tier: Tier): VectorsRaceQuestion | 
     return build(0, 'combination', say(
         `${math(`${vec('u')}=${pairLatex(u)}`)} eta ${math(`${vec('v')}=${pairLatex(v)}`)}. Kalkulatu ${math(expression)}.`,
         `${math(`${vec('u')}=${pairLatex(u)}`)} y ${math(`${vec('v')}=${pairLatex(v)}`)}. Calcula ${math(expression)}.`,
-        `${math(`${vec('u')}=${pairLatex(u)}`)} و${math(`${vec('v')}=${pairLatex(v)}`)}. احسب ${math(expression)}.`
+        `${math(`${vec('u')}=${pairLatex(u)}`)} و${math(`${vec('v')}=${pairLatex(v)}`)}. احسب ${math(expression)}.`, `${math(`${vec('u')}=${pairLatex(u)}`)} and ${math(`${vec('v')}=${pairLatex(v)}`)}. Calculate ${math(expression)}.`
     ), options(random, ofPair(right), [
         wrong(ofPair([k * u[0] + sign * v[0], u[1] + sign * v[1]]), 'scalar'),
         wrong(ofPair(plus(times(k, u), times(-sign, v))), 'sign'),
@@ -199,7 +199,7 @@ function parallelQuestion(random: Random, tier: Tier): VectorsRaceQuestion | nul
     return build(0, 'parallel', say(
         `Zenbat da ${math('y')}, ${math(`${vec('u')}=${pairLatex([a, b])}`)} eta ${math(`${vec('v')}=(${c},\\,y)`)} paraleloak izateko?`,
         `¿Cuánto vale ${math('y')} para que ${math(`${vec('u')}=${pairLatex([a, b])}`)} y ${math(`${vec('v')}=(${c},\\,y)`)} sean paralelos?`,
-        `ما قيمة ${math('y')} ليكون ${math(`${vec('u')}=${pairLatex([a, b])}`)} و${math(`${vec('v')}=(${c},\\,y)`)} متوازيين؟`
+        `ما قيمة ${math('y')} ليكون ${math(`${vec('u')}=${pairLatex([a, b])}`)} و${math(`${vec('v')}=(${c},\\,y)`)} متوازيين؟`, `What is the value of ${math('y')} so that ${math(`${vec('u')}=${pairLatex([a, b])}`)} and ${math(`${vec('v')}=(${c},\\,y)`)} are parallel?`
     ), options(random, ofNumber(right), [
         wrong(ofNumber(fraction(-a * c, b)), 'perpendicular'),
         wrong(ofNumber(fraction(a * c, b)), 'inverse'),
@@ -218,7 +218,7 @@ function distanceQuestion(random: Random, tier: Tier): VectorsRaceQuestion | nul
     return build(1, 'distance', say(
         `Zein da ${math(named('A', a))} eta ${math(named('B', b))} puntuen arteko distantzia?`,
         `¿Cuál es la distancia entre ${math(named('A', a))} y ${math(named('B', b))}?`,
-        `ما المسافة بين ${math(named('A', a))} و${math(named('B', b))}؟`
+        `ما المسافة بين ${math(named('A', a))} و${math(named('B', b))}؟`, `What is the distance between ${math(named('A', a))} and ${math(named('B', b))}?`
     ), options(random, ofNumber(f(length)), [
         wrong(ofNumber(f(dx * dx + dy * dy)), 'no-root'),
         wrong(ofNumber(f(Math.abs(dx) + Math.abs(dy))), 'sum-sides'),
@@ -235,7 +235,7 @@ function midpointQuestion(random: Random, tier: Tier): VectorsRaceQuestion | nul
     return build(1, 'midpoint', say(
         `Zein da ${math(named('A', a))} eta ${math(named('B', b))} muturreko zuzenkiaren erdiko puntua?`,
         `¿Cuál es el punto medio del segmento de extremos ${math(named('A', a))} y ${math(named('B', b))}?`,
-        `ما منتصف القطعة ذات الطرفين ${math(named('A', a))} و${math(named('B', b))}؟`
+        `ما منتصف القطعة ذات الطرفين ${math(named('A', a))} و${math(named('B', b))}؟`, `What is the midpoint of the segment with endpoints ${math(named('A', a))} and ${math(named('B', b))}?`
     ), options(random, ofPair(right), [
         wrong(ofPair(sum), 'no-half'),
         wrong(ofPair(times(1 / 2, minus(b, a))), 'half-difference'),
@@ -252,7 +252,7 @@ function symmetricQuestion(random: Random, tier: Tier): VectorsRaceQuestion | nu
     return build(1, 'symmetric', say(
         `Zein da ${math(named('A', a))} puntuaren simetrikoa ${math(named('M', m))} puntuarekiko?`,
         `¿Cuál es el simétrico de ${math(named('A', a))} respecto de ${math(named('M', m))}?`,
-        `ما نظيرة ${math(named('A', a))} بالنسبة إلى ${math(named('M', m))}؟`
+        `ما نظيرة ${math(named('A', a))} بالنسبة إلى ${math(named('M', m))}؟`, `What is the point symmetric to ${math(named('A', a))} with respect to ${math(named('M', m))}?`
     ), options(random, ofPair(right), [
         wrong(ofPair(minus(m, a)), 'vector-not-point'),
         ...(half[0] % 2 === 0 && half[1] % 2 === 0 ? [wrong(ofPair(times(1 / 2, half)), 'midpoint')] : []),
@@ -271,7 +271,7 @@ function alignedQuestion(random: Random, tier: Tier): VectorsRaceQuestion | null
     return build(1, 'aligned', say(
         `${math(named('A', a))}, ${math(named('B', b))} eta ${math(`C(${c[0]},\\,y)`)} lerrokatuta daude. Zenbat da ${math('y')}?`,
         `${math(named('A', a))}, ${math(named('B', b))} y ${math(`C(${c[0]},\\,y)`)} están alineados. ¿Cuánto vale ${math('y')}?`,
-        `النقاط ${math(named('A', a))} و${math(named('B', b))} و${math(`C(${c[0]},\\,y)`)} على استقامة واحدة. ما قيمة ${math('y')}؟`
+        `النقاط ${math(named('A', a))} و${math(named('B', b))} و${math(`C(${c[0]},\\,y)`)} على استقامة واحدة. ما قيمة ${math('y')}؟`, `${math(named('A', a))}, ${math(named('B', b))} and ${math(`C(${c[0]},\\,y)`)} are collinear. What is the value of ${math('y')}?`
     ), options(random, ofNumber(right), [
         wrong(ofNumber(add(f(a[1]), fraction(k * d[0] * d[0], d[1]))), 'inverse'),
         wrong(ofNumber(f(a[1] - k * d[1])), 'sign'),
@@ -290,7 +290,7 @@ function slopeQuestion(random: Random, tier: Tier): VectorsRaceQuestion | null {
     return build(2, 'slope', say(
         `Zein da ${math(named('A', a))} eta ${math(named('B', b))} puntuetatik igarotzen den zuzenaren malda?`,
         `¿Cuál es la pendiente de la recta que pasa por ${math(named('A', a))} y ${math(named('B', b))}?`,
-        `ما ميل المستقيم المار بـ${math(named('A', a))} و${math(named('B', b))}؟`
+        `ما ميل المستقيم المار بـ${math(named('A', a))} و${math(named('B', b))}؟`, `What is the slope of the straight line through ${math(named('A', a))} and ${math(named('B', b))}?`
     ), options(random, ofNumber(right), [
         wrong(ofNumber(fraction(dx, dy)), 'inverse'),
         wrong(ofNumber(fraction(-dy, dx)), 'sign'),
@@ -307,7 +307,7 @@ function generalSlopeQuestion(random: Random, tier: Tier): VectorsRaceQuestion |
     return build(2, 'general-slope', say(
         `Zein da ${math(generalLatex(a, b, c))} zuzenaren malda?`,
         `¿Cuál es la pendiente de la recta ${math(generalLatex(a, b, c))}?`,
-        `ما ميل المستقيم ${math(generalLatex(a, b, c))}؟`
+        `ما ميل المستقيم ${math(generalLatex(a, b, c))}؟`, `What is the slope of the straight line ${math(generalLatex(a, b, c))}?`
     ), options(random, ofNumber(right), [
         wrong(ofNumber(fraction(a, b)), 'sign'),
         wrong(ofNumber(fraction(-b, a)), 'inverse'),
@@ -323,7 +323,7 @@ function interceptQuestion(random: Random, tier: Tier): VectorsRaceQuestion | nu
     return build(2, 'intercept', say(
         `Zuzen bat ${math(named('P', p))} puntutik igarotzen da eta haren malda ${math(`m=${m}`)} da. Zenbat da ${math('n')} jatorriko ordenatua?`,
         `Una recta pasa por ${math(named('P', p))} y tiene pendiente ${math(`m=${m}`)}. ¿Cuánto vale su ordenada en el origen ${math('n')}?`,
-        `مستقيم يمر بـ${math(named('P', p))} وميله ${math(`m=${m}`)}. ما قيمة الجزء المقطوع من محور الصادات ${math('n')}؟`
+        `مستقيم يمر بـ${math(named('P', p))} وميله ${math(`m=${m}`)}. ما قيمة الجزء المقطوع من محور الصادات ${math('n')}؟`, `A straight line passes through ${math(named('P', p))} and has slope ${math(`m=${m}`)}. What is its y-intercept ${math('n')}?`
     ), options(random, ofNumber(right), [
         wrong(ofNumber(f(p[1] + m * p[0])), 'sign'),
         wrong(ofNumber(f(p[0] - m * p[1])), 'swap'),
@@ -340,7 +340,7 @@ function parametricQuestion(random: Random, tier: Tier): VectorsRaceQuestion | n
     return build(2, 'parametric', say(
         `${math(`r\\colon\\ ${line}`)} zuzenean, zein puntu dagokio ${math(`t=${t}`)} balioari?`,
         `En la recta ${math(`r\\colon\\ ${line}`)}, ¿qué punto corresponde a ${math(`t=${t}`)}?`,
-        `في المستقيم ${math(`r\\colon\\ ${line}`)}، ما النقطة الموافقة لـ${math(`t=${t}`)}؟`
+        `في المستقيم ${math(`r\\colon\\ ${line}`)}، ما النقطة الموافقة لـ${math(`t=${t}`)}؟`, `On the straight line ${math(`r\\colon\\ ${line}`)}, which point corresponds to ${math(`t=${t}`)}?`
     ), options(random, ofPair(right), [
         wrong(ofPair(p), 'only-point'),
         wrong(ofPair(times(t, d)), 'only-vector'),
@@ -359,7 +359,7 @@ function explicitQuestion(random: Random, tier: Tier): VectorsRaceQuestion | nul
     return build(2, 'explicit', say(
         `Zein da ${math(named('A', a))} eta ${math(named('B', b))} puntuetatik igarotzen den zuzenaren ekuazio esplizitua?`,
         `¿Cuál es la ecuación explícita de la recta que pasa por ${math(named('A', a))} y ${math(named('B', b))}?`,
-        `ما المعادلة الصريحة للمستقيم المار بـ${math(named('A', a))} و${math(named('B', b))}؟`
+        `ما المعادلة الصريحة للمستقيم المار بـ${math(named('A', a))} و${math(named('B', b))}؟`, `What is the explicit equation of the straight line through ${math(named('A', a))} and ${math(named('B', b))}?`
     ), options(random, ofExplicit(f(m), n), [
         wrong(ofExplicit(flipped, subtract(f(a[1]), multiply(flipped, f(a[0])))), 'inverse'),
         wrong(ofExplicit(f(m), f(-n.numerator)), 'sign'),
@@ -381,8 +381,8 @@ function slopePositionQuestion(random: Random, tier: Tier): VectorsRaceQuestion 
     const right = ask === 0 ? m : perpendicular
     const line = math(`r\\colon ${explicitLatex(m, f(n))}`)
     const prompt = ask === 0
-        ? say(`Zein da ${line} zuzenarekiko paraleloa den zuzen baten malda?`, `¿Qué pendiente tiene una recta paralela a ${line}?`, `ما ميل مستقيم موازٍ لـ${line}؟`)
-        : say(`Zein da ${line} zuzenarekiko perpendikularra den zuzen baten malda?`, `¿Qué pendiente tiene una recta perpendicular a ${line}?`, `ما ميل مستقيم عمودي على ${line}؟`)
+        ? say(`Zein da ${line} zuzenarekiko paraleloa den zuzen baten malda?`, `¿Qué pendiente tiene una recta paralela a ${line}?`, `ما ميل مستقيم موازٍ لـ${line}؟`, `What is the slope of a straight line parallel to ${line}?`)
+        : say(`Zein da ${line} zuzenarekiko perpendikularra den zuzen baten malda?`, `¿Qué pendiente tiene una recta perpendicular a ${line}?`, `ما ميل مستقيم عمودي على ${line}؟`, `What is the slope of a straight line perpendicular to ${line}?`)
     return build(3, 'slope-position', prompt, options(random, ofNumber(right), [
         wrong(ofNumber(ask === 0 ? perpendicular : m), ask === 0 ? 'perpendicular' : 'parallel'),
         wrong(ofNumber(divide(f(1), m)), 'inverse'),
@@ -403,7 +403,7 @@ function crossingQuestion(random: Random, tier: Tier): VectorsRaceQuestion | nul
     return build(3, 'crossing', say(
         `Zein puntutan ebakitzen dute elkar ${r} eta ${s} zuzenek?`,
         `¿En qué punto se cortan ${r} y ${s}?`,
-        `في أي نقطة يتقاطع ${r} و${s}؟`
+        `في أي نقطة يتقاطع ${r} و${s}؟`, `At what point do ${r} and ${s} intersect?`
     ), options(random, ofPair(x), [wrong(ofPair([x[1], x[0]]), 'swap'), ...nearPairs(x)]), null, `${sumLatex([[m1, 'x'], [n1, '']])}=${sumLatex([[m2, 'x'], [n2, '']])}\\ \\to\\ x=${x[0]},\\ y=${x[1]}`, { m1, n1, m2, n2 })
 }
 
@@ -421,8 +421,8 @@ function parameterQuestion(random: Random, tier: Tier): VectorsRaceQuestion | nu
     const r = math(`r\\colon ${generalLatex(a1, b1, c1)}`)
     const s = math(`s\\colon ${sumLatex([[a2, 'x']])}+ky${c2 > 0 ? '+' : '-'}${Math.abs(c2)}=0`)
     const prompt = ask === 0
-        ? say(`Zenbat da ${math('k')}, ${r} eta ${s} paraleloak izateko?`, `¿Cuánto vale ${math('k')} para que ${r} y ${s} sean paralelas?`, `ما قيمة ${math('k')} ليكون ${r} و${s} متوازيين؟`)
-        : say(`Zenbat da ${math('k')}, ${r} eta ${s} perpendikularrak izateko?`, `¿Cuánto vale ${math('k')} para que ${r} y ${s} sean perpendiculares?`, `ما قيمة ${math('k')} ليكون ${r} و${s} متعامدين؟`)
+        ? say(`Zenbat da ${math('k')}, ${r} eta ${s} paraleloak izateko?`, `¿Cuánto vale ${math('k')} para que ${r} y ${s} sean paralelas?`, `ما قيمة ${math('k')} ليكون ${r} و${s} متوازيين؟`, `What is the value of ${math('k')} so that ${r} and ${s} are parallel?`)
+        : say(`Zenbat da ${math('k')}, ${r} eta ${s} perpendikularrak izateko?`, `¿Cuánto vale ${math('k')} para que ${r} y ${s} sean perpendiculares?`, `ما قيمة ${math('k')} ليكون ${r} و${s} متعامدين؟`, `What is the value of ${math('k')} so that ${r} and ${s} are perpendicular?`)
     return build(3, 'parameter', prompt, options(random, ofNumber(right), [
         wrong(ofNumber(ask === 0 ? perpendicularK : parallelK), ask === 0 ? 'perpendicular' : 'parallel'),
         wrong(ofNumber(multiply(f(-1), right)), 'sign'),
@@ -441,7 +441,7 @@ function bisectorQuestion(random: Random, tier: Tier): VectorsRaceQuestion | nul
     return build(4, 'bisector', say(
         `Zein da ${math(named('A', a))} eta ${math(named('B', b))} muturreko zuzenkiaren erdibitzailearen malda?`,
         `¿Qué pendiente tiene la mediatriz del segmento de extremos ${math(named('A', a))} y ${math(named('B', b))}?`,
-        `ما ميل محور القطعة ذات الطرفين ${math(named('A', a))} و${math(named('B', b))}؟`
+        `ما ميل محور القطعة ذات الطرفين ${math(named('A', a))} و${math(named('B', b))}؟`, `What is the slope of the perpendicular bisector of the segment with endpoints ${math(named('A', a))} and ${math(named('B', b))}?`
     ), options(random, ofNumber(right), [
         wrong(ofNumber(fraction(dy, dx)), 'parallel'),
         wrong(ofNumber(fraction(dx, dy)), 'sign'),
@@ -461,13 +461,13 @@ function circleQuestion(random: Random, tier: Tier): VectorsRaceQuestion | null 
         return build(4, 'circle-centre', say(
             `Zein da ${equation} zirkunferentziaren zentroa?`,
             `¿Cuál es el centro de la circunferencia ${equation}?`,
-            `ما مركز الدائرة ${equation}؟`
+            `ما مركز الدائرة ${equation}؟`, `What is the centre of the circumference ${equation}?`
         ), options(random, ofPair([a, b]), [wrong(ofPair([-a, -b]), 'sign'), wrong(ofPair([b, a]), 'swap'), ...nearPairs([a, b])]), null, `C${pairLatex([a, b])},\\ r=${r}`, { a, b, r, ask })
     }
     return build(4, 'circle-radius', say(
         `Zein da ${equation} zirkunferentziaren erradioa?`,
         `¿Cuál es el radio de la circunferencia ${equation}?`,
-        `ما نصف قطر الدائرة ${equation}؟`
+        `ما نصف قطر الدائرة ${equation}؟`, `What is the radius of the circumference ${equation}?`
     ), options(random, ofNumber(f(r)), [wrong(ofNumber(f(r * r)), 'no-root'), ...nearNumbers(f(r))]), f(r), `r=\\sqrt{${r * r}}=${r}`, { a, b, r, ask })
 }
 
@@ -479,7 +479,7 @@ function circleEquationQuestion(random: Random, tier: Tier): VectorsRaceQuestion
     return build(4, 'circle-equation', say(
         `Zein da ${math(named('C', [a, b]))} zentroa eta ${math(`r=${r}`)} erradioa dituen zirkunferentziaren ekuazioa?`,
         `¿Cuál es la ecuación de la circunferencia de centro ${math(named('C', [a, b]))} y radio ${math(`r=${r}`)}?`,
-        `ما معادلة الدائرة التي مركزها ${math(named('C', [a, b]))} ونصف قطرها ${math(`r=${r}`)}؟`
+        `ما معادلة الدائرة التي مركزها ${math(named('C', [a, b]))} ونصف قطرها ${math(`r=${r}`)}؟`, `What is the equation of the circumference with centre ${math(named('C', [a, b]))} and radius ${math(`r=${r}`)}?`
     ), options(random, ofCircle(a, b, r * r), [
         wrong(ofCircle(-a, -b, r * r), 'sign'),
         wrong(ofCircle(a, b, r), 'no-square'),
@@ -500,7 +500,7 @@ function vertexQuestion(random: Random, tier: Tier): VectorsRaceQuestion | null 
     return build(4, 'vertex', say(
         `${math('ABCD')} paralelogramoa da, ${math(named('A', a))}, ${math(named('B', b))} eta ${math(named('C', c))} erpinekin. Zein da ${math('D')}?`,
         `${math('ABCD')} es un paralelogramo con ${math(named('A', a))}, ${math(named('B', b))} y ${math(named('C', c))}. ¿Cuál es ${math('D')}?`,
-        `${math('ABCD')} متوازي أضلاع فيه ${math(named('A', a))} و${math(named('B', b))} و${math(named('C', c))}. ما ${math('D')}؟`
+        `${math('ABCD')} متوازي أضلاع فيه ${math(named('A', a))} و${math(named('B', b))} و${math(named('C', c))}. ما ${math('D')}؟`, `${math('ABCD')} is a parallelogram with ${math(named('A', a))}, ${math(named('B', b))} and ${math(named('C', c))}. What is ${math('D')}?`
     ), options(random, ofPair(right), [
         wrong(ofPair(minus(plus(b, c), a)), 'order'),
         wrong(ofPair(minus(plus(a, b), c)), 'order'),
@@ -538,24 +538,24 @@ export function vectorsParTime(circuit: number): number {
 }
 
 export const vectorsRaceErrorTips: Record<VectorsRaceError, LocalizedText> = {
-    reversed: say('Alderantziz egin duzu: muturra ken jatorria, $\\vec{AB}=B-A$.', 'Lo has hecho al revés: extremo menos origen, $\\vec{AB}=B-A$.', 'عكست الترتيب: الطرف ناقص الأصل، $\\vec{AB}=B-A$.'),
-    added: say('Puntuak ez dira batzen: bektorea muturra ken jatorria da.', 'Los puntos no se suman: el vector es extremo menos origen.', 'لا تُجمع النقاط: المتجه هو الطرف ناقص الأصل.'),
-    scalar: say('Zenbakiak bi koordenatuak biderkatzen ditu: $k\\cdot(x,\\,y)=(kx,\\,ky)$.', 'El número multiplica las dos coordenadas: $k\\cdot(x,\\,y)=(kx,\\,ky)$.', 'العدد يضرب المركّبتين معًا: $k\\cdot(x,\\,y)=(kx,\\,ky)$.'),
-    sign: say('Begiratu zeinuari: ken bat parentesi aurrean badago, barruko zeinu guztiak aldatzen ditu.', 'Mira el signo: un menos delante de un paréntesis cambia todos los signos de dentro.', 'انتبه للإشارة: الناقص أمام القوس يغيّر كل الإشارات داخله.'),
-    'no-root': say('Hori karratua da: erro karratua falta da.', 'Eso es el cuadrado: falta la raíz cuadrada.', 'هذا هو المربع: ينقص الجذر التربيعي.'),
-    'sum-sides': say('Koordenatuak ez dira batzen: $|\\vec{u}|=\\sqrt{x^{2}+y^{2}}$.', 'Las coordenadas no se suman: $|\\vec{u}|=\\sqrt{x^{2}+y^{2}}$.', 'لا تُجمع المركّبتان: $|\\vec{u}|=\\sqrt{x^{2}+y^{2}}$.'),
-    perpendicular: say('Hori perpendikularra da. Paraleloak: koordenatu proportzionalak edo malda bera.', 'Eso es perpendicular. Paralelos: coordenadas proporcionales o la misma pendiente.', 'هذا عمودي. المتوازيان: مركّبات متناسبة أو الميل نفسه.'),
-    parallel: say('Hori paraleloa da. Perpendikularra: $m\'=-\\frac{1}{m}$, edo biderkadura eskalarra 0.', 'Eso es paralelo. Perpendicular: $m\'=-\\frac{1}{m}$, o producto escalar 0.', 'هذا موازٍ. العمودي: $m\'=-\\frac{1}{m}$، أو الجداء السلمي 0.'),
-    'no-half': say('Batu ondoren, zatitu 2z: $M=\\frac{A+B}{2}$.', 'Después de sumar, divide entre 2: $M=\\frac{A+B}{2}$.', 'بعد الجمع اقسم على 2: $M=\\frac{A+B}{2}$.'),
-    'half-difference': say('Erdiko puntuan koordenatuak batzen dira, ez kentzen.', 'En el punto medio las coordenadas se suman, no se restan.', 'في المنتصف تُجمع الإحداثيات ولا تُطرح.'),
-    midpoint: say('Hori $A$ eta $M$ puntuen erdikoa da; erdiko puntua $M$ bera da: $A\'=2M-A$.', 'Ese es el punto medio entre $A$ y $M$; el punto medio es el propio $M$: $A\'=2M-A$.', 'هذه منتصف $A$ و$M$؛ والمنتصف هو $M$ نفسها: $A\'=2M-A$.'),
-    'vector-not-point': say('Hori $\\vec{AM}$ bektorea da, ez puntua: $A\'=M+\\vec{AM}=2M-A$.', 'Eso es el vector $\\vec{AM}$, no el punto: $A\'=M+\\vec{AM}=2M-A$.', 'هذا المتجه $\\vec{AM}$ لا النقطة: $A\'=M+\\vec{AM}=2M-A$.'),
-    inverse: say('Malda alderantziz: ordenatuen kendura zati abzisen kendura, $m=\\frac{\\Delta y}{\\Delta x}$.', 'La pendiente al revés: diferencia de ordenadas entre diferencia de abscisas, $m=\\frac{\\Delta y}{\\Delta x}$.', 'الميل مقلوب: فرق الصادات على فرق السينات، $m=\\frac{\\Delta y}{\\Delta x}$.'),
-    intercept: say('Hori jatorriko ordenatua da. Malda $-\\frac{A}{B}$ da.', 'Esa es la ordenada en el origen. La pendiente es $-\\frac{A}{B}$.', 'هذا الجزء المقطوع. الميل هو $-\\frac{A}{B}$.'),
-    'only-point': say('Hori $t=0$ puntua da: gehitu $t\\cdot\\vec{d}$.', 'Ese es el punto de $t=0$: suma $t\\cdot\\vec{d}$.', 'هذه نقطة $t=0$: أضف $t\\cdot\\vec{d}$.'),
-    'only-vector': say('$t\\cdot\\vec{d}$ bakarrik ez: hasierako puntua gehitu behar zaio.', 'No basta $t\\cdot\\vec{d}$: hay que sumarle el punto inicial.', 'لا يكفي $t\\cdot\\vec{d}$: يجب إضافة النقطة الابتدائية.'),
-    swap: say('x eta y trukatu dituzu: lehenengo abzisa, gero ordenatua.', 'Has cambiado x e y: primero la abscisa y luego la ordenada.', 'بدّلت x وy: السينية أولًا ثم الصادية.'),
-    'no-square': say('Eskuinean erradioaren karratua doa: $(x-a)^{2}+(y-b)^{2}=r^{2}$.', 'A la derecha va el radio al cuadrado: $(x-a)^{2}+(y-b)^{2}=r^{2}$.', 'في الطرف الأيمن مربع نصف القطر: $(x-a)^{2}+(y-b)^{2}=r^{2}$.'),
-    order: say('Erpinak ordenan doaz: $ABCD$ paralelogramoan, $\\vec{AD}=\\vec{BC}$, beraz $D=A+C-B$.', 'Los vértices van en orden: en $ABCD$, $\\vec{AD}=\\vec{BC}$, así que $D=A+C-B$.', 'الرؤوس مرتبة: في $ABCD$ يكون $\\vec{AD}=\\vec{BC}$، إذن $D=A+C-B$.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    reversed: say('Alderantziz egin duzu: muturra ken jatorria, $\\vec{AB}=B-A$.', 'Lo has hecho al revés: extremo menos origen, $\\vec{AB}=B-A$.', 'عكست الترتيب: الطرف ناقص الأصل، $\\vec{AB}=B-A$.', 'You have done it the wrong way round: end point minus start point, $\\vec{AB}=B-A$.'),
+    added: say('Puntuak ez dira batzen: bektorea muturra ken jatorria da.', 'Los puntos no se suman: el vector es extremo menos origen.', 'لا تُجمع النقاط: المتجه هو الطرف ناقص الأصل.', 'Points are not added: the vector is end point minus start point.'),
+    scalar: say('Zenbakiak bi koordenatuak biderkatzen ditu: $k\\cdot(x,\\,y)=(kx,\\,ky)$.', 'El número multiplica las dos coordenadas: $k\\cdot(x,\\,y)=(kx,\\,ky)$.', 'العدد يضرب المركّبتين معًا: $k\\cdot(x,\\,y)=(kx,\\,ky)$.', 'The number multiplies both coordinates: $k\\cdot(x,\\,y)=(kx,\\,ky)$.'),
+    sign: say('Begiratu zeinuari: ken bat parentesi aurrean badago, barruko zeinu guztiak aldatzen ditu.', 'Mira el signo: un menos delante de un paréntesis cambia todos los signos de dentro.', 'انتبه للإشارة: الناقص أمام القوس يغيّر كل الإشارات داخله.', 'Watch the sign: a minus in front of a bracket changes all the signs inside.'),
+    'no-root': say('Hori karratua da: erro karratua falta da.', 'Eso es el cuadrado: falta la raíz cuadrada.', 'هذا هو المربع: ينقص الجذر التربيعي.', 'That is the square: you still need the square root.'),
+    'sum-sides': say('Koordenatuak ez dira batzen: $|\\vec{u}|=\\sqrt{x^{2}+y^{2}}$.', 'Las coordenadas no se suman: $|\\vec{u}|=\\sqrt{x^{2}+y^{2}}$.', 'لا تُجمع المركّبتان: $|\\vec{u}|=\\sqrt{x^{2}+y^{2}}$.', 'The coordinates are not simply added: $|\\vec{u}|=\\sqrt{x^{2}+y^{2}}$.'),
+    perpendicular: say('Hori perpendikularra da. Paraleloak: koordenatu proportzionalak edo malda bera.', 'Eso es perpendicular. Paralelos: coordenadas proporcionales o la misma pendiente.', 'هذا عمودي. المتوازيان: مركّبات متناسبة أو الميل نفسه.', 'That is perpendicular. Parallel: proportional coordinates or the same slope.'),
+    parallel: say('Hori paraleloa da. Perpendikularra: $m\'=-\\frac{1}{m}$, edo biderkadura eskalarra 0.', 'Eso es paralelo. Perpendicular: $m\'=-\\frac{1}{m}$, o producto escalar 0.', 'هذا موازٍ. العمودي: $m\'=-\\frac{1}{m}$، أو الجداء السلمي 0.', 'That is parallel. Perpendicular: $m\'=-\\frac{1}{m}$, or dot product 0.'),
+    'no-half': say('Batu ondoren, zatitu 2z: $M=\\frac{A+B}{2}$.', 'Después de sumar, divide entre 2: $M=\\frac{A+B}{2}$.', 'بعد الجمع اقسم على 2: $M=\\frac{A+B}{2}$.', 'After adding, divide by 2: $M=\\frac{A+B}{2}$.'),
+    'half-difference': say('Erdiko puntuan koordenatuak batzen dira, ez kentzen.', 'En el punto medio las coordenadas se suman, no se restan.', 'في المنتصف تُجمع الإحداثيات ولا تُطرح.', 'At the midpoint, the coordinates are added, not subtracted.'),
+    midpoint: say('Hori $A$ eta $M$ puntuen erdikoa da; erdiko puntua $M$ bera da: $A\'=2M-A$.', 'Ese es el punto medio entre $A$ y $M$; el punto medio es el propio $M$: $A\'=2M-A$.', 'هذه منتصف $A$ و$M$؛ والمنتصف هو $M$ نفسها: $A\'=2M-A$.', 'That is the midpoint between $A$ and $M$; the midpoint is $M$ itself: $A\'=2M-A$.'),
+    'vector-not-point': say('Hori $\\vec{AM}$ bektorea da, ez puntua: $A\'=M+\\vec{AM}=2M-A$.', 'Eso es el vector $\\vec{AM}$, no el punto: $A\'=M+\\vec{AM}=2M-A$.', 'هذا المتجه $\\vec{AM}$ لا النقطة: $A\'=M+\\vec{AM}=2M-A$.', 'That is the vector $\\vec{AM}$, not the point: $A\'=M+\\vec{AM}=2M-A$.'),
+    inverse: say('Malda alderantziz: ordenatuen kendura zati abzisen kendura, $m=\\frac{\\Delta y}{\\Delta x}$.', 'La pendiente al revés: diferencia de ordenadas entre diferencia de abscisas, $m=\\frac{\\Delta y}{\\Delta x}$.', 'الميل مقلوب: فرق الصادات على فرق السينات، $m=\\frac{\\Delta y}{\\Delta x}$.', 'You have the slope the wrong way round: difference of the y-coordinates divided by the difference of the x-coordinates, $m=\\frac{\\Delta y}{\\Delta x}$.'),
+    intercept: say('Hori jatorriko ordenatua da. Malda $-\\frac{A}{B}$ da.', 'Esa es la ordenada en el origen. La pendiente es $-\\frac{A}{B}$.', 'هذا الجزء المقطوع. الميل هو $-\\frac{A}{B}$.', 'That is the y-intercept. The slope is $-\\frac{A}{B}$.'),
+    'only-point': say('Hori $t=0$ puntua da: gehitu $t\\cdot\\vec{d}$.', 'Ese es el punto de $t=0$: suma $t\\cdot\\vec{d}$.', 'هذه نقطة $t=0$: أضف $t\\cdot\\vec{d}$.', 'That is the point for $t=0$: add $t\\cdot\\vec{d}$.'),
+    'only-vector': say('$t\\cdot\\vec{d}$ bakarrik ez: hasierako puntua gehitu behar zaio.', 'No basta $t\\cdot\\vec{d}$: hay que sumarle el punto inicial.', 'لا يكفي $t\\cdot\\vec{d}$: يجب إضافة النقطة الابتدائية.', '$t\\cdot\\vec{d}$ is not enough: you also need to add the starting point.'),
+    swap: say('x eta y trukatu dituzu: lehenengo abzisa, gero ordenatua.', 'Has cambiado x e y: primero la abscisa y luego la ordenada.', 'بدّلت x وy: السينية أولًا ثم الصادية.', 'You have swapped x and y: first the x-coordinate and then the y-coordinate.'),
+    'no-square': say('Eskuinean erradioaren karratua doa: $(x-a)^{2}+(y-b)^{2}=r^{2}$.', 'A la derecha va el radio al cuadrado: $(x-a)^{2}+(y-b)^{2}=r^{2}$.', 'في الطرف الأيمن مربع نصف القطر: $(x-a)^{2}+(y-b)^{2}=r^{2}$.', 'On the right goes the radius squared: $(x-a)^{2}+(y-b)^{2}=r^{2}$.'),
+    order: say('Erpinak ordenan doaz: $ABCD$ paralelogramoan, $\\vec{AD}=\\vec{BC}$, beraz $D=A+C-B$.', 'Los vértices van en orden: en $ABCD$, $\\vec{AD}=\\vec{BC}$, así que $D=A+C-B$.', 'الرؤوس مرتبة: في $ABCD$ يكون $\\vec{AD}=\\vec{BC}$، إذن $D=A+C-B$.', 'The vertices must be in order: in $ABCD$, $\\vec{AD}=\\vec{BC}$, so $D=A+C-B$.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

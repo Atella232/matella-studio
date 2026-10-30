@@ -36,7 +36,7 @@ export function FunctionsAkLaboratory(props: {
             tools={functionsAkLabTools}
             stages={functionsAkStages}
             components={toolComponents}
-            title={{ eu: 'Eraiki, lotu eta aztertu', es: 'Construye, une y estudia', ar: 'ابنِ وصِل وادرس' }}
+            title={{ eu: 'Eraiki, lotu eta aztertu', es: 'Construye, une y estudia', en: 'Build, connect and study.', ar: 'ابنِ وصِل وادرس' }}
         />
     )
 }

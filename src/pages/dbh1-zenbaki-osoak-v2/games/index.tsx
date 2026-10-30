@@ -42,7 +42,7 @@ export function IntegerIntroGames({ language, pathname, openGame, completedIds, 
             language={language}
             games={hubGames}
             recordsKey={INTRO_GAME_RECORDS_KEY}
-            title={{ eu: 'Jolastu zenbaki osoekin', es: 'Juega con los números enteros', ar: 'العب بالأعداد الصحيحة' }}
+            title={{ eu: 'Jolastu zenbaki osoekin', es: 'Juega con los números enteros', en: 'Play with integers', ar: 'العب بالأعداد الصحيحة' }}
             completedIds={completedIds}
             onComplete={onComplete}
             mode={introGameModeForPath(pathname)}

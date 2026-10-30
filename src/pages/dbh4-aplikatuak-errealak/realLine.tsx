@@ -15,12 +15,14 @@ const STAGE = 'var(--stage, #2f6fdb)'
 const CARD = 'var(--card, #fffcf6)'
 
 /** Axis with arrowheads, ticks every `step` and numbers every `labelEvery` ticks */
-export function RealAxis({ map, step = 1, labelEvery = 1, labels = true, arabic = false, fontSize = 15, minor = 0 }: {
+export function RealAxis({ map, step = 1, labelEvery = 1, labels = true, arabic = false, language, fontSize = 15, minor = 0 }: {
     map: LineMap
     step?: number
     labelEvery?: number
     labels?: boolean
     arabic?: boolean
+    /** The language of the page: its decimal mark wins over `arabic` when given */
+    language?: string
     fontSize?: number
     /** Small ticks between the main ones (10 for tenths) */
     minor?: number
@@ -36,7 +38,7 @@ export function RealAxis({ map, step = 1, labelEvery = 1, labels = true, arabic 
             {ticks.map((value, index) => (
                 <g key={value}>
                     <line x1={map.x(value)} y1={map.y - 9} x2={map.x(value)} y2={map.y + 9} stroke={INK} strokeWidth={2} />
-                    {labels && index % labelEvery === 0 && <text x={map.x(value)} y={map.y + 28} textAnchor="middle" fontSize={fontSize} fill={MUTED}>{tickText(value, arabic)}</text>}
+                    {labels && index % labelEvery === 0 && <text x={map.x(value)} y={map.y + 28} textAnchor="middle" fontSize={fontSize} fill={MUTED}>{tickText(value, arabic, language)}</text>}
                 </g>
             ))}
         </g>

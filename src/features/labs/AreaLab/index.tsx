@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { formatDecimal, fraction as createFraction } from '../../fractions/fractionMath'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import './AreaLab.css'
 
 export function AreaLab() {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
     const [numerator, setNumerator] = useState(3)
     const [denominator, setDenominator] = useState(4)
     const [totalParts, setTotalParts] = useState(12)
@@ -12,7 +13,7 @@ export function AreaLab() {
 
     const partsToHighlight = (numerator * totalParts) / denominator
     const maxCompatibleParts = Math.max(denominator, Math.floor(48 / denominator) * denominator)
-    const decimal = formatDecimal(createFraction(numerator, denominator))
+    const decimal = formatDecimal(createFraction(numerator, denominator), decimalSeparatorFor(i18n.language))
 
     const changeDenominator = (newDenominator: number) => {
         setDenominator(newDenominator)

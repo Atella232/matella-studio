@@ -32,7 +32,7 @@ export function ProportionLaboratory(props: {
             tools={proportionLabTools}
             stages={proportionStages}
             components={toolComponents}
-            title={{ eu: 'Bikoitza → bikoitza ala erdia?', es: '¿Doble → doble o mitad?', ar: 'الضعف ← الضعف أم النصف؟' }}
+            title={{ eu: 'Bikoitza → bikoitza ala erdia?', es: '¿Doble → doble o mitad?', en: 'Double → double or half?', ar: 'الضعف ← الضعف أم النصف؟' }}
         />
     )
 }

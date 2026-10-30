@@ -25,9 +25,9 @@ export type PolynomialsRaceError = AlgebraRaceError | 'sign-a' | 'no-multiply' |
 
 export type PolynomialsRaceQuestion = RaceQuestion<PolynomialsRaceError>
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const math = (latex: string) => `$${latex}$`
-const all = (latex: string): LocalizedText => say(math(latex), math(latex), math(latex))
+const all = (latex: string): LocalizedText => say(math(latex), math(latex), math(latex), math(latex))
 const signedRandom = (random: Random, min: number, max: number) => randomInt(random, min, max) * (random() < 0.5 ? -1 : 1)
 
 interface Candidate {
@@ -75,7 +75,7 @@ function remainderQuestion(random: Random, tier: Tier): PolynomialsRaceQuestion 
     return question(2, 'remainder', say(
         `Zein da ${math(`(${polynomialLatex(coefficients)})\\mathbin{:}(${binomialLatex(a)})`)} zatiketaren hondarra?`,
         `¿Cuál es el resto de ${math(`(${polynomialLatex(coefficients)})\\mathbin{:}(${binomialLatex(a)})`)}?`,
-        `ما باقي ${math(`(${polynomialLatex(coefficients)})\\mathbin{:}(${binomialLatex(a)})`)}؟`
+        `ما باقي ${math(`(${polynomialLatex(coefficients)})\\mathbin{:}(${binomialLatex(a)})`)}؟`, `What is the remainder of ${math(`(${polynomialLatex(coefficients)})\\mathbin{:}(${binomialLatex(a)})`)}?`
     ), choices, answer, all(`a=${a}:\\ ${bottom.join(';\\ ')}`))
 }
 
@@ -89,7 +89,7 @@ function quotientQuestion(random: Random, tier: Tier): PolynomialsRaceQuestion |
     return question(2, 'quotient', say(
         `Ruffiniz ${math(`(${polynomialLatex(coefficients)})\\mathbin{:}(${binomialLatex(a)})`)}: zein da zatiduraren x-ren koefizientea?`,
         `Con Ruffini, ${math(`(${polynomialLatex(coefficients)})\\mathbin{:}(${binomialLatex(a)})`)}: ¿cuál es el coeficiente de x del cociente?`,
-        `بروفيني ${math(`(${polynomialLatex(coefficients)})\\mathbin{:}(${binomialLatex(a)})`)}: ما معامل x في خارج القسمة؟`
+        `بروفيني ${math(`(${polynomialLatex(coefficients)})\\mathbin{:}(${binomialLatex(a)})`)}: ما معامل x في خارج القسمة؟`, `Using Ruffini, ${math(`(${polynomialLatex(coefficients)})\\mathbin{:}(${binomialLatex(a)})`)}: what is the coefficient of x in the quotient?`
     ), choices, answer, all(`${coefficients[0]}\\cdot(${a})+(${coefficients[1]})=${answer}`))
 }
 
@@ -108,7 +108,7 @@ function exactQuestion(random: Random, tier: Tier): PolynomialsRaceQuestion | nu
     return question(2, 'exact', say(
         `Zenbat da k, ${math(`(${latex})\\mathbin{:}(${binomialLatex(a)})`)} zatiketa zehatza izateko?`,
         `¿Cuánto vale k para que ${math(`(${latex})\\mathbin{:}(${binomialLatex(a)})`)} sea exacta?`,
-        `كم قيمة k لتكون ${math(`(${latex})\\mathbin{:}(${binomialLatex(a)})`)} تامة؟`
+        `كم قيمة k لتكون ${math(`(${latex})\\mathbin{:}(${binomialLatex(a)})`)} تامة؟`, `What value of k makes ${math(`(${latex})\\mathbin{:}(${binomialLatex(a)})`)} divide exactly?`
     ), choices, k, all(`P(${a})=${a ** 3}+${a * a}k${p * a < 0 ? '' : '+'}${p * a}${q < 0 ? '' : '+'}${q}=0\\ \\to\\ k=${k}`))
 }
 
@@ -132,7 +132,7 @@ function rootQuestion(random: Random, tier: Tier): PolynomialsRaceQuestion | nul
     return question(3, 'root', say(
         `Zein da ${math(polynomialLatex(coefficients))} polinomioaren erro bat?`,
         `¿Cuál es una raíz de ${math(polynomialLatex(coefficients))}?`,
-        `ما جذر من جذور ${math(polynomialLatex(coefficients))}؟`
+        `ما جذر من جذور ${math(polynomialLatex(coefficients))}؟`, `What is a root of ${math(polynomialLatex(coefficients))}?`
     ), choices, null, all(`P(${right})=0`))
 }
 
@@ -150,7 +150,7 @@ function fractionQuestion(random: Random, tier: Tier): PolynomialsRaceQuestion |
     return question(4, 'fraction', say(
         `Sinplifikatu ${math(`\\frac{${numerator}}{${binomialLatex(-a)}}`)} eta kalkulatu haren balioa ${math(`x=${c}`)} denean.`,
         `Simplifica ${math(`\\frac{${numerator}}{${binomialLatex(-a)}}`)} y calcula su valor para ${math(`x=${c}`)}.`,
-        `بسّط ${math(`\\frac{${numerator}}{${binomialLatex(-a)}}`)} واحسب قيمته عندما ${math(`x=${c}`)}.`
+        `بسّط ${math(`\\frac{${numerator}}{${binomialLatex(-a)}}`)} واحسب قيمته عندما ${math(`x=${c}`)}.`, `Simplify ${math(`\\frac{${numerator}}{${binomialLatex(-a)}}`)} and work out its value for ${math(`x=${c}`)}.`
     ), choices, answer, all(`\\frac{(${binomialLatex(-a)})(${binomialLatex(-b)})}{${binomialLatex(-a)}}=${binomialLatex(-b)}\\ \\to\\ ${c}${b < 0 ? '' : '+'}${b}=${answer}`))
 }
 
@@ -165,7 +165,7 @@ function simplifyQuestion(random: Random, tier: Tier): PolynomialsRaceQuestion |
     return question(4, 'simplify', say(
         `Sinplifikatu ${math(`${p}(x+${a})-${q}(x+${b})`)}. Zein da gai askea?`,
         `Simplifica ${math(`${p}(x+${a})-${q}(x+${b})`)}. ¿Cuál es el término independiente?`,
-        `بسّط ${math(`${p}(x+${a})-${q}(x+${b})`)}. ما الحد الثابت؟`
+        `بسّط ${math(`${p}(x+${a})-${q}(x+${b})`)}. ما الحد الثابت؟`, `Simplify ${math(`${p}(x+${a})-${q}(x+${b})`)}. What is the constant term?`
     ), choices, answer, all(`${p}\\cdot ${a}-${q}\\cdot ${b}=${answer}`))
 }
 
@@ -178,7 +178,7 @@ function rectangleQuestion(random: Random, tier: Tier): PolynomialsRaceQuestion 
     return question(4, 'rectangle', say(
         `Laukizuzen baten perimetroa ${math(`${2 * half}`)} m da eta azalera ${math(`x(${half}-x)`)}. Zenbat m² ${math(`x=${side}`)} denean?`,
         `Un rectángulo de ${math(`${2 * half}`)} m de perímetro tiene área ${math(`x(${half}-x)`)}. ¿Cuántos m² para ${math(`x=${side}`)}?`,
-        `مستطيل محيطه ${math(`${2 * half}`)} م ومساحته ${math(`x(${half}-x)`)}. كم م² عندما ${math(`x=${side}`)}؟`
+        `مستطيل محيطه ${math(`${2 * half}`)} م ومساحته ${math(`x(${half}-x)`)}. كم م² عندما ${math(`x=${side}`)}؟`, `A rectangle with a perimeter of ${math(`${2 * half}`)} m has an area of ${math(`x(${half}-x)`)}. How many m² when ${math(`x=${side}`)}?`
     ), choices, answer, all(`${side}\\cdot(${half}-${side})=${answer}`))
 }
 
@@ -213,11 +213,11 @@ export function polynomialsParTime(circuit: number): number {
 
 export const polynomialsRaceErrorTips: Record<PolynomialsRaceError, LocalizedText> = {
     ...algebraRaceErrorTips,
-    'sign-a': say('Kontuz a-ren zeinuarekin: $x-a$ zatitzailean, $x+3$ bada $a=-3$.', 'Cuidado con el signo de a: en $x-a$, si es $x+3$, $a=-3$.', 'انتبه لإشارة a: في $x-a$، إذا كان $x+3$ فإن $a=-3$.'),
-    'no-multiply': say('Ruffinin, behekoa a-z biderkatu behar da batu aurretik.', 'En Ruffini hay que multiplicar el de abajo por a antes de sumar.', 'في روفيني نضرب العدد السفلي في a قبل الجمع.'),
-    'root-sign': say('$x-r$ faktoreak r erroa ematen du: $(x+2)$ → erroa $-2$.', 'El factor $x-r$ da la raíz r: $(x+2)$ → raíz $-2$.', 'العامل $x-r$ يعطي الجذر r: $(x+2)$ ← الجذر $-2$.'),
-    'not-divisor': say('Erro osoak gai askearen zatitzaileak dira.', 'Las raíces enteras son divisores del término independiente.', 'الجذور الصحيحة قواسم الحد الثابت.'),
-    'no-simplify': say('Lehenik faktorizatu eta sinplifikatu; gero ordeztu.', 'Primero factoriza y simplifica; después sustituye.', 'حلّل وبسّط أولًا ثم عوّض.'),
-    'half-perimeter': say('Bi alde jarraiak perimetroaren erdia dira.', 'Dos lados contiguos suman la mitad del perímetro.', 'مجموع ضلعين متجاورين نصف المحيط.'),
-    'no-distribute': say('Parentesiaren aurreko zenbakia gai guztiez biderkatu.', 'Multiplica el número de delante por todos los términos del paréntesis.', 'اضرب العدد الذي قبل القوس في كل حدوده.')
+    'sign-a': say('Kontuz a-ren zeinuarekin: $x-a$ zatitzailean, $x+3$ bada $a=-3$.', 'Cuidado con el signo de a: en $x-a$, si es $x+3$, $a=-3$.', 'انتبه لإشارة a: في $x-a$، إذا كان $x+3$ فإن $a=-3$.', 'Watch the sign of a: in $x-a$, if it is $x+3$, then $a=-3$.'),
+    'no-multiply': say('Ruffinin, behekoa a-z biderkatu behar da batu aurretik.', 'En Ruffini hay que multiplicar el de abajo por a antes de sumar.', 'في روفيني نضرب العدد السفلي في a قبل الجمع.', 'In Ruffini, you must multiply the number below by a before adding.'),
+    'root-sign': say('$x-r$ faktoreak r erroa ematen du: $(x+2)$ → erroa $-2$.', 'El factor $x-r$ da la raíz r: $(x+2)$ → raíz $-2$.', 'العامل $x-r$ يعطي الجذر r: $(x+2)$ ← الجذر $-2$.', 'The factor $x-r$ gives the root r: $(x+2)$ → root $-2$.'),
+    'not-divisor': say('Erro osoak gai askearen zatitzaileak dira.', 'Las raíces enteras son divisores del término independiente.', 'الجذور الصحيحة قواسم الحد الثابت.', 'The integer roots are divisors of the constant term.'),
+    'no-simplify': say('Lehenik faktorizatu eta sinplifikatu; gero ordeztu.', 'Primero factoriza y simplifica; después sustituye.', 'حلّل وبسّط أولًا ثم عوّض.', 'First factorise and simplify; then substitute.'),
+    'half-perimeter': say('Bi alde jarraiak perimetroaren erdia dira.', 'Dos lados contiguos suman la mitad del perímetro.', 'مجموع ضلعين متجاورين نصف المحيط.', 'Two adjacent sides add up to half the perimeter.'),
+    'no-distribute': say('Parentesiaren aurreko zenbakia gai guztiez biderkatu.', 'Multiplica el número de delante por todos los términos del paréntesis.', 'اضرب العدد الذي قبل القوس في كل حدوده.', 'Multiply the number in front by every term in the bracket.')
 }

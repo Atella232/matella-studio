@@ -1,6 +1,7 @@
 /* Zenbaki errealak (4. DBH) — the real line's geometry, apart from the SVG so the tests can load it. */
 
 import type { Interval } from './reals.ts'
+import { decimalSeparatorFor } from '../../utils/numberFormat.ts'
 
 export interface LineMap {
     from: number
@@ -13,10 +14,10 @@ export interface LineMap {
 
 export const lineMap = (from: number, to: number, x0: number, x1: number, y: number): LineMap => ({ from, to, x0, x1, y, x: (value) => x0 + ((value - from) / (to - from)) * (x1 - x0) })
 
-/** Written with a true minus sign and, in Arabic, the decimal point */
-export const tickText = (value: number, arabic = false) => {
+/** Written with a true minus sign and the decimal mark of the language (a point in Arabic and English); without `language`, `arabic` decides as before */
+export const tickText = (value: number, arabic = false, language = arabic ? 'ar' : 'es') => {
     const text = String(Math.round(value * 1e6) / 1e6).replace('-', '−')
-    return arabic ? text : text.replace('.', ',')
+    return language === 'ar' ? text : text.replace('.', decimalSeparatorFor(language))
 }
 
 /** A real line drawn under an exercise, as plain data (the tests read it too) */

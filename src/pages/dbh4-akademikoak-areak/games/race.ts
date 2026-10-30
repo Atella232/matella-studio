@@ -52,8 +52,8 @@ export type AreasSimilarityRaceError = OwnError | `are:${AreasVolumesRaceError}`
 export type AreasSimilarityRaceQuestion = RaceQuestion<AreasSimilarityRaceError> & { meta: Record<string, number> }
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, ar: latex.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, en: latex, ar: latex.replace(/\{,\}/g, '.') })
 const math = (latex: string) => `$${latex}$`
 /** Hundredths as an exact value */
 const h = (hundredths: number) => fraction(hundredths, 100)
@@ -62,7 +62,7 @@ const w = (hundredths: number) => (Number.isInteger(hundredths) ? written(h(hund
 /** A number with at most two decimals in LaTeX: 6.4 → 6{,}4 */
 const num = (value: number) => w(Math.round(value * 100))
 const PI = ` (${math('\\pi\\approx 3{,}14')})`
-const withPi = (text: LocalizedText) => say(text.eu + PI, text.es + PI, text.ar + PI)
+const withPi = (text: LocalizedText) => say(text.eu + PI, text.es + PI, text.ar + PI, text.en + PI)
 
 interface Candidate {
     hundredths: number
@@ -120,7 +120,7 @@ function crownQuestion(random: Random, tier: Tier): AreasSimilarityRaceQuestion 
     return build(0, 'crown', withPi(say(
         `Kalkulatu ${math(String(R))} cm eta ${math(String(r))} cm-ko erradioko koroa zirkularraren azalera.`,
         `Calcula el área de la corona circular de radios ${math(String(R))} cm y ${math(String(r))} cm.`,
-        `احسب مساحة الحلقة الدائرية التي نصفا قطريها ${math(String(R))} سم و${math(String(r))} سم.`
+        `احسب مساحة الحلقة الدائرية التي نصفا قطريها ${math(String(R))} سم و${math(String(r))} سم.`, `Calculate the area of the annulus with radii ${math(String(R))} cm and ${math(String(r))} cm.`
     )), options(random, answer, [
         { hundredths: 314 * (R - r) * (R - r), error: 'crown-radii' },
         { hundredths: 314 * R * R, error: 'missing-part' },
@@ -137,7 +137,7 @@ function sectorQuestion(random: Random, tier: Tier): AreasSimilarityRaceQuestion
     return build(0, 'sector', withPi(say(
         `Kalkulatu sektore zirkular baten azalera: erradioa ${math(String(r))} cm da eta angelua ${math(`${angle}^{\\circ}`)}.`,
         `Calcula el área de un sector circular de ${math(String(r))} cm de radio y ${math(`${angle}^{\\circ}`)}.`,
-        `احسب مساحة قطاع دائري نصف قطره ${math(String(r))} سم وزاويته ${math(`${angle}^{\\circ}`)}.`
+        `احسب مساحة قطاع دائري نصف قطره ${math(String(r))} سم وزاويته ${math(`${angle}^{\\circ}`)}.`, `Calculate the area of a circular sector with a radius of ${math(String(r))} cm and an angle of ${math(`${angle}^{\\circ}`)}.`
     )), options(random, answer, [
         { hundredths: (628 * r * angle) / 360, error: 'arc-not-area' },
         { hundredths: 314 * r * r, error: 'whole-circle' },
@@ -154,7 +154,7 @@ function segmentQuestion(random: Random, tier: Tier): AreasSimilarityRaceQuestio
     return build(0, 'segment', withPi(say(
         `Kalkulatu segmentu zirkular baten azalera: zirkuluaren erradioa ${math(String(r))} cm da eta angelu zentrala ${math('90^{\\circ}')}.`,
         `Calcula el área del segmento circular de ${math('90^{\\circ}')} de un círculo de ${math(String(r))} cm de radio.`,
-        `احسب مساحة القطعة الدائرية ذات الزاوية ${math('90^{\\circ}')} من قرص نصف قطره ${math(String(r))} سم.`
+        `احسب مساحة القطعة الدائرية ذات الزاوية ${math('90^{\\circ}')} من قرص نصف قطره ${math(String(r))} سم.`, `Calculate the area of the circular segment of ${math('90^{\\circ}')} in a circle with a radius of ${math(String(r))} cm.`
     )), options(random, answer, [
         { hundredths: quarter, error: 'segment-sector' },
         { hundredths: quarter - 2 * triangle, error: 'triangle-no-half' },
@@ -173,7 +173,7 @@ function pyramidAreaQuestion(random: Random, tier: Tier): AreasSimilarityRaceQue
     return build(1, 'pyramid-area', say(
         `Piramide karratu baten oinarriaren aldea ${math(String(side))} cm da eta altuera ${math(String(height))} cm. Zein da azalera osoa?`,
         `Una pirámide cuadrangular tiene ${math(String(side))} cm de lado de la base y ${math(String(height))} cm de altura. ¿Cuál es su área total?`,
-        `هرم رباعي ضلع قاعدته ${math(String(side))} سم وارتفاعه ${math(String(height))} سم. ما مساحته الكلية؟`
+        `هرم رباعي ضلع قاعدته ${math(String(side))} سم وارتفاعه ${math(String(height))} سم. ما مساحته الكلية؟`, `A square-based pyramid has a base side of ${math(String(side))} cm and a height of ${math(String(height))} cm. What is its total area?`
     ), options(random, answer, [
         { hundredths: 100 * (2 * side * height + side * side), error: 'height-not-apothem' },
         { hundredths: 100 * lateral, error: 'missing-part' },
@@ -188,7 +188,7 @@ function coneAreaQuestion(random: Random, tier: Tier): AreasSimilarityRaceQuesti
     return build(1, 'cone-area', withPi(say(
         `Kono baten erradioa ${math(String(r))} cm da eta altuera ${math(String(height))} cm. Zein da azalera osoa?`,
         `Un cono tiene ${math(String(r))} cm de radio y ${math(String(height))} cm de altura. ¿Cuál es su área total?`,
-        `مخروط نصف قطره ${math(String(r))} سم وارتفاعه ${math(String(height))} سم. ما مساحته الكلية؟`
+        `مخروط نصف قطره ${math(String(r))} سم وارتفاعه ${math(String(height))} سم. ما مساحته الكلية؟`, `A cone has a radius of ${math(String(r))} cm and a height of ${math(String(height))} cm. What is its total area?`
     )), options(random, answer, [
         { hundredths: 314 * r * (height + r), error: 'height-not-generatrix' },
         { hundredths: 314 * r * g, error: 'missing-part' },
@@ -204,7 +204,7 @@ function sphereAreaQuestion(random: Random, tier: Tier): AreasSimilarityRaceQues
         return build(1, 'zone', withPi(say(
             `${math(String(R))} cm-ko erradioko esfera bat ${math(String(thickness))} cm-ra dauden bi plano paralelok mozten dute. Zein da bien arteko zona esferikoaren azalera?`,
             `Una esfera de ${math(String(R))} cm de radio se corta con dos planos paralelos separados ${math(String(thickness))} cm. ¿Cuál es el área de la zona esférica entre ellos?`,
-            `كرة نصف قطرها ${math(String(R))} سم يقطعها مستويان متوازيان المسافة بينهما ${math(String(thickness))} سم. ما مساحة المنطقة الكروية بينهما؟`
+            `كرة نصف قطرها ${math(String(R))} سم يقطعها مستويان متوازيان المسافة بينهما ${math(String(thickness))} سم. ما مساحة المنطقة الكروية بينهما؟`, `A sphere with a radius of ${math(String(R))} cm is cut by two parallel planes ${math(String(thickness))} cm apart. What is the area of the spherical zone between them?`
         )), options(random, answer, [
             { hundredths: 314 * R * thickness, error: 'zone-half' },
             { hundredths: 1256 * R * R, error: 'whole-sphere' },
@@ -216,7 +216,7 @@ function sphereAreaQuestion(random: Random, tier: Tier): AreasSimilarityRaceQues
     return build(1, 'hemisphere', withPi(say(
         `Kalkulatu ${math(String(r))} cm-ko erradioko esfera-erdi itxi baten azalera osoa.`,
         `Calcula el área total de una semiesfera cerrada de ${math(String(r))} cm de radio.`,
-        `احسب المساحة الكلية لنصف كرة مغلق نصف قطره ${math(String(r))} سم.`
+        `احسب المساحة الكلية لنصف كرة مغلق نصف قطره ${math(String(r))} سم.`, `Calculate the total area of a closed hemisphere with a radius of ${math(String(r))} cm.`
     )), options(random, answer, [
         { hundredths: 2 * 314 * r * r, error: 'missing-part' },
         { hundredths: 4 * 314 * r * r, error: 'whole-sphere' },
@@ -233,7 +233,7 @@ function coneVolumeQuestion(random: Random, tier: Tier): AreasSimilarityRaceQues
     return build(2, 'cone-volume', withPi(say(
         `Kono baten erradioa ${math(String(r))} cm da eta sortzailea ${math(String(g))} cm. Zein da bolumena?`,
         `Un cono tiene ${math(String(r))} cm de radio y ${math(String(g))} cm de generatriz. ¿Cuál es su volumen?`,
-        `مخروط نصف قطره ${math(String(r))} سم وراسمه ${math(String(g))} سم. ما حجمه؟`
+        `مخروط نصف قطره ${math(String(r))} سم وراسمه ${math(String(g))} سم. ما حجمه؟`, `A cone has a radius of ${math(String(r))} cm and a slant height of ${math(String(g))} cm. What is its volume?`
     )), options(random, answer, [
         { hundredths: (314 * r * r * g) / 3, error: 'height-not-generatrix' },
         { hundredths: 314 * r * r * height, error: 'cone-third' },
@@ -249,7 +249,7 @@ function pyramidVolumeQuestion(random: Random, tier: Tier): AreasSimilarityRaceQ
     return build(2, 'pyramid-volume', say(
         `Piramide karratu baten oinarriaren aldea ${math(String(side))} cm da eta apotema ${math(String(apothem))} cm. Zein da bolumena?`,
         `Una pirámide cuadrangular tiene ${math(String(side))} cm de lado de la base y ${math(String(apothem))} cm de apotema. ¿Cuál es su volumen?`,
-        `هرم رباعي ضلع قاعدته ${math(String(side))} سم وعامده ${math(String(apothem))} سم. ما حجمه؟`
+        `هرم رباعي ضلع قاعدته ${math(String(side))} سم وعامده ${math(String(apothem))} سم. ما حجمه؟`, `A square-based pyramid has a base side of ${math(String(side))} cm and a slant height of ${math(String(apothem))} cm. What is its volume?`
     ), options(random, answer, [
         { hundredths: (100 * side * side * apothem) / 3, error: 'height-not-apothem' },
         { hundredths: 100 * side * side * height, error: 'cone-third' },
@@ -263,7 +263,7 @@ function sphereVolumeQuestion(random: Random, tier: Tier): AreasSimilarityRaceQu
     return build(2, 'sphere-volume', withPi(say(
         `Kalkulatu ${math(String(r))} cm-ko erradioko esfera baten bolumena.`,
         `Calcula el volumen de una esfera de ${math(String(r))} cm de radio.`,
-        `احسب حجم كرة نصف قطرها ${math(String(r))} سم.`
+        `احسب حجم كرة نصف قطرها ${math(String(r))} سم.`, `Calculate the volume of a sphere with a radius of ${math(String(r))} cm.`
     )), options(random, answer, [
         { hundredths: 4 * 314 * r * r, error: 'area-not-volume' },
         { hundredths: 4 * 314 * r * r * r, error: 'cone-third' },
@@ -285,7 +285,7 @@ function altitudeQuestion(random: Random): AreasSimilarityRaceQuestion | null {
     return build(3, 'altitude', say(
         `Triangelu angeluzuzen batean, katetoen proiekzioak hipotenusan ${math(String(m))} cm eta ${math(String(n))} cm dira. Zenbat neurtzen du hipotenusarekiko altuerak?`,
         `En un triángulo rectángulo, las proyecciones de los catetos sobre la hipotenusa miden ${math(String(m))} cm y ${math(String(n))} cm. ¿Cuánto mide la altura sobre la hipotenusa?`,
-        `في مثلث قائم، مسقطا الضلعين القائمين على الوتر ${math(String(m))} سم و${math(String(n))} سم. كم طول الارتفاع على الوتر؟`
+        `في مثلث قائم، مسقطا الضلعين القائمين على الوتر ${math(String(m))} سم و${math(String(n))} سم. كم طول الارتفاع على الوتر؟`, `In a right-angled triangle, the projections of the legs onto the hypotenuse are ${math(String(m))} cm and ${math(String(n))} cm. How long is the height to the hypotenuse?`
     ), options(random, answer, [
         { hundredths: 100 * m * n, error: 'no-root' },
         { hundredths: 50 * (m + n), error: 'calculation' },
@@ -309,7 +309,7 @@ function legQuestion(random: Random): AreasSimilarityRaceQuestion | null {
     return build(3, 'leg', say(
         `Triangelu angeluzuzen baten hipotenusa ${math(String(a))} cm da, eta kateto baten proiekzioa ${math(num(n))} cm. Zenbat neurtzen du kateto horrek?`,
         `La hipotenusa de un triángulo rectángulo mide ${math(String(a))} cm y la proyección de un cateto, ${math(num(n))} cm. ¿Cuánto mide ese cateto?`,
-        `وتر مثلث قائم ${math(String(a))} سم ومسقط أحد الضلعين القائمين ${math(num(n))} سم. كم طول هذا الضلع؟`
+        `وتر مثلث قائم ${math(String(a))} سم ومسقط أحد الضلعين القائمين ${math(num(n))} سم. كم طول هذا الضلع؟`, `The hypotenuse of a right-angled triangle is ${math(String(a))} cm and the projection of one leg is ${math(num(n))} cm. How long is that leg?`
     ), options(random, answer, [
         { hundredths: Math.round(100 * Math.sqrt(a * other)) === 100 * Math.sqrt(a * other) ? 100 * Math.sqrt(a * other) : 0, error: 'other-projection' },
         { hundredths: Math.round(100 * a * n), error: 'no-root' },
@@ -325,7 +325,7 @@ function hypotenuseQuestion(random: Random): AreasSimilarityRaceQuestion | null 
     return build(3, 'hypotenuse', say(
         `Triangelu angeluzuzen batean, hipotenusarekiko altuera ${math(String(height))} cm da eta proiekzio bat ${math(String(m))} cm. Zenbat neurtzen du hipotenusak?`,
         `En un triángulo rectángulo, la altura sobre la hipotenusa mide ${math(String(height))} cm y una proyección, ${math(String(m))} cm. ¿Cuánto mide la hipotenusa?`,
-        `في مثلث قائم، الارتفاع على الوتر ${math(String(height))} سم وأحد المسقطين ${math(String(m))} سم. كم طول الوتر؟`
+        `في مثلث قائم، الارتفاع على الوتر ${math(String(height))} سم وأحد المسقطين ${math(String(m))} سم. كم طول الوتر؟`, `In a right-angled triangle, the height to the hypotenuse is ${math(String(height))} cm and one projection is ${math(String(m))} cm. How long is the hypotenuse?`
     ), options(random, answer, [
         { hundredths: 100 * n, error: 'one-part' },
         { hundredths: 100 * (m + height), error: 'calculation' },
@@ -349,7 +349,7 @@ function frustumQuestion(random: Random, tier: Tier): AreasSimilarityRaceQuestio
     return build(4, 'frustum', withPi(say(
         `Kono-enbor baten oinarrien erradioak ${math(String(R))} cm eta ${math(String(r))} cm dira, eta altuera ${math(String(height))} cm. Zein da bolumena?`,
         `Un tronco de cono tiene bases de ${math(String(R))} cm y ${math(String(r))} cm de radio y ${math(String(height))} cm de altura. ¿Cuál es su volumen?`,
-        `جذع مخروط نصفا قطري قاعدتيه ${math(String(R))} سم و${math(String(r))} سم وارتفاعه ${math(String(height))} سم. ما حجمه؟`
+        `جذع مخروط نصفا قطري قاعدتيه ${math(String(R))} سم و${math(String(r))} سم وارتفاعه ${math(String(height))} سم. ما حجمه؟`, `A frustum of a cone has base radii of ${math(String(R))} cm and ${math(String(r))} cm and a height of ${math(String(height))} cm. What is its volume?`
     )), options(random, answer, [
         { hundredths: big, error: 'missing-part' },
         { hundredths: 314 * thirds, error: 'cone-third' },
@@ -366,7 +366,7 @@ function scaleQuestion(random: Random, tier: Tier): AreasSimilarityRaceQuestion 
         return build(4, 'scale-area', say(
             `${math(`1\\mathbin{:}${n}`)} eskalako plano batean, gela batek ${math(String(area))} cm² hartzen ditu. Zenbat m² ditu gela errealak?`,
             `En un plano a escala ${math(`1\\mathbin{:}${n}`)}, una habitación ocupa ${math(String(area))} cm². ¿Cuántos m² tiene la habitación real?`,
-            `في مخطط بمقياس ${math(`1\\mathbin{:}${n}`)} تشغل غرفة ${math(String(area))} سم². كم م² مساحة الغرفة الحقيقية؟`
+            `في مخطط بمقياس ${math(`1\\mathbin{:}${n}`)} تشغل غرفة ${math(String(area))} سم². كم م² مساحة الغرفة الحقيقية؟`, `On a plan at a scale of ${math(`1\\mathbin{:}${n}`)}, a room covers ${math(String(area))} cm². What is the real area of the room in m²?`
         ), options(random, answer, [
             { hundredths: (area * n) / 100, error: 'r-not-squared' },
             { hundredths: area * n * n, error: 'unit' },
@@ -379,7 +379,7 @@ function scaleQuestion(random: Random, tier: Tier): AreasSimilarityRaceQuestion 
     return build(4, 'scale-volume', say(
         `${math(`1\\mathbin{:}${n}`)} eskalako maketa batek ${math(String(volume))} cm³-ko bolumena du. Zenbat m³ ditu gorputz errealak?`,
         `Una maqueta a escala ${math(`1\\mathbin{:}${n}`)} tiene ${math(String(volume))} cm³ de volumen. ¿Cuántos m³ tiene el cuerpo real?`,
-        `مجسّم بمقياس ${math(`1\\mathbin{:}${n}`)} حجمه ${math(String(volume))} سم³. كم م³ حجم الجسم الحقيقي؟`
+        `مجسّم بمقياس ${math(`1\\mathbin{:}${n}`)} حجمه ${math(String(volume))} سم³. كم م³ حجم الجسم الحقيقي؟`, `A model at a scale of ${math(`1\\mathbin{:}${n}`)} has a volume of ${math(String(volume))} cm³. What is the volume of the real object in m³?`
     ), options(random, answer, [
         { hundredths: (volume * n * n) / 10_000, error: 'r-not-cubed' },
         { hundredths: (volume * n * n * n) / 100, error: 'unit' },
@@ -396,7 +396,7 @@ function volumeRatioQuestion(random: Random, tier: Tier): AreasSimilarityRaceQue
     return build(4, 'volume-ratio', say(
         `Bi gorputz antzekoren bolumenak ${math(String(small))} cm³ eta ${math(num(big))} cm³ dira. Zein da antzekotasun-arrazoia?`,
         `Dos cuerpos semejantes tienen ${math(String(small))} cm³ y ${math(num(big))} cm³ de volumen. ¿Cuál es la razón de semejanza?`,
-        `جسمان متشابهان حجماهما ${math(String(small))} سم³ و${math(num(big))} سم³. ما نسبة التشابه؟`
+        `جسمان متشابهان حجماهما ${math(String(small))} سم³ و${math(num(big))} سم³. ما نسبة التشابه؟`, `Two similar solids have volumes of ${math(String(small))} cm³ and ${math(num(big))} cm³. What is the scale factor?`
     ), options(random, answer, [
         // Only exact mistakes: 27/8 = 3,375 cannot be written with two decimals
         { hundredths: 100 * quotient, error: 'cube-root' },
@@ -441,24 +441,24 @@ export const areasSimilarityRaceErrorTips: Record<AreasSimilarityRaceError, Loca
     ...(prefixed('are', areasVolumesRaceErrorTips) as Record<`are:${AreasVolumesRaceError}`, LocalizedText>),
     ...(prefixed('sol', solidsRaceErrorTips) as Record<`sol:${SolidsRaceError}`, LocalizedText>),
     ...(prefixed('sim', similarityRaceErrorTips) as Record<`sim:${SimilarityRaceError}`, LocalizedText>),
-    'crown-radii': say('Ez kendu erradioak karratura jaso aurretik: $\\pi(R^{2}-r^{2})$.', 'No restes los radios antes de elevarlos al cuadrado: $\\pi(R^{2}-r^{2})$.', 'لا تطرح نصفي القطرين قبل تربيعهما: $\\pi(R^{2}-r^{2})$.'),
-    'missing-part': say('Zati bat falta da: batu edo kendu zati guztiak.', 'Falta una parte: suma o resta todas las partes.', 'ينقص جزء: اجمع أو اطرح كل الأجزاء.'),
-    'arc-not-area': say('Hori arkuaren luzera da; azalerarako $\\pi r^{2}$.', 'Esa es la longitud del arco; para el área, $\\pi r^{2}$.', 'هذا طول القوس؛ وللمساحة $\\pi r^{2}$.'),
-    'whole-circle': say('Hori zirkulu osoa da: hartu angelua zati 360.', 'Ese es el círculo entero: toma el ángulo entre 360.', 'هذا القرص كاملًا: خذ الزاوية على 360.'),
-    'segment-sector': say('Hori sektorea da: kendu triangelua.', 'Ese es el sector: réstale el triángulo.', 'هذا القطاع: اطرح منه المثلث.'),
-    'triangle-no-half': say('Triangeluaren azalera zati 2 da.', 'El área del triángulo se divide entre 2.', 'مساحة المثلث تُقسم على 2.'),
-    'height-not-apothem': say('Altuera eta apotema ez dira gauza bera: Pitagorasekin pasatu batetik bestera.', 'La altura y la apotema no son lo mismo: pasa de una a otra con Pitágoras.', 'الارتفاع والعامد ليسا الشيء نفسه: انتقل من أحدهما إلى الآخر بفيثاغورس.'),
-    'height-not-generatrix': say('Altuera eta sortzailea ez dira gauza bera: $g^{2}=h^{2}+r^{2}$.', 'La altura y la generatriz no son lo mismo: $g^{2}=h^{2}+r^{2}$.', 'الارتفاع والراسم ليسا الشيء نفسه: $g^{2}=h^{2}+r^{2}$.'),
-    'whole-sphere': say('Begiratu esfera osoa edo erdia den: $4\\pi r^{2}$ esfera osoarena da.', 'Mira si es la esfera entera o media: $4\\pi r^{2}$ es la entera.', 'انظر هل هي كرة كاملة أم نصف: $4\\pi r^{2}$ للكاملة.'),
-    'zone-half': say('Zona esferikoa $2\\pi r h$ da.', 'La zona esférica es $2\\pi r h$.', 'المنطقة الكروية $2\\pi r h$.'),
-    'cone-third': say('Konoaren, piramidearen eta esferaren formuletan zati 3 dago.', 'En las fórmulas del cono, la pirámide y la esfera se divide entre 3.', 'في صيغ المخروط والهرم والكرة قسمة على 3.'),
-    'area-not-volume': say('Hori esferaren azalera da; bolumena $\\frac{4}{3}\\pi r^{3}$.', 'Esa es el área de la esfera; el volumen es $\\frac{4}{3}\\pi r^{3}$.', 'هذه مساحة الكرة؛ والحجم $\\frac{4}{3}\\pi r^{3}$.'),
-    'no-root': say('Hori karratua da: atera erro karratua.', 'Eso es el cuadrado: saca la raíz cuadrada.', 'هذا المربع: استخرج الجذر التربيعي.'),
-    'other-projection': say('Kateto bakoitza bere proiekzioarekin doa, ez bestearekin.', 'Cada cateto va con su propia proyección, no con la otra.', 'كل ضلع قائم مع مسقطه هو لا مع الآخر.'),
-    'one-part': say('Hori proiekzio bat da: hipotenusa bien batura da.', 'Eso es una proyección: la hipotenusa es la suma de las dos.', 'هذا مسقط واحد: الوتر مجموع المسقطين.'),
-    'r-not-squared': say('Azalerak $n^{2}$ bider hazten dira, ez $n$ bider.', 'Las áreas crecen $n^{2}$ veces, no $n$ veces.', 'تكبر المساحات $n^{2}$ مرة لا $n$ مرة.'),
-    'r-not-cubed': say('Bolumenak $n^{3}$ bider hazten dira.', 'Los volúmenes crecen $n^{3}$ veces.', 'تكبر الحجوم $n^{3}$ مرة.'),
-    'cube-root': say('Bolumenen zatidura $k^{3}$ da: atera erro kubikoa.', 'El cociente de volúmenes es $k^{3}$: saca la raíz cúbica.', 'نسبة الحجوم $k^{3}$: استخرج الجذر التكعيبي.'),
-    unit: say('Kontuz unitateekin: $1\\ \\text{m}^{2}=10\\,000\\ \\text{cm}^{2}$ eta $1\\ \\text{m}^{3}=1\\,000\\,000\\ \\text{cm}^{3}$.', 'Cuidado con las unidades: $1\\ \\text{m}^{2}=10\\,000\\ \\text{cm}^{2}$ y $1\\ \\text{m}^{3}=1\\,000\\,000\\ \\text{cm}^{3}$.', 'انتبه للوحدات: $1\\ \\text{m}^{2}=10\\,000\\ \\text{cm}^{2}$ و$1\\ \\text{m}^{3}=1\\,000\\,000\\ \\text{cm}^{3}$.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    'crown-radii': say('Ez kendu erradioak karratura jaso aurretik: $\\pi(R^{2}-r^{2})$.', 'No restes los radios antes de elevarlos al cuadrado: $\\pi(R^{2}-r^{2})$.', 'لا تطرح نصفي القطرين قبل تربيعهما: $\\pi(R^{2}-r^{2})$.', 'Don\'t subtract the radii before squaring them: $\\pi(R^{2}-r^{2})$.'),
+    'missing-part': say('Zati bat falta da: batu edo kendu zati guztiak.', 'Falta una parte: suma o resta todas las partes.', 'ينقص جزء: اجمع أو اطرح كل الأجزاء.', 'A part is missing: add or subtract all the parts.'),
+    'arc-not-area': say('Hori arkuaren luzera da; azalerarako $\\pi r^{2}$.', 'Esa es la longitud del arco; para el área, $\\pi r^{2}$.', 'هذا طول القوس؛ وللمساحة $\\pi r^{2}$.', 'That is the arc length; for the area, use $\\pi r^{2}$.'),
+    'whole-circle': say('Hori zirkulu osoa da: hartu angelua zati 360.', 'Ese es el círculo entero: toma el ángulo entre 360.', 'هذا القرص كاملًا: خذ الزاوية على 360.', 'That is the whole circle: take the angle divided by 360.'),
+    'segment-sector': say('Hori sektorea da: kendu triangelua.', 'Ese es el sector: réstale el triángulo.', 'هذا القطاع: اطرح منه المثلث.', 'That is the sector: subtract the triangle from it.'),
+    'triangle-no-half': say('Triangeluaren azalera zati 2 da.', 'El área del triángulo se divide entre 2.', 'مساحة المثلث تُقسم على 2.', 'Divide the triangle\'s area by 2.'),
+    'height-not-apothem': say('Altuera eta apotema ez dira gauza bera: Pitagorasekin pasatu batetik bestera.', 'La altura y la apotema no son lo mismo: pasa de una a otra con Pitágoras.', 'الارتفاع والعامد ليسا الشيء نفسه: انتقل من أحدهما إلى الآخر بفيثاغورس.', 'The height and the slant height are not the same: use Pythagoras\' theorem to go from one to the other.'),
+    'height-not-generatrix': say('Altuera eta sortzailea ez dira gauza bera: $g^{2}=h^{2}+r^{2}$.', 'La altura y la generatriz no son lo mismo: $g^{2}=h^{2}+r^{2}$.', 'الارتفاع والراسم ليسا الشيء نفسه: $g^{2}=h^{2}+r^{2}$.', 'The height and the slant height are not the same: $g^{2}=h^{2}+r^{2}$.'),
+    'whole-sphere': say('Begiratu esfera osoa edo erdia den: $4\\pi r^{2}$ esfera osoarena da.', 'Mira si es la esfera entera o media: $4\\pi r^{2}$ es la entera.', 'انظر هل هي كرة كاملة أم نصف: $4\\pi r^{2}$ للكاملة.', 'Check whether it is the whole sphere or half of one: $4\\pi r^{2}$ is for the whole sphere.'),
+    'zone-half': say('Zona esferikoa $2\\pi r h$ da.', 'La zona esférica es $2\\pi r h$.', 'المنطقة الكروية $2\\pi r h$.', 'The spherical zone is $2\\pi r h$.'),
+    'cone-third': say('Konoaren, piramidearen eta esferaren formuletan zati 3 dago.', 'En las fórmulas del cono, la pirámide y la esfera se divide entre 3.', 'في صيغ المخروط والهرم والكرة قسمة على 3.', 'In the formulas for the cone, the pyramid and the sphere, you divide by 3.'),
+    'area-not-volume': say('Hori esferaren azalera da; bolumena $\\frac{4}{3}\\pi r^{3}$.', 'Esa es el área de la esfera; el volumen es $\\frac{4}{3}\\pi r^{3}$.', 'هذه مساحة الكرة؛ والحجم $\\frac{4}{3}\\pi r^{3}$.', 'That is the area of the sphere; the volume is $\\frac{4}{3}\\pi r^{3}$.'),
+    'no-root': say('Hori karratua da: atera erro karratua.', 'Eso es el cuadrado: saca la raíz cuadrada.', 'هذا المربع: استخرج الجذر التربيعي.', 'That is the square: take the square root.'),
+    'other-projection': say('Kateto bakoitza bere proiekzioarekin doa, ez bestearekin.', 'Cada cateto va con su propia proyección, no con la otra.', 'كل ضلع قائم مع مسقطه هو لا مع الآخر.', 'Each leg goes with its own projection, not with the other one.'),
+    'one-part': say('Hori proiekzio bat da: hipotenusa bien batura da.', 'Eso es una proyección: la hipotenusa es la suma de las dos.', 'هذا مسقط واحد: الوتر مجموع المسقطين.', 'That is one projection: the hypotenuse is the sum of the two.'),
+    'r-not-squared': say('Azalerak $n^{2}$ bider hazten dira, ez $n$ bider.', 'Las áreas crecen $n^{2}$ veces, no $n$ veces.', 'تكبر المساحات $n^{2}$ مرة لا $n$ مرة.', 'Areas grow $n^{2}$ times, not $n$ times.'),
+    'r-not-cubed': say('Bolumenak $n^{3}$ bider hazten dira.', 'Los volúmenes crecen $n^{3}$ veces.', 'تكبر الحجوم $n^{3}$ مرة.', 'Volumes grow $n^{3}$ times.'),
+    'cube-root': say('Bolumenen zatidura $k^{3}$ da: atera erro kubikoa.', 'El cociente de volúmenes es $k^{3}$: saca la raíz cúbica.', 'نسبة الحجوم $k^{3}$: استخرج الجذر التكعيبي.', 'The ratio of the volumes is $k^{3}$: take the cube root.'),
+    unit: say('Kontuz unitateekin: $1\\ \\text{m}^{2}=10\\,000\\ \\text{cm}^{2}$ eta $1\\ \\text{m}^{3}=1\\,000\\,000\\ \\text{cm}^{3}$.', 'Cuidado con las unidades: $1\\ \\text{m}^{2}=10\\,000\\ \\text{cm}^{2}$ y $1\\ \\text{m}^{3}=1\\,000\\,000\\ \\text{cm}^{3}$.', 'انتبه للوحدات: $1\\ \\text{m}^{2}=10\\,000\\ \\text{cm}^{2}$ و$1\\ \\text{m}^{3}=1\\,000\\,000\\ \\text{cm}^{3}$.', 'Be careful with units: $1\\ \\text{m}^{2}=10\\,000\\ \\text{cm}^{2}$ and $1\\ \\text{m}^{3}=1\\,000\\,000\\ \\text{cm}^{3}$.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

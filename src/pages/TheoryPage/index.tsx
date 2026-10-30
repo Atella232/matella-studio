@@ -770,7 +770,7 @@ function MultiplicacionContent() {
                         <span className="line"></span>
                         <span className="den">3</span>
                     </span>
-                    <span> de 15 = </span>
+                    <span>{t('theory.content.multiply.fractionOfNumberConnector')}</span>
                     <span className="fraction-display">
                         <span className="num">2</span>
                         <span className="line"></span>

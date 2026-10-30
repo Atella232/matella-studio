@@ -31,7 +31,7 @@ export function PythagorasLaboratory(props: {
             tools={pythagorasLabTools}
             stages={pythagorasStages}
             components={toolComponents}
-            title={{ eu: 'Eraiki, neurtu eta egiaztatu', es: 'Construye, mide y comprueba', ar: 'أنشئ وقِس وتحقّق' }}
+            title={{ eu: 'Eraiki, neurtu eta egiaztatu', es: 'Construye, mide y comprueba', en: 'Build, measure and check', ar: 'أنشئ وقِس وتحقّق' }}
         />
     )
 }

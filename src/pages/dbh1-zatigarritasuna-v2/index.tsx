@@ -13,16 +13,17 @@ import { divisibilityIntroStages, divisibilityIntroTopics } from './lessons'
 const zatigarritasunaIntroUnit: UnitDefinition = {
     storagePrefix: 'matella-zatigarritasuna-dbh1',
     coursePath: '/matematika/dbh1',
-    courseTitle: { eu: '1. DBH', es: '1.º ESO', ar: 'الصف الأول' },
-    title: { eu: 'Zatigarritasuna', es: 'Divisibilidad', ar: 'قابلية القسمة' },
-    documentTitle: { eu: 'Zatigarritasuna · 1. DBH', es: 'Divisibilidad · 1.º ESO', ar: 'قابلية القسمة · الصف الأول' },
+    courseTitle: { eu: '1. DBH', es: '1.º ESO', en: '1st ESO', ar: 'الصف الأول' },
+    title: { eu: 'Zatigarritasuna', es: 'Divisibilidad', en: 'Divisibility', ar: 'قابلية القسمة' },
+    documentTitle: { eu: 'Zatigarritasuna · 1. DBH', es: 'Divisibilidad · 1.º ESO', en: 'Divisibility · 1st ESO', ar: 'قابلية القسمة · الصف الأول' },
     tagline: {
         eu: 'Arkatzak poltsetan, ikasleak taldeetan eta igerilekuko egunak: ikasi multiploak eta zatitzaileak aurkitzen, zenbakiak deskonposatzen eta ZKH eta MKT erabiltzen.',
         es: 'Lápices en bolsas, alumnos en grupos y días de piscina: aprende a encontrar múltiplos y divisores, a descomponer números y a usar el m.c.d. y el m.c.m.',
+        en: 'Pencils in bags, students in groups and pool days: learn to find multiples and divisors, to factorise numbers and to use the GCD and the LCM.',
         ar: 'أقلام في أكياس وتلاميذ في مجموعات وأيام المسبح: تعلّم إيجاد المضاعفات والقواسم وتحليل الأعداد واستعمال ق.م.أ وم.م.أ.'
     },
     heroArt: <DivisibilityIntroHeroArt />,
-    pathSubtitle: { eu: 'Bost etapa, zatiketa zehatzetik ZKH eta MKTko buruketetara', es: 'Cinco etapas, de la división exacta a los problemas de m.c.d. y m.c.m.', ar: 'خمس مراحل، من القسمة التامة إلى مسائل ق.م.أ وم.م.أ' },
+    pathSubtitle: { eu: 'Bost etapa, zatiketa zehatzetik ZKH eta MKTko buruketetara', es: 'Cinco etapas, de la división exacta a los problemas de m.c.d. y m.c.m.', en: 'Five stages, from exact division to GCD and LCM problems.', ar: 'خمس مراحل، من القسمة التامة إلى مسائل ق.م.أ وم.م.أ' },
     stages: divisibilityIntroStages,
     topics: divisibilityIntroTopics,
     diagnostic: divisibilityIntroDiagnostic,
@@ -30,32 +31,32 @@ const zatigarritasunaIntroUnit: UnitDefinition = {
     exerciseBank: divisibilityIntroExerciseBank,
     challenges: divisibilityIntroChallenges,
     lab: {
-        description: { eu: `${divisibilityIntroLabTools.length} tresna multiploak, zatitzaileak, irizpideak, lehenak, ZKH eta MKT ukitzeko, erronkekin.`, es: `${divisibilityIntroLabTools.length} herramientas para tocar múltiplos, divisores, criterios, primos, m.c.d. y m.c.m., con retos.`, ar: `${divisibilityIntroLabTools.length} أدوات للمس المضاعفات والقواسم والقواعد والأعداد الأولية وق.م.أ وم.م.أ، مع تحديات.` },
+        description: { eu: `${divisibilityIntroLabTools.length} tresna multiploak, zatitzaileak, irizpideak, lehenak, ZKH eta MKT ukitzeko, erronkekin.`, es: `${divisibilityIntroLabTools.length} herramientas para tocar múltiplos, divisores, criterios, primos, m.c.d. y m.c.m., con retos.`, en: `${divisibilityIntroLabTools.length} tools to explore multiples, divisors, rules, primes, GCD and LCM, with challenges.`, ar: `${divisibilityIntroLabTools.length} أدوات للمس المضاعفات والقواسم والقواعد والأعداد الأولية وق.م.أ وم.م.أ، مع تحديات.` },
         progressIds: divisibilityIntroLabChallengeIds,
         toolForTopic: divisibilityIntroLabToolForTopic,
         render: (props) => <DivisibilityIntroLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Lau joko multiploekin, irizpideekin, lehenekin, ZKH eta MKTrekin azkar aritzeko.', es: 'Cuatro juegos para ganar rapidez con múltiplos, criterios, primos, m.c.d. y m.c.m.', ar: 'أربع ألعاب لاكتساب السرعة مع المضاعفات والقواعد والأعداد الأولية وق.م.أ وم.م.أ.' },
+        description: { eu: 'Lau joko multiploekin, irizpideekin, lehenekin, ZKH eta MKTrekin azkar aritzeko.', es: 'Cuatro juegos para ganar rapidez con múltiplos, criterios, primos, m.c.d. y m.c.m.', en: 'Four games to build speed with multiples, rules, primes, GCD and LCM.', ar: 'أربع ألعاب لاكتساب السرعة مع المضاعفات والقواعد والأعداد الأولية وق.م.أ وم.م.أ.' },
         progressIds: introDivisibilityGameProgressIds,
         recordsKey: INTRO_DIVISIBILITY_GAME_RECORDS_KEY,
         render: (props) => <DivisibilityIntroGames {...props} />
     },
     answers: {
-        note: { eu: 'Idatzi emaitza zenbaki gisa, adibidez 12.', es: 'Escribe el resultado como un número, por ejemplo 12.', ar: 'اكتب النتيجة عددًا، مثل 12.' },
+        note: { eu: 'Idatzi emaitza zenbaki gisa, adibidez 12.', es: 'Escribe el resultado como un número, por ejemplo 12.', en: 'Write the result as a number, for example 12.', ar: 'اكتب النتيجة عددًا، مثل 12.' },
         defaultForm: 'simplified',
         inputMode: 'numeric',
         normalizeInput: readNaturalAnswer,
-        placeholder: () => ({ eu: 'Adib.: 12', es: 'Ej.: 12', ar: 'مثال: 12' }),
-        wrongForm: () => ({ eu: 'Balioa zuzena da, baina idatzi zenbaki oso gisa.', es: 'El valor es correcto, pero escríbelo como número entero.', ar: 'القيمة صحيحة، لكن اكتبها عددًا صحيحًا.' }),
-        unreadable: { eu: 'Ez dut erantzun hori ulertzen. Idatzi zenbaki bat, adibidez 12.', es: 'No entiendo esa respuesta. Escribe un número, por ejemplo 12.', ar: 'لم أفهم هذه الإجابة. اكتب عددًا، مثل 12.' }
+        placeholder: () => ({ eu: 'Adib.: 12', es: 'Ej.: 12', en: 'E.g.: 12', ar: 'مثال: 12' }),
+        wrongForm: () => ({ eu: 'Balioa zuzena da, baina idatzi zenbaki oso gisa.', es: 'El valor es correcto, pero escríbelo como número entero.', en: 'The value is correct, but write it as an integer.', ar: 'القيمة صحيحة، لكن اكتبها عددًا صحيحًا.' }),
+        unreadable: { eu: 'Ez dut erantzun hori ulertzen. Idatzi zenbaki bat, adibidez 12.', es: 'No entiendo esa respuesta. Escribe un número, por ejemplo 12.', en: 'I don\'t understand that answer. Write a number, for example 12.', ar: 'لم أفهم هذه الإجابة. اكتب عددًا، مثل 12.' }
     },
     errorByStage: {
-        multiples: { eu: 'Multiploak lortzeko biderkatu; zatitzaileak lortzeko, bilatu hondarra 0 duten zatiketak.', es: 'Para múltiplos, multiplica; para divisores, busca divisiones con resto 0.', ar: 'للمضاعفات اضرب، وللقواسم ابحث عن القسمة التي باقيها 0.' },
-        criteria: { eu: 'Berrikusi irizpidea: azken zifra (2, 5, 10) edo zifren batura (3, 9).', es: 'Repasa el criterio: última cifra (2, 5, 10) o suma de cifras (3, 9).', ar: 'راجع القاعدة: الرقم الأخير (2، 5، 10) أو مجموع الأرقام (3، 9).' },
-        primes: { eu: 'Zatitu lehen txikienetik hasita (2, 3, 5, 7…), eta egiaztatu biderkagai guztiak lehenak direla.', es: 'Divide empezando por el primo más pequeño (2, 3, 5, 7…) y comprueba que todos los factores son primos.', ar: 'اقسم بدءًا بأصغر عدد أولي (2، 3، 5، 7…) وتحقق أن كل العوامل أولية.' },
-        'gcd-lcm': { eu: 'ZKH: zatitzaile komunetako handiena. MKT: multiplo komunetako txikiena.', es: 'm.c.d.: el mayor de los divisores comunes. m.c.m.: el menor de los múltiplos comunes.', ar: 'ق.م.أ: أكبر القواسم المشتركة. م.م.أ: أصغر المضاعفات المشتركة.' },
-        problems: { eu: 'Erabaki lehenik: banatu (ZKH) ala bat etorri (MKT)? Eta eman emaitza unitateekin.', es: 'Decide primero: ¿repartir (m.c.d.) o coincidir (m.c.m.)? Y da el resultado con unidades.', ar: 'قرّر أولًا: توزيع (ق.م.أ) أم تزامن (م.م.أ)؟ ثم اكتب النتيجة مع الوحدات.' }
+        multiples: { eu: 'Multiploak lortzeko biderkatu; zatitzaileak lortzeko, bilatu hondarra 0 duten zatiketak.', es: 'Para múltiplos, multiplica; para divisores, busca divisiones con resto 0.', en: 'For multiples, multiply; for divisors, look for divisions with remainder 0.', ar: 'للمضاعفات اضرب، وللقواسم ابحث عن القسمة التي باقيها 0.' },
+        criteria: { eu: 'Berrikusi irizpidea: azken zifra (2, 5, 10) edo zifren batura (3, 9).', es: 'Repasa el criterio: última cifra (2, 5, 10) o suma de cifras (3, 9).', en: 'Check the rule: last digit (2, 5, 10) or sum of digits (3, 9).', ar: 'راجع القاعدة: الرقم الأخير (2، 5، 10) أو مجموع الأرقام (3، 9).' },
+        primes: { eu: 'Zatitu lehen txikienetik hasita (2, 3, 5, 7…), eta egiaztatu biderkagai guztiak lehenak direla.', es: 'Divide empezando por el primo más pequeño (2, 3, 5, 7…) y comprueba que todos los factores son primos.', en: 'Divide starting with the smallest prime (2, 3, 5, 7…), and check that all the factors are prime.', ar: 'اقسم بدءًا بأصغر عدد أولي (2، 3، 5، 7…) وتحقق أن كل العوامل أولية.' },
+        'gcd-lcm': { eu: 'ZKH: zatitzaile komunetako handiena. MKT: multiplo komunetako txikiena.', es: 'm.c.d.: el mayor de los divisores comunes. m.c.m.: el menor de los múltiplos comunes.', en: 'GCD: the greatest of the common divisors. LCM: the least of the common multiples.', ar: 'ق.م.أ: أكبر القواسم المشتركة. م.م.أ: أصغر المضاعفات المشتركة.' },
+        problems: { eu: 'Erabaki lehenik: banatu (ZKH) ala bat etorri (MKT)? Eta eman emaitza unitateekin.', es: 'Decide primero: ¿repartir (m.c.d.) o coincidir (m.c.m.)? Y da el resultado con unidades.', en: 'Decide first: share out (GCD) or coincide (LCM)? And give the answer with units.', ar: 'قرّر أولًا: توزيع (ق.م.أ) أم تزامن (م.م.أ)؟ ثم اكتب النتيجة مع الوحدات.' }
     }
 }
 

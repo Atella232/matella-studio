@@ -22,13 +22,13 @@ export function TableTool(props: LabToolProps) {
 
     const controls = (
         <>
-            <NumberField label={l({ eu: 'Zenbakia', es: 'Número', ar: 'العدد' })} value={value} min={TABLE_LIMITS.min} max={TABLE_LIMITS.max} onChange={(next) => setState((current) => setTableValue(current, next))} language={props.language} />
-            <div className="divisibility-table-suggestions" role="group" aria-label={l({ eu: 'Liburuko zenbakiak', es: 'Números del libro', ar: 'أعداد الكتاب' })}>
+            <NumberField label={l({ eu: 'Zenbakia', es: 'Número', en: 'Number', ar: 'العدد' })} value={value} min={TABLE_LIMITS.min} max={TABLE_LIMITS.max} onChange={(next) => setState((current) => setTableValue(current, next))} language={props.language} />
+            <div className="divisibility-table-suggestions" role="group" aria-label={l({ eu: 'Liburuko zenbakiak', es: 'Números del libro', en: 'Numbers from the book', ar: 'أعداد الكتاب' })}>
                 {SUGGESTIONS.map((suggestion) => (
                     <button type="button" aria-pressed={value === suggestion} onClick={() => setState((current) => setTableValue(current, suggestion))} key={suggestion}>{suggestion}</button>
                 ))}
             </div>
-            <button type="button" className="fraction-v2-secondary" onClick={() => setState((current) => setTableValue(current, current.value))}>{l({ eu: 'Garbitu taula', es: 'Borrar la tabla', ar: 'امسح الجدول' })}</button>
+            <button type="button" className="fraction-v2-secondary" onClick={() => setState((current) => setTableValue(current, current.value))}>{l({ eu: 'Garbitu taula', es: 'Borrar la tabla', en: 'Clear the table', ar: 'امسح الجدول' })}</button>
         </>
     )
 
@@ -36,18 +36,18 @@ export function TableTool(props: LabToolProps) {
         <>
             <span className="divisibility-found">
                 <MathText text={`$${divisorsLatex(props.language)}(${value})=\\{${all.map((divisor) => (found.includes(divisor) ? String(divisor) : '\\square')).join(',\\ ')}\\}$`} />
-                <small>{l({ eu: `${found.length} / ${all.length} gelaxka zuzen`, es: `${found.length} de ${all.length} casillas bien`, ar: `${found.length} من ${all.length} خانات صحيحة` })}</small>
+                <small>{l({ eu: `${found.length} / ${all.length} gelaxka zuzen`, es: `${found.length} de ${all.length} casillas bien`, en: `${found.length} of ${all.length} cells correct`, ar: `${found.length} من ${all.length} خانات صحيحة` })}</small>
             </span>
             {complete && (
                 <>
-                    <span className="fraction-v2-lab-readout-note">{l({ eu: `Taula osatuta. Zenbat zatitzaile ditu ${value} zenbakiak?`, es: `Tabla completa. ¿Cuántos divisores tiene ${value}?`, ar: `اكتمل الجدول. كم قاسمًا للعدد ${value}؟` })}</span>
+                    <span className="fraction-v2-lab-readout-note">{l({ eu: `Taula osatuta. Zenbat zatitzaile ditu ${value} zenbakiak?`, es: `Tabla completa. ¿Cuántos divisores tiene ${value}?`, en: `Table complete. How many divisors does ${value} have?`, ar: `اكتمل الجدول. كم قاسمًا للعدد ${value}؟` })}</span>
                     <WholeAnswer language={props.language} state={state} expected={{ numerator: all.length, denominator: 1 }} onChange={(patch) => setState((current) => ({ ...current, ...patch }))} />
                 </>
             )}
         </>
     ) : (
         <span className="fraction-v2-lab-readout-note">
-            {l({ eu: `${value} zenbakiak hiru lehen desberdin edo gehiago ditu; taula honek bat edo bi lehenekin funtzionatzen du. Aukeratu beste zenbaki bat.`, es: `${value} tiene tres primos distintos o más; esta tabla funciona con uno o dos primos. Elige otro número.`, ar: `للعدد ${value} ثلاثة عوامل أولية مختلفة أو أكثر؛ هذا الجدول يعمل مع عامل أو عاملين. اختر عددًا آخر.` })}
+            {l({ eu: `${value} zenbakiak hiru lehen desberdin edo gehiago ditu; taula honek bat edo bi lehenekin funtzionatzen du. Aukeratu beste zenbaki bat.`, es: `${value} tiene tres primos distintos o más; esta tabla funciona con uno o dos primos. Elige otro número.`, en: `${value} has three or more different primes; this table works with one or two primes. Choose another number.`, ar: `للعدد ${value} ثلاثة عوامل أولية مختلفة أو أكثر؛ هذا الجدول يعمل مع عامل أو عاملين. اختر عددًا آخر.` })}
         </span>
     )
 

@@ -39,7 +39,7 @@ export function EquationsInequalitiesLaboratory(props: {
             tools={equationsInequalitiesLabTools}
             stages={equationsInequalitiesStages}
             components={toolComponents}
-            title={{ eu: 'Ebatzi, egiaztatu eta marraztu', es: 'Resuelve, comprueba y dibuja', ar: 'حلّ وتحقّق وارسم' }}
+            title={{ eu: 'Ebatzi, egiaztatu eta marraztu', es: 'Resuelve, comprueba y dibuja', en: 'Solve, check and draw', ar: 'حلّ وتحقّق وارسم' }}
         />
     )
 }

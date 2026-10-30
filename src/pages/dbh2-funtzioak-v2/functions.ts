@@ -52,13 +52,13 @@ export function quadrantText(point: Point): LocalizedText {
     const quadrant = quadrantOf(point)
     if (quadrant > 0) {
         const roman = quadrantRoman[quadrant]
-        return { eu: `${roman}. koadrantea`, es: `${roman} cuadrante`, ar: `الربع ${roman}` }
+        return { eu: `${roman}. koadrantea`, es: `${roman} cuadrante`, en: `quadrant ${roman}`, ar: `الربع ${roman}` }
     }
     const [x, y] = point
-    if (x === 0 && y === 0) return { eu: 'jatorria', es: 'el origen', ar: 'نقطة الأصل' }
+    if (x === 0 && y === 0) return { eu: 'jatorria', es: 'el origen', en: 'the origin', ar: 'نقطة الأصل' }
     return y === 0
-        ? { eu: 'X ardatzean', es: 'en el eje X', ar: 'على محور X' }
-        : { eu: 'Y ardatzean', es: 'en el eje Y', ar: 'على محور Y' }
+        ? { eu: 'X ardatzean', es: 'en el eje X', en: 'on the x-axis', ar: 'على محور X' }
+        : { eu: 'Y ardatzean', es: 'en el eje Y', en: 'on the y-axis', ar: 'على محور Y' }
 }
 
 /* ---------- Relations and functions ---------- */
@@ -101,42 +101,42 @@ export interface StoryGraph {
 export const storyGraphs: StoryGraph[] = [
     {
         id: 'temperature',
-        title: { eu: 'Tenperatura egun batean', es: 'Temperatura a lo largo del día', ar: 'درجة الحرارة خلال اليوم' },
-        short: { eu: 'Tenperatura', es: 'Temperatura', ar: 'الحرارة' },
-        xLabel: { eu: 'ordua (h)', es: 'hora (h)', ar: 'الساعة (س)' },
-        yLabel: { eu: 'tenperatura (°C)', es: 'temperatura (°C)', ar: 'الحرارة (°م)' },
+        title: { eu: 'Tenperatura egun batean', es: 'Temperatura a lo largo del día', en: 'Temperature during the day', ar: 'درجة الحرارة خلال اليوم' },
+        short: { eu: 'Tenperatura', es: 'Temperatura', en: 'Temperature', ar: 'الحرارة' },
+        xLabel: { eu: 'ordua (h)', es: 'hora (h)', en: 'hour (h)', ar: 'الساعة (س)' },
+        yLabel: { eu: 'tenperatura (°C)', es: 'temperatura (°C)', en: 'temperature (°C)', ar: 'الحرارة (°م)' },
         points: [[0, 3], [1, 2], [2, 1], [3, 4], [4, 8], [5, 11], [6, 12], [7, 9], [8, 6]]
     },
     {
         id: 'plane',
-        title: { eu: 'Hegazkin baten altuera', es: 'Altura de una avioneta', ar: 'ارتفاع طائرة صغيرة' },
-        short: { eu: 'Hegazkina', es: 'Avioneta', ar: 'الطائرة' },
-        xLabel: { eu: 'denbora (h)', es: 'tiempo (h)', ar: 'الزمن (س)' },
-        yLabel: { eu: 'altuera (km)', es: 'altura (km)', ar: 'الارتفاع (كم)' },
+        title: { eu: 'Hegazkin baten altuera', es: 'Altura de una avioneta', en: 'Height of a small plane', ar: 'ارتفاع طائرة صغيرة' },
+        short: { eu: 'Hegazkina', es: 'Avioneta', en: 'Small plane', ar: 'الطائرة' },
+        xLabel: { eu: 'denbora (h)', es: 'tiempo (h)', en: 'time (h)', ar: 'الزمن (س)' },
+        yLabel: { eu: 'altuera (km)', es: 'altura (km)', en: 'height (km)', ar: 'الارتفاع (كم)' },
         points: [[0, 0], [1, 2], [2, 4], [3, 4], [4, 4], [5, 6], [6, 3], [7, 1], [8, 0]]
     },
     {
         id: 'speed',
-        title: { eu: 'Lasterketa-auto baten abiadura', es: 'Velocidad de un coche de carreras', ar: 'سرعة سيارة سباق' },
-        short: { eu: 'Abiadura', es: 'Velocidad', ar: 'السرعة' },
-        xLabel: { eu: 'ibilbidea (km)', es: 'recorrido (km)', ar: 'المسافة (كم)' },
-        yLabel: { eu: 'abiadura (×10 km/h)', es: 'velocidad (×10 km/h)', ar: 'السرعة (×10 كم/س)' },
+        title: { eu: 'Lasterketa-auto baten abiadura', es: 'Velocidad de un coche de carreras', en: 'Speed of a racing car', ar: 'سرعة سيارة سباق' },
+        short: { eu: 'Abiadura', es: 'Velocidad', en: 'Speed', ar: 'السرعة' },
+        xLabel: { eu: 'ibilbidea (km)', es: 'recorrido (km)', en: 'distance (km)', ar: 'المسافة (كم)' },
+        yLabel: { eu: 'abiadura (×10 km/h)', es: 'velocidad (×10 km/h)', en: 'speed (×10 km/h)', ar: 'السرعة (×10 كم/س)' },
         points: [[0, 1], [1, 3], [2, 6], [3, 8], [4, 5], [5, 2], [6, 5], [7, 7], [8, 4]]
     },
     {
         id: 'tank',
-        title: { eu: 'Depositu bat hustuz', es: 'Un depósito que se vacía', ar: 'خزان يفرغ' },
-        short: { eu: 'Depositua', es: 'Depósito', ar: 'الخزان' },
-        xLabel: { eu: 'denbora (min)', es: 'tiempo (min)', ar: 'الزمن (د)' },
-        yLabel: { eu: 'ura (litro)', es: 'agua (litros)', ar: 'الماء (لتر)' },
+        title: { eu: 'Depositu bat hustuz', es: 'Un depósito que se vacía', en: 'A tank that empties', ar: 'خزان يفرغ' },
+        short: { eu: 'Depositua', es: 'Depósito', en: 'Tank', ar: 'الخزان' },
+        xLabel: { eu: 'denbora (min)', es: 'tiempo (min)', en: 'time (min)', ar: 'الزمن (د)' },
+        yLabel: { eu: 'ura (litro)', es: 'agua (litros)', en: 'water (litres)', ar: 'الماء (لتر)' },
         points: [[0, 8], [1, 7], [2, 5], [3, 4], [4, 2], [5, 0]]
     },
     {
         id: 'abstract',
-        title: { eu: 'Funtzio bat', es: 'Una función', ar: 'دالة' },
-        short: { eu: 'f(x)', es: 'f(x)', ar: 'f(x)' },
-        xLabel: { eu: 'x', es: 'x', ar: 'x' },
-        yLabel: { eu: 'y', es: 'y', ar: 'y' },
+        title: { eu: 'Funtzio bat', es: 'Una función', en: 'A function', ar: 'دالة' },
+        short: { eu: 'f(x)', es: 'f(x)', en: 'f(x)', ar: 'f(x)' },
+        xLabel: { eu: 'x', es: 'x', en: 'x', ar: 'x' },
+        yLabel: { eu: 'y', es: 'y', en: 'y', ar: 'y' },
         points: [[-4, -2], [-3, 0], [-2, 2], [-1, 3], [0, 2], [1, 0], [2, -2], [3, -3], [4, -1], [5, 0]]
     }
 ]
@@ -226,7 +226,7 @@ export function specValue(spec: GraphSpec, x: number, curve = 0): number | null 
 }
 
 export const trendWord: Record<Trend, LocalizedText> = {
-    up: { eu: 'gorakorra', es: 'creciente', ar: 'متزايدة' },
-    down: { eu: 'beherakorra', es: 'decreciente', ar: 'متناقصة' },
-    flat: { eu: 'konstantea', es: 'constante', ar: 'ثابتة' }
+    up: { eu: 'gorakorra', es: 'creciente', en: 'increasing', ar: 'متزايدة' },
+    down: { eu: 'beherakorra', es: 'decreciente', en: 'decreasing', ar: 'متناقصة' },
+    flat: { eu: 'konstantea', es: 'constante', en: 'constant', ar: 'ثابتة' }
 }

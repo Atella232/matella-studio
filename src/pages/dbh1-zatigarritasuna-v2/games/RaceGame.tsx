@@ -12,8 +12,8 @@ const introRace: RaceRules<IntroDivisibilityRaceError> = {
     parTime: introDivisibilityParTime,
     errorTip: (error) => introDivisibilityRaceErrorTips[error ?? 'calculation'],
     pitPlaceholder: () => '12',
-    pitUnreadable: { eu: 'Idatzi zenbaki bat, adibidez 12.', es: 'Escribe un número, por ejemplo 12.', ar: 'اكتب عددًا، مثل 12.' },
-    pitWrongForm: { eu: 'Idatzi zenbaki oso gisa.', es: 'Escríbelo como número entero.', ar: 'اكتبه عددًا صحيحًا.' }
+    pitUnreadable: { eu: 'Idatzi zenbaki bat, adibidez 12.', es: 'Escribe un número, por ejemplo 12.', en: 'Write a number, for example 12.', ar: 'اكتب عددًا، مثل 12.' },
+    pitWrongForm: { eu: 'Idatzi zenbaki oso gisa.', es: 'Escríbelo como número entero.', en: 'Write it as an integer.', ar: 'اكتبه عددًا صحيحًا.' }
 }
 
 export function IntroDivisibilityRaceGame(props: GameProps) {

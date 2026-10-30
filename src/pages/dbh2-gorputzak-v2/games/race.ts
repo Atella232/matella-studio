@@ -37,8 +37,8 @@ export type SolidsRaceError =
 export type SolidsRaceQuestion = RaceQuestion<SolidsRaceError>
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, ar: latex.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, en: latex, ar: latex.replace(/\{,\}/g, '.') })
 const math = (latex: string) => `$${latex}$`
 
 /** An exact decimal in LaTeX with the comma ({,}); only values that end with at most two decimals */
@@ -92,9 +92,9 @@ function question(circuit: number, kind: string, prompt: LocalizedText, choices:
 
 type Element = 'faces' | 'edges' | 'vertices'
 const elementName: Record<Element, LocalizedText> = {
-    faces: say('aurpegi', 'caras', 'وجهًا'),
-    edges: say('ertz', 'aristas', 'حرفًا'),
-    vertices: say('erpin', 'vértices', 'رأسًا')
+    faces: say('aurpegi', 'caras', 'وجهًا', 'faces'),
+    edges: say('ertz', 'aristas', 'حرفًا', 'edges'),
+    vertices: say('erpin', 'vértices', 'رأسًا', 'vertices')
 }
 const counts = (prism: boolean, sides: number): Record<Element, number> => (prism ? { faces: sides + 2, edges: 3 * sides, vertices: 2 * sides } : { faces: sides + 1, edges: 2 * sides, vertices: sides + 1 })
 
@@ -113,7 +113,7 @@ function countQuestion(random: Random, tier: Tier): SolidsRaceQuestion | null {
     return question(0, `count-${element}`, say(
         `${prism ? 'Prisma' : 'Piramide'} baten oinarriak ${math(String(sides))} alde ditu. Zenbat ${elementName[element].eu} ditu?`,
         `${prism ? 'Un prisma' : 'Una pirámide'} tiene una base de ${math(String(sides))} lados. ¿${many} ${elementName[element].es} tiene?`,
-        `لقاعدة ${prism ? 'منشور' : 'هرم'} ${math(String(sides))} أضلاع. كم ${elementName[element].ar} له؟`
+        `لقاعدة ${prism ? 'منشور' : 'هرم'} ${math(String(sides))} أضلاع. كم ${elementName[element].ar} له؟`, `${prism ? 'A prism' : 'A pyramid'} has a base with ${math(String(sides))} sides. How many ${elementName[element].en} does it have?`
     ), choices, n(right), same(math(formula)))
 }
 
@@ -128,15 +128,15 @@ function eulerQuestion(random: Random, tier: Tier): SolidsRaceQuestion | null {
     const choices = options(random, n(right), [{ value: n(wrongEuler), error: 'euler' }, { value: n(noTwo), error: 'euler' }, ...near(n(right))])
     if (!choices) return null
     const known = unknown === 'edges'
-        ? say(`${math(String(faces))} aurpegi eta ${math(String(vertices))} erpin`, `${math(String(faces))} caras y ${math(String(vertices))} vértices`, `${math(String(faces))} وجهًا و${math(String(vertices))} رأسًا`)
+        ? say(`${math(String(faces))} aurpegi eta ${math(String(vertices))} erpin`, `${math(String(faces))} caras y ${math(String(vertices))} vértices`, `${math(String(faces))} وجهًا و${math(String(vertices))} رأسًا`, `${math(String(faces))} faces and ${math(String(vertices))} vertices`)
         : unknown === 'faces'
-            ? say(`${math(String(vertices))} erpin eta ${math(String(edges))} ertz`, `${math(String(vertices))} vértices y ${math(String(edges))} aristas`, `${math(String(vertices))} رأسًا و${math(String(edges))} حرفًا`)
-            : say(`${math(String(faces))} aurpegi eta ${math(String(edges))} ertz`, `${math(String(faces))} caras y ${math(String(edges))} aristas`, `${math(String(faces))} وجهًا و${math(String(edges))} حرفًا`)
+            ? say(`${math(String(vertices))} erpin eta ${math(String(edges))} ertz`, `${math(String(vertices))} vértices y ${math(String(edges))} aristas`, `${math(String(vertices))} رأسًا و${math(String(edges))} حرفًا`, `${math(String(vertices))} vertices and ${math(String(edges))} edges`)
+            : say(`${math(String(faces))} aurpegi eta ${math(String(edges))} ertz`, `${math(String(faces))} caras y ${math(String(edges))} aristas`, `${math(String(faces))} وجهًا و${math(String(edges))} حرفًا`, `${math(String(faces))} faces and ${math(String(edges))} edges`)
     const solution = unknown === 'edges' ? `${faces}+${vertices}-2=${right}` : unknown === 'faces' ? `${edges}+2-${vertices}=${right}` : `${edges}+2-${faces}=${right}`
     return question(0, `euler-${unknown}`, say(
         `Poliedro ganbil batek ${known.eu} ditu. Zenbat ${elementName[unknown].eu} ditu?`,
         `Un poliedro convexo tiene ${known.es}. ¿Cuántas ${elementName[unknown].es} tiene?`.replace('Cuántas vértices', 'Cuántos vértices'),
-        `لمتعدد أوجه محدّب ${known.ar}. كم ${elementName[unknown].ar} له؟`
+        `لمتعدد أوجه محدّب ${known.ar}. كم ${elementName[unknown].ar} له؟`, `A convex polyhedron has ${known.en}. How many ${elementName[unknown].en} does it have?`
     ), choices, n(right), same(math(solution)))
 }
 
@@ -150,7 +150,7 @@ function cubeQuestion(random: Random, tier: Tier): SolidsRaceQuestion | null {
     return question(1, 'cube', say(
         `Kubo baten ertza ${math(wn(edge))} cm da. Zein da azalera osoa (cm²)?`,
         `La arista de un cubo mide ${math(wn(edge))} cm. ¿Cuál es su área total (cm²)?`,
-        `طول حرف مكعب ${math(wn(edge))} سم. ما مساحته الكلية (سم²)؟`
+        `طول حرف مكعب ${math(wn(edge))} سم. ما مساحته الكلية (سم²)؟`, `The edge of a cube measures ${math(wn(edge))} cm. What is its total area (cm²)?`
     ), choices, right, same(math(`6\\cdot ${wn(edge)}^{2}=${w(right)}`)))
 }
 
@@ -165,7 +165,7 @@ function cuboidQuestion(random: Random, tier: Tier): SolidsRaceQuestion | null {
     return question(1, 'cuboid', say(
         `Ortoedro baten neurriak ${math(`${a}`)} cm, ${math(`${b}`)} cm eta ${math(`${c}`)} cm dira. Zein da azalera osoa (cm²)?`,
         `Un ortoedro mide ${math(`${a}`)} cm, ${math(`${b}`)} cm y ${math(`${c}`)} cm. ¿Cuál es su área total (cm²)?`,
-        `أبعاد متوازي مستطيلات ${math(`${a}`)} سم و${math(`${b}`)} سم و${math(`${c}`)} سم. ما مساحته الكلية (سم²)؟`
+        `أبعاد متوازي مستطيلات ${math(`${a}`)} سم و${math(`${b}`)} سم و${math(`${c}`)} سم. ما مساحته الكلية (سم²)؟`, `A cuboid measures ${math(`${a}`)} cm, ${math(`${b}`)} cm and ${math(`${c}`)} cm. What is its total area (cm²)?`
     ), choices, right, same(math(`2\\cdot (${a}\\cdot ${b}+${a}\\cdot ${c}+${b}\\cdot ${c})=${w(right)}`)))
 }
 
@@ -187,21 +187,21 @@ function pyramidQuestion(random: Random, tier: Tier): SolidsRaceQuestion | null 
     ])
     if (!choices) return null
     const data = given === 'apothem'
-        ? say(`oinarria ${math(String(side))} cm-ko aldeko karratua da eta apotema ${math(String(apothem))} cm`, `la base es un cuadrado de ${math(String(side))} cm de lado y la apotema mide ${math(String(apothem))} cm`, `قاعدته مربع طول ضلعه ${math(String(side))} سم وعامده ${math(String(apothem))} سم`)
-        : say(`oinarria ${math(String(side))} cm-ko aldeko karratua da eta altuera ${math(String(height))} cm`, `la base es un cuadrado de ${math(String(side))} cm de lado y la altura mide ${math(String(height))} cm`, `قاعدته مربع طول ضلعه ${math(String(side))} سم وارتفاعه ${math(String(height))} سم`)
+        ? say(`oinarria ${math(String(side))} cm-ko aldeko karratua da eta apotema ${math(String(apothem))} cm`, `la base es un cuadrado de ${math(String(side))} cm de lado y la apotema mide ${math(String(apothem))} cm`, `قاعدته مربع طول ضلعه ${math(String(side))} سم وعامده ${math(String(apothem))} سم`, `the base is a square with a side of ${math(String(side))} cm and the slant height is ${math(String(apothem))} cm`)
+        : say(`oinarria ${math(String(side))} cm-ko aldeko karratua da eta altuera ${math(String(height))} cm`, `la base es un cuadrado de ${math(String(side))} cm de lado y la altura mide ${math(String(height))} cm`, `قاعدته مربع طول ضلعه ${math(String(side))} سم وارتفاعه ${math(String(height))} سم`, `the base is a square with a side of ${math(String(side))} cm and the height is ${math(String(height))} cm`)
     const solution = given === 'apothem'
         ? `4\\cdot \\frac{${side}\\cdot ${apothem}}{2}=${lateral}`
         : `\\sqrt{${height}^{2}+${half}^{2}}=${apothem}\\ \\to\\ 4\\cdot \\frac{${side}\\cdot ${apothem}}{2}=${lateral}`
     return question(1, `pyramid-${given}`, say(
         `Piramide erregular batean, ${data.eu}. Zein da alboko azalera (cm²)?`,
         `En una pirámide regular, ${data.es}. ¿Cuál es su área lateral (cm²)?`,
-        `في هرم منتظم ${data.ar}. ما مساحته الجانبية (سم²)؟`
+        `في هرم منتظم ${data.ar}. ما مساحته الجانبية (سم²)؟`, `In a regular pyramid, ${data.en}. What is its lateral area (cm²)?`
     ), choices, right, same(math(solution)))
 }
 
 /* ---------- Circuit 2: bodies of revolution (π ≈ 3,14) ---------- */
 
-const PI_NOTE = say('($\\pi\\approx 3{,}14$)', '($\\pi\\approx 3{,}14$)', '($\\pi\\approx 3{,}14$)')
+const PI_NOTE = say('($\\pi\\approx 3{,}14$)', '($\\pi\\approx 3{,}14$)', '($\\pi\\approx 3{,}14$)', '($\\pi\\approx 3{,}14$)')
 
 function cylinderQuestion(random: Random, tier: Tier): SolidsRaceQuestion | null {
     const r = randomInt(random, 1, tier === 0 ? 5 : 10)
@@ -217,12 +217,12 @@ function cylinderQuestion(random: Random, tier: Tier): SolidsRaceQuestion | null
     ])
     if (!choices) return null
     const size = byDiameter
-        ? say(`${math(String(2 * r))} cm-ko diametroa`, `${math(String(2 * r))} cm de diámetro`, `قطره ${math(String(2 * r))} سم`)
-        : say(`${math(String(r))} cm-ko erradioa`, `${math(String(r))} cm de radio`, `نصف قطره ${math(String(r))} سم`)
+        ? say(`${math(String(2 * r))} cm-ko diametroa`, `${math(String(2 * r))} cm de diámetro`, `قطره ${math(String(2 * r))} سم`, `a diameter of ${math(String(2 * r))} cm`)
+        : say(`${math(String(r))} cm-ko erradioa`, `${math(String(r))} cm de radio`, `نصف قطره ${math(String(r))} سم`, `a radius of ${math(String(r))} cm`)
     return question(2, byDiameter ? 'cylinder-diameter' : 'cylinder', say(
         `Zilindro batek ${size.eu} eta ${math(String(h))} cm-ko altuera ditu. Zein da alboko azalera (cm²)? ${PI_NOTE.eu}`,
         `Un cilindro tiene ${size.es} y ${math(String(h))} cm de altura. ¿Cuál es su área lateral (cm²)? ${PI_NOTE.es}`,
-        `أسطوانة ${size.ar} وارتفاعها ${math(String(h))} سم. ما مساحتها الجانبية (سم²)؟ ${PI_NOTE.ar}`
+        `أسطوانة ${size.ar} وارتفاعها ${math(String(h))} سم. ما مساحتها الجانبية (سم²)؟ ${PI_NOTE.ar}`, `A cylinder has ${size.en} and a height of ${math(String(h))} cm. What is its lateral area (cm²)? ${PI_NOTE.en}`
     ), choices, right, same(math(`2\\cdot 3{,}14\\cdot ${r}\\cdot ${h}=${w(right)}`)))
 }
 
@@ -240,13 +240,13 @@ function coneQuestion(random: Random, tier: Tier): SolidsRaceQuestion | null {
     ])
     if (!choices) return null
     const data = givenG
-        ? say(`erradioa ${math(String(r))} cm da eta sortzailea ${math(String(g))} cm`, `el radio mide ${math(String(r))} cm y la generatriz ${math(String(g))} cm`, `نصف قطره ${math(String(r))} سم وراسمه ${math(String(g))} سم`)
-        : say(`erradioa ${math(String(r))} cm da eta altuera ${math(String(h))} cm`, `el radio mide ${math(String(r))} cm y la altura ${math(String(h))} cm`, `نصف قطره ${math(String(r))} سم وارتفاعه ${math(String(h))} سم`)
+        ? say(`erradioa ${math(String(r))} cm da eta sortzailea ${math(String(g))} cm`, `el radio mide ${math(String(r))} cm y la generatriz ${math(String(g))} cm`, `نصف قطره ${math(String(r))} سم وراسمه ${math(String(g))} سم`, `the radius is ${math(String(r))} cm and the slant height is ${math(String(g))} cm`)
+        : say(`erradioa ${math(String(r))} cm da eta altuera ${math(String(h))} cm`, `el radio mide ${math(String(r))} cm y la altura ${math(String(h))} cm`, `نصف قطره ${math(String(r))} سم وارتفاعه ${math(String(h))} سم`, `the radius is ${math(String(r))} cm and the height is ${math(String(h))} cm`)
     const solution = givenG ? `3{,}14\\cdot ${r}\\cdot ${g}=${w(right)}` : `\\sqrt{${h}^{2}+${r}^{2}}=${g}\\ \\to\\ 3{,}14\\cdot ${r}\\cdot ${g}=${w(right)}`
     return question(2, givenG ? 'cone' : 'cone-height', say(
         `Kono batean ${data.eu}. Zein da alboko azalera (cm²)? ${PI_NOTE.eu}`,
         `En un cono ${data.es}. ¿Cuál es su área lateral (cm²)? ${PI_NOTE.es}`,
-        `في مخروط ${data.ar}. ما مساحته الجانبية (سم²)؟ ${PI_NOTE.ar}`
+        `في مخروط ${data.ar}. ما مساحته الجانبية (سم²)؟ ${PI_NOTE.ar}`, `In a cone, ${data.en}. What is its lateral area (cm²)? ${PI_NOTE.en}`
     ), choices, right, same(math(solution)))
 }
 
@@ -262,11 +262,11 @@ function sphereQuestion(random: Random, tier: Tier): SolidsRaceQuestion | null {
         ...near(right)
     ])
     if (!choices) return null
-    const size = byDiameter ? say(`${math(String(2 * r))} cm-ko diametroko`, `de ${math(String(2 * r))} cm de diámetro`, `قطرها ${math(String(2 * r))} سم`) : say(`${math(String(r))} cm-ko erradioko`, `de ${math(String(r))} cm de radio`, `نصف قطرها ${math(String(r))} سم`)
+    const size = byDiameter ? say(`${math(String(2 * r))} cm-ko diametroko`, `de ${math(String(2 * r))} cm de diámetro`, `قطرها ${math(String(2 * r))} سم`, `with a diameter of ${math(String(2 * r))} cm`) : say(`${math(String(r))} cm-ko erradioko`, `de ${math(String(r))} cm de radio`, `نصف قطرها ${math(String(r))} سم`, `with a radius of ${math(String(r))} cm`)
     return question(2, byDiameter ? 'sphere-diameter' : 'sphere', say(
         `Zein da ${size.eu} esfera baten azalera (cm²)? ${PI_NOTE.eu}`,
         `¿Cuál es el área de una esfera ${size.es} (cm²)? ${PI_NOTE.es}`,
-        `ما مساحة كرة ${size.ar} (سم²)؟ ${PI_NOTE.ar}`
+        `ما مساحة كرة ${size.ar} (سم²)؟ ${PI_NOTE.ar}`, `What is the area of a sphere ${size.en} (cm²)? ${PI_NOTE.en}`
     ), choices, right, same(math(`4\\cdot 3{,}14\\cdot ${r}^{2}=${w(right)}`)))
 }
 
@@ -305,7 +305,7 @@ function convertQuestion(random: Random, tier: Tier): SolidsRaceQuestion | null 
     return question(3, litres ? 'litres' : 'units', say(
         `Adierazi ${math(`${wn(value)}\\ ${unitLatex[fromUnit]}`)} ${math(unitLatex[toUnit])} unitatetan.`,
         `Expresa ${math(`${wn(value)}\\ ${unitLatex[fromUnit]}`)} en ${math(unitLatex[toUnit])}.`,
-        `عبّر عن ${math(`${wn(value)}\\ ${unitLatex[fromUnit]}`)} بوحدة ${math(unitLatex[toUnit])}.`
+        `عبّر عن ${math(`${wn(value)}\\ ${unitLatex[fromUnit]}`)} بوحدة ${math(unitLatex[toUnit])}.`, `Express ${math(`${wn(value)}\\ ${unitLatex[fromUnit]}`)} in ${math(unitLatex[toUnit])}.`
     ), choices, n(right), same(math(operation)))
 }
 
@@ -326,7 +326,7 @@ function tankQuestion(random: Random, tier: Tier): SolidsRaceQuestion | null {
     return question(3, inCm ? 'tank-cm' : 'tank-dm', say(
         `Depositu ortoedriko batek ${math(`${a}\\ \\text{${unit}}\\times ${b}\\ \\text{${unit}}\\times ${c}\\ \\text{${unit}}`)} neurtzen ditu. Zenbat litro sartzen dira?`,
         `Un depósito ortoédrico mide ${math(`${a}\\ \\text{${unit}}\\times ${b}\\ \\text{${unit}}\\times ${c}\\ \\text{${unit}}`)}. ¿Cuántos litros caben?`,
-        `خزان على شكل متوازي مستطيلات أبعاده ${math(`${a}\\ \\text{${unit}}\\times ${b}\\ \\text{${unit}}\\times ${c}\\ \\text{${unit}}`)}. كم لترًا يسع؟`
+        `خزان على شكل متوازي مستطيلات أبعاده ${math(`${a}\\ \\text{${unit}}\\times ${b}\\ \\text{${unit}}\\times ${c}\\ \\text{${unit}}`)}. كم لترًا يسع؟`, `A cuboid tank measures ${math(`${a}\\ \\text{${unit}}\\times ${b}\\ \\text{${unit}}\\times ${c}\\ \\text{${unit}}`)}. How many litres does it hold?`
     ), choices, n(right), same(math(inCm ? `${a}\\cdot ${b}\\cdot ${c}=${cubic}\\ \\to\\ ${cubic}\\mathbin{:}1000=${wn(right)}` : `${a}\\cdot ${b}\\cdot ${c}=${cubic}`)))
 }
 
@@ -343,7 +343,7 @@ function prismVolumeQuestion(random: Random, tier: Tier): SolidsRaceQuestion | n
         return question(4, 'cylinder-volume', say(
             `Zilindro batek ${math(String(r))} cm-ko erradioa eta ${math(String(h))} cm-ko altuera ditu. Zein da bolumena (cm³)? ${PI_NOTE.eu}`,
             `Un cilindro tiene ${math(String(r))} cm de radio y ${math(String(h))} cm de altura. ¿Cuál es su volumen (cm³)? ${PI_NOTE.es}`,
-            `أسطوانة نصف قطرها ${math(String(r))} سم وارتفاعها ${math(String(h))} سم. ما حجمها (سم³)؟ ${PI_NOTE.ar}`
+            `أسطوانة نصف قطرها ${math(String(r))} سم وارتفاعها ${math(String(h))} سم. ما حجمها (سم³)؟ ${PI_NOTE.ar}`, `A cylinder has a radius of ${math(String(r))} cm and a height of ${math(String(h))} cm. What is its volume (cm³)? ${PI_NOTE.en}`
         ), choices, right, same(math(`3{,}14\\cdot ${r}^{2}\\cdot ${h}=${w(right)}`)))
     }
     const [p, q] = [randomInt(random, 2, tier === 0 ? 8 : 14), randomInt(random, 2, tier === 0 ? 8 : 14)]
@@ -355,7 +355,7 @@ function prismVolumeQuestion(random: Random, tier: Tier): SolidsRaceQuestion | n
     return question(4, 'prism-volume', say(
         `Prisma baten oinarria ${math(String(p))} cm eta ${math(String(q))} cm-ko katetoak dituen triangelu angeluzuzena da, eta altuera ${math(String(h))} cm. Zein da bolumena (cm³)?`,
         `La base de un prisma es un triángulo rectángulo de catetos ${math(String(p))} cm y ${math(String(q))} cm, y su altura mide ${math(String(h))} cm. ¿Cuál es su volumen (cm³)?`,
-        `قاعدة منشور مثلث قائم ضلعاه القائمان ${math(String(p))} سم و${math(String(q))} سم، وارتفاعه ${math(String(h))} سم. ما حجمه (سم³)؟`
+        `قاعدة منشور مثلث قائم ضلعاه القائمان ${math(String(p))} سم و${math(String(q))} سم، وارتفاعه ${math(String(h))} سم. ما حجمه (سم³)؟`, `The base of a prism is a right-angled triangle with legs of ${math(String(p))} cm and ${math(String(q))} cm, and its height is ${math(String(h))} cm. What is its volume (cm³)?`
     ), choices, right, same(math(`\\frac{${p}\\cdot ${q}}{2}\\cdot ${h}=${w(right)}`)))
 }
 
@@ -370,7 +370,7 @@ function pyramidVolumeQuestion(random: Random, tier: Tier): SolidsRaceQuestion |
         return question(4, 'cone-volume', say(
             `Kono batek ${math(String(r))} cm-ko erradioa eta ${math(String(h))} cm-ko altuera ditu. Zein da bolumena (cm³)? ${PI_NOTE.eu}`,
             `Un cono tiene ${math(String(r))} cm de radio y ${math(String(h))} cm de altura. ¿Cuál es su volumen (cm³)? ${PI_NOTE.es}`,
-            `مخروط نصف قطره ${math(String(r))} سم وارتفاعه ${math(String(h))} سم. ما حجمه (سم³)؟ ${PI_NOTE.ar}`
+            `مخروط نصف قطره ${math(String(r))} سم وارتفاعه ${math(String(h))} سم. ما حجمه (سم³)؟ ${PI_NOTE.ar}`, `A cone has a radius of ${math(String(r))} cm and a height of ${math(String(h))} cm. What is its volume (cm³)? ${PI_NOTE.en}`
         ), choices, right, same(math(`\\frac{3{,}14\\cdot ${r}^{2}\\cdot ${h}}{3}=${w(right)}`)))
     }
     const right = n((r * r * h) / 3)
@@ -379,7 +379,7 @@ function pyramidVolumeQuestion(random: Random, tier: Tier): SolidsRaceQuestion |
     return question(4, 'pyramid-volume', say(
         `Piramide baten oinarria ${math(String(r))} cm-ko aldeko karratua da eta altuera ${math(String(h))} cm. Zein da bolumena (cm³)?`,
         `La base de una pirámide es un cuadrado de ${math(String(r))} cm de lado y su altura mide ${math(String(h))} cm. ¿Cuál es su volumen (cm³)?`,
-        `قاعدة هرم مربع طول ضلعه ${math(String(r))} سم وارتفاعه ${math(String(h))} سم. ما حجمه (سم³)؟`
+        `قاعدة هرم مربع طول ضلعه ${math(String(r))} سم وارتفاعه ${math(String(h))} سم. ما حجمه (سم³)؟`, `The base of a pyramid is a square with a side of ${math(String(r))} cm, and its height is ${math(String(h))} cm. What is its volume (cm³)?`
     ), choices, right, same(math(`\\frac{${r}^{2}\\cdot ${h}}{3}=${w(right)}`)))
 }
 
@@ -397,7 +397,7 @@ function sphereVolumeQuestion(random: Random, tier: Tier): SolidsRaceQuestion | 
     return question(4, 'sphere-volume', say(
         `Zein da ${math(wn(r))} cm-ko erradioko esfera baten bolumena (cm³)? ${PI_NOTE.eu}`,
         `¿Cuál es el volumen de una esfera de ${math(wn(r))} cm de radio (cm³)? ${PI_NOTE.es}`,
-        `ما حجم كرة نصف قطرها ${math(wn(r))} سم (سم³)؟ ${PI_NOTE.ar}`
+        `ما حجم كرة نصف قطرها ${math(wn(r))} سم (سم³)؟ ${PI_NOTE.ar}`, `What is the volume of a sphere with a radius of ${math(wn(r))} cm (cm³)? ${PI_NOTE.en}`
     ), choices, right, same(math(`\\frac{4\\cdot 3{,}14\\cdot ${wn(r)}^{3}}{3}=${w(right)}`)))
 }
 
@@ -431,19 +431,19 @@ export function solidsParTime(circuit: number): number {
 }
 
 export const solidsRaceErrorTips: Record<SolidsRaceError, LocalizedText> = {
-    'formula-mix': say('Hori beste gorputzarena da: prismak bi oinarri ditu ($n+2$, $3n$, $2n$), piramideak bat ($n+1$, $2n$, $n+1$).', 'Eso es del otro cuerpo: el prisma tiene dos bases ($n+2$, $3n$, $2n$) y la pirámide una ($n+1$, $2n$, $n+1$).', 'هذا للجسم الآخر: للمنشور قاعدتان ($n+2$، $3n$، $2n$) وللهرم قاعدة واحدة ($n+1$، $2n$، $n+1$).'),
-    'missing-bases': say('Oinarriak ahaztu dituzu.', 'Te has olvidado de las bases.', 'نسيت القاعدتين.'),
-    euler: say('Euler: aurpegiak + erpinak = ertzak + 2. Begiratu 2 non dagoen.', 'Euler: caras + vértices = aristas + 2. Mira dónde va el 2.', 'أويلر: الأوجه + الرؤوس = الأحرف + 2. انتبه أين يوضع العدد 2.'),
-    'one-face': say('Hori aurpegi bakarra (edo zirkulu bakarra) da.', 'Eso es una sola cara (o un solo círculo).', 'هذا وجه واحد (أو دائرة واحدة).'),
-    'no-double': say('Bider 2 falta da (aurpegiak binaka, edo $2\\pi r$).', 'Falta multiplicar por 2 (caras dos a dos, o $2\\pi r$).', 'ينقص الضرب في 2 (الأوجه مثنى مثنى، أو $2\\pi r$).'),
-    'no-half': say('Triangeluaren azalera zati 2 da.', 'El área del triángulo se divide entre 2.', 'مساحة المثلث تُقسم على 2.'),
-    'height-apothem': say('Altuera erabili duzu: azalerarako apotema edo sortzailea behar da, Pitagorasekin.', 'Has usado la altura: para el área hace falta la apotema o la generatriz, con Pitágoras.', 'استعملت الارتفاع: للمساحة نحتاج العامد أو الراسم بفيثاغورس.'),
-    diameter: say('Diametroa erabili duzu erradioaren ordez: erdia hartu.', 'Has usado el diámetro en lugar del radio: toma la mitad.', 'استعملت القطر بدل نصف القطر: خذ النصف.'),
-    'no-square': say('Erradioa karratura jaso behar da.', 'El radio va al cuadrado.', 'يجب تربيع نصف القطر.'),
-    'volume-area': say('Azalera eta bolumena nahastu dituzu.', 'Has confundido área y volumen.', 'خلطت بين المساحة والحجم.'),
-    'step-ten': say('Bolumenean maila bakoitza 1000 da, ez 10.', 'En volumen cada escalón es 1000, no 10.', 'في الحجم كل درجة 1000 لا 10.'),
-    'step-hundred': say('100 azalerarako da; bolumenean 1000.', '100 es para el área; en volumen, 1000.', '100 للمساحة؛ وفي الحجم 1000.'),
-    direction: say('Unitate txikiagora jaistean biderkatu; handiagora igotzean zatitu.', 'Para bajar a una unidad menor se multiplica; para subir, se divide.', 'للنزول إلى وحدة أصغر نضرب؛ وللصعود نقسم.'),
-    'no-third': say('Piramidea eta konoa prismaren eta zilindroaren herena dira; esfera $\\frac{4}{3}\\pi r^{3}$.', 'Pirámide y cono son un tercio del prisma y del cilindro; la esfera, $\\frac{4}{3}\\pi r^{3}$.', 'الهرم والمخروط ثلث المنشور والأسطوانة؛ والكرة $\\frac{4}{3}\\pi r^{3}$.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    'formula-mix': say('Hori beste gorputzarena da: prismak bi oinarri ditu ($n+2$, $3n$, $2n$), piramideak bat ($n+1$, $2n$, $n+1$).', 'Eso es del otro cuerpo: el prisma tiene dos bases ($n+2$, $3n$, $2n$) y la pirámide una ($n+1$, $2n$, $n+1$).', 'هذا للجسم الآخر: للمنشور قاعدتان ($n+2$، $3n$، $2n$) وللهرم قاعدة واحدة ($n+1$، $2n$، $n+1$).', 'That belongs to the other solid: the prism has two bases ($n+2$, $3n$, $2n$) and the pyramid has one ($n+1$, $2n$, $n+1$).'),
+    'missing-bases': say('Oinarriak ahaztu dituzu.', 'Te has olvidado de las bases.', 'نسيت القاعدتين.', 'You have forgotten the bases.'),
+    euler: say('Euler: aurpegiak + erpinak = ertzak + 2. Begiratu 2 non dagoen.', 'Euler: caras + vértices = aristas + 2. Mira dónde va el 2.', 'أويلر: الأوجه + الرؤوس = الأحرف + 2. انتبه أين يوضع العدد 2.', 'Euler: faces + vertices = edges + 2. Check where the 2 goes.'),
+    'one-face': say('Hori aurpegi bakarra (edo zirkulu bakarra) da.', 'Eso es una sola cara (o un solo círculo).', 'هذا وجه واحد (أو دائرة واحدة).', 'That is only one face (or one circle).'),
+    'no-double': say('Bider 2 falta da (aurpegiak binaka, edo $2\\pi r$).', 'Falta multiplicar por 2 (caras dos a dos, o $2\\pi r$).', 'ينقص الضرب في 2 (الأوجه مثنى مثنى، أو $2\\pi r$).', 'You still need to multiply by 2 (faces come in pairs, or $2\\pi r$).'),
+    'no-half': say('Triangeluaren azalera zati 2 da.', 'El área del triángulo se divide entre 2.', 'مساحة المثلث تُقسم على 2.', 'Divide the triangle\'s area by 2.'),
+    'height-apothem': say('Altuera erabili duzu: azalerarako apotema edo sortzailea behar da, Pitagorasekin.', 'Has usado la altura: para el área hace falta la apotema o la generatriz, con Pitágoras.', 'استعملت الارتفاع: للمساحة نحتاج العامد أو الراسم بفيثاغورس.', 'You used the height. For the area you need the slant height, found with Pythagoras.'),
+    diameter: say('Diametroa erabili duzu erradioaren ordez: erdia hartu.', 'Has usado el diámetro en lugar del radio: toma la mitad.', 'استعملت القطر بدل نصف القطر: خذ النصف.', 'You used the diameter instead of the radius: take half of it.'),
+    'no-square': say('Erradioa karratura jaso behar da.', 'El radio va al cuadrado.', 'يجب تربيع نصف القطر.', 'The radius is squared.'),
+    'volume-area': say('Azalera eta bolumena nahastu dituzu.', 'Has confundido área y volumen.', 'خلطت بين المساحة والحجم.', 'You have mixed up area and volume.'),
+    'step-ten': say('Bolumenean maila bakoitza 1000 da, ez 10.', 'En volumen cada escalón es 1000, no 10.', 'في الحجم كل درجة 1000 لا 10.', 'For volume, each step is 1,000, not 10.'),
+    'step-hundred': say('100 azalerarako da; bolumenean 1000.', '100 es para el área; en volumen, 1000.', '100 للمساحة؛ وفي الحجم 1000.', '100 is for area; for volume, it\'s 1,000.'),
+    direction: say('Unitate txikiagora jaistean biderkatu; handiagora igotzean zatitu.', 'Para bajar a una unidad menor se multiplica; para subir, se divide.', 'للنزول إلى وحدة أصغر نضرب؛ وللصعود نقسم.', 'To go down to a smaller unit, multiply; to go up, divide.'),
+    'no-third': say('Piramidea eta konoa prismaren eta zilindroaren herena dira; esfera $\\frac{4}{3}\\pi r^{3}$.', 'Pirámide y cono son un tercio del prisma y del cilindro; la esfera, $\\frac{4}{3}\\pi r^{3}$.', 'الهرم والمخروط ثلث المنشور والأسطوانة؛ والكرة $\\frac{4}{3}\\pi r^{3}$.', 'The pyramid and the cone are a third of the prism and the cylinder; the sphere is $\\frac{4}{3}\\pi r^{3}$.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

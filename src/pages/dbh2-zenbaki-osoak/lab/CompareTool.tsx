@@ -16,8 +16,8 @@ export function CompareTool(props: IntegerToolProps & { challenges?: LabChalleng
 
     const controls = (
         <>
-            <Stepper label={l({ eu: 'Lehen zenbakia (a)', es: 'Primer número (a)', ar: 'العدد الأول (a)' })} value={first} min={LINE_LIMITS.min} max={LINE_LIMITS.max} format={(next) => signed(next)} onChange={(next) => setState((current) => setCompareValue(current, 'first', next))} language={props.language} />
-            <Stepper label={l({ eu: 'Bigarren zenbakia (b)', es: 'Segundo número (b)', ar: 'العدد الثاني (b)' })} value={second} min={LINE_LIMITS.min} max={LINE_LIMITS.max} format={(next) => signed(next)} onChange={(next) => setState((current) => setCompareValue(current, 'second', next))} language={props.language} />
+            <Stepper label={l({ eu: 'Lehen zenbakia (a)', es: 'Primer número (a)', en: 'First number (a)', ar: 'العدد الأول (a)' })} value={first} min={LINE_LIMITS.min} max={LINE_LIMITS.max} format={(next) => signed(next)} onChange={(next) => setState((current) => setCompareValue(current, 'first', next))} language={props.language} />
+            <Stepper label={l({ eu: 'Bigarren zenbakia (b)', es: 'Segundo número (b)', en: 'Second number (b)', ar: 'العدد الثاني (b)' })} value={second} min={LINE_LIMITS.min} max={LINE_LIMITS.max} format={(next) => signed(next)} onChange={(next) => setState((current) => setCompareValue(current, 'second', next))} language={props.language} />
         </>
     )
 
@@ -26,8 +26,8 @@ export function CompareTool(props: IntegerToolProps & { challenges?: LabChalleng
             <span className="fraction-v2-lab-readout-main" dir="ltr">{signed(first)} {truth} {signed(second)}</span>
             <span className="fraction-v2-lab-readout-note">
                 {guess === truth
-                    ? l({ eu: 'Asmatu duzu! Begiratu zuzenean: eskuinean dagoena da handiena.', es: '¡Acertaste! Mira la recta: el que está más a la derecha es el mayor.', ar: 'أصبت! انظر إلى الخط: العدد الواقع إلى اليمين هو الأكبر.' })
-                    : l({ eu: 'Ez da hori. Begiratu zuzenean zein dagoen eskuinerago.', es: 'No es eso. Mira en la recta cuál está más a la derecha.', ar: 'ليس كذلك. انظر إلى الخط: أيهما يقع إلى اليمين أكثر؟' })}
+                    ? l({ eu: 'Asmatu duzu! Begiratu zuzenean: eskuinean dagoena da handiena.', es: '¡Acertaste! Mira la recta: el que está más a la derecha es el mayor.', en: 'You got it! Look at the number line: the one furthest to the right is the greater one.', ar: 'أصبت! انظر إلى الخط: العدد الواقع إلى اليمين هو الأكبر.' })
+                    : l({ eu: 'Ez da hori. Begiratu zuzenean zein dagoen eskuinerago.', es: 'No es eso. Mira en la recta cuál está más a la derecha.', en: 'Not quite. Look at the number line to see which one is further to the right.', ar: 'ليس كذلك. انظر إلى الخط: أيهما يقع إلى اليمين أكثر؟' })}
             </span>
         </>
     )
@@ -35,7 +35,7 @@ export function CompareTool(props: IntegerToolProps & { challenges?: LabChalleng
     return (
         <ToolFrame {...props} controls={controls} readout={readout || undefined} challenges={props.challenges ?? compareChallenges} state={state}>
             <div className="integers-lab-compare">
-                <p className="integers-lab-question">{l({ eu: 'Zein ikur doa erdian?', es: '¿Qué signo va en medio?', ar: 'أي رمز يوضع في الوسط؟' })}</p>
+                <p className="integers-lab-question">{l({ eu: 'Zein ikur doa erdian?', es: '¿Qué signo va en medio?', en: 'Which sign goes in the middle?', ar: 'أي رمز يوضع في الوسط؟' })}</p>
                 <div className="integers-lab-guess" dir="ltr">
                     <strong>{signed(first)}</strong>
                     {relations.map((relation) => (
@@ -64,7 +64,7 @@ export function CompareTool(props: IntegerToolProps & { challenges?: LabChalleng
                         />
                     </div>
                 ) : (
-                    <p className="fraction-v2-lab-tip">{l({ eu: 'Aukeratu ikur bat zuzena ikusteko.', es: 'Elige un signo para ver la recta.', ar: 'اختر رمزًا لرؤية الخط.' })}</p>
+                    <p className="fraction-v2-lab-tip">{l({ eu: 'Aukeratu ikur bat zuzena ikusteko.', es: 'Elige un signo para ver la recta.', en: 'Choose a sign to see the number line.', ar: 'اختر رمزًا لرؤية الخط.' })}</p>
                 )}
             </div>
         </ToolFrame>

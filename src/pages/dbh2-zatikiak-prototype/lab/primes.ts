@@ -154,11 +154,13 @@ export const primesChallenges: LabChallenge<PrimesState>[] = [
         prompt: {
             eu: 'Sinplifikatu 84/126: marratu faktore komunak, bat ere geratzen ez den arte.',
             es: 'Simplifica 84/126: tacha los factores comunes hasta que no quede ninguno.',
+            en: 'Simplify 84/126: cross out the common factors until none is left.',
             ar: 'اختزل 84/126: اشطب العوامل المشتركة حتى لا يبقى أيّ منها.'
         },
         hint: {
             eu: '84 = 2·2·3·7 eta 126 = 2·3·3·7: marratu 2 bat, 3 bat eta 7 bat alde bakoitzean.',
             es: '84 = 2·2·3·7 y 126 = 2·3·3·7: tacha un 2, un 3 y un 7 de cada lado.',
+            en: '84 = 2·2·3·7 and 126 = 2·3·3·7: cross out one 2, one 3 and one 7 on each side.',
             ar: `${ltr('84 = 2·2·3·7')} و${ltr('126 = 2·3·3·7')}: اشطب 2 و3 و7 من كل جهة.`
         },
         isSolved: (state) => numbersAre(state, 84, 126) && done(state)
@@ -168,11 +170,13 @@ export const primesChallenges: LabChallenge<PrimesState>[] = [
         prompt: {
             eu: 'Aurkitu 60 eta 90 zenbakien ZKH, faktore komunak marratuz.',
             es: 'Halla el m.c.d. de 60 y 90 tachando sus factores comunes.',
+            en: 'Find the GCD of 60 and 90 by crossing out their common factors.',
             ar: 'جد ق.م.أ للعددين 60 و90 بشطب عواملهما المشتركة.'
         },
         hint: {
             eu: 'Idatzi 60 goian eta 90 behean. ZKH marratutakoen biderkadura da.',
             es: 'Escribe 60 arriba y 90 abajo. El m.c.d. es el producto de lo tachado.',
+            en: 'Write 60 on top and 90 below. The GCD is the product of what you crossed out.',
             ar: 'اكتب 60 في الأعلى و90 في الأسفل. ق.م.أ هو حاصل ضرب المشطوب.'
         },
         isSolved: (state) => numbersAre(state, 60, 90, true) && done(state)
@@ -182,11 +186,13 @@ export const primesChallenges: LabChallenge<PrimesState>[] = [
         prompt: {
             eu: '5/12 + 7/18 batzeko, 12 eta 18 zenbakien MKT behar duzu: idatzi biak, marratu komunak eta begiratu MKT.',
             es: 'Para sumar 5/12 + 7/18 necesitas el m.c.m. de 12 y 18: escríbelos, tacha los comunes y mira el m.c.m.',
+            en: 'To add 5/12 + 7/18 you need the LCM of 12 and 18: write them down, cross out the common factors and look at the LCM.',
             ar: `لجمع ${ltr('5/12 + 7/18')} تحتاج إلى م.م.أ للعددين 12 و18: اكتبهما واشطب المشتركة وانظر إلى م.م.أ.`
         },
         hint: {
             eu: 'MKT = marratutakoak (behin) bider goian eta behean geratzen dena.',
             es: 'El m.c.m. es lo tachado (una vez) por todo lo que queda arriba y abajo.',
+            en: 'The LCM is what gets crossed out (once) by everything left on the top and bottom.',
             ar: 'م.م.أ = المشطوب (مرة واحدة) مضروبًا في كل ما يبقى في الأعلى والأسفل.'
         },
         isSolved: (state) => numbersAre(state, 12, 18, true) && done(state)
@@ -196,11 +202,13 @@ export const primesChallenges: LabChallenge<PrimesState>[] = [
         prompt: {
             eu: 'Idatzi hiru faktore-bikote marratzeko aukera ematen duen zatiki bat, eta marratu guztiak.',
             es: 'Escribe una fracción en la que puedas tachar tres parejas de factores, y táchalas todas.',
+            en: 'Write a fraction in which you can cross out three pairs of factors, and cross them all out.',
             ar: 'اكتب كسرًا يمكنك فيه شطب ثلاثة أزواج من العوامل، واشطبها كلها.'
         },
         hint: {
             eu: 'Biderkatu zatiki baten bi gaiak 2·3·5 = 30 zenbakiaz: adibidez, 1/2 → 30/60.',
             es: 'Multiplica los dos términos de una fracción por 2·3·5 = 30: por ejemplo, 1/2 → 30/60.',
+            en: 'Multiply both terms of a fraction by 2·3·5 = 30: for example, 1/2 → 30/60.',
             ar: `اضرب حدّي كسر في ${ltr('2·3·5 = 30')}: مثلًا ${ltr('1/2 → 30/60')}.`
         },
         isSolved: (state) => done(state) && state.pairs.length >= 3
@@ -226,17 +234,17 @@ export function randomPrimesFraction(random: () => number): { numerator: number;
 
 export const primesExtra: LabChallengeMaker<PrimesState> = (random) => {
     const { numerator, denominator } = randomPrimesFraction(random)
-    const text = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+    const text = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
     return {
         prompt: text(
             `Sinplifikatu ${numerator}/${denominator}: marratu faktore komun guztiak.`,
             `Simplifica ${numerator}/${denominator}: tacha todos los factores comunes.`,
-            `اختزل ${numerator}/${denominator}: اشطب كل العوامل المشتركة.`
+            `اختزل ${numerator}/${denominator}: اشطب كل العوامل المشتركة.`, `Simplify ${numerator}/${denominator}: cross out all the common factors.`
         ),
         hint: text(
             `${numerator} = ${primeFactors(numerator).join('·')} eta ${denominator} = ${primeFactors(denominator).join('·')}.`,
             `${numerator} = ${primeFactors(numerator).join('·')} y ${denominator} = ${primeFactors(denominator).join('·')}.`,
-            `${ltr(`${numerator} = ${primeFactors(numerator).join('·')}`)} و${ltr(`${denominator} = ${primeFactors(denominator).join('·')}`)}.`
+            `${ltr(`${numerator} = ${primeFactors(numerator).join('·')}`)} و${ltr(`${denominator} = ${primeFactors(denominator).join('·')}`)}.`, `${numerator} = ${primeFactors(numerator).join('·')} and ${denominator} = ${primeFactors(denominator).join('·')}.`
         ),
         isSolved: (state) => numbersAre(state, numerator, denominator) && done(state),
         solution: pairAll(setPrimesNumbers(initialPrimesState, { numerator, denominator }))

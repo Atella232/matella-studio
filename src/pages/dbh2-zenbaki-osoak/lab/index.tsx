@@ -36,7 +36,7 @@ export function IntegerLaboratory(props: {
             tools={integerLabTools}
             stages={integerStages}
             components={toolComponents}
-            title={{ eu: 'Ikusi zeinua, ez ikasi soilik araua', es: 'Mira el signo, no solo memorices la regla', ar: 'شاهد الإشارة ولا تحفظ القاعدة فقط' }}
+            title={{ eu: 'Ikusi zeinua, ez ikasi soilik araua', es: 'Mira el signo, no solo memorices la regla', en: 'Look at the sign, don\'t just memorise the rule.', ar: 'شاهد الإشارة ولا تحفظ القاعدة فقط' }}
         />
     )
 }

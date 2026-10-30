@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
@@ -66,9 +67,9 @@ test('zatikiak sales: whole euros, one right option, and it is right', () => {
                 assert.equal(bar.paidValue + bar.savedValue, bar.total, label)
             }
             for (const text of texts(round)) {
-                for (const language of ['eu', 'es', 'ar'] as const) {
+                for (const language of ['eu', 'es', 'en', 'ar'] as const) {
                     for (const [, formula] of text[language].matchAll(/\$([^$]+)\$/g)) {
-                        katex.renderToString(formula, { throwOnError: true })
+                        katex.renderToString(formulaFor(language, formula), { throwOnError: true })
                         assert.ok(!/[؀-ۿ]/.test(formula), formula)
                     }
                     if (language === 'eu') assert.ok(!/\$[^$]+\$[a-z]/.test(text.eu), `${label}: ${text.eu}`)
@@ -86,6 +87,6 @@ test('zatikiak sales: levels, tips and stars', () => {
         assert.equal(rounds.length, SALES_ROUNDS)
         for (const kind of kinds) assert.ok(rounds.some((round) => round.kind === kind), `${level} ${kind}`)
     })
-    for (const tip of Object.values(saleErrorTips)) for (const language of ['eu', 'es', 'ar'] as const) assert.ok(tip[language].length > 0)
+    for (const tip of Object.values(saleErrorTips)) for (const language of ['eu', 'es', 'en', 'ar'] as const) assert.ok(tip[language].length > 0)
     assert.deepEqual([6, 5, 4, 3, 2].map(salesStars), [3, 2, 2, 1, 0])
 })

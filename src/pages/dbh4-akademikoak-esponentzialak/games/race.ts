@@ -91,7 +91,7 @@ function expValueQuestion(random: Random, tier: Tier): ExponentialAkRaceQuestion
     return build(0, 'exp-value', say(
         `${math(`f(x)=${a}^{x}`)} bada, zenbat da ${math(`f(${x})`)}?`,
         `Si ${math(`f(x)=${a}^{x}`)}, ¿cuánto vale ${math(`f(${x})`)}?`,
-        `إذا كان ${math(`f(x)=${a}^{x}`)} فكم تساوي ${math(`f(${x})`)}؟`
+        `إذا كان ${math(`f(x)=${a}^{x}`)} فكم تساوي ${math(`f(${x})`)}؟`, `If ${math(`f(x)=${a}^{x}`)}, what is ${math(`f(${x})`)}?`
     ), options(random, right, [
         wrong(f(a * x), 'product'),
         wrong(x < 0 ? f(-(a ** -x)) : power(a, -x), 'negative-exponent'),
@@ -109,7 +109,7 @@ function asymptoteQuestion(random: Random, tier: Tier): ExponentialAkRaceQuestio
     return build(0, 'asymptote', say(
         `${math(`y=${a}^{${shifted(p)}}${plus(q)}`)} funtzioaren asintota horizontala ${math('y=k')} da. Zenbat da ${math('k')}?`,
         `La asíntota horizontal de ${math(`y=${a}^{${shifted(p)}}${plus(q)}`)} es ${math('y=k')}. ¿Cuánto vale ${math('k')}?`,
-        `المقارب الأفقي لـ ${math(`y=${a}^{${shifted(p)}}${plus(q)}`)} هو ${math('y=k')}. كم قيمة ${math('k')}؟`
+        `المقارب الأفقي لـ ${math(`y=${a}^{${shifted(p)}}${plus(q)}`)} هو ${math('y=k')}. كم قيمة ${math('k')}؟`, `The horizontal asymptote of ${math(`y=${a}^{${shifted(p)}}${plus(q)}`)} is ${math('y=k')}. What is ${math('k')}?`
     ), options(random, f(q), [
         wrong(f(p), 'swap'),
         wrong(f(-q), 'sign'),
@@ -125,7 +125,7 @@ function baseQuestion(random: Random, tier: Tier): ExponentialAkRaceQuestion | n
     return build(0, 'base', say(
         `${math('y=a^{x}')} funtzioa ${math(`(${x},\\,${y})`)} puntutik pasatzen da. Zenbat da ${math('a')}?`,
         `La función ${math('y=a^{x}')} pasa por ${math(`(${x},\\,${y})`)}. ¿Cuánto vale ${math('a')}?`,
-        `تمر الدالة ${math('y=a^{x}')} بـ ${math(`(${x},\\,${y})`)}. كم قيمة ${math('a')}؟`
+        `تمر الدالة ${math('y=a^{x}')} بـ ${math(`(${x},\\,${y})`)}. كم قيمة ${math('a')}؟`, `The function ${math('y=a^{x}')} passes through ${math(`(${x},\\,${y})`)}. What is ${math('a')}?`
     ), options(random, f(a), [
         wrong(f(y), 'square'),
         wrong(fraction(y, x), 'divide'),
@@ -144,7 +144,7 @@ function compoundQuestion(random: Random, tier: Tier): ExponentialAkRaceQuestion
     return build(1, 'compound', say(
         `${capital} € % ${rate}ean, interes konposatuan. Zenbat diru izango da ${years} urtean (€)?`,
         `${capital} € al ${rate} % de interés compuesto. ¿Cuánto habrá en ${years} años (€)?`,
-        `${capital} € بفائدة مركبة ${rate} %. كم يصبح المبلغ بعد ${years} سنوات (€)؟`
+        `${capital} € بفائدة مركبة ${rate} %. كم يصبح المبلغ بعد ${years} سنوات (€)؟`, `€${capital} at ${rate}% compound interest. How much will there be after ${years} years (€)?`
     ), options(random, f(value), [
         wrong(f(capital + (capital * rate * years) / 100), 'simple'),
         wrong(f(capital * (100 + rate) / 100 * years), 'product'),
@@ -164,7 +164,7 @@ function halfLifeQuestion(random: Random, tier: Tier): ExponentialAkRaceQuestion
     return build(1, 'half-life', say(
         `Substantzia baten erdibizitza ${period} urte da. ${mass} g badira, zenbat gramo geratuko dira ${time} urtean?`,
         `Una sustancia tiene una semivida de ${period} años. Si hay ${mass} g, ¿cuántos gramos quedarán en ${time} años?`,
-        `عمر النصف لمادة ${period} سنوات. إذا كان لدينا ${mass} غ فكم غرامًا يبقى بعد ${time} سنة؟`
+        `عمر النصف لمادة ${period} سنوات. إذا كان لدينا ${mass} غ فكم غرامًا يبقى بعد ${time} سنة؟`, `A substance has a half-life of ${period} years. If there are ${mass} g, how many grams will be left after ${time} years?`
     ), options(random, f(right), [
         wrong(fraction(mass, time), 'divide'),
         wrong(f(mass / 2), 'calculation'),
@@ -183,7 +183,7 @@ function expEquationQuestion(random: Random, tier: Tier): ExponentialAkRaceQuest
     return build(1, 'exp-equation', say(
         `Ebatzi ${math(`${a}^{${b === 0 ? 'x' : `x${plus(b)}`}}=${a ** n}`)}.`,
         `Resuelve ${math(`${a}^{${b === 0 ? 'x' : `x${plus(b)}`}}=${a ** n}`)}.`,
-        `حُلّ ${math(`${a}^{${b === 0 ? 'x' : `x${plus(b)}`}}=${a ** n}`)}.`
+        `حُلّ ${math(`${a}^{${b === 0 ? 'x' : `x${plus(b)}`}}=${a ** n}`)}.`, `Solve ${math(`${a}^{${b === 0 ? 'x' : `x${plus(b)}`}}=${a ** n}`)}.`
     ), options(random, f(right), [
         wrong(f(n + b), 'sign'),
         wrong(f(a ** n), 'power'),
@@ -202,7 +202,7 @@ function logValueQuestion(random: Random, tier: Tier): ExponentialAkRaceQuestion
     return build(2, 'log-value', say(
         `Kalkulatu ${math(`${log} ${toLatex(argument)}`)}.`,
         `Calcula ${math(`${log} ${toLatex(argument)}`)}.`,
-        `احسب ${math(`${log} ${toLatex(argument)}`)}.`
+        `احسب ${math(`${log} ${toLatex(argument)}`)}.`, `Work out ${math(`${log} ${toLatex(argument)}`)}.`
     ), options(random, f(n), [
         wrong(f(-n || 0), 'sign'),
         wrong(argument, 'power'),
@@ -220,7 +220,7 @@ function logDomainQuestion(random: Random, tier: Tier): ExponentialAkRaceQuestio
     return build(2, 'log-domain', say(
         `Zein da ${math(`y=\\log(${inside})`)} funtzioaren izate-eremuaren ezkerreko muturra?`,
         `¿Cuál es el extremo izquierdo del dominio de ${math(`y=\\log(${inside})`)}?`,
-        `ما الطرف الأيسر لمجال ${math(`y=\\log(${inside})`)}؟`
+        `ما الطرف الأيسر لمجال ${math(`y=\\log(${inside})`)}؟`, `What is the left-hand end of the domain of ${math(`y=\\log(${inside})`)}?`
     ), options(random, f(p), [
         wrong(f(-p), 'sign'),
         wrong(f(p + 1), 'point'),
@@ -239,7 +239,7 @@ function logZeroQuestion(random: Random, tier: Tier): ExponentialAkRaceQuestion 
     return build(2, 'log-zero', say(
         `Zein abszisatan ebakitzen du ${math(`y=${log}${p === 0 ? '\\,x' : `(${shifted(p)})`}${plus(q)}`)} funtzioak X ardatza?`,
         `¿En qué abscisa corta ${math(`y=${log}${p === 0 ? '\\,x' : `(${shifted(p)})`}${plus(q)}`)} al eje X?`,
-        `عند أي إحداثي سيني تقطع ${math(`y=${log}${p === 0 ? '\\,x' : `(${shifted(p)})`}${plus(q)}`)} محور X؟`
+        `عند أي إحداثي سيني تقطع ${math(`y=${log}${p === 0 ? '\\,x' : `(${shifted(p)})`}${plus(q)}`)} محور X؟`, `At what x-coordinate does ${math(`y=${log}${p === 0 ? '\\,x' : `(${shifted(p)})`}${plus(q)}`)} cross the x-axis?`
     ), options(random, f(right), [
         wrong(f(p), 'point'),
         wrong(f(p - a ** -q), 'sign'),
@@ -260,7 +260,7 @@ function degreesQuestion(random: Random, tier: Tier): ExponentialAkRaceQuestion 
     return build(3, 'degrees', say(
         `Zenbat gradu dira ${math(`\\frac{${angle}}{${m}}`)} rad?`,
         `¿Cuántos grados son ${math(`\\frac{${angle}}{${m}}`)} rad?`,
-        `كم درجة تساوي ${math(`\\frac{${angle}}{${m}}`)} rad؟`
+        `كم درجة تساوي ${math(`\\frac{${angle}}{${m}}`)} rad؟`, `How many degrees are ${math(`\\frac{${angle}}{${m}}`)} rad?`
     ), options(random, f(right), [
         wrong(f(2 * right), 'double'),
         wrong(fraction(right, 2), 'calculation'),
@@ -302,7 +302,7 @@ function trigValueQuestion(random: Random, tier: Tier): ExponentialAkRaceQuestio
     return build(3, 'trig-value', say(
         `Kalkulatu ${math(`${name} ${angle}`)}.`,
         `Calcula ${math(`${name} ${angle}`)}.`,
-        `احسب ${math(`${name} ${angle}`)}.`
+        `احسب ${math(`${name} ${angle}`)}.`, `Work out ${math(`${name} ${angle}`)}.`
     ), options(random, right, [
         wrong(negative, 'sign'),
         ...(other ? [wrong(other, 'sin-cos')] : []),
@@ -315,7 +315,7 @@ function zerosQuestion(random: Random, tier: Tier): ExponentialAkRaceQuestion | 
     return build(3, 'zeros', say(
         `Zenbat zero ditu ${math('y=\\sen x')} funtzioak ${math(`[0,\\,${n}\\pi]`)} tartean?`,
         `¿Cuántos ceros tiene ${math('y=\\sen x')} en ${math(`[0,\\,${n}\\pi]`)}?`,
-        `كم صفرًا للدالة ${math('y=\\sen x')} في ${math(`[0,\\,${n}\\pi]`)}؟`
+        `كم صفرًا للدالة ${math('y=\\sen x')} في ${math(`[0,\\,${n}\\pi]`)}؟`, `How many zeros does ${math('y=\\sin x')} have in ${math(`[0,\\,${n}\\pi]`)}?`
     ), options(random, f(n + 1), [
         wrong(f(n), 'ends'),
         wrong(f(n - 1), 'ends'),
@@ -336,7 +336,7 @@ function maxQuestion(random: Random, tier: Tier): ExponentialAkRaceQuestion | nu
     return build(4, 'max', say(
         `Zein da ${math(`y=${a}${name} x${plus(d)}`)} funtzioaren balio maximoa?`,
         `¿Cuál es el valor máximo de ${math(`y=${a}${name} x${plus(d)}`)}?`,
-        `ما القيمة العظمى لـ ${math(`y=${a}${name} x${plus(d)}`)}؟`
+        `ما القيمة العظمى لـ ${math(`y=${a}${name} x${plus(d)}`)}؟`, `What is the maximum value of ${math(`y=${a}${name} x${plus(d)}`)}?`
     ), options(random, f(right), [
         wrong(f(d - Math.abs(a)), 'min'),
         wrong(f(a + d), 'sign'),
@@ -355,7 +355,7 @@ function periodQuestion(random: Random, tier: Tier): ExponentialAkRaceQuestion |
     return build(4, 'period', say(
         `${math(`y=${name} ${kx}`)} funtzioaren periodoa ${math('a\\pi')} da. Zenbat da ${math('a')}?`,
         `El periodo de ${math(`y=${name} ${kx}`)} es ${math('a\\pi')}. ¿Cuánto vale ${math('a')}?`,
-        `دور ${math(`y=${name} ${kx}`)} هو ${math('a\\pi')}. كم قيمة ${math('a')}؟`
+        `دور ${math(`y=${name} ${kx}`)} هو ${math('a\\pi')}. كم قيمة ${math('a')}؟`, `The period of ${math(`y=${name} ${kx}`)} is ${math('a\\pi')}. What is ${math('a')}?`
     ), options(random, right, [
         wrong(fraction(factor.numerator, 2 * factor.denominator), 'inverted'),
         wrong(f(2), 'calculation'),
@@ -374,7 +374,7 @@ function amplitudeQuestion(random: Random, tier: Tier): ExponentialAkRaceQuestio
     return build(4, 'amplitude', say(
         `Zein da ${math(`y=${a}${name} ${k === 1 ? '' : k}x${plus(d)}`)} funtzioaren anplitudea?`,
         `¿Cuál es la amplitud de ${math(`y=${a}${name} ${k === 1 ? '' : k}x${plus(d)}`)}?`,
-        `ما سعة ${math(`y=${a}${name} ${k === 1 ? '' : k}x${plus(d)}`)}؟`
+        `ما سعة ${math(`y=${a}${name} ${k === 1 ? '' : k}x${plus(d)}`)}؟`, `What is the amplitude of ${math(`y=${a}${name} ${k === 1 ? '' : k}x${plus(d)}`)}?`
     ), options(random, f(-a), [
         wrong(f(a), 'sign'),
         wrong(f(d), 'swap'),
@@ -413,19 +413,19 @@ export function exponentialAkParTime(circuit: number): number {
 }
 
 export const exponentialAkRaceErrorTips: Record<ExponentialAkRaceError, LocalizedText> = {
-    product: say('$a^{x}$ ez da $a\\cdot x$: oinarria $x$ aldiz biderkatzen da.', '$a^{x}$ no es $a\\cdot x$: la base se multiplica $x$ veces.', '$a^{x}$ ليست $a\\cdot x$: يُضرب الأساس في نفسه $x$ مرة.'),
-    'negative-exponent': say('Berretzaile negatiboa: alderantzizkoa, ez negatiboa. $2^{-3}=\\frac{1}{8}$.', 'Exponente negativo: el inverso, no un negativo. $2^{-3}=\\frac{1}{8}$.', 'الأس السالب: المقلوب لا العدد السالب. $2^{-3}=\\frac{1}{8}$.'),
-    swap: say('Bi parametroak nahastu dituzu: begiratu bakoitza non dagoen.', 'Has confundido los dos parámetros: mira dónde está cada uno.', 'خلطت بين الوسيطين: انظر أين يقع كل منهما.'),
-    sign: say('Begiratu zeinuari.', 'Mira el signo.', 'انتبه للإشارة.'),
-    square: say('Hori puntuaren $y$ da; $a$ haren erroa da.', 'Esa es la $y$ del punto; $a$ es su raíz.', 'هذا $y$ النقطة؛ و$a$ جذره.'),
-    simple: say('Hori interes soila da; konposatuan urtero biderkatzen da.', 'Eso es interés simple; en el compuesto se multiplica cada año.', 'هذه فائدة بسيطة؛ في المركبة يُضرب كل سنة.'),
-    divide: say('Ez zatitu: berretu. Erdibizitza bakoitzean erdia geratzen da.', 'No dividas: eleva. En cada periodo se repite la operación.', 'لا تقسم: ارفع إلى قوة. تتكرر العملية في كل دور.'),
-    power: say('Logaritmoa berretzailea da, ez balioa.', 'El logaritmo es el exponente, no el valor.', 'اللوغاريتم هو الأس لا القيمة.'),
-    point: say('Hori puntu ezagun bat da, ez eskatzen dena.', 'Ese es un punto conocido, no lo que se pide.', 'هذه نقطة معروفة وليست المطلوب.'),
-    double: say('Kontatu berriro: $\\pi$ rad $=180°$, ez $360°$.', 'Cuenta otra vez: $\\pi$ rad $=180°$, no $360°$.', 'أعد العد: $\\pi$ rad $=180°$ لا $360°$.'),
-    'sin-cos': say('Hori beste arrazoia da: sinua ordenatua da, kosinua abzisa.', 'Esa es la otra razón: el seno es la ordenada; el coseno, la abscisa.', 'هذه النسبة الأخرى: الجيب هو الصادي، وجيب التمام السيني.'),
-    ends: say('Muturrak ere zeroak dira: $0$ eta $n\\pi$.', 'Los extremos también son ceros: $0$ y $n\\pi$.', 'الطرفان صفران أيضًا: $0$ و$n\\pi$.'),
-    min: say('Hori minimoa da; maximoa $d+|A|$.', 'Ese es el mínimo; el máximo es $d+|A|$.', 'هذه الصغرى؛ والعظمى $d+|A|$.'),
-    inverted: say('Periodoa $\\frac{2\\pi}{k}$ da, ez $\\frac{k}{2}\\pi$.', 'El periodo es $\\frac{2\\pi}{k}$, no $\\frac{k}{2}\\pi$.', 'الدور $\\frac{2\\pi}{k}$ لا $\\frac{k}{2}\\pi$.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    product: say('$a^{x}$ ez da $a\\cdot x$: oinarria $x$ aldiz biderkatzen da.', '$a^{x}$ no es $a\\cdot x$: la base se multiplica $x$ veces.', '$a^{x}$ ليست $a\\cdot x$: يُضرب الأساس في نفسه $x$ مرة.', '$a^{x}$ is not $a\\cdot x$: the base is multiplied $x$ times.'),
+    'negative-exponent': say('Berretzaile negatiboa: alderantzizkoa, ez negatiboa. $2^{-3}=\\frac{1}{8}$.', 'Exponente negativo: el inverso, no un negativo. $2^{-3}=\\frac{1}{8}$.', 'الأس السالب: المقلوب لا العدد السالب. $2^{-3}=\\frac{1}{8}$.', 'Negative exponent: the reciprocal, not a negative number. $2^{-3}=\\frac{1}{8}$.'),
+    swap: say('Bi parametroak nahastu dituzu: begiratu bakoitza non dagoen.', 'Has confundido los dos parámetros: mira dónde está cada uno.', 'خلطت بين الوسيطين: انظر أين يقع كل منهما.', 'You have mixed up the two parameters: look at where each one is.'),
+    sign: say('Begiratu zeinuari.', 'Mira el signo.', 'انتبه للإشارة.', 'Check the sign.'),
+    square: say('Hori puntuaren $y$ da; $a$ haren erroa da.', 'Esa es la $y$ del punto; $a$ es su raíz.', 'هذا $y$ النقطة؛ و$a$ جذره.', 'That is the $y$ of the point; $a$ is its root.'),
+    simple: say('Hori interes soila da; konposatuan urtero biderkatzen da.', 'Eso es interés simple; en el compuesto se multiplica cada año.', 'هذه فائدة بسيطة؛ في المركبة يُضرب كل سنة.', 'That is simple interest; with compound interest, you multiply each year.'),
+    divide: say('Ez zatitu: berretu. Erdibizitza bakoitzean erdia geratzen da.', 'No dividas: eleva. En cada periodo se repite la operación.', 'لا تقسم: ارفع إلى قوة. تتكرر العملية في كل دور.', 'Don\'t divide: raise to a power. Each period repeats the same operation.'),
+    power: say('Logaritmoa berretzailea da, ez balioa.', 'El logaritmo es el exponente, no el valor.', 'اللوغاريتم هو الأس لا القيمة.', 'The logarithm is the exponent, not the value.'),
+    point: say('Hori puntu ezagun bat da, ez eskatzen dena.', 'Ese es un punto conocido, no lo que se pide.', 'هذه نقطة معروفة وليست المطلوب.', 'That is a known point, not what is being asked for.'),
+    double: say('Kontatu berriro: $\\pi$ rad $=180°$, ez $360°$.', 'Cuenta otra vez: $\\pi$ rad $=180°$, no $360°$.', 'أعد العد: $\\pi$ rad $=180°$ لا $360°$.', 'Check again: $\\pi$ rad $=180°$, not $360°$.'),
+    'sin-cos': say('Hori beste arrazoia da: sinua ordenatua da, kosinua abzisa.', 'Esa es la otra razón: el seno es la ordenada; el coseno, la abscisa.', 'هذه النسبة الأخرى: الجيب هو الصادي، وجيب التمام السيني.', 'That is the other reason: the sine is the y-coordinate; the cosine, the x-coordinate.'),
+    ends: say('Muturrak ere zeroak dira: $0$ eta $n\\pi$.', 'Los extremos también son ceros: $0$ y $n\\pi$.', 'الطرفان صفران أيضًا: $0$ و$n\\pi$.', 'The end points are zeros too: $0$ and $n\\pi$.'),
+    min: say('Hori minimoa da; maximoa $d+|A|$.', 'Ese es el mínimo; el máximo es $d+|A|$.', 'هذه الصغرى؛ والعظمى $d+|A|$.', 'That is the minimum; the maximum is $d+|A|$.'),
+    inverted: say('Periodoa $\\frac{2\\pi}{k}$ da, ez $\\frac{k}{2}\\pi$.', 'El periodo es $\\frac{2\\pi}{k}$, no $\\frac{k}{2}\\pi$.', 'الدور $\\frac{2\\pi}{k}$ لا $\\frac{k}{2}\\pi$.', 'The period is $\\frac{2\\pi}{k}$, not $\\frac{k}{2}\\pi$.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

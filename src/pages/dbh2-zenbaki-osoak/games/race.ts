@@ -35,11 +35,11 @@ export const signedLatex = (value: number): string => (value < 0 ? `-${-value}` 
 /** An operand in brackets: (−7), (+7) */
 const b = (value: number): string => `(${signedLatex(value)})`
 const math = (latex: string) => `$${latex}$`
-const text = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
-const formula = (latex: string): LocalizedText => ({ eu: math(latex), es: math(latex), ar: math(latex) })
+const text = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
+const formula = (latex: string): LocalizedText => ({ eu: math(latex), es: math(latex), en: math(latex), ar: math(latex) })
 
 function around(before: LocalizedText, latex: string): LocalizedText {
-    return { eu: `${before.eu}${math(latex)}`, es: `${before.es}${math(latex)}`, ar: `${before.ar}${math(latex)}` }
+    return { eu: `${before.eu}${math(latex)}`, es: `${before.es}${math(latex)}`, en: `${before.es}${math(latex)}`, ar: `${before.ar}${math(latex)}` }
 }
 
 /** A non-zero integer whose size is between min and max */
@@ -95,7 +95,7 @@ function question(
     return { circuit, kind, prompt, options, answer: fraction(answer === 0 ? 0 : answer), answerForm: 'any', percentAnswer: false, writable, solution }
 }
 
-const calculate = text('Kalkulatu: ', 'Calcula: ', 'احسب: ')
+const calculate = text('Kalkulatu: ', 'Calcula: ', 'احسب: ', 'Calculate: ')
 
 /* ---------- Circuit 0: absolute value and opposite ---------- */
 
@@ -130,7 +130,7 @@ function oppositeQuestion(random: Random, tier: Tier): IntegerRaceQuestion | nul
         ...nearMisses(answer)
     ])
     if (!options) return null
-    const prompt = { eu: `Kalkulatu: ${math(op('Aur'))}`, es: `Calcula: ${math(op('Op'))}`, ar: `احسب معاكس ${math(signedLatex(first))} زائد ${math(`\\lvert ${signedLatex(second)}\\rvert`)}` }
+    const prompt = { eu: `Kalkulatu: ${math(op('Aur'))}`, es: `Calcula: ${math(op('Op'))}`, en: `Calculate: ${math(op('Op'))}`, ar: `احسب معاكس ${math(signedLatex(first))} زائد ${math(`\\lvert ${signedLatex(second)}\\rvert`)}` }
     const worked = `${b(-first)}+${Math.abs(second)}=${signedLatex(answer)}`
     return question(0, 'opposite', prompt, options, answer, formula(worked))
 }
@@ -159,8 +159,8 @@ function extremeQuestion(random: Random, tier: Tier, largest: boolean): IntegerR
         error: value === answer ? null : value === tempting ? 'bigger-abs' as const : 'compare' as const
     }))
     const prompt = largest
-        ? text('Zein da handiena?', '¿Cuál es el mayor?', 'أي عدد هو الأكبر؟')
-        : text('Zein da txikiena?', '¿Cuál es el menor?', 'أي عدد هو الأصغر؟')
+        ? text('Zein da handiena?', '¿Cuál es el mayor?', 'أي عدد هو الأكبر؟', 'Which is the largest?')
+        : text('Zein da txikiena?', '¿Cuál es el menor?', 'أي عدد هو الأصغر؟', 'Which is the smallest?')
     const sorted = [...values].sort((left, right) => left - right).map(signedLatex).join('<')
     return question(1, largest ? 'largest' : 'smallest', prompt, options, answer, formula(sorted))
 }
@@ -179,7 +179,7 @@ function betweenQuestion(random: Random, tier: Tier): IntegerRaceQuestion | null
         { value: high, error: 'outside' }
     ].filter((mistake) => mistake.value <= low || mistake.value >= high) as Candidate[])
     if (!options) return null
-    return question(1, 'between', around(text('Zein dago tarte honetan? ', '¿Cuál está entre los dos? ', 'أي عدد يقع بينهما؟ '), `${signedLatex(low)}<\\;?\\;<${signedLatex(high)}`), options, answer, formula(`${signedLatex(low)}<${signedLatex(answer)}<${signedLatex(high)}`), false)
+    return question(1, 'between', around(text('Zein dago tarte honetan? ', '¿Cuál está entre los dos? ', 'أي عدد يقع بينهما؟ ', 'Which one lies between the two? '), `${signedLatex(low)}<\\;?\\;<${signedLatex(high)}`), options, answer, formula(`${signedLatex(low)}<${signedLatex(answer)}<${signedLatex(high)}`), false)
 }
 
 /* ---------- Circuit 2: sums and subtractions ---------- */
@@ -266,7 +266,7 @@ function productQuestion(random: Random, tier: Tier): IntegerRaceQuestion | null
     ])
     if (!options) return null
     const sameSign = (divide ? dividend : first) * second > 0
-    const rule = sameSign ? text('Zeinu bera → +. ', 'Mismo signo → +. ', 'الإشارة نفسها ← +. ') : text('Zeinu desberdinak → −. ', 'Signos distintos → −. ', 'إشارتان مختلفتان ← −. ')
+    const rule = sameSign ? text('Zeinu bera → +. ', 'Mismo signo → +. ', 'الإشارة نفسها ← +. ', 'Same sign → +. ') : text('Zeinu desberdinak → −. ', 'Signos distintos → −. ', 'إشارتان مختلفتان ← −. ', 'Different signs → −. ')
     return question(3, divide ? 'divide' : 'multiply', around(calculate, latex), options, answer, around(rule, `${latex}=${signedLatex(answer)}`))
 }
 
@@ -284,8 +284,8 @@ function threeFactorsQuestion(random: Random, tier: Tier): IntegerRaceQuestion |
     ])
     if (!options) return null
     const rule = negatives % 2 === 0
-        ? text(`${negatives} faktore negatibo (bikoitia) → +. `, `${negatives} factores negativos (par) → +. `, `${negatives} عوامل سالبة (عدد زوجي) ← +. `)
-        : text(`${negatives} faktore negatibo (bakoitia) → −. `, `${negatives} factores negativos (impar) → −. `, `${negatives} عوامل سالبة (عدد فردي) ← −. `)
+        ? text(`${negatives} faktore negatibo (bikoitia) → +. `, `${negatives} factores negativos (par) → +. `, `${negatives} عوامل سالبة (عدد زوجي) ← +. `, `${negatives} negative factors (even) → +. `)
+        : text(`${negatives} faktore negatibo (bakoitia) → −. `, `${negatives} factores negativos (impar) → −. `, `${negatives} عوامل سالبة (عدد فردي) ← −. `, `${negatives} negative factors (odd) → −. `)
     return question(3, 'three-factors', around(calculate, latex), options, answer, around(rule, `${latex}=${signedLatex(answer)}`))
 }
 
@@ -368,17 +368,17 @@ export function integerParTime(circuit: number): number {
 }
 
 export const integerRaceErrorTips: Record<IntegerRaceError, LocalizedText> = {
-    sign: text('Kalkulua ondo dago, baina zeinua ez. Begiratu zein zenbakik duen balio absolutu handiena.', 'El cálculo está bien, pero el signo no. Mira qué número tiene mayor valor absoluto.', 'الحساب صحيح لكن الإشارة خاطئة. انظر أي عدد له القيمة المطلقة الأكبر.'),
-    'abs-sign': text('Balio absolutua distantzia da: kendu zeinua barren barrukoari kalkulatu aurretik.', 'El valor absoluto es una distancia: quita el signo de dentro de las barras antes de calcular.', 'القيمة المطلقة مسافة: احذف الإشارة داخل الخطين قبل الحساب.'),
-    'no-opposite': text('Aurkakoa hartzean zeinua aldatzen da: Aur(−5) = +5.', 'Al tomar el opuesto se cambia el signo: Op(−5) = +5.', 'عند أخذ المعاكس تتغير الإشارة: معاكس ⁦−5⁩ هو ⁦+5⁩.'),
-    'bigger-abs': text('Negatiboetan, balio absolutu handiena duena da txikiena: −9 < −2.', 'Entre negativos, el de mayor valor absoluto es el menor: −9 < −2.', 'بين السالبة، صاحب القيمة المطلقة الأكبر هو الأصغر: ⁦−9 < −2⁩.'),
-    compare: text('Irudikatu zenbakiak zuzenean: eskuinean dagoena da handiena.', 'Imagina los números en la recta: el que está más a la derecha es el mayor.', 'تخيّل الأعداد على الخط: الواقع إلى اليمين هو الأكبر.'),
-    outside: text('Zenbaki hori tartetik kanpo dago (edo muturrean). Bilatu bi zenbakien artean.', 'Ese número está fuera del intervalo (o en un extremo). Busca entre los dos números.', 'هذا العدد خارج المجال (أو على طرفه). ابحث بين العددين.'),
-    'subtract-sign': text('Kentzea aurkakoa batzea da: bigarren zenbakiaren zeinua aldatu behar da.', 'Restar es sumar el opuesto: hay que cambiar el signo del segundo número.', 'الطرح هو جمع المعاكس: يجب تغيير إشارة العدد الثاني.'),
-    'added-abs': text('Zeinu desberdinak: ez batu balio absolutuak, kendu egin behar dira.', 'Con signos distintos no se suman los valores absolutos: se restan.', 'مع إشارتين مختلفتين لا نجمع القيمتين المطلقتين بل نطرحهما.'),
-    'sign-rule': text('Berrikusi zeinuen araua: zeinu bera → +, zeinu desberdinak → −.', 'Repasa la regla de los signos: mismo signo → +, signos distintos → −.', 'راجع قاعدة الإشارات: الإشارة نفسها ← +، إشارتان مختلفتان ← −.'),
-    added: text('Hemen biderkatu edo zatitu egin behar da, ez batu.', 'Aquí hay que multiplicar o dividir, no sumar.', 'هنا يجب الضرب أو القسمة، لا الجمع.'),
-    priority: text('Biderketak eta zatiketak batuketak eta kenketak baino lehen egiten dira.', 'Los productos y cocientes se hacen antes que las sumas y restas.', 'يُجرى الضرب والقسمة قبل الجمع والطرح.'),
-    brackets: text('Parentesiaren aurrean − dagoenean, barruko zeinu guztiak aldatzen dira (edo egin lehenik barrukoa).', 'Con un − delante del paréntesis cambian todos los signos de dentro (o haz primero lo de dentro).', 'عندما تسبق − القوس تتغير كل الإشارات داخله (أو احسب ما بداخله أولًا).'),
-    calculation: text('Zeinua ondo dago, baina kalkuluan akats txiki bat dago. Egin berriro poliki.', 'El signo está bien, pero hay un pequeño error de cálculo. Hazlo otra vez despacio.', 'الإشارة صحيحة لكن في الحساب خطأ صغير. أعده ببطء.')
+    sign: text('Kalkulua ondo dago, baina zeinua ez. Begiratu zein zenbakik duen balio absolutu handiena.', 'El cálculo está bien, pero el signo no. Mira qué número tiene mayor valor absoluto.', 'الحساب صحيح لكن الإشارة خاطئة. انظر أي عدد له القيمة المطلقة الأكبر.', 'The calculation is right, but the sign is not. Check which number has the greater absolute value.'),
+    'abs-sign': text('Balio absolutua distantzia da: kendu zeinua barren barrukoari kalkulatu aurretik.', 'El valor absoluto es una distancia: quita el signo de dentro de las barras antes de calcular.', 'القيمة المطلقة مسافة: احذف الإشارة داخل الخطين قبل الحساب.', 'Absolute value is a distance: remove the sign inside the bars before you calculate.'),
+    'no-opposite': text('Aurkakoa hartzean zeinua aldatzen da: Aur(−5) = +5.', 'Al tomar el opuesto se cambia el signo: Op(−5) = +5.', 'عند أخذ المعاكس تتغير الإشارة: معاكس ⁦−5⁩ هو ⁦+5⁩.', 'Taking the opposite changes the sign: Op(−5) = +5.'),
+    'bigger-abs': text('Negatiboetan, balio absolutu handiena duena da txikiena: −9 < −2.', 'Entre negativos, el de mayor valor absoluto es el menor: −9 < −2.', 'بين السالبة، صاحب القيمة المطلقة الأكبر هو الأصغر: ⁦−9 < −2⁩.', 'Among negative numbers, the one with the greater absolute value is the smaller: −9 < −2.'),
+    compare: text('Irudikatu zenbakiak zuzenean: eskuinean dagoena da handiena.', 'Imagina los números en la recta: el que está más a la derecha es el mayor.', 'تخيّل الأعداد على الخط: الواقع إلى اليمين هو الأكبر.', 'Picture the numbers on the number line: the one furthest to the right is the greater one.'),
+    outside: text('Zenbaki hori tartetik kanpo dago (edo muturrean). Bilatu bi zenbakien artean.', 'Ese número está fuera del intervalo (o en un extremo). Busca entre los dos números.', 'هذا العدد خارج المجال (أو على طرفه). ابحث بين العددين.', 'That number is outside the interval (or at one end). Look between the two numbers.'),
+    'subtract-sign': text('Kentzea aurkakoa batzea da: bigarren zenbakiaren zeinua aldatu behar da.', 'Restar es sumar el opuesto: hay que cambiar el signo del segundo número.', 'الطرح هو جمع المعاكس: يجب تغيير إشارة العدد الثاني.', 'Subtracting is adding the opposite: you must change the sign of the second number.'),
+    'added-abs': text('Zeinu desberdinak: ez batu balio absolutuak, kendu egin behar dira.', 'Con signos distintos no se suman los valores absolutos: se restan.', 'مع إشارتين مختلفتين لا نجمع القيمتين المطلقتين بل نطرحهما.', 'With different signs you don\'t add the absolute values: you subtract them.'),
+    'sign-rule': text('Berrikusi zeinuen araua: zeinu bera → +, zeinu desberdinak → −.', 'Repasa la regla de los signos: mismo signo → +, signos distintos → −.', 'راجع قاعدة الإشارات: الإشارة نفسها ← +، إشارتان مختلفتان ← −.', 'Review the rule of signs: same sign → +, different signs → −.'),
+    added: text('Hemen biderkatu edo zatitu egin behar da, ez batu.', 'Aquí hay que multiplicar o dividir, no sumar.', 'هنا يجب الضرب أو القسمة، لا الجمع.', 'Here you need to multiply or divide, not add.'),
+    priority: text('Biderketak eta zatiketak batuketak eta kenketak baino lehen egiten dira.', 'Los productos y cocientes se hacen antes que las sumas y restas.', 'يُجرى الضرب والقسمة قبل الجمع والطرح.', 'Multiplications and divisions are done before additions and subtractions.'),
+    brackets: text('Parentesiaren aurrean − dagoenean, barruko zeinu guztiak aldatzen dira (edo egin lehenik barrukoa).', 'Con un − delante del paréntesis cambian todos los signos de dentro (o haz primero lo de dentro).', 'عندما تسبق − القوس تتغير كل الإشارات داخله (أو احسب ما بداخله أولًا).', 'With a − in front of the bracket, all the signs inside change (or work out the bracket first).'),
+    calculation: text('Zeinua ondo dago, baina kalkuluan akats txiki bat dago. Egin berriro poliki.', 'El signo está bien, pero hay un pequeño error de cálculo. Hazlo otra vez despacio.', 'الإشارة صحيحة لكن في الحساب خطأ صغير. أعده ببطء.', 'The sign is right, but there is a small calculation error. Do it again, slowly.')
 }

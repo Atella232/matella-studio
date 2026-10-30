@@ -66,9 +66,9 @@ export function GamesHub<Id extends string>({
     return (
         <section className="fraction-v2-games" aria-labelledby="fraction-v2-games-title">
             <div className="fraction-v2-page-intro">
-                <span>{l({ eu: `${count} JOKO`, es: `${count} JUEGOS`, ar: `${count} ألعاب` })}</span>
+                <span>{l({ eu: `${count} JOKO`, es: `${count} JUEGOS`, en: `${count} GAMES`, ar: `${count} ألعاب` })}</span>
                 <h1 id="fraction-v2-games-title">{l(title)}</h1>
-                <p>{l({ eu: 'Joko bakoitzak maila edo zirkuitu batzuk ditu. Lortu izarrak: lehenengoak unitateko aurrerapenean zenbatzen du.', es: 'Cada juego tiene varios niveles o circuitos. Consigue estrellas: la primera cuenta en el progreso de la unidad.', ar: 'لكل لعبة عدة مستويات أو حلبات. اجمع النجوم: الأولى تُحتسب في تقدم الوحدة.' })}</p>
+                <p>{l({ eu: 'Joko bakoitzak maila edo zirkuitu batzuk ditu. Lortu izarrak: lehenengoak unitateko aurrerapenean zenbatzen du.', es: 'Cada juego tiene varios niveles o circuitos. Consigue estrellas: la primera cuenta en el progreso de la unidad.', en: 'Each game has several levels or circuits. Earn stars: the first star counts towards the unit\'s progress.', ar: 'لكل لعبة عدة مستويات أو حلبات. اجمع النجوم: الأولى تُحتسب في تقدم الوحدة.' })}</p>
             </div>
             <div className="fraction-v2-games-grid">
                 {games.map(({ info, art }) => {
@@ -85,10 +85,10 @@ export function GamesHub<Id extends string>({
                             <div className="fraction-v2-games-card-foot">
                                 <span className="fraction-v2-games-card-stars">
                                     <StarRow stars={earned > 0 ? 1 : 0} count={1} language={language} size={18} />
-                                    <span aria-label={l({ eu: `${earned} izar ${possible}tik`, es: `${earned} de ${possible} estrellas`, ar: `${earned} من ${possible} نجمة` })}>{earned} / {possible}</span>
+                                    <span aria-label={l({ eu: `${earned} izar ${possible}tik`, es: `${earned} de ${possible} estrellas`, en: `${earned} of ${possible} stars`, ar: `${earned} من ${possible} نجمة` })}>{earned} / {possible}</span>
                                 </span>
-                                <button type="button" className="fraction-v2-primary" onClick={() => open(info.id)} aria-label={`${l({ eu: 'Jolastu', es: 'Jugar', ar: 'العب' })}: ${l(info.title)}`}>
-                                    {l({ eu: 'Jolastu', es: 'Jugar', ar: 'العب' })}
+                                <button type="button" className="fraction-v2-primary" onClick={() => open(info.id)} aria-label={`${l({ eu: 'Jolastu', es: 'Jugar', en: 'Play', ar: 'العب' })}: ${l(info.title)}`}>
+                                    {l({ eu: 'Jolastu', es: 'Jugar', en: 'Play', ar: 'العب' })}
                                 </button>
                             </div>
                         </article>

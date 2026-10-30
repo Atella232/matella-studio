@@ -43,8 +43,8 @@ export type PowersRaceError =
 export type PowersRaceQuestion = RaceQuestion<PowersRaceError> & { meta: Record<string, number> }
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => ({ eu: `$${latex}$`, es: `$${latex}$`, ar: `$${latex.replace(/\{,\}/g, '.')}$` })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => ({ eu: `$${latex}$`, es: `$${latex}$`, en: `$${latex}$`, ar: `$${latex.replace(/\{,\}/g, '.')}$` })
 const math = (latex: string) => `$${latex}$`
 const root = (index: number, radicand: number | string) => (index === 2 ? `\\sqrt{${radicand}}` : `\\sqrt[${index}]{${radicand}}`)
 
@@ -88,8 +88,8 @@ function build(circuit: number, kind: string, prompt: LocalizedText, choices: Ra
     return { circuit, kind, prompt, options: choices, answer, answerForm: 'any', percentAnswer: false, writable: true, solution, meta }
 }
 
-const calc = (formula: string) => say(`Kalkulatu ${math(formula)}.`, `Calcula ${math(formula)}.`, `احسب ${math(formula)}.`)
-const howMuch = (formula: string, letter: string) => say(`${math(formula)}. Zenbat da ${math(letter)}?`, `${math(formula)}. ¿Cuánto vale ${math(letter)}?`, `${math(formula)}. كم تساوي ${math(letter)}؟`)
+const calc = (formula: string) => say(`Kalkulatu ${math(formula)}.`, `Calcula ${math(formula)}.`, `احسب ${math(formula)}.`, `Calculate ${math(formula)}.`)
+const howMuch = (formula: string, letter: string) => say(`${math(formula)}. Zenbat da ${math(letter)}?`, `${math(formula)}. ¿Cuánto vale ${math(letter)}?`, `${math(formula)}. كم تساوي ${math(letter)}؟`, `${math(formula)}. What is the value of ${math(letter)}?`)
 
 /* ---------- Circuit 0: powers ---------- */
 
@@ -307,7 +307,7 @@ function bracketQuestion(random: Random, tier: Tier): PowersRaceQuestion | null 
     return choices && build(4, 'bracket', say(
         `${math(`\\log_{${base}} ${value}`)} bi zenbaki osoren artean dago. Zein da txikiena?`,
         `${math(`\\log_{${base}} ${value}`)} está entre dos números enteros. ¿Cuál es el menor?`,
-        `${math(`\\log_{${base}} ${value}`)} بين عددين صحيحين. ما الأصغر؟`
+        `${math(`\\log_{${base}} ${value}`)} بين عددين صحيحين. ما الأصغر؟`, `${math(`\\log_{${base}} ${value}`)} lies between two integers. Which one is the smaller?`
     ), choices, fraction(low), same(`${base}^{${low}}=${from}<${value}<${to}=${base}^{${low + 1}}`), { base, value })
 }
 
@@ -339,22 +339,22 @@ export function powersParTime(circuit: number): number {
 }
 
 export const powersRaceErrorTips: Record<PowersRaceError, LocalizedText> = {
-    'no-inverse': say('Berretzaile negatiboa: alderantzizkoa, a⁻ⁿ = 1/aⁿ.', 'Exponente negativo: el inverso, a⁻ⁿ = 1/aⁿ.', 'الأس السالب: المقلوب، a⁻ⁿ = 1/aⁿ.'),
-    sign: say('Kontuz zeinuarekin: berretzaileak kentzean, edo oinarri negatiboarekin.', 'Cuidado con el signo: al restar exponentes o con la base negativa.', 'انتبه للإشارة: عند طرح الأسس أو مع الأساس السالب.'),
-    'multiply-exponents': say('Oinarri bera biderkatzean berretzaileak batu, ez biderkatu; berretura baten berreturan bakarrik biderkatzen dira.', 'Al multiplicar la misma base se suman los exponentes; solo se multiplican en la potencia de una potencia.', 'عند ضرب الأساس نفسه نجمع الأسس؛ ولا نضربها إلا في قوة القوة.'),
-    'exponent-sign': say('Zenbaki handiak: berretzaile positiboa; zenbaki txikiak (1 baino txikiagoak): negatiboa.', 'Números grandes: exponente positivo; números pequeños (menores que 1): negativo.', 'الأعداد الكبيرة: أس موجب؛ والصغيرة (أصغر من 1): سالب.'),
-    'no-adjust': say('Zenbatu jauziak ondo: komaren aurretik zero ez den zifra bakarra geratu behar da.', 'Cuenta bien los saltos: delante de la coma tiene que quedar una sola cifra distinta de cero.', 'عُدّ القفزات جيدًا: يجب أن يبقى قبل الفاصلة رقم واحد غير الصفر.'),
-    swap: say('Izendatzailea indizea da eta zenbakitzailea berretura: a^(p/q) = (ᵠ√a)ᵖ.', 'El denominador es el índice y el numerador la potencia: a^(p/q) = (ᵠ√a)ᵖ.', 'المقام هو الدليل والبسط هو القوة: a^(p/q) = (ᵠ√a)ᵖ.'),
-    'no-root': say('Erroa atera behar da, ez zatitu indizeaz.', 'Hay que sacar la raíz, no dividir entre el índice.', 'يجب أخذ الجذر لا القسمة على الدليل.'),
-    index: say('Indizeak ez du emaitza biderkatzen: erroa da.', 'El índice no multiplica el resultado: es una raíz.', 'الدليل لا يضرب النتيجة: إنه جذر.'),
-    radicand: say('Indize komunera eramatean, errokizuna berretu behar da, ez biderkatu.', 'Al pasar a índice común, el radicando se eleva, no se multiplica.', 'عند الرد إلى دليل مشترك يُرفع ما تحت الجذر إلى قوة لا يُضرب.'),
-    outside: say('Ateratzen dena erroa da (a), ez berretura (aⁿ).', 'Lo que sale es la raíz (a), no la potencia (aⁿ).', 'ما يخرج هو الجذر (a) لا القوة (aⁿ).'),
-    'add-radicands': say('Erroak ez dira batzen errokizunak batuz: atera faktoreak eta batu koefizienteak.', 'Las raíces no se suman sumando los radicandos: saca factores y suma los coeficientes.', 'لا تُجمع الجذور بجمع ما تحتها: أخرج العوامل واجمع المعاملات.'),
-    'no-square': say('√(k² · a) = k√a: ateratzean, k karratuaren erroa da.', '√(k² · a) = k√a: al sacar, sale la raíz de k².', '√(k² · a) = k√a: عند الإخراج يخرج جذر k².'),
-    'wrong-factor': say('Osatu berretzailea indizeraino: ⁿ√bᵐ bider ⁿ√bⁿ⁻ᵐ.', 'Completa el exponente hasta el índice: ⁿ√bᵐ por ⁿ√bⁿ⁻ᵐ.', 'أكمل الأس حتى الدليل: ⁿ√bᵐ في ⁿ√bⁿ⁻ᵐ.'),
-    denominator: say('Ez ahaztu izendatzaileaz zatitzea: √b · √b = b.', 'No olvides dividir entre el denominador: √b · √b = b.', 'لا تنسَ القسمة على المقام: √b · √b = b.'),
-    'log-value': say('Logaritmoa berretzailea da, ez balioa: logₐ aˣ = x.', 'El logaritmo es el exponente, no el valor: logₐ aˣ = x.', 'اللوغاريتم هو الأس لا القيمة: logₐ aˣ = x.'),
-    'log-base': say('logₐ b = x esan nahi du aˣ = b: ez biderkatu oinarria.', 'logₐ b = x significa aˣ = b: no multipliques la base.', 'logₐ b = x تعني aˣ = b: لا تضرب الأساس.'),
-    'log-product': say('Logaritmoen batura biderkaduraren logaritmoa da: log m + log n = log (m · n).', 'La suma de logaritmos es el logaritmo del producto: log m + log n = log (m · n).', 'مجموع اللوغاريتمين لوغاريتم الضرب: log m + log n = log (m · n).'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    'no-inverse': say('Berretzaile negatiboa: alderantzizkoa, a⁻ⁿ = 1/aⁿ.', 'Exponente negativo: el inverso, a⁻ⁿ = 1/aⁿ.', 'الأس السالب: المقلوب، a⁻ⁿ = 1/aⁿ.', 'Negative exponent: the reciprocal, a⁻ⁿ = 1/aⁿ.'),
+    sign: say('Kontuz zeinuarekin: berretzaileak kentzean, edo oinarri negatiboarekin.', 'Cuidado con el signo: al restar exponentes o con la base negativa.', 'انتبه للإشارة: عند طرح الأسس أو مع الأساس السالب.', 'Watch the sign: when subtracting exponents or with a negative base.'),
+    'multiply-exponents': say('Oinarri bera biderkatzean berretzaileak batu, ez biderkatu; berretura baten berreturan bakarrik biderkatzen dira.', 'Al multiplicar la misma base se suman los exponentes; solo se multiplican en la potencia de una potencia.', 'عند ضرب الأساس نفسه نجمع الأسس؛ ولا نضربها إلا في قوة القوة.', 'When multiplying the same base, the exponents are added; they are only multiplied in a power of a power.'),
+    'exponent-sign': say('Zenbaki handiak: berretzaile positiboa; zenbaki txikiak (1 baino txikiagoak): negatiboa.', 'Números grandes: exponente positivo; números pequeños (menores que 1): negativo.', 'الأعداد الكبيرة: أس موجب؛ والصغيرة (أصغر من 1): سالب.', 'Large numbers: positive exponent; small numbers (less than 1): negative exponent.'),
+    'no-adjust': say('Zenbatu jauziak ondo: komaren aurretik zero ez den zifra bakarra geratu behar da.', 'Cuenta bien los saltos: delante de la coma tiene que quedar una sola cifra distinta de cero.', 'عُدّ القفزات جيدًا: يجب أن يبقى قبل الفاصلة رقم واحد غير الصفر.', 'Count the places carefully: there must be just one non-zero digit in front of the decimal point.'),
+    swap: say('Izendatzailea indizea da eta zenbakitzailea berretura: a^(p/q) = (ᵠ√a)ᵖ.', 'El denominador es el índice y el numerador la potencia: a^(p/q) = (ᵠ√a)ᵖ.', 'المقام هو الدليل والبسط هو القوة: a^(p/q) = (ᵠ√a)ᵖ.', 'The denominator is the index and the numerator is the power: a^(p/q) = (ᵠ√a)ᵖ.'),
+    'no-root': say('Erroa atera behar da, ez zatitu indizeaz.', 'Hay que sacar la raíz, no dividir entre el índice.', 'يجب أخذ الجذر لا القسمة على الدليل.', 'You have to take the root, not divide by the index.'),
+    index: say('Indizeak ez du emaitza biderkatzen: erroa da.', 'El índice no multiplica el resultado: es una raíz.', 'الدليل لا يضرب النتيجة: إنه جذر.', 'The index does not multiply the result: it is a root.'),
+    radicand: say('Indize komunera eramatean, errokizuna berretu behar da, ez biderkatu.', 'Al pasar a índice común, el radicando se eleva, no se multiplica.', 'عند الرد إلى دليل مشترك يُرفع ما تحت الجذر إلى قوة لا يُضرب.', 'When changing to a common index, the radicand is raised to a power, not multiplied.'),
+    outside: say('Ateratzen dena erroa da (a), ez berretura (aⁿ).', 'Lo que sale es la raíz (a), no la potencia (aⁿ).', 'ما يخرج هو الجذر (a) لا القوة (aⁿ).', 'What you get is the root (a), not the power (aⁿ).'),
+    'add-radicands': say('Erroak ez dira batzen errokizunak batuz: atera faktoreak eta batu koefizienteak.', 'Las raíces no se suman sumando los radicandos: saca factores y suma los coeficientes.', 'لا تُجمع الجذور بجمع ما تحتها: أخرج العوامل واجمع المعاملات.', 'Roots are not added by adding the radicands: take out factors and add the coefficients.'),
+    'no-square': say('√(k² · a) = k√a: ateratzean, k karratuaren erroa da.', '√(k² · a) = k√a: al sacar, sale la raíz de k².', '√(k² · a) = k√a: عند الإخراج يخرج جذر k².', '√(k² · a) = k√a: when you take it out, the root of k² comes out.'),
+    'wrong-factor': say('Osatu berretzailea indizeraino: ⁿ√bᵐ bider ⁿ√bⁿ⁻ᵐ.', 'Completa el exponente hasta el índice: ⁿ√bᵐ por ⁿ√bⁿ⁻ᵐ.', 'أكمل الأس حتى الدليل: ⁿ√bᵐ في ⁿ√bⁿ⁻ᵐ.', 'Complete the exponent up to the index: ⁿ√bᵐ times ⁿ√bⁿ⁻ᵐ.'),
+    denominator: say('Ez ahaztu izendatzaileaz zatitzea: √b · √b = b.', 'No olvides dividir entre el denominador: √b · √b = b.', 'لا تنسَ القسمة على المقام: √b · √b = b.', 'Don\'t forget to divide by the denominator: √b · √b = b.'),
+    'log-value': say('Logaritmoa berretzailea da, ez balioa: logₐ aˣ = x.', 'El logaritmo es el exponente, no el valor: logₐ aˣ = x.', 'اللوغاريتم هو الأس لا القيمة: logₐ aˣ = x.', 'The logarithm is the exponent, not the value: logₐ aˣ = x.'),
+    'log-base': say('logₐ b = x esan nahi du aˣ = b: ez biderkatu oinarria.', 'logₐ b = x significa aˣ = b: no multipliques la base.', 'logₐ b = x تعني aˣ = b: لا تضرب الأساس.', 'logₐ b = x means aˣ = b: don\'t multiply the base.'),
+    'log-product': say('Logaritmoen batura biderkaduraren logaritmoa da: log m + log n = log (m · n).', 'La suma de logaritmos es el logaritmo del producto: log m + log n = log (m · n).', 'مجموع اللوغاريتمين لوغاريتم الضرب: log m + log n = log (m · n).', 'The sum of logarithms is the logarithm of the product: log m + log n = log (m · n).'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

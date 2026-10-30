@@ -50,8 +50,8 @@ const MUSTARD_TINT = 'var(--mustard-tint, #fbebc0)'
 const SECOND_TINT = 'var(--second-tint, #f8dcd0)'
 
 const numberTexts = {
-    placeholder: { eu: 'Adib.: 12', es: 'Ej.: 12', ar: 'مثال: 12' },
-    unreadable: { eu: 'Idatzi zenbaki oso bat.', es: 'Escribe un número entero.', ar: 'اكتب عددًا صحيحًا.' }
+    placeholder: { eu: 'Adib.: 12', es: 'Ej.: 12', en: 'E.g.: 12', ar: 'مثال: 12' },
+    unreadable: { eu: 'Idatzi zenbaki oso bat.', es: 'Escribe un número entero.', en: 'Write an integer.', ar: 'اكتب عددًا صحيحًا.' }
 }
 
 /* ---------- The 1. DBH machine and tiles with this course's polynomials ---------- */
@@ -67,8 +67,8 @@ export function TilesTool(props: LabToolProps) {
 /* ---------- Area model ---------- */
 
 const askNames: Record<AreaAsk, LocalizedText> = {
-    middle: { eu: 'x-ren koefizientea', es: 'Coeficiente de x', ar: 'معامل x' },
-    constant: { eu: 'Gai askea', es: 'Término independiente', ar: 'الحد الثابت' }
+    middle: { eu: 'x-ren koefizientea', es: 'Coeficiente de x', en: 'Coefficient of x', ar: 'معامل x' },
+    constant: { eu: 'Gai askea', es: 'Término independiente', en: 'Constant term', ar: 'الحد الثابت' }
 }
 
 export function AreaTool(props: LabToolProps) {
@@ -85,7 +85,7 @@ export function AreaTool(props: LabToolProps) {
         <>
             <Stepper label="a" value={a} min={AREA_LIMITS.min} max={AREA_LIMITS.max} onChange={(next) => setState((current) => setAreaModel(current, { a: next }))} language={props.language} />
             <Stepper label="b" value={b} min={AREA_LIMITS.min} max={AREA_LIMITS.max} onChange={(next) => setState((current) => setAreaModel(current, { b: next }))} language={props.language} />
-            <Segmented label={l({ eu: 'Idatzi', es: 'Escribe', ar: 'اكتب' })} value={state.ask} options={(['middle', 'constant'] as AreaAsk[]).map((value) => ({ value, label: l(askNames[value]) }))} onChange={(next) => setState((current) => setAreaModel(current, { ask: next }))} />
+            <Segmented label={l({ eu: 'Idatzi', es: 'Escribe', en: 'Write', ar: 'اكتب' })} value={state.ask} options={(['middle', 'constant'] as AreaAsk[]).map((value) => ({ value, label: l(askNames[value]) }))} onChange={(next) => setState((current) => setAreaModel(current, { ask: next }))} />
         </>
     )
     const readout = (
@@ -125,9 +125,9 @@ export function AreaTool(props: LabToolProps) {
 /* ---------- Notable products with numbers ---------- */
 
 const identityNames: Record<IdentityKind, LocalizedText> = {
-    sum: { eu: '(a + b)²', es: '(a + b)²', ar: '(a + b)²' },
-    difference: { eu: '(a − b)²', es: '(a − b)²', ar: '(a − b)²' },
-    product: { eu: '(a + b)(a − b)', es: '(a + b)(a − b)', ar: '(a + b)(a − b)' }
+    sum: { eu: '(a + b)²', es: '(a + b)²', en: '(a + b)²', ar: '(a + b)²' },
+    difference: { eu: '(a − b)²', es: '(a − b)²', en: '(a − b)²', ar: '(a − b)²' },
+    product: { eu: '(a + b)(a − b)', es: '(a + b)(a − b)', en: '(a + b)(a − b)', ar: '(a + b)(a − b)' }
 }
 
 function identityLeft(state: IdentityState): string {
@@ -153,7 +153,7 @@ export function IdentityTool(props: LabToolProps) {
     const mistake = identityMistake(state)
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Identitatea', es: 'Identidad', ar: 'المتطابقة' })} value={state.kind} options={(['sum', 'difference', 'product'] as IdentityKind[]).map((value) => ({ value, label: l(identityNames[value]) }))} onChange={(next) => setState((current) => setIdentity(current, { kind: next }))} />
+            <Segmented label={l({ eu: 'Identitatea', es: 'Identidad', en: 'Identity', ar: 'المتطابقة' })} value={state.kind} options={(['sum', 'difference', 'product'] as IdentityKind[]).map((value) => ({ value, label: l(identityNames[value]) }))} onChange={(next) => setState((current) => setIdentity(current, { kind: next }))} />
             <Stepper label="a" value={state.a} min={IDENTITY_LIMITS.min} max={IDENTITY_LIMITS.max} onChange={(next) => setState((current) => setIdentity(current, { a: next }))} language={props.language} />
             <Stepper label="b" value={state.b} min={IDENTITY_LIMITS.min} max={IDENTITY_LIMITS.max} onChange={(next) => setState((current) => setIdentity(current, { b: next }))} language={props.language} />
         </>
@@ -172,8 +172,8 @@ export function IdentityTool(props: LabToolProps) {
                 <p className="algebra2-identity-equal"><MathText text={`$=${terms.map((term, index) => (index === 0 ? String(term) : term < 0 ? `-${-term}` : `+${term}`)).join('')}${shown ? `=${value}` : ''}$`} /></p>
                 {mistake !== null && (
                     <p className="algebra2-identity-mistake">
-                        {l({ eu: 'Akats ohikoa:', es: 'Error típico:', ar: 'خطأ شائع:' })} <MathText text={`$${state.a}^{2}+${state.b}^{2}=${mistake}$`} />
-                        {' '}{l({ eu: `— ${2 * state.a * state.b} falta zaio (2ab).`, es: `— le faltan ${2 * state.a * state.b} (2ab).`, ar: `— ينقصه ${2 * state.a * state.b} (2ab).` })}
+                        {l({ eu: 'Akats ohikoa:', es: 'Error típico:', en: 'Common mistake:', ar: 'خطأ شائع:' })} <MathText text={`$${state.a}^{2}+${state.b}^{2}=${mistake}$`} />
+                        {' '}{l({ eu: `— ${2 * state.a * state.b} falta zaio (2ab).`, es: `— le faltan ${2 * state.a * state.b} (2ab).`, en: `— it is missing ${2 * state.a * state.b} (2ab).`, ar: `— ينقصه ${2 * state.a * state.b} (2ab).` })}
                     </p>
                 )}
             </div>
@@ -193,9 +193,9 @@ export function FactorTool(props: LabToolProps) {
     const isGreatest = greatest.coefficient === state.coefficient && greatest.power === state.power
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Polinomioa', es: 'Polinomio', ar: 'الحدودية' })} value={String(state.polynomial)} options={factorPolynomials.map((polynomial, index) => ({ value: String(index), label: factorLatex(polynomial.terms).replace(/\^\{(\d)\}/g, (_, digit: string) => '⁰¹²³⁴⁵'[Number(digit)]).replace(/-/g, '−') }))} onChange={(next) => setState((current) => setFactor(current, { polynomial: Number(next) }))} />
-            <Stepper label={l({ eu: 'Koefizientea', es: 'Coeficiente', ar: 'المعامل' })} value={state.coefficient} min={FACTOR_LIMITS.coefficient.min} max={FACTOR_LIMITS.coefficient.max} onChange={(next) => setState((current) => setFactor(current, { coefficient: next }))} language={props.language} />
-            <Stepper label={l({ eu: 'x-ren berretzailea', es: 'Exponente de x', ar: 'أس x' })} value={state.power} min={FACTOR_LIMITS.power.min} max={FACTOR_LIMITS.power.max} onChange={(next) => setState((current) => setFactor(current, { power: next }))} language={props.language} />
+            <Segmented label={l({ eu: 'Polinomioa', es: 'Polinomio', en: 'Polynomial', ar: 'الحدودية' })} value={String(state.polynomial)} options={factorPolynomials.map((polynomial, index) => ({ value: String(index), label: factorLatex(polynomial.terms).replace(/\^\{(\d)\}/g, (_, digit: string) => '⁰¹²³⁴⁵'[Number(digit)]).replace(/-/g, '−') }))} onChange={(next) => setState((current) => setFactor(current, { polynomial: Number(next) }))} />
+            <Stepper label={l({ eu: 'Koefizientea', es: 'Coeficiente', en: 'Coefficient', ar: 'المعامل' })} value={state.coefficient} min={FACTOR_LIMITS.coefficient.min} max={FACTOR_LIMITS.coefficient.max} onChange={(next) => setState((current) => setFactor(current, { coefficient: next }))} language={props.language} />
+            <Stepper label={l({ eu: 'x-ren berretzailea', es: 'Exponente de x', en: 'Exponent of x', ar: 'أس x' })} value={state.power} min={FACTOR_LIMITS.power.min} max={FACTOR_LIMITS.power.max} onChange={(next) => setState((current) => setFactor(current, { power: next }))} language={props.language} />
         </>
     )
     const readout = (
@@ -205,10 +205,10 @@ export function FactorTool(props: LabToolProps) {
             </span>
             <span className="fraction-v2-lab-readout-note">
                 {inside === null
-                    ? l({ eu: `${outside} ez da gai guztien zatitzailea: aukeratu beste bat.`, es: `${outside} no divide a todos los términos: elige otro.`, ar: `${outside} لا يقسم كل الحدود: اختر غيره.` })
+                    ? l({ eu: `${outside} ez da gai guztien zatitzailea: aukeratu beste bat.`, es: `${outside} no divide a todos los términos: elige otro.`, en: `${outside} does not divide all the terms: choose another.`, ar: `${outside} لا يقسم كل الحدود: اختر غيره.` })
                     : isGreatest
-                        ? l({ eu: 'Faktore komunik handiena da! Parentesi barruan ez da ezer komunik geratzen.', es: '¡Es el mayor factor común! Dentro del paréntesis ya no queda nada en común.', ar: 'إنه أكبر عامل مشترك! لم يبقَ شيء مشترك داخل القوس.' })
-                        : l({ eu: 'Faktore komuna da, baina handiagoa atera daiteke.', es: 'Es un factor común, pero se puede sacar uno mayor.', ar: 'إنه عامل مشترك، لكن يمكن إخراج أكبر منه.' })}
+                        ? l({ eu: 'Faktore komunik handiena da! Parentesi barruan ez da ezer komunik geratzen.', es: '¡Es el mayor factor común! Dentro del paréntesis ya no queda nada en común.', en: 'It is the greatest common factor! Inside the brackets, nothing else in common is left.', ar: 'إنه أكبر عامل مشترك! لم يبقَ شيء مشترك داخل القوس.' })
+                        : l({ eu: 'Faktore komuna da, baina handiagoa atera daiteke.', es: 'Es un factor común, pero se puede sacar uno mayor.', en: 'It is a common factor, but a bigger one can be taken out.', ar: 'إنه عامل مشترك، لكن يمكن إخراج أكبر منه.' })}
             </span>
         </>
     )

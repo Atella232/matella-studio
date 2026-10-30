@@ -12,16 +12,17 @@ import { fractionsIntroStages, fractionsIntroTopics } from './lessons'
 const zatikiakIntroUnit: UnitDefinition = {
     storagePrefix: 'matella-zatikiak-dbh1',
     coursePath: '/matematika/dbh1',
-    courseTitle: { eu: '1. DBH', es: '1.º ESO', ar: 'الصف الأول' },
-    title: { eu: 'Zatikiak', es: 'Fracciones', ar: 'الكسور' },
-    documentTitle: { eu: 'Zatikiak · 1. DBH', es: 'Fracciones · 1.º ESO', ar: 'الكسور · الصف الأول' },
+    courseTitle: { eu: '1. DBH', es: '1.º ESO', en: '1st ESO', ar: 'الصف الأول' },
+    title: { eu: 'Zatikiak', es: 'Fracciones', en: 'Fractions', ar: 'الكسور' },
+    documentTitle: { eu: 'Zatikiak · 1. DBH', es: 'Fracciones · 1.º ESO', en: 'Fractions · 1st ESO', ar: 'الكسور · الصف الأول' },
     tagline: {
         eu: 'Gazta-kutxak, bizkotxoak eta kromoak: ikasi zatikiak irakurtzen, marrazten, zuzenean kokatzen, alderatzen eta haiekin kalkulatzen.',
         es: 'Cajas de quesitos, bizcochos y cromos: aprende a leer, dibujar, situar en la recta, comparar y calcular con fracciones.',
+        en: 'Boxes of cheese wedges, sponge cakes and stickers: learn to read, draw, place on the number line, compare and calculate with fractions.',
         ar: 'علب الجبن والكعك والصور اللاصقة: تعلّم قراءة الكسور ورسمها ووضعها على المستقيم ومقارنتها والحساب بها.'
     },
     heroArt: <FractionsIntroHeroArt />,
-    pathSubtitle: { eu: 'Bost etapa, zatikiaren ideiatik buruketetara', es: 'Cinco etapas, de la idea de fracción a los problemas', ar: 'خمس مراحل، من فكرة الكسر إلى المسائل' },
+    pathSubtitle: { eu: 'Bost etapa, zatikiaren ideiatik buruketetara', es: 'Cinco etapas, de la idea de fracción a los problemas', en: 'Five stages, from the idea of a fraction to problems', ar: 'خمس مراحل، من فكرة الكسر إلى المسائل' },
     stages: fractionsIntroStages,
     topics: fractionsIntroTopics,
     diagnostic: fractionsIntroDiagnostic,
@@ -29,37 +30,37 @@ const zatikiakIntroUnit: UnitDefinition = {
     exerciseBank: fractionsIntroExerciseBank,
     challenges: fractionsIntroChallenges,
     lab: {
-        description: { eu: `${fractionsIntroLabTools.length} tresna zatikiak ukitzeko: zatiak, zuzena, horma, baliokidetasuna, alderaketa, eragiketak eta kopuruak, erronkekin.`, es: `${fractionsIntroLabTools.length} herramientas para tocar las fracciones: partes, recta, muro, equivalencia, comparación, operaciones y cantidades, con retos.`, ar: `${fractionsIntroLabTools.length} أدوات للمس الكسور: الأجزاء والمستقيم والجدار والتكافؤ والمقارنة والعمليات والكميات، مع تحديات.` },
+        description: { eu: `${fractionsIntroLabTools.length} tresna zatikiak ukitzeko: zatiak, zuzena, horma, baliokidetasuna, alderaketa, eragiketak eta kopuruak, erronkekin.`, es: `${fractionsIntroLabTools.length} herramientas para tocar las fracciones: partes, recta, muro, equivalencia, comparación, operaciones y cantidades, con retos.`, en: `${fractionsIntroLabTools.length} tools to get hands-on with fractions: parts, number line, wall, equivalence, comparison, operations and quantities, with challenges.`, ar: `${fractionsIntroLabTools.length} أدوات للمس الكسور: الأجزاء والمستقيم والجدار والتكافؤ والمقارنة والعمليات والكميات، مع تحديات.` },
         progressIds: fractionsIntroLabChallengeIds,
         toolForTopic: fractionsIntroLabToolForTopic,
         render: (props) => <FractionsIntroLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Lau joko abiadura eta zehaztasuna entrenatzeko: lasterketa, itua, horma eta memoria.', es: 'Cuatro juegos para entrenar rapidez y precisión: carrera, diana, muro y memoria.', ar: 'أربع ألعاب لتدريب السرعة والدقة: السباق والهدف والجدار والذاكرة.' },
+        description: { eu: 'Lau joko abiadura eta zehaztasuna entrenatzeko: lasterketa, itua, horma eta memoria.', es: 'Cuatro juegos para entrenar rapidez y precisión: carrera, diana, muro y memoria.', en: 'Four games to practise speed and accuracy: race, target, wall and memory.', ar: 'أربع ألعاب لتدريب السرعة والدقة: السباق والهدف والجدار والذاكرة.' },
         progressIds: introFractionGameProgressIds,
         recordsKey: INTRO_FRACTION_GAME_RECORDS_KEY,
         render: (props) => <FractionsIntroGames {...props} />
     },
     answers: {
-        note: { eu: 'Enuntziatuak forma zehatzik eskatzen ez badu, zatiki baliokideak eta koma edo puntua duten hamartarrak onartzen dira.', es: 'Si el enunciado no pide una forma concreta, se aceptan fracciones equivalentes y decimales con coma o punto.', ar: 'إذا لم يطلب السؤال صيغة محددة، تُقبل الكسور المكافئة والأعداد العشرية بالفاصلة أو النقطة.' },
+        note: { eu: 'Enuntziatuak forma zehatzik eskatzen ez badu, zatiki baliokideak eta koma edo puntua duten hamartarrak onartzen dira.', es: 'Si el enunciado no pide una forma concreta, se aceptan fracciones equivalentes y decimales con coma o punto.', en: 'If the question does not ask for a specific form, equivalent fractions and decimals written with a point or a comma are accepted.', ar: 'إذا لم يطلب السؤال صيغة محددة، تُقبل الكسور المكافئة والأعداد العشرية بالفاصلة أو النقطة.' },
         defaultForm: 'any',
         inputMode: 'decimal',
         placeholder: (form) => form === 'mixed'
-            ? { eu: 'Adib.: 2 1/3', es: 'Ej.: 2 1/3', ar: 'مثال: 2 1/3' }
+            ? { eu: 'Adib.: 2 1/3', es: 'Ej.: 2 1/3', en: 'Example: 2 1/3', ar: 'مثال: 2 1/3' }
             : form === 'simplified'
-                ? { eu: 'Adib.: 3/4', es: 'Ej.: 3/4', ar: 'مثال: 3/4' }
-                : { eu: 'Adib.: 3/4 edo 0,75', es: 'Ej.: 3/4 o 0,75', ar: 'مثال: 3/4 أو 0.75' },
+                ? { eu: 'Adib.: 3/4', es: 'Ej.: 3/4', en: 'Example: 3/4', ar: 'مثال: 3/4' }
+                : { eu: 'Adib.: 3/4 edo 0,75', es: 'Ej.: 3/4 o 0,75', en: 'Example: 3/4 or 0.75', ar: 'مثال: 3/4 أو 0.75' },
         wrongForm: (form) => form === 'mixed'
-            ? { eu: 'Balioa zuzena da, baina idatzi zenbaki misto gisa: oso bat eta zatiki propio laburtezin bat, adibidez 2 1/3.', es: 'El valor es correcto, pero escríbelo como número mixto: un entero y una fracción propia irreducible, por ejemplo 2 1/3.', ar: 'القيمة صحيحة، لكن اكتبها عددًا كسريًا: عدد صحيح وكسر حقيقي في أبسط صورة، مثل 2 1/3.' }
-            : { eu: 'Balioa zuzena da, baina oraindik sinplifika daiteke. Idatzi zatiki laburtezina.', es: 'El valor es correcto, pero todavía se puede simplificar. Escribe la fracción irreducible.', ar: 'القيمة صحيحة، لكن يمكن تبسيطها أكثر. اكتب الكسر في أبسط صورة.' },
-        unreadable: { eu: 'Ez dut erantzun hori ulertzen. Idatzi zatiki bat (3/4), zenbaki misto bat (2 1/3) edo hamartar bat (0,75).', es: 'No entiendo esa respuesta. Escribe una fracción (3/4), un número mixto (2 1/3) o un decimal (0,75).', ar: 'لم أفهم هذه الإجابة. اكتب كسرًا (3/4) أو عددًا كسريًا (2 1/3) أو عددًا عشريًا (0.75).' }
+            ? { eu: 'Balioa zuzena da, baina idatzi zenbaki misto gisa: oso bat eta zatiki propio laburtezin bat, adibidez 2 1/3.', es: 'El valor es correcto, pero escríbelo como número mixto: un entero y una fracción propia irreducible, por ejemplo 2 1/3.', en: 'The value is correct, but write it as a mixed number: a whole number and a proper fraction in its simplest form, for example 2 1/3.', ar: 'القيمة صحيحة، لكن اكتبها عددًا كسريًا: عدد صحيح وكسر حقيقي في أبسط صورة، مثل 2 1/3.' }
+            : { eu: 'Balioa zuzena da, baina oraindik sinplifika daiteke. Idatzi zatiki laburtezina.', es: 'El valor es correcto, pero todavía se puede simplificar. Escribe la fracción irreducible.', en: 'The value is correct, but it can still be simplified. Write the fraction in its simplest form.', ar: 'القيمة صحيحة، لكن يمكن تبسيطها أكثر. اكتب الكسر في أبسط صورة.' },
+        unreadable: { eu: 'Ez dut erantzun hori ulertzen. Idatzi zatiki bat (3/4), zenbaki misto bat (2 1/3) edo hamartar bat (0,75).', es: 'No entiendo esa respuesta. Escribe una fracción (3/4), un número mixto (2 1/3) o un decimal (0,75).', en: 'I don\'t understand that answer. Write a fraction (3/4), a mixed number (2 1/3) or a decimal (0.75).', ar: 'لم أفهم هذه الإجابة. اكتب كسرًا (3/4) أو عددًا كسريًا (2 1/3) أو عددًا عشريًا (0.75).' }
     },
     errorByStage: {
-        meaning: { eu: 'Izendatzailea: zenbat zati berdin guztira. Zenbakitzailea: zenbat hartzen diren.', es: 'Denominador: cuántas partes iguales en total. Numerador: cuántas se toman.', ar: 'المقام: كم جزءًا متساويًا في المجموع. البسط: كم جزءًا نأخذ.' },
-        types: { eu: 'Alderatu zenbakitzailea eta izendatzailea; zenbaki mistorako, zatitu zenbakitzailea izendatzaileaz.', es: 'Compara numerador y denominador; para el número mixto, divide el numerador entre el denominador.', ar: 'قارن البسط بالمقام؛ وللعدد الكسري اقسم البسط على المقام.' },
-        equivalence: { eu: 'Bi gaiei eragiketa bera egin; alderatzeko, eraman izendatzaile berera.', es: 'Haz la misma operación a los dos términos; para comparar, pasa a común denominador.', ar: 'أجرِ العملية نفسها على الحدّين؛ وللمقارنة وحّد المقامات.' },
-        operations: { eu: 'Batu eta kendu: izendatzaile bera behar da. Biderkatu: zuzenean. Zatitu: gurutzean.', es: 'Sumar y restar: hace falta el mismo denominador. Multiplicar: en línea. Dividir: en cruz.', ar: 'الجمع والطرح: نحتاج المقام نفسه. الضرب: مباشرة. القسمة: تبادليًا.' },
-        problems: { eu: 'Kopuru baten zatikia: zatitu izendatzaileaz eta biderkatu zenbakitzaileaz. Geratzen dena: 1 ken erabilitakoa.', es: 'Fracción de una cantidad: divide entre el denominador y multiplica por el numerador. Lo que queda: 1 menos lo usado.', ar: 'كسر من كمية: اقسم على المقام واضرب في البسط. المتبقي: 1 ناقص المستعمل.' }
+        meaning: { eu: 'Izendatzailea: zenbat zati berdin guztira. Zenbakitzailea: zenbat hartzen diren.', es: 'Denominador: cuántas partes iguales en total. Numerador: cuántas se toman.', en: 'Denominator: how many equal parts there are in total. Numerator: how many are taken.', ar: 'المقام: كم جزءًا متساويًا في المجموع. البسط: كم جزءًا نأخذ.' },
+        types: { eu: 'Alderatu zenbakitzailea eta izendatzailea; zenbaki mistorako, zatitu zenbakitzailea izendatzaileaz.', es: 'Compara numerador y denominador; para el número mixto, divide el numerador entre el denominador.', en: 'Compare the numerator and the denominator; for a mixed number, divide the numerator by the denominator.', ar: 'قارن البسط بالمقام؛ وللعدد الكسري اقسم البسط على المقام.' },
+        equivalence: { eu: 'Bi gaiei eragiketa bera egin; alderatzeko, eraman izendatzaile berera.', es: 'Haz la misma operación a los dos términos; para comparar, pasa a común denominador.', en: 'Do the same operation to both terms; to compare, change them to a common denominator.', ar: 'أجرِ العملية نفسها على الحدّين؛ وللمقارنة وحّد المقامات.' },
+        operations: { eu: 'Batu eta kendu: izendatzaile bera behar da. Biderkatu: zuzenean. Zatitu: gurutzean.', es: 'Sumar y restar: hace falta el mismo denominador. Multiplicar: en línea. Dividir: en cruz.', en: 'Adding and subtracting: you need the same denominator. Multiplying: straight across. Dividing: cross-multiply.', ar: 'الجمع والطرح: نحتاج المقام نفسه. الضرب: مباشرة. القسمة: تبادليًا.' },
+        problems: { eu: 'Kopuru baten zatikia: zatitu izendatzaileaz eta biderkatu zenbakitzaileaz. Geratzen dena: 1 ken erabilitakoa.', es: 'Fracción de una cantidad: divide entre el denominador y multiplica por el numerador. Lo que queda: 1 menos lo usado.', en: 'Fraction of a quantity: divide by the denominator and multiply by the numerator. What is left: 1 minus what has been used.', ar: 'كسر من كمية: اقسم على المقام واضرب في البسط. المتبقي: 1 ناقص المستعمل.' }
     }
 }
 

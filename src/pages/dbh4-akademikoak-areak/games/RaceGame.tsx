@@ -12,8 +12,8 @@ const areasSimilarityRace: RaceRules<AreasSimilarityRaceError> = {
     parTime: areasSimilarityParTime,
     errorTip: (error) => areasSimilarityRaceErrorTips[error ?? 'calculation'],
     pitPlaceholder: () => '263,76',
-    pitUnreadable: { eu: 'Idatzi zenbaki bat, adibidez 48 edo 263,76.', es: 'Escribe un número, por ejemplo 48 o 263,76.', ar: 'اكتب عددًا، مثل 48 أو 263.76.' },
-    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', ar: 'اكتبه عددًا.' }
+    pitUnreadable: { eu: 'Idatzi zenbaki bat, adibidez 48 edo 263,76.', es: 'Escribe un número, por ejemplo 48 o 263,76.', en: 'Write a number, for example 48 or 263.76.', ar: 'اكتب عددًا، مثل 48 أو 263.76.' },
+    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', en: 'Write it as a number.', ar: 'اكتبه عددًا.' }
 }
 
 export function AreasSimilarityRaceGame(props: GameProps) {

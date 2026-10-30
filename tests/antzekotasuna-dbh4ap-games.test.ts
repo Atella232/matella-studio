@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
@@ -43,7 +44,7 @@ test('antzekotasuna 4. DBH ap race: valid options and every question checked aga
                     katex.renderToString(option.latex, { throwOnError: true })
                     if (!option.correct) assert.ok(similarityRaceErrorTips[option.error!], `${question.kind}: ${option.error}`)
                 }
-                for (const language of ['eu', 'es', 'ar'] as const) for (const text of [question.prompt[language], question.solution[language]]) for (const formula of mathIn(text)) katex.renderToString(formula, { throwOnError: true })
+                for (const language of ['eu', 'es', 'en', 'ar'] as const) for (const text of [question.prompt[language], question.solution[language]]) for (const formula of mathIn(text)) katex.renderToString(formulaFor(language, formula), { throwOnError: true })
                 assert.ok(!question.prompt.ar.includes('{,}') && !question.solution.ar.includes('{,}'), question.kind)
                 const right = question.options.find((option) => option.correct)!
                 const value = toNumber(question.answer)

@@ -121,5 +121,5 @@ export function extractStars(total: number): Stars {
     return 0
 }
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
-export const extractTip = (): LocalizedText => say('Bikote bakoitzak faktore bat ematen du kanpoan: $\\sqrt{2\\cdot 2\\cdot 3}=2\\sqrt{3}$.', 'Cada pareja da un factor fuera: $\\sqrt{2\\cdot 2\\cdot 3}=2\\sqrt{3}$.', 'كل زوج يعطي عاملًا في الخارج: $\\sqrt{2\\cdot 2\\cdot 3}=2\\sqrt{3}$.')
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
+export const extractTip = (): LocalizedText => say('Bikote bakoitzak faktore bat ematen du kanpoan: $\\sqrt{2\\cdot 2\\cdot 3}=2\\sqrt{3}$.', 'Cada pareja da un factor fuera: $\\sqrt{2\\cdot 2\\cdot 3}=2\\sqrt{3}$.', 'كل زوج يعطي عاملًا في الخارج: $\\sqrt{2\\cdot 2\\cdot 3}=2\\sqrt{3}$.', 'Each pair gives one factor outside the root: $\\sqrt{2\\cdot 2\\cdot 3}=2\\sqrt{3}$.')

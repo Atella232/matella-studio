@@ -131,7 +131,7 @@ test('zatikiak zoom: challenges', () => {
     assert.ok(!solved(deep).includes(1904), 'something must be found at the end')
     assert.ok(solved(pickFirst(setZoomSplit(deep, 2))).includes(1904))
     for (const challenge of zoomChallenges) {
-        for (const language of ['eu', 'es', 'ar'] as const) assert.ok(challenge.prompt[language].trim() && challenge.hint[language].trim())
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) assert.ok(challenge.prompt[language].trim() && challenge.hint[language].trim())
         assert.doesNotMatch(challenge.prompt.eu + challenge.hint.eu, /\d(?:ren|ko|ra|tik|rekin|tan|an|ean|ek|z)\b/, 'no suffix after a number in Basque')
         // Arabic: every fraction sits inside LRI … PDI
         assert.doesNotMatch((challenge.prompt.ar + challenge.hint.ar).replace(/\u2066[^\u2069]*\u2069/g, ''), /\d\/\d/, `${challenge.id} Arabic fractions isolated`)

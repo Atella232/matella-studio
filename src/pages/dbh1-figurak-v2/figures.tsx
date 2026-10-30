@@ -1,6 +1,7 @@
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
 import { Figure } from '../dbh2-zatikiak-prototype/figures'
 import { Label } from '../dbh2-funtzioak-v2/plane'
+import { decimalSeparatorFor } from '../../utils/numberFormat'
 
 /* ==========================================================================
    Irudi lauak · 1. DBH — lesson figures in the notebook style: diagonals
@@ -22,10 +23,10 @@ const SOFT = '#fbebc0'
 
 type Point = [number, number]
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language, text)
-/** A number written with the comma, shown with the point in Arabic */
-const num = (language: UnitLanguage, text: string) => (language === 'ar' ? text.replace(/,/g, '.') : text)
+/** A number written with the comma, shown with the point in Arabic and English */
+const num = (language: UnitLanguage, text: string) => text.replace(/,/g, language === 'ar' ? '.' : decimalSeparatorFor(language))
 const rad = (degrees: number) => (degrees * Math.PI) / 180
 const points = (list: Point[]) => list.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ')
 /** Vertices of a regular polygon; `start` is the screen angle of the first vertex (−90 = top) */
@@ -99,12 +100,12 @@ function Dot({ p, color = SECOND, r = 4.5 }: { p: Point; color?: string; r?: num
 
 export function DiagonalsFigure({ language }: { language: UnitLanguage }) {
     const shapes = [
-        { n: 4, start: -135, name: say('Laukia', 'Cuadrilátero', 'رباعي'), formula: '4 · 1 : 2 = 2' },
-        { n: 5, start: -90, name: say('Pentagonoa', 'Pentágono', 'مخمس'), formula: '5 · 2 : 2 = 5' },
-        { n: 6, start: -90, name: say('Hexagonoa', 'Hexágono', 'مسدس'), formula: '6 · 3 : 2 = 9' }
+        { n: 4, start: -135, name: say('Laukia', 'Cuadrilátero', 'رباعي', 'Quadrilateral'), formula: '4 · 1 : 2 = 2' },
+        { n: 5, start: -90, name: say('Pentagonoa', 'Pentágono', 'مخمس', 'Pentagon'), formula: '5 · 2 : 2 = 5' },
+        { n: 6, start: -90, name: say('Hexagonoa', 'Hexágono', 'مسدس', 'Hexagon'), formula: '6 · 3 : 2 = 9' }
     ]
     return (
-        <Figure height={300} label={pick(language, say('Laukiaren, pentagonoaren eta hexagonoaren diagonalak', 'Diagonales del cuadrilátero, el pentágono y el hexágono', 'أقطار الرباعي والمخمس والمسدس'))}>
+        <Figure height={300} label={pick(language, say('Laukiaren, pentagonoaren eta hexagonoaren diagonalak', 'Diagonales del cuadrilátero, el pentágono y el hexágono', 'أقطار الرباعي والمخمس والمسدس', 'Diagonals of the quadrilateral, the pentagon and the hexagon'))}>
             {shapes.map((shape, index) => {
                 const cx = 120 + index * 240
                 const vertices = regular(cx, 130, 85, shape.n, shape.start)
@@ -135,7 +136,7 @@ export function AngleSumFigure({ language }: { language: UnitLanguage }) {
     ]
     const tints = [STAGE_TINT, SOFT, '#d6eddf', '#f6d9d2']
     return (
-        <Figure height={322} label={pick(language, say('Pentagonoa 3 triangelutan eta hexagonoa 4 triangelutan', 'El pentágono en 3 triángulos y el hexágono en 4', 'المخمس في 3 مثلثات والمسدس في 4'))}>
+        <Figure height={322} label={pick(language, say('Pentagonoa 3 triangelutan eta hexagonoa 4 triangelutan', 'El pentágono en 3 triángulos y el hexágono en 4', 'المخمس في 3 مثلثات والمسدس في 4', 'The pentagon in 3 triangles and the hexagon in 4'))}>
             {shapes.map((shape) => {
                 const vertices = regular(shape.cx, 142, 118, shape.n)
                 return (
@@ -156,7 +157,7 @@ export function AngleSumFigure({ language }: { language: UnitLanguage }) {
                     </g>
                 )
             })}
-            <Caption y={312} language={language} text={say('Erpin batetik: n − 2 triangelu', 'Desde un vértice: n − 2 triángulos', 'من رأس واحد: n − 2 مثلثات')} size={13} />
+            <Caption y={312} language={language} text={say('Erpin batetik: n − 2 triangelu', 'Desde un vértice: n − 2 triángulos', 'من رأس واحد: n − 2 مثلثات', 'From one vertex: n − 2 triangles')} size={13} />
         </Figure>
     )
 }
@@ -169,25 +170,25 @@ export function RegularAnglesFigure({ language }: { language: UnitLanguage }) {
     const hexTiles = [0, 120, 240].map((heading) => walk([360, 135], heading, 6, 50))
     const pentTiles = [0, 108, 216].map((heading) => walk([600, 140], heading, 5, 58))
     return (
-        <Figure height={300} label={pick(language, say('Hexagono erregularraren angeluak; hexagonoek lauzatzen dute, pentagonoek ez', 'Ángulos del hexágono regular; los hexágonos embaldosan y los pentágonos no', 'زوايا المسدس المنتظم؛ المسدسات تُبلِّط والمخمسات لا'))}>
+        <Figure height={300} label={pick(language, say('Hexagono erregularraren angeluak; hexagonoek lauzatzen dute, pentagonoek ez', 'Ángulos del hexágono regular; los hexágonos embaldosan y los pentágonos no', 'زوايا المسدس المنتظم؛ المسدسات تُبلِّط والمخمسات لا', 'Angles of the regular hexagon; hexagons tile and pentagons do not'))}>
             <polygon points={points(hexagon)} fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
             <line x1={120} y1={135} x2={hexagon[0][0]} y2={hexagon[0][1]} stroke={STAGE} strokeWidth={2} />
             <line x1={120} y1={135} x2={hexagon[1][0]} y2={hexagon[1][1]} stroke={STAGE} strokeWidth={2} />
             <Corner v={centre} a={hexagon[0]} b={hexagon[1]} r={20} color={STAGE} label="60°" labelR={36} />
             <Corner v={hexagon[3]} a={hexagon[2]} b={hexagon[4]} r={20} label="120°" labelR={40} />
             <Dot p={centre} color={STAGE} r={3.5} />
-            <Caption x={120} y={262} language={language} text={say('Zentrala eta barnekoa', 'Central e interior', 'المركزية والداخلية')} color={INK} />
+            <Caption x={120} y={262} language={language} text={say('Zentrala eta barnekoa', 'Central e interior', 'المركزية والداخلية', 'Central and interior')} color={INK} />
 
             {hexTiles.map((tile, index) => <polygon key={index} points={points(tile)} fill={index === 1 ? SOFT : STAGE_TINT} stroke={INK} strokeWidth={2} strokeLinejoin="round" />)}
             <Dot p={[360, 135]} />
             <Formula x={360} y={262} color={GREEN}>3 · 120° = 360°</Formula>
-            <Caption x={360} y={288} language={language} text={say('Lauzatzen du', 'Embaldosa', 'يُبلِّط')} color={GREEN} />
+            <Caption x={360} y={288} language={language} text={say('Lauzatzen du', 'Embaldosa', 'يُبلِّط', 'Tiles')} color={GREEN} />
 
             {pentTiles.map((tile, index) => <polygon key={index} points={points(tile)} fill={index === 1 ? SOFT : STAGE_TINT} stroke={INK} strokeWidth={2} strokeLinejoin="round" />)}
             <path d={`M600 140 L${600 + 46 * Math.cos(rad(324))} ${140 - 46 * Math.sin(rad(324))} A46 46 0 0 0 646 140 Z`} fill={SECOND} fillOpacity={0.35} />
             <Dot p={[600, 140]} />
             <Formula x={600} y={262} color={SECOND}>3 · 108° = 324°</Formula>
-            <Caption x={600} y={288} language={language} text={say('Hutsunea geratzen da', 'Queda un hueco', 'تبقى فجوة')} color={SECOND} />
+            <Caption x={600} y={288} language={language} text={say('Hutsunea geratzen da', 'Queda un hueco', 'تبقى فجوة', 'A gap is left')} color={SECOND} />
         </Figure>
     )
 }
@@ -205,13 +206,13 @@ export function TriangleExistsFigure({ language }: { language: UnitLanguage }) {
     const leftEnd = onCircle(420, 200, 3 * scale, 55)
     const rightEnd = onCircle(660, 200, 4 * scale, 125)
     return (
-        <Figure height={290} label={pick(language, say('3, 5 eta 7: triangelua ixten da. 3, 4 eta 8: ez da ixten', '3, 5 y 7: el triángulo se cierra. 3, 4 y 8: no se cierra', '3 و5 و7: يُغلق المثلث. 3 و4 و8: لا يُغلق'))}>
+        <Figure height={290} label={pick(language, say('3, 5 eta 7: triangelua ixten da. 3, 4 eta 8: ez da ixten', '3, 5 y 7: el triángulo se cierra. 3, 4 y 8: no se cierra', '3 و5 و7: يُغلق المثلث. 3 و4 و8: لا يُغلق', '3, 5 and 7: the triangle closes. 3, 4 and 8: it does not close'))}>
             <polygon points={points([a, b, c])} fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
             <text x={(a[0] + b[0]) / 2} y={226} textAnchor="middle" fontSize={17} fontWeight={700} fill={INK}>7</text>
             <text x={(a[0] + c[0]) / 2 - 14} y={(a[1] + c[1]) / 2} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>3</text>
             <text x={(b[0] + c[0]) / 2 + 14} y={(b[1] + c[1]) / 2} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>5</text>
             <Formula x={165} y={258} color={GREEN} size={19}>7 &lt; 3 + 5</Formula>
-            <Caption x={165} y={284} language={language} text={say('Ixten da', 'Se cierra', 'يُغلق')} color={GREEN} />
+            <Caption x={165} y={284} language={language} text={say('Ixten da', 'Se cierra', 'يُغلق', 'It closes')} color={GREEN} />
 
             <line x1={left[0]} y1={200} x2={right[0]} y2={200} stroke={INK} strokeWidth={2.4} />
             <path d={`M${420 + 3 * scale} 200 A${3 * scale} ${3 * scale} 0 0 0 420 ${200 - 3 * scale}`} fill="none" stroke={STAGE} strokeWidth={1.5} strokeDasharray="5 5" />
@@ -222,7 +223,7 @@ export function TriangleExistsFigure({ language }: { language: UnitLanguage }) {
             <text x={(420 + leftEnd[0]) / 2 - 14} y={(200 + leftEnd[1]) / 2} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>3</text>
             <text x={(660 + rightEnd[0]) / 2 + 16} y={(200 + rightEnd[1]) / 2} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>4</text>
             <Formula x={540} y={258} color={SECOND} size={19}>8 &gt; 3 + 4</Formula>
-            <Caption x={540} y={284} language={language} text={say('Ez da ixten', 'No se cierra', 'لا يُغلق')} color={SECOND} />
+            <Caption x={540} y={284} language={language} text={say('Ez da ixten', 'No se cierra', 'لا يُغلق', 'It does not close')} color={SECOND} />
         </Figure>
     )
 }
@@ -239,15 +240,15 @@ export function SideAngleFigure({ language }: { language: UnitLanguage }) {
     const baseLeft: Point = [540 - half, 60 + height]
     const baseRight: Point = [540 + half, 60 + height]
     return (
-        <Figure height={290} label={pick(language, say('Alde handienaren aurrean angelu handiena; isoszelearen oinarriko angeluak berdinak', 'Frente al lado mayor, el ángulo mayor; los ángulos de la base del isósceles son iguales', 'الزاوية الكبرى تقابل الضلع الأكبر؛ وزاويتا قاعدة متساوي الساقين متساويتان'))}>
+        <Figure height={290} label={pick(language, say('Alde handienaren aurrean angelu handiena; isoszelearen oinarriko angeluak berdinak', 'Frente al lado mayor, el ángulo mayor; los ángulos de la base del isósceles son iguales', 'الزاوية الكبرى تقابل الضلع الأكبر؛ وزاويتا قاعدة متساوي الساقين متساويتان', 'Opposite the longest side, the largest angle; the base angles of an isosceles triangle are equal'))}>
             <polygon points={points([A, B, C])} fill={STAGE_TINT} stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
             <line x1={A[0]} y1={A[1]} x2={B[0]} y2={B[1]} stroke={SECOND} strokeWidth={4} />
             <Corner v={C} a={A} b={B} r={24} label="" />
             <line x1={A[0]} y1={A[1]} x2={C[0]} y2={C[1]} stroke={STAGE} strokeWidth={4} />
             <Corner v={B} a={A} b={C} r={34} color={STAGE} />
-            <Caption x={175} y={244} language={language} text={say('alde handiena', 'lado mayor', 'الضلع الأكبر')} color={SECOND} size={14} />
-            <Caption x={190} y={64} language={language} text={say('angelu handiena', 'ángulo mayor', 'الزاوية الكبرى')} color={SECOND} size={14} />
-            <Caption x={175} y={280} language={language} text={say('Alde txikiena ↔ angelu txikiena', 'Lado menor ↔ ángulo menor', 'الضلع الأصغر ↔ الزاوية الصغرى')} color={STAGE} size={14} />
+            <Caption x={175} y={244} language={language} text={say('alde handiena', 'lado mayor', 'الضلع الأكبر', 'Longest side')} color={SECOND} size={14} />
+            <Caption x={190} y={64} language={language} text={say('angelu handiena', 'ángulo mayor', 'الزاوية الكبرى', 'Largest angle')} color={SECOND} size={14} />
+            <Caption x={175} y={280} language={language} text={say('Alde txikiena ↔ angelu txikiena', 'Lado menor ↔ ángulo menor', 'الضلع الأصغر ↔ الزاوية الصغرى', 'Shortest side ↔ smallest angle')} color={STAGE} size={14} />
 
             <polygon points={points([apex, baseLeft, baseRight])} fill={SOFT} stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
             <Ticks a={apex} b={baseLeft} />
@@ -256,7 +257,7 @@ export function SideAngleFigure({ language }: { language: UnitLanguage }) {
             <Corner v={baseLeft} a={baseRight} b={apex} r={24} label="70°" labelR={44} />
             <Corner v={baseRight} a={apex} b={baseLeft} r={24} label="70°" labelR={44} />
             <Formula x={540} y={250} size={16}>(180° − 40°) : 2 = 70°</Formula>
-            <Caption x={540} y={280} language={language} text={say('Isoszelea', 'Isósceles', 'متساوي الساقين')} color={INK} size={14} />
+            <Caption x={540} y={280} language={language} text={say('Isoszelea', 'Isósceles', 'متساوي الساقين', 'Isosceles')} color={INK} size={14} />
         </Figure>
     )
 }
@@ -273,12 +274,12 @@ const circumcentre = ([ax, ay]: Point, [bx, by]: Point, [cx, cy]: Point): Point 
 
 export function CentersFigure({ language }: { language: UnitLanguage }) {
     const cases = [
-        { triangle: [[50, 200], [190, 200], [110, 90]] as Point[], name: say('Angelu-zorrotza: barruan', 'Acutángulo: dentro', 'حاد الزوايا: داخله'), color: GREEN },
-        { triangle: [[60, 210], [190, 210], [60, 120]] as Point[], name: say('Angeluzuzena: hipotenusan', 'Rectángulo: en la hipotenusa', 'قائم: على الوتر'), color: STAGE },
-        { triangle: [[40, 135], [200, 135], [90, 95]] as Point[], name: say('Angelu-kamutsa: kanpoan', 'Obtusángulo: fuera', 'منفرج: خارجه'), color: SECOND }
+        { triangle: [[50, 200], [190, 200], [110, 90]] as Point[], name: say('Angelu-zorrotza: barruan', 'Acutángulo: dentro', 'حاد الزوايا: داخله', 'Acute-angled: inside'), color: GREEN },
+        { triangle: [[60, 210], [190, 210], [60, 120]] as Point[], name: say('Angeluzuzena: hipotenusan', 'Rectángulo: en la hipotenusa', 'قائم: على الوتر', 'Right-angled: on the hypotenuse'), color: STAGE },
+        { triangle: [[40, 135], [200, 135], [90, 95]] as Point[], name: say('Angelu-kamutsa: kanpoan', 'Obtusángulo: fuera', 'منفرج: خارجه', 'Obtuse-angled: outside'), color: SECOND }
     ]
     return (
-        <Figure height={310} label={pick(language, say('Zirkunferentzia zirkunskribatua eta zirkunzentroa triangelu motaren arabera', 'Circunferencia circunscrita y circuncentro según el tipo de triángulo', 'الدائرة المحيطة ومركزها حسب نوع المثلث'))}>
+        <Figure height={310} label={pick(language, say('Zirkunferentzia zirkunskribatua eta zirkunzentroa triangelu motaren arabera', 'Circunferencia circunscrita y circuncentro según el tipo de triángulo', 'الدائرة المحيطة ومركزها حسب نوع المثلث', 'Circumscribed circle and circumcentre depending on the type of triangle'))}>
             {cases.map((item, index) => {
                 const shift = index * 240
                 const triangle = item.triangle.map(([x, y]) => [x + shift, y] as Point)
@@ -302,13 +303,13 @@ export function CentersFigure({ language }: { language: UnitLanguage }) {
 
 export function QuadDiagonalsFigure({ language }: { language: UnitLanguage }) {
     const shapes = [
-        { name: say('Laukizuzena', 'Rectángulo', 'مستطيل'), note: say('berdinak', 'iguales', 'متساويان'), vertices: [[30, 70], [150, 70], [150, 150], [30, 150]] as Point[], equal: true, right: false },
-        { name: say('Erronboa', 'Rombo', 'معيّن'), note: say('perpendikularrak', 'perpendiculares', 'متعامدان'), vertices: [[90, 50], [150, 110], [90, 170], [30, 110]] as Point[], equal: false, right: true },
-        { name: say('Karratua', 'Cuadrado', 'مربع'), note: say('biak', 'las dos cosas', 'الأمران معًا'), vertices: [[45, 65], [135, 65], [135, 155], [45, 155]] as Point[], equal: true, right: true },
-        { name: say('Kometa', 'Cometa', 'طائرة ورقية'), note: say('perpendikularrak', 'perpendiculares', 'متعامدان'), vertices: [[90, 45], [135, 90], [90, 180], [45, 90]] as Point[], equal: false, right: true }
+        { name: say('Laukizuzena', 'Rectángulo', 'مستطيل', 'Rectangle'), note: say('berdinak', 'iguales', 'متساويان', 'Equal'), vertices: [[30, 70], [150, 70], [150, 150], [30, 150]] as Point[], equal: true, right: false },
+        { name: say('Erronboa', 'Rombo', 'معيّن', 'Rhombus'), note: say('perpendikularrak', 'perpendiculares', 'متعامدان', 'perpendicular'), vertices: [[90, 50], [150, 110], [90, 170], [30, 110]] as Point[], equal: false, right: true },
+        { name: say('Karratua', 'Cuadrado', 'مربع', 'Square'), note: say('biak', 'las dos cosas', 'الأمران معًا', 'Both'), vertices: [[45, 65], [135, 65], [135, 155], [45, 155]] as Point[], equal: true, right: true },
+        { name: say('Kometa', 'Cometa', 'طائرة ورقية', 'Kite'), note: say('perpendikularrak', 'perpendiculares', 'متعامدان', 'perpendicular'), vertices: [[90, 45], [135, 90], [90, 180], [45, 90]] as Point[], equal: false, right: true }
     ]
     return (
-        <Figure height={270} label={pick(language, say('Laukizuzenaren, erronboaren, karratuaren eta kometaren diagonalak', 'Diagonales del rectángulo, el rombo, el cuadrado y la cometa', 'أقطار المستطيل والمعيّن والمربع والطائرة الورقية'))}>
+        <Figure height={270} label={pick(language, say('Laukizuzenaren, erronboaren, karratuaren eta kometaren diagonalak', 'Diagonales del rectángulo, el rombo, el cuadrado y la cometa', 'أقطار المستطيل والمعيّن والمربع والطائرة الورقية', 'Diagonals of the rectangle, the rhombus, the square and the kite'))}>
             {shapes.map((shape, index) => {
                 const shift = index * 180
                 const [p0, p1, p2, p3] = shape.vertices.map(([x, y]) => [x + shift, y] as Point)
@@ -349,14 +350,14 @@ export function QuadAnglesFigure({ language }: { language: UnitLanguage }) {
     const c: Point = [660 - leg * Math.cos(rad(65)), 210 - leg * Math.sin(rad(65))]
     const d: Point = [420 + leg * Math.cos(rad(65)), 210 - leg * Math.sin(rad(65))]
     return (
-        <Figure height={290} label={pick(language, say('Paralelogramo baten eta trapezio isoszele baten angeluak', 'Ángulos de un paralelogramo y de un trapecio isósceles', 'زوايا متوازي أضلاع وشبه منحرف متساوي الساقين'))}>
+        <Figure height={290} label={pick(language, say('Paralelogramo baten eta trapezio isoszele baten angeluak', 'Ángulos de un paralelogramo y de un trapecio isósceles', 'زوايا متوازي أضلاع وشبه منحرف متساوي الساقين', 'Angles of a parallelogram and of an isosceles trapezium'))}>
             <polygon points={points([bl, br, tr, tl])} fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
             <Corner v={bl} a={br} b={tl} label="70°" labelR={42} />
             <Corner v={br} a={tr} b={bl} color={STAGE} label="110°" labelR={42} />
             <Corner v={tr} a={tl} b={br} label="70°" labelR={42} />
             <Corner v={tl} a={bl} b={tr} color={STAGE} label="110°" labelR={42} />
             <Formula x={190} y={250}>70° + 110° = 180°</Formula>
-            <Caption x={190} y={280} language={language} text={say('Aurkakoak berdinak', 'Opuestos iguales', 'المتقابلة متساوية')} size={14} />
+            <Caption x={190} y={280} language={language} text={say('Aurkakoak berdinak', 'Opuestos iguales', 'المتقابلة متساوية', 'Opposite angles are equal')} size={14} />
 
             <polygon points={points([a, b, c, d])} fill={SOFT} stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
             <Ticks a={a} b={d} />
@@ -366,7 +367,7 @@ export function QuadAnglesFigure({ language }: { language: UnitLanguage }) {
             <Corner v={c} a={d} b={b} color={STAGE} label="115°" labelR={42} />
             <Corner v={d} a={a} b={c} color={STAGE} label="115°" labelR={42} />
             <Formula x={540} y={250}>65° + 115° = 180°</Formula>
-            <Caption x={540} y={280} language={language} text={say('Trapezio isoszelea', 'Trapecio isósceles', 'شبه منحرف متساوي الساقين')} size={14} />
+            <Caption x={540} y={280} language={language} text={say('Trapezio isoszelea', 'Trapecio isósceles', 'شبه منحرف متساوي الساقين', 'Isosceles trapezium')} size={14} />
         </Figure>
     )
 }
@@ -381,7 +382,7 @@ export function SymmetryFigure({ language }: { language: UnitLanguage }) {
     const cy = 110
     const pentagon = regular(504, cy, 55, 5)
     return (
-        <Figure height={260} label={pick(language, say('Karratuaren, laukizuzenaren, trapezio isoszelearen, pentagonoaren eta zirkuluaren simetria-ardatzak', 'Ejes de simetría del cuadrado, el rectángulo, el trapecio isósceles, el pentágono y el círculo', 'محاور تناظر المربع والمستطيل وشبه المنحرف المتساوي الساقين والمخمس والدائرة'))}>
+        <Figure height={260} label={pick(language, say('Karratuaren, laukizuzenaren, trapezio isoszelearen, pentagonoaren eta zirkuluaren simetria-ardatzak', 'Ejes de simetría del cuadrado, el rectángulo, el trapecio isósceles, el pentágono y el círculo', 'محاور تناظر المربع والمستطيل وشبه المنحرف المتساوي الساقين والمخمس والدائرة', 'Lines of symmetry of the square, the rectangle, the isosceles trapezium, the pentagon and the circle'))}>
             <rect x={32} y={cy - 45} width={90} height={90} fill={STAGE_TINT} stroke={INK} strokeWidth={2.2} />
             <Axis a={[77, cy - 62]} b={[77, cy + 62]} />
             <Axis a={[15, cy]} b={[139, cy]} />
@@ -409,7 +410,7 @@ export function SymmetryFigure({ language }: { language: UnitLanguage }) {
             {['4', '2', '1', '5', '∞'].map((count, index) => (
                 <text key={index} x={[77, 224, 370, 504, 636][index]} y={212} textAnchor="middle" fontSize={26} fontWeight={700} fill={SECOND}>{count}</text>
             ))}
-            <Caption y={248} language={language} text={say('Simetria-ardatz kopurua', 'Número de ejes de simetría', 'عدد محاور التناظر')} size={14} />
+            <Caption y={248} language={language} text={say('Simetria-ardatz kopurua', 'Número de ejes de simetría', 'عدد محاور التناظر', 'Number of lines of symmetry')} size={14} />
         </Figure>
     )
 }
@@ -418,12 +419,12 @@ export function SymmetryFigure({ language }: { language: UnitLanguage }) {
 
 export function LineCircleFigure({ language }: { language: UnitLanguage }) {
     const cases = [
-        { d: 40, name: say('Ebakitzailea', 'Secante', 'قاطع'), formula: 'd < r', color: STAGE },
-        { d: 70, name: say('Ukitzailea', 'Tangente', 'مماس'), formula: 'd = r', color: GREEN },
-        { d: 98, name: say('Kanpokoa', 'Exterior', 'خارجي'), formula: 'd > r', color: SECOND }
+        { d: 40, name: say('Ebakitzailea', 'Secante', 'قاطع', 'Secant'), formula: 'd < r', color: STAGE },
+        { d: 70, name: say('Ukitzailea', 'Tangente', 'مماس', 'Tangent'), formula: 'd = r', color: GREEN },
+        { d: 98, name: say('Kanpokoa', 'Exterior', 'خارجي', 'External'), formula: 'd > r', color: SECOND }
     ]
     return (
-        <Figure height={290} label={pick(language, say('Zuzen ebakitzailea, ukitzailea eta kanpokoa', 'Recta secante, tangente y exterior', 'مستقيم قاطع ومماس وخارجي'))}>
+        <Figure height={290} label={pick(language, say('Zuzen ebakitzailea, ukitzailea eta kanpokoa', 'Recta secante, tangente y exterior', 'مستقيم قاطع ومماس وخارجي', 'Secant, tangent and external line'))}>
             {cases.map((item, index) => {
                 const cx = 110 + index * 240
                 const x = cx + item.d
@@ -454,15 +455,15 @@ export function TwoCirclesFigure({ language }: { language: UnitLanguage }) {
     const big = 40
     const small = 24
     const cases = [
-        { d: 84, name: say('Kanpokoak', 'Exteriores', 'متباعدتان'), formula: 'd > r₁ + r₂' },
-        { d: 64, name: say('Kanpotik ukitzaileak', 'Tangentes exteriores', 'متماستان من الخارج'), formula: 'd = r₁ + r₂' },
-        { d: 38, name: say('Ebakitzaileak', 'Secantes', 'متقاطعتان'), formula: 'r₁ − r₂ < d < r₁ + r₂' },
-        { d: 16, name: say('Barrutik ukitzaileak', 'Tangentes interiores', 'متماستان من الداخل'), formula: 'd = r₁ − r₂' },
-        { d: 7, name: say('Barnekoak', 'Interiores', 'متداخلتان'), formula: 'd < r₁ − r₂' },
-        { d: 0, name: say('Zentrokideak', 'Concéntricas', 'متحدتا المركز'), formula: 'd = 0' }
+        { d: 84, name: say('Kanpokoak', 'Exteriores', 'متباعدتان', 'Separate'), formula: 'd > r₁ + r₂' },
+        { d: 64, name: say('Kanpotik ukitzaileak', 'Tangentes exteriores', 'متماستان من الخارج', 'Externally tangent'), formula: 'd = r₁ + r₂' },
+        { d: 38, name: say('Ebakitzaileak', 'Secantes', 'متقاطعتان', 'Intersecting'), formula: 'r₁ − r₂ < d < r₁ + r₂' },
+        { d: 16, name: say('Barrutik ukitzaileak', 'Tangentes interiores', 'متماستان من الداخل', 'Internally tangent'), formula: 'd = r₁ − r₂' },
+        { d: 7, name: say('Barnekoak', 'Interiores', 'متداخلتان', 'Internally tangent'), formula: 'd < r₁ − r₂' },
+        { d: 0, name: say('Zentrokideak', 'Concéntricas', 'متحدتا المركز', 'Concentric'), formula: 'd = 0' }
     ]
     return (
-        <Figure height={350} label={pick(language, say('Bi zirkunferentziaren sei posizioak', 'Las seis posiciones de dos circunferencias', 'الأوضاع الستة لدائرتين'))}>
+        <Figure height={350} label={pick(language, say('Bi zirkunferentziaren sei posizioak', 'Las seis posiciones de dos circunferencias', 'الأوضاع الستة لدائرتين', 'The six positions of two circles'))}>
             {cases.map((item, index) => {
                 const column = index % 3
                 const row = Math.floor(index / 3)
@@ -496,10 +497,10 @@ export function CircleAnglesFigure({ language }: { language: UnitLanguage }) {
     const p = onCircle(cx, cy, r, 95)
     const centre: Point = [cx, cy]
     const minis = [
-        { name: say('Sektorea', 'Sector', 'قطاع'), x: 420, y: 70 },
-        { name: say('Segmentua', 'Segmento', 'قطعة'), x: 600, y: 70 },
-        { name: say('Koroa', 'Corona', 'حلقة'), x: 420, y: 190 },
-        { name: say('Trapezio zirkularra', 'Trapecio circular', 'شبه منحرف دائري'), x: 600, y: 190 }
+        { name: say('Sektorea', 'Sector', 'قطاع', 'Circular sector'), x: 420, y: 70 },
+        { name: say('Segmentua', 'Segmento', 'قطعة', 'Circular segment'), x: 600, y: 70 },
+        { name: say('Koroa', 'Corona', 'حلقة', 'Annulus'), x: 420, y: 190 },
+        { name: say('Trapezio zirkularra', 'Trapecio circular', 'شبه منحرف دائري', 'Annular sector'), x: 600, y: 190 }
     ]
     const R = 42
     const arc = (x: number, y: number, radius: number, from: number, to: number) => {
@@ -508,7 +509,7 @@ export function CircleAnglesFigure({ language }: { language: UnitLanguage }) {
         return { sx, sy, ex, ey }
     }
     return (
-        <Figure height={290} label={pick(language, say('Angelu zentrala eta inskribatua; sektorea, segmentua, koroa eta trapezio zirkularra', 'Ángulo central e inscrito; sector, segmento, corona y trapecio circular', 'الزاوية المركزية والمحيطية؛ القطاع والقطعة والحلقة وشبه المنحرف الدائري'))}>
+        <Figure height={290} label={pick(language, say('Angelu zentrala eta inskribatua; sektorea, segmentua, koroa eta trapezio zirkularra', 'Ángulo central e inscrito; sector, segmento, corona y trapecio circular', 'الزاوية المركزية والمحيطية؛ القطاع والقطعة والحلقة وشبه المنحرف الدائري', 'Central and inscribed angle; sector, segment, annulus and annular sector'))}>
             <circle cx={cx} cy={cy} r={r} fill={PAPER} stroke={INK} strokeWidth={2.2} />
             <path d={`M${a[0]} ${a[1]} A${r} ${r} 0 0 0 ${b[0]} ${b[1]}`} fill="none" stroke={SECOND} strokeWidth={5} strokeLinecap="round" />
             <polyline points={points([a, centre, b])} fill="none" stroke={STAGE} strokeWidth={2.4} />
@@ -517,7 +518,7 @@ export function CircleAnglesFigure({ language }: { language: UnitLanguage }) {
             <Corner v={p} a={a} b={b} r={30} color={GREEN} label="50°" labelR={48} />
             <Dot p={centre} color={STAGE} />
             <Dot p={p} color={GREEN} />
-            <Caption x={cx} y={262} language={language} text={say('Inskribatua = zentrala : 2', 'Inscrito = central : 2', 'المحيطية = المركزية : 2')} color={INK} size={14} />
+            <Caption x={cx} y={262} language={language} text={say('Inskribatua = zentrala : 2', 'Inscrito = central : 2', 'المحيطية = المركزية : 2', 'Inscribed = central : 2')} color={INK} size={14} />
 
             {minis.map((mini, index) => {
                 const { x, y } = mini
@@ -577,14 +578,14 @@ function LShape({ x, language, split }: { x: number; language: UnitLanguage; spl
             <text x={x - 14} y={top + 3 * u + 5} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>6</text>
             <text x={x + 8 * u} y={(split ? top + 3 * u : top) - 8} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>4</text>
             <text x={x + 10 * u + 14} y={top + (split ? 4.5 : 1.5) * u + 5} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>3</text>
-            <Caption x={x + 5 * u} y={262} language={language} text={split ? say('Zatitu eta batu', 'Divide y suma', 'قسّم واجمع') : say('Osatu eta kendu', 'Completa y resta', 'أكمل واطرح')} color={INK} size={14} />
+            <Caption x={x + 5 * u} y={262} language={language} text={split ? say('Zatitu eta batu', 'Divide y suma', 'قسّم واجمع', 'Divide and add') : say('Osatu eta kendu', 'Completa y resta', 'أكمل واطرح', 'Complete and subtract')} color={INK} size={14} />
         </g>
     )
 }
 
 export function CompositeFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={280} label={pick(language, say('L formako irudiaren azalera bi eratara', 'El área de la figura en L de dos maneras', 'مساحة الشكل L بطريقتين'))}>
+        <Figure height={280} label={pick(language, say('L formako irudiaren azalera bi eratara', 'El área de la figura en L de dos maneras', 'مساحة الشكل L بطريقتين', 'The area of the L-shape in two ways'))}>
             <LShape x={50} language={language} split={false} />
             <Formula x={170} y={232} color={SECOND}>10 · 6 − 4 · 3 = 48</Formula>
             <LShape x={410} language={language} split />
@@ -602,14 +603,14 @@ export function SectorRingFigure({ language }: { language: UnitLanguage }) {
     const start = onCircle(cx, cy, r, 0)
     const end = onCircle(cx, cy, r, 90)
     return (
-        <Figure height={300} label={pick(language, say('90°-ko sektorea eta koroa zirkularra', 'Sector de 90° y corona circular', 'قطاع 90° وحلقة دائرية'))}>
+        <Figure height={300} label={pick(language, say('90°-ko sektorea eta koroa zirkularra', 'Sector de 90° y corona circular', 'قطاع 90° وحلقة دائرية', 'Sector of 90° and annulus'))}>
             <circle cx={cx} cy={cy} r={r} fill={PAPER} stroke={MUTED} strokeWidth={1.6} strokeDasharray="6 5" />
             <path d={`M${cx} ${cy} L${start[0]} ${start[1]} A${r} ${r} 0 0 0 ${end[0]} ${end[1]} Z`} fill={STAGE_TINT} stroke={STAGE} strokeWidth={2.4} />
             <path d={`M${start[0]} ${start[1]} A${r} ${r} 0 0 0 ${end[0]} ${end[1]}`} fill="none" stroke={SECOND} strokeWidth={5} strokeLinecap="round" />
             <Corner v={[cx, cy]} a={start} b={end} r={20} color={INK} label="90°" labelR={-22} />
             <text x={cx + 50} y={cy + 20} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>r = 10</text>
             <Formula x={cx} y={262} size={16} color={STAGE}>{num(language, '314 · 90 : 360 = 78,5')}</Formula>
-            <Caption x={cx} y={290} language={language} text={say('Sektorea: zirkuluaren laurdena', 'Sector: un cuarto del círculo', 'القطاع: ربع القرص')} size={14} />
+            <Caption x={cx} y={290} language={language} text={say('Sektorea: zirkuluaren laurdena', 'Sector: un cuarto del círculo', 'القطاع: ربع القرص', 'Sector: a quarter of the circle')} size={14} />
 
             <circle cx={530} cy={cy} r={100} fill={STAGE_TINT} stroke={STAGE} strokeWidth={2.4} />
             <circle cx={530} cy={cy} r={60} fill={PAPER} stroke={STAGE} strokeWidth={2.4} />
@@ -618,7 +619,7 @@ export function SectorRingFigure({ language }: { language: UnitLanguage }) {
             <text x={590} y={cy - 8} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>R = 5</text>
             <text x={498} y={cy + 4} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>r = 3</text>
             <Formula x={530} y={262} size={16} color={STAGE}>{num(language, '3,14 · (25 − 9) = 50,24')}</Formula>
-            <Caption x={530} y={290} language={language} text={say('Koroa: handia ken txikia', 'Corona: el grande menos el pequeño', 'الحلقة: الكبير ناقص الصغير')} size={14} />
+            <Caption x={530} y={290} language={language} text={say('Koroa: handia ken txikia', 'Corona: el grande menos el pequeño', 'الحلقة: الكبير ناقص الصغير', 'Annulus: the big circle minus the small one')} size={14} />
         </Figure>
     )
 }
@@ -630,7 +631,7 @@ export function AreaProblemsFigure({ language }: { language: UnitLanguage }) {
     const x = 60
     const y = 40
     return (
-        <Figure height={290} label={pick(language, say('5 m × 4 m-ko gela, 50 cm-ko lauzekin: 80 lauza', 'Habitación de 5 m × 4 m con baldosas de 50 cm: 80 baldosas', 'غرفة 5 م × 4 م ببلاطات 50 سم: 80 بلاطة'))}>
+        <Figure height={290} label={pick(language, say('5 m × 4 m-ko gela, 50 cm-ko lauzekin: 80 lauza', 'Habitación de 5 m × 4 m con baldosas de 50 cm: 80 baldosas', 'غرفة 5 م × 4 م ببلاطات 50 سم: 80 بلاطة', 'Room measuring 5 m × 4 m, with 50 cm tiles: 80 tiles'))}>
             {Array.from({ length: 80 }, (_, index) => (
                 <rect key={index} x={x + (index % 10) * tile} y={y + Math.floor(index / 10) * tile} width={tile} height={tile} fill={(index + Math.floor(index / 10)) % 2 ? STAGE_TINT : PAPER} stroke={MUTED} strokeWidth={0.8} />
             ))}
@@ -638,13 +639,13 @@ export function AreaProblemsFigure({ language }: { language: UnitLanguage }) {
             <text x={x + 5 * tile} y={y - 10} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>5 m</text>
             <text x={x - 10} y={y + 4 * tile + 5} textAnchor="end" fontSize={16} fontWeight={700} fill={INK}>4 m</text>
             <Formula x={x + 5 * tile} y={y + 8 * tile + 30} color={STAGE}>10 · 8 = 80</Formula>
-            <Caption x={x + 5 * tile} y={y + 8 * tile + 58} language={language} text={say('Estali: azalera', 'Cubrir: área', 'التغطية: المساحة')} color={STAGE} size={14} />
+            <Caption x={x + 5 * tile} y={y + 8 * tile + 58} language={language} text={say('Estali: azalera', 'Cubrir: área', 'التغطية: المساحة', 'Cover: area')} color={STAGE} size={14} />
 
             <rect x={440} y={70} width={200} height={130} rx={4} fill="#d6eddf" stroke={SECOND} strokeWidth={4} strokeDasharray="10 6" />
             <text x={540} y={58} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>20 m</text>
             <text x={655} y={140} textAnchor="start" fontSize={16} fontWeight={700} fill={INK}>15 m</text>
             <Formula x={540} y={236} color={SECOND}>2 · 20 + 2 · 15 = 70</Formula>
-            <Caption x={540} y={264} language={language} text={say('Inguratu: perimetroa', 'Rodear: perímetro', 'الإحاطة: المحيط')} color={SECOND} size={14} />
+            <Caption x={540} y={264} language={language} text={say('Inguratu: perimetroa', 'Rodear: perímetro', 'الإحاطة: المحيط', 'Surround: perimeter')} color={SECOND} size={14} />
         </Figure>
     )
 }

@@ -1,6 +1,7 @@
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
 import { Figure } from '../dbh2-zatikiak-prototype/figures'
 import { Label } from '../dbh2-funtzioak-v2/plane'
+import { decimalSeparatorFor } from '../../utils/numberFormat'
 
 /* ==========================================================================
    Azalerak, bolumenak eta antzekotasuna · 4. DBH akademikoak — the new
@@ -26,10 +27,10 @@ const SERIF = 'Fraunces, serif'
 
 type Point = [number, number]
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language, text)
 /** A number written with the comma, shown with the point in Arabic */
-const num = (language: UnitLanguage, text: string) => (language === 'ar' ? text.replace(/,/g, '.') : text)
+const num = (language: UnitLanguage, text: string) => (language === 'ar' ? text.replace(/,/g, '.') : text.replace(/,/g, decimalSeparatorFor(language)))
 const rad = (degrees: number) => (degrees * Math.PI) / 180
 const points = (list: Point[]) => list.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ')
 /** The point at a screen angle (0 = right, 90 = up) and distance r from c */
@@ -64,7 +65,7 @@ export function SegmentFigure({ language }: { language: UnitLanguage }) {
     const outer = [polar(C, R, 60), polar(C, R, 120)]
     const inner = [polar(C, small, 60), polar(C, small, 120)]
     return (
-        <Figure height={340} label={pick(language, say('Zirkulu-segmentua: 90°-ko sektorea ken triangelua. Trapezio zirkularra: 60°-ko koroa-zatia', 'Segmento circular: el sector de 90° menos el triángulo. Trapecio circular: la parte de 60° de una corona', 'القطعة الدائرية: قطاع 90° ناقص المثلث. شبه المنحرف الدائري: جزء 60° من حلقة'))}>
+        <Figure height={340} label={pick(language, say('Zirkulu-segmentua: 90°-ko sektorea ken triangelua. Trapezio zirkularra: 60°-ko koroa-zatia', 'Segmento circular: el sector de 90° menos el triángulo. Trapecio circular: la parte de 60° de una corona', 'القطعة الدائرية: قطاع 90° ناقص المثلث. شبه المنحرف الدائري: جزء 60° من حلقة', 'Circular segment: the 90° sector minus the triangle. Annular sector: the 60° part of an annulus.'))}>
             <path d={`M${O[0]} ${O[1]} L${A[0]} ${A[1]} A${r} ${r} 0 0 0 ${B[0]} ${B[1]} Z`} fill={PAPER} stroke={INK} strokeWidth={2} />
             <path d={`M${A[0]} ${A[1]} A${r} ${r} 0 0 0 ${B[0]} ${B[1]} Z`} fill={SECOND} fillOpacity={0.35} stroke={SECOND} strokeWidth={2.4} />
             <RightMark v={O} u={[1, 0]} w={[0, -1]} s={14} />
@@ -72,7 +73,7 @@ export function SegmentFigure({ language }: { language: UnitLanguage }) {
             <Formula x={150} y={258} size={15} color={MUTED}>{num(language, '3,14 · 4² : 4 = 12,56')}</Formula>
             <Formula x={150} y={282} size={15} color={MUTED}>4 · 4 : 2 = 8</Formula>
             <Formula x={150} y={308} color={SECOND}>{num(language, '12,56 − 8 = 4,56')}</Formula>
-            <Caption x={150} y={334} language={language} text={say('Segmentua: sektorea − triangelua', 'Segmento: sector − triángulo', 'القطعة: القطاع − المثلث')} size={14} />
+            <Caption x={150} y={334} language={language} text={say('Segmentua: sektorea − triangelua', 'Segmento: sector − triángulo', 'القطعة: القطاع − المثلث', 'Segment: sector − triangle')} size={14} />
 
             <path d={`M${outer[0][0]} ${outer[0][1]} A${R} ${R} 0 0 0 ${outer[1][0]} ${outer[1][1]} L${inner[1][0]} ${inner[1][1]} A${small} ${small} 0 0 1 ${inner[0][0]} ${inner[0][1]} Z`} fill={STAGE_TINT} stroke={INK} strokeWidth={2.2} />
             <line x1={C[0]} y1={C[1]} x2={inner[0][0]} y2={inner[0][1]} stroke={MUTED} strokeWidth={1.4} strokeDasharray="5 4" />
@@ -83,7 +84,7 @@ export function SegmentFigure({ language }: { language: UnitLanguage }) {
             <Formula x={polar(C, 70, 60)[0] + 8} y={polar(C, 70, 60)[1] + 8} anchor="start" size={15}>r = 3</Formula>
             <Formula x={C[0]} y={258} size={15} color={MUTED}>{num(language, '3,14 · (6² − 3²) · 60 : 360')}</Formula>
             <Formula x={C[0]} y={308} color={STAGE}>{num(language, '= 14,13')}</Formula>
-            <Caption x={C[0]} y={334} language={language} text={say('Trapezio zirkularra: koroaren zatia', 'Trapecio circular: parte de la corona', 'شبه المنحرف الدائري: جزء من الحلقة')} size={14} />
+            <Caption x={C[0]} y={334} language={language} text={say('Trapezio zirkularra: koroaren zatia', 'Trapecio circular: parte de la corona', 'شبه المنحرف الدائري: جزء من الحلقة', 'Annular sector: part of the annulus')} size={14} />
         </Figure>
     )
 }
@@ -97,7 +98,7 @@ export function RightTheoremsFigure({ language }: { language: UnitLanguage }) {
     const right: Point = [60 + 25 * s, 220]
     const top: Point = [foot[0], 220 - 12 * s]
     return (
-        <Figure height={320} label={pick(language, say('Hipotenusarekiko altuerak 9 eta 16ko proiekzioak sortzen ditu: h² = 9 · 16 eta b² = 25 · 16', 'La altura sobre la hipotenusa forma las proyecciones 9 y 16: h² = 9 · 16 y b² = 25 · 16', 'الارتفاع على الوتر يكوّن المسقطين 9 و16: h² = 9 · 16 وb² = 25 · 16'))}>
+        <Figure height={320} label={pick(language, say('Hipotenusarekiko altuerak 9 eta 16ko proiekzioak sortzen ditu: h² = 9 · 16 eta b² = 25 · 16', 'La altura sobre la hipotenusa forma las proyecciones 9 y 16: h² = 9 · 16 y b² = 25 · 16', 'الارتفاع على الوتر يكوّن المسقطين 9 و16: h² = 9 · 16 وb² = 25 · 16', 'The height to the hypotenuse gives projections of 9 and 16: h² = 9 · 16 and b² = 25 · 16'))}>
             <polygon points={points([left, right, top])} fill={STAGE_TINT} stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
             <polygon points={points([left, foot, top])} fill={SOFT} stroke="none" />
             <polygon points={points([left, right, top])} fill="none" stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
@@ -112,10 +113,10 @@ export function RightTheoremsFigure({ language }: { language: UnitLanguage }) {
             <line x1={left[0]} y1={276} x2={right[0]} y2={276} stroke={MUTED} strokeWidth={1.4} />
             <Formula x={(left[0] + right[0]) / 2} y={300} size={15} color={MUTED}>a = 25</Formula>
 
-            <Caption x={590} y={70} language={language} text={say('Altueraren teorema', 'Teorema de la altura', 'مبرهنة الارتفاع')} color={SECOND} size={15} />
+            <Caption x={590} y={70} language={language} text={say('Altueraren teorema', 'Teorema de la altura', 'مبرهنة الارتفاع', 'Altitude theorem')} color={SECOND} size={15} />
             <Formula x={590} y={98} color={SECOND}>h² = m · n</Formula>
             <Formula x={590} y={124} size={15}>h² = 9 · 16 = 144</Formula>
-            <Caption x={590} y={176} language={language} text={say('Katetoaren teorema', 'Teorema del cateto', 'مبرهنة الضلع القائم')} color={STAGE} size={15} />
+            <Caption x={590} y={176} language={language} text={say('Katetoaren teorema', 'Teorema del cateto', 'مبرهنة الضلع القائم', 'Leg theorem')} color={STAGE} size={15} />
             <Formula x={590} y={204} color={STAGE}>b² = a · n</Formula>
             <Formula x={590} y={230} size={15}>b² = 25 · 16 = 400</Formula>
         </Figure>
@@ -133,7 +134,7 @@ export function FrustumFigure({ language }: { language: UnitLanguage }) {
     const R = 6 * s
     const r = 3 * s
     return (
-        <Figure height={320} label={pick(language, say('Kono-enborra: kono handia ken moztutako kono txikia; x antzekotasunez', 'Tronco de cono: el cono grande menos el pequeño cortado; x por semejanza', 'جذع المخروط: المخروط الكبير ناقص الصغير المقطوع؛ x بالتشابه'))}>
+        <Figure height={320} label={pick(language, say('Kono-enborra: kono handia ken moztutako kono txikia; x antzekotasunez', 'Tronco de cono: el cono grande menos el pequeño cortado; x por semejanza', 'جذع المخروط: المخروط الكبير ناقص الصغير المقطوع؛ x بالتشابه', 'Frustum of a cone: the large cone minus the small cone cut off; x by similarity'))}>
             <polygon points={points([[cx - r, cut], apex, [cx + r, cut]])} fill={PAPER} stroke={MUTED} strokeWidth={1.6} strokeDasharray="6 5" />
             <path d={`M${cx - R} ${base} L${cx - r} ${cut} L${cx + r} ${cut} L${cx + R} ${base} A${R} ${R * 0.18} 0 0 1 ${cx - R} ${base} Z`} fill={STAGE_TINT} stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
             <ellipse cx={cx} cy={cut} rx={r} ry={r * 0.18} fill={SOFT} stroke={INK} strokeWidth={1.8} />
@@ -150,7 +151,7 @@ export function FrustumFigure({ language }: { language: UnitLanguage }) {
             <Formula x={540} y={118} size={15}>V = π · 6² · 8 : 3 − π · 3² · 4 : 3</Formula>
             <Formula x={540} y={146} size={15}>= 96π − 12π = 84π</Formula>
             <Formula x={540} y={186} color={STAGE}>{num(language, '84 · 3,14 = 263,76')}</Formula>
-            <Caption x={540} y={240} language={language} text={say('Enborra = kono handia − kono txikia', 'Tronco = cono grande − cono pequeño', 'الجذع = المخروط الكبير − المخروط الصغير')} size={14} />
+            <Caption x={540} y={240} language={language} text={say('Enborra = kono handia − kono txikia', 'Tronco = cono grande − cono pequeño', 'الجذع = المخروط الكبير − المخروط الصغير', 'Frustum = large cone − small cone')} size={14} />
         </Figure>
     )
 }

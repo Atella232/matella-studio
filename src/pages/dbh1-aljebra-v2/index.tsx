@@ -11,16 +11,17 @@ import { algebraIntroStages, algebraIntroTopics } from './lessons'
 const aljebraIntroUnit: UnitDefinition = {
     storagePrefix: 'matella-aljebra-dbh1',
     coursePath: '/matematika/dbh1',
-    courseTitle: { eu: '1. DBH', es: '1.º ESO', ar: 'الصف الأول' },
-    title: { eu: 'Aljebra', es: 'Álgebra', ar: 'الجبر' },
-    documentTitle: { eu: 'Aljebra · 1. DBH', es: 'Álgebra · 1.º ESO', ar: 'الجبر · الصف الأول' },
+    courseTitle: { eu: '1. DBH', es: '1.º ESO', en: '1st ESO', ar: 'الصف الأول' },
+    title: { eu: 'Aljebra', es: 'Álgebra', en: 'Algebra', ar: 'الجبر' },
+    documentTitle: { eu: 'Aljebra · 1. DBH', es: 'Álgebra · 1.º ESO', en: 'Algebra · 1st ESO', ar: 'الجبر · الصف الأول' },
     tagline: {
         eu: 'Letrak zenbakien ordez, monomioak, balantzak eta ezezagunak: ikasi hizkuntza aljebraikoa erabiltzen eta ekuazioekin buruketak ebazten.',
         es: 'Letras en lugar de números, monomios, balanzas e incógnitas: aprende a usar el lenguaje algebraico y a resolver problemas con ecuaciones.',
+        en: 'Letters instead of numbers, monomials, balance scales and unknowns: learn to use algebraic language and solve problems with equations.',
         ar: 'حروف بدل الأعداد، ووحيدات حد، وموازين، ومجاهيل: تعلّم استعمال اللغة الجبرية وحل المسائل بالمعادلات.'
     },
     heroArt: <AlgebraIntroHeroArt />,
-    pathSubtitle: { eu: 'Bost etapa, letretatik ekuazioekin ebatzitako buruketetara', es: 'Cinco etapas, de las letras a los problemas resueltos con ecuaciones', ar: 'خمس مراحل، من الحروف إلى المسائل المحلولة بالمعادلات' },
+    pathSubtitle: { eu: 'Bost etapa, letretatik ekuazioekin ebatzitako buruketetara', es: 'Cinco etapas, de las letras a los problemas resueltos con ecuaciones', en: 'Five stages, from letters to problems solved with equations.', ar: 'خمس مراحل، من الحروف إلى المسائل المحلولة بالمعادلات' },
     stages: algebraIntroStages,
     topics: algebraIntroTopics,
     diagnostic: algebraIntroDiagnostic,
@@ -28,31 +29,31 @@ const aljebraIntroUnit: UnitDefinition = {
     exerciseBank: algebraIntroExerciseBank,
     challenges: algebraIntroChallenges,
     lab: {
-        description: { eu: `${algebraLabTools.length} tresna: itzultzailea, zenbaki-makina, fitxa aljebraikoak, balantza eta probatu eta zuzendu, erronkekin.`, es: `${algebraLabTools.length} herramientas: traductor, máquina de números, fichas algebraicas, balanza y prueba y corrige, con retos.`, ar: `${algebraLabTools.length} أدوات: المترجم وآلة الأعداد والبطاقات الجبرية والميزان وجرّب وصحّح، مع تحديات.` },
+        description: { eu: `${algebraLabTools.length} tresna: itzultzailea, zenbaki-makina, fitxa aljebraikoak, balantza eta probatu eta zuzendu, erronkekin.`, es: `${algebraLabTools.length} herramientas: traductor, máquina de números, fichas algebraicas, balanza y prueba y corrige, con retos.`, en: `${algebraLabTools.length} tools: translator, number machine, algebra tiles, balance and “Test and correct”, with challenges.`, ar: `${algebraLabTools.length} أدوات: المترجم وآلة الأعداد والبطاقات الجبرية والميزان وجرّب وصحّح، مع تحديات.` },
         progressIds: algebraLabChallengeIds,
         toolForTopic: algebraLabToolForTopic,
         render: (props) => <AlgebraIntroLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Hiru joko azkar aritzeko: lasterketa, balantza azkarra eta memoria.', es: 'Tres juegos para ganar rapidez: carrera, balanza rápida y memoria.', ar: 'ثلاث ألعاب لاكتساب السرعة: السباق والميزان السريع والذاكرة.' },
+        description: { eu: 'Hiru joko azkar aritzeko: lasterketa, balantza azkarra eta memoria.', es: 'Tres juegos para ganar rapidez: carrera, balanza rápida y memoria.', en: 'Three games to build speed: race, quick balance and memory.', ar: 'ثلاث ألعاب لاكتساب السرعة: السباق والميزان السريع والذاكرة.' },
         progressIds: algebraGameProgressIds,
         recordsKey: ALGEBRA_GAME_RECORDS_KEY,
         render: (props) => <AlgebraIntroGames {...props} />
     },
     answers: {
-        note: { eu: 'Idatzi emaitza zenbaki gisa: 7, −3 edo 5/2.', es: 'Escribe el resultado como número: 7, −3 o 5/2.', ar: 'اكتب النتيجة عددًا: 7 أو ⁦−3⁩ أو 5/2.' },
+        note: { eu: 'Idatzi emaitza zenbaki gisa: 7, −3 edo 5/2.', es: 'Escribe el resultado como número: 7, −3 o 5/2.', en: 'Write the result as a number: 7, −3 or 5/2.', ar: 'اكتب النتيجة عددًا: 7 أو ⁦−3⁩ أو 5/2.' },
         defaultForm: 'any',
         inputMode: 'text',
-        placeholder: () => ({ eu: 'Adib.: 7', es: 'Ej.: 7', ar: 'مثال: 7' }),
-        wrongForm: () => ({ eu: 'Balioa zuzena da, baina sinplifikatu.', es: 'El valor es correcto, pero simplifícalo.', ar: 'القيمة صحيحة، لكن بسّطها.' }),
-        unreadable: { eu: 'Ez dut erantzun hori ulertzen. Idatzi zenbaki bat, adibidez 7 edo −3.', es: 'No entiendo esa respuesta. Escribe un número, por ejemplo 7 o −3.', ar: 'لم أفهم هذه الإجابة. اكتب عددًا، مثل 7 أو ⁦−3⁩.' }
+        placeholder: () => ({ eu: 'Adib.: 7', es: 'Ej.: 7', en: 'e.g. 7', ar: 'مثال: 7' }),
+        wrongForm: () => ({ eu: 'Balioa zuzena da, baina sinplifikatu.', es: 'El valor es correcto, pero simplifícalo.', en: 'The value is correct, but simplify it.', ar: 'القيمة صحيحة، لكن بسّطها.' }),
+        unreadable: { eu: 'Ez dut erantzun hori ulertzen. Idatzi zenbaki bat, adibidez 7 edo −3.', es: 'No entiendo esa respuesta. Escribe un número, por ejemplo 7 o −3.', en: 'I don\'t understand that answer. Write a number, for example 7 or −3.', ar: 'لم أفهم هذه الإجابة. اكتب عددًا، مثل 7 أو ⁦−3⁩.' }
     },
     errorByStage: {
-        language: { eu: 'Erabaki zer den ezezaguna eta idatzi eragiketak ordenan; ordezkatzean, errespetatu hierarkia.', es: 'Decide cuál es la incógnita y escribe las operaciones en orden; al sustituir, respeta la jerarquía.', ar: 'حدّد المجهول واكتب العمليات بالترتيب؛ وعند التعويض احترم الأولويات.' },
-        monomials: { eu: 'Koefizientea: zenbakia. Zati literala: letrak. Maila: berretzaileen batura.', es: 'Coeficiente: el número. Parte literal: las letras. Grado: suma de exponentes.', ar: 'المعامل: العدد. الجزء الحرفي: الحروف. الدرجة: مجموع الأسس.' },
-        operations: { eu: 'Antzekoak bakarrik batzen dira; biderkatzean berretzaileak batzen dira.', es: 'Solo se suman los semejantes; al multiplicar se suman los exponentes.', ar: 'نجمع المتشابهة فقط؛ وعند الضرب نجمع الأسس.' },
-        equations: { eu: 'Atalez aldatzean, gaiak kontrako eragiketa egiten du. Egiaztatu ebazpena.', es: 'Al cambiar de miembro, el término hace la operación contraria. Comprueba la solución.', ar: 'عند تغيير الطرف يقوم الحد بالعملية العكسية. تحقّق من الحل.' },
-        problems: { eu: 'Ezezaguna → ekuazioa → ebatzi → egiaztatu eta erantzun esaldi batez.', es: 'Incógnita → ecuación → resolver → comprobar y responder con una frase.', ar: 'المجهول ← المعادلة ← الحل ← التحقق والجواب بجملة.' }
+        language: { eu: 'Erabaki zer den ezezaguna eta idatzi eragiketak ordenan; ordezkatzean, errespetatu hierarkia.', es: 'Decide cuál es la incógnita y escribe las operaciones en orden; al sustituir, respeta la jerarquía.', en: 'Decide what the unknown is and write the operations in order; when you substitute, respect the order of operations.', ar: 'حدّد المجهول واكتب العمليات بالترتيب؛ وعند التعويض احترم الأولويات.' },
+        monomials: { eu: 'Koefizientea: zenbakia. Zati literala: letrak. Maila: berretzaileen batura.', es: 'Coeficiente: el número. Parte literal: las letras. Grado: suma de exponentes.', en: 'Coefficient: the number. Literal part: the letters. Degree: sum of the exponents.', ar: 'المعامل: العدد. الجزء الحرفي: الحروف. الدرجة: مجموع الأسس.' },
+        operations: { eu: 'Antzekoak bakarrik batzen dira; biderkatzean berretzaileak batzen dira.', es: 'Solo se suman los semejantes; al multiplicar se suman los exponentes.', en: 'Only like terms are added; when multiplying, the exponents are added.', ar: 'نجمع المتشابهة فقط؛ وعند الضرب نجمع الأسس.' },
+        equations: { eu: 'Atalez aldatzean, gaiak kontrako eragiketa egiten du. Egiaztatu ebazpena.', es: 'Al cambiar de miembro, el término hace la operación contraria. Comprueba la solución.', en: 'When a term moves to the other side, it does the opposite operation. Check the solution.', ar: 'عند تغيير الطرف يقوم الحد بالعملية العكسية. تحقّق من الحل.' },
+        problems: { eu: 'Ezezaguna → ekuazioa → ebatzi → egiaztatu eta erantzun esaldi batez.', es: 'Incógnita → ecuación → resolver → comprobar y responder con una frase.', en: 'Unknown → equation → solve → check and answer with a sentence.', ar: 'المجهول ← المعادلة ← الحل ← التحقق والجواب بجملة.' }
     }
 }
 

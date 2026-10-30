@@ -17,9 +17,9 @@ export const INTRO_FRACTION_RACE_CIRCUITS = 5
 export type IntroFractionRaceError = RaceErrorKind | 'mixed-swapped' | 'mixed-added' | 'mixed-remainder'
 export type IntroFractionRaceQuestion = RaceQuestion<IntroFractionRaceError>
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const math = (latex: string) => `$${latex}$`
-const all = (latex: string): LocalizedText => say(math(latex), math(latex), math(latex))
+const all = (latex: string): LocalizedText => say(math(latex), math(latex), math(latex), math(latex))
 const mixedLatex = (whole: number, numerator: number, denominator: number) => `${whole}\\frac{${numerator}}{${denominator}}`
 
 interface Candidate {
@@ -66,7 +66,7 @@ function toMixedQuestion(random: Random, tier: Tier): IntroFractionRaceQuestion 
         ...(rest > 1 ? [{ latex: mixedLatex(whole, rest - 1, denominator), error: 'calculation' as const }] : [])
     ])
     if (!choices) return null
-    return question(0, 'to-mixed', say(`Nola idazten da ${math(`\\frac{${numerator}}{${denominator}}`)} zenbaki misto gisa?`, `¿Cómo se escribe ${math(`\\frac{${numerator}}{${denominator}}`)} como número mixto?`, `كيف يُكتب ${math(`\\frac{${numerator}}{${denominator}}`)} عددًا كسريًا؟`), choices, fraction(numerator, denominator), all(`${numerator}=${denominator}\\cdot ${whole}+${rest}`), 'mixed')
+    return question(0, 'to-mixed', say(`Nola idazten da ${math(`\\frac{${numerator}}{${denominator}}`)} zenbaki misto gisa?`, `¿Cómo se escribe ${math(`\\frac{${numerator}}{${denominator}}`)} como número mixto?`, `كيف يُكتب ${math(`\\frac{${numerator}}{${denominator}}`)} عددًا كسريًا؟`, `How do you write ${math(`\\frac{${numerator}}{${denominator}}`)} as a mixed number?`), choices, fraction(numerator, denominator), all(`${numerator}=${denominator}\\cdot ${whole}+${rest}`), 'mixed')
 }
 
 function toImproperQuestion(random: Random, tier: Tier): IntroFractionRaceQuestion | null {
@@ -79,7 +79,7 @@ function toImproperQuestion(random: Random, tier: Tier): IntroFractionRaceQuesti
         { latex: frac(numerator - 1), error: 'calculation' }
     ] as Candidate[]).filter((candidate) => !candidate.latex.includes('{0}')))
     if (!choices) return null
-    return question(0, 'to-improper', say(`Nola idazten da ${math(mixedLatex(whole, rest, denominator))} zatiki gisa?`, `¿Cómo se escribe ${math(mixedLatex(whole, rest, denominator))} como fracción?`, `كيف يُكتب ${math(mixedLatex(whole, rest, denominator))} كسرًا؟`), choices, fraction(numerator, denominator), all(`\\frac{${whole}\\cdot ${denominator}+${rest}}{${denominator}}=\\frac{${numerator}}{${denominator}}`))
+    return question(0, 'to-improper', say(`Nola idazten da ${math(mixedLatex(whole, rest, denominator))} zatiki gisa?`, `¿Cómo se escribe ${math(mixedLatex(whole, rest, denominator))} como fracción?`, `كيف يُكتب ${math(mixedLatex(whole, rest, denominator))} كسرًا؟`, `How do you write ${math(mixedLatex(whole, rest, denominator))} as a fraction?`), choices, fraction(numerator, denominator), all(`\\frac{${whole}\\cdot ${denominator}+${rest}}{${denominator}}=\\frac{${numerator}}{${denominator}}`))
 }
 
 /* ---------- Circuit 4: fraction of a quantity and the part that is left ---------- */
@@ -99,7 +99,7 @@ function fractionOfQuestion(random: Random, tier: Tier): IntroFractionRaceQuesti
     ] as Candidate[]).filter((candidate) => Number(candidate.latex) > 0))
     if (!choices) return null
     const frac = `\\frac{${numerator}}{${denominator}}`
-    return question(4, 'fraction-of', say(`Zenbat da ${total}ren ${math(frac)}?`, `¿Cuánto es ${math(frac)} de ${total}?`, `كم يساوي ${math(frac)} من ${total}؟`), choices, fraction(answer), all(`${total}\\mathbin{:}${denominator}\\cdot ${numerator}=${answer}`))
+    return question(4, 'fraction-of', say(`Zenbat da ${total}ren ${math(frac)}?`, `¿Cuánto es ${math(frac)} de ${total}?`, `كم يساوي ${math(frac)} من ${total}؟`, `What is ${math(frac)} of ${total}?`), choices, fraction(answer), all(`${total}\\mathbin{:}${denominator}\\cdot ${numerator}=${answer}`))
 }
 
 function remainingQuestion(random: Random, tier: Tier): IntroFractionRaceQuestion | null {
@@ -116,9 +116,9 @@ function remainingQuestion(random: Random, tier: Tier): IntroFractionRaceQuestio
     ])
     if (!choices) return null
     const situation = pick(random, [
-        say(`Ane-k pagaren ${math(toLatex(spentValue))} gastatu du. Pagaren zer zati geratzen zaio?`, `Ana ha gastado ${math(toLatex(spentValue))} de su paga. ¿Qué fracción de la paga le queda?`, `أنفقت آنه ${math(toLatex(spentValue))} مصروفها. ما الكسر المتبقي من المصروف؟`),
-        say(`Liburu baten ${math(toLatex(spentValue))} irakurri dut. Liburuaren zer zati falta zait?`, `He leído ${math(toLatex(spentValue))} de un libro. ¿Qué fracción del libro me falta?`, `قرأت ${math(toLatex(spentValue))} كتاب. ما الكسر المتبقي من الكتاب؟`),
-        say(`Pastel baten ${math(toLatex(spentValue))} jan dugu. Pastelaren zer zati geratzen da?`, `Nos hemos comido ${math(toLatex(spentValue))} de una tarta. ¿Qué fracción de la tarta queda?`, `أكلنا ${math(toLatex(spentValue))} كعكة. ما الكسر المتبقي من الكعكة؟`)
+        say(`Ane-k pagaren ${math(toLatex(spentValue))} gastatu du. Pagaren zer zati geratzen zaio?`, `Ana ha gastado ${math(toLatex(spentValue))} de su paga. ¿Qué fracción de la paga le queda?`, `أنفقت آنه ${math(toLatex(spentValue))} مصروفها. ما الكسر المتبقي من المصروف؟`, `Ana has spent ${math(toLatex(spentValue))} of her pocket money. What fraction of her pocket money is left?`),
+        say(`Liburu baten ${math(toLatex(spentValue))} irakurri dut. Liburuaren zer zati falta zait?`, `He leído ${math(toLatex(spentValue))} de un libro. ¿Qué fracción del libro me falta?`, `قرأت ${math(toLatex(spentValue))} كتاب. ما الكسر المتبقي من الكتاب؟`, `I have read ${math(toLatex(spentValue))} of a book. What fraction of the book is left for me to read?`),
+        say(`Pastel baten ${math(toLatex(spentValue))} jan dugu. Pastelaren zer zati geratzen da?`, `Nos hemos comido ${math(toLatex(spentValue))} de una tarta. ¿Qué fracción de la tarta queda?`, `أكلنا ${math(toLatex(spentValue))} كعكة. ما الكسر المتبقي من الكعكة؟`, `We have eaten ${math(toLatex(spentValue))} of a cake. What fraction of the cake is left?`)
     ])
     return question(4, 'remaining', situation, choices, left, all(`1-${toLatex(spentValue)}=\\frac{${denominator}}{${denominator}}-${toLatex(spentValue)}=${toLatex(subtract(fraction(1), spentValue))}`))
 }
@@ -185,7 +185,7 @@ export function introFractionParTime(circuit: number): number {
 
 export const introFractionRaceErrorTips: Record<IntroFractionRaceError, LocalizedText> = {
     ...raceErrorTips,
-    'mixed-swapped': say('Zatidura unitate osoak dira, eta hondarra zenbakitzaile berria; trukatu dituzu.', 'El cociente son las unidades y el resto, el nuevo numerador; los has intercambiado.', 'الناتج هو الوحدات والباقي هو البسط الجديد؛ لقد بدّلتهما.'),
-    'mixed-added': say('Unitateak izendatzaileaz biderkatu behar dira, eta gero zenbakitzailea batu.', 'Hay que multiplicar las unidades por el denominador y después sumar el numerador.', 'يجب ضرب الوحدات في المقام ثم إضافة البسط.'),
-    'mixed-remainder': say('Zenbatu ondo zenbat aldiz sartzen den izendatzailea zenbakitzailean.', 'Cuenta bien cuántas veces cabe el denominador en el numerador.', 'عُدّ جيدًا كم مرة يدخل المقام في البسط.')
+    'mixed-swapped': say('Zatidura unitate osoak dira, eta hondarra zenbakitzaile berria; trukatu dituzu.', 'El cociente son las unidades y el resto, el nuevo numerador; los has intercambiado.', 'الناتج هو الوحدات والباقي هو البسط الجديد؛ لقد بدّلتهما.', 'The quotient is the whole units and the remainder is the new numerator; you have swapped them.'),
+    'mixed-added': say('Unitateak izendatzaileaz biderkatu behar dira, eta gero zenbakitzailea batu.', 'Hay que multiplicar las unidades por el denominador y después sumar el numerador.', 'يجب ضرب الوحدات في المقام ثم إضافة البسط.', 'You have to multiply the whole units by the denominator and then add the numerator.'),
+    'mixed-remainder': say('Zenbatu ondo zenbat aldiz sartzen den izendatzailea zenbakitzailean.', 'Cuenta bien cuántas veces cabe el denominador en el numerador.', 'عُدّ جيدًا كم مرة يدخل المقام في البسط.', 'Count carefully how many times the denominator goes into the numerator.')
 }

@@ -29,7 +29,7 @@ export function StatisticsIntroLaboratory(props: {
             tools={statisticsLabTools}
             stages={statisticsIntroStages}
             components={toolComponents}
-            title={{ eu: 'Bildu, antolatu eta jaurti', es: 'Recoge, organiza y lanza', ar: 'اجمع ونظّم وارمِ' }}
+            title={{ eu: 'Bildu, antolatu eta jaurti', es: 'Recoge, organiza y lanza', en: 'Collect, organise and roll', ar: 'اجمع ونظّم وارمِ' }}
         />
     )
 }

@@ -52,22 +52,22 @@ export function SumTool(props: ToolProps & { challenges?: LabChallenge<SumState>
     const operandControls = (which: 'first' | 'second', value: FractionValue, title: string) => (
         <>
             <h3>{title}</h3>
-            <Stepper label={l({ eu: 'Zenbakitzailea', es: 'Numerador', ar: 'البسط' })} value={value.numerator} min={1} max={value.denominator} onChange={(next) => setState((current) => setSumOperand(current, which, next, current[which].denominator))} language={props.language} />
-            <Stepper label={l({ eu: 'Izendatzailea', es: 'Denominador', ar: 'المقام' })} value={value.denominator} min={OPERATION_LIMITS.minDenominator} max={OPERATION_LIMITS.maxDenominator} onChange={(next) => setState((current) => setSumOperand(current, which, current[which].numerator, next))} language={props.language} />
+            <Stepper label={l({ eu: 'Zenbakitzailea', es: 'Numerador', en: 'Numerator', ar: 'البسط' })} value={value.numerator} min={1} max={value.denominator} onChange={(next) => setState((current) => setSumOperand(current, which, next, current[which].denominator))} language={props.language} />
+            <Stepper label={l({ eu: 'Izendatzailea', es: 'Denominador', en: 'Denominator', ar: 'المقام' })} value={value.denominator} min={OPERATION_LIMITS.minDenominator} max={OPERATION_LIMITS.maxDenominator} onChange={(next) => setState((current) => setSumOperand(current, which, current[which].numerator, next))} language={props.language} />
         </>
     )
 
     const controls = (
         <>
-            {operandControls('first', first, l({ eu: 'Lehen zatikia', es: 'Primera fracción', ar: 'الكسر الأول' }))}
-            <Segmented label={l({ eu: 'Eragiketa', es: 'Operación', ar: 'العملية' })} value={op} options={[{ value: 'add', label: '+' }, { value: 'subtract', label: '−' }]} onChange={(next) => setState((current) => setSumOp(current, next))} />
-            {operandControls('second', second, l({ eu: 'Bigarren zatikia', es: 'Segunda fracción', ar: 'الكسر الثاني' }))}
+            {operandControls('first', first, l({ eu: 'Lehen zatikia', es: 'Primera fracción', en: 'First fraction', ar: 'الكسر الأول' }))}
+            <Segmented label={l({ eu: 'Eragiketa', es: 'Operación', en: 'Operation', ar: 'العملية' })} value={op} options={[{ value: 'add', label: '+' }, { value: 'subtract', label: '−' }]} onChange={(next) => setState((current) => setSumOp(current, next))} />
+            {operandControls('second', second, l({ eu: 'Bigarren zatikia', es: 'Segunda fracción', en: 'Second fraction', ar: 'الكسر الثاني' }))}
             <Segmented
-                label={l({ eu: 'Barrak', es: 'Barras', ar: 'الأشرطة' })}
+                label={l({ eu: 'Barrak', es: 'Barras', en: 'Bar chart', ar: 'الأشرطة' })}
                 value={view}
                 options={[
-                    { value: 'original', label: l({ eu: 'Zatikiak', es: 'Fracciones', ar: 'الكسور' }) },
-                    { value: 'common', label: l({ eu: 'Izendatzaile bera', es: 'Mismo denominador', ar: 'مقام موحّد' }) }
+                    { value: 'original', label: l({ eu: 'Zatikiak', es: 'Fracciones', en: 'Fractions', ar: 'الكسور' }) },
+                    { value: 'common', label: l({ eu: 'Izendatzaile bera', es: 'Mismo denominador', en: 'Same denominator', ar: 'مقام موحّد' }) }
                 ]}
                 onChange={(next) => setState((current) => ({ ...current, view: next }))}
             />
@@ -91,23 +91,23 @@ export function SumTool(props: ToolProps & { challenges?: LabChallenge<SumState>
                 <MathText text={`$${latex(first)}${symbol}${latex(second)}${view === 'common' || showResult ? `=\\frac{${firstScaled}}{${common}}${symbol}\\frac{${secondScaled}}{${common}}` : ''}${showResult ? `=${latex(result)}${simplifiedTail(result)}` : ''}$`} />
             </span>
             {showResult && negative && (
-                <span className="fraction-v2-lab-readout-note">{l({ eu: 'Bigarren zatikia handiagoa denez, emaitza negatiboa da.', es: 'Como la segunda fracción es mayor, el resultado es negativo.', ar: 'بما أن الكسر الثاني أكبر، فالنتيجة سالبة.' })}</span>
+                <span className="fraction-v2-lab-readout-note">{l({ eu: 'Bigarren zatikia handiagoa denez, emaitza negatiboa da.', es: 'Como la segunda fracción es mayor, el resultado es negativo.', en: 'As the second fraction is bigger, the result is negative.', ar: 'بما أن الكسر الثاني أكبر، فالنتيجة سالبة.' })}</span>
             )}
             <PredictionStep
                 language={props.language}
                 question={op === 'add'
-                    ? { eu: 'Kalkulatu aurretik: batura 1 baino txikiagoa, berdina ala handiagoa izango da?', es: 'Antes de calcular: ¿la suma será menor, igual o mayor que 1?', ar: 'قبل الحساب: هل سيكون المجموع أصغر من 1 أم يساويه أم أكبر منه؟' }
-                    : { eu: 'Kalkulatu aurretik: kenketa negatiboa, zero ala positiboa izango da?', es: 'Antes de calcular: ¿la resta será negativa, cero o positiva?', ar: 'قبل الحساب: هل سيكون الفرق سالبًا أم صفرًا أم موجبًا؟' }}
+                    ? { eu: 'Kalkulatu aurretik: batura 1 baino txikiagoa, berdina ala handiagoa izango da?', es: 'Antes de calcular: ¿la suma será menor, igual o mayor que 1?', en: 'Before calculating: will the sum be smaller than, equal to or bigger than 1?', ar: 'قبل الحساب: هل سيكون المجموع أصغر من 1 أم يساويه أم أكبر منه؟' }
+                    : { eu: 'Kalkulatu aurretik: kenketa negatiboa, zero ala positiboa izango da?', es: 'Antes de calcular: ¿la resta será negativa, cero o positiva?', en: 'Before calculating: will the subtraction give a negative, zero or positive result?', ar: 'قبل الحساب: هل سيكون الفرق سالبًا أم صفرًا أم موجبًا؟' }}
                 labels={op === 'add' ? undefined : {
-                    '<': { eu: 'Negatiboa', es: 'Negativa', ar: 'سالب' },
-                    '=': { eu: 'Zero', es: 'Cero', ar: 'صفر' },
-                    '>': { eu: 'Positiboa', es: 'Positiva', ar: 'موجب' }
+                    '<': { eu: 'Negatiboa', es: 'Negativa', en: 'Negative', ar: 'سالب' },
+                    '=': { eu: 'Zero', es: 'Cero', en: 'Zero', ar: 'صفر' },
+                    '>': { eu: 'Positiboa', es: 'Positiva', en: 'Positive', ar: 'موجب' }
                 }}
                 actual={sumPrediction(state).relation}
                 choice={state.prediction}
                 tip={op === 'add'
-                    ? { eu: 'Trikimailua: konparatu zatiki bakoitza erdiarekin. Biak erdia baino handiagoak badira, batura 1 baino handiagoa da; biak txikiagoak badira, ez da batera iristen.', es: 'Truco: compara cada fracción con la mitad. Si las dos pasan de la mitad, la suma pasa de 1; si las dos se quedan por debajo, no llega a 1.', ar: 'حيلة: قارن كل كسر بالنصف. إذا تجاوز الكسران النصف تجاوز المجموع 1، وإذا كانا أصغر منه لم يبلغ 1.' }
-                    : { eu: 'Lehena baino zatiki handiago bat kentzen baduzu, emaitza negatiboa da; txikiagoa bada, positiboa.', es: 'Si restas una fracción mayor que la primera, el resultado es negativo; si es menor, positivo.', ar: 'إذا طرحت كسرًا أكبر من الأول فالنتيجة سالبة، وإذا كان أصغر فهي موجبة.' }}
+                    ? { eu: 'Trikimailua: konparatu zatiki bakoitza erdiarekin. Biak erdia baino handiagoak badira, batura 1 baino handiagoa da; biak txikiagoak badira, ez da batera iristen.', es: 'Truco: compara cada fracción con la mitad. Si las dos pasan de la mitad, la suma pasa de 1; si las dos se quedan por debajo, no llega a 1.', en: 'Tip: compare each fraction with a half. If both are bigger than a half, the sum is bigger than 1; if both are below a half, it does not reach 1.', ar: 'حيلة: قارن كل كسر بالنصف. إذا تجاوز الكسران النصف تجاوز المجموع 1، وإذا كانا أصغر منه لم يبلغ 1.' }
+                    : { eu: 'Lehena baino zatiki handiago bat kentzen baduzu, emaitza negatiboa da; txikiagoa bada, positiboa.', es: 'Si restas una fracción mayor que la primera, el resultado es negativo; si es menor, positivo.', en: 'If you subtract a fraction bigger than the first one, the result is negative; if it is smaller, the result is positive.', ar: 'إذا طرحت كسرًا أكبر من الأول فالنتيجة سالبة، وإذا كان أصغر فهي موجبة.' }}
                 onChoose={(relation) => setState((current) => setPrediction(current, relation))}
             >
                 <SumWorksheetPanel
@@ -133,7 +133,7 @@ export function SumTool(props: ToolProps & { challenges?: LabChallenge<SumState>
                     <PartitionBar parts={second.denominator} filled={second.numerator} ghostPerPart={splitSecond} tone="second" label={`${second.numerator}/${second.denominator}`} />
                 </div>
                 {view === 'common' && common > MAX_DRAWN_PIECES && (
-                    <p className="fraction-v2-insight">{l({ eu: `Izendatzaile komuna ${common} da: zati gehiegi marrazteko.`, es: `El denominador común es ${common}: demasiadas partes para dibujarlas.`, ar: `المقام المشترك هو ${common}: أجزاء كثيرة جدًا لرسمها.` })}</p>
+                    <p className="fraction-v2-insight">{l({ eu: `Izendatzaile komuna ${common} da: zati gehiegi marrazteko.`, es: `El denominador común es ${common}: demasiadas partes para dibujarlas.`, en: `The common denominator is ${common}: too many parts to draw.`, ar: `المقام المشترك هو ${common}: أجزاء كثيرة جدًا لرسمها.` })}</p>
                 )}
                 {showResult && !negative && common <= MAX_DRAWN_PIECES && (
                     <div className="fraction-v2-bar-row">

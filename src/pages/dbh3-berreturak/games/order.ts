@@ -27,7 +27,7 @@ export interface OrderCard {
 
 export type OrderRound = OrderCard[]
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 
 const mantissaText = (tenths: number) => (tenths % 10 === 0 ? String(tenths / 10) : `${Math.floor(tenths / 10)}{,}${tenths % 10}`)
 
@@ -103,4 +103,4 @@ export function orderStars(total: number): Stars {
     return 0
 }
 
-export const orderHint = (): LocalizedText => say('Konparatu berretzaileak lehenik; berdinak badira, zenbakiak. Kontuz: $25\\cdot 10^{3}$ ez dago idazkera zientifikoan.', 'Compara primero los exponentes; si son iguales, los números. Ojo: $25\\cdot 10^{3}$ no está en notación científica.', 'قارن الأسس أولًا؛ وإذا تساوت فقارن الأعداد. انتبه: $25\\cdot 10^{3}$ ليست بالترميز العلمي.')
+export const orderHint = (): LocalizedText => say('Konparatu berretzaileak lehenik; berdinak badira, zenbakiak. Kontuz: $25\\cdot 10^{3}$ ez dago idazkera zientifikoan.', 'Compara primero los exponentes; si son iguales, los números. Ojo: $25\\cdot 10^{3}$ no está en notación científica.', 'قارن الأسس أولًا؛ وإذا تساوت فقارن الأعداد. انتبه: $25\\cdot 10^{3}$ ليست بالترميز العلمي.', 'Compare the exponents first; if they are equal, compare the numbers. Careful: $25\\cdot 10^{3}$ is not in scientific notation.')

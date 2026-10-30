@@ -143,7 +143,7 @@ test('zatikiak decimals: challenges and endless practice', () => {
     assert.ok(!solved(divided(5, 6)).includes(1803), 'one digit before the period')
     assert.ok(!solved(divided(1, 21)).includes(1803))
     for (const challenge of decimalsChallenges) {
-        for (const language of ['eu', 'es', 'ar'] as const) {
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) {
             assert.ok(challenge.prompt[language].trim() && challenge.hint[language].trim())
             // Basque statements never put a suffix right after a number
             if (language === 'eu') assert.doesNotMatch(challenge.prompt.eu + challenge.hint.eu, /\d(?:ren|ko|ra|tik|rekin|an|ean|ek|z)\b/)

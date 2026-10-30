@@ -40,7 +40,7 @@ export function PolynomialsFractionsLaboratory(props: {
             tools={polynomialsFractionsLabTools}
             stages={polynomialsFractionsStages}
             components={toolComponents}
-            title={{ eu: 'Zatitu, faktorizatu eta sinplifikatu', es: 'Divide, factoriza y simplifica', ar: 'اقسم وحلّل وبسّط' }}
+            title={{ eu: 'Zatitu, faktorizatu eta sinplifikatu', es: 'Divide, factoriza y simplifica', en: 'Divide, factorise and simplify', ar: 'اقسم وحلّل وبسّط' }}
         />
     )
 }

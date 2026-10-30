@@ -3,6 +3,7 @@ import { pick } from '../../../features/unit-v2/games/random.ts'
 import type { LabChallenge, LabChallengeMaker, OperationAnswer } from '../../../features/unit-v2/lab/types.ts'
 import type { LocalizedText } from '../../../features/unit-v2/types.ts'
 import { readMoneyAnswer } from '../answers.ts'
+import { thousandsSeparatorFor } from '../../../utils/numberFormat.ts'
 
 /* ==========================================================================
    The 100 % bar: the reference amount is a bar split into ten pieces of
@@ -121,7 +122,7 @@ export function percentSlip(state: PercentBarState): 'added' | 'multiplied' | nu
 
 /* ---------- Challenges: the lessons' stadium, dress, plumber and insurance ---------- */
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
 
 const is = (state: PercentBarState, find: PercentFind, change: PercentChange, values: Partial<Record<'whole' | 'part' | 'rate', number>>) =>
     state.find === find && state.change === change && Object.entries(values).every(([key, value]) => state[key as 'whole' | 'part' | 'rate'] === value) && percentAnswered(state)
@@ -132,9 +133,9 @@ export const percentBarChallenges: LabChallenge<PercentBarState>[] = [
         prompt: say(
             'Estadioan 24 000 zale daude, edukieraren % 80. Zein da estadioaren edukiera? Prestatu barra eta idatzi emaitza.',
             'En el estadio hay 24 000 aficionados, el 80 % de su capacidad. ¿Cuál es la capacidad? Prepara la barra y escribe el resultado.',
-            'في الملعب 24000 مشجع، أي 80٪ من سعته. ما سعة الملعب؟ جهّز الشريط واكتب النتيجة.'
+            'في الملعب 24000 مشجع، أي 80٪ من سعته. ما سعة الملعب؟ جهّز الشريط واكتب النتيجة.', 'There are 24,000 fans in the stadium, which is 80% of its capacity. What is the capacity? Set up the bar and write the result.'
         ),
-        hint: say('Bilatu: osoa. % 80 = 24 000, beraz % 10 = 3000.', 'Busca: el total. El 80 % son 24 000, así que el 10 % son 3000.', 'ابحث عن: الكل. 80٪ هي 24000، إذن 10٪ هي 3000.'),
+        hint: say('Bilatu: osoa. % 80 = 24 000, beraz % 10 = 3000.', 'Busca: el total. El 80 % son 24 000, así que el 10 % son 3000.', 'ابحث عن: الكل. 80٪ هي 24000، إذن 10٪ هي 3000.', 'Find the total. 80% is 24,000, so 10% is 3,000.'),
         isSolved: (state) => is(state, 'whole', 'of', { part: 24000, rate: 80 })
     },
     {
@@ -142,9 +143,9 @@ export const percentBarChallenges: LabChallenge<PercentBarState>[] = [
         prompt: say(
             'Soineko bat % 25 merketu dute, eta orain 84 € balio du. Zenbat balio zuen lehen?',
             'Un vestido rebajado un 25 % sale por 84 €. ¿Cuánto costaba antes de la rebaja?',
-            'ثمن فستان بعد تخفيض 25٪ هو 84 €. كم كان ثمنه قبل التخفيض؟'
+            'ثمن فستان بعد تخفيض 25٪ هو 84 €. كم كان ثمنه قبل التخفيض؟', 'A dress reduced by 25% costs €84. How much did it cost before the discount?'
         ),
-        hint: say('84 € prezio zaharraren % 75 da: zatitu $0{,}75$ zenbakiaz, ez gehitu % 25.', '84 € es el 75 % del precio de antes: divide entre $0{,}75$, no sumes un 25 %.', '84 € هي 75٪ من الثمن القديم: اقسم على $0{,}75$ ولا تضف 25٪.'),
+        hint: say('84 € prezio zaharraren % 75 da: zatitu $0{,}75$ zenbakiaz, ez gehitu % 25.', '84 € es el 75 % del precio de antes: divide entre $0{,}75$, no sumes un 25 %.', '84 € هي 75٪ من الثمن القديم: اقسم على $0{,}75$ ولا تضف 25٪.', '€84 is 75% of the price before: divide by $0{,}75$, don\'t add 25%.'),
         isSolved: (state) => is(state, 'whole', 'down', { part: 84, rate: 25 })
     },
     {
@@ -152,9 +153,9 @@ export const percentBarChallenges: LabChallenge<PercentBarState>[] = [
         prompt: say(
             'Iturgin baten faktura 119 € da, BEZik gabe. BEZa % 21 bada, zenbat ordaindu behar da?',
             'La factura de un fontanero es de 119 € sin IVA. ¿Cuánto hay que pagar con el 21 % de IVA?',
-            'فاتورة سبّاك 119 € دون ضريبة. كم يجب أن يُدفع مع ضريبة 21٪؟'
+            'فاتورة سبّاك 119 € دون ضريبة. كم يجب أن يُدفع مع ضريبة 21٪؟', 'A plumber\'s bill is €119 without VAT. How much do you have to pay with 21% VAT?'
         ),
-        hint: say('% 21 igotzea $1{,}21$ zenbakiaz biderkatzea da.', 'Subir un 21 % es multiplicar por $1{,}21$.', 'رفع 21٪ يعني الضرب في $1{,}21$.'),
+        hint: say('% 21 igotzea $1{,}21$ zenbakiaz biderkatzea da.', 'Subir un 21 % es multiplicar por $1{,}21$.', 'رفع 21٪ يعني الضرب في $1{,}21$.', 'Increasing by 21% means multiplying by $1{,}21$.'),
         isSolved: (state) => is(state, 'part', 'up', { whole: 119, rate: 21 })
     },
     {
@@ -162,9 +163,9 @@ export const percentBarChallenges: LabChallenge<PercentBarState>[] = [
         prompt: say(
             'Aseguruaren kuota 520 € zen, eta orain 442 € da. Zenbat merketu da, ehunekotan?',
             'El seguro baja la cuota de 520 € a 442 €. ¿Qué porcentaje la ha rebajado?',
-            'خفّض التأمين القسط من 520 € إلى 442 €. ما نسبة التخفيض؟'
+            'خفّض التأمين القسط من 520 € إلى 442 €. ما نسبة التخفيض؟', 'The insurance lowers the fee from €520 to €442. What percentage has it been cut by?'
         ),
-        hint: say('$442\\mathbin{:}520=0{,}85$: orain % 85 ordaintzen da.', '$442\\mathbin{:}520=0{,}85$: ahora se paga el 85 %.', '$442\\mathbin{:}520=0{,}85$: يُدفع الآن 85٪.'),
+        hint: say('$442\\mathbin{:}520=0{,}85$: orain % 85 ordaintzen da.', '$442\\mathbin{:}520=0{,}85$: ahora se paga el 85 %.', '$442\\mathbin{:}520=0{,}85$: يُدفع الآن 85٪.', '$442\\mathbin{:}520=0{,}85$: now you pay 85%.'),
         isSolved: (state) => is(state, 'percent', 'down', { whole: 520, part: 442 })
     }
 ]
@@ -181,8 +182,8 @@ function freshFrom<State>(start: State, maker: LabChallengeMaker<State>): LabCha
     }
 }
 
-/** 24 000 with a space in Basque and Spanish; Arabic keeps the plain digits */
-const big = (value: number) => (value >= 10000 ? String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : String(value))
+/** 24 000 with a space in Basque and Spanish, 24,000 in English; Arabic keeps the plain digits */
+const big = (value: number, language: string) => (value >= 10000 ? String(value).replace(/\B(?=(\d{3})+(?!\d))/g, language === 'en' ? thousandsSeparatorFor(language) : ' ') : String(value))
 const decimalLatex = (value: FractionValue) => (toExactDecimal(value, ',') ?? String(toNumber(value))).replace(',', '{,}')
 
 const RATES: Record<PercentChange, readonly number[]> = {
@@ -205,29 +206,29 @@ export const percentBarExtra: LabChallengeMaker<PercentBarState> = freshFrom(ini
         const answer = toExactDecimal(percentBarCase(solution).unknown, ',')!
         const ready = { ...solution, answer, checked: true }
         const index = decimalLatex(fraction(percent, 100))
-        const W = big(whole)
-        const P = big(part)
+        const W = { eu: big(whole, 'eu'), es: big(whole, 'es'), en: big(whole, 'en') }
+        const P = { eu: big(part, 'eu'), es: big(part, 'es'), en: big(part, 'en') }
         const texts: Record<PercentChange, Record<PercentFind, LocalizedText>> = {
             of: {
-                part: say(`Kalkulatu ${W} zenbakiaren % ${rate}.`, `Calcula el ${rate} % de ${W}.`, `احسب ${rate}٪ من ${whole}.`),
-                whole: say(`${P} kantitate baten % ${rate} da. Zein da kantitate osoa?`, `${P} es el ${rate} % de una cantidad. ¿Cuál es la cantidad?`, `${part} هو ${rate}٪ من كمية. ما هذه الكمية؟`),
-                percent: say(`${W} kantitatearen zer ehuneko da ${P}?`, `¿Qué porcentaje de ${W} es ${P}?`, `ما النسبة المئوية التي يمثلها ${part} من ${whole}؟`)
+                part: say(`Kalkulatu ${W.eu} zenbakiaren % ${rate}.`, `Calcula el ${rate} % de ${W.es}.`, `احسب ${rate}٪ من ${whole}.`, `Work out ${rate}% of ${W.en}.`),
+                whole: say(`${P.eu} kantitate baten % ${rate} da. Zein da kantitate osoa?`, `${P.es} es el ${rate} % de una cantidad. ¿Cuál es la cantidad?`, `${part} هو ${rate}٪ من كمية. ما هذه الكمية؟`, `${P.en} is ${rate}% of an amount. What is the amount?`),
+                percent: say(`${W.eu} kantitatearen zer ehuneko da ${P.eu}?`, `¿Qué porcentaje de ${W.es} es ${P.es}?`, `ما النسبة المئوية التي يمثلها ${part} من ${whole}؟`, `What percentage of ${W.en} is ${P.en}?`)
             },
             up: {
-                part: say(`Prezioa: ${W} €. % ${rate} igo da. Zein da prezio berria?`, `Un precio de ${W} € sube un ${rate} %. ¿Cuál es el precio nuevo?`, `سعر ${whole} € يرتفع ${rate}٪. ما السعر الجديد؟`),
-                whole: say(`% ${rate} igo ondoren, prezioa ${P} € da. Zenbat zen lehen?`, `Tras subir un ${rate} %, un precio es de ${P} €. ¿Cuánto era antes?`, `بعد ارتفاع ${rate}٪ صار السعر ${part} €. كم كان قبل ذلك؟`),
-                percent: say(`Prezioa ${W} € zen, eta orain ${P} € da. Zenbat igo da, ehunekotan?`, `Un precio pasa de ${W} € a ${P} €. ¿Qué porcentaje ha subido?`, `ارتفع سعر من ${whole} € إلى ${part} €. ما نسبة الارتفاع؟`)
+                part: say(`Prezioa: ${W.eu} €. % ${rate} igo da. Zein da prezio berria?`, `Un precio de ${W.es} € sube un ${rate} %. ¿Cuál es el precio nuevo?`, `سعر ${whole} € يرتفع ${rate}٪. ما السعر الجديد؟`, `A price of €${W.en} goes up by ${rate}%. What is the new price?`),
+                whole: say(`% ${rate} igo ondoren, prezioa ${P.eu} € da. Zenbat zen lehen?`, `Tras subir un ${rate} %, un precio es de ${P.es} €. ¿Cuánto era antes?`, `بعد ارتفاع ${rate}٪ صار السعر ${part} €. كم كان قبل ذلك؟`, `After a ${rate}% increase, a price is €${P.en}. How much was it before?`),
+                percent: say(`Prezioa ${W.eu} € zen, eta orain ${P.eu} € da. Zenbat igo da, ehunekotan?`, `Un precio pasa de ${W.es} € a ${P.es} €. ¿Qué porcentaje ha subido?`, `ارتفع سعر من ${whole} € إلى ${part} €. ما نسبة الارتفاع؟`, `A price goes from €${W.en} to €${P.en}. What percentage has it gone up by?`)
             },
             down: {
-                part: say(`Prezioa: ${W} €. % ${rate} merketu da. Zein da prezio berria?`, `Un precio de ${W} € se rebaja un ${rate} %. ¿Cuál es el precio nuevo?`, `سعر ${whole} € يُخفَّض ${rate}٪. ما السعر الجديد؟`),
-                whole: say(`% ${rate} merketuta, artikulu batek ${P} € balio du. Zenbat balio zuen lehen?`, `Rebajado un ${rate} %, un artículo cuesta ${P} €. ¿Cuánto costaba antes?`, `بعد تخفيض ${rate}٪ صار ثمن سلعة ${part} €. كم كان ثمنها قبل ذلك؟`),
-                percent: say(`Prezioa ${W} € zen, eta orain ${P} € da. Zenbat merketu da, ehunekotan?`, `Un precio pasa de ${W} € a ${P} €. ¿Qué porcentaje se ha rebajado?`, `انخفض سعر من ${whole} € إلى ${part} €. ما نسبة التخفيض؟`)
+                part: say(`Prezioa: ${W.eu} €. % ${rate} merketu da. Zein da prezio berria?`, `Un precio de ${W.es} € se rebaja un ${rate} %. ¿Cuál es el precio nuevo?`, `سعر ${whole} € يُخفَّض ${rate}٪. ما السعر الجديد؟`, `A price of €${W.en} is reduced by ${rate}%. What is the new price?`),
+                whole: say(`% ${rate} merketuta, artikulu batek ${P.eu} € balio du. Zenbat balio zuen lehen?`, `Rebajado un ${rate} %, un artículo cuesta ${P.es} €. ¿Cuánto costaba antes?`, `بعد تخفيض ${rate}٪ صار ثمن سلعة ${part} €. كم كان ثمنها قبل ذلك؟`, `After a ${rate}% discount, an item costs €${P.en}. How much did it cost before?`),
+                percent: say(`Prezioa ${W.eu} € zen, eta orain ${P.eu} € da. Zenbat merketu da, ehunekotan?`, `Un precio pasa de ${W.es} € a ${P.es} €. ¿Qué porcentaje se ha rebajado?`, `انخفض سعر من ${whole} € إلى ${part} €. ما نسبة التخفيض؟`, `A price goes from €${W.en} to €${P.en}. What percentage has it been reduced by?`)
             }
         }
         const hints: Record<PercentFind, LocalizedText> = {
-            part: say(`Biderkatu indizeaz: $${index}$.`, `Multiplica por el índice: $${index}$.`, `اضرب في المؤشر: $${index}$.`),
-            whole: say(`Zatitu indizeaz: $${index}$. Barra osoa % 100 da.`, `Divide entre el índice: $${index}$. La barra entera es el 100 %.`, `اقسم على المؤشر: $${index}$. الشريط كله هو 100٪.`),
-            percent: say(`Zatitu: $${part}\\mathbin{:}${whole}$, eta pasatu ehunekora.`, `Divide $${part}\\mathbin{:}${whole}$ y pásalo a porcentaje.`, `اقسم $${part}\\mathbin{:}${whole}$ وحوّله إلى نسبة مئوية.`)
+            part: say(`Biderkatu indizeaz: $${index}$.`, `Multiplica por el índice: $${index}$.`, `اضرب في المؤشر: $${index}$.`, `Multiply by the multiplier: $${index}$.`),
+            whole: say(`Zatitu indizeaz: $${index}$. Barra osoa % 100 da.`, `Divide entre el índice: $${index}$. La barra entera es el 100 %.`, `اقسم على المؤشر: $${index}$. الشريط كله هو 100٪.`, `Divide by the multiplier: $${index}$. The whole bar is 100%.`),
+            percent: say(`Zatitu: $${part}\\mathbin{:}${whole}$, eta pasatu ehunekora.`, `Divide $${part}\\mathbin{:}${whole}$ y pásalo a porcentaje.`, `اقسم $${part}\\mathbin{:}${whole}$ وحوّله إلى نسبة مئوية.`, `Divide $${part}\\mathbin{:}${whole}$ and convert it to a percentage.`)
         }
         const known = find === 'part' ? { whole, rate } : find === 'whole' ? { part, rate } : { whole, part }
         return {

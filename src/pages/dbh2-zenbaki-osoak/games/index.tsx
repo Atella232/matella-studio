@@ -24,7 +24,7 @@ export function IntegerGames({ language, pathname, openGame, completedIds, onCom
             language={language}
             games={hubGames}
             recordsKey={INTEGER_GAME_RECORDS_KEY}
-            title={{ eu: 'Jolastu zeinuekin', es: 'Juega con los signos', ar: 'العب بالإشارات' }}
+            title={{ eu: 'Jolastu zeinuekin', es: 'Juega con los signos', en: 'Play with the signs', ar: 'العب بالإشارات' }}
             completedIds={completedIds}
             onComplete={onComplete}
             mode={integerGameModeForPath(pathname)}

@@ -28,10 +28,11 @@ export const labTools: LabToolInfo[] = [
         id: 'parts',
         stage: 'meaning',
         lessonTopic: 'representation',
-        title: { eu: 'Osoaren zatiak', es: 'Partes de un todo', ar: 'أجزاء من كلّ' },
+        title: { eu: 'Osoaren zatiak', es: 'Partes de un todo', en: 'Parts of a whole', ar: 'أجزاء من كلّ' },
         observe: {
             eu: 'Izendatzaileak unitate bakoitza zenbat zati berdinetan banatzen den adierazten du; zenbakitzaileak, zenbat koloreztatzen dituzun. Unitate batean sartzen direnak baino zati gehiago koloreztatzen badituzu, beste unitate bat behar duzu: zatikia inpropioa da.',
             es: 'El denominador dice en cuántas partes iguales se divide cada unidad; el numerador, cuántas coloreas. Si coloreas más partes de las que caben en una unidad, necesitas otra: la fracción es impropia.',
+            en: 'The denominator says how many equal parts each whole is divided into; the numerator, how many you colour. If you colour more parts than fit into one whole, you need another whole: the fraction is improper.',
             ar: 'يبيّن المقام عدد الأجزاء المتساوية لكل وحدة، ويبيّن البسط عدد الأجزاء التي تلوّنها. إذا لوّنت أجزاء أكثر مما تتسع له وحدة واحدة فأنت بحاجة إلى وحدة أخرى: الكسر غير حقيقي.'
         }
     },
@@ -39,10 +40,11 @@ export const labTools: LabToolInfo[] = [
         id: 'numberline',
         stage: 'meaning',
         lessonTopic: 'meaning',
-        title: { eu: 'Zenbaki-zuzena', es: 'Recta numérica', ar: 'خط الأعداد' },
+        title: { eu: 'Zenbaki-zuzena', es: 'Recta numérica', en: 'Number line', ar: 'خط الأعداد' },
         observe: {
             eu: 'Zatiki bakoitza puntu bat da. Izendatzaileak unitate bakoitza zenbat jauzi berdinetan banatzen den adierazten du; zenbakitzaileak, 0tik zenbat jauzi egiten dituzun.',
             es: 'Cada fracción es un punto. El denominador dice en cuántos saltos iguales se divide cada unidad; el numerador, cuántos saltos das desde el 0.',
+            en: 'Each fraction is a point. The denominator says how many equal jumps each unit is divided into; the numerator, how many jumps you take from 0.',
             ar: 'كل كسر نقطة. يبيّن المقام عدد القفزات المتساوية في كل وحدة، ويبيّن البسط عدد القفزات التي تقفزها من 0.'
         }
     },
@@ -50,10 +52,11 @@ export const labTools: LabToolInfo[] = [
         id: 'wall',
         stage: 'equivalence',
         lessonTopic: 'equivalence',
-        title: { eu: 'Zatikien horma', es: 'Muro de fracciones', ar: 'جدار الكسور' },
+        title: { eu: 'Zatikien horma', es: 'Muro de fracciones', en: 'Fraction wall', ar: 'جدار الكسور' },
         observe: {
             eu: 'Errenkada bakoitza zati berdinetan banatutako unitate bat da. Lerro berera zehazki iristen diren zatikiak baliokideak dira; urrunago iristen dena handiagoa da.',
             es: 'Cada fila es una unidad partida en trozos iguales. Las fracciones que llegan exactamente a la misma línea son equivalentes; la que llega más lejos es mayor.',
+            en: 'Each row is one unit cut into equal pieces. Fractions that reach exactly the same line are equivalent; the one that reaches further is greater.',
             ar: 'كل صف وحدة مقسّمة إلى قطع متساوية. الكسور التي تصل تمامًا إلى الخط نفسه متكافئة، والتي تصل أبعد هي الأكبر.'
         }
     },
@@ -61,10 +64,11 @@ export const labTools: LabToolInfo[] = [
         id: 'equivalence',
         stage: 'equivalence',
         lessonTopic: 'equivalence',
-        title: { eu: 'Baliokidetasuna', es: 'Equivalencia', ar: 'التكافؤ' },
+        title: { eu: 'Baliokidetasuna', es: 'Equivalencia', en: 'Equivalence', ar: 'التكافؤ' },
         observe: {
             eu: 'Anplifikatzeak zati bakoitza zati txikiagotan banatzen du; sinplifikatzeak zatiak talde berdinetan biltzen ditu. Bi kasuetan koloreztatutako zatia bera da: balioa ez da aldatzen.',
             es: 'Amplificar parte cada porción en trozos más pequeños; simplificar junta porciones en grupos iguales. En los dos casos la parte coloreada es la misma: el valor no cambia.',
+            en: 'Multiplying top and bottom cuts each piece into smaller ones; simplifying joins pieces into equal groups. In both cases the coloured part is the same: the value does not change.',
             ar: 'التوسيع يقسّم كل جزء إلى قطع أصغر، والتبسيط يجمع الأجزاء في مجموعات متساوية. في الحالتين يبقى الجزء الملوّن نفسه: القيمة لا تتغيّر.'
         }
     },
@@ -72,10 +76,11 @@ export const labTools: LabToolInfo[] = [
         id: 'primes',
         stage: 'equivalence',
         lessonTopic: 'simplification',
-        title: { eu: 'Lehen faktoreak', es: 'Factores primos', ar: 'العوامل الأولية' },
+        title: { eu: 'Lehen faktoreak', es: 'Factores primos', en: 'Prime factors', ar: 'العوامل الأولية' },
         observe: {
             eu: 'Deskonposatu zenbakitzailea eta izendatzailea lehen faktoretan. Faktore berdinen bikote bakoitza, bat goian eta bestea behean, marra daiteke: bi gaiak zenbaki beraz zatitzea da. Marratutakoa ZKH da; marratzeko ezer geratzen ez denean, zatikia laburtezina da. Eta marratutakoa (behin) bider goian eta behean geratzen dena, MKT.',
             es: 'Descompón numerador y denominador en factores primos. Cada pareja de factores iguales, uno arriba y otro abajo, se puede tachar: es dividir los dos términos entre el mismo número. Lo tachado es el m.c.d.; cuando no queda nada que tachar, la fracción es irreducible. Y lo tachado (una vez) por lo que queda arriba y abajo es el m.c.m.',
+            en: 'Break the numerator and denominator down into prime factors. Each pair of equal factors, one on top and one below, can be crossed out: that means dividing both terms by the same number. What is crossed out is the GCD; when there is nothing left to cross out, the fraction is in its simplest form. And what is crossed out (once), multiplied by what is left on top and bottom, is the LCM.',
             ar: 'حلّل البسط والمقام إلى عوامل أولية. كل زوج من العوامل المتساوية، واحد في الأعلى وآخر في الأسفل، يمكن شطبه: وهذا قسمة الحدّين على العدد نفسه. المشطوب هو القاسم المشترك الأكبر؛ وحين لا يبقى ما يُشطب يكون الكسر في أبسط صورة. والمشطوب (مرة واحدة) مضروبًا في ما يبقى في الأعلى والأسفل هو المضاعف المشترك الأصغر.'
         }
     },
@@ -83,10 +88,11 @@ export const labTools: LabToolInfo[] = [
         id: 'compare',
         stage: 'ordering',
         lessonTopic: 'ordering',
-        title: { eu: 'Konparatu', es: 'Comparar', ar: 'قارن' },
+        title: { eu: 'Konparatu', es: 'Comparar', en: 'Compare', ar: 'قارن' },
         observe: {
             eu: 'Aurreikusi lehenik zein den handiagoa eta gero egiaztatu estrategia batekin: izendatzaile komuna, zenbaki-zuzena edo biderketa gurutzatua.',
             es: 'Predice primero cuál es mayor y después compruébalo con una estrategia: denominador común, recta numérica o productos cruzados.',
+            en: 'Predict first which is greater, then check it with a strategy: common denominator, number line or cross-multiplication.',
             ar: 'توقّع أولًا أيهما أكبر ثم تحقّق باستعمال استراتيجية: مقام مشترك أو خط الأعداد أو الضرب التبادلي.'
         }
     },
@@ -94,10 +100,11 @@ export const labTools: LabToolInfo[] = [
         id: 'zoom',
         stage: 'ordering',
         lessonTopic: 'ordering',
-        title: { eu: 'Lupa zenbaki-zuzenean', es: 'Lupa en la recta', ar: 'عدسة على خط الأعداد' },
+        title: { eu: 'Lupa zenbaki-zuzenean', es: 'Lupa en la recta', en: 'Zoom on the number line', ar: 'عدسة على خط الأعداد' },
         observe: {
             eu: 'Bi zatiki izendatzaile komunaren marrak dira, eta eskuinerago dagoena da handiagoa. Bien artean marrarik geratzen ez bada, zatitu zati bakoitza bitan (edo gehiagotan): marra berriak agertzen dira, bi zatikiak anplifikatzea baita. Aukeratu bat eta hurbildu lupa haren eta beste baten artean: berriro dago hutsunea, eta horrela amaigabe. Bi zatiki desberdinen artean beti dago beste bat.',
             es: 'Dos fracciones son marcas de su denominador común, y la que queda más a la derecha es la mayor. Si entre ellas no queda ninguna marca, parte cada trozo en 2 (o en más): aparecen marcas nuevas, porque es amplificar las dos fracciones. Elige una y acerca la lupa entre ella y una de las otras: vuelve a haber hueco, y así sin fin. Entre dos fracciones distintas siempre hay otra.',
+            en: 'Both fractions are marks on the common-denominator grid, and the one further to the right is the greater one. If there is no mark between them, split each piece into 2 (or more): new marks appear, because that means multiplying the top and bottom of both fractions. Choose one and move the zoom between it and one of the others: there is a gap again, and so on forever. Between two different fractions there is always another one.',
             ar: 'الكسران علامتان من مقامهما المشترك، والواقع أكثر إلى اليمين هو الأكبر. وإذا لم تبقَ أي علامة بينهما فقسّم كل جزء إلى 2 (أو أكثر): تظهر علامات جديدة لأن ذلك توسيع للكسرين. اختر واحدة وقرّب العدسة بينها وبين أحد الكسرين: يظهر فراغ من جديد، وهكذا بلا نهاية. بين كسرين مختلفين يوجد دائمًا كسر آخر.'
         }
     },
@@ -105,10 +112,11 @@ export const labTools: LabToolInfo[] = [
         id: 'addsub',
         stage: 'operations',
         lessonTopic: 'add-subtract',
-        title: { eu: 'Batuketa eta kenketa', es: 'Suma y resta', ar: 'الجمع والطرح' },
+        title: { eu: 'Batuketa eta kenketa', es: 'Suma y resta', en: 'Addition and subtraction', ar: 'الجمع والطرح' },
         observe: {
             eu: 'Tamaina bereko zatiak bakarrik batu edo ken daitezke. Lehenik banatu bi barrak zati kopuru berean (izendatzaile komuna) eta gero bildu edo kendu zatiak.',
             es: 'Solo se pueden sumar o restar trozos del mismo tamaño. Primero parte las dos barras en el mismo número de partes (denominador común) y después junta o quita trozos.',
+            en: 'You can only add or subtract pieces of the same size. First split both bars into the same number of parts (common denominator), and then add or take away pieces.',
             ar: 'لا يمكن جمع أو طرح إلا القطع المتساوية في الحجم. قسّم الشريطين أولًا إلى العدد نفسه من الأجزاء (مقام مشترك) ثم اجمع القطع أو اطرحها.'
         }
     },
@@ -116,10 +124,11 @@ export const labTools: LabToolInfo[] = [
         id: 'muldiv',
         stage: 'operations',
         lessonTopic: 'multiply-divide',
-        title: { eu: 'Biderketa eta zatiketa', es: 'Multiplicación y división', ar: 'الضرب والقسمة' },
+        title: { eu: 'Biderketa eta zatiketa', es: 'Multiplicación y división', en: 'Multiplication and division', ar: 'الضرب والقسمة' },
         observe: {
             eu: 'Biderkatzea zatiki baten zatikia hartzea da: bi eremuen gurutzea da biderkadura. Zatitzea bigarren zatikia lehenengoan zenbat aldiz sartzen den galdetzea da.',
             es: 'Multiplicar es tomar una fracción de otra: el cruce de las dos zonas es el producto. Dividir es preguntar cuántas veces cabe la segunda fracción en la primera.',
+            en: 'Multiplying is taking a fraction of another: where the two areas cross is the product. Dividing is asking how many times the second fraction fits into the first.',
             ar: 'الضرب هو أخذ كسر من كسر آخر: تقاطع المنطقتين هو الناتج. والقسمة هي السؤال عن عدد مرات احتواء الكسر الأول على الكسر الثاني.'
         }
     },
@@ -127,10 +136,11 @@ export const labTools: LabToolInfo[] = [
         id: 'expression',
         stage: 'operations',
         lessonTopic: 'combined',
-        title: { eu: 'Eragiketak urratsez urrats', es: 'Desmonta la expresión', ar: 'العمليات خطوة بخطوة' },
+        title: { eu: 'Eragiketak urratsez urrats', es: 'Desmonta la expresión', en: 'Break down the expression', ar: 'العمليات خطوة بخطوة' },
         observe: {
             eu: 'Sakatu orain egin behar den eragiketa: adierazpena bere emaitzara laburtzen da. Ordena okerra aukeratzen baduzu, zein arauk agintzen duen ikusiko duzu, eta askotan beste emaitza bat aterako litzatekeela. Lerro bakoitzak balio bera du, idazkera laburrago batean.',
             es: 'Toca la operación que toca hacer ahora: la expresión se reduce a su resultado. Si eliges un orden equivocado, verás qué regla manda y, muchas veces, que saldría otro resultado. Cada línea vale lo mismo, escrita de forma más corta.',
+            en: 'Tap the operation you have to do now: the expression shrinks to its result. If you choose a wrong order, you will see which rule comes first and, often, that a different result would come out. Each line has the same value, written in a shorter form.',
             ar: 'اضغط العملية التي يجب إجراؤها الآن: تُختصر العبارة إلى نتيجتها. إذا اخترت ترتيبًا خاطئًا سترى أي قاعدة تحكم، وأنه غالبًا ستنتج نتيجة أخرى. كل سطر له القيمة نفسها مكتوبة بصورة أقصر.'
         }
     },
@@ -138,10 +148,11 @@ export const labTools: LabToolInfo[] = [
         id: 'proportion',
         stage: 'proportionality',
         lessonTopic: 'fraction-of',
-        title: { eu: 'Kantitateak eta ehunekoak', es: 'Cantidades y porcentajes', ar: 'الكميات والنسب المئوية' },
+        title: { eu: 'Kantitateak eta ehunekoak', es: 'Cantidades y porcentajes', en: 'Quantities and percentages', ar: 'الكميات والنسب المئوية' },
         observe: {
             eu: 'Kantitate baten zatikia zati berdinetan banatu eta batzuk hartzea da. Ehuneko bat 100 izendatzailea duen zatikia da, eta hamartarra balio bera idazteko beste modu bat.',
             es: 'Una fracción de una cantidad es repartir en partes iguales y tomar algunas. Un porcentaje es una fracción con denominador 100, y un decimal es otra forma de escribir el mismo valor.',
+            en: 'A fraction of a quantity means sharing it into equal parts and taking some. A percentage is a fraction with denominator 100, and a decimal is another way of writing the same value.',
             ar: 'كسر من كمية يعني تقسيمها إلى أجزاء متساوية وأخذ بعضها. النسبة المئوية كسر مقامه 100، والعدد العشري طريقة أخرى لكتابة القيمة نفسها.'
         }
     },
@@ -149,10 +160,11 @@ export const labTools: LabToolInfo[] = [
         id: 'bars',
         stage: 'proportionality',
         lessonTopic: 'fraction-of',
-        title: { eu: 'Problemak barrekin', es: 'Problemas con barras', ar: 'مسائل بالأشرطة' },
+        title: { eu: 'Problemak barrekin', es: 'Problemas con barras', en: 'Problems with bars', ar: 'مسائل بالأشرطة' },
         observe: {
             eu: 'Marraztu problema: barra osoa da, eta zatiak, enuntziatuak esaten dituenak. Kontuz: «geratzen denaren» zatia ez da osoaren zatia; geratzen dena berriro banatzen da. Datuak zati batzuen balioa ematen du: banatu eta zati batek zenbat balio duen jakingo duzu, eta horrekin, barra osoarena.',
             es: 'Dibuja el problema: la barra es el total y las partes son las que dice el enunciado. Cuidado: una parte «de lo que queda» no es una parte del total; lo que queda se vuelve a partir. El dato da el valor de unos trozos: repártelo y sabrás cuánto vale un trozo, y con él, toda la barra.',
+            en: 'Draw the problem: the bar is the whole and the parts are the ones the problem describes. Careful: a part ‘of what is left’ is not a part of the whole; what is left gets split again. The data gives the value of some pieces: share it out and you will know how much one piece is worth, and with that, the whole bar.',
             ar: 'ارسم المسألة: الشريط هو الكل والأجزاء هي ما يذكره النص. انتبه: جزء «من الباقي» ليس جزءًا من الكل؛ فالباقي يُقسَّم من جديد. يعطي المعطى قيمة بعض القطع: وزّعه فتعرف قيمة القطعة الواحدة، ومنها قيمة الشريط كله.'
         }
     },
@@ -160,10 +172,11 @@ export const labTools: LabToolInfo[] = [
         id: 'decimals',
         stage: 'proportionality',
         lessonTopic: 'percentages',
-        title: { eu: 'Zatikitik hamartarrera', es: 'De fracción a decimal', ar: 'من الكسر إلى العدد العشري' },
+        title: { eu: 'Zatikitik hamartarrera', es: 'De fracción a decimal', en: 'From fraction to decimal', ar: 'من الكسر إلى العدد العشري' },
         observe: {
             eu: 'Zenbakitzailea izendatzaileaz zatitzean, zifrak banan-banan ateratzen dira: hondar bakoitzari 0 bat gehitu eta berriro zatitzen da. Hondarra 0 bada, hamartar zehatza da. 7 zatitzean 7 hondar posible baino ez daude (0, 1… 6); beraz, hondarra inoiz 0 ez bada, hondarren bat errepikatu egiten da, eta handik aurrera zifrak ere bai: periodikoa da. Itzultzen den hondarra lehenengoa bada, periodoa komaren ondoren hasten da (periodiko hutsa); bestela, lehenik zifra solte batzuk ateratzen dira, aurreperiodoa (periodiko mistoa). Zatitu gabe ere jakin daiteke: sinplifikatu eta begiratu izendatzailearen lehen faktoreei. 2 eta 5 bakarrik: zehatza; ez 2 ez 5: hutsa; 2 edo 5 eta beste faktore bat: mistoa.',
             es: 'Al dividir el numerador entre el denominador, las cifras salen una a una: a cada resto se le añade un 0 y se vuelve a dividir. Si el resto llega a 0, el decimal es exacto. Al dividir entre 7 solo hay 7 restos posibles (0, 1… 6), así que, si no llega a 0, algún resto se repite, y desde ahí las cifras también: es periódico. Si el resto que vuelve es el primero, el periodo empieza justo después de la coma (periódico puro); si no, antes salen unas cifras sueltas, el anteperiodo (periódico mixto). También se sabe sin dividir: simplifica y mira los factores primos del denominador. Solo 2 y 5: exacto; ni 2 ni 5: puro; 2 o 5 y otro factor: mixto.',
+            en: 'When you divide the numerator by the denominator, the digits come out one by one: a 0 is added to each remainder and you divide again. If the remainder reaches 0, the decimal is exact. When dividing by 7 there are only 7 possible remainders (0, 1… 6), so if it never reaches 0, a remainder repeats and the digits repeat from then on: it is recurring. If the remainder that comes back is the first one, the repeating block starts right after the decimal point (pure recurring decimal); if not, some digits that don’t repeat come out first, the non-repeating part (mixed recurring decimal). It can also be known without dividing: simplify and look at the prime factors of the denominator. Only 2s and 5s: exact; neither 2 nor 5: pure; 2 or 5 and another factor: mixed.',
             ar: 'عند قسمة البسط على المقام تظهر الأرقام واحدًا بعد آخر: نضيف 0 إلى كل باقٍ ونقسم من جديد. إذا وصل الباقي إلى 0 فالعدد العشري منتهٍ. وعند القسمة على 7 لا توجد إلا سبعة بواقٍ ممكنة (0، 1… 6)؛ لذلك إن لم يصل الباقي إلى 0 فلا بد أن يتكرر أحد البواقي، ومن هناك تتكرر الأرقام أيضًا: العدد دوري. إذا كان الباقي العائد هو الأول بدأ الدور بعد الفاصلة مباشرة (دوري بحت)؛ وإلا ظهرت قبله بعض الأرقام، وهي ما قبل الدور (دوري مختلط). ويمكن معرفة ذلك من دون قسمة: اختزل الكسر وانظر إلى العوامل الأولية للمقام. 2 و5 فقط: منتهٍ؛ لا 2 ولا 5: دوري بحت؛ 2 أو 5 مع عامل آخر: دوري مختلط.'
         }
     }
@@ -249,26 +262,26 @@ const partsCount = (state: PartsState, denominator: number, count: number) =>
 export const partsChallenges: LabChallenge<PartsState>[] = [
     {
         id: 701,
-        prompt: { eu: 'Koloreztatu barra baten 3/4.', es: 'Colorea 3/4 de una barra.', ar: 'لوّن 3/4 من شريط.' },
-        hint: { eu: 'Aukeratu barra, zatitu 4 zati berdinetan eta koloreztatu 3.', es: 'Elige la barra, divídela en 4 partes iguales y colorea 3.', ar: 'اختر الشريط وقسّمه إلى 4 أجزاء متساوية ولوّن 3 منها.' },
+        prompt: { eu: 'Koloreztatu barra baten 3/4.', es: 'Colorea 3/4 de una barra.', en: 'Colour 3/4 of a bar.', ar: 'لوّن 3/4 من شريط.' },
+        hint: { eu: 'Aukeratu barra, zatitu 4 zati berdinetan eta koloreztatu 3.', es: 'Elige la barra, divídela en 4 partes iguales y colorea 3.', en: 'Choose the bar, divide it into 4 equal parts and colour 3.', ar: 'اختر الشريط وقسّمه إلى 4 أجزاء متساوية ولوّن 3 منها.' },
         isSolved: (state) => state.shape === 'bar' && partsCount(state, 4, 3)
     },
     {
         id: 702,
-        prompt: { eu: 'Irudikatu 5/6 zirkulu batekin.', es: 'Representa 5/6 con un círculo.', ar: 'مثّل 5/6 بدائرة.' },
-        hint: { eu: 'Aukeratu zirkulua, zatitu seirenetan eta koloreztatu 5.', es: 'Elige el círculo, divídelo en sextos y colorea 5.', ar: 'اختر الدائرة وقسّمها إلى أسداس ولوّن 5 منها.' },
+        prompt: { eu: 'Irudikatu 5/6 zirkulu batekin.', es: 'Representa 5/6 con un círculo.', en: 'Represent 5/6 with a circle.', ar: 'مثّل 5/6 بدائرة.' },
+        hint: { eu: 'Aukeratu zirkulua, zatitu seirenetan eta koloreztatu 5.', es: 'Elige el círculo, divídelo en sextos y colorea 5.', en: 'Choose the circle, divide it into sixths and colour 5.', ar: 'اختر الدائرة وقسّمها إلى أسداس ولوّن 5 منها.' },
         isSolved: (state) => state.shape === 'circle' && partsCount(state, 6, 5)
     },
     {
         id: 703,
-        prompt: { eu: 'Irudikatu 7/3. Zenbat unitate behar dituzu?', es: 'Representa 7/3. ¿Cuántas unidades necesitas?', ar: 'مثّل 7/3. كم وحدة تحتاج؟' },
-        hint: { eu: 'Unitate bakoitzak 3 heren ditu: 2 unitaterekin 6/3ra baino ez zara iristen.', es: 'Cada unidad tiene 3 tercios: con 2 unidades solo llegas a 6/3.', ar: 'كل وحدة فيها 3 أثلاث: بوحدتين تصل فقط إلى 6/3.' },
+        prompt: { eu: 'Irudikatu 7/3. Zenbat unitate behar dituzu?', es: 'Representa 7/3. ¿Cuántas unidades necesitas?', en: 'Represent 7/3. How many units do you need?', ar: 'مثّل 7/3. كم وحدة تحتاج؟' },
+        hint: { eu: 'Unitate bakoitzak 3 heren ditu: 2 unitaterekin 6/3ra baino ez zara iristen.', es: 'Cada unidad tiene 3 tercios: con 2 unidades solo llegas a 6/3.', en: 'Each unit has 3 thirds: with 2 units you only get to 6/3.', ar: 'كل وحدة فيها 3 أثلاث: بوحدتين تصل فقط إلى 6/3.' },
         isSolved: (state) => partsCount(state, 3, 7)
     },
     {
         id: 704,
-        prompt: { eu: 'Koloreztatu unitate baten erdia zortzirenak erabiliz.', es: 'Colorea la mitad de una unidad usando octavos.', ar: 'لوّن نصف وحدة باستعمال الأثمان.' },
-        hint: { eu: 'Zatitu 8 zatitan. Zenbat dira erdia?', es: 'Divide en 8 partes. ¿Cuántas son la mitad?', ar: 'قسّم إلى 8 أجزاء. كم جزءًا يمثّل النصف؟' },
+        prompt: { eu: 'Koloreztatu unitate baten erdia zortzirenak erabiliz.', es: 'Colorea la mitad de una unidad usando octavos.', en: 'Colour half of a unit using eighths.', ar: 'لوّن نصف وحدة باستعمال الأثمان.' },
+        hint: { eu: 'Zatitu 8 zatitan. Zenbat dira erdia?', es: 'Divide en 8 partes. ¿Cuántas son la mitad?', en: 'Divide it into 8 parts. How many make half?', ar: 'قسّم إلى 8 أجزاء. كم جزءًا يمثّل النصف؟' },
         isSolved: (state) => partsCount(state, 8, 4)
     }
 ]
@@ -322,26 +335,26 @@ const lineValue = (state: NumberLineState): FractionValue => ({ numerator: state
 export const numberLineChallenges: LabChallenge<NumberLineState>[] = [
     {
         id: 801,
-        prompt: { eu: 'Kokatu 3/4 zuzenean.', es: 'Coloca 3/4 en la recta.', ar: 'ضع 3/4 على خط الأعداد.' },
-        hint: { eu: 'Zatitu unitate bakoitza 4 jauzitan eta egin 3.', es: 'Divide cada unidad en 4 saltos y da 3.', ar: 'قسّم كل وحدة إلى 4 قفزات واقفز 3.' },
+        prompt: { eu: 'Kokatu 3/4 zuzenean.', es: 'Coloca 3/4 en la recta.', en: 'Place 3/4 on the number line.', ar: 'ضع 3/4 على خط الأعداد.' },
+        hint: { eu: 'Zatitu unitate bakoitza 4 jauzitan eta egin 3.', es: 'Divide cada unidad en 4 saltos y da 3.', en: 'Divide each unit into 4 jumps and take 3.', ar: 'قسّم كل وحدة إلى 4 قفزات واقفز 3.' },
         isSolved: (state) => equals(lineValue(state), fraction(3, 4))
     },
     {
         id: 802,
-        prompt: { eu: 'Kokatu 7/3. Zein bi zenbaki osoren artean geratzen da?', es: 'Coloca 7/3. ¿Entre qué dos enteros queda?', ar: 'ضع 7/3. بين أي عددين صحيحين يقع؟' },
-        hint: { eu: 'Gutxienez 3raino iristen den tarte bat behar duzu, heren bateko jauziekin.', es: 'Necesitas un tramo que llegue al menos hasta 3, con saltos de un tercio.', ar: 'تحتاج إلى مجال يصل إلى 3 على الأقل بقفزات من ثلث.' },
+        prompt: { eu: 'Kokatu 7/3. Zein bi zenbaki osoren artean geratzen da?', es: 'Coloca 7/3. ¿Entre qué dos enteros queda?', en: 'Place 7/3. Between which two integers does it fall?', ar: 'ضع 7/3. بين أي عددين صحيحين يقع؟' },
+        hint: { eu: 'Gutxienez 3raino iristen den tarte bat behar duzu, heren bateko jauziekin.', es: 'Necesitas un tramo que llegue al menos hasta 3, con saltos de un tercio.', en: 'You need a stretch that reaches at least 3, with jumps of a third.', ar: 'تحتاج إلى مجال يصل إلى 3 على الأقل بقفزات من ثلث.' },
         isSolved: (state) => equals(lineValue(state), fraction(7, 3))
     },
     {
         id: 803,
-        prompt: { eu: 'Kokatu −1/2.', es: 'Coloca −1/2.', ar: 'ضع −1/2.' },
-        hint: { eu: 'Aukeratu −2tik 2rako tartea: negatiboak 0ren ezkerrean daude.', es: 'Elige el tramo de −2 a 2: los negativos quedan a la izquierda del 0.', ar: 'اختر المجال من −2 إلى 2: الأعداد السالبة تقع يسار 0.' },
+        prompt: { eu: 'Kokatu −1/2.', es: 'Coloca −1/2.', en: 'Place −1/2.', ar: 'ضع −1/2.' },
+        hint: { eu: 'Aukeratu −2tik 2rako tartea: negatiboak 0ren ezkerrean daude.', es: 'Elige el tramo de −2 a 2: los negativos quedan a la izquierda del 0.', en: 'Choose the stretch from −2 to 2: the negatives are to the left of 0.', ar: 'اختر المجال من −2 إلى 2: الأعداد السالبة تقع يسار 0.' },
         isSolved: (state) => equals(lineValue(state), fraction(-1, 2))
     },
     {
         id: 804,
-        prompt: { eu: 'Kokatu 1/3 eta 1/2 artean dagoen zatiki bat.', es: 'Coloca una fracción que esté entre 1/3 y 1/2.', ar: 'ضع كسرًا يقع بين 1/3 و1/2.' },
-        hint: { eu: 'Herenekin edo erdiekin ez da bat ere sartzen: probatu jauzi txikiagoak, hamabirenak adibidez.', es: 'Con tercios o medios no cabe ninguna: prueba saltos más pequeños, como doceavos.', ar: 'لا يتسع أي كسر بالأثلاث أو الأنصاف: جرّب قفزات أصغر مثل أجزاء من اثني عشر.' },
+        prompt: { eu: 'Kokatu 1/3 eta 1/2 artean dagoen zatiki bat.', es: 'Coloca una fracción que esté entre 1/3 y 1/2.', en: 'Place a fraction that is between 1/3 and 1/2.', ar: 'ضع كسرًا يقع بين 1/3 و1/2.' },
+        hint: { eu: 'Herenekin edo erdiekin ez da bat ere sartzen: probatu jauzi txikiagoak, hamabirenak adibidez.', es: 'Con tercios o medios no cabe ninguna: prueba saltos más pequeños, como doceavos.', en: 'With thirds or halves none fits: try smaller jumps, like twelfths.', ar: 'لا يتسع أي كسر بالأثلاث أو الأنصاف: جرّب قفزات أصغر مثل أجزاء من اثني عشر.' },
         isSolved: (state) => compare(lineValue(state), fraction(1, 3)) > 0 && compare(lineValue(state), fraction(1, 2)) < 0
     }
 ]
@@ -388,26 +401,26 @@ const isPiece = (piece: WallPiece | null, numerator: number, denominator: number
 export const wallChallenges: LabChallenge<WallState>[] = [
     {
         id: 901,
-        prompt: { eu: 'Hautatu 2/3ren baliokidea den zatiki bat, 3 baino izendatzaile handiagoarekin.', es: 'Selecciona una fracción equivalente a 2/3 con un denominador mayor que 3.', ar: 'اختر كسرًا مكافئًا لـ 2/3 مقامه أكبر من 3.' },
-        hint: { eu: 'Bilatu pieza bat 2/3ren lerro berean amaitzen den errenkadak.', es: 'Busca las filas donde una pieza termina justo en la misma línea que 2/3.', ar: 'ابحث عن الصفوف التي تنتهي فيها قطعة عند خط 2/3 نفسه تمامًا.' },
+        prompt: { eu: 'Hautatu 2/3ren baliokidea den zatiki bat, 3 baino izendatzaile handiagoarekin.', es: 'Selecciona una fracción equivalente a 2/3 con un denominador mayor que 3.', en: 'Choose a fraction equivalent to 2/3 with a denominator greater than 3.', ar: 'اختر كسرًا مكافئًا لـ 2/3 مقامه أكبر من 3.' },
+        hint: { eu: 'Bilatu pieza bat 2/3ren lerro berean amaitzen den errenkadak.', es: 'Busca las filas donde una pieza termina justo en la misma línea que 2/3.', en: 'Find the rows where a piece ends exactly on the same line as 2/3.', ar: 'ابحث عن الصفوف التي تنتهي فيها قطعة عند خط 2/3 نفسه تمامًا.' },
         isSolved: (state) => state.mode === 'equivalent' && state.first !== null && state.first.denominator > 3 && equals(state.first, fraction(2, 3))
     },
     {
         id: 902,
-        prompt: { eu: 'Zein da handiagoa, 3/5 ala 5/8? Hautatu handiena.', es: '¿Qué es mayor, 3/5 o 5/8? Selecciona la mayor.', ar: 'أيهما أكبر، 3/5 أم 5/8؟ اختر الأكبر.' },
-        hint: { eu: 'Hautatu bata eta gero bestea: urrunen iristen dena da handiena.', es: 'Selecciona primero una y después la otra: la que llegue más lejos es la mayor.', ar: 'اختر أحدهما ثم الآخر: الذي يصل أبعد هو الأكبر.' },
+        prompt: { eu: 'Zein da handiagoa, 3/5 ala 5/8? Hautatu handiena.', es: '¿Qué es mayor, 3/5 o 5/8? Selecciona la mayor.', en: 'Which is greater, 3/5 or 5/8? Choose the greater one.', ar: 'أيهما أكبر، 3/5 أم 5/8؟ اختر الأكبر.' },
+        hint: { eu: 'Hautatu bata eta gero bestea: urrunen iristen dena da handiena.', es: 'Selecciona primero una y después la otra: la que llegue más lejos es la mayor.', en: 'Choose one first and then the other: the one that reaches further is the greater one.', ar: 'اختر أحدهما ثم الآخر: الذي يصل أبعد هو الأكبر.' },
         isSolved: (state) => state.mode === 'equivalent' && isPiece(state.first, 5, 8)
     },
     {
         id: 903,
-        prompt: { eu: 'Hautatu 1/8 baino handiagoa den unitate-zatiki txikiena.', es: 'Selecciona la fracción unitaria más pequeña que sea mayor que 1/8.', ar: 'اختر أصغر كسر وحدي أكبر من 1/8.' },
-        hint: { eu: 'Unitate-zatikiek 1 dute zenbakitzaile. Zenbat eta zati gehiago, orduan eta txikiagoa da bakoitza.', es: 'Las fracciones unitarias tienen numerador 1. Cuantas más partes, más pequeña es cada una.', ar: 'الكسور الوحدية بسطها 1. كلما زاد عدد الأجزاء صغر كل جزء.' },
+        prompt: { eu: 'Hautatu 1/8 baino handiagoa den unitate-zatiki txikiena.', es: 'Selecciona la fracción unitaria más pequeña que sea mayor que 1/8.', en: 'Choose the smallest unit fraction that is greater than 1/8.', ar: 'اختر أصغر كسر وحدي أكبر من 1/8.' },
+        hint: { eu: 'Unitate-zatikiek 1 dute zenbakitzaile. Zenbat eta zati gehiago, orduan eta txikiagoa da bakoitza.', es: 'Las fracciones unitarias tienen numerador 1. Cuantas más partes, más pequeña es cada una.', en: 'Unit fractions have a numerator of 1. The more parts, the smaller each one is.', ar: 'الكسور الوحدية بسطها 1. كلما زاد عدد الأجزاء صغر كل جزء.' },
         isSolved: (state) => state.mode === 'equivalent' && isPiece(state.first, 1, 7)
     },
     {
         id: 904,
-        prompt: { eu: 'Konparatzeko moduan, markatu 2/3 eta 3/4.', es: 'En modo comparar, marca 2/3 y 3/4.', ar: 'في وضع المقارنة، حدّد 2/3 و3/4.' },
-        hint: { eu: 'Aukeratu «Konparatu» eta sakatu herenen bigarren pieza eta laurdenen hirugarrena.', es: 'Elige «Comparar» y pulsa la segunda pieza de los tercios y la tercera de los cuartos.', ar: 'اختر «مقارنة» واضغط القطعة الثانية من الأثلاث والقطعة الثالثة من الأرباع.' },
+        prompt: { eu: 'Konparatzeko moduan, markatu 2/3 eta 3/4.', es: 'En modo comparar, marca 2/3 y 3/4.', en: 'In compare mode, mark 2/3 and 3/4.', ar: 'في وضع المقارنة، حدّد 2/3 و3/4.' },
+        hint: { eu: 'Aukeratu «Konparatu» eta sakatu herenen bigarren pieza eta laurdenen hirugarrena.', es: 'Elige «Comparar» y pulsa la segunda pieza de los tercios y la tercera de los cuartos.', en: 'Choose ‘Compare’ and press the second piece of the thirds and the third piece of the quarters.', ar: 'اختر «مقارنة» واضغط القطعة الثانية من الأثلاث والقطعة الثالثة من الأرباع.' },
         isSolved: (state) => state.mode === 'compare'
             && ((isPiece(state.first, 2, 3) && isPiece(state.second, 3, 4)) || (isPiece(state.first, 3, 4) && isPiece(state.second, 2, 3)))
     }
@@ -458,26 +471,26 @@ const sameTerms = (value: FractionValue, numerator: number, denominator: number)
 export const equivalenceChallenges: LabChallenge<EquivalenceState>[] = [
     {
         id: 1001,
-        prompt: { eu: 'Lortu 3/4ren zatiki baliokide bat, 12 izendatzailearekin.', es: 'Consigue una fracción equivalente a 3/4 con denominador 12.', ar: 'كوّن كسرًا مكافئًا لـ 3/4 مقامه 12.' },
-        hint: { eu: 'Zein zenbakiz biderkatu behar da 4, 12ra iristeko?', es: '¿Por qué número hay que multiplicar 4 para llegar a 12?', ar: 'في أي عدد نضرب 4 لنصل إلى 12؟' },
+        prompt: { eu: 'Lortu 3/4ren zatiki baliokide bat, 12 izendatzailearekin.', es: 'Consigue una fracción equivalente a 3/4 con denominador 12.', en: 'Get a fraction equivalent to 3/4 with denominator 12.', ar: 'كوّن كسرًا مكافئًا لـ 3/4 مقامه 12.' },
+        hint: { eu: 'Zein zenbakiz biderkatu behar da 4, 12ra iristeko?', es: '¿Por qué número hay que multiplicar 4 para llegar a 12?', en: 'What number do you need to multiply 4 by to get 12?', ar: 'في أي عدد نضرب 4 لنصل إلى 12؟' },
         isSolved: (state) => sameTerms(equivalenceResult(state), 9, 12)
     },
     {
         id: 1002,
-        prompt: { eu: 'Sinplifikatu 8/12 zatiki laburtezinera arte.', es: 'Simplifica 8/12 hasta la fracción irreducible.', ar: 'بسّط 8/12 إلى أبسط صورة.' },
-        hint: { eu: '8ren eta 12ren zatitzaile komun handiena 4 da.', es: 'El mayor divisor común de 8 y 12 es 4.', ar: 'القاسم المشترك الأكبر لـ 8 و12 هو 4.' },
+        prompt: { eu: 'Sinplifikatu 8/12 zatiki laburtezinera arte.', es: 'Simplifica 8/12 hasta la fracción irreducible.', en: 'Simplify 8/12 until it is in its simplest form.', ar: 'بسّط 8/12 إلى أبسط صورة.' },
+        hint: { eu: '8ren eta 12ren zatitzaile komun handiena 4 da.', es: 'El mayor divisor común de 8 y 12 es 4.', en: 'The greatest common divisor of 8 and 12 is 4.', ar: 'القاسم المشترك الأكبر لـ 8 و12 هو 4.' },
         isSolved: (state) => state.mode === 'simplify' && sameTerms(state, 8, 12) && sameTerms(equivalenceResult(state), 2, 3)
     },
     {
         id: 1003,
-        prompt: { eu: 'Aurkitu 6 zenbakitzailea duen 2/5ren zatiki baliokidea.', es: 'Encuentra la fracción equivalente a 2/5 que tiene numerador 6.', ar: 'جد الكسر المكافئ لـ 2/5 الذي بسطه 6.' },
-        hint: { eu: '2 × 3 = 6: biderkatu izendatzailea ere 3z.', es: '2 × 3 = 6: multiplica también el denominador por 3.', ar: '2 × 3 = 6: اضرب المقام أيضًا في 3.' },
+        prompt: { eu: 'Aurkitu 6 zenbakitzailea duen 2/5ren zatiki baliokidea.', es: 'Encuentra la fracción equivalente a 2/5 que tiene numerador 6.', en: 'Find the fraction equivalent to 2/5 that has a numerator of 6.', ar: 'جد الكسر المكافئ لـ 2/5 الذي بسطه 6.' },
+        hint: { eu: '2 × 3 = 6: biderkatu izendatzailea ere 3z.', es: '2 × 3 = 6: multiplica también el denominador por 3.', en: '2 × 3 = 6: also multiply the denominator by 3.', ar: '2 × 3 = 6: اضرب المقام أيضًا في 3.' },
         isSolved: (state) => sameTerms(equivalenceResult(state), 6, 15)
     },
     {
         id: 1004,
-        prompt: { eu: 'Egiaztatu 5/7 sinplifika daitekeen.', es: 'Comprueba si 5/7 se puede simplificar.', ar: 'تحقّق مما إذا كان يمكن تبسيط 5/7.' },
-        hint: { eu: 'Bilatu 5 eta 7 aldi berean zatitzen dituen zenbaki bat.', es: 'Busca un número que divida a la vez a 5 y a 7.', ar: 'ابحث عن عدد يقسم 5 و7 معًا.' },
+        prompt: { eu: 'Egiaztatu 5/7 sinplifika daitekeen.', es: 'Comprueba si 5/7 se puede simplificar.', en: 'Check whether 5/7 can be simplified.', ar: 'تحقّق مما إذا كان يمكن تبسيط 5/7.' },
+        hint: { eu: 'Bilatu 5 eta 7 aldi berean zatitzen dituen zenbaki bat.', es: 'Busca un número que divida a la vez a 5 y a 7.', en: 'Find a number that divides both 5 and 7 at once.', ar: 'ابحث عن عدد يقسم 5 و7 معًا.' },
         isSolved: (state) => state.mode === 'simplify' && sameTerms(state, 5, 7)
     }
 ]
@@ -528,27 +541,27 @@ const predictedRight = (state: CompareState) => state.guess !== null && state.gu
 export const compareChallenges: LabChallenge<CompareState>[] = [
     {
         id: 1101,
-        prompt: { eu: 'Alderatu 3/8 eta 1/2 eta aukeratu zeinu zuzena.', es: 'Compara 3/8 y 1/2 y elige el signo correcto.', ar: 'قارن بين 3/8 و1/2 واختر الإشارة الصحيحة.' },
-        hint: { eu: 'Izendatzaile komunarekin: 1/2 = 4/8.', es: 'Con denominador común: 1/2 = 4/8.', ar: 'بمقام مشترك: 1/2 = 4/8.' },
+        prompt: { eu: 'Alderatu 3/8 eta 1/2 eta aukeratu zeinu zuzena.', es: 'Compara 3/8 y 1/2 y elige el signo correcto.', en: 'Compare 3/8 and 1/2 and choose the correct sign.', ar: 'قارن بين 3/8 و1/2 واختر الإشارة الصحيحة.' },
+        hint: { eu: 'Izendatzaile komunarekin: 1/2 = 4/8.', es: 'Con denominador común: 1/2 = 4/8.', en: 'With a common denominator: 1/2 = 4/8.', ar: 'بمقام مشترك: 1/2 = 4/8.' },
         isSolved: (state) => comparesPair(state, [3, 8], [1, 2]) && predictedRight(state)
     },
     {
         id: 1102,
-        prompt: { eu: 'Alderatu 5/6 eta 7/9 izendatzaile komuna erabiliz.', es: 'Compara 5/6 y 7/9 usando el denominador común.', ar: 'قارن بين 5/6 و7/9 باستعمال مقام مشترك.' },
-        hint: { eu: '6ren eta 9ren multiplo komunetako txikiena 18 da.', es: 'El mínimo común múltiplo de 6 y 9 es 18.', ar: 'المضاعف المشترك الأصغر لـ 6 و9 هو 18.' },
+        prompt: { eu: 'Alderatu 5/6 eta 7/9 izendatzaile komuna erabiliz.', es: 'Compara 5/6 y 7/9 usando el denominador común.', en: 'Compare 5/6 and 7/9 using the common denominator.', ar: 'قارن بين 5/6 و7/9 باستعمال مقام مشترك.' },
+        hint: { eu: '6ren eta 9ren multiplo komunetako txikiena 18 da.', es: 'El mínimo común múltiplo de 6 y 9 es 18.', en: 'The least common multiple of 6 and 9 is 18.', ar: 'المضاعف المشترك الأصغر لـ 6 و9 هو 18.' },
         isSolved: (state) => state.strategy === 'common' && comparesPair(state, [5, 6], [7, 9]) && predictedRight(state)
     },
     {
         id: 1103,
-        prompt: { eu: 'Aukeratu balio bera duten bi zatiki desberdin eta markatu =.', es: 'Elige dos fracciones distintas que valgan lo mismo y marca =.', ar: 'اختر كسرين مختلفين لهما القيمة نفسها وحدّد =.' },
-        hint: { eu: 'Biderkatu baten zenbakitzailea eta izendatzailea zenbaki berarekin.', es: 'Multiplica numerador y denominador de una por el mismo número.', ar: 'اضرب بسط أحدهما ومقامه في العدد نفسه.' },
+        prompt: { eu: 'Aukeratu balio bera duten bi zatiki desberdin eta markatu =.', es: 'Elige dos fracciones distintas que valgan lo mismo y marca =.', en: 'Choose two different fractions with the same value and mark =.', ar: 'اختر كسرين مختلفين لهما القيمة نفسها وحدّد =.' },
+        hint: { eu: 'Biderkatu baten zenbakitzailea eta izendatzailea zenbaki berarekin.', es: 'Multiplica numerador y denominador de una por el mismo número.', en: 'Multiply the numerator and denominator of one by the same number.', ar: 'اضرب بسط أحدهما ومقامه في العدد نفسه.' },
         isSolved: (state) => state.guess === '=' && equals(state.first, state.second)
             && !sameTerms(state.first, state.second.numerator, state.second.denominator)
     },
     {
         id: 1104,
-        prompt: { eu: 'Alderatu 7/12 eta 3/5 biderketa gurutzatuarekin.', es: 'Compara 7/12 y 3/5 con productos cruzados.', ar: 'قارن بين 7/12 و3/5 بالضرب التبادلي.' },
-        hint: { eu: 'Kalkulatu 7 × 5 eta 3 × 12.', es: 'Calcula 7 × 5 y 3 × 12.', ar: 'احسب 7 × 5 و3 × 12.' },
+        prompt: { eu: 'Alderatu 7/12 eta 3/5 biderketa gurutzatuarekin.', es: 'Compara 7/12 y 3/5 con productos cruzados.', en: 'Compare 7/12 and 3/5 using cross-multiplication.', ar: 'قارن بين 7/12 و3/5 بالضرب التبادلي.' },
+        hint: { eu: 'Kalkulatu 7 × 5 eta 3 × 12.', es: 'Calcula 7 × 5 y 3 × 12.', en: 'Calculate 7 × 5 and 3 × 12.', ar: 'احسب 7 × 5 و3 × 12.' },
         isSolved: (state) => state.strategy === 'cross' && comparesPair(state, [7, 12], [3, 5]) && predictedRight(state)
     }
 ]
@@ -721,26 +734,26 @@ export function sumPrediction(state: SumState): Prediction {
 export const sumChallenges: LabChallenge<SumState>[] = [
     {
         id: 1201,
-        prompt: { eu: 'Kalkulatu 1/2 + 1/3 eta idatzi emaitza.', es: 'Calcula 1/2 + 1/3 y escribe el resultado.', ar: 'احسب 1/2 + 1/3 واكتب النتيجة.' },
-        hint: { eu: 'Banatu bi barrak seirenetan: 1/2 = 3/6 eta 1/3 = 2/6.', es: 'Parte las dos barras en sextos: 1/2 = 3/6 y 1/3 = 2/6.', ar: 'قسّم الشريطين إلى أسداس: 1/2 = 3/6 و1/3 = 2/6.' },
+        prompt: { eu: 'Kalkulatu 1/2 + 1/3 eta idatzi emaitza.', es: 'Calcula 1/2 + 1/3 y escribe el resultado.', en: 'Calculate 1/2 + 1/3 and write the result.', ar: 'احسب 1/2 + 1/3 واكتب النتيجة.' },
+        hint: { eu: 'Banatu bi barrak seirenetan: 1/2 = 3/6 eta 1/3 = 2/6.', es: 'Parte las dos barras en sextos: 1/2 = 3/6 y 1/3 = 2/6.', en: 'Split both bars into sixths: 1/2 = 3/6 and 1/3 = 2/6.', ar: 'قسّم الشريطين إلى أسداس: 1/2 = 3/6 و1/3 = 2/6.' },
         isSolved: (state) => state.op === 'add' && operands(state, [1, 2], [1, 3], false) && answered(state, fraction(5, 6))
     },
     {
         id: 1202,
-        prompt: { eu: 'Kalkulatu 3/4 − 1/6 eta idatzi emaitza.', es: 'Calcula 3/4 − 1/6 y escribe el resultado.', ar: 'احسب 3/4 − 1/6 واكتب النتيجة.' },
-        hint: { eu: '4ren eta 6ren izendatzaile komuna 12 da.', es: 'El denominador común de 4 y 6 es 12.', ar: 'المقام المشترك لـ 4 و6 هو 12.' },
+        prompt: { eu: 'Kalkulatu 3/4 − 1/6 eta idatzi emaitza.', es: 'Calcula 3/4 − 1/6 y escribe el resultado.', en: 'Calculate 3/4 − 1/6 and write the result.', ar: 'احسب 3/4 − 1/6 واكتب النتيجة.' },
+        hint: { eu: '4ren eta 6ren izendatzaile komuna 12 da.', es: 'El denominador común de 4 y 6 es 12.', en: 'The common denominator of 4 and 6 is 12.', ar: 'المقام المشترك لـ 4 و6 هو 12.' },
         isSolved: (state) => state.op === 'subtract' && operands(state, [3, 4], [1, 6], true) && answered(state, fraction(7, 12))
     },
     {
         id: 1203,
-        prompt: { eu: 'Batu izendatzaile desberdineko bi zatiki, emaitza zehazki 1 izan dadin.', es: 'Suma dos fracciones con distinto denominador que den exactamente 1.', ar: 'اجمع كسرين مختلفي المقام يكون ناتجهما 1 تمامًا.' },
-        hint: { eu: 'Probatu 1/2rekin eta 1/2ren balio bera duen beste zatiki batekin.', es: 'Prueba con 1/2 y otra fracción que valga lo mismo que 1/2.', ar: 'جرّب 1/2 وكسرًا آخر يساوي 1/2.' },
+        prompt: { eu: 'Batu izendatzaile desberdineko bi zatiki, emaitza zehazki 1 izan dadin.', es: 'Suma dos fracciones con distinto denominador que den exactamente 1.', en: 'Add two fractions with different denominators that add up to exactly 1.', ar: 'اجمع كسرين مختلفي المقام يكون ناتجهما 1 تمامًا.' },
+        hint: { eu: 'Probatu 1/2rekin eta 1/2ren balio bera duen beste zatiki batekin.', es: 'Prueba con 1/2 y otra fracción que valga lo mismo que 1/2.', en: 'Try 1/2 and another fraction that equals 1/2.', ar: 'جرّب 1/2 وكسرًا آخر يساوي 1/2.' },
         isSolved: (state) => state.op === 'add' && state.first.denominator !== state.second.denominator && equals(sumParts(state).result, fraction(1))
     },
     {
         id: 1204,
-        prompt: { eu: 'Kalkulatu 5/6 + 3/4 eta idatzi emaitza zenbaki misto gisa.', es: 'Calcula 5/6 + 3/4 y escribe el resultado como número mixto.', ar: 'احسب 5/6 + 3/4 واكتب النتيجة عددًا كسريًا.' },
-        hint: { eu: 'Batura 19/12 da: zenbat unitate oso sartzen dira?', es: 'La suma es 19/12: ¿cuántas unidades completas caben?', ar: 'المجموع 19/12: كم وحدة كاملة فيه؟' },
+        prompt: { eu: 'Kalkulatu 5/6 + 3/4 eta idatzi emaitza zenbaki misto gisa.', es: 'Calcula 5/6 + 3/4 y escribe el resultado como número mixto.', en: 'Calculate 5/6 + 3/4 and write the result as a mixed number.', ar: 'احسب 5/6 + 3/4 واكتب النتيجة عددًا كسريًا.' },
+        hint: { eu: 'Batura 19/12 da: zenbat unitate oso sartzen dira?', es: 'La suma es 19/12: ¿cuántas unidades completas caben?', en: 'The sum is 19/12: how many whole units fit?', ar: 'المجموع 19/12: كم وحدة كاملة فيه؟' },
         isSolved: (state) => state.op === 'add' && operands(state, [5, 6], [3, 4], false) && answered(state, fraction(19, 12), 'mixed')
     }
 ]
@@ -782,26 +795,26 @@ export function productPrediction(state: ProductState): Prediction {
 export const productChallenges: LabChallenge<ProductState>[] = [
     {
         id: 1301,
-        prompt: { eu: 'Kalkulatu 2/3 × 3/4 eta idatzi emaitza.', es: 'Calcula 2/3 × 3/4 y escribe el resultado.', ar: 'احسب 2/3 × 3/4 واكتب النتيجة.' },
-        hint: { eu: 'Zenbatu gurutzeko laukiak eta lauki guztiak.', es: 'Cuenta las casillas del cruce y las casillas totales.', ar: 'عُدّ خانات التقاطع وجميع الخانات.' },
+        prompt: { eu: 'Kalkulatu 2/3 × 3/4 eta idatzi emaitza.', es: 'Calcula 2/3 × 3/4 y escribe el resultado.', en: 'Calculate 2/3 × 3/4 and write the result.', ar: 'احسب 2/3 × 3/4 واكتب النتيجة.' },
+        hint: { eu: 'Zenbatu gurutzeko laukiak eta lauki guztiak.', es: 'Cuenta las casillas del cruce y las casillas totales.', en: 'Count the squares in the overlap and the total squares.', ar: 'عُدّ خانات التقاطع وجميع الخانات.' },
         isSolved: (state) => state.op === 'multiply' && operands(state, [2, 3], [3, 4], false) && answered(state, fraction(1, 2))
     },
     {
         id: 1302,
-        prompt: { eu: 'Zenbat aldiz sartzen da 1/4 3/4an? Idatzi emaitza.', es: '¿Cuántas veces cabe 1/4 en 3/4? Escribe el resultado.', ar: 'كم مرة يتسع 3/4 لـ 1/4؟ اكتب النتيجة.' },
-        hint: { eu: 'Erabili zatiketa: lehen zatikia 3/4, bigarrena 1/4.', es: 'Usa la división: primera fracción 3/4, segunda 1/4.', ar: 'استعمل القسمة: الكسر الأول 3/4 والثاني 1/4.' },
+        prompt: { eu: 'Zenbat aldiz sartzen da 1/4 3/4an? Idatzi emaitza.', es: '¿Cuántas veces cabe 1/4 en 3/4? Escribe el resultado.', en: 'How many times does 1/4 fit into 3/4? Write the result.', ar: 'كم مرة يتسع 3/4 لـ 1/4؟ اكتب النتيجة.' },
+        hint: { eu: 'Erabili zatiketa: lehen zatikia 3/4, bigarrena 1/4.', es: 'Usa la división: primera fracción 3/4, segunda 1/4.', en: 'Use division: first fraction 3/4, second 1/4.', ar: 'استعمل القسمة: الكسر الأول 3/4 والثاني 1/4.' },
         isSolved: (state) => state.op === 'divide' && operands(state, [3, 4], [1, 4], true) && answered(state, fraction(3))
     },
     {
         id: 1303,
-        prompt: { eu: 'Kalkulatu 2/3 : 3/4. Behin osorik sartzen da?', es: 'Calcula 2/3 : 3/4. ¿Cabe una vez entera?', ar: 'احسب 2/3 ÷ 3/4. هل يتسع مرة كاملة؟' },
-        hint: { eu: 'Biderkatu 2/3 3/4ren alderantzizkoarekin, hau da, 4/3rekin.', es: 'Multiplica 2/3 por la inversa de 3/4, que es 4/3.', ar: 'اضرب 2/3 في مقلوب 3/4 أي 4/3.' },
+        prompt: { eu: 'Kalkulatu 2/3 : 3/4. Behin osorik sartzen da?', es: 'Calcula 2/3 : 3/4. ¿Cabe una vez entera?', en: 'Calculate 2/3 : 3/4. Does it fit in once, completely?', ar: 'احسب 2/3 ÷ 3/4. هل يتسع مرة كاملة؟' },
+        hint: { eu: 'Biderkatu 2/3 3/4ren alderantzizkoarekin, hau da, 4/3rekin.', es: 'Multiplica 2/3 por la inversa de 3/4, que es 4/3.', en: 'Multiply 2/3 by the reciprocal of 3/4, which is 4/3.', ar: 'اضرب 2/3 في مقلوب 3/4 أي 4/3.' },
         isSolved: (state) => state.op === 'divide' && operands(state, [2, 3], [3, 4], true) && answered(state, fraction(8, 9))
     },
     {
         id: 1304,
-        prompt: { eu: 'Aurkitu 1 baino txikiagoak diren bi zatiki, biderkadura 1/4 izan dezaten.', es: 'Encuentra dos fracciones menores que 1 cuyo producto sea 1/4.', ar: 'جد كسرين أصغر من 1 حاصل ضربهما 1/4.' },
-        hint: { eu: 'Adibidez, erdiaren erdia.', es: 'Por ejemplo, la mitad de la mitad.', ar: 'مثلًا، نصف النصف.' },
+        prompt: { eu: 'Aurkitu 1 baino txikiagoak diren bi zatiki, biderkadura 1/4 izan dezaten.', es: 'Encuentra dos fracciones menores que 1 cuyo producto sea 1/4.', en: 'Find two fractions less than 1 whose product is 1/4.', ar: 'جد كسرين أصغر من 1 حاصل ضربهما 1/4.' },
+        hint: { eu: 'Adibidez, erdiaren erdia.', es: 'Por ejemplo, la mitad de la mitad.', en: 'For example, half of a half.', ar: 'مثلًا، نصف النصف.' },
         isSolved: (state) => state.op === 'multiply'
             && state.first.numerator < state.first.denominator && state.second.numerator < state.second.denominator
             && equals(productResult(state), fraction(1, 4))
@@ -877,26 +890,26 @@ export function decimalExpansion(numerator: number, denominator: number): { inte
 export const proportionChallenges: LabChallenge<ProportionState>[] = [
     {
         id: 1401,
-        prompt: { eu: 'Kalkulatu 120ren 3/5 eta idatzi emaitza.', es: 'Calcula 3/5 de 120 y escribe el resultado.', ar: 'احسب 3/5 من 120 واكتب النتيجة.' },
-        hint: { eu: 'Banatu 120 5 talde berdinetan eta hartu 3.', es: 'Reparte 120 en 5 grupos iguales y toma 3.', ar: 'قسّم 120 إلى 5 مجموعات متساوية وخذ 3 منها.' },
+        prompt: { eu: 'Kalkulatu 120ren 3/5 eta idatzi emaitza.', es: 'Calcula 3/5 de 120 y escribe el resultado.', en: 'Calculate 3/5 of 120 and write the result.', ar: 'احسب 3/5 من 120 واكتب النتيجة.' },
+        hint: { eu: 'Banatu 120 5 talde berdinetan eta hartu 3.', es: 'Reparte 120 en 5 grupos iguales y toma 3.', en: 'Share 120 into 5 equal groups and take 3.', ar: 'قسّم 120 إلى 5 مجموعات متساوية وخذ 3 منها.' },
         isSolved: (state) => state.mode === 'of' && sameTerms(state, 3, 5) && state.quantity === 120 && answered(state, fraction(72))
     },
     {
         id: 1402,
-        prompt: { eu: 'Zenbat da 80ren % 25? Idatzi emaitza.', es: '¿Cuánto es el 25 % de 80? Escribe el resultado.', ar: 'كم يساوي 25٪ من 80؟ اكتب النتيجة.' },
-        hint: { eu: '% 25 laurdena da.', es: 'El 25 % es la cuarta parte.', ar: '25٪ هي الربع.' },
+        prompt: { eu: 'Zenbat da 80ren % 25? Idatzi emaitza.', es: '¿Cuánto es el 25 % de 80? Escribe el resultado.', en: 'How much is 25% of 80? Write the result.', ar: 'كم يساوي 25٪ من 80؟ اكتب النتيجة.' },
+        hint: { eu: '% 25 laurdena da.', es: 'El 25 % es la cuarta parte.', en: '25% is a quarter.', ar: '25٪ هي الربع.' },
         isSolved: (state) => state.mode === 'percent' && state.percent === 25 && state.quantity === 80 && answered(state, fraction(20))
     },
     {
         id: 1403,
-        prompt: { eu: 'Eraiki zehazki % 75 balio duen zatiki bat.', es: 'Construye una fracción que valga exactamente el 75 %.', ar: 'كوّن كسرًا يساوي 75٪ تمامًا.' },
-        hint: { eu: '100etik 75… zenbat 4tik?', es: '75 de cada 100… ¿cuántos de cada 4?', ar: '75 من كل 100... كم من كل 4؟' },
+        prompt: { eu: 'Eraiki zehazki % 75 balio duen zatiki bat.', es: 'Construye una fracción que valga exactamente el 75 %.', en: 'Build a fraction that is exactly 75%.', ar: 'كوّن كسرًا يساوي 75٪ تمامًا.' },
+        hint: { eu: '100etik 75… zenbat 4tik?', es: '75 de cada 100… ¿cuántos de cada 4?', en: '75 out of every 100… how many out of every 4?', ar: '75 من كل 100... كم من كل 4؟' },
         isSolved: (state) => state.mode === 'forms' && equals(state, fraction(3, 4))
     },
     {
         id: 1404,
-        prompt: { eu: 'Aurkitu hamartarra inoiz amaitzen ez den zatiki bat (periodikoa).', es: 'Encuentra una fracción cuyo decimal no se acabe nunca (periódico).', ar: 'جد كسرًا لا ينتهي عدده العشري أبدًا (دوري).' },
-        hint: { eu: 'Probatu herenekin edo zazpirenekin.', es: 'Prueba con tercios o séptimos.', ar: 'جرّب الأثلاث أو الأسباع.' },
+        prompt: { eu: 'Aurkitu hamartarra inoiz amaitzen ez den zatiki bat (periodikoa).', es: 'Encuentra una fracción cuyo decimal no se acabe nunca (periódico).', en: 'Find a fraction whose decimal never ends (recurring).', ar: 'جد كسرًا لا ينتهي عدده العشري أبدًا (دوري).' },
+        hint: { eu: 'Probatu herenekin edo zazpirenekin.', es: 'Prueba con tercios o séptimos.', en: 'Try thirds or sevenths.', ar: 'جرّب الأثلاث أو الأسباع.' },
         isSolved: (state) => state.mode === 'forms' && !hasTerminatingDecimal(state)
     }
 ]

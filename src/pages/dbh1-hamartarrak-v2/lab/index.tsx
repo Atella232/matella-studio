@@ -33,7 +33,7 @@ export function DecimalsLaboratory(props: {
             tools={decimalsLabTools}
             stages={decimalsStages}
             components={toolComponents}
-            title={{ eu: 'Ikusi non dagoen koma', es: 'Mira dónde está la coma', ar: 'انظر أين الفاصلة' }}
+            title={{ eu: 'Ikusi non dagoen koma', es: 'Mira dónde está la coma', en: 'Look at where the decimal point is', ar: 'انظر أين الفاصلة' }}
         />
     )
 }

@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
@@ -89,9 +90,9 @@ test('estatistika 4. DBH ap race: valid options and every answer recomputed', ()
                     // Probabilities stay between 0 and 1
                     if (circuit === 4) assert.ok(valueOf(option.latex) > 0 && valueOf(option.latex) <= 1, `${question.kind} ${option.latex}`)
                 }
-                for (const language of ['eu', 'es', 'ar'] as const) {
+                for (const language of ['eu', 'es', 'en', 'ar'] as const) {
                     for (const text of [question.prompt[language], question.solution[language]]) {
-                        for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formula, { throwOnError: true })
+                        for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formulaFor(language, formula), { throwOnError: true })
                     }
                 }
                 // No Basque suffix glued to a generated number

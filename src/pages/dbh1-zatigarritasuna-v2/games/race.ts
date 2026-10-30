@@ -17,7 +17,7 @@ export const INTRO_RACE_CIRCUITS = 5
 export type IntroDivisibilityRaceError = DivisibilityRaceError | 'quotient'
 export type IntroDivisibilityRaceQuestion = RaceQuestion<IntroDivisibilityRaceError>
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 
 interface Grouping {
     text: (total: number, size: number) => LocalizedText
@@ -25,10 +25,10 @@ interface Grouping {
 }
 
 const groupings: Grouping[] = [
-    { text: (total, size) => say(`${total} arkatz ${size}ko poltsetan gorde nahi ditugu.`, `Queremos guardar ${total} lápices en bolsas de ${size}.`, `نريد وضع ${total} قلمًا في أكياس من ${size}.`), question: say('Zenbat arkatz geratzen dira soberan?', '¿Cuántos lápices sobran?', 'كم قلمًا يبقى؟') },
-    { text: (total, size) => say(`${total} ikasle ${size}ko taldeetan jarri nahi ditugu.`, `Queremos poner a ${total} alumnos en grupos de ${size}.`, `نريد وضع ${total} تلميذًا في مجموعات من ${size}.`), question: say('Zenbat ikasle geratzen dira taldetik kanpo?', '¿Cuántos alumnos se quedan sin grupo?', 'كم تلميذًا يبقى بلا مجموعة؟') },
-    { text: (total, size) => say(`${total} pilota ${size}ko poteetan sartu nahi ditugu.`, `Queremos meter ${total} pelotas en botes de ${size}.`, `نريد وضع ${total} كرة في علب من ${size}.`), question: say('Zenbat pilota geratzen dira soberan?', '¿Cuántas pelotas sobran?', 'كم كرة تبقى؟') },
-    { text: (total, size) => say(`${total} lata ${size}ko kutxetan gorde nahi ditugu.`, `Queremos guardar ${total} latas en cajas de ${size}.`, `نريد وضع ${total} علبة في صناديق من ${size}.`), question: say('Zenbat lata geratzen dira soberan?', '¿Cuántas latas sobran?', 'كم علبة تبقى؟') }
+    { text: (total, size) => say(`${total} arkatz ${size}ko poltsetan gorde nahi ditugu.`, `Queremos guardar ${total} lápices en bolsas de ${size}.`, `نريد وضع ${total} قلمًا في أكياس من ${size}.`, `We want to put ${total} pencils into bags of ${size}.`), question: say('Zenbat arkatz geratzen dira soberan?', '¿Cuántos lápices sobran?', 'كم قلمًا يبقى؟', 'How many pencils are left over?') },
+    { text: (total, size) => say(`${total} ikasle ${size}ko taldeetan jarri nahi ditugu.`, `Queremos poner a ${total} alumnos en grupos de ${size}.`, `نريد وضع ${total} تلميذًا في مجموعات من ${size}.`, `We want to put ${total} students into groups of ${size}.`), question: say('Zenbat ikasle geratzen dira taldetik kanpo?', '¿Cuántos alumnos se quedan sin grupo?', 'كم تلميذًا يبقى بلا مجموعة؟', 'How many students are left without a group?') },
+    { text: (total, size) => say(`${total} pilota ${size}ko poteetan sartu nahi ditugu.`, `Queremos meter ${total} pelotas en botes de ${size}.`, `نريد وضع ${total} كرة في علب من ${size}.`, `We want to put ${total} balls into tubs of ${size}.`), question: say('Zenbat pilota geratzen dira soberan?', '¿Cuántas pelotas sobran?', 'كم كرة تبقى؟', 'How many balls are left over?') },
+    { text: (total, size) => say(`${total} lata ${size}ko kutxetan gorde nahi ditugu.`, `Queremos guardar ${total} latas en cajas de ${size}.`, `نريد وضع ${total} علبة في صناديق من ${size}.`, `We want to put ${total} cans into boxes of ${size}.`), question: say('Zenbat lata geratzen dira soberan?', '¿Cuántas latas sobran?', 'كم علبة تبقى؟', 'How many cans are left over?') }
 ]
 
 /** How many are left over when sharing out in equal groups: the remainder */
@@ -57,13 +57,13 @@ function leftOverQuestion(random: Random, tier: Tier): IntroDivisibilityRaceQues
     return {
         circuit: 0,
         kind: 'left-over',
-        prompt: say(`${text.eu} ${grouping.question.eu}`, `${text.es} ${grouping.question.es}`, `${text.ar} ${grouping.question.ar}`),
+        prompt: say(`${text.eu} ${grouping.question.eu}`, `${text.es} ${grouping.question.es}`, `${text.ar} ${grouping.question.ar}`, `${text.en} ${grouping.question.en}`),
         options,
         answer: fraction(rest),
         answerForm: 'any',
         percentAnswer: false,
         writable: true,
-        solution: say(`${worked}: ${rest === 0 ? 'ez da ezer soberan geratzen' : `${rest} soberan`}.`, `${worked}: ${rest === 0 ? 'no sobra nada' : `sobran ${rest}`}.`, `${worked}: ${rest === 0 ? 'لا يبقى شيء' : `يبقى ${rest}`}.`)
+        solution: say(`${worked}: ${rest === 0 ? 'ez da ezer soberan geratzen' : `${rest} soberan`}.`, `${worked}: ${rest === 0 ? 'no sobra nada' : `sobran ${rest}`}.`, `${worked}: ${rest === 0 ? 'لا يبقى شيء' : `يبقى ${rest}`}.`, `${worked}: ${rest === 0 ? 'nothing is left over' : `${rest} left over`}.`)
     }
 }
 
@@ -88,5 +88,5 @@ export function introDivisibilityParTime(circuit: number): number {
 
 export const introDivisibilityRaceErrorTips: Record<IntroDivisibilityRaceError, LocalizedText> = {
     ...divisibilityRaceErrorTips,
-    quotient: say('Hori talde kopurua da (zatidura). Soberan geratzen dena hondarra da.', 'Eso es el número de grupos (el cociente). Lo que sobra es el resto.', 'هذا عدد المجموعات (الناتج). وما يبقى هو الباقي.')
+    quotient: say('Hori talde kopurua da (zatidura). Soberan geratzen dena hondarra da.', 'Eso es el número de grupos (el cociente). Lo que sobra es el resto.', 'هذا عدد المجموعات (الناتج). وما يبقى هو الباقي.', 'That is the number of groups (the quotient). What is left over is the remainder.')
 }

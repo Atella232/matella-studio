@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
+import { decimalSeparatorFor } from '../../utils/numberFormat'
 import { Label } from '../dbh2-funtzioak-v2/plane'
 import { Figure } from '../dbh2-zatikiak-prototype/figures'
 
@@ -25,13 +26,13 @@ const GREEN_TINT = '#d6eddf'
 const CARD = 'var(--card, #fffcf6)'
 const PAPER = '#fffcf6'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 
-/** Picks the text and, in Arabic, writes decimal commas as points */
+/** Picks the text; the decimal commas of the numbers become the point in Arabic and English */
 const useText = (language: UnitLanguage) => {
-    const arabic = language === 'ar'
-    const d = (text: string) => (arabic ? text.replace(/(\d),(\d)/g, '$1.$2') : text)
-    return { d, t: (text: LocalizedText) => d(pickText(language, text)) }
+    const mark = language === 'ar' ? '.' : decimalSeparatorFor(language)
+    const d = (text: string) => text.replace(/(\d),(\d)/g, `$1${mark}$2`)
+    return { d, t: (text: LocalizedText) => (language === 'ar' ? d(pickText(language, text)) : pickText(language, text)) }
 }
 
 function Caption({ y, children }: { y: number; children: ReactNode }) {
@@ -84,12 +85,12 @@ const Arrow = ({ x1, x2, y, color = MUTED }: { x1: number; x2: number; y: number
 export function PowerRulesFigure({ language }: { language: UnitLanguage }) {
     const { t } = useText(language)
     const rules = [
-        { rule: 'aᵐ · aⁿ = aᵐ⁺ⁿ', example: '2³ · 2⁴ = 2⁷', name: say('Oinarri bera: batu', 'Misma base: suma', 'الأساس نفسه: اجمع') },
-        { rule: 'aᵐ : aⁿ = aᵐ⁻ⁿ', example: '5² : 5⁶ = 5⁻⁴', name: say('Oinarri bera: kendu', 'Misma base: resta', 'الأساس نفسه: اطرح') },
-        { rule: '(aᵐ)ⁿ = aᵐ·ⁿ', example: '(3²)⁻³ = 3⁻⁶', name: say('Berreturaren berretura', 'Potencia de potencia', 'قوة القوة') }
+        { rule: 'aᵐ · aⁿ = aᵐ⁺ⁿ', example: '2³ · 2⁴ = 2⁷', name: say('Oinarri bera: batu', 'Misma base: suma', 'الأساس نفسه: اجمع', 'Same base: add') },
+        { rule: 'aᵐ : aⁿ = aᵐ⁻ⁿ', example: '5² : 5⁶ = 5⁻⁴', name: say('Oinarri bera: kendu', 'Misma base: resta', 'الأساس نفسه: اطرح', 'Same base: subtract') },
+        { rule: '(aᵐ)ⁿ = aᵐ·ⁿ', example: '(3²)⁻³ = 3⁻⁶', name: say('Berreturaren berretura', 'Potencia de potencia', 'قوة القوة', 'Power of a power') }
     ]
     return (
-        <Figure height={290} label={t(say('Berreturen propietateak eta faktorizazioa', 'Propiedades de las potencias y factorización', 'خصائص القوى والتحليل'))}>
+        <Figure height={290} label={t(say('Berreturen propietateak eta faktorizazioa', 'Propiedades de las potencias y factorización', 'خصائص القوى والتحليل', 'Properties of powers and factorisation'))}>
             {rules.map((item, index) => (
                 <Card key={index} x={24 + index * 228} y={20} width={216} height={124} tint={index === 1 ? MUSTARD_TINT : STAGE_TINT}>
                     <Label x={132 + index * 228} y={48} textAnchor="middle" fontSize={14} fontWeight={700} fill={STAGE}>{t(item.name)}</Label>
@@ -97,10 +98,10 @@ export function PowerRulesFigure({ language }: { language: UnitLanguage }) {
                     <F x={132 + index * 228} y={124} anchor="middle" size={18} color={SECOND}>{item.example}</F>
                 </Card>
             ))}
-            <Label x={40} y={182} fontSize={15} fontWeight={700} fill={INK}>{t(say('Oinarri desberdinak: faktorizatu lehenik', 'Bases distintas: factoriza primero', 'أسس مختلفة: حلّل أولًا'))}</Label>
+            <Label x={40} y={182} fontSize={15} fontWeight={700} fill={INK}>{t(say('Oinarri desberdinak: faktorizatu lehenik', 'Bases distintas: factoriza primero', 'أسس مختلفة: حلّل أولًا', 'Different bases: factorise first'))}</Label>
             <F x={40} y={220} size={19}>12³ : 6² = (2² · 3)³ : (2 · 3)² = 2⁶ · 3³ : (2² · 3²)</F>
             <F x={40} y={254} size={21} color={SECOND}>= 2⁴ · 3 = 48</F>
-            <Caption y={282}>{t(say('a⁻ⁿ = 1/aⁿ · (a/b)⁻ⁿ = (b/a)ⁿ · a⁰ = 1', 'a⁻ⁿ = 1/aⁿ · (a/b)⁻ⁿ = (b/a)ⁿ · a⁰ = 1', 'a⁻ⁿ = 1/aⁿ · (a/b)⁻ⁿ = (b/a)ⁿ · a⁰ = 1'))}</Caption>
+            <Caption y={282}>{t(say('a⁻ⁿ = 1/aⁿ · (a/b)⁻ⁿ = (b/a)ⁿ · a⁰ = 1', 'a⁻ⁿ = 1/aⁿ · (a/b)⁻ⁿ = (b/a)ⁿ · a⁰ = 1', 'a⁻ⁿ = 1/aⁿ · (a/b)⁻ⁿ = (b/a)ⁿ · a⁰ = 1', 'a⁻ⁿ = 1/aⁿ · (a/b)⁻ⁿ = (b/a)ⁿ · a⁰ = 1'))}</Caption>
         </Figure>
     )
 }
@@ -116,7 +117,7 @@ export function FractionalFigure({ language }: { language: UnitLanguage }) {
         { power: '−1/3', radical: '1 / ∛8', value: '1/2' }
     ]
     return (
-        <Figure height={290} label={t(say('Berretzaile zatikia eta erradikala', 'Exponente fraccionario y radical', 'الأس الكسري والجذر'))}>
+        <Figure height={290} label={t(say('Berretzaile zatikia eta erradikala', 'Exponente fraccionario y radical', 'الأس الكسري والجذر', 'Fractional exponent and radical'))}>
             <Card x={30} y={18} width={660} height={62} tint={MUSTARD_TINT}>
                 <F x={360} y={60} anchor="middle" size={26}>a<Up>m/n</Up> = ⁿ√aᵐ = (ⁿ√a)ᵐ</F>
             </Card>
@@ -129,7 +130,7 @@ export function FractionalFigure({ language }: { language: UnitLanguage }) {
                     <F x={540} y={124 + index * 40} size={21} color={SECOND}>{rung.value}</F>
                 </g>
             ))}
-            <Caption y={280}>{t(say('Izendatzailea indizea da, eta zenbakitzailea errokizunaren berretzailea', 'El denominador es el índice y el numerador el exponente del radicando', 'المقام هو الدليل والبسط أس ما تحت الجذر'))}</Caption>
+            <Caption y={280}>{t(say('Izendatzailea indizea da, eta zenbakitzailea errokizunaren berretzailea', 'El denominador es el índice y el numerador el exponente del radicando', 'المقام هو الدليل والبسط أس ما تحت الجذر', 'The denominator is the index and the numerator is the exponent of the radicand'))}</Caption>
         </Figure>
     )
 }
@@ -139,22 +140,22 @@ export function FractionalFigure({ language }: { language: UnitLanguage }) {
 export function EquivalentFigure({ language }: { language: UnitLanguage }) {
     const { t } = useText(language)
     return (
-        <Figure height={290} label={t(say('Erradikal baliokideak eta indize komuna', 'Radicales equivalentes e índice común', 'الجذور المتكافئة والدليل المشترك'))}>
+        <Figure height={290} label={t(say('Erradikal baliokideak eta indize komuna', 'Radicales equivalentes e índice común', 'الجذور المتكافئة والدليل المشترك', 'Equivalent radicals and common index'))}>
             <Card x={24} y={20} width={320} height={220} tint={STAGE_TINT}>
-                <Label x={44} y={50} fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Sinplifikatu: zatitu biak', 'Simplificar: divide los dos', 'التبسيط: اقسم الاثنين'))}</Label>
+                <Label x={44} y={50} fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Sinplifikatu: zatitu biak', 'Simplificar: divide los dos', 'التبسيط: اقسم الاثنين', 'Simplify: divide both'))}</Label>
                 <F x={44} y={100} size={24}>⁶√2⁴ = ³√2²</F>
                 <F x={44} y={132} size={15} color={MUTED} weight={400}>6 : 2 = 3 · 4 : 2 = 2</F>
                 <F x={44} y={182} size={24}>¹²√5⁸ = ³√5²</F>
                 <F x={44} y={214} size={15} color={MUTED} weight={400}>12 : 4 = 3 · 8 : 4 = 2</F>
             </Card>
             <Card x={366} y={20} width={330} height={220} tint={MUSTARD_TINT}>
-                <Label x={386} y={50} fontSize={15} fontWeight={700} fill={INK}>{t(say('Konparatu: indize komuna', 'Comparar: índice común', 'المقارنة: دليل مشترك'))}</Label>
+                <Label x={386} y={50} fontSize={15} fontWeight={700} fill={INK}>{t(say('Konparatu: indize komuna', 'Comparar: índice común', 'المقارنة: دليل مشترك', 'Compare: common index'))}</Label>
                 <F x={386} y={92} size={18} color={MUTED} weight={400}>m.c.m.(2, 3) = 6</F>
                 <F x={386} y={132} size={22}>√2 = ⁶√2³ = ⁶√8</F>
                 <F x={386} y={172} size={22}>∛3 = ⁶√3² = ⁶√9</F>
                 <F x={386} y={214} size={22} color={SECOND}>⁶√8 &lt; ⁶√9 → √2 &lt; ∛3</F>
             </Card>
-            <Caption y={272}>{t(say('ⁿ√aᵐ = ⁿᵏ√aᵐᵏ: indizea eta berretzailea zenbaki berberaz biderkatu edo zatitu', 'ⁿ√aᵐ = ⁿᵏ√aᵐᵏ: multiplica o divide el índice y el exponente por el mismo número', 'ⁿ√aᵐ = ⁿᵏ√aᵐᵏ: اضرب الدليل والأس أو اقسمهما على العدد نفسه'))}</Caption>
+            <Caption y={272}>{t(say('ⁿ√aᵐ = ⁿᵏ√aᵐᵏ: indizea eta berretzailea zenbaki berberaz biderkatu edo zatitu', 'ⁿ√aᵐ = ⁿᵏ√aᵐᵏ: multiplica o divide el índice y el exponente por el mismo número', 'ⁿ√aᵐ = ⁿᵏ√aᵐᵏ: اضرب الدليل والأس أو اقسمهما على العدد نفسه', 'ⁿ√aᵐ = ⁿᵏ√aᵐᵏ: multiply or divide the index and the exponent by the same number'))}</Caption>
         </Figure>
     )
 }
@@ -164,10 +165,10 @@ export function EquivalentFigure({ language }: { language: UnitLanguage }) {
 export function RadicalProductFigure({ language }: { language: UnitLanguage }) {
     const { t } = useText(language)
     return (
-        <Figure height={290} label={t(say('Indize desberdineko erradikalak biderkatu', 'Multiplicar radicales de distinto índice', 'ضرب جذور مختلفة الدليل'))}>
-            <Label x={40} y={40} fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Indize bera: errokizunak elkartu', 'Mismo índice: junta los radicandos', 'الدليل نفسه: اجمع ما تحت الجذر'))}</Label>
+        <Figure height={290} label={t(say('Indize desberdineko erradikalak biderkatu', 'Multiplicar radicales de distinto índice', 'ضرب جذور مختلفة الدليل', 'Multiplying radicals with different indices'))}>
+            <Label x={40} y={40} fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Indize bera: errokizunak elkartu', 'Mismo índice: junta los radicandos', 'الدليل نفسه: اجمع ما تحت الجذر', 'Same index: put the radicands together'))}</Label>
             <F x={40} y={76} size={21}>∛4 · ∛6 = ∛24 = ∛(2³ · 3) = 2∛3</F>
-            <Label x={40} y={120} fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Indize desberdinak: lehenik indize komuna', 'Índices distintos: primero índice común', 'أدلة مختلفة: أولًا دليل مشترك'))}</Label>
+            <Label x={40} y={120} fontSize={15} fontWeight={700} fill={STAGE}>{t(say('Indize desberdinak: lehenik indize komuna', 'Índices distintos: primero índice común', 'أدلة مختلفة: أولًا دليل مشترك', 'Different indices: first, a common index'))}</Label>
             <F x={40} y={156} size={21}>√2 · ∛3 = ⁶√2³ · ⁶√3² = ⁶√(8 · 9) = ⁶√72</F>
             <Card x={40} y={180} width={300} height={62} tint={MUSTARD_TINT}>
                 <F x={190} y={220} anchor="middle" size={21}>(∛5)² = ∛5² = ∛25</F>
@@ -175,7 +176,7 @@ export function RadicalProductFigure({ language }: { language: UnitLanguage }) {
             <Card x={380} y={180} width={300} height={62} tint={GREEN_TINT}>
                 <F x={530} y={220} anchor="middle" size={21}>√(∛2) = ⁶√2</F>
             </Card>
-            <Caption y={272}>{t(say('Berretura: errokizuna ber m. Erroaren erroa: indizeak biderkatu', 'Potencia: el radicando a la m. Raíz de raíz: multiplica los índices', 'القوة: ما تحت الجذر أس m. جذر الجذر: اضرب الأدلة'))}</Caption>
+            <Caption y={272}>{t(say('Berretura: errokizuna ber m. Erroaren erroa: indizeak biderkatu', 'Potencia: el radicando a la m. Raíz de raíz: multiplica los índices', 'القوة: ما تحت الجذر أس m. جذر الجذر: اضرب الأدلة', 'Power: raise the radicand to the power m. Root of a root: multiply the indices'))}</Caption>
         </Figure>
     )
 }
@@ -185,7 +186,7 @@ export function RadicalProductFigure({ language }: { language: UnitLanguage }) {
 export function RationalizeSquareFigure({ language }: { language: UnitLanguage }) {
     const { t } = useText(language)
     return (
-        <Figure height={270} label={t(say('Erro karratu bat arrazionalizatu', 'Racionalizar una raíz cuadrada', 'إنطاق جذر تربيعي'))}>
+        <Figure height={270} label={t(say('Erro karratu bat arrazionalizatu', 'Racionalizar una raíz cuadrada', 'إنطاق جذر تربيعي', 'Rationalising a square root'))}>
             <Frac x={90} y={110} n="6" d="√3" size={28} />
             <F x={140} y={120} size={28}>·</F>
             <Frac x={196} y={110} n="√3" d="√3" size={28} color={STAGE} />
@@ -195,9 +196,9 @@ export function RationalizeSquareFigure({ language }: { language: UnitLanguage }
             <Frac x={480} y={110} n="6√3" d="3" size={28} />
             <F x={530} y={120} size={28}>=</F>
             <F x={560} y={120} size={30} color={SECOND}>2√3</F>
-            <Label x={196} y={186} textAnchor="middle" fontSize={14} fontWeight={700} fill={STAGE}>{t(say('= 1: balioa ez da aldatzen', '= 1: el valor no cambia', '= 1: لا تتغيّر القيمة'))}</Label>
+            <Label x={196} y={186} textAnchor="middle" fontSize={14} fontWeight={700} fill={STAGE}>{t(say('= 1: balioa ez da aldatzen', '= 1: el valor no cambia', '= 1: لا تتغيّر القيمة', '= 1: the value does not change'))}</Label>
             <F x={330} y={186} anchor="middle" size={16} color={MUTED} weight={400}>√3 · √3 = 3</F>
-            <Caption y={244}>{t(say('Biderkatu goian eta behean izendatzaileko erroaz: erroa desagertzen da', 'Multiplica arriba y abajo por la raíz del denominador: la raíz desaparece', 'اضرب البسط والمقام في جذر المقام: يختفي الجذر'))}</Caption>
+            <Caption y={244}>{t(say('Biderkatu goian eta behean izendatzaileko erroaz: erroa desagertzen da', 'Multiplica arriba y abajo por la raíz del denominador: la raíz desaparece', 'اضرب البسط والمقام في جذر المقام: يختفي الجذر', 'Multiply the top and bottom by the root in the denominator: the root disappears'))}</Caption>
         </Figure>
     )
 }
@@ -207,7 +208,7 @@ export function RationalizeSquareFigure({ language }: { language: UnitLanguage }
 export function RationalizeIndexFigure({ language }: { language: UnitLanguage }) {
     const { t } = useText(language)
     return (
-        <Figure height={280} label={t(say('Beste indize bateko erroa arrazionalizatu', 'Racionalizar una raíz de otro índice', 'إنطاق جذر من دليل آخر'))}>
+        <Figure height={280} label={t(say('Beste indize bateko erroa arrazionalizatu', 'Racionalizar una raíz de otro índice', 'إنطاق جذر من دليل آخر', 'Rationalising a root with a different index'))}>
             <Frac x={80} y={110} n="5" d="∛2" size={28} />
             <F x={130} y={120} size={28}>·</F>
             <Frac x={196} y={110} n="∛2²" d="∛2²" size={28} color={STAGE} />
@@ -218,7 +219,7 @@ export function RationalizeIndexFigure({ language }: { language: UnitLanguage })
             <Card x={140} y={180} width={440} height={56} tint={MUSTARD_TINT}>
                 <F x={360} y={216} anchor="middle" size={20}>ⁿ√aᵐ · ⁿ√aⁿ⁻ᵐ = ⁿ√aⁿ = a</F>
             </Card>
-            <Caption y={266}>{t(say('Osatu berretzailea indizeraino: ∛2 bider ∛2² ematen du ∛2³ = 2', 'Completa el exponente hasta el índice: ∛2 por ∛2² da ∛2³ = 2', 'أكمل الأس حتى الدليل: ∛2 في ∛2² يعطي ∛2³ = 2'))}</Caption>
+            <Caption y={266}>{t(say('Osatu berretzailea indizeraino: ∛2 bider ∛2² ematen du ∛2³ = 2', 'Completa el exponente hasta el índice: ∛2 por ∛2² da ∛2³ = 2', 'أكمل الأس حتى الدليل: ∛2 في ∛2² يعطي ∛2³ = 2', 'Complete the exponent up to the index: ∛2 times ∛2² gives ∛2³ = 2'))}</Caption>
         </Figure>
     )
 }
@@ -228,7 +229,7 @@ export function RationalizeIndexFigure({ language }: { language: UnitLanguage })
 export function ConjugateFigure({ language }: { language: UnitLanguage }) {
     const { t } = useText(language)
     return (
-        <Figure height={290} label={t(say('Konjokatuaz biderkatu', 'Multiplicar por el conjugado', 'الضرب في المرافق'))}>
+        <Figure height={290} label={t(say('Konjokatuaz biderkatu', 'Multiplicar por el conjugado', 'الضرب في المرافق', 'Multiply by the conjugate'))}>
             <Frac x={100} y={100} n="1" d="√3 − √2" size={26} />
             <F x={170} y={110} size={26}>·</F>
             <Frac x={250} y={100} n="√3 + √2" d="√3 + √2" size={26} color={STAGE} />
@@ -239,7 +240,7 @@ export function ConjugateFigure({ language }: { language: UnitLanguage }) {
             <Card x={70} y={170} width={580} height={62} tint={MUSTARD_TINT}>
                 <F x={360} y={210} anchor="middle" size={21}>(a − b)(a + b) = a² − b² → (√3)² − (√2)² = 1</F>
             </Card>
-            <Caption y={268}>{t(say('a − b-ren konjokatua a + b da: biderkatzean, erroak desagertzen dira', 'El conjugado de a − b es a + b: al multiplicar, las raíces desaparecen', 'مرافق a − b هو a + b: عند الضرب تختفي الجذور'))}</Caption>
+            <Caption y={268}>{t(say('a − b-ren konjokatua a + b da: biderkatzean, erroak desagertzen dira', 'El conjugado de a − b es a + b: al multiplicar, las raíces desaparecen', 'مرافق a − b هو a + b: عند الضرب تختفي الجذور', 'The conjugate of a − b is a + b: when you multiply, the roots disappear'))}</Caption>
         </Figure>
     )
 }
@@ -251,9 +252,9 @@ export function LogDefinitionFigure({ language }: { language: UnitLanguage }) {
     const x = (exponent: number) => 134 + (exponent + 2) * 74
     const values = ['1/4', '1/2', '1', '2', '4', '8', '16', '32']
     return (
-        <Figure height={290} label={t(say('Logaritmoa berretzailea da', 'El logaritmo es el exponente', 'اللوغاريتم هو الأس'))}>
-            <Label x={58} y={86} textAnchor="middle" fontSize={14} fontWeight={700} fill={STAGE}>{t(say('berretzailea', 'exponente', 'الأس'))}</Label>
-            <Label x={58} y={152} textAnchor="middle" fontSize={14} fontWeight={700} fill={SECOND}>{t(say('balioa', 'valor', 'القيمة'))}</Label>
+        <Figure height={290} label={t(say('Logaritmoa berretzailea da', 'El logaritmo es el exponente', 'اللوغاريتم هو الأس', 'The logarithm is the exponent'))}>
+            <Label x={58} y={86} textAnchor="middle" fontSize={14} fontWeight={700} fill={STAGE}>{t(say('berretzailea', 'exponente', 'الأس', 'exponent'))}</Label>
+            <Label x={58} y={152} textAnchor="middle" fontSize={14} fontWeight={700} fill={SECOND}>{t(say('balioa', 'valor', 'القيمة', 'value'))}</Label>
             {values.map((value, index) => {
                 const exponent = index - 2
                 const highlight = exponent === 5
@@ -269,7 +270,7 @@ export function LogDefinitionFigure({ language }: { language: UnitLanguage }) {
             })}
             <F x={360} y={208} anchor="middle" size={22} color={SECOND}>log₂ 32 = 5 ⟺ 2⁵ = 32</F>
             <F x={360} y={242} anchor="middle" size={18} color={MUTED} weight={400}>log₂ (1/4) = −2 · log 1000 = 3 · ln e = 1</F>
-            <Caption y={276}>{t(say('logₐ b: a zenbatera jaso behar den b lortzeko. Oinarria positiboa eta 1 ez dena', 'logₐ b: a qué hay que elevar a para obtener b. Base positiva y distinta de 1', 'logₐ b: الأس الذي نرفع إليه a لنحصل على b. الأساس موجب ولا يساوي 1'))}</Caption>
+            <Caption y={276}>{t(say('logₐ b: a zenbatera jaso behar den b lortzeko. Oinarria positiboa eta 1 ez dena', 'logₐ b: a qué hay que elevar a para obtener b. Base positiva y distinta de 1', 'logₐ b: الأس الذي نرفع إليه a لنحصل على b. الأساس موجب ولا يساوي 1', 'logₐ b: the power you must raise a to in order to get b. The base must be positive and not equal to 1'))}</Caption>
         </Figure>
     )
 }
@@ -284,14 +285,14 @@ export function LogPropertiesFigure({ language }: { language: UnitLanguage }) {
         { rule: 'log aⁿ = n · log a', example: 'log₂ 8⁵ = 5 · log₂ 8 = 15', tint: GREEN_TINT }
     ]
     return (
-        <Figure height={290} label={t(say('Logaritmoen propietateak', 'Propiedades de los logaritmos', 'خصائص اللوغاريتمات'))}>
+        <Figure height={290} label={t(say('Logaritmoen propietateak', 'Propiedades de los logaritmos', 'خصائص اللوغاريتمات', 'Properties of logarithms'))}>
             {rules.map((item, index) => (
                 <Card key={index} x={30} y={18 + index * 78} width={660} height={66} tint={item.tint}>
                     <F x={54} y={58 + index * 78} size={21}>{item.rule}</F>
                     <F x={670} y={58 + index * 78} anchor="end" size={18} color={SECOND}>{item.example}</F>
                 </Card>
             ))}
-            <Caption y={272}>{t(say('Biderketa batura bihurtzen da, zatiketa kenketa eta berretura biderketa', 'El producto se convierte en suma, el cociente en resta y la potencia en producto', 'يتحوّل الضرب إلى جمع، والقسمة إلى طرح، والقوة إلى ضرب'))}</Caption>
+            <Caption y={272}>{t(say('Biderketa batura bihurtzen da, zatiketa kenketa eta berretura biderketa', 'El producto se convierte en suma, el cociente en resta y la potencia en producto', 'يتحوّل الضرب إلى جمع، والقسمة إلى طرح، والقوة إلى ضرب', 'The product becomes a sum, the quotient a difference and the power a product'))}</Caption>
         </Figure>
     )
 }
@@ -301,7 +302,7 @@ export function LogPropertiesFigure({ language }: { language: UnitLanguage }) {
 export function ChangeBaseFigure({ language }: { language: UnitLanguage }) {
     const { t, d } = useText(language)
     return (
-        <Figure height={290} label={t(say('Oinarri-aldaketa', 'Cambio de base', 'تغيير الأساس'))}>
+        <Figure height={290} label={t(say('Oinarri-aldaketa', 'Cambio de base', 'تغيير الأساس', 'Change of base'))}>
             <Card x={150} y={18} width={420} height={70} tint={MUSTARD_TINT}>
                 <F x={300} y={62} anchor="middle" size={24}>logₐ b =</F>
                 <Frac x={440} y={52} n="log b" d="log a" size={22} />
@@ -311,10 +312,10 @@ export function ChangeBaseFigure({ language }: { language: UnitLanguage }) {
             <F x={286} y={146} size={22}>≈</F>
             <Frac x={360} y={136} n={d('1,301')} d={d('0,699')} size={22} />
             <F x={420} y={146} size={22} color={SECOND}>≈ {d('1,861')}</F>
-            <Label x={60} y={210} fontSize={15} fill={MUTED}>{t(say('Egiaztapena:', 'Comprobación:', 'التحقق:'))}</Label>
+            <Label x={60} y={210} fontSize={15} fill={MUTED}>{t(say('Egiaztapena:', 'Comprobación:', 'التحقق:', 'Check:'))}</Label>
             <F x={220} y={210} size={20}>5¹ = 5 &lt; 20 &lt; 25 = 5²</F>
             <F x={520} y={210} size={20}>5<Up>{d('1,861')}</Up> ≈ 20</F>
-            <Caption y={268}>{t(say('Kalkulagailuak log (10 oinarria) eta ln (e oinarria) ditu; beste oinarriak horiekin kalkulatzen dira', 'La calculadora tiene log (base 10) y ln (base e); las demás bases se calculan con ellas', 'للآلة الحاسبة log (الأساس 10) وln (الأساس e)؛ وتُحسب الأسس الأخرى بهما'))}</Caption>
+            <Caption y={268}>{t(say('Kalkulagailuak log (10 oinarria) eta ln (e oinarria) ditu; beste oinarriak horiekin kalkulatzen dira', 'La calculadora tiene log (base 10) y ln (base e); las demás bases se calculan con ellas', 'للآلة الحاسبة log (الأساس 10) وln (الأساس e)؛ وتُحسب الأسس الأخرى بهما', 'The calculator has log (base 10) and ln (base e); other bases are calculated using these'))}</Caption>
         </Figure>
     )
 }

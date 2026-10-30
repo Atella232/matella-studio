@@ -399,6 +399,7 @@
                 "simplificationText": "Podemos simplificar <strong>cruzado</strong> antes de multiplicar, dividiendo un numerador y un denominador entre su m.c.d.",
                 "fractionOfNumberTitle": "Fracción de un número",
                 "fractionOfNumberText": "Calcular una fracción de una cantidad es multiplicar la fracción por esa cantidad.",
+                "fractionOfNumberConnector": " de 15 = ",
                 "tip": "<strong>💡 Truco:</strong> La palabra \"de\" entre fracción y número significa multiplicación."
             },
             "divide": {
@@ -621,6 +622,7 @@
             "tab": "Navegar al siguiente elemento interactivo",
             "shiftTab": "Navegar al elemento anterior",
             "enter": "Activar botón o enlace seleccionado",
+            "spaceKey": "Espacio",
             "escape": "Cerrar diálogos o cancelar acción",
             "arrows": "Ajustar valores en controles deslizantes"
         },
@@ -634,6 +636,7 @@
         "spanish": "Castellano",
         "basque": "Euskera",
         "arabic": "العربية",
+        "english": "Inglés",
         "close": "Cerrar",
         "next": "Siguiente",
         "previous": "Anterior",

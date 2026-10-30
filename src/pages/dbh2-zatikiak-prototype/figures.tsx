@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
+import { decimalSeparatorFor } from '../../utils/numberFormat'
 
 /* ==========================================================================
    Zatikiak · lesson figures, drawn as SVG in the notebook style
@@ -17,22 +18,22 @@ const svgStyle: CSSProperties = { fontFamily: '"Atkinson Hyperlegible", "Noto Sa
 
 const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language, text)
 
-/** Decimal comma in Basque and Spanish, point in Arabic */
+/** Decimal comma in Basque and Spanish, point in Arabic and English */
 const decimal = (language: UnitLanguage, value: number, digits = 2) => {
     const text = Number.isInteger(value) ? String(value) : value.toFixed(digits).replace(/0+$/, '')
-    return language === 'ar' ? text : text.replace('.', ',')
+    return language === 'ar' ? text : text.replace('.', decimalSeparatorFor(language))
 }
 
 /** Euros always with two decimals */
 const money = (language: UnitLanguage, value: number) => {
     const text = value === 0 ? '0' : value.toFixed(2)
-    return language === 'ar' ? text : text.replace('.', ',')
+    return language === 'ar' ? text : text.replace('.', decimalSeparatorFor(language))
 }
 
-/** Basque writes the sign first (%25); Spanish and Arabic after (25 %) */
+/** Basque writes the sign first (%25); Spanish and Arabic after (25 %); English sticks it to the number (25%) */
 const percent = (language: UnitLanguage, value: number) => {
     const number = decimal(language, value, 1)
-    return language === 'eu' ? `%${number}` : `${number} %`
+    return language === 'eu' ? `%${number}` : language === 'en' ? `${number}%` : `${number} %`
 }
 
 export function Figure({ height, label, children }: { height: number; label: string; children: ReactNode }) {
@@ -85,11 +86,11 @@ export function MeaningFigure({ language }: { language: UnitLanguage }) {
     const sector = (cx: number, cy: number, r: number) => `M${cx} ${cy} L${cx} ${cy - r} A${r} ${r} 0 0 1 ${cx + r} ${cy} Z`
     const lineX = (value: number) => 510 + value * 180
     return (
-        <Figure height={200} label={pick(language, { eu: '3/4 zati, zatiketa eta zenbaki gisa', es: '3/4 como parte, cociente y número', ar: '3/4 جزءًا وقسمةً وعددًا' })}>
+        <Figure height={200} label={pick(language, { eu: '3/4 zati, zatiketa eta zenbaki gisa', es: '3/4 como parte, cociente y número', en: '3/4 as a part, a quotient and a number', ar: '3/4 جزءًا وقسمةً وعددًا' })}>
             {[
-                { x: 120, text: { eu: 'Zatia', es: 'Parte', ar: 'جزء' } },
-                { x: 360, text: { eu: 'Zatiketa', es: 'Cociente', ar: 'قسمة' } },
-                { x: 600, text: { eu: 'Zenbakia', es: 'Número', ar: 'عدد' } }
+                { x: 120, text: { eu: 'Zatia', es: 'Parte', en: 'Part', ar: 'جزء' } },
+                { x: 360, text: { eu: 'Zatiketa', es: 'Cociente', en: 'Quotient', ar: 'قسمة' } },
+                { x: 600, text: { eu: 'Zenbakia', es: 'Número', en: 'Number', ar: 'عدد' } }
             ].map((panel) => <text key={panel.x} x={panel.x} y={26} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{pick(language, panel.text)}</text>)}
             <Bar x={30} y={56} width={180} height={46} parts={4} filled={3} />
             <Frac x={120} y={150} n={3} d={4} />
@@ -113,7 +114,7 @@ export function MeaningFigure({ language }: { language: UnitLanguage }) {
             <text x={lineX(0)} y={114} textAnchor="middle" fontSize={16} fill={INK}>0</text>
             <text x={lineX(1)} y={114} textAnchor="middle" fontSize={16} fill={INK}>1</text>
             <Frac x={lineX(0.75)} y={150} n={3} d={4} color={STAGE} />
-            <Caption y={194}>{pick(language, { eu: 'Hiru irakurketa, balio bera', es: 'Tres lecturas, un mismo valor', ar: 'ثلاث قراءات لقيمة واحدة' })}</Caption>
+            <Caption y={194}>{pick(language, { eu: 'Hiru irakurketa, balio bera', es: 'Tres lecturas, un mismo valor', en: 'Three readings, one value', ar: 'ثلاث قراءات لقيمة واحدة' })}</Caption>
         </Figure>
     )
 }
@@ -123,7 +124,7 @@ export function MeaningFigure({ language }: { language: UnitLanguage }) {
 export function MixedFigure({ language }: { language: UnitLanguage }) {
     const lineX = (value: number) => 60 + value * 150
     return (
-        <Figure height={250} label={pick(language, { eu: '17/5 = 3 eta 2/5', es: '17/5 = 3 y 2/5', ar: '17/5 = 3 و2/5' })}>
+        <Figure height={250} label={pick(language, { eu: '17/5 = 3 eta 2/5', es: '17/5 = 3 y 2/5', en: '17/5 = 3 and 2/5', ar: '17/5 = 3 و2/5' })}>
             {[0, 1, 2, 3].map((unit) => (
                 <g key={unit}>
                     <Bar x={30 + unit * 170} y={20} width={150} height={40} parts={5} filled={unit < 3 ? 5 : 2} />
@@ -142,6 +143,7 @@ export function MixedFigure({ language }: { language: UnitLanguage }) {
             <Caption y={236}>{pick(language, {
                 eu: '17 bosten = 3 unitate oso eta beste 2 bosten',
                 es: '17 quintos = 3 unidades completas y 2 quintos más',
+                en: '17 fifths = 3 whole units and 2 more fifths',
                 ar: '17 خُمسًا = 3 وحدات كاملة وخُمسان'
             })}</Caption>
         </Figure>
@@ -155,7 +157,7 @@ export function EquivalenceFigure({ language }: { language: UnitLanguage }) {
     const x = 140
     const width = 520
     return (
-        <Figure height={244} label={pick(language, { eu: '3/4, 6/8 eta 9/12 zatiki baliokideak', es: 'Fracciones equivalentes 3/4, 6/8 y 9/12', ar: 'الكسور المتكافئة 3/4 و6/8 و9/12' })}>
+        <Figure height={244} label={pick(language, { eu: '3/4, 6/8 eta 9/12 zatiki baliokideak', es: 'Fracciones equivalentes 3/4, 6/8 y 9/12', en: 'Equivalent fractions 3/4, 6/8 and 9/12', ar: 'الكسور المتكافئة 3/4 و6/8 و9/12' })}>
             {rows.map(([n, d], index) => (
                 <g key={d}>
                     <Frac x={70} y={48 + index * 64} n={n} d={d} />
@@ -166,6 +168,7 @@ export function EquivalenceFigure({ language }: { language: UnitLanguage }) {
             <Caption y={236}>{pick(language, {
                 eu: 'Zati gehiago eta txikiagoak, baina luzera bera',
                 es: 'Más trozos y más pequeños, pero la misma longitud',
+                en: 'More pieces and smaller ones, but the same length',
                 ar: 'أجزاء أكثر وأصغر، لكن الطول نفسه'
             })}</Caption>
         </Figure>
@@ -179,7 +182,7 @@ export function SimplifyFigure({ language }: { language: UnitLanguage }) {
     const divisors = [2, 3, 7]
     const xs = [90, 270, 450, 630]
     return (
-        <Figure height={220} label={pick(language, { eu: '84/126 sinplifikatzen', es: 'Simplificando 84/126', ar: 'تبسيط 84/126' })}>
+        <Figure height={220} label={pick(language, { eu: '84/126 sinplifikatzen', es: 'Simplificando 84/126', en: 'Simplifying 84/126', ar: 'تبسيط 84/126' })}>
             {chain.map(([n, d], index) => <Frac key={n} x={xs[index]} y={84} n={n} d={d} size={24} color={index === chain.length - 1 ? STAGE : INK} />)}
             {divisors.map((divisor, index) => {
                 const from = xs[index] + 42
@@ -195,7 +198,7 @@ export function SimplifyFigure({ language }: { language: UnitLanguage }) {
             <path d={`M${xs[0]} 136 C ${xs[0]} 190, ${xs[3]} 190, ${xs[3]} 140`} fill="none" stroke={STAGE} strokeWidth={2.6} />
             <path d={`M${xs[3] - 7} 146 L${xs[3]} 134 L${xs[3] + 7} 146 z`} fill={STAGE} />
             <text x={360} y={196} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>
-                {pick(language, { eu: ': 42 = ZKH(84, 126), urrats bakarrean', es: ': 42 = m.c.d.(84, 126), en un solo paso', ar: ': 42 = ZKH(84، 126)، في خطوة واحدة' })}
+                {pick(language, { eu: ': 42 = ZKH(84, 126), urrats bakarrean', es: ': 42 = m.c.d.(84, 126), en un solo paso', en: ': 42 = GCD(84, 126), in one step', ar: ': 42 = ZKH(84، 126)، في خطوة واحدة' })}
             </text>
         </Figure>
     )
@@ -212,7 +215,7 @@ export function OrderFigure({ language }: { language: UnitLanguage }) {
         { value: 5 / 6, n: 5, d: 6, sign: '', tone: STAGE, up: true }
     ]
     return (
-        <Figure height={200} label={pick(language, { eu: '−3/4, −2/3, 1/4 eta 5/6 zenbaki-zuzenean', es: '−3/4, −2/3, 1/4 y 5/6 en la recta', ar: '−3/4 و−2/3 و1/4 و5/6 على خط الأعداد' })}>
+        <Figure height={200} label={pick(language, { eu: '−3/4, −2/3, 1/4 eta 5/6 zenbaki-zuzenean', es: '−3/4, −2/3, 1/4 y 5/6 en la recta', en: '−3/4, −2/3, 1/4 and 5/6 on the number line', ar: '−3/4 و−2/3 و1/4 و5/6 على خط الأعداد' })}>
             <line x1={x(-1) - 14} x2={x(1) + 14} y1={100} y2={100} stroke={INK} strokeWidth={2.4} />
             {Array.from({ length: 25 }, (_, index) => {
                 const value = -1 + index / 12
@@ -226,7 +229,7 @@ export function OrderFigure({ language }: { language: UnitLanguage }) {
                     <Frac x={x(point.value) + (point.sign ? 6 : 0)} y={point.up ? 50 : 150} n={point.n} d={point.d} size={17} color={point.tone} sign={point.sign} />
                 </g>
             ))}
-            <Caption y={194}>{pick(language, { eu: 'Eskuinerago, handiago', es: 'Más a la derecha, mayor', ar: 'كلما اتجهنا يمينًا كان العدد أكبر' })}</Caption>
+            <Caption y={194}>{pick(language, { eu: 'Eskuinerago, handiago', es: 'Más a la derecha, mayor', en: 'The further right, the larger', ar: 'كلما اتجهنا يمينًا كان العدد أكبر' })}</Caption>
         </Figure>
     )
 }
@@ -235,7 +238,7 @@ export function OrderFigure({ language }: { language: UnitLanguage }) {
 
 export function AddFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={330} label={pick(language, { eu: '1/2 + 1/3 = 3/6 + 2/6 = 5/6', es: '1/2 + 1/3 = 3/6 + 2/6 = 5/6', ar: '1/2 + 1/3 = 3/6 + 2/6 = 5/6' })}>
+        <Figure height={330} label={pick(language, { eu: '1/2 + 1/3 = 3/6 + 2/6 = 5/6', es: '1/2 + 1/3 = 3/6 + 2/6 = 5/6', en: '1/2 + 1/3 = 3/6 + 2/6 = 5/6', ar: '1/2 + 1/3 = 3/6 + 2/6 = 5/6' })}>
             <Bar x={60} y={20} width={240} parts={2} filled={1} />
             <text x={360} y={48} textAnchor="middle" fontSize={26} fontWeight={700} fill={INK}>+</text>
             <Bar x={420} y={20} width={240} parts={3} filled={0} extra={1} />
@@ -249,7 +252,7 @@ export function AddFigure({ language }: { language: UnitLanguage }) {
             <text x={150} y={272} textAnchor="middle" fontSize={26} fontWeight={700} fill={INK}>=</text>
             <Bar x={200} y={244} width={320} parts={6} filled={3} extra={2} />
             <Frac x={580} y={268} n={5} d={6} size={20} color={STAGE} />
-            <Caption y={322}>{pick(language, { eu: 'Erdiak eta herenak ezin dira batu; seirenak bai', es: 'Medios y tercios no se pueden sumar; sextos, sí', ar: 'لا نجمع الأنصاف مع الأثلاث، لكن نجمع الأسداس' })}</Caption>
+            <Caption y={322}>{pick(language, { eu: 'Erdiak eta herenak ezin dira batu; seirenak bai', es: 'Medios y tercios no se pueden sumar; sextos, sí', en: 'Halves and thirds cannot be added; sixths can.', ar: 'لا نجمع الأنصاف مع الأثلاث، لكن نجمع الأسداس' })}</Caption>
         </Figure>
     )
 }
@@ -262,7 +265,7 @@ export function AreaFigure({ language }: { language: UnitLanguage }) {
     const top = 62
     const cell = { w: size / 3, h: size / 4 }
     return (
-        <Figure height={330} label={pick(language, { eu: '2/3 · 3/4 azalera gisa', es: '2/3 · 3/4 como área', ar: '2/3 · 3/4 على شكل مساحة' })}>
+        <Figure height={330} label={pick(language, { eu: '2/3 · 3/4 azalera gisa', es: '2/3 · 3/4 como área', en: '2/3 · 3/4 as an area', ar: '2/3 · 3/4 على شكل مساحة' })}>
             {Array.from({ length: 12 }, (_, index) => {
                 const column = index % 3
                 const row = Math.floor(index / 3)
@@ -285,7 +288,7 @@ export function AreaFigure({ language }: { language: UnitLanguage }) {
                 <tspan>3</tspan><tspan dx={4}>·</tspan><tspan dx={4}>4</tspan><tspan dx={10}>=</tspan><tspan dx={6}>12</tspan>
             </text>
             <line x1={398} x2={476} y1={130} y2={130} stroke={INK} strokeWidth={2} />
-            <text x={400} y={206} fontSize={16} fill={MUTED}>{pick(language, { eu: '12 laukitxotatik 6 kolore bietan:', es: '6 de las 12 casillas tienen los dos colores:', ar: '6 خانات من 12 ملوّنة باللونين:' })}</text>
+            <text x={400} y={206} fontSize={16} fill={MUTED}>{pick(language, { eu: '12 laukitxotatik 6 kolore bietan:', es: '6 de las 12 casillas tienen los dos colores:', en: '6 of the 12 squares have both colours:', ar: '6 خانات من 12 ملوّنة باللونين:' })}</text>
             <text x={400} y={236} fontSize={20} fontWeight={700} fill={STAGE}>6/12 = 1/2</text>
         </Figure>
     )
@@ -299,7 +302,7 @@ export function PowerFigure({ language }: { language: UnitLanguage }) {
     const top = 62
     const cell = size / 3
     return (
-        <Figure height={330} label={pick(language, { eu: '(2/3)² = 4/9 karratu baten azalera gisa', es: '(2/3)² = 4/9 como área de un cuadrado', ar: '(2/3)² = 4/9 على شكل مساحة مربع' })}>
+        <Figure height={330} label={pick(language, { eu: '(2/3)² = 4/9 karratu baten azalera gisa', es: '(2/3)² = 4/9 como área de un cuadrado', en: '(2/3)² = 4/9 as the area of a square', ar: '(2/3)² = 4/9 على شكل مساحة مربع' })}>
             {Array.from({ length: 9 }, (_, index) => {
                 const column = index % 3
                 const row = Math.floor(index / 3)
@@ -310,9 +313,9 @@ export function PowerFigure({ language }: { language: UnitLanguage }) {
             <rect x={left} y={top} width={size} height={size} fill="none" stroke={INK} strokeWidth={2.6} />
             <Frac x={left + cell} y={34} n={2} d={3} size={15} color={STAGE} />
             <Frac x={left - 30} y={top + cell + 4} n={2} d={3} size={15} color={STAGE} />
-            <text x={400} y={112} fontSize={16} fill={MUTED}>{pick(language, { eu: 'Aldea 2/3 duen karratua:', es: 'Cuadrado de lado 2/3:', ar: 'مربع طول ضلعه 2/3:' })}</text>
+            <text x={400} y={112} fontSize={16} fill={MUTED}>{pick(language, { eu: 'Aldea 2/3 duen karratua:', es: 'Cuadrado de lado 2/3:', en: 'Square with side 2/3:', ar: 'مربع طول ضلعه 2/3:' })}</text>
             <text x={400} y={146} fontSize={22} fontWeight={700} fill={STAGE}>(2/3)² = 4/9</text>
-            <text x={400} y={196} fontSize={16} fill={MUTED}>{pick(language, { eu: 'Unitatearen 9 laukitxotatik 4:', es: '4 de las 9 casillas de la unidad:', ar: '4 من خانات الوحدة التسع:' })}</text>
+            <text x={400} y={196} fontSize={16} fill={MUTED}>{pick(language, { eu: 'Unitatearen 9 laukitxotatik 4:', es: '4 de las 9 casillas de la unidad:', en: '4 of the 9 squares in the whole:', ar: '4 من خانات الوحدة التسع:' })}</text>
             <text x={400} y={228} fontSize={20} fontWeight={700} fill={INK}>4/9 &lt; 2/3</text>
         </Figure>
     )
@@ -330,13 +333,13 @@ export function FractionOfFigure({ language }: { language: UnitLanguage }) {
         return `M${x1} ${y} Q ${x1} ${tip} ${x1 + 14} ${tip} L ${mid - 10} ${tip} Q ${mid} ${tip} ${mid} ${up ? tip - 10 : tip + 10} Q ${mid} ${tip} ${mid + 10} ${tip} L ${x2 - 14} ${tip} Q ${x2} ${tip} ${x2} ${y}`
     }
     return (
-        <Figure height={220} label={pick(language, { eu: '120ren 3/8 = 45', es: '3/8 de 120 = 45', ar: '3/8 من 120 = 45' })}>
+        <Figure height={220} label={pick(language, { eu: '120ren 3/8 = 45', es: '3/8 de 120 = 45', en: '3/8 of 120 = 45', ar: '3/8 من 120 = 45' })}>
             <path d={brace(left, left + width, 52, true)} fill="none" stroke={INK} strokeWidth={2} />
             <text x={360} y={22} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>120</text>
             <Bar x={left} y={62} width={width} height={50} parts={8} filled={3} labels={Array(8).fill('15')} />
             <path d={brace(left, left + part * 3, 122, false)} fill="none" stroke={STAGE} strokeWidth={2.4} />
             <text x={left + part * 1.5} y={168} textAnchor="middle" fontSize={20} fontWeight={700} fill={STAGE}>3 · 15 = 45</text>
-            <Caption y={210}>{pick(language, { eu: '120 : 8 = 15 zati bakoitzean; 3 zati hartzen dira', es: '120 : 8 = 15 en cada parte; se toman 3 partes', ar: '120 : 8 = 15 في كل جزء، ونأخذ 3 أجزاء' })}</Caption>
+            <Caption y={210}>{pick(language, { eu: '120 : 8 = 15 zati bakoitzean; 3 zati hartzen dira', es: '120 : 8 = 15 en cada parte; se toman 3 partes', en: '120 : 8 = 15 in each part; 3 parts are taken', ar: '120 : 8 = 15 في كل جزء، ونأخذ 3 أجزاء' })}</Caption>
         </Figure>
     )
 }
@@ -354,12 +357,12 @@ export function PercentFigure({ language }: { language: UnitLanguage }) {
         { value: 1, n: 1, d: 1 }
     ]
     const rows = [
-        { y: 46, label: { eu: 'Zatikia', es: 'Fracción', ar: 'كسر' } },
-        { y: 136, label: { eu: 'Hamartarra', es: 'Decimal', ar: 'عدد عشري' } },
-        { y: 172, label: { eu: 'Ehunekoa', es: 'Porcentaje', ar: 'نسبة مئوية' } }
+        { y: 46, label: { eu: 'Zatikia', es: 'Fracción', en: 'Fraction', ar: 'كسر' } },
+        { y: 136, label: { eu: 'Hamartarra', es: 'Decimal', en: 'Decimal', ar: 'عدد عشري' } },
+        { y: 172, label: { eu: 'Ehunekoa', es: 'Porcentaje', en: 'Percentage', ar: 'نسبة مئوية' } }
     ]
     return (
-        <Figure height={200} label={pick(language, { eu: 'Zatikiak, hamartarrak eta ehunekoak zuzen berean', es: 'Fracciones, decimales y porcentajes en la misma recta', ar: 'الكسور والأعداد العشرية والنسب المئوية على الخط نفسه' })}>
+        <Figure height={200} label={pick(language, { eu: 'Zatikiak, hamartarrak eta ehunekoak zuzen berean', es: 'Fracciones, decimales y porcentajes en la misma recta', en: 'Fractions, decimals and percentages on the same number line', ar: 'الكسور والأعداد العشرية والنسب المئوية على الخط نفسه' })}>
             {rows.map((row) => <text key={row.y} x={20} y={row.y + 6} fontSize={15} fontWeight={700} fill={MUTED}>{pick(language, row.label)}</text>)}
             <line x1={x(0) - 10} x2={x(1) + 10} y1={96} y2={96} stroke={INK} strokeWidth={2.4} />
             {marks.map((mark) => {
@@ -388,8 +391,8 @@ export function ProportionFigure({ language }: { language: UnitLanguage }) {
     const bottomY = 140
     const highlighted = [1, 3, 5]
     return (
-        <Figure height={220} label={pick(language, { eu: '3 koaderno 7,50 €; 5 koaderno 12,50 €', es: '3 cuadernos 7,50 €; 5 cuadernos 12,50 €', ar: '3 دفاتر بـ 7.50€ و5 دفاتر بـ 12.50€' })}>
-            <text x={20} y={topY + 6} fontSize={15} fontWeight={700} fill={MUTED}>{pick(language, { eu: 'Koadernoak', es: 'Cuadernos', ar: 'دفاتر' })}</text>
+        <Figure height={220} label={pick(language, { eu: '3 koaderno 7,50 €; 5 koaderno 12,50 €', es: '3 cuadernos 7,50 €; 5 cuadernos 12,50 €', en: '3 notebooks €7.50; 5 notebooks €12.50', ar: '3 دفاتر بـ 7.50€ و5 دفاتر بـ 12.50€' })}>
+            <text x={20} y={topY + 6} fontSize={15} fontWeight={700} fill={MUTED}>{pick(language, { eu: 'Koadernoak', es: 'Cuadernos', en: 'Notebooks', ar: 'دفاتر' })}</text>
             <text x={20} y={bottomY + 6} fontSize={15} fontWeight={700} fill={MUTED}>€</text>
             {[topY, bottomY].map((y) => <line key={y} x1={x(0) - 10} x2={x(5) + 20} y1={y} y2={y} stroke={INK} strokeWidth={2.4} />)}
             {[0, 1, 2, 3, 4, 5].map((count) => {
@@ -408,6 +411,7 @@ export function ProportionFigure({ language }: { language: UnitLanguage }) {
             <Caption y={210}>{pick(language, {
                 eu: '7,50 : 3 = 2,50 koaderno bakoitzeko; 5 · 2,50 = 12,50',
                 es: '7,50 : 3 = 2,50 por cuaderno; 5 · 2,50 = 12,50',
+                en: '7.50 : 3 = 2.50 per notebook; 5 · 2.50 = 12.50',
                 ar: '7.50 : 3 = 2.50 للدفتر الواحد؛ 5 · 2.50 = 12.50'
             })}</Caption>
         </Figure>

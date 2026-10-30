@@ -51,7 +51,7 @@ test('funtzioak 2. DBH lab: tools, topics and challenge ids', () => {
     assert.equal(new Set(functionsLabChallengeIds).size, functionsLabChallengeIds.length)
     assert.equal(functionsLabChallengeIds.length, 31)
     for (const challenge of [...planeChallenges, ...relationChallenges, ...tableChallenges, ...readingChallenges, ...slopeChallenges, ...lineChallenges]) {
-        for (const language of ['eu', 'es', 'ar'] as const) assert.ok(challenge.prompt[language].length > 0 && challenge.hint[language].length > 0, `${challenge.id} ${language}`)
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) assert.ok(challenge.prompt[language].length > 0 && challenge.hint[language].length > 0, `${challenge.id} ${language}`)
     }
 })
 

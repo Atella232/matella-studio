@@ -4,6 +4,7 @@ import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/Lab
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import type { LocalizedText, UnitLanguage } from '../../../features/unit-v2/types'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import { usePlayback } from '../../dbh4-aplikatuak-proportzionaltasuna/lab/usePlayback'
 import { scaleChallenges, scaleCorrect, scaleExtra, scaleObjects, SCALE_RANGE, initialScaleState, revealScale, setScale, type ScaleState } from './scale'
 import { initialSpiralState, setSpiral, spiralChallenges, spiralExact, spiralExtra, spiralPoints, spiralRoot, SPIRAL_LIMITS, type SpiralState } from './spiral'
@@ -20,12 +21,14 @@ const MUSTARD = 'var(--mustard, #e0a100)'
 const MUSTARD_TINT = 'var(--mustard-tint, #fbebc0)'
 const CARD = 'var(--card, #fffcf6)'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const SUPERSCRIPT: Record<string, string> = { 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹', '-': '⁻' }
 const sup = (value: number | string) => String(value).split('').map((digit) => SUPERSCRIPT[digit] ?? digit).join('')
-/** A decimal written with the comma, or the point in Arabic */
-const dec = (value: number, language: UnitLanguage, digits = 2) => String(Math.round(value * 10 ** digits) / 10 ** digits).replace('.', language === 'ar' ? '.' : ',')
-const decimalText = (text: string, language: UnitLanguage) => (language === 'ar' ? text.replace(',', '.') : text)
+/** A decimal written with the language's decimal mark: the point in Arabic and English, the comma in Spanish and Basque */
+const dec = (value: number, language: UnitLanguage, digits = 2) => String(Math.round(value * 10 ** digits) / 10 ** digits).replace('.', language === 'ar' ? '.' : decimalSeparatorFor(language))
+/** A decimal for LaTeX: {,} for the comma (MathText writes it as the point in English), the point in Arabic */
+const texDec = (value: number, language: UnitLanguage, digits = 2) => String(Math.round(value * 10 ** digits) / 10 ** digits).replace('.', language === 'ar' ? '.' : '{,}')
+const decimalText = (text: string, language: UnitLanguage) => (language === 'ar' ? text.replace(',', '.') : text.replace(',', decimalSeparatorFor(language)))
 
 /** The 360-wide board every tool here draws on: legible on a phone */
 function Board({ height, label, children }: { height: number; label: string; children: ReactNode }) {
@@ -64,10 +67,10 @@ export function TokensTool(props: LabToolProps) {
     const value = tokensValue(state)
     const controls = (
         <>
-            <Segmented label={l(say('Oinarria', 'Base', 'الأساس'))} value={String(state.base)} options={TOKEN_BASES.map((candidate, index) => ({ value: String(index), label: String(candidate) }))} onChange={(next) => setState((s) => setTokens(s, { base: Number(next) }))} />
-            <Stepper label={l(say('m (goian)', 'm (arriba)', 'm (أعلى)'))} value={state.m} min={0} max={TOKEN_LIMITS.m} format={(v) => `${base}${sup(v)}`} onChange={(next) => setState((s) => setTokens(s, { m: next }))} language={props.language} />
-            <Stepper label={l(say('n (goian)', 'n (arriba)', 'n (أعلى)'))} value={state.n} min={0} max={TOKEN_LIMITS.n} format={(v) => `${base}${sup(v)}`} onChange={(next) => setState((s) => setTokens(s, { n: next }))} language={props.language} />
-            <Stepper label={l(say('p (behean)', 'p (abajo)', 'p (أسفل)'))} value={state.p} min={0} max={TOKEN_LIMITS.p} format={(v) => `${base}${sup(v)}`} onChange={(next) => setState((s) => setTokens(s, { p: next }))} language={props.language} />
+            <Segmented label={l(say('Oinarria', 'Base', 'الأساس', 'Base'))} value={String(state.base)} options={TOKEN_BASES.map((candidate, index) => ({ value: String(index), label: String(candidate) }))} onChange={(next) => setState((s) => setTokens(s, { base: Number(next) }))} />
+            <Stepper label={l(say('m (goian)', 'm (arriba)', 'm (أعلى)', 'm (top)'))} value={state.m} min={0} max={TOKEN_LIMITS.m} format={(v) => `${base}${sup(v)}`} onChange={(next) => setState((s) => setTokens(s, { m: next }))} language={props.language} />
+            <Stepper label={l(say('n (goian)', 'n (arriba)', 'n (أعلى)', 'n (top)'))} value={state.n} min={0} max={TOKEN_LIMITS.n} format={(v) => `${base}${sup(v)}`} onChange={(next) => setState((s) => setTokens(s, { n: next }))} language={props.language} />
+            <Stepper label={l(say('p (behean)', 'p (abajo)', 'p (أسفل)', 'p (bottom)'))} value={state.p} min={0} max={TOKEN_LIMITS.p} format={(v) => `${base}${sup(v)}`} onChange={(next) => setState((s) => setTokens(s, { p: next }))} language={props.language} />
         </>
     )
     const parts = [state.m > 0 || state.n === 0 ? `${base}^{${state.m}}` : '', state.n > 0 ? `${base}^{${state.n}}` : ''].filter(Boolean).join('\\cdot ')
@@ -81,13 +84,13 @@ export function TokensTool(props: LabToolProps) {
     )
     return (
         <ToolFrame {...props} controls={controls} state={state} challenges={tokensChallenges} extraChallenges={tokensExtra}
-            readout={<Readout latex={latex} note={net === 0 ? l(say('Fitxa guztiak bikoteka kendu dira: emaitza $1$ da.', 'Todas las fichas se anularon por parejas: el resultado es 1.', 'تلاشت كل الرقاقات بالأزواج: النتيجة 1.')) : net > 0 ? l(say(`${net} fitxa geratu dira goian: berretzaile positiboa.`, `Sobran ${net} fichas arriba: exponente positivo.`, `بقيت ${net} رقاقات في الأعلى: أس موجب.`)) : l(say(`${-net} fitxa geratu dira behean: berretzaile negatiboa.`, `Sobran ${-net} fichas abajo: exponente negativo.`, `بقيت ${-net} رقاقات في الأسفل: أس سالب.`))}
+            readout={<Readout latex={latex} note={net === 0 ? l(say('Fitxa guztiak bikoteka kendu dira: emaitza $1$ da.', 'Todas las fichas se anularon por parejas: el resultado es 1.', 'تلاشت كل الرقاقات بالأزواج: النتيجة 1.', 'All the counters cancelled out in pairs: the result is 1.')) : net > 0 ? l(say(`${net} fitxa geratu dira goian: berretzaile positiboa.`, `Sobran ${net} fichas arriba: exponente positivo.`, `بقيت ${net} رقاقات في الأعلى: أس موجب.`, `${net} counters are left over on top: positive exponent.`)) : l(say(`${-net} fitxa geratu dira behean: berretzaile negatiboa.`, `Sobran ${-net} fichas abajo: exponente negativo.`, `بقيت ${-net} رقاقات في الأسفل: أس سالب.`, `${-net} counters are left over at the bottom: negative exponent.`))}
             />}>
-            <Board height={214} label={l(say('Goiko eta beheko fitxak bikoteka kentzen dira', 'Las fichas de arriba y de abajo se anulan por parejas', 'تتلاشى الرقاقات العلوية والسفلية بالأزواج'))}>
-                <Text x={20} y={22} anchor="start" size={14} color={MUTED} weight={400}>{l(say('Zenbakitzailea', 'Numerador', 'البسط'))}</Text>
+            <Board height={214} label={l(say('Goiko eta beheko fitxak bikoteka kentzen dira', 'Las fichas de arriba y de abajo se anulan por parejas', 'تتلاشى الرقاقات العلوية والسفلية بالأزواج', 'Counters on top and at the bottom cancel out in pairs'))}>
+                <Text x={20} y={22} anchor="start" size={14} color={MUTED} weight={400}>{l(say('Zenbakitzailea', 'Numerador', 'البسط', 'Numerator'))}</Text>
                 {Array.from({ length: numerator }, (_, index) => token(TOKEN_LEFT + index * TOKEN_STEP, 48, index < state.m ? STAGE : SECOND, index < state.m ? STAGE_TINT : SECOND_TINT, index < cancelled, `n${index}`))}
                 <line x1={16} x2={344} y1={84} y2={84} stroke={INK} strokeWidth={2.5} />
-                <Text x={20} y={108} anchor="start" size={14} color={MUTED} weight={400}>{l(say('Izendatzailea', 'Denominador', 'المقام'))}</Text>
+                <Text x={20} y={108} anchor="start" size={14} color={MUTED} weight={400}>{l(say('Izendatzailea', 'Denominador', 'المقام', 'Denominator'))}</Text>
                 {Array.from({ length: state.p }, (_, index) => token(TOKEN_LEFT + index * TOKEN_STEP, 134, MUSTARD, MUSTARD_TINT, index < cancelled, `d${index}`))}
                 {Array.from({ length: cancelled }, (_, index) => <line key={`c${index}`} x1={TOKEN_LEFT + index * TOKEN_STEP} x2={TOKEN_LEFT + index * TOKEN_STEP} y1={60} y2={122} stroke={INK} strokeWidth={1.5} strokeDasharray="3 3" opacity={0.55} />)}
                 <Text x={180} y={196} size={22} color={SECOND}>{`${base}${sup(net)}`}</Text>
@@ -115,20 +118,20 @@ export function SquareTool(props: LabToolProps) {
     const height = 62 + rows * unit + 12
     const controls = (
         <>
-            <Stepper label={l(say('Azalera n', 'Área n', 'المساحة n'))} value={n} min={SQUARE_LIMITS.n.min} max={SQUARE_LIMITS.n.max} onChange={(next) => setState((current) => setSquare(current, { n: next }))} language={props.language} />
-            <Stepper label={l(say('Blokearen aldea s', 'Lado del bloque s', 'ضلع الكتلة s'))} value={s} min={SQUARE_LIMITS.s.min} max={SQUARE_LIMITS.s.max} onChange={(next) => setState((current) => setSquare(current, { s: next }))} language={props.language} />
+            <Stepper label={l(say('Azalera n', 'Área n', 'المساحة n', 'Area n'))} value={n} min={SQUARE_LIMITS.n.min} max={SQUARE_LIMITS.n.max} onChange={(next) => setState((current) => setSquare(current, { n: next }))} language={props.language} />
+            <Stepper label={l(say('Blokearen aldea s', 'Lado del bloque s', 'ضلع الكتلة s', 'Side of the block s'))} value={s} min={SQUARE_LIMITS.s.min} max={SQUARE_LIMITS.s.max} onChange={(next) => setState((current) => setSquare(current, { s: next }))} language={props.language} />
         </>
     )
     const latex = fits ? (inside === 1 ? `\\sqrt{${n}}=\\sqrt{${s}^{2}}=${s}` : `\\sqrt{${n}}=\\sqrt{${s}^{2}\\cdot ${inside}}=${s === 1 ? '' : s}\\sqrt{${inside}}`) : `${s}^{2}=${s * s}\\ \\nmid\\ ${n}`
     const note = !fits
-        ? l(say(`${s}×${s} blokeek ez dute azalera betetzen: ${left} gelaxka geratzen dira.`, `Los bloques de ${s}×${s} no llenan el área: sobran ${left} cuadritos.`, `كتل ${s}×${s} لا تملأ المساحة: يتبقى ${left} مربعات صغيرة.`))
-        : squareSimplified(state) ? l(say('Ezin da gehiago atera: errokizunak ez du karratu perfekturik.', 'No se puede sacar más: el radicando ya no tiene cuadrados perfectos.', 'لا يمكن إخراج المزيد: لم يعد في ما تحت الجذر مربع كامل.'))
-            : l(say(`Oraindik bloke handiagoa sartzen da: ${maxSide(n)}×${maxSide(n)}.`, `Todavía cabe un bloque mayor: ${maxSide(n)}×${maxSide(n)}.`, `ما زالت تتسع كتلة أكبر: ${maxSide(n)}×${maxSide(n)}.`))
+        ? l(say(`${s}×${s} blokeek ez dute azalera betetzen: ${left} gelaxka geratzen dira.`, `Los bloques de ${s}×${s} no llenan el área: sobran ${left} cuadritos.`, `كتل ${s}×${s} لا تملأ المساحة: يتبقى ${left} مربعات صغيرة.`, `The blocks of ${s}×${s} do not fill the area: ${left} small squares are left over.`))
+        : squareSimplified(state) ? l(say('Ezin da gehiago atera: errokizunak ez du karratu perfekturik.', 'No se puede sacar más: el radicando ya no tiene cuadrados perfectos.', 'لا يمكن إخراج المزيد: لم يعد في ما تحت الجذر مربع كامل.', 'You cannot take out anything more: the radicand no longer has any perfect squares.'))
+            : l(say(`Oraindik bloke handiagoa sartzen da: ${maxSide(n)}×${maxSide(n)}.`, `Todavía cabe un bloque mayor: ${maxSide(n)}×${maxSide(n)}.`, `ما زالت تتسع كتلة أكبر: ${maxSide(n)}×${maxSide(n)}.`, `A larger block still fits: ${maxSide(n)}×${maxSide(n)}.`))
     return (
         <ToolFrame {...props} controls={controls} state={state} challenges={squareChallenges} extraChallenges={squareExtra} readout={<Readout latex={latex} note={note} />}>
-            <Board height={height} label={l(say(`${n} gelaxka, ${s}×${s} blokeetan`, `${n} cuadritos en bloques de ${s}×${s}`, `${n} مربعًا صغيرًا في كتل ${s}×${s}`))}>
+            <Board height={height} label={l(say(`${n} gelaxka, ${s}×${s} blokeetan`, `${n} cuadritos en bloques de ${s}×${s}`, `${n} مربعًا صغيرًا في كتل ${s}×${s}`, `${n} small squares in blocks of ${s}×${s}`))}>
                 <Text x={180} y={30} size={20} color={fits ? SECOND : MUTED}>{fits ? (inside === 1 ? `√${n} = ${s}` : `√${n} = ${s === 1 ? '' : s}√${inside}`) : `√${n}`}</Text>
-                <Text x={180} y={50} size={13} color={MUTED} weight={400}>{fits ? l(say(`${n} = ${s * s} · ${inside}`, `${n} = ${s * s} · ${inside}`, `${n} = ${s * s} · ${inside}`)) : `${n} = ${s * s} · ${blocks} + ${left}`}</Text>
+                <Text x={180} y={50} size={13} color={MUTED} weight={400}>{fits ? l(say(`${n} = ${s * s} · ${inside}`, `${n} = ${s * s} · ${inside}`, `${n} = ${s * s} · ${inside}`, `${n} = ${s * s} · ${inside}`)) : `${n} = ${s * s} · ${blocks} + ${left}`}</Text>
                 {Array.from({ length: items }, (_, item) => {
                     const partial = item === blocks
                     const x0 = 16 + (item % perRow) * unit
@@ -175,19 +178,19 @@ export function ScaleTool(props: LabToolProps) {
     const [first, second] = twoLines(l(object.name))
     const controls = (
         <>
-            <Stepper label={l(say('Objektua', 'Objeto', 'الجسم'))} value={state.object + 1} min={1} max={scaleObjects.length} format={(v) => `${v} / ${scaleObjects.length}`} onChange={(next) => setState((s) => setScale(s, { object: next - 1 }))} language={props.language} />
-            <Stepper label={l(say('Zure iragarpena: berretzailea', 'Tu predicción: el exponente', 'توقّعك: الأس'))} value={state.guess} min={SCALE_RANGE.min} max={SCALE_RANGE.max} format={(v) => `10${sup(v)} m`} onChange={(next) => setState((s) => setScale(s, { guess: next }))} language={props.language} />
-            <button type="button" className="fraction-v2-primary" disabled={state.revealed} onClick={() => setState((s) => revealScale(s))}>{l(say('Egiaztatu', 'Comprobar', 'تحقق'))}</button>
+            <Stepper label={l(say('Objektua', 'Objeto', 'الجسم', 'Object'))} value={state.object + 1} min={1} max={scaleObjects.length} format={(v) => `${v} / ${scaleObjects.length}`} onChange={(next) => setState((s) => setScale(s, { object: next - 1 }))} language={props.language} />
+            <Stepper label={l(say('Zure iragarpena: berretzailea', 'Tu predicción: el exponente', 'توقّعك: الأس', 'Your prediction: the exponent'))} value={state.guess} min={SCALE_RANGE.min} max={SCALE_RANGE.max} format={(v) => `10${sup(v)} m`} onChange={(next) => setState((s) => setScale(s, { guess: next }))} language={props.language} />
+            <button type="button" className="fraction-v2-primary" disabled={state.revealed} onClick={() => setState((s) => revealScale(s))}>{l(say('Egiaztatu', 'Comprobar', 'تحقق', 'Check'))}</button>
         </>
     )
-    const latex = state.revealed ? `${object.mantissa}\\cdot 10^{${object.exponent}}\\ \\text{m}` : `10^{${state.guess}}\\ \\text{m}`
-    const note = !state.revealed ? l(say('Iragarri berretzailea eta sakatu «Egiaztatu».', 'Predice el exponente y pulsa «Comprobar».', 'توقّع الأس ثم اضغط «تحقق».'))
-        : correct ? l(say('Ondo asmatu duzu!', '¡Acertaste!', 'أحسنت، لقد أصبت!'))
-            : state.guess < object.exponent ? l(say(`Txikiegia: benetako berretzailea ${object.exponent} da.`, `Te quedaste corto: el exponente real es ${object.exponent}.`, `أقل من اللازم: الأس الحقيقي ${object.exponent}.`)) : l(say(`Handiegia: benetako berretzailea ${object.exponent} da.`, `Te pasaste: el exponente real es ${object.exponent}.`, `أكبر من اللازم: الأس الحقيقي ${object.exponent}.`))
+    const latex = state.revealed ? `${object.mantissa.replace(',', '{,}')}\\cdot 10^{${object.exponent}}\\ \\text{m}` : `10^{${state.guess}}\\ \\text{m}`
+    const note = !state.revealed ? l(say('Iragarri berretzailea eta sakatu «Egiaztatu».', 'Predice el exponente y pulsa «Comprobar».', 'توقّع الأس ثم اضغط «تحقق».', 'Predict the exponent and press ‘Check’.'))
+        : correct ? l(say('Ondo asmatu duzu!', '¡Acertaste!', 'أحسنت، لقد أصبت!', 'You got it right!'))
+            : state.guess < object.exponent ? l(say(`Txikiegia: benetako berretzailea ${object.exponent} da.`, `Te quedaste corto: el exponente real es ${object.exponent}.`, `أقل من اللازم: الأس الحقيقي ${object.exponent}.`, `You were too low: the real exponent is ${object.exponent}.`)) : l(say(`Handiegia: benetako berretzailea ${object.exponent} da.`, `Te pasaste: el exponente real es ${object.exponent}.`, `أكبر من اللازم: الأس الحقيقي ${object.exponent}.`, `You were too high: the real exponent is ${object.exponent}.`))
     const ticks = Array.from({ length: SCALE_RANGE.max - SCALE_RANGE.min + 1 }, (_, index) => SCALE_RANGE.min + index)
     return (
         <ToolFrame {...props} controls={controls} state={state} challenges={scaleChallenges} extraChallenges={scaleExtra} readout={<Readout latex={latex} note={note} />}>
-            <Board height={190} label={l(say('10en berreturen zerrenda eta objektuaren tokia', 'La tira de potencias de 10 y el lugar del objeto', 'شريط قوى العدد 10 ومكان الجسم'))}>
+            <Board height={190} label={l(say('10en berreturen zerrenda eta objektuaren tokia', 'La tira de potencias de 10 y el lugar del objeto', 'شريط قوى العدد 10 ومكان الجسم', 'The strip of powers of 10 and the object\'s position'))}>
                 <Text x={180} y={26} size={16}>{first}</Text>
                 {second && <Text x={180} y={46} size={16}>{second}</Text>}
                 <line x1={AXIS.left} x2={AXIS.right} y1={120} y2={120} stroke={INK} strokeWidth={2.5} />
@@ -198,7 +201,7 @@ export function ScaleTool(props: LabToolProps) {
                     </g>
                 ))}
                 <path d={`M${axisX(state.guess)} 118 l-9 -18 h18 z`} fill={MUSTARD} stroke={INK} strokeWidth={1.8} />
-                <Text x={axisX(state.guess)} y={92} size={12} color={MUTED} weight={400}>{l(say('zu', 'tú', 'أنت'))}</Text>
+                <Text x={axisX(state.guess)} y={92} size={12} color={MUTED} weight={400}>{l(say('zu', 'tú', 'أنت', 'you'))}</Text>
                 {state.revealed && (
                     <g>
                         <circle cx={axisX(realExponent)} cy={120} r={8} fill={correct ? 'var(--success, #267b53)' : SECOND} stroke={CARD} strokeWidth={2.5} />
@@ -235,17 +238,17 @@ export function SpiralTool(props: LabToolProps) {
     const arcEnd = at(Math.sqrt(last.k), 0)
     const controls = (
         <>
-            <Stepper label={l(say('Errokizuna n', 'Radicando n', 'ما تحت الجذر n'))} value={state.n} min={SPIRAL_LIMITS.min} max={SPIRAL_LIMITS.max} onChange={(next) => setState(setSpiral(next))} language={props.language} />
-            <button type="button" className="fraction-v2-primary" disabled={playback.playing} onClick={playback.play}>▶ {l(say('Eraiki pausoz pauso', 'Construir paso a paso', 'ابنِ خطوة خطوة'))}</button>
+            <Stepper label={l(say('Errokizuna n', 'Radicando n', 'ما تحت الجذر n', 'Radicand n'))} value={state.n} min={SPIRAL_LIMITS.min} max={SPIRAL_LIMITS.max} onChange={(next) => setState(setSpiral(next))} language={props.language} />
+            <button type="button" className="fraction-v2-primary" disabled={playback.playing} onClick={playback.play}>▶ {l(say('Eraiki pausoz pauso', 'Construir paso a paso', 'ابنِ خطوة خطوة', 'Build step by step'))}</button>
         </>
     )
-    const latex = spiralExact(state) ? `\\sqrt{${state.n}}=${Math.round(root)}` : `\\sqrt{${state.n}}\\approx ${dec(root, props.language, 3).replace(',', '{,}')}`
+    const latex = spiralExact(state) ? `\\sqrt{${state.n}}=${Math.round(root)}` : `\\sqrt{${state.n}}\\approx ${texDec(root, props.language, 3)}`
     const note = spiralExact(state)
-        ? l(say('Karratu perfektua: hipotenusa zenbaki osoa da eta zuzeneko marka batean erortzen da.', 'Cuadrado perfecto: la hipotenusa es un número entero y cae justo en una marca de la recta.', 'مربع كامل: الوتر عدد صحيح ويقع تمامًا على علامة من المستقيم.'))
-        : l(say(`Hipotenusa √${state.n - 1} eta 1 aldeen artean dago; zuzenean bi marken artean erortzen da.`, `La hipotenusa de catetos √${state.n - 1} y 1 cae entre dos marcas de la recta.`, `وتر الضلعين √${state.n - 1} و1 يقع بين علامتين على المستقيم.`))
+        ? l(say('Karratu perfektua: hipotenusa zenbaki osoa da eta zuzeneko marka batean erortzen da.', 'Cuadrado perfecto: la hipotenusa es un número entero y cae justo en una marca de la recta.', 'مربع كامل: الوتر عدد صحيح ويقع تمامًا على علامة من المستقيم.', 'Perfect square: the hypotenuse is a whole number and lands exactly on a mark on the number line.'))
+        : l(say(`Hipotenusa √${state.n - 1} eta 1 aldeen artean dago; zuzenean bi marken artean erortzen da.`, `La hipotenusa de catetos √${state.n - 1} y 1 cae entre dos marcas de la recta.`, `وتر الضلعين √${state.n - 1} و1 يقع بين علامتين على المستقيم.`, `The hypotenuse with legs √${state.n - 1} and 1 falls between two marks on the number line.`))
     return (
         <ToolFrame {...props} controls={controls} state={state} challenges={spiralChallenges} extraChallenges={spiralExtra} readout={<Readout latex={latex} note={note} />}>
-            <Board height={272} label={l(say(`Erroen espirala √${state.n} arte`, `La espiral de raíces hasta √${state.n}`, `حلزون الجذور حتى √${state.n}`))}>
+            <Board height={272} label={l(say(`Erroen espirala √${state.n} arte`, `La espiral de raíces hasta √${state.n}`, `حلزون الجذور حتى √${state.n}`, `The spiral of roots up to √${state.n}`))}>
                 {points.slice(0, Math.max(0, shown - 0)).map((point, index) => {
                     const next = points[index + 1]
                     if (!next || index + 1 >= shown) return null

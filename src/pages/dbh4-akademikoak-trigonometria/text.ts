@@ -10,6 +10,7 @@ import type { LocalizedText, UnitLanguage } from '../../features/unit-v2/types.t
 const names: Record<UnitLanguage, [string, string]> = {
     eu: ['\\sin', '\\operatorname{tg}'],
     es: ['\\operatorname{sen}', '\\operatorname{tg}'],
+    en: ['\\sin', '\\tan'],
     ar: ['\\sin', '\\tan']
 }
 
@@ -17,11 +18,12 @@ const names: Record<UnitLanguage, [string, string]> = {
 export const localize = (language: UnitLanguage, text: string) =>
     text.replace(/\\sen(?![a-zA-Z])/g, names[language][0]).replace(/\\tg(?![a-zA-Z])/g, names[language][1])
 
-export const say = (eu: string, es: string, ar: string): LocalizedText => ({
+export const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({
     eu: localize('eu', eu),
     es: localize('es', es),
+    en: localize('en', en),
     ar: localize('ar', ar).replace(/\{,\}/g, '.')
 })
 
 /** The same formula in every language */
-export const same = (value: string): LocalizedText => say(value, value, value)
+export const same = (value: string): LocalizedText => say(value, value, value, value)

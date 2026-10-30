@@ -25,9 +25,9 @@ export type RationalsProblemMeta =
 
 export type RationalsRaceQuestion = RaceQuestion<RationalsRaceError> & { meta?: unknown; source: 'fractions' | 'decimals' | 'problems' }
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const math = (latex: string) => `$${latex}$`
-const same = (latex: string): LocalizedText => say(math(latex), math(latex), math(latex))
+const same = (latex: string): LocalizedText => say(math(latex), math(latex), math(latex), math(latex))
 
 interface Choice {
     latex: string
@@ -69,7 +69,7 @@ function fractionOfQuestion(random: Random, tier: Tier): RationalsRaceQuestion |
         valueChoice(fraction(amount * part.denominator, part.numerator), 'whole-inverted')
     ]))
     if (!options) return null
-    return problem('fraction-of', say(`Kalkulatu ${math(`${amount}`)} zenbakiaren ${math(toLatex(part))}.`, `Calcula ${math(toLatex(part))} de ${math(`${amount}`)}.`, `احسب ${math(toLatex(part))} من ${math(`${amount}`)}.`), options, fraction(value), `${amount}:${part.denominator}=${amount / part.denominator}\\ \\to\\ ${amount / part.denominator}\\cdot ${part.numerator}=${value}`, { kind: 'fraction-of', part, amount, value })
+    return problem('fraction-of', say(`Kalkulatu ${math(`${amount}`)} zenbakiaren ${math(toLatex(part))}.`, `Calcula ${math(toLatex(part))} de ${math(`${amount}`)}.`, `احسب ${math(toLatex(part))} من ${math(`${amount}`)}.`, `Work out ${math(toLatex(part))} of ${math(`${amount}`)}.`), options, fraction(value), `${amount}:${part.denominator}=${amount / part.denominator}\\ \\to\\ ${amount / part.denominator}\\cdot ${part.numerator}=${value}`, { kind: 'fraction-of', part, amount, value })
 }
 
 function remainingQuestion(random: Random): RationalsRaceQuestion | null {
@@ -86,7 +86,7 @@ function remainingQuestion(random: Random): RationalsRaceQuestion | null {
         valueChoice(multiply(first, second), 'calculation')
     ]).filter((item) => item.latex !== toLatex(left)))
     if (!options) return null
-    return problem('remaining', say(`Pastel baten ${math(toLatex(first))} jan da eta gero gainerakoaren ${math(toLatex(second))}. Pastelaren zer zati geratzen da?`, `Se come ${math(toLatex(first))} de un pastel y después ${math(toLatex(second))} de lo que queda. ¿Qué fracción del pastel queda?`, `أُكل ${math(toLatex(first))} من كعكة ثم ${math(toLatex(second))} مما بقي. ما الكسر الباقي من الكعكة؟`), options, left, `${toLatex(rest)}\\cdot ${toLatex(subtract(fraction(1), second))}=${toLatex(left)}`, { kind: 'remaining', first, second, left })
+    return problem('remaining', say(`Pastel baten ${math(toLatex(first))} jan da eta gero gainerakoaren ${math(toLatex(second))}. Pastelaren zer zati geratzen da?`, `Se come ${math(toLatex(first))} de un pastel y después ${math(toLatex(second))} de lo que queda. ¿Qué fracción del pastel queda?`, `أُكل ${math(toLatex(first))} من كعكة ثم ${math(toLatex(second))} مما بقي. ما الكسر الباقي من الكعكة؟`, `Someone eats ${math(toLatex(first))} of a cake and then ${math(toLatex(second))} of what is left. What fraction of the cake is left?`), options, left, `${toLatex(rest)}\\cdot ${toLatex(subtract(fraction(1), second))}=${toLatex(left)}`, { kind: 'remaining', first, second, left })
 }
 
 function wholeQuestion(random: Random, tier: Tier): RationalsRaceQuestion | null {
@@ -100,7 +100,7 @@ function wholeQuestion(random: Random, tier: Tier): RationalsRaceQuestion | null
         valueChoice(fraction(known + whole / part.denominator), 'calculation')
     ]))
     if (!options) return null
-    return problem('whole', say(`Bidaia baten ${math(toLatex(part))} ${math(`${known}`)} km dira. Zenbat km ditu bidaiak?`, `Los ${math(toLatex(part))} de un viaje son ${math(`${known}`)} km. ¿Cuántos km tiene el viaje?`, `${math(toLatex(part))} من رحلة يساوي ${math(`${known}`)} كم. كم كم طول الرحلة؟`), options, fraction(whole), `${known}:${part.numerator}=${whole / part.denominator}\\ \\to\\ ${whole / part.denominator}\\cdot ${part.denominator}=${whole}`, { kind: 'whole', part, known, whole })
+    return problem('whole', say(`Bidaia baten ${math(toLatex(part))} ${math(`${known}`)} km dira. Zenbat km ditu bidaiak?`, `Los ${math(toLatex(part))} de un viaje son ${math(`${known}`)} km. ¿Cuántos km tiene el viaje?`, `${math(toLatex(part))} من رحلة يساوي ${math(`${known}`)} كم. كم كم طول الرحلة؟`, `${math(toLatex(part))} of a journey is ${math(`${known}`)} km. How many km is the whole journey?`), options, fraction(whole), `${known}:${part.numerator}=${whole / part.denominator}\\ \\to\\ ${whole / part.denominator}\\cdot ${part.denominator}=${whole}`, { kind: 'whole', part, known, whole })
 }
 
 /* ---------- Public API ---------- */
@@ -153,7 +153,7 @@ export function rationalsParTime(circuit: number): number {
 export const rationalsRaceErrorTips: Record<RationalsRaceError, LocalizedText> = {
     ...realsRaceErrorTips,
     ...raceErrorTips,
-    'remaining-whole': say('"Gainerakoaren" zatikia ez da osoaren gainean kentzen: biderkatu geratzen den zatiaz.', 'La fracción "de lo que queda" no se resta del total: multiplica por la parte que queda.', 'كسر "من الباقي" لا يُطرح من الكل: اضرب في الجزء الباقي.'),
-    'part-instead': say('Begiratu zer galdetzen den: hartzen den zatia ala geratzen dena.', 'Mira qué se pregunta: la parte que se toma o la que queda.', 'انظر إلى المطلوب: الجزء المأخوذ أم الباقي.'),
-    'whole-inverted': say('Osoa aurkitzeko, zatitu zenbakitzaileaz eta biderkatu izendatzaileaz (ez alderantziz).', 'Para hallar el total, divide entre el numerador y multiplica por el denominador (no al revés).', 'لإيجاد الكل اقسم على البسط واضرب في المقام (لا العكس).')
+    'remaining-whole': say('"Gainerakoaren" zatikia ez da osoaren gainean kentzen: biderkatu geratzen den zatiaz.', 'La fracción "de lo que queda" no se resta del total: multiplica por la parte que queda.', 'كسر "من الباقي" لا يُطرح من الكل: اضرب في الجزء الباقي.', 'The fraction “of what is left” is not subtracted from the total: multiply by the part that is left.'),
+    'part-instead': say('Begiratu zer galdetzen den: hartzen den zatia ala geratzen dena.', 'Mira qué se pregunta: la parte que se toma o la que queda.', 'انظر إلى المطلوب: الجزء المأخوذ أم الباقي.', 'Look at what is being asked: the part taken or the part left.'),
+    'whole-inverted': say('Osoa aurkitzeko, zatitu zenbakitzaileaz eta biderkatu izendatzaileaz (ez alderantziz).', 'Para hallar el total, divide entre el numerador y multiplica por el denominador (no al revés).', 'لإيجاد الكل اقسم على البسط واضرب في المقام (لا العكس).', 'To find the total, divide by the numerator and multiply by the denominator (not the other way round).')
 }

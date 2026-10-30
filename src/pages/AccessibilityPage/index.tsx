@@ -104,7 +104,7 @@ export function AccessibilityPage() {
                                 <td>{t('accessibility.keyboard.shiftTab')}</td>
                             </tr>
                             <tr>
-                                <td><kbd>Enter</kbd> / <kbd>Espacio</kbd></td>
+                                <td><kbd>Enter</kbd> / <kbd>{t('accessibility.keyboard.spaceKey')}</kbd></td>
                                 <td>{t('accessibility.keyboard.enter')}</td>
                             </tr>
                             <tr>

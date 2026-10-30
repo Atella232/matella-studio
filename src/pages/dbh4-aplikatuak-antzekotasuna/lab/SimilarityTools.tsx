@@ -4,6 +4,7 @@ import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/Lab
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { toExactDecimal, toNumber, type FractionValue } from '../../../features/unit-v2/math/fraction'
+import { decimalSeparatorFor, thousandsSeparatorFor } from '../../../utils/numberFormat'
 import { boxVertices, fitCamera } from '../../dbh2-gorputzak-v2/geometry3d'
 import { Solid } from '../../dbh2-gorputzak-v2/solids'
 import {
@@ -71,7 +72,7 @@ import {
    are language-free; numbers in Arabic use the decimal point.
    ========================================================================== */
 
-type Text = { eu: string; es: string; ar: string }
+type Text = { eu: string; es: string; en: string; ar: string }
 type Point = [number, number]
 
 const INK = 'var(--ink, #1d2733)'
@@ -84,20 +85,28 @@ const MINT = '#d6eddf'
 const SKY = '#dde7f7'
 const ROSE = '#f6d9d2'
 
-const say = (eu: string, es: string, ar: string): Text => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): Text => ({ eu, es, en, ar })
 /** {,} in LaTeX becomes the point in Arabic */
 const localLatex = (language: string, latex: string) => (language === 'ar' ? latex.replace(/\{,\}/g, '.') : latex)
 const points = (list: Point[]) => list.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ')
 const lerp = ([ax, ay]: Point, [bx, by]: Point, t: number): Point => [ax + (bx - ax) * t, ay + (by - ay) * t]
-/** A number with the comma, the point in Arabic */
-const plain = (language: string, text: string) => (language === 'ar' ? text.replace(',', '.') : text)
-/** Thousands grouped with thin spaces: 1 200 000 */
-const grouped = (value: number) => String(value).replace(/\B(?=(\d{3})+$)/g, ' ')
+/** A number with the language's decimal mark: the point in Arabic and English, the comma in Spanish and Basque */
+const plain = (language: string, text: string) => (language === 'ar' ? text.replace(',', '.') : text.replace(',', decimalSeparatorFor(language)))
+/** The thousands mark of plain text: a comma in English and a space elsewhere (50 000, the format the checker reads) */
+const thousandsMark = (language: string) => (language === 'en' ? thousandsSeparatorFor(language) : ' ')
+/** Thousands grouped with thin spaces (or with the mark given): 1 200 000 */
+const grouped = (value: number, mark = ' ') => String(value).replace(/\B(?=(\d{3})+$)/g, mark)
 /** A decimal text with its whole part grouped in thousands from five digits: 200000 → 200 000 */
 const groupedText = (text: string) => {
     const [whole, decimals] = text.split(',')
     const spaced = whole.length > 4 ? whole.replace(/\B(?=(\d{3})+$)/g, ' ') : whole
     return decimals === undefined ? spaced : `${spaced},${decimals}`
+}
+/** A decimal text for plain words, grouped and written in the language: 200000,5 → 200.000,5 (Spanish), 200,000.5 (English) */
+const groupedPlain = (language: string, text: string) => {
+    const [whole, decimals] = text.split(',')
+    const spaced = whole.length > 4 ? whole.replace(/\B(?=(\d{3})+$)/g, thousandsMark(language)) : whole
+    return decimals === undefined ? spaced : `${spaced}${decimalSeparatorFor(language)}${decimals}`
 }
 
 /** An exact value as text with the comma, or rounded to hundredths with ≈ */
@@ -145,18 +154,18 @@ export function DivideTool(props: LabToolProps) {
     const cuts: Point[] = cumulative.map((reach) => lerp(A, B, reach / sum))
     const controls = (
         <>
-            <Stepper label={l(say('Luzera (cm)', 'Longitud (cm)', 'الطول (سم)'))} value={state.length} min={1} max={DIVIDE_LENGTH_MAX} onChange={(value) => setState((s) => setDivide(s, { length: value }))} language={props.language} />
-            <Stepper label={l(say('Zati kopurua', 'Número de partes', 'عدد الأجزاء'))} value={state.weights.length} min={DIVIDE_PARTS_MIN} max={DIVIDE_PARTS_MAX} onChange={(value) => setState((s) => setDivide(s, { count: value }))} language={props.language} />
+            <Stepper label={l(say('Luzera (cm)', 'Longitud (cm)', 'الطول (سم)', 'Length (cm)'))} value={state.length} min={1} max={DIVIDE_LENGTH_MAX} onChange={(value) => setState((s) => setDivide(s, { length: value }))} language={props.language} />
+            <Stepper label={l(say('Zati kopurua', 'Número de partes', 'عدد الأجزاء', 'Number of parts'))} value={state.weights.length} min={DIVIDE_PARTS_MIN} max={DIVIDE_PARTS_MAX} onChange={(value) => setState((s) => setDivide(s, { count: value }))} language={props.language} />
             {state.weights.map((weight, index) => (
-                <Stepper key={index} label={l(say(`${index + 1}. zatiaren pisua`, `Peso de la parte ${index + 1}`, `وزن الجزء ${index + 1}`))} value={weight} min={1} max={WEIGHT_MAX} onChange={(value) => setState((s) => setDivide(s, { weight: [index, value] }))} language={props.language} />
+                <Stepper key={index} label={l(say(`${index + 1}. zatiaren pisua`, `Peso de la parte ${index + 1}`, `وزن الجزء ${index + 1}`, `Weight of part ${index + 1}`))} value={weight} min={1} max={WEIGHT_MAX} onChange={(value) => setState((s) => setDivide(s, { weight: [index, value] }))} language={props.language} />
             ))}
         </>
     )
     const latex = `\\frac{${state.length}}{${sum}}\\cdot (${state.weights.join(',\\,')})\\to ${parts.map((part) => valueText(part).text.replace(',', '{,}')).join(';\\ ')}`
-    const note = l(say(`Zatiak, cm-tan: ${parts.map((part) => valueText(part).text).join('; ')}.`, `Las partes, en cm: ${parts.map((part) => valueText(part).text).join('; ')}.`, `الأجزاء بالسنتيمتر: ${parts.map((part) => valueText(part).text.replace(',', '.')).join('؛ ')}.`))
+    const note = l(say(`Zatiak, cm-tan: ${parts.map((part) => valueText(part).text).join('; ')}.`, `Las partes, en cm: ${parts.map((part) => valueText(part).text).join('; ')}.`, `الأجزاء بالسنتيمتر: ${parts.map((part) => valueText(part).text.replace(',', '.')).join('؛ ')}.`, `The parts, in cm: ${parts.map((part) => valueText(part).text.replace(',', '.')).join('; ')}.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={divideChallenges} state={state}>
-            <Board height={290} label={l(say('Zuzenkia Talesekin zatituta', 'El segmento dividido con Tales', 'القطعة مقسومة بطاليس'))}>
+            <Board height={290} label={l(say('Zuzenkia Talesekin zatituta', 'El segmento dividido con Tales', 'القطعة مقسومة بطاليس', 'The segment divided with Thales'))}>
                 <line x1={A[0]} y1={A[1]} x2={marks[marks.length - 1][0] + 20 * Math.cos(angle)} y2={marks[marks.length - 1][1] + 20 * Math.sin(angle)} stroke={MUTED} strokeWidth={1.6} />
                 <line x1={A[0]} y1={A[1]} x2={B[0]} y2={B[1]} stroke={INK} strokeWidth={3} />
                 {marks.map((mark, index) => (
@@ -197,10 +206,10 @@ export function ThalesTool(props: LabToolProps) {
     )
     const latex = `\\frac{B'C'}{${bc}}=\\frac{${cut}}{${ab}}\\to B'C'=\\frac{${bc}\\cdot ${cut}}{${ab}}${latexValue(small)}`
     const ratio = valueText(thalesRatio(state))
-    const note = l(say(`Arrazoia: ${ratio.exact ? '' : '≈ '}${ratio.text}. Triangelu txikiaren alde guztiak proportzio berean.`, `Razón: ${ratio.exact ? '' : '≈ '}${ratio.text}. Todos los lados del pequeño, en la misma proporción.`, `النسبة: ${ratio.exact ? '' : '≈ '}${ratio.text.replace(',', '.')}. كل أضلاع الصغير بالنسبة نفسها.`))
+    const note = l(say(`Arrazoia: ${ratio.exact ? '' : '≈ '}${ratio.text}. Triangelu txikiaren alde guztiak proportzio berean.`, `Razón: ${ratio.exact ? '' : '≈ '}${ratio.text}. Todos los lados del pequeño, en la misma proporción.`, `النسبة: ${ratio.exact ? '' : '≈ '}${ratio.text.replace(',', '.')}. كل أضلاع الصغير بالنسبة نفسها.`, `Ratio: ${ratio.exact ? '' : '≈ '}${ratio.text.replace(',', '.')}. All the sides of the small one are in the same proportion.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={thalesChallenges} state={state}>
-            <Board height={300} label={l(say('Bi triangelu Tales posizioan', 'Dos triángulos en posición de Tales', 'مثلثان في وضع طاليس'))}>
+            <Board height={300} label={l(say('Bi triangelu Tales posizioan', 'Dos triángulos en posición de Tales', 'مثلثان في وضع طاليس', 'Two triangles in Thales\' position'))}>
                 <polygon points={points([A, B, C])} fill={SKY} stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
                 <polygon points={points([A, B2, C2])} fill={SOFT} stroke={INK} strokeWidth={2} strokeLinejoin="round" />
                 <line x1={B2[0]} y1={B2[1]} x2={C2[0]} y2={C2[1]} stroke={SECOND} strokeWidth={3} />
@@ -229,18 +238,18 @@ export function RectanglesTool(props: LabToolProps) {
     const O: Point = [80, 268]
     const controls = (
         <>
-            <Segmented label={l(say('Jatorrizkoa', 'Original', 'الأصلي'))} value={String(state.original)} options={RECTANGLES.map(([x, y], index) => ({ value: String(index), label: `${x} × ${y}` }))} onChange={(value) => setState((s) => setRectangles(s, { original: Number(value) }))} />
-            <Stepper label={l(say('Zabalera', 'Ancho', 'العرض'))} value={width} min={1} max={COPY_MAX} onChange={(value) => setState((s) => setRectangles(s, { width: value }))} language={props.language} />
-            <Stepper label={l(say('Altuera', 'Alto', 'الارتفاع'))} value={height} min={1} max={COPY_MAX} onChange={(value) => setState((s) => setRectangles(s, { height: value }))} language={props.language} />
+            <Segmented label={l(say('Jatorrizkoa', 'Original', 'الأصلي', 'Original'))} value={String(state.original)} options={RECTANGLES.map(([x, y], index) => ({ value: String(index), label: `${x} × ${y}` }))} onChange={(value) => setState((s) => setRectangles(s, { original: Number(value) }))} />
+            <Stepper label={l(say('Zabalera', 'Ancho', 'العرض', 'Width'))} value={width} min={1} max={COPY_MAX} onChange={(value) => setState((s) => setRectangles(s, { width: value }))} language={props.language} />
+            <Stepper label={l(say('Altuera', 'Alto', 'الارتفاع', 'Height'))} value={height} min={1} max={COPY_MAX} onChange={(value) => setState((s) => setRectangles(s, { height: value }))} language={props.language} />
         </>
     )
     const latex = `\\frac{${width}}{${a}}${latexValue(rectanglesRatio(state))}\\qquad \\frac{${height}}{${b}}${latexValue({ numerator: height, denominator: b })}`
     const note = similar
-        ? l(say('Antzekoak dira: zatidurak berdinak eta diagonalak lerrokatuta.', 'Son semejantes: los cocientes son iguales y las diagonales coinciden.', 'متشابهان: النسبتان متساويتان والقطران متطابقان.'))
-        : l(say('Ez dira antzekoak: zatidurak desberdinak dira.', 'No son semejantes: los cocientes son distintos.', 'غير متشابهين: النسبتان مختلفتان.'))
+        ? l(say('Antzekoak dira: zatidurak berdinak eta diagonalak lerrokatuta.', 'Son semejantes: los cocientes son iguales y las diagonales coinciden.', 'متشابهان: النسبتان متساويتان والقطران متطابقان.', 'They are similar: the ratios are equal and the diagonals line up.'))
+        : l(say('Ez dira antzekoak: zatidurak desberdinak dira.', 'No son semejantes: los cocientes son distintos.', 'غير متشابهين: النسبتان مختلفتان.', 'They are not similar: the ratios are different.'))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={rectanglesChallenges} state={state}>
-            <Board height={300} label={l(say('Jatorrizko laukizuzena eta kopia, izkina berean', 'El rectángulo original y la copia, en la misma esquina', 'المستطيل الأصلي والنسخة في الزاوية نفسها'))}>
+            <Board height={300} label={l(say('Jatorrizko laukizuzena eta kopia, izkina berean', 'El rectángulo original y la copia, en la misma esquina', 'المستطيل الأصلي والنسخة في الزاوية نفسها', 'The original rectangle and the copy, in the same corner.'))}>
                 <rect x={O[0]} y={O[1] - height * k} width={width * k} height={height * k} fill={similar ? MINT : ROSE} fillOpacity={0.7} stroke={INK} strokeWidth={2.2} />
                 <rect x={O[0]} y={O[1] - b * k} width={a * k} height={b * k} fill={SOFT} stroke={INK} strokeWidth={2.2} />
                 <line x1={O[0]} y1={O[1]} x2={O[0] + width * k} y2={O[1] - height * k} stroke={similar ? GREEN : SECOND} strokeWidth={2.4} strokeDasharray="7 5" />
@@ -270,14 +279,14 @@ export function HomothetyTool(props: LabToolProps) {
     const perimeter = homothetyPerimeter(state)
     const area = homothetyArea(state)
     const controls = (
-        <Stepper label={l(say('Arrazoia r', 'Razón r', 'النسبة r'))} value={r} min={HOMOTHETY_MIN} max={HOMOTHETY_MAX} step={0.5} format={(value) => plain(props.language, String(value).replace('.', ','))} onChange={(value) => setState((s) => setHomothety(s, { r: value }))} language={props.language} />
+        <Stepper label={l(say('Arrazoia r', 'Razón r', 'النسبة r', 'Scale factor r'))} value={r} min={HOMOTHETY_MIN} max={HOMOTHETY_MAX} step={0.5} format={(value) => plain(props.language, String(value).replace('.', ','))} onChange={(value) => setState((s) => setHomothety(s, { r: value }))} language={props.language} />
     )
     const rTex = String(r).replace('.', '{,}')
     const latex = `P'=12\\cdot ${rTex}${latexValue(perimeter)}\\qquad A'=6\\cdot ${rTex}^{2}${latexValue(area)}`
-    const note = l(say('Jatorrizko triangelua: aldeak 3, 4 eta 5; perimetroa 12 eta azalera 6.', 'Triángulo original: lados 3, 4 y 5; perímetro 12 y área 6.', 'المثلث الأصلي: الأضلاع 3 و4 و5؛ المحيط 12 والمساحة 6.'))
+    const note = l(say('Jatorrizko triangelua: aldeak 3, 4 eta 5; perimetroa 12 eta azalera 6.', 'Triángulo original: lados 3, 4 y 5; perímetro 12 y área 6.', 'المثلث الأصلي: الأضلاع 3 و4 و5؛ المحيط 12 والمساحة 6.', 'Original triangle: sides 3, 4 and 5; perimeter 12 and area 6.'))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={homothetyChallenges} state={state}>
-            <Board height={300} label={l(say('O zentroko homotezia', 'Homotecia de centro O', 'تحاكٍ مركزه O'))}>
+            <Board height={300} label={l(say('O zentroko homotezia', 'Homotecia de centro O', 'تحاكٍ مركزه O', 'Homothety with centre O'))}>
                 {base.map((p, index) => <line key={index} x1={O[0]} y1={O[1]} x2={at(p, Math.max(r, 1) * 1.06)[0]} y2={at(p, Math.max(r, 1) * 1.06)[1]} stroke={MUTED} strokeWidth={1.2} strokeDasharray="5 4" />)}
                 <polygon points={points(original)} fill={SOFT} stroke={INK} strokeWidth={2} strokeLinejoin="round" />
                 <polygon points={points(image)} fill={MINT} fillOpacity={0.75} stroke={STAGE} strokeWidth={2.4} strokeLinejoin="round" />
@@ -292,8 +301,8 @@ export function HomothetyTool(props: LabToolProps) {
 /* ---------- 5. Growing a square or a cube ---------- */
 
 const shapeNames: Record<GrowthShape, Text> = {
-    square: say('Karratua', 'Cuadrado', 'مربع'),
-    cube: say('Kuboa', 'Cubo', 'مكعب')
+    square: say('Karratua', 'Cuadrado', 'مربع', 'Square'),
+    cube: say('Kuboa', 'Cubo', 'مكعب', 'Cube')
 }
 
 export function GrowthTool(props: LabToolProps) {
@@ -304,8 +313,8 @@ export function GrowthTool(props: LabToolProps) {
     const unit = 260 / GROWTH_MAX / 1.1
     const controls = (
         <>
-            <Segmented label={l(say('Irudia', 'Figura', 'الشكل'))} value={shape} options={(['square', 'cube'] as GrowthShape[]).map((value) => ({ value, label: l(shapeNames[value]) }))} onChange={(value) => setState((s) => setGrowth(s, { shape: value }))} />
-            <Stepper label={l(say('Arrazoia r', 'Razón r', 'النسبة r'))} value={r} min={0.5} max={GROWTH_MAX} step={0.5} format={(value) => plain(props.language, String(value).replace('.', ','))} onChange={(value) => setState((s) => setGrowth(s, { r: value }))} language={props.language} />
+            <Segmented label={l(say('Irudia', 'Figura', 'الشكل', 'Shape'))} value={shape} options={(['square', 'cube'] as GrowthShape[]).map((value) => ({ value, label: l(shapeNames[value]) }))} onChange={(value) => setState((s) => setGrowth(s, { shape: value }))} />
+            <Stepper label={l(say('Arrazoia r', 'Razón r', 'النسبة r', 'Scale factor r'))} value={r} min={0.5} max={GROWTH_MAX} step={0.5} format={(value) => plain(props.language, String(value).replace('.', ','))} onChange={(value) => setState((s) => setGrowth(s, { r: value }))} language={props.language} />
         </>
     )
     const rTex = String(r).replace('.', '{,}')
@@ -313,8 +322,8 @@ export function GrowthTool(props: LabToolProps) {
         ? `r=${rTex}\\qquad r^{2}${latexValue(factors.area)}`
         : `r=${rTex}\\qquad r^{2}${latexValue(factors.area)}\\qquad r^{3}${latexValue(factors.volume)}`
     const note = shape === 'square'
-        ? l(say(`Aldea ${valueText(factors.length).text} bider, azalera ${valueText(factors.area).text} bider.`, `El lado, ${valueText(factors.length).text} veces; el área, ${valueText(factors.area).text} veces.`, `الضلع ${valueText(factors.length).text.replace(',', '.')} مرة؛ والمساحة ${valueText(factors.area).text.replace(',', '.')} مرة.`))
-        : l(say(`Ertza ${valueText(factors.length).text} bider, bolumena ${valueText(factors.volume).text} bider.`, `La arista, ${valueText(factors.length).text} veces; el volumen, ${valueText(factors.volume).text} veces.`, `الحرف ${valueText(factors.length).text.replace(',', '.')} مرة؛ والحجم ${valueText(factors.volume).text.replace(',', '.')} مرة.`))
+        ? l(say(`Aldea ${valueText(factors.length).text} bider, azalera ${valueText(factors.area).text} bider.`, `El lado, ${valueText(factors.length).text} veces; el área, ${valueText(factors.area).text} veces.`, `الضلع ${valueText(factors.length).text.replace(',', '.')} مرة؛ والمساحة ${valueText(factors.area).text.replace(',', '.')} مرة.`, `The side, ${valueText(factors.length).text.replace(',', '.')} times; the area, ${valueText(factors.area).text.replace(',', '.')} times.`))
+        : l(say(`Ertza ${valueText(factors.length).text} bider, bolumena ${valueText(factors.volume).text} bider.`, `La arista, ${valueText(factors.length).text} veces; el volumen, ${valueText(factors.volume).text} veces.`, `الحرف ${valueText(factors.length).text.replace(',', '.')} مرة؛ والحجم ${valueText(factors.volume).text.replace(',', '.')} مرة.`, `The edge, ${valueText(factors.length).text.replace(',', '.')} times; the volume, ${valueText(factors.volume).text.replace(',', '.')} times.`))
     let drawing: ReactNode
     if (shape === 'square') {
         const side = r * unit
@@ -358,25 +367,25 @@ export function MapTool(props: LabToolProps) {
     const Q: Point = [60 + cm * 26, 190 - cm * 4]
     const controls = (
         <>
-            <Segmented label={l(say('Eskala', 'Escala', 'المقياس'))} value={String(scale)} options={MAP_SCALES.map((value) => ({ value: String(value), label: `1:${grouped(value)}` }))} onChange={(value) => setState((s) => setMap(s, { scale: Number(value) }))} />
-            <Stepper label={l(say('Mapan (cm)', 'En el mapa (cm)', 'في الخريطة (سم)'))} value={cm} min={1} max={MAP_DISTANCE_MAX} onChange={(value) => setState((s) => setMap(s, { cm: value }))} language={props.language} />
+            <Segmented label={l(say('Eskala', 'Escala', 'المقياس', 'Scale'))} value={String(scale)} options={MAP_SCALES.map((value) => ({ value: String(value), label: `1:${grouped(value, thousandsMark(props.language))}` }))} onChange={(value) => setState((s) => setMap(s, { scale: Number(value) }))} />
+            <Stepper label={l(say('Mapan (cm)', 'En el mapa (cm)', 'في الخريطة (سم)', 'On the map (cm)'))} value={cm} min={1} max={MAP_DISTANCE_MAX} onChange={(value) => setState((s) => setMap(s, { cm: value }))} language={props.language} />
         </>
     )
     const km = valueText(real.km)
     const m = valueText(real.m)
     const mText = groupedText(m.text)
     const latex = `${cm}\\cdot ${grouped(scale).replace(/ /g, '\\,')}=${grouped(real.cm).replace(/ /g, '\\,')}\\ \\text{cm}${m.exact ? '=' : '\\approx '}${mText.replace(',', '{,}').replace(/ /g, '\\,')}\\ \\text{m}`
-    const note = l(say(`Errealitatean: ${groupedText(km.text)} km.`, `En la realidad: ${groupedText(km.text)} km.`, `في الواقع: ${groupedText(km.text).replace(',', '.')} كم.`))
+    const note = l(say(`Errealitatean: ${groupedPlain('eu', km.text)} km.`, `En la realidad: ${groupedPlain('es', km.text)} km.`, `في الواقع: ${groupedPlain('ar', km.text).replace(',', '.')} كم.`, `In real life: ${groupedPlain('en', km.text)} km.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={mapChallenges} state={state}>
-            <Board height={260} label={l(say('Mapa eta bi puntuen arteko distantzia', 'El mapa y la distancia entre dos puntos', 'الخريطة والمسافة بين نقطتين'))}>
+            <Board height={260} label={l(say('Mapa eta bi puntuen arteko distantzia', 'El mapa y la distancia entre dos puntos', 'الخريطة والمسافة بين نقطتين', 'The map and the distance between two points'))}>
                 <rect x={30} y={40} width={580} height={190} rx={10} fill={MINT} stroke={INK} strokeWidth={2} />
                 <path d="M30 150 C 150 110, 260 210, 400 160 S 560 110, 610 130" fill="none" stroke={STAGE} strokeWidth={6} strokeOpacity={0.4} />
                 <line x1={P[0]} y1={P[1]} x2={Q[0]} y2={Q[1]} stroke={SECOND} strokeWidth={2.6} strokeDasharray="7 5" />
                 <circle cx={P[0]} cy={P[1]} r={6} fill={SECOND} />
                 <circle cx={Q[0]} cy={Q[1]} r={6} fill={SECOND} />
                 <Tag x={(P[0] + Q[0]) / 2} y={(P[1] + Q[1]) / 2 - 14} color={SECOND}>{`${cm} cm`}</Tag>
-                <Tag x={590} y={70} anchor="end" size={16}>{`1 : ${grouped(scale)}`}</Tag>
+                <Tag x={590} y={70} anchor="end" size={16}>{`1 : ${grouped(scale, thousandsMark(props.language))}`}</Tag>
                 <Tag x={590} y={215} anchor="end" size={18} color={STAGE}>{`${km.exact ? '' : '≈ '}${plain(props.language, km.text)} km`}</Tag>
             </Board>
         </ToolFrame>
@@ -398,17 +407,17 @@ export function ShadowsTool(props: LabToolProps) {
     const half = (value: number) => plain(props.language, String(value).replace('.', ','))
     const controls = (
         <>
-            <Stepper label={l(say('Makila (m)', 'Palo (m)', 'العصا (م)'))} value={stick} min={0.5} max={STICK_MAX} step={0.5} format={half} onChange={(value) => setState((s) => setShadows(s, { stick: value }))} language={props.language} />
-            <Stepper label={l(say('Makilaren itzala (m)', 'Sombra del palo (m)', 'ظل العصا (م)'))} value={stickShadow} min={0.5} max={STICK_SHADOW_MAX} step={0.5} format={half} onChange={(value) => setState((s) => setShadows(s, { stickShadow: value }))} language={props.language} />
-            <Stepper label={l(say('Zuhaitzaren itzala (m)', 'Sombra del árbol (m)', 'ظل الشجرة (م)'))} value={treeShadow} min={1} max={TREE_SHADOW_MAX} onChange={(value) => setState((s) => setShadows(s, { treeShadow: value }))} language={props.language} />
+            <Stepper label={l(say('Makila (m)', 'Palo (m)', 'العصا (م)', 'Stick (m)'))} value={stick} min={0.5} max={STICK_MAX} step={0.5} format={half} onChange={(value) => setState((s) => setShadows(s, { stick: value }))} language={props.language} />
+            <Stepper label={l(say('Makilaren itzala (m)', 'Sombra del palo (m)', 'ظل العصا (م)', 'Shadow of the stick (m)'))} value={stickShadow} min={0.5} max={STICK_SHADOW_MAX} step={0.5} format={half} onChange={(value) => setState((s) => setShadows(s, { stickShadow: value }))} language={props.language} />
+            <Stepper label={l(say('Zuhaitzaren itzala (m)', 'Sombra del árbol (m)', 'ظل الشجرة (م)', 'Shadow of the tree (m)'))} value={treeShadow} min={1} max={TREE_SHADOW_MAX} onChange={(value) => setState((s) => setShadows(s, { treeShadow: value }))} language={props.language} />
         </>
     )
     const latex = `x=\\frac{${String(stick).replace('.', '{,}')}\\cdot ${treeShadow}}{${String(stickShadow).replace('.', '{,}')}}${latexValue(tree)}`
     const shown = valueText(tree)
-    const note = l(say(`Zuhaitzak ${shown.exact ? '' : '≈ '}${shown.text} m neurtzen ditu.`, `El árbol mide ${shown.exact ? '' : '≈ '}${shown.text} m.`, `طول الشجرة ${shown.exact ? '' : '≈ '}${shown.text.replace(',', '.')} م.`))
+    const note = l(say(`Zuhaitzak ${shown.exact ? '' : '≈ '}${shown.text} m neurtzen ditu.`, `El árbol mide ${shown.exact ? '' : '≈ '}${shown.text} m.`, `طول الشجرة ${shown.exact ? '' : '≈ '}${shown.text.replace(',', '.')} م.`, `The tree is ${shown.exact ? '' : '≈ '}${shown.text.replace(',', '.')} m tall.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={shadowsChallenges} state={state}>
-            <Board height={300} label={l(say('Makila eta zuhaitza, beren itzalekin', 'El palo y el árbol con sus sombras', 'العصا والشجرة مع ظليهما'))}>
+            <Board height={300} label={l(say('Makila eta zuhaitza, beren itzalekin', 'El palo y el árbol con sus sombras', 'العصا والشجرة مع ظليهما', 'The stick and the tree with their shadows'))}>
                 <line x1={20} y1={ground} x2={620} y2={ground} stroke={MUTED} strokeWidth={2} />
                 <line x1={60} y1={ground} x2={60} y2={ground - stick * stickK} stroke={INK} strokeWidth={5} strokeLinecap="round" />
                 <line x1={60} y1={ground} x2={60 + stickShadow * stickK} y2={ground} stroke={MUTED} strokeWidth={8} />

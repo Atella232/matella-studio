@@ -3,6 +3,7 @@ import { GameTopbar, LevelPicker, ResultPanel } from '../../../features/unit-v2/
 import { useGameText } from '../../../features/unit-v2/games/gameHooks'
 import type { GameProps } from '../../../features/unit-v2/games/GamesHub'
 import { createRandom, randomSeed } from '../../../features/unit-v2/games/random'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import { createMeanRound, MEAN_ROUNDS, meanLevels, meanOfData, meanPoints, meanStars } from './boards'
 import { StatisticsGameArt } from './GameArt'
 import { statisticsGames } from './info'
@@ -10,7 +11,7 @@ import { statisticsGames } from './info'
 type Phase = 'pick' | 'playing' | 'finished'
 
 /** A value with two decimals at most, comma in Basque and Spanish */
-const shown = (value: number, language: string) => { const text = String(Math.round(value * 100) / 100); return language === 'ar' ? text : text.replace('.', ',') }
+const shown = (value: number, language: string) => { const text = String(Math.round(value * 100) / 100); return language === 'ar' ? text : text.replace('.', decimalSeparatorFor(language)) }
 
 const game = statisticsGames.find((item) => item.id === 'mean')!
 
@@ -95,12 +96,12 @@ export function MeanGame({ language, records, onResult, onExit }: GameProps) {
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${record.score} ${l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${record.score} ${l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: `${MEAN_ROUNDS} datu-multzo. Idatzi haien batez bestekoa zenbat den uste duzun, kalkulatu gabe.`, es: `${MEAN_ROUNDS} conjuntos de datos. Escribe cuánto crees que vale su media, sin calcularla.`, ar: `${MEAN_ROUNDS} مجموعات بيانات. اكتب كم تظن متوسطها دون حساب.` })}</li>
-                        <li>{l({ eu: 'Zenbat eta hurbilago, orduan eta puntu gehiago (3 gehienez).', es: 'Cuanto más cerca, más puntos (3 como máximo).', ar: 'كلما اقتربت زادت النقاط (3 على الأكثر).' })}</li>
-                        <li>{l({ eu: 'Batez bestekoa oreka-puntua da: datuak bi aldeetan orekatzen dira.', es: 'La media es el punto de equilibrio: los datos se compensan a los dos lados.', ar: 'المتوسط نقطة التوازن: تتعادل البيانات على الجانبين.' })}</li>
+                        <li>{l({ eu: `${MEAN_ROUNDS} datu-multzo. Idatzi haien batez bestekoa zenbat den uste duzun, kalkulatu gabe.`, es: `${MEAN_ROUNDS} conjuntos de datos. Escribe cuánto crees que vale su media, sin calcularla.`, en: `${MEAN_ROUNDS} data sets. Write what you think their mean is, without calculating it.`, ar: `${MEAN_ROUNDS} مجموعات بيانات. اكتب كم تظن متوسطها دون حساب.` })}</li>
+                        <li>{l({ eu: 'Zenbat eta hurbilago, orduan eta puntu gehiago (3 gehienez).', es: 'Cuanto más cerca, más puntos (3 como máximo).', en: 'The closer you are, the more points you get (3 at most).', ar: 'كلما اقتربت زادت النقاط (3 على الأكثر).' })}</li>
+                        <li>{l({ eu: 'Batez bestekoa oreka-puntua da: datuak bi aldeetan orekatzen dira.', es: 'La media es el punto de equilibrio: los datos se compensan a los dos lados.', en: 'The mean is the balance point: the values balance out on both sides.', ar: 'المتوسط نقطة التوازن: تتعادل البيانات على الجانبين.' })}</li>
                     </ul>
                 )}
             />
@@ -111,7 +112,7 @@ export function MeanGame({ language, records, onResult, onExit }: GameProps) {
         <div className="statistics-mean-game" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span>{Math.min(index + 1, MEAN_ROUNDS)} / {MEAN_ROUNDS}</span>
-                <span>{total} {l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}</span>
+                <span>{total} {l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}</span>
             </GameTopbar>
 
             {phase === 'playing' && values[index] !== undefined && (
@@ -119,17 +120,17 @@ export function MeanGame({ language, records, onResult, onExit }: GameProps) {
                     <DataDrawing values={values[index]} max={meanLevels[level].max} guess={last?.guess ?? null} />
                     {!last && (
                         <label>
-                            <input value={input} onChange={(event) => setInput(event.target.value)} inputMode="decimal" autoFocus aria-label={l({ eu: 'Zure estimazioa', es: 'Tu estimación', ar: 'تقديرك' })} dir="ltr" />
+                            <input value={input} onChange={(event) => setInput(event.target.value)} inputMode="decimal" autoFocus aria-label={l({ eu: 'Zure estimazioa', es: 'Tu estimación', en: 'Your estimate', ar: 'تقديرك' })} dir="ltr" />
                         </label>
                     )}
                     <div aria-live="polite">
                         {last && (
                             <div className={`fraction-v2-feedback ${last.points >= 2 ? 'success' : 'error'}`}>
-                                {l({ eu: `x̄ = ${shown(last.mean, 'eu')}; zuk ${shown(last.guess, 'eu')} esan duzu: +${last.points} puntu.`, es: `x̄ = ${shown(last.mean, 'es')}; has dicho ${shown(last.guess, 'es')}: +${last.points} puntos.`, ar: `x̄ = ${shown(last.mean, 'ar')}؛ قلت ${shown(last.guess, 'ar')}: +${last.points} نقطة.` })}
+                                {l({ eu: `x̄ = ${shown(last.mean, 'eu')}; zuk ${shown(last.guess, 'eu')} esan duzu: +${last.points} puntu.`, es: `x̄ = ${shown(last.mean, 'es')}; has dicho ${shown(last.guess, 'es')}: +${last.points} puntos.`, en: `x̄ = ${shown(last.mean, 'en')}; you said ${shown(last.guess, 'en')}: +${last.points} points.`, ar: `x̄ = ${shown(last.mean, 'ar')}؛ قلت ${shown(last.guess, 'ar')}: +${last.points} نقطة.` })}
                             </div>
                         )}
                     </div>
-                    <button type="submit" className="fraction-v2-primary">{last ? l({ eu: 'Hurrengoa', es: 'Siguiente', ar: 'التالي' }) : l({ eu: 'Egiaztatu', es: 'Comprobar', ar: 'تحقّق' })}</button>
+                    <button type="submit" className="fraction-v2-primary">{last ? l({ eu: 'Hurrengoa', es: 'Siguiente', en: 'Next', ar: 'التالي' }) : l({ eu: 'Egiaztatu', es: 'Comprobar', en: 'Check', ar: 'تحقّق' })}</button>
                 </form>
             )}
 
@@ -137,9 +138,9 @@ export function MeanGame({ language, records, onResult, onExit }: GameProps) {
                 <ResultPanel
                     language={language}
                     stars={meanStars(total)}
-                    title={l({ eu: `${total} puntu`, es: `${total} puntos`, ar: `${total} نقطة` })}
-                    subtitle={l({ eu: '3 izar: 20 puntu edo gehiago · 2 izar: 13', es: '3 estrellas: 20 puntos o más · 2: 13', ar: '3 نجوم: 20 نقطة أو أكثر · 2: 13' })}
-                    stats={[{ label: l({ eu: 'Puntuak', es: 'Puntos', ar: 'النقاط' }), value: `${total} / ${MEAN_ROUNDS * 3}` }]}
+                    title={l({ eu: `${total} puntu`, es: `${total} puntos`, en: `${total} points`, ar: `${total} نقطة` })}
+                    subtitle={l({ eu: '3 izar: 20 puntu edo gehiago · 2 izar: 13', es: '3 estrellas: 20 puntos o más · 2: 13', en: '3 stars: 20 points or more · 2: 13', ar: '3 نجوم: 20 نقطة أو أكثر · 2: 13' })}
+                    stats={[{ label: l({ eu: 'Puntuak', es: 'Puntos', en: 'Points', ar: 'النقاط' }), value: `${total} / ${MEAN_ROUNDS * 3}` }]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}
                     onLevels={() => setPhase('pick')}

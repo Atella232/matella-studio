@@ -35,7 +35,7 @@ export function StatisticsLaboratory(props: {
             tools={statisticsLabTools}
             stages={statisticsStages}
             components={toolComponents}
-            title={{ eu: 'Neurtu, konparatu eta atera', es: 'Mide, compara y extrae', ar: 'قِس وقارن واسحب' }}
+            title={{ eu: 'Neurtu, konparatu eta atera', es: 'Mide, compara y extrae', en: 'Measure, compare and extract', ar: 'قِس وقارن واسحب' }}
         />
     )
 }

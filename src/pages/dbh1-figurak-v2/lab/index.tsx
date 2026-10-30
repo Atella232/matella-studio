@@ -32,7 +32,7 @@ export function FiguresLaboratory(props: {
             tools={figuresLabTools}
             stages={figuresStages}
             components={toolComponents}
-            title={{ eu: 'Mugitu, eraiki eta neurtu', es: 'Mueve, construye y mide', ar: 'حرّك وأنشئ وقِس' }}
+            title={{ eu: 'Mugitu, eraiki eta neurtu', es: 'Mueve, construye y mide', en: 'Move, build and measure.', ar: 'حرّك وأنشئ وقِس' }}
         />
     )
 }

@@ -45,8 +45,8 @@ const STAGE = 'var(--stage, #2f6fdb)'
 const SECOND = 'var(--second, #c4432a)'
 const GREEN = 'var(--success, #267b53)'
 
-type Text = { eu: string; es: string; ar: string }
-const say = (eu: string, es: string, ar: string): Text => ({ eu, es, ar })
+type Text = { eu: string; es: string; en: string; ar: string }
+const say = (eu: string, es: string, ar: string, en: string): Text => ({ eu, es, en, ar })
 /** Negative numbers in the drawings with the true minus sign */
 const signed = (value: number) => (value < 0 ? `−${-value}` : String(value))
 
@@ -83,12 +83,12 @@ export function RadicalTool(props: LabToolProps) {
     const checked = state.checked[state.equation] ?? []
     const controls = (
         <>
-            <Segmented label={l(say('Ekuazioa', 'Ecuación', 'المعادلة'))} value={String(state.equation)} options={radicalEquations.map((_, index) => ({ value: String(index), label: `E${index + 1}` }))} onChange={(value) => setState((s) => chooseRadical(s, Number(value)))} />
-            <button type="button" className="fraction-v2-secondary" disabled={squared} onClick={() => setState(squareRadical)}>{l(say('Karratura jaso', 'Elevar al cuadrado', 'ربّع الطرفين'))}</button>
+            <Segmented label={l(say('Ekuazioa', 'Ecuación', 'المعادلة', 'Equation'))} value={String(state.equation)} options={radicalEquations.map((_, index) => ({ value: String(index), label: `E${index + 1}` }))} onChange={(value) => setState((s) => chooseRadical(s, Number(value)))} />
+            <button type="button" className="fraction-v2-secondary" disabled={squared} onClick={() => setState(squareRadical)}>{l(say('Karratura jaso', 'Elevar al cuadrado', 'ربّع الطرفين', 'Square both sides'))}</button>
             {squared && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }} role="group" aria-label={l(say('Hautagaiak', 'Candidatos', 'المرشحون'))}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }} role="group" aria-label={l(say('Hautagaiak', 'Candidatos', 'المرشحون', 'Candidates'))}>
                     {candidates.map((x) => (
-                        <button key={x} type="button" className="fraction-v2-secondary" disabled={checked.includes(x)} onClick={() => setState((s) => checkCandidate(s, x))}>{l(say(`Egiaztatu x = ${signed(x)}`, `Comprobar x = ${signed(x)}`, `تحقّق من x = ${signed(x)}`))}</button>
+                        <button key={x} type="button" className="fraction-v2-secondary" disabled={checked.includes(x)} onClick={() => setState((s) => checkCandidate(s, x))}>{l(say(`Egiaztatu x = ${signed(x)}`, `Comprobar x = ${signed(x)}`, `تحقّق من x = ${signed(x)}`, `Check x = ${signed(x)}`))}</button>
                     ))}
                 </div>
             )}
@@ -97,15 +97,15 @@ export function RadicalTool(props: LabToolProps) {
     const valid = checked.filter((x) => isTrueSolution(equation, x))
     const latex = squared ? `${radicalLatex(equation)}\\ \\to\\ ${quadraticLatex(squaredQuadratic(equation))}` : radicalLatex(equation)
     const note = !squared
-        ? l(say('Erroa bakarrik dago: jaso bi atalak karratura.', 'La raíz está sola: eleva los dos miembros al cuadrado.', 'الجذر وحده: ربّع الطرفين.'))
+        ? l(say('Erroa bakarrik dago: jaso bi atalak karratura.', 'La raíz está sola: eleva los dos miembros al cuadrado.', 'الجذر وحده: ربّع الطرفين.', 'The root is on its own: square both sides.'))
         : checked.length < candidates.length
-            ? l(say(`Hautagaiak: ${candidates.map(signed).join(' eta ')}. Egiaztatu bakoitza hasierako ekuazioan.`, `Candidatos: ${candidates.map(signed).join(' y ')}. Comprueba cada uno en la ecuación inicial.`, `المرشحون: ${candidates.map(signed).join(' و')}. تحقّق من كل واحد في المعادلة الأصلية.`))
+            ? l(say(`Hautagaiak: ${candidates.map(signed).join(' eta ')}. Egiaztatu bakoitza hasierako ekuazioan.`, `Candidatos: ${candidates.map(signed).join(' y ')}. Comprueba cada uno en la ecuación inicial.`, `المرشحون: ${candidates.map(signed).join(' و')}. تحقّق من كل واحد في المعادلة الأصلية.`, `Candidates: ${candidates.map(signed).join(' y ')}. Check each one in the original equation.`))
             : valid.length === 0
-                ? l(say('Ez dago ebazpenik.', 'No hay solución.', 'لا حل.'))
-                : l(say(`Ebazpena: ${valid.map((x) => `x = ${signed(x)}`).join(', ')}.`, `Solución: ${valid.map((x) => `x = ${signed(x)}`).join(', ')}.`, `الحل: ${valid.map((x) => `x = ${signed(x)}`).join('، ')}.`))
+                ? l(say('Ez dago ebazpenik.', 'No hay solución.', 'لا حل.', 'There is no solution.'))
+                : l(say(`Ebazpena: ${valid.map((x) => `x = ${signed(x)}`).join(', ')}.`, `Solución: ${valid.map((x) => `x = ${signed(x)}`).join(', ')}.`, `الحل: ${valid.map((x) => `x = ${signed(x)}`).join('، ')}.`, `Solution: ${valid.map((x) => `x = ${signed(x)}`).join(', ')}.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={radicalChallenges} state={state}>
-            <Board height={190} label={l(say('Egiaztatutako hautagaiak', 'Candidatos comprobados', 'المرشحون الذين تم التحقق منهم'))}>
+            <Board height={190} label={l(say('Egiaztatutako hautagaiak', 'Candidatos comprobados', 'المرشحون الذين تم التحقق منهم', 'Candidates checked'))}>
                 {candidates.length > 0 && !squared && <text x={320} y={100} textAnchor="middle" fontSize={20} fill={MUTED}>?</text>}
                 {squared && candidates.map((x, index) => {
                     const done = checked.includes(x)
@@ -140,28 +140,28 @@ export function PlaneTool(props: LabToolProps) {
     const onFirst = satisfies(system.first, state.x, state.y)
     const onSecond = satisfies(system.second, state.x, state.y)
     const kindLabels: Record<SystemKind, Text> = {
-        one: say('Ebazpen bat', 'Una solución', 'حل واحد'),
-        none: say('Ebazpenik ez', 'Ninguna', 'لا حل'),
-        infinite: say('Infinitu', 'Infinitas', 'ما لا نهاية')
+        one: say('Ebazpen bat', 'Una solución', 'حل واحد', 'One solution'),
+        none: say('Ebazpenik ez', 'Ninguna', 'لا حل', 'None'),
+        infinite: say('Infinitu', 'Infinitas', 'ما لا نهاية', 'Infinitely many')
     }
     const controls = (
         <>
-            <Segmented label={l(say('Sistema', 'Sistema', 'النظام'))} value={String(state.system)} options={planeSystems.map((_, index) => ({ value: String(index), label: `S${index + 1}` }))} onChange={(value) => setState((s) => choosePlaneSystem(s, Number(value)))} />
+            <Segmented label={l(say('Sistema', 'Sistema', 'النظام', 'System'))} value={String(state.system)} options={planeSystems.map((_, index) => ({ value: String(index), label: `S${index + 1}` }))} onChange={(value) => setState((s) => choosePlaneSystem(s, Number(value)))} />
             <Stepper label="x" value={state.x} min={-PLANE_LIMIT} max={PLANE_LIMIT} format={signed} onChange={(x) => setState((s) => movePoint(s, x, s.y))} language={props.language} />
             <Stepper label="y" value={state.y} min={-PLANE_LIMIT} max={PLANE_LIMIT} format={signed} onChange={(y) => setState((s) => movePoint(s, s.x, y))} language={props.language} />
-            <Segmented label={l(say('Zenbat ebazpen?', '¿Cuántas soluciones?', 'كم حلًّا؟'))} value={state.kinds[state.system] ?? ('' as SystemKind)} options={(['one', 'none', 'infinite'] as const).map((kind) => ({ value: kind, label: l(kindLabels[kind]) }))} onChange={(kind) => setState((s) => chooseKind(s, kind))} />
+            <Segmented label={l(say('Zenbat ebazpen?', '¿Cuántas soluciones?', 'كم حلًّا؟', 'How many solutions?'))} value={state.kinds[state.system] ?? ('' as SystemKind)} options={(['one', 'none', 'infinite'] as const).map((kind) => ({ value: kind, label: l(kindLabels[kind]) }))} onChange={(kind) => setState((s) => chooseKind(s, kind))} />
         </>
     )
     const mark = (ok: boolean) => (ok ? '\\ \\checkmark' : '\\ \\times')
     const latex = `${linearLatex(system.first)}${mark(onFirst)}\\qquad ${linearLatex(system.second)}${mark(onSecond)}`
     const note = onFirst && onSecond
-        ? l(say(`(${signed(state.x)}, ${signed(state.y)}) bi zuzenetan dago: sistemaren ebazpena da.`, `(${signed(state.x)}, ${signed(state.y)}) está en las dos rectas: es solución del sistema.`, `(${signed(state.x)}, ${signed(state.y)}) على المستقيمين: إنها حل للنظام.`))
+        ? l(say(`(${signed(state.x)}, ${signed(state.y)}) bi zuzenetan dago: sistemaren ebazpena da.`, `(${signed(state.x)}, ${signed(state.y)}) está en las dos rectas: es solución del sistema.`, `(${signed(state.x)}, ${signed(state.y)}) على المستقيمين: إنها حل للنظام.`, `(${signed(state.x)}, ${signed(state.y)}) is on both straight lines: it is a solution of the system.`))
         : onFirst || onSecond
-            ? l(say('Puntua zuzen batean dago, baina ez bestean.', 'El punto está en una recta, pero no en la otra.', 'النقطة على مستقيم واحد لا على الآخر.'))
-            : l(say('Mugitu puntua edo sakatu planoan.', 'Mueve el punto o pulsa en el plano.', 'حرّك النقطة أو انقر على المستوى.'))
+            ? l(say('Puntua zuzen batean dago, baina ez bestean.', 'El punto está en una recta, pero no en la otra.', 'النقطة على مستقيم واحد لا على الآخر.', 'The point is on one straight line, but not on the other.'))
+            : l(say('Mugitu puntua edo sakatu planoan.', 'Mueve el punto o pulsa en el plano.', 'حرّك النقطة أو انقر على المستوى.', 'Move the point or tap on the grid.'))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={planeChallenges} state={state}>
-            <Plane box={{ xMin: -PLANE_LIMIT, xMax: PLANE_LIMIT, yMin: -PLANE_LIMIT, yMax: PLANE_LIMIT }} cell={26} label={l(say('Sistemaren bi zuzenak eta puntua', 'Las dos rectas del sistema y el punto', 'مستقيما النظام والنقطة'))} onPick={([x, y]) => setState((s) => movePoint(s, x, y))}>
+            <Plane box={{ xMin: -PLANE_LIMIT, xMax: PLANE_LIMIT, yMin: -PLANE_LIMIT, yMax: PLANE_LIMIT }} cell={26} label={l(say('Sistemaren bi zuzenak eta puntua', 'Las dos rectas del sistema y el punto', 'مستقيما النظام والنقطة', 'The two straight lines of the system and the point'))} onPick={([x, y]) => setState((s) => movePoint(s, x, y))}>
                 {(map, clip) => (
                     <g>
                         <LineOf map={map} equation={system.first} color={STAGE} clip={clip} />
@@ -203,20 +203,20 @@ export function ReductionTool(props: LabToolProps) {
     const system = reductionSystems[state.system]
     const controls = (
         <>
-            <Segmented label={l(say('Sistema', 'Sistema', 'النظام'))} value={String(state.system)} options={reductionSystems.map((_, index) => ({ value: String(index), label: `S${index + 1}` }))} onChange={(value) => setState((s) => setMultipliers(s, { system: Number(value) }))} />
-            <Stepper label={l(say('1. ekuazioa bider', '1.ª ecuación por', 'المعادلة 1 في'))} value={state.m1} min={-MULTIPLIER_LIMIT} max={MULTIPLIER_LIMIT} format={signed} onChange={(m1) => setState((s) => setMultipliers(s, { m1 }))} language={props.language} />
-            <Stepper label={l(say('2. ekuazioa bider', '2.ª ecuación por', 'المعادلة 2 في'))} value={state.m2} min={-MULTIPLIER_LIMIT} max={MULTIPLIER_LIMIT} format={signed} onChange={(m2) => setState((s) => setMultipliers(s, { m2 }))} language={props.language} />
+            <Segmented label={l(say('Sistema', 'Sistema', 'النظام', 'System'))} value={String(state.system)} options={reductionSystems.map((_, index) => ({ value: String(index), label: `S${index + 1}` }))} onChange={(value) => setState((s) => setMultipliers(s, { system: Number(value) }))} />
+            <Stepper label={l(say('1. ekuazioa bider', '1.ª ecuación por', 'المعادلة 1 في', '1st equation times'))} value={state.m1} min={-MULTIPLIER_LIMIT} max={MULTIPLIER_LIMIT} format={signed} onChange={(m1) => setState((s) => setMultipliers(s, { m1 }))} language={props.language} />
+            <Stepper label={l(say('2. ekuazioa bider', '2.ª ecuación por', 'المعادلة 2 في', '2nd equation times'))} value={state.m2} min={-MULTIPLIER_LIMIT} max={MULTIPLIER_LIMIT} format={signed} onChange={(m2) => setState((s) => setMultipliers(s, { m2 }))} language={props.language} />
         </>
     )
     const latex = `${linearLatex(system.first)},\\quad ${linearLatex(system.second)}`
     const note = gone === 'y'
-        ? l(say(`y desagertu da: x = ${signed(solution.x)}, eta ordeztuz y = ${signed(solution.y)}.`, `La y ha desaparecido: x = ${signed(solution.x)}, y sustituyendo, y = ${signed(solution.y)}.`, `اختفى y: x = ${signed(solution.x)}، وبالتعويض y = ${signed(solution.y)}.`))
+        ? l(say(`y desagertu da: x = ${signed(solution.x)}, eta ordeztuz y = ${signed(solution.y)}.`, `La y ha desaparecido: x = ${signed(solution.x)}, y sustituyendo, y = ${signed(solution.y)}.`, `اختفى y: x = ${signed(solution.x)}، وبالتعويض y = ${signed(solution.y)}.`, `The y has cancelled out: x = ${signed(solution.x)}, and substituting, y = ${signed(solution.y)}.`))
         : gone === 'x'
-            ? l(say(`x desagertu da: y = ${signed(solution.y)}, eta ordeztuz x = ${signed(solution.x)}.`, `La x ha desaparecido: y = ${signed(solution.y)}, y sustituyendo, x = ${signed(solution.x)}.`, `اختفى x: y = ${signed(solution.y)}، وبالتعويض x = ${signed(solution.x)}.`))
-            : l(say('Bilatu ezezagun baten koefizienteak aurkako bihurtzen dituzten zenbakiak.', 'Busca los números que hacen opuestos los coeficientes de una incógnita.', 'ابحث عن العددين اللذين يجعلان معاملي مجهول متعاكسين.'))
+            ? l(say(`x desagertu da: y = ${signed(solution.y)}, eta ordeztuz x = ${signed(solution.x)}.`, `La x ha desaparecido: y = ${signed(solution.y)}, y sustituyendo, x = ${signed(solution.x)}.`, `اختفى x: y = ${signed(solution.y)}، وبالتعويض x = ${signed(solution.x)}.`, `The x has cancelled out: y = ${signed(solution.y)}, and substituting, x = ${signed(solution.x)}.`))
+            : l(say('Bilatu ezezagun baten koefizienteak aurkako bihurtzen dituzten zenbakiak.', 'Busca los números que hacen opuestos los coeficientes de una incógnita.', 'ابحث عن العددين اللذين يجعلان معاملي مجهول متعاكسين.', 'Find the numbers that make the coefficients of one unknown opposites.'))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={reductionChallenges} state={state}>
-            <Board height={230} label={l(say('Bi ekuazioak biderkatuta eta batuta', 'Las dos ecuaciones multiplicadas y sumadas', 'المعادلتان مضروبتان ومجموعتان'))}>
+            <Board height={230} label={l(say('Bi ekuazioak biderkatuta eta batuta', 'Las dos ecuaciones multiplicadas y sumadas', 'المعادلتان مضروبتان ومجموعتان', 'The two equations multiplied and added'))}>
                 <EquationRow y={50} factor={`· ${signed(state.m1)}`} equation={rows.first} color={INK} />
                 <EquationRow y={96} factor={`· ${signed(state.m2)}`} equation={rows.second} color={INK} />
                 <line x1={90} x2={490} y1={116} y2={116} stroke={INK} strokeWidth={2} />

@@ -40,8 +40,8 @@ export type StatisticsRaceError =
 export type StatisticsRaceQuestion = RaceQuestion<StatisticsRaceError>
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, ar: latex.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, en: latex, ar: latex.replace(/\{,\}/g, '.') })
 const math = (latex: string) => `$${latex}$`
 const sum = (values: number[]) => values.reduce((total, value) => total + value, 0)
 
@@ -108,7 +108,7 @@ function cumulativeQuestion(random: Random, tier: Tier): StatisticsRaceQuestion 
     return question(0, 'cumulative', say(
         `Taula: ${tableText(values, counts)}. Zein da ${math(String(index))} balioaren maiztasun absolutu metatua?`,
         `Tabla: ${tableText(values, counts)}. ¿Cuál es la frecuencia absoluta acumulada del valor ${math(String(index))}?`,
-        `جدول: ${tableText(values, counts)}. ما التكرار المطلق المتجمّع للقيمة ${math(String(index))}؟`
+        `جدول: ${tableText(values, counts)}. ما التكرار المطلق المتجمّع للقيمة ${math(String(index))}؟`, `Table: ${tableText(values, counts)}. What is the cumulative frequency of the value ${math(String(index))}?`
     ), choices, n(right), same(math(`${counts.slice(0, index + 1).join('+')}=${right}`)))
 }
 
@@ -132,7 +132,7 @@ function relativeCumulativeQuestion(random: Random, tier: Tier): StatisticsRaceQ
     return question(0, 'relative-cumulative', say(
         `Taula: ${tableText(values, counts)}. Zein da ${math(String(index))} balioaren maiztasun erlatibo metatua?`,
         `Tabla: ${tableText(values, counts)}. ¿Cuál es la frecuencia relativa acumulada del valor ${math(String(index))}?`,
-        `جدول: ${tableText(values, counts)}. ما التكرار النسبي المتجمّع للقيمة ${math(String(index))}؟`
+        `جدول: ${tableText(values, counts)}. ما التكرار النسبي المتجمّع للقيمة ${math(String(index))}؟`, `Table: ${tableText(values, counts)}. What is the cumulative relative frequency of the value ${math(String(index))}?`
     ), choices, right, same(math(`\\frac{${counts.slice(0, index + 1).join('+')}}{${total}}=${w(right)}`)))
 }
 
@@ -151,7 +151,7 @@ function classMarkQuestion(random: Random, tier: Tier): StatisticsRaceQuestion |
     return question(0, 'class-mark', say(
         `Zein da ${math(`[${lower},${upper})`)} tartearen klase-marka?`,
         `¿Cuál es la marca de clase del intervalo ${math(`[${lower},${upper})`)}?`,
-        `ما مركز الفئة ${math(`[${lower},${upper})`)}؟`
+        `ما مركز الفئة ${math(`[${lower},${upper})`)}؟`, `What is the class mark of the interval ${math(`[${lower},${upper})`)}?`
     ), choices, right, same(math(`\\frac{${lower}+${upper}}{2}=${w(right)}`)))
 }
 
@@ -170,7 +170,7 @@ function angleQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | nul
     return question(1, 'angle', say(
         `Sektore-diagrama batean, zenbat gradu ditu datuen ${math(`${percent}\\,\\%`)} sektoreak?`,
         `En un diagrama de sectores, ¿cuántos grados mide el sector del ${math(`${percent}\\,\\%`)} de los datos?`,
-        `في مخطط دائري، كم درجة قطاع ${math(`${percent}\\,\\%`)} من البيانات؟`
+        `في مخطط دائري، كم درجة قطاع ${math(`${percent}\\,\\%`)} من البيانات؟`, `In a pie chart, how many degrees is the sector for ${math(`${percent}\\,\\%`)} of the data?`
     ), choices, right, same(math(`${percent}\\cdot 3{,}6=${w(right)}`)))
 }
 
@@ -190,7 +190,7 @@ function countFromAngleQuestion(random: Random, tier: Tier): StatisticsRaceQuest
     return question(1, 'count-from-angle', say(
         `${math(String(people))} pertsonari egindako inkesta batean, sektore batek ${math(`${angle}^{\\circ}`)} ditu. Zenbat pertsona dira?`,
         `En una encuesta a ${math(String(people))} personas, un sector mide ${math(`${angle}^{\\circ}`)}. ¿Cuántas personas son?`,
-        `في استبيان لـ${math(String(people))} شخصًا، قياس قطاع ${math(`${angle}^{\\circ}`)}. كم شخصًا يمثّل؟`
+        `في استبيان لـ${math(String(people))} شخصًا، قياس قطاع ${math(`${angle}^{\\circ}`)}. كم شخصًا يمثّل؟`, `In a survey of ${math(String(people))} people, a sector measures ${math(`${angle}^{\\circ}`)}. How many people is that?`
     ), choices, right, same(math(`\\frac{${angle}}{360}\\cdot ${people}=${count}`)))
 }
 
@@ -209,7 +209,7 @@ function percentFromAngleQuestion(random: Random, tier: Tier): StatisticsRaceQue
     return question(1, 'percent-from-angle', say(
         `Sektore batek ${math(`${angle}^{\\circ}`)} ditu. Datuen zein ehuneko da?`,
         `Un sector mide ${math(`${angle}^{\\circ}`)}. ¿Qué porcentaje de los datos es?`,
-        `قياس قطاع ${math(`${angle}^{\\circ}`)}. ما النسبة المئوية من البيانات؟`
+        `قياس قطاع ${math(`${angle}^{\\circ}`)}. ما النسبة المئوية من البيانات؟`, `A sector measures ${math(`${angle}^{\\circ}`)}. What percentage of the data is that?`
     ), choices, right, same(math(`\\frac{${angle}}{360}\\cdot 100=${w(right)}`)))
 }
 
@@ -235,7 +235,7 @@ function meanTableQuestion(random: Random, tier: Tier): StatisticsRaceQuestion |
     return question(2, 'mean-table', say(
         `Taula: ${tableText(values, counts)}. Zein da batez bestekoa?`,
         `Tabla: ${tableText(values, counts)}. ¿Cuál es la media?`,
-        `جدول: ${tableText(values, counts)}. ما المتوسط؟`
+        `جدول: ${tableText(values, counts)}. ما المتوسط؟`, `Table: ${tableText(values, counts)}. What is the mean?`
     ), choices, right, same(math(`\\frac{${values.map((value, index) => `${value}\\cdot ${counts[index]}`).join('+')}}{${total}}=${w(right)}`)))
 }
 
@@ -261,11 +261,11 @@ function medianTableQuestion(random: Random, tier: Tier): StatisticsRaceQuestion
     return question(2, 'median-table', say(
         `Taula: ${tableText(values, counts)}. Zein da mediana?`,
         `Tabla: ${tableText(values, counts)}. ¿Cuál es la mediana?`,
-        `جدول: ${tableText(values, counts)}. ما الوسيط؟`
+        `جدول: ${tableText(values, counts)}. ما الوسيط؟`, `Table: ${tableText(values, counts)}. What is the median?`
     ), choices, right, say(
         `${math(`N=${total}\\ \\to\\ \\frac{${total}+1}{2}=${position}`)}. Metatuak: ${math(cumulative.join(',\\ '))}. Mediana: ${math(String(median))}.`,
         `${math(`N=${total}\\ \\to\\ \\frac{${total}+1}{2}=${position}`)}. Acumuladas: ${math(cumulative.join(',\\ '))}. Mediana: ${math(String(median))}.`,
-        `${math(`N=${total}\\ \\to\\ \\frac{${total}+1}{2}=${position}`)}. المتجمّعة: ${math(cumulative.join(',\\ '))}. الوسيط: ${math(String(median))}.`
+        `${math(`N=${total}\\ \\to\\ \\frac{${total}+1}{2}=${position}`)}. المتجمّعة: ${math(cumulative.join(',\\ '))}. الوسيط: ${math(String(median))}.`, `${math(`N=${total}\\ \\to\\ \\frac{${total}+1}{2}=${position}`)}. Cumulative frequencies: ${math(cumulative.join(',\\ '))}. Median: ${math(String(median))}.`
     ))
 }
 
@@ -286,7 +286,7 @@ function missingDatumQuestion(random: Random, tier: Tier): StatisticsRaceQuestio
     return question(2, 'missing-datum', say(
         `${math(String(size))} daturen batez bestekoa ${math(String(mean))} da. Horietako batzuk ${math(list)} dira. Zein da falta dena?`,
         `La media de ${math(String(size))} datos es ${math(String(mean))}. Algunos son ${math(list)}. ¿Cuál es el que falta?`,
-        `متوسط ${math(String(size))} بيانات هو ${math(String(mean))}. بعضها ${math(list)}. ما البيان الناقص؟`
+        `متوسط ${math(String(size))} بيانات هو ${math(String(mean))}. بعضها ${math(list)}. ما البيان الناقص؟`, `The mean of ${math(String(size))} values is ${math(String(mean))}. Some of them are ${math(list)}. What is the missing one?`
     ), choices, n(right), same(math(`${size}\\cdot ${mean}-(${known.join('+')})=${right}`)))
 }
 
@@ -308,7 +308,7 @@ function rangeQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | nul
     return question(3, 'range', say(
         `Zein da ibiltartea? ${math(data.join(',\\ '))}`,
         `¿Cuál es el recorrido? ${math(data.join(',\\ '))}`,
-        `ما المدى؟ ${math(data.join(',\\ '))}`
+        `ما المدى؟ ${math(data.join(',\\ '))}`, `What is the range? ${math(data.join(',\\ '))}`
     ), choices, right, same(math(`${max}-${min}=${max - min}`)))
 }
 
@@ -331,7 +331,7 @@ function deviationQuestion(random: Random, tier: Tier): StatisticsRaceQuestion |
     return question(3, 'deviation', say(
         `Kalkulatu batez besteko desbideratzea: ${math(data.join(',\\ '))}`,
         `Calcula la desviación media de: ${math(data.join(',\\ '))}`,
-        `احسب الانحراف المتوسط لـ: ${math(data.join(',\\ '))}`
+        `احسب الانحراف المتوسط لـ: ${math(data.join(',\\ '))}`, `Calculate the mean deviation of: ${math(data.join(',\\ '))}`
     ), choices, right, same(math(`\\frac{${data.join('+')}}{${size}}=${mean}\\ \\to\\ \\frac{${distances.join('+')}}{${size}}=${w(right)}`)))
 }
 
@@ -352,11 +352,11 @@ function quartileQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | 
     return question(3, third ? 'third-quartile' : 'first-quartile', say(
         `Aurkitu ${math(name)}: ${math(data.join(',\\ '))}`,
         `Halla ${math(name)} de: ${math(data.join(',\\ '))}`,
-        `أوجد ${math(name)} لـ: ${math(data.join(',\\ '))}`
+        `أوجد ${math(name)} لـ: ${math(data.join(',\\ '))}`, `Find ${math(name)} of: ${math(data.join(',\\ '))}`
     ), choices, right, say(
         `Ordenatuta: ${math(sorted.join(',\\ '))}. ${math(`${name}=${w(right)}`)}`,
         `Ordenados: ${math(sorted.join(',\\ '))}. ${math(`${name}=${w(right)}`)}`,
-        `بعد الترتيب: ${math(sorted.join(',\\ '))}. ${math(`${name}=${w(right)}`)}`
+        `بعد الترتيب: ${math(sorted.join(',\\ '))}. ${math(`${name}=${w(right)}`)}`, `In order: ${math(sorted.join(',\\ '))}. ${math(`${name}=${w(right)}`)}`
     ))
 }
 
@@ -376,7 +376,7 @@ function complementQuestion(random: Random, tier: Tier): StatisticsRaceQuestion 
     return question(4, 'complement', say(
         `${math(`P(A)=${w(p)}`)}. Zein da aurkako gertaeraren probabilitatea?`,
         `${math(`P(A)=${w(p)}`)}. ¿Cuál es la probabilidad del suceso contrario?`,
-        `${math(`P(A)=${w(p)}`)}. ما احتمال الحدث المعاكس؟`
+        `${math(`P(A)=${w(p)}`)}. ما احتمال الحدث المعاكس؟`, `${math(`P(A)=${w(p)}`)}. What is the probability of the complementary event?`
     ), choices, right, same(math(`1-${w(p)}=${w(right)}`)))
 }
 
@@ -401,7 +401,7 @@ function diceQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | null
     return question(4, atLeast ? 'dice-at-least' : 'dice-sum', say(
         `Bi dado jaurtitzen dira. Zein da batura ${math(event)} izateko probabilitatea?`,
         `Se lanzan dos dados. ¿Cuál es la probabilidad de que la suma sea ${math(event)}?`,
-        `يُرمى نردان. ما احتمال أن يكون المجموع ${math(event)}؟`
+        `يُرمى نردان. ما احتمال أن يكون المجموع ${math(event)}؟`, `Two dice are rolled. What is the probability that the sum is ${math(event)}?`
     ), choices, right, same(math(`\\frac{${ways}}{36}${right.denominator === 36 ? '' : `=${w(right, true)}`}`)))
 }
 
@@ -421,7 +421,7 @@ function coinsQuestion(random: Random, tier: Tier): StatisticsRaceQuestion | nul
     return question(4, `coins-${coins}`, say(
         `${math(String(coins))} txanpon botatzen dira. Zein da zehazki ${math(String(heads))} aurpegi ateratzeko probabilitatea?`,
         `Se lanzan ${math(String(coins))} monedas. ¿Cuál es la probabilidad de sacar exactamente ${math(String(heads))} caras?`,
-        `تُرمى ${math(String(coins))} قطع نقود. ما احتمال ظهور ${math(String(heads))} أوجه بالضبط؟`
+        `تُرمى ${math(String(coins))} قطع نقود. ما احتمال ظهور ${math(String(heads))} أوجه بالضبط؟`, `${math(String(coins))} coins are tossed. What is the probability of getting exactly ${math(String(heads))} heads?`
     ), choices, right, same(math(`\\frac{${ways}}{${outcomes}}${right.denominator === outcomes ? '' : `=${w(right, true)}`}`)))
 }
 
@@ -455,21 +455,21 @@ export function statisticsParTime(circuit: number): number {
 }
 
 export const statisticsRaceErrorTips: Record<StatisticsRaceError, LocalizedText> = {
-    'no-accumulate': say('Hori maiztasuna da; metatua lortzeko, batu aurreko guztiak ere.', 'Esa es la frecuencia; para la acumulada, suma también todas las anteriores.', 'هذا هو التكرار؛ وللمتجمّع اجمع معه كل ما قبله.'),
-    previous: say('Hori aurreko balioaren metatua da: falta da balio honen maiztasuna gehitzea.', 'Esa es la acumulada del valor anterior: falta sumar la frecuencia de este valor.', 'هذا متجمّع القيمة السابقة: ينقص إضافة تكرار هذه القيمة.'),
-    absolute: say('Hori zenbatekoa da; erlatiboa lortzeko, zatitu datu kopuruaz (edo hori N da).', 'Eso es una cantidad; para la relativa, divide entre el número de datos (o eso es N).', 'هذا عدد؛ وللنسبي اقسم على عدد البيانات (أو هذا هو N).'),
-    limit: say('Hori tartearen muga bat da; klase-marka erdian dago.', 'Ese es un límite del intervalo; la marca de clase está en el centro.', 'هذا حدّ الفئة؛ ومركز الفئة في منتصفها.'),
-    width: say('Hori tartearen zabalera da, ez erdiko puntua.', 'Esa es la amplitud del intervalo, no su punto central.', 'هذا طول الفئة لا منتصفها.'),
-    'percent-degrees': say('Ehunekoak eta graduak ez dira gauza bera: % 1 = 3,6°.', 'Porcentaje y grados no son lo mismo: 1 % = 3,6°.', 'النسبة والدرجات ليست الشيء نفسه: 1 % = 3.6°.'),
-    'whole-circle': say('Hori gainerako zatia da, ez galdetutakoa.', 'Esa es la parte restante, no la que se pregunta.', 'هذا هو الجزء الباقي لا المسؤول عنه.'),
-    'ignore-frequency': say('Balio bakoitza bere maiztasunaz biderkatu behar da.', 'Cada valor se multiplica por su frecuencia.', 'تُضرب كل قيمة في تكرارها.'),
-    'no-divide': say('Falta da datu kopuruaz zatitzea.', 'Falta dividir entre el número de datos.', 'ينقص القسمة على عدد البيانات.'),
-    'mode-median': say('Hori moda da (gehien errepikatzen dena); mediana erdiko datua da.', 'Esa es la moda (la que más se repite); la mediana es el dato central.', 'هذا المنوال (الأكثر تكرارًا)؛ والوسيط هو البيان الأوسط.'),
-    unsorted: say('Lehenik ordenatu datuak.', 'Primero ordena los datos.', 'رتّب البيانات أولًا.'),
-    'median-quartile': say('Hori mediana da; kuartila erdi baten erdikoa da.', 'Esa es la mediana; el cuartil es el central de una mitad.', 'هذا الوسيط؛ والربيع أوسط أحد النصفين.'),
-    'range-max': say('Ibiltartea handiena ken txikiena da.', 'El recorrido es el mayor menos el menor.', 'المدى هو الأكبر ناقص الأصغر.'),
-    'same-event': say('Hori gertaera beraren probabilitatea da; aurkakoa $1-P$ da.', 'Esa es la probabilidad del mismo suceso; el contrario es $1-P$.', 'هذا احتمال الحدث نفسه؛ والمعاكس $1-P$.'),
-    'sums-equal': say('Emaitzek ez dute aukera bera: zenbatu zuhaitz edo taula batekin.', 'Los resultados no son igual de probables: cuenta con un árbol o una tabla.', 'النتائج ليست متساوية الإمكان: عُدّ بشجرة أو جدول.'),
-    order: say('Begiratu ondo zein postutako datua den.', 'Mira bien qué posición ocupa el dato.', 'انتبه إلى موقع البيان.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    'no-accumulate': say('Hori maiztasuna da; metatua lortzeko, batu aurreko guztiak ere.', 'Esa es la frecuencia; para la acumulada, suma también todas las anteriores.', 'هذا هو التكرار؛ وللمتجمّع اجمع معه كل ما قبله.', 'That is the frequency; for the cumulative one, also add all the previous ones.'),
+    previous: say('Hori aurreko balioaren metatua da: falta da balio honen maiztasuna gehitzea.', 'Esa es la acumulada del valor anterior: falta sumar la frecuencia de este valor.', 'هذا متجمّع القيمة السابقة: ينقص إضافة تكرار هذه القيمة.', 'That is the cumulative frequency of the previous value: you still need to add the frequency of this value.'),
+    absolute: say('Hori zenbatekoa da; erlatiboa lortzeko, zatitu datu kopuruaz (edo hori N da).', 'Eso es una cantidad; para la relativa, divide entre el número de datos (o eso es N).', 'هذا عدد؛ وللنسبي اقسم على عدد البيانات (أو هذا هو N).', 'That is a count; for the relative frequency, divide by the number of values (N).'),
+    limit: say('Hori tartearen muga bat da; klase-marka erdian dago.', 'Ese es un límite del intervalo; la marca de clase está en el centro.', 'هذا حدّ الفئة؛ ومركز الفئة في منتصفها.', 'That is a limit of the interval; the class mark is at the centre.'),
+    width: say('Hori tartearen zabalera da, ez erdiko puntua.', 'Esa es la amplitud del intervalo, no su punto central.', 'هذا طول الفئة لا منتصفها.', 'That is the class width, not the midpoint.'),
+    'percent-degrees': say('Ehunekoak eta graduak ez dira gauza bera: % 1 = 3,6°.', 'Porcentaje y grados no son lo mismo: 1 % = 3,6°.', 'النسبة والدرجات ليست الشيء نفسه: 1 % = 3.6°.', 'Percentage and degrees are not the same: 1% = 3.6°.'),
+    'whole-circle': say('Hori gainerako zatia da, ez galdetutakoa.', 'Esa es la parte restante, no la que se pregunta.', 'هذا هو الجزء الباقي لا المسؤول عنه.', 'That is the remaining part, not the one being asked about.'),
+    'ignore-frequency': say('Balio bakoitza bere maiztasunaz biderkatu behar da.', 'Cada valor se multiplica por su frecuencia.', 'تُضرب كل قيمة في تكرارها.', 'Each value is multiplied by its frequency.'),
+    'no-divide': say('Falta da datu kopuruaz zatitzea.', 'Falta dividir entre el número de datos.', 'ينقص القسمة على عدد البيانات.', 'You still need to divide by the number of values.'),
+    'mode-median': say('Hori moda da (gehien errepikatzen dena); mediana erdiko datua da.', 'Esa es la moda (la que más se repite); la mediana es el dato central.', 'هذا المنوال (الأكثر تكرارًا)؛ والوسيط هو البيان الأوسط.', 'That is the mode (the one that appears most often); the median is the middle value.'),
+    unsorted: say('Lehenik ordenatu datuak.', 'Primero ordena los datos.', 'رتّب البيانات أولًا.', 'First, put the data in order.'),
+    'median-quartile': say('Hori mediana da; kuartila erdi baten erdikoa da.', 'Esa es la mediana; el cuartil es el central de una mitad.', 'هذا الوسيط؛ والربيع أوسط أحد النصفين.', 'That is the median; a quartile is the middle value of a half.'),
+    'range-max': say('Ibiltartea handiena ken txikiena da.', 'El recorrido es el mayor menos el menor.', 'المدى هو الأكبر ناقص الأصغر.', 'The range is the largest minus the smallest.'),
+    'same-event': say('Hori gertaera beraren probabilitatea da; aurkakoa $1-P$ da.', 'Esa es la probabilidad del mismo suceso; el contrario es $1-P$.', 'هذا احتمال الحدث نفسه؛ والمعاكس $1-P$.', 'That is the probability of the same event; the complementary event is $1-P$.'),
+    'sums-equal': say('Emaitzek ez dute aukera bera: zenbatu zuhaitz edo taula batekin.', 'Los resultados no son igual de probables: cuenta con un árbol o una tabla.', 'النتائج ليست متساوية الإمكان: عُدّ بشجرة أو جدول.', 'The outcomes are not equally likely: count them with a tree diagram or a table.'),
+    order: say('Begiratu ondo zein postutako datua den.', 'Mira bien qué posición ocupa el dato.', 'انتبه إلى موقع البيان.', 'Look carefully at which position the value is in.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

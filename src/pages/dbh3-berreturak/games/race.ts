@@ -38,8 +38,8 @@ export type PowersRaceError =
 export type PowersRaceQuestion = RaceQuestion<PowersRaceError> & { meta: Record<string, number> }
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => ({ eu: `$${latex}$`, es: `$${latex}$`, ar: `$${latex.replace(/\{,\}/g, '.')}$` })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => ({ eu: `$${latex}$`, es: `$${latex}$`, en: `$${latex}$`, ar: `$${latex.replace(/\{,\}/g, '.')}$` })
 const math = (latex: string) => `$${latex}$`
 const frac = (numerator: number, denominator: number) => fraction(numerator, denominator)
 
@@ -89,8 +89,8 @@ function build(circuit: number, kind: string, prompt: LocalizedText, choices: Ra
     return { circuit, kind, prompt, options: choices, answer, answerForm: 'any', percentAnswer: false, writable: true, solution, meta }
 }
 
-const calc = (formula: string) => say(`Kalkulatu ${math(formula)}.`, `Calcula ${math(formula)}.`, `احسب ${math(formula)}.`)
-const howMuch = (formula: string, letter: string) => say(`${math(formula)}. Zenbat da ${math(letter)}?`, `${math(formula)}. ¿Cuánto vale ${math(letter)}?`, `${math(formula)}. كم تساوي ${math(letter)}؟`)
+const calc = (formula: string) => say(`Kalkulatu ${math(formula)}.`, `Calcula ${math(formula)}.`, `احسب ${math(formula)}.`, `Calculate ${math(formula)}.`)
+const howMuch = (formula: string, letter: string) => say(`${math(formula)}. Zenbat da ${math(letter)}?`, `${math(formula)}. ¿Cuánto vale ${math(letter)}?`, `${math(formula)}. كم تساوي ${math(letter)}؟`, `${math(formula)}. What is the value of ${math(letter)}?`)
 const paren = (value: number) => (value < 0 ? `(${value})` : String(value))
 const grouped = (value: number) => String(value).replace(/\B(?=(\d{3})+$)/g, '\\,')
 
@@ -186,7 +186,7 @@ function ratioQuestion(random: Random): PowersRaceQuestion | null {
     const p = q + gap
     const answer = fraction(10 ** gap)
     const choices = options(random, answer, [whole(10 ** (p + q), 'sign'), whole(gap * 10, 'multiply-exponents'), whole(10 ** (gap + 1), 'no-adjust'), whole(10 ** (gap - 1), 'no-adjust')])
-    return choices && build(1, 'ratio', say(`Zenbat aldiz handiagoa da ${math(`10^{${p}}`)}, ${math(`10^{${q}}`)} baino?`, `¿Cuántas veces mayor es ${math(`10^{${p}}`)} que ${math(`10^{${q}}`)}?`, `كم مرة ${math(`10^{${p}}`)} أكبر من ${math(`10^{${q}}`)}؟`), choices, answer, same(`10^{${p}-${q}}=10^{${gap}}=${grouped(10 ** gap)}`), { p, q })
+    return choices && build(1, 'ratio', say(`Zenbat aldiz handiagoa da ${math(`10^{${p}}`)}, ${math(`10^{${q}}`)} baino?`, `¿Cuántas veces mayor es ${math(`10^{${p}}`)} que ${math(`10^{${q}}`)}?`, `كم مرة ${math(`10^{${p}}`)} أكبر من ${math(`10^{${q}}`)}؟`, `How many times larger is ${math(`10^{${p}}`)} than ${math(`10^{${q}}`)}?`), choices, answer, same(`10^{${p}-${q}}=10^{${gap}}=${grouped(10 ** gap)}`), { p, q })
 }
 
 /* ---------- Circuit 2: roots ---------- */
@@ -243,14 +243,14 @@ function irrationalCountQuestion(random: Random): PowersRaceQuestion | null {
     const count = pick(random, [1, 2, 3, 4])
     const items = shuffle(random, [...shuffle(random, IRRATIONAL_POOL).slice(0, count), ...shuffle(random, RATIONAL_POOL).slice(0, 5 - count)])
     const choices = options(random, fraction(count), [whole(5 - count, 'irrational'), whole(count + 1, 'calculation'), whole(count - 1, 'calculation'), whole(count + 2, 'calculation'), whole(0, 'irrational')])
-    return choices && build(3, 'irrational-count', say(`Hauetako zenbat dira irrazionalak: ${items.map(math).join(', ')}?`, `¿Cuántos de estos son irracionales: ${items.map(math).join(', ')}?`, `كم من هذه الأعداد غير نسبي: ${items.map(math).join(', ')}؟`), choices, fraction(count), say(`${count} irrazional: karratu perfektua ez diren erroak, π eta horien biderkaduren.`, `${count} irracionales: raíces de no cuadrados perfectos, π y sus múltiplos.`, `${count} غير نسبية: جذور غير المربعات الكاملة و π ومضاعفاتها.`), { count })
+    return choices && build(3, 'irrational-count', say(`Hauetako zenbat dira irrazionalak: ${items.map(math).join(', ')}?`, `¿Cuántos de estos son irracionales: ${items.map(math).join(', ')}?`, `كم من هذه الأعداد غير نسبي: ${items.map(math).join(', ')}؟`, `How many of these are irrational: ${items.map(math).join(', ')}?`), choices, fraction(count), say(`${count} irrazional: karratu perfektua ez diren erroak, π eta horien biderkaduren.`, `${count} irracionales: raíces de no cuadrados perfectos, π y sus múltiplos.`, `${count} غير نسبية: جذور غير المربعات الكاملة و π ومضاعفاتها.`, `${count} irrational: roots of numbers that are not perfect squares, π and its multiples.`), { count })
 }
 
 function betweenQuestion(random: Random, tier: Tier): PowersRaceQuestion | null {
     const n = randomInt(random, 2, tier === 0 ? 8 : 12)
     const radicand = randomInt(random, n * n + 1, (n + 1) * (n + 1) - 1)
     const choices = options(random, fraction(n), [whole(n + 1, 'no-adjust'), whole(Math.floor(radicand / 2), 'no-root'), whole(n - 1, 'calculation'), whole(n + 2, 'calculation')])
-    return choices && build(3, 'between', say(`${math(`n<\\sqrt{${radicand}}<n+1`)}. Zenbat da ${math('n')}?`, `${math(`n<\\sqrt{${radicand}}<n+1`)}. ¿Cuánto vale ${math('n')}?`, `${math(`n<\\sqrt{${radicand}}<n+1`)}. كم تساوي ${math('n')}؟`), choices, fraction(n), same(`${n}^{2}=${n * n}<${radicand}<${(n + 1) ** 2}=${n + 1}^{2}`), { n, radicand })
+    return choices && build(3, 'between', say(`${math(`n<\\sqrt{${radicand}}<n+1`)}. Zenbat da ${math('n')}?`, `${math(`n<\\sqrt{${radicand}}<n+1`)}. ¿Cuánto vale ${math('n')}?`, `${math(`n<\\sqrt{${radicand}}<n+1`)}. كم تساوي ${math('n')}؟`, `${math(`n<\\sqrt{${radicand}}<n+1`)}. What is the value of ${math('n')}?`), choices, fraction(n), same(`${n}^{2}=${n * n}<${radicand}<${(n + 1) ** 2}=${n + 1}^{2}`), { n, radicand })
 }
 
 function intervalCountQuestion(random: Random): PowersRaceQuestion | null {
@@ -261,14 +261,14 @@ function intervalCountQuestion(random: Random): PowersRaceQuestion | null {
     const count = b - a - 1 + (closedA ? 1 : 0) + (closedB ? 1 : 0)
     const interval = `${closedA ? '[' : '('}${a},\\,${b}${closedB ? ']' : ')'}`
     const choices = options(random, fraction(count), [whole(b - a, 'interval'), whole(b - a + 1, 'interval'), whole(b - a - 1, 'interval'), whole(count + 2, 'interval')])
-    return choices && build(3, 'interval-count', say(`Zenbat zenbaki oso daude ${math(interval)} tartean?`, `¿Cuántos números enteros hay en el intervalo ${math(interval)}?`, `كم عددًا صحيحًا في الفترة ${math(interval)}؟`), choices, fraction(count), say(`${count} zenbaki oso: kortxeteko muturra sartzen da, parentesikoa ez.`, `${count} enteros: el extremo con corchete entra, el de paréntesis no.`, `${count} أعداد صحيحة: الطرف بقوس مربع داخل والآخر غير داخل.`), { a, b, closedA: closedA ? 1 : 0, closedB: closedB ? 1 : 0 })
+    return choices && build(3, 'interval-count', say(`Zenbat zenbaki oso daude ${math(interval)} tartean?`, `¿Cuántos números enteros hay en el intervalo ${math(interval)}?`, `كم عددًا صحيحًا في الفترة ${math(interval)}؟`, `How many integers are in the interval ${math(interval)}?`), choices, fraction(count), say(`${count} zenbaki oso: kortxeteko muturra sartzen da, parentesikoa ez.`, `${count} enteros: el extremo con corchete entra, el de paréntesis no.`, `${count} أعداد صحيحة: الطرف بقوس مربع داخل والآخر غير داخل.`, `${count} integers: an endpoint with a square bracket is included, one with a round bracket is not.`), { a, b, closedA: closedA ? 1 : 0, closedB: closedB ? 1 : 0 })
 }
 
 function intervalLengthQuestion(random: Random): PowersRaceQuestion | null {
     const a = randomInt(random, -9, 4)
     const b = a + randomInt(random, 2, 12)
     const choices = options(random, fraction(b - a), [whole(b + a, 'sign'), whole(a - b, 'sign'), whole(b - a + 1, 'interval'), whole(b - a - 1, 'interval')])
-    return choices && build(3, 'interval-length', say(`Zenbat da ${math(`[${a},\\,${b}]`)} tartearen luzera?`, `¿Cuánto mide la longitud del intervalo ${math(`[${a},\\,${b}]`)}?`, `كم طول الفترة ${math(`[${a},\\,${b}]`)}؟`), choices, fraction(b - a), same(`${b}-${paren(a)}=${b - a}`), { a, b })
+    return choices && build(3, 'interval-length', say(`Zenbat da ${math(`[${a},\\,${b}]`)} tartearen luzera?`, `¿Cuánto mide la longitud del intervalo ${math(`[${a},\\,${b}]`)}?`, `كم طول الفترة ${math(`[${a},\\,${b}]`)}؟`, `What is the length of the interval ${math(`[${a},\\,${b}]`)}?`), choices, fraction(b - a), same(`${b}-${paren(a)}=${b - a}`), { a, b })
 }
 
 /* ---------- Circuit 4: approximations ---------- */
@@ -284,9 +284,9 @@ function awkwardNumber(random: Random, places: number): { text: string; value: n
 }
 
 const PLACES: Record<number, LocalizedText> = {
-    1: say('hamarrenetara', 'a las décimas', 'إلى الأعشار'),
-    2: say('ehunenetara', 'a las centésimas', 'إلى الأجزاء من مئة'),
-    3: say('milaenetara', 'a las milésimas', 'إلى الأجزاء من ألف')
+    1: say('hamarrenetara', 'a las décimas', 'إلى الأعشار', 'to the tenths'),
+    2: say('ehunenetara', 'a las centésimas', 'إلى الأجزاء من مئة', 'to the hundredths'),
+    3: say('milaenetara', 'a las milésimas', 'إلى الأجزاء من ألف', 'to three decimal places')
 }
 
 function roundQuestion(random: Random, tier: Tier): PowersRaceQuestion | null {
@@ -298,7 +298,7 @@ function roundQuestion(random: Random, tier: Tier): PowersRaceQuestion | null {
     const truncated = Math.floor(number.value * factor + 1e-9) / factor
     const answer = fraction(Math.round(rounded * factor), factor)
     const choices = options(random, answer, [decimalOf(truncated, places, 'round-trunc'), decimalOf(rounded + 1 / factor, places, 'calculation'), decimalOf(Math.round(number.value * factor * 10 + 1e-9) / (factor * 10), places + 1, 'calculation')])
-    return choices && build(4, 'round', say(`Biribildu ${math(number.text)} ${PLACES[places].eu}.`, `Redondea ${math(number.text)} ${PLACES[places].es}.`, `قرّب ${math(number.text)} ${PLACES[places].ar}.`), choices, answer, same(`${number.text}\\approx ${written(answer)}`), { places, value: Math.round(number.value * 10000) })
+    return choices && build(4, 'round', say(`Biribildu ${math(number.text)} ${PLACES[places].eu}.`, `Redondea ${math(number.text)} ${PLACES[places].es}.`, `قرّب ${math(number.text)} ${PLACES[places].ar}.`, `Round ${math(number.text)} ${PLACES[places].en}.`), choices, answer, same(`${number.text}\\approx ${written(answer)}`), { places, value: Math.round(number.value * 10000) })
 }
 
 function truncateQuestion(random: Random, tier: Tier): PowersRaceQuestion | null {
@@ -310,7 +310,7 @@ function truncateQuestion(random: Random, tier: Tier): PowersRaceQuestion | null
     const truncated = Math.floor(number.value * factor + 1e-9) / factor
     const answer = fraction(Math.round(truncated * factor), factor)
     const choices = options(random, answer, [decimalOf(rounded, places, 'round-trunc'), decimalOf(truncated - 1 / factor, places, 'calculation'), decimalOf(Math.floor(number.value * factor * 10 + 1e-9) / (factor * 10), places + 1, 'calculation')])
-    return choices && build(4, 'truncate', say(`Trunkatu ${math(number.text)} ${PLACES[places].eu}.`, `Trunca ${math(number.text)} ${PLACES[places].es}.`, `ابتر ${math(number.text)} ${PLACES[places].ar}.`), choices, answer, same(`${number.text}\\to ${written(answer)}`), { places, value: Math.round(number.value * 10000) })
+    return choices && build(4, 'truncate', say(`Trunkatu ${math(number.text)} ${PLACES[places].eu}.`, `Trunca ${math(number.text)} ${PLACES[places].es}.`, `ابتر ${math(number.text)} ${PLACES[places].ar}.`, `Truncate ${math(number.text)} ${PLACES[places].en}.`), choices, answer, same(`${number.text}\\to ${written(answer)}`), { places, value: Math.round(number.value * 10000) })
 }
 
 function absoluteErrorQuestion(random: Random): PowersRaceQuestion | null {
@@ -325,7 +325,7 @@ function absoluteErrorQuestion(random: Random): PowersRaceQuestion | null {
     const exact = written(fraction(exactCents, 100))!
     const approx = written(fraction(approxTenths, 10))!
     const choices = options(random, answer, [{ value: fraction(approxTenths, 10), error: 'abs-rel' }, { value: fraction(errorCents, 10), error: 'calculation' }, { value: fraction(exactCents - approxTenths * 10, 100), error: 'sign' }, { value: fraction(errorCents, 1000), error: 'calculation' }])
-    return choices && build(4, 'absolute-error', say(`${math(exact)} hamarrenetara biribiltzen da: ${math(approx)}. Zenbat da errore absolutua?`, `Se redondea ${math(exact)} a las décimas: ${math(approx)}. ¿Cuánto es el error absoluto?`, `قُرّب ${math(exact)} إلى الأعشار فصار ${math(approx)}. كم الخطأ المطلق؟`), choices, answer, same(`|${exact}-${approx}|=${written(answer)}`), { exactCents, approxTenths })
+    return choices && build(4, 'absolute-error', say(`${math(exact)} hamarrenetara biribiltzen da: ${math(approx)}. Zenbat da errore absolutua?`, `Se redondea ${math(exact)} a las décimas: ${math(approx)}. ¿Cuánto es el error absoluto?`, `قُرّب ${math(exact)} إلى الأعشار فصار ${math(approx)}. كم الخطأ المطلق؟`, `${math(exact)} is rounded to one decimal place: ${math(approx)}. What is the absolute error?`), choices, answer, same(`|${exact}-${approx}|=${written(answer)}`), { exactCents, approxTenths })
 }
 
 function relativeErrorQuestion(random: Random): PowersRaceQuestion | null {
@@ -333,7 +333,7 @@ function relativeErrorQuestion(random: Random): PowersRaceQuestion | null {
     const error = randomInt(random, 1, Math.min(4, exact / 10))
     const answer = frac(error, exact)
     const choices = options(random, answer, [whole(error, 'abs-rel'), { value: frac(exact, error), error: 'abs-rel' }, { value: frac(error, exact - error), error: 'calculation' }, { value: frac(error, exact * 10), error: 'calculation' }])
-    return choices && build(4, 'relative-error', say(`Zenbaki zehatza ${math(String(exact))} da eta neurtutakoa ${math(String(exact - error))}. Zenbat da errore erlatiboa?`, `El valor exacto es ${math(String(exact))} y se midió ${math(String(exact - error))}. ¿Cuánto es el error relativo?`, `القيمة الصحيحة ${math(String(exact))} والمقيسة ${math(String(exact - error))}. كم الخطأ النسبي؟`), choices, answer, same(`\\frac{|${exact}-${exact - error}|}{${exact}}=\\frac{${error}}{${exact}}=${written(answer)}`), { exact, error })
+    return choices && build(4, 'relative-error', say(`Zenbaki zehatza ${math(String(exact))} da eta neurtutakoa ${math(String(exact - error))}. Zenbat da errore erlatiboa?`, `El valor exacto es ${math(String(exact))} y se midió ${math(String(exact - error))}. ¿Cuánto es el error relativo?`, `القيمة الصحيحة ${math(String(exact))} والمقيسة ${math(String(exact - error))}. كم الخطأ النسبي؟`, `The exact value is ${math(String(exact))} and ${math(String(exact - error))} was measured. What is the relative error?`), choices, answer, same(`\\frac{|${exact}-${exact - error}|}{${exact}}=\\frac{${error}}{${exact}}=${written(answer)}`), { exact, error })
 }
 
 type Generator = (random: Random, tier: Tier) => PowersRaceQuestion | null
@@ -364,20 +364,20 @@ export function powersParTime(circuit: number): number {
 }
 
 export const powersRaceErrorTips: Record<PowersRaceError, LocalizedText> = {
-    'sign-base': say('Berretzaileak oinarriari bakarrik eragiten dio: −5² = −25, baina (−5)² = 25.', 'El exponente solo afecta a la base: −5² = −25, pero (−5)² = 25.', 'الأس يؤثر في الأساس فقط: −5² = −25 لكن (−5)² = 25.'),
-    'no-inverse': say('Berretzaile negatiboa: alderantzizkoa, a⁻ⁿ = 1/aⁿ. Zatikietan, buelta eman.', 'Exponente negativo: el inverso, a⁻ⁿ = 1/aⁿ. En las fracciones, se da la vuelta.', 'الأس السالب: المقلوب، a⁻ⁿ = 1/aⁿ. وفي الكسور نقلب الكسر.'),
-    'negative-result': say('Berretzaile negatiboak ez du emaitza negatiboa ematen: alderantzizkoa ematen du.', 'Un exponente negativo no da un resultado negativo: da el inverso.', 'الأس السالب لا يعطي نتيجة سالبة: يعطي المقلوب.'),
-    'multiply-exponents': say('Oinarri bera biderkatzean berretzaileak batu, ez biderkatu; berreturaren berreturan bakarrik biderkatzen dira.', 'Al multiplicar la misma base se suman los exponentes; solo se multiplican en la potencia de una potencia.', 'عند ضرب الأساس نفسه تُجمع الأسس لا تُضرب؛ وتُضرب في قوة القوة فقط.'),
-    'exponent-sign': say('Zenbaki handiak: berretzaile positiboa; 1 baino txikiagoak: negatiboa.', 'Números grandes: exponente positivo; menores que 1: negativo.', 'الأعداد الكبيرة: أس موجب؛ والأصغر من 1: سالب.'),
-    'no-adjust': say('Zenbatu jauziak ondo: komaren aurretik zifra bakarra geratu behar da, 0 ez dena. Emaitzak 10 edo gehiago ateratzen badu, egokitu.', 'Cuenta bien los saltos: delante de la coma una sola cifra distinta de 0. Si el resultado sale 10 o más, ajusta.', 'عُدّ القفزات جيدًا: رقم واحد غير صفر قبل الفاصلة. وإذا خرج 10 أو أكثر فاضبطه.'),
-    sign: say('Kontuz zeinuarekin: berretzaileak kentzean edo zatitzean, kendu berretzaileak.', 'Cuidado con el signo: al dividir, los exponentes se restan.', 'انتبه للإشارة: عند القسمة تُطرح الأسس.'),
-    'no-root': say('Erroa atera behar da, ez erdira zatitu.', 'Hay que sacar la raíz, no dividir entre la mitad.', 'يجب أخذ الجذر لا القسمة على النصف.'),
-    outside: say('Ateratzen dena karratu perfektuaren erroa da, ez gainerako faktorea.', 'Lo que sale es la raíz del cuadrado perfecto, no el otro factor.', 'ما يخرج هو جذر المربع الكامل لا العامل الآخر.'),
-    'no-square': say('Sartzean, aurreko faktorea karratura jaso behar da: a√b = √(a² · b).', 'Al meter, el factor de delante se eleva al cuadrado: a√b = √(a² · b).', 'عند الإدخال يُرفع العامل الأمامي إلى التربيع: a√b = √(a² · b).'),
-    'add-radicands': say('Erroak ez dira errokizunak batuz batzen; biderkatzean errokizunak biderkatzen dira.', 'Las raíces no se suman sumando los radicandos; al multiplicar se multiplican los radicandos.', 'لا تُجمع الجذور بجمع ما تحتها؛ وعند الضرب يُضرب ما تحتها.'),
-    irrational: say('Irrazionala: zifra hamartar infinituak periodorik gabe. Karratu perfektuen erroak eta hamartar periodikoak arrazionalak dira.', 'Irracional: infinitas cifras sin periodo. Las raíces de cuadrados perfectos y los decimales periódicos son racionales.', 'غير النسبي: أرقام لا نهائية بلا دور. جذور المربعات الكاملة والعشريات الدورية نسبية.'),
-    interval: say('Kortxeteko muturra sartzen da, parentesikoa ez. Luzera: b − a.', 'El extremo con corchete entra, el de paréntesis no. Longitud: b − a.', 'الطرف بقوس مربع داخل والآخر لا. الطول: b − a.'),
-    'round-trunc': say('Trunkatzea mozteko da; biribiltzean, kendutako lehen zifra 5 edo handiagoa bada, 1 gehitzen da.', 'Truncar es cortar; al redondear, si la primera cifra suprimida es 5 o más, se suma 1.', 'البتر قطع؛ وعند التقريب إذا كان أول رقم محذوف 5 أو أكثر نضيف 1.'),
-    'abs-rel': say('Errore absolutua distantzia da; erlatiboa, absolutua zenbaki zehatzaz zatitzea.', 'El error absoluto es la distancia; el relativo, el absoluto entre el valor exacto.', 'الخطأ المطلق هو المسافة؛ والنسبي هو المطلق مقسومًا على القيمة الصحيحة.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    'sign-base': say('Berretzaileak oinarriari bakarrik eragiten dio: −5² = −25, baina (−5)² = 25.', 'El exponente solo afecta a la base: −5² = −25, pero (−5)² = 25.', 'الأس يؤثر في الأساس فقط: −5² = −25 لكن (−5)² = 25.', 'The exponent only affects the base: −5² = −25, but (−5)² = 25.'),
+    'no-inverse': say('Berretzaile negatiboa: alderantzizkoa, a⁻ⁿ = 1/aⁿ. Zatikietan, buelta eman.', 'Exponente negativo: el inverso, a⁻ⁿ = 1/aⁿ. En las fracciones, se da la vuelta.', 'الأس السالب: المقلوب، a⁻ⁿ = 1/aⁿ. وفي الكسور نقلب الكسر.', 'Negative exponent: the reciprocal, a⁻ⁿ = 1/aⁿ. With fractions, turn the fraction upside down.'),
+    'negative-result': say('Berretzaile negatiboak ez du emaitza negatiboa ematen: alderantzizkoa ematen du.', 'Un exponente negativo no da un resultado negativo: da el inverso.', 'الأس السالب لا يعطي نتيجة سالبة: يعطي المقلوب.', 'A negative exponent does not give a negative result: it gives the reciprocal.'),
+    'multiply-exponents': say('Oinarri bera biderkatzean berretzaileak batu, ez biderkatu; berreturaren berreturan bakarrik biderkatzen dira.', 'Al multiplicar la misma base se suman los exponentes; solo se multiplican en la potencia de una potencia.', 'عند ضرب الأساس نفسه تُجمع الأسس لا تُضرب؛ وتُضرب في قوة القوة فقط.', 'When multiplying the same base, the exponents are added; they are only multiplied in a power of a power.'),
+    'exponent-sign': say('Zenbaki handiak: berretzaile positiboa; 1 baino txikiagoak: negatiboa.', 'Números grandes: exponente positivo; menores que 1: negativo.', 'الأعداد الكبيرة: أس موجب؛ والأصغر من 1: سالب.', 'Large numbers: positive exponent; numbers less than 1: negative.'),
+    'no-adjust': say('Zenbatu jauziak ondo: komaren aurretik zifra bakarra geratu behar da, 0 ez dena. Emaitzak 10 edo gehiago ateratzen badu, egokitu.', 'Cuenta bien los saltos: delante de la coma una sola cifra distinta de 0. Si el resultado sale 10 o más, ajusta.', 'عُدّ القفزات جيدًا: رقم واحد غير صفر قبل الفاصلة. وإذا خرج 10 أو أكثر فاضبطه.', 'Count the jumps carefully: only one non-zero digit goes in front of the decimal point. If the result is 10 or more, adjust it.'),
+    sign: say('Kontuz zeinuarekin: berretzaileak kentzean edo zatitzean, kendu berretzaileak.', 'Cuidado con el signo: al dividir, los exponentes se restan.', 'انتبه للإشارة: عند القسمة تُطرح الأسس.', 'Watch the sign: when dividing, the exponents are subtracted.'),
+    'no-root': say('Erroa atera behar da, ez erdira zatitu.', 'Hay que sacar la raíz, no dividir entre la mitad.', 'يجب أخذ الجذر لا القسمة على النصف.', 'You must take the root, not halve the number.'),
+    outside: say('Ateratzen dena karratu perfektuaren erroa da, ez gainerako faktorea.', 'Lo que sale es la raíz del cuadrado perfecto, no el otro factor.', 'ما يخرج هو جذر المربع الكامل لا العامل الآخر.', 'What comes out is the square root of the perfect square, not the other factor.'),
+    'no-square': say('Sartzean, aurreko faktorea karratura jaso behar da: a√b = √(a² · b).', 'Al meter, el factor de delante se eleva al cuadrado: a√b = √(a² · b).', 'عند الإدخال يُرفع العامل الأمامي إلى التربيع: a√b = √(a² · b).', 'When putting a factor inside the root, the factor in front is squared: a√b = √(a² · b).'),
+    'add-radicands': say('Erroak ez dira errokizunak batuz batzen; biderkatzean errokizunak biderkatzen dira.', 'Las raíces no se suman sumando los radicandos; al multiplicar se multiplican los radicandos.', 'لا تُجمع الجذور بجمع ما تحتها؛ وعند الضرب يُضرب ما تحتها.', 'Roots are not added by adding the radicands; when multiplying, the radicands are multiplied.'),
+    irrational: say('Irrazionala: zifra hamartar infinituak periodorik gabe. Karratu perfektuen erroak eta hamartar periodikoak arrazionalak dira.', 'Irracional: infinitas cifras sin periodo. Las raíces de cuadrados perfectos y los decimales periódicos son racionales.', 'غير النسبي: أرقام لا نهائية بلا دور. جذور المربعات الكاملة والعشريات الدورية نسبية.', 'Irrational: infinitely many digits with no repeating pattern. Roots of perfect squares and recurring decimals are rational.'),
+    interval: say('Kortxeteko muturra sartzen da, parentesikoa ez. Luzera: b − a.', 'El extremo con corchete entra, el de paréntesis no. Longitud: b − a.', 'الطرف بقوس مربع داخل والآخر لا. الطول: b − a.', 'An endpoint with a square bracket is included, one with a round bracket is not. Length: b − a.'),
+    'round-trunc': say('Trunkatzea mozteko da; biribiltzean, kendutako lehen zifra 5 edo handiagoa bada, 1 gehitzen da.', 'Truncar es cortar; al redondear, si la primera cifra suprimida es 5 o más, se suma 1.', 'البتر قطع؛ وعند التقريب إذا كان أول رقم محذوف 5 أو أكثر نضيف 1.', 'Truncating means cutting off; when rounding, if the first digit dropped is 5 or more, add 1.'),
+    'abs-rel': say('Errore absolutua distantzia da; erlatiboa, absolutua zenbaki zehatzaz zatitzea.', 'El error absoluto es la distancia; el relativo, el absoluto entre el valor exacto.', 'الخطأ المطلق هو المسافة؛ والنسبي هو المطلق مقسومًا على القيمة الصحيحة.', 'The absolute error is the distance; the relative error is the absolute error divided by the exact value.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

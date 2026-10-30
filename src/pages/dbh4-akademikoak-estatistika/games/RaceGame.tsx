@@ -12,8 +12,8 @@ const statisticsAkRace: RaceRules<StatisticsAkRaceError> = {
     parTime: statisticsAkParTime,
     errorTip: (error) => statisticsAkRaceErrorTips[error ?? 'calculation'],
     pitPlaceholder: () => '18',
-    pitUnreadable: { eu: 'Idatzi zenbaki bakar bat, adibidez 18, 6,5 edo −2.', es: 'Escribe un solo número, por ejemplo 18, 6,5 o −2.', ar: 'اكتب عددًا واحدًا، مثل 18 أو 6.5 أو ⁦−2⁩.' },
-    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', ar: 'اكتبه عددًا.' }
+    pitUnreadable: { eu: 'Idatzi zenbaki bakar bat, adibidez 18, 6,5 edo −2.', es: 'Escribe un solo número, por ejemplo 18, 6,5 o −2.', en: 'Write a single number, for example 18, 6.5 or −2.', ar: 'اكتب عددًا واحدًا، مثل 18 أو 6.5 أو ⁦−2⁩.' },
+    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', en: 'Write it as a number.', ar: 'اكتبه عددًا.' }
 }
 
 export function StatisticsAkRaceGame(props: GameProps) {

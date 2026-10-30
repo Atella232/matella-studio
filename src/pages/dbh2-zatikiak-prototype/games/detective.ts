@@ -54,29 +54,29 @@ export const detectiveLevels: DetectiveError[][] = [
 export const DETECTIVE_CASES = 6
 
 export const detectiveErrorNames: Record<DetectiveError, LocalizedText> = {
-    'added-denominators': { eu: 'Izendatzaileak batu ditu', es: 'Sumó los denominadores', ar: 'جمع المقامات' },
-    'forgot-numerator': { eu: 'Ez du zenbakitzailea aldatu', es: 'No cambió el numerador', ar: 'لم يغيّر البسط' },
-    calculation: { eu: 'Kalkulu-akatsa', es: 'Error de cálculo', ar: 'خطأ حسابي' },
-    'bad-simplify': { eu: 'Gaizki sinplifikatu du', es: 'Simplificó mal', ar: 'اختزل خطأً' },
-    sign: { eu: 'Zeinu-akatsa', es: 'Error de signo', ar: 'خطأ في الإشارة' },
-    'cross-multiplied': { eu: 'Gurutzean biderkatu du', es: 'Multiplicó en cruz', ar: 'ضرب تبادليًا' },
-    'no-invert': { eu: 'Ez du bigarrena alderantzikatu', es: 'No invirtió la segunda', ar: 'لم يقلب الكسر الثاني' },
-    'inverted-first': { eu: 'Lehena alderantzikatu du', es: 'Invirtió la primera', ar: 'قلب الكسر الأول' },
-    priority: { eu: 'Ez du hierarkia errespetatu', es: 'Se saltó la jerarquía', ar: 'لم يحترم أولوية العمليات' },
-    'power-numerator': { eu: 'Zenbakitzailea bakarrik berretu du', es: 'Solo elevó el numerador', ar: 'رفع البسط وحده' }
+    'added-denominators': { eu: 'Izendatzaileak batu ditu', es: 'Sumó los denominadores', en: 'Added the denominators', ar: 'جمع المقامات' },
+    'forgot-numerator': { eu: 'Ez du zenbakitzailea aldatu', es: 'No cambió el numerador', en: 'Did not change the numerator', ar: 'لم يغيّر البسط' },
+    calculation: { eu: 'Kalkulu-akatsa', es: 'Error de cálculo', en: 'Calculation error', ar: 'خطأ حسابي' },
+    'bad-simplify': { eu: 'Gaizki sinplifikatu du', es: 'Simplificó mal', en: 'Simplified incorrectly', ar: 'اختزل خطأً' },
+    sign: { eu: 'Zeinu-akatsa', es: 'Error de signo', en: 'Sign error', ar: 'خطأ في الإشارة' },
+    'cross-multiplied': { eu: 'Gurutzean biderkatu du', es: 'Multiplicó en cruz', en: 'Cross-multiplied', ar: 'ضرب تبادليًا' },
+    'no-invert': { eu: 'Ez du bigarrena alderantzikatu', es: 'No invirtió la segunda', en: 'Did not invert the second one', ar: 'لم يقلب الكسر الثاني' },
+    'inverted-first': { eu: 'Lehena alderantzikatu du', es: 'Invirtió la primera', en: 'Inverted the first one', ar: 'قلب الكسر الأول' },
+    priority: { eu: 'Ez du hierarkia errespetatu', es: 'Se saltó la jerarquía', en: 'Skipped the order of operations', ar: 'لم يحترم أولوية العمليات' },
+    'power-numerator': { eu: 'Zenbakitzailea bakarrik berretu du', es: 'Solo elevó el numerador', en: 'Only raised the numerator to a power', ar: 'رفع البسط وحده' }
 }
 
 export const detectiveErrorTips: Record<DetectiveError, LocalizedText> = {
-    'added-denominators': { eu: 'Izendatzaileak ez dira batzen: lehenik, izendatzaile komuna.', es: 'Los denominadores no se suman: primero, denominador común.', ar: 'لا تُجمع المقامات: أولًا المقام المشترك.' },
-    'forgot-numerator': { eu: 'Izendatzailea aldatzen baduzu, zenbakitzailea zenbaki beraz biderkatu behar da.', es: 'Si cambias el denominador, el numerador se multiplica por el mismo número.', ar: 'إذا غيّرت المقام فاضرب البسط في العدد نفسه.' },
-    calculation: { eu: 'Berrikusi lerro horretako eragiketa.', es: 'Repasa la operación de esa línea.', ar: 'راجع العملية في ذلك السطر.' },
-    'bad-simplify': { eu: 'Sinplifikatzeko, zatitu zenbakitzailea eta izendatzailea zenbaki beraz.', es: 'Para simplificar, divide numerador y denominador entre el mismo número.', ar: 'للاختزال اقسم البسط والمقام على العدد نفسه.' },
-    sign: { eu: 'Zatiki handiago bat kentzen baduzu, emaitza negatiboa da.', es: 'Si restas una fracción mayor, el resultado es negativo.', ar: 'إذا طرحت كسرًا أكبر فالنتيجة سالبة.' },
-    'cross-multiplied': { eu: 'Biderkatzeko: zenbakitzailea zenbakitzaileaz eta izendatzailea izendatzaileaz.', es: 'Para multiplicar: numerador por numerador y denominador por denominador.', ar: 'للضرب: البسط في البسط والمقام في المقام.' },
-    'no-invert': { eu: 'Zatitzeko, bigarren zatikiaren alderantzizkoaz biderkatzen da.', es: 'Para dividir, se multiplica por la inversa de la segunda fracción.', ar: 'للقسمة نضرب في مقلوب الكسر الثاني.' },
-    'inverted-first': { eu: 'Bigarren zatikia alderantzikatzen da, ez lehena.', es: 'Se invierte la segunda fracción, no la primera.', ar: 'نقلب الكسر الثاني لا الأول.' },
-    priority: { eu: 'Lehenik biderketak eta zatiketak; gero batuketak eta kenketak.', es: 'Primero las multiplicaciones y divisiones; después las sumas y restas.', ar: 'أولًا الضرب والقسمة، ثم الجمع والطرح.' },
-    'power-numerator': { eu: 'Zatiki baten berreturak zenbakitzailea eta izendatzailea berretzen ditu.', es: 'Al elevar una fracción se elevan el numerador y el denominador.', ar: 'عند رفع كسر إلى قوة يُرفع البسط والمقام معًا.' }
+    'added-denominators': { eu: 'Izendatzaileak ez dira batzen: lehenik, izendatzaile komuna.', es: 'Los denominadores no se suman: primero, denominador común.', en: 'Denominators are not added: first, a common denominator.', ar: 'لا تُجمع المقامات: أولًا المقام المشترك.' },
+    'forgot-numerator': { eu: 'Izendatzailea aldatzen baduzu, zenbakitzailea zenbaki beraz biderkatu behar da.', es: 'Si cambias el denominador, el numerador se multiplica por el mismo número.', en: 'If you change the denominator, the numerator is multiplied by the same number.', ar: 'إذا غيّرت المقام فاضرب البسط في العدد نفسه.' },
+    calculation: { eu: 'Berrikusi lerro horretako eragiketa.', es: 'Repasa la operación de esa línea.', en: 'Check the calculation on that line.', ar: 'راجع العملية في ذلك السطر.' },
+    'bad-simplify': { eu: 'Sinplifikatzeko, zatitu zenbakitzailea eta izendatzailea zenbaki beraz.', es: 'Para simplificar, divide numerador y denominador entre el mismo número.', en: 'To simplify, divide the numerator and the denominator by the same number.', ar: 'للاختزال اقسم البسط والمقام على العدد نفسه.' },
+    sign: { eu: 'Zatiki handiago bat kentzen baduzu, emaitza negatiboa da.', es: 'Si restas una fracción mayor, el resultado es negativo.', en: 'If you subtract a larger fraction, the result is negative.', ar: 'إذا طرحت كسرًا أكبر فالنتيجة سالبة.' },
+    'cross-multiplied': { eu: 'Biderkatzeko: zenbakitzailea zenbakitzaileaz eta izendatzailea izendatzaileaz.', es: 'Para multiplicar: numerador por numerador y denominador por denominador.', en: 'To multiply: numerator by numerator and denominator by denominator.', ar: 'للضرب: البسط في البسط والمقام في المقام.' },
+    'no-invert': { eu: 'Zatitzeko, bigarren zatikiaren alderantzizkoaz biderkatzen da.', es: 'Para dividir, se multiplica por la inversa de la segunda fracción.', en: 'To divide, multiply by the reciprocal of the second fraction.', ar: 'للقسمة نضرب في مقلوب الكسر الثاني.' },
+    'inverted-first': { eu: 'Bigarren zatikia alderantzikatzen da, ez lehena.', es: 'Se invierte la segunda fracción, no la primera.', en: 'Invert the second fraction, not the first.', ar: 'نقلب الكسر الثاني لا الأول.' },
+    priority: { eu: 'Lehenik biderketak eta zatiketak; gero batuketak eta kenketak.', es: 'Primero las multiplicaciones y divisiones; después las sumas y restas.', en: 'First multiply and divide; then add and subtract.', ar: 'أولًا الضرب والقسمة، ثم الجمع والطرح.' },
+    'power-numerator': { eu: 'Zatiki baten berreturak zenbakitzailea eta izendatzailea berretzen ditu.', es: 'Al elevar una fracción se elevan el numerador y el denominador.', en: 'When you raise a fraction to a power, you raise both the numerator and the denominator.', ar: 'عند رفع كسر إلى قوة يُرفع البسط والمقام معًا.' }
 }
 
 /* ---------- Writing ---------- */

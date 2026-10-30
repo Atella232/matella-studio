@@ -4,6 +4,7 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 
 import es from './locales/es.json'
 import eu from './locales/eu.json'
+import en from './locales/en.json'
 import ar from './locales/ar.json'
 
 export const SOURCE_LANGUAGE = 'eu'
@@ -15,6 +16,7 @@ i18n
         resources: {
             es: { translation: es },
             eu: { translation: eu },
+            en: { translation: en },
             ar: { translation: ar },
         },
         fallbackLng: SOURCE_LANGUAGE,

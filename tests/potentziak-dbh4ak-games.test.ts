@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
@@ -80,9 +81,9 @@ test('potentziak 4. DBH ak race: valid options and every answer recomputed', () 
                         assert.ok(powersRaceErrorTips[option.error], option.error)
                     }
                 }
-                for (const language of ['eu', 'es', 'ar'] as const) {
+                for (const language of ['eu', 'es', 'en', 'ar'] as const) {
                     for (const text of [question.prompt[language], question.solution[language]]) {
-                        for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formula, { throwOnError: true })
+                        for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) katex.renderToString(formulaFor(language, formula), { throwOnError: true })
                     }
                 }
                 assert.ok(!/\$-(?:k|ra|tik|n|ko|an|ean)\b/.test(question.prompt.eu), question.prompt.eu)

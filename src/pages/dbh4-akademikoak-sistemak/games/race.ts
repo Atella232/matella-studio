@@ -43,8 +43,8 @@ export type SystemsRaceError =
 export type SystemsRaceQuestion = RaceQuestion<SystemsRaceError> & { meta: Record<string, number> }
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => ({ eu: `$${latex}$`, es: `$${latex}$`, ar: `$${latex}$` })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => ({ eu: `$${latex}$`, es: `$${latex}$`, en: `$${latex}$`, ar: `$${latex}$` })
 const math = (latex: string) => `$${latex}$`
 const nonZero = (random: Random, min: number, max: number) => {
     const value = randomInt(random, min, max - 1)
@@ -93,7 +93,7 @@ function build(circuit: number, kind: string, prompt: LocalizedText, choices: Ra
 }
 
 /** «Solve the system …: how much is x/y?» */
-const solveFor = (system: string, unknown: 'x' | 'y') => say(`Ebatzi ${system}. Zenbat da ${unknown}?`, `Resuelve ${system}. ¿Cuánto vale ${unknown}?`, `حل ${system}. كم تساوي ${unknown}؟`)
+const solveFor = (system: string, unknown: 'x' | 'y') => say(`Ebatzi ${system}. Zenbat da ${unknown}?`, `Resuelve ${system}. ¿Cuánto vale ${unknown}?`, `حل ${system}. كم تساوي ${unknown}؟`, `Solve ${system}. What is the value of ${unknown}?`)
 /** Meta of a linear system with the unknown asked */
 const linearMeta = (a1: number, b1: number, c1: number, a2: number, b2: number, c2: number, ask: 0 | 1) => ({ a1, b1, c1, a2, b2, c2, ask })
 
@@ -109,7 +109,7 @@ function pointQuestion(random: Random, tier: Tier): SystemsRaceQuestion | null {
     return choices && build(0, 'point', say(
         `$(${x},k)$ bikotea ${math(eq(a, b, c))} ekuazioaren ebazpena da. Zenbat da k?`,
         `$(${x},k)$ es solución de ${math(eq(a, b, c))}. ¿Cuánto vale k?`,
-        `$(${x},k)$ حل للمعادلة ${math(eq(a, b, c))}. كم تساوي k؟`
+        `$(${x},k)$ حل للمعادلة ${math(eq(a, b, c))}. كم تساوي k؟`, `$(${x},k)$ is a solution of ${math(eq(a, b, c))}. What is the value of k?`
     ), choices, fraction(k), same(`${a * x}${b === 1 ? '+k' : b === -1 ? '-k' : `${plus(b)}\\cdot k`}=${c}\\ \\to\\ k=${k}`), { a, b, c, x })
 }
 
@@ -134,7 +134,7 @@ function parameterQuestion(random: Random, tier: Tier): SystemsRaceQuestion | nu
     return choices && build(0, 'parameter', say(
         `m-ren zein baliotarako da bateraezina ${pair(eq(a, b, c), `${a * factor}x+my=${c2}`)} sistema?`,
         `¿Para qué valor de m es incompatible el sistema ${pair(eq(a, b, c), `${a * factor}x+my=${c2}`)}?`,
-        `لأي قيمة لـ m يكون النظام ${pair(eq(a, b, c), `${a * factor}x+my=${c2}`)} غير متوافق؟`
+        `لأي قيمة لـ m يكون النظام ${pair(eq(a, b, c), `${a * factor}x+my=${c2}`)} غير متوافق؟`, `For what value of m is the system ${pair(eq(a, b, c), `${a * factor}x+my=${c2}`)} inconsistent?`
     ), choices, fraction(m), same(`\\frac{${a}}{${a * factor}}=\\frac{${b}}{m}\\ \\to\\ m=${m}`), { a, b, c, factor, c2 })
 }
 
@@ -148,7 +148,7 @@ function axisQuestion(random: Random): SystemsRaceQuestion | null {
     return choices && build(0, 'axis', say(
         `Non ebakitzen du ${math(eq(a, b, c))} zuzenak Y ardatza? Eman y.`,
         `¿Dónde corta la recta ${math(eq(a, b, c))} al eje Y? Da la y.`,
-        `أين يقطع المستقيم ${math(eq(a, b, c))} المحور Y؟ أعطِ y.`
+        `أين يقطع المستقيم ${math(eq(a, b, c))} المحور Y؟ أعطِ y.`, `Where does the straight line ${math(eq(a, b, c))} cross the y-axis? Give the y-value.`
     ), choices, fraction(y), same(`x=0\\ \\to\\ ${times(b, 'y')}=${c}\\ \\to\\ y=${y}`), { a, b, c })
 }
 
@@ -217,7 +217,7 @@ function sumProductQuestion(random: Random): SystemsRaceQuestion | null {
     return choices && build(2, 'sum-product', say(
         `Ebatzi ${pair(`x+y=${r + s}`, `xy=${r * s}`)}. Zein da x-ren baliorik handiena?`,
         `Resuelve ${pair(`x+y=${r + s}`, `xy=${r * s}`)}. ¿Cuál es el mayor valor de x?`,
-        `حل ${pair(`x+y=${r + s}`, `xy=${r * s}`)}. ما أكبر قيمة لـ x؟`
+        `حل ${pair(`x+y=${r + s}`, `xy=${r * s}`)}. ما أكبر قيمة لـ x؟`, `Solve ${pair(`x+y=${r + s}`, `xy=${r * s}`)}. What is the largest value of x?`
     ), choices, fraction(s), same(`${polyLatex([1, -(r + s), r * s])}=0\\ \\to\\ x=${r},\\ x=${s}`), { r, s })
 }
 
@@ -238,7 +238,7 @@ function squaresCountQuestion(random: Random): SystemsRaceQuestion | null {
     return choices && build(2, 'squares-count', say(
         `Zenbat ebazpen ditu ${pair(`x^{2}+y^{2}=${A}`, `x^{2}-y^{2}=${B}`)} sistemak?`,
         `¿Cuántas soluciones tiene el sistema ${pair(`x^{2}+y^{2}=${A}`, `x^{2}-y^{2}=${B}`)}?`,
-        `كم حلًّا للنظام ${pair(`x^{2}+y^{2}=${A}`, `x^{2}-y^{2}=${B}`)}؟`
+        `كم حلًّا للنظام ${pair(`x^{2}+y^{2}=${A}`, `x^{2}-y^{2}=${B}`)}؟`, `How many solutions does the system ${pair(`x^{2}+y^{2}=${A}`, `x^{2}-y^{2}=${B}`)} have?`
     ), choices, fraction(count), same(`x^{2}=${x2},\\ y^{2}=${y2}`), { A, B })
 }
 
@@ -252,7 +252,7 @@ function squaresValueQuestion(random: Random): SystemsRaceQuestion | null {
     return choices && build(2, 'squares-value', say(
         `Ebatzi ${pair(`x^{2}+y^{2}=${A}`, `x^{2}-y^{2}=${B}`)}. Eman x positiboa.`,
         `Resuelve ${pair(`x^{2}+y^{2}=${A}`, `x^{2}-y^{2}=${B}`)}. Da la x positiva.`,
-        `حل ${pair(`x^{2}+y^{2}=${A}`, `x^{2}-y^{2}=${B}`)}. أعطِ x الموجبة.`
+        `حل ${pair(`x^{2}+y^{2}=${A}`, `x^{2}-y^{2}=${B}`)}. أعطِ x الموجبة.`, `Solve ${pair(`x^{2}+y^{2}=${A}`, `x^{2}-y^{2}=${B}`)}. Give the positive x-value.`
     ), choices, fraction(x), same(`2x^{2}=${A + B}\\ \\to\\ x^{2}=${x * x}\\ \\to\\ x=\\pm ${x}`), { A, B })
 }
 
@@ -263,7 +263,7 @@ function lineCircleQuestion(random: Random, tier: Tier): SystemsRaceQuestion | n
     return choices && build(2, 'line-circle', say(
         `Ebatzi ${pair(`x^{2}+y^{2}=${a * a + b * b}`, `x+y=${a + b}`)}. Zein da x-ren baliorik handiena?`,
         `Resuelve ${pair(`x^{2}+y^{2}=${a * a + b * b}`, `x+y=${a + b}`)}. ¿Cuál es el mayor valor de x?`,
-        `حل ${pair(`x^{2}+y^{2}=${a * a + b * b}`, `x+y=${a + b}`)}. ما أكبر قيمة لـ x؟`
+        `حل ${pair(`x^{2}+y^{2}=${a * a + b * b}`, `x+y=${a + b}`)}. ما أكبر قيمة لـ x؟`, `Solve ${pair(`x^{2}+y^{2}=${a * a + b * b}`, `x+y=${a + b}`)}. What is the largest value of x?`
     ), choices, fraction(b), same(`x^{2}+(${a + b}-x)^{2}=${a * a + b * b}\\ \\to\\ x=${a},\\ x=${b}`), { a, b })
 }
 
@@ -281,7 +281,7 @@ function testPointQuestion(random: Random): SystemsRaceQuestion | null {
     return choices && build(3, 'test-point', say(
         `Zein da c-ren balio osorik txikiena $(${p},${q})$ puntuak ${math(linearLatex({ a, b, c: 0 }, '\\le ').replace(/0$/, 'c'))} bete dezan?`,
         `¿Cuál es el menor valor entero de c para que $(${p},${q})$ cumpla ${math(linearLatex({ a, b, c: 0 }, '\\le ').replace(/0$/, 'c'))}?`,
-        `ما أصغر قيمة صحيحة لـ c لكي تحقق $(${p},${q})$ المتراجحة ${math(linearLatex({ a, b, c: 0 }, '\\le ').replace(/0$/, 'c'))}؟`
+        `ما أصغر قيمة صحيحة لـ c لكي تحقق $(${p},${q})$ المتراجحة ${math(linearLatex({ a, b, c: 0 }, '\\le ').replace(/0$/, 'c'))}؟`, `What is the smallest integer value of c for which $(${p},${q})$ satisfies ${math(linearLatex({ a, b, c: 0 }, '\\le ').replace(/0$/, 'c'))}?`
     ), choices, fraction(value), same(`${a}\\cdot(${p})+${b < 0 ? `(${b})` : b}\\cdot(${q})=${value}\\le c`), { a, b, p, q })
 }
 
@@ -301,7 +301,7 @@ function latticeQuestion(random: Random, tier: Tier): SystemsRaceQuestion | null
     return choices && build(3, 'lattice', say(
         `${math(region)}. Zenbat puntu ditu eskualdeak koordenatu osoekin?`,
         `${math(region)}. ¿Cuántos puntos de coordenadas enteras tiene la región?`,
-        `${math(region)}. كم نقطة إحداثياتها صحيحة في المنطقة؟`
+        `${math(region)}. كم نقطة إحداثياتها صحيحة في المنطقة؟`, `${math(region)}. How many points with integer coordinates does the region have?`
     ), choices, fraction(count), same(`${columns.join('+')}=${count}`), { a, b, c })
 }
 
@@ -316,7 +316,7 @@ function vertexQuestion(random: Random): SystemsRaceQuestion | null {
     return choices && build(3, 'vertex', say(
         `${math(region)}. Eskualdearen erpin bat X ardatzean dago. Zein da haren x?`,
         `${math(region)}. La región tiene un vértice en el eje X. ¿Cuál es su x?`,
-        `${math(region)}. للمنطقة رأس على المحور X. ما قيمة x فيه؟`
+        `${math(region)}. للمنطقة رأس على المحور X. ما قيمة x فيه؟`, `${math(region)}. The region has a vertex on the x-axis. What is its x-value?`
     ), choices, fraction(x), same(`y=0\\ \\to\\ ${times(a)}=${c}\\ \\to\\ x=${x}`), { a, b, c })
 }
 
@@ -330,7 +330,7 @@ function areaQuestion(random: Random): SystemsRaceQuestion | null {
     return choices && build(3, 'area', say(
         `${math(region)}. Zenbat da eskualdearen azalera?`,
         `${math(region)}. ¿Cuánto vale el área de la región?`,
-        `${math(region)}. كم مساحة المنطقة؟`
+        `${math(region)}. كم مساحة المنطقة؟`, `${math(region)}. What is the area of the region?`
     ), choices, area, same(`\\frac{${p}\\cdot ${q}}{2}=${written(area)}`), { a: q, b: p, c: p * q })
 }
 
@@ -346,7 +346,7 @@ function headsLegsQuestion(random: Random): SystemsRaceQuestion | null {
     return choices && build(4, 'heads-legs', say(
         `Baserri batean oiloak eta untxiak daude: ${heads} buru eta ${legs} hanka. Zenbat untxi daude?`,
         `En una granja hay gallinas y conejos: ${heads} cabezas y ${legs} patas. ¿Cuántos conejos hay?`,
-        `في مزرعة دجاج وأرانب: ${heads} رأسًا و${legs} رجلًا. كم أرنبًا هناك؟`
+        `في مزرعة دجاج وأرانب: ${heads} رأسًا و${legs} رجلًا. كم أرنبًا هناك؟`, `On a farm there are hens and rabbits: ${heads} heads and ${legs} legs. How many rabbits are there?`
     ), choices, fraction(rabbits), same(`2y=${legs}-2\\cdot ${heads}=${2 * rabbits}\\ \\to\\ y=${rabbits}`), linearMeta(1, 1, heads, 2, 4, legs, 1))
 }
 
@@ -361,7 +361,7 @@ function coinsQuestion(random: Random): SystemsRaceQuestion | null {
     return choices && build(4, 'coins', say(
         `${low} eta ${high} euroko ${count} txanpon edo billetek ${total} € egiten dute. Zenbat dira ${high} eurokoak?`,
         `${count} monedas o billetes de ${low} € y de ${high} € suman ${total} €. ¿Cuántos son de ${high} €?`,
-        `${count} قطعة نقدية أو ورقة من فئتي ${low} € و${high} € مجموعها ${total} €. كم منها من فئة ${high} €؟`
+        `${count} قطعة نقدية أو ورقة من فئتي ${low} € و${high} € مجموعها ${total} €. كم منها من فئة ${high} €؟`, `${count} coins or notes of €${low} and €${high} add up to €${total}. How many are €${high}?`
     ), choices, fraction(highs), same(`${times(high - low, 'y')}=${total}-${low}\\cdot ${count}=${(high - low) * highs}\\ \\to\\ y=${highs}`), linearMeta(1, 1, count, low, high, total, 1))
 }
 
@@ -374,7 +374,7 @@ function numbersQuestion(random: Random): SystemsRaceQuestion | null {
     return choices && build(4, 'numbers', say(
         `Bi zenbakiren batura ${sum} da eta haien karratuen kendura ${difference}. Zein da handiena?`,
         `Dos números suman ${sum} y la diferencia de sus cuadrados es ${difference}. ¿Cuál es el mayor?`,
-        `عددان مجموعهما ${sum} والفرق بين مربعيهما ${difference}. ما أكبرهما؟`
+        `عددان مجموعهما ${sum} والفرق بين مربعيهما ${difference}. ما أكبرهما؟`, `Two numbers add up to ${sum}, and the difference of their squares is ${difference}. What is the larger one?`
     ), choices, fraction(x), same(`x-y=\\frac{${difference}}{${sum}}=${x - y}\\qquad x=\\frac{${sum}+${x - y}}{2}=${x}`), { sum, difference })
 }
 
@@ -387,7 +387,7 @@ function rectangleQuestion(random: Random): SystemsRaceQuestion | null {
     return choices && build(4, 'rectangle', say(
         `Laukizuzen baten perimetroa ${perimeter} cm da eta azalera ${area} cm². Zenbat neurtzen du alderik luzeenak (cm)?`,
         `Un rectángulo tiene ${perimeter} cm de perímetro y ${area} cm² de área. ¿Cuánto mide el lado mayor (cm)?`,
-        `مستطيل محيطه ${perimeter} سم ومساحته ${area} سم². كم طول ضلعه الأكبر (سم)؟`
+        `مستطيل محيطه ${perimeter} سم ومساحته ${area} سم². كم طول ضلعه الأكبر (سم)؟`, `A rectangle has a perimeter of ${perimeter} cm and an area of ${area} cm². What is the length of the longer side (cm)?`
     ), choices, fraction(long), same(`x+y=${short + long},\\ xy=${area}\\ \\to\\ ${short},\\ ${long}`), { perimeter, area })
 }
 
@@ -403,7 +403,7 @@ function budgetQuestion(random: Random): SystemsRaceQuestion | null {
     return choices && build(4, 'budget', say(
         `${budget} € dituzu ${p} €-ko ogitartekoak eta ${q} €-ko freskagarriak erosteko, eta ogitarteko bat gutxienez nahi duzu. Gehienez zenbat freskagarri?`,
         `Tienes ${budget} € para bocadillos de ${p} € y refrescos de ${q} €, y quieres al menos un bocadillo. ¿Cuántos refrescos como máximo?`,
-        `معك ${budget} € لشطائر بـ${p} € ومشروبات بـ${q} €، وتريد شطيرة على الأقل. كم مشروبًا على الأكثر؟`
+        `معك ${budget} € لشطائر بـ${p} € ومشروبات بـ${q} €، وتريد شطيرة على الأقل. كم مشروبًا على الأكثر؟`, `You have €${budget} for sandwiches at €${p} and soft drinks at €${q}, and you want at least one sandwich. What is the greatest number of soft drinks you can buy?`
     ), choices, fraction(answer), same(`${p}+${times(q, 'y')}\\le ${budget}\\ \\to\\ y\\le ${written(fraction(budget - p, q))}`), { p, q, budget })
 }
 
@@ -435,17 +435,17 @@ export function systemsParTime(circuit: number): number {
 }
 
 export const systemsRaceErrorTips: Record<SystemsRaceError, LocalizedText> = {
-    sign: say('Kontuz zeinuarekin: negatiboak parentesi artean, eta pasatzean zeinua aldatu.', 'Cuidado con el signo: los negativos, entre paréntesis, y al pasar de lado cambia el signo.', 'انتبه للإشارة: السالب بين قوسين، وعند النقل تتغير الإشارة.'),
-    swap: say('Hori beste ezezaguna da: begiratu x ala y eskatzen den.', 'Esa es la otra incógnita: mira si se pide x o y.', 'هذا هو المجهول الآخر: انظر هل المطلوب x أم y.'),
-    'other-root': say('Bi balio ateratzen dira: begiratu zein eskatzen den.', 'Salen dos valores: mira cuál se pide.', 'تظهر قيمتان: انظر أيهما المطلوب.'),
-    'axis-swap': say('Y ardatzean x = 0; X ardatzean y = 0.', 'En el eje Y, x = 0; en el eje X, y = 0.', 'على المحور Y يكون x = 0؛ وعلى المحور X يكون y = 0.'),
-    inverse: say('a/a′ = b/b′: koefizienteak ordena berean jarri.', 'a/a′ = b/b′: pon los coeficientes en el mismo orden.', 'a/a′ = b/b′: ضع المعاملات بالترتيب نفسه.'),
-    subtract: say('Koefizienteak aurkakoak direnean, batu; berdinak direnean, kendu.', 'Si los coeficientes son opuestos, suma; si son iguales, resta.', 'إذا كان المعاملان متعاكسين فاجمع؛ وإذا كانا متساويين فاطرح.'),
-    signs: say('x² = k positiboak bi balio ematen ditu, ±√k, eta zeinu guztiak konbinatzen dira.', 'Un x² = k positivo da dos valores, ±√k, y se combinan todos los signos.', 'x² = k الموجب يعطي قيمتين ±√k، وتُجمع كل الإشارات.'),
-    square: say('Hori x² da: atera erro karratua.', 'Eso es x²: saca la raíz cuadrada.', 'هذا x²: خذ الجذر التربيعي.'),
-    border: say('≤ bada, ertzeko puntuak ere badaude, ardatzetakoak barne.', 'Con ≤ también cuentan los puntos del borde, los de los ejes incluidos.', 'مع ≤ تُعدّ نقاط الحدود أيضًا، ومنها نقاط المحورين.'),
-    'no-half': say('Triangeluaren azalera: oinarria bider altuera, zati 2.', 'Área del triángulo: base por altura, entre 2.', 'مساحة المثلث: القاعدة في الارتفاع على 2.'),
-    'no-fixed': say('Lehenik kendu derrigorrezko ogitartekoa.', 'Primero resta el bocadillo obligatorio.', 'اطرح أولًا ثمن الشطيرة الإلزامية.'),
-    'round-up': say('«Gehienez» bada, biribildu behera.', 'Si es «como máximo», redondea hacia abajo.', 'إذا كان «على الأكثر» فقرّب إلى الأسفل.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    sign: say('Kontuz zeinuarekin: negatiboak parentesi artean, eta pasatzean zeinua aldatu.', 'Cuidado con el signo: los negativos, entre paréntesis, y al pasar de lado cambia el signo.', 'انتبه للإشارة: السالب بين قوسين، وعند النقل تتغير الإشارة.', 'Watch the signs: put negative numbers in brackets, and the sign changes when you move a term to the other side.'),
+    swap: say('Hori beste ezezaguna da: begiratu x ala y eskatzen den.', 'Esa es la otra incógnita: mira si se pide x o y.', 'هذا هو المجهول الآخر: انظر هل المطلوب x أم y.', 'That is the other unknown: check whether x or y is asked for.'),
+    'other-root': say('Bi balio ateratzen dira: begiratu zein eskatzen den.', 'Salen dos valores: mira cuál se pide.', 'تظهر قيمتان: انظر أيهما المطلوب.', 'There are two values: check which one is asked for.'),
+    'axis-swap': say('Y ardatzean x = 0; X ardatzean y = 0.', 'En el eje Y, x = 0; en el eje X, y = 0.', 'على المحور Y يكون x = 0؛ وعلى المحور X يكون y = 0.', 'On the y-axis, x = 0; on the x-axis, y = 0.'),
+    inverse: say('a/a′ = b/b′: koefizienteak ordena berean jarri.', 'a/a′ = b/b′: pon los coeficientes en el mismo orden.', 'a/a′ = b/b′: ضع المعاملات بالترتيب نفسه.', 'a/a′ = b/b′: put the coefficients in the same order.'),
+    subtract: say('Koefizienteak aurkakoak direnean, batu; berdinak direnean, kendu.', 'Si los coeficientes son opuestos, suma; si son iguales, resta.', 'إذا كان المعاملان متعاكسين فاجمع؛ وإذا كانا متساويين فاطرح.', 'If the coefficients are opposites, add; if they are equal, subtract.'),
+    signs: say('x² = k positiboak bi balio ematen ditu, ±√k, eta zeinu guztiak konbinatzen dira.', 'Un x² = k positivo da dos valores, ±√k, y se combinan todos los signos.', 'x² = k الموجب يعطي قيمتين ±√k، وتُجمع كل الإشارات.', 'If x² = k and k is positive, there are two values, ±√k, and you combine all the signs.'),
+    square: say('Hori x² da: atera erro karratua.', 'Eso es x²: saca la raíz cuadrada.', 'هذا x²: خذ الجذر التربيعي.', 'That is x²: take the square root.'),
+    border: say('≤ bada, ertzeko puntuak ere badaude, ardatzetakoak barne.', 'Con ≤ también cuentan los puntos del borde, los de los ejes incluidos.', 'مع ≤ تُعدّ نقاط الحدود أيضًا، ومنها نقاط المحورين.', 'With ≤, the points on the boundary also count, including those on the axes.'),
+    'no-half': say('Triangeluaren azalera: oinarria bider altuera, zati 2.', 'Área del triángulo: base por altura, entre 2.', 'مساحة المثلث: القاعدة في الارتفاع على 2.', 'Area of a triangle: base times height, divided by 2.'),
+    'no-fixed': say('Lehenik kendu derrigorrezko ogitartekoa.', 'Primero resta el bocadillo obligatorio.', 'اطرح أولًا ثمن الشطيرة الإلزامية.', 'First, subtract the compulsory sandwich.'),
+    'round-up': say('«Gehienez» bada, biribildu behera.', 'Si es «como máximo», redondea hacia abajo.', 'إذا كان «على الأكثر» فقرّب إلى الأسفل.', 'If it says “at most”, round down.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

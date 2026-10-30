@@ -12,8 +12,8 @@ const rationalsRace: RaceRules<RationalsRaceError> = {
     parTime: rationalsParTime,
     errorTip: (error) => rationalsRaceErrorTips[error ?? 'calculation'],
     pitPlaceholder: () => '−7/2',
-    pitUnreadable: { eu: 'Idatzi zenbaki bat edo zatiki bat, adibidez −3 edo 3/2.', es: 'Escribe un número o una fracción, por ejemplo −3 o 3/2.', ar: 'اكتب عددًا أو كسرًا، مثل ⁦−3⁩ أو 3/2.' },
-    pitWrongForm: { eu: 'Idatzi zatiki laburtezin gisa.', es: 'Escríbelo como fracción irreducible.', ar: 'اكتبه كسرًا في أبسط صورة.' }
+    pitUnreadable: { eu: 'Idatzi zenbaki bat edo zatiki bat, adibidez −3 edo 3/2.', es: 'Escribe un número o una fracción, por ejemplo −3 o 3/2.', en: 'Write a number or a fraction, for example −3 or 3/2.', ar: 'اكتب عددًا أو كسرًا، مثل ⁦−3⁩ أو 3/2.' },
+    pitWrongForm: { eu: 'Idatzi zatiki laburtezin gisa.', es: 'Escríbelo como fracción irreducible.', en: 'Write it as a fraction in its simplest form.', ar: 'اكتبه كسرًا في أبسط صورة.' }
 }
 
 export function RationalsRaceGame(props: GameProps) {

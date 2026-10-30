@@ -31,25 +31,25 @@ export function EquivalenceTool(props: ToolProps & { challenges?: LabChallenge<E
 
     const controls = (
         <>
-            <h3>{l({ eu: 'Hasierako zatikia', es: 'Fracción de partida', ar: 'الكسر الأصلي' })}</h3>
-            <Stepper label={l({ eu: 'Zenbakitzailea', es: 'Numerador', ar: 'البسط' })} value={numerator} min={1} max={denominator} onChange={(next) => setState((current) => setEquivalenceBase(current, next, current.denominator))} language={props.language} />
-            <Stepper label={l({ eu: 'Izendatzailea', es: 'Denominador', ar: 'المقام' })} value={denominator} min={EQUIVALENCE_LIMITS.minDenominator} max={EQUIVALENCE_LIMITS.maxDenominator} onChange={(next) => setState((current) => setEquivalenceBase(current, current.numerator, next))} language={props.language} />
+            <h3>{l({ eu: 'Hasierako zatikia', es: 'Fracción de partida', en: 'Starting fraction', ar: 'الكسر الأصلي' })}</h3>
+            <Stepper label={l({ eu: 'Zenbakitzailea', es: 'Numerador', en: 'Numerator', ar: 'البسط' })} value={numerator} min={1} max={denominator} onChange={(next) => setState((current) => setEquivalenceBase(current, next, current.denominator))} language={props.language} />
+            <Stepper label={l({ eu: 'Izendatzailea', es: 'Denominador', en: 'Denominator', ar: 'المقام' })} value={denominator} min={EQUIVALENCE_LIMITS.minDenominator} max={EQUIVALENCE_LIMITS.maxDenominator} onChange={(next) => setState((current) => setEquivalenceBase(current, current.numerator, next))} language={props.language} />
             <Segmented
-                label={l({ eu: 'Zer egin', es: 'Qué hacer', ar: 'ماذا تفعل' })}
+                label={l({ eu: 'Zer egin', es: 'Qué hacer', en: 'What to do', ar: 'ماذا تفعل' })}
                 value={mode}
                 options={[
-                    { value: 'amplify', label: l({ eu: 'Anplifikatu', es: 'Amplificar', ar: 'توسيع' }) },
-                    { value: 'simplify', label: l({ eu: 'Sinplifikatu', es: 'Simplificar', ar: 'تبسيط' }) }
+                    { value: 'amplify', label: l({ eu: 'Anplifikatu', es: 'Amplificar', en: 'Expanding', ar: 'توسيع' }) },
+                    { value: 'simplify', label: l({ eu: 'Sinplifikatu', es: 'Simplificar', en: 'Simplify', ar: 'تبسيط' }) }
                 ]}
                 onChange={(next) => setState((current) => ({ ...current, mode: next }))}
             />
             {mode === 'amplify' ? (
-                <Stepper label={l({ eu: 'Biderkatu honekin', es: 'Multiplicar por', ar: 'اضرب في' })} value={factor} min={EQUIVALENCE_LIMITS.minFactor} max={EQUIVALENCE_LIMITS.maxFactor} onChange={(next) => setState((current) => ({ ...current, factor: next }))} language={props.language} />
+                <Stepper label={l({ eu: 'Biderkatu honekin', es: 'Multiplicar por', en: 'Multiply by', ar: 'اضرب في' })} value={factor} min={EQUIVALENCE_LIMITS.minFactor} max={EQUIVALENCE_LIMITS.maxFactor} onChange={(next) => setState((current) => ({ ...current, factor: next }))} language={props.language} />
             ) : divisors.length === 0 ? (
-                <p className="fraction-v2-lab-tip">{l({ eu: 'Ez dago zatitzaile komunik: zatikia laburtezina da jada.', es: 'No hay ningún divisor común: la fracción ya es irreducible.', ar: 'لا يوجد قاسم مشترك: الكسر في أبسط صورة بالفعل.' })}</p>
+                <p className="fraction-v2-lab-tip">{l({ eu: 'Ez dago zatitzaile komunik: zatikia laburtezina da jada.', es: 'No hay ningún divisor común: la fracción ya es irreducible.', en: 'There is no common divisor: the fraction is already in its simplest form.', ar: 'لا يوجد قاسم مشترك: الكسر في أبسط صورة بالفعل.' })}</p>
             ) : (
-                <div className="fraction-v2-segmented" role="group" aria-label={l({ eu: 'Zatitu honekin', es: 'Dividir entre', ar: 'اقسم على' })}>
-                    <span className="fraction-v2-stepper-label" aria-hidden="true">{l({ eu: 'Zatitu honekin', es: 'Dividir entre', ar: 'اقسم على' })}</span>
+                <div className="fraction-v2-segmented" role="group" aria-label={l({ eu: 'Zatitu honekin', es: 'Dividir entre', en: 'Divide by', ar: 'اقسم على' })}>
+                    <span className="fraction-v2-stepper-label" aria-hidden="true">{l({ eu: 'Zatitu honekin', es: 'Dividir entre', en: 'Divide by', ar: 'اقسم على' })}</span>
                     <div>
                         {divisors.map((candidate) => (
                             <button type="button" aria-pressed={divisor === candidate} onClick={() => setState((current) => ({ ...current, divisor: candidate }))} key={candidate}>{candidate}</button>
@@ -67,16 +67,17 @@ export function EquivalenceTool(props: ToolProps & { challenges?: LabChallenge<E
         note = l({
             eu: `Zati bakoitza ${factor} zatitan banatu da: ${factor} aldiz zati gehiago daude eta ${factor} aldiz koloreztatu gehiago.`,
             es: `Cada porción se ha partido en ${factor}: hay ${factor} veces más partes y ${factor} veces más coloreadas.`,
+            en: `Each piece has been split into ${factor} parts: there are ${factor} times as many parts and ${factor} times as many coloured ones.`,
             ar: `قُسّم كل جزء إلى ${factor}: صار عدد الأجزاء وعدد الأجزاء الملوّنة ${factor} أضعاف.`
         })
     } else if (simplified) {
         formula = `\\frac{${numerator}}{${denominator}}=\\frac{${numerator}:${divisor}}{${denominator}:${divisor}}=\\frac{${result.numerator}}{${result.denominator}}`
-        note = `${l({ eu: `Zatiak ${divisor} zatiko taldeetan bildu dira.`, es: `Se han juntado las porciones de ${divisor} en ${divisor}.`, ar: `جُمعت الأجزاء كل ${divisor} معًا.` })}${resultIsIrreducible ? ` ${l({ eu: 'Zatiki laburtezina da.', es: 'Es la fracción irreducible.', ar: 'إنه الكسر في أبسط صورة.' })}` : ''}`
+        note = `${l({ eu: `Zatiak ${divisor} zatiko taldeetan bildu dira.`, es: `Se han juntado las porciones de ${divisor} en ${divisor}.`, en: `The pieces have been grouped ${divisor} by ${divisor}.`, ar: `جُمعت الأجزاء كل ${divisor} معًا.` })}${resultIsIrreducible ? ` ${l({ eu: 'Zatiki laburtezina da.', es: 'Es la fracción irreducible.', en: 'It is in its simplest form.', ar: 'إنه الكسر في أبسط صورة.' })}` : ''}`
     } else {
         formula = `\\frac{${numerator}}{${denominator}}`
         note = divisors.length === 0
-            ? l({ eu: 'Zatiki laburtezina da: ezin da sinplifikatu.', es: 'Es irreducible: no se puede simplificar.', ar: 'إنه في أبسط صورة: لا يمكن تبسيطه.' })
-            : l({ eu: 'Aukeratu zatitzaile komun bat.', es: 'Elige un divisor común.', ar: 'اختر قاسمًا مشتركًا.' })
+            ? l({ eu: 'Zatiki laburtezina da: ezin da sinplifikatu.', es: 'Es irreducible: no se puede simplificar.', en: 'It is in its simplest form: it cannot be simplified.', ar: 'إنه في أبسط صورة: لا يمكن تبسيطه.' })
+            : l({ eu: 'Aukeratu zatitzaile komun bat.', es: 'Elige un divisor común.', en: 'Choose a common divisor.', ar: 'اختر قاسمًا مشتركًا.' })
     }
 
     const readout = (
@@ -86,8 +87,8 @@ export function EquivalenceTool(props: ToolProps & { challenges?: LabChallenge<E
         </>
     )
 
-    const startLabel = `${l({ eu: 'Hasierako zatikia', es: 'Fracción de partida', ar: 'الكسر الأصلي' })}: ${numerator}/${denominator}`
-    const resultLabel = `${l({ eu: 'Zatiki baliokidea', es: 'Fracción equivalente', ar: 'الكسر المكافئ' })}: ${result.numerator}/${result.denominator}`
+    const startLabel = `${l({ eu: 'Hasierako zatikia', es: 'Fracción de partida', en: 'Starting fraction', ar: 'الكسر الأصلي' })}: ${numerator}/${denominator}`
+    const resultLabel = `${l({ eu: 'Zatiki baliokidea', es: 'Fracción equivalente', en: 'Equivalent fraction', ar: 'الكسر المكافئ' })}: ${result.numerator}/${result.denominator}`
 
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? equivalenceChallenges}

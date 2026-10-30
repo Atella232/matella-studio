@@ -6,7 +6,7 @@ import type { LocalizedText } from '../../features/unit-v2/types.ts'
    Intervals and points are written left to right in every language.
    ========================================================================== */
 
-export const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
+export const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
 
 /** The same formula in every language */
-export const same = (value: string): LocalizedText => say(value, value, value)
+export const same = (value: string): LocalizedText => say(value, value, value, value)

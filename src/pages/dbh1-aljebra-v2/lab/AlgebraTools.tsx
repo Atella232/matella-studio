@@ -60,9 +60,9 @@ export function TranslateTool(props: LabToolProps) {
 
     const controls = (
         <>
-            <p className="fraction-v2-lab-tip">{l({ eu: 'Esaldi bakoitzerako, aukeratu adierazpen aljebraiko zuzena.', es: 'Para cada frase, elige la expresión algebraica correcta.', ar: 'لكل جملة اختر العبارة الجبرية الصحيحة.' })}</p>
-            <p className="algebra-lab-score">{l({ eu: `Ondo: ${right} / ${phraseCards.length} · Akatsak: ${state.mistakes}`, es: `Bien: ${right} / ${phraseCards.length} · Errores: ${state.mistakes}`, ar: `صحيحة: ${right} / ${phraseCards.length} · الأخطاء: ${state.mistakes}` })}</p>
-            <button type="button" className="fraction-v2-secondary" onClick={() => setState(initialTranslateState)}>{l({ eu: 'Berriro hasi', es: 'Empezar de nuevo', ar: 'ابدأ من جديد' })}</button>
+            <p className="fraction-v2-lab-tip">{l({ eu: 'Esaldi bakoitzerako, aukeratu adierazpen aljebraiko zuzena.', es: 'Para cada frase, elige la expresión algebraica correcta.', en: 'For each phrase, choose the correct algebraic expression.', ar: 'لكل جملة اختر العبارة الجبرية الصحيحة.' })}</p>
+            <p className="algebra-lab-score">{l({ eu: `Ondo: ${right} / ${phraseCards.length} · Akatsak: ${state.mistakes}`, es: `Bien: ${right} / ${phraseCards.length} · Errores: ${state.mistakes}`, en: `Correct: ${right} / ${phraseCards.length} · Mistakes: ${state.mistakes}`, ar: `صحيحة: ${right} / ${phraseCards.length} · الأخطاء: ${state.mistakes}` })}</p>
+            <button type="button" className="fraction-v2-secondary" onClick={() => setState(initialTranslateState)}>{l({ eu: 'Berriro hasi', es: 'Empezar de nuevo', en: 'Start again', ar: 'ابدأ من جديد' })}</button>
         </>
     )
 
@@ -103,7 +103,7 @@ export function MachineTool({ expressions = machineExpressions, limits = MACHINE
     const controls = (
         <>
             <Segmented
-                label={l({ eu: 'Makina', es: 'Máquina', ar: 'الآلة' })}
+                label={l({ eu: 'Makina', es: 'Máquina', en: 'Machine', ar: 'الآلة' })}
                 value={String(state.expression)}
                 options={expressions.map((item, index) => ({ value: String(index), label: item.latex.replace(/\\frac\{x\}\{2\}/, 'x/2').replace(/\^\{2\}/g, '²').replace(/\^\{3\}/g, '³') }))}
                 onChange={(next) => setState((current) => setMachine(current, { expression: Number(next) }, expressions, limits))}
@@ -123,8 +123,8 @@ export function MachineTool({ expressions = machineExpressions, limits = MACHINE
                 language={props.language}
                 state={state}
                 expected={fraction(Math.round(value * 2), 2)}
-                placeholder={{ eu: 'Adib.: −11', es: 'Ej.: −11', ar: 'مثال: ⁦−11⁩' }}
-                unreadable={{ eu: 'Idatzi zenbaki bat, adibidez −11.', es: 'Escribe un número, por ejemplo −11.', ar: 'اكتب عددًا، مثل ⁦−11⁩.' }}
+                placeholder={{ eu: 'Adib.: −11', es: 'Ej.: −11', en: 'e.g. −11', ar: 'مثال: ⁦−11⁩' }}
+                unreadable={{ eu: 'Idatzi zenbaki bat, adibidez −11.', es: 'Escribe un número, por ejemplo −11.', en: 'Write a number, for example −11.', ar: 'اكتب عددًا، مثل ⁦−11⁩.' }}
                 onChange={(patch) => setState((current) => ({ ...current, ...patch }))}
             />
         </>
@@ -172,7 +172,7 @@ export function TilesTool({ initial = initialTilesState, challenges = tilesChall
     const controls = (
         <>
             {steppers('first')}
-            <Segmented label={l({ eu: 'Eragiketa', es: 'Operación', ar: 'العملية' })} value={state.op} options={[{ value: 'add', label: '+' }, { value: 'subtract', label: '−' }]} onChange={(op) => setState((current) => ({ ...current, op }))} />
+            <Segmented label={l({ eu: 'Eragiketa', es: 'Operación', en: 'Operation', ar: 'العملية' })} value={state.op} options={[{ value: 'add', label: '+' }, { value: 'subtract', label: '−' }]} onChange={(op) => setState((current) => ({ ...current, op }))} />
             {steppers('second')}
         </>
     )
@@ -192,7 +192,7 @@ export function TilesTool({ initial = initialTilesState, challenges = tilesChall
                 <span className="algebra-tiles-op">=</span>
                 <TileRow group={{ squares: tilesResult(state).find((term) => term.power === 2)?.coefficient ?? 0, bars: tilesResult(state).find((term) => term.power === 1)?.coefficient ?? 0, units: tilesResult(state).find((term) => term.power === 0)?.coefficient ?? 0 }} label="=" />
             </div>
-            <p className="algebra-tiles-legend">{l({ eu: 'Urdina: positiboa. Gorria: negatiboa. Karratu handia x², barra x, karratu txikia 1.', es: 'Azul: positivo. Rojo: negativo. Cuadrado grande x², barra x, cuadradito 1.', ar: 'الأزرق: موجب. الأحمر: سالب. المربع الكبير x²، الشريط x، المربع الصغير 1.' })}</p>
+            <p className="algebra-tiles-legend">{l({ eu: 'Urdina: positiboa. Gorria: negatiboa. Karratu handia x², barra x, karratu txikia 1.', es: 'Azul: positivo. Rojo: negativo. Cuadrado grande x², barra x, cuadradito 1.', en: 'Blue: positive. Red: negative. Big square x², bar x, small square 1.', ar: 'الأزرق: موجب. الأحمر: سالب. المربع الكبير x²، الشريط x، المربع الصغير 1.' })}</p>
         </ToolFrame>
     )
 }
@@ -213,14 +213,14 @@ export function BalanceTool(props: LabToolProps) {
     const controls = (
         <>
             <Segmented
-                label={l({ eu: 'Ekuazioa', es: 'Ecuación', ar: 'المعادلة' })}
+                label={l({ eu: 'Ekuazioa', es: 'Ecuación', en: 'Equation', ar: 'المعادلة' })}
                 value={String(state.exercise)}
                 options={balanceExercises.map((item) => ({ value: String(item.id), label: `${item.id}${state.finished.includes(item.id) ? ' ✓' : ''}` }))}
                 onChange={(next) => { setWarning(false); setState((current) => startBalance(Number(next), current.finished)) }}
             />
-            <button type="button" className="fraction-v2-secondary" disabled={solved} onClick={() => act(removeUnit)}>{l({ eu: 'Kendu 1 bi platerretatik', es: 'Quitar 1 de los dos platos', ar: 'أزل 1 من الكفتين' })}</button>
-            <button type="button" className="fraction-v2-secondary" disabled={solved} onClick={() => act(divideByBoxes)}>{l({ eu: `Zatitu ${state.left.a} zatitan`, es: `Dividir en ${state.left.a} partes`, ar: `اقسم إلى ${state.left.a} أجزاء` })}</button>
-            <button type="button" className="fraction-v2-secondary" onClick={() => { setWarning(false); setState((current) => startBalance(current.exercise, current.finished)) }}>{l({ eu: 'Berriro hasi', es: 'Empezar de nuevo', ar: 'ابدأ من جديد' })}</button>
+            <button type="button" className="fraction-v2-secondary" disabled={solved} onClick={() => act(removeUnit)}>{l({ eu: 'Kendu 1 bi platerretatik', es: 'Quitar 1 de los dos platos', en: 'Take 1 off both pans', ar: 'أزل 1 من الكفتين' })}</button>
+            <button type="button" className="fraction-v2-secondary" disabled={solved} onClick={() => act(divideByBoxes)}>{l({ eu: `Zatitu ${state.left.a} zatitan`, es: `Dividir en ${state.left.a} partes`, en: `Divide into ${state.left.a} parts`, ar: `اقسم إلى ${state.left.a} أجزاء` })}</button>
+            <button type="button" className="fraction-v2-secondary" onClick={() => { setWarning(false); setState((current) => startBalance(current.exercise, current.finished)) }}>{l({ eu: 'Berriro hasi', es: 'Empezar de nuevo', en: 'Start again', ar: 'ابدأ من جديد' })}</button>
         </>
     )
 
@@ -229,10 +229,10 @@ export function BalanceTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${linearLatex(state.left)}=${state.right}$`} /></span>
             <span className="fraction-v2-lab-readout-note">
                 {solved
-                    ? l({ eu: `Askatuta: x = ${state.right}.`, es: `Despejada: x = ${state.right}.`, ar: `عُزل x: x = ${state.right}.` })
+                    ? l({ eu: `Askatuta: x = ${state.right}.`, es: `Despejada: x = ${state.right}.`, en: `Solved for x: x = ${state.right}.`, ar: `عُزل x: x = ${state.right}.` })
                     : warning
-                        ? l({ eu: 'Ezin da: balantza desorekatuko litzateke. Kendu lehenik unitate solteak, edo zatiketa ez da zehatza.', es: 'No se puede: la balanza se desequilibraría. Quita primero las unidades sueltas, o la división no es exacta.', ar: 'لا يمكن: سيختلّ الميزان. أزل أولًا الوحدات المنفردة، أو إن القسمة ليست تامة.' })
-                        : l({ eu: 'Utzi x bakarrik ezkerreko platerrean.', es: 'Deja la x sola en el plato de la izquierda.', ar: 'اترك x وحده في الكفة اليسرى.' })}
+                        ? l({ eu: 'Ezin da: balantza desorekatuko litzateke. Kendu lehenik unitate solteak, edo zatiketa ez da zehatza.', es: 'No se puede: la balanza se desequilibraría. Quita primero las unidades sueltas, o la división no es exacta.', en: 'You can\'t do that: the balance would become unbalanced. Remove the loose units first, or the division won\'t be exact.', ar: 'لا يمكن: سيختلّ الميزان. أزل أولًا الوحدات المنفردة، أو إن القسمة ليست تامة.' })
+                        : l({ eu: 'Utzi x bakarrik ezkerreko platerrean.', es: 'Deja la x sola en el plato de la izquierda.', en: 'Leave only the x on the left-hand pan.', ar: 'اترك x وحده في الكفة اليسرى.' })}
             </span>
         </>
     )
@@ -269,23 +269,23 @@ export function TrialTool(props: LabToolProps) {
     const controls = (
         <>
             <Segmented
-                label={l({ eu: 'Ekuazioa', es: 'Ecuación', ar: 'المعادلة' })}
+                label={l({ eu: 'Ekuazioa', es: 'Ecuación', en: 'Equation', ar: 'المعادلة' })}
                 value={String(state.equation)}
                 options={trialEquations.map((_, index) => ({ value: String(index), label: `${index + 1}` }))}
                 onChange={(next) => setState((current) => setTrialEquation(current, Number(next)))}
             />
-            <Stepper label={l({ eu: 'Probatu x =', es: 'Prueba x =', ar: 'جرّب x =' })} value={state.x} min={TRIAL_LIMITS.min} max={TRIAL_LIMITS.max} format={signed} onChange={(next) => setState((current) => tryValue(current, next))} language={props.language} />
-            <p className="fraction-v2-lab-tip">{l({ eu: `Probak: ${tried.length ? tried.map(signed).join(', ') : '—'}`, es: `Intentos: ${tried.length ? tried.map(signed).join(', ') : '—'}`, ar: `المحاولات: ${tried.length ? tried.map(signed).join('، ') : '—'}` })}</p>
+            <Stepper label={l({ eu: 'Probatu x =', es: 'Prueba x =', en: 'Try x =', ar: 'جرّب x =' })} value={state.x} min={TRIAL_LIMITS.min} max={TRIAL_LIMITS.max} format={signed} onChange={(next) => setState((current) => tryValue(current, next))} language={props.language} />
+            <p className="fraction-v2-lab-tip">{l({ eu: `Probak: ${tried.length ? tried.map(signed).join(', ') : '—'}`, es: `Intentos: ${tried.length ? tried.map(signed).join(', ') : '—'}`, en: `Tries: ${tried.length ? tried.map(signed).join(', ') : '—'}`, ar: `المحاولات: ${tried.length ? tried.map(signed).join('، ') : '—'}` })}</p>
         </>
     )
 
     const readout = (
         <span className="fraction-v2-lab-readout-note">
             {relation === '='
-                ? l({ eu: `Bi atalek ${signed(left)} balio dute: x = ${signed(state.x)} ebazpena da.`, es: `Los dos miembros valen ${signed(left)}: x = ${signed(state.x)} es la solución.`, ar: `الطرفان يساويان ${signed(left)}: x = ${signed(state.x)} هو الحل.` })
+                ? l({ eu: `Bi atalek ${signed(left)} balio dute: x = ${signed(state.x)} ebazpena da.`, es: `Los dos miembros valen ${signed(left)}: x = ${signed(state.x)} es la solución.`, en: `Both sides equal ${signed(left)}: x = ${signed(state.x)} is the solution.`, ar: `الطرفان يساويان ${signed(left)}: x = ${signed(state.x)} هو الحل.` })
                 : relation === '<'
-                    ? l({ eu: 'Lehen atala txikiagoa da.', es: 'El primer miembro es menor.', ar: 'الطرف الأول أصغر.' })
-                    : l({ eu: 'Lehen atala handiagoa da.', es: 'El primer miembro es mayor.', ar: 'الطرف الأول أكبر.' })}
+                    ? l({ eu: 'Lehen atala txikiagoa da.', es: 'El primer miembro es menor.', en: 'The left side is smaller.', ar: 'الطرف الأول أصغر.' })
+                    : l({ eu: 'Lehen atala handiagoa da.', es: 'El primer miembro es mayor.', en: 'The left side is bigger.', ar: 'الطرف الأول أكبر.' })}
         </span>
     )
 

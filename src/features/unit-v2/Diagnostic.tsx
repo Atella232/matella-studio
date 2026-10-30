@@ -65,19 +65,19 @@ export function DiagnosticQuiz({
         return (
             <section className="fraction-v2-diagnostic" aria-labelledby="fraction-v2-diagnostic-title">
                 <div className="fraction-v2-page-intro">
-                    <span>{l({ eu: 'DIAGNOSTIKOA OSATUTA', es: 'DIAGNÓSTICO COMPLETADO', ar: 'اكتمل التشخيص' })}</span>
-                    <h1 id="fraction-v2-diagnostic-title">{l({ eu: 'Zure ibilbidea prest dago', es: 'Tu ruta está preparada', ar: 'مسارك جاهز' })}</h1>
+                    <span>{l({ eu: 'DIAGNOSTIKOA OSATUTA', es: 'DIAGNÓSTICO COMPLETADO', en: 'DIAGNOSTIC COMPLETED', ar: 'اكتمل التشخيص' })}</span>
+                    <h1 id="fraction-v2-diagnostic-title">{l({ eu: 'Zure ibilbidea prest dago', es: 'Tu ruta está preparada', en: 'Your path is ready', ar: 'مسارك جاهز' })}</h1>
                 </div>
                 <div className="fraction-v2-diagnostic-card">
                     <p className="fraction-v2-diagnostic-score">
                         <strong>{score}</strong>
-                        <span>{l({ eu: `/ ${count} asmatuta`, es: `de ${count} correctas`, ar: `من ${count} صحيحة` })}</span>
+                        <span>{l({ eu: `/ ${count} asmatuta`, es: `de ${count} correctas`, en: `of ${count} correct`, ar: `من ${count} صحيحة` })}</span>
                     </p>
                     {reviewTopics.length === 0 ? (
-                        <p>{l({ eu: 'Hasierako ideia guztiak menderatzen dituzu. Hasi nahi duzun gaitik edo jarraitu ibilbideari hasieratik.', es: 'Dominas las ideas iniciales. Empieza por el tema que prefieras o sigue la ruta desde el principio.', ar: 'أنت متقن للأفكار الأولية. ابدأ بالموضوع الذي تفضله أو تابع المسار من البداية.' })}</p>
+                        <p>{l({ eu: 'Hasierako ideia guztiak menderatzen dituzu. Hasi nahi duzun gaitik edo jarraitu ibilbideari hasieratik.', es: 'Dominas las ideas iniciales. Empieza por el tema que prefieras o sigue la ruta desde el principio.', en: 'You know the starting ideas well. Start with the topic you prefer, or follow the path from the beginning.', ar: 'أنت متقن للأفكار الأولية. ابدأ بالموضوع الذي تفضله أو تابع المسار من البداية.' })}</p>
                     ) : (
                         <>
-                            <p>{l({ eu: 'Erantzunen arabera, gai hauek berrikustea gomendatzen dizugu:', es: 'Según tus respuestas, te recomendamos repasar estos temas:', ar: 'استنادًا إلى إجاباتك، نوصيك بمراجعة هذه المواضيع:' })}</p>
+                            <p>{l({ eu: 'Erantzunen arabera, gai hauek berrikustea gomendatzen dizugu:', es: 'Según tus respuestas, te recomendamos repasar estos temas:', en: 'Based on your answers, we recommend reviewing these topics:', ar: 'استنادًا إلى إجاباتك، نوصيك بمراجعة هذه المواضيع:' })}</p>
                             <ul className="fraction-v2-review-list">
                                 {reviewTopics.map((topicId) => {
                                     const topic = unit.topics.find((item) => item.id === topicId)
@@ -98,10 +98,10 @@ export function DiagnosticQuiz({
                     <div className="fraction-v2-diagnostic-actions">
                         <button type="button" className="fraction-v2-primary" onClick={() => onStartLearning(firstTopic.id)}>
                             {reviewTopics.length === 0
-                                ? l({ eu: 'Hasi lehen ikasgaitik', es: 'Empezar por la primera lección', ar: 'ابدأ بالدرس الأول' })
-                                : `${l({ eu: 'Hasi hemendik:', es: 'Empezar por:', ar: 'ابدأ بـ:' })} ${l(firstTopic.title)}`}
+                                ? l({ eu: 'Hasi lehen ikasgaitik', es: 'Empezar por la primera lección', en: 'Start with the first lesson', ar: 'ابدأ بالدرس الأول' })
+                                : `${l({ eu: 'Hasi hemendik:', es: 'Empezar por:', en: 'Start with:', ar: 'ابدأ بـ:' })} ${l(firstTopic.title)}`}
                         </button>
-                        <button type="button" className="fraction-v2-secondary" onClick={restart}>{l({ eu: 'Errepikatu diagnostikoa', es: 'Repetir el diagnóstico', ar: 'أعد التشخيص' })}</button>
+                        <button type="button" className="fraction-v2-secondary" onClick={restart}>{l({ eu: 'Errepikatu diagnostikoa', es: 'Repetir el diagnóstico', en: 'Try the diagnostic again', ar: 'أعد التشخيص' })}</button>
                     </div>
                 </div>
             </section>
@@ -111,9 +111,9 @@ export function DiagnosticQuiz({
     return (
         <section className="fraction-v2-diagnostic" aria-labelledby="fraction-v2-diagnostic-title">
             <div className="fraction-v2-page-intro">
-                <span>{l({ eu: `${count} GALDERA · PUNTUAZIORIK GABE`, es: `${count} PREGUNTAS · SIN NOTA`, ar: `${count} أسئلة · بلا علامة` })}</span>
-                <h1 id="fraction-v2-diagnostic-title">{l({ eu: 'Aurkitu nondik hasi', es: 'Descubre por dónde empezar', ar: 'اكتشف من أين تبدأ' })}</h1>
-                <p>{l({ eu: 'Ez da azterketa bat. Erantzun galdera bakoitza behin; zure erantzunek hurrengo urratsa aukeratzen lagunduko dute.', es: 'No es un examen. Responde cada pregunta una vez; tus respuestas ayudarán a elegir el siguiente paso.', ar: 'هذا ليس اختبارًا. أجب عن كل سؤال مرة واحدة؛ ستساعد إجاباتك على اختيار الخطوة التالية.' })}</p>
+                <span>{l({ eu: `${count} GALDERA · PUNTUAZIORIK GABE`, es: `${count} PREGUNTAS · SIN NOTA`, en: `${count} QUESTIONS · NOT GRADED`, ar: `${count} أسئلة · بلا علامة` })}</span>
+                <h1 id="fraction-v2-diagnostic-title">{l({ eu: 'Aurkitu nondik hasi', es: 'Descubre por dónde empezar', en: 'Find out where to start', ar: 'اكتشف من أين تبدأ' })}</h1>
+                <p>{l({ eu: 'Ez da azterketa bat. Erantzun galdera bakoitza behin; zure erantzunek hurrengo urratsa aukeratzen lagunduko dute.', es: 'No es un examen. Responde cada pregunta una vez; tus respuestas ayudarán a elegir el siguiente paso.', en: 'This is not a test. Answer each question once; your answers will help choose the next step.', ar: 'هذا ليس اختبارًا. أجب عن كل سؤال مرة واحدة؛ ستساعد إجاباتك على اختيار الخطوة التالية.' })}</p>
             </div>
             <article className="fraction-v2-diagnostic-card" aria-live="polite">
                 <div className="fraction-v2-diagnostic-progress"><span style={{ width: `${((questionIndex + (answered ? 1 : 0)) / count) * 100}%` }} /></div>
@@ -133,15 +133,15 @@ export function DiagnosticQuiz({
                 {answered && (
                     <div className={`fraction-v2-feedback ${selectedIndex === question.correctIndex ? 'success' : 'error'}`}>
                         <strong>{selectedIndex === question.correctIndex
-                            ? l({ eu: 'Zuzena.', es: 'Correcto.', ar: 'صحيح.' })
-                            : l({ eu: 'Ez da hori.', es: 'No es esa.', ar: 'ليست هذه.' })}</strong>
+                            ? l({ eu: 'Zuzena.', es: 'Correcto.', en: 'Correct.', ar: 'صحيح.' })
+                            : l({ eu: 'Ez da hori.', es: 'No es esa.', en: 'Not this one.', ar: 'ليست هذه.' })}</strong>
                         <MathText text={l(question.explanation)} />
                     </div>
                 )}
                 <button type="button" className="fraction-v2-primary" disabled={!answered} onClick={next}>
                     {isLast
-                        ? l({ eu: 'Ikusi emaitza', es: 'Ver el resultado', ar: 'اعرض النتيجة' })
-                        : l({ eu: 'Hurrengo galdera', es: 'Siguiente pregunta', ar: 'السؤال التالي' })}
+                        ? l({ eu: 'Ikusi emaitza', es: 'Ver el resultado', en: 'See the result', ar: 'اعرض النتيجة' })
+                        : l({ eu: 'Hurrengo galdera', es: 'Siguiente pregunta', en: 'Next question', ar: 'السؤال التالي' })}
                 </button>
             </article>
         </section>

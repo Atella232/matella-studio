@@ -12,8 +12,8 @@ const vectorsRace: RaceRules<VectorsRaceError> = {
     parTime: vectorsParTime,
     errorTip: (error) => vectorsRaceErrorTips[error ?? 'calculation'],
     pitPlaceholder: () => '-3',
-    pitUnreadable: { eu: 'Idatzi zenbaki bakar bat, adibidez 5, −3 edo 2/3.', es: 'Escribe un solo número, por ejemplo 5, −3 o 2/3.', ar: 'اكتب عددًا واحدًا، مثل 5 أو ⁦−3⁩ أو 2/3.' },
-    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', ar: 'اكتبه عددًا.' }
+    pitUnreadable: { eu: 'Idatzi zenbaki bakar bat, adibidez 5, −3 edo 2/3.', es: 'Escribe un solo número, por ejemplo 5, −3 o 2/3.', en: 'Write a single number, for example 5, −3 or 2/3.', ar: 'اكتب عددًا واحدًا، مثل 5 أو ⁦−3⁩ أو 2/3.' },
+    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', en: 'Write it as a number.', ar: 'اكتبه عددًا.' }
 }
 
 export function VectorsRaceGame(props: GameProps) {

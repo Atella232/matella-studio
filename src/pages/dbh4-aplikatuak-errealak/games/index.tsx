@@ -31,7 +31,7 @@ export function RealsGames({ language, pathname, openGame, completedIds, onCompl
             language={language}
             games={hubGames}
             recordsKey={REALS_GAME_RECORDS_KEY}
-            title={{ eu: 'Jolastu zenbaki errealekin', es: 'Juega con los números reales', ar: 'العب بالأعداد الحقيقية' }}
+            title={{ eu: 'Jolastu zenbaki errealekin', es: 'Juega con los números reales', en: 'Play with real numbers', ar: 'العب بالأعداد الحقيقية' }}
             completedIds={completedIds}
             onComplete={onComplete}
             mode={realsGameModeForPath(pathname)}

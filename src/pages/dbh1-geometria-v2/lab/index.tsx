@@ -29,7 +29,7 @@ export function GeometryIntroLaboratory(props: {
             tools={geometryLabTools}
             stages={geometryIntroStages}
             components={toolComponents}
-            title={{ eu: 'Neurtu, eraiki eta kalkulatu', es: 'Mide, construye y calcula', ar: 'قِس وابنِ واحسب' }}
+            title={{ eu: 'Neurtu, eraiki eta kalkulatu', es: 'Mide, construye y calcula', en: 'Measure, build and calculate.', ar: 'قِس وابنِ واحسب' }}
         />
     )
 }

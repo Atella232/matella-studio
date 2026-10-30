@@ -3,6 +3,7 @@ import { Figure } from '../dbh2-zatikiak-prototype/figures'
 import { Label } from '../dbh2-funtzioak-v2/plane'
 import { camera } from '../dbh2-gorputzak-v2/geometry3d'
 import { GridBox } from '../dbh2-gorputzak-v2/solids'
+import { decimalSeparatorFor, thousandsSeparatorFor } from '../../utils/numberFormat'
 
 /* ==========================================================================
    Antzekotasuna · 4. DBH aplikatuak — lesson figures: Thales with two lines
@@ -28,10 +29,12 @@ const SERIF = 'Fraunces, serif'
 
 type Point = [number, number]
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language, text)
-/** A number written with the comma, shown with the point in Arabic */
-const num = (language: UnitLanguage, text: string) => (language === 'ar' ? text.replace(/,/g, '.') : text)
+/** A number written with the comma, shown with the point in Arabic and English */
+const num = (language: UnitLanguage, text: string) => text.replace(/,/g, language === 'ar' ? '.' : decimalSeparatorFor(language))
+/** Thousands written with a space (50 000), and a comma in English */
+const grouped = (language: UnitLanguage, text: string) => text.replace(/(?<=\d) (?=\d{3}(?!\d))/g, language === 'en' ? thousandsSeparatorFor(language) : ' ')
 const points = (list: Point[]) => list.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ')
 const lerp = ([ax, ay]: Point, [bx, by]: Point, t: number): Point => [ax + (bx - ax) * t, ay + (by - ay) * t]
 const mid = (a: Point, b: Point) => lerp(a, b, 0.5)
@@ -70,7 +73,7 @@ export function ThalesFigure({ language }: { language: UnitLanguage }) {
     const [A, B, A2, B2] = [at(u, 200), at(u, 500), at(v, 200), at(v, 500)]
     const extend = (p: Point, q: Point): [Point, Point] => [lerp(p, q, -0.25), lerp(p, q, 1.25)]
     return (
-        <Figure height={310} label={pick(language, say('Paraleloek bi zuzen mozten dituzte: zuzenki-zatiak proportzionalak dira', 'Unas paralelas cortan dos rectas: los segmentos son proporcionales', 'مستقيمات متوازية تقطع مستقيمين: القطع متناسبة'))}>
+        <Figure height={310} label={pick(language, say('Paraleloek bi zuzen mozten dituzte: zuzenki-zatiak proportzionalak dira', 'Unas paralelas cortan dos rectas: los segmentos son proporcionales', 'مستقيمات متوازية تقطع مستقيمين: القطع متناسبة', 'Some parallel lines cut two lines: the segments are proportional'))}>
             <Line a={O} b={at(u, 560)} width={2.4} />
             <Line a={O} b={at(v, 570)} width={2.4} />
             {[[A, A2], [B, B2]].map(([p, q], index) => {
@@ -98,7 +101,7 @@ export function DivideFigure({ language }: { language: UnitLanguage }) {
     const marks: Point[] = [1, 2, 3, 4, 5].map((k) => [A[0] + k * step * Math.cos(angle), A[1] + k * step * Math.sin(angle)])
     const cuts: Point[] = [1, 2, 3, 4, 5].map((k) => lerp(A, B, k / 5))
     return (
-        <Figure height={300} label={pick(language, say('10 cm-ko zuzenkia 5 zati berdinetan, Talesekin', 'Un segmento de 10 cm en 5 partes iguales, con Tales', 'قطعة طولها 10 سم إلى 5 أجزاء متساوية بطاليس'))}>
+        <Figure height={300} label={pick(language, say('10 cm-ko zuzenkia 5 zati berdinetan, Talesekin', 'Un segmento de 10 cm en 5 partes iguales, con Tales', 'قطعة طولها 10 سم إلى 5 أجزاء متساوية بطاليس', 'A 10 cm segment divided into 5 equal parts, using Thales'))}>
             <Line a={A} b={lerp(A, marks[4], 1.08)} color={MUTED} width={1.8} />
             <Line a={A} b={B} width={3} />
             {marks.map((mark, index) => <g key={index}><Dot p={mark} color={SECOND} r={4.5} /><Line a={mark} b={cuts[index]} color={index === 4 ? SECOND : STAGE} width={2} dashed={index !== 4} /></g>)}
@@ -109,7 +112,7 @@ export function DivideFigure({ language }: { language: UnitLanguage }) {
             <Tag p={[320, 262]}>10 cm</Tag>
             <Tag p={off(A, marks[0], -14)} color={SECOND} size={13}>1</Tag>
             <Formula x={600} y={120} color={STAGE}>10 : 5 = 2</Formula>
-            <Caption x={360} y={292} language={language} text={say('Lotu azken marka B-rekin eta marraztu paraleloak', 'Une la última marca con B y traza paralelas', 'صِل العلامة الأخيرة بـ B وارسم متوازيات')} size={14} />
+            <Caption x={360} y={292} language={language} text={say('Lotu azken marka B-rekin eta marraztu paraleloak', 'Une la última marca con B y traza paralelas', 'صِل العلامة الأخيرة بـ B وارسم متوازيات', 'Join the last mark to B and draw parallel lines')} size={14} />
         </Figure>
     )
 }
@@ -123,7 +126,7 @@ export function ThalesPositionFigure({ language }: { language: UnitLanguage }) {
     const B2 = lerp(A, B, 0.5)
     const C2 = lerp(A, C, 0.5)
     return (
-        <Figure height={300} label={pick(language, say('Tales posizioan dauden bi triangelu: angelu bat partekatzen dute eta aurkako aldeak paraleloak dira', 'Dos triángulos en posición de Tales: comparten un ángulo y los lados opuestos son paralelos', 'مثلثان في وضع طاليس: يشتركان في زاوية والضلعان المقابلان متوازيان'))}>
+        <Figure height={300} label={pick(language, say('Tales posizioan dauden bi triangelu: angelu bat partekatzen dute eta aurkako aldeak paraleloak dira', 'Dos triángulos en posición de Tales: comparten un ángulo y los lados opuestos son paralelos', 'مثلثان في وضع طاليس: يشتركان في زاوية والضلعان المقابلان متوازيان', 'Two triangles in Thales\' position: they share an angle and the opposite sides are parallel'))}>
             <polygon points={points([A, B, C])} fill={SKY} stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
             <polygon points={points([A, B2, C2])} fill={SOFT} stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
             <Line a={B2} b={C2} color={SECOND} width={3} />
@@ -151,7 +154,7 @@ export function SimilarFiguresFigure({ language }: { language: UnitLanguage }) {
     const small = place(36, 60, 220)
     const large = place(54, 330, 250)
     return (
-        <Figure height={310} label={pick(language, say('Bi lauki antzeko: aldeak proportzionalak (r = 1,5) eta angeluak berdinak', 'Dos cuadriláteros semejantes: lados proporcionales (r = 1,5) y ángulos iguales', 'رباعيان متشابهان: أضلاع متناسبة (r = 1.5) وزوايا متساوية'))}>
+        <Figure height={310} label={pick(language, say('Bi lauki antzeko: aldeak proportzionalak (r = 1,5) eta angeluak berdinak', 'Dos cuadriláteros semejantes: lados proporcionales (r = 1,5) y ángulos iguales', 'رباعيان متشابهان: أضلاع متناسبة (r = 1.5) وزوايا متساوية', 'Two similar quadrilaterals: proportional sides (r = 1.5) and equal angles'))}>
             <polygon points={points(small)} fill={SOFT} stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
             <polygon points={points(large)} fill={MINT} stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
             <Tag p={[mid(small[0], small[1])[0], small[0][1] + 18]}>4</Tag>
@@ -161,8 +164,8 @@ export function SimilarFiguresFigure({ language }: { language: UnitLanguage }) {
             <path d={`M${small[1][0] - 16} ${small[1][1]} A16 16 0 0 0 ${lerp(small[1], small[2], 16 / Math.hypot(36, 72))[0]} ${lerp(small[1], small[2], 16 / Math.hypot(36, 72))[1]}`} fill="none" stroke={SECOND} strokeWidth={2.4} />
             <path d={`M${large[1][0] - 16} ${large[1][1]} A16 16 0 0 0 ${lerp(large[1], large[2], 16 / Math.hypot(54, 108))[0]} ${lerp(large[1], large[2], 16 / Math.hypot(54, 108))[1]}`} fill="none" stroke={SECOND} strokeWidth={2.4} />
             <Formula x={610} y={110} color={STAGE}>{num(language, '6 / 4 = 3 / 2 = 1,5')}</Formula>
-            <Caption x={610} y={142} language={language} text={say('Antzekotasun-arrazoia', 'Razón de semejanza', 'نسبة التشابه')} size={14} />
-            <Caption x={360} y={296} language={language} text={say('Angelu berdinak, alde proportzionalak', 'Ángulos iguales, lados proporcionales', 'زوايا متساوية وأضلاع متناسبة')} size={14} />
+            <Caption x={610} y={142} language={language} text={say('Antzekotasun-arrazoia', 'Razón de semejanza', 'نسبة التشابه', 'Scale factor')} size={14} />
+            <Caption x={360} y={296} language={language} text={say('Angelu berdinak, alde proportzionalak', 'Ángulos iguales, lados proporcionales', 'زوايا متساوية وأضلاع متناسبة', 'Equal angles, proportional sides')} size={14} />
         </Figure>
     )
 }
@@ -189,18 +192,18 @@ function MiniTriangle({ x, y, k, labels, arcs = [] }: { x: number; y: number; k:
 
 export function CriteriaFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={300} label={pick(language, say('Triangeluen antzekotasun-irizpideak: bi angelu; bi alde eta angelua; hiru alde', 'Criterios de semejanza de triángulos: dos ángulos; dos lados y el ángulo; tres lados', 'معايير تشابه المثلثات: زاويتان؛ ضلعان والزاوية؛ ثلاثة أضلاع'))}>
+        <Figure height={300} label={pick(language, say('Triangeluen antzekotasun-irizpideak: bi angelu; bi alde eta angelua; hiru alde', 'Criterios de semejanza de triángulos: dos ángulos; dos lados y el ángulo; tres lados', 'معايير تشابه المثلثات: زاويتان؛ ضلعان والزاوية؛ ثلاثة أضلاع', 'Similarity tests for triangles: two angles; two sides and the angle; three sides'))}>
             <MiniTriangle x={20} y={130} k={14} arcs={[0, 1]} />
             <MiniTriangle x={100} y={210} k={22} arcs={[0, 1]} />
-            <Caption x={120} y={262} language={language} text={say('Bi angelu berdin', 'Dos ángulos iguales', 'زاويتان متساويتان')} size={14} />
+            <Caption x={120} y={262} language={language} text={say('Bi angelu berdin', 'Dos ángulos iguales', 'زاويتان متساويتان', 'Two equal angles')} size={14} />
 
             <MiniTriangle x={260} y={130} k={14} arcs={[1]} labels={['4', '3', '']} />
             <MiniTriangle x={340} y={210} k={22} arcs={[1]} labels={['8', '6', '']} />
-            <Caption x={360} y={262} language={language} text={say('Bi alde proportzional eta angelua', 'Dos lados proporcionales y el ángulo', 'ضلعان متناسبان والزاوية')} size={14} />
+            <Caption x={360} y={262} language={language} text={say('Bi alde proportzional eta angelua', 'Dos lados proporcionales y el ángulo', 'ضلعان متناسبان والزاوية', 'Two proportional sides and the angle')} size={14} />
 
             <MiniTriangle x={500} y={130} k={14} labels={['4', '3', '5']} />
             <MiniTriangle x={580} y={210} k={22} labels={['8', '6', '10']} />
-            <Caption x={600} y={262} language={language} text={say('Hiru alde proportzional', 'Tres lados proporcionales', 'ثلاثة أضلاع متناسبة')} size={14} />
+            <Caption x={600} y={262} language={language} text={say('Hiru alde proportzional', 'Tres lados proporcionales', 'ثلاثة أضلاع متناسبة', 'Three proportional sides')} size={14} />
         </Figure>
     )
 }
@@ -212,7 +215,7 @@ export function HomothetyFigure({ language }: { language: UnitLanguage }) {
     const tri: Point[] = [[170, 215], [260, 230], [205, 150]]
     const image = tri.map((p) => lerp(O, p, 2))
     return (
-        <Figure height={300} label={pick(language, say('O zentroko eta 2 arrazoiko homotezia', 'Homotecia de centro O y razón 2', 'تحاكٍ مركزه O ونسبته 2'))}>
+        <Figure height={300} label={pick(language, say('O zentroko eta 2 arrazoiko homotezia', 'Homotecia de centro O y razón 2', 'تحاكٍ مركزه O ونسبته 2', 'Homothety with centre O and scale factor 2'))}>
             {image.map((p, index) => <Line key={index} a={O} b={lerp(O, p, 1.08)} color={MUTED} width={1.4} dashed />)}
             <polygon points={points(tri)} fill={SOFT} stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
             <polygon points={points(image)} fill={MINT} fillOpacity={0.8} stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
@@ -221,7 +224,7 @@ export function HomothetyFigure({ language }: { language: UnitLanguage }) {
             {tri.map((p, index) => <Tag key={index} p={[p[0] + 4, p[1] - 14]} size={14}>{['A', 'B', 'C'][index]}</Tag>)}
             {image.map((p, index) => <Tag key={index} p={[p[0] + 6, p[1] - 14]} size={14}>{["A'", "B'", "C'"][index]}</Tag>)}
             <Formula x={590} y={110} color={STAGE}>{"OA' = 2 · OA"}</Formula>
-            <Caption x={590} y={142} language={language} text={say('Irudia bi aldiz handiagoa', 'La imagen, el doble de grande', 'الصورة ضعف الحجم')} size={14} />
+            <Caption x={590} y={142} language={language} text={say('Irudia bi aldiz handiagoa', 'La imagen, el doble de grande', 'الصورة ضعف الحجم', 'The image, twice as big')} size={14} />
         </Figure>
     )
 }
@@ -232,7 +235,7 @@ export function RatiosFigure({ language }: { language: UnitLanguage }) {
     const unit = 40
     const xs = [70, 210, 410]
     return (
-        <Figure height={300} label={pick(language, say('1, 2 eta 3 aldeko karratuak: perimetroa r bider, azalera r² bider', 'Cuadrados de lado 1, 2 y 3: el perímetro por r, el área por r²', 'مربعات أضلاعها 1 و2 و3: المحيط في r والمساحة في r²'))}>
+        <Figure height={300} label={pick(language, say('1, 2 eta 3 aldeko karratuak: perimetroa r bider, azalera r² bider', 'Cuadrados de lado 1, 2 y 3: el perímetro por r, el área por r²', 'مربعات أضلاعها 1 و2 و3: المحيط في r والمساحة في r²', 'Squares with sides 1, 2 and 3: the perimeter times r, the area times r².'))}>
             {[1, 2, 3].map((side, index) => (
                 <g key={side}>
                     {Array.from({ length: side * side }, (_, cell) => (
@@ -244,8 +247,8 @@ export function RatiosFigure({ language }: { language: UnitLanguage }) {
                     <Formula x={xs[index] + (side * unit) / 2} y={278} size={14} color={MUTED}>{`r = ${side}`}</Formula>
                 </g>
             ))}
-            <Caption x={620} y={120} language={language} text={say('Luzerak: × r', 'Longitudes: × r', 'الأطوال: × r')} color={SECOND} />
-            <Caption x={620} y={150} language={language} text={say('Azalerak: × r²', 'Áreas: × r²', 'المساحات: × r²')} color={STAGE} />
+            <Caption x={620} y={120} language={language} text={say('Luzerak: × r', 'Longitudes: × r', 'الأطوال: × r', 'Lengths: × r')} color={SECOND} />
+            <Caption x={620} y={150} language={language} text={say('Azalerak: × r²', 'Áreas: × r²', 'المساحات: × r²', 'Areas: × r²')} color={STAGE} />
         </Figure>
     )
 }
@@ -255,7 +258,7 @@ export function RatiosFigure({ language }: { language: UnitLanguage }) {
 export function VolumeRatioFigure({ language }: { language: UnitLanguage }) {
     const cams = [camera(90, 210, 30), camera(270, 220, 30), camera(500, 230, 30)]
     return (
-        <Figure height={310} label={pick(language, say('1, 2 eta 3 ertzeko kuboak: bolumena r³ bider (1, 8, 27)', 'Cubos de arista 1, 2 y 3: el volumen por r³ (1, 8, 27)', 'مكعبات أحرفها 1 و2 و3: الحجم في r³ (1 و8 و27)'))}>
+        <Figure height={310} label={pick(language, say('1, 2 eta 3 ertzeko kuboak: bolumena r³ bider (1, 8, 27)', 'Cubos de arista 1, 2 y 3: el volumen por r³ (1, 8, 27)', 'مكعبات أحرفها 1 و2 و3: الحجم في r³ (1 و8 و27)', 'Cubes with edges 1, 2 and 3: the volume times r³ (1, 8, 27).'))}>
             {[1, 2, 3].map((edge, index) => (
                 <g key={edge}>
                     <GridBox cam={cams[index]} a={edge} b={edge} c={edge} fill={[SOFT, MINT, ROSE][index]} />
@@ -263,7 +266,7 @@ export function VolumeRatioFigure({ language }: { language: UnitLanguage }) {
                     <Formula x={[90, 270, 500][index]} y={294} size={14} color={MUTED}>{`r = ${edge}`}</Formula>
                 </g>
             ))}
-            <Caption x={650} y={110} language={language} text={say('Bolumenak:', 'Volúmenes:', 'الحجوم:')} color={STAGE} size={14} />
+            <Caption x={650} y={110} language={language} text={say('Bolumenak:', 'Volúmenes:', 'الحجوم:', 'Volumes:')} color={STAGE} size={14} />
             <Formula x={650} y={138} color={STAGE}>× r³</Formula>
         </Figure>
     )
@@ -275,7 +278,7 @@ export function ScaleFigure({ language }: { language: UnitLanguage }) {
     const P: Point = [140, 190]
     const Q: Point = [380, 110]
     return (
-        <Figure height={300} label={pick(language, say('1:50 000 eskalako mapa: 4 cm mapan 2 km dira errealitatean', 'Mapa a escala 1:50 000: 4 cm en el mapa son 2 km en la realidad', 'خريطة بمقياس 1:50 000: 4 سم في الخريطة هي 2 كم في الواقع'))}>
+        <Figure height={300} label={pick(language, say('1:50 000 eskalako mapa: 4 cm mapan 2 km dira errealitatean', 'Mapa a escala 1:50 000: 4 cm en el mapa son 2 km en la realidad', 'خريطة بمقياس 1:50 000: 4 سم في الخريطة هي 2 كم في الواقع', 'Map with scale 1:50,000: 4 cm on the map are 2 km in reality'))}>
             <rect x={60} y={40} width={400} height={200} rx={10} fill={MINT} stroke={INK} strokeWidth={2} />
             <path d="M60 170 C 160 140, 220 220, 330 180 S 430 120, 460 140" fill="none" stroke={STAGE} strokeWidth={6} strokeOpacity={0.5} />
             <Line a={P} b={Q} color={SECOND} width={2.6} dashed />
@@ -284,11 +287,11 @@ export function ScaleFigure({ language }: { language: UnitLanguage }) {
             <Tag p={off(P, Q, -18)} color={SECOND}>4 cm</Tag>
             <rect x={80} y={210} width={100} height={8} fill={INK} />
             <rect x={130} y={210} width={50} height={8} fill={PAPER} stroke={INK} strokeWidth={1} />
-            <Tag p={[200, 214]} anchor="start" size={13}>1 : 50 000</Tag>
-            <Formula x={590} y={120}>{'4 · 50 000 ='}</Formula>
-            <Formula x={590} y={150}>{'200 000 cm'}</Formula>
+            <Tag p={[200, 214]} anchor="start" size={13}>{grouped(language, '1 : 50 000')}</Tag>
+            <Formula x={590} y={120}>{grouped(language, '4 · 50 000 =')}</Formula>
+            <Formula x={590} y={150}>{grouped(language, '200 000 cm')}</Formula>
             <Formula x={590} y={186} color={SECOND}>= 2 km</Formula>
-            <Caption x={360} y={284} language={language} text={say('Errealitatea = mapa · n', 'Realidad = mapa · n', 'الواقع = الخريطة · n')} size={14} />
+            <Caption x={360} y={284} language={language} text={say('Errealitatea = mapa · n', 'Realidad = mapa · n', 'الواقع = الخريطة · n', 'Real life = map · n')} size={14} />
         </Figure>
     )
 }
@@ -297,7 +300,7 @@ export function ScaleFigure({ language }: { language: UnitLanguage }) {
 
 export function PlanFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={300} label={pick(language, say('1:100 eskalako planoa: 5 cm × 4 cm = 5 m × 4 m; azalera 10 000 bider', 'Plano a escala 1:100: 5 cm × 4 cm = 5 m × 4 m; el área, 10 000 veces', 'مخطط بمقياس 1:100: 5 سم × 4 سم = 5 م × 4 م؛ والمساحة 10 000 مرة'))}>
+        <Figure height={300} label={pick(language, say('1:100 eskalako planoa: 5 cm × 4 cm = 5 m × 4 m; azalera 10 000 bider', 'Plano a escala 1:100: 5 cm × 4 cm = 5 m × 4 m; el área, 10 000 veces', 'مخطط بمقياس 1:100: 5 سم × 4 سم = 5 م × 4 م؛ والمساحة 10 000 مرة', 'Plan with scale 1:100: 5 cm × 4 cm = 5 m × 4 m; the area, 10,000 times'))}>
             <rect x={70} y={50} width={250} height={200} fill={PAPER} stroke={INK} strokeWidth={5} />
             <line x1={190} y1={50} x2={190} y2={140} stroke={INK} strokeWidth={4} />
             <path d="M190 180 A40 40 0 0 1 230 140" fill="none" stroke={MUTED} strokeWidth={1.4} strokeDasharray="4 3" />
@@ -308,7 +311,7 @@ export function PlanFigure({ language }: { language: UnitLanguage }) {
             <Formula x={530} y={100}>5 · 100 = 500 cm = 5 m</Formula>
             <Formula x={530} y={130}>4 · 100 = 400 cm = 4 m</Formula>
             <Formula x={530} y={180} color={STAGE}>20 cm² → 20 m²</Formula>
-            <Caption x={530} y={212} language={language} text={say('Azalera: × 100² = × 10 000', 'Área: × 100² = × 10 000', 'المساحة: × 100² = × 10 000')} color={STAGE} size={14} />
+            <Caption x={530} y={212} language={language} text={say('Azalera: × 100² = × 10 000', 'Área: × 100² = × 10 000', 'المساحة: × 100² = × 10 000', 'Area: × 100² = × 10,000')} color={STAGE} size={14} />
         </Figure>
     )
 }
@@ -319,7 +322,7 @@ export function ShadowFigure({ language }: { language: UnitLanguage }) {
     const ground = 240
     const unit = 15
     return (
-        <Figure height={300} label={pick(language, say('Itzalak: makila eta zuhaitza, eguzki-izpi paraleloekin', 'Sombras: un palo y un árbol con rayos de sol paralelos', 'الظلال: عصا وشجرة مع أشعة شمس متوازية'))}>
+        <Figure height={300} label={pick(language, say('Itzalak: makila eta zuhaitza, eguzki-izpi paraleloekin', 'Sombras: un palo y un árbol con rayos de sol paralelos', 'الظلال: عصا وشجرة مع أشعة شمس متوازية', 'Shadows: a stick and a tree with parallel sun rays'))}>
             <Line a={[30, ground]} b={[690, ground]} color={MUTED} width={2} />
             <Line a={[80, ground]} b={[80, ground - 1.5 * unit * 2]} color={INK} width={5} />
             <Line a={[80, ground]} b={[80 + 2 * unit * 2, ground]} color={MUTED} width={8} />
@@ -335,7 +338,7 @@ export function ShadowFigure({ language }: { language: UnitLanguage }) {
             <Tag p={[420, ground + 20]}>12</Tag>
             <Formula x={600} y={80} color={STAGE}>{num(language, 'x / 12 = 1,5 / 2')}</Formula>
             <Formula x={600} y={112}>x = 9 m</Formula>
-            <Caption x={360} y={290} language={language} text={say('Ordu berean, itzalak altueren proportzionalak dira', 'A la misma hora, las sombras son proporcionales a las alturas', 'في الساعة نفسها تتناسب الظلال مع الارتفاعات')} size={14} />
+            <Caption x={360} y={290} language={language} text={say('Ordu berean, itzalak altueren proportzionalak dira', 'A la misma hora, las sombras son proporcionales a las alturas', 'في الساعة نفسها تتناسب الظلال مع الارتفاعات', 'At the same time of day, the shadows are proportional to the heights')} size={14} />
         </Figure>
     )
 }
@@ -349,7 +352,7 @@ export function MirrorFigure({ language }: { language: UnitLanguage }) {
     const eye: Point = [60, ground - 1.6 * unit]
     const top: Point = [M[0] + 15 * 0.5 * unit, ground - 12 * 0.5 * unit]
     return (
-        <Figure height={300} label={pick(language, say('Ispilua lurrean: erasotze- eta islapen-angeluak berdinak dira, triangeluak antzekoak', 'Un espejo en el suelo: los ángulos de incidencia y reflexión son iguales y los triángulos, semejantes', 'مرآة على الأرض: زاويتا السقوط والانعكاس متساويتان والمثلثان متشابهان'))}>
+        <Figure height={300} label={pick(language, say('Ispilua lurrean: erasotze- eta islapen-angeluak berdinak dira, triangeluak antzekoak', 'Un espejo en el suelo: los ángulos de incidencia y reflexión son iguales y los triángulos, semejantes', 'مرآة على الأرض: زاويتا السقوط والانعكاس متساويتان والمثلثان متشابهان', 'A mirror on the ground: the angles of incidence and reflection are equal, and the triangles are similar'))}>
             <Line a={[30, ground]} b={[690, ground]} color={MUTED} width={2} />
             <Line a={[60, ground]} b={eye} color={INK} width={5} />
             <circle cx={eye[0]} cy={eye[1] - 8} r={8} fill={PAPER} stroke={INK} strokeWidth={2} />
@@ -376,7 +379,7 @@ export function SightFigure({ language }: { language: UnitLanguage }) {
     const post: Point = [60 + 4 * unit, ground - 3 * unit]
     const top: Point = [60 + 20 * unit, ground - 9 * unit]
     return (
-        <Figure height={300} label={pick(language, say('Ikus-lerroa zutoin baten puntatik eraikinaren goialderaino', 'La línea de visión pasa por la punta de un poste y llega a lo alto del edificio', 'خط النظر يمر برأس عمود ويصل إلى أعلى المبنى'))}>
+        <Figure height={300} label={pick(language, say('Ikus-lerroa zutoin baten puntatik eraikinaren goialderaino', 'La línea de visión pasa por la punta de un poste y llega a lo alto del edificio', 'خط النظر يمر برأس عمود ويصل إلى أعلى المبنى', 'The line of sight passes the tip of a pole and reaches the top of the building'))}>
             <Line a={[30, ground]} b={[690, ground]} color={MUTED} width={2} />
             <Line a={[60, ground]} b={eye} color={INK} width={5} />
             <circle cx={eye[0]} cy={eye[1] - 8} r={8} fill={PAPER} stroke={INK} strokeWidth={2} />

@@ -399,6 +399,7 @@
                 "simplificationText": "Biderkatu aurretik <strong>gurutzatuta</strong> sinplifikatu dezakegu, zenbakitzaile bat eta izendatzaile bat beraien z.k.h.-rekin zatituz.",
                 "fractionOfNumberTitle": "Zenbaki baten zatikia",
                 "fractionOfNumberText": "Kantitate baten zatikia kalkulatzea zatikia kantitate horrengatik biderkatzea da.",
+                "fractionOfNumberConnector": " -(r)en 15 = ",
                 "tip": "<strong>💡 Trikimailua:</strong> Zatikiaren eta zenbakiaren arteko \"-(r)en\" hitzak biderketa esan nahi du."
             },
             "divide": {
@@ -621,6 +622,7 @@
             "tab": "Hurrengo elementu interaktibora joan",
             "shiftTab": "Aurreko elementura joan",
             "enter": "Hautatutako botoia edo esteka aktibatu",
+            "spaceKey": "Zuriunea",
             "escape": "Elkarrizketa-koadroak itxi edo ekintza ezeztatu",
             "arrows": "Doitu balioak kontrol deslizantetan"
         },
@@ -634,6 +636,7 @@
         "spanish": "Gaztelania",
         "basque": "Euskara",
         "arabic": "العربية",
+        "english": "Ingelesa",
         "close": "Itxi",
         "next": "Hurrengoa",
         "previous": "Aurrekoa",

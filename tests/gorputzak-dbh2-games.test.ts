@@ -27,7 +27,7 @@ function checkQuestion(question: SolidsRaceQuestion): number {
             assert.ok(Math.abs(value! - answer) > 1e-9, `${question.kind}: wrong option ${option.latex} equals the answer`)
         }
     }
-    for (const language of ['eu', 'es', 'ar'] as const) {
+    for (const language of ['eu', 'es', 'en', 'ar'] as const) {
         for (const text of [question.prompt[language], question.solution[language]]) for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) renders(formula)
         assert.ok(!question.prompt[language].includes('?') || question.prompt[language].trim().length > 10)
     }

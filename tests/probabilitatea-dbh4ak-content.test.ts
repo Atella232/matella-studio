@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import { readFileSync } from 'node:fs'
 import assert from 'node:assert/strict'
@@ -68,7 +69,7 @@ test('probabilitatea 4. DBH ak: diagnostic, practice, challenges and bank are co
     for (const item of [...practice, ...challenges]) {
         assert.ok(stages.includes(item.stage), `${item.id}`)
         assert.equal(checkAnswer(typed(item.expected, item.answerForm), item.expected, item.answerForm), 'correct', `${item.id}`)
-        for (const language of ['eu', 'es', 'ar'] as const) assert.ok(item.explanation[language].length > 0 && item.prompt[language].length > 0 && item.hint[language].length > 0, `${item.id} ${language}`)
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) assert.ok(item.explanation[language].length > 0 && item.prompt[language].length > 0 && item.hint[language].length > 0, `${item.id} ${language}`)
     }
     assert.deepEqual(exerciseBank.map((section) => section.id), stages)
     const ids = exerciseBank.flatMap((section) => section.items.map((item) => item.id))
@@ -76,7 +77,7 @@ test('probabilitatea 4. DBH ak: diagnostic, practice, challenges and bank are co
     for (const section of exerciseBank) {
         assert.ok(section.items.some((item) => item.difficulty === 'easy') && section.items.some((item) => item.difficulty === 'hard'), section.id)
         for (const item of section.items) {
-            for (const language of ['eu', 'es', 'ar'] as const) assert.ok(item.question[language].length > 0 && item.solution[language].length > 0, `${item.id} ${language}`)
+            for (const language of ['eu', 'es', 'en', 'ar'] as const) assert.ok(item.question[language].length > 0 && item.solution[language].length > 0, `${item.id} ${language}`)
             if (item.answer) assert.equal(checkAnswer(typed(item.answer.expected, item.answer.form), item.answer.expected, item.answer.form), 'correct', `${item.id}`)
         }
     }
@@ -92,9 +93,9 @@ test('probabilitatea 4. DBH ak: diagnostic, practice, challenges and bank are co
 test('probabilitatea 4. DBH ak: every formula renders in KaTeX', () => {
     let formulas = 0
     for (const text of allTexts()) {
-        for (const language of ['eu', 'es', 'ar'] as const) {
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) {
             for (const [, formula] of text[language].matchAll(/\$([^$]+)\$/g)) {
-                katex.renderToString(formula, { throwOnError: true, strict: 'error' })
+                katex.renderToString(formulaFor(language, formula), { throwOnError: true, strict: 'error' })
                 assert.ok(!/[؀-ۿ]/.test(formula), formula)
                 formulas += 1
             }
@@ -218,7 +219,7 @@ test('probabilitatea 4. DBH ak: lessons cover every topic and their formulas ren
     assert.deepEqual([...source.matchAll(/id: '([a-z-]+)',\s+stage:/g)].map((match) => match[1]), topics)
     let formulas = 0
     for (const [, formula] of source.matchAll(/\$([^$]+)\$/g)) {
-        for (const language of ['eu', 'es', 'ar'] as const) katex.renderToString(formula.replace(/\{,\}/g, language === 'ar' ? '.' : '{,}'), { throwOnError: true, strict: 'error' })
+        for (const language of ['eu', 'es', 'en', 'ar'] as const) katex.renderToString(formula.replace(/\{,\}/g, language === 'ar' ? '.' : '{,}'), { throwOnError: true, strict: 'error' })
         formulas += 1
     }
     assert.ok(formulas > 100, `only ${formulas}`)

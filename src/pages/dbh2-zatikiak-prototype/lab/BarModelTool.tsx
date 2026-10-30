@@ -26,10 +26,10 @@ import './BarModel.css'
 const valueLatex = (value: FractionValue) => value.denominator === 1 ? String(value.numerator) : `\\frac{${value.numerator}}{${value.denominator}}`
 const valueText = (value: FractionValue) => value.denominator === 1 ? String(value.numerator) : `${value.numerator}/${value.denominator}`
 
-const remainderName = { eu: 'Geratzen dena', es: 'Lo que queda', ar: 'الباقي' }
-const pieceNames: Record<BarRow, { eu: string; es: string; ar: string }> = {
-    whole: { eu: 'Barraren zati bat', es: 'Una parte de la barra', ar: 'جزء من الشريط' },
-    rest: { eu: 'Geratzen denaren zati bat', es: 'Un trozo de lo que queda', ar: 'جزء من الباقي' }
+const remainderName = { eu: 'Geratzen dena', es: 'Lo que queda', en: 'What is left', ar: 'الباقي' }
+const pieceNames: Record<BarRow, { eu: string; es: string; en: string; ar: string }> = {
+    whole: { eu: 'Barraren zati bat', es: 'Una parte de la barra', en: 'A part of the bar', ar: 'جزء من الشريط' },
+    rest: { eu: 'Geratzen denaren zati bat', es: 'Un trozo de lo que queda', en: 'A piece of what is left', ar: 'جزء من الباقي' }
 }
 
 export function BarModelTool(props: ToolProps) {
@@ -45,32 +45,32 @@ export function BarModelTool(props: ToolProps) {
 
     const controls = (
         <>
-            <h3>{l({ eu: 'Barra', es: 'La barra', ar: 'الشريط' })}</h3>
-            <Stepper label={l({ eu: 'Barraren zatiak', es: 'Partes de la barra', ar: 'أجزاء الشريط' })} value={state.parts} min={BAR_LIMITS.minParts} max={BAR_LIMITS.maxParts} onChange={(parts) => update({ parts })} language={props.language} />
+            <h3>{l({ eu: 'Barra', es: 'La barra', en: 'The bar', ar: 'الشريط' })}</h3>
+            <Stepper label={l({ eu: 'Barraren zatiak', es: 'Partes de la barra', en: 'Parts of the bar', ar: 'أجزاء الشريط' })} value={state.parts} min={BAR_LIMITS.minParts} max={BAR_LIMITS.maxParts} onChange={(parts) => update({ parts })} language={props.language} />
             <Stepper label={l(barSegmentNames.first)} value={state.first} min={0} max={state.parts} onChange={(first) => update({ first })} language={props.language} />
             <Segmented
                 label={l(barSegmentNames.second)}
                 value={state.secondOf}
                 options={[
-                    { value: 'none', label: l({ eu: 'Ez dago', es: 'No hay', ar: 'لا يوجد' }) },
-                    { value: 'whole', label: l({ eu: 'Osoarena', es: 'Del total', ar: 'من الكل' }) },
-                    { value: 'rest', label: l({ eu: 'Geratzen denarena', es: 'De lo que queda', ar: 'من الباقي' }) }
+                    { value: 'none', label: l({ eu: 'Ez dago', es: 'No hay', en: 'None', ar: 'لا يوجد' }) },
+                    { value: 'whole', label: l({ eu: 'Osoarena', es: 'Del total', en: 'Of the whole', ar: 'من الكل' }) },
+                    { value: 'rest', label: l({ eu: 'Geratzen denarena', es: 'De lo que queda', en: 'Of what is left', ar: 'من الباقي' }) }
                 ]}
                 onChange={(secondOf) => update({ secondOf })}
             />
             {state.secondOf === 'whole' && (
-                <Stepper label={l({ eu: '2. zatiaren zatiak', es: 'Partes de la 2.ª', ar: 'أجزاء الجزء الثاني' })} value={state.second} min={0} max={state.parts - state.first} onChange={(second) => update({ second })} language={props.language} />
+                <Stepper label={l({ eu: '2. zatiaren zatiak', es: 'Partes de la 2.ª', en: 'Parts of the 2nd part', ar: 'أجزاء الجزء الثاني' })} value={state.second} min={0} max={state.parts - state.first} onChange={(second) => update({ second })} language={props.language} />
             )}
             {state.secondOf === 'rest' && (
                 <>
-                    <Stepper label={l({ eu: 'Geratzen denaren zatiak', es: 'Partes de lo que queda', ar: 'أجزاء الباقي' })} value={state.restParts} min={BAR_LIMITS.minParts} max={BAR_LIMITS.maxParts} onChange={(restParts) => update({ restParts })} language={props.language} />
-                    <Stepper label={l({ eu: 'Hartutako zatiak', es: 'Partes que se toman', ar: 'الأجزاء المأخوذة' })} value={state.second} min={0} max={state.restParts} onChange={(second) => update({ second })} language={props.language} />
+                    <Stepper label={l({ eu: 'Geratzen denaren zatiak', es: 'Partes de lo que queda', en: 'Parts of what is left', ar: 'أجزاء الباقي' })} value={state.restParts} min={BAR_LIMITS.minParts} max={BAR_LIMITS.maxParts} onChange={(restParts) => update({ restParts })} language={props.language} />
+                    <Stepper label={l({ eu: 'Hartutako zatiak', es: 'Partes que se toman', en: 'Parts taken', ar: 'الأجزاء المأخوذة' })} value={state.second} min={0} max={state.restParts} onChange={(second) => update({ second })} language={props.language} />
                 </>
             )}
-            <h3>{l({ eu: 'Datuak', es: 'Los datos', ar: 'المعطيات' })}</h3>
-            <Segmented label={l({ eu: 'Datua', es: 'Dato', ar: 'المعطى' })} value={state.known} options={segmentOptions} onChange={(known) => update({ known })} />
-            <NumberField label={l({ eu: 'Datuaren balioa', es: 'Valor del dato', ar: 'قيمة المعطى' })} value={state.knownValue} min={BAR_LIMITS.minValue} max={BAR_LIMITS.maxValue} onChange={(knownValue) => update({ knownValue })} language={props.language} />
-            <Segmented label={l({ eu: 'Galdera', es: 'Pregunta', ar: 'السؤال' })} value={state.asked} options={segmentOptions} onChange={(asked) => update({ asked })} />
+            <h3>{l({ eu: 'Datuak', es: 'Los datos', en: 'The data', ar: 'المعطيات' })}</h3>
+            <Segmented label={l({ eu: 'Datua', es: 'Dato', en: 'Given', ar: 'المعطى' })} value={state.known} options={segmentOptions} onChange={(known) => update({ known })} />
+            <NumberField label={l({ eu: 'Datuaren balioa', es: 'Valor del dato', en: 'Given value', ar: 'قيمة المعطى' })} value={state.knownValue} min={BAR_LIMITS.minValue} max={BAR_LIMITS.maxValue} onChange={(knownValue) => update({ knownValue })} language={props.language} />
+            <Segmented label={l({ eu: 'Galdera', es: 'Pregunta', en: 'Question', ar: 'السؤال' })} value={state.asked} options={segmentOptions} onChange={(asked) => update({ asked })} />
         </>
     )
 
@@ -96,7 +96,7 @@ export function BarModelTool(props: ToolProps) {
 
     const readout = (
         <div className="bar-model-readout">
-            <p className="bar-model-readout-title">{l({ eu: 'Osoaren zatikiak', es: 'Fracciones del total', ar: 'الكسور من الكل' })}</p>
+            <p className="bar-model-readout-title">{l({ eu: 'Osoaren zatikiak', es: 'Fracciones del total', en: 'Fractions of the whole', ar: 'الكسور من الكل' })}</p>
             <ul className="bar-model-fractions">
                 {fractionLines.map((line) => (
                     <li key={line.segment}>
@@ -110,6 +110,7 @@ export function BarModelTool(props: ToolProps) {
                 <p className="bar-model-readout-warning">{l({
                     eu: 'Datua ezin da zati huts batean egon: aukeratu beste bat edo koloreztatu zatiren bat.',
                     es: 'El dato no puede estar en una parte vacía: elige otro o colorea alguna parte.',
+                    en: 'The given value can’t go in an empty part: choose another part or colour some of the parts.',
                     ar: 'لا يمكن أن يكون المعطى في جزء فارغ: اختر غيره أو لوّن بعض الأجزاء.'
                 })}</p>
             ) : (
@@ -218,6 +219,7 @@ function BarDiagram({ state, values, shown, language }: { state: BarModelState; 
     const description = l({
         eu: `${state.parts} zatiko barra: ${state.first} 1. zatian.`,
         es: `Barra de ${state.parts} partes: ${state.first} en la 1.ª parte.`,
+        en: `Bar of ${state.parts} parts: ${state.first} in the 1st part.`,
         ar: `شريط من ${state.parts} أجزاء: ${state.first} في الجزء الأول.`
     })
 
@@ -253,8 +255,8 @@ function BarDiagram({ state, values, shown, language }: { state: BarModelState; 
             </svg>
             <p className="fraction-v2-insight">
                 {shown
-                    ? l({ eu: 'Zati bat ezagututa, barra osoa ezagutzen da.', es: 'Conocido un trozo, se conoce toda la barra.', ar: 'بمعرفة جزء واحد تُعرف قيمة الشريط كله.' })
-                    : l({ eu: 'Bilatu zati batek zenbat balio duen: datua bere zatien artean banatzen da.', es: 'Busca cuánto vale un trozo: el dato se reparte entre sus trozos.', ar: 'ابحث عن قيمة جزء واحد: المعطى يتوزّع على أجزائه.' })}
+                    ? l({ eu: 'Zati bat ezagututa, barra osoa ezagutzen da.', es: 'Conocido un trozo, se conoce toda la barra.', en: 'Once you know one piece, you know the whole bar.', ar: 'بمعرفة جزء واحد تُعرف قيمة الشريط كله.' })
+                    : l({ eu: 'Bilatu zati batek zenbat balio duen: datua bere zatien artean banatzen da.', es: 'Busca cuánto vale un trozo: el dato se reparte entre sus trozos.', en: 'Find how much one piece is worth: the given value is shared between its pieces.', ar: 'ابحث عن قيمة جزء واحد: المعطى يتوزّع على أجزائه.' })}
             </p>
         </div>
     )

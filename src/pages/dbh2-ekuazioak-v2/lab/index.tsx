@@ -30,7 +30,7 @@ export function EquationsLaboratory(props: {
             tools={equationsLabTools}
             stages={equationsStages}
             components={toolComponents}
-            title={{ eu: 'Probatu, ebatzi eta planteatu', es: 'Prueba, resuelve y plantea', ar: 'جرّب وحلّ وصُغ' }}
+            title={{ eu: 'Probatu, ebatzi eta planteatu', es: 'Prueba, resuelve y plantea', en: 'Try, solve and set up', ar: 'جرّب وحلّ وصُغ' }}
         />
     )
 }

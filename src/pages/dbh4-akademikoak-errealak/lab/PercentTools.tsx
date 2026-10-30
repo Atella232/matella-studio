@@ -3,6 +3,7 @@ import { MathText } from '../../../components/MathText'
 import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { LinePoint, RealAxis } from '../../dbh4-aplikatuak-errealak/realLine'
 import { lineMap } from '../../dbh4-aplikatuak-errealak/realLineMap'
@@ -50,17 +51,22 @@ const DOWN = 'var(--blue, #2f6fdb)'
 const DOWN_TINT = 'var(--blue-tint, #dde7f7)'
 const CARD = 'var(--card, #fffcf6)'
 
-/** A number written with the decimal comma (point in Arabic), thousands grouped from 10 000 */
-function local(language: string, value: number, places?: number): string {
+/** A number as text with the given decimal mark; thousands grouped from 10 000 with the given mark */
+function grouped(value: number, places: number | undefined, decimal: string, group: string): string {
     const text = places === undefined ? String(tidy(value, 6)) : value.toFixed(places)
     const [whole, decimals] = text.replace('-', '').split('.')
-    const grouped = whole.length > 4 ? whole.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : whole
+    const digits = whole.length > 4 ? whole.replace(/\B(?=(\d{3})+(?!\d))/g, group) : whole
     const sign = text.startsWith('-') ? '−' : ''
-    return `${sign}${grouped}${decimals ? `${language === 'ar' ? '.' : ','}${decimals}` : ''}`
+    return `${sign}${digits}${decimals ? `${decimal}${decimals}` : ''}`
 }
 
-/** The same number for LaTeX: {,} for the comma (a point in Arabic) */
-const latexNumber = (language: string, value: number, places?: number) => local(language, value, places).replace(',', '{,}').replace(/\u2009/g, '\\,').replace('−', '-')
+/** On the screen: the point in Arabic and English, the comma elsewhere; English groups thousands with a comma */
+function local(language: string, value: number, places?: number): string {
+    return grouped(value, places, language === 'ar' ? '.' : decimalSeparatorFor(language), language === 'en' ? ',' : '\u2009')
+}
+
+/** The same number for LaTeX: {,} for the comma (a point in Arabic); thin spaces become \, in every language */
+const latexNumber = (language: string, value: number, places?: number) => grouped(value, places, language === 'ar' ? '.' : ',', '\u2009').replace(',', '{,}').replace(/\u2009/g, '\\,').replace('−', '-')
 
 const signedPercent = (language: string, change: number) => `${change > 0 ? '+' : ''}${local(language, change)} %`
 
@@ -79,8 +85,8 @@ export function PythagorasTool(props: LabToolProps) {
     const top = map.y - state.b * unit
     const controls = (
         <>
-            <Stepper label={l({ eu: 'Katetoa a (zuzenean)', es: 'Cateto a (en la recta)', ar: 'الضلع a (على المستقيم)' })} value={state.a} min={LEG_LIMITS.min} max={LEG_LIMITS.max} onChange={(a) => setState((s) => setLegs(s, { a }))} language={props.language} />
-            <Stepper label={l({ eu: 'Katetoa b (gora)', es: 'Cateto b (hacia arriba)', ar: 'الضلع b (إلى الأعلى)' })} value={state.b} min={LEG_LIMITS.min} max={LEG_LIMITS.max} onChange={(b) => setState((s) => setLegs(s, { b }))} language={props.language} />
+            <Stepper label={l({ eu: 'Katetoa a (zuzenean)', es: 'Cateto a (en la recta)', en: 'Leg a (on the number line)', ar: 'الضلع a (على المستقيم)' })} value={state.a} min={LEG_LIMITS.min} max={LEG_LIMITS.max} onChange={(a) => setState((s) => setLegs(s, { a }))} language={props.language} />
+            <Stepper label={l({ eu: 'Katetoa b (gora)', es: 'Cateto b (hacia arriba)', en: 'Leg b (upwards)', ar: 'الضلع b (إلى الأعلى)' })} value={state.b} min={LEG_LIMITS.min} max={LEG_LIMITS.max} onChange={(b) => setState((s) => setLegs(s, { b }))} language={props.language} />
         </>
     )
     const value = rational ? String(outside) : `${outside > 1 ? radicalLatex(outside, inside) : `\\sqrt{${n}}`}\\approx ${latexNumber(props.language, Math.round(length * 1000) / 1000)}`
@@ -89,15 +95,15 @@ export function PythagorasTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-main"><MathText text={`$\\sqrt{${state.a}^{2}+${state.b}^{2}}=\\sqrt{${n}}${outside > 1 && !rational ? `=${radicalLatex(outside, inside)}` : ''}${rational ? `=${outside}` : ''}$`} /></span>
             <span className="fraction-v2-lab-readout-note">
                 {rational
-                    ? l({ eu: `${n} karratu perfektua da: puntua arrazionala (${outside}).`, es: `${n} es un cuadrado perfecto: el punto es racional (${outside}).`, ar: `${n} مربع كامل: النقطة نسبية (${outside}).` })
-                    : <MathText text={l({ eu: `Ez da karratu perfektua: puntua irrazionala, $${value}$.`, es: `No es cuadrado perfecto: el punto es irracional, $${value}$.`, ar: `ليس مربعًا كاملًا: النقطة غير نسبية، $${value}$.` })} />}
+                    ? l({ eu: `${n} karratu perfektua da: puntua arrazionala (${outside}).`, es: `${n} es un cuadrado perfecto: el punto es racional (${outside}).`, en: `${n} is a perfect square: the point is rational (${outside}).`, ar: `${n} مربع كامل: النقطة نسبية (${outside}).` })
+                    : <MathText text={l({ eu: `Ez da karratu perfektua: puntua irrazionala, $${value}$.`, es: `No es cuadrado perfecto: el punto es irracional, $${value}$.`, en: `It is not a perfect square: the point is irrational, $${value}$.`, ar: `ليس مربعًا كاملًا: النقطة غير نسبية، $${value}$.` })} />}
             </span>
         </>
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={pythagorasChallenges} state={state}>
             <svg viewBox={`0 0 640 ${map.y + 92}`} className="reals-line" role="img" aria-label={`√(${state.a}² + ${state.b}²) = √${n}`}>
-                <RealAxis map={map} arabic={props.language === 'ar'} />
+                <RealAxis map={map} language={props.language} />
                 <polygon points={`${map.x(0)},${map.y} ${map.x(state.a)},${map.y} ${map.x(state.a)},${top}`} fill={STAGE_TINT} stroke={INK} strokeWidth={2} />
                 <rect x={map.x(state.a) - 12} y={map.y - 12} width={12} height={12} fill="none" stroke={INK} strokeWidth={1.4} />
                 <line x1={map.x(0)} y1={map.y} x2={map.x(state.a)} y2={top} stroke={SECOND} strokeWidth={3.4} />
@@ -124,10 +130,10 @@ export function PercentTool(props: LabToolProps) {
     const indexLatex = (change: number) => latexNumber(props.language, variationIndex(change))
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Hasierako kantitatea', es: 'Cantidad inicial', ar: 'الكمية الأولية' })} value={String(state.amount)} options={percentAmounts.map((amount, position) => ({ value: String(position), label: local(props.language, amount) }))} onChange={(next) => setState((s) => setPercent(s, { amount: Number(next) }))} />
-            <Stepper label={l({ eu: 'Aldaketa kopurua', es: 'Número de variaciones', ar: 'عدد التغيرات' })} value={state.count} min={1} max={MAX_CHANGES} onChange={(count) => setState((s) => setPercent(s, { count }))} language={props.language} />
+            <Segmented label={l({ eu: 'Hasierako kantitatea', es: 'Cantidad inicial', en: 'Starting amount', ar: 'الكمية الأولية' })} value={String(state.amount)} options={percentAmounts.map((amount, position) => ({ value: String(position), label: local(props.language, amount) }))} onChange={(next) => setState((s) => setPercent(s, { amount: Number(next) }))} />
+            <Stepper label={l({ eu: 'Aldaketa kopurua', es: 'Número de variaciones', en: 'Number of changes', ar: 'عدد التغيرات' })} value={state.count} min={1} max={MAX_CHANGES} onChange={(count) => setState((s) => setPercent(s, { count }))} language={props.language} />
             {changes.map((_, position) => (
-                <Stepper key={position} label={l({ eu: `${position + 1}. aldaketa`, es: `Variación ${position + 1}`, ar: `التغير ${position + 1}` })} value={state.steps[position]} min={0} max={percentSteps.length - 1} format={(step) => signedPercent(props.language, percentSteps[step])} onChange={(value) => setState((s) => setPercent(s, { step: { index: position, value } }))} language={props.language} />
+                <Stepper key={position} label={l({ eu: `${position + 1}. aldaketa`, es: `Variación ${position + 1}`, en: `Change ${position + 1}`, ar: `التغير ${position + 1}` })} value={state.steps[position]} min={0} max={percentSteps.length - 1} format={(step) => signedPercent(props.language, percentSteps[step])} onChange={(value) => setState((s) => setPercent(s, { step: { index: position, value } }))} language={props.language} />
             ))}
         </>
     )
@@ -138,6 +144,7 @@ export function PercentTool(props: LabToolProps) {
                 <MathText text={l({
                     eu: `Indize osoa: $${latexNumber(props.language, index)}$ → ${total === 0 ? 'aldaketarik ez' : total > 0 ? `% ${local(props.language, total)} igo` : `% ${local(props.language, -total)} jaitsi`}.`,
                     es: `Índice total: $${latexNumber(props.language, index)}$ → ${total === 0 ? 'sin variación' : total > 0 ? `sube un ${local(props.language, total)} %` : `baja un ${local(props.language, -total)} %`}.`,
+                    en: `Total multiplier: $${latexNumber(props.language, index)}$ → ${total === 0 ? 'no change' : total > 0 ? `rises by ${local(props.language, total)}%` : `falls by ${local(props.language, -total)}%`}.`,
                     ar: `المؤشر الكلي: $${latexNumber(props.language, index)}$ ← ${total === 0 ? 'بلا تغير' : total > 0 ? `زيادة ${local(props.language, total)} %` : `نقصان ${local(props.language, -total)} %`}.`
                 })} />
             </span>
@@ -190,21 +197,21 @@ export function InterestTool(props: LabToolProps) {
     const rate = latexNumber(props.language, state.rate)
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Kapitala (€)', es: 'Capital (€)', ar: 'رأس المال (€)' })} value={String(state.capital)} options={interestCapitals.map((capital, position) => ({ value: String(position), label: local(props.language, capital) }))} onChange={(next) => setState((s) => setInterest(s, { capital: Number(next) }))} />
-            <Stepper label={l({ eu: 'Interes-tasa (%)', es: 'Rédito (%)', ar: 'المعدل (%)' })} value={state.rate} min={RATE_LIMITS.min} max={RATE_LIMITS.max} step={RATE_LIMITS.step} format={(value) => `${local(props.language, value)} %`} onChange={(next) => setState((s) => setInterest(s, { rate: next }))} language={props.language} />
-            <Stepper label={l({ eu: 'Urteak', es: 'Años', ar: 'الأعوام' })} value={state.years} min={YEAR_LIMITS.min} max={YEAR_LIMITS.max} onChange={(years) => setState((s) => setInterest(s, { years }))} language={props.language} />
+            <Segmented label={l({ eu: 'Kapitala (€)', es: 'Capital (€)', en: 'Capital (€)', ar: 'رأس المال (€)' })} value={String(state.capital)} options={interestCapitals.map((capital, position) => ({ value: String(position), label: local(props.language, capital) }))} onChange={(next) => setState((s) => setInterest(s, { capital: Number(next) }))} />
+            <Stepper label={l({ eu: 'Interes-tasa (%)', es: 'Rédito (%)', en: 'Interest rate (%)', ar: 'المعدل (%)' })} value={state.rate} min={RATE_LIMITS.min} max={RATE_LIMITS.max} step={RATE_LIMITS.step} format={(value) => `${local(props.language, value)} %`} onChange={(next) => setState((s) => setInterest(s, { rate: next }))} language={props.language} />
+            <Stepper label={l({ eu: 'Urteak', es: 'Años', en: 'Years', ar: 'الأعوام' })} value={state.years} min={YEAR_LIMITS.min} max={YEAR_LIMITS.max} onChange={(years) => setState((s) => setInterest(s, { years }))} language={props.language} />
         </>
     )
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${latexNumber(props.language, info.capital)}+\\frac{${info.capital}\\cdot ${rate}\\cdot ${state.years}}{100}=${latexNumber(props.language, info.simple, 2)}$`} /></span>
             <span className="fraction-v2-lab-readout-main"><MathText text={`$${latexNumber(props.language, info.capital)}\\cdot\\left(1+\\frac{${rate}}{100}\\right)^{${state.years}}\\approx ${latexNumber(props.language, info.compound, 2)}$`} /></span>
-            <span className="fraction-v2-lab-readout-note">{l({ eu: `Konposatuak ${local(props.language, info.difference, 2)} € gehiago ematen ditu.`, es: `El compuesto da ${local(props.language, info.difference, 2)} € más.`, ar: `تعطي المركبة ${local(props.language, info.difference, 2)} € أكثر.` })}</span>
+            <span className="fraction-v2-lab-readout-note">{l({ eu: `Konposatuak ${local(props.language, info.difference, 2)} € gehiago ematen ditu.`, es: `El compuesto da ${local(props.language, info.difference, 2)} € más.`, en: `Compound interest gives €${local(props.language, info.difference, 2)} more.`, ar: `تعطي المركبة ${local(props.language, info.difference, 2)} € أكثر.` })}</span>
         </>
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={interestChallenges} state={state}>
-            <svg viewBox="0 0 640 300" className="reals-line" role="img" aria-label={l({ eu: 'Interes sinplea eta konposatua urtez urte', es: 'Interés simple y compuesto año a año', ar: 'الفائدة البسيطة والمركبة عامًا بعد عام' })}>
+            <svg viewBox="0 0 640 300" className="reals-line" role="img" aria-label={l({ eu: 'Interes sinplea eta konposatua urtez urte', es: 'Interés simple y compuesto año a año', en: 'Simple and compound interest, year by year.', ar: 'الفائدة البسيطة والمركبة عامًا بعد عام' })}>
                 <line x1={60} y1={250} x2={540} y2={250} stroke={INK} strokeWidth={2} />
                 <line x1={60} y1={250} x2={60} y2={34} stroke={INK} strokeWidth={2} />
                 {table.filter((row) => state.years <= 10 || row.year % 2 === 0 || row.year === state.years).map((row) => <text key={row.year} x={x(row.year)} y={272} textAnchor="middle" fontSize={13} fill={MUTED}>{row.year}</text>)}
@@ -213,9 +220,9 @@ export function InterestTool(props: LabToolProps) {
                 {table.map((row) => <circle key={row.year} cx={x(row.year)} cy={y(row.compound)} r={3.2} fill={SECOND} />)}
                 <text x={548} y={y(info.compound) + 5} fontSize={15} fontWeight={700} fill={SECOND}>{local(props.language, info.compound, 2)}</text>
                 <text x={548} y={Math.max(y(info.simple) + 5, y(info.compound) + 24)} fontSize={15} fontWeight={700} fill={STAGE}>{local(props.language, info.simple, 2)}</text>
-                <Label x={80} y={52} fontSize={14} fontWeight={700} fill={SECOND}>{l({ eu: 'konposatua', es: 'compuesto', ar: 'المركبة' })}</Label>
-                <Label x={80} y={72} fontSize={14} fontWeight={700} fill={STAGE}>{l({ eu: 'sinplea', es: 'simple', ar: 'البسيطة' })}</Label>
-                <Label x={320} y={294} textAnchor="middle" fontSize={13} fill={MUTED}>{l({ eu: 'urteak', es: 'años', ar: 'الأعوام' })}</Label>
+                <Label x={80} y={52} fontSize={14} fontWeight={700} fill={SECOND}>{l({ eu: 'konposatua', es: 'compuesto', en: 'compound', ar: 'المركبة' })}</Label>
+                <Label x={80} y={72} fontSize={14} fontWeight={700} fill={STAGE}>{l({ eu: 'sinplea', es: 'simple', en: 'simple', ar: 'البسيطة' })}</Label>
+                <Label x={320} y={294} textAnchor="middle" fontSize={13} fill={MUTED}>{l({ eu: 'urteak', es: 'años', en: 'years', ar: 'الأعوام' })}</Label>
             </svg>
         </ToolFrame>
     )

@@ -80,7 +80,7 @@ export function WallGame({ language, records, onResult, onExit, config }: GamePr
             setMessage({
                 tone: 'error',
                 latex: `${toLatex(rowTotal(before))}+${brickLatex}>1`,
-                text: l({ eu: 'Ez da sartzen: ilara batek ezin du unitate bat baino gehiago izan.', es: 'No cabe: una fila no puede pasar de una unidad.', ar: 'لا تتسع: لا يمكن أن يتجاوز الصف وحدة واحدة.' })
+                text: l({ eu: 'Ez da sartzen: ilara batek ezin du unitate bat baino gehiago izan.', es: 'No cabe: una fila no puede pasar de una unidad.', en: 'It doesn’t fit: a row can’t exceed one unit.', ar: 'لا تتسع: لا يمكن أن يتجاوز الصف وحدة واحدة.' })
             })
             return
         }
@@ -91,14 +91,14 @@ export function WallGame({ language, records, onResult, onExit, config }: GamePr
             setMessage({
                 tone: 'success',
                 latex: `${bricks.map((item) => toLatex(item)).join('+')}=1`,
-                text: l({ eu: 'Ilara osatuta!', es: '¡Fila completa!', ar: 'اكتمل الصف!' })
+                text: l({ eu: 'Ilara osatuta!', es: '¡Fila completa!', en: 'Row complete!', ar: 'اكتمل الصف!' })
             })
         } else {
             const total = rowTotal(next.rows[row])
             setMessage({
                 tone: 'info',
                 latex: before.length ? `${toLatex(rowTotal(before))}+${brickLatex}=${toLatex(total)}` : brickLatex,
-                text: l({ eu: `${row + 1}. ilara`, es: `Fila ${row + 1}`, ar: `الصف ${row + 1}` })
+                text: l({ eu: `${row + 1}. ilara`, es: `Fila ${row + 1}`, en: `Row ${row + 1}`, ar: `الصف ${row + 1}` })
             })
         }
         settle(next)
@@ -110,8 +110,8 @@ export function WallGame({ language, records, onResult, onExit, config }: GamePr
         setMessage({
             tone: 'error',
             text: next.lives > 0
-                ? l({ eu: `Adreilua bota duzu. ${next.lives} bizitza geratzen zaizkizu.`, es: `Has tirado el ladrillo. Te quedan ${next.lives} vidas.`, ar: `رميت الطوبة. بقي لك ${next.lives} محاولات.` })
-                : l({ eu: 'Bizitzarik gabe geratu zara.', es: 'Te has quedado sin vidas.', ar: 'نفدت محاولاتك.' })
+                ? l({ eu: `Adreilua bota duzu. ${next.lives} bizitza geratzen zaizkizu.`, es: `Has tirado el ladrillo. Te quedan ${next.lives} vidas.`, en: `You discarded the brick. You have ${next.lives} lives left.`, ar: `رميت الطوبة. بقي لك ${next.lives} محاولات.` })
+                : l({ eu: 'Bizitzarik gabe geratu zara.', es: 'Te has quedado sin vidas.', en: 'You’ve run out of lives.', ar: 'نفدت محاولاتك.' })
         })
         settle(next)
     }
@@ -138,13 +138,13 @@ export function WallGame({ language, records, onResult, onExit, config }: GamePr
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${record.score} / ${WALL_UNITS}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${record.score} / ${WALL_UNITS}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: 'Sakatu ilara bat (edo 1–4 teklak) adreilua bertan jartzeko.', es: 'Pulsa una fila (o las teclas 1–4) para colocar el ladrillo.', ar: 'اضغط على صف (أو المفاتيح 1–4) لوضع الطوبة فيه.' })}</li>
-                        <li>{l({ eu: 'Ilara batek zehazki 1 balio duenean, desagertu egiten da.', es: 'Cuando una fila vale exactamente 1, desaparece.', ar: 'عندما يساوي الصف 1 تمامًا، يختفي.' })}</li>
-                        <li>{l({ eu: `Adreilu bat inon sartzen ez bada, bota egin behar duzu. ${WALL_LIVES} bizitza dituzu.`, es: `Si un ladrillo no cabe en ninguna fila, tendrás que tirarlo. Tienes ${WALL_LIVES} vidas.`, ar: `إذا لم تتسع الطوبة في أي صف فعليك رميها. لديك ${WALL_LIVES} محاولات.` })}</li>
-                        <li>{l({ eu: `${WALL_UNITS} unitate osa daitezke: denak osatzeko, planifikatu aurrez.`, es: `Se pueden completar ${WALL_UNITS} unidades: para lograrlas todas, planifica.`, ar: `يمكن إكمال ${WALL_UNITS} وحدات: خطط مسبقًا لإكمالها كلها.` })}</li>
+                        <li>{l({ eu: 'Sakatu ilara bat (edo 1–4 teklak) adreilua bertan jartzeko.', es: 'Pulsa una fila (o las teclas 1–4) para colocar el ladrillo.', en: 'Press a row (or keys 1–4) to place the brick.', ar: 'اضغط على صف (أو المفاتيح 1–4) لوضع الطوبة فيه.' })}</li>
+                        <li>{l({ eu: 'Ilara batek zehazki 1 balio duenean, desagertu egiten da.', es: 'Cuando una fila vale exactamente 1, desaparece.', en: 'When a row totals exactly 1, it disappears.', ar: 'عندما يساوي الصف 1 تمامًا، يختفي.' })}</li>
+                        <li>{l({ eu: `Adreilu bat inon sartzen ez bada, bota egin behar duzu. ${WALL_LIVES} bizitza dituzu.`, es: `Si un ladrillo no cabe en ninguna fila, tendrás que tirarlo. Tienes ${WALL_LIVES} vidas.`, en: `If a brick doesn’t fit in any row, you’ll have to discard it. You have ${WALL_LIVES} lives.`, ar: `إذا لم تتسع الطوبة في أي صف فعليك رميها. لديك ${WALL_LIVES} محاولات.` })}</li>
+                        <li>{l({ eu: `${WALL_UNITS} unitate osa daitezke: denak osatzeko, planifikatu aurrez.`, es: `Se pueden completar ${WALL_UNITS} unidades: para lograrlas todas, planifica.`, en: `You can complete ${WALL_UNITS} units: to complete them all, plan ahead.`, ar: `يمكن إكمال ${WALL_UNITS} وحدات: خطط مسبقًا لإكمالها كلها.` })}</li>
                     </ul>
                 )}
             />
@@ -159,7 +159,7 @@ export function WallGame({ language, records, onResult, onExit, config }: GamePr
     return (
         <div className="fraction-v2-wall-game" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
-                <span className="fraction-v2-wall-lives" aria-label={l({ eu: `${state.lives} bizitza`, es: `${state.lives} vidas`, ar: `${state.lives} محاولات` })}>
+                <span className="fraction-v2-wall-lives" aria-label={l({ eu: `${state.lives} bizitza`, es: `${state.lives} vidas`, en: `${state.lives} lives`, ar: `${state.lives} محاولات` })}>
                     {Array.from({ length: WALL_LIVES }, (_, index) => <span className={index < state.lives ? 'on' : ''} key={index} aria-hidden="true">♥</span>)}
                 </span>
                 <span><strong>{state.cleared}</strong> / {WALL_UNITS}</span>
@@ -169,18 +169,18 @@ export function WallGame({ language, records, onResult, onExit, config }: GamePr
                 <>
                     <div className="fraction-v2-wall-dock">
                         <div className="fraction-v2-wall-current">
-                            <span className="fraction-v2-wall-caption">{l({ eu: 'Adreilu hau', es: 'Este ladrillo', ar: 'هذه الطوبة' })}</span>
+                            <span className="fraction-v2-wall-caption">{l({ eu: 'Adreilu hau', es: 'Este ladrillo', en: 'This brick', ar: 'هذه الطوبة' })}</span>
                             <div className="fraction-v2-wall-scale" aria-label={current ? toText(current) : ''}>
                                 {current && <Brick value={current} />}
                             </div>
                         </div>
                         <div className="fraction-v2-wall-next">
-                            <span className="fraction-v2-wall-caption">{l({ eu: 'Ondoren', es: 'Después', ar: 'التالي' })}</span>
+                            <span className="fraction-v2-wall-caption">{l({ eu: 'Ondoren', es: 'Después', en: 'Then', ar: 'التالي' })}</span>
                             <div>
                                 {upcoming.map((brick, index) => <MathText text={`$${toLatex(brick)}$`} key={index} />)}
                                 {upcoming.length === 0 && <span>—</span>}
                             </div>
-                            <small>{l({ eu: `${left} adreilu`, es: `${left} ladrillos`, ar: `${left} طوبات` })}</small>
+                            <small>{l({ eu: `${left} adreilu`, es: `${left} ladrillos`, en: `${left} bricks`, ar: `${left} طوبات` })}</small>
                         </div>
                     </div>
 
@@ -196,7 +196,7 @@ export function WallGame({ language, records, onResult, onExit, config }: GamePr
                                     type="button"
                                     className={`fraction-v2-wall-row ${flashing ? 'clearing' : ''} ${levelInfo.showMissing && !fits ? 'blocked' : ''}`}
                                     onClick={() => place(rowIndex)}
-                                    aria-label={`${l({ eu: `${rowIndex + 1}. ilara`, es: `Fila ${rowIndex + 1}`, ar: `الصف ${rowIndex + 1}` })}: ${toText(total)}${levelInfo.showMissing && !fits ? ` · ${l({ eu: 'ez da sartzen', es: 'no cabe', ar: 'لا تتسع' })}` : ''}`}
+                                    aria-label={`${l({ eu: `${rowIndex + 1}. ilara`, es: `Fila ${rowIndex + 1}`, en: `Row ${rowIndex + 1}`, ar: `الصف ${rowIndex + 1}` })}: ${toText(total)}${levelInfo.showMissing && !fits ? ` · ${l({ eu: 'ez da sartzen', es: 'no cabe', en: 'doesn’t fit', ar: 'لا تتسع' })}` : ''}`}
                                     key={rowIndex}
                                 >
                                     <span className="fraction-v2-wall-key" aria-hidden="true">{rowIndex + 1}</span>
@@ -209,7 +209,7 @@ export function WallGame({ language, records, onResult, onExit, config }: GamePr
                                     <span className="fraction-v2-wall-total" aria-hidden="true">
                                         <MathText text={`$${flashing ? '1' : toLatex(total)}$`} />
                                         {levelInfo.showMissing && !flashing && row.length > 0 && (
-                                            <small>{l({ eu: 'falta', es: 'falta', ar: 'ينقص' })} <MathText text={`$${toLatex(missing)}$`} /></small>
+                                            <small>{l({ eu: 'falta', es: 'falta', en: 'missing', ar: 'ينقص' })} <MathText text={`$${toLatex(missing)}$`} /></small>
                                         )}
                                     </span>
                                 </button>
@@ -220,7 +220,7 @@ export function WallGame({ language, records, onResult, onExit, config }: GamePr
                     <div className="fraction-v2-wall-actions">
                         <div className={`fraction-v2-wall-message ${message?.tone ?? ''}`} aria-live="polite">
                             {stuck
-                                ? <span>{l({ eu: 'Adreilu hau ez da inongo ilaratan sartzen. Bota egin behar duzu.', es: 'Este ladrillo no cabe en ninguna fila. Tienes que tirarlo.', ar: 'هذه الطوبة لا تتسع في أي صف. عليك رميها.' })}</span>
+                                ? <span>{l({ eu: 'Adreilu hau ez da inongo ilaratan sartzen. Bota egin behar duzu.', es: 'Este ladrillo no cabe en ninguna fila. Tienes que tirarlo.', en: 'This brick doesn’t fit in any row. You have to discard it.', ar: 'هذه الطوبة لا تتسع في أي صف. عليك رميها.' })}</span>
                                 : message && (
                                     <>
                                         <span>{message.text}</span>
@@ -229,7 +229,7 @@ export function WallGame({ language, records, onResult, onExit, config }: GamePr
                                 )}
                         </div>
                         <button type="button" className={stuck ? 'fraction-v2-primary' : 'fraction-v2-secondary'} onClick={discard}>
-                            {l({ eu: 'Bota adreilua (−1 ♥)', es: 'Tirar ladrillo (−1 ♥)', ar: 'ارمِ الطوبة (−1 ♥)' })}
+                            {l({ eu: 'Bota adreilua (−1 ♥)', es: 'Tirar ladrillo (−1 ♥)', en: 'Discard brick (−1 ♥)', ar: 'ارمِ الطوبة (−1 ♥)' })}
                         </button>
                     </div>
                 </>
@@ -239,14 +239,14 @@ export function WallGame({ language, records, onResult, onExit, config }: GamePr
                 <ResultPanel
                     language={language}
                     stars={wallStars(state.cleared)}
-                    title={l({ eu: `${state.cleared} unitate osatuta`, es: `${state.cleared} unidades completadas`, ar: `${state.cleared} وحدات مكتملة` })}
+                    title={l({ eu: `${state.cleared} unitate osatuta`, es: `${state.cleared} unidades completadas`, en: `${state.cleared} units completed`, ar: `${state.cleared} وحدات مكتملة` })}
                     subtitle={state.lives <= 0
-                        ? l({ eu: 'Bizitzak amaitu dira.', es: 'Se acabaron las vidas.', ar: 'انتهت المحاولات.' })
-                        : l({ eu: '3 izar: 8 unitate · 2 izar: 6 · izar 1: 4', es: '3 estrellas: 8 unidades · 2: 6 · 1: 4', ar: '3 نجوم: 8 وحدات · 2: 6 · 1: 4' })}
+                        ? l({ eu: 'Bizitzak amaitu dira.', es: 'Se acabaron las vidas.', en: 'You’re out of lives.', ar: 'انتهت المحاولات.' })
+                        : l({ eu: '3 izar: 8 unitate · 2 izar: 6 · izar 1: 4', es: '3 estrellas: 8 unidades · 2: 6 · 1: 4', en: '3 stars: 8 units · 2: 6 · 1: 4', ar: '3 نجوم: 8 وحدات · 2: 6 · 1: 4' })}
                     stats={[
-                        { label: l({ eu: 'Unitateak', es: 'Unidades', ar: 'الوحدات' }), value: `${state.cleared} / ${WALL_UNITS}` },
-                        { label: l({ eu: 'Botatako adreiluak', es: 'Ladrillos tirados', ar: 'الطوب المرمي' }), value: String(state.discarded) },
-                        { label: l({ eu: 'Erdizka geratu dena', es: 'Lo que quedó a medias', ar: 'ما بقي ناقصًا' }), value: toText(state.rows.reduce((sum, row) => add(sum, rowTotal(row)), fraction(0))) }
+                        { label: l({ eu: 'Unitateak', es: 'Unidades', en: 'Units', ar: 'الوحدات' }), value: `${state.cleared} / ${WALL_UNITS}` },
+                        { label: l({ eu: 'Botatako adreiluak', es: 'Ladrillos tirados', en: 'Bricks discarded', ar: 'الطوب المرمي' }), value: String(state.discarded) },
+                        { label: l({ eu: 'Erdizka geratu dena', es: 'Lo que quedó a medias', en: 'Left unfinished', ar: 'ما بقي ناقصًا' }), value: toText(state.rows.reduce((sum, row) => add(sum, rowTotal(row)), fraction(0))) }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}

@@ -32,9 +32,9 @@ export function VennTool(props: DivisibilityToolProps & { challenges?: LabChalle
 
     const controls = (
         <>
-            <NumberField label={l({ eu: 'Lehen zenbakia', es: 'Primer número', ar: 'العدد الأول' })} value={first} min={VENN_LIMITS.min} max={VENN_LIMITS.max} onChange={(next) => setState((current) => setVenn(current, { first: next }))} language={props.language} />
-            <NumberField label={l({ eu: 'Bigarren zenbakia', es: 'Segundo número', ar: 'العدد الثاني' })} value={second} min={VENN_LIMITS.min} max={VENN_LIMITS.max} onChange={(next) => setState((current) => setVenn(current, { second: next }))} language={props.language} />
-            <Segmented label={l({ eu: 'Zer kalkulatu', es: 'Qué calcular', ar: 'ماذا نحسب' })} value={ask} options={[{ value: 'gcd', label: acronym(props.language, 'gcd') }, { value: 'lcm', label: acronym(props.language, 'lcm') }]} onChange={(next) => setState((current) => setVenn(current, { ask: next }))} />
+            <NumberField label={l({ eu: 'Lehen zenbakia', es: 'Primer número', en: 'First number', ar: 'العدد الأول' })} value={first} min={VENN_LIMITS.min} max={VENN_LIMITS.max} onChange={(next) => setState((current) => setVenn(current, { first: next }))} language={props.language} />
+            <NumberField label={l({ eu: 'Bigarren zenbakia', es: 'Segundo número', en: 'Second number', ar: 'العدد الثاني' })} value={second} min={VENN_LIMITS.min} max={VENN_LIMITS.max} onChange={(next) => setState((current) => setVenn(current, { second: next }))} language={props.language} />
+            <Segmented label={l({ eu: 'Zer kalkulatu', es: 'Qué calcular', en: 'What to calculate', ar: 'ماذا نحسب' })} value={ask} options={[{ value: 'gcd', label: acronym(props.language, 'gcd') }, { value: 'lcm', label: acronym(props.language, 'lcm') }]} onChange={(next) => setState((current) => setVenn(current, { ask: next }))} />
         </>
     )
 
@@ -54,7 +54,7 @@ export function VennTool(props: DivisibilityToolProps & { challenges?: LabChalle
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={props.challenges ?? vennChallenges} state={state}>
             <div className="divisibility-figure-box">
-                <svg viewBox="0 0 640 300" className="divisibility-figure" role="img" aria-label={l({ eu: `Erdian: ${regions.shared.join(' · ') || 'ezer ez'}`, es: `En el centro: ${regions.shared.join(' · ') || 'nada'}`, ar: `في الوسط: ${regions.shared.join(' · ') || 'لا شيء'}` })}>
+                <svg viewBox="0 0 640 300" className="divisibility-figure" role="img" aria-label={l({ eu: `Erdian: ${regions.shared.join(' · ') || 'ezer ez'}`, es: `En el centro: ${regions.shared.join(' · ') || 'nada'}`, en: `In the centre: ${regions.shared.join(' · ') || 'nothing'}`, ar: `في الوسط: ${regions.shared.join(' · ') || 'لا شيء'}` })}>
                     <circle cx={250} cy={160} r={120} fill="var(--blue-tint, #dde7f7)" fillOpacity={ask === 'gcd' ? 0.5 : 0.8} stroke="var(--ink)" strokeWidth={2.2} />
                     <circle cx={390} cy={160} r={120} fill="var(--coral-tint, #f8dcd0)" fillOpacity={ask === 'gcd' ? 0.5 : 0.8} stroke="var(--ink)" strokeWidth={2.2} />
                     {ask === 'gcd' && <path d="M320 62 A120 120 0 0 1 320 258 A120 120 0 0 1 320 62 Z" fill="var(--mustard-tint, #fbebc0)" stroke="var(--ink)" strokeWidth={2.2} />}
@@ -65,8 +65,8 @@ export function VennTool(props: DivisibilityToolProps & { challenges?: LabChalle
                     <Factors values={regions.onlySecond} cx={440} cy={160} />
                     <text x={320} y={292} textAnchor="middle" fontSize={15} fill="var(--muted)">
                         {ask === 'gcd'
-                            ? l({ eu: `${acronym(props.language, 'gcd')}: erdikoak bakarrik → ${shown ? product(regions.shared) : '?'}`, es: `${acronym(props.language, 'gcd')}: solo los del centro → ${shown ? product(regions.shared) : '?'}`, ar: `${acronym(props.language, 'gcd')}: عوامل الوسط فقط ← ${shown ? product(regions.shared) : '?'}` })
-                            : l({ eu: `${acronym(props.language, 'lcm')}: diagramako guztiak → ${shown ? expected : '?'}`, es: `${acronym(props.language, 'lcm')}: todos los del diagrama → ${shown ? expected : '?'}`, ar: `${acronym(props.language, 'lcm')}: كل عوامل المخطط ← ${shown ? expected : '?'}` })}
+                            ? l({ eu: `${acronym(props.language, 'gcd')}: erdikoak bakarrik → ${shown ? product(regions.shared) : '?'}`, es: `${acronym(props.language, 'gcd')}: solo los del centro → ${shown ? product(regions.shared) : '?'}`, en: `${acronym(props.language, 'gcd')}: only the ones in the centre → ${shown ? product(regions.shared) : '?'}`, ar: `${acronym(props.language, 'gcd')}: عوامل الوسط فقط ← ${shown ? product(regions.shared) : '?'}` })
+                            : l({ eu: `${acronym(props.language, 'lcm')}: diagramako guztiak → ${shown ? expected : '?'}`, es: `${acronym(props.language, 'lcm')}: todos los del diagrama → ${shown ? expected : '?'}`, en: `${acronym(props.language, 'lcm')}: all those in the diagram → ${shown ? expected : '?'}`, ar: `${acronym(props.language, 'lcm')}: كل عوامل المخطط ← ${shown ? expected : '?'}` })}
                     </text>
                 </svg>
             </div>

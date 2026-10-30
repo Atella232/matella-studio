@@ -15,8 +15,8 @@ export function CountersTool(props: IntegerToolProps & { challenges?: LabChallen
 
     const controls = (
         <>
-            <Stepper label={l({ eu: 'Fitxa positiboak (+1)', es: 'Fichas positivas (+1)', ar: 'بطاقات موجبة (+1)' })} value={positive} min={COUNTER_LIMITS.min} max={COUNTER_LIMITS.max} onChange={(next) => setState((current) => setCounters(current, 'positive', next))} language={props.language} />
-            <Stepper label={l({ eu: 'Fitxa negatiboak (−1)', es: 'Fichas negativas (−1)', ar: 'بطاقات سالبة (−1)' })} value={negative} min={COUNTER_LIMITS.min} max={COUNTER_LIMITS.max} onChange={(next) => setState((current) => setCounters(current, 'negative', next))} language={props.language} />
+            <Stepper label={l({ eu: 'Fitxa positiboak (+1)', es: 'Fichas positivas (+1)', en: 'Positive counters (+1)', ar: 'بطاقات موجبة (+1)' })} value={positive} min={COUNTER_LIMITS.min} max={COUNTER_LIMITS.max} onChange={(next) => setState((current) => setCounters(current, 'positive', next))} language={props.language} />
+            <Stepper label={l({ eu: 'Fitxa negatiboak (−1)', es: 'Fichas negativas (−1)', en: 'Negative counters (−1)', ar: 'بطاقات سالبة (−1)' })} value={negative} min={COUNTER_LIMITS.min} max={COUNTER_LIMITS.max} onChange={(next) => setState((current) => setCounters(current, 'negative', next))} language={props.language} />
         </>
     )
 
@@ -29,6 +29,7 @@ export function CountersTool(props: IntegerToolProps & { challenges?: LabChallen
                 {l({
                     eu: `${pairs} bikote (0 balio dute) eta ${leftover} fitxa ${result < 0 ? 'negatibo' : 'positibo'} geratzen dira: ${signed(result)}.`,
                     es: `${pairs} parejas (valen 0) y quedan ${leftover} fichas ${result < 0 ? 'negativas' : 'positivas'}: ${signed(result)}.`,
+                    en: `${pairs} pairs (each worth 0) and ${leftover} ${result < 0 ? 'negativas' : 'positivas'} counters are left: ${signed(result)}.`,
                     ar: `${pairs} أزواج (تساوي 0) ويبقى ${leftover} بطاقات ${result < 0 ? 'سالبة' : 'موجبة'}: ⁦${signed(result)}⁩.`
                 })}
             </span>
@@ -44,7 +45,7 @@ export function CountersTool(props: IntegerToolProps & { challenges?: LabChallen
             <div
                 className="integers-counters"
                 role="img"
-                aria-label={l({ eu: `${positive} fitxa positibo eta ${negative} negatibo`, es: `${positive} fichas positivas y ${negative} negativas`, ar: `${positive} بطاقات موجبة و${negative} بطاقات سالبة` })}
+                aria-label={l({ eu: `${positive} fitxa positibo eta ${negative} negatibo`, es: `${positive} fichas positivas y ${negative} negativas`, en: `${positive} positive counters and ${negative} negative counters`, ar: `${positive} بطاقات موجبة و${negative} بطاقات سالبة` })}
             >
                 <div className="integers-counters-pairs">
                     {Array.from({ length: pairs }, (_, index) => (
@@ -58,7 +59,7 @@ export function CountersTool(props: IntegerToolProps & { challenges?: LabChallen
                 <div className="integers-counters-left">
                     {Array.from({ length: leftover }, (_, index) => chip(result < 0 ? 'minus' : 'plus', false, String(index)))}
                 </div>
-                {positive + negative === 0 && <p className="fraction-v2-lab-tip">{l({ eu: 'Gehitu fitxak ezkerreko kontrolekin.', es: 'Añade fichas con los controles.', ar: 'أضف بطاقات بأدوات التحكم.' })}</p>}
+                {positive + negative === 0 && <p className="fraction-v2-lab-tip">{l({ eu: 'Gehitu fitxak ezkerreko kontrolekin.', es: 'Añade fichas con los controles.', en: 'Add counters using the controls.', ar: 'أضف بطاقات بأدوات التحكم.' })}</p>}
             </div>
         </ToolFrame>
     )

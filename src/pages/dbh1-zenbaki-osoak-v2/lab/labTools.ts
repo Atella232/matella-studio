@@ -40,10 +40,11 @@ export const introLabTools: IntroLabTool[] = [
         id: 'brackets',
         stage: 'addsub',
         lessonTopic: 'brackets',
-        title: { eu: 'Parentesiak kentzen', es: 'Quitar paréntesis', ar: 'حذف الأقواس' },
+        title: { eu: 'Parentesiak kentzen', es: 'Quitar paréntesis', en: 'Removing brackets', ar: 'حذف الأقواس' },
         observe: {
             eu: 'Aurretik + duen parentesiak barruko zeinuak mantentzen ditu; aurretik − duenak zeinu guztiak aldatzen ditu. Parentesiak kendu ondoren, batu positiboak eta negatiboak bereiz.',
             es: 'Un paréntesis precedido de + mantiene los signos de dentro; uno precedido de − cambia todos los signos. Después de quitar los paréntesis, suma aparte positivos y negativos.',
+            en: 'A bracket preceded by + keeps the signs inside; one preceded by − changes all the signs. After removing the brackets, add the positives and negatives separately.',
             ar: 'القوس المسبوق بـ + يحافظ على الإشارات داخله؛ والمسبوق بـ − يغيّر كل الإشارات. بعد حذف الأقواس اجمع الموجبة والسالبة كلًّا على حدة.'
         }
     },
@@ -76,26 +77,26 @@ const pairIs = (state: CompareState, a: number, b: number) => [state.first, stat
 export const introLineChallenges: LabChallenge<LineState>[] = [
     {
         id: 2101,
-        prompt: { eu: 'Kokatu −7 zuzenean.', es: 'Coloca el −7 en la recta.', ar: 'ضع ⁦−7⁩ على الخط.' },
-        hint: { eu: 'Zerotik 7 urrats ezkerrera.', es: '7 pasos a la izquierda del cero.', ar: '7 خطوات إلى يسار الصفر.' },
+        prompt: { eu: 'Kokatu −7 zuzenean.', es: 'Coloca el −7 en la recta.', en: 'Place −7 on the number line.', ar: 'ضع ⁦−7⁩ على الخط.' },
+        hint: { eu: 'Zerotik 7 urrats ezkerrera.', es: '7 pasos a la izquierda del cero.', en: '7 steps to the left of zero.', ar: '7 خطوات إلى يسار الصفر.' },
         isSolved: (state) => state.value === -7
     },
     {
         id: 2102,
-        prompt: { eu: 'Termometroa: «zero azpitik bost gradu».', es: 'Termómetro: «cinco grados bajo cero».', ar: 'ميزان الحرارة: «خمس درجات تحت الصفر».' },
-        hint: { eu: 'Aukeratu termometroa. Zero azpitik = −.', es: 'Elige el termómetro. Bajo cero = −.', ar: 'اختر ميزان الحرارة. تحت الصفر = −.' },
+        prompt: { eu: 'Termometroa: «zero azpitik bost gradu».', es: 'Termómetro: «cinco grados bajo cero».', en: 'Thermometer: “five degrees below zero”.', ar: 'ميزان الحرارة: «خمس درجات تحت الصفر».' },
+        hint: { eu: 'Aukeratu termometroa. Zero azpitik = −.', es: 'Elige el termómetro. Bajo cero = −.', en: 'Choose the thermometer. Below zero = −.', ar: 'اختر ميزان الحرارة. تحت الصفر = −.' },
         isSolved: (state) => state.context === 'temperature' && state.value === -5
     },
     {
         id: 2103,
-        prompt: { eu: 'Eraikina: jostailu-saila hirugarren sotoan dago. Joan hara.', es: 'Edificio: la sección de juguetes está en el tercer sótano. Ve allí.', ar: 'المبنى: قسم الألعاب في القبو الثالث. اذهب إليه.' },
-        hint: { eu: 'Aukeratu eraikina. Sotoak negatiboak dira.', es: 'Elige el edificio. Los sótanos son negativos.', ar: 'اختر المبنى. الأقبية سالبة.' },
+        prompt: { eu: 'Eraikina: jostailu-saila hirugarren sotoan dago. Joan hara.', es: 'Edificio: la sección de juguetes está en el tercer sótano. Ve allí.', en: 'Building: the toy department is in the third basement. Go there.', ar: 'المبنى: قسم الألعاب في القبو الثالث. اذهب إليه.' },
+        hint: { eu: 'Aukeratu eraikina. Sotoak negatiboak dira.', es: 'Elige el edificio. Los sótanos son negativos.', en: 'Choose the building. Basements are negative.', ar: 'اختر المبنى. الأقبية سالبة.' },
         isSolved: (state) => state.context === 'floors' && state.value === -3
     },
     {
         id: 2104,
-        prompt: { eu: 'Itsasoa: kaio bat itsas mailatik 9 metro gora dabil. Kokatu.', es: 'Mar: una gaviota vuela a 9 metros sobre el nivel del mar. Colócala.', ar: 'البحر: نورس يطير على ارتفاع 9 أمتار فوق سطح البحر. ضعه.' },
-        hint: { eu: 'Itsas mailatik gora = +.', es: 'Sobre el nivel del mar = +.', ar: 'فوق سطح البحر = +.' },
+        prompt: { eu: 'Itsasoa: kaio bat itsas mailatik 9 metro gora dabil. Kokatu.', es: 'Mar: una gaviota vuela a 9 metros sobre el nivel del mar. Colócala.', en: 'Sea: a seagull is flying 9 metres above sea level. Place it.', ar: 'البحر: نورس يطير على ارتفاع 9 أمتار فوق سطح البحر. ضعه.' },
+        hint: { eu: 'Itsas mailatik gora = +.', es: 'Sobre el nivel del mar = +.', en: 'Above sea level = +.', ar: 'فوق سطح البحر = +.' },
         isSolved: (state) => state.context === 'sea' && state.value === 9
     }
 ]
@@ -103,26 +104,26 @@ export const introLineChallenges: LabChallenge<LineState>[] = [
 export const introCompareChallenges: LabChallenge<CompareState>[] = [
     {
         id: 2201,
-        prompt: { eu: 'Alderatu +5 eta −3, eta asmatu ikurra.', es: 'Compara +5 y −3 y acierta el signo.', ar: 'قارن ⁦+5⁩ و⁦−3⁩ وأصب الرمز.' },
-        hint: { eu: 'Positibo bat beti da negatibo bat baino handiagoa.', es: 'Un positivo siempre es mayor que un negativo.', ar: 'الموجب دائمًا أكبر من السالب.' },
+        prompt: { eu: 'Alderatu +5 eta −3, eta asmatu ikurra.', es: 'Compara +5 y −3 y acierta el signo.', en: 'Compare +5 and −3 and choose the right sign.', ar: 'قارن ⁦+5⁩ و⁦−3⁩ وأصب الرمز.' },
+        hint: { eu: 'Positibo bat beti da negatibo bat baino handiagoa.', es: 'Un positivo siempre es mayor que un negativo.', en: 'A positive is always greater than a negative.', ar: 'الموجب دائمًا أكبر من السالب.' },
         isSolved: (state) => guessedRight(state) && pairIs(state, 5, -3)
     },
     {
         id: 2202,
-        prompt: { eu: 'Alderatu −7 eta −4, eta asmatu ikurra.', es: 'Compara −7 y −4 y acierta el signo.', ar: 'قارن ⁦−7⁩ و⁦−4⁩ وأصب الرمز.' },
-        hint: { eu: 'Zerotik hurbilen dagoena da handiena.', es: 'El más cercano al cero es el mayor.', ar: 'الأقرب إلى الصفر هو الأكبر.' },
+        prompt: { eu: 'Alderatu −7 eta −4, eta asmatu ikurra.', es: 'Compara −7 y −4 y acierta el signo.', en: 'Compare −7 and −4 and choose the right sign.', ar: 'قارن ⁦−7⁩ و⁦−4⁩ وأصب الرمز.' },
+        hint: { eu: 'Zerotik hurbilen dagoena da handiena.', es: 'El más cercano al cero es el mayor.', en: 'The one closest to zero is the greater.', ar: 'الأقرب إلى الصفر هو الأكبر.' },
         isSolved: (state) => guessedRight(state) && pairIs(state, -7, -4)
     },
     {
         id: 2203,
-        prompt: { eu: 'Alderatu −10 eta −8, eta asmatu ikurra.', es: 'Compara −10 y −8 y acierta el signo.', ar: 'قارن ⁦−10⁩ و⁦−8⁩ وأصب الرمز.' },
-        hint: { eu: '$\\lvert -10\\rvert >\\lvert -8\\rvert$, beraz −10 zerotik urrunago dago.', es: '$\\lvert -10\\rvert >\\lvert -8\\rvert$, así que −10 está más lejos del cero.', ar: '$\\lvert -10\\rvert >\\lvert -8\\rvert$، إذن ⁦−10⁩ أبعد عن الصفر.' },
+        prompt: { eu: 'Alderatu −10 eta −8, eta asmatu ikurra.', es: 'Compara −10 y −8 y acierta el signo.', en: 'Compare −10 and −8 and choose the right sign.', ar: 'قارن ⁦−10⁩ و⁦−8⁩ وأصب الرمز.' },
+        hint: { eu: '$\\lvert -10\\rvert >\\lvert -8\\rvert$, beraz −10 zerotik urrunago dago.', es: '$\\lvert -10\\rvert >\\lvert -8\\rvert$, así que −10 está más lejos del cero.', en: '$\\lvert -10\\rvert >\\lvert -8\\rvert$, so −10 is further from zero.', ar: '$\\lvert -10\\rvert >\\lvert -8\\rvert$، إذن ⁦−10⁩ أبعد عن الصفر.' },
         isSolved: (state) => guessedRight(state) && pairIs(state, -10, -8)
     },
     {
         id: 2204,
-        prompt: { eu: 'Alderatu +3 eta −3, eta asmatu ikurra.', es: 'Compara +3 y −3 y acierta el signo.', ar: 'قارن ⁦+3⁩ و⁦−3⁩ وأصب الرمز.' },
-        hint: { eu: 'Balio absolutu bera dute, baina bata positiboa da.', es: 'Tienen el mismo valor absoluto, pero uno es positivo.', ar: 'لهما القيمة المطلقة نفسها لكن أحدهما موجب.' },
+        prompt: { eu: 'Alderatu +3 eta −3, eta asmatu ikurra.', es: 'Compara +3 y −3 y acierta el signo.', en: 'Compare +3 and −3 and choose the right sign.', ar: 'قارن ⁦+3⁩ و⁦−3⁩ وأصب الرمز.' },
+        hint: { eu: 'Balio absolutu bera dute, baina bata positiboa da.', es: 'Tienen el mismo valor absoluto, pero uno es positivo.', en: 'They have the same absolute value, but one is positive.', ar: 'لهما القيمة المطلقة نفسها لكن أحدهما موجب.' },
         isSolved: (state) => guessedRight(state) && pairIs(state, 3, -3)
     }
 ]
@@ -130,26 +131,26 @@ export const introCompareChallenges: LabChallenge<CompareState>[] = [
 export const introMirrorChallenges: LabChallenge<MirrorState>[] = [
     {
         id: 2301,
-        prompt: { eu: 'Aukeratu balio absolutua 9 duen zenbaki positiboa.', es: 'Elige el número positivo cuyo valor absoluto es 9.', ar: 'اختر العدد الموجب الذي قيمته المطلقة 9.' },
-        hint: { eu: 'Zerotik 9 unitatera, eskuinean.', es: 'A 9 unidades del cero, por la derecha.', ar: 'على بعد 9 وحدات من الصفر، جهة اليمين.' },
+        prompt: { eu: 'Aukeratu balio absolutua 9 duen zenbaki positiboa.', es: 'Elige el número positivo cuyo valor absoluto es 9.', en: 'Choose the positive number whose absolute value is 9.', ar: 'اختر العدد الموجب الذي قيمته المطلقة 9.' },
+        hint: { eu: 'Zerotik 9 unitatera, eskuinean.', es: 'A 9 unidades del cero, por la derecha.', en: '9 units from zero, to the right.', ar: 'على بعد 9 وحدات من الصفر، جهة اليمين.' },
         isSolved: (state) => state.value === 9
     },
     {
         id: 2302,
-        prompt: { eu: 'Erakutsi −7ren aurkakoa.', es: 'Muestra el opuesto de −7.', ar: 'اعرض معاكس ⁦−7⁩.' },
-        hint: { eu: 'Aukeratu −7 eta aktibatu aurkakoa.', es: 'Elige el −7 y activa el opuesto.', ar: 'اختر ⁦−7⁩ وفعّل المعاكس.' },
+        prompt: { eu: 'Erakutsi −7ren aurkakoa.', es: 'Muestra el opuesto de −7.', en: 'Show the opposite of −7.', ar: 'اعرض معاكس ⁦−7⁩.' },
+        hint: { eu: 'Aukeratu −7 eta aktibatu aurkakoa.', es: 'Elige el −7 y activa el opuesto.', en: 'Choose −7 and activate the opposite.', ar: 'اختر ⁦−7⁩ وفعّل المعاكس.' },
         isSolved: (state) => state.value === -7 && state.showOpposite
     },
     {
         id: 2303,
-        prompt: { eu: 'Aurkitu bere aurkakotik 8 unitatera dagoen zenbaki bat, eta erakutsi biak.', es: 'Encuentra un número que esté a 8 unidades de su opuesto y muestra los dos.', ar: 'جد عددًا يبعد 8 وحدات عن معاكسه واعرض الاثنين.' },
-        hint: { eu: 'Bakoitza zerotik 8ren erdira.', es: 'Cada uno a la mitad de 8 del cero.', ar: 'كل منهما على بعد نصف 8 من الصفر.' },
+        prompt: { eu: 'Aurkitu bere aurkakotik 8 unitatera dagoen zenbaki bat, eta erakutsi biak.', es: 'Encuentra un número que esté a 8 unidades de su opuesto y muestra los dos.', en: 'Find a number that is 8 units from its opposite and show both.', ar: 'جد عددًا يبعد 8 وحدات عن معاكسه واعرض الاثنين.' },
+        hint: { eu: 'Bakoitza zerotik 8ren erdira.', es: 'Cada uno a la mitad de 8 del cero.', en: 'Each one is half of 8 away from zero.', ar: 'كل منهما على بعد نصف 8 من الصفر.' },
         isSolved: (state) => Math.abs(state.value) === 4 && state.showOpposite
     },
     {
         id: 2304,
-        prompt: { eu: 'Aukeratu zerotik hurbilen dagoen zenbaki negatiboa.', es: 'Elige el número negativo más cercano al cero.', ar: 'اختر العدد السالب الأقرب إلى الصفر.' },
-        hint: { eu: 'Balio absolutu txikiena duen negatiboa.', es: 'El negativo de menor valor absoluto.', ar: 'السالب صاحب أصغر قيمة مطلقة.' },
+        prompt: { eu: 'Aukeratu zerotik hurbilen dagoen zenbaki negatiboa.', es: 'Elige el número negativo más cercano al cero.', en: 'Choose the negative number closest to zero.', ar: 'اختر العدد السالب الأقرب إلى الصفر.' },
+        hint: { eu: 'Balio absolutu txikiena duen negatiboa.', es: 'El negativo de menor valor absoluto.', en: 'The negative with the smallest absolute value.', ar: 'السالب صاحب أصغر قيمة مطلقة.' },
         isSolved: (state) => state.value === -1
     }
 ]
@@ -157,26 +158,26 @@ export const introMirrorChallenges: LabChallenge<MirrorState>[] = [
 export const introCountersChallenges: LabChallenge<CountersState>[] = [
     {
         id: 2401,
-        prompt: { eu: 'Irudikatu $(+5)+(-3)$: 5 € ditut eta 3 € zor ditut.', es: 'Representa $(+5)+(-3)$: tengo 5 € y debo 3 €.', ar: 'مثّل $(+5)+(-3)$: لديّ 5 € وعليّ 3 €.' },
-        hint: { eu: '5 fitxa positibo eta 3 negatibo.', es: '5 fichas positivas y 3 negativas.', ar: '5 بطاقات موجبة و3 سالبة.' },
+        prompt: { eu: 'Irudikatu $(+5)+(-3)$: 5 € ditut eta 3 € zor ditut.', es: 'Representa $(+5)+(-3)$: tengo 5 € y debo 3 €.', en: 'Represent $(+5)+(-3)$: I have €5 and owe €3.', ar: 'مثّل $(+5)+(-3)$: لديّ 5 € وعليّ 3 €.' },
+        hint: { eu: '5 fitxa positibo eta 3 negatibo.', es: '5 fichas positivas y 3 negativas.', en: '5 positive and 3 negative counters.', ar: '5 بطاقات موجبة و3 سالبة.' },
         isSolved: (state) => state.positive === 5 && state.negative === 3
     },
     {
         id: 2402,
-        prompt: { eu: 'Irudikatu $(-4)+(-1)$.', es: 'Representa $(-4)+(-1)$.', ar: 'مثّل $(-4)+(-1)$.' },
-        hint: { eu: 'Bi zorrak batera: negatiboak bakarrik.', es: 'Dos deudas juntas: solo fichas negativas.', ar: 'دَينان معًا: بطاقات سالبة فقط.' },
+        prompt: { eu: 'Irudikatu $(-4)+(-1)$.', es: 'Representa $(-4)+(-1)$.', en: 'Represent $(-4)+(-1)$.', ar: 'مثّل $(-4)+(-1)$.' },
+        hint: { eu: 'Bi zorrak batera: negatiboak bakarrik.', es: 'Dos deudas juntas: solo fichas negativas.', en: 'Two debts together: only negative counters.', ar: 'دَينان معًا: بطاقات سالبة فقط.' },
         isSolved: (state) => state.positive === 0 && state.negative === 5
     },
     {
         id: 2403,
-        prompt: { eu: '6 € ditut eta 6 € zor ditut. Irudikatu: zenbat daukat guztira?', es: 'Tengo 6 € y debo 6 €. Represéntalo: ¿cuánto tengo en total?', ar: 'لديّ 6 € وعليّ 6 €. مثّل ذلك: كم لديّ في المجموع؟' },
-        hint: { eu: 'Aurkakoak: bikote guztiak.', es: 'Son opuestos: todo parejas.', ar: 'متعاكسان: كلها أزواج.' },
+        prompt: { eu: '6 € ditut eta 6 € zor ditut. Irudikatu: zenbat daukat guztira?', es: 'Tengo 6 € y debo 6 €. Represéntalo: ¿cuánto tengo en total?', en: 'I have €6 and owe €6. Represent it: how much do I have in total?', ar: 'لديّ 6 € وعليّ 6 €. مثّل ذلك: كم لديّ في المجموع؟' },
+        hint: { eu: 'Aurkakoak: bikote guztiak.', es: 'Son opuestos: todo parejas.', en: 'They are opposites: all in pairs.', ar: 'متعاكسان: كلها أزواج.' },
         isSolved: (state) => state.positive === 6 && state.negative === 6
     },
     {
         id: 2404,
-        prompt: { eu: 'Irudikatu −2 zehazki 10 fitxarekin.', es: 'Representa −2 con exactamente 10 fichas.', ar: 'مثّل ⁦−2⁩ بعشر بطاقات بالضبط.' },
-        hint: { eu: 'Bikoteak kentzean 2 negatibo geratu behar dira.', es: 'Al quitar las parejas tienen que quedar 2 negativas.', ar: 'بعد حذف الأزواج يجب أن تبقى بطاقتان سالبتان.' },
+        prompt: { eu: 'Irudikatu −2 zehazki 10 fitxarekin.', es: 'Representa −2 con exactamente 10 fichas.', en: 'Represent −2 with exactly 10 counters.', ar: 'مثّل ⁦−2⁩ بعشر بطاقات بالضبط.' },
+        hint: { eu: 'Bikoteak kentzean 2 negatibo geratu behar dira.', es: 'Al quitar las parejas tienen que quedar 2 negativas.', en: 'When the pairs are removed, 2 negative counters must be left.', ar: 'بعد حذف الأزواج يجب أن تبقى بطاقتان سالبتان.' },
         isSolved: (state) => state.positive + state.negative === 10 && state.positive - state.negative === -2
     }
 ]
@@ -184,26 +185,26 @@ export const introCountersChallenges: LabChallenge<CountersState>[] = [
 export const introJumpsChallenges: LabChallenge<JumpsState>[] = [
     {
         id: 2501,
-        prompt: { eu: 'Egin $(+5)+(-3)$ eta idatzi emaitza.', es: 'Haz $(+5)+(-3)$ y escribe el resultado.', ar: 'نفّذ $(+5)+(-3)$ واكتب الناتج.' },
-        hint: { eu: 'Hasi +5ean eta egin 3 urrats ezkerrera.', es: 'Empieza en +5 y da 3 pasos a la izquierda.', ar: 'ابدأ من ⁦+5⁩ وتقدّم 3 خطوات إلى اليسار.' },
+        prompt: { eu: 'Egin $(+5)+(-3)$ eta idatzi emaitza.', es: 'Haz $(+5)+(-3)$ y escribe el resultado.', en: 'Do $(+5)+(-3)$ and write the result.', ar: 'نفّذ $(+5)+(-3)$ واكتب الناتج.' },
+        hint: { eu: 'Hasi +5ean eta egin 3 urrats ezkerrera.', es: 'Empieza en +5 y da 3 pasos a la izquierda.', en: 'Start at +5 and take 3 steps to the left.', ar: 'ابدأ من ⁦+5⁩ وتقدّم 3 خطوات إلى اليسار.' },
         isSolved: (state) => state.start === 5 && state.op === 'add' && state.amount === -3 && answered(state, 2)
     },
     {
         id: 2502,
-        prompt: { eu: 'Egin $(-3)+(+5)$ eta idatzi emaitza.', es: 'Haz $(-3)+(+5)$ y escribe el resultado.', ar: 'نفّذ $(-3)+(+5)$ واكتب الناتج.' },
-        hint: { eu: 'Hasi −3an eta egin 5 urrats eskuinera.', es: 'Empieza en −3 y da 5 pasos a la derecha.', ar: 'ابدأ من ⁦−3⁩ وتقدّم 5 خطوات إلى اليمين.' },
+        prompt: { eu: 'Egin $(-3)+(+5)$ eta idatzi emaitza.', es: 'Haz $(-3)+(+5)$ y escribe el resultado.', en: 'Do $(-3)+(+5)$ and write the result.', ar: 'نفّذ $(-3)+(+5)$ واكتب الناتج.' },
+        hint: { eu: 'Hasi −3an eta egin 5 urrats eskuinera.', es: 'Empieza en −3 y da 5 pasos a la derecha.', en: 'Start at −3 and take 5 steps to the right.', ar: 'ابدأ من ⁦−3⁩ وتقدّم 5 خطوات إلى اليمين.' },
         isSolved: (state) => state.start === -3 && state.op === 'add' && state.amount === 5 && answered(state, 2)
     },
     {
         id: 2503,
-        prompt: { eu: 'Egin $(+5)-(+2)$ eta idatzi emaitza.', es: 'Haz $(+5)-(+2)$ y escribe el resultado.', ar: 'نفّذ $(+5)-(+2)$ واكتب الناتج.' },
-        hint: { eu: 'Aukeratu «−». $+2$ kentzea $-2$ batzea da.', es: 'Elige «−». Restar +2 es sumar −2.', ar: 'اختر «−». طرح ⁦+2⁩ يساوي جمع ⁦−2⁩.' },
+        prompt: { eu: 'Egin $(+5)-(+2)$ eta idatzi emaitza.', es: 'Haz $(+5)-(+2)$ y escribe el resultado.', en: 'Do $(+5)-(+2)$ and write the result.', ar: 'نفّذ $(+5)-(+2)$ واكتب الناتج.' },
+        hint: { eu: 'Aukeratu «−». $+2$ kentzea $-2$ batzea da.', es: 'Elige «−». Restar +2 es sumar −2.', en: 'Choose “−”. Subtracting +2 is adding −2.', ar: 'اختر «−». طرح ⁦+2⁩ يساوي جمع ⁦−2⁩.' },
         isSolved: (state) => state.start === 5 && state.op === 'subtract' && state.amount === 2 && answered(state, 3)
     },
     {
         id: 2504,
-        prompt: { eu: 'Egin $(-6)-(-1)$ eta idatzi emaitza.', es: 'Haz $(-6)-(-1)$ y escribe el resultado.', ar: 'نفّذ $(-6)-(-1)$ واكتب الناتج.' },
-        hint: { eu: 'Negatibo bat kentzea gora egitea da: $(-6)+(+1)$.', es: 'Restar un negativo es subir: $(-6)+(+1)$.', ar: 'طرح سالب يعني الصعود: $(-6)+(+1)$.' },
+        prompt: { eu: 'Egin $(-6)-(-1)$ eta idatzi emaitza.', es: 'Haz $(-6)-(-1)$ y escribe el resultado.', en: 'Do $(-6)-(-1)$ and write the result.', ar: 'نفّذ $(-6)-(-1)$ واكتب الناتج.' },
+        hint: { eu: 'Negatibo bat kentzea gora egitea da: $(-6)+(+1)$.', es: 'Restar un negativo es subir: $(-6)+(+1)$.', en: 'Subtracting a negative is going up: $(-6)+(+1)$.', ar: 'طرح سالب يعني الصعود: $(-6)+(+1)$.' },
         isSolved: (state) => state.start === -6 && state.op === 'subtract' && state.amount === -1 && answered(state, jumpsResult(state))
     }
 ]
@@ -211,26 +212,26 @@ export const introJumpsChallenges: LabChallenge<JumpsState>[] = [
 export const introSignsChallenges: LabChallenge<SignsState>[] = [
     {
         id: 2701,
-        prompt: { eu: 'Kalkulatu $(+5)\\cdot(-3)$ eta idatzi emaitza.', es: 'Calcula $(+5)\\cdot(-3)$ y escribe el resultado.', ar: 'احسب $(+5)\\cdot(-3)$ واكتب الناتج.' },
-        hint: { eu: '5 jauzi −3koak.', es: '5 saltos de −3.', ar: '5 قفزات مقدار كل منها ⁦−3⁩.' },
+        prompt: { eu: 'Kalkulatu $(+5)\\cdot(-3)$ eta idatzi emaitza.', es: 'Calcula $(+5)\\cdot(-3)$ y escribe el resultado.', en: 'Calculate $(+5)\\cdot(-3)$ and write the result.', ar: 'احسب $(+5)\\cdot(-3)$ واكتب الناتج.' },
+        hint: { eu: '5 jauzi −3koak.', es: '5 saltos de −3.', en: '5 jumps of −3.', ar: '5 قفزات مقدار كل منها ⁦−3⁩.' },
         isSolved: (state) => state.op === 'multiply' && state.groups === 5 && state.size === -3 && answered(state, -15)
     },
     {
         id: 2702,
-        prompt: { eu: 'Kalkulatu $(-5)\\cdot(-3)$ eta idatzi emaitza.', es: 'Calcula $(-5)\\cdot(-3)$ y escribe el resultado.', ar: 'احسب $(-5)\\cdot(-3)$ واكتب الناتج.' },
-        hint: { eu: 'Zeinu bera → +.', es: 'Mismo signo → +.', ar: 'الإشارة نفسها ← +.' },
+        prompt: { eu: 'Kalkulatu $(-5)\\cdot(-3)$ eta idatzi emaitza.', es: 'Calcula $(-5)\\cdot(-3)$ y escribe el resultado.', en: 'Calculate $(-5)\\cdot(-3)$ and write the result.', ar: 'احسب $(-5)\\cdot(-3)$ واكتب الناتج.' },
+        hint: { eu: 'Zeinu bera → +.', es: 'Mismo signo → +.', en: 'Same sign → +.', ar: 'الإشارة نفسها ← +.' },
         isSolved: (state) => state.op === 'multiply' && state.groups === -5 && state.size === -3 && answered(state, 15)
     },
     {
         id: 2703,
-        prompt: { eu: 'Kalkulatu $(+20)\\mathbin{:}(-4)$ eta idatzi emaitza.', es: 'Calcula $(+20)\\mathbin{:}(-4)$ y escribe el resultado.', ar: 'احسب $(+20)\\mathbin{:}(-4)$ واكتب الناتج.' },
-        hint: { eu: 'Aukeratu zatiketa, zatitzailea −4 eta zatikizuna +20.', es: 'Elige la división, divisor −4 y dividendo +20.', ar: 'اختر القسمة، والمقسوم عليه ⁦−4⁩ والمقسوم ⁦+20⁩.' },
+        prompt: { eu: 'Kalkulatu $(+20)\\mathbin{:}(-4)$ eta idatzi emaitza.', es: 'Calcula $(+20)\\mathbin{:}(-4)$ y escribe el resultado.', en: 'Calculate $(+20)\\mathbin{:}(-4)$ and write the result.', ar: 'احسب $(+20)\\mathbin{:}(-4)$ واكتب الناتج.' },
+        hint: { eu: 'Aukeratu zatiketa, zatitzailea −4 eta zatikizuna +20.', es: 'Elige la división, divisor −4 y dividendo +20.', en: 'Choose division: divisor −4 and dividend +20.', ar: 'اختر القسمة، والمقسوم عليه ⁦−4⁩ والمقسوم ⁦+20⁩.' },
         isSolved: (state) => state.op === 'divide' && state.size === -4 && signsProduct(state) === 20 && answered(state, -5)
     },
     {
         id: 2704,
-        prompt: { eu: 'Kalkulatu $(-20)\\mathbin{:}(-4)$ eta idatzi emaitza.', es: 'Calcula $(-20)\\mathbin{:}(-4)$ y escribe el resultado.', ar: 'احسب $(-20)\\mathbin{:}(-4)$ واكتب الناتج.' },
-        hint: { eu: 'Zeinu bera → +.', es: 'Mismo signo → +.', ar: 'الإشارة نفسها ← +.' },
+        prompt: { eu: 'Kalkulatu $(-20)\\mathbin{:}(-4)$ eta idatzi emaitza.', es: 'Calcula $(-20)\\mathbin{:}(-4)$ y escribe el resultado.', en: 'Calculate $(-20)\\mathbin{:}(-4)$ and write the result.', ar: 'احسب $(-20)\\mathbin{:}(-4)$ واكتب الناتج.' },
+        hint: { eu: 'Zeinu bera → +.', es: 'Mismo signo → +.', en: 'Same sign → +.', ar: 'الإشارة نفسها ← +.' },
         isSolved: (state) => state.op === 'divide' && state.size === -4 && signsProduct(state) === -20 && answered(state, 5)
     }
 ]
@@ -324,11 +325,12 @@ export const bracketsChallenges: LabChallenge<BracketsState>[] = bracketsExercis
     prompt: {
         eu: `Kendu parentesiak eta kalkulatu ${exercise.id}. eragiketa (zeinu guztiak ondo eta emaitza idatzita).`,
         es: `Quita los paréntesis y calcula la operación ${exercise.id} (todos los signos bien y el resultado escrito).`,
+        en: `Remove the brackets and calculate the operation ${exercise.id} (all the signs right and the result written).`,
         ar: `احذف الأقواس واحسب العملية ${exercise.id} (كل الإشارات صحيحة والنتيجة مكتوبة).`
     },
     hint: exercise.parts.some((part) => part.kind === 'bracket' && part.sign === '-')
-        ? { eu: 'Aurretik − duen parentesian zeinu guztiak aldatzen dira.', es: 'En el paréntesis precedido de − cambian todos los signos.', ar: 'في القوس المسبوق بـ − تتغير كل الإشارات.' }
-        : { eu: 'Aurretik + duenean, zeinuak ez dira aldatzen.', es: 'Si va precedido de +, los signos no cambian.', ar: 'إذا سبقه + لا تتغير الإشارات.' },
+        ? { eu: 'Aurretik − duen parentesian zeinu guztiak aldatzen dira.', es: 'En el paréntesis precedido de − cambian todos los signos.', en: 'In a bracket preceded by −, all the signs change.', ar: 'في القوس المسبوق بـ − تتغير كل الإشارات.' }
+        : { eu: 'Aurretik + duenean, zeinuak ez dira aldatzen.', es: 'Si va precedido de +, los signos no cambian.', en: 'If it is preceded by +, the signs stay the same.', ar: 'إذا سبقه + لا تتغير الإشارات.' },
     isSolved: (state: BracketsState) => state.finished.includes(exercise.id)
 }))
 

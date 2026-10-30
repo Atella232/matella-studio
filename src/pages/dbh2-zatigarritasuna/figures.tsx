@@ -22,7 +22,7 @@ export function MultiplesFigure({ step = 3, max = 24, language }: { step?: numbe
     const lineY = 110
     const jumps = Array.from({ length: Math.floor(max / step) }, (_, index) => index * step)
     return (
-        <svg viewBox={`0 0 ${width} 170`} role="img" aria-label={pick(language, { eu: `${step}ren multiploak zuzenean`, es: `Múltiplos de ${step} en la recta`, ar: `مضاعفات ${step} على خط الأعداد` })} className="divisibility-figure">
+        <svg viewBox={`0 0 ${width} 170`} role="img" aria-label={pick(language, { eu: `${step}ren multiploak zuzenean`, es: `Múltiplos de ${step} en la recta`, en: `Multiples of ${step} on the number line`, ar: `مضاعفات ${step} على خط الأعداد` })} className="divisibility-figure">
             <defs>
                 <marker id="divisibility-jump" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
                     <path d="M0 0 L10 5 L0 10 z" fill={STAGE} />
@@ -44,7 +44,7 @@ export function MultiplesFigure({ step = 3, max = 24, language }: { step?: numbe
                 )
             })}
             <text x={width / 2} y={164} textAnchor="middle" fontSize={15} fill={MUTED}>
-                {pick(language, { eu: `M(${step}) = {${step}, ${step * 2}, ${step * 3}, …}: ez dute amaierarik`, es: `Múltiplos de ${step}: {${step}, ${step * 2}, ${step * 3}, …}, no se acaban nunca`, ar: `مضاعفات ${step}: {${step}، ${step * 2}، ${step * 3}، …} لا نهاية لها` })}
+                {pick(language, { eu: `M(${step}) = {${step}, ${step * 2}, ${step * 3}, …}: ez dute amaierarik`, es: `Múltiplos de ${step}: {${step}, ${step * 2}, ${step * 3}, …}, no se acaban nunca`, en: `Multiples of ${step}: {${step}, ${step * 2}, ${step * 3}, …}, they never end`, ar: `مضاعفات ${step}: {${step}، ${step * 2}، ${step * 3}، …} لا نهاية لها` })}
             </text>
         </svg>
     )
@@ -64,7 +64,7 @@ export function DivisorRectanglesFigure({ n = 12, language }: { n?: number; lang
     const width = Math.max(offset, 480)
     const labelY = 30 + Math.max(...pairs.map(([rows]) => rows)) * cell + 26
     return (
-        <svg viewBox={`0 0 ${width} 200`} role="img" aria-label={pick(language, { eu: `${n} karratuekin egin daitezkeen laukizuzenak`, es: `Rectángulos que se pueden formar con ${n} cuadrados`, ar: `المستطيلات التي يمكن تكوينها من ${n} مربعًا` })} className="divisibility-figure">
+        <svg viewBox={`0 0 ${width} 200`} role="img" aria-label={pick(language, { eu: `${n} karratuekin egin daitezkeen laukizuzenak`, es: `Rectángulos que se pueden formar con ${n} cuadrados`, en: `Rectangles that can be made with ${n} squares`, ar: `المستطيلات التي يمكن تكوينها من ${n} مربعًا` })} className="divisibility-figure">
             {blocks.map(({ rows, columns, x }) => (
                 <g key={`${rows}x${columns}`}>
                     {Array.from({ length: rows * columns }, (_, index) => (
@@ -74,7 +74,7 @@ export function DivisorRectanglesFigure({ n = 12, language }: { n?: number; lang
                 </g>
             ))}
             <text x={width / 2} y={190} textAnchor="middle" fontSize={15} fill={MUTED}>
-                {pick(language, { eu: `Zat(${n}) = {${[...pairs.map(([a]) => a), ...pairs.map(([, b]) => b).reverse()].filter((value, index, list) => list.indexOf(value) === index).join(', ')}}`, es: `Div(${n}) = {${[...pairs.map(([a]) => a), ...pairs.map(([, b]) => b).reverse()].filter((value, index, list) => list.indexOf(value) === index).join(', ')}}`, ar: `قواسم ${n} = {${[...pairs.map(([a]) => a), ...pairs.map(([, b]) => b).reverse()].filter((value, index, list) => list.indexOf(value) === index).join('، ')}}` })}
+                {pick(language, { eu: `Zat(${n}) = {${[...pairs.map(([a]) => a), ...pairs.map(([, b]) => b).reverse()].filter((value, index, list) => list.indexOf(value) === index).join(', ')}}`, es: `Div(${n}) = {${[...pairs.map(([a]) => a), ...pairs.map(([, b]) => b).reverse()].filter((value, index, list) => list.indexOf(value) === index).join(', ')}}`, en: `Div(${n}) = {${[...pairs.map(([a]) => a), ...pairs.map(([, b]) => b).reverse()].filter((value, index, list) => list.indexOf(value) === index).join(', ')}}`, ar: `قواسم ${n} = {${[...pairs.map(([a]) => a), ...pairs.map(([, b]) => b).reverse()].filter((value, index, list) => list.indexOf(value) === index).join('، ')}}` })}
             </text>
         </svg>
     )
@@ -90,7 +90,7 @@ const isPrime = (value: number) => {
 export function SieveFigure({ language }: { language: UnitLanguage }) {
     const cell = 58
     return (
-        <svg viewBox="0 0 600 340" role="img" aria-label={pick(language, { eu: 'Eratostenesen bahea 50 arte', es: 'Criba de Eratóstenes hasta 50', ar: 'غربال إراتوستينس حتى 50' })} className="divisibility-figure">
+        <svg viewBox="0 0 600 340" role="img" aria-label={pick(language, { eu: 'Eratostenesen bahea 50 arte', es: 'Criba de Eratóstenes hasta 50', en: 'Sieve of Eratosthenes up to 50', ar: 'غربال إراتوستينس حتى 50' })} className="divisibility-figure">
             {Array.from({ length: 50 }, (_, index) => {
                 const value = index + 1
                 const x = 10 + (index % 10) * cell
@@ -105,7 +105,7 @@ export function SieveFigure({ language }: { language: UnitLanguage }) {
                 )
             })}
             <text x={300} y={332} textAnchor="middle" fontSize={15} fill={MUTED}>
-                {pick(language, { eu: 'Koloreztatuak: zenbaki lehenak. Ratatuak: konposatuak. 1 ez da ez lehena ez konposatua.', es: 'En color: primos. Tachados: compuestos. El 1 no es ni primo ni compuesto.', ar: 'الملوّنة: أعداد أولية. المشطوبة: مؤلفة. العدد 1 ليس أوليًا ولا مؤلفًا.' })}
+                {pick(language, { eu: 'Koloreztatuak: zenbaki lehenak. Ratatuak: konposatuak. 1 ez da ez lehena ez konposatua.', es: 'En color: primos. Tachados: compuestos. El 1 no es ni primo ni compuesto.', en: 'Coloured: primes. Crossed out: composites. 1 is neither prime nor composite.', ar: 'الملوّنة: أعداد أولية. المشطوبة: مؤلفة. العدد 1 ليس أوليًا ولا مؤلفًا.' })}
             </text>
         </svg>
     )
@@ -128,7 +128,7 @@ export function FactorLadderFigure({ n = 360, language }: { n?: number; language
     const counts = steps.reduce<Record<number, number>>((all, [, prime]) => ({ ...all, [prime]: (all[prime] ?? 0) + 1 }), {})
     const result = Object.entries(counts).map(([prime, count]) => (count > 1 ? `${prime}^${count}` : prime))
     return (
-        <svg viewBox={`0 0 520 ${height}`} role="img" aria-label={pick(language, { eu: `${n} biderkagai lehenetan deskonposatzea`, es: `Descomposición de ${n} en factores primos`, ar: `تحليل ${n} إلى عوامل أولية` })} className="divisibility-figure">
+        <svg viewBox={`0 0 520 ${height}`} role="img" aria-label={pick(language, { eu: `${n} biderkagai lehenetan deskonposatzea`, es: `Descomposición de ${n} en factores primos`, en: `Prime factorisation of ${n}`, ar: `تحليل ${n} إلى عوامل أولية` })} className="divisibility-figure">
             <line x1={150} x2={150} y1={10} y2={10 + (steps.length + 1) * rowHeight - 8} stroke={INK} strokeWidth={2.4} />
             {[...steps, [1, 0] as [number, number]].map(([value, prime], index) => (
                 <g key={index}>
@@ -150,7 +150,7 @@ export function FactorLadderFigure({ n = 360, language }: { n?: number; language
                 </text>
             </g>
             <text x={260} y={height - 12} textAnchor="middle" fontSize={15} fill={MUTED}>
-                {pick(language, { eu: 'Zatitu zenbaki lehenez, txikienetik hasita, 1 lortu arte.', es: 'Divide entre primos, empezando por el menor, hasta llegar a 1.', ar: 'اقسم على أعداد أولية بدءًا بالأصغر حتى تصل إلى 1.' })}
+                {pick(language, { eu: 'Zatitu zenbaki lehenez, txikienetik hasita, 1 lortu arte.', es: 'Divide entre primos, empezando por el menor, hasta llegar a 1.', en: 'Divide by primes, starting with the smallest, until you reach 1.', ar: 'اقسم على أعداد أولية بدءًا بالأصغر حتى تصل إلى 1.' })}
             </text>
         </svg>
     )
@@ -163,7 +163,7 @@ export function FactorLadderFigure({ n = 360, language }: { n?: number; language
 export function VennFigure({ language }: { language: UnitLanguage }) {
     // 12 = 2 · 2 · 3 and 18 = 2 · 3 · 3
     return (
-        <svg viewBox="0 0 640 300" role="img" aria-label={pick(language, { eu: '12 eta 18ren biderkagai lehenak Venn diagraman', es: 'Factores primos de 12 y 18 en un diagrama de Venn', ar: 'العوامل الأولية للعددين 12 و18 في مخطط فن' })} className="divisibility-figure">
+        <svg viewBox="0 0 640 300" role="img" aria-label={pick(language, { eu: '12 eta 18ren biderkagai lehenak Venn diagraman', es: 'Factores primos de 12 y 18 en un diagrama de Venn', en: 'Prime factors of 12 and 18 in a Venn diagram', ar: 'العوامل الأولية للعددين 12 و18 في مخطط فن' })} className="divisibility-figure">
             <circle cx={250} cy={140} r={115} fill={STAGE_TINT} fillOpacity={0.65} stroke={INK} strokeWidth={2.2} />
             <circle cx={390} cy={140} r={115} fill="var(--second-tint, #f8dcd0)" fillOpacity={0.65} stroke={INK} strokeWidth={2.2} />
             <text x={190} y={28} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>12 = 2² · 3</text>
@@ -173,7 +173,7 @@ export function VennFigure({ language }: { language: UnitLanguage }) {
             <text x={320} y={170} textAnchor="middle" fontSize={30} fontWeight={700} fill={INK}>3</text>
             <text x={445} y={150} textAnchor="middle" fontSize={30} fontWeight={700} fill={INK}>3</text>
             <text x={320} y={278} textAnchor="middle" fontSize={17} fontWeight={700} fill={INK}>
-                {pick(language, { eu: 'Erdian: ZKH = 2 · 3 = 6   ·   Denak: MKT = 2 · 2 · 3 · 3 = 36', es: 'En el centro: m.c.d. = 2 · 3 = 6   ·   Todos: m.c.m. = 2 · 2 · 3 · 3 = 36', ar: 'في الوسط: ق.م.أ = 2 · 3 = 6   ·   الكل: م.م.أ = 2 · 2 · 3 · 3 = 36' })}
+                {pick(language, { eu: 'Erdian: ZKH = 2 · 3 = 6   ·   Denak: MKT = 2 · 2 · 3 · 3 = 36', es: 'En el centro: m.c.d. = 2 · 3 = 6   ·   Todos: m.c.m. = 2 · 2 · 3 · 3 = 36', en: 'In the centre: GCD = 2 · 3 = 6   ·   All: LCM = 2 · 2 · 3 · 3 = 36', ar: 'في الوسط: ق.م.أ = 2 · 3 = 6   ·   الكل: م.م.أ = 2 · 2 · 3 · 3 = 36' })}
             </text>
         </svg>
     )
@@ -184,11 +184,11 @@ export function CoincidenceFigure({ language }: { language: UnitLanguage }) {
     const max = 24
     const x = (value: number) => 40 + value * 26
     const rows = [
-        { every: 4, y: 70, color: STAGE, label: { eu: 'A autobusa: 4 min', es: 'Autobús A: cada 4 min', ar: 'الحافلة أ: كل 4 دقائق' } },
-        { every: 6, y: 150, color: SECOND, label: { eu: 'B autobusa: 6 min', es: 'Autobús B: cada 6 min', ar: 'الحافلة ب: كل 6 دقائق' } }
+        { every: 4, y: 70, color: STAGE, label: { eu: 'A autobusa: 4 min', es: 'Autobús A: cada 4 min', en: 'Bus A: every 4 min', ar: 'الحافلة أ: كل 4 دقائق' } },
+        { every: 6, y: 150, color: SECOND, label: { eu: 'B autobusa: 6 min', es: 'Autobús B: cada 6 min', en: 'Bus B: every 6 min', ar: 'الحافلة ب: كل 6 دقائق' } }
     ]
     return (
-        <svg viewBox="0 0 720 250" role="img" aria-label={pick(language, { eu: 'Bi autobus 12 eta 24 minututan batera irteten dira', es: 'Dos autobuses coinciden a los 12 y 24 minutos', ar: 'حافلتان تلتقيان بعد 12 و24 دقيقة' })} className="divisibility-figure">
+        <svg viewBox="0 0 720 250" role="img" aria-label={pick(language, { eu: 'Bi autobus 12 eta 24 minututan batera irteten dira', es: 'Dos autobuses coinciden a los 12 y 24 minutos', en: 'Two buses leave together at 12 and 24 minutes', ar: 'حافلتان تلتقيان بعد 12 و24 دقيقة' })} className="divisibility-figure">
             {[12, 24].map((meet) => (
                 <g key={meet}>
                     <rect x={x(meet) - 16} y={34} width={32} height={150} rx={10} fill="var(--mustard-tint, #fbebc0)" stroke={INK} strokeWidth={1.6} />
@@ -207,7 +207,7 @@ export function CoincidenceFigure({ language }: { language: UnitLanguage }) {
                 <text key={minute} x={x(minute)} y={206} textAnchor="middle" fontSize={14} fill={minute % 12 === 0 ? INK : MUTED} fontWeight={minute % 12 === 0 ? 700 : 400}>{minute}</text>
             ))}
             <text x={360} y={238} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>
-                {pick(language, { eu: 'Berriz batera: 12 minututan → MKT(4, 6) = 12', es: 'Vuelven a coincidir a los 12 minutos → m.c.m.(4, 6) = 12', ar: 'تلتقيان مجددًا بعد 12 دقيقة ← م.م.أ(4، 6) = 12' })}
+                {pick(language, { eu: 'Berriz batera: 12 minututan → MKT(4, 6) = 12', es: 'Vuelven a coincidir a los 12 minutos → m.c.m.(4, 6) = 12', en: 'Together again at 12 minutes → LCM(4, 6) = 12', ar: 'تلتقيان مجددًا بعد 12 دقيقة ← م.م.أ(4، 6) = 12' })}
             </text>
         </svg>
     )

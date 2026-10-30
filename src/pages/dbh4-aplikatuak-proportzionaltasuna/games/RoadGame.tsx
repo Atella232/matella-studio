@@ -131,12 +131,12 @@ export function ProportionDbh4ApRoadGame({ language, records, onResult, onExit }
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${record.score}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${record.score}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: 'Sakatu errepidean bandera jartzeko, A eta B elkartuko diren lekuan. Gero, sakatu «Irteera!».', es: 'Toca la carretera para poner la bandera donde se encontrarán A y B. Después, pulsa «¡Salida!».', ar: 'المس الطريق لتضع الراية حيث ستلتقي أ وب. ثم اضغط «انطلاق!».' })}</li>
-                        <li>{l({ eu: `${ROAD_ROUNDS} bidaia. Errepidearen % 1 baino gertuago: 100 puntu. % 15 baino urrunago: 0.`, es: `${ROAD_ROUNDS} viajes. A menos del 1 % de la carretera: 100 puntos. A más del 15 %: 0.`, ar: `${ROAD_ROUNDS} رحلات. أقرب من 1٪ من الطريق: 100 نقطة. أبعد من 15٪: 0.` })}</li>
-                        <li>{l({ eu: 'Kalkulatu: lehenik denbora, gero kilometroak. − eta + botoiek bandera km bat mugitzen dute.', es: 'Calcula: primero el tiempo, después los kilómetros. Los botones − y + mueven la bandera 1 km.', ar: 'احسب: الزمن أولًا، ثم الكيلومترات. الزرّان − و+ يحرّكان الراية 1 كم.' })}</li>
+                        <li>{l({ eu: 'Sakatu errepidean bandera jartzeko, A eta B elkartuko diren lekuan. Gero, sakatu «Irteera!».', es: 'Toca la carretera para poner la bandera donde se encontrarán A y B. Después, pulsa «¡Salida!».', en: 'Tap the road to place the flag where A and B will meet. Then press ‘Go!’.', ar: 'المس الطريق لتضع الراية حيث ستلتقي أ وب. ثم اضغط «انطلاق!».' })}</li>
+                        <li>{l({ eu: `${ROAD_ROUNDS} bidaia. Errepidearen % 1 baino gertuago: 100 puntu. % 15 baino urrunago: 0.`, es: `${ROAD_ROUNDS} viajes. A menos del 1 % de la carretera: 100 puntos. A más del 15 %: 0.`, en: `${ROAD_ROUNDS} journeys. Less than 1% of the road away: 100 points. More than 15% away: 0.`, ar: `${ROAD_ROUNDS} رحلات. أقرب من 1٪ من الطريق: 100 نقطة. أبعد من 15٪: 0.` })}</li>
+                        <li>{l({ eu: 'Kalkulatu: lehenik denbora, gero kilometroak. − eta + botoiek bandera km bat mugitzen dute.', es: 'Calcula: primero el tiempo, después los kilómetros. Los botones − y + mueven la bandera 1 km.', en: 'Calculate: first the time, then the kilometres. The − and + buttons move the flag 1 km.', ar: 'احسب: الزمن أولًا، ثم الكيلومترات. الزرّان − و+ يحرّكان الراية 1 كم.' })}</li>
                     </ul>
                 )}
             />
@@ -150,12 +150,12 @@ export function ProportionDbh4ApRoadGame({ language, records, onResult, onExit }
                 <ResultPanel
                     language={language}
                     stars={roadStars(total)}
-                    title={`${total} ${l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}`}
-                    subtitle={l({ eu: '3 izar: 510 puntu · 2 izar: 390 · izar 1: 240', es: '3 estrellas: 510 puntos · 2: 390 · 1: 240', ar: '3 نجوم: 510 نقاط · 2: 390 · 1: 240' })}
+                    title={`${total} ${l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}`}
+                    subtitle={l({ eu: '3 izar: 510 puntu · 2 izar: 390 · izar 1: 240', es: '3 estrellas: 510 puntos · 2: 390 · 1: 240', en: '3 stars: 510 points · 2: 390 · 1: 240', ar: '3 نجوم: 510 نقاط · 2: 390 · 1: 240' })}
                     stats={[
-                        { label: l({ eu: 'Itua', es: 'Dianas', ar: 'إصابات' }), value: String(throws.filter((item) => item.result.grade === 'bullseye').length) },
-                        { label: l({ eu: 'Oso gertu', es: 'Muy cerca', ar: 'قريب جدًا' }), value: String(throws.filter((item) => item.result.grade === 'close').length) },
-                        { label: l({ eu: 'Urrun', es: 'Lejos', ar: 'بعيد' }), value: String(throws.filter((item) => item.result.grade === 'far').length) }
+                        { label: l({ eu: 'Itua', es: 'Dianas', en: 'Bullseyes', ar: 'إصابات' }), value: String(throws.filter((item) => item.result.grade === 'bullseye').length) },
+                        { label: l({ eu: 'Oso gertu', es: 'Muy cerca', en: 'Very close', ar: 'قريب جدًا' }), value: String(throws.filter((item) => item.result.grade === 'close').length) },
+                        { label: l({ eu: 'Urrun', es: 'Lejos', en: 'Far', ar: 'بعيد' }), value: String(throws.filter((item) => item.result.grade === 'far').length) }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}
@@ -184,11 +184,11 @@ export function ProportionDbh4ApRoadGame({ language, records, onResult, onExit }
         <div className="road-game" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span>{index + 1} / {ROAD_ROUNDS}</span>
-                <span><strong>{counted}</strong> {l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}</span>
+                <span><strong>{counted}</strong> {l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}</span>
             </GameTopbar>
 
             <p className="road-problem">{l(roadProblem(round))}</p>
-            <p className="road-question">{l({ eu: 'Non elkartuko dira? Jarri bandera.', es: '¿Dónde se encuentran? Pon la bandera.', ar: 'أين تلتقيان؟ ضع الراية.' })}</p>
+            <p className="road-question">{l({ eu: 'Non elkartuko dira? Jarri bandera.', es: '¿Dónde se encuentran? Pon la bandera.', en: 'Where do they meet? Place the flag.', ar: 'أين تلتقيان؟ ضع الراية.' })}</p>
 
             <svg
                 ref={boardRef}
@@ -197,11 +197,11 @@ export function ProportionDbh4ApRoadGame({ language, records, onResult, onExit }
                 direction="ltr"
                 role="slider"
                 tabIndex={thrown ? -1 : 0}
-                aria-label={l({ eu: 'Banderaren lekua errepidean (km)', es: 'Lugar de la bandera en la carretera (km)', ar: 'موضع الراية على الطريق (كم)' })}
+                aria-label={l({ eu: 'Banderaren lekua errepidean (km)', es: 'Lugar de la bandera en la carretera (km)', en: 'Position of the flag on the road (km)', ar: 'موضع الراية على الطريق (كم)' })}
                 aria-valuemin={0}
                 aria-valuemax={round.road}
                 aria-valuenow={flag ?? undefined}
-                aria-valuetext={flag === null ? l({ eu: 'Bandera jarri gabe', es: 'Sin bandera', ar: 'بلا راية' }) : `${flag} km`}
+                aria-valuetext={flag === null ? l({ eu: 'Bandera jarri gabe', es: 'Sin bandera', en: 'No flag', ar: 'بلا راية' }) : `${flag} km`}
                 onKeyDown={onKey}
                 onPointerDown={(event) => {
                     if (thrown) return
@@ -250,22 +250,22 @@ export function ProportionDbh4ApRoadGame({ language, records, onResult, onExit }
                 )}
 
                 {thrown && <text x={180} y={162} textAnchor="middle" fontSize={16} fontWeight={700} fill={arrived ? GREEN : INK}>{durationText(clock, 'eu')}</text>}
-                {flag === null && !thrown && <Label x={180} y={44} textAnchor="middle" fontSize={13} fontWeight={700} fill={MUTED}>{l({ eu: 'Sakatu errepidean ↓', es: 'Toca la carretera ↓', ar: 'المس الطريق ↓' })}</Label>}
+                {flag === null && !thrown && <Label x={180} y={44} textAnchor="middle" fontSize={13} fontWeight={700} fill={MUTED}>{l({ eu: 'Sakatu errepidean ↓', es: 'Toca la carretera ↓', en: 'Tap the road ↓', ar: 'المس الطريق ↓' })}</Label>}
             </svg>
 
             {!thrown && (
                 <div className="road-controls">
                     <div className="road-nudge" dir="ltr">
-                        <button type="button" onClick={() => nudge(-1)} aria-label={l({ eu: 'Km bat atzera', es: 'Un km menos', ar: 'كيلومتر أقل' })}>−</button>
+                        <button type="button" onClick={() => nudge(-1)} aria-label={l({ eu: 'Km bat atzera', es: 'Un km menos', en: '1 km back', ar: 'كيلومتر أقل' })}>−</button>
                         <span className="road-flag-value" aria-live="polite">
                             {flag === null
-                                ? l({ eu: 'Bandera gabe', es: 'Sin bandera', ar: 'بلا راية' })
-                                : l({ eu: `Bandera: ${flag} km`, es: `Bandera: km ${flag}`, ar: `الراية: ${flag} كم` })}
+                                ? l({ eu: 'Bandera gabe', es: 'Sin bandera', en: 'No flag', ar: 'بلا راية' })
+                                : l({ eu: `Bandera: ${flag} km`, es: `Bandera: km ${flag}`, en: `Flag: ${flag} km`, ar: `الراية: ${flag} كم` })}
                         </span>
-                        <button type="button" onClick={() => nudge(1)} aria-label={l({ eu: 'Km bat aurrera', es: 'Un km más', ar: 'كيلومتر أكثر' })}>+</button>
+                        <button type="button" onClick={() => nudge(1)} aria-label={l({ eu: 'Km bat aurrera', es: 'Un km más', en: '1 km forward', ar: 'كيلومتر أكثر' })}>+</button>
                     </div>
                     <button type="button" className="fraction-v2-primary" disabled={flag === null} onClick={go}>
-                        {l({ eu: 'Irteera!', es: '¡Salida!', ar: 'انطلاق!' })}
+                        {l({ eu: 'Irteera!', es: '¡Salida!', en: 'Go!', ar: 'انطلاق!' })}
                     </button>
                 </div>
             )}
@@ -288,7 +288,7 @@ export function ProportionDbh4ApRoadGame({ language, records, onResult, onExit }
                         ))}
                     </ol>
                     <button type="button" className="fraction-v2-primary road-next" onClick={next} ref={(node) => node?.focus({ preventScroll: true })}>
-                        {index + 1 >= ROAD_ROUNDS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', ar: 'التالي' })}
+                        {index + 1 >= ROAD_ROUNDS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', en: 'See the result', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', en: 'Next', ar: 'التالي' })}
                     </button>
                 </>
             )}

@@ -1,4 +1,4 @@
-export type UnitLanguage = 'eu' | 'es' | 'ar'
+export type UnitLanguage = 'eu' | 'es' | 'en' | 'ar'
 
 export type UnitSectionId = 'home' | 'teoria' | 'laboratorio' | 'retos' | 'juegos' | 'ejercicios'
 
@@ -7,6 +7,7 @@ export type LegacyUnitSectionId = 'laborategia' | 'misioa' | 'jokuak' | 'ariketa
 export interface LocalizedText {
     eu: string
     es: string
+    en: string
     ar: string
 }
 
@@ -45,6 +46,7 @@ export interface UnitQualityStatus {
 
 export function normalizeUnitLanguage(language?: string): UnitLanguage {
     if (language?.startsWith('es')) return 'es'
+    if (language?.startsWith('en')) return 'en'
     if (language?.startsWith('ar')) return 'ar'
     return 'eu'
 }

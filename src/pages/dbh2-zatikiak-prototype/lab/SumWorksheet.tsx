@@ -49,13 +49,14 @@ export function SumWorksheetPanel({
     )
 
     const waiting: LocalizedText = marks.common === 'empty'
-        ? { eu: 'Idatzi lehenik izendatzaile komuna.', es: 'Escribe primero el denominador común.', ar: 'اكتب أولًا المقام المشترك.' }
-        : { eu: 'Zuzendu lehenik goiko urratsak.', es: 'Corrige primero los pasos de arriba.', ar: 'صحّح أولًا الخطوات السابقة.' }
+        ? { eu: 'Idatzi lehenik izendatzaile komuna.', es: 'Escribe primero el denominador común.', en: 'First write the common denominator.', ar: 'اكتب أولًا المقام المشترك.' }
+        : { eu: 'Zuzendu lehenik goiko urratsak.', es: 'Corrige primero los pasos de arriba.', en: 'First correct the steps above.', ar: 'صحّح أولًا الخطوات السابقة.' }
     const numeratorTip = (which: 0 | 1): LocalizedText => {
         const factor = marks.factors?.[which] ?? 1
         return {
             eu: `Izendatzailea ${factor} zenbakiaz biderkatu da: biderkatu zenbakitzailea ere zenbaki beraz.`,
             es: `El denominador se ha multiplicado por ${factor}: multiplica el numerador por lo mismo.`,
+            en: `The denominator has been multiplied by ${factor}: multiply the numerator by the same number.`,
             ar: `ضُرب المقام في ${factor}: اضرب البسط في العدد نفسه.`
         }
     }
@@ -74,52 +75,52 @@ export function SumWorksheetPanel({
     return (
         <div className="ws">
             <p className="ws-title">
-                {l({ eu: 'Urratsez urrats', es: 'Paso a paso', ar: 'خطوة بخطوة' })}
-                <small>{l({ eu: 'Urratsak aukerakoak dira: idatzitako bakoitza zuzentzen da.', es: 'Los pasos son opcionales: se corrige cada uno que escribas.', ar: 'الخطوات اختيارية: تُصحَّح كل خطوة تكتبها.' })}</small>
+                {l({ eu: 'Urratsez urrats', es: 'Paso a paso', en: 'Step by step', ar: 'خطوة بخطوة' })}
+                <small>{l({ eu: 'Urratsak aukerakoak dira: idatzitako bakoitza zuzentzen da.', es: 'Los pasos son opcionales: se corrige cada uno que escribas.', en: 'The steps are optional: each one you write is checked.', ar: 'الخطوات اختيارية: تُصحَّح كل خطوة تكتبها.' })}</small>
             </p>
             <ol className="ws-steps">
                 <li className={show(marks.common)}>
-                    <span className="ws-label">{l({ eu: `Izendatzaile komuna (${first.denominator} eta ${second.denominator} zenbakien multiploa)`, es: `Denominador común (múltiplo de ${first.denominator} y de ${second.denominator})`, ar: `المقام المشترك (مضاعف لـ ${first.denominator} و${second.denominator})` })}</span>
+                    <span className="ws-label">{l({ eu: `Izendatzaile komuna (${first.denominator} eta ${second.denominator} zenbakien multiploa)`, es: `Denominador común (múltiplo de ${first.denominator} y de ${second.denominator})`, en: `Common denominator (multiple of ${first.denominator} and ${second.denominator})`, ar: `المقام المشترك (مضاعف لـ ${first.denominator} و${second.denominator})` })}</span>
                     <span className="ws-row" dir="ltr">
                         <input
                             className="ws-int"
                             value={worksheet.common}
                             inputMode="numeric"
                             autoComplete="off"
-                            aria-label={l({ eu: 'Izendatzaile komuna', es: 'Denominador común', ar: 'المقام المشترك' })}
+                            aria-label={l({ eu: 'Izendatzaile komuna', es: 'Denominador común', en: 'Common denominator', ar: 'المقام المشترك' })}
                             onChange={(event) => onWorksheet({ common: event.target.value })}
                             onKeyDown={(event) => { if (event.key === 'Enter') onAnswer({ checked: true }) }}
                         />
                     </span>
-                    {note(marks.common, { eu: `${first.denominator} eta ${second.denominator} zenbakien multiploa izan behar du.`, es: `Tiene que ser múltiplo de ${first.denominator} y de ${second.denominator}.`, ar: `يجب أن يكون مضاعفًا لـ ${first.denominator} و${second.denominator}.` })}
+                    {note(marks.common, { eu: `${first.denominator} eta ${second.denominator} zenbakien multiploa izan behar du.`, es: `Tiene que ser múltiplo de ${first.denominator} y de ${second.denominator}.`, en: `It must be a multiple of ${first.denominator} and of ${second.denominator}.`, ar: `يجب أن يكون مضاعفًا لـ ${first.denominator} و${second.denominator}.` })}
                     {checked && marks.common === 'right' && !marks.least && (
-                        <p className="ws-note">{l({ eu: `Balio du. Txikiena ${least} da: harekin zenbaki txikiagoak.`, es: `Vale. El más pequeño es ${least}: con él, números más pequeños.`, ar: `يصلح. الأصغر هو ${least}: معه تكون الأعداد أصغر.` })}</p>
+                        <p className="ws-note">{l({ eu: `Balio du. Txikiena ${least} da: harekin zenbaki txikiagoak.`, es: `Vale. El más pequeño es ${least}: con él, números más pequeños.`, en: `That works. The smallest one is ${least}: with it, the numbers stay smaller.`, ar: `يصلح. الأصغر هو ${least}: معه تكون الأعداد أصغر.` })}</p>
                     )}
                 </li>
                 <li className={checked ? (marks.first === 'wrong' || marks.second === 'wrong' ? 'wrong' : marks.first === 'waiting' || marks.second === 'waiting' ? 'waiting' : marks.first === 'right' || marks.second === 'right' ? 'right' : 'empty') : 'empty'}>
-                    <span className="ws-label">{l({ eu: 'Zatiki baliokideak', es: 'Fracciones equivalentes', ar: 'الكسور المكافئة' })}</span>
+                    <span className="ws-label">{l({ eu: 'Zatiki baliokideak', es: 'Fracciones equivalentes', en: 'Equivalent fractions', ar: 'الكسور المكافئة' })}</span>
                     <span className="ws-row" dir="ltr">
                         <MathText text={`$${latex(first.numerator, first.denominator)}=$`} />
-                        {over(worksheet.first, 'first', l({ eu: 'Lehen zenbakitzailea', es: 'Primer numerador', ar: 'البسط الأول' }), true)}
+                        {over(worksheet.first, 'first', l({ eu: 'Lehen zenbakitzailea', es: 'Primer numerador', en: 'First numerator', ar: 'البسط الأول' }), true)}
                         <span className="ws-gap" />
                         <MathText text={`$${latex(second.numerator, second.denominator)}=$`} />
-                        {over(worksheet.second, 'second', l({ eu: 'Bigarren zenbakitzailea', es: 'Segundo numerador', ar: 'البسط الثاني' }), true)}
+                        {over(worksheet.second, 'second', l({ eu: 'Bigarren zenbakitzailea', es: 'Segundo numerador', en: 'Second numerator', ar: 'البسط الثاني' }), true)}
                     </span>
                     {note(marks.first, numeratorTip(0))}
                     {marks.first !== 'wrong' && note(marks.second, numeratorTip(1))}
                 </li>
                 <li className={show(marks.numerator)}>
-                    <span className="ws-label">{op === 'add' ? l({ eu: 'Zenbakitzaileen batura', es: 'Suma de numeradores', ar: 'مجموع البسطين' }) : l({ eu: 'Zenbakitzaileen kenketa', es: 'Resta de numeradores', ar: 'فرق البسطين' })}</span>
+                    <span className="ws-label">{op === 'add' ? l({ eu: 'Zenbakitzaileen batura', es: 'Suma de numeradores', en: 'Sum of numerators', ar: 'مجموع البسطين' }) : l({ eu: 'Zenbakitzaileen kenketa', es: 'Resta de numeradores', en: 'Difference of numerators', ar: 'فرق البسطين' })}</span>
                     <span className="ws-row" dir="ltr">
                         <span className="ws-op">{`${worksheet.first.trim() || '?'} ${symbol} ${worksheet.second.trim() || '?'} =`}</span>
-                        {over(worksheet.numerator, 'numerator', l({ eu: 'Emaitzaren zenbakitzailea', es: 'Numerador del resultado', ar: 'بسط النتيجة' }), op === 'add')}
+                        {over(worksheet.numerator, 'numerator', l({ eu: 'Emaitzaren zenbakitzailea', es: 'Numerador del resultado', en: 'Numerator of the result', ar: 'بسط النتيجة' }), op === 'add')}
                     </span>
                     {note(marks.numerator, op === 'add'
-                        ? { eu: 'Batu zenbakitzaileak: izendatzailea ez da aldatzen.', es: 'Suma los numeradores: el denominador no cambia.', ar: 'اجمع البسطين: المقام لا يتغيّر.' }
-                        : { eu: 'Kendu zenbakitzaileak: izendatzailea ez da aldatzen.', es: 'Resta los numeradores: el denominador no cambia.', ar: 'اطرح البسطين: المقام لا يتغيّر.' })}
+                        ? { eu: 'Batu zenbakitzaileak: izendatzailea ez da aldatzen.', es: 'Suma los numeradores: el denominador no cambia.', en: 'Add the numerators: the denominator does not change.', ar: 'اجمع البسطين: المقام لا يتغيّر.' }
+                        : { eu: 'Kendu zenbakitzaileak: izendatzailea ez da aldatzen.', es: 'Resta los numeradores: el denominador no cambia.', en: 'Subtract the numerators: the denominator does not change.', ar: 'اطرح البسطين: المقام لا يتغيّر.' })}
                 </li>
                 <li className={checked ? (marks.result === 'right' ? 'right' : marks.result === 'empty' ? 'empty' : 'wrong') : 'empty'}>
-                    <label className="ws-label" htmlFor={resultId}>{l({ eu: 'Emaitza sinplifikatua', es: 'Resultado simplificado', ar: 'النتيجة المبسّطة' })}</label>
+                    <label className="ws-label" htmlFor={resultId}>{l({ eu: 'Emaitza sinplifikatua', es: 'Resultado simplificado', en: 'Simplified result', ar: 'النتيجة المبسّطة' })}</label>
                     <span className="ws-row" dir="ltr">
                         <input
                             id={resultId}
@@ -127,21 +128,21 @@ export function SumWorksheetPanel({
                             value={state.answer}
                             inputMode="text"
                             autoComplete="off"
-                            placeholder={l({ eu: 'Adib.: 5/6 edo 1 1/2', es: 'Ej.: 5/6 o 1 1/2', ar: '\u20665/6\u2069 أو \u20661 1/2\u2069' })}
+                            placeholder={l({ eu: 'Adib.: 5/6 edo 1 1/2', es: 'Ej.: 5/6 o 1 1/2', en: 'e.g. 5/6 or 1 1/2', ar: '\u20665/6\u2069 أو \u20661 1/2\u2069' })}
                             onChange={(event) => onAnswer({ answer: event.target.value, checked: false })}
                             onKeyDown={(event) => { if (event.key === 'Enter') onAnswer({ checked: true }) }}
                         />
                     </span>
-                    {checked && marks.result === 'wrong' && <p className="ws-note wrong">{l({ eu: 'Berrikusi emaitza: lortutako zenbakitzailea izendatzaile komunaren gainean, sinplifikatuta.', es: 'Revisa el resultado: el numerador obtenido sobre el denominador común, simplificado.', ar: 'راجع النتيجة: البسط الناتج على المقام المشترك، بعد الاختزال.' })}</p>}
-                    {checked && marks.result === 'wrong-form' && <p className="ws-note waiting">{l({ eu: 'Balioa zuzena da, baina sinplifikatu.', es: 'El valor es correcto, pero simplifícalo.', ar: 'القيمة صحيحة، لكن اختزلها.' })}</p>}
-                    {checked && marks.result === 'unreadable' && <p className="ws-note waiting">{l({ eu: 'Idatzi zatiki bat (5/6) edo zenbaki misto bat (1 1/2).', es: 'Escribe una fracción (5/6) o un número mixto (1 1/2).', ar: 'اكتب كسرًا (5/6) أو عددًا كسريًا (1 1/2).' })}</p>}
+                    {checked && marks.result === 'wrong' && <p className="ws-note wrong">{l({ eu: 'Berrikusi emaitza: lortutako zenbakitzailea izendatzaile komunaren gainean, sinplifikatuta.', es: 'Revisa el resultado: el numerador obtenido sobre el denominador común, simplificado.', en: 'Check the result: the numerator you got over the common denominator, simplified.', ar: 'راجع النتيجة: البسط الناتج على المقام المشترك، بعد الاختزال.' })}</p>}
+                    {checked && marks.result === 'wrong-form' && <p className="ws-note waiting">{l({ eu: 'Balioa zuzena da, baina sinplifikatu.', es: 'El valor es correcto, pero simplifícalo.', en: 'The value is correct, but simplify it.', ar: 'القيمة صحيحة، لكن اختزلها.' })}</p>}
+                    {checked && marks.result === 'unreadable' && <p className="ws-note waiting">{l({ eu: 'Idatzi zatiki bat (5/6) edo zenbaki misto bat (1 1/2).', es: 'Escribe una fracción (5/6) o un número mixto (1 1/2).', en: 'Write a fraction (5/6) or a mixed number (1 1/2).', ar: 'اكتب كسرًا (5/6) أو عددًا كسريًا (1 1/2).' })}</p>}
                 </li>
             </ol>
             <div className="ws-actions" aria-live="polite">
-                <button type="button" className="fraction-v2-primary" onClick={() => onAnswer({ checked: true })}>{l({ eu: 'Egiaztatu', es: 'Comprobar', ar: 'تحقق' })}</button>
-                {allRight && <span className="ws-all-right">{l({ eu: 'Urrats guztiak ondo daude!', es: '¡Todos los pasos están bien!', ar: 'كل الخطوات صحيحة!' })}</span>}
+                <button type="button" className="fraction-v2-primary" onClick={() => onAnswer({ checked: true })}>{l({ eu: 'Egiaztatu', es: 'Comprobar', en: 'Check', ar: 'تحقق' })}</button>
+                {allRight && <span className="ws-all-right">{l({ eu: 'Urrats guztiak ondo daude!', es: '¡Todos los pasos están bien!', en: 'All the steps are correct!', ar: 'كل الخطوات صحيحة!' })}</span>}
                 {!state.revealed && !allRight && (
-                    <button type="button" className="fraction-v2-hint-button" onClick={() => onAnswer({ revealed: true })}>{l({ eu: 'Ikusi emaitza', es: 'Ver el resultado', ar: 'اعرض النتيجة' })}</button>
+                    <button type="button" className="fraction-v2-hint-button" onClick={() => onAnswer({ revealed: true })}>{l({ eu: 'Ikusi emaitza', es: 'Ver el resultado', en: 'See the result', ar: 'اعرض النتيجة' })}</button>
                 )}
             </div>
         </div>

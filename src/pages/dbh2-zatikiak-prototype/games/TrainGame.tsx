@@ -5,6 +5,7 @@ import { useGameText } from './gameHooks'
 import type { GameProps } from './index'
 import { createRandom, randomSeed } from './random'
 import { games } from './records'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import {
     brokenNeighbour,
     cardChain,
@@ -44,7 +45,9 @@ function CardFace({ card, separator }: { card: TrainCard; separator: ',' | '.' }
 
 export function TrainGame({ language, records, onResult, onExit }: GameProps) {
     const l = useGameText(language)
+    // LaTeX keeps the comma (KaTeX turns {,} into the point in English); the plain text takes the language's mark
     const separator = language === 'ar' ? '.' : ','
+    const textSeparator = language === 'ar' ? '.' : decimalSeparatorFor(language)
     const [phase, setPhase] = useState<'pick' | 'playing' | 'finished'>('pick')
     const [level, setLevel] = useState<TrainLevel>(0)
     const [trains, setTrains] = useState<Train[]>([])
@@ -186,9 +189,10 @@ export function TrainGame({ language, records, onResult, onExit }: GameProps) {
     const starsText = l({
         eu: `3 izar: ${TRAIN_STARS.three} bagoi · 2: ${TRAIN_STARS.two} · 1: ${TRAIN_STARS.one}.`,
         es: `3 estrellas: ${TRAIN_STARS.three} vagones · 2: ${TRAIN_STARS.two} · 1: ${TRAIN_STARS.one}.`,
+        en: `3 stars: ${TRAIN_STARS.three} carriages · 2: ${TRAIN_STARS.two} · 1: ${TRAIN_STARS.one}.`,
         ar: `3 نجوم: ${TRAIN_STARS.three} عربات · 2: ${TRAIN_STARS.two} · 1: ${TRAIN_STARS.one}.`
     })
-    const say = (card: TrainCard) => (language === 'ar' ? ltr(cardText(card, separator)) : cardText(card, separator))
+    const say = (card: TrainCard) => (language === 'ar' ? ltr(cardText(card, textSeparator)) : cardText(card, textSeparator))
 
     if (phase === 'pick') {
         return (
@@ -198,11 +202,11 @@ export function TrainGame({ language, records, onResult, onExit }: GameProps) {
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'أفضل نتيجة' })}: ${outOf(record.score, TRAIN_MAX_SCORE)}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'أفضل نتيجة' })}: ${outOf(record.score, TRAIN_MAX_SCORE)}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: `${TRAINS_PER_LEVEL} tren maila bakoitzean, ${TRAIN_ARRIVALS} bagoi iristen dira tren bakoitzera.`, es: `${TRAINS_PER_LEVEL} trenes por nivel; a cada tren le llegan ${TRAIN_ARRIVALS} vagones.`, ar: `قطاران في كل مستوى، ويصل إلى كل قطار ${TRAIN_ARRIVALS} عربات.` })}</li>
-                        <li>{l({ eu: 'Sakatu trenean bagoia non doan, eta gero «Lotu». Lehen saiakeran ondo lotutako bagoi bakoitzak puntu bat ematen du.', es: 'Toca en el tren dónde va el vagón y después «Enganchar». Cada vagón bien enganchado a la primera vale un punto.', ar: 'اضغط على القطار حيث تذهب العربة ثم «اربط». كل عربة ربطتَها في مكانها الصحيح من المحاولة الأولى بنقطة.' })}</li>
+                        <li>{l({ eu: `${TRAINS_PER_LEVEL} tren maila bakoitzean, ${TRAIN_ARRIVALS} bagoi iristen dira tren bakoitzera.`, es: `${TRAINS_PER_LEVEL} trenes por nivel; a cada tren le llegan ${TRAIN_ARRIVALS} vagones.`, en: `${TRAINS_PER_LEVEL} trains per level; ${TRAIN_ARRIVALS} carriages arrive at each train.`, ar: `قطاران في كل مستوى، ويصل إلى كل قطار ${TRAIN_ARRIVALS} عربات.` })}</li>
+                        <li>{l({ eu: 'Sakatu trenean bagoia non doan, eta gero «Lotu». Lehen saiakeran ondo lotutako bagoi bakoitzak puntu bat ematen du.', es: 'Toca en el tren dónde va el vagón y después «Enganchar». Cada vagón bien enganchado a la primera vale un punto.', en: 'Tap the train where the carriage goes, then ‘Attach’. Each carriage attached correctly first time is worth one point.', ar: 'اضغط على القطار حيث تذهب العربة ثم «اربط». كل عربة ربطتَها في مكانها الصحيح من المحاولة الأولى بنقطة.' })}</li>
                         <li>{starsText}</li>
                     </ul>
                 )}
@@ -220,8 +224,8 @@ export function TrainGame({ language, records, onResult, onExit }: GameProps) {
                     title={outOf(score, TRAIN_MAX_SCORE)}
                     subtitle={starsText}
                     stats={[
-                        { label: l({ eu: 'Lehen saiakeran', es: 'A la primera', ar: 'من المحاولة الأولى' }), value: outOf(score, TRAIN_MAX_SCORE) },
-                        { label: l({ eu: 'Lekuz aldatutakoak', es: 'Recolocados', ar: 'أُعيد وضعها' }), value: outOf(TRAIN_MAX_SCORE - score, TRAIN_MAX_SCORE) }
+                        { label: l({ eu: 'Lehen saiakeran', es: 'A la primera', en: 'First try', ar: 'من المحاولة الأولى' }), value: outOf(score, TRAIN_MAX_SCORE) },
+                        { label: l({ eu: 'Lekuz aldatutakoak', es: 'Recolocados', en: 'Moved', ar: 'أُعيد وضعها' }), value: outOf(TRAIN_MAX_SCORE - score, TRAIN_MAX_SCORE) }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}
@@ -244,9 +248,9 @@ export function TrainGame({ language, records, onResult, onExit }: GameProps) {
         if (gap === null) return ''
         const before = hooked[gap - 1]
         const after = hooked[gap]
-        if (!before) return l({ eu: `Hasieran, ${say(after)} baino lehen`, es: `Al principio, antes de ${say(after)}`, ar: `في البداية، قبل ${say(after)}` })
-        if (!after) return l({ eu: `Amaieran, ${say(before)} ondoren`, es: `Al final, después de ${say(before)}`, ar: `في النهاية، بعد ${say(before)}` })
-        return l({ eu: `${say(before)} eta ${say(after)} artean`, es: `Entre ${say(before)} y ${say(after)}`, ar: `بين ${say(before)} و${say(after)}` })
+        if (!before) return l({ eu: `Hasieran, ${say(after)} baino lehen`, es: `Al principio, antes de ${say(after)}`, en: `At the start, before ${say(after)}`, ar: `في البداية، قبل ${say(after)}` })
+        if (!after) return l({ eu: `Amaieran, ${say(before)} ondoren`, es: `Al final, después de ${say(before)}`, en: `At the end, after ${say(before)}`, ar: `في النهاية، بعد ${say(before)}` })
+        return l({ eu: `${say(before)} eta ${say(after)} artean`, es: `Entre ${say(before)} y ${say(after)}`, en: `Between ${say(before)} and ${say(after)}`, ar: `بين ${say(before)} و${say(after)}` })
     })()
 
     // The number line under the train: one dot per hooked wagon, and the halves when the hint is on
@@ -264,8 +268,8 @@ export function TrainGame({ language, records, onResult, onExit }: GameProps) {
     return (
         <div className="train-game" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
-                <span>{l({ eu: 'Trena', es: 'Tren', ar: 'القطار' })} <bdi dir="ltr">{trainIndex + 1} / {TRAINS_PER_LEVEL}</bdi></span>
-                <span>{l({ eu: 'Puntuak', es: 'Puntos', ar: 'النقاط' })}: <strong><bdi dir="ltr">{score}</bdi></strong></span>
+                <span>{l({ eu: 'Trena', es: 'Tren', en: 'Train', ar: 'القطار' })} <bdi dir="ltr">{trainIndex + 1} / {TRAINS_PER_LEVEL}</bdi></span>
+                <span>{l({ eu: 'Puntuak', es: 'Puntos', en: 'Points', ar: 'النقاط' })}: <strong><bdi dir="ltr">{score}</bdi></strong></span>
             </GameTopbar>
 
             <div className="train-platform" aria-live="polite">
@@ -273,23 +277,23 @@ export function TrainGame({ language, records, onResult, onExit }: GameProps) {
                     <>
                         <span className={`train-platform-label ${outcome?.kind === 'right' ? 'right' : ''}`}>
                             {outcome?.kind === 'right'
-                                ? l({ eu: 'Ondo lotuta! Beste bat dator:', es: '¡Bien enganchado! Llega otro:', ar: 'رُبطت في مكانها! وتصل أخرى:' })
-                                : l({ eu: 'Bagoi hau iritsi da:', es: 'Llega este vagón:', ar: 'وصلت هذه العربة:' })}
+                                ? l({ eu: 'Ondo lotuta! Beste bat dator:', es: '¡Bien enganchado! Llega otro:', en: 'Attached correctly! Another one arrives:', ar: 'رُبطت في مكانها! وتصل أخرى:' })
+                                : l({ eu: 'Bagoi hau iritsi da:', es: 'Llega este vagón:', en: 'This carriage arrives:', ar: 'وصلت هذه العربة:' })}
                         </span>
-                        <span className="train-wagon arriving" dir="ltr" key={`arriving-${trainIndex}-${arrival}`} role="img" aria-label={cardText(arriving, separator)}>
+                        <span className="train-wagon arriving" dir="ltr" key={`arriving-${trainIndex}-${arrival}`} role="img" aria-label={cardText(arriving, textSeparator)}>
                             <span className="train-wagon-face"><CardFace card={arriving} separator={separator} /></span>
                         </span>
-                        <span className="train-count">{l({ eu: `Bagoia: ${arrival} / ${TRAIN_ARRIVALS}`, es: `Vagón ${arrival} de ${TRAIN_ARRIVALS}`, ar: `العربة ${arrival} من ${TRAIN_ARRIVALS}` })}</span>
+                        <span className="train-count">{l({ eu: `Bagoia: ${arrival} / ${TRAIN_ARRIVALS}`, es: `Vagón ${arrival} de ${TRAIN_ARRIVALS}`, en: `Carriage ${arrival} of ${TRAIN_ARRIVALS}`, ar: `العربة ${arrival} من ${TRAIN_ARRIVALS}` })}</span>
                     </>
                 )}
-                {outcome?.kind === 'right' && !arriving && <strong className="train-right">{l({ eu: 'Ondo lotuta!', es: '¡Bien enganchado!', ar: 'رُبطت في مكانها!' })}</strong>}
-                {outcome?.kind === 'wrong' && <strong className="train-wrong">{l({ eu: 'Ez doa hor.', es: 'Ahí no va.', ar: 'ليس هذا مكانها.' })}</strong>}
+                {outcome?.kind === 'right' && !arriving && <strong className="train-right">{l({ eu: 'Ondo lotuta!', es: '¡Bien enganchado!', en: 'Attached correctly!', ar: 'رُبطت في مكانها!' })}</strong>}
+                {outcome?.kind === 'wrong' && <strong className="train-wrong">{l({ eu: 'Ez doa hor.', es: 'Ahí no va.', en: 'It doesn’t go there.', ar: 'ليس هذا مكانها.' })}</strong>}
             </div>
 
             <p className="train-direction" aria-hidden="true">
-                <span>{l({ eu: 'txikiena', es: 'menor', ar: 'الأصغر' })}</span>
+                <span>{l({ eu: 'txikiena', es: 'menor', en: 'smallest', ar: 'الأصغر' })}</span>
                 <span className="train-direction-arrow" />
-                <span>{l({ eu: 'handiena', es: 'mayor', ar: 'الأكبر' })}</span>
+                <span>{l({ eu: 'handiena', es: 'mayor', en: 'largest', ar: 'الأكبر' })}</span>
             </p>
 
             <div
@@ -298,7 +302,7 @@ export function TrainGame({ language, records, onResult, onExit }: GameProps) {
                 ref={trackRef}
                 tabIndex={choosing ? 0 : -1}
                 role="group"
-                aria-label={l({ eu: 'Trena: sakatu bagoia non doan; geziekin ere bai', es: 'Tren: toca dónde va el vagón; también con las flechas', ar: 'القطار: اضغط حيث تذهب العربة؛ أو استعمل الأسهم' })}
+                aria-label={l({ eu: 'Trena: sakatu bagoia non doan; geziekin ere bai', es: 'Tren: toca dónde va el vagón; también con las flechas', en: 'Train: tap where the carriage goes; also with the arrow keys', ar: 'القطار: اضغط حيث تذهب العربة؛ أو استعمل الأسهم' })}
                 onClick={onTrackClick}
                 onKeyDown={onTrackKey}
             >
@@ -311,7 +315,7 @@ export function TrainGame({ language, records, onResult, onExit }: GameProps) {
                         ref={ghost ? ghostRef : undefined}
                         className={`train-wagon ${ghost ? 'ghost' : 'hooked'} ${!ghost && card === lastHooked ? 'new' : ''} ${!ghost && card === wrongCard ? 'moved' : ''} ${card.form === 'decimal' && cardText(card, separator).length > 4 ? 'long' : ''}`}
                         role="img"
-                        aria-label={ghost ? gapWords : cardText(card, separator)}
+                        aria-label={ghost ? gapWords : cardText(card, textSeparator)}
                     >
                         <span className="train-wagon-face"><CardFace card={card} separator={separator} /></span>
                     </span>
@@ -339,24 +343,24 @@ export function TrainGame({ language, records, onResult, onExit }: GameProps) {
 
             {choosing && (
                 <>
-                    <p className="train-gap" aria-live="polite">{gap === null ? l({ eu: 'Sakatu trenean, bagoia non doan.', es: 'Toca en el tren dónde va el vagón.', ar: 'اضغط على القطار حيث تذهب العربة.' }) : gapWords}</p>
+                    <p className="train-gap" aria-live="polite">{gap === null ? l({ eu: 'Sakatu trenean, bagoia non doan.', es: 'Toca en el tren dónde va el vagón.', en: 'Tap the train where the carriage goes.', ar: 'اضغط على القطار حيث تذهب العربة.' }) : gapWords}</p>
                     {hinting
                         ? (
                             <p className="train-hint" role="status">
                                 {level === 2
-                                    ? l({ eu: 'Pista: begiratu lehenik zeinuari. Gero: zerotik ala batetik (edo minus batetik) gertuago dago? Zenbaki-zuzenean erdiak markatuta daude.', es: 'Pista: mira primero el signo. Después: ¿está más cerca de 0 o de 1 (o de −1)? En la recta están marcadas las mitades.', ar: `تلميح: انظر أولًا إلى الإشارة. ثم: هل هو أقرب إلى ${ltr('0')} أم إلى ${ltr('1')} (أو ${ltr('−1')})؟ على الخط علامات الأنصاف.` })
-                                    : l({ eu: 'Pista: erdia baino handiagoa ala txikiagoa da? Eta bat baino? Zenbaki-zuzenean erdiak markatuta daude.', es: 'Pista: ¿es mayor o menor que ½? ¿Y que 1? En la recta están marcadas las mitades.', ar: `تلميح: هل هو أكبر من النصف أم أصغر؟ ومن ${ltr('1')}؟ على الخط علامات الأنصاف.` })}
+                                    ? l({ eu: 'Pista: begiratu lehenik zeinuari. Gero: zerotik ala batetik (edo minus batetik) gertuago dago? Zenbaki-zuzenean erdiak markatuta daude.', es: 'Pista: mira primero el signo. Después: ¿está más cerca de 0 o de 1 (o de −1)? En la recta están marcadas las mitades.', en: 'Hint: look at the sign first. Then: is it closer to 0 or to 1 (or to −1)? The halves are marked on the number line.', ar: `تلميح: انظر أولًا إلى الإشارة. ثم: هل هو أقرب إلى ${ltr('0')} أم إلى ${ltr('1')} (أو ${ltr('−1')})؟ على الخط علامات الأنصاف.` })
+                                    : l({ eu: 'Pista: erdia baino handiagoa ala txikiagoa da? Eta bat baino? Zenbaki-zuzenean erdiak markatuta daude.', es: 'Pista: ¿es mayor o menor que ½? ¿Y que 1? En la recta están marcadas las mitades.', en: 'Hint: is it greater or less than ½? And what about 1? The halves are marked on the number line.', ar: `تلميح: هل هو أكبر من النصف أم أصغر؟ ومن ${ltr('1')}؟ على الخط علامات الأنصاف.` })}
                             </p>
                         )
                         : (
                             <button type="button" className="train-hint-button" onClick={() => setHintFor(`${trainIndex}-${arrival}`)}>
-                                {l({ eu: 'Pista: konparatu erdiarekin', es: 'Pista: compara con ½', ar: 'تلميح: قارن بالنصف' })}
+                                {l({ eu: 'Pista: konparatu erdiarekin', es: 'Pista: compara con ½', en: 'Hint: compare with ½', ar: 'تلميح: قارن بالنصف' })}
                             </button>
                         )}
                     <div className="train-controls" dir="ltr">
-                        <button type="button" className="fraction-v2-secondary" aria-label={l({ eu: 'Ezkerrera', es: 'A la izquierda', ar: 'إلى اليسار' })} disabled={gap === 0} onClick={() => point(gap === null ? hooked.length : gap - 1)}>◀</button>
-                        <button type="button" className="fraction-v2-primary" disabled={gap === null} onClick={hook}>{l({ eu: 'Lotu', es: 'Enganchar', ar: 'اربط' })}</button>
-                        <button type="button" className="fraction-v2-secondary" aria-label={l({ eu: 'Eskuinera', es: 'A la derecha', ar: 'إلى اليمين' })} disabled={gap === hooked.length} onClick={() => point(gap === null ? 0 : gap + 1)}>▶</button>
+                        <button type="button" className="fraction-v2-secondary" aria-label={l({ eu: 'Ezkerrera', es: 'A la izquierda', en: 'To the left', ar: 'إلى اليسار' })} disabled={gap === 0} onClick={() => point(gap === null ? hooked.length : gap - 1)}>◀</button>
+                        <button type="button" className="fraction-v2-primary" disabled={gap === null} onClick={hook}>{l({ eu: 'Lotu', es: 'Enganchar', en: 'Attach', ar: 'اربط' })}</button>
+                        <button type="button" className="fraction-v2-secondary" aria-label={l({ eu: 'Eskuinera', es: 'A la derecha', en: 'To the right', ar: 'إلى اليمين' })} disabled={gap === hooked.length} onClick={() => point(gap === null ? 0 : gap + 1)}>▶</button>
                     </div>
                 </>
             )}
@@ -370,9 +374,9 @@ export function TrainGame({ language, records, onResult, onExit }: GameProps) {
                     <div className="train-explain" id="train-explain">
                         <p>
                             {outcome.cardIsLarger
-                                ? l({ eu: `Eskuinerago doa: ${say(outcome.card)} handiagoa da ${say(outcome.neighbour)} baino.`, es: `Va más a la derecha: ${say(outcome.card)} es mayor que ${say(outcome.neighbour)}.`, ar: `مكانها إلى اليمين: ${say(outcome.card)} أكبر من ${say(outcome.neighbour)}.` })
-                                : l({ eu: `Ezkerrerago doa: ${say(outcome.card)} txikiagoa da ${say(outcome.neighbour)} baino.`, es: `Va más a la izquierda: ${say(outcome.card)} es menor que ${say(outcome.neighbour)}.`, ar: `مكانها إلى اليسار: ${say(outcome.card)} أصغر من ${say(outcome.neighbour)}.` })}
-                            {larger.value.numerator < 0 && smaller.value.numerator < 0 && <> {l({ eu: 'Negatiboetan, zerotik hurbilen dagoena da handiena.', es: 'Entre negativos, el más cercano a 0 es el mayor.', ar: 'بين الأعداد السالبة، الأقرب إلى 0 هو الأكبر.' })}</>}
+                                ? l({ eu: `Eskuinerago doa: ${say(outcome.card)} handiagoa da ${say(outcome.neighbour)} baino.`, es: `Va más a la derecha: ${say(outcome.card)} es mayor que ${say(outcome.neighbour)}.`, en: `It goes further right: ${say(outcome.card)} is greater than ${say(outcome.neighbour)}.`, ar: `مكانها إلى اليمين: ${say(outcome.card)} أكبر من ${say(outcome.neighbour)}.` })
+                                : l({ eu: `Ezkerrerago doa: ${say(outcome.card)} txikiagoa da ${say(outcome.neighbour)} baino.`, es: `Va más a la izquierda: ${say(outcome.card)} es menor que ${say(outcome.neighbour)}.`, en: `It goes further left: ${say(outcome.card)} is less than ${say(outcome.neighbour)}.`, ar: `مكانها إلى اليسار: ${say(outcome.card)} أصغر من ${say(outcome.neighbour)}.` })}
+                            {larger.value.numerator < 0 && smaller.value.numerator < 0 && <> {l({ eu: 'Negatiboetan, zerotik hurbilen dagoena da handiena.', es: 'Entre negativos, el más cercano a 0 es el mayor.', en: 'Among negative numbers, the one closest to 0 is the greater one.', ar: 'بين الأعداد السالبة، الأقرب إلى 0 هو الأكبر.' })}</>}
                         </p>
                         <div className="train-compare" dir="ltr">
                             <MathText inline text={`$${cardChain(larger, common, separator).replaceAll('\\frac', '\\dfrac')}$`} />
@@ -381,15 +385,15 @@ export function TrainGame({ language, records, onResult, onExit }: GameProps) {
                         </div>
                         <p className="train-place">
                             {before && after
-                                ? l({ eu: `Bere lekua: ${say(before)} eta ${say(after)} artean.`, es: `Su sitio: entre ${say(before)} y ${say(after)}.`, ar: `مكانها: بين ${say(before)} و${say(after)}.` })
+                                ? l({ eu: `Bere lekua: ${say(before)} eta ${say(after)} artean.`, es: `Su sitio: entre ${say(before)} y ${say(after)}.`, en: `Its place: between ${say(before)} and ${say(after)}.`, ar: `مكانها: بين ${say(before)} و${say(after)}.` })
                                 : before
-                                    ? l({ eu: `Bere lekua: amaieran, ${say(before)} ondoren.`, es: `Su sitio: al final, después de ${say(before)}.`, ar: `مكانها: في النهاية، بعد ${say(before)}.` })
+                                    ? l({ eu: `Bere lekua: amaieran, ${say(before)} ondoren.`, es: `Su sitio: al final, después de ${say(before)}.`, en: `Its place: at the end, after ${say(before)}.`, ar: `مكانها: في النهاية، بعد ${say(before)}.` })
                                     : after
-                                        ? l({ eu: `Bere lekua: hasieran, ${say(after)} baino lehen.`, es: `Su sitio: al principio, antes de ${say(after)}.`, ar: `مكانها: في البداية، قبل ${say(after)}.` })
+                                        ? l({ eu: `Bere lekua: hasieran, ${say(after)} baino lehen.`, es: `Su sitio: al principio, antes de ${say(after)}.`, en: `Its place: at the start, before ${say(after)}.`, ar: `مكانها: في البداية، قبل ${say(after)}.` })
                                         : null}
                         </p>
                         <button type="button" className="fraction-v2-primary" aria-describedby="train-explain" aria-disabled={!armed} onClick={afterWrong} ref={(node) => node?.focus({ preventScroll: true })}>
-                            {arrival >= TRAIN_ARRIVALS ? l({ eu: 'Ados', es: 'Entendido', ar: 'حسنًا' }) : l({ eu: 'Hurrengo bagoia', es: 'Siguiente vagón', ar: 'العربة التالية' })}
+                            {arrival >= TRAIN_ARRIVALS ? l({ eu: 'Ados', es: 'Entendido', en: 'Got it', ar: 'حسنًا' }) : l({ eu: 'Hurrengo bagoia', es: 'Siguiente vagón', en: 'Next carriage', ar: 'العربة التالية' })}
                         </button>
                     </div>
                 )
@@ -397,9 +401,9 @@ export function TrainGame({ language, records, onResult, onExit }: GameProps) {
 
             {trainDone && !outcome && (
                 <div className="train-done" role="status">
-                    <p><strong>{l({ eu: 'Trena osatu duzu!', es: '¡Tren completo!', ar: 'اكتمل القطار!' })}</strong> {l({ eu: 'Txikienetik handienera doa.', es: 'Va de menor a mayor.', ar: 'إنه من الأصغر إلى الأكبر.' })}</p>
+                    <p><strong>{l({ eu: 'Trena osatu duzu!', es: '¡Tren completo!', en: 'Train complete!', ar: 'اكتمل القطار!' })}</strong> {l({ eu: 'Txikienetik handienera doa.', es: 'Va de menor a mayor.', en: 'It goes from smallest to largest.', ar: 'إنه من الأصغر إلى الأكبر.' })}</p>
                     <button type="button" className="fraction-v2-primary" onClick={nextTrain} ref={(node) => node?.focus({ preventScroll: true })}>
-                        {trainIndex + 1 >= TRAINS_PER_LEVEL ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengo trena', es: 'Siguiente tren', ar: 'القطار التالي' })}
+                        {trainIndex + 1 >= TRAINS_PER_LEVEL ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', en: 'See the result', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengo trena', es: 'Siguiente tren', en: 'Next train', ar: 'القطار التالي' })}
                     </button>
                 </div>
             )}

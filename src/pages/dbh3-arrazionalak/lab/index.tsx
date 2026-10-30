@@ -47,7 +47,7 @@ export function RationalsLaboratory(props: {
             tools={rationalsLabTools}
             stages={rationalsStages}
             components={toolComponents}
-            title={{ eu: 'Zatitu, ordenatu eta eragin', es: 'Divide, ordena y opera', ar: 'اقسم ورتّب واحسب' }}
+            title={{ eu: 'Zatitu, ordenatu eta eragin', es: 'Divide, ordena y opera', en: 'Divide, order and operate', ar: 'اقسم ورتّب واحسب' }}
         />
     )
 }

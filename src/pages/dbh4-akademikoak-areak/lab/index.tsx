@@ -40,7 +40,7 @@ export function AreasSimilarityLaboratory(props: {
             tools={areasSimilarityLabTools}
             stages={areasSimilarityStages}
             components={toolComponents}
-            title={{ eu: 'Neurtu, moztu eta eskalatu', es: 'Mide, corta y escala', ar: 'قِس واقطع وغيّر المقياس' }}
+            title={{ eu: 'Neurtu, moztu eta eskalatu', es: 'Mide, corta y escala', en: 'Measure, cut and scale', ar: 'قِس واقطع وغيّر المقياس' }}
         />
     )
 }

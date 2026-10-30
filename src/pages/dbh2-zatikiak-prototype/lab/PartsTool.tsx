@@ -66,11 +66,12 @@ export function PartsTool({
         const position: LocalizedText = {
             eu: `${unit + 1}. unitatea, ${part + 1}. zatia / ${denominator}`,
             es: `Unidad ${unit + 1}, parte ${part + 1} de ${denominator}`,
+            en: `Unit ${unit + 1}, part ${part + 1} of ${denominator}`,
             ar: `الوحدة ${unit + 1}، الجزء ${part + 1} من ${denominator}`
         }
         const status: LocalizedText = isFilled
-            ? { eu: 'koloreztatua', es: 'coloreada', ar: 'ملوّن' }
-            : { eu: 'zuria', es: 'sin colorear', ar: 'غير ملوّن' }
+            ? { eu: 'koloreztatua', es: 'coloreada', en: 'coloured', ar: 'ملوّن' }
+            : { eu: 'zuria', es: 'sin colorear', en: 'uncoloured', ar: 'غير ملوّن' }
         return `${l(position)}, ${l(status)}`
     }
 
@@ -86,16 +87,16 @@ export function PartsTool({
     const { rows, columns } = gridLayout(denominator)
 
     const shapeOptions: Array<{ value: PartsShape; label: string }> = [
-        { value: 'bar', label: l({ eu: 'Barra', es: 'Barra', ar: 'شريط' }) },
-        { value: 'circle', label: l({ eu: 'Zirkulua', es: 'Círculo', ar: 'دائرة' }) },
-        { value: 'grid', label: l({ eu: 'Laukizuzena', es: 'Rectángulo', ar: 'مستطيل' }) }
+        { value: 'bar', label: l({ eu: 'Barra', es: 'Barra', en: 'Bar', ar: 'شريط' }) },
+        { value: 'circle', label: l({ eu: 'Zirkulua', es: 'Círculo', en: 'Circle', ar: 'دائرة' }) },
+        { value: 'grid', label: l({ eu: 'Laukizuzena', es: 'Rectángulo', en: 'Rectangle', ar: 'مستطيل' }) }
     ]
 
     const controls = (
         <>
-            <Segmented label={l({ eu: 'Forma', es: 'Forma', ar: 'الشكل' })} value={shape} options={shapeOptions} onChange={(next) => setState((current) => ({ ...current, shape: next }))} />
+            <Segmented label={l({ eu: 'Forma', es: 'Forma', en: 'Shape', ar: 'الشكل' })} value={shape} options={shapeOptions} onChange={(next) => setState((current) => ({ ...current, shape: next }))} />
             <Stepper
-                label={l({ eu: 'Zatiak unitateko', es: 'Partes por unidad', ar: 'أجزاء كل وحدة' })}
+                label={l({ eu: 'Zatiak unitateko', es: 'Partes por unidad', en: 'Parts per unit', ar: 'أجزاء كل وحدة' })}
                 value={denominator}
                 min={PARTS_LIMITS.minDenominator}
                 max={PARTS_LIMITS.maxDenominator}
@@ -103,7 +104,7 @@ export function PartsTool({
                 language={language}
             />
             <Stepper
-                label={l({ eu: 'Unitateak', es: 'Unidades', ar: 'الوحدات' })}
+                label={l({ eu: 'Unitateak', es: 'Unidades', en: 'Units', ar: 'الوحدات' })}
                 value={units}
                 min={PARTS_LIMITS.minUnits}
                 max={PARTS_LIMITS.maxUnits}
@@ -111,10 +112,10 @@ export function PartsTool({
                 language={language}
             />
             <div className="fraction-v2-lab-quick-actions">
-                <button type="button" onClick={() => setState(clearParts)}>{l({ eu: 'Hustu', es: 'Vaciar', ar: 'إفراغ' })}</button>
-                <button type="button" onClick={() => setState(fillAllParts)}>{l({ eu: 'Dena bete', es: 'Llenar todo', ar: 'املأ الكل' })}</button>
+                <button type="button" onClick={() => setState(clearParts)}>{l({ eu: 'Hustu', es: 'Vaciar', en: 'Clear', ar: 'إفراغ' })}</button>
+                <button type="button" onClick={() => setState(fillAllParts)}>{l({ eu: 'Dena bete', es: 'Llenar todo', en: 'Fill all', ar: 'املأ الكل' })}</button>
             </div>
-            <p className="fraction-v2-lab-tip">{l({ eu: 'Sakatu zati bat koloreztatzeko edo kentzeko.', es: 'Pulsa una parte para colorearla o quitarle el color.', ar: 'اضغط على جزء لتلوينه أو إزالة لونه.' })}</p>
+            <p className="fraction-v2-lab-tip">{l({ eu: 'Sakatu zati bat koloreztatzeko edo kentzeko.', es: 'Pulsa una parte para colorearla o quitarle el color.', en: 'Press a part to colour it or remove the colour.', ar: 'اضغط على جزء لتلوينه أو إزالة لونه.' })}</p>
         </>
     )
 
@@ -137,12 +138,12 @@ export function PartsTool({
             </span>
             <span className="fraction-v2-lab-readout-note">
                 {numerator === 0
-                    ? l({ eu: 'Ez dago zatirik koloreztatuta.', es: 'No hay ninguna parte coloreada.', ar: 'لا يوجد أي جزء ملوّن.' })
+                    ? l({ eu: 'Ez dago zatirik koloreztatuta.', es: 'No hay ninguna parte coloreada.', en: 'No part is coloured.', ar: 'لا يوجد أي جزء ملوّن.' })
                     : numerator < denominator
-                        ? l({ eu: 'Zatiki propioa: unitate bat baino gutxiago.', es: 'Fracción propia: menos de una unidad.', ar: 'كسر حقيقي: أقل من وحدة.' })
+                        ? l({ eu: 'Zatiki propioa: unitate bat baino gutxiago.', es: 'Fracción propia: menos de una unidad.', en: 'Proper fraction: less than one unit.', ar: 'كسر حقيقي: أقل من وحدة.' })
                         : numerator === denominator
-                            ? l({ eu: 'Unitate oso bat.', es: 'Una unidad completa.', ar: 'وحدة كاملة.' })
-                            : l({ eu: 'Zatiki inpropioa: unitate bat baino gehiago.', es: 'Fracción impropia: más de una unidad.', ar: 'كسر غير حقيقي: أكثر من وحدة.' })}
+                            ? l({ eu: 'Unitate oso bat.', es: 'Una unidad completa.', en: 'One whole unit.', ar: 'وحدة كاملة.' })
+                            : l({ eu: 'Zatiki inpropioa: unitate bat baino gehiago.', es: 'Fracción impropia: más de una unidad.', en: 'Improper fraction: more than one whole unit.', ar: 'كسر غير حقيقي: أكثر من وحدة.' })}
             </span>
         </>
     )

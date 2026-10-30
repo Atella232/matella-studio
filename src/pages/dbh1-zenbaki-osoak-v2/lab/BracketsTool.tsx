@@ -48,12 +48,12 @@ export function BracketsTool(props: LabToolProps) {
     const controls = (
         <>
             <Segmented
-                label={l({ eu: 'Eragiketa', es: 'Operación', ar: 'العملية' })}
+                label={l({ eu: 'Eragiketa', es: 'Operación', en: 'Operation', ar: 'العملية' })}
                 value={String(state.exercise)}
                 options={bracketsExercises.map((item) => ({ value: String(item.id), label: `${item.id}${state.finished.includes(item.id) ? ' ✓' : ''}` }))}
                 onChange={(next) => setState((current) => startBrackets(Number(next), current.finished))}
             />
-            <p className="fraction-v2-lab-tip">{l({ eu: 'Parentesi barruko zenbaki bakoitzean, aukeratu zein zeinu geratzen den parentesia kentzean.', es: 'En cada número de dentro del paréntesis, elige qué signo queda al quitar el paréntesis.', ar: 'في كل عدد داخل القوس، اختر الإشارة التي تبقى بعد حذف القوس.' })}</p>
+            <p className="fraction-v2-lab-tip">{l({ eu: 'Parentesi barruko zenbaki bakoitzean, aukeratu zein zeinu geratzen den parentesia kentzean.', es: 'En cada número de dentro del paréntesis, elige qué signo queda al quitar el paréntesis.', en: 'For each number inside the brackets, choose which sign is left when you remove the brackets.', ar: 'في كل عدد داخل القوس، اختر الإشارة التي تبقى بعد حذف القوس.' })}</p>
         </>
     )
 
@@ -61,8 +61,8 @@ export function BracketsTool(props: LabToolProps) {
         <>
             <span className="fraction-v2-lab-readout-note">
                 {allRight
-                    ? l({ eu: 'Zeinu guztiak ondo! Orain batu positiboak eta negatiboak.', es: '¡Todos los signos bien! Ahora suma positivos y negativos.', ar: 'كل الإشارات صحيحة! الآن اجمع الموجبة والسالبة.' })
-                    : l({ eu: `${chosen} / ${slots.length} zeinu aukeratuta.`, es: `${chosen} de ${slots.length} signos elegidos.`, ar: `اختيرت ${chosen} من ${slots.length} إشارات.` })}
+                    ? l({ eu: 'Zeinu guztiak ondo! Orain batu positiboak eta negatiboak.', es: '¡Todos los signos bien! Ahora suma positivos y negativos.', en: 'All the signs are right! Now add the positives and negatives.', ar: 'كل الإشارات صحيحة! الآن اجمع الموجبة والسالبة.' })
+                    : l({ eu: `${chosen} / ${slots.length} zeinu aukeratuta.`, es: `${chosen} de ${slots.length} signos elegidos.`, en: `${chosen} of ${slots.length} signs chosen.`, ar: `اختيرت ${chosen} من ${slots.length} إشارات.` })}
             </span>
             {allRight && (
                 <span className="fraction-v2-lab-readout-main">
@@ -77,7 +77,7 @@ export function BracketsTool(props: LabToolProps) {
         <ToolFrame {...props} controls={controls} readout={readout} challenges={bracketsChallenges} state={state}>
             <div className="integers-brackets" dir="ltr">
                 <div className="integers-brackets-original"><MathText text={`$${partsLatex(parts)}$`} /></div>
-                <div className="integers-brackets-flat" role="group" aria-label={l({ eu: 'Parentesirik gabe', es: 'Sin paréntesis', ar: 'دون أقواس' })}>
+                <div className="integers-brackets-flat" role="group" aria-label={l({ eu: 'Parentesirik gabe', es: 'Sin paréntesis', en: 'Without brackets', ar: 'دون أقواس' })}>
                     <span className="integers-brackets-equals">=</span>
                     {parts.map((part, partIndex) => part.kind === 'number'
                         ? <span className="integers-brackets-fixed" key={partIndex}>{part.value < 0 ? `−${-part.value}` : partIndex === 0 ? part.value : `+${part.value}`}</span>

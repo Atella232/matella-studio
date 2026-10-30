@@ -4,6 +4,7 @@ import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/Lab
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { fraction, toExactDecimal, toNumber, type FractionValue } from '../../../features/unit-v2/math/fraction'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import { Label } from '../../dbh2-funtzioak-v2/plane'
 import {
     CAPITALS,
@@ -54,8 +55,8 @@ const SECOND = 'var(--second, #c4432a)'
 const GREEN = 'var(--success, #267b53)'
 const CARD = 'var(--card, #fffcf6)'
 
-type Text = { eu: string; es: string; ar: string }
-const say = (eu: string, es: string, ar: string): Text => ({ eu, es, ar })
+type Text = { eu: string; es: string; en: string; ar: string }
+const say = (eu: string, es: string, ar: string, en: string): Text => ({ eu, es, en, ar })
 /** {,} in LaTeX becomes the point in Arabic */
 const localLatex = (language: string, latex: string) => (language === 'ar' ? latex.replace(/\{,\}/g, '.') : latex)
 /** A value in LaTeX: exact with up to two decimals, otherwise rounded with ≈ */
@@ -66,10 +67,10 @@ const valueLatex = (value: FractionValue) => {
 }
 /** A value as plain text in the drawings */
 const valueText = (language: string, value: FractionValue) => {
-    const exact = toExactDecimal(value, language === 'ar' ? '.' : ',')
+    const exact = toExactDecimal(value, language === 'ar' ? '.' : decimalSeparatorFor(language))
     if (exact !== null && (exact.split(/[.,]/)[1] ?? '').length <= 3) return exact
     const rounded = (Math.round(toNumber(value) * 100) / 100).toString()
-    return `≈ ${language === 'ar' ? rounded : rounded.replace('.', ',')}`
+    return `≈ ${language === 'ar' ? rounded : rounded.replace('.', decimalSeparatorFor(language))}`
 }
 /** The terms of a fraction as LaTeX */
 const termLatex = (value: FractionValue) => (value.denominator === 1 ? String(value.numerator) : valueLatex(value))
@@ -89,7 +90,7 @@ function Readout({ language, latex, note }: { language: string; latex: string; n
     )
 }
 
-const relationNames: Record<Relation, Text> = { direct: say('Zuzena', 'Directa', 'طردي'), inverse: say('Alderantzizkoa', 'Inversa', 'عكسي') }
+const relationNames: Record<Relation, Text> = { direct: say('Zuzena', 'Directa', 'طردي', 'Direct'), inverse: say('Alderantzizkoa', 'Inversa', 'عكسي', 'Inverse') }
 
 /* ---------- 1. The compound-proportionality machine ---------- */
 
@@ -102,7 +103,7 @@ export function CompoundTool(props: LabToolProps) {
     const allRight = state.relations[0] === right[0] && state.relations[1] === right[1]
     const controls = (
         <>
-            <Segmented label={l(say('Problema', 'Problema', 'المسألة'))} value={String(state.problem)} options={compoundProblems.map((_, index) => ({ value: String(index), label: `${index + 1}${state.solved.includes(index) ? ' ✓' : ''}` }))} onChange={(next) => setState((s) => chooseCompoundProblem(s, Number(next)))} />
+            <Segmented label={l(say('Problema', 'Problema', 'المسألة', 'Problem'))} value={String(state.problem)} options={compoundProblems.map((_, index) => ({ value: String(index), label: `${index + 1}${state.solved.includes(index) ? ' ✓' : ''}` }))} onChange={(next) => setState((s) => chooseCompoundProblem(s, Number(next)))} />
             <p className="fraction-v2-lab-tip">{l(problem.text)}</p>
             {problem.magnitudes.map((magnitude, index) => (
                 <Segmented key={index} label={l(magnitude.name)} value={state.relations[index] ?? ''} options={(['direct', 'inverse'] as Relation[]).map((relation) => ({ value: relation, label: l(relationNames[relation]) }))} onChange={(relation) => setState((s) => chooseRelation(s, index as 0 | 1, relation as Relation))} />
@@ -118,10 +119,10 @@ export function CompoundTool(props: LabToolProps) {
     }
     const latex = `x=${termLatex(problem.known)}\\cdot ${fractionLatex(0)}\\cdot ${fractionLatex(1)}${result ? `=${valueLatex(result)}` : ''}`
     const note = !result
-        ? l(say('Aukeratu magnitude bakoitzaren erlazioa.', 'Elige la relación de cada magnitud.', 'اختر علاقة كل مقدار.'))
+        ? l(say('Aukeratu magnitude bakoitzaren erlazioa.', 'Elige la relación de cada magnitud.', 'اختر علاقة كل مقدار.', 'Choose the relationship for each quantity.'))
         : allRight
-            ? l(say('Zuzena! Bi erlazioak ondo daude.', '¡Correcto! Las dos relaciones están bien.', 'صحيح! العلاقتان صحيحتان.'))
-            : l(say('Berrikusi: hau handitzean, ezezaguna handitu ala txikitu egiten da?', 'Revisa: al crecer esta, ¿la incógnita crece o decrece?', 'راجع: حين يزيد هذا هل يزيد المجهول أم ينقص؟'))
+            ? l(say('Zuzena! Bi erlazioak ondo daude.', '¡Correcto! Las dos relaciones están bien.', 'صحيح! العلاقتان صحيحتان.', 'Correct! Both relationships are right.'))
+            : l(say('Berrikusi: hau handitzean, ezezaguna handitu ala txikitu egiten da?', 'Revisa: al crecer esta, ¿la incógnita crece o decrece?', 'راجع: حين يزيد هذا هل يزيد المجهول أم ينقص؟', 'Check again: if this one increases, does the unknown increase or decrease?'))
     const cell = 150
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={compoundChallenges} state={state}>
@@ -160,10 +161,10 @@ export function ShareTool(props: LabToolProps) {
     const colors = ['#2f6fdb', '#c4432a', '#267b53']
     const controls = (
         <>
-            <Segmented label={l(say('Kantitatea', 'Cantidad', 'الكمية'))} value={String(state.total)} options={SHARE_TOTALS.map((total) => ({ value: String(total), label: String(total) }))} onChange={(total) => setState((s) => setShare(s, { total: Number(total) }))} />
-            <Segmented label={l(say('Banaketa', 'Reparto', 'التوزيع'))} value={state.relation} options={[{ value: 'direct', label: l(say('Zuzena', 'Directo', 'طردي')) }, { value: 'inverse', label: l(say('Alderantzizkoa', 'Inverso', 'عكسي')) }]} onChange={(relation) => setState((s) => setShare(s, { relation: relation as Relation }))} />
+            <Segmented label={l(say('Kantitatea', 'Cantidad', 'الكمية', 'Quantity'))} value={String(state.total)} options={SHARE_TOTALS.map((total) => ({ value: String(total), label: String(total) }))} onChange={(total) => setState((s) => setShare(s, { total: Number(total) }))} />
+            <Segmented label={l(say('Banaketa', 'Reparto', 'التوزيع', 'Sharing'))} value={state.relation} options={[{ value: 'direct', label: l(say('Zuzena', 'Directo', 'طردي', 'Direct')) }, { value: 'inverse', label: l(say('Alderantzizkoa', 'Inverso', 'عكسي', 'Inverse')) }]} onChange={(relation) => setState((s) => setShare(s, { relation: relation as Relation }))} />
             {state.numbers.map((value, index) => (
-                <Stepper key={index} label={`${l(say('Zenbakia', 'Número', 'العدد'))} ${index + 1}`} value={value} min={1} max={SHARE_NUMBER_MAX} onChange={(next) => setState((s) => setShare(s, { number: [index as 0 | 1 | 2, next] }))} language={props.language} />
+                <Stepper key={index} label={`${l(say('Zenbakia', 'Número', 'العدد', 'Number'))} ${index + 1}`} value={value} min={1} max={SHARE_NUMBER_MAX} onChange={(next) => setState((s) => setShare(s, { number: [index as 0 | 1 | 2, next] }))} language={props.language} />
             ))}
         </>
     )
@@ -177,7 +178,7 @@ export function ShareTool(props: LabToolProps) {
     const segments = parts.map((_, index) => parts.slice(0, index).reduce((sum, part) => sum + (toNumber(part) / total) * 560, 0))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={shareChallenges} extraChallenges={shareExtra} state={state}>
-            <Board height={200} label={l(say('Banaketa barra batean', 'El reparto en una barra', 'التوزيع في شريط'))}>
+            <Board height={200} label={l(say('Banaketa barra batean', 'El reparto en una barra', 'التوزيع في شريط', 'Sharing on a bar'))}>
                 {parts.map((part, index) => {
                     const width = (toNumber(part) / total) * 560
                     return (
@@ -199,12 +200,13 @@ export function ShareTool(props: LabToolProps) {
 export function ChainTool(props: LabToolProps) {
     const l = useLabText(props.language)
     const [state, setState] = useState<ChainState>(initialChainState)
-    const sign = (percent: number) => (percent > 0 ? `+${percent} %` : `${percent} %`)
+    const percentMark = props.language === 'en' ? '%' : ' %'
+    const sign = (percent: number) => (percent > 0 ? `+${percent}${percentMark}` : `${percent}${percentMark}`)
     const controls = (
         <>
-            <Segmented label={l(say('Hasierako prezioa', 'Precio inicial', 'السعر الأصلي'))} value={String(state.start)} options={CHAIN_STARTS.map((start) => ({ value: String(start), label: `${start} €` }))} onChange={(start) => setState((s) => setChain(s, { start: Number(start) }))} />
+            <Segmented label={l(say('Hasierako prezioa', 'Precio inicial', 'السعر الأصلي', 'Original price'))} value={String(state.start)} options={CHAIN_STARTS.map((start) => ({ value: String(start), label: `${start} €` }))} onChange={(start) => setState((s) => setChain(s, { start: Number(start) }))} />
             {state.changes.map((percent, index) => (
-                <Stepper key={index} label={`${l(say('Aldaketa', 'Cambio', 'التغيّر'))} ${index + 1}`} value={percent} min={-CHANGE_LIMIT} max={CHANGE_LIMIT} step={CHANGE_STEP} format={sign} onChange={(next) => setState((s) => setChain(s, { change: [index as 0 | 1 | 2, next] }))} language={props.language} />
+                <Stepper key={index} label={`${l(say('Aldaketa', 'Cambio', 'التغيّر', 'Change'))} ${index + 1}`} value={percent} min={-CHANGE_LIMIT} max={CHANGE_LIMIT} step={CHANGE_STEP} format={sign} onChange={(next) => setState((s) => setChain(s, { change: [index as 0 | 1 | 2, next] }))} language={props.language} />
             ))}
         </>
     )
@@ -212,14 +214,14 @@ export function ChainTool(props: LabToolProps) {
     const latex = `${state.start}${active.map((percent) => `\\cdot ${valueLatex(changeIndex(percent))}`).join('')}=${valueLatex(chainFinal(state))}`
     const index = chainIndex(state)
     const change = (toNumber(index) - 1) * 100
-    const note = l(say(`Indize osoa ${valueText('eu', index)}: guztira ${change >= 0 ? '+' : ''}${(Math.round(change * 100) / 100).toString().replace('.', ',')} %.`, `Índice total ${valueText('es', index)}: en total ${change >= 0 ? '+' : ''}${(Math.round(change * 100) / 100).toString().replace('.', ',')} %.`, `المؤشر الكلي ${valueText('ar', index)}: إجمالًا ${change >= 0 ? '+' : ''}${Math.round(change * 100) / 100}٪.`))
+    const note = l(say(`Indize osoa ${valueText('eu', index)}: guztira ${change >= 0 ? '+' : ''}${(Math.round(change * 100) / 100).toString().replace('.', ',')} %.`, `Índice total ${valueText('es', index)}: en total ${change >= 0 ? '+' : ''}${(Math.round(change * 100) / 100).toString().replace('.', ',')} %.`, `المؤشر الكلي ${valueText('ar', index)}: إجمالًا ${change >= 0 ? '+' : ''}${Math.round(change * 100) / 100}٪.`, `Total multiplier ${valueText('en', index)}: overall ${change >= 0 ? '+' : ''}${(Math.round(change * 100) / 100).toString().replace('.', decimalSeparatorFor('en'))}%.`))
     // Running amounts after each active change
     const steps = active.reduce<FractionValue[]>((list, percent) => [...list, { numerator: list[list.length - 1].numerator * (100 + percent), denominator: list[list.length - 1].denominator * 100 }], [{ numerator: state.start, denominator: 1 }])
     const width = 272 / Math.max(1, steps.length - 1)
     const boxX = (step: number) => (steps.length === 1 ? 180 : 44 + step * width)
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={chainChallenges} extraChallenges={chainExtra} state={state}>
-            <Board narrow height={124} label={l(say('Aldaketen katea', 'La cadena de cambios', 'سلسلة التغيّرات'))}>
+            <Board narrow height={124} label={l(say('Aldaketen katea', 'La cadena de cambios', 'سلسلة التغيّرات', 'The chain of changes'))}>
                 {steps.map((value, step) => {
                     const x = boxX(step)
                     const color = active[step - 1] > 0 ? GREEN : SECOND
@@ -254,17 +256,17 @@ export function InterestTool(props: LabToolProps) {
     const scale = 470 / (state.capital + yearly * state.years)
     const controls = (
         <>
-            <Segmented label={l(say('Kapitala', 'Capital', 'رأس المال'))} value={String(state.capital)} options={CAPITALS.map((capital) => ({ value: String(capital), label: `${capital} €` }))} onChange={(capital) => setState((s) => setInterest(s, { capital: Number(capital) }))} />
-            <Stepper label={l(say('Interes-tasa (%)', 'Tipo de interés (%)', 'سعر الفائدة (٪)'))} value={state.rate} min={1} max={RATE_MAX} onChange={(rate) => setState((s) => setInterest(s, { rate }))} language={props.language} />
-            <Stepper label={l(say('Urteak', 'Años', 'السنوات'))} value={state.years} min={1} max={YEARS_MAX} onChange={(years) => setState((s) => setInterest(s, { years }))} language={props.language} />
+            <Segmented label={l(say('Kapitala', 'Capital', 'رأس المال', 'Capital'))} value={String(state.capital)} options={CAPITALS.map((capital) => ({ value: String(capital), label: `${capital} €` }))} onChange={(capital) => setState((s) => setInterest(s, { capital: Number(capital) }))} />
+            <Stepper label={l(say('Interes-tasa (%)', 'Tipo de interés (%)', 'سعر الفائدة (٪)', 'Interest rate (%)'))} value={state.rate} min={1} max={RATE_MAX} onChange={(rate) => setState((s) => setInterest(s, { rate }))} language={props.language} />
+            <Stepper label={l(say('Urteak', 'Años', 'السنوات', 'Years'))} value={state.years} min={1} max={YEARS_MAX} onChange={(years) => setState((s) => setInterest(s, { years }))} language={props.language} />
         </>
     )
     const latex = `I=\\frac{${state.capital}\\cdot ${state.rate}\\cdot ${state.years}}{100}=${valueLatex(interest)}`
-    const note = l(say(`Urtero ${yearly} €. Amaieran: ${state.capital + toNumber(interest)} €.`, `Cada año, ${yearly} €. Al final: ${state.capital + toNumber(interest)} €.`, `كل سنة ${yearly} €. في النهاية: ${state.capital + toNumber(interest)} €.`))
+    const note = l(say(`Urtero ${yearly} €. Amaieran: ${state.capital + toNumber(interest)} €.`, `Cada año, ${yearly} €. Al final: ${state.capital + toNumber(interest)} €.`, `كل سنة ${yearly} €. في النهاية: ${state.capital + toNumber(interest)} €.`, `Each year, €${yearly}. At the end, €${state.capital + toNumber(interest)}.`))
     const rowHeight = Math.min(34, 260 / (state.years + 1))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={interestChallenges} extraChallenges={interestExtra} state={state}>
-            <Board height={24 + (state.years + 1) * (rowHeight + 4)} label={l(say('Kapitala eta interesa urtez urte', 'Capital e interés año a año', 'رأس المال والفائدة سنة بعد سنة'))}>
+            <Board height={24 + (state.years + 1) * (rowHeight + 4)} label={l(say('Kapitala eta interesa urtez urte', 'Capital e interés año a año', 'رأس المال والفائدة سنة بعد سنة', 'Capital and interest year by year'))}>
                 {Array.from({ length: state.years + 1 }, (_, year) => {
                     const y = 16 + year * (rowHeight + 4)
                     return (

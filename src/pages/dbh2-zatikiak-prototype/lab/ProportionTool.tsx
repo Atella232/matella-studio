@@ -2,6 +2,7 @@ import type { LabChallenge, LabChallengeMaker } from '../../../features/unit-v2/
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { fraction, type FractionValue } from '../math/fraction'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import {
     decimalExpansion,
     initialProportionState,
@@ -40,29 +41,29 @@ export function ProportionTool(props: ToolProps & { challenges?: LabChallenge<Pr
 
     const fractionSteppers = (
         <>
-            <Stepper label={l({ eu: 'Zenbakitzailea', es: 'Numerador', ar: 'البسط' })} value={numerator} min={1} max={denominator} onChange={(next) => update({ numerator: next })} language={props.language} />
-            <Stepper label={l({ eu: 'Izendatzailea', es: 'Denominador', ar: 'المقام' })} value={denominator} min={PROPORTION_LIMITS.minDenominator} max={PROPORTION_LIMITS.maxDenominator} onChange={(next) => update({ denominator: next })} language={props.language} />
+            <Stepper label={l({ eu: 'Zenbakitzailea', es: 'Numerador', en: 'Numerator', ar: 'البسط' })} value={numerator} min={1} max={denominator} onChange={(next) => update({ numerator: next })} language={props.language} />
+            <Stepper label={l({ eu: 'Izendatzailea', es: 'Denominador', en: 'Denominator', ar: 'المقام' })} value={denominator} min={PROPORTION_LIMITS.minDenominator} max={PROPORTION_LIMITS.maxDenominator} onChange={(next) => update({ denominator: next })} language={props.language} />
         </>
     )
     const quantityStepper = (
-        <Stepper label={l({ eu: 'Kantitatea', es: 'Cantidad', ar: 'الكمية' })} value={quantity} min={PROPORTION_LIMITS.minQuantity} max={PROPORTION_LIMITS.maxQuantity} step={PROPORTION_LIMITS.quantityStep} onChange={(next) => update({ quantity: next })} language={props.language} />
+        <Stepper label={l({ eu: 'Kantitatea', es: 'Cantidad', en: 'Quantity', ar: 'الكمية' })} value={quantity} min={PROPORTION_LIMITS.minQuantity} max={PROPORTION_LIMITS.maxQuantity} step={PROPORTION_LIMITS.quantityStep} onChange={(next) => update({ quantity: next })} language={props.language} />
     )
 
     const controls = (
         <>
             <Segmented
-                label={l({ eu: 'Modua', es: 'Modo', ar: 'الوضع' })}
+                label={l({ eu: 'Modua', es: 'Modo', en: 'Mode', ar: 'الوضع' })}
                 value={mode}
                 options={([
-                    { value: 'of', label: l({ eu: 'Zatikia', es: 'Fracción de', ar: 'كسر من' }) },
-                    { value: 'percent', label: l({ eu: 'Ehunekoa', es: 'Porcentaje', ar: 'نسبة مئوية' }) },
-                    { value: 'forms', label: l({ eu: 'Hiru forma', es: 'Tres formas', ar: 'ثلاث صيغ' }) }
+                    { value: 'of', label: l({ eu: 'Zatikia', es: 'Fracción de', en: 'Fraction of', ar: 'كسر من' }) },
+                    { value: 'percent', label: l({ eu: 'Ehunekoa', es: 'Porcentaje', en: 'Percentage', ar: 'نسبة مئوية' }) },
+                    { value: 'forms', label: l({ eu: 'Hiru forma', es: 'Tres formas', en: 'Three forms', ar: 'ثلاث صيغ' }) }
                 ] as Array<{ value: ProportionState['mode']; label: string }>).filter((option) => !props.modes || props.modes.includes(option.value))}
                 onChange={(next) => update({ mode: next })}
             />
             {mode !== 'percent' && fractionSteppers}
             {mode === 'percent' && (
-                <Stepper label={l({ eu: 'Ehunekoa (%)', es: 'Porcentaje (%)', ar: 'النسبة المئوية (٪)' })} value={percent} min={0} max={100} step={PROPORTION_LIMITS.percentStep} onChange={(next) => update({ percent: next })} language={props.language} />
+                <Stepper label={l({ eu: 'Ehunekoa (%)', es: 'Porcentaje (%)', en: 'Percentage (%)', ar: 'النسبة المئوية (٪)' })} value={percent} min={0} max={100} step={PROPORTION_LIMITS.percentStep} onChange={(next) => update({ percent: next })} language={props.language} />
             )}
             {mode !== 'forms' && quantityStepper}
         </>
@@ -90,12 +91,12 @@ export function ProportionTool(props: ToolProps & { challenges?: LabChallenge<Pr
                 )}
                 <PredictionStep
                     language={props.language}
-                    question={{ eu: `Kalkulatu aurretik: emaitza ${quantity} kantitatearen erdia baino txikiagoa, berdina ala handiagoa izango da?`, es: `Antes de calcular: ¿el resultado será menor, igual o mayor que la mitad de ${quantity}?`, ar: `قبل الحساب: هل ستكون النتيجة أصغر من نصف ${quantity} أم تساويه أم أكبر منه؟` }}
+                    question={{ eu: `Kalkulatu aurretik: emaitza ${quantity} kantitatearen erdia baino txikiagoa, berdina ala handiagoa izango da?`, es: `Antes de calcular: ¿el resultado será menor, igual o mayor que la mitad de ${quantity}?`, en: `Before calculating: will the result be smaller than, equal to or bigger than half of ${quantity}?`, ar: `قبل الحساب: هل ستكون النتيجة أصغر من نصف ${quantity} أم تساويه أم أكبر منه؟` }}
                     actual={proportionPrediction(state).relation}
                     choice={state.prediction}
                     tip={mode === 'of'
-                        ? { eu: 'Zatikia erdia baino handiagoa bada, erdia baino gehiago hartzen duzu; txikiagoa bada, gutxiago.', es: 'Si la fracción es mayor que la mitad, tomas más de la mitad; si es menor, menos.', ar: 'إذا كان الكسر أكبر من النصف فأنت تأخذ أكثر من النصف، وإذا كان أصغر فأقل.' }
-                        : { eu: '% 50 erdia da: ehuneko handiago batek erdia baino gehiago hartzen du; txikiago batek, gutxiago.', es: 'El 50 % es la mitad: un porcentaje mayor toma más de la mitad; uno menor, menos.', ar: '50٪ هي النصف: النسبة الأكبر تأخذ أكثر من النصف، والأصغر أقل.' }}
+                        ? { eu: 'Zatikia erdia baino handiagoa bada, erdia baino gehiago hartzen duzu; txikiagoa bada, gutxiago.', es: 'Si la fracción es mayor que la mitad, tomas más de la mitad; si es menor, menos.', en: 'If the fraction is bigger than a half, you take more than half; if it is smaller, you take less.', ar: 'إذا كان الكسر أكبر من النصف فأنت تأخذ أكثر من النصف، وإذا كان أصغر فأقل.' }
+                        : { eu: '% 50 erdia da: ehuneko handiago batek erdia baino gehiago hartzen du; txikiago batek, gutxiago.', es: 'El 50 % es la mitad: un porcentaje mayor toma más de la mitad; uno menor, menos.', en: '50% is a half: a bigger percentage takes more than half; a smaller one takes less.', ar: '50٪ هي النصف: النسبة الأكبر تأخذ أكثر من النصف، والأصغر أقل.' }}
                     onChoose={(relation) => setState((current) => setPrediction(current, relation))}
                 >
                     <ResultAnswer language={props.language} state={state} expected={result} onChange={(patch) => setState((current) => ({ ...current, ...patch }))} />
@@ -122,7 +123,7 @@ function TapeDiagram({ numerator, denominator, quantity, showResult, result, lan
     return (
         <div className="fraction-v2-tape">
             <div className="fraction-v2-tape-total"><span>{quantity}</span></div>
-            <div className="fraction-v2-tape-bar" role="img" aria-label={l({ eu: `${quantity} ${denominator} taldetan; ${numerator} koloreztatuta`, es: `${quantity} en ${denominator} grupos; ${numerator} coloreados`, ar: `${quantity} في ${denominator} مجموعات؛ ${numerator} ملوّنة` })}>
+            <div className="fraction-v2-tape-bar" role="img" aria-label={l({ eu: `${quantity} ${denominator} taldetan; ${numerator} koloreztatuta`, es: `${quantity} en ${denominator} grupos; ${numerator} coloreados`, en: `${quantity} in ${denominator} groups; ${numerator} coloured`, ar: `${quantity} في ${denominator} مجموعات؛ ${numerator} ملوّنة` })}>
                 {groups.map((index) => (
                     <span className={index < numerator ? 'filled' : ''} key={index}>
                         <MathText text={`$${valueLatex(group)}$`} />
@@ -134,8 +135,8 @@ function TapeDiagram({ numerator, denominator, quantity, showResult, result, lan
             </div>
             <p className="fraction-v2-insight">
                 {showResult
-                    ? l({ eu: `${denominator} talde, bakoitza ${group.denominator === 1 ? group.numerator : `${group.numerator}/${group.denominator}`}; ${numerator} talde hartuta.`, es: `${denominator} grupos de ${group.denominator === 1 ? group.numerator : `${group.numerator}/${group.denominator}`}; se toman ${numerator}.`, ar: `${denominator} مجموعات، كل منها ${group.denominator === 1 ? group.numerator : `${group.numerator}/${group.denominator}`}؛ نأخذ ${numerator}.` })
-                    : l({ eu: 'Zenbat balio du talde bakoitzak? Eta koloreztatutako taldeek?', es: '¿Cuánto vale cada grupo? ¿Y los grupos coloreados?', ar: 'كم تساوي كل مجموعة؟ وكم تساوي المجموعات الملوّنة؟' })}
+                    ? l({ eu: `${denominator} talde, bakoitza ${group.denominator === 1 ? group.numerator : `${group.numerator}/${group.denominator}`}; ${numerator} talde hartuta.`, es: `${denominator} grupos de ${group.denominator === 1 ? group.numerator : `${group.numerator}/${group.denominator}`}; se toman ${numerator}.`, en: `${denominator} groups of ${group.denominator === 1 ? group.numerator : `${group.numerator}/${group.denominator}`}; take ${numerator}.`, ar: `${denominator} مجموعات، كل منها ${group.denominator === 1 ? group.numerator : `${group.numerator}/${group.denominator}`}؛ نأخذ ${numerator}.` })
+                    : l({ eu: 'Zenbat balio du talde bakoitzak? Eta koloreztatutako taldeek?', es: '¿Cuánto vale cada grupo? ¿Y los grupos coloreados?', en: 'How much is each group worth? And the coloured groups?', ar: 'كم تساوي كل مجموعة؟ وكم تساوي المجموعات الملوّنة؟' })}
             </p>
         </div>
     )
@@ -170,10 +171,12 @@ function HundredGrid({ numerator, denominator, language }: { numerator: number; 
     const hundredths = (numerator * 100) / denominator
     const full = Math.floor(hundredths + 1e-9)
     const partial = hundredths - full
+    // The rounded number for the label, with the language's decimal mark (Arabic keeps the point)
+    const shown = String(Math.round(hundredths * 10) / 10).replace('.', language === 'ar' ? '.' : decimalSeparatorFor(language))
     const cells = Array.from({ length: 100 }, (_, index) => index)
     return (
         <div className="fraction-v2-hundred">
-            <div className="fraction-v2-hundred-grid" role="img" aria-label={l({ eu: `100 laukitatik ${Math.round(hundredths * 10) / 10}`, es: `${Math.round(hundredths * 10) / 10} de 100 casillas`, ar: `${Math.round(hundredths * 10) / 10} من 100 خانة` })}>
+            <div className="fraction-v2-hundred-grid" role="img" aria-label={l({ eu: `100 laukitatik ${shown}`, es: `${shown} de 100 casillas`, en: `${shown} of 100 squares`, ar: `${shown} من 100 خانة` })}>
                 {cells.map((index) => (
                     <span className={index < full ? 'filled' : ''} key={index}>
                         {index === full && partial > 1e-9 && <i style={{ width: `${partial * 100}%` }} />}
@@ -183,6 +186,7 @@ function HundredGrid({ numerator, denominator, language }: { numerator: number; 
             <p className="fraction-v2-insight">{l({
                 eu: 'Ehuneko bat ehunen bat da: 100 laukitatik zenbat koloreztatzen diren.',
                 es: 'Un porcentaje cuenta centésimas: cuántas casillas de 100 se colorean.',
+                en: 'A percentage counts hundredths: how many of the 100 squares are coloured.',
                 ar: 'النسبة المئوية تعدّ أجزاء المئة: كم خانة من 100 نلوّن.'
             })}</p>
         </div>

@@ -1,8 +1,10 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
+import type { UnitLanguage } from '../../../features/unit-v2/types'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import type { TrigonometryGameId } from './info'
 
-/** Small illustration of each game; the art is the same in every language */
-export function TrigonometryGameArt({ game }: { game: TrigonometryGameId }) {
+/** Small illustration of each game; the art is the same in every language, only its decimal mark follows the language */
+export function TrigonometryGameArt({ game, language }: { game: TrigonometryGameId; language: UnitLanguage }) {
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
@@ -16,7 +18,7 @@ export function TrigonometryGameArt({ game }: { game: TrigonometryGameId }) {
     }
     return (
         <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
-            {['150°', '5π/6', "12° 30′", '12,5°'].map((label, index) => (
+            {['150°', '5π/6', "12° 30′", `12${decimalSeparatorFor(language)}5°`].map((label, index) => (
                 <g key={index} transform={`translate(${14 + index * 50} ${index % 2 === 0 ? 24 : 40}) rotate(${index % 2 === 0 ? -4 : 4})`}>
                     <rect width="44" height="60" rx="8" fill={index % 2 === 0 ? 'var(--paper-deep)' : 'var(--blue-tint, #dde7f7)'} stroke="var(--ink)" strokeWidth="2" />
                     <text x="22" y="36" textAnchor="middle" fontSize="9" fontWeight="700" fill="var(--ink)" direction="ltr">{label}</text>

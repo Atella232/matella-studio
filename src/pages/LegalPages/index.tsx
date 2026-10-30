@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import './LegalPages.css'
 
-type LegalLanguage = 'eu' | 'es' | 'ar'
+type LegalLanguage = 'eu' | 'es' | 'en' | 'ar'
 
 interface LegalSection {
     title: string
@@ -51,6 +51,25 @@ const privacyCopy: Record<LegalLanguage, LegalCopy> = {
             {
                 title: 'Alojamiento técnico',
                 paragraphs: ['El proveedor que aloja la web puede procesar los datos técnicos de acceso habituales para mantener la seguridad y el funcionamiento del servicio, de acuerdo con su propia política de privacidad.']
+            }
+        ]
+    },
+    en: {
+        eyebrow: 'Privacy',
+        title: 'Privacy notice',
+        description: 'Matella uses only the minimum information needed to support learning.',
+        sections: [
+            {
+                title: 'Data saved on your device',
+                paragraphs: ['The language you choose and the progress of some activities are saved in the local storage of the browser. This information stays on your device and can be deleted from the browser settings.']
+            },
+            {
+                title: 'Accounts and personal data',
+                paragraphs: ['The website does not create user accounts and does not send names, email addresses or exercise answers to a server of its own.']
+            },
+            {
+                title: 'Technical hosting',
+                paragraphs: ['The provider that hosts the website may process the usual technical access data to keep the service secure and working, in line with its own privacy policy.']
             }
         ]
     },
@@ -114,6 +133,25 @@ const creditsCopy: Record<LegalLanguage, LegalCopy> = {
             }
         ]
     },
+    en: {
+        eyebrow: 'Credits',
+        title: 'Project credits',
+        description: 'Matella is an educational project for learning mathematics in a clear, practical and accessible way.',
+        sections: [
+            {
+                title: 'Content and design',
+                paragraphs: ['The teaching units, explanations, exercises and interactive activities have been prepared specifically for the Matella project.']
+            },
+            {
+                title: 'Technology used',
+                paragraphs: ['The website is built with React, TypeScript, i18next and KaTeX. The icons and additional animations use Lucide and canvas-confetti.']
+            },
+            {
+                title: 'Educational purpose',
+                paragraphs: ['The material is designed for use in the classroom and for independent learning, combining theory, experimentation and immediate checking.']
+            }
+        ]
+    },
     ar: {
         eyebrow: 'الاعتمادات',
         title: 'اعتمادات المشروع',
@@ -138,6 +176,7 @@ const creditsCopy: Record<LegalLanguage, LegalCopy> = {
 function normalizeLanguage(language: string): LegalLanguage {
     if (language.startsWith('ar')) return 'ar'
     if (language.startsWith('es')) return 'es'
+    if (language.startsWith('en')) return 'en'
     return 'eu'
 }
 

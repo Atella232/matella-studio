@@ -46,13 +46,13 @@ export function createPlotRound(random: Random, levelIndex: number): PlotTarget[
         let target: PlotTarget
         if (levelIndex === 0) {
             point = [randomInt(random, 1, 9), randomInt(random, 1, 9)]
-            target = { point, prompt: say(`Kokatu $A${pointLatex(point)}$ puntua.`, `Sitúa el punto $A${pointLatex(point)}$.`, `ضع النقطة $A${pointLatex(point)}$.`), worked: `A${pointLatex(point)}` }
+            target = { point, prompt: say(`Kokatu $A${pointLatex(point)}$ puntua.`, `Sitúa el punto $A${pointLatex(point)}$.`, `ضع النقطة $A${pointLatex(point)}$.`, `Plot the point $A${pointLatex(point)}$.`), worked: `A${pointLatex(point)}` }
         } else if (levelIndex === 1) {
             const onAxis = random() < 0.2
             point = onAxis
                 ? (random() < 0.5 ? [randomInt(random, -6, 6) || 3, 0] : [0, randomInt(random, -6, 6) || -2])
                 : [randomInt(random, 1, 6) * (random() < 0.5 ? -1 : 1), randomInt(random, 1, 6) * (random() < 0.5 ? -1 : 1)]
-            target = { point, prompt: say(`Kokatu $A${pointLatex(point)}$ puntua.`, `Sitúa el punto $A${pointLatex(point)}$.`, `ضع النقطة $A${pointLatex(point)}$.`), worked: `A${pointLatex(point)}` }
+            target = { point, prompt: say(`Kokatu $A${pointLatex(point)}$ puntua.`, `Sitúa el punto $A${pointLatex(point)}$.`, `ضع النقطة $A${pointLatex(point)}$.`, `Plot the point $A${pointLatex(point)}$.`), worked: `A${pointLatex(point)}` }
         } else {
             const m = pick(random, [-3, -2, -1, 1, 2, 3])
             const n = randomInt(random, -3, 3)
@@ -62,7 +62,7 @@ export function createPlotRound(random: Random, levelIndex: number): PlotTarget[
             point = [x, y]
             target = {
                 point,
-                prompt: say(`Kokatu $${lineLatex(m, n)}$ funtzioaren puntua $x=${x}$ denean.`, `Sitúa el punto de $${lineLatex(m, n)}$ cuando $x=${x}$.`, `ضع نقطة $${lineLatex(m, n)}$ عندما $x=${x}$.`),
+                prompt: say(`Kokatu $${lineLatex(m, n)}$ funtzioaren puntua $x=${x}$ denean.`, `Sitúa el punto de $${lineLatex(m, n)}$ cuando $x=${x}$.`, `ضع نقطة $${lineLatex(m, n)}$ عندما $x=${x}$.`, `Plot the point on the line $${lineLatex(m, n)}$ where $x=${x}$.`),
                 worked: `y=${m}\\cdot ${bracket(x)}${n < 0 ? '' : '+'}${n}=${y}\\ \\to\\ ${pointLatex(point)}`
             }
         }
@@ -74,8 +74,8 @@ export function createPlotRound(random: Random, levelIndex: number): PlotTarget[
     return targets
 }
 
-function say(eu: string, es: string, ar: string): LocalizedText {
-    return { eu, es, ar }
+function say(eu: string, es: string, ar: string, en: string): LocalizedText {
+    return { eu, es, en, ar }
 }
 
 /** Points for one target: 2 at the first try, 1 at the second, 0 otherwise */

@@ -2,7 +2,7 @@ import { checkAnswer, fraction, type AnswerCheck } from '../../../features/unit-
 import { parTimeFor, type RaceOption, type RaceQuestion, type Tier } from '../../../features/unit-v2/games/raceCore.ts'
 import { pick, randomInt, shuffle, type Random } from '../../../features/unit-v2/games/random.ts'
 import type { LocalizedText } from '../../../features/unit-v2/types.ts'
-import { formatNatural } from '../format.ts'
+import { formatNatural, formatNaturalLatex } from '../format.ts'
 import { readNaturalAnswer, toRoman } from '../numbers.ts'
 
 /* ==========================================================================
@@ -37,9 +37,10 @@ export type NaturalsRaceError =
 
 export type NaturalsRaceQuestion = RaceQuestion<NaturalsRaceError>
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
-const same = (value: string): LocalizedText => ({ eu: value, es: value, ar: value })
-const f = formatNatural
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
+const same = (value: string): LocalizedText => ({ eu: value, es: value, en: value, ar: value })
+/** Numbers inside formulas: the point, which MathText writes as {,} in English */
+const f = formatNaturalLatex
 
 interface Candidate {
     latex: string
@@ -68,7 +69,7 @@ function question(circuit: number, kind: string, prompt: LocalizedText, options:
     return { circuit, kind, prompt, options, answer: fraction(answer), answerForm: 'any', percentAnswer: false, writable, solution }
 }
 
-const calculate = (latex: string) => say(`Kalkulatu: $${latex}$`, `Calcula: $${latex}$`, `احسب: $${latex}$`)
+const calculate = (latex: string) => say(`Kalkulatu: $${latex}$`, `Calcula: $${latex}$`, `احسب: $${latex}$`, `Work out: $${latex}$`)
 
 /** A number with `length` digits, the first one not zero */
 function randomNumber(random: Random, length: number): number {
@@ -92,7 +93,7 @@ function digitValueQuestion(random: Random, tier: Tier): NaturalsRaceQuestion | 
         ...numbers([answer * 10, answer / 10], 'wrong-place')
     ])
     if (!options) return null
-    return question(0, 'digit-value', say(`Zenbat balio du ${digit} zifrak ${f(value)} zenbakian?`, `¿Cuánto vale la cifra ${digit} en ${f(value)}?`, `كم قيمة الرقم ${digit} في العدد ${f(value)}؟`), options, answer, same(`$${digit}\\cdot ${f(10 ** place)}=${f(answer)}$`), true)
+    return question(0, 'digit-value', say(`Zenbat balio du ${digit} zifrak ${formatNatural(value, 'eu')} zenbakian?`, `¿Cuánto vale la cifra ${digit} en ${formatNatural(value, 'es')}?`, `كم قيمة الرقم ${digit} في العدد ${formatNatural(value, 'ar')}؟`, `¿Cuánto vale la cifra ${digit} en ${formatNatural(value, 'en')}?`), options, answer, same(`$${digit}\\cdot ${f(10 ** place)}=${f(answer)}$`), true)
 }
 
 function decompositionQuestion(random: Random, tier: Tier): NaturalsRaceQuestion | null {
@@ -110,7 +111,7 @@ function decompositionQuestion(random: Random, tier: Tier): NaturalsRaceQuestion
         ...nearMisses(answer, 10 ** last.place)
     ])
     if (!options) return null
-    return question(0, 'decomposition', say(`Zein zenbaki da $${latex}$?`, `¿Qué número es $${latex}$?`, `ما العدد $${latex}$؟`), options, answer, same(`$${latex}=${f(answer)}$`), true)
+    return question(0, 'decomposition', say(`Zein zenbaki da $${latex}$?`, `¿Qué número es $${latex}$?`, `ما العدد $${latex}$؟`, `What number is $${latex}$?`), options, answer, same(`$${latex}=${f(answer)}$`), true)
 }
 
 /** What a Roman numeral adds up to if every symbol is added, the usual slip */
@@ -128,7 +129,7 @@ function romanQuestion(random: Random, tier: Tier): NaturalsRaceQuestion | null 
         ...numbers([answer + 10, answer - 10, answer + 2, answer - 2], 'calculation')
     ])
     if (!options) return null
-    return question(0, 'roman', say(`Zein zenbaki da $\\mathrm{${roman}}$?`, `¿Qué número es $\\mathrm{${roman}}$?`, `ما العدد $\\mathrm{${roman}}$؟`), options, answer, same(`$\\mathrm{${roman}}=${f(answer)}$`), true)
+    return question(0, 'roman', say(`Zein zenbaki da $\\mathrm{${roman}}$?`, `¿Qué número es $\\mathrm{${roman}}$?`, `ما العدد $\\mathrm{${roman}}$؟`, `What number is $\\mathrm{${roman}}$?`), options, answer, same(`$\\mathrm{${roman}}=${f(answer)}$`), true)
 }
 
 function biggestQuestion(random: Random, tier: Tier): NaturalsRaceQuestion | null {
@@ -145,7 +146,7 @@ function biggestQuestion(random: Random, tier: Tier): NaturalsRaceQuestion | nul
     const options = buildOptions(random, f(answer), numbers(list.filter((value) => value !== answer), 'order'))
     if (!options) return null
     const sorted = [...list].sort((a, b) => b - a).map(f).join('>')
-    return question(0, 'biggest', say('Zein da handiena?', '¿Cuál es el mayor?', 'أيها الأكبر؟'), options, answer, same(`$${sorted}$`), false)
+    return question(0, 'biggest', say('Zein da handiena?', '¿Cuál es el mayor?', 'أيها الأكبر؟', 'Which is the largest?'), options, answer, same(`$${sorted}$`), false)
 }
 
 /* ---------- Circuit 1: rounding ---------- */
@@ -156,11 +157,11 @@ export function roundTo(value: number, place: number): number {
 }
 
 const placeWords: Record<number, LocalizedText> = {
-    10: say('hamarrekoetara', 'a las decenas', 'إلى العشرات'),
-    100: say('ehunekoetara', 'a las centenas', 'إلى المئات'),
-    1000: say('milakoetara', 'a los millares', 'إلى الآلاف'),
-    10000: say('hamar milakoetara', 'a las decenas de millar', 'إلى عشرات الآلاف'),
-    100000: say('ehun milakoetara', 'a las centenas de millar', 'إلى مئات الآلاف')
+    10: say('hamarrekoetara', 'a las decenas', 'إلى العشرات', 'to the nearest ten'),
+    100: say('ehunekoetara', 'a las centenas', 'إلى المئات', 'to the nearest hundred'),
+    1000: say('milakoetara', 'a los millares', 'إلى الآلاف', 'to the nearest thousand'),
+    10000: say('hamar milakoetara', 'a las decenas de millar', 'إلى عشرات الآلاف', 'to the nearest ten thousand'),
+    100000: say('ehun milakoetara', 'a las centenas de millar', 'إلى مئات الآلاف', 'to the nearest hundred thousand')
 }
 
 function roundQuestion(random: Random, tier: Tier): NaturalsRaceQuestion | null {
@@ -177,7 +178,7 @@ function roundQuestion(random: Random, tier: Tier): NaturalsRaceQuestion | null 
         ...numbers([roundTo(value, place * 10), roundTo(value, place / 10)], 'wrong-place')
     ])
     if (!options) return null
-    return question(1, 'round', say(`Biribildu ${f(value)} ${words.eu}.`, `Redondea ${f(value)} ${words.es}.`, `قرّب ${f(value)} ${words.ar}.`), options, answer, same(`$${f(value)}\\approx ${f(answer)}$`), true)
+    return question(1, 'round', say(`Biribildu ${formatNatural(value, 'eu')} ${words.eu}.`, `Redondea ${formatNatural(value, 'es')} ${words.es}.`, `قرّب ${formatNatural(value, 'ar')} ${words.ar}.`, `Redondea ${formatNatural(value, 'en')} ${words.en}.`), options, answer, same(`$${f(value)}\\approx ${f(answer)}$`), true)
 }
 
 function reverseRoundQuestion(random: Random, tier: Tier): NaturalsRaceQuestion | null {
@@ -189,7 +190,7 @@ function reverseRoundQuestion(random: Random, tier: Tier): NaturalsRaceQuestion 
     const wrongs = [target + half + randomInt(random, 0, half - 1), target - half - randomInt(random, 1, half), target + half]
     const options = buildOptions(random, f(answer), numbers(wrongs, 'rounding-direction'))
     if (!options) return null
-    return question(1, 'reverse-round', say(`Zein zenbakik ematen du ${f(target)} ${words.eu} biribiltzean?`, `¿Qué número da ${f(target)} al redondearlo ${words.es}?`, `أي عدد يعطي ${f(target)} عند تقريبه ${words.ar}؟`), options, answer, same(`$${f(answer)}\\approx ${f(target)}$`), false)
+    return question(1, 'reverse-round', say(`Zein zenbakik ematen du ${formatNatural(target, 'eu')} ${words.eu} biribiltzean?`, `¿Qué número da ${formatNatural(target, 'es')} al redondearlo ${words.es}?`, `أي عدد يعطي ${formatNatural(target, 'ar')} عند تقريبه ${words.ar}؟`, `¿Qué número da ${formatNatural(target, 'en')} al redondearlo ${words.en}?`), options, answer, same(`$${f(answer)}\\approx ${f(target)}$`), false)
 }
 
 /* ---------- Circuit 2: basic operations ---------- */
@@ -213,7 +214,7 @@ function missingTermQuestion(random: Random, tier: Tier): NaturalsRaceQuestion |
     const { latex, answer, wrong } = cases[kind]
     const options = buildOptions(random, f(answer), [...numbers([wrong], 'inverse'), ...nearMisses(answer, 10), ...nearMisses(answer)])
     if (!options) return null
-    return question(2, kind, say(`Osatu: $${latex}$`, `Completa: $${latex}$`, `أكمل: $${latex}$`), options, answer, same(`$\\square=${f(answer)}$`), true)
+    return question(2, kind, say(`Osatu: $${latex}$`, `Completa: $${latex}$`, `أكمل: $${latex}$`, `Complete: $${latex}$`), options, answer, same(`$\\square=${f(answer)}$`), true)
 }
 
 function dividendQuestion(random: Random, tier: Tier): NaturalsRaceQuestion | null {
@@ -227,7 +228,7 @@ function dividendQuestion(random: Random, tier: Tier): NaturalsRaceQuestion | nu
         ...nearMisses(answer)
     ])
     if (!options) return null
-    return question(2, 'dividend', say(`Zatitzailea ${divisor} da, zatidura ${quotient} eta hondarra ${remainder}. Zein da zatikizuna?`, `El divisor es ${divisor}, el cociente ${quotient} y el resto ${remainder}. ¿Cuál es el dividendo?`, `المقسوم عليه ${divisor} وخارج القسمة ${quotient} والباقي ${remainder}. ما المقسوم؟`), options, answer, same(`$${divisor}\\cdot ${quotient}+${remainder}=${f(answer)}$`), true)
+    return question(2, 'dividend', say(`Zatitzailea ${divisor} da, zatidura ${quotient} eta hondarra ${remainder}. Zein da zatikizuna?`, `El divisor es ${divisor}, el cociente ${quotient} y el resto ${remainder}. ¿Cuál es el dividendo?`, `المقسوم عليه ${divisor} وخارج القسمة ${quotient} والباقي ${remainder}. ما المقسوم؟`, `The divisor is ${divisor}, the quotient is ${quotient} and the remainder is ${remainder}. What is the dividend?`), options, answer, same(`$${divisor}\\cdot ${quotient}+${remainder}=${f(answer)}$`), true)
 }
 
 function remainderQuestion(random: Random, tier: Tier): NaturalsRaceQuestion | null {
@@ -241,7 +242,7 @@ function remainderQuestion(random: Random, tier: Tier): NaturalsRaceQuestion | n
         ...numbers([divisor - answer, answer + 1, answer + divisor], 'calculation')
     ])
     if (!options) return null
-    return question(2, 'remainder', say(`Zein da $${f(dividend)}\\mathbin{:}${divisor}$ zatiketaren hondarra?`, `¿Cuál es el resto de $${f(dividend)}\\mathbin{:}${divisor}$?`, `ما باقي القسمة $${f(dividend)}\\mathbin{:}${divisor}$؟`), options, answer, same(`$${f(dividend)}=${divisor}\\cdot ${quotient}+${answer}$`), true)
+    return question(2, 'remainder', say(`Zein da $${f(dividend)}\\mathbin{:}${divisor}$ zatiketaren hondarra?`, `¿Cuál es el resto de $${f(dividend)}\\mathbin{:}${divisor}$?`, `ما باقي القسمة $${f(dividend)}\\mathbin{:}${divisor}$؟`, `What is the remainder of $${f(dividend)}\\mathbin{:}${divisor}$?`), options, answer, same(`$${f(dividend)}=${divisor}\\cdot ${quotient}+${answer}$`), true)
 }
 
 function mentalQuestion(random: Random, tier: Tier): NaturalsRaceQuestion | null {
@@ -256,7 +257,7 @@ function mentalQuestion(random: Random, tier: Tier): NaturalsRaceQuestion | null
     ])
     if (!options) return null
     const worked = factor === 9 ? `${n}\\cdot 9=${f(n * 10)}-${n}=${f(answer)}` : `${n}\\cdot 11=${f(n * 10)}+${n}=${f(answer)}`
-    return question(2, 'mental', say(`Kalkulatu buruz: $${n}\\cdot ${factor}$`, `Calcula mentalmente: $${n}\\cdot ${factor}$`, `احسب ذهنيًا: $${n}\\cdot ${factor}$`), options, answer, same(`$${worked}$`), true)
+    return question(2, 'mental', say(`Kalkulatu buruz: $${n}\\cdot ${factor}$`, `Calcula mentalmente: $${n}\\cdot ${factor}$`, `احسب ذهنيًا: $${n}\\cdot ${factor}$`, `Work out in your head: $${n}\\cdot ${factor}$`), options, answer, same(`$${worked}$`), true)
 }
 
 /* ---------- Circuit 3: order of operations and problems ---------- */
@@ -324,7 +325,7 @@ function problemQuestion(random: Random, tier: Tier): NaturalsRaceQuestion | nul
     return question(3, 'problem', say(
         `Furgoneta batek ${b} kiloko ${a} kutxa eta ${d} kiloko ${c} kutxa daramatza. Zenbat kilo guztira?`,
         `Una furgoneta lleva ${a} cajas de ${b} kilos y ${c} cajas de ${d} kilos. ¿Cuántos kilos en total?`,
-        `تنقل شاحنة صغيرة ${a} صناديق وزن كل منها ${b} كغ و${c} صناديق وزن كل منها ${d} كغ. كم كيلوغرامًا في المجموع؟`
+        `تنقل شاحنة صغيرة ${a} صناديق وزن كل منها ${b} كغ و${c} صناديق وزن كل منها ${d} كغ. كم كيلوغرامًا في المجموع؟`, `A van carries ${a} boxes of ${b} kilograms and ${c} boxes of ${d} kilograms. How many kilograms in total?`
     ), options, answer, same(`$${a}\\cdot ${b}+${c}\\cdot ${d}=${f(answer)}$`), true)
 }
 
@@ -368,7 +369,7 @@ function sameBaseQuestion(random: Random, tier: Tier): NaturalsRaceQuestion | nu
         { latex: `${base}^{${m + k + 1}}`, error: 'calculation' }
     ])
     if (!options) return null
-    return question(4, 'same-base', say(`Idatzi berretura bakar gisa: $${base}^{${m}}\\cdot ${base}^{${k}}$`, `Escribe como una sola potencia: $${base}^{${m}}\\cdot ${base}^{${k}}$`, `اكتب قوةً واحدة: $${base}^{${m}}\\cdot ${base}^{${k}}$`), options, answer, same(`$${base}^{${m}}\\cdot ${base}^{${k}}=${base}^{${m}+${k}}=${base}^{${m + k}}$`), false)
+    return question(4, 'same-base', say(`Idatzi berretura bakar gisa: $${base}^{${m}}\\cdot ${base}^{${k}}$`, `Escribe como una sola potencia: $${base}^{${m}}\\cdot ${base}^{${k}}$`, `اكتب قوةً واحدة: $${base}^{${m}}\\cdot ${base}^{${k}}$`, `Write as a single power: $${base}^{${m}}\\cdot ${base}^{${k}}$`), options, answer, same(`$${base}^{${m}}\\cdot ${base}^{${k}}=${base}^{${m}+${k}}=${base}^{${m + k}}$`), false)
 }
 
 /* ---------- Public API ---------- */
@@ -402,23 +403,23 @@ export function naturalsParTime(circuit: number): number {
 }
 
 export const naturalsRaceErrorTips: Record<NaturalsRaceError, LocalizedText> = {
-    'digit-only': say('Hori zifra da, ez bere balioa: begiratu zein posiziotan dagoen.', 'Esa es la cifra, no su valor: mira en qué posición está.', 'هذا هو الرقم لا قيمته: انظر في أي مرتبة يقع.'),
-    'wrong-place': say('Posizio bat gehiago edo gutxiago hartu duzu: zenbatu ordenak eskuinetik.', 'Te has movido una posición: cuenta los órdenes desde la derecha.', 'أخطأت بمرتبة واحدة: عدّ المراتب من اليمين.'),
-    'missing-zeros': say('Zeroak ere zenbatzen dira: posizio hutsek 0 bat behar dute.', 'Los ceros también cuentan: los huecos llevan un 0.', 'الأصفار مهمة أيضًا: المراتب الفارغة تحتاج 0.'),
-    order: say('Lehenik zifra kopurua; gero, ezkerretik lehen zifra desberdina.', 'Primero el número de cifras; luego, la primera cifra distinta por la izquierda.', 'أولًا عدد الأرقام، ثم أول رقم مختلف من اليسار.'),
-    'roman-subtract': say('Ikur txiki bat handiago baten aurretik badago, kendu egiten da (IV = 4), ez batu.', 'Un símbolo pequeño delante de uno mayor se resta (IV = 4), no se suma.', 'الرمز الصغير قبل رمز أكبر يُطرح (IV = 4) ولا يُجمع.'),
-    'rounding-direction': say('Begiratu eskuineko zifrari: 5etik 9ra gora, 0tik 4ra behera.', 'Mira la cifra de la derecha: de 5 a 9 hacia arriba, de 0 a 4 hacia abajo.', 'انظر إلى الرقم الذي على اليمين: من 5 إلى 9 نرفع، ومن 0 إلى 4 نُبقي.'),
-    'kept-digits': say('Biribiltzean, eskuineko zifra guztiak zero bihurtzen dira.', 'Al redondear, todas las cifras de la derecha pasan a ser ceros.', 'عند التقريب تصبح كل الأرقام التي على اليمين أصفارًا.'),
-    inverse: say('Alderantzizko eragiketa behar da: kenketa batuketarekin egiaztatzen da, eta alderantziz.', 'Hace falta la operación inversa: la resta se comprueba con una suma, y al revés.', 'نحتاج العملية العكسية: نتحقق من الطرح بالجمع، والعكس.'),
-    'forgot-remainder': say('Ez ahaztu hondarra: zatikizuna = zatitzailea · zatidura + hondarra.', 'No olvides el resto: D = d · c + r.', 'لا تنسَ الباقي: المقسوم = المقسوم عليه × الخارج + الباقي.'),
-    'quotient-not-remainder': say('Hori zatidura da. Hondarra soberan geratzen dena da.', 'Ese es el cociente. El resto es lo que sobra.', 'هذا خارج القسمة. الباقي هو ما يتبقى.'),
-    'nine-eleven': say('9z: 10ez biderkatu eta kendu. 11z: 10ez biderkatu eta batu.', 'Por 9: multiplica por 10 y resta. Por 11: multiplica por 10 y suma.', 'في 9: اضرب في 10 واطرح. في 11: اضرب في 10 وأضف.'),
-    'left-to-right': say('Ezkerretik eskuinera egin duzu. Semaforoa: biderketak eta zatiketak lehenik.', 'Lo has hecho de izquierda a derecha. Semáforo: primero multiplicaciones y divisiones.', 'حسبت من اليسار إلى اليمين. إشارة المرور: الضرب والقسمة أولًا.'),
-    'ignored-brackets': say('Parentesiak ahaztu dituzu: gorria lehenik, barrukoa egin behar da hasieran.', 'Te has saltado los paréntesis: el rojo va primero.', 'تجاهلت الأقواس: الأحمر أولًا.'),
-    'wrong-operation': say('Idatzi datuak eta pentsatu: zer biderkatu behar da zerekin?', 'Escribe los datos y piensa: ¿qué hay que multiplicar por qué?', 'اكتب المعطيات وفكّر: ماذا نضرب في ماذا؟'),
-    'power-times': say('Berretura ez da oinarria bider berretzailea: $2^{3}=2\\cdot 2\\cdot 2=8$.', 'Una potencia no es base por exponente: $2^{3}=2\\cdot 2\\cdot 2=8$.', 'القوة ليست الأساس ضرب الأس: $2^{3}=2\\cdot 2\\cdot 2=8$.'),
-    'swapped-base': say('Oinarria eta berretzailea trukatu dituzu: $2^{3}=8$ baina $3^{2}=9$.', 'Has cambiado base y exponente: $2^{3}=8$ pero $3^{2}=9$.', 'بدّلت الأساس والأس: $2^{3}=8$ لكن $3^{2}=9$.'),
-    zeros: say('10en berretura batek berretzaileak adina zero ditu.', 'Una potencia de 10 tiene tantos ceros como indica el exponente.', 'قوة العدد 10 فيها أصفار بعدد الأس.'),
-    'multiplied-exponents': say('Oinarri bereko berreturak biderkatzean, berretzaileak batu egiten dira, ez biderkatu.', 'Al multiplicar potencias de la misma base, los exponentes se suman, no se multiplican.', 'عند ضرب قوى لها الأساس نفسه تُجمع الأسس ولا تُضرب.'),
-    calculation: say('Metodoa ondo dago, baina kalkuluan akats bat dago. Egin berriro poliki.', 'El método está bien, pero hay un error de cálculo. Hazlo otra vez despacio.', 'الطريقة صحيحة لكن في الحساب خطأ. أعده ببطء.')
+    'digit-only': say('Hori zifra da, ez bere balioa: begiratu zein posiziotan dagoen.', 'Esa es la cifra, no su valor: mira en qué posición está.', 'هذا هو الرقم لا قيمته: انظر في أي مرتبة يقع.', 'That is the digit, not its value: check which place it is in.'),
+    'wrong-place': say('Posizio bat gehiago edo gutxiago hartu duzu: zenbatu ordenak eskuinetik.', 'Te has movido una posición: cuenta los órdenes desde la derecha.', 'أخطأت بمرتبة واحدة: عدّ المراتب من اليمين.', 'You have moved one place: count the places from the right.'),
+    'missing-zeros': say('Zeroak ere zenbatzen dira: posizio hutsek 0 bat behar dute.', 'Los ceros también cuentan: los huecos llevan un 0.', 'الأصفار مهمة أيضًا: المراتب الفارغة تحتاج 0.', 'Zeros count too: empty places need a 0.'),
+    order: say('Lehenik zifra kopurua; gero, ezkerretik lehen zifra desberdina.', 'Primero el número de cifras; luego, la primera cifra distinta por la izquierda.', 'أولًا عدد الأرقام، ثم أول رقم مختلف من اليسار.', 'First the number of digits; then the first digit from the left that is not zero.'),
+    'roman-subtract': say('Ikur txiki bat handiago baten aurretik badago, kendu egiten da (IV = 4), ez batu.', 'Un símbolo pequeño delante de uno mayor se resta (IV = 4), no se suma.', 'الرمز الصغير قبل رمز أكبر يُطرح (IV = 4) ولا يُجمع.', 'A smaller symbol in front of a larger one is subtracted (IV = 4), not added.'),
+    'rounding-direction': say('Begiratu eskuineko zifrari: 5etik 9ra gora, 0tik 4ra behera.', 'Mira la cifra de la derecha: de 5 a 9 hacia arriba, de 0 a 4 hacia abajo.', 'انظر إلى الرقم الذي على اليمين: من 5 إلى 9 نرفع، ومن 0 إلى 4 نُبقي.', 'Look at the digit on the right: from 5 to 9, round up; from 0 to 4, round down.'),
+    'kept-digits': say('Biribiltzean, eskuineko zifra guztiak zero bihurtzen dira.', 'Al redondear, todas las cifras de la derecha pasan a ser ceros.', 'عند التقريب تصبح كل الأرقام التي على اليمين أصفارًا.', 'When you round, all the digits on the right become zeros.'),
+    inverse: say('Alderantzizko eragiketa behar da: kenketa batuketarekin egiaztatzen da, eta alderantziz.', 'Hace falta la operación inversa: la resta se comprueba con una suma, y al revés.', 'نحتاج العملية العكسية: نتحقق من الطرح بالجمع، والعكس.', 'You need the inverse operation: check subtraction with addition, and the other way round.'),
+    'forgot-remainder': say('Ez ahaztu hondarra: zatikizuna = zatitzailea · zatidura + hondarra.', 'No olvides el resto: D = d · c + r.', 'لا تنسَ الباقي: المقسوم = المقسوم عليه × الخارج + الباقي.', 'Don\'t forget the remainder: D = d · c + r.'),
+    'quotient-not-remainder': say('Hori zatidura da. Hondarra soberan geratzen dena da.', 'Ese es el cociente. El resto es lo que sobra.', 'هذا خارج القسمة. الباقي هو ما يتبقى.', 'That is the quotient. The remainder is what is left over.'),
+    'nine-eleven': say('9z: 10ez biderkatu eta kendu. 11z: 10ez biderkatu eta batu.', 'Por 9: multiplica por 10 y resta. Por 11: multiplica por 10 y suma.', 'في 9: اضرب في 10 واطرح. في 11: اضرب في 10 وأضف.', 'To multiply by 9, multiply by 10 and subtract the number. To multiply by 11, multiply by 10 and add the number.'),
+    'left-to-right': say('Ezkerretik eskuinera egin duzu. Semaforoa: biderketak eta zatiketak lehenik.', 'Lo has hecho de izquierda a derecha. Semáforo: primero multiplicaciones y divisiones.', 'حسبت من اليسار إلى اليمين. إشارة المرور: الضرب والقسمة أولًا.', 'You worked from left to right. Traffic lights: multiplications and divisions first.'),
+    'ignored-brackets': say('Parentesiak ahaztu dituzu: gorria lehenik, barrukoa egin behar da hasieran.', 'Te has saltado los paréntesis: el rojo va primero.', 'تجاهلت الأقواس: الأحمر أولًا.', 'You skipped the brackets: the red one goes first.'),
+    'wrong-operation': say('Idatzi datuak eta pentsatu: zer biderkatu behar da zerekin?', 'Escribe los datos y piensa: ¿qué hay que multiplicar por qué?', 'اكتب المعطيات وفكّر: ماذا نضرب في ماذا؟', 'Write down the data and think: what has to be multiplied by what?'),
+    'power-times': say('Berretura ez da oinarria bider berretzailea: $2^{3}=2\\cdot 2\\cdot 2=8$.', 'Una potencia no es base por exponente: $2^{3}=2\\cdot 2\\cdot 2=8$.', 'القوة ليست الأساس ضرب الأس: $2^{3}=2\\cdot 2\\cdot 2=8$.', 'A power is not base times exponent: $2^{3}=2\\cdot 2\\cdot 2=8$.'),
+    'swapped-base': say('Oinarria eta berretzailea trukatu dituzu: $2^{3}=8$ baina $3^{2}=9$.', 'Has cambiado base y exponente: $2^{3}=8$ pero $3^{2}=9$.', 'بدّلت الأساس والأس: $2^{3}=8$ لكن $3^{2}=9$.', 'You have swapped the base and the exponent: $2^{3}=8$ but $3^{2}=9$.'),
+    zeros: say('10en berretura batek berretzaileak adina zero ditu.', 'Una potencia de 10 tiene tantos ceros como indica el exponente.', 'قوة العدد 10 فيها أصفار بعدد الأس.', 'A power of 10 has as many zeros as its exponent.'),
+    'multiplied-exponents': say('Oinarri bereko berreturak biderkatzean, berretzaileak batu egiten dira, ez biderkatu.', 'Al multiplicar potencias de la misma base, los exponentes se suman, no se multiplican.', 'عند ضرب قوى لها الأساس نفسه تُجمع الأسس ولا تُضرب.', 'When you multiply powers with the same base, the exponents are added, not multiplied.'),
+    calculation: say('Metodoa ondo dago, baina kalkuluan akats bat dago. Egin berriro poliki.', 'El método está bien, pero hay un error de cálculo. Hazlo otra vez despacio.', 'الطريقة صحيحة لكن في الحساب خطأ. أعده ببطء.', 'Your method is right, but there is a calculation error. Do it again slowly.')
 }

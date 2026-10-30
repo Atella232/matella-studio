@@ -36,7 +36,7 @@ export function ProbabilityAkLaboratory(props: {
             tools={probabilityAkLabTools}
             stages={probabilityAkStages}
             components={toolComponents}
-            title={{ eu: 'Bota, zenbatu eta erabaki', es: 'Lanza, cuenta y decide', ar: 'ارمِ وعُدّ وقرّر' }}
+            title={{ eu: 'Bota, zenbatu eta erabaki', es: 'Lanza, cuenta y decide', en: 'Roll, count and decide', ar: 'ارمِ وعُدّ وقرّر' }}
         />
     )
 }

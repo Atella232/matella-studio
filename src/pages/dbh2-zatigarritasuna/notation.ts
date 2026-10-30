@@ -8,5 +8,6 @@ import type { LocalizedText } from '../../features/unit-v2/types.ts'
 export function notation(latex: string): LocalizedText {
     const basque = latex.replace(/@DIV/g, '\\mathrm{Zat}').replace(/@GCD/g, '\\mathrm{ZKH}').replace(/@LCM/g, '\\mathrm{MKT}')
     const spanish = latex.replace(/@DIV/g, '\\mathrm{Div}').replace(/@GCD/g, '\\text{m.c.d.}').replace(/@LCM/g, '\\text{m.c.m.}')
-    return { eu: basque, es: spanish, ar: basque }
+    const english = latex.replace(/@DIV/g, '\\mathrm{Div}').replace(/@GCD/g, '\\text{GCD}').replace(/@LCM/g, '\\text{LCM}')
+    return { eu: basque, es: spanish, en: english, ar: basque }
 }

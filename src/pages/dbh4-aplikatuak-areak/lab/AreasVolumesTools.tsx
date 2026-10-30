@@ -3,6 +3,7 @@ import { MathText } from '../../../components/MathText'
 import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import {
     apothemHundredths,
     arcHundredths,
@@ -46,7 +47,7 @@ import {
    language-free; numbers in Arabic use the decimal point.
    ========================================================================== */
 
-type Text = { eu: string; es: string; ar: string }
+type Text = { eu: string; es: string; en: string; ar: string }
 type Point = [number, number]
 
 const INK = 'var(--ink, #1d2733)'
@@ -59,13 +60,13 @@ const SOFT = '#fbebc0'
 const ROSE = '#f6d9d2'
 const MINT = '#d6eddf'
 
-const say = (eu: string, es: string, ar: string): Text => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): Text => ({ eu, es, en, ar })
 /** {,} in LaTeX becomes the point in Arabic */
 const localLatex = (language: string, latex: string) => (language === 'ar' ? latex.replace(/\{,\}/g, '.') : latex)
 /** A decimal with the comma, ready for LaTeX */
 const tex = (decimal: string) => decimal.replace(',', '{,}')
-/** A decimal with the comma for plain text, the point in Arabic */
-const plain = (language: string, decimal: string) => (language === 'ar' ? decimal.replace(',', '.') : decimal)
+/** A decimal with the comma for plain text, the point in Arabic and English */
+const plain = (language: string, decimal: string) => decimal.replace(',', language === 'ar' ? '.' : decimalSeparatorFor(language))
 const points = (list: Point[]) => list.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ')
 const rad = (degrees: number) => (degrees * Math.PI) / 180
 
@@ -108,19 +109,19 @@ export function ArcTool(props: LabToolProps) {
     const barX = 320
     const controls = (
         <>
-            <Stepper label={l(say('Erradioa (cm)', 'Radio (cm)', 'نصف القطر (سم)'))} value={r} min={1} max={CIRCLE_RADIUS_MAX} onChange={(value) => setState((s) => setCircle(s, { r: value }))} language={props.language} />
-            <Stepper label={l(say('Angelua', 'Ángulo', 'الزاوية'))} value={angle} min={ARC_STEP} max={360} step={ARC_STEP} format={(value) => `${value}°`} onChange={(value) => setState((s) => setCircle(s, { angle: value }))} language={props.language} />
+            <Stepper label={l(say('Erradioa (cm)', 'Radio (cm)', 'نصف القطر (سم)', 'Radius (cm)'))} value={r} min={1} max={CIRCLE_RADIUS_MAX} onChange={(value) => setState((s) => setCircle(s, { r: value }))} language={props.language} />
+            <Stepper label={l(say('Angelua', 'Ángulo', 'الزاوية', 'Angle'))} value={angle} min={ARC_STEP} max={360} step={ARC_STEP} format={(value) => `${value}°`} onChange={(value) => setState((s) => setCircle(s, { angle: value }))} language={props.language} />
         </>
     )
     const latex = `L=2\\cdot 3{,}14\\cdot ${r}=${tex(hundredthsText(whole))}\\qquad \\frac{${tex(hundredthsText(whole))}\\cdot ${angle}}{360}${arc.exact ? '=' : '\\approx '}${tex(hundredthsText(arc.value))}`
     const note = l(say(
         `${angle}°-ko arkua zirkunferentziaren ${angle}/360 da: ${hundredthsText(arc.value)} cm.`,
         `El arco de ${angle}° es ${angle}/360 de la circunferencia: ${hundredthsText(arc.value)} cm.`,
-        `قوس ${angle}° هو ${angle}/360 من الدائرة: ${plain('ar', hundredthsText(arc.value))} سم.`
+        `قوس ${angle}° هو ${angle}/360 من الدائرة: ${plain('ar', hundredthsText(arc.value))} سم.`, `The arc of ${angle}° is ${angle}/360 of the circumference: ${plain('en', hundredthsText(arc.value))} cm.`
     ))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={circleChallenges} state={state}>
-            <Board height={330} label={l(say('Zirkunferentzia eta arkua', 'Circunferencia y arco', 'الدائرة والقوس'))}>
+            <Board height={330} label={l(say('Zirkunferentzia eta arkua', 'Circunferencia y arco', 'الدائرة والقوس', 'Circumference and arc'))}>
                 <circle cx={cx} cy={cy} r={R} fill={PAPER} stroke={MUTED} strokeWidth={2} strokeDasharray={angle === 360 ? undefined : '6 5'} />
                 {sector}
                 <path d={arcPath} fill="none" stroke={SECOND} strokeWidth={6} strokeLinecap="round" />
@@ -130,10 +131,10 @@ export function ArcTool(props: LabToolProps) {
                 <Tag x={cx + R / 2} y={cy + 22}>{`r = ${r}`}</Tag>
                 {angle !== 360 && <Tag x={cx + 34 * Math.cos(rad(angle / 2))} y={cy - 34 * Math.sin(rad(angle / 2)) + 5} size={14} color={SECOND}>{`${angle}°`}</Tag>}
 
-                <Tag x={barX} y={104} anchor="start" size={14} color={MUTED}>{l(say('Zirkunferentzia', 'Circunferencia', 'الدائرة'))}</Tag>
+                <Tag x={barX} y={104} anchor="start" size={14} color={MUTED}>{l(say('Zirkunferentzia', 'Circunferencia', 'الدائرة', 'Circumference'))}</Tag>
                 <rect x={barX} y={114} width={Math.max(2, whole * scale)} height={16} rx={4} fill={STAGE_TINT} stroke={STAGE} strokeWidth={1.6} />
                 <Tag x={barX} y={152} anchor="start" size={15} color={STAGE}>{`${plain(props.language, hundredthsText(whole))} cm`}</Tag>
-                <Tag x={barX} y={194} anchor="start" size={14} color={MUTED}>{l(say('Arkua', 'Arco', 'القوس'))}</Tag>
+                <Tag x={barX} y={194} anchor="start" size={14} color={MUTED}>{l(say('Arkua', 'Arco', 'القوس', 'Arc'))}</Tag>
                 <rect x={barX} y={204} width={Math.max(2, arc.value * scale)} height={16} rx={4} fill={SECOND} fillOpacity={0.3} stroke={SECOND} strokeWidth={1.6} />
                 <Tag x={barX} y={242} anchor="start" size={15} color={SECOND}>{`${arc.exact ? '' : '≈ '}${plain(props.language, hundredthsText(arc.value))} cm`}</Tag>
             </Board>
@@ -161,8 +162,8 @@ export function RegularTool(props: LabToolProps) {
     const foot: Point = [(vertices[n - 1][0] + vertices[0][0]) / 2, (vertices[n - 1][1] + vertices[0][1]) / 2]
     const controls = (
         <>
-            <Stepper label={l(say('Alde kopurua', 'Número de lados', 'عدد الأضلاع'))} value={n} min={REGULAR_MIN} max={REGULAR_MAX} onChange={(value) => setState((s) => setRegular(s, { n: value }))} language={props.language} />
-            <Stepper label={l(say('Aldea (cm)', 'Lado (cm)', 'الضلع (سم)'))} value={side} min={1} max={REGULAR_SIDE_MAX} onChange={(value) => setState((s) => setRegular(s, { side: value }))} language={props.language} />
+            <Stepper label={l(say('Alde kopurua', 'Número de lados', 'عدد الأضلاع', 'Number of sides'))} value={n} min={REGULAR_MIN} max={REGULAR_MAX} onChange={(value) => setState((s) => setRegular(s, { n: value }))} language={props.language} />
+            <Stepper label={l(say('Aldea (cm)', 'Lado (cm)', 'الضلع (سم)', 'Side (cm)'))} value={side} min={1} max={REGULAR_SIDE_MAX} onChange={(value) => setState((s) => setRegular(s, { side: value }))} language={props.language} />
         </>
     )
     const aText = tex(hundredthsText(a.value))
@@ -170,11 +171,11 @@ export function RegularTool(props: LabToolProps) {
     const note = l(say(
         `${n} triangelu berdin, bakoitza ${side} · a / 2. Perimetroa: ${perimeter} cm.`,
         `${n} triángulos iguales, cada uno ${side} · a / 2. Perímetro: ${perimeter} cm.`,
-        `${n} مثلثات متطابقة، كل منها ${side} · a / 2. المحيط: ${perimeter} سم.`
+        `${n} مثلثات متطابقة، كل منها ${side} · a / 2. المحيط: ${perimeter} سم.`, `${n} equal triangles, each one ${side} · a / 2. Perimeter: ${perimeter} cm.`
     ))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={regularChallenges} state={state}>
-            <Board height={330} label={l(say('Poligono erregularra triangelutan', 'El polígono regular en triángulos', 'المضلع المنتظم مقسّمًا إلى مثلثات'))}>
+            <Board height={330} label={l(say('Poligono erregularra triangelutan', 'El polígono regular en triángulos', 'المضلع المنتظم مقسّمًا إلى مثلثات', 'The regular polygon split into triangles'))}>
                 {vertices.map((vertex, index) => {
                     const next = vertices[(index + 1) % n]
                     return <polygon key={index} points={points([[cx, cy], vertex, next])} fill={index === n - 1 ? ROSE : index % 2 ? STAGE_TINT : PAPER} stroke={MUTED} strokeWidth={1.2} />
@@ -196,9 +197,9 @@ export function RegularTool(props: LabToolProps) {
 /* ---------- 3. Compound solids ---------- */
 
 const capNames: Record<Cap, Text> = {
-    none: say('Ezer ez', 'Nada', 'لا شيء'),
-    cone: say('Konoa', 'Cono', 'مخروط'),
-    hemisphere: say('Esfera-erdia', 'Semiesfera', 'نصف كرة')
+    none: say('Ezer ez', 'Nada', 'لا شيء', 'Nothing'),
+    cone: say('Konoa', 'Cono', 'مخروط', 'Cone'),
+    hemisphere: say('Esfera-erdia', 'Semiesfera', 'نصف كرة', 'Hemisphere')
 }
 
 /** One part of the volume as LaTeX, in terms of π */
@@ -236,20 +237,20 @@ export function CompoundTool(props: LabToolProps) {
         : `V=${parts.map((part) => partLatex(state, part)).join('+')}\\qquad =${amount}${volume.exact ? '=' : '\\approx '}${tex(hundredthsText(volume.value))}`
     const pieces = parts.map((part) => `${hundredthsText(Math.round((314 * partThirds(state, part)) / 3))}`).join(' + ')
     const note = compoundIsEmpty(state)
-        ? l(say('Gehitu zilindro bat edo mutur bat.', 'Añade un cilindro o un extremo.', 'أضف أسطوانة أو طرفًا.'))
-        : l(say(`Zatiak: ${pieces}. Guztira ${hundredthsText(volume.value)} cm³ = ${hundredthsText(volume.value)} mL.`, `Partes: ${pieces}. Total ${hundredthsText(volume.value)} cm³ = ${hundredthsText(volume.value)} mL.`, `الأجزاء: ${pieces.replace(/,/g, '.')}. المجموع ${plain('ar', hundredthsText(volume.value))} سم³ = ${plain('ar', hundredthsText(volume.value))} مل.`))
+        ? l(say('Gehitu zilindro bat edo mutur bat.', 'Añade un cilindro o un extremo.', 'أضف أسطوانة أو طرفًا.', 'Add a cylinder or an end.'))
+        : l(say(`Zatiak: ${pieces}. Guztira ${hundredthsText(volume.value)} cm³ = ${hundredthsText(volume.value)} mL.`, `Partes: ${pieces}. Total ${hundredthsText(volume.value)} cm³ = ${hundredthsText(volume.value)} mL.`, `الأجزاء: ${pieces.replace(/,/g, '.')}. المجموع ${plain('ar', hundredthsText(volume.value))} سم³ = ${plain('ar', hundredthsText(volume.value))} مل.`, `Parts: ${pieces.replace(/,/g, '.')}. Total ${plain('en', hundredthsText(volume.value))} cm³ = ${plain('en', hundredthsText(volume.value))} mL.`))
     const controls = (
         <>
-            <Stepper label={l(say('Erradioa', 'Radio', 'نصف القطر'))} value={r} min={1} max={COMPOUND_RADIUS_MAX} onChange={(value) => setState((current) => setCompound(current, { r: value }))} language={props.language} />
-            <Stepper label={l(say('Zilindroaren altuera', 'Altura del cilindro', 'ارتفاع الأسطوانة'))} value={h} min={0} max={COMPOUND_HEIGHT_MAX} onChange={(value) => setState((current) => setCompound(current, { h: value }))} language={props.language} />
-            <Segmented label={l(say('Goian', 'Arriba', 'في الأعلى'))} value={top} options={CAPS.map((value) => ({ value, label: l(capNames[value]) }))} onChange={(value) => setState((current) => setCompound(current, { top: value }))} />
-            <Segmented label={l(say('Behean', 'Abajo', 'في الأسفل'))} value={bottom} options={CAPS.map((value) => ({ value, label: l(capNames[value]) }))} onChange={(value) => setState((current) => setCompound(current, { bottom: value }))} />
-            {(top === 'cone' || bottom === 'cone') && <Stepper label={l(say('Konoaren altuera', 'Altura del cono', 'ارتفاع المخروط'))} value={k} min={1} max={CONE_HEIGHT_MAX} onChange={(value) => setState((current) => setCompound(current, { k: value }))} language={props.language} />}
+            <Stepper label={l(say('Erradioa', 'Radio', 'نصف القطر', 'Radius'))} value={r} min={1} max={COMPOUND_RADIUS_MAX} onChange={(value) => setState((current) => setCompound(current, { r: value }))} language={props.language} />
+            <Stepper label={l(say('Zilindroaren altuera', 'Altura del cilindro', 'ارتفاع الأسطوانة', 'Height of the cylinder'))} value={h} min={0} max={COMPOUND_HEIGHT_MAX} onChange={(value) => setState((current) => setCompound(current, { h: value }))} language={props.language} />
+            <Segmented label={l(say('Goian', 'Arriba', 'في الأعلى', 'Top'))} value={top} options={CAPS.map((value) => ({ value, label: l(capNames[value]) }))} onChange={(value) => setState((current) => setCompound(current, { top: value }))} />
+            <Segmented label={l(say('Behean', 'Abajo', 'في الأسفل', 'Bottom'))} value={bottom} options={CAPS.map((value) => ({ value, label: l(capNames[value]) }))} onChange={(value) => setState((current) => setCompound(current, { bottom: value }))} />
+            {(top === 'cone' || bottom === 'cone') && <Stepper label={l(say('Konoaren altuera', 'Altura del cono', 'ارتفاع المخروط', 'Height of the cone'))} value={k} min={1} max={CONE_HEIGHT_MAX} onChange={(value) => setState((current) => setCompound(current, { k: value }))} language={props.language} />}
         </>
     )
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={compoundChallenges} state={state}>
-            <Board height={330} label={l(say('Gorputz konposatua aurretik ikusita', 'El cuerpo compuesto visto de frente', 'الجسم المركّب من الأمام'))}>
+            <Board height={330} label={l(say('Gorputz konposatua aurretik ikusita', 'El cuerpo compuesto visto de frente', 'الجسم المركّب من الأمام', 'The composite solid seen from the front'))}>
                 {compoundIsEmpty(state) ? (
                     <Tag x={320} y={170} size={18} color={MUTED}>V = 0</Tag>
                 ) : (

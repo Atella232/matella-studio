@@ -150,21 +150,22 @@ export function ProportionDbh4ApMixGame({ language, records, onResult, onExit }:
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${record.score} / ${MIX_ROUNDS * MIX_TRIES}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${record.score} / ${MIX_ROUNDS * MIX_TRIES}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: 'Balantzaren euskarria eskatzen duten prezioan dago, eta produktu bakoitza bere prezioan.', es: 'El balancín tiene el apoyo en el precio que te piden, y cada producto en su precio.', ar: 'نقطة ارتكاز الميزان عند السعر المطلوب، وكل منتج عند سعره.' })}</li>
+                        <li>{l({ eu: 'Balantzaren euskarria eskatzen duten prezioan dago, eta produktu bakoitza bere prezioan.', es: 'El balancín tiene el apoyo en el precio que te piden, y cada producto en su precio.', en: 'The balance pivots at the price you are asked for, and each product sits at its own price.', ar: 'نقطة ارتكاز الميزان عند السعر المطلوب، وكل منتج عند سعره.' })}</li>
                         <li>
                             <MathText
                                 inline
                                 text={l({
                                     eu: 'Zuzen geratzen da kiloak bider distantzia berdina denean bi aldeetan: $6\\cdot 2=4\\cdot 3$. Bestela, astunenaren aldera erortzen da.',
                                     es: 'Queda recto cuando kilos por distancia es igual a los dos lados: $6\\cdot 2=4\\cdot 3$. Si no, cae hacia el lado que pesa más.',
+                                    en: 'It stays level when kilos times distance is equal on both sides: $6\\cdot 2=4\\cdot 3$. Otherwise, it tips towards the heavier side.',
                                     ar: 'يبقى مستويًا عندما تتساوى الكيلوغرامات في المسافة في الجهتين: $6\\cdot 2=4\\cdot 3$. وإلا يميل نحو الجهة الأثقل.'
                                 })}
                             />
                         </li>
-                        <li>{l({ eu: `${MIX_ROUNDS} txanda eta ${MIX_TRIES} saiakera bakoitzean: 3 puntu lehenengoan, 2 bigarrenean, 1 hirugarrenean.`, es: `${MIX_ROUNDS} rondas y ${MIX_TRIES} intentos en cada una: 3 puntos a la primera, 2 a la segunda y 1 a la tercera.`, ar: `${MIX_ROUNDS} جولات و${MIX_TRIES} محاولات في كل جولة: 3 نقاط من المحاولة الأولى، و2 من الثانية، و1 من الثالثة.` })}</li>
+                        <li>{l({ eu: `${MIX_ROUNDS} txanda eta ${MIX_TRIES} saiakera bakoitzean: 3 puntu lehenengoan, 2 bigarrenean, 1 hirugarrenean.`, es: `${MIX_ROUNDS} rondas y ${MIX_TRIES} intentos en cada una: 3 puntos a la primera, 2 a la segunda y 1 a la tercera.`, en: `${MIX_ROUNDS} rounds and ${MIX_TRIES} attempts in each one: 3 points for the first attempt, 2 for the second and 1 for the third.`, ar: `${MIX_ROUNDS} جولات و${MIX_TRIES} محاولات في كل جولة: 3 نقاط من المحاولة الأولى، و2 من الثانية، و1 من الثالثة.` })}</li>
                     </ul>
                 )}
             />
@@ -179,10 +180,10 @@ export function ProportionDbh4ApMixGame({ language, records, onResult, onExit }:
                     language={language}
                     stars={mixStars(total)}
                     title={`${total} / ${MIX_ROUNDS * MIX_TRIES}`}
-                    subtitle={l({ eu: '3 izar: 13 puntu · 2 izar: 10 · izar 1: 6', es: '3 estrellas: 13 puntos · 2: 10 · 1: 6', ar: '3 نجوم: 13 نقطة · 2: 10 · 1: 6' })}
+                    subtitle={l({ eu: '3 izar: 13 puntu · 2 izar: 10 · izar 1: 6', es: '3 estrellas: 13 puntos · 2: 10 · 1: 6', en: '3 stars: 13 points · 2: 10 · 1: 6', ar: '3 نجوم: 13 نقطة · 2: 10 · 1: 6' })}
                     stats={[
-                        { label: l({ eu: 'Lehenengoan', es: 'A la primera', ar: 'من المحاولة الأولى' }), value: `${points.filter((value) => value === MIX_TRIES).length} / ${MIX_ROUNDS}` },
-                        { label: l({ eu: 'Nahasketa perfektuak', es: 'Mezclas perfectas', ar: 'خلائط مثالية' }), value: `${points.filter((value) => value > 0).length} / ${MIX_ROUNDS}` }
+                        { label: l({ eu: 'Lehenengoan', es: 'A la primera', en: 'First attempt', ar: 'من المحاولة الأولى' }), value: `${points.filter((value) => value === MIX_TRIES).length} / ${MIX_ROUNDS}` },
+                        { label: l({ eu: 'Nahasketa perfektuak', es: 'Mezclas perfectas', en: 'Perfect mixtures', ar: 'خلائط مثالية' }), value: `${points.filter((value) => value > 0).length} / ${MIX_ROUNDS}` }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}
@@ -230,7 +231,7 @@ export function ProportionDbh4ApMixGame({ language, records, onResult, onExit }:
         <div className="mix-game" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span>{index + 1} / {MIX_ROUNDS}</span>
-                <span><strong>{counted}</strong> {l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}</span>
+                <span><strong>{counted}</strong> {l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}</span>
             </GameTopbar>
 
             <div className="mix-target">
@@ -239,7 +240,7 @@ export function ProportionDbh4ApMixGame({ language, records, onResult, onExit }:
                 <p>{l(mixTask(round))}</p>
             </div>
 
-            <svg className="mix-board" viewBox="0 0 360 222" direction="ltr" role="img" aria-label={l(gold ? { eu: 'Bi urre-zati balantza batean', es: 'Dos trozos de oro en un balancín', ar: 'قطعتا ذهب على ميزان' } : { eu: 'Bi produktu balantza batean', es: 'Dos productos en un balancín', ar: 'منتجان على ميزان' })}>
+            <svg className="mix-board" viewBox="0 0 360 222" direction="ltr" role="img" aria-label={l(gold ? { eu: 'Bi urre-zati balantza batean', es: 'Dos trozos de oro en un balancín', en: 'Two pieces of gold on a balance', ar: 'قطعتا ذهب على ميزان' } : { eu: 'Bi produktu balantza batean', es: 'Dos productos en un balancín', en: 'Two products on a balance', ar: 'منتجان على ميزان' })}>
                 <line x1={14} x2={346} y1={GROUND} y2={GROUND} stroke="var(--line, #d8d2c4)" strokeWidth={2} />
                 {/* Two blocks hold the beam level until it is let go */}
                 {!showingLast && [CX - HALF + 6, CX + HALF - 6].map((x) => <rect key={x} x={x - 5} y={BEAM_Y + 3} width={10} height={GROUND - BEAM_Y - 3} fill="var(--paper-deep, #ece6da)" stroke={INK} strokeWidth={1.2} />)}
@@ -276,7 +277,7 @@ export function ProportionDbh4ApMixGame({ language, records, onResult, onExit }:
                         <span className="mix-side-value">{valueText(round, round.values[product], language)}</span>
                         <strong className="mix-side-amount">{amountText(round, amounts[product], language)}</strong>
                         {fixedSide === product
-                            ? <span className="mix-side-state">{l({ eu: 'dagoeneko', es: 'ya está', ar: 'موجود' })}</span>
+                            ? <span className="mix-side-state">{l({ eu: 'dagoeneko', es: 'ya está', en: 'already added', ar: 'موجود' })}</span>
                             : (
                                 <span className="mix-steppers">
                                     <button type="button" disabled={locked || amounts[product] === 0} aria-label={`− ${valueText(round, round.values[product], language)}`} onClick={() => change(product, -1)}>−</button>
@@ -295,7 +296,7 @@ export function ProportionDbh4ApMixGame({ language, records, onResult, onExit }:
                 step={1}
                 value={setting}
                 disabled={locked}
-                aria-label={l(round.kind === 'total' ? { eu: 'Nola banatu', es: 'Cómo repartir', ar: 'كيف توزّع' } : { eu: 'Zenbat gehitu', es: 'Cuánto añadir', ar: 'كم تضيف' })}
+                aria-label={l(round.kind === 'total' ? { eu: 'Nola banatu', es: 'Cómo repartir', en: 'How to share', ar: 'كيف توزّع' } : { eu: 'Zenbat gehitu', es: 'Cuánto añadir', en: 'How much to add', ar: 'كم تضيف' })}
                 aria-valuetext={`${amountText(round, amounts[0], language)} · ${amountText(round, amounts[1], language)}`}
                 onChange={(event) => setSetting(Number(event.target.value))}
             />
@@ -303,14 +304,14 @@ export function ProportionDbh4ApMixGame({ language, records, onResult, onExit }:
             {!over && (
                 <div className="mix-actions">
                     <button type="button" className="fraction-v2-primary" disabled={mixing || incomplete || tried} onClick={pour}>
-                        {gold ? l({ eu: 'Urtu!', es: '¡Fundir!', ar: 'اصهر!' }) : l({ eu: 'Nahastu!', es: '¡Mezclar!', ar: 'اخلط!' })}
+                        {gold ? l({ eu: 'Urtu!', es: '¡Fundir!', en: 'Melt!', ar: 'اصهر!' }) : l({ eu: 'Nahastu!', es: '¡Mezclar!', en: 'Mix!', ar: 'اخلط!' })}
                     </button>
                     <span className="mix-tries">
                         {tried && !mixing
-                            ? l({ eu: 'Hori probatu duzu jada.', es: 'Eso ya lo has probado.', ar: 'جرّبت هذا من قبل.' })
+                            ? l({ eu: 'Hori probatu duzu jada.', es: 'Eso ya lo has probado.', en: 'You have already tried that.', ar: 'جرّبت هذا من قبل.' })
                             : incomplete
-                                ? l({ eu: 'Jarri bietatik.', es: 'Pon de los dos.', ar: 'ضع من الاثنين.' })
-                                : l({ eu: `Saiakera: ${attempt} / ${MIX_TRIES}`, es: `Intento ${attempt} de ${MIX_TRIES}`, ar: `المحاولة ${attempt} من ${MIX_TRIES}` })}
+                                ? l({ eu: 'Jarri bietatik.', es: 'Pon de los dos.', en: 'Add some of both.', ar: 'ضع من الاثنين.' })
+                                : l({ eu: `Saiakera: ${attempt} / ${MIX_TRIES}`, es: `Intento ${attempt} de ${MIX_TRIES}`, en: `Attempt ${attempt} of ${MIX_TRIES}`, ar: `المحاولة ${attempt} من ${MIX_TRIES}` })}
                     </span>
                 </div>
             )}
@@ -326,13 +327,13 @@ export function ProportionDbh4ApMixGame({ language, records, onResult, onExit }:
                             <MathText text={`$${localLatex(mixBalanceLatex(round), language)}$`} />
                         </>
                     )}
-                    {over && <p className="mix-points"><bdi dir="ltr">+{points[index] ?? 0}</bdi> {l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}</p>}
+                    {over && <p className="mix-points"><bdi dir="ltr">+{points[index] ?? 0}</bdi> {l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}</p>}
                 </div>
             )}
 
             {over && (
                 <button type="button" className="fraction-v2-primary mix-next" onClick={next} ref={(node) => node?.focus({ preventScroll: true })}>
-                    {index + 1 >= MIX_ROUNDS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', ar: 'التالي' })}
+                    {index + 1 >= MIX_ROUNDS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', en: 'See the result', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', en: 'Next', ar: 'التالي' })}
                 </button>
             )}
         </div>

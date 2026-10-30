@@ -20,6 +20,7 @@ export function TopicsPage() {
         switch (i18n.language) {
             case 'eu': return course.nameEu
             case 'ar': return course.nameAr
+            case 'en': return course.nameEn
             default: return course.name
         }
     }
@@ -28,6 +29,7 @@ export function TopicsPage() {
         switch (i18n.language) {
             case 'eu': return topic.nameEu
             case 'ar': return topic.nameAr
+            case 'en': return topic.nameEn
             default: return topic.name
         }
     }

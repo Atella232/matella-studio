@@ -13,8 +13,8 @@ const percentRace: RaceRules<PercentRaceError> = {
     parTime: percentParTime,
     errorTip: (error) => percentRaceErrorTips[error ?? 'calculation'],
     pitPlaceholder: () => '17,5',
-    pitUnreadable: { eu: 'Idatzi zenbaki bat, adibidez −3, 2,5 edo 3/2.', es: 'Escribe un número, por ejemplo −3, 2,5 o 3/2.', ar: 'اكتب عددًا، مثل ⁦−3⁩ أو 2.5 أو 3/2.' },
-    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', ar: 'اكتبه عددًا.' },
+    pitUnreadable: { eu: 'Idatzi zenbaki bat, adibidez −3, 2,5 edo 3/2.', es: 'Escribe un número, por ejemplo −3, 2,5 o 3/2.', en: 'Write a number, for example −3, 2.5 or 3/2.', ar: 'اكتب عددًا، مثل ⁦−3⁩ أو 2.5 أو 3/2.' },
+    pitWrongForm: { eu: 'Idatzi zenbaki gisa.', es: 'Escríbelo como número.', en: 'Write it as a number.', ar: 'اكتبه عددًا.' },
     figure: (question, language) => {
         const { line } = question as PercentRaceQuestion
         return line ? <div className="reals-race-line"><LineSpecFigure spec={line} language={language} /></div> : null

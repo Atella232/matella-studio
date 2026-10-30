@@ -150,7 +150,7 @@ export function receiptLatex(state: ReceiptState): string {
 
 /* ---------- Challenges ---------- */
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
 
 const has = (state: ReceiptState, values: Pick<ReceiptState, 'price' | 'discount' | 'vat' | 'coupon'>) =>
     state.price === values.price && state.discount === values.discount && state.vat === values.vat && state.coupon === values.coupon
@@ -162,9 +162,9 @@ export const receiptChallenges: LabChallenge<ReceiptState>[] = [
         prompt: say(
             'Motxila batek 80 € balio du BEZik gabe. Deskontua: % 20, eta gero BEZa gehitzen da (% 21). Prestatu tiketa eta idatzi guztira.',
             'Una mochila cuesta 80 € sin IVA. Tiene un 20 % de descuento y después se suma el 21 % de IVA. Prepara el tique y escribe el total.',
-            'حقيبة ثمنها 80 € دون ضريبة. عليها خصم 20٪ ثم تُضاف ضريبة 21٪. جهّز الإيصال واكتب المجموع.'
+            'حقيبة ثمنها 80 € دون ضريبة. عليها خصم 20٪ ثم تُضاف ضريبة 21٪. جهّز الإيصال واكتب المجموع.', 'A backpack costs €80 without VAT. It has a 20% discount, and then 21% VAT is added. Set up the receipt and write the total.'
         ),
-        hint: say('$80\\cdot 0{,}8\\cdot 1{,}21$', '$80\\cdot 0{,}8\\cdot 1{,}21$', '$80\\cdot 0{,}8\\cdot 1{,}21$'),
+        hint: say('$80\\cdot 0{,}8\\cdot 1{,}21$', '$80\\cdot 0{,}8\\cdot 1{,}21$', '$80\\cdot 0{,}8\\cdot 1{,}21$', '$80\\cdot 0{,}8\\cdot 1{,}21$'),
         isSolved: (state) => has(state, { price: 80, discount: 20, vat: 21, coupon: 0 }) && before(state, 'discount', 'vat') && receiptAnswered(state)
     },
     {
@@ -172,9 +172,9 @@ export const receiptChallenges: LabChallenge<ReceiptState>[] = [
         prompt: say(
             'Orain jarri lehenik BEZa eta gero deskontua. Aldatzen da guztira? Idatzi.',
             'Ahora pon primero el IVA y después el descuento. ¿Cambia el total? Escríbelo.',
-            'ضع الآن الضريبة أولًا ثم الخصم. هل يتغيّر المجموع؟ اكتبه.'
+            'ضع الآن الضريبة أولًا ثم الخصم. هل يتغيّر المجموع؟ اكتبه.', 'Now put the VAT first and then the discount. Does the total change? Write it down.'
         ),
-        hint: say('$80\\cdot 1{,}21\\cdot 0{,}8$: biderkagaien ordenak ez du biderkadura aldatzen.', '$80\\cdot 1{,}21\\cdot 0{,}8$: el orden de los factores no cambia el producto.', '$80\\cdot 1{,}21\\cdot 0{,}8$: ترتيب العوامل لا يغيّر الناتج.'),
+        hint: say('$80\\cdot 1{,}21\\cdot 0{,}8$: biderkagaien ordenak ez du biderkadura aldatzen.', '$80\\cdot 1{,}21\\cdot 0{,}8$: el orden de los factores no cambia el producto.', '$80\\cdot 1{,}21\\cdot 0{,}8$: ترتيب العوامل لا يغيّر الناتج.', '$80\\cdot 1{,}21\\cdot 0{,}8$: the order of the factors does not change the product.'),
         isSolved: (state) => has(state, { price: 80, discount: 20, vat: 21, coupon: 0 }) && before(state, 'vat', 'discount') && receiptAnswered(state)
     },
     {
@@ -182,9 +182,9 @@ export const receiptChallenges: LabChallenge<ReceiptState>[] = [
         prompt: say(
             'Gehitu kupoi bat: 5 €. Zein ordenatan ordaintzen duzu gutxien? Ordenatu tiketa horrela eta idatzi guztira.',
             'Añade un cupón de 5 €. ¿En qué orden pagas menos? Ordena el tique así y escribe ese total.',
-            'أضف قسيمة بقيمة 5 €. بأي ترتيب تدفع أقل؟ رتّب الإيصال هكذا واكتب المجموع.'
+            'أضف قسيمة بقيمة 5 €. بأي ترتيب تدفع أقل؟ رتّب الإيصال هكذا واكتب المجموع.', 'Add a €5 coupon. In which order do you pay less? Order the receipt that way and write that total.'
         ),
-        hint: say('BEZaren aurretik, kupoiak bere BEZa ere aurrezten dizu: $5\\cdot 1{,}21=6{,}05$ €.', 'Antes del IVA, el cupón también te ahorra su IVA: $5\\cdot 1{,}21=6{,}05$ €.', 'قبل الضريبة توفّر القسيمة ضريبتها أيضًا: $5\\cdot 1{,}21=6{,}05$ €.'),
+        hint: say('BEZaren aurretik, kupoiak bere BEZa ere aurrezten dizu: $5\\cdot 1{,}21=6{,}05$ €.', 'Antes del IVA, el cupón también te ahorra su IVA: $5\\cdot 1{,}21=6{,}05$ €.', 'قبل الضريبة توفّر القسيمة ضريبتها أيضًا: $5\\cdot 1{,}21=6{,}05$ €.', 'Before the VAT, the coupon also saves you its VAT: $5\\cdot 1{,}21=6{,}05$ euros.'),
         isSolved: (state) => has(state, { price: 80, discount: 20, vat: 21, coupon: 5 }) && equals(receiptTotal(state), cheapestTotal(state)) && receiptAnswered(state)
     },
     {
@@ -192,9 +192,9 @@ export const receiptChallenges: LabChallenge<ReceiptState>[] = [
         prompt: say(
             'Liburu batek 30 € balio du BEZik gabe: % 10 deskontua eta % 4 BEZa, eta amaieran kupoi bat (3 €). Zenbat ordaintzen duzu?',
             'Un libro de 30 € sin IVA lleva un 10 % de descuento y el 4 % de IVA, y al final pagas con un cupón de 3 €. ¿Cuánto pagas?',
-            'كتاب ثمنه 30 € دون ضريبة، عليه خصم 10٪ وضريبة 4٪، وتدفع في النهاية بقسيمة 3 €. كم تدفع؟'
+            'كتاب ثمنه 30 € دون ضريبة، عليه خصم 10٪ وضريبة 4٪، وتدفع في النهاية بقسيمة 3 €. كم تدفع؟', 'A book costs €30 without VAT. It has a 10% discount and 4% VAT, and at the end you pay with a €3 coupon. How much do you pay?'
         ),
-        hint: say('$30\\cdot 0{,}9\\cdot 1{,}04-3$', '$30\\cdot 0{,}9\\cdot 1{,}04-3$', '$30\\cdot 0{,}9\\cdot 1{,}04-3$'),
+        hint: say('$30\\cdot 0{,}9\\cdot 1{,}04-3$', '$30\\cdot 0{,}9\\cdot 1{,}04-3$', '$30\\cdot 0{,}9\\cdot 1{,}04-3$', '$30\\cdot 0{,}9\\cdot 1{,}04-3$'),
         isSolved: (state) => has(state, { price: 30, discount: 10, vat: 4, coupon: 3 }) && state.order[2] === 'coupon' && receiptAnswered(state)
     }
 ]
@@ -212,19 +212,19 @@ function freshFrom<State>(start: State, maker: LabChallengeMaker<State>): LabCha
 }
 
 const STEP_NAMES: Record<ReceiptStep, LocalizedText> = {
-    discount: say('deskontua', 'descuento', 'الخصم'),
-    vat: say('BEZa', 'IVA', 'الضريبة'),
-    coupon: say('kupoia', 'cupón', 'القسيمة')
+    discount: say('deskontua', 'descuento', 'الخصم', 'discount'),
+    vat: say('BEZa', 'IVA', 'الضريبة', 'VAT'),
+    coupon: say('kupoia', 'cupón', 'القسيمة', 'coupon')
 }
 
 /** «descuento, IVA y cupón» */
 function orderText(state: ReceiptState): LocalizedText {
     const names = state.order.filter((step) => stepUsed(state, step)).map((step) => STEP_NAMES[step])
-    const list = (language: 'eu' | 'es' | 'ar', and: string) => {
+    const list = (language: 'eu' | 'es' | 'en' | 'ar', and: string) => {
         const words = names.map((name) => name[language])
         return words.length === 1 ? words[0] : `${words.slice(0, -1).join(', ')} ${and} ${words[words.length - 1]}`
     }
-    return { eu: list('eu', 'eta'), es: list('es', 'y'), ar: names.map((name) => name.ar).join(' ثم ') }
+    return { eu: list('eu', 'eta'), es: list('es', 'y'), en: list('en', 'and'), ar: names.map((name) => name.ar).join(' ثم ') }
 }
 
 /** What the receipt has: «80 € sin IVA, 20 % de descuento, IVA del 21 % y un cupón de 5 €» */
@@ -233,7 +233,7 @@ function receiptData(state: ReceiptState): LocalizedText {
     return say(
         `${price} € BEZik gabe.${discount ? ` Deskontua: % ${discount}.` : ''} BEZa: % ${vat}.${coupon ? ` Kupoia: ${coupon} €.` : ''}`,
         `${price} € sin IVA${discount ? `, un ${discount} % de descuento` : ''}, IVA del ${vat} %${coupon ? ` y un cupón de ${coupon} €` : ''}.`,
-        `${price} € دون ضريبة.${discount ? ` الخصم ${discount}٪.` : ''} الضريبة ${vat}٪.${coupon ? ` القسيمة ${coupon} €.` : ''}`
+        `${price} € دون ضريبة.${discount ? ` الخصم ${discount}٪.` : ''} الضريبة ${vat}٪.${coupon ? ` القسيمة ${coupon} €.` : ''}`, `€${price} without VAT${discount ? `, un ${discount} % de descuento` : ''}, VAT of ${vat}%${coupon ? ` y un cupón de ${coupon} €` : ''}.`
     )
 }
 
@@ -262,12 +262,12 @@ export const receiptExtra: LabChallengeMaker<ReceiptState> = freshFrom(initialRe
                 prompt: say(
                     `Tiketa: ${data.eu} Zein ordenatan ordaintzen duzu gutxien? Ordenatu horrela eta idatzi guztira.`,
                     `Tique: ${data.es} ¿En qué orden pagas menos? Ordénalo así y escribe ese total.`,
-                    `الإيصال: ${data.ar} بأي ترتيب تدفع أقل؟ رتّبه هكذا واكتب المجموع.`
+                    `الإيصال: ${data.ar} بأي ترتيب تدفع أقل؟ رتّبه هكذا واكتب المجموع.`, `Receipt: ${data.en} In which order do you pay less? Order it that way and write that total.`
                 ),
                 hint: say(
                     'Kupoiak aurrezten duena atzetik datozen indizeez biderkatzen da: BEZaren aurretik eta deskontuaren ondoren.',
                     'Lo que ahorra el cupón se multiplica por los índices que vienen detrás: antes del IVA y después del descuento.',
-                    'ما توفّره القسيمة يُضرب في المؤشرات التي تأتي بعدها: قبل الضريبة وبعد الخصم.'
+                    'ما توفّره القسيمة يُضرب في المؤشرات التي تأتي بعدها: قبل الضريبة وبعد الخصم.', 'What the coupon saves is multiplied by the multipliers that come after it: before the VAT and after the discount.'
                 ),
                 isSolved: (state) => has(state, values) && equals(receiptTotal(state), cheapestTotal(state)) && receiptAnswered(state),
                 solution: ready
@@ -278,9 +278,9 @@ export const receiptExtra: LabChallengeMaker<ReceiptState> = freshFrom(initialRe
             prompt: say(
                 `Tiketa: ${data.eu} Ordena: ${sequence.eu}. Idatzi guztira.`,
                 `Tique: ${data.es} Orden: ${sequence.es}. Escribe el total.`,
-                `الإيصال: ${data.ar} الترتيب: ${sequence.ar}. اكتب المجموع.`
+                `الإيصال: ${data.ar} الترتيب: ${sequence.ar}. اكتب المجموع.`, `Receipt: ${data.en} Order: ${sequence.en}. Write the total.`
             ),
-            hint: say(`$${receiptExpression(solution)}$`, `$${receiptExpression(solution)}$`, `$${receiptExpression(solution)}$`),
+            hint: say(`$${receiptExpression(solution)}$`, `$${receiptExpression(solution)}$`, `$${receiptExpression(solution)}$`, `$${receiptExpression(solution)}$`),
             // Any order with the same total will do: the discount and the VAT may swap when the coupon is not between them
             isSolved: (state) => has(state, values) && equals(receiptTotal(state), total) && receiptAnswered(state),
             solution: ready

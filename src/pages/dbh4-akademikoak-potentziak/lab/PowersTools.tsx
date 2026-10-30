@@ -5,6 +5,7 @@ import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import type { FractionValue } from '../../../features/unit-v2/math/fraction'
 import type { LocalizedText, UnitLanguage } from '../../../features/unit-v2/types'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import {
     CHANGE_BASES,
     CHANGE_VALUE_LIMITS,
@@ -74,14 +75,16 @@ const MUSTARD_TINT = 'var(--mustard-tint, #fbebc0)'
 const CARD = 'var(--card, #fffcf6)'
 const PAPER = '#fffcf6'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const minus = (value: number | string) => String(value).replace(/-/g, '−')
 /** A fraction in LaTeX */
 const texFraction = (value: FractionValue) => (value.denominator === 1 ? String(value.numerator) : `${value.numerator < 0 ? '-' : ''}\\frac{${Math.abs(value.numerator)}}{${value.denominator}}`)
 /** A fraction as plain text */
 const textFraction = (value: FractionValue) => minus(value.denominator === 1 ? String(value.numerator) : `${value.numerator}/${value.denominator}`)
-/** A decimal with the comma, or the point in Arabic */
-const decimal = (value: number, language: UnitLanguage, digits = 3) => minus(String(Math.round(value * 10 ** digits) / 10 ** digits).replace('.', language === 'ar' ? '.' : ','))
+/** A decimal as text: the comma in Spanish and Basque, the point in English and Arabic */
+const decimal = (value: number, language: UnitLanguage, digits = 3) => minus(String(Math.round(value * 10 ** digits) / 10 ** digits).replace('.', language === 'ar' ? '.' : decimalSeparatorFor(language)))
+/** A decimal inside LaTeX: {,} (MathText writes it as a point in English), a point in Arabic */
+const texDecimal = (value: number, language: UnitLanguage, digits = 3) => minus(String(Math.round(value * 10 ** digits) / 10 ** digits).replace('.', language === 'ar' ? '.' : '{,}'))
 /** A root written with Unicode: √a, ∛a, ⁴√a… */
 const SUPERSCRIPT: Record<string, string> = { 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹', '-': '⁻' }
 const sup = (value: number | string) => String(value).split('').map((digit) => SUPERSCRIPT[digit] ?? digit).join('')
@@ -148,8 +151,8 @@ export function RulesTool(props: LabToolProps) {
         </g>
     )
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say('Eskuinean, zenbakitzailean; ezkerrean, izendatzailean.', 'A la derecha, en el numerador; a la izquierda, en el denominador.', 'إلى اليمين في البسط، وإلى اليسار في المقام.'))} />} challenges={rulesChallenges} state={state}>
-            <Board height={250} label={l(say('2-ren eta 3-ren berretzaileak', 'Los exponentes del 2 y del 3', 'أسس 2 و3'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say('Eskuinean, zenbakitzailean; ezkerrean, izendatzailean.', 'A la derecha, en el numerador; a la izquierda, en el denominador.', 'إلى اليمين في البسط، وإلى اليسار في المقام.', 'On the right, in the numerator; on the left, in the denominator.'))} />} challenges={rulesChallenges} state={state}>
+            <Board height={250} label={l(say('2-ren eta 3-ren berretzaileak', 'Los exponentes del 2 y del 3', 'أسس 2 و3', 'The exponents of 2 and 3'))}>
                 <Text x={320} y={40} size={22}>{`12${sup(state.m)} : 6${sup(state.n)} = (2²·3)${sup(state.m)} : (2·3)${sup(state.n)}`}</Text>
                 {bar(two, 80, STAGE, 2)}
                 {bar(three, 140, SECOND, 3)}
@@ -168,9 +171,9 @@ export function FractionalTool(props: LabToolProps) {
     const value = fractionalValue(state)
     const controls = (
         <>
-            <Stepper label={l(say('Oinarria', 'Base', 'الأساس'))} value={state.base} min={0} max={FRACTIONAL_BASES.length - 1} format={(index) => String(FRACTIONAL_BASES[index])} onChange={(next) => setState((s) => setFractional(s, { base: next }))} language={props.language} />
-            <Stepper label={l(say('Zenbakitzailea (berretura)', 'Numerador (potencia)', 'البسط (القوة)'))} value={state.p} min={-FRACTIONAL_LIMITS.numerator} max={FRACTIONAL_LIMITS.numerator} onChange={(next) => setState((s) => setFractional(s, { p: next }))} language={props.language} />
-            <Stepper label={l(say('Izendatzailea (indizea)', 'Denominador (índice)', 'المقام (الدليل)'))} value={state.q} min={1} max={FRACTIONAL_LIMITS.denominator} onChange={(next) => setState((s) => setFractional(s, { q: next }))} language={props.language} />
+            <Stepper label={l(say('Oinarria', 'Base', 'الأساس', 'Base'))} value={state.base} min={0} max={FRACTIONAL_BASES.length - 1} format={(index) => String(FRACTIONAL_BASES[index])} onChange={(next) => setState((s) => setFractional(s, { base: next }))} language={props.language} />
+            <Stepper label={l(say('Zenbakitzailea (berretura)', 'Numerador (potencia)', 'البسط (القوة)', 'Numerator (power)'))} value={state.p} min={-FRACTIONAL_LIMITS.numerator} max={FRACTIONAL_LIMITS.numerator} onChange={(next) => setState((s) => setFractional(s, { p: next }))} language={props.language} />
+            <Stepper label={l(say('Izendatzailea (indizea)', 'Denominador (índice)', 'المقام (الدليل)', 'Denominator (index)'))} value={state.q} min={1} max={FRACTIONAL_LIMITS.denominator} onChange={(next) => setState((s) => setFractional(s, { q: next }))} language={props.language} />
         </>
     )
     const radical = state.q === 1 ? `${base}^{${state.p}}` : `\\left(${texRoot(state.q, base)}\\right)^{${state.p}}`
@@ -178,8 +181,8 @@ export function FractionalTool(props: LabToolProps) {
     const rootValue = Math.round(base ** (1 / state.q))
     const exact = rootValue ** state.q === base
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={value ? l(say('Erroa zehatza da.', 'La raíz es exacta.', 'الجذر دقيق.')) : l(say('Erroa ez da zehatza: emaitza irrazionala da.', 'La raíz no es exacta: el resultado es irracional.', 'الجذر غير دقيق: النتيجة غير نسبية.'))} />} challenges={fractionalChallenges} state={state}>
-            <Board height={220} label={l(say('Lehenik erroa, gero berretura', 'Primero la raíz, después la potencia', 'الجذر أولًا ثم القوة'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={value ? l(say('Erroa zehatza da.', 'La raíz es exacta.', 'الجذر دقيق.', 'The root is exact.')) : l(say('Erroa ez da zehatza: emaitza irrazionala da.', 'La raíz no es exacta: el resultado es irracional.', 'الجذر غير دقيق: النتيجة غير نسبية.', 'The root is not exact: the result is irrational.'))} />} challenges={fractionalChallenges} state={state}>
+            <Board height={220} label={l(say('Lehenik erroa, gero berretura', 'Primero la raíz, después la potencia', 'الجذر أولًا ثم القوة', 'First the root, then the power'))}>
                 <rect x={30} y={60} width={140} height={80} rx={14} fill={STAGE_TINT} stroke={INK} strokeWidth={1.8} />
                 <Text x={100} y={112} size={30}>{base}</Text>
                 <line x1={176} x2={246} y1={100} y2={100} stroke={MUTED} strokeWidth={2} />
@@ -206,10 +209,10 @@ export function CommonTool(props: LabToolProps) {
     const sign = order > 0 ? '>' : order < 0 ? '<' : '='
     const controls = (
         <>
-            <Stepper label={l(say('1. indizea', '1.er índice', 'الدليل 1'))} value={state.firstIndex} min={COMMON_LIMITS.index.min} max={COMMON_LIMITS.index.max} onChange={(next) => setState((s) => setCommon(s, { firstIndex: next }))} language={props.language} />
-            <Stepper label={l(say('1. errokizuna', '1.er radicando', 'ما تحت الجذر 1'))} value={state.firstRadicand} min={COMMON_LIMITS.radicand.min} max={COMMON_LIMITS.radicand.max} onChange={(next) => setState((s) => setCommon(s, { firstRadicand: next }))} language={props.language} />
-            <Stepper label={l(say('2. indizea', '2.º índice', 'الدليل 2'))} value={state.secondIndex} min={COMMON_LIMITS.index.min} max={COMMON_LIMITS.index.max} onChange={(next) => setState((s) => setCommon(s, { secondIndex: next }))} language={props.language} />
-            <Stepper label={l(say('2. errokizuna', '2.º radicando', 'ما تحت الجذر 2'))} value={state.secondRadicand} min={COMMON_LIMITS.radicand.min} max={COMMON_LIMITS.radicand.max} onChange={(next) => setState((s) => setCommon(s, { secondRadicand: next }))} language={props.language} />
+            <Stepper label={l(say('1. indizea', '1.er índice', 'الدليل 1', '1st index'))} value={state.firstIndex} min={COMMON_LIMITS.index.min} max={COMMON_LIMITS.index.max} onChange={(next) => setState((s) => setCommon(s, { firstIndex: next }))} language={props.language} />
+            <Stepper label={l(say('1. errokizuna', '1.er radicando', 'ما تحت الجذر 1', '1st radicand'))} value={state.firstRadicand} min={COMMON_LIMITS.radicand.min} max={COMMON_LIMITS.radicand.max} onChange={(next) => setState((s) => setCommon(s, { firstRadicand: next }))} language={props.language} />
+            <Stepper label={l(say('2. indizea', '2.º índice', 'الدليل 2', '2nd index'))} value={state.secondIndex} min={COMMON_LIMITS.index.min} max={COMMON_LIMITS.index.max} onChange={(next) => setState((s) => setCommon(s, { secondIndex: next }))} language={props.language} />
+            <Stepper label={l(say('2. errokizuna', '2.º radicando', 'ما تحت الجذر 2', '2nd radicand'))} value={state.secondRadicand} min={COMMON_LIMITS.radicand.min} max={COMMON_LIMITS.radicand.max} onChange={(next) => setState((s) => setCommon(s, { secondRadicand: next }))} language={props.language} />
         </>
     )
     const latex = `${texRoot(state.firstIndex, state.firstRadicand)}=${texRoot(common.index, common.first)}\\quad ${texRoot(state.secondIndex, state.secondRadicand)}=${texRoot(common.index, common.second)}`
@@ -222,8 +225,8 @@ export function CommonTool(props: LabToolProps) {
         </g>
     )
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`Indize komuna: m.k.t.(${state.firstIndex}, ${state.secondIndex}) = ${common.index}.`, `Índice común: m.c.m.(${state.firstIndex}, ${state.secondIndex}) = ${common.index}.`, `الدليل المشترك: م.م.أ(${state.firstIndex}، ${state.secondIndex}) = ${common.index}.`))} />} challenges={commonChallenges} state={state}>
-            <Board height={220} label={l(say('Bi erradikal indize komunarekin', 'Dos radicales con índice común', 'جذران بدليل مشترك'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`Indize komuna: m.k.t.(${state.firstIndex}, ${state.secondIndex}) = ${common.index}.`, `Índice común: m.c.m.(${state.firstIndex}, ${state.secondIndex}) = ${common.index}.`, `الدليل المشترك: م.م.أ(${state.firstIndex}، ${state.secondIndex}) = ${common.index}.`, `Common index: LCM(${state.firstIndex}, ${state.secondIndex}) = ${common.index}.`))} />} challenges={commonChallenges} state={state}>
+            <Board height={220} label={l(say('Bi erradikal indize komunarekin', 'Dos radicales con índice común', 'جذران بدليل مشترك', 'Two radicals with a common index'))}>
                 {column(30, state.firstIndex, state.firstRadicand, common.index / state.firstIndex, common.first, order >= 0 ? SECOND : STAGE)}
                 <Text x={320} y={118} size={40} color={SECOND}>{sign}</Text>
                 {column(360, state.secondIndex, state.secondRadicand, common.index / state.secondIndex, common.second, order <= 0 ? SECOND : STAGE)}
@@ -242,16 +245,16 @@ export function ExtractTool(props: LabToolProps) {
     const controls = (
         <>
             {EXTRACT_PRIMES.map((prime, index) => (
-                <Stepper key={prime} label={l(say(`${prime}ren berretzailea`, `Exponente del ${prime}`, `أس ${prime}`))} value={state.exponents[index]} min={0} max={EXTRACT_LIMITS.exponent} onChange={(next) => setState((s) => setExtract(s, { prime: index, exponent: next }))} language={props.language} />
+                <Stepper key={prime} label={l(say(`${prime}ren berretzailea`, `Exponente del ${prime}`, `أس ${prime}`, `Exponent of ${prime}`))} value={state.exponents[index]} min={0} max={EXTRACT_LIMITS.exponent} onChange={(next) => setState((s) => setExtract(s, { prime: index, exponent: next }))} language={props.language} />
             ))}
-            <Stepper label={l(say('Indizea', 'Índice', 'الدليل'))} value={state.index} min={EXTRACT_LIMITS.index.min} max={EXTRACT_LIMITS.index.max} onChange={(next) => setState((s) => setExtract(s, { index: next }))} language={props.language} />
+            <Stepper label={l(say('Indizea', 'Índice', 'الدليل', 'Index'))} value={state.index} min={EXTRACT_LIMITS.index.min} max={EXTRACT_LIMITS.index.max} onChange={(next) => setState((s) => setExtract(s, { index: next }))} language={props.language} />
         </>
     )
     const result = inside === 1 ? String(outside) : `${outside === 1 ? '' : outside}${texRoot(state.index, inside)}`
     const latex = `${texRoot(state.index, radicand)}=${result}`
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`${state.index}ko talde osoak (koloreztatuak) errotik ateratzen dira.`, `Los grupos completos de ${state.index} (en color) salen de la raíz.`, `المجموعات الكاملة من ${state.index} (الملوّنة) تخرج من الجذر.`))} />} challenges={extractChallenges} state={state}>
-            <Board height={230} label={l(say('Errokizunaren faktore lehenak taldeka', 'Los factores primos del radicando en grupos', 'عوامل ما تحت الجذر الأولية في مجموعات'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`${state.index}ko talde osoak (koloreztatuak) errotik ateratzen dira.`, `Los grupos completos de ${state.index} (en color) salen de la raíz.`, `المجموعات الكاملة من ${state.index} (الملوّنة) تخرج من الجذر.`, `The complete groups of ${state.index} (in colour) come out of the root.`))} />} challenges={extractChallenges} state={state}>
+            <Board height={230} label={l(say('Errokizunaren faktore lehenak taldeka', 'Los factores primos del radicando en grupos', 'عوامل ما تحت الجذر الأولية في مجموعات', 'The prime factors of the radicand, in groups'))}>
                 <Text x={30} y={34} anchor="start" size={20}>{`${root(state.index, radicand)} = ${root(state.index, EXTRACT_PRIMES.map((prime, index) => (state.exponents[index] ? `${prime}${sup(state.exponents[index])}` : '')).filter(Boolean).join('·') || '1')}`}</Text>
                 {EXTRACT_PRIMES.map((prime, index) => (
                     <Chips key={prime} x={30} y={56 + index * 44} prime={prime} count={state.exponents[index]} index={state.index} />
@@ -270,10 +273,10 @@ export function RationalizeTool(props: LabToolProps) {
     const result = rationalizeOf(state)
     const controls = (
         <>
-            <Stepper label={l(say('Zenbakitzailea', 'Numerador', 'البسط'))} value={state.numerator} min={RATIONALIZE_LIMITS.numerator.min} max={RATIONALIZE_LIMITS.numerator.max} onChange={(next) => setState((s) => setRationalize(s, { numerator: next }))} language={props.language} />
+            <Stepper label={l(say('Zenbakitzailea', 'Numerador', 'البسط', 'Numerator'))} value={state.numerator} min={RATIONALIZE_LIMITS.numerator.min} max={RATIONALIZE_LIMITS.numerator.max} onChange={(next) => setState((s) => setRationalize(s, { numerator: next }))} language={props.language} />
             <Segmented label="b" value={String(state.base)} options={RATIONALIZE_BASES.map((base, index) => ({ value: String(index), label: String(base) }))} onChange={(next) => setState((s) => setRationalize(s, { base: Number(next) }))} />
-            <Stepper label={l(say('Indizea', 'Índice', 'الدليل'))} value={state.index} min={RATIONALIZE_LIMITS.index.min} max={RATIONALIZE_LIMITS.index.max} onChange={(next) => setState((s) => setRationalize(s, { index: next }))} language={props.language} />
-            <Stepper label={l(say('b-ren berretzailea', 'Exponente de b', 'أس b'))} value={state.exponent} min={1} max={state.index - 1} onChange={(next) => setState((s) => setRationalize(s, { exponent: next }))} language={props.language} />
+            <Stepper label={l(say('Indizea', 'Índice', 'الدليل', 'Index'))} value={state.index} min={RATIONALIZE_LIMITS.index.min} max={RATIONALIZE_LIMITS.index.max} onChange={(next) => setState((s) => setRationalize(s, { index: next }))} language={props.language} />
+            <Stepper label={l(say('b-ren berretzailea', 'Exponente de b', 'أس b', 'Exponent of b'))} value={state.exponent} min={1} max={state.index - 1} onChange={(next) => setState((s) => setRationalize(s, { exponent: next }))} language={props.language} />
         </>
     )
     const denominatorRoot = texRoot(state.index, state.exponent === 1 ? result.b : `${result.b}^{${state.exponent}}`)
@@ -284,11 +287,11 @@ export function RationalizeTool(props: LabToolProps) {
         <rect key={index} x={x + index * 30} y={120} width={26} height={30} rx={6} fill={color} fillOpacity={0.35} stroke={color} strokeWidth={1.6} />
     ))
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`Berretzailea ${state.exponent}-tik ${state.index}-raino osatzen da: falta dira ${result.missing}.`, `El exponente se completa de ${state.exponent} a ${state.index}: faltan ${result.missing}.`, `يكتمل الأس من ${state.exponent} إلى ${state.index}: ينقص ${result.missing}.`))} />} challenges={rationalizeChallenges} state={state}>
-            <Board height={220} label={l(say('Berretzailea indizeraino osatu', 'Completar el exponente hasta el índice', 'إكمال الأس حتى الدليل'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say(`Berretzailea ${state.exponent}-tik ${state.index}-raino osatzen da: falta dira ${result.missing}.`, `El exponente se completa de ${state.exponent} a ${state.index}: faltan ${result.missing}.`, `يكتمل الأس من ${state.exponent} إلى ${state.index}: ينقص ${result.missing}.`, `The exponent is filled up from ${state.exponent} to ${state.index}: missing ${result.missing}.`))} />} challenges={rationalizeChallenges} state={state}>
+            <Board height={220} label={l(say('Berretzailea indizeraino osatu', 'Completar el exponente hasta el índice', 'إكمال الأس حتى الدليل', 'Fill up the exponent to the index'))}>
                 <Text x={30} y={60} anchor="start" size={22}>{`${state.numerator} / ${root(state.index, `${result.b}${sup(state.exponent)}`)}`}</Text>
                 <Text x={360} y={60} anchor="start" size={22} color={STAGE}>{`· ${root(state.index, `${result.b}${sup(result.missing)}`)}`}</Text>
-                <Text x={30} y={108} anchor="start" size={15} color={MUTED} weight={400}>{l(say('Berretzaileak:', 'Exponentes:', 'الأسس:'))}</Text>
+                <Text x={30} y={108} anchor="start" size={15} color={MUTED} weight={400}>{l(say('Berretzaileak:', 'Exponentes:', 'الأسس:', 'Exponents:'))}</Text>
                 {powerBoxes(30, state.exponent, SECOND)}
                 {powerBoxes(30 + state.exponent * 30, result.missing, STAGE)}
                 <Text x={30 + state.index * 30 + 12} y={142} anchor="start" size={18}>{`= ${state.index}`}</Text>
@@ -306,7 +309,7 @@ export function ConjugateTool(props: LabToolProps) {
     const { denominator, coefficient } = conjugateOf(state)
     const controls = (
         <>
-            <Stepper label={l(say('Zenbakitzailea', 'Numerador', 'البسط'))} value={state.numerator} min={CONJUGATE_LIMITS.numerator.min} max={CONJUGATE_LIMITS.numerator.max} onChange={(next) => setState((s) => setConjugate(s, { numerator: next }))} language={props.language} />
+            <Stepper label={l(say('Zenbakitzailea', 'Numerador', 'البسط', 'Numerator'))} value={state.numerator} min={CONJUGATE_LIMITS.numerator.min} max={CONJUGATE_LIMITS.numerator.max} onChange={(next) => setState((s) => setConjugate(s, { numerator: next }))} language={props.language} />
             <Stepper label="a" value={state.a} min={CONJUGATE_LIMITS.radicand.min} max={CONJUGATE_LIMITS.radicand.max} onChange={(next) => setState((s) => setConjugate(s, { a: next }))} language={props.language} />
             <Stepper label="b" value={state.b} min={CONJUGATE_LIMITS.radicand.min} max={CONJUGATE_LIMITS.radicand.max} onChange={(next) => setState((s) => setConjugate(s, { b: next }))} language={props.language} />
         </>
@@ -318,8 +321,8 @@ export function ConjugateTool(props: LabToolProps) {
         : `\\frac{${state.numerator}}{${r(state.a)}-${r(state.b)}}=\\frac{${state.numerator}(${sum})}{${minus(denominator).replace('−', '-')}}${coefficient.denominator === 1 ? `=${coefficient.numerator === 1 ? '' : coefficient.numerator === -1 ? '-' : coefficient.numerator}(${sum})` : ''}`
     const rt = (value: number) => (value === 1 ? '1' : `√${value}`)
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={coefficient === null ? l(say('a = b denean izendatzailea 0 da.', 'Con a = b el denominador es 0.', 'عندما a = b يكون المقام 0.')) : l(say(`(${rt(state.a)} − ${rt(state.b)})(${rt(state.a)} + ${rt(state.b)}) = ${state.a} − ${state.b} = ${minus(denominator)}`, `(${rt(state.a)} − ${rt(state.b)})(${rt(state.a)} + ${rt(state.b)}) = ${state.a} − ${state.b} = ${minus(denominator)}`, `(${rt(state.a)} − ${rt(state.b)})(${rt(state.a)} + ${rt(state.b)}) = ${state.a} − ${state.b} = ${minus(denominator)}`))} />} challenges={conjugateChallenges} state={state}>
-            <Board height={220} label={l(say('Batura bider kenketa', 'Suma por diferencia', 'المجموع في الفرق'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={coefficient === null ? l(say('a = b denean izendatzailea 0 da.', 'Con a = b el denominador es 0.', 'عندما a = b يكون المقام 0.', 'With a = b, the denominator is 0.')) : l(say(`(${rt(state.a)} − ${rt(state.b)})(${rt(state.a)} + ${rt(state.b)}) = ${state.a} − ${state.b} = ${minus(denominator)}`, `(${rt(state.a)} − ${rt(state.b)})(${rt(state.a)} + ${rt(state.b)}) = ${state.a} − ${state.b} = ${minus(denominator)}`, `(${rt(state.a)} − ${rt(state.b)})(${rt(state.a)} + ${rt(state.b)}) = ${state.a} − ${state.b} = ${minus(denominator)}`, `(${rt(state.a)} − ${rt(state.b)})(${rt(state.a)} + ${rt(state.b)}) = ${state.a} − ${state.b} = ${minus(denominator)}`))} />} challenges={conjugateChallenges} state={state}>
+            <Board height={220} label={l(say('Batura bider kenketa', 'Suma por diferencia', 'المجموع في الفرق', 'Sum times difference'))}>
                 <rect x={30} y={30} width={260} height={64} rx={14} fill={CARD} stroke={INK} strokeWidth={1.8} />
                 <Text x={160} y={72} size={24}>{`${rt(state.a)} − ${rt(state.b)}`}</Text>
                 <Text x={320} y={72} size={26}>×</Text>
@@ -343,16 +346,16 @@ export function LadderTool(props: LabToolProps) {
     const exponents = Array.from({ length: LADDER_LIMITS.max - LADDER_LIMITS.min + 1 }, (_, index) => LADDER_LIMITS.min + index)
     const controls = (
         <>
-            <Segmented label={l(say('Oinarria', 'Base', 'الأساس'))} value={String(state.base)} options={LADDER_BASES.map((item, index) => ({ value: String(index), label: textFraction(item) }))} onChange={(next) => setState((s) => setLadder(s, { base: Number(next) }))} />
-            <Stepper label={l(say('Berretzailea', 'Exponente', 'الأس'))} value={state.exponent} min={LADDER_LIMITS.min} max={LADDER_LIMITS.max} onChange={(next) => setState((s) => setLadder(s, { exponent: next }))} language={props.language} />
+            <Segmented label={l(say('Oinarria', 'Base', 'الأساس', 'Base'))} value={String(state.base)} options={LADDER_BASES.map((item, index) => ({ value: String(index), label: textFraction(item) }))} onChange={(next) => setState((s) => setLadder(s, { base: Number(next) }))} />
+            <Stepper label={l(say('Berretzailea', 'Exponente', 'الأس', 'Exponent'))} value={state.exponent} min={LADDER_LIMITS.min} max={LADDER_LIMITS.max} onChange={(next) => setState((s) => setLadder(s, { exponent: next }))} language={props.language} />
         </>
     )
     const logBase = base.denominator === 1 ? String(base.numerator) : `1/${base.denominator}`
     const latex = `${base.denominator === 1 ? base.numerator : `\\left(${texFraction(base)}\\right)`}^{${state.exponent}}=${texFraction(value)}\\iff \\log_{${logBase}} ${texFraction(value)}=${state.exponent}`
     const step = 54
     return (
-        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say('Logaritmoa berretzailea da: zenbat maila igo edo jaitsi diren.', 'El logaritmo es el exponente: cuántos escalones se suben o bajan.', 'اللوغاريتم هو الأس: عدد الدرجات صعودًا أو نزولًا.'))} />} challenges={ladderChallenges} state={state}>
-            <Board height={250} label={l(say('Oinarriaren berreturen eskailera', 'Escalera de potencias de la base', 'سُلّم قوى الأساس'))}>
+        <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={l(say('Logaritmoa berretzailea da: zenbat maila igo edo jaitsi diren.', 'El logaritmo es el exponente: cuántos escalones se suben o bajan.', 'اللوغاريتم هو الأس: عدد الدرجات صعودًا أو نزولًا.', 'The logarithm is the exponent: how many steps you go up or down.'))} />} challenges={ladderChallenges} state={state}>
+            <Board height={250} label={l(say('Oinarriaren berreturen eskailera', 'Escalera de potencias de la base', 'سُلّم قوى الأساس', 'Ladder of powers of the base'))}>
                 {exponents.map((exponent, index) => {
                     const active = exponent === state.exponent
                     const x = 30 + index * step
@@ -365,7 +368,7 @@ export function LadderTool(props: LabToolProps) {
                         </g>
                     )
                 })}
-                <Text x={30} y={40} anchor="start" size={16} color={MUTED} weight={400}>{`${l(say('oinarria', 'base', 'الأساس'))} ${baseText}`}</Text>
+                <Text x={30} y={40} anchor="start" size={16} color={MUTED} weight={400}>{`${l(say('oinarria', 'base', 'الأساس', 'base'))} ${baseText}`}</Text>
             </Board>
         </ToolFrame>
     )
@@ -381,17 +384,17 @@ export function ChangeBaseTool(props: LabToolProps) {
     const [low, high] = changeBracket(state)
     const controls = (
         <>
-            <Segmented label={l(say('Oinarria', 'Base', 'الأساس'))} value={String(state.base)} options={CHANGE_BASES.map((item, index) => ({ value: String(index), label: String(item) }))} onChange={(next) => setState((s) => setChange(s, { base: Number(next) }))} />
-            <Stepper label={l(say('Zenbakia', 'Número', 'العدد'))} value={state.value} min={CHANGE_VALUE_LIMITS.min} max={CHANGE_VALUE_LIMITS.max} onChange={(next) => setState((s) => setChange(s, { value: next }))} language={props.language} />
+            <Segmented label={l(say('Oinarria', 'Base', 'الأساس', 'Base'))} value={String(state.base)} options={CHANGE_BASES.map((item, index) => ({ value: String(index), label: String(item) }))} onChange={(next) => setState((s) => setChange(s, { base: Number(next) }))} />
+            <Stepper label={l(say('Zenbakia', 'Número', 'العدد', 'Number'))} value={state.value} min={CHANGE_VALUE_LIMITS.min} max={CHANGE_VALUE_LIMITS.max} onChange={(next) => setState((s) => setChange(s, { value: next }))} language={props.language} />
         </>
     )
     const exact = Math.abs(log - Math.round(log)) < 1e-9
-    const shown = decimal(log, props.language).replace(',', '{,}').replace('−', '-')
+    const shown = texDecimal(log, props.language).replace('−', '-')
     const latex = `\\log_{${base}} ${state.value}=\\frac{\\log ${state.value}}{\\log ${base}}${exact ? '=' : '\\approx '}${shown}`
     const x = (value: number) => 40 + value * 80
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={`${base}${sup(low)} = ${base ** low} ≤ ${state.value} < ${base ** high} = ${base}${sup(high)}`} />} challenges={changeChallenges} state={state}>
-            <Board height={190} label={l(say('Logaritmoa bi berretzaile osoren artean', 'El logaritmo entre dos exponentes enteros', 'اللوغاريتم بين أسين صحيحين'))}>
+            <Board height={190} label={l(say('Logaritmoa bi berretzaile osoren artean', 'El logaritmo entre dos exponentes enteros', 'اللوغاريتم بين أسين صحيحين', 'The logarithm between two integer exponents'))}>
                 <line x1={x(0)} x2={x(7)} y1={110} y2={110} stroke={INK} strokeWidth={2} />
                 {Array.from({ length: 8 }, (_, value) => (
                     <g key={value}>

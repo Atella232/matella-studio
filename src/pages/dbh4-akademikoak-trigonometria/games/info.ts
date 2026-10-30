@@ -13,26 +13,26 @@ export const TRIGONOMETRY_GAME_RECORDS_KEY = 'matella-trigonometria-dbh4ak-game-
 export const trigonometryGames: GameInfo<TrigonometryGameId>[] = [
     {
         id: 'race',
-        title: { eu: 'Trigonometriaren lasterketa', es: 'Carrera de trigonometría', ar: 'سباق حساب المثلثات' },
-        tagline: { eu: 'Erantzun ondo eta azkar: zure autoa aurrera doa, akatsek irrist egiten dute.', es: 'Responde bien y rápido: tu coche avanza, los errores le hacen derrapar.', ar: 'أجب بدقة وسرعة: تتقدم سيارتك، والأخطاء تجعلها تنزلق.' },
-        skills: { eu: 'Bost zirkuitu, etapa bakoitzeko bat', es: 'Cinco circuitos, uno por etapa', ar: 'خمس حلبات، واحدة لكل مرحلة' },
+        title: { eu: 'Trigonometriaren lasterketa', es: 'Carrera de trigonometría', en: 'Trigonometry race', ar: 'سباق حساب المثلثات' },
+        tagline: { eu: 'Erantzun ondo eta azkar: zure autoa aurrera doa, akatsek irrist egiten dute.', es: 'Responde bien y rápido: tu coche avanza, los errores le hacen derrapar.', en: 'Answer correctly and quickly: your car moves forward, mistakes make it skid.', ar: 'أجب بدقة وسرعة: تتقدم سيارتك، والأخطاء تجعلها تنزلق.' },
+        skills: { eu: 'Bost zirkuitu, etapa bakoitzeko bat', es: 'Cinco circuitos, uno por etapa', en: 'Five circuits, one per stage', ar: 'خمس حلبات، واحدة لكل مرحلة' },
         levels: [
-            { progressId: 72101, stage: 'ratios', title: { eu: 'Arrazoiak', es: 'Razones', ar: 'النسب' }, description: { eu: 'Hiru aldeetatik, 30°, 45° eta 60°, eta hipotenusa.', es: 'A partir de los tres lados, 30°, 45° y 60°, y la hipotenusa.', ar: 'من الأضلاع الثلاثة، و30° و45° و60°، والوتر.' } },
-            { progressId: 72102, stage: 'identities', title: { eu: 'Oinarrizko erlazioak', es: 'Relaciones fundamentales', ar: 'العلاقات الأساسية' }, description: { eu: 'Arrazoi batetik besteetara, minutuak eta kalkulagailua.', es: 'De una razón a las demás, minutos y calculadora.', ar: 'من نسبة إلى البقية، والدقائق والآلة الحاسبة.' } },
-            { progressId: 72103, stage: 'solving', title: { eu: 'Triangelu angeluzuzenak', es: 'Triángulos rectángulos', ar: 'المثلثات القائمة' }, description: { eu: 'Aldeak, angeluak, goratzea eta beheratzea.', es: 'Lados, ángulos, elevación y depresión.', ar: 'الأضلاع والزوايا والارتفاع والانخفاض.' } },
-            { progressId: 72104, stage: 'problems', title: { eu: 'Altuerak eta azalerak', es: 'Alturas y áreas', ar: 'الارتفاعات والمساحات' }, description: { eu: 'Behaketa bikoitza, triangeluak eta paralelogramoak.', es: 'Doble observación, triángulos y paralelogramos.', ar: 'الرصد المزدوج والمثلثات ومتوازيات الأضلاع.' } },
-            { progressId: 72105, stage: 'circle', title: { eu: 'Zirkunferentzia goniometrikoa', es: 'Circunferencia goniométrica', ar: 'الدائرة المثلثية' }, description: { eu: 'Zeinuak, lehen koadrantera eta radianak.', es: 'Signos, reducción al primer cuadrante y radianes.', ar: 'الإشارات والإرجاع إلى الربع الأول والراديان.' } }
+            { progressId: 72101, stage: 'ratios', title: { eu: 'Arrazoiak', es: 'Razones', en: 'Ratios', ar: 'النسب' }, description: { eu: 'Hiru aldeetatik, 30°, 45° eta 60°, eta hipotenusa.', es: 'A partir de los tres lados, 30°, 45° y 60°, y la hipotenusa.', en: 'From the three sides, 30°, 45° and 60°, and the hypotenuse.', ar: 'من الأضلاع الثلاثة، و30° و45° و60°، والوتر.' } },
+            { progressId: 72102, stage: 'identities', title: { eu: 'Oinarrizko erlazioak', es: 'Relaciones fundamentales', en: 'Fundamental relationships', ar: 'العلاقات الأساسية' }, description: { eu: 'Arrazoi batetik besteetara, minutuak eta kalkulagailua.', es: 'De una razón a las demás, minutos y calculadora.', en: 'From one ratio to the others, minutes and calculator.', ar: 'من نسبة إلى البقية، والدقائق والآلة الحاسبة.' } },
+            { progressId: 72103, stage: 'solving', title: { eu: 'Triangelu angeluzuzenak', es: 'Triángulos rectángulos', en: 'Right-angled triangles', ar: 'المثلثات القائمة' }, description: { eu: 'Aldeak, angeluak, goratzea eta beheratzea.', es: 'Lados, ángulos, elevación y depresión.', en: 'Sides, angles, angle of elevation and depression.', ar: 'الأضلاع والزوايا والارتفاع والانخفاض.' } },
+            { progressId: 72104, stage: 'problems', title: { eu: 'Altuerak eta azalerak', es: 'Alturas y áreas', en: 'Heights and areas', ar: 'الارتفاعات والمساحات' }, description: { eu: 'Behaketa bikoitza, triangeluak eta paralelogramoak.', es: 'Doble observación, triángulos y paralelogramos.', en: 'Double sighting, triangles and parallelograms.', ar: 'الرصد المزدوج والمثلثات ومتوازيات الأضلاع.' } },
+            { progressId: 72105, stage: 'circle', title: { eu: 'Zirkunferentzia goniometrikoa', es: 'Circunferencia goniométrica', en: 'Unit circle', ar: 'الدائرة المثلثية' }, description: { eu: 'Zeinuak, lehen koadrantera eta radianak.', es: 'Signos, reducción al primer cuadrante y radianes.', en: 'Signs, reduction to the first quadrant and radians.', ar: 'الإشارات والإرجاع إلى الربع الأول والراديان.' } }
         ]
     },
     {
         id: 'memory',
-        title: { eu: 'Memoria', es: 'Memoria', ar: 'الذاكرة' },
-        tagline: { eu: 'Elkartu karta bakoitza bere bikotearekin.', es: 'Une cada carta con su pareja.', ar: 'صِل كل بطاقة بقرينتها.' },
-        skills: { eu: 'Radianak, minutuak eta azalerak', es: 'Radianes, minutos y áreas', ar: 'الراديان والدقائق والمساحات' },
+        title: { eu: 'Memoria', es: 'Memoria', en: 'Memory', ar: 'الذاكرة' },
+        tagline: { eu: 'Elkartu karta bakoitza bere bikotearekin.', es: 'Une cada carta con su pareja.', en: 'Match each card with its pair.', ar: 'صِل كل بطاقة بقرينتها.' },
+        skills: { eu: 'Radianak, minutuak eta azalerak', es: 'Radianes, minutos y áreas', en: 'Radians, minutes and areas', ar: 'الراديان والدقائق والمساحات' },
         levels: [
-            { progressId: 72201, stage: 'circle', title: { eu: 'Graduak eta radianak', es: 'Grados y radianes', ar: 'الدرجات والراديان' }, description: { eu: '150° ↔ 5π/6', es: '150° ↔ 5π/6', ar: '150° ↔ 5π/6' } },
-            { progressId: 72202, stage: 'identities', title: { eu: 'Minutuak eta hamartarrak', es: 'Minutos y decimales', ar: 'الدقائق والأعداد العشرية' }, description: { eu: '12° 30′ ↔ 12,5°', es: '12° 30′ ↔ 12,5°', ar: '12° 30′ ↔ 12.5°' } },
-            { progressId: 72203, stage: 'problems', title: { eu: 'Triangeluen azalerak', es: 'Áreas de triángulos', ar: 'مساحات المثلثات' }, description: { eu: 'b = 4, c = 6, A = 30° ↔ S = 6', es: 'b = 4, c = 6, A = 30° ↔ S = 6', ar: 'b = 4, c = 6, A = 30° ↔ S = 6' } }
+            { progressId: 72201, stage: 'circle', title: { eu: 'Graduak eta radianak', es: 'Grados y radianes', en: 'Degrees and radians', ar: 'الدرجات والراديان' }, description: { eu: '150° ↔ 5π/6', es: '150° ↔ 5π/6', en: '150° ↔ 5π/6', ar: '150° ↔ 5π/6' } },
+            { progressId: 72202, stage: 'identities', title: { eu: 'Minutuak eta hamartarrak', es: 'Minutos y decimales', en: 'Minutes and decimals', ar: 'الدقائق والأعداد العشرية' }, description: { eu: '12° 30′ ↔ 12,5°', es: '12° 30′ ↔ 12,5°', en: '12° 30′ ↔ 12.5°', ar: '12° 30′ ↔ 12.5°' } },
+            { progressId: 72203, stage: 'problems', title: { eu: 'Triangeluen azalerak', es: 'Áreas de triángulos', en: 'Areas of triangles', ar: 'مساحات المثلثات' }, description: { eu: 'b = 4, c = 6, A = 30° ↔ S = 6', es: 'b = 4, c = 6, A = 30° ↔ S = 6', en: 'b = 4, c = 6, A = 30° ↔ S = 6', ar: 'b = 4, c = 6, A = 30° ↔ S = 6' } }
         ]
     }
 ]

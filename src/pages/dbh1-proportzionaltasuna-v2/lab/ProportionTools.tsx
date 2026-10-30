@@ -4,6 +4,7 @@ import { ResultAnswer, Segmented, Stepper, ToolFrame } from '../../../features/u
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { toExactDecimal, toNumber, type FractionValue } from '../../../features/unit-v2/math/fraction'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { readProportionAnswer } from '../answers'
 import {
@@ -62,7 +63,7 @@ const SECOND = 'var(--second, #c4432a)'
 const GREEN = 'var(--success, #267b53)'
 const CARD = 'var(--card, #fffcf6)'
 
-const say = (eu: string, es: string, ar: string) => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string) => ({ eu, es, en, ar })
 /** {,} in LaTeX becomes the point in Arabic */
 const localLatex = (language: string, latex: string) => (language === 'ar' ? latex.replace(/\{,\}/g, '.') : latex)
 /** A value as LaTeX: exact decimal with {,}, or a fraction when it does not end */
@@ -72,7 +73,7 @@ const valueLatex = (value: FractionValue) => {
 }
 /** A value as plain text in the drawings */
 const valueText = (language: string, value: FractionValue) => {
-    const text = toExactDecimal(value, language === 'ar' ? '.' : ',')
+    const text = toExactDecimal(value, language === 'ar' ? '.' : decimalSeparatorFor(language))
     return text ?? `${value.numerator}/${value.denominator}`
 }
 
@@ -90,19 +91,19 @@ export function RatioTool(props: LabToolProps) {
     const unit = 560 / max
     const controls = (
         <>
-            <Stepper label={l(say('Aurrekaria', 'Antecedente', 'المقدَّم'))} value={state.antecedent} min={1} max={RATIO_LIMIT} onChange={(antecedent) => setState((s) => setRatio(s, { antecedent }))} language={props.language} />
-            <Stepper label={l(say('Ondorengoa', 'Consecuente', 'التالي'))} value={state.consequent} min={1} max={RATIO_LIMIT} onChange={(consequent) => setState((s) => setRatio(s, { consequent }))} language={props.language} />
+            <Stepper label={l(say('Aurrekaria', 'Antecedente', 'المقدَّم', 'Antecedent'))} value={state.antecedent} min={1} max={RATIO_LIMIT} onChange={(antecedent) => setState((s) => setRatio(s, { antecedent }))} language={props.language} />
+            <Stepper label={l(say('Ondorengoa', 'Consecuente', 'التالي', 'Consequent'))} value={state.consequent} min={1} max={RATIO_LIMIT} onChange={(consequent) => setState((s) => setRatio(s, { consequent }))} language={props.language} />
         </>
     )
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={localLatex(props.language, `$\\frac{${state.antecedent}}{${state.consequent}}=${valueLatex(value)}$`)} /></span>
-            <span className="fraction-v2-lab-readout-note">{l(say(`Aurrekaria ondorengoaren ${valueText('eu', value)} aldiz da.`, `El antecedente es ${valueText('es', value)} veces el consecuente.`, `المقدَّم يساوي ${valueText('ar', value)} من التالي.`))}</span>
+            <span className="fraction-v2-lab-readout-note">{l(say(`Aurrekaria ondorengoaren ${valueText('eu', value)} aldiz da.`, `El antecedente es ${valueText('es', value)} veces el consecuente.`, `المقدَّم يساوي ${valueText('ar', value)} من التالي.`, `The antecedent is ${valueText('es', value)} times the consequent.`))}</span>
         </>
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={ratioChallenges} state={state}>
-            <Board height={150} label={l(say('Bi barra', 'Dos barras', 'شريطان'))}>
+            <Board height={150} label={l(say('Bi barra', 'Dos barras', 'شريطان', 'Two bars'))}>
                 {[state.antecedent, state.consequent].map((count, row) => (
                     <g key={row}>
                         {Array.from({ length: count }, (_, index) => <rect key={index} x={40 + index * unit} y={24 + row * 60} width={unit} height={40} fill={row === 0 ? STAGE : SECOND} fillOpacity={0.35} stroke={INK} strokeWidth={1} />)}
@@ -124,13 +125,13 @@ export function SolveTool(props: LabToolProps) {
     const shown = state.revealed || state.solved.includes(state.problem)
     const controls = (
         <>
-            <Segmented label={l(say('Proportzioa', 'Proporción', 'التناسب'))} value={String(state.problem)} options={proportionProblems.map(([p, q, r], index) => ({ value: String(index), label: `${p}/${q} = ${r}/x${state.solved.includes(index) ? ' ✓' : ''}` }))} onChange={(next) => setState((s) => chooseProportion(s, Number(next)))} />
+            <Segmented label={l(say('Proportzioa', 'Proporción', 'التناسب', 'Proportion'))} value={String(state.problem)} options={proportionProblems.map(([p, q, r], index) => ({ value: String(index), label: `${p}/${q} = ${r}/x${state.solved.includes(index) ? ' ✓' : ''}` }))} onChange={(next) => setState((s) => chooseProportion(s, Number(next)))} />
             <ResultAnswer
                 language={props.language}
                 state={state}
                 expected={x}
-                placeholder={say('Adib.: 14', 'Ej.: 14', 'مثال: 14')}
-                unreadable={say('Idatzi zenbaki bat.', 'Escribe un número.', 'اكتب عددًا.')}
+                placeholder={say('Adib.: 14', 'Ej.: 14', 'مثال: 14', 'E.g.: 14')}
+                unreadable={say('Idatzi zenbaki bat.', 'Escribe un número.', 'اكتب عددًا.', 'Write a number.')}
                 normalizeInput={readProportionAnswer}
                 onChange={(patch) => setState((s) => updateSolve(s, patch, readProportionAnswer))}
             />
@@ -139,7 +140,7 @@ export function SolveTool(props: LabToolProps) {
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={localLatex(props.language, `$${a}\\cdot x=${b}\\cdot ${c}=${b * c}${shown ? `\\ \\to\\ x=${b * c}\\mathbin{:}${a}=${valueLatex(x)}` : ''}$`)} /></span>
-            <span className="fraction-v2-lab-readout-note">{l(say('Muturren biderkadura = erdikoen biderkadura.', 'Producto de extremos = producto de medios.', 'حاصل ضرب الطرفين = حاصل ضرب الوسطين.'))}</span>
+            <span className="fraction-v2-lab-readout-note">{l(say('Muturren biderkadura = erdikoen biderkadura.', 'Producto de extremos = producto de medios.', 'حاصل ضرب الطرفين = حاصل ضرب الوسطين.', 'Product of extremes = product of means.'))}</span>
         </>
     )
     const term = (cx: number, cy: number, text: string, color: string) => (
@@ -150,7 +151,7 @@ export function SolveTool(props: LabToolProps) {
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={solveChallenges} state={state}>
-            <Board height={170} label={l(say('Proportzioa', 'La proporción', 'التناسب'))}>
+            <Board height={170} label={l(say('Proportzioa', 'La proporción', 'التناسب', 'The proportion'))}>
                 {term(220, 56, String(a), STAGE)}
                 <line x1={186} x2={254} y1={78} y2={78} stroke={INK} strokeWidth={3} />
                 {term(220, 130, String(b), SECOND)}
@@ -170,19 +171,19 @@ export function ClassifyTool(props: LabToolProps) {
     const [state, setState] = useState<ClassifyState>(initialClassifyState)
     const pair = magnitudePairs[state.card]
     const answer = state.answers[state.card]
-    const kinds: Array<{ kind: PairKind; label: { eu: string; es: string; ar: string }; color: string }> = [
-        { kind: 'direct', label: say('Zuzena', 'Directa', 'طردي'), color: STAGE },
-        { kind: 'inverse', label: say('Alderantzizkoa', 'Inversa', 'عكسي'), color: SECOND },
-        { kind: 'none', label: say('Ez proportzionala', 'No proporcional', 'غير متناسب'), color: MUTED }
+    const kinds: Array<{ kind: PairKind; label: { eu: string; es: string; en: string; ar: string }; color: string }> = [
+        { kind: 'direct', label: say('Zuzena', 'Directa', 'طردي', 'Direct'), color: STAGE },
+        { kind: 'inverse', label: say('Alderantzizkoa', 'Inversa', 'عكسي', 'Inverse'), color: SECOND },
+        { kind: 'none', label: say('Ez proportzionala', 'No proporcional', 'غير متناسب', 'Not proportional'), color: MUTED }
     ]
     const controls = (
         <>
-            <Segmented label={l(say('Bikotea', 'Pareja', 'الزوج'))} value={String(state.card)} options={magnitudePairs.map((_, index) => ({ value: String(index), label: `${index + 1}${state.answers[index] === undefined ? '' : cardRight(state, index) ? ' ✓' : ' ✗'}` }))} onChange={(next) => setState((s) => chooseCard(s, Number(next)))} />
+            <Segmented label={l(say('Bikotea', 'Pareja', 'الزوج', 'Pair'))} value={String(state.card)} options={magnitudePairs.map((_, index) => ({ value: String(index), label: `${index + 1}${state.answers[index] === undefined ? '' : cardRight(state, index) ? ' ✓' : ' ✗'}` }))} onChange={(next) => setState((s) => chooseCard(s, Number(next)))} />
             <div className="fraction-v2-lab-quick-actions">
                 {kinds.map((item) => <button key={item.kind} type="button" aria-pressed={answer === item.kind} onClick={() => setState((s) => classifyCard(s, item.kind))}>{l(item.label)}</button>)}
             </div>
             <div className="fraction-v2-lab-quick-actions">
-                <button type="button" disabled={state.card >= magnitudePairs.length - 1} onClick={() => setState((s) => chooseCard(s, s.card + 1))}>{l(say('Hurrengoa', 'Siguiente', 'التالي'))}</button>
+                <button type="button" disabled={state.card >= magnitudePairs.length - 1} onClick={() => setState((s) => chooseCard(s, s.card + 1))}>{l(say('Hurrengoa', 'Siguiente', 'التالي', 'Next'))}</button>
             </div>
         </>
     )
@@ -192,16 +193,16 @@ export function ClassifyTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-main">{l(pair.text)}</span>
             <span className="fraction-v2-lab-readout-note">
                 {answer === undefined
-                    ? l(say('Bat bikoiztean, bestea bikoiztu, erdia ala ez dago araurik?', 'Al doblar una, ¿la otra se dobla, se hace la mitad o no hay regla?', 'إذا تضاعف أحدهما، هل يتضاعف الآخر أم ينقص إلى النصف أم لا قاعدة؟'))
+                    ? l(say('Bat bikoiztean, bestea bikoiztu, erdia ala ez dago araurik?', 'Al doblar una, ¿la otra se dobla, se hace la mitad o no hay regla?', 'إذا تضاعف أحدهما، هل يتضاعف الآخر أم ينقص إلى النصف أم لا قاعدة؟', 'When you double one, does the other double, halve, or is there no rule?'))
                     : right
-                        ? l(say('Zuzena!', '¡Correcto!', 'صحيح!'))
-                        : l(say('Ez. Pentsatu adibide batean: zer gertatzen da bat bikoiztean?', 'No. Piensa un ejemplo: ¿qué pasa al doblar una?', 'لا. فكّر في مثال: ماذا يحدث إذا تضاعف أحدهما؟'))}
+                        ? l(say('Zuzena!', '¡Correcto!', 'صحيح!', 'Correct!'))
+                        : l(say('Ez. Pentsatu adibide batean: zer gertatzen da bat bikoiztean?', 'No. Piensa un ejemplo: ¿qué pasa al doblar una?', 'لا. فكّر في مثال: ماذا يحدث إذا تضاعف أحدهما؟', 'No. Think of an example: what happens when you double one?'))}
             </span>
         </>
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={classifyChallenges} state={state}>
-            <Board height={190} label={l(say('Bikoteak sailkatuta', 'Parejas clasificadas', 'الأزواج المصنّفة'))}>
+            <Board height={190} label={l(say('Bikoteak sailkatuta', 'Parejas clasificadas', 'الأزواج المصنّفة', 'Classified pairs'))}>
                 {kinds.map((item, column) => (
                     <g key={item.kind}>
                         <rect x={20 + column * 205} y={10} width={190} height={170} rx={12} fill={CARD} stroke={item.color} strokeWidth={2} />
@@ -231,19 +232,19 @@ export function TableTool(props: LabToolProps) {
     const gy = (y: number) => 200 - (y / maxY) * 170
     const controls = (
         <>
-            <Segmented label={l(say('Mota', 'Tipo', 'النوع'))} value={state.kind} options={[{ value: 'direct', label: l(say('Zuzena', 'Directa', 'طردي')) }, { value: 'inverse', label: l(say('Alderantzizkoa', 'Inversa', 'عكسي')) }]} onChange={(kind) => setState(setTableKind(kind as TableState['kind']))} />
-            <Segmented label={state.kind === 'direct' ? l(say('Konstantea (arrazoia)', 'Constante (razón)', 'الثابت (النسبة)')) : l(say('Biderkadura', 'Producto', 'حاصل الضرب'))} value={String(state.constant)} options={tableConstants[state.kind].map((text, index) => ({ value: String(index), label: props.language === 'ar' ? text.replace(',', '.') : text }))} onChange={(next) => setState((s) => setTableConstant(s, Number(next)))} />
+            <Segmented label={l(say('Mota', 'Tipo', 'النوع', 'Type'))} value={state.kind} options={[{ value: 'direct', label: l(say('Zuzena', 'Directa', 'طردي', 'Direct')) }, { value: 'inverse', label: l(say('Alderantzizkoa', 'Inversa', 'عكسي', 'Inverse')) }]} onChange={(kind) => setState(setTableKind(kind as TableState['kind']))} />
+            <Segmented label={state.kind === 'direct' ? l(say('Konstantea (arrazoia)', 'Constante (razón)', 'الثابت (النسبة)', 'Constant (ratio)')) : l(say('Biderkadura', 'Producto', 'حاصل الضرب', 'Product'))} value={String(state.constant)} options={tableConstants[state.kind].map((text, index) => ({ value: String(index), label: props.language === 'ar' ? text.replace(',', '.') : text.replace(',', decimalSeparatorFor(props.language)) }))} onChange={(next) => setState((s) => setTableConstant(s, Number(next)))} />
         </>
     )
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={localLatex(props.language, state.kind === 'direct' ? `$y=${valueLatex(k)}\\cdot x$` : `$x\\cdot y=${valueLatex(k)}$`)} /></span>
-            <span className="fraction-v2-lab-readout-note">{state.kind === 'direct' ? l(say('Puntuak zuzen batean, jatorritik.', 'Los puntos, en una recta desde el origen.', 'النقاط على مستقيم من الأصل.')) : l(say('Puntuak kurba batean: bat handitzean, bestea txikitu.', 'Los puntos, en una curva: al crecer una, la otra decrece.', 'النقاط على منحنى: حين يزيد أحدهما ينقص الآخر.'))}</span>
+            <span className="fraction-v2-lab-readout-note">{state.kind === 'direct' ? l(say('Puntuak zuzen batean, jatorritik.', 'Los puntos, en una recta desde el origen.', 'النقاط على مستقيم من الأصل.', 'The points, on a straight line from the origin.')) : l(say('Puntuak kurba batean: bat handitzean, bestea txikitu.', 'Los puntos, en una curva: al crecer una, la otra decrece.', 'النقاط على منحنى: حين يزيد أحدهما ينقص الآخر.', 'The points, on a curve: as one grows, the other decreases.'))}</span>
         </>
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={tableChallenges} state={state}>
-            <Board height={230} label={l(say('Taula eta grafikoa', 'Tabla y gráfica', 'الجدول والرسم'))}>
+            <Board height={230} label={l(say('Taula eta grafikoa', 'Tabla y gráfica', 'الجدول والرسم', 'Table and graph'))}>
                 {TABLE_XS.map((x, index) => (
                     <g key={x}>
                         <rect x={20} y={14 + index * 40} width={90} height={38} fill={STAGE_TINT} stroke={INK} strokeWidth={1.4} />
@@ -281,10 +282,10 @@ export function UnitTool(props: LabToolProps) {
     )
     const controls = (
         <>
-            <Segmented label={l(say('Problema', 'Problema', 'المسألة'))} value={String(state.problem)} options={unitProblems.map((_, index) => ({ value: String(index), label: `${index + 1}${state.solved.includes(index) ? ' ✓' : ''}` }))} onChange={(next) => setState((s) => chooseUnitProblem(s, Number(next)))} />
-            <p className="fraction-v2-lab-tip">{l(say(`1. urratsa: ${problem.known} → 1`, `Paso 1: ${problem.known} → 1`, `الخطوة 1: ${problem.known} ← 1`))}</p>
+            <Segmented label={l(say('Problema', 'Problema', 'المسألة', 'Problem'))} value={String(state.problem)} options={unitProblems.map((_, index) => ({ value: String(index), label: `${index + 1}${state.solved.includes(index) ? ' ✓' : ''}` }))} onChange={(next) => setState((s) => chooseUnitProblem(s, Number(next)))} />
+            <p className="fraction-v2-lab-tip">{l(say(`1. urratsa: ${problem.known} → 1`, `Paso 1: ${problem.known} → 1`, `الخطوة 1: ${problem.known} ← 1`, `Step 1: ${problem.known} → 1`))}</p>
             {stepButtons('first', problem.known)}
-            <p className="fraction-v2-lab-tip">{l(say(`2. urratsa: 1 → ${problem.wanted}`, `Paso 2: 1 → ${problem.wanted}`, `الخطوة 2: 1 ← ${problem.wanted}`))}</p>
+            <p className="fraction-v2-lab-tip">{l(say(`2. urratsa: 1 → ${problem.wanted}`, `Paso 2: 1 → ${problem.wanted}`, `الخطوة 2: 1 ← ${problem.wanted}`, `Step 2: 1 → ${problem.wanted}`))}</p>
             {stepButtons('second', problem.wanted)}
         </>
     )
@@ -293,14 +294,14 @@ export function UnitTool(props: LabToolProps) {
             <span className="fraction-v2-lab-readout-main">{l(problem.text)}</span>
             <span className="fraction-v2-lab-readout-note">
                 {!state.first
-                    ? l(say('Aukeratu lehen urratsa: bat bakarrarentzat, zatitu ala biderkatu?', 'Elige el primer paso: para uno solo, ¿dividir o multiplicar?', 'اختر الخطوة الأولى: للواحد، هل نقسم أم نضرب؟'))
+                    ? l(say('Aukeratu lehen urratsa: bat bakarrarentzat, zatitu ala biderkatu?', 'Elige el primer paso: para uno solo, ¿dividir o multiplicar?', 'اختر الخطوة الأولى: للواحد، هل نقسم أم نضرب؟', 'Choose the first step: for one, do you divide or multiply?'))
                     : !firstRight
-                        ? (problem.direct ? l(say('Zuzena da: bat bakarrak gutxiago, zatitu.', 'Es directa: uno solo, menos; divide.', 'إنه طردي: الواحد أقل، فاقسم.')) : l(say('Alderantzizkoa da: bat bakarrak denbora gehiago, biderkatu.', 'Es inversa: uno solo tarda más; multiplica.', 'إنه عكسي: الواحد يحتاج وقتًا أطول، فاضرب.')))
+                        ? (problem.direct ? l(say('Zuzena da: bat bakarrak gutxiago, zatitu.', 'Es directa: uno solo, menos; divide.', 'إنه طردي: الواحد أقل، فاقسم.', 'It is direct: for one, the amount is smaller; divide.')) : l(say('Alderantzizkoa da: bat bakarrak denbora gehiago, biderkatu.', 'Es inversa: uno solo tarda más; multiplica.', 'إنه عكسي: الواحد يحتاج وقتًا أطول، فاضرب.', 'It is inverse: one alone takes longer; multiply.')))
                         : !state.second
-                            ? l(say('Orain bigarren urratsa.', 'Ahora el segundo paso.', 'الآن الخطوة الثانية.'))
+                            ? l(say('Orain bigarren urratsa.', 'Ahora el segundo paso.', 'الآن الخطوة الثانية.', 'Now the second step.'))
                             : secondRight
-                                ? l(say('Zuzena!', '¡Correcto!', 'صحيح!'))
-                                : l(say('Bigarren urratsean alderantzizko eragiketa egiten da.', 'En el segundo paso se hace la operación contraria.', 'في الخطوة الثانية نجري العملية المعاكسة.'))}
+                                ? l(say('Zuzena!', '¡Correcto!', 'صحيح!', 'Correct!'))
+                                : l(say('Bigarren urratsean alderantzizko eragiketa egiten da.', 'En el segundo paso se hace la operación contraria.', 'في الخطوة الثانية نجري العملية المعاكسة.', 'In the second step, do the opposite operation.'))}
             </span>
         </>
     )
@@ -313,7 +314,7 @@ export function UnitTool(props: LabToolProps) {
     )
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={unitChallenges} state={state}>
-            <Board height={170} label={l(say('Unitatera laburtzea', 'Reducción a la unidad', 'الإرجاع إلى الوحدة'))}>
+            <Board height={170} label={l(say('Unitatera laburtzea', 'Reducción a la unidad', 'الإرجاع إلى الوحدة', 'Unitary method'))}>
                 {box(20, String(problem.known), `${problem.amount} ${problem.unit}`, INK, CARD)}
                 {box(245, '1', one ? `${valueText(props.language, one)} ${problem.unit}` : '?', state.first ? (firstRight ? GREEN : SECOND) : MUTED, '#fbebc0')}
                 {box(470, String(problem.wanted), wanted ? `${valueText(props.language, wanted)} ${problem.unit}` : '?', state.second ? (firstRight && secondRight ? GREEN : SECOND) : MUTED, CARD)}
@@ -332,26 +333,26 @@ export function ChangeTool(props: LabToolProps) {
     const l = useLabText(props.language)
     const [state, setState] = useState<ChangeState>(initialChangeState)
     const { change, final, paid } = changeResult(state)
-    const percentText = (value: number) => (props.language === 'eu' ? `% ${value}` : props.language === 'ar' ? `${value}٪` : `${value} %`)
+    const percentText = (value: number) => (props.language === 'eu' ? `% ${value}` : props.language === 'ar' ? `${value}٪` : props.language === 'en' ? `${value}%` : `${value} %`)
     const scale = 520 / 150
     const controls = (
         <>
-            <Segmented label={l(say('Aldaketa', 'Cambio', 'التغيّر'))} value={state.kind} options={[{ value: 'discount', label: l(say('Beherapena', 'Rebaja', 'تخفيض')) }, { value: 'increase', label: l(say('Igoera', 'Subida', 'زيادة')) }]} onChange={(kind) => setState((s) => setChange(s, { kind: kind as ChangeState['kind'] }))} />
-            <Stepper label={l(say('Prezioa (€)', 'Precio (€)', 'السعر (€)'))} value={state.price} min={CHANGE_LIMITS.price.min} max={CHANGE_LIMITS.price.max} step={CHANGE_LIMITS.price.step} onChange={(price) => setState((s) => setChange(s, { price }))} language={props.language} />
-            <Stepper label={l(say('Ehunekoa (%)', 'Porcentaje (%)', 'النسبة (٪)'))} value={state.percent} min={CHANGE_LIMITS.percent.min} max={CHANGE_LIMITS.percent.max} step={CHANGE_LIMITS.percent.step} onChange={(percent) => setState((s) => setChange(s, { percent }))} language={props.language} />
+            <Segmented label={l(say('Aldaketa', 'Cambio', 'التغيّر', 'Change'))} value={state.kind} options={[{ value: 'discount', label: l(say('Beherapena', 'Rebaja', 'تخفيض', 'Discount')) }, { value: 'increase', label: l(say('Igoera', 'Subida', 'زيادة', 'Increase')) }]} onChange={(kind) => setState((s) => setChange(s, { kind: kind as ChangeState['kind'] }))} />
+            <Stepper label={l(say('Prezioa (€)', 'Precio (€)', 'السعر (€)', 'Price (€)'))} value={state.price} min={CHANGE_LIMITS.price.min} max={CHANGE_LIMITS.price.max} step={CHANGE_LIMITS.price.step} onChange={(price) => setState((s) => setChange(s, { price }))} language={props.language} />
+            <Stepper label={l(say('Ehunekoa (%)', 'Porcentaje (%)', 'النسبة (٪)', 'Percentage (%)'))} value={state.percent} min={CHANGE_LIMITS.percent.min} max={CHANGE_LIMITS.percent.max} step={CHANGE_LIMITS.percent.step} onChange={(percent) => setState((s) => setChange(s, { percent }))} language={props.language} />
         </>
     )
     const sign = state.kind === 'discount' ? '-' : '+'
     const readout = (
         <>
             <span className="fraction-v2-lab-readout-main"><MathText text={localLatex(props.language, `$${state.price}${sign}${valueLatex(change)}=${valueLatex(final)}$`)} /></span>
-            <span className="fraction-v2-lab-readout-note">{l(say(`Prezioaren ${percentText(paid)} ordaintzen da: ${state.price} · ${paid} : 100.`, `Se paga el ${percentText(paid)} del precio: ${state.price} · ${paid} : 100.`, `يُدفع ${percentText(paid)} من السعر: ${state.price} · ${paid} : 100.`))}</span>
+            <span className="fraction-v2-lab-readout-note">{l(say(`Prezioaren ${percentText(paid)} ordaintzen da: ${state.price} · ${paid} : 100.`, `Se paga el ${percentText(paid)} del precio: ${state.price} · ${paid} : 100.`, `يُدفع ${percentText(paid)} من السعر: ${state.price} · ${paid} : 100.`, `You pay ${percentText(paid)} of the price: ${state.price} · ${paid} : 100.`))}</span>
         </>
     )
     const whole = 100 * scale
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={changeChallenges} state={state}>
-            <Board height={150} label={l(say('Prezioaren barra', 'Barra del precio', 'شريط السعر'))}>
+            <Board height={150} label={l(say('Prezioaren barra', 'Barra del precio', 'شريط السعر', 'Price bar'))}>
                 <rect x={40} y={50} width={paid * scale} height={46} fill={state.kind === 'discount' ? GREEN : STAGE} fillOpacity={0.3} stroke={INK} strokeWidth={2} />
                 <rect x={40} y={50} width={whole} height={46} fill="none" stroke={INK} strokeWidth={2} strokeDasharray={state.kind === 'discount' ? '6 4' : undefined} />
                 {state.kind === 'discount' && state.percent > 0 && <rect x={40 + paid * scale} y={50} width={state.percent * scale} height={46} fill={SECOND} fillOpacity={0.3} stroke={INK} strokeWidth={2} />}

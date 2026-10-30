@@ -47,7 +47,7 @@ const TRIP_MINUTES = [30, 36, 40, 45, 48, 50, 60, 72, 75, 80, 90, 96, 100, 105, 
 const DELAYS = [15, 20, 30, 45, 60, 90] as const
 
 const whole = (value: number) => Math.abs(value - Math.round(value)) < 1e-9
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 
 export const isTowards = (kind: RoadKind) => kind === 'meet' || kind === 'late-meet'
 
@@ -143,28 +143,28 @@ export function roadStars(total: number): Stars {
 /** The problem, as a short text; the speeds and distances are also on the drawing */
 export function roadProblem(round: RoadRound): LocalizedText {
     const [a, b] = round.speeds
-    const speeds = say(`Abiadurak: A, ${a} km/h; B, ${b} km/h.`, `A va a ${a} km/h y B a ${b} km/h.`, `سرعة أ ${a} كم/س وسرعة ب ${b} كم/س.`)
-    const join = (first: LocalizedText, last: LocalizedText) => say(`${first.eu} ${speeds.eu}${last.eu}`, `${first.es} ${speeds.es}${last.es}`, `${first.ar} ${speeds.ar}${last.ar}`)
+    const speeds = say(`Abiadurak: A, ${a} km/h; B, ${b} km/h.`, `A va a ${a} km/h y B a ${b} km/h.`, `سرعة أ ${a} كم/س وسرعة ب ${b} كم/س.`, `A goes at ${a} km/h and B at ${b} km/h.`)
+    const join = (first: LocalizedText, last: LocalizedText) => say(`${first.eu} ${speeds.eu}${last.eu}`, `${first.es} ${speeds.es}${last.es}`, `${first.ar} ${speeds.ar}${last.ar}`, `${first.en} ${speeds.en}${last.en}`)
     switch (round.kind) {
         case 'meet':
             return join(
-                say('A eta B elkarrengana abiatzen dira, aldi berean.', 'A y B salen a la vez, uno hacia el otro.', 'تنطلق أ وب في اللحظة نفسها، كلٌّ نحو الأخرى.'),
-                say(` Bien arteko distantzia: ${round.distance} km.`, ` Los separan ${round.distance} km.`, ` والمسافة بينهما ${round.distance} كم.`)
+                say('A eta B elkarrengana abiatzen dira, aldi berean.', 'A y B salen a la vez, uno hacia el otro.', 'تنطلق أ وب في اللحظة نفسها، كلٌّ نحو الأخرى.', 'A and B set off at the same time, towards each other.'),
+                say(` Bien arteko distantzia: ${round.distance} km.`, ` Los separan ${round.distance} km.`, ` والمسافة بينهما ${round.distance} كم.`, ` They are ${round.distance} km apart.`)
             )
         case 'chase':
             return join(
-                say('B aurretik doa eta A atzetik; biak norabide berean abiatzen dira, aldi berean.', 'B va delante y A lo persigue; salen a la vez y en el mismo sentido.', 'ب في المقدمة وأ تلاحقها؛ تنطلقان في اللحظة نفسها وفي الاتجاه نفسه.'),
-                say(` Abiatzean, bien arteko distantzia: ${round.distance} km.`, ` Al salir, B le lleva ${round.distance} km.`, ` وعند الانطلاق تتقدم ب بمسافة ${round.distance} كم.`)
+                say('B aurretik doa eta A atzetik; biak norabide berean abiatzen dira, aldi berean.', 'B va delante y A lo persigue; salen a la vez y en el mismo sentido.', 'ب في المقدمة وأ تلاحقها؛ تنطلقان في اللحظة نفسها وفي الاتجاه نفسه.', 'B is ahead and A is chasing it; they set off at the same time and in the same direction.'),
+                say(` Abiatzean, bien arteko distantzia: ${round.distance} km.`, ` Al salir, B le lleva ${round.distance} km.`, ` وعند الانطلاق تتقدم ب بمسافة ${round.distance} كم.`, ` When they set off, B is already ${round.distance} km ahead.`)
             )
         case 'late-meet':
             return join(
-                say(`A eta B elkarrengana doaz, baina B geroago abiatzen da: ${round.delay} minutu geroago.`, `A y B van uno hacia el otro, pero B sale ${round.delay} min más tarde.`, `تسير أ وب كلٌّ نحو الأخرى، لكن ب تنطلق بعد ${round.delay} دقيقة.`),
-                say(` Bien arteko distantzia: ${round.distance} km.`, ` Los separan ${round.distance} km.`, ` والمسافة بينهما ${round.distance} كم.`)
+                say(`A eta B elkarrengana doaz, baina B geroago abiatzen da: ${round.delay} minutu geroago.`, `A y B van uno hacia el otro, pero B sale ${round.delay} min más tarde.`, `تسير أ وب كلٌّ نحو الأخرى، لكن ب تنطلق بعد ${round.delay} دقيقة.`, `A and B are going towards each other, but B sets off ${round.delay} min later.`),
+                say(` Bien arteko distantzia: ${round.distance} km.`, ` Los separan ${round.distance} km.`, ` والمسافة بينهما ${round.distance} كم.`, ` They are ${round.distance} km apart.`)
             )
         case 'late-chase':
             return join(
-                say(`B herritik irteten da. A herri beretik irteten da, ${round.delay} minutu geroago, eta B-ren atzetik doa.`, `B sale del pueblo. A sale del mismo pueblo ${round.delay} min más tarde y lo persigue.`, `تنطلق ب من البلدة. ثم تنطلق أ من البلدة نفسها بعد ${round.delay} دقيقة وتلاحقها.`),
-                say('', '', '')
+                say(`B herritik irteten da. A herri beretik irteten da, ${round.delay} minutu geroago, eta B-ren atzetik doa.`, `B sale del pueblo. A sale del mismo pueblo ${round.delay} min más tarde y lo persigue.`, `تنطلق ب من البلدة. ثم تنطلق أ من البلدة نفسها بعد ${round.delay} دقيقة وتلاحقها.`, `B sets off from the village. A sets off from the same village ${round.delay} min later and chases B.`),
+                say('', '', '', '')
             )
     }
 }
@@ -176,30 +176,30 @@ export function roadSteps(round: RoadRound): RoadStep[] {
     const trip = round.minutes - round.delay
     const hours = hoursLatex(fraction(trip, 60))
     const wait = hoursLatex(fraction(round.delay, 60))
-    const place = say('A-ren irteeratik (km)', 'Desde la salida de A (km)', 'من نقطة انطلاق أ (كم)')
+    const place = say('A-ren irteeratik (km)', 'Desde la salida de A (km)', 'من نقطة انطلاق أ (كم)', 'From A\'s starting point (km)')
     if (!late) {
         const towards = round.kind === 'meet'
         const closing = towards ? a + b : a - b
         return [
             towards
-                ? { label: say('Orduko hurbiltzen dira (km)', 'Se acercan cada hora (km)', 'تقتربان كل ساعة (كم)'), latex: `${a}+${b}=${closing}` }
-                : { label: say('Orduko murrizten du tartea (km)', 'Cada hora recorta (km)', 'تقلّص المسافة كل ساعة (كم)'), latex: `${a}-${b}=${closing}` },
-            { label: say('Elkartu arteko denbora (h)', 'Tiempo hasta el encuentro (h)', 'الزمن حتى اللقاء (س)'), latex: `${round.distance}\\mathbin{:}${closing}=${hours}` },
+                ? { label: say('Orduko hurbiltzen dira (km)', 'Se acercan cada hora (km)', 'تقتربان كل ساعة (كم)', 'Closing in each hour (km)'), latex: `${a}+${b}=${closing}` }
+                : { label: say('Orduko murrizten du tartea (km)', 'Cada hora recorta (km)', 'تقلّص المسافة كل ساعة (كم)', 'Gap closed each hour (km)'), latex: `${a}-${b}=${closing}` },
+            { label: say('Elkartu arteko denbora (h)', 'Tiempo hasta el encuentro (h)', 'الزمن حتى اللقاء (س)', 'Time until they meet (h)'), latex: `${round.distance}\\mathbin{:}${closing}=${hours}` },
             { label: place, latex: `${a}\\cdot ${hours}=${round.meeting}` }
         ]
     }
     if (round.kind === 'late-meet') {
         const head = (a * round.delay) / 60
         return [
-            { label: say('A bakarrik, B abiatu arte (km)', 'A sola, hasta que sale B (km)', 'أ وحدها حتى تنطلق ب (كم)'), latex: `${a}\\cdot ${wait}=${head}` },
-            { label: say('B abiatu eta elkartu arte (h)', 'Desde que sale B hasta el encuentro (h)', 'من انطلاق ب حتى اللقاء (س)'), latex: `(${round.distance}-${head})\\mathbin{:}(${a}+${b})=${hours}` },
+            { label: say('A bakarrik, B abiatu arte (km)', 'A sola, hasta que sale B (km)', 'أ وحدها حتى تنطلق ب (كم)', 'A alone, until B sets off (km)'), latex: `${a}\\cdot ${wait}=${head}` },
+            { label: say('B abiatu eta elkartu arte (h)', 'Desde que sale B hasta el encuentro (h)', 'من انطلاق ب حتى اللقاء (س)', 'From when B sets off until they meet (h)'), latex: `(${round.distance}-${head})\\mathbin{:}(${a}+${b})=${hours}` },
             { label: place, latex: `${head}+${a}\\cdot ${hours}=${round.meeting}` }
         ]
     }
     const head = (b * round.delay) / 60
     return [
-        { label: say('B aurretik, A abiatzean (km)', 'Ventaja de B cuando sale A (km)', 'تقدّم ب عند انطلاق أ (كم)'), latex: `${b}\\cdot ${wait}=${head}` },
-        { label: say('A abiatu eta harrapatu arte (h)', 'Desde que sale A hasta que la alcanza (h)', 'من انطلاق أ حتى اللحاق (س)'), latex: `${head}\\mathbin{:}(${a}-${b})=${hours}` },
+        { label: say('B aurretik, A abiatzean (km)', 'Ventaja de B cuando sale A (km)', 'تقدّم ب عند انطلاق أ (كم)', 'B\'s lead when A sets off (km)'), latex: `${b}\\cdot ${wait}=${head}` },
+        { label: say('A abiatu eta harrapatu arte (h)', 'Desde que sale A hasta que la alcanza (h)', 'من انطلاق أ حتى اللحاق (س)', 'From when A sets off until it catches up (h)'), latex: `${head}\\mathbin{:}(${a}-${b})=${hours}` },
         { label: place, latex: `${a}\\cdot ${hours}=${round.meeting}` }
     ]
 }
@@ -209,13 +209,13 @@ export function roadAnswer(round: RoadRound): LocalizedText {
     return say(
         `Elkartzeko: ${durationText(round.minutes, 'eu')}. Lekua: A-ren irteeratik ${round.meeting} km.`,
         `Se encuentran al cabo de ${durationText(round.minutes, 'es')}, a ${round.meeting} km de la salida de A.`,
-        `تلتقيان بعد ${durationText(round.minutes, 'ar')}، على بعد ${round.meeting} كم من نقطة انطلاق أ.`
+        `تلتقيان بعد ${durationText(round.minutes, 'ar')}، على بعد ${round.meeting} كم من نقطة انطلاق أ.`, `They meet after ${durationText(round.minutes, 'en')}, ${round.meeting} km from A's starting point.`
     )
 }
 
 export const roadGradeTexts: Record<RoadGrade, LocalizedText> = {
-    bullseye: say('Itua! Justu han elkartu dira.', '¡Diana! Se encuentran justo ahí.', 'إصابة! التقتا هناك تمامًا.'),
-    close: say('Oso gertu!', '¡Muy cerca!', 'قريب جدًا!'),
-    near: say('Gertu.', 'Cerca.', 'قريب.'),
-    far: say('Urrun geratu zara.', 'Te has quedado lejos.', 'كنت بعيدًا.')
+    bullseye: say('Itua! Justu han elkartu dira.', '¡Diana! Se encuentran justo ahí.', 'إصابة! التقتا هناك تمامًا.', 'Bullseye! They meet right there.'),
+    close: say('Oso gertu!', '¡Muy cerca!', 'قريب جدًا!', 'Very close!'),
+    near: say('Gertu.', 'Cerca.', 'قريب.', 'Close.'),
+    far: say('Urrun geratu zara.', 'Te has quedado lejos.', 'كنت بعيدًا.', 'You’re far off.')
 }

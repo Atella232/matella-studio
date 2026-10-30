@@ -4,6 +4,7 @@ import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/Lab
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { toExactDecimal, toNumber, type FractionValue } from '../../../features/unit-v2/math/fraction'
+import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import {
     ANGLE_STEP,
     angleKind,
@@ -93,9 +94,9 @@ const CARD = 'var(--card, #fffcf6)'
 const SOFT = '#fbebc0'
 
 type Point = [number, number]
-type Text = { eu: string; es: string; ar: string }
+type Text = { eu: string; es: string; en: string; ar: string }
 
-const say = (eu: string, es: string, ar: string): Text => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): Text => ({ eu, es, en, ar })
 /** {,} in LaTeX becomes the point in Arabic */
 const localLatex = (language: string, latex: string) => (language === 'ar' ? latex.replace(/\{,\}/g, '.') : latex)
 /** A measure in LaTeX: exact with up to two decimals, otherwise rounded to one with ≈ */
@@ -123,16 +124,16 @@ function Readout({ language, latex, note }: { language: string; latex: string; n
 }
 
 const polygonNames: Record<number, Text> = {
-    3: say('Triangelua', 'Triángulo', 'مثلث'),
-    4: say('Laukia', 'Cuadrilátero', 'رباعي'),
-    5: say('Pentagonoa', 'Pentágono', 'مخمس'),
-    6: say('Hexagonoa', 'Hexágono', 'مسدس'),
-    7: say('Heptagonoa', 'Heptágono', 'مسبع'),
-    8: say('Oktogonoa', 'Octógono', 'مثمن'),
-    9: say('Eneagonoa', 'Eneágono', 'متسع'),
-    10: say('Dekagonoa', 'Decágono', 'معشّر'),
-    11: say('Hendekagonoa', 'Endecágono', 'مضلع بأحد عشر ضلعًا'),
-    12: say('Dodekagonoa', 'Dodecágono', 'مضلع باثني عشر ضلعًا')
+    3: say('Triangelua', 'Triángulo', 'مثلث', 'Triangle'),
+    4: say('Laukia', 'Cuadrilátero', 'رباعي', 'Quadrilateral'),
+    5: say('Pentagonoa', 'Pentágono', 'مخمس', 'Pentagon'),
+    6: say('Hexagonoa', 'Hexágono', 'مسدس', 'Hexagon'),
+    7: say('Heptagonoa', 'Heptágono', 'مسبع', 'Heptagon'),
+    8: say('Oktogonoa', 'Octógono', 'مثمن', 'Octagon'),
+    9: say('Eneagonoa', 'Eneágono', 'متسع', 'Nonagon'),
+    10: say('Dekagonoa', 'Decágono', 'معشّر', 'Decagon'),
+    11: say('Hendekagonoa', 'Endecágono', 'مضلع بأحد عشر ضلعًا', 'Hendecagon'),
+    12: say('Dodekagonoa', 'Dodecágono', 'مضلع باثني عشر ضلعًا', 'Dodecagon')
 }
 
 /* ---------- 1. The polygon inside ---------- */
@@ -145,8 +146,8 @@ export function PolygonTool(props: LabToolProps) {
     const tints = [STAGE_TINT, SOFT, '#d6eddf', '#f6d9d2', '#e8e0f7']
     const controls = (
         <>
-            <Stepper label={l(say('Alde kopurua', 'Número de lados', 'عدد الأضلاع'))} value={n} min={POLYGON_MIN} max={POLYGON_MAX} onChange={(sides) => setState((s) => setPolygon(s, { sides }))} language={props.language} />
-            <Segmented label={l(say('Ikusi', 'Ver', 'اعرض'))} value={state.mode} options={[{ value: 'diagonals', label: l(say('Diagonalak', 'Diagonales', 'الأقطار')) }, { value: 'triangles', label: l(say('Triangeluak', 'Triángulos', 'المثلثات')) }, { value: 'angles', label: l(say('Angeluak', 'Ángulos', 'الزوايا')) }]} onChange={(mode) => setState((s) => setPolygon(s, { mode: mode as PolygonMode }))} />
+            <Stepper label={l(say('Alde kopurua', 'Número de lados', 'عدد الأضلاع', 'Number of sides'))} value={n} min={POLYGON_MIN} max={POLYGON_MAX} onChange={(sides) => setState((s) => setPolygon(s, { sides }))} language={props.language} />
+            <Segmented label={l(say('Ikusi', 'Ver', 'اعرض', 'Show'))} value={state.mode} options={[{ value: 'diagonals', label: l(say('Diagonalak', 'Diagonales', 'الأقطار', 'Diagonals')) }, { value: 'triangles', label: l(say('Triangeluak', 'Triángulos', 'المثلثات', 'Triangles')) }, { value: 'angles', label: l(say('Angeluak', 'Ángulos', 'الزوايا', 'Angles')) }]} onChange={(mode) => setState((s) => setPolygon(s, { mode: mode as PolygonMode }))} />
         </>
     )
     const latex = state.mode === 'diagonals'
@@ -155,10 +156,10 @@ export function PolygonTool(props: LabToolProps) {
             ? `(${n}-2)\\cdot 180^{\\circ}=${angleSum(n)}^{\\circ}`
             : `\\frac{${angleSum(n)}^{\\circ}}{${n}}${measure(interiorAngle(n))}^{\\circ}\\qquad\\frac{360^{\\circ}}{${n}}${measure(centralAngle(n))}^{\\circ}`
     const note = state.mode === 'diagonals'
-        ? l(say(`${l(polygonNames[n])}: erpin bakoitzetik ${n - 3} diagonal.`, `${l(polygonNames[n])}: de cada vértice salen ${n - 3} diagonales.`, `${l(polygonNames[n])}: من كل رأس ${n - 3} أقطار.`))
+        ? l(say(`${l(polygonNames[n])}: erpin bakoitzetik ${n - 3} diagonal.`, `${l(polygonNames[n])}: de cada vértice salen ${n - 3} diagonales.`, `${l(polygonNames[n])}: من كل رأس ${n - 3} أقطار.`, `${l(polygonNames[n])}: from each vertex, ${n - 3} diagonals start.`))
         : state.mode === 'triangles'
-            ? l(say(`Erpin batetik ${n - 2} triangelu.`, `Desde un vértice, ${n - 2} triángulos.`, `من رأس واحد ${n - 2} مثلثات.`))
-            : l(say('Erregularra: barne-angelua eta angelu zentrala.', 'Regular: ángulo interior y ángulo central.', 'المنتظم: الزاوية الداخلية والزاوية المركزية.'))
+            ? l(say(`Erpin batetik ${n - 2} triangelu.`, `Desde un vértice, ${n - 2} triángulos.`, `من رأس واحد ${n - 2} مثلثات.`, `From one vertex, ${n - 2} triangles.`))
+            : l(say('Erregularra: barne-angelua eta angelu zentrala.', 'Regular: ángulo interior y ángulo central.', 'المنتظم: الزاوية الداخلية والزاوية المركزية.', 'Regular: interior angle and central angle.'))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={polygonChallenges} state={state}>
             <Board height={330} label={l(polygonNames[n])}>
@@ -201,18 +202,18 @@ export function TilingTool(props: LabToolProps) {
     const color = status === 'closed' ? GREEN : status === 'gap' ? STAGE : SECOND
     const controls = (
         <>
-            <Segmented label={l(say('Lauza', 'Baldosa', 'البلاطة'))} value={String(state.sides)} options={TILE_SIDES.map((sides) => ({ value: String(sides), label: l(polygonNames[sides]) }))} onChange={(sides) => setState((s) => setTiling(s, { sides: Number(sides) as TileSides }))} />
-            <Stepper label={l(say('Lauza kopurua', 'Número de baldosas', 'عدد البلاطات'))} value={state.copies} min={1} max={TILE_COPIES_MAX} onChange={(copies) => setState((s) => setTiling(s, { copies }))} language={props.language} />
+            <Segmented label={l(say('Lauza', 'Baldosa', 'البلاطة', 'Tile'))} value={String(state.sides)} options={TILE_SIDES.map((sides) => ({ value: String(sides), label: l(polygonNames[sides]) }))} onChange={(sides) => setState((s) => setTiling(s, { sides: Number(sides) as TileSides }))} />
+            <Stepper label={l(say('Lauza kopurua', 'Número de baldosas', 'عدد البلاطات', 'Number of tiles'))} value={state.copies} min={1} max={TILE_COPIES_MAX} onChange={(copies) => setState((s) => setTiling(s, { copies }))} language={props.language} />
         </>
     )
     const note = status === 'closed'
-        ? l(say('Zehazki 360°: erpina hutsunerik gabe ixten da.', 'Justo 360°: el vértice se cierra sin huecos.', '360° تمامًا: يُغلق الرأس دون فراغات.'))
+        ? l(say('Zehazki 360°: erpina hutsunerik gabe ixten da.', 'Justo 360°: el vértice se cierra sin huecos.', '360° تمامًا: يُغلق الرأس دون فراغات.', 'Exactly 360°: the vertex closes with no gaps.'))
         : status === 'gap'
-            ? l(say('360° baino gutxiago: hutsune bat geratzen da.', 'Menos de 360°: queda un hueco.', 'أقل من 360°: تبقى فجوة.'))
-            : l(say('360° baino gehiago: lauzak gainjartzen dira.', 'Más de 360°: las baldosas se solapan.', 'أكثر من 360°: تتراكب البلاطات.'))
+            ? l(say('360° baino gutxiago: hutsune bat geratzen da.', 'Menos de 360°: queda un hueco.', 'أقل من 360°: تبقى فجوة.', 'Less than 360°: a gap is left.'))
+            : l(say('360° baino gehiago: lauzak gainjartzen dira.', 'Más de 360°: las baldosas se solapan.', 'أكثر من 360°: تتراكب البلاطات.', 'More than 360°: the tiles overlap.'))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={`${state.copies}\\cdot ${interior}^{\\circ}=${toNumber(tilingTotal(state))}^{\\circ}`} note={note} />} challenges={tilingChallenges} state={state}>
-            <Board height={330} label={l(say('Lauzak erpin baten inguruan', 'Baldosas alrededor de un vértice', 'بلاطات حول رأس'))}>
+            <Board height={330} label={l(say('Lauzak erpin baten inguruan', 'Baldosas alrededor de un vértice', 'بلاطات حول رأس', 'Tiles around a vertex'))}>
                 {Array.from({ length: state.copies }, (_, index) => (
                     <polygon key={index} points={points(walk([320, 165], index * interior, state.sides, side))} fill={index % 2 ? SOFT : STAGE_TINT} fillOpacity={0.75} stroke={INK} strokeWidth={2} strokeLinejoin="round" />
                 ))}
@@ -238,12 +239,12 @@ export function TriangleTool(props: LabToolProps) {
     const C: Point = [A[0] + apexX * unit, 290 - Math.sqrt(Math.max(0, b * b - apexX * apexX)) * unit]
     const loose = (from: Point, length: number, angle: number): Point => [from[0] + length * unit * Math.cos(rad(angle)), from[1] - length * unit * Math.sin(rad(angle))]
     const kinds = {
-        equilateral: say('aldeberdina', 'equilátero', 'متساوي الأضلاع'),
-        isosceles: say('isoszelea', 'isósceles', 'متساوي الساقين'),
-        scalene: say('eskalenoa', 'escaleno', 'مختلف الأضلاع'),
-        acute: say('angelu-zorrotza', 'acutángulo', 'حاد الزوايا'),
-        right: say('angeluzuzena', 'rectángulo', 'قائم الزاوية'),
-        obtuse: say('angelu-kamutsa', 'obtusángulo', 'منفرج الزاوية')
+        equilateral: say('aldeberdina', 'equilátero', 'متساوي الأضلاع', 'equilateral'),
+        isosceles: say('isoszelea', 'isósceles', 'متساوي الساقين', 'isosceles'),
+        scalene: say('eskalenoa', 'escaleno', 'مختلف الأضلاع', 'scalene'),
+        acute: say('angelu-zorrotza', 'acutángulo', 'حاد الزوايا', 'acute-angled'),
+        right: say('angeluzuzena', 'rectángulo', 'قائم الزاوية', 'right-angled'),
+        obtuse: say('angelu-kamutsa', 'obtusángulo', 'منفرج الزاوية', 'obtuse-angled')
     }
     const [large, rest] = (() => {
         const list = [a, b, c].sort((x, y) => y - x)
@@ -253,20 +254,20 @@ export function TriangleTool(props: LabToolProps) {
         <>
             <Stepper label="a" value={a} min={1} max={SIDE_MAX} onChange={(value) => setState((s) => setTriangle(s, { a: value }))} language={props.language} />
             <Stepper label="b" value={b} min={1} max={SIDE_MAX} onChange={(value) => setState((s) => setTriangle(s, { b: value }))} language={props.language} />
-            <Stepper label={l(say('c (oinarria)', 'c (base)', 'c (القاعدة)'))} value={c} min={1} max={SIDE_MAX} onChange={(value) => setState((s) => setTriangle(s, { c: value }))} language={props.language} />
+            <Stepper label={l(say('c (oinarria)', 'c (base)', 'c (القاعدة)', 'c (base)'))} value={c} min={1} max={SIDE_MAX} onChange={(value) => setState((s) => setTriangle(s, { c: value }))} language={props.language} />
         </>
     )
     const sign = shape === 'closes' ? '<' : shape === 'flat' ? '=' : '>'
     const angles = shape === 'closes' ? triangleAngles(state) : null
     const note = shape === 'closes'
-        ? `${l(say('Triangelu', 'Triángulo', 'مثلث'))} ${l(kinds[sideKind(state)])}, ${l(kinds[angleKind(state)])}: ${angles!.map((value) => `${value}°`).join(' · ')}`
+        ? `${l(say('Triangelu', 'Triángulo', 'مثلث', 'Triangle'))} ${l(kinds[sideKind(state)])}, ${l(kinds[angleKind(state)])}: ${angles!.map((value) => `${value}°`).join(' · ')}`
         : shape === 'flat'
-            ? l(say('Aldeak zuzen baten gainean geratzen dira: ez dago triangelurik.', 'Los lados quedan aplastados sobre una recta: no hay triángulo.', 'تنطبق الأضلاع على مستقيم: لا يوجد مثلث.'))
-            : l(say('Bi alde txikiek ez dute elkar ukitzen: ez dago triangelurik.', 'Los dos lados pequeños no llegan a tocarse: no hay triángulo.', 'لا يلتقي الضلعان الصغيران: لا يوجد مثلث.'))
+            ? l(say('Aldeak zuzen baten gainean geratzen dira: ez dago triangelurik.', 'Los lados quedan aplastados sobre una recta: no hay triángulo.', 'تنطبق الأضلاع على مستقيم: لا يوجد مثلث.', 'The sides lie flat on a straight line: there is no triangle.'))
+            : l(say('Bi alde txikiek ez dute elkar ukitzen: ez dago triangelurik.', 'Los dos lados pequeños no llegan a tocarse: no hay triángulo.', 'لا يلتقي الضلعان الصغيران: لا يوجد مثلث.', 'The two shorter sides do not reach each other: there is no triangle.'))
     const latex = shape === 'closes' ? `${large}${sign}${rest[0]}+${rest[1]}\\qquad ${large}^{2}=${large * large}\\ ${angleKind(state) === 'right' ? '=' : angleKind(state) === 'acute' ? '<' : '>'}\\ ${rest[0] * rest[0] + rest[1] * rest[1]}` : `${large}${sign}${rest[0]}+${rest[1]}`
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={triangleChallenges} state={state}>
-            <Board height={320} label={l(say('Hiru aldeko triangelua', 'El triángulo de tres lados', 'المثلث ذو الأضلاع الثلاثة'))}>
+            <Board height={320} label={l(say('Hiru aldeko triangelua', 'El triángulo de tres lados', 'المثلث ذو الأضلاع الثلاثة', 'The triangle from three sides'))}>
                 {shape === 'closes' ? (
                     <g>
                         <polygon points={points([A, B, C])} fill={STAGE_TINT} stroke={INK} strokeWidth={2.6} strokeLinejoin="round" />
@@ -298,10 +299,10 @@ export function TriangleTool(props: LabToolProps) {
 /* ---------- 4. Notable points ---------- */
 
 const centreNames: Record<CentrePoint, Text> = {
-    circum: say('Zirkunzentroa', 'Circuncentro', 'مركز الدائرة المحيطة'),
-    in: say('Inzentroa', 'Incentro', 'مركز الدائرة الداخلية'),
-    centroid: say('Barizentroa', 'Baricentro', 'مركز الثقل'),
-    ortho: say('Ortozentroa', 'Ortocentro', 'ملتقى الارتفاعات')
+    circum: say('Zirkunzentroa', 'Circuncentro', 'مركز الدائرة المحيطة', 'Circumcentre'),
+    in: say('Inzentroa', 'Incentro', 'مركز الدائرة الداخلية', 'Incentre'),
+    centroid: say('Barizentroa', 'Baricentro', 'مركز الثقل', 'Centroid'),
+    ortho: say('Ortozentroa', 'Ortocentro', 'ملتقى الارتفاعات', 'Orthocentre')
 }
 
 export function CentersTool(props: LabToolProps) {
@@ -328,16 +329,16 @@ export function CentersTool(props: LabToolProps) {
     const c = Math.hypot(A[0] - B[0], A[1] - B[1])
     const s = (a + b + c) / 2
     const inRadius = Math.sqrt(Math.max(0, (s - a) * (s - b) * (s - c) / s))
-    const kinds = { acute: say('angelu-zorrotza', 'acutángulo', 'حاد الزوايا'), right: say('angeluzuzena', 'rectángulo', 'قائم الزاوية'), obtuse: say('angelu-kamutsa', 'obtusángulo', 'منفرج الزاوية') }
-    const places = { inside: say('barruan', 'dentro', 'داخله'), side: say('alde baten gainean (hipotenusaren erdian)', 'sobre un lado (mitad de la hipotenusa)', 'على ضلع (منتصف الوتر)'), vertex: say('erpin batean (angelu zuzenekoan)', 'en un vértice (el del ángulo recto)', 'عند رأس (رأس الزاوية القائمة)'), outside: say('kanpoan', 'fuera', 'خارجه') }
+    const kinds = { acute: say('angelu-zorrotza', 'acutángulo', 'حاد الزوايا', 'acute-angled'), right: say('angeluzuzena', 'rectángulo', 'قائم الزاوية', 'right-angled'), obtuse: say('angelu-kamutsa', 'obtusángulo', 'منفرج الزاوية', 'obtuse-angled') }
+    const places = { inside: say('barruan', 'dentro', 'داخله', 'inside'), side: say('alde baten gainean (hipotenusaren erdian)', 'sobre un lado (mitad de la hipotenusa)', 'على ضلع (منتصف الوتر)', 'on a side (midpoint of the hypotenuse)'), vertex: say('erpin batean (angelu zuzenekoan)', 'en un vértice (el del ángulo recto)', 'عند رأس (رأس الزاوية القائمة)', 'at a vertex (the right-angle vertex)'), outside: say('kanpoan', 'fuera', 'خارجه', 'outside') }
     const controls = (
         <>
-            <Segmented label={l(say('Puntua', 'Punto', 'النقطة'))} value={state.point} options={(Object.keys(centreNames) as CentrePoint[]).map((point) => ({ value: point, label: l(centreNames[point]) }))} onChange={(point) => setState((st) => setCenters(st, { point: point as CentrePoint }))} />
-            <Stepper label={l(say('C ezker-eskuin', 'C izquierda-derecha', 'C يسارًا ويمينًا'))} value={state.x} min={APEX_X_MIN} max={APEX_X_MAX} onChange={(x) => setState((st) => setCenters(st, { x }))} language={props.language} />
-            <Stepper label={l(say('C-ren altuera', 'Altura de C', 'ارتفاع C'))} value={state.h} min={1} max={APEX_H_MAX} onChange={(h) => setState((st) => setCenters(st, { h }))} language={props.language} />
+            <Segmented label={l(say('Puntua', 'Punto', 'النقطة', 'Point'))} value={state.point} options={(Object.keys(centreNames) as CentrePoint[]).map((point) => ({ value: point, label: l(centreNames[point]) }))} onChange={(point) => setState((st) => setCenters(st, { point: point as CentrePoint }))} />
+            <Stepper label={l(say('C ezker-eskuin', 'C izquierda-derecha', 'C يسارًا ويمينًا', 'C left-right'))} value={state.x} min={APEX_X_MIN} max={APEX_X_MAX} onChange={(x) => setState((st) => setCenters(st, { x }))} language={props.language} />
+            <Stepper label={l(say('C-ren altuera', 'Altura de C', 'ارتفاع C', 'Height of C'))} value={state.h} min={1} max={APEX_H_MAX} onChange={(h) => setState((st) => setCenters(st, { h }))} language={props.language} />
         </>
     )
-    const note = `${l(say('Triangelu', 'Triángulo', 'مثلث'))} ${l(kinds[kind])}. ${l(centreNames[state.point])}: ${l(places[where])}.`
+    const note = `${l(say('Triangelu', 'Triángulo', 'مثلث', 'Triangle'))} ${l(kinds[kind])}. ${l(centreNames[state.point])}: ${l(places[where])}.`
     const lines: ReactNode[] = []
     if (state.point === 'circum') sides.forEach(([p, q], index) => lines.push(<line key={index} x1={middle(p, q)[0]} y1={middle(p, q)[1]} x2={P[0]} y2={P[1]} stroke={SECOND} strokeWidth={1.6} strokeDasharray="6 4" />))
     if (state.point === 'in') sides.forEach(([, , v], index) => lines.push(<line key={index} x1={v[0]} y1={v[1]} x2={P[0]} y2={P[1]} stroke={SECOND} strokeWidth={1.6} strokeDasharray="6 4" />))
@@ -363,12 +364,12 @@ export function CentersTool(props: LabToolProps) {
 /* ---------- 5. The quadrilateral from its diagonals ---------- */
 
 const quadNames: Record<QuadName, Text> = {
-    square: say('Karratua', 'Cuadrado', 'مربع'),
-    rectangle: say('Laukizuzena', 'Rectángulo', 'مستطيل'),
-    rhombus: say('Erronboa', 'Rombo', 'معيّن'),
-    romboid: say('Erronboidea', 'Romboide', 'متوازي أضلاع'),
-    kite: say('Kometa', 'Cometa', 'طائرة ورقية'),
-    trapezoid: say('Trapezoidea', 'Trapezoide', 'رباعي عام')
+    square: say('Karratua', 'Cuadrado', 'مربع', 'Square'),
+    rectangle: say('Laukizuzena', 'Rectángulo', 'مستطيل', 'Rectangle'),
+    rhombus: say('Erronboa', 'Rombo', 'معيّن', 'Rhombus'),
+    romboid: say('Erronboidea', 'Romboide', 'متوازي أضلاع', 'Rhomboid'),
+    kite: say('Kometa', 'Cometa', 'طائرة ورقية', 'Kite'),
+    trapezoid: say('Trapezoidea', 'Trapezoide', 'رباعي عام', 'Quadrilateral with no parallel sides')
 }
 
 export function QuadTool(props: LabToolProps) {
@@ -387,14 +388,14 @@ export function QuadTool(props: LabToolProps) {
     const name = quadName(state)
     const controls = (
         <>
-            <Stepper label={l(say('1. diagonala', '1.ª diagonal', 'القطر الأول'))} value={state.first} min={DIAGONAL_MIN} max={DIAGONAL_MAX} onChange={(first) => setState((s) => setQuad(s, { first }))} language={props.language} />
-            <Stepper label={l(say('2. diagonala', '2.ª diagonal', 'القطر الثاني'))} value={state.second} min={DIAGONAL_MIN} max={DIAGONAL_MAX} onChange={(second) => setState((s) => setQuad(s, { second }))} language={props.language} />
-            <Segmented label={l(say('Angelua', 'Ángulo', 'الزاوية'))} value={String(state.angle)} options={[{ value: '90', label: '90°' }, { value: '60', label: '60°' }]} onChange={(angle) => setState((s) => setQuad(s, { angle: Number(angle) as 90 | 60 }))} />
-            <Segmented label={l(say('Erdian ebakitzen dira', 'Se cortan por la mitad', 'التنصيف'))} value={state.cut} options={[{ value: 'both', label: l(say('Biak', 'Las dos', 'كلاهما')) }, { value: 'one', label: l(say('Bat bakarrik', 'Solo una', 'واحد فقط')) }]} onChange={(cut) => setState((s) => setQuad(s, { cut: cut as QuadState['cut'] }))} />
+            <Stepper label={l(say('1. diagonala', '1.ª diagonal', 'القطر الأول', '1st diagonal'))} value={state.first} min={DIAGONAL_MIN} max={DIAGONAL_MAX} onChange={(first) => setState((s) => setQuad(s, { first }))} language={props.language} />
+            <Stepper label={l(say('2. diagonala', '2.ª diagonal', 'القطر الثاني', '2nd diagonal'))} value={state.second} min={DIAGONAL_MIN} max={DIAGONAL_MAX} onChange={(second) => setState((s) => setQuad(s, { second }))} language={props.language} />
+            <Segmented label={l(say('Angelua', 'Ángulo', 'الزاوية', 'Angle'))} value={String(state.angle)} options={[{ value: '90', label: '90°' }, { value: '60', label: '60°' }]} onChange={(angle) => setState((s) => setQuad(s, { angle: Number(angle) as 90 | 60 }))} />
+            <Segmented label={l(say('Erdian ebakitzen dira', 'Se cortan por la mitad', 'التنصيف', 'They cut each other in half'))} value={state.cut} options={[{ value: 'both', label: l(say('Biak', 'Las dos', 'كلاهما', 'Both')) }, { value: 'one', label: l(say('Bat bakarrik', 'Solo una', 'واحد فقط', 'Only one')) }]} onChange={(cut) => setState((s) => setQuad(s, { cut: cut as QuadState['cut'] }))} />
         </>
     )
     const axes = symmetryAxes[name]
-    const note = l(say(`${axes} simetria-ardatz.`, `${axes} ejes de simetría.`, `محاور التناظر: ${axes}.`))
+    const note = l(say(`${axes} simetria-ardatz.`, `${axes} ejes de simetría.`, `محاور التناظر: ${axes}.`, `${axes} lines of symmetry.`))
     return (
         <ToolFrame {...props} controls={controls} readout={(
             <>
@@ -408,10 +409,10 @@ export function QuadTool(props: LabToolProps) {
                 <line x1={p1[0]} y1={p1[1]} x2={p3[0]} y2={p3[1]} stroke={STAGE} strokeWidth={3} />
                 <circle cx={cross[0]} cy={cross[1]} r={5} fill={INK} />
                 {state.angle === 90 && <polyline points={points([[cross[0] - 14, cross[1]], [cross[0] - 14, cross[1] - 14], [cross[0], cross[1] - 14]])} fill="none" stroke={INK} strokeWidth={2} />}
-                <text x={(p0[0] + cross[0]) / 2} y={cross[1] + 24} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{state.first / 2}</text>
-                <text x={(p2[0] + cross[0]) / 2} y={cross[1] + 24} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{state.first / 2}</text>
-                <text x={(p1[0] + cross[0]) / 2 - 16} y={(p1[1] + cross[1]) / 2} textAnchor="end" fontSize={15} fontWeight={700} fill={STAGE}>{String(near).replace('.', props.language === 'ar' ? '.' : ',')}</text>
-                <text x={(p3[0] + cross[0]) / 2 + 16} y={(p3[1] + cross[1]) / 2} fontSize={15} fontWeight={700} fill={STAGE}>{String(far).replace('.', props.language === 'ar' ? '.' : ',')}</text>
+                <text x={(p0[0] + cross[0]) / 2} y={cross[1] + 24} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{String(state.first / 2).replace('.', props.language === 'ar' ? '.' : decimalSeparatorFor(props.language))}</text>
+                <text x={(p2[0] + cross[0]) / 2} y={cross[1] + 24} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{String(state.first / 2).replace('.', props.language === 'ar' ? '.' : decimalSeparatorFor(props.language))}</text>
+                <text x={(p1[0] + cross[0]) / 2 - 16} y={(p1[1] + cross[1]) / 2} textAnchor="end" fontSize={15} fontWeight={700} fill={STAGE}>{String(near).replace('.', props.language === 'ar' ? '.' : decimalSeparatorFor(props.language))}</text>
+                <text x={(p3[0] + cross[0]) / 2 + 16} y={(p3[1] + cross[1]) / 2} fontSize={15} fontWeight={700} fill={STAGE}>{String(far).replace('.', props.language === 'ar' ? '.' : decimalSeparatorFor(props.language))}</text>
             </Board>
         </ToolFrame>
     )
@@ -420,14 +421,14 @@ export function QuadTool(props: LabToolProps) {
 /* ---------- 6. Positions of circles ---------- */
 
 const positionNames: Record<CirclePosition, Text> = {
-    secant: say('Ebakitzailea', 'Secante', 'قاطع'),
-    tangent: say('Ukitzailea', 'Tangente', 'مماس'),
-    exterior: say('Kanpokoa(k)', 'Exterior(es)', 'خارجي'),
-    'tangent-exterior': say('Kanpotik ukitzaileak', 'Tangentes exteriores', 'متماستان من الخارج'),
-    'tangent-interior': say('Barrutik ukitzaileak', 'Tangentes interiores', 'متماستان من الداخل'),
-    interior: say('Barnekoak', 'Interiores', 'متداخلتان'),
-    concentric: say('Zentrokideak', 'Concéntricas', 'متحدتا المركز'),
-    coincident: say('Bat datoz', 'Coinciden', 'منطبقتان')
+    secant: say('Ebakitzailea', 'Secante', 'قاطع', 'Secant'),
+    tangent: say('Ukitzailea', 'Tangente', 'مماس', 'Tangent'),
+    exterior: say('Kanpokoa(k)', 'Exterior(es)', 'خارجي', 'External'),
+    'tangent-exterior': say('Kanpotik ukitzaileak', 'Tangentes exteriores', 'متماستان من الخارج', 'Externally tangent'),
+    'tangent-interior': say('Barrutik ukitzaileak', 'Tangentes interiores', 'متماستان من الداخل', 'Internally tangent'),
+    interior: say('Barnekoak', 'Interiores', 'متداخلتان', 'Internally tangent'),
+    concentric: say('Zentrokideak', 'Concéntricas', 'متحدتا المركز', 'Concentric'),
+    coincident: say('Bat datoz', 'Coinciden', 'منطبقتان', 'They coincide')
 }
 
 export function CirclesTool(props: LabToolProps) {
@@ -440,7 +441,7 @@ export function CirclesTool(props: LabToolProps) {
     const line = state.mode === 'line'
     const controls = (
         <>
-            <Segmented label={l(say('Zer mugitu', 'Qué mover', 'ماذا نحرّك'))} value={state.mode} options={[{ value: 'line', label: l(say('Zuzen bat', 'Una recta', 'مستقيم')) }, { value: 'two', label: l(say('Beste zirkunferentzia', 'Otra circunferencia', 'دائرة أخرى')) }]} onChange={(mode) => setState((s) => setCircles(s, { mode: mode as CirclesState['mode'] }))} />
+            <Segmented label={l(say('Zer mugitu', 'Qué mover', 'ماذا نحرّك', 'What to move'))} value={state.mode} options={[{ value: 'line', label: l(say('Zuzen bat', 'Una recta', 'مستقيم', 'A straight line')) }, { value: 'two', label: l(say('Beste zirkunferentzia', 'Otra circunferencia', 'دائرة أخرى', 'Another circle')) }]} onChange={(mode) => setState((s) => setCircles(s, { mode: mode as CirclesState['mode'] }))} />
             <Stepper label={line ? 'r' : 'r₁'} value={state.first} min={1} max={RADIUS_MAX} onChange={(first) => setState((s) => setCircles(s, { first }))} language={props.language} />
             {!line && <Stepper label="r₂" value={state.second} min={1} max={RADIUS_MAX} onChange={(second) => setState((s) => setCircles(s, { second }))} language={props.language} />}
             <Stepper label="d" value={state.distance} min={0} max={DISTANCE_MAX} onChange={(distance) => setState((s) => setCircles(s, { distance }))} language={props.language} />
@@ -481,7 +482,7 @@ export function SectorTool(props: LabToolProps) {
     const end: Point = [cx + r * Math.cos(rad(state.angle)), cy - r * Math.sin(rad(state.angle))]
     const controls = (
         <>
-            <Segmented label={l(say('Irudia', 'Figura', 'الشكل'))} value={state.mode} options={[{ value: 'sector', label: l(say('Sektorea', 'Sector', 'قطاع')) }, { value: 'ring', label: l(say('Koroa', 'Corona', 'حلقة')) }]} onChange={(mode) => setState((s) => setSector(s, { mode: mode as SectorState['mode'] }))} />
+            <Segmented label={l(say('Irudia', 'Figura', 'الشكل', 'Shape'))} value={state.mode} options={[{ value: 'sector', label: l(say('Sektorea', 'Sector', 'قطاع', 'Circular sector')) }, { value: 'ring', label: l(say('Koroa', 'Corona', 'حلقة', 'Annulus')) }]} onChange={(mode) => setState((s) => setSector(s, { mode: mode as SectorState['mode'] }))} />
             {ring ? (
                 <>
                     <Stepper label="R" value={state.outer} min={2} max={SECTOR_RADIUS_MAX} onChange={(outer) => setState((s) => setSector(s, { outer }))} language={props.language} />
@@ -490,7 +491,7 @@ export function SectorTool(props: LabToolProps) {
             ) : (
                 <>
                     <Stepper label="r" value={state.radius} min={1} max={SECTOR_RADIUS_MAX} onChange={(radius) => setState((s) => setSector(s, { radius }))} language={props.language} />
-                    <Stepper label={l(say('Angelua', 'Ángulo', 'الزاوية'))} value={state.angle} min={ANGLE_STEP} max={360} step={ANGLE_STEP} format={(value) => `${value}°`} onChange={(angle) => setState((s) => setSector(s, { angle }))} language={props.language} />
+                    <Stepper label={l(say('Angelua', 'Ángulo', 'الزاوية', 'Angle'))} value={state.angle} min={ANGLE_STEP} max={360} step={ANGLE_STEP} format={(value) => `${value}°`} onChange={(angle) => setState((s) => setSector(s, { angle }))} language={props.language} />
                 </>
             )}
         </>
@@ -498,10 +499,10 @@ export function SectorTool(props: LabToolProps) {
     const latex = ring
         ? `A=3{,}14\\cdot(${state.outer}^{2}-${state.inner}^{2})${measure(ringArea(state))}`
         : `A=\\frac{3{,}14\\cdot ${state.radius}^{2}\\cdot ${state.angle}}{360}${measure(sectorArea(state))}\\qquad L=\\frac{2\\cdot 3{,}14\\cdot ${state.radius}\\cdot ${state.angle}}{360}${measure(arcLength(state))}`
-    const note = ring ? l(say('Zirkulu handia ken txikia (cm²).', 'El círculo grande menos el pequeño (cm²).', 'القرص الكبير ناقص الصغير (سم²).')) : l(say('Azalera (cm²) eta arkuaren luzera (cm).', 'Área (cm²) y longitud del arco (cm).', 'المساحة (سم²) وطول القوس (سم).'))
+    const note = ring ? l(say('Zirkulu handia ken txikia (cm²).', 'El círculo grande menos el pequeño (cm²).', 'القرص الكبير ناقص الصغير (سم²).', 'The big circle minus the small one (cm²).')) : l(say('Azalera (cm²) eta arkuaren luzera (cm).', 'Área (cm²) y longitud del arco (cm).', 'المساحة (سم²) وطول القوس (سم).', 'Area (cm²) and arc length (cm).'))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={sectorChallenges} state={state}>
-            <Board height={340} label={ring ? l(say('Koroa zirkularra', 'Corona circular', 'حلقة دائرية')) : l(say('Sektore zirkularra', 'Sector circular', 'قطاع دائري'))}>
+            <Board height={340} label={ring ? l(say('Koroa zirkularra', 'Corona circular', 'حلقة دائرية', 'Annulus')) : l(say('Sektore zirkularra', 'Sector circular', 'قطاع دائري', 'Circular sector'))}>
                 {ring ? (
                     <g>
                         <circle cx={cx} cy={cy} r={state.outer * unit} fill={STAGE_TINT} stroke={STAGE} strokeWidth={2.4} />
@@ -542,18 +543,18 @@ export function CompositeTool(props: LabToolProps) {
     const [tall, short] = compositePieces(state)
     const controls = (
         <>
-            <Segmented label={l(say('Bidea', 'Camino', 'الطريقة'))} value={state.method} options={[{ value: 'subtract', label: l(say('Osatu eta kendu', 'Completar y restar', 'أكمل واطرح')) }, { value: 'split', label: l(say('Zatitu eta batu', 'Dividir y sumar', 'قسّم واجمع')) }]} onChange={(method) => setState((s) => setComposite(s, { method: method as CompositeState['method'] }))} />
-            <Stepper label={l(say('Zabalera', 'Ancho', 'العرض'))} value={W} min={3} max={WIDTH_MAX} onChange={(width) => setState((s) => setComposite(s, { width }))} language={props.language} />
-            <Stepper label={l(say('Altuera', 'Alto', 'الارتفاع'))} value={H} min={2} max={HEIGHT_MAX} onChange={(height) => setState((s) => setComposite(s, { height }))} language={props.language} />
-            <Stepper label={l(say('Izkinaren zabalera', 'Ancho de la esquina', 'عرض الركن'))} value={w} min={1} max={W - 1} onChange={(cutWidth) => setState((s) => setComposite(s, { cutWidth }))} language={props.language} />
-            <Stepper label={l(say('Izkinaren altuera', 'Alto de la esquina', 'ارتفاع الركن'))} value={h} min={1} max={H - 1} onChange={(cutHeight) => setState((s) => setComposite(s, { cutHeight }))} language={props.language} />
+            <Segmented label={l(say('Bidea', 'Camino', 'الطريقة', 'Path'))} value={state.method} options={[{ value: 'subtract', label: l(say('Osatu eta kendu', 'Completar y restar', 'أكمل واطرح', 'Complete and subtract')) }, { value: 'split', label: l(say('Zatitu eta batu', 'Dividir y sumar', 'قسّم واجمع', 'Divide and add')) }]} onChange={(method) => setState((s) => setComposite(s, { method: method as CompositeState['method'] }))} />
+            <Stepper label={l(say('Zabalera', 'Ancho', 'العرض', 'Width'))} value={W} min={3} max={WIDTH_MAX} onChange={(width) => setState((s) => setComposite(s, { width }))} language={props.language} />
+            <Stepper label={l(say('Altuera', 'Alto', 'الارتفاع', 'Height'))} value={H} min={2} max={HEIGHT_MAX} onChange={(height) => setState((s) => setComposite(s, { height }))} language={props.language} />
+            <Stepper label={l(say('Izkinaren zabalera', 'Ancho de la esquina', 'عرض الركن', 'Width of the corner'))} value={w} min={1} max={W - 1} onChange={(cutWidth) => setState((s) => setComposite(s, { cutWidth }))} language={props.language} />
+            <Stepper label={l(say('Izkinaren altuera', 'Alto de la esquina', 'ارتفاع الركن', 'Height of the corner'))} value={h} min={1} max={H - 1} onChange={(cutHeight) => setState((s) => setComposite(s, { cutHeight }))} language={props.language} />
         </>
     )
     const latex = split ? `${W - w}\\cdot ${H}+${w}\\cdot ${H - h}=${tall}+${short}=${compositeArea(state)}` : `${W}\\cdot ${H}-${w}\\cdot ${h}=${W * H}-${w * h}=${compositeArea(state)}`
-    const note = l(say(`Azalera ${compositeArea(state)} cm². Perimetroa ${compositePerimeter(state)} cm, laukizuzenarena bera.`, `Área: ${compositeArea(state)} cm². Perímetro: ${compositePerimeter(state)} cm, el mismo que el del rectángulo.`, `المساحة ${compositeArea(state)} سم². المحيط ${compositePerimeter(state)} سم، مثل محيط المستطيل.`))
+    const note = l(say(`Azalera ${compositeArea(state)} cm². Perimetroa ${compositePerimeter(state)} cm, laukizuzenarena bera.`, `Área: ${compositeArea(state)} cm². Perímetro: ${compositePerimeter(state)} cm, el mismo que el del rectángulo.`, `المساحة ${compositeArea(state)} سم². المحيط ${compositePerimeter(state)} سم، مثل محيط المستطيل.`, `Area: ${compositeArea(state)} cm². Perimeter: ${compositePerimeter(state)} cm, the same as the rectangle's.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={compositeChallenges} state={state}>
-            <Board height={330} label={l(say('L formako irudia', 'La figura en L', 'الشكل L'))}>
+            <Board height={330} label={l(say('L formako irudia', 'La figura en L', 'الشكل L', 'The L-shape'))}>
                 {Array.from({ length: W * H }, (_, index) => {
                     const column = index % W
                     const row = Math.floor(index / W)

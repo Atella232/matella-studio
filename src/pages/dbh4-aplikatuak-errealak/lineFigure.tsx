@@ -11,8 +11,8 @@ export function LineSpecFigure({ spec, language }: { spec: LineSpec; language: U
     const top = 40 + Math.max(0, ...lifts)
     const map = lineMap(spec.from, spec.to, 40, 520, top)
     return (
-        <svg viewBox={`0 0 560 ${top + 50}`} role="img" aria-label={language === 'eu' ? 'Zuzen erreala' : language === 'es' ? 'Recta real' : 'المستقيم الحقيقي'} className="reals-line">
-            <RealAxis map={map} step={spec.step ?? 1} labelEvery={spec.labelEvery ?? 1} arabic={language === 'ar'} />
+        <svg viewBox={`0 0 560 ${top + 50}`} role="img" aria-label={language === 'eu' ? 'Zuzen erreala' : language === 'es' ? 'Recta real' : language === 'en' ? 'Real number line' : 'المستقيم الحقيقي'} className="reals-line">
+            <RealAxis map={map} step={spec.step ?? 1} labelEvery={spec.labelEvery ?? 1} language={language} />
             {spec.intervals?.map((item, index) => <LineInterval key={index} map={map} value={item.value} color={colors[item.color ?? 'stage']} lift={item.lift} />)}
             {spec.points?.map((point, index) => <LinePoint key={index} map={map} value={point.value} name={point.name} />)}
         </svg>

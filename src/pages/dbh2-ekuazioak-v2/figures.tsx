@@ -21,13 +21,13 @@ const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language,
 
 export function EquationPartsFigure({ language }: { language: UnitLanguage }) {
     const terms = [
-        { x: 150, text: '3x', note: { eu: 'gaia', es: 'término', ar: 'حد' } },
-        { x: 240, text: '− 5', note: { eu: 'gaia', es: 'término', ar: 'حد' } },
-        { x: 440, text: 'x', note: { eu: 'ezezaguna', es: 'incógnita', ar: 'المجهول' } },
-        { x: 530, text: '+ 7', note: { eu: 'gaia', es: 'término', ar: 'حد' } }
+        { x: 150, text: '3x', note: { eu: 'gaia', es: 'término', en: 'term', ar: 'حد' } },
+        { x: 240, text: '− 5', note: { eu: 'gaia', es: 'término', en: 'term', ar: 'حد' } },
+        { x: 440, text: 'x', note: { eu: 'ezezaguna', es: 'incógnita', en: 'unknown', ar: 'المجهول' } },
+        { x: 530, text: '+ 7', note: { eu: 'gaia', es: 'término', en: 'term', ar: 'حد' } }
     ]
     return (
-        <Figure height={250} label={pick(language, { eu: 'Ekuazio baten zatiak', es: 'Las partes de una ecuación', ar: 'أجزاء المعادلة' })}>
+        <Figure height={250} label={pick(language, { eu: 'Ekuazio baten zatiak', es: 'Las partes de una ecuación', en: 'The parts of an equation', ar: 'أجزاء المعادلة' })}>
             <rect x={100} y={70} width={200} height={70} rx={14} fill={STAGE_TINT} stroke={INK} strokeWidth={2} />
             <rect x={390} y={70} width={200} height={70} rx={14} fill={MUSTARD_TINT} stroke={INK} strokeWidth={2} />
             <text x={345} y={118} textAnchor="middle" fontSize={34} fontWeight={700} fill={SECOND}>=</text>
@@ -38,10 +38,10 @@ export function EquationPartsFigure({ language }: { language: UnitLanguage }) {
                     <text x={term.x} y={186} textAnchor="middle" fontSize={14} fill={index === 2 ? SECOND : MUTED} fontWeight={700}>{pick(language, term.note)}</text>
                 </g>
             ))}
-            <text x={200} y={56} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'lehen atala', es: 'primer miembro', ar: 'الطرف الأول' })}</text>
-            <text x={490} y={56} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'bigarren atala', es: 'segundo miembro', ar: 'الطرف الثاني' })}</text>
-            <text x={360} y={218} textAnchor="middle" fontSize={16} fill={INK}>{pick(language, { eu: 'Maila 1 · ebazpena: x = 6 (3 · 6 − 5 = 6 + 7)', es: 'Grado 1 · solución: x = 6 (3 · 6 − 5 = 6 + 7)', ar: 'الدرجة 1 · الحل: x = 6 (3 · 6 − 5 = 6 + 7)' })}</text>
-            <Caption y={244}>{pick(language, { eu: 'Ebazpenak bi atalak berdin uzten ditu', es: 'La solución hace iguales los dos miembros', ar: 'الحل يجعل الطرفين متساويين' })}</Caption>
+            <text x={200} y={56} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'lehen atala', es: 'primer miembro', en: 'left-hand side', ar: 'الطرف الأول' })}</text>
+            <text x={490} y={56} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'bigarren atala', es: 'segundo miembro', en: 'right-hand side', ar: 'الطرف الثاني' })}</text>
+            <text x={360} y={218} textAnchor="middle" fontSize={16} fill={INK}>{pick(language, { eu: 'Maila 1 · ebazpena: x = 6 (3 · 6 − 5 = 6 + 7)', es: 'Grado 1 · solución: x = 6 (3 · 6 − 5 = 6 + 7)', en: 'Degree 1 · solution: x = 6 (3 · 6 − 5 = 6 + 7)', ar: 'الدرجة 1 · الحل: x = 6 (3 · 6 − 5 = 6 + 7)' })}</text>
+            <Caption y={244}>{pick(language, { eu: 'Ebazpenak bi atalak berdin uzten ditu', es: 'La solución hace iguales los dos miembros', en: 'The solution makes both sides equal.', ar: 'الحل يجعل الطرفين متساويين' })}</Caption>
         </Figure>
     )
 }
@@ -50,14 +50,14 @@ export function EquationPartsFigure({ language }: { language: UnitLanguage }) {
 
 export function StepsFigure({ language }: { language: UnitLanguage }) {
     const steps = [
-        { math: '3(x − 2) + 1 = x + 7', note: { eu: 'hasiera', es: 'inicio', ar: 'البداية' } },
-        { math: '3x − 6 + 1 = x + 7', note: { eu: '1. parentesiak kendu', es: '1. quitar paréntesis', ar: '1. حذف الأقواس' } },
-        { math: '3x − x = 7 + 6 − 1', note: { eu: '2. x-ak bildu atal batean', es: '2. agrupar las x en un miembro', ar: '2. جمع x في طرف' } },
-        { math: '2x = 12', note: { eu: '3. laburtu', es: '3. reducir', ar: '3. التبسيط' } },
-        { math: 'x = 6', note: { eu: '4. x askatu', es: '4. despejar x', ar: '4. عزل x' } }
+        { math: '3(x − 2) + 1 = x + 7', note: { eu: 'hasiera', es: 'inicio', en: 'Start', ar: 'البداية' } },
+        { math: '3x − 6 + 1 = x + 7', note: { eu: '1. parentesiak kendu', es: '1. quitar paréntesis', en: '1. Remove brackets', ar: '1. حذف الأقواس' } },
+        { math: '3x − x = 7 + 6 − 1', note: { eu: '2. x-ak bildu atal batean', es: '2. agrupar las x en un miembro', en: '2. Group the x terms on one side', ar: '2. جمع x في طرف' } },
+        { math: '2x = 12', note: { eu: '3. laburtu', es: '3. reducir', en: '3. Simplify', ar: '3. التبسيط' } },
+        { math: 'x = 6', note: { eu: '4. x askatu', es: '4. despejar x', en: '4. Solve for x', ar: '4. عزل x' } }
     ]
     return (
-        <Figure height={270} label={pick(language, { eu: 'Ekuazio bat ebazteko urratsak', es: 'Los pasos para resolver una ecuación', ar: 'خطوات حل معادلة' })}>
+        <Figure height={270} label={pick(language, { eu: 'Ekuazio bat ebazteko urratsak', es: 'Los pasos para resolver una ecuación', en: 'The steps for solving an equation', ar: 'خطوات حل معادلة' })}>
             {steps.map((step, index) => (
                 <g key={index}>
                     <rect x={70 + index * 18} y={18 + index * 46} width={330} height={38} rx={10} fill={index === steps.length - 1 ? MUSTARD_TINT : STAGE_TINT} stroke={INK} strokeWidth={1.6} />
@@ -65,7 +65,7 @@ export function StepsFigure({ language }: { language: UnitLanguage }) {
                     <text x={420 + index * 18} y={43 + index * 46} fontSize={15} fill={index === 0 ? MUTED : STAGE} fontWeight={700}>{pick(language, step.note)}</text>
                 </g>
             ))}
-            <Caption y={262}>{pick(language, { eu: '5. Egiaztatu: 3 · 4 + 1 = 13 eta 6 + 7 = 13', es: '5. Comprueba: 3 · 4 + 1 = 13 y 6 + 7 = 13', ar: '5. تحقّق: 3 · 4 + 1 = 13 و6 + 7 = 13' })}</Caption>
+            <Caption y={262}>{pick(language, { eu: '5. Egiaztatu: 3 · 4 + 1 = 13 eta 6 + 7 = 13', es: '5. Comprueba: 3 · 4 + 1 = 13 y 6 + 7 = 13', en: '5. Check: 3 · 4 + 1 = 13 and 6 + 7 = 13', ar: '5. تحقّق: 3 · 4 + 1 = 13 و6 + 7 = 13' })}</Caption>
         </Figure>
     )
 }
@@ -79,7 +79,7 @@ export function DenominatorsFigure({ language }: { language: UnitLanguage }) {
         { x: 450, top: '5', bottom: '', times: '6 · 5 = 30' }
     ]
     return (
-        <Figure height={260} label={pick(language, { eu: 'x/2 + x/3 = 5, bider 6', es: 'x/2 + x/3 = 5, por 6', ar: 'x/2 + x/3 = 5، في 6' })}>
+        <Figure height={260} label={pick(language, { eu: 'x/2 + x/3 = 5, bider 6', es: 'x/2 + x/3 = 5, por 6', en: 'x/2 + x/3 = 5, multiply by 6', ar: 'x/2 + x/3 = 5، في 6' })}>
             {parts.map((part, index) => (
                 <g key={index}>
                     {part.bottom ? (
@@ -102,9 +102,9 @@ export function DenominatorsFigure({ language }: { language: UnitLanguage }) {
                     <path d="M0 0 L10 5 L0 10 z" fill={MUTED} />
                 </marker>
             </defs>
-            <text x={600} y={96} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, { eu: 'MKT(2, 3) = 6', es: 'm.c.m.(2, 3) = 6', ar: 'م.م.أ(2، 3) = 6' })}</text>
+            <text x={600} y={96} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, { eu: 'MKT(2, 3) = 6', es: 'm.c.m.(2, 3) = 6', en: 'LCM(2, 3) = 6', ar: 'م.م.أ(2، 3) = 6' })}</text>
             <text x={300} y={216} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>3x + 2x = 30 → x = 6</text>
-            <Caption y={252}>{pick(language, { eu: 'Gai GUZTIAK biderkatu MKTaz, zenbakiak ere bai', es: 'Multiplica TODOS los términos por el m.c.m., también los números', ar: 'اضرب كل الحدود في م.م.أ، حتى الأعداد' })}</Caption>
+            <Caption y={252}>{pick(language, { eu: 'Gai GUZTIAK biderkatu MKTaz, zenbakiak ere bai', es: 'Multiplica TODOS los términos por el m.c.m., también los números', en: 'Multiply ALL the terms by the LCM, including the numbers.', ar: 'اضرب كل الحدود في م.م.أ، حتى الأعداد' })}</Caption>
         </Figure>
     )
 }
@@ -113,13 +113,13 @@ export function DenominatorsFigure({ language }: { language: UnitLanguage }) {
 
 export function ProblemStepsFigure({ language }: { language: UnitLanguage }) {
     const steps = [
-        { title: { eu: '1. Ulertu', es: '1. Comprender', ar: '1. الفهم' }, text: { eu: 'Zer da x?', es: '¿Qué es x?', ar: 'ما x؟' } },
-        { title: { eu: '2. Planteatu', es: '2. Plantear', ar: '2. الصياغة' }, text: { eu: '3x − 8 = 25', es: '3x − 8 = 25', ar: '3x − 8 = 25' } },
-        { title: { eu: '3. Ebatzi', es: '3. Resolver', ar: '3. الحل' }, text: { eu: 'x = 11', es: 'x = 11', ar: 'x = 11' } },
-        { title: { eu: '4. Egiaztatu', es: '4. Comprobar', ar: '4. التحقق' }, text: { eu: '33 − 8 = 25 ✓', es: '33 − 8 = 25 ✓', ar: '33 − 8 = 25 ✓' } }
+        { title: { eu: '1. Ulertu', es: '1. Comprender', en: '1. Understand', ar: '1. الفهم' }, text: { eu: 'Zer da x?', es: '¿Qué es x?', en: 'What is x?', ar: 'ما x؟' } },
+        { title: { eu: '2. Planteatu', es: '2. Plantear', en: '2. Set up', ar: '2. الصياغة' }, text: { eu: '3x − 8 = 25', es: '3x − 8 = 25', en: '3x − 8 = 25', ar: '3x − 8 = 25' } },
+        { title: { eu: '3. Ebatzi', es: '3. Resolver', en: '3. Solve', ar: '3. الحل' }, text: { eu: 'x = 11', es: 'x = 11', en: 'x = 11', ar: 'x = 11' } },
+        { title: { eu: '4. Egiaztatu', es: '4. Comprobar', en: '4. Check', ar: '4. التحقق' }, text: { eu: '33 − 8 = 25 ✓', es: '33 − 8 = 25 ✓', en: '33 − 8 = 25 ✓', ar: '33 − 8 = 25 ✓' } }
     ]
     return (
-        <Figure height={210} label={pick(language, { eu: 'Buruketa baten lau urratsak', es: 'Los cuatro pasos de un problema', ar: 'الخطوات الأربع لمسألة' })}>
+        <Figure height={210} label={pick(language, { eu: 'Buruketa baten lau urratsak', es: 'Los cuatro pasos de un problema', en: 'The four steps to solve a problem', ar: 'الخطوات الأربع لمسألة' })}>
             {steps.map((step, index) => (
                 <g key={index}>
                     <rect x={20 + index * 175} y={50} width={150} height={96} rx={14} fill={index === 1 ? MUSTARD_TINT : STAGE_TINT} stroke={INK} strokeWidth={2} />
@@ -128,8 +128,8 @@ export function ProblemStepsFigure({ language }: { language: UnitLanguage }) {
                     {index < steps.length - 1 && <path d={`M${172 + index * 175} 98 L${193 + index * 175} 98`} stroke={INK} strokeWidth={2} />}
                 </g>
             ))}
-            <text x={360} y={30} textAnchor="middle" fontSize={16} fill={INK}>{pick(language, { eu: '«Zenbaki baten hirukoitzari 8 kenduta, 25 lortzen da»', es: '«Si al triple de un número le restas 8, obtienes 25»', ar: '«إذا طرحت 8 من ثلاثة أضعاف عدد تحصل على 25»' })}</text>
-            <Caption y={196}>{pick(language, { eu: 'Amaitzeko, idatzi erantzuna esaldi batean: zenbakia 11 da', es: 'Al final, escribe la respuesta en una frase: el número es 11', ar: 'في النهاية اكتب الجواب في جملة: العدد 11' })}</Caption>
+            <text x={360} y={30} textAnchor="middle" fontSize={16} fill={INK}>{pick(language, { eu: '«Zenbaki baten hirukoitzari 8 kenduta, 25 lortzen da»', es: '«Si al triple de un número le restas 8, obtienes 25»', en: '“If you subtract 8 from three times a number, you get 25”', ar: '«إذا طرحت 8 من ثلاثة أضعاف عدد تحصل على 25»' })}</text>
+            <Caption y={196}>{pick(language, { eu: 'Amaitzeko, idatzi erantzuna esaldi batean: zenbakia 11 da', es: 'Al final, escribe la respuesta en una frase: el número es 11', en: 'At the end, write the answer in a sentence: the number is 11', ar: 'في النهاية اكتب الجواب في جملة: العدد 11' })}</Caption>
         </Figure>
     )
 }
@@ -138,7 +138,7 @@ export function ProblemStepsFigure({ language }: { language: UnitLanguage }) {
 
 export function ZeroProductFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={230} label={pick(language, { eu: 'x(x − 5) = 0', es: 'x(x − 5) = 0', ar: 'x(x − 5) = 0' })}>
+        <Figure height={230} label={pick(language, { eu: 'x(x − 5) = 0', es: 'x(x − 5) = 0', en: 'x(x − 5) = 0', ar: 'x(x − 5) = 0' })}>
             <text x={360} y={58} textAnchor="middle" fontSize={30} fontWeight={700} fill={INK} fontFamily="Fraunces, serif">x² − 5x = 0 → x · (x − 5) = 0</text>
             <path d="M300 74 L200 130" stroke={INK} strokeWidth={2} />
             <path d="M420 74 L520 130" stroke={INK} strokeWidth={2} />
@@ -146,7 +146,7 @@ export function ZeroProductFigure({ language }: { language: UnitLanguage }) {
             <rect x={400} y={134} width={240} height={52} rx={12} fill={MUSTARD_TINT} stroke={INK} strokeWidth={2} />
             <text x={200} y={168} textAnchor="middle" fontSize={22} fontWeight={700} fill={INK}>x = 0</text>
             <text x={520} y={168} textAnchor="middle" fontSize={22} fontWeight={700} fill={INK}>x − 5 = 0 → x = 5</text>
-            <Caption y={220}>{pick(language, { eu: 'Biderkadura bat 0 bada, faktoreetako bat 0 da', es: 'Si un producto vale 0, alguno de sus factores es 0', ar: 'إذا كان الجداء 0 فأحد عوامله 0' })}</Caption>
+            <Caption y={220}>{pick(language, { eu: 'Biderkadura bat 0 bada, faktoreetako bat 0 da', es: 'Si un producto vale 0, alguno de sus factores es 0', en: 'If a product equals 0, one of its factors is 0', ar: 'إذا كان الجداء 0 فأحد عوامله 0' })}</Caption>
         </Figure>
     )
 }
@@ -155,13 +155,13 @@ export function ZeroProductFigure({ language }: { language: UnitLanguage }) {
 
 export function DiscriminantFigure({ language }: { language: UnitLanguage }) {
     const cases = [
-        { cx: 130, shift: 30, label: { eu: 'Δ > 0: bi ebazpen', es: 'Δ > 0: dos soluciones', ar: 'Δ > 0: حلان' } },
-        { cx: 360, shift: 0, label: { eu: 'Δ = 0: ebazpen bat', es: 'Δ = 0: una solución', ar: 'Δ = 0: حل واحد' } },
-        { cx: 590, shift: -30, label: { eu: 'Δ < 0: ebazpenik ez', es: 'Δ < 0: sin solución', ar: 'Δ < 0: لا حل' } }
+        { cx: 130, shift: 30, label: { eu: 'Δ > 0: bi ebazpen', es: 'Δ > 0: dos soluciones', en: 'Δ > 0: two solutions', ar: 'Δ > 0: حلان' } },
+        { cx: 360, shift: 0, label: { eu: 'Δ = 0: ebazpen bat', es: 'Δ = 0: una solución', en: 'Δ = 0: one solution', ar: 'Δ = 0: حل واحد' } },
+        { cx: 590, shift: -30, label: { eu: 'Δ < 0: ebazpenik ez', es: 'Δ < 0: sin solución', en: 'Δ < 0: no solution', ar: 'Δ < 0: لا حل' } }
     ]
     const axis = 140
     return (
-        <Figure height={240} label={pick(language, { eu: 'Diskriminatzailearen hiru kasuak', es: 'Los tres casos del discriminante', ar: 'الحالات الثلاث للمميّز' })}>
+        <Figure height={240} label={pick(language, { eu: 'Diskriminatzailearen hiru kasuak', es: 'Los tres casos del discriminante', en: 'The three cases of the discriminant', ar: 'الحالات الثلاث للمميّز' })}>
             {cases.map((item, index) => {
                 const vertex = axis + item.shift
                 const path = Array.from({ length: 41 }, (_, step) => {
@@ -178,7 +178,7 @@ export function DiscriminantFigure({ language }: { language: UnitLanguage }) {
                     </g>
                 )
             })}
-            <Caption y={232}>{pick(language, { eu: 'Δ = b² − 4ac: erro karratuaren barrukoa', es: 'Δ = b² − 4ac: lo que está dentro de la raíz', ar: 'Δ = b² − 4ac: ما تحت الجذر' })}</Caption>
+            <Caption y={232}>{pick(language, { eu: 'Δ = b² − 4ac: erro karratuaren barrukoa', es: 'Δ = b² − 4ac: lo que está dentro de la raíz', en: 'Δ = b² − 4ac: what is inside the square root', ar: 'Δ = b² − 4ac: ما تحت الجذر' })}</Caption>
         </Figure>
     )
 }

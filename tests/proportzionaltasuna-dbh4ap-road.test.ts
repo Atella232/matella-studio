@@ -25,7 +25,7 @@ import { fraction } from '../src/features/unit-v2/math/fraction.ts'
 const renders = (latex: string) => katex.renderToString(latex, { throwOnError: true, strict: 'error' })
 
 function checkText(text: LocalizedText, where: string) {
-    for (const language of ['eu', 'es', 'ar'] as const) {
+    for (const language of ['eu', 'es', 'en', 'ar'] as const) {
         const line = text[language]
         assert.equal(line.split('$').length % 2, 1, `${where}: ${line}`)
         for (const match of line.matchAll(/\$([^$]+)\$/g)) {

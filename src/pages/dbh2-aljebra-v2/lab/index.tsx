@@ -30,7 +30,7 @@ export function AlgebraLaboratory(props: {
             tools={algebraLabTools}
             stages={algebraStages}
             components={toolComponents}
-            title={{ eu: 'Ordeztu, eraiki eta faktorizatu', es: 'Sustituye, construye y factoriza', ar: 'عوّض وابنِ وحلّل' }}
+            title={{ eu: 'Ordeztu, eraiki eta faktorizatu', es: 'Sustituye, construye y factoriza', en: 'Substitute, build and factorise', ar: 'عوّض وابنِ وحلّل' }}
         />
     )
 }

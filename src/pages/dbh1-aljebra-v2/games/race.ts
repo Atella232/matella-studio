@@ -31,9 +31,9 @@ export type AlgebraRaceError =
 
 export type AlgebraRaceQuestion = RaceQuestion<AlgebraRaceError>
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const math = (latex: string) => `$${latex}$`
-const all = (latex: string): LocalizedText => say(math(latex), math(latex), math(latex))
+const all = (latex: string): LocalizedText => say(math(latex), math(latex), math(latex), math(latex))
 
 interface Candidate {
     latex: string
@@ -69,13 +69,13 @@ interface Phrase {
 }
 
 const phrases: Phrase[] = [
-    { text: () => say('Zenbaki baten bikoitza', 'El doble de un número', 'ضعف عدد'), right: () => '2x', wrong: () => [{ latex: 'x^{2}', error: 'double-square' }, { latex: 'x+2', error: 'coefficient' }, { latex: '\\frac{x}{2}', error: 'coefficient' }] },
-    { text: () => say('Zenbaki baten karratua', 'El cuadrado de un número', 'مربع عدد'), right: () => 'x^{2}', wrong: () => [{ latex: '2x', error: 'double-square' }, { latex: 'x+x', error: 'double-square' }, { latex: 'x^{3}', error: 'coefficient' }] },
-    { text: (n) => say(`Zenbaki bat ken ${n}`, `Un número disminuido en ${n}`, `عدد ناقص ${n}`), right: (n) => `x-${n}`, wrong: (n) => [{ latex: `${n}-x`, error: 'order' }, { latex: `${n}x`, error: 'coefficient' }, { latex: `x+${n}`, error: 'sign' }] },
-    { text: (n) => say(`Zenbaki baten hirukoitza gehi ${n}`, `El triple de un número más ${n}`, `ثلاثة أضعاف عدد زائد ${n}`), right: (n) => `3x+${n}`, wrong: (n) => [{ latex: `3(x+${n})`, error: 'bracket' }, { latex: `x+${3 * n}`, error: 'coefficient' }, { latex: `3x-${n}`, error: 'sign' }] },
-    { text: (n) => say(`Zenbaki bat gehi ${n}, bider 2`, `El doble de un número aumentado en ${n}`, `ضعف (عدد زائد ${n})`), right: (n) => `2(x+${n})`, wrong: (n) => [{ latex: `2x+${n}`, error: 'bracket' }, { latex: `x+${2 * n}`, error: 'bracket' }, { latex: `2x+${2 * n + 1}`, error: 'calculation' }] },
-    { text: (n) => say(`Zure adina duela ${n} urte`, `Tu edad hace ${n} años`, `عمرك قبل ${n} سنوات`), right: (n) => `x-${n}`, wrong: (n) => [{ latex: `x+${n}`, error: 'sign' }, { latex: `${n}-x`, error: 'order' }, { latex: `${n}x`, error: 'coefficient' }] },
-    { text: () => say('Zenbaki baten erdia', 'La mitad de un número', 'نصف عدد'), right: () => '\\frac{x}{2}', wrong: () => [{ latex: '2x', error: 'coefficient' }, { latex: 'x-2', error: 'coefficient' }, { latex: 'x^{2}', error: 'double-square' }] }
+    { text: () => say('Zenbaki baten bikoitza', 'El doble de un número', 'ضعف عدد', 'Twice a number'), right: () => '2x', wrong: () => [{ latex: 'x^{2}', error: 'double-square' }, { latex: 'x+2', error: 'coefficient' }, { latex: '\\frac{x}{2}', error: 'coefficient' }] },
+    { text: () => say('Zenbaki baten karratua', 'El cuadrado de un número', 'مربع عدد', 'The square of a number'), right: () => 'x^{2}', wrong: () => [{ latex: '2x', error: 'double-square' }, { latex: 'x+x', error: 'double-square' }, { latex: 'x^{3}', error: 'coefficient' }] },
+    { text: (n) => say(`Zenbaki bat ken ${n}`, `Un número disminuido en ${n}`, `عدد ناقص ${n}`, `A number decreased by ${n}`), right: (n) => `x-${n}`, wrong: (n) => [{ latex: `${n}-x`, error: 'order' }, { latex: `${n}x`, error: 'coefficient' }, { latex: `x+${n}`, error: 'sign' }] },
+    { text: (n) => say(`Zenbaki baten hirukoitza gehi ${n}`, `El triple de un número más ${n}`, `ثلاثة أضعاف عدد زائد ${n}`, `Three times a number plus ${n}`), right: (n) => `3x+${n}`, wrong: (n) => [{ latex: `3(x+${n})`, error: 'bracket' }, { latex: `x+${3 * n}`, error: 'coefficient' }, { latex: `3x-${n}`, error: 'sign' }] },
+    { text: (n) => say(`Zenbaki bat gehi ${n}, bider 2`, `El doble de un número aumentado en ${n}`, `ضعف (عدد زائد ${n})`, `Twice a number increased by ${n}`), right: (n) => `2(x+${n})`, wrong: (n) => [{ latex: `2x+${n}`, error: 'bracket' }, { latex: `x+${2 * n}`, error: 'bracket' }, { latex: `2x+${2 * n + 1}`, error: 'calculation' }] },
+    { text: (n) => say(`Zure adina duela ${n} urte`, `Tu edad hace ${n} años`, `عمرك قبل ${n} سنوات`, `Your age ${n} years ago`), right: (n) => `x-${n}`, wrong: (n) => [{ latex: `x+${n}`, error: 'sign' }, { latex: `${n}-x`, error: 'order' }, { latex: `${n}x`, error: 'coefficient' }] },
+    { text: () => say('Zenbaki baten erdia', 'La mitad de un número', 'نصف عدد', 'Half of a number'), right: () => '\\frac{x}{2}', wrong: () => [{ latex: '2x', error: 'coefficient' }, { latex: 'x-2', error: 'coefficient' }, { latex: 'x^{2}', error: 'double-square' }] }
 ]
 
 function languageQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | null {
@@ -83,7 +83,7 @@ function languageQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | nul
     const n = randomInt(random, 2, 9)
     const choices = options(random, phrase.right(n), phrase.wrong(n))
     if (!choices) return null
-    return question(0, 'translate', say(`${phrase.text(n).eu}:`, `${phrase.text(n).es}:`, `${phrase.text(n).ar}:`), choices, null, all(phrase.right(n)))
+    return question(0, 'translate', say(`${phrase.text(n).eu}:`, `${phrase.text(n).es}:`, `${phrase.text(n).ar}:`, `${phrase.text(n).en}:`), choices, null, all(phrase.right(n)))
 }
 
 function valueQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | null {
@@ -103,7 +103,7 @@ function valueQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | null {
     ])
     if (!choices) return null
     const worked = square ? `${shown}^{2}${b < 0 ? '' : '+'}${b}=${answer}` : `${a}\\cdot ${shown}${b < 0 ? '' : '+'}${b}=${answer}`
-    return question(0, 'value', say(`Zenbat balio du ${math(expression)} adierazpenak ${math(`x=${x}`)} denean?`, `¿Cuánto vale ${math(expression)} para ${math(`x=${x}`)}?`, `كم قيمة ${math(expression)} عندما ${math(`x=${x}`)}؟`), choices, answer, all(worked))
+    return question(0, 'value', say(`Zenbat balio du ${math(expression)} adierazpenak ${math(`x=${x}`)} denean?`, `¿Cuánto vale ${math(expression)} para ${math(`x=${x}`)}?`, `كم قيمة ${math(expression)} عندما ${math(`x=${x}`)}؟`, `What is the value of ${math(expression)} when ${math(`x=${x}`)}?`), choices, answer, all(worked))
 }
 
 /* ---------- Circuit 1: monomials ---------- */
@@ -124,7 +124,7 @@ function degreeQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | null 
         ...near(degree)
     ])
     if (!choices) return null
-    return question(1, 'degree', say(`Zein da ${math(latex)} monomioaren maila?`, `¿Cuál es el grado de ${math(latex)}?`, `ما درجة ${math(latex)}؟`), choices, degree, all(exponents.join('+') + `=${degree}`))
+    return question(1, 'degree', say(`Zein da ${math(latex)} monomioaren maila?`, `¿Cuál es el grado de ${math(latex)}?`, `ما درجة ${math(latex)}؟`, `What is the degree of ${math(latex)}?`), choices, degree, all(exponents.join('+') + `=${degree}`))
 }
 
 function likeQuestion(random: Random): AlgebraRaceQuestion | null {
@@ -138,7 +138,7 @@ function likeQuestion(random: Random): AlgebraRaceQuestion | null {
         { latex: `${coefficient}y${power > 1 ? `^{${power}}` : ''}`, error: 'not-like' }
     ])
     if (!choices) return null
-    return question(1, 'like', say(`Zein da ${math(termLatex(base))} monomioaren antzekoa?`, `¿Cuál es semejante a ${math(termLatex(base))}?`, `أيها يشابه ${math(termLatex(base))}؟`), choices, null, say('Zati literal bera behar dute.', 'Tienen que tener la misma parte literal.', 'يجب أن يكون لهما الجزء الحرفي نفسه.'))
+    return question(1, 'like', say(`Zein da ${math(termLatex(base))} monomioaren antzekoa?`, `¿Cuál es semejante a ${math(termLatex(base))}?`, `أيها يشابه ${math(termLatex(base))}؟`, `Which is a like term of ${math(termLatex(base))}?`), choices, null, say('Zati literal bera behar dute.', 'Tienen que tener la misma parte literal.', 'يجب أن يكون لهما الجزء الحرفي نفسه.', 'They must have the same variable part.'))
 }
 
 /* ---------- Circuit 2: operations with monomials ---------- */
@@ -158,7 +158,7 @@ function addQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | null {
         { latex: termLatex({ coefficient: sum - 1, power }), error: 'calculation' }
     ].filter((candidate) => candidate.latex !== right))
     if (!choices) return null
-    return question(2, 'add', say(`Laburtu: ${math(latex)}`, `Reduce: ${math(latex)}`, `بسّط: ${math(latex)}`), choices, null, all(`${latex}=${right}`))
+    return question(2, 'add', say(`Laburtu: ${math(latex)}`, `Reduce: ${math(latex)}`, `بسّط: ${math(latex)}`, `Simplify: ${math(latex)}`), choices, null, all(`${latex}=${right}`))
 }
 
 function multiplyQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | null {
@@ -173,7 +173,7 @@ function multiplyQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | nul
         { latex: termLatex({ coefficient: product.coefficient, power: product.power + 1 }), error: 'calculation' }
     ].filter((candidate) => candidate.latex !== termLatex(product)))
     if (!choices) return null
-    return question(2, 'multiply', say(`Biderkatu: ${math(latex)}`, `Multiplica: ${math(latex)}`, `اضرب: ${math(latex)}`), choices, null, all(`${latex}=${termLatex(product)}`))
+    return question(2, 'multiply', say(`Biderkatu: ${math(latex)}`, `Multiplica: ${math(latex)}`, `اضرب: ${math(latex)}`, `Multiply: ${math(latex)}`), choices, null, all(`${latex}=${termLatex(product)}`))
 }
 
 /* ---------- Circuit 3: simple equations ---------- */
@@ -191,7 +191,7 @@ function simpleEquationQuestion(random: Random, tier: Tier): AlgebraRaceQuestion
     const { latex, answer, wrong, worked } = cases[kind]
     const choices = options(random, String(answer), [...wrong, ...near(answer)])
     if (!choices) return null
-    return question(3, 'equation', say(`Ebatzi: ${math(latex)}`, `Resuelve: ${math(latex)}`, `حلّ: ${math(latex)}`), choices, answer, all(worked))
+    return question(3, 'equation', say(`Ebatzi: ${math(latex)}`, `Resuelve: ${math(latex)}`, `حلّ: ${math(latex)}`, `Solve: ${math(latex)}`), choices, answer, all(worked))
 }
 
 /* ---------- Circuit 4: two-step equations ---------- */
@@ -210,7 +210,7 @@ function twoStepQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | null
             ...near(x)
         ].filter((candidate) => Number.isInteger(Number(candidate.latex))))
         if (!choices) return null
-        return question(4, 'both-sides', say(`Ebatzi: ${math(latex)}`, `Resuelve: ${math(latex)}`, `حلّ: ${math(latex)}`), choices, x, all(`${a - c}x=${d - b}\\ \\to\\ x=${x}`))
+        return question(4, 'both-sides', say(`Ebatzi: ${math(latex)}`, `Resuelve: ${math(latex)}`, `حلّ: ${math(latex)}`, `Solve: ${math(latex)}`), choices, x, all(`${a - c}x=${d - b}\\ \\to\\ x=${x}`))
     }
     const c = a * x + b
     const latex = `${linearLatex({ a, b })}=${c}`
@@ -221,7 +221,7 @@ function twoStepQuestion(random: Random, tier: Tier): AlgebraRaceQuestion | null
         ...near(x)
     ])
     if (!choices) return null
-    return question(4, 'two-step', say(`Ebatzi: ${math(latex)}`, `Resuelve: ${math(latex)}`, `حلّ: ${math(latex)}`), choices, x, all(`${a}x=${c - b}\\ \\to\\ x=${x}`))
+    return question(4, 'two-step', say(`Ebatzi: ${math(latex)}`, `Resuelve: ${math(latex)}`, `حلّ: ${math(latex)}`, `Solve: ${math(latex)}`), choices, x, all(`${a}x=${c - b}\\ \\to\\ x=${x}`))
 }
 
 /* ---------- Public API ---------- */
@@ -254,18 +254,18 @@ export function algebraParTime(circuit: number): number {
 }
 
 export const algebraRaceErrorTips: Record<AlgebraRaceError, LocalizedText> = {
-    'double-square': say('Bikoitza $2x$ da ($x+x$); karratua $x^{2}$ da ($x\\cdot x$).', 'El doble es $2x$ ($x+x$); el cuadrado, $x^{2}$ ($x\\cdot x$).', 'الضعف $2x$ ($x+x$)، والمربع $x^{2}$ ($x\\cdot x$).'),
-    order: say('Kenketan ordena garrantzitsua da: «zenbaki bat ken 3» $x-3$ da.', 'En la resta importa el orden: «un número menos 3» es $x-3$.', 'في الطرح الترتيب مهم: «عدد ناقص 3» هو $x-3$.'),
-    bracket: say('«Baturaren bikoitza» parentesiarekin idazten da; «bikoitza gehi», gabe.', '«El doble de la suma» lleva paréntesis; «el doble más», no.', '«ضعف المجموع» يُكتب بقوس، أما «الضعف زائد» فبدونه.'),
-    priority: say('Lehenik biderketa, gero batuketa.', 'Primero la multiplicación, después la suma.', 'الضرب أولًا ثم الجمع.'),
-    sign: say('Begiratu zeinuari: minus bat galdu edo gehitu duzu.', 'Mira el signo: has perdido o añadido un menos.', 'انتبه للإشارة: أضعت علامة ناقص أو أضفتها.'),
-    coefficient: say('Koefizienteak x biderkatzen du; ez da batzen edo zatitzen.', 'El coeficiente multiplica a la x; no se suma ni se divide.', 'المعامل يضرب x؛ لا يُجمع ولا يُقسم.'),
-    'degree-count': say('Maila berretzaile guztien batura da (1 berretzaileak ere bai).', 'El grado es la suma de todos los exponentes (también los que valen 1).', 'الدرجة مجموع كل الأسس (ومنها التي تساوي 1).'),
-    'not-like': say('Antzekoak izateko, letra eta berretzaile berak behar dira.', 'Para ser semejantes hacen falta las mismas letras y los mismos exponentes.', 'لكي تكون متشابهة يلزم الحروف نفسها والأسس نفسها.'),
-    'added-exponents': say('Batzean koefizienteak batzen dira; berretzailea ez da aldatzen.', 'Al sumar se suman los coeficientes; el exponente no cambia.', 'عند الجمع نجمع المعاملات؛ والأس لا يتغيّر.'),
-    'multiplied-exponents': say('Biderkatzean berretzaileak batzen dira, ez biderkatzen.', 'Al multiplicar, los exponentes se suman, no se multiplican.', 'عند الضرب تُجمع الأسس ولا تُضرب.'),
-    'forgot-coefficient': say('Koefizienteak biderkatu egiten dira, ez batu.', 'Los coeficientes se multiplican, no se suman.', 'المعاملات تُضرب ولا تُجمع.'),
-    'transpose-sign': say('Batzen ari dena kentzen pasatzen da, eta kentzen ari dena batzen.', 'Lo que suma pasa restando y lo que resta pasa sumando.', 'ما يُجمع ينتقل مطروحًا وما يُطرح ينتقل مجموعًا.'),
-    'transpose-operation': say('Biderkatzen ari dena zatitzen pasatzen da, eta zatitzen ari dena biderkatzen.', 'Lo que multiplica pasa dividiendo y lo que divide pasa multiplicando.', 'ما يَضرب ينتقل قاسمًا وما يَقسم ينتقل ضاربًا.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    'double-square': say('Bikoitza $2x$ da ($x+x$); karratua $x^{2}$ da ($x\\cdot x$).', 'El doble es $2x$ ($x+x$); el cuadrado, $x^{2}$ ($x\\cdot x$).', 'الضعف $2x$ ($x+x$)، والمربع $x^{2}$ ($x\\cdot x$).', 'Twice is $2x$ ($x+x$); the square is $x^{2}$ ($x\\cdot x$).'),
+    order: say('Kenketan ordena garrantzitsua da: «zenbaki bat ken 3» $x-3$ da.', 'En la resta importa el orden: «un número menos 3» es $x-3$.', 'في الطرح الترتيب مهم: «عدد ناقص 3» هو $x-3$.', 'In subtraction the order matters: “a number minus 3” is $x-3$.'),
+    bracket: say('«Baturaren bikoitza» parentesiarekin idazten da; «bikoitza gehi», gabe.', '«El doble de la suma» lleva paréntesis; «el doble más», no.', '«ضعف المجموع» يُكتب بقوس، أما «الضعف زائد» فبدونه.', '“Twice the sum” needs brackets; “twice a number plus” does not.'),
+    priority: say('Lehenik biderketa, gero batuketa.', 'Primero la multiplicación, después la suma.', 'الضرب أولًا ثم الجمع.', 'First the multiplication, then the addition.'),
+    sign: say('Begiratu zeinuari: minus bat galdu edo gehitu duzu.', 'Mira el signo: has perdido o añadido un menos.', 'انتبه للإشارة: أضعت علامة ناقص أو أضفتها.', 'Check the sign: you have dropped or added a minus.'),
+    coefficient: say('Koefizienteak x biderkatzen du; ez da batzen edo zatitzen.', 'El coeficiente multiplica a la x; no se suma ni se divide.', 'المعامل يضرب x؛ لا يُجمع ولا يُقسم.', 'The coefficient multiplies the x; it is not added or divided.'),
+    'degree-count': say('Maila berretzaile guztien batura da (1 berretzaileak ere bai).', 'El grado es la suma de todos los exponentes (también los que valen 1).', 'الدرجة مجموع كل الأسس (ومنها التي تساوي 1).', 'The degree is the sum of all the exponents (including the ones that equal 1).'),
+    'not-like': say('Antzekoak izateko, letra eta berretzaile berak behar dira.', 'Para ser semejantes hacen falta las mismas letras y los mismos exponentes.', 'لكي تكون متشابهة يلزم الحروف نفسها والأسس نفسها.', 'To be like terms, they need the same letters and the same exponents.'),
+    'added-exponents': say('Batzean koefizienteak batzen dira; berretzailea ez da aldatzen.', 'Al sumar se suman los coeficientes; el exponente no cambia.', 'عند الجمع نجمع المعاملات؛ والأس لا يتغيّر.', 'When you add, you add the coefficients; the exponent does not change.'),
+    'multiplied-exponents': say('Biderkatzean berretzaileak batzen dira, ez biderkatzen.', 'Al multiplicar, los exponentes se suman, no se multiplican.', 'عند الضرب تُجمع الأسس ولا تُضرب.', 'When you multiply, the exponents are added, not multiplied.'),
+    'forgot-coefficient': say('Koefizienteak biderkatu egiten dira, ez batu.', 'Los coeficientes se multiplican, no se suman.', 'المعاملات تُضرب ولا تُجمع.', 'The coefficients are multiplied, not added.'),
+    'transpose-sign': say('Batzen ari dena kentzen pasatzen da, eta kentzen ari dena batzen.', 'Lo que suma pasa restando y lo que resta pasa sumando.', 'ما يُجمع ينتقل مطروحًا وما يُطرح ينتقل مجموعًا.', 'What is added moves across as a subtraction, and what is subtracted moves across as an addition.'),
+    'transpose-operation': say('Biderkatzen ari dena zatitzen pasatzen da, eta zatitzen ari dena biderkatzen.', 'Lo que multiplica pasa dividiendo y lo que divide pasa multiplicando.', 'ما يَضرب ينتقل قاسمًا وما يَقسم ينتقل ضاربًا.', 'What multiplies moves across as a division, and what divides moves across as a multiplication.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

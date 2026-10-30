@@ -30,28 +30,28 @@ export function WallTool(props: ToolProps & { challenges?: LabChallenge<WallStat
     const controls = (
         <>
             <Segmented
-                label={l({ eu: 'Modua', es: 'Modo', ar: 'الوضع' })}
+                label={l({ eu: 'Modua', es: 'Modo', en: 'Mode', ar: 'الوضع' })}
                 value={mode}
                 options={[
-                    { value: 'equivalent', label: l({ eu: 'Baliokideak', es: 'Equivalentes', ar: 'المتكافئة' }) },
-                    { value: 'compare', label: l({ eu: 'Konparatu', es: 'Comparar', ar: 'مقارنة' }) }
+                    { value: 'equivalent', label: l({ eu: 'Baliokideak', es: 'Equivalentes', en: 'Equivalent', ar: 'المتكافئة' }) },
+                    { value: 'compare', label: l({ eu: 'Konparatu', es: 'Comparar', en: 'Compare', ar: 'مقارنة' }) }
                 ]}
                 onChange={(next) => setState((current) => setWallMode(current, next))}
             />
             <p className="fraction-v2-lab-tip">
                 {mode === 'equivalent'
-                    ? l({ eu: 'Sakatu pieza bat: zatikia pieza horren amaieraraino iristen da.', es: 'Pulsa una pieza: la fracción llega hasta el final de esa pieza.', ar: 'اضغط على قطعة: يصل الكسر إلى نهاية تلك القطعة.' })
-                    : l({ eu: 'Sakatu bi pieza zatikiak alderatzeko.', es: 'Pulsa dos piezas para comparar las fracciones.', ar: 'اضغط على قطعتين لمقارنة الكسرين.' })}
+                    ? l({ eu: 'Sakatu pieza bat: zatikia pieza horren amaieraraino iristen da.', es: 'Pulsa una pieza: la fracción llega hasta el final de esa pieza.', en: 'Press a piece: the fraction reaches the end of that piece.', ar: 'اضغط على قطعة: يصل الكسر إلى نهاية تلك القطعة.' })
+                    : l({ eu: 'Sakatu bi pieza zatikiak alderatzeko.', es: 'Pulsa dos piezas para comparar las fracciones.', en: 'Press two pieces to compare the fractions.', ar: 'اضغط على قطعتين لمقارنة الكسرين.' })}
             </p>
             <div className="fraction-v2-lab-quick-actions">
-                <button type="button" onClick={() => setState((current) => ({ ...current, first: null, second: null }))}>{l({ eu: 'Garbitu', es: 'Limpiar', ar: 'مسح' })}</button>
+                <button type="button" onClick={() => setState((current) => ({ ...current, first: null, second: null }))}>{l({ eu: 'Garbitu', es: 'Limpiar', en: 'Clear', ar: 'مسح' })}</button>
             </div>
         </>
     )
 
     let readout
     if (!first) {
-        readout = <span className="fraction-v2-lab-readout-note">{l({ eu: 'Sakatu hormako pieza bat.', es: 'Pulsa una pieza del muro.', ar: 'اضغط على قطعة من الجدار.' })}</span>
+        readout = <span className="fraction-v2-lab-readout-note">{l({ eu: 'Sakatu hormako pieza bat.', es: 'Pulsa una pieza del muro.', en: 'Press a piece of the wall.', ar: 'اضغط على قطعة من الجدار.' })}</span>
     } else if (mode === 'equivalent') {
         readout = (
             <>
@@ -65,8 +65,8 @@ export function WallTool(props: ToolProps & { challenges?: LabChallenge<WallStat
                 </span>
                 <span className="fraction-v2-lab-readout-note">
                     {equivalents.length === 1
-                        ? l({ eu: 'Hormako beste zatikirik ez du balio bera.', es: 'Ninguna otra fracción del muro vale lo mismo.', ar: 'لا يوجد كسر آخر في الجدار بالقيمة نفسها.' })
-                        : l({ eu: `Hormako ${equivalents.length} zatikik balio bera dute.`, es: `${equivalents.length} fracciones del muro valen lo mismo.`, ar: `${equivalents.length} كسور في الجدار لها القيمة نفسها.` })}
+                        ? l({ eu: 'Hormako beste zatikirik ez du balio bera.', es: 'Ninguna otra fracción del muro vale lo mismo.', en: 'No other fraction on the wall has the same value.', ar: 'لا يوجد كسر آخر في الجدار بالقيمة نفسها.' })
+                        : l({ eu: `Hormako ${equivalents.length} zatikik balio bera dute.`, es: `${equivalents.length} fracciones del muro valen lo mismo.`, en: `${equivalents.length} fractions on the wall have the same value.`, ar: `${equivalents.length} كسور في الجدار لها القيمة نفسها.` })}
                 </span>
             </>
         )
@@ -74,7 +74,7 @@ export function WallTool(props: ToolProps & { challenges?: LabChallenge<WallStat
         readout = (
             <>
                 <MathText text={`$${pieceLatex(first)}$`} />
-                <span className="fraction-v2-lab-readout-note">{l({ eu: 'Aukeratu bigarren pieza.', es: 'Elige la segunda pieza.', ar: 'اختر القطعة الثانية.' })}</span>
+                <span className="fraction-v2-lab-readout-note">{l({ eu: 'Aukeratu bigarren pieza.', es: 'Elige la segunda pieza.', en: 'Choose the second piece.', ar: 'اختر القطعة الثانية.' })}</span>
             </>
         )
     } else {

@@ -147,12 +147,12 @@ export function ExactGame({ language, records, onResult, onExit }: GameProps) {
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${record.score}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${record.score}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: 'Sakatu karta bat, eragiketa bat eta beste karta bat: biak emaitzaren karta bihurtzen dira.', es: 'Toca una carta, una operación y otra carta: las dos se convierten en la carta del resultado.', ar: 'اضغط بطاقة ثم عملية ثم بطاقة أخرى: تتحوّل البطاقتان إلى بطاقة النتيجة.' })}</li>
-                        <li>{l({ eu: 'Iritsi zehazki helburura. Ez dituzu karta guztiak erabili behar.', es: 'Llega exactamente al objetivo. No hace falta usar todas las cartas.', ar: 'صل إلى الهدف تمامًا. لا يلزم استعمال كل البطاقات.' })}</li>
-                        <li>{l({ eu: `${EXACT_ROUNDS} txanda: 100 puntu bakoitzeko, 50 pista erabiliz gero.`, es: `${EXACT_ROUNDS} rondas: 100 puntos cada una, 50 si usas una pista.`, ar: `${EXACT_ROUNDS} جولات: 100 نقطة لكل جولة، و50 إذا استعملت تلميحًا.` })}</li>
+                        <li>{l({ eu: 'Sakatu karta bat, eragiketa bat eta beste karta bat: biak emaitzaren karta bihurtzen dira.', es: 'Toca una carta, una operación y otra carta: las dos se convierten en la carta del resultado.', en: 'Tap a card, an operation and another card: both cards turn into the result card.', ar: 'اضغط بطاقة ثم عملية ثم بطاقة أخرى: تتحوّل البطاقتان إلى بطاقة النتيجة.' })}</li>
+                        <li>{l({ eu: 'Iritsi zehazki helburura. Ez dituzu karta guztiak erabili behar.', es: 'Llega exactamente al objetivo. No hace falta usar todas las cartas.', en: 'Reach the target exactly. You do not need to use all the cards.', ar: 'صل إلى الهدف تمامًا. لا يلزم استعمال كل البطاقات.' })}</li>
+                        <li>{l({ eu: `${EXACT_ROUNDS} txanda: 100 puntu bakoitzeko, 50 pista erabiliz gero.`, es: `${EXACT_ROUNDS} rondas: 100 puntos cada una, 50 si usas una pista.`, en: `${EXACT_ROUNDS} rounds: 100 points each, 50 if you use a hint.`, ar: `${EXACT_ROUNDS} جولات: 100 نقطة لكل جولة، و50 إذا استعملت تلميحًا.` })}</li>
                     </ul>
                 )}
             />
@@ -167,11 +167,11 @@ export function ExactGame({ language, records, onResult, onExit }: GameProps) {
                 <ResultPanel
                     language={language}
                     stars={exactStars(score)}
-                    title={`${score} ${l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}`}
-                    subtitle={l({ eu: '3 izar: 450 puntu · 2 izar: 300 · izar 1: 150', es: '3 estrellas: 450 puntos · 2: 300 · 1: 150', ar: '3 نجوم: 450 نقطة · 2: 300 · 1: 150' })}
+                    title={`${score} ${l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}`}
+                    subtitle={l({ eu: '3 izar: 450 puntu · 2 izar: 300 · izar 1: 150', es: '3 estrellas: 450 puntos · 2: 300 · 1: 150', en: '3 stars: 450 points · 2: 300 · 1: 150', ar: '3 نجوم: 450 نقطة · 2: 300 · 1: 150' })}
                     stats={[
-                        { label: l({ eu: 'Lortuak', es: 'Resueltas', ar: 'محلولة' }), value: `${solved} / ${EXACT_ROUNDS}` },
-                        { label: l({ eu: 'Pistarik gabe', es: 'Sin pista', ar: 'بلا تلميح' }), value: String(points.filter((value) => value === 100).length) }
+                        { label: l({ eu: 'Lortuak', es: 'Resueltas', en: 'Solved', ar: 'محلولة' }), value: `${solved} / ${EXACT_ROUNDS}` },
+                        { label: l({ eu: 'Pistarik gabe', es: 'Sin pista', en: 'No hint', ar: 'بلا تلميح' }), value: String(points.filter((value) => value === 100).length) }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}
@@ -196,24 +196,24 @@ export function ExactGame({ language, records, onResult, onExit }: GameProps) {
     const status = !playing
         ? null
         : play.selected === null
-            ? l({ eu: 'Aukeratu karta bat.', es: 'Elige una carta.', ar: 'اختر بطاقة.' })
+            ? l({ eu: 'Aukeratu karta bat.', es: 'Elige una carta.', en: 'Choose a card.', ar: 'اختر بطاقة.' })
             : play.op === null
-                ? l({ eu: 'Aukeratu eragiketa bat (edo beste karta bat).', es: 'Elige una operación (u otra carta).', ar: 'اختر عملية (أو بطاقة أخرى).' })
-                : l({ eu: 'Aukeratu bigarren karta.', es: 'Elige la segunda carta.', ar: 'اختر البطاقة الثانية.' })
+                ? l({ eu: 'Aukeratu eragiketa bat (edo beste karta bat).', es: 'Elige una operación (u otra carta).', en: 'Choose an operation (or another card).', ar: 'اختر عملية (أو بطاقة أخرى).' })
+                : l({ eu: 'Aukeratu bigarren karta.', es: 'Elige la segunda carta.', en: 'Choose the second card.', ar: 'اختر البطاقة الثانية.' })
 
     return (
         <div className="exact-game" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span>{index + 1} / {EXACT_ROUNDS}</span>
-                <span><strong>{score}</strong> {l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}</span>
+                <span><strong>{score}</strong> {l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}</span>
             </GameTopbar>
 
             <div className="exact-target" aria-live="polite">
-                <span className="exact-target-label">{l({ eu: 'Helburua', es: 'Objetivo', ar: 'الهدف' })}</span>
+                <span className="exact-target-label">{l({ eu: 'Helburua', es: 'Objetivo', en: 'Target', ar: 'الهدف' })}</span>
                 <MathText text={`$${toLatex(round.target)}$`} />
             </div>
 
-            <div className="exact-cards" role="group" aria-label={l({ eu: 'Kartak', es: 'Cartas', ar: 'البطاقات' })}>
+            <div className="exact-cards" role="group" aria-label={l({ eu: 'Kartak', es: 'Cartas', en: 'Cards', ar: 'البطاقات' })}>
                 {play.cards.map((card) => (
                     <button
                         type="button"
@@ -234,7 +234,7 @@ export function ExactGame({ language, records, onResult, onExit }: GameProps) {
                 ))}
             </div>
 
-            <div className="exact-ops" role="group" aria-label={l({ eu: 'Eragiketak', es: 'Operaciones', ar: 'العمليات' })}>
+            <div className="exact-ops" role="group" aria-label={l({ eu: 'Eragiketak', es: 'Operaciones', en: 'Operations', ar: 'العمليات' })}>
                 {levelInfo.ops.map((op) => (
                     <button type="button" key={op} aria-pressed={play.op === op} disabled={!playing || play.selected === null} onClick={() => tapOp(op)}>
                         {opSymbols[op]}
@@ -243,11 +243,11 @@ export function ExactGame({ language, records, onResult, onExit }: GameProps) {
             </div>
 
             {status && <p className="exact-status" aria-live="polite">{status}</p>}
-            {warning && <p className="exact-warning" role="alert">{l({ eu: 'Ezin da zeroz zatitu.', es: 'No se puede dividir entre cero.', ar: 'لا يمكن القسمة على صفر.' })}</p>}
-            {play.hint === 'stuck' && <p className="exact-warning" role="status">{l({ eu: 'Bide honetatik ez zara iristen: desegin urratsen bat.', es: 'Por este camino no se llega: deshaz algún paso.', ar: 'لا يوصل هذا الطريق إلى الهدف: تراجع عن خطوة.' })}</p>}
+            {warning && <p className="exact-warning" role="alert">{l({ eu: 'Ezin da zeroz zatitu.', es: 'No se puede dividir entre cero.', en: 'You cannot divide by zero.', ar: 'لا يمكن القسمة على صفر.' })}</p>}
+            {play.hint === 'stuck' && <p className="exact-warning" role="status">{l({ eu: 'Bide honetatik ez zara iristen: desegin urratsen bat.', es: 'Por este camino no se llega: deshaz algún paso.', en: 'This way won\'t get you there: undo a step.', ar: 'لا يوصل هذا الطريق إلى الهدف: تراجع عن خطوة.' })}</p>}
             {hintStep && (
                 <p className="exact-hint" role="status">
-                    <strong>{l({ eu: 'Pista:', es: 'Pista:', ar: 'تلميح:' })}</strong>{' '}
+                    <strong>{l({ eu: 'Pista:', es: 'Pista:', en: 'Hint:', ar: 'تلميح:' })}</strong>{' '}
                     <MathText text={`$${toLatex(hintStep.left)}${opLatex[hintStep.op]}${operandLatex(hintStep.right)}$`} />
                 </p>
             )}
@@ -260,24 +260,24 @@ export function ExactGame({ language, records, onResult, onExit }: GameProps) {
 
             {playing ? (
                 <div className="exact-actions">
-                    <button type="button" className="fraction-v2-secondary" disabled={play.history.length === 0} onClick={undo}>{l({ eu: 'Desegin', es: 'Deshacer', ar: 'تراجع' })}</button>
-                    <button type="button" className="fraction-v2-secondary" onClick={hint}>{l({ eu: 'Pista', es: 'Pista', ar: 'تلميح' })}</button>
-                    <button type="button" className="fraction-v2-secondary" onClick={giveUp}>{l({ eu: 'Ebazpena ikusi', es: 'Ver una solución', ar: 'اعرض حلًّا' })}</button>
+                    <button type="button" className="fraction-v2-secondary" disabled={play.history.length === 0} onClick={undo}>{l({ eu: 'Desegin', es: 'Deshacer', en: 'Undo', ar: 'تراجع' })}</button>
+                    <button type="button" className="fraction-v2-secondary" onClick={hint}>{l({ eu: 'Pista', es: 'Pista', en: 'Hint', ar: 'تلميح' })}</button>
+                    <button type="button" className="fraction-v2-secondary" onClick={giveUp}>{l({ eu: 'Ebazpena ikusi', es: 'Ver una solución', en: 'Show a solution', ar: 'اعرض حلًّا' })}</button>
                 </div>
             ) : (
                 <div className={`exact-outcome ${play.outcome}`} role="status">
                     {play.outcome === 'solved' ? (
-                        <p><strong>{l({ eu: 'Zehatza!', es: '¡Exacto!', ar: 'بالضبط!' })}</strong> +{points[points.length - 1]}</p>
+                        <p><strong>{l({ eu: 'Zehatza!', es: '¡Exacto!', en: 'Exactly!', ar: 'بالضبط!' })}</strong> +{points[points.length - 1]}</p>
                     ) : (
                         <>
-                            <p><strong>{l({ eu: 'Ebazpen bat:', es: 'Una solución:', ar: 'حلّ ممكن:' })}</strong></p>
+                            <p><strong>{l({ eu: 'Ebazpen bat:', es: 'Una solución:', en: 'One solution:', ar: 'حلّ ممكن:' })}</strong></p>
                             <ol className="exact-steps">
                                 {round.solution.map((step, stepIndex) => <li key={stepIndex}><MathText text={`$${stepLatex(step)}$`} /></li>)}
                             </ol>
                         </>
                     )}
                     <button type="button" className="fraction-v2-primary" onClick={next} ref={(node) => node?.focus({ preventScroll: true })}>
-                        {index + 1 >= EXACT_ROUNDS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', ar: 'التالي' })}
+                        {index + 1 >= EXACT_ROUNDS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', en: 'See the result', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', en: 'Next', ar: 'التالي' })}
                     </button>
                 </div>
             )}

@@ -29,8 +29,8 @@ export type PythagorasRaceError =
 export type PythagorasRaceQuestion = RaceQuestion<PythagorasRaceError>
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar: ar.replace(/\{,\}/g, '.') })
-const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, ar: latex.replace(/\{,\}/g, '.') })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
+const same = (latex: string): LocalizedText => ({ eu: latex, es: latex, en: latex, ar: latex.replace(/\{,\}/g, '.') })
 const math = (latex: string) => `$${latex}$`
 
 /** An exact decimal in LaTeX with the comma ({,}); only values that end with at most two decimals */
@@ -99,8 +99,8 @@ function squaresQuestion(random: Random, tier: Tier): PythagorasRaceQuestion | n
         : [{ value: n(h * h + p * p), error: 'wrong-operation' }, { value: n(q), error: 'no-root' }, ...near(answer)])
     if (!choices) return null
     return question(0, big ? 'square-hypotenuse' : 'square-leg', big
-        ? say(`Katetoen gaineko karratuen azalerak ${math(w(p * p))} eta ${math(w(q * q))} dira. Zein da hipotenusaren gaineko karratuaren azalera?`, `Los cuadrados sobre los catetos tienen áreas ${math(w(p * p))} y ${math(w(q * q))}. ¿Qué área tiene el cuadrado sobre la hipotenusa?`, `مساحتا المربعين على الضلعين القائمين ${math(w(p * p))} و${math(w(q * q))}. ما مساحة المربع على الوتر؟`)
-        : say(`Hipotenusaren gaineko karratuaren azalera ${math(w(h * h))} da, eta kateto baten gainekoarena ${math(w(p * p))}. Zein da beste katetoaren gainekoarena?`, `El cuadrado sobre la hipotenusa tiene área ${math(w(h * h))} y el de un cateto ${math(w(p * p))}. ¿Qué área tiene el del otro cateto?`, `مساحة المربع على الوتر ${math(w(h * h))} ومساحة المربع على أحد الضلعين القائمين ${math(w(p * p))}. ما مساحة المربع على الآخر؟`),
+        ? say(`Katetoen gaineko karratuen azalerak ${math(w(p * p))} eta ${math(w(q * q))} dira. Zein da hipotenusaren gaineko karratuaren azalera?`, `Los cuadrados sobre los catetos tienen áreas ${math(w(p * p))} y ${math(w(q * q))}. ¿Qué área tiene el cuadrado sobre la hipotenusa?`, `مساحتا المربعين على الضلعين القائمين ${math(w(p * p))} و${math(w(q * q))}. ما مساحة المربع على الوتر؟`, `The squares on the legs have areas ${math(w(p * p))} and ${math(w(q * q))}. What area does the square on the hypotenuse have?`)
+        : say(`Hipotenusaren gaineko karratuaren azalera ${math(w(h * h))} da, eta kateto baten gainekoarena ${math(w(p * p))}. Zein da beste katetoaren gainekoarena?`, `El cuadrado sobre la hipotenusa tiene área ${math(w(h * h))} y el de un cateto ${math(w(p * p))}. ¿Qué área tiene el del otro cateto?`, `مساحة المربع على الوتر ${math(w(h * h))} ومساحة المربع على أحد الضلعين القائمين ${math(w(p * p))}. ما مساحة المربع على الآخر؟`, `The square on the hypotenuse has area ${math(w(h * h))} and the one on a leg has area ${math(w(p * p))}. What area does the one on the other leg have?`),
     choices, n(answer), same(math(big ? `${w(p * p)}+${w(q * q)}=${w(answer)}` : `${w(h * h)}-${w(p * p)}=${w(answer)}`)))
 }
 
@@ -115,8 +115,8 @@ function tripleQuestion(random: Random, tier: Tier): PythagorasRaceQuestion | nu
         : [{ value: n(z - x), error: 'added-sides' }, { value: n(z * z - x * x), error: 'no-root' }, { value: root(z * z + x * x), error: 'wrong-operation' }, ...near(answer)])
     if (!choices) return null
     return question(0, missingHyp ? 'triple-hypotenuse' : 'triple-leg', missingHyp
-        ? say(`Zein zenbakik osatzen du hirukote pitagorikoa? ${math(`${x},\\ ${y},\\ ?`)}`, `¿Qué número completa la terna pitagórica? ${math(`${x},\\ ${y},\\ ?`)}`, `أي عدد يكمل الثلاثية الفيثاغورية؟ ${math(`${x},\\ ${y},\\ ?`)}`)
-        : say(`Zein zenbakik osatzen du hirukote pitagorikoa? ${math(`${x},\\ ?,\\ ${z}`)}`, `¿Qué número completa la terna pitagórica? ${math(`${x},\\ ?,\\ ${z}`)}`, `أي عدد يكمل الثلاثية الفيثاغورية؟ ${math(`${x},\\ ?,\\ ${z}`)}`),
+        ? say(`Zein zenbakik osatzen du hirukote pitagorikoa? ${math(`${x},\\ ${y},\\ ?`)}`, `¿Qué número completa la terna pitagórica? ${math(`${x},\\ ${y},\\ ?`)}`, `أي عدد يكمل الثلاثية الفيثاغورية؟ ${math(`${x},\\ ${y},\\ ?`)}`, `Which number completes the Pythagorean triple? ${math(`${x},\\ ${y},\\ ?`)}`)
+        : say(`Zein zenbakik osatzen du hirukote pitagorikoa? ${math(`${x},\\ ?,\\ ${z}`)}`, `¿Qué número completa la terna pitagórica? ${math(`${x},\\ ?,\\ ${z}`)}`, `أي عدد يكمل الثلاثية الفيثاغورية؟ ${math(`${x},\\ ?,\\ ${z}`)}`, `Which number completes the Pythagorean triple? ${math(`${x},\\ ?,\\ ${z}`)}`),
     choices, n(answer), same(math(missingHyp ? `\\sqrt{${x * x}+${y * y}}=\\sqrt{${z * z}}=${z}` : `\\sqrt{${z * z}-${x * x}}=\\sqrt{${y * y}}=${y}`)))
 }
 
@@ -134,7 +134,7 @@ function hypotenuseQuestion(random: Random, tier: Tier): PythagorasRaceQuestion 
     return question(1, 'hypotenuse', say(
         `Triangelu angeluzuzen baten katetoak ${math(w(p))} cm eta ${math(w(q))} cm dira. Zenbat da hipotenusa?`,
         `Los catetos de un triángulo rectángulo miden ${math(w(p))} cm y ${math(w(q))} cm. ¿Cuánto mide la hipotenusa?`,
-        `الضلعان القائمان في مثلث قائم ${math(w(p))} سم و${math(w(q))} سم. كم طول الوتر؟`
+        `الضلعان القائمان في مثلث قائم ${math(w(p))} سم و${math(w(q))} سم. كم طول الوتر؟`, `The legs of a right-angled triangle are ${math(w(p))} cm and ${math(w(q))} cm. How long is the hypotenuse?`
     ), choices, n(h), same(math(`\\sqrt{${w(p)}^{2}+${w(q)}^{2}}=\\sqrt{${w(h * h)}}=${w(h)}`)))
 }
 
@@ -150,7 +150,7 @@ function legQuestion(random: Random, tier: Tier): PythagorasRaceQuestion | null 
     return question(1, 'leg', say(
         `Hipotenusa ${math(w(h))} cm da eta kateto bat ${math(w(p))} cm. Zenbat da beste katetoa?`,
         `La hipotenusa mide ${math(w(h))} cm y un cateto ${math(w(p))} cm. ¿Cuánto mide el otro cateto?`,
-        `الوتر ${math(w(h))} سم وأحد الضلعين القائمين ${math(w(p))} سم. كم طول الضلع الآخر؟`
+        `الوتر ${math(w(h))} سم وأحد الضلعين القائمين ${math(w(p))} سم. كم طول الضلع الآخر؟`, `The hypotenuse is ${math(w(h))} cm and one leg is ${math(w(p))} cm. How long is the other leg?`
     ), choices, n(q), same(math(`\\sqrt{${w(h)}^{2}-${w(p)}^{2}}=\\sqrt{${w(q * q)}}=${w(q)}`)))
 }
 
@@ -170,7 +170,7 @@ function isoscelesQuestion(random: Random, tier: Tier): PythagorasRaceQuestion |
     return question(2, 'isosceles', say(
         `Triangelu isoszele baten alde berdinak ${math(w(h))} cm dira eta oinarria ${math(w(base))} cm. Zenbat da altuera?`,
         `Los lados iguales de un triángulo isósceles miden ${math(w(h))} cm y la base ${math(w(base))} cm. ¿Cuánto mide la altura?`,
-        `الساقان في مثلث متساوي الساقين ${math(w(h))} سم والقاعدة ${math(w(base))} سم. كم الارتفاع؟`
+        `الساقان في مثلث متساوي الساقين ${math(w(h))} سم والقاعدة ${math(w(base))} سم. كم الارتفاع؟`, `The equal sides of an isosceles triangle are ${math(w(h))} cm and the base is ${math(w(base))} cm. How long is the height?`
     ), choices, n(q), same(math(`\\sqrt{${w(h)}^{2}-${w(p)}^{2}}=${w(q)}`)))
 }
 
@@ -186,7 +186,7 @@ function rectangleQuestion(random: Random, tier: Tier): PythagorasRaceQuestion |
     return question(2, 'rectangle', say(
         `Laukizuzen baten aldeak ${math(w(p))} cm eta ${math(w(q))} cm dira. Zenbat da diagonala?`,
         `Los lados de un rectángulo miden ${math(w(p))} cm y ${math(w(q))} cm. ¿Cuánto mide la diagonal?`,
-        `ضلعا مستطيل ${math(w(p))} سم و${math(w(q))} سم. كم طول قطره؟`
+        `ضلعا مستطيل ${math(w(p))} سم و${math(w(q))} سم. كم طول قطره؟`, `The sides of a rectangle are ${math(w(p))} cm and ${math(w(q))} cm. How long is the diagonal?`
     ), choices, n(h), same(math(`\\sqrt{${w(p)}^{2}+${w(q)}^{2}}=${w(h)}`)))
 }
 
@@ -202,7 +202,7 @@ function rhombusQuestion(random: Random, tier: Tier): PythagorasRaceQuestion | n
     return question(2, 'rhombus', say(
         `Erronbo baten diagonalak ${math(w(2 * p))} cm eta ${math(w(2 * q))} cm dira. Zenbat da aldea?`,
         `Las diagonales de un rombo miden ${math(w(2 * p))} cm y ${math(w(2 * q))} cm. ¿Cuánto mide el lado?`,
-        `قطرا معيّن ${math(w(2 * p))} سم و${math(w(2 * q))} سم. كم طول ضلعه؟`
+        `قطرا معيّن ${math(w(2 * p))} سم و${math(w(2 * q))} سم. كم طول ضلعه؟`, `The diagonals of a rhombus are ${math(w(2 * p))} cm and ${math(w(2 * q))} cm. How long is the side?`
     ), choices, n(h), same(math(`\\sqrt{${w(p)}^{2}+${w(q)}^{2}}=${w(h)}`)))
 }
 
@@ -220,8 +220,8 @@ function trapezoidQuestion(random: Random, tier: Tier): PythagorasRaceQuestion |
     ])
     if (!choices) return null
     return question(2, isosceles ? 'trapezoid-isosceles' : 'trapezoid-right', isosceles
-        ? say(`Trapezio isoszele baten oinarriak ${math(w(big))} cm eta ${math(w(small))} cm dira, eta alde zeiharrak ${math(w(h))} cm. Zenbat da altuera?`, `Las bases de un trapecio isósceles miden ${math(w(big))} cm y ${math(w(small))} cm, y los lados oblicuos ${math(w(h))} cm. ¿Cuánto mide la altura?`, `قاعدتا شبه منحرف متساوي الساقين ${math(w(big))} سم و${math(w(small))} سم وضلعاه المائلان ${math(w(h))} سم. كم الارتفاع؟`)
-        : say(`Trapezio angeluzuzen baten oinarriak ${math(w(big))} cm eta ${math(w(small))} cm dira, eta alde zeiharra ${math(w(h))} cm. Zenbat da altuera?`, `Las bases de un trapecio rectángulo miden ${math(w(big))} cm y ${math(w(small))} cm, y el lado oblicuo ${math(w(h))} cm. ¿Cuánto mide la altura?`, `قاعدتا شبه منحرف قائم ${math(w(big))} سم و${math(w(small))} سم وضلعه المائل ${math(w(h))} سم. كم الارتفاع؟`),
+        ? say(`Trapezio isoszele baten oinarriak ${math(w(big))} cm eta ${math(w(small))} cm dira, eta alde zeiharrak ${math(w(h))} cm. Zenbat da altuera?`, `Las bases de un trapecio isósceles miden ${math(w(big))} cm y ${math(w(small))} cm, y los lados oblicuos ${math(w(h))} cm. ¿Cuánto mide la altura?`, `قاعدتا شبه منحرف متساوي الساقين ${math(w(big))} سم و${math(w(small))} سم وضلعاه المائلان ${math(w(h))} سم. كم الارتفاع؟`, `The bases of an isosceles trapezium are ${math(w(big))} cm and ${math(w(small))} cm, and the slanted sides are ${math(w(h))} cm. What is the height?`)
+        : say(`Trapezio angeluzuzen baten oinarriak ${math(w(big))} cm eta ${math(w(small))} cm dira, eta alde zeiharra ${math(w(h))} cm. Zenbat da altuera?`, `Las bases de un trapecio rectángulo miden ${math(w(big))} cm y ${math(w(small))} cm, y el lado oblicuo ${math(w(h))} cm. ¿Cuánto mide la altura?`, `قاعدتا شبه منحرف قائم ${math(w(big))} سم و${math(w(small))} سم وضلعه المائل ${math(w(h))} سم. كم الارتفاع؟`, `The bases of a right trapezium are ${math(w(big))} cm and ${math(w(small))} cm, and the slanted side is ${math(w(h))} cm. What is the height?`),
     choices, n(q), same(math(isosceles
         ? `(${w(big)}-${w(small)})\\mathbin{:}2=${w(p)}\\ \\to\\ \\sqrt{${w(h)}^{2}-${w(p)}^{2}}=${w(q)}`
         : `${w(big)}-${w(small)}=${w(p)}\\ \\to\\ \\sqrt{${w(h)}^{2}-${w(p)}^{2}}=${w(q)}`)))
@@ -244,7 +244,7 @@ function chordQuestion(random: Random, tier: Tier): PythagorasRaceQuestion | nul
         return question(3, 'chord', say(
             `Zirkunferentzia baten erradioa ${math(w(h))} cm da, eta korda bat zentrotik ${math(w(p))} cm-ra dago. Zenbat da korda?`,
             `Una circunferencia tiene ${math(w(h))} cm de radio y una cuerda está a ${math(w(p))} cm del centro. ¿Cuánto mide la cuerda?`,
-            `نصف قطر دائرة ${math(w(h))} سم ووتر يبعد ${math(w(p))} سم عن المركز. كم طول الوتر؟`
+            `نصف قطر دائرة ${math(w(h))} سم ووتر يبعد ${math(w(p))} سم عن المركز. كم طول الوتر؟`, `A circle has a radius of ${math(w(h))} cm and a chord is ${math(w(p))} cm from the centre. How long is the chord?`
         ), choices, n(answer), same(math(`\\sqrt{${w(h)}^{2}-${w(p)}^{2}}=${w(q)}\\ \\to\\ 2\\cdot ${w(q)}=${w(answer)}`)))
     }
     const chord = 2 * q
@@ -258,7 +258,7 @@ function chordQuestion(random: Random, tier: Tier): PythagorasRaceQuestion | nul
     return question(3, 'chord-distance', say(
         `${math(w(h))} cm-ko erradioko zirkunferentzia batean ${math(w(chord))} cm-ko korda bat dago. Zer distantziara dago zentrotik?`,
         `En una circunferencia de ${math(w(h))} cm de radio hay una cuerda de ${math(w(chord))} cm. ¿A qué distancia está del centro?`,
-        `في دائرة نصف قطرها ${math(w(h))} سم وتر طوله ${math(w(chord))} سم. كم يبعد عن المركز؟`
+        `في دائرة نصف قطرها ${math(w(h))} سم وتر طوله ${math(w(chord))} سم. كم يبعد عن المركز؟`, `In a circle with a radius of ${math(w(h))} cm there is a chord of ${math(w(chord))} cm. How far is it from the centre?`
     ), choices, n(p), same(math(`\\sqrt{${w(h)}^{2}-${w(q)}^{2}}=${w(p)}`)))
 }
 
@@ -271,8 +271,8 @@ function tangentQuestion(random: Random, tier: Tier): PythagorasRaceQuestion | n
         : [{ value: root(h * h + q * q), error: 'wrong-operation' }, { value: n(p * p), error: 'no-root' }, { value: n(h - q), error: 'added-sides' }, ...near(answer)])
     if (!choices) return null
     return question(3, findDistance ? 'tangent-distance' : 'tangent-radius', findDistance
-        ? say(`Erradioa ${math(w(p))} cm da eta $PT$ zuzenki ukitzailea ${math(w(q))} cm. Zer distantziara dago $P$ zentrotik?`, `El radio mide ${math(w(p))} cm y el segmento tangente $PT$ ${math(w(q))} cm. ¿A qué distancia está $P$ del centro?`, `نصف القطر ${math(w(p))} سم وقطعة المماس $PT$ طولها ${math(w(q))} سم. كم تبعد $P$ عن المركز؟`)
-        : say(`$P$ puntua zentrotik ${math(w(h))} cm-ra dago eta $PT$ zuzenki ukitzailea ${math(w(q))} cm da. Zenbat da erradioa?`, `El punto $P$ está a ${math(w(h))} cm del centro y el segmento tangente $PT$ mide ${math(w(q))} cm. ¿Cuánto mide el radio?`, `النقطة $P$ تبعد ${math(w(h))} سم عن المركز وقطعة المماس $PT$ طولها ${math(w(q))} سم. كم نصف القطر؟`),
+        ? say(`Erradioa ${math(w(p))} cm da eta $PT$ zuzenki ukitzailea ${math(w(q))} cm. Zer distantziara dago $P$ zentrotik?`, `El radio mide ${math(w(p))} cm y el segmento tangente $PT$ ${math(w(q))} cm. ¿A qué distancia está $P$ del centro?`, `نصف القطر ${math(w(p))} سم وقطعة المماس $PT$ طولها ${math(w(q))} سم. كم تبعد $P$ عن المركز؟`, `The radius is ${math(w(p))} cm and the tangent segment $PT$ is ${math(w(q))} cm. How far is $P$ from the centre?`)
+        : say(`$P$ puntua zentrotik ${math(w(h))} cm-ra dago eta $PT$ zuzenki ukitzailea ${math(w(q))} cm da. Zenbat da erradioa?`, `El punto $P$ está a ${math(w(h))} cm del centro y el segmento tangente $PT$ mide ${math(w(q))} cm. ¿Cuánto mide el radio?`, `النقطة $P$ تبعد ${math(w(h))} سم عن المركز وقطعة المماس $PT$ طولها ${math(w(q))} سم. كم نصف القطر؟`, `Point $P$ is ${math(w(h))} cm from the centre and the tangent segment $PT$ is ${math(w(q))} cm. How long is the radius?`),
     choices, n(answer), same(math(findDistance ? `\\sqrt{${w(p)}^{2}+${w(q)}^{2}}=${w(h)}` : `\\sqrt{${w(h)}^{2}-${w(q)}^{2}}=${w(p)}`)))
 }
 
@@ -295,7 +295,7 @@ function boxQuestion(random: Random, tier: Tier): PythagorasRaceQuestion | null 
     return question(4, 'box', say(
         `Ortoedro baten dimentsioak ${math(`${x}`)} cm, ${math(`${y}`)} cm eta ${math(`${z}`)} cm dira. Zenbat da diagonala?`,
         `Un ortoedro mide ${math(`${x}`)} cm, ${math(`${y}`)} cm y ${math(`${z}`)} cm. ¿Cuánto mide su diagonal?`,
-        `أبعاد متوازي مستطيلات ${math(`${x}`)} سم و${math(`${y}`)} سم و${math(`${z}`)} سم. كم طول قطره؟`
+        `أبعاد متوازي مستطيلات ${math(`${x}`)} سم و${math(`${y}`)} سم و${math(`${z}`)} سم. كم طول قطره؟`, `A cuboid measures ${math(`${x}`)} cm, ${math(`${y}`)} cm and ${math(`${z}`)} cm. How long is its diagonal?`
     ), choices, n(answer), same(math(`\\sqrt{${x * x}+${y * y}+${z * z}}=\\sqrt{${answer * answer}}=${answer}`)))
 }
 
@@ -318,7 +318,7 @@ function gridQuestion(random: Random, tier: Tier): PythagorasRaceQuestion | null
     return question(4, 'grid', say(
         `Kalkulatu ${math(`A(${x1},${y1})`)} eta ${math(`B(${x2},${y2})`)} puntuen arteko distantzia.`,
         `Calcula la distancia entre ${math(`A(${x1},${y1})`)} y ${math(`B(${x2},${y2})`)}.`,
-        `احسب المسافة بين ${math(`A(${x1},${y1})`)} و${math(`B(${x2},${y2})`)}.`
+        `احسب المسافة بين ${math(`A(${x1},${y1})`)} و${math(`B(${x2},${y2})`)}.`, `Calculate the distance between ${math(`A(${x1},${y1})`)} and ${math(`B(${x2},${y2})`)}.`
     ), choices, n(answer), same(math(`\\sqrt{${dx}^{2}+${dy}^{2}}=\\sqrt{${answer * answer}}=${answer}`)))
 }
 
@@ -335,7 +335,7 @@ function ladderQuestion(random: Random, tier: Tier): PythagorasRaceQuestion | nu
     return question(4, 'ladder', say(
         `${math(w(h))} m-ko eskailera baten oina hormatik ${math(w(p))} m-ra dago. Zer altueratara iristen da?`,
         `El pie de una escalera de ${math(w(h))} m está a ${math(w(p))} m de la pared. ¿Hasta qué altura llega?`,
-        `قاعدة سلّم طوله ${math(w(h))} م تبعد ${math(w(p))} م عن الجدار. إلى أي ارتفاع يصل؟`
+        `قاعدة سلّم طوله ${math(w(h))} م تبعد ${math(w(p))} م عن الجدار. إلى أي ارتفاع يصل؟`, `The foot of a ${math(w(h))} m ladder is ${math(w(p))} m from the wall. How high up the wall does it reach?`
     ), choices, n(q), same(math(`\\sqrt{${w(h)}^{2}-${w(p)}^{2}}=\\sqrt{${w(q * q)}}=${w(q)}`)))
 }
 
@@ -369,11 +369,11 @@ export function pythagorasParTime(circuit: number): number {
 }
 
 export const pythagorasRaceErrorTips: Record<PythagorasRaceError, LocalizedText> = {
-    'added-sides': say('Ez batu edo kendu aldeak: batu edo kendu haien karratuak, eta gero erroa.', 'No sumes ni restes los lados: suma o resta sus cuadrados y después saca la raíz.', 'لا تجمع الأضلاع ولا تطرحها: اجمع مربعاتها أو اطرحها ثم خذ الجذر.'),
-    'no-root': say('Hori karratua da: falta da erro karratua ateratzea.', 'Eso es el cuadrado: falta sacar la raíz cuadrada.', 'هذا هو المربع: بقي أخذ الجذر التربيعي.'),
-    'wrong-operation': say('Hipotenusarako karratuak batu; katetorako, hipotenusaren karratuari kendu.', 'Para la hipotenusa se suman los cuadrados; para un cateto, se restan del cuadrado de la hipotenusa.', 'للوتر نجمع المربعات؛ وللضلع القائم نطرح من مربع الوتر.'),
-    'no-half': say('Triangelu angeluzuzenaren katetoa erdia da: oinarri-erdia, diagonal-erdia, korda-erdia edo oinarrien kenduraren erdia.', 'El cateto del triángulo rectángulo es la mitad: media base, media diagonal, media cuerda o la mitad de la diferencia de las bases.', 'الضلع القائم في المثلث هو النصف: نصف القاعدة أو نصف القطر أو نصف الوتر أو نصف فرق القاعدتين.'),
-    'no-double': say('Hori korda-erdia da: bikoiztu korda osoa lortzeko.', 'Eso es media cuerda: duplícala para tener la cuerda entera.', 'هذا نصف الوتر: ضاعفه لتحصل على الوتر كله.'),
-    'base-only': say('Hori oinarriaren diagonala da; orain altuerarekin Pitagoras berriro.', 'Esa es la diagonal de la base; ahora, Pitágoras otra vez con la altura.', 'هذا قطر القاعدة؛ الآن طبّق فيثاغورس مرة أخرى مع الارتفاع.'),
-    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.')
+    'added-sides': say('Ez batu edo kendu aldeak: batu edo kendu haien karratuak, eta gero erroa.', 'No sumes ni restes los lados: suma o resta sus cuadrados y después saca la raíz.', 'لا تجمع الأضلاع ولا تطرحها: اجمع مربعاتها أو اطرحها ثم خذ الجذر.', 'Don\'t add or subtract the sides: add or subtract their squares and then take the square root.'),
+    'no-root': say('Hori karratua da: falta da erro karratua ateratzea.', 'Eso es el cuadrado: falta sacar la raíz cuadrada.', 'هذا هو المربع: بقي أخذ الجذر التربيعي.', 'That is the square: you still need to take the square root.'),
+    'wrong-operation': say('Hipotenusarako karratuak batu; katetorako, hipotenusaren karratuari kendu.', 'Para la hipotenusa se suman los cuadrados; para un cateto, se restan del cuadrado de la hipotenusa.', 'للوتر نجمع المربعات؛ وللضلع القائم نطرح من مربع الوتر.', 'For the hypotenuse, add the squares; for a leg, subtract them from the square of the hypotenuse.'),
+    'no-half': say('Triangelu angeluzuzenaren katetoa erdia da: oinarri-erdia, diagonal-erdia, korda-erdia edo oinarrien kenduraren erdia.', 'El cateto del triángulo rectángulo es la mitad: media base, media diagonal, media cuerda o la mitad de la diferencia de las bases.', 'الضلع القائم في المثلث هو النصف: نصف القاعدة أو نصف القطر أو نصف الوتر أو نصف فرق القاعدتين.', 'The leg of the right-angled triangle is half of one of these: half the base, half the diagonal, half the chord or half the difference of the bases.'),
+    'no-double': say('Hori korda-erdia da: bikoiztu korda osoa lortzeko.', 'Eso es media cuerda: duplícala para tener la cuerda entera.', 'هذا نصف الوتر: ضاعفه لتحصل على الوتر كله.', 'That is half the chord: double it to get the whole chord.'),
+    'base-only': say('Hori oinarriaren diagonala da; orain altuerarekin Pitagoras berriro.', 'Esa es la diagonal de la base; ahora, Pitágoras otra vez con la altura.', 'هذا قطر القاعدة؛ الآن طبّق فيثاغورس مرة أخرى مع الارتفاع.', 'That is the base diagonal; now use Pythagoras\' theorem again with the height.'),
+    calculation: say('Berrikusi kalkulua.', 'Revisa el cálculo.', 'راجع الحساب.', 'Check your working.')
 }

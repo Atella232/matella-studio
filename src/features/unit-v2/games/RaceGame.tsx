@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { MathText } from '../../../components/MathText'
 import { fraction, toLatex, type AnswerCheck } from '../math/fraction'
+import { englishDigits, englishNumberText } from '../../../utils/numberFormat'
 import { Car, GameTopbar, LevelPicker, ResultPanel } from './GameKit'
 import { formatTime, localLatex, useGameText } from './gameHooks'
 import type { GameProps } from './GamesHub'
@@ -199,7 +200,7 @@ export function RaceGame<Error extends string>({ language, records, onResult, on
 
     const submitPit = () => {
         if (!pitQuestion) return
-        const result = rules.checkPit(pitQuestion, pitInput)
+        const result = rules.checkPit(pitQuestion, language === 'en' ? englishDigits(pitInput) : pitInput)
         setPitCheck(result)
         if (result === 'unreadable' || result === 'wrong-form') return
         setAdjust((value) => value + (result === 'correct' ? -PIT_BONUS_MS : PIT_PENALTY_MS))
@@ -212,18 +213,18 @@ export function RaceGame<Error extends string>({ language, records, onResult, on
             <LevelPicker
                 game={game}
                 art={art}
-                levelsTitle={l({ eu: 'Aukeratu zirkuitua', es: 'Elige circuito', ar: 'اختر الحلبة' })}
+                levelsTitle={l({ eu: 'Aukeratu zirkuitua', es: 'Elige circuito', en: 'Choose a circuit', ar: 'اختر الحلبة' })}
                 language={language}
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => record.timeMs === null ? '' : `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${formatTime(record.timeMs)}`}
+                bestLabel={(record) => record.timeMs === null ? '' : `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${formatTime(record.timeMs)}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: `Erantzun ${RACE_QUESTIONS} galdera zuzen helmugara iristeko. Erabili 1–4 teklak.`, es: `Acierta ${RACE_QUESTIONS} preguntas para llegar a meta. Puedes usar las teclas 1–4.`, ar: `أجب عن ${RACE_QUESTIONS} أسئلة صحيحة للوصول إلى خط النهاية. يمكنك استخدام المفاتيح 1–4.` })}</li>
-                        <li>{l({ eu: `Akats bakoitzak ${WRONG_PENALTY_MS / 1000} s gehitzen ditu, baina erlojua gelditu egiten da azalpena irakurtzeko.`, es: `Cada fallo suma ${WRONG_PENALTY_MS / 1000} s, pero el reloj se para para que leas la explicación.`, ar: `كل خطأ يضيف ${WRONG_PENALTY_MS / 1000} ث، لكن الساعة تتوقف لتقرأ الشرح.` })}</li>
-                        <li>{l({ eu: `${TURBO_STREAK} jarraian asmatuz gero, turboa: −1 s asmatze bakoitzeko.`, es: `Con ${TURBO_STREAK} aciertos seguidos, turbo: −1 s por acierto.`, ar: `مع ${TURBO_STREAK} إجابات صحيحة متتالية، تيربو: −1 ث لكل إجابة صحيحة.` })}</li>
-                        <li>{l({ eu: `Bidearen erdian boxetan gelditu eta idatzi erantzuna: zuzena bada −${PIT_BONUS_MS / 1000} s.`, es: `A mitad de vuelta paras en boxes y escribes la respuesta: si es correcta, −${PIT_BONUS_MS / 1000} s.`, ar: `في منتصف اللفة تتوقف في الصيانة وتكتب الإجابة: إن كانت صحيحة −${PIT_BONUS_MS / 1000} ث.` })}</li>
+                        <li>{l({ eu: `Erantzun ${RACE_QUESTIONS} galdera zuzen helmugara iristeko. Erabili 1–4 teklak.`, es: `Acierta ${RACE_QUESTIONS} preguntas para llegar a meta. Puedes usar las teclas 1–4.`, en: `Answer ${RACE_QUESTIONS} questions correctly to reach the finish line. You can use keys 1–4.`, ar: `أجب عن ${RACE_QUESTIONS} أسئلة صحيحة للوصول إلى خط النهاية. يمكنك استخدام المفاتيح 1–4.` })}</li>
+                        <li>{l({ eu: `Akats bakoitzak ${WRONG_PENALTY_MS / 1000} s gehitzen ditu, baina erlojua gelditu egiten da azalpena irakurtzeko.`, es: `Cada fallo suma ${WRONG_PENALTY_MS / 1000} s, pero el reloj se para para que leas la explicación.`, en: `Each mistake adds ${WRONG_PENALTY_MS / 1000} s, but the clock stops so you can read the explanation.`, ar: `كل خطأ يضيف ${WRONG_PENALTY_MS / 1000} ث، لكن الساعة تتوقف لتقرأ الشرح.` })}</li>
+                        <li>{l({ eu: `${TURBO_STREAK} jarraian asmatuz gero, turboa: −1 s asmatze bakoitzeko.`, es: `Con ${TURBO_STREAK} aciertos seguidos, turbo: −1 s por acierto.`, en: `After ${TURBO_STREAK} correct answers in a row, turbo: −1 s per correct answer.`, ar: `مع ${TURBO_STREAK} إجابات صحيحة متتالية، تيربو: −1 ث لكل إجابة صحيحة.` })}</li>
+                        <li>{l({ eu: `Bidearen erdian boxetan gelditu eta idatzi erantzuna: zuzena bada −${PIT_BONUS_MS / 1000} s.`, es: `A mitad de vuelta paras en boxes y escribes la respuesta: si es correcta, −${PIT_BONUS_MS / 1000} s.`, en: `Halfway round the lap, stop at the pit box and write your answer: if it is correct, −${PIT_BONUS_MS / 1000} s.`, ar: `في منتصف اللفة تتوقف في الصيانة وتكتب الإجابة: إن كانت صحيحة −${PIT_BONUS_MS / 1000} ث.` })}</li>
                     </ul>
                 )}
             />
@@ -255,7 +256,7 @@ export function RaceGame<Error extends string>({ language, records, onResult, on
             {phase === 'countdown' && (
                 <div className="fraction-v2-race-lights" role="status" aria-live="assertive">
                     {[0, 1, 2].map((index) => <span className={index < lights ? 'on' : ''} key={index} />)}
-                    <strong>{lights < 3 ? 3 - lights : l({ eu: 'Aurrera!', es: '¡Ya!', ar: 'انطلق!' })}</strong>
+                    <strong>{lights < 3 ? 3 - lights : l({ eu: 'Aurrera!', es: '¡Ya!', en: 'Go!', ar: 'انطلق!' })}</strong>
                 </div>
             )}
 
@@ -263,7 +264,7 @@ export function RaceGame<Error extends string>({ language, records, onResult, on
                 <div className={`fraction-v2-race-panel ${phase}`}>
                     <div className="fraction-v2-race-prompt"><MathText text={l(question.prompt)} /></div>
                     {rules.figure?.(question, language)}
-                    <div className="fraction-v2-race-options" role="group" aria-label={l({ eu: 'Erantzunak', es: 'Respuestas', ar: 'الإجابات' })}>
+                    <div className="fraction-v2-race-options" role="group" aria-label={l({ eu: 'Erantzunak', es: 'Respuestas', en: 'Answers', ar: 'الإجابات' })}>
                         {question.options.map((option, index) => {
                             const state = chosen === null ? '' : option.correct && (phase !== 'question') ? 'correct' : index === chosen ? 'wrong' : ''
                             return (
@@ -282,11 +283,11 @@ export function RaceGame<Error extends string>({ language, records, onResult, on
                     </div>
                     {phase === 'wrong' && chosen !== null && (
                         <div className="fraction-v2-race-feedback" role="alert">
-                            <strong>{l({ eu: `Irristatu zara! +${WRONG_PENALTY_MS / 1000} s`, es: `¡Derrape! +${WRONG_PENALTY_MS / 1000} s`, ar: `انزلاق! +${WRONG_PENALTY_MS / 1000} ث` })}</strong>
+                            <strong>{l({ eu: `Irristatu zara! +${WRONG_PENALTY_MS / 1000} s`, es: `¡Derrape! +${WRONG_PENALTY_MS / 1000} s`, en: `Skid! +${WRONG_PENALTY_MS / 1000} s`, ar: `انزلاق! +${WRONG_PENALTY_MS / 1000} ث` })}</strong>
                             <p><MathText text={l(rules.errorTip(question.options[chosen].error))} /></p>
                             <div className="fraction-v2-race-solution"><MathText text={l(question.solution)} /></div>
                             <button type="button" className="fraction-v2-primary" onClick={resume} ref={(node) => node?.focus()}>
-                                {l({ eu: 'Jarraitu lasterketan', es: 'Seguir la carrera', ar: 'تابع السباق' })}
+                                {l({ eu: 'Jarraitu lasterketan', es: 'Seguir la carrera', en: 'Keep racing', ar: 'تابع السباق' })}
                             </button>
                         </div>
                     )}
@@ -295,23 +296,23 @@ export function RaceGame<Error extends string>({ language, records, onResult, on
 
             {(phase === 'pit' || phase === 'pit-result') && pitQuestion && (
                 <div className="fraction-v2-race-pit">
-                    <span className="fraction-v2-race-pit-badge">{l({ eu: 'BOXAK', es: 'BOXES', ar: 'الصيانة' })}</span>
-                    <p>{l({ eu: 'Erlojua geldituta dago. Idatzi emaitza zehatza.', es: 'El reloj está parado. Escribe el resultado exacto.', ar: 'الساعة متوقفة. اكتب النتيجة الدقيقة.' })}</p>
+                    <span className="fraction-v2-race-pit-badge">{l({ eu: 'BOXAK', es: 'BOXES', en: 'PIT BOXES', ar: 'الصيانة' })}</span>
+                    <p>{l({ eu: 'Erlojua geldituta dago. Idatzi emaitza zehatza.', es: 'El reloj está parado. Escribe el resultado exacto.', en: 'The clock is stopped. Write the exact result.', ar: 'الساعة متوقفة. اكتب النتيجة الدقيقة.' })}</p>
                     <div className="fraction-v2-race-prompt"><MathText text={l(pitQuestion.prompt)} /></div>
                     {rules.figure?.(pitQuestion, language)}
                     {phase === 'pit' ? (
                         <form className="fraction-v2-race-pit-form" onSubmit={(event) => { event.preventDefault(); submitPit() }}>
-                            <label htmlFor="fraction-v2-pit-answer">{l({ eu: 'Zure erantzuna', es: 'Tu respuesta', ar: 'إجابتك' })}</label>
+                            <label htmlFor="fraction-v2-pit-answer">{l({ eu: 'Zure erantzuna', es: 'Tu respuesta', en: 'Your answer', ar: 'إجابتك' })}</label>
                             <div>
                                 <input
                                     id="fraction-v2-pit-answer"
                                     value={pitInput}
                                     autoComplete="off"
-                                    placeholder={rules.pitPlaceholder(pitQuestion)}
+                                    placeholder={language === 'en' ? englishNumberText(rules.pitPlaceholder(pitQuestion)) : rules.pitPlaceholder(pitQuestion)}
                                     onChange={(event) => { setPitInput(event.target.value); setPitCheck(null) }}
                                     ref={(node) => node?.focus({ preventScroll: true })}
                                 />
-                                <button type="submit" className="fraction-v2-primary" disabled={!pitInput.trim()}>{l({ eu: 'Egiaztatu', es: 'Comprobar', ar: 'تحقق' })}</button>
+                                <button type="submit" className="fraction-v2-primary" disabled={!pitInput.trim()}>{l({ eu: 'Egiaztatu', es: 'Comprobar', en: 'Check', ar: 'تحقق' })}</button>
                             </div>
                             {pitCheck === 'unreadable' && <p className="fraction-v2-race-pit-note" role="alert">{l(rules.pitUnreadable)}</p>}
                             {pitCheck === 'wrong-form' && <p className="fraction-v2-race-pit-note" role="alert">{l(rules.pitWrongForm)}</p>}
@@ -319,11 +320,11 @@ export function RaceGame<Error extends string>({ language, records, onResult, on
                     ) : (
                         <div className={`fraction-v2-race-pit-result ${pitCheck === 'correct' ? 'success' : 'error'}`} role="alert">
                             <strong>{pitCheck === 'correct'
-                                ? l({ eu: `Box perfektua! −${PIT_BONUS_MS / 1000} s`, es: `¡Boxes perfectos! −${PIT_BONUS_MS / 1000} s`, ar: `صيانة مثالية! −${PIT_BONUS_MS / 1000} ث` })
-                                : l({ eu: `Ez da zuzena: +${PIT_PENALTY_MS / 1000} s`, es: `No es correcto: +${PIT_PENALTY_MS / 1000} s`, ar: `غير صحيح: +${PIT_PENALTY_MS / 1000} ث` })}</strong>
+                                ? l({ eu: `Box perfektua! −${PIT_BONUS_MS / 1000} s`, es: `¡Boxes perfectos! −${PIT_BONUS_MS / 1000} s`, en: `Perfect pit stop! −${PIT_BONUS_MS / 1000} s`, ar: `صيانة مثالية! −${PIT_BONUS_MS / 1000} ث` })
+                                : l({ eu: `Ez da zuzena: +${PIT_PENALTY_MS / 1000} s`, es: `No es correcto: +${PIT_PENALTY_MS / 1000} s`, en: `Not correct: +${PIT_PENALTY_MS / 1000} s`, ar: `غير صحيح: +${PIT_PENALTY_MS / 1000} ث` })}</strong>
                             <div className="fraction-v2-race-solution"><MathText text={l(pitQuestion.solution)} /></div>
                             <button type="button" className="fraction-v2-primary" onClick={resume} ref={(node) => node?.focus()}>
-                                {l({ eu: 'Itzuli pistara', es: 'Volver a la pista', ar: 'عُد إلى الحلبة' })}
+                                {l({ eu: 'Itzuli pistara', es: 'Volver a la pista', en: 'Back to the track', ar: 'عُد إلى الحلبة' })}
                             </button>
                         </div>
                     )}
@@ -335,25 +336,25 @@ export function RaceGame<Error extends string>({ language, records, onResult, on
                     language={language}
                     stars={starsFor(rules.parTime(circuit), finishTime, mistakes.length)}
                     title={position === 1
-                        ? l({ eu: 'Irabazi duzu!', es: '¡Has ganado!', ar: 'لقد فزت!' })
-                        : l({ eu: `${position}. postua`, es: `Puesto ${position}`, ar: `المركز ${position}` })}
+                        ? l({ eu: 'Irabazi duzu!', es: '¡Has ganado!', en: 'You won!', ar: 'لقد فزت!' })
+                        : l({ eu: `${position}. postua`, es: `Puesto ${position}`, en: `Position ${position}`, ar: `المركز ${position}` })}
                     subtitle={best !== null && finishTime < best
-                        ? l({ eu: 'Marka berria!', es: '¡Nuevo récord!', ar: 'رقم قياسي جديد!' })
+                        ? l({ eu: 'Marka berria!', es: '¡Nuevo récord!', en: 'New record!', ar: 'رقم قياسي جديد!' })
                         : undefined}
                     stats={[
-                        { label: l({ eu: 'Denbora', es: 'Tiempo', ar: 'الوقت' }), value: formatTime(finishTime) },
-                        { label: l({ eu: 'Akatsak', es: 'Fallos', ar: 'الأخطاء' }), value: String(mistakes.length) },
+                        { label: l({ eu: 'Denbora', es: 'Tiempo', en: 'Time', ar: 'الوقت' }), value: formatTime(finishTime) },
+                        { label: l({ eu: 'Akatsak', es: 'Fallos', en: 'Mistakes', ar: 'الأخطاء' }), value: String(mistakes.length) },
                         { label: 'Turbo', value: turbo ? `−${turbo / 1000} s` : '0 s' },
-                        { label: l({ eu: 'Unai (erdiko erritmoa)', es: 'Unai (ritmo medio)', ar: 'أوناي (الوتيرة المتوسطة)' }), value: formatTime(rules.parTime(circuit)) }
+                        { label: l({ eu: 'Unai (erdiko erritmoa)', es: 'Unai (ritmo medio)', en: 'Unai (average pace)', ar: 'أوناي (الوتيرة المتوسطة)' }), value: formatTime(rules.parTime(circuit)) }
                     ]}
                     onReplay={() => start(circuit)}
                     onNext={circuit < game.levels.length - 1 ? () => start(circuit + 1) : undefined}
                     onLevels={() => setPhase('pick')}
                 >
-                    <p className="fraction-v2-game-result-note">{l({ eu: '3 izar: Unai baino % 20 azkarrago eta akats bat gehienez. 2 izar: Unai baino azkarrago.', es: '3 estrellas: un 20 % más rápido que Unai y como mucho un fallo. 2 estrellas: más rápido que Unai.', ar: '3 نجوم: أسرع من أوناي بـ20٪ مع خطأ واحد على الأكثر. نجمتان: أسرع من أوناي.' })}</p>
+                    <p className="fraction-v2-game-result-note">{l({ eu: '3 izar: Unai baino % 20 azkarrago eta akats bat gehienez. 2 izar: Unai baino azkarrago.', es: '3 estrellas: un 20 % más rápido que Unai y como mucho un fallo. 2 estrellas: más rápido que Unai.', en: '3 stars: 20% faster than Unai and at most one mistake. 2 stars: faster than Unai.', ar: '3 نجوم: أسرع من أوناي بـ20٪ مع خطأ واحد على الأكثر. نجمتان: أسرع من أوناي.' })}</p>
                     {mistakes.length > 0 && (
                         <details className="fraction-v2-race-review" open={mistakes.length <= 3}>
-                            <summary>{l({ eu: 'Berrikusi akatsak', es: 'Repasa los fallos', ar: 'راجع الأخطاء' })} ({mistakes.length})</summary>
+                            <summary>{l({ eu: 'Berrikusi akatsak', es: 'Repasa los fallos', en: 'Review your mistakes', ar: 'راجع الأخطاء' })} ({mistakes.length})</summary>
                             <ol>
                                 {mistakes.map((mistake, index) => (
                                     <li key={index}>
@@ -422,16 +423,16 @@ function RaceTrack({
     const playerShare = correct / RACE_QUESTIONS
     const lanes = [
         ...rivals.map((rival) => ({ id: rival.id, name: rival.name, color: rivalColors[rival.id], share: lapShare(raceTime, rivalTimeFor(par, rival)), ghost: false })),
-        { id: 'player', name: l({ eu: 'Zu', es: 'Tú', ar: 'أنت' }), color: 'var(--coral)', share: playerShare, ghost: false }
+        { id: 'player', name: l({ eu: 'Zu', es: 'Tú', en: 'You', ar: 'أنت' }), color: 'var(--coral)', share: playerShare, ghost: false }
     ]
     const lapLatex = correct === 0 ? '0' : toLatex(fraction(correct, RACE_QUESTIONS))
 
     return (
         <div className="fraction-v2-race-board" dir="ltr">
             <div className="fraction-v2-race-hud">
-                <span className="fraction-v2-race-clock" aria-label={l({ eu: 'Denbora', es: 'Tiempo', ar: 'الوقت' })}>{formatTime(raceTime)}</span>
+                <span className="fraction-v2-race-clock" aria-label={l({ eu: 'Denbora', es: 'Tiempo', en: 'Time', ar: 'الوقت' })}>{formatTime(raceTime)}</span>
                 <span className="fraction-v2-race-lap">
-                    {l({ eu: 'Itzulia', es: 'Vuelta', ar: 'اللفة' })}: <MathText text={`$${lapLatex}$`} />
+                    {l({ eu: 'Itzulia', es: 'Vuelta', en: 'Lap', ar: 'اللفة' })}: <MathText text={`$${lapLatex}$`} />
                 </span>
                 {turboFlash > 0 && <span className="fraction-v2-race-turbo" key={turboFlash} aria-live="polite">Turbo −1 s</span>}
             </div>
@@ -444,7 +445,7 @@ function RaceTrack({
                                 <span className={`fraction-v2-race-pit-mark ${pitDone ? 'done' : ''}`} style={{ left: `${(PIT_AFTER / RACE_QUESTIONS) * 100}%` }} aria-hidden="true">P</span>
                             )}
                             {lane.id === 'player' && best !== null && (
-                                <span className="fraction-v2-race-car ghost" style={{ '--share': lapShare(raceTime, best) } as React.CSSProperties} title={l({ eu: 'Zure marka', es: 'Tu récord', ar: 'رقمك القياسي' })}>
+                                <span className="fraction-v2-race-car ghost" style={{ '--share': lapShare(raceTime, best) } as React.CSSProperties} title={l({ eu: 'Zure marka', es: 'Tu récord', en: 'Your record', ar: 'رقمك القياسي' })}>
                                     <Car color="none" ghost />
                                 </span>
                             )}
@@ -463,7 +464,7 @@ function RaceTrack({
                 ))}
             </div>
             <p className="sr-only" aria-live="polite">
-                {l({ eu: `${correct} / ${RACE_QUESTIONS} erantzun zuzen`, es: `${correct} de ${RACE_QUESTIONS} aciertos`, ar: `${correct} من ${RACE_QUESTIONS} إجابات صحيحة` })}
+                {l({ eu: `${correct} / ${RACE_QUESTIONS} erantzun zuzen`, es: `${correct} de ${RACE_QUESTIONS} aciertos`, en: `${correct} of ${RACE_QUESTIONS} correct`, ar: `${correct} من ${RACE_QUESTIONS} إجابات صحيحة` })}
             </p>
         </div>
     )

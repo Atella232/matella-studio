@@ -8,13 +8,13 @@ import { NumberField } from './LabBits'
 import { CRITERIA, CRITERIA_LIMITS, criteriaChallenges, criterionWorking, initialCriteriaState, setCriteriaValue, type CriteriaState, type Criterion, type DivisibilityToolProps } from './labTools'
 
 const ruleText: Record<Criterion, LocalizedText> = {
-    2: { eu: 'Azken zifra bikoitia', es: 'Última cifra par', ar: 'الرقم الأخير زوجي' },
-    3: { eu: 'Zifren batura 3ren multiploa', es: 'Suma de cifras múltiplo de 3', ar: 'مجموع الأرقام مضاعف لـ 3' },
-    5: { eu: 'Azken zifra 0 edo 5', es: 'Última cifra 0 o 5', ar: 'الرقم الأخير 0 أو 5' },
-    7: { eu: 'Kendu azken zifraren bikoitza', es: 'Resta el doble de la última cifra', ar: 'اطرح ضعف الرقم الأخير' },
-    9: { eu: 'Zifren batura 9ren multiploa', es: 'Suma de cifras múltiplo de 9', ar: 'مجموع الأرقام مضاعف لـ 9' },
-    10: { eu: 'Azken zifra 0', es: 'Última cifra 0', ar: 'الرقم الأخير 0' },
-    11: { eu: 'Posizio bikoitiak − bakoitiak', es: 'Lugares pares − impares', ar: 'المواقع الزوجية − الفردية' }
+    2: { eu: 'Azken zifra bikoitia', es: 'Última cifra par', en: 'Last digit even', ar: 'الرقم الأخير زوجي' },
+    3: { eu: 'Zifren batura 3ren multiploa', es: 'Suma de cifras múltiplo de 3', en: 'Sum of digits a multiple of 3', ar: 'مجموع الأرقام مضاعف لـ 3' },
+    5: { eu: 'Azken zifra 0 edo 5', es: 'Última cifra 0 o 5', en: 'Last digit 0 or 5', ar: 'الرقم الأخير 0 أو 5' },
+    7: { eu: 'Kendu azken zifraren bikoitza', es: 'Resta el doble de la última cifra', en: 'Subtract twice the last digit', ar: 'اطرح ضعف الرقم الأخير' },
+    9: { eu: 'Zifren batura 9ren multiploa', es: 'Suma de cifras múltiplo de 9', en: 'Sum of digits a multiple of 9', ar: 'مجموع الأرقام مضاعف لـ 9' },
+    10: { eu: 'Azken zifra 0', es: 'Última cifra 0', en: 'Last digit 0', ar: 'الرقم الأخير 0' },
+    11: { eu: 'Posizio bikoitiak − bakoitiak', es: 'Lugares pares − impares', en: 'Even places − odd places', ar: 'المواقع الزوجية − الفردية' }
 }
 
 export function CriteriaTool(props: DivisibilityToolProps & { challenges?: LabChallenge<CriteriaState>[]; criteria?: readonly Criterion[] }) {
@@ -26,9 +26,9 @@ export function CriteriaTool(props: DivisibilityToolProps & { challenges?: LabCh
 
     const controls = (
         <>
-            <NumberField label={l({ eu: 'Zenbakia', es: 'Número', ar: 'العدد' })} value={value} min={CRITERIA_LIMITS.min} max={CRITERIA_LIMITS.max} onChange={(next) => setState((current) => setCriteriaValue(current, next))} language={props.language} />
+            <NumberField label={l({ eu: 'Zenbakia', es: 'Número', en: 'Number', ar: 'العدد' })} value={value} min={CRITERIA_LIMITS.min} max={CRITERIA_LIMITS.max} onChange={(next) => setState((current) => setCriteriaValue(current, next))} language={props.language} />
             <button type="button" className="fraction-v2-secondary" onClick={() => setState((current) => setCriteriaValue(current, 100 + Math.floor(Math.random() * 9900)))}>
-                {l({ eu: 'Ausazko zenbakia', es: 'Número al azar', ar: 'عدد عشوائي' })}
+                {l({ eu: 'Ausazko zenbakia', es: 'Número al azar', en: 'Random number', ar: 'عدد عشوائي' })}
             </button>
         </>
     )
@@ -36,8 +36,8 @@ export function CriteriaTool(props: DivisibilityToolProps & { challenges?: LabCh
     const readout = (
         <span className="fraction-v2-lab-readout-note">
             {yes.length
-                ? l({ eu: `${value} honekin zatigarria da: ${yes.join(', ')}.`, es: `${value} es divisible por: ${yes.join(', ')}.`, ar: `${value} يقبل القسمة على: ${yes.join('، ')}.` })
-                : l({ eu: `${value} ez da taulako zenbakiekin zatigarria.`, es: `${value} no es divisible por ninguno de la tabla.`, ar: `${value} لا يقبل القسمة على أي عدد في الجدول.` })}
+                ? l({ eu: `${value} honekin zatigarria da: ${yes.join(', ')}.`, es: `${value} es divisible por: ${yes.join(', ')}.`, en: `${value} is divisible by: ${yes.join(', ')}.`, ar: `${value} يقبل القسمة على: ${yes.join('، ')}.` })
+                : l({ eu: `${value} ez da taulako zenbakiekin zatigarria.`, es: `${value} no es divisible por ninguno de la tabla.`, en: `${value} is not divisible by any of the numbers in the table.`, ar: `${value} لا يقبل القسمة على أي عدد في الجدول.` })}
         </span>
     )
 
@@ -47,10 +47,10 @@ export function CriteriaTool(props: DivisibilityToolProps & { challenges?: LabCh
             <table className="divisibility-criteria">
                 <thead>
                     <tr>
-                        <th scope="col">{l({ eu: 'Honekin', es: 'Por', ar: 'على' })}</th>
-                        <th scope="col">{l({ eu: 'Irizpidea', es: 'Criterio', ar: 'القاعدة' })}</th>
-                        <th scope="col">{l({ eu: 'Kalkulua', es: 'Cálculo', ar: 'الحساب' })}</th>
-                        <th scope="col"><span className="sr-only">{l({ eu: 'Emaitza', es: 'Resultado', ar: 'النتيجة' })}</span></th>
+                        <th scope="col">{l({ eu: 'Honekin', es: 'Por', en: 'By', ar: 'على' })}</th>
+                        <th scope="col">{l({ eu: 'Irizpidea', es: 'Criterio', en: 'Rule', ar: 'القاعدة' })}</th>
+                        <th scope="col">{l({ eu: 'Kalkulua', es: 'Cálculo', en: 'Calculation', ar: 'الحساب' })}</th>
+                        <th scope="col"><span className="sr-only">{l({ eu: 'Emaitza', es: 'Resultado', en: 'Result', ar: 'النتيجة' })}</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,7 +61,7 @@ export function CriteriaTool(props: DivisibilityToolProps & { challenges?: LabCh
                                 <th scope="row">{criterion}</th>
                                 <td>{l(ruleText[criterion])}</td>
                                 <td dir="ltr"><MathText text={`$${detail}$`} /></td>
-                                <td aria-label={applies ? l({ eu: 'Bai', es: 'Sí', ar: 'نعم' }) : l({ eu: 'Ez', es: 'No', ar: 'لا' })}>{applies ? '✓' : '✗'}</td>
+                                <td aria-label={applies ? l({ eu: 'Bai', es: 'Sí', en: 'Yes', ar: 'نعم' }) : l({ eu: 'Ez', es: 'No', en: 'No', ar: 'لا' })}>{applies ? '✓' : '✗'}</td>
                             </tr>
                         )
                     })}

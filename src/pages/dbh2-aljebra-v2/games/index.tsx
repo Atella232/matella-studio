@@ -31,7 +31,7 @@ export function AlgebraGames({ language, pathname, openGame, completedIds, onCom
             language={language}
             games={hubGames}
             recordsKey={ALGEBRA_GAME_RECORDS_KEY}
-            title={{ eu: 'Jolastu polinomioekin', es: 'Juega con polinomios', ar: 'العب بالحدوديات' }}
+            title={{ eu: 'Jolastu polinomioekin', es: 'Juega con polinomios', en: 'Play with polynomials', ar: 'العب بالحدوديات' }}
             completedIds={completedIds}
             onComplete={onComplete}
             mode={algebraGameModeForPath(pathname)}

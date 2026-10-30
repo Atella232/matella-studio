@@ -1,0 +1,1767 @@
+{
+    "nav": {
+        "home": "Home",
+        "method": "Methodology",
+        "accessibility": "Accessibility",
+        "privacy": "Privacy",
+        "learn": "Learn",
+        "lab": "Lab",
+        "challenges": "Challenges",
+        "practice": "Practice",
+        "teacher": "Teacher",
+        "theory": "Theory",
+        "topics": "Topics",
+        "games": "Games"
+    },
+    "subjects": {
+        "title": "What do you want to learn?",
+        "subtitle": "Choose a subject to start your learning adventure",
+        "math": {
+            "title": "Mathematics",
+            "description": "From 1st ESO to 2nd Baccalaureate"
+        },
+        "natura": {
+            "title": "Science",
+            "description": "Natural Sciences and Biology"
+        },
+        "comingSoon": "Coming soon",
+        "about": {
+            "title": "About this platform",
+            "text": "An educational platform with interactive resources, virtual labs and contextualised challenges to learn mathematics and science in a meaningful way."
+        }
+    },
+    "courses": {
+        "title": "Mathematics courses",
+        "subtitle": "Select your course to see the topics available"
+    },
+    "topics": {
+        "subtitle": "{{count}} topics available",
+        "available": "Available",
+        "comingSoon": "Coming soon"
+    },
+    "home": {
+        "title": "Fractions ESO",
+        "subtitle": "Learn rational numbers in a meaningful way",
+        "description": "A competency-based learning platform for 2nd ESO. Build your understanding of fractions through interactive labs and contextualised missions.",
+        "description_dbh1": "A competency-based learning platform for 1st ESO. Build your understanding of fractions through interactive labs and contextualised missions.",
+        "cta": {
+            "start": "Challenges",
+            "lab": "Go to the lab",
+            "teacher": "Teacher area"
+        },
+        "features": {
+            "title": "What will you find?",
+            "theory": {
+                "description": "Learn the core concepts of fractions with clear explanations and examples.",
+                "link": "Study →"
+            },
+            "lab": {
+                "title": "Interactive Lab",
+                "description": "Explore fractions through visual representations: number line, areas and equivalences.",
+                "link": "Explore →"
+            },
+            "missions": {
+                "title": "Contextualised Missions",
+                "description": "Solve real problems like \"Baserri Logic\", where fractions make sense.",
+                "link": "See missions →"
+            },
+            "exercises": {
+                "description": "Exercises by subtopic and level, with step-by-step solutions.",
+                "link": "Practise →"
+            },
+            "games": {
+                "description": "Interactive games to practise fractions in a fun way.",
+                "link": "Play →"
+            },
+            "teacher": {
+                "title": "Teacher Tracking",
+                "description": "Competency analytics, error map and evidence of learning.",
+                "link": "Teacher dashboard →"
+            },
+            "accessibility": {
+                "title": "Universal Design",
+                "description": "Accessible for everyone: multilingual (eu/es/ar), keyboard navigation, visual adaptations.",
+                "link": "Learn more →"
+            }
+        },
+        "curriculum": {
+            "title": "Curriculum Alignment",
+            "description": "Designed around the Basque Country's 2nd ESO mathematics curriculum, with a competency-based approach and assessment criteria.",
+            "description_dbh1": "Designed around the Basque Country's 1st ESO mathematics curriculum, with a competency-based approach and assessment criteria.",
+            "tags": {
+                "numerical": "Number sense",
+                "fractions": "Fractions and decimals",
+                "proportionality": "Proportionality",
+                "problemSolving": "Problem solving"
+            }
+        }
+    },
+    "lab": {
+        "title": "Fractions Lab",
+        "numberLine": "Number line",
+        "numberLineDesc": "Visualise fractions on an interactive number line",
+        "numberLineAria": "Number line showing the fraction {{num}}/{{den}}",
+        "area": "Area and Operator",
+        "areaDesc": "Represent fractions as parts of a grid",
+        "areaAria": "Area representation of the fraction {{num}}/{{den}}",
+        "equivalence": "Equivalences",
+        "equivalenceDesc": "Explore equivalent fractions with visual bars",
+        "equivalenceAria": "Equivalence visualisation: {{num1}}/{{den1}} = {{num2}}/{{den2}}",
+        "instructions": "Explore the fractions visually. Use the controls to change the values and see the representations.",
+        "numerator": "Numerator",
+        "denominator": "Denominator",
+        "equivalent": "Equivalent fraction",
+        "simplified": "Simplified form",
+        "baseFraction": "Base fraction",
+        "equivalentFraction": "Equivalent fraction",
+        "totalParts": "Total parts (grid)",
+        "selected": "Selected",
+        "zoom": "Zoom",
+        "decimalValue": "Decimal value",
+        "fraction": "Fraction",
+        "representation": "Representation",
+        "whatIsIt": "What does it represent?",
+        "whatIsItDesc": "The fraction {{num}}/{{den}} represents taking {{num}} parts out of {{den}} equal parts.",
+        "whatIsItEquiv": "On the grid of {{total}} parts, this is equivalent to selecting {{parts}} parts.",
+        "equivPrinciple": "Equivalence principle",
+        "equivPrincipleDesc": "Multiplying (or dividing) the numerator and the denominator by the same number does not change the value of the fraction. This is called an equivalent fraction.",
+        "equivCase": "In this case, we have multiplied by {{mult}}, so we now have {{num}} parts out of {{den}}, which represents the same amount as {{baseNum}}/{{baseDen}}.",
+        "irreducible": "Simplest form",
+        "pizza": {
+            "title": "Pizza",
+            "description": "Visualise fractions as pizza slices",
+            "none": "You have not taken any slices!",
+            "all": "You have eaten the whole pizza!",
+            "some": "You have taken {{num}} of {{den}} slices",
+            "aria": "Pizza divided into {{den}} slices, {{num}} selected"
+        },
+        "operations": {
+            "title": "Operations",
+            "description": "Add and subtract fractions visually, step by step",
+            "fraction1": "First fraction",
+            "fraction2": "Second fraction",
+            "add": "Add",
+            "subtract": "Subtract",
+            "steps": "Calculation steps",
+            "simplified": "Simplified",
+            "aria": "{{num1}}/{{den1}} {{op}} {{num2}}/{{den2}} = {{resNum}}/{{resDen}}",
+            "plus": "plus",
+            "minus": "minus"
+        },
+        "comparator": {
+            "title": "Comparator",
+            "description": "Compare two fractions side by side",
+            "fraction1": "Fraction A",
+            "fraction2": "Fraction B",
+            "greater": "The first fraction is GREATER",
+            "less": "The first fraction is LESS",
+            "equal": "The fractions are EQUAL",
+            "explanation": "We compare: {{num1}}×{{den2}} = {{cross1}} vs {{num2}}×{{den1}} = {{cross2}}",
+            "aria": "Comparison: {{num1}}/{{den1}} {{symbol}} {{num2}}/{{den2}}"
+        }
+    },
+    "missions": {
+        "title": "Mathematical Challenges",
+        "subtitle": "Choose your difficulty level and test your knowledge",
+        "points": "total points",
+        "placeholder": "Write your answer...",
+        "completed": "Challenge completed! +points earned",
+        "levelCompleted": "✓ Completed",
+        "levels": {
+            "hasiberria": {
+                "label": "Beginner",
+                "sublabel": "Beginner"
+            },
+            "aurreratua": {
+                "label": "Advanced",
+                "sublabel": "Advanced"
+            },
+            "maisu": {
+                "label": "Expert",
+                "sublabel": "Expert"
+            }
+        },
+        "challenges": {
+            "ch1": {
+                "title": "🍎 Apples on the farm",
+                "description": "The farm has 24 apples. 3/4 of the harvest has been picked. How many apples have been picked?",
+                "hint": "Multiply the total (24) by the fraction (3/4): 24 × 3/4",
+                "success": "Correct! 3/4 of 24 = 18 apples picked.",
+                "error": "Check your calculation: 24 × 3/4 = ?"
+            },
+            "ch2": {
+                "title": "🍕 Sharing pizza",
+                "description": "You have 1/2 of a pizza and your friend gives you 1/4 more. How much pizza do you have now?",
+                "hint": "Find a common denominator: 1/2 = 2/4, then add.",
+                "success": "Perfect! 1/2 + 1/4 = 2/4 + 1/4 = 3/4 of a pizza.",
+                "error": "Convert 1/2 to quarters first."
+            },
+            "ch3": {
+                "title": "🎂 Birthday cake",
+                "description": "A cake is cut into 8 pieces. If you eat 3, what fraction of the cake have you eaten?",
+                "hint": "The fraction is: pieces eaten / total number of pieces",
+                "success": "Well done! You have eaten 3/8 of the cake.",
+                "error": "Divide the pieces eaten by the total."
+            },
+            "ch4": {
+                "title": "⏰ Study time",
+                "description": "You studied for 45 minutes. An hour has 60 minutes. What fraction of an hour did you study?",
+                "hint": "45/60 can be simplified by dividing both by 15.",
+                "success": "Correct! 45/60 = 3/4 of an hour.",
+                "error": "45/60 = ? Simplify the fraction."
+            },
+            "ch5": {
+                "title": "🏡 The farm's land",
+                "description": "The land measures 12 km². 1/3 is used for apple trees, 1/4 for the vegetable garden and the rest for pasture. What fraction is pasture?",
+                "hint": "Add 1/3 + 1/4 and subtract from 1 (the total).",
+                "success": "Exactly! 1 - 1/3 - 1/4 = 5/12 of the land is pasture.",
+                "error": "Remember: 1/3 + 1/4 = 7/12. The rest is 1 - 7/12."
+            },
+            "ch6": {
+                "title": "🧁 Cake recipe",
+                "description": "The recipe needs 2/3 of a cup of sugar for 4 people. How much sugar for 10 people?",
+                "hint": "Work out for 1 person: (2/3) ÷ 4. Then multiply by 10.",
+                "success": "Perfect! You need 5/3 cups (1 and 2/3) of sugar.",
+                "error": "For 1 person: (2/3) ÷ 4 = 1/6. For 10: 1/6 × 10 = 5/3"
+            },
+            "ch7": {
+                "title": "📊 Percentages and fractions",
+                "description": "60% of the students passed. What is it as a simplified fraction?",
+                "hint": "60% = 60/100. Simplify by dividing by the GCD.",
+                "success": "Correct! 60/100 = 3/5",
+                "error": "Divide 60 and 100 by their GCD (20)."
+            },
+            "ch8": {
+                "title": "🏃 Relay race",
+                "description": "A runner completes 3/7 of the route in 15 minutes. How many minutes will it take in total?",
+                "hint": "If 3/7 = 15 min, then 1/7 = 5 min.",
+                "success": "Perfect! 15 ÷ 3 × 7 = 35 minutes.",
+                "error": "Use the rule of three: 3/7 → 15, 7/7 → ?"
+            },
+            "ch9": {
+                "title": "🏀 The Bouncing Ball",
+                "description": "A ball bounces back to 2/3 of its previous height. If on the second bounce it reaches 8 metres, from what height was it dropped?",
+                "hint": "Work backwards. If the last height is 8m, the one before was 8 ÷ (2/3). Do this twice.",
+                "success": "Brilliant! 18m × 2/3 = 12m; 12m × 2/3 = 8m.",
+                "error": "Remember: Height × (2/3) × (2/3) = 8. Solve for the Height."
+            },
+            "ch10": {
+                "title": "🚰 Taps and tanks",
+                "description": "One tap takes 2 hours to fill a tank, and another takes 6 hours. How many minutes will both take together?",
+                "hint": "In one hour, one fills 1/2 and the other 1/6. Add both.",
+                "success": "Well done! 1/2 + 1/6 = 2/3 fill per hour. So they take 3/2 hours = 90 minutes.",
+                "error": "Add up what they fill per hour: 1/2 + 1/6 = 2/3. Then work out the total time."
+            },
+            "ch11": {
+                "title": "💸 Salary and spending",
+                "description": "You have spent 1/4 of your salary on rent, and 1/3 of what was left on food. If you still have €600, what was your salary?",
+                "hint": "After the rent you have 3/4 left. Food is 1/3 × 3/4 = 1/4.",
+                "success": "Perfect! Rent + Food = 1/2. So €600 is half of the salary. Total €1,200.",
+                "error": "Be careful with the part of 'what was left'! 1/4 is the rent and 1/4 is the food."
+            },
+            "ch12": {
+                "title": "💀 The Final Challenge: The Water Tank",
+                "description": "Three farmers share a water tank. The first uses 1/4, the second uses 1/3 of what is left, and the third uses 2/5 of the rest. If 1,800 litres are left, how many litres were there at the start?",
+                "hint": "Work backwards: 1,800 L is 3/5 of what there was before the third farmer. Continue step by step back to the start.",
+                "success": "Excellent! In the end, 3/4 × 2/3 × 3/5 = 3/10 of the water is left. If 3/10 is 1,800 L, there were 6,000 L at the start.",
+                "error": "Step by step: Final = X × 3/4 × 2/3 × 3/5 = 1,800. Solve for X."
+            }
+        },
+        "baserri": {
+            "title": "Baserri Logic",
+            "subtitle": "Manage the Gernika vegetable garden",
+            "description": "Help the family share the harvest among the members of the farm using fractions.",
+            "task1": "The farm has 24 apples. 3/4 of the harvest has been picked. How many apples have been picked?",
+            "task2": "The farm's land measures 12 km². 1/3 is used for apple trees, 1/4 for the vegetable garden and the rest for pasture. What fraction is pasture?",
+            "task3": "The apple cake recipe needs 2/3 of a cup of sugar for every 4 people. How much sugar do you need for 10 people?",
+            "hints": {
+                "task1": "Multiply the total (24) by the fraction (3/4): 24 × 3/4",
+                "task2": "Add the known fractions: 1/3 + 1/4. Subtract the result from 1 (the whole).",
+                "task3": "First work out for 1 person: (2/3) ÷ 4. Then multiply by 10."
+            },
+            "success": {
+                "task1": "Correct! 3/4 of 24 = 18 apples picked.",
+                "task2": "Exactly! 1 - 1/3 - 1/4 = 5/12 of the land is pasture.",
+                "task3": "Perfect! You need 5/3 cups (1 and 2/3) of sugar."
+            },
+            "errors": {
+                "task1": "Check your calculation: 24 × 3/4 = ?",
+                "task2": "Remember: 1/3 + 1/4 = 7/12. The rest is 1 - 7/12.",
+                "task3": "For 1 person: (2/3) ÷ 4 = 1/6. For 10: 1/6 × 10 = 10/6 = 5/3"
+            },
+            "progress": "tasks completed",
+            "task": "TASK",
+            "of": "OF",
+            "placeholder": "Write your answer...",
+            "check": "Check",
+            "hint": "Hint"
+        }
+    },
+    "theory": {
+        "title": "Fractions Theory",
+        "subtitle": "Everything you need to know about fractions for 2nd ESO",
+        "subtitle_dbh1": "Everything you need to know about fractions for 1st ESO",
+        "description": "Explore each topic by clicking on the cards. The content will expand to show explanations, examples and tips for mastering fractions.",
+        "sections": {
+            "definition": "What is a fraction?",
+            "types": "Types of fractions",
+            "equivalent": "Equivalent fractions",
+            "compare": "Comparing fractions",
+            "addSubtract": "Addition and subtraction",
+            "multiply": "Multiplication",
+            "divide": "Division",
+            "powers": "Powers",
+            "combined": "Combined operations",
+            "decimals": "Fractions and decimals",
+            "proportionality": "Proportionality",
+            "percentages": "Percentages"
+        },
+        "content": {
+            "definition": {
+                "title": "Definition",
+                "text1": "A <strong>fraction</strong> is a mathematical expression that represents a part of a whole. It is made up of two numbers separated by a line:",
+                "numeratorLabel": "← Numerator (the parts we take)",
+                "denominatorLabel": "← Denominator (total parts)",
+                "meaningsTitle": "Meanings of a fraction",
+                "partWholeTitle": "📦 Part-whole",
+                "partWholeText": "Represents a part of an object divided into equal parts.",
+                "partWholeExample": "<strong>Example:</strong> 2/3 of a pizza means 2 out of 3 equal parts.",
+                "quotientTitle": "📊 Quotient",
+                "quotientText": "Represents the division of two numbers.",
+                "quotientExample": "<strong>Example:</strong> 3/4 = 3 ÷ 4 = 0.75",
+                "operatorTitle": "⚡ Operator",
+                "operatorText": "Acts as a multiplier on an amount.",
+                "operatorExample": "<strong>Example:</strong> 2/3 of 12 = (2/3) × 12 = 8",
+                "ratioTitle": "📏 Ratio",
+                "ratioText": "Compares two quantities of the same kind.",
+                "ratioExample": "<strong>Example:</strong> The ratio 2:5 means 2/5",
+                "tip": "<strong>💡 Tip:</strong> The denominator can never be zero (0), because you cannot divide by nothing."
+            },
+            "types": {
+                "title": "Types according to the numerator and denominator",
+                "properTitle": "Proper fractions",
+                "properDesc": "Numerator less than denominator",
+                "properValue": "Value less than 1",
+                "properExample": "They represent less than one whole",
+                "improperTitle": "Improper fractions",
+                "improperDesc": "Numerator greater than denominator",
+                "improperValue": "Value greater than 1",
+                "improperExample": "They represent more than one whole",
+                "unitTitle": "Unit fractions",
+                "unitDesc": "Numerator = 1",
+                "unitValue": "Value = 1/n",
+                "unitExample": "One part out of n equal parts",
+                "mixedTitle": "Mixed numbers",
+                "mixedText": "Improper fractions can be converted into <strong>mixed numbers</strong>, which combine a whole-number part and a proper fraction.",
+                "conversionStep1": "7 ÷ 4 = 1 remainder 3",
+                "tip": "<strong>💡 Tip:</strong> To convert a mixed number into an improper fraction: (whole number × denominator) + numerator, all over the same denominator."
+            },
+            "equivalent": {
+                "title": "What are equivalent fractions?",
+                "text1": "Two fractions are <strong>equivalent</strong> when they represent the same amount, even though they have different numerators and denominators.",
+                "propTitle": "Fundamental property",
+                "propText": "If we multiply or divide the numerator and the denominator by the same number (other than zero), we get an equivalent fraction.",
+                "exampleTitle": "Practical example",
+                "tip": "<strong>💡 Tip:</strong> To check whether two fractions are equivalent, cross-multiply: a×d must be equal to b×c."
+            },
+            "compare": {
+                "sameDenomTitle": "Comparing fractions with the same denominator",
+                "sameDenomText": "If two fractions have the <strong>same denominator</strong>, the one with the larger numerator is the larger fraction.",
+                "sameDenomExpl": "because 3 > 2",
+                "diffDenomTitle": "Comparing fractions with different denominators",
+                "diffDenomText": "First, we reduce them to a <strong>common denominator</strong> using the LCM (least common multiple) of the denominators.",
+                "methodTitle": "Step-by-step method:",
+                "methodStep1": "Calculate the LCM of the denominators",
+                "methodStep2": "Convert both fractions to that common denominator",
+                "methodStep3": "Compare the numerators",
+                "exampleTitle": "<strong>Example:</strong> Compare 2/3 and 3/4",
+                "exampleStep1": "LCM(3, 4) = 12",
+                "exampleConclusion": "Since 8 < 12, 2/3 < 3/4",
+                "tip": "<strong>💡 Quick tip:</strong> Cross-multiply: 2×4 = 8 and 3×3 = 9. Since 8 < 9, 2/3 < 3/4"
+            },
+            "addSubtract": {
+                "sameDenomTitle": "Adding and subtracting with the same denominator",
+                "sameDenomText": "If the fractions have the <strong>same denominator</strong>, we add or subtract the numerators and keep the denominator.",
+                "diffDenomTitle": "Adding and subtracting with different denominators",
+                "diffDenomText": "We reduce them to a <strong>common denominator</strong> using the LCM, then we do the same as before.",
+                "stepsTitle": "Step-by-step method",
+                "step1": "Calculate the LCM of the denominators",
+                "step2": "Convert both fractions to the LCM",
+                "step3": "Add or subtract the numerators",
+                "step4": "Simplify the result",
+                "exampleTitle": "Example:",
+                "warning": "<strong>⚠️ Common mistake:</strong> Never add the denominators. 1/2 + 1/2 ≠ 2/4, but 2/2 = 1"
+            },
+            "multiply": {
+                "title": "Multiplying fractions",
+                "text": "To multiply fractions, we multiply <strong>numerator by numerator</strong> and <strong>denominator by denominator</strong>.",
+                "simplificationTitle": "Simplifying before multiplying",
+                "simplificationText": "We can <strong>cross-simplify</strong> before multiplying, dividing one numerator and one denominator by their GCD.",
+                "fractionOfNumberTitle": "Fraction of a number",
+                "fractionOfNumberText": "Working out a fraction of an amount means multiplying the fraction by that amount.",
+                "fractionOfNumberConnector": " of 15 = ",
+                "tip": "<strong>💡 Tip:</strong> The word \"of\" between a fraction and a number means multiplication."
+            },
+            "divide": {
+                "title": "Dividing fractions",
+                "text": "To divide fractions, we multiply the first fraction by the <strong>reciprocal</strong> of the second.",
+                "inverseTitle": "What is the reciprocal of a fraction?",
+                "inverseText": "The reciprocal of a fraction is found by swapping the numerator and the denominator.",
+                "exampleTitle": "Example:",
+                "integerTitle": "Dividing fractions by integers",
+                "integerText": "We turn the integer into a fraction (by writing 1 as the denominator) and apply the same rule.",
+                "tip": "<strong>💡 Remember:</strong> Dividing by a fraction is the same as multiplying by its reciprocal. Never divide numerators and denominators directly!"
+            },
+            "powers": {
+                "title": "Powers of fractions",
+                "text": "To raise a fraction to a power, we raise both the numerator and the denominator to that power.",
+                "exampleTitle": "Examples:",
+                "negativeTitle": "Powers with a negative exponent",
+                "negativeText": "A negative exponent means we take the <strong>reciprocal</strong> of the fraction and raise it to the positive power.",
+                "rulesTitle": "Product and quotient of powers",
+                "sameBaseTitle": "Same base",
+                "sameExpTitle": "Same exponent",
+                "powerOfPowerTitle": "Power of a power",
+                "tip": "<strong>💡 Tip:</strong> Any fraction raised to 0 is equal to 1: (a/b)⁰ = 1"
+            },
+            "combined": {
+                "title": "Order of operations",
+                "text": "When there are several operations, we follow the <strong>order of priority</strong>:",
+                "priority1": "Brackets (from the inside out)",
+                "priority2": "Powers",
+                "priority3": "Multiplications and divisions (from left to right)",
+                "priority4": "Additions and subtractions (from left to right)",
+                "exampleTitle": "Worked example, step by step",
+                "step1": "Brackets:",
+                "step2": "Multiplication:",
+                "step3": "Addition:",
+                "warning": "<strong>⚠️ Common mistake:</strong> Not working from left to right when operations are at the same level. Multiplication and division have the same priority!",
+                "tip": "<strong>💡 Tip:</strong> If you are not sure, use brackets to make the order clear. It is better to add too many than to get it wrong!"
+            },
+            "decimals": {
+                "fracToDecTitle": "Fraction to decimal",
+                "fracToDecText": "To convert a fraction to a decimal, we <strong>divide</strong> the numerator by the denominator.",
+                "methodDirect": "Direct division",
+                "methodPower10": "Scale up to a power of 10",
+                "typesTitle": "Types of decimals",
+                "typeExact": "Terminating",
+                "typeExactDesc": "They have a finite number of decimal places",
+                "typeExactCond": "The denominator only has factors of 2 and/or 5",
+                "typePure": "Pure recurring",
+                "typePureDesc": "A group of decimal digits repeats forever",
+                "typePureCond": "The denominator has no factors of 2 or 5",
+                "typeMixed": "Mixed recurring",
+                "typeMixedDesc": "There are non-recurring decimals, followed by recurring ones",
+                "typeMixedCond": "The denominator has factors of 2 or 5 and others",
+                "decToFracTitle": "Decimal to fraction",
+                "stepExact": "Terminating decimal",
+                "stepExact1": "Numerator: the number without the decimal point",
+                "stepExact2": "Denominator: 1 followed by as many zeros as there are decimal places",
+                "stepPure": "Pure recurring",
+                "stepPure1": "Numerator: the repeating part",
+                "stepPure2": "Denominator: as many 9s as there are digits in the repeating part",
+                "stepMixed": "Mixed recurring",
+                "stepMixed1": "Numerator: (non-recurring + repeating part) - non-recurring part",
+                "stepMixed2": "Denominator: as many 9s as there are digits in the repeating part, followed by as many 0s as there are non-recurring decimal places",
+                "commonStep3": "Simplify",
+                "tip": "<strong>💡 Tip:</strong> If the decimal is greater than 1, separate the whole-number part, convert only the decimal part, then add them together."
+            },
+            "proportionality": {
+                "title": "Ratio and proportion",
+                "text": "A <strong>ratio</strong> is the quotient of two amounts. A <strong>proportion</strong> is an equality between two ratios.",
+                "magnitudesTitle": "Proportional quantities",
+                "directTitle": "📈 Directly proportional",
+                "directText": "If one increases, the other increases by the same proportion.",
+                "directEx1": "• Kilograms of apples → Price",
+                "directEx2": "• Hours worked → Money earned",
+                "directEx3": "• Speed → Distance (same time)",
+                "inverseTitle": "📉 Inversely proportional",
+                "inverseText": "If one increases, the other decreases by the same proportion.",
+                "inverseEx1": "• Speed → Time (same distance)",
+                "inverseEx2": "• Workers → Time (same amount of work)",
+                "inverseEx3": "• Width → Length (same area)",
+                "ruleOfThreeTitle": "Simple rule of three",
+                "ruleOfThreeText": "A method for solving proportionality problems.",
+                "problem": "<strong>Problem:</strong> If 3 kg of apples cost €6, how much do 5 kg cost?",
+                "constant": "constant",
+                "tip": "<strong>💡 Tip:</strong> Multiply across and divide by the leftover value: (value sought × cross value) ÷ value beside it"
+            },
+            "percentages": {
+                "title": "What is a percentage?",
+                "text": "A <strong>percentage</strong> is a fraction with a denominator of 100. It is shown with the % symbol.",
+                "calcTitle": "Working out a percentage of an amount",
+                "calcText": "We multiply the amount by the percentage written as a fraction.",
+                "ex1": "<strong>Example 1:</strong> Work out 20% of 50",
+                "ex2": "<strong>Example 2:</strong> Work out 15% of 80",
+                "increaseDecreaseTitle": "Percentage increases and discounts",
+                "increaseTitle": "📈 Percentage increase",
+                "increaseFormula": "Final amount = Initial amount × (1 + %/100)",
+                "increaseEx": "Increase 50 by 20%:",
+                "decreaseTitle": "📉 Percentage discount",
+                "decreaseFormula": "Final amount = Initial amount × (1 - %/100)",
+                "decreaseEx": "20% discount on 50:",
+                "equivTitle": "Equivalent percentages",
+                "headerFraction": "Fraction",
+                "headerDecimal": "Decimal",
+                "headerPercent": "Percentage",
+                "tip": "<strong>💡 Quick tip:</strong><br />• 10% = divide by 10<br />• 20% = divide by 5<br />• 25% = divide by 4<br />• 50% = divide by 2<br />• 75% = divide by 4 and multiply by 3"
+            }
+        }
+    },
+    "teacher": {
+        "title": "Teacher Dashboard",
+        "subtitle": "Learning analytics and competency tracking",
+        "tabs": {
+            "overview": "Overview",
+            "students": "Students",
+            "analytics": "Analytics"
+        },
+        "stats": {
+            "activeStudents": "Active students",
+            "averageProgress": "Average progress",
+            "completedTasks": "Tasks completed",
+            "finishedMissions": "Missions finished"
+        },
+        "competencies": {
+            "title": "Performance by Competency",
+            "numerical": "Number sense",
+            "representation": "Fraction representation",
+            "equivalence": "Equivalence and simplification",
+            "operations": "Operations with fractions",
+            "proportionality": "Proportionality"
+        },
+        "errors": {
+            "title": "Common Error Patterns",
+            "addDenominators": "Adding denominators",
+            "confuseLcmGcd": "Confusing LCM with GCD",
+            "loseUnit": "Losing the unit",
+            "decimalFractionConfusion": "Decimal-fraction confusion",
+            "percentageAbsolute": "Percentage as an absolute number",
+            "students": "students"
+        },
+        "students": {
+            "title": "Students",
+            "name": "Student",
+            "progress": "Progress",
+            "tasks": "Tasks",
+            "commonErrors": "Common errors",
+            "lastActivity": "Last activity",
+            "noErrors": "No common errors"
+        },
+        "analytics": {
+            "title": "Analytics",
+            "distribution": "Progress Distribution",
+            "high": "High (70-100%)",
+            "medium": "Medium (50-69%)",
+            "low": "Low (0-49%)"
+        }
+    },
+    "accessibility": {
+        "title": "Accessibility and UDL",
+        "description": "This platform follows Universal Design for Learning (UDL) and the WCAG 2.1 AA guidelines.",
+        "features": {
+            "perception": "Multiple means of representation",
+            "action": "Multiple means of action and expression",
+            "engagement": "Multiple means of engagement"
+        },
+        "dua": {
+            "title": "Universal Design for Learning (UDL)",
+            "description": "This platform implements the UDL framework from CAST Center, which is internationally recognised and aligned with the Basque Country's curriculum decree. UDL is based on three core principles:",
+            "perception": {
+                "title": "Multiple means of representation",
+                "items": [
+                    "Visual representations of fractions (number line, area, sets)",
+                    "Alternative text for all images and graphics",
+                    "Screen reader support with mathematical descriptions",
+                    "High-contrast mode available",
+                    "Resizable text (up to 200% without loss of functionality)"
+                ]
+            },
+            "action": {
+                "title": "Multiple means of action and expression",
+                "items": [
+                    "Full keyboard navigation (Tab, Shift+Tab, Enter, Escape)",
+                    "Keyboard shortcuts for main features",
+                    "Multiple ways to interact (mouse, keyboard, touch)",
+                    "Clear, visible focus indicators",
+                    "No reliance on complex gestures"
+                ]
+            },
+            "engagement": {
+                "title": "Multiple means of engagement",
+                "items": [
+                    "Multiple learning contexts (Lab, missions, practice)",
+                    "Progression that adapts to each student's pace",
+                    "Immediate, constructive feedback",
+                    "Clear goals and gradual challenges",
+                    "Cultural relevance (Basque context)"
+                ]
+            }
+        },
+        "wcag": {
+            "title": "WCAG 2.1 compliance",
+            "description": "The platform meets level AA of the Web Content Accessibility Guidelines:",
+            "perceptible": "Perceivable: Information and interface components are presented in ways users can perceive",
+            "operable": "Operable: Navigation and interface components can be operated by all users",
+            "understandable": "Understandable: Information and interface operation are easy to understand",
+            "robust": "Robust: Content is robust enough to be interpreted by a range of user agents"
+        },
+        "multilingual": {
+            "title": "Multilingualism and Language Inclusion",
+            "description": "The platform respects the linguistic reality of the Basque Country and the diversity of its students:",
+            "basque": "Basque: full interface in standard Basque",
+            "spanish": "Spanish: full interface in Spanish",
+            "arabic": "Arabic: RTL (right-to-left) support for students of Arab origin",
+            "glossary": "Multilingual mathematical glossary with contextual definitions",
+            "cultural": "Culturally relevant content (Basque context)"
+        },
+        "keyboard": {
+            "title": "Keyboard Shortcuts",
+            "shortcut": "Shortcut",
+            "function": "Action",
+            "tab": "Move to the next interactive element",
+            "shiftTab": "Move to the previous element",
+            "enter": "Activate the selected button or link",
+            "spaceKey": "Space",
+            "escape": "Close dialog boxes or cancel an action",
+            "arrows": "Adjust values on sliders"
+        },
+        "help": {
+            "title": "Need accessibility help?",
+            "description": "If you find accessibility barriers or need specific adjustments, contact the support team. We are committed to equal opportunities in access to mathematics education."
+        }
+    },
+    "common": {
+        "language": "Language",
+        "spanish": "Spanish",
+        "basque": "Basque",
+        "arabic": "Arabic",
+        "english": "English",
+        "close": "Close",
+        "next": "Next",
+        "previous": "Previous",
+        "check": "Check",
+        "hint": "Hint",
+        "back": "Back",
+        "showHint": "Show hint",
+        "hideHint": "Hide hint",
+        "levels": {
+            "easy": "Easy",
+            "medium": "Medium",
+            "hard": "Hard",
+            "expert": "Expert"
+        }
+    },
+    "games": {
+        "hub": {
+            "subtitle": "Learn fractions by playing",
+            "tags": {
+                "easyMedium": "Easy-Medium",
+                "easyHard": "Easy-Hard",
+                "easyExpert": "Easy-Expert"
+            },
+            "objectives": {
+                "partOfWhole": "Fraction as part of a whole",
+                "equivalences": "Equivalent fractions",
+                "operations": "Operations with fractions"
+            }
+        },
+        "pizzaFractions": {
+            "title": "Fraction Pizzeria",
+            "subtitle": "Serve the right slices!",
+            "description": "Help out at the pizzeria by serving the right slices of pizza. You will learn what a fraction is in a fun, visual way.",
+            "startGame": "Start game",
+            "wantOrder": "I want...",
+            "oneSliceSelected": "1 slice selected",
+            "multipleSlicesSelected": "{{count}} slices selected",
+            "slice": "slice",
+            "slices": "slices",
+            "serve": "Serve",
+            "reset": "Clear",
+            "correct": "Correct!",
+            "incorrect": "Wrong slice",
+            "of": "of",
+            "selectedWrong": "You selected {{selected}} slices, but the customer wanted {{needed}} of {{total}}.",
+            "nextOrder": "Next order",
+            "tryAgain": "Try again",
+            "tips": "Tips",
+            "orders": "Orders",
+            "level": "Level",
+            "gameOver": "End of turn!",
+            "ordersServed": "Orders served",
+            "tipsEarned": "Tips earned",
+            "playAgain": "Play again"
+        },
+        "fractionMemory": {
+            "title": "Fraction Memory",
+            "subtitle": "Find the equivalent fractions",
+            "description": "Find pairs of cards that show the same fraction in different forms: numerical, visual, decimal or percentage.",
+            "startGame": "Start game",
+            "pairs": "Pairs",
+            "cards": "Cards",
+            "visual": "Visual",
+            "decimal": "Decimal",
+            "moves": "Moves",
+            "time": "Time",
+            "score": "Score",
+            "restart": "Reset",
+            "exit": "Exit",
+            "playAgain": "Play again",
+            "completed": "Congratulations!",
+            "hiddenCard": "Hidden card",
+            "equivalencesFound": "Equivalences found"
+        },
+        "fractionRace": {
+            "title": "Fraction Race",
+            "subtitle": "Calculate with fractions to win!",
+            "description": "Compete in a race by solving fraction calculations. The faster you answer, the further your car will go!",
+            "modes": {
+                "addSub": "Addition and Subtraction",
+                "mulDiv": "Multiplication and Division",
+                "powers": "Powers",
+                "combined": "Combined"
+            },
+            "startRace": "Start race!",
+            "questions": "Questions",
+            "operations": "Operations",
+            "mixedNumbers": "Mixed numbers",
+            "maxExponent": "Max exp.",
+            "opponents": "Opponents",
+            "fastTime": "Speed bonus",
+            "modeSelection": "Type of operation",
+            "difficultySelection": "Difficulty",
+            "maxDenominator": "Denominator ≤ {{value}}",
+            "sameDenominators": "Same denominators",
+            "differentDenominators": "Different denominators",
+            "simplifiedAnswers": "Simplified answers",
+            "continue": "Continue",
+            "viewResults": "View results",
+            "retryErrors": "Try my mistakes again",
+            "reviewMode": "Review mistakes",
+            "countdown": "Race countdown",
+            "fractionAria": "Fraction {{numerator}} over {{denominator}}",
+            "mixedFractionAria": "Mixed number {{whole}} and {{numerator}} over {{denominator}}",
+            "explanations": {
+                "addSubtract": "Find a common denominator and only work with the numerators.",
+                "multiply": "Multiply the numerators together and the denominators together; simplify at the end.",
+                "divide": "Multiply by the reciprocal of the second fraction, then simplify.",
+                "power": "Raise both the numerator and the denominator to the exponent.",
+                "combined": "First do the brackets, then follow the order of operations."
+            },
+            "pts": "pts",
+            "exit": "Exit",
+            "question": "Question",
+            "of": "of",
+            "correct": "Correct!",
+            "incorrect": "Incorrect!",
+            "turbo": "TURBO!",
+            "combo": "Combo",
+            "scoringGuide": "Scoring system",
+            "baseScore": "Correct answer",
+            "speedScore": "Speed",
+            "comboScore": "Combo",
+            "comboStep": "per combo level",
+            "turboScore": "Turbo",
+            "scoreEarned": "+{{points}} points earned",
+            "noPoints": "0 points earned",
+            "comboReset": "Combo resets to zero",
+            "turboProgress": "Turbo {{current}}/{{target}}",
+            "turboActiveBonus": "Turbo active: +{{points}} per correct answer",
+            "chooseRaceFormat": "Race mode",
+            "soundOn": "Sound on",
+            "soundOff": "Sound off",
+            "formats": {
+                "classic": {
+                    "name": "Classic",
+                    "description": "Reach the finish line by solving all the questions."
+                },
+                "sprint": {
+                    "name": "Time attack",
+                    "description": "Score as many points as you can in 60 seconds."
+                },
+                "perfect": {
+                    "name": "Perfect race",
+                    "description": "One mistake ends the race."
+                }
+            },
+            "questionCountSelection": "Number of questions",
+            "operationSelection": "Operations included",
+            "operationFilters": {
+                "default": "All",
+                "addition": "Additions only",
+                "subtraction": "Subtractions only",
+                "multiplication": "Multiplications only",
+                "division": "Divisions only"
+            },
+            "includeMixedOption": "Include mixed numbers",
+            "timeLimit": "Time limit",
+            "personalProgress": "My progress",
+            "racesPlayed": "Races",
+            "wins": "Wins",
+            "bestScore": "Best score",
+            "bestTime": "Best time",
+            "bestAccuracy": "Best accuracy",
+            "bestCombo": "Best combo",
+            "noRecordYet": "Complete your first race to start saving records.",
+            "newAchievements": "New achievements",
+            "rivalPersonalities": {
+                "sprinter": "Fast start: starts strong and slows down at the end",
+                "steady": "Steady: keeps a very even pace",
+                "comeback": "Comeback: speeds up in the second half"
+            },
+            "errorInsights": {
+                "sign": "Check the sign of the result before choosing your answer.",
+                "simplification": "The value is equivalent, but the answer must be fully simplified.",
+                "commonDenominator": "Don't operate on the denominators: first find a common denominator.",
+                "multiplication": "Multiply numerator by numerator and denominator by denominator.",
+                "inverse": "When dividing, flip only the second fraction.",
+                "power": "Apply the exponent to both the numerator and the denominator.",
+                "operationOrder": "Work out the brackets first and follow the order of operations.",
+                "calculation": "Your method looks right; check the last calculation and the simplification."
+            },
+            "rewardTiers": {
+                "gold": "Perfect race",
+                "silver": "Excellent mastery",
+                "bronze": "Good progress",
+                "finisher": "Challenge completed",
+                "attempt": "Attempt finished"
+            },
+            "finishReasons": {
+                "completed": "You have completed the whole track.",
+                "time": "Time's up: every correct answer counts.",
+                "mistake": "The perfect race ends with the first mistake. You can review the mistake and try again."
+            },
+            "achievements": {
+                "firstRace": "🎟️ First race",
+                "firstWin": "🏆 First win",
+                "newBestScore": "⭐ High score",
+                "newBestTime": "⏱️ Best time",
+                "newBestAccuracy": "🎯 Best accuracy",
+                "perfectRace": "💎 No mistakes"
+            },
+            "go": "GO!",
+            "oneGo": "1... GO!",
+            "raceFinished": "Race finished!",
+            "yourPosition": "Your position",
+            "points": "Points",
+            "correctAnswers": "Correct answers",
+            "time": "Time",
+            "reviewErrors": "Review mistakes",
+            "playAgain": "Play again",
+            "track": "Track",
+            "position": "Position",
+            "turboActivated": "TURBO ACTIVATED!",
+            "results": {
+                "title": "Race finished!",
+                "position": "Place {{position}}",
+                "stats": "Statistics",
+                "correctAnswers": "Correct answers",
+                "time": "Total time",
+                "score": "Score",
+                "seconds": "s",
+                "errors": "Review mistakes",
+                "yourAnswer": "Your answer",
+                "correctAnswer": "Correct answer",
+                "noErrors": "No mistakes! Excellent work!",
+                "playAgain": "Play again",
+                "backToMenu": "Back to menu"
+            },
+            "player": "You",
+            "bot1": "Max",
+            "bot2": "Luna",
+            "bot3": "Leo"
+        }
+    },
+    "zatigarritasuna": {
+        "home": {
+            "title": "Divisibility",
+            "subtitle": "Multiples, divisors and prime numbers",
+            "description": "Discover the hidden rules of numbers. Learn to find multiples, divisors, LCM and GCD, essential tools for simplifying problems.",
+            "startTheory": "Explore Theory",
+            "startLab": "Lab",
+            "features": {
+                "title": "What will you learn?",
+                "lab": {
+                    "title": "Interactive Lab",
+                    "desc": "Test your knowledge with dynamic tools and see divisibility in action.",
+                    "link": "Go to the Lab"
+                },
+                "f1": {
+                    "title": "Multiples and Divisors",
+                    "desc": "Understand the basic relationship between numbers."
+                },
+                "f2": {
+                    "title": "Divisibility Rules",
+                    "desc": "Learn quick tricks to tell whether one number is divisible by another."
+                },
+                "f3": {
+                    "title": "Prime Numbers",
+                    "desc": "Discover the 'building blocks' of all numbers."
+                },
+                "f4": {
+                    "title": "LCM and GCD",
+                    "desc": "Apply strategies to solve problems involving coincidences and sharing."
+                }
+            },
+            "curriculum": {
+                "title": "Curriculum Alignment for 1st ESO",
+                "c1": "Identifying multiples and divisors of a number.",
+                "c2": "Applying divisibility rules (2, 3, 5, 9, 10, 11).",
+                "c3": "Prime factorisation of numbers.",
+                "c4": "Calculating and applying the LCM and GCD to solve problems."
+            }
+        },
+        "theory": {
+            "title": "Divisibility Theory",
+            "sections": {
+                "conceptos": "Basic Concepts",
+                "criterios": "Divisibility Rules",
+                "primos": "Prime and Composite Numbers",
+                "mcmMcd": "LCM and GCD"
+            },
+            "conceptos": {
+                "title": "Multiples and Divisors",
+                "subtitle": "The basic relationship",
+                "description": "Understanding how numbers relate through multiplication and exact division.",
+                "multiplos": {
+                    "title": "Multiples of a number",
+                    "text": "The multiples of a number are all the possible results of multiplying that number by each natural number.",
+                    "example": "Multiples of 4 are 0, 4, 8, 12, 16... (the result of 4×0, 4×1, 4×2, 4×3...)"
+                },
+                "divisores": {
+                    "title": "Divisors of a number",
+                    "text": "The divisors of a number are the numbers that can divide it an exact number of times, that is, with no remainder.",
+                    "example": "Divisors of 12 are 1, 2, 3, 4, 6 and 12."
+                }
+            },
+            "criterios": {
+                "title": "Quick Divisibility Rules",
+                "subtitle": "Mathematical shortcuts",
+                "description": "There are simple rules that let us tell whether a number is divisible by another without doing the division."
+            },
+            "primos": {
+                "title": "Prime and Composite Numbers",
+                "subtitle": "The building blocks",
+                "description": "Sorting numbers by how many divisors they have.",
+                "primos": {
+                    "title": "Prime Numbers",
+                    "text": "A prime number is a natural number greater than 1 that has only two different divisors: itself and 1.",
+                    "example": "Examples: 2, 3, 5, 7, 11, 13..."
+                },
+                "compuestos": {
+                    "title": "Composite Numbers",
+                    "text": "A composite number is any natural number greater than 1 that is not prime. That is, it has more than two divisors.",
+                    "example": "Examples: 4 (divisors 1, 2, 4), 6 (1, 2, 3, 6), 9 (1, 3, 9)..."
+                },
+                "descomposicion": {
+                    "title": "Prime Factorisation",
+                    "text": "Any composite number can be written as a unique product of prime numbers. This process is called prime factorisation.",
+                    "example": "12 = 2² × 3"
+                }
+            },
+            "mcmMcd": {
+                "title": "LCM and GCD",
+                "subtitle": "Common multiples and divisors",
+                "description": "How to find the least common multiple and the greatest common divisor using factorisation.",
+                "mcm": {
+                    "title": "Least Common Multiple (LCM)",
+                    "text": "The smallest number that is a multiple of all the numbers in the group. Rule: take all the prime factors (common and non-common), each raised to its highest exponent.",
+                    "example": "12 = 2² × 3, 18 = 2 × 3² ➔ LCM(12, 18) = 2² × 3² = 36"
+                },
+                "mcd": {
+                    "title": "Greatest Common Divisor (GCD)",
+                    "text": "The largest number that can divide all the numbers in the group without leaving a remainder. Rule: take only the common prime factors, each raised to its lowest exponent.",
+                    "example": "12 = 2² × 3, 18 = 2 × 3² ➔ GCD(12, 18) = 2 × 3 = 6"
+                }
+            }
+        },
+        "lab": {
+            "title": "Divisibility Lab",
+            "subtitle": "Interactive tools to explore numbers",
+            "divisorChecker": {
+                "title": "Check Divisibility",
+                "desc": "Check whether one number is divisible by another",
+                "numberPlaceholder": "e.g. 24",
+                "divisorPlaceholder": "e.g. 6",
+                "number": "Number",
+                "divisor": "Divisor",
+                "check": "Check",
+                "isDivisible": "Excellent! {{num}} is divisible by {{div}}.",
+                "isNotDivisible": "{{num}} is NOT divisible by {{div}}.",
+                "explanationFormat": "{{num}} ÷ {{div}} = {{quotient}} (Remainder: {{remainder}})"
+            },
+            "lcmGcd": {
+                "title": "LCM and GCD Calculator",
+                "desc": "Calculate the least common multiple and greatest common divisor",
+                "num1Placeholder": "e.g. 12",
+                "num2Placeholder": "e.g. 18",
+                "num1": "1st Number",
+                "num2": "2nd Number",
+                "lcm": "LCM (Least Common Multiple)",
+                "gcd": "GCD (Greatest Common Divisor)",
+                "calculate": "Calculate",
+                "resultLcm": "The LCM of {{n1}} and {{n2}} is {{result}}.",
+                "resultGcd": "The GCD of {{n1}} and {{n2}} is {{result}}."
+            },
+            "rules": {
+                "title": "Divisibility Rules",
+                "desc": "Check which divisibility rules a number satisfies",
+                "numberPlaceholder": "e.g. 120",
+                "number": "Number",
+                "check": "Check Rules",
+                "divBy": "Divisible by {{div}}:",
+                "yes": "Yes",
+                "no": "No",
+                "rule2": "The last digit is even (0, 2, 4, 6, 8)",
+                "rule3": "The sum of its digits is a multiple of 3",
+                "rule5": "Ends in 0 or 5",
+                "rule9": "The sum of its digits is a multiple of 9",
+                "rule10": "Ends in 0",
+                "rule11": "The difference between the sums of the digits in even and odd positions is 0 or a multiple of 11"
+            }
+        }
+    },
+    "zenbakiNaturalak": {
+        "home": {
+            "title": "Natural Numbers",
+            "subtitle": "Operations, mental calculation and order of operations",
+            "description": "Learn the basic concepts of natural numbers, develop mental calculation strategies and master the order of operations."
+        },
+        "theory": {
+            "title": "Natural and Decimal Numbers",
+            "subtitle": "Discover the Number Line and the Operations",
+            "description": "Learn how to use natural and decimal numbers, together with the D-P-E method for solving problems.",
+            "sections": {
+                "mentalMath": "Mental Calculation",
+                "operations": "Basic Operations",
+                "orderOfOperations": "Order of Operations"
+            },
+            "mentalMath": {
+                "title": "Mental Calculation Strategies",
+                "subtitle": "Techniques for Calculating Faster",
+                "description": "Mental calculation means doing mathematical operations without a calculator or other tools. Developing this skill will give you speed and a better understanding of numbers.",
+                "rounding": {
+                    "title": "Round and Adjust",
+                    "text": "Round one of the numbers to the nearest ten or hundred, do the operation, then adjust the result.",
+                    "example": "38 + 45 → (40 + 45) - 2 = 85 - 2 = 83"
+                },
+                "breakdown": {
+                    "title": "Break Down",
+                    "text": "Split one of the numbers into easier parts.",
+                    "example": "128 ÷ 4 → (120 ÷ 4) + (8 ÷ 4) = 30 + 2 = 32"
+                }
+            },
+            "order": {
+                "title": "Order of Operations",
+                "subtitle": "Hierarchy of Operations",
+                "description": "When an expression has more than one operation, we must follow a specific order to make sure everyone gets the same result.",
+                "rulesTitle": "The correct order is:",
+                "rule1": "<b>Brackets:</b> First, work out the operations inside the brackets.",
+                "rule2": "<b>Multiplication and Division:</b> Work from left to right.",
+                "rule3": "<b>Addition and Subtraction:</b> Work these out last, from left to right.",
+                "example": "Example:",
+                "exampleText": "9 - (1 + 3) · 2\n= 9 - 4 · 2    // First we work out what is inside the brackets so that we can subtract\n= 9 - 8        // Next we do the multiplication\n= 1            // Finally we do the subtraction"
+            },
+            "ops": {
+                "title": "Basic Operations",
+                "subtitle": "Definition and Properties",
+                "description": "Natural numbers are used for counting and ordering. The main operations are addition, subtraction, multiplication and division.",
+                "addition": {
+                    "title": "Addition",
+                    "text": "It means putting quantities together. The result is the same whatever order the numbers are added in (commutative property).",
+                    "example": "15 + 23 = 38"
+                },
+                "subtraction": {
+                    "title": "Subtraction",
+                    "text": "It means taking one quantity away from another. Careful! It is not commutative.",
+                    "example": "45 - 12 = 33"
+                },
+                "multiplication": {
+                    "title": "Multiplication",
+                    "text": "It is a short way of adding the same number several times. It has the commutative property.",
+                    "example": "4 · 5 = 20"
+                },
+                "division": {
+                    "title": "Division",
+                    "text": "It means sharing a quantity into equal parts.",
+                    "example": "20 ÷ 4 = 5"
+                }
+            }
+        },
+        "pdfTheory": {
+            "title": "Natural and Decimal Numbers",
+            "subtitle": "Discover the Number Line and Operations",
+            "description": "Learn to use natural and decimal numbers, together with the D-P-E method for solving problems.",
+            "sections": {
+                "arruntak": "Natural Numbers",
+                "hamartarrak": "Decimal Numbers",
+                "dpe": "D-P-E Method",
+                "tips": "Study Techniques"
+            },
+            "arruntak": {
+                "title": "Natural Numbers",
+                "description": "We use natural numbers (0, 1, 2, 3...) to represent whole quantities.",
+                "segidak": {
+                    "title": "Sequences and Number Line",
+                    "text": "If we have two known numbers on a number line, calculate the distance between them and divide by the number of intervals."
+                },
+                "biribiltzea": {
+                    "title": "Rounding to Thousands",
+                    "text": "If the digit on the right is 5 or more, add one. If it is 4 or less, leave it as it is."
+                },
+                "eragiketak": {
+                    "title": "Combined Operations",
+                    "text": "Order of operations: 1. Brackets, 2. Multiplication and division, 3. Addition and subtraction."
+                }
+            },
+            "hamartarrak": {
+                "title": "Decimal Numbers",
+                "description": "Decimals are used to represent parts smaller than one unit.",
+                "zuzena": {
+                    "title": "Placing on the Number Line",
+                    "text": "Always add a zero at the end (e.g. 9.7 -> 9.70) to see it more clearly."
+                },
+                "biribiltzea": {
+                    "title": "Rounding to Tenths",
+                    "text": "If the hundredths digit is 5 or more, add one to the tenths digit."
+                },
+                "eragiketak": {
+                    "title": "Calculation Method",
+                    "text": "Addition/Subtraction: line up all the decimal points in the same column. Multiplication/Division (10, 100, 1000): move the decimal point as many places as there are zeros, to the right or to the left."
+                }
+            },
+            "dpe": {
+                "title": "D-P-E Method for Solving Problems",
+                "description": "To solve a problem correctly, you must always follow this structure:",
+                "datuak": {
+                    "title": "D - Data",
+                    "text": "Read the text and pick out only the necessary mathematical information. Only keywords and numbers."
+                },
+                "prozedura": {
+                    "title": "P - Procedure",
+                    "text": "Write the mathematical set-up clearly. If possible, do it in one single combined operation."
+                },
+                "erantzuna": {
+                    "title": "E - Answer",
+                    "text": "Never leave a number on its own. Always answer with a complete sentence."
+                }
+            },
+            "tips": {
+                "title": "Study Techniques",
+                "description": "Alternative approaches that work:",
+                "semaforo": {
+                    "title": "The Traffic Light for Combined Operations",
+                    "text": "Red: brackets. Yellow: multiplication/division. Green: addition/subtraction."
+                },
+                "dirua": {
+                    "title": "Decimals vs. Cents",
+                    "text": "If you have trouble with decimals, think in euros and cents. The brain processes money better."
+                },
+                "rol": {
+                    "title": "Role-Play Game",
+                    "text": "Do a calculation with a deliberate mistake, then try to spot that mistake and explain why."
+                }
+            }
+        },
+        "erronkak": {
+            "title": "Number Challenges",
+            "ch1": {
+                "title": "📌 Placing on the Number Line",
+                "description": "On a number line, the interval between 5,000 and 6,000 is divided into four parts. Which number is at the first mark?",
+                "options": [
+                    "5,100",
+                    "5,250",
+                    "5,500"
+                ],
+                "success": "Correct! Each interval is (6000-5000)/4 = 250. 5000 + 250 = 5,250.",
+                "error": "Find the length of each interval by dividing the total span (1000) by 4."
+            },
+            "ch2": {
+                "title": "🔄 Rounding",
+                "description": "Round 26,421 to the nearest thousand.",
+                "options": [
+                    "26,000",
+                    "26,400",
+                    "27,000"
+                ],
+                "success": "Correct! As the hundreds digit is 4 (< 5), the thousands digit stays the same: 26,000.",
+                "error": "Look at the digit to the right of the thousands digit (4)."
+            },
+            "ch3": {
+                "title": "🚦 The Traffic Light",
+                "description": "Solve this combined operation: 6 × 5 - 10 + 36:9.",
+                "options": [
+                    "24",
+                    "14",
+                    "20"
+                ],
+                "success": "Excellent! (30) - 10 + (4) = 20 + 4 = 24.",
+                "error": "First do the multiplications and divisions. Then add and subtract from left to right."
+            },
+            "ch4": {
+                "title": "🎯 Tenths",
+                "description": "Round 14.663 to the nearest tenth.",
+                "options": [
+                    "14.6",
+                    "14.7",
+                    "15.0"
+                ],
+                "success": "Correct! The hundredths digit is 6, which is greater than 5, so we add 1 to the tenths digit: 14.7.",
+                "error": "Look at the digit to the right of the tenths digit (6)."
+            },
+            "ch5": {
+                "title": "✖️ Quick Multiplication",
+                "description": "What is the result of doing this multiplication in your head? 7.5 × 1000.",
+                "options": [
+                    "750",
+                    "7,500",
+                    "75,000"
+                ],
+                "success": "Great! The decimal point moves 3 places to the right: 7,500.",
+                "error": "Move the decimal point to the right according to the number of zeros."
+            },
+            "ch6": {
+                "title": "➖ Aligned Subtraction",
+                "description": "What is the result of this subtraction (remember to line up the decimal points): 15.73 - 9.98?",
+                "options": [
+                    "5.75",
+                    "6.25",
+                    "5.85"
+                ],
+                "success": "Excellent! By lining up the decimal points correctly and paying attention to the carries, the result is 5.75.",
+                "error": "Line up the decimal points vertically and do a normal subtraction."
+            },
+            "ch7": {
+                "title": "📏 D-P-E Procedure",
+                "description": "A building has 27 floors. Each floor has 12 flats, and each flat has 7 windows. What is the correct PROCEDURE for calculating the windows?",
+                "options": [
+                    "27 + 12 + 7",
+                    "27 × 12 × 7",
+                    "27 × 12 + 7"
+                ],
+                "success": "Correct! As all the relationships are multiplicative, the procedure is 27 × 12 × 7.",
+                "error": "When some items appear repeatedly within a quantity of other items, you multiply."
+            },
+            "ch8": {
+                "title": "📊 D-P-E Data",
+                "description": "I have €50 and I want to buy an item of clothing for €32.89 and a ball for €17.50. What should be written in the DATA section?",
+                "options": [
+                    "All of the text, word for word.",
+                    "Money: €50 / Clothing item: €32.89 / Ball: €17.50",
+                    "32.89 + 17.50 = 50.39"
+                ],
+                "success": "Of course! In the data, only the important information should be written, without calculations.",
+                "error": "The data should not include calculations, only a useful summary of the problem."
+            },
+            "ch9": {
+                "title": "✍️ D-P-E Answer",
+                "description": "When you have the numerical result of the previous problem (0.39 is missing), how should the ANSWER section be written?",
+                "options": [
+                    "Only 0.39.",
+                    "€0.39",
+                    "'I'm short of money, I'm missing exactly €0.39.'"
+                ],
+                "success": "Well done! E (Answer) must always be written as a complete sentence, to give context.",
+                "error": "Answers are not just numbers on their own; they always need an explanatory sentence."
+            }
+        }
+    },
+    "zenbakiOsoak": {
+        "home": {
+            "title": "Integers",
+            "subtitle": "The Set ℤ, Operations and Hierarchy",
+            "description": "Dive into the world of integers. Learn to calculate with positive and negative numbers in different real-life situations.",
+            "startTheory": "Explore Theory",
+            "startLab": "Lab",
+            "features": {
+                "title": "What will you learn?",
+                "lab": {
+                    "title": "Interactive Lab",
+                    "desc": "Practise calculating with integers.",
+                    "link": "Go to the Lab"
+                },
+                "f1": {
+                    "title": "The Set ℤ",
+                    "desc": "Learn about negative numbers, positive numbers and zero, and how they are shown on the number line."
+                },
+                "f2": {
+                    "title": "Absolute Value",
+                    "desc": "Understand the idea of distance from zero and how to calculate the absolute value of any number."
+                },
+                "f3": {
+                    "title": "Addition and Subtraction",
+                    "desc": "Discover the rules for basic operations using movements on the number line."
+                },
+                "f4": {
+                    "title": "Advanced Operations",
+                    "desc": "Master the rule of signs for multiplying and dividing, and solve combined operations."
+                }
+            },
+            "curriculum": {
+                "title": "Curriculum Alignment: 1st ESO",
+                "c1": "Identifying and using integers in real-life contexts (temperatures, debts).",
+                "c2": "Representing and ordering numbers on the number line.",
+                "c3": "Calculating the absolute value and the opposite of a number.",
+                "c4": "Basic and combined operations with integers, following the order of operations."
+            }
+        },
+        "theory": {
+            "title": "Integers Theory",
+            "subtitle": "Discover the set ℤ",
+            "description": "Learn how to use positive and negative numbers to solve everyday and mathematical problems.",
+            "sections": {
+                "concepto": "The Set ℤ",
+                "operaciones": "Addition and Subtraction",
+                "avanzadas": "Advanced Operations"
+            },
+            "concepto": {
+                "title": "The Set ℤ and the Number Line",
+                "description": "Integers include the natural numbers (positive ones), their opposites (negative ones) and zero. They are used to represent debts, temperatures below zero or depths.",
+                "recta": {
+                    "title": "The Number Line",
+                    "text": "Zero is the origin. Positive numbers (>0) are on the right and negative numbers (<0) are on the left."
+                },
+                "absoluto": {
+                    "title": "Absolute Value",
+                    "text": "It is the distance of a number from zero. It is always positive or zero. It is written between bars | |.",
+                    "example": "Example: |-7| = 7, because -7 is 7 units from 0."
+                }
+            },
+            "operaciones": {
+                "title": "Addition and Subtraction",
+                "description": "Think of addition and subtraction as movements on the number line: adding a positive number is moving forward (to the right), and adding a negative number is moving back (to the left).",
+                "sumaMismo": {
+                    "title": "Adding numbers with the same sign",
+                    "text": "Add their absolute values and keep the sign.",
+                    "example": "(-7) + (-2) = -9"
+                },
+                "sumaDiferente": {
+                    "title": "Adding numbers with different signs",
+                    "text": "Subtract their absolute values and use the sign of the number with the larger absolute value.",
+                    "example": "(+8) + (-3) = +5"
+                },
+                "resta": {
+                    "title": "Subtraction",
+                    "text": "Subtracting a number is the same as adding its opposite.",
+                    "example": "(+9) - (+5) → (+9) + (-5) = +4"
+                }
+            },
+            "avanzadas": {
+                "title": "Advanced Operations",
+                "description": "Rules for multiplication, division and combined operations.",
+                "multDiv": {
+                    "title": "Multiplication and Division",
+                    "text": "Apply the Rule of Signs:\n• Same signs: positive result (+)\n• Different signs: negative result (-)",
+                    "example": "(+3) × (-4) = -12"
+                },
+                "combinadas": {
+                    "title": "Combined Operations",
+                    "text": "Follow the same order of operations as with natural numbers, paying attention to the signs.",
+                    "example": "15 - 3 · [6 - (−12) ÷ (+4)] = -12"
+                }
+            }
+        },
+        "lab": {
+            "title": "Integers Lab",
+            "subtitle": "Interactive calculator for practising with integers.",
+            "integerCalculator": {
+                "title": "Special Calculator",
+                "desc": "Try additions, subtractions, multiplications and divisions with negative numbers.",
+                "num1": "1st Number",
+                "num2": "2nd Number",
+                "operation": "Operation",
+                "add": "Addition (+)",
+                "subtract": "Subtraction (-)",
+                "multiply": "Multiplication (×)",
+                "divide": "Division (÷)",
+                "calculate": "Calculate",
+                "result": "Result: {{res}}",
+                "errorZero": "You cannot divide by zero!"
+            }
+        }
+    },
+    "algebra": {
+        "title": "Algebra",
+        "subtitle": "The magic of mental calculation: letters and equations",
+        "home": {
+            "theory": {
+                "description": "Learn the basics of algebra, expressions and equations.",
+                "link": "View Theory"
+            },
+            "lab": {
+                "description": "Solve equations and practise interactively.",
+                "link": "Go to the Lab"
+            }
+        },
+        "theory": {
+            "title": "Algebra Theory",
+            "sections": {
+                "letras": {
+                    "title": "1. Letters and Expressions",
+                    "subtitle1": "From Numbers to Letters",
+                    "p1": "In situations where we do not know an exact value, we use a letter to represent it. We call this letter an <1>unknown</1> or a <3>variable</3>. This lets us generalise rules and solve complex problems.",
+                    "example1": "<0>Example:</0> If Juan's age is 'x', in 15 years he will be 'x + 15' years old, and a year ago he was 'x - 1'.",
+                    "subtitle2": "Algebraic Expressions",
+                    "p2": "An algebraic expression is a combination of numbers, letters (variables) and mathematical operations.",
+                    "components_title": "Components of an Expression:",
+                    "c1": "<0>Letters (variables):</0> They represent unknown values (x, y, a, b...).",
+                    "c2": "<0>Numbers (coefficients):</0> The known values that multiply the variables.",
+                    "c3": "<0>Operations:</0> Addition, subtraction, multiplication, division, etc.",
+                    "example2": "<0>Examples:</0> 3x - 5 (three times a number minus five), x² + 1 (the square of a number plus one)."
+                },
+                "ecuaciones": {
+                    "title": "2. Equations",
+                    "subtitle1": "What Is an Equation?",
+                    "p1": "An equation is an equality between two algebraic expressions that contains one or more unknown values (unknowns). It is like a balanced scale: what is on one side of the equals sign (=) must be worth the same as what is on the other side.",
+                    "goal": "<0>The goal:</0> To find the value of the unknown (usually 'x') that makes the equation true.",
+                    "subtitle2": "Techniques for Solving Equations",
+                    "p2": "To solve a first-degree equation, we follow some steps to 'solve for x', that is, to leave x on its own on one side of the equals sign.",
+                    "step1_title": "Step 1: Group terms",
+                    "step1_desc": "We move all the terms that have the unknown (x) to one side of the equals sign, and all the numbers to the other side. <1>Key rule:</1> whatever is added on one side moves to the other side as a subtraction, and vice versa.",
+                    "step2_title": "Step 2: Simplify",
+                    "step2_desc": "We work on each side of the equals sign to simplify the expression.",
+                    "step3_title": "Step 3: Solve for x",
+                    "step3_desc": "If the 'x' has a coefficient (a number multiplying it), we move it to the other side by dividing.",
+                    "subtitle3": "Solving Problems",
+                    "p3": "The real power of algebra is translating real-life problems into mathematical language that we can solve.",
+                    "problem_example": "<0>Problem:</0> A pile of coins and one seventh of that pile add up to 24 euros. How much is the pile worth?<br/><br/><3>Setting up:</3> x + (1/7)x = 24<br/><br/><6>Solution:</6> (8/7)x = 24 → x = (24 × 7) / 8 → x = 21. The pile is worth 21 euros."
+                },
+                "monomios": {
+                    "title": "3. Operations with Monomials",
+                    "subtitle1": "Adding and Subtracting Monomials",
+                    "p1": "Only <1>like</1> monomials can be added or subtracted, that is, those with the same literal part (the same letters with the same exponents).",
+                    "rule_title": "Golden Rule:",
+                    "rule_desc": "Add or subtract the coefficients and keep the same literal part.",
+                    "example1": "<0>Like terms:</0> 4x + 2x = 6x<br/><br/><3>Unlike terms:</3> 3a + 2b (it cannot be simplified)",
+                    "subtitle2": "Multiplication and Division",
+                    "p2": "To multiply or divide monomials, work with the coefficients and the literal parts separately.",
+                    "mult_title": "Multiplication",
+                    "mult_desc": "Multiply the coefficients and add the exponents of the same letters.",
+                    "div_title": "Division",
+                    "div_desc": "Divide the coefficients and subtract the exponents of the same letters.",
+                    "dist_title": "Distributive Property",
+                    "dist_desc": "When a monomial multiplies a sum or subtraction, it multiplies each of the terms."
+                }
+            }
+        },
+        "lab": {
+            "title": "Equations Lab",
+            "subtitle": "Solve equations automatically and practise algebra.",
+            "streak": "Streak",
+            "tool_title": "Equation Solver",
+            "new_equation": "Generate new equation",
+            "check": "Check",
+            "show_solution": "Show solution",
+            "correct": "Correct! Keep it up!",
+            "incorrect": "Incorrect. Try again!",
+            "solution_title": "Step-by-Step Solution",
+            "next_equation": "Next Equation"
+        }
+    },
+    "geometria": {
+        "title": "Geometry",
+        "subtitle": "The study of shapes and space",
+        "home": {
+            "theory": {
+                "description": "Learn about triangles, quadrilaterals and their properties. Discover Pythagoras' theorem and learn how to calculate areas and perimeters.",
+                "link": "Explore Geometry"
+            },
+            "lab": {
+                "description": "Use our interactive tools to work with different geometric shapes and test your knowledge.",
+                "link": "Go to the Lab"
+            }
+        },
+        "theory": {
+            "page_title": "Geometry Theory",
+            "page_subtitle": "Plane Shapes and Their Properties",
+            "table": {
+                "type": "Type",
+                "description": "Description",
+                "figure": "Shape",
+                "area": "Area",
+                "perimeter": "Perimeter"
+            },
+            "triangles": {
+                "title": "Triangles",
+                "intro": "Triangles are polygons that have three sides and three angles.",
+                "by_sides": {
+                    "title": "Classification by Sides",
+                    "equilateral": {
+                        "name": "Equilateral",
+                        "desc": "It has three equal sides."
+                    },
+                    "isosceles": {
+                        "name": "Isosceles",
+                        "desc": "It has two equal sides and one different side."
+                    },
+                    "scalene": {
+                        "name": "Scalene",
+                        "desc": "All three sides are different."
+                    }
+                },
+                "by_angles": {
+                    "title": "Classification by Angles",
+                    "acute": {
+                        "name": "Acute",
+                        "desc": "All three angles are acute (less than 90°)."
+                    },
+                    "right": {
+                        "name": "Right-angled",
+                        "desc": "It has one right angle (equal to 90°)."
+                    },
+                    "obtuse": {
+                        "name": "Obtuse",
+                        "desc": "It has one obtuse angle (greater than 90°)."
+                    }
+                }
+            },
+            "quadrilaterals": {
+                "title": "Quadrilaterals",
+                "parallelograms": {
+                    "title": "Parallelograms",
+                    "desc": "Their opposite sides are parallel in pairs.",
+                    "square": {
+                        "name": "Square",
+                        "desc": "4 equal sides and 4 right angles."
+                    },
+                    "rectangle": {
+                        "name": "Rectangle",
+                        "desc": "Opposite sides are equal, and there are 4 right angles."
+                    },
+                    "rhombus": {
+                        "name": "Rhombus",
+                        "desc": "4 equal sides and equal opposite angles."
+                    },
+                    "rhomboid": {
+                        "name": "Rhomboid",
+                        "desc": "Opposite sides and opposite angles are equal."
+                    }
+                },
+                "non_parallelograms": {
+                    "title": "Non-Parallelograms",
+                    "trapezium": {
+                        "name": "Trapezium",
+                        "desc": "Only two of its opposite sides are parallel."
+                    },
+                    "trapezoid": {
+                        "name": "Trapezoid",
+                        "desc": "No side is parallel to its opposite side."
+                    }
+                }
+            },
+            "pythagoras": {
+                "title": "Pythagoras' Theorem",
+                "desc": "In every right-angled triangle, the square of the hypotenuse is equal to the sum of the squares of the legs.",
+                "legend": "Where 'c' is the hypotenuse, and 'a' and 'b' are the legs."
+            },
+            "areas_perimeters": {
+                "title": "Areas and Perimeters",
+                "desc": "Formulas for calculating the area and perimeter of the most common plane shapes.",
+                "square": {
+                    "name": "Square"
+                },
+                "rectangle": {
+                    "name": "Rectangle"
+                },
+                "triangle": {
+                    "name": "Triangle"
+                },
+                "circle": {
+                    "name": "Circle"
+                },
+                "rhombus": {
+                    "name": "Rhombus"
+                },
+                "trapezium": {
+                    "name": "Trapezium",
+                    "perimeter_desc": "Sum of its sides"
+                }
+            }
+        },
+        "lab": {
+            "title": "Geometry Room",
+            "subtitle": "Calculate the area of random shapes.",
+            "streak": "Streak",
+            "tool_title": "Area Challenge",
+            "new_problem": "New Challenge",
+            "side": "Side",
+            "base": "Base",
+            "height": "Height",
+            "radius": "Radius",
+            "find_area": "Calculate the area of this shape.",
+            "find_area_rounded": "Calculate the area of this shape (rounded to the nearest integer).",
+            "check": "Check",
+            "show_solution": "View Solution",
+            "correct": "Correct! Excellent calculation.",
+            "incorrect": "Incorrect. Try again or look at the solution.",
+            "solution_title": "Solution",
+            "next_problem": "Next Challenge"
+        }
+    },
+    "taulakGrafikoak": {
+        "title": "Tables and Graphs",
+        "subtitle": "Fundamentals of Statistics",
+        "home": {
+            "title": "Tables and Graphs",
+            "subtitle": "Represent the world of data",
+            "description": "Learn how to collect, organise and represent information using statistics.",
+            "startTheory": "Explore Theory",
+            "features": {
+                "title": "What will you learn?",
+                "f1": {
+                    "title": "Population and Sample",
+                    "desc": "Learn who to ask to get information."
+                },
+                "f2": {
+                    "title": "Statistical Variables",
+                    "desc": "Learn to tell the difference between types of data (qualitative and quantitative)."
+                },
+                "f3": {
+                    "title": "Frequencies and Tables",
+                    "desc": "Learn how to organise data and understand what it means."
+                },
+                "f4": {
+                    "title": "Graphs and Measures",
+                    "desc": "Learn to create graphs and analyse basic statistical measures (Mean, Median, Mode)."
+                }
+            },
+            "curriculum": {
+                "title": "Curriculum Alignment: 1st ESO",
+                "c1": "Understanding the concepts of population, sample and individual.",
+                "c2": "Telling apart qualitative and quantitative statistical variables.",
+                "c3": "Creating absolute and relative frequency tables.",
+                "c4": "Representing data using bar charts and pie charts."
+            }
+        },
+        "theory": {
+            "title": "Statistics Theory",
+            "subtitle": "A guide to understanding data",
+            "sections": {
+                "poblacion": "Population and Sample",
+                "variables": "Statistical Variables",
+                "frecuencias": "Frequencies and Tables",
+                "graficos": "Statistical Graphs",
+                "medidas": "Statistical Measures"
+            },
+            "poblacion": {
+                "title": "Population and Sample",
+                "description": "Before collecting information, we must be clear about who we are going to ask.",
+                "population": {
+                    "title": "Population",
+                    "text": "It is the set of ALL the elements or people that we want to study."
+                },
+                "sample": {
+                    "title": "Sample",
+                    "text": "It is a representative part of the population. We often cannot ask everyone, so we take a sample."
+                },
+                "individual": {
+                    "title": "Individual",
+                    "text": "Each one of the members of the population or sample."
+                }
+            },
+            "variables": {
+                "title": "Statistical Variables",
+                "description": "It is the characteristic that is studied for each individual.",
+                "qualitative": {
+                    "title": "Qualitative Variables",
+                    "text": "They are not measured with numbers. They represent a quality or characteristic (e.g. eye colour, favourite sport)."
+                },
+                "quantitative": {
+                    "title": "Quantitative Variables",
+                    "text": "They are expressed using numbers. They can be of two types:",
+                    "discrete": "Discrete: They take separate values, usually integers (e.g. number of siblings: 0, 1, 2...).",
+                    "continuous": "Continuous: They can take any value within an interval, including decimals (e.g. height, weight)."
+                }
+            },
+            "frecuencias": {
+                "title": "Frequencies and Tables",
+                "description": "We organise data into tables to understand it better.",
+                "absolute": {
+                    "title": "Absolute Frequency (fi)",
+                    "text": "The number of times a value or piece of data appears."
+                },
+                "relative": {
+                    "title": "Relative Frequency (hi)",
+                    "text": "It is the result of dividing the absolute frequency by the total number of data (N): hi = fi / N."
+                },
+                "percentage": {
+                    "title": "Percentage (%)",
+                    "text": "It is found by multiplying the relative frequency by 100. It shows what percentage of the total it represents."
+                }
+            },
+            "graficos": {
+                "title": "Statistical Graphs",
+                "description": "They are used to understand data visually and quickly.",
+                "bar": {
+                    "title": "Bar Chart",
+                    "text": "It is used for qualitative or discrete quantitative variables. The frequency is shown by the height of the bars."
+                },
+                "pie": {
+                    "title": "Pie Chart",
+                    "text": "Ideal for showing the parts (percentages) of a total. The circle is divided into slices, like a pie."
+                }
+            },
+            "medidas": {
+                "title": "Statistical Measures",
+                "description": "To summarise a set of data with one or a few values.",
+                "media": {
+                    "title": "Arithmetic Mean",
+                    "text": "The sum of all the data divided by the number of data values. (Only possible with quantitative variables.)"
+                },
+                "mediana": {
+                    "title": "Median",
+                    "text": "The value in the middle after the data are put in order from smallest to largest."
+                },
+                "moda": {
+                    "title": "Mode",
+                    "text": "The value that appears most often (the one with the highest absolute frequency)."
+                },
+                "rango": {
+                    "title": "Range",
+                    "text": "The difference between the maximum value and the minimum value."
+                }
+            }
+        },
+        "lab": {
+            "title": "Data Lab",
+            "subtitle": "Build your tables and graphs.",
+            "tabs": {
+                "variables": "Classify Variables",
+                "frequencies": "Frequency Table",
+                "graphs": "Insert Graphs"
+            },
+            "variablesTool": {
+                "title": "Classify the Variables",
+                "description": "Choose the correct type for each element.",
+                "qualitative": "Qualitative",
+                "quantDiscrete": "Discrete Quantitative",
+                "quantContinuous": "Continuous Quantitative"
+            },
+            "frequencyTool": {
+                "title": "Complete the Table",
+                "description": "Calculate the relative frequency and the percentage from this data.",
+                "data": "Data",
+                "fi": "fi (Absolute)",
+                "hi": "hi (Relative)",
+                "percent": "% (Percentage)",
+                "check": "Check Table",
+                "correct": "Correct table!",
+                "incorrect": "There are mistakes in the table. Review it."
+            }
+        }
+    },
+    "routeError": {
+        "title": "Something went wrong",
+        "description": "This page could not be loaded. Try again or go back to the home page.",
+        "notFoundTitle": "We couldn't find this page",
+        "notFoundDescription": "The link may be out of date, or the address may be typed incorrectly.",
+        "retry": "Try again",
+        "home": "Back to home"
+    },
+    "footer": {
+        "copyright": "© 2026 Matella - Basque Country",
+        "accessibility": "Accessibility",
+        "privacy": "Privacy",
+        "credits": "Credits"
+    }
+}

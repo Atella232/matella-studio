@@ -72,9 +72,9 @@ const ROSE = '#f6d9d2'
 const MINT = '#d6eddf'
 
 type Point = [number, number]
-type Text = { eu: string; es: string; ar: string }
+type Text = { eu: string; es: string; en: string; ar: string }
 
-const say = (eu: string, es: string, ar: string): Text => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): Text => ({ eu, es, en, ar })
 /** {,} in LaTeX becomes the point in Arabic */
 const localLatex = (language: string, latex: string) => (language === 'ar' ? latex.replace(/\{,\}/g, '.') : latex)
 const points = (list: Point[]) => list.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ')
@@ -183,16 +183,16 @@ export function SquaresTool(props: LabToolProps) {
     const exact = exactRoot(square)
     const controls = (
         <>
-            <Stepper label={l(say('b katetoa', 'Cateto b', 'الضلع القائم b'))} value={b} min={1} max={LEG_MAX} onChange={(value) => setState((s) => setSquares(s, { b: value }))} language={props.language} />
-            <Stepper label={l(say('c katetoa', 'Cateto c', 'الضلع القائم c'))} value={c} min={1} max={LEG_MAX} onChange={(value) => setState((s) => setSquares(s, { c: value }))} language={props.language} />
+            <Stepper label={l(say('b katetoa', 'Cateto b', 'الضلع القائم b', 'Leg b'))} value={b} min={1} max={LEG_MAX} onChange={(value) => setState((s) => setSquares(s, { b: value }))} language={props.language} />
+            <Stepper label={l(say('c katetoa', 'Cateto c', 'الضلع القائم c', 'Leg c'))} value={c} min={1} max={LEG_MAX} onChange={(value) => setState((s) => setSquares(s, { c: value }))} language={props.language} />
         </>
     )
     const note = exact !== null
-        ? l(say(`Hipotenusa zehatza: ${b}, ${c}, ${exact} hirukote pitagorikoa da.`, `Hipotenusa exacta: ${b}, ${c}, ${exact} es una terna pitagórica.`, `وتر دقيق: ${b}، ${c}، ${exact} ثلاثية فيثاغورية.`))
-        : l(say('Karratu handiaren azalera ez da karratu perfektua: hipotenusa ez da osoa.', 'El área del cuadrado grande no es un cuadrado perfecto: la hipotenusa no es entera.', 'مساحة المربع الكبير ليست مربعًا كاملًا: الوتر ليس عددًا صحيحًا.'))
+        ? l(say(`Hipotenusa zehatza: ${b}, ${c}, ${exact} hirukote pitagorikoa da.`, `Hipotenusa exacta: ${b}, ${c}, ${exact} es una terna pitagórica.`, `وتر دقيق: ${b}، ${c}، ${exact} ثلاثية فيثاغورية.`, `Exact hypotenuse: ${b}, ${c}, ${exact} form a Pythagorean triple.`))
+        : l(say('Karratu handiaren azalera ez da karratu perfektua: hipotenusa ez da osoa.', 'El área del cuadrado grande no es un cuadrado perfecto: la hipotenusa no es entera.', 'مساحة المربع الكبير ليست مربعًا كاملًا: الوتر ليس عددًا صحيحًا.', 'The area of the large square is not a perfect square: the hypotenuse is not a whole number.'))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={`${b * b}+${c * c}=${square}\\qquad a=${rootLatex(square)}`} note={note} />} challenges={squaresChallenges} state={state}>
-            <Board height={350} label={l(say('Katetoen eta hipotenusaren gaineko karratuak', 'Cuadrados sobre los catetos y la hipotenusa', 'المربعات على الضلعين القائمين والوتر'))}>
+            <Board height={350} label={l(say('Katetoen eta hipotenusaren gaineko karratuak', 'Cuadrados sobre los catetos y la hipotenusa', 'المربعات على الضلعين القائمين والوتر', 'Squares on the legs and the hypotenuse'))}>
                 <GridSquare a={C} b={A} away={B} n={b} fill={STAGE_TINT} label={String(b * b)} />
                 <GridSquare a={B} b={C} away={A} n={c} fill={SOFT} label={String(c * c)} />
                 <GridSquare a={A} b={B} away={C} n={exact ?? 0} fill={ROSE} label={String(square)} />
@@ -206,10 +206,10 @@ export function SquaresTool(props: LabToolProps) {
 /* ---------- 2. Three sides: what triangle? ---------- */
 
 const kindName: Record<TriangleKind, Text> = {
-    impossible: say('Ez da ixten', 'No se cierra', 'لا ينغلق'),
-    acute: say('Angelu-zorrotza', 'Acutángulo', 'حاد الزوايا'),
-    right: say('Angeluzuzena', 'Rectángulo', 'قائم الزاوية'),
-    obtuse: say('Angelu-kamutsa', 'Obtusángulo', 'منفرج الزاوية')
+    impossible: say('Ez da ixten', 'No se cierra', 'لا ينغلق', 'It does not close'),
+    acute: say('Angelu-zorrotza', 'Acutángulo', 'حاد الزوايا', 'Acute-angled'),
+    right: say('Angeluzuzena', 'Rectángulo', 'قائم الزاوية', 'Right-angled'),
+    obtuse: say('Angelu-kamutsa', 'Obtusángulo', 'منفرج الزاوية', 'Obtuse-angled')
 }
 const kindColor: Record<TriangleKind, string> = { impossible: MUTED, acute: STAGE, right: GREEN, obtuse: SECOND }
 
@@ -231,7 +231,7 @@ export function ClassifyTool(props: LabToolProps) {
     const controls = (
         <>
             {(['a', 'b', 'c'] as const).map((key) => (
-                <Stepper key={key} label={l(say(`${key} aldea`, `Lado ${key}`, `الضلع ${key}`))} value={state[key]} min={1} max={SIDE_MAX} onChange={(value) => setState((s) => setClassify(s, { [key]: value }))} language={props.language} />
+                <Stepper key={key} label={l(say(`${key} aldea`, `Lado ${key}`, `الضلع ${key}`, `Side ${key}`))} value={state[key]} min={1} max={SIDE_MAX} onChange={(value) => setState((s) => setClassify(s, { [key]: value }))} language={props.language} />
             ))}
         </>
     )
@@ -239,7 +239,7 @@ export function ClassifyTool(props: LabToolProps) {
         ? `${big}\\geq ${middle}+${small}`
         : `${big}^{2}=${big * big}\\quad ${sign}\\quad ${middle}^{2}+${small}^{2}=${sum}`
     const note = kind === 'impossible'
-        ? l(say('Alde handiena ez da beste bien batura baino txikiagoa: aldeak ez dira elkartzen.', 'El lado mayor no es menor que la suma de los otros dos: los lados no se juntan.', 'الضلع الأكبر ليس أصغر من مجموع الآخرين: لا يلتقي الضلعان.'))
+        ? l(say('Alde handiena ez da beste bien batura baino txikiagoa: aldeak ez dira elkartzen.', 'El lado mayor no es menor que la suma de los otros dos: los lados no se juntan.', 'الضلع الأكبر ليس أصغر من مجموع الآخرين: لا يلتقي الضلعان.', 'The longest side is not shorter than the sum of the other two: the sides do not join up.'))
         : l(kindName[kind])
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={classifyChallenges} state={state}>
@@ -281,20 +281,20 @@ export function SolveTool(props: LabToolProps) {
     const unknownText = rootShort(square)
     const controls = (
         <>
-            <Segmented label={l(say('Zer bilatu', 'Qué buscar', 'ماذا نبحث'))} value={state.unknown} options={[{ value: 'hypotenuse', label: l(say('Hipotenusa', 'Hipotenusa', 'الوتر')) }, { value: 'leg', label: l(say('Katetoa', 'Cateto', 'الضلع القائم')) }]} onChange={(unknown) => setState((s) => setSolve(s, { unknown: unknown as Unknown }))} />
-            <Stepper label={l(say('Kateto ezaguna', 'Cateto conocido', 'الضلع القائم المعلوم'))} value={state.first} min={1} max={state.unknown === 'leg' ? SOLVE_MAX - 1 : SOLVE_MAX} onChange={(first) => setState((s) => setSolve(s, { first }))} language={props.language} />
-            <Stepper label={state.unknown === 'hypotenuse' ? l(say('Beste katetoa', 'El otro cateto', 'الضلع القائم الآخر')) : l(say('Hipotenusa', 'Hipotenusa', 'الوتر'))} value={state.second} min={state.unknown === 'leg' ? 2 : 1} max={SOLVE_MAX} onChange={(second) => setState((s) => setSolve(s, { second }))} language={props.language} />
+            <Segmented label={l(say('Zer bilatu', 'Qué buscar', 'ماذا نبحث', 'What to find'))} value={state.unknown} options={[{ value: 'hypotenuse', label: l(say('Hipotenusa', 'Hipotenusa', 'الوتر', 'Hypotenuse')) }, { value: 'leg', label: l(say('Katetoa', 'Cateto', 'الضلع القائم', 'Leg')) }]} onChange={(unknown) => setState((s) => setSolve(s, { unknown: unknown as Unknown }))} />
+            <Stepper label={l(say('Kateto ezaguna', 'Cateto conocido', 'الضلع القائم المعلوم', 'Known leg'))} value={state.first} min={1} max={state.unknown === 'leg' ? SOLVE_MAX - 1 : SOLVE_MAX} onChange={(first) => setState((s) => setSolve(s, { first }))} language={props.language} />
+            <Stepper label={state.unknown === 'hypotenuse' ? l(say('Beste katetoa', 'El otro cateto', 'الضلع القائم الآخر', 'The other leg')) : l(say('Hipotenusa', 'Hipotenusa', 'الوتر', 'Hypotenuse'))} value={state.second} min={state.unknown === 'leg' ? 2 : 1} max={SOLVE_MAX} onChange={(second) => setState((s) => setSolve(s, { second }))} language={props.language} />
         </>
     )
     const latex = state.unknown === 'hypotenuse'
         ? `a=\\sqrt{${state.first}^{2}+${state.second}^{2}}=${rootLatex(square)}`
         : `b=\\sqrt{${state.second}^{2}-${state.first}^{2}}=${rootLatex(square)}`
     const note = state.unknown === 'hypotenuse'
-        ? l(say('Hipotenusa: karratuak batu eta erroa.', 'Hipotenusa: suma los cuadrados y saca la raíz.', 'الوتر: اجمع المربعين وخذ الجذر.'))
-        : l(say('Katetoa: hipotenusaren karratuari beste katetoarena kendu.', 'Cateto: al cuadrado de la hipotenusa réstale el del otro cateto.', 'الضلع القائم: اطرح مربع الضلع الآخر من مربع الوتر.'))
+        ? l(say('Hipotenusa: karratuak batu eta erroa.', 'Hipotenusa: suma los cuadrados y saca la raíz.', 'الوتر: اجمع المربعين وخذ الجذر.', 'Hypotenuse: add the squares and take the square root.'))
+        : l(say('Katetoa: hipotenusaren karratuari beste katetoarena kendu.', 'Cateto: al cuadrado de la hipotenusa réstale el del otro cateto.', 'الضلع القائم: اطرح مربع الضلع الآخر من مربع الوتر.', 'Leg: subtract the square of the other leg from the square of the hypotenuse.'))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={solveChallenges} state={state}>
-            <Board height={310} label={l(say('Triangelu angeluzuzena', 'Triángulo rectángulo', 'مثلث قائم'))}>
+            <Board height={310} label={l(say('Triangelu angeluzuzena', 'Triángulo rectángulo', 'مثلث قائم', 'Right-angled triangle'))}>
                 <polygon points={points([A, B, C])} fill={state.unknown === 'hypotenuse' ? STAGE_TINT : MINT} stroke={INK} strokeWidth={2.6} strokeLinejoin="round" />
                 <line x1={state.unknown === 'hypotenuse' ? A[0] : C[0]} y1={state.unknown === 'hypotenuse' ? A[1] : C[1]} x2={state.unknown === 'hypotenuse' ? B[0] : A[0]} y2={state.unknown === 'hypotenuse' ? B[1] : A[1]} stroke={SECOND} strokeWidth={5} strokeLinecap="round" />
                 <RightMark v={C} a={A} b={B} />
@@ -309,19 +309,19 @@ export function SolveTool(props: LabToolProps) {
 /* ---------- 4. The hidden right triangle ---------- */
 
 const shapeNames: Record<FigureShape, Text> = {
-    isosceles: say('Isoszelea', 'Isósceles', 'متساوي الساقين'),
-    rectangle: say('Laukizuzena', 'Rectángulo', 'مستطيل'),
-    rhombus: say('Erronboa', 'Rombo', 'معيّن'),
-    trapezoid: say('Trapezioa', 'Trapecio', 'شبه منحرف'),
-    hexagon: say('Hexagonoa', 'Hexágono', 'مسدس')
+    isosceles: say('Isoszelea', 'Isósceles', 'متساوي الساقين', 'Isosceles'),
+    rectangle: say('Laukizuzena', 'Rectángulo', 'مستطيل', 'Rectangle'),
+    rhombus: say('Erronboa', 'Rombo', 'معيّن', 'Rhombus'),
+    trapezoid: say('Trapezioa', 'Trapecio', 'شبه منحرف', 'Trapezium'),
+    hexagon: say('Hexagonoa', 'Hexágono', 'مسدس', 'Hexagon')
 }
 
 const paramNames: Record<FigureShape, Text[]> = {
-    isosceles: [say('Oinarria', 'Base', 'القاعدة'), say('Alde berdina', 'Lado igual', 'الساق')],
-    rectangle: [say('Oinarria', 'Base', 'القاعدة'), say('Altuera', 'Altura', 'الارتفاع')],
-    rhombus: [say('Diagonal handia', 'Diagonal mayor', 'القطر الأكبر'), say('Diagonal txikia', 'Diagonal menor', 'القطر الأصغر')],
-    trapezoid: [say('Oinarri handia', 'Base mayor', 'القاعدة الكبرى'), say('Oinarri txikia', 'Base menor', 'القاعدة الصغرى'), say('Alde zeiharra', 'Lado oblicuo', 'الضلع المائل')],
-    hexagon: [say('Aldea', 'Lado', 'الضلع')]
+    isosceles: [say('Oinarria', 'Base', 'القاعدة', 'Base'), say('Alde berdina', 'Lado igual', 'الساق', 'Equal side')],
+    rectangle: [say('Oinarria', 'Base', 'القاعدة', 'Base'), say('Altuera', 'Altura', 'الارتفاع', 'Height')],
+    rhombus: [say('Diagonal handia', 'Diagonal mayor', 'القطر الأكبر', 'Longer diagonal'), say('Diagonal txikia', 'Diagonal menor', 'القطر الأصغر', 'Shorter diagonal')],
+    trapezoid: [say('Oinarri handia', 'Base mayor', 'القاعدة الكبرى', 'Longer base'), say('Oinarri txikia', 'Base menor', 'القاعدة الصغرى', 'Shorter base'), say('Alde zeiharra', 'Lado oblicuo', 'الضلع المائل', 'Slanted side')],
+    hexagon: [say('Aldea', 'Lado', 'الضلع', 'Side')]
 }
 
 /** A label beside segment ab, on the side away from the point `away` */
@@ -394,14 +394,14 @@ export function FigureTool(props: LabToolProps) {
     const unknownName = { isosceles: 'h', rectangle: 'd', rhombus: 'l', trapezoid: 'h', hexagon: 'ap' }[state.shape]
     const latex = builds ? `${unknownName}=\\sqrt{${knownLatex}}=${rootLatex(hidden.unknownSquare)}` : `${knownLatex}\\leq 0`
     const note = !builds
-        ? l(say('Irudi hau ezin da eraiki: alde zeiharra laburregia da.', 'Esta figura no se puede construir: el lado inclinado es demasiado corto.', 'لا يمكن إنشاء هذا الشكل: الضلع المائل أقصر من اللازم.'))
+        ? l(say('Irudi hau ezin da eraiki: alde zeiharra laburregia da.', 'Esta figura no se puede construir: el lado inclinado es demasiado corto.', 'لا يمكن إنشاء هذا الشكل: الضلع المائل أقصر من اللازم.', 'This shape cannot be built: the slanted side is too short.'))
         : hidden.hypotenuse === null
-            ? l(say('Bi katetoak ezagunak dira: batu karratuak.', 'Se conocen los dos catetos: suma los cuadrados.', 'الضلعان القائمان معلومان: اجمع المربعين.'))
-            : l(say('Hipotenusa eta kateto bat ezagunak dira: kendu karratuak.', 'Se conocen la hipotenusa y un cateto: resta los cuadrados.', 'الوتر وضلع قائم معلومان: اطرح المربعين.'))
+            ? l(say('Bi katetoak ezagunak dira: batu karratuak.', 'Se conocen los dos catetos: suma los cuadrados.', 'الضلعان القائمان معلومان: اجمع المربعين.', 'Both legs are known: add the squares.'))
+            : l(say('Hipotenusa eta kateto bat ezagunak dira: kendu karratuak.', 'Se conocen la hipotenusa y un cateto: resta los cuadrados.', 'الوتر وضلع قائم معلومان: اطرح المربعين.', 'The hypotenuse and one leg are known: subtract the squares.'))
     const params = figureParams[state.shape]
     const controls = (
         <>
-            <Segmented label={l(say('Irudia', 'Figura', 'الشكل'))} value={state.shape} options={FIGURE_SHAPES.map((shape) => ({ value: shape, label: l(shapeNames[shape]) }))} onChange={(shape) => setState((s) => setFigure(s, { shape: shape as FigureShape }))} />
+            <Segmented label={l(say('Irudia', 'Figura', 'الشكل', 'Shape'))} value={state.shape} options={FIGURE_SHAPES.map((shape) => ({ value: shape, label: l(shapeNames[shape]) }))} onChange={(shape) => setState((s) => setFigure(s, { shape: shape as FigureShape }))} />
             {params.map((param, index) => (
                 <Stepper key={`${state.shape}-${param.key}`} label={l(paramNames[state.shape][index])} value={state[param.key]} min={param.min} max={param.max} step={param.step} onChange={(value) => setState((s) => setFigure(s, { [param.key]: value }))} language={props.language} />
             ))}
@@ -453,20 +453,20 @@ export function CircleTool(props: LabToolProps) {
     const chord = chordLength(state)
     const controls = (
         <>
-            <Segmented label={l(say('Zer', 'Qué', 'ماذا'))} value={state.mode} options={[{ value: 'chord', label: l(say('Korda', 'Cuerda', 'وتر')) }, { value: 'tangent', label: l(say('Ukitzailea', 'Tangente', 'مماس')) }]} onChange={(mode) => setState((s) => setCircle(s, { mode: mode as CircleMode }))} />
-            <Stepper label={l(say('Erradioa', 'Radio', 'نصف القطر'))} value={state.r} min={1} max={CIRCLE_RADIUS_MAX} onChange={(r) => setState((s) => setCircle(s, { r }))} language={props.language} />
-            <Stepper label={isChord ? l(say('Zentrorako distantzia', 'Distancia al centro', 'البعد عن المركز')) : l(say('PT ukitzailea', 'Tangente PT', 'المماس PT'))} value={state.d} min={isChord ? 0 : 1} max={isChord ? state.r - 1 : TANGENT_MAX} onChange={(d) => setState((s) => setCircle(s, { d }))} language={props.language} />
+            <Segmented label={l(say('Zer', 'Qué', 'ماذا', 'What'))} value={state.mode} options={[{ value: 'chord', label: l(say('Korda', 'Cuerda', 'وتر', 'Chord')) }, { value: 'tangent', label: l(say('Ukitzailea', 'Tangente', 'مماس', 'Tangent')) }]} onChange={(mode) => setState((s) => setCircle(s, { mode: mode as CircleMode }))} />
+            <Stepper label={l(say('Erradioa', 'Radio', 'نصف القطر', 'Radius'))} value={state.r} min={1} max={CIRCLE_RADIUS_MAX} onChange={(r) => setState((s) => setCircle(s, { r }))} language={props.language} />
+            <Stepper label={isChord ? l(say('Zentrorako distantzia', 'Distancia al centro', 'البعد عن المركز', 'Distance to the centre')) : l(say('PT ukitzailea', 'Tangente PT', 'المماس PT', 'Tangent PT'))} value={state.d} min={isChord ? 0 : 1} max={isChord ? state.r - 1 : TANGENT_MAX} onChange={(d) => setState((s) => setCircle(s, { d }))} language={props.language} />
         </>
     )
     const latex = isChord
         ? `\\frac{k}{2}=\\sqrt{${state.r}^{2}-${state.d}^{2}}=${rootLatex(square)}${chord !== null ? `\\qquad k=${chord}` : ''}`
         : `OP=\\sqrt{${state.r}^{2}+${state.d}^{2}}=${rootLatex(square)}`
     const note = isChord
-        ? l(say('Erradioa hipotenusa da; distantzia eta korda-erdia, katetoak.', 'El radio es la hipotenusa; la distancia y media cuerda, los catetos.', 'نصف القطر هو الوتر؛ والبعد ونصف الوتر هما الضلعان القائمان.'))
-        : l(say('Angelu zuzena T puntuan dago; OP hipotenusa da.', 'El ángulo recto está en T; OP es la hipotenusa.', 'الزاوية القائمة عند T؛ وOP هو الوتر.'))
+        ? l(say('Erradioa hipotenusa da; distantzia eta korda-erdia, katetoak.', 'El radio es la hipotenusa; la distancia y media cuerda, los catetos.', 'نصف القطر هو الوتر؛ والبعد ونصف الوتر هما الضلعان القائمان.', 'The radius is the hypotenuse; the distance and half the chord are the legs.'))
+        : l(say('Angelu zuzena T puntuan dago; OP hipotenusa da.', 'El ángulo recto está en T; OP es la hipotenusa.', 'الزاوية القائمة عند T؛ وOP هو الوتر.', 'The right angle is at T; OP is the hypotenuse.'))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={circleChallenges} state={state}>
-            <Board height={310} label={isChord ? l(say('Korda', 'Cuerda', 'وتر')) : l(say('Ukitzailea', 'Tangente', 'مماس'))}>
+            <Board height={310} label={isChord ? l(say('Korda', 'Cuerda', 'وتر', 'Chord')) : l(say('Ukitzailea', 'Tangente', 'مماس', 'Tangent'))}>
                 <circle cx={O[0]} cy={O[1]} r={radius} fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} />
                 {isChord ? (
                     <g>
@@ -523,16 +523,16 @@ export function BoxTool(props: LabToolProps) {
     const space = spaceSquare(state)
     const controls = (
         <>
-            <Stepper label={l(say('Luzera', 'Largo', 'الطول'))} value={a} min={1} max={BOX_MAX} onChange={(value) => setState((st) => setBox(st, { a: value }))} language={props.language} />
-            <Stepper label={l(say('Zabalera', 'Ancho', 'العرض'))} value={b} min={1} max={BOX_MAX} onChange={(value) => setState((st) => setBox(st, { b: value }))} language={props.language} />
-            <Stepper label={l(say('Altuera', 'Alto', 'الارتفاع'))} value={c} min={1} max={BOX_MAX} onChange={(value) => setState((st) => setBox(st, { c: value }))} language={props.language} />
+            <Stepper label={l(say('Luzera', 'Largo', 'الطول', 'Length'))} value={a} min={1} max={BOX_MAX} onChange={(value) => setState((st) => setBox(st, { a: value }))} language={props.language} />
+            <Stepper label={l(say('Zabalera', 'Ancho', 'العرض', 'Width'))} value={b} min={1} max={BOX_MAX} onChange={(value) => setState((st) => setBox(st, { b: value }))} language={props.language} />
+            <Stepper label={l(say('Altuera', 'Alto', 'الارتفاع', 'Height'))} value={c} min={1} max={BOX_MAX} onChange={(value) => setState((st) => setBox(st, { c: value }))} language={props.language} />
         </>
     )
     const latex = `d^{2}=${a}^{2}+${b}^{2}=${base}\\qquad D=\\sqrt{${base}+${c}^{2}}=${rootLatex(space)}`
-    const note = l(say('Oinarriaren diagonala eta altuera dira diagonal handiaren katetoak.', 'La diagonal de la base y la altura son los catetos de la diagonal grande.', 'قطر القاعدة والارتفاع هما الضلعان القائمان للقطر الكبير.'))
+    const note = l(say('Oinarriaren diagonala eta altuera dira diagonal handiaren katetoak.', 'La diagonal de la base y la altura son los catetos de la diagonal grande.', 'قطر القاعدة والارتفاع هما الضلعان القائمان للقطر الكبير.', 'The base diagonal and the height are the legs of the big diagonal.'))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={boxChallenges} state={state}>
-            <Board height={310} label={l(say('Ortoedroa eta haren diagonala', 'El ortoedro y su diagonal', 'متوازي المستطيلات وقطره'))}>
+            <Board height={310} label={l(say('Ortoedroa eta haren diagonala', 'El ortoedro y su diagonal', 'متوازي المستطيلات وقطره', 'The cuboid and its diagonal'))}>
                 <polygon points={points([A, B, C, D])} fill={STAGE_TINT} />
                 <line x1={D[0]} y1={D[1]} x2={A[0]} y2={A[1]} stroke={MUTED} strokeWidth={1.4} strokeDasharray="5 4" />
                 <line x1={D[0]} y1={D[1]} x2={C[0]} y2={C[1]} stroke={MUTED} strokeWidth={1.4} strokeDasharray="5 4" />
@@ -574,10 +574,10 @@ export function GridTool(props: LabToolProps) {
         </>
     )
     const latex = `AB=\\sqrt{${dx}^{2}+${dy}^{2}}=${rootLatex(square)}`
-    const note = l(say(`${dx} lauki horizontalean eta ${dy} bertikalean.`, `${dx} cuadros en horizontal y ${dy} en vertical.`, `${dx} مربعات أفقيًا و${dy} عموديًا.`))
+    const note = l(say(`${dx} lauki horizontalean eta ${dy} bertikalean.`, `${dx} cuadros en horizontal y ${dy} en vertical.`, `${dx} مربعات أفقيًا و${dy} عموديًا.`, `${dx} squares horizontally and ${dy} vertically.`))
     return (
         <ToolFrame {...props} controls={controls} readout={<Readout language={props.language} latex={latex} note={note} />} challenges={gridChallenges} state={state}>
-            <Board height={310} label={l(say('Bi puntu sarean', 'Dos puntos en la cuadrícula', 'نقطتان على الشبكة'))}>
+            <Board height={310} label={l(say('Bi puntu sarean', 'Dos puntos en la cuadrícula', 'نقطتان على الشبكة', 'Two points on the grid'))}>
                 {Array.from({ length: GRID_MAX + 1 }, (_, index) => (
                     <g key={index}>
                         <line x1={x0 + index * cell} y1={y0} x2={x0 + index * cell} y2={y0 - GRID_MAX * cell} stroke={MUTED} strokeWidth={0.7} strokeOpacity={0.5} />

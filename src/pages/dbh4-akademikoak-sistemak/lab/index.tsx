@@ -38,7 +38,7 @@ export function SystemsLaboratory(props: {
             tools={systemsLabTools}
             stages={systemsStages}
             components={toolComponents}
-            title={{ eu: 'Ebatzi, irudikatu eta zenbatu', es: 'Resuelve, representa y cuenta', ar: 'حلّ ومثّل وعُدّ' }}
+            title={{ eu: 'Ebatzi, irudikatu eta zenbatu', es: 'Resuelve, representa y cuenta', en: 'Solve, graph and count', ar: 'حلّ ومثّل وعُدّ' }}
         />
     )
 }

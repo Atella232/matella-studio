@@ -1,3 +1,4 @@
+import { formulaFor } from '../src/utils/latexLanguage.ts'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import katex from 'katex'
@@ -27,11 +28,11 @@ import {
 const make = (patch: Partial<Pick<ReceiptState, 'price' | 'discount' | 'vat' | 'coupon' | 'order'>>, answer = '') => ({ ...setReceipt(initialReceiptState, patch), answer, checked: answer !== '' })
 
 function checkText(text: LocalizedText, where: string) {
-    for (const language of ['eu', 'es', 'ar'] as const) {
+    for (const language of ['eu', 'es', 'en', 'ar'] as const) {
         const line = text[language]
         assert.equal(line.split('$').length % 2, 1, `${where}: ${line}`)
         for (const [, formula] of line.matchAll(/\$([^$]+)\$/g)) {
-            katex.renderToString(formula, { throwOnError: true, strict: 'error' })
+            katex.renderToString(formulaFor(language, formula), { throwOnError: true, strict: 'error' })
             assert.ok(!/[؀-ۿ]/.test(formula), `${where}: ${formula}`)
         }
         if (language === 'eu') assert.ok(!/\d-?(an|ean|ra|era|tik|etik|ko|eko|rekin|ekin|k|z)\b/.test(line), `${where}: ${line}`)

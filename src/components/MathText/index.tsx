@@ -1,7 +1,9 @@
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import katex from 'katex'
 import 'katex/dist/katex.min.css'
 import { fixMaybeText } from '../../utils/fixText'
+import { englishLatex } from '../../utils/latexLanguage'
 import './MathText.css'
 
 type RenderPiece =
@@ -45,7 +47,7 @@ function parseMath(text: string): Array<{ type: 'text' | 'math'; value: string; 
     return pieces
 }
 
-function renderMath(latex: string, display: boolean): string {
+function renderMath(latex: string, display: boolean, language: string): string {
     const withOperators = latex
         .replace(/(^|[^\\])->/g, '$1\\to ')
         .replace(/(^|[^\\])<=/g, '$1\\le ')
@@ -67,8 +69,9 @@ function renderMath(latex: string, display: boolean): string {
         .replace(/([0-9a-zA-Z)\]}])\s*ge\s*([0-9a-zA-Z({[])/g, '$1\\ge $2')
 
     const normalized = withRecoveredCommands.replace(/\s{2,}/g, ' ').trim()
+    const localized = language.startsWith('en') ? englishLatex(normalized) : normalized
 
-    return katex.renderToString(normalized, {
+    return katex.renderToString(localized, {
         throwOnError: false,
         strict: 'ignore',
         displayMode: display,
@@ -77,6 +80,9 @@ function renderMath(latex: string, display: boolean): string {
 }
 
 export function MathText({ text, className, inline = false }: MathTextProps) {
+    const { i18n } = useTranslation()
+    const language = i18n.language
+
     const content = useMemo<RenderPiece[]>(() => {
         const parsed = parseMath(fixMaybeText(text))
         const onlyMath = parsed.length === 1 && parsed[0].type === 'math' && !inline
@@ -88,11 +94,11 @@ export function MathText({ text, className, inline = false }: MathTextProps) {
             return {
                 type: 'math',
                 key,
-                html: renderMath(piece.value, display),
+                html: renderMath(piece.value, display, language),
                 display
             }
         })
-    }, [text, inline])
+    }, [text, inline, language])
 
     return (
         <span className={['math-text', className].filter(Boolean).join(' ')}>

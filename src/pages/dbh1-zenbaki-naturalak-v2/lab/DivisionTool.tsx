@@ -14,8 +14,8 @@ export function DivisionTool(props: NaturalsToolProps) {
 
     const controls = (
         <>
-            <Stepper label={l({ eu: 'Fitxak (zatikizuna)', es: 'Fichas (dividendo)', ar: 'القطع (المقسوم)' })} value={dividend} min={1} max={DIVISION_LIMITS.dividend} onChange={(next) => setState((current) => setDivision(current, { dividend: next }))} language={props.language} />
-            <Stepper label={l({ eu: 'Taldeko (zatitzailea)', es: 'Por grupo (divisor)', ar: 'في كل مجموعة (المقسوم عليه)' })} value={divisor} min={1} max={DIVISION_LIMITS.divisor} onChange={(next) => setState((current) => setDivision(current, { divisor: next }))} language={props.language} />
+            <Stepper label={l({ eu: 'Fitxak (zatikizuna)', es: 'Fichas (dividendo)', en: 'Counters (dividend)', ar: 'القطع (المقسوم)' })} value={dividend} min={1} max={DIVISION_LIMITS.dividend} onChange={(next) => setState((current) => setDivision(current, { dividend: next }))} language={props.language} />
+            <Stepper label={l({ eu: 'Taldeko (zatitzailea)', es: 'Por grupo (divisor)', en: 'Group size (divisor)', ar: 'في كل مجموعة (المقسوم عليه)' })} value={divisor} min={1} max={DIVISION_LIMITS.divisor} onChange={(next) => setState((current) => setDivision(current, { divisor: next }))} language={props.language} />
         </>
     )
 
@@ -26,10 +26,10 @@ export function DivisionTool(props: NaturalsToolProps) {
             </span>
             <span className="fraction-v2-lab-readout-note">
                 {remainder === 0
-                    ? l({ eu: 'Ez da ezer soberan geratzen: zatiketa zehatza.', es: 'No sobra nada: división exacta.', ar: 'لا يبقى شيء: قسمة تامة.' })
-                    : l({ eu: `${remainder} fitxa soberan: zatiketa osoa (ez-zehatza).`, es: `Sobran ${remainder} fichas: división entera (inexacta).`, ar: `تبقى ${remainder} قطع: قسمة غير تامة.` })}
+                    ? l({ eu: 'Ez da ezer soberan geratzen: zatiketa zehatza.', es: 'No sobra nada: división exacta.', en: 'Nothing is left over: exact division.', ar: 'لا يبقى شيء: قسمة تامة.' })
+                    : l({ eu: `${remainder} fitxa soberan: zatiketa osoa (ez-zehatza).`, es: `Sobran ${remainder} fichas: división entera (inexacta).`, en: `${remainder} counters are left over: whole-number division (not exact).`, ar: `تبقى ${remainder} قطع: قسمة غير تامة.` })}
             </span>
-            <span className="fraction-v2-lab-readout-note">{l({ eu: 'Zenbat talde oso daude? Hori da zatidura.', es: '¿Cuántos grupos completos hay? Ese es el cociente.', ar: 'كم مجموعة كاملة؟ هذا هو خارج القسمة.' })}</span>
+            <span className="fraction-v2-lab-readout-note">{l({ eu: 'Zenbat talde oso daude? Hori da zatidura.', es: '¿Cuántos grupos completos hay? Ese es el cociente.', en: 'How many full groups are there? That is the quotient.', ar: 'كم مجموعة كاملة؟ هذا هو خارج القسمة.' })}</span>
             <NaturalAnswer language={props.language} state={state} expected={{ numerator: quotient, denominator: 1 }} onChange={(patch) => setState((current) => ({ ...current, ...patch }))} />
         </>
     )

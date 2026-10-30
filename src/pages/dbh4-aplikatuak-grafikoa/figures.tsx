@@ -4,6 +4,7 @@ import { Figure } from '../dbh2-zatikiak-prototype/figures'
 import { AxisTitles, Label, PlaneGrid, PlaneLine, PlanePath, PlanePoint } from '../dbh2-funtzioak-v2/plane'
 import { useBoxClip } from '../dbh2-funtzioak-v2/planeClip'
 import { planeMap, type PlaneBox, type PlaneMap } from '../dbh2-funtzioak-v2/planeMap'
+import { decimalSeparatorFor } from '../../utils/numberFormat'
 import { exponentialCurve, hyperbolaBranches, rootCurve, sampled } from './functions'
 
 /* ==========================================================================
@@ -27,10 +28,10 @@ const CARD = 'var(--card, #fffcf6)'
 const PAPER = '#fffcf6'
 const SERIF = 'Fraunces, serif'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language, text)
 /** A decimal written with a comma, or with a point in Arabic */
-const dec = (language: UnitLanguage, value: string) => (language === 'ar' ? value.replace(/,/g, '.') : value)
+const dec = (language: UnitLanguage, value: string) => (language === 'ar' ? value.replace(/,/g, '.') : value.replace(/,/g, decimalSeparatorFor(language)))
 
 function Caption({ y, language, text }: { y: number; language: UnitLanguage; text: LocalizedText }) {
     return <Label x={360} y={y} textAnchor="middle" fontSize={15} fill={MUTED}>{pick(language, text)}</Label>
@@ -87,8 +88,8 @@ export function LinearModelsFigure({ language }: { language: UnitLanguage }) {
     // One square = 20 cm on the y axis
     const length = (kg: number) => (30 + 15 * kg) / 20
     return (
-        <Figure height={330} label={pick(language, say('Malguki baten luzera: y = 30 + 15x', 'La longitud de un muelle: y = 30 + 15x', 'طول نابض: y = 30 + 15x'))}>
-            <Frame box={{ xMin: 0, xMax: 5, yMin: 0, yMax: 6 }} cell={36} ox={70} oy={44} yUnit={20} xTitle={pick(language, say('pisua (kg)', 'peso (kg)', 'الوزن (كغ)'))} yTitle={pick(language, say('luzera (cm)', 'longitud (cm)', 'الطول (سم)'))}>
+        <Figure height={330} label={pick(language, say('Malguki baten luzera: y = 30 + 15x', 'La longitud de un muelle: y = 30 + 15x', 'طول نابض: y = 30 + 15x', 'The length of a spring: y = 30 + 15x'))}>
+            <Frame box={{ xMin: 0, xMax: 5, yMin: 0, yMax: 6 }} cell={36} ox={70} oy={44} yUnit={20} xTitle={pick(language, say('pisua (kg)', 'peso (kg)', 'الوزن (كغ)', 'weight (kg)'))} yTitle={pick(language, say('luzera (cm)', 'longitud (cm)', 'الطول (سم)', 'length (cm)'))}>
                 {(map, clip) => (
                     <g>
                         <PlanePath map={map} points={[[0, length(0)], [5, length(5)]]} color={STAGE} width={3.4} clip={clip} />
@@ -97,12 +98,12 @@ export function LinearModelsFigure({ language }: { language: UnitLanguage }) {
                 )}
             </Frame>
             <Formula x={340} y={74} size={26} color={STAGE}>y = 30 + 15x</Formula>
-            <Label x={340} y={118} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('n = 30: hasierako luzera', 'n = 30: la longitud inicial', 'n = 30: الطول الابتدائي'))}</Label>
-            <Label x={340} y={150} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('m = 15: cm kilo bakoitzeko', 'm = 15: cm por cada kilo', 'm = 15: سم لكل كيلوغرام'))}</Label>
+            <Label x={340} y={118} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('n = 30: hasierako luzera', 'n = 30: la longitud inicial', 'n = 30: الطول الابتدائي', 'n = 30: the starting length'))}</Label>
+            <Label x={340} y={150} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('m = 15: cm kilo bakoitzeko', 'm = 15: cm por cada kilo', 'm = 15: سم لكل كيلوغرام', 'm = 15: cm per kilogram'))}</Label>
             <Formula x={340} y={196} size={17}>x = 4  →  y = 30 + 60 = 90</Formula>
-            <Label x={340} y={232} fontSize={15} fill={MUTED}>{pick(language, say('Aldaketa berdinak, gehikuntza berdinak:', 'A aumentos iguales, aumentos iguales:', 'زيادات متساوية تعطي زيادات متساوية:'))}</Label>
-            <Label x={340} y={256} fontSize={15} fill={MUTED}>{pick(language, say('grafikoa zuzen bat da', 'la gráfica es una recta', 'الرسم خط مستقيم'))}</Label>
-            <Caption y={318} language={language} text={say('Funtzio lineal bat: y = mx + n', 'Una función lineal: y = mx + n', 'دالة خطية: y = mx + n')} />
+            <Label x={340} y={232} fontSize={15} fill={MUTED}>{pick(language, say('Aldaketa berdinak, gehikuntza berdinak:', 'A aumentos iguales, aumentos iguales:', 'زيادات متساوية تعطي زيادات متساوية:', 'Equal increases, equal increases:'))}</Label>
+            <Label x={340} y={256} fontSize={15} fill={MUTED}>{pick(language, say('grafikoa zuzen bat da', 'la gráfica es una recta', 'الرسم خط مستقيم', 'The graph is a straight line'))}</Label>
+            <Caption y={318} language={language} text={say('Funtzio lineal bat: y = mx + n', 'Una función lineal: y = mx + n', 'دالة خطية: y = mx + n', 'A linear function: y = mx + n')} />
         </Figure>
     )
 }
@@ -111,7 +112,7 @@ export function LinearModelsFigure({ language }: { language: UnitLanguage }) {
 
 export function ParallelFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={322} label={pick(language, say('Zuzen paraleloak: malda bera', 'Rectas paralelas: la misma pendiente', 'مستقيمات متوازية: الميل نفسه'))}>
+        <Figure height={322} label={pick(language, say('Zuzen paraleloak: malda bera', 'Rectas paralelas: la misma pendiente', 'مستقيمات متوازية: الميل نفسه', 'Parallel lines: the same slope'))}>
             <Frame box={{ xMin: -4, xMax: 4, yMin: -4, yMax: 5 }} cell={28} ox={40} oy={30}>
                 {(map, clip) => (
                     <g>
@@ -127,11 +128,11 @@ export function ParallelFigure({ language }: { language: UnitLanguage }) {
             <Formula x={356} y={66} color={STAGE}>y = 2x + 1</Formula>
             <Key x={320} y={100} color={SECOND} />
             <Formula x={356} y={100} color={SECOND}>y = 2x − 3</Formula>
-            <Label x={320} y={140} fontSize={16} fontWeight={700} fill={INK}>{pick(language, say('Malda bera, m = 2: paraleloak', 'Misma pendiente, m = 2: paralelas', 'الميل نفسه m = 2: متوازيان'))}</Label>
+            <Label x={320} y={140} fontSize={16} fontWeight={700} fill={INK}>{pick(language, say('Malda bera, m = 2: paraleloak', 'Misma pendiente, m = 2: paralelas', 'الميل نفسه m = 2: متوازيان', 'Same slope, m = 2: parallel'))}</Label>
             <Key x={320} y={188} color={MUSTARD} dashed />
             <Formula x={356} y={188} color={MUSTARD}>y = −x + 2</Formula>
-            <Label x={320} y={226} fontSize={16} fill={INK}>{pick(language, say('Beste malda bat: ebakitzen dira', 'Otra pendiente: se cortan', 'ميل آخر: يتقاطعان'))}</Label>
-            <Caption y={310} language={language} text={say('Paraleloak: m bera eta n desberdina', 'Paralelas: la misma m y distinta n', 'المتوازيان: m نفسها وn مختلفة')} />
+            <Label x={320} y={226} fontSize={16} fill={INK}>{pick(language, say('Beste malda bat: ebakitzen dira', 'Otra pendiente: se cortan', 'ميل آخر: يتقاطعان', 'Different slope: they cross'))}</Label>
+            <Caption y={310} language={language} text={say('Paraleloak: m bera eta n desberdina', 'Paralelas: la misma m y distinta n', 'المتوازيان: m نفسها وn مختلفة', 'Parallel: the same m and a different n')} />
         </Figure>
     )
 }
@@ -146,7 +147,7 @@ export function ParabolaShapesFigure({ language }: { language: UnitLanguage }) {
         { a: -1, color: MUSTARD, text: 'y = −x²' }
     ]
     return (
-        <Figure height={330} label={pick(language, say('y = ax² parabolak a-ren arabera', 'Las parábolas y = ax² según a', 'القطوع المكافئة y = ax² بحسب a'))}>
+        <Figure height={330} label={pick(language, say('y = ax² parabolak a-ren arabera', 'Las parábolas y = ax² según a', 'القطوع المكافئة y = ax² بحسب a', 'Parabolas y = ax², depending on a'))}>
             <Frame box={{ xMin: -3, xMax: 3, yMin: -4, yMax: 5 }} cell={28} ox={56} oy={30}>
                 {(map, clip) => (
                     <g>
@@ -161,10 +162,10 @@ export function ParabolaShapesFigure({ language }: { language: UnitLanguage }) {
                     <Formula x={326} y={60 + index * 32} color={curve.color}>{curve.text}</Formula>
                 </g>
             ))}
-            <Label x={290} y={206} fontSize={16} fill={INK}>{pick(language, say('a > 0: adarrak gora, minimoa', 'a > 0: ramas hacia arriba, mínimo', 'a > 0: الفرعان إلى الأعلى، قيمة صغرى'))}</Label>
-            <Label x={290} y={236} fontSize={16} fill={INK}>{pick(language, say('a < 0: adarrak behera, maximoa', 'a < 0: ramas hacia abajo, máximo', 'a < 0: الفرعان إلى الأسفل، قيمة عظمى'))}</Label>
-            <Label x={290} y={266} fontSize={16} fill={INK}>{pick(language, say('|a| handiagoa: itxiagoa', '|a| mayor: más cerrada', '|a| أكبر: أضيق'))}</Label>
-            <Caption y={318} language={language} text={say('Guztiek dute erpina (0, 0) puntuan', 'Todas tienen el vértice en (0, 0)', 'كلها رأسها في (0, 0)')} />
+            <Label x={290} y={206} fontSize={16} fill={INK}>{pick(language, say('a > 0: adarrak gora, minimoa', 'a > 0: ramas hacia arriba, mínimo', 'a > 0: الفرعان إلى الأعلى، قيمة صغرى', 'a > 0: branches up, minimum'))}</Label>
+            <Label x={290} y={236} fontSize={16} fill={INK}>{pick(language, say('a < 0: adarrak behera, maximoa', 'a < 0: ramas hacia abajo, máximo', 'a < 0: الفرعان إلى الأسفل، قيمة عظمى', 'a < 0: branches down, maximum'))}</Label>
+            <Label x={290} y={266} fontSize={16} fill={INK}>{pick(language, say('|a| handiagoa: itxiagoa', '|a| mayor: más cerrada', '|a| أكبر: أضيق', 'Larger |a|: narrower'))}</Label>
+            <Caption y={318} language={language} text={say('Guztiek dute erpina (0, 0) puntuan', 'Todas tienen el vértice en (0, 0)', 'كلها رأسها في (0, 0)', 'All have their vertex at (0, 0)')} />
         </Figure>
     )
 }
@@ -173,7 +174,7 @@ export function ParabolaShapesFigure({ language }: { language: UnitLanguage }) {
 
 export function VertexFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={312} label={pick(language, say('y = x² − 4x + 3 parabolaren erpina eta ebakidurak', 'Vértice y cortes de y = x² − 4x + 3', 'رأس y = x² − 4x + 3 وتقاطعاته'))}>
+        <Figure height={312} label={pick(language, say('y = x² − 4x + 3 parabolaren erpina eta ebakidurak', 'Vértice y cortes de y = x² − 4x + 3', 'رأس y = x² − 4x + 3 وتقاطعاته', 'Vertex and intercepts of y = x² − 4x + 3'))}>
             <Frame box={{ xMin: -1, xMax: 5, yMin: -2, yMax: 5 }} cell={32} ox={44} oy={34}>
                 {(map, clip) => (
                     <g>
@@ -189,11 +190,11 @@ export function VertexFigure({ language }: { language: UnitLanguage }) {
             <Formula x={300} y={60} size={22} color={STAGE}>y = x² − 4x + 3</Formula>
             <Formula x={300} y={100} color={SECOND}>x = −b / 2a = 4 / 2 = 2</Formula>
             <Formula x={300} y={132} color={SECOND}>y = 4 − 8 + 3 = −1</Formula>
-            <Label x={300} y={166} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('V(2, −1): minimoa', 'V(2, −1): mínimo', 'V(2, −1): قيمة صغرى'))}</Label>
-            <Label x={300} y={200} fontSize={16} fill={MUTED}>{pick(language, say('Simetria-ardatza: x = 2', 'Eje de simetría: x = 2', 'محور التماثل: x = 2'))}</Label>
-            <Label x={300} y={232} fontSize={16} fill={GREEN}>{pick(language, say('X ardatza: (1, 0) eta (3, 0)', 'Eje X: (1, 0) y (3, 0)', 'محور X: (1, 0) و(3, 0)'))}</Label>
-            <Label x={300} y={262} fontSize={16} fill={MUSTARD}>{pick(language, say('Y ardatza: (0, 3)', 'Eje Y: (0, 3)', 'محور Y: (0, 3)'))}</Label>
-            <Caption y={300} language={language} text={say('Lehenik erpina, gero ebakidurak eta inguruko puntu batzuk', 'Primero el vértice, luego los cortes y algunos puntos cercanos', 'الرأس أولًا، ثم التقاطعات وبعض النقاط القريبة')} />
+            <Label x={300} y={166} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('V(2, −1): minimoa', 'V(2, −1): mínimo', 'V(2, −1): قيمة صغرى', 'V(2, −1): minimum'))}</Label>
+            <Label x={300} y={200} fontSize={16} fill={MUTED}>{pick(language, say('Simetria-ardatza: x = 2', 'Eje de simetría: x = 2', 'محور التماثل: x = 2', 'Axis of symmetry: x = 2'))}</Label>
+            <Label x={300} y={232} fontSize={16} fill={GREEN}>{pick(language, say('X ardatza: (1, 0) eta (3, 0)', 'Eje X: (1, 0) y (3, 0)', 'محور X: (1, 0) و(3, 0)', 'On the x-axis: (1, 0) and (3, 0)'))}</Label>
+            <Label x={300} y={262} fontSize={16} fill={MUSTARD}>{pick(language, say('Y ardatza: (0, 3)', 'Eje Y: (0, 3)', 'محور Y: (0, 3)', 'On the y-axis: (0, 3)'))}</Label>
+            <Caption y={300} language={language} text={say('Lehenik erpina, gero ebakidurak eta inguruko puntu batzuk', 'Primero el vértice, luego los cortes y algunos puntos cercanos', 'الرأس أولًا، ثم التقاطعات وبعض النقاط القريبة', 'First the vertex, then the intercepts and some nearby points')} />
         </Figure>
     )
 }
@@ -202,7 +203,7 @@ export function VertexFigure({ language }: { language: UnitLanguage }) {
 
 export function ShiftFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={322} label={pick(language, say('y = x² parabolaren lekualdaketak', 'Traslaciones de la parábola y = x²', 'انسحابات القطع المكافئ y = x²'))}>
+        <Figure height={322} label={pick(language, say('y = x² parabolaren lekualdaketak', 'Traslaciones de la parábola y = x²', 'انسحابات القطع المكافئ y = x²', 'Translations of the parabola y = x²'))}>
             <Frame box={{ xMin: -3, xMax: 6, yMin: -4, yMax: 6 }} cell={25} ox={40} oy={30}>
                 {(map, clip) => (
                     <g>
@@ -215,14 +216,14 @@ export function ShiftFigure({ language }: { language: UnitLanguage }) {
                 )}
             </Frame>
             <Formula x={300} y={62} size={22} color={INK}>y = (x − p)² + q</Formula>
-            <Label x={300} y={94} fontSize={16} fill={INK}>{pick(language, say('Erpina: (p, q)', 'Vértice: (p, q)', 'الرأس: (p, q)'))}</Label>
+            <Label x={300} y={94} fontSize={16} fill={INK}>{pick(language, say('Erpina: (p, q)', 'Vértice: (p, q)', 'الرأس: (p, q)', 'Vertex: (p, q)'))}</Label>
             <Key x={300} y={142} color={STAGE} />
             <Formula x={336} y={142} color={STAGE}>y = (x − 3)²</Formula>
-            <Label x={300} y={170} fontSize={15} fill={STAGE}>{pick(language, say('3 unitate eskuinera', '3 unidades a la derecha', '3 وحدات إلى اليمين'))}</Label>
+            <Label x={300} y={170} fontSize={15} fill={STAGE}>{pick(language, say('3 unitate eskuinera', '3 unidades a la derecha', '3 وحدات إلى اليمين', '3 units to the right'))}</Label>
             <Key x={300} y={214} color={SECOND} />
             <Formula x={336} y={214} color={SECOND}>y = x² − 3</Formula>
-            <Label x={300} y={242} fontSize={15} fill={SECOND}>{pick(language, say('3 unitate behera', '3 unidades hacia abajo', '3 وحدات إلى الأسفل'))}</Label>
-            <Caption y={310} language={language} text={say('Forma bera; erpina bakarrik mugitzen da', 'La misma forma; solo se mueve el vértice', 'الشكل نفسه؛ يتحرك الرأس فقط')} />
+            <Label x={300} y={242} fontSize={15} fill={SECOND}>{pick(language, say('3 unitate behera', '3 unidades hacia abajo', '3 وحدات إلى الأسفل', '3 units down'))}</Label>
+            <Caption y={310} language={language} text={say('Forma bera; erpina bakarrik mugitzen da', 'La misma forma; solo se mueve el vértice', 'الشكل نفسه؛ يتحرك الرأس فقط', 'The same shape; only the vertex moves')} />
         </Figure>
     )
 }
@@ -232,7 +233,7 @@ export function ShiftFigure({ language }: { language: UnitLanguage }) {
 export function HyperbolaFigure({ language }: { language: UnitLanguage }) {
     const named = [1, 2, 4, -1, -2, -4]
     return (
-        <Figure height={312} label={pick(language, say('y = 4/x hiperbola', 'La hipérbola y = 4/x', 'القطع الزائد y = 4/x'))}>
+        <Figure height={312} label={pick(language, say('y = 4/x hiperbola', 'La hipérbola y = 4/x', 'القطع الزائد y = 4/x', 'The hyperbola y = 4/x'))}>
             <Frame box={{ xMin: -6, xMax: 6, yMin: -6, yMax: 6 }} cell={21} ox={40} oy={30} labelStep={2}>
                 {(map, clip) => (
                     <g>
@@ -245,13 +246,13 @@ export function HyperbolaFigure({ language }: { language: UnitLanguage }) {
             {['x', 'y'].map((name, row) => (
                 <g key={name}>
                     <text x={344} y={106 + row * 32} textAnchor="middle" fontSize={17} fontWeight={700} fontStyle="italic" fill={INK}>{name}</text>
-                    {[1, 2, 4, 8].map((x, index) => <text key={x} x={384 + index * 46} y={106 + row * 32} textAnchor="middle" fontSize={17} fill={INK}>{row === 0 ? x : String(4 / x).replace('.', language === 'ar' ? '.' : ',')}</text>)}
+                    {[1, 2, 4, 8].map((x, index) => <text key={x} x={384 + index * 46} y={106 + row * 32} textAnchor="middle" fontSize={17} fill={INK}>{row === 0 ? x : String(4 / x).replace('.', language === 'ar' ? '.' : decimalSeparatorFor(language))}</text>)}
                 </g>
             ))}
-            <Label x={330} y={180} fontSize={16} fill={INK}>{pick(language, say('x · y = 4 beti: alderantzizkoa', 'x · y = 4 siempre: inversa', 'x · y = 4 دائمًا: عكسي'))}</Label>
-            <Label x={330} y={212} fontSize={16} fill={INK}>{pick(language, say('k > 0: I. eta III. koadranteak', 'k > 0: cuadrantes I y III', 'k > 0: الربعان الأول والثالث'))}</Label>
-            <Label x={330} y={244} fontSize={16} fill={MUTED}>{pick(language, say('Asintotak: x = 0 eta y = 0', 'Asíntotas: x = 0 e y = 0', 'المقاربان: x = 0 وy = 0'))}</Label>
-            <Caption y={300} language={language} text={say('Ez du ardatzik ebakitzen: Dom f = ℝ − {0}', 'No corta a los ejes: Dom f = ℝ − {0}', 'لا يقطع المحورين: Dom f = ℝ − {0}')} />
+            <Label x={330} y={180} fontSize={16} fill={INK}>{pick(language, say('x · y = 4 beti: alderantzizkoa', 'x · y = 4 siempre: inversa', 'x · y = 4 دائمًا: عكسي', 'x · y = 4 always: inverse'))}</Label>
+            <Label x={330} y={212} fontSize={16} fill={INK}>{pick(language, say('k > 0: I. eta III. koadranteak', 'k > 0: cuadrantes I y III', 'k > 0: الربعان الأول والثالث', 'k > 0: quadrants I and III'))}</Label>
+            <Label x={330} y={244} fontSize={16} fill={MUTED}>{pick(language, say('Asintotak: x = 0 eta y = 0', 'Asíntotas: x = 0 e y = 0', 'المقاربان: x = 0 وy = 0', 'Asymptotes: x = 0 and y = 0'))}</Label>
+            <Caption y={300} language={language} text={say('Ez du ardatzik ebakitzen: Dom f = ℝ − {0}', 'No corta a los ejes: Dom f = ℝ − {0}', 'لا يقطع المحورين: Dom f = ℝ − {0}', 'It doesn\'t cross the axes: Dom f = ℝ − {0}')} />
         </Figure>
     )
 }
@@ -260,7 +261,7 @@ export function HyperbolaFigure({ language }: { language: UnitLanguage }) {
 
 export function ShiftedHyperbolaFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={300} label={pick(language, say('y = 1/(x − 2) + 1 eta bere asintotak', 'y = 1/(x − 2) + 1 y sus asíntotas', 'y = 1/(x − 2) + 1 ومقارباه'))}>
+        <Figure height={300} label={pick(language, say('y = 1/(x − 2) + 1 eta bere asintotak', 'y = 1/(x − 2) + 1 y sus asíntotas', 'y = 1/(x − 2) + 1 ومقارباه', 'y = 1/(x − 2) + 1 and its asymptotes'))}>
             <Frame box={{ xMin: -3, xMax: 7, yMin: -3, yMax: 6 }} cell={24} ox={40} oy={30}>
                 {(map, clip) => (
                     <g>
@@ -273,12 +274,12 @@ export function ShiftedHyperbolaFigure({ language }: { language: UnitLanguage })
                 )}
             </Frame>
             <Formula x={320} y={62} size={22} color={INK}>y = k / (x − a) + b</Formula>
-            <Label x={320} y={100} fontSize={16} fill={INK}>{pick(language, say('Asintota bertikala: x = a', 'Asíntota vertical: x = a', 'المقارب الرأسي: x = a'))}</Label>
-            <Label x={320} y={130} fontSize={16} fill={INK}>{pick(language, say('Asintota horizontala: y = b', 'Asíntota horizontal: y = b', 'المقارب الأفقي: y = b'))}</Label>
+            <Label x={320} y={100} fontSize={16} fill={INK}>{pick(language, say('Asintota bertikala: x = a', 'Asíntota vertical: x = a', 'المقارب الرأسي: x = a', 'Vertical asymptote: x = a'))}</Label>
+            <Label x={320} y={130} fontSize={16} fill={INK}>{pick(language, say('Asintota horizontala: y = b', 'Asíntota horizontal: y = b', 'المقارب الأفقي: y = b', 'Horizontal asymptote: y = b'))}</Label>
             <Formula x={320} y={178} size={20} color={STAGE}>y = 1 / (x − 2) + 1</Formula>
-            <Label x={320} y={212} fontSize={16} fill={MUTED}>{pick(language, say('x = 2 eta y = 1', 'x = 2 e y = 1', 'x = 2 وy = 1'))}</Label>
+            <Label x={320} y={212} fontSize={16} fill={MUTED}>{pick(language, say('x = 2 eta y = 1', 'x = 2 e y = 1', 'x = 2 وy = 1', 'x = 2 and y = 1'))}</Label>
             <Formula x={320} y={244} size={17} color={MUTED}>Dom f = ℝ − {'{2}'}</Formula>
-            <Caption y={288} language={language} text={say('y = 1/x bera, 2 eskuinera eta 1 gora', 'La misma y = 1/x, 2 a la derecha y 1 hacia arriba', 'الدالة y = 1/x نفسها، 2 يمينًا و1 إلى الأعلى')} />
+            <Caption y={288} language={language} text={say('y = 1/x bera, 2 eskuinera eta 1 gora', 'La misma y = 1/x, 2 a la derecha y 1 hacia arriba', 'الدالة y = 1/x نفسها، 2 يمينًا و1 إلى الأعلى', 'The same y = 1/x, 2 to the right and 1 up')} />
         </Figure>
     )
 }
@@ -287,7 +288,7 @@ export function ShiftedHyperbolaFigure({ language }: { language: UnitLanguage })
 
 export function RootGraphFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={290} label={pick(language, say('Erro karratuen grafikoak', 'Gráficas de raíces cuadradas', 'رسوم الجذور التربيعية'))}>
+        <Figure height={290} label={pick(language, say('Erro karratuen grafikoak', 'Gráficas de raíces cuadradas', 'رسوم الجذور التربيعية', 'Graphs of square roots'))}>
             <Frame box={{ xMin: -4, xMax: 9, yMin: -3, yMax: 4 }} cell={21} ox={30} oy={34}>
                 {(map, clip) => (
                     <g>
@@ -306,10 +307,10 @@ export function RootGraphFigure({ language }: { language: UnitLanguage }) {
             <Formula x={366} y={94} color={SECOND}>y = √(x + 3)</Formula>
             <Key x={330} y={126} color={MUSTARD} />
             <Formula x={366} y={126} color={MUSTARD}>y = −√x</Formula>
-            <Label x={330} y={168} fontSize={16} fill={INK}>{pick(language, say('Errokizuna ezin da negatiboa izan:', 'Lo de dentro no puede ser negativo:', 'لا يكون ما تحت الجذر سالبًا:'))}</Label>
+            <Label x={330} y={168} fontSize={16} fill={INK}>{pick(language, say('Errokizuna ezin da negatiboa izan:', 'Lo de dentro no puede ser negativo:', 'لا يكون ما تحت الجذر سالبًا:', 'What is inside cannot be negative:'))}</Label>
             <Formula x={330} y={198} color={SECOND}>x + 3 ≥ 0  →  x ≥ −3</Formula>
             <Formula x={330} y={230} color={SECOND}>Dom = [−3, +∞)</Formula>
-            <Caption y={278} language={language} text={say('Lagungarri: 0, 1, 4, 9 → 0, 1, 2, 3', 'Ayuda: 0, 1, 4, 9 → 0, 1, 2, 3', 'مساعدة: 0، 1، 4، 9 ← 0، 1، 2، 3')} />
+            <Caption y={278} language={language} text={say('Lagungarri: 0, 1, 4, 9 → 0, 1, 2, 3', 'Ayuda: 0, 1, 4, 9 → 0, 1, 2, 3', 'مساعدة: 0، 1، 4، 9 ← 0، 1، 2، 3', 'Hint: 0, 1, 4, 9 → 0, 1, 2, 3')} />
         </Figure>
     )
 }
@@ -318,7 +319,7 @@ export function RootGraphFigure({ language }: { language: UnitLanguage }) {
 
 export function ExponentialFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={312} label={pick(language, say('y = 2ˣ eta y = (1/2)ˣ', 'y = 2ˣ e y = (1/2)ˣ', 'y = 2ˣ وy = (1/2)ˣ'))}>
+        <Figure height={312} label={pick(language, say('y = 2ˣ eta y = (1/2)ˣ', 'y = 2ˣ e y = (1/2)ˣ', 'y = 2ˣ وy = (1/2)ˣ', 'y = 2ˣ and y = (1/2)ˣ'))}>
             <Frame box={{ xMin: -4, xMax: 4, yMin: -1, yMax: 8 }} cell={27} ox={40} oy={30}>
                 {(map, clip) => (
                     <g>
@@ -332,15 +333,15 @@ export function ExponentialFigure({ language }: { language: UnitLanguage }) {
             </Frame>
             <Key x={316} y={62} color={STAGE} />
             <Formula x={352} y={62} color={STAGE}>y = 2ˣ</Formula>
-            <Label x={460} y={62} fontSize={16} fill={STAGE}>{pick(language, say('gorakorra', 'creciente', 'متزايدة'))}</Label>
+            <Label x={460} y={62} fontSize={16} fill={STAGE}>{pick(language, say('gorakorra', 'creciente', 'متزايدة', 'increasing'))}</Label>
             <Key x={316} y={96} color={SECOND} />
             <Formula x={352} y={96} color={SECOND}>y = (1/2)ˣ</Formula>
-            <Label x={460} y={96} fontSize={16} fill={SECOND}>{pick(language, say('beherakorra', 'decreciente', 'متناقصة'))}</Label>
-            <Label x={316} y={140} fontSize={16} fill={INK}>{pick(language, say('a > 1: gorakorra', 'a > 1: creciente', 'a > 1: متزايدة'))}</Label>
-            <Label x={316} y={170} fontSize={16} fill={INK}>{pick(language, say('0 < a < 1: beherakorra', '0 < a < 1: decreciente', '0 < a < 1: متناقصة'))}</Label>
-            <Label x={316} y={206} fontSize={16} fontWeight={700} fill={INK}>{pick(language, say('Beti (0, 1) puntutik', 'Siempre por (0, 1)', 'دائمًا عبر (0, 1)'))}</Label>
-            <Label x={316} y={238} fontSize={16} fill={MUTED}>{pick(language, say('Asintota: y = 0', 'Asíntota: y = 0', 'المقارب: y = 0'))}</Label>
-            <Caption y={300} language={language} text={say('Simetrikoak dira Y ardatzarekiko', 'Son simétricas respecto al eje Y', 'متماثلتان بالنسبة لمحور Y')} />
+            <Label x={460} y={96} fontSize={16} fill={SECOND}>{pick(language, say('beherakorra', 'decreciente', 'متناقصة', 'decreasing'))}</Label>
+            <Label x={316} y={140} fontSize={16} fill={INK}>{pick(language, say('a > 1: gorakorra', 'a > 1: creciente', 'a > 1: متزايدة', 'a > 1: increasing'))}</Label>
+            <Label x={316} y={170} fontSize={16} fill={INK}>{pick(language, say('0 < a < 1: beherakorra', '0 < a < 1: decreciente', '0 < a < 1: متناقصة', '0 < a < 1: decreasing'))}</Label>
+            <Label x={316} y={206} fontSize={16} fontWeight={700} fill={INK}>{pick(language, say('Beti (0, 1) puntutik', 'Siempre por (0, 1)', 'دائمًا عبر (0, 1)', 'Always through (0, 1)'))}</Label>
+            <Label x={316} y={238} fontSize={16} fill={MUTED}>{pick(language, say('Asintota: y = 0', 'Asíntota: y = 0', 'المقارب: y = 0', 'Asymptote: y = 0'))}</Label>
+            <Caption y={300} language={language} text={say('Simetrikoak dira Y ardatzarekiko', 'Son simétricas respecto al eje Y', 'متماثلتان بالنسبة لمحور Y', 'They are symmetrical about the y-axis')} />
         </Figure>
     )
 }
@@ -350,7 +351,7 @@ export function ExponentialFigure({ language }: { language: UnitLanguage }) {
 export function GrowthFigure({ language }: { language: UnitLanguage }) {
     const values = [0, 1, 2, 3, 4].map((x) => 3 * 1.2 ** x)
     return (
-        <Figure height={312} label={pick(language, say('y = 3 · 1,2ˣ hazkuntza', 'El crecimiento y = 3 · 1,2ˣ', 'النمو y = 3 · 1.2ˣ'))}>
+        <Figure height={312} label={pick(language, say('y = 3 · 1,2ˣ hazkuntza', 'El crecimiento y = 3 · 1,2ˣ', 'النمو y = 3 · 1.2ˣ', 'Growth: y = 3 · 1.2ˣ'))}>
             <Frame box={{ xMin: -2, xMax: 5, yMin: 0, yMax: 8 }} cell={28} ox={40} oy={30}>
                 {(map, clip) => (
                     <g>
@@ -360,12 +361,12 @@ export function GrowthFigure({ language }: { language: UnitLanguage }) {
                 )}
             </Frame>
             <Formula x={300} y={62} size={24} color={STAGE}>{`y = k · aˣ`}</Formula>
-            <Label x={300} y={102} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('k = 3: hasierako balioa (x = 0)', 'k = 3: valor inicial (x = 0)', 'k = 3: القيمة الابتدائية (x = 0)'))}</Label>
+            <Label x={300} y={102} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, say('k = 3: hasierako balioa (x = 0)', 'k = 3: valor inicial (x = 0)', 'k = 3: القيمة الابتدائية (x = 0)', 'k = 3: starting value (x = 0)'))}</Label>
             <Formula x={300} y={140} color={STAGE}>{`a = ${dec(language, '3,6')} / 3 = ${dec(language, '1,2')}`}</Formula>
-            <Label x={300} y={176} fontSize={16} fill={INK}>{pick(language, say('Urrats bakoitzean % 20 gehiago', 'Cada paso, un 20 % más', 'كل خطوة تزيد 20 %'))}</Label>
+            <Label x={300} y={176} fontSize={16} fill={INK}>{pick(language, say('Urrats bakoitzean % 20 gehiago', 'Cada paso, un 20 % más', 'كل خطوة تزيد 20 %', 'Each step, 20% more'))}</Label>
             <Formula x={300} y={214} color={MUTED}>{`3 → ${dec(language, '3,6')} → ${dec(language, '4,32')} → ${dec(language, '5,18')}`}</Formula>
-            <Label x={300} y={250} fontSize={16} fill={INK}>{pick(language, say('% 20 jaistean: a = 0,8', 'Si baja un 20 %: a = 0,8', 'إذا نقص 20 %: a = 0.8'))}</Label>
-            <Caption y={300} language={language} text={say('Ehuneko berdina urrats bakoitzean: funtzio esponentziala', 'El mismo porcentaje en cada paso: función exponencial', 'النسبة نفسها في كل خطوة: دالة أسية')} />
+            <Label x={300} y={250} fontSize={16} fill={INK}>{pick(language, say('% 20 jaistean: a = 0,8', 'Si baja un 20 %: a = 0,8', 'إذا نقص 20 %: a = 0.8', 'If it goes down 20%: a = 0.8'))}</Label>
+            <Caption y={300} language={language} text={say('Ehuneko berdina urrats bakoitzean: funtzio esponentziala', 'El mismo porcentaje en cada paso: función exponencial', 'النسبة نفسها في كل خطوة: دالة أسية', 'The same percentage at each step: exponential function')} />
         </Figure>
     )
 }
@@ -375,13 +376,13 @@ export function GrowthFigure({ language }: { language: UnitLanguage }) {
 export function ModelsFigure({ language }: { language: UnitLanguage }) {
     const box = { xMin: -3, xMax: 3, yMin: -3, yMax: 3 }
     const panels: Array<{ name: LocalizedText; formula: string; draw: (map: PlaneMap, clip: string) => ReactNode }> = [
-        { name: say('Lineala', 'Lineal', 'خطية'), formula: 'y = mx + n', draw: (map, clip) => <PlaneLine map={map} m={0.5} n={1} color={STAGE} clip={clip} /> },
-        { name: say('Koadratikoa', 'Cuadrática', 'تربيعية'), formula: 'y = ax² + bx + c', draw: (map, clip) => <PlanePath map={map} points={sampled((x) => x * x - 2, -3.5, 3.5)} color={SECOND} width={3.2} clip={clip} /> },
-        { name: say('Alderantzizkoa', 'Inversa', 'عكسية'), formula: 'y = k / x', draw: (map, clip) => hyperbolaBranches(2, 0, 0, -3.5, 3.5, -3, 3).map((points, index) => <PlanePath key={index} map={map} points={points} color={GREEN} width={3.2} clip={clip} />) },
-        { name: say('Esponentziala', 'Exponencial', 'أسية'), formula: 'y = aˣ', draw: (map, clip) => <PlanePath map={map} points={exponentialCurve(1, 2, -3.5, 2)} color={MUSTARD} width={3.2} clip={clip} /> }
+        { name: say('Lineala', 'Lineal', 'خطية', 'Linear'), formula: 'y = mx + n', draw: (map, clip) => <PlaneLine map={map} m={0.5} n={1} color={STAGE} clip={clip} /> },
+        { name: say('Koadratikoa', 'Cuadrática', 'تربيعية', 'Quadratic'), formula: 'y = ax² + bx + c', draw: (map, clip) => <PlanePath map={map} points={sampled((x) => x * x - 2, -3.5, 3.5)} color={SECOND} width={3.2} clip={clip} /> },
+        { name: say('Alderantzizkoa', 'Inversa', 'عكسية', 'Inverse'), formula: 'y = k / x', draw: (map, clip) => hyperbolaBranches(2, 0, 0, -3.5, 3.5, -3, 3).map((points, index) => <PlanePath key={index} map={map} points={points} color={GREEN} width={3.2} clip={clip} />) },
+        { name: say('Esponentziala', 'Exponencial', 'أسية', 'Exponential'), formula: 'y = aˣ', draw: (map, clip) => <PlanePath map={map} points={exponentialCurve(1, 2, -3.5, 2)} color={MUSTARD} width={3.2} clip={clip} /> }
     ]
     return (
-        <Figure height={296} label={pick(language, say('Lau funtzio-mota', 'Cuatro tipos de función', 'أربعة أنواع من الدوال'))}>
+        <Figure height={296} label={pick(language, say('Lau funtzio-mota', 'Cuatro tipos de función', 'أربعة أنواع من الدوال', 'Four types of function'))}>
             {panels.map((panel, index) => (
                 <g key={index}>
                     <Frame box={box} cell={24} ox={20 + index * 174} oy={40} labels={false}>
@@ -391,7 +392,7 @@ export function ModelsFigure({ language }: { language: UnitLanguage }) {
                     <Formula x={92 + index * 174} y={242} size={15} anchor="middle" color={MUTED}>{panel.formula}</Formula>
                 </g>
             ))}
-            <Caption y={282} language={language} text={say('Grafikoaren formak esaten du zein eredu aukeratu', 'La forma de la gráfica dice qué modelo elegir', 'شكل الرسم يحدد النموذج المناسب')} />
+            <Caption y={282} language={language} text={say('Grafikoaren formak esaten du zein eredu aukeratu', 'La forma de la gráfica dice qué modelo elegir', 'شكل الرسم يحدد النموذج المناسب', 'The shape of the graph tells you which model to choose')} />
         </Figure>
     )
 }

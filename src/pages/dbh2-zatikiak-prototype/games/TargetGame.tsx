@@ -105,12 +105,12 @@ export function TargetGame({ language, records, onResult, onExit, config }: Game
                 records={records}
                 onStart={start}
                 onExit={onExit}
-                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', ar: 'الرقم' })}: ${record.score}`}
+                bestLabel={(record) => `${l({ eu: 'Marka', es: 'Récord', en: 'Record', ar: 'الرقم' })}: ${record.score}`}
                 howTo={(
                     <ul className="fraction-v2-game-rules">
-                        <li>{l({ eu: `${TARGET_THROWS} jaurtiketa. Eraman markatzailea zenbakia dagoen lekura eta sakatu «Jaurti».`, es: `${TARGET_THROWS} lanzamientos. Lleva el marcador adonde está el número y pulsa «Lanzar».`, ar: `${TARGET_THROWS} رميات. حرّك المؤشر إلى موضع العدد واضغط «ارمِ».` })}</li>
-                        <li>{l({ eu: 'Unitate baten ehunena baino gertuago: 100 puntu. Unitatearen 1/8tik urrunago: 0.', es: 'A menos de una centésima de unidad: 100 puntos. A más de 1/8 de unidad: 0.', ar: 'أقرب من جزء من مئة من الوحدة: 100 نقطة. أبعد من 1/8 الوحدة: 0.' })}</li>
-                        <li>{l({ eu: 'Teklatuarekin: geziak mugitzeko (Shift azkarrago) eta Enter jaurtitzeko.', es: 'Con teclado: flechas para mover (Mayús, más rápido) y Enter para lanzar.', ar: 'بلوحة المفاتيح: الأسهم للتحريك (Shift أسرع) وEnter للرمي.' })}</li>
+                        <li>{l({ eu: `${TARGET_THROWS} jaurtiketa. Eraman markatzailea zenbakia dagoen lekura eta sakatu «Jaurti».`, es: `${TARGET_THROWS} lanzamientos. Lleva el marcador adonde está el número y pulsa «Lanzar».`, en: `${TARGET_THROWS} throws. Move the marker to where the number is and press ‘Throw’.`, ar: `${TARGET_THROWS} رميات. حرّك المؤشر إلى موضع العدد واضغط «ارمِ».` })}</li>
+                        <li>{l({ eu: 'Unitate baten ehunena baino gertuago: 100 puntu. Unitatearen 1/8tik urrunago: 0.', es: 'A menos de una centésima de unidad: 100 puntos. A más de 1/8 de unidad: 0.', en: 'Less than one hundredth of a unit: 100 points. More than 1/8 of a unit: 0.', ar: 'أقرب من جزء من مئة من الوحدة: 100 نقطة. أبعد من 1/8 الوحدة: 0.' })}</li>
+                        <li>{l({ eu: 'Teklatuarekin: geziak mugitzeko (Shift azkarrago) eta Enter jaurtitzeko.', es: 'Con teclado: flechas para mover (Mayús, más rápido) y Enter para lanzar.', en: 'With the keyboard: arrow keys to move (Shift to go faster) and Enter to throw.', ar: 'بلوحة المفاتيح: الأسهم للتحريك (Shift أسرع) وEnter للرمي.' })}</li>
                     </ul>
                 )}
             />
@@ -123,23 +123,23 @@ export function TargetGame({ language, records, onResult, onExit, config }: Game
     const integers = Array.from({ length: levelInfo.max - levelInfo.min + 1 }, (_, offset) => levelInfo.min + offset)
     const markerLeft = `${(lastThrow ? targetShare(level, lastThrow.guess, levels) : share) * 100}%`
     const gradeText = (result: ThrowResult) => ({
-        bullseye: l({ eu: 'Itua! Zuzen-zuzen.', es: '¡Diana! Justo en el blanco.', ar: 'إصابة مباشرة!' }),
-        close: l({ eu: 'Oso gertu!', es: '¡Muy cerca!', ar: 'قريب جدًا!' }),
-        near: l({ eu: 'Gertu.', es: 'Cerca.', ar: 'قريب.' }),
-        far: l({ eu: 'Urrun geratu zara.', es: 'Te has quedado lejos.', ar: 'كنت بعيدًا.' })
+        bullseye: l({ eu: 'Itua! Zuzen-zuzen.', es: '¡Diana! Justo en el blanco.', en: 'Bullseye! Right on target.', ar: 'إصابة مباشرة!' }),
+        close: l({ eu: 'Oso gertu!', es: '¡Muy cerca!', en: 'Very close!', ar: 'قريب جدًا!' }),
+        near: l({ eu: 'Gertu.', es: 'Cerca.', en: 'Close.', ar: 'قريب.' }),
+        far: l({ eu: 'Urrun geratu zara.', es: 'Te has quedado lejos.', en: 'You’re far off.', ar: 'كنت بعيدًا.' })
     })[result.grade]
 
     return (
         <div className="fraction-v2-target" data-stage={game.levels[level].stage}>
             <GameTopbar game={game} language={language} onExit={onExit}>
                 <span>{Math.min(index + 1, TARGET_THROWS)} / {TARGET_THROWS}</span>
-                <span><strong>{total}</strong> {l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}</span>
+                <span><strong>{total}</strong> {l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}</span>
             </GameTopbar>
 
             {phase !== 'finished' && round && (
                 <div className="fraction-v2-target-stage">
                     <div className="fraction-v2-target-card" aria-live="polite">
-                        <span className="fraction-v2-target-ask">{l({ eu: 'Non dago?', es: '¿Dónde está?', ar: 'أين يقع؟' })}</span>
+                        <span className="fraction-v2-target-ask">{l({ eu: 'Non dago?', es: '¿Dónde está?', en: 'Where is it?', ar: 'أين يقع؟' })}</span>
                         <MathText text={`$${targetLatex(round, separator)}$`} />
                     </div>
 
@@ -149,11 +149,11 @@ export function TargetGame({ language, records, onResult, onExit, config }: Game
                         ref={lineRef}
                         role="slider"
                         tabIndex={phase === 'aiming' ? 0 : -1}
-                        aria-label={l({ eu: 'Markatzailearen posizioa zenbaki-zuzenean', es: 'Posición del marcador en la recta', ar: 'موضع المؤشر على خط الأعداد' })}
+                        aria-label={l({ eu: 'Markatzailearen posizioa zenbaki-zuzenean', es: 'Posición del marcador en la recta', en: 'Position of the marker on the number line', ar: 'موضع المؤشر على خط الأعداد' })}
                         aria-valuemin={0}
                         aria-valuemax={100}
                         aria-valuenow={Math.round(share * 100)}
-                        aria-valuetext={l({ eu: `Zuzenaren % ${Math.round(share * 100)}, ${levelInfo.min} eta ${levelInfo.max} artean`, es: `${Math.round(share * 100)} % de la recta, entre ${levelInfo.min} y ${levelInfo.max}`, ar: `${Math.round(share * 100)}٪ من الخط بين ${levelInfo.min} و${levelInfo.max}` })}
+                        aria-valuetext={l({ eu: `Zuzenaren % ${Math.round(share * 100)}, ${levelInfo.min} eta ${levelInfo.max} artean`, es: `${Math.round(share * 100)} % de la recta, entre ${levelInfo.min} y ${levelInfo.max}`, en: `${Math.round(share * 100)}% of the number line, between ${levelInfo.min} and ${levelInfo.max}`, ar: `${Math.round(share * 100)}٪ من الخط بين ${levelInfo.min} و${levelInfo.max}` })}
                         onKeyDown={onKey}
                         onPointerDown={(event) => {
                             if (phase !== 'aiming') return
@@ -194,7 +194,7 @@ export function TargetGame({ language, records, onResult, onExit, config }: Game
 
                     {phase === 'aiming' && (
                         <button type="button" className="fraction-v2-primary fraction-v2-target-throw" onClick={throwNow}>
-                            {l({ eu: 'Jaurti', es: 'Lanzar', ar: 'ارمِ' })}
+                            {l({ eu: 'Jaurti', es: 'Lanzar', en: 'Roll', ar: 'ارمِ' })}
                         </button>
                     )}
 
@@ -206,7 +206,7 @@ export function TargetGame({ language, records, onResult, onExit, config }: Game
                                 <p className="fraction-v2-target-hint"><MathText text={`$${targetHintLatex(lastThrow.round, separator)}$`} /></p>
                             </div>
                             <button type="button" className="fraction-v2-primary" onClick={next} ref={(node) => node?.focus({ preventScroll: true })}>
-                                {index + 1 >= TARGET_THROWS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', ar: 'التالي' })}
+                                {index + 1 >= TARGET_THROWS ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', en: 'See the result', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', en: 'Next', ar: 'التالي' })}
                             </button>
                         </div>
                     )}
@@ -217,12 +217,12 @@ export function TargetGame({ language, records, onResult, onExit, config }: Game
                 <ResultPanel
                     language={language}
                     stars={targetStars(total)}
-                    title={`${total} ${l({ eu: 'puntu', es: 'puntos', ar: 'نقطة' })}`}
-                    subtitle={l({ eu: '3 izar: 850 puntu · 2 izar: 650 · izar 1: 400', es: '3 estrellas: 850 puntos · 2: 650 · 1: 400', ar: '3 نجوم: 850 نقطة · 2: 650 · 1: 400' })}
+                    title={`${total} ${l({ eu: 'puntu', es: 'puntos', en: 'points', ar: 'نقطة' })}`}
+                    subtitle={l({ eu: '3 izar: 850 puntu · 2 izar: 650 · izar 1: 400', es: '3 estrellas: 850 puntos · 2: 650 · 1: 400', en: '3 stars: 850 points · 2: 650 · 1: 400', ar: '3 نجوم: 850 نقطة · 2: 650 · 1: 400' })}
                     stats={[
-                        { label: l({ eu: 'Itua', es: 'Dianas', ar: 'إصابات' }), value: String(throws.filter((item) => item.result.grade === 'bullseye').length) },
-                        { label: l({ eu: 'Oso gertu', es: 'Muy cerca', ar: 'قريب جدًا' }), value: String(throws.filter((item) => item.result.grade === 'close').length) },
-                        { label: l({ eu: 'Urrun', es: 'Lejos', ar: 'بعيد' }), value: String(throws.filter((item) => item.result.grade === 'far').length) }
+                        { label: l({ eu: 'Itua', es: 'Dianas', en: 'Bullseyes', ar: 'إصابات' }), value: String(throws.filter((item) => item.result.grade === 'bullseye').length) },
+                        { label: l({ eu: 'Oso gertu', es: 'Muy cerca', en: 'Very close', ar: 'قريب جدًا' }), value: String(throws.filter((item) => item.result.grade === 'close').length) },
+                        { label: l({ eu: 'Urrun', es: 'Lejos', en: 'Far', ar: 'بعيد' }), value: String(throws.filter((item) => item.result.grade === 'far').length) }
                     ]}
                     onReplay={() => start(level)}
                     onNext={level < game.levels.length - 1 ? () => start(level + 1) : undefined}

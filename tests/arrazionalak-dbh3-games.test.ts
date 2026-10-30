@@ -22,7 +22,7 @@ function checkShape(question: RationalsRaceQuestion) {
         renders(option.latex)
         if (!option.correct) assert.ok(rationalsRaceErrorTips[option.error!], `${question.kind}: ${option.error}`)
     }
-    for (const language of ['eu', 'es', 'ar'] as const) for (const text of [question.prompt[language], question.solution[language]]) for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) renders(formula)
+    for (const language of ['eu', 'es', 'en', 'ar'] as const) for (const text of [question.prompt[language], question.solution[language]]) for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) renders(formula)
     // "Simplified" and "mixed" answers are typed as the fraction; the rest, as the shortest form
     const written = question.answerForm === 'any' ? typed(question.answer) : question.answer.denominator === 1 ? String(question.answer.numerator) : `${question.answer.numerator}/${question.answer.denominator}`
     if (question.writable && question.answerForm !== 'mixed') assert.equal(checkRationalsPitAnswer(question, written), 'correct', question.kind)

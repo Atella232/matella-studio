@@ -28,19 +28,19 @@ export const TILL_PATIENCE = [45, 60, 75]
 
 export type TillProduct = 'backpack' | 'trainers' | 'book' | 'headphones' | 'ball' | 'jacket' | 'game' | 'cake' | 'bike'
 
-const say = (eu: string, es: string, ar: string): LocalizedText => ({ eu, es, ar })
+const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 
 /** Each product with its VAT (books 4 %, cakes 10 %) and a range of prices in whole euros */
 const PRODUCTS: Record<TillProduct, { name: LocalizedText; vat: number; prices: [number, number] }> = {
-    backpack: { name: say('Motxila', 'Mochila', 'حقيبة ظهر'), vat: 21, prices: [20, 60] },
-    trainers: { name: say('Zapatilak', 'Zapatillas', 'حذاء رياضي'), vat: 21, prices: [40, 120] },
-    book: { name: say('Liburua', 'Libro', 'كتاب'), vat: 4, prices: [10, 40] },
-    headphones: { name: say('Entzungailuak', 'Auriculares', 'سماعات'), vat: 21, prices: [20, 150] },
-    ball: { name: say('Baloia', 'Balón', 'كرة'), vat: 21, prices: [10, 40] },
-    jacket: { name: say('Jaka', 'Chaqueta', 'سترة'), vat: 21, prices: [40, 160] },
-    game: { name: say('Mahai-jokoa', 'Juego de mesa', 'لعبة لوحية'), vat: 21, prices: [20, 60] },
-    cake: { name: say('Tarta', 'Tarta', 'كعكة'), vat: 10, prices: [10, 40] },
-    bike: { name: say('Bizikleta', 'Bicicleta', 'دراجة'), vat: 21, prices: [150, 600] }
+    backpack: { name: say('Motxila', 'Mochila', 'حقيبة ظهر', 'Backpack'), vat: 21, prices: [20, 60] },
+    trainers: { name: say('Zapatilak', 'Zapatillas', 'حذاء رياضي', 'Trainers'), vat: 21, prices: [40, 120] },
+    book: { name: say('Liburua', 'Libro', 'كتاب', 'Book'), vat: 4, prices: [10, 40] },
+    headphones: { name: say('Entzungailuak', 'Auriculares', 'سماعات', 'Headphones'), vat: 21, prices: [20, 150] },
+    ball: { name: say('Baloia', 'Balón', 'كرة', 'Ball'), vat: 21, prices: [10, 40] },
+    jacket: { name: say('Jaka', 'Chaqueta', 'سترة', 'Jacket'), vat: 21, prices: [40, 160] },
+    game: { name: say('Mahai-jokoa', 'Juego de mesa', 'لعبة لوحية', 'Board game'), vat: 21, prices: [20, 60] },
+    cake: { name: say('Tarta', 'Tarta', 'كعكة', 'Cake'), vat: 10, prices: [10, 40] },
+    bike: { name: say('Bizikleta', 'Bicicleta', 'دراجة', 'Bike'), vat: 21, prices: [150, 600] }
 }
 
 const PRODUCT_IDS = Object.keys(PRODUCTS) as TillProduct[]
@@ -158,18 +158,18 @@ export function tillSlipText(round: TillRound, slip: TillSlip): LocalizedText {
     switch (slip) {
         case 'part':
             return vat
-                ? say('Hori BEZa bakarrik da: gehitu prezioari.', 'Eso es solo el IVA: súmalo al precio.', 'هذه هي الضريبة فقط: أضفها إلى السعر.')
-                : say('Hori deskontua bakarrik da: kendu prezioari.', 'Eso es solo el descuento: réstalo del precio.', 'هذا هو الخصم فقط: اطرحه من السعر.')
+                ? say('Hori BEZa bakarrik da: gehitu prezioari.', 'Eso es solo el IVA: súmalo al precio.', 'هذه هي الضريبة فقط: أضفها إلى السعر.', 'That is just the VAT: add it to the price.')
+                : say('Hori deskontua bakarrik da: kendu prezioari.', 'Eso es solo el descuento: réstalo del precio.', 'هذا هو الخصم فقط: اطرحه من السعر.', 'That is just the discount: subtract it from the price.')
         case 'wrong-way':
             return vat
-                ? say('BEZa kendu duzu: gehitu egin behar da.', 'Has restado el IVA: hay que sumarlo.', 'طرحت الضريبة: يجب أن تضيفها.')
-                : say('Deskontua gehitu duzu: kendu egin behar da.', 'Has sumado el descuento: hay que restarlo.', 'أضفت الخصم: يجب أن تطرحه.')
+                ? say('BEZa kendu duzu: gehitu egin behar da.', 'Has restado el IVA: hay que sumarlo.', 'طرحت الضريبة: يجب أن تضيفها.', 'You subtracted the VAT: you need to add it.')
+                : say('Deskontua gehitu duzu: kendu egin behar da.', 'Has sumado el descuento: hay que restarlo.', 'أضفت الخصم: يجب أن تطرحه.', 'You added the discount: you need to subtract it.')
         case 'percent-of-final':
-            return say('Ehunekoa lehengo prezioarena da, ez honena: zatitu indizeaz.', 'El % es del precio de antes, no de este: divide entre el índice.', 'النسبة من السعر السابق لا من هذا: اقسم على المؤشر.')
+            return say('Ehunekoa lehengo prezioarena da, ez honena: zatitu indizeaz.', 'El % es del precio de antes, no de este: divide entre el índice.', 'النسبة من السعر السابق لا من هذا: اقسم على المؤشر.', 'The percentage is of the price before, not of this one: divide by the multiplier.')
         case 'multiplied':
-            return say('Atzera egiteko ez da indizeaz biderkatzen: zatitu egiten da.', 'Para volver atrás no se multiplica por el índice: se divide.', 'للرجوع لا نضرب في المؤشر بل نقسم عليه.')
+            return say('Atzera egiteko ez da indizeaz biderkatzen: zatitu egiten da.', 'Para volver atrás no se multiplica por el índice: se divide.', 'للرجوع لا نضرب في المؤشر بل نقسم عليه.', 'To go back, you don\'t multiply by the multiplier: you divide.')
         case 'added-percents':
-            return say('Ehunekoak ez dira batzen: aplikatu bata bestearen atzetik.', 'Los porcentajes no se suman: aplica uno detrás de otro.', 'النسب لا تُجمع: طبّقها واحدة بعد الأخرى.')
+            return say('Ehunekoak ez dira batzen: aplikatu bata bestearen atzetik.', 'Los porcentajes no se suman: aplica uno detrás de otro.', 'النسب لا تُجمع: طبّقها واحدة بعد الأخرى.', 'Percentages are not added together: apply one after the other.')
     }
 }
 
@@ -186,27 +186,27 @@ export function tillTagLabel(round: TillRound): LocalizedText {
     switch (round.kind) {
         case 'discount':
         case 'two-discounts':
-            return say('Prezioa', 'Precio', 'السعر')
+            return say('Prezioa', 'Precio', 'السعر', 'Price')
         case 'vat':
         case 'discount-vat':
-            return say('BEZik gabe', 'Sin IVA', 'دون ضريبة')
+            return say('BEZik gabe', 'Sin IVA', 'دون ضريبة', 'Without VAT')
         case 'discount-back':
-            return say('Merkatuta', 'Rebajado', 'بعد التخفيض')
+            return say('Merkatuta', 'Rebajado', 'بعد التخفيض', 'Discounted')
         case 'vat-back':
-            return say('BEZa barne', 'IVA incluido', 'شامل الضريبة')
+            return say('BEZa barne', 'IVA incluido', 'شامل الضريبة', 'VAT included')
         case 'two-discounts-back':
         case 'discount-vat-back':
-            return say('Ordaindu du', 'Ha pagado', 'دفع')
+            return say('Ordaindu du', 'Ha pagado', 'دفع', 'You paid')
     }
 }
 
 /** A sticker for each change: «Descuento: 15 %», «Otro descuento: 10 %», «IVA: 21 %» */
 export function tillStickers(round: TillRound): LocalizedText[] {
     return round.changes.map((change, index) => {
-        if (change > 0) return say(`BEZa: % ${change}`, `IVA: ${change} %`, `الضريبة ${change}٪`)
+        if (change > 0) return say(`BEZa: % ${change}`, `IVA: ${change} %`, `الضريبة ${change}٪`, `VAT: ${change}%`)
         return index > 0
-            ? say(`Beste deskontu bat: % ${-change}`, `Otro descuento: ${-change} %`, `خصم إضافي ${-change}٪`)
-            : say(`Deskontua: % ${-change}`, `Descuento: ${-change} %`, `خصم ${-change}٪`)
+            ? say(`Beste deskontu bat: % ${-change}`, `Otro descuento: ${-change} %`, `خصم إضافي ${-change}٪`, `Another discount: ${-change}%`)
+            : say(`Deskontua: % ${-change}`, `Descuento: ${-change} %`, `خصم ${-change}٪`, `Discount: ${-change}%`)
     })
 }
 
@@ -214,15 +214,15 @@ export function tillStickers(round: TillRound): LocalizedText[] {
 export function tillQuestion(round: TillRound): LocalizedText {
     switch (round.kind) {
         case 'discount-back':
-            return say('Zenbat balio zuen merkatu aurretik?', '¿Cuánto costaba antes de la rebaja?', 'كم كان سعره قبل التخفيض؟')
+            return say('Zenbat balio zuen merkatu aurretik?', '¿Cuánto costaba antes de la rebaja?', 'كم كان سعره قبل التخفيض؟', 'How much did it cost before the discount?')
         case 'vat-back':
-            return say('Fakturarako: zenbat da BEZik gabe?', 'Para la factura: ¿cuánto es sin IVA?', 'للفاتورة: كم السعر دون ضريبة؟')
+            return say('Fakturarako: zenbat da BEZik gabe?', 'Para la factura: ¿cuánto es sin IVA?', 'للفاتورة: كم السعر دون ضريبة؟', 'For the invoice: how much is it without VAT?')
         case 'two-discounts-back':
-            return say('Zenbat balio zuen bi deskontuen aurretik?', '¿Cuánto costaba antes de los dos descuentos?', 'كم كان سعره قبل التخفيضين؟')
+            return say('Zenbat balio zuen bi deskontuen aurretik?', '¿Cuánto costaba antes de los dos descuentos?', 'كم كان سعره قبل التخفيضين؟', 'How much did it cost before the two discounts?')
         case 'discount-vat-back':
-            return say('Zein zen prezioa, deskonturik eta BEZik gabe?', '¿Cuál era el precio sin descuento y sin IVA?', 'كم كان السعر دون خصم ودون ضريبة؟')
+            return say('Zein zen prezioa, deskonturik eta BEZik gabe?', '¿Cuál era el precio sin descuento y sin IVA?', 'كم كان السعر دون خصم ودون ضريبة؟', 'What was the price without discount and without VAT?')
         default:
-            return say('Zenbat ordaindu behar dut?', '¿Cuánto tengo que pagar?', 'كم عليّ أن أدفع؟')
+            return say('Zenbat ordaindu behar dut?', '¿Cuánto tengo que pagar?', 'كم عليّ أن أدفع؟', 'How much do I have to pay?')
     }
 }
 
@@ -236,15 +236,15 @@ export function tillSteps(round: TillRound): { label: LocalizedText; latex: stri
     const answer = moneyLatex(round.answer)
     if (!isBack(round.kind)) {
         const label = indices.length === 1
-            ? say('Prezioa bider indizea', 'Precio por el índice', 'السعر في المؤشر')
-            : say('Prezioa bider bi indizeak', 'Precio por los dos índices', 'السعر في المؤشرين')
+            ? say('Prezioa bider indizea', 'Precio por el índice', 'السعر في المؤشر', 'Price times the multiplier')
+            : say('Prezioa bider bi indizeak', 'Precio por los dos índices', 'السعر في المؤشرين', 'Price times both multipliers')
         return [{ label, latex: `${shown}\\cdot ${indices.join('\\cdot ')}=${answer}` }]
     }
-    if (indices.length === 1) return [{ label: say('Prezioa zati indizea', 'Precio entre el índice', 'السعر مقسومًا على المؤشر'), latex: `${shown}\\mathbin{:}${indices[0]}=${answer}` }]
+    if (indices.length === 1) return [{ label: say('Prezioa zati indizea', 'Precio entre el índice', 'السعر مقسومًا على المؤشر', 'Price divided by the multiplier'), latex: `${shown}\\mathbin{:}${indices[0]}=${answer}` }]
     const total = latexNumber(round.changes.reduce((value, change) => (value * (100 + change)) / 100, 1))
     return [
-        { label: say('Indize osoa', 'El índice total', 'المؤشر الكلي'), latex: `${indices.join('\\cdot ')}=${total}` },
-        { label: say('Prezioa zati indize osoa', 'Precio entre el índice total', 'السعر مقسومًا على المؤشر الكلي'), latex: `${shown}\\mathbin{:}${total}=${answer}` }
+        { label: say('Indize osoa', 'El índice total', 'المؤشر الكلي', 'The total multiplier'), latex: `${indices.join('\\cdot ')}=${total}` },
+        { label: say('Prezioa zati indize osoa', 'Precio entre el índice total', 'السعر مقسومًا على المؤشر الكلي', 'Price divided by the total multiplier'), latex: `${shown}\\mathbin{:}${total}=${answer}` }
     ]
 }
 
@@ -252,6 +252,6 @@ export function tillSteps(round: TillRound): { label: LocalizedText; latex: stri
 export function tillAnswerText(round: TillRound): LocalizedText {
     const amount = (language: UnitLanguage) => euroText(round.answer, language)
     return isBack(round.kind)
-        ? say(`Erantzuna: ${amount('eu')}.`, `La respuesta era ${amount('es')}.`, `الجواب الصحيح: ${amount('ar')}.`)
-        : say(`Kobratu behar zena: ${amount('eu')}.`, `Había que cobrar ${amount('es')}.`, `المبلغ الصحيح: ${amount('ar')}.`)
+        ? say(`Erantzuna: ${amount('eu')}.`, `La respuesta era ${amount('es')}.`, `الجواب الصحيح: ${amount('ar')}.`, `The answer was ${amount('en')}.`)
+        : say(`Kobratu behar zena: ${amount('eu')}.`, `Había que cobrar ${amount('es')}.`, `المبلغ الصحيح: ${amount('ar')}.`, `You had to charge ${amount('en')}.`)
 }

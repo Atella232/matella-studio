@@ -34,7 +34,7 @@ export function TrigonometryLaboratory(props: {
             tools={trigonometryLabTools}
             stages={trigonometryStages}
             components={toolComponents}
-            title={{ eu: 'Neurtu, kalkulatu eta biratu', es: 'Mide, calcula y gira', ar: 'قِس واحسب ودوّر' }}
+            title={{ eu: 'Neurtu, kalkulatu eta biratu', es: 'Mide, calcula y gira', en: 'Measure, calculate and rotate', ar: 'قِس واحسب ودوّر' }}
         />
     )
 }

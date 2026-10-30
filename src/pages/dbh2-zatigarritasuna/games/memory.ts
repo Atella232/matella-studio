@@ -89,8 +89,8 @@ export function divisibilityCardValue(card: DivisibilityCard): number {
 }
 
 export function divisibilityCardLatex(card: DivisibilityCard, language: UnitLanguage): string {
-    const gcdName = language === 'es' ? '\\text{m.c.d.}' : '\\mathrm{ZKH}'
-    const lcmName = language === 'es' ? '\\text{m.c.m.}' : '\\mathrm{MKT}'
+    const gcdName = language === 'es' ? '\\text{m.c.d.}' : language === 'en' ? '\\mathrm{GCD}' : '\\mathrm{ZKH}'
+    const lcmName = language === 'es' ? '\\text{m.c.m.}' : language === 'en' ? '\\mathrm{LCM}' : '\\mathrm{MKT}'
     switch (card.kind) {
         case 'value': return String(card.value)
         case 'factors': return factorLatex(factorize(card.value))
