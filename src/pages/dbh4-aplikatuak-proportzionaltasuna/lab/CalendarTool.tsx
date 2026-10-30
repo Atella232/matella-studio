@@ -188,11 +188,17 @@ export function CalendarTool(props: LabToolProps) {
     const perRow = years ? 10 : 12
     const gridX = 34
     const cellWidth = 272 / perRow
-    const cellHeight = 24
+    const cellHeight = 28
     const rowStep = cellHeight + 8
     const knownTime = state.unknown !== 'time' || shown
-    const squares = toNumber(values.time) / (state.unit === 'days' ? 30 : 1)
-    const rows = years || !knownTime ? 1 : Math.max(1, Math.ceil(squares / 12 - 1e-9))
+    // The squares set the time, unless the time is what the learner works out
+    const tappable = state.unknown !== 'time'
+    const perSquare = state.unit === 'days' ? 30 : 1
+    const squares = toNumber(values.time) / perSquare
+    const filledRows = Math.max(1, Math.ceil(squares / 12 - 1e-9))
+    // One empty year after the filled ones, so the time can grow into it
+    const rows = years || !knownTime ? 1 : Math.min(CALENDAR_TIME_MAX[state.unit] / perSquare / 12, filledRows + (tappable ? 1 : 0))
+    const pick = (square: number) => set({ time: Math.min(CALENDAR_TIME_MAX[state.unit], square * perSquare) })
     const knownYearly = state.unknown === 'interest' || state.unknown === 'time' || shown
     const yearly = yearlyInterest(state)
     const gridTop = years ? 48 : 74
@@ -222,10 +228,26 @@ export function CalendarTool(props: LabToolProps) {
                                 const x = gridX + column * cellWidth
                                 const y = gridTop + row * rowStep
                                 const part = knownTime ? Math.min(1, Math.max(0, squares - row * perRow - column)) : 0
-                                return (
-                                    <g key={column}>
+                                const square = row * perRow + column + 1
+                                const cell = (
+                                    <>
                                         <rect x={x} y={y} width={cellWidth} height={cellHeight} fill={CARD} stroke={INK} strokeWidth={1} />
                                         {part > 0 && <rect x={x} y={y} width={cellWidth * part} height={cellHeight} fill={GREEN} fillOpacity={0.45} />}
+                                    </>
+                                )
+                                if (!tappable) return <g key={column}>{cell}</g>
+                                return (
+                                    <g
+                                        key={column}
+                                        className="calendar-square"
+                                        role="button"
+                                        tabIndex={0}
+                                        aria-label={timeText(square * perSquare, state.unit, props.language)}
+                                        aria-pressed={square * perSquare === state.time}
+                                        onClick={() => pick(square)}
+                                        onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); pick(square) } }}
+                                    >
+                                        {cell}
                                     </g>
                                 )
                             })}
@@ -234,7 +256,7 @@ export function CalendarTool(props: LabToolProps) {
                     <Label x={14} y={totalY} fontSize={16} fontWeight={700} fill={INK}>{`${l(UNIT_NAMES[state.unit])}: ${knownTime ? timeNumber(props.language, values.time) : '?'}`}</Label>
                     <text x={306} y={totalY} textAnchor="end" fontSize={18} fontWeight={700} fill={state.unknown === 'interest' && !shown ? MUTED : GREEN}>{euros(props.language, state.unknown === 'interest' && !shown ? null : values.interest)}</text>
                 </svg>
-                <p className="calendar-caption">{l(caption)}</p>
+                <p className="calendar-caption">{`${l(caption)}${tappable ? ` ${l(say('Ukitu lauki bat denbora aukeratzeko.', 'Toca una casilla para elegir el tiempo.', 'المس مربعًا لاختيار المدة.', 'Tap a square to choose the time.'))}` : ''}`}</p>
             </div>
         </ToolFrame>
     )

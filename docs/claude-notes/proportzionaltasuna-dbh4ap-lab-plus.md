@@ -551,7 +551,10 @@ M6 «Interesa hilabete eta egunetan / Interés en meses y días / الفائدة
   - one row is one year, with the interest of one year and of one month (or day) above it;
   - 12 squares per row, one month each, or 30 days each;
   - in years, each square is one year, with up to 10 squares;
-  - the squares are filled up to t.
+  - the squares are filled up to t;
+  - tapping a square sets the time (8 months, or 240 days in days), with one empty year after the filled ones so the time can grow;
+  - each square is a button with its time as its name, for the keyboard and screen readers;
+  - when the time is the unknown, the squares do not respond, because the time is what the learner has to find.
 - Before the answer, the unknown shows as «?».
 - After the answer:
   - the formula in two lines: with letters, then with the data and the result;
@@ -590,6 +593,7 @@ M6 «Interesa hilabete eta egunetan / Interés en meses y días / الفائدة
   - en: 120,000 and 6,750 typed with commas, 11.25, and challenge 43904 solved;
   - ar: 60 days, and challenge 43905 solved;
   - es: years mode and the note for an impossible unknown.
+  - es: tapping the 18-month square sets 18 months and fills a year and a half.
 
 ### Gotchas
 

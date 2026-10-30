@@ -12,3 +12,21 @@
     font-size: 14px;
     text-align: center;
 }
+
+/* A square sets the time when it is tapped */
+.calendar-square {
+    cursor: pointer;
+}
+
+.calendar-square:hover rect:first-child,
+.calendar-square:focus-visible rect:first-child {
+    fill: var(--stage-tint, #e8f3ec);
+}
+
+.calendar-square:focus-visible {
+    outline: none;
+}
+
+.calendar-square:focus-visible rect:first-child {
+    stroke-width: 2.5;
+}
