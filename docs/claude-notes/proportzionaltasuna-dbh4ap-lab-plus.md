@@ -692,11 +692,14 @@ V1 (shorter explanations, split into cases) and V2 (a «typical mistake» box), 
   - English has no decimal comma;
   - Basque has no case ending on a number, which is also checked for every Basque string of `lessons.tsx` (read from the source);
   - every worked equality is right, the mistakes included;
+  - every text has the same formulas in eu, es and en, and in ar with a point instead of `{,}`;
   - the examples quoted by challenges are still there.
+
+- For anyone who copies examples by hand (for instance the explainer-video skill, which says to read `lessons.tsx`): for this unit, the explanations and their examples are now in `lessonTexts.ts`. No script parses them.
 
 ### Checks
 
-- Suite 930/930; lint and build OK.
+- Suite 931/931; lint and build OK.
 - At 375 px, all 15 lessons in eu, es, en and ar: no sideways scroll, every lesson has its cards and its box, and no formula in a card or in the box scrolls sideways.
 - Screenshots:
   - es: simple interest, cards and mistake box;

@@ -56,6 +56,17 @@ test('proportzionaltasuna 4. DBH ap lessons: formulas render, and each language 
     assert.ok(formulas > 150, `only ${formulas}`)
 })
 
+test('proportzionaltasuna 4. DBH ap lessons: every language has the same formulas', () => {
+    const formulas = (line: string) => [...line.matchAll(/\$([^$]+)\$/g)].map((match) => match[1])
+    for (const id of topics) {
+        for (const text of lessonParts(id)) {
+            const spanish = formulas(text.es)
+            for (const language of ['eu', 'en'] as const) assert.deepEqual(formulas(text[language]), spanish, `${id} ${language}: ${text[language]}`)
+            assert.deepEqual(formulas(text.ar), spanish.map((formula) => formula.replace(/\{,\}/g, '.')), `${id} ar: ${text.ar}`)
+        }
+    }
+})
+
 test('proportzionaltasuna 4. DBH ap lessons: every worked equality with numbers is right, the mistakes too', () => {
     let checked = 0
     for (const id of topics) {
