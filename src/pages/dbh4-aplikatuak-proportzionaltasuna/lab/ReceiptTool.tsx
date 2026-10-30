@@ -6,7 +6,7 @@ import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { fraction, toNumber, type FractionValue } from '../../../features/unit-v2/math/fraction'
 import { Label } from '../../dbh2-funtzioak-v2/plane'
-import { readMoneyAnswer } from '../answers'
+import { readMoneyAnswer, typeLabAnswer } from '../answers'
 import {
     couponTotals,
     expectedReceiptAnswer,
@@ -139,7 +139,7 @@ export function ReceiptTool(props: LabToolProps) {
                     placeholder={say('Adib.: 77,44', 'Ej.: 77,44', '\u206677.44\u2069', 'e.g. 77.44')}
                     unreadable={say('Idatzi zenbaki bat, adibidez 77,44.', 'Escribe un número, por ejemplo 77,44.', 'اكتب عددًا، مثل 77.44.', 'Write a number, for example 77.44.')}
                     normalizeInput={readMoneyAnswer}
-                    onChange={(patch) => setState((current) => ({ ...current, ...patch }))}
+                    onChange={(patch) => setState((current) => typeLabAnswer(current, patch, props.language))}
                 />
                 {roundedAnswer(total).rounded && !shown && <span className="fraction-v2-lab-readout-note">{l(say('Biribildu zentimoetara.', 'Redondea a los céntimos.', 'قرّب إلى السنتات.', 'Round to the nearest cent.'))}</span>}
                 {shown && (

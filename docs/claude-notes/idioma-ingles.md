@@ -24,7 +24,7 @@ Publicada en matella.net el 2026-10-30: commit `df11157` en `main` (avance rápi
 
 ## Pendiente (no hecho)
 
-1. Lecturas directas de dinero en proporzionaltasuna 4.º (`percentBar.ts`, `ruleOfThree.ts`, `receipt.ts`, `roadGraph.ts`): una respuesta «30,000» en inglés se lee como 30 en la comprobación directa. El laboratorio con `LabKit` sí la convierte. Hace falta pasar el idioma.
+1. ~~Lecturas directas de dinero en proporzionaltasuna 4.º~~ Hecho el 2026-10-30 (fase 10 de `proportzionaltasuna-dbh4ap-lab-plus.md`): `typeLabAnswer` y `readLabAnswer` en `answers.ts` guardan si la respuesta se escribió en inglés.
 2. Dinero sin agrupar en proporzionaltasuna 4.º (`money()` en `ProportionDbh4ApTools.tsx` y `ReceiptTool.tsx`): en inglés sale `12000.00`.
 3. Miles mezclados en es/eu: los valores dinámicos llevan punto (`100.000 €`, `9.880`), pero muchos textos fijos llevan espacio (`42 000`, `22 000`). Hay que decidir una norma y aplicarla a toda la web.
 4. Árabe: algún eje sale con un espacio extra (`0.00 052`), fallo antiguo.

@@ -2,7 +2,7 @@ import { checkAnswer, divide, equals, fraction, multiply, parseFractionInput, ty
 import { pick, randomInt } from '../../../features/unit-v2/games/random.ts'
 import type { LabChallenge, LabChallengeMaker, OperationAnswer } from '../../../features/unit-v2/lab/types.ts'
 import type { LocalizedText } from '../../../features/unit-v2/types.ts'
-import { readMoneyAnswer } from '../answers.ts'
+import { readLabAnswer } from '../answers.ts'
 import { roundedAnswer } from './percentBar.ts'
 
 /* ==========================================================================
@@ -39,6 +39,8 @@ export const RULE_CONTEXTS: Record<RuleContext, RuleContextInfo> = {
 export const RULE_VALUE_MAX = 9999
 
 export interface RuleState extends OperationAnswer {
+    /** Typed on the English page (18,700 is eighteen thousand seven hundred) */
+    english?: boolean
     context: RuleContext
     /** The known pair (a of the first magnitude goes with b of the second), and the new value c of the first */
     a: number
@@ -88,12 +90,12 @@ export const expectedRuleAnswer = (state: RuleState) => roundedAnswer(ruleResult
 
 /** The right relation was chosen and x is written right (a revealed result does not count) */
 export const ruleAnswered = (state: RuleState) =>
-    relationRight(state) && checkAnswer(readMoneyAnswer(state.answer), expectedRuleAnswer(state)) === 'correct'
+    relationRight(state) && checkAnswer(readLabAnswer(state), expectedRuleAnswer(state)) === 'correct'
 
 /** After checking: the answer the other relation would give (multiplying where one should divide) */
 export function ruleSlip(state: RuleState): boolean {
     if (!state.checked) return false
-    const value = parseFractionInput(readMoneyAnswer(state.answer))
+    const value = parseFractionInput(readLabAnswer(state))
     if (value === null) return false
     const other = ruleResult(state, trueRelation(state) === 'direct' ? 'inverse' : 'direct')
     return !equals(other, ruleResult(state)) && equals(value, roundedAnswer(other).value)

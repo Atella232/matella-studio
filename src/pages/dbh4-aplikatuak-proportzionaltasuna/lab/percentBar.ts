@@ -2,7 +2,7 @@ import { checkAnswer, divide, equals, fraction, multiply, parseFractionInput, su
 import { pick } from '../../../features/unit-v2/games/random.ts'
 import type { LabChallenge, LabChallengeMaker, OperationAnswer } from '../../../features/unit-v2/lab/types.ts'
 import type { LocalizedText } from '../../../features/unit-v2/types.ts'
-import { readMoneyAnswer } from '../answers.ts'
+import { readLabAnswer } from '../answers.ts'
 import { thousandsSeparatorFor } from '../../../utils/numberFormat.ts'
 
 /* ==========================================================================
@@ -21,6 +21,8 @@ export type PercentFind = 'part' | 'whole' | 'percent'
 export type PercentChange = 'of' | 'up' | 'down'
 
 export interface PercentBarState extends OperationAnswer {
+    /** Typed on the English page (18,700 is eighteen thousand seven hundred) */
+    english?: boolean
     find: PercentFind
     change: PercentChange
     /** Euros of the 100 % bar: the total, or the price before the change */
@@ -101,7 +103,7 @@ export const expectedPercentAnswer = (state: PercentBarState) => roundedAnswer(p
 
 /** The learner has written the right number (a revealed result does not count) */
 export const percentAnswered = (state: PercentBarState) =>
-    percentBarCase(state).valid && checkAnswer(readMoneyAnswer(state.answer), expectedPercentAnswer(state)) === 'correct'
+    percentBarCase(state).valid && checkAnswer(readLabAnswer(state), expectedPercentAnswer(state)) === 'correct'
 
 /**
  * The classic slips when going back to the 100 %: adding the percentage to
@@ -110,7 +112,7 @@ export const percentAnswered = (state: PercentBarState) =>
  */
 export function percentSlip(state: PercentBarState): 'added' | 'multiplied' | null {
     if (state.find !== 'whole' || !state.checked) return null
-    const value = parseFractionInput(readMoneyAnswer(state.answer))
+    const value = parseFractionInput(readLabAnswer(state))
     if (value === null) return null
     const part = fraction(state.part)
     const index = percentIndex(state)

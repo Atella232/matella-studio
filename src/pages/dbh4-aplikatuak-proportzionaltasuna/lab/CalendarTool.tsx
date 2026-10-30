@@ -7,7 +7,7 @@ import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { divide, fraction, toNumber, type FractionValue } from '../../../features/unit-v2/math/fraction'
 import type { UnitLanguage } from '../../../features/unit-v2/types'
 import { Label } from '../../dbh2-funtzioak-v2/plane'
-import { readMoneyAnswer } from '../answers'
+import { readMoneyAnswer, typeLabAnswer } from '../answers'
 import { moneyText } from '../games/numbers'
 import {
     CALENDAR_CAPITAL_MAX,
@@ -29,7 +29,6 @@ import {
     setUnknown,
     TIME_UNITS,
     timeText,
-    typeCalendarAnswer,
     yearlyInterest,
     type CalendarState,
     type InterestUnknown,
@@ -164,7 +163,7 @@ export function CalendarTool(props: LabToolProps) {
                     placeholder={state.unknown === 'rate' ? say('Adib.: 3,5', 'Ej.: 3,5', '\u20663.5\u2069', 'e.g. 3.5') : say('Adib.: 120', 'Ej.: 120', '\u2066120\u2069', 'e.g. 120')}
                     unreadable={say('Idatzi zenbaki bat, adibidez 120.', 'Escribe un número, por ejemplo 120.', 'اكتب عددًا، مثل 120.', 'Write a number, for example 120.')}
                     normalizeInput={readMoneyAnswer}
-                    onChange={(patch) => setState((current) => typeCalendarAnswer(current, patch, props.language))}
+                    onChange={(patch) => setState((current) => typeLabAnswer(current, patch, props.language))}
                 />
                 {rounded && !shown && (
                     <span className="fraction-v2-lab-readout-note">

@@ -7,7 +7,7 @@ import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { fraction, toExactDecimal, type FractionValue } from '../../../features/unit-v2/math/fraction'
 import { Label } from '../../dbh2-funtzioak-v2/plane'
 import '../../dbh2-zatikiak-prototype/lab/Prediction.css'
-import { readMoneyAnswer } from '../answers'
+import { readMoneyAnswer, typeLabAnswer } from '../answers'
 import { roundedAnswer } from './percentBar'
 import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import {
@@ -132,7 +132,7 @@ export function RuleTool(props: LabToolProps) {
                         placeholder={say('Adib.: 10', 'Ej.: 10', '⁦10⁩', 'Example: 10')}
                         unreadable={say('Idatzi zenbaki bat, adibidez 10 edo 67,5.', 'Escribe un número, por ejemplo 10 o 67,5.', 'اكتب عددًا، مثل 10 أو 67.5.', 'Write a number, for example 10 or 67.5.')}
                         normalizeInput={readMoneyAnswer}
-                        onChange={(patch) => setState((current) => ({ ...current, ...patch }))}
+                        onChange={(patch) => setState((current) => typeLabAnswer(current, patch, props.language))}
                     />
                     {rounded && !shown && <span className="fraction-v2-lab-readout-note">{l(say('Biribildu ehunenetara.', 'Redondea a las centésimas.', 'قرّب إلى أجزاء المئة.', 'Round to two decimal places.'))}</span>}
                     {ruleSlip(state) && !shown && (

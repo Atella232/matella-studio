@@ -2,7 +2,7 @@ import { add, checkAnswer, divide, equals, fraction, multiply, subtract, toNumbe
 import { pick, randomInt } from '../../../features/unit-v2/games/random.ts'
 import type { LabChallenge, LabChallengeMaker, OperationAnswer } from '../../../features/unit-v2/lab/types.ts'
 import type { LocalizedText } from '../../../features/unit-v2/types.ts'
-import { readMoneyAnswer } from '../answers.ts'
+import { readLabAnswer } from '../answers.ts'
 import type { MotionMode } from './labTools.ts'
 import { roundedAnswer } from './percentBar.ts'
 
@@ -25,6 +25,8 @@ export const GRAPH_SPEED_MAX = 150
 export const GRAPH_SPEED_STEP = 10
 
 export interface RoadGraphState extends OperationAnswer {
+    /** Typed on the English page (18,700 is eighteen thousand seven hundred) */
+    english?: boolean
     mode: MotionMode
     /** km from A's start to B's start; 0 only in a chase (both from the same place) */
     distance: number
@@ -102,7 +104,7 @@ export const expectedGraphAnswer = (state: RoadGraphState) => {
 /** The learner wrote the meeting minute (a revealed result does not count) */
 export function graphAnswered(state: RoadGraphState) {
     const expected = expectedGraphAnswer(state)
-    return expected !== null && checkAnswer(readMoneyAnswer(state.answer), expected) === 'correct'
+    return expected !== null && checkAnswer(readLabAnswer(state), expected) === 'correct'
 }
 
 /* ---------- Problems in words ---------- */

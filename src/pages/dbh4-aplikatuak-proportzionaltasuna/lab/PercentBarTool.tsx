@@ -6,7 +6,7 @@ import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { fraction, toExactDecimal, toNumber, type FractionValue } from '../../../features/unit-v2/math/fraction'
 import { Label } from '../../dbh2-funtzioak-v2/plane'
-import { readMoneyAnswer } from '../answers'
+import { readMoneyAnswer, typeLabAnswer } from '../answers'
 import { decimalSeparatorFor, thousandsSeparatorFor } from '../../../utils/numberFormat'
 import {
     expectedPercentAnswer,
@@ -136,7 +136,7 @@ export function PercentBarTool(props: LabToolProps) {
                     placeholder={say('Adib.: 112', 'Ej.: 112', '⁦112⁩', 'e.g. 112')}
                     unreadable={say('Idatzi zenbaki bat, adibidez 112 edo 143,99.', 'Escribe un número, por ejemplo 112 o 143,99.', 'اكتب عددًا، مثل 112 أو 143.99.', 'Write a number, for example 112 or 143.99.')}
                     normalizeInput={readMoneyAnswer}
-                    onChange={(patch) => setState((current) => ({ ...current, ...patch }))}
+                    onChange={(patch) => setState((current) => typeLabAnswer(current, patch, props.language))}
                 />
                 {rounded && !shown && <span className="fraction-v2-lab-readout-note">{l(say('Biribildu ehunenetara.', 'Redondea a las centésimas.', 'قرّب إلى أجزاء المئة.', 'Round to two decimal places.'))}</span>}
                 {slip && !shown && (

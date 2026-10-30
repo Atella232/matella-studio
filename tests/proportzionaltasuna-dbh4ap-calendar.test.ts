@@ -15,7 +15,6 @@ import {
     setCalendar,
     setUnit,
     setUnknown,
-    typeCalendarAnswer,
     unknownValue,
     yearlyInterest,
     type CalendarState,
@@ -23,9 +22,10 @@ import {
     type TimeUnit
 } from '../src/pages/dbh4-aplikatuak-proportzionaltasuna/lab/calendar.ts'
 import { decimalFieldText, readDecimalField } from '../src/pages/dbh4-aplikatuak-proportzionaltasuna/lab/decimalInput.ts'
+import { typeLabAnswer } from '../src/pages/dbh4-aplikatuak-proportzionaltasuna/answers.ts'
 
 type Data = Partial<Pick<CalendarState, 'capital' | 'rate' | 'time' | 'interest'>>
-const make = (unknown: InterestUnknown, unit: TimeUnit, data: Data, answer = '') => ({ ...initialCalendarState, unknown, unit, ...data, answer, reading: answer, checked: answer !== '' })
+const make = (unknown: InterestUnknown, unit: TimeUnit, data: Data, answer = '') => ({ ...initialCalendarState, unknown, unit, ...data, answer, checked: answer !== '' })
 
 /** The numbers after the letters give the result: C = I · 1200 / (r · t) = 448,80 · 1200 / (3,2 · 9) = 18 700 */
 function checkWorking(latex: string) {
@@ -62,8 +62,8 @@ test('proportzionaltasuna 4. DBH ap calendar: the lesson cases, in years, months
     // 1000 € at 4 % for 4 months: 13,33 € to the cent
     const rounded = make('interest', 'months', { capital: 1000, rate: 4, time: 4 })
     assert.ok(calendarLatex(rounded).endsWith('\\approx 13{,}33'))
-    assert.ok(calendarAnswered({ ...rounded, answer: '13,33 €', reading: '13,33 €', checked: true }))
-    assert.ok(!calendarAnswered({ ...rounded, answer: '13,3', reading: '13,3', checked: true }))
+    assert.ok(calendarAnswered({ ...rounded, answer: '13,33 €', checked: true }))
+    assert.ok(!calendarAnswered({ ...rounded, answer: '13,3', checked: true }))
     // The principal, the rate and the time worked out
     const capital = make('capital', 'months', { interest: 448.8, rate: 3.2, time: 9 })
     assert.equal(toNumber(unknownValue(capital)), 18700)
@@ -80,7 +80,7 @@ test('proportzionaltasuna 4. DBH ap calendar: the lesson cases, in years, months
 })
 
 test('proportzionaltasuna 4. DBH ap calendar: changing the unknown, the unit and the data', () => {
-    const answered = { ...initialCalendarState, answer: '30', reading: '30', checked: true }
+    const answered = { ...initialCalendarState, answer: '30', checked: true }
     assert.ok(calendarAnswered(answered))
     // Same time in another unit: 6 months = 180 days = half a year, and the 30 € still hold
     const days = setUnit(answered, 'days')
@@ -91,7 +91,7 @@ test('proportzionaltasuna 4. DBH ap calendar: changing the unknown, the unit and
     assert.equal(setUnit(days, 'years').answer, '')
     assert.equal(setUnit(setCalendar(initialCalendarState, { time: 24 }), 'years').time, 2)
     // When the time is the unknown, another unit asks for another number
-    const time = { ...make('time', 'months', { capital: 2000, rate: 3, interest: 30 }), answer: '6', reading: '6', checked: true }
+    const time = { ...make('time', 'months', { capital: 2000, rate: 3, interest: 30 }), answer: '6', checked: true }
     assert.ok(calendarAnswered(time))
     assert.equal(setUnit(time, 'days').answer, '')
     // Another unknown keeps the case: what principal gives the 30 €?
@@ -110,14 +110,14 @@ test('proportzionaltasuna 4. DBH ap calendar: changing the unknown, the unit and
 
 test('proportzionaltasuna 4. DBH ap calendar: English answers with thousands commas', () => {
     const capital = make('capital', 'months', { interest: 448.8, rate: 3.2, time: 9 })
-    assert.ok(calendarAnswered(typeCalendarAnswer(capital, { answer: '18,700', checked: true }, 'en')))
-    assert.ok(calendarAnswered(typeCalendarAnswer(capital, { answer: '€18,700', checked: true }, 'en')))
+    assert.ok(calendarAnswered(typeLabAnswer(capital, { answer: '18,700', checked: true }, 'en')))
+    assert.ok(calendarAnswered(typeLabAnswer(capital, { answer: '€18,700', checked: true }, 'en')))
     // In Spanish 18,700 is eighteen point seven
-    assert.ok(!calendarAnswered(typeCalendarAnswer(capital, { answer: '18,700', checked: true }, 'es')))
-    assert.ok(calendarAnswered(typeCalendarAnswer(capital, { answer: '18 700', checked: true }, 'es')))
+    assert.ok(!calendarAnswered(typeLabAnswer(capital, { answer: '18,700', checked: true }, 'es')))
+    assert.ok(calendarAnswered(typeLabAnswer(capital, { answer: '18 700', checked: true }, 'es')))
     // Checking later reads what was typed
-    const typed = typeCalendarAnswer(capital, { answer: '18,700' }, 'en')
-    assert.ok(calendarAnswered(typeCalendarAnswer(typed, { checked: true }, 'en')))
+    const typed = typeLabAnswer(capital, { answer: '18,700' }, 'en')
+    assert.ok(calendarAnswered(typeLabAnswer(typed, { checked: true }, 'en')))
 })
 
 test('proportzionaltasuna 4. DBH ap calendar: the decimal fields in each language', () => {
@@ -140,8 +140,8 @@ test('proportzionaltasuna 4. DBH ap calendar: challenges', () => {
     ]
     states.forEach((state, index) => assert.ok(calendarChallenges[index].isSolved(state), String(calendarChallenges[index].id)))
     // Not with the time as years, nor without the answer
-    assert.ok(!calendarChallenges[0].isSolved({ ...states[0], unit: 'years', answer: '1440', reading: '1440' }))
-    assert.ok(!calendarChallenges[2].isSolved({ ...states[2], answer: '', reading: '', checked: false }))
+    assert.ok(!calendarChallenges[0].isSolved({ ...states[0], unit: 'years', answer: '1440' }))
+    assert.ok(!calendarChallenges[2].isSolved({ ...states[2], answer: '', checked: false }))
     // The unknown's own field does not matter
     assert.ok(calendarChallenges[2].isSolved({ ...states[2], capital: 5 }))
     for (const challenge of calendarChallenges) {

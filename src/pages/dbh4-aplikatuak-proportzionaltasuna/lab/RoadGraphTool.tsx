@@ -3,7 +3,7 @@ import { ResultAnswer, Segmented, Stepper, ToolFrame } from '../../../features/u
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { fraction, toExactDecimal, toNumber, type FractionValue } from '../../../features/unit-v2/math/fraction'
-import { readMoneyAnswer } from '../answers'
+import { readMoneyAnswer, typeLabAnswer } from '../answers'
 import type { MotionMode } from './labTools'
 import { roundedAnswer } from './percentBar'
 import { decimalSeparatorFor } from '../../../utils/numberFormat'
@@ -87,7 +87,7 @@ export function RoadGraphTool(props: LabToolProps) {
                     placeholder={say('Adib.: 80', 'Ej.: 80', '⁦80⁩', 'Example: 80')}
                     unreadable={say('Idatzi minutuak, adibidez 80.', 'Escribe los minutos, por ejemplo 80.', 'اكتب الدقائق، مثل 80.', 'Write the minutes, for example 80.')}
                     normalizeInput={readMoneyAnswer}
-                    onChange={(patch) => setState((current) => ({ ...current, ...patch }))}
+                    onChange={(patch) => setState((current) => typeLabAnswer(current, patch, props.language))}
                 />
                 {roundedAnswer(meeting.minutes).rounded && !shown && <span className="fraction-v2-lab-readout-note">{l(say('Biribildu ehunenetara.', 'Redondea a las centésimas.', 'قرّب إلى أجزاء المئة.', 'Round to two decimal places.'))}</span>}
                 {shown && (

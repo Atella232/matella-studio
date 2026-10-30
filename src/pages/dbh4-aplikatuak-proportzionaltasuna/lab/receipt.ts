@@ -2,7 +2,7 @@ import { checkAnswer, equals, fraction, multiply, subtract, toExactDecimal, toNu
 import { pick, shuffle } from '../../../features/unit-v2/games/random.ts'
 import type { LabChallenge, LabChallengeMaker, OperationAnswer } from '../../../features/unit-v2/lab/types.ts'
 import type { LocalizedText } from '../../../features/unit-v2/types.ts'
-import { readMoneyAnswer } from '../answers.ts'
+import { readLabAnswer } from '../answers.ts'
 import { latexNumber } from '../games/numbers.ts'
 import { roundedAnswer } from './percentBar.ts'
 
@@ -19,6 +19,8 @@ import { roundedAnswer } from './percentBar.ts'
 export type ReceiptStep = 'discount' | 'vat' | 'coupon'
 
 export interface ReceiptState extends OperationAnswer {
+    /** Typed on the English page (18,700 is eighteen thousand seven hundred) */
+    english?: boolean
     /** Price without VAT, in whole euros */
     price: number
     /** Discount in % (0: none) */
@@ -121,7 +123,7 @@ export const expectedReceiptAnswer = (state: ReceiptState) => roundedAnswer(rece
 
 /** The learner has written the right total (a revealed result does not count) */
 export const receiptAnswered = (state: ReceiptState) =>
-    receiptValid(state) && checkAnswer(readMoneyAnswer(state.answer), expectedReceiptAnswer(state)) === 'correct'
+    receiptValid(state) && checkAnswer(readLabAnswer(state), expectedReceiptAnswer(state)) === 'correct'
 
 /** The working in one line, without the result: (80 · 0,8 − 5) · 1,21 */
 export function receiptExpression(state: ReceiptState, order: ReceiptStep[] = state.order): string {

@@ -2,8 +2,8 @@ import { checkAnswer, divide, fraction, multiply, toExactDecimal, toNumber, type
 import { pick, type Random } from '../../../features/unit-v2/games/random.ts'
 import type { LabChallenge, LabChallengeMaker, OperationAnswer } from '../../../features/unit-v2/lab/types.ts'
 import type { LocalizedText, UnitLanguage } from '../../../features/unit-v2/types.ts'
-import { decimalSeparatorFor, englishDigits } from '../../../utils/numberFormat.ts'
-import { readMoneyAnswer } from '../answers.ts'
+import { decimalSeparatorFor } from '../../../utils/numberFormat.ts'
+import { readLabAnswer } from '../answers.ts'
 import { latexNumber, moneyText } from '../games/numbers.ts'
 import { roundedAnswer } from './percentBar.ts'
 
@@ -32,8 +32,8 @@ export interface CalendarState extends OperationAnswer {
     time: number
     /** Interest in euros, up to two decimals */
     interest: number
-    /** The written answer as the checker reads it: English commas between thousands taken out (18,700 → 18700) */
-    reading: string
+    /** Typed on the English page (18,700 is eighteen thousand seven hundred) */
+    english?: boolean
 }
 
 export const INTEREST_UNKNOWNS: InterestUnknown[] = ['interest', 'capital', 'rate', 'time']
@@ -46,7 +46,7 @@ export const CALENDAR_TIME_MAX: Record<TimeUnit, number> = { years: 10, months: 
 export const DIVISORS: Record<TimeUnit, number> = { years: 100, months: 1200, days: 36000 }
 export const PER_YEAR: Record<TimeUnit, number> = { years: 1, months: 12, days: 360 }
 
-const freshAnswer = { answer: '', checked: false, revealed: false, reading: '' }
+const freshAnswer = { answer: '', checked: false, revealed: false }
 
 /** Not one of the challenges, so that none is solved on arrival */
 export const initialCalendarState: CalendarState = { unknown: 'interest', unit: 'months', capital: 2000, rate: 3, time: 6, interest: 30, ...freshAnswer }
@@ -116,17 +116,11 @@ export function setUnit(state: CalendarState, unit: TimeUnit): CalendarState {
     return same && state.unknown !== 'time' ? next : { ...next, ...freshAnswer }
 }
 
-/** The learner types: the checker reads English thousands without their commas */
-export function typeCalendarAnswer(state: CalendarState, patch: Partial<OperationAnswer>, language: UnitLanguage): CalendarState {
-    const answer = patch.answer ?? state.answer
-    return { ...state, ...patch, reading: language === 'en' ? englishDigits(answer) : answer }
-}
-
 export const expectedCalendarAnswer = (state: CalendarState) => roundedAnswer(unknownValue(state)).value
 
 /** The learner has written the right unknown (a revealed result does not count) */
 export const calendarAnswered = (state: CalendarState) =>
-    calendarValid(state) && checkAnswer(readMoneyAnswer(state.reading), expectedCalendarAnswer(state)) === 'correct'
+    calendarValid(state) && checkAnswer(readLabAnswer(state), expectedCalendarAnswer(state)) === 'correct'
 
 /** One year's interest, C · r / 100, and the interest of one month or day */
 export function yearlyInterest(state: CalendarState): FractionValue {
@@ -378,7 +372,7 @@ export const calendarExtra: LabChallengeMaker<CalendarState> = freshFrom(initial
             // The formula solved for the unknown, with letters: I = C · r · t / 1200
             hint: same(`$${calendarLatex(solution).split('=').slice(0, 2).join('=')}$`),
             isSolved: (state) => has(state, unknown, unit, known) && calendarAnswered(state),
-            solution: { ...solution, answer, reading: answer, checked: true }
+            solution: { ...solution, answer, checked: true }
         }
     }
 })

@@ -1,3 +1,6 @@
+import type { OperationAnswer } from '../../features/unit-v2/lab/types.ts'
+import type { UnitLanguage } from '../../features/unit-v2/types.ts'
+import { englishDigits } from '../../utils/numberFormat.ts'
 import { readDecimalAnswer } from '../dbh1-hamartarrak-v2/answers.ts'
 
 /* ==========================================================================
@@ -8,3 +11,18 @@ import { readDecimalAnswer } from '../dbh1-hamartarrak-v2/answers.ts'
    ========================================================================== */
 
 export const readMoneyAnswer = (input: string) => readDecimalAnswer(input.replace(/[%٪€]/g, ''))
+
+/** A lab answer, and whether it was typed on the English page, where 18,700 groups thousands */
+export interface LabAnswer {
+    answer: string
+    english?: boolean
+}
+
+/** A lab answer as the checks read it: from the English page the commas between thousands go (18,700 → 18700) */
+export const readLabAnswer = (state: LabAnswer) => readMoneyAnswer(state.english ? englishDigits(state.answer) : state.answer)
+
+/** The learner types or checks: the answer keeps the language of the page */
+export function typeLabAnswer<State extends LabAnswer>(state: State, patch: Partial<OperationAnswer>, language: UnitLanguage): State {
+    return { ...state, ...patch, english: language === 'en' }
+}
+
