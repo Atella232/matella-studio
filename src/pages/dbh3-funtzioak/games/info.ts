@@ -33,7 +33,7 @@ export const functions3Games: GameInfo<Functions3GameId>[] = [
         skills: { eu: 'Grafikoa eta formula lotzea', es: 'Unir gráfica y fórmula', en: 'Linking graph and formula', ar: 'الربط بين التمثيل والصيغة' },
         levels: [
             { progressId: 55301, stage: 'linear', title: { eu: 'Zuzenak', es: 'Rectas', en: 'Lines', ar: 'المستقيمات' }, description: { eu: 'Malda osoak.', es: 'Pendientes enteras.', en: 'Whole slopes.', ar: 'ميول صحيحة.' } },
-            { progressId: 55302, stage: 'lines', title: { eu: 'Malda zatikiak', es: 'Pendientes fraccionarias', en: 'Fraction slopes', ar: 'ميول كسرية' }, description: { eu: 'Bat edo bi eskuinera, gora edo behera.', es: 'Dos o tres a la derecha, arriba o abajo.', en: 'Two or three to the right, up or down.', ar: 'اثنان أو ثلاثة إلى اليمين، صعودًا أو نزولًا.' } },
+            { progressId: 55302, stage: 'lines', title: { eu: 'Malda zatikiak', es: 'Pendientes fraccionarias', en: 'Fraction slopes', ar: 'ميول كسرية' }, description: { eu: 'Bi edo hiru eskuinera, gora edo behera.', es: 'Dos o tres a la derecha, arriba o abajo.', en: 'Two or three to the right, up or down.', ar: 'اثنان أو ثلاثة إلى اليمين، صعودًا أو نزولًا.' } },
             { progressId: 55303, stage: 'quadratic', title: { eu: 'Parabolak', es: 'Parábolas', en: 'Parabolas', ar: 'القطوع المكافئة' }, description: { eu: 'Irekiera eta erpina.', es: 'Abertura y vértice.', en: 'Opening and vertex.', ar: 'الانفتاح والرأس.' } }
         ]
     },
@@ -55,7 +55,7 @@ export const functions3Games: GameInfo<Functions3GameId>[] = [
         skills: { eu: 'Koefizienteak grafikoan', es: 'Coeficientes en la gráfica', en: 'Coefficients on the graph', ar: 'المعاملات في التمثيل' },
         levels: [
             { progressId: 55501, stage: 'linear', title: { eu: 'm eta n', es: 'm y n', en: 'm and n', ar: 'الميل والجزء المقطوع' }, description: { eu: 'Malda eta Y ardatza.', es: 'Pendiente y eje Y.', en: 'Slope and Y axis.', ar: 'الميل ومحور Y.' } },
-            { progressId: 55502, stage: 'quadratic', title: { eu: 'a eta c', es: 'a y c', en: 'a and c', ar: 'المعاملان a وc' }, description: { eu: 'Irekiera eta Y ardatza.', es: 'Abertura y eje Y.', en: 'Opening and Y axis.', ar: 'الانفتاح ومحور Y.' } },
+            { progressId: 55502, stage: 'quadratic', title: { eu: 'a eta c', es: 'a y c', en: 'a and c', ar: 'المعاملان \u2066a\u2069 و\u2066c\u2069' }, description: { eu: 'Irekiera eta Y ardatza.', es: 'Abertura y eje Y.', en: 'Opening and Y axis.', ar: 'الانفتاح ومحور Y.' } },
             { progressId: 55503, stage: 'quadratic', title: { eu: 'Erpinaren aldea', es: 'El lado del vértice', en: 'The side of the vertex', ar: 'جهة الرأس' }, description: { eu: 'Irekiera eta erpina.', es: 'Abertura y vértice.', en: 'Opening and vertex.', ar: 'الانفتاح والرأس.' } }
         ]
     },
@@ -76,8 +76,8 @@ export const functions3Games: GameInfo<Functions3GameId>[] = [
         tagline: { eu: 'Elkartu funtzio bakoitza bere datuarekin.', es: 'Une cada función con su dato.', en: 'Match each function with its value.', ar: 'صِل كل دالة بمعطاها.' },
         skills: { eu: 'Funtzioak buruz', es: 'Funciones de cabeza', en: 'Functions in your head', ar: 'الدوال ذهنيًا' },
         levels: [
-            { progressId: 55201, stage: 'graphs', title: { eu: 'Balioak', es: 'Valores', en: 'Values', ar: 'القيم' }, description: { eu: 'Funtzioa eta x ↔ y', es: 'Función y x ↔ y', en: 'Function and x ↔ y', ar: 'الدالة وx ↔ y' } },
-            { progressId: 55202, stage: 'linear', title: { eu: 'Zuzenak', es: 'Rectas', en: 'Lines', ar: 'المستقيمات' }, description: { eu: 'Zuzena ↔ m eta n', es: 'Recta ↔ m y n', en: 'Line ↔ m and n', ar: 'المستقيم ↔ m وn' } },
+            { progressId: 55201, stage: 'graphs', title: { eu: 'Balioak', es: 'Valores', en: 'Values', ar: 'القيم' }, description: { eu: 'Funtzioa eta x ↔ y', es: 'Función y x ↔ y', en: 'Function and x ↔ y', ar: 'الدالة و\u2066x ↔ y\u2069' } },
+            { progressId: 55202, stage: 'linear', title: { eu: 'Zuzenak', es: 'Rectas', en: 'Lines', ar: 'المستقيمات' }, description: { eu: 'Zuzena ↔ m eta n', es: 'Recta ↔ m y n', en: 'Line ↔ m and n', ar: 'المستقيم ↔ \u2066m\u2069 و\u2066n\u2069' } },
             { progressId: 55203, stage: 'quadratic', title: { eu: 'Erpinak', es: 'Vértices', en: 'Vertices', ar: 'الرؤوس' }, description: { eu: 'Parabola ↔ erpina', es: 'Parábola ↔ vértice', en: 'Parabola ↔ vertex', ar: 'القطع ↔ الرأس' } }
         ]
     }

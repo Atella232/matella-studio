@@ -186,10 +186,10 @@ const storyConfig: QuizConfig = {
         options: round.options.map((positions) => ({ key: positions.join(','), content: <MiniGraph curve={{ kind: 'walk', positions }} size={160} /> })),
         answer: round.answer.join(','),
         why: say(
-            `Distantziak orduz ordu: ${round.answer.join(' → ')} km. Gora urruntzen da, horizontalean geldirik dago eta behera etxera hurbiltzen da.`,
-            `Distancias hora a hora: ${round.answer.join(' → ')} km. Sube al alejarse, es horizontal al pararse y baja al acercarse a casa.`,
-            `المسافات ساعة بساعة: ${round.answer.join(' → ')} كم. يصعد عند الابتعاد، ويكون أفقيًا عند التوقف، وينزل عند الاقتراب من البيت.`,
-            `Distances hour by hour: ${round.answer.join(' → ')} km. It rises moving away, is flat when stopped and falls coming home.`
+            `Distantziak orduz ordu: $${round.answer.join('\\to ')}$ km. Gora urruntzen da, horizontalean geldirik dago eta behera etxera hurbiltzen da.`,
+            `Distancias hora a hora: $${round.answer.join('\\to ')}$ km. Sube al alejarse, es horizontal al pararse y baja al acercarse a casa.`,
+            `المسافات ساعة بساعة: $${round.answer.join('\\to ')}$ كم. يصعد عند الابتعاد، ويكون أفقيًا عند التوقف، وينزل عند الاقتراب من البيت.`,
+            `Distances hour by hour: $${round.answer.join('\\to ')}$ km. It rises moving away, is flat when stopped and falls coming home.`
         )
     }))
 }
