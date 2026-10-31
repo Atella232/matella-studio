@@ -1,0 +1,48 @@
+/* ---------- Ekuazioak eta sistemak (3. DBH) games: the layout comes from Proportzionaltasuna 3. DBH (prop3-*) ---------- */
+
+.fraction-v2-games-card[data-game="step"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="roots"] { --game-tint: var(--violet-tint, #e6e0f3); }
+.fraction-v2-games-card[data-game="crossing"] { --game-tint: var(--mustard-tint, #fbebc0); }
+.fraction-v2-games-card[data-game="detective"] { --game-tint: var(--paper-deep, #ece6da); }
+
+.ekuazioak-detective-step { display: flex; flex-direction: column; gap: 2px; text-align: start; }
+.ekuazioak-detective-label { color: var(--muted); font-size: 13px; }
+
+.ekuazioak-hint { margin: 0; text-align: center; color: var(--muted); }
+
+.ekuazioak-steps { display: grid; gap: 8px; }
+
+.ekuazioak-steps button,
+.ekuazioak-line button {
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    background: var(--card);
+    box-shadow: 0 3px 0 var(--ink);
+    color: var(--ink);
+    font: inherit;
+    cursor: pointer;
+}
+
+.ekuazioak-steps button { min-height: 52px; padding: 6px 10px; font-size: 19px; }
+
+.ekuazioak-line {
+    display: grid;
+    grid-template-columns: repeat(13, minmax(0, 1fr));
+    gap: 3px;
+}
+
+.ekuazioak-line button { min-height: 44px; padding: 0; font-size: 14px; font-weight: 700; box-shadow: 0 2px 0 var(--ink); border-radius: 8px; }
+.ekuazioak-line button.on { background: var(--blue-tint, #dde7f7); outline: 3px solid var(--blue, #2f6fdb); }
+
+.ekuazioak-steps button.right,
+.ekuazioak-line button.right { background: var(--success-tint, #d9efe2); border-color: var(--success, #267b53); }
+.ekuazioak-steps button.wrong,
+.ekuazioak-line button.wrong { background: var(--coral-tint, #f6d5cc); border-color: var(--error, #c4432a); }
+.ekuazioak-line button.missed { outline: 3px dashed var(--success, #267b53); }
+.ekuazioak-steps button:disabled,
+.ekuazioak-line button:disabled { cursor: default; }
+
+.ekuazioak-system { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; font-size: 20px; font-weight: 700; }
+
+.ekuazioak-grid { display: block; width: 100%; max-width: 360px; height: auto; margin: 0 auto; }
+.ekuazioak-grid circle:focus-visible { outline: none; stroke: var(--ink); stroke-width: 2.5; }
