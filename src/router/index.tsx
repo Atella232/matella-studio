@@ -61,6 +61,7 @@ const SegidakDBH3Page = lazy(() => import('../pages/dbh3-segidak').then((module)
 const PolinomioakDBH3Page = lazy(() => import('../pages/dbh3-polinomioak').then((module) => ({ default: module.PolinomioakDBH3Page })))
 const EkuazioakDBH3Page = lazy(() => import('../pages/dbh3-ekuazioak').then((module) => ({ default: module.EkuazioakDBH3Page })))
 const GeometriaDBH3Page = lazy(() => import('../pages/dbh3-geometria').then((module) => ({ default: module.GeometriaDBH3Page })))
+const MugimenduakDBH3Page = lazy(() => import('../pages/dbh3-mugimenduak').then((module) => ({ default: module.MugimenduakDBH3Page })))
 const ErrealakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-errealak').then((module) => ({ default: module.ErrealakDBH4AkPage })))
 const ZenbakiOsoakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-osoak-v2').then((module) => ({ default: module.ZenbakiOsoakIntroPage })))
 
@@ -241,6 +242,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/dbh3/geometria-plana/*',
                         element: <GeometriaDBH3Page />,
+                    },
+                    // Movimientos en el plano de 3.º ESO: unidad V2
+                    {
+                        path: 'matematika/dbh3/movimientos-plano/*',
+                        element: <MugimenduakDBH3Page />,
                     },
                     // Números reales de 4.º ESO (matemáticas aplicadas): unidad V2
                     {

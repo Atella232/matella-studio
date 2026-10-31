@@ -1,0 +1,12 @@
+/* ---------- Planoko mugimenduak (3. DBH) games: the layout comes from Proportzionaltasuna 3. DBH (prop3-*) ---------- */
+
+.fraction-v2-games-card[data-game="where"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="which"] { --game-tint: var(--coral-tint, #f6d5cc); }
+.fraction-v2-games-card[data-game="tiles"] { --game-tint: var(--success-tint, #d9efe2); }
+.fraction-v2-games-card[data-game="detective"] { --game-tint: var(--paper-deep, #ece6da); }
+
+.mugimenduak-detective-step { display: flex; flex-direction: column; gap: 2px; text-align: start; }
+.mugimenduak-detective-label { color: var(--muted); font-size: 13px; }
+
+.mugimenduak-which-board { display: block; width: 100%; max-width: 340px; height: auto; margin: 0 auto; }
+.mugimenduak-tiles { display: block; width: 100%; max-width: 340px; height: auto; margin: 0 auto; }
