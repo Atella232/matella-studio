@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { ProportionHeroArt } from '../dbh1-proportzionaltasuna-v2/figures'
 import { readMoneyAnswer } from '../dbh4-aplikatuak-proportzionaltasuna/answers'
 import { proportion3Challenges, proportion3Diagnostic, proportion3ExerciseBank, proportion3Practice } from './content'
+import { Proportion3Games } from './games'
+import { PROPORTION3_GAME_RECORDS_KEY, proportion3GameProgressIds } from './games/info'
 import { Proportion3Laboratory } from './lab'
 import { proportion3LabChallengeIds, proportion3LabToolForTopic, proportion3LabTools } from './lab/labTools'
 import { proportion3Stages, proportion3Topics } from './lessons'
@@ -37,6 +39,17 @@ const proportion3Unit: UnitDefinition = {
         progressIds: proportion3LabChallengeIds,
         toolForTopic: proportion3LabToolForTopic,
         render: (props) => <Proportion3Laboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko: lasterketa, kanbio-kaxa, fotokopiagailua, altxorraren banaketa, altxorraren mapa eta memoria.',
+            es: 'Seis juegos: carrera, la caja de cambios, la fotocopiadora, el reparto del botín, el mapa del tesoro y memoria.',
+            en: 'Six games: race, the gearbox, the photocopier, sharing the loot, the treasure map and memory.',
+            ar: 'ست ألعاب: السباق وعلبة التروس وآلة النسخ وتقسيم الغنيمة وخريطة الكنز والذاكرة.'
+        },
+        progressIds: proportion3GameProgressIds,
+        recordsKey: PROPORTION3_GAME_RECORDS_KEY,
+        render: (props) => <Proportion3Games {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (12,6 edo 12.6). Ehunekoetan, idatzi % ikurraren aurreko zenbakia; dirua, euroetan; denbora, ordutan.', es: 'Escribe un número, con coma o con punto (12,6 o 12.6). En los porcentajes, el número que va delante del %; el dinero, en euros; el tiempo, en horas.', en: 'Write a number, with a decimal point or a decimal comma (for example 12.6). For percentages, write the number before the %; money in euros; time in hours.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (12.6). وفي النسب المئوية العدد الذي يسبق ٪؛ والمال باليورو؛ والزمن بالساعات.' },

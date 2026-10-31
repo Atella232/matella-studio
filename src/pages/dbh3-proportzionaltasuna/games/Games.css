@@ -1,0 +1,190 @@
+/* ---------- Proportzionaltasuna (3. DBH) games ---------- */
+
+.fraction-v2-games-card[data-game="gearbox"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="copier"] { --game-tint: var(--mustard-tint, #fbebc0); }
+.fraction-v2-games-card[data-game="loot"] { --game-tint: var(--coral-tint, #f6d5cc); }
+.fraction-v2-games-card[data-game="treasure"] { --game-tint: var(--success-tint, #d9efe2); }
+
+.prop3-game {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.prop3-game > * {
+    align-self: center;
+    width: min(100%, 560px);
+    margin: 0;
+}
+
+.prop3-prompt {
+    padding: 10px 16px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+    text-align: center;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.prop3-prompt strong {
+    display: block;
+    font-family: var(--font-display, "Fraunces", Georgia, serif);
+    font-size: 24px;
+    line-height: 1.25;
+}
+
+.prop3-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.prop3-options button,
+.prop3-buttons button {
+    min-height: 54px;
+    padding: 8px 10px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+    box-shadow: 0 3px 0 var(--ink);
+    color: var(--ink);
+    font: inherit;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.prop3-options button:disabled,
+.prop3-buttons button:disabled {
+    cursor: default;
+    opacity: 0.55;
+    box-shadow: none;
+}
+
+.prop3-options button.right {
+    opacity: 1;
+    background: var(--success-tint, #d9efe2);
+    border-color: var(--success, #267b53);
+}
+
+.prop3-options button.wrong {
+    opacity: 1;
+    background: var(--coral-tint, #f6d5cc);
+    border-color: var(--error, #c4432a);
+}
+
+.prop3-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.prop3-buttons button { white-space: nowrap; }
+.prop3-buttons button.up { background: var(--blue-tint, #dde7f7); }
+.prop3-buttons button.down { background: var(--coral-tint, #f6d5cc); }
+
+.prop3-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.prop3-verdict.right { color: var(--success, #267b53); }
+.prop3-verdict.wrong { color: var(--error, #c4432a); }
+
+.prop3-trail {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    min-height: 34px;
+    font-weight: 700;
+}
+
+.prop3-trail span {
+    padding: 2px 10px;
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    background: var(--card);
+}
+
+.prop3-piles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+    gap: 10px;
+}
+
+.prop3-pile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 6px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--card);
+}
+
+.prop3-pile strong {
+    font-size: 22px;
+}
+
+.prop3-pile small {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.prop3-pile .prop3-pile-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.prop3-pile .prop3-pile-row button {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    background: var(--paper-deep, #ece6da);
+    color: var(--ink);
+    font: inherit;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.prop3-pile .prop3-pile-row button:disabled {
+    cursor: default;
+    opacity: 0.45;
+}
+
+.prop3-pile.right { border-color: var(--success, #267b53); background: var(--success-tint, #d9efe2); }
+.prop3-pile.wrong { border-color: var(--error, #c4432a); background: var(--coral-tint, #f6d5cc); }
+
+.prop3-sum {
+    text-align: center;
+    font-weight: 700;
+}
+
+.prop3-sum.over { color: var(--error, #c4432a); }
+
+.prop3-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.prop3-dots span {
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    background: var(--card);
+}
+
+.prop3-dots span.right { background: var(--success, #267b53); }
+.prop3-dots span.wrong { background: var(--error, #c4432a); }
+.prop3-dots span.now { background: var(--mustard, #e0a100); }
