@@ -1,0 +1,14 @@
+/* ---------- Funtzioak (3. DBH) games: the layout comes from Proportzionaltasuna 3. DBH (prop3-*) ---------- */
+
+.fraction-v2-games-card[data-game="match"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="story"] { --game-tint: var(--success-tint, #d9efe2); }
+.fraction-v2-games-card[data-game="signs"] { --game-tint: var(--coral-tint, #f6d5cc); }
+.fraction-v2-games-card[data-game="detective"] { --game-tint: var(--paper-deep, #ece6da); }
+
+.funtzioak-detective-step { display: flex; flex-direction: column; gap: 2px; text-align: start; }
+.funtzioak-detective-label { color: var(--muted); font-size: 13px; }
+
+.funtzioak-mini-graph { display: block; width: 100%; max-width: 300px; height: auto; margin: 0 auto; }
+.funtzioak-options button .funtzioak-mini-graph { max-width: 140px; }
+.funtzioak-options button { min-width: 0; padding-inline: 6px; }
+.funtzioak-story { max-width: 520px; margin: 0 auto; padding: 12px 14px; border: 2px solid var(--ink); border-radius: 12px; background: var(--card); font-size: 17px; line-height: 1.5; }
