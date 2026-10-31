@@ -63,6 +63,7 @@ const EkuazioakDBH3Page = lazy(() => import('../pages/dbh3-ekuazioak').then((mod
 const GeometriaDBH3Page = lazy(() => import('../pages/dbh3-geometria').then((module) => ({ default: module.GeometriaDBH3Page })))
 const MugimenduakDBH3Page = lazy(() => import('../pages/dbh3-mugimenduak').then((module) => ({ default: module.MugimenduakDBH3Page })))
 const FuntzioakDBH3Page = lazy(() => import('../pages/dbh3-funtzioak').then((module) => ({ default: module.FuntzioakDBH3Page })))
+const EstatistikaDBH3Page = lazy(() => import('../pages/dbh3-estatistika').then((module) => ({ default: module.EstatistikaDBH3Page })))
 const ErrealakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-errealak').then((module) => ({ default: module.ErrealakDBH4AkPage })))
 const ZenbakiOsoakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-osoak-v2').then((module) => ({ default: module.ZenbakiOsoakIntroPage })))
 
@@ -253,6 +254,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/dbh3/funciones-lineales/*',
                         element: <FuntzioakDBH3Page />,
+                    },
+                    // Estadística y probabilidad de 3.º ESO: unidad V2
+                    {
+                        path: 'matematika/dbh3/estadistica-probabilidad/*',
+                        element: <EstatistikaDBH3Page />,
                     },
                     // Números reales de 4.º ESO (matemáticas aplicadas): unidad V2
                     {
