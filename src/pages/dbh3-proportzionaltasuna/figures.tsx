@@ -20,9 +20,10 @@ const PAPER = '#fffcf6'
 
 const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 
+/** Drawn 360 wide to fit a phone, so the 540 px minimum of lesson figures does not apply */
 function Board({ height, label, children }: { height: number; label: string; children: ReactNode }) {
     return (
-        <svg viewBox={`0 0 360 ${height}`} direction="ltr" role="img" aria-label={label} style={{ display: 'block', width: '100%', maxWidth: 520, height: 'auto', margin: '0 auto', fontFamily: '"Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif' }}>
+        <svg viewBox={`0 0 360 ${height}`} direction="ltr" role="img" aria-label={label} style={{ display: 'block', width: '100%', minWidth: 0, maxWidth: 520, height: 'auto', margin: '0 auto', fontFamily: '"Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif' }}>
             {children}
         </svg>
     )
