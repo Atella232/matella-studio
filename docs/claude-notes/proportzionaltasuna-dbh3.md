@@ -37,4 +37,7 @@ Fuentes: Santillana 3.º U4 «Proporcionalidad numérica» (razones y proporcion
 - El lint de React no deja reasignar variables dentro del `map` del render: las direcciones de giro se calculan antes con `reduce`.
 
 ## Estado
-Fases 1–2 en `453430f`. Fase 3 en el commit siguiente. Tests, lint y tipos en verde; inventario OK (4 juegos propios, 4 herramientas propias). Sin publicar.
+Fases 1–2 en `453430f`. Fase 3 en el commit siguiente. Tests, lint y tipos en verde; inventario OK (4 juegos propios, 4 herramientas propias). Publicada el 2026-10-31.
+
+## Publicación
+Publicada en matella.net el 2026-10-31 junto con las otras 7 unidades de 3.º (fusión de avance rápido de `feat/estadistica-dbh3` en `main`, último commit 5042946; bundle `index-DSpCP6ns.js`). Comprobada en vivo a 375 px en eu, es y ar (ruta, laboratorio y juegos de las 8).

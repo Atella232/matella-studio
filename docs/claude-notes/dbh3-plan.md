@@ -42,3 +42,6 @@ Dentro de cada bloque, una centena por herramienta o juego (carrera x101–x105,
 ## Fuera del encargo
 
 Santillana 3.º U10 «Cuerpos geométricos» no tiene tema en `courses.ts` para 3. DBH: no se ha hecho.
+
+## Publicación (2026-10-31)
+Las 8 unidades publicadas en matella.net: fusión de `feat/estadistica-dbh3` en `main` (5042946), bundle `index-DSpCP6ns.js`.

@@ -25,4 +25,7 @@ Fuentes: Santillana 3.º U9 «Movimientos en el plano» + Anaya 3.º U12 «Trans
 - Tests: `tests/mugimenduak-dbh3-content|lab|games.test.ts`. El test de juegos comprueba con la orientación y el tamaño de la bandera que cada movimiento deja su marca.
 
 ## Estado
-Hecha en la rama `feat/movimientos-dbh3`. Tests, lint y tipos en verde; inventario OK; revisada a 375 px en eu, es y ar. Sin publicar.
+Hecha en la rama `feat/movimientos-dbh3`. Tests, lint y tipos en verde; inventario OK; revisada a 375 px en eu, es y ar. Publicada el 2026-10-31.
+
+## Publicación
+Publicada en matella.net el 2026-10-31 junto con las otras 7 unidades de 3.º (fusión de avance rápido de `feat/estadistica-dbh3` en `main`, último commit 5042946; bundle `index-DSpCP6ns.js`). Comprobada en vivo a 375 px en eu, es y ar (ruta, laboratorio y juegos de las 8).

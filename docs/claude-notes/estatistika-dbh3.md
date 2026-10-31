@@ -26,4 +26,7 @@ Fuentes: Santillana 3.º U13 «Estadística» + U14 «Probabilidad»; Anaya 3.º
 - Tests: `tests/estatistika-dbh3-content|lab|games.test.ts`. El test de juegos tarda (las 1000 tiradas de la ruleta y muchas semillas): no es un cuelgue.
 
 ## Estado
-Hecha en la rama `feat/estadistica-dbh3`. Revisada a 375 px en eu, es y ar. Sin publicar.
+Hecha en la rama `feat/estadistica-dbh3`. Revisada a 375 px en eu, es y ar. Publicada el 2026-10-31.
+
+## Publicación
+Publicada en matella.net el 2026-10-31 junto con las otras 7 unidades de 3.º (fusión de avance rápido de `feat/estadistica-dbh3` en `main`, último commit 5042946; bundle `index-DSpCP6ns.js`). Comprobada en vivo a 375 px en eu, es y ar (ruta, laboratorio y juegos de las 8).

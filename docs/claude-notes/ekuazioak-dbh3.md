@@ -29,4 +29,7 @@ Fuentes: Santillana 3.º U6 «Ecuaciones de primer y segundo grado» y U7 «Sist
 - `.fraction-v2-lesson-figure svg` pide 540 px de ancho mínimo; el `Board` de 360 de Segidak y Proporcionalidad 3. DBH lleva `minWidth: 0` (arreglado en esta rama: antes sus figuras se desplazaban en el móvil).
 
 ## Estado
-Hecha en la rama `feat/ecuaciones-dbh3`. Tests, lint y tipos en verde; inventario OK; revisada a 375 px en eu, es y ar. Sin publicar.
+Hecha en la rama `feat/ecuaciones-dbh3`. Tests, lint y tipos en verde; inventario OK; revisada a 375 px en eu, es y ar. Publicada el 2026-10-31.
+
+## Publicación
+Publicada en matella.net el 2026-10-31 junto con las otras 7 unidades de 3.º (fusión de avance rápido de `feat/estadistica-dbh3` en `main`, último commit 5042946; bundle `index-DSpCP6ns.js`). Comprobada en vivo a 375 px en eu, es y ar (ruta, laboratorio y juegos de las 8).

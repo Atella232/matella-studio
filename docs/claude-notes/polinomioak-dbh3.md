@@ -29,4 +29,7 @@ Fuentes: Santillana 3.º U5 «Polinomios» + Anaya 3.º U5 «Lenguaje algebraico
 - Árabe: los textos planos de juegos y herramientas con fórmulas (x + 3, a = −3, (a + b)²) van aislados con LRI/PDI y espacios duros; en `lab/labTools.ts` lo hace `isolate` dentro de `say`.
 
 ## Estado
-Hecha en la rama `feat/polinomios-dbh3`. Tests, lint y tipos en verde; inventario OK; revisada a 375 px en eu, es y ar. Sin publicar.
+Hecha en la rama `feat/polinomios-dbh3`. Tests, lint y tipos en verde; inventario OK; revisada a 375 px en eu, es y ar. Publicada el 2026-10-31.
+
+## Publicación
+Publicada en matella.net el 2026-10-31 junto con las otras 7 unidades de 3.º (fusión de avance rápido de `feat/estadistica-dbh3` en `main`, último commit 5042946; bundle `index-DSpCP6ns.js`). Comprobada en vivo a 375 px en eu, es y ar (ruta, laboratorio y juegos de las 8).

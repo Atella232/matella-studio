@@ -17,14 +17,14 @@ Historial por unidad (ids, reutilización, fases, trucos). Copiadas de la memori
 - [Arrazionalak 3. DBH](arrazionalak-dbh3.md) — first 3. DBH unit deployed 2026-10-02; reuse map
 - [Berreturak eta erroak 3. DBH](berreturak-dbh3.md) — 2nd 3. DBH unit (potencias y raíces, replaces `numeros-reales`); 4 own tools + 4 own games; merged and deployed 2026-10-30
 - [3. DBH plan](dbh3-plan.md) — the 8 remaining 3. DBH units (2026-10-31): order, stacked branches, reserved ids, quality bar
-- [Proportzionaltasuna 3. DBH](proportzionaltasuna-dbh3.md) — 1st of the 8: 4 own tools (recipe, map, gears, rectangle) + 4 own games (gearbox, copier, loot, treasure); not deployed
-- [Segidak 3. DBH](segidak-dbh3.md) — 2nd of the 8: 5 own tools (sticks, frog, Gauss bars, bounce, endless bar) + 4 own games (hidden, sorter, staircase, detective); shared lab parts for 3. DBH; not deployed
-- [Polinomioak 3. DBH](polinomioak-dbh3.md) — 3rd of the 8: 4 own tools (chips, binomial square, remainder machine, factor rectangle) + 4 own games (alike, identity piece, Ruffini table, detective); not deployed
-- [Ekuazioak 3. DBH](ekuazioak-dbh3.md) — 4th of the 8: 4 own tools (balance, parabola and ground, two balances, ages timeline) + 4 own games (right step, roots on the line, crossing lines, detective); not deployed
-- [Geometria 3. DBH](geometria-dbh3.md) — 5th of the 8: 4 own tools (inscribed angle, notable points, ladder, enlarged copy) + 4 own games (angle hunt, which triangle, which point, detective); not deployed
-- [Mugimenduak 3. DBH](mugimenduak-dbh3.md) — 6th of the 8: 4 own tools (slide, turn, mirror, two mirrors) + 4 own games (where it lands, which movement, do they tile, detective); not deployed
-- [Funtzioak 3. DBH](funtzioak-dbh3.md) — 7th of the 8: lines and parabolas; 4 own tools (walk, taxi meter, two plans, throw) + 4 own games (which graph, story of a walk, sign hunter, detective); not deployed
-- [Estatistika 3. DBH](estatistika-dbh3.md) — 8th of the 8 (the branch holds all of them): 4 own tools (sample, misleading axis, which mark I need, spinner) + 4 own games (read the chart, kind of variable, which bag, detective); not deployed
+- [Proportzionaltasuna 3. DBH](proportzionaltasuna-dbh3.md) — 1st of the 8: 4 own tools (recipe, map, gears, rectangle) + 4 own games (gearbox, copier, loot, treasure); deployed 2026-10-31
+- [Segidak 3. DBH](segidak-dbh3.md) — 2nd of the 8: 5 own tools (sticks, frog, Gauss bars, bounce, endless bar) + 4 own games (hidden, sorter, staircase, detective); shared lab parts for 3. DBH; deployed 2026-10-31
+- [Polinomioak 3. DBH](polinomioak-dbh3.md) — 3rd of the 8: 4 own tools (chips, binomial square, remainder machine, factor rectangle) + 4 own games (alike, identity piece, Ruffini table, detective); deployed 2026-10-31
+- [Ekuazioak 3. DBH](ekuazioak-dbh3.md) — 4th of the 8: 4 own tools (balance, parabola and ground, two balances, ages timeline) + 4 own games (right step, roots on the line, crossing lines, detective); deployed 2026-10-31
+- [Geometria 3. DBH](geometria-dbh3.md) — 5th of the 8: 4 own tools (inscribed angle, notable points, ladder, enlarged copy) + 4 own games (angle hunt, which triangle, which point, detective); deployed 2026-10-31
+- [Mugimenduak 3. DBH](mugimenduak-dbh3.md) — 6th of the 8: 4 own tools (slide, turn, mirror, two mirrors) + 4 own games (where it lands, which movement, do they tile, detective); deployed 2026-10-31
+- [Funtzioak 3. DBH](funtzioak-dbh3.md) — 7th of the 8: lines and parabolas; 4 own tools (walk, taxi meter, two plans, throw) + 4 own games (which graph, story of a walk, sign hunter, detective); deployed 2026-10-31
+- [Estatistika 3. DBH](estatistika-dbh3.md) — 8th of the 8 (the branch holds all of them): 4 own tools (sample, misleading axis, which mark I need, spinner) + 4 own games (read the chart, kind of variable, which bag, detective); deployed 2026-10-31
 - [Remaining ESO units](remaining-eso-units.md) — owner's order 2026-10-02: finish 1./2. DBH before Bachillerato; progress log
 - [Potentziak DBH4 akademikoak](potentziak-dbh4ak.md) — 2nd 4.º académicas unit (potencias, radicales, logaritmos): ids, progress
 - [Polinomioak DBH4 akademikoak](polinomioak-dbh4ak.md) — 3rd 4.º académicas unit (polinomios y fracciones algebraicas): ids, progress
