@@ -58,6 +58,7 @@ const ArrazionalakDBH3Page = lazy(() => import('../pages/dbh3-arrazionalak').the
 const BerreturakDBH3Page = lazy(() => import('../pages/dbh3-berreturak').then((module) => ({ default: module.BerreturakDBH3Page })))
 const ProportzionaltasunaDBH3Page = lazy(() => import('../pages/dbh3-proportzionaltasuna').then((module) => ({ default: module.ProportzionaltasunaDBH3Page })))
 const SegidakDBH3Page = lazy(() => import('../pages/dbh3-segidak').then((module) => ({ default: module.SegidakDBH3Page })))
+const PolinomioakDBH3Page = lazy(() => import('../pages/dbh3-polinomioak').then((module) => ({ default: module.PolinomioakDBH3Page })))
 const ErrealakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-errealak').then((module) => ({ default: module.ErrealakDBH4AkPage })))
 const ZenbakiOsoakDBH1Page = lazy(() => import('../pages/dbh1-zenbaki-osoak-v2').then((module) => ({ default: module.ZenbakiOsoakIntroPage })))
 
@@ -223,6 +224,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/dbh3/sucesiones/*',
                         element: <SegidakDBH3Page />,
+                    },
+                    // Polinomios de 3.º ESO: unidad V2
+                    {
+                        path: 'matematika/dbh3/polinomios/*',
+                        element: <PolinomioakDBH3Page />,
                     },
                     // Números reales de 4.º ESO (matemáticas aplicadas): unidad V2
                     {

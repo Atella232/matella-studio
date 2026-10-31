@@ -19,6 +19,7 @@ Historial por unidad (ids, reutilización, fases, trucos). Copiadas de la memori
 - [3. DBH plan](dbh3-plan.md) — the 8 remaining 3. DBH units (2026-10-31): order, stacked branches, reserved ids, quality bar
 - [Proportzionaltasuna 3. DBH](proportzionaltasuna-dbh3.md) — 1st of the 8: 4 own tools (recipe, map, gears, rectangle) + 4 own games (gearbox, copier, loot, treasure); not deployed
 - [Segidak 3. DBH](segidak-dbh3.md) — 2nd of the 8: 5 own tools (sticks, frog, Gauss bars, bounce, endless bar) + 4 own games (hidden, sorter, staircase, detective); shared lab parts for 3. DBH; not deployed
+- [Polinomioak 3. DBH](polinomioak-dbh3.md) — 3rd of the 8: 4 own tools (chips, binomial square, remainder machine, factor rectangle) + 4 own games (alike, identity piece, Ruffini table, detective); not deployed
 - [Remaining ESO units](remaining-eso-units.md) — owner's order 2026-10-02: finish 1./2. DBH before Bachillerato; progress log
 - [Potentziak DBH4 akademikoak](potentziak-dbh4ak.md) — 2nd 4.º académicas unit (potencias, radicales, logaritmos): ids, progress
 - [Polinomioak DBH4 akademikoak](polinomioak-dbh4ak.md) — 3rd 4.º académicas unit (polinomios y fracciones algebraicas): ids, progress
