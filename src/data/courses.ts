@@ -91,7 +91,7 @@ export const courses: Course[] = [
       { id: 'geometria-plana', name: 'Geometría del Plano', nameEu: 'Planoko Geometria', nameAr: 'هندسة المستوى', nameEn: 'Plane Geometry', icon: '📐' },
       { id: 'movimientos-plano', name: 'Movimientos en el Plano', nameEu: 'Planoko Mugimenduak', nameAr: 'الحركات في المستوى', nameEn: 'Transformations in the Plane', icon: '🔄' },
       { id: 'funciones-lineales', name: 'Funciones Lineales', nameEu: 'Funtzio Linealak', nameAr: 'الدوال الخطية', nameEn: 'Linear Functions', icon: '📈' },
-      { id: 'sucesiones', name: 'Sucesiones', nameEu: 'Segidak', nameAr: 'المتتاليات', nameEn: 'Sequences', icon: '🔢' },
+      { id: 'sucesiones', name: 'Sucesiones', nameEu: 'Segidak', nameAr: 'المتتاليات', nameEn: 'Sequences', icon: '🔢', active: true },
       { id: 'estadistica-probabilidad', name: 'Estadística y Probabilidad', nameEu: 'Estatistika eta Probabilitatea', nameAr: 'الإحصاء والاحتمالات', nameEn: 'Statistics and Probability', icon: '📊' },
     ]
   },
