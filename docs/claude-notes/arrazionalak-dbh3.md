@@ -20,3 +20,5 @@ The owner asked to bring this unit up to the level of the other 3. DBH units (it
   - L4 `whole.ts` — del trozo al todo (topic `whole-from-part`), ids 33701–33705. Prediction: whole less than / exactly / more than double the part.
 - Games: `jug` (Llena la jarra, levels 33501–33503, negatives in level 3), `period` (Caza el periodo, 33601–33603, CSS fall animation, level 3 = unsimplified fractions), `detective` (12 errors, 33401–33403). Hub order: race, jug, period, detective, place, memory.
 - Tricks: the Basque check in tests must not include `n` after `$` (it matched `$n=0$`). Arabic Segmented labels with "…" need LRI/PDI or the dots jump to the left. Game art has no decimal commas: fractions only. Jug cards use `\dfrac` so they are readable.
+
+Deployed 2026-11-01 (main 19c1f38, bundle index-Bn7PqFNZ.js); checked live at 375 px in eu, es and ar: new lab tools and games load, no overflow, no console errors.
