@@ -17,3 +17,5 @@ The unit had only the race and the memory. The owner chose four games:
 New shared pieces, for the rest of 2. DBH: `src/features/unit-v2/games/RoundGame.tsx` (a game of a few one-try rounds: picker, dots, result; each game gives `create` and a `Round` component) and `WorkedDetectiveGame.tsx` + `workedDetective.ts` (the worked-solution detective with `createWorkedCases`). Test helpers in `tests/helpers/ownGamesCheck.ts` (`checkTexts`, `checkWorkedCases`).
 
 Tricks: in Basque, problem numbers go in `$…$` and the words after them carry the case (`$8$ langilek`). Euro amounts in money games are written with `toFixed(2)` and the language's decimal mark, not LaTeX.
+
+Deployed 2026-11-01: main 942edd4, bundle `index-CpeeiNuH.js`; checked live at 375 px in eu, es and ar (four games open and start, no overflow, no console errors).
