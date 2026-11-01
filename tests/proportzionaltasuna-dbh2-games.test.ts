@@ -8,6 +8,11 @@ import { createProportionDbh2MemoryBoard as createProportionMemoryBoard, PROPORT
 import { proportionDbh2GameModeForPath as proportionGameModeForPath, proportionDbh2GameProgressIds as proportionGameProgressIds, proportionDbh2Games as proportionGames } from '../src/pages/dbh2-proportzionaltasuna-v2/games/info.ts'
 import { checkProportionDbh2PitAnswer as checkProportionPitAnswer, PROPORTION_DBH2_RACE_CIRCUITS as PROPORTION_RACE_CIRCUITS, proportionDbh2ParTime as proportionParTime, proportionDbh2RaceErrorTips as proportionRaceErrorTips, generateProportionDbh2RaceQuestion as generateProportionRaceQuestion, type ProportionDbh2RaceQuestion as ProportionRaceQuestion } from '../src/pages/dbh2-proportzionaltasuna-v2/games/race.ts'
 import { proportionDbh2LabChallengeIds as proportionLabChallengeIds } from '../src/pages/dbh2-proportzionaltasuna-v2/lab/labTools.ts'
+import { createProportionDetectiveCases, proportionDetectiveLevels, proportionDetectiveNames, proportionDetectiveTips } from '../src/pages/dbh2-proportzionaltasuna-v2/games/detective.ts'
+import { createKindRounds, KIND_ROUNDS, relationOf, SITUATIONS } from '../src/pages/dbh2-proportzionaltasuna-v2/games/kind.ts'
+import { applyChanges, createTagRound, tagPrice, tagSolved } from '../src/pages/dbh2-proportzionaltasuna-v2/games/tag.ts'
+import { createWorkRound, finishesOnTime, totalWork } from '../src/pages/dbh2-proportzionaltasuna-v2/games/work.ts'
+import { checkTexts, checkWorkedCases } from './helpers/ownGamesCheck.ts'
 
 const renders = (latex: string) => katex.renderToString(latex, { throwOnError: true, strict: 'error' })
 
@@ -46,7 +51,12 @@ const cardValue = (latex: string) => {
 }
 
 test('proportzionaltasuna 2. DBH games: levels, ids and routes', () => {
-    assert.equal(proportionGames.length, 2)
+    assert.deepEqual(proportionGames.map((game) => game.id), ['race', 'tag', 'kind', 'work', 'detective', 'memory'])
+    for (const game of proportionGames) for (const level of game.levels) for (const language of ['eu', 'es', 'en', 'ar'] as const) assert.ok(!level.description[language].includes('$'))
+    assert.equal(proportionGameModeForPath('/matematika/dbh2/proporcionalidad/juegos/etiqueta'), 'tag')
+    assert.equal(proportionGameModeForPath('/matematika/dbh2/proporcionalidad/jokuak/obra'), 'work')
+    assert.equal(proportionGameModeForPath('/matematika/dbh2/proporcionalidad/juegos/directa-inversa'), 'kind')
+    assert.equal(proportionGameModeForPath('/matematika/dbh2/proporcionalidad/juegos/detective'), 'detective')
     assert.equal(proportionGames[0].levels.length, PROPORTION_RACE_CIRCUITS)
     assert.equal(proportionGames.find((game) => game.id === 'memory')!.levels.length, proportionMemoryLevels.length)
     assert.equal(new Set(proportionGameProgressIds).size, proportionGameProgressIds.length)
@@ -103,5 +113,78 @@ test('proportzionaltasuna 2. DBH memory: every card has exactly one partner and 
                 for (const other of cards.filter((item) => item.setId !== card.setId)) assert.ok(Math.abs(cardValue(other.latex)! - a!) > 1e-9, `${card.latex} ~ ${other.latex}`)
             }
         }
+    }
+})
+
+/* ---------- The four games of this unit ---------- */
+
+test('proportzionaltasuna 2. DBH tag: the right stickers give the target, in cents, and percentages do not add up', () => {
+    assert.equal(applyChanges(100, [20, -20]), 96)
+    assert.equal(applyChanges(80, [-25]), 60)
+    for (let level = 0; level < 3; level += 1) {
+        let traps = 0
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const round = createTagRound(createRandom(seed * 7919 + level), level)
+            assert.ok(tagSolved(round, round.solution))
+            assert.notEqual(round.target, round.price)
+            assert.ok(Math.abs(round.target * 100 - Math.round(round.target * 100)) < 1e-9)
+            assert.equal(new Set(round.stickers).size, round.stickers.length)
+            assert.equal(round.stickers.length, [4, 5, 6][level])
+            if (round.solution.length > 1) for (let index = 0; index < round.stickers.length; index += 1) assert.ok(!tagSolved(round, [index]), `${round.price} ${round.stickers}`)
+            // The order of the stickers does not matter
+            assert.equal(tagPrice(round, [...round.solution].reverse()), round.target)
+            if (level === 1 && round.stickers[round.solution[0]] === -round.stickers[round.solution[1]]) traps += 1
+        }
+        if (level === 1) assert.ok(traps > 50, `${traps}`)
+    }
+})
+
+test('proportzionaltasuna 2. DBH kind: every answer at least twice, tables match their answer', () => {
+    checkTexts(SITUATIONS.flatMap((item) => [item.text, item.why]))
+    for (const answer of ['direct', 'inverse', 'none'] as const) assert.ok(SITUATIONS.filter((item) => item.answer === answer).length >= 3)
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 100; seed += 1) {
+            const rounds = createKindRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, KIND_ROUNDS)
+            for (const answer of ['direct', 'inverse', 'none'] as const) assert.ok(rounds.filter((round) => round.answer === answer).length >= 2)
+            for (const round of rounds) {
+                if (level === 0) assert.equal(round.shown, 'situation')
+                if (level === 1) assert.equal(round.shown, 'table')
+                if (round.shown === 'table') {
+                    assert.equal(relationOf(round.xs, round.ys), round.answer)
+                    assert.equal(new Set(round.xs).size, 4)
+                    assert.ok(round.ys.every((y) => Number.isInteger(y) && y > 0))
+                    checkTexts([round.why])
+                }
+            }
+        }
+    }
+})
+
+test('proportzionaltasuna 2. DBH work: the solution finishes exactly on the deadline', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const round = createWorkRound(createRandom(seed * 7919 + level), level)
+            assert.ok(finishesOnTime(round, round.solution.workers, round.solution.hours))
+            assert.equal(round.solution.workers * round.solution.hours * round.deadline, totalWork(round))
+            assert.ok(round.solution.workers >= 1 && round.solution.workers <= 24 && round.solution.hours >= 1 && round.solution.hours <= 10)
+            assert.ok(!finishesOnTime(round, round.workers, round.fixedHours ?? round.hours) || level === 2)
+            if (level === 0) assert.equal(round.fixedHours, round.hours)
+            if (level === 1) assert.notEqual(round.fixedHours, round.hours)
+            if (level === 2) assert.equal(round.fixedHours, null)
+        }
+    }
+})
+
+test('proportzionaltasuna 2. DBH detective: one wrong line, the fix gives the right value', () => {
+    checkTexts([...Object.values(proportionDetectiveNames), ...Object.values(proportionDetectiveTips)])
+    for (let level = 0; level < 3; level += 1) {
+        const seen = new Set<string>()
+        for (let seed = 1; seed <= 80; seed += 1) {
+            const cases = createProportionDetectiveCases(createRandom(seed * 7919 + level), level)
+            for (const item of cases) seen.add(item.error)
+            checkWorkedCases(cases, proportionDetectiveLevels[level])
+        }
+        assert.equal(seen.size, 4)
     }
 })

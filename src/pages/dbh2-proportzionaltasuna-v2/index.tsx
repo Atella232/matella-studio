@@ -36,7 +36,7 @@ const proportzionaltasunaDbh2Unit: UnitDefinition = {
         render: (props) => <ProportionDbh2Laboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Sei joko: lasterketa, etiketa, zuzena ala alderantzizkoa, amaitu obra, detektibea eta memoria.', es: 'Seis juegos: carrera, la etiqueta, ¿directa o inversa?, termina la obra, detective y memoria.', en: 'Six games: race, the price tag, direct or inverse, finish the job, detective and memory.', ar: 'ست ألعاب: السباق وبطاقة السعر وطردية أم عكسية وأنهِ العمل والمخبر والذاكرة.' },
         progressIds: proportionDbh2GameProgressIds,
         recordsKey: PROPORTION_DBH2_GAME_RECORDS_KEY,
         render: (props) => <ProportionDbh2Games {...props} />

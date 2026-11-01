@@ -1,0 +1,4 @@
+/* ---------- The worked-solution detective: the label above each line ---------- */
+
+.worked-detective-step { display: flex; flex-direction: column; gap: 2px; text-align: start; }
+.worked-detective-label { color: var(--muted); font-size: 13px; }

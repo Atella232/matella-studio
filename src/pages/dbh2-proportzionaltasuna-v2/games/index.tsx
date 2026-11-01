@@ -6,12 +6,17 @@ import '../../dbh2-zatikiak-prototype/games/Games.css'
 import { createProportionDbh2MemoryBoard, PROPORTION_DBH2_MEMORY_PAIRS } from './boards'
 import { ProportionDbh2GameArt } from './GameArt'
 import { PROPORTION_DBH2_GAME_RECORDS_KEY, proportionDbh2GameModeForPath, proportionDbh2Games, proportionDbh2GameSlugs, type ProportionDbh2GameId } from './info'
+import { KindGame, ProportionDetectiveGame, TagGame, WorkGame } from './ProportionGames'
 import { ProportionDbh2RaceGame } from './RaceGame'
 
 const memoryGame = proportionDbh2Games.find((game) => game.id === 'memory')!
 
 const components: Record<ProportionDbh2GameId, (props: GameProps) => JSX.Element> = {
     race: ProportionDbh2RaceGame,
+    tag: TagGame,
+    kind: KindGame,
+    work: WorkGame,
+    detective: ProportionDetectiveGame,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <ProportionDbh2GameArt game="memory" />, pairs: PROPORTION_DBH2_MEMORY_PAIRS, createBoard: createProportionDbh2MemoryBoard }} />
 }
 

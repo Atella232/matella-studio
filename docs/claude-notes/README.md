@@ -18,6 +18,7 @@ Historial por unidad (ids, reutilización, fases, trucos). Copiadas de la memori
 - [Berreturak eta erroak 3. DBH](berreturak-dbh3.md) — 2nd 3. DBH unit (potencias y raíces, replaces `numeros-reales`); 4 own tools + 4 own games; merged and deployed 2026-10-30
 - [3. DBH plan](dbh3-plan.md) — the 8 remaining 3. DBH units (2026-10-31): order, stacked branches, reserved ids, quality bar
 - [Proportzionaltasuna 3. DBH](proportzionaltasuna-dbh3.md) — 1st of the 8: 4 own tools (recipe, map, gears, rectangle) + 4 own games (gearbox, copier, loot, treasure); deployed 2026-10-31
+- [Proportzionaltasuna 2. DBH](proportzionaltasuna-dbh2.md) — 2.º proportionality; 2026-11-01 four own games (tag, kind, work, detective) and the shared RoundGame / WorkedDetectiveGame
 - [Segidak 3. DBH](segidak-dbh3.md) — 2nd of the 8: 5 own tools (sticks, frog, Gauss bars, bounce, endless bar) + 4 own games (hidden, sorter, staircase, detective); shared lab parts for 3. DBH; deployed 2026-10-31
 - [Polinomioak 3. DBH](polinomioak-dbh3.md) — 3rd of the 8: 4 own tools (chips, binomial square, remainder machine, factor rectangle) + 4 own games (alike, identity piece, Ruffini table, detective); deployed 2026-10-31
 - [Ekuazioak 3. DBH](ekuazioak-dbh3.md) — 4th of the 8: 4 own tools (balance, parabola and ground, two balances, ages timeline) + 4 own games (right step, roots on the line, crossing lines, detective); deployed 2026-10-31
