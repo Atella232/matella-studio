@@ -6,6 +6,9 @@ import { algebraGameModeForPath, algebraGameProgressIds, algebraGames } from '..
 import { ALGEBRA_RACE_CIRCUITS, algebraRaceErrorTips, checkAlgebraPitAnswer, generateAlgebraRaceQuestion } from '../src/pages/dbh2-aljebra-v2/games/race.ts'
 import { ALGEBRA_MEMORY_PAIRS, algebraMemoryLevels, createAlgebraMemoryBoard, createExpansionRound, EXPANSIONS_PER_ROUND, expansionLevels, expansionStars } from '../src/pages/dbh2-aljebra-v2/games/boards.ts'
 import { algebraLabChallengeIds } from '../src/pages/dbh2-aljebra-v2/lab/labTools.ts'
+import { ALGEBRA_DETECTIVE_X, algebraDetectiveLevels, algebraDetectiveNames, algebraDetectiveTips, createAlgebraDetectiveCases } from '../src/pages/dbh2-aljebra-v2/games/detective.ts'
+import { createPyramidRound, pyramidHolds, pyramidSolved, PYRAMID_BRICKS } from '../src/pages/dbh2-aljebra-v2/games/pyramid.ts'
+import { checkTexts, renders } from './helpers/ownGamesCheck.ts'
 
 /** Evaluates a LaTeX expression in x (or n) at a number: powers, implicit products, fractions, subscripts */
 function evaluate(latex: string, x: number): number {
@@ -13,6 +16,7 @@ function evaluate(latex: string, x: number): number {
         .replace(/a_\{\d+\}|a_\{n\}/g, '')
         .replace(/\\cdot/g, '*')
         .replace(/\\mathbin\{:\}/g, '/')
+        .replace(/\\div/g, '/')
         .replace(/\s+/g, '')
         .replace(/[xn]/g, 'X')
     for (let pass = 0; pass < 3; pass += 1) {
@@ -28,13 +32,15 @@ function evaluate(latex: string, x: number): number {
 const mathIn = (text: string) => [...text.matchAll(/\$([^$]+)\$/g)].map((match) => match[1])
 
 test('aljebra 2. DBH games: levels, ids and routes', () => {
-    assert.equal(algebraGames.length, 3)
+    assert.equal(algebraGames.length, 5)
     assert.equal(algebraGames[0].levels.length, ALGEBRA_RACE_CIRCUITS)
     assert.equal(algebraGames.find((game) => game.id === 'expand')!.levels.length, expansionLevels.length)
     assert.equal(algebraGames.find((game) => game.id === 'memory')!.levels.length, algebraMemoryLevels.length)
     assert.equal(new Set(algebraGameProgressIds).size, algebraGameProgressIds.length)
     assert.ok(!algebraGameProgressIds.some((id) => algebraLabChallengeIds.includes(id)))
     assert.equal(algebraGameModeForPath('/matematika/dbh2/algebra/juegos/desarrollo'), 'expand')
+    assert.equal(algebraGameModeForPath('/matematika/dbh2/algebra/jokuak/piramidea'), 'pyramid')
+    assert.equal(algebraGameModeForPath('/matematika/dbh2/algebra/juegos/detective'), 'detective')
 })
 
 test('aljebra 2. DBH race: four different options, the right one equals the question, the wrong ones do not', () => {
@@ -95,5 +101,60 @@ test('aljebra 2. DBH quick expansion and memory', () => {
                 for (const x of [2, 3, -1]) assert.ok(Math.abs(evaluate(card.latex, x) - evaluate(partner.latex, x)) < 1e-9, `${card.latex} = ${partner.latex}`)
             }
         }
+    }
+})
+
+/* ---------- The games of this topic ---------- */
+
+test('aljebra 2. DBH pyramid: the bricks hold, three right cards and three different mistakes', () => {
+    for (let level = 0; level < 3; level += 1) {
+        const patterns = new Set<string>()
+        for (let seed = 1; seed <= 300; seed += 1) {
+            const round = createPyramidRound(createRandom(seed * 7919 + level), level)
+            assert.equal(round.bricks.length, PYRAMID_BRICKS)
+            assert.equal(round.operation, level === 0 ? 'sum' : 'product')
+            assert.ok(pyramidHolds(round.operation, round.bricks))
+            assert.ok(round.bricks.every((term) => Number.isInteger(term.coefficient) && term.coefficient !== 0))
+            assert.equal(round.hidden.length, 3)
+            assert.equal(round.cards.length, 6)
+            assert.equal(new Set(round.cards.map((card) => card.latex)).size, 6)
+            for (const card of round.cards) renders(card.latex)
+            // Placing each right card on its brick solves the round; a decoy anywhere does not
+            const placed = Object.fromEntries(round.hidden.map((brick) => [brick, round.cards.findIndex((card) => card.brick === brick)]))
+            assert.ok(pyramidSolved(round, placed))
+            const decoy = round.cards.findIndex((card) => card.brick === null)
+            assert.ok(!pyramidSolved(round, { ...placed, [round.hidden[0]]: decoy }))
+            patterns.add(round.hidden.join())
+            // Level 2 builds upwards only; level 3 has an empty bottom brick
+            if (level === 1) assert.deepEqual(round.hidden, [3, 4, 5])
+            if (level === 2) assert.ok(round.hidden.some((brick) => brick < 3))
+        }
+        assert.equal(patterns.size, [4, 1, 3][level])
+    }
+})
+
+/** The last side of a line: after the last «=» or «→» */
+const lastSide = (latex: string) => latex.split('=').pop()!.replace(/^.*\\to\\ /, '')
+
+test('aljebra 2. DBH detective: one wrong line, the fix ends on the right polynomial', () => {
+    checkTexts([...Object.values(algebraDetectiveNames), ...Object.values(algebraDetectiveTips)])
+    for (let level = 0; level < 3; level += 1) {
+        const seen = new Set<string>()
+        for (let seed = 1; seed <= 80; seed += 1) {
+            for (const item of createAlgebraDetectiveCases(createRandom(seed * 7919 + level), level)) {
+                seen.add(item.error)
+                assert.ok(algebraDetectiveLevels[level].includes(item.error))
+                assert.ok(item.options.includes(item.error) && new Set(item.options).size === 3)
+                assert.equal(item.lines.length, 3)
+                for (const line of item.lines) renders(line.latex)
+                renders(item.fix)
+                checkTexts([item.problem])
+                const fix = lastSide(item.fix.split('\\to\\ ').pop()!)
+                assert.ok(Math.abs(evaluate(fix, ALGEBRA_DETECTIVE_X) - item.right) < 1e-9, `${item.error}: ${item.fix} ≠ ${item.right}`)
+                assert.ok(Math.abs(evaluate(lastSide(item.lines[2].latex), ALGEBRA_DETECTIVE_X) - item.reached) < 1e-9, `${item.error}: ${item.lines[2].latex} ≠ ${item.reached}`)
+                assert.ok(Math.abs(item.right - item.reached) > 1e-9)
+            }
+        }
+        assert.equal(seen.size, 4)
     }
 })

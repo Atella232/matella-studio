@@ -2,6 +2,7 @@ import type { JSX } from 'react'
 import { GamesHub, type GameProps, type HubGame } from '../../../features/unit-v2/games/GamesHub'
 import { PairsMemoryGame } from '../../../features/unit-v2/games/PairsMemoryGame'
 import type { UnitLanguage } from '../../../features/unit-v2/types'
+import { AlgebraDetectiveGame, PyramidGame } from './AlgebraOwnGames'
 import { ALGEBRA_MEMORY_PAIRS, createAlgebraMemoryBoard } from './boards'
 import { ExpansionGame } from './ExpansionGame'
 import { AlgebraGameArt } from './GameArt'
@@ -14,6 +15,8 @@ const memoryGame = algebraGames.find((game) => game.id === 'memory')!
 const components: Record<AlgebraGameId, (props: GameProps) => JSX.Element> = {
     race: AlgebraRaceGame,
     expand: ExpansionGame,
+    pyramid: PyramidGame,
+    detective: AlgebraDetectiveGame,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <AlgebraGameArt game="memory" />, pairs: ALGEBRA_MEMORY_PAIRS, createBoard: createAlgebraMemoryBoard }} />
 }
 

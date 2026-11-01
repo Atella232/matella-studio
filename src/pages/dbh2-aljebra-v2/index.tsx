@@ -35,7 +35,7 @@ const aljebraUnit: UnitDefinition = {
         render: (props) => <AlgebraLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Hiru joko: lasterketa, garapen azkarra eta memoria.', es: 'Tres juegos: carrera, desarrollo rápido y memoria.', en: 'Three games: race, quick expansion and memory.', ar: 'ثلاث ألعاب: السباق والنشر السريع والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, garapen azkarra, monomioen piramidea, aljebraren detektibea eta memoria.', es: 'Cinco juegos: carrera, desarrollo rápido, pirámide de monomios, detective de álgebra y memoria.', en: 'Five games: race, quick expansion, monomial pyramid, algebra detective and memory.', ar: 'خمس ألعاب: السباق والنشر السريع وهرم وحيدات الحد ومخبر الجبر والذاكرة.' },
         progressIds: algebraGameProgressIds,
         recordsKey: ALGEBRA_GAME_RECORDS_KEY,
         render: (props) => <AlgebraGames {...props} />

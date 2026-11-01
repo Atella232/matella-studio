@@ -38,6 +38,16 @@ export interface RoundGameConfig<Round> {
     Round: (props: RoundProps<Round>) => ReactNode
 }
 
+/** The verdict under a round: «Correct!» or «No.» and the explanation */
+export function RoundVerdict({ right, language, children }: { right: boolean; language: UnitLanguage; children?: ReactNode }) {
+    const l = useGameText(language)
+    return (
+        <p className={`prop3-verdict ${right ? 'right' : 'wrong'}`} aria-live="polite">
+            <strong>{right ? l({ eu: 'Zuzena!', es: '¡Correcto!', en: 'Correct!', ar: 'صحيح!' }) : l({ eu: 'Ez.', es: 'No.', en: 'No.', ar: 'لا.' })}</strong> {children}
+        </p>
+    )
+}
+
 export function RoundGame<Round>({ config, language, records, onResult, onExit }: GameProps & { config: RoundGameConfig<Round> }) {
     const { game, rounds: count, Round } = config
     const l = useGameText(language)

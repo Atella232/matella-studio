@@ -26,6 +26,32 @@ export function AlgebraGameArt({ game }: { game: AlgebraGameId }) {
             </svg>
         )
     }
+    if (game === 'pyramid') {
+        const bricks: Array<[number, number, string, boolean]> = [[85, 8, '12x³', false], [50, 44, '2x', false], [120, 44, '?', true], [15, 80, 'x', false], [85, 80, '2', false], [155, 80, '3x²', false]]
+        return (
+            <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
+                {bricks.map(([x, y, label, empty]) => (
+                    <g key={`${x}-${y}`}>
+                        <rect x={x} y={y} width="50" height="32" rx="4" fill={empty ? 'var(--mustard-tint, #fbebc0)' : 'var(--paper-deep)'} stroke="var(--ink)" strokeWidth="2" strokeDasharray={empty ? '5 4' : undefined} />
+                        <text x={x + 25} y={y + 22} textAnchor="middle" fontSize="15" fontWeight="700" fill="var(--ink)">{label}</text>
+                    </g>
+                ))}
+            </svg>
+        )
+    }
+    if (game === 'detective') {
+        return (
+            <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
+                <rect x="14" y="10" width="132" height="100" rx="8" fill="var(--card)" stroke="var(--ink)" strokeWidth="2" />
+                <text x="26" y="38" fontSize="13" fontWeight="700" fill="var(--ink)">3x + 2x</text>
+                <text x="26" y="64" fontSize="13" fontWeight="700" fill="var(--coral)">= 5x²</text>
+                <line x1="24" y1="68" x2="80" y2="58" stroke="var(--coral)" strokeWidth="2.5" />
+                <text x="26" y="92" fontSize="13" fontWeight="700" fill="var(--ink)">(x+3)² = …</text>
+                <circle cx="168" cy="58" r="24" fill="var(--blue-tint, #dde7f7)" stroke="var(--ink)" strokeWidth="3" />
+                <line x1="185" y1="75" x2="206" y2="98" stroke="var(--ink)" strokeWidth="6" strokeLinecap="round" />
+            </svg>
+        )
+    }
     return (
         <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
             {['(x+3)²', 'x²+6x+9', '4x(x+2)', '4x²+8x'].map((label, index) => (

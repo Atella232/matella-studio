@@ -201,7 +201,8 @@ export function WorkedDetectiveGame<Error extends string>({ config, language, re
                         </p>
                         <p className="detective-fix">
                             <span>{l({ eu: 'Hau izan behar zuen:', es: 'Debería ser:', en: 'It should be:', ar: 'كان يجب أن يكون:' })}</span>
-                            <MathText text={`$${localLatex(item.fix, language)}$`} />
+                            {/* A long fix goes on two lines, the second one after the arrow */}
+                            {item.fix.split('\\ \\to\\ ').map((part, position) => <MathText key={position} text={`$${position > 0 ? '\\to\\ ' : ''}${localLatex(part, language)}$`} />)}
                         </p>
                         <button type="button" className="fraction-v2-primary" onClick={next} ref={(node) => node?.focus({ preventScroll: true })}>
                             {index + 1 >= count ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', en: 'See the result', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', en: 'Next', ar: 'التالي' })}
