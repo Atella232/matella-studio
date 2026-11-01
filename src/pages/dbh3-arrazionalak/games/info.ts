@@ -3,10 +3,13 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
 /* ==========================================================================
    Zenbaki arrazionalak (3. DBH) games: the list shown in the hub, with
    levels and the unit progress id each level earns with its first star.
-   "Kokatu zuzenean" is the 4. DBH game with its two rational levels.
+   Three games belong to this topic (fill the jug, catch the period and
+   the rational numbers detective); the race and the memory are shared
+   engines, and "Kokatu zuzenean" is the 4. DBH game with its two
+   rational levels. Level descriptions are plain text.
    ========================================================================== */
 
-export type RationalsGameId = 'race' | 'place' | 'memory'
+export type RationalsGameId = 'race' | 'jug' | 'period' | 'detective' | 'place' | 'memory'
 
 export const RATIONALS_GAME_RECORDS_KEY = 'matella-arrazionalak-dbh3-game-records'
 
@@ -22,6 +25,39 @@ export const rationalsGames: GameInfo<RationalsGameId>[] = [
             { progressId: 33103, stage: 'operations', title: { eu: 'Eragiketak', es: 'Operaciones', en: 'Operations', ar: 'العمليات' }, description: { eu: 'Batu, kendu, biderkatu, zatitu eta konbinatuak.', es: 'Sumar, restar, multiplicar, dividir y combinadas.', en: 'Adding, subtracting, multiplying, dividing and combined operations.', ar: 'الجمع والطرح والضرب والقسمة والمركبة.' } },
             { progressId: 33104, stage: 'decimals', title: { eu: 'Hamartarrak', es: 'Decimales', en: 'Decimals', ar: 'العشريات' }, description: { eu: 'Hamartar motak eta zatiki sortzailea.', es: 'Tipos de decimales y fracción generatriz.', en: 'Types of decimals and generating fraction.', ar: 'أنواع العشريات والكسر المولّد.' } },
             { progressId: 33105, stage: 'problems', title: { eu: 'Problemak', es: 'Problemas', en: 'Problems', ar: 'المسائل' }, description: { eu: 'Kantitate baten zatikia, geratzen dena eta osoa.', es: 'Fracción de una cantidad, lo que queda y el total.', en: 'Fraction of a quantity, what is left and the total.', ar: 'كسر من كمية والباقي والكل.' } }
+        ]
+    },
+    {
+        id: 'jug',
+        title: { eu: 'Bete pitxerra', es: 'Llena la jarra', en: 'Fill the jug', ar: 'املأ الإبريق' },
+        tagline: { eu: 'Aukeratu marka arte justu betetzen duten zatikiak: ez gutxiago, ez gehiago.', es: 'Elige las fracciones que la llenan justo hasta la marca: ni menos ni más.', en: 'Choose the fractions that fill it exactly up to the mark: no less, no more.', ar: 'اختر الكسور التي تملؤه حتى العلامة تمامًا: لا أقل ولا أكثر.' },
+        skills: { eu: 'Zatikiak batu eta kendu buruz', es: 'Sumar y restar fracciones de cabeza', en: 'Add and subtract fractions in your head', ar: 'جمع الكسور وطرحها ذهنيًا' },
+        levels: [
+            { progressId: 33501, stage: 'operations', title: { eu: 'Erdiak eta laurdenak', es: 'Medios y cuartos', en: 'Halves and quarters', ar: 'الأنصاف والأرباع' }, description: { eu: 'Erdiak, laurdenak eta zortzirenak.', es: 'Medios, cuartos y octavos.', en: 'Halves, quarters and eighths.', ar: 'الأنصاف والأرباع والأثمان.' } },
+            { progressId: 33502, stage: 'operations', title: { eu: 'Herenak eta seirenak', es: 'Tercios y sextos', en: 'Thirds and sixths', ar: 'الأثلاث والأسداس' }, description: { eu: 'Herenak, seirenak eta hamabirenak ere bai.', es: 'También tercios, sextos y doceavos.', en: 'Thirds, sixths and twelfths too.', ar: 'والأثلاث والأسداس والأجزاء من اثني عشر أيضًا.' } },
+            { progressId: 33503, stage: 'operations', title: { eu: 'Negatiboekin', es: 'Con negativas', en: 'With negatives', ar: 'مع السالبة' }, description: { eu: 'Txartel negatibo batek ura kentzen du.', es: 'Una carta negativa quita agua.', en: 'A negative card takes water out.', ar: 'البطاقة السالبة تُخرج ماءً.' } }
+        ]
+    },
+    {
+        id: 'period',
+        title: { eu: 'Ehizatu periodoa', es: 'Caza el periodo', en: 'Catch the period', ar: 'اصطد الدور' },
+        tagline: { eu: 'Zenbakiak erortzen dira: bota bakoitza bere ontzira lurrera iritsi aurretik.', es: 'Caen números: echa cada uno a su cubo antes de que llegue al suelo.', en: 'Numbers fall: drop each into its bin before it hits the floor.', ar: 'تسقط أعداد: ضع كل عدد في سلّته قبل أن يصل إلى الأرض.' },
+        skills: { eu: 'Hamartar zehatzak, periodiko hutsak eta mistoak', es: 'Decimales exactos, periódicos puros y mixtos', en: 'Terminating, purely recurring and mixed recurring decimals', ar: 'العشريات المنتهية والدورية البحتة والمختلطة' },
+        levels: [
+            { progressId: 33601, stage: 'decimals', title: { eu: 'Hamartarrak', es: 'Decimales', en: 'Decimals', ar: 'العشريات' }, description: { eu: 'Hamartarra idatzita: 0,375 · 0,333… · 0,1666…', es: 'El decimal escrito: 0,375 · 0,333… · 0,1666…', en: 'The decimal written out: 0.375 · 0.333… · 0.1666…', ar: 'العشري مكتوبًا: 0.375 · 0.333… · 0.1666…' } },
+            { progressId: 33602, stage: 'decimals', title: { eu: 'Zatikiak', es: 'Fracciones', en: 'Fractions', ar: 'الكسور' }, description: { eu: 'Izendatzaileak esaten du: 2 eta 5, besterik ez, ala biak.', es: 'Lo dice el denominador: 2 y 5, otros o de los dos.', en: 'The denominator tells: 2s and 5s, others or both.', ar: 'المقام يخبرك: 2 و5، أو غيرهما، أو كلاهما.' } },
+            { progressId: 33603, stage: 'decimals', title: { eu: 'Tranpak', es: 'Trampas', en: 'Traps', ar: 'الفخاخ' }, description: { eu: 'Sinplifikatu gabeko zatikiak: 6/15 zehatza da.', es: 'Fracciones sin simplificar: 6/15 es exacto.', en: 'Fractions not in lowest terms: 6/15 terminates.', ar: 'كسور غير مختزلة: 6/15 منتهٍ.' } }
+        ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Zenbaki arrazionalen detektibea', es: 'Detective de racionales', en: 'Rational numbers detective', ar: 'مخبر الأعداد النسبية' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: اكتشفه وقل ما نوع الخطأ.' },
+        skills: { eu: 'Zatikietako akats tipikoak', es: 'Errores típicos con fracciones', en: 'Common mistakes with fractions', ar: 'الأخطاء الشائعة في الكسور' },
+        levels: [
+            { progressId: 33401, stage: 'order', title: { eu: 'Zatikiak eta ordena', es: 'Fracciones y orden', en: 'Fractions and order', ar: 'الكسور والترتيب' }, description: { eu: 'Batuketak, izendatzaile komuna eta negatiboak.', es: 'Sumas, denominador común y negativas.', en: 'Sums, common denominator and negatives.', ar: 'الجمع والمقام المشترك والسالبة.' } },
+            { progressId: 33402, stage: 'operations', title: { eu: 'Eragiketak', es: 'Operaciones', en: 'Operations', ar: 'العمليات' }, description: { eu: 'Biderketak, zatiketak, hierarkia eta zeinuak.', es: 'Productos, divisiones, jerarquía y signos.', en: 'Products, divisions, order of operations and signs.', ar: 'الضرب والقسمة والأولويات والإشارات.' } },
+            { progressId: 33403, stage: 'problems', title: { eu: 'Hamartarrak eta problemak', es: 'Decimales y problemas', en: 'Decimals and problems', ar: 'العشريات والمسائل' }, description: { eu: 'Zatiki sortzailea, geratzen dena eta osoa.', es: 'Generatriz, lo que queda y el total.', en: 'Generating fraction, what is left and the whole.', ar: 'الكسر المولّد والباقي والكل.' } }
         ]
     },
     {
@@ -50,12 +86,15 @@ export const rationalsGames: GameInfo<RationalsGameId>[] = [
 export const rationalsGameProgressIds: number[] = levelProgressIds(rationalsGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const rationalsGameSlugs: Record<RationalsGameId, string> = { race: 'lasterketa', place: 'zuzena', memory: 'memoria' }
+export const rationalsGameSlugs: Record<RationalsGameId, string> = { race: 'lasterketa', jug: 'pitxerra', period: 'periodoa', detective: 'detektibea', place: 'zuzena', memory: 'memoria' }
 
 export function rationalsGameModeForPath(pathname: string): RationalsGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
     if (!game) return 'hub'
     if (['carrera', 'lasterketa'].includes(game)) return 'race'
+    if (['pitxerra', 'jarra'].includes(game)) return 'jug'
+    if (['periodoa', 'periodo'].includes(game)) return 'period'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     if (['zuzena', 'recta', 'situar', 'kokatu'].includes(game)) return 'place'
     if (['memoria', 'memory'].includes(game)) return 'memory'
     return 'hub'

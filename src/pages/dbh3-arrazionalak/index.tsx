@@ -42,7 +42,7 @@ const arrazionalakUnit: UnitDefinition = {
         render: (props) => <RationalsLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Hiru joko: lasterketa, zatikiak zuzenean kokatu eta memoria.', es: 'Tres juegos: carrera, situar fracciones en la recta y memoria.', en: 'Three games: race, placing fractions on the number line and memory.', ar: 'ثلاث ألعاب: السباق ووضع الكسور على المستقيم والذاكرة.' },
+        description: { eu: 'Sei joko: lasterketa, bete pitxerra, ehizatu periodoa, detektibea, zatikiak zuzenean kokatu eta memoria.', es: 'Seis juegos: carrera, llena la jarra, caza el periodo, detective, situar fracciones en la recta y memoria.', en: 'Six games: race, fill the jug, catch the period, detective, placing fractions on the number line and memory.', ar: 'ست ألعاب: السباق واملأ الإبريق واصطد الدور والمخبر ووضع الكسور على المستقيم والذاكرة.' },
         progressIds: rationalsGameProgressIds,
         recordsKey: RATIONALS_GAME_RECORDS_KEY,
         render: (props) => <RationalsGames {...props} />

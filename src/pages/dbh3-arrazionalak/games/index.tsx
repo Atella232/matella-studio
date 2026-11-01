@@ -5,9 +5,14 @@ import type { UnitLanguage } from '../../../features/unit-v2/types'
 import { RealsGameArt } from '../../dbh4-aplikatuak-errealak/games/GameArt'
 import { PlaceGameView } from '../../dbh4-aplikatuak-errealak/games/PlaceGame'
 import { createRationalsMemoryBoard, RATIONALS_MEMORY_PAIRS } from './boards'
+import { DetectiveGame } from './DetectiveGame'
+import { RationalsGameArt } from './GameArt'
 import { RATIONALS_GAME_RECORDS_KEY, rationalsGameModeForPath, rationalsGames, rationalsGameSlugs, type RationalsGameId } from './info'
+import { JugGame } from './JugGame'
+import { PeriodGame } from './PeriodGame'
 import { RationalsRaceGame } from './RaceGame'
 import '../../dbh1-aljebra-v2/games/AlgebraGames.css'
+import '../../dbh3-proportzionaltasuna/games/Games.css'
 
 const memoryGame = rationalsGames.find((game) => game.id === 'memory')!
 const placeGame = rationalsGames.find((game) => game.id === 'place')!
@@ -16,11 +21,21 @@ const placeArt = <RealsGameArt game="place" points={[{ value: 0.75, label: '3/4'
 
 const components: Record<RationalsGameId, (props: GameProps) => JSX.Element> = {
     race: RationalsRaceGame,
+    jug: JugGame,
+    period: PeriodGame,
+    detective: DetectiveGame,
     place: (props) => <PlaceGameView {...props} game={placeGame} art={placeArt} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <RealsGameArt game="memory" />, pairs: RATIONALS_MEMORY_PAIRS, createBoard: createRationalsMemoryBoard }} />
 }
 
-const hubGames: HubGame<RationalsGameId>[] = rationalsGames.map((info) => ({ info, art: info.id === 'place' ? placeArt : info.id === 'race' ? raceArt : <RealsGameArt game={info.id} />, component: components[info.id] }))
+const artFor = (id: RationalsGameId) => {
+    if (id === 'place') return placeArt
+    if (id === 'race') return raceArt
+    if (id === 'memory') return <RealsGameArt game="memory" />
+    return <RationalsGameArt game={id} />
+}
+
+const hubGames: HubGame<RationalsGameId>[] = rationalsGames.map((info) => ({ info, art: artFor(info.id), component: components[info.id] }))
 
 export function RationalsGames({ language, pathname, openGame, completedIds, onComplete }: {
     language: UnitLanguage

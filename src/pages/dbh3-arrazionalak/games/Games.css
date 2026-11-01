@@ -1,0 +1,77 @@
+/* ---------- Zenbaki arrazionalak (3. DBH) games: the layout comes from Proportzionaltasuna 3. DBH (prop3-*) ---------- */
+
+.fraction-v2-games-card[data-game="jug"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="period"] { --game-tint: var(--success-tint, #d9efe2); }
+.fraction-v2-games-card[data-game="detective"] { --game-tint: var(--paper-deep, #ece6da); }
+
+.rationals-detective-step { display: flex; flex-direction: column; gap: 2px; text-align: start; }
+.rationals-detective-label { color: var(--muted); font-size: 13px; }
+
+/* Llena la jarra */
+.rationals-jug { display: block; width: 100%; max-width: 220px; height: auto; margin: 0 auto; }
+.rationals-jug-cards { grid-template-columns: repeat(3, 1fr); }
+.rationals-jug-cards button { min-height: 64px; font-size: 20px; }
+.rationals-jug-cards button[aria-pressed="true"] { background: var(--blue-tint, #dde7f7); border-color: var(--stage, #2f6fdb); transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
+.rationals-jug-cards button.negative:not(.right):not(.wrong) { border-style: dashed; }
+
+/* Caza el periodo */
+.rationals-period-lane {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: linear-gradient(to bottom, var(--card) 0 86%, var(--paper-deep, #ece6da) 86%);
+}
+
+.rationals-period-drop {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    padding: 8px 14px;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    background: var(--card);
+    box-shadow: 0 3px 0 var(--ink);
+    font-size: 22px;
+    font-weight: 700;
+    white-space: nowrap;
+    transform: translate(-50%, 6px);
+    animation: rationals-fall var(--fall-ms, 7000ms) linear forwards;
+}
+
+.rationals-period-drop.stopped { animation-play-state: paused; }
+.rationals-period-drop.right { border-color: var(--success, #267b53); background: var(--success-tint, #d9efe2); }
+.rationals-period-drop.wrong { border-color: var(--error, #c4432a); background: var(--coral-tint, #f6d5cc); }
+
+@keyframes rationals-fall {
+    from { transform: translate(-50%, 6px); }
+    to { transform: translate(-50%, 150px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .rationals-period-drop { animation: none; transform: translate(-50%, 70px); }
+}
+
+.rationals-period-bins { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+
+.rationals-period-bins button {
+    min-height: 58px;
+    padding: 6px;
+    border: 2px solid var(--ink);
+    border-radius: 6px 6px 16px 16px;
+    box-shadow: 0 3px 0 var(--ink);
+    color: var(--ink);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+    cursor: pointer;
+}
+
+.rationals-period-bins button[data-kind="exact"] { background: var(--blue-tint, #dde7f7); }
+.rationals-period-bins button[data-kind="pure"] { background: var(--success-tint, #d9efe2); }
+.rationals-period-bins button[data-kind="mixed"] { background: var(--coral-tint, #f6d5cc); }
+.rationals-period-bins button:disabled { cursor: default; opacity: 0.55; box-shadow: none; }
+.rationals-period-bins button.right { opacity: 1; outline: 3px solid var(--success, #267b53); }
+.rationals-period-bins button.wrong { opacity: 1; outline: 3px solid var(--error, #c4432a); }
