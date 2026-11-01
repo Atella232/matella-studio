@@ -15,6 +15,10 @@ import {
 import { decimalsChallenges, generatrixChallenges, realsLabTools } from '../../dbh4-aplikatuak-errealak/lab/labTools.ts'
 import type { RationalsStageId } from '../lessons.tsx'
 import { evaluate, hierarchyExpressions, type HierarchyState } from './hierarchy.ts'
+import { machineChallenges } from './machine.ts'
+import { magnifierChallenges } from './magnifier.ts'
+import { remainingChallenges } from './remaining.ts'
+import { wholeChallenges } from './whole.ts'
 
 /* ==========================================================================
    Zenbaki arrazionalak (3. DBH) laboratory. Five tools of the 2. DBH
@@ -26,7 +30,7 @@ import { evaluate, hierarchyExpressions, type HierarchyState } from './hierarchy
    of operations, step by step. Tests in tests/arrazionalak-dbh3-lab.test.ts.
    ========================================================================== */
 
-export type RationalsLabToolId = 'numberline' | 'equivalence' | 'compare' | 'addsub' | 'muldiv' | 'hierarchy' | 'decimals' | 'generatrix'
+export type RationalsLabToolId = 'numberline' | 'equivalence' | 'compare' | 'magnifier' | 'addsub' | 'muldiv' | 'hierarchy' | 'decimals' | 'generatrix' | 'machine' | 'remaining' | 'whole'
 
 export interface RationalsLabTool extends LabToolInfo {
     id: RationalsLabToolId
@@ -43,11 +47,15 @@ export const rationalsLabTools: RationalsLabTool[] = [
     { ...shared('equivalence'), id: 'equivalence', stage: 'fractions', lessonTopic: 'simplify' },
     { ...shared('numberline'), id: 'numberline', stage: 'order', lessonTopic: 'line' },
     { ...shared('compare'), id: 'compare', stage: 'order', lessonTopic: 'compare' },
+    { id: 'magnifier', stage: 'order', lessonTopic: 'between', title: say('Lupa zuzenean', 'La lupa en la recta', 'العدسة على المستقيم', 'The magnifier on the number line'), observe: say('Bi zatikiren artean beti dago beste bat. Izendatzaile komunarekin agian ez dago bat ere tartean, baina lupa handitzean izendatzailea biderkatzen da eta tartean marka berriak agertzen dira: gero eta gehiago.', 'Entre dos fracciones siempre hay otra. Con el denominador común quizá no haya ninguna en medio, pero al subir la lupa el denominador se multiplica y aparecen marcas nuevas en medio: cada vez más.', 'بين كسرين يوجد دائمًا كسر آخر. قد لا يوجد أي كسر بينهما بالمقام المشترك، لكن عند تكبير العدسة يتضاعف المقام وتظهر علامات جديدة بينهما: أكثر فأكثر.', 'There is always another fraction between two fractions. With the common denominator there may be none in between, but turning the magnifier up multiplies the denominator and new marks appear in between: more and more.') },
     { ...shared('addsub'), id: 'addsub', stage: 'operations', lessonTopic: 'add-sub' },
     { ...shared('muldiv'), id: 'muldiv', stage: 'operations', lessonTopic: 'mul-div' },
     { id: 'hierarchy', stage: 'operations', lessonTopic: 'combined', title: say('Eragiketen ordena', 'El orden de las operaciones', 'ترتيب العمليات', 'The order of operations'), observe: say('Sakatu orain egin daitekeen eragiketaren ikurra: bi eragigaiak zenbakiak direnean bakarrik egin daiteke. Parentesiek eta biderketek itxaron arazten dute.', 'Pulsa el signo de la operación que se puede hacer ahora: solo se puede cuando sus dos operandos ya son números. Los paréntesis y los productos hacen esperar a los demás.', 'اضغط إشارة العملية التي يمكن إجراؤها الآن: لا يمكن إلا إذا كان طرفاها عددين. الأقواس والضرب تجعل غيرها تنتظر.', 'Press the sign of the operation you can do now: it can only be done when both of its operands are already numbers. Brackets and products make the others wait.') },
     { ...applied('decimals'), id: 'decimals', stage: 'decimals', lessonTopic: 'decimal-kinds' },
-    { ...applied('generatrix'), id: 'generatrix', stage: 'decimals', lessonTopic: 'periodic-generatrix' }
+    { ...applied('generatrix'), id: 'generatrix', stage: 'decimals', lessonTopic: 'exact-generatrix' },
+    { id: 'machine', stage: 'decimals', lessonTopic: 'periodic-generatrix', title: say('Zatiki sortzailearen makina', 'La máquina de la generatriz', 'آلة الكسر المولّد', 'The generating-fraction machine'), observe: say('Hamartarra 10, 100 edo 1000 aldiz handitzean koma mugitzen da. Bi zerrendek buztan bera dutenean, kenketak zenbaki osoa ematen du eta zatikia agertzen da. Periodiko hutsetan izendatzailea bederatziak dira; mistoetan, bederatziak eta zeroak; zehatzetan, 10, 100…', 'Al multiplicar el decimal por 10, 100 o 1000 la coma se mueve. Cuando las dos tiras tienen la misma cola, la resta da un número entero y aparece la fracción. En los periódicos puros el denominador son nueves; en los mixtos, nueves y ceros; en los exactos, 10, 100…', 'عند ضرب العشري في 10 أو 100 أو 1000 تتحرك الفاصلة. وعندما يكون للشريطين الذيل نفسه يعطي الطرح عددًا صحيحًا ويظهر الكسر. في الدوري البحت يكون المقام تسعات، وفي المختلط تسعات وأصفارًا، وفي المنتهي 10 أو 100…', 'Multiplying the decimal by 10, 100 or 1000 moves the point. When the two strips have the same tail, the subtraction gives a whole number and the fraction appears. Purely recurring decimals give nines in the denominator; mixed ones, nines and zeros; terminating ones, 10, 100…') },
+    { id: 'remaining', stage: 'problems', lessonTopic: 'remaining', title: say('Geratzen dena', 'Lo que queda', 'ما يبقى', 'What is left'), observe: say('Lehen ebakiak osoaren zutabe batzuk kentzen ditu. Bigarrenak geratzen denaren zatiki bat kentzen du, ez osoarena: geratzen diren zutabeak errenkadatan zatitzen dira. Geratzen dena bi zatikien biderkadura da.', 'El primer corte quita columnas del total. El segundo quita una fracción de lo que queda, no del total: las columnas que quedan se parten en filas. Lo que queda al final es el producto de las dos partes que quedan.', 'يزيل القطع الأول أعمدة من الكل. ويزيل الثاني كسرًا من الباقي لا من الكل: تُقسم الأعمدة الباقية إلى صفوف. وما يبقى في النهاية هو حاصل ضرب الجزأين الباقيين.', 'The first cut removes columns of the whole. The second removes a fraction of what is left, not of the whole: the columns left are split into rows. What is left at the end is the product of the two parts left.') },
+    { id: 'whole', stage: 'problems', lessonTopic: 'whole-from-part', title: say('Zatitik osora', 'Del trozo al todo', 'من الجزء إلى الكل', 'From the part to the whole'), observe: say('Zati ezagunak zenbakitzaileak adina zati ditu: haren balioa zati horien artean banatzen da. Gero zati bat izendatzaileak adina aldiz kopiatzen da. Zatia erdia baino txikiagoa bada, osoa bikoitza baino handiagoa da.', 'La parte conocida tiene tantos trozos como dice el numerador: su valor se reparte entre ellos. Después un trozo se copia tantas veces como dice el denominador. Si la parte es menos de la mitad, el total es más del doble.', 'الجزء المعروف فيه قطع بعدد البسط: تتوزع قيمته عليها. ثم تُنسخ قطعة واحدة بعدد المقام. وإذا كان الجزء أقل من النصف فالكل أكثر من الضعف.', 'The known part has as many pieces as the numerator says: its value is shared among them. Then one piece is copied as many times as the denominator says. If the part is less than half, the whole is more than double.') }
 ]
 
 export const rationalsLabToolForTopic: Record<string, RationalsLabToolId | undefined> = {
@@ -56,16 +64,16 @@ export const rationalsLabToolForTopic: Record<string, RationalsLabToolId | undef
     simplify: 'equivalence',
     compare: 'compare',
     line: 'numberline',
-    between: 'numberline',
+    between: 'magnifier',
     'add-sub': 'addsub',
     'mul-div': 'muldiv',
     combined: 'hierarchy',
     'decimal-kinds': 'decimals',
     'exact-generatrix': 'generatrix',
-    'periodic-generatrix': 'generatrix',
+    'periodic-generatrix': 'machine',
     'fraction-of': 'muldiv',
-    remaining: 'hierarchy',
-    'whole-from-part': 'muldiv'
+    remaining: 'remaining',
+    'whole-from-part': 'whole'
 }
 
 const value = (state: NumberLineState): FractionValue => ({ numerator: state.numerator, denominator: state.denominator })
@@ -138,5 +146,9 @@ export const rationalsLabChallengeIds: number[] = [
     rationalsProductChallenges,
     hierarchyChallenges,
     decimalsChallenges,
-    generatrixChallenges
+    generatrixChallenges,
+    magnifierChallenges,
+    machineChallenges,
+    remainingChallenges,
+    wholeChallenges
 ].flatMap((list: Array<{ id: number }>) => list.map((challenge) => challenge.id))

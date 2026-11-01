@@ -11,6 +11,7 @@ import { SumTool } from '../../dbh2-zatikiak-prototype/lab/SumTool'
 import { DecimalsTool, GeneratrixTool } from '../../dbh4-aplikatuak-errealak/lab/RealsTools'
 import { rationalsStages } from '../lessons'
 import { HierarchyTool } from './HierarchyTool'
+import { MachineTool, MagnifierTool, RemainingTool, WholeTool } from './RationalTools'
 import {
     RATIONALS_NUMBER_LINE_RANGES,
     rationalsCompareChallenges,
@@ -30,7 +31,11 @@ const toolComponents: Record<RationalsLabToolId, (props: LabToolProps) => JSX.El
     muldiv: (props) => <ProductTool {...props} challenges={rationalsProductChallenges} />,
     hierarchy: HierarchyTool,
     decimals: DecimalsTool,
-    generatrix: GeneratrixTool
+    generatrix: GeneratrixTool,
+    magnifier: MagnifierTool,
+    machine: MachineTool,
+    remaining: RemainingTool,
+    whole: WholeTool
 }
 
 export function RationalsLaboratory(props: {

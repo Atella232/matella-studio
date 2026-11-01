@@ -32,10 +32,10 @@ const arrazionalakUnit: UnitDefinition = {
     challenges: rationalsChallenges,
     lab: {
         description: {
-            eu: `${rationalsLabTools.length} tresna: baliokidetasuna, zuzena, konparatu, batu eta kendu, biderkatu eta zatitu, eragiketen ordena, zatikitik hamartarrera eta zatiki sortzailea, erronkekin.`,
-            es: `${rationalsLabTools.length} herramientas: equivalencia, recta, comparar, sumar y restar, multiplicar y dividir, orden de las operaciones, de fracción a decimal y fracción generatriz, con retos.`,
-            en: `${rationalsLabTools.length} tools: equivalence, number line, comparing, adding and subtracting, multiplying and dividing, order of operations, from fraction to decimal and generating fraction, with challenges.`,
-            ar: `${rationalsLabTools.length} أدوات: التكافؤ والمستقيم والمقارنة والجمع والطرح والضرب والقسمة وترتيب العمليات ومن الكسر إلى العشري والكسر المولّد، مع تحديات.`
+            eu: `${rationalsLabTools.length} tresna: baliokidetasuna, zuzena eta lupa, konparatu, batu eta kendu, biderkatu eta zatitu, eragiketen ordena, zatikitik hamartarrera, zatiki sortzailea eta haren makina, geratzen dena eta zatitik osora, erronkekin.`,
+            es: `${rationalsLabTools.length} herramientas: equivalencia, recta y lupa, comparar, sumar y restar, multiplicar y dividir, orden de las operaciones, de fracción a decimal, fracción generatriz y su máquina, lo que queda y del trozo al todo, con retos.`,
+            en: `${rationalsLabTools.length} tools: equivalence, number line and magnifier, comparing, adding and subtracting, multiplying and dividing, order of operations, from fraction to decimal, generating fraction and its machine, what is left and from the part to the whole, with challenges.`,
+            ar: `${rationalsLabTools.length} أداة: التكافؤ، والمستقيم والعدسة، والمقارنة، والجمع والطرح، والضرب والقسمة، وترتيب العمليات، ومن الكسر إلى العشري، والكسر المولّد وآلته، وما يبقى، ومن الجزء إلى الكل، مع تحديات.`
         },
         progressIds: rationalsLabChallengeIds,
         toolForTopic: rationalsLabToolForTopic,
