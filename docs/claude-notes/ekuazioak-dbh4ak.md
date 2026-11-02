@@ -13,3 +13,7 @@ Phase 1 DONE ce51823 (diag 5201–5208, practice 1–20, challenges 101–115, b
 Lab DONE d120ea6: 10 tools; reused 2. DBH QuadraticTool + 4. DBH aplikatuak RadicalTool; new roots 651xx, biquadratic 652xx, exponential 653xx, linear 654xx, tariffs 655xx, sign 656xx, graphic 657xx, system 658xx. labTools.ts has a generic Span/intersect/setLatex for unions of intervals (reuse for later units). Lab observe text is plain (no $…$); readouts must stay short (~429 px at 1024 wide): long steps go to the note. Known: the reused 2. DBH quadratic Δ readout overflows by ~13 px at a=−3,b=−10,c=−12 (left as is, shared).
 Games DONE 12332da: race 66101–66105 (21 kinds; probe kind is writable: false), memory 66201–66203 (sum-product, linear, quadratic). Memory cards: S/P stacked with \begin{array}{c}; inequalities use a tight() helper wrapping signs and relations in braces ({+}, {<}) to fit the 102 px phone card (max 97 px measured).
 DEPLOYED 2026-10-12 (main 12332da, bundle index-DLz3HLPh). Next unit only when asked: course topic `sistemas` (Santillana Ac. U5 + Anaya U3 systems part).
+
+## Own games (2026-11-02)
+
+Is it a solution?, paint the solution and the equations detective: see [dbh4-own-games](dbh4-own-games.md).

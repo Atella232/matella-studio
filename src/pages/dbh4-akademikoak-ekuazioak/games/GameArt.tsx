@@ -1,8 +1,13 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { EquationsGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { EquationArt } from '../../dbh4-games/EquationGames'
 
 /** Small illustration of each game; the art is the same in every language */
 export function EquationsGameArt({ game }: { game: EquationsGameId }) {
+    if (game === 'check') return <EquationArt game="check" />
+    if (game === 'paint') return <EquationArt game="paint" />
+    if (game === 'detective') return <DetectiveArt lines={['−2x > −6', 'x > 3 ?', 'x < 3']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

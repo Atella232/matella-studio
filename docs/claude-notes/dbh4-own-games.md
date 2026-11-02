@@ -18,3 +18,14 @@ Tricks: in Arabic the two end boxes need `direction: ltr` so the left end stays 
 - `divisible` (applied only): choose k (slider + stepper) so that x − a divides the polynomial; the Ruffini table shows the remainder. The test checks that only one k in −40…40 works. Ids 46401–3.
 - `simplify` (academic only): four simplifications of a fraction of quadratics; the wrong ones cancel the x², swap the signs or cancel the x. Ids 64401–3.
 - `detective` (`dbh4-games/polynomialsDetective.ts`): 16 errors; applied = operations, division, factorising; academic = division, factorising, algebraic fractions. Lines with polynomials or fractions are compared at x = 11. Ids ap 46501–3, ak 64501–3.
+
+## Equations (ap `dbh4-aplikatuak-ekuazioak`, ak `dbh4-akademikoak-ekuazioak`)
+
+Code in `dbh4-games/equations.ts`, `EquationGames.tsx`, `equationsDetective.ts`.
+- ak `check` (66301–3): is it a solution? Candidates as chips; keep only the true solutions (radicals with a false root, a fraction whose candidate cancels the denominator, biquadratics with the t values as traps). «None» is a valid answer.
+- ak `paint` (66401–3): paint the solution of an inequality; the line is cut at the roots (hidden in level 3, with double roots and no roots); pieces and ends (● / ○) are switched on.
+- ap `build` (48301–3): build x² + bx + c = 0 from two solutions; the parabola appears after checking.
+- ap `cross` (48401–3): the crossing point of two lines, tapped on the plane (`Plane` of Funtzioak 2. DBH). Reusable for Sistemak.
+- `detective` (ap 48501–3, ak 66501–3): the applied track reuses the first- and second-degree cases of Ekuazioak 2. DBH (`buildEquationDetectiveCase`, now exported) and adds systems; the academic track has quadratics and biquadratics, radical/fraction/exponential equations and inequalities. Values: lists → `solutionsValue`, systems → x·1000 + y, sets → `setCode`.
+
+Trick: the wiring script once changed the wrong `assert.equal(x.length, n)` in a test; it now only matches `…Games.length`.

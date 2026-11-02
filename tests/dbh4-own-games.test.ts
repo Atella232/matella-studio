@@ -8,6 +8,9 @@ import { createIntervalRounds, INTERVAL_MAX, INTERVAL_MIN, INTERVAL_ROUNDS } fro
 import { createRealsDetectiveCases, realsDetectiveLevels, realsDetectiveNames, realsDetectiveTips } from '../src/pages/dbh4-games/realsDetective.ts'
 import { createDivisibleRounds, createHuntRounds, createSimplifyRounds, divisorsOf, factoredLatex, fromRoots, K_MAX, K_MIN, patternLatex, polyLatex, ruffini, valueAt, withK } from '../src/pages/dbh4-games/polynomials.ts'
 import { createPolyDetectiveCases, POLY_DETECTIVE_X, polyDetectiveLevels, polyDetectiveNames, polyDetectiveTips } from '../src/pages/dbh4-games/polynomialsDetective.ts'
+import { buildRight, checkRight, createBuildRounds, createCheckRounds, createCrossRounds, createPaintRounds, lineAt, paintRight, pieceCount, pieceSample, pieceSolves, rootSolves, solutionLatex } from '../src/pages/dbh4-games/equations.ts'
+import { createEquationsDetectiveCases, equationsDetectiveLevels, equationsDetectiveNames, equationsDetectiveTips, setCode, systemCode, type Piece } from '../src/pages/dbh4-games/equationsDetective.ts'
+import { solutionsValue } from '../src/pages/dbh2-ekuazioak-v2/games/detective.ts'
 import { checkTexts, renders } from './helpers/ownGamesCheck.ts'
 import { evaluate } from './helpers/realsRaceCheck.ts'
 
@@ -132,5 +135,107 @@ test('4. DBH simplify the fraction: the right option equals the fraction, the ot
 test('4. DBH polynomials detective: both tracks', () => {
     for (const track of ['applied', 'academic'] as const) {
         checkDetective((random, level) => createPolyDetectiveCases(track)(random, level).map((item) => ({ ...item, fix: item.fix.replace(/x/g, `(${POLY_DETECTIVE_X})`), lines: item.lines.map((line, index) => (index === 2 ? { ...line, latex: line.latex.replace(/x/g, `(${POLY_DETECTIVE_X})`) } : line)) })), polyDetectiveLevels[track], polyDetectiveNames, polyDetectiveTips)
+    }
+})
+
+/* ---------- Equations ---------- */
+
+test('4. DBH is it a solution?: the solutions satisfy the equation, the other candidates do not', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            for (const round of createCheckRounds(createRandom(seed * 7919 + level), level)) {
+                renders(round.latex)
+                const [left, right] = round.latex.split('=')
+                for (const candidate of round.candidates) {
+                    const at = (side: string) => evaluate(side.replace(/x/g, `(${candidate})`))
+                    const l = at(left)
+                    const r = at(right)
+                    const solves = l !== null && r !== null && Number.isFinite(l) && Math.abs(l - r) < 1e-9
+                    assert.equal(round.solutions.includes(candidate), solves, `${round.latex} at ${candidate}`)
+                }
+                assert.ok(checkRight(round, round.solutions))
+                if (round.solutions.length < round.candidates.length) assert.ok(!checkRight(round, round.candidates))
+            }
+        }
+    }
+})
+
+test('4. DBH paint the solution: pieces and ends agree with the polynomial', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            for (const round of createPaintRounds(createRandom(seed * 7919 + level), level)) {
+                for (const root of round.roots) assert.ok(Math.abs(round.coefficients.reduce((total, c) => total * root + c, 0)) < 1e-9)
+                const pieces = Array.from({ length: pieceCount(round) }, (_, piece) => pieceSolves(round, piece))
+                const ends = round.roots.map(() => rootSolves(round))
+                assert.ok(paintRight(round, pieces, ends))
+                assert.ok(!paintRight(round, pieces.map((on) => !on), ends))
+                for (let piece = 0; piece < pieceCount(round); piece += 1) assert.ok(Math.abs(pieceSample(round, piece)) < 20)
+                renders(solutionLatex(round))
+            }
+        }
+    }
+})
+
+test('4. DBH build the equation and the crossing point', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            for (const round of createBuildRounds(createRandom(seed * 7919 + level), level)) {
+                const [r1, r2] = round.roots
+                assert.ok(buildRight(round, -(r1 + r2), r1 * r2))
+                assert.ok(!buildRight(round, r1 + r2, r1 * r2) || r1 + r2 === 0)
+            }
+            for (const round of createCrossRounds(createRandom(seed * 7919 + level), level)) {
+                for (const line of round.lines) assert.ok(Math.abs(lineAt(line, round.point[0]) - round.point[1]) < 1e-9)
+                assert.notEqual(round.lines[0].a * round.lines[1].b, round.lines[1].a * round.lines[0].b)
+                assert.ok(Math.abs(round.point[0]) <= 6 && Math.abs(round.point[1]) <= 6)
+            }
+        }
+    }
+})
+
+/** The value of the end of an equations line: a system, a set of reals or a list of solutions */
+function equationCode(latex: string): number {
+    const last = latex.split('\\ \\to\\ ').pop()!
+    if (/y=/.test(last)) {
+        const [x, y] = [...last.matchAll(/[xy]=(-?\d+)/g)].map((match) => Number(match[1]))
+        return systemCode(x, y)
+    }
+    if (/infty|^[[(]/.test(last)) {
+        const pieces: Piece[] = last.split('\\cup ').map((part) => {
+            const match = part.match(/^([[(])(-\\infty|-?\d+),\\,(\+\\infty|-?\d+)([\])])$/)!
+            assert.ok(match, part)
+            return [match[2].includes('infty') ? null : Number(match[2]), match[3].includes('infty') ? null : Number(match[3]), match[1] === '[', match[4] === ']']
+        })
+        return setCode(pieces)
+    }
+    const values = last.split(',\\ ').flatMap((part) => {
+        const value = part.split('=').pop()!
+        if (value.startsWith('\\pm ')) {
+            const size = evaluate(value.slice(4))!
+            return [-size, size]
+        }
+        return [evaluate(value)!]
+    })
+    return solutionsValue(values.sort((a, b) => a - b))
+}
+
+test('4. DBH equations detective: both tracks', () => {
+    for (const track of ['applied', 'academic'] as const) {
+        checkTexts([...Object.values(equationsDetectiveNames), ...Object.values(equationsDetectiveTips)])
+        for (let level = 0; level < 3; level += 1) {
+            const seen = new Set<string>()
+            for (let seed = 1; seed <= 100; seed += 1) {
+                for (const item of createEquationsDetectiveCases(track)(createRandom(seed * 7919 + level), level)) {
+                    seen.add(item.error)
+                    assert.ok(item.options.includes(item.error) && new Set(item.options).size === 3)
+                    for (const line of item.lines) renders(line.latex)
+                    renders(item.fix)
+                    checkTexts([item.problem])
+                    assert.ok(Math.abs(equationCode(item.fix) - item.right) < 1e-6, `${item.error}: ${item.fix} ≠ ${item.right}`)
+                    assert.ok(Math.abs(equationCode(item.lines[2].latex) - item.reached) < 1e-6, `${item.error}: ${item.lines[2].latex} ≠ ${item.reached}`)
+                }
+            }
+            assert.equal(seen.size, 4, `${track} ${level}`)
+        }
     }
 })

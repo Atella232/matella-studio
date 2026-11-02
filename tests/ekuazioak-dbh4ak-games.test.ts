@@ -88,7 +88,7 @@ function expected(question: EquationsRaceQuestion): number {
 }
 
 test('ekuazioak 4. DBH ak games: levels, ids and routes', () => {
-    assert.equal(equationsGames.length, 2)
+    assert.equal(equationsGames.length, 5)
     assert.equal(equationsGames[0].levels.length, EQUATIONS_RACE_CIRCUITS)
     assert.equal(equationsGames[1].levels.length, equationsMemoryLevels.length)
     assert.equal(new Set(equationsGameProgressIds).size, equationsGameProgressIds.length)

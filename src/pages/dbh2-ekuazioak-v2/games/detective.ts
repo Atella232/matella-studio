@@ -96,7 +96,8 @@ const range = (min: number, max: number) => Array.from({ length: max - min + 1 }
 
 type Built = Omit<WorkedCase<EquationDetectiveError>, 'options'>
 
-function build(random: Random, error: EquationDetectiveError): Built | null {
+/** One case of a given error; 4. DBH reuses the first-degree and second-degree ones */
+export function buildEquationDetectiveCase(random: Random, error: EquationDetectiveError): Built | null {
     switch (error) {
         case 'transpose-sign': {
             const c = randomInt(random, 1, 4)
@@ -349,4 +350,4 @@ const gcd = (a: number, b: number): number => (b === 0 ? Math.abs(a) : gcd(b, a 
 /** x² + bx + c */
 const linearQuadratic = (b: number, c: number) => `x^{2}${b === 0 ? '' : b === 1 ? '+x' : b === -1 ? '-x' : b > 0 ? `+${b}x` : `${b}x`}${c > 0 ? `+${c}` : c}`
 
-export const createEquationDetectiveCases = (random: Random, levelIndex: number) => createWorkedCases(random, equationDetectiveLevels[levelIndex], EQUATION_DETECTIVE_CASES, build)
+export const createEquationDetectiveCases = (random: Random, levelIndex: number) => createWorkedCases(random, equationDetectiveLevels[levelIndex], EQUATION_DETECTIVE_CASES, buildEquationDetectiveCase)

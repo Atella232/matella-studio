@@ -32,7 +32,7 @@ function parseQuadratic(latex: string): [number, number, number] {
 const factorRoots = (latex: string) => [...latex.matchAll(/\(x(?:([+-])(\d+))?\)/g)].map((match) => (match[1] === undefined ? 0 : match[1] === '-' ? Number(match[2]) : -Number(match[2])))
 
 test('ekuazioak 4. DBH ap games: levels, ids and routes', () => {
-    assert.equal(equationsSystemsGames.length, 2)
+    assert.equal(equationsSystemsGames.length, 5)
     assert.equal(equationsSystemsGames[0].levels.length, EQUATIONS_SYSTEMS_RACE_CIRCUITS)
     assert.equal(equationsSystemsGames[1].levels.length, equationsSystemsMemoryLevels.length)
     assert.equal(new Set(equationsSystemsGameProgressIds).size, equationsSystemsGameProgressIds.length)

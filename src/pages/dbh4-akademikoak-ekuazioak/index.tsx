@@ -40,7 +40,7 @@ const ekuazioakUnit: UnitDefinition = {
         render: (props) => <EquationsInequalitiesLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, soluzioa al da?, margotu soluzioa, ekuazioen detektibea eta memoria.', es: 'Cinco juegos: carrera, ¿es solución?, pinta la solución, detective de ecuaciones y memoria.', en: 'Five games: race, is it a solution?, paint the solution, equations detective and memory.', ar: 'خمس ألعاب: السباق وهل هو حل؟ ولوّن الحل ومخبر المعادلات والذاكرة.' },
         progressIds: equationsGameProgressIds,
         recordsKey: EQUATIONS_GAME_RECORDS_KEY,
         render: (props) => <EquationsGames {...props} />

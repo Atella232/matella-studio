@@ -31,3 +31,12 @@
 .dbh4-hint { margin: 0; text-align: center; color: var(--muted); font-size: 14px; }
 .dbh4-fractions { grid-template-columns: 1fr 1fr; }
 .dbh4-fractions button { font-size: 20px; min-height: 70px; }
+.dbh4-candidates button.chosen { background: var(--blue-tint, #dde7f7); border-color: var(--blue, #2f5fb3); }
+
+.fraction-v2-games-card[data-game="check"] { --game-tint: var(--mustard-tint, #fbebc0); }
+.fraction-v2-games-card[data-game="paint"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="build"] { --game-tint: var(--success-tint, #d9efe2); }
+.fraction-v2-games-card[data-game="cross"] { --game-tint: var(--coral-tint, #f6d5cc); }
+.func2-plane { display: flex; justify-content: center; }
+.func2-plane .functions-plane { max-width: 340px; border: 2px solid var(--ink); border-radius: 14px; background: var(--card); }
+.dbh4-candidates button { padding: 0 10px; white-space: nowrap; }
