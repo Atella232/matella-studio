@@ -386,6 +386,9 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
         const nextTopic = unit.topics[currentIndex + 1]
         const isLearned = learned.ids.includes(currentTopic.id)
         const stepsKind = currentTopic.stepsKind ?? 'steps'
+        const figure = currentTopic.figure && <LessonFigure language={language}>{currentTopic.figure(language)}</LessonFigure>
+        // A drawing of the solved exercise waits after the steps, so it does not give the answer away
+        const figureAfterSteps = Boolean(currentTopic.figureAfterSteps && currentTopic.steps)
         const labToolId = unit.lab?.toolForTopic[currentTopic.id]
         const selectTopic = (id: string) => navigate('learn', id)
 
@@ -436,7 +439,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                     <p className="fraction-v2-lesson-body"><MathText text={l(currentTopic.explanation)} /></p>
                     {currentTopic.cases && <LessonCases cases={currentTopic.cases} language={language} />}
                     {/* The drawing right under the explanation it illustrates, before the worked exercise */}
-                    {currentTopic.figure && <LessonFigure language={language}>{currentTopic.figure(language)}</LessonFigure>}
+                    {!figureAfterSteps && figure}
                     {currentTopic.problem && (
                         <div className="fraction-v2-lesson-problem">
                             <span>{l({ eu: 'Ebatz dezagun', es: 'Vamos a resolver', en: 'Let\'s solve', ar: 'لنحلّ' })}</span>
@@ -451,6 +454,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                             // One step at a time only when they solve «Let's solve», and until the lesson is understood
                             progressive={Boolean(currentTopic.problem) && stepsKind === 'steps' && !isLearned}
                             language={language}
+                            solution={figureAfterSteps ? figure : undefined}
                         />
                     )}
                     <FitMath as="figure" className="fraction-v2-example" text={pickMaybeText(language, currentTopic.example)} />

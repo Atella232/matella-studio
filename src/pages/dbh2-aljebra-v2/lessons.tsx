@@ -25,6 +25,7 @@ export const algebraTopics: UnitTopic[] = [
     {
         id: 'language',
         stage: 'language',
+        figureAfterSteps: true,
         title: { eu: 'Hizkuntza aljebraikoa eta segidak', es: 'Lenguaje algebraico y series', en: 'Algebraic language and sequences', ar: 'اللغة الجبرية والمتتاليات' },
         goal: {
             eu: 'Esaldiak adierazpen aljebraiko bihurtzea eta segida baten gai orokorra idaztea.',

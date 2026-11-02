@@ -210,6 +210,7 @@ export const equationsTopics: UnitTopic[] = [
     {
         id: 'lcm',
         stage: 'denominators',
+        figureAfterSteps: true,
         title: { eu: 'Izendatzaile batzuk: MKT', es: 'Varios denominadores: m.c.m.', en: 'Several denominators: LCM', ar: 'عدة مقامات: م.م.أ' },
         goal: {
             eu: 'Izendatzaile desberdinak dituzten ekuazioak MKTa erabiliz ebaztea.',
@@ -397,6 +398,7 @@ export const equationsTopics: UnitTopic[] = [
     {
         id: 'incomplete',
         stage: 'quadratic',
+        figureAfterSteps: true,
         title: { eu: 'Ekuazio osatugabeak', es: 'Ecuaciones incompletas', en: 'Incomplete equations', ar: 'المعادلات الناقصة' },
         goal: {
             eu: '$ax^{2}+c=0$ eta $ax^{2}+bx=0$ motakoak formularik gabe ebaztea.',

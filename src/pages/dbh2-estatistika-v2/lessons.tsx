@@ -69,6 +69,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'cumulative',
         stage: 'tables',
+        figureAfterSteps: true,
         title: say('Maiztasun metatuak', 'Frecuencias acumuladas', 'التكرارات المتجمّعة', 'Cumulative frequencies'),
         goal: say('Maiztasun absolutu eta erlatibo metatuak kalkulatzea eta «zenbat gutxiago» galderei erantzutea.', 'Calcular las frecuencias absolutas y relativas acumuladas y responder preguntas de «cuántos como mucho».', 'حساب التكرارات المطلقة والنسبية المتجمّعة والإجابة عن أسئلة «كم على الأكثر».', 'Calculate the cumulative absolute and relative frequencies and answer “at most how many” questions.'),
         explanation: say(
@@ -90,6 +91,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'grouped',
         stage: 'tables',
+        figureAfterSteps: true,
         title: say('Datu multzokatuak', 'Datos agrupados', 'البيانات المبوّبة', 'Grouped data'),
         goal: say('Datu asko edo jarraituak tartetan multzokatzea eta klase-markak kalkulatzea.', 'Agrupar en intervalos muchos datos o datos continuos y calcular las marcas de clase.', 'تبويب البيانات الكثيرة أو المتصلة في فئات وحساب مراكز الفئات.', 'Group many data values or continuous data into intervals and calculate the class marks.'),
         explanation: say(
@@ -133,6 +135,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'pie',
         stage: 'graphs',
+        figureAfterSteps: true,
         title: say('Sektore-diagramak eta ehunekoak', 'Diagramas de sectores y porcentajes', 'المخططات الدائرية والنسب المئوية', 'Pie charts and percentages'),
         goal: say('Ehunekoetatik angeluak kalkulatzea eta, alderantziz, angelu batetik zenbat datu diren jakitea.', 'Calcular ángulos a partir de porcentajes y, al revés, saber cuántos datos son a partir de un ángulo.', 'حساب الزوايا انطلاقًا من النسب المئوية، وبالعكس معرفة عدد البيانات انطلاقًا من زاوية.', 'Calculate angles from percentages and, the other way round, find how many data values an angle represents.'),
         explanation: say(
@@ -176,6 +179,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'mean-table',
         stage: 'centre',
+        figureAfterSteps: true,
         title: say('Batez bestekoa taula batetik', 'La media desde una tabla', 'المتوسط من جدول', 'The mean from a table'),
         goal: say('Maiztasun-taula baten batez bestekoa kalkulatzea, datu multzokatuekin ere bai.', 'Calcular la media de una tabla de frecuencias, también con datos agrupados.', 'حساب متوسط جدول تكرارات، وكذلك للبيانات المبوّبة.', 'Calculate the mean from a frequency table, including grouped data.'),
         explanation: say(
@@ -197,6 +201,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'median-table',
         stage: 'centre',
+        figureAfterSteps: true,
         title: say('Mediana eta moda taula batetik', 'Mediana y moda desde una tabla', 'الوسيط والمنوال من جدول', 'Median and mode from a table'),
         goal: say('Maiztasun metatuak erabiliz mediana aurkitzea eta moda (edo modak) ezagutzea.', 'Encontrar la mediana con las frecuencias acumuladas y reconocer la moda (o las modas).', 'إيجاد الوسيط بالتكرارات المتجمّعة والتعرّف إلى المنوال (أو المنوالات).', 'Find the median using the cumulative frequencies and recognise the mode (or modes).'),
         explanation: say(
@@ -241,6 +246,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'deviation',
         stage: 'spread',
+        figureAfterSteps: true,
         title: say('Ibiltartea eta batez besteko desbideratzea', 'Recorrido y desviación media', 'المدى والانحراف المتوسط', 'Range and mean deviation'),
         goal: say('Datuen sakabanaketa ibiltartearekin eta batez besteko desbideratzearekin neurtzea.', 'Medir la dispersión de los datos con el recorrido y la desviación media.', 'قياس تشتت البيانات بالمدى والانحراف المتوسط.', 'Measure how spread out the data are using the range and the mean deviation.'),
         explanation: say(
@@ -262,6 +268,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'quartiles',
         stage: 'spread',
+        figureAfterSteps: true,
         title: say('Kuartilak', 'Cuartiles', 'الربيعيات', 'Quartiles'),
         goal: say('Ordenatutako datuak lau zati berdinetan banatzen dituzten kuartilak kalkulatzea.', 'Calcular los cuartiles, que dividen los datos ordenados en cuatro partes iguales.', 'حساب الربيعيات التي تقسم البيانات المرتّبة إلى أربعة أجزاء متساوية.', 'Calculate the quartiles, which divide the ordered data into four equal parts.'),
         explanation: say(
@@ -306,6 +313,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'events',
         stage: 'chance',
+        figureAfterSteps: true,
         title: say('Gertaerak eta aurkako gertaera', 'Sucesos y suceso contrario', 'الأحداث والحدث المعاكس', 'Events and complementary events'),
         goal: say('Gertaerak lagin-espazioaren zati gisa idaztea, aurkako gertaeraren probabilitatea kalkulatzea eta gailu erregularrak eta irregularrak bereiztea.', 'Escribir sucesos como partes del espacio muestral, calcular la probabilidad del suceso contrario y distinguir instrumentos regulares e irregulares.', 'كتابة الأحداث أجزاءً من فضاء العيّنة، وحساب احتمال الحدث المعاكس، والتمييز بين الأدوات المنتظمة وغير المنتظمة.', 'Write events as parts of the sample space, calculate the probability of the complementary event and tell apart fair and unfair objects.'),
         explanation: say(
@@ -327,6 +335,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'tree',
         stage: 'chance',
+        figureAfterSteps: true,
         title: say('Zuhaitz-diagramak eta taulak', 'Diagramas de árbol y tablas', 'المخططات الشجرية والجداول', 'Tree diagrams and tables'),
         goal: say('Esperimentu konposatuen emaitza guztiak zuhaitz edo taula batekin zenbatzea eta probabilitateak kalkulatzea.', 'Contar todos los resultados de experimentos compuestos con un árbol o una tabla y calcular probabilidades.', 'عدّ كل نتائج التجارب المركّبة بشجرة أو جدول وحساب الاحتمالات.', 'Count all the outcomes of compound experiments using a tree or a table, and calculate probabilities.'),
         explanation: say(
@@ -348,6 +357,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'double-table',
         stage: 'chance',
+        figureAfterSteps: true,
         title: say('Sarrera bikoitzeko taulak', 'Tablas de doble entrada', 'الجداول ذات المدخلين', 'Two-way tables'),
         goal: say('Bi ezaugarri batera dituzten taulak irakurtzea, osatzea eta haietatik probabilitateak kalkulatzea.', 'Leer y completar tablas con dos características a la vez y calcular probabilidades a partir de ellas.', 'قراءة جداول تجمع خاصيتين معًا وإكمالها وحساب الاحتمالات منها.', 'Read and complete tables with two characteristics at the same time and calculate probabilities from them.'),
         explanation: say(

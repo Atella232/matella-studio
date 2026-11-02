@@ -66,6 +66,7 @@ export const theoryTopics: TheoryTopic[] = [
     {
         id: 'representation',
         stage: 'meaning',
+        figureAfterSteps: true,
         title: { eu: 'Zatiki propioak, inpropioak eta mistoak', es: 'Fracciones propias, impropias y mixtas', en: 'Proper, improper and mixed fractions', ar: 'الكسور الحقيقية وغير الحقيقية والأعداد الكسرية' },
         goal: {
             eu: 'Zatiki inpropio bat zenbaki misto bihurtzea eta alderantziz, eta zenbaki-zuzenean kokatzea.',
@@ -152,6 +153,7 @@ export const theoryTopics: TheoryTopic[] = [
     {
         id: 'simplification',
         stage: 'equivalence',
+        figureAfterSteps: true,
         title: { eu: 'Sinplifikazioa eta zatiki laburtezina', es: 'Simplificación y fracción irreducible', en: 'Simplifying and the simplest form', ar: 'التبسيط والكسر غير القابل للاختزال' },
         goal: {
             eu: 'Zatiki bat bere forma laburrenean idaztea, urratsez urrats edo ZKHrekin.',
@@ -499,6 +501,7 @@ export const theoryTopics: TheoryTopic[] = [
     {
         id: 'proportionality',
         stage: 'proportionality',
+        figureAfterSteps: true,
         title: { eu: 'Ehunekoak eta proportzionaltasuna', es: 'Porcentajes y proporcionalidad', en: 'Percentages and proportionality', ar: 'النسب المئوية والتناسب' },
         goal: {
             eu: 'Proportzionaltasun zuzeneko buruketak unitateko balioaz eta proportzioz ebaztea.',

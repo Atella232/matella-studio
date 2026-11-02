@@ -42,7 +42,14 @@ export function LessonMistakeBox({ mistake, language }: { mistake: LessonMistake
  * the next move before seeing it; render it with the lesson id as key so
  * every lesson starts again from the first step.
  */
-export function LessonSteps({ steps, kind, progressive, language }: { steps: LessonStep[]; kind: 'steps' | 'facts'; progressive: boolean; language: UnitLanguage }) {
+export function LessonSteps({ steps, kind, progressive, language, solution }: {
+    steps: LessonStep[]
+    kind: 'steps' | 'facts'
+    progressive: boolean
+    language: UnitLanguage
+    /** Drawing of the exercise already solved: it waits until the last step is shown */
+    solution?: ReactNode
+}) {
     const l = (text: { eu: string; es: string; en: string; ar: string }) => pickText(language, text)
     const [shown, setShown] = useState(1)
     const listRef = useRef<HTMLOListElement>(null)
@@ -95,6 +102,7 @@ export function LessonSteps({ steps, kind, progressive, language }: { steps: Les
                     </div>
                 </div>
             )}
+            {visible.length === steps.length && solution}
         </>
     )
 }

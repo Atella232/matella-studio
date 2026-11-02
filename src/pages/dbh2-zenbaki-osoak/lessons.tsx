@@ -150,6 +150,7 @@ export const integerTopics: UnitTopic[] = [
     {
         id: 'order',
         stage: 'ordering',
+        figureAfterSteps: true,
         title: { eu: 'Zenbaki osoak ordenatzea', es: 'Ordenar números enteros', en: 'Order integers', ar: 'ترتيب الأعداد الصحيحة' },
         goal: {
             eu: 'Zenbaki osoen zerrenda bat txikienetik handienera eta alderantziz ordenatzea.',

@@ -238,6 +238,7 @@ export const divisibilityTopics: UnitTopic[] = [
     {
         id: 'primes',
         stage: 'primes',
+        figureAfterSteps: true,
         title: { eu: 'Zenbaki lehenak eta konposatuak', es: 'Números primos y compuestos', en: 'Prime and composite numbers', ar: 'الأعداد الأولية والمؤلفة' },
         goal: {
             eu: 'Zenbaki bat lehena ala konposatua den erabakitzea.',
@@ -270,6 +271,7 @@ export const divisibilityTopics: UnitTopic[] = [
     {
         id: 'factorization',
         stage: 'primes',
+        figureAfterSteps: true,
         title: { eu: 'Biderkagai lehenetan deskonposatzea', es: 'Descomposición en factores primos', en: 'Prime factorisation', ar: 'التحليل إلى عوامل أولية' },
         goal: {
             eu: 'Zenbaki bat zenbaki lehenen biderkadura gisa idaztea, berreturak erabiliz.',
