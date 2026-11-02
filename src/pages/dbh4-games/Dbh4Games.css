@@ -73,3 +73,9 @@
 .dbh4-ladder li { padding: 4px 10px; text-align: center; font-size: 17px; background: var(--paper-deep, #ece6da); border-block: 2px solid var(--ink); }
 .dbh4-ladder li.right { background: var(--success-tint, #d9efe2); border-color: var(--success, #267b53); font-weight: 700; }
 .dbh4-ladder li.chosen { background: var(--coral-tint, #f6d5cc); border-color: var(--error, #c4432a); }
+
+/* The trigonometry games: the unit circle, the other ratios */
+.fraction-v2-games-card[data-game="circle"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="ratios"] { --game-tint: var(--success-tint, #d9efe2); }
+.dbh4-ratio-row { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.dbh4-ratio-name { font-size: 18px; }

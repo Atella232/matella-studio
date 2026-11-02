@@ -24,6 +24,9 @@ import { BOX_MAX, BOX_MIN, BOX_ROUNDS, CLOUD_ROUNDS, createBoxRounds, createClou
 import { createStatsDetectiveCases, statsDetectiveLevels, statsDetectiveNames, statsDetectiveTips } from '../src/pages/dbh4-games/statsDetective.ts'
 import { argumentLatex, createLogRounds, createRadicalRounds, EXPONENT_STEPS, exponentValue, expressionLatex, LOG_ROUNDS, logQuestionLatex, powerValue, primeFactors, RADICAL_ROUNDS, radicalLatex, simplify } from '../src/pages/dbh4-games/radicals.ts'
 import { createPowersDetectiveCases, powersDetectiveLevels, powersDetectiveNames, powersDetectiveTips } from '../src/pages/dbh4-games/powersDetective.ts'
+import { CIRCLE_ROUNDS, CIRCLE_STEP, circleQuestionLatex, createCircleRounds, createRatiosRounds, fittingAngles, fractionLatex, QUADRANT_SIGNS, RATIOS_ROUNDS, ratioFraction, ratioValue, valueLatex } from '../src/pages/dbh4-games/trigonometry.ts'
+import { createTrigDetectiveCases, trigDetectiveLevels, trigDetectiveNames, trigDetectiveTips } from '../src/pages/dbh4-games/trigDetective.ts'
+import { localize } from '../src/pages/dbh4-akademikoak-trigonometria/text.ts'
 import { checkTexts, renders } from './helpers/ownGamesCheck.ts'
 import { evaluate } from './helpers/realsRaceCheck.ts'
 
@@ -49,7 +52,7 @@ export function checkLanguages(texts: LocalizedText[]) {
 }
 
 /** The checks of a worked-solution detective: the level's errors, three options, the fix and the last line on their values */
-export function checkDetective<Error extends string>(create: (random: ReturnType<typeof createRandom>, level: number) => WorkedCase<Error>[], levels: Error[][], names: Record<Error, LocalizedText>, tips: Record<Error, LocalizedText>, tolerance = 1e-6) {
+export function checkDetective<Error extends string>(create: (random: ReturnType<typeof createRandom>, level: number) => WorkedCase<Error>[], levels: Error[][], names: Record<Error, LocalizedText>, tips: Record<Error, LocalizedText>, tolerance = 1e-6, localize = (latex: string) => latex) {
     checkTexts([...Object.values<LocalizedText>(names), ...Object.values<LocalizedText>(tips)])
     checkLanguages([...Object.values<LocalizedText>(names), ...Object.values<LocalizedText>(tips)])
     for (let level = 0; level < levels.length; level += 1) {
@@ -62,8 +65,8 @@ export function checkDetective<Error extends string>(create: (random: ReturnType
                 assert.ok(levels[level].includes(item.error))
                 assert.ok(item.options.includes(item.error) && new Set(item.options).size === 3)
                 assert.equal(item.lines.length, 3)
-                for (const line of item.lines) renders(line.latex)
-                renders(item.fix)
+                for (const line of item.lines) renders(localize(line.latex))
+                renders(localize(item.fix))
                 checkTexts([item.problem])
                 checkLanguages([item.problem, ...item.lines.map((line) => line.label)])
                 assert.ok(!/\{,\}/.test(item.problem.es.replace(/\$[^$]+\$/g, '')), item.problem.es)
@@ -647,5 +650,61 @@ test('4. DBH find the exponent: b to the exponent gives the number, the stepper 
 
 test('4. DBH powers detective: powers, roots and logarithms', () => {
     checkDetective(createPowersDetectiveCases, powersDetectiveLevels, powersDetectiveNames, powersDetectiveTips)
+})
+
+test('4. DBH the unit circle: one angle of the stepper fits, exact values, the quadrants of each level', () => {
+    for (let level = 0; level < 3; level += 1) {
+        const quadrants = new Set<number>()
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createCircleRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, CIRCLE_ROUNDS)
+            for (const round of rounds) {
+                quadrants.add(Math.ceil(round.angle / 90))
+                assert.ok(round.angle > 0 && round.angle < 360 && round.angle % CIRCLE_STEP === 0)
+                assert.deepEqual(fittingAngles(round, ratioValue(round.given, round.angle)!), [round.angle])
+                for (const language of ['eu', 'es', 'en', 'ar'] as const) renders(localize(language, circleQuestionLatex(round)))
+                const value = evaluate(valueLatex(ratioValue(round.given, round.angle)!))!
+                assert.ok(Math.abs(value - ratioValue(round.given, round.angle)!) < 1e-9)
+                if (level === 0) assert.ok(round.firstQuadrant && round.angle <= 90 && round.condition === null)
+                assert.equal(round.radians, level === 2)
+            }
+        }
+        if (level > 0) assert.deepEqual([...quadrants].sort(), [1, 2, 3, 4])
+    }
+})
+
+test('4. DBH the other ratios: the right options follow the identity and the signs of the quadrant', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createRatiosRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, RATIOS_ROUNDS)
+            for (const round of rounds) {
+                const [p, q, r] = round.triple
+                assert.equal(p * p + q * q, r * r)
+                const sen = ratioFraction('sen', round.triple, round.quadrant)
+                const cos = ratioFraction('cos', round.triple, round.quadrant)
+                assert.ok(Math.abs((sen[0] / sen[1]) ** 2 + (cos[0] / cos[1]) ** 2 - 1) < 1e-12)
+                assert.equal(round.asked.length, 2)
+                for (const asked of round.asked) {
+                    assert.equal(new Set(asked.options.map((option) => option.join('/'))).size, 4)
+                    const [a, b] = asked.options[asked.right]
+                    assert.deepEqual([a, b], ratioFraction(asked.ratio, round.triple, round.quadrant))
+                    assert.equal(Math.sign(a), QUADRANT_SIGNS[round.quadrant][asked.ratio])
+                    renders(fractionLatex([a, b]))
+                }
+                if (level === 0) assert.equal(round.quadrant, 1)
+                if (level === 1) assert.ok(round.quadrant > 1 && round.signs === null)
+                if (level === 2) {
+                    // The sign of the given ratio and the sign shown leave one quadrant
+                    const fits = ([1, 2, 3, 4] as const).filter((quadrant) => QUADRANT_SIGNS[quadrant][round.given] === QUADRANT_SIGNS[round.quadrant][round.given] && round.signs!.every(({ ratio, sign }) => QUADRANT_SIGNS[quadrant][ratio] === sign))
+                    assert.deepEqual(fits, [round.quadrant])
+                }
+            }
+        }
+    }
+})
+
+test('4. DBH trigonometry detective: right triangles, identities and problems, with sen and tg in every language', () => {
+    for (const language of ['eu', 'es', 'en', 'ar'] as const) checkDetective(createTrigDetectiveCases, trigDetectiveLevels, trigDetectiveNames, trigDetectiveTips, 1e-6, (latex) => localize(language, latex))
 })
 

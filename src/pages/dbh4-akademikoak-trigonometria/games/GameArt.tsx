@@ -2,9 +2,14 @@ import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { UnitLanguage } from '../../../features/unit-v2/types'
 import { decimalSeparatorFor } from '../../../utils/numberFormat'
 import type { TrigonometryGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { TrigArt } from '../../dbh4-games/TrigGames'
 
 /** Small illustration of each game; the art is the same in every language, only its decimal mark follows the language */
 export function TrigonometryGameArt({ game, language }: { game: TrigonometryGameId; language: UnitLanguage }) {
+    if (game === 'circle') return <TrigArt game="circle" />
+    if (game === 'ratios') return <TrigArt game="ratios" />
+    if (game === 'detective') return <DetectiveArt lines={['a = 10 · cos 30° ?', 'cos 120° = −½', 'π rad = 180°']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

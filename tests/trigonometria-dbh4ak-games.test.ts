@@ -81,7 +81,7 @@ function expected(question: TrigonometryRaceQuestion): number {
 }
 
 test('trigonometria 4. DBH ak games: levels, ids and routes', () => {
-    assert.equal(trigonometryGames.length, 2)
+    assert.equal(trigonometryGames.length, 5)
     assert.equal(trigonometryGames[0].levels.length, TRIGONOMETRY_RACE_CIRCUITS)
     assert.equal(trigonometryGames[1].levels.length, trigonometryMemoryLevels.length)
     assert.equal(new Set(trigonometryGameProgressIds).size, trigonometryGameProgressIds.length)

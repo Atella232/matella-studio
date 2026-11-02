@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from 'react'
 import { MathText } from '../../../components/MathText'
 import '../../../pages/dbh2-zatikiak-prototype/games/Detective.css'
-import type { LocalizedText } from '../types'
+import type { LocalizedText, UnitLanguage } from '../types'
 import { GameTopbar, LevelPicker, ResultPanel } from './GameKit'
 import { localLatex, useGameText } from './gameHooks'
 import type { GameProps } from './GamesHub'
@@ -25,6 +25,8 @@ export interface WorkedDetectiveConfig<Error extends string> {
     createCases: (random: Random, level: number) => WorkedCase<Error>[]
     names: Record<Error, LocalizedText>
     tips: Record<Error, LocalizedText>
+    /** Writes a line in the language's notation (e.g. \\sen as sen or sin); the lines are left as they are without it */
+    localize?: (latex: string, language: UnitLanguage) => string
 }
 
 /** Each case: first the wrong line, then what kind of mistake it is */
@@ -157,7 +159,7 @@ export function WorkedDetectiveGame<Error extends string>({ config, language, re
                                     <span className="detective-line-number">{lineNumber(position)}</span>
                                     <span className="worked-detective-step">
                                         <span className="worked-detective-label" dir={language === 'ar' ? 'rtl' : 'ltr'}>{l(current.label)}</span>
-                                        <MathText text={`$${localLatex(current.latex, language)}$`} />
+                                        <MathText text={`$${localLatex(config.localize ? config.localize(current.latex, language) : current.latex, language)}$`} />
                                     </span>
                                 </button>
                             </li>
@@ -202,7 +204,7 @@ export function WorkedDetectiveGame<Error extends string>({ config, language, re
                         <p className="detective-fix">
                             <span>{l({ eu: 'Hau izan behar zuen:', es: 'Debería ser:', en: 'It should be:', ar: 'كان يجب أن يكون:' })}</span>
                             {/* A long fix goes on two lines, the second one after the arrow */}
-                            {item.fix.split('\\ \\to\\ ').map((part, position) => <MathText key={position} text={`$${position > 0 ? '\\to\\ ' : ''}${localLatex(part, language)}$`} />)}
+                            {item.fix.split('\\ \\to\\ ').map((part, position) => <MathText key={position} text={`$${position > 0 ? '\\to\\ ' : ''}${localLatex(config.localize ? config.localize(part, language) : part, language)}$`} />)}
                         </p>
                         <button type="button" className="fraction-v2-primary" onClick={next} ref={(node) => node?.focus({ preventScroll: true })}>
                             {index + 1 >= count ? l({ eu: 'Emaitza ikusi', es: 'Ver resultado', en: 'See the result', ar: 'اعرض النتيجة' }) : l({ eu: 'Hurrengoa', es: 'Siguiente', en: 'Next', ar: 'التالي' })}

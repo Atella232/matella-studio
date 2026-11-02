@@ -41,7 +41,7 @@ const trigonometriaUnit: UnitDefinition = {
         render: (props) => <TrigonometryLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, zirkunferentzia goniometrikoa, beste arrazoiak, trigonometriaren detektibea eta memoria.', es: 'Cinco juegos: carrera, la circunferencia goniométrica, las otras razones, detective de trigonometría y memoria.', en: 'Five games: race, the unit circle, the other ratios, trigonometry detective and memory.', ar: 'خمس ألعاب: السباق والدائرة المثلثية والنسب الأخرى ومخبر حساب المثلثات والذاكرة.' },
         progressIds: trigonometryGameProgressIds,
         recordsKey: TRIGONOMETRY_GAME_RECORDS_KEY,
         render: (props) => <TrigonometryGames {...props} />

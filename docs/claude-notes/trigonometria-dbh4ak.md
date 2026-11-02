@@ -10,3 +10,7 @@ Sources: Anaya Ac. U7 (solucionario with text layer, scratchpad ak7.txt) + Santi
 Stages ratios/identities/solving/problems/circle; 15 topics: right-ratios, ratio-properties, notable-angles, fundamental, one-ratio, calculator, two-sides, side-angle, elevation, double-observation, oblique, trig-area, unit-circle, reduction, radians. All 14 figures new (figures.tsx). Naming: `text.ts` say/same turn `\sen`/`\tg` into es sen/tg, eu sin/tg, ar sin/tan (figures use trig()). Answers `answers.ts` readTrigonometryAnswer (figurak reader + drops «rad»), inputMode text (negatives). Stage chip is nowrap: long stage titles overflow at 375 px (shortened «Triángulos rectángulos»). Tests can't import .tsx: the content test reads lessons.tsx source and renders its formulas.
 
 Phase 1 DONE c0a75b4 (diag 5501–5508, practice 1–20, challenges 101–115, bank 1–50; tests/trigonometria-dbh4ak-content.test.ts). Lab DONE dd52e71 (ids 710xx–719xx), games DONE 4dcec6a. Merged to main and deployed. Next unit: [[bektoreak-dbh4ak]].
+
+## Own games (2026-11-02)
+
+The unit circle (72301–3), the other ratios (72401–3) and a trigonometry detective (72501–3; lines use \sen and \tg with `localize`). Details in `dbh4-own-games.md`.
