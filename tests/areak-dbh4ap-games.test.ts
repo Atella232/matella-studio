@@ -24,7 +24,7 @@ function evaluate(latex: string): number {
 }
 
 test('areak 4. DBH ap games: levels, ids and routes', () => {
-    assert.equal(areasVolumesGames.length, 2)
+    assert.equal(areasVolumesGames.length, 5)
     assert.equal(areasVolumesGames[0].levels.length, AREAS_VOLUMES_RACE_CIRCUITS)
     assert.equal(areasVolumesGames[1].levels.length, areasVolumesMemoryLevels.length)
     assert.equal(new Set(areasVolumesGameProgressIds).size, areasVolumesGameProgressIds.length)

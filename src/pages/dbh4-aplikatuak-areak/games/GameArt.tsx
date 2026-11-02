@@ -1,8 +1,13 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { AreasVolumesGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { VolumeArt } from '../../dbh4-games/VolumeGames'
 
 /** Small illustration of each game; the art is the same in every language */
 export function AreasVolumesGameArt({ game }: { game: AreasVolumesGameId }) {
+    if (game === 'tiles') return <VolumeArt game="tiles" />
+    if (game === 'pour') return <VolumeArt game="pour" />
+    if (game === 'detective') return <DetectiveArt lines={['A = π · (R − r)²', 'h = 9 ?', 'V = ⅔πr³']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

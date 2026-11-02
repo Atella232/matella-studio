@@ -36,7 +36,7 @@ const antzekotasunaUnit: UnitDefinition = {
         render: (props) => <SimilarityLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Sei joko: lasterketa, neurtu dorrea, mapako eskala, hazi k bider, antzekotasunaren detektibea eta memoria.', es: 'Seis juegos: carrera, mide la torre, la escala del mapa, crece k veces, detective de semejanza y memoria.', en: 'Six games: race, measure the tower, the map scale, grow it k times, similarity detective and memory.', ar: 'ست ألعاب: السباق وقِس البرج ومقياس الخريطة وكبّره k مرة ومخبر التشابه والذاكرة.' },
         progressIds: similarityGameProgressIds,
         recordsKey: SIMILARITY_GAME_RECORDS_KEY,
         render: (props) => <SimilarityGames {...props} />

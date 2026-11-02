@@ -1,8 +1,14 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { AreasSimilarityGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { VolumeArt } from '../../dbh4-games/VolumeGames'
+import { SimilarityArt } from '../../dbh4-games/SimilarityGames'
 
 /** Small illustration of each game; the art is the same in every language */
 export function AreasSimilarityGameArt({ game }: { game: AreasSimilarityGameId }) {
+    if (game === 'pour') return <VolumeArt game="pour" />
+    if (game === 'scale') return <SimilarityArt game="scale" />
+    if (game === 'detective') return <DetectiveArt lines={['A = 25π + 50 ?', 'g = √(r² + h²)', 'V′ = V · k³']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

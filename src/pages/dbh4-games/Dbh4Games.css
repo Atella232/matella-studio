@@ -48,3 +48,19 @@
 .dbh4-bars { display: flex; align-items: flex-end; justify-content: center; gap: 6px; height: 96px; }
 .dbh4-bars span { width: 20px; border-radius: 4px 4px 0 0; background: var(--blue, #2f5fb3); }
 .dbh4-bars span.target { background: var(--success, #267b53); }
+
+/* The geometry games: how many glasses?, tile the floor, grow it k times, measure the tower, the map scale */
+.fraction-v2-games-card[data-game="pour"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="tiles"] { --game-tint: var(--mustard-tint, #fbebc0); }
+.fraction-v2-games-card[data-game="scale"] { --game-tint: var(--success-tint, #d9efe2); }
+.fraction-v2-games-card[data-game="tower"] { --game-tint: var(--mustard-tint, #fbebc0); }
+.fraction-v2-games-card[data-game="map"] { --game-tint: var(--success-tint, #d9efe2); }
+.dbh4-scene { display: block; width: min(100%, 340px); height: auto; margin: 0 auto; border: 2px solid var(--ink); border-radius: 14px; background: var(--card); font-family: "Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif; }
+.dbh4-pickable { cursor: crosshair; touch-action: manipulation; }
+.dbh4-subprompt { display: block; margin-top: 6px; font-weight: 400; color: var(--muted); }
+.dbh4-controls { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.dbh4-controls input[type="range"] { width: min(100%, 320px); accent-color: var(--blue, #2f5fb3); }
+.dbh4-worked { display: block; margin: 2px 0; }
+.dbh4-spill circle { animation: dbh4-drip 1.2s ease-in infinite; }
+@keyframes dbh4-drip { from { transform: translateY(-6px); opacity: 0.3; } to { transform: translateY(6px); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .dbh4-spill circle { animation: none; } }

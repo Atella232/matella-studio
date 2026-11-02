@@ -51,7 +51,7 @@ function expected(question: AreasSimilarityRaceQuestion): number {
 }
 
 test('areak 4. DBH ak games: levels, ids and routes', () => {
-    assert.equal(areasSimilarityGames.length, 2)
+    assert.equal(areasSimilarityGames.length, 5)
     assert.equal(areasSimilarityGames[0].levels.length, AREAS_SIMILARITY_RACE_CIRCUITS)
     assert.equal(areasSimilarityGames[1].levels.length, areasSimilarityMemoryLevels.length)
     assert.equal(new Set(areasSimilarityGameProgressIds).size, areasSimilarityGameProgressIds.length)

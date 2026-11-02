@@ -7,11 +7,18 @@ import { AreasSimilarityGameArt } from './GameArt'
 import { AREAS_SIMILARITY_GAME_RECORDS_KEY, areasSimilarityGameModeForPath, areasSimilarityGames, areasSimilarityGameSlugs, type AreasSimilarityGameId } from './info'
 import { AreasSimilarityRaceGame } from './RaceGame'
 import '../../dbh1-aljebra-v2/games/AlgebraGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { createGeometryDetectiveCases, GEOMETRY_DETECTIVE_CASES, geometryDetectiveNames, geometryDetectiveTips } from '../../dbh4-games/geometryDetective'
+import { PourGame } from '../../dbh4-games/VolumeGames'
+import { ScaleGame } from '../../dbh4-games/SimilarityGames'
 
 const memoryGame = areasSimilarityGames.find((game) => game.id === 'memory')!
 
 const components: Record<AreasSimilarityGameId, (props: GameProps) => JSX.Element> = {
     race: AreasSimilarityRaceGame,
+    pour: (props) => <PourGame {...props} game={areasSimilarityGames.find((game) => game.id === 'pour')!} art={<AreasSimilarityGameArt game="pour" />} />,
+    scale: (props) => <ScaleGame {...props} game={areasSimilarityGames.find((game) => game.id === 'scale')!} art={<AreasSimilarityGameArt game="scale" />} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: areasSimilarityGames.find((game) => game.id === 'detective')!, art: <AreasSimilarityGameArt game="detective" />, cases: GEOMETRY_DETECTIVE_CASES, createCases: createGeometryDetectiveCases('academic'), names: geometryDetectiveNames, tips: geometryDetectiveTips }} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <AreasSimilarityGameArt game="memory" />, pairs: AREAS_SIMILARITY_MEMORY_PAIRS, createBoard: createAreasSimilarityMemoryBoard }} />
 }
 

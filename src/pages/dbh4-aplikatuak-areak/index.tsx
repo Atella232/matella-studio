@@ -36,7 +36,7 @@ const areakUnit: UnitDefinition = {
         render: (props) => <AreasVolumesLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, lauzatu lurra, zenbat ontzi?, geometriaren detektibea eta memoria.', es: 'Cinco juegos: carrera, embaldosa el suelo, ¿cuántos vasos?, detective de geometría y memoria.', en: 'Five games: race, tile the floor, how many glasses?, geometry detective and memory.', ar: 'خمس ألعاب: السباق وبلّط الأرضية وكم كأسًا؟ ومخبر الهندسة والذاكرة.' },
         progressIds: areasVolumesGameProgressIds,
         recordsKey: AREAS_VOLUMES_GAME_RECORDS_KEY,
         render: (props) => <AreasVolumesGames {...props} />

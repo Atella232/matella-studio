@@ -41,7 +41,7 @@ const areakUnit: UnitDefinition = {
         render: (props) => <AreasSimilarityLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, zenbat ontzi?, hazi k bider, geometriaren detektibea eta memoria.', es: 'Cinco juegos: carrera, ¿cuántos vasos?, crece k veces, detective de geometría y memoria.', en: 'Five games: race, how many glasses?, grow it k times, geometry detective and memory.', ar: 'خمس ألعاب: السباق وكم كأسًا؟ وكبّره k مرة ومخبر الهندسة والذاكرة.' },
         progressIds: areasSimilarityGameProgressIds,
         recordsKey: AREAS_SIMILARITY_GAME_RECORDS_KEY,
         render: (props) => <AreasSimilarityGames {...props} />

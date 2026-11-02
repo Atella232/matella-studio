@@ -7,11 +7,17 @@ import { AreasVolumesGameArt } from './GameArt'
 import { AREAS_VOLUMES_GAME_RECORDS_KEY, areasVolumesGameModeForPath, areasVolumesGames, areasVolumesGameSlugs, type AreasVolumesGameId } from './info'
 import { AreasVolumesRaceGame } from './RaceGame'
 import '../../dbh1-aljebra-v2/games/AlgebraGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { createGeometryDetectiveCases, GEOMETRY_DETECTIVE_CASES, geometryDetectiveNames, geometryDetectiveTips } from '../../dbh4-games/geometryDetective'
+import { PourGame, TilesGame } from '../../dbh4-games/VolumeGames'
 
 const memoryGame = areasVolumesGames.find((game) => game.id === 'memory')!
 
 const components: Record<AreasVolumesGameId, (props: GameProps) => JSX.Element> = {
     race: AreasVolumesRaceGame,
+    tiles: (props) => <TilesGame {...props} game={areasVolumesGames.find((game) => game.id === 'tiles')!} art={<AreasVolumesGameArt game="tiles" />} />,
+    pour: (props) => <PourGame {...props} game={areasVolumesGames.find((game) => game.id === 'pour')!} art={<AreasVolumesGameArt game="pour" />} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: areasVolumesGames.find((game) => game.id === 'detective')!, art: <AreasVolumesGameArt game="detective" />, cases: GEOMETRY_DETECTIVE_CASES, createCases: createGeometryDetectiveCases('areas'), names: geometryDetectiveNames, tips: geometryDetectiveTips }} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <AreasVolumesGameArt game="memory" />, pairs: AREAS_VOLUMES_MEMORY_PAIRS, createBoard: createAreasVolumesMemoryBoard }} />
 }
 

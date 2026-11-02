@@ -16,6 +16,10 @@ import { createFunctionsDetectiveCases, functionsDetectiveLevels, functionsDetec
 import { createCurveRounds, createGrowthRounds, createMatchRounds, curveAt, curveLatex, growthAt, hitsAll, START, uniqueFit, type Family } from '../src/pages/dbh4-games/curves.ts'
 import { createGraphsDetectiveCases, graphsDetectiveLevels, graphsDetectiveNames, graphsDetectiveTips } from '../src/pages/dbh4-games/graphsDetective.ts'
 import { createHalfRounds, inRegion, regionPoints } from '../src/pages/dbh4-games/halfPlanes.ts'
+import { createPourRounds, isRound, POUR_ROUNDS, tripleVolume, volumeLatex, volumeOf, type Vessel } from '../src/pages/dbh4-games/pour.ts'
+import { createTilesRounds, floorArea, floorCells, outlineArea, sideLengths, tileArea, TILES_ROUNDS } from '../src/pages/dbh4-games/tiles.ts'
+import { CONTEXT_GROWTH, createMapRounds, createScaleRounds, createTowerRounds, MAP_ROUNDS, mapPrompt, RULER_CM, SCALE_ROUNDS, scaleFactor, scalePrompt, TOWER_MAX, TOWER_ROUNDS, towerLayout } from '../src/pages/dbh4-games/similarity.ts'
+import { createGeometryDetectiveCases, geometryDetectiveLevels, geometryDetectiveNames, geometryDetectiveTips } from '../src/pages/dbh4-games/geometryDetective.ts'
 import { checkTexts, renders } from './helpers/ownGamesCheck.ts'
 import { evaluate } from './helpers/realsRaceCheck.ts'
 
@@ -32,9 +36,18 @@ export function endValue(latex: string): number {
     return value!
 }
 
+/** English has no Arabic letters, and Arabic (its formulas left out) no Latin word: the two languages are not swapped */
+export function checkLanguages(texts: LocalizedText[]) {
+    for (const text of texts) {
+        assert.ok(!/[\u0600-\u06ff]/.test(text.en), `Arabic in English: ${text.en}`)
+        assert.ok(!/[A-Za-z]{4,}/.test(text.ar.replace(/\$[^$]+\$/g, '')), `Latin in Arabic: ${text.ar}`)
+    }
+}
+
 /** The checks of a worked-solution detective: the level's errors, three options, the fix and the last line on their values */
 export function checkDetective<Error extends string>(create: (random: ReturnType<typeof createRandom>, level: number) => WorkedCase<Error>[], levels: Error[][], names: Record<Error, LocalizedText>, tips: Record<Error, LocalizedText>, tolerance = 1e-6) {
     checkTexts([...Object.values<LocalizedText>(names), ...Object.values<LocalizedText>(tips)])
+    checkLanguages([...Object.values<LocalizedText>(names), ...Object.values<LocalizedText>(tips)])
     for (let level = 0; level < levels.length; level += 1) {
         const seen = new Set<string>()
         const wrongLines = new Set<number>()
@@ -48,6 +61,7 @@ export function checkDetective<Error extends string>(create: (random: ReturnType
                 for (const line of item.lines) renders(line.latex)
                 renders(item.fix)
                 checkTexts([item.problem])
+                checkLanguages([item.problem, ...item.lines.map((line) => line.label)])
                 assert.ok(!/\{,\}/.test(item.problem.es.replace(/\$[^$]+\$/g, '')), item.problem.es)
                 assert.ok(Math.abs(endValue(item.fix) - item.right) < tolerance * Math.max(1, Math.abs(item.right)), `${item.error}: ${item.fix} ≠ ${item.right}`)
                 assert.ok(Math.abs(endValue(item.lines[2].latex) - item.reached) < tolerance * Math.max(1, Math.abs(item.reached)), `${item.error}: ${item.lines[2].latex} ≠ ${item.reached}`)
@@ -373,3 +387,143 @@ test('4. DBH touch the solution: a region with whole points, every region point 
         }
     }
 })
+
+/** The volume of a vessel worked out again, with π */
+function realVolume({ shape, size: r, height: h }: Vessel): number {
+    switch (shape) {
+        case 'cylinder': return Math.PI * r * r * h
+        case 'cone': return (Math.PI * r * r * h) / 3
+        case 'sphere': return (4 / 3) * Math.PI * r ** 3
+        case 'hemisphere': return (2 / 3) * Math.PI * r ** 3
+        case 'prism': return r * r * h
+        case 'pyramid': return (r * r * h) / 3
+        case 'cube': return r ** 3
+    }
+}
+
+test('4. DBH how many glasses?: whole fills worked out from the volumes, the same kind of vessel, the small one smaller', () => {
+    const sources = [new Set<string>(), new Set<string>(), new Set<string>()]
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createPourRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, POUR_ROUNDS)
+            assert.equal(new Set(rounds.map((round) => JSON.stringify(round))).size, POUR_ROUNDS)
+            for (const { source, target, fills } of rounds) {
+                sources[level].add(source.shape)
+                assert.ok(Number.isInteger(fills) && fills >= 2 && fills <= 12)
+                assert.ok(Math.abs(realVolume(target) / realVolume(source) - fills) < 1e-9, `${JSON.stringify(source)} ${JSON.stringify(target)}`)
+                assert.equal(isRound(source.shape), isRound(target.shape))
+                assert.ok(['cylinder', 'prism'].includes(target.shape))
+                assert.ok(source.height <= target.height && source.size <= target.size)
+                if (level === 0) assert.equal(source.size, target.size)
+                if (level === 1) assert.ok(source.size < target.size)
+                for (const v of [source, target]) {
+                    assert.ok(tripleVolume(v) % 3 === 0)
+                    renders(volumeLatex(v))
+                    assert.ok(Math.abs(endValue(volumeLatex(v)) - volumeOf(v) * (isRound(v.shape) ? Math.PI : 1)) < 1e-6)
+                }
+            }
+        }
+    }
+    assert.deepEqual([...sources[0]].sort(), ['cone', 'cylinder', 'prism', 'pyramid'])
+    assert.deepEqual([...sources[1]].sort(), ['cube', 'cylinder', 'prism', 'pyramid'])
+    assert.deepEqual([...sources[2]].sort(), ['cone', 'hemisphere', 'sphere'])
+})
+
+test('4. DBH tile the floor: the tiles counted three ways, sides in whole decimetres, the floor shapes of each level', () => {
+    for (let level = 0; level < 3; level += 1) {
+        const kinds = new Set<string>()
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createTilesRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, TILES_ROUNDS)
+            for (const round of rounds) {
+                kinds.add(round.kind)
+                assert.equal(floorCells(round).length, round.count)
+                assert.equal(outlineArea(round.outline), round.count)
+                assert.ok(Math.abs(floorArea(round) / tileArea(round) - round.count) < 1e-9)
+                assert.ok(round.max > round.count && round.count >= 8)
+                for (const side of sideLengths(round)) assert.ok(side > 0 && Math.abs(side * 10 - Math.round(side * 10)) < 1e-9, `${side}`)
+                if (level < 2) assert.equal(round.tile[0], round.tile[1])
+                else assert.notEqual(round.tile[0], round.tile[1])
+            }
+        }
+        assert.deepEqual([...kinds].sort(), [['rectangle'], ['l'], ['l', 't', 'u']][level])
+    }
+})
+
+test('4. DBH grow it k times: the right option is the measure times k, k² or k³, four different options, prompts in four languages', () => {
+    for (let level = 0; level < 3; level += 1) {
+        const growths = new Set<string>()
+        let inverse = 0
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createScaleRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, SCALE_ROUNDS)
+            for (const round of rounds) {
+                growths.add(round.growth)
+                assert.equal(new Set(round.options).size, 4)
+                for (const option of round.options) assert.ok(option > 0 && Math.abs(option * 100 - Math.round(option * 100)) < 1e-9)
+                const right = round.options[round.right]
+                if (round.inverse) {
+                    inverse += 1
+                    assert.equal(level, 2)
+                    assert.equal(right ** (round.growth === 'area' ? 2 : 3), round.value)
+                } else {
+                    assert.equal(CONTEXT_GROWTH[round.context], round.growth)
+                    assert.ok(Math.abs(right - round.value * scaleFactor(round.k, round.growth)) < 1e-9)
+                    if (level < 2) assert.ok(round.k[1] === 1 && round.k[0] >= 2)
+                    else assert.ok(round.k[0] === 1 && round.k[1] >= 2)
+                }
+                checkTexts([scalePrompt(round)])
+                checkLanguages([scalePrompt(round)])
+            }
+        }
+        assert.deepEqual([...growths].sort(), [['area', 'length'], ['area', 'volume'], ['area', 'length', 'volume']][level])
+        if (level === 2) assert.ok(inverse > 50)
+    }
+})
+
+test('4. DBH measure the tower: similar triangles give the height, the stepper reaches it, the methods of each level', () => {
+    for (let level = 0; level < 3; level += 1) {
+        const methods = new Set<string>()
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createTowerRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, TOWER_ROUNDS)
+            for (const round of rounds) {
+                methods.add(round.method)
+                assert.ok(Math.abs(round.height - (round.known * round.far) / round.near) < 1e-9)
+                assert.ok(round.height >= 4 && round.height <= TOWER_MAX)
+                assert.ok(Math.abs(round.height / round.step - Math.round(round.height / round.step)) < 1e-9)
+                assert.ok(towerLayout(round).extent <= 36)
+                if (level === 0) assert.ok(Number.isInteger(round.height) && Number.isInteger(round.far))
+            }
+        }
+        assert.deepEqual([...methods].sort(), [['shadow'], ['mirror', 'shadow'], ['mirror', 'shadow', 'sight']][level])
+    }
+})
+
+test('4. DBH the map scale: the real distance from the scale, B on the ruler, half the rounds of each kind, prompts in four languages', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createMapRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, MAP_ROUNDS)
+            assert.equal(rounds.filter((round) => round.mode === 'place').length, 3)
+            assert.equal(new Set(rounds.map((round) => round.cm)).size, MAP_ROUNDS)
+            for (const round of rounds) {
+                assert.ok(round.cm >= 2 && round.cm <= RULER_CM && Math.abs(round.cm / round.snap - Math.round(round.cm / round.snap)) < 1e-9)
+                assert.ok(Math.abs(round.real - (round.cm * round.scale) / (round.unit === 'km' ? 100000 : 100)) < 1e-9)
+                // The stepper of a read round lands on the answer
+                const steps = round.real / (round.snap * round.perCm)
+                assert.ok(Math.abs(steps - Math.round(steps)) < 1e-9)
+                assert.ok(Math.abs(round.real * 100 - Math.round(round.real * 100)) < 1e-9)
+                assert.equal(round.unit, level === 2 ? 'm' : 'km')
+                checkTexts([mapPrompt(round)])
+                checkLanguages([mapPrompt(round)])
+            }
+        }
+    }
+})
+
+test('4. DBH geometry detective: areas, volumes and similarity, each level with its own errors', () => {
+    for (const track of ['areas', 'academic', 'similarity'] as const) checkDetective(createGeometryDetectiveCases(track), geometryDetectiveLevels[track], geometryDetectiveNames, geometryDetectiveTips)
+})
+

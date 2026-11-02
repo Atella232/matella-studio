@@ -16,7 +16,7 @@ const numbersIn = (text: string) => mathIn(text).map((formula) => plainNumber(fo
 const close = (a: number, b: number) => Math.abs(a - b) < 1e-6
 
 test('antzekotasuna 4. DBH ap games: levels, ids and routes', () => {
-    assert.equal(similarityGames.length, 2)
+    assert.equal(similarityGames.length, 6)
     assert.equal(similarityGames[0].levels.length, SIMILARITY_RACE_CIRCUITS)
     assert.equal(similarityGames[1].levels.length, similarityMemoryLevels.length)
     assert.equal(new Set(similarityGameProgressIds).size, similarityGameProgressIds.length)
