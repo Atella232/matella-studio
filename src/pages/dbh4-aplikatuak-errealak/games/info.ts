@@ -5,7 +5,7 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
    with levels and the unit progress id each level earns with its first star.
    ========================================================================== */
 
-export type RealsGameId = 'race' | 'place' | 'memory'
+export type RealsGameId = 'race' | 'place' | 'memory' | 'intervals' | 'detective'
 
 export const REALS_GAME_RECORDS_KEY = 'matella-errealak-dbh4ap-game-records'
 
@@ -44,19 +44,43 @@ export const realsGames: GameInfo<RealsGameId>[] = [
             { progressId: 41302, stage: 'approx', title: { eu: 'Idazkera zientifikoa', es: 'Notación científica', en: 'Scientific notation', ar: 'الترميز العلمي' }, description: { eu: '0,00052 ↔ 5,2 · 10⁻⁴', es: '0,00052 ↔ 5,2 · 10⁻⁴', en: '0.00052 ↔ 5.2 · 10⁻⁴', ar: '0.00052 ↔ 5.2 · 10⁻⁴' } },
             { progressId: 41303, stage: 'radicals', title: { eu: 'Erradikalak', es: 'Radicales', en: 'Radicals', ar: 'الجذريات' }, description: { eu: '√72 ↔ 6√2', es: '√72 ↔ 6√2', en: '√72 ↔ 6√2', ar: '√72 ↔ 6√2' } }
         ]
+    },
+    {
+        id: 'intervals',
+        title: { eu: 'Eraiki tartea', es: 'Construye el intervalo', en: 'Build the interval', ar: 'ابنِ الفترة' },
+        tagline: { eu: 'Eraiki multzoa zuzenean: muturrak, ±∞ eta parentesiak edo kortxeteak.', es: 'Construye el conjunto en la recta: extremos, ±∞ y paréntesis o corchetes.', en: 'Build the set on the number line: ends, ±∞ and round or square brackets.', ar: 'ابنِ المجموعة على المستقيم: الطرفان و±∞ والأقواس.' },
+        skills: { eu: 'Tarteak eta desberdintzak', es: 'Intervalos y desigualdades', en: 'Intervals and inequalities', ar: 'الفترات والمتباينات' },
+        levels: [
+            { progressId: 41501, stage: 'reals', title: { eu: 'Tarte bornatuak', es: 'Intervalos acotados', en: 'Bounded intervals', ar: 'فترات محدودة' }, description: { eu: '−2 < x ≤ 5', es: '−2 < x ≤ 5', en: '−2 < x ≤ 5', ar: '−2 < x ≤ 5' } },
+            { progressId: 41502, stage: 'reals', title: { eu: 'Zuzerdiak', es: 'Semirrectas', en: 'Half-lines', ar: 'أنصاف مستقيمات' }, description: { eu: 'x ≥ 3, x < −1', es: 'x ≥ 3, x < −1', en: 'x ≥ 3, x < −1', ar: 'x ≥ 3, x < −1' } },
+            { progressId: 41503, stage: 'reals', title: { eu: 'Hitzez', es: 'Con palabras', en: 'In words', ar: 'بالكلمات' }, description: { eu: '«−3 baino handiagoak eta 4 baino txikiagoak»', es: '«mayores que −3 y menores que 4»', en: '“greater than −3 and less than 4”', ar: '«الأكبر من −3 والأصغر من 4»' } }
+        ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Errealen detektibea', es: 'Detective de reales', en: 'Real numbers detective', ar: 'مخبر الأعداد الحقيقية' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: اكتشفه وقل ما نوع الخطأ.' },
+        skills: { eu: 'Zenbaki errealetako akats tipikoak', es: 'Errores típicos con números reales', en: 'Common mistakes with real numbers', ar: 'الأخطاء الشائعة في الأعداد الحقيقية' },
+        levels: [
+            { progressId: 41601, stage: 'approx', title: { eu: 'Hamartarrak eta hurbilketak', es: 'Decimales y aproximaciones', en: 'Decimals and approximations', ar: 'الأعداد العشرية والتقريبات' }, description: { eu: 'Zatiki sortzailea, biribiltzea eta erroreak.', es: 'Generatriz, redondeo y errores.', en: 'Generating fractions, rounding and errors.', ar: 'الكسر المولّد والتقريب والأخطاء.' } },
+            { progressId: 41602, stage: 'radicals', title: { eu: 'Erroak batu eta biderkatu', es: 'Sumar y multiplicar raíces', en: 'Adding and multiplying roots', ar: 'جمع الجذور وضربها' }, description: { eu: '√a + √b, a√n + b√n, √a · √b', es: '√a + √b, a√n + b√n, √a · √b', en: '√a + √b, a√n + b√n, √a · √b', ar: '√a + √b، a√n + b√n، √a · √b' } },
+            { progressId: 41603, stage: 'radicals', title: { eu: 'Faktoreak atera eta sartu', es: 'Extraer e introducir factores', en: 'Taking factors out and in', ar: 'إخراج العوامل وإدخالها' }, description: { eu: '√72, (2√3)², √((−3)²)', es: '√72, (2√3)², √((−3)²)', en: '√72, (2√3)², √((−3)²)', ar: '√72، (2√3)²، √((−3)²)' } }
+        ]
     }
 ]
 
 export const realsGameProgressIds: number[] = levelProgressIds(realsGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const realsGameSlugs: Record<RealsGameId, string> = { race: 'lasterketa', place: 'zuzena', memory: 'memoria' }
+export const realsGameSlugs: Record<RealsGameId, string> = { race: 'lasterketa', place: 'zuzena', memory: 'memoria', intervals: 'tartea', detective: 'detektibea' }
 
 export function realsGameModeForPath(pathname: string): RealsGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
     if (!game) return 'hub'
     if (['carrera', 'lasterketa'].includes(game)) return 'race'
     if (['zuzena', 'recta', 'situar', 'kokatu'].includes(game)) return 'place'
+    if (['tartea', 'intervalo'].includes(game)) return 'intervals'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     if (['memoria', 'memory'].includes(game)) return 'memory'
     return 'hub'
 }

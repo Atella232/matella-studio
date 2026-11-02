@@ -8,11 +8,16 @@ import { REALS_GAME_RECORDS_KEY, realsGameModeForPath, realsGames, realsGameSlug
 import { PlaceGame } from './PlaceGame'
 import { RealsRaceGame } from './RaceGame'
 import '../../dbh1-aljebra-v2/games/AlgebraGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { IntervalGame } from '../../dbh4-games/IntervalGame'
+import { createRealsDetectiveCases, REALS_DETECTIVE_CASES, realsDetectiveNames, realsDetectiveTips } from '../../dbh4-games/realsDetective'
 
 const memoryGame = realsGames.find((game) => game.id === 'memory')!
 
 const components: Record<RealsGameId, (props: GameProps) => JSX.Element> = {
     race: RealsRaceGame,
+    intervals: (props) => <IntervalGame {...props} game={realsGames.find((game) => game.id === 'intervals')!} art={<RealsGameArt game="intervals" />} track="applied" />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: realsGames.find((game) => game.id === 'detective')!, art: <RealsGameArt game="detective" />, cases: REALS_DETECTIVE_CASES, createCases: createRealsDetectiveCases('applied'), names: realsDetectiveNames, tips: realsDetectiveTips }} />,
     place: PlaceGame,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <RealsGameArt game="memory" />, pairs: REALS_MEMORY_PAIRS, createBoard: createRealsMemoryBoard }} />
 }

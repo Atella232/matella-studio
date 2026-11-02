@@ -10,3 +10,7 @@ Five stages: rational, reals, approx (intervals + approximations), percent, inte
 Status: merged into main (fast-forward, up to 832b160) and deployed to matella.net on 2026-10-02.
 
 Gotcha learnt: Chrome ignores LRI/PDI isolates inside SVG text, so in Arabic figure labels keep formulas in their own <text>, never mixed with Arabic words. Basque suffixes after generated numbers (% 5ean, 1200en) depend on pronunciation: phrase generated prompts without suffixes.
+
+## Own games (2026-11-02)
+
+Build the interval and the reals detective, shared with the other track: see [dbh4-own-games](dbh4-own-games.md).

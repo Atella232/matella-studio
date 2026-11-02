@@ -1,0 +1,14 @@
+/* ---------- 4. DBH own games shared by the applied and academic units: the layout comes from Proportzionaltasuna 3. DBH (prop3-*) ---------- */
+
+.fraction-v2-games-card[data-game="intervals"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="detective"] { --game-tint: var(--paper-deep, #ece6da); }
+
+/* Build the interval */
+.dbh4-line { display: block; width: min(100%, 360px); height: auto; margin: 0 auto; }
+.dbh4-readout { margin: 0; text-align: center; font-size: 20px; min-height: 28px; }
+.dbh4-ends { direction: ltr; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.dbh4-end { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 6px; border: 2px solid var(--line, #d6cfc2); border-radius: 12px; }
+.dbh4-end-title { font-size: 13px; font-weight: 700; color: var(--muted); text-align: center; }
+.dbh4-end-buttons { display: flex; gap: 6px; }
+.dbh4-end-buttons button { min-width: 44px; min-height: 38px; border: 2px solid var(--ink); border-radius: 10px; background: var(--card); font: inherit; font-size: 18px; font-weight: 700; color: var(--ink); cursor: pointer; }
+.dbh4-end-buttons button[aria-pressed="true"] { background: var(--blue-tint, #dde7f7); }

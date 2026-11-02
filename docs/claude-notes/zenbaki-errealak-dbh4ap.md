@@ -12,3 +12,7 @@ Status 2026-10-02: merged into main (fast-forward, includes fix/funtzioak-qualit
 Shared engine changes in that branch: race/memory use `localLatex` (Arabic decimal point); `.fraction-v2 .math-text` no longer forced LTR (only `.math-token`/`.katex`), fixing Arabic sentence order in every unit.
 
 Next (after the academic unit, see [[errealak-ehunekoak-dbh4ak]]): other courses' first units — confirm order with the user. See [[funtzioak-dbh2]], [[remaining-dbh1-units]].
+
+## Own games (2026-11-02)
+
+Build the interval and the reals detective, shared with the other track: see [dbh4-own-games](dbh4-own-games.md).

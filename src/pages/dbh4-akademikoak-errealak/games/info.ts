@@ -6,7 +6,7 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
    its first star. "Kokatu zuzenean" is the applied unit's game.
    ========================================================================== */
 
-export type PercentGameId = 'race' | 'place' | 'memory'
+export type PercentGameId = 'race' | 'place' | 'memory' | 'intervals' | 'detective'
 
 export const PERCENT_GAME_RECORDS_KEY = 'matella-errealak-dbh4ak-game-records'
 
@@ -45,19 +45,43 @@ export const percentGames: GameInfo<PercentGameId>[] = [
             { progressId: 42302, stage: 'percent', title: { eu: 'Indizeak', es: 'Índices', en: 'Multipliers', ar: 'المؤشرات' }, description: { eu: '+21 % ↔ × 1,21', es: '+21 % ↔ × 1,21', en: '+21% ↔ × 1.21', ar: '+21 % ↔ × 1.21' } },
             { progressId: 42303, stage: 'approx', title: { eu: 'Tarteak', es: 'Intervalos', en: 'Intervals', ar: 'الفترات' }, description: { eu: '−2 ≤ x < 4 ↔ [−2, 4)', es: '−2 ≤ x < 4 ↔ [−2, 4)', en: '−2 ≤ x < 4 ↔ [−2, 4)', ar: '−2 ≤ x < 4 ↔ [−2, 4)' } }
         ]
+    },
+    {
+        id: 'intervals',
+        title: { eu: 'Eraiki tartea', es: 'Construye el intervalo', en: 'Build the interval', ar: 'ابنِ الفترة' },
+        tagline: { eu: 'Eraiki multzoa zuzenean: muturrak, ±∞ eta parentesiak edo kortxeteak.', es: 'Construye el conjunto en la recta: extremos, ±∞ y paréntesis o corchetes.', en: 'Build the set on the number line: ends, ±∞ and round or square brackets.', ar: 'ابنِ المجموعة على المستقيم: الطرفان و±∞ والأقواس.' },
+        skills: { eu: 'Tarteak eta desberdintzak', es: 'Intervalos y desigualdades', en: 'Intervals and inequalities', ar: 'الفترات والمتباينات' },
+        levels: [
+            { progressId: 42401, stage: 'reals', title: { eu: 'Tarte bornatuak', es: 'Intervalos acotados', en: 'Bounded intervals', ar: 'فترات محدودة' }, description: { eu: '−2 < x ≤ 5', es: '−2 < x ≤ 5', en: '−2 < x ≤ 5', ar: '−2 < x ≤ 5' } },
+            { progressId: 42402, stage: 'reals', title: { eu: 'Zuzerdiak', es: 'Semirrectas', en: 'Half-lines', ar: 'أنصاف مستقيمات' }, description: { eu: 'x ≥ 3, x < −1', es: 'x ≥ 3, x < −1', en: 'x ≥ 3, x < −1', ar: 'x ≥ 3, x < −1' } },
+            { progressId: 42403, stage: 'reals', title: { eu: 'Balio absolutua', es: 'Valor absoluto', en: 'Absolute value', ar: 'القيمة المطلقة' }, description: { eu: '|x − 2| ≤ 3', es: '|x − 2| ≤ 3', en: '|x − 2| ≤ 3', ar: '|x − 2| ≤ 3' } }
+        ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Errealen detektibea', es: 'Detective de reales', en: 'Real numbers detective', ar: 'مخبر الأعداد الحقيقية' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: اكتشفه وقل ما نوع الخطأ.' },
+        skills: { eu: 'Zenbaki errealetako akats tipikoak', es: 'Errores típicos con números reales', en: 'Common mistakes with real numbers', ar: 'الأخطاء الشائعة في الأعداد الحقيقية' },
+        levels: [
+            { progressId: 42501, stage: 'approx', title: { eu: 'Hamartarrak eta hurbilketak', es: 'Decimales y aproximaciones', en: 'Decimals and approximations', ar: 'الأعداد العشرية والتقريبات' }, description: { eu: 'Zatiki sortzailea, biribiltzea eta erroreak.', es: 'Generatriz, redondeo y errores.', en: 'Generating fractions, rounding and errors.', ar: 'الكسر المولّد والتقريب والأخطاء.' } },
+            { progressId: 42502, stage: 'percent', title: { eu: 'Ehunekoak', es: 'Porcentajes', en: 'Percentages', ar: 'النسب المئوية' }, description: { eu: 'Kateatuak, hasierakoa eta aldakuntza.', es: 'Encadenados, inicial y variación.', en: 'Chained, starting amount and change.', ar: 'المتتالية والأصلية والتغيّر.' } },
+            { progressId: 42503, stage: 'interest', title: { eu: 'Interes konposatua', es: 'Interés compuesto', en: 'Compound interest', ar: 'الفائدة المركّبة' }, description: { eu: 'Tasa, hilabeteak eta interesak.', es: 'Tasa, meses e intereses.', en: 'Rate, months and interest.', ar: 'المعدل والأشهر والفوائد.' } }
+        ]
     }
 ]
 
 export const percentGameProgressIds: number[] = levelProgressIds(percentGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const percentGameSlugs: Record<PercentGameId, string> = { race: 'lasterketa', place: 'zuzena', memory: 'memoria' }
+export const percentGameSlugs: Record<PercentGameId, string> = { race: 'lasterketa', place: 'zuzena', memory: 'memoria', intervals: 'tartea', detective: 'detektibea' }
 
 export function percentGameModeForPath(pathname: string): PercentGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
     if (!game) return 'hub'
     if (['carrera', 'lasterketa'].includes(game)) return 'race'
     if (['zuzena', 'recta', 'situar', 'kokatu'].includes(game)) return 'place'
+    if (['tartea', 'intervalo'].includes(game)) return 'intervals'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     if (['memoria', 'memory'].includes(game)) return 'memory'
     return 'hub'
 }

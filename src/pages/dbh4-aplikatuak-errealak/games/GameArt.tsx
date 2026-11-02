@@ -1,9 +1,13 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { RealsGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { IntervalArt } from '../../dbh4-games/IntervalGame'
 
 /** Small illustration of each real-numbers game, in the notebook style */
 /** `points` changes the two numbers on the line of the placing game (√2 and π by default) and `caption` the numbers under the race */
 export function RealsGameArt({ game, points = [{ value: Math.SQRT2, label: '√2' }, { value: Math.PI, label: 'π' }], caption = '√2 · π · 3/4' }: { game: RealsGameId; points?: Array<{ value: number; label: string }>; caption?: string }) {
+    if (game === 'intervals') return <IntervalArt />
+    if (game === 'detective') return <DetectiveArt lines={['√9 + √16', '= √25 ?', '= 3 + 4 = 7']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" direction="ltr" aria-hidden="true">

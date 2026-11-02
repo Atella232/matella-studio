@@ -13,7 +13,7 @@ import { realsLabChallengeIds } from '../src/pages/dbh4-aplikatuak-errealak/lab/
 import { generatrix, radicalLatex, scientificLatex, simplifySqrt, toScientific } from '../src/pages/dbh4-aplikatuak-errealak/reals.ts'
 
 test('errealak 4. DBH games: levels, ids and routes', () => {
-    assert.equal(realsGames.length, 3)
+    assert.equal(realsGames.length, 5)
     assert.equal(realsGames[0].levels.length, REALS_RACE_CIRCUITS)
     assert.equal(realsGames.find((game) => game.id === 'place')!.levels.length, placeLevels.length)
     assert.equal(realsGames.find((game) => game.id === 'memory')!.levels.length, realsMemoryLevels.length)

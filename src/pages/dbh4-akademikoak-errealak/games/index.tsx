@@ -8,12 +8,17 @@ import { createPercentMemoryBoard, PERCENT_MEMORY_PAIRS } from './boards'
 import { PERCENT_GAME_RECORDS_KEY, percentGameModeForPath, percentGames, percentGameSlugs, type PercentGameId } from './info'
 import { PercentRaceGame } from './RaceGame'
 import '../../dbh1-aljebra-v2/games/AlgebraGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { IntervalGame } from '../../dbh4-games/IntervalGame'
+import { createRealsDetectiveCases, REALS_DETECTIVE_CASES, realsDetectiveNames, realsDetectiveTips } from '../../dbh4-games/realsDetective'
 
 const memoryGame = percentGames.find((game) => game.id === 'memory')!
 const placeGame = percentGames.find((game) => game.id === 'place')!
 
 const components: Record<PercentGameId, (props: GameProps) => JSX.Element> = {
     race: PercentRaceGame,
+    intervals: (props) => <IntervalGame {...props} game={percentGames.find((game) => game.id === 'intervals')!} art={<RealsGameArt game="intervals" />} track="academic" />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: percentGames.find((game) => game.id === 'detective')!, art: <RealsGameArt game="detective" />, cases: REALS_DETECTIVE_CASES, createCases: createRealsDetectiveCases('academic'), names: realsDetectiveNames, tips: realsDetectiveTips }} />,
     place: (props) => <PlaceGameView {...props} game={placeGame} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <RealsGameArt game="memory" />, pairs: PERCENT_MEMORY_PAIRS, createBoard: createPercentMemoryBoard }} />
 }
