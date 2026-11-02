@@ -42,7 +42,7 @@ const errealakEhunekoakUnit: UnitDefinition = {
         render: (props) => <RealsPercentLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bost joko: lasterketa, kokatu zuzenean, eraiki tartea, errealen detektibea eta memoria.', es: 'Cinco juegos: carrera, sitúa en la recta, construye el intervalo, detective de reales y memoria.', en: 'Five games: race, place on the number line, build the interval, real numbers detective and memory.', ar: 'خمس ألعاب: السباق والوضع على المستقيم وابنِ الفترة ومخبر الأعداد الحقيقية والذاكرة.' },
+        description: { eu: 'Sei joko: lasterketa, kokatu zuzenean, eraiki tartea, ehuneko kateatuak, errealen detektibea eta memoria.', es: 'Seis juegos: carrera, sitúa en la recta, construye el intervalo, porcentajes encadenados, detective de reales y memoria.', en: 'Six games: race, place it on the line, build the interval, chained percentages, reals detective and memory.', ar: 'ست ألعاب: السباق وضعه على المستقيم وابنِ الفترة والنسب المتتالية ومخبر الأعداد الحقيقية والذاكرة.' },
         progressIds: percentGameProgressIds,
         recordsKey: PERCENT_GAME_RECORDS_KEY,
         render: (props) => <PercentGames {...props} />

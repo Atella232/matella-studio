@@ -11,19 +11,22 @@ import '../../dbh1-aljebra-v2/games/AlgebraGames.css'
 import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
 import { IntervalGame } from '../../dbh4-games/IntervalGame'
 import { createRealsDetectiveCases, REALS_DETECTIVE_CASES, realsDetectiveNames, realsDetectiveTips } from '../../dbh4-games/realsDetective'
+import { ChainArt, ChainGame } from '../../dbh4-games/PercentGames'
 
 const memoryGame = percentGames.find((game) => game.id === 'memory')!
 const placeGame = percentGames.find((game) => game.id === 'place')!
 
 const components: Record<PercentGameId, (props: GameProps) => JSX.Element> = {
     race: PercentRaceGame,
+    chain: (props) => <ChainGame {...props} game={percentGames.find((game) => game.id === 'chain')!} art={<ChainArt />} />,
     intervals: (props) => <IntervalGame {...props} game={percentGames.find((game) => game.id === 'intervals')!} art={<RealsGameArt game="intervals" />} track="academic" />,
     detective: (props) => <WorkedDetectiveGame {...props} config={{ game: percentGames.find((game) => game.id === 'detective')!, art: <RealsGameArt game="detective" />, cases: REALS_DETECTIVE_CASES, createCases: createRealsDetectiveCases('academic'), names: realsDetectiveNames, tips: realsDetectiveTips }} />,
     place: (props) => <PlaceGameView {...props} game={placeGame} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <RealsGameArt game="memory" />, pairs: PERCENT_MEMORY_PAIRS, createBoard: createPercentMemoryBoard }} />
 }
 
-const hubGames: HubGame<PercentGameId>[] = percentGames.map((info) => ({ info, art: <RealsGameArt game={info.id} />, component: components[info.id] }))
+// The art of the applied unit, but chained percentages are only here
+const hubGames: HubGame<PercentGameId>[] = percentGames.map((info) => ({ info, art: info.id === 'chain' ? <ChainArt /> : <RealsGameArt game={info.id} />, component: components[info.id] }))
 
 export function PercentGames({ language, pathname, openGame, completedIds, onComplete }: {
     language: UnitLanguage

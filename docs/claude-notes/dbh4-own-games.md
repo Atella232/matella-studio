@@ -107,3 +107,11 @@ Code in `dbh4-games/probability.ts`, `ProbabilityGames.tsx`, `probabilityDetecti
 - `tree` (86301–3): the paths of the tree. A bag (balls drawn on top with the colour's initial in each language), two draws with or without replacement, an event in words; tap the leaves (keyboard too). After checking, the leaf products and their sum (leaf values only when there are more than three). The test recomputes the event probability by listing every ordered pair of balls. Second-level branch labels sit at the end of each branch so close branches do not overlap.
 - `table` (86401–3): the contingency table. Inner cells go to the numerator, a total to the denominator; P(A), P(A∩D), P(A∪D), P(D/A), P(A/D) in two contexts (girls and sport, pets and town). Level texts are plain (the hub does not render formulas there).
 - `detective` (86501–3): 9 errors (favourable over unfavourable, the eleven sums as equally likely, the union without the intersection, independent events added, no replacement treated as replacement, «at least one» added, the conditional over the whole total or over the wrong group, the total probability with one branch).
+
+## Chained percentages (ak `dbh4-akademikoak-errealak`, route `numeros-reales`)
+
+The academic reals unit had only one own mechanic (build the interval) besides its detective and the place game borrowed from the applied unit, so `chain` (42601–3, `dbh4-games/percentChain.ts`, `PercentGames.tsx`) was added: a price and two or three rises/discounts, choose the total change (the options are the product of the multipliers, the percentages added, the last change and the sign turned); level 3 goes back to the price before one change. Only exact total changes with one decimal are kept. After answering, the price bars go step by step with ×1,2, ×0,9… Its hub art is `ChainArt` (the rest of the unit uses the applied unit's `RealsGameArt`).
+
+## Inventory
+
+`inventario-unidad.mjs` (matella-nueva-unidad skill) counted the games imported from `dbh4-games` as borrowed; that folder now counts as own (`SHARED_OWN`). With it every 4. DBH unit shows at least 2 own mechanics, plus a detective that the script lists apart as a pattern.

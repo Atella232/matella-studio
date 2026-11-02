@@ -39,11 +39,14 @@ const GENERIC = new Set(['race', 'memory'])
 const PATTERN = new Set(['detective'])
 const read = (p) => (existsSync(p) ? readFileSync(p, 'utf8') : '')
 
+/** Carpetas de juegos compartidos que no son de otra unidad: dbh4-games guarda los juegos propios de 4.º, cada uno pensado para el tema de las unidades que lo usan */
+const SHARED_OWN = new Set(['dbh4-games'])
+
 /** Identificadores importados desde la carpeta de otra unidad (../../dbhX-…/) */
 function borrowed(source, unit) {
   const names = new Set()
   for (const m of source.matchAll(/import\s+(?:type\s+)?\{([^}]+)\}\s+from\s+'\.\.\/\.\.\/(dbh[\w-]+)\//g)) {
-    if (m[2] === unit) continue
+    if (m[2] === unit || SHARED_OWN.has(m[2])) continue
     for (const n of m[1].split(',')) names.add(n.trim().split(/\s+as\s+/).pop())
   }
   for (const m of source.matchAll(/import\s+(\w+)\s+from\s+'\.\.\/\.\.\/(dbh[\w-]+)\//g)) if (m[2] !== unit) names.add(m[1])

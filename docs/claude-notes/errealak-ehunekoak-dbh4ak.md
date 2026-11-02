@@ -14,3 +14,7 @@ Gotcha learnt: Chrome ignores LRI/PDI isolates inside SVG text, so in Arabic fig
 ## Own games (2026-11-02)
 
 Build the interval and the reals detective, shared with the other track: see [dbh4-own-games](dbh4-own-games.md).
+
+## Own games (2026-11-02)
+
+Chained percentages (42601–3) added, so the unit has two own mechanics (intervals, chain) besides the reals detective. Details in `dbh4-own-games.md`.

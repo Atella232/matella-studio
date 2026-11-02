@@ -108,3 +108,6 @@
 .dbh4-table td button.chosen { background: var(--blue-tint, #dde7f7); border-color: var(--blue, #2f5fb3); }
 .dbh4-table td button.found { background: var(--success-tint, #d9efe2); border-color: var(--success, #267b53); }
 .dbh4-table td button.missed { background: var(--coral-tint, #f6d5cc); border-color: var(--error, #c4432a); }
+
+/* Chained percentages */
+.fraction-v2-games-card[data-game="chain"] { --game-tint: var(--blue-tint, #dde7f7); }

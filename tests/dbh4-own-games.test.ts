@@ -34,6 +34,7 @@ import { combinatoricsDetectiveLevels, combinatoricsDetectiveNames, combinatoric
 import { cellValue, createTableRounds, createTreeRounds, eventLeaves, eventProbability, eventText, leafProbability, TABLE_ROUNDS, tableAnswer, tableQuestionLatex, totalValue, TREE_ROUNDS } from '../src/pages/dbh4-games/probability.ts'
 import { createProbabilityDetectiveCases, probabilityDetectiveLevels, probabilityDetectiveNames, probabilityDetectiveTips } from '../src/pages/dbh4-games/probabilityDetective.ts'
 import { toNumber } from '../src/features/unit-v2/math/fraction.ts'
+import { CHAIN_ROUNDS, createChainRounds, finalPrice, multiplier, totalChange } from '../src/pages/dbh4-games/percentChain.ts'
 import { checkTexts, renders } from './helpers/ownGamesCheck.ts'
 import { evaluate } from './helpers/realsRaceCheck.ts'
 
@@ -879,5 +880,30 @@ test('4. DBH the contingency table: the cells and the total give the probability
 
 test('4. DBH probability detective: Laplace, compound events and conditional probability', () => {
     checkDetective(createProbabilityDetectiveCases, probabilityDetectiveLevels, probabilityDetectiveNames, probabilityDetectiveTips)
+})
+
+test('4. DBH chained percentages: the multipliers give the total change (not the sum), the way back divides, four different options', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createChainRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, CHAIN_ROUNDS)
+            for (const round of rounds) {
+                assert.equal(round.changes.length, [2, 3, 1][level])
+                assert.equal(new Set(round.options).size, 4)
+                assert.equal(round.inverse, level === 2)
+                const right = round.options[round.right]
+                if (round.inverse) {
+                    assert.equal(right, round.start)
+                    assert.ok(Math.abs(finalPrice(round) / multiplier(round.changes[0]) - round.start) < 1e-9)
+                } else {
+                    const factor = round.changes.reduce((product, change) => product * (100 + change) / 100, 1)
+                    assert.ok(Math.abs(right - (factor - 1) * 100) < 1e-9)
+                    assert.equal(right, totalChange(round.changes))
+                    assert.ok(right !== round.changes.reduce((sum, change) => sum + change, 0))
+                }
+                for (const option of round.options) assert.ok(Math.abs(option * 100 - Math.round(option * 100)) < 1e-9)
+            }
+        }
+    }
 })
 

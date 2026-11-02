@@ -54,7 +54,7 @@ function checkPercent(question: PercentRaceQuestion) {
 }
 
 test('errealak eta ehunekoak 4. DBH games: levels, ids and routes', () => {
-    assert.equal(percentGames.length, 5)
+    assert.equal(percentGames.length, 6)
     assert.equal(percentGames[0].levels.length, PERCENT_RACE_CIRCUITS)
     assert.equal(percentGames.find((game) => game.id === 'memory')!.levels.length, percentMemoryLevels.length)
     assert.equal(new Set(percentGameProgressIds).size, percentGameProgressIds.length)

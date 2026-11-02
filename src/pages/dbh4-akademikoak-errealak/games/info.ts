@@ -6,7 +6,7 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
    its first star. "Kokatu zuzenean" is the applied unit's game.
    ========================================================================== */
 
-export type PercentGameId = 'race' | 'place' | 'memory' | 'intervals' | 'detective'
+export type PercentGameId = 'race' | 'place' | 'memory' | 'intervals' | 'detective' | 'chain'
 
 export const PERCENT_GAME_RECORDS_KEY = 'matella-errealak-dbh4ak-game-records'
 
@@ -67,13 +67,24 @@ export const percentGames: GameInfo<PercentGameId>[] = [
             { progressId: 42502, stage: 'percent', title: { eu: 'Ehunekoak', es: 'Porcentajes', en: 'Percentages', ar: 'النسب المئوية' }, description: { eu: 'Kateatuak, hasierakoa eta aldakuntza.', es: 'Encadenados, inicial y variación.', en: 'Chained, starting amount and change.', ar: 'المتتالية والأصلية والتغيّر.' } },
             { progressId: 42503, stage: 'interest', title: { eu: 'Interes konposatua', es: 'Interés compuesto', en: 'Compound interest', ar: 'الفائدة المركّبة' }, description: { eu: 'Tasa, hilabeteak eta interesak.', es: 'Tasa, meses e intereses.', en: 'Rate, months and interest.', ar: 'المعدل والأشهر والفوائد.' } }
         ]
+    },
+    {
+        id: 'chain',
+        title: { eu: 'Ehuneko kateatuak', es: 'Porcentajes encadenados', en: 'Chained percentages', ar: 'النسب المتتالية' },
+        tagline: { eu: 'Igoerak eta jaitsierak segidan: zein da aldaketa osoa? Gero, prezioaren barrak.', es: 'Subidas y rebajas seguidas: ¿cuál es la variación total? Luego, las barras del precio.', en: 'Rises and discounts in a row: what is the total change? Then the price bars.', ar: 'زيادات وتخفيضات متتالية: ما التغير الكلي؟ ثم أعمدة السعر.' },
+        skills: { eu: 'Ehunekoak eta biderkatzaileak', es: 'Porcentajes y multiplicadores', en: 'Percentages and multipliers', ar: 'النسب والمضاعِفات' },
+        levels: [
+            { progressId: 42601, stage: 'percent', title: { eu: 'Bi aldaketa', es: 'Dos cambios', en: 'Two changes', ar: 'تغيّران' }, description: { eu: 'Igoera eta jaitsiera.', es: 'Subida y rebaja.', en: 'A rise and a discount.', ar: 'زيادة وتخفيض.' } },
+            { progressId: 42602, stage: 'percent', title: { eu: 'Hiru aldaketa', es: 'Tres cambios', en: 'Three changes', ar: 'ثلاثة تغيّرات' }, description: { eu: 'Biderkatzaileen katea.', es: 'La cadena de multiplicadores.', en: 'The chain of multipliers.', ar: 'سلسلة المضاعِفات.' } },
+            { progressId: 42603, stage: 'percent', title: { eu: 'Atzera', es: 'Hacia atrás', en: 'Going back', ar: 'الرجوع' }, description: { eu: 'Lehengo prezioa.', es: 'El precio de antes.', en: 'The price before.', ar: 'السعر السابق.' } }
+        ]
     }
 ]
 
 export const percentGameProgressIds: number[] = levelProgressIds(percentGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const percentGameSlugs: Record<PercentGameId, string> = { race: 'lasterketa', place: 'zuzena', memory: 'memoria', intervals: 'tartea', detective: 'detektibea' }
+export const percentGameSlugs: Record<PercentGameId, string> = { race: 'lasterketa', place: 'zuzena', memory: 'memoria', intervals: 'tartea', detective: 'detektibea', chain: 'katea' }
 
 export function percentGameModeForPath(pathname: string): PercentGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
@@ -82,6 +93,7 @@ export function percentGameModeForPath(pathname: string): PercentGameId | 'hub' 
     if (['zuzena', 'recta', 'situar', 'kokatu'].includes(game)) return 'place'
     if (['tartea', 'intervalo'].includes(game)) return 'intervals'
     if (['detektibea', 'detective'].includes(game)) return 'detective'
+    if (['katea', 'encadenados'].includes(game)) return 'chain'
     if (['memoria', 'memory'].includes(game)) return 'memory'
     return 'hub'
 }
