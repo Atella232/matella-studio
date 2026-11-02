@@ -270,7 +270,7 @@ export const functionsTopics: UnitTopic[] = [
             { text: say('5ean beherakorra gorakor bihurtzen da: minimoa.', 'En 5 pasa de decreciente a creciente: mínimo.', 'عند 5 ينتقل من التناقص إلى التزايد: قيمة صغرى.', 'At 5 it changes from decreasing to increasing: minimum.'), math: '$(5,\\,2)$' },
             { text: say('Bi maximoetatik altuena absolutua da.', 'El más alto de los dos máximos es el absoluto.', 'الأعلى من القيمتين العظميين هو المطلقة.', 'The higher of the two maximum points is the absolute maximum.'), math: '$(3,\\,8)$' }
         ],
-        example: say('Maximoak: 8 eta 7 · minimoa: 2', 'Máximos: 8 y 7 · mínimo: 2', 'القيم العظمى: 8 و7 · الصغرى: 2', 'Maximum values: 8 and 7 · minimum value: 2'),
+        example: say('Maximoak: $(3,\\,8)$ eta $(7,\\,7)$ · minimoa: $(5,\\,2)$', 'Máximos: $(3,\\,8)$ y $(7,\\,7)$ · mínimo: $(5,\\,2)$', 'القيم العظمى: $(3,\\,8)$ و$(7,\\,7)$ · الصغرى: $(5,\\,2)$', 'Maximum points: $(3,\\,8)$ and $(7,\\,7)$ · minimum point: $(5,\\,2)$'),
         takeaway: say('Muturrak joera aldatzen den lekuan daude. Idatzi puntu osoa.', 'Los extremos están donde cambia la tendencia. Escribe el punto completo.', 'القيم القصوى حيث يتغير الاتجاه. اكتب النقطة كاملة.', 'Turning points are where the trend changes. Write the full point.'),
         figure: (language) => <ExtremesFigure language={language} />
     },

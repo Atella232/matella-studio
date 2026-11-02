@@ -227,7 +227,7 @@ export const divisibilityTopics: UnitTopic[] = [
                 math: '$3234\\mathbin{:}\\ 323-8=315;\\ 31-10=21\\ \\checkmark$'
             }
         ],
-        example: '$\\begin{gathered}3\\,238\\mathbin{:}\\ (8+2)-(3+3)=4\\\\\\text{11 } \\times\\end{gathered}$',
+        example: '$\\begin{gathered}3238\\mathbin{:}\\ (8+2)-(3+3)=4\\\\\\text{11 } \\times\\end{gathered}$',
         takeaway: {
             eu: '11: posizio bikoitiak − bakoitiak. 7: kendu azken zifraren bikoitza.',
             es: '11: lugares pares − impares. 7: resta el doble de la última cifra.',

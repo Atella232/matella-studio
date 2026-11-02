@@ -133,7 +133,7 @@ export const theoryTopics: TheoryTopic[] = [
             {
                 title: { eu: 'Biderkadura gurutzatuak', es: 'Productos cruzados', en: 'Cross products', ar: 'الضرب التبادلي' },
                 text: { eu: '$\\frac{a}{b}$ eta $\\frac{c}{d}$ baliokideak dira $a\\cdot d=b\\cdot c$ denean.', es: '$\\frac{a}{b}$ y $\\frac{c}{d}$ son equivalentes cuando $a\\cdot d=b\\cdot c$.', en: '$\\frac{a}{b}$ and $\\frac{c}{d}$ are equivalent when $a\\cdot d=b\\cdot c$.', ar: 'يتكافأ $\\frac{a}{b}$ و$\\frac{c}{d}$ عندما $a\\cdot d=b\\cdot c$.' },
-                math: '$\\frac{6}{8}=\\frac{9}{12}:\\ 6\\cdot 12=8\\cdot 9=72$'
+                math: '$6\\cdot 12=8\\cdot 9=72\\ \\Rightarrow\\ \\frac{6}{8}=\\frac{9}{12}$'
             },
             {
                 title: { eu: 'Kontuz: batzeak ez du balio', es: 'Cuidado: sumar no sirve', en: 'Careful: adding does not work', ar: 'انتبه: الجمع لا يصلح' },
@@ -406,10 +406,10 @@ export const theoryTopics: TheoryTopic[] = [
         ],
         example: '$\\left(-\\frac{3}{5}\\right)^{2}=\\frac{9}{25}\\qquad -\\left(\\frac{3}{5}\\right)^{2}=-\\frac{9}{25}$',
         takeaway: {
-            eu: 'Zatiki propio bat berretzean, txikiagoa egiten da: $\\left(\\frac{2}{3}\\right)^{2}=\\frac{4}{9}<\\frac{2}{3}$.',
-            es: 'Al elevar una fracción propia, se hace más pequeña: $\\left(\\frac{2}{3}\\right)^{2}=\\frac{4}{9}<\\frac{2}{3}$.',
-            en: 'When you raise a proper fraction to a power, it gets smaller: $\\left(\\frac{2}{3}\\right)^{2}=\\frac{4}{9}<\\frac{2}{3}$.',
-            ar: 'عند رفع كسر حقيقي إلى قوة يصغر: $\\left(\\frac{2}{3}\\right)^{2}=\\frac{4}{9}<\\frac{2}{3}$.'
+            eu: 'Zatiki propio positibo bat berretzean, txikiagoa egiten da: $\\left(\\frac{2}{3}\\right)^{2}=\\frac{4}{9}<\\frac{2}{3}$.',
+            es: 'Al elevar una fracción propia positiva, se hace más pequeña: $\\left(\\frac{2}{3}\\right)^{2}=\\frac{4}{9}<\\frac{2}{3}$.',
+            en: 'When you raise a positive proper fraction to a power, it gets smaller: $\\left(\\frac{2}{3}\\right)^{2}=\\frac{4}{9}<\\frac{2}{3}$.',
+            ar: 'عند رفع كسر حقيقي موجب إلى قوة يصغر: $\\left(\\frac{2}{3}\\right)^{2}=\\frac{4}{9}<\\frac{2}{3}$.'
         }
     },
     {
