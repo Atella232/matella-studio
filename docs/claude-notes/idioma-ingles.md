@@ -24,7 +24,7 @@ Publicada en matella.net el 2026-10-30: commit `df11157` en `main` (avance rápi
 
 ## Pendiente
 
-Resuelto el 2026-11-02 (rama `feat/eso-polish`):
+Resuelto el 2026-11-02 (rama `feat/eso-polish`, publicada el mismo día: main 2cc3d60, bundle `index-BZ690MU_.js`, comprobado en vivo a 375 px en eu, es, en y ar):
 1. ~~Lecturas directas de dinero en proporzionaltasuna 4.º~~ (2026-10-30).
 2. ~~Dinero sin agrupar en inglés~~: `money()` y el recibo usan `groupDigits` (12,000.00).
 3. ~~Miles mezclados en es/eu~~: el dueño eligió la norma RAE (espacio desde 5 cifras, 4 cifras juntas). `groupDigits`/`groupLatex` en `numberFormat.ts`; los textos se reescribieron por llamada desde el castellano; las respuestas valen con espacio, punto o sin separar (`checkAnswer`).

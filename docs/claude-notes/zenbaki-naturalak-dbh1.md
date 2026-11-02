@@ -13,4 +13,4 @@ Phases: 1) lessons + route [done 2026-09-27, commit 7a9dff3]; 2) diagnostic 8, p
 
 Own games (2026-11-02): see `dbh1-own-games.md` for the new games, their ids and checks.
 
-Miles (2026-11-02): la web pasó a la norma RAE por decisión del dueño: 15 000 (espacio no separable; `15\,000` en fórmulas) y 2918 sin separar. `formatNatural`/`formatNaturalLatex` usan `groupDigits`/`groupLatex`; `readNaturalAnswer` sigue aceptando 15.000, 15 000 y 15,000.
+Miles (2026-11-02): la web pasó a la norma RAE por decisión del dueño: 15 000 (espacio no separable; `15\,000` en fórmulas) y 2918 sin separar. `formatNatural`/`formatNaturalLatex` usan `groupDigits`/`groupLatex`; `readNaturalAnswer` sigue aceptando 15.000, 15 000 y 15,000. Publicado el 2026-11-02 (main 2cc3d60, bundle `index-BZ690MU_.js`).
