@@ -7,11 +7,17 @@ import { PowersGameArt } from './GameArt'
 import { POWERS_GAME_RECORDS_KEY, powersGameModeForPath, powersGames, powersGameSlugs, type PowersGameId } from './info'
 import { PowersRaceGame } from './RaceGame'
 import '../../dbh1-aljebra-v2/games/AlgebraGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { LogGame, RadicalGame } from '../../dbh4-games/PowerGames'
+import { createPowersDetectiveCases, POWERS_DETECTIVE_CASES, powersDetectiveNames, powersDetectiveTips } from '../../dbh4-games/powersDetective'
 
 const memoryGame = powersGames.find((game) => game.id === 'memory')!
 
 const components: Record<PowersGameId, (props: GameProps) => JSX.Element> = {
     race: PowersRaceGame,
+    radical: (props) => <RadicalGame {...props} game={powersGames.find((game) => game.id === 'radical')!} art={<PowersGameArt game="radical" />} />,
+    log: (props) => <LogGame {...props} game={powersGames.find((game) => game.id === 'log')!} art={<PowersGameArt game="log" />} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: powersGames.find((game) => game.id === 'detective')!, art: <PowersGameArt game="detective" />, cases: POWERS_DETECTIVE_CASES, createCases: createPowersDetectiveCases, names: powersDetectiveNames, tips: powersDetectiveTips }} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <PowersGameArt game="memory" />, pairs: POWERS_MEMORY_PAIRS, createBoard: createPowersMemoryBoard }} />
 }
 

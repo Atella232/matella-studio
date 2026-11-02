@@ -64,3 +64,12 @@
 .dbh4-spill circle { animation: dbh4-drip 1.2s ease-in infinite; }
 @keyframes dbh4-drip { from { transform: translateY(-6px); opacity: 0.3; } to { transform: translateY(6px); opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .dbh4-spill circle { animation: none; } }
+
+/* The powers games: simplify the radical, find the exponent */
+.fraction-v2-games-card[data-game="radical"] { --game-tint: var(--mustard-tint, #fbebc0); }
+.fraction-v2-games-card[data-game="log"] { --game-tint: var(--success-tint, #d9efe2); }
+.dbh4-big-formula { display: block; margin-top: 8px; font-size: 22px; }
+.dbh4-ladder { list-style: none; margin: 0 auto; padding: 0; width: min(100%, 260px); display: flex; flex-direction: column; gap: 4px; border-inline: 4px solid var(--ink); }
+.dbh4-ladder li { padding: 4px 10px; text-align: center; font-size: 17px; background: var(--paper-deep, #ece6da); border-block: 2px solid var(--ink); }
+.dbh4-ladder li.right { background: var(--success-tint, #d9efe2); border-color: var(--success, #267b53); font-weight: 700; }
+.dbh4-ladder li.chosen { background: var(--coral-tint, #f6d5cc); border-color: var(--error, #c4432a); }

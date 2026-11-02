@@ -1,8 +1,13 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { PowersGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { PowerArt } from '../../dbh4-games/PowerGames'
 
 /** Small illustration of each game; the art is the same in every language */
 export function PowersGameArt({ game }: { game: PowersGameId }) {
+    if (game === 'radical') return <PowerArt game="radical" />
+    if (game === 'log') return <PowerArt game="log" />
+    if (game === 'detective') return <DetectiveArt lines={['2³ · 2² = 2⁶ ?', '√9 + √16 = 7', 'log₂ 8 = 3']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

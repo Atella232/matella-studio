@@ -22,6 +22,8 @@ import { CONTEXT_GROWTH, createMapRounds, createScaleRounds, createTowerRounds, 
 import { createGeometryDetectiveCases, geometryDetectiveLevels, geometryDetectiveNames, geometryDetectiveTips } from '../src/pages/dbh4-games/geometryDetective.ts'
 import { BOX_MAX, BOX_MIN, BOX_ROUNDS, CLOUD_ROUNDS, createBoxRounds, createCloudRounds, estimateRight, kindOf, percentilePlaces } from '../src/pages/dbh4-games/statistics.ts'
 import { createStatsDetectiveCases, statsDetectiveLevels, statsDetectiveNames, statsDetectiveTips } from '../src/pages/dbh4-games/statsDetective.ts'
+import { argumentLatex, createLogRounds, createRadicalRounds, EXPONENT_STEPS, exponentValue, expressionLatex, LOG_ROUNDS, logQuestionLatex, powerValue, primeFactors, RADICAL_ROUNDS, radicalLatex, simplify } from '../src/pages/dbh4-games/radicals.ts'
+import { createPowersDetectiveCases, powersDetectiveLevels, powersDetectiveNames, powersDetectiveTips } from '../src/pages/dbh4-games/powersDetective.ts'
 import { checkTexts, renders } from './helpers/ownGamesCheck.ts'
 import { evaluate } from './helpers/realsRaceCheck.ts'
 
@@ -593,5 +595,57 @@ test('4. DBH guess the correlation: r recomputed, its band, the kinds of each le
 
 test('4. DBH statistics detective: grouped data, quartiles, spread, samples and regression', () => {
     for (const track of ['applied', 'academic'] as const) checkDetective(createStatsDetectiveCases(track), statsDetectiveLevels[track], statsDetectiveNames, statsDetectiveTips)
+})
+
+test('4. DBH simplify the radical: the value is kept, nothing is left to take out, the steppers start off the answer', () => {
+    for (let level = 0; level < 3; level += 1) {
+        const indices = new Set<number>()
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createRadicalRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, RADICAL_ROUNDS)
+            for (const round of rounds) {
+                indices.add(round.index)
+                const value = round.terms.reduce((sum, term) => sum + term.sign * term.coefficient * term.radicand ** (1 / round.index), 0)
+                assert.ok(Math.abs(value - round.outside * round.inside ** (1 / round.index)) < 1e-9, expressionLatex(round))
+                // b has no n-th power left inside, and a > 1 or the sum really simplifies
+                for (const prime of new Set(primeFactors(round.inside))) assert.ok(primeFactors(round.inside).filter((factor) => factor === prime).length < round.index)
+                assert.ok(round.outside >= 1 && round.inside > 1)
+                assert.ok(!(round.outside === 1 && round.inside === round.terms[0].radicand))
+                for (const term of round.terms) assert.ok(primeFactors(term.radicand).every((prime) => prime <= 11))
+                if (level < 2) assert.deepEqual(simplify(round.terms[0].radicand, round.index), { outside: round.outside, inside: round.inside })
+                else assert.equal(round.terms.length, 2)
+                renders(expressionLatex(round))
+                renders(radicalLatex(round.index, round.outside, round.inside))
+                assert.ok(Math.abs(evaluate(radicalLatex(round.index, round.outside, round.inside))! - value) < 1e-9)
+            }
+        }
+        assert.deepEqual([...indices].sort(), [[2], [3, 4], [2]][level])
+    }
+})
+
+test('4. DBH find the exponent: b to the exponent gives the number, the stepper reaches every answer, the questions render', () => {
+    for (let level = 0; level < 3; level += 1) {
+        const unknowns = new Set<string>()
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createLogRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, LOG_ROUNDS)
+            for (const round of rounds) {
+                unknowns.add(round.unknown)
+                renders(logQuestionLatex(round))
+                const argument = evaluate(argumentLatex(round.base, round.exponent).replace(/\{,\}/g, '.'))!
+                assert.ok(Math.abs(argument - powerValue(round.base, round.exponent)) < 1e-9 * Math.max(1, argument), argumentLatex(round.base, round.exponent))
+                if (round.unknown === 'exponent') {
+                    assert.ok(EXPONENT_STEPS.some((step) => exponentValue(step) === exponentValue(round.exponent)))
+                    assert.notEqual(exponentValue(round.exponent), 0)
+                } else assert.ok(Number.isInteger(exponentValue(round.exponent)) && round.exponent[0] >= 2 && round.exponent[0] <= 8 && round.base <= 10)
+                if (level === 1) assert.ok(round.exponent[0] < 0 || round.exponent[1] > 1)
+            }
+        }
+        assert.deepEqual([...unknowns].sort(), [['exponent'], ['exponent'], ['argument', 'base']][level])
+    }
+})
+
+test('4. DBH powers detective: powers, roots and logarithms', () => {
+    checkDetective(createPowersDetectiveCases, powersDetectiveLevels, powersDetectiveNames, powersDetectiveTips)
 })
 

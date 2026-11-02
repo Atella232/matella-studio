@@ -48,7 +48,7 @@ function expected(question: PowersRaceQuestion): number {
 }
 
 test('potentziak 4. DBH ak games: levels, ids and routes', () => {
-    assert.equal(powersGames.length, 2)
+    assert.equal(powersGames.length, 5)
     assert.equal(powersGames[0].levels.length, POWERS_RACE_CIRCUITS)
     assert.equal(powersGames[1].levels.length, powersMemoryLevels.length)
     assert.equal(new Set(powersGameProgressIds).size, powersGameProgressIds.length)
