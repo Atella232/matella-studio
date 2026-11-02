@@ -10,6 +10,8 @@ import { createShareRounds, createStripsRounds, reduce, SHARE_ROUNDS, STRIPS_ROU
 import { createFractionsDetectiveCases, fractionsDetectiveLevels, fractionsDetectiveNames, fractionsDetectiveTips } from '../src/pages/dbh1-zatikiak-v2/games/detective.ts'
 import { columns, createCommaRounds, createPodiumRounds, fits, placed, placedLatex, PODIUM_ROUNDS, COMMA_ROUNDS, rightOrder, wrongOrder } from '../src/pages/dbh1-hamartarrak-v2/games/decimalRounds.ts'
 import { createDecimalsDetectiveCases, decimalsDetectiveLevels, decimalsDetectiveNames, decimalsDetectiveTips } from '../src/pages/dbh1-hamartarrak-v2/games/detective.ts'
+import { amountFor, createGridRounds, createRecipeRounds, GRID_COLUMNS, GRID_ROUNDS, RECIPE_ROUNDS } from '../src/pages/dbh1-proportzionaltasuna-v2/games/proportionRounds.ts'
+import { createProportionDetectiveCases, proportionDetectiveLevels, proportionDetectiveNames, proportionDetectiveTips } from '../src/pages/dbh1-proportzionaltasuna-v2/games/detective.ts'
 import { checkDetective, endValue, renders } from './helpers/ownGamesCheck.ts'
 
 /* The own games of the 1. DBH units */
@@ -173,4 +175,44 @@ test('1. DBH podium: different values, the trap bites in level 2, five numbers i
 
 test('1. DBH decimals detective: the errors of each level, the fix and the last line on their values', () => {
     checkDetective(createDecimalsDetectiveCases, decimalsDetectiveLevels, decimalsDetectiveNames, decimalsDetectiveTips)
+})
+
+test('1. DBH recipe: the answer is proportional, four different options, the levels as promised', () => {
+    for (let level = 0; level < 3; level += 1) {
+        const places = new Set<number>()
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const rounds = createRecipeRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, RECIPE_ROUNDS)
+            for (const round of rounds) {
+                const { people, target, given, answer, options } = round
+                assert.ok(target !== people && target > 0)
+                if (level === 0) assert.ok(target === 2 * people || target === people / 2)
+                if (level < 2) assert.ok(given === null && answer === amountFor(round, target))
+                else assert.ok(given === amountFor(round, target) && answer === target)
+                assert.ok(options.length === 4 && new Set(options).size === 4 && options.includes(answer) && options.every((option) => option > 0))
+                places.add(options.indexOf(answer))
+            }
+        }
+        assert.ok(places.size >= 3, `level ${level}: the answer always in the same place`)
+    }
+})
+
+test('1. DBH paint the percentage: a whole number of squares that fits the grid, rises and discounts in level 3', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const rounds = createGridRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, GRID_ROUNDS)
+            for (const { total, percent, kind, answer, shown } of rounds) {
+                const part = (total * percent) / 100
+                assert.ok(Number.isInteger(part) && part > 0 && answer > 0 && answer <= shown && shown % GRID_COLUMNS === total % GRID_COLUMNS)
+                assert.equal(answer, kind === 'part' ? part : kind === 'rise' ? total + part : total - part)
+                assert.equal(kind === 'part', level < 2)
+                assert.ok(answer !== 0)
+            }
+        }
+    }
+})
+
+test('1. DBH proportionality detective: the errors of each level, the fix and the last line on their values', () => {
+    checkDetective(createProportionDetectiveCases, proportionDetectiveLevels, proportionDetectiveNames, proportionDetectiveTips)
 })

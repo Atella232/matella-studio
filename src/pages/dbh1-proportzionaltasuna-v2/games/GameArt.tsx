@@ -1,8 +1,13 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { ProportionGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { GridArt, RecipeArt } from './OwnGames'
 
 /** Small illustration of each proportionality game; no decimal commas, the art is the same in every language */
 export function ProportionGameArt({ game }: { game: ProportionGameId }) {
+    if (game === 'recipe') return <RecipeArt />
+    if (game === 'grid') return <GridArt />
+    if (game === 'detective') return <DetectiveArt lines={['2 → 6 €, 4 → 12 €', '4 → 6: 6 + 2 = 8', '20 % · 50 = 10']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

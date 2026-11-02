@@ -52,7 +52,7 @@ const cardValue = (latex: string) => {
 }
 
 test('proportzionaltasuna 1. DBH games: levels, ids and routes', () => {
-    assert.equal(proportionGames.length, 2)
+    assert.equal(proportionGames.length, 5)
     assert.equal(proportionGames[0].levels.length, PROPORTION_RACE_CIRCUITS)
     assert.equal(proportionGames.find((game) => game.id === 'memory')!.levels.length, proportionMemoryLevels.length)
     assert.equal(new Set(proportionGameProgressIds).size, proportionGameProgressIds.length)

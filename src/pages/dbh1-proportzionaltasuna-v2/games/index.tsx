@@ -7,11 +7,17 @@ import { createProportionMemoryBoard, PROPORTION_MEMORY_PAIRS } from './boards'
 import { ProportionGameArt } from './GameArt'
 import { PROPORTION_GAME_RECORDS_KEY, proportionGameModeForPath, proportionGames, proportionGameSlugs, type ProportionGameId } from './info'
 import { ProportionRaceGame } from './RaceGame'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { createProportionDetectiveCases, PROPORTION_DETECTIVE_CASES, proportionDetectiveNames, proportionDetectiveTips } from './detective'
+import { GridGame, RecipeGame } from './OwnGames'
 
 const memoryGame = proportionGames.find((game) => game.id === 'memory')!
 
 const components: Record<ProportionGameId, (props: GameProps) => JSX.Element> = {
     race: ProportionRaceGame,
+    recipe: (props) => <RecipeGame {...props} game={proportionGames.find((game) => game.id === 'recipe')!} art={<ProportionGameArt game="recipe" />} />,
+    grid: (props) => <GridGame {...props} game={proportionGames.find((game) => game.id === 'grid')!} art={<ProportionGameArt game="grid" />} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: proportionGames.find((game) => game.id === 'detective')!, art: <ProportionGameArt game="detective" />, cases: PROPORTION_DETECTIVE_CASES, createCases: createProportionDetectiveCases, names: proportionDetectiveNames, tips: proportionDetectiveTips }} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <ProportionGameArt game="memory" />, pairs: PROPORTION_MEMORY_PAIRS, createBoard: createProportionMemoryBoard }} />
 }
 
