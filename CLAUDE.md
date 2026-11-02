@@ -26,7 +26,6 @@ El dueño habla castellano: contéstale en castellano y con palabras sencillas.
 - `MathText` convierte `:` en ÷; para dividir se escribe `\div`.
 - Miles (decisión del dueño, norma RAE): en eu, es y ar se separan con espacio desde 5 cifras (`15\,728` en fórmulas, espacio no separable en texto) y las de 4 cifras van juntas (2918). Usa `groupDigits` y `groupLatex` de `src/utils/numberFormat.ts`. El inglés escribe 15,000 y €400. Las respuestas valen con espacio, punto o sin separar.
 - El test de comprobación numérica solo evalúa `\frac` (no `\dfrac`); las lecciones pueden usar `\dfrac`.
-- Las cajas de «takeaway» ponen el KaTeX en mayúsculas: nada de letras minúsculas en sus fórmulas.
 - Euskera: los enunciados nunca llevan un sufijo pegado a un número.
 - Árabe: envuelve las fórmulas con LRI/PDI; nada de árabe dentro de `\text{}` de KaTeX.
 - El CSS nuevo va en archivos propios: muchas unidades importan `lab/Lab.css`.

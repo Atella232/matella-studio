@@ -1314,7 +1314,8 @@
     background: var(--ink);
 }
 
-.fraction-v2-takeaway span:not(.fraction-v2-takeaway-icon) {
+/* Only the «Key idea» label: the sentence and its formulas are spans too and keep their own case */
+.fraction-v2-takeaway > div > span {
     color: var(--mustard-ink);
     font-size: 13px;
     font-weight: 700;
