@@ -350,6 +350,8 @@ test('funtzioak 2. DBH laser: one line through every target, inside the plane, a
                     assert.ok(y >= LASER_BOX.yMin && y <= LASER_BOX.yMax)
                 }
                 if (level === 0) assert.equal(round.n, 0)
+                // The steppers start on y = 0, never a round's laser
+                assert.ok(!laserRight(round, 0, 0))
                 // Only the right line, among all the stepper can set, hits every target
                 for (let m = -4; m <= 4; m += round.step) {
                     for (let n = -6; n <= 6; n += 1) {

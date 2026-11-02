@@ -34,7 +34,8 @@ const slopeText = (value: number) => (Number.isInteger(value) ? signed(value) : 
 
 function LaserPlay({ round, language, onAnswer, answered }: RoundProps<LaserRound>) {
     const l = useGameText(language)
-    const [m, setM] = useState(1)
+    // y = 0 is never a round's laser: the steppers never start on an answer
+    const [m, setM] = useState(0)
     const [n, setN] = useState(0)
     const right = laserRight(round, m, n)
     const hit = answered ? targetsHit(round, m, n) : []

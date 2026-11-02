@@ -41,7 +41,8 @@ const eulerLatex = (counts: EulerCounts) => `${counts.faces}+${counts.vertices}=
 function EulerPlay({ round, language, onAnswer, answered }: RoundProps<EulerRound>) {
     const l = useGameText(language)
     const given = round.unknown ? EULER_ELEMENTS.filter((element) => element !== round.unknown) : []
-    const [answer, setAnswer] = useState<EulerCounts>({ faces: 4, vertices: 4, edges: 6 })
+    // No polyhedron has three faces, vertices or edges: the steppers never start on an answer
+    const [answer, setAnswer] = useState<EulerCounts>({ faces: 3, vertices: 3, edges: 3 })
     const right = eulerRight(round, answer)
     const set = (element: EulerElement, value: number) => !answered && setAnswer({ ...answer, [element]: value })
     const cam = round.vertices.length > 0 ? fitCamera(round.vertices, [30, 16, 210, 164], 90, -0.5, 0.42) : null

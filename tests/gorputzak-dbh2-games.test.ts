@@ -128,6 +128,7 @@ test('gorputzak 2. DBH count and Euler: the drawing has the counts of the formul
                     assert.ok(round.unknown)
                 }
                 assert.ok(eulerRight(round, round.counts))
+                assert.ok(!eulerRight(round, { faces: 3, vertices: 3, edges: 3 }))
                 assert.ok(!eulerRight(round, { ...round.counts, edges: round.counts.edges + 1 }) || (round.unknown !== null && round.unknown !== 'edges'))
             }
         }
