@@ -47,9 +47,9 @@ const letterValue = (name: string, trial: number) => 0.7 + (name.charCodeAt(0) %
  * Evaluates a numeric expression (·, :, \frac, powers, roots, π, decimal commas, brackets); null when
  * it is something else. With a trial, each letter becomes a number, so 3x+5x and 8x can be compared.
  */
-function evaluate(latex: string, trial?: number): number | null {
+function evaluate(latex: string, trial?: number | ((name: string) => number)): number | null {
     let js = latex.replace(/\\left|\\right/g, '').replace(/^\s*\\approx\s*/, '').replace(unit, '')
-    if (trial !== undefined) js = js.replace(letter, (name) => `(${letterValue(name, trial)})`)
+    if (trial !== undefined) js = js.replace(letter, (name) => `(${typeof trial === 'number' ? letterValue(name, trial) : trial(name)})`)
     js = js.replace(/(\d)\\,(?=\d)/g, '$1') // thousands: 39\,999
     js = js.replace(/(\d+)\s*\\frac\{(\d+)\}\{(\d+)\}/g, '($1+($2)/($3))') // a mixed number: 4 5/6 is 4 + 5/6
     // Innermost first, so a power inside a root or a fraction inside a fraction also works
@@ -79,6 +79,46 @@ function matches(answer: string, value: number, question: number): boolean {
     const decimals = answer.match(/\{,\}(\d+)/)?.[1].length ?? 0
     return Math.abs(value - question) <= 0.5 * 10 ** -decimals + 1e-9
 }
+
+/** The two sides of an equation such as 3x-5=10, or null when it is not one */
+function sides(latex: string): [string, string] | null {
+    const parts = latex.split('=')
+    return parts.length === 2 && !/[<>]|\\[lg]eq|\\to|\\sim/.test(latex) ? [parts[0], parts[1]] : null
+}
+
+/** The values of x in an answer such as x=5, x=\pm 5 or x=0,\ x=5; null when it is something else */
+function solutions(answer: string): number[] | null {
+    const found: number[] = []
+    for (const part of answer.split(/(?<!\{),(?!\})/)) {
+        const match = part.replace(/^\s*(?:\\ |\\quad|\\qquad)?\s*/, '').match(/^x(?:_\{\d\})?=(\\pm\s*)?(.+)$/)
+        const value = match ? evaluate(match[2]) : null
+        if (match === null || value === null) return null
+        found.push(value, ...(match[1] ? [-value] : []))
+    }
+    return found
+}
+
+/** Whether x = value makes both sides of the equation equal */
+function satisfies([left, right]: [string, string], value: number): boolean {
+    const at = (side: string) => evaluate(side, (name) => (name === 'x' ? value : Number.NaN))
+    const a = at(left)
+    const b = at(right)
+    return a !== null && b !== null && near(a, b)
+}
+
+/** Two equations are equivalent when left − right of one is a multiple of the other's (tried at two sets of numbers) */
+function equivalent(first: [string, string], second: [string, string]): boolean | null {
+    const difference = ([left, right]: [string, string], trial: number) => {
+        const a = evaluate(left, trial)
+        const b = evaluate(right, trial)
+        return a === null || b === null ? null : a - b
+    }
+    const [p, q, r, t] = [difference(first, 0), difference(first, 1), difference(second, 0), difference(second, 1)]
+    if (p === null || q === null || r === null || t === null) return null
+    return near(p * t, q * r) && !near(r, 0)
+}
+
+const sameSet = (a: number[], b: number[]) => a.length === b.length && [...a].sort((x, y) => x - y).every((v, i) => near(v, [...b].sort((x, y) => x - y)[i]))
 
 /** Words outside the formulas, to tell the languages apart */
 const words = (text: string) => text.replace(/\$[^$]+\$/g, ' ')
@@ -144,7 +184,38 @@ for (const unit of units) {
         for (const [id, { check }] of Object.entries(unit.checks)) {
             const asked = formulas(check.prompt.es)
             const answer = formulas(check.options[check.correctIndex].es)
-            if (asked.length !== 1 || answer.length !== 1 || !isCalculation(asked[0])) continue
+            if (asked.length !== 1 || answer.length !== 1) continue
+            // An equation: each solution must make both sides equal, or the answer must be an equivalent equation
+            const equation = asked[0].search(letter) >= 0 ? sides(asked[0]) : null
+            if (!equation && !isCalculation(asked[0])) continue
+            if (equation) {
+                const roots = solutions(answer[0])
+                const others = check.options.filter((_, index) => index !== check.correctIndex).map((option) => formulas(option.es)[0] ?? '')
+                if (roots) {
+                    assert.ok(roots.every((root) => satisfies(equation, root)), `${id}: ${answer[0]} does not solve ${asked[0]}`)
+                    for (const other of others) {
+                        const wrong = solutions(other)
+                        if (!wrong) continue
+                        assert.ok(!sameSet(wrong, roots), `${id}: a wrong answer is also right: ${other}`)
+                        // A wrong answer with every right root and more, all of them solutions: the right one misses some
+                        const more = wrong.every((root) => satisfies(equation, root)) && roots.every((root) => wrong.some((w) => near(w, root)))
+                        assert.ok(!more, `${id}: ${other} has more solutions than the right answer`)
+                    }
+                    continue
+                }
+                const rewritten = sides(answer[0])
+                const same = rewritten && equivalent(equation, rewritten)
+                if (same === null || same === undefined) {
+                    unchecked.push(`${id}: ${asked[0]}`)
+                    continue
+                }
+                assert.ok(same, `${id}: ${answer[0]} is not equivalent to ${asked[0]}`)
+                for (const other of others) {
+                    const wrong = sides(other)
+                    if (wrong) assert.ok(equivalent(equation, wrong) === false, `${id}: a wrong answer is also right: ${other}`)
+                }
+                continue
+            }
             // An expression with letters (reduce, expand, factorise) is compared at two sets of numbers
             const algebraic = asked[0].search(letter) >= 0 && !/[=<>]/.test(asked[0] + answer[0])
             const trials = algebraic ? [0, 1] : [undefined]

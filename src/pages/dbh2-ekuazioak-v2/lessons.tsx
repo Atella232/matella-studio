@@ -1,6 +1,7 @@
 import type { UnitStage, UnitTopic } from '../../features/unit-v2/types'
 import { BalanceFigure } from '../dbh1-aljebra-v2/figures'
 import { DenominatorsFigure, DiscriminantFigure, EquationPartsFigure, ProblemStepsFigure, StepsFigure, ZeroProductFigure } from './figures'
+import { equationLessonChecks, type EquationTopicId } from './lessonChecks'
 
 /* ==========================================================================
    Ekuazioak · 2. DBH — stages and lessons
@@ -21,7 +22,7 @@ export const equationsStages: UnitStage[] = [
     { id: 'quadratic', tone: 'green', title: { eu: 'Bigarren mailako ekuazioak', es: 'Ecuaciones de segundo grado', en: 'Second-degree equations', ar: 'معادلات الدرجة الثانية' } }
 ]
 
-export const equationsTopics: UnitTopic[] = [
+const baseTopics: UnitTopic[] = [
     {
         id: 'meaning',
         stage: 'basics',
@@ -465,3 +466,6 @@ export const equationsTopics: UnitTopic[] = [
         figure: (language) => <DiscriminantFigure language={language} />
     }
 ]
+
+/** Each lesson with its typical mistake and its «Check it» question (lessonChecks.ts) */
+export const equationsTopics: UnitTopic[] = baseTopics.map((topic) => ({ ...topic, ...equationLessonChecks[topic.id as EquationTopicId] }))
