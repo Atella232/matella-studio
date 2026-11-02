@@ -1,6 +1,6 @@
 ---
 name: matella-nueva-unidad
-description: Crea una unidad V2 nueva de Matella (lecciones, retos, laboratorio, juegos y ejercicios en euskera, castellano y árabe) o rehace el laboratorio y los juegos de una unidad existente, y exige que cada unidad tenga juegos y herramientas de laboratorio PROPIOS de su tema, no solo la carrera y las parejas de siempre. Úsala SIEMPRE que el dueño diga «sigue con el siguiente tema/unidad», «hacemos la unidad de…», «empezamos X de Y DBH», «revisa o mejora el laboratorio / los juegos de…» o «lab plus», aunque no diga V2.
+description: Crea una unidad V2 nueva de Matella (lecciones, retos, laboratorio, juegos y ejercicios en euskera, castellano, inglés y árabe) o rehace el laboratorio y los juegos de una unidad existente, y exige que cada unidad tenga juegos y herramientas de laboratorio PROPIOS de su tema, no solo la carrera y las parejas de siempre. Úsala SIEMPRE que el dueño diga «sigue con el siguiente tema/unidad», «hacemos la unidad de…», «empezamos X de Y DBH», «revisa o mejora el laboratorio / los juegos de…» o «lab plus», aunque no diga V2.
 ---
 
 # Nueva unidad V2 de Matella
@@ -81,7 +81,7 @@ menciónaselo una vez al dueño y no lo edites sin que lo pida.
   `\text{}` y `{,}` pasa a `.`; el texto de SVG ignora los aislantes bidi.
 - El CSS nuevo va en archivos propios (28 unidades importan `lab/Lab.css`). Textos de `observe` en
   herramientas: texto plano, no LaTeX. Colores de acierto/error con `--success`/`--error`.
-- Los textos de las unidades V2 están hoy en eu, es y ar (`UnitLanguage`); `CLAUDE.md` nombra también el
-  inglés para la web: pregunta antes de añadirlo a una unidad.
+- Los textos de las unidades V2 van en eu, es, en y ar (`UnitLanguage`); en el código, `say(eu, es, ar, en)`.
+  El inglés escribe 0.5, 15,000 y €400; `englishLatex` cambia las marcas de las fórmulas.
 - Si el panel del navegador está oculto, no hay capturas ni cuenta atrás de carrera: comprueba desbordes
   con `getBBox` y confía en los tests.

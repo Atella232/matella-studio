@@ -325,6 +325,8 @@ export function ChainedFigure({ language }: { language: UnitLanguage }) {
 /* ---------- 15. Simple interest ---------- */
 
 export function InterestFigure({ language }: { language: UnitLanguage }) {
+    // English writes the euro sign first: €400
+    const euros = (value: number) => (language === 'en' ? `€${value.toLocaleString('en-GB')}` : `${value} €`)
     const capitalWidth = 400
     const yearWidth = capitalWidth * 0.05
     return (
@@ -333,13 +335,13 @@ export function InterestFigure({ language }: { language: UnitLanguage }) {
                 <g key={year}>
                     <text x={56} y={58 + year * 44} textAnchor="end" fontSize={15} fontWeight={700} fill={MUTED}>{year}</text>
                     <rect x={66} y={36 + year * 44} width={capitalWidth} height={32} fill={STAGE} fillOpacity={0.25} stroke={INK} strokeWidth={1.4} />
-                    {year === 0 && <text x={66 + capitalWidth / 2} y={58} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>8000 €</text>}
+                    {year === 0 && <text x={66 + capitalWidth / 2} y={58} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{euros(8000)}</text>}
                     {Array.from({ length: year }, (_, block) => <rect key={block} x={66 + capitalWidth + block * yearWidth} y={36 + year * 44} width={yearWidth} height={32} fill={GREEN} fillOpacity={0.45} stroke={INK} strokeWidth={1.4} />)}
-                    {year > 0 && <text x={78 + capitalWidth + year * yearWidth} y={58 + year * 44} fontSize={15} fontWeight={700} fill={GREEN}>{`+${400 * year} €`}</text>}
+                    {year > 0 && <text x={78 + capitalWidth + year * yearWidth} y={58 + year * 44} fontSize={15} fontWeight={700} fill={GREEN}>{`+${euros(400 * year)}`}</text>}
                 </g>
             ))}
             <Frac x={470} y={226} n="8000 · 5 · 3" d="100" size={18} />
-            <text x={570} y={232} fontSize={20} fontWeight={700} fill={STAGE}>= 1200 €</text>
+            <text x={570} y={232} fontSize={20} fontWeight={700} fill={STAGE}>{`= ${euros(1200)}`}</text>
             <Label x={220} y={232} textAnchor="middle" fontSize={15} fontWeight={700} fill={MUTED}>{pick(language, say('Urtero interes bera', 'Cada año, el mismo interés', 'كل سنة الفائدة نفسها', 'Each year, the same interest'))}</Label>
         </Figure>
     )

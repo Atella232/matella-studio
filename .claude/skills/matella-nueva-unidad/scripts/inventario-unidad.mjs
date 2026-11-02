@@ -67,7 +67,8 @@ function inventory(unit) {
   const games = [...new Set(ids)].map((id) => {
     if (GENERIC.has(id)) return { id, kind: 'genérico' }
     const line = gamesIdx.split('\n').find((l) => new RegExp(`\\b${id}\\s*:`).test(l)) || ''
-    const prestado = [...gameBorrow].some((n) => line.includes(n))
+    // Un dibujo prestado (…Art) no hace prestado el juego: cuenta el componente del juego
+    const prestado = [...gameBorrow].filter((n) => !/Art$/.test(n)).some((n) => new RegExp(`\\b${n}\\b`).test(line))
     return { id, kind: prestado ? 'prestado' : PATTERN.has(id) ? 'patrón' : 'propio' }
   })
 
@@ -90,7 +91,8 @@ const ownGames = (inv) => count(inv.games, 'propio')
 const ownTools = (inv) => count(inv.tools, 'propio')
 
 if (all) {
-  const units = readdirSync(pages).filter((u) => u.startsWith('dbh') && statSync(join(pages, u)).isDirectory())
+  // Las carpetas compartidas (dbh4-games) y las de código sin juegos ni laboratorio (dbh2-zatikiak) no son unidades
+  const units = readdirSync(pages).filter((u) => u.startsWith('dbh') && !SHARED_OWN.has(u) && statSync(join(pages, u)).isDirectory() && (existsSync(join(pages, u, 'games', 'index.tsx')) || existsSync(join(pages, u, 'lab', 'labTools.ts'))))
   const rows = units.map(inventory)
   console.log('unidad'.padEnd(44), 'juegos propios', '| herramientas propias / total')
   for (const r of rows) console.log(r.unit.padEnd(44), String(ownGames(r)).padStart(8), '        |', `${ownTools(r)} / ${r.tools.length}`)

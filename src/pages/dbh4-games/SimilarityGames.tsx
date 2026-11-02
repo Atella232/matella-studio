@@ -452,7 +452,7 @@ export function SimilarityArt({ game }: { game: 'scale' | 'tower' | 'map' }) {
     if (game === 'tower') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
-                <circle cx="196" cy="20" r="11" fill={SUN} />
+                <circle cx="20" cy="20" r="11" fill={SUN} />
                 <line x1="8" y1="104" x2="212" y2="104" stroke="var(--ink)" strokeWidth="2.5" />
                 <line x1="30" y1="104" x2="30" y2="80" stroke="var(--ink)" strokeWidth="4" strokeLinecap="round" />
                 <line x1="30" y1="80" x2="62" y2="104" stroke={SUN} strokeWidth="2.5" strokeDasharray="5 4" />
