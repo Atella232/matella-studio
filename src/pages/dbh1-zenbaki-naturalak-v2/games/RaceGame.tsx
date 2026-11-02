@@ -11,8 +11,8 @@ const naturalsRace: RaceRules<NaturalsRaceError> = {
     checkPit: checkNaturalsPitAnswer,
     parTime: naturalsParTime,
     errorTip: (error) => naturalsRaceErrorTips[error ?? 'calculation'],
-    pitPlaceholder: () => '15.000',
-    pitUnreadable: { eu: 'Idatzi zenbaki natural bat, adibidez 15.000.', es: 'Escribe un número natural, por ejemplo 15.000.', en: 'Write a natural number, for example 15,000.', ar: 'اكتب عددًا طبيعيًا، مثل 15.000.' },
+    pitPlaceholder: () => '15\u00a0000',
+    pitUnreadable: { eu: 'Idatzi zenbaki natural bat, adibidez 15\u00a0000.', es: 'Escribe un número natural, por ejemplo 15\u00a0000.', en: 'Write a natural number, for example 15,000.', ar: 'اكتب عددًا طبيعيًا، مثل 15\u00a0000.' },
     pitWrongForm: { eu: 'Idatzi zenbaki natural gisa.', es: 'Escríbelo como número natural.', en: 'Write it as a natural number.', ar: 'اكتبه عددًا طبيعيًا.' }
 }
 

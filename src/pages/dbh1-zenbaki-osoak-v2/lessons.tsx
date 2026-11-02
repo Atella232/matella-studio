@@ -61,7 +61,7 @@ export const integerIntroTopics: UnitTopic[] = [
                 text: { eu: 'Erreferentzia da: beheko solairua, 0 °C edo itsas maila.', es: 'Es la referencia: la planta baja, 0 °C o el nivel del mar.', en: 'It is the reference: the ground floor, 0 °C or sea level.', ar: 'هو المرجع: الطابق الأرضي أو 0 °م أو مستوى سطح البحر.' }
             }
         ],
-        example: '$\\begin{gathered}\\text{−120 m}\\qquad \\text{+8.844 m}\\\\\\text{−4 °C}\\qquad \\text{+30 °C}\\end{gathered}$',
+        example: '$\\begin{gathered}\\text{−120 m}\\qquad \\text{+8844 m}\\\\\\text{−4 °C}\\qquad \\text{+30 °C}\\end{gathered}$',
         takeaway: {
             eu: 'Zerotik behera: −. Zerotik gora: +.',
             es: 'Por debajo de cero: −. Por encima de cero: +.',

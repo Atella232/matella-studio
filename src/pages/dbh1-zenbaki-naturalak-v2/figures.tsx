@@ -60,10 +60,10 @@ export function PlaceValueFigure({ language }: { language: UnitLanguage }) {
             <text x={left + highlight * column + (column - 6) / 2} y={212} textAnchor="middle" fontSize={20} fontWeight={700} fill={STAGE}>{formatNatural(value, language)}</text>
             <text x={360} y={242} textAnchor="middle" fontSize={15} fill={MUTED}>
                 {pick(language, {
-                    eu: `8.706.265 zenbakian, 7 zifrak ${formatNatural(value, language)} balio du`,
-                    es: `En 8.706.265, la cifra 7 vale ${formatNatural(value, language)}`,
+                    eu: `8\u00a0706\u00a0265 zenbakian, 7 zifrak ${formatNatural(value, language)} balio du`,
+                    es: `En 8\u00a0706\u00a0265, la cifra 7 vale ${formatNatural(value, language)}`,
                     en: `In 8,706,265, the digit 7 is worth ${formatNatural(value, language)}`,
-                    ar: `في العدد 8.706.265 قيمة الرقم 7 هي ${formatNatural(value, language)}`
+                    ar: `في العدد 8\u00a0706\u00a0265 قيمة الرقم 7 هي ${formatNatural(value, language)}`
                 })}
             </text>
         </svg>
@@ -94,8 +94,8 @@ export function PeriodsFigure({ language }: { language: UnitLanguage }) {
             })}
             <text x={360} y={180} textAnchor="middle" fontSize={15} fill={MUTED}>
                 {pick(language, {
-                    eu: '15 bilioi 350.000 milioi: hamabost bilioi hirurehun eta berrogeita hamar mila milioi',
-                    es: '15 billones 350.000 millones: quince billones trescientos cincuenta mil millones',
+                    eu: '15 bilioi 350\u00a0000 milioi: hamabost bilioi hirurehun eta berrogeita hamar mila milioi',
+                    es: '15 billones 350\u00a0000 millones: quince billones trescientos cincuenta mil millones',
                     en: '15 trillion 350,000 million: fifteen trillion three hundred and fifty billion',
                     ar: '15 تريليونًا و350 مليارًا'
                 })}
@@ -160,7 +160,7 @@ export function RomanFigure({ language }: { language: UnitLanguage }) {
                 )
             })}
             <text x={360} y={180} textAnchor="middle" fontSize={16} fill={MUTED}>
-                {pick(language, { eu: 'MMXXVI = 2.026     XC = 90     XIV = 14', es: 'MMXXVI = 2.026     XC = 90     XIV = 14', en: 'MMXXVI = 2,026     XC = 90     XIV = 14', ar: 'MMXXVI = 2.026     XC = 90     XIV = 14' })}
+                {pick(language, { eu: 'MMXXVI = 2026     XC = 90     XIV = 14', es: 'MMXXVI = 2026     XC = 90     XIV = 14', en: 'MMXXVI = 2,026     XC = 90     XIV = 14', ar: 'MMXXVI = 2026     XC = 90     XIV = 14' })}
             </text>
         </svg>
     )
@@ -176,7 +176,7 @@ export function RoundingFigure({ language }: { language: UnitLanguage }) {
     const x = (number: number) => left + ((number - from) / (to - from)) * (right - left)
     const lineY = 110
     return (
-        <svg viewBox="0 0 720 210" role="img" aria-label={pick(language, { eu: '14.823 milakoetara biribiltzea', es: 'Redondear 14.823 a los millares', en: 'Round 14,823 to the nearest thousand', ar: 'تقريب 14.823 إلى الآلاف' })} className="naturals-figure">
+        <svg viewBox="0 0 720 210" role="img" aria-label={pick(language, { eu: '14\u00a0823 milakoetara biribiltzea', es: 'Redondear 14\u00a0823 a los millares', en: 'Round 14,823 to the nearest thousand', ar: 'تقريب 14\u00a0823 إلى الآلاف' })} className="naturals-figure">
             <rect x={x(14500)} y={lineY - 34} width={right - x(14500)} height={68} rx={10} fill={STAGE_TINT} />
             <line x1={left - 20} x2={right + 20} y1={lineY} y2={lineY} stroke={INK} strokeWidth={2.4} />
             {Array.from({ length: 11 }, (_, index) => {
@@ -199,7 +199,7 @@ export function RoundingFigure({ language }: { language: UnitLanguage }) {
                 </marker>
             </defs>
             <text x={360} y={200} textAnchor="middle" fontSize={15} fill={MUTED}>
-                {pick(language, { eu: '14.500 baino gehiago da: 15.000ra biribiltzen da', es: 'Pasa de 14.500: se redondea a 15.000', en: 'It is over 14,500: it rounds up to 15,000', ar: 'يتجاوز 14.500: نقرّبه إلى 15.000' })}
+                {pick(language, { eu: '14\u00a0500 baino gehiago da: 15\u00a0000ra biribiltzen da', es: 'Pasa de 14\u00a0500: se redondea a 15\u00a0000', en: 'It is over 14,500: it rounds up to 15,000', ar: 'يتجاوز 14\u00a0500: نقرّبه إلى 15\u00a0000' })}
             </text>
         </svg>
     )
@@ -325,13 +325,13 @@ export function DpeFigure({ language }: { language: UnitLanguage }) {
     const cards: Array<{ letter: string; title: string; lines: string[]; color: string }> = {
         eu: [
             { letter: 'D', title: 'Datuak', lines: ['27 solairu', '12 bizileku solairuko', '7 leiho bizilekuko'], color: '#2f6fdb' },
-            { letter: 'P', title: 'Prozedura', lines: ['27 · 12 · 7 = 2.268'], color: '#e0a100' },
-            { letter: 'E', title: 'Erantzuna', lines: ['Eraikinak 2.268', 'leiho ditu guztira.'], color: '#267b53' }
+            { letter: 'P', title: 'Prozedura', lines: ['27 · 12 · 7 = 2268'], color: '#e0a100' },
+            { letter: 'E', title: 'Erantzuna', lines: ['Eraikinak 2268', 'leiho ditu guztira.'], color: '#267b53' }
         ],
         es: [
             { letter: 'D', title: 'Datos', lines: ['27 plantas', '12 viviendas por planta', '7 ventanas por vivienda'], color: '#2f6fdb' },
-            { letter: 'P', title: 'Procedimiento', lines: ['27 · 12 · 7 = 2.268'], color: '#e0a100' },
-            { letter: 'R', title: 'Respuesta', lines: ['El edificio tiene', '2.268 ventanas en total.'], color: '#267b53' }
+            { letter: 'P', title: 'Procedimiento', lines: ['27 · 12 · 7 = 2268'], color: '#e0a100' },
+            { letter: 'R', title: 'Respuesta', lines: ['El edificio tiene', '2268 ventanas en total.'], color: '#267b53' }
         ],
         en: [
             { letter: 'D', title: 'Data', lines: ['27 floors', '12 flats per floor', '7 windows per flat'], color: '#2f6fdb' },
@@ -340,8 +340,8 @@ export function DpeFigure({ language }: { language: UnitLanguage }) {
         ],
         ar: [
             { letter: '١', title: 'المعطيات', lines: ['27 طابقًا', '12 شقة في كل طابق', '7 نوافذ في كل شقة'], color: '#2f6fdb' },
-            { letter: '٢', title: 'الطريقة', lines: ['27 · 12 · 7 = 2.268'], color: '#e0a100' },
-            { letter: '٣', title: 'الجواب', lines: ['في المبنى 2.268', 'نافذة في المجموع.'], color: '#267b53' }
+            { letter: '٢', title: 'الطريقة', lines: ['27 · 12 · 7 = 2268'], color: '#e0a100' },
+            { letter: '٣', title: 'الجواب', lines: ['في المبنى 2268', 'نافذة في المجموع.'], color: '#267b53' }
         ]
     }[language]
     const width = 206

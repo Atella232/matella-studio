@@ -140,7 +140,7 @@ export const realsTopics: UnitTopic[] = [
         problem: say('Idatzi $0{,}0016$ eta $76{,}94$ zatiki laburtezin gisa.', 'Escribe $0{,}0016$ y $76{,}94$ como fracciones irreducibles.', 'اكتب $0{,}0016$ و$76{,}94$ كسرين غير قابلين للاختزال.', 'Write $0{,}0016$ and $76{,}94$ as fractions in their simplest form.'),
         stepsKind: 'steps',
         steps: [
-            { text: say('$0{,}0016$: lau hamartar → 10 000.', '$0{,}0016$: cuatro decimales → 10 000.', '$0{,}0016$: أربع منازل ← 10 000.', '$0{,}0016$: four decimal places → 10,000.'), math: '$\\frac{16}{10\\,000}=\\frac{1}{625}$' },
+            { text: say('$0{,}0016$: lau hamartar → 10\u00a0000.', '$0{,}0016$: cuatro decimales → 10\u00a0000.', '$0{,}0016$: أربع منازل ← 10\u00a0000.', '$0{,}0016$: four decimal places → 10,000.'), math: '$\\frac{16}{10\\,000}=\\frac{1}{625}$' },
             { text: say('$76{,}94$: bi hamartar → 100.', '$76{,}94$: dos decimales → 100.', '$76{,}94$: منزلتان ← 100.', '$76{,}94$: two decimal places → 100.'), math: '$\\frac{7694}{100}$' },
             { text: say('Sinplifikatu 2z.', 'Simplifica entre 2.', 'بسّط على 2.', 'Simplify by dividing by 2.'), math: '$=\\frac{3847}{50}$' }
         ],

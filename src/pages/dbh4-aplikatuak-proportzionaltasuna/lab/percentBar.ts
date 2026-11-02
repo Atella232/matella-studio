@@ -133,11 +133,11 @@ export const percentBarChallenges: LabChallenge<PercentBarState>[] = [
     {
         id: 43501,
         prompt: say(
-            'Estadioan 24 000 zale daude, edukieraren % 80. Zein da estadioaren edukiera? Prestatu barra eta idatzi emaitza.',
-            'En el estadio hay 24 000 aficionados, el 80 % de su capacidad. ¿Cuál es la capacidad? Prepara la barra y escribe el resultado.',
+            'Estadioan 24\u00a0000 zale daude, edukieraren % 80. Zein da estadioaren edukiera? Prestatu barra eta idatzi emaitza.',
+            'En el estadio hay 24\u00a0000 aficionados, el 80 % de su capacidad. ¿Cuál es la capacidad? Prepara la barra y escribe el resultado.',
             'في الملعب 24000 مشجع، أي 80٪ من سعته. ما سعة الملعب؟ جهّز الشريط واكتب النتيجة.', 'There are 24,000 fans in the stadium, which is 80% of its capacity. What is the capacity? Set up the bar and write the result.'
         ),
-        hint: say('Bilatu: osoa. % 80 = 24 000, beraz % 10 = 3000.', 'Busca: el total. El 80 % son 24 000, así que el 10 % son 3000.', 'ابحث عن: الكل. 80٪ هي 24000، إذن 10٪ هي 3000.', 'Find the total. 80% is 24,000, so 10% is 3,000.'),
+        hint: say('Bilatu: osoa. % 80 = 24\u00a0000, beraz % 10 = 3000.', 'Busca: el total. El 80 % son 24\u00a0000, así que el 10 % son 3000.', 'ابحث عن: الكل. 80٪ هي 24000، إذن 10٪ هي 3000.', 'Find the total. 80% is 24,000, so 10% is 3,000.'),
         isSolved: (state) => is(state, 'whole', 'of', { part: 24000, rate: 80 })
     },
     {

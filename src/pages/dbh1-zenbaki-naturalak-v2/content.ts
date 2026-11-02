@@ -17,26 +17,26 @@ const calculateBoth = (first: string, second: string): LocalizedText => say(`Kal
 export const naturalsDiagnostic: DiagnosticQuestion[] = [
     {
         id: 901,
-        prompt: say('Zenbat balio du 4 zifrak 342.918 zenbakian?', '¿Cuánto vale la cifra 4 en 342.918?', 'كم قيمة الرقم 4 في العدد 342.918؟', 'What is the value of the digit 4 in 342,918?'),
-        options: [same('$4.000$'), same('$40.000$'), same('$400$')],
+        prompt: say('Zenbat balio du 4 zifrak 342\u00a0918 zenbakian?', '¿Cuánto vale la cifra 4 en 342\u00a0918?', 'كم قيمة الرقم 4 في العدد 342\u00a0918؟', 'What is the value of the digit 4 in 342,918?'),
+        options: [same('$4000$'), same('$40\\,000$'), same('$400$')],
         correctIndex: 1,
-        explanation: say('4 hamar milakoen posizioan dago: $4\\cdot 10.000=40.000$.', 'El 4 está en las decenas de millar: $4\\cdot 10.000=40.000$.', 'الرقم 4 في مرتبة عشرات الآلاف: $4\\cdot 10.000=40.000$.', 'The 4 is in the ten thousands place: $4\\cdot 10.000=40.000$.'),
+        explanation: say('4 hamar milakoen posizioan dago: $4\\cdot 10\\,000=40\\,000$.', 'El 4 está en las decenas de millar: $4\\cdot 10\\,000=40\\,000$.', 'الرقم 4 في مرتبة عشرات الآلاف: $4\\cdot 10\\,000=40\\,000$.', 'The 4 is in the ten thousands place: $4\\cdot 10.000=40.000$.'),
         topic: 'place-value'
     },
     {
         id: 902,
         prompt: say('Nola idazten da «bi milioi hogeita hamar mila eta bost»?', '¿Cómo se escribe «dos millones treinta mil cinco»?', 'كيف يُكتب «مليونان وثلاثون ألفًا وخمسة»؟', 'How do you write ‘two million, thirty thousand and five’ in figures?'),
-        options: [same('$2.030.005$'), same('$2.300.005$'), same('$2.030.500$')],
+        options: [same('$2\\,030\\,005$'), same('$2\\,300\\,005$'), same('$2\\,030\\,500$')],
         correctIndex: 0,
-        explanation: say('Hiruko taldeak: $2$ milioi, $030$ mila, $005$ unitate → $2.030.005$.', 'Grupos de tres: $2$ millones, $030$ mil, $005$ unidades → $2.030.005$.', 'مجموعات من ثلاثة: $2$ مليون، $030$ ألف، $005$ آحاد ← $2.030.005$.', 'Groups of three: $2$ million, $030$ thousand, $005$ units → $2.030.005$.'),
+        explanation: say('Hiruko taldeak: $2$ milioi, $030$ mila, $005$ unitate → $2\\,030\\,005$.', 'Grupos de tres: $2$ millones, $030$ mil, $005$ unidades → $2\\,030\\,005$.', 'مجموعات من ثلاثة: $2$ مليون، $030$ ألف، $005$ آحاد ← $2\\,030\\,005$.', 'Groups of three: $2$ million, $030$ thousand, $005$ units → $2.030.005$.'),
         topic: 'big-numbers'
     },
     {
         id: 903,
-        prompt: say('Biribildu 26.421 milakoetara.', 'Redondea 26.421 a los millares.', 'قرّب 26.421 إلى الآلاف.', 'Round 26,421 to the nearest thousand.'),
-        options: [same('$26.000$'), same('$26.400$'), same('$27.000$')],
+        prompt: say('Biribildu 26\u00a0421 milakoetara.', 'Redondea 26\u00a0421 a los millares.', 'قرّب 26\u00a0421 إلى الآلاف.', 'Round 26,421 to the nearest thousand.'),
+        options: [same('$26\\,000$'), same('$26\\,400$'), same('$27\\,000$')],
         correctIndex: 0,
-        explanation: say('Milakoen eskuineko zifra 4 da (5 baino txikiagoa): milakoa ez da aldatzen → $26.000$.', 'La cifra a la derecha de los millares es 4 (menor que 5): el millar no cambia → $26.000$.', 'الرقم الذي على يمين الآلاف هو 4 (أصغر من 5): لا تتغير الآلاف ← $26.000$.', 'The digit to the right of the thousands is 4 (less than 5): the thousands digit does not change → $26.000$.'),
+        explanation: say('Milakoen eskuineko zifra 4 da (5 baino txikiagoa): milakoa ez da aldatzen → $26\\,000$.', 'La cifra a la derecha de los millares es 4 (menor que 5): el millar no cambia → $26\\,000$.', 'الرقم الذي على يمين الآلاف هو 4 (أصغر من 5): لا تتغير الآلاف ← $26\\,000$.', 'The digit to the right of the thousands is 4 (less than 5): the thousands digit does not change → $26.000$.'),
         topic: 'rounding'
     },
     {
@@ -88,23 +88,23 @@ export const naturalsPractice: PracticeItem[] = [
         prompt: say('Idatzi zifraz: hiru milioi laurehun eta bost mila ehun eta hogei.', 'Escribe con cifras: tres millones cuatrocientos cinco mil ciento veinte.', 'اكتب بالأرقام: ثلاثة ملايين وأربعمائة وخمسة آلاف ومئة وعشرون.', 'Write in figures: three million four hundred and five thousand one hundred and twenty.'),
         expected: fraction(3405120),
         hint: say('Idatzi hiruko taldeka: milioiak, milakoak, unitateak.', 'Escribe por grupos de tres: millones, millares, unidades.', 'اكتب بمجموعات من ثلاثة: الملايين، الآلاف، الآحاد.', 'Write in groups of three: millions, thousands, units.'),
-        explanation: say('$3$ milioi, $405$ mila eta $120$: $3.405.120$.', '$3$ millones, $405$ mil y $120$: $3.405.120$.', '$3$ ملايين و$405$ ألفًا و$120$: $3.405.120$.', '$3$ million, $405$ thousand and $120$: $3.405.120$.')
+        explanation: say('$3$ milioi, $405$ mila eta $120$: $3\\,405\\,120$.', '$3$ millones, $405$ mil y $120$: $3\\,405\\,120$.', '$3$ ملايين و$405$ ألفًا و$120$: $3\\,405\\,120$.', '$3$ million, $405$ thousand and $120$: $3.405.120$.')
     },
     {
         id: 2,
         stage: 'numbering',
-        prompt: say('Zenbat balio du 7 zifrak 87.003 zenbakian?', '¿Cuánto vale la cifra 7 en 87.003?', 'كم قيمة الرقم 7 في العدد 87.003؟', 'What is the value of the digit 7 in 87,003?'),
+        prompt: say('Zenbat balio du 7 zifrak 87\u00a0003 zenbakian?', '¿Cuánto vale la cifra 7 en 87\u00a0003?', 'كم قيمة الرقم 7 في العدد 87\u00a0003؟', 'What is the value of the digit 7 in 87,003?'),
         expected: fraction(7000),
         hint: say('Zein posiziotan dago 7: unitateak, hamarrekoak, ehunekoak, milakoak…?', '¿En qué posición está el 7: unidades, decenas, centenas, millares…?', 'في أي مرتبة يقع 7: آحاد، عشرات، مئات، آلاف…؟', 'Which place is the 7 in: units, tens, hundreds, thousands…?'),
-        explanation: say('7 milakoen posizioan dago: $7\\cdot 1.000=7.000$.', 'El 7 está en las unidades de millar: $7\\cdot 1.000=7.000$.', 'الرقم 7 في مرتبة الآلاف: $7\\cdot 1.000=7.000$.', 'The 7 is in the thousands place: $7\\cdot 1.000=7.000$.')
+        explanation: say('7 milakoen posizioan dago: $7\\cdot 1000=7000$.', 'El 7 está en las unidades de millar: $7\\cdot 1000=7000$.', 'الرقم 7 في مرتبة الآلاف: $7\\cdot 1000=7000$.', 'The 7 is in the thousands place: $7\\cdot 1.000=7.000$.')
     },
     {
         id: 3,
         stage: 'numbering',
-        prompt: say('Zuzen zenbakidun batean 5.000tik 6.000ra bitarteko tartea lau zati berdinetan banatuta dago. Zein zenbaki dago lehen markan?', 'En una recta numérica, el tramo de 5.000 a 6.000 está dividido en cuatro partes iguales. ¿Qué número hay en la primera marca?', 'على مستقيم الأعداد، قُسم المقطع من 5.000 إلى 6.000 إلى أربعة أجزاء متساوية. ما العدد عند العلامة الأولى؟', 'On a number line, the section from 5,000 to 6,000 is divided into four equal parts. What number is at the first mark?'),
+        prompt: say('Zuzen zenbakidun batean 5000tik 6000ra bitarteko tartea lau zati berdinetan banatuta dago. Zein zenbaki dago lehen markan?', 'En una recta numérica, el tramo de 5000 a 6000 está dividido en cuatro partes iguales. ¿Qué número hay en la primera marca?', 'على مستقيم الأعداد، قُسم المقطع من 5000 إلى 6000 إلى أربعة أجزاء متساوية. ما العدد عند العلامة الأولى؟', 'On a number line, the section from 5,000 to 6,000 is divided into four equal parts. What number is at the first mark?'),
         expected: fraction(5250),
         hint: say('Kalkulatu distantzia eta zatitu 4ren artean.', 'Calcula la distancia y divídela entre 4.', 'احسب المسافة واقسمها على 4.', 'Work out the distance and divide it by 4.'),
-        explanation: say('$(6.000-5.000)\\mathbin{:}4=250$. Lehen marka: $5.000+250=5.250$.', '$(6.000-5.000)\\mathbin{:}4=250$. Primera marca: $5.000+250=5.250$.', '$(6.000-5.000)\\mathbin{:}4=250$. العلامة الأولى: $5.000+250=5.250$.', '$(6.000-5.000)\\mathbin{:}4=250$. First mark: $5.000+250=5.250$.')
+        explanation: say('$(6000-5000)\\mathbin{:}4=250$. Lehen marka: $5000+250=5250$.', '$(6000-5000)\\mathbin{:}4=250$. Primera marca: $5000+250=5250$.', '$(6000-5000)\\mathbin{:}4=250$. العلامة الأولى: $5000+250=5250$.', '$(6.000-5.000)\\mathbin{:}4=250$. First mark: $5.000+250=5.250$.')
     },
     {
         id: 4,
@@ -117,34 +117,34 @@ export const naturalsPractice: PracticeItem[] = [
     {
         id: 5,
         stage: 'rounding',
-        prompt: say('Biribildu 24.963 milakoetara.', 'Redondea 24.963 a los millares.', 'قرّب 24.963 إلى الآلاف.', 'Round 24,963 to the nearest thousand.'),
+        prompt: say('Biribildu 24\u00a0963 milakoetara.', 'Redondea 24\u00a0963 a los millares.', 'قرّب 24\u00a0963 إلى الآلاف.', 'Round 24,963 to the nearest thousand.'),
         expected: fraction(25000),
         hint: say('Begiratu milakoaren (4) eskuineko zifrari.', 'Mira la cifra a la derecha del millar (el 4).', 'انظر إلى الرقم الذي على يمين الآلاف (4).', 'Look at the digit to the right of the thousands digit (the 4).'),
-        explanation: say('Eskuinean 9 dago (5 edo gehiago): $4+1=5$ → $25.000$.', 'A la derecha hay un 9 (5 o más): $4+1=5$ → $25.000$.', 'على اليمين 9 (5 أو أكثر): $4+1=5$ ← $25.000$.', 'To the right there is a 9 (5 or more): $4+1=5$ → $25.000$.')
+        explanation: say('Eskuinean 9 dago (5 edo gehiago): $4+1=5$ → $25\\,000$.', 'A la derecha hay un 9 (5 o más): $4+1=5$ → $25\\,000$.', 'على اليمين 9 (5 أو أكثر): $4+1=5$ ← $25\\,000$.', 'To the right there is a 9 (5 or more): $4+1=5$ → $25.000$.')
     },
     {
         id: 6,
         stage: 'rounding',
-        prompt: say('Biribildu 36.905.000 milioietara.', 'Redondea 36.905.000 a los millones.', 'قرّب 36.905.000 إلى الملايين.', 'Round 36,905,000 to the nearest million.'),
+        prompt: say('Biribildu 36\u00a0905\u00a0000 milioietara.', 'Redondea 36\u00a0905\u00a0000 a los millones.', 'قرّب 36\u00a0905\u00a0000 إلى الملايين.', 'Round 36,905,000 to the nearest million.'),
         expected: fraction(37000000),
         hint: say('Milioien zifra 6 da; begiratu haren eskuinekoari.', 'La cifra de los millones es 6; mira la de su derecha.', 'رقم الملايين هو 6؛ انظر إلى الرقم الذي على يمينه.', 'The millions digit is 6; look at the digit to its right.'),
-        explanation: say('Eskuinean 9 dago: $36+1=37$ milioi → $37.000.000$.', 'A la derecha hay un 9: $36+1=37$ millones → $37.000.000$.', 'على اليمين 9: $36+1=37$ مليونًا ← $37.000.000$.', 'To the right there is a 9: $36+1=37$ million → $37.000.000$.')
+        explanation: say('Eskuinean 9 dago: $36+1=37$ milioi → $37\\,000\\,000$.', 'A la derecha hay un 9: $36+1=37$ millones → $37\\,000\\,000$.', 'على اليمين 9: $36+1=37$ مليونًا ← $37\\,000\\,000$.', 'To the right there is a 9: $36+1=37$ million → $37.000.000$.')
     },
     {
         id: 7,
         stage: 'rounding',
-        prompt: say('Biribildu 359.481 hamar milakoetara.', 'Redondea 359.481 a las decenas de millar.', 'قرّب 359.481 إلى عشرات الآلاف.', 'Round 359,481 to the nearest ten thousand.'),
+        prompt: say('Biribildu 359\u00a0481 hamar milakoetara.', 'Redondea 359\u00a0481 a las decenas de millar.', 'قرّب 359\u00a0481 إلى عشرات الآلاف.', 'Round 359,481 to the nearest ten thousand.'),
         expected: fraction(360000),
         hint: say('Hamar milakoen zifra 5 da; eskuinean 9 dago.', 'La cifra de las decenas de millar es 5; a su derecha hay un 9.', 'رقم عشرات الآلاف هو 5؛ وعلى يمينه 9.', 'The ten thousands digit is 5; to its right there is a 9.'),
-        explanation: say('$35$ hamar milako → $36$: $360.000$.', '$35$ decenas de millar → $36$: $360.000$.', '$35$ عشرة آلاف ← $36$: $360.000$.', '$35$ ten thousands → $36$: $360.000$.')
+        explanation: say('$35$ hamar milako → $36$: $360\\,000$.', '$35$ decenas de millar → $36$: $360\\,000$.', '$35$ عشرة آلاف ← $36$: $360\\,000$.', '$35$ ten thousands → $36$: $360.000$.')
     },
     {
         id: 8,
         stage: 'operations',
-        prompt: calculate('$6.070+893+527$'),
+        prompt: calculate('$6070+893+527$'),
         expected: fraction(7490),
         hint: say('Batu zutabeka, unitateak unitateen azpian.', 'Suma en columna, unidades bajo unidades.', 'اجمع عموديًا، الآحاد تحت الآحاد.', 'Add in columns, units under units.'),
-        explanation: same('$6.070+893=6.963 \\qquad 6.963+527=7.490$')
+        explanation: same('$6070+893=6963 \\qquad 6963+527=7490$')
     },
     {
         id: 9,
@@ -165,10 +165,10 @@ export const naturalsPractice: PracticeItem[] = [
     {
         id: 11,
         stage: 'operations',
-        prompt: say('Zein da $1.345\\mathbin{:}29$ zatiketaren hondarra?', '¿Cuál es el resto de $1.345\\mathbin{:}29$?', 'ما باقي القسمة $1.345\\mathbin{:}29$؟', 'What is the remainder of $1.345\\mathbin{:}29$?'),
+        prompt: say('Zein da $1345\\mathbin{:}29$ zatiketaren hondarra?', '¿Cuál es el resto de $1345\\mathbin{:}29$?', 'ما باقي القسمة $1345\\mathbin{:}29$؟', 'What is the remainder of $1.345\\mathbin{:}29$?'),
         expected: fraction(11),
         hint: say('Zatidura 46 da. Kalkulatu $29\\cdot 46$.', 'El cociente es 46. Calcula $29\\cdot 46$.', 'خارج القسمة 46. احسب $29\\cdot 46$.', 'The quotient is 46. Work out $29\\cdot 46$.'),
-        explanation: say('$29\\cdot 46=1.334$ eta $1.345-1.334=11$. $11<29$ ✓', '$29\\cdot 46=1.334$ y $1.345-1.334=11$. $11<29$ ✓', '$29\\cdot 46=1.334$ و$1.345-1.334=11$. $11<29$ ✓', '$29\\cdot 46=1.334$ and $1.345-1.334=11$. $11<29$ ✓')
+        explanation: say('$29\\cdot 46=1334$ eta $1345-1334=11$. $11<29$ ✓', '$29\\cdot 46=1334$ y $1345-1334=11$. $11<29$ ✓', '$29\\cdot 46=1334$ و$1345-1334=11$. $11<29$ ✓', '$29\\cdot 46=1.334$ and $1.345-1.334=11$. $11<29$ ✓')
     },
     {
         id: 12,
@@ -176,7 +176,7 @@ export const naturalsPractice: PracticeItem[] = [
         prompt: say('Zatiketa batean zatitzailea 38 da, zatidura 26 eta hondarra 12. Zein da zatikizuna?', 'En una división el divisor es 38, el cociente 26 y el resto 12. ¿Cuál es el dividendo?', 'في قسمة، المقسوم عليه 38 وخارج القسمة 26 والباقي 12. ما المقسوم؟', 'In a division, the divisor is 38, the quotient is 26 and the remainder is 12. What is the dividend?'),
         expected: fraction(1000),
         hint: say('Zatikizuna = zatitzailea · zatidura + hondarra.', 'D = d · c + r.', 'المقسوم = المقسوم عليه × خارج القسمة + الباقي.', 'D = d · q + r.'),
-        explanation: same('$38\\cdot 26+12=988+12=1.000$')
+        explanation: same('$38\\cdot 26+12=988+12=1000$')
     },
     {
         id: 13,
@@ -224,7 +224,7 @@ export const naturalsPractice: PracticeItem[] = [
         prompt: calculate('$10^5$'),
         expected: fraction(100000),
         hint: say('1 eta berretzaileak adina zero.', 'Un 1 y tantos ceros como indica el exponente.', '1 وعدد من الأصفار يساوي الأس.', 'A 1 followed by as many zeros as the exponent shows.'),
-        explanation: same('$10^5=100.000$')
+        explanation: same('$10^5=100\\,000$')
     },
     {
         id: 19,
@@ -242,10 +242,10 @@ export const naturalsChallenges: ChallengeItem[] = [
         stage: 'operations',
         context: 'starter',
         points: 10,
-        prompt: say('Kiosko batek 1.300 egunkari ditu. Goizean 745 saldu ditu eta arratsaldean 350. Zenbat egunkari geratzen dira?', 'Un kiosco tiene 1.300 periódicos. Por la mañana vende 745 y por la tarde 350. ¿Cuántos periódicos quedan?', 'لدى كشك 1.300 جريدة. باع صباحًا 745 ومساءً 350. كم جريدة بقيت؟', 'A newsstand has 1,300 newspapers. In the morning it sells 745 and in the afternoon 350. How many newspapers are left?'),
+        prompt: say('Kiosko batek 1300 egunkari ditu. Goizean 745 saldu ditu eta arratsaldean 350. Zenbat egunkari geratzen dira?', 'Un kiosco tiene 1300 periódicos. Por la mañana vende 745 y por la tarde 350. ¿Cuántos periódicos quedan?', 'لدى كشك 1300 جريدة. باع صباحًا 745 ومساءً 350. كم جريدة بقيت؟', 'A newsstand has 1,300 newspapers. In the morning it sells 745 and in the afternoon 350. How many newspapers are left?'),
         expected: fraction(205),
-        hint: say('Eragiketa bakarra: $1.300-(745+350)$.', 'Una sola operación: $1.300-(745+350)$.', 'عملية واحدة: $1.300-(745+350)$.', 'Write it as a single calculation: $1.300-(745+350)$.'),
-        explanation: say('$1.300-(745+350)=1.300-1.095=205$ egunkari.', '$1.300-(745+350)=1.300-1.095=205$ periódicos.', '$1.300-(745+350)=1.300-1.095=205$ جريدة.', '$1.300-(745+350)=1.300-1.095=205$ newspapers.')
+        hint: say('Eragiketa bakarra: $1300-(745+350)$.', 'Una sola operación: $1300-(745+350)$.', 'عملية واحدة: $1300-(745+350)$.', 'Write it as a single calculation: $1.300-(745+350)$.'),
+        explanation: say('$1300-(745+350)=1300-1095=205$ egunkari.', '$1300-(745+350)=1300-1095=205$ periódicos.', '$1300-(745+350)=1300-1095=205$ جريدة.', '$1.300-(745+350)=1.300-1.095=205$ newspapers.')
     },
     {
         id: 102,
@@ -275,27 +275,27 @@ export const naturalsChallenges: ChallengeItem[] = [
         prompt: say('Nekazari batek 200 mertxika-arbola ditu. Arbola bakoitzarekin 5 kiloko 7 kutxa betetzen ditu, eta kiloa 2 € saltzen du. Zenbat euro jasoko ditu?', 'Un agricultor tiene 200 melocotoneros. Con cada árbol llena 7 cajas de 5 kilos, y vende el kilo a 2 €. ¿Cuántos euros obtendrá?', 'لدى مزارع 200 شجرة خوخ. يملأ من كل شجرة 7 صناديق من 5 كيلوغرامات، ويبيع الكيلوغرام بـ 2 €. كم يورو سيحصل؟', 'A farmer has 200 peach trees. From each tree he fills 7 boxes of 5 kilos and sells each kilo for €2. How many euros will he earn?'),
         expected: fraction(14000),
         hint: say('Kiloak lehenik: arbolak · kutxak · kiloak.', 'Primero los kilos: árboles · cajas · kilos.', 'الكيلوغرامات أولًا: الأشجار · الصناديق · الكيلوغرامات.', 'First the kilos: trees · boxes · kilos.'),
-        explanation: say('$200\\cdot 7\\cdot 5\\cdot 2=14.000$ €.', '$200\\cdot 7\\cdot 5\\cdot 2=14.000$ €.', '$200\\cdot 7\\cdot 5\\cdot 2=14.000$ €.', '$200\\cdot 7\\cdot 5\\cdot 2=14.000$ euros.')
+        explanation: say('$200\\cdot 7\\cdot 5\\cdot 2=14\\,000$ €.', '$200\\cdot 7\\cdot 5\\cdot 2=14\\,000$ €.', '$200\\cdot 7\\cdot 5\\cdot 2=14\\,000$ €.', '$200\\cdot 7\\cdot 5\\cdot 2=14.000$ euros.')
     },
     {
         id: 105,
         stage: 'operations',
         context: 'advanced',
         points: 20,
-        prompt: say('Baserritar batek 1.274 arrautza bildu ditu eta 30eko erretiluetan sartzen ditu. Zenbat arrautza geratzen dira erretilu bat osatu gabe?', 'Un granjero recoge 1.274 huevos y los envasa en bandejas de 30. ¿Cuántos huevos quedan sin completar una bandeja?', 'جمع مزارع 1.274 بيضة ويعبّئها في صوانٍ من 30. كم بيضة تبقى دون إكمال صينية؟', 'A farmer collects 1,274 eggs and packs them into trays of 30. How many eggs are left over without filling a tray?'),
+        prompt: say('Baserritar batek 1274 arrautza bildu ditu eta 30eko erretiluetan sartzen ditu. Zenbat arrautza geratzen dira erretilu bat osatu gabe?', 'Un granjero recoge 1274 huevos y los envasa en bandejas de 30. ¿Cuántos huevos quedan sin completar una bandeja?', 'جمع مزارع 1274 بيضة ويعبّئها في صوانٍ من 30. كم بيضة تبقى دون إكمال صينية؟', 'A farmer collects 1,274 eggs and packs them into trays of 30. How many eggs are left over without filling a tray?'),
         expected: fraction(14),
         hint: say('Erantzuna zatiketaren hondarra da.', 'La respuesta es el resto de la división.', 'الجواب هو باقي القسمة.', 'The answer is the remainder of the division.'),
-        explanation: say('$1.274=30\\cdot 42+14$: 42 erretilu beteta eta 14 arrautza soberan.', '$1.274=30\\cdot 42+14$: 42 bandejas llenas y sobran 14 huevos.', '$1.274=30\\cdot 42+14$: ‏42 صينية ممتلئة وتبقى 14 بيضة.', '$1.274=30\\cdot 42+14$: 42 full trays and 14 eggs left over.')
+        explanation: say('$1274=30\\cdot 42+14$: 42 erretilu beteta eta 14 arrautza soberan.', '$1274=30\\cdot 42+14$: 42 bandejas llenas y sobran 14 huevos.', '$1274=30\\cdot 42+14$: ‏42 صينية ممتلئة وتبقى 14 بيضة.', '$1.274=30\\cdot 42+14$: 42 full trays and 14 eggs left over.')
     },
     {
         id: 106,
         stage: 'operations',
         context: 'advanced',
         points: 20,
-        prompt: say('Auto-fabrika batek 15.660 auto egin ditu 90 egunetan. Batez beste, zenbat auto egiten ditu egunean?', 'Una fábrica de coches ha producido 15.660 coches en 90 días. ¿Cuántos coches fabrica de media cada día?', 'أنتج مصنع سيارات 15.660 سيارة في 90 يومًا. كم سيارة ينتج في اليوم في المتوسط؟', 'A car factory has produced 15,660 cars in 90 days. How many cars does it make on average each day?'),
+        prompt: say('Auto-fabrika batek 15\u00a0660 auto egin ditu 90 egunetan. Batez beste, zenbat auto egiten ditu egunean?', 'Una fábrica de coches ha producido 15\u00a0660 coches en 90 días. ¿Cuántos coches fabrica de media cada día?', 'أنتج مصنع سيارات 15\u00a0660 سيارة في 90 يومًا. كم سيارة ينتج في اليوم في المتوسط؟', 'A car factory has produced 15,660 cars in 90 days. How many cars does it make on average each day?'),
         expected: fraction(174),
         hint: say('Banatu autoak egunen artean.', 'Reparte los coches entre los días.', 'وزّع السيارات على الأيام.', 'Share the cars out among the days.'),
-        explanation: say('$15.660\\mathbin{:}90=174$ auto egunean. Proba: $90\\cdot 174=15.660$.', '$15.660\\mathbin{:}90=174$ coches al día. Prueba: $90\\cdot 174=15.660$.', '$15.660\\mathbin{:}90=174$ سيارة يوميًا. التحقق: $90\\cdot 174=15.660$.', '$15.660\\mathbin{:}90=174$ cars a day. Check: $90\\cdot 174=15.660$.')
+        explanation: say('$15\\,660\\mathbin{:}90=174$ auto egunean. Proba: $90\\cdot 174=15\\,660$.', '$15\\,660\\mathbin{:}90=174$ coches al día. Prueba: $90\\cdot 174=15\\,660$.', '$15\\,660\\mathbin{:}90=174$ سيارة يوميًا. التحقق: $90\\cdot 174=15\\,660$.', '$15.660\\mathbin{:}90=174$ cars a day. Check: $90\\cdot 174=15.660$.')
     },
     {
         id: 107,
@@ -305,7 +305,7 @@ export const naturalsChallenges: ChallengeItem[] = [
         prompt: say('Auto batek 9900-JMA matrikula du. Haren ondoren, zenbat auto matrikulatu ziren JMA letra berberekin?', 'Un coche tiene la matrícula 9900-JMA. Después de él, ¿cuántos coches se matricularon con las mismas letras JMA?', 'سيارة لوحتها 9900-JMA. بعدها، كم سيارة سُجّلت بالحروف نفسها JMA؟', 'A car has the number plate 9900-JMA. How many cars were registered with the same letters JMA after it?'),
         expected: fraction(99),
         hint: say('Zenbakiak 9901etik 9999ra doaz.', 'Los números van de 9901 a 9999.', 'الأرقام من 9901 إلى 9999.', 'The numbers go from 9901 to 9999.'),
-        explanation: say('9901etik 9999ra: $9.999-9.900=99$ auto.', 'De 9901 a 9999: $9.999-9.900=99$ coches.', 'من 9901 إلى 9999: $9.999-9.900=99$ سيارة.', 'From 9901 to 9999: $9.999-9.900=99$ cars.')
+        explanation: say('9901etik 9999ra: $9999-9900=99$ auto.', 'De 9901 a 9999: $9999-9900=99$ coches.', 'من 9901 إلى 9999: $9999-9900=99$ سيارة.', 'From 9901 to 9999: $9.999-9.900=99$ cars.')
     },
     {
         id: 108,
@@ -335,7 +335,7 @@ export const naturalsChallenges: ChallengeItem[] = [
         prompt: say('Martinak honela batu ditu 1etik 7ra: $(1+7)\\cdot 7\\mathbin{:}2=28$. Erabili ideia bera: zenbat da $1+2+3+\\dots+100$?', 'Martina ha sumado del 1 al 7 así: $(1+7)\\cdot 7\\mathbin{:}2=28$. Usa la misma idea: ¿cuánto es $1+2+3+\\dots+100$?', 'جمعت مارتينا الأعداد من 1 إلى 7 هكذا: $(1+7)\\cdot 7\\mathbin{:}2=28$. استعمل الفكرة نفسها: كم يساوي $1+2+3+\\dots+100$؟', 'Martina added the numbers from 1 to 7 like this: $(1+7)\\cdot 7\\mathbin{:}2=28$. Use the same idea: what is $1+2+3+\\dots+100$?'),
         expected: fraction(5050),
         hint: say('Lehena + azkena, bider zenbat zenbaki, zati 2.', 'Primero + último, por cuántos números hay, entre 2.', 'الأول + الأخير، في عدد الأعداد، على 2.', 'First + last, times how many numbers there are, divided by 2.'),
-        explanation: say('$(1+100)\\cdot 100\\mathbin{:}2=10.100\\mathbin{:}2=5.050$.', '$(1+100)\\cdot 100\\mathbin{:}2=10.100\\mathbin{:}2=5.050$.', '$(1+100)\\cdot 100\\mathbin{:}2=10.100\\mathbin{:}2=5.050$.', '$(1+100)\\cdot 100\\mathbin{:}2=10.100\\mathbin{:}2=5.050$.')
+        explanation: say('$(1+100)\\cdot 100\\mathbin{:}2=10\\,100\\mathbin{:}2=5050$.', '$(1+100)\\cdot 100\\mathbin{:}2=10\\,100\\mathbin{:}2=5050$.', '$(1+100)\\cdot 100\\mathbin{:}2=10\\,100\\mathbin{:}2=5050$.', '$(1+100)\\cdot 100\\mathbin{:}2=10.100\\mathbin{:}2=5.050$.')
     },
     {
         id: 111,
@@ -345,7 +345,7 @@ export const naturalsChallenges: ChallengeItem[] = [
         prompt: say('Erlezain batek 187 erlauntz ditu eta urtean 2 uzta biltzen ditu, erlauntz bakoitzeko 9 kilo uzta bakoitzean. Eztia kilo erdiko potoetan sartzen du, eta 6 potoko kutxak 18 € saltzen ditu. Zenbat euro jasotzen ditu urtean?', 'Un apicultor tiene 187 colmenas y hace 2 cosechas al año, de 9 kilos por colmena en cada cosecha. Envasa la miel en tarros de medio kilo y vende cajas de 6 tarros a 18 €. ¿Cuántos euros ingresa al año?', 'لدى نحّال 187 خلية ويجني محصولين في السنة، 9 كيلوغرامات من كل خلية في كل محصول. يعبّئ العسل في مرطبانات من نصف كيلوغرام، ويبيع صناديق من 6 مرطبانات بـ 18 €. كم يورو يجني في السنة؟', 'A beekeeper has 187 hives and makes 2 harvests a year, with 9 kilos per hive in each harvest. He packs the honey into jars of half a kilo and sells boxes of 6 jars for €18. How many euros does he earn a year?'),
         expected: fraction(20196),
         hint: say('Pausoz pauso: kiloak → potoak (bider 2) → kutxak (zati 6) → euroak.', 'Paso a paso: kilos → tarros (por 2) → cajas (entre 6) → euros.', 'خطوة بخطوة: الكيلوغرامات ← المرطبانات (× 2) ← الصناديق (÷ 6) ← اليوروهات.', 'Step by step: kilos → jars (times 2) → boxes (divided by 6) → euros.'),
-        explanation: say('$187\\cdot 2\\cdot 9=3.366$ kg → $6.732$ poto → $6.732\\mathbin{:}6=1.122$ kutxa → $1.122\\cdot 18=20.196$ €.', '$187\\cdot 2\\cdot 9=3.366$ kg → $6.732$ tarros → $6.732\\mathbin{:}6=1.122$ cajas → $1.122\\cdot 18=20.196$ €.', '$187\\cdot 2\\cdot 9=3.366$ كغ ← $6.732$ مرطبانًا ← $6.732\\mathbin{:}6=1.122$ صندوقًا ← $1.122\\cdot 18=20.196$ €.', '$187\\cdot 2\\cdot 9=3.366$ kg → $6.732$ jars → $6.732\\mathbin{:}6=1.122$ boxes → €$1.122\\cdot 18=20.196$.')
+        explanation: say('$187\\cdot 2\\cdot 9=3366$ kg → $6732$ poto → $6732\\mathbin{:}6=1122$ kutxa → $1122\\cdot 18=20\\,196$ €.', '$187\\cdot 2\\cdot 9=3366$ kg → $6732$ tarros → $6732\\mathbin{:}6=1122$ cajas → $1122\\cdot 18=20\\,196$ €.', '$187\\cdot 2\\cdot 9=3366$ كغ ← $6732$ مرطبانًا ← $6732\\mathbin{:}6=1122$ صندوقًا ← $1122\\cdot 18=20\\,196$ €.', '$187\\cdot 2\\cdot 9=3.366$ kg → $6.732$ jars → $6.732\\mathbin{:}6=1.122$ boxes → €$1.122\\cdot 18=20.196$.')
     },
     {
         id: 112,
@@ -364,24 +364,24 @@ export const naturalsExerciseBank: ExerciseSection[] = [
         id: 'numbering',
         title: say('Sistema hamartarra', 'El sistema decimal', 'النظام العشري', 'The decimal system'),
         items: [
-            { id: 1, difficulty: 'easy', question: say('Idatzi nola irakurtzen diren: 15.728 eta 87.003.', 'Escribe cómo se leen: 15.728 y 87.003.', 'اكتب كيف يُقرأ: 15.728 و87.003.', 'Write how these numbers are read: 15,728 and 87,003.'), solution: say('Hamabost mila zazpiehun eta hogeita zortzi. Laurogeita zazpi mila eta hiru.', 'Quince mil setecientos veintiocho. Ochenta y siete mil tres.', 'خمسة عشر ألفًا وسبعمائة وثمانية وعشرون. سبعة وثمانون ألفًا وثلاثة.', 'Fifteen thousand seven hundred and twenty-eight. Eighty-seven thousand and three.') },
-            { id: 2, difficulty: 'easy', question: say('Idatzi 234.912 zenbakiaren deskonposizio polinomikoa.', 'Escribe la descomposición polinómica de 234.912.', 'اكتب تفكيك العدد 234.912.', 'Write 234,912 in expanded form.'), solution: same('$234.912=200.000+30.000+4.000+900+10+2$') },
-            { id: 3, difficulty: 'medium', question: say('Ordenatu txikienetik handienera: 17.630, 7.478, 15.080, 51.498, 5.478, 7.500.', 'Ordena de menor a mayor: 17.630, 7.478, 15.080, 51.498, 5.478, 7.500.', 'رتّب من الأصغر إلى الأكبر: 17.630، 7.478، 15.080، 51.498، 5.478، 7.500.', 'Order from smallest to largest: 17,630, 7,478, 15,080, 51,498, 5,478, 7,500.'), solution: same('$5.478<7.478<7.500<15.080<17.630<51.498$') },
-            { id: 4, difficulty: 'medium', question: say('Idatzi erromatar zenbakiz: 87, 425 eta 2.600.', 'Escribe en números romanos: 87, 425 y 2.600.', 'اكتب بالأرقام الرومانية: 87 و425 و2.600.', 'Write in Roman numerals: 87, 425 and 2,600.'), solution: same('$87=\\mathrm{LXXXVII} \\quad 425=\\mathrm{CDXXV} \\quad 2.600=\\mathrm{MMDC}$') },
-            { id: 5, difficulty: 'medium', question: say('Idatzi zifraz: a) hamabost bilioi hirurehun eta berrogeita hamar mila milioi; b) bi mila eta zazpiehun milioi.', 'Escribe con cifras: a) quince billones trescientos cincuenta mil millones; b) dos mil setecientos millones.', 'اكتب بالأرقام: أ) خمسة عشر تريليونًا وثلاثمائة وخمسون مليارًا؛ ب) ألفان وسبعمائة مليون.', 'Write in figures: a) fifteen trillion three hundred and fifty billion; b) two thousand seven hundred million.'), solution: same('a) $15.350.000.000.000$; b) $2.700.000.000$') },
-            { id: 6, difficulty: 'hard', question: say('Bost zifrako zenbaki baten zifrek 5 batzen dute. Unitateak eta milakoak trukatzen badira, 999 handitzen da. Zein da zenbakia?', 'Un número de cinco cifras tiene cifras que suman 5. Si intercambias las unidades con las unidades de millar, aumenta en 999. ¿Qué número es?', 'عدد من خمسة أرقام مجموع أرقامه 5. إذا بادلنا الآحاد بالآلاف يزيد بمقدار 999. ما العدد؟', 'A five-digit number has digits that add up to 5. If you swap the units digit with the thousands digit, it goes up by 999. What is the number?'), solution: say('$40.001$: trukatuta $41.000$ da, eta $41.000-40.001=999$.', '$40.001$: al intercambiar queda $41.000$, y $41.000-40.001=999$.', '$40.001$: بعد المبادلة يصبح $41.000$، و$41.000-40.001=999$.', '$40.001$: after swapping, it becomes $41.000$, and $41.000-40.001=999$.'), answer: { expected: fraction(40001) } }
+            { id: 1, difficulty: 'easy', question: say('Idatzi nola irakurtzen diren: 15\u00a0728 eta 87\u00a0003.', 'Escribe cómo se leen: 15\u00a0728 y 87\u00a0003.', 'اكتب كيف يُقرأ: 15\u00a0728 و87\u00a0003.', 'Write how these numbers are read: 15,728 and 87,003.'), solution: say('Hamabost mila zazpiehun eta hogeita zortzi. Laurogeita zazpi mila eta hiru.', 'Quince mil setecientos veintiocho. Ochenta y siete mil tres.', 'خمسة عشر ألفًا وسبعمائة وثمانية وعشرون. سبعة وثمانون ألفًا وثلاثة.', 'Fifteen thousand seven hundred and twenty-eight. Eighty-seven thousand and three.') },
+            { id: 2, difficulty: 'easy', question: say('Idatzi 234\u00a0912 zenbakiaren deskonposizio polinomikoa.', 'Escribe la descomposición polinómica de 234\u00a0912.', 'اكتب تفكيك العدد 234\u00a0912.', 'Write 234,912 in expanded form.'), solution: same('$234\\,912=200\\,000+30\\,000+4000+900+10+2$') },
+            { id: 3, difficulty: 'medium', question: say('Ordenatu txikienetik handienera: 17\u00a0630, 7478, 15\u00a0080, 51\u00a0498, 5478, 7500.', 'Ordena de menor a mayor: 17\u00a0630, 7478, 15\u00a0080, 51\u00a0498, 5478, 7500.', 'رتّب من الأصغر إلى الأكبر: 17\u00a0630، 7478، 15\u00a0080، 51\u00a0498، 5478، 7500.', 'Order from smallest to largest: 17,630, 7,478, 15,080, 51,498, 5,478, 7,500.'), solution: same('$5478<7478<7500<15\\,080<17\\,630<51\\,498$') },
+            { id: 4, difficulty: 'medium', question: say('Idatzi erromatar zenbakiz: 87, 425 eta 2600.', 'Escribe en números romanos: 87, 425 y 2600.', 'اكتب بالأرقام الرومانية: 87 و425 و2600.', 'Write in Roman numerals: 87, 425 and 2,600.'), solution: same('$87=\\mathrm{LXXXVII} \\quad 425=\\mathrm{CDXXV} \\quad 2600=\\mathrm{MMDC}$') },
+            { id: 5, difficulty: 'medium', question: say('Idatzi zifraz: a) hamabost bilioi hirurehun eta berrogeita hamar mila milioi; b) bi mila eta zazpiehun milioi.', 'Escribe con cifras: a) quince billones trescientos cincuenta mil millones; b) dos mil setecientos millones.', 'اكتب بالأرقام: أ) خمسة عشر تريليونًا وثلاثمائة وخمسون مليارًا؛ ب) ألفان وسبعمائة مليون.', 'Write in figures: a) fifteen trillion three hundred and fifty billion; b) two thousand seven hundred million.'), solution: same('a) $15\\,350\\,000\\,000\\,000$; b) $2\\,700\\,000\\,000$') },
+            { id: 6, difficulty: 'hard', question: say('Bost zifrako zenbaki baten zifrek 5 batzen dute. Unitateak eta milakoak trukatzen badira, 999 handitzen da. Zein da zenbakia?', 'Un número de cinco cifras tiene cifras que suman 5. Si intercambias las unidades con las unidades de millar, aumenta en 999. ¿Qué número es?', 'عدد من خمسة أرقام مجموع أرقامه 5. إذا بادلنا الآحاد بالآلاف يزيد بمقدار 999. ما العدد؟', 'A five-digit number has digits that add up to 5. If you swap the units digit with the thousands digit, it goes up by 999. What is the number?'), solution: say('$40\\,001$: trukatuta $41\\,000$ da, eta $41\\,000-40\\,001=999$.', '$40\\,001$: al intercambiar queda $41\\,000$, y $41\\,000-40\\,001=999$.', '$40\\,001$: بعد المبادلة يصبح $41\\,000$، و$41\\,000-40\\,001=999$.', '$40.001$: after swapping, it becomes $41.000$, and $41.000-40.001=999$.'), answer: { expected: fraction(40001) } }
         ]
     },
     {
         id: 'rounding',
         title: say('Biribiltzea eta estimazioa', 'Redondeo y estimación', 'التقريب والتقدير', 'Rounding and estimation'),
         items: [
-            { id: 7, difficulty: 'easy', question: say('Biribildu milakoetara: 24.963, 7.280, 40.274 eta 99.399.', 'Redondea a los millares: 24.963, 7.280, 40.274 y 99.399.', 'قرّب إلى الآلاف: 24.963 و7.280 و40.274 و99.399.', 'Round to the nearest thousand: 24,963, 7,280, 40,274 and 99,399.'), solution: same('$25.000 \\quad 7.000 \\quad 40.000 \\quad 99.000$') },
-            { id: 8, difficulty: 'easy', question: say('Biribildu 530.298 ehun milakoetara eta hamar milakoetara.', 'Redondea 530.298 a las centenas de millar y a las decenas de millar.', 'قرّب 530.298 إلى مئات الآلاف وإلى عشرات الآلاف.', 'Round 530,298 to the nearest hundred thousand and to the nearest ten thousand.'), solution: same('$500.000 \\qquad 530.000$') },
+            { id: 7, difficulty: 'easy', question: say('Biribildu milakoetara: 24\u00a0963, 7280, 40\u00a0274 eta 99\u00a0399.', 'Redondea a los millares: 24\u00a0963, 7280, 40\u00a0274 y 99\u00a0399.', 'قرّب إلى الآلاف: 24\u00a0963 و7280 و40\u00a0274 و99\u00a0399.', 'Round to the nearest thousand: 24,963, 7,280, 40,274 and 99,399.'), solution: same('$25\\,000 \\quad 7000 \\quad 40\\,000 \\quad 99\\,000$') },
+            { id: 8, difficulty: 'easy', question: say('Biribildu 530\u00a0298 ehun milakoetara eta hamar milakoetara.', 'Redondea 530\u00a0298 a las centenas de millar y a las decenas de millar.', 'قرّب 530\u00a0298 إلى مئات الآلاف وإلى عشرات الآلاف.', 'Round 530,298 to the nearest hundred thousand and to the nearest ten thousand.'), solution: same('$500\\,000 \\qquad 530\\,000$') },
             { id: 9, difficulty: 'medium', question: say('Estimatu $167+235+32$ hamarrekoetara biribilduta, eta konparatu emaitza zehatzarekin.', 'Estima $167+235+32$ redondeando a las decenas y compáralo con el resultado exacto.', 'قدّر $167+235+32$ بالتقريب إلى العشرات وقارنه بالنتيجة الدقيقة.', 'Estimate $167+235+32$ by rounding to the nearest ten, and compare it with the exact result.'), solution: say('$170+240+30=440$. Zehatza: $434$. Oso gertu.', '$170+240+30=440$. Exacto: $434$. Muy cerca.', '$170+240+30=440$. الدقيق: $434$. قريب جدًا.', '$170+240+30=440$. Exact: $434$. Very close.') },
-            { id: 10, difficulty: 'medium', question: say('Estimatu: $49\\cdot 21$ eta $398\\mathbin{:}4$.', 'Estima: $49\\cdot 21$ y $398\\mathbin{:}4$.', 'قدّر: $49\\cdot 21$ و$398\\mathbin{:}4$.', 'Estimate: $49\\cdot 21$ and $398\\mathbin{:}4$.'), solution: say('$50\\cdot 20=1.000$ (zehatza $1.029$). $400\\mathbin{:}4=100$ (zehatza 99, hondarra 2).', '$50\\cdot 20=1.000$ (exacto $1.029$). $400\\mathbin{:}4=100$ (exacto 99, resto 2).', '$50\\cdot 20=1.000$ (الدقيق $1.029$). $400\\mathbin{:}4=100$ (الدقيق 99 والباقي 2).', '$50\\cdot 20=1.000$ (exact: $1.029$). $400\\mathbin{:}4=100$ (exact: 99, remainder 2).') },
-            { id: 11, difficulty: 'medium', question: say('Kairoko biztanleak 16.794.464 ziren 2013an. Zer esango zenuke zenbaki zehatza gogoratu gabe?', 'El Cairo tenía 16.794.464 habitantes en 2013. ¿Qué dirías si no recuerdas la cifra exacta?', 'كان عدد سكان القاهرة 16.794.464 نسمة سنة 2013. ماذا تقول إن لم تتذكر العدد الدقيق؟', 'Cairo had 16,794,464 inhabitants in 2013. What would you say if you don\'t remember the exact figure?'), solution: say('17 milioi inguru (milioietara biribilduta).', 'Unos 17 millones (redondeo a los millones).', 'حوالي 17 مليونًا (تقريب إلى الملايين).', 'About 17 million (rounded to the nearest million).') },
-            { id: 12, difficulty: 'hard', question: say('Biribildu 299.352.362 ehun milakoetara eta hamar milakoetara.', 'Redondea 299.352.362 a las centenas de millar y a las decenas de millar.', 'قرّب 299.352.362 إلى مئات الآلاف وإلى عشرات الآلاف.', 'Round 299,352,362 to the nearest hundred thousand and to the nearest ten thousand.'), solution: same('$299.400.000 \\qquad 299.350.000$') }
+            { id: 10, difficulty: 'medium', question: say('Estimatu: $49\\cdot 21$ eta $398\\mathbin{:}4$.', 'Estima: $49\\cdot 21$ y $398\\mathbin{:}4$.', 'قدّر: $49\\cdot 21$ و$398\\mathbin{:}4$.', 'Estimate: $49\\cdot 21$ and $398\\mathbin{:}4$.'), solution: say('$50\\cdot 20=1000$ (zehatza $1029$). $400\\mathbin{:}4=100$ (zehatza 99, hondarra 2).', '$50\\cdot 20=1000$ (exacto $1029$). $400\\mathbin{:}4=100$ (exacto 99, resto 2).', '$50\\cdot 20=1000$ (الدقيق $1029$). $400\\mathbin{:}4=100$ (الدقيق 99 والباقي 2).', '$50\\cdot 20=1.000$ (exact: $1.029$). $400\\mathbin{:}4=100$ (exact: 99, remainder 2).') },
+            { id: 11, difficulty: 'medium', question: say('Kairoko biztanleak 16\u00a0794\u00a0464 ziren 2013an. Zer esango zenuke zenbaki zehatza gogoratu gabe?', 'El Cairo tenía 16\u00a0794\u00a0464 habitantes en 2013. ¿Qué dirías si no recuerdas la cifra exacta?', 'كان عدد سكان القاهرة 16\u00a0794\u00a0464 نسمة سنة 2013. ماذا تقول إن لم تتذكر العدد الدقيق؟', 'Cairo had 16,794,464 inhabitants in 2013. What would you say if you don\'t remember the exact figure?'), solution: say('17 milioi inguru (milioietara biribilduta).', 'Unos 17 millones (redondeo a los millones).', 'حوالي 17 مليونًا (تقريب إلى الملايين).', 'About 17 million (rounded to the nearest million).') },
+            { id: 12, difficulty: 'hard', question: say('Biribildu 299\u00a0352\u00a0362 ehun milakoetara eta hamar milakoetara.', 'Redondea 299\u00a0352\u00a0362 a las centenas de millar y a las decenas de millar.', 'قرّب 299\u00a0352\u00a0362 إلى مئات الآلاف وإلى عشرات الآلاف.', 'Round 299,352,362 to the nearest hundred thousand and to the nearest ten thousand.'), solution: same('$299\\,400\\,000 \\qquad 299\\,350\\,000$') }
         ]
     },
     {
@@ -389,8 +389,8 @@ export const naturalsExerciseBank: ExerciseSection[] = [
         title: say('Oinarrizko eragiketak', 'Operaciones básicas', 'العمليات الأساسية', 'Basic operations'),
         items: [
             { id: 13, difficulty: 'easy', question: calculateBoth('$651+283-459$', '$831-392-76$'), solution: same('$934-459=475 \\qquad 439-76=363$') },
-            { id: 14, difficulty: 'easy', question: calculateBoth('$134\\cdot 1.000$', '$85\\cdot 100$'), solution: same('$134.000 \\qquad 8.500$') },
-            { id: 15, difficulty: 'medium', question: say('Aurkitu zatidura eta hondarra: $2.647\\mathbin{:}8$ eta $7.482\\mathbin{:}174$.', 'Halla el cociente y el resto: $2.647\\mathbin{:}8$ y $7.482\\mathbin{:}174$.', 'أوجد خارج القسمة والباقي: $2.647\\mathbin{:}8$ و$7.482\\mathbin{:}174$.', 'Find the quotient and the remainder: $2.647\\mathbin{:}8$ and $7.482\\mathbin{:}174$.'), solution: same('$2.647=8\\cdot 330+7 \\qquad 7.482=174\\cdot 43+0$') },
+            { id: 14, difficulty: 'easy', question: calculateBoth('$134\\cdot 1000$', '$85\\cdot 100$'), solution: same('$134\\,000 \\qquad 8500$') },
+            { id: 15, difficulty: 'medium', question: say('Aurkitu zatidura eta hondarra: $2647\\mathbin{:}8$ eta $7482\\mathbin{:}174$.', 'Halla el cociente y el resto: $2647\\mathbin{:}8$ y $7482\\mathbin{:}174$.', 'أوجد خارج القسمة والباقي: $2647\\mathbin{:}8$ و$7482\\mathbin{:}174$.', 'Find the quotient and the remainder: $2.647\\mathbin{:}8$ and $7.482\\mathbin{:}174$.'), solution: same('$2647=8\\cdot 330+7 \\qquad 7482=174\\cdot 43+0$') },
             { id: 16, difficulty: 'medium', question: say('Aplikatu banatze-propietatea: $5\\cdot (9-6)$ eta $(10-8)\\cdot 4$.', 'Aplica la propiedad distributiva: $5\\cdot (9-6)$ y $(10-8)\\cdot 4$.', 'طبّق خاصية التوزيع: $5\\cdot (9-6)$ و$(10-8)\\cdot 4$.', 'Apply the distributive property: $5\\cdot (9-6)$ and $(10-8)\\cdot 4$.'), solution: same('$5\\cdot 9-5\\cdot 6=45-30=15 \\qquad 10\\cdot 4-8\\cdot 4=40-32=8$') },
             { id: 17, difficulty: 'medium', question: say('Kalkulatu buruz: $33\\cdot 9$ eta $33\\cdot 11$.', 'Calcula mentalmente: $33\\cdot 9$ y $33\\cdot 11$.', 'احسب ذهنيًا: $33\\cdot 9$ و$33\\cdot 11$.', 'Work out in your head: $33\\cdot 9$ and $33\\cdot 11$.'), solution: same('$330-33=297 \\qquad 330+33=363$') },
             { id: 18, difficulty: 'hard', question: say('Egia ala gezurra? a) Hondarra beti da zatitzailea baino txikiagoa. b) Zatiketak trukatze-propietatea betetzen du. c) Zatikizuna eta zatitzailea 3z biderkatzen badira, zatidura hirukoizten da.', '¿Verdadero o falso? a) El resto siempre es menor que el divisor. b) La división cumple la propiedad conmutativa. c) Si se multiplican dividendo y divisor por 3, el cociente se triplica.', 'صح أم خطأ؟ أ) الباقي دائمًا أصغر من المقسوم عليه. ب) القسمة تحقق خاصية التبديل. ج) إذا ضربنا المقسوم والمقسوم عليه في 3 يتضاعف خارج القسمة ثلاث مرات.', 'True or false? a) The remainder is always smaller than the divisor. b) Division is commutative. c) If you multiply the dividend and the divisor by 3, the quotient triples.'), solution: say('a) Egia. b) Gezurra: $12\\mathbin{:}4=3$ baina $4\\mathbin{:}12$ ez da 3. c) Gezurra: zatidura ez da aldatzen, $36\\mathbin{:}12=12\\mathbin{:}4=3$.', 'a) Verdadero. b) Falso: $12\\mathbin{:}4=3$ pero $4\\mathbin{:}12$ no es 3. c) Falso: el cociente no cambia, $36\\mathbin{:}12=12\\mathbin{:}4=3$.', 'أ) صح. ب) خطأ: $12\\mathbin{:}4=3$ لكن $4\\mathbin{:}12$ ليس 3. ج) خطأ: خارج القسمة لا يتغير، $36\\mathbin{:}12=12\\mathbin{:}4=3$.', 'a) True. b) False: $12\\mathbin{:}4=3$ but $4\\mathbin{:}12$ is not 3. c) False: the quotient does not change, $36\\mathbin{:}12=12\\mathbin{:}4=3$.') }
@@ -413,11 +413,11 @@ export const naturalsExerciseBank: ExerciseSection[] = [
         title: say('Berreturak', 'Potencias', 'القوى', 'Powers'),
         items: [
             { id: 25, difficulty: 'easy', question: say('Idatzi berretura gisa eta kalkulatu: $5\\cdot 5\\cdot 5\\cdot 5$ eta $7\\cdot 7\\cdot 7$.', 'Escribe como potencia y calcula: $5\\cdot 5\\cdot 5\\cdot 5$ y $7\\cdot 7\\cdot 7$.', 'اكتب على صورة قوة واحسب: $5\\cdot 5\\cdot 5\\cdot 5$ و$7\\cdot 7\\cdot 7$.', 'Write as a power and calculate: $5\\cdot 5\\cdot 5\\cdot 5$ and $7\\cdot 7\\cdot 7$.'), solution: same('$5^4=625 \\qquad 7^3=343$') },
-            { id: 26, difficulty: 'easy', question: say('Esan oinarria, berretzailea eta balioa: $3^5$ eta $6^4$.', 'Di la base, el exponente y el valor: $3^5$ y $6^4$.', 'اذكر الأساس والأس والقيمة: $3^5$ و$6^4$.', 'Give the base, the exponent and the value of $3^5$ and $6^4$.'), solution: say('$3^5$: oinarria 3, berretzailea 5, $243$. $6^4$: oinarria 6, berretzailea 4, $1.296$.', '$3^5$: base 3, exponente 5, $243$. $6^4$: base 6, exponente 4, $1.296$.', '$3^5$: الأساس 3، الأس 5، $243$. $6^4$: الأساس 6، الأس 4، $1.296$.', '$3^5$: base 3, exponent 5, $243$. $6^4$: base 6, exponent 4, $1.296$.') },
+            { id: 26, difficulty: 'easy', question: say('Esan oinarria, berretzailea eta balioa: $3^5$ eta $6^4$.', 'Di la base, el exponente y el valor: $3^5$ y $6^4$.', 'اذكر الأساس والأس والقيمة: $3^5$ و$6^4$.', 'Give the base, the exponent and the value of $3^5$ and $6^4$.'), solution: say('$3^5$: oinarria 3, berretzailea 5, $243$. $6^4$: oinarria 6, berretzailea 4, $1296$.', '$3^5$: base 3, exponente 5, $243$. $6^4$: base 6, exponente 4, $1296$.', '$3^5$: الأساس 3، الأس 5، $243$. $6^4$: الأساس 6، الأس 4، $1296$.', '$3^5$: base 3, exponent 5, $243$. $6^4$: base 6, exponent 4, $1.296$.') },
             { id: 27, difficulty: 'medium', question: say('Adierazi berretura gisa: 25, 49, 64, 81 eta 100.', 'Expresa como potencia: 25, 49, 64, 81 y 100.', 'عبّر على صورة قوة: 25 و49 و64 و81 و100.', 'Write as a power: 25, 49, 64, 81 and 100.'), solution: same('$5^2 \\quad 7^2 \\quad 8^2=2^6 \\quad 9^2=3^4 \\quad 10^2$') },
-            { id: 28, difficulty: 'medium', question: say('Idatzi 10en berreturekin: 25.000, 4.000.000 eta 13.000.000.', 'Escribe con potencias de 10: 25.000, 4.000.000 y 13.000.000.', 'اكتب بقوى العدد 10: 25.000 و4.000.000 و13.000.000.', 'Write with powers of 10: 25,000, 4,000,000 and 13,000,000.'), solution: same('$25\\cdot 10^3 \\quad 4\\cdot 10^6 \\quad 13\\cdot 10^6$') },
+            { id: 28, difficulty: 'medium', question: say('Idatzi 10en berreturekin: 25\u00a0000, 4\u00a0000\u00a0000 eta 13\u00a0000\u00a0000.', 'Escribe con potencias de 10: 25\u00a0000, 4\u00a0000\u00a0000 y 13\u00a0000\u00a0000.', 'اكتب بقوى العدد 10: 25\u00a0000 و4\u00a0000\u00a0000 و13\u00a0000\u00a0000.', 'Write with powers of 10: 25,000, 4,000,000 and 13,000,000.'), solution: same('$25\\cdot 10^3 \\quad 4\\cdot 10^6 \\quad 13\\cdot 10^6$') },
             { id: 29, difficulty: 'medium', question: say('Idatzi 1etik 6rako zenbakien karratuak eta kuboak.', 'Escribe los cuadrados y los cubos de los números del 1 al 6.', 'اكتب مربعات ومكعبات الأعداد من 1 إلى 6.', 'Write the squares and the cubes of the numbers from 1 to 6.'), solution: say('Karratuak: 1, 4, 9, 16, 25, 36. Kuboak: 1, 8, 27, 64, 125, 216.', 'Cuadrados: 1, 4, 9, 16, 25, 36. Cubos: 1, 8, 27, 64, 125, 216.', 'المربعات: 1، 4، 9، 16، 25، 36. المكعبات: 1، 8، 27، 64، 125، 216.', 'Squares: 1, 4, 9, 16, 25, 36. Cubes: 1, 8, 27, 64, 125, 216.') },
-            { id: 30, difficulty: 'hard', question: say('Deskonposatu 10en berreturekin: 3.402 eta 50.070.', 'Descompón con potencias de 10: 3.402 y 50.070.', 'فكّك بقوى العدد 10: 3.402 و50.070.', 'Break down using powers of 10: 3,402 and 50,070.'), solution: same('$3\\cdot 10^3+4\\cdot 10^2+2 \\qquad 5\\cdot 10^4+7\\cdot 10$') }
+            { id: 30, difficulty: 'hard', question: say('Deskonposatu 10en berreturekin: 3402 eta 50\u00a0070.', 'Descompón con potencias de 10: 3402 y 50\u00a0070.', 'فكّك بقوى العدد 10: 3402 و50\u00a0070.', 'Break down using powers of 10: 3,402 and 50,070.'), solution: same('$3\\cdot 10^3+4\\cdot 10^2+2 \\qquad 5\\cdot 10^4+7\\cdot 10$') }
         ]
     }
 ]

@@ -47,7 +47,7 @@ const konbinatoriaUnit: UnitDefinition = {
         render: (props) => <CombinatoricsAkGames {...props} />
     },
     answers: {
-        note: { eu: 'Idatzi zenbaki oso bat: 120 edo 40 320 (hutsuneak berdin).', es: 'Escribe un número entero: 120 o 40 320 (los espacios dan igual).', en: 'Write an integer: 120 or 40,320 (spaces don\'t matter).', ar: 'اكتب عددًا صحيحًا: 120 أو 40320.' },
+        note: { eu: 'Idatzi zenbaki oso bat: 120 edo 40\u00a0320 (hutsuneak berdin).', es: 'Escribe un número entero: 120 o 40\u00a0320 (los espacios dan igual).', en: 'Write an integer: 120 or 40,320 (spaces don\'t matter).', ar: 'اكتب عددًا صحيحًا: 120 أو 40320.' },
         defaultForm: 'any',
         inputMode: 'numeric',
         normalizeInput: readCountAnswer,

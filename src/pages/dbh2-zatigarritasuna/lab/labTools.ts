@@ -62,7 +62,7 @@ export const divisibilityLabTools: DivisibilityLabTool[] = [
         lessonTopic: 'primes',
         title: { eu: 'Eratostenesen bahea', es: 'Criba de Eratóstenes', en: 'Sieve of Eratosthenes', ar: 'غربال إراتوستينس' },
         observe: {
-            eu: 'Zenbaki lehen bat aukeratzean, haren multiplo guztiak ratatzen dira: ez dira lehenak. 7 ondoren ez da ezer berririk ratatzen, 11 · 11 = 121 100 baino handiagoa delako.',
+            eu: 'Zenbaki lehen bat aukeratzean, haren multiplo guztiak ratatzen dira: ez dira lehenak. 7 ondoren ez da ezer berririk ratatzen, 11 · 11 = 121\u00a0100 baino handiagoa delako.',
             es: 'Al elegir un primo, se tachan todos sus múltiplos: no son primos. Después del 7 ya no se tacha nada nuevo, porque 11 · 11 = 121 es mayor que 100.',
             en: 'When you choose a prime, all its multiples are crossed out: they are not prime. After 7, nothing new is crossed out, because 11 · 11 = 121 is greater than 100.',
             ar: 'عند اختيار عدد أولي تُشطب كل مضاعفاته لأنها ليست أولية. وبعد 7 لا يُشطب شيء جديد لأن 11 · 11 = 121 أكبر من 100.'
@@ -307,7 +307,7 @@ export const criteriaChallenges: LabChallenge<CriteriaState>[] = [
     {
         id: 1303,
         prompt: { eu: 'Aurkitu 11rekin zatigarria den lau zifrako zenbaki bat.', es: 'Encuentra un número de cuatro cifras divisible por 11.', en: 'Find a four-digit number divisible by 11.', ar: 'جد عددًا من أربعة أرقام يقبل القسمة على 11.' },
-        hint: { eu: 'Posizio bikoitietako batura eta bakoitietakoa berdinak izan daitezke: 1 221, 3 234…', es: 'La suma de los lugares pares y la de los impares pueden ser iguales: 1 221, 3 234…', en: 'The sum of the even places and the sum of the odd places can be equal: 1221, 3234…', ar: 'يمكن أن يتساوى مجموع المواقع الزوجية والفردية: 1 221، 3 234…' },
+        hint: { eu: 'Posizio bikoitietako batura eta bakoitietakoa berdinak izan daitezke: 1221, 3234…', es: 'La suma de los lugares pares y la de los impares pueden ser iguales: 1221, 3234…', en: 'The sum of the even places and the sum of the odd places can be equal: 1221, 3234…', ar: 'يمكن أن يتساوى مجموع المواقع الزوجية والفردية: 1221، 3234…' },
         isSolved: (state) => inHistory(state, (value) => value >= 1000 && value <= 9999 && divides(11, value))
     },
     {
@@ -425,7 +425,7 @@ export const ladderChallenges: LabChallenge<LadderState>[] = [
     },
     {
         id: 1502,
-        prompt: { eu: 'Deskonposatu 1 001. Zein lehen behar dira?', es: 'Descompón 1 001. ¿Qué primos hacen falta?', en: 'Factorise 1,001. Which primes are needed?', ar: 'حلّل 1 001. ما الأعداد الأولية اللازمة؟' },
+        prompt: { eu: 'Deskonposatu 1001. Zein lehen behar dira?', es: 'Descompón 1001. ¿Qué primos hacen falta?', en: 'Factorise 1,001. Which primes are needed?', ar: 'حلّل 1001. ما الأعداد الأولية اللازمة؟' },
         hint: { eu: 'Ez da 2, 3 edo 5ekin zatigarria. Probatu 7ren irizpidea.', es: 'No es divisible por 2, 3 ni 5. Prueba el criterio del 7.', en: 'It is not divisible by 2, 3 or 5. Try the rule for 7.', ar: 'لا يقبل القسمة على 2 أو 3 أو 5. جرّب قاعدة 7.' },
         isSolved: (state) => state.finished.includes(1001)
     },
@@ -437,8 +437,8 @@ export const ladderChallenges: LabChallenge<LadderState>[] = [
     },
     {
         id: 1504,
-        prompt: { eu: 'Deskonposatu 2 000 eta lortu 2 eta 5 bakarrik dituen deskonposizioa.', es: 'Descompón 2 000: su descomposición solo tiene doses y cincos.', en: 'Factorise 2,000: its factorisation only has 2s and 5s.', ar: 'حلّل 2 000: لا يحتوي تحليله إلا على العددين 2 و5.' },
-        hint: { eu: '2 000 = 2 · 1 000 eta 1 000 = 10 · 10 · 10.', es: '2 000 = 2 · 1 000 y 1 000 = 10 · 10 · 10.', en: '2,000 = 2 · 1,000 and 1,000 = 10 · 10 · 10.', ar: '2 000 = 2 · 1 000 و1 000 = 10 · 10 · 10.' },
+        prompt: { eu: 'Deskonposatu 2000 eta lortu 2 eta 5 bakarrik dituen deskonposizioa.', es: 'Descompón 2000: su descomposición solo tiene doses y cincos.', en: 'Factorise 2,000: its factorisation only has 2s and 5s.', ar: 'حلّل 2000: لا يحتوي تحليله إلا على العددين 2 و5.' },
+        hint: { eu: '2000 = 2 · 1000 eta 1000 = 10 · 10 · 10.', es: '2000 = 2 · 1000 y 1000 = 10 · 10 · 10.', en: '2,000 = 2 · 1,000 and 1,000 = 10 · 10 · 10.', ar: '2000 = 2 · 1000 و1000 = 10 · 10 · 10.' },
         isSolved: (state) => state.finished.includes(2000)
     }
 ]

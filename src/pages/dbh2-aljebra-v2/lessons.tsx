@@ -387,7 +387,7 @@ export const algebraTopics: UnitTopic[] = [
         stepsKind: 'steps',
         steps: [
             { text: { eu: 'Lehenaren karratua ken bigarrenaren karratua.', es: 'Cuadrado del primero menos cuadrado del segundo.', en: 'Square of the first minus square of the second.', ar: 'مربع الأول ناقص مربع الثاني.' }, math: '$4x^{2}-9$' },
-            { text: { eu: 'Zenbakiekin berdin.', es: 'Con números, igual.', en: 'The same with numbers.', ar: 'ومع الأعداد كذلك.' }, math: '$100^{2}-2^{2}=10\\,000-4=9\\,996$' }
+            { text: { eu: 'Zenbakiekin berdin.', es: 'Con números, igual.', en: 'The same with numbers.', ar: 'ومع الأعداد كذلك.' }, math: '$100^{2}-2^{2}=10\\,000-4=9996$' }
         ],
         example: '$(x+4)(x-4)=x^{2}-16$',
         takeaway: {
@@ -480,9 +480,9 @@ export const algebraTopics: UnitTopic[] = [
         steps: [
             { title: { eu: 'Karratuen kendura', es: 'Diferencia de cuadrados', en: 'Difference of squares', ar: 'فرق مربعين' }, text: { eu: 'Bi zenbaki jarraituren karratuen kendura haien batura da.', es: 'La diferencia de cuadrados de dos números seguidos es su suma.', en: 'The difference of the squares of two consecutive numbers is their sum.', ar: 'فرق مربعَي عددين متتاليين يساوي مجموعهما.' }, math: '$312^{2}-311^{2}=623$' },
             { title: { eu: 'Batura baten karratua', es: 'Cuadrado de una suma', en: 'Square of a sum', ar: 'مربع مجموع' }, text: { eu: '101 = 100 + 1.', es: '101 = 100 + 1.', en: '101 = 100 + 1.', ar: '101 = 100 + 1.' }, math: '$101^{2}=10\\,000+200+1=10\\,201$' },
-            { title: { eu: 'Faktore komuna', es: 'Factor común', en: 'Common factor', ar: 'العامل المشترك' }, text: { eu: 'Gai biek dute 37.', es: 'Los dos términos tienen 37.', en: 'Both terms have 37 in them.', ar: 'في الحدين 37.' }, math: '$37\\cdot 13+37\\cdot 87=3\\,700$' }
+            { title: { eu: 'Faktore komuna', es: 'Factor común', en: 'Common factor', ar: 'العامل المشترك' }, text: { eu: 'Gai biek dute 37.', es: 'Los dos términos tienen 37.', en: 'Both terms have 37 in them.', ar: 'في الحدين 37.' }, math: '$37\\cdot 13+37\\cdot 87=3700$' }
         ],
-        example: '$99^{2}=10\\,000-200+1=9\\,801$',
+        example: '$99^{2}=10\\,000-200+1=9801$',
         takeaway: {
             eu: 'Aljebrak zenbakiekin ere laguntzen du.',
             es: 'El álgebra también ayuda con los números.',

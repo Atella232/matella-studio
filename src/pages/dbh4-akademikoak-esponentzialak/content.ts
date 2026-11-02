@@ -39,8 +39,8 @@ export const exponentialAkDiagnostic: DiagnosticQuestion[] = [
     },
     {
         id: 6003,
-        prompt: say('1 000 € % 4an interes konposatuan. Zenbat diru $t$ urtean?', '1 000 € al 4 % de interés compuesto. ¿Cuánto dinero hay en $t$ años?', '1000 € بفائدة مركبة 4 %. كم يصبح المال بعد $t$ سنة؟', '€1,000 at 4% compound interest. How much money is there after $t$ years?'),
-        options: [same('$1\\,000+40t$'), same('$1\\,000\\cdot 0{,}04^{t}$'), same('$1\\,000\\cdot 1{,}04^{t}$')],
+        prompt: say('1000 € % 4an interes konposatuan. Zenbat diru $t$ urtean?', '1000 € al 4 % de interés compuesto. ¿Cuánto dinero hay en $t$ años?', '1000 € بفائدة مركبة 4 %. كم يصبح المال بعد $t$ سنة؟', '€1,000 at 4% compound interest. How much money is there after $t$ years?'),
+        options: [same('$1000+40t$'), same('$1000\\cdot 0{,}04^{t}$'), same('$1000\\cdot 1{,}04^{t}$')],
         correctIndex: 2,
         explanation: say('Urtero $1{,}04$-z biderkatzen da.', 'Cada año se multiplica por $1{,}04$.', 'يُضرب كل سنة في $1{,}04$.', 'Each year it is multiplied by $1{,}04$.'),
         topic: 'growth'
@@ -120,17 +120,17 @@ export const exponentialAkPractice: PracticeItem[] = [
     /* ---------- Growth and equations ---------- */
     {
         id: 5, stage: 'growth',
-        prompt: say('2 000 € % 5ean jarri dira interes konposatuan. Zenbat diru izango da 2 urtean (€)?', 'Se ponen 2 000 € al 5 % de interés compuesto. ¿Cuánto habrá en 2 años (€)?', 'وُضع 2000 € بفائدة مركبة 5 %. كم يصبح المبلغ بعد سنتين (€)؟', '€2,000 is invested at 5% compound interest. How much will there be after 2 years (€)?'),
+        prompt: say('2000 € % 5ean jarri dira interes konposatuan. Zenbat diru izango da 2 urtean (€)?', 'Se ponen 2000 € al 5 % de interés compuesto. ¿Cuánto habrá en 2 años (€)?', 'وُضع 2000 € بفائدة مركبة 5 %. كم يصبح المبلغ بعد سنتين (€)؟', '€2,000 is invested at 5% compound interest. How much will there be after 2 years (€)?'),
         expected: n(2205),
         hint: say('Urtero $1{,}05$-z biderkatu.', 'Multiplica por $1{,}05$ cada año.', 'اضرب في $1{,}05$ كل سنة.', 'Multiply by $1{,}05$ each year.'),
-        explanation: same('$2\\,000\\cdot 1{,}05^{2}=2\\,000\\cdot 1{,}1025=2\\,205$')
+        explanation: same('$2000\\cdot 1{,}05^{2}=2000\\cdot 1{,}1025=2205$')
     },
     {
         id: 6, stage: 'growth',
         prompt: say('Bakterio-kolonia bat orduro hirukoizten da eta 200 bakteriorekin hasten da. Zenbat izango dira 3 ordutan?', 'Una colonia de bacterias se triplica cada hora y empieza con 200. ¿Cuántas habrá en 3 horas?', 'تتضاعف مستعمرة بكتيريا ثلاث مرات كل ساعة وتبدأ بـ 200. كم يصبح عددها بعد 3 ساعات؟', 'A colony of bacteria triples every hour and starts with 200. How many will there be after 3 hours?'),
         expected: n(5400),
         hint: say('$N=200\\cdot 3^{t}$.', '$N=200\\cdot 3^{t}$.', '$N=200\\cdot 3^{t}$.', '$N=200\\cdot 3^{t}$.'),
-        explanation: same('$200\\cdot 3^{3}=200\\cdot 27=5\\,400$')
+        explanation: same('$200\\cdot 3^{3}=200\\cdot 27=5400$')
     },
     {
         id: 7, stage: 'growth',
@@ -261,7 +261,7 @@ export const exponentialAkChallenges: ChallengeItem[] = [
     /* ---------- Growth and equations ---------- */
     {
         id: 104, stage: 'growth', points: 10, context: 'starter',
-        prompt: say('20 000 €-ko auto batek urtero balioaren % 10 galtzen du. Zenbat balio du 2 urtera (€)?', 'Un coche de 20 000 € pierde cada año el 10 % de su valor. ¿Cuánto vale a los 2 años (€)?', 'سيارة قيمتها 20000 € تفقد كل سنة 10 % من قيمتها. كم قيمتها بعد سنتين (€)؟', 'A car worth €20,000 loses 10% of its value each year. How much is it worth after 2 years (€)?'),
+        prompt: say('20\u00a0000 €-ko auto batek urtero balioaren % 10 galtzen du. Zenbat balio du 2 urtera (€)?', 'Un coche de 20\u00a0000 € pierde cada año el 10 % de su valor. ¿Cuánto vale a los 2 años (€)?', 'سيارة قيمتها 20000 € تفقد كل سنة 10 % من قيمتها. كم قيمتها بعد سنتين (€)؟', 'A car worth €20,000 loses 10% of its value each year. How much is it worth after 2 years (€)?'),
         expected: n(16200),
         hint: say('Faktorea $0{,}9$ da.', 'El factor es $0{,}9$.', 'المعامل $0{,}9$.', 'The factor is $0{,}9$.'),
         explanation: same('$20\\,000\\cdot 0{,}9^{2}=20\\,000\\cdot 0{,}81=16\\,200$')
@@ -275,7 +275,7 @@ export const exponentialAkChallenges: ChallengeItem[] = [
     },
     {
         id: 106, stage: 'growth', points: 30, context: 'master',
-        prompt: say('Kolonia bat 20 minuturo bikoizten da eta 100 bakteriorekin hasten da. Zenbat minututan iritsiko da 6 400 bakteriora?', 'Una colonia se duplica cada 20 minutos y empieza con 100 bacterias. ¿En cuántos minutos llegará a 6 400?', 'تتضاعف مستعمرة كل 20 دقيقة وتبدأ بـ 100 بكتيريا. في كم دقيقة تبلغ 6400؟', 'A colony doubles every 20 minutes and starts with 100 bacteria. In how many minutes will it reach 6,400?'),
+        prompt: say('Kolonia bat 20 minuturo bikoizten da eta 100 bakteriorekin hasten da. Zenbat minututan iritsiko da 6400 bakteriora?', 'Una colonia se duplica cada 20 minutos y empieza con 100 bacterias. ¿En cuántos minutos llegará a 6 400?', 'تتضاعف مستعمرة كل 20 دقيقة وتبدأ بـ 100 بكتيريا. في كم دقيقة تبلغ 6400؟', 'A colony doubles every 20 minutes and starts with 100 bacteria. In how many minutes will it reach 6,400?'),
         expected: n(120),
         hint: say('Zenbat bikoizketa behar dira?', '¿Cuántas duplicaciones hacen falta?', 'كم تضاعفًا يلزم؟', 'How many doublings are needed?'),
         explanation: same('$2^{n}=64=2^{6}\\qquad 6\\cdot 20=120$')
@@ -372,12 +372,12 @@ export const exponentialAkExerciseBank: ExerciseSection[] = [
             { id: 11, difficulty: 'easy', question: say('Zein da % 8ko igoera baten faktorea?', '¿Cuál es el factor de una subida del 8 %?', 'ما معامل زيادة 8 %؟', 'What is the factor for an 8% increase?'), solution: same('$1+\\frac{8}{100}=1{,}08$'), answer: { expected: v('1,08') } },
             { id: 12, difficulty: 'easy', question: say('Zein da % 25eko jaitsiera baten faktorea?', '¿Cuál es el factor de una bajada del 25 %?', 'ما معامل نقص 25 %؟', 'What is the factor for a 25% decrease?'), solution: same('$1-\\frac{25}{100}=0{,}75$'), answer: { expected: v('0,75') } },
             { id: 13, difficulty: 'easy', question: say('Ebatzi $2^{x}=16$.', 'Resuelve $2^{x}=16$.', 'حُلّ $2^{x}=16$.', 'Solve $2^{x}=16$.'), solution: same('$2^{4}=16\\ \\to\\ x=4$'), answer: { expected: n(4) } },
-            { id: 14, difficulty: 'medium', question: say('5 000 € % 2an jarri dira interes konposatuan. Zenbat diru izango da 2 urtean (€)?', 'Se ponen 5 000 € al 2 % de interés compuesto. ¿Cuánto habrá en 2 años (€)?', 'وُضع 5000 € بفائدة مركبة 2 %. كم يصبح المبلغ بعد سنتين (€)؟', '€5,000 is invested at 2% compound interest. How much will there be after 2 years (€)?'), solution: same('$5\\,000\\cdot 1{,}02^{2}=5\\,000\\cdot 1{,}0404=5\\,202$'), answer: { expected: n(5202) } },
+            { id: 14, difficulty: 'medium', question: say('5000 € % 2an jarri dira interes konposatuan. Zenbat diru izango da 2 urtean (€)?', 'Se ponen 5000 € al 2 % de interés compuesto. ¿Cuánto habrá en 2 años (€)?', 'وُضع 5000 € بفائدة مركبة 2 %. كم يصبح المبلغ بعد سنتين (€)؟', '€5,000 is invested at 2% compound interest. How much will there be after 2 years (€)?'), solution: same('$5000\\cdot 1{,}02^{2}=5000\\cdot 1{,}0404=5202$'), answer: { expected: n(5202) } },
             { id: 15, difficulty: 'medium', question: say('Ebatzi $3^{x-2}=27$.', 'Resuelve $3^{x-2}=27$.', 'حُلّ $3^{x-2}=27$.', 'Solve $3^{x-2}=27$.'), solution: same('$3^{x-2}=3^{3}\\ \\to\\ x-2=3\\ \\to\\ x=5$'), answer: { expected: n(5) } },
             { id: 16, difficulty: 'medium', question: say('Ebatzi $4^{x}=\\frac{1}{16}$.', 'Resuelve $4^{x}=\\frac{1}{16}$.', 'حُلّ $4^{x}=\\frac{1}{16}$.', 'Solve $4^{x}=\\frac{1}{16}$.'), solution: same('$4^{-2}=\\frac{1}{16}\\ \\to\\ x=-2$'), answer: { expected: n(-2) } },
             { id: 17, difficulty: 'medium', question: say('Isotopo baten erdibizitza 30 urte da. 200 g badira, zenbat gramo geratuko dira 90 urtean?', 'Un isótopo tiene una semivida de 30 años. Si hay 200 g, ¿cuántos gramos quedarán en 90 años?', 'عمر النصف لنظير 30 سنة. إذا كان لدينا 200 غ فكم غرامًا يبقى بعد 90 سنة؟', 'An isotope has a half-life of 30 years. If there are 200 g, how many grams will be left after 90 years?'), solution: same('$\\frac{90}{30}=3\\qquad 200\\cdot\\frac{1}{2^{3}}=25$'), answer: { expected: n(25) } },
             { id: 18, difficulty: 'hard', question: say('Ebatzi $8^{x}=4$.', 'Resuelve $8^{x}=4$.', 'حُلّ $8^{x}=4$.', 'Solve $8^{x}=4$.'), solution: same('$2^{3x}=2^{2}\\ \\to\\ 3x=2\\ \\to\\ x=\\frac{2}{3}$'), answer: { expected: fraction(2, 3) } },
-            { id: 19, difficulty: 'hard', question: say('1 000 biztanleko herri bat 5 urtero bikoizten da. Zenbat biztanle izango ditu 15 urtean?', 'Un pueblo de 1 000 habitantes se duplica cada 5 años. ¿Cuántos tendrá en 15 años?', 'قرية فيها 1000 نسمة تتضاعف كل 5 سنوات. كم يصبح عدد سكانها بعد 15 سنة؟', 'A village of 1,000 inhabitants doubles every 5 years. How many will it have in 15 years?'), solution: same('$\\frac{15}{5}=3\\qquad 1\\,000\\cdot 2^{3}=8\\,000$'), answer: { expected: n(8000) } },
+            { id: 19, difficulty: 'hard', question: say('1000 biztanleko herri bat 5 urtero bikoizten da. Zenbat biztanle izango ditu 15 urtean?', 'Un pueblo de 1000 habitantes se duplica cada 5 años. ¿Cuántos tendrá en 15 años?', 'قرية فيها 1000 نسمة تتضاعف كل 5 سنوات. كم يصبح عدد سكانها بعد 15 سنة؟', 'A village of 1,000 inhabitants doubles every 5 years. How many will it have in 15 years?'), solution: same('$\\frac{15}{5}=3\\qquad 1000\\cdot 2^{3}=8000$'), answer: { expected: n(8000) } },
             { id: 20, difficulty: 'hard', question: say('Kapital bat % 7an dago interes konposatuan. Gutxienez zenbat urte osotan bikoizten da?', 'Un capital está al 7 % de interés compuesto. ¿En cuántos años enteros, como mínimo, se duplica?', 'رأس مال بفائدة مركبة 7 %. في كم سنة كاملة على الأقل يتضاعف؟', 'A principal is invested at 7% compound interest. After at least how many whole years does it double?'), solution: say('$1{,}07^{t}=2$, $t=\\frac{\\log 2}{\\log 1{,}07}\\approx 10{,}24$: 11 urte behar dira.', '$1{,}07^{t}=2$, $t=\\frac{\\log 2}{\\log 1{,}07}\\approx 10{,}24$: hacen falta 11 años.', '$1{,}07^{t}=2$ و$t=\\frac{\\log 2}{\\log 1{,}07}\\approx 10{,}24$: يلزم 11 سنة.', '$1{,}07^{t}=2$, $t=\\frac{\\log 2}{\\log 1{,}07}\\approx 10{,}24$: 11 years are needed.'), answer: { expected: n(11) } }
         ]
     },
@@ -386,7 +386,7 @@ export const exponentialAkExerciseBank: ExerciseSection[] = [
         title: say('Funtzio logaritmikoa', 'Función logarítmica', 'الدالة اللوغاريتمية', 'Logarithmic function'),
         items: [
             { id: 21, difficulty: 'easy', question: say('Kalkulatu $\\log_2 16$.', 'Calcula $\\log_2 16$.', 'احسب $\\log_2 16$.', 'Work out $\\log_2 16$.'), solution: same('$2^{4}=16$'), answer: { expected: n(4) } },
-            { id: 22, difficulty: 'easy', question: say('Kalkulatu $\\log 1\\,000$.', 'Calcula $\\log 1\\,000$.', 'احسب $\\log 1\\,000$.', 'Work out $\\log 1\\,000$.'), solution: same('$10^{3}=1\\,000$'), answer: { expected: n(3) } },
+            { id: 22, difficulty: 'easy', question: say('Kalkulatu $\\log 1000$.', 'Calcula $\\log 1000$.', 'احسب $\\log 1000$.', 'Work out $\\log 1\\,000$.'), solution: same('$10^{3}=1000$'), answer: { expected: n(3) } },
             { id: 23, difficulty: 'easy', question: say('Kalkulatu $\\log_7 1$.', 'Calcula $\\log_7 1$.', 'احسب $\\log_7 1$.', 'Work out $\\log_7 1$.'), solution: same('$7^{0}=1$'), answer: { expected: n(0) } },
             { id: 24, difficulty: 'medium', question: say('Kalkulatu $\\log_9 3$.', 'Calcula $\\log_9 3$.', 'احسب $\\log_9 3$.', 'Work out $\\log_9 3$.'), solution: same('$9^{\\frac{1}{2}}=\\sqrt{9}=3$'), answer: { expected: fraction(1, 2) } },
             { id: 25, difficulty: 'medium', question: say('Kalkulatu $\\log_{\\frac{1}{2}} 8$.', 'Calcula $\\log_{\\frac{1}{2}} 8$.', 'احسب $\\log_{\\frac{1}{2}} 8$.', 'Work out $\\log_{\\frac{1}{2}} 8$.'), solution: same('$\\left(\\frac{1}{2}\\right)^{-3}=2^{3}=8$'), answer: { expected: n(-3) } },

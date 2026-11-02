@@ -288,8 +288,8 @@ export function MapTool(props: LabToolProps) {
             actual={mapPrediction(state)}
             choice={state.prediction}
             tip={say(
-                `1 km = 100 000 cm. Mapako cm bakoitzak ${scaleText(n)} cm balio ditu.`,
-                `1 km = 100 000 cm. Cada cm del mapa vale ${scaleText(n)} cm.`,
+                `1 km = 100\u00a0000 cm. Mapako cm bakoitzak ${scaleText(n)} cm balio ditu.`,
+                `1 km = 100\u00a0000 cm. Cada cm del mapa vale ${scaleText(n)} cm.`,
                 `1 كم = 100000 سم. وكل سنتيمتر على الخريطة يساوي ${n} سم.`,
                 `1 km = 100,000 cm. Each cm on the map is worth ${scaleText(n)} cm.`
             )}

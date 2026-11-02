@@ -404,8 +404,8 @@ export const statisticsIntroTopics: UnitTopic[] = [
             ar: 'فهم العلاقة بين التكرار النسبي والاحتمال.'
         },
         explanation: {
-            eu: 'Esperimentu bat askotan errepikatzen bada, gertaera baten maiztasun erlatiboa haren probabilitatetik gero eta hurbilago egoten da. Txanpon bat 10 aldiz botata 7 aurpegi atera daitezke (0,7), baina 1.000 aldiz botata 500etik hurbil aterako dira (0,5).',
-            es: 'Si un experimento se repite muchas veces, la frecuencia relativa de un suceso se acerca cada vez más a su probabilidad. Al lanzar una moneda 10 veces pueden salir 7 caras (0,7), pero al lanzarla 1.000 veces saldrán cerca de 500 (0,5).',
+            eu: 'Esperimentu bat askotan errepikatzen bada, gertaera baten maiztasun erlatiboa haren probabilitatetik gero eta hurbilago egoten da. Txanpon bat 10 aldiz botata 7 aurpegi atera daitezke (0,7), baina 1000 aldiz botata 500etik hurbil aterako dira (0,5).',
+            es: 'Si un experimento se repite muchas veces, la frecuencia relativa de un suceso se acerca cada vez más a su probabilidad. Al lanzar una moneda 10 veces pueden salir 7 caras (0,7), pero al lanzarla 1000 veces saldrán cerca de 500 (0,5).',
             en: 'If an experiment is repeated many times, the relative frequency of an event gets closer and closer to its probability. When you toss a coin 10 times, you may get 7 heads (0.7), but if you toss it 1,000 times, you will get close to 500 heads (0.5).',
             ar: 'إذا تكررت تجربة مرات كثيرة يقترب التكرار النسبي لحدث أكثر فأكثر من احتماله. عند رمي قطعة نقود 10 مرات قد يظهر الوجه 7 مرات (0.7)، لكن عند رميها 1000 مرة سيظهر قرابة 500 مرة (0.5).'
         },

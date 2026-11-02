@@ -73,7 +73,7 @@ export const geometryIntroDiagnostic: DiagnosticQuestion[] = [
     {
         id: 1208,
         prompt: say('Zenbat cm dira 2,5 m?', '¿Cuántos cm son 2,5 m?', 'كم سنتيمترًا في 2.5 م؟', 'How many cm are in 2.5 m?'),
-        options: [same('$25$'), same('$250$'), same('$2\\,500$')],
+        options: [same('$25$'), same('$250$'), same('$2500$')],
         correctIndex: 1,
         explanation: same('$2{,}5\\cdot 100=250$'),
         topic: 'units'
@@ -159,7 +159,7 @@ export const geometryIntroExerciseBank: ExerciseSection[] = [
         id: 'perimeters',
         title: say('Unitateak eta perimetroak', 'Unidades y perímetros', 'الوحدات والمحيطات', 'Units and perimeters.'),
         items: [
-            { id: 19, difficulty: 'easy', question: say('Pasatu: a) 3 km m-tara; b) 250 cm m-tara; c) 45 mm cm-tara.', 'Pasa: a) 3 km a m; b) 250 cm a m; c) 45 mm a cm.', 'حوّل: أ) 3 كم إلى م؛ ب) 250 سم إلى م؛ ج) 45 مم إلى سم.', 'Convert: a) 3 km to m; b) 250 cm to m; c) 45 mm to cm.'), solution: same('a) $3\\,000$; b) $2{,}5$; c) $4{,}5$') },
+            { id: 19, difficulty: 'easy', question: say('Pasatu: a) 3 km m-tara; b) 250 cm m-tara; c) 45 mm cm-tara.', 'Pasa: a) 3 km a m; b) 250 cm a m; c) 45 mm a cm.', 'حوّل: أ) 3 كم إلى م؛ ب) 250 سم إلى م؛ ج) 45 مم إلى سم.', 'Convert: a) 3 km to m; b) 250 cm to m; c) 45 mm to cm.'), solution: same('a) $3000$; b) $2{,}5$; c) $4{,}5$') },
             { id: 20, difficulty: 'easy', question: say('Kalkulatu 9, 5, 5,4 eta 5,4 cm-ko aldeak dituen trapezioaren perimetroa.', 'Calcula el perímetro de un trapecio de lados 9, 5, 5,4 y 5,4 cm.', 'احسب محيط شبه منحرف أضلاعه 9 و5 و5.4 و5.4 سم.', 'Calculate the perimeter of a trapezium with sides of 9, 5, 5.4 and 5.4 cm.'), solution: same('$9+5+5{,}4+5{,}4=24{,}8$'), answer: { expected: fraction(248, 10) } },
             { id: 21, difficulty: 'medium', question: say('Pasatu: a) 2 m² dm²-tara; b) 500 cm² dm²-tara.', 'Pasa: a) 2 m² a dm²; b) 500 cm² a dm².', 'حوّل: أ) 2 م² إلى دسم²؛ ب) 500 سم² إلى دسم².', 'Convert: a) 2 m² to dm²; b) 500 cm² to dm².'), solution: same('a) $200$; b) $5$') },
             { id: 22, difficulty: 'medium', question: say('Pentagono erregular baten perimetroa 45 cm da. Zenbat da aldea?', 'El perímetro de un pentágono regular es 45 cm. ¿Cuánto mide el lado?', 'محيط مخمس منتظم 45 سم. كم طول ضلعه؟', 'The perimeter of a regular pentagon is 45 cm. How long is one side?'), solution: same('$45\\mathbin{:}5=9$'), answer: { expected: fraction(9) } },

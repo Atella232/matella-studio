@@ -43,7 +43,7 @@ const zenbakiNaturalakUnit: UnitDefinition = {
         render: (props) => <NaturalsGames {...props} />
     },
     answers: {
-        note: { eu: 'Idatzi emaitza zenbaki gisa, adibidez 44 edo 15.000.', es: 'Escribe el resultado como un número, por ejemplo 44 o 15.000.', en: 'Write the result as a number, for example 44 or 15,000.', ar: 'اكتب النتيجة عددًا، مثل 44 أو 15.000.' },
+        note: { eu: 'Idatzi emaitza zenbaki gisa, adibidez 44 edo 15\u00a0000.', es: 'Escribe el resultado como un número, por ejemplo 44 o 15\u00a0000.', en: 'Write the result as a number, for example 44 or 15,000.', ar: 'اكتب النتيجة عددًا، مثل 44 أو 15\u00a0000.' },
         defaultForm: 'simplified',
         inputMode: 'numeric',
         normalizeInput: readNaturalAnswer,

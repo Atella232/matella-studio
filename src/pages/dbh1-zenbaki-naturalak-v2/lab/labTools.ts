@@ -173,14 +173,14 @@ export const setAbacus = (value: number): AbacusState => ({ value: clamp(value, 
 export const abacusChallenges: LabChallenge<AbacusState>[] = [
     {
         id: 2101,
-        prompt: { eu: 'Osatu 40.001 zenbakia taulan.', es: 'Forma el número 40.001 en la tabla.', en: 'Build the number 40,001 in the table.', ar: 'كوّن العدد 40.001 في الجدول.' },
+        prompt: { eu: 'Osatu 40\u00a0001 zenbakia taulan.', es: 'Forma el número 40\u00a0001 en la tabla.', en: 'Build the number 40,001 in the table.', ar: 'كوّن العدد 40\u00a0001 في الجدول.' },
         hint: { eu: '4 hamar milakoetan eta 1 unitateetan; beste guztiak 0.', es: 'Un 4 en las decenas de millar y un 1 en las unidades; el resto, 0.', en: 'A 4 in the ten thousands and a 1 in the units; the rest, 0.', ar: '4 في عشرات الآلاف و1 في الآحاد؛ والباقي 0.' },
         isSolved: (state) => state.value === 40001
     },
     {
         id: 2102,
-        prompt: { eu: 'Osatu zenbaki bat non 7 zifrak 70.000 balio duen.', es: 'Forma un número en el que la cifra 7 valga 70.000.', en: 'Build a number in which the digit 7 is worth 70,000.', ar: 'كوّن عددًا تكون فيه قيمة الرقم 7 هي 70.000.' },
-        hint: { eu: '70.000 = 7 hamar milako.', es: '70.000 = 7 decenas de millar.', en: '70,000 = 7 ten thousands.', ar: '70.000 = 7 عشرات آلاف.' },
+        prompt: { eu: 'Osatu zenbaki bat non 7 zifrak 70\u00a0000 balio duen.', es: 'Forma un número en el que la cifra 7 valga 70\u00a0000.', en: 'Build a number in which the digit 7 is worth 70,000.', ar: 'كوّن عددًا تكون فيه قيمة الرقم 7 هي 70\u00a0000.' },
+        hint: { eu: '70\u00a0000 = 7 hamar milako.', es: '70\u00a0000 = 7 decenas de millar.', en: '70,000 = 7 ten thousands.', ar: '70\u00a0000 = 7 عشرات آلاف.' },
         isSolved: (state) => abacusDigits(state.value)[PLACES - 5] === 7
     },
     {
@@ -191,7 +191,7 @@ export const abacusChallenges: LabChallenge<AbacusState>[] = [
     },
     {
         id: 2104,
-        prompt: { eu: 'Osatu 99.999 eta gehitu unitate bat unitateen ▲ botoiarekin. Zer gertatzen da?', es: 'Forma 99.999 y suma una unidad con el ▲ de las unidades. ¿Qué pasa?', en: 'Build 99,999 and add one unit with the ▲ in the units column. What happens?', ar: 'كوّن 99.999 وأضف وحدة بزر ▲ في الآحاد. ماذا يحدث؟' },
+        prompt: { eu: 'Osatu 99\u00a0999 eta gehitu unitate bat unitateen ▲ botoiarekin. Zer gertatzen da?', es: 'Forma 99\u00a0999 y suma una unidad con el ▲ de las unidades. ¿Qué pasa?', en: 'Build 99,999 and add one unit with the ▲ in the units column. What happens?', ar: 'كوّن 99\u00a0999 وأضف وحدة بزر ▲ في الآحاد. ماذا يحدث؟' },
         hint: { eu: 'Lehenik 9 bat zutabe bakoitzean, bosgarrenetik unitateetara.', es: 'Primero un 9 en cada columna, de las decenas de millar a las unidades.', en: 'First a 9 in each column, from the ten thousands to the units.', ar: 'أولًا 9 في كل عمود، من عشرات الآلاف إلى الآحاد.' },
         isSolved: (state) => state.value === 100000 && state.lastPlace === 0
     }
@@ -241,20 +241,20 @@ export const lineChallenges: LabChallenge<LineState>[] = [
     },
     {
         id: 2202,
-        prompt: { eu: '5.000tik 6.000ra 4 zatitan: zein zenbaki dago lehen markan? Idatzi.', es: 'De 5.000 a 6.000 en 4 partes: ¿qué número hay en la primera marca? Escríbelo.', en: 'From 5,000 to 6,000 in 4 parts: what number is on the first mark? Write it down.', ar: 'من 5.000 إلى 6.000 في 4 أجزاء: ما العدد عند العلامة الأولى؟ اكتبه.' },
-        hint: { eu: '1.000 : 4 = 250.', es: '1.000 : 4 = 250.', en: '1,000 : 4 = 250.', ar: '1.000 : 4 = 250.' },
+        prompt: { eu: '5000tik 6000ra 4 zatitan: zein zenbaki dago lehen markan? Idatzi.', es: 'De 5000 a 6000 en 4 partes: ¿qué número hay en la primera marca? Escríbelo.', en: 'From 5,000 to 6,000 in 4 parts: what number is on the first mark? Write it down.', ar: 'من 5000 إلى 6000 في 4 أجزاء: ما العدد عند العلامة الأولى؟ اكتبه.' },
+        hint: { eu: '1000 : 4 = 250.', es: '1000 : 4 = 250.', en: '1,000 : 4 = 250.', ar: '1000 : 4 = 250.' },
         isSolved: (state) => lineIs(state, 5000, 6000, 4) && state.mark === 1 && answered(state, 5250)
     },
     {
         id: 2203,
-        prompt: { eu: 'Egin 0tik 1.000ra doan zuzen bat, salto bakoitza 125 izan dadin.', es: 'Haz una recta de 0 a 1.000 en la que cada salto valga 125.', en: 'Make a number line from 0 to 1,000 where each jump is 125.', ar: 'ارسم مستقيمًا من 0 إلى 1.000 تكون فيه كل قفزة 125.' },
-        hint: { eu: 'Zenbat aldiz sartzen da 125 1.000n?', es: '¿Cuántas veces cabe 125 en 1.000?', en: 'How many times does 125 go into 1,000?', ar: 'كم مرة يدخل 125 في 1.000؟' },
+        prompt: { eu: 'Egin 0tik 1000ra doan zuzen bat, salto bakoitza 125 izan dadin.', es: 'Haz una recta de 0 a 1000 en la que cada salto valga 125.', en: 'Make a number line from 0 to 1,000 where each jump is 125.', ar: 'ارسم مستقيمًا من 0 إلى 1000 تكون فيه كل قفزة 125.' },
+        hint: { eu: 'Zenbat aldiz sartzen da 125 1000n?', es: '¿Cuántas veces cabe 125 en 1000?', en: 'How many times does 125 go into 1,000?', ar: 'كم مرة يدخل 125 في 1000؟' },
         isSolved: (state) => state.from === 0 && state.to === 1000 && lineJump(state) === 125
     },
     {
         id: 2204,
-        prompt: { eu: '2.000.000tik 3.000.000ra 5 salto: zein zenbaki dago 2. markan? Idatzi.', es: 'De 2.000.000 a 3.000.000 en 5 saltos: ¿qué número hay en la 2.ª marca? Escríbelo.', en: 'From 2,000,000 to 3,000,000 in 5 jumps: what number is on the 2nd mark? Write it down.', ar: 'من 2.000.000 إلى 3.000.000 في 5 قفزات: ما العدد عند العلامة الثانية؟ اكتبه.' },
-        hint: { eu: 'Salto bakoitza 200.000 da.', es: 'Cada salto vale 200.000.', en: 'Each jump is 200,000.', ar: 'كل قفزة تساوي 200.000.' },
+        prompt: { eu: '2\u00a0000\u00a0000tik 3\u00a0000\u00a0000ra 5 salto: zein zenbaki dago 2. markan? Idatzi.', es: 'De 2\u00a0000\u00a0000 a 3\u00a0000\u00a0000 en 5 saltos: ¿qué número hay en la 2.ª marca? Escríbelo.', en: 'From 2,000,000 to 3,000,000 in 5 jumps: what number is on the 2nd mark? Write it down.', ar: 'من 2\u00a0000\u00a0000 إلى 3\u00a0000\u00a0000 في 5 قفزات: ما العدد عند العلامة الثانية؟ اكتبه.' },
+        hint: { eu: 'Salto bakoitza 200\u00a0000 da.', es: 'Cada salto vale 200\u00a0000.', en: 'Each jump is 200,000.', ar: 'كل قفزة تساوي 200\u00a0000.' },
         isSolved: (state) => lineIs(state, 2000000, 3000000, 5) && state.mark === 2 && answered(state, 2400000)
     }
 ]
@@ -296,7 +296,7 @@ export const romanChallenges: LabChallenge<RomanState>[] = [
     {
         id: 2301,
         prompt: { eu: 'Idatzi aurtengo urtea, 2026, erromatar zenbakiz.', es: 'Escribe el año 2026 en números romanos.', en: 'Write the year 2026 in Roman numerals.', ar: 'اكتب السنة 2026 بالأرقام الرومانية.' },
-        hint: { eu: '2.000 = MM, 20 = XX, 6 = VI.', es: '2.000 = MM, 20 = XX, 6 = VI.', en: '2,000 = MM, 20 = XX, 6 = VI.', ar: '2.000 = MM، 20 = XX، 6 = VI.' },
+        hint: { eu: '2000 = MM, 20 = XX, 6 = VI.', es: '2000 = MM, 20 = XX, 6 = VI.', en: '2,000 = MM, 20 = XX, 6 = VI.', ar: '2000 = MM، 20 = XX، 6 = VI.' },
         isSolved: (state) => fromRoman(state.written) === 2026
     },
     {
@@ -345,26 +345,26 @@ export function roundTo(value: number, place: number): number {
 export const roundingChallenges: LabChallenge<RoundingState>[] = [
     {
         id: 2401,
-        prompt: { eu: 'Biribildu 26.421 milakoetara eta idatzi emaitza.', es: 'Redondea 26.421 a los millares y escribe el resultado.', en: 'Round 26,421 to the nearest thousand and write the result.', ar: 'قرّب 26.421 إلى الآلاف واكتب النتيجة.' },
+        prompt: { eu: 'Biribildu 26\u00a0421 milakoetara eta idatzi emaitza.', es: 'Redondea 26\u00a0421 a los millares y escribe el resultado.', en: 'Round 26,421 to the nearest thousand and write the result.', ar: 'قرّب 26\u00a0421 إلى الآلاف واكتب النتيجة.' },
         hint: { eu: 'Milakoen eskuinean 4 dago.', es: 'A la derecha de los millares hay un 4.', en: 'To the right of the thousands there is a 4.', ar: 'على يمين الآلاف يوجد 4.' },
         isSolved: (state) => state.value === 26421 && state.place === 1000 && answered(state, 26000)
     },
     {
         id: 2402,
-        prompt: { eu: 'Biribildu 359.481 hamar milakoetara eta idatzi emaitza.', es: 'Redondea 359.481 a las decenas de millar y escribe el resultado.', en: 'Round 359,481 to the nearest ten thousand and write the result.', ar: 'قرّب 359.481 إلى عشرات الآلاف واكتب النتيجة.' },
+        prompt: { eu: 'Biribildu 359\u00a0481 hamar milakoetara eta idatzi emaitza.', es: 'Redondea 359\u00a0481 a las decenas de millar y escribe el resultado.', en: 'Round 359,481 to the nearest ten thousand and write the result.', ar: 'قرّب 359\u00a0481 إلى عشرات الآلاف واكتب النتيجة.' },
         hint: { eu: 'Hamar milakoak: 5. Eskuinean 9.', es: 'Decenas de millar: 5. A su derecha, 9.', en: 'Ten thousands: 5. The digit to its right is 9.', ar: 'عشرات الآلاف: 5. وعلى يمينها 9.' },
         isSolved: (state) => state.value === 359481 && state.place === 10000 && answered(state, 360000)
     },
     {
         id: 2403,
-        prompt: { eu: 'Jarri zenbaki bat erdi-erdian (adibidez, 3.500 milakoetara) eta idatzi nola biribiltzen den.', es: 'Pon un número justo en la mitad (por ejemplo, 3.500 a los millares) y escribe cómo se redondea.', en: 'Choose a number that is exactly halfway (for example, 3,500 to the nearest thousand) and write how it is rounded.', ar: 'ضع عددًا في المنتصف تمامًا (مثل 3.500 إلى الآلاف) واكتب كيف يُقرَّب.' },
+        prompt: { eu: 'Jarri zenbaki bat erdi-erdian (adibidez, 3500 milakoetara) eta idatzi nola biribiltzen den.', es: 'Pon un número justo en la mitad (por ejemplo, 3500 a los millares) y escribe cómo se redondea.', en: 'Choose a number that is exactly halfway (for example, 3,500 to the nearest thousand) and write how it is rounded.', ar: 'ضع عددًا في المنتصف تمامًا (مثل 3500 إلى الآلاف) واكتب كيف يُقرَّب.' },
         hint: { eu: 'Eskuineko zifra 5 da: gora.', es: 'La cifra de la derecha es 5: hacia arriba.', en: 'The digit on the right is 5: round up.', ar: 'الرقم الذي على اليمين 5: نرفع.' },
         isSolved: (state) => state.value % state.place === state.place / 2 && answered(state, roundTo(state.value, state.place))
     },
     {
         id: 2404,
         prompt: { eu: 'Aurkitu zenbaki bat (100en multiploa ez dena), ehunekoetara eta milakoetara biribiltzean emaitza bera ematen duena. Idatzi.', es: 'Encuentra un número (que no sea múltiplo de 100) que al redondearlo a las centenas y a los millares dé lo mismo. Escríbelo.', en: 'Find a number (that is not a multiple of 100) that gives the same result when rounded to the nearest hundred and to the nearest thousand. Write it down.', ar: 'جد عددًا (ليس مضاعفًا لـ 100) يعطي النتيجة نفسها عند تقريبه إلى المئات وإلى الآلاف. اكتبها.' },
-        hint: { eu: 'Probatu 7.980: ehunekoetara 8.000, milakoetara ere bai.', es: 'Prueba con 7.980: a las centenas da 8.000, y a los millares también.', en: 'Try 7,980: to the nearest hundred it gives 8,000, and to the nearest thousand it gives 8,000 too.', ar: 'جرّب 7.980: إلى المئات 8.000، وإلى الآلاف أيضًا.' },
+        hint: { eu: 'Probatu 7980: ehunekoetara 8000, milakoetara ere bai.', es: 'Prueba con 7980: a las centenas da 8000, y a los millares también.', en: 'Try 7,980: to the nearest hundred it gives 8,000, and to the nearest thousand it gives 8,000 too.', ar: 'جرّب 7980: إلى المئات 8000، وإلى الآلاف أيضًا.' },
         isSolved: (state) => state.value % 100 !== 0 && roundTo(state.value, 100) === roundTo(state.value, 1000) && answered(state, roundTo(state.value, state.place))
     }
 ]

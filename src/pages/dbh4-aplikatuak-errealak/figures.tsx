@@ -389,7 +389,7 @@ export function ScientificFigure({ language }: { language: UnitLanguage }) {
         <path key={index} d={`M${x + index * step} ${y} q${step / 2} -18 ${step} 0`} fill="none" stroke={color} strokeWidth={2} />
     ))
     return (
-        <Figure height={290} label={t(say('83 400 000 = 8,34 · 10⁷ eta 0,00052 = 5,2 · 10⁻⁴', '83 400 000 = 8,34 · 10⁷ y 0,00052 = 5,2 · 10⁻⁴', '83 400 000 = 8.34 · 10⁷ و0.00052 = 5.2 · 10⁻⁴', '83,400,000 = 8.34 · 10⁷ and 0.00052 = 5.2 · 10⁻⁴'))}>
+        <Figure height={290} label={t(say('83\u00a0400\u00a0000 = 8,34 · 10⁷ eta 0,00052 = 5,2 · 10⁻⁴', '83\u00a0400\u00a0000 = 8,34 · 10⁷ y 0,00052 = 5,2 · 10⁻⁴', '83\u00a0400\u00a0000 = 8.34 · 10⁷ و0.00052 = 5.2 · 10⁻⁴', '83,400,000 = 8.34 · 10⁷ and 0.00052 = 5.2 · 10⁻⁴'))}>
             <Label x={40} y={40} fontSize={16} fontWeight={700} fill={INK}>{t(say('Zenbaki handiak: koma ezkerrera, berretzaile positiboa', 'Números grandes: la coma a la izquierda, exponente positivo', 'الأعداد الكبيرة: الفاصلة إلى اليسار والأس موجب', 'Large numbers: the decimal point moves left, and the exponent is positive'))}</Label>
             <text x={60} y={96} fontSize={28} fontWeight={700} letterSpacing={4} fill={INK}>83400000</text>
             {hops(87, 66, 7, 19.4, STAGE)}

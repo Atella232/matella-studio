@@ -32,7 +32,7 @@ export const similarityGames: GameInfo<SimilarityGameId>[] = [
         levels: [
             { progressId: 52201, stage: 'thales', title: { eu: 'Tales', es: 'Tales', en: 'Thales', ar: 'طاليس' }, description: { eu: '2/4 = 3/x ↔ x = 6', es: '2/4 = 3/x ↔ x = 6', en: '2/4 = 3/x ↔ x = 6', ar: '2/4 = 3/x ↔ x = 6' } },
             { progressId: 52202, stage: 'ratios', title: { eu: 'Arrazoiak', es: 'Razones', en: 'Ratios', ar: 'النسب' }, description: { eu: 'r = 3 → A ↔ × 9', es: 'r = 3 → A ↔ × 9', en: 'r = 3 → A ↔ × 9', ar: 'r = 3 → A ↔ × 9' } },
-            { progressId: 52203, stage: 'scales', title: { eu: 'Eskalak', es: 'Escalas', en: 'Scales', ar: 'المقاييس' }, description: { eu: '4 cm, 1:50 000 ↔ 2 km', es: '4 cm, 1:50 000 ↔ 2 km', en: '4 cm, 1:50,000 ↔ 2 km', ar: '4 cm, 1:50 000 ↔ 2 km' } }
+            { progressId: 52203, stage: 'scales', title: { eu: 'Eskalak', es: 'Escalas', en: 'Scales', ar: 'المقاييس' }, description: { eu: '4 cm, 1:50\u00a0000 ↔ 2 km', es: '4 cm, 1:50\u00a0000 ↔ 2 km', en: '4 cm, 1:50,000 ↔ 2 km', ar: '4 cm, 1:50\u00a0000 ↔ 2 km' } }
         ]
     },
     {
@@ -53,7 +53,7 @@ export const similarityGames: GameInfo<SimilarityGameId>[] = [
         skills: { eu: 'Eskalak eta unitateak', es: 'Escalas y unidades', en: 'Scales and units', ar: 'المقاييس والوحدات' },
         levels: [
             { progressId: 52401, stage: 'scales', title: { eu: '1 cm = 1 edo 2 km', es: '1 cm = 1 o 2 km', en: '1 cm = 1 or 2 km', ar: '1 cm = 1 أو 2 km' }, description: { eu: 'Zentimetro osoak.', es: 'Centímetros enteros.', en: 'Whole centimetres.', ar: 'سنتيمترات كاملة.' } },
-            { progressId: 52402, stage: 'scales', title: { eu: 'Beste eskala batzuk', es: 'Otras escalas', en: 'Other scales', ar: 'مقاييس أخرى' }, description: { eu: '1 : 50 000 eta 1 : 250 000, erdiekin.', es: '1 : 50 000 y 1 : 250 000, con medios.', en: '1 : 50,000 and 1 : 250,000, with halves.', ar: '1 : 50 000 و1 : 250 000 مع الأنصاف.' } },
+            { progressId: 52402, stage: 'scales', title: { eu: 'Beste eskala batzuk', es: 'Otras escalas', en: 'Other scales', ar: 'مقاييس أخرى' }, description: { eu: '1 : 50\u00a0000 eta 1 : 250\u00a0000, erdiekin.', es: '1 : 50\u00a0000 y 1 : 250\u00a0000, con medios.', en: '1 : 50,000 and 1 : 250,000, with halves.', ar: '1 : 50\u00a0000 و1 : 250\u00a0000 مع الأنصاف.' } },
             { progressId: 52403, stage: 'scales', title: { eu: 'Etxeen planoak', es: 'Planos de casas', en: 'House plans', ar: 'مخططات البيوت' }, description: { eu: '1 : 50, 1 : 100 eta 1 : 200, metrotan.', es: '1 : 50, 1 : 100 y 1 : 200, en metros.', en: '1 : 50, 1 : 100 and 1 : 200, in metres.', ar: '1 : 50 و1 : 100 و1 : 200 بالأمتار.' } }
         ]
     },

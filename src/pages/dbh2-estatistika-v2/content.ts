@@ -42,7 +42,7 @@ const SHELTER = say('Babesleku batean: katu osasuntsuak 12, txakur osasuntsuak 1
 export const statisticsDiagnostic: DiagnosticQuestion[] = [
     {
         id: 1701,
-        prompt: say('12 000 biztanleko herri baten iritzia jakin nahi da. Nori galdetu behar zaio?', 'Se quiere conocer la opinión de un pueblo de 12 000 habitantes. ¿A quién hay que preguntar?', 'نريد معرفة رأي بلدة سكانها 12000 نسمة. مَن نسأل؟', 'You want to find out the opinion of a town with 12,000 inhabitants. Who should you ask?'),
+        prompt: say('12\u00a0000 biztanleko herri baten iritzia jakin nahi da. Nori galdetu behar zaio?', 'Se quiere conocer la opinión de un pueblo de 12\u00a0000 habitantes. ¿A quién hay que preguntar?', 'نريد معرفة رأي بلدة سكانها 12000 نسمة. مَن نسأل؟', 'You want to find out the opinion of a town with 12,000 inhabitants. Who should you ask?'),
         options: [say('Futbol-taldeko jokalariei', 'A los jugadores del equipo de fútbol', 'لاعبي فريق كرة القدم', 'The players on the football team'), say('Zoriz aukeratutako 400 biztanleri', 'A 400 habitantes elegidos al azar', '400 ساكن مختارين عشوائيًا', '400 inhabitants chosen at random'), say('Alkatearen familiari', 'A la familia del alcalde', 'عائلة رئيس البلدية', 'The mayor\'s family')],
         correctIndex: 1,
         explanation: say('Populazioa handia da: lagin bat behar da, zoriz aukeratua. Beste biak lagin alboratuak dira.', 'La población es grande: hace falta una muestra elegida al azar. Las otras dos son muestras sesgadas.', 'المجتمع كبير: نحتاج إلى عيّنة عشوائية. والخياران الآخران عيّنتان متحيّزتان.', 'The population is large, so you need a sample chosen at random. The other two are biased samples.'),

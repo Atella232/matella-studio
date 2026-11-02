@@ -4,7 +4,7 @@ import { Figure, Frac } from '../dbh2-zatikiak-prototype/figures'
 import { Label } from '../dbh2-funtzioak-v2/plane'
 import { Caption, Formula } from '../dbh2-estatistika-v2/figures'
 import { COLORS, INK, LINE, MUTED, PAPER, SECOND, STAGE, STAGE_TINT } from '../dbh2-estatistika-v2/palette'
-import { decimalSeparatorFor, thousandsSeparatorFor } from '../../utils/numberFormat'
+import { decimalSeparatorFor } from '../../utils/numberFormat'
 
 /* ==========================================================================
    Probabilitatea · 4. DBH akademikoak — lesson figures: the tree of three
@@ -27,8 +27,6 @@ const num = (language: UnitLanguage, value: number | string) => {
     return typeof value === 'number' ? String(Math.round(value * 1000) / 1000).replace('.', mark) : value.replace(/,/g, mark)
 }
 
-/** Thousands written with a space in the source: 9 880 is 9.880 in Spanish and Basque, 9,880 in English; Arabic keeps the space */
-const grouped = (language: UnitLanguage, text: string) => text.replace(/(\d) (?=\d)/g, `$1${language === 'ar' ? ' ' : thousandsSeparatorFor(language)}`)
 
 const RED = '#d9502e'
 const GREEN = '#267b53'
@@ -495,8 +493,8 @@ export function CombinationsDeckFigure({ language }: { language: UnitLanguage })
             }))}
             <Label x={190} y={214} textAnchor="middle" fontSize={15} fontWeight={700} fill={GOLD}>{pick(language, say('10 urre, 40 karta', '10 oros, 40 cartas', '10 أوراق ذهب من 40', '10 cards of coins, out of 40'))}</Label>
             <Formula x={530} y={58} size={19} color={GOLD}><Sub letter="C" index="10,3" rest=" = 120" /></Formula>
-            <Formula x={530} y={102} size={19}><Sub letter="C" index="40,3" rest={` = ${grouped(language, '9 880')}`} /></Formula>
-            <Formula x={530} y={150} size={20} color={SECOND}>P = 120/{grouped(language, '9 880')} = 3/247</Formula>
+            <Formula x={530} y={102} size={19}><Sub letter="C" index="40,3" rest={` = ${'9880'}`} /></Formula>
+            <Formula x={530} y={150} size={20} color={SECOND}>P = 120/{'9880'} = 3/247</Formula>
             <Formula x={530} y={196} size={15} color={MUTED}>10/40 · 9/39 · 8/38 = 3/247</Formula>
             <Caption y={262} language={language} text={say('Aldeko kasuak: 10 urreetatik 3 aukeratzea. Kasu posibleak: 40 kartatik 3', 'Casos favorables: elegir 3 de los 10 oros. Casos posibles: 3 de las 40 cartas', 'الحالات الملائمة: اختيار 3 من 10 أوراق ذهب. والممكنة: 3 من 40 ورقة', 'Favourable cases: choose 3 of the 10 cards of coins. Possible cases: 3 of the 40 cards')} size={14} />
             <Caption y={288} language={language} text={say('Biderkadurarekin emaitza bera ateratzen da', 'Con el producto sale lo mismo', 'وبالضرب نحصل على النتيجة نفسها', 'Using the product gives the same result')} size={14} />

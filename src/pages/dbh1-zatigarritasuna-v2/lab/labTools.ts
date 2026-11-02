@@ -195,7 +195,7 @@ export const introSieveChallenges: LabChallenge<SieveState>[] = [
     {
         id: 3404,
         prompt: { eu: 'Osatu bahea lau zenbaki bakarrik sakatuta.', es: 'Completa la criba pulsando solo cuatro números.', en: 'Complete the sieve by pressing only four numbers.', ar: 'أكمل الغربال بالضغط على أربعة أعداد فقط.' },
-        hint: { eu: '7 ondoren ez da ezer berririk ratatzen, 11 · 11 = 121 100 baino handiagoa delako.', es: 'Después del 7 ya no se tacha nada nuevo, porque 11 · 11 = 121 es mayor que 100.', en: 'After 7, nothing new is crossed out, because 11 · 11 = 121 is greater than 100.', ar: 'بعد 7 لا يُشطب شيء جديد لأن 11 · 11 = 121 أكبر من 100.' },
+        hint: { eu: '7 ondoren ez da ezer berririk ratatzen, 11 · 11 = 121\u00a0100 baino handiagoa delako.', es: 'Después del 7 ya no se tacha nada nuevo, porque 11 · 11 = 121 es mayor que 100.', en: 'After 7, nothing new is crossed out, because 11 · 11 = 121 is greater than 100.', ar: 'بعد 7 لا يُشطب شيء جديد لأن 11 · 11 = 121 أكبر من 100.' },
         isSolved: (state) => state.circled.join() === '2,3,5,7' && sieveComplete(state)
     }
 ]

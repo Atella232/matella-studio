@@ -158,7 +158,9 @@ test('zenbaki naturalak: every worked equality in the unit is right', () => {
 test('zenbaki naturalak: the answer of every challenge appears in its explanation', () => {
     for (const item of naturalsChallenges) {
         const value = toNumber(item.expected)
-        const written = String(value).replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-        assert.ok(item.explanation.es.includes(written), `${item.id}: ${written}`)
+        // RAE: a space from five digits (no-break in text, thin in formulas), four digits together
+        const plain = String(value)
+        const written = [plain, plain.replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0'), plain.replace(/\B(?=(\d{3})+(?!\d))/g, '\\,')].filter((form, index) => index === 0 ? plain.length < 5 : plain.length >= 5)
+        assert.ok(written.some((form) => item.explanation.es.includes(form)), `${item.id}: ${written}`)
     }
 })

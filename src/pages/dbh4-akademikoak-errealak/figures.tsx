@@ -267,13 +267,13 @@ export function ChainedFigure({ language }: { language: UnitLanguage }) {
         </g>
     )
     return (
-        <Figure height={266} label={t(say('18 000 € − % 20 + % 21 BEZ = 17 424 €', '18 000 € − 20 % + 21 % de IVA = 17 424 €', '18 000 € − 20 % + 21 % ضريبة = 17 424 €', '€18,000 − 20% + 21% VAT = €17,424'))}>
+        <Figure height={266} label={t(say('18\u00a0000 € − % 20 + % 21 BEZ = 17\u00a0424 €', '18\u00a0000 € − 20 % + 21 % de IVA = 17\u00a0424 €', '18\u00a0000 € − 20 % + 21 % ضريبة = 17\u00a0424 €', '€18,000 − 20% + 21% VAT = €17,424'))}>
             <Label x={40} y={38} fontSize={16} fontWeight={700} fill={INK}>{t(say('Auto bat: % 20ko deskontua eta gero % 21 BEZ', 'Un coche: descuento del 20 % y después 21 % de IVA', 'سيارة: خصم 20 % ثم ضريبة 21 %', 'A car: 20% discount and then 21% VAT'))}</Label>
-            {box(30, '18 000 €', CARD)}
+            {box(30, '18\u00a0000 €', CARD)}
             <Arrow x1={184} x2={276} y={98} label={d('× 0,80')} color={STAGE} />
-            {box(280, '14 400 €', STAGE_TINT)}
+            {box(280, '14\u00a0400 €', STAGE_TINT)}
             <Arrow x1={434} x2={526} y={98} label={d('× 1,21')} />
-            {box(530, '17 424 €', SECOND_TINT)}
+            {box(530, '17\u00a0424 €', SECOND_TINT)}
             <text x={360} y={176} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>{d('0,80 · 1,21 = 0,968')}</text>
             <Label x={360} y={208} textAnchor="middle" fontSize={16} fill={INK}>{t(say('Indizeak biderkatzen dira, ez dira ehunekoak batzen: azkenean % 3,2 merkeago', 'Los índices se multiplican, los porcentajes no se suman: al final, un 3,2 % más barato', 'تُضرب المؤشرات ولا تُجمع النسب: في النهاية أرخص بـ 3.2 %', 'Multipliers are multiplied, percentages are not added: in the end, it is 3.2% cheaper'))}</Label>
             <Caption y={248}>{d(t(say('−20 % + 21 % ≠ +1 %', '−20 % + 21 % ≠ +1 %', '−20 % + 21 % ≠ +1 %', '−20% + 21% ≠ +1%')))}</Caption>

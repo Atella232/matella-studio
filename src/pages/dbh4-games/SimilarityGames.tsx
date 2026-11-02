@@ -407,7 +407,7 @@ function MapPlay({ round, language, onAnswer, answered }: RoundProps<MapRound>) 
                 <RoundVerdict right={right} language={language}>
                     <span className="dbh4-worked">{formula(worked, language)}</span>
                     {round.unit === 'km'
-                        ? l(say('Gogoratu: 1 km = 100 000 cm.', 'Recuerda: 1 km = 100 000 cm.', 'تذكّر: 1 km = 100 000 cm.', 'Remember: 1 km = 100,000 cm.'))
+                        ? l(say('Gogoratu: 1 km = 100\u00a0000 cm.', 'Recuerda: 1 km = 100\u00a0000 cm.', 'تذكّر: 1 km = 100\u00a0000 cm.', 'Remember: 1 km = 100,000 cm.'))
                         : l(say('Gogoratu: 1 m = 100 cm.', 'Recuerda: 1 m = 100 cm.', 'تذكّر: 1 m = 100 cm.', 'Remember: 1 m = 100 cm.'))}
                 </RoundVerdict>
             )}

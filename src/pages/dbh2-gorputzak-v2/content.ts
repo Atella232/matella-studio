@@ -199,7 +199,7 @@ export const solidsPractice: PracticeItem[] = [
     },
     {
         id: 14, stage: 'units',
-        prompt: say('Adierazi 42 000 cm³ dm³-tan.', 'Expresa 42 000 cm³ en dm³.', 'عبّر عن 42000 سم³ بالديسيمتر المكعب.', 'Express 42,000 cm³ in dm³.'),
+        prompt: say('Adierazi 42\u00a0000 cm³ dm³-tan.', 'Expresa 42\u00a0000 cm³ en dm³.', 'عبّر عن 42000 سم³ بالديسيمتر المكعب.', 'Express 42,000 cm³ in dm³.'),
         expected: n(42),
         hint: say('Maila bat igo: zati 1000.', 'Sube un escalón: entre 1000.', 'اصعد درجة: على 1000.', 'Go up one step: divide by 1,000.'),
         explanation: same('$42\\,000\\mathbin{:}1000=42$')

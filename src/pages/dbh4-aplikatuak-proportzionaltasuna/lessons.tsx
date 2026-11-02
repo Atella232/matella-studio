@@ -89,7 +89,7 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
         stage: 'compound',
         title: say('Proportzionaltasun konposatua', 'Proporcionalidad compuesta', 'التناسب المركّب', 'Compound proportion'),
         goal: say('Hiru magnitude edo gehiago dituzten problemak ebaztea, erlazio bakoitza zuzena ala alderantzizkoa den erabakiz.', 'Resolver problemas con tres o más magnitudes, decidiendo si cada relación es directa o inversa.', 'حلّ مسائل فيها ثلاثة مقادير أو أكثر، مع تحديد نوع كل علاقة طرديةً كانت أم عكسية.', 'Solve problems with three or more quantities, deciding whether each relationship is direct or inverse.'),
-        problem: say('5 lokaleko zinema-kate batek 15 000 sarrera saltzen ditu 3 astetan. Zenbat sarrera salduko lituzke astean 7 lokalekin?', 'Una cadena de cines con 5 locales vende 15 000 entradas en 3 semanas. ¿Cuántas entradas vendería a la semana con 7 locales?', 'سلسلة سينما لها 5 صالات تبيع 15000 تذكرة في 3 أسابيع. كم تذكرة تبيع في الأسبوع بـ7 صالات؟', 'A chain of 5 cinemas sells 15,000 tickets in 3 weeks. How many tickets would it sell per week with 7 cinemas?'),
+        problem: say('5 lokaleko zinema-kate batek 15\u00a0000 sarrera saltzen ditu 3 astetan. Zenbat sarrera salduko lituzke astean 7 lokalekin?', 'Una cadena de cines con 5 locales vende 15\u00a0000 entradas en 3 semanas. ¿Cuántas entradas vendería a la semana con 7 locales?', 'سلسلة سينما لها 5 صالات تبيع 15000 تذكرة في 3 أسابيع. كم تذكرة تبيع في الأسبوع بـ7 صالات؟', 'A chain of 5 cinemas sells 15,000 tickets in 3 weeks. How many tickets would it sell per week with 7 cinemas?'),
         stepsKind: 'steps',
         steps: [
             { text: say('Lokal gehiago → sarrera gehiago: zuzena.', 'Más locales → más entradas: directa.', 'صالات أكثر ← تذاكر أكثر: طردي.', 'More cinemas → more tickets: direct.'), math: same('$\\frac{7}{5}$') },
@@ -169,7 +169,7 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
         stage: 'percent',
         title: say('Ehuneko kateatuak', 'Porcentajes encadenados', 'النسب المتتالية', 'Chained percentages'),
         goal: say('Jarraian egiten diren aldaketak indizeak biderkatuz kalkulatzea eta aldakuntza osoa interpretatzea.', 'Calcular cambios sucesivos multiplicando los índices e interpretar la variación total.', 'حساب تغيّرات متتالية بضرب المؤشرات وتفسير التغيّر الكلي.', 'Calculate successive changes by multiplying the multipliers and interpret the overall change.'),
-        problem: say('Auto batek 15 000 € balio du. Matrikulatzean % 18 galtzen du, eta gero % 10 urtero. Zenbat balio du hirugarren urtearen amaieran?', 'Un coche vale 15 000 €. Al matricularlo pierde un 18 % y luego un 10 % cada año. ¿Cuánto vale al final del tercer año?', 'ثمن سيارة 15000 €. تخسر 18٪ عند تسجيلها ثم 10٪ كل سنة. كم ثمنها في نهاية السنة الثالثة؟', 'A car is worth €15,000. When it is registered, it loses 18%, and then 10% every year. How much is it worth at the end of the third year?'),
+        problem: say('Auto batek 15\u00a0000 € balio du. Matrikulatzean % 18 galtzen du, eta gero % 10 urtero. Zenbat balio du hirugarren urtearen amaieran?', 'Un coche vale 15\u00a0000 €. Al matricularlo pierde un 18 % y luego un 10 % cada año. ¿Cuánto vale al final del tercer año?', 'ثمن سيارة 15000 €. تخسر 18٪ عند تسجيلها ثم 10٪ كل سنة. كم ثمنها في نهاية السنة الثالثة؟', 'A car is worth €15,000. When it is registered, it loses 18%, and then 10% every year. How much is it worth at the end of the third year?'),
         stepsKind: 'steps',
         steps: [
             { text: say('Indizeak.', 'Los índices.', 'المؤشرات.', 'The multipliers.'), math: same('$0{,}82\\cdot 0{,}9^{3}=0{,}59778$') },
@@ -193,7 +193,7 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('120 €.', '120 €.', '120 €.', '€120.'), math: same('$\\frac{144\\,000}{1200}=120$') }
         ],
         example: same('$\\frac{448{,}80\\cdot 1200}{3{,}2\\cdot 9}=18\\,700$'),
-        takeaway: say('Zatitzailea: urteak, 100; hilabeteak, 1200; egunak, 36 000.', 'Años: entre 100. Meses: entre 1200. Días: entre 36 000.', 'السنوات: على 100. الأشهر: على 1200. الأيام: على 36000.', 'Years: divide by 100. Months: divide by 1200. Days: divide by 36,000.'),
+        takeaway: say('Zatitzailea: urteak, 100; hilabeteak, 1200; egunak, 36\u00a0000.', 'Años: entre 100. Meses: entre 1200. Días: entre 36\u00a0000.', 'السنوات: على 100. الأشهر: على 1200. الأيام: على 36000.', 'Years: divide by 100. Months: divide by 1200. Days: divide by 36,000.'),
         figure: (language) => <InterestFigure language={language} />
     },
     {
@@ -201,7 +201,7 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
         stage: 'interest',
         title: say('Interes konposatua', 'El interés compuesto', 'الفائدة المركّبة', 'Compound interest'),
         goal: say('Interes konposatuko amaierako kapitala eta hasierako kapitala kalkulatzea.', 'Calcular el capital final y el capital inicial en el interés compuesto.', 'حساب رأس المال النهائي ورأس المال الأصلي في الفائدة المركّبة.', 'Calculate the final amount and the starting principal in compound interest.'),
-        problem: say('10 000 € jartzen dira interes konposatuan, tasa % 5 dela, 3 urtez. Zenbat diru egongo da amaieran?', 'Se colocan 10 000 € al 5 % de interés compuesto durante 3 años. ¿Cuánto dinero habrá al final?', 'أودعنا 10000 € بفائدة مركّبة 5٪ مدة 3 سنوات. كم يصبح المبلغ في النهاية؟', '€10,000 is invested at 5% compound interest for 3 years. How much money will there be at the end?'),
+        problem: say('10\u00a0000 € jartzen dira interes konposatuan, tasa % 5 dela, 3 urtez. Zenbat diru egongo da amaieran?', 'Se colocan 10\u00a0000 € al 5 % de interés compuesto durante 3 años. ¿Cuánto dinero habrá al final?', 'أودعنا 10000 € بفائدة مركّبة 5٪ مدة 3 سنوات. كم يصبح المبلغ في النهاية؟', '€10,000 is invested at 5% compound interest for 3 years. How much money will there be at the end?'),
         stepsKind: 'steps',
         steps: [
             { text: say('Indizea.', 'El índice.', 'المؤشر.', 'The multiplier.'), math: same('$1+\\frac{5}{100}=1{,}05$') },
@@ -217,7 +217,7 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
         stage: 'interest',
         title: say('Kapitalizazio-aldiak', 'Periodos de capitalización', 'فترات الرسملة', 'Compounding periods'),
         goal: say('Interesak urtean $k$ aldiz (seihilekoz, hiruhilekoz, hilero) metatzen direnean amaierako kapitala kalkulatzea.', 'Calcular el capital final cuando los intereses se acumulan $k$ veces al año (semestral, trimestral, mensualmente).', 'حساب رأس المال النهائي عندما تُضاف الفوائد $k$ مرات في السنة (نصف سنويًا، ربع سنويًا، شهريًا).', 'Calculate the final amount when interest is added $k$ times a year (every six months, quarterly, monthly).'),
-        problem: say('10 000 € urte batez, tasa % 12 dela, interesak hiruhilekoz metatuz. Zenbat diru amaieran?', '10 000 € al 12 % durante un año, con intereses trimestrales. ¿Cuánto dinero al final?', '10000 € بفائدة 12٪ مدة سنة، مع إضافة الفوائد كل ربع سنة. كم يصبح المبلغ؟', '€10,000 at 12% for one year, with quarterly interest. How much money is there at the end?'),
+        problem: say('10\u00a0000 € urte batez, tasa % 12 dela, interesak hiruhilekoz metatuz. Zenbat diru amaieran?', '10\u00a0000 € al 12 % durante un año, con intereses trimestrales. ¿Cuánto dinero al final?', '10000 € بفائدة 12٪ مدة سنة، مع إضافة الفوائد كل ربع سنة. كم يصبح المبلغ؟', '€10,000 at 12% for one year, with quarterly interest. How much money is there at the end?'),
         stepsKind: 'steps',
         steps: [
             { text: say('Hiruhileko bakoitzean.', 'En cada trimestre.', 'في كل ربع سنة.', 'Each quarter.'), math: same('$\\frac{12}{4}=3$') },

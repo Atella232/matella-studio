@@ -7,9 +7,9 @@ const toAsciiDigits = (text: string) => text
     .replace(/[۰-۹]/g, (digit) => String(digit.charCodeAt(0) - 0x06f0))
 
 /**
- * In class large numbers are written with a point every three digits
- * (15.000). There are no decimals in this unit, so "15.000", "15 000" or
- * "15,000" all mean fifteen thousand.
+ * The site groups large numbers with a space (15 000, RAE), and in class
+ * they are often written with a point (15.000). There are no decimals in
+ * this unit, so "15 000", "15.000" or "15,000" all mean fifteen thousand.
  */
 export function readNaturalAnswer(input: string): string {
     const written = toAsciiDigits(input).trim()

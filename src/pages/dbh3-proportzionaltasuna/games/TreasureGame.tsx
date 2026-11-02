@@ -97,7 +97,7 @@ export function TreasureGame({ language, records, onResult, onExit }: GameProps)
                 howTo={(
                     <ul className="fraction-v2-game-rules">
                         <li>{l({ eu: 'Mapako eskalak dio zenbat balio duen cm batek benetan.', es: 'La escala del mapa dice cuánto vale en la realidad cada cm.', en: 'The map\'s scale says how much each cm is worth in real life.', ar: 'يقول مقياس الخريطة كم يساوي كل سنتيمتر في الحقيقة.' })}</li>
-                        <li>{l({ eu: 'Kontuz unitateekin: 1 m = 100 cm eta 1 km = 100 000 cm.', es: 'Cuidado con las unidades: 1 m = 100 cm y 1 km = 100 000 cm.', en: 'Careful with units: 1 m = 100 cm and 1 km = 100,000 cm.', ar: 'انتبه للوحدات: 1 م = 100 سم و1 كم = 100000 سم.' })}</li>
+                        <li>{l({ eu: 'Kontuz unitateekin: 1 m = 100 cm eta 1 km = 100\u00a0000 cm.', es: 'Cuidado con las unidades: 1 m = 100 cm y 1 km = 100\u00a0000 cm.', en: 'Careful with units: 1 m = 100 cm and 1 km = 100,000 cm.', ar: 'انتبه للوحدات: 1 م = 100 سم و1 كم = 100000 سم.' })}</li>
                         <li>{l({ eu: `${TREASURE_ROUNDS} mapa; saiakera bat bakoitzean.`, es: `${TREASURE_ROUNDS} mapas; un intento en cada uno.`, en: `${TREASURE_ROUNDS} maps; one try for each.`, ar: `${TREASURE_ROUNDS} خرائط؛ محاولة واحدة لكل خريطة.` })}</li>
                     </ul>
                 )}

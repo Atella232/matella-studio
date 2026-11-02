@@ -273,8 +273,8 @@ export function TableDeviationFigure({ language }: { language: UnitLanguage }) {
 
 export function VariationFigure({ language }: { language: UnitLanguage }) {
     const firms = [
-        { name: 'A', mean: '100 000 €', sigma: '12 500 €', share: 0.125, cv: '12,5' },
-        { name: 'B', mean: '15 000 €', sigma: '2 500 €', share: 2500 / 15000, cv: '16,7' }
+        { name: 'A', mean: '100\u00a0000 €', sigma: '12\u00a0500 €', share: 0.125, cv: '12,5' },
+        { name: 'B', mean: '15\u00a0000 €', sigma: '2500 €', share: 2500 / 15000, cv: '16,7' }
     ]
     const left = 120
     const width = 320

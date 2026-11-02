@@ -60,7 +60,7 @@ export function Gear({ cx, cy, radius, teeth, angle = 0, color, tint }: { cx: nu
 export function ScaleFigure({ language }: { language: UnitLanguage }) {
     // 1 cm on the map is drawn 40 px; the route measures 3 cm
     return (
-        <Board height={220} label={pickText(language, say('1:50 000 eskalako mapa: 3 cm = 1,5 km', 'Mapa a escala 1:50 000: 3 cm = 1,5 km', 'خريطة بمقياس 1:50000: ‏3 سم = 1.5 كم', 'Map at a scale of 1:50,000: 3 cm = 1.5 km'))}>
+        <Board height={220} label={pickText(language, say('1:50\u00a0000 eskalako mapa: 3 cm = 1,5 km', 'Mapa a escala 1:50\u00a0000: 3 cm = 1,5 km', 'خريطة بمقياس 1:50000: ‏3 سم = 1.5 كم', 'Map at a scale of 1:50,000: 3 cm = 1.5 km'))}>
             <rect x={14} y={10} width={332} height={128} rx={10} fill={STAGE_TINT} stroke={INK} strokeWidth={1.6} />
             <path d="M40 112 C 90 40, 160 130, 230 70 S 320 40, 330 30" fill="none" stroke={MUTED} strokeWidth={3} strokeDasharray="2 6" strokeLinecap="round" />
             <circle cx={70} cy={96} r={9} fill={STAGE} stroke={INK} strokeWidth={1.5} />
@@ -80,7 +80,7 @@ export function ScaleFigure({ language }: { language: UnitLanguage }) {
             <text x={200} y={180} textAnchor="middle" fontSize={13} fill={INK}>2</text>
             <text x={232} y={180} fontSize={13} fill={MUTED}>km</text>
             <text x={300} y={163} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{language === 'en' ? '1 : 50,000' : '1 : 50 000'}</text>
-            <Caption y={208} language={language} text={say('Mapako 1 cm = 50 000 cm = 500 m', '1 cm del mapa = 50 000 cm = 500 m', '1 سم على الخريطة = 500 م', '1 cm on the map = 50,000 cm = 500 m')} />
+            <Caption y={208} language={language} text={say('Mapako 1 cm = 50\u00a0000 cm = 500 m', '1 cm del mapa = 50\u00a0000 cm = 500 m', '1 سم على الخريطة = 500 م', '1 cm on the map = 50,000 cm = 500 m')} />
         </Board>
     )
 }

@@ -79,7 +79,7 @@ export function PeriodsFigure({ language }: { language: UnitLanguage }) {
         { k: '12', name: say('hilekoa', 'mensual', 'شهرية', 'monthly'), formula: '10 000 · 1,01¹²', total: '11 268,25' }
     ]
     return (
-        <Figure height={310} label={pick(language, say('10 000 € % 12an urte batez, k = 1, 2, 4, 12', '10 000 € al 12 % un año, k = 1, 2, 4, 12', '10000 € بفائدة 12٪ سنة واحدة، k = 1، 2، 4، 12', '€10,000 at 12% for one year, k = 1, 2, 4, 12'))}>
+        <Figure height={310} label={pick(language, say('10\u00a0000 € % 12an urte batez, k = 1, 2, 4, 12', '10\u00a0000 € al 12 % un año, k = 1, 2, 4, 12', '10000 € بفائدة 12٪ سنة واحدة، k = 1، 2، 4، 12', '€10,000 at 12% for one year, k = 1, 2, 4, 12'))}>
             {['k', '', 'C · (1 + r/100k)ᵏ', '€'].map((head, index) => (
                 <text key={index} x={[70, 190, 400, 610][index]} y={30} textAnchor="middle" fontSize={16} fontWeight={700} fill={MUTED}>{head}</text>
             ))}

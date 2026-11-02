@@ -175,12 +175,12 @@ export function ShareDaysFigure({ language }: { language: UnitLanguage }) {
 
 export function InverseShareFigure({ language }: { language: UnitLanguage }) {
     const places = [
-        { place: '1.', share: 6, amount: '12 000 €', color: '#c9a227' },
+        { place: '1.', share: 6, amount: '12\u00a0000 €', color: '#c9a227' },
         { place: '2.', share: 3, amount: '6000 €', color: '#9aa3ad' },
         { place: '3.', share: 2, amount: '4000 €', color: '#b5713b' }
     ]
     return (
-        <Figure height={280} label={pick(language, say('22 000 € postuarekiko alderantziz: 12 000, 6000 eta 4000 €', '22 000 € inversamente al puesto: 12 000, 6000 y 4000 €', '22000 € عكسيًا مع الترتيب: 12000 و6000 و4000 €', '€22,000 in inverse proportion to position: €12,000, €6,000 and €4,000'))}>
+        <Figure height={280} label={pick(language, say('22\u00a0000 € postuarekiko alderantziz: 12\u00a0000, 6000 eta 4000 €', '22\u00a0000 € inversamente al puesto: 12\u00a0000, 6000 y 4000 €', '22000 € عكسيًا مع الترتيب: 12000 و6000 و4000 €', '€22,000 in inverse proportion to position: €12,000, €6,000 and €4,000'))}>
             {places.map((item, index) => {
                 const x = 90 + index * 150
                 const height = item.share * 26

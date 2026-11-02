@@ -41,8 +41,8 @@ export const divisibilityGames: GameInfo<DivisibilityGameId>[] = [
         skills: { eu: 'Biderkagai lehenak', es: 'Factores primos', en: 'Prime factors', ar: 'العوامل الأولية' },
         levels: [
             { progressId: 2301, stage: 'primes', title: { eu: '100 arte', es: 'Hasta 100', en: 'Up to 100', ar: 'حتى 100' }, description: { eu: '2, 3 eta 5 lehenak.', es: 'Primos 2, 3 y 5.', en: 'Primes 2, 3 and 5.', ar: 'الأعداد الأولية 2 و3 و5.' } },
-            { progressId: 2302, stage: 'primes', title: { eu: '1 000 arte', es: 'Hasta 1 000', en: 'Up to 1,000', ar: 'حتى 1 000' }, description: { eu: '7 ere agertzen da.', es: 'También aparece el 7.', en: '7 also appears.', ar: 'ويظهر 7 أيضًا.' } },
-            { progressId: 2303, stage: 'primes', title: { eu: 'Zenbaki handiak', es: 'Números grandes', en: 'Large numbers', ar: 'أعداد كبيرة' }, description: { eu: '11 eta 13 ere bai, 10 000 arte.', es: 'También 11 y 13, hasta 10 000.', en: '11 and 13 too, up to 10,000.', ar: 'و11 و13 أيضًا، حتى 10 000.' } }
+            { progressId: 2302, stage: 'primes', title: { eu: '1000 arte', es: 'Hasta 1000', en: 'Up to 1,000', ar: 'حتى 1000' }, description: { eu: '7 ere agertzen da.', es: 'También aparece el 7.', en: '7 also appears.', ar: 'ويظهر 7 أيضًا.' } },
+            { progressId: 2303, stage: 'primes', title: { eu: 'Zenbaki handiak', es: 'Números grandes', en: 'Large numbers', ar: 'أعداد كبيرة' }, description: { eu: '11 eta 13 ere bai, 10\u00a0000 arte.', es: 'También 11 y 13, hasta 10\u00a0000.', en: '11 and 13 too, up to 10,000.', ar: 'و11 و13 أيضًا، حتى 10\u00a0000.' } }
         ]
     },
     {

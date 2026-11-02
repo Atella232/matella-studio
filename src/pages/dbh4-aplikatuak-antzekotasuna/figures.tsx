@@ -278,7 +278,7 @@ export function ScaleFigure({ language }: { language: UnitLanguage }) {
     const P: Point = [140, 190]
     const Q: Point = [380, 110]
     return (
-        <Figure height={300} label={pick(language, say('1:50 000 eskalako mapa: 4 cm mapan 2 km dira errealitatean', 'Mapa a escala 1:50 000: 4 cm en el mapa son 2 km en la realidad', 'خريطة بمقياس 1:50 000: 4 سم في الخريطة هي 2 كم في الواقع', 'Map with scale 1:50,000: 4 cm on the map are 2 km in reality'))}>
+        <Figure height={300} label={pick(language, say('1:50\u00a0000 eskalako mapa: 4 cm mapan 2 km dira errealitatean', 'Mapa a escala 1:50\u00a0000: 4 cm en el mapa son 2 km en la realidad', 'خريطة بمقياس 1:50\u00a0000: 4 سم في الخريطة هي 2 كم في الواقع', 'Map with scale 1:50,000: 4 cm on the map are 2 km in reality'))}>
             <rect x={60} y={40} width={400} height={200} rx={10} fill={MINT} stroke={INK} strokeWidth={2} />
             <path d="M60 170 C 160 140, 220 220, 330 180 S 430 120, 460 140" fill="none" stroke={STAGE} strokeWidth={6} strokeOpacity={0.5} />
             <Line a={P} b={Q} color={SECOND} width={2.6} dashed />
@@ -289,7 +289,7 @@ export function ScaleFigure({ language }: { language: UnitLanguage }) {
             <rect x={130} y={210} width={50} height={8} fill={PAPER} stroke={INK} strokeWidth={1} />
             <Tag p={[200, 214]} anchor="start" size={13}>{grouped(language, '1 : 50 000')}</Tag>
             <Formula x={590} y={120}>{grouped(language, '4 · 50 000 =')}</Formula>
-            <Formula x={590} y={150}>{grouped(language, '200 000 cm')}</Formula>
+            <Formula x={590} y={150}>{grouped(language, '200\u00a0000 cm')}</Formula>
             <Formula x={590} y={186} color={SECOND}>= 2 km</Formula>
             <Caption x={360} y={284} language={language} text={say('Errealitatea = mapa · n', 'Realidad = mapa · n', 'الواقع = الخريطة · n', 'Real life = map · n')} size={14} />
         </Figure>
@@ -300,7 +300,7 @@ export function ScaleFigure({ language }: { language: UnitLanguage }) {
 
 export function PlanFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={300} label={pick(language, say('1:100 eskalako planoa: 5 cm × 4 cm = 5 m × 4 m; azalera 10 000 bider', 'Plano a escala 1:100: 5 cm × 4 cm = 5 m × 4 m; el área, 10 000 veces', 'مخطط بمقياس 1:100: 5 سم × 4 سم = 5 م × 4 م؛ والمساحة 10 000 مرة', 'Plan with scale 1:100: 5 cm × 4 cm = 5 m × 4 m; the area, 10,000 times'))}>
+        <Figure height={300} label={pick(language, say('1:100 eskalako planoa: 5 cm × 4 cm = 5 m × 4 m; azalera 10\u00a0000 bider', 'Plano a escala 1:100: 5 cm × 4 cm = 5 m × 4 m; el área, 10\u00a0000 veces', 'مخطط بمقياس 1:100: 5 سم × 4 سم = 5 م × 4 م؛ والمساحة 10\u00a0000 مرة', 'Plan with scale 1:100: 5 cm × 4 cm = 5 m × 4 m; the area, 10,000 times'))}>
             <rect x={70} y={50} width={250} height={200} fill={PAPER} stroke={INK} strokeWidth={5} />
             <line x1={190} y1={50} x2={190} y2={140} stroke={INK} strokeWidth={4} />
             <path d="M190 180 A40 40 0 0 1 230 140" fill="none" stroke={MUTED} strokeWidth={1.4} strokeDasharray="4 3" />
@@ -311,7 +311,7 @@ export function PlanFigure({ language }: { language: UnitLanguage }) {
             <Formula x={530} y={100}>5 · 100 = 500 cm = 5 m</Formula>
             <Formula x={530} y={130}>4 · 100 = 400 cm = 4 m</Formula>
             <Formula x={530} y={180} color={STAGE}>20 cm² → 20 m²</Formula>
-            <Caption x={530} y={212} language={language} text={say('Azalera: × 100² = × 10 000', 'Área: × 100² = × 10 000', 'المساحة: × 100² = × 10 000', 'Area: × 100² = × 10,000')} color={STAGE} size={14} />
+            <Caption x={530} y={212} language={language} text={say('Azalera: × 100² = × 10\u00a0000', 'Área: × 100² = × 10\u00a0000', 'المساحة: × 100² = × 10\u00a0000', 'Area: × 100² = × 10,000')} color={STAGE} size={14} />
         </Figure>
     )
 }

@@ -107,7 +107,7 @@ export function NaturalsMemoryGame({ language, records, onResult, onExit }: Game
                 howTo={(
                     <ul className="fraction-v2-game-rules">
                         <li>{l({ eu: 'Buelta eman kartei eta aurkitu balio bera duten bikoteak (edo hirukoteak).', es: 'Da la vuelta a las cartas y encuentra las parejas (o tríos) con el mismo valor.', en: 'Turn the cards over and find the pairs (or trios) with the same value.', ar: 'اقلب البطاقات وجد الأزواج (أو الثلاثيات) ذات القيمة نفسها.' })}</li>
-                        <li>{l({ eu: 'Kontuz tranpekin: IX eta XI, 2³ eta 3², 3.402 eta 3.042 elkarrekin egon daitezke taulan.', es: 'Cuidado con las trampas: IX y XI, 2³ y 3², 3.402 y 3.042 pueden estar juntos en el tablero.', en: 'Watch out for traps: IX and XI, 2³ and 3², 3,402 and 3,042 can be on the board together.', ar: 'احذر الفخاخ: قد توجد IX وXI، و2³ و3²، و3.402 و3.042 معًا على اللوحة.' })}</li>
+                        <li>{l({ eu: 'Kontuz tranpekin: IX eta XI, 2³ eta 3², 3402 eta 3042 elkarrekin egon daitezke taulan.', es: 'Cuidado con las trampas: IX y XI, 2³ y 3², 3402 y 3042 pueden estar juntos en el tablero.', en: 'Watch out for traps: IX and XI, 2³ and 3², 3,402 and 3,042 can be on the board together.', ar: 'احذر الفخاخ: قد توجد IX وXI، و2³ و3²، و3402 و3042 معًا على اللوحة.' })}</li>
                         <li>{l({ eu: 'Zenbat eta txanda gutxiago, orduan eta izar gehiago.', es: 'Cuantos menos turnos, más estrellas.', en: 'The fewer turns, the more stars.', ar: 'كلما قلت الأدوار زادت النجوم.' })}</li>
                     </ul>
                 )}

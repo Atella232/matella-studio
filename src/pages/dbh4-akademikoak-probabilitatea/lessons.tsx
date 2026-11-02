@@ -316,7 +316,7 @@ export const probabilityAkTopics: UnitTopic[] = [
         problem: say('40 kartako sorta batetik 3 karta ateratzen dira batera. Kalkulatu bi eratara hirurak urreak izateko probabilitatea (10 urre daude).', 'Se sacan 3 cartas a la vez de una baraja de 40. Calcula de dos formas la probabilidad de que las tres sean oros (hay 10 oros).', 'تُسحب 3 أوراق معًا من مجموعة 40 ورقة. احسب بطريقتين احتمال أن تكون الثلاث من الذهب (هناك 10 أوراق ذهب).', 'Three cards are drawn at once from a 40-card deck. Calculate in two ways the probability that all three are coins (there are 10 cards of coins).'),
         stepsKind: 'steps',
         steps: [
-            { text: say('Kasu posibleak eta aldekoak.', 'Casos posibles y favorables.', 'الحالات الممكنة والملائمة.', 'Possible and favourable outcomes.'), math: same('$\\text{C}_{40,3}=9\\,880\\qquad\\text{C}_{10,3}=120$') },
+            { text: say('Kasu posibleak eta aldekoak.', 'Casos posibles y favorables.', 'الحالات الممكنة والملائمة.', 'Possible and favourable outcomes.'), math: same('$\\text{C}_{40,3}=9880\\qquad\\text{C}_{10,3}=120$') },
             { text: say('Laplace.', 'Laplace.', 'لابلاس.', 'Laplace\'s rule.'), math: same('$\\frac{120}{9\\,880}=\\frac{3}{247}$') },
             { text: say('Biderkadurarekin, itzuli gabe.', 'Con el producto, sin devolver.', 'بالضرب دون إرجاع.', 'Using the product, without replacement.'), math: same('$\\frac{10}{40}\\cdot\\frac{9}{39}\\cdot\\frac{8}{38}=\\frac{720}{59\\,280}=\\frac{3}{247}$') }
         ],

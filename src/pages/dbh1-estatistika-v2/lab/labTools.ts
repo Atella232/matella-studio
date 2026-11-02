@@ -401,7 +401,7 @@ export const diceChallenges: LabChallenge<DiceState>[] = [
     },
     {
         id: 11504,
-        prompt: { eu: '1.000 jaurtiketa edo gehiagorekin, lortu maiztasun erlatiboa probabilitatetik 0,05 baino gutxiagora egotea.', es: 'Con 1.000 lanzamientos o más, consigue que la frecuencia relativa quede a menos de 0,05 de la probabilidad.', en: 'With 1,000 rolls or more, get the relative frequency within 0.05 of the probability.', ar: 'مع 1000 رمية أو أكثر اجعل التكرار النسبي على بعد أقل من 0.05 من الاحتمال.' },
+        prompt: { eu: '1000 jaurtiketa edo gehiagorekin, lortu maiztasun erlatiboa probabilitatetik 0,05 baino gutxiagora egotea.', es: 'Con 1000 lanzamientos o más, consigue que la frecuencia relativa quede a menos de 0,05 de la probabilidad.', en: 'With 1,000 rolls or more, get the relative frequency within 0.05 of the probability.', ar: 'مع 1000 رمية أو أكثر اجعل التكرار النسبي على بعد أقل من 0.05 من الاحتمال.' },
         hint: { eu: 'Jaurti askotan: maiztasuna probabilitatera hurbiltzen da.', es: 'Lanza muchas veces: la frecuencia se acerca a la probabilidad.', en: 'Roll many times: the frequency gets closer to the probability.', ar: 'ارمِ مرات كثيرة: يقترب التكرار من الاحتمال.' },
         isSolved: (state) => {
             const frequency = eventFrequency(state)

@@ -156,9 +156,9 @@ export const divisibilityTopics: UnitTopic[] = [
         },
         stepsKind: 'facts',
         steps: [
-            { title: { eu: '2rekin', es: 'Por 2', en: 'By 2', ar: 'على 2' }, text: { eu: 'Azken zifra bikoitia bada: 0, 2, 4, 6 edo 8.', es: 'Si la última cifra es par: 0, 2, 4, 6 u 8.', en: 'If the last digit is even: 0, 2, 4, 6 or 8.', ar: 'إذا كان الرقم الأخير زوجيًا: 0 أو 2 أو 4 أو 6 أو 8.' }, math: '$3\\,232\\ \\checkmark\\qquad 3\\,235\\ \\times$' },
-            { title: { eu: '5ekin', es: 'Por 5', en: 'By 5', ar: 'على 5' }, text: { eu: 'Azken zifra 0 edo 5 bada.', es: 'Si la última cifra es 0 o 5.', en: 'If the last digit is 0 or 5.', ar: 'إذا كان الرقم الأخير 0 أو 5.' }, math: '$3\\,235\\ \\checkmark\\qquad 3\\,232\\ \\times$' },
-            { title: { eu: '10ekin', es: 'Por 10', en: 'By 10', ar: 'على 10' }, text: { eu: 'Azken zifra 0 bada. 10ekin zatigarria dena 2rekin eta 5ekin ere bada.', es: 'Si la última cifra es 0. Lo que es divisible por 10 también lo es por 2 y por 5.', en: 'If the last digit is 0. Anything divisible by 10 is also divisible by 2 and by 5.', ar: 'إذا كان الرقم الأخير 0. وما يقبل القسمة على 10 يقبلها على 2 و5 أيضًا.' }, math: '$3\\,230\\ \\checkmark\\qquad 3\\,232\\ \\times$' }
+            { title: { eu: '2rekin', es: 'Por 2', en: 'By 2', ar: 'على 2' }, text: { eu: 'Azken zifra bikoitia bada: 0, 2, 4, 6 edo 8.', es: 'Si la última cifra es par: 0, 2, 4, 6 u 8.', en: 'If the last digit is even: 0, 2, 4, 6 or 8.', ar: 'إذا كان الرقم الأخير زوجيًا: 0 أو 2 أو 4 أو 6 أو 8.' }, math: '$3232\\ \\checkmark\\qquad 3235\\ \\times$' },
+            { title: { eu: '5ekin', es: 'Por 5', en: 'By 5', ar: 'على 5' }, text: { eu: 'Azken zifra 0 edo 5 bada.', es: 'Si la última cifra es 0 o 5.', en: 'If the last digit is 0 or 5.', ar: 'إذا كان الرقم الأخير 0 أو 5.' }, math: '$3235\\ \\checkmark\\qquad 3232\\ \\times$' },
+            { title: { eu: '10ekin', es: 'Por 10', en: 'By 10', ar: 'على 10' }, text: { eu: 'Azken zifra 0 bada. 10ekin zatigarria dena 2rekin eta 5ekin ere bada.', es: 'Si la última cifra es 0. Lo que es divisible por 10 también lo es por 2 y por 5.', en: 'If the last digit is 0. Anything divisible by 10 is also divisible by 2 and by 5.', ar: 'إذا كان الرقم الأخير 0. وما يقبل القسمة على 10 يقبلها على 2 و5 أيضًا.' }, math: '$3230\\ \\checkmark\\qquad 3232\\ \\times$' }
         ],
         example: '$370\\mathbin{:}\\ \\text{2 } \\checkmark\\quad \\text{5 } \\checkmark\\quad \\text{10 } \\checkmark$',
         takeaway: {
@@ -186,8 +186,8 @@ export const divisibilityTopics: UnitTopic[] = [
         },
         stepsKind: 'facts',
         steps: [
-            { title: { eu: '3rekin', es: 'Por 3', en: 'By 3', ar: 'على 3' }, text: { eu: 'Zifren batura 3ren multiploa bada: 3, 6, 9, 12, 15…', es: 'Si la suma de sus cifras es múltiplo de 3: 3, 6, 9, 12, 15…', en: 'If the sum of its digits is a multiple of 3: 3, 6, 9, 12, 15…', ar: 'إذا كان مجموع أرقامه مضاعفًا لـ 3: 3، 6، 9، 12، 15…' }, math: '$3\\,234\\mathbin{:}\\ 3+2+3+4=12\\ \\checkmark$' },
-            { title: { eu: '9rekin', es: 'Por 9', en: 'By 9', ar: 'على 9' }, text: { eu: 'Zifren batura 9ren multiploa bada: 9, 18, 27…', es: 'Si la suma de sus cifras es múltiplo de 9: 9, 18, 27…', en: 'If the sum of its digits is a multiple of 9: 9, 18, 27…', ar: 'إذا كان مجموع أرقامه مضاعفًا لـ 9: 9، 18، 27…' }, math: '$5\\,013\\mathbin{:}\\ 5+0+1+3=9\\ \\checkmark$' },
+            { title: { eu: '3rekin', es: 'Por 3', en: 'By 3', ar: 'على 3' }, text: { eu: 'Zifren batura 3ren multiploa bada: 3, 6, 9, 12, 15…', es: 'Si la suma de sus cifras es múltiplo de 3: 3, 6, 9, 12, 15…', en: 'If the sum of its digits is a multiple of 3: 3, 6, 9, 12, 15…', ar: 'إذا كان مجموع أرقامه مضاعفًا لـ 3: 3، 6، 9، 12، 15…' }, math: '$3234\\mathbin{:}\\ 3+2+3+4=12\\ \\checkmark$' },
+            { title: { eu: '9rekin', es: 'Por 9', en: 'By 9', ar: 'على 9' }, text: { eu: 'Zifren batura 9ren multiploa bada: 9, 18, 27…', es: 'Si la suma de sus cifras es múltiplo de 9: 9, 18, 27…', en: 'If the sum of its digits is a multiple of 9: 9, 18, 27…', ar: 'إذا كان مجموع أرقامه مضاعفًا لـ 9: 9، 18، 27…' }, math: '$5013\\mathbin{:}\\ 5+0+1+3=9\\ \\checkmark$' },
             { title: { eu: '6rekin', es: 'Por 6', en: 'By 6', ar: 'على 6' }, text: { eu: 'Irizpideak konbina daitezke: 6rekin zatigarria da 2rekin eta 3rekin zatigarria bada.', es: 'Los criterios se pueden combinar: es divisible por 6 si lo es por 2 y por 3.', en: 'Rules can be combined: it is divisible by 6 if it is divisible by 2 and by 3.', ar: 'يمكن الجمع بين القواعد: يقبل القسمة على 6 إذا قبلها على 2 و3 معًا.' }, math: '$282\\mathbin{:}\\ \\text{2 } \\checkmark\\ \\ 2+8+2=12\\ \\checkmark$' }
         ],
         example: '$\\begin{gathered}147\\mathbin{:}\\ 1+4+7=12\\\\\\text{3 } \\checkmark\\quad \\text{9 } \\times\\end{gathered}$',
@@ -219,12 +219,12 @@ export const divisibilityTopics: UnitTopic[] = [
             {
                 title: { eu: '11rekin', es: 'Por 11', en: 'By 11', ar: 'على 11' },
                 text: { eu: 'Batu posizio bikoitietako zifrak eta posizio bakoitietakoak. Kendu bi baturak: emaitza 0 edo 11ren multiploa bada, zatigarria da.', es: 'Suma las cifras de lugar par y las de lugar impar. Resta las dos sumas: si da 0 o un múltiplo de 11, es divisible.', en: 'Add the digits in even places and the digits in odd places. Subtract the two sums: if the result is 0 or a multiple of 11, it is divisible.', ar: 'اجمع الأرقام في المواقع الزوجية والأرقام في المواقع الفردية، ثم اطرح المجموعين: إذا كان الناتج 0 أو مضاعفًا لـ 11 فالعدد يقبل القسمة.' },
-                math: '$3\\,234\\mathbin{:}\\ (2+4)-(3+3)=0\\ \\checkmark$'
+                math: '$3234\\mathbin{:}\\ (2+4)-(3+3)=0\\ \\checkmark$'
             },
             {
                 title: { eu: '7rekin', es: 'Por 7', en: 'By 7', ar: 'على 7' },
                 text: { eu: 'Kendu unitateen zifra eta kendu haren bikoitza geratzen den zenbakiari. Emaitza 0 edo 7ren multiploa bada, zatigarria da. Handia bada, errepikatu.', es: 'Quita la cifra de las unidades y resta su doble al número que queda. Si da 0 o un múltiplo de 7, es divisible. Si es grande, repite.', en: 'Remove the units digit and subtract its double from the number that is left. If the result is 0 or a multiple of 7, it is divisible. If it is big, repeat.', ar: 'احذف رقم الآحاد واطرح ضعفه من العدد الباقي. إذا كان الناتج 0 أو مضاعفًا لـ 7 فالعدد يقبل القسمة. وإن كان كبيرًا فكرّر.' },
-                math: '$3\\,234\\mathbin{:}\\ 323-8=315;\\ 31-10=21\\ \\checkmark$'
+                math: '$3234\\mathbin{:}\\ 323-8=315;\\ 31-10=21\\ \\checkmark$'
             }
         ],
         example: '$\\begin{gathered}3\\,238\\mathbin{:}\\ (8+2)-(3+3)=4\\\\\\text{11 } \\times\\end{gathered}$',

@@ -30,7 +30,7 @@ export const naturalsGames: GameInfo<NaturalsGameId>[] = [
         skills: { eu: 'Posizioa, biribiltzea eta karratuak', es: 'Posición, redondeo y cuadrados', en: 'Place value, rounding and squares', ar: 'الموقع والتقريب والمربعات' },
         levels: [
             { progressId: 3201, stage: 'numbering', title: { eu: 'Zifraren balioa', es: 'El valor de la cifra', en: 'The value of the digit', ar: 'قيمة الرقم' }, description: { eu: '«7 zifrak 700 balio du»: kontuz beste posizioetako 7ekin.', es: '«La cifra 7 vale 700»: cuidado con los 7 de otras posiciones.', en: '‘The digit 7 is worth 700’: watch out for the 7s in other positions.', ar: '«قيمة الرقم 7 هي 700»: انتبه للسبعات في مواقع أخرى.' } },
-            { progressId: 3202, stage: 'rounding', title: { eu: 'Biribiltzea', es: 'Redondeo', en: 'Rounding', ar: 'التقريب' }, description: { eu: 'Zein zenbakik ematen du 25.000 milakoetara biribiltzean?', es: '¿Qué números dan 25.000 al redondear a los millares?', en: 'Which numbers give 25,000 when rounded to the nearest thousand?', ar: 'أي الأعداد تعطي 25.000 عند التقريب إلى الآلاف؟' } },
+            { progressId: 3202, stage: 'rounding', title: { eu: 'Biribiltzea', es: 'Redondeo', en: 'Rounding', ar: 'التقريب' }, description: { eu: 'Zein zenbakik ematen du 25\u00a0000 milakoetara biribiltzean?', es: '¿Qué números dan 25\u00a0000 al redondear a los millares?', en: 'Which numbers give 25,000 when rounded to the nearest thousand?', ar: 'أي الأعداد تعطي 25\u00a0000 عند التقريب إلى الآلاف؟' } },
             { progressId: 3203, stage: 'powers', title: { eu: 'Karratuak eta kuboak', es: 'Cuadrados y cubos', en: 'Squares and cubes', ar: 'المربعات والمكعبات' }, description: { eu: '49 = 7², baina 50 ez.', es: '49 = 7², pero 50 no.', en: '49 = 7², but 50 isn\'t.', ar: '49 = 7²، أما 50 فلا.' } }
         ]
     },
@@ -48,7 +48,7 @@ export const naturalsGames: GameInfo<NaturalsGameId>[] = [
     {
         id: 'memory',
         title: { eu: 'Memoria', es: 'Memoria', en: 'Memory', ar: 'الذاكرة' },
-        tagline: { eu: 'Aurkitu balio bera duten kartak. Kontuz tranpekin: IX eta XI, 2³ eta 3², 3.402 eta 3.042…', es: 'Encuentra las cartas que valen lo mismo. Cuidado con las trampas: IX y XI, 2³ y 3², 3.402 y 3.042…', en: 'Find the cards that are worth the same. Watch out for traps: IX and XI, 2³ and 3², 3,402 and 3,042…', ar: 'جد البطاقات ذات القيمة نفسها. احذر الفخاخ: IX وXI، 2³ و3²، 3.402 و3.042…' },
+        tagline: { eu: 'Aurkitu balio bera duten kartak. Kontuz tranpekin: IX eta XI, 2³ eta 3², 3402 eta 3042…', es: 'Encuentra las cartas que valen lo mismo. Cuidado con las trampas: IX y XI, 2³ y 3², 3402 y 3042…', en: 'Find the cards that are worth the same. Watch out for traps: IX and XI, 2³ and 3², 3,402 and 3,042…', ar: 'جد البطاقات ذات القيمة نفسها. احذر الفخاخ: IX وXI، 2³ و3²، 3402 و3042…' },
         skills: { eu: 'Erromatarrak, berreturak eta deskonposizioak', es: 'Romanos, potencias y descomposiciones', en: 'Roman numerals, powers and expanded forms', ar: 'الأرقام الرومانية والقوى والتفكيك' },
         levels: [
             { progressId: 3401, stage: 'numbering', title: { eu: 'Erromatarrak', es: 'Romanos', en: 'Roman numerals', ar: 'الأرقام الرومانية' }, description: { eu: '6 bikote: XL ↔ 40, eta LX ↔ 60 ere bai.', es: '6 parejas: XL ↔ 40, y también LX ↔ 60.', en: '6 pairs: XL ↔ 40, and also LX ↔ 60.', ar: '6 أزواج: XL ↔ 40، وأيضًا LX ↔ 60.' } },
