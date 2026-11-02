@@ -1,8 +1,13 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { CombinatoricsAkGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { CombinatoricsArt } from '../../dbh4-games/CombinatoricsGames'
 
 /** Small illustration of each game; the art is the same in every language */
 export function CombinatoricsAkGameArt({ game }: { game: CombinatoricsAkGameId }) {
+    if (game === 'model') return <CombinatoricsArt game="model" />
+    if (game === 'boxes') return <CombinatoricsArt game="boxes" />
+    if (game === 'detective') return <DetectiveArt lines={['3 + 4 = 7 ?', '8!/5! = 8 · 7 · 6', 'C(5, 2) = 10']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

@@ -29,6 +29,8 @@ import { createTrigDetectiveCases, trigDetectiveLevels, trigDetectiveNames, trig
 import { localize } from '../src/pages/dbh4-akademikoak-trigonometria/text.ts'
 import { createJumpRounds, createLinesRounds, JUMP_ROUNDS, jumpLanding, K_RANGE, lineLatex, LINES_ROUNDS, slopeOf, withK as lineWithK } from '../src/pages/dbh4-games/vectors.ts'
 import { createVectorsDetectiveCases, vectorsDetectiveLevels, vectorsDetectiveNames, vectorsDetectiveTips } from '../src/pages/dbh4-games/vectorsDetective.ts'
+import { binomial, BOXES_ROUNDS, createBoxesRounds, createModelRounds, factorial, MODEL_ANSWERS, MODEL_ROUNDS, modelCount, modelLatex, variations } from '../src/pages/dbh4-games/combinatorics.ts'
+import { combinatoricsDetectiveLevels, combinatoricsDetectiveNames, combinatoricsDetectiveTips, createCombinatoricsDetectiveCases } from '../src/pages/dbh4-games/combinatoricsDetective.ts'
 import { checkTexts, renders } from './helpers/ownGamesCheck.ts'
 import { evaluate } from './helpers/realsRaceCheck.ts'
 
@@ -768,5 +770,57 @@ function pointRead(latex: string): number {
 
 test('4. DBH vectors detective: vectors, lines and their positions', () => {
     checkDetective(createVectorsDetectiveCases, vectorsDetectiveLevels, vectorsDetectiveNames, vectorsDetectiveTips, 1e-6, (latex) => latex, pointRead)
+})
+
+test('4. DBH does order matter?: the right count is the model of the situation, four different options, both orders in a set', () => {
+    for (let level = 0; level < 3; level += 1) {
+        const models = new Set<string>()
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createModelRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, MODEL_ROUNDS)
+            assert.equal(new Set(rounds.map((round) => MODEL_ANSWERS[round.model].order)).size, 2)
+            for (const round of rounds) {
+                models.add(round.model)
+                assert.equal(new Set(round.options).size, 4)
+                assert.equal(round.options[round.right], modelCount(round.model, round.n, round.k))
+                // The count worked out again from scratch
+                const again = round.model === 'repetition' ? round.n ** round.k : round.model === 'permutations' ? factorial(round.n) : round.model === 'combinations' ? factorial(round.n) / (factorial(round.k) * factorial(round.n - round.k)) : factorial(round.n) / factorial(round.n - round.k)
+                assert.equal(round.options[round.right], again)
+                checkTexts([round.text])
+                checkLanguages([round.text])
+                renders(modelLatex(round.model, round.n, round.k))
+            }
+        }
+        assert.deepEqual([...models].sort(), [['combinations', 'variations'], ['combinations', 'permutations', 'repetition', 'variations'], ['combinations', 'permutations', 'repetition', 'variations']][level])
+    }
+})
+
+test('4. DBH the box method: the boxes multiply to the count, every box within the steppers, the condition filled first', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createBoxesRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, BOXES_ROUNDS)
+            for (const round of rounds) {
+                assert.equal(round.boxes.reduce((product, value) => product * value, 1), round.total)
+                for (const value of round.boxes) assert.ok(value >= 1 && value <= 10)
+                // The steppers start on 1 in every box, never the answer
+                assert.ok(round.total > 1)
+                if (level === 0) assert.ok(round.boxes.every((value) => value === round.boxes[0]) && round.first === null)
+                if (level === 1) assert.equal(round.total, variations(round.boxes[0], round.boxes.length))
+                if (level === 2) assert.ok(round.first !== null)
+                checkTexts([round.text])
+                checkLanguages([round.text])
+            }
+        }
+    }
+    // Counted by brute force: three-digit numbers with different digits, not starting with 0
+    let count = 0
+    for (let value = 100; value <= 999; value += 1) if (new Set(String(value)).size === 3) count += 1
+    assert.equal(count, 9 * 9 * 8)
+    assert.equal(binomial(6, 2), 15)
+})
+
+test('4. DBH combinatorics detective: counting, models and combinations', () => {
+    checkDetective(createCombinatoricsDetectiveCases, combinatoricsDetectiveLevels, combinatoricsDetectiveNames, combinatoricsDetectiveTips)
 })
 

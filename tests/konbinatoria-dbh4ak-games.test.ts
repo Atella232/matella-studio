@@ -61,7 +61,7 @@ function expected(question: CombinatoricsAkRaceQuestion): number {
 }
 
 test('konbinatoria 4. DBH ak games: levels, ids and routes', () => {
-    assert.equal(combinatoricsAkGames.length, 2)
+    assert.equal(combinatoricsAkGames.length, 5)
     assert.equal(combinatoricsAkGames[0].levels.length, COMBINATORICS_AK_RACE_CIRCUITS)
     assert.equal(combinatoricsAkGames[1].levels.length, combinatoricsAkMemoryLevels.length)
     assert.equal(new Set(combinatoricsAkGameProgressIds).size, combinatoricsAkGameProgressIds.length)

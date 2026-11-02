@@ -10,3 +10,7 @@ Stages counting/variations/permutations/combinations/problems; topics tree, prod
 Phase 1 ada0c84 (diag 6201–6208, practice 1–20, challenges 101–115, bank 1–50). Lab f41cf66: 7 new tools (tree 831xx, factorial 833xx, slots V/VR 832xx, letters 834xx, choose 835xx, pascal 836xx, grid 837xx). Games baa330d (race 84101–84105, memory 84201–84203). Full suite 784/784, lint and build OK. Merged to main (fast-forward baa330d), pushed and deployed 2026-10-21 (bundle index-g87kmqP8).
 
 Next 4. DBH akademikoak unit: probabilidad (Santillana Ac. U14 + Anaya Ac. U12), the last one.
+
+## Own games (2026-11-02)
+
+Does order matter? (84301–3), the box method (84401–3) and a combinatorics detective (84501–3). Details in `dbh4-own-games.md`.

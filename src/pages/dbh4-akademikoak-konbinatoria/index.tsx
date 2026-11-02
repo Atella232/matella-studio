@@ -41,7 +41,7 @@ const konbinatoriaUnit: UnitDefinition = {
         render: (props) => <CombinatoricsAkLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, ordenak axola du?, kutxen metodoa, konbinatoriaren detektibea eta memoria.', es: 'Cinco juegos: carrera, ¿importa el orden?, el método de las casillas, detective de combinatoria y memoria.', en: 'Five games: race, does order matter?, the box method, combinatorics detective and memory.', ar: 'خمس ألعاب: السباق وهل يهم الترتيب؟ وطريقة الخانات ومخبر التوافيق والذاكرة.' },
         progressIds: combinatoricsAkGameProgressIds,
         recordsKey: COMBINATORICS_AK_GAME_RECORDS_KEY,
         render: (props) => <CombinatoricsAkGames {...props} />

@@ -83,3 +83,14 @@
 /* The vectors games: the vector jump, find k */
 .fraction-v2-games-card[data-game="jump"] { --game-tint: var(--blue-tint, #dde7f7); }
 .fraction-v2-games-card[data-game="lines"] { --game-tint: var(--coral-tint, #f6d5cc); }
+
+/* The combinatorics games: does order matter?, the box method */
+.fraction-v2-games-card[data-game="model"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="boxes"] { --game-tint: var(--mustard-tint, #fbebc0); }
+.dbh4-toggle { display: flex; flex-direction: column; align-items: center; gap: 6px; font-weight: 700; }
+.dbh4-boxes { display: flex; justify-content: center; gap: 10px; }
+.dbh4-box { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px; border: 2px solid var(--ink); border-radius: 12px; background: var(--card); min-width: 56px; }
+.dbh4-box.first { background: var(--mustard-tint, #fbebc0); }
+.dbh4-box output { font-size: 26px; font-weight: 700; line-height: 1.2; }
+.dbh4-box button { width: 44px; height: 34px; border: 2px solid var(--ink); border-radius: 8px; background: var(--paper-deep, #ece6da); font-size: 14px; color: var(--ink); cursor: pointer; }
+.dbh4-box button:disabled { opacity: 0.4; cursor: default; }
