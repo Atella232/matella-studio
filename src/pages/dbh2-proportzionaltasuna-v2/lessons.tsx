@@ -154,6 +154,7 @@ export const proportionDbh2Topics: UnitTopic[] = [
     {
         id: 'compound-unit',
         stage: 'compound',
+        figureAfterSteps: true,
         title: say('Unitatera laburtuz, urratsez urrats', 'Reduciendo a la unidad, paso a paso', 'بالإرجاع إلى الوحدة خطوة خطوة', 'The unitary method, step by step'),
         goal: say('Proportzionaltasun konposatuko problemak magnitude bat aldi berean aldatuz ebaztea.', 'Resolver problemas de proporcionalidad compuesta cambiando una magnitud cada vez.', 'حلّ مسائل التناسب المركّب بتغيير مقدار واحد في كل مرة.', 'Solve compound proportion problems by changing one quantity at a time.'),
         explanation: say(
@@ -219,6 +220,7 @@ export const proportionDbh2Topics: UnitTopic[] = [
     {
         id: 'inverse-share',
         stage: 'shares',
+        figureAfterSteps: true,
         title: say('Banaketa alderantziz proportzionala', 'Reparto inversamente proporcional', 'التوزيع العكسي', 'Sharing in inverse proportion'),
         goal: say('Kantitate bat zenbaki batzuekiko alderantziz proportzionalak diren zatitan banatzea.', 'Repartir una cantidad en partes inversamente proporcionales a unos números.', 'توزيع كمية إلى أجزاء متناسبة عكسيًا مع أعداد معطاة.', 'Share an amount into parts in inverse proportion to some numbers.'),
         explanation: say(

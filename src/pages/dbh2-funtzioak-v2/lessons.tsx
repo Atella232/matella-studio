@@ -46,6 +46,7 @@ export const functionsTopics: UnitTopic[] = [
     {
         id: 'coordinates',
         stage: 'idea',
+        figureAfterSteps: true,
         title: say('Koordenatuak eta koadranteak', 'Coordenadas y cuadrantes', 'الإحداثيات والأرباع', 'Coordinates and quadrants'),
         goal: say('Puntu baten koordenatuak idaztea, planoan kokatzea eta koadrantea esatea.', 'Escribir las coordenadas de un punto, situarlo en el plano y decir su cuadrante.', 'كتابة إحداثيي نقطة وتحديد موقعها في المستوى وذكر ربعها.', 'Write the coordinates of a point, plot it on the plane and say which quadrant it is in.'),
         explanation: say(
@@ -109,6 +110,7 @@ export const functionsTopics: UnitTopic[] = [
     {
         id: 'tables',
         stage: 'representations',
+        figureAfterSteps: true,
         title: say('Funtzioa taula batean', 'La función en una tabla', 'الدالة في جدول', 'The function in a table'),
         goal: say('Arau batetik balio-taula osatzea eta bikoteak puntu gisa idaztea.', 'Completar una tabla de valores a partir de una regla y escribir las parejas como puntos.', 'إكمال جدول قيم من قاعدة وكتابة الأزواج نقاطًا.', 'Complete a table of values from a rule and write the pairs as points.'),
         explanation: say(
@@ -130,6 +132,7 @@ export const functionsTopics: UnitTopic[] = [
     {
         id: 'formula',
         stage: 'representations',
+        figureAfterSteps: true,
         title: say('Formula eta f(x) notazioa', 'La fórmula y la notación f(x)', 'الصيغة والترميز f(x)', 'The formula and the f(x) notation'),
         goal: say('$x$ formula batean ordezkatzea, $f(x)$ interpretatzea eta puntu bat funtzioarena den egiaztatzea.', 'Sustituir $x$ en una fórmula, interpretar $f(x)$ y comprobar si un punto es de la función.', 'التعويض عن $x$ في صيغة وفهم $f(x)$ والتحقق من انتماء نقطة إلى الدالة.', 'Substitute $x$ into a formula, interpret $f(x)$ and check whether a point belongs to the function.'),
         explanation: say(
@@ -151,6 +154,7 @@ export const functionsTopics: UnitTopic[] = [
     {
         id: 'plot',
         stage: 'representations',
+        figureAfterSteps: true,
         title: say('Funtzio bat marraztu', 'Dibujar una función', 'رسم دالة', 'Drawing a function'),
         goal: say('Taulatik puntuak kokatzea eta grafikoa osatzea, eskala egokia aukeratuz.', 'Situar los puntos de una tabla y completar la gráfica eligiendo una escala adecuada.', 'وضع نقاط الجدول وإكمال الرسم مع اختيار تدريج مناسب.', 'Plot the points from a table and complete the graph by choosing a suitable scale.'),
         explanation: say(
@@ -298,6 +302,7 @@ export const functionsTopics: UnitTopic[] = [
     {
         id: 'slope',
         stage: 'proportional',
+        figureAfterSteps: true,
         title: say('Malda: aldapa kalkulatzen', 'La pendiente: cómo se calcula', 'الميل: كيف يُحسب', 'Slope: how it is calculated'),
         goal: say('Bi punturen koordenatuekin zuzen baten malda kalkulatzea.', 'Calcular la pendiente de una recta con las coordenadas de dos puntos.', 'حساب ميل خط مستقيم من إحداثيات نقطتين.', 'Calculate the slope of a straight line using the coordinates of two points.'),
         explanation: say(
@@ -340,6 +345,7 @@ export const functionsTopics: UnitTopic[] = [
     {
         id: 'affine',
         stage: 'lines',
+        figureAfterSteps: true,
         title: say('Funtzio lineala: y = mx + n', 'La función lineal: y = mx + n', 'الدالة الخطية: y = mx + n', 'The linear function: y = mx + n'),
         goal: say('$y=mx+n$ formulan malda eta Y ardatzeko ebakidura identifikatzea eta zuzena marraztea.', 'Identificar la pendiente y el corte con el eje Y en $y=mx+n$ y dibujar la recta.', 'تحديد الميل وتقاطع محور Y في $y=mx+n$ ورسم الخط.', 'Identify the slope and the y-intercept in $y=mx+n$ and draw the line.'),
         explanation: say(
@@ -382,6 +388,7 @@ export const functionsTopics: UnitTopic[] = [
     {
         id: 'line-equation',
         stage: 'lines',
+        figureAfterSteps: true,
         title: say('Zuzen baten ekuazioa aurkitu', 'Hallar la ecuación de una recta', 'إيجاد معادلة خط مستقيم', 'Finding the equation of a straight line'),
         goal: say('Bi puntu edo grafiko batetik $y=mx+n$ ekuazioa idaztea eta buruketetan erabiltzea.', 'Escribir la ecuación $y=mx+n$ a partir de dos puntos o de una gráfica y usarla en problemas.', 'كتابة المعادلة $y=mx+n$ من نقطتين أو من رسم واستعمالها في المسائل.', 'Write the equation $y=mx+n$ from two points or from a graph and use it in problems.'),
         explanation: say(

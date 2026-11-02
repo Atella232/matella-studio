@@ -64,6 +64,11 @@ export interface UnitTopic {
     mistake?: LessonMistake
     /** Optional model drawn under the explanation (a number line, a thermometer…) */
     figure?: (language: UnitLanguage) => ReactNode
+    /**
+     * The drawing shows the exercise of «Let's solve» already solved: it goes
+     * after the steps, and appears once the last step has been revealed
+     */
+    figureAfterSteps?: boolean
 }
 
 export interface PracticeItem {

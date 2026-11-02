@@ -153,6 +153,7 @@ export const solidsTopics: UnitTopic[] = [
     {
         id: 'frustum-area',
         stage: 'areas',
+        figureAfterSteps: true,
         title: say('Piramide-enborraren azalera', 'Área del tronco de pirámide', 'مساحة جذع الهرم', 'Area of a truncated pyramid'),
         goal: say('Piramide-enbor baten azalera kalkulatzea alboko trapezioak eta bi oinarriak batuz.', 'Calcular el área de un tronco de pirámide sumando los trapecios laterales y las dos bases.', 'حساب مساحة جذع الهرم بجمع أشباه المنحرفات الجانبية والقاعدتين.', 'Calculate the area of a truncated pyramid by adding the lateral trapeziums and the two bases.'),
         explanation: say(
@@ -197,6 +198,7 @@ export const solidsTopics: UnitTopic[] = [
     {
         id: 'cone',
         stage: 'round',
+        figureAfterSteps: true,
         title: say('Konoa eta kono-enborra', 'El cono y el tronco de cono', 'المخروط وجذع المخروط', 'The cone and the truncated cone'),
         goal: say('Konoaren elementuak lotzea Pitagorasekin eta konoaren eta kono-enborraren azalera kalkulatzea.', 'Relacionar los elementos del cono con Pitágoras y calcular el área del cono y del tronco de cono.', 'ربط عناصر المخروط بفيثاغورس وحساب مساحة المخروط وجذع المخروط.', 'Relate the parts of the cone using Pythagoras\' theorem, and calculate the area of the cone and of the truncated cone.'),
         explanation: say(
@@ -323,6 +325,7 @@ export const solidsTopics: UnitTopic[] = [
     {
         id: 'pyramid-volume',
         stage: 'volume',
+        figureAfterSteps: true,
         title: say('Piramidearen eta konoaren bolumena', 'Volumen de la pirámide y del cono', 'حجم الهرم والمخروط', 'Volume of pyramids and cones'),
         goal: say('Piramideen eta konoen bolumena prisma eta zilindro baten heren gisa kalkulatzea.', 'Calcular el volumen de pirámides y conos como un tercio de un prisma y un cilindro.', 'حساب حجم الأهرامات والمخاريط بوصفه ثلث منشور وأسطوانة.', 'Calculate the volume of pyramids and cones as one third of a prism and a cylinder.'),
         explanation: say(
@@ -343,6 +346,7 @@ export const solidsTopics: UnitTopic[] = [
     {
         id: 'sphere-volume',
         stage: 'volume',
+        figureAfterSteps: true,
         title: say('Esferaren bolumena eta problemak', 'Volumen de la esfera y problemas', 'حجم الكرة والمسائل', 'Volume of the sphere and problem solving'),
         goal: say('Esferaren bolumena kalkulatzea eta gorputz konposatuen eta eguneroko bolumen-problemak ebaztea.', 'Calcular el volumen de la esfera y resolver problemas de cuerpos compuestos y volúmenes cotidianos.', 'حساب حجم الكرة وحل مسائل الأجسام المركبة والحجوم اليومية.', 'Calculate the volume of a sphere and solve problems with composite solids and everyday volumes.'),
         explanation: say(
