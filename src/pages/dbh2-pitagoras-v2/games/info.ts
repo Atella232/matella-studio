@@ -3,9 +3,11 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
 /* ==========================================================================
    Pitagorasen teorema (2. DBH) games: the list shown in the hub, with
    levels and the unit progress id each level earns with its first star.
+   Three games belong to this topic (the ladder, what triangle is it and
+   the Pythagoras detective); the race and the memory are shared engines.
    ========================================================================== */
 
-export type PythagorasGameId = 'race' | 'memory'
+export type PythagorasGameId = 'race' | 'ladder' | 'classify' | 'detective' | 'memory'
 
 export const PYTHAGORAS_GAME_RECORDS_KEY = 'matella-pitagoras-dbh2-game-records'
 
@@ -24,6 +26,39 @@ export const pythagorasGames: GameInfo<PythagorasGameId>[] = [
         ]
     },
     {
+        id: 'ladder',
+        title: { eu: 'Eskailera', es: 'La escalera', en: 'The ladder', ar: 'السلّم' },
+        tagline: { eu: 'Kalkulatu non jarri eskaileraren oina, edo zer eskailera behar den, leihora iristeko.', es: 'Calcula dónde poner el pie de la escalera, o qué escalera hace falta, para llegar a la ventana.', en: 'Work out where to put the foot of the ladder, or which ladder you need, to reach the window.', ar: 'احسب أين تضع قاعدة السلّم، أو أي سلّم تحتاج، لتصل إلى النافذة.' },
+        skills: { eu: 'Katetoa eta hipotenusa egoera errealetan', es: 'Cateto e hipotenusa en situaciones reales', en: 'Legs and hypotenuse in real situations', ar: 'الضلع القائم والوتر في مواقف واقعية' },
+        levels: [
+            { progressId: 24301, stage: 'sides', title: { eu: 'Hirukote txikiak', es: 'Ternas pequeñas', en: 'Small triples', ar: 'ثلاثيات صغيرة' }, description: { eu: 'Oinaren distantzia: 3, 4, 5.', es: 'La distancia del pie: 3, 4, 5.', en: 'The distance of the foot: 3, 4, 5.', ar: 'بعد القاعدة: 3، 4، 5.' } },
+            { progressId: 24302, stage: 'sides', title: { eu: 'Oina ala eskailera', es: 'El pie o la escalera', en: 'The foot or the ladder', ar: 'القاعدة أو السلّم' }, description: { eu: 'Katetoa edo hipotenusa, hirukote handiekin.', es: 'Cateto o hipotenusa, con ternas grandes.', en: 'Leg or hypotenuse, with large triples.', ar: 'ضلع قائم أو وتر بثلاثيات كبيرة.' } },
+            { progressId: 24303, stage: 'space', title: { eu: 'Hamarrenak', es: 'Décimas', en: 'Tenths', ar: 'الأعشار' }, description: { eu: 'Edozein luzera, hamarren batera biribilduta.', es: 'Cualquier longitud, redondeada a las décimas.', en: 'Any length, rounded to one decimal place.', ar: 'أي طول مقرّبًا إلى أقرب عُشر.' } }
+        ]
+    },
+    {
+        id: 'classify',
+        title: { eu: 'Zer triangelu da?', es: '¿Qué triángulo es?', en: 'What triangle is it?', ar: 'أي مثلث هذا؟' },
+        tagline: { eu: 'Hiru alde: angelu-zorrotza, angeluzuzena ala angelu-kamutsa?', es: 'Tres lados: ¿acutángulo, rectángulo u obtusángulo?', en: 'Three sides: acute, right or obtuse?', ar: 'ثلاثة أضلاع: حاد أم قائم أم منفرج؟' },
+        skills: { eu: 'Triangeluak aldeen arabera sailkatzea', es: 'Clasificar triángulos por sus lados', en: 'Classifying triangles by their sides', ar: 'تصنيف المثلثات حسب أضلاعها' },
+        levels: [
+            { progressId: 24401, stage: 'sides', title: { eu: 'Alde osoak', es: 'Lados enteros', en: 'Whole sides', ar: 'أضلاع صحيحة' }, description: { eu: 'Handiena azkena.', es: 'El mayor, el último.', en: 'The longest one last.', ar: 'الأكبر في الأخير.' } },
+            { progressId: 24402, stage: 'sides', title: { eu: 'Ia hirukoteak', es: 'Casi ternas', en: 'Near triples', ar: 'شبه ثلاثيات' }, description: { eu: 'Edozein ordenatan: 6, 8, 11.', es: 'En cualquier orden: 6, 8, 11.', en: 'In any order: 6, 8, 11.', ar: 'بأي ترتيب: 6، 8، 11.' } },
+            { progressId: 24403, stage: 'sides', title: { eu: 'Alde hamartarrak', es: 'Lados decimales', en: 'Decimal sides', ar: 'أضلاع عشرية' }, description: { eu: 'Hirukoteen erdiak.', es: 'Mitades de ternas.', en: 'Halves of triples.', ar: 'أنصاف الثلاثيات.' } }
+        ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Pitagorasen detektibea', es: 'Detective de Pitágoras', en: 'Pythagoras detective', ar: 'مخبر فيثاغورس' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: اكتشفه وقل ما نوع الخطأ.' },
+        skills: { eu: 'Teorema erabiltzean egiten diren akats tipikoak', es: 'Errores típicos al usar el teorema', en: 'Common mistakes when using the theorem', ar: 'الأخطاء الشائعة في استعمال النظرية' },
+        levels: [
+            { progressId: 24501, stage: 'theorem', title: { eu: 'Hipotenusa', es: 'Hipotenusa', en: 'Hypotenuse', ar: 'الوتر' }, description: { eu: 'Karratuak, batura eta erroa.', es: 'Cuadrados, suma y raíz.', en: 'Squares, sum and root.', ar: 'المربعات والمجموع والجذر.' } },
+            { progressId: 24502, stage: 'sides', title: { eu: 'Katetoak eta unitateak', es: 'Catetos y unidades', en: 'Legs and units', ar: 'الأضلاع القائمة والوحدات' }, description: { eu: 'Batu ala kendu, eta metroak.', es: 'Sumar o restar, y los metros.', en: 'Add or subtract, and the metres.', ar: 'الجمع أو الطرح والأمتار.' } },
+            { progressId: 24503, stage: 'plane', title: { eu: 'Irudietan', es: 'En las figuras', en: 'In shapes', ar: 'في الأشكال' }, description: { eu: 'Isoszelea, erronboa, kaxa eta ukitzailea.', es: 'Isósceles, rombo, caja y tangente.', en: 'Isosceles, rhombus, box and tangent.', ar: 'متساوي الساقين والمعيّن والصندوق والمماس.' } }
+        ]
+    },
+    {
         id: 'memory',
         title: { eu: 'Memoria', es: 'Memoria', en: 'Memory', ar: 'الذاكرة' },
         tagline: { eu: 'Aurkitu balio bera duten kartak.', es: 'Encuentra las cartas que valen lo mismo.', en: 'Find the cards that are worth the same.', ar: 'جد البطاقات ذات القيمة نفسها.' },
@@ -39,12 +74,15 @@ export const pythagorasGames: GameInfo<PythagorasGameId>[] = [
 export const pythagorasGameProgressIds: number[] = levelProgressIds(pythagorasGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const pythagorasGameSlugs: Record<PythagorasGameId, string> = { race: 'lasterketa', memory: 'memoria' }
+export const pythagorasGameSlugs: Record<PythagorasGameId, string> = { race: 'lasterketa', ladder: 'eskailera', classify: 'sailkatu', detective: 'detektibea', memory: 'memoria' }
 
 export function pythagorasGameModeForPath(pathname: string): PythagorasGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
     if (!game) return 'hub'
     if (['carrera', 'lasterketa'].includes(game)) return 'race'
+    if (['eskailera', 'escalera'].includes(game)) return 'ladder'
+    if (['sailkatu', 'clasifica'].includes(game)) return 'classify'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     if (['memoria', 'memory'].includes(game)) return 'memory'
     return 'hub'
 }

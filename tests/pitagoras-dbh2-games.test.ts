@@ -8,6 +8,10 @@ import { createPythagorasMemoryBoard as createProportionMemoryBoard, PYTHAGORAS_
 import { pythagorasGameModeForPath as proportionGameModeForPath, pythagorasGameProgressIds as proportionGameProgressIds, pythagorasGames as proportionGames } from '../src/pages/dbh2-pitagoras-v2/games/info.ts'
 import { checkPythagorasPitAnswer as checkProportionPitAnswer, PYTHAGORAS_RACE_CIRCUITS as PROPORTION_RACE_CIRCUITS, pythagorasParTime as proportionParTime, pythagorasRaceErrorTips as proportionRaceErrorTips, generatePythagorasRaceQuestion as generateProportionRaceQuestion, type PythagorasRaceQuestion as ProportionRaceQuestion } from '../src/pages/dbh2-pitagoras-v2/games/race.ts'
 import { pythagorasLabChallengeIds as proportionLabChallengeIds } from '../src/pages/dbh2-pitagoras-v2/lab/labTools.ts'
+import { CLASSIFY_ROUNDS, createClassifyRounds, isTriangle, kindOf } from '../src/pages/dbh2-pitagoras-v2/games/classify.ts'
+import { createPythagorasDetectiveCases, pythagorasDetectiveLevels, pythagorasDetectiveNames, pythagorasDetectiveTips } from '../src/pages/dbh2-pitagoras-v2/games/detective.ts'
+import { createLadderRound, createLadderRounds, ladderRight, ladderTarget, ladderTop, LADDER_ROUNDS } from '../src/pages/dbh2-pitagoras-v2/games/ladder.ts'
+import { checkTexts } from './helpers/ownGamesCheck.ts'
 
 const renders = (latex: string) => katex.renderToString(latex, { throwOnError: true, strict: 'error' })
 
@@ -41,7 +45,7 @@ function checkQuestion(question: ProportionRaceQuestion): number {
 const cardValue = (latex: string) => valueOf(latex)
 
 test('pitagoras 2. DBH games: levels, ids and routes', () => {
-    assert.equal(proportionGames.length, 2)
+    assert.equal(proportionGames.length, 5)
     assert.equal(proportionGames[0].levels.length, PROPORTION_RACE_CIRCUITS)
     assert.equal(proportionGames.find((game) => game.id === 'memory')!.levels.length, proportionMemoryLevels.length)
     assert.equal(new Set(proportionGameProgressIds).size, proportionGameProgressIds.length)
@@ -98,5 +102,77 @@ test('pitagoras 2. DBH memory: every card has exactly one partner and the pair i
                 for (const other of cards.filter((item) => item.setId !== card.setId)) assert.ok(Math.abs(cardValue(other.latex)! - a!) > 1e-9, `${card.latex} ~ ${other.latex}`)
             }
         }
+    }
+})
+
+/* ---------- The games of this topic ---------- */
+
+test('pitagoras 2. DBH ladder: the target reaches the window, its neighbours do not', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const rounds = createLadderRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, LADDER_ROUNDS)
+            if (level === 0) assert.ok(rounds.every((round) => round.unknown === 'foot'))
+            else assert.ok(rounds.some((round) => round.unknown === 'ladder') && rounds.some((round) => round.unknown === 'foot'))
+            for (const round of rounds) {
+                const target = ladderTarget(round)
+                assert.ok(target >= round.min && target <= round.max, `${target} in ${round.min}–${round.max}`)
+                // The slider can land on the target exactly
+                assert.ok(Math.abs((target - round.min) / round.step - Math.round((target - round.min) / round.step)) < 1e-6)
+                assert.ok(ladderRight(round, target) && !ladderRight(round, target + round.step) && !ladderRight(round, target - round.step))
+                assert.ok(Math.abs(ladderTop(round, target) - round.height) < (level === 2 ? 0.2 : 1e-9), `${ladderTop(round, target)} vs ${round.height}`)
+                assert.ok(round.foot ** 2 + round.height ** 2 - round.ladder ** 2 < (level === 2 ? 1.5 : 1e-9))
+                if (level === 0) assert.ok(Number.isInteger(target))
+                if (level === 1) assert.ok(Number.isInteger(target * 2))
+                if (level === 2) assert.ok(!Number.isInteger(target))
+                assert.ok(round.height <= 12)
+            }
+        }
+    }
+    assert.equal(createLadderRound(createRandom(3), 0, 'foot').step, 1)
+})
+
+test('pitagoras 2. DBH classify: real triangles of the right kind, every kind at least twice', () => {
+    assert.equal(kindOf([5, 13, 12]), 'right')
+    assert.equal(kindOf([6, 8, 11]), 'obtuse')
+    assert.equal(kindOf([1.5, 2, 2.5]), 'right')
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const rounds = createClassifyRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, CLASSIFY_ROUNDS)
+            for (const kind of ['acute', 'right', 'obtuse'] as const) assert.ok(rounds.filter((round) => round.kind === kind).length >= 2)
+            for (const round of rounds) {
+                assert.ok(isTriangle(round.sides), `${round.sides}`)
+                assert.equal(kindOf(round.sides), round.kind)
+                assert.equal(new Set(round.sides).size, 3)
+                if (level < 2) assert.ok(round.sides.every(Number.isInteger))
+                else assert.ok(round.sides.some((side) => !Number.isInteger(side)))
+            }
+        }
+    }
+})
+
+/** The number at the end of a line: after the last «=» or «≈» */
+const endValue = (latex: string) => Number(latex.split('\\to\\ ').pop()!.split(/=|\\approx /).pop()!.replace('{,}', '.').trim())
+
+test('pitagoras 2. DBH detective: one wrong line, the fix ends on the right length', () => {
+    checkTexts([...Object.values(pythagorasDetectiveNames), ...Object.values(pythagorasDetectiveTips)])
+    for (let level = 0; level < 3; level += 1) {
+        const seen = new Set<string>()
+        for (let seed = 1; seed <= 100; seed += 1) {
+            for (const item of createPythagorasDetectiveCases(createRandom(seed * 7919 + level), level)) {
+                seen.add(item.error)
+                assert.ok(pythagorasDetectiveLevels[level].includes(item.error))
+                assert.ok(item.options.includes(item.error) && new Set(item.options).size === 3)
+                assert.equal(item.lines.length, 3)
+                for (const line of item.lines) katex.renderToString(line.latex, { throwOnError: true, strict: 'error' })
+                katex.renderToString(item.fix, { throwOnError: true, strict: 'error' })
+                checkTexts([item.problem])
+                assert.ok(!/\{,\}/.test(item.problem.es), item.problem.es)
+                assert.ok(Math.abs(endValue(item.fix) - item.right) < 1e-9, `${item.error}: ${item.fix} ≠ ${item.right}`)
+                assert.ok(Math.abs(endValue(item.lines[2].latex) - item.reached) < 1e-9, `${item.error}: ${item.lines[2].latex} ≠ ${item.reached}`)
+            }
+        }
+        assert.equal(seen.size, 4)
     }
 })

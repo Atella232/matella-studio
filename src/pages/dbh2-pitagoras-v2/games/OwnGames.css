@@ -1,0 +1,21 @@
+/* ---------- Pitagorasen teorema (2. DBH) games: the layout comes from Proportzionaltasuna 3. DBH (prop3-*) ---------- */
+
+.fraction-v2-games-card[data-game="ladder"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="classify"] { --game-tint: var(--mustard-tint, #fbebc0); }
+.fraction-v2-games-card[data-game="detective"] { --game-tint: var(--paper-deep, #ece6da); }
+
+.pyth2-problem { font-weight: 600; text-align: start; }
+
+/* The ladder */
+.pyth2-scene { display: block; width: min(100%, 320px); height: auto; margin: 0 auto; border: 2px solid var(--ink); border-radius: 14px; background: var(--card); }
+.pyth2-ladder { stroke: var(--mustard, #c8962b); }
+.pyth2-ladder.right { stroke: var(--success, #267b53); }
+.pyth2-ladder.wrong { stroke: var(--error, #c4432a); }
+.pyth2-controls { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.pyth2-controls input[type="range"] { width: min(100%, 320px); accent-color: var(--coral); }
+
+/* What triangle is it */
+.pyth2-sides { display: flex; justify-content: center; gap: 10px; font-size: 24px; font-weight: 700; }
+.pyth2-sides > span { padding: 6px 14px; border: 2px solid var(--ink); border-radius: 12px; background: var(--card); }
+.pyth2-kinds { grid-template-columns: repeat(3, 1fr); }
+.pyth2-kinds button { font-size: 15px; }

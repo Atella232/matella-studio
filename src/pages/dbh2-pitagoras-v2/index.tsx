@@ -36,7 +36,7 @@ const pitagorasUnit: UnitDefinition = {
         render: (props) => <PythagorasLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, eskailera, zer triangelu da?, Pitagorasen detektibea eta memoria.', es: 'Cinco juegos: carrera, la escalera, ¿qué triángulo es?, detective de Pitágoras y memoria.', en: 'Five games: race, the ladder, what triangle is it?, Pythagoras detective and memory.', ar: 'خمس ألعاب: السباق والسلّم وأي مثلث هذا؟ ومخبر فيثاغورس والذاكرة.' },
         progressIds: pythagorasGameProgressIds,
         recordsKey: PYTHAGORAS_GAME_RECORDS_KEY,
         render: (props) => <PythagorasGames {...props} />

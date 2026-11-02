@@ -5,6 +5,7 @@ import type { UnitLanguage } from '../../../features/unit-v2/types'
 import '../../dbh2-zatikiak-prototype/games/Games.css'
 import { createPythagorasMemoryBoard, PYTHAGORAS_MEMORY_PAIRS } from './boards'
 import { PythagorasGameArt } from './GameArt'
+import { ClassifyGame, LadderGame, PythagorasDetectiveGame } from './PythagorasOwnGames'
 import { PYTHAGORAS_GAME_RECORDS_KEY, pythagorasGameModeForPath, pythagorasGames, pythagorasGameSlugs, type PythagorasGameId } from './info'
 import { PythagorasRaceGame } from './RaceGame'
 
@@ -12,6 +13,9 @@ const memoryGame = pythagorasGames.find((game) => game.id === 'memory')!
 
 const components: Record<PythagorasGameId, (props: GameProps) => JSX.Element> = {
     race: PythagorasRaceGame,
+    ladder: LadderGame,
+    classify: ClassifyGame,
+    detective: PythagorasDetectiveGame,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <PythagorasGameArt game="memory" />, pairs: PYTHAGORAS_MEMORY_PAIRS, createBoard: createPythagorasMemoryBoard }} />
 }
 
