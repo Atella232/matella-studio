@@ -186,3 +186,56 @@
     font-size: 14px;
     font-weight: 700;
 }
+
+/* ---------- Worked steps, one at a time ---------- */
+
+.lesson-steps-next {
+    display: grid;
+    gap: 12px;
+    margin-top: -12px;
+    padding: 14px 18px;
+    border: 2px dashed var(--stage);
+    border-radius: 16px;
+    background: var(--stage-soft);
+}
+
+.fraction-v2 .lesson-steps-next p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+.lesson-steps-next strong {
+    color: var(--stage-ink);
+}
+
+.lesson-steps-next-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+}
+
+.lesson-steps-all {
+    padding: 8px 2px;
+    border: 0;
+    color: var(--stage-ink);
+    background: none;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+/* The step just revealed takes the focus: show it gently */
+.fraction-v2-lesson-steps li:focus {
+    outline: none;
+}
+
+.fraction-v2-lesson-steps li:focus-visible {
+    outline: 3px solid var(--stage);
+    outline-offset: 2px;
+}

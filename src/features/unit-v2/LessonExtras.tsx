@@ -37,6 +37,69 @@ export function LessonMistakeBox({ mistake, language }: { mistake: LessonMistake
 }
 
 /**
+ * The steps or facts of a lesson. When the steps solve the exercise of
+ * «Let's solve», they appear one at a time, so the student can think about
+ * the next move before seeing it; render it with the lesson id as key so
+ * every lesson starts again from the first step.
+ */
+export function LessonSteps({ steps, kind, progressive, language }: { steps: LessonStep[]; kind: 'steps' | 'facts'; progressive: boolean; language: UnitLanguage }) {
+    const l = (text: { eu: string; es: string; en: string; ar: string }) => pickText(language, text)
+    const [shown, setShown] = useState(1)
+    const listRef = useRef<HTMLOListElement>(null)
+    // The first step just revealed by a click, to move the focus there
+    const focusFrom = useRef<number | null>(null)
+    const visible = progressive ? steps.slice(0, shown) : steps
+    const next = visible.length + 1
+
+    useEffect(() => {
+        if (focusFrom.current === null) return
+        listRef.current?.querySelectorAll<HTMLElement>(':scope > li')[focusFrom.current]?.focus()
+        focusFrom.current = null
+    }, [shown])
+
+    const reveal = (count: number) => {
+        focusFrom.current = shown
+        setShown(count)
+    }
+
+    return (
+        <>
+            <ol className={`fraction-v2-lesson-steps ${kind}`} ref={listRef}>
+                {visible.map((step, index) => (
+                    <li key={index} tabIndex={progressive ? -1 : undefined}>
+                        <span className="fraction-v2-lesson-step-badge" aria-hidden="true">{kind === 'steps' ? index + 1 : ''}</span>
+                        <div className="fraction-v2-lesson-step-body">
+                            {step.title && <strong>{pickText(language, step.title)}</strong>}
+                            <p><MathText text={pickText(language, step.text)} /></p>
+                        </div>
+                        {step.math && <FitMath className="fraction-v2-lesson-step-math" text={pickMaybeText(language, step.math)} />}
+                    </li>
+                ))}
+            </ol>
+            {visible.length < steps.length && (
+                <div className="lesson-steps-next">
+                    <p>
+                        <strong>{l({ eu: 'Zer egingo zenuke orain?', es: '¿Qué harías ahora?', en: 'What would you do now?', ar: 'ماذا ستفعل الآن؟' })}</strong>{' '}
+                        {l({ eu: `Pentsatu, eta gero begiratu ${next}. urratsa.`, es: `Piénsalo y después mira el paso ${next}.`, en: `Think about it, then look at step ${next}.`, ar: `فكّر فيها ثم انظر إلى الخطوة ${next}.` })}
+                    </p>
+                    <div className="lesson-steps-next-actions">
+                        <button type="button" className="fraction-v2-secondary" onClick={() => reveal(shown + 1)}>
+                            {l({ eu: `Ikusi ${next}. urratsa`, es: `Ver el paso ${next}`, en: `Show step ${next}`, ar: `اعرض الخطوة ${next}` })}
+                            <Icon name="arrow" size={18} strokeWidth={2.4} className="fraction-v2-icon-flip" />
+                        </button>
+                        {steps.length - visible.length > 1 && (
+                            <button type="button" className="lesson-steps-all" onClick={() => reveal(steps.length)}>
+                                {l({ eu: 'Ikusi urrats guztiak', es: 'Ver todos los pasos', en: 'Show all the steps', ar: 'اعرض كل الخطوات' })}
+                            </button>
+                        )}
+                    </div>
+                </div>
+            )}
+        </>
+    )
+}
+
+/**
  * A formula block that never gets cut on a phone: when the formula is wider
  * than its box, the font shrinks (down to 60 %, never under 12 px); only
  * then does the box scroll.

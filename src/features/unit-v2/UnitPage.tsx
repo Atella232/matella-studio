@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { MathText } from '../../components/MathText'
 import { DiagnosticQuiz } from './Diagnostic'
 import { Icon } from './icons'
-import { FitMath, LessonCases, LessonFigure, LessonMistakeBox } from './LessonExtras'
+import { FitMath, LessonCases, LessonFigure, LessonMistakeBox, LessonSteps } from './LessonExtras'
 import { PracticeArea, PracticeDeck } from './Practice'
 import { parseUnitPath, unitBasePath, unitPathFor, type PracticeMode } from './routing'
 import { useStoredIds, useStoredTopics } from './storage'
@@ -385,6 +385,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
         const currentTone = stageOf(currentTopic.stage).tone
         const nextTopic = unit.topics[currentIndex + 1]
         const isLearned = learned.ids.includes(currentTopic.id)
+        const stepsKind = currentTopic.stepsKind ?? 'steps'
         const labToolId = unit.lab?.toolForTopic[currentTopic.id]
         const selectTopic = (id: string) => navigate('learn', id)
 
@@ -443,18 +444,14 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                         </div>
                     )}
                     {currentTopic.steps && (
-                        <ol className={`fraction-v2-lesson-steps ${currentTopic.stepsKind ?? 'steps'}`}>
-                            {currentTopic.steps.map((step, index) => (
-                                <li key={index}>
-                                    <span className="fraction-v2-lesson-step-badge" aria-hidden="true">{(currentTopic.stepsKind ?? 'steps') === 'steps' ? index + 1 : ''}</span>
-                                    <div className="fraction-v2-lesson-step-body">
-                                        {step.title && <strong>{l(step.title)}</strong>}
-                                        <p><MathText text={l(step.text)} /></p>
-                                    </div>
-                                    {step.math && <FitMath className="fraction-v2-lesson-step-math" text={pickMaybeText(language, step.math)} />}
-                                </li>
-                            ))}
-                        </ol>
+                        <LessonSteps
+                            key={currentTopic.id}
+                            steps={currentTopic.steps}
+                            kind={stepsKind}
+                            // One step at a time only when they solve «Let's solve», and until the lesson is understood
+                            progressive={Boolean(currentTopic.problem) && stepsKind === 'steps' && !isLearned}
+                            language={language}
+                        />
                     )}
                     <FitMath as="figure" className="fraction-v2-example" text={pickMaybeText(language, currentTopic.example)} />
                     {currentTopic.mistake && <LessonMistakeBox mistake={currentTopic.mistake} language={language} />}
