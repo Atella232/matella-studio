@@ -11,3 +11,10 @@ Shared code lives in `src/pages/dbh4-games/` (engines and detectives used by bot
 - With the existing `place` game, each unit has three own games.
 
 Tricks: in Arabic the two end boxes need `direction: ltr` so the left end stays on the left of the line. Basque names must not glue a suffix to a number («12z» → «hamabiz»).
+
+## Polynomials (ap `dbh4-aplikatuak-polinomioak`, ak `dbh4-akademikoak-polinomioak`)
+
+- `hunt` (`dbh4-games/polynomials.ts`, `PolynomialGames.tsx`): root hunt. The divisors of the constant term as chips; each try runs Ruffini (table shown); a root lowers the degree (roots can repeat); won with at most one miss. Level 1 three different roots, level 2 leading coefficient and repeated roots, level 3 degree 4. Ids ap 46301–3, ak 64301–3.
+- `divisible` (applied only): choose k (slider + stepper) so that x − a divides the polynomial; the Ruffini table shows the remainder. The test checks that only one k in −40…40 works. Ids 46401–3.
+- `simplify` (academic only): four simplifications of a fraction of quadratics; the wrong ones cancel the x², swap the signs or cancel the x. Ids 64401–3.
+- `detective` (`dbh4-games/polynomialsDetective.ts`): 16 errors; applied = operations, division, factorising; academic = division, factorising, algebraic fractions. Lines with polynomials or fractions are compared at x = 11. Ids ap 46501–3, ak 64501–3.

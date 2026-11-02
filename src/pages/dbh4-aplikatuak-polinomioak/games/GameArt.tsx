@@ -1,8 +1,13 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { PolynomialsGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { PolynomialArt } from '../../dbh4-games/PolynomialGames'
 
 /** Small illustration of each game; the art is the same in every language */
 export function PolynomialsGameArt({ game }: { game: PolynomialsGameId }) {
+    if (game === 'hunt') return <PolynomialArt game="hunt" />
+    if (game === 'divisible') return <PolynomialArt game="divisible" />
+    if (game === 'detective') return <DetectiveArt lines={['x² − 9', '= (x − 3)² ?', '(x + 3)(x − 3)']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

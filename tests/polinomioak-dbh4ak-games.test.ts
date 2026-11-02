@@ -57,7 +57,7 @@ function atX(latex: string, x: number): number {
 }
 
 test('polinomioak 4. DBH ak games: levels, ids and routes', () => {
-    assert.equal(polynomialsGames.length, 2)
+    assert.equal(polynomialsGames.length, 5)
     assert.equal(polynomialsGames[0].levels.length, POLYNOMIALS_RACE_CIRCUITS)
     assert.equal(polynomialsGames[1].levels.length, polynomialsMemoryLevels.length)
     assert.equal(new Set(polynomialsGameProgressIds).size, polynomialsGameProgressIds.length)

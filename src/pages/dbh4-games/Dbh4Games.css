@@ -12,3 +12,22 @@
 .dbh4-end-buttons { display: flex; gap: 6px; }
 .dbh4-end-buttons button { min-width: 44px; min-height: 38px; border: 2px solid var(--ink); border-radius: 10px; background: var(--card); font: inherit; font-size: 18px; font-weight: 700; color: var(--ink); cursor: pointer; }
 .dbh4-end-buttons button[aria-pressed="true"] { background: var(--blue-tint, #dde7f7); }
+
+.fraction-v2-games-card[data-game="hunt"] { --game-tint: var(--mustard-tint, #fbebc0); }
+.fraction-v2-games-card[data-game="divisible"] { --game-tint: var(--success-tint, #d9efe2); }
+.fraction-v2-games-card[data-game="simplify"] { --game-tint: var(--coral-tint, #f6d5cc); }
+
+/* The polynomial games */
+.dbh4-candidates { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.dbh4-candidates button { min-width: 46px; min-height: 42px; border: 2px solid var(--ink); border-radius: 10px; background: var(--card); box-shadow: 0 2px 0 var(--ink); font: inherit; font-size: 17px; font-weight: 700; color: var(--ink); cursor: pointer; }
+.dbh4-candidates button.found { background: var(--success-tint, #d9efe2); border-color: var(--success, #267b53); }
+.dbh4-candidates button.missed { background: var(--coral-tint, #f6d5cc); border-color: var(--error, #c4432a); opacity: 0.7; box-shadow: none; }
+.dbh4-ruffini { margin: 0 auto; border-collapse: collapse; font-size: 16px; font-variant-numeric: tabular-nums; }
+.dbh4-ruffini td, .dbh4-ruffini th { min-width: 34px; padding: 3px 6px; text-align: center; }
+.dbh4-ruffini th { border-right: 2px solid var(--ink); color: var(--coral); }
+.dbh4-ruffini tr.result td { border-top: 2px solid var(--ink); font-weight: 700; }
+.dbh4-ruffini td.zero { color: var(--success, #267b53); }
+.dbh4-ruffini td.rest { color: var(--error, #c4432a); }
+.dbh4-hint { margin: 0; text-align: center; color: var(--muted); font-size: 14px; }
+.dbh4-fractions { grid-template-columns: 1fr 1fr; }
+.dbh4-fractions button { font-size: 20px; min-height: 70px; }

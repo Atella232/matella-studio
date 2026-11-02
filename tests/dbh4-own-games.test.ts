@@ -6,6 +6,8 @@ import type { LocalizedText } from '../src/features/unit-v2/types.ts'
 import { contains } from '../src/pages/dbh4-aplikatuak-errealak/reals.ts'
 import { createIntervalRounds, INTERVAL_MAX, INTERVAL_MIN, INTERVAL_ROUNDS } from '../src/pages/dbh4-games/intervals.ts'
 import { createRealsDetectiveCases, realsDetectiveLevels, realsDetectiveNames, realsDetectiveTips } from '../src/pages/dbh4-games/realsDetective.ts'
+import { createDivisibleRounds, createHuntRounds, createSimplifyRounds, divisorsOf, factoredLatex, fromRoots, K_MAX, K_MIN, patternLatex, polyLatex, ruffini, valueAt, withK } from '../src/pages/dbh4-games/polynomials.ts'
+import { createPolyDetectiveCases, POLY_DETECTIVE_X, polyDetectiveLevels, polyDetectiveNames, polyDetectiveTips } from '../src/pages/dbh4-games/polynomialsDetective.ts'
 import { checkTexts, renders } from './helpers/ownGamesCheck.ts'
 import { evaluate } from './helpers/realsRaceCheck.ts'
 
@@ -74,4 +76,61 @@ test('4. DBH build the interval: sets inside the line, distinct rounds, the prom
 
 test('4. DBH reals detective: both tracks', () => {
     for (const track of ['applied', 'academic'] as const) checkDetective(createRealsDetectiveCases(track), realsDetectiveLevels[track], realsDetectiveNames, realsDetectiveTips, 1e-3)
+})
+
+/* ---------- Polynomials ---------- */
+
+test('4. DBH root hunt: whole roots that divide the constant term, the product gives the polynomial', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 150; seed += 1) {
+            for (const round of createHuntRounds(createRandom(seed * 7919 + level), level)) {
+                assert.deepEqual(fromRoots(round.leading, round.roots), round.coefficients)
+                const constant = round.coefficients[round.coefficients.length - 1]
+                for (const root of round.roots) {
+                    assert.ok(divisorsOf(constant).includes(root), `${root} | ${constant}`)
+                    assert.equal(ruffini(round.coefficients, root).remainder, 0)
+                }
+                assert.equal(round.roots.length, level === 2 ? 4 : 3)
+                renders(polyLatex(round.coefficients))
+                renders(factoredLatex(round.leading, round.roots))
+            }
+        }
+    }
+})
+
+test('4. DBH divisible by x − a: only the right k leaves no remainder, inside the slider', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 150; seed += 1) {
+            for (const round of createDivisibleRounds(createRandom(seed * 7919 + level), level)) {
+                assert.ok(round.k >= K_MIN && round.k <= K_MAX && round.k !== 0)
+                for (let k = K_MIN; k <= K_MAX; k += 1) assert.equal(ruffini(withK(round, k), round.root).remainder === 0, k === round.k, `${patternLatex(round.pattern)} k=${k}`)
+                renders(patternLatex(round.pattern))
+            }
+        }
+    }
+})
+
+test('4. DBH simplify the fraction: the right option equals the fraction, the others do not', () => {
+    const value = (latex: string, x: number) => evaluate(latex.replace(/x/g, `(${x})`))!
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 150; seed += 1) {
+            for (const round of createSimplifyRounds(createRandom(seed * 7919 + level), level)) {
+                assert.equal(round.options.length, 4)
+                for (const x of [7.5, 13, -11.5]) {
+                    const exact = valueAt(round.numerator, x) / valueAt(round.denominator, x)
+                    round.options.forEach((option, index) => {
+                        renders(option)
+                        if (index === round.right) assert.ok(Math.abs(value(option, x) - exact) < 1e-9, option)
+                    })
+                }
+                round.options.forEach((option, index) => { if (index !== round.right) assert.ok([7.5, 13, -11.5].some((x) => Math.abs(value(option, x) - valueAt(round.numerator, x) / valueAt(round.denominator, x)) > 1e-6), option) })
+            }
+        }
+    }
+})
+
+test('4. DBH polynomials detective: both tracks', () => {
+    for (const track of ['applied', 'academic'] as const) {
+        checkDetective((random, level) => createPolyDetectiveCases(track)(random, level).map((item) => ({ ...item, fix: item.fix.replace(/x/g, `(${POLY_DETECTIVE_X})`), lines: item.lines.map((line, index) => (index === 2 ? { ...line, latex: line.latex.replace(/x/g, `(${POLY_DETECTIVE_X})`) } : line)) })), polyDetectiveLevels[track], polyDetectiveNames, polyDetectiveTips)
+    }
 })

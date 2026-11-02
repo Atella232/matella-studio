@@ -7,11 +7,17 @@ import { PolynomialsGameArt } from './GameArt'
 import { POLYNOMIALS_GAME_RECORDS_KEY, polynomialsGameModeForPath, polynomialsGames, polynomialsGameSlugs, type PolynomialsGameId } from './info'
 import { PolynomialsRaceGame } from './RaceGame'
 import '../../dbh1-aljebra-v2/games/AlgebraGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { DivisibleGame, RootHuntGame } from '../../dbh4-games/PolynomialGames'
+import { createPolyDetectiveCases, POLY_DETECTIVE_CASES, polyDetectiveNames, polyDetectiveTips } from '../../dbh4-games/polynomialsDetective'
 
 const memoryGame = polynomialsGames.find((game) => game.id === 'memory')!
 
 const components: Record<PolynomialsGameId, (props: GameProps) => JSX.Element> = {
     race: PolynomialsRaceGame,
+    hunt: (props) => <RootHuntGame {...props} game={polynomialsGames.find((game) => game.id === 'hunt')!} art={<PolynomialsGameArt game="hunt" />} />,
+    divisible: (props) => <DivisibleGame {...props} game={polynomialsGames.find((game) => game.id === 'divisible')!} art={<PolynomialsGameArt game="divisible" />} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: polynomialsGames.find((game) => game.id === 'detective')!, art: <PolynomialsGameArt game="detective" />, cases: POLY_DETECTIVE_CASES, createCases: createPolyDetectiveCases('applied'), names: polyDetectiveNames, tips: polyDetectiveTips }} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <PolynomialsGameArt game="memory" />, pairs: POLYNOMIALS_MEMORY_PAIRS, createBoard: createPolynomialsMemoryBoard }} />
 }
 

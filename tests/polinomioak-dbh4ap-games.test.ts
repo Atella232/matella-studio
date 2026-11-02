@@ -27,7 +27,7 @@ const mathIn = (text: string) => [...text.matchAll(/\$([^$]+)\$/g)].map((match) 
 const rootOf = (binomial: string) => (binomial === 'x' ? 0 : binomial.startsWith('x-') ? Number(binomial.slice(2)) : -Number(binomial.slice(2)))
 
 test('polinomioak 4. DBH ap games: levels, ids and routes', () => {
-    assert.equal(polynomialsGames.length, 2)
+    assert.equal(polynomialsGames.length, 5)
     assert.equal(polynomialsGames[0].levels.length, POLYNOMIALS_RACE_CIRCUITS)
     assert.equal(polynomialsGames[1].levels.length, polynomialsMemoryLevels.length)
     assert.equal(new Set(polynomialsGameProgressIds).size, polynomialsGameProgressIds.length)

@@ -35,7 +35,7 @@ const polinomioakUnit: UnitDefinition = {
         render: (props) => <PolynomialsLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, erroen ehiza, x − a-z zatigarria, polinomioen detektibea eta memoria.', es: 'Cinco juegos: carrera, caza de raíces, divisible por x − a, detective de polinomios y memoria.', en: 'Five games: race, root hunt, divisible by x − a, polynomials detective and memory.', ar: 'خمس ألعاب: السباق وصيد الجذور والقسمة على x − a ومخبر كثيرات الحدود والذاكرة.' },
         progressIds: polynomialsGameProgressIds,
         recordsKey: POLYNOMIALS_GAME_RECORDS_KEY,
         render: (props) => <PolynomialsGames {...props} />
