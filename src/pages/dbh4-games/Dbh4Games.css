@@ -79,3 +79,7 @@
 .fraction-v2-games-card[data-game="ratios"] { --game-tint: var(--success-tint, #d9efe2); }
 .dbh4-ratio-row { display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .dbh4-ratio-name { font-size: 18px; }
+
+/* The vectors games: the vector jump, find k */
+.fraction-v2-games-card[data-game="jump"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="lines"] { --game-tint: var(--coral-tint, #f6d5cc); }

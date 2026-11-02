@@ -1,8 +1,13 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { VectorsGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { VectorArt } from '../../dbh4-games/VectorGames'
 
 /** Small illustration of each game; the art is the same in every language */
 export function VectorsGameArt({ game }: { game: VectorsGameId }) {
+    if (game === 'jump') return <VectorArt game="jump" />
+    if (game === 'lines') return <VectorArt game="lines" />
+    if (game === 'detective') return <DetectiveArt lines={['AB = A − B ?', 'M = (A + B) / 2', '|v| = √(x² + y²)']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

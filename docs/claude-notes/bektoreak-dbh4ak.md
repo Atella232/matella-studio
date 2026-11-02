@@ -8,3 +8,7 @@ Course topic `vectores-rectas` in dbh4-akademikoak, folder `src/pages/dbh4-akade
 Phase 1+2 4ccaf16, lab 730b686 (ids 730xx–739xx), games 6a110ea. Merged to main and deployed 2026-10-18 (gh-pages 13b7e47), done from another session — a local checkout may be stale: `git pull` main first.
 
 Next 4. DBH akademikoak unit: `funciones` (then funciones-polinomicas-racionales, funciones-exponenciales, estadistica, combinatoria, probabilidad). Follows [[trigonometria-dbh4ak]].
+
+## Own games (2026-11-02)
+
+The vector jump (74301–3), find k (74401–3) and a vectors detective (74501–3). Details in `dbh4-own-games.md`.

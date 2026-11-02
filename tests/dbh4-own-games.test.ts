@@ -27,6 +27,8 @@ import { createPowersDetectiveCases, powersDetectiveLevels, powersDetectiveNames
 import { CIRCLE_ROUNDS, CIRCLE_STEP, circleQuestionLatex, createCircleRounds, createRatiosRounds, fittingAngles, fractionLatex, QUADRANT_SIGNS, RATIOS_ROUNDS, ratioFraction, ratioValue, valueLatex } from '../src/pages/dbh4-games/trigonometry.ts'
 import { createTrigDetectiveCases, trigDetectiveLevels, trigDetectiveNames, trigDetectiveTips } from '../src/pages/dbh4-games/trigDetective.ts'
 import { localize } from '../src/pages/dbh4-akademikoak-trigonometria/text.ts'
+import { createJumpRounds, createLinesRounds, JUMP_ROUNDS, jumpLanding, K_RANGE, lineLatex, LINES_ROUNDS, slopeOf, withK as lineWithK } from '../src/pages/dbh4-games/vectors.ts'
+import { createVectorsDetectiveCases, vectorsDetectiveLevels, vectorsDetectiveNames, vectorsDetectiveTips } from '../src/pages/dbh4-games/vectorsDetective.ts'
 import { checkTexts, renders } from './helpers/ownGamesCheck.ts'
 import { evaluate } from './helpers/realsRaceCheck.ts'
 
@@ -52,7 +54,7 @@ export function checkLanguages(texts: LocalizedText[]) {
 }
 
 /** The checks of a worked-solution detective: the level's errors, three options, the fix and the last line on their values */
-export function checkDetective<Error extends string>(create: (random: ReturnType<typeof createRandom>, level: number) => WorkedCase<Error>[], levels: Error[][], names: Record<Error, LocalizedText>, tips: Record<Error, LocalizedText>, tolerance = 1e-6, localize = (latex: string) => latex) {
+export function checkDetective<Error extends string>(create: (random: ReturnType<typeof createRandom>, level: number) => WorkedCase<Error>[], levels: Error[][], names: Record<Error, LocalizedText>, tips: Record<Error, LocalizedText>, tolerance = 1e-6, localize = (latex: string) => latex, read = endValue) {
     checkTexts([...Object.values<LocalizedText>(names), ...Object.values<LocalizedText>(tips)])
     checkLanguages([...Object.values<LocalizedText>(names), ...Object.values<LocalizedText>(tips)])
     for (let level = 0; level < levels.length; level += 1) {
@@ -70,8 +72,8 @@ export function checkDetective<Error extends string>(create: (random: ReturnType
                 checkTexts([item.problem])
                 checkLanguages([item.problem, ...item.lines.map((line) => line.label)])
                 assert.ok(!/\{,\}/.test(item.problem.es.replace(/\$[^$]+\$/g, '')), item.problem.es)
-                assert.ok(Math.abs(endValue(item.fix) - item.right) < tolerance * Math.max(1, Math.abs(item.right)), `${item.error}: ${item.fix} ≠ ${item.right}`)
-                assert.ok(Math.abs(endValue(item.lines[2].latex) - item.reached) < tolerance * Math.max(1, Math.abs(item.reached)), `${item.error}: ${item.lines[2].latex} ≠ ${item.reached}`)
+                assert.ok(Math.abs(read(item.fix) - item.right) < tolerance * Math.max(1, Math.abs(item.right)), `${item.error}: ${item.fix} ≠ ${item.right}`)
+                assert.ok(Math.abs(read(item.lines[2].latex) - item.reached) < tolerance * Math.max(1, Math.abs(item.reached)), `${item.error}: ${item.lines[2].latex} ≠ ${item.reached}`)
             }
         }
         assert.equal(seen.size, levels[level].length, `level ${level}: ${[...seen]}`)
@@ -706,5 +708,65 @@ test('4. DBH the other ratios: the right options follow the identity and the sig
 
 test('4. DBH trigonometry detective: right triangles, identities and problems, with sen and tg in every language', () => {
     for (const language of ['eu', 'es', 'en', 'ar'] as const) checkDetective(createTrigDetectiveCases, trigDetectiveLevels, trigDetectiveNames, trigDetectiveTips, 1e-6, (latex) => localize(language, latex))
+})
+
+test('4. DBH the vector jump: the answer lands on the target, inside the plane, never at the start of the steppers', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createJumpRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, JUMP_ROUNDS)
+            for (const round of rounds) {
+                assert.equal(round.kind, ['vector', 'mirror', 'combination'][level])
+                const landing = jumpLanding(round, round.answer)
+                if (round.kind === 'vector') assert.deepEqual(landing, round.b)
+                if (round.kind === 'mirror') assert.deepEqual([(round.a[0] + landing[0]) / 2, (round.a[1] + landing[1]) / 2], round.m)
+                if (round.kind === 'combination') {
+                    assert.deepEqual(landing, round.w)
+                    assert.notEqual(round.u[0] * round.v[1] - round.u[1] * round.v[0], 0)
+                    assert.ok(round.answer.every((value) => value !== 0 && Math.abs(value) <= 4))
+                }
+                for (const value of [...landing, ...round.answer]) assert.ok(Math.abs(value) <= 12)
+                assert.ok(!(round.answer[0] === 0 && round.answer[1] === 0))
+            }
+        }
+    }
+})
+
+test('4. DBH find k: parallel, perpendicular or through the point with the k found, and only that k', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createLinesRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, LINES_ROUNDS)
+            for (const round of rounds) {
+                assert.ok(round.k !== 0 && Math.abs(round.k) <= K_RANGE)
+                const holds = (k: number) => {
+                    const line = lineWithK(round, k)
+                    if (round.kind === 'parallel') return line.a * round.fixed.b - line.b * round.fixed.a === 0
+                    if (round.kind === 'perpendicular') return line.a * round.fixed.a + line.b * round.fixed.b === 0
+                    return line.a * round.point![0] + line.b * round.point![1] + line.c === 0
+                }
+                assert.deepEqual(Array.from({ length: 2 * K_RANGE + 1 }, (_, index) => index - K_RANGE).filter(holds), [round.k])
+                if (round.kind === 'parallel') {
+                    // Parallel, not the same line
+                    assert.ok(Math.abs(slopeOf(lineWithK(round, round.k))! - slopeOf(round.fixed)!) < 1e-9)
+                    assert.notEqual(lineWithK(round, round.k).c * round.fixed.b, round.fixed.c * lineWithK(round, round.k).b)
+                }
+                renders(lineLatex(round.fixed))
+                renders(lineLatex(round.moving, { slot: round.slot, text: 'k' }))
+                renders(lineLatex(lineWithK(round, round.k)))
+            }
+        }
+    }
+})
+
+/** A point (x,y) at the end of a line as x·1000 + y; anything else as a number */
+function pointRead(latex: string): number {
+    const last = latex.split('\\ \\to\\ ').pop()!.split('=').pop()!.trim()
+    const match = last.match(/^\((-?\d+),(-?\d+)\)$/)
+    return match ? Number(match[1]) * 1000 + Number(match[2]) : endValue(latex)
+}
+
+test('4. DBH vectors detective: vectors, lines and their positions', () => {
+    checkDetective(createVectorsDetectiveCases, vectorsDetectiveLevels, vectorsDetectiveNames, vectorsDetectiveTips, 1e-6, (latex) => latex, pointRead)
 })
 

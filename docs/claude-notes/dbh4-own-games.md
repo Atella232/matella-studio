@@ -86,3 +86,10 @@ Code in `dbh4-games/trigonometry.ts`, `TrigGames.tsx`, `trigDetective.ts`. Formu
 - `detective` (72501–3): 10 errors (cos for sen, multiplying by the tangent, sen for an elevation, sen + cos = 1, the sign of quadrant II, tg = cos/sen, reducing with 90°, area without ½, the height with cos, π rad = 360°). Exact surds (`5\sqrt{3}`) so `endValue` reads them.
 
 Engine change: `WorkedDetectiveConfig` has an optional `localize(latex, language)` applied to the lines and the fix; `checkDetective` in the tests takes the same function (the trig test runs it in all four languages).
+
+## Vectors (ak `dbh4-akademikoak-bektoreak`, route `vectores-rectas`)
+
+Code in `dbh4-games/vectors.ts`, `VectorGames.tsx`, `vectorsDetective.ts`.
+- `jump` (74301–3): the vector jump. Two steppers: the vector AB (level 1), the end B from A and the midpoint M (level 2), or a and b with a·u + b·v = w (level 3, u and v independent, a and b never 0). The arrows (and, after a miss, the right path dashed) appear after checking; they are clipped to the grid.
+- `lines` (74401–3): find k. Two lines in general form with k in one coefficient: parallel (not the same line), perpendicular, or the line through P. The test checks that only that k in −10…10 works. Both lines are drawn after checking (the right one dashed after a miss).
+- `detective` (74501–3): 11 errors (A − B, half the difference for the midpoint, the length without the root, a number times one coordinate, the slope upside down, the normal taken as the direction, the sign of the point in y − y₀ = m(x − x₀), the perpendicular slope without the minus, the parallel proportion upside down, r² taken as the radius, a distance as Δx + Δy). Points and vectors end a line as `(x,y)`; the test reads them as x·1000 + y (`checkDetective` now takes a `read` function).

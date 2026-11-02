@@ -41,7 +41,7 @@ const bektoreakUnit: UnitDefinition = {
         render: (props) => <VectorsLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, bektore-jauzia, aurkitu k, bektoreen detektibea eta memoria.', es: 'Cinco juegos: carrera, el salto del vector, encuentra k, detective de vectores y memoria.', en: 'Five games: race, the vector jump, find k, vectors detective and memory.', ar: 'خمس ألعاب: السباق وقفزة المتجه وأوجد k ومخبر المتجهات والذاكرة.' },
         progressIds: vectorsGameProgressIds,
         recordsKey: VECTORS_GAME_RECORDS_KEY,
         render: (props) => <VectorsGames {...props} />

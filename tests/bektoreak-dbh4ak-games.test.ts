@@ -86,7 +86,7 @@ function expected(question: VectorsRaceQuestion): Expected {
 }
 
 test('bektoreak 4. DBH ak games: levels, ids and routes', () => {
-    assert.equal(vectorsGames.length, 2)
+    assert.equal(vectorsGames.length, 5)
     assert.equal(vectorsGames[0].levels.length, VECTORS_RACE_CIRCUITS)
     assert.equal(vectorsGames[1].levels.length, vectorsMemoryLevels.length)
     assert.equal(new Set(vectorsGameProgressIds).size, vectorsGameProgressIds.length)
