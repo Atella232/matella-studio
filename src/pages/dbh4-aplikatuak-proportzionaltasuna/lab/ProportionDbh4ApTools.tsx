@@ -5,7 +5,7 @@ import { NumberField } from '../../../features/unit-v2/lab/NumberField'
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { fraction, toExactDecimal, toNumber, type FractionValue } from '../../../features/unit-v2/math/fraction'
-import { decimalSeparatorFor } from '../../../utils/numberFormat'
+import { decimalSeparatorFor, groupDigits, groupLatex } from '../../../utils/numberFormat'
 import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { PredictionStep } from '../../dbh2-zatikiak-prototype/lab/PredictionStep'
 import {
@@ -84,11 +84,14 @@ const localLatex = (language: string, latex: string) => (language === 'ar' ? lat
 /** Money or any number rounded to the cent, with the language's decimal mark (point in Arabic and English) */
 const money = (language: string, value: number) => {
     const rounded = cents(value)
-    const text = Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(2)
+    const text = groupDigits(Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(2), language)
     return language === 'ar' ? text : text.replace('.', decimalSeparatorFor(language))
 }
-/** The same for LaTeX */
-const moneyLatex = (value: number) => money('eu', value).replace(',', '{,}')
+/** The same for LaTeX: 12\,000{,}50 */
+const moneyLatex = (value: number) => {
+    const rounded = cents(value)
+    return groupLatex(Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(2)).replace('.', '{,}')
+}
 /** An exact value in LaTeX: a short decimal, otherwise a fraction */
 const exactLatex = (value: FractionValue) => {
     if (shortDecimal(value)) return toExactDecimal(value, ',')!.replace(',', '{,}')

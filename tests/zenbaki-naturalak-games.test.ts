@@ -10,11 +10,11 @@ import { createSprintExpression, naturalValue, parseExpression, sprintOperations
 import { createNaturalsMemoryBoard, naturalsCardLatex, naturalsCardValue, naturalsMemoryLevels } from '../src/pages/dbh1-zenbaki-naturalak-v2/games/memory.ts'
 import { naturalsLabChallengeIds } from '../src/pages/dbh1-zenbaki-naturalak-v2/lab/labTools.ts'
 
-/** Reads an option written in the unit's style: 15.000, 2^{5}, \mathrm{XL}… */
+/** Reads an option written in the unit's style: 15\,000, 2^{5}, \mathrm{XL}… */
 function optionValue(latex: string): number | null {
     const power = latex.match(/^(\d+)\^\{(\d+)\}$/)
     if (power) return Number(power[1]) ** Number(power[2])
-    if (/^[\d.]+$/.test(latex)) return Number(latex.replace(/\./g, ''))
+    if (/^\d+(?:\\,\d{3})*$/.test(latex)) return Number(latex.replace(/\\,/g, ''))
     return null
 }
 
@@ -69,7 +69,7 @@ test('naturals race: rounding questions round the way the class does', () => {
     for (let round = 0; round < 300; round += 1) {
         const question = generateNaturalsRaceQuestion(random, 1, 2)
         if (question.kind !== 'reverse-round') continue
-        const target = Number(question.prompt.es.match(/da ([\d.]+)/)![1].replace(/\./g, ''))
+        const target = Number(question.prompt.es.match(/da ([\d\u00a0]+)/)![1].replace(/\u00a0/g, ''))
         const place = question.prompt.es.includes('decenas de millar') ? 10000 : question.prompt.es.includes('millares') ? 1000 : 100
         for (const option of question.options) assert.equal(roundTo(optionValue(option.latex)!, place) === target, option.correct, option.latex)
     }

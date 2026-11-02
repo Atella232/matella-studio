@@ -4,7 +4,7 @@ import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/Lab
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import type { LocalizedText, UnitLanguage } from '../../../features/unit-v2/types'
-import { decimalSeparatorFor } from '../../../utils/numberFormat'
+import { decimalSeparatorFor, groupDigits } from '../../../utils/numberFormat'
 import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { PredictionStep } from '../../dbh2-zatikiak-prototype/lab/PredictionStep'
 import { usePlayback } from '../../dbh4-aplikatuak-proportzionaltasuna/lab/usePlayback'
@@ -265,7 +265,7 @@ export function MapTool(props: LabToolProps) {
     const cm = mapCentimetres(state)
     const realCm = mapRealCentimetres(state)
     const metres = mapRealMetres(state)
-    const scaleText = (value: number) => (language === 'en' ? value.toLocaleString('en-GB') : String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ' '))
+    const scaleText = (value: number) => groupDigits(value, language)
     const controls = (
         <>
             <Segmented label={l(say('Eskala', 'Escala', 'المقياس', 'Scale'))} value={String(state.scale)} options={MAP_SCALES.map((scale, index) => ({ value: String(index), label: `1:${scaleText(scale)}` }))} onChange={(scale) => setState((s) => setMap(s, { scale: Number(scale) }))} />

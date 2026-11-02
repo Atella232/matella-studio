@@ -1,5 +1,6 @@
 import type { PairCard } from '../../../features/unit-v2/games/pairsMemory.ts'
 import { pick, randomInt, shuffle, type Random } from '../../../features/unit-v2/games/random.ts'
+import { groupLatex } from '../../../utils/numberFormat.ts'
 
 /* ==========================================================================
    Berreturak eta erroak (3. DBH) memory: a power and its value, a number in
@@ -19,7 +20,7 @@ export interface MemoryPair {
     key: string
 }
 
-const grouped = (digits: string) => digits.replace(/\B(?=(\d{3})+$)/g, '\\,')
+const grouped = (digits: string) => groupLatex(digits)
 
 function negativePair(random: Random): MemoryPair | null {
     const base = pick(random, [2, 3, 4, 5, 10])

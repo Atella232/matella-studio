@@ -3,6 +3,7 @@ import { parTimeFor, type RaceOption, type RaceQuestion, type Tier } from '../..
 import { pick, randomInt, shuffle, type Random } from '../../../features/unit-v2/games/random.ts'
 import type { LocalizedText } from '../../../features/unit-v2/types.ts'
 import { gcd, rationalPower } from '../radicals.ts'
+import { groupLatex } from '../../../utils/numberFormat.ts'
 
 /* ==========================================================================
    Berreturen lasterketa (4. DBH akademikoak): five circuits, one per
@@ -124,7 +125,7 @@ function scientificExponentQuestion(random: Random, tier: Tier): PowersRaceQuest
     // The number written out: digits followed or preceded by zeros
     const shown = exponent > 0 ? `${digits.padEnd(exponent + 1, '0')}` : `0{,}${'0'.repeat(-exponent - 1)}${digits}`
     if (shown.replace(/\D/g, '').length > 12) return null
-    const grouped = exponent > 0 ? shown.replace(/\B(?=(\d{3})+$)/g, '\\,') : shown
+    const grouped = exponent > 0 ? groupLatex(shown) : shown
     const choices = options(random, fraction(exponent), [whole(-exponent, 'exponent-sign'), whole(exponent + (exponent > 0 ? 1 : -1), 'no-adjust'), whole(exponent - (exponent > 0 ? 1 : -1), 'no-adjust'), ...near(fraction(exponent))])
     return choices && build(0, 'scientific', howMuch(`${grouped}=${mantissa}\\cdot 10^{n}`, 'n'), choices, fraction(exponent), same(`${grouped}=${mantissa}\\cdot 10^{${exponent}}`), { exponent, length: digits.length })
 }

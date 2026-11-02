@@ -30,7 +30,7 @@ import {
     type ReceiptStep
 } from './receipt'
 import { roundedAnswer } from './percentBar'
-import { decimalSeparatorFor } from '../../../utils/numberFormat'
+import { decimalSeparatorFor, groupDigits } from '../../../utils/numberFormat'
 import './Receipt.css'
 
 const INK = 'var(--ink, #1d2733)'
@@ -45,7 +45,7 @@ const say = (eu: string, es: string, ar: string, en: string): Text => ({ eu, es,
 /** Euros on a receipt: always two decimals, 64,00 (64.00 in Arabic and English), with a real minus sign */
 function money(language: string, value: FractionValue, sign = false) {
     const cents = Math.round(toNumber(value) * 100)
-    const text = (Math.abs(cents) / 100).toFixed(2)
+    const text = groupDigits((Math.abs(cents) / 100).toFixed(2), language)
     const prefix = sign ? (cents < 0 ? '−' : '+') : cents < 0 ? '−' : ''
     return `${prefix}${language === 'ar' ? text : text.replace('.', decimalSeparatorFor(language))}`
 }

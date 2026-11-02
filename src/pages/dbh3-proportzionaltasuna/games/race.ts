@@ -3,6 +3,7 @@ import { parTimeFor, type RaceOption, type RaceQuestion, type Tier } from '../..
 import { pick, randomInt, shuffle, type Random } from '../../../features/unit-v2/games/random.ts'
 import type { LocalizedText } from '../../../features/unit-v2/types.ts'
 import { readMoneyAnswer } from '../../dbh4-aplikatuak-proportzionaltasuna/answers.ts'
+import { groupLatex } from '../../../utils/numberFormat.ts'
 
 /* ==========================================================================
    Proportzionaltasunaren lasterketa (3. DBH): five circuits, one per stage —
@@ -110,7 +111,7 @@ function meanQuestion(random: Random): Proportion3RaceQuestion | null {
 }
 
 const SCALES = [10000, 20000, 25000, 50000, 100000, 200000]
-const grouped = (value: number) => String(value).replace(/\B(?=(\d{3})+(?!\d))/g, '\\,')
+const grouped = (value: number) => groupLatex(value)
 
 function scaleQuestion(random: Random, tier: Tier): Proportion3RaceQuestion | null {
     const n = pick(random, SCALES)

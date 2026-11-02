@@ -3,6 +3,7 @@ import { parTimeFor, type RaceOption, type RaceQuestion, type Tier } from '../..
 import { pick, randomInt, shuffle, type Random } from '../../../features/unit-v2/games/random.ts'
 import type { LocalizedText } from '../../../features/unit-v2/types.ts'
 import { readCountAnswer } from '../answers.ts'
+import { groupLatex } from '../../../utils/numberFormat.ts'
 
 /* ==========================================================================
    Konbinatoriaren lasterketa (4. DBH akademikoak): five circuits, one per
@@ -53,7 +54,7 @@ export const factorial = (n: number): number => (n <= 1 ? 1 : n * factorial(n - 
 const arrange = (n: number, k: number) => (k > n ? 0 : factorial(n) / factorial(n - k))
 const choose = (n: number, k: number) => (k < 0 || k > n ? 0 : arrange(n, k) / factorial(k))
 /** A count in LaTeX, thousands grouped with a thin space */
-export const big = (value: number) => String(value).replace(/\B(?=(\d{3})+(?!\d))/g, '\\,')
+export const big = (value: number) => groupLatex(value)
 
 interface Candidate {
     value: number

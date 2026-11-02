@@ -2,6 +2,7 @@ import { pick, randomInt } from '../../../features/unit-v2/games/random.ts'
 import type { LabChallenge, LabChallengeMaker } from '../../../features/unit-v2/lab/types.ts'
 import type { LocalizedText } from '../../../features/unit-v2/types.ts'
 import { compareTo, freshFrom, type Prediction } from './prediction.ts'
+import { groupLatex } from '../../../utils/numberFormat.ts'
 
 /* ==========================================================================
    L3 · El mapa a escala: the learner picks a scale 1 : n and stretches the
@@ -45,7 +46,7 @@ export const mapPrediction = (state: MapState): Prediction => compareTo(mapRealM
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
 const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar: ar.replace(/\{,\}/g, '.') })
 /** 50000 as 50\,000 inside LaTeX */
-export const groupedLatex = (value: number) => String(value).replace(/\B(?=(\d{3})+(?!\d))/g, '\\,')
+export const groupedLatex = (value: number) => groupLatex(value)
 const scaleLatex = (index: number) => `1\\mathbin{:}${groupedLatex(MAP_SCALES[index])}`
 const dec = (value: number) => String(value).replace('.', '{,}')
 /** A real distance for a prompt, in LaTeX: 750 m or 2,5 km */

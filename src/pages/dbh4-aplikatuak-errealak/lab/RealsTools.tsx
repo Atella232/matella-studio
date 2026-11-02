@@ -8,7 +8,7 @@ import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { LineInterval, LinePoint, RealAxis } from '../realLine'
 import { lineMap } from '../realLineMap'
 import { commaLatex, contains, decimalKind, divisionRemainders, expansionLatex, generatrixLatex, inequalityLatex, intervalLatex, primeFactors, simplifySqrt, radicalLatex, toScientific } from '../reals'
-import { decimalSeparatorFor, thousandsSeparatorFor } from '../../../utils/numberFormat'
+import { decimalSeparatorFor, groupDigits } from '../../../utils/numberFormat'
 import {
     DECIMAL_LIMITS,
     INTERVAL_LIMIT,
@@ -400,11 +400,10 @@ export function ScientificTool(props: LabToolProps) {
     const ok = isScientific(state)
     const target = toScientific(item.text)
     const grouped = (text: string) => {
-        // Arabic keeps the grouping it had (its decimals keep a stray space: "0.00 052"); the other languages get their thousands and decimal marks
-        if (props.language === 'ar') return local(props.language, text.replace(/\B(?=(\d{3})+(?!\d))/g, ' ').replace(/(\.\d*)/, (decimals) => decimals.replace(/ /g, '')))
+        // Thousands grouped in the whole part only (Arabic used to group its decimals too: "0.00 052"); Arabic keeps the decimal point
         const [whole, decimals] = text.split('.')
-        const groupedWhole = whole.replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSeparatorFor(props.language))
-        return minus(decimals === undefined ? groupedWhole : `${groupedWhole}${decimalSeparatorFor(props.language)}${decimals}`)
+        const groupedWhole = groupDigits(whole, props.language)
+        return minus(decimals === undefined ? groupedWhole : `${groupedWhole}${props.language === 'ar' ? '.' : decimalSeparatorFor(props.language)}${decimals}`)
     }
     const controls = (
         <>

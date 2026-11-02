@@ -3,6 +3,7 @@ import { parTimeFor, type RaceOption, type RaceQuestion, type Tier } from '../..
 import { pick, randomInt, shuffle, type Random } from '../../../features/unit-v2/games/random.ts'
 import type { LocalizedText } from '../../../features/unit-v2/types.ts'
 import type { LineSpec } from '../realLineMap.ts'
+import { groupLatex } from '../../../utils/numberFormat.ts'
 import {
     commaLatex,
     decimalKind,
@@ -441,7 +442,7 @@ function fromSci(mantissa: string, exponent: number): string {
 
 const groupedNumber = (text: string) => {
     const [whole, decimals] = text.split('.')
-    const groupedWhole = whole.replace(/\B(?=(\d{3})+(?!\d))/g, '\\,')
+    const groupedWhole = groupLatex(whole)
     return decimals ? `${groupedWhole}{,}${decimals.replace(/(\d{3})(?=\d)/g, '$1\\,')}` : groupedWhole
 }
 

@@ -6,7 +6,7 @@ import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { fraction, type FractionValue } from '../../../features/unit-v2/math/fraction'
 import type { LocalizedText, UnitLanguage } from '../../../features/unit-v2/types'
 import { INK, LINE, MUTED, PAPER, SECOND, STAGE, STAGE_TINT } from '../../dbh2-estatistika-v2/palette'
-import { decimalSeparatorFor } from '../../../utils/numberFormat'
+import { decimalSeparatorFor, groupLatex } from '../../../utils/numberFormat'
 import { DieFace } from '../figures'
 import {
     DRAW_K_MAX,
@@ -77,7 +77,7 @@ const plainDecimal = (value: number, language: UnitLanguage, digits = 3) => {
 /** A fraction in LaTeX: whole numbers plain, negatives with the sign in front */
 const texFraction = (value: FractionValue) => (value.denominator === 1 ? String(value.numerator) : `${value.numerator < 0 ? '-' : ''}\\frac{${Math.abs(value.numerator)}}{${value.denominator}}`)
 /** Thousands grouped with a thin space in LaTeX */
-const big = (value: number) => String(value).replace(/\B(?=(\d{3})+(?!\d))/g, '\\,')
+const big = (value: number) => groupLatex(value)
 
 function Board({ height, label, children }: { height: number; label: string; children: ReactNode }) {
     return <svg viewBox={`0 0 640 ${height}`} direction="ltr" role="img" aria-label={label} style={{ width: '100%', height: 'auto', fontFamily: '"Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif' }}>{children}</svg>

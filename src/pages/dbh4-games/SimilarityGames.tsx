@@ -6,7 +6,7 @@ import type { GameProps } from '../../features/unit-v2/games/GamesHub'
 import { RoundGame, RoundVerdict, type RoundProps } from '../../features/unit-v2/games/RoundGame'
 import type { GameInfo } from '../../features/unit-v2/games/records'
 import type { LocalizedText, UnitLanguage } from '../../features/unit-v2/types'
-import { thousandsSeparatorFor } from '../../utils/numberFormat'
+import { groupDigits } from '../../utils/numberFormat'
 import { standardStars } from './equations'
 import { tex } from './geometryDetective'
 import { CONTEXT_UNIT, createMapRounds, createScaleRounds, createTowerRounds, kLatex, MAP_ROUNDS, mapPrompt, RULER_CM, SCALE_ROUNDS, scaleFactor, scalePrompt, TOWER_MAX, TOWER_ROUNDS, towerLayout, type MapRound, type ScaleRound, type TowerRound } from './similarity'
@@ -333,7 +333,7 @@ const CM_PX = 28
 const ROAD_Y = 74
 
 /** 1 : 200 000 as plain text, the thousands mark of the language (a thin space but in English) */
-const scaleText = (scale: number, language: UnitLanguage) => `1 : ${String(scale).replace(/\B(?=(\d{3})+$)/g, language === 'en' ? thousandsSeparatorFor(language) : ' ')}`
+const scaleText = (scale: number, language: UnitLanguage) => `1 : ${groupDigits(scale, language)}`
 
 function MapScene({ round, mark, answered, onPick, language }: { round: MapRound; mark: number | null; answered: boolean; onPick: (cm: number) => void; language: UnitLanguage }) {
     const x = (cm: number) => RULER_LEFT + cm * CM_PX

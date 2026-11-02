@@ -1,4 +1,5 @@
 import { fraction, gcd, type FractionValue } from '../../features/unit-v2/math/fraction.ts'
+import { groupLatex } from '../../utils/numberFormat.ts'
 
 /* ==========================================================================
    Zenbaki errealak (4. DBH, aplikatuak) — pure maths shared by the lessons,
@@ -211,7 +212,7 @@ export const scientificLatex = ({ mantissa, exponent }: Scientific) => `${commaL
 export function groupedLatex(text: string): string {
     const [whole, decimals] = text.replace('-', '').split('.')
     const sign = text.startsWith('-') ? '-' : ''
-    const groupedWhole = whole.replace(/\B(?=(\d{3})+(?!\d))/g, '\\,')
+    const groupedWhole = groupLatex(whole)
     const groupedDecimals = decimals ? decimals.replace(/(\d{3})(?=\d)/g, '$1\\,') : ''
     return `${sign}${groupedWhole}${decimals ? `{,}${groupedDecimals}` : ''}`
 }

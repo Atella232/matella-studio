@@ -8,6 +8,8 @@ import { Proportion3GameArt } from './GameArt'
 import { proportion3Games } from './info'
 import { createTreasureRounds, TREASURE_HALVES_MAX, TREASURE_ROUNDS, treasureStars, type TreasureRound } from './treasure'
 import './Games.css'
+import { groupDigits } from '../../../utils/numberFormat'
+import type { UnitLanguage } from '../../../features/unit-v2/types'
 
 const game = proportion3Games.find((item) => item.id === 'treasure')!
 
@@ -18,7 +20,7 @@ const GREEN = 'var(--success, #267b53)'
 const CM = 12
 
 /** The map: a dashed path from the camp, the ruler under it and the chest at `halves` half-centimetres */
-function TreasureMap({ halves, scale, showScale, chest, answer }: { halves: number; scale: number; showScale: boolean; chest: boolean; answer: number | null }) {
+function TreasureMap({ halves, scale, showScale, chest, answer, language }: { halves: number; scale: number; showScale: boolean; chest: boolean; answer: number | null; language: UnitLanguage }) {
     const x0 = 36
     const at = (value: number) => x0 + (value / 2) * CM * 2
     return (
@@ -38,7 +40,7 @@ function TreasureMap({ halves, scale, showScale, chest, answer }: { halves: numb
                 </g>
             ))}
             <text x={at(TREASURE_HALVES_MAX) + 6} y={160} fontSize={12} fill={MUTED}>cm</text>
-            {showScale && <text x={344} y={110} textAnchor="end" fontSize={14} fontWeight={700} fill={INK}>{`1 : ${String(scale).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}`}</text>}
+            {showScale && <text x={344} y={110} textAnchor="end" fontSize={14} fontWeight={700} fill={INK}>{`1 : ${groupDigits(scale, language)}`}</text>}
         </svg>
     )
 }
@@ -146,7 +148,7 @@ export function TreasureGame({ language, records, onResult, onExit }: GameProps)
                 {Array.from({ length: TREASURE_ROUNDS }, (_, position) => <span key={position} className={position < results.length ? (results[position] ? 'right' : 'wrong') : position === index ? 'now' : ''} />)}
             </div>
             <p className="prop3-prompt">{prompt}</p>
-            <TreasureMap halves={place ? halves : round.halves} scale={round.scale} showScale={round.mode !== 'scale'} chest={place || round.mode !== 'place'} answer={place && picked !== null ? round.answer : null} />
+            <TreasureMap language={language} halves={place ? halves : round.halves} scale={round.scale} showScale={round.mode !== 'scale'} chest={place || round.mode !== 'place'} answer={place && picked !== null ? round.answer : null} />
             {place && (
                 <>
                     <div className="prop3-buttons" role="group" aria-label={l({ eu: 'Mugitu kutxa', es: 'Mueve el cofre', en: 'Move the chest', ar: 'حرّك الصندوق' })} style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>

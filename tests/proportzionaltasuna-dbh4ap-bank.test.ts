@@ -94,7 +94,7 @@ test('proportzionaltasuna 4. DBH ap bank: numbers and stars', () => {
     assert.equal(moneyText(4440.7311, 'es'), '4440,73')
     assert.equal(moneyText(4440.7311, 'ar'), '4440.73')
     assert.equal(moneyText(4500, 'eu'), '4500')
-    assert.equal(moneyText(13488.5, 'es'), '13\u202f488,50')
+    assert.equal(moneyText(13488.5, 'es'), '13\u00a0488,50')
     assert.equal(latexNumber(10609), '10\\,609')
     assert.equal(latexNumber(1.045), '1{,}045')
     assert.equal(latexNumber(-4), '-4')

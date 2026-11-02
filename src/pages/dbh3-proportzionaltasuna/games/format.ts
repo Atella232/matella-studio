@@ -1,5 +1,5 @@
 import type { UnitLanguage } from '../../../features/unit-v2/types.ts'
-import { decimalSeparatorFor } from '../../../utils/numberFormat.ts'
+import { decimalSeparatorFor, groupDigits } from '../../../utils/numberFormat.ts'
 
 /* ==========================================================================
    How the games of this unit write numbers on screen: the decimal comma in
@@ -10,7 +10,7 @@ import { decimalSeparatorFor } from '../../../utils/numberFormat.ts'
 export function num(value: number, language: UnitLanguage, digits = 2): string {
     const rounded = Math.round(value * 10 ** digits) / 10 ** digits
     const [whole, decimals] = String(rounded).split('.')
-    const thousands = whole.length > 4 ? whole.replace(/\B(?=(\d{3})+(?!\d))/g, language === 'en' ? ',' : language === 'ar' ? '' : ' ') : whole
+    const thousands = groupDigits(whole, language)
     if (!decimals) return thousands
     return `${thousands}${language === 'ar' ? '.' : decimalSeparatorFor(language)}${decimals}`
 }
@@ -36,4 +36,4 @@ export function distanceText(metres: number, language: UnitLanguage): string {
 }
 
 /** A scale: 1 : 50 000 */
-export const scaleText = (scale: number, language: UnitLanguage) => `1 : ${language === 'en' ? scale.toLocaleString('en-GB') : String(scale).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}`
+export const scaleText = (scale: number, language: UnitLanguage) => `1 : ${groupDigits(scale, language)}`

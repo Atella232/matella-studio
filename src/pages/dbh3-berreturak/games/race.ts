@@ -2,6 +2,7 @@ import { checkAnswer, fraction, hasTerminatingDecimal, power, toExactDecimal, ty
 import { parTimeFor, type RaceOption, type RaceQuestion, type Tier } from '../../../features/unit-v2/games/raceCore.ts'
 import { pick, randomInt, shuffle, type Random } from '../../../features/unit-v2/games/random.ts'
 import type { LocalizedText } from '../../../features/unit-v2/types.ts'
+import { groupLatex } from '../../../utils/numberFormat.ts'
 
 /* ==========================================================================
    Berreturen lasterketa (3. DBH): five circuits, one per stage — powers
@@ -92,7 +93,7 @@ function build(circuit: number, kind: string, prompt: LocalizedText, choices: Ra
 const calc = (formula: string) => say(`Kalkulatu ${math(formula)}.`, `Calcula ${math(formula)}.`, `احسب ${math(formula)}.`, `Calculate ${math(formula)}.`)
 const howMuch = (formula: string, letter: string) => say(`${math(formula)}. Zenbat da ${math(letter)}?`, `${math(formula)}. ¿Cuánto vale ${math(letter)}?`, `${math(formula)}. كم تساوي ${math(letter)}؟`, `${math(formula)}. What is the value of ${math(letter)}?`)
 const paren = (value: number) => (value < 0 ? `(${value})` : String(value))
-const grouped = (value: number) => String(value).replace(/\B(?=(\d{3})+$)/g, '\\,')
+const grouped = (value: number) => groupLatex(value)
 
 /* ---------- Circuit 0: powers ---------- */
 
@@ -150,7 +151,7 @@ function sciExponentQuestion(random: Random, tier: Tier): PowersRaceQuestion | n
     const mantissa = `${digits[0]}${digits.length > 1 ? `{,}${digits.slice(1)}` : ''}`
     const shown = exponent > 0 ? digits.padEnd(exponent + 1, '0') : `0{,}${'0'.repeat(-exponent - 1)}${digits}`
     if (shown.replace(/\D/g, '').length > 12) return null
-    const text = exponent > 0 ? shown.replace(/\B(?=(\d{3})+$)/g, '\\,') : shown
+    const text = exponent > 0 ? groupLatex(shown) : shown
     const step = exponent > 0 ? 1 : -1
     const choices = options(random, fraction(exponent), [whole(-exponent, 'exponent-sign'), whole(exponent + step, 'no-adjust'), whole(exponent - step, 'no-adjust'), ...near(fraction(exponent))])
     return choices && build(1, 'sci-exponent', howMuch(`${text}=${mantissa}\\cdot 10^{n}`, 'n'), choices, fraction(exponent), same(`${text}=${mantissa}\\cdot 10^{${exponent}}`), { exponent })

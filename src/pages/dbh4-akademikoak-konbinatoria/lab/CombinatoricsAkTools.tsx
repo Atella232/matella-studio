@@ -5,7 +5,7 @@ import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import type { LocalizedText } from '../../../features/unit-v2/types'
 import { COLORS, INK, LINE, MUTED, PAPER, SECOND, STAGE, STAGE_TINT } from '../../dbh2-estatistika-v2/palette'
-import { thousandsSeparatorFor } from '../../../utils/numberFormat'
+import { groupDigits, groupLatex } from '../../../utils/numberFormat'
 import {
     BRANCHES_MAX,
     choose,
@@ -61,9 +61,9 @@ import {
 
 const say = (eu: string, es: string, ar: string, en: string): LocalizedText => ({ eu, es, en, ar })
 /** Thousands grouped with a thin space in LaTeX */
-const big = (value: number) => String(value).replace(/\B(?=(\d{3})+(?!\d))/g, '\\,')
-/** The same in SVG text. Only English changes: the other languages keep the narrow space that the typed answers use (rule 3 deviation) */
-const bigText = (value: number, language: string) => String(value).replace(/\B(?=(\d{3})+(?!\d))/g, language === 'en' ? thousandsSeparatorFor(language) : '\u202f')
+const big = (value: number) => groupLatex(value)
+/** The same in SVG text: 40 320 (a no-break space; 5040 together), 40,320 in English */
+const bigText = (value: number, language: string) => groupDigits(value, language)
 
 function Board({ height, label, children }: { height: number; label: string; children: ReactNode }) {
     return <svg viewBox={`0 0 640 ${height}`} direction="ltr" role="img" aria-label={label} style={{ width: '100%', height: 'auto', fontFamily: '"Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif' }}>{children}</svg>
