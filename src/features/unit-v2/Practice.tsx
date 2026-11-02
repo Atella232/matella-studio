@@ -142,7 +142,7 @@ function ExerciseBank({
                         if (!answer) return
                         const written = attempts[key] ?? ''
                         const answerText = language === 'en' ? englishDigits(written) : written
-                        const result = checkAnswer(unit.answers.normalizeInput?.(answerText) ?? answerText, answer.expected, answerForm)
+                        const result = checkAnswer(unit.answers.normalizeInput?.(answerText) ?? answerText, answer.expected, answerForm, language !== 'en')
                         const next: TaskFeedback = result === 'correct' ? 'success' : result === 'incorrect' ? 'error' : result
                         setChecks((state) => ({ ...state, [key]: next }))
                         if (next === 'success' && !isComplete) onComplete(progressId)
@@ -253,7 +253,7 @@ export function PracticeDeck({
     const check = () => {
         const written = answers[current.id] ?? ''
         const answerText = language === 'en' ? englishDigits(written) : written
-        const result = checkAnswer(unit.answers.normalizeInput?.(answerText) ?? answerText, current.expected, answerForm)
+        const result = checkAnswer(unit.answers.normalizeInput?.(answerText) ?? answerText, current.expected, answerForm, language !== 'en')
         const next: TaskFeedback = result === 'correct' ? 'success' : result === 'incorrect' ? 'error' : result
         setFeedback((state) => ({ ...state, [current.id]: next }))
         if (result === 'correct') onComplete(current.id)

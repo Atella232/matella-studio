@@ -300,7 +300,7 @@ export function ResultAnswer({
 }) {
     const l = useLabText(language)
     const inputId = useId()
-    const result = state.checked ? checkAnswer(normalizeInput(language === 'en' ? englishDigits(state.answer) : state.answer), expected, form) : null
+    const result = state.checked ? checkAnswer(normalizeInput(language === 'en' ? englishDigits(state.answer) : state.answer), expected, form, language !== 'en') : null
     return (
         <div className="fraction-v2-lab-answer">
             <label htmlFor={inputId}>{l({ eu: 'Zure emaitza', es: 'Tu resultado', en: 'Your result', ar: 'نتيجتك' })}</label>
