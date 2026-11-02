@@ -16,3 +16,4 @@ Next 4. DBH akademikoak units: combinatoria, probabilidad.
 ## Own games (2026-11-02)
 
 Build the box plot (82301–3), guess the correlation (82401–3) and a statistics detective (82501–3). Details in `dbh4-own-games.md`.
+Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).

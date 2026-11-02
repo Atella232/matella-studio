@@ -16,3 +16,4 @@ Figure check trick (browser pane hidden, screenshots fail): bundle a renderToSta
 ## Own games (2026-11-02)
 
 How many glasses? (70301–3), grow it k times (70401–3) and a geometry detective (70501–3). Details in `dbh4-own-games.md`.
+Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).

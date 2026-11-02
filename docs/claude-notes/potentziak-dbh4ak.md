@@ -16,3 +16,4 @@ Gotchas: in SVG avoid rare glyphs like ᐟ for fractional exponents; use a raise
 ## Own games (2026-11-02)
 
 Simplify the radical (62301–3), find the exponent (62401–3) and a powers detective (62501–3). Details in `dbh4-own-games.md`.
+Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).

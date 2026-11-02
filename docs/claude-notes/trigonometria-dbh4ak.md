@@ -14,3 +14,4 @@ Phase 1 DONE c0a75b4 (diag 5501–5508, practice 1–20, challenges 101–115, b
 ## Own games (2026-11-02)
 
 The unit circle (72301–3), the other ratios (72401–3) and a trigonometry detective (72501–3; lines use \sen and \tg with `localize`). Details in `dbh4-own-games.md`.
+Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).

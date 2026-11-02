@@ -18,3 +18,4 @@ Build the interval and the reals detective, shared with the other track: see [db
 ## Own games (2026-11-02)
 
 Chained percentages (42601–3) added, so the unit has two own mechanics (intervals, chain) besides the reals detective. Details in `dbh4-own-games.md`.
+Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).

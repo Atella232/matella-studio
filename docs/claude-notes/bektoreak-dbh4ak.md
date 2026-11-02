@@ -12,3 +12,4 @@ Next 4. DBH akademikoak unit: `funciones` (then funciones-polinomicas-racionales
 ## Own games (2026-11-02)
 
 The vector jump (74301–3), find k (74401–3) and a vectors detective (74501–3). Details in `dbh4-own-games.md`.
+Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).

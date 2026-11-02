@@ -14,3 +14,4 @@ Next 4. DBH akademikoak unit: probabilidad (Santillana Ac. U14 + Anaya Ac. U12),
 ## Own games (2026-11-02)
 
 Does order matter? (84301–3), the box method (84401–3) and a combinatorics detective (84501–3). Details in `dbh4-own-games.md`.
+Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).

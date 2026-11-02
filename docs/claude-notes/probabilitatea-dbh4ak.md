@@ -16,3 +16,4 @@ Full suite 804/804, lint and build OK. Merged to main (fast-forward f8ddf34), pu
 ## Own games (2026-11-02)
 
 The paths of the tree (86301–3), the contingency table (86401–3) and a probability detective (86501–3). Details in `dbh4-own-games.md`.
+Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).
