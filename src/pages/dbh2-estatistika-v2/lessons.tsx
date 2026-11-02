@@ -16,6 +16,7 @@ import {
     SymmetryFigure,
     TreeFigure
 } from './figures'
+import { statisticsLessonChecks, type StatisticsTopicId } from './lessonChecks'
 
 /* ==========================================================================
    Estatistika eta probabilitatea · 2. DBH — stages and lessons, following
@@ -44,7 +45,7 @@ const say = (eu: string, es: string, ar: string, en: string): LocalizedText => (
 /** The same formula in every language; the decimal comma becomes a point in Arabic */
 const same = (value: string): LocalizedText => ({ eu: value, es: value, en: value, ar: value.replace(/\{,\}/g, '.') })
 
-export const statisticsTopics: UnitTopic[] = [
+const baseTopics: UnitTopic[] = [
     /* ---------- 1. Data and tables ---------- */
     {
         id: 'sample',
@@ -385,3 +386,6 @@ export const statisticsTopics: UnitTopic[] = [
         figure: (language) => <DoubleTableFigure language={language} />
     }
 ]
+
+/** Each lesson with its typical mistake and its «Check it» question (lessonChecks.ts) */
+export const statisticsTopics: UnitTopic[] = baseTopics.map((topic) => ({ ...topic, ...statisticsLessonChecks[topic.id as StatisticsTopicId] }))
