@@ -1,6 +1,7 @@
 import type { UnitStage, UnitTopic } from '../../features/unit-v2/types'
 import { MachineFigure, MonomialFigure, TilesFigure } from '../dbh1-aljebra-v2/figures'
 import { CommonFactorFigure, PatternFigure, PolynomialFigure, ProductAreaFigure, SquareDifferenceFigure, SquareSumFigure, SumDifferenceFigure } from './figures'
+import { algebraLessonChecks, type AlgebraTopicId } from './lessonChecks'
 
 /* ==========================================================================
    Aljebra · 2. DBH — stages and lessons
@@ -21,7 +22,7 @@ export const algebraStages: UnitStage[] = [
     { id: 'factor', tone: 'green', title: { eu: 'Faktore komuna eta faktorizazioa', es: 'Factor común y factorización', en: 'Common factor and factorisation', ar: 'العامل المشترك والتحليل' } }
 ]
 
-export const algebraTopics: UnitTopic[] = [
+const baseTopics: UnitTopic[] = [
     {
         id: 'language',
         stage: 'language',
@@ -495,3 +496,6 @@ export const algebraTopics: UnitTopic[] = [
         }
     }
 ]
+
+/** Each lesson with its typical mistake and its «Check it» question (lessonChecks.ts) */
+export const algebraTopics: UnitTopic[] = baseTopics.map((topic) => ({ ...topic, ...algebraLessonChecks[topic.id as AlgebraTopicId] }))
