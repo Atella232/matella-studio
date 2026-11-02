@@ -34,19 +34,41 @@ function lessonIds(folder: string): string[] {
 
 const formulas = (text: string) => [...text.matchAll(/\$([^$]+)\$/g)].map(([, formula]) => formula)
 
-/** Evaluates a numeric expression (·, :, \frac, decimal commas, brackets); null when it is something else */
+/** A unit written after the number (20 cm, 12 m², 5 €), left out before evaluating */
+const unit = /(?:\\[ ,;]|\s)*(?:\\(?:text|mathrm)\{[^{}]*\}(?:\^\{?\d\}?)?|\\text\{€\}|€)\s*$/
+
+/** Evaluates a numeric expression (·, :, \frac, powers, roots, π, decimal commas, brackets); null when it is something else */
 function evaluate(latex: string): number | null {
-    let js = latex.replace(/\\left|\\right/g, '').replace(/\\[dt]?frac\{([^{}]+)\}\{([^{}]+)\}/g, '(($1)/($2))')
-    js = js.replace(/\{,\}/g, '.').replace(/\\cdot/g, '*').replace(/\\mathbin\{:\}/g, '/').replace(/\\div/g, '/').replace(/[[\]]/g, (b) => (b === '[' ? '(' : ')'))
-    if (!/^[\d.+\-*/() ]+$/.test(js)) return null
-    const value = Function(`return ${js}`)() as number
-    return Number.isFinite(value) ? value : null
+    let js = latex.replace(/\\left|\\right/g, '').replace(/^\s*\\approx\s*/, '').replace(unit, '')
+    // Innermost first, so a power inside a root or a fraction inside a fraction also works
+    for (let previous = ''; previous !== js;) {
+        previous = js
+        js = js.replace(/\\[dt]?frac\{([^{}]+)\}\{([^{}]+)\}/g, '(($1)/($2))').replace(/\\sqrt\{([^{}]+)\}/g, 'Math.sqrt($1)').replace(/\^\{([^{}]+)\}/g, '**($1)')
+    }
+    js = js.replace(/\^(\d)/g, '**$1').replace(/\\pi/g, 'Math.PI').replace(/\{,\}/g, '.').replace(/\\cdot/g, '*').replace(/\\mathbin\{:\}/g, '/').replace(/\\div/g, '/').replace(/[[\]]/g, (b) => (b === '[' ? '(' : ')'))
+    if (!/^(?:[\d.+\-*/() ]|Math\.sqrt|Math\.PI)+$/.test(js)) return null
+    try {
+        const value = Function(`return ${js}`)() as number
+        return Number.isFinite(value) ? value : null
+    } catch {
+        return null // −3**2 is not valid JavaScript: check it by hand
+    }
 }
 
 /** A formula with an operation in it (not just a signed number such as −8) */
-const isCalculation = (latex: string) => /[\d)\]}]\s*(?:[+-]|\\cdot|\\mathbin\{:\}|\\div)|\\frac/.test(latex)
+const isCalculation = (latex: string) => /[\d)\]}]\s*(?:[+-]|\\cdot|\\mathbin\{:\}|\\div|\^)|\\frac|\\sqrt/.test(latex)
 
 const near = (a: number, b: number) => Math.abs(a - b) < 1e-9 * Math.max(1, Math.abs(b))
+
+/** A rounded answer (≈ 5,83) is right when it is the result rounded to its own decimals */
+function matches(answer: string, value: number, question: number): boolean {
+    if (!/^\s*\\approx/.test(answer)) return near(value, question)
+    const decimals = answer.match(/\{,\}(\d+)/)?.[1].length ?? 0
+    return Math.abs(value - question) <= 0.5 * 10 ** -decimals + 1e-9
+}
+
+/** Words outside the formulas, to tell the languages apart */
+const words = (text: string) => text.replace(/\$[^$]+\$/g, ' ')
 
 function texts(entry: Entry): LocalizedText[] {
     return [entry.mistake.wrong, entry.mistake.right, entry.check.prompt, ...entry.check.options, entry.check.explanation]
@@ -84,6 +106,17 @@ for (const unit of units) {
         }
     })
 
+    test(`${unit.folder}: each language in its own place (say takes eu, es, ar, en)`, () => {
+        for (const [id, entry] of Object.entries(unit.checks)) {
+            for (const text of texts(entry)) {
+                if (!/[a-zA-Z؀-ۿ]{3}/.test(words(text.es))) continue
+                assert.ok(/[؀-ۿ]/.test(words(text.ar)), `${id}: ar is not Arabic: ${text.ar}`)
+                for (const language of ['eu', 'es', 'en'] as const) assert.ok(!/[؀-ۿ]/.test(text[language]), `${id}: Arabic in ${language}: ${text[language]}`)
+                if (/[a-zA-Z]{5}/.test(words(text.es))) assert.ok(text.eu !== text.es && text.en !== text.es, `${id}: a text copied from Spanish: ${text.es}`)
+            }
+        }
+    })
+
     test(`${unit.folder}: Basque glues no case ending to a number`, () => {
         for (const [id, entry] of Object.entries(unit.checks)) {
             for (const text of texts(entry)) {
@@ -105,10 +138,11 @@ for (const unit of units) {
                 unchecked.push(`${id}: ${asked[0]}`)
                 continue
             }
-            assert.ok(near(value, question), `${id}: ${asked[0]} = ${answer[0]}`)
+            assert.ok(matches(answer[0], value, question), `${id}: ${asked[0]} = ${answer[0]}`)
             for (const [index, option] of check.options.entries()) {
-                const other = evaluate(formulas(option.es)[0] ?? '')
-                if (index !== check.correctIndex && other !== null) assert.ok(!near(other, question), `${id}: a wrong answer is also right`)
+                const formula = formulas(option.es)[0] ?? ''
+                const other = evaluate(formula)
+                if (index !== check.correctIndex && other !== null) assert.ok(!matches(formula, other, question), `${id}: a wrong answer is also right`)
             }
         }
         // Questions that look like a calculation but this evaluator cannot read: check them by hand
