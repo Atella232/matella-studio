@@ -30,7 +30,7 @@ function evaluate(latex: string): number | null {
 }
 
 /** A formula with an operation in it (not just a signed number such as −8) */
-const isCalculation = (latex: string) => /[\d)\]]\s*(?:[+\-]|\\cdot|\\mathbin\{:\})/.test(latex)
+const isCalculation = (latex: string) => /[\d)\]]\s*(?:[+-]|\\cdot|\\mathbin\{:\})/.test(latex)
 
 function texts(entry: { mistake: LessonMistake; check: LessonCheck }): LocalizedText[] {
     return [entry.mistake.wrong, entry.mistake.right, entry.check.prompt, ...entry.check.options, entry.check.explanation]
