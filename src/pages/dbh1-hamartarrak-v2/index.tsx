@@ -36,7 +36,7 @@ const hamartarrakUnit: UnitDefinition = {
         render: (props) => <DecimalsLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Hiru joko abiadura eta zehaztasuna entrenatzeko: lasterketa, itua eta memoria.', es: 'Tres juegos para entrenar rapidez y precisión: carrera, diana y memoria.', en: 'Three games to train speed and accuracy: race, target and memory.', ar: 'ثلاث ألعاب لتدريب السرعة والدقة: السباق والهدف والذاكرة.' },
+        description: { eu: 'Sei joko: lasterketa, itua, memoria, koma mugitu, podiuma eta hamartarren detektibea.', es: 'Seis juegos: carrera, diana, memoria, mueve la coma, el podio y detective de decimales.', en: 'Six games: race, target, memory, move the comma, the podium and decimals detective.', ar: 'ست ألعاب: السباق والهدف والذاكرة وحرّك الفاصلة والمنصة ومخبر الأعداد العشرية.' },
         progressIds: decimalsGameProgressIds,
         recordsKey: DECIMALS_GAME_RECORDS_KEY,
         render: (props) => <DecimalsGames {...props} />

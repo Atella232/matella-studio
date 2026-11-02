@@ -1,0 +1,23 @@
+/* The own games of 1. DBH decimals */
+.fraction-v2-games-card[data-game="comma"] { --game-tint: var(--coral-tint, #f6d5cc); }
+.fraction-v2-games-card[data-game="podium"] { --game-tint: var(--mustard-tint, #fbebc0); }
+
+/* Move the comma: a place-value table of seven columns with the comma after the units */
+.dbh1-places { display: flex; flex-direction: column; gap: 4px; width: min(100%, 336px); margin: 0 auto; }
+.dbh1-place-row { display: grid; grid-template-columns: repeat(7, 1fr); border: 2px solid var(--ink); border-radius: 10px; background: var(--card); overflow: visible; }
+.dbh1-place-row.head { border: none; background: none; }
+.dbh1-place-row.head .dbh1-place { min-height: 0; font-size: 11px; font-weight: 700; color: var(--muted); }
+.dbh1-place-row.right { border-color: var(--success, #267b53); background: var(--success-tint, #d9efe2); }
+.dbh1-place-row.wrong { border-color: var(--error, #c4432a); background: var(--coral-tint, #f6d5cc); }
+.dbh1-place { position: relative; display: flex; align-items: center; justify-content: center; min-height: 44px; font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--ink); }
+.dbh1-place-row:not(.head) .dbh1-place + .dbh1-place { border-inline-start: 1px dashed var(--line, #d6cfc2); }
+.dbh1-place-row:not(.head) .dbh1-place.units::after { content: attr(data-mark); position: absolute; right: -4px; bottom: 2px; font-size: 28px; font-weight: 700; color: var(--coral, #d9502e); }
+.dbh1-place.filler { color: var(--muted, #8a8a8a); font-weight: 400; }
+.dbh1-shift { display: flex; justify-content: center; gap: 12px; }
+.dbh1-shift button { min-width: 84px; min-height: 46px; border: 2px solid var(--ink); border-radius: 12px; background: var(--card); box-shadow: 0 2px 0 var(--ink); font: inherit; font-size: 20px; font-weight: 700; color: var(--ink); cursor: pointer; }
+.dbh1-shift button:disabled { opacity: 0.4; cursor: default; }
+
+/* The podium: the rank tapped on each number */
+.dbh1-podium button { position: relative; min-width: 72px; }
+.dbh1-rank { position: absolute; top: -9px; inset-inline-start: -9px; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: var(--card, #fffcf6); font-size: 13px; }
+.dbh1-podium-panel { display: flex; justify-content: center; gap: 10px; }

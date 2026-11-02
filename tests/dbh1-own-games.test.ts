@@ -8,6 +8,8 @@ import { createMeetRounds, createRectanglesRounds, departures, divisorsOf, gcd, 
 import { createDivisibilityDetectiveCases, divisibilityDetectiveLevels, divisibilityDetectiveNames, divisibilityDetectiveTips } from '../src/pages/dbh1-zatigarritasuna-v2/games/detective.ts'
 import { createShareRounds, createStripsRounds, reduce, SHARE_ROUNDS, STRIPS_ROUNDS, valueOf } from '../src/pages/dbh1-zatikiak-v2/games/fractionRounds.ts'
 import { createFractionsDetectiveCases, fractionsDetectiveLevels, fractionsDetectiveNames, fractionsDetectiveTips } from '../src/pages/dbh1-zatikiak-v2/games/detective.ts'
+import { columns, createCommaRounds, createPodiumRounds, fits, placed, placedLatex, PODIUM_ROUNDS, COMMA_ROUNDS, rightOrder, wrongOrder } from '../src/pages/dbh1-hamartarrak-v2/games/decimalRounds.ts'
+import { createDecimalsDetectiveCases, decimalsDetectiveLevels, decimalsDetectiveNames, decimalsDetectiveTips } from '../src/pages/dbh1-hamartarrak-v2/games/detective.ts'
 import { checkDetective, endValue, renders } from './helpers/ownGamesCheck.ts'
 
 /* The own games of the 1. DBH units */
@@ -126,4 +128,49 @@ test('1. DBH fraction strips: one right option by value, the result fits one str
 
 test('1. DBH fractions detective: the errors of each level, the fix and the last line on their values', () => {
     checkDetective(createFractionsDetectiveCases, fractionsDetectiveLevels, fractionsDetectiveNames, fractionsDetectiveTips)
+})
+
+test('1. DBH move the comma: the digits are placed as written, the answer is the operation, never the start', () => {
+    assert.equal(placed('345', -2), '3,45')
+    assert.equal(placed('6', -2), '0,06')
+    assert.equal(placed('35', 1), '350')
+    assert.deepEqual(columns('6', -2), [null, null, null, '0', '0', '6', null])
+    assert.deepEqual(columns('35', 1), [null, '3', '5', '0', null, null, null])
+    const value = (digits: string, exponent: number) => Number(placed(digits, exponent).replace(',', '.'))
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const rounds = createCommaRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, COMMA_ROUNDS)
+            for (const round of rounds) {
+                assert.ok(fits(round.digits, round.start) && fits(round.digits, round.answer) && round.start !== round.answer)
+                assert.ok(!round.digits.startsWith('0') && !round.digits.endsWith('0'))
+                renders(round.question)
+                renders(placedLatex(round.digits, round.answer))
+                const result = endValue(`${round.question}`.replace(/\\div /g, '/').replace(/\\cdot /g, '*').replace(/\{,\}/g, '.').replace(/^/, '0+'))
+                assert.ok(Math.abs(result - value(round.digits, round.answer)) < 1e-9, `${round.question} ≠ ${placed(round.digits, round.answer)}`)
+                assert.equal(round.kind, ['power', 'product', 'tenth'][level])
+                if (level === 1) assert.ok(round.hint && round.start >= 0)
+            }
+        }
+    }
+})
+
+test('1. DBH podium: different values, the trap bites in level 2, five numbers in level 3', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const rounds = createPodiumRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, PODIUM_ROUNDS)
+            for (const { entries } of rounds) {
+                assert.equal(entries.length, level === 2 ? 5 : 4)
+                assert.equal(new Set(entries.map((item) => item.value)).size, entries.length)
+                for (const item of entries) assert.equal(Number(item.text), item.value)
+                if (level === 0) assert.ok(entries.every((item) => item.text.split('.')[1].length === 2))
+                if (level === 1) assert.ok(wrongOrder(entries).some((item, index) => item !== rightOrder(entries)[index]))
+            }
+        }
+    }
+})
+
+test('1. DBH decimals detective: the errors of each level, the fix and the last line on their values', () => {
+    checkDetective(createDecimalsDetectiveCases, decimalsDetectiveLevels, decimalsDetectiveNames, decimalsDetectiveTips)
 })

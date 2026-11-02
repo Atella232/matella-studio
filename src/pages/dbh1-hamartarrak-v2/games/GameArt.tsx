@@ -1,8 +1,13 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { DecimalsGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { CommaArt, PodiumArt } from './OwnGames'
 
 /** Small illustration of each decimals game, in the notebook style */
 export function DecimalsGameArt({ game }: { game: DecimalsGameId }) {
+    if (game === 'comma') return <CommaArt />
+    if (game === 'podium') return <PodiumArt />
+    if (game === 'detective') return <DetectiveArt lines={['0,7 > 0,07', '0,45 > 0,5', '3,2 ÷ 10 = 0,32']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

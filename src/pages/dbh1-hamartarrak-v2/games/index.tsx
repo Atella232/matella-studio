@@ -8,11 +8,17 @@ import { createDecimalsMemoryBoard, DECIMALS_MEMORY_PAIRS } from './boards'
 import { DecimalsGameArt } from './GameArt'
 import { DECIMALS_GAME_RECORDS_KEY, decimalsGameModeForPath, decimalsGames, decimalsGameSlugs, decimalsTargetLevels, type DecimalsGameId } from './info'
 import { DecimalsRaceGame } from './RaceGame'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { createDecimalsDetectiveCases, DECIMALS_DETECTIVE_CASES, decimalsDetectiveNames, decimalsDetectiveTips } from './detective'
+import { CommaGame, PodiumGame } from './OwnGames'
 
 const info = (id: DecimalsGameId) => decimalsGames.find((game) => game.id === id)!
 
 const components: Record<DecimalsGameId, (props: GameProps) => JSX.Element> = {
     race: DecimalsRaceGame,
+    comma: (props) => <CommaGame {...props} game={info('comma')} art={<DecimalsGameArt game="comma" />} />,
+    podium: (props) => <PodiumGame {...props} game={info('podium')} art={<DecimalsGameArt game="podium" />} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: info('detective'), art: <DecimalsGameArt game="detective" />, cases: DECIMALS_DETECTIVE_CASES, createCases: createDecimalsDetectiveCases, names: decimalsDetectiveNames, tips: decimalsDetectiveTips }} />,
     target: (props) => <TargetGame {...props} config={{ game: info('target'), levels: decimalsTargetLevels }} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: info('memory'), art: <DecimalsGameArt game="memory" />, pairs: DECIMALS_MEMORY_PAIRS, createBoard: createDecimalsMemoryBoard }} />
 }

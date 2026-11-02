@@ -42,7 +42,7 @@ function checkQuestion(question: DecimalsRaceQuestion): number {
 }
 
 test('hamartarrak 1. DBH games: levels, ids and routes', () => {
-    assert.equal(decimalsGames.length, 3)
+    assert.equal(decimalsGames.length, 6)
     assert.equal(decimalsGames[0].levels.length, DECIMALS_RACE_CIRCUITS)
     assert.equal(decimalsGames.find((game) => game.id === 'target')!.levels.length, decimalsTargetLevels.length)
     assert.equal(decimalsGames.find((game) => game.id === 'memory')!.levels.length, decimalsMemoryLevels.length)

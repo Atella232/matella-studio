@@ -8,7 +8,7 @@ import type { TargetLevel } from '../../dbh2-zatikiak-prototype/games/target.ts'
    engine's pairs game.
    ========================================================================== */
 
-export type DecimalsGameId = 'race' | 'target' | 'memory'
+export type DecimalsGameId = 'race' | 'target' | 'memory' | 'comma' | 'podium' | 'detective'
 
 export const DECIMALS_GAME_RECORDS_KEY = 'matella-hamartarrak-dbh1-game-records'
 
@@ -47,6 +47,39 @@ export const decimalsGames: GameInfo<DecimalsGameId>[] = [
             { progressId: 14302, stage: 'fractions', title: { eu: 'Zatikia zatiketa gisa', es: 'La fracción como división', en: 'A fraction as a division', ar: 'الكسر قسمةً' }, description: { eu: '3/4 ↔ 0,75 · 1/3 ↔ 0,333…', es: '3/4 ↔ 0,75 · 1/3 ↔ 0,333…', en: '3/4 ↔ 0.75 · 1/3 ↔ 0.333…', ar: '3/4 ↔ 0.75 · 1/3 ↔ 0.333…' } },
             { progressId: 14303, stage: 'operations', title: { eu: 'Eragiketak', es: 'Operaciones', en: 'Operations', ar: 'العمليات' }, description: { eu: '2,7 · 1,5 ↔ 4,05', es: '2,7 · 1,5 ↔ 4,05', en: '2.7 · 1.5 ↔ 4.05', ar: '2.7 · 1.5 ↔ 4.05' } }
         ]
+    },
+    {
+        id: 'comma',
+        title: { eu: 'Mugitu koma', es: 'Mueve la coma', en: 'Move the comma', ar: 'حرّك الفاصلة' },
+        tagline: { eu: 'Zifrak posizio-taulan: ×10 ezkerrera, ÷10 eskuinera.', es: 'Las cifras en la tabla de posiciones: ×10 a la izquierda, ÷10 a la derecha.', en: 'The digits in the place-value table: ×10 to the left, ÷10 to the right.', ar: 'الأرقام في جدول المنازل: ×10 إلى اليسار و÷10 إلى اليمين.' },
+        skills: { eu: '10, 100 eta 1000 zenbakiekin biderkatu eta zatitu', es: 'Multiplicar y dividir por 10, 100 y 1000', en: 'Multiplying and dividing by 10, 100 and 1000', ar: 'الضرب والقسمة على 10 و100 و1000' },
+        levels: [
+            { progressId: 14401, stage: 'operations', title: { eu: '×10, ×100, ×1000', es: '×10, ×100, ×1000', en: '×10, ×100, ×1000', ar: '×10، ×100، ×1000' }, description: { eu: 'Biderkatu eta zatitu.', es: 'Multiplicar y dividir.', en: 'Multiplying and dividing.', ar: 'الضرب والقسمة.' } },
+            { progressId: 14402, stage: 'operations', title: { eu: 'Biderkadurak', es: 'Productos', en: 'Products', ar: 'الضرب' }, description: { eu: 'Zenbat zifra hamartar?', es: '¿Cuántas cifras decimales?', en: 'How many decimal places?', ar: 'كم رقمًا عشريًا؟' } },
+            { progressId: 14403, stage: 'division', title: { eu: '×0,1 eta ÷0,1', es: '×0,1 y ÷0,1', en: '×0.1 and ÷0.1', ar: '×0.1 و÷0.1' }, description: { eu: 'Ezkerrera ala eskuinera?', es: '¿A la izquierda o a la derecha?', en: 'To the left or to the right?', ar: 'إلى اليسار أم إلى اليمين؟' } }
+        ]
+    },
+    {
+        id: 'podium',
+        title: { eu: 'Podiuma', es: 'El podio', en: 'The podium', ar: 'المنصة' },
+        tagline: { eu: 'Ordenatu hamartarrak txikienetik handienera; gero, zenbaki-zuzenean.', es: 'Ordena los decimales de menor a mayor; luego, en la recta.', en: 'Put the decimals in order from smallest to biggest; then on the number line.', ar: 'رتّب الأعداد العشرية من الأصغر إلى الأكبر، ثم على المستقيم.' },
+        skills: { eu: 'Hamartarrak konparatu eta ordenatu', es: 'Comparar y ordenar decimales', en: 'Comparing and ordering decimals', ar: 'مقارنة الأعداد العشرية وترتيبها' },
+        levels: [
+            { progressId: 14501, stage: 'order', title: { eu: 'Zifra kopuru bera', es: 'Mismas cifras', en: 'Same number of digits', ar: 'عدد الأرقام نفسه' }, description: { eu: 'Bi zifra hamartar denek.', es: 'Todos con dos decimales.', en: 'All with two decimal places.', ar: 'كلها برقمين عشريين.' } },
+            { progressId: 14502, stage: 'order', title: { eu: 'Luzera desberdinak', es: 'Distinta longitud', en: 'Different lengths', ar: 'أطوال مختلفة' }, description: { eu: '0,5 eta 0,45: tranpa.', es: '0,5 y 0,45: la trampa.', en: '0.5 and 0.45: the trap.', ar: '0.5 و0.45: الفخ.' } },
+            { progressId: 14503, stage: 'order', title: { eu: 'Zeroak', es: 'Ceros', en: 'Zeros', ar: 'الأصفار' }, description: { eu: 'Bost zenbaki: 0,7, 0,07, 0,705…', es: 'Cinco números: 0,7, 0,07, 0,705…', en: 'Five numbers: 0.7, 0.07, 0.705…', ar: 'خمسة أعداد: 0.7 و0.07 و0.705…' } }
+        ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Hamartarren detektibea', es: 'Detective de decimales', en: 'Decimals detective', ar: 'مخبر الأعداد العشرية' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: اكتشفه وقل ما نوع الخطأ.' },
+        skills: { eu: 'Hamartarrekin akats tipikoak', es: 'Errores típicos con decimales', en: 'Common mistakes with decimals', ar: 'الأخطاء الشائعة في الأعداد العشرية' },
+        levels: [
+            { progressId: 14601, stage: 'order', title: { eu: 'Ordena eta biribilketa', es: 'Orden y redondeo', en: 'Order and rounding', ar: 'الترتيب والتقريب' }, description: { eu: 'Konparatu, zatikiak eta biribildu.', es: 'Comparar, fracciones y redondear.', en: 'Comparing, fractions and rounding.', ar: 'المقارنة والكسور والتقريب.' } },
+            { progressId: 14602, stage: 'operations', title: { eu: 'Eragiketak', es: 'Operaciones', en: 'Operations', ar: 'العمليات' }, description: { eu: 'Batu, biderkatu eta hamarrez zatitu.', es: 'Sumar, multiplicar y dividir entre 10.', en: 'Adding, multiplying and dividing by 10.', ar: 'الجمع والضرب والقسمة على 10.' } },
+            { progressId: 14603, stage: 'division', title: { eu: 'Zatiketak eta buruketak', es: 'Divisiones y problemas', en: 'Divisions and problems', ar: 'القسمة والمسائل' }, description: { eu: 'Komak zatiketan eta itzulia.', es: 'Las comas al dividir y el cambio.', en: 'The commas when dividing and the change.', ar: 'الفواصل في القسمة والباقي.' } }
+        ]
     }
 ]
 
@@ -60,13 +93,16 @@ export const decimalsTargetLevels: TargetLevel[] = [
 ]
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const decimalsGameSlugs: Record<DecimalsGameId, string> = { race: 'lasterketa', target: 'itua', memory: 'memoria' }
+export const decimalsGameSlugs: Record<DecimalsGameId, string> = { race: 'lasterketa', target: 'itua', memory: 'memoria', comma: 'koma', podium: 'podiuma', detective: 'detektibea' }
 
 export function decimalsGameModeForPath(pathname: string): DecimalsGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
     if (!game) return 'hub'
     if (['carrera', 'lasterketa'].includes(game)) return 'race'
     if (['diana', 'itua'].includes(game)) return 'target'
+    if (['koma', 'coma'].includes(game)) return 'comma'
+    if (['podiuma', 'podio'].includes(game)) return 'podium'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     if (['memoria', 'memory'].includes(game)) return 'memory'
     return 'hub'
 }
