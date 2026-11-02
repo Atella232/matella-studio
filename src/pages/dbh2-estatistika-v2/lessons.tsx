@@ -69,6 +69,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'cumulative',
         stage: 'tables',
+        needs: [{ unit: 'dbh1/estadistica', topic: 'frequencies', title: { eu: 'Maiztasun absolutua eta erlatiboa', es: 'Frecuencia absoluta y relativa', en: 'Absolute and relative frequency', ar: 'التكرار المطلق والنسبي' } }],
         figureAfterSteps: true,
         title: say('Maiztasun metatuak', 'Frecuencias acumuladas', 'التكرارات المتجمّعة', 'Cumulative frequencies'),
         goal: say('Maiztasun absolutu eta erlatibo metatuak kalkulatzea eta «zenbat gutxiago» galderei erantzutea.', 'Calcular las frecuencias absolutas y relativas acumuladas y responder preguntas de «cuántos como mucho».', 'حساب التكرارات المطلقة والنسبية المتجمّعة والإجابة عن أسئلة «كم على الأكثر».', 'Calculate the cumulative absolute and relative frequencies and answer “at most how many” questions.'),
@@ -135,6 +136,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'pie',
         stage: 'graphs',
+        needs: [{ unit: 'dbh2/proporcionalidad', topic: 'percent-forms', title: { eu: 'Ehunekoa hamartar gisa', es: 'El porcentaje como decimal', en: 'Percentages as decimals', ar: 'النسبة المئوية عددًا عشريًا' } }],
         figureAfterSteps: true,
         title: say('Sektore-diagramak eta ehunekoak', 'Diagramas de sectores y porcentajes', 'المخططات الدائرية والنسب المئوية', 'Pie charts and percentages'),
         goal: say('Ehunekoetatik angeluak kalkulatzea eta, alderantziz, angelu batetik zenbat datu diren jakitea.', 'Calcular ángulos a partir de porcentajes y, al revés, saber cuántos datos son a partir de un ángulo.', 'حساب الزوايا انطلاقًا من النسب المئوية، وبالعكس معرفة عدد البيانات انطلاقًا من زاوية.', 'Calculate angles from percentages and, the other way round, find how many data values an angle represents.'),
@@ -179,6 +181,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'mean-table',
         stage: 'centre',
+        needs: [{ unit: 'dbh1/estadistica', topic: 'mean', title: { eu: 'Batez bestekoa', es: 'La media', en: 'The mean', ar: 'المتوسط الحسابي' } }],
         figureAfterSteps: true,
         title: say('Batez bestekoa taula batetik', 'La media desde una tabla', 'المتوسط من جدول', 'The mean from a table'),
         goal: say('Maiztasun-taula baten batez bestekoa kalkulatzea, datu multzokatuekin ere bai.', 'Calcular la media de una tabla de frecuencias, también con datos agrupados.', 'حساب متوسط جدول تكرارات، وكذلك للبيانات المبوّبة.', 'Calculate the mean from a frequency table, including grouped data.'),
@@ -201,6 +204,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'median-table',
         stage: 'centre',
+        needs: [{ unit: 'dbh1/estadistica', topic: 'median-mode', title: { eu: 'Mediana eta moda', es: 'Mediana y moda', en: 'Median and mode', ar: 'الوسيط والمنوال' } }],
         figureAfterSteps: true,
         title: say('Mediana eta moda taula batetik', 'Mediana y moda desde una tabla', 'الوسيط والمنوال من جدول', 'Median and mode from a table'),
         goal: say('Maiztasun metatuak erabiliz mediana aurkitzea eta moda (edo modak) ezagutzea.', 'Encontrar la mediana con las frecuencias acumuladas y reconocer la moda (o las modas).', 'إيجاد الوسيط بالتكرارات المتجمّعة والتعرّف إلى المنوال (أو المنوالات).', 'Find the median using the cumulative frequencies and recognise the mode (or modes).'),
@@ -246,6 +250,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'deviation',
         stage: 'spread',
+        needs: [{ unit: 'dbh2/numeros-enteros', topic: 'absolute', title: { eu: 'Balio absolutua', es: 'Valor absoluto', en: 'Absolute value', ar: 'القيمة المطلقة' } }],
         figureAfterSteps: true,
         title: say('Ibiltartea eta batez besteko desbideratzea', 'Recorrido y desviación media', 'المدى والانحراف المتوسط', 'Range and mean deviation'),
         goal: say('Datuen sakabanaketa ibiltartearekin eta batez besteko desbideratzearekin neurtzea.', 'Medir la dispersión de los datos con el recorrido y la desviación media.', 'قياس تشتت البيانات بالمدى والانحراف المتوسط.', 'Measure how spread out the data are using the range and the mean deviation.'),
@@ -313,6 +318,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'events',
         stage: 'chance',
+        needs: [{ unit: 'dbh1/estadistica', topic: 'laplace', title: { eu: 'Laplaceren erregela', es: 'La regla de Laplace', en: 'Laplace\'s rule', ar: 'قاعدة لابلاس' } }],
         figureAfterSteps: true,
         title: say('Gertaerak eta aurkako gertaera', 'Sucesos y suceso contrario', 'الأحداث والحدث المعاكس', 'Events and complementary events'),
         goal: say('Gertaerak lagin-espazioaren zati gisa idaztea, aurkako gertaeraren probabilitatea kalkulatzea eta gailu erregularrak eta irregularrak bereiztea.', 'Escribir sucesos como partes del espacio muestral, calcular la probabilidad del suceso contrario y distinguir instrumentos regulares e irregulares.', 'كتابة الأحداث أجزاءً من فضاء العيّنة، وحساب احتمال الحدث المعاكس، والتمييز بين الأدوات المنتظمة وغير المنتظمة.', 'Write events as parts of the sample space, calculate the probability of the complementary event and tell apart fair and unfair objects.'),
@@ -335,6 +341,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'tree',
         stage: 'chance',
+        needs: [{ unit: 'dbh1/estadistica', topic: 'laplace', title: { eu: 'Laplaceren erregela', es: 'La regla de Laplace', en: 'Laplace\'s rule', ar: 'قاعدة لابلاس' } }],
         figureAfterSteps: true,
         title: say('Zuhaitz-diagramak eta taulak', 'Diagramas de árbol y tablas', 'المخططات الشجرية والجداول', 'Tree diagrams and tables'),
         goal: say('Esperimentu konposatuen emaitza guztiak zuhaitz edo taula batekin zenbatzea eta probabilitateak kalkulatzea.', 'Contar todos los resultados de experimentos compuestos con un árbol o una tabla y calcular probabilidades.', 'عدّ كل نتائج التجارب المركّبة بشجرة أو جدول وحساب الاحتمالات.', 'Count all the outcomes of compound experiments using a tree or a table, and calculate probabilities.'),
@@ -357,6 +364,7 @@ export const statisticsTopics: UnitTopic[] = [
     {
         id: 'double-table',
         stage: 'chance',
+        needs: [{ unit: 'dbh1/estadistica', topic: 'laplace', title: { eu: 'Laplaceren erregela', es: 'La regla de Laplace', en: 'Laplace\'s rule', ar: 'قاعدة لابلاس' } }],
         figureAfterSteps: true,
         title: say('Sarrera bikoitzeko taulak', 'Tablas de doble entrada', 'الجداول ذات المدخلين', 'Two-way tables'),
         goal: say('Bi ezaugarri batera dituzten taulak irakurtzea, osatzea eta haietatik probabilitateak kalkulatzea.', 'Leer y completar tablas con dos características a la vez y calcular probabilidades a partir de ellas.', 'قراءة جداول تجمع خاصيتين معًا وإكمالها وحساب الاحتمالات منها.', 'Read and complete tables with two characteristics at the same time and calculate probabilities from them.'),

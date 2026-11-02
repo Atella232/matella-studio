@@ -5,6 +5,7 @@ import { MathText } from '../../components/MathText'
 import { DiagnosticQuiz } from './Diagnostic'
 import { Icon } from './icons'
 import { FitMath, LessonCases, LessonFigure, LessonMistakeBox, LessonSteps } from './LessonExtras'
+import { LessonNeeds } from './LessonNeeds'
 import { PracticeArea, PracticeDeck } from './Practice'
 import { parseUnitPath, unitBasePath, unitPathFor, type PracticeMode } from './routing'
 import { useStoredIds, useStoredTopics } from './storage'
@@ -436,6 +437,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                     </div>
                     <h1 id="fraction-v2-lesson-title">{l(currentTopic.title)}</h1>
                     <p className="fraction-v2-lesson-goal"><strong>{l({ eu: 'Helburua:', es: 'Objetivo:', en: 'Goal:', ar: 'الهدف:' })}</strong> <MathText text={l(currentTopic.goal)} /></p>
+                    {currentTopic.needs && currentTopic.needs.length > 0 && <LessonNeeds needs={currentTopic.needs} language={language} coursePath={unit.coursePath} />}
                     <p className="fraction-v2-lesson-body"><MathText text={l(currentTopic.explanation)} /></p>
                     {currentTopic.cases && <LessonCases cases={currentTopic.cases} language={language} />}
                     {/* The drawing right under the explanation it illustrates, before the worked exercise */}

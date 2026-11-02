@@ -111,6 +111,7 @@ export const solidsTopics: UnitTopic[] = [
     {
         id: 'prism-area',
         stage: 'areas',
+        needs: [{ unit: 'dbh1/geometria', topic: 'area-circle', title: { eu: 'Poligono erregularren eta zirkuluaren azalera', es: 'Área de polígonos regulares y del círculo', en: 'Area of regular polygons and of the circle', ar: 'مساحة المضلعات المنتظمة والقرص' } }],
         title: say('Prismaren azalera', 'Área del prisma', 'مساحة المنشور', 'Area of a prism'),
         goal: say('Prisma baten garapena marraztea eta alboko azalera eta azalera osoa kalkulatzea.', 'Dibujar el desarrollo de un prisma y calcular su área lateral y total.', 'رسم نشر المنشور وحساب مساحته الجانبية والكلية.', 'Draw the net of a prism and calculate its lateral and total area.'),
         explanation: say(
@@ -132,6 +133,7 @@ export const solidsTopics: UnitTopic[] = [
     {
         id: 'pyramid-area',
         stage: 'areas',
+        needs: [{ unit: 'dbh2/teorema-pitagoras', topic: 'hypotenuse', title: { eu: 'Hipotenusa kalkulatu', es: 'Calcular la hipotenusa', en: 'Calculate the hypotenuse', ar: 'حساب الوتر' } }],
         title: say('Piramidearen azalera', 'Área de la pirámide', 'مساحة الهرم', 'Area of a pyramid'),
         goal: say('Piramide erregular baten azalera kalkulatzea, apotema Pitagorasekin aurkituz behar denean.', 'Calcular el área de una pirámide regular, hallando la apotema con Pitágoras cuando haga falta.', 'حساب مساحة هرم منتظم، مع إيجاد العامد بفيثاغورس عند الحاجة.', 'Calculate the area of a regular pyramid, finding the slant height with Pythagoras when needed.'),
         explanation: say(
@@ -153,6 +155,7 @@ export const solidsTopics: UnitTopic[] = [
     {
         id: 'frustum-area',
         stage: 'areas',
+        needs: [{ unit: 'dbh2/teorema-pitagoras', topic: 'trapezoid', title: { eu: 'Trapezioak', es: 'Trapecios', en: 'Trapeziums', ar: 'أشباه المنحرف' } }],
         figureAfterSteps: true,
         title: say('Piramide-enborraren azalera', 'Área del tronco de pirámide', 'مساحة جذع الهرم', 'Area of a truncated pyramid'),
         goal: say('Piramide-enbor baten azalera kalkulatzea alboko trapezioak eta bi oinarriak batuz.', 'Calcular el área de un tronco de pirámide sumando los trapecios laterales y las dos bases.', 'حساب مساحة جذع الهرم بجمع أشباه المنحرفات الجانبية والقاعدتين.', 'Calculate the area of a truncated pyramid by adding the lateral trapeziums and the two bases.'),
@@ -177,6 +180,7 @@ export const solidsTopics: UnitTopic[] = [
     {
         id: 'cylinder',
         stage: 'round',
+        needs: [{ unit: 'dbh1/geometria', topic: 'circumference', title: { eu: 'Zirkunferentziaren luzera', es: 'Longitud de la circunferencia', en: 'Length of the circumference', ar: 'طول الدائرة' } }],
         title: say('Zilindroa', 'El cilindro', 'الأسطوانة', 'The cylinder'),
         goal: say('Zilindroa biraketa-gorputz gisa ulertzea eta haren azalera garapenetik kalkulatzea.', 'Entender el cilindro como cuerpo de revolución y calcular su área a partir del desarrollo.', 'فهم الأسطوانة جسمًا دورانيًا وحساب مساحتها من نشرها.', 'Understand the cylinder as a solid of revolution and calculate its area from its net.'),
         explanation: say(
@@ -198,6 +202,7 @@ export const solidsTopics: UnitTopic[] = [
     {
         id: 'cone',
         stage: 'round',
+        needs: [{ unit: 'dbh2/teorema-pitagoras', topic: 'hypotenuse', title: { eu: 'Hipotenusa kalkulatu', es: 'Calcular la hipotenusa', en: 'Calculate the hypotenuse', ar: 'حساب الوتر' } }],
         figureAfterSteps: true,
         title: say('Konoa eta kono-enborra', 'El cono y el tronco de cono', 'المخروط وجذع المخروط', 'The cone and the truncated cone'),
         goal: say('Konoaren elementuak lotzea Pitagorasekin eta konoaren eta kono-enborraren azalera kalkulatzea.', 'Relacionar los elementos del cono con Pitágoras y calcular el área del cono y del tronco de cono.', 'ربط عناصر المخروط بفيثاغورس وحساب مساحة المخروط وجذع المخروط.', 'Relate the parts of the cone using Pythagoras\' theorem, and calculate the area of the cone and of the truncated cone.'),
@@ -242,6 +247,7 @@ export const solidsTopics: UnitTopic[] = [
     {
         id: 'volume-units',
         stage: 'units',
+        needs: [{ unit: 'dbh1/geometria', topic: 'units', title: { eu: 'Luzera- eta azalera-unitateak', es: 'Unidades de longitud y superficie', en: 'Units of length and area', ar: 'وحدات الطول والمساحة' } }],
         title: say('Bolumen-unitateak', 'Unidades de volumen', 'وحدات الحجم', 'Units of volume'),
         goal: say('Bolumen-unitateak elkarren artean aldatzea, mailaz maila 1000 bider biderkatuz edo zatituz.', 'Pasar de unas unidades de volumen a otras, multiplicando o dividiendo por 1000 en cada escalón.', 'التحويل بين وحدات الحجم بالضرب أو القسمة على 1000 في كل درجة.', 'Convert between units of volume by multiplying or dividing by 1000 at each step.'),
         explanation: say(
@@ -304,6 +310,7 @@ export const solidsTopics: UnitTopic[] = [
     {
         id: 'prism-volume',
         stage: 'volume',
+        needs: [{ unit: 'dbh1/geometria', topic: 'area-triangle', title: { eu: 'Triangeluaren, erronboaren eta trapezioaren azalera', es: 'Área del triángulo, del rombo y del trapecio', en: 'Area of the triangle, the rhombus and the trapezium', ar: 'مساحة المثلث والمعيّن وشبه المنحرف' } }],
         title: say('Prismaren eta zilindroaren bolumena', 'Volumen del prisma y del cilindro', 'حجم المنشور والأسطوانة', 'Volume of prisms and cylinders'),
         goal: say('Prismen eta zilindroen bolumena oinarriaren azalera bider altuera gisa kalkulatzea.', 'Calcular el volumen de prismas y cilindros como área de la base por altura.', 'حساب حجم المناشير والأسطوانات بوصفه مساحة القاعدة في الارتفاع.', 'Calculate the volume of prisms and cylinders as the area of the base times the height.'),
         explanation: say(
@@ -325,6 +332,7 @@ export const solidsTopics: UnitTopic[] = [
     {
         id: 'pyramid-volume',
         stage: 'volume',
+        needs: [{ unit: 'dbh2/teorema-pitagoras', topic: 'leg', title: { eu: 'Katetoa kalkulatu', es: 'Calcular un cateto', en: 'Calculate a leg', ar: 'حساب ضلع قائم' } }],
         figureAfterSteps: true,
         title: say('Piramidearen eta konoaren bolumena', 'Volumen de la pirámide y del cono', 'حجم الهرم والمخروط', 'Volume of pyramids and cones'),
         goal: say('Piramideen eta konoen bolumena prisma eta zilindro baten heren gisa kalkulatzea.', 'Calcular el volumen de pirámides y conos como un tercio de un prisma y un cilindro.', 'حساب حجم الأهرامات والمخاريط بوصفه ثلث منشور وأسطوانة.', 'Calculate the volume of pyramids and cones as one third of a prism and a cylinder.'),

@@ -271,6 +271,7 @@ export const divisibilityTopics: UnitTopic[] = [
     {
         id: 'factorization',
         stage: 'primes',
+        needs: [{ unit: 'dbh1/zenbaki-naturalak', topic: 'powers', title: { eu: 'Berreturak', es: 'Las potencias', en: 'Powers', ar: 'القوى' } }],
         figureAfterSteps: true,
         title: { eu: 'Biderkagai lehenetan deskonposatzea', es: 'Descomposición en factores primos', en: 'Prime factorisation', ar: 'التحليل إلى عوامل أولية' },
         goal: {

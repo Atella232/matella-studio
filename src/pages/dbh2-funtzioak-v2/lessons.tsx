@@ -46,6 +46,7 @@ export const functionsTopics: UnitTopic[] = [
     {
         id: 'coordinates',
         stage: 'idea',
+        needs: [{ unit: 'dbh2/numeros-enteros', topic: 'integer-set', title: { eu: 'ℤ multzoa eta zenbakizko zuzena', es: 'El conjunto ℤ y la recta numérica', en: 'The set ℤ and the number line', ar: 'المجموعة ℤ وخط الأعداد' } }],
         figureAfterSteps: true,
         title: say('Koordenatuak eta koadranteak', 'Coordenadas y cuadrantes', 'الإحداثيات والأرباع', 'Coordinates and quadrants'),
         goal: say('Puntu baten koordenatuak idaztea, planoan kokatzea eta koadrantea esatea.', 'Escribir las coordenadas de un punto, situarlo en el plano y decir su cuadrante.', 'كتابة إحداثيي نقطة وتحديد موقعها في المستوى وذكر ربعها.', 'Write the coordinates of a point, plot it on the plane and say which quadrant it is in.'),
@@ -110,6 +111,7 @@ export const functionsTopics: UnitTopic[] = [
     {
         id: 'tables',
         stage: 'representations',
+        needs: [{ unit: 'dbh2/algebra', topic: 'value', title: { eu: 'Zenbakizko balioa', es: 'Valor numérico', en: 'Numerical value', ar: 'القيمة العددية' } }],
         figureAfterSteps: true,
         title: say('Funtzioa taula batean', 'La función en una tabla', 'الدالة في جدول', 'The function in a table'),
         goal: say('Arau batetik balio-taula osatzea eta bikoteak puntu gisa idaztea.', 'Completar una tabla de valores a partir de una regla y escribir las parejas como puntos.', 'إكمال جدول قيم من قاعدة وكتابة الأزواج نقاطًا.', 'Complete a table of values from a rule and write the pairs as points.'),
@@ -132,6 +134,7 @@ export const functionsTopics: UnitTopic[] = [
     {
         id: 'formula',
         stage: 'representations',
+        needs: [{ unit: 'dbh2/algebra', topic: 'value', title: { eu: 'Zenbakizko balioa', es: 'Valor numérico', en: 'Numerical value', ar: 'القيمة العددية' } }],
         figureAfterSteps: true,
         title: say('Formula eta f(x) notazioa', 'La fórmula y la notación f(x)', 'الصيغة والترميز f(x)', 'The formula and the f(x) notation'),
         goal: say('$x$ formula batean ordezkatzea, $f(x)$ interpretatzea eta puntu bat funtzioarena den egiaztatzea.', 'Sustituir $x$ en una fórmula, interpretar $f(x)$ y comprobar si un punto es de la función.', 'التعويض عن $x$ في صيغة وفهم $f(x)$ والتحقق من انتماء نقطة إلى الدالة.', 'Substitute $x$ into a formula, interpret $f(x)$ and check whether a point belongs to the function.'),
@@ -218,6 +221,7 @@ export const functionsTopics: UnitTopic[] = [
     {
         id: 'intercepts',
         stage: 'reading',
+        needs: [{ unit: 'dbh2/ekuazioak', topic: 'simple', title: { eu: 'x bi ataletan', es: 'La x en los dos miembros', en: 'The x on both sides', ar: 'x في الطرفين' } }],
         title: say('Ardatzekiko ebakidurak', 'Puntos de corte con los ejes', 'نقاط التقاطع مع المحاور', 'Points where the graph crosses the axes'),
         goal: say('Funtzio baten ebakidurak X eta Y ardatzekin kalkulatzea eta irakurtzea.', 'Calcular y leer los puntos de corte de una función con los ejes X e Y.', 'حساب وقراءة نقاط تقاطع دالة مع محوري X وY.', 'Calculate and read the points where a function crosses the x- and y-axes.'),
         explanation: say(
@@ -281,6 +285,7 @@ export const functionsTopics: UnitTopic[] = [
     {
         id: 'direct-proportion',
         stage: 'proportional',
+        needs: [{ unit: 'dbh2/proporcionalidad', topic: 'direct-review', title: { eu: 'Proportzionaltasun zuzena', es: 'Proporcionalidad directa', en: 'Direct proportion', ar: 'التناسب الطردي' } }],
         title: say('Proportzionaltasun zuzeneko funtzioa', 'La función de proporcionalidad directa', 'دالة التناسب الطردي', 'The direct proportion function'),
         goal: say('$y=mx$ funtzioa ezagutzea, $m$ konstantea kalkulatzea eta grafikoa jatorritik pasatzen dela ulertzea.', 'Reconocer la función $y=mx$, calcular la constante $m$ y entender que su gráfica pasa por el origen.', 'التعرف على الدالة $y=mx$ وحساب الثابت $m$ وفهم أن رسمها يمر بنقطة الأصل.', 'Recognise the function $y=mx$, calculate the constant $m$ and understand that its graph passes through the origin.'),
         explanation: say(
@@ -302,6 +307,7 @@ export const functionsTopics: UnitTopic[] = [
     {
         id: 'slope',
         stage: 'proportional',
+        needs: [{ unit: 'dbh2/numeros-enteros', topic: 'subtract', title: { eu: 'Kenketa: aurkakoa batu', es: 'Resta: sumar el opuesto', en: 'Subtraction: adding the opposite', ar: 'الطرح: جمع المعاكس' } }],
         figureAfterSteps: true,
         title: say('Malda: aldapa kalkulatzen', 'La pendiente: cómo se calcula', 'الميل: كيف يُحسب', 'Slope: how it is calculated'),
         goal: say('Bi punturen koordenatuekin zuzen baten malda kalkulatzea.', 'Calcular la pendiente de una recta con las coordenadas de dos puntos.', 'حساب ميل خط مستقيم من إحداثيات نقطتين.', 'Calculate the slope of a straight line using the coordinates of two points.'),
@@ -388,6 +394,7 @@ export const functionsTopics: UnitTopic[] = [
     {
         id: 'line-equation',
         stage: 'lines',
+        needs: [{ unit: 'dbh2/ekuazioak', topic: 'simple', title: { eu: 'x bi ataletan', es: 'La x en los dos miembros', en: 'The x on both sides', ar: 'x في الطرفين' } }],
         figureAfterSteps: true,
         title: say('Zuzen baten ekuazioa aurkitu', 'Hallar la ecuación de una recta', 'إيجاد معادلة خط مستقيم', 'Finding the equation of a straight line'),
         goal: say('Bi puntu edo grafiko batetik $y=mx+n$ ekuazioa idaztea eta buruketetan erabiltzea.', 'Escribir la ecuación $y=mx+n$ a partir de dos puntos o de una gráfica y usarla en problemas.', 'كتابة المعادلة $y=mx+n$ من نقطتين أو من رسم واستعمالها في المسائل.', 'Write the equation $y=mx+n$ from two points or from a graph and use it in problems.'),

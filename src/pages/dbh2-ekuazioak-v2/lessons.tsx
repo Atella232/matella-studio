@@ -88,6 +88,7 @@ export const equationsTopics: UnitTopic[] = [
     {
         id: 'simple',
         stage: 'first-degree',
+        needs: [{ unit: 'dbh2/algebra', topic: 'add-monomials', title: { eu: 'Monomioen batuketa eta kenketa', es: 'Suma y resta de monomios', en: 'Adding and subtracting monomials', ar: 'جمع وحيدات الحد وطرحها' } }],
         title: { eu: 'x bi ataletan', es: 'La x en los dos miembros', en: 'The x on both sides', ar: 'x في الطرفين' },
         goal: {
             eu: '$ax+b=cx+d$ motako ekuazioak ebaztea gaiak transposatuz.',
@@ -119,6 +120,7 @@ export const equationsTopics: UnitTopic[] = [
     {
         id: 'brackets',
         stage: 'first-degree',
+        needs: [{ unit: 'dbh2/algebra', topic: 'multiply-monomial', title: { eu: 'Polinomioa bider monomioa eta zati monomioa', es: 'Polinomio por monomio y entre monomio', en: 'Multiplying and dividing a polynomial by a monomial', ar: 'حدودية في وحيد حد وعلى وحيد حد' } }],
         title: { eu: 'Parentesiak dituzten ekuazioak', es: 'Ecuaciones con paréntesis', en: 'Equations with brackets', ar: 'معادلات بأقواس' },
         goal: {
             eu: 'Parentesiak dituzten ekuazioak ebaztea, urratsen ordena jarraituz.',
@@ -210,6 +212,7 @@ export const equationsTopics: UnitTopic[] = [
     {
         id: 'lcm',
         stage: 'denominators',
+        needs: [{ unit: 'dbh2/divisibilidad', topic: 'lcm', title: { eu: 'Multiplo komunetako txikiena (MKT)', es: 'Mínimo común múltiplo (m.c.m.)', en: 'Least common multiple (LCM)', ar: 'المضاعف المشترك الأصغر (م.م.أ · MKT)' } }],
         figureAfterSteps: true,
         title: { eu: 'Izendatzaile batzuk: MKT', es: 'Varios denominadores: m.c.m.', en: 'Several denominators: LCM', ar: 'عدة مقامات: م.م.أ' },
         goal: {
@@ -273,6 +276,7 @@ export const equationsTopics: UnitTopic[] = [
     {
         id: 'problem-steps',
         stage: 'problems',
+        needs: [{ unit: 'dbh2/algebra', topic: 'language', title: { eu: 'Hizkuntza aljebraikoa eta segidak', es: 'Lenguaje algebraico y series', en: 'Algebraic language and sequences', ar: 'اللغة الجبرية والمتتاليات' } }],
         title: { eu: 'Buruketa bat ebazteko urratsak', es: 'Pasos para resolver un problema', en: 'Steps to solve a problem', ar: 'خطوات حل مسألة' },
         goal: {
             eu: 'Enuntziatu bat ekuazio bihurtzea eta lau urratsak jarraitzea.',
@@ -398,6 +402,7 @@ export const equationsTopics: UnitTopic[] = [
     {
         id: 'incomplete',
         stage: 'quadratic',
+        needs: [{ unit: 'dbh2/algebra', topic: 'common-factor', title: { eu: 'Faktore komuna ateratzea', es: 'Sacar factor común', en: 'Taking out a common factor', ar: 'إخراج العامل المشترك' } }],
         figureAfterSteps: true,
         title: { eu: 'Ekuazio osatugabeak', es: 'Ecuaciones incompletas', en: 'Incomplete equations', ar: 'المعادلات الناقصة' },
         goal: {

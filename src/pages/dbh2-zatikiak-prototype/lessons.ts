@@ -153,6 +153,7 @@ export const theoryTopics: TheoryTopic[] = [
     {
         id: 'simplification',
         stage: 'equivalence',
+        needs: [{ unit: 'dbh2/divisibilidad', topic: 'gcd', title: { eu: 'Zatitzaile komunetako handiena (ZKH)', es: 'Máximo común divisor (m.c.d.)', en: 'Greatest common divisor (GCD)', ar: 'القاسم المشترك الأكبر (ق.م.أ · ZKH)' } }],
         figureAfterSteps: true,
         title: { eu: 'Sinplifikazioa eta zatiki laburtezina', es: 'Simplificación y fracción irreducible', en: 'Simplifying and the simplest form', ar: 'التبسيط والكسر غير القابل للاختزال' },
         goal: {
@@ -194,6 +195,7 @@ export const theoryTopics: TheoryTopic[] = [
     {
         id: 'ordering',
         stage: 'ordering',
+        needs: [{ unit: 'dbh2/numeros-enteros', topic: 'compare', title: { eu: 'Zenbaki osoak alderatzea', es: 'Comparar números enteros', en: 'Compare integers', ar: 'مقارنة الأعداد الصحيحة' } }],
         title: { eu: 'Konparazioa eta ordena', es: 'Comparación y orden', en: 'Comparison and order', ar: 'المقارنة والترتيب' },
         goal: {
             eu: 'Zatiki positiboak eta negatiboak estrategia egokiaz alderatzea eta ordenatzea.',
@@ -251,6 +253,7 @@ export const theoryTopics: TheoryTopic[] = [
     {
         id: 'add-subtract',
         stage: 'operations',
+        needs: [{ unit: 'dbh2/divisibilidad', topic: 'lcm', title: { eu: 'Multiplo komunetako txikiena (MKT)', es: 'Mínimo común múltiplo (m.c.m.)', en: 'Least common multiple (LCM)', ar: 'المضاعف المشترك الأصغر (م.م.أ · MKT)' } }],
         title: { eu: 'Batuketa eta kenketa', es: 'Suma y resta', en: 'Addition and subtraction', ar: 'الجمع والطرح' },
         goal: {
             eu: 'Izendatzaile komun egokia aukeratu eta zeinuekin zuzen jardutea.',
@@ -295,6 +298,7 @@ export const theoryTopics: TheoryTopic[] = [
     {
         id: 'multiply-divide',
         stage: 'operations',
+        needs: [{ unit: 'dbh2/numeros-enteros', topic: 'multiply-divide', title: { eu: 'Biderketa eta zatiketa: zeinuen araua', es: 'Producto y cociente: regla de los signos', en: 'Product and quotient: rule of signs', ar: 'الضرب والقسمة: قاعدة الإشارات' } }],
         title: { eu: 'Biderketa eta zatiketa', es: 'Multiplicación y división', en: 'Multiplication and division', ar: 'الضرب والقسمة' },
         goal: {
             eu: 'Zatikiak biderkatzea eta zatitzea, aurretik sinplifikatuz eta alderantzizkoa erabiliz.',
@@ -337,6 +341,7 @@ export const theoryTopics: TheoryTopic[] = [
     {
         id: 'combined',
         stage: 'operations',
+        needs: [{ unit: 'dbh2/numeros-enteros', topic: 'combined', title: { eu: 'Eragiketa konbinatuak eta kako zuzenak', es: 'Operaciones combinadas y corchetes', en: 'Combined operations and square brackets', ar: 'العمليات المركبة والأقواس المعقوفة' } }],
         title: { eu: 'Eragiketa konbinatuak', es: 'Operaciones combinadas', en: 'Combined operations', ar: 'العمليات المركبة' },
         goal: { eu: 'Eragiketen hierarkia errespetatuz kalkulatzea.', es: 'Calcular respetando la jerarquía de operaciones.', en: 'Calculate following the order of operations.', ar: 'الحساب مع احترام ترتيب العمليات.' },
         explanation: {
@@ -375,6 +380,7 @@ export const theoryTopics: TheoryTopic[] = [
     {
         id: 'powers',
         stage: 'operations',
+        needs: [{ unit: 'dbh1/zenbaki-naturalak', topic: 'powers', title: { eu: 'Berreturak', es: 'Las potencias', en: 'Powers', ar: 'القوى' } }],
         title: { eu: 'Zatikien berreturak', es: 'Potencias de fracciones', en: 'Powers of fractions', ar: 'قوى الكسور' },
         goal: { eu: 'Zatiki bat berretzea, oinarriaren zeinua eta berretzailearen paritatea kontrolatuz.', es: 'Elevar una fracción a una potencia controlando el signo de la base y la paridad del exponente.', en: 'Raise a fraction to a power, checking the sign of the base and whether the exponent is even or odd.', ar: 'رفع كسر إلى قوة مع ضبط إشارة الأساس وزوجية الأس.' },
         explanation: {
@@ -454,6 +460,7 @@ export const theoryTopics: TheoryTopic[] = [
     {
         id: 'percentages',
         stage: 'proportionality',
+        needs: [{ unit: 'dbh1/numeros-decimales', topic: 'fraction-division', title: { eu: 'Zatikia zatiketa gisa: zehatza edo periodikoa', es: 'La fracción como división: exacto o periódico', en: 'A fraction as a division: terminating or recurring', ar: 'الكسر قسمةً: منتهٍ أو دوري' } }],
         title: { eu: 'Zatikiak, hamartarrak eta ehunekoak', es: 'Fracciones, decimales y porcentajes', en: 'Fractions, decimals and percentages', ar: 'الكسور والأعداد العشرية والنسب المئوية' },
         goal: { eu: 'Hiru adierazpenen artean zehaztasuna galdu gabe bihurtzea.', es: 'Convertir entre las tres representaciones sin perder exactitud.', en: 'Convert between the three forms without losing accuracy.', ar: 'التحويل بين التمثيلات الثلاثة من دون فقدان الدقة.' },
         explanation: {

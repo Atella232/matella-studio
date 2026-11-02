@@ -199,6 +199,7 @@ export const proportionDbh2Topics: UnitTopic[] = [
     {
         id: 'share-problems',
         stage: 'shares',
+        needs: [{ unit: 'dbh2/zatikiak', topic: 'add-subtract', title: { eu: 'Batuketa eta kenketa', es: 'Suma y resta', en: 'Addition and subtraction', ar: 'الجمع والطرح' } }],
         title: say('Banaketak problemetan eta zatikiekin', 'Repartos en problemas y con fracciones', 'التوزيع في المسائل وبالكسور', 'Sharing in problems and with fractions'),
         goal: say('Banaketa proportzionalak egunekin, orduekin edo zatikiekin ebaztea.', 'Resolver repartos proporcionales con días, horas o fracciones.', 'حلّ توزيعات تناسبية بالأيام أو الساعات أو الكسور.', 'Solve proportional shares involving days, hours or fractions.'),
         explanation: say(
@@ -220,6 +221,7 @@ export const proportionDbh2Topics: UnitTopic[] = [
     {
         id: 'inverse-share',
         stage: 'shares',
+        needs: [{ unit: 'dbh2/zatikiak', topic: 'multiply-divide', title: { eu: 'Biderketa eta zatiketa', es: 'Multiplicación y división', en: 'Multiplication and division', ar: 'الضرب والقسمة' } }],
         figureAfterSteps: true,
         title: say('Banaketa alderantziz proportzionala', 'Reparto inversamente proporcional', 'التوزيع العكسي', 'Sharing in inverse proportion'),
         goal: say('Kantitate bat zenbaki batzuekiko alderantziz proportzionalak diren zatitan banatzea.', 'Repartir una cantidad en partes inversamente proporcionales a unos números.', 'توزيع كمية إلى أجزاء متناسبة عكسيًا مع أعداد معطاة.', 'Share an amount into parts in inverse proportion to some numbers.'),
@@ -244,6 +246,7 @@ export const proportionDbh2Topics: UnitTopic[] = [
     {
         id: 'percent-forms',
         stage: 'percent',
+        needs: [{ unit: 'dbh2/zatikiak', topic: 'percentages', title: { eu: 'Zatikiak, hamartarrak eta ehunekoak', es: 'Fracciones, decimales y porcentajes', en: 'Fractions, decimals and percentages', ar: 'الكسور والأعداد العشرية والنسب المئوية' } }],
         title: say('Ehunekoa hamartar gisa', 'El porcentaje como decimal', 'النسبة المئوية عددًا عشريًا', 'Percentages as decimals'),
         goal: say('Ehuneko bat hamartar gisa idaztea eta kantitate baten ehunekoa biderketa bakar batez kalkulatzea, % 100etik gorakoak barne.', 'Escribir un porcentaje como decimal y calcular el porcentaje de una cantidad con una sola multiplicación, también por encima del 100 %.', 'كتابة النسبة المئوية عددًا عشريًا وحساب نسبة من كمية بضربة واحدة، حتى فوق 100٪.', 'Write a percentage as a decimal and calculate a percentage of an amount with a single multiplication, including percentages above 100%.'),
         explanation: say(
@@ -264,6 +267,7 @@ export const proportionDbh2Topics: UnitTopic[] = [
     {
         id: 'percent-total',
         stage: 'percent',
+        needs: [{ unit: 'dbh1/numeros-decimales', topic: 'divide-decimal', title: { eu: 'Zatitzailea hamartarra denean', es: 'Cuando el divisor es decimal', en: 'When the divisor is a decimal', ar: 'حين يكون المقسوم عليه عشريًا' } }],
         title: say('Hasierako kantitatea', 'La cantidad inicial', 'الكمية الأصلية', 'The initial amount'),
         goal: say('Zati bat eta haren ehunekoa jakinda, osoa kalkulatzea.', 'Calcular el total conociendo una parte y su porcentaje.', 'حساب الكل بمعرفة جزء ونسبته المئوية.', 'Calculate the total when you know a part and its percentage.'),
         explanation: say(

@@ -174,6 +174,7 @@ export const pythagorasTopics: UnitTopic[] = [
     {
         id: 'triangle-height',
         stage: 'plane',
+        needs: [{ unit: 'dbh1/geometria', topic: 'area-triangle', title: { eu: 'Triangeluaren, erronboaren eta trapezioaren azalera', es: 'Área del triángulo, del rombo y del trapecio', en: 'Area of the triangle, the rhombus and the trapezium', ar: 'مساحة المثلث والمعيّن وشبه المنحرف' } }],
         title: say('Triangelu isoszele eta aldeberdinen altuera', 'La altura de triángulos isósceles y equiláteros', 'ارتفاع المثلث المتساوي الساقين والمتساوي الأضلاع', 'The height of isosceles and equilateral triangles'),
         goal: say('Triangelu isoszele edo aldeberdin baten altuera kalkulatzea eta haren azalera aurkitzea.', 'Calcular la altura de un triángulo isósceles o equilátero y hallar su área.', 'حساب ارتفاع مثلث متساوي الساقين أو متساوي الأضلاع وإيجاد مساحته.', 'Calculate the height of an isosceles or equilateral triangle and find its area.'),
         explanation: say(
@@ -194,6 +195,7 @@ export const pythagorasTopics: UnitTopic[] = [
     {
         id: 'diagonals',
         stage: 'plane',
+        needs: [{ unit: 'dbh1/figuras-planas', topic: 'quad-diagonals', title: { eu: 'Laukien diagonalak', es: 'Las diagonales de los cuadriláteros', en: 'The diagonals of quadrilaterals', ar: 'أقطار الرباعيات' } }],
         title: say('Laukizuzenak, karratuak eta erronboak', 'Rectángulos, cuadrados y rombos', 'المستطيلات والمربعات والمعيّنات', 'Rectangles, squares and rhombuses'),
         goal: say('Laukizuzen eta karratuen diagonala eta erronboen aldea edo diagonala kalkulatzea.', 'Calcular la diagonal de rectángulos y cuadrados y el lado o la diagonal de los rombos.', 'حساب قطر المستطيلات والمربعات وضلع المعيّن أو قطره.', 'Calculate the diagonal of rectangles and squares, and the side or the diagonal of rhombuses.'),
         explanation: say(
@@ -215,6 +217,7 @@ export const pythagorasTopics: UnitTopic[] = [
     {
         id: 'trapezoid',
         stage: 'plane',
+        needs: [{ unit: 'dbh1/geometria', topic: 'area-triangle', title: { eu: 'Triangeluaren, erronboaren eta trapezioaren azalera', es: 'Área del triángulo, del rombo y del trapecio', en: 'Area of the triangle, the rhombus and the trapezium', ar: 'مساحة المثلث والمعيّن وشبه المنحرف' } }],
         title: say('Trapezioak', 'Trapecios', 'أشباه المنحرف', 'Trapeziums'),
         goal: say('Trapezio angeluzuzen eta isoszeleen altuera edo alde zeiharra kalkulatzea, eta azalera eta perimetroa aurkitzea.', 'Calcular la altura o el lado oblicuo de trapecios rectángulos e isósceles y hallar su área y su perímetro.', 'حساب ارتفاع أشباه المنحرف القائمة والمتساوية الساقين أو ضلعها المائل، وإيجاد مساحتها ومحيطها.', 'Calculate the height or the slanted side of right-angled and isosceles trapeziums, and find their area and perimeter.'),
         explanation: say(
@@ -237,6 +240,7 @@ export const pythagorasTopics: UnitTopic[] = [
     {
         id: 'apothem',
         stage: 'circle',
+        needs: [{ unit: 'dbh1/geometria', topic: 'area-circle', title: { eu: 'Poligono erregularren eta zirkuluaren azalera', es: 'Área de polígonos regulares y del círculo', en: 'Area of regular polygons and of the circle', ar: 'مساحة المضلعات المنتظمة والقرص' } }],
         title: say('Poligono erregularren apotema', 'La apotema de los polígonos regulares', 'عامد المضلعات المنتظمة', 'The apothem of regular polygons'),
         goal: say('Poligono erregular baten apotema kalkulatzea eta haren azalera aurkitzea.', 'Calcular la apotema de un polígono regular y hallar su área.', 'حساب عامد مضلع منتظم وإيجاد مساحته.', 'Calculate the apothem of a regular polygon and find its area.'),
         explanation: say(
@@ -277,6 +281,7 @@ export const pythagorasTopics: UnitTopic[] = [
     {
         id: 'tangent',
         stage: 'circle',
+        needs: [{ unit: 'dbh1/figuras-planas', topic: 'line-circle', title: { eu: 'Zuzena eta zirkunferentzia', es: 'Recta y circunferencia', en: 'Straight line and circle', ar: 'المستقيم والدائرة' } }],
         title: say('Zuzenki ukitzaileak', 'Segmentos tangentes', 'قطع المماس', 'Tangent segments'),
         goal: say('Kanpoko puntu batetik zirkunferentzia batera doan zuzenki ukitzailea, erradioa edo distantzia kalkulatzea.', 'Calcular el segmento tangente desde un punto exterior, el radio o la distancia al centro.', 'حساب قطعة المماس من نقطة خارجية، أو نصف القطر، أو البعد عن المركز.', 'Calculate the tangent segment from an external point, the radius, or the distance to the centre.'),
         explanation: say(

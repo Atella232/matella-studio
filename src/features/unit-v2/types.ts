@@ -35,6 +35,16 @@ export interface LessonStep {
     math?: string | LocalizedText
 }
 
+/** A lesson of an earlier unit that this one builds on: «Before you start, review…» */
+export interface LessonNeed {
+    /** Address of that unit under /matematika: course and unit slug (dbh2/divisibilidad) */
+    unit: string
+    /** The lesson id in that unit */
+    topic: string
+    /** That lesson's title, copied as it is (tests/lesson-needs.test.ts keeps it in step) */
+    title: LocalizedText
+}
+
 /** A typical slip of the lesson: what students often write, and the right way */
 export interface LessonMistake {
     wrong: LocalizedText
@@ -46,6 +56,8 @@ export interface UnitTopic {
     stage: string
     title: LocalizedText
     goal: LocalizedText
+    /** Lessons of earlier units to review first, linked under the goal */
+    needs?: LessonNeed[]
     explanation: LocalizedText
     /** The explanation split into cases (direct / inverse, the part / the total…), shown as cards right under it */
     cases?: LessonStep[]

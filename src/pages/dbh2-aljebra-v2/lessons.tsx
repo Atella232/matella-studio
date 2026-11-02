@@ -58,6 +58,7 @@ export const algebraTopics: UnitTopic[] = [
     {
         id: 'value',
         stage: 'language',
+        needs: [{ unit: 'dbh2/numeros-enteros', topic: 'combined', title: { eu: 'Eragiketa konbinatuak eta kako zuzenak', es: 'Operaciones combinadas y corchetes', en: 'Combined operations and square brackets', ar: 'العمليات المركبة والأقواس المعقوفة' } }],
         title: { eu: 'Zenbakizko balioa', es: 'Valor numérico', en: 'Numerical value', ar: 'القيمة العددية' },
         goal: {
             eu: 'Adierazpen aljebraiko baten zenbakizko balioa kalkulatzea, zenbaki negatiboekin ere.',
@@ -215,6 +216,7 @@ export const algebraTopics: UnitTopic[] = [
     {
         id: 'add-polynomials',
         stage: 'polynomials',
+        needs: [{ unit: 'dbh2/numeros-enteros', topic: 'brackets', title: { eu: 'Parentesidun batuketak eta kenketak', es: 'Sumas y restas con paréntesis', en: 'Additions and subtractions with brackets', ar: 'الجمع والطرح مع الأقواس' } }],
         title: { eu: 'Polinomioen batuketa eta kenketa', es: 'Suma y resta de polinomios', en: 'Adding and subtracting polynomials', ar: 'جمع الحدوديات وطرحها' },
         goal: {
             eu: 'Polinomioak batu eta kentzea, parentesiak ondo kenduz.',
@@ -402,6 +404,7 @@ export const algebraTopics: UnitTopic[] = [
     {
         id: 'common-factor',
         stage: 'factor',
+        needs: [{ unit: 'dbh2/divisibilidad', topic: 'gcd', title: { eu: 'Zatitzaile komunetako handiena (ZKH)', es: 'Máximo común divisor (m.c.d.)', en: 'Greatest common divisor (GCD)', ar: 'القاسم المشترك الأكبر (ق.م.أ · ZKH)' } }],
         title: { eu: 'Faktore komuna ateratzea', es: 'Sacar factor común', en: 'Taking out a common factor', ar: 'إخراج العامل المشترك' },
         goal: {
             eu: 'Polinomio baten faktore komunik handiena ateratzea.',

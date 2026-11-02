@@ -1,0 +1,26 @@
+/* «Before you start, review…»: one quiet line under the goal of the lesson */
+
+.fraction-v2 .lesson-needs {
+    margin: -10px 0 0;
+    padding: 0 18px;
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.55;
+}
+
+.lesson-needs-label {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.fraction-v2 .lesson-needs a {
+    color: var(--stage-ink);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+}
+
+.lesson-needs-where {
+    color: var(--muted);
+}
