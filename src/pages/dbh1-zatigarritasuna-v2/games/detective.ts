@@ -41,6 +41,8 @@ const LABELS = {
     result: say('Emaitza', 'Resultado', 'النتيجة', 'Result'),
     lastDigit: say('3, 6 edo 9 amaieran', 'Acaban en 3, 6 o 9', 'تنتهي بـ 3 أو 6 أو 9', 'End in 3, 6 or 9'),
     primes: say('Lehenak', 'Primos', 'الأعداد الأولية', 'Primes'),
+    odd: say('Bakoitiak', 'Impares', 'الأعداد الفردية', 'Odd numbers'),
+    howMany: say('Zenbat', 'Cuántos', 'كم عددًا', 'How many'),
     factors: say('Deskonposizioa', 'Descomposición', 'التحليل', 'Factorisation'),
     lowest: say('Faktore komunak, berretzaile txikiena', 'Factores comunes, menor exponente', 'العوامل المشتركة بأصغر أس', 'Common factors, lowest exponent'),
     highest: say('Faktore guztiak, berretzaile handiena', 'Todos los factores, mayor exponente', 'كل العوامل بأكبر أس', 'All factors, highest exponent'),
@@ -111,20 +113,18 @@ function joined(a: number, b: number, rule: 'gcd' | 'lcm'): Map<number, number> 
 /** Pairs whose GCD is not a single prime, so its factorisation shows a step */
 const PAIRS: Array<[number, number]> = [[8, 12], [12, 18], [12, 20], [18, 24], [16, 24], [20, 30], [12, 30], [18, 30], [24, 36], [12, 16], [8, 20], [18, 27], [12, 42], [20, 50], [24, 40], [30, 45]]
 
-const sumPrompt = (n: number, kind: 'less' | 'between') => (kind === 'less'
-    ? say(`Batu $${n}$ baino txikiagoak diren zenbaki lehen guztiak.`, `Suma todos los números primos menores que $${n}$.`, `اجمع كل الأعداد الأولية الأصغر من $${n}$.`, `Add all the prime numbers less than $${n}$.`)
-    : say(`Batu $${n}$ eta $${n + 10}$ arteko zenbaki lehenak.`, `Suma los números primos que hay entre $${n}$ y $${n + 10}$.`, `اجمع الأعداد الأولية بين $${n}$ و$${n + 10}$.`, `Add the prime numbers between $${n}$ and $${n + 10}$.`))
+const sumPrompt = (n: number) => say(`Batu $${n}$ baino txikiagoak diren zenbaki lehen guztiak.`, `Suma todos los números primos menores que $${n}$.`, `اجمع كل الأعداد الأولية الأصغر من $${n}$.`, `Add all the prime numbers less than $${n}$.`)
 
 function build(random: Random, error: DivisibilityDetectiveError): Built | null {
     switch (error) {
         case 'missing-one-and-itself': {
-            const n = pick(random, [12, 18, 20, 24, 28, 30])
+            const n = pick(random, [12, 18, 20, 28])
             const all = divisorsOf(n)
             const shown = all.slice(1, -1)
             return {
                 problem: say(`Batu $${n}$ zenbakiaren zatitzaile guztiak.`, `Suma todos los divisores de $${n}$.`, `اجمع كل قواسم العدد $${n}$.`, `Add up all the divisors of $${n}$.`),
                 lines: [line(LABELS.divisors, list(shown)), line(LABELS.add, shown.join('+')), line(LABELS.result, `${sum(shown)}`)],
-                wrong: 0, error, fix: `${all.join('+')}=${sum(all)}`, right: sum(all), reached: sum(shown)
+                wrong: 0, error, fix: `${sum(shown)}+1+${n}=${sum(all)}`, right: sum(all), reached: sum(shown)
             }
         }
         case 'divisors-for-multiples': {
@@ -151,11 +151,11 @@ function build(random: Random, error: DivisibilityDetectiveError): Built | null 
         }
         case 'one-prime':
         case 'two-not-prime': {
-            const n = randomInt(random, 10, 20)
+            const n = pick(random, [6, 8, 10])
             const primes = Array.from({ length: n - 1 }, (_, index) => index + 1).filter(isPrime)
             const shown = error === 'one-prime' ? [1, ...primes] : primes.slice(1)
             return {
-                problem: sumPrompt(n, 'less'),
+                problem: sumPrompt(n),
                 lines: [line(LABELS.primes, list(shown)), line(LABELS.add, shown.join('+')), line(LABELS.result, `${sum(shown)}`)],
                 wrong: 0, error, fix: `${primes.join('+')}=${sum(primes)}`, right: sum(primes), reached: sum(shown)
             }
@@ -165,9 +165,9 @@ function build(random: Random, error: DivisibilityDetectiveError): Built | null 
             const odd = [1, 3, 5, 7, 9].map((step) => n + step)
             const primes = odd.filter(isPrime)
             return {
-                problem: sumPrompt(n, 'between'),
-                lines: [line(LABELS.primes, list(odd)), line(LABELS.add, odd.join('+')), line(LABELS.result, `${sum(odd)}`)],
-                wrong: 0, error, fix: `${primes.join('+')}=${sum(primes)}`, right: sum(primes), reached: sum(odd)
+                problem: say(`Zenbat zenbaki lehen daude $${n}$ eta $${n + 10}$ artean?`, `¿Cuántos números primos hay entre $${n}$ y $${n + 10}$?`, `كم عددًا أوليًا بين $${n}$ و$${n + 10}$؟`, `How many prime numbers are there between $${n}$ and $${n + 10}$?`),
+                lines: [line(LABELS.odd, list(odd)), line(LABELS.primes, list(odd)), line(LABELS.howMany, `${odd.length}`)],
+                wrong: 1, error, fix: `${list(primes)}\\ \\to\\ ${primes.length}`, right: primes.length, reached: odd.length
             }
         }
         case 'gcd-for-lcm': {
@@ -175,7 +175,7 @@ function build(random: Random, error: DivisibilityDetectiveError): Built | null 
             if (lcm(a, b) > 60) return null
             return {
                 problem: say(`Bi autobus elkarrekin irten dira: bata $${a}$ minuturo eta bestea $${b}$ minuturo. Noiz irtengo dira berriro elkarrekin?`, `Dos autobuses salen juntos: uno cada $${a}$ minutos y otro cada $${b}$. ¿Cuándo vuelven a salir juntos?`, `حافلتان تنطلقان معًا: الأولى كل $${a}$ دقيقة والثانية كل $${b}$. متى تنطلقان معًا مرة أخرى؟`, `Two buses leave together: one every $${a}$ minutes and the other every $${b}$. When do they next leave together?`),
-                lines: [line(LABELS.factors, `${a}=${factorLatex(exponentsOf(a))},\\ ${b}=${factorLatex(exponentsOf(b))}`), line(LABELS.lowest, `${factorLatex(joined(a, b, 'gcd'))}=${gcd(a, b)}`), line(LABELS.answer, `${gcd(a, b)}`)],
+                lines: [line(LABELS.factors, `${factorLatex(exponentsOf(a))},\\ ${factorLatex(exponentsOf(b))}`), line(LABELS.lowest, `${factorLatex(joined(a, b, 'gcd'))}=${gcd(a, b)}`), line(LABELS.answer, `${gcd(a, b)}`)],
                 wrong: 1, error, fix: `${factorLatex(joined(a, b, 'lcm'))}=${lcm(a, b)}`, right: lcm(a, b), reached: gcd(a, b)
             }
         }
@@ -183,7 +183,7 @@ function build(random: Random, error: DivisibilityDetectiveError): Built | null 
             const [a, b] = pick(random, PAIRS)
             return {
                 problem: say(`Kalkulatu $${a}$ eta $${b}$ zenbakien ZKH.`, `Halla el m.c.d. de $${a}$ y $${b}$.`, `أوجد ق.م.أ للعددين $${a}$ و$${b}$.`, `Find the GCD of $${a}$ and $${b}$.`),
-                lines: [line(LABELS.factors, `${a}=${factorLatex(exponentsOf(a))},\\ ${b}=${factorLatex(exponentsOf(b))}`), line(LABELS.highest, factorLatex(joined(a, b, 'lcm'))), line(LABELS.gcd, `${lcm(a, b)}`)],
+                lines: [line(LABELS.factors, `${factorLatex(exponentsOf(a))},\\ ${factorLatex(exponentsOf(b))}`), line(LABELS.highest, factorLatex(joined(a, b, 'lcm'))), line(LABELS.gcd, `${lcm(a, b)}`)],
                 wrong: 1, error, fix: `${factorLatex(joined(a, b, 'gcd'))}=${gcd(a, b)}`, right: gcd(a, b), reached: lcm(a, b)
             }
         }
@@ -193,7 +193,7 @@ function build(random: Random, error: DivisibilityDetectiveError): Built | null 
             const m = lcm(a, b)
             return {
                 problem: say(`Kalkulatu $${a}$ eta $${b}$ zenbakien MKT.`, `Halla el m.c.m. de $${a}$ y $${b}$.`, `أوجد م.م.أ للعددين $${a}$ و$${b}$.`, `Find the LCM of $${a}$ and $${b}$.`),
-                lines: [line(LABELS.common, `${a}\\cdot ${b}=${a * b}`), line(LABELS.check, `${a * b}\\div ${a}=${b},\\ ${a * b}\\div ${b}=${a}`), line(LABELS.lcm, `${a * b}`)],
+                lines: [line(LABELS.common, `${a}\\cdot ${b}=${a * b}`), line(LABELS.check, `${a * b}\\div ${a}=${b}`), line(LABELS.lcm, `${a * b}`)],
                 wrong: 2, error, fix: `${a}\\cdot ${m / a}=${b}\\cdot ${m / b}=${m}`, right: m, reached: a * b
             }
         }

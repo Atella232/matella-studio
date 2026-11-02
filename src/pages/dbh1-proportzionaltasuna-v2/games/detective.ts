@@ -158,7 +158,7 @@ function build(random: Random, error: ProportionDetectiveError): Built | null {
             return {
                 problem: say(`$${price}$ €-ko jaka batek $${percent}\\,\\%$-ko deskontua du. Zenbat ordaintzen da?`, `Una chaqueta de $${price}$ € tiene un descuento del $${percent}\\,\\%$. ¿Cuánto se paga?`, `سترة ثمنها $${price}$ يورو عليها تخفيض $${percent}\\,\\%$. كم ندفع؟`, `A jacket costs $${price}$ € with a $${percent}\\,\\%$ discount. How much do you pay?`),
                 lines: [line(LABELS.discount, `${price}\\div ${percent}=${n(wrongDiscount)}`), line(LABELS.price, `${price}-${n(wrongDiscount)}`), line(LABELS.answer, n(price - wrongDiscount))],
-                wrong: 0, error, fix: `${price}\\cdot ${percent}\\div 100=${(price * percent) / 100}\\ \\to\\ ${price}-${(price * percent) / 100}=${right}`, right, reached: price - wrongDiscount
+                wrong: 0, error, fix: `${price}\\cdot ${percent}\\div 100=${n((price * percent) / 100)}\\ \\to\\ ${price}-${n((price * percent) / 100)}=${n(right)}`, right, reached: price - wrongDiscount
             }
         }
         case 'discount-as-price': {
@@ -179,9 +179,9 @@ function build(random: Random, error: ProportionDetectiveError): Built | null {
             const reached = (rise / end) * 100
             if (Math.round(reached * 100) !== reached * 100) return null
             return {
-                problem: say(`Prezio bat $${start}$ €-tik $${end}$ €-ra igo da. Zenbat igo da ehunekotan?`, `Un precio sube de $${start}$ € a $${end}$ €. ¿Qué porcentaje ha subido?`, `ارتفع سعر من $${start}$ يورو إلى $${end}$ يورو. ما نسبة الزيادة؟`, `A price rises from $${start}$ € to $${end}$ €. By what percentage has it risen?`),
-                lines: [line(LABELS.rise, `${end}-${start}=${rise}`), line(LABELS.fraction, `\\frac{${rise}}{${end}}=${n(rise / end)}`), line(LABELS.percent, `${n(reached)}\\,\\%`)],
-                wrong: 1, error, fix: `\\frac{${rise}}{${start}}=${n(rise / start)}\\ \\to\\ ${percent}\\,\\%`, right: percent, reached
+                problem: say(`Prezio bat $${start}$ €-tik $${n(end)}$ €-ra igo da. Zenbat igo da ehunekotan?`, `Un precio sube de $${start}$ € a $${n(end)}$ €. ¿Qué porcentaje ha subido?`, `ارتفع سعر من $${start}$ يورو إلى $${n(end)}$ يورو. ما نسبة الزيادة؟`, `A price rises from $${start}$ € to $${n(end)}$ €. By what percentage has it risen?`),
+                lines: [line(LABELS.rise, `${n(end)}-${start}=${n(rise)}`), line(LABELS.fraction, `\\frac{${n(rise)}}{${n(end)}}=${n(rise / end)}`), line(LABELS.percent, `${n(reached)}\\,\\%`)],
+                wrong: 1, error, fix: `\\frac{${n(rise)}}{${start}}=${n(rise / start)}\\ \\to\\ ${percent}\\,\\%`, right: percent, reached
             }
         }
     }

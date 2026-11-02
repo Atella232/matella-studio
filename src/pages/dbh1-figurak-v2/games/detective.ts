@@ -107,7 +107,7 @@ function build(random: Random, error: FiguresDetectiveError): Built | null {
             return {
                 problem: say(`Zenbat batzen dute ${name.eu} baten barne-angeluek?`, `¿Cuánto suman los ángulos interiores de un ${name.es}?`, `ما مجموع الزوايا الداخلية في ${name.ar}؟`, `What do the interior angles of a ${name.en} add up to?`),
                 lines: [line(LABELS.formula, `S=n\\cdot ${deg(180)}`), line(LABELS.substitute, `S=${sides}\\cdot ${deg(180)}`), line(LABELS.result, `S=${deg(sides * 180)}`)],
-                wrong: 0, error, fix: `S=(${sides}-2)\\cdot ${deg(180)}=${deg((sides - 2) * 180)}`, right: (sides - 2) * 180, reached: sides * 180
+                wrong: 0, error, fix: `S=(${sides}-2)\\cdot ${deg(180)}\\ \\to\\ S=${deg((sides - 2) * 180)}`, right: (sides - 2) * 180, reached: sides * 180
             }
         }
         case 'central-as-interior': {
@@ -116,7 +116,7 @@ function build(random: Random, error: FiguresDetectiveError): Built | null {
             const total = (sides - 2) * 180
             return {
                 problem: say(`Zenbat neurtzen du ${name.eu} erregular baten barne-angelu bakoitzak?`, `¿Cuánto mide cada ángulo interior de un ${name.es} regular?`, `كم قياس كل زاوية داخلية في ${name.ar} منتظم؟`, `How big is each interior angle of a regular ${name.en}?`),
-                lines: [line(LABELS.sum, `S=(${sides}-2)\\cdot ${deg(180)}=${deg(total)}`), line(LABELS.each, `\\alpha=${deg(360)}\\div ${sides}`), line(LABELS.result, `\\alpha=${deg(360 / sides)}`)],
+                lines: [line(LABELS.sum, `S=${deg(total)}`), line(LABELS.each, `\\alpha=${deg(360)}\\div ${sides}`), line(LABELS.result, `\\alpha=${deg(360 / sides)}`)],
                 wrong: 1, error, fix: `\\alpha=${deg(total)}\\div ${sides}=${deg(total / sides)}`, right: total / sides, reached: 360 / sides
             }
         }
@@ -141,7 +141,7 @@ function build(random: Random, error: FiguresDetectiveError): Built | null {
             return {
                 problem: say(`Triangelu isoszele batean angelu desberdinak $${deg(a)}$ neurtzen du. Zenbat neurtzen du oinarriko angelu bakoitzak?`, `En un triángulo isósceles el ángulo desigual mide $${deg(a)}$. ¿Cuánto mide cada ángulo de la base?`, `في مثلث متساوي الساقين الزاوية المختلفة $${deg(a)}$. كم قياس كل زاوية من زاويتي القاعدة؟`, `In an isosceles triangle the odd angle is $${deg(a)}$. How big is each base angle?`),
                 lines: [line(LABELS.sum, `${deg(a)}+\\beta+\\beta=${deg(180)}`), line(LABELS.isolate, `\\beta=${deg(180)}-${deg(a)}`), line(LABELS.result, `\\beta=${deg(180 - a)}`)],
-                wrong: 1, error, fix: `\\beta=(${deg(180)}-${deg(a)})\\div 2=${deg((180 - a) / 2)}`, right: (180 - a) / 2, reached: 180 - a
+                wrong: 1, error, fix: `${deg(180)}-${deg(a)}=${deg(180 - a)}\\ \\to\\ \\beta=${deg(180 - a)}\\div 2=${deg((180 - a) / 2)}`, right: (180 - a) / 2, reached: 180 - a
             }
         }
         case 'inscribed-as-central': {

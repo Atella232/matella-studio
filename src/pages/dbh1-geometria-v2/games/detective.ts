@@ -76,7 +76,7 @@ export const geometryDetectiveTips: Record<GeometryDetectiveError, LocalizedText
 
 type Built = Omit<WorkedCase<GeometryDetectiveError>, 'options'>
 
-const TRIPLES: Array<[number, number, number]> = [[3, 4, 5], [6, 8, 10], [5, 12, 13], [8, 15, 17], [9, 12, 15], [12, 16, 20]]
+const TRIPLES: Array<[number, number, number]> = [[3, 4, 5], [6, 8, 10], [5, 12, 13], [8, 15, 17], [9, 12, 15]]
 
 function build(random: Random, error: GeometryDetectiveError): Built | null {
     switch (error) {

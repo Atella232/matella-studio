@@ -101,11 +101,11 @@ function build(random: Random, error: NaturalsDetectiveError): Built | null {
             return {
                 problem: say(`Egin zatiketa eta eman hondarra: $${dividend}\\div ${d}$`, `Haz la división y da el resto: $${dividend}\\div ${d}$`, `أجرِ القسمة وأعطِ الباقي: $${dividend}\\div ${d}$`, `Do the division and give the remainder: $${dividend}\\div ${d}$`),
                 lines: [line(LABELS.attempt, `${d}\\cdot ${c - 1}=${d * (c - 1)}`), line(LABELS.subtract, `${dividend}-${d * (c - 1)}=${r + d}`), line(LABELS.both, `c=${c - 1},\\ r=${r + d}`)],
-                wrong: 2, error, fix: `${d}\\cdot ${c}=${d * c},\\ r=${dividend}-${d * c}=${r}`, right: r, reached: r + d
+                wrong: 2, error, fix: `${d}\\cdot ${c}=${d * c}\\ \\to\\ r=${dividend}-${d * c}=${r}`, right: r, reached: r + d
             }
         }
         case 'rounding-down': {
-            const low = 100 * randomInt(random, 12, 98)
+            const low = 100 * randomInt(random, 1, 9)
             const value = low + 10 * randomInt(random, 5, 9) + randomInt(random, 0, 9)
             return {
                 problem: say(`Biribildu ehunekoetara: $${big(value)}$`, `Redondea a las centenas: $${big(value)}$`, `قرّب إلى المئات: $${big(value)}$`, `Round to the nearest hundred: $${big(value)}$`),

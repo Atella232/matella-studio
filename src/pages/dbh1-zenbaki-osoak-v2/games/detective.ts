@@ -75,7 +75,7 @@ const calculate = (latex: string) => say(`Kalkulatu: $${latex}$`, `Calcula: $${l
 function build(random: Random, error: IntegersDetectiveError): Built | null {
     switch (error) {
         case 'bigger-absolute': {
-            const far = -randomInt(random, 4, 12)
+            const far = -randomInt(random, 4, 9)
             const near = randomInt(random, far + 1, -1)
             const [first, second] = pick(random, [[far, near], [near, far]])
             return {

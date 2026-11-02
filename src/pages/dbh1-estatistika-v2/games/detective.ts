@@ -105,7 +105,7 @@ function build(random: Random, error: StatsDetectiveError): Built | null {
         }
         case 'mean-distinct': {
             const values = shuffle(random, [2, 3, 4, 5, 6, 7, 8]).slice(0, 3)
-            const data = shuffle(random, [...values, pick(random, values), pick(random, values)])
+            const data = shuffle(random, [...values, pick(random, values)])
             const total = sum(data)
             if (!exact(total / data.length) || !exact(total / values.length)) return null
             return {
@@ -116,7 +116,7 @@ function build(random: Random, error: StatsDetectiveError): Built | null {
         }
         case 'median-unsorted': {
             const size = pick(random, [5, 7])
-            const data = shuffle(random, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]).slice(0, size)
+            const data = shuffle(random, [1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, size)
             const middle = Math.floor(size / 2)
             const sorted = [...data].sort((p, q) => p - q)
             if (data[middle] === sorted[middle]) return null
