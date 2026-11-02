@@ -18,6 +18,7 @@ import {
     VariablesFigure,
     VariationFigure
 } from './figures'
+import { functionsLessonChecks, type FunctionsTopicId } from './lessonChecks'
 
 /* ==========================================================================
    Funtzioak · 2. DBH — stages and lessons
@@ -42,7 +43,7 @@ const say = (eu: string, es: string, ar: string, en: string): LocalizedText => (
 /** The same formula in every language; the decimal comma becomes a point in Arabic */
 const same = (value: string): LocalizedText => ({ eu: value, es: value, en: value, ar: value.replace(/\{,\}/g, '.') })
 
-export const functionsTopics: UnitTopic[] = [
+const baseTopics: UnitTopic[] = [
     {
         id: 'coordinates',
         stage: 'idea',
@@ -415,3 +416,6 @@ export const functionsTopics: UnitTopic[] = [
         figure: (language) => <LineEquationFigure language={language} />
     }
 ]
+
+/** Each lesson with its typical mistake and its «Check it» question (lessonChecks.ts) */
+export const functionsTopics: UnitTopic[] = baseTopics.map((topic) => ({ ...topic, ...functionsLessonChecks[topic.id as FunctionsTopicId] }))

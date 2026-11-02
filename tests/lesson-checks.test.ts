@@ -98,12 +98,20 @@ function solutions(answer: string): number[] | null {
     return found
 }
 
-/** Whether x = value makes both sides of the equation equal */
-function satisfies([left, right]: [string, string], value: number): boolean {
-    const at = (side: string) => evaluate(side, (name) => (name === 'x' ? value : Number.NaN))
+/** Whether x = value (and y, for a point) makes both sides of the equation equal */
+function satisfies([left, right]: [string, string], value: number, y?: number): boolean {
+    const at = (side: string) => evaluate(side, (name) => (name === 'x' ? value : name === 'y' && y !== undefined ? y : Number.NaN))
     const a = at(left)
     const b = at(right)
     return a !== null && b !== null && near(a, b)
+}
+
+/** The coordinates of an answer such as (4,\,0) or (-1,\,2); null when it is something else */
+function point(answer: string): [number, number] | null {
+    const match = answer.match(/^\s*\(([^,]+),(?:\\,|\s)*([^,]+)\)\s*$/)
+    const x = match ? evaluate(match[1]) : null
+    const y = match ? evaluate(match[2]) : null
+    return x === null || y === null ? null : [x, y]
 }
 
 /** Two equations are equivalent when left − right of one is a multiple of the other's (tried at two sets of numbers) */
@@ -192,6 +200,19 @@ for (const unit of units) {
             if (equation) {
                 const roots = solutions(answer[0])
                 const others = check.options.filter((_, index) => index !== check.correctIndex).map((option) => formulas(option.es)[0] ?? '')
+                // A point of the graph: its coordinates must satisfy the equation, and no wrong point may.
+                // When the right one is a crossing with an axis, a wrong point may be the other crossing.
+                const coordinates = point(answer[0])
+                if (coordinates) {
+                    assert.ok(satisfies(equation, ...coordinates), `${id}: ${answer[0]} is not on ${asked[0]}`)
+                    const axis = near(coordinates[1], 0) ? 1 : near(coordinates[0], 0) ? 0 : null
+                    for (const other of others) {
+                        const wrong = point(other)
+                        const sameKind = wrong && (axis === null || near(wrong[axis], 0))
+                        if (wrong && sameKind) assert.ok(!satisfies(equation, ...wrong), `${id}: a wrong answer is also right: ${other}`)
+                    }
+                    continue
+                }
                 if (roots) {
                     assert.ok(roots.every((root) => satisfies(equation, root)), `${id}: ${answer[0]} does not solve ${asked[0]}`)
                     for (const other of others) {
