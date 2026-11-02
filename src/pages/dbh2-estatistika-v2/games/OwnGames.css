@@ -1,0 +1,24 @@
+/* ---------- Estatistika eta probabilitatea (2. DBH) games: the layout comes from Proportzionaltasuna 3. DBH (prop3-*) ---------- */
+
+.fraction-v2-games-card[data-game="missing"] { --game-tint: var(--mustard-tint, #fbebc0); }
+.fraction-v2-games-card[data-game="bag"] { --game-tint: var(--coral-tint, #f6d5cc); }
+.fraction-v2-games-card[data-game="detective"] { --game-tint: var(--paper-deep, #ece6da); }
+
+/* The missing card */
+.stats2-cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.stats2-card { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 64px; border: 2px solid var(--ink); border-radius: 8px; background: var(--card); box-shadow: 0 3px 0 var(--ink); font-family: var(--font-display, "Fraunces", Georgia, serif); font-size: 24px; font-weight: 700; }
+.stats2-card.hidden { background: repeating-linear-gradient(45deg, var(--blue-tint, #dde7f7) 0 6px, var(--card) 6px 12px); color: var(--blue, #2f5fb3); }
+.stats2-card.right { background: var(--success-tint, #d9efe2); border-color: var(--success, #267b53); color: var(--ink); }
+.stats2-card.wrong { background: var(--coral-tint, #f6d5cc); border-color: var(--error, #c4432a); color: var(--ink); }
+.stats2-table { margin: 0 auto; border-collapse: collapse; font-size: 17px; }
+.stats2-table th, .stats2-table td { padding: 6px 10px; border: 2px solid var(--ink); text-align: center; background: var(--card); }
+.stats2-table th { background: var(--paper-deep, #ece6da); font-size: 14px; }
+.stats2-table td.missing { background: var(--blue-tint, #dde7f7); font-weight: 700; }
+
+/* Pack the bag */
+.stats2-conditions { list-style: none; display: flex; flex-direction: column; gap: 4px; margin: 0; }
+.stats2-conditions li.right { color: var(--success, #267b53); }
+.stats2-conditions li.wrong { color: var(--error, #c4432a); }
+.stats2-bag { display: block; width: min(100%, 260px); height: auto; margin: 0 auto; }
+.stats2-steppers { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.stats2-probability { display: inline-block; margin-inline-end: 10px; }

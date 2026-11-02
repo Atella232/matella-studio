@@ -8,6 +8,10 @@ import { createStatisticsMemoryBoard, STATISTICS_MEMORY_PAIRS, statisticsMemoryL
 import { statisticsGameModeForPath, statisticsGameProgressIds, statisticsGames } from '../src/pages/dbh2-estatistika-v2/games/info.ts'
 import { checkStatisticsPitAnswer, generateStatisticsRaceQuestion, STATISTICS_RACE_CIRCUITS, statisticsParTime, statisticsRaceErrorTips, type StatisticsRaceQuestion } from '../src/pages/dbh2-estatistika-v2/games/race.ts'
 import { statisticsLabChallengeIds } from '../src/pages/dbh2-estatistika-v2/lab/labTools.ts'
+import { BAG_MAX, bagRight, createBagRounds, smallestBag } from '../src/pages/dbh2-estatistika-v2/games/bag.ts'
+import { createStatisticsDetectiveCases, statisticsDetectiveLevels, statisticsDetectiveNames, statisticsDetectiveTips } from '../src/pages/dbh2-estatistika-v2/games/detective.ts'
+import { createMissingRounds, median, missingRight, MISSING_ROUNDS } from '../src/pages/dbh2-estatistika-v2/games/missing.ts'
+import { checkTexts } from './helpers/ownGamesCheck.ts'
 
 const renders = (latex: string) => katex.renderToString(latex, { throwOnError: true, strict: 'error' })
 
@@ -39,7 +43,7 @@ function checkQuestion(question: StatisticsRaceQuestion): number {
 }
 
 test('estatistika 2. DBH games: levels, ids and routes', () => {
-    assert.equal(statisticsGames.length, 2)
+    assert.equal(statisticsGames.length, 5)
     assert.equal(statisticsGames[0].levels.length, STATISTICS_RACE_CIRCUITS)
     assert.equal(statisticsGames.find((game) => game.id === 'memory')!.levels.length, statisticsMemoryLevels.length)
     assert.equal(new Set(statisticsGameProgressIds).size, statisticsGameProgressIds.length)
@@ -104,5 +108,75 @@ test('estatistika 2. DBH memory: every card has exactly one partner and the pair
                 for (const other of cards.filter((item) => item.setId !== card.setId)) assert.ok(Math.abs(cardValue(other.latex) - a) > 1e-6, `${card.latex} ~ ${other.latex}`)
             }
         }
+    }
+})
+
+/* ---------- The games of this topic ---------- */
+
+test('estatistika 2. DBH missing card: exactly one value in the stepper range gives the target', () => {
+    assert.equal(median([3, 1, 2, 4]), 2.5)
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const rounds = createMissingRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, MISSING_ROUNDS)
+            for (const round of rounds) {
+                assert.equal(round.kind, ['mean', 'median', 'frequency'][level])
+                const right = Array.from({ length: round.max - round.min + 1 }, (_, index) => index + round.min).filter((value) => missingRight(round, value))
+                assert.deepEqual(right, [round.answer], `${round.kind} ${JSON.stringify(round)}`)
+                assert.ok(Number.isInteger(round.target * 10))
+                // The stepper never starts on the answer
+                assert.notEqual(round.answer, round.kind === 'frequency' ? 1 : round.min)
+                // The hidden card is not simply the target
+                if (level === 1) assert.notEqual(round.answer, round.target)
+            }
+        }
+    }
+})
+
+test('estatistika 2. DBH pack the bag: the smallest bag fits, and an empty or wrong bag does not', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 100; seed += 1) {
+            for (const round of createBagRounds(createRandom(seed * 7919 + level), level)) {
+                assert.equal(round.conditions.length, level === 0 ? 1 : 2)
+                assert.ok(bagRight(round, round.example))
+                assert.deepEqual(smallestBag(round.conditions), round.example)
+                assert.ok(Object.values(round.example).every((count) => count <= BAG_MAX))
+                assert.ok(round.example.red + round.example.blue + round.example.green <= 12)
+                assert.ok(!bagRight(round, { red: 0, blue: 0, green: 0 }))
+                // Twice the smallest bag is right too, when it fits
+                const doubled = { red: round.example.red * 2, blue: round.example.blue * 2, green: round.example.green * 2 }
+                if (Object.values(doubled).every((count) => count <= BAG_MAX)) assert.ok(bagRight(round, doubled))
+                assert.ok(!bagRight(round, { ...round.example, red: round.example.red + 1 }))
+            }
+        }
+    }
+})
+
+/** The number at the end of a line: after the last «=» or «≈», a fraction, a decimal or degrees */
+function endValue(latex: string): number {
+    const last = latex.split('\\to\\ ').pop()!.split(/=|\\approx /).pop()!.replace('^{\\circ}', '').trim()
+    const fractionMatch = last.match(/^(-?)\\frac\{(\d+)\}\{(\d+)\}$/)
+    if (fractionMatch) return (fractionMatch[1] ? -1 : 1) * Number(fractionMatch[2]) / Number(fractionMatch[3])
+    return Number(last.replace('{,}', '.'))
+}
+
+test('estatistika 2. DBH detective: one wrong line, the fix ends on the right value', () => {
+    checkTexts([...Object.values(statisticsDetectiveNames), ...Object.values(statisticsDetectiveTips)])
+    for (let level = 0; level < 3; level += 1) {
+        const seen = new Set<string>()
+        for (let seed = 1; seed <= 100; seed += 1) {
+            for (const item of createStatisticsDetectiveCases(createRandom(seed * 7919 + level), level)) {
+                seen.add(item.error)
+                assert.ok(statisticsDetectiveLevels[level].includes(item.error))
+                assert.ok(item.options.includes(item.error) && new Set(item.options).size === 3)
+                assert.equal(item.lines.length, 3)
+                for (const line of item.lines) katex.renderToString(line.latex, { throwOnError: true, strict: 'error' })
+                katex.renderToString(item.fix, { throwOnError: true, strict: 'error' })
+                checkTexts([item.problem])
+                assert.ok(Math.abs(endValue(item.fix) - item.right) < 1e-9, `${item.error}: ${item.fix} ≠ ${item.right}`)
+                assert.ok(Math.abs(endValue(item.lines[2].latex) - item.reached) < 1e-9, `${item.error}: ${item.lines[2].latex} ≠ ${item.reached}`)
+            }
+        }
+        assert.equal(seen.size, 4)
     }
 })

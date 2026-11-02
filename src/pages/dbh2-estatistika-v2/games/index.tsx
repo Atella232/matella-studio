@@ -7,11 +7,15 @@ import { createStatisticsMemoryBoard, STATISTICS_MEMORY_PAIRS } from './boards'
 import { StatisticsGameArt } from './GameArt'
 import { STATISTICS_GAME_RECORDS_KEY, statisticsGameModeForPath, statisticsGames, statisticsGameSlugs, type StatisticsGameId } from './info'
 import { StatisticsRaceGame } from './RaceGame'
+import { BagGame, MissingGame, StatisticsDetectiveGame } from './StatisticsOwnGames'
 
 const memoryGame = statisticsGames.find((game) => game.id === 'memory')!
 
 const components: Record<StatisticsGameId, (props: GameProps) => JSX.Element> = {
     race: StatisticsRaceGame,
+    missing: MissingGame,
+    bag: BagGame,
+    detective: StatisticsDetectiveGame,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <StatisticsGameArt game="memory" />, pairs: STATISTICS_MEMORY_PAIRS, createBoard: createStatisticsMemoryBoard }} />
 }
 

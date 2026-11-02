@@ -36,7 +36,7 @@ const estatistikaUnit: UnitDefinition = {
         render: (props) => <StatisticsLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, falta den txartela, prestatu poltsa, estatistikaren detektibea eta memoria.', es: 'Cinco juegos: carrera, la carta que falta, prepara la bolsa, detective de estadística y memoria.', en: 'Five games: race, the missing card, pack the bag, statistics detective and memory.', ar: 'خمس ألعاب: السباق والبطاقة الناقصة وجهّز الكيس ومخبر الإحصاء والذاكرة.' },
         progressIds: statisticsGameProgressIds,
         recordsKey: STATISTICS_GAME_RECORDS_KEY,
         render: (props) => <StatisticsGames {...props} />
