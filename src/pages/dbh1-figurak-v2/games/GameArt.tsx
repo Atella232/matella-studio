@@ -1,8 +1,13 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { FiguresGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { SticksArt, SymmetryArt } from './OwnGames'
 
 /** Small illustration of each plane-figures game; no decimal commas, the art is the same in every language */
 export function FiguresGameArt({ game }: { game: FiguresGameId }) {
+    if (game === 'sticks') return <SticksArt />
+    if (game === 'symmetry') return <SymmetryArt />
+    if (game === 'detective') return <DetectiveArt lines={['D = 6 · 3 ÷ 2 = 9', 'S = 5 · 180°', '3 + 4 > 5']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

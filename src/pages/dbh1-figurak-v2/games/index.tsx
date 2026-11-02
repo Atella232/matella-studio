@@ -7,11 +7,17 @@ import { createFiguresMemoryBoard, FIGURES_MEMORY_PAIRS } from './boards'
 import { FiguresGameArt } from './GameArt'
 import { FIGURES_GAME_RECORDS_KEY, figuresGameModeForPath, figuresGames, figuresGameSlugs, type FiguresGameId } from './info'
 import { FiguresRaceGame } from './RaceGame'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { createFiguresDetectiveCases, FIGURES_DETECTIVE_CASES, figuresDetectiveNames, figuresDetectiveTips } from './detective'
+import { SticksGame, SymmetryGame } from './OwnGames'
 
 const memoryGame = figuresGames.find((game) => game.id === 'memory')!
 
 const components: Record<FiguresGameId, (props: GameProps) => JSX.Element> = {
     race: FiguresRaceGame,
+    sticks: (props) => <SticksGame {...props} game={figuresGames.find((game) => game.id === 'sticks')!} art={<FiguresGameArt game="sticks" />} />,
+    symmetry: (props) => <SymmetryGame {...props} game={figuresGames.find((game) => game.id === 'symmetry')!} art={<FiguresGameArt game="symmetry" />} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: figuresGames.find((game) => game.id === 'detective')!, art: <FiguresGameArt game="detective" />, cases: FIGURES_DETECTIVE_CASES, createCases: createFiguresDetectiveCases, names: figuresDetectiveNames, tips: figuresDetectiveTips }} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <FiguresGameArt game="memory" />, pairs: FIGURES_MEMORY_PAIRS, createBoard: createFiguresMemoryBoard }} />
 }
 

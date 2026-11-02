@@ -36,7 +36,7 @@ const figurakUnit: UnitDefinition = {
         render: (props) => <FiguresLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, memoria, eraiki daiteke?, simetria-ardatzak eta irudi lauen detektibea.', es: 'Cinco juegos: carrera, memoria, ¿se puede construir?, ejes de simetría y detective de figuras.', en: 'Five games: race, memory, can it be built?, lines of symmetry and shapes detective.', ar: 'خمس ألعاب: السباق والذاكرة وهل يمكن البناء؟ ومحاور التناظر ومخبر الأشكال.' },
         progressIds: figuresGameProgressIds,
         recordsKey: FIGURES_GAME_RECORDS_KEY,
         render: (props) => <FiguresGames {...props} />

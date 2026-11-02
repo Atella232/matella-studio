@@ -16,6 +16,8 @@ import { COEFFICIENT_LIMIT, createTilesRounds, KINDS, LINE_MAX, polyLatex, terms
 import { ALGEBRA_DETECTIVE_X, algebraDetectiveLevels, algebraDetectiveNames, algebraDetectiveTips, createAlgebraDetectiveCases } from '../src/pages/dbh1-aljebra-v2/games/detective.ts'
 import { AREA_ROUNDS, createAreaRounds, GRID } from '../src/pages/dbh1-geometria-v2/games/areaRounds.ts'
 import { createGeometryDetectiveCases, geometryDetectiveLevels, geometryDetectiveNames, geometryDetectiveTips } from '../src/pages/dbh1-geometria-v2/games/detective.ts'
+import { axesOf, canBuild, createSticksRounds, createSymmetryRounds, SHAPES, STICK_LIMIT, STICKS_ROUNDS, SYMMETRY_ROUNDS, type ShapeName } from '../src/pages/dbh1-figurak-v2/games/figureRounds.ts'
+import { createFiguresDetectiveCases, figuresDetectiveLevels, figuresDetectiveNames, figuresDetectiveTips } from '../src/pages/dbh1-figurak-v2/games/detective.ts'
 import { checkDetective, endValue, renders } from './helpers/ownGamesCheck.ts'
 
 /* The own games of the 1. DBH units */
@@ -279,4 +281,62 @@ test('1. DBH areas on the grid: the area is the shoelace area, the shape and the
 
 test('1. DBH geometry detective: the errors of each level, the fix and the last line on their values', () => {
     checkDetective(createGeometryDetectiveCases, geometryDetectiveLevels, geometryDetectiveNames, geometryDetectiveTips, 1e-9, undefined, (latex) => endValue(latex.replace(/\^\{\\circ\}/g, '')))
+})
+
+test('1. DBH can it be built?: the answer follows the triangle inequality, both answers appear, level 3 asks the range', () => {
+    for (let level = 0; level < 3; level += 1) {
+        let borderline = 0
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const rounds = createSticksRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, STICKS_ROUNDS)
+            if (level < 2) assert.ok(rounds.some((round) => round.possible) && rounds.some((round) => !round.possible))
+            for (const { sides, range, possible } of rounds) {
+                if (level === 2) {
+                    const [a, b] = sides
+                    assert.deepEqual(range, [Math.abs(a - b) + 1, a + b - 1])
+                    assert.ok(range![0] > 0 && range![1] <= STICK_LIMIT)
+                    continue
+                }
+                assert.equal(possible, canBuild(sides))
+                assert.ok(sides.every((side) => side >= 2 && side <= STICK_LIMIT))
+                const [longest, a, b] = [...sides].sort((p, q) => q - p)
+                if (a + b === longest) borderline += 1
+            }
+        }
+        if (level === 0) assert.equal(borderline, 0)
+        if (level === 1) assert.ok(borderline > 0)
+    }
+})
+
+test('1. DBH lines of symmetry: the axes of each shape are right, level 3 counts and never starts on the answer', () => {
+    const expected: Record<ShapeName, number> = { 'rectangle': 2, 'square': 4, 'rhombus': 2, 'isosceles-trapezoid': 1, 'kite': 1, 'parallelogram': 0, 'right-trapezoid': 0, 'isosceles-triangle': 1, 'equilateral-triangle': 3, 'scalene-triangle': 0, 'pentagon': 5, 'hexagon': 6, 'octagon': 8 }
+    /** Reflecting every vertex in an axis gives the same set of vertices */
+    const mirrors = (points: Array<[number, number]>, [[x1, y1], [x2, y2]]: Array<[number, number]>) => points.every(([x, y]) => {
+        const [dx, dy] = [x2 - x1, y2 - y1]
+        const t = ((x - x1) * dx + (y - y1) * dy) / (dx * dx + dy * dy)
+        const [fx, fy] = [x1 + t * dx, y1 + t * dy]
+        const [rx, ry] = [2 * fx - x, 2 * fy - y]
+        return points.some(([px, py]) => Math.hypot(px - rx, py - ry) < 0.6)
+    })
+    for (const name of Object.keys(expected) as ShapeName[]) {
+        assert.equal(axesOf(name).length, expected[name], name)
+        for (const axis of axesOf(name)) assert.ok(mirrors(SHAPES[name].points, [axis.from, axis.to]), `${name}: an axis that does not mirror`)
+        for (const candidate of SHAPES[name].candidates) assert.equal(mirrors(SHAPES[name].points, [candidate.from, candidate.to]), candidate.axis, `${name}: candidate ${JSON.stringify(candidate)}`)
+    }
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 50; seed += 1) {
+            const rounds = createSymmetryRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, SYMMETRY_ROUNDS)
+            assert.equal(new Set(rounds.map((round) => round.shape)).size, SYMMETRY_ROUNDS)
+            for (const round of rounds) {
+                assert.equal(round.count, level === 2)
+                if (level === 2) assert.ok(round.axes > 0)
+                else assert.ok(SHAPES[round.shape].candidates.length === 4)
+            }
+        }
+    }
+})
+
+test('1. DBH shapes detective: the errors of each level, the fix and the last line on their values', () => {
+    checkDetective(createFiguresDetectiveCases, figuresDetectiveLevels, figuresDetectiveNames, figuresDetectiveTips, 1e-9, undefined, (latex) => endValue(latex.replace(/\^\{\\circ\}/g, '')))
 })

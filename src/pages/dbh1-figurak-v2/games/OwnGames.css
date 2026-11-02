@@ -1,0 +1,15 @@
+/* The own games of 1. DBH plane figures */
+.fraction-v2-games-card[data-game="sticks"] { --game-tint: var(--mustard-tint, #fbebc0); }
+.fraction-v2-games-card[data-game="symmetry"] { --game-tint: var(--blue-tint, #dde7f7); }
+
+/* The two sticks swing up to close the triangle */
+.dbh1-close { transform-box: view-box; animation: dbh1-close 0.8s ease-out both; }
+@keyframes dbh1-close { from { opacity: 0; } to { opacity: 1; } }
+
+/* Lines of symmetry: the candidates are tapped */
+.dbh1-candidate { cursor: pointer; }
+.dbh1-candidate:focus-visible line:last-child { stroke-width: 5; }
+.dbh1-axis { animation: dbh1-close 0.6s ease-out both; }
+@media (prefers-reduced-motion: reduce) {
+    .dbh1-close, .dbh1-axis { animation: none; }
+}
