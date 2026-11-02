@@ -3,9 +3,11 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
 /* ==========================================================================
    Funtzioak (2. DBH) games: the list shown in the hub, with levels and the
    unit progress id each level earns with its first star.
+   Three games belong to this topic (plot the point, the laser and the
+   functions detective); the race and the memory are shared engines.
    ========================================================================== */
 
-export type FunctionsGameId = 'race' | 'plot' | 'memory'
+export type FunctionsGameId = 'race' | 'plot' | 'laser' | 'detective' | 'memory'
 
 export const FUNCTIONS_GAME_RECORDS_KEY = 'matella-funtzioak-dbh2-game-records'
 
@@ -35,6 +37,28 @@ export const functionsGames: GameInfo<FunctionsGameId>[] = [
         ]
     },
     {
+        id: 'laser',
+        title: { eu: 'Laserra', es: 'El láser', en: 'The laser', ar: 'الليزر' },
+        tagline: { eu: 'Aukeratu malda eta ordenatua, eta jaurti: laserrak jomuga guztiak jo behar ditu.', es: 'Elige la pendiente y la ordenada y dispara: el láser tiene que dar en todas las dianas.', en: 'Choose the slope and the intercept and fire: the laser has to hit every target.', ar: 'اختر الميل والجزء المقطوع وأطلق: يجب أن يصيب الليزر كل الأهداف.' },
+        skills: { eu: 'Zuzen baten malda eta ordenatua', es: 'Pendiente y ordenada de una recta', en: 'Slope and intercept of a line', ar: 'ميل المستقيم والجزء المقطوع' },
+        levels: [
+            { progressId: 32701, stage: 'proportional', title: { eu: 'Jatorritik', es: 'Por el origen', en: 'Through the origin', ar: 'من الأصل' }, description: { eu: 'y = mx, jomuga bat.', es: 'y = mx, una diana.', en: 'y = mx, one target.', ar: 'y = mx، هدف واحد.' } },
+            { progressId: 32702, stage: 'lines', title: { eu: 'Bi jomuga', es: 'Dos dianas', en: 'Two targets', ar: 'هدفان' }, description: { eu: 'y = mx + n', es: 'y = mx + n', en: 'y = mx + n', ar: 'y = mx + n' } },
+            { progressId: 32703, stage: 'lines', title: { eu: 'Hiru jomuga', es: 'Tres dianas', en: 'Three targets', ar: 'ثلاثة أهداف' }, description: { eu: 'Maldak erdika eta funtzio konstanteak.', es: 'Pendientes en medios y funciones constantes.', en: 'Slopes in halves and constant functions.', ar: 'ميول بالأنصاف ودوال ثابتة.' } }
+        ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Funtzioen detektibea', es: 'Detective de funciones', en: 'Functions detective', ar: 'مخبر الدوال' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: اكتشفه وقل ما نوع الخطأ.' },
+        skills: { eu: 'Funtzio linealetako akats tipikoak', es: 'Errores típicos de funciones lineales', en: 'Common mistakes with linear functions', ar: 'الأخطاء الشائعة في الدوال الخطية' },
+        levels: [
+            { progressId: 32801, stage: 'representations', title: { eu: 'Puntuak eta malda', es: 'Puntos y pendiente', en: 'Points and slope', ar: 'النقاط والميل' }, description: { eu: 'Koordenatuak, malda eta ebakidurak.', es: 'Coordenadas, pendiente y cortes.', en: 'Coordinates, slope and cuts.', ar: 'الإحداثيات والميل والتقاطعات.' } },
+            { progressId: 32802, stage: 'proportional', title: { eu: 'Proportzioa eta taulak', es: 'Proporción y tablas', en: 'Proportion and tables', ar: 'التناسب والجداول' }, description: { eu: 'Konstantea, igoera eta ordenatua.', es: 'La constante, la subida y la ordenada.', en: 'The constant, the rise and the intercept.', ar: 'الثابت والزيادة والجزء المقطوع.' } },
+            { progressId: 32803, stage: 'lines', title: { eu: 'Tarifak', es: 'Tarifas', en: 'Charges', ar: 'التعريفات' }, description: { eu: 'Kopuru finkoa, unitateko prezioa eta unitateak.', es: 'Cantidad fija, precio por unidad y unidades.', en: 'Fixed charge, price per unit and units.', ar: 'المبلغ الثابت وسعر الوحدة والوحدات.' } }
+        ]
+    },
+    {
         id: 'memory',
         title: { eu: 'Memoria', es: 'Memoria', en: 'Memory', ar: 'الذاكرة' },
         tagline: { eu: 'Aurkitu bikoteak: funtzio bat eta bere emaitza, bi puntu eta malda edo zuzen bat eta bere ebakidura.', es: 'Encuentra las parejas: una función y su resultado, dos puntos y su pendiente o una recta y su corte.', en: 'Find the pairs: a function and its result, two points and their slope, or a straight line and its intercept.', ar: 'جد الأزواج: دالة ونتيجتها أو نقطتان وميلهما أو خط وتقاطعه.' },
@@ -50,12 +74,14 @@ export const functionsGames: GameInfo<FunctionsGameId>[] = [
 export const functionsGameProgressIds: number[] = levelProgressIds(functionsGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const functionsGameSlugs: Record<FunctionsGameId, string> = { race: 'lasterketa', plot: 'puntuak', memory: 'memoria' }
+export const functionsGameSlugs: Record<FunctionsGameId, string> = { race: 'lasterketa', plot: 'puntuak', laser: 'laserra', detective: 'detektibea', memory: 'memoria' }
 
 export function functionsGameModeForPath(pathname: string): FunctionsGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
     if (!game) return 'hub'
     if (['carrera', 'lasterketa'].includes(game)) return 'race'
+    if (['laserra', 'laser'].includes(game)) return 'laser'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     if (['puntos', 'puntuak', 'situar'].includes(game)) return 'plot'
     if (['memoria', 'memory'].includes(game)) return 'memory'
     return 'hub'

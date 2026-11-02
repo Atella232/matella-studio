@@ -42,7 +42,7 @@ const funtzioakUnit: UnitDefinition = {
         render: (props) => <FunctionsLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Hiru joko: lasterketa, puntuak planoan kokatu eta memoria.', es: 'Tres juegos: carrera, situar puntos en el plano y memoria.', en: 'Three games: race, plot points on the grid and memory.', ar: 'ثلاث ألعاب: السباق ووضع النقاط في المستوى والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, puntuak planoan kokatu, laserra, funtzioen detektibea eta memoria.', es: 'Cinco juegos: carrera, situar puntos en el plano, el láser, detective de funciones y memoria.', en: 'Five games: race, plot points on the grid, the laser, functions detective and memory.', ar: 'خمس ألعاب: السباق ووضع النقاط على المستوى والليزر ومخبر الدوال والذاكرة.' },
         progressIds: functionsGameProgressIds,
         recordsKey: FUNCTIONS_GAME_RECORDS_KEY,
         render: (props) => <FunctionsGames {...props} />

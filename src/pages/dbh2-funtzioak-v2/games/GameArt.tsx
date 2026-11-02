@@ -28,6 +28,35 @@ export function FunctionsGameArt({ game }: { game: FunctionsGameId }) {
             </svg>
         )
     }
+    if (game === 'laser') {
+        return (
+            <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
+                <line x1="20" y1="100" x2="200" y2="100" stroke="var(--ink)" strokeWidth="2" />
+                <line x1="60" y1="112" x2="60" y2="8" stroke="var(--ink)" strokeWidth="2" />
+                <line x1="24" y1="104" x2="196" y2="14" stroke="var(--coral)" strokeWidth="4" strokeLinecap="round" />
+                {[[100, 63], [150, 37]].map(([cx, cy]) => (
+                    <g key={cx}>
+                        <circle cx={cx} cy={cy} r="11" fill="none" stroke="var(--success, #267b53)" strokeWidth="2.5" />
+                        <circle cx={cx} cy={cy} r="4.5" fill="var(--success, #267b53)" />
+                    </g>
+                ))}
+                <text x="140" y="116" fontSize="14" fontWeight="700" fill="var(--ink)" direction="ltr">y = mx + n</text>
+            </svg>
+        )
+    }
+    if (game === 'detective') {
+        return (
+            <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
+                <rect x="14" y="10" width="132" height="100" rx="8" fill="var(--card)" stroke="var(--ink)" strokeWidth="2" />
+                <text x="24" y="38" fontSize="13" fontWeight="700" fill="var(--ink)" direction="ltr">A(1, 2), B(3, 8)</text>
+                <text x="24" y="64" fontSize="13" fontWeight="700" fill="var(--coral)" direction="ltr">m = 2 / 6</text>
+                <line x1="22" y1="68" x2="90" y2="56" stroke="var(--coral)" strokeWidth="2.5" />
+                <text x="24" y="92" fontSize="13" fontWeight="700" fill="var(--ink)" direction="ltr">m = 6 / 2 = 3</text>
+                <circle cx="168" cy="58" r="24" fill="var(--blue-tint, #dde7f7)" stroke="var(--ink)" strokeWidth="3" />
+                <line x1="185" y1="75" x2="206" y2="98" stroke="var(--ink)" strokeWidth="6" strokeLinecap="round" />
+            </svg>
+        )
+    }
     return (
         <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
             {['y=2x−3', 'y = 5', 'm = 2', '(3, 0)'].map((label, index) => (

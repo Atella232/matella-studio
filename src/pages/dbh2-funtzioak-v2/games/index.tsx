@@ -5,6 +5,7 @@ import type { UnitLanguage } from '../../../features/unit-v2/types'
 import { createFunctionsMemoryBoard, FUNCTIONS_MEMORY_PAIRS } from './boards'
 import { FunctionsGameArt } from './GameArt'
 import { FUNCTIONS_GAME_RECORDS_KEY, functionsGameModeForPath, functionsGames, functionsGameSlugs, type FunctionsGameId } from './info'
+import { FunctionsDetectiveGame, LaserGame } from './FunctionsOwnGames'
 import { PlotGame } from './PlotGame'
 import { FunctionsRaceGame } from './RaceGame'
 import '../../dbh1-aljebra-v2/games/AlgebraGames.css'
@@ -14,6 +15,8 @@ const memoryGame = functionsGames.find((game) => game.id === 'memory')!
 const components: Record<FunctionsGameId, (props: GameProps) => JSX.Element> = {
     race: FunctionsRaceGame,
     plot: PlotGame,
+    laser: LaserGame,
+    detective: FunctionsDetectiveGame,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <FunctionsGameArt game="memory" />, pairs: FUNCTIONS_MEMORY_PAIRS, createBoard: createFunctionsMemoryBoard }} />
 }
 

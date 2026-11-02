@@ -16,3 +16,11 @@ Next candidates for 2. DBH still on legacy: Proporcionalidad y porcentajes, Teor
 Quality pass (2026-10-02, owner: "todavía un pelín verde"), branch `fix/funtzioak-quality` commit fd6675b, merged and deployed 2026-10-02: engine got optional `figure` on DiagnosticQuestion/PracticeItem/ExerciseItem (+`solutionFigure`) and `RaceRules.figure`; Funtzioak content carries pure `graph`/`solutionGraph` GraphSpec (functions.ts) drawn via `withGraphs` (withGraphs.tsx) / `GraphFigure` (graphs.tsx); plane `Label` auto-RTL for Arabic with LRI-isolated formulas; Frame clips lines (planeClip.tsx); lab relations A–H incl. parabola + circle; race reading circuit drawn as graphs + graph-point/value/slope/line kinds. Bank ids are progress keys: new items take the next free id inside their section (49 lines, 50 reading).
 
 **Why:** resume after interruptions / pick the next unit. **How to apply:** graph-reading exercises should show a real graph (GraphSpec), not a table; keep LaTeX out of `observe` hints (plain text) and Arabic/€ out of `\text{}`; review lesson figures in a temporary gallery page (not committed) since the browser pane's screenshots lag.
+
+## Own games (2026-11-02)
+
+Branch `feat/funtzioak-dbh2-games` (stacked on the other 2. DBH game branches). Two more games of this topic, besides plot the point:
+- `laser` (`games/laser.ts`), 32701–32703: the laser. Targets on the plane; the learner sets m and n with steppers (the readout shows the line) and fires; the line is drawn only then, hit targets turn green, and a missed shot also shows the right line dashed. Level 1 y = mx with one target, level 2 y = mx + n with two, level 3 slopes in halves and constant functions with three. The test checks that no other line the steppers can set hits every target.
+- `detective` (`games/detective.ts`), 32801–32803: 12 typical errors (the point substituted the wrong way round, the slope upside down, differences in mixed order, the x-axis cut as the intercept; adding the difference in a proportion, the constant upside down, the rise not divided by the run, the intercept read at x ≠ 0; the fixed charge forgotten, charge and rate swapped, a loss added, hours with a price per minute).
+
+Trick: the game's own CSS imports `../Functions.css` for the plane, which the unit page also loads.

@@ -8,6 +8,9 @@ import { createFunctionsMemoryBoard, createPlotRound, FUNCTIONS_MEMORY_PAIRS, fu
 import { functionsGameModeForPath, functionsGameProgressIds, functionsGames } from '../src/pages/dbh2-funtzioak-v2/games/info.ts'
 import { checkFunctionsPitAnswer, FUNCTIONS_RACE_CIRCUITS, functionsParTime, functionsRaceErrorTips, generateFunctionsRaceQuestion, type FunctionsRaceQuestion } from '../src/pages/dbh2-funtzioak-v2/games/race.ts'
 import { functionsLabChallengeIds } from '../src/pages/dbh2-funtzioak-v2/lab/labTools.ts'
+import { createFunctionsDetectiveCases, functionsDetectiveLevels, functionsDetectiveNames, functionsDetectiveTips } from '../src/pages/dbh2-funtzioak-v2/games/detective.ts'
+import { createLaserRounds, LASER_BOX, LASER_ROUNDS, laserRight, targetsHit } from '../src/pages/dbh2-funtzioak-v2/games/laser.ts'
+import { checkTexts } from './helpers/ownGamesCheck.ts'
 
 const typed = (value: FractionValue) => (hasTerminatingDecimal(value) ? toExactDecimal(value)! : `${value.numerator}/${value.denominator}`)
 
@@ -201,7 +204,7 @@ function check(question: FunctionsRaceQuestion) {
 }
 
 test('funtzioak 2. DBH games: levels, ids and routes', () => {
-    assert.equal(functionsGames.length, 3)
+    assert.equal(functionsGames.length, 5)
     assert.equal(functionsGames[0].levels.length, FUNCTIONS_RACE_CIRCUITS)
     assert.equal(functionsGames.find((game) => game.id === 'plot')!.levels.length, plotLevels.length)
     assert.equal(functionsGames.find((game) => game.id === 'memory')!.levels.length, functionsMemoryLevels.length)
@@ -329,5 +332,64 @@ test('funtzioak 2. DBH games: everything the games show renders in KaTeX', () =>
             render(card.latex)
             render(card.explain!)
         }
+    }
+})
+
+/* ---------- The games of this topic ---------- */
+
+test('funtzioak 2. DBH laser: one line through every target, inside the plane, and no other line of the stepper grid', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const rounds = createLaserRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, LASER_ROUNDS)
+            for (const round of rounds) {
+                assert.equal(round.targets.length, level + 1)
+                assert.ok(laserRight(round, round.m, round.n))
+                for (const [x, y] of round.targets) {
+                    assert.ok(Number.isInteger(x) && Number.isInteger(y) && x !== 0)
+                    assert.ok(y >= LASER_BOX.yMin && y <= LASER_BOX.yMax)
+                }
+                if (level === 0) assert.equal(round.n, 0)
+                // Only the right line, among all the stepper can set, hits every target
+                for (let m = -4; m <= 4; m += round.step) {
+                    for (let n = -6; n <= 6; n += 1) {
+                        if (round.fixedN && n !== 0) continue
+                        if (Math.abs(m - round.m) < 1e-9 && n === round.n) continue
+                        assert.ok(!laserRight(round, m, n), `${m} ${n} also hits ${JSON.stringify(round.targets)}`)
+                    }
+                }
+                assert.equal(targetsHit(round, round.m + round.step, round.n).length < round.targets.length, true)
+            }
+        }
+    }
+})
+
+/** The number at the end of a line: after the last «=», a fraction or a decimal */
+function endValue(latex: string): number {
+    const last = latex.split('\\to\\ ').pop()!.split('=').pop()!.trim()
+    const fractionMatch = last.match(/^(-?)\\frac\{(\d+)\}\{(\d+)\}$/)
+    if (fractionMatch) return (fractionMatch[1] ? -1 : 1) * Number(fractionMatch[2]) / Number(fractionMatch[3])
+    return Number(last.replace('{,}', '.'))
+}
+
+test('funtzioak 2. DBH detective: one wrong line, the fix ends on the right value', () => {
+    checkTexts([...Object.values(functionsDetectiveNames), ...Object.values(functionsDetectiveTips)])
+    for (let level = 0; level < 3; level += 1) {
+        const seen = new Set<string>()
+        for (let seed = 1; seed <= 100; seed += 1) {
+            for (const item of createFunctionsDetectiveCases(createRandom(seed * 7919 + level), level)) {
+                seen.add(item.error)
+                assert.ok(functionsDetectiveLevels[level].includes(item.error))
+                assert.ok(item.options.includes(item.error) && new Set(item.options).size === 3)
+                assert.equal(item.lines.length, 3)
+                for (const line of item.lines) katex.renderToString(line.latex, { throwOnError: true, strict: 'error' })
+                katex.renderToString(item.fix, { throwOnError: true, strict: 'error' })
+                checkTexts([item.problem])
+                assert.ok(!/\{,\}/.test(item.problem.es), item.problem.es)
+                assert.ok(Math.abs(endValue(item.fix) - item.right) < 1e-9, `${item.error}: ${item.fix} ≠ ${item.right}`)
+                assert.ok(Math.abs(endValue(item.lines[2].latex) - item.reached) < 1e-9, `${item.error}: ${item.lines[2].latex} ≠ ${item.reached}`)
+            }
+        }
+        assert.equal(seen.size, 4)
     }
 })
