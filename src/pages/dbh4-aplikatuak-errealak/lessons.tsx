@@ -291,7 +291,7 @@ export const realsTopics: UnitTopic[] = [
             { text: say('Errore absolutua.', 'Error absoluto.', 'الخطأ المطلق.', 'Absolute error.'), math: same('$E_a=|11{,}36-10|=1{,}36\\ \\text{ml}$') },
             { text: say('Errore erlatiboa: zatitu balio errealaz.', 'Error relativo: divide entre el valor real.', 'الخطأ النسبي: اقسم على القيمة الحقيقية.', 'Relative error: divide by the real value.'), math: same('$E_r=\\frac{1{,}36}{11{,}36}\\approx 0{,}12\\to 12\\,\\%$') }
         ],
-        example: same('$\\sqrt{2}\\approx 1{,}4:\\ E_a=0{,}0142\\ldots$'),
+        example: same('$\\sqrt{2}\\approx 1{,}4\\ \\to\\ E_a=0{,}0142\\ldots$'),
         takeaway: say('$E_a$: zenbat huts egin den. $E_r$: zein garrantzitsua den hutsegite hori.', '$E_a$: cuánto nos equivocamos. $E_r$: qué importancia tiene ese error.', '$E_a$: مقدار الخطأ. $E_r$: أهمية ذلك الخطأ.', '$E_a$: how much we got it wrong. $E_r$: how important that error is.'),
         figure: (language) => <ErrorsFigure language={language} />
     },

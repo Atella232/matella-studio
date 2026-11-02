@@ -338,7 +338,7 @@ export const polynomialsTopics: UnitTopic[] = [
             { text: say('Probatu.', 'Prueba.', 'جرّب.', 'Try them.'), math: same('$P(1)=0\\quad P(2)=0\\quad P(-3)=0$') },
             { text: say('Hiru erroak: 1, 2 eta −3.', 'Las tres raíces: 1, 2 y −3.', 'الجذور الثلاثة: 1 و2 و−3.', 'The three roots: 1, 2 and −3.') }
         ],
-        example: same('$x^{2}-9:\\ x=3,\\ x=-3$'),
+        example: same('$x^{2}-9=0\\ \\to\\ x=3,\\ x=-3$'),
         mistake: {
             wrong: say('$x^{2}-x-6$ polinomioaren erroak bilatzeko, 1, 2, 3 eta 6 bakarrik probatu dira.', 'Para buscar las raíces de $x^{2}-x-6$ solo se probaron 1, 2, 3 y 6.', 'للبحث عن جذور $x^{2}-x-6$ جُرّبت 1 و2 و3 و6 فقط.', 'To find the roots of $x^{2}-x-6$, only 1, 2, 3 and 6 were tried.'),
             right: say('Zatitzaile negatiboak ere probatu behar dira: $P(-2)=0$, beraz $-2$ ere erroa da.', 'También hay que probar los negativos: $P(-2)=0$, así que $-2$ también es raíz.', 'يجب تجربة القواسم السالبة أيضًا: $P(-2)=0$ إذن $-2$ جذر أيضًا.', 'You must try the negative divisors too: $P(-2)=0$, so $-2$ is also a root.')

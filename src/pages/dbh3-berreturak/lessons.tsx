@@ -311,7 +311,7 @@ export const powersTopics: UnitTopic[] = [
             { text: say('Eskuineko muturra ez da sartzen (parentesi irekia).', 'El extremo derecho no entra (paréntesis abierto).', 'الطرف الأيمن غير داخل (قوس مفتوح).', 'The right endpoint is not included (round bracket).'), math: same('$x<4$') },
             { text: say('Luzera: $4-(-1)$.', 'Longitud: $4-(-1)$.', 'الطول: $4-(-1)$.', 'Length: $4-(-1)$.'), math: same('$5$') }
         ],
-        example: same('$(0,\\,3]=\\{x:\\,0<x\\le 3\\}$'),
+        example: same('$(0,\\,3]=\\{x\\mid 0<x\\le 3\\}$'),
         takeaway: say('Kortxetea: muturra sartzen da. Parentesia: ez da sartzen. Luzera: muturra ken hasiera.', 'Corchete: el extremo entra. Paréntesis: no entra. Longitud: final menos principio.', 'القوس المربع: الطرف داخل. القوس العادي: غير داخل. الطول: النهاية ناقص البداية.', 'Square bracket: the endpoint is included. Round bracket: it is not. Length: end minus start.'),
         figure: (language) => <IntervalsFigure language={language} />
     },

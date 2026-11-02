@@ -199,7 +199,7 @@ export const realsPercentTopics: UnitTopic[] = [
             { text: say('Desberdintzatik tartera (txikiena ezkerrean).', 'De desigualdad a intervalo (el menor a la izquierda).', 'من المتباينة إلى الفترة (الأصغر يسارًا).', 'From inequality to interval (the smaller number on the left).'), math: same('$10>x>4\\ \\to\\ (4,\\,10)$') },
             { text: say('Zuzenerdia.', 'Semirrecta.', 'نصف مستقيم.', 'Half-line.'), math: same('$x\\ge -1\\ \\to\\ [-1,\\,+\\infty)$') }
         ],
-        example: same('$[1,\\,5)=\\{x\\in\\mathbb{R}:\\ 1\\le x<5\\}$'),
+        example: same('$[1,\\,5)=\\{x\\in\\mathbb{R}\\mid 1\\le x<5\\}$'),
         takeaway: say('[ ] barne, ( ) kanpo; infinitua beti parentesiarekin.', '[ ] dentro, ( ) fuera; el infinito siempre con paréntesis.', '[ ] داخل و( ) خارج؛ واللانهاية دائمًا بقوس عادي.', '[ ]: included, ( ): not included; infinity always with a round bracket.'),
         figure: (language) => <IntervalsFigure language={language} />
     },

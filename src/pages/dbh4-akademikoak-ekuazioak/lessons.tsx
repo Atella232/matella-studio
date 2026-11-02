@@ -257,7 +257,7 @@ export const equationsInequalitiesTopics: UnitTopic[] = [
             { text: say('0 eta 2: bai.', '0 y 2: sí.', '0 و2: نعم.', '0 and 2: yes.'), math: same('$0<12,\\ \\ 4-16=-12<12$') },
             { text: say('10: ez.', '10: no.', '10: لا.', '10: no.'), math: same('$100-80=20>12$') }
         ],
-        example: same('$x\\ge -2:\\ [-2,+\\infty)$'),
+        example: same('$x\\ge -2\\ \\to\\ [-2,+\\infty)$'),
         takeaway: say('[ ]: muturra sartzen da; ( ): ez. ∞ beti parentesiarekin.', '[ ]: el extremo entra; ( ): no. ∞ siempre con paréntesis.', '[ ]: الطرف داخل؛ ( ): خارج. و∞ دائمًا بقوس عادي.', '[ ]: the end is included; ( ): it is not. ∞ always gets a round bracket.'),
         figure: (language) => <IntervalsFigure language={language} />
     },
@@ -276,7 +276,7 @@ export const equationsInequalitiesTopics: UnitTopic[] = [
         steps: [
             { text: say('Bider 6.', 'Por 6.', 'في 6.', 'Multiply by 6.'), math: same('$3(x-1)-2(x+3)\\ge 6$') },
             { text: say('Laburtu.', 'Reduce.', 'بسّط.', 'Simplify.'), math: same('$x-9\\ge 6$') },
-            { text: say('Ebazpena.', 'La solución.', 'الحل.', 'The solution.'), math: same('$x\\ge 15:\\ [15,+\\infty)$') }
+            { text: say('Ebazpena.', 'La solución.', 'الحل.', 'The solution.'), math: same('$x\\ge 15\\ \\to\\ [15,+\\infty)$') }
         ],
         example: same('$-2x>6\\to x<-3$'),
         takeaway: say('Ekuazio bat bezala, baina negatibo batez biderkatzean: zentzua aldatu.', 'Como una ecuación, pero al multiplicar por un negativo: cambia el sentido.', 'كالمعادلة، لكن عند الضرب في سالب: اقلب الاتجاه.', 'Like an equation, but when you multiply by a negative, the inequality sign reverses.'),
@@ -322,7 +322,7 @@ export const equationsInequalitiesTopics: UnitTopic[] = [
             { text: say('Probatu 0: $-6<0$, erdian negatiboa.', 'Prueba 0: $-6<0$, negativo en medio.', 'جرّب 0: $-6<0$، سالب في الوسط.', 'Try 0: $-6<0$, negative in the middle.'), math: same('$+\\ \\ -\\ \\ +$') },
             { text: say('Kanpoko zatiak.', 'Los trozos de fuera.', 'الجزآن الخارجيان.', 'The outer pieces.'), math: same('$(-\\infty,-2)\\cup(3,+\\infty)$') }
         ],
-        example: same('$x^{2}-4<0:\\ (-2,2)$'),
+        example: same('$x^{2}-4<0\\ \\to\\ (-2,2)$'),
         takeaway: say('Erroak, zatiak eta zeinuak; $a>0$: erroen artean negatiboa.', 'Raíces, trozos y signos; $a>0$: negativo entre las raíces.', 'الجذور والأجزاء والإشارات؛ $a>0$: سالب بين الجذرين.', 'Roots, pieces and signs; $a>0$: negative between the roots.'),
         figure: (language) => <QuadraticSignFigure language={language} />
     },

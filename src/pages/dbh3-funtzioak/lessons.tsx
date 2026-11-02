@@ -269,7 +269,7 @@ export const functions3Topics: UnitTopic[] = [
         steps: [
             { text: say('Malda.', 'Pendiente.', 'الميل.', 'Slope.'), math: same('$m=\\frac{9-5}{3-1}=2$') },
             { text: say('Ordezkatu $(1,5)$.', 'Sustituye $(1,5)$.', 'عوّض $(1,5)$.', 'Substitute $(1,5)$.'), math: same('$5=2\\cdot 1+n\\ \\to\\ n=3$') },
-            { text: say('Zuzena eta egiaztapena.', 'Recta y comprobación.', 'المستقيم والتحقق.', 'Line and check.'), math: same('$y=2x+3:\\ 2\\cdot 3+3=9$') }
+            { text: say('Zuzena eta egiaztapena.', 'Recta y comprobación.', 'المستقيم والتحقق.', 'Line and check.'), math: same('$y=2x+3\\qquad 2\\cdot 3+3=9\\ \\checkmark$') }
         ],
         example: same('$m=\\frac{0-4}{2-0}=-2$'),
         mistake: {

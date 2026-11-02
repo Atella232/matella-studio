@@ -269,7 +269,7 @@ export const motions3Topics: UnitTopic[] = [
             { text: say('$P$ ardatzetik 2 unitatera dago eskuinean.', '$P$ está 2 unidades a la derecha del eje.', '$P$ على بعد وحدتين يمين المحور.', '$P$ is 2 units to the right of the axis.') },
             { text: say('$P^{\\prime}$ 2 unitatera ezkerrean.', '$P^{\\prime}$, 2 unidades a la izquierda.', '$P^{\\prime}$ على بعد وحدتين يساره.', '$P^{\\prime}$, 2 units to the left.'), math: same('$P^{\\prime}=(1,2)$') }
         ],
-        example: same('$x=3:\\ (7,0)\\to(-1,0)$'),
+        example: same('$(7,0)\\xrightarrow{\\ x=3\\ }(-1,0)$'),
         mistake: {
             wrong: say('Simetria axialean irudia biratu egiten da.', 'En la simetría axial la figura gira.', 'في التناظر المحوري يدور الشكل.', 'In a reflection the shape turns.'),
             right: say('Ez da biratzen: iraultzen da, ispiluan bezala. Ezkerra eskuin bihurtzen da.', 'No gira: se da la vuelta, como en un espejo. La izquierda pasa a ser la derecha.', 'لا يدور: ينقلب كما في المرآة. يصير اليسار يمينًا.', 'It does not turn: it flips, as in a mirror. Left becomes right.')
@@ -298,7 +298,7 @@ export const motions3Topics: UnitTopic[] = [
         steps: [
             { text: say('$y$ koordenatuaren zeinua aldatu.', 'Cambia el signo de la $y$.', 'غيّر إشارة $y$.', 'Change the sign of $y$.'), math: same('$(3,-3)$') }
         ],
-        example: same('$y=x:\\ (2,-5)\\to(-5,2)$'),
+        example: same('$(2,-5)\\xrightarrow{\\ y=x\\ }(-5,2)$'),
         mistake: {
             wrong: say('X ardatzarekiko: $(4,1)\\to(-4,1)$.', 'Respecto al eje X: $(4,1)\\to(-4,1)$.', 'بالنسبة إلى محور X: $(4,1)\\to(-4,1)$.', 'In the X axis: $(4,1)\\to(-4,1)$.'),
             right: say('X ardatza horizontala da: puntua gora edo behera islatzen da, $(4,-1)$.', 'El eje X es horizontal: el punto se refleja hacia arriba o abajo, $(4,-1)$.', 'محور X أفقي: تنعكس النقطة إلى الأعلى أو الأسفل، $(4,-1)$.', 'The X axis is horizontal: the point is reflected up or down, $(4,-1)$.')
@@ -401,7 +401,7 @@ export const motions3Topics: UnitTopic[] = [
         steps: [
             { text: say('Biderkatu koordenatuak.', 'Multiplica las coordenadas.', 'اضرب الإحداثيين.', 'Multiply the coordinates.'), math: same('$(3\\cdot 2,\\ 3\\cdot(-3))=(6,-9)$') }
         ],
-        example: same('$k=\\frac{1}{2}:\\ (8,4)\\to(4,2)$'),
+        example: same('$(8,4)\\xrightarrow{\\ k=\\frac{1}{2}\\ }(4,2)$'),
         mistake: {
             wrong: say('$k=3$ homotezia: $(2,-3)\\to(2+3,\\ -3+3)$.', 'Homotecia $k=3$: $(2,-3)\\to(2+3,\\ -3+3)$.', 'تحاكٍ $k=3$: $(2,-3)\\to(2+3,\\ -3+3)$.', 'Enlargement $k=3$: $(2,-3)\\to(2+3,\\ -3+3)$.'),
             right: say('Homoteziak biderkatu egiten du, ez batu: $(6,-9)$. Batzea lekualdaketa da.', 'La homotecia multiplica, no suma: $(6,-9)$. Sumar es trasladar.', 'التحاكي يضرب ولا يجمع: $(6,-9)$. الجمع انسحاب.', 'An enlargement multiplies, it does not add: $(6,-9)$. Adding is translating.')

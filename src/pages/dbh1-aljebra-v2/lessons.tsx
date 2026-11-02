@@ -108,7 +108,7 @@ export const algebraIntroTopics: UnitTopic[] = [
             { text: { eu: 'Lehenik biderketa.', es: 'Primero la multiplicación.', en: 'First the multiplication.', ar: 'الضرب أولًا.' }, math: '$6-5$' },
             { text: { eu: 'Gero kenketa.', es: 'Después la resta.', en: 'Then the subtraction.', ar: 'ثم الطرح.' }, math: '$3\\cdot 2-5=1$' }
         ],
-        example: '$x=-1:\\quad 3\\cdot(-1)-5=-8$',
+        example: '$x=-1\\ \\to\\ 3\\cdot(-1)-5=-8$',
         takeaway: {
             eu: 'Ordeztu, parentesiak jarri behar badira jarri, eta kalkulatu ordenan.',
             es: 'Sustituye, pon paréntesis si hacen falta y calcula en orden.',
