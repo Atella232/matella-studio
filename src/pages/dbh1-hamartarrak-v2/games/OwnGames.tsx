@@ -212,16 +212,16 @@ export function CommaArt() {
     )
 }
 
-/** The art of the podium: three steps with decimals */
-export function PodiumArt() {
+/** The art of the podium: three steps with decimals, written with the language's decimal mark */
+export function PodiumArt({ mark }: { mark: (text: string) => string }) {
     return (
         <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
             <rect x="80" y="40" width="60" height="70" fill="var(--mustard-tint, #fbebc0)" stroke="var(--ink)" strokeWidth="2.5" />
             <rect x="20" y="62" width="60" height="48" fill="var(--blue-tint, #dde7f7)" stroke="var(--ink)" strokeWidth="2.5" />
             <rect x="140" y="78" width="60" height="32" fill="var(--coral-tint, #f6d5cc)" stroke="var(--ink)" strokeWidth="2.5" />
-            <text x="110" y="32" textAnchor="middle" fontSize="15" fontWeight="700" fill="var(--ink)" direction="ltr">0,5</text>
-            <text x="50" y="54" textAnchor="middle" fontSize="15" fontWeight="700" fill="var(--ink)" direction="ltr">0,45</text>
-            <text x="170" y="70" textAnchor="middle" fontSize="15" fontWeight="700" fill="var(--ink)" direction="ltr">0,405</text>
+            <text x="110" y="32" textAnchor="middle" fontSize="15" fontWeight="700" fill="var(--ink)" direction="ltr">{mark('0,5')}</text>
+            <text x="50" y="54" textAnchor="middle" fontSize="15" fontWeight="700" fill="var(--ink)" direction="ltr">{mark('0,45')}</text>
+            <text x="170" y="70" textAnchor="middle" fontSize="15" fontWeight="700" fill="var(--ink)" direction="ltr">{mark('0,405')}</text>
         </svg>
     )
 }

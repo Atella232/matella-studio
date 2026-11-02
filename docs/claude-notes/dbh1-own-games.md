@@ -23,4 +23,7 @@ Rules kept from 4. DBH: predict first and draw after answering; steppers never s
 - `npm test` 1219 pass, lint and build green; `inventario-unidad.mjs --all`: every dbh1 unit has 2 own games.
 - 375 px sweep in es, eu and ar: the hub of each unit and the 24 new games at levels 1 and 3, before and after answering (detectives: question, wrong line, kind of error): no overflow, no console errors.
 - How to measure the detective widths quickly: in the dev server, `await import('/node_modules/.vite/deps/katex.js')` and `await import('/src/pages/<unit>/games/detective.ts')`, then render each line in a hidden 21 px box.
+- Progress ids: a script imported each unit's lab challenge ids, game ids and every `id`/`progressId` in `content.ts`: no clashes in any unit.
+- The level-2 sweep (all 24 games, es/eu/ar) is clean too.
+- The decimals hub art (podium and detective) writes decimals with the language's mark: the hub now builds its cards inside the component with `language`.
 - Not published yet: ask the owner first.

@@ -23,7 +23,6 @@ const components: Record<DecimalsGameId, (props: GameProps) => JSX.Element> = {
     memory: (props) => <PairsMemoryGame {...props} config={{ game: info('memory'), art: <DecimalsGameArt game="memory" />, pairs: DECIMALS_MEMORY_PAIRS, createBoard: createDecimalsMemoryBoard }} />
 }
 
-const hubGames: HubGame<DecimalsGameId>[] = decimalsGames.map((game) => ({ info: game, art: <DecimalsGameArt game={game.id} />, component: components[game.id] }))
 
 export function DecimalsGames({ language, pathname, openGame, completedIds, onComplete }: {
     language: UnitLanguage
@@ -32,6 +31,7 @@ export function DecimalsGames({ language, pathname, openGame, completedIds, onCo
     completedIds: number[]
     onComplete: (id: number) => void
 }) {
+    const hubGames: HubGame<DecimalsGameId>[] = decimalsGames.map((game) => ({ info: game, art: <DecimalsGameArt game={game.id} language={language} />, component: components[game.id] }))
     return (
         <GamesHub
             language={language}
