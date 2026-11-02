@@ -42,7 +42,7 @@ const grafikoaUnit: UnitDefinition = {
         render: (props) => <GraphsLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, kurben laserra, zein formula da?, grafikoen detektibea eta memoria.', es: 'Cinco juegos: carrera, láser de curvas, ¿qué fórmula es?, detective de gráficas y memoria.', en: 'Five games: race, curve laser, which formula?, graphs detective and memory.', ar: 'خمس ألعاب: السباق وليزر المنحنيات وأي صيغة؟ ومخبر التمثيلات والذاكرة.' },
         progressIds: graphsGameProgressIds,
         recordsKey: GRAPHS_GAME_RECORDS_KEY,
         render: (props) => <GraphsGames {...props} />

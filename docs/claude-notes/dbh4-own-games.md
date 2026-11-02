@@ -37,3 +37,11 @@ Trick: the wiring script once changed the wrong `assert.equal(x.length, n)` in a
 - `detective` (`functionsDetective.ts`): images and preimages, domains (sets), the rate of change. Ids ap 54501–3, ak 76501–3.
 
 Trick: several academic hub tests limited the progress ids to `…101–…299`; they now allow up to `…599`.
+
+## Graphs (ap `dbh4-aplikatuak-grafikoa`, ak `dbh4-akademikoak-polinomikoak`, ak `dbh4-akademikoak-esponentzialak`)
+
+Code in `dbh4-games/curves.ts`, `CurveGames.tsx`, `graphsDetective.ts`; each unit passes its families per level.
+- `laser` (all three): curve laser. A family template (y = mx + n, a(x − h)² + k, a|x − h| + k, a/(x − h) + k, b^(x − h) + k, log_b(x − h) + k), steppers for its parameters and 2–3 targets; the curve appears after firing (the right one dashed after a miss). `uniqueFit` checks that no other stepper setting hits every target; the steppers start on a curve no round uses (`START`). Ids: graphs 58301–3, polynomial 78301–3, exponential 80301–3.
+- `match` (graphs 58401–3, polynomial 78401–3): which formula? A graph and four formulas (shift sign, opening sign, h and k swapped).
+- `growth` (exponential 80401–3): when does it double? Bacteria that double or triple, half-lives; set the time; bars appear after checking.
+- `detective` (graphs 58501–3, polynomial 78501–3, exponential 80501–3): 20 errors on lines, parabolas, shifts, absolute value, hyperbolas, exponentials and logarithms; three levels per unit.

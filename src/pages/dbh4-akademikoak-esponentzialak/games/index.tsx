@@ -7,11 +7,17 @@ import { ExponentialAkGameArt } from './GameArt'
 import { EXPONENTIAL_AK_GAME_RECORDS_KEY, exponentialAkGameModeForPath, exponentialAkGames, exponentialAkGameSlugs, type ExponentialAkGameId } from './info'
 import { ExponentialAkRaceGame } from './RaceGame'
 import '../../dbh1-aljebra-v2/games/AlgebraGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { CurveLaserGame, GrowthGame } from '../../dbh4-games/CurveGames'
+import { createGraphsDetectiveCases, GRAPHS_DETECTIVE_CASES, graphsDetectiveNames, graphsDetectiveTips } from '../../dbh4-games/graphsDetective'
 
 const memoryGame = exponentialAkGames.find((game) => game.id === 'memory')!
 
 const components: Record<ExponentialAkGameId, (props: GameProps) => JSX.Element> = {
     race: ExponentialAkRaceGame,
+    laser: (props) => <CurveLaserGame {...props} game={exponentialAkGames.find((game) => game.id === 'laser')!} art={<ExponentialAkGameArt game="laser" />} families={[['exp'], ['log'], ['exp', 'log']]} />,
+    growth: (props) => <GrowthGame {...props} game={exponentialAkGames.find((game) => game.id === 'growth')!} art={<ExponentialAkGameArt game="growth" />} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: exponentialAkGames.find((game) => game.id === 'detective')!, art: <ExponentialAkGameArt game="detective" />, cases: GRAPHS_DETECTIVE_CASES, createCases: createGraphsDetectiveCases('exponential'), names: graphsDetectiveNames, tips: graphsDetectiveTips }} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <ExponentialAkGameArt game="memory" />, pairs: EXPONENTIAL_AK_MEMORY_PAIRS, createBoard: createExponentialAkMemoryBoard }} />
 }
 

@@ -10,3 +10,7 @@ Stages exponential/growth/logarithmic/trigonometric/transforms; topics exp-graph
 Phase 1+2 486e519 (diag 6001–6008, practice 1–20, challenges 101–115, bank 1–50). Lab 361dec6: grafikoa exponential, potentziak ladder, trigonometria circle with their ids + new shift 791xx, growth 792xx, log-shift 793xx, wave 794xx. Games (race 80101–80105, memory 80201–80203: powers, logarithms, periods of cos kx — cos only so cards are the same in every language). Full suite 747/747, lint and build OK. Merged to main (fast-forward 148c90b), pushed and deployed 2026-10-20 (bundle index-C4Xd_E6R).
 
 Next 4. DBH akademikoak units: estadistica, combinatoria, probabilidad. Gotcha: long browser checks time out at 45 s when the pane is hidden — split them into one call per level.
+
+## Own games (2026-11-02)
+
+Curve laser, which formula? / when does it double? and the graphs detective: see [dbh4-own-games](dbh4-own-games.md).

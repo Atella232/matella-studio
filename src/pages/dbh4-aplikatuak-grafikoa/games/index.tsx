@@ -7,11 +7,17 @@ import { GraphsGameArt } from './GameArt'
 import { GRAPHS_GAME_RECORDS_KEY, graphsGameModeForPath, graphsGames, graphsGameSlugs, type GraphsGameId } from './info'
 import { GraphsRaceGame } from './RaceGame'
 import '../../dbh1-aljebra-v2/games/AlgebraGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { CurveLaserGame, WhichFormulaGame } from '../../dbh4-games/CurveGames'
+import { createGraphsDetectiveCases, GRAPHS_DETECTIVE_CASES, graphsDetectiveNames, graphsDetectiveTips } from '../../dbh4-games/graphsDetective'
 
 const memoryGame = graphsGames.find((game) => game.id === 'memory')!
 
 const components: Record<GraphsGameId, (props: GameProps) => JSX.Element> = {
     race: GraphsRaceGame,
+    laser: (props) => <CurveLaserGame {...props} game={graphsGames.find((game) => game.id === 'laser')!} art={<GraphsGameArt game="laser" />} families={[['line'], ['parabola'], ['inverse', 'exp']]} />,
+    match: (props) => <WhichFormulaGame {...props} game={graphsGames.find((game) => game.id === 'match')!} art={<GraphsGameArt game="match" />} families={[['line'], ['parabola'], ['inverse', 'exp']]} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: graphsGames.find((game) => game.id === 'detective')!, art: <GraphsGameArt game="detective" />, cases: GRAPHS_DETECTIVE_CASES, createCases: createGraphsDetectiveCases('graphs'), names: graphsDetectiveNames, tips: graphsDetectiveTips }} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <GraphsGameArt game="memory" />, pairs: GRAPHS_MEMORY_PAIRS, createBoard: createGraphsMemoryBoard }} />
 }
 

@@ -41,7 +41,7 @@ const esponentzialakUnit: UnitDefinition = {
         render: (props) => <ExponentialAkLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, kurben laserra, noiz bikoizten da?, grafikoen detektibea eta memoria.', es: 'Cinco juegos: carrera, láser de curvas, ¿cuándo se duplica?, detective de gráficas y memoria.', en: 'Five games: race, curve laser, when does it double?, graphs detective and memory.', ar: 'خمس ألعاب: السباق وليزر المنحنيات ومتى يتضاعف؟ ومخبر التمثيلات والذاكرة.' },
         progressIds: exponentialAkGameProgressIds,
         recordsKey: EXPONENTIAL_AK_GAME_RECORDS_KEY,
         render: (props) => <ExponentialAkGames {...props} />

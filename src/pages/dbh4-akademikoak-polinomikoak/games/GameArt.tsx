@@ -1,8 +1,13 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { PolynomialAkGameId } from './info'
+import { CurveArt } from '../../dbh4-games/CurveGames'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
 
 /** Small illustration of each game; the art is the same in every language */
 export function PolynomialAkGameArt({ game }: { game: PolynomialAkGameId }) {
+    if (game === 'laser') return <CurveArt game="laser" />
+    if (game === 'match') return <CurveArt game="match" />
+    if (game === 'detective') return <DetectiveArt lines={['y = (x + 3)²', 'vértice x = 3 ?', 'x = −3']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

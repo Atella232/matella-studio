@@ -56,7 +56,7 @@ function expected(question: ExponentialAkRaceQuestion): number {
 }
 
 test('esponentzialak 4. DBH ak games: levels, ids and routes', () => {
-    assert.equal(exponentialAkGames.length, 2)
+    assert.equal(exponentialAkGames.length, 5)
     assert.equal(exponentialAkGames[0].levels.length, EXPONENTIAL_AK_RACE_CIRCUITS)
     assert.equal(exponentialAkGames[1].levels.length, exponentialAkMemoryLevels.length)
     assert.equal(new Set(exponentialAkGameProgressIds).size, exponentialAkGameProgressIds.length)

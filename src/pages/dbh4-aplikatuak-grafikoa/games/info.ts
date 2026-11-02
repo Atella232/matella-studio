@@ -6,7 +6,7 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
    first star.
    ========================================================================== */
 
-export type GraphsGameId = 'race' | 'memory'
+export type GraphsGameId = 'race' | 'memory' | 'laser' | 'match' | 'detective'
 
 export const GRAPHS_GAME_RECORDS_KEY = 'matella-grafikoa-dbh4ap-game-records'
 
@@ -34,18 +34,54 @@ export const graphsGames: GameInfo<GraphsGameId>[] = [
             { progressId: 58202, stage: 'quadratic', title: { eu: 'Erpinak', es: 'Vértices', en: 'Vertices', ar: 'الرؤوس' }, description: { eu: 'x² − 4x + 3 ↔ V(2, −1)', es: 'x² − 4x + 3 ↔ V(2, −1)', en: 'x² − 4x + 3 ↔ V(2, −1)', ar: 'x² − 4x + 3 ↔ V(2, −1)' } },
             { progressId: 58203, stage: 'exponential', title: { eu: 'Berreturak', es: 'Potencias', en: 'Powers', ar: 'القوى' }, description: { eu: '2⁻³ ↔ 1/8', es: '2⁻³ ↔ 1/8', en: '2⁻³ ↔ 1/8', ar: '2⁻³ ↔ 1/8' } }
         ]
+    },
+    {
+        id: 'laser',
+        title: { eu: 'Kurben laserra', es: 'Láser de curvas', en: 'Curve laser', ar: 'ليزر المنحنيات' },
+        tagline: { eu: 'Doitu kurbaren parametroak eta jaurti: jomuga guztiak jo behar ditu.', es: 'Ajusta los parámetros de la curva y dispara: tiene que dar en todas las dianas.', en: 'Set the parameters of the curve and fire: it has to hit every target.', ar: 'اضبط معاملات المنحنى وأطلق: يجب أن يصيب كل الأهداف.' },
+        skills: { eu: 'Parametroak eta grafikoak', es: 'Parámetros y gráficas', en: 'Parameters and graphs', ar: 'المعاملات والتمثيلات' },
+        levels: [
+            { progressId: 58301, stage: 'lines', title: { eu: 'Zuzenak', es: 'Rectas', en: 'Lines', ar: 'المستقيمات' }, description: { eu: 'y = mx + n', es: 'y = mx + n', en: 'y = mx + n', ar: 'y = mx + n' } },
+            { progressId: 58302, stage: 'quadratic', title: { eu: 'Parabolak', es: 'Parábolas', en: 'Parabolas', ar: 'القطوع المكافئة' }, description: { eu: 'y = a(x − h)² + k', es: 'y = a(x − h)² + k', en: 'y = a(x − h)² + k', ar: 'y = a(x − h)² + k' } },
+            { progressId: 58303, stage: 'exponential', title: { eu: 'Hiperbolak eta esponentzialak', es: 'Hipérbolas y exponenciales', en: 'Hyperbolas and exponentials', ar: 'الزائدة والأسية' }, description: { eu: 'y = a/(x − h) + k, y = 2^(x − h) + k', es: 'y = a/(x − h) + k, y = 2^(x − h) + k', en: 'y = a/(x − h) + k, y = 2^(x − h) + k', ar: 'y = a/(x − h) + k، y = 2^(x − h) + k' } }
+        ]
+    },
+    {
+        id: 'match',
+        title: { eu: 'Zein formula da?', es: '¿Qué fórmula es?', en: 'Which formula?', ar: 'أي صيغة؟' },
+        tagline: { eu: 'Grafiko bat eta lau formula: aukeratu ona.', es: 'Una gráfica y cuatro fórmulas: elige la buena.', en: 'A graph and four formulas: choose the right one.', ar: 'تمثيل وأربع صيغ: اختر الصحيحة.' },
+        skills: { eu: 'Grafikoak eta formulak lotzea', es: 'Relacionar gráficas y fórmulas', en: 'Matching graphs and formulas', ar: 'ربط التمثيلات بالصيغ' },
+        levels: [
+            { progressId: 58401, stage: 'lines', title: { eu: 'Zuzenak', es: 'Rectas', en: 'Lines', ar: 'المستقيمات' }, description: { eu: 'y = mx + n', es: 'y = mx + n', en: 'y = mx + n', ar: 'y = mx + n' } },
+            { progressId: 58402, stage: 'quadratic', title: { eu: 'Parabolak', es: 'Parábolas', en: 'Parabolas', ar: 'القطوع المكافئة' }, description: { eu: 'y = a(x − h)² + k', es: 'y = a(x − h)² + k', en: 'y = a(x − h)² + k', ar: 'y = a(x − h)² + k' } },
+            { progressId: 58403, stage: 'inverse', title: { eu: 'Hiperbolak eta esponentzialak', es: 'Hipérbolas y exponenciales', en: 'Hyperbolas and exponentials', ar: 'الزائدة والأسية' }, description: { eu: 'y = a/(x − h) + k, y = 2^(x − h) + k', es: 'y = a/(x − h) + k, y = 2^(x − h) + k', en: 'y = a/(x − h) + k, y = 2^(x − h) + k', ar: 'y = a/(x − h) + k، y = 2^(x − h) + k' } }
+        ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Grafikoen detektibea', es: 'Detective de gráficas', en: 'Graphs detective', ar: 'مخبر التمثيلات' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: اكتشفه وقل ما نوع الخطأ.' },
+        skills: { eu: 'Grafiko eta funtzioetako akats tipikoak', es: 'Errores típicos con gráficas y funciones', en: 'Common mistakes with graphs and functions', ar: 'الأخطاء الشائعة في التمثيلات والدوال' },
+        levels: [
+            { progressId: 58501, stage: 'linear', title: { eu: 'Zuzenak', es: 'Rectas', en: 'Lines', ar: 'المستقيمات' }, description: { eu: 'Malda, ordenatua eta perpendikularrak.', es: 'Pendiente, ordenada y perpendiculares.', en: 'Slope, intercept and perpendiculars.', ar: 'الميل والجزء المقطوع والعمودية.' } },
+            { progressId: 58502, stage: 'quadratic', title: { eu: 'Parabolak', es: 'Parábolas', en: 'Parabolas', ar: 'القطوع المكافئة' }, description: { eu: 'Erpina eta ebakidurak.', es: 'Vértice y cortes.', en: 'Vertex and cuts.', ar: 'الرأس والتقاطعات.' } },
+            { progressId: 58503, stage: 'exponential', title: { eu: 'Hiperbolak eta esponentzialak', es: 'Hipérbolas y exponenciales', en: 'Hyperbolas and exponentials', ar: 'الزائدة والأسية' }, description: { eu: 'Asintotak eta berreturak.', es: 'Asíntotas y potencias.', en: 'Asymptotes and powers.', ar: 'المقاربات والقوى.' } }
+        ]
     }
 ]
 
 export const graphsGameProgressIds: number[] = levelProgressIds(graphsGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const graphsGameSlugs: Record<GraphsGameId, string> = { race: 'lasterketa', memory: 'memoria' }
+export const graphsGameSlugs: Record<GraphsGameId, string> = { race: 'lasterketa', memory: 'memoria', laser: 'laserra', match: 'formula', detective: 'detektibea' }
 
 export function graphsGameModeForPath(pathname: string): GraphsGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
     if (!game) return 'hub'
     if (['carrera', 'lasterketa'].includes(game)) return 'race'
+    if (['laserra', 'laser'].includes(game)) return 'laser'
+    if (['formula', 'formula-grafica'].includes(game)) return 'match'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     if (['memoria', 'memory'].includes(game)) return 'memory'
     return 'hub'
 }

@@ -83,7 +83,7 @@ function checkPrompt(question: PolynomialAkRaceQuestion) {
 }
 
 test('polinomikoak 4. DBH ak games: levels, ids and routes', () => {
-    assert.equal(polynomialAkGames.length, 2)
+    assert.equal(polynomialAkGames.length, 5)
     assert.equal(polynomialAkGames[0].levels.length, POLYNOMIAL_AK_RACE_CIRCUITS)
     assert.equal(polynomialAkGames[1].levels.length, polynomialAkMemoryLevels.length)
     assert.equal(new Set(polynomialAkGameProgressIds).size, polynomialAkGameProgressIds.length)

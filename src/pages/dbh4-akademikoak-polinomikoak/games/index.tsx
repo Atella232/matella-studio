@@ -7,11 +7,17 @@ import { PolynomialAkGameArt } from './GameArt'
 import { POLYNOMIAL_AK_GAME_RECORDS_KEY, polynomialAkGameModeForPath, polynomialAkGames, polynomialAkGameSlugs, type PolynomialAkGameId } from './info'
 import { PolynomialAkRaceGame } from './RaceGame'
 import '../../dbh1-aljebra-v2/games/AlgebraGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { CurveLaserGame, WhichFormulaGame } from '../../dbh4-games/CurveGames'
+import { createGraphsDetectiveCases, GRAPHS_DETECTIVE_CASES, graphsDetectiveNames, graphsDetectiveTips } from '../../dbh4-games/graphsDetective'
 
 const memoryGame = polynomialAkGames.find((game) => game.id === 'memory')!
 
 const components: Record<PolynomialAkGameId, (props: GameProps) => JSX.Element> = {
     race: PolynomialAkRaceGame,
+    laser: (props) => <CurveLaserGame {...props} game={polynomialAkGames.find((game) => game.id === 'laser')!} art={<PolynomialAkGameArt game="laser" />} families={[['parabola'], ['abs'], ['inverse']]} />,
+    match: (props) => <WhichFormulaGame {...props} game={polynomialAkGames.find((game) => game.id === 'match')!} art={<PolynomialAkGameArt game="match" />} families={[['line', 'parabola'], ['abs', 'parabola'], ['inverse']]} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: polynomialAkGames.find((game) => game.id === 'detective')!, art: <PolynomialAkGameArt game="detective" />, cases: GRAPHS_DETECTIVE_CASES, createCases: createGraphsDetectiveCases('polynomial'), names: graphsDetectiveNames, tips: graphsDetectiveTips }} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <PolynomialAkGameArt game="memory" />, pairs: POLYNOMIAL_AK_MEMORY_PAIRS, createBoard: createPolynomialAkMemoryBoard }} />
 }
 

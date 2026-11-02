@@ -46,7 +46,7 @@ function expected(question: GraphsRaceQuestion): number {
 }
 
 test('grafikoa 4. DBH ap games: levels, ids and routes', () => {
-    assert.equal(graphsGames.length, 2)
+    assert.equal(graphsGames.length, 5)
     assert.equal(graphsGames[0].levels.length, GRAPHS_RACE_CIRCUITS)
     assert.equal(graphsGames[1].levels.length, graphsMemoryLevels.length)
     assert.equal(new Set(graphsGameProgressIds).size, graphsGameProgressIds.length)

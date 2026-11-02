@@ -13,6 +13,8 @@ import { createEquationsDetectiveCases, equationsDetectiveLevels, equationsDetec
 import { solutionsValue } from '../src/pages/dbh2-ekuazioak-v2/games/detective.ts'
 import { createDomainRounds, createSlopeRounds, meanRate, rightIntervals } from '../src/pages/dbh4-games/functions.ts'
 import { createFunctionsDetectiveCases, functionsDetectiveLevels, functionsDetectiveNames, functionsDetectiveTips } from '../src/pages/dbh4-games/functionsDetective.ts'
+import { createCurveRounds, createGrowthRounds, createMatchRounds, curveAt, curveLatex, growthAt, hitsAll, START, uniqueFit, type Family } from '../src/pages/dbh4-games/curves.ts'
+import { createGraphsDetectiveCases, graphsDetectiveLevels, graphsDetectiveNames, graphsDetectiveTips } from '../src/pages/dbh4-games/graphsDetective.ts'
 import { checkTexts, renders } from './helpers/ownGamesCheck.ts'
 import { evaluate } from './helpers/realsRaceCheck.ts'
 
@@ -292,4 +294,65 @@ test('4. DBH functions detective', () => {
         }
         assert.equal(seen.size, 4)
     }
+})
+
+/* ---------- Graphs ---------- */
+
+const FAMILY_LEVELS: Family[][][] = [[['line'], ['parabola'], ['inverse', 'exp']], [['parabola'], ['abs'], ['inverse']], [['exp'], ['log'], ['exp', 'log']], [['line', 'parabola'], ['abs', 'parabola'], ['inverse']]]
+
+test('4. DBH curve laser: only the round curve hits every target, the start never does', () => {
+    for (const families of FAMILY_LEVELS) {
+        for (let level = 0; level < 3; level += 1) {
+            for (let seed = 1; seed <= 40; seed += 1) {
+                for (const round of createCurveRounds(families)(createRandom(seed * 7919 + level), level)) {
+                    assert.ok(families[level].includes(round.curve.family))
+                    assert.ok(hitsAll(round.curve, round.targets))
+                    assert.ok(uniqueFit(round))
+                    assert.ok(!hitsAll({ ...START[round.curve.family], base: round.curve.base }, round.targets))
+                    renders(curveLatex(round.curve))
+                }
+            }
+        }
+    }
+})
+
+test('4. DBH which formula?: the options are different curves', () => {
+    for (const families of FAMILY_LEVELS) {
+        for (let level = 0; level < 3; level += 1) {
+            for (let seed = 1; seed <= 60; seed += 1) {
+                for (const round of createMatchRounds(families)(createRandom(seed * 7919 + level), level)) {
+                    assert.equal(round.options[round.right], curveLatex(round.curve))
+                    for (const option of round.options) renders(option)
+                    assert.equal(new Set(round.options).size, 4)
+                    // Each wrong option differs from the curve at some whole x
+                    round.options.forEach((option, index) => {
+                        if (index === round.right) return
+                        const differs = [-5, -3, -1, 0.5, 2, 4, 5.5].some((x) => {
+                            const value = evaluate(option.replace(/^y=/, '').replace(/\\log_\{(\d)\}\(([^)]*)\)/g, (_, b, inside) => `(${Math.log(Number(evaluate(inside.replace(/x/g, `(${x})`)))) / Math.log(Number(b))})`).replace(/x/g, `(${x})`))
+                            const exact = curveAt(round.curve, x)
+                            return value === null || exact === null || !Number.isFinite(value) || Math.abs(value - exact) > 1e-6
+                        })
+                        assert.ok(differs, `${option} vs ${curveLatex(round.curve)}`)
+                    })
+                }
+            }
+        }
+    }
+})
+
+test('4. DBH when does it double?: the time reaches the target exactly', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            for (const round of createGrowthRounds(createRandom(seed * 7919 + level), level)) {
+                assert.ok(Math.abs(growthAt(round, round.time) - round.target) < 1e-9)
+                assert.ok(Number.isInteger(round.target) && round.time % round.period === 0 && round.time > round.period)
+                assert.ok(round.time <= round.period * 8)
+            }
+        }
+    }
+})
+
+test('4. DBH graphs detective: the three units', () => {
+    checkTexts([...Object.values(graphsDetectiveNames), ...Object.values(graphsDetectiveTips)])
+    for (const track of ['graphs', 'polynomial', 'exponential'] as const) checkDetective(createGraphsDetectiveCases(track), graphsDetectiveLevels[track], graphsDetectiveNames, graphsDetectiveTips)
 })

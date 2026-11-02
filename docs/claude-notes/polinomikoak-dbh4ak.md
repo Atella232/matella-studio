@@ -10,3 +10,7 @@ Stages lines/parabolas/shifts/absolute/rational; topics line-kinds, slope, line-
 Phase 1+2 38ffc8a (diag 5901–5908 — 58xx is taken by dbh1 zatikiak lab — practice 1–20, challenges 101–115, bank 1–50). Lab d373125: dbh2 line/slope, aplikatuak funtzioak intercepts, grafikoa point-slope/parabola/hyperbola with their ids + new fit 772xx, secant 771xx, absolute 773xx, rational 774xx. Games b3e273f: race 78101–78105 (every answer a number, all writable, `meta` recomputed by the test), memory 78201–78203 (slopes, vertices, asymptotes; widest card 90 px of 106). Full suite 730/730, lint and build OK. Merged to main (fast-forward b3e273f), pushed and deployed 2026-10-20 (bundle index-BY8-eUdS).
 
 Next 4. DBH akademikoak unit after this: `funciones-exponenciales` (Santillana Ac. U11 + Anaya Ac. U5 exp/log part).
+
+## Own games (2026-11-02)
+
+Curve laser, which formula? / when does it double? and the graphs detective: see [dbh4-own-games](dbh4-own-games.md).

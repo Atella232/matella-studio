@@ -1,8 +1,13 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { ExponentialAkGameId } from './info'
+import { CurveArt } from '../../dbh4-games/CurveGames'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
 
 /** Small illustration of each game; the art is the same in every language */
 export function ExponentialAkGameArt({ game }: { game: ExponentialAkGameId }) {
+    if (game === 'laser') return <CurveArt game="laser" />
+    if (game === 'growth') return <CurveArt game="growth" />
+    if (game === 'detective') return <DetectiveArt lines={['log₂(4 · 8)', '= 2 · 3 ?', '= 2 + 3']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

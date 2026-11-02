@@ -40,3 +40,11 @@
 .func2-plane { display: flex; justify-content: center; }
 .func2-plane .functions-plane { max-width: 340px; border: 2px solid var(--ink); border-radius: 14px; background: var(--card); }
 .dbh4-candidates button { padding: 0 10px; white-space: nowrap; }
+.func2-steppers { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.fraction-v2-games-card[data-game="laser"] { --game-tint: var(--coral-tint, #f6d5cc); }
+.fraction-v2-games-card[data-game="match"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="growth"] { --game-tint: var(--success-tint, #d9efe2); }
+.dbh4-story { font-weight: 600; text-align: start; }
+.dbh4-bars { display: flex; align-items: flex-end; justify-content: center; gap: 6px; height: 96px; }
+.dbh4-bars span { width: 20px; border-radius: 4px 4px 0 0; background: var(--blue, #2f5fb3); }
+.dbh4-bars span.target { background: var(--success, #267b53); }
