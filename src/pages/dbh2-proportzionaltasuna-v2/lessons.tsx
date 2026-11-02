@@ -14,6 +14,7 @@ import {
     PercentWhichFigure,
     ShareDaysFigure
 } from './figures'
+import { proportionLessonChecks, type ProportionTopicId } from './lessonChecks'
 
 /* ==========================================================================
    Proportzionaltasuna eta ehunekoak · 2. DBH — stages and lessons. The
@@ -42,7 +43,7 @@ const say = (eu: string, es: string, ar: string, en: string): LocalizedText => (
 /** The same formula in every language; the decimal comma becomes a point in Arabic */
 const same = (value: string): LocalizedText => ({ eu: value, es: value, en: value, ar: value.replace(/\{,\}/g, '.') })
 
-export const proportionDbh2Topics: UnitTopic[] = [
+const baseTopics: UnitTopic[] = [
     /* ---------- 1. Review ---------- */
     {
         id: 'proportion-review',
@@ -369,3 +370,6 @@ export const proportionDbh2Topics: UnitTopic[] = [
         figure: (language) => <InterestFigure language={language} />
     }
 ]
+
+/** Each lesson with its typical mistake and its «Check it» question (lessonChecks.ts) */
+export const proportionDbh2Topics: UnitTopic[] = baseTopics.map((topic) => ({ ...topic, ...proportionLessonChecks[topic.id as ProportionTopicId] }))
