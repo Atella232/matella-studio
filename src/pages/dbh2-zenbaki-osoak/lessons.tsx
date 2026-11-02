@@ -1,5 +1,6 @@
 import type { UnitStage, UnitTopic } from '../../features/unit-v2/types'
 import { NumberLine, SignRuleFigure, SituationsFigure } from './figures'
+import { integerLessonChecks, type IntegerTopicId } from './lessonChecks'
 
 /* ==========================================================================
    Zenbaki osoak · 2. DBH — stages and lessons
@@ -18,7 +19,7 @@ export const integerStages: UnitStage[] = [
     { id: 'muldiv', tone: 'green', title: { eu: 'Biderketak, zatiketak eta hierarkia', es: 'Productos, cocientes y jerarquía', en: 'Products, quotients and order of operations', ar: 'الضرب والقسمة وأولوية العمليات' } }
 ]
 
-export const integerTopics: UnitTopic[] = [
+const baseTopics: UnitTopic[] = [
     {
         id: 'negatives',
         stage: 'integers',
@@ -325,3 +326,6 @@ export const integerTopics: UnitTopic[] = [
         }
     }
 ]
+
+/** Each lesson with its typical mistake and its «Check it» question (lessonChecks.ts) */
+export const integerTopics: UnitTopic[] = baseTopics.map((topic) => ({ ...topic, ...integerLessonChecks[topic.id as IntegerTopicId] }))
