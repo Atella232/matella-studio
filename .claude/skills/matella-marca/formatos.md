@@ -7,7 +7,6 @@ Primero las reglas base de [SKILL.md](SKILL.md). Aquí va lo propio de cada form
 - Usa las variables que ya existen: `src/index.css` (globales) y `src/features/unit-v2/UnitPage.css` (unidades V2, con `data-stage` / `data-tone`). No inventes colores nuevos.
 - El CSS nuevo va en un archivo propio (muchas unidades importan `lab/Lab.css`).
 - Las unidades siguen `docs/unit-model.md`, `docs/unit-quality-checklist.md` y `docs/unit-reusable-template.md`.
-- Las cajas de idea clave ponen el KaTeX en mayúsculas: nada de letras minúsculas en sus fórmulas.
 - Revisa a 375 px en eu, es y ar.
 
 ## Artifacts y páginas HTML sueltas

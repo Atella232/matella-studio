@@ -76,7 +76,6 @@ menciónaselo una vez al dueño y no lo edites sin que lo pida.
 - Router de hash: `#/matematika/...`. `MathText` convierte `:` en ÷; para dividir, `\div`.
 - El test numérico solo evalúa `\frac`, no `\dfrac` (las lecciones sí pueden usar `\dfrac`); parte las
   desigualdades encadenadas (`a<b=c`) y no pongas `0=8` dentro de `$…$`.
-- Cajas «takeaway»: el KaTeX sale en mayúsculas; nada de letras minúsculas en sus fórmulas.
 - Euskera: ningún sufijo pegado a un número. Árabe: fórmulas envueltas con LRI/PDI, sin árabe dentro de
   `\text{}` y `{,}` pasa a `.`; el texto de SVG ignora los aislantes bidi.
 - El CSS nuevo va en archivos propios (28 unidades importan `lab/Lab.css`). Textos de `observe` en
