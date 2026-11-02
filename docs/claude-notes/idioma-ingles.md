@@ -22,17 +22,18 @@ Publicada en matella.net el 2026-10-30: commit `df11157` en `main` (avance rápi
 - Antzekotasuna: los miles en es/eu se quedan con espacio («50 000»), porque el corrector de respuestas lo exige. Un punto daba respuesta incorrecta.
 - Konbinatoria: los miles en SVG usan espacio en eu/es/ar (el texto pide escribir «40 320»).
 
-## Pendiente (no hecho)
+## Pendiente
 
-1. ~~Lecturas directas de dinero en proporzionaltasuna 4.º~~ Hecho el 2026-10-30 (fase 10 de `proportzionaltasuna-dbh4ap-lab-plus.md`): `typeLabAnswer` y `readLabAnswer` en `answers.ts` guardan si la respuesta se escribió en inglés.
-2. Dinero sin agrupar en proporzionaltasuna 4.º (`money()` en `ProportionDbh4ApTools.tsx` y `ReceiptTool.tsx`): en inglés sale `12000.00`.
-3. Miles mezclados en es/eu: los valores dinámicos llevan punto (`100.000 €`, `9.880`), pero muchos textos fijos llevan espacio (`42 000`, `22 000`). Hay que decidir una norma y aplicarla a toda la web.
-4. Árabe: algún eje sale con un espacio extra (`0.00 052`), fallo antiguo.
-5. Abreviaturas en inglés: `Dom` (dominio) en las gráficas de funciones, y `Me` para la mediana (en inglés suele ser `Md` o `M`). Decidir.
-6. Moneda en inglés: `400 €` en vez de `€400` (proporzionaltasuna 2.º, `figures.tsx:338`).
-7. `hundredthsText` (`dbh4-aplikatuak-areak/lab/labTools.ts`) escribe coma también en inglés.
-8. Ejes de la biosfera y de `reals.ts`: `englishLatex` convierte `0.000\,123` en `0.000{,}123` (sale `0.000,123` en inglés).
-9. La habilidad `matella-nueva-unidad` (fuera del repositorio) sigue diciendo que hay tres idiomas.
+Resuelto el 2026-11-02 (rama `feat/eso-polish`):
+1. ~~Lecturas directas de dinero en proporzionaltasuna 4.º~~ (2026-10-30).
+2. ~~Dinero sin agrupar en inglés~~: `money()` y el recibo usan `groupDigits` (12,000.00).
+3. ~~Miles mezclados en es/eu~~: el dueño eligió la norma RAE (espacio desde 5 cifras, 4 cifras juntas). `groupDigits`/`groupLatex` en `numberFormat.ts`; los textos se reescribieron por llamada desde el castellano; las respuestas valen con espacio, punto o sin separar (`checkAnswer`).
+4. ~~Árabe `0.00 052`~~: `RealsTools` agrupa solo la parte entera.
+5. Abreviaturas: la mediana es `Med` en inglés (`englishLatex` cambia `\text{Me}`); `Dom` se queda (también se usa en inglés).
+6. ~~Moneda en inglés~~: €400 en el dibujo de interés y «€31» en los textos ingleses (los resultados de una cuenta, «… = 72 €», siguen con el signo detrás).
+7. `hundredthsText`: ya se mostraba con `plain()` según el idioma; no hacía falta tocarlo.
+8. ~~`englishLatex` con grupos de decimales~~: los espacios finos de la parte decimal se quedan (0.000\,072).
+9. ~~La habilidad `matella-nueva-unidad` decía tres idiomas~~: ahora dice cuatro.
 
 ## Trucos
 

@@ -83,5 +83,7 @@ menciónaselo una vez al dueño y no lo edites sin que lo pida.
   herramientas: texto plano, no LaTeX. Colores de acierto/error con `--success`/`--error`.
 - Los textos de las unidades V2 van en eu, es, en y ar (`UnitLanguage`); en el código, `say(eu, es, ar, en)`.
   El inglés escribe 0.5, 15,000 y €400; `englishLatex` cambia las marcas de las fórmulas.
+- Miles con espacio (RAE) desde 5 cifras: `15\,728` en fórmulas y espacio no separable en texto, con
+  `groupDigits`/`groupLatex`; 4 cifras juntas (2918). Nunca el punto de miles.
 - Si el panel del navegador está oculto, no hay capturas ni cuenta atrás de carrera: comprueba desbordes
   con `getBBox` y confía en los tests.
