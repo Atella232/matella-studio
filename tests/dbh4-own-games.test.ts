@@ -227,6 +227,7 @@ test('4. DBH equations detective: both tracks', () => {
             for (let seed = 1; seed <= 100; seed += 1) {
                 for (const item of createEquationsDetectiveCases(track)(createRandom(seed * 7919 + level), level)) {
                     seen.add(item.error)
+                    assert.ok(equationsDetectiveLevels[track][level].includes(item.error))
                     assert.ok(item.options.includes(item.error) && new Set(item.options).size === 3)
                     for (const line of item.lines) renders(line.latex)
                     renders(item.fix)
