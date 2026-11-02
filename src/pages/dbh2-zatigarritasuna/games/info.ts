@@ -5,7 +5,7 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
    progress id each level earns with its first star.
    ========================================================================== */
 
-export type DivisibilityGameId = 'race' | 'hunt' | 'factor' | 'memory'
+export type DivisibilityGameId = 'race' | 'hunt' | 'factor' | 'memory' | 'detective'
 
 export const DIVISIBILITY_GAME_RECORDS_KEY = 'matella-zatigarritasuna-dbh2-game-records'
 
@@ -55,13 +55,24 @@ export const divisibilityGames: GameInfo<DivisibilityGameId>[] = [
             { progressId: 2402, stage: 'gcd-lcm', title: { eu: 'ZKH eta MKT', es: 'm.c.d. y m.c.m.', en: 'GCD and LCM', ar: 'ق.م.أ وم.م.أ' }, description: { eu: '8 bikote. Kontuz: bikote bereko ZKH eta MKT biak daude.', es: '8 parejas. Cuidado: están el m.c.d. y el m.c.m. de la misma pareja.', en: '8 pairs. Careful: both the GCD and the LCM of the same pair are there.', ar: '8 أزواج. انتبه: ق.م.أ وم.م.أ للزوج نفسه كلاهما موجود.' } },
             { progressId: 2403, stage: 'primes', title: { eu: 'Hirukoteak', es: 'Tríos', en: 'Trios', ar: 'ثلاثيات' }, description: { eu: '6 hirukote: zenbakia, deskonposizioa eta biderketa bat.', es: '6 tríos: número, descomposición y una multiplicación.', en: '6 trios: number, factorisation and a multiplication.', ar: '6 ثلاثيات: العدد وتحليله وعملية ضرب.' } }
         ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Zatigarritasunaren detektibea', es: 'Detective de divisibilidad', en: 'Divisibility detective', ar: 'مخبر قابلية القسمة' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: اكتشفه وقل ما نوع الخطأ.' },
+        skills: { eu: 'Zatitzaile, ZKH eta MKTko akats tipikoak', es: 'Errores típicos de divisores, m.c.d. y m.c.m.', en: 'Common mistakes with divisors, GCD and LCM', ar: 'الأخطاء الشائعة في القواسم وق.م.أ وم.م.أ' },
+        levels: [
+            { progressId: 2501, stage: 'primes', title: { eu: 'Zatitzaileak eta lehenak', es: 'Divisores y primos', en: 'Divisors and primes', ar: 'القواسم والأعداد الأولية' }, description: { eu: 'Zatitzaileak zenbatu eta faktorizatu.', es: 'Contar divisores y factorizar.', en: 'Counting divisors and factorising.', ar: 'عدّ القواسم والتحليل.' } },
+            { progressId: 2502, stage: 'gcd-lcm', title: { eu: 'ZKH eta MKT', es: 'm.c.d. y m.c.m.', en: 'GCD and LCM', ar: 'ق.م.أ وم.م.أ' }, description: { eu: 'Berretzaileak eta faktoreak.', es: 'Exponentes y factores.', en: 'Exponents and factors.', ar: 'الأسس والعوامل.' } },
+            { progressId: 2503, stage: 'problems', title: { eu: 'Buruketak', es: 'Problemas', en: 'Problems', ar: 'المسائل' }, description: { eu: 'ZKH ala MKT, eta zer galdetzen den.', es: '¿m.c.d. o m.c.m.?, y qué se pregunta.', en: 'GCD or LCM, and what is asked.', ar: 'ق.م.أ أم م.م.أ، وما المطلوب.' } }
+        ]
     }
 ]
 
 export const divisibilityGameProgressIds: number[] = levelProgressIds(divisibilityGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const divisibilityGameSlugs: Record<DivisibilityGameId, string> = { race: 'lasterketa', hunt: 'ehiza', factor: 'deskonposaketa', memory: 'memoria' }
+export const divisibilityGameSlugs: Record<DivisibilityGameId, string> = { race: 'lasterketa', hunt: 'ehiza', factor: 'deskonposaketa', memory: 'memoria', detective: 'detektibea' }
 
 export function divisibilityGameModeForPath(pathname: string): DivisibilityGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
@@ -70,5 +81,6 @@ export function divisibilityGameModeForPath(pathname: string): DivisibilityGameI
     if (['caza', 'ehiza'].includes(game)) return 'hunt'
     if (['descomposicion', 'deskonposaketa'].includes(game)) return 'factor'
     if (['memoria', 'memory'].includes(game)) return 'memory'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     return 'hub'
 }

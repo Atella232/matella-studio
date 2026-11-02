@@ -36,7 +36,7 @@ const zatigarritasunaUnit: UnitDefinition = {
         render: (props) => <DivisibilityLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Lau joko multiploekin, lehenekin, ZKH eta MKTrekin azkar aritzeko.', es: 'Cuatro juegos para ganar rapidez con múltiplos, primos, m.c.d. y m.c.m.', en: 'Four games to build speed with multiples, primes, GCD and LCM.', ar: 'أربع ألعاب لاكتساب السرعة مع المضاعفات والأعداد الأولية وق.م.أ وم.م.أ.' },
+        description: { eu: 'Bost joko multiploekin, lehenekin, ZKH eta MKTrekin azkar aritzeko, detektibea barne.', es: 'Cinco juegos para ganar rapidez con múltiplos, primos, m.c.d. y m.c.m., detective incluido.', en: 'Five games to build speed with multiples, primes, GCD and LCM, detective included.', ar: 'خمس ألعاب لاكتساب السرعة في المضاعفات والأعداد الأولية وق.م.أ وم.م.أ، منها المخبر.' },
         progressIds: divisibilityGameProgressIds,
         recordsKey: DIVISIBILITY_GAME_RECORDS_KEY,
         render: (props) => <DivisibilityGames {...props} />

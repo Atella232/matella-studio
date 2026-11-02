@@ -1,5 +1,6 @@
 import { GamesHub, type HubGame } from '../../../features/unit-v2/games/GamesHub'
 import type { UnitLanguage } from '../../../features/unit-v2/types'
+import { DivisibilityDetectiveGame } from './DetectiveGame'
 import { FactorGame } from './FactorGame'
 import { DivisibilityGameArt } from './GameArt'
 import { HuntGame } from './HuntGame'
@@ -8,7 +9,7 @@ import { DivisibilityMemoryGame } from './MemoryGame'
 import { DivisibilityRaceGame } from './RaceGame'
 import './DivisibilityGames.css'
 
-const components = { race: DivisibilityRaceGame, hunt: HuntGame, factor: FactorGame, memory: DivisibilityMemoryGame }
+const components = { race: DivisibilityRaceGame, hunt: HuntGame, factor: FactorGame, memory: DivisibilityMemoryGame, detective: DivisibilityDetectiveGame }
 
 const hubGames: HubGame<DivisibilityGameId>[] = divisibilityGames.map((info) => ({ info, art: <DivisibilityGameArt game={info.id} />, component: components[info.id] }))
 

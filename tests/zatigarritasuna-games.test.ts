@@ -8,6 +8,8 @@ import { divisibilityGameModeForPath, divisibilityGameProgressIds, divisibilityG
 import { checkDivisibilityPitAnswer, DIVISIBILITY_RACE_CIRCUITS, divisibilityRaceErrorTips, generateDivisibilityRaceQuestion } from '../src/pages/dbh2-zatigarritasuna/games/race.ts'
 import { createHuntRound, HUNT_CELLS, huntLevels, huntParTime, huntStars, targetsLeft } from '../src/pages/dbh2-zatigarritasuna/games/hunt.ts'
 import { createFactorNumbers, FACTOR_NUMBERS, factorLevels, factorPool } from '../src/pages/dbh2-zatigarritasuna/games/factor.ts'
+import { createDivisibilityDetectiveCases, divisibilityDetectiveLevels, divisibilityDetectiveNames, divisibilityDetectiveTips } from '../src/pages/dbh2-zatigarritasuna/games/detective.ts'
+import { checkTexts, renders } from './helpers/ownGamesCheck.ts'
 import { createDivisibilityMemoryBoard, divisibilityCardLatex, divisibilityCardValue, divisibilityMemoryLevels, evaluateDivisibilityFlip } from '../src/pages/dbh2-zatigarritasuna/games/memory.ts'
 
 test('basque suffixes after numbers', () => {
@@ -16,7 +18,7 @@ test('basque suffixes after numbers', () => {
 })
 
 test('divisibility games: levels, ids and routes', () => {
-    assert.equal(divisibilityGames.length, 4)
+    assert.equal(divisibilityGames.length, 5)
     assert.equal(divisibilityGames[0].levels.length, DIVISIBILITY_RACE_CIRCUITS)
     assert.equal(new Set(divisibilityGameProgressIds).size, divisibilityGameProgressIds.length)
     assert.equal(divisibilityGameModeForPath('/matematika/dbh2/divisibilidad/jokuak/ehiza'), 'hunt')
@@ -105,4 +107,34 @@ test('memory boards: every card shows its value, no two cards look the same', ()
     assert.ok(pairs.some((card) => pairs.some((other) => other !== card && other.terms.join() === card.terms.join())), 'the ZKH and MKT of one pair are both on the board')
     const partner = cards.findIndex((card, index) => index > 0 && card.setId === cards[0].setId)
     assert.equal(evaluateDivisibilityFlip(cards, [0, partner], 2), 'match')
+})
+
+/** The value at the end of a line: after the last «=» or «→», a whole number or a product of powers */
+function endValue(latex: string): number {
+    const last = latex.split('\\to\\ ').pop()!.split('=').pop()!.trim()
+    return last.split('\\cdot ').reduce((product, part) => {
+        const [base, exponent] = part.replace(/[{}]/g, '').split('^')
+        return product * Number(base) ** Number(exponent ?? 1)
+    }, 1)
+}
+
+test('zatigarritasuna 2. DBH detective: one wrong line, the fix ends on the right value', () => {
+    checkTexts([...Object.values(divisibilityDetectiveNames), ...Object.values(divisibilityDetectiveTips)])
+    for (let level = 0; level < 3; level += 1) {
+        const seen = new Set<string>()
+        for (let seed = 1; seed <= 100; seed += 1) {
+            for (const item of createDivisibilityDetectiveCases(createRandom(seed * 7919 + level), level)) {
+                seen.add(item.error)
+                assert.ok(divisibilityDetectiveLevels[level].includes(item.error))
+                assert.ok(item.options.includes(item.error) && new Set(item.options).size === 3)
+                assert.equal(item.lines.length, 3)
+                for (const line of item.lines) renders(line.latex)
+                renders(item.fix)
+                checkTexts([item.problem])
+                assert.ok(Math.abs(endValue(item.fix) - item.right) < 1e-9, `${item.error}: ${item.fix} ≠ ${item.right}`)
+                assert.ok(Math.abs(endValue(item.lines[2].latex) - item.reached) < 1e-9, `${item.error}: ${item.lines[2].latex} ≠ ${item.reached}`)
+            }
+        }
+        assert.equal(seen.size, 4)
+    }
 })

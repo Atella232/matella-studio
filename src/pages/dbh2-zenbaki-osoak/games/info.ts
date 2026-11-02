@@ -2,10 +2,11 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
 
 /* ==========================================================================
    Zenbaki osoak games: the list shown in the hub, with levels and the unit
-   progress id each level earns with its first star.
+   progress id each level earns with its first star. Three games belong to
+   this topic (the pyramid, the queue and the integers detective).
    ========================================================================== */
 
-export type IntegerGameId = 'race' | 'pyramid' | 'memory' | 'order'
+export type IntegerGameId = 'race' | 'pyramid' | 'memory' | 'order' | 'detective'
 
 export const INTEGER_GAME_RECORDS_KEY = 'matella-zenbaki-osoak-dbh2-game-records'
 
@@ -55,13 +56,24 @@ export const integerGames: GameInfo<IntegerGameId>[] = [
             { progressId: 2402, stage: 'ordering', title: { eu: 'Bi norabideak', es: 'En los dos sentidos', en: 'In both directions', ar: 'في الاتجاهين' }, description: { eu: 'Zortzi zenbaki, −30etik 30era; batzuetan handienetik hasita.', es: 'Ocho números de −30 a 30; a veces empezando por el mayor.', en: 'Eight numbers from −30 to 30; sometimes starting with the largest.', ar: 'ثمانية أعداد من ⁦−30⁩ إلى 30؛ أحيانًا نبدأ بالأكبر.' } },
             { progressId: 2403, stage: 'muldiv', title: { eu: 'Eragiketak ordenan', es: 'Operaciones en orden', en: 'Operations in order', ar: 'عمليات بالترتيب' }, description: { eu: 'Kalkulatu buruz eta ordenatu: |−6|, Aur(3), (−2)·(+3)…', es: 'Calcula de cabeza y ordena: |−6|, Op(3), (−2)·(+3)…', en: 'Work out in your head and order: |−6|, Op(3), (−2)·(+3)…', ar: 'احسب ذهنيًا ورتّب: ⁦|−6|⁩، معاكس 3، ⁦(−2)·(+3)⁩…' } }
         ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Zenbaki osoen detektibea', es: 'Detective de enteros', en: 'Integers detective', ar: 'مخبر الأعداد الصحيحة' },
+        tagline: { eu: 'Kalkulu bakoitzean lerro bat gaizki dago: aurkitu eta esan zer zeinu-akats den.', es: 'En cada cálculo hay una línea mal: encuéntrala y di qué error de signos es.', en: 'Each calculation has one wrong line: find it and say which sign mistake it is.', ar: 'في كل حساب سطر خاطئ: اكتشفه وقل ما خطأ الإشارة.' },
+        skills: { eu: 'Zeinu-akats tipikoak', es: 'Errores típicos de signos', en: 'Common sign mistakes', ar: 'أخطاء الإشارة الشائعة' },
+        levels: [
+            { progressId: 2501, stage: 'addsub', title: { eu: 'Batu eta kendu', es: 'Sumar y restar', en: 'Add and subtract', ar: 'الجمع والطرح' }, description: { eu: 'Balio absolutua, ordena eta zeinuak.', es: 'Valor absoluto, orden y signos.', en: 'Absolute value, order and signs.', ar: 'القيمة المطلقة والترتيب والإشارات.' } },
+            { progressId: 2502, stage: 'muldiv', title: { eu: 'Zeinuen araua', es: 'Regla de los signos', en: 'Rule of signs', ar: 'قاعدة الإشارات' }, description: { eu: 'Biderketak, zatiketak eta berreturak.', es: 'Productos, cocientes y potencias.', en: 'Products, quotients and powers.', ar: 'الجداءات وخوارج القسمة والقوى.' } },
+            { progressId: 2503, stage: 'muldiv', title: { eu: 'Hierarkia', es: 'Jerarquía', en: 'Order of operations', ar: 'أولوية العمليات' }, description: { eu: 'Eragiketa konbinatuak eta parentesiak.', es: 'Operaciones combinadas y paréntesis.', en: 'Combined operations and brackets.', ar: 'العمليات المركبة والأقواس.' } }
+        ]
     }
 ]
 
 export const integerGameProgressIds: number[] = levelProgressIds(integerGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const integerGameSlugs: Record<IntegerGameId, string> = { race: 'lasterketa', pyramid: 'piramidea', memory: 'memoria', order: 'ilara' }
+export const integerGameSlugs: Record<IntegerGameId, string> = { race: 'lasterketa', pyramid: 'piramidea', memory: 'memoria', order: 'ilara', detective: 'detektibea' }
 
 export function integerGameModeForPath(pathname: string): IntegerGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
@@ -70,5 +82,6 @@ export function integerGameModeForPath(pathname: string): IntegerGameId | 'hub' 
     if (['piramide', 'piramidea'].includes(game)) return 'pyramid'
     if (['memoria', 'memory'].includes(game)) return 'memory'
     if (['fila', 'ilara'].includes(game)) return 'order'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     return 'hub'
 }

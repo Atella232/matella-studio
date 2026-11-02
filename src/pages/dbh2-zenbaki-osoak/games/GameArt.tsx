@@ -51,6 +51,19 @@ export function IntegerGameArt({ game }: { game: IntegerGameId }) {
             </svg>
         )
     }
+    if (game === 'detective') {
+        return (
+            <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
+                <rect x="14" y="10" width="132" height="100" rx="8" fill="var(--card)" stroke="var(--ink)" strokeWidth="2" />
+                <text x="24" y="38" fontSize="13" fontWeight="700" fill="var(--ink)" direction="ltr">(−3) · (−4)</text>
+                <text x="24" y="64" fontSize="13" fontWeight="700" fill="var(--coral)" direction="ltr">= −12</text>
+                <line x1="22" y1="68" x2="72" y2="56" stroke="var(--coral)" strokeWidth="2.5" />
+                <text x="24" y="92" fontSize="13" fontWeight="700" fill="var(--ink)" direction="ltr">(−)·(−) = (+)</text>
+                <circle cx="168" cy="58" r="24" fill="var(--blue-tint, #dde7f7)" stroke="var(--ink)" strokeWidth="3" />
+                <line x1="185" y1="75" x2="206" y2="98" stroke="var(--ink)" strokeWidth="6" strokeLinecap="round" />
+            </svg>
+        )
+    }
     return (
         <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
             {(['−7', '−2', '0', '+3', '+8'] as const).map((label, index) => (

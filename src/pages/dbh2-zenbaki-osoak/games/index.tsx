@@ -1,5 +1,6 @@
 import { GamesHub, type HubGame } from '../../../features/unit-v2/games/GamesHub'
 import type { UnitLanguage } from '../../../features/unit-v2/types'
+import { IntegerDetectiveGame } from './DetectiveGame'
 import { IntegerGameArt } from './GameArt'
 import { INTEGER_GAME_RECORDS_KEY, integerGameModeForPath, integerGameSlugs, integerGames, type IntegerGameId } from './info'
 import { IntegerMemoryGame } from './MemoryGame'
@@ -8,7 +9,7 @@ import { PyramidGame } from './PyramidGame'
 import { IntegerRaceGame } from './RaceGame'
 import './IntegerGames.css'
 
-const components = { race: IntegerRaceGame, pyramid: PyramidGame, memory: IntegerMemoryGame, order: OrderGame }
+const components = { race: IntegerRaceGame, pyramid: PyramidGame, memory: IntegerMemoryGame, order: OrderGame, detective: IntegerDetectiveGame }
 
 const hubGames: HubGame<IntegerGameId>[] = integerGames.map((info) => ({ info, art: <IntegerGameArt game={info.id} />, component: components[info.id] }))
 

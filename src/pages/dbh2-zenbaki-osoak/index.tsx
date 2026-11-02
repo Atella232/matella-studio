@@ -36,7 +36,7 @@ const zenbakiOsoakUnit: UnitDefinition = {
         render: (props) => <IntegerLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Lau joko zeinuekin azkar eta zehatz aritzeko.', es: 'Cuatro juegos para ganar rapidez y precisión con los signos.', en: 'Four games to build speed and accuracy with signs.', ar: 'أربع ألعاب لاكتساب السرعة والدقة مع الإشارات.' },
+        description: { eu: 'Bost joko zeinuekin azkar eta zehatz aritzeko, detektibea barne.', es: 'Cinco juegos para ganar rapidez y precisión con los signos, detective incluido.', en: 'Five games to build speed and accuracy with signs, detective included.', ar: 'خمس ألعاب لاكتساب السرعة والدقة مع الإشارات، منها المخبر.' },
         progressIds: integerGameProgressIds,
         recordsKey: INTEGER_GAME_RECORDS_KEY,
         render: (props) => <IntegerGames {...props} />

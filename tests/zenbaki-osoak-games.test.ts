@@ -13,9 +13,11 @@ import {
 import { buildPyramid, createPyramid, isSolvable, pyramidLevels, PYRAMIDS_PER_LEVEL, pyramidStars, wrongCells } from '../src/pages/dbh2-zenbaki-osoak/games/pyramid.ts'
 import { cardValue, createIntegerMemoryBoard, evaluateIntegerFlip, integerCardLatex, integerMemoryLevels } from '../src/pages/dbh2-zenbaki-osoak/games/memory.ts'
 import { createOrderRound, nextExpected, orderLevels, ORDER_ROUNDS, orderParTime, orderStars } from '../src/pages/dbh2-zenbaki-osoak/games/order.ts'
+import { createIntegerDetectiveCases, integerDetectiveLevels, integerDetectiveNames, integerDetectiveTips } from '../src/pages/dbh2-zenbaki-osoak/games/detective.ts'
+import { checkTexts, checkWorkedCases } from './helpers/ownGamesCheck.ts'
 
 test('integer games: levels, progress ids and routes', () => {
-    assert.equal(integerGames.length, 4)
+    assert.equal(integerGames.length, 5)
     assert.equal(integerGames.find((game) => game.id === 'race')!.levels.length, INTEGER_RACE_CIRCUITS)
     assert.equal(integerGames.find((game) => game.id === 'pyramid')!.levels.length, pyramidLevels.length)
     assert.equal(integerGames.find((game) => game.id === 'memory')!.levels.length, integerMemoryLevels.length)
@@ -139,4 +141,22 @@ test('order: distinct values, the next card to tap and stars', () => {
     assert.equal(orderStars(0, orderParTime(0) * 0.7, 0), 3)
     assert.equal(orderStars(0, orderParTime(0) * 0.9, 0), 2)
     assert.equal(orderStars(0, orderParTime(0) * 2, 0), 1)
+})
+
+test('zenbaki osoak 2. DBH detective: one wrong line, the fix ends on the right value', () => {
+    checkTexts([...Object.values(integerDetectiveNames), ...Object.values(integerDetectiveTips)])
+    for (let level = 0; level < 3; level += 1) {
+        const seen = new Set<string>()
+        const lines = new Set<number>()
+        for (let seed = 1; seed <= 100; seed += 1) {
+            const cases = createIntegerDetectiveCases(createRandom(seed * 7919 + level), level)
+            for (const item of cases) {
+                seen.add(item.error)
+                lines.add(item.wrong)
+            }
+            checkWorkedCases(cases, integerDetectiveLevels[level])
+        }
+        assert.equal(seen.size, 4)
+        assert.ok(lines.size >= 2, 'the wrong line is not always the same one')
+    }
 })
