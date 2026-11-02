@@ -46,7 +46,7 @@ function DecisionTree({ right, chosen, language }: { right: Model; chosen: { ord
     const weight = (edge: Edge) => (pathOf(rightLeaf).includes(edge) || pathOf(chosenLeaf).includes(edge) ? 4 : 2)
     const edge = (leaf: keyof typeof leaves) => (leaf === rightLeaf ? GREEN : leaf === chosenLeaf ? RED : 'var(--line, #d6cfc2)')
     return (
-        <svg className="dbh4-scene" viewBox="0 0 330 206" aria-hidden="true">
+        <svg className="dbh4-scene" viewBox="0 0 330 206" direction="ltr" aria-hidden="true">
             <line x1="165" y1="34" x2="114" y2="96" stroke={stroke('order-yes')} strokeWidth={weight('order-yes')} />
             <line x1="165" y1="34" x2="272" y2="104" stroke={stroke('order-no')} strokeWidth={weight('order-no')} />
             <line x1="114" y1="112" x2="60" y2="168" stroke={stroke('repeat-yes')} strokeWidth={weight('repeat-yes')} />

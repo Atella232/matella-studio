@@ -115,3 +115,10 @@ The academic reals unit had only one own mechanic (build the interval) besides i
 ## Inventory
 
 `inventario-unidad.mjs` (matella-nueva-unidad skill) counted the games imported from `dbh4-games` as borrowed; that folder now counts as own (`SHARED_OWN`). With it every 4. DBH unit shows at least 2 own mechanics, plus a detective that the script lists apart as a pattern.
+
+## Commits (branch chain ending at `feat/dbh4-geometry-games`, on top of main e5f8aa2; not deployed yet)
+
+- Reals: ae25443 (chained percentages for ak: 45f5866). Polynomials: b3da4e5. Equations: 46a0eb4, test fix 73f2117. Functions: 52c4620. Graphs: f2eedef. Systems: 85a1c2e.
+- Geometry: 0208053. Statistics: 0d8495f. Powers: 8165ad6. Trigonometry: fce5c93. Vectors: 230fe78. Combinatorics: f1bc153. Probability: 27423c1.
+- Checks on 2026-11-02: 1195 tests, lint and build green; every new game swept at 375 px in eu, es and ar (levels 1 and 3, before and after answering).
+
