@@ -26,4 +26,7 @@ Rules kept from 4. DBH: predict first and draw after answering; steppers never s
 - Progress ids: a script imported each unit's lab challenge ids, game ids and every `id`/`progressId` in `content.ts`: no clashes in any unit.
 - The level-2 sweep (all 24 games, es/eu/ar) is clean too.
 - The decimals hub art (podium and detective) writes decimals with the language's mark: the hub now builds its cards inside the component with `language`.
-- Not published yet: ask the owner first.
+
+## Deploy
+
+Published on 2026-11-02 after the owner's «Sí, publica»: `feat/dbh1-own-games` fast-forwarded onto main (d3b6601), pushed, deployed from a clean worktree of main (promo/ and the video skill were uncommitted work of another session). Bundle `index-BvfidIBL.js`, live after 61 s. Live check on matella.net at 375 px in es, eu and ar: the hub of each unit and the 24 new games at level 1, before and after answering: no overflow, no console errors.
