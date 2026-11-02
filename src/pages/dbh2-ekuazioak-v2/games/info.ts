@@ -2,10 +2,12 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
 
 /* ==========================================================================
    Ekuazioak (2. DBH) games: the list shown in the hub, with levels and the
-   unit progress id each level earns with its first star.
+   unit progress id each level earns with its first star. Three games
+   belong to this topic (solve quickly, pose the equation and the equations
+   detective); the race and the memory are shared engines.
    ========================================================================== */
 
-export type EquationsGameId = 'race' | 'solve' | 'memory'
+export type EquationsGameId = 'race' | 'solve' | 'pose' | 'detective' | 'memory'
 
 export const EQUATIONS_GAME_RECORDS_KEY = 'matella-ekuazioak-dbh2-game-records'
 
@@ -35,6 +37,28 @@ export const equationsGames: GameInfo<EquationsGameId>[] = [
         ]
     },
     {
+        id: 'pose',
+        title: { eu: 'Planteatu ekuazioa', es: 'Plantea la ecuación', en: 'Set up the equation', ar: 'اكتب المعادلة' },
+        tagline: { eu: 'Buruketa bat eta lau ekuazio: zein dio buruketak dioena?', es: 'Un problema y cuatro ecuaciones: ¿cuál dice lo que dice el problema?', en: 'A problem and four equations: which one says what the problem says?', ar: 'مسألة وأربع معادلات: أيها تقول ما تقوله المسألة؟' },
+        skills: { eu: 'Buruketak hizkuntza aljebraikora itzultzea', es: 'Traducir problemas al lenguaje algebraico', en: 'Translating problems into algebra', ar: 'ترجمة المسائل إلى لغة الجبر' },
+        levels: [
+            { progressId: 29401, stage: 'problems', title: { eu: 'Zenbakiak', es: 'Números', en: 'Numbers', ar: 'الأعداد' }, description: { eu: 'Bikoitza, ondoz ondokoak, erdia eta herena.', es: 'El doble, consecutivos, la mitad y la tercera parte.', en: 'Double, consecutive numbers, a half and a third.', ar: 'الضعف والمتتالية والنصف والثلث.' } },
+            { progressId: 29402, stage: 'problems', title: { eu: 'Adinak eta dirua', es: 'Edades y dinero', en: 'Ages and money', ar: 'الأعمار والمال' }, description: { eu: 'Orain eta urte batzuk barru; erosketak eta banaketak.', es: 'Ahora y dentro de unos años; compras y repartos.', en: 'Now and in a few years; shopping and sharing.', ar: 'الآن وبعد سنوات؛ المشتريات والتوزيع.' } },
+            { progressId: 29403, stage: 'problems', title: { eu: 'Geometria', es: 'Geometría', en: 'Geometry', ar: 'الهندسة' }, description: { eu: 'Perimetroak eta triangelu baten angeluak.', es: 'Perímetros y ángulos de un triángulo.', en: 'Perimeters and the angles of a triangle.', ar: 'المحيطات وزوايا المثلث.' } }
+        ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Ekuazioen detektibea', es: 'Detective de ecuaciones', en: 'Equations detective', ar: 'مخبر المعادلات' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: اكتشفه وقل ما نوع الخطأ.' },
+        skills: { eu: 'Ekuazioak ebaztean egiten diren akats tipikoak', es: 'Errores típicos al resolver ecuaciones', en: 'Common mistakes when solving equations', ar: 'الأخطاء الشائعة في حل المعادلات' },
+        levels: [
+            { progressId: 29501, stage: 'first-degree', title: { eu: 'Lehen maila', es: 'Primer grado', en: 'First degree', ar: 'الدرجة الأولى' }, description: { eu: 'Gaiak lekuz aldatu eta x askatu.', es: 'Transponer y despejar.', en: 'Moving terms and solving for x.', ar: 'نقل الحدود وعزل x.' } },
+            { progressId: 29502, stage: 'denominators', title: { eu: 'Izendatzaileak', es: 'Denominadores', en: 'Denominators', ar: 'المقامات' }, description: { eu: 'MKT, minusak eta gurutzean biderkatzea.', es: 'El m.c.m., los menos y multiplicar en cruz.', en: 'The LCM, minus signs and cross-multiplying.', ar: 'المضاعف المشترك والنواقص والضرب التبادلي.' } },
+            { progressId: 29503, stage: 'quadratic', title: { eu: 'Bigarren maila', es: 'Segundo grado', en: 'Second degree', ar: 'الدرجة الثانية' }, description: { eu: 'Bi soluzio, faktorizazioa eta formula.', es: 'Dos soluciones, factorizar y la fórmula.', en: 'Two solutions, factorising and the formula.', ar: 'حلان والتحليل والقانون العام.' } }
+        ]
+    },
+    {
         id: 'memory',
         title: { eu: 'Memoria', es: 'Memoria', en: 'Memory', ar: 'الذاكرة' },
         tagline: { eu: 'Aurkitu bikoteak: ekuazio bat eta bere ebazpena.', es: 'Encuentra las parejas: una ecuación y su solución.', en: 'Find the pairs: an equation and its solution.', ar: 'جد الأزواج: معادلة وحلها.' },
@@ -50,13 +74,15 @@ export const equationsGames: GameInfo<EquationsGameId>[] = [
 export const equationsGameProgressIds: number[] = levelProgressIds(equationsGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const equationsGameSlugs: Record<EquationsGameId, string> = { race: 'lasterketa', solve: 'ebatzi', memory: 'memoria' }
+export const equationsGameSlugs: Record<EquationsGameId, string> = { race: 'lasterketa', solve: 'ebatzi', pose: 'planteatu', detective: 'detektibea', memory: 'memoria' }
 
 export function equationsGameModeForPath(pathname: string): EquationsGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
     if (!game) return 'hub'
     if (['carrera', 'lasterketa'].includes(game)) return 'race'
     if (['resolver', 'ebatzi'].includes(game)) return 'solve'
+    if (['planteatu', 'plantea'].includes(game)) return 'pose'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     if (['memoria', 'memory'].includes(game)) return 'memory'
     return 'hub'
 }

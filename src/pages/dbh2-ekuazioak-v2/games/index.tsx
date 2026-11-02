@@ -3,6 +3,7 @@ import { GamesHub, type GameProps, type HubGame } from '../../../features/unit-v
 import { PairsMemoryGame } from '../../../features/unit-v2/games/PairsMemoryGame'
 import type { UnitLanguage } from '../../../features/unit-v2/types'
 import { createEquationsMemoryBoard, EQUATIONS_MEMORY_PAIRS } from './boards'
+import { EquationDetectiveGame, PoseGame } from './EquationOwnGames'
 import { EquationsGameArt } from './GameArt'
 import { EQUATIONS_GAME_RECORDS_KEY, equationsGameModeForPath, equationsGames, equationsGameSlugs, type EquationsGameId } from './info'
 import { EquationsRaceGame } from './RaceGame'
@@ -14,6 +15,8 @@ const memoryGame = equationsGames.find((game) => game.id === 'memory')!
 const components: Record<EquationsGameId, (props: GameProps) => JSX.Element> = {
     race: EquationsRaceGame,
     solve: SolveGame,
+    pose: PoseGame,
+    detective: EquationDetectiveGame,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <EquationsGameArt game="memory" />, pairs: EQUATIONS_MEMORY_PAIRS, createBoard: createEquationsMemoryBoard }} />
 }
 

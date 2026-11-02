@@ -35,7 +35,7 @@ const ekuazioakUnit: UnitDefinition = {
         render: (props) => <EquationsLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Hiru joko: lasterketa, ebatzi azkar eta memoria.', es: 'Tres juegos: carrera, resuelve rápido y memoria.', en: 'Three games: race, solve quickly and memory.', ar: 'ثلاث ألعاب: السباق والحل السريع والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, ebatzi azkar, planteatu ekuazioa, ekuazioen detektibea eta memoria.', es: 'Cinco juegos: carrera, resuelve rápido, plantea la ecuación, detective de ecuaciones y memoria.', en: 'Five games: race, solve quickly, set up the equation, equations detective and memory.', ar: 'خمس ألعاب: السباق والحل السريع واكتب المعادلة ومخبر المعادلات والذاكرة.' },
         progressIds: equationsGameProgressIds,
         recordsKey: EQUATIONS_GAME_RECORDS_KEY,
         render: (props) => <EquationsGames {...props} />

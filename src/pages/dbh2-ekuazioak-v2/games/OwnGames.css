@@ -1,0 +1,9 @@
+/* ---------- Ekuazioak (2. DBH) games: the layout comes from Proportzionaltasuna 3. DBH (prop3-*) ---------- */
+
+.fraction-v2-games-card[data-game="pose"] { --game-tint: var(--coral-tint, #f6d5cc); }
+.fraction-v2-games-card[data-game="detective"] { --game-tint: var(--paper-deep, #ece6da); }
+
+/* Pose the equation */
+.eq2-problem { font-weight: 600; text-align: start; }
+.eq2-equations { grid-template-columns: 1fr; }
+.eq2-equations button { font-size: 19px; }

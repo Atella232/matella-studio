@@ -6,10 +6,13 @@ import { equationsGameModeForPath, equationsGameProgressIds, equationsGames } fr
 import { checkEquationsPitAnswer, EQUATIONS_RACE_CIRCUITS, equationsRaceErrorTips, generateEquationsRaceQuestion } from '../src/pages/dbh2-ekuazioak-v2/games/race.ts'
 import { createEquationsMemoryBoard, createSolveRound, EQUATIONS_MEMORY_PAIRS, equationsMemoryLevels, SOLVES_PER_ROUND, solveLevels, solveStars } from '../src/pages/dbh2-ekuazioak-v2/games/boards.ts'
 import { equationsLabChallengeIds } from '../src/pages/dbh2-ekuazioak-v2/lab/labTools.ts'
+import { createEquationDetectiveCases, equationDetectiveLevels, equationDetectiveNames, equationDetectiveTips, solutionsValue } from '../src/pages/dbh2-ekuazioak-v2/games/detective.ts'
+import { createPoseRounds, POSE_ROUNDS, POSE_TEMPLATES } from '../src/pages/dbh2-ekuazioak-v2/games/pose.ts'
+import { checkTexts, renders } from './helpers/ownGamesCheck.ts'
 
 /** Evaluates one side of an equation in LaTeX at x: fractions, powers, brackets, implicit products */
 function side(latex: string, x: number): number {
-    let js = latex.replace(/\s+/g, '').replace(/x/g, 'X')
+    let js = latex.replace(/\\cdot/g, '*').replace(/\s+/g, '').replace(/x/g, 'X')
     for (let pass = 0; pass < 3; pass += 1) {
         js = js
             .replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g, '(($1)/($2))')
@@ -26,7 +29,7 @@ const holds = (equation: string, x: number) => {
 }
 
 test('ekuazioak 2. DBH games: levels, ids and routes', () => {
-    assert.equal(equationsGames.length, 3)
+    assert.equal(equationsGames.length, 5)
     assert.equal(equationsGames[0].levels.length, EQUATIONS_RACE_CIRCUITS)
     assert.equal(equationsGames.find((game) => game.id === 'solve')!.levels.length, solveLevels.length)
     assert.equal(equationsGames.find((game) => game.id === 'memory')!.levels.length, equationsMemoryLevels.length)
@@ -80,5 +83,65 @@ test('ekuazioak 2. DBH quick solving and memory', () => {
                 for (const x of values) assert.ok(holds(card.latex, x), `${card.latex} at ${x}`)
             }
         }
+    }
+})
+
+/* ---------- The games of this topic ---------- */
+
+test('ekuazioak 2. DBH pose: the right equation holds for the answer, the wrong ones do not', () => {
+    for (let level = 0; level < 3; level += 1) {
+        const seen = new Set<string>()
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createPoseRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, POSE_ROUNDS)
+            for (const round of rounds) {
+                seen.add(round.text.es.slice(0, 18))
+                assert.equal(round.options.length, 4)
+                assert.equal(new Set(round.options).size, 4)
+                assert.ok(Number.isInteger(round.x) && round.x > 0, `${round.x}`)
+                round.options.forEach((option, index) => {
+                    renders(option)
+                    assert.equal(holds(option, round.x), index === round.right, `${round.text.es}: ${option}`)
+                })
+                // The check is a chain of true equalities
+                const parts = round.check.split('=')
+                for (let index = 1; index < parts.length; index += 1) assert.ok(Math.abs(side(parts[index - 1], 0) - side(parts[index], 0)) < 1e-9, round.check)
+                checkTexts([round.text, round.answer])
+            }
+        }
+        assert.ok(seen.size >= POSE_TEMPLATES[level].length, `${seen.size}`)
+    }
+})
+
+/** The value of the last line of a solution: x = 4, or x₁ = 3, x₂ = −3 */
+function lineValue(latex: string): number {
+    const last = latex.split('\\to\\ ').pop()!
+    const values = last.split(',\\ ').map((part) => side(part.split('=').pop()!, 0))
+    assert.ok(values.length > 0, latex)
+    return solutionsValue(values)
+}
+
+test('ekuazioak 2. DBH detective: one wrong line, the fix ends on the right solutions', () => {
+    checkTexts([...Object.values(equationDetectiveNames), ...Object.values(equationDetectiveTips)])
+    for (let level = 0; level < 3; level += 1) {
+        const seen = new Set<string>()
+        for (let seed = 1; seed <= 100; seed += 1) {
+            for (const item of createEquationDetectiveCases(createRandom(seed * 7919 + level), level)) {
+                seen.add(item.error)
+                assert.ok(equationDetectiveLevels[level].includes(item.error))
+                assert.ok(item.options.includes(item.error) && new Set(item.options).size === 3)
+                assert.equal(item.lines.length, 3)
+                for (const line of item.lines) renders(line.latex)
+                renders(item.fix)
+                checkTexts([item.problem])
+                assert.ok(Math.abs(lineValue(item.fix) - item.right) < 1e-9, `${item.error}: ${item.fix} ≠ ${item.right}`)
+                assert.ok(Math.abs(lineValue(item.lines[2].latex) - item.reached) < 1e-9, `${item.error}: ${item.lines[2].latex} ≠ ${item.reached}`)
+                // The right solutions solve the problem's equation
+                const equation = item.problem.es.match(/\$([^$]+)\$/)![1]
+                const solutions = item.fix.split('\\to\\ ').pop()!.split(',\\ ').map((part) => side(part.split('=').pop()!, 0))
+                for (const solution of solutions) assert.ok(holds(equation, solution), `${item.error}: ${equation} at ${solution}`)
+            }
+        }
+        assert.equal(seen.size, 4)
     }
 })

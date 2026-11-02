@@ -10,3 +10,11 @@ Sources: `LIBROS/2_ESO/Santillana/Unidad_06_Ecuaciones.pdf` (solutions manual) a
 Phases: ALL DONE — 1) 14 lessons [03c421e]; legacy dbh2-ekuazioak, dbh2-ekuazioak-prototype (route redirects) and src/styles/legacy-unit deleted; 2) content 8/20/12/30 [49d6e25]; 3) lab 5 tools ids 281xx–285xx [6ca124a]; 4) games race/solve/memory ids 291xx–293xx [063004c]. Merged to main (fast-forward 063004c), pushed and deployed 2026-09-30. Deployed from a clean git worktree of main because the working tree held another session's uncommitted Funciones DBH2 work (src/pages/dbh2-funtzioak-v2 + router/paths/courses edits) — never commit or deploy that without its owner.
 
 **Why:** resume after interruptions. **How to apply:** same 4-phase pattern as [[aljebra-dbh2]].
+
+## Own games (2026-11-02)
+
+Branch `feat/ekuazioak-dbh2-games` (stacked on `feat/aljebra-dbh2-games`). Two more games of this topic, besides solve quickly:
+- `pose` (`games/pose.ts`), 29401–29403: set up the equation. A problem and four equations, the wrong ones are the usual misreadings (brackets of «the double of the sum», x + 2x + 3x for consecutive numbers, half the perimeter, 90° or 360° in a triangle, area instead of perimeter...). 13 templates in three levels (numbers; ages and money; geometry); every answer a whole number. Templates reject the parameters where a wrong equation happens to hold too (x = a, a square of side 4, area = perimeter).
+- `detective` (`games/detective.ts`), 29501–29503: 12 typical errors (first degree, denominators, second degree). Lines with two solutions are written `x_{1}=…,\ x_{2}=…`; `solutionsValue` turns a list into one number for right/reached.
+
+Trick: in Arabic text, a number with ° must be isolated (`⁦…°⁩`), or the sign jumps to the other side.

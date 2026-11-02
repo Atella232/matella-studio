@@ -14,6 +14,31 @@ export function EquationsGameArt({ game }: { game: EquationsGameId }) {
             </svg>
         )
     }
+    if (game === 'pose') {
+        return (
+            <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
+                <rect x="10" y="10" width="200" height="40" rx="8" fill="var(--card)" stroke="var(--ink)" strokeWidth="2" />
+                <text x="110" y="35" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--ink)">x, x+1, x+2 → 48</text>
+                <rect x="10" y="62" width="96" height="44" rx="8" fill="var(--success-tint, #d9efe2)" stroke="var(--ink)" strokeWidth="2" />
+                <text x="58" y="89" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--ink)">3x+3=48</text>
+                <rect x="114" y="62" width="96" height="44" rx="8" fill="var(--coral-tint, #f6d5cc)" stroke="var(--ink)" strokeWidth="2" />
+                <text x="162" y="89" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--ink)">6x=48</text>
+            </svg>
+        )
+    }
+    if (game === 'detective') {
+        return (
+            <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
+                <rect x="14" y="10" width="132" height="100" rx="8" fill="var(--card)" stroke="var(--ink)" strokeWidth="2" />
+                <text x="26" y="38" fontSize="13" fontWeight="700" fill="var(--ink)">x + 5 = 12</text>
+                <text x="26" y="64" fontSize="13" fontWeight="700" fill="var(--coral)">x = 12 + 5</text>
+                <line x1="24" y1="68" x2="100" y2="58" stroke="var(--coral)" strokeWidth="2.5" />
+                <text x="26" y="92" fontSize="13" fontWeight="700" fill="var(--ink)">x = 17</text>
+                <circle cx="168" cy="58" r="24" fill="var(--blue-tint, #dde7f7)" stroke="var(--ink)" strokeWidth="3" />
+                <line x1="185" y1="75" x2="206" y2="98" stroke="var(--ink)" strokeWidth="6" strokeLinecap="round" />
+            </svg>
+        )
+    }
     if (game === 'solve') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
