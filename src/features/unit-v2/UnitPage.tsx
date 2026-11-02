@@ -6,8 +6,9 @@ import { DiagnosticQuiz } from './Diagnostic'
 import { Icon } from './icons'
 import { FitMath, LessonCases, LessonFigure, LessonMistakeBox, LessonSteps } from './LessonExtras'
 import { LessonNeeds } from './LessonNeeds'
+import { UnitSummary } from './UnitSummary'
 import { PracticeArea, PracticeDeck } from './Practice'
-import { parseUnitPath, unitBasePath, unitPathFor, type PracticeMode } from './routing'
+import { isSummaryDetail, parseUnitPath, summarySlugs, summaryTitle, unitBasePath, unitPathFor, type PracticeMode } from './routing'
 import { useStoredIds, useStoredTopics } from './storage'
 import {
     availableSections,
@@ -70,7 +71,8 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
     /** Every move inside the unit changes the address, so reload, Back and shared links keep the place */
     const navigate = (next: UnitSection, detail?: string, practiceMode?: PracticeMode) => {
         const nextDetail = detail ?? (next === 'learn' ? topicId : undefined)
-        if (next === 'learn' && nextDetail) setLastTopicId(nextDetail)
+        // Only a lesson is remembered: back in Learn, the summary gives way to the last lesson
+        if (next === 'learn' && nextDetail && unit.topics.some((topic) => topic.id === nextDetail)) setLastTopicId(nextDetail)
         goTo(unitPathFor(basePath, next, nextDetail, practiceMode))
         scrollToTop()
     }
@@ -392,6 +394,9 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
         const figureAfterSteps = Boolean(currentTopic.figureAfterSteps && currentTopic.steps)
         const labToolId = unit.lab?.toolForTopic[currentTopic.id]
         const selectTopic = (id: string) => navigate('learn', id)
+        // teoria/laburpena: the whole unit on one page instead of a lesson
+        const showSummary = isSummaryDetail(place.detail)
+        const lastTone = unit.stages[unit.stages.length - 1].tone
 
         return (
             <section className="fraction-v2-learning">
@@ -402,22 +407,33 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                             {unit.topics.map((topic, index) => topic.stage !== stage.id ? null : (
                                 <button
                                     type="button"
-                                    className={`${topic.id === currentTopic.id ? 'active' : ''} ${learned.ids.includes(topic.id) ? 'done' : ''}`}
-                                    aria-current={topic.id === currentTopic.id ? 'step' : undefined}
+                                    className={`${!showSummary && topic.id === currentTopic.id ? 'active' : ''} ${learned.ids.includes(topic.id) ? 'done' : ''}`}
+                                    aria-current={!showSummary && topic.id === currentTopic.id ? 'step' : undefined}
                                     onClick={() => selectTopic(topic.id)}
                                     key={topic.id}
                                 >
-                                    <span className="fraction-v2-lesson-number">{learned.ids.includes(topic.id) && topic.id !== currentTopic.id ? <Icon name="check" size={14} strokeWidth={3.2} /> : index + 1}</span>
+                                    <span className="fraction-v2-lesson-number">{learned.ids.includes(topic.id) && (showSummary || topic.id !== currentTopic.id) ? <Icon name="check" size={14} strokeWidth={3.2} /> : index + 1}</span>
                                     {l(topic.title)}
                                 </button>
                             ))}
                         </div>
                     ))}
+                    <div className="fraction-v2-lesson-group" data-tone={lastTone}>
+                        <button
+                            type="button"
+                            className={showSummary ? 'active' : ''}
+                            aria-current={showSummary ? 'step' : undefined}
+                            onClick={() => selectTopic(summarySlugs[0])}
+                        >
+                            <span className="fraction-v2-lesson-number"><Icon name="learn" size={14} strokeWidth={2.6} /></span>
+                            {l(summaryTitle)}
+                        </button>
+                    </div>
                 </nav>
 
-                <label className="fraction-v2-lesson-jump" data-stage={currentTopic.stage} data-tone={currentTone}>
+                <label className="fraction-v2-lesson-jump" data-stage={showSummary ? undefined : currentTopic.stage} data-tone={showSummary ? lastTone : currentTone}>
                     <span>{l({ eu: 'Joan ikasgaira', es: 'Ir a la lección', en: 'Go to lesson', ar: 'انتقل إلى الدرس' })}</span>
-                    <select value={currentTopic.id} onChange={(event) => selectTopic(event.target.value)}>
+                    <select value={showSummary ? summarySlugs[0] : currentTopic.id} onChange={(event) => selectTopic(event.target.value)}>
                         {unit.stages.map((stage, stageIndex) => (
                             <optgroup label={`${stageIndex + 1} · ${l(stage.title)}`} key={stage.id}>
                                 {unit.topics.filter((topic) => topic.stage === stage.id).map((topic) => (
@@ -427,9 +443,13 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                                 ))}
                             </optgroup>
                         ))}
+                        <option value={summarySlugs[0]}>{l(summaryTitle)}</option>
                     </select>
                 </label>
 
+                {showSummary ? (
+                    <UnitSummary unit={unit} language={language} learnedIds={learned.ids} onOpenTopic={selectTopic} />
+                ) : (
                 <article className="fraction-v2-lesson" data-stage={currentTopic.stage} data-tone={currentTone} aria-labelledby="fraction-v2-lesson-title">
                     <div className="fraction-v2-lesson-meta">
                         <span className="fraction-v2-chip" data-stage={currentTopic.stage} data-tone={currentTone}>{l({ eu: `${currentStageIndex + 1}. etapa`, es: `Etapa ${currentStageIndex + 1}`, en: `Stage ${currentStageIndex + 1}`, ar: `المرحلة ${currentStageIndex + 1}` })} · {l(unit.stages[currentStageIndex].title)}</span>
@@ -486,14 +506,20 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                                 {l({ eu: 'Esperimentatu laborategian', es: 'Experimentar en el laboratorio', en: 'Experiment in the lab', ar: 'جرّب في المختبر' })}
                             </button>
                         )}
-                        {nextTopic && (
+                        {nextTopic ? (
                             <button type="button" className="fraction-v2-next" data-stage={nextTopic.stage} data-tone={stageOf(nextTopic.stage).tone} onClick={() => selectTopic(nextTopic.id)}>
                                 <span>{l({ eu: 'Hurrengoa:', es: 'Siguiente:', en: 'Next:', ar: 'التالي:' })} {l(nextTopic.title)}</span>
+                                <Icon name="arrow" size={18} strokeWidth={2.4} className="fraction-v2-icon-flip" />
+                            </button>
+                        ) : (
+                            <button type="button" className="fraction-v2-next" data-tone={lastTone} onClick={() => selectTopic(summarySlugs[0])}>
+                                <span>{l({ eu: 'Hurrengoa:', es: 'Siguiente:', en: 'Next:', ar: 'التالي:' })} {l(summaryTitle)}</span>
                                 <Icon name="arrow" size={18} strokeWidth={2.4} className="fraction-v2-icon-flip" />
                             </button>
                         )}
                     </div>
                 </article>
+                )}
             </section>
         )
     }

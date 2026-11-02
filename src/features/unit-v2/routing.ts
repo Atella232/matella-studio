@@ -1,4 +1,4 @@
-import type { UnitSection } from './types.ts'
+import type { LocalizedText, UnitSection } from './types.ts'
 import { unitV2Paths } from './paths.ts'
 
 export type PracticeMode = 'guided' | 'bank'
@@ -21,6 +21,15 @@ const slugs: Array<{ section: UnitSection; mode?: PracticeMode; names: string[] 
     { section: 'challenges', names: ['erronkak', 'retos', 'misioa'] },
     { section: 'play', names: ['jokuak', 'juegos'] }
 ]
+
+/** Lesson slot of the unit summary (teoria/laburpena); the first one is canonical, «resumen» also opens it */
+export const summarySlugs = ['laburpena', 'resumen']
+
+export function isSummaryDetail(detail?: string): boolean {
+    return summarySlugs.includes(detail ?? '')
+}
+
+export const summaryTitle: LocalizedText = { eu: 'Unitatearen laburpena', es: 'Resumen de la unidad', en: 'Unit summary', ar: 'ملخّص الوحدة' }
 
 /** Root of the unit that contains the address (the address itself if no unit matches) */
 export function unitBasePath(pathname: string): string {

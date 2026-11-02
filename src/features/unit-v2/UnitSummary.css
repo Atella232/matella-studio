@@ -1,0 +1,202 @@
+/* The unit summary: every key idea of the unit on one page, to revise on screen or on paper */
+
+.unit-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding: 44px 52px;
+    border: 2px solid var(--ink);
+    border-radius: 24px;
+    background: var(--card);
+    box-shadow: var(--shadow-lg);
+}
+
+.unit-summary-head {
+    display: grid;
+    gap: 8px;
+    justify-items: start;
+}
+
+.unit-summary-unit {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.unit-summary-head h1 {
+    margin: 0;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+}
+
+.fraction-v2 .unit-summary-head p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+.unit-summary-print {
+    margin-top: 6px;
+}
+
+.unit-summary-stage {
+    display: grid;
+    gap: 12px;
+    padding-inline-start: 16px;
+    border-inline-start: 5px solid var(--stage);
+}
+
+.unit-summary-stage h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    color: var(--stage-ink);
+    font-size: 22px;
+    line-height: 1.2;
+}
+
+.unit-summary-stage-badge {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    color: var(--stage-on);
+    background: var(--stage);
+    font-size: 15px;
+}
+
+.unit-summary-stage ol {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.unit-summary-stage li {
+    display: grid;
+    gap: 6px;
+    padding: 12px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    background: var(--stage-soft);
+}
+
+.unit-summary-lesson {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 0;
+    border: 0;
+    color: var(--ink);
+    background: none;
+    font: inherit;
+    font-size: 17px;
+    font-weight: 700;
+    text-align: start;
+    cursor: pointer;
+}
+
+.unit-summary-lesson:hover .unit-summary-lesson-title {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.unit-summary-number {
+    flex-shrink: 0;
+    color: var(--stage-ink);
+}
+
+.unit-summary-done {
+    flex-shrink: 0;
+    align-self: center;
+    color: var(--success);
+}
+
+.fraction-v2 .unit-summary-idea {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-style: italic;
+    line-height: 1.35;
+}
+
+.fraction-v2[dir="rtl"] .unit-summary-idea {
+    font-style: normal;
+}
+
+.unit-summary .lesson-mistake {
+    max-width: none;
+}
+
+/* In one column it goes first, like a lesson, with the lesson list under it */
+@media (max-width: 900px) {
+    .unit-summary {
+        order: -1;
+    }
+}
+
+@media (max-width: 760px) {
+    .unit-summary {
+        padding: 22px 18px;
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+    }
+
+    .unit-summary-stage {
+        padding-inline-start: 10px;
+    }
+
+    .fraction-v2 .unit-summary-idea {
+        font-size: 17px;
+    }
+
+    .unit-summary-stage li {
+        padding: 10px 10px;
+    }
+
+    /* The mistake box sits inside the lesson card: less padding so its lines are not too short */
+    .unit-summary .lesson-mistake {
+        padding: 10px;
+    }
+
+    .fraction-v2 .unit-summary .lesson-mistake p {
+        padding: 6px 8px;
+        font-size: 16px;
+    }
+}
+
+/* On paper: only the summary, without the page around it, and no lesson cut between two pages */
+@media print {
+    .fraction-v2:has(.unit-summary) .fraction-v2-header,
+    .fraction-v2:has(.unit-summary) .fraction-v2-lesson-index,
+    .fraction-v2:has(.unit-summary) .fraction-v2-lesson-jump,
+    .unit-summary-print {
+        display: none !important;
+    }
+
+    .fraction-v2:has(.unit-summary) .fraction-v2-learning {
+        display: block;
+    }
+
+    .unit-summary {
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+    }
+
+    .unit-summary-stage li {
+        break-inside: avoid;
+    }
+
+    .unit-summary-stage h2 {
+        break-after: avoid;
+    }
+}
