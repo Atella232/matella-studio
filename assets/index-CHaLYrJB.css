@@ -1,0 +1,1 @@
+.fraction-v2-games-card[data-game=tiles]{--game-tint: var(--success-tint, #d9efe2)}.dbh1-cancel{animation:dbh1-cancel .7s ease-out .5s both}.dbh1-left{stroke-width:2.6}@keyframes dbh1-cancel{0%{opacity:1}to{opacity:.22}}@media(prefers-reduced-motion:reduce){.dbh1-cancel{animation:none;opacity:.22}}
