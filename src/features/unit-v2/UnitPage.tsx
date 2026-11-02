@@ -434,6 +434,8 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                     <p className="fraction-v2-lesson-goal"><strong>{l({ eu: 'Helburua:', es: 'Objetivo:', en: 'Goal:', ar: 'الهدف:' })}</strong> <MathText text={l(currentTopic.goal)} /></p>
                     <p className="fraction-v2-lesson-body"><MathText text={l(currentTopic.explanation)} /></p>
                     {currentTopic.cases && <LessonCases cases={currentTopic.cases} language={language} />}
+                    {/* The drawing right under the explanation it illustrates, before the worked exercise */}
+                    {currentTopic.figure && <LessonFigure language={language}>{currentTopic.figure(language)}</LessonFigure>}
                     {currentTopic.problem && (
                         <div className="fraction-v2-lesson-problem">
                             <span>{l({ eu: 'Ebatz dezagun', es: 'Vamos a resolver', en: 'Let\'s solve', ar: 'لنحلّ' })}</span>
@@ -454,7 +456,6 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                             ))}
                         </ol>
                     )}
-                    {currentTopic.figure && <LessonFigure language={language}>{currentTopic.figure(language)}</LessonFigure>}
                     <FitMath as="figure" className="fraction-v2-example" text={pickMaybeText(language, currentTopic.example)} />
                     {currentTopic.mistake && <LessonMistakeBox mistake={currentTopic.mistake} language={language} />}
                     <aside className="fraction-v2-takeaway">
