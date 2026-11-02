@@ -21,7 +21,7 @@ import {
 import { fractionsIntroLabChallengeIds } from '../src/pages/dbh1-zatikiak-v2/lab/labTools.ts'
 
 test('zatikiak 1. DBH games: levels, ids and routes', () => {
-    assert.equal(introFractionGames.length, 4)
+    assert.equal(introFractionGames.length, 7)
     assert.equal(introFractionGames[0].levels.length, INTRO_FRACTION_RACE_CIRCUITS)
     assert.equal(introTargetLevels.length, introFractionGames.find((game) => game.id === 'target')!.levels.length)
     assert.equal(introMemoryLevels.length, introFractionGames.find((game) => game.id === 'memory')!.levels.length)

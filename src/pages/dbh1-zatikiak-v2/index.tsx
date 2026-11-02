@@ -36,7 +36,7 @@ const zatikiakIntroUnit: UnitDefinition = {
         render: (props) => <FractionsIntroLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Lau joko abiadura eta zehaztasuna entrenatzeko: lasterketa, itua, horma eta memoria.', es: 'Cuatro juegos para entrenar rapidez y precisión: carrera, diana, muro y memoria.', en: 'Four games to practise speed and accuracy: race, target, wall and memory.', ar: 'أربع ألعاب لتدريب السرعة والدقة: السباق والهدف والجدار والذاكرة.' },
+        description: { eu: 'Zazpi joko: lasterketa, itua, horma, memoria, banaketak, zatiki-barrak eta zatikien detektibea.', es: 'Siete juegos: carrera, diana, muro, memoria, repartos, tiras de fracciones y detective de fracciones.', en: 'Seven games: race, target, wall, memory, share it out, fraction strips and fractions detective.', ar: 'سبع ألعاب: السباق والهدف والجدار والذاكرة والتوزيع وأشرطة الكسور ومخبر الكسور.' },
         progressIds: introFractionGameProgressIds,
         recordsKey: INTRO_FRACTION_GAME_RECORDS_KEY,
         render: (props) => <FractionsIntroGames {...props} />

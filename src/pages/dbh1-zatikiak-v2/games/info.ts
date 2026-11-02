@@ -10,7 +10,7 @@ import type { TargetLevel } from '../../dbh2-zatikiak-prototype/games/target.ts'
    negative fractions and no percentages.
    ========================================================================== */
 
-export type IntroFractionGameId = 'race' | 'target' | 'wall' | 'memory'
+export type IntroFractionGameId = 'race' | 'target' | 'wall' | 'memory' | 'share' | 'strips' | 'detective'
 
 export const INTRO_FRACTION_GAME_RECORDS_KEY = 'matella-zatikiak-dbh1-game-records'
 
@@ -60,6 +60,39 @@ export const introFractionGames: GameInfo<IntroFractionGameId>[] = [
             { progressId: 6402, stage: 'types', title: { eu: 'Mistoak eta zuzena', es: 'Mixtos y la recta', en: 'Mixed numbers and the number line', ar: 'الأعداد الكسرية والمستقيم' }, description: { eu: '8 bikote: mistoak, marrazkiak eta zuzena.', es: '8 parejas: mixtos, dibujos y la recta.', en: '8 pairs: mixed numbers, drawings and the number line.', ar: '8 أزواج: أعداد كسرية ورسوم والمستقيم.' } },
             { progressId: 6403, stage: 'equivalence', title: { eu: 'Hirukoteak', es: 'Tríos', en: 'Trios', ar: 'ثلاثيات' }, description: { eu: '6 hirukote: zatikia, hamartarra eta marrazkia.', es: '6 tríos: fracción, decimal y dibujo.', en: '6 trios: fraction, decimal and drawing.', ar: '6 ثلاثيات: كسر وعدد عشري ورسم.' } }
         ]
+    },
+    {
+        id: 'share',
+        title: { eu: 'Banaketak', es: 'Repartos', en: 'Share it out', ar: 'التوزيع' },
+        tagline: { eu: 'Kantitate baten zatikia: aukeratu erantzuna eta ikusi gauzak taldeka.', es: 'La fracción de una cantidad: elige la respuesta y mira las cosas en grupos.', en: 'A fraction of an amount: choose the answer and see the things in groups.', ar: 'كسر من كمية: اختر الإجابة وانظر إلى الأشياء في مجموعات.' },
+        skills: { eu: 'Kantitate baten zatikia', es: 'Fracción de una cantidad', en: 'A fraction of an amount', ar: 'كسر من كمية' },
+        levels: [
+            { progressId: 6501, stage: 'problems', title: { eu: 'Zati bat', es: 'Una parte', en: 'One part', ar: 'جزء واحد' }, description: { eu: 'Zenbakitzailea 1 da.', es: 'Numerador 1.', en: 'Numerator 1.', ar: 'البسط 1.' } },
+            { progressId: 6502, stage: 'problems', title: { eu: 'Zati batzuk', es: 'Varias partes', en: 'Several parts', ar: 'عدة أجزاء' }, description: { eu: 'Zatitu eta biderkatu.', es: 'Divide y multiplica.', en: 'Divide and multiply.', ar: 'اقسم ثم اضرب.' } },
+            { progressId: 6503, stage: 'problems', title: { eu: 'Alderantziz', es: 'Al revés', en: 'The other way round', ar: 'بالعكس' }, description: { eu: 'Zatia ezaguna da: zein da osoa?', es: 'Se conoce la parte: ¿cuál es el total?', en: 'The part is known: what is the whole?', ar: 'الجزء معروف: ما الكل؟' } }
+        ]
+    },
+    {
+        id: 'strips',
+        title: { eu: 'Zatiki-barrak', es: 'Tiras de fracciones', en: 'Fraction strips', ar: 'أشرطة الكسور' },
+        tagline: { eu: 'Batu edo kendu bi zatiki; gero, barrak izendatzaile komunean moztuta.', es: 'Suma o resta dos fracciones; luego, las tiras cortadas en el denominador común.', en: 'Add or subtract two fractions; then the strips cut into the common denominator.', ar: 'اجمع كسرين أو اطرحهما، ثم الأشرطة مقطوعة بالمقام المشترك.' },
+        skills: { eu: 'Zatikien batuketak eta kenketak', es: 'Sumas y restas de fracciones', en: 'Adding and subtracting fractions', ar: 'جمع الكسور وطرحها' },
+        levels: [
+            { progressId: 6601, stage: 'operations', title: { eu: 'Izendatzaile bera', es: 'Mismo denominador', en: 'Same denominator', ar: 'المقام نفسه' }, description: { eu: 'Zenbakitzaileak bakarrik batu.', es: 'Se suman solo los numeradores.', en: 'Only the numerators are added.', ar: 'نجمع البسوط فقط.' } },
+            { progressId: 6602, stage: 'operations', title: { eu: 'Izendatzaile desberdinak', es: 'Distinto denominador', en: 'Different denominators', ar: 'مقامات مختلفة' }, description: { eu: 'Lehenik izendatzaile komuna.', es: 'Primero el denominador común.', en: 'First the common denominator.', ar: 'أولًا المقام المشترك.' } },
+            { progressId: 6603, stage: 'operations', title: { eu: 'Kenketak', es: 'Restas', en: 'Subtractions', ar: 'الطرح' }, description: { eu: 'Izendatzaile desberdinekin kendu.', es: 'Restar con distinto denominador.', en: 'Subtracting with different denominators.', ar: 'الطرح بمقامات مختلفة.' } }
+        ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Zatikien detektibea', es: 'Detective de fracciones', en: 'Fractions detective', ar: 'مخبر الكسور' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: اكتشفه وقل ما نوع الخطأ.' },
+        skills: { eu: 'Zatikiekin akats tipikoak', es: 'Errores típicos con fracciones', en: 'Common mistakes with fractions', ar: 'الأخطاء الشائعة في الكسور' },
+        levels: [
+            { progressId: 6701, stage: 'equivalence', title: { eu: 'Baliokideak', es: 'Equivalentes', en: 'Equivalent fractions', ar: 'الكسور المتكافئة' }, description: { eu: 'Sinplifikatu, konparatu eta anplifikatu.', es: 'Simplificar, comparar y amplificar.', en: 'Simplifying, comparing and amplifying.', ar: 'الاختزال والمقارنة والتوسيع.' } },
+            { progressId: 6702, stage: 'operations', title: { eu: 'Eragiketak', es: 'Operaciones', en: 'Operations', ar: 'العمليات' }, description: { eu: 'Batu, biderkatu eta zatitu.', es: 'Sumar, multiplicar y dividir.', en: 'Adding, multiplying and dividing.', ar: 'الجمع والضرب والقسمة.' } },
+            { progressId: 6703, stage: 'problems', title: { eu: 'Buruketak', es: 'Problemas', en: 'Problems', ar: 'المسائل' }, description: { eu: 'Kantitate baten zatikia eta geratzen dena.', es: 'Fracción de una cantidad y lo que queda.', en: 'A fraction of an amount and what is left.', ar: 'كسر من كمية والباقي.' } }
+        ]
     }
 ]
 
@@ -97,7 +130,7 @@ export const introMemoryLevels: MemoryLevel[] = [
 ]
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones and the legacy ones */
-export const introFractionGameSlugs: Record<IntroFractionGameId, string> = { race: 'lasterketa', target: 'itua', wall: 'horma', memory: 'memoria' }
+export const introFractionGameSlugs: Record<IntroFractionGameId, string> = { race: 'lasterketa', target: 'itua', wall: 'horma', memory: 'memoria', share: 'banaketak', strips: 'barrak', detective: 'detektibea' }
 
 export function introFractionGameModeForPath(pathname: string): IntroFractionGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
@@ -106,5 +139,8 @@ export function introFractionGameModeForPath(pathname: string): IntroFractionGam
     if (['diana', 'itua'].includes(game)) return 'target'
     if (['muro', 'horma'].includes(game)) return 'wall'
     if (['memoria', 'memory'].includes(game)) return 'memory'
+    if (['banaketak', 'repartos'].includes(game)) return 'share'
+    if (['barrak', 'tiras'].includes(game)) return 'strips'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     return 'hub'
 }

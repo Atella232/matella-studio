@@ -6,6 +6,8 @@ import { createZeroRounds, effective, ROW_MAX, sumLatex, termsLatex, ZERO_LIMIT,
 import { createIntegersDetectiveCases, integersDetectiveLevels, integersDetectiveNames, integersDetectiveTips } from '../src/pages/dbh1-zenbaki-osoak-v2/games/detective.ts'
 import { createMeetRounds, createRectanglesRounds, departures, divisorsOf, gcd, lcm, MEET_ROUNDS, rectanglePairs, RECTANGLES_MAX, RECTANGLES_ROUNDS } from '../src/pages/dbh1-zatigarritasuna-v2/games/divisibilityRounds.ts'
 import { createDivisibilityDetectiveCases, divisibilityDetectiveLevels, divisibilityDetectiveNames, divisibilityDetectiveTips } from '../src/pages/dbh1-zatigarritasuna-v2/games/detective.ts'
+import { createShareRounds, createStripsRounds, reduce, SHARE_ROUNDS, STRIPS_ROUNDS, valueOf } from '../src/pages/dbh1-zatikiak-v2/games/fractionRounds.ts'
+import { createFractionsDetectiveCases, fractionsDetectiveLevels, fractionsDetectiveNames, fractionsDetectiveTips } from '../src/pages/dbh1-zatikiak-v2/games/detective.ts'
 import { checkDetective, endValue, renders } from './helpers/ownGamesCheck.ts'
 
 /* The own games of the 1. DBH units */
@@ -84,4 +86,44 @@ test('1. DBH buses and ribbons: the answer is the LCM or the GCD and is among th
 
 test('1. DBH divisibility detective: the errors of each level, the fix and the last line on their values', () => {
     checkDetective(createDivisibilityDetectiveCases, divisibilityDetectiveLevels, divisibilityDetectiveNames, divisibilityDetectiveTips)
+})
+
+test('1. DBH share it out: the part (or the whole) is right, four different options, the levels as promised', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const rounds = createShareRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, SHARE_ROUNDS)
+            for (const { a, d, total, part, inverse, answer, options } of rounds) {
+                assert.ok(a < d && total % d === 0 && part === (total / d) * a && total <= 48)
+                assert.equal(answer, inverse ? total : part)
+                assert.equal(inverse, level === 2)
+                if (level === 0) assert.equal(a, 1)
+                assert.ok(options.length === 4 && new Set(options).size === 4 && options.includes(answer) && options.every((option) => option > 0))
+            }
+        }
+    }
+})
+
+test('1. DBH fraction strips: one right option by value, the result fits one strip, the levels as promised', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const rounds = createStripsRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, STRIPS_ROUNDS)
+            for (const { first, second, op, common, options, right } of rounds) {
+                const exact = op === '+' ? valueOf(first) + valueOf(second) : valueOf(first) - valueOf(second)
+                assert.ok(Math.abs(exact - right) < 1e-9 && right > 0 && right <= 1)
+                assert.ok(common % first.d === 0 && common % second.d === 0 && common <= 24)
+                assert.equal(options.filter((option) => Math.abs(valueOf(option) - right) < 1e-9).length, 1)
+                assert.ok(options.length >= 3 && options.every((option) => option.n > 0 && option.d > 0))
+                if (level === 0) assert.ok(first.d === second.d && op === '+')
+                if (level === 1) assert.ok(first.d !== second.d && op === '+')
+                if (level === 2) assert.ok(first.d !== second.d && op === '-')
+                assert.deepEqual(reduce({ n: 6, d: 8 }), { n: 3, d: 4 })
+            }
+        }
+    }
+})
+
+test('1. DBH fractions detective: the errors of each level, the fix and the last line on their values', () => {
+    checkDetective(createFractionsDetectiveCases, fractionsDetectiveLevels, fractionsDetectiveNames, fractionsDetectiveTips)
 })

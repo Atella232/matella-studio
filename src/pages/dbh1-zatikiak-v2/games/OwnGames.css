@@ -1,0 +1,3 @@
+/* The own games of 1. DBH fractions */
+.fraction-v2-games-card[data-game="share"] { --game-tint: var(--success-tint, #d9efe2); }
+.fraction-v2-games-card[data-game="strips"] { --game-tint: var(--blue-tint, #dde7f7); }
