@@ -16,6 +16,7 @@ import {
     TrapezoidFigure,
     TriplesFigure
 } from './figures'
+import { pythagorasLessonChecks, type PythagorasTopicId } from './lessonChecks'
 
 /* ==========================================================================
    Pitagorasen teorema · 2. DBH — stages and lessons, following Anaya 2.º
@@ -41,7 +42,7 @@ const say = (eu: string, es: string, ar: string, en: string): LocalizedText => (
 /** The same formula in every language; the decimal comma becomes a point in Arabic */
 const same = (value: string): LocalizedText => ({ eu: value, es: value, en: value, ar: value.replace(/\{,\}/g, '.') })
 
-export const pythagorasTopics: UnitTopic[] = [
+const baseTopics: UnitTopic[] = [
     /* ---------- 1. The theorem ---------- */
     {
         id: 'squares',
@@ -362,3 +363,6 @@ export const pythagorasTopics: UnitTopic[] = [
         figure: (language) => <LadderFigure language={language} />
     }
 ]
+
+/** Each lesson with its typical mistake and its «Check it» question (lessonChecks.ts) */
+export const pythagorasTopics: UnitTopic[] = baseTopics.map((topic) => ({ ...topic, ...pythagorasLessonChecks[topic.id as PythagorasTopicId] }))
