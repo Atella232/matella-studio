@@ -16,6 +16,7 @@ import {
     SphereVolumeFigure,
     VolumeUnitsFigure
 } from './figures'
+import { solidsLessonChecks, type SolidsTopicId } from './lessonChecks'
 
 /* ==========================================================================
    Gorputz geometrikoak · 2. DBH — stages and lessons, following Anaya 2.º
@@ -41,7 +42,7 @@ const say = (eu: string, es: string, ar: string, en: string): LocalizedText => (
 /** The same formula in every language; the decimal comma becomes a point in Arabic */
 const same = (value: string): LocalizedText => ({ eu: value, es: value, en: value, ar: value.replace(/\{,\}/g, '.') })
 
-export const solidsTopics: UnitTopic[] = [
+const baseTopics: UnitTopic[] = [
     /* ---------- 1. Polyhedra ---------- */
     {
         id: 'elements',
@@ -373,3 +374,6 @@ export const solidsTopics: UnitTopic[] = [
         figure: (language) => <SphereVolumeFigure language={language} />
     }
 ]
+
+/** Each lesson with its typical mistake and its «Check it» question (lessonChecks.ts) */
+export const solidsTopics: UnitTopic[] = baseTopics.map((topic) => ({ ...topic, ...solidsLessonChecks[topic.id as SolidsTopicId] }))

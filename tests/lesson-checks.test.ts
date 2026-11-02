@@ -173,7 +173,8 @@ for (const unit of units) {
     test(`${unit.folder}: Basque glues no case ending to a number`, () => {
         for (const [id, entry] of Object.entries(unit.checks)) {
             for (const text of texts(entry)) {
-                assert.ok(!/\d(?:ri|ren|rekin|ekin|ek|ak|ra|tik|z|ez|ei|en|k|ko|eko|an|ean|etan)(?![a-zA-Z])/.test(text.eu.replace(/\$[^$]+\$/g, '')), `${id}: ${text.eu}`)
+                // Any lowercase letter right after a digit is a glued ending (10en, 3ko, 100ekoak); units go after a space
+                assert.ok(!/\d[a-zñ]/.test(text.eu.replace(/\$[^$]+\$/g, '')), `${id}: ${text.eu}`)
                 assert.ok(!/\$(?:ri|ren|rekin|z|ra|tik|ei|ek|ak|en|ko|an)(?![a-zA-Z])/.test(text.eu), `${id}: ${text.eu}`)
             }
         }
