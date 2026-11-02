@@ -15,6 +15,7 @@ import { createDomainRounds, createSlopeRounds, meanRate, rightIntervals } from 
 import { createFunctionsDetectiveCases, functionsDetectiveLevels, functionsDetectiveNames, functionsDetectiveTips } from '../src/pages/dbh4-games/functionsDetective.ts'
 import { createCurveRounds, createGrowthRounds, createMatchRounds, curveAt, curveLatex, growthAt, hitsAll, START, uniqueFit, type Family } from '../src/pages/dbh4-games/curves.ts'
 import { createGraphsDetectiveCases, graphsDetectiveLevels, graphsDetectiveNames, graphsDetectiveTips } from '../src/pages/dbh4-games/graphsDetective.ts'
+import { createHalfRounds, inRegion, regionPoints } from '../src/pages/dbh4-games/halfPlanes.ts'
 import { checkTexts, renders } from './helpers/ownGamesCheck.ts'
 import { evaluate } from './helpers/realsRaceCheck.ts'
 
@@ -201,8 +202,11 @@ test('4. DBH build the equation and the crossing point', () => {
 function equationCode(latex: string): number {
     const last = latex.split('\\ \\to\\ ').pop()!
     if (/y=/.test(last)) {
-        const [x, y] = [...last.matchAll(/[xy]=(-?\d+)/g)].map((match) => Number(match[1]))
-        return systemCode(x, y)
+        // One or more points x = a, y = b; several are added up
+        const values = [...last.matchAll(/[xy]=(-?\d+)/g)].map((match) => Number(match[1]))
+        let code = 0
+        for (let index = 0; index < values.length; index += 2) code += systemCode(values[index], values[index + 1])
+        return code
     }
     if (/infty|^[[(]/.test(last)) {
         const pieces: Piece[] = last.split('\\cup ').map((part) => {
@@ -224,7 +228,7 @@ function equationCode(latex: string): number {
 }
 
 test('4. DBH equations detective: both tracks', () => {
-    for (const track of ['applied', 'academic'] as const) {
+    for (const track of ['applied', 'academic', 'systems'] as const) {
         checkTexts([...Object.values(equationsDetectiveNames), ...Object.values(equationsDetectiveTips)])
         for (let level = 0; level < 3; level += 1) {
             const seen = new Set<string>()
@@ -355,4 +359,17 @@ test('4. DBH when does it double?: the time reaches the target exactly', () => {
 test('4. DBH graphs detective: the three units', () => {
     checkTexts([...Object.values(graphsDetectiveNames), ...Object.values(graphsDetectiveTips)])
     for (const track of ['graphs', 'polynomial', 'exponential'] as const) checkDetective(createGraphsDetectiveCases(track), graphsDetectiveLevels[track], graphsDetectiveNames, graphsDetectiveTips)
+})
+
+test('4. DBH touch the solution: a region with whole points, every region point solves every inequality', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 150; seed += 1) {
+            for (const round of createHalfRounds(createRandom(seed * 7919 + level), level)) {
+                assert.equal(round.inequalities.length, level + 1)
+                const points = regionPoints(round)
+                assert.ok(points.length >= 3)
+                for (const [x, y] of points) assert.ok(inRegion(round, x, y))
+            }
+        }
+    }
 })

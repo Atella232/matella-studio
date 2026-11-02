@@ -78,7 +78,7 @@ function expected(question: SystemsRaceQuestion): number {
 
 
 test('sistemak 4. DBH ak games: levels, ids and routes', () => {
-    assert.equal(systemsGames.length, 2)
+    assert.equal(systemsGames.length, 5)
     assert.equal(systemsGames[0].levels.length, SYSTEMS_RACE_CIRCUITS)
     assert.equal(systemsGames[1].levels.length, systemsMemoryLevels.length)
     assert.equal(new Set(systemsGameProgressIds).size, systemsGameProgressIds.length)

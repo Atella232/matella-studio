@@ -1,8 +1,14 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { SystemsGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { EquationArt } from '../../dbh4-games/EquationGames'
+import { TouchArt } from '../../dbh4-games/SystemGames'
 
 /** Small illustration of each game; the art is the same in every language */
 export function SystemsGameArt({ game }: { game: SystemsGameId }) {
+    if (game === 'cross') return <EquationArt game="cross" />
+    if (game === 'touch') return <TouchArt />
+    if (game === 'detective') return <DetectiveArt lines={['2x + y = 7', 'y = 7 + 2x ?', 'y = 7 − 2x']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

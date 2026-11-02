@@ -7,11 +7,18 @@ import { SystemsGameArt } from './GameArt'
 import { SYSTEMS_GAME_RECORDS_KEY, systemsGameModeForPath, systemsGames, systemsGameSlugs, type SystemsGameId } from './info'
 import { SystemsRaceGame } from './RaceGame'
 import '../../dbh1-aljebra-v2/games/AlgebraGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { CrossingPointGame } from '../../dbh4-games/EquationGames'
+import { TouchSolutionGame } from '../../dbh4-games/SystemGames'
+import { createEquationsDetectiveCases, EQUATIONS_DETECTIVE_CASES, equationsDetectiveNames, equationsDetectiveTips } from '../../dbh4-games/equationsDetective'
 
 const memoryGame = systemsGames.find((game) => game.id === 'memory')!
 
 const components: Record<SystemsGameId, (props: GameProps) => JSX.Element> = {
     race: SystemsRaceGame,
+    cross: (props) => <CrossingPointGame {...props} game={systemsGames.find((game) => game.id === 'cross')!} art={<SystemsGameArt game="cross" />} />,
+    touch: (props) => <TouchSolutionGame {...props} game={systemsGames.find((game) => game.id === 'touch')!} art={<SystemsGameArt game="touch" />} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: systemsGames.find((game) => game.id === 'detective')!, art: <SystemsGameArt game="detective" />, cases: EQUATIONS_DETECTIVE_CASES, createCases: createEquationsDetectiveCases('systems'), names: equationsDetectiveNames, tips: equationsDetectiveTips }} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <SystemsGameArt game="memory" />, pairs: SYSTEMS_MEMORY_PAIRS, createBoard: createSystemsMemoryBoard }} />
 }
 

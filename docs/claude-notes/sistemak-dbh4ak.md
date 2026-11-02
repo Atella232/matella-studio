@@ -14,3 +14,7 @@ Shared fix 871a397 (owner asked): under 760 px lesson step formulas span the who
 Lab DONE 4741542: reused aplikatuak PlaneTool (472xx) + ReductionTool (473xx); new classify 671xx, substitution 672xx, circle 673xx, squares 674xx, half-plane 675xx, region 676xx, mixture 677xx, shopping 678xx (SystemsTools.tsx). Known: reused PlaneTool's point label overlaps axis numbers near the axes; in Arabic the Plane 'y' bbox pokes 1 px above (font ascent) — both harmless.
 Games DONE 45468d6: race 68101–68105 (21 kinds, linear-system kinds carry meta a1..c2 + ask for a Cramer check), memory 68201–68203 (linear, nonlinear, region). Memory cards: equations stacked with \begin{array}{c} and tight() braces; at most 7 symbols per row (no leading minus) to fit the 102 px phone card (max 98 measured).
 DEPLOYED 2026-10-12 (main 45468d6, bundle index-CgDsm_eM), with the phone-steps fix. Next unit only when asked: `areas-volumenes-semejanza` (Santillana Ac. U6).
+
+## Own games (2026-11-02)
+
+The crossing point, touch the solution and the systems detective: see [dbh4-own-games](dbh4-own-games.md).

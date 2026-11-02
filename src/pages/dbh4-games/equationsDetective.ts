@@ -28,15 +28,25 @@ export type Dbh4EquationError =
     | 'reduction-sign'
     | 'isolate-sign'
     | 'multiply-one-side'
+    | 'nonlinear-one-root'
+    | 'nonlinear-distribute'
+    | 'legs-swapped'
+    | 'difference-reversed'
+    | 'ages-one-side'
 
 export type Dbh4EquationAnyError = Dbh4EquationError | EquationDetectiveError
-export type EquationsTrack = 'applied' | 'academic'
+export type EquationsTrack = 'applied' | 'academic' | 'systems'
 
 export const equationsDetectiveLevels: Record<EquationsTrack, Dbh4EquationAnyError[][]> = {
     applied: [
         ['transpose-sign', 'subtract-coefficient', 'divide-upside-down', 'minus-bracket'],
         ['one-root', 'divide-by-x', 'formula-sign', 'product-not-zero'],
         ['substitution-bracket', 'reduction-sign', 'isolate-sign', 'multiply-one-side']
+    ],
+    systems: [
+        ['substitution-bracket', 'reduction-sign', 'isolate-sign', 'multiply-one-side'],
+        ['nonlinear-one-root', 'nonlinear-distribute', 'one-root', 'product-not-zero'],
+        ['legs-swapped', 'difference-reversed', 'ages-one-side', 'substitution-bracket']
     ],
     academic: [
         ['formula-sign', 'divide-by-x', 'biquadratic-t-as-x', 'biquadratic-negative-t'],
@@ -85,7 +95,12 @@ const newNames: Record<Dbh4EquationError, LocalizedText> = {
     'substitution-bracket': say('Ordeztean ez du parentesirik jarri', 'Al sustituir no puso paréntesis', 'لم يضع أقواسًا عند التعويض', 'Did not use brackets when substituting'),
     'reduction-sign': say('Ekuazioak kentzean zeinu bat oker atera zaio', 'Al restar las ecuaciones se equivocó de signo', 'أخطأ في إشارة عند طرح المعادلتين', 'Got a sign wrong when subtracting the equations'),
     'isolate-sign': say('y askatzean ez dio zeinua aldatu', 'Al despejar y no cambió el signo', 'لم يغيّر الإشارة عند عزل y', 'Did not change the sign when solving for y'),
-    'multiply-one-side': say('Ekuazioaren atal bat bakarrik biderkatu du', 'Multiplicó solo un miembro de la ecuación', 'ضرب طرفًا واحدًا من المعادلة', 'Multiplied only one side of the equation')
+    'multiply-one-side': say('Ekuazioaren atal bat bakarrik biderkatu du', 'Multiplicó solo un miembro de la ecuación', 'ضرب طرفًا واحدًا من المعادلة', 'Multiplied only one side of the equation'),
+    'nonlinear-one-root': say('Erro positiboa bakarrik hartu du eta soluzio bat galdu du', 'Tomó solo la raíz positiva y perdió una solución', 'أخذ الجذر الموجب فقط فأضاع حلًا', 'Took only the positive root and lost a solution'),
+    'nonlinear-distribute': say('Ordeztean lehen gaia bakarrik biderkatu du', 'Al sustituir multiplicó solo el primer término', 'عند التعويض ضرب الحد الأول فقط', 'Multiplied only the first term when substituting'),
+    'legs-swapped': say('Hanken kopurua oker esleitu dio animalia bakoitzari', 'Asignó mal el número de patas a cada animal', 'أخطأ في عدد أرجل كل حيوان', 'Gave each animal the wrong number of legs'),
+    'difference-reversed': say('Kendura alderantziz idatzi du', 'Escribió la diferencia al revés', 'كتب الفرق بالعكس', 'Wrote the difference the wrong way round'),
+    'ages-one-side': say('Urteak pertsona bati bakarrik gehitu dizkio', 'Sumó los años a una sola persona', 'أضاف السنوات لشخص واحد فقط', 'Added the years to only one person')
 }
 
 const newTips: Record<Dbh4EquationError, LocalizedText> = {
@@ -102,7 +117,12 @@ const newTips: Record<Dbh4EquationError, LocalizedText> = {
     'substitution-bracket': say('Ordezten den adierazpena parentesi artean: $3(5-2x)=15-6x$.', 'Lo que se sustituye va entre paréntesis: $3(5-2x)=15-6x$.', 'ما يُعوَّض يوضع بين قوسين: $3(5-2x)=15-6x$.', 'What you substitute goes in brackets: $3(5-2x)=15-6x$.'),
     'reduction-sign': say('Atal bakoitza kendu: $8-12=-4$.', 'Se resta cada miembro: $8-12=-4$.', 'نطرح كل طرف: $8-12=-4$.', 'Subtract each side: $8-12=-4$.'),
     'isolate-sign': say('$2x+y=7$ bada, $y=7-2x$.', 'Si $2x+y=7$, entonces $y=7-2x$.', 'إذا كان $2x+y=7$ فإن $y=7-2x$.', 'If $2x+y=7$, then $y=7-2x$.'),
-    'multiply-one-side': say('Ekuazio bat biderkatzean, bi atalak biderkatzen dira.', 'Al multiplicar una ecuación se multiplican los dos miembros.', 'عند ضرب معادلة يُضرب الطرفان.', 'Multiplying an equation multiplies both sides.')
+    'multiply-one-side': say('Ekuazio bat biderkatzean, bi atalak biderkatzen dira.', 'Al multiplicar una ecuación se multiplican los dos miembros.', 'عند ضرب معادلة يُضرب الطرفان.', 'Multiplying an equation multiplies both sides.'),
+    'nonlinear-one-root': say('$x^{2}=4$ bada, $x=\\pm 2$: bi puntu.', 'Si $x^{2}=4$, $x=\\pm 2$: dos puntos.', 'إذا كان $x^{2}=4$ فإن $x=\\pm 2$: نقطتان.', 'If $x^{2}=4$, $x=\\pm 2$: two points.'),
+    'nonlinear-distribute': say('$x(5-x)=5x-x^{2}$: x-k bi gaiak biderkatzen ditu.', '$x(5-x)=5x-x^{2}$: la x multiplica a los dos términos.', '$x(5-x)=5x-x^{2}$: x تضرب الحدين.', '$x(5-x)=5x-x^{2}$: x multiplies both terms.'),
+    'legs-swapped': say('Oiloek 2 hanka dituzte eta untxiek 4: koefizienteak ezezagun bakoitzari dagozkio.', 'Las gallinas tienen 2 patas y los conejos 4: cada coeficiente va con su incógnita.', 'للدجاجة رجلان وللأرنب أربع: كل معامل مع مجهوله.', 'Hens have 2 legs and rabbits 4: each coefficient goes with its unknown.'),
+    'difference-reversed': say('«x, y baino 5 handiagoa da»: $x-y=5$.', '«x es 5 más que y»: $x-y=5$.', '«x أكبر من y بـ 5»: $x-y=5$.', '“x is 5 more than y”: $x-y=5$.'),
+    'ages-one-side': say('Urteak denontzat igarotzen dira: $x+t=2(y+t)$.', 'Los años pasan para todos: $x+t=2(y+t)$.', 'السنوات تمر على الجميع: $x+t=2(y+t)$.', 'Years pass for everyone: $x+t=2(y+t)$.')
 }
 
 export const equationsDetectiveNames: Record<Dbh4EquationAnyError, LocalizedText> = { ...equationDetectiveNames, ...newNames }
@@ -339,6 +359,64 @@ function build(random: Random, error: Dbh4EquationAnyError): Built | null {
                 problem: problem(`\\begin{cases}x+y=${c1}\\\\${leftLatex(a2, b2)}=${c2}\\end{cases}`),
                 lines: [line(LABELS.multiply, `${k}x+${k}y=${c1}`), line(LABELS.subtract, `${k - b2}y=${c1 - c2}`), line(LABELS.solutions, systemLatex(wx, wy))],
                 wrong: 0, error, fix: `${k}x+${k}y=${k * c1}\\ \\to\\ ${systemLatex(x, y)}`, right: systemCode(x, y), reached: systemCode(wx, wy)
+            }
+        }
+        case 'nonlinear-one-root': {
+            const k = randomInt(random, 2, 4)
+            return {
+                problem: problem(`\\begin{cases}y=x^{2}\\\\y=${k * k}\\end{cases}`),
+                lines: [line(LABELS.substitute, `x^{2}=${k * k}`), line(LABELS.solutions, `x=${k}`), line(LABELS.solutions, systemLatex(k, k * k))],
+                wrong: 1, error, fix: `x=\\pm ${k}\\ \\to\\ ${systemLatex(-k, k * k)};\\ ${systemLatex(k, k * k)}`, right: systemCode(-k, k * k) + systemCode(k, k * k), reached: systemCode(k, k * k)
+            }
+        }
+        case 'nonlinear-distribute': {
+            const r1 = randomInt(random, 1, 4)
+            const r2 = randomInt(random, r1 + 1, 6)
+            const [sum, product] = [r1 + r2, r1 * r2]
+            // Wrong: x·sum − x = product
+            if (product % (sum - 1) !== 0) return null
+            const wx = product / (sum - 1)
+            return {
+                problem: problem(`\\begin{cases}x+y=${sum}\\\\xy=${product}\\end{cases}`),
+                lines: [line(LABELS.isolate, `y=${sum}-x`), line(LABELS.substitute, `x(${sum}-x)=${sum}x-x=${product}`), line(LABELS.solutions, systemLatex(wx, sum - wx))],
+                wrong: 1, error, fix: `${sum}x-x^{2}=${product}\\ \\to\\ ${systemLatex(r1, r2)};\\ ${systemLatex(r2, r1)}`, right: systemCode(r1, r2) + systemCode(r2, r1), reached: systemCode(wx, sum - wx)
+            }
+        }
+        case 'legs-swapped': {
+            const hens = randomInt(random, 4, 20)
+            const rabbits = randomInt(random, 2, 15)
+            if (hens === rabbits) return null
+            const [heads, legs] = [hens + rabbits, 2 * hens + 4 * rabbits]
+            return {
+                problem: say(`Baserri batean oiloak (x) eta untxiak (y) daude: ${heads} buru eta ${legs} hanka. Zenbat dira?`, `En una granja hay gallinas (x) y conejos (y): ${heads} cabezas y ${legs} patas. ¿Cuántos hay?`, `في مزرعة دجاج (x) وأرانب (y): ${heads} رأسًا و${legs} رجلًا. كم عدد كل منهما؟`, `A farm has hens (x) and rabbits (y): ${heads} heads and ${legs} legs. How many of each?`),
+                lines: [line(LABELS.substitute, `x+y=${heads}`), line(LABELS.substitute, `4x+2y=${legs}`), line(LABELS.solutions, systemLatex(rabbits, hens))],
+                wrong: 1, error, fix: `2x+4y=${legs}\\ \\to\\ ${systemLatex(hens, rabbits)}`, right: systemCode(hens, rabbits), reached: systemCode(rabbits, hens)
+            }
+        }
+        case 'difference-reversed': {
+            const y = randomInt(random, 1, 6)
+            const d = pick(random, [5, 10])
+            const x = y + d
+            const total = 2 * x + 3 * y
+            // Wrong: y − x = d, so x = y − d and 5y − 2d = total
+            const wy = (total + 2 * d) / 5
+            if (!Number.isInteger(wy)) return null
+            return {
+                problem: say(`2 ogitarteko (x) eta 3 freskagarri (y) ${total} euro dira; ogitarteko batek freskagarri batek baino ${d} euro gehiago balio du.`, `2 bocadillos (x) y 3 refrescos (y) cuestan ${total} €; un bocadillo cuesta ${d} € más que un refresco.`, `شطيرتان (x) و3 مشروبات (y) بـ ${total} يورو؛ والشطيرة أغلى من المشروب بـ ${d} يورو.`, `2 sandwiches (x) and 3 drinks (y) cost ${total} €; a sandwich costs ${d} € more than a drink.`),
+                lines: [line(LABELS.substitute, `2x+3y=${total}`), line(LABELS.substitute, `y-x=${d}`), line(LABELS.solutions, systemLatex(wy - d, wy))],
+                wrong: 1, error, fix: `x-y=${d}\\ \\to\\ ${systemLatex(x, y)}`, right: systemCode(x, y), reached: systemCode(wy - d, wy)
+            }
+        }
+        case 'ages-one-side': {
+            const t = pick(random, [4, 6, 8, 10, 12])
+            const m = 3
+            const y = t / (m - 2)
+            const x = m * y
+            // Wrong: x + t = 2y with x = 3y gives y = −t
+            return {
+                problem: say(`Aitak semeak baino hiru aldiz urte gehiago ditu (x, y). ${t} urte barru, bikoitza izango ditu. Zenbat urte dituzte?`, `Un padre tiene el triple de años que su hijo (x, y). Dentro de ${t} años tendrá el doble. ¿Qué edades tienen?`, `عمر الأب ثلاثة أضعاف عمر ابنه (x، y). بعد ${t} سنوات سيصبح ضعفه. ما عمراهما؟`, `A father is three times as old as his son (x, y). In ${t} years he will be twice as old. How old are they?`),
+                lines: [line(LABELS.substitute, `x=3y`), line(LABELS.substitute, `x+${t}=2y`), line(LABELS.solutions, systemLatex(-3 * t, -t))],
+                wrong: 1, error, fix: `x+${t}=2(y+${t})\\ \\to\\ ${systemLatex(x, y)}`, right: systemCode(x, y), reached: systemCode(-3 * t, -t)
             }
         }
     }

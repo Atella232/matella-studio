@@ -45,3 +45,9 @@ Code in `dbh4-games/curves.ts`, `CurveGames.tsx`, `graphsDetective.ts`; each uni
 - `match` (graphs 58401–3, polynomial 78401–3): which formula? A graph and four formulas (shift sign, opening sign, h and k swapped).
 - `growth` (exponential 80401–3): when does it double? Bacteria that double or triple, half-lives; set the time; bars appear after checking.
 - `detective` (graphs 58501–3, polynomial 78501–3, exponential 80501–3): 20 errors on lines, parabolas, shifts, absolute value, hyperbolas, exponentials and logarithms; three levels per unit.
+
+## Systems (ak `dbh4-akademikoak-sistemak`)
+
+- `cross` (68301–3): the crossing point of Ekuazioak (`CrossingPointGame`).
+- `touch` (`dbh4-games/halfPlanes.ts`, `SystemGames.tsx`, 68401–3): touch the solution. One, two or three linear inequalities; tap any whole point of the region; afterwards the boundary lines (dashed when strict) and the region's whole points are drawn.
+- `detective` (68501–3): the equations detective with a `systems` track: methods, non-linear systems (a lost negative root, a product distributed to one term), problems (legs, a difference written backwards, years added to one person). Several points in a line are written `x=…, y=…;\ x=…, y=…` and coded as the sum of `systemCode`.
