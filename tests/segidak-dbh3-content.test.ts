@@ -163,17 +163,6 @@ test('segidak 3. DBH: no Basque suffix glued to a number', () => {
     }
 })
 
-test('segidak 3. DBH: the formulas in the takeaway boxes have no lowercase letters (the box prints KaTeX in capitals)', () => {
-    const takeaways = lessonsSource.split('\n').filter((line) => line.trimStart().startsWith('takeaway:'))
-    assert.equal(takeaways.length, 15)
-    for (const line of takeaways) {
-        for (const [, formula] of line.matchAll(/\$([^$]+)\$/g)) {
-            // Commands such as \neq are fine; letters of their own are not
-            assert.ok(!/[a-z]/.test(formula.replace(/\\[a-zA-Z]+/g, '')), formula)
-        }
-    }
-})
-
 test('segidak 3. DBH: every lesson names its typical mistake, and the Basque lessons glue no suffix to a number', () => {
     const mistakes = lessonsSource.split('\n').filter((line) => line.trimStart().startsWith('mistake: {'))
     assert.equal(mistakes.length, 15)

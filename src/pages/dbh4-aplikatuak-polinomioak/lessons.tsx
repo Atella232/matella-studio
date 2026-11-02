@@ -69,7 +69,7 @@ export const polynomialsTopics: UnitTopic[] = [
             { text: say('Kalkulatu.', 'Calcula.', 'احسب.', 'Calculate.'), math: same('$-54-63+51+10=-56$') }
         ],
         example: same('$P(2)=8-4+6-1=9$'),
-        takeaway: say('$P(A)$: ordeztu x, negatiboak parentesi artean, lehenik berreturak.', '$P(A)$: sustituye x, negativos entre paréntesis, primero las potencias.', '$P(A)$: عوّض x، والسالب بين قوسين، والقوى أولًا.', '$P(A)$: substitute x, put negatives in brackets, do the powers first.'),
+        takeaway: say('$P(a)$: ordeztu x, negatiboak parentesi artean, lehenik berreturak.', '$P(a)$: sustituye x, negativos entre paréntesis, primero las potencias.', '$P(a)$: عوّض x، والسالب بين قوسين، والقوى أولًا.', '$P(a)$: substitute x, put negatives in brackets, do the powers first.'),
         figure: (language) => <PolynomialFigure language={language} />
     },
     {
@@ -154,7 +154,7 @@ export const polynomialsTopics: UnitTopic[] = [
             { text: say('Bigarrenaren karratua.', 'Cuadrado del segundo.', 'مربع الثاني.', 'Square of the second.'), math: same('$(-1)^{2}=1$') }
         ],
         example: same('$(3x-2)^{2}=9x^{2}-12x+4$'),
-        takeaway: say('$(A\\pm B)^{2}=A^{2}\\pm 2AB+B^{2}$; $(A+B)(A-B)=A^{2}-B^{2}$.', '$(A\\pm B)^{2}=A^{2}\\pm 2AB+B^{2}$; $(A+B)(A-B)=A^{2}-B^{2}$.', '$(A\\pm B)^{2}=A^{2}\\pm 2AB+B^{2}$؛ $(A+B)(A-B)=A^{2}-B^{2}$.', '$(A\\pm B)^{2}=A^{2}\\pm 2AB+B^{2}$; $(A+B)(A-B)=A^{2}-B^{2}$.'),
+        takeaway: say('$(a\\pm b)^{2}=a^{2}\\pm 2ab+b^{2}$; $(a+b)(a-b)=a^{2}-b^{2}$.', '$(a\\pm b)^{2}=a^{2}\\pm 2ab+b^{2}$; $(a+b)(a-b)=a^{2}-b^{2}$.', '$(a\\pm b)^{2}=a^{2}\\pm 2ab+b^{2}$؛ $(a+b)(a-b)=a^{2}-b^{2}$.', '$(a\\pm b)^{2}=a^{2}\\pm 2ab+b^{2}$; $(a+b)(a-b)=a^{2}-b^{2}$.'),
         figure: (language) => <SquareSumFigure language={language} />
     },
 
@@ -218,7 +218,7 @@ export const polynomialsTopics: UnitTopic[] = [
             { text: say('Hondarra 4.', 'El resto es 4.', 'الباقي 4.', 'The remainder is 4.'), math: same('$-3-5+9+3=4$') }
         ],
         example: same('$R=M(4)=20$'),
-        takeaway: say('$P(X)\\mathbin{:}(X-A)$ zatiketaren hondarra $=P(A)$.', 'Resto de $P(X)\\mathbin{:}(X-A)$ $=P(A)$.', 'باقي $P(X)\\mathbin{:}(X-A)$ $=P(A)$.', 'Remainder of $P(X)\\mathbin{:}(X-A)$ $=P(A)$.'),
+        takeaway: say('$P(x)\\mathbin{:}(x-a)$ zatiketaren hondarra $=P(a)$.', 'Resto de $P(x)\\mathbin{:}(x-a)$ $=P(a)$.', 'باقي $P(x)\\mathbin{:}(x-a)$ $=P(a)$.', 'Remainder of $P(x)\\mathbin{:}(x-a)$ $=P(a)$.'),
         figure: (language) => <RemainderFigure language={language} />
     },
 
@@ -241,7 +241,7 @@ export const polynomialsTopics: UnitTopic[] = [
             { text: say('Erroak: 0, 2 eta $-4$.', 'Raíces: 0, 2 y $-4$.', 'الجذور: 0 و2 و$-4$.', 'Roots: 0, 2 and $-4$.'), math: same('$x(x-2)(x+4)$') }
         ],
         example: same('$P(1)=1-6+11-6=0$'),
-        takeaway: say('$P(A)=0$ bada, $A$ erroa da eta $X-A$ faktorea.', 'Si $P(A)=0$, $A$ es raíz y $X-A$ es factor.', 'إذا كان $P(A)=0$ فإن $A$ جذر و$X-A$ عامل.', 'If $P(A)=0$, $A$ is a root and $X-A$ is a factor.'),
+        takeaway: say('$P(a)=0$ bada, $a$ erroa da eta $x-a$ faktorea.', 'Si $P(a)=0$, $a$ es raíz y $x-a$ es factor.', 'إذا كان $P(a)=0$ فإن $a$ جذر و$x-a$ عامل.', 'If $P(a)=0$, $a$ is a root and $x-a$ is a factor.'),
         figure: (language) => <RootsFigure language={language} />
     },
     {

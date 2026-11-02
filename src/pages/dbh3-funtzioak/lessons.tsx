@@ -48,7 +48,7 @@ export const functions3Topics: UnitTopic[] = [
             wrong: same('$f(-2)=-2^{2}+6=2$'),
             right: say('Negatiboa parentesi artean karratura: $(-2)^{2}=4$, eta $f(-2)=10$.', 'El negativo va entre paréntesis al cuadrado: $(-2)^{2}=4$, y $f(-2)=10$.', 'يُربَّع السالب بين قوسين: $(-2)^{2}=4$، و$f(-2)=10$.', 'Square the negative number in brackets: $(-2)^{2}=4$, so $f(-2)=10$.')
         },
-        takeaway: say('$X$ bakoitzari $Y$ BAKAR bat.', 'A cada $X$, UN SOLO $Y$.', 'لكل $X$ قيمة $Y$ واحدة فقط.', 'Each $X$ gets ONE $Y$ only.'),
+        takeaway: say('$x$ bakoitzari $y$ BAKAR bat.', 'A cada $x$, UN SOLO $y$.', 'لكل $x$ قيمة $y$ واحدة فقط.', 'Each $x$ gets ONE $y$ only.'),
         figure: (language) => <TableFigure language={language} />
     },
     {
@@ -72,7 +72,7 @@ export const functions3Topics: UnitTopic[] = [
             wrong: say('Definizio-eremua grafikoaren altuera da.', 'El dominio es la altura de la gráfica.', 'المجال هو ارتفاع التمثيل.', 'The domain is how high the graph goes.'),
             right: say('Altuera ibilbidea da ($y$). Definizio-eremua zabalera da ($x$).', 'La altura es el recorrido ($y$). El dominio es el ancho ($x$).', 'الارتفاع هو المدى ($y$). والمجال هو العرض ($x$).', 'Height is the range ($y$). The domain is the width ($x$).')
         },
-        takeaway: say('Eremua: $X$ ardatza. Ibilbidea: $Y$ ardatza.', 'Dominio: eje $X$. Recorrido: eje $Y$.', 'المجال: محور $X$. المدى: محور $Y$.', 'Domain: the $X$ axis. Range: the $Y$ axis.'),
+        takeaway: say('Eremua: $x$ ardatza. Ibilbidea: $y$ ardatza.', 'Dominio: eje $x$. Recorrido: eje $y$.', 'المجال: محور $x$. المدى: محور $y$.', 'Domain: the $x$ axis. Range: the $y$ axis.'),
         figure: (language) => <DomainGraphFigure language={language} />
     },
     {
@@ -173,7 +173,7 @@ export const functions3Topics: UnitTopic[] = [
             wrong: say('X ardatza mozteko $x=0$ ordezkatu.', 'Para cortar el eje X se sustituye $x=0$.', 'لقطع محور X نعوّض $x=0$.', 'To meet the X axis, substitute $x=0$.'),
             right: say('Alderantziz: X ardatzean $y=0$ da. $x=0$ Y ardatzerako da.', 'Al revés: en el eje X es $y=0$. $x=0$ es para el eje Y.', 'بالعكس: على محور X يكون $y=0$. و$x=0$ لمحور Y.', 'The other way round: on the X axis $y=0$. $x=0$ is for the Y axis.')
         },
-        takeaway: say('Y ardatza: $X=0$. X ardatza: $Y=0$.', 'Eje Y: $X=0$. Eje X: $Y=0$.', 'محور Y: $X=0$. محور X: $Y=0$.', 'Y axis: $X=0$. X axis: $Y=0$.'),
+        takeaway: say('Y ardatza: $x=0$. X ardatza: $y=0$.', 'Eje Y: $x=0$. Eje X: $y=0$.', 'محور Y: $x=0$. محور X: $y=0$.', 'Y axis: $x=0$. X axis: $y=0$.'),
         figure: (language) => <InterceptsFigure language={language} />
     },
     /* ---------- 3. Linear functions ---------- */
@@ -199,7 +199,7 @@ export const functions3Topics: UnitTopic[] = [
             wrong: say('$y=2x+1$ proportzionaltasun zuzenekoa da, zuzen bat delako.', '$y=2x+1$ es de proporcionalidad directa porque es una recta.', '$y=2x+1$ تناسب طردي لأنه مستقيم.', '$y=2x+1$ is a direct proportion because it is a line.'),
             right: say('Ez da jatorritik igarotzen ($x=0$ denean $y=1$): afina da, ez proportzionala.', 'No pasa por el origen ($x=0$ da $y=1$): es afín, no proporcional.', 'لا يمر بالأصل ($x=0$ يعطي $y=1$): إنها تآلفية لا تناسبية.', 'It does not go through the origin ($x=0$ gives $y=1$): it is affine, not proportional.')
         },
-        takeaway: say('$Y=MX$: zuzena JATORRITIK, $M=\\frac{Y}{X}$.', '$Y=MX$: recta por el ORIGEN, $M=\\frac{Y}{X}$.', '$Y=MX$: مستقيم يمر بالأصل، $M=\\frac{Y}{X}$.', '$Y=MX$: a line through the ORIGIN, $M=\\frac{Y}{X}$.'),
+        takeaway: say('$y=mx$: zuzena JATORRITIK, $m=\\frac{y}{x}$.', '$y=mx$: recta por el ORIGEN, $m=\\frac{y}{x}$.', '$y=mx$: مستقيم يمر بالأصل، $m=\\frac{y}{x}$.', '$y=mx$: a line through the ORIGIN, $m=\\frac{y}{x}$.'),
         figure: (language) => <ProportionalFigure language={language} />
     },
     {
@@ -223,7 +223,7 @@ export const functions3Topics: UnitTopic[] = [
             wrong: same('$m=\\frac{4-1}{11-2}=\\frac{1}{3}$'),
             right: say('Malda $y$ aldaketa zati $x$ aldaketa da, ez alderantziz: $\\frac{9}{3}=3$.', 'La pendiente es el cambio de $y$ entre el cambio de $x$, no al revés: $\\frac{9}{3}=3$.', 'الميل تغيّر $y$ على تغيّر $x$ لا العكس: $\\frac{9}{3}=3$.', 'The slope is the change in $y$ over the change in $x$, not the other way round: $\\frac{9}{3}=3$.')
         },
-        takeaway: same('$M=\\frac{Y_{2}-Y_{1}}{X_{2}-X_{1}}$'),
+        takeaway: same('$m=\\frac{y_{2}-y_{1}}{x_{2}-x_{1}}$'),
         figure: (language) => <SlopeFigure language={language} />
     },
     {
@@ -249,7 +249,7 @@ export const functions3Topics: UnitTopic[] = [
             wrong: say('$y=3x-2$ zuzenak Y ardatza $(0,3)$ puntuan mozten du.', 'La recta $y=3x-2$ corta al eje Y en $(0,3)$.', 'المستقيم $y=3x-2$ يقطع محور Y في $(0,3)$.', 'The line $y=3x-2$ meets the Y axis at $(0,3)$.'),
             right: say('3 malda da. Ebaki-puntua $n=-2$ da: $(0,-2)$.', 'El 3 es la pendiente. El corte es $n=-2$: $(0,-2)$.', '3 هو الميل. والتقاطع $n=-2$: $(0,-2)$.', '3 is the slope. The intercept is $n=-2$: $(0,-2)$.')
         },
-        takeaway: say('$Y=MX+N$: $M$ malda, $N$ Y ardatzean.', '$Y=MX+N$: $M$ pendiente, $N$ en el eje Y.', '$Y=MX+N$: $M$ الميل و$N$ على محور Y.', '$Y=MX+N$: $M$ slope, $N$ on the Y axis.'),
+        takeaway: say('$y=mx+n$: $m$ malda, $n$ Y ardatzean.', '$y=mx+n$: $m$ pendiente, $n$ en el eje Y.', '$y=mx+n$: $m$ الميل و$n$ على محور Y.', '$y=mx+n$: $m$ slope, $n$ on the Y axis.'),
         figure: (language) => <AffineFigure language={language} />
     },
     /* ---------- 4. Lines and models ---------- */
@@ -276,7 +276,7 @@ export const functions3Topics: UnitTopic[] = [
             wrong: say('$m=2$ eta $(1,5)$: $n=5$, beraz $y=2x+5$.', '$m=2$ y $(1,5)$: $n=5$, así que $y=2x+5$.', '$m=2$ و$(1,5)$: $n=5$، إذن $y=2x+5$.', '$m=2$ and $(1,5)$: $n=5$, so $y=2x+5$.'),
             right: say('$n$ ez da puntuaren $y$, $x=0$ denean ez badago: $5=2\\cdot 1+n$, $n=3$.', '$n$ no es la $y$ del punto si no está en $x=0$: $5=2\\cdot 1+n$, $n=3$.', '$n$ ليس $y$ للنقطة إن لم تكن عند $x=0$: $5=2\\cdot 1+n$، $n=3$.', '$n$ is not the $y$ of the point unless it is at $x=0$: $5=2\\cdot 1+n$, $n=3$.')
         },
-        takeaway: say('Lehenik $M$; gero puntu bat ordezkatu $N$ lortzeko.', 'Primero $M$; después sustituye un punto para hallar $N$.', 'أولًا $M$؛ ثم عوّض نقطة لإيجاد $N$.', 'First $M$; then substitute a point to find $N$.'),
+        takeaway: say('Lehenik $m$; gero puntu bat ordezkatu $n$ lortzeko.', 'Primero $m$; después sustituye un punto para hallar $n$.', 'أولًا $m$؛ ثم عوّض نقطة لإيجاد $n$.', 'First $m$; then substitute a point to find $n$.'),
         figure: (language) => <LineEquationFigure language={language} />
     },
     {
@@ -301,7 +301,7 @@ export const functions3Topics: UnitTopic[] = [
             wrong: say('$y=2x+1$ eta $y=x+1$ paraleloak dira, $n$ bera dutelako.', '$y=2x+1$ e $y=x+1$ son paralelas porque tienen el mismo $n$.', '$y=2x+1$ و$y=x+1$ متوازيان لأن لهما $n$ نفسه.', '$y=2x+1$ and $y=x+1$ are parallel because they have the same $n$.'),
             right: say('$n$ bera dutenek Y ardatzean ebakitzen dute, $(0,1)$ puntuan. Paraleloek malda bera dute.', 'Con el mismo $n$ se cortan en el eje Y, en $(0,1)$. Las paralelas tienen la misma pendiente.', 'لهما $n$ نفسه فيتقاطعان على محور Y في $(0,1)$. والمتوازيان لهما الميل نفسه.', 'With the same $n$ they cross on the Y axis, at $(0,1)$. Parallel lines have the same slope.')
         },
-        takeaway: say('Paraleloak: $M$ BERA. Ebakidura: berdindu.', 'Paralelas: la MISMA $M$. Corte: igualar.', 'المتوازيان: $M$ نفسه. التقاطع: المساواة.', 'Parallel: the SAME $M$. Crossing: set equal.'),
+        takeaway: say('Paraleloak: $m$ BERA. Ebakidura: berdindu.', 'Paralelas: la MISMA $m$. Corte: igualar.', 'المتوازيان: $m$ نفسه. التقاطع: المساواة.', 'Parallel: the SAME $m$. Crossing: set equal.'),
         figure: (language) => <ParallelFigure language={language} />
     },
     {
@@ -326,7 +326,7 @@ export const functions3Topics: UnitTopic[] = [
             wrong: say('Taxia: 3 € hasteko eta 1,50 € km-ko. 8 km: $3\\cdot 8+1{,}5=25{,}5$ €.', 'Taxi: 3 € de bajada y 1,50 € el km. 8 km: $3\\cdot 8+1{,}5=25{,}5$ €.', 'سيارة أجرة: 3 يورو انطلاق و1.50 يورو للكيلومتر. 8 كم: $3\\cdot 8+1{,}5=25{,}5$ يورو.', 'Taxi: €3 to start and €1.50 per km. 8 km: $3\\cdot 8+1{,}5=25{,}5$ €.'),
             right: say('Km kopurua prezioaz biderkatzen da, eta zati finkoa batu: $1{,}5\\cdot 8+3=15$ €.', 'Se multiplica el precio por los km y se suma la parte fija: $1{,}5\\cdot 8+3=15$ €.', 'نضرب السعر في الكيلومترات ونضيف الجزء الثابت: $1{,}5\\cdot 8+3=15$ يورو.', 'Multiply the price by the km and add the fixed part: $1{,}5\\cdot 8+3=15$ €.')
         },
-        takeaway: say('Tarifa = $M$ · unitateak + $N$ finkoa.', 'Tarifa = $M$ · unidades + $N$ fijo.', 'التعريفة = $M$ · الوحدات + $N$ الثابت.', 'Price = $M$ · units + fixed $N$.'),
+        takeaway: say('Tarifa = $m$ · unitateak + $n$ finkoa.', 'Tarifa = $m$ · unidades + $n$ fijo.', 'التعريفة = $m$ · الوحدات + $n$ الثابت.', 'Price = $m$ · units + fixed $n$.'),
         figure: (language) => <LinearModelsFigure language={language} />
     },
     /* ---------- 5. Quadratic functions ---------- */
@@ -352,7 +352,7 @@ export const functions3Topics: UnitTopic[] = [
             wrong: say('$y=-x^{2}$ gora irekitzen da, $x^{2}$ beti positiboa delako.', '$y=-x^{2}$ se abre hacia arriba porque $x^{2}$ siempre es positivo.', '$y=-x^{2}$ ينفتح إلى الأعلى لأن $x^{2}$ موجب دائمًا.', '$y=-x^{2}$ opens upwards because $x^{2}$ is always positive.'),
             right: say('Minusak $y$ guztiak negatibo egiten ditu: behera irekitzen da.', 'El menos hace negativos todos los $y$: se abre hacia abajo.', 'السالب يجعل كل قيم $y$ سالبة: ينفتح إلى الأسفل.', 'The minus makes every $y$ negative: it opens downwards.')
         },
-        takeaway: say('$A>0$: ∪ (minimoa). $A<0$: ∩ (maximoa).', '$A>0$: ∪ (mínimo). $A<0$: ∩ (máximo).', '$A>0$: ∪ (صغرى). $A<0$: ∩ (عظمى).', '$A>0$: ∪ (minimum). $A<0$: ∩ (maximum).'),
+        takeaway: say('$a>0$: ∪ (minimoa). $a<0$: ∩ (maximoa).', '$a>0$: ∪ (mínimo). $a<0$: ∩ (máximo).', '$a>0$: ∪ (صغرى). $a<0$: ∩ (عظمى).', '$a>0$: ∪ (minimum). $a<0$: ∩ (maximum).'),
         figure: (language) => <ParabolaShapesFigure language={language} />
     },
     {
@@ -377,7 +377,7 @@ export const functions3Topics: UnitTopic[] = [
             wrong: same('$x_{v}=\\frac{-6}{2}=-3$'),
             right: say('Formulak $-b$ du: $b=-6$ bada, $-b=6$ eta $x_{v}=3$.', 'La fórmula lleva $-b$: si $b=-6$, $-b=6$ y $x_{v}=3$.', 'في الصيغة $-b$: إذا $b=-6$ فإن $-b=6$ و$x_{v}=3$.', 'The formula has $-b$: if $b=-6$, $-b=6$ and $x_{v}=3$.')
         },
-        takeaway: same('$X_{V}=\\frac{-B}{2A}$'),
+        takeaway: same('$x_{v}=\\frac{-b}{2a}$'),
         figure: (language) => <VertexFigure language={language} />
     },
     {
@@ -403,7 +403,7 @@ export const functions3Topics: UnitTopic[] = [
             wrong: say('Parabola batek beti mozten du X ardatza bi puntutan.', 'Una parábola siempre corta al eje X en dos puntos.', 'يقطع القطع المكافئ محور X دائمًا في نقطتين.', 'A parabola always meets the X axis at two points.'),
             right: say('Ez beti: $\\Delta$ negatiboa bada ez du mozten, eta zero bada ukitu besterik ez du egiten.', 'No siempre: si $\\Delta$ es negativo no lo corta, y si es cero solo lo toca.', 'ليس دائمًا: إذا كان $\\Delta$ سالبًا لا يقطعه، وإذا كان صفرًا يمسّه فقط.', 'Not always: if $\\Delta$ is negative it does not meet it, and if it is zero it only touches it.')
         },
-        takeaway: say('Y ardatza: $(0,C)$. X ardatza: $AX^{2}+BX+C=0$.', 'Eje Y: $(0,C)$. Eje X: $AX^{2}+BX+C=0$.', 'محور Y: $(0,C)$. محور X: $AX^{2}+BX+C=0$.', 'Y axis: $(0,C)$. X axis: $AX^{2}+BX+C=0$.'),
+        takeaway: say('Y ardatza: $(0,c)$. X ardatza: $ax^{2}+bx+c=0$.', 'Eje Y: $(0,c)$. Eje X: $ax^{2}+bx+c=0$.', 'محور Y: $(0,c)$. محور X: $ax^{2}+bx+c=0$.', 'Y axis: $(0,c)$. X axis: $ax^{2}+bx+c=0$.'),
         figure: (language) => <ParabolaCutsFigure language={language} />
     }
 ]

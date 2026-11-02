@@ -52,7 +52,7 @@ export const proportion3Topics: UnitTopic[] = [
             wrong: say('$\\frac{2}{3}$ eta $\\frac{4}{5}$ proportzionalak dira, bietan goiko zenbakiari 1 gehitzen zaiolako behekoa lortzeko.', '$\\frac{2}{3}$ y $\\frac{4}{5}$ son proporcionales, porque en las dos se suma 1 para pasar de arriba abajo.', '$\\frac{2}{3}$ و$\\frac{4}{5}$ متناسبتان لأننا نضيف 1 في الحالتين للانتقال من الأعلى إلى الأسفل.', '$\\frac{2}{3}$ and $\\frac{4}{5}$ are proportional, because in both you add 1 to go from top to bottom.'),
             right: say('Proportzioak zatidurak konparatzen ditu, ez kenketak: $2\\cdot 5=10$ eta $3\\cdot 4=12$, ez dira berdinak.', 'Una proporción compara cocientes, no restas: $2\\cdot 5=10$ y $3\\cdot 4=12$ no son iguales.', 'التناسب يقارن حواصل القسمة لا الفروق: $2\\cdot 5=10$ و$3\\cdot 4=12$ غير متساويين.', 'A proportion compares quotients, not differences: $2\\cdot 5=10$ and $3\\cdot 4=12$ are not equal.')
         },
-        takeaway: say('Proportzioa: $\\frac{A}{B}=\\frac{C}{D}$ eta $A\\cdot D=B\\cdot C$.', 'Proporción: $\\frac{A}{B}=\\frac{C}{D}$ y $A\\cdot D=B\\cdot C$.', 'التناسب: $\\frac{A}{B}=\\frac{C}{D}$ و$A\\cdot D=B\\cdot C$.', 'Proportion: $\\frac{A}{B}=\\frac{C}{D}$ and $A\\cdot D=B\\cdot C$.'),
+        takeaway: say('Proportzioa: $\\frac{a}{b}=\\frac{c}{d}$ eta $a\\cdot d=b\\cdot c$.', 'Proporción: $\\frac{a}{b}=\\frac{c}{d}$ y $a\\cdot d=b\\cdot c$.', 'التناسب: $\\frac{a}{b}=\\frac{c}{d}$ و$a\\cdot d=b\\cdot c$.', 'Proportion: $\\frac{a}{b}=\\frac{c}{d}$ and $a\\cdot d=b\\cdot c$.'),
         figure: (language) => <RatioFigure language={language} />
     },
     {
@@ -82,7 +82,7 @@ export const proportion3Topics: UnitTopic[] = [
             wrong: say('$\\frac{4}{10}=\\frac{6}{x}$: goian 2 gehitu da, beraz behean ere bai, $x=12$.', '$\\frac{4}{10}=\\frac{6}{x}$: arriba se ha sumado 2, así que abajo también, $x=12$.', '$\\frac{4}{10}=\\frac{6}{x}$: أضفنا 2 في الأعلى فنضيفه في الأسفل، $x=12$.', '$\\frac{4}{10}=\\frac{6}{x}$: 2 was added on top, so add it at the bottom too, $x=12$.'),
             right: say('Proportzioan biderkatzen da, ez batu: $6$ zenbakia $4\\cdot 1{,}5$ da, beraz $x=10\\cdot 1{,}5=15$.', 'En una proporción se multiplica, no se suma: $6$ es $4\\cdot 1{,}5$, así que $x=10\\cdot 1{,}5=15$.', 'في التناسب نضرب ولا نجمع: $6$ هو $4\\cdot 1{,}5$ إذن $x=10\\cdot 1{,}5=15$.', 'In a proportion you multiply, you do not add: $6$ is $4\\cdot 1{,}5$, so $x=10\\cdot 1{,}5=15$.')
         },
-        takeaway: say('Ezezaguna: bi gai gurutzean biderkatu eta hirugarrenaz zatitu. Erdiko proportzionala: $X^{2}=A\\cdot B$.', 'Incógnita: multiplica dos términos en cruz y divide entre el tercero. Media proporcional: $X^{2}=A\\cdot B$.', 'المجهول: اضرب حدّين تبادليًا واقسم على الثالث. الوسط المتناسب: $X^{2}=A\\cdot B$.', 'Unknown: cross-multiply two terms and divide by the third. Mean proportional: $X^{2}=A\\cdot B$.'),
+        takeaway: say('Ezezaguna: bi gai gurutzean biderkatu eta hirugarrenaz zatitu. Erdiko proportzionala: $x^{2}=a\\cdot b$.', 'Incógnita: multiplica dos términos en cruz y divide entre el tercero. Media proporcional: $x^{2}=a\\cdot b$.', 'المجهول: اضرب حدّين تبادليًا واقسم على الثالث. الوسط المتناسب: $x^{2}=a\\cdot b$.', 'Unknown: cross-multiply two terms and divide by the third. Mean proportional: $x^{2}=a\\cdot b$.'),
         figure: (language) => <ProportionFigure language={language} />
     },
     {
@@ -108,7 +108,7 @@ export const proportion3Topics: UnitTopic[] = [
             wrong: say('$1\\mathbin{:}50\\,000$ eskalan, mapako 3 cm-k 150\u00a0000 km dira.', 'A escala $1\\mathbin{:}50\\,000$, 3 cm del mapa son 150\u00a0000 km.', 'بمقياس $1\\mathbin{:}50\\,000$ تساوي 3 سم على الخريطة 150000 كم.', 'At a scale of $1\\mathbin{:}50\\,000$, 3 cm on the map is 150,000 km.'),
             right: say('Emaitza cm-tan dago: $150\\,000$ cm $=1{,}5$ km. Eskalak ez du unitatea aldatzen.', 'El resultado está en cm: $150\\,000$ cm $=1{,}5$ km. La escala no cambia la unidad.', 'النتيجة بالسنتيمتر: $150\\,000$ سم $=1{,}5$ كم. المقياس لا يغيّر الوحدة.', 'The result is in cm: $150\\,000$ cm $=1{,}5$ km. The scale does not change the unit.')
         },
-        takeaway: say('Erreala = planoa · eskala. Unitate bera bi aldeetan; gero, $1\\ \\mathrm{KM}=100\\,000\\ \\mathrm{CM}$.', 'Real = plano · escala. La misma unidad a los dos lados; después, $1\\ \\mathrm{KM}=100\\,000\\ \\mathrm{CM}$.', 'الحقيقي = المخطط · المقياس. الوحدة نفسها في الطرفين ثم $1\\ \\mathrm{KM}=100\\,000\\ \\mathrm{CM}$.', 'Real = plan · scale. The same unit on both sides; then $1\\ \\mathrm{KM}=100\\,000\\ \\mathrm{CM}$.'),
+        takeaway: say('Erreala = planoa · eskala. Unitate bera bi aldeetan; gero, $1\\ \\mathrm{km}=100\\,000\\ \\mathrm{cm}$.', 'Real = plano · escala. La misma unidad a los dos lados; después, $1\\ \\mathrm{km}=100\\,000\\ \\mathrm{cm}$.', 'الحقيقي = المخطط · المقياس. الوحدة نفسها في الطرفين ثم $1\\ \\mathrm{km}=100\\,000\\ \\mathrm{cm}$.', 'Real = plan · scale. The same unit on both sides; then $1\\ \\mathrm{km}=100\\,000\\ \\mathrm{cm}$.'),
         figure: (language) => <ScaleFigure language={language} />
     },
 
@@ -140,7 +140,7 @@ export const proportion3Topics: UnitTopic[] = [
             wrong: say('Bi magnitude biak hazten badira, zuzenki proportzionalak dira: adina eta altuera, adibidez.', 'Si dos magnitudes crecen a la vez, son directamente proporcionales: la edad y la altura, por ejemplo.', 'إذا كبر مقداران معًا فهما متناسبان طرديًا: العمر والطول مثلًا.', 'If two quantities grow together, they are directly proportional: age and height, for example.'),
             right: say('Hazteaz gain, proportzio berean hazi behar dute: 10 urterekin ez da 5 urterekin baino bi aldiz altuagoa.', 'Además de crecer, tienen que crecer en la misma proporción: con 10 años no se mide el doble que con 5.', 'لا يكفي أن يكبرا، بل يجب أن يكبرا بالنسبة نفسها: في العاشرة لا يكون الطول ضعفه في الخامسة.', 'As well as growing, they must grow in the same proportion: at 10 you are not twice as tall as at 5.')
         },
-        takeaway: say('Zuzena: zatidura konstantea. $X=\\frac{B\\cdot C}{A}$ edo lehenik unitate baten balioa.', 'Directa: cociente constante. $X=\\frac{B\\cdot C}{A}$ o primero el valor de una unidad.', 'الطردي: حاصل قسمة ثابت. $X=\\frac{B\\cdot C}{A}$ أو قيمة الوحدة أولًا.', 'Direct: constant quotient. $X=\\frac{B\\cdot C}{A}$, or first the value of one unit.'),
+        takeaway: say('Zuzena: zatidura konstantea. $x=\\frac{b\\cdot c}{a}$ edo lehenik unitate baten balioa.', 'Directa: cociente constante. $x=\\frac{b\\cdot c}{a}$ o primero el valor de una unidad.', 'الطردي: حاصل قسمة ثابت. $x=\\frac{b\\cdot c}{a}$ أو قيمة الوحدة أولًا.', 'Direct: constant quotient. $x=\\frac{b\\cdot c}{a}$, or first the value of one unit.'),
         figure: (language) => <RuleOfThreeFigure language={language} />
     },
     {
@@ -166,7 +166,7 @@ export const proportion3Topics: UnitTopic[] = [
             wrong: say('6 margolarik 10 egun; 4 margolarik: $\\frac{4\\cdot 10}{6}\\approx 6{,}7$ egun.', '6 pintores, 10 días; 4 pintores: $\\frac{4\\cdot 10}{6}\\approx 6{,}7$ días.', '6 دهّانين 10 أيام؛ 4 دهّانين: $\\frac{4\\cdot 10}{6}\\approx 6{,}7$ يوم.', '6 painters, 10 days; 4 painters: $\\frac{4\\cdot 10}{6}\\approx 6{,}7$ days.'),
             right: say('Hiruko erregela zuzena aplikatu da. Margolari gutxiagok gehiago behar dute: $\\frac{6\\cdot 10}{4}=15$ egun.', 'Se ha aplicado la regla de tres directa. Menos pintores tardan más: $\\frac{6\\cdot 10}{4}=15$ días.', 'طُبّقت القاعدة الطردية. العمال الأقل يحتاجون وقتًا أطول: $\\frac{6\\cdot 10}{4}=15$ يومًا.', 'The direct rule was used. Fewer painters take longer: $\\frac{6\\cdot 10}{4}=15$ days.')
         },
-        takeaway: say('Alderantzizkoa: biderkadura konstantea. $X=\\frac{A\\cdot B}{C}$.', 'Inversa: producto constante. $X=\\frac{A\\cdot B}{C}$.', 'العكسي: حاصل ضرب ثابت. $X=\\frac{A\\cdot B}{C}$.', 'Inverse: constant product. $X=\\frac{A\\cdot B}{C}$.'),
+        takeaway: say('Alderantzizkoa: biderkadura konstantea. $x=\\frac{a\\cdot b}{c}$.', 'Inversa: producto constante. $x=\\frac{a\\cdot b}{c}$.', 'العكسي: حاصل ضرب ثابت. $x=\\frac{a\\cdot b}{c}$.', 'Inverse: constant product. $x=\\frac{a\\cdot b}{c}$.'),
         figure: (language) => <GearsFigure language={language} />
     },
     {
@@ -225,7 +225,7 @@ export const proportion3Topics: UnitTopic[] = [
             wrong: say('Magnitude guztiak ezezagunarekin batera konparatu dira: «makina gutxiago eta pieza gehiago, beraz ordu gehiago», eta zatiki guztiak berria/zaharra moduan jarri dira.', 'Se han comparado todas a la vez y se han puesto todas las fracciones como nuevo/viejo.', 'قورنت المقادير كلها معًا ووُضعت كل الكسور على صورة الجديد/القديم.', 'All the quantities were compared at once and every fraction was written as new/old.'),
             right: say('Magnitude bakoitza bakarka konparatzen da ezezagunarekin. Alderantzizkoetan zatikia buelta emanda doa: zaharra/berria.', 'Cada magnitud se compara por separado con la incógnita. En las inversas la fracción va al revés: viejo/nuevo.', 'يُقارن كل مقدار وحده بالمجهول. وفي العكسية يُقلب الكسر: القديم/الجديد.', 'Each quantity is compared with the unknown on its own. For the inverse ones the fraction is turned round: old/new.')
         },
-        takeaway: say('Zuzena: $\\frac{BERRIA}{ZAHARRA}$. Alderantzizkoa: $\\frac{ZAHARRA}{BERRIA}$. Gero, biderkatu guztiak.', 'Directa: $\\frac{NUEVO}{VIEJO}$. Inversa: $\\frac{VIEJO}{NUEVO}$. Después, multiplica todo.', 'الطردي: الجديد/القديم. العكسي: القديم/الجديد. ثم اضرب كل شيء.', 'Direct: $\\frac{NEW}{OLD}$. Inverse: $\\frac{OLD}{NEW}$. Then multiply everything.'),
+        takeaway: say('Zuzena: berria/zaharra. Alderantzizkoa: zaharra/berria. Gero, biderkatu guztiak.', 'Directa: nuevo/viejo. Inversa: viejo/nuevo. Después, multiplica todo.', 'الطردي: الجديد/القديم. العكسي: القديم/الجديد. ثم اضرب كل شيء.', 'Direct: new/old. Inverse: old/new. Then multiply everything.'),
         figure: (language) => <CompoundMixedFigure language={language} />
     },
     {
@@ -251,7 +251,7 @@ export const proportion3Topics: UnitTopic[] = [
             wrong: say('Hiru pertsona daudenez, bakoitzari $300\\mathbin{:}3=100$ € ematen zaizkio.', 'Como son tres personas, a cada una se le dan $300\\mathbin{:}3=100$ €.', 'لأنهم ثلاثة يُعطى كلٌّ $300\\mathbin{:}3=100$ €.', 'Since there are three people, each one gets $300\\mathbin{:}3=100$ €.'),
             right: say('Hori banaketa berdina da. Proportzionalean, zatitu zenbakien baturaz, ez pertsona kopuruaz.', 'Eso es un reparto a partes iguales. En el proporcional se divide entre la suma de los números, no entre el número de personas.', 'هذا توزيع بالتساوي. وفي التوزيع التناسبي نقسم على مجموع الأعداد لا على عدد الأشخاص.', 'That is an equal share. In a proportional share you divide by the sum of the numbers, not by the number of people.')
         },
-        takeaway: say('Zati bat $=\\frac{KOPURUA}{BATURA}$; bakoitzari, bere zenbakia bider zati bat.', 'Una parte $=\\frac{CANTIDAD}{SUMA}$; a cada uno, su número por una parte.', 'الجزء $=\\frac{C}{S}$؛ ولكل واحد عدده في الجزء.', 'One part $=\\frac{AMOUNT}{SUM}$; each person gets their number times one part.'),
+        takeaway: say('Zati bat = kopurua/batura; bakoitzari, bere zenbakia bider zati bat.', 'Una parte = cantidad/suma; a cada uno, su número por una parte.', 'الجزء = الكمية/المجموع؛ ولكل واحد عدده في الجزء.', 'One part = amount/sum; each person gets their number times one part.'),
         figure: (language) => <DirectShareFigure language={language} />
     },
     {
@@ -277,7 +277,7 @@ export const proportion3Topics: UnitTopic[] = [
             wrong: say('Alderantzizkoa denez, banatu zuzenean 2, 3 eta 6 zenbakiekiko eta trukatu emaitzak.', 'Como es inversa, se reparte de forma directa a 2, 3 y 6 y se cambian los resultados de sitio.', 'لأنه عكسي نوزع طرديًا على 2 و3 و6 ثم نبدّل النتائج.', 'Since it is inverse, share directly in proportion to 2, 3 and 6 and swap the results round.'),
             right: say('Trukatzeak ez du balio: 72, 108 eta 180 lortuko lirateke, ez 180, 120 eta 60. Alderantzizkoekin banatu behar da.', 'Cambiar de sitio no sirve: saldrían 72, 108 y 180, no 180, 120 y 60. Hay que repartir con los inversos.', 'التبديل لا ينفع: سنحصل على 72 و108 و180 لا 180 و120 و60. يجب التوزيع على المقلوبات.', 'Swapping does not work: you would get 72, 108 and 180, not 180, 120 and 60. You must share using the reciprocals.')
         },
-        takeaway: say('Alderantzizkoa: banatu zuzenean $\\frac{1}{A}$, $\\frac{1}{B}$, $\\frac{1}{C}$ zenbakiekiko.', 'Inverso: reparte de forma directa a $\\frac{1}{A}$, $\\frac{1}{B}$, $\\frac{1}{C}$.', 'العكسي: وزّع طرديًا على $\\frac{1}{A}$ و$\\frac{1}{B}$ و$\\frac{1}{C}$.', 'Inverse: share directly in proportion to $\\frac{1}{A}$, $\\frac{1}{B}$, $\\frac{1}{C}$.'),
+        takeaway: say('Alderantzizkoa: banatu zuzenean $\\frac{1}{a}$, $\\frac{1}{b}$, $\\frac{1}{c}$ zenbakiekiko.', 'Inverso: reparte de forma directa a $\\frac{1}{a}$, $\\frac{1}{b}$, $\\frac{1}{c}$.', 'العكسي: وزّع طرديًا على $\\frac{1}{a}$ و$\\frac{1}{b}$ و$\\frac{1}{c}$.', 'Inverse: share directly in proportion to $\\frac{1}{a}$, $\\frac{1}{b}$, $\\frac{1}{c}$.'),
         figure: (language) => <InverseShareFigure language={language} />
     },
 
@@ -310,7 +310,7 @@ export const proportion3Topics: UnitTopic[] = [
             wrong: say('% 15 jaitsi ondoren 51 € balio badu, lehen $51+0{,}15\\cdot 51=58{,}65$ € balio zuen.', 'Si tras bajar un 15 % cuesta 51 €, antes costaba $51+0{,}15\\cdot 51=58{,}65$ €.', 'إذا صار 51 € بعد تخفيض 15٪ فقد كان $51+0{,}15\\cdot 51=58{,}65$ €.', 'If after a 15% discount it costs €51, before it cost $51+0{,}15\\cdot 51=58{,}65$ €.'),
             right: say('% 15 hasierako prezioarena da, ez amaierakoarena. Zatitu indizeaz: $51\\mathbin{:}0{,}85=60$ €.', 'El 15 % es del precio inicial, no del final. Divide entre el índice: $51\\mathbin{:}0{,}85=60$ €.', '15٪ من السعر الأصلي لا النهائي. اقسم على المؤشر: $51\\mathbin{:}0{,}85=60$ €.', 'The 15% is of the original price, not the final one. Divide by the index: $51\\mathbin{:}0{,}85=60$ €.')
         },
-        takeaway: say('Amaierakoa = hasierakoa · indizea. Igoera: $1+\\frac{R}{100}$; jaitsiera: $1-\\frac{R}{100}$.', 'Final = inicial · índice. Aumento: $1+\\frac{R}{100}$; disminución: $1-\\frac{R}{100}$.', 'النهائية = الأصلية · المؤشر. الزيادة: $1+\\frac{R}{100}$؛ النقصان: $1-\\frac{R}{100}$.', 'Final = original · index. Increase: $1+\\frac{R}{100}$; decrease: $1-\\frac{R}{100}$.'),
+        takeaway: say('Amaierakoa = hasierakoa · indizea. Igoera: $1+\\frac{r}{100}$; jaitsiera: $1-\\frac{r}{100}$.', 'Final = inicial · índice. Aumento: $1+\\frac{r}{100}$; disminución: $1-\\frac{r}{100}$.', 'النهائية = الأصلية · المؤشر. الزيادة: $1+\\frac{r}{100}$؛ النقصان: $1-\\frac{r}{100}$.', 'Final = original · index. Increase: $1+\\frac{r}{100}$; decrease: $1-\\frac{r}{100}$.'),
         figure: (language) => <IndexFigure language={language} />
     },
     {
@@ -336,7 +336,7 @@ export const proportion3Topics: UnitTopic[] = [
             wrong: say('% 20 igo eta % 25 jaitsi: guztira $20-25=-5$, % 5 jaitsi da.', 'Sube un 20 % y baja un 25 %: en total $20-25=-5$, baja un 5 %.', 'زيادة 20٪ ونقصان 25٪: المجموع $20-25=-5$ أي نقصان 5٪.', 'Up 20% and down 25%: in total $20-25=-5$, so it is down 5%.'),
             right: say('Ehunekoak ez dira batzen: % 25 prezio berriarena da. Indizeak biderkatu: $1{,}2\\cdot 0{,}75=0{,}9$, % 10 jaitsi da.', 'Los porcentajes no se suman: el 25 % es del precio nuevo. Multiplica los índices: $1{,}2\\cdot 0{,}75=0{,}9$, baja un 10 %.', 'النسب لا تُجمع: 25٪ من السعر الجديد. اضرب المؤشرات: $1{,}2\\cdot 0{,}75=0{,}9$ أي نقصان 10٪.', 'Percentages are not added: the 25% is of the new price. Multiply the indices: $1{,}2\\cdot 0{,}75=0{,}9$, a 10% decrease.')
         },
-        takeaway: say('Kateatuak: indize osoa $=I_{1}\\cdot I_{2}\\cdots$. Ehunekoak ez dira batzen.', 'Encadenados: índice total $=I_{1}\\cdot I_{2}\\cdots$. Los porcentajes no se suman.', 'المتتالية: المؤشر الكلي $=I_{1}\\cdot I_{2}\\cdots$. النسب لا تُجمع.', 'Successive: total index $=I_{1}\\cdot I_{2}\\cdots$. Percentages are not added.'),
+        takeaway: say('Kateatuak: indize osoa $=i_{1}\\cdot i_{2}\\cdots$. Ehunekoak ez dira batzen.', 'Encadenados: índice total $=i_{1}\\cdot i_{2}\\cdots$. Los porcentajes no se suman.', 'المتتالية: المؤشر الكلي $=i_{1}\\cdot i_{2}\\cdots$. النسب لا تُجمع.', 'Successive: total index $=i_{1}\\cdot i_{2}\\cdots$. Percentages are not added.'),
         figure: (language) => <ChainedFigure language={language} />
     },
     {
@@ -362,7 +362,7 @@ export const proportion3Topics: UnitTopic[] = [
             wrong: say('1200 € 8 hilabetez, interes-tasa % 5 dela: $\\frac{1200\\cdot 5\\cdot 8}{100}=480$ €.', '1200 € al 5 % durante 8 meses: $\\frac{1200\\cdot 5\\cdot 8}{100}=480$ €.', '1200 € بفائدة 5٪ مدة 8 أشهر: $\\frac{1200\\cdot 5\\cdot 8}{100}=480$ €.', '€1,200 at 5% for 8 months: $\\frac{1200\\cdot 5\\cdot 8}{100}=480$ €.'),
             right: say('Tasa urtekoa da: 8 hilabete $\\frac{8}{12}$ urte dira. $\\frac{1200\\cdot 5}{100}\\cdot\\frac{8}{12}=40$ €.', 'El rédito es anual: 8 meses son $\\frac{8}{12}$ de año. $\\frac{1200\\cdot 5}{100}\\cdot\\frac{8}{12}=40$ €.', 'السعر سنوي: 8 أشهر هي $\\frac{8}{12}$ سنة. $\\frac{1200\\cdot 5}{100}\\cdot\\frac{8}{12}=40$ €.', 'The rate is per year: 8 months is $\\frac{8}{12}$ of a year. $\\frac{1200\\cdot 5}{100}\\cdot\\frac{8}{12}=40$ €.')
         },
-        takeaway: say('$I=\\frac{C\\cdot R\\cdot T}{100}$, $T$ urtetan. Guztira: $C+I$.', '$I=\\frac{C\\cdot R\\cdot T}{100}$, con $T$ en años. En total: $C+I$.', '$I=\\frac{C\\cdot R\\cdot T}{100}$ و$T$ بالسنوات. المجموع: $C+I$.', '$I=\\frac{C\\cdot R\\cdot T}{100}$, with $T$ in years. In total: $C+I$.'),
+        takeaway: say('$I=\\frac{C\\cdot r\\cdot t}{100}$, $t$ urtetan. Guztira: $C+I$.', '$I=\\frac{C\\cdot r\\cdot t}{100}$, con $t$ en años. En total: $C+I$.', '$I=\\frac{C\\cdot r\\cdot t}{100}$ و$t$ بالسنوات. المجموع: $C+I$.', '$I=\\frac{C\\cdot r\\cdot t}{100}$, with $t$ in years. In total: $C+I$.'),
         figure: (language) => <InterestFigure language={language} />
     },
 
@@ -390,7 +390,7 @@ export const proportion3Topics: UnitTopic[] = [
             wrong: say('Nahastearen prezioa bi prezioen erdia da: $\\frac{8+13}{2}=10{,}50$ €/kg.', 'El precio de la mezcla es la media de los dos: $\\frac{8+13}{2}=10{,}50$ €/kg.', 'سعر الخليط متوسط السعرين: $\\frac{8+13}{2}=10{,}50$ €/كغ.', 'The price of the mixture is the average of the two: $\\frac{8+13}{2}=10{,}50$ €/kg.'),
             right: say('Kafe merke gehiago dago, beraz prezioa merketik hurbilago dago: $\\frac{96+104}{20}=10$ €/kg.', 'Hay más café barato, así que el precio queda más cerca del barato: $\\frac{96+104}{20}=10$ €/kg.', 'البن الرخيص أكثر، فالسعر أقرب إلى الرخيص: $\\frac{96+104}{20}=10$ €/كغ.', 'There is more cheap coffee, so the price is closer to the cheap one: $\\frac{96+104}{20}=10$ €/kg.')
         },
-        takeaway: say('Nahastea: $\\frac{A\\cdot P+B\\cdot Q}{A+B}$, bi prezioen artean.', 'Mezcla: $\\frac{A\\cdot P+B\\cdot Q}{A+B}$, entre los dos precios.', 'الخليط: $\\frac{A\\cdot P+B\\cdot Q}{A+B}$ بين السعرين.', 'Mixture: $\\frac{A\\cdot P+B\\cdot Q}{A+B}$, between the two prices.'),
+        takeaway: say('Nahastea: $\\frac{a\\cdot p+b\\cdot q}{a+b}$, bi prezioen artean.', 'Mezcla: $\\frac{a\\cdot p+b\\cdot q}{a+b}$, entre los dos precios.', 'الخليط: $\\frac{a\\cdot p+b\\cdot q}{a+b}$ بين السعرين.', 'Mixture: $\\frac{a\\cdot p+b\\cdot q}{a+b}$, between the two prices.'),
         figure: (language) => <MixtureFigure language={language} />
     },
     {
@@ -420,7 +420,7 @@ export const proportion3Topics: UnitTopic[] = [
             wrong: say('Elkarrengana doazenean ere abiadurak kentzen dira: $\\frac{210}{80-60}=10{,}5$ h.', 'También cuando van al encuentro se restan las velocidades: $\\frac{210}{80-60}=10{,}5$ h.', 'حتى عند التقابل تُطرح السرعتان: $\\frac{210}{80-60}=10{,}5$ س.', 'Even when they move towards each other, subtract the speeds: $\\frac{210}{80-60}=10{,}5$ h.'),
             right: say('Elkarrengana doazenean bien bideak batzen dira: ordu bakoitzean $80+60=140$ km hurbiltzen dira, $t=1{,}5$ h.', 'Al ir al encuentro se suman los dos caminos: cada hora se acercan $80+60=140$ km, $t=1{,}5$ h.', 'عند التقابل يُجمع الطريقان: تقتربان كل ساعة $80+60=140$ كم، $t=1{,}5$ س.', 'Moving towards each other, both journeys add up: each hour they get $80+60=140$ km closer, $t=1{,}5$ h.')
         },
-        takeaway: say('Elkarrengana: $T=\\frac{D}{V_{1}+V_{2}}$. Atzetik: $T=\\frac{D}{V_{1}-V_{2}}$.', 'Encuentro: $T=\\frac{D}{V_{1}+V_{2}}$. Alcance: $T=\\frac{D}{V_{1}-V_{2}}$.', 'التقابل: $T=\\frac{D}{V_{1}+V_{2}}$. اللحاق: $T=\\frac{D}{V_{1}-V_{2}}$.', 'Meeting: $T=\\frac{D}{V_{1}+V_{2}}$. Catching up: $T=\\frac{D}{V_{1}-V_{2}}$.'),
+        takeaway: say('Elkarrengana: $t=\\frac{d}{v_{1}+v_{2}}$. Atzetik: $t=\\frac{d}{v_{1}-v_{2}}$.', 'Encuentro: $t=\\frac{d}{v_{1}+v_{2}}$. Alcance: $t=\\frac{d}{v_{1}-v_{2}}$.', 'التقابل: $t=\\frac{d}{v_{1}+v_{2}}$. اللحاق: $t=\\frac{d}{v_{1}-v_{2}}$.', 'Meeting: $t=\\frac{d}{v_{1}+v_{2}}$. Catching up: $t=\\frac{d}{v_{1}-v_{2}}$.'),
         figure: (language) => <MotionFigure language={language} />
     },
     {
@@ -446,7 +446,7 @@ export const proportion3Topics: UnitTopic[] = [
             wrong: say('4 ordu eta 12 ordu: elkarrekin $4+12=16$ ordu, edo erdia, 8 ordu.', '4 horas y 12 horas: juntos $4+12=16$ horas, o la media, 8 horas.', '4 ساعات و12 ساعة: معًا $4+12=16$ ساعة أو المتوسط 8 ساعات.', '4 hours and 12 hours: together $4+12=16$ hours, or the average, 8 hours.'),
             right: say('Denborak ez dira batzen: ordu bateko zatiak batzen dira. Elkarrekin 3 ordu, azkarrena bakarrik baino gutxiago.', 'Los tiempos no se suman: se suman las partes de una hora. Juntos, 3 horas, menos que el más rápido solo.', 'الأزمنة لا تُجمع: تُجمع أجزاء الساعة. معًا 3 ساعات، أقل من الأسرع وحده.', 'Times are not added: the parts per hour are. Together, 3 hours, less than the faster one alone.')
         },
-        takeaway: say('Ordu batean: $\\frac{1}{A}+\\frac{1}{B}=\\frac{1}{T}$. Hustubidea: kendu.', 'En una hora: $\\frac{1}{A}+\\frac{1}{B}=\\frac{1}{T}$. Desagüe: se resta.', 'في ساعة: $\\frac{1}{A}+\\frac{1}{B}=\\frac{1}{T}$. المصرف: يُطرح.', 'In one hour: $\\frac{1}{A}+\\frac{1}{B}=\\frac{1}{T}$. A drain: subtract.'),
+        takeaway: say('Ordu batean: $\\frac{1}{a}+\\frac{1}{b}=\\frac{1}{t}$. Hustubidea: kendu.', 'En una hora: $\\frac{1}{a}+\\frac{1}{b}=\\frac{1}{t}$. Desagüe: se resta.', 'في ساعة: $\\frac{1}{a}+\\frac{1}{b}=\\frac{1}{t}$. المصرف: يُطرح.', 'In one hour: $\\frac{1}{a}+\\frac{1}{b}=\\frac{1}{t}$. A drain: subtract.'),
         figure: (language) => <TapsFigure language={language} />
     }
 ]

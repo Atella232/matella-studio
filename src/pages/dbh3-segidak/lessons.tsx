@@ -46,7 +46,7 @@ export const sequencesTopics: UnitTopic[] = [
             wrong: say('$5,\\,8,\\,11,\\,14$ segidan, $a_{2}=2$, bigarren lekuan dagoelako.', 'En $5,\\,8,\\,11,\\,14$, $a_{2}=2$, porque está en el segundo lugar.', 'في $5,\\,8,\\,11,\\,14$ يكون $a_{2}=2$ لأنه في الرتبة الثانية.', 'In $5,\\,8,\\,11,\\,14$, $a_{2}=2$, because it is in second place.'),
             right: say('Azpiindizea lekua da, eta $a_{2}$ leku horretan dagoen balioa: $a_{2}=8$.', 'El subíndice es el lugar, y $a_{2}$ es el valor que hay en ese lugar: $a_{2}=8$.', 'الدليل هو الرتبة، و$a_{2}$ هو القيمة في تلك الرتبة: $a_{2}=8$.', 'The subscript is the position, and $a_{2}$ is the value in that position: $a_{2}=8$.')
         },
-        takeaway: say('$A_{N}$: $N$ lekuan dagoen gaia. Lehenik bilatu araua.', '$A_{N}$: el término que ocupa el lugar $N$. Primero busca la regla.', '$A_{N}$: الحد في الرتبة $N$. ابحث أولًا عن القاعدة.', '$A_{N}$: the term in position $N$. First look for the rule.'),
+        takeaway: say('$a_{n}$: $n$ lekuan dagoen gaia. Lehenik bilatu araua.', '$a_{n}$: el término que ocupa el lugar $n$. Primero busca la regla.', '$a_{n}$: الحد في الرتبة $n$. ابحث أولًا عن القاعدة.', '$a_{n}$: the term in position $n$. First look for the rule.'),
         figure: (language) => <SticksFigure language={language} />
     },
     {
@@ -76,7 +76,7 @@ export const sequencesTopics: UnitTopic[] = [
             wrong: say('$a_{n}=2n+1$ bada, $a_{10}=2\\cdot 1+10=12$.', 'Si $a_{n}=2n+1$, $a_{10}=2\\cdot 1+10=12$.', 'إذا كان $a_{n}=2n+1$ فإن $a_{10}=2\\cdot 1+10=12$.', 'If $a_{n}=2n+1$, then $a_{10}=2\\cdot 1+10=12$.'),
             right: say('$n$ lekua da, eta hori ordezkatzen da: $a_{10}=2\\cdot 10+1=21$.', '$n$ es el lugar, y es lo que se sustituye: $a_{10}=2\\cdot 10+1=21$.', '$n$ هو الرتبة وهو ما نعوّضه: $a_{10}=2\\cdot 10+1=21$.', '$n$ is the position, and that is what you substitute: $a_{10}=2\\cdot 10+1=21$.')
         },
-        takeaway: say('Gai bat: ordezkatu $N$. Lekua: berdindu eta ebatzi; $N$ zenbaki arrunta izan behar da.', 'Un término: sustituye $N$. El lugar: iguala y resuelve; $N$ tiene que ser natural.', 'الحد: عوّض $N$. الرتبة: ساوِ وحلّ؛ و$N$ يجب أن يكون طبيعيًا.', 'A term: substitute $N$. The position: set equal and solve; $N$ must be a natural number.'),
+        takeaway: say('Gai bat: ordezkatu $n$. Lekua: berdindu eta ebatzi; $n$ zenbaki arrunta izan behar da.', 'Un término: sustituye $n$. El lugar: iguala y resuelve; $n$ tiene que ser natural.', 'الحد: عوّض $n$. الرتبة: ساوِ وحلّ؛ و$n$ يجب أن يكون طبيعيًا.', 'A term: substitute $n$. The position: set equal and solve; $n$ must be a natural number.'),
         figure: (language) => <SticksFigure language={language} />
     },
     {
@@ -130,7 +130,7 @@ export const sequencesTopics: UnitTopic[] = [
             wrong: say('$17,\\,13,\\,9$ segidan, $d=4$, zenbakiak lauko jauzietan aldatzen direlako.', 'En $17,\\,13,\\,9$, $d=4$, porque los números cambian de 4 en 4.', 'في $17,\\,13,\\,9$ يكون $d=4$ لأن الأعداد تتغير بأربعة.', 'In $17,\\,13,\\,9$, $d=4$, because the numbers change by 4 each time.'),
             right: say('Diferentzia hurrengoa ken aurrekoa da: $13-17=-4$. Zeinuak esaten du jaisten dela.', 'La diferencia es el siguiente menos el anterior: $13-17=-4$. El signo dice que baja.', 'الفرق هو التالي ناقص السابق: $13-17=-4$. والإشارة تدل على النقصان.', 'The difference is the next term minus the previous one: $13-17=-4$. The sign says it is going down.')
         },
-        takeaway: say('$D=A_{N}-A_{N-1}$, beti bera. $D>0$ gorakorra, $D<0$ beherakorra.', '$D=A_{N}-A_{N-1}$, siempre la misma. $D>0$ creciente, $D<0$ decreciente.', '$D=A_{N}-A_{N-1}$ ثابت دائمًا. $D>0$ تزايدية و$D<0$ تناقصية.', '$D=A_{N}-A_{N-1}$, always the same. $D>0$ increasing, $D<0$ decreasing.'),
+        takeaway: say('$d=a_{n}-a_{n-1}$, beti bera. $d>0$ gorakorra, $d<0$ beherakorra.', '$d=a_{n}-a_{n-1}$, siempre la misma. $d>0$ creciente, $d<0$ decreciente.', '$d=a_{n}-a_{n-1}$ ثابت دائمًا. $d>0$ تزايدية و$d<0$ تناقصية.', '$d=a_{n}-a_{n-1}$, always the same. $d>0$ increasing, $d<0$ decreasing.'),
         figure: (language) => <JumpsFigure language={language} />
     },
     {
@@ -156,7 +156,7 @@ export const sequencesTopics: UnitTopic[] = [
             wrong: say('$a_{1}=7$ eta $d=3$: $a_{20}=7+20\\cdot 3=67$.', '$a_{1}=7$ y $d=3$: $a_{20}=7+20\\cdot 3=67$.', '$a_{1}=7$ و$d=3$: $a_{20}=7+20\\cdot 3=67$.', '$a_{1}=7$ and $d=3$: $a_{20}=7+20\\cdot 3=67$.'),
             right: say('Lehen gaitik hogeigarrenera 19 salto daude, ez 20: $a_{20}=7+19\\cdot 3=64$.', 'Del primero al vigésimo hay 19 saltos, no 20: $a_{20}=7+19\\cdot 3=64$.', 'من الأول إلى العشرين 19 قفزة لا 20: $a_{20}=7+19\\cdot 3=64$.', 'From the first to the twentieth there are 19 jumps, not 20: $a_{20}=7+19\\cdot 3=64$.')
         },
-        takeaway: say('$A_{N}=A_{1}+(N-1)\\cdot D$: $N-1$ salto.', '$A_{N}=A_{1}+(N-1)\\cdot D$: $N-1$ saltos.', '$A_{N}=A_{1}+(N-1)\\cdot D$: $N-1$ قفزة.', '$A_{N}=A_{1}+(N-1)\\cdot D$: $N-1$ jumps.'),
+        takeaway: say('$a_{n}=a_{1}+(n-1)\\cdot d$: $n-1$ salto.', '$a_{n}=a_{1}+(n-1)\\cdot d$: $n-1$ saltos.', '$a_{n}=a_{1}+(n-1)\\cdot d$: $n-1$ قفزة.', '$a_{n}=a_{1}+(n-1)\\cdot d$: $n-1$ jumps.'),
         figure: (language) => <JumpsFigure language={language} />
     },
     {
@@ -182,7 +182,7 @@ export const sequencesTopics: UnitTopic[] = [
             wrong: say('$a_{3}=11$ eta $a_{8}=31$: $d=\\frac{31-11}{8-3+1}=\\frac{20}{6}$.', '$a_{3}=11$ y $a_{8}=31$: $d=\\frac{31-11}{8-3+1}=\\frac{20}{6}$.', '$a_{3}=11$ و$a_{8}=31$: $d=\\frac{31-11}{8-3+1}=\\frac{20}{6}$.', '$a_{3}=11$ and $a_{8}=31$: $d=\\frac{31-11}{8-3+1}=\\frac{20}{6}$.'),
             right: say('Saltoak zenbatzen dira, ez gaiak: hirugarren lekutik zortzigarrenera $8-3=5$ salto, $d=4$.', 'Se cuentan los saltos, no los términos: del lugar 3 al 8 hay $8-3=5$ saltos, $d=4$.', 'تُعدّ القفزات لا الحدود: من الرتبة 3 إلى 8 هناك $8-3=5$ قفزات، $d=4$.', 'Count the jumps, not the terms: from position 3 to 8 there are $8-3=5$ jumps, $d=4$.')
         },
-        takeaway: say('$D=\\frac{A_{M}-A_{K}}{M-K}$: kendura zati salto kopurua.', '$D=\\frac{A_{M}-A_{K}}{M-K}$: la diferencia entre el número de saltos.', '$D=\\frac{A_{M}-A_{K}}{M-K}$: الفرق على عدد القفزات.', '$D=\\frac{A_{M}-A_{K}}{M-K}$: the difference divided by the number of jumps.'),
+        takeaway: say('$d=\\frac{a_{m}-a_{k}}{m-k}$: kendura zati salto kopurua.', '$d=\\frac{a_{m}-a_{k}}{m-k}$: la diferencia entre el número de saltos.', '$d=\\frac{a_{m}-a_{k}}{m-k}$: الفرق على عدد القفزات.', '$d=\\frac{a_{m}-a_{k}}{m-k}$: the difference divided by the number of jumps.'),
         figure: (language) => <JumpsFigure language={language} />
     },
 
@@ -210,7 +210,7 @@ export const sequencesTopics: UnitTopic[] = [
             wrong: say('$1+2+\\cdots+40$: 40 bikote daude, beraz $40\\cdot 41=1640$.', '$1+2+\\cdots+40$: hay 40 parejas, así que $40\\cdot 41=1640$.', '$1+2+\\cdots+40$: هناك 40 زوجًا، إذن $40\\cdot 41=1640$.', '$1+2+\\cdots+40$: there are 40 pairs, so $40\\cdot 41=1640$.'),
             right: say('40 gai daude, eta bikote bakoitzak bi hartzen ditu: 20 bikote. $20\\cdot 41=820$.', 'Hay 40 términos, y cada pareja coge dos: 20 parejas. $20\\cdot 41=820$.', 'هناك 40 حدًا وكل زوج يأخذ حدّين: 20 زوجًا. $20\\cdot 41=820$.', 'There are 40 terms, and each pair takes two: 20 pairs. $20\\cdot 41=820$.')
         },
-        takeaway: say('$1+2+\\cdots+N=\\frac{N\\cdot(N+1)}{2}$', '$1+2+\\cdots+N=\\frac{N\\cdot(N+1)}{2}$', '$1+2+\\cdots+N=\\frac{N\\cdot(N+1)}{2}$', '$1+2+\\cdots+N=\\frac{N\\cdot(N+1)}{2}$'),
+        takeaway: say('$1+2+\\cdots+n=\\frac{n\\cdot(n+1)}{2}$', '$1+2+\\cdots+n=\\frac{n\\cdot(n+1)}{2}$', '$1+2+\\cdots+n=\\frac{n\\cdot(n+1)}{2}$', '$1+2+\\cdots+n=\\frac{n\\cdot(n+1)}{2}$'),
         figure: (language) => <GaussFigure language={language} />
     },
     {
@@ -236,7 +236,7 @@ export const sequencesTopics: UnitTopic[] = [
             wrong: say('$S_{20}=(5+62)\\cdot 20=1340$.', '$S_{20}=(5+62)\\cdot 20=1340$.', '$S_{20}=(5+62)\\cdot 20=1340$.', '$S_{20}=(5+62)\\cdot 20=1340$.'),
             right: say('Hori batura bikoitza da (progresioa bi aldiz). Zatitu 2 zenbakiaz: $S_{20}=670$.', 'Eso es el doble de la suma (la progresión dos veces). Divide entre 2: $S_{20}=670$.', 'هذا ضعف المجموع (المتتالية مرتين). اقسم على 2: $S_{20}=670$.', 'That is twice the sum (the progression twice). Divide by 2: $S_{20}=670$.')
         },
-        takeaway: say('$S_{N}=\\frac{(A_{1}+A_{N})\\cdot N}{2}$', '$S_{N}=\\frac{(A_{1}+A_{N})\\cdot N}{2}$', '$S_{N}=\\frac{(A_{1}+A_{N})\\cdot N}{2}$', '$S_{N}=\\frac{(A_{1}+A_{N})\\cdot N}{2}$'),
+        takeaway: say('$S_{n}=\\frac{(a_{1}+a_{n})\\cdot n}{2}$', '$S_{n}=\\frac{(a_{1}+a_{n})\\cdot n}{2}$', '$S_{n}=\\frac{(a_{1}+a_{n})\\cdot n}{2}$', '$S_{n}=\\frac{(a_{1}+a_{n})\\cdot n}{2}$'),
         figure: (language) => <GaussFigure language={language} />
     },
     {
@@ -262,7 +262,7 @@ export const sequencesTopics: UnitTopic[] = [
             wrong: say('Egunero 0,5 km gehiago, 10 egunez, astelehenean 2 km: azken egunean $2+10\\cdot 0{,}5=7$ km.', 'Cada día 0,5 km más, 10 días, el lunes 2 km: el último día $2+10\\cdot 0{,}5=7$ km.', 'كل يوم 0.5 كم زيادة مدة 10 أيام والاثنين 2 كم: اليوم الأخير $2+10\\cdot 0{,}5=7$ كم.', 'Each day 0.5 km more, for 10 days, 2 km on Monday: on the last day $2+10\\cdot 0{,}5=7$ km.'),
             right: say('Astelehena lehen eguna da: hamargarren egunera 9 salto. $2+9\\cdot 0{,}5=6{,}5$ km.', 'El lunes es el primer día: hasta el décimo hay 9 saltos. $2+9\\cdot 0{,}5=6{,}5$ km.', 'الاثنين هو اليوم الأول: حتى العاشر 9 قفزات. $2+9\\cdot 0{,}5=6{,}5$ كم.', 'Monday is the first day: up to the tenth there are 9 jumps. $2+9\\cdot 0{,}5=6{,}5$ km.')
         },
-        takeaway: say('Erabaki $A_{1}$, $D$ eta $N$; gero, gai bat ala batura.', 'Decide $A_{1}$, $D$ y $N$; después, un término o la suma.', 'حدّد $A_{1}$ و$D$ و$N$؛ ثم حدًا أو مجموعًا.', 'Decide $A_{1}$, $D$ and $N$; then a term or the sum.'),
+        takeaway: say('Erabaki $a_{1}$, $d$ eta $n$; gero, gai bat ala batura.', 'Decide $a_{1}$, $d$ y $n$; después, un término o la suma.', 'حدّد $a_{1}$ و$d$ و$n$؛ ثم حدًا أو مجموعًا.', 'Decide $a_{1}$, $d$ and $n$; then a term or the sum.'),
         figure: (language) => <GaussFigure language={language} />
     },
 
@@ -290,7 +290,7 @@ export const sequencesTopics: UnitTopic[] = [
             wrong: say('$48,\\,24,\\,12$ segidan, $r=-24$, 24 kentzen delako.', 'En $48,\\,24,\\,12$, $r=-24$, porque se resta 24.', 'في $48,\\,24,\\,12$ يكون $r=-24$ لأننا نطرح 24.', 'In $48,\\,24,\\,12$, $r=-24$, because 24 is subtracted.'),
             right: say('Arrazoia zatidura da, ez kendura (kendura ez da beti bera: 24, 12…). $r=\\frac{24}{48}=\\frac{1}{2}$.', 'La razón es un cociente, no una resta (la resta no es siempre igual: 24, 12…). $r=\\frac{24}{48}=\\frac{1}{2}$.', 'الأساس حاصل قسمة لا فرق (الفرق ليس ثابتًا: 24، 12…). $r=\\frac{24}{48}=\\frac{1}{2}$.', 'The ratio is a quotient, not a difference (the difference is not always the same: 24, 12…). $r=\\frac{24}{48}=\\frac{1}{2}$.')
         },
-        takeaway: say('$R=\\frac{A_{N}}{A_{N-1}}$, beti bera. Aritmetikoan batu, geometrikoan biderkatu.', '$R=\\frac{A_{N}}{A_{N-1}}$, siempre la misma. En la aritmética se suma, en la geométrica se multiplica.', '$R=\\frac{A_{N}}{A_{N-1}}$ ثابت. في الحسابية نجمع وفي الهندسية نضرب.', '$R=\\frac{A_{N}}{A_{N-1}}$, always the same. Arithmetic adds, geometric multiplies.'),
+        takeaway: say('$r=\\frac{a_{n}}{a_{n-1}}$, beti bera. Aritmetikoan batu, geometrikoan biderkatu.', '$r=\\frac{a_{n}}{a_{n-1}}$, siempre la misma. En la aritmética se suma, en la geométrica se multiplica.', '$r=\\frac{a_{n}}{a_{n-1}}$ ثابت. في الحسابية نجمع وفي الهندسية نضرب.', '$r=\\frac{a_{n}}{a_{n-1}}$, always the same. Arithmetic adds, geometric multiplies.'),
         figure: (language) => <BounceFigure language={language} />
     },
     {
@@ -316,7 +316,7 @@ export const sequencesTopics: UnitTopic[] = [
             wrong: say('$a_{1}=5$, $r=3$: $a_{5}=(5\\cdot 3)^{4}=50\\,625$.', '$a_{1}=5$, $r=3$: $a_{5}=(5\\cdot 3)^{4}=50\\,625$.', '$a_{1}=5$ و$r=3$: $a_{5}=(5\\cdot 3)^{4}=50\\,625$.', '$a_{1}=5$, $r=3$: $a_{5}=(5\\cdot 3)^{4}=50\\,625$.'),
             right: say('Berretzaileak $r$ zenbakiari bakarrik eragiten dio: $5\\cdot 3^{4}=405$.', 'El exponente solo afecta a $r$: $5\\cdot 3^{4}=405$.', 'الأس يؤثر في $r$ فقط: $5\\cdot 3^{4}=405$.', 'The exponent only applies to $r$: $5\\cdot 3^{4}=405$.')
         },
-        takeaway: say('$A_{N}=A_{1}\\cdot R^{N-1}$: lehenik berretura.', '$A_{N}=A_{1}\\cdot R^{N-1}$: primero la potencia.', '$A_{N}=A_{1}\\cdot R^{N-1}$: القوة أولًا.', '$A_{N}=A_{1}\\cdot R^{N-1}$: the power first.'),
+        takeaway: say('$a_{n}=a_{1}\\cdot r^{n-1}$: lehenik berretura.', '$a_{n}=a_{1}\\cdot r^{n-1}$: primero la potencia.', '$a_{n}=a_{1}\\cdot r^{n-1}$: القوة أولًا.', '$a_{n}=a_{1}\\cdot r^{n-1}$: the power first.'),
         figure: (language) => <BounceFigure language={language} />
     },
     {
@@ -342,7 +342,7 @@ export const sequencesTopics: UnitTopic[] = [
             wrong: say('$a_{2}=6$ eta $a_{5}=162$: $r=\\frac{162}{6}=27$.', '$a_{2}=6$ y $a_{5}=162$: $r=\\frac{162}{6}=27$.', '$a_{2}=6$ و$a_{5}=162$: $r=\\frac{162}{6}=27$.', '$a_{2}=6$ and $a_{5}=162$: $r=\\frac{162}{6}=27$.'),
             right: say('27 hiru biderketen ondorioa da, $r^{3}$. $r=3$.', '27 es el resultado de tres multiplicaciones, $r^{3}$. $r=3$.', '27 ناتج ثلاث عمليات ضرب، $r^{3}$. $r=3$.', '27 is the result of three multiplications, $r^{3}$. $r=3$.')
         },
-        takeaway: say('$R^{M-K}=\\frac{A_{M}}{A_{K}}$: zatitu eta atera erroa.', '$R^{M-K}=\\frac{A_{M}}{A_{K}}$: divide y saca la raíz.', '$R^{M-K}=\\frac{A_{M}}{A_{K}}$: اقسم واستخرج الجذر.', '$R^{M-K}=\\frac{A_{M}}{A_{K}}$: divide and take the root.'),
+        takeaway: say('$r^{m-k}=\\frac{a_{m}}{a_{k}}$: zatitu eta atera erroa.', '$r^{m-k}=\\frac{a_{m}}{a_{k}}$: divide y saca la raíz.', '$r^{m-k}=\\frac{a_{m}}{a_{k}}$: اقسم واستخرج الجذر.', '$r^{m-k}=\\frac{a_{m}}{a_{k}}$: divide and take the root.'),
         figure: (language) => <BounceFigure language={language} />
     },
 
@@ -370,7 +370,7 @@ export const sequencesTopics: UnitTopic[] = [
             wrong: say('$S_{6}=\\frac{(a_{1}+a_{6})\\cdot 6}{2}=\\frac{(3+96)\\cdot 6}{2}=297$.', '$S_{6}=\\frac{(a_{1}+a_{6})\\cdot 6}{2}=\\frac{(3+96)\\cdot 6}{2}=297$.', '$S_{6}=\\frac{(a_{1}+a_{6})\\cdot 6}{2}=\\frac{(3+96)\\cdot 6}{2}=297$.', '$S_{6}=\\frac{(a_{1}+a_{6})\\cdot 6}{2}=\\frac{(3+96)\\cdot 6}{2}=297$.'),
             right: say('Gaussen formula aritmetikoentzat da. Geometrikoan: $S_{6}=\\frac{3\\cdot(2^{6}-1)}{2-1}=189$.', 'La fórmula de Gauss es para las aritméticas. En la geométrica: $S_{6}=\\frac{3\\cdot(2^{6}-1)}{2-1}=189$.', 'صيغة غاوس للحسابية. وفي الهندسية: $S_{6}=\\frac{3\\cdot(2^{6}-1)}{2-1}=189$.', 'Gauss\'s formula is for arithmetic progressions. For a geometric one: $S_{6}=\\frac{3\\cdot(2^{6}-1)}{2-1}=189$.')
         },
-        takeaway: say('$S_{N}=\\frac{A_{1}\\cdot(R^{N}-1)}{R-1}$', '$S_{N}=\\frac{A_{1}\\cdot(R^{N}-1)}{R-1}$', '$S_{N}=\\frac{A_{1}\\cdot(R^{N}-1)}{R-1}$', '$S_{N}=\\frac{A_{1}\\cdot(R^{N}-1)}{R-1}$')
+        takeaway: say('$S_{n}=\\frac{a_{1}\\cdot(r^{n}-1)}{r-1}$', '$S_{n}=\\frac{a_{1}\\cdot(r^{n}-1)}{r-1}$', '$S_{n}=\\frac{a_{1}\\cdot(r^{n}-1)}{r-1}$', '$S_{n}=\\frac{a_{1}\\cdot(r^{n}-1)}{r-1}$')
     },
     {
         id: 'geo-infinite',
@@ -395,7 +395,7 @@ export const sequencesTopics: UnitTopic[] = [
             wrong: say('$5+10+20+\\cdots$ batura: $\\frac{5}{1-2}=-5$.', 'La suma $5+10+20+\\cdots$: $\\frac{5}{1-2}=-5$.', 'المجموع $5+10+20+\\cdots$: $\\frac{5}{1-2}=-5$.', 'The sum $5+10+20+\\cdots$: $\\frac{5}{1-2}=-5$.'),
             right: say('Formula $|r|<1$ denean bakarrik da baliozkoa. Hemen $r=2$: gaiak hazi egiten dira eta batura infinitua da.', 'La fórmula solo vale si $|r|<1$. Aquí $r=2$: los términos crecen y la suma es infinita.', 'الصيغة صالحة فقط إذا $|r|<1$. وهنا $r=2$: الحدود تكبر والمجموع لا نهائي.', 'The formula only works if $|r|<1$. Here $r=2$: the terms grow and the sum is infinite.')
         },
-        takeaway: say('$|R|<1$ bada: $S=\\frac{A_{1}}{1-R}$.', 'Si $|R|<1$: $S=\\frac{A_{1}}{1-R}$.', 'إذا $|R|<1$: $S=\\frac{A_{1}}{1-R}$.', 'If $|R|<1$: $S=\\frac{A_{1}}{1-R}$.'),
+        takeaway: say('$|r|<1$ bada: $S=\\frac{a_{1}}{1-r}$.', 'Si $|r|<1$: $S=\\frac{a_{1}}{1-r}$.', 'إذا $|r|<1$: $S=\\frac{a_{1}}{1-r}$.', 'If $|r|<1$: $S=\\frac{a_{1}}{1-r}$.'),
         figure: (language) => <HalvesFigure language={language} />
     },
     {
@@ -421,7 +421,7 @@ export const sequencesTopics: UnitTopic[] = [
             wrong: say('500 bakterio, orduro bikoiztuz, 6 ordu: $500\\cdot 2\\cdot 6=6000$.', '500 bacterias que se duplican cada hora, 6 horas: $500\\cdot 2\\cdot 6=6000$.', '500 بكتيريا تتضاعف كل ساعة مدة 6 ساعات: $500\\cdot 2\\cdot 6=6000$.', '500 bacteria doubling every hour, 6 hours: $500\\cdot 2\\cdot 6=6000$.'),
             right: say('Ordu bakoitzean bider 2 egiten da: hori berretura da, ez biderketa bakarra. $500\\cdot 2^{6}=32\\,000$.', 'Cada hora se multiplica por 2: eso es una potencia, no un solo producto. $500\\cdot 2^{6}=32\\,000$.', 'كل ساعة نضرب في 2: هذه قوة لا ضرب واحد. $500\\cdot 2^{6}=32\\,000$.', 'Each hour you multiply by 2: that is a power, not a single product. $500\\cdot 2^{6}=32\\,000$.')
         },
-        takeaway: say('Ehuneko berean aldatzen bada: $R=1\\pm\\frac{P}{100}$ eta $A_{1}\\cdot R^{N}$.', 'Si cambia en el mismo porcentaje: $R=1\\pm\\frac{P}{100}$ y $A_{1}\\cdot R^{N}$.', 'إذا تغيّرت بالنسبة نفسها: $R=1\\pm\\frac{P}{100}$ و$A_{1}\\cdot R^{N}$.', 'If it changes by the same percentage: $R=1\\pm\\frac{P}{100}$ and $A_{1}\\cdot R^{N}$.'),
+        takeaway: say('Ehuneko berean aldatzen bada: $r=1\\pm\\frac{p}{100}$ eta $a_{1}\\cdot r^{n}$.', 'Si cambia en el mismo porcentaje: $r=1\\pm\\frac{p}{100}$ y $a_{1}\\cdot r^{n}$.', 'إذا تغيّرت بالنسبة نفسها: $r=1\\pm\\frac{p}{100}$ و$a_{1}\\cdot r^{n}$.', 'If it changes by the same percentage: $r=1\\pm\\frac{p}{100}$ and $a_{1}\\cdot r^{n}$.'),
         figure: (language) => <BounceFigure language={language} />
     }
 ]

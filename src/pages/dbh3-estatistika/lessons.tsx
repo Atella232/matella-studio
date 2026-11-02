@@ -72,7 +72,7 @@ export const stats3Topics: UnitTopic[] = [
             wrong: say('1 balioaren metatua 9 da.', 'La acumulada del valor 1 es 9.', 'المتجمّع للقيمة 1 هو 9.', 'The cumulative frequency of 1 is 9.'),
             right: say('9 maiztasun absolutua da; metatuak aurrekoak ere batzen ditu: $4+9=13$.', '9 es la absoluta; la acumulada suma también las anteriores: $4+9=13$.', '9 هو المطلق؛ والمتجمّع يضيف السابق أيضًا: $4+9=13$.', '9 is the absolute frequency; the cumulative one adds the earlier ones too: $4+9=13$.')
         },
-        takeaway: same('$H_{I}=\\frac{F_{I}}{N}$'),
+        takeaway: same('$h_{i}=\\frac{f_{i}}{N}$'),
         figure: (language) => <CumulativeFigure language={language} />
     },
     {
@@ -97,7 +97,7 @@ export const stats3Topics: UnitTopic[] = [
             wrong: say('$[150,160)$ tartearen klase-marka 160 da, muturra delako.', 'La marca de clase de $[150,160)$ es 160, porque es el extremo.', 'مركز الفئة $[150,160)$ هو 160 لأنه الطرف.', 'The class midpoint of $[150,160)$ is 160, because it is the end.'),
             right: say('Klase-marka erdiko puntua da: $\\frac{150+160}{2}=155$.', 'La marca de clase es el punto medio: $\\frac{150+160}{2}=155$.', 'مركز الفئة نقطة المنتصف: $\\frac{150+160}{2}=155$.', 'The class midpoint is the middle point: $\\frac{150+160}{2}=155$.')
         },
-        takeaway: say('Klase-marka: $\\frac{A+B}{2}$, tartearen ERDIA.', 'Marca de clase: $\\frac{A+B}{2}$, el MEDIO del intervalo.', 'مركز الفئة: $\\frac{A+B}{2}$، منتصف الفترة.', 'Class midpoint: $\\frac{A+B}{2}$, the MIDDLE of the interval.'),
+        takeaway: say('Klase-marka: $\\frac{a+b}{2}$, tartearen ERDIA.', 'Marca de clase: $\\frac{a+b}{2}$, el MEDIO del intervalo.', 'مركز الفئة: $\\frac{a+b}{2}$، منتصف الفترة.', 'Class midpoint: $\\frac{a+b}{2}$, the MIDDLE of the interval.'),
         figure: (language) => <GroupedFigure language={language} />
     },
     /* ---------- 2. Charts ---------- */
@@ -146,7 +146,7 @@ export const stats3Topics: UnitTopic[] = [
             wrong: say('% 25 duen sektoreak 25° ditu.', 'Un sector del 25 % mide 25°.', 'قطاع نسبته 25 % زاويته 25°.', 'A 25% sector measures 25°.'),
             right: say('Zirkulua 360° da, ez 100: $25\\cdot 3{,}6=90°$.', 'El círculo son 360°, no 100: $25\\cdot 3{,}6=90°$.', 'الدائرة 360° لا 100: $25\\cdot 3{,}6=90°$.', 'The circle is 360°, not 100: $25\\cdot 3{,}6=90°$.')
         },
-        takeaway: say('Angelua = $\\frac{F}{N}\\cdot 360°$.', 'Ángulo = $\\frac{F}{N}\\cdot 360°$.', 'الزاوية = $\\frac{F}{N}\\cdot 360°$.', 'Angle = $\\frac{F}{N}\\cdot 360°$.'),
+        takeaway: say('Angelua = $\\frac{f}{N}\\cdot 360°$.', 'Ángulo = $\\frac{f}{N}\\cdot 360°$.', 'الزاوية = $\\frac{f}{N}\\cdot 360°$.', 'Angle = $\\frac{f}{N}\\cdot 360°$.'),
         figure: (language) => <PieFigure language={language} />
     },
     {
@@ -197,7 +197,7 @@ export const stats3Topics: UnitTopic[] = [
             wrong: same('$\\bar{x}=\\frac{1+2+3}{3}=2$'),
             right: say('Taula batean balioak maiztasunez biderkatzen dira eta $N=10$ zenbakiaz zatitzen: $1{,}7$.', 'En una tabla los valores se multiplican por su frecuencia y se divide entre $N=10$: $1{,}7$.', 'في الجدول تُضرب القيم في تكراراتها ويُقسم على $N=10$: $1{,}7$.', 'In a table the values are multiplied by their frequencies and divided by $N=10$: $1{,}7$.')
         },
-        takeaway: same('$\\bar{X}=\\frac{\\Sigma X_{I}F_{I}}{N}$'),
+        takeaway: same('$\\bar{x}=\\frac{\\Sigma x_{i}f_{i}}{N}$'),
         figure: (language) => <MeanTableFigure language={language} />
     },
     {
@@ -324,7 +324,7 @@ export const stats3Topics: UnitTopic[] = [
             wrong: say('Distantziak batu eta zatitu besterik ez: $(-4)+(-2)+0+2+4=0$, beraz ez dago sakabanaketarik.', 'Basta sumar las distancias y dividir: $(-4)+(-2)+0+2+4=0$, así que no hay dispersión.', 'يكفي جمع المسافات والقسمة: $(-4)+(-2)+0+2+4=0$، إذن لا تشتت.', 'Just add the distances and divide: $(-4)+(-2)+0+2+4=0$, so there is no spread.'),
             right: say('Distantziek elkar deuseztatzen dute; horregatik karratura igotzen dira lehenik.', 'Las distancias se anulan entre sí; por eso primero se elevan al cuadrado.', 'المسافات يلغي بعضها بعضًا؛ لذلك تُربَّع أولًا.', 'The distances cancel each other out; that is why they are squared first.')
         },
-        takeaway: same('$\\sigma=\\sqrt{\\frac{\\Sigma(X_{I}-\\bar{X})^{2}}{N}}$'),
+        takeaway: same('$\\sigma=\\sqrt{\\frac{\\Sigma(x_{i}-\\bar{x})^{2}}{N}}$'),
         figure: (language) => <VarianceFigure language={language} />
     },
     /* ---------- 5. Probability ---------- */

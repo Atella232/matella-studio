@@ -47,7 +47,7 @@ export const motions3Topics: UnitTopic[] = [
             wrong: say('$\\vec{AB}$ = jatorria ken muturra: $(1-5,\\ 1-4)$.', '$\\vec{AB}$ = origen menos extremo: $(1-5,\\ 1-4)$.', '$\\vec{AB}$ = البداية ناقص النهاية: $(1-5,\\ 1-4)$.', '$\\vec{AB}$ = start minus end: $(1-5,\\ 1-4)$.'),
             right: say('Hori $\\vec{BA}$ da, aurkako noranzkoan. $\\vec{AB}$: muturra ken jatorria, $(4,3)$.', 'Eso es $\\vec{BA}$, en sentido contrario. $\\vec{AB}$: extremo menos origen, $(4,3)$.', 'هذا $\\vec{BA}$ بالمنحى المعاكس. $\\vec{AB}$: النهاية ناقص البداية، $(4,3)$.', 'That is $\\vec{BA}$, the opposite way. $\\vec{AB}$: end minus start, $(4,3)$.')
         },
-        takeaway: same('$\\vec{AB}=(X_{2}-X_{1},\\ Y_{2}-Y_{1})$'),
+        takeaway: same('$\\vec{AB}=(x_{2}-x_{1},\\ y_{2}-y_{1})$'),
         figure: (language) => <MotionFigure language={language} kind="components" />
     },
     {
@@ -72,7 +72,7 @@ export const motions3Topics: UnitTopic[] = [
             wrong: say('$|(-6,8)|=-6+8=2$', '$|(-6,8)|=-6+8=2$', '$|(-6,8)|=-6+8=2$', '$|(-6,8)|=-6+8=2$'),
             right: say('Osagaiak ez dira batzen: haien karratuak batu eta erroa atera, $\\sqrt{36+64}=10$.', 'Las componentes no se suman: se suman sus cuadrados y se saca la raíz, $\\sqrt{36+64}=10$.', 'لا تُجمع المركّبتان: نجمع مربعيهما ونأخذ الجذر، $\\sqrt{36+64}=10$.', 'The components are not added: add their squares and take the root, $\\sqrt{36+64}=10$.')
         },
-        takeaway: same('$|\\vec{V}|=\\sqrt{A^{2}+B^{2}}$'),
+        takeaway: same('$|\\vec{v}|=\\sqrt{a^{2}+b^{2}}$'),
         figure: (language) => <MotionFigure language={language} kind="components" />
     },
     {
@@ -96,7 +96,7 @@ export const motions3Topics: UnitTopic[] = [
             wrong: say('$|\\vec{u}+\\vec{v}|=|\\vec{u}|+|\\vec{v}|$ beti.', 'Siempre $|\\vec{u}+\\vec{v}|=|\\vec{u}|+|\\vec{v}|$.', 'دائمًا $|\\vec{u}+\\vec{v}|=|\\vec{u}|+|\\vec{v}|$.', 'Always $|\\vec{u}+\\vec{v}|=|\\vec{u}|+|\\vec{v}|$.'),
             right: say('Norabide berean daudenean bakarrik. Bestela, batura laburragoa da: $|(4,4)|\\approx 5{,}66<3{,}16+3{,}16$.', 'Solo cuando van en la misma dirección. Si no, la suma es más corta: $|(4,4)|\\approx 5{,}66<3{,}16+3{,}16$.', 'فقط عندما يكونان بالاتجاه نفسه. وإلا فالمجموع أقصر: $|(4,4)|\\approx 5{,}66<3{,}16+3{,}16$.', 'Only when they point the same way. Otherwise the sum is shorter: $|(4,4)|\\approx 5{,}66<3{,}16+3{,}16$.')
         },
-        takeaway: same('$(A,B)+(C,D)=(A+C,\\ B+D)$'),
+        takeaway: same('$(a,b)+(c,d)=(a+c,\\ b+d)$'),
         figure: (language) => <MotionFigure language={language} kind="sum" />
     },
     /* ---------- 2. Translations ---------- */
@@ -121,7 +121,7 @@ export const motions3Topics: UnitTopic[] = [
             wrong: say('Lekualdaketa batean irudia biratu egiten da bektorearen norabidean.', 'En una traslación la figura gira hacia la dirección del vector.', 'في الانسحاب يدور الشكل نحو اتجاه المتجه.', 'In a translation the shape turns towards the direction of the vector.'),
             right: say('Ez da biratzen: puntu guztiek mugimendu bera egiten dute, eta orientazioa ez da aldatzen.', 'No gira: todos los puntos se mueven igual y la orientación no cambia.', 'لا يدور: تتحرك كل النقاط بالطريقة نفسها ولا يتغيّر الوضع.', 'It does not turn: every point moves the same way and the orientation stays.')
         },
-        takeaway: say('Puntu GUZTIAK bektore berarekin: $P^{\\prime}=P+\\vec{V}$.', 'TODOS los puntos con el mismo vector: $P^{\\prime}=P+\\vec{V}$.', 'كل النقاط بالمتجه نفسه: $P^{\\prime}=P+\\vec{V}$.', 'EVERY point by the same vector: $P^{\\prime}=P+\\vec{V}$.'),
+        takeaway: say('Puntu GUZTIAK bektore berarekin: $P^{\\prime}=P+\\vec{v}$.', 'TODOS los puntos con el mismo vector: $P^{\\prime}=P+\\vec{v}$.', 'كل النقاط بالمتجه نفسه: $P^{\\prime}=P+\\vec{v}$.', 'EVERY point by the same vector: $P^{\\prime}=P+\\vec{v}$.'),
         figure: (language) => <MotionFigure language={language} kind="translation" />
     },
     {
@@ -145,7 +145,7 @@ export const motions3Topics: UnitTopic[] = [
             wrong: say('$(4,-1)$ bektorearekin: $(2,3)\\to(2-4,\\ 3+1)$.', 'Con el vector $(4,-1)$: $(2,3)\\to(2-4,\\ 3+1)$.', 'بالمتجه $(4,-1)$: $(2,3)\\to(2-4,\\ 3+1)$.', 'With the vector $(4,-1)$: $(2,3)\\to(2-4,\\ 3+1)$.'),
             right: say('Osagaiak zeinuarekin batzen dira: $(2+4,\\ 3-1)=(6,2)$.', 'Las componentes se suman con su signo: $(2+4,\\ 3-1)=(6,2)$.', 'تُجمع المركّبتان بإشارتيهما: $(2+4,\\ 3-1)=(6,2)$.', 'The components are added with their signs: $(2+4,\\ 3-1)=(6,2)$.')
         },
-        takeaway: same('$(X,Y)\\to(X+A,\\ Y+B)$'),
+        takeaway: same('$(x,y)\\to(x+a,\\ y+b)$'),
         figure: (language) => <MotionFigure language={language} kind="coordinates" />
     },
     {
@@ -169,7 +169,7 @@ export const motions3Topics: UnitTopic[] = [
             wrong: say('Bi lekualdaketa elkarren segidan biraketa bat dira.', 'Dos traslaciones seguidas son un giro.', 'انسحابان متتاليان دوران.', 'Two translations in a row make a rotation.'),
             right: say('Lekualdaketa bat dira, bektoreen baturarekin: irudia ez da biratzen.', 'Son una traslación, con la suma de los vectores: la figura no gira.', 'هما انسحاب بمجموع المتجهين: الشكل لا يدور.', 'They make a translation by the sum of the vectors: the shape does not turn.')
         },
-        takeaway: say('$\\vec{U}$ eta gero $\\vec{V}$ = $\\vec{U}+\\vec{V}$', '$\\vec{U}$ y después $\\vec{V}$ = $\\vec{U}+\\vec{V}$', '$\\vec{U}$ ثم $\\vec{V}$ = $\\vec{U}+\\vec{V}$', '$\\vec{U}$ then $\\vec{V}$ = $\\vec{U}+\\vec{V}$'),
+        takeaway: say('$\\vec{u}$ eta gero $\\vec{v}$ = $\\vec{u}+\\vec{v}$', '$\\vec{u}$ y después $\\vec{v}$ = $\\vec{u}+\\vec{v}$', '$\\vec{u}$ ثم $\\vec{v}$ = $\\vec{u}+\\vec{v}$', '$\\vec{u}$ then $\\vec{v}$ = $\\vec{u}+\\vec{v}$'),
         figure: (language) => <MotionFigure language={language} kind="two-translations" />
     },
     /* ---------- 3. Rotations ---------- */
@@ -224,7 +224,7 @@ export const motions3Topics: UnitTopic[] = [
             wrong: say('90° biraketa: $(3,2)\\to(2,3)$.', 'Giro de 90°: $(3,2)\\to(2,3)$.', 'دوران 90°: $(3,2)\\to(2,3)$.', 'Rotation by 90°: $(3,2)\\to(2,3)$.'),
             right: say('Trukatzea bakarrik $y=x$ zuzenarekiko simetria da. Biraketan zeinua ere aldatzen da: $(-2,3)$.', 'Solo intercambiar es la simetría respecto a $y=x$. En el giro también cambia un signo: $(-2,3)$.', 'المبادلة وحدها تناظر بالنسبة إلى $y=x$. وفي الدوران تتغيّر إشارة أيضًا: $(-2,3)$.', 'Only swapping is the reflection in $y=x$. A rotation also changes a sign: $(-2,3)$.')
         },
-        takeaway: same('$90°: (X,Y)\\to(-Y,X)$'),
+        takeaway: same('$90°$: $(x,y)\\to(-y,x)$'),
         figure: (language) => <MotionFigure language={language} kind="rotation-coordinates" />
     },
     {
@@ -303,7 +303,7 @@ export const motions3Topics: UnitTopic[] = [
             wrong: say('X ardatzarekiko: $(4,1)\\to(-4,1)$.', 'Respecto al eje X: $(4,1)\\to(-4,1)$.', 'بالنسبة إلى محور X: $(4,1)\\to(-4,1)$.', 'In the X axis: $(4,1)\\to(-4,1)$.'),
             right: say('X ardatza horizontala da: puntua gora edo behera islatzen da, $(4,-1)$.', 'El eje X es horizontal: el punto se refleja hacia arriba o abajo, $(4,-1)$.', 'محور X أفقي: تنعكس النقطة إلى الأعلى أو الأسفل، $(4,-1)$.', 'The X axis is horizontal: the point is reflected up or down, $(4,-1)$.')
         },
-        takeaway: same('$X:\\ (X,Y)\\to(X,-Y)\\qquad Y:\\ (X,Y)\\to(-X,Y)$'),
+        takeaway: say('X ardatza: $(x,y)\\to(x,-y)$. Y ardatza: $(x,y)\\to(-x,y)$.', 'Eje X: $(x,y)\\to(x,-y)$. Eje Y: $(x,y)\\to(-x,y)$.', 'محور X: $(x,y)\\to(x,-y)$. محور Y: $(x,y)\\to(-x,y)$.', 'X axis: $(x,y)\\to(x,-y)$. Y axis: $(x,y)\\to(-x,y)$.'),
         figure: (language) => <MotionFigure language={language} kind="reflection-coordinates" />
     },
     {
@@ -332,7 +332,7 @@ export const motions3Topics: UnitTopic[] = [
             wrong: say('Bi ardatz paralelo 3 unitatera: lekualdaketa 3 unitatekoa da.', 'Dos ejes paralelos a 3 unidades: la traslación es de 3 unidades.', 'محوران متوازيان على بعد 3 وحدات: الانسحاب 3 وحدات.', 'Two parallel axes 3 units apart: the translation is 3 units.'),
             right: say('Bikoitza da: 6 unitate.', 'Es el doble: 6 unidades.', 'إنه الضعف: 6 وحدات.', 'It is twice: 6 units.')
         },
-        takeaway: say('Paraleloak: lekualdaketa $2D$. Ebakitzaileak: biraketa $2\\alpha$.', 'Paralelos: traslación $2D$. Secantes: giro $2\\alpha$.', 'متوازيان: انسحاب $2D$. متقاطعان: دوران $2\\alpha$.', 'Parallel: translation $2D$. Crossing: rotation $2\\alpha$.'),
+        takeaway: say('Paraleloak: lekualdaketa $2d$. Ebakitzaileak: biraketa $2\\alpha$.', 'Paralelos: traslación $2d$. Secantes: giro $2\\alpha$.', 'متوازيان: انسحاب $2d$. متقاطعان: دوران $2\\alpha$.', 'Parallel: translation $2d$. Crossing: rotation $2\\alpha$.'),
         figure: (language) => <MotionFigure language={language} kind="two-mirrors" />
     },
     /* ---------- 5. Patterns ---------- */
@@ -406,7 +406,7 @@ export const motions3Topics: UnitTopic[] = [
             wrong: say('$k=3$ homotezia: $(2,-3)\\to(2+3,\\ -3+3)$.', 'Homotecia $k=3$: $(2,-3)\\to(2+3,\\ -3+3)$.', 'تحاكٍ $k=3$: $(2,-3)\\to(2+3,\\ -3+3)$.', 'Enlargement $k=3$: $(2,-3)\\to(2+3,\\ -3+3)$.'),
             right: say('Homoteziak biderkatu egiten du, ez batu: $(6,-9)$. Batzea lekualdaketa da.', 'La homotecia multiplica, no suma: $(6,-9)$. Sumar es trasladar.', 'التحاكي يضرب ولا يجمع: $(6,-9)$. الجمع انسحاب.', 'An enlargement multiplies, it does not add: $(6,-9)$. Adding is translating.')
         },
-        takeaway: same("$\\vec{OP^{\\prime}}=K\\cdot\\vec{OP}$"),
+        takeaway: same("$\\vec{OP^{\\prime}}=k\\cdot\\vec{OP}$"),
         figure: (language) => <HomothetyFigure language={language} />
     }
 ]

@@ -59,7 +59,7 @@ export const systemsTopics: UnitTopic[] = [
             { text: say('Askatu k.', 'Despeja k.', 'اعزل k.', 'Solve for k.'), math: same('$-2k=2\\ \\to\\ k=-1$') }
         ],
         example: same('$x+y=5$'),
-        takeaway: say('$AX+BY=C$: infinitu ebazpen, zuzen bat.', '$AX+BY=C$: infinitas soluciones, una recta.', '$AX+BY=C$: حلول لا نهاية لها، مستقيم.', '$AX+BY=C$: infinitely many solutions, one straight line.'),
+        takeaway: say('$ax+by=c$: infinitu ebazpen, zuzen bat.', '$ax+by=c$: infinitas soluciones, una recta.', '$ax+by=c$: حلول لا نهاية لها، مستقيم.', '$ax+by=c$: infinitely many solutions, one straight line.'),
         figure: (language) => <LinearSolutionsFigure language={language} />
     },
     {
@@ -100,7 +100,7 @@ export const systemsTopics: UnitTopic[] = [
             { text: say('b-rena ere berdina izan behar da.', 'El de b también tiene que ser igual.', 'ويجب أن تساويهما نسبة b.', 'The ratio of b must also be equal.'), math: same('$\\frac{-3}{m}=\\frac{1}{2}\\ \\to\\ m=-6$') }
         ],
         example: same('$\\frac{a}{a\'}\\ne\\frac{b}{b\'}$'),
-        takeaway: say('$\\frac{A}{A\'}=\\frac{B}{B\'}$: paraleloak edo zuzen bera.', '$\\frac{A}{A\'}=\\frac{B}{B\'}$: paralelas o la misma recta.', '$\\frac{A}{A\'}=\\frac{B}{B\'}$: متوازيان أو مستقيم واحد.', '$\\frac{A}{A\'}=\\frac{B}{B\'}$: parallel lines or the same straight line.'),
+        takeaway: say('$\\frac{a}{a\'}=\\frac{b}{b\'}$: paraleloak edo zuzen bera.', '$\\frac{a}{a\'}=\\frac{b}{b\'}$: paralelas o la misma recta.', '$\\frac{a}{a\'}=\\frac{b}{b\'}$: متوازيان أو مستقيم واحد.', '$\\frac{a}{a\'}=\\frac{b}{b\'}$: parallel lines or the same straight line.'),
         figure: (language) => <CoefficientsFigure language={language} />
     },
 
@@ -186,7 +186,7 @@ export const systemsTopics: UnitTopic[] = [
             { text: say('Batu.', 'Suma.', 'اجمع.', 'Add.'), math: same('$4x=20\\ \\to\\ x=5,\\ y=\\frac{9}{2}$') }
         ],
         example: same('$4x-5y=80$'),
-        takeaway: say('Lehenik $AX+BY=C$, gero metodoa.', 'Primero $AX+BY=C$, después el método.', 'أولًا $AX+BY=C$، ثم الطريقة.', 'First write $AX+BY=C$, then use the method.'),
+        takeaway: say('Lehenik $ax+by=c$, gero metodoa.', 'Primero $ax+by=c$, después el método.', 'أولًا $ax+by=c$، ثم الطريقة.', 'First write $ax+by=c$, then use the method.'),
         figure: (language) => <SimplifyFirstFigure language={language} />
     },
 
@@ -230,7 +230,7 @@ export const systemsTopics: UnitTopic[] = [
             { text: say('Konbinatu zeinuak: lau.', 'Combina los signos: cuatro.', 'اجمع الإشارات: أربعة.', 'Combine the signs: four.'), math: same('$(\\pm 3,\\pm 2)$') }
         ],
         example: same('$2x^{2}=50$'),
-        takeaway: say('$X^{2}=K$: $X=\\pm\\sqrt{K}$; zeinu guztiak konbinatu.', '$X^{2}=K$: $X=\\pm\\sqrt{K}$; combina todos los signos.', '$X^{2}=K$: $X=\\pm\\sqrt{K}$؛ اجمع كل الإشارات.', '$X^{2}=K$: $X=\\pm\\sqrt{K}$; combine all the signs.'),
+        takeaway: say('$x^{2}=k$: $x=\\pm\\sqrt{k}$; zeinu guztiak konbinatu.', '$x^{2}=k$: $x=\\pm\\sqrt{k}$; combina todos los signos.', '$x^{2}=k$: $x=\\pm\\sqrt{k}$؛ اجمع كل الإشارات.', '$x^{2}=k$: $x=\\pm\\sqrt{k}$; combine all the signs.'),
         figure: (language) => <SquaresReductionFigure language={language} />
     },
     {

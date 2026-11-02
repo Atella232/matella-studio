@@ -49,7 +49,7 @@ export const equations3Topics: UnitTopic[] = [
             wrong: say('$2x=10$ ekuaziotik $x=10-2=8$.', 'De $2x=10$ sale $x=10-2=8$.', 'من $2x=10$ نحصل على $x=10-2=8$.', 'From $2x=10$ you get $x=10-2=8$.'),
             right: say('$2x$ bider 2 da: bi atalak zatitu behar dira, $x=10\\div 2=5$.', '$2x$ es 2 por $x$: hay que dividir los dos miembros, $x=10\\div 2=5$.', '$2x$ هو 2 في $x$: يجب قسمة الطرفين، $x=10\\div 2=5$.', '$2x$ is 2 times $x$: divide both sides, $x=10\\div 2=5$.')
         },
-        takeaway: say('Bi ataletan gauza bera: $A=B\\Rightarrow A+C=B+C$.', 'Lo mismo en los dos miembros: $A=B\\Rightarrow A+C=B+C$.', 'الشيء نفسه في الطرفين: $A=B\\Rightarrow A+C=B+C$.', 'The same on both sides: $A=B\\Rightarrow A+C=B+C$.'),
+        takeaway: say('Bi ataletan gauza bera: $a=b\\Rightarrow a+c=b+c$.', 'Lo mismo en los dos miembros: $a=b\\Rightarrow a+c=b+c$.', 'الشيء نفسه في الطرفين: $a=b\\Rightarrow a+c=b+c$.', 'The same on both sides: $a=b\\Rightarrow a+c=b+c$.'),
         figure: (language) => <BalanceFigure language={language} />
     },
     {
@@ -76,7 +76,7 @@ export const equations3Topics: UnitTopic[] = [
             wrong: say('$-(x-4)=-x-4$', '$-(x-4)=-x-4$', '$-(x-4)=-x-4$', '$-(x-4)=-x-4$'),
             right: say('Minusak parentesiko gai guztiei eragiten die: $-(x-4)=-x+4$.', 'El menos afecta a todos los términos: $-(x-4)=-x+4$.', 'السالب يؤثر في كل الحدود: $-(x-4)=-x+4$.', 'The minus affects every term: $-(x-4)=-x+4$.')
         },
-        takeaway: say('$-(A-B)=-A+B$: zeinu guztiak aldatzen dira.', '$-(A-B)=-A+B$: cambian todos los signos.', '$-(A-B)=-A+B$: تتغيّر كل الإشارات.', '$-(A-B)=-A+B$: every sign changes.'),
+        takeaway: say('$-(a-b)=-a+b$: zeinu guztiak aldatzen dira.', '$-(a-b)=-a+b$: cambian todos los signos.', '$-(a-b)=-a+b$: تتغيّر كل الإشارات.', '$-(a-b)=-a+b$: every sign changes.'),
         figure: (language) => <StepsFigure language={language} />
     },
     {
@@ -102,7 +102,7 @@ export const equations3Topics: UnitTopic[] = [
             wrong: say('$\\frac{x}{3}+2=5$ bider 3: $x+2=15$.', '$\\frac{x}{3}+2=5$ por 3: $x+2=15$.', '$\\frac{x}{3}+2=5$ في 3: $x+2=15$.', '$\\frac{x}{3}+2=5$ times 3: $x+2=15$.'),
             right: say('Gai guztiak biderkatzen dira, 2 ere bai: $x+6=15$, $x=9$.', 'Se multiplican todos los términos, también el 2: $x+6=15$, $x=9$.', 'تُضرب كل الحدود، حتى 2: $x+6=15$، $x=9$.', 'Every term is multiplied, the 2 as well: $x+6=15$, $x=9$.')
         },
-        takeaway: say('m.k.t.-az biderkatu GAI GUZTIAK: $\\frac{A}{B}\\cdot M$.', 'Multiplica por el m.c.m. TODOS los términos: $\\frac{A}{B}\\cdot M$.', 'اضرب كل الحدود في م.م.أ.: $\\frac{A}{B}\\cdot M$.', 'Multiply EVERY term by the LCM: $\\frac{A}{B}\\cdot M$.'),
+        takeaway: say('m.k.t.-az biderkatu GAI GUZTIAK: $\\frac{a}{b}\\cdot m$.', 'Multiplica por el m.c.m. TODOS los términos: $\\frac{a}{b}\\cdot m$.', 'اضرب كل الحدود في م.م.أ.: $\\frac{a}{b}\\cdot m$.', 'Multiply EVERY term by the LCM: $\\frac{a}{b}\\cdot m$.'),
         figure: (language) => <DenominatorsFigure language={language} />
     },
     /* ---------- 2. Second degree ---------- */
@@ -132,7 +132,7 @@ export const equations3Topics: UnitTopic[] = [
             wrong: say('$x^{2}=4x$ eta $x$ ezezagunaz zatitzen dut: $x=4$ bakarrik.', '$x^{2}=4x$, divido entre $x$: solo $x=4$.', '$x^{2}=4x$، أقسم على $x$: $x=4$ فقط.', '$x^{2}=4x$, divide by $x$: only $x=4$.'),
             right: say('$x$ ezezagunaz zatitzean $x=0$ galtzen da. Faktore komuna: $x(x-4)=0$, $x=0$ eta $x=4$.', 'Al dividir entre $x$ se pierde $x=0$. Factor común: $x(x-4)=0$, $x=0$ y $x=4$.', 'بالقسمة على $x$ نفقد $x=0$. العامل المشترك: $x(x-4)=0$، $x=0$ و$x=4$.', 'Dividing by $x$ loses $x=0$. Common factor: $x(x-4)=0$, $x=0$ and $x=4$.')
         },
-        takeaway: say('$X(AX+B)=0\\Rightarrow X=0$ EDO $AX+B=0$.', '$X(AX+B)=0\\Rightarrow X=0$ O $AX+B=0$.', '$X(AX+B)=0\\Rightarrow X=0$ أو $AX+B=0$.', '$X(AX+B)=0\\Rightarrow X=0$ OR $AX+B=0$.'),
+        takeaway: say('$x(ax+b)=0\\Rightarrow x=0$ edo $ax+b=0$.', '$x(ax+b)=0\\Rightarrow x=0$ o $ax+b=0$.', '$x(ax+b)=0\\Rightarrow x=0$ أو $ax+b=0$.', '$x(ax+b)=0\\Rightarrow x=0$ or $ax+b=0$.'),
         figure: (language) => <ZeroProductFigure language={language} />
     },
     {
@@ -159,7 +159,7 @@ export const equations3Topics: UnitTopic[] = [
             wrong: say('$x^{2}-4x+3=0$: $x=\\frac{-4\\pm 2}{2}$.', '$x^{2}-4x+3=0$: $x=\\frac{-4\\pm 2}{2}$.', '$x^{2}-4x+3=0$: $x=\\frac{-4\\pm 2}{2}$.', '$x^{2}-4x+3=0$: $x=\\frac{-4\\pm 2}{2}$.'),
             right: say('$b=-4$ da, beraz $-b=4$: $x=\\frac{4\\pm 2}{2}$, $x=3$ eta $x=1$.', '$b=-4$, así que $-b=4$: $x=\\frac{4\\pm 2}{2}$, $x=3$ y $x=1$.', '$b=-4$، إذن $-b=4$: $x=\\frac{4\\pm 2}{2}$، $x=3$ و$x=1$.', '$b=-4$, so $-b=4$: $x=\\frac{4\\pm 2}{2}$, $x=3$ and $x=1$.')
         },
-        takeaway: say('$X=\\frac{-B\\pm\\sqrt{B^{2}-4AC}}{2A}$', '$X=\\frac{-B\\pm\\sqrt{B^{2}-4AC}}{2A}$', '$X=\\frac{-B\\pm\\sqrt{B^{2}-4AC}}{2A}$', '$X=\\frac{-B\\pm\\sqrt{B^{2}-4AC}}{2A}$'),
+        takeaway: say('$x=\\frac{-b\\pm\\sqrt{b^{2}-4ac}}{2a}$', '$x=\\frac{-b\\pm\\sqrt{b^{2}-4ac}}{2a}$', '$x=\\frac{-b\\pm\\sqrt{b^{2}-4ac}}{2a}$', '$x=\\frac{-b\\pm\\sqrt{b^{2}-4ac}}{2a}$'),
         figure: (language) => <QuadraticFormulaFigure language={language} />
     },
     {
@@ -189,7 +189,7 @@ export const equations3Topics: UnitTopic[] = [
             wrong: say('$x^{2}+2x-8=0$: $\\Delta=2^{2}-4\\cdot 1\\cdot 8<0$, ebazpenik ez.', '$x^{2}+2x-8=0$: $\\Delta=2^{2}-4\\cdot 1\\cdot 8<0$, no tiene solución.', '$x^{2}+2x-8=0$: $\\Delta=2^{2}-4\\cdot 1\\cdot 8<0$، لا حل.', '$x^{2}+2x-8=0$: $\\Delta=2^{2}-4\\cdot 1\\cdot 8<0$, no solution.'),
             right: say('$c=-8$ da, zeinuarekin: $\\Delta=4+32=36>0$, bi ebazpen.', '$c=-8$, con su signo: $\\Delta=4+32=36>0$, dos soluciones.', '$c=-8$ بإشارته: $\\Delta=4+32=36>0$، حلّان.', '$c=-8$, with its sign: $\\Delta=4+32=36>0$, two solutions.')
         },
-        takeaway: say('$\\Delta=B^{2}-4AC$: $>0$ bi, $=0$ bat, $<0$ bat ere ez.', '$\\Delta=B^{2}-4AC$: $>0$ dos, $=0$ una, $<0$ ninguna.', '$\\Delta=B^{2}-4AC$: $>0$ حلّان، $=0$ حلّ، $<0$ لا حل.', '$\\Delta=B^{2}-4AC$: $>0$ two, $=0$ one, $<0$ none.'),
+        takeaway: say('$\\Delta=b^{2}-4ac$: $>0$ bi, $=0$ bat, $<0$ bat ere ez.', '$\\Delta=b^{2}-4ac$: $>0$ dos, $=0$ una, $<0$ ninguna.', '$\\Delta=b^{2}-4ac$: $>0$ حلّان، $=0$ حلّ، $<0$ لا حل.', '$\\Delta=b^{2}-4ac$: $>0$ two, $=0$ one, $<0$ none.'),
         figure: (language) => <DiscriminantFigure language={language} />
     },
     /* ---------- 3. Systems ---------- */
@@ -216,7 +216,7 @@ export const equations3Topics: UnitTopic[] = [
             wrong: say('$(4,1)$ ebazpena da: $x+y=5$ betetzen du.', '$(4,1)$ es solución: cumple $x+y=5$.', '$(4,1)$ حلّ: يحقق $x+y=5$.', '$(4,1)$ is the solution: it satisfies $x+y=5$.'),
             right: say('Bi ekuazioak bete behar ditu: $3\\cdot 4-1=11\\neq 3$, beraz ez da sistemaren ebazpena.', 'Tiene que cumplir las dos: $3\\cdot 4-1=11\\neq 3$, así que no es solución del sistema.', 'يجب أن يحقق الاثنتين: $3\\cdot 4-1=11\\neq 3$، إذن ليس حلًّا للنظام.', 'It must satisfy both: $3\\cdot 4-1=11\\neq 3$, so it is not the solution of the system.')
         },
-        takeaway: say('Sistemaren ebazpena: BI ekuazioak betetzen dituen $(X,Y)$.', 'Solución del sistema: el $(X,Y)$ que cumple LAS DOS.', 'حل النظام: الزوج $(X,Y)$ الذي يحقق المعادلتين.', 'Solution of the system: the $(X,Y)$ that satisfies BOTH.'),
+        takeaway: say('Sistemaren ebazpena: BI ekuazioak betetzen dituen $(x,y)$.', 'Solución del sistema: el $(x,y)$ que cumple LAS DOS.', 'حل النظام: الزوج $(x,y)$ الذي يحقق المعادلتين.', 'Solution of the system: the $(x,y)$ that satisfies BOTH.'),
         figure: (language) => <LinearSolutionsFigure language={language} />
     },
     {
@@ -327,7 +327,7 @@ export const equations3Topics: UnitTopic[] = [
             wrong: say('$y=2x+1$ eta $x=-y+7$ berdindu: $2x+1=-y+7$.', 'Igualo $y=2x+1$ y $x=-y+7$: $2x+1=-y+7$.', 'أساوي $y=2x+1$ و$x=-y+7$: $2x+1=-y+7$.', 'I set $y=2x+1$ and $x=-y+7$ equal: $2x+1=-y+7$.'),
             right: say('Ezezagun BERA bakandu behar da bietan; bestela bi ezezagun geratzen dira.', 'Hay que despejar la MISMA incógnita en las dos; si no, quedan dos incógnitas.', 'يجب عزل المجهول نفسه في الاثنتين؛ وإلا يبقى مجهولان.', 'You must isolate the SAME unknown in both; otherwise two unknowns are left.')
         },
-        takeaway: say('$Y=A$ ETA $Y=B\\Rightarrow A=B$', '$Y=A$ E $Y=B\\Rightarrow A=B$', '$Y=A$ و$Y=B\\Rightarrow A=B$', '$Y=A$ AND $Y=B\\Rightarrow A=B$'),
+        takeaway: say('$y=a$ eta $y=b\\Rightarrow a=b$', '$y=a$ e $y=b\\Rightarrow a=b$', '$y=a$ و$y=b\\Rightarrow a=b$', '$y=a$ and $y=b\\Rightarrow a=b$'),
         figure: (language) => <EqualizationFigure language={language} />
     },
     {
@@ -353,7 +353,7 @@ export const equations3Topics: UnitTopic[] = [
             wrong: say('$5x-y=13$ bider 3: $15x-3y=13$.', '$5x-y=13$ por 3: $15x-3y=13$.', '$5x-y=13$ في 3: $15x-3y=13$.', '$5x-y=13$ times 3: $15x-3y=13$.'),
             right: say('Bi atalak biderkatzen dira, gai askea ere bai: $15x-3y=39$.', 'Se multiplican los dos miembros, también el término independiente: $15x-3y=39$.', 'يُضرب الطرفان، حتى الحد الثابت: $15x-3y=39$.', 'Both sides are multiplied, the constant as well: $15x-3y=39$.')
         },
-        takeaway: say('Koefiziente AURKAKOAK lortu eta batu: $3Y+(-3Y)=0$.', 'Consigue coeficientes OPUESTOS y suma: $3Y+(-3Y)=0$.', 'احصل على معاملين متعاكسين واجمع: $3Y+(-3Y)=0$.', 'Make the coefficients OPPOSITE and add: $3Y+(-3Y)=0$.'),
+        takeaway: say('Koefiziente AURKAKOAK lortu eta batu: $3y+(-3y)=0$.', 'Consigue coeficientes OPUESTOS y suma: $3y+(-3y)=0$.', 'احصل على معاملين متعاكسين واجمع: $3y+(-3y)=0$.', 'Make the coefficients OPPOSITE and add: $3y+(-3y)=0$.'),
         figure: (language) => <ReductionFigure language={language} />
     },
     /* ---------- 5. Problems ---------- */
@@ -381,7 +381,7 @@ export const equations3Topics: UnitTopic[] = [
             wrong: say('4 urte barru: $x+28=3(x+4)$.', 'Dentro de 4 años: $x+28=3(x+4)$.', 'بعد 4 سنوات: $x+28=3(x+4)$.', 'In 4 years: $x+28=3(x+4)$.'),
             right: say('Urteak amari ere igarotzen zaizkio: $x+28+4=3(x+4)$.', 'Los años también pasan para la madre: $x+28+4=3(x+4)$.', 'السنوات تمرّ على الأم أيضًا: $x+28+4=3(x+4)$.', 'The years pass for the mother too: $x+28+4=3(x+4)$.')
         },
-        takeaway: say('Erabaki $X$, idatzi dena $X$-rekin, planteatu, EGIAZTATU.', 'Decide $X$, escribe todo con $X$, plantea, COMPRUEBA.', 'حدّد $X$، اكتب الكل بـ$X$، صُغ، تحقّق.', 'Choose $X$, write everything with $X$, set up, CHECK.'),
+        takeaway: say('Erabaki $x$, idatzi dena $x$-rekin, planteatu, EGIAZTATU.', 'Decide $x$, escribe todo con $x$, plantea, COMPRUEBA.', 'حدّد $x$، اكتب الكل بـ$x$، صُغ، تحقّق.', 'Choose $x$, write everything with $x$, set up, CHECK.'),
         figure: (language) => <AgesFigure language={language} />
     },
     {

@@ -81,7 +81,7 @@ export const polynomialsFractionsTopics: UnitTopic[] = [
             { text: say('Kalkulatu.', 'Calcula.', 'احسب.', 'Calculate.'), math: same('$8x^{3}-12x^{2}+6x-1$') }
         ],
         example: same('$(3x+2)(3x-2)=9x^{2}-4$'),
-        takeaway: say('$(A\\pm B)^{2}=A^{2}\\pm 2AB+B^{2}$; $(A+B)(A-B)=A^{2}-B^{2}$.', '$(A\\pm B)^{2}=A^{2}\\pm 2AB+B^{2}$; $(A+B)(A-B)=A^{2}-B^{2}$.', '$(A\\pm B)^{2}=A^{2}\\pm 2AB+B^{2}$؛ $(A+B)(A-B)=A^{2}-B^{2}$.', '$(A\\pm B)^{2}=A^{2}\\pm 2AB+B^{2}$; $(A+B)(A-B)=A^{2}-B^{2}$.'),
+        takeaway: say('$(a\\pm b)^{2}=a^{2}\\pm 2ab+b^{2}$; $(a+b)(a-b)=a^{2}-b^{2}$.', '$(a\\pm b)^{2}=a^{2}\\pm 2ab+b^{2}$; $(a+b)(a-b)=a^{2}-b^{2}$.', '$(a\\pm b)^{2}=a^{2}\\pm 2ab+b^{2}$؛ $(a+b)(a-b)=a^{2}-b^{2}$.', '$(a\\pm b)^{2}=a^{2}\\pm 2ab+b^{2}$; $(a+b)(a-b)=a^{2}-b^{2}$.'),
         figure: (language) => <SquareSumFigure language={language} />
     },
     {
@@ -101,7 +101,7 @@ export const polynomialsFractionsTopics: UnitTopic[] = [
             { text: say('Koefizientea.', 'El coeficiente.', 'المعامل.', 'The coefficient.'), math: same('$10\\cdot 9=90$') }
         ],
         example: same('$(a+b)^{3}\\to 1\\ 3\\ 3\\ 1$'),
-        takeaway: say('n. errenkada = $(A+B)^{N}$-ren koefizienteak.', 'Fila n = coeficientes de $(A+B)^{N}$.', 'الصف n = معاملات $(A+B)^{N}$.', 'Row n = coefficients of $(A+B)^{N}$.'),
+        takeaway: say('n. errenkada = $(a+b)^{n}$-ren koefizienteak.', 'Fila n = coeficientes de $(a+b)^{n}$.', 'الصف n = معاملات $(a+b)^{n}$.', 'Row n = coefficients of $(a+b)^{n}$.'),
         figure: (language) => <TartagliaFigure language={language} />
     },
 
@@ -124,7 +124,7 @@ export const polynomialsFractionsTopics: UnitTopic[] = [
             { text: say('$-2$; hondarra 0: zehatza.', '$-2$; resto 0: exacta.', '$-2$؛ الباقي 0: تامة.', '$-2$; remainder 0: exact.'), math: same('$c(x)=2x^{2}+3x-2$') }
         ],
         example: same('$D=d\\cdot c+r$'),
-        takeaway: say('$D=D\\cdot C+R$, hondarraren maila zatitzailearena baino txikiagoa.', '$D=D\\cdot C+R$, con el grado del resto menor que el del divisor.', '$D=D\\cdot C+R$، ودرجة الباقي أصغر من درجة المقسوم عليه.', '$D=D\\cdot C+R$, with the degree of the remainder less than that of the divisor.'),
+        takeaway: say('$D=d\\cdot c+r$, hondarraren maila zatitzailearena baino txikiagoa.', '$D=d\\cdot c+r$, con el grado del resto menor que el del divisor.', '$D=d\\cdot c+r$، ودرجة الباقي أصغر من درجة المقسوم عليه.', '$D=d\\cdot c+r$, with the degree of the remainder less than that of the divisor.'),
         figure: (language) => <LongDivisionFigure language={language} />
     },
     {
@@ -165,7 +165,7 @@ export const polynomialsFractionsTopics: UnitTopic[] = [
             { text: say('Berdindu.', 'Iguala.', 'ساوِ.', 'Set them equal.'), math: same('$5m-9=-4\\ \\to\\ m=1$') }
         ],
         example: same('$R=P(a)$'),
-        takeaway: say('Hondarra $=P(A)$. Parametroa: berdindu eta askatu.', 'Resto $=P(A)$. Parámetro: iguala y despeja.', 'الباقي $=P(A)$. الوسيط: ساوِ واستخرج.', 'Remainder $=P(A)$. Parameter: set it equal and solve for it.'),
+        takeaway: say('Hondarra $=P(a)$. Parametroa: berdindu eta askatu.', 'Resto $=P(a)$. Parámetro: iguala y despeja.', 'الباقي $=P(a)$. الوسيط: ساوِ واستخرج.', 'Remainder $=P(a)$. Parameter: set it equal and solve for it.'),
         figure: (language) => <ParameterFigure language={language} />
     },
 
@@ -188,7 +188,7 @@ export const polynomialsFractionsTopics: UnitTopic[] = [
             { text: say('Zatidura $x^{2}+1$: ez du erro gehiago.', 'Cociente $x^{2}+1$: no hay más raíces.', 'خارج القسمة $x^{2}+1$: لا جذور أخرى.', 'Quotient $x^{2}+1$: there are no more roots.'), math: same('$(x+3)(x^{2}+1)$') }
         ],
         example: same('$P(a)=0$'),
-        takeaway: say('Erro osoak: gai askearen zatitzaileak. $P(A)=0$ ⟺ $X-A$ faktorea.', 'Raíces enteras: divisores del término independiente. $P(A)=0$ ⟺ $X-A$ es factor.', 'الجذور الصحيحة: قواسم الحد الثابت. $P(A)=0$ ⟺ $X-A$ عامل.', 'Integer roots: divisors of the constant term. $P(A)=0$ ⟺ $X-A$ is a factor.'),
+        takeaway: say('Erro osoak: gai askearen zatitzaileak. $P(a)=0$ ⟺ $x-a$ faktorea.', 'Raíces enteras: divisores del término independiente. $P(a)=0$ ⟺ $x-a$ es factor.', 'الجذور الصحيحة: قواسم الحد الثابت. $P(a)=0$ ⟺ $x-a$ عامل.', 'Integer roots: divisors of the constant term. $P(a)=0$ ⟺ $x-a$ is a factor.'),
         figure: (language) => <RootsFigure language={language} />
     },
     {

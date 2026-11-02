@@ -50,7 +50,7 @@ export const geometry3Topics: UnitTopic[] = [
             wrong: say('Hexagono baten angeluek $6\\cdot 180°=1080°$ batzen dute.', 'Los ángulos de un hexágono suman $6\\cdot 180°=1080°$.', 'مجموع زوايا السداسي $6\\cdot 180°=1080°$.', 'The angles of a hexagon add up to $6\\cdot 180°=1080°$.'),
             right: say('Hexagonoa 4 triangelutan banatzen da, ez 6: $(6-2)\\cdot 180°=720°$.', 'El hexágono se divide en 4 triángulos, no en 6: $(6-2)\\cdot 180°=720°$.', 'ينقسم السداسي إلى 4 مثلثات لا 6: $(6-2)\\cdot 180°=720°$.', 'The hexagon splits into 4 triangles, not 6: $(6-2)\\cdot 180°=720°$.')
         },
-        takeaway: say('Barnekoak: $(N-2)\\cdot 180°$. Kanpokoak: $360°$.', 'Interiores: $(N-2)\\cdot 180°$. Exteriores: $360°$.', 'الداخلية: $(N-2)\\cdot 180°$. الخارجية: $360°$.', 'Interior: $(N-2)\\cdot 180°$. Exterior: $360°$.'),
+        takeaway: say('Barnekoak: $(n-2)\\cdot 180°$. Kanpokoak: $360°$.', 'Interiores: $(n-2)\\cdot 180°$. Exteriores: $360°$.', 'الداخلية: $(n-2)\\cdot 180°$. الخارجية: $360°$.', 'Interior: $(n-2)\\cdot 180°$. Exterior: $360°$.'),
         figure: (language) => <AngleSumFigure language={language} />
     },
     {
@@ -75,7 +75,7 @@ export const geometry3Topics: UnitTopic[] = [
             wrong: say('Pentagono erregularraren barne-angelua: $360°\\div 5=72°$.', 'Ángulo interior del pentágono regular: $360°\\div 5=72°$.', 'الزاوية الداخلية للخماسي المنتظم: $360°\\div 5=72°$.', 'Interior angle of the regular pentagon: $360°\\div 5=72°$.'),
             right: say('$72°$ kanpo-angelua (eta zentrala) da. Barnekoa: $180°-72°=108°$.', '$72°$ es el exterior (y el central). El interior: $180°-72°=108°$.', '$72°$ هي الخارجية (والمركزية). الداخلية: $180°-72°=108°$.', '$72°$ is the exterior (and central) angle. The interior one: $180°-72°=108°$.')
         },
-        takeaway: say('Zentrala = kanpokoa = $\\frac{360°}{N}$; barnekoa = $180°-\\frac{360°}{N}$.', 'Central = exterior = $\\frac{360°}{N}$; interior = $180°-\\frac{360°}{N}$.', 'المركزية = الخارجية = $\\frac{360°}{N}$؛ الداخلية = $180°-\\frac{360°}{N}$.', 'Central = exterior = $\\frac{360°}{N}$; interior = $180°-\\frac{360°}{N}$.'),
+        takeaway: say('Zentrala = kanpokoa = $\\frac{360°}{n}$; barnekoa = $180°-\\frac{360°}{n}$.', 'Central = exterior = $\\frac{360°}{n}$; interior = $180°-\\frac{360°}{n}$.', 'المركزية = الخارجية = $\\frac{360°}{n}$؛ الداخلية = $180°-\\frac{360°}{n}$.', 'Central = exterior = $\\frac{360°}{n}$; interior = $180°-\\frac{360°}{n}$.'),
         figure: (language) => <RegularAnglesFigure language={language} />
     },
     {
@@ -205,7 +205,7 @@ export const geometry3Topics: UnitTopic[] = [
             wrong: same('$\\sqrt{3^{2}+4^{2}}=3+4=7$'),
             right: say('Erroa ez da banatzen batuketan: $\\sqrt{9+16}=\\sqrt{25}=5$.', 'La raíz no se reparte en la suma: $\\sqrt{9+16}=\\sqrt{25}=5$.', 'لا يتوزع الجذر على الجمع: $\\sqrt{9+16}=\\sqrt{25}=5$.', 'The root does not split over a sum: $\\sqrt{9+16}=\\sqrt{25}=5$.')
         },
-        takeaway: same('$A^{2}=B^{2}+C^{2}$'),
+        takeaway: same('$a^{2}=b^{2}+c^{2}$'),
         figure: (language) => <HypotenuseFigure language={language} />
     },
     {
@@ -230,7 +230,7 @@ export const geometry3Topics: UnitTopic[] = [
             wrong: say('Altuera: $\\sqrt{10^{2}-12^{2}}$.', 'La altura: $\\sqrt{10^{2}-12^{2}}$.', 'الارتفاع: $\\sqrt{10^{2}-12^{2}}$.', 'The height: $\\sqrt{10^{2}-12^{2}}$.'),
             right: say('Triangelu zuzenak oinarriaren ERDIA du: $\\sqrt{10^{2}-6^{2}}=8$.', 'El triángulo rectángulo tiene la MITAD de la base: $\\sqrt{10^{2}-6^{2}}=8$.', 'للمثلث القائم نصف القاعدة: $\\sqrt{10^{2}-6^{2}}=8$.', 'The right triangle has HALF the base: $\\sqrt{10^{2}-6^{2}}=8$.')
         },
-        takeaway: say('Bilatu triangelu ZUZENA: $H=\\sqrt{L^{2}-(B\\div 2)^{2}}$.', 'Busca el triángulo RECTÁNGULO: $H=\\sqrt{L^{2}-(B\\div 2)^{2}}$.', 'ابحث عن المثلث القائم: $H=\\sqrt{L^{2}-(B\\div 2)^{2}}$.', 'Look for the RIGHT triangle: $H=\\sqrt{L^{2}-(B\\div 2)^{2}}$.'),
+        takeaway: say('Bilatu triangelu ZUZENA: $h=\\sqrt{l^{2}-(b\\div 2)^{2}}$.', 'Busca el triángulo RECTÁNGULO: $h=\\sqrt{l^{2}-(b\\div 2)^{2}}$.', 'ابحث عن المثلث القائم: $h=\\sqrt{l^{2}-(b\\div 2)^{2}}$.', 'Look for the RIGHT triangle: $h=\\sqrt{l^{2}-(b\\div 2)^{2}}$.'),
         figure: (language) => <IsoscelesHeightFigure language={language} />
     },
     {
@@ -254,7 +254,7 @@ export const geometry3Topics: UnitTopic[] = [
             wrong: say('Eskailera: $h=\\sqrt{10^{2}+6^{2}}$.', 'Escalera: $h=\\sqrt{10^{2}+6^{2}}$.', 'السلّم: $h=\\sqrt{10^{2}+6^{2}}$.', 'Ladder: $h=\\sqrt{10^{2}+6^{2}}$.'),
             right: say('Eskailera hipotenusa da: katetoa kalkulatzeko kendu egiten da, $\\sqrt{100-36}=8$.', 'La escalera es la hipotenusa: para un cateto se resta, $\\sqrt{100-36}=8$.', 'السلّم هو الوتر: لإيجاد ضلع قائم نطرح، $\\sqrt{100-36}=8$.', 'The ladder is the hypotenuse: for a leg you subtract, $\\sqrt{100-36}=8$.')
         },
-        takeaway: same('$D=\\sqrt{(X_{2}-X_{1})^{2}+(Y_{2}-Y_{1})^{2}}$'),
+        takeaway: same('$d=\\sqrt{(x_{2}-x_{1})^{2}+(y_{2}-y_{1})^{2}}$'),
         figure: (language) => <LadderFigure language={language} />
     },
     /* ---------- 4. Areas ---------- */
@@ -279,7 +279,7 @@ export const geometry3Topics: UnitTopic[] = [
             wrong: say('Oinarria 8 eta altuera 6 duen triangelua: $8\\cdot 6=48$.', 'Triángulo de base 8 y altura 6: $8\\cdot 6=48$.', 'مثلث قاعدته 8 وارتفاعه 6: $8\\cdot 6=48$.', 'Triangle with base 8 and height 6: $8\\cdot 6=48$.'),
             right: say('Triangelua paralelogramoaren erdia da: $\\frac{8\\cdot 6}{2}=24$.', 'El triángulo es la mitad del paralelogramo: $\\frac{8\\cdot 6}{2}=24$.', 'المثلث نصف متوازي الأضلاع: $\\frac{8\\cdot 6}{2}=24$.', 'The triangle is half the parallelogram: $\\frac{8\\cdot 6}{2}=24$.')
         },
-        takeaway: say('Triangelua: $\\frac{B\\cdot H}{2}$. Trapezioa: $\\frac{(B+B^{\\prime})\\cdot H}{2}$.', 'Triángulo: $\\frac{B\\cdot H}{2}$. Trapecio: $\\frac{(B+B^{\\prime})\\cdot H}{2}$.', 'المثلث: $\\frac{B\\cdot H}{2}$. شبه المنحرف: $\\frac{(B+B^{\\prime})\\cdot H}{2}$.', 'Triangle: $\\frac{B\\cdot H}{2}$. Trapezium: $\\frac{(B+B^{\\prime})\\cdot H}{2}$.'),
+        takeaway: say('Triangelua: $\\frac{b\\cdot h}{2}$. Trapezioa: $\\frac{(B+b)\\cdot h}{2}$.', 'Triángulo: $\\frac{b\\cdot h}{2}$. Trapecio: $\\frac{(B+b)\\cdot h}{2}$.', 'المثلث: $\\frac{b\\cdot h}{2}$. شبه المنحرف: $\\frac{(B+b)\\cdot h}{2}$.', 'Triangle: $\\frac{b\\cdot h}{2}$. Trapezium: $\\frac{(B+b)\\cdot h}{2}$.'),
         figure: (language) => <PolygonAreasFigure language={language} />
     },
     {
@@ -304,7 +304,7 @@ export const geometry3Topics: UnitTopic[] = [
             wrong: say('Azalera $P\\cdot a$ da, zati 2 gabe.', 'El área es $P\\cdot a$, sin dividir entre 2.', 'المساحة $P\\cdot a$ دون قسمة على 2.', 'The area is $P\\cdot a$, without dividing by 2.'),
             right: say('Triangelu bakoitza $\\frac{l\\cdot a}{2}$ da: guztira $\\frac{P\\cdot a}{2}$.', 'Cada triángulo es $\\frac{l\\cdot a}{2}$: en total $\\frac{P\\cdot a}{2}$.', 'كل مثلث $\\frac{l\\cdot a}{2}$: والمجموع $\\frac{P\\cdot a}{2}$.', 'Each triangle is $\\frac{l\\cdot a}{2}$: in total $\\frac{P\\cdot a}{2}$.')
         },
-        takeaway: same('$A=\\frac{P\\cdot AP}{2}$'),
+        takeaway: same('$A=\\frac{P\\cdot a}{2}$'),
         figure: (language) => <ApothemFigure language={language} />
     },
     {
@@ -329,7 +329,7 @@ export const geometry3Topics: UnitTopic[] = [
             wrong: say('8 cm-ko diametroa: azalera $\\pi\\cdot 8^{2}$.', 'Diámetro 8 cm: área $\\pi\\cdot 8^{2}$.', 'القطر 8 سم: المساحة $\\pi\\cdot 8^{2}$.', 'Diameter 8 cm: area $\\pi\\cdot 8^{2}$.'),
             right: say('Formulak erradioa erabiltzen du: $r=4$, azalera $16\\pi$.', 'La fórmula usa el radio: $r=4$, área $16\\pi$.', 'تستعمل الصيغة نصف القطر: $r=4$، المساحة $16\\pi$.', 'The formula uses the radius: $r=4$, area $16\\pi$.')
         },
-        takeaway: say('Sektorea = $\\pi R^{2}\\cdot\\frac{\\alpha}{360°}$', 'Sector = $\\pi R^{2}\\cdot\\frac{\\alpha}{360°}$', 'القطاع = $\\pi R^{2}\\cdot\\frac{\\alpha}{360°}$', 'Sector = $\\pi R^{2}\\cdot\\frac{\\alpha}{360°}$'),
+        takeaway: say('Sektorea = $\\pi r^{2}\\cdot\\frac{\\alpha}{360°}$', 'Sector = $\\pi r^{2}\\cdot\\frac{\\alpha}{360°}$', 'القطاع = $\\pi r^{2}\\cdot\\frac{\\alpha}{360°}$', 'Sector = $\\pi r^{2}\\cdot\\frac{\\alpha}{360°}$'),
         figure: (language) => <SectorRingFigure language={language} />
     },
     /* ---------- 5. Similarity ---------- */
@@ -380,7 +380,7 @@ export const geometry3Topics: UnitTopic[] = [
             wrong: say('5 cm-tik 12 cm-ra 7 gehitu da: alde guztiei 7 gehitu.', 'De 5 cm a 12 cm se suman 7: se suman 7 a todos los lados.', 'من 5 سم إلى 12 سم أُضيف 7: نضيف 7 إلى كل الأضلاع.', 'From 5 cm to 12 cm, 7 is added: add 7 to every side.'),
             right: say('Antzekotasunean biderkatu egiten da, ez batu: alde guztiak bider $k$.', 'En la semejanza se multiplica, no se suma: todos los lados por $k$.', 'في التشابه نضرب ولا نجمع: كل الأضلاع في $k$.', 'Similarity multiplies, it does not add: every side times $k$.')
         },
-        takeaway: same("$K=\\frac{A^{\\prime}}{A}=\\frac{B^{\\prime}}{B}=\\frac{C^{\\prime}}{C}$"),
+        takeaway: same("$k=\\frac{a^{\\prime}}{a}=\\frac{b^{\\prime}}{b}=\\frac{c^{\\prime}}{c}$"),
         figure: (language) => <CriteriaFigure language={language} />
     },
     {
@@ -405,7 +405,7 @@ export const geometry3Topics: UnitTopic[] = [
             wrong: say('Aldeak bikoiztean, azalera ere bikoizten da.', 'Al doblar los lados, el área también se dobla.', 'عند مضاعفة الأضلاع تتضاعف المساحة أيضًا.', 'Doubling the sides doubles the area too.'),
             right: say('Azalera $k^{2}$ aldiz: aldeak bikoiztean, azalera laukoiztu.', 'El área va por $k^{2}$: al doblar los lados, el área se multiplica por 4.', 'المساحة في $k^{2}$: بمضاعفة الأضلاع تُضرب المساحة في 4.', 'The area goes by $k^{2}$: doubling the sides multiplies the area by 4.')
         },
-        takeaway: say('Perimetroak: $K$. Azalerak: $K^{2}$.', 'Perímetros: $K$. Áreas: $K^{2}$.', 'المحيطات: $K$. المساحات: $K^{2}$.', 'Perimeters: $K$. Areas: $K^{2}$.'),
+        takeaway: say('Perimetroak: $k$. Azalerak: $k^{2}$.', 'Perímetros: $k$. Áreas: $k^{2}$.', 'المحيطات: $k$. المساحات: $k^{2}$.', 'Perimeters: $k$. Areas: $k^{2}$.'),
         figure: (language) => <RatiosFigure language={language} />
     }
 ]

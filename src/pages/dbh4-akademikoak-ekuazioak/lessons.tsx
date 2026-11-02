@@ -64,7 +64,7 @@ export const equationsInequalitiesTopics: UnitTopic[] = [
             { text: say('Bi ebazpen.', 'Dos soluciones.', 'حلّان.', 'Two solutions.'), math: same('$x=2,\\ x=-\\frac{2}{3}$') }
         ],
         example: same('$\\Delta=b^{2}-4ac$'),
-        takeaway: say('$X=\\frac{-B\\pm\\sqrt{\\Delta}}{2A}$; $\\Delta<0$: ebazpenik ez.', '$X=\\frac{-B\\pm\\sqrt{\\Delta}}{2A}$; $\\Delta<0$: sin solución.', '$X=\\frac{-B\\pm\\sqrt{\\Delta}}{2A}$؛ $\\Delta<0$: لا حل.', '$X=\\frac{-B\\pm\\sqrt{\\Delta}}{2A}$; $\\Delta<0$: no solution.'),
+        takeaway: say('$x=\\frac{-b\\pm\\sqrt{\\Delta}}{2a}$; $\\Delta<0$: ebazpenik ez.', '$x=\\frac{-b\\pm\\sqrt{\\Delta}}{2a}$; $\\Delta<0$: sin solución.', '$x=\\frac{-b\\pm\\sqrt{\\Delta}}{2a}$؛ $\\Delta<0$: لا حل.', '$x=\\frac{-b\\pm\\sqrt{\\Delta}}{2a}$; $\\Delta<0$: no solution.'),
         figure: (language) => <QuadraticFormulaFigure language={language} />
     },
     {
@@ -84,7 +84,7 @@ export const equationsInequalitiesTopics: UnitTopic[] = [
             { text: say('Batura $-b$ da.', 'La suma es $-b$.', 'المجموع هو $-b$.', 'The sum is $-b$.'), math: same('$3-4=-1\\ \\to\\ b=1$') }
         ],
         example: same('$x^{2}-Sx+P=0$'),
-        takeaway: say('$X_1+X_2=-\\frac{B}{A}$, $X_1\\cdot X_2=\\frac{C}{A}$.', '$X_1+X_2=-\\frac{B}{A}$, $X_1\\cdot X_2=\\frac{C}{A}$.', '$X_1+X_2=-\\frac{B}{A}$، $X_1\\cdot X_2=\\frac{C}{A}$.', '$X_1+X_2=-\\frac{B}{A}$, $X_1\\cdot X_2=\\frac{C}{A}$.'),
+        takeaway: say('$x_1+x_2=-\\frac{b}{a}$, $x_1\\cdot x_2=\\frac{c}{a}$.', '$x_1+x_2=-\\frac{b}{a}$, $x_1\\cdot x_2=\\frac{c}{a}$.', '$x_1+x_2=-\\frac{b}{a}$، $x_1\\cdot x_2=\\frac{c}{a}$.', '$x_1+x_2=-\\frac{b}{a}$, $x_1\\cdot x_2=\\frac{c}{a}$.'),
         figure: (language) => <SumProductFigure language={language} />
     },
     {
@@ -128,7 +128,7 @@ export const equationsInequalitiesTopics: UnitTopic[] = [
             { text: say('Lau ebazpen.', 'Cuatro soluciones.', 'أربعة حلول.', 'Four solutions.'), math: same('$x=\\pm 3,\\ x=\\pm 2$') }
         ],
         example: same('$t=x^{2}$'),
-        takeaway: say('$T=X^{2}$; $T$ negatiboa bada, ez dago $X$-rik.', '$T=X^{2}$; si $T$ es negativo, no hay $X$.', '$T=X^{2}$؛ إذا كان $T$ سالبًا فلا يوجد $X$.', '$T=X^{2}$; if $T$ is negative, there is no $X$.'),
+        takeaway: say('$t=x^{2}$; $t$ negatiboa bada, ez dago $x$-rik.', '$t=x^{2}$; si $t$ es negativo, no hay $x$.', '$t=x^{2}$؛ إذا كان $t$ سالبًا فلا يوجد $x$.', '$t=x^{2}$; if $t$ is negative, there is no $x$.'),
         figure: (language) => <BiquadraticFigure language={language} />
     },
     {
@@ -323,7 +323,7 @@ export const equationsInequalitiesTopics: UnitTopic[] = [
             { text: say('Kanpoko zatiak.', 'Los trozos de fuera.', 'الجزآن الخارجيان.', 'The outer pieces.'), math: same('$(-\\infty,-2)\\cup(3,+\\infty)$') }
         ],
         example: same('$x^{2}-4<0:\\ (-2,2)$'),
-        takeaway: say('Erroak, zatiak eta zeinuak; $A>0$: erroen artean negatiboa.', 'Raíces, trozos y signos; $A>0$: negativo entre las raíces.', 'الجذور والأجزاء والإشارات؛ $A>0$: سالب بين الجذرين.', 'Roots, pieces and signs; $A>0$: negative between the roots.'),
+        takeaway: say('Erroak, zatiak eta zeinuak; $a>0$: erroen artean negatiboa.', 'Raíces, trozos y signos; $a>0$: negativo entre las raíces.', 'الجذور والأجزاء والإشارات؛ $a>0$: سالب بين الجذرين.', 'Roots, pieces and signs; $a>0$: negative between the roots.'),
         figure: (language) => <QuadraticSignFigure language={language} />
     },
     {
@@ -343,7 +343,7 @@ export const equationsInequalitiesTopics: UnitTopic[] = [
             { text: say('Parabola azpian 2 eta 3 artean.', 'La parábola queda debajo entre 2 y 3.', 'القطع تحت المستقيم بين 2 و3.', 'The parabola is below the straight line between 2 and 3.'), math: same('$[2,3]$') }
         ],
         example: same('$f(x)<g(x)$'),
-        takeaway: say('$F<G$: f-ren grafikoa g-renaren azpian; mugak, ebaki-puntuak.', '$F<G$: la gráfica de f debajo de la de g; extremos, los cortes.', '$F<G$: منحنى f تحت منحنى g؛ والأطراف نقاط التقاطع.', '$F<G$: the graph of f is below the graph of g; the endpoints are the crossing points.'),
+        takeaway: say('$f(x)<g(x)$: f-ren grafikoa g-renaren azpian; mugak, ebaki-puntuak.', '$f(x)<g(x)$: la gráfica de f debajo de la de g; extremos, los cortes.', '$f(x)<g(x)$: منحنى f تحت منحنى g؛ والأطراف نقاط التقاطع.', '$f(x)<g(x)$: the graph of f is below the graph of g; the endpoints are the crossing points.'),
         figure: (language) => <GraphicInequalityFigure language={language} />
     },
     {

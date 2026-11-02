@@ -47,7 +47,7 @@ export const polynomialsTopics: UnitTopic[] = [
             wrong: say('«$x$ gehi 3, guztia bider 2» = $x+3\\cdot 2$.', '«$x$ más 3, todo por 2» = $x+3\\cdot 2$.', '«$x$ زائد 3، والكل في 2» = $x+3\\cdot 2$.', '«$x$ plus 3, all times 2» = $x+3\\cdot 2$.'),
             right: say('«Guztia» parentesi bat da: $2(x+3)$. Parentesirik gabe 3 bakarrik biderkatzen da.', '«Todo» es un paréntesis: $2(x+3)$. Sin paréntesis solo se multiplica el 3.', '«الكل» يعني قوسًا: $2(x+3)$. وبلا قوس لا يُضرب إلا 3.', '«All» means brackets: $2(x+3)$. Without them only the 3 is multiplied.')
         },
-        takeaway: say('«Guztia» = parentesiak: $2(X+3)\\neq 2X+3$.', '«Todo» = paréntesis: $2(X+3)\\neq 2X+3$.', '«الكل» = أقواس: $2(X+3)\\neq 2X+3$.', '«All» = brackets: $2(X+3)\\neq 2X+3$.'),
+        takeaway: say('«Guztia» = parentesiak: $2(x+3)\\neq 2x+3$.', '«Todo» = paréntesis: $2(x+3)\\neq 2x+3$.', '«الكل» = أقواس: $2(x+3)\\neq 2x+3$.', '«All» = brackets: $2(x+3)\\neq 2x+3$.'),
         figure: (language) => <PatternFigure language={language} />
     },
     {
@@ -77,7 +77,7 @@ export const polynomialsTopics: UnitTopic[] = [
             wrong: say('$2x+3x^{2}=5x^{3}$', '$2x+3x^{2}=5x^{3}$', '$2x+3x^{2}=5x^{3}$', '$2x+3x^{2}=5x^{3}$'),
             right: say('$2x$ eta $3x^{2}$ ez dira antzekoak: ezin dira batu. $3x^{2}+2x$ geratzen da.', '$2x$ y $3x^{2}$ no son semejantes: no se suman. Se queda $3x^{2}+2x$.', '$2x$ و$3x^{2}$ غير متشابهين: لا يُجمعان. يبقى $3x^{2}+2x$.', '$2x$ and $3x^{2}$ are not like terms: they cannot be added. It stays $3x^{2}+2x$.')
         },
-        takeaway: say('Batu: antzekoak bakarrik. Biderkatu: $X^{M}\\cdot X^{N}=X^{M+N}$.', 'Sumar: solo semejantes. Multiplicar: $X^{M}\\cdot X^{N}=X^{M+N}$.', 'الجمع: المتشابهة فقط. الضرب: $X^{M}\\cdot X^{N}=X^{M+N}$.', 'Adding: like terms only. Multiplying: $X^{M}\\cdot X^{N}=X^{M+N}$.'),
+        takeaway: say('Batu: antzekoak bakarrik. Biderkatu: $x^{m}\\cdot x^{n}=x^{m+n}$.', 'Sumar: solo semejantes. Multiplicar: $x^{m}\\cdot x^{n}=x^{m+n}$.', 'الجمع: المتشابهة فقط. الضرب: $x^{m}\\cdot x^{n}=x^{m+n}$.', 'Adding: like terms only. Multiplying: $x^{m}\\cdot x^{n}=x^{m+n}$.'),
         figure: (language) => <PolynomialFigure language={language} />
     },
     {
@@ -103,7 +103,7 @@ export const polynomialsTopics: UnitTopic[] = [
             wrong: say('$P(x)=x^{2}-3x+4$ bada, $P(-1)=-1^{2}-3\\cdot -1+4=0$.', 'Si $P(x)=x^{2}-3x+4$, $P(-1)=-1^{2}-3\\cdot -1+4=0$.', 'إذا كان $P(x)=x^{2}-3x+4$ فإن $P(-1)=-1^{2}-3\\cdot -1+4=0$.', 'If $P(x)=x^{2}-3x+4$, then $P(-1)=-1^{2}-3\\cdot -1+4=0$.'),
             right: say('Parentesirik gabe, $-1^{2}=-1$ da, eta hori ez da $(-1)^{2}=1$. Zuzena: $P(-1)=8$.', 'Sin paréntesis, $-1^{2}=-1$, que no es $(-1)^{2}=1$. Lo correcto: $P(-1)=8$.', 'بلا أقواس $-1^{2}=-1$ وهذا ليس $(-1)^{2}=1$. الصحيح: $P(-1)=8$.', 'Without brackets, $-1^{2}=-1$, which is not $(-1)^{2}=1$. Correct: $P(-1)=8$.')
         },
-        takeaway: say('$P(A)$: jarri $A$ parentesi artean $X$ letraren ordez.', '$P(A)$: pon $A$ entre paréntesis en lugar de $X$.', '$P(A)$: ضع $A$ بين قوسين مكان $X$.', '$P(A)$: put $A$ in brackets in place of $X$.'),
+        takeaway: say('$P(a)$: jarri $a$ parentesi artean $x$ letraren ordez.', '$P(a)$: pon $a$ entre paréntesis en lugar de $x$.', '$P(a)$: ضع $a$ بين قوسين مكان $x$.', '$P(a)$: put $a$ in brackets in place of $x$.'),
         figure: (language) => <RemainderFigure language={language} />
     },
 
@@ -211,7 +211,7 @@ export const polynomialsTopics: UnitTopic[] = [
             wrong: say('$(x+5)^{2}=x^{2}+25$', '$(x+5)^{2}=x^{2}+25$', '$(x+5)^{2}=x^{2}+25$', '$(x+5)^{2}=x^{2}+25$'),
             right: say('Bi laukizuzenak falta dira: $2\\cdot x\\cdot 5=10x$. $(x+5)^{2}=x^{2}+10x+25$.', 'Faltan los dos rectángulos: $2\\cdot x\\cdot 5=10x$. $(x+5)^{2}=x^{2}+10x+25$.', 'ينقص المستطيلان: $2\\cdot x\\cdot 5=10x$. $(x+5)^{2}=x^{2}+10x+25$.', 'The two rectangles are missing: $2\\cdot x\\cdot 5=10x$. $(x+5)^{2}=x^{2}+10x+25$.')
         },
-        takeaway: say('$(A+B)^{2}=A^{2}+2AB+B^{2}$, ez $A^{2}+B^{2}$.', '$(A+B)^{2}=A^{2}+2AB+B^{2}$, no $A^{2}+B^{2}$.', '$(A+B)^{2}=A^{2}+2AB+B^{2}$ لا $A^{2}+B^{2}$.', '$(A+B)^{2}=A^{2}+2AB+B^{2}$, not $A^{2}+B^{2}$.'),
+        takeaway: say('$(a+b)^{2}=a^{2}+2ab+b^{2}$, ez $a^{2}+b^{2}$.', '$(a+b)^{2}=a^{2}+2ab+b^{2}$, no $a^{2}+b^{2}$.', '$(a+b)^{2}=a^{2}+2ab+b^{2}$ لا $a^{2}+b^{2}$.', '$(a+b)^{2}=a^{2}+2ab+b^{2}$, not $a^{2}+b^{2}$.'),
         figure: (language) => <SquareSumFigure language={language} />
     },
     {
@@ -237,7 +237,7 @@ export const polynomialsTopics: UnitTopic[] = [
             wrong: say('$(x-4)^{2}=x^{2}-8x-16$', '$(x-4)^{2}=x^{2}-8x-16$', '$(x-4)^{2}=x^{2}-8x-16$', '$(x-4)^{2}=x^{2}-8x-16$'),
             right: say('Azkena karratu bat da: $(-4)^{2}=16$, positiboa. $x^{2}-8x+16$.', 'El último es un cuadrado: $(-4)^{2}=16$, positivo. $x^{2}-8x+16$.', 'الأخير مربع: $(-4)^{2}=16$ موجب. $x^{2}-8x+16$.', 'The last term is a square: $(-4)^{2}=16$, positive. $x^{2}-8x+16$.')
         },
-        takeaway: say('$(A-B)^{2}=A^{2}-2AB+B^{2}$: zeinuak $+\\ -\\ +$.', '$(A-B)^{2}=A^{2}-2AB+B^{2}$: signos $+\\ -\\ +$.', '$(A-B)^{2}=A^{2}-2AB+B^{2}$: الإشارات $+\\ -\\ +$.', '$(A-B)^{2}=A^{2}-2AB+B^{2}$: signs $+\\ -\\ +$.'),
+        takeaway: say('$(a-b)^{2}=a^{2}-2ab+b^{2}$: zeinuak $+\\ -\\ +$.', '$(a-b)^{2}=a^{2}-2ab+b^{2}$: signos $+\\ -\\ +$.', '$(a-b)^{2}=a^{2}-2ab+b^{2}$: الإشارات $+\\ -\\ +$.', '$(a-b)^{2}=a^{2}-2ab+b^{2}$: signs $+\\ -\\ +$.'),
         figure: (language) => <SquareDifferenceFigure language={language} />
     },
     {
@@ -263,7 +263,7 @@ export const polynomialsTopics: UnitTopic[] = [
             wrong: say('$(x+3)(x-3)=x^{2}+9$', '$(x+3)(x-3)=x^{2}+9$', '$(x+3)(x-3)=x^{2}+9$', '$(x+3)(x-3)=x^{2}+9$'),
             right: say('Azkena $3\\cdot(-3)=-9$ da. Karratuen kendura: $x^{2}-9$.', 'El último es $3\\cdot(-3)=-9$. Diferencia de cuadrados: $x^{2}-9$.', 'الأخير $3\\cdot(-3)=-9$. فرق مربعين: $x^{2}-9$.', 'The last term is $3\\cdot(-3)=-9$. Difference of squares: $x^{2}-9$.')
         },
-        takeaway: say('$(A+B)(A-B)=A^{2}-B^{2}$', '$(A+B)(A-B)=A^{2}-B^{2}$', '$(A+B)(A-B)=A^{2}-B^{2}$', '$(A+B)(A-B)=A^{2}-B^{2}$'),
+        takeaway: say('$(a+b)(a-b)=a^{2}-b^{2}$', '$(a+b)(a-b)=a^{2}-b^{2}$', '$(a+b)(a-b)=a^{2}-b^{2}$', '$(a+b)(a-b)=a^{2}-b^{2}$'),
         figure: (language) => <SumDifferenceFigure language={language} />
     },
 
@@ -291,7 +291,7 @@ export const polynomialsTopics: UnitTopic[] = [
             wrong: say('$(x^{2}+2x-3):(x+3)$ zatitzeko, $a=3$ jarri da taulan.', 'Para dividir $(x^{2}+2x-3):(x+3)$ se puso $a=3$ en la tabla.', 'للقسمة $(x^{2}+2x-3):(x+3)$ وُضع $a=3$ في الجدول.', 'To divide $(x^{2}+2x-3):(x+3)$, $a=3$ was put in the table.'),
             right: say('$x+3=x-(-3)$, beraz $a=-3$. Horrela hondarra 0 da.', '$x+3=x-(-3)$, así que $a=-3$. Así el resto es 0.', '$x+3=x-(-3)$ إذن $a=-3$. وبذلك الباقي 0.', '$x+3=x-(-3)$, so $a=-3$. Then the remainder is 0.')
         },
-        takeaway: say('$X-A$ zatitzailea: taulan $A$. $X+3$ bada, $A=-3$.', 'Divisor $X-A$: en la tabla, $A$. Si es $X+3$, $A=-3$.', 'المقسوم عليه $X-A$: في الجدول $A$. وإذا كان $X+3$ فإن $A=-3$.', 'Divisor $X-A$: $A$ in the table. If it is $X+3$, $A=-3$.'),
+        takeaway: say('$x-a$ zatitzailea: taulan $a$. $x+3$ bada, $a=-3$.', 'Divisor $x-a$: en la tabla, $a$. Si es $x+3$, $a=-3$.', 'المقسوم عليه $x-a$: في الجدول $a$. وإذا كان $x+3$ فإن $a=-3$.', 'Divisor $x-a$: $a$ in the table. If it is $x+3$, $a=-3$.'),
         figure: (language) => <RuffiniFigure language={language} />
     },
     {
@@ -317,7 +317,7 @@ export const polynomialsTopics: UnitTopic[] = [
             wrong: say('$x^{3}-2x+4$ zati $x+1$: hondarra $P(1)=3$.', '$x^{3}-2x+4$ entre $x+1$: el resto es $P(1)=3$.', '$x^{3}-2x+4$ على $x+1$: الباقي $P(1)=3$.', '$x^{3}-2x+4$ divided by $x+1$: the remainder is $P(1)=3$.'),
             right: say('$x+1$ zatitzailearekin $a=-1$ da: hondarra $P(-1)=5$.', 'Con el divisor $x+1$, $a=-1$: el resto es $P(-1)=5$.', 'مع المقسوم عليه $x+1$ يكون $a=-1$: الباقي $P(-1)=5$.', 'With the divisor $x+1$, $a=-1$: the remainder is $P(-1)=5$.')
         },
-        takeaway: say('$P(X):(X-A)$ eragiketaren hondarra $=P(A)$.', 'Resto de $P(X):(X-A)$ $=P(A)$.', 'باقي $P(X):(X-A)$ $=P(A)$.', 'Remainder of $P(X):(X-A)$ $=P(A)$.'),
+        takeaway: say('$P(x):(x-a)$ eragiketaren hondarra $=P(a)$.', 'Resto de $P(x):(x-a)$ $=P(a)$.', 'باقي $P(x):(x-a)$ $=P(a)$.', 'Remainder of $P(x):(x-a)$ $=P(a)$.'),
         figure: (language) => <RemainderFigure language={language} />
     },
     {
@@ -343,7 +343,7 @@ export const polynomialsTopics: UnitTopic[] = [
             wrong: say('$x^{2}-x-6$ polinomioaren erroak bilatzeko, 1, 2, 3 eta 6 bakarrik probatu dira.', 'Para buscar las raíces de $x^{2}-x-6$ solo se probaron 1, 2, 3 y 6.', 'للبحث عن جذور $x^{2}-x-6$ جُرّبت 1 و2 و3 و6 فقط.', 'To find the roots of $x^{2}-x-6$, only 1, 2, 3 and 6 were tried.'),
             right: say('Zatitzaile negatiboak ere probatu behar dira: $P(-2)=0$, beraz $-2$ ere erroa da.', 'También hay que probar los negativos: $P(-2)=0$, así que $-2$ también es raíz.', 'يجب تجربة القواسم السالبة أيضًا: $P(-2)=0$ إذن $-2$ جذر أيضًا.', 'You must try the negative divisors too: $P(-2)=0$, so $-2$ is also a root.')
         },
-        takeaway: say('Erroa: $P(A)=0$. Hautagaiak: gai askearen zatitzaileak, $\\pm$.', 'Raíz: $P(A)=0$. Candidatos: divisores del término independiente, con $\\pm$.', 'الجذر: $P(A)=0$. المرشحون: قواسم الحد الثابت مع $\\pm$.', 'Root: $P(A)=0$. Candidates: divisors of the constant term, with $\\pm$.'),
+        takeaway: say('Erroa: $P(a)=0$. Hautagaiak: gai askearen zatitzaileak, $\\pm$.', 'Raíz: $P(a)=0$. Candidatos: divisores del término independiente, con $\\pm$.', 'الجذر: $P(a)=0$. المرشحون: قواسم الحد الثابت مع $\\pm$.', 'Root: $P(a)=0$. Candidates: divisors of the constant term, with $\\pm$.'),
         figure: (language) => <RootsFigure language={language} />
     },
 
@@ -371,7 +371,7 @@ export const polynomialsTopics: UnitTopic[] = [
             wrong: say('$4x^{2}+2x=2x(2x)$', '$4x^{2}+2x=2x(2x)$', '$4x^{2}+2x=2x(2x)$', '$4x^{2}+2x=2x(2x)$'),
             right: say('$2x$ zati $2x$ bat da, ez ezer: $4x^{2}+2x=2x(2x+1)$.', '$2x$ entre $2x$ es 1, no nada: $4x^{2}+2x=2x(2x+1)$.', '$2x$ على $2x$ يساوي 1 لا لا شيء: $4x^{2}+2x=2x(2x+1)$.', '$2x$ divided by $2x$ is 1, not nothing: $4x^{2}+2x=2x(2x+1)$.')
         },
-        takeaway: say('Atera z.k.h. eta berretzaile txikiena; barruan, gai bakoitza zati hori. $5X+5=5(X+1)$.', 'Saca el m.c.d. y el menor exponente; dentro, cada término entre eso. $5X+5=5(X+1)$.', 'أخرج ق.م.أ وأصغر أس؛ وفي الداخل كل حد مقسوم عليه. $5X+5=5(X+1)$.', 'Take out the HCF and the smallest exponent; inside, each term divided by it. $5X+5=5(X+1)$.'),
+        takeaway: say('Atera z.k.h. eta berretzaile txikiena; barruan, gai bakoitza zati hori. $5x+5=5(x+1)$.', 'Saca el m.c.d. y el menor exponente; dentro, cada término entre eso. $5x+5=5(x+1)$.', 'أخرج ق.م.أ وأصغر أس؛ وفي الداخل كل حد مقسوم عليه. $5x+5=5(x+1)$.', 'Take out the HCF and the smallest exponent; inside, each term divided by it. $5x+5=5(x+1)$.'),
         figure: (language) => <CommonFactorFigure language={language} />
     },
     {
@@ -402,7 +402,7 @@ export const polynomialsTopics: UnitTopic[] = [
             wrong: say('$x^{2}-5x+6$ polinomioaren erroak 2 eta 3 dira, beraz $(x+2)(x+3)$.', 'Las raíces de $x^{2}-5x+6$ son 2 y 3, así que $(x+2)(x+3)$.', 'جذرا $x^{2}-5x+6$ هما 2 و3، إذن $(x+2)(x+3)$.', 'The roots of $x^{2}-5x+6$ are 2 and 3, so $(x+2)(x+3)$.'),
             right: say('$a$ erroa bada, faktorea $x-a$ da: $(x-2)(x-3)$. Egiaztatu: $x=2$ jarrita zero.', 'Si $a$ es raíz, el factor es $x-a$: $(x-2)(x-3)$. Comprueba: con $x=2$ da cero.', 'إذا كان $a$ جذرًا فالعامل $x-a$: $(x-2)(x-3)$. تحقق: مع $x=2$ يعطي صفرًا.', 'If $a$ is a root, the factor is $x-a$: $(x-2)(x-3)$. Check: with $x=2$ it gives zero.')
         },
-        takeaway: say('Ordena: faktore komuna, identitateak, erroak. $A$ erroa → $(X-A)$.', 'Orden: factor común, identidades, raíces. Raíz $A$ → $(X-A)$.', 'الترتيب: العامل المشترك ثم المتطابقات ثم الجذور. الجذر $A$ ← $(X-A)$.', 'Order: common factor, special products, roots. Root $A$ → $(X-A)$.'),
+        takeaway: say('Ordena: faktore komuna, identitateak, erroak. $a$ erroa → $(x-a)$.', 'Orden: factor común, identidades, raíces. Raíz $a$ → $(x-a)$.', 'الترتيب: العامل المشترك ثم المتطابقات ثم الجذور. الجذر $a$ ← $(x-a)$.', 'Order: common factor, special products, roots. Root $a$ → $(x-a)$.'),
         figure: (language) => <FactorizeFigure language={language} />
     },
     {

@@ -27,7 +27,7 @@ Fuentes: Santillana 3.º U2 (págs. 39–72; el PDF es el solucionario, escanead
 
 ## Revisión final (2026-10-29)
 - Las cajas «takeaway» imprimen el KaTeX en mayúsculas: ninguna fórmula suya lleva letras minúsculas; lo vigila un test (`takeaway` en `berreturak-dbh3-content.test.ts`).
-  - 2026-11-02: ya no hace falta. Era un fallo de estilo (la regla de la etiqueta «Idea clave» llegaba a toda la frase) y está arreglado; ver [Teoría 2. DBH](teoria-dbh2.md). El test sigue pasando y se ha dejado.
+  - 2026-11-02: ya no hace falta. Era un fallo de estilo (la regla de la etiqueta «Idea clave» llegaba a toda la frase) y está arreglado; ver [Teoría 2. DBH](teoria-dbh2.md). Ese mismo día se quitó el test y las fórmulas de las ideas clave de 3. DBH pasaron a la notación de cada lección (`tests/takeaway-notation.test.ts`).
 - La espiral se comprueba con `getBBox` para cada n de 2 a 17 (no solo para el último); el SVG mide 272 de alto.
 - Barrido a 375 px en eu/es/ar: lecciones, laboratorio (las 4 propias), diagnóstico, práctica, retos, banco, los 4 juegos propios y el circuito 4 de la carrera; sin desbordes ni errores de KaTeX.
 - Detective: el error relativo usa aproximaciones a menos del 10 % del valor exacto y fracciones exactas; `add-radicands` y `root-sum` (la misma identidad falsa leída al revés) nunca se ofrecen juntos como respuesta y distractor.

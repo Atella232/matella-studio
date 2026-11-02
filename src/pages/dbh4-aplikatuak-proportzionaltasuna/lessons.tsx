@@ -63,7 +63,7 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('Zatitu: 67,5 kcal.', 'Divide: 67,5 kcal.', 'اقسم: 67.5 سعرة.', 'Divide: 67.5 kcal.'), math: same('$x=6750\\mathbin{:}100=67{,}5$') }
         ],
         example: same('$\\frac{3{,}60\\cdot 1}{0{,}75}=4{,}8$'),
-        takeaway: say('Zuzena: $X=\\frac{B\\cdot C}{A}$; edo lehenik unitate baten balioa.', 'Directa: $X=\\frac{B\\cdot C}{A}$; o primero el valor de 1.', 'الطردي: $X=\\frac{B\\cdot C}{A}$؛ أو قيمة الواحد أولًا.', 'Direct: $X=\\frac{B\\cdot C}{A}$; or first find the value of 1.'),
+        takeaway: say('Zuzena: $x=\\frac{b\\cdot c}{a}$; edo lehenik unitate baten balioa.', 'Directa: $x=\\frac{b\\cdot c}{a}$; o primero el valor de 1.', 'الطردي: $x=\\frac{b\\cdot c}{a}$؛ أو قيمة الواحد أولًا.', 'Direct: $x=\\frac{b\\cdot c}{a}$; or first find the value of 1.'),
         figure: (language) => <RuleOfThreeFigure language={language} />
     },
     {
@@ -79,7 +79,7 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('Zatitu: 12 egun.', 'Divide: 12 días.', 'اقسم: 12 يومًا.', 'Divide: 12 days.'), math: same('$54\\mathbin{:}4{,}50=12$') }
         ],
         example: same('$\\frac{35\\cdot 60}{20}=105$'),
-        takeaway: say('Alderantzizkoa: $X=\\frac{A\\cdot B}{C}$, biderkadura ez da aldatzen.', 'Inversa: $X=\\frac{A\\cdot B}{C}$, el producto no cambia.', 'العكسي: $X=\\frac{A\\cdot B}{C}$، وحاصل الضرب لا يتغير.', 'Inverse: $X=\\frac{A\\cdot B}{C}$, the product stays the same.'),
+        takeaway: say('Alderantzizkoa: $x=\\frac{a\\cdot b}{c}$, biderkadura ez da aldatzen.', 'Inversa: $x=\\frac{a\\cdot b}{c}$, el producto no cambia.', 'العكسي: $x=\\frac{a\\cdot b}{c}$، وحاصل الضرب لا يتغير.', 'Inverse: $x=\\frac{a\\cdot b}{c}$, the product stays the same.'),
         figure: (language) => <InverseRuleFigure language={language} />
     },
 
@@ -209,7 +209,7 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('Amaierako kapitala.', 'Capital final.', 'رأس المال النهائي.', 'Final amount.'), math: same('$10\\,000\\cdot 1{,}157625=11\\,576{,}25$') }
         ],
         example: same('$1000\\cdot 1{,}1^{3}=1331$'),
-        takeaway: say('Urtero bider indizea: $C\\cdot(1+R/100)^{T}$.', 'Cada año por el índice: $C\\cdot(1+R/100)^{T}$.', 'كل سنة في المؤشر: $C\\cdot(1+R/100)^{T}$.', 'Multiply by the multiplier each year: $C\\cdot(1+R/100)^{T}$.'),
+        takeaway: say('Urtero bider indizea: $C\\cdot\\left(1+\\frac{r}{100}\\right)^{t}$.', 'Cada año por el índice: $C\\cdot\\left(1+\\frac{r}{100}\\right)^{t}$.', 'كل سنة في المؤشر: $C\\cdot\\left(1+\\frac{r}{100}\\right)^{t}$.', 'Multiply by the multiplier each year: $C\\cdot\\left(1+\\frac{r}{100}\\right)^{t}$.'),
         figure: (language) => <CompoundInterestFigure language={language} />
     },
     {
@@ -225,7 +225,7 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('Amaierako kapitala.', 'Capital final.', 'رأس المال النهائي.', 'Final amount.'), math: same('$10\\,000\\cdot 1{,}03^{4}\\approx 11\\,255{,}09$') }
         ],
         example: same('$24\\,000\\cdot 1{,}004^{60}\\approx 30\\,495{,}38$'),
-        takeaway: say('Tasa zati $K$; urteak bider $K$.', 'El tipo entre $K$; los años por $K$.', 'السعر على $K$؛ والسنوات في $K$.', 'Divide the rate by $K$; multiply the years by $K$.'),
+        takeaway: say('Tasa zati $k$; urteak bider $k$.', 'El tipo entre $k$; los años por $k$.', 'السعر على $k$؛ والسنوات في $k$.', 'Divide the rate by $k$; multiply the years by $k$.'),
         figure: (language) => <PeriodsFigure language={language} />
     },
 
