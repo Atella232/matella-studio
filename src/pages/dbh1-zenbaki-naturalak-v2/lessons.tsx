@@ -51,7 +51,7 @@ export const naturalsTopics: UnitTopic[] = [
             },
             {
                 title: { eu: 'Zifraren balioa', es: 'El valor de una cifra', en: 'The value of a digit', ar: 'قيمة الرقم' },
-                text: { eu: '7 zifrak 700 balio du 15\u00a0728 zenbakian (ehunekoak), baina 7 bakarrik 1967 zenbakian (unitateak).', es: 'La cifra 7 vale 700 en 15\u00a0728 (centenas), pero solo 7 en 1967 (unidades).', en: 'The digit 7 is worth 700 in 15,728 (hundreds), but only 7 in 1,967 (units).', ar: `الرقم 7 قيمته 700 في ${ltr('15.728')} (مئات)، لكن قيمته 7 فقط في ${ltr('1.967')} (آحاد).` },
+                text: { eu: '7 zifrak 700 balio du 15\u00a0728 zenbakian (ehunekoak), baina 7 bakarrik 1967 zenbakian (unitateak).', es: 'La cifra 7 vale 700 en 15\u00a0728 (centenas), pero solo 7 en 1967 (unidades).', en: 'The digit 7 is worth 700 in 15,728 (hundreds), but only 7 in 1,967 (units).', ar: `الرقم 7 قيمته 700 في ${ltr('15\u00a0728')} (مئات)، لكن قيمته 7 فقط في ${ltr('1967')} (آحاد).` },
                 math: '$15.\\underline{7}28 \\to 700 \\qquad 1.96\\underline{7} \\to 7$'
             },
             {
@@ -109,7 +109,7 @@ export const naturalsTopics: UnitTopic[] = [
             },
             {
                 title: { eu: 'Nola irakurri', es: 'Cómo se lee', en: 'How to read it', ar: 'كيف نقرأ' },
-                text: { eu: '28\u00a0350\u00a0000: hogeita zortzi milioi hirurehun eta berrogeita hamar mila.', es: '28\u00a0350\u00a0000: veintiocho millones trescientos cincuenta mil.', en: '28,350,000: twenty-eight million three hundred and fifty thousand.', ar: `${ltr('28.350.000')}: ثمانية وعشرون مليونًا وثلاثمائة وخمسون ألفًا.` }
+                text: { eu: '28\u00a0350\u00a0000: hogeita zortzi milioi hirurehun eta berrogeita hamar mila.', es: '28\u00a0350\u00a0000: veintiocho millones trescientos cincuenta mil.', en: '28,350,000: twenty-eight million three hundred and fifty thousand.', ar: `${ltr('28\u00a0350\u00a0000')}: ثمانية وعشرون مليونًا وثلاثمائة وخمسون ألفًا.` }
             }
         ],
         example: {
@@ -146,7 +146,7 @@ export const naturalsTopics: UnitTopic[] = [
         steps: [
             {
                 title: { eu: 'Zifra kopurua', es: 'Número de cifras', en: 'Number of digits', ar: 'عدد الأرقام' },
-                text: { eu: '75\u00a0460 zenbakiak bost zifra ditu eta 8990 zenbakiak lau: lehena handiagoa da.', es: '75\u00a0460 tiene cinco cifras y 8990 tiene cuatro: el primero es mayor.', en: '75,460 has five digits and 8,990 has four: the first one is bigger.', ar: `للعدد ${ltr('75.460')} خمسة أرقام وللعدد ${ltr('8.990')} أربعة: الأول أكبر.` },
+                text: { eu: '75\u00a0460 zenbakiak bost zifra ditu eta 8990 zenbakiak lau: lehena handiagoa da.', es: '75\u00a0460 tiene cinco cifras y 8990 tiene cuatro: el primero es mayor.', en: '75,460 has five digits and 8,990 has four: the first one is bigger.', ar: `للعدد ${ltr('75\u00a0460')} خمسة أرقام وللعدد ${ltr('8990')} أربعة: الأول أكبر.` },
                 math: '$75\\,460>8990$'
             },
             {
@@ -183,7 +183,7 @@ export const naturalsTopics: UnitTopic[] = [
             eu: 'Erromatarren sistema batukorra da: ikur bakoitzak beti balio bera du, eta balioak batu (edo kendu) egiten dira. Zazpi ikur erabiltzen dira: I = 1, V = 5, X = 10, L = 50, C = 100, D = 500 eta M = 1000. Gure sisteman, aldiz, zifra baten balioa posizioaren araberakoa da.',
             es: 'El sistema romano es aditivo: cada símbolo vale siempre lo mismo y los valores se suman (o se restan). Usa siete símbolos: I = 1, V = 5, X = 10, L = 50, C = 100, D = 500 y M = 1000. En nuestro sistema, en cambio, el valor de una cifra depende de su posición.',
             en: 'The Roman system is additive: each symbol always has the same value, and the values are added (or subtracted). It uses seven symbols: I = 1, V = 5, X = 10, L = 50, C = 100, D = 500 and M = 1,000. In our system, on the other hand, the value of a digit depends on its position.',
-            ar: `النظام الروماني نظام جمعي: لكل رمز القيمة نفسها دائمًا، ونجمع القيم (أو نطرحها). يستعمل سبعة رموز: ${ltr('I = 1, V = 5, X = 10, L = 50, C = 100, D = 500, M = 1.000')}. أما في نظامنا فقيمة الرقم تتعلق بموقعه.`
+            ar: `النظام الروماني نظام جمعي: لكل رمز القيمة نفسها دائمًا، ونجمع القيم (أو نطرحها). يستعمل سبعة رموز: ${ltr('I = 1, V = 5, X = 10, L = 50, C = 100, D = 500, M = 1000')}. أما في نظامنا فقيمة الرقم تتعلق بموقعه.`
         },
         stepsKind: 'facts',
         steps: [
@@ -204,7 +204,7 @@ export const naturalsTopics: UnitTopic[] = [
             },
             {
                 title: { eu: 'Marra gainean', es: 'Una raya encima', en: 'A bar above', ar: 'خط فوق الرمز' },
-                text: { eu: 'Ikur baten gaineko marrak haren balioa 1000z biderkatzen du.', es: 'Una raya encima de un símbolo multiplica su valor por 1000.', en: 'A bar above a symbol multiplies its value by 1,000.', ar: `الخط فوق الرمز يضرب قيمته في ${ltr('1.000')}.` },
+                text: { eu: 'Ikur baten gaineko marrak haren balioa 1000z biderkatzen du.', es: 'Una raya encima de un símbolo multiplica su valor por 1000.', en: 'A bar above a symbol multiplies its value by 1,000.', ar: `الخط فوق الرمز يضرب قيمته في ${ltr('1000')}.` },
                 math: '$\\overline{\\mathrm{V}}=5000$'
             }
         ],
@@ -233,7 +233,7 @@ export const naturalsTopics: UnitTopic[] = [
             en: 'To round a number to a certain place value, look at the digit to the right of the one you want to round. If it is 5 or more, add 1 to the digit you are rounding; if it is 4 or less, the digit stays the same. All the digits to the right become zeros. This gives the closest “round” number to the original.',
             ar: 'لتقريب عدد إلى مرتبة معيّنة ننظر إلى الرقم الذي على يمين الرقم المراد تقريبه. إذا كان 5 أو أكبر نضيف 1 إلى الرقم المقرَّب، وإذا كان 4 أو أصغر نتركه كما هو. وتصبح كل الأرقام التي على اليمين أصفارًا. هكذا نحصل على أقرب عدد «مدوَّر» إلى العدد الأصلي.'
         },
-        problem: { eu: 'Biribildu 14\u00a0823 milakoetara.', es: 'Redondea 14\u00a0823 a los millares.', en: 'Round 14,823 to the nearest thousand.', ar: `قرّب ${ltr('14.823')} إلى الآلاف.` },
+        problem: { eu: 'Biribildu 14\u00a0823 milakoetara.', es: 'Redondea 14\u00a0823 a los millares.', en: 'Round 14,823 to the nearest thousand.', ar: `قرّب ${ltr('14\u00a0823')} إلى الآلاف.` },
         stepsKind: 'steps',
         steps: [
             { text: { eu: 'Markatu biribildu beharreko zifra. Milakoetara: 4.', es: 'Marca la cifra que vas a redondear. A los millares: el 4.', en: 'Mark the digit you are going to round. To the nearest thousand: the 4.', ar: 'حدّد الرقم المراد تقريبه. إلى الآلاف: 4.' }, math: '$1\\underline{4}.823$' },
@@ -304,12 +304,12 @@ export const naturalsTopics: UnitTopic[] = [
         steps: [
             {
                 title: { eu: 'Batugaiak eta batura', es: 'Sumandos y suma', en: 'Addends and sum', ar: 'الحدود والمجموع' },
-                text: { eu: 'Arrain-haztegi batean 24\u00a0350 eta 18\u00a0812 amuarrain sartu dituzte.', es: 'En una piscifactoría se introducen 24\u00a0350 y 18\u00a0812 truchas.', en: 'At a fish farm, 24,350 and 18,812 trout are put in.', ar: `وُضع في مزرعة أسماك ${ltr('24.350')} و${ltr('18.812')} سمكة.` },
+                text: { eu: 'Arrain-haztegi batean 24\u00a0350 eta 18\u00a0812 amuarrain sartu dituzte.', es: 'En una piscifactoría se introducen 24\u00a0350 y 18\u00a0812 truchas.', en: 'At a fish farm, 24,350 and 18,812 trout are put in.', ar: `وُضع في مزرعة أسماك ${ltr('24\u00a0350')} و${ltr('18\u00a0812')} سمكة.` },
                 math: '$24\\,350+18\\,812=43\\,162$'
             },
             {
                 title: { eu: 'Kenkizuna, kentzailea eta kendura', es: 'Minuendo, sustraendo y diferencia', en: 'Minuend, subtrahend and difference', ar: 'المطروح منه والمطروح والفرق' },
-                text: { eu: '15\u00a0000 litroko igerileku batetik 1568 litro irten dira.', es: 'De una piscina de 15\u00a0000 litros se han salido 1568 litros.', en: 'From a 15,000-litre pool, 1,568 litres have drained out.', ar: `تسرّب ${ltr('1.568')} لترًا من مسبح سعته ${ltr('15.000')} لتر.` },
+                text: { eu: '15\u00a0000 litroko igerileku batetik 1568 litro irten dira.', es: 'De una piscina de 15\u00a0000 litros se han salido 1568 litros.', en: 'From a 15,000-litre pool, 1,568 litres have drained out.', ar: `تسرّب ${ltr('1568')} لترًا من مسبح سعته ${ltr('15\u00a0000')} لتر.` },
                 math: '$15\\,000-1568=13\\,432$'
             },
             {
@@ -365,7 +365,7 @@ export const naturalsTopics: UnitTopic[] = [
                 math: '$6\\cdot (8+2)=6\\cdot 8+6\\cdot 2=60$'
             },
             {
-                title: { eu: '10ez, 100ez, 1000z', es: 'Por 10, 100, 1000', en: 'By 10, 100, 1,000', ar: `في 10، 100، ${ltr('1.000')}` },
+                title: { eu: '10ez, 100ez, 1000z', es: 'Por 10, 100, 1000', en: 'By 10, 100, 1,000', ar: `في 10، 100، ${ltr('1000')}` },
                 text: { eu: 'Zenbakiaren eskuinean zero bat, bi edo hiru idazten dira.', es: 'Se añaden uno, dos o tres ceros a la derecha del número.', en: 'You add one, two or three zeros to the right of the number.', ar: 'نضيف صفرًا أو صفرين أو ثلاثة أصفار على يمين العدد.' },
                 math: '$15\\cdot 1000=15\\,000$'
             },
@@ -541,7 +541,7 @@ export const naturalsTopics: UnitTopic[] = [
             },
             {
                 title: { eu: 'Erantzuna', es: 'Respuesta', en: 'Answer', ar: 'الجواب' },
-                text: { eu: 'Eraikinak 2268 leiho ditu guztira.', es: 'El edificio tiene 2268 ventanas en total.', en: 'The building has 2,268 windows in total.', ar: `في المبنى ${ltr('2.268')} نافذة في المجموع.` }
+                text: { eu: 'Eraikinak 2268 leiho ditu guztira.', es: 'El edificio tiene 2268 ventanas en total.', en: 'The building has 2,268 windows in total.', ar: `في المبنى ${ltr('2268')} نافذة في المجموع.` }
             }
         ],
         example: '$(15+55)\\cdot 4+12\\cdot 3=280+36=316$',
@@ -615,7 +615,7 @@ export const naturalsTopics: UnitTopic[] = [
             eu: '10en berretura bat 1 eta berretzaileak adina zero da: 10⁶ = 1\u00a0000\u00a0000. Horregatik oso erabilgarriak dira zenbaki handiak labur idazteko, adibidez distantziak edo herrialde bateko biztanleak: 4\u00a0000\u00a0000 = 4 · 10⁶. Zenbaki baten deskonposizioa ere idatz daiteke 10en berreturekin.',
             es: 'Una potencia de base 10 es un 1 seguido de tantos ceros como indica el exponente: 10⁶ = 1\u00a0000\u00a0000. Por eso son muy útiles para escribir números grandes de forma abreviada, como distancias o habitantes de un país: 4\u00a0000\u00a0000 = 4 · 10⁶. También se puede escribir la descomposición de un número con potencias de 10.',
             en: 'A power of 10 is a 1 followed by as many zeros as the exponent shows: 10⁶ = 1,000,000. That is why they are very useful for writing large numbers in a shorter form, such as distances or the population of a country: 4,000,000 = 4 · 10⁶. You can also write a number in expanded form using powers of 10.',
-            ar: `قوة العدد 10 هي 1 متبوعًا بعدد من الأصفار يساوي الأسّ: ${ltr('10⁶ = 1.000.000')}. لذلك هي مفيدة جدًا لكتابة الأعداد الكبيرة باختصار، مثل المسافات أو عدد سكان بلد: ${ltr('4.000.000 = 4 · 10⁶')}. ويمكن أيضًا كتابة تفكيك عدد بقوى العدد 10.`
+            ar: `قوة العدد 10 هي 1 متبوعًا بعدد من الأصفار يساوي الأسّ: ${ltr('10⁶ = 1\u00a0000\u00a0000')}. لذلك هي مفيدة جدًا لكتابة الأعداد الكبيرة باختصار، مثل المسافات أو عدد سكان بلد: ${ltr('4\u00a0000\u00a0000 = 4 · 10⁶')}. ويمكن أيضًا كتابة تفكيك عدد بقوى العدد 10.`
         },
         stepsKind: 'facts',
         steps: [

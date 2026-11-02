@@ -31,7 +31,7 @@ const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language,
 const num = (language: UnitLanguage, text: string) => {
     if (language === 'ar') return text.replace(/,/g, '.')
     if (language !== 'en') return text
-    return text.replace(/(\d),(\d)/g, `$1${decimalSeparatorFor(language)}$2`).replace(/(\d) (?=\d{3}(?!\d))/g, `$1${thousandsSeparatorFor(language)}`)
+    return text.replace(/(\d),(\d)/g, `$1${decimalSeparatorFor(language)}$2`).replace(/(\d)[ \u00a0](?=\d{3}(?!\d))/g, `$1${thousandsSeparatorFor(language)}`)
 }
 
 /* ---------- 11. Simple against compound interest ---------- */

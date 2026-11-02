@@ -34,7 +34,7 @@ const pick = (language: UnitLanguage, text: LocalizedText) => pickText(language,
 /** A number written with the comma, shown with the point in Arabic and English */
 const num = (language: UnitLanguage, text: string) => text.replace(/,/g, language === 'ar' ? '.' : decimalSeparatorFor(language))
 /** Thousands written with a space (50 000), and a comma in English */
-const grouped = (language: UnitLanguage, text: string) => text.replace(/(?<=\d) (?=\d{3}(?!\d))/g, language === 'en' ? thousandsSeparatorFor(language) : ' ')
+const grouped = (language: UnitLanguage, text: string) => text.replace(/(?<=\d)[ \u00a0](?=\d{3}(?!\d))/g, language === 'en' ? thousandsSeparatorFor(language) : ' ')
 const points = (list: Point[]) => list.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ')
 const lerp = ([ax, ay]: Point, [bx, by]: Point, t: number): Point => [ax + (bx - ax) * t, ay + (by - ay) * t]
 const mid = (a: Point, b: Point) => lerp(a, b, 0.5)

@@ -29,7 +29,7 @@ const num = (language: UnitLanguage, value: number | string) => {
 }
 
 /** Thousands written with a space in the source: 100 000 € is 100.000 € in Spanish and Basque, 100,000 € in English; Arabic keeps the space */
-const grouped = (language: UnitLanguage, text: string) => text.replace(/(\d) (?=\d)/g, `$1${language === 'ar' ? ' ' : thousandsSeparatorFor(language)}`)
+const grouped = (language: UnitLanguage, text: string) => text.replace(/(\d)[ \u00a0](?=\d)/g, `$1${language === 'ar' ? ' ' : thousandsSeparatorFor(language)}`)
 
 /** A small axis with ticks and numbers */
 function Ruler({ x, y, from, to, ticks, language }: { x: (value: number) => number; y: number; from: number; to: number; ticks: number[]; language: UnitLanguage }) {
