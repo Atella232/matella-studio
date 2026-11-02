@@ -1,0 +1,15 @@
+/* ---------- Gorputz geometrikoak (2. DBH) games: the layout comes from Proportzionaltasuna 3. DBH (prop3-*) ---------- */
+
+.fraction-v2-games-card[data-game="euler"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="tank"] { --game-tint: var(--success-tint, #d9efe2); }
+.fraction-v2-games-card[data-game="detective"] { --game-tint: var(--paper-deep, #ece6da); }
+
+.solids2-scene { display: block; width: min(100%, 300px); height: auto; margin: 0 auto; border: 2px solid var(--ink); border-radius: 14px; background: var(--card); }
+.solids2-steppers { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.solids2-given { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; font-size: 17px; }
+.solids2-measures { display: block; margin-top: 6px; font-weight: 400; }
+.solids2-controls { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.solids2-controls input[type="range"] { width: min(100%, 320px); accent-color: var(--blue, #2f5fb3); }
+.solids2-spill circle { animation: solids2-drip 1.2s ease-in infinite; }
+@keyframes solids2-drip { from { transform: translateY(-6px); opacity: 0.3; } to { transform: translateY(6px); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .solids2-spill circle { animation: none; } }

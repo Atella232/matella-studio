@@ -1,0 +1,12 @@
+# Gorputz geometrikoak 2. DBH
+
+Folder `src/pages/dbh2-gorputzak-v2`, route `matematika/dbh2/cuerpos-geometricos/*`. Stages: polyhedra, areas, round, units, volume. Lab 7 tools (251xx…); games race 341xx and memory 342xx. 3D drawing kit in `geometry3d.ts` + `solids.tsx` (`Solid`, `Cylinder`, `fitCamera`).
+
+## Own games (2026-11-02)
+
+Branch `feat/gorputzak-dbh2-games` (stacked on the Aljebra, Ekuazioak and Pitagoras game branches). Three games of this topic:
+- `euler` (`games/euler.ts`), 34301–34303: count and Euler. A polyhedron drawn in 3D (hidden edges dashed) and three steppers for faces, vertices and edges; level 1 prisms and pyramids, level 2 more sides, frustums and regular solids, level 3 no drawing: two numbers and Euler's formula. The formula is written in words, as in the lessons («caras + vértices = aristas + 2»). The test checks `countElements` of the drawing equals the formulas.
+- `tank` (`games/tank.ts`), 34401–34403: fill the tank. A box or cylinder with its measures; the learner sets the litres (slider + stepper) and opens the tap; only then the water rises (fills, stays short or spills). Level 1 boxes in dm, level 2 boxes in cm and in m, level 3 cylinders rounded to the litre.
+- `detective` (`games/detective.ts`), 34501–34503: 12 typical errors (one base, the height for the slant height, the diameter as radius, base area × height for a lateral area; the third of pyramids and cones, r² in the sphere, the circumference as base; 1 cm³ = 1 L, 1 m³ = 100 dm³, the height forgotten, 1 L = 100 mL). Units in formulas as `\,\text{cm}^{3}`.
+
+Trick: water colour is a fixed `#7fb0e8`; the theme's blue tint is too pale to read as water.

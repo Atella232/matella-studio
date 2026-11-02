@@ -36,7 +36,7 @@ const gorputzakUnit: UnitDefinition = {
         render: (props) => <SolidsLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, zenbatu eta Euler, bete depositua, gorputzen detektibea eta memoria.', es: 'Cinco juegos: carrera, cuenta y Euler, llena el depósito, detective de cuerpos y memoria.', en: 'Five games: race, count and Euler, fill the tank, solids detective and memory.', ar: 'خمس ألعاب: السباق وعُدّ وأويلر واملأ الخزان ومخبر المجسمات والذاكرة.' },
         progressIds: solidsGameProgressIds,
         recordsKey: SOLIDS_GAME_RECORDS_KEY,
         render: (props) => <SolidsGames {...props} />

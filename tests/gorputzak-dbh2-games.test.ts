@@ -8,6 +8,10 @@ import { createSolidsMemoryBoard, SOLIDS_MEMORY_PAIRS, solidsMemoryLevels } from
 import { solidsGameModeForPath, solidsGameProgressIds, solidsGames } from '../src/pages/dbh2-gorputzak-v2/games/info.ts'
 import { checkSolidsPitAnswer, generateSolidsRaceQuestion, SOLIDS_RACE_CIRCUITS, solidsParTime, solidsRaceErrorTips, type SolidsRaceQuestion } from '../src/pages/dbh2-gorputzak-v2/games/race.ts'
 import { solidsLabChallengeIds } from '../src/pages/dbh2-gorputzak-v2/lab/labTools.ts'
+import { createSolidsDetectiveCases, solidsDetectiveLevels, solidsDetectiveNames, solidsDetectiveTips } from '../src/pages/dbh2-gorputzak-v2/games/detective.ts'
+import { createEulerRounds, drawnCounts, eulerRight, EULER_ROUNDS, solidName } from '../src/pages/dbh2-gorputzak-v2/games/euler.ts'
+import { createTankRounds, tankCapacity, tankRight, TANK_ROUNDS } from '../src/pages/dbh2-gorputzak-v2/games/tank.ts'
+import { checkTexts } from './helpers/ownGamesCheck.ts'
 
 const renders = (latex: string) => katex.renderToString(latex, { throwOnError: true, strict: 'error' })
 
@@ -39,7 +43,7 @@ function checkQuestion(question: SolidsRaceQuestion): number {
 }
 
 test('gorputzak 2. DBH games: levels, ids and routes', () => {
-    assert.equal(solidsGames.length, 2)
+    assert.equal(solidsGames.length, 5)
     assert.equal(solidsGames[0].levels.length, SOLIDS_RACE_CIRCUITS)
     assert.equal(solidsGames.find((game) => game.id === 'memory')!.levels.length, solidsMemoryLevels.length)
     assert.equal(new Set(solidsGameProgressIds).size, solidsGameProgressIds.length)
@@ -102,5 +106,76 @@ test('gorputzak 2. DBH memory: every card has exactly one partner and the pair i
                 for (const other of cards.filter((item) => item.setId !== card.setId)) assert.ok(Math.abs(cardValue(other.latex) - a) > 1e-6, `${card.latex} ~ ${other.latex}`)
             }
         }
+    }
+})
+
+/* ---------- The games of this topic ---------- */
+
+test('gorputzak 2. DBH count and Euler: the drawing has the counts of the formulas, which keep Euler', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 120; seed += 1) {
+            const rounds = createEulerRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, EULER_ROUNDS)
+            for (const round of rounds) {
+                const { faces, vertices, edges } = round.counts
+                assert.equal(faces + vertices, edges + 2)
+                checkTexts([solidName(round)])
+                if (level < 2) {
+                    assert.deepEqual(drawnCounts(round), round.counts, `${round.kind} ${round.sides}`)
+                    assert.equal(round.unknown, null)
+                } else {
+                    assert.equal(round.vertices.length, 0)
+                    assert.ok(round.unknown)
+                }
+                assert.ok(eulerRight(round, round.counts))
+                assert.ok(!eulerRight(round, { ...round.counts, edges: round.counts.edges + 1 }) || (round.unknown !== null && round.unknown !== 'edges'))
+            }
+        }
+    }
+})
+
+test('gorputzak 2. DBH fill the tank: whole litres for boxes, the capacity in range', () => {
+    assert.equal(tankCapacity('box', 'cm', [50, 30, 40]), 60)
+    assert.ok(Math.abs(tankCapacity('box', 'm', [1.2, 0.5, 0.6]) - 360) < 1e-9)
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const rounds = createTankRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, TANK_ROUNDS)
+            for (const round of rounds) {
+                assert.ok(Math.abs(tankCapacity(round.shape, round.unit, round.measures) - round.exact) < 1e-9)
+                assert.equal(round.litres, Math.round(round.exact))
+                if (round.shape === 'box') assert.ok(Math.abs(round.exact - round.litres) < 1e-6)
+                assert.ok(round.litres >= 4 && round.litres <= round.max)
+                assert.ok(tankRight(round, round.litres) && !tankRight(round, round.litres + 1) && !tankRight(round, round.litres - 1))
+                if (level === 0) assert.equal(round.unit, 'dm')
+                if (level === 2) assert.equal(round.shape, 'cylinder')
+            }
+            if (level === 1) assert.ok(rounds.some((round) => round.unit === 'cm') && rounds.some((round) => round.unit === 'm'))
+        }
+    }
+})
+
+/** The number at the end of a line: after the last «=» or «≈», with its unit left out */
+const endValue = (latex: string) => Number(latex.split('\\to\\ ').pop()!.split(/=|\\approx /).pop()!.replace(/\\[ ,]\\text\{[^}]*\}(\^\{3\})?/g, '').replace('{,}', '.').trim())
+
+test('gorputzak 2. DBH detective: one wrong line, the fix ends on the right value', () => {
+    checkTexts([...Object.values(solidsDetectiveNames), ...Object.values(solidsDetectiveTips)])
+    for (let level = 0; level < 3; level += 1) {
+        const seen = new Set<string>()
+        for (let seed = 1; seed <= 100; seed += 1) {
+            for (const item of createSolidsDetectiveCases(createRandom(seed * 7919 + level), level)) {
+                seen.add(item.error)
+                assert.ok(solidsDetectiveLevels[level].includes(item.error))
+                assert.ok(item.options.includes(item.error) && new Set(item.options).size === 3)
+                assert.equal(item.lines.length, 3)
+                for (const line of item.lines) katex.renderToString(line.latex, { throwOnError: true, strict: 'error' })
+                katex.renderToString(item.fix, { throwOnError: true, strict: 'error' })
+                checkTexts([item.problem])
+                assert.ok(!/\{,\}/.test(item.problem.es), item.problem.es)
+                assert.ok(Math.abs(endValue(item.fix) - item.right) < 1e-9, `${item.error}: ${item.fix} ≠ ${item.right}`)
+                assert.ok(Math.abs(endValue(item.lines[2].latex) - item.reached) < 1e-9, `${item.error}: ${item.lines[2].latex} ≠ ${item.reached}`)
+            }
+        }
+        assert.equal(seen.size, 4)
     }
 })

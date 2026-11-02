@@ -7,11 +7,15 @@ import { createSolidsMemoryBoard, SOLIDS_MEMORY_PAIRS } from './boards'
 import { SolidsGameArt } from './GameArt'
 import { SOLIDS_GAME_RECORDS_KEY, solidsGameModeForPath, solidsGames, solidsGameSlugs, type SolidsGameId } from './info'
 import { SolidsRaceGame } from './RaceGame'
+import { EulerGame, SolidsDetectiveGame, TankGame } from './SolidsOwnGames'
 
 const memoryGame = solidsGames.find((game) => game.id === 'memory')!
 
 const components: Record<SolidsGameId, (props: GameProps) => JSX.Element> = {
     race: SolidsRaceGame,
+    euler: EulerGame,
+    tank: TankGame,
+    detective: SolidsDetectiveGame,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <SolidsGameArt game="memory" />, pairs: SOLIDS_MEMORY_PAIRS, createBoard: createSolidsMemoryBoard }} />
 }
 
