@@ -43,7 +43,7 @@ function digitRule(digit: number, place: number): HuntRule {
     const worth = digit * 10 ** place
     return {
         id: `digit-${digit}-${place}`,
-        label: say(`${digit} zifrak ${formatNatural(worth, 'eu')} balio du`, `La cifra ${digit} vale ${formatNatural(worth, 'es')}`, `قيمة الرقم ${digit} هي ${formatNatural(worth, 'ar')}`, `La cifra ${digit} vale ${formatNatural(worth, 'en')}`),
+        label: say(`${digit} zifrak ${formatNatural(worth, 'eu')} balio du`, `La cifra ${digit} vale ${formatNatural(worth, 'es')}`, `قيمة الرقم ${digit} هي ${formatNatural(worth, 'ar')}`, `The digit ${digit} is worth ${formatNatural(worth, 'en')}`),
         test: (value) => digitAt(value, place) === digit,
         why: (value) => {
             const places = [0, 1, 2, 3, 4].filter((index) => digitAt(value, index) === digit)
@@ -86,7 +86,7 @@ function roundingRule(target: number, place: number): HuntRule {
     const words = roundWords[place]
     return {
         id: `round-${target}-${place}`,
-        label: say(`${words.eu} biribilduta: ${formatNatural(target, 'eu')}`, `Redondeados ${words.es} dan ${formatNatural(target, 'es')}`, `مقرَّبة ${words.ar} تعطي ${formatNatural(target, 'ar')}`, `Redondeados ${words.en} dan ${formatNatural(target, 'en')}`),
+        label: say(`${words.eu} biribilduta: ${formatNatural(target, 'eu')}`, `Redondeados ${words.es} dan ${formatNatural(target, 'es')}`, `مقرَّبة ${words.ar} تعطي ${formatNatural(target, 'ar')}`, `Rounded ${words.en}, they give ${formatNatural(target, 'en')}`),
         test: (value) => roundTo(value, place) === target,
         why: (value) => approximately(value, roundTo(value, place)),
         // Close to the target, and often just around the halves

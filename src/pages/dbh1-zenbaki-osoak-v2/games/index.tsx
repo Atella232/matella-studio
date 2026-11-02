@@ -9,6 +9,10 @@ import { ElevatorArt } from './ElevatorArt'
 import { ElevatorGame } from './ElevatorGame'
 import { INTRO_GAME_RECORDS_KEY, introGameModeForPath, introGames, introGameSlugs, introOrderLevels, introPyramidLevels, type IntroGameId } from './info'
 import { IntroRaceGame } from './RaceGame'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { createIntegersDetectiveCases, INTEGERS_DETECTIVE_CASES, integersDetectiveNames, integersDetectiveTips } from './detective'
+import { ZeroArt, ZeroGame } from './OwnGames'
 import './IntroGames.css'
 
 const info = (id: IntroGameId) => introGames.find((game) => game.id === id)!
@@ -18,14 +22,18 @@ const components: Record<IntroGameId, (props: GameProps) => JSX.Element> = {
     race: IntroRaceGame,
     elevator: ElevatorGame,
     pyramid: (props) => <PyramidGame {...props} config={{ game: info('pyramid'), levels: introPyramidLevels, art: <IntegerGameArt game="pyramid" /> }} />,
-    order: (props) => <OrderGame {...props} config={{ game: info('order'), levels: introOrderLevels, art: <IntegerGameArt game="order" /> }} />
+    order: (props) => <OrderGame {...props} config={{ game: info('order'), levels: introOrderLevels, art: <IntegerGameArt game="order" /> }} />,
+    zero: (props) => <ZeroGame {...props} game={info('zero')} art={art.zero} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: info('detective'), art: art.detective, cases: INTEGERS_DETECTIVE_CASES, createCases: createIntegersDetectiveCases, names: integersDetectiveNames, tips: integersDetectiveTips }} />
 }
 
 const art: Record<IntroGameId, JSX.Element> = {
     race: <IntegerGameArt game="race" />,
     elevator: <ElevatorArt />,
     pyramid: <IntegerGameArt game="pyramid" />,
-    order: <IntegerGameArt game="order" />
+    order: <IntegerGameArt game="order" />,
+    zero: <ZeroArt />,
+    detective: <DetectiveArt lines={['|−7| = 7', '(−2) · (−3) = −6', '4 − (−6) = 10']} />
 }
 
 const hubGames: HubGame<IntroGameId>[] = introGames.map((game) => ({ info: game, art: art[game.id], component: components[game.id] }))

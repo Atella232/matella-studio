@@ -37,7 +37,7 @@ const zenbakiNaturalakUnit: UnitDefinition = {
         render: (props) => <NaturalsLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Lau joko zenbaki naturalekin azkar aritzeko: lasterketa, ehiza, semaforo-sprinta eta memoria.', es: 'Cuatro juegos para ganar rapidez con los números naturales: carrera, caza, sprint del semáforo y memoria.', en: 'Four games to build speed with natural numbers: race, hunt, traffic light sprint and memory.', ar: 'أربع ألعاب لاكتساب السرعة مع الأعداد الطبيعية: السباق والصيد وسباق إشارة المرور والذاكرة.' },
+        description: { eu: 'Bost joko zenbaki naturalekin: lasterketa, ehiza, semaforo-sprinta, memoria eta zenbakien detektibea.', es: 'Cinco juegos con los números naturales: carrera, caza, sprint del semáforo, memoria y detective de números.', en: 'Five games with natural numbers: race, hunt, traffic light sprint, memory and number detective.', ar: 'خمس ألعاب مع الأعداد الطبيعية: السباق والصيد وسباق إشارة المرور والذاكرة ومخبر الأعداد.' },
         progressIds: naturalsGameProgressIds,
         recordsKey: NATURALS_GAME_RECORDS_KEY,
         render: (props) => <NaturalsGames {...props} />

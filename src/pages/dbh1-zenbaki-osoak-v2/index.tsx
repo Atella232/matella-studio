@@ -37,7 +37,7 @@ const zenbakiOsoakIntroUnit: UnitDefinition = {
         render: (props) => <IntegerIntroLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Lau joko zenbaki osoekin azkar aritzeko: lasterketa, igogailua, piramidea eta ilara.', es: 'Cuatro juegos para ganar rapidez con los enteros: carrera, ascensor, pirámide y en fila.', en: 'Four games to get faster with integers: race, lift, pyramid and in a row.', ar: 'أربع ألعاب لاكتساب السرعة مع الأعداد الصحيحة: السباق والمصعد والهرم وفي صف.' },
+        description: { eu: 'Sei joko zenbaki osoekin: lasterketa, igogailua, piramidea, ilara, zero bikoteak eta zenbaki osoen detektibea.', es: 'Seis juegos con los enteros: carrera, ascensor, pirámide, en fila, parejas cero y detective de enteros.', en: 'Six games with integers: race, lift, pyramid, in a row, zero pairs and integers detective.', ar: 'ست ألعاب مع الأعداد الصحيحة: السباق والمصعد والهرم وفي صف وأزواج الصفر ومخبر الأعداد الصحيحة.' },
         progressIds: introGameProgressIds,
         recordsKey: INTRO_GAME_RECORDS_KEY,
         render: (props) => <IntegerIntroGames {...props} />

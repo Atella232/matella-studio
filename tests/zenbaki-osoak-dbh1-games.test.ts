@@ -12,7 +12,7 @@ import { createOrderRound } from '../src/pages/dbh2-zenbaki-osoak/games/order.ts
 const readSigned = (latex: string) => Number(latex.replace('+', ''))
 
 test('zenbaki osoak 1. DBH games: hub, levels, addresses and ids', () => {
-    assert.equal(introGames.length, 4)
+    assert.equal(introGames.length, 6)
     assert.equal(new Set(introGameProgressIds).size, introGameProgressIds.length)
     for (const id of introGameProgressIds) assert.ok(!introLabChallengeIds.includes(id))
     assert.equal(introGames.find((game) => game.id === 'race')!.levels.length, INTRO_RACE_CIRCUITS)

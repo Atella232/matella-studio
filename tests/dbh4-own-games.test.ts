@@ -1,8 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { createRandom } from '../src/features/unit-v2/games/random.ts'
-import type { WorkedCase } from '../src/features/unit-v2/games/workedDetective.ts'
-import type { LocalizedText } from '../src/features/unit-v2/types.ts'
 import { contains } from '../src/pages/dbh4-aplikatuak-errealak/reals.ts'
 import { createIntervalRounds, INTERVAL_MAX, INTERVAL_MIN, INTERVAL_ROUNDS } from '../src/pages/dbh4-games/intervals.ts'
 import { createRealsDetectiveCases, realsDetectiveLevels, realsDetectiveNames, realsDetectiveTips } from '../src/pages/dbh4-games/realsDetective.ts'
@@ -35,56 +33,10 @@ import { cellValue, createTableRounds, createTreeRounds, eventLeaves, eventProba
 import { createProbabilityDetectiveCases, probabilityDetectiveLevels, probabilityDetectiveNames, probabilityDetectiveTips } from '../src/pages/dbh4-games/probabilityDetective.ts'
 import { toNumber } from '../src/features/unit-v2/math/fraction.ts'
 import { CHAIN_ROUNDS, createChainRounds, finalPrice, multiplier, totalChange } from '../src/pages/dbh4-games/percentChain.ts'
-import { checkTexts, renders } from './helpers/ownGamesCheck.ts'
+import { checkDetective, checkLanguages, checkTexts, endValue, renders } from './helpers/ownGamesCheck.ts'
 import { evaluate } from './helpers/realsRaceCheck.ts'
 
 /* The own games shared by the 4. DBH applied and academic units */
-
-/** The number at the end of a line: after the last «→», then after the last «=» or «≈»; a percentage sign and units left out */
-export function endValue(latex: string): number {
-    const last = latex.split('\\ \\to\\ ').pop()!.split(/=|\\approx /).pop()!
-        .replace(/\\,\\%$/, '')
-        .replace(/\\[ ,]\\text\{[^}]*\}(\^\{\d\})?/g, '')
-        .trim()
-    const value = evaluate(last.replace(/\\pi/g, `(${Math.PI})`))
-    assert.ok(value !== null, `cannot read ${latex}`)
-    return value!
-}
-
-/** English has no Arabic letters, and Arabic (its formulas left out) no Latin word: the two languages are not swapped */
-export function checkLanguages(texts: LocalizedText[]) {
-    for (const text of texts) {
-        assert.ok(!/[\u0600-\u06ff]/.test(text.en), `Arabic in English: ${text.en}`)
-        assert.ok(!/[A-Za-z]{4,}/.test(text.ar.replace(/\$[^$]+\$/g, '')), `Latin in Arabic: ${text.ar}`)
-    }
-}
-
-/** The checks of a worked-solution detective: the level's errors, three options, the fix and the last line on their values */
-export function checkDetective<Error extends string>(create: (random: ReturnType<typeof createRandom>, level: number) => WorkedCase<Error>[], levels: Error[][], names: Record<Error, LocalizedText>, tips: Record<Error, LocalizedText>, tolerance = 1e-6, localize = (latex: string) => latex, read = endValue) {
-    checkTexts([...Object.values<LocalizedText>(names), ...Object.values<LocalizedText>(tips)])
-    checkLanguages([...Object.values<LocalizedText>(names), ...Object.values<LocalizedText>(tips)])
-    for (let level = 0; level < levels.length; level += 1) {
-        const seen = new Set<string>()
-        const wrongLines = new Set<number>()
-        for (let seed = 1; seed <= 100; seed += 1) {
-            for (const item of create(createRandom(seed * 7919 + level), level)) {
-                seen.add(item.error)
-                wrongLines.add(item.wrong)
-                assert.ok(levels[level].includes(item.error))
-                assert.ok(item.options.includes(item.error) && new Set(item.options).size === 3)
-                assert.equal(item.lines.length, 3)
-                for (const line of item.lines) renders(localize(line.latex))
-                renders(localize(item.fix))
-                checkTexts([item.problem])
-                checkLanguages([item.problem, ...item.lines.map((line) => line.label)])
-                assert.ok(!/\{,\}/.test(item.problem.es.replace(/\$[^$]+\$/g, '')), item.problem.es)
-                assert.ok(Math.abs(read(item.fix) - item.right) < tolerance * Math.max(1, Math.abs(item.right)), `${item.error}: ${item.fix} ≠ ${item.right}`)
-                assert.ok(Math.abs(read(item.lines[2].latex) - item.reached) < tolerance * Math.max(1, Math.abs(item.reached)), `${item.error}: ${item.lines[2].latex} ≠ ${item.reached}`)
-            }
-        }
-        assert.equal(seen.size, levels[level].length, `level ${level}: ${[...seen]}`)
-    }
-}
 
 test('4. DBH build the interval: sets inside the line, distinct rounds, the prompt says the same set', () => {
     for (const track of ['applied', 'academic'] as const) {

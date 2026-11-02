@@ -1,0 +1,8 @@
+/* Zero pairs (1. DBH integers): the cancelled pairs fade, the counters left stay */
+.fraction-v2-games-card[data-game="zero"] { --game-tint: var(--blue-tint, #dde7f7); }
+.dbh1-cancel { animation: dbh1-cancel 0.7s ease-out 0.5s both; }
+.dbh1-left circle { stroke-width: 3; }
+@keyframes dbh1-cancel { from { opacity: 1; } to { opacity: 0.22; } }
+@media (prefers-reduced-motion: reduce) {
+    .dbh1-cancel { animation: none; opacity: 0.22; }
+}

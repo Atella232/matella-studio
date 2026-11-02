@@ -19,7 +19,7 @@ function optionValue(latex: string): number | null {
 }
 
 test('naturals games: hub, levels, paths and progress ids', () => {
-    assert.equal(naturalsGames.length, 4)
+    assert.equal(naturalsGames.length, 5)
     assert.equal(new Set(naturalsGameProgressIds).size, naturalsGameProgressIds.length)
     for (const id of naturalsGameProgressIds) assert.ok(!naturalsLabChallengeIds.includes(id), `${id} is also a lab id`)
     assert.equal(naturalsGames.find((game) => game.id === 'race')!.levels.length, NATURALS_RACE_CIRCUITS)

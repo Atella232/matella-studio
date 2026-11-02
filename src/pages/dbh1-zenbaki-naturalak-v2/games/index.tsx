@@ -1,4 +1,4 @@
-import { GamesHub, type HubGame } from '../../../features/unit-v2/games/GamesHub'
+import { GamesHub, type GameProps, type HubGame } from '../../../features/unit-v2/games/GamesHub'
 import type { UnitLanguage } from '../../../features/unit-v2/types'
 import '../lab/NaturalsLab.css'
 import { NaturalsGameArt } from './GameArt'
@@ -8,8 +8,10 @@ import { NaturalsMemoryGame } from './MemoryGame'
 import { NaturalsRaceGame } from './RaceGame'
 import { SprintGame } from './SprintGame'
 import './NaturalsGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { createNaturalsDetectiveCases, NATURALS_DETECTIVE_CASES, naturalsDetectiveNames, naturalsDetectiveTips } from './detective'
 
-const components = { race: NaturalsRaceGame, hunt: HuntGame, sprint: SprintGame, memory: NaturalsMemoryGame }
+const components = { race: NaturalsRaceGame, hunt: HuntGame, sprint: SprintGame, memory: NaturalsMemoryGame, detective: (props: GameProps) => <WorkedDetectiveGame {...props} config={{ game: naturalsGames.find((game) => game.id === 'detective')!, art: <NaturalsGameArt game="detective" language={props.language} />, cases: NATURALS_DETECTIVE_CASES, createCases: createNaturalsDetectiveCases, names: naturalsDetectiveNames, tips: naturalsDetectiveTips }} /> }
 
 export function NaturalsGames({ language, pathname, openGame, completedIds, onComplete }: {
     language: UnitLanguage

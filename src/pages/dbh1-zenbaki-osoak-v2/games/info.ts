@@ -8,7 +8,7 @@ import type { PyramidLevel } from '../../dbh2-zenbaki-osoak/games/pyramid.ts'
    and the order game are the 2. DBH ones with first-year levels.
    ========================================================================== */
 
-export type IntroGameId = 'race' | 'elevator' | 'pyramid' | 'order'
+export type IntroGameId = 'race' | 'elevator' | 'pyramid' | 'order' | 'zero' | 'detective'
 
 export const INTRO_GAME_RECORDS_KEY = 'matella-zenbaki-osoak-dbh1-game-records'
 
@@ -58,6 +58,28 @@ export const introGames: GameInfo<IntroGameId>[] = [
             { progressId: 3402, stage: 'line', title: { eu: 'Bi norabideak', es: 'En los dos sentidos', en: 'In both directions', ar: 'في الاتجاهين' }, description: { eu: 'Zazpi zenbaki, −20tik 20ra; batzuetan handienetik hasita.', es: 'Siete números de −20 a 20; a veces empezando por el mayor.', en: 'Seven numbers from −20 to 20; sometimes starting with the greatest.', ar: 'سبعة أعداد من ⁦−20⁩ إلى 20؛ أحيانًا نبدأ بالأكبر.' } },
             { progressId: 3403, stage: 'absolute', title: { eu: 'Kalkulatu eta ordenatu', es: 'Calcula y ordena', en: 'Calculate and order', ar: 'احسب ورتّب' }, description: { eu: '|−6|, Aur(3), (−2) + (+5)…', es: '|−6|, Op(3), (−2) + (+5)…', en: '|−6|, Opp(3), (−2) + (+5)…', ar: '⁦|−6|⁩، معاكس 3، ⁦(−2) + (+5)⁩…' } }
         ]
+    },
+    {
+        id: 'zero',
+        title: { eu: 'Zero bikoteak', es: 'Parejas cero', en: 'Zero pairs', ar: 'أزواج الصفر' },
+        tagline: { eu: 'Asmatu emaitza; gero, fitxa positiboak eta negatiboak bikoteka ezabatzen dira.', es: 'Adivina el resultado; luego, las fichas positivas y negativas se anulan por parejas.', en: 'Guess the result; then the positive and negative counters cancel in pairs.', ar: 'خمّن النتيجة، ثم تُلغى القطع الموجبة والسالبة أزواجًا.' },
+        skills: { eu: 'Zenbaki osoen batuketak eta kenketak', es: 'Sumas y restas de enteros', en: 'Adding and subtracting integers', ar: 'جمع الأعداد الصحيحة وطرحها' },
+        levels: [
+            { progressId: 3501, stage: 'addsub', title: { eu: 'Zeinu desberdinak', es: 'Signos distintos', en: 'Different signs', ar: 'إشارتان مختلفتان' }, description: { eu: 'Positibo bat gehi negatibo bat.', es: 'Un positivo más un negativo.', en: 'A positive plus a negative.', ar: 'عدد موجب زائد عدد سالب.' } },
+            { progressId: 3502, stage: 'addsub', title: { eu: 'Kenketak', es: 'Restas', en: 'Subtractions', ar: 'الطرح' }, description: { eu: 'Negatibo bat kentzea: aurkakoa batu.', es: 'Restar un negativo: sumar el opuesto.', en: 'Subtracting a negative: add the opposite.', ar: 'طرح عدد سالب: أضف المعاكس.' } },
+            { progressId: 3503, stage: 'addsub', title: { eu: 'Kateak', es: 'Cadenas', en: 'Chains', ar: 'سلاسل' }, description: { eu: 'Hiru edo lau gai, parentesiekin.', es: 'Tres o cuatro términos con paréntesis.', en: 'Three or four terms with brackets.', ar: 'ثلاثة أو أربعة حدود مع أقواس.' } }
+        ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Zenbaki osoen detektibea', es: 'Detective de enteros', en: 'Integers detective', ar: 'مخبر الأعداد الصحيحة' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: اكتشفه وقل ما نوع الخطأ.' },
+        skills: { eu: 'Zenbaki osoekin akats tipikoak', es: 'Errores típicos con enteros', en: 'Common mistakes with integers', ar: 'الأخطاء الشائعة في الأعداد الصحيحة' },
+        levels: [
+            { progressId: 3601, stage: 'absolute', title: { eu: 'Ordena eta balio absolutua', es: 'Orden y valor absoluto', en: 'Order and absolute value', ar: 'الترتيب والقيمة المطلقة' }, description: { eu: 'Negatiboak, balio absolutua eta aurkakoa.', es: 'Negativos, valor absoluto y opuesto.', en: 'Negatives, absolute value and opposite.', ar: 'الأعداد السالبة والقيمة المطلقة والمعاكس.' } },
+            { progressId: 3602, stage: 'addsub', title: { eu: 'Batuketak eta kenketak', es: 'Sumas y restas', en: 'Adding and subtracting', ar: 'الجمع والطرح' }, description: { eu: 'Zeinu bera, zeinu desberdinak eta negatibo bat kentzea.', es: 'Mismo signo, distinto signo y restar un negativo.', en: 'Same sign, different signs and subtracting a negative.', ar: 'الإشارة نفسها وإشارتان مختلفتان وطرح عدد سالب.' } },
+            { progressId: 3603, stage: 'muldiv', title: { eu: 'Biderkadurak eta zatidurak', es: 'Productos y cocientes', en: 'Products and quotients', ar: 'الضرب والقسمة' }, description: { eu: 'Zeinuen araua eta hierarkia.', es: 'La regla de los signos y la jerarquía.', en: 'The sign rule and the order of operations.', ar: 'قاعدة الإشارات وترتيب العمليات.' } }
+        ]
     }
 ]
 
@@ -78,7 +100,7 @@ export const introOrderLevels: OrderLevel[] = [
 ]
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const introGameSlugs: Record<IntroGameId, string> = { race: 'lasterketa', elevator: 'igogailua', pyramid: 'piramidea', order: 'ilara' }
+export const introGameSlugs: Record<IntroGameId, string> = { race: 'lasterketa', elevator: 'igogailua', pyramid: 'piramidea', order: 'ilara', zero: 'zero-bikoteak', detective: 'detektibea' }
 
 export function introGameModeForPath(pathname: string): IntroGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
@@ -87,5 +109,7 @@ export function introGameModeForPath(pathname: string): IntroGameId | 'hub' {
     if (['ascensor', 'igogailua'].includes(game)) return 'elevator'
     if (['piramide', 'piramidea'].includes(game)) return 'pyramid'
     if (['fila', 'ilara'].includes(game)) return 'order'
+    if (['zero-bikoteak', 'parejas-cero'].includes(game)) return 'zero'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     return 'hub'
 }

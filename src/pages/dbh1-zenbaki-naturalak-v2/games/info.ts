@@ -5,7 +5,7 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
    unit progress id each level earns with its first star.
    ========================================================================== */
 
-export type NaturalsGameId = 'race' | 'hunt' | 'sprint' | 'memory'
+export type NaturalsGameId = 'race' | 'hunt' | 'sprint' | 'memory' | 'detective'
 
 export const NATURALS_GAME_RECORDS_KEY = 'matella-zenbaki-naturalak-dbh1-game-records'
 
@@ -55,13 +55,24 @@ export const naturalsGames: GameInfo<NaturalsGameId>[] = [
             { progressId: 3402, stage: 'powers', title: { eu: 'Berreturak', es: 'Potencias', en: 'Powers', ar: 'القوى' }, description: { eu: '6 bikote: 2⁵ ↔ 32, eta 5² ↔ 25 ere bai.', es: '6 parejas: 2⁵ ↔ 32, y también 5² ↔ 25.', en: '6 pairs: 2⁵ ↔ 32, and also 5² ↔ 25.', ar: '6 أزواج: 2⁵ ↔ 32، وأيضًا 5² ↔ 25.' } },
             { progressId: 3403, stage: 'numbering', title: { eu: 'Hirukoteak', es: 'Tríos', en: 'Trios', ar: 'ثلاثيات' }, description: { eu: 'Zenbakia, deskonposizioa eta 10en berreturak.', es: 'Número, descomposición y potencias de 10.', en: 'Number, expanded form and powers of 10.', ar: 'العدد والتفكيك وقوى العدد 10.' } }
         ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Zenbakien detektibea', es: 'Detective de números', en: 'Number detective', ar: 'مخبر الأعداد' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: اكتشفه وقل ما نوع الخطأ.' },
+        skills: { eu: 'Kalkuluko akats tipikoak', es: 'Errores típicos de cálculo', en: 'Common calculation mistakes', ar: 'الأخطاء الشائعة في الحساب' },
+        levels: [
+            { progressId: 3501, stage: 'operations', title: { eu: 'Zatiketa eta biribilketa', es: 'División y redondeo', en: 'Division and rounding', ar: 'القسمة والتقريب' }, description: { eu: 'Zatidurako zeroak, hondarra eta biribilketa.', es: 'Ceros del cociente, el resto y el redondeo.', en: 'Zeros in the quotient, the remainder and rounding.', ar: 'أصفار الناتج والباقي والتقريب.' } },
+            { progressId: 3502, stage: 'combined', title: { eu: 'Eragiketen hierarkia', es: 'Jerarquía de las operaciones', en: 'Order of operations', ar: 'ترتيب العمليات' }, description: { eu: 'Biderketak, parentesiak eta ezkerretik eskuinera.', es: 'Productos, paréntesis y de izquierda a derecha.', en: 'Products, brackets and left to right.', ar: 'الضرب والأقواس ومن اليسار إلى اليمين.' } },
+            { progressId: 3503, stage: 'powers', title: { eu: 'Berreturak', es: 'Potencias', en: 'Powers', ar: 'القوى' }, description: { eu: 'Oinarria, berretzailea eta hamarraren berreturak.', es: 'Base, exponente y potencias de 10.', en: 'Base, exponent and powers of 10.', ar: 'الأساس والأس وقوى العدد 10.' } }
+        ]
     }
 ]
 
 export const naturalsGameProgressIds: number[] = levelProgressIds(naturalsGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const naturalsGameSlugs: Record<NaturalsGameId, string> = { race: 'lasterketa', hunt: 'ehiza', sprint: 'semaforoa', memory: 'memoria' }
+export const naturalsGameSlugs: Record<NaturalsGameId, string> = { race: 'lasterketa', hunt: 'ehiza', sprint: 'semaforoa', memory: 'memoria', detective: 'detektibea' }
 
 export function naturalsGameModeForPath(pathname: string): NaturalsGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
@@ -69,6 +80,7 @@ export function naturalsGameModeForPath(pathname: string): NaturalsGameId | 'hub
     if (['carrera', 'lasterketa'].includes(game)) return 'race'
     if (['caza', 'ehiza'].includes(game)) return 'hunt'
     if (['semaforo', 'semaforoa', 'sprint'].includes(game)) return 'sprint'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     if (['memoria', 'memory'].includes(game)) return 'memory'
     return 'hub'
 }

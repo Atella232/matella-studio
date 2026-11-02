@@ -2,9 +2,11 @@ import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { UnitLanguage } from '../../../features/unit-v2/types'
 import { formatNatural } from '../format'
 import type { NaturalsGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
 
 /** Small illustration of each natural numbers game, in the notebook style */
 export function NaturalsGameArt({ game, language }: { game: NaturalsGameId; language: UnitLanguage }) {
+    if (game === 'detective') return <DetectiveArt lines={['3 + 4 · 5 = 23', '2⁵ = 10', '618 ÷ 3 = 206']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
