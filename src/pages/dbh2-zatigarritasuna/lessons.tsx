@@ -1,5 +1,6 @@
 import type { UnitStage, UnitTopic } from '../../features/unit-v2/types'
 import { notation } from './notation'
+import { divisibilityLessonChecks, type DivisibilityTopicId } from './lessonChecks'
 import { CoincidenceFigure, DivisorRectanglesFigure, FactorLadderFigure, MultiplesFigure, SieveFigure, VennFigure } from './figures'
 
 /* ==========================================================================
@@ -21,7 +22,7 @@ export const divisibilityStages: UnitStage[] = [
     { id: 'problems', tone: 'green', title: { eu: 'Buruketak', es: 'Problemas', en: 'Problems', ar: 'المسائل' } }
 ]
 
-export const divisibilityTopics: UnitTopic[] = [
+const baseTopics: UnitTopic[] = [
     {
         id: 'relation',
         stage: 'multiples',
@@ -429,3 +430,6 @@ export const divisibilityTopics: UnitTopic[] = [
         }
     }
 ]
+
+/** Each lesson with its typical mistake and its «Check it» question (lessonChecks.ts) */
+export const divisibilityTopics: UnitTopic[] = baseTopics.map((topic) => ({ ...topic, ...divisibilityLessonChecks[topic.id as DivisibilityTopicId] }))
