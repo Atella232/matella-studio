@@ -52,10 +52,13 @@ export function LessonSteps({ steps, kind, progressive, language, solution }: {
 }) {
     const l = (text: { eu: string; es: string; en: string; ar: string }) => pickText(language, text)
     const [shown, setShown] = useState(1)
+    // As it was when the lesson opened: understanding it on this page (the «Check it» question) must not
+    // unfold every step above the reader all at once
+    const [stepByStep] = useState(progressive)
     const listRef = useRef<HTMLOListElement>(null)
     // The first step just revealed by a click, to move the focus there
     const focusFrom = useRef<number | null>(null)
-    const visible = progressive ? steps.slice(0, shown) : steps
+    const visible = stepByStep ? steps.slice(0, shown) : steps
     const next = visible.length + 1
 
     useEffect(() => {
@@ -73,7 +76,7 @@ export function LessonSteps({ steps, kind, progressive, language, solution }: {
         <>
             <ol className={`fraction-v2-lesson-steps ${kind}`} ref={listRef}>
                 {visible.map((step, index) => (
-                    <li key={index} tabIndex={progressive ? -1 : undefined}>
+                    <li key={index} tabIndex={stepByStep ? -1 : undefined}>
                         <span className="fraction-v2-lesson-step-badge" aria-hidden="true">{kind === 'steps' ? index + 1 : ''}</span>
                         <div className="fraction-v2-lesson-step-body">
                             {step.title && <strong>{pickText(language, step.title)}</strong>}

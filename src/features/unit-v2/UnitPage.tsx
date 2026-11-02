@@ -471,7 +471,8 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                     )}
                     {currentTopic.steps && (
                         <LessonSteps
-                            key={currentTopic.id}
+                            // Keys of siblings must differ: with the same one React duplicates them
+                            key={`steps-${currentTopic.id}`}
                             steps={currentTopic.steps}
                             kind={stepsKind}
                             // One step at a time only when they solve «Let's solve», and until the lesson is understood
@@ -491,7 +492,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                     </aside>
                     {currentTopic.check && (
                         <LessonCheckCard
-                            key={currentTopic.id}
+                            key={`check-${currentTopic.id}`}
                             check={currentTopic.check}
                             language={language}
                             learned={isLearned}
