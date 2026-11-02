@@ -17,6 +17,7 @@ import { GAME_RECORDS_KEY, gameProgressIds, games } from './games/records'
 import { gameModeForPath, gameSlugs } from './routing'
 import { AddFigure, AreaFigure, EquivalenceFigure, FractionOfFigure, MeaningFigure, MixedFigure, OrderFigure, PercentFigure, PowerFigure, ProportionFigure, SimplifyFigure } from './figures'
 import type { TheoryTopicId } from './content'
+import { fractionLessonChecks } from './lessonChecks'
 
 /** The model drawn under each lesson; 'combined' is shown with its steps only */
 const lessonFigures: Partial<Record<TheoryTopicId, (language: UnitLanguage) => ReactNode>> = {
@@ -61,7 +62,8 @@ const zatikiakUnit: UnitDefinition = {
     ),
     pathSubtitle: { eu: 'Bost etapa, zatikiaren ideiatik proportzionaltasunera', es: 'Cinco etapas, de la idea de fracción a la proporcionalidad', en: 'Five stages, from the idea of a fraction to proportionality', ar: 'خمس مراحل، من فكرة الكسر إلى التناسب' },
     stages: learningStages,
-    topics: theoryTopics.map((topic) => ({ ...topic, figure: lessonFigures[topic.id] })),
+    // Each lesson with its drawing, its typical mistake and its «Check it» question (lessonChecks.ts)
+    topics: theoryTopics.map((topic) => ({ ...topic, ...fractionLessonChecks[topic.id], figure: lessonFigures[topic.id] })),
     diagnostic: diagnosticQuestions,
     guidedPractice,
     exerciseBank: fractionExerciseSections.map((section) => ({

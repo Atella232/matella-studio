@@ -40,6 +40,7 @@ const unit = /(?:\\[ ,;]|\s)*(?:\\(?:text|mathrm)\{[^{}]*\}(?:\^\{?\d\}?)?|\\tex
 /** Evaluates a numeric expression (·, :, \frac, powers, roots, π, decimal commas, brackets); null when it is something else */
 function evaluate(latex: string): number | null {
     let js = latex.replace(/\\left|\\right/g, '').replace(/^\s*\\approx\s*/, '').replace(unit, '')
+    js = js.replace(/(\d+)\s*\\frac\{(\d+)\}\{(\d+)\}/g, '($1+($2)/($3))') // a mixed number: 4 5/6 is 4 + 5/6
     // Innermost first, so a power inside a root or a fraction inside a fraction also works
     for (let previous = ''; previous !== js;) {
         previous = js
