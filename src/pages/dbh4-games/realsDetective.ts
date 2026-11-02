@@ -203,7 +203,7 @@ function build(random: Random, error: RealsDetectiveError): Built | null {
             const reached = price * (1 + (up - down) / 100)
             const net = up - down
             return {
-                problem: say(`${price} euroko prezio bat % ${up} igo eta gero % ${down} jaitsi da. Zenbat da orain?`, `Un precio de ${price} € sube un ${up} % y luego baja un ${down} %. ¿Cuánto vale ahora?`, `سعر ${price} يورو ارتفع ${up}٪ ثم انخفض ${down}٪. كم أصبح؟`, `A price of ${price} € goes up ${up}% and then down ${down}%. What is it now?`),
+                problem: say(`${price} euroko prezio bat % ${up} igo eta gero % ${down} jaitsi da. Zenbat da orain?`, `Un precio de ${price} € sube un ${up} % y luego baja un ${down} %. ¿Cuánto vale ahora?`, `سعر ${price} يورو ارتفع ${up}٪ ثم انخفض ${down}٪. كم أصبح؟`, `A price of €${price} goes up ${up}% and then down ${down}%. What is it now?`),
                 lines: [line(LABELS.change, `+${up}\\,\\%-${down}\\,\\%=${net > 0 ? '+' : ''}${net}\\,\\%`), line(LABELS.multiplier, dec(1 + (up - down) / 100)), line(LABELS.result, `${price}\\cdot ${dec(1 + (up - down) / 100)}=${dec(reached)}`)],
                 wrong: 0,
                 error,
@@ -218,7 +218,7 @@ function build(random: Random, error: RealsDetectiveError): Built | null {
             const final = base * (1 + rate / 100)
             const reached = final * (1 - rate / 100)
             return {
-                problem: say(`BEZa barne (% ${rate}), zerbait ${dec(final)} euro da. Zenbat zen BEZik gabe?`, `Con el IVA incluido (${rate} %), algo cuesta ${dec(final)} €. ¿Cuánto costaba sin IVA?`, `مع الضريبة (${rate}٪) يكلّف شيء ${dec(final)} يورو. كم كان ثمنه دون الضريبة؟`, `With VAT included (${rate}%), something costs ${dec(final)} €. How much was it without VAT?`),
+                problem: say(`BEZa barne (% ${rate}), zerbait ${dec(final)} euro da. Zenbat zen BEZik gabe?`, `Con el IVA incluido (${rate} %), algo cuesta ${dec(final)} €. ¿Cuánto costaba sin IVA?`, `مع الضريبة (${rate}٪) يكلّف شيء ${dec(final)} يورو. كم كان ثمنه دون الضريبة؟`, `With VAT included (${rate}%), something costs €${dec(final)}. How much was it without VAT?`),
                 lines: [line(LABELS.multiplier, dec(1 - rate / 100)), line(LABELS.result, `${dec(final)}\\cdot ${dec(1 - rate / 100)}`), line(LABELS.result, dec(reached))],
                 wrong: 0,
                 error,
@@ -231,7 +231,7 @@ function build(random: Random, error: RealsDetectiveError): Built | null {
             const [start, end] = pick(random, [[40, 50], [80, 100], [20, 25], [60, 75], [50, 40]] as const)
             const change = end - start
             return {
-                problem: say(`Prezio bat ${start} eurotik ${end} eurora pasatu da. Zer ehuneko aldatu da?`, `Un precio pasa de ${start} € a ${end} €. ¿En qué porcentaje ha variado?`, `انتقل سعر من ${start} يورو إلى ${end} يورو. بأي نسبة تغيّر؟`, `A price goes from ${start} € to ${end} €. By what percentage has it changed?`),
+                problem: say(`Prezio bat ${start} eurotik ${end} eurora pasatu da. Zer ehuneko aldatu da?`, `Un precio pasa de ${start} € a ${end} €. ¿En qué porcentaje ha variado?`, `انتقل سعر من ${start} يورو إلى ${end} يورو. بأي نسبة تغيّر؟`, `A price goes from €${start} to €${end}. By what percentage has it changed?`),
                 lines: [line(LABELS.change, `${end}-${start}=${change}`), line(LABELS.relative, `\\frac{${change}}{${end}}=${dec(change / end, 2)}`), line(LABELS.result, `${dec((change / end) * 100, 1)}\\,\\%`)],
                 wrong: 1,
                 error,
@@ -259,7 +259,7 @@ function build(random: Random, error: RealsDetectiveError): Built | null {
             const right = capital * (1 + rate / 100) ** years
             const reached = capital * (1 + (rate / 100) * years)
             return {
-                problem: say(`${capital} euro % ${rate} interes konposatuan, ${years} urtez. Zenbat izango da?`, `${capital} € al ${rate} % de interés compuesto durante ${years} años. ¿Cuánto habrá?`, `${capital} يورو بفائدة مركّبة ${rate}٪ لمدة ${years} سنوات. كم سيصبح؟`, `${capital} € at ${rate}% compound interest for ${years} years. How much will there be?`),
+                problem: say(`${capital} euro % ${rate} interes konposatuan, ${years} urtez. Zenbat izango da?`, `${capital} € al ${rate} % de interés compuesto durante ${years} años. ¿Cuánto habrá?`, `${capital} يورو بفائدة مركّبة ${rate}٪ لمدة ${years} سنوات. كم سيصبح؟`, `€${capital} at ${rate}% compound interest for ${years} years. How much will there be?`),
                 lines: [line(LABELS.formula, `C=${capital}(1+${dec(rate / 100)}\\cdot ${years})`), line(LABELS.capital, `C=${capital}\\cdot ${dec(1 + (rate / 100) * years)}`), line(LABELS.result, `C=${dec(reached)}`)],
                 wrong: 0,
                 error,
@@ -274,7 +274,7 @@ function build(random: Random, error: RealsDetectiveError): Built | null {
             const years = 2
             const right = capital * (1 + rate / 100) ** years
             return {
-                problem: say(`${capital} euro % ${rate} interes konposatuan, ${years} urtez. Zenbat izango da?`, `${capital} € al ${rate} % de interés compuesto durante ${years} años. ¿Cuánto habrá?`, `${capital} يورو بفائدة مركّبة ${rate}٪ لمدة سنتين. كم سيصبح؟`, `${capital} € at ${rate}% compound interest for ${years} years. How much will there be?`),
+                problem: say(`${capital} euro % ${rate} interes konposatuan, ${years} urtez. Zenbat izango da?`, `${capital} € al ${rate} % de interés compuesto durante ${years} años. ¿Cuánto habrá?`, `${capital} يورو بفائدة مركّبة ${rate}٪ لمدة سنتين. كم سيصبح؟`, `€${capital} at ${rate}% compound interest for ${years} years. How much will there be?`),
                 lines: [line(LABELS.formula, `C=C_{0}(1+r)^{t}`), line(LABELS.multiplier, `1+${rate}=${1 + rate}`), line(LABELS.result, `C=${capital}\\cdot ${1 + rate}^{2}=${capital * (1 + rate) ** 2}`)],
                 wrong: 1,
                 error,
@@ -290,7 +290,7 @@ function build(random: Random, error: RealsDetectiveError): Built | null {
             const right = capital * (1 + rate / 1200) ** months
             const reached = capital * (1 + rate / 100) ** months
             return {
-                problem: say(`${capital} euro urteko % ${rate}an, interesak hilero kapitalizatuta. Zenbat izango da ${months} hilabete barru?`, `${capital} € al ${rate} % anual, con los intereses capitalizados cada mes. ¿Cuánto habrá a los ${months} meses?`, `${capital} يورو بمعدل سنوي ${rate}٪ تُضاف فوائده شهريًا. كم سيصبح بعد ${months} أشهر؟`, `${capital} € at ${rate}% a year, with the interest added every month. How much will there be after ${months} months?`),
+                problem: say(`${capital} euro urteko % ${rate}an, interesak hilero kapitalizatuta. Zenbat izango da ${months} hilabete barru?`, `${capital} € al ${rate} % anual, con los intereses capitalizados cada mes. ¿Cuánto habrá a los ${months} meses?`, `${capital} يورو بمعدل سنوي ${rate}٪ تُضاف فوائده شهريًا. كم سيصبح بعد ${months} أشهر؟`, `€${capital} at ${rate}% a year, with the interest added every month. How much will there be after ${months} months?`),
                 lines: [line(LABELS.rate, `r=${dec(rate / 100)}`), line(LABELS.formula, `C=${capital}\\cdot ${dec(1 + rate / 100)}^{${months}}`), line(LABELS.result, `C\\approx ${dec(reached)}`)],
                 wrong: 0,
                 error,
@@ -305,7 +305,7 @@ function build(random: Random, error: RealsDetectiveError): Built | null {
             const years = 2
             const total = capital * (1 + rate / 100) ** years
             return {
-                problem: say(`${capital} euro % ${rate} interes konposatuan, ${years} urtez. Zenbat interes sortu dira?`, `${capital} € al ${rate} % de interés compuesto durante ${years} años. ¿Cuántos intereses se generan?`, `${capital} يورو بفائدة مركّبة ${rate}٪ لمدة سنتين. كم فائدة تتولّد؟`, `${capital} € at ${rate}% compound interest for ${years} years. How much interest is earned?`),
+                problem: say(`${capital} euro % ${rate} interes konposatuan, ${years} urtez. Zenbat interes sortu dira?`, `${capital} € al ${rate} % de interés compuesto durante ${years} años. ¿Cuántos intereses se generan?`, `${capital} يورو بفائدة مركّبة ${rate}٪ لمدة سنتين. كم فائدة تتولّد؟`, `€${capital} at ${rate}% compound interest for ${years} years. How much interest is earned?`),
                 lines: [line(LABELS.formula, `C=${capital}\\cdot ${dec(1 + rate / 100)}^{2}`), line(LABELS.capital, `C=${dec(total)}`), line(LABELS.interest, dec(total))],
                 wrong: 2,
                 error,

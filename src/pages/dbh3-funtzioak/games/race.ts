@@ -151,7 +151,7 @@ function taxi(random: Random) {
     const start = randomInt(random, 2, 6)
     const perKm = randomInt(random, 1, 3)
     const km = randomInt(random, 3, 12)
-    return build(random, 3, 'linear', [perKm, start, km], say(`Taxia: ${start} € + ${perKm} € km-ko. ${km} km (€)?`, `Taxi: ${start} € + ${perKm} € por km. ¿${km} km (€)?`, `سيارة أجرة: $${start}$ يورو + $${perKm}$ يورو لكل كم. $${km}$ كم (يورو)؟`, `Taxi: ${start} € + ${perKm} € per km. ${km} km (€)?`), [wrong(start * km + perKm, 'calculation'), wrong(perKm * km, 'calculation')])
+    return build(random, 3, 'linear', [perKm, start, km], say(`Taxia: ${start} € + ${perKm} € km-ko. ${km} km (€)?`, `Taxi: ${start} € + ${perKm} € por km. ¿${km} km (€)?`, `سيارة أجرة: $${start}$ يورو + $${perKm}$ يورو لكل كم. $${km}$ كم (يورو)؟`, `Taxi: €${start} + €${perKm} per km. ${km} km (€)?`), [wrong(start * km + perKm, 'calculation'), wrong(perKm * km, 'calculation')])
 }
 
 /* ---------- Circuit 4: vertices ---------- */

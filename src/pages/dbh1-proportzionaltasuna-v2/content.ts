@@ -129,21 +129,21 @@ export const proportionPractice: PracticeItem[] = [
     },
     {
         id: 6, stage: 'direct',
-        prompt: say('Bi kilo laranjak $1{,}50$ € balio dute. Zenbat balio dute 12 kilok?', 'Dos kilos de naranjas cuestan $1{,}50$ €. ¿Cuánto cuestan 12 kilos?', 'ثمن كيلوغرامين من البرتقال $1{,}50$ €. كم ثمن 12 كيلوغرامًا؟', 'Two kilos of oranges cost $1{,}50$ €. How much do 12 kilos cost?'),
+        prompt: say('Bi kilo laranjak $1{,}50$ € balio dute. Zenbat balio dute 12 kilok?', 'Dos kilos de naranjas cuestan $1{,}50$ €. ¿Cuánto cuestan 12 kilos?', 'ثمن كيلوغرامين من البرتقال $1{,}50$ €. كم ثمن 12 كيلوغرامًا؟', 'Two kilos of oranges cost €$1{,}50$. How much do 12 kilos cost?'),
         expected: n(9),
         hint: say('Kilo batek: $1{,}50\\mathbin{:}2$.', 'Un kilo: $1{,}50\\mathbin{:}2$.', 'الكيلو الواحد: $1{,}50\\mathbin{:}2$.', 'One kilo: $1{,}50\\mathbin{:}2$.'),
         explanation: same('$1{,}50\\mathbin{:}2=0{,}75\\ \\to\\ 0{,}75\\cdot 12=9$')
     },
     {
         id: 7, stage: 'direct',
-        prompt: say('100 g izokin ketuak $2{,}40$ € balio dute. Zenbat balio dute 260 g-k?', '100 g de salmón ahumado cuestan $2{,}40$ €. ¿Cuánto cuestan 260 g?', 'ثمن 100 غ من السلمون المدخّن $2{,}40$ €. كم ثمن 260 غ؟', '100 g of smoked salmon cost $2{,}40$ €. How much do 260 g cost?'),
+        prompt: say('100 g izokin ketuak $2{,}40$ € balio dute. Zenbat balio dute 260 g-k?', '100 g de salmón ahumado cuestan $2{,}40$ €. ¿Cuánto cuestan 260 g?', 'ثمن 100 غ من السلمون المدخّن $2{,}40$ €. كم ثمن 260 غ؟', '100 g of smoked salmon cost €$2{,}40$. How much do 260 g cost?'),
         expected: v('6,24'),
         hint: say('Hiruko erregela: $\\frac{100}{2{,}40}=\\frac{260}{x}$.', 'Regla de tres: $\\frac{100}{2{,}40}=\\frac{260}{x}$.', 'قاعدة الثلاثة: $\\frac{100}{2{,}40}=\\frac{260}{x}$.', 'Rule of three: $\\frac{100}{2{,}40}=\\frac{260}{x}$.'),
         explanation: same('$x=\\frac{260\\cdot 2{,}40}{100}=6{,}24$')
     },
     {
         id: 8, stage: 'direct',
-        prompt: say('Sagar-kilo batek $1{,}50$ € balio du. Zenbat balio dute 7 kilok?', 'Un kilo de manzanas cuesta $1{,}50$ €. ¿Cuánto cuestan 7 kilos?', 'ثمن كيلو التفاح $1{,}50$ €. كم ثمن 7 كيلوغرامات؟', 'One kilo of apples costs $1{,}50$ €. How much do 7 kilos cost?'),
+        prompt: say('Sagar-kilo batek $1{,}50$ € balio du. Zenbat balio dute 7 kilok?', 'Un kilo de manzanas cuesta $1{,}50$ €. ¿Cuánto cuestan 7 kilos?', 'ثمن كيلو التفاح $1{,}50$ €. كم ثمن 7 كيلوغرامات؟', 'One kilo of apples costs €$1{,}50$. How much do 7 kilos cost?'),
         expected: v('10,5'),
         hint: say('Konstantea $1{,}50$ da: biderkatu.', 'La constante es $1{,}50$: multiplica.', 'الثابت $1{,}50$: اضرب.', 'The constant is $1{,}50$: multiply.'),
         explanation: same('$1{,}50\\cdot 7=10{,}5$')
@@ -257,14 +257,14 @@ export const proportionChallenges: ChallengeItem[] = [
     },
     {
         id: 103, stage: 'direct', points: 10, context: 'starter',
-        prompt: say('12 fotokopiak $0{,}50$ € balio dute. Zenbat balio dute 30 fotokopiak?', '12 fotocopias cuestan $0{,}50$ €. ¿Cuánto cuestan 30 fotocopias?', 'ثمن 12 نسخة مصوّرة $0{,}50$ €. كم ثمن 30 نسخة؟', '12 photocopies cost $0{,}50$ €. How much do 30 photocopies cost?'),
+        prompt: say('12 fotokopiak $0{,}50$ € balio dute. Zenbat balio dute 30 fotokopiak?', '12 fotocopias cuestan $0{,}50$ €. ¿Cuánto cuestan 30 fotocopias?', 'ثمن 12 نسخة مصوّرة $0{,}50$ €. كم ثمن 30 نسخة؟', '12 photocopies cost €$0{,}50$. How much do 30 photocopies cost?'),
         expected: v('1,25'),
         hint: say('$\\frac{12}{0{,}50}=\\frac{30}{x}$.', '$\\frac{12}{0{,}50}=\\frac{30}{x}$.', '$\\frac{12}{0{,}50}=\\frac{30}{x}$.', '$\\frac{12}{0{,}50}=\\frac{30}{x}$.'),
         explanation: same('$x=\\frac{30\\cdot 0{,}50}{12}=\\frac{15}{12}=1{,}25$')
     },
     {
         id: 104, stage: 'direct', points: 20, context: 'advanced',
-        prompt: say('Hamar ogi-barrak $4{,}75$ € balio dute. Zenbat balio dute 24 barrak?', 'Diez barras de pan cuestan $4{,}75$ €. ¿Cuánto cuestan 24 barras?', 'ثمن عشرة أرغفة $4{,}75$ €. كم ثمن 24 رغيفًا؟', 'Ten loaves of bread cost $4{,}75$ €. How much do 24 loaves cost?'),
+        prompt: say('Hamar ogi-barrak $4{,}75$ € balio dute. Zenbat balio dute 24 barrak?', 'Diez barras de pan cuestan $4{,}75$ €. ¿Cuánto cuestan 24 barras?', 'ثمن عشرة أرغفة $4{,}75$ €. كم ثمن 24 رغيفًا؟', 'Ten loaves of bread cost €$4{,}75$. How much do 24 loaves cost?'),
         expected: v('11,4'),
         hint: say('Barra batek: $4{,}75\\mathbin{:}10$.', 'Una barra: $4{,}75\\mathbin{:}10$.', 'الرغيف الواحد: $4{,}75\\mathbin{:}10$.', 'One loaf: $4{,}75\\mathbin{:}10$.'),
         explanation: same('$4{,}75\\mathbin{:}10=0{,}475\\ \\to\\ 0{,}475\\cdot 24=11{,}4$')

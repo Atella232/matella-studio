@@ -89,7 +89,7 @@ function build(random: Random, error: ProportionDetectiveError): Built | null {
             const cost = unit * p
             if (q === p || !Number.isInteger(cost) || q - p + cost === unit * q) return null
             return {
-                problem: say(`$${p}$ koaderno $${n(cost)}$ € dira. Zenbat balio dute $${q}$ koadernok?`, `$${p}$ cuadernos cuestan $${n(cost)}$ €. ¿Cuánto cuestan $${q}$ cuadernos?`, `ثمن $${p}$ دفاتر $${n(cost)}$ يورو. كم ثمن $${q}$ دفاتر؟`, `$${p}$ notebooks cost $${n(cost)}$ €. How much do $${q}$ notebooks cost?`),
+                problem: say(`$${p}$ koaderno $${n(cost)}$ € dira. Zenbat balio dute $${q}$ koadernok?`, `$${p}$ cuadernos cuestan $${n(cost)}$ €. ¿Cuánto cuestan $${q}$ cuadernos?`, `ثمن $${p}$ دفاتر $${n(cost)}$ يورو. كم ثمن $${q}$ دفاتر؟`, `$${p}$ notebooks cost €$${n(cost)}$. How much do $${q}$ notebooks cost?`),
                 lines: [line(LABELS.difference, `${q}-${p}=${q - p}`), line(LABELS.step2, `${n(cost)}+${q - p}=${n(cost + q - p)}`), line(LABELS.answer, n(cost + q - p))],
                 wrong: 1, error, fix: `${n(cost)}\\div ${p}=${n(unit)}\\ \\to\\ ${n(unit)}\\cdot ${q}=${n(unit * q)}`, right: unit * q, reached: cost + q - p
             }
@@ -101,7 +101,7 @@ function build(random: Random, error: ProportionDetectiveError): Built | null {
             const wrong = (cost * p) / q
             if (q === p || Math.round(wrong * 100) !== wrong * 100) return null
             return {
-                problem: say(`$${p}$ kg sagar $${cost}$ € dira. Zenbat balio dute $${q}$ kg-k?`, `$${p}$ kg de manzanas cuestan $${cost}$ €. ¿Cuánto cuestan $${q}$ kg?`, `ثمن $${p}$ كغ من التفاح $${cost}$ يورو. كم ثمن $${q}$ كغ؟`, `$${p}$ kg of apples cost $${cost}$ €. How much do $${q}$ kg cost?`),
+                problem: say(`$${p}$ kg sagar $${cost}$ € dira. Zenbat balio dute $${q}$ kg-k?`, `$${p}$ kg de manzanas cuestan $${cost}$ €. ¿Cuánto cuestan $${q}$ kg?`, `ثمن $${p}$ كغ من التفاح $${cost}$ يورو. كم ثمن $${q}$ كغ؟`, `$${p}$ kg of apples cost €$${cost}$. How much do $${q}$ kg cost?`),
                 lines: [line(LABELS.rule, `x=\\frac{${cost}\\cdot ${p}}{${q}}`), line(LABELS.step2, `x=\\frac{${cost * p}}{${q}}`), line(LABELS.answer, `x=${n(wrong)}`)],
                 wrong: 0, error, fix: `x=\\frac{${cost}\\cdot ${q}}{${p}}=${unit * q}`, right: unit * q, reached: wrong
             }
@@ -156,7 +156,7 @@ function build(random: Random, error: ProportionDetectiveError): Built | null {
             const right = price - (price * percent) / 100
             if (Math.round(wrongDiscount * 100) !== wrongDiscount * 100) return null
             return {
-                problem: say(`$${price}$ €-ko jaka batek $${percent}\\,\\%$-ko deskontua du. Zenbat ordaintzen da?`, `Una chaqueta de $${price}$ € tiene un descuento del $${percent}\\,\\%$. ¿Cuánto se paga?`, `سترة ثمنها $${price}$ يورو عليها تخفيض $${percent}\\,\\%$. كم ندفع؟`, `A jacket costs $${price}$ € with a $${percent}\\,\\%$ discount. How much do you pay?`),
+                problem: say(`$${price}$ €-ko jaka batek $${percent}\\,\\%$-ko deskontua du. Zenbat ordaintzen da?`, `Una chaqueta de $${price}$ € tiene un descuento del $${percent}\\,\\%$. ¿Cuánto se paga?`, `سترة ثمنها $${price}$ يورو عليها تخفيض $${percent}\\,\\%$. كم ندفع؟`, `A jacket costs €$${price}$ with a $${percent}\\,\\%$ discount. How much do you pay?`),
                 lines: [line(LABELS.discount, `${price}\\div ${percent}=${n(wrongDiscount)}`), line(LABELS.price, `${price}-${n(wrongDiscount)}`), line(LABELS.answer, n(price - wrongDiscount))],
                 wrong: 0, error, fix: `${price}\\cdot ${percent}\\div 100=${n((price * percent) / 100)}\\ \\to\\ ${price}-${n((price * percent) / 100)}=${n(right)}`, right, reached: price - wrongDiscount
             }
@@ -167,7 +167,7 @@ function build(random: Random, error: ProportionDetectiveError): Built | null {
             const socks = randomInt(random, 3, 9)
             const discount = (price * percent) / 100
             return {
-                problem: say(`$${price}$ €-ko kamiseta bat $${percent}\\,\\%$-ko deskontuarekin eta $${socks}$ €-ko galtzerdi batzuk erosi dituzu. Zenbat ordaindu duzu?`, `Compras una camiseta de $${price}$ € con un $${percent}\\,\\%$ de descuento y unos calcetines de $${socks}$ €. ¿Cuánto pagas?`, `تشتري قميصًا ثمنه $${price}$ يورو بتخفيض $${percent}\\,\\%$ وجوارب بـ$${socks}$ يورو. كم تدفع؟`, `You buy a $${price}$ € T-shirt with a $${percent}\\,\\%$ discount and some $${socks}$ € socks. How much do you pay?`),
+                problem: say(`$${price}$ €-ko kamiseta bat $${percent}\\,\\%$-ko deskontuarekin eta $${socks}$ €-ko galtzerdi batzuk erosi dituzu. Zenbat ordaindu duzu?`, `Compras una camiseta de $${price}$ € con un $${percent}\\,\\%$ de descuento y unos calcetines de $${socks}$ €. ¿Cuánto pagas?`, `تشتري قميصًا ثمنه $${price}$ يورو بتخفيض $${percent}\\,\\%$ وجوارب بـ$${socks}$ يورو. كم تدفع؟`, `You buy a €$${price}$ T-shirt with a $${percent}\\,\\%$ discount and some €$${socks}$ socks. How much do you pay?`),
                 lines: [line(LABELS.discount, `${price}\\cdot ${percent}\\div 100=${discount}`), line(LABELS.shirt, `${discount}`), line(LABELS.total, `${discount}+${socks}=${discount + socks}`)],
                 wrong: 1, error, fix: `${price}-${discount}=${price - discount}\\ \\to\\ ${price - discount}+${socks}=${price - discount + socks}`, right: price - discount + socks, reached: discount + socks
             }
@@ -179,7 +179,7 @@ function build(random: Random, error: ProportionDetectiveError): Built | null {
             const reached = (rise / end) * 100
             if (Math.round(reached * 100) !== reached * 100) return null
             return {
-                problem: say(`Prezio bat $${start}$ €-tik $${n(end)}$ €-ra igo da. Zenbat igo da ehunekotan?`, `Un precio sube de $${start}$ € a $${n(end)}$ €. ¿Qué porcentaje ha subido?`, `ارتفع سعر من $${start}$ يورو إلى $${n(end)}$ يورو. ما نسبة الزيادة؟`, `A price rises from $${start}$ € to $${n(end)}$ €. By what percentage has it risen?`),
+                problem: say(`Prezio bat $${start}$ €-tik $${n(end)}$ €-ra igo da. Zenbat igo da ehunekotan?`, `Un precio sube de $${start}$ € a $${n(end)}$ €. ¿Qué porcentaje ha subido?`, `ارتفع سعر من $${start}$ يورو إلى $${n(end)}$ يورو. ما نسبة الزيادة؟`, `A price rises from €$${start}$ to €$${n(end)}$. By what percentage has it risen?`),
                 lines: [line(LABELS.rise, `${n(end)}-${start}=${n(rise)}`), line(LABELS.fraction, `\\frac{${n(rise)}}{${n(end)}}=${n(rise / end)}`), line(LABELS.percent, `${n(reached)}\\,\\%`)],
                 wrong: 1, error, fix: `\\frac{${n(rise)}}{${start}}=${n(rise / start)}\\ \\to\\ ${percent}\\,\\%`, right: percent, reached
             }

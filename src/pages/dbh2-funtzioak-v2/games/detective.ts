@@ -259,7 +259,7 @@ function build(random: Random, error: FunctionsDetectiveError): Built | null {
             const rate = pick(random, [1.2, 1.5, 2])
             const km = pick(random, [5, 8, 10, 12])
             return {
-                problem: say(`Taxi batek ${comma(fee)} € kobratzen ditu hasieran eta ${comma(rate)} € kilometroko. Zenbat balio dute ${km} kilometrok?`, `Un taxi cobra ${comma(fee)} € de bajada de bandera y ${comma(rate)} € por kilómetro. ¿Cuánto cuestan ${km} km?`, `تتقاضى سيارة أجرة ${fee} يورو عند الانطلاق و${rate} يورو لكل كيلومتر. كم تكلّف ${km} كم؟`, `A taxi charges ${fee} € to start and ${rate} € per kilometre. How much do ${km} km cost?`),
+                problem: say(`Taxi batek ${comma(fee)} € kobratzen ditu hasieran eta ${comma(rate)} € kilometroko. Zenbat balio dute ${km} kilometrok?`, `Un taxi cobra ${comma(fee)} € de bajada de bandera y ${comma(rate)} € por kilómetro. ¿Cuánto cuestan ${km} km?`, `تتقاضى سيارة أجرة ${fee} يورو عند الانطلاق و${rate} يورو لكل كيلومتر. كم تكلّف ${km} كم؟`, `A taxi charges €${fee} to start and €${rate} per kilometre. How much do ${km} km cost?`),
                 lines: [
                     line(LABELS.formula, `y=${decimal(rate)}x`),
                     line(LABELS.substitute, `y=${decimal(rate)}\\cdot ${km}`),
@@ -277,7 +277,7 @@ function build(random: Random, error: FunctionsDetectiveError): Built | null {
             const rate = pick(random, [2, 3, 4])
             const hours = pick(random, [3, 4, 5, 6])
             return {
-                problem: say(`Bizikleta bat alokatzeko ${fee} € ordaintzen dira hasieran eta ${rate} € orduko. Zenbat ordaintzen da ${hours} ordurengatik?`, `Alquilar una bici cuesta ${fee} € fijos y ${rate} € por hora. ¿Cuánto se paga por ${hours} horas?`, `استئجار دراجة يكلّف ${fee} يورو ثابتة و${rate} يورو لكل ساعة. كم ندفع مقابل ${hours} ساعات؟`, `Renting a bike costs ${fee} € fixed and ${rate} € per hour. How much do you pay for ${hours} hours?`),
+                problem: say(`Bizikleta bat alokatzeko ${fee} € ordaintzen dira hasieran eta ${rate} € orduko. Zenbat ordaintzen da ${hours} ordurengatik?`, `Alquilar una bici cuesta ${fee} € fijos y ${rate} € por hora. ¿Cuánto se paga por ${hours} horas?`, `استئجار دراجة يكلّف ${fee} يورو ثابتة و${rate} يورو لكل ساعة. كم ندفع مقابل ${hours} ساعات؟`, `Renting a bike costs €${fee} fixed and €${rate} per hour. How much do you pay for ${hours} hours?`),
                 lines: [
                     line(LABELS.formula, lineLatex(fee, rate)),
                     line(LABELS.substitute, `y=${fee}\\cdot ${hours}+${rate}`),
@@ -314,7 +314,7 @@ function build(random: Random, error: FunctionsDetectiveError): Built | null {
             const hours = pick(random, [1, 2])
             const minutes = 60 * hours
             return {
-                problem: say(`Telefono-tarifa batek ${fee} € ditu hilean eta ${comma(cents)} € minutuko. Zenbat ordainduko da ${hours === 1 ? 'ordu batengatik' : `${hours} ordurengatik`}?`, `Una tarifa de móvil cuesta ${fee} € al mes y ${comma(cents)} € por minuto. ¿Cuánto se paga por ${hours === 1 ? '1 hora' : `${hours} horas`}?`, `تعريفة هاتف تكلّف ${fee} يورو شهريًا و${cents} يورو للدقيقة. كم ندفع مقابل ${hours === 1 ? 'ساعة واحدة' : 'ساعتين'}؟`, `A phone plan costs ${fee} € a month and ${cents} € a minute. How much do you pay for ${hours === 1 ? '1 hour' : `${hours} hours`}?`),
+                problem: say(`Telefono-tarifa batek ${fee} € ditu hilean eta ${comma(cents)} € minutuko. Zenbat ordainduko da ${hours === 1 ? 'ordu batengatik' : `${hours} ordurengatik`}?`, `Una tarifa de móvil cuesta ${fee} € al mes y ${comma(cents)} € por minuto. ¿Cuánto se paga por ${hours === 1 ? '1 hora' : `${hours} horas`}?`, `تعريفة هاتف تكلّف ${fee} يورو شهريًا و${cents} يورو للدقيقة. كم ندفع مقابل ${hours === 1 ? 'ساعة واحدة' : 'ساعتين'}؟`, `A phone plan costs €${fee} a month and €${cents} a minute. How much do you pay for ${hours === 1 ? '1 hour' : `${hours} hours`}?`),
                 lines: [
                     line(LABELS.formula, `y=${decimal(cents)}x+${fee}`),
                     line(LABELS.substitute, `y=${decimal(cents)}\\cdot ${hours}+${fee}`),

@@ -421,10 +421,10 @@ export const equations3Topics: UnitTopic[] = [
             'عندما يكون في المسألة كميتان مجهولتان وشرطان، استعمل $x$ و$y$ واكتب معادلة لكل شرط. مثلًا: «تذاكر للكبار وللصغار» ← مجموع التذاكر ومجموع المال. وبعد الحل أجب عن السؤال بالكلمات وتحقّق من الشرطين.',
             'When the problem has two unknown quantities and two conditions, use $x$ and $y$ and write one equation for each condition. For example: «adult and child tickets» → the total number of tickets and the total money. After solving, answer the question in words and check both conditions.'
         ),
-        problem: say('Zinema batean 9 euroko eta 6 euroko 40 sarrera saldu dira, guztira 303 euro. Zenbat saldu dira 9 eurokoak?', 'En un cine se han vendido 40 entradas de 9 € y de 6 €, en total 303 €. ¿Cuántas de 9 € se han vendido?', 'بيعت في سينما 40 تذكرة بسعر 9 يورو و6 يورو، بمجموع 303 يورو. كم تذكرة بسعر 9 يورو بيعت؟', 'A cinema sold 40 tickets at 9 € and 6 €, 303 € in total. How many 9 € tickets were sold?'),
+        problem: say('Zinema batean 9 euroko eta 6 euroko 40 sarrera saldu dira, guztira 303 euro. Zenbat saldu dira 9 eurokoak?', 'En un cine se han vendido 40 entradas de 9 € y de 6 €, en total 303 €. ¿Cuántas de 9 € se han vendido?', 'بيعت في سينما 40 تذكرة بسعر 9 يورو و6 يورو، بمجموع 303 يورو. كم تذكرة بسعر 9 يورو بيعت؟', 'A cinema sold 40 tickets at €9 and €6, €303 in total. How many €9 tickets were sold?'),
         stepsKind: 'steps',
         steps: [
-            { text: say('$x$: 9 eurokoak; $y$: 6 eurokoak.', '$x$: las de 9 €; $y$: las de 6 €.', '$x$: تذاكر 9 يورو؛ $y$: تذاكر 6 يورو.', '$x$: the 9 € ones; $y$: the 6 € ones.'), math: same('$x+y=40,\\ 9x+6y=303$') },
+            { text: say('$x$: 9 eurokoak; $y$: 6 eurokoak.', '$x$: las de 9 €; $y$: las de 6 €.', '$x$: تذاكر 9 يورو؛ $y$: تذاكر 6 يورو.', '$x$: the €9 ones; $y$: the €6 ones.'), math: same('$x+y=40,\\ 9x+6y=303$') },
             { text: say('Bigarrenari lehena bider 6 kendu.', 'A la segunda réstale la primera por 6.', 'اطرح من الثانية الأولى مضروبة في 6.', 'Subtract the first times 6 from the second.'), math: same('$3x=63\\ \\to\\ x=21$') },
             { text: say('Beste aldagaia.', 'La otra incógnita.', 'المجهول الآخر.', 'The other unknown.'), math: same('$y=40-21=19$') },
             { text: say('Egiaztatu.', 'Comprueba.', 'تحقّق.', 'Check.'), math: same('$9\\cdot 21+6\\cdot 19=303$') }

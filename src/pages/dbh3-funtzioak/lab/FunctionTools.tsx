@@ -134,8 +134,8 @@ export function TaxiTool(props: LabToolProps) {
     const readout = (
         <Predict
             language={props.language}
-            question={say('Ikusi aurretik: bidaiak 20 € baino gutxiago, 20 € ala gehiago balio du?', 'Antes de verlo: ¿el viaje cuesta menos de 20 €, 20 € o más?', 'قبل رؤيته: هل ثمن الرحلة أقل من 20 يورو أم 20 أم أكثر؟', 'Before you see it: does the ride cost less than 20 €, 20 € or more?')}
-            labels={{ '<': say('Gutxiago', 'Menos', 'أقل', 'Less'), '=': say('Justu 20 €', 'Justo 20 €', '20 يورو تمامًا', 'Exactly 20 €'), '>': say('Gehiago', 'Más', 'أكثر', 'More') }}
+            question={say('Ikusi aurretik: bidaiak 20 € baino gutxiago, 20 € ala gehiago balio du?', 'Antes de verlo: ¿el viaje cuesta menos de 20 €, 20 € o más?', 'قبل رؤيته: هل ثمن الرحلة أقل من 20 يورو أم 20 أم أكثر؟', 'Before you see it: does the ride cost less than €20, €20 or more?')}
+            labels={{ '<': say('Gutxiago', 'Menos', 'أقل', 'Less'), '=': say('Justu 20 €', 'Justo 20 €', '20 يورو تمامًا', 'Exactly €20'), '>': say('Gehiago', 'Más', 'أكثر', 'More') }}
             actual={taxiPrediction(state)}
             choice={state.prediction}
             tip={say('Prezioa km-ko bider km, gehi hasierakoa.', 'El precio por km por los km, más la bajada.', 'سعر الكيلومتر في عدد الكيلومترات زائد الانطلاق.', 'The price per km times the km, plus the start fee.')}

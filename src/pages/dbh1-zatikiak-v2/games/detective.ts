@@ -178,7 +178,7 @@ function build(random: Random, error: FractionsDetectiveError): Built | null {
             const total = d * randomInt(random, 2, 6)
             const spent = (total / d) * a
             return {
-                problem: say(`Anak $${total}$ € ditu eta horien $${f(a, d)}$ gastatu ditu. Zenbat euro geratzen zaizkio?`, `Ana tiene $${total}$ € y gasta $${f(a, d)}$. ¿Cuántos euros le quedan?`, `مع آنا $${total}$ يورو وأنفقت $${f(a, d)}$ منها. كم يورو بقي معها؟`, `Ana has $${total}$ € and spends $${f(a, d)}$ of it. How many euros are left?`),
+                problem: say(`Anak $${total}$ € ditu eta horien $${f(a, d)}$ gastatu ditu. Zenbat euro geratzen zaizkio?`, `Ana tiene $${total}$ € y gasta $${f(a, d)}$. ¿Cuántos euros le quedan?`, `مع آنا $${total}$ يورو وأنفقت $${f(a, d)}$ منها. كم يورو بقي معها؟`, `Ana has €$${total}$ and spends $${f(a, d)}$ of it. How many euros are left?`),
                 lines: [line(LABELS.part, `${total}\\div ${d}=${total / d}`), line(LABELS.step2, `${total / d}\\cdot ${a}=${spent}`), line(LABELS.left, `${spent}`)],
                 wrong: 2, error, fix: `${total}-${spent}=${total - spent}`, right: total - spent, reached: spent
             }

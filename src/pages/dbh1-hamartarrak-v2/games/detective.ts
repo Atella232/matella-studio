@@ -75,7 +75,7 @@ export const decimalsDetectiveTips: Record<DecimalsDetectiveError, LocalizedText
     'divide-ten-zero': say('Hamarrez zatitzean, zifrak toki bat eskuinera: $3{,}2\\div 10=0{,}32$.', 'Al dividir entre 10, las cifras pasan un lugar a la derecha: $3{,}2\\div 10=0{,}32$.', 'عند القسمة على 10 تنتقل الأرقام خانة إلى اليمين: $3{,}2\\div 10=0{,}32$.', 'Dividing by 10 moves the digits one place to the right: $3{,}2\\div 10=0{,}32$.'),
     'divisor-only': say('Koma bi zenbakietan mugitu behar da, toki kopuru berean.', 'La coma se mueve en los dos números, los mismos lugares.', 'نحرّك الفاصلة في العددين بعدد الخانات نفسه.', 'Move the comma in both numbers by the same number of places.'),
     'quotient-comma': say('Zatikizunaren komara iristean, jarri koma zatiduran.', 'Al llegar a la coma del dividendo, se pone la coma en el cociente.', 'عند الوصول إلى فاصلة المقسوم نضع الفاصلة في الناتج.', 'When you reach the comma of the dividend, put the comma in the quotient.'),
-    'change-no-borrow': say('$10$ euro $10{,}00$ dira: kendu zentimoak euro bat hartuta.', '$10$ € son $10{,}00$ €: para restar los céntimos se pide un euro.', '$10$ يورو هي $10{,}00$: نستلف يورو لطرح السنتات.', '$10$ € is $10{,}00$ €: borrow a euro to subtract the cents.')
+    'change-no-borrow': say('$10$ euro $10{,}00$ dira: kendu zentimoak euro bat hartuta.', '$10$ € son $10{,}00$ €: para restar los céntimos se pide un euro.', '$10$ يورو هي $10{,}00$: نستلف يورو لطرح السنتات.', '€$10$ is €$10{,}00$: borrow a euro to subtract the cents.')
 }
 
 type Built = Omit<WorkedCase<DecimalsDetectiveError>, 'options'>
@@ -178,7 +178,7 @@ function build(random: Random, error: DecimalsDetectiveError): Built | null {
             const price = euros + cents / 100
             const reached = pay - euros + cents / 100
             return {
-                problem: say(`$${d(price)}$ € balio duen zerbait $${pay}$ €-ko billetearekin ordaindu duzu. Zenbat itzuliko dizute?`, `Pagas algo de $${d(price)}$ € con un billete de $${pay}$ €. ¿Cuánto te devuelven?`, `تدفع ثمن شيء قيمته $${d(price)}$ يورو بورقة من $${pay}$ يورو. كم يُرجَع لك؟`, `You pay for something that costs $${d(price)}$ € with a $${pay}$ € note. How much change do you get?`),
+                problem: say(`$${d(price)}$ € balio duen zerbait $${pay}$ €-ko billetearekin ordaindu duzu. Zenbat itzuliko dizute?`, `Pagas algo de $${d(price)}$ € con un billete de $${pay}$ €. ¿Cuánto te devuelven?`, `تدفع ثمن شيء قيمته $${d(price)}$ يورو بورقة من $${pay}$ يورو. كم يُرجَع لك؟`, `You pay for something that costs €$${d(price)}$ with a €$${pay}$ note. How much change do you get?`),
                 lines: [line(LABELS.euros, `${pay}-${euros}=${pay - euros}`), line(LABELS.cents, `${cents}`), line(LABELS.change, d(reached))],
                 wrong: 1, error, fix: `${pay}{,}00-${d(price)}=${d(pay - price)}`, right: pay - price, reached
             }

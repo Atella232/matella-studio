@@ -222,7 +222,7 @@ function tickets(random: Random): Equations3RaceQuestion | null {
     const count = x + y
     const money = big * x + small * y
     const choices = options(random, x, [wrong(y, 'calculation'), wrong(Math.round(money / big), 'calculation'), wrong(count - 1, 'calculation')])
-    return choices && build(4, 'tickets', say(`${big} euroko eta ${small} euroko ${count} sarrera saldu dira, guztira ${money} euro. Zenbat dira ${big} eurokoak?`, `Se venden ${count} entradas de ${big} € y de ${small} €, en total ${money} €. ¿Cuántas son de ${big} €?`, `بيعت ${count} تذكرة بسعر ${big} يورو و${small} يورو، بمجموع ${money} يورو. كم تذكرة بسعر ${big} يورو؟`, `${count} tickets at ${big} € and ${small} € are sold, ${money} € in total. How many are ${big} € tickets?`), choices, x, same(`x+y=${count},\\ ${big}x+${small}y=${money}\\ \\to\\ x=${x}`), { big, small, count, money })
+    return choices && build(4, 'tickets', say(`${big} euroko eta ${small} euroko ${count} sarrera saldu dira, guztira ${money} euro. Zenbat dira ${big} eurokoak?`, `Se venden ${count} entradas de ${big} € y de ${small} €, en total ${money} €. ¿Cuántas son de ${big} €?`, `بيعت ${count} تذكرة بسعر ${big} يورو و${small} يورو، بمجموع ${money} يورو. كم تذكرة بسعر ${big} يورو؟`, `${count} tickets at €${big} and €${small} are sold, €${money} in total. How many are €${big} tickets?`), choices, x, same(`x+y=${count},\\ ${big}x+${small}y=${money}\\ \\to\\ x=${x}`), { big, small, count, money })
 }
 
 type Generator = (random: Random, tier: Tier) => Equations3RaceQuestion | null

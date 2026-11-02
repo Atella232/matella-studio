@@ -149,11 +149,11 @@ const AGES_AND_MONEY: Template[] = [
         const p = randomInt(random, 8, 20)
         const total = n * x + p
         return {
-            text: say(`${n} koaderno berdin eta ${p} euroko liburu bat erosi ditut, eta ${total} euro ordaindu ditut. Zenbat balio du koaderno batek?`, `He comprado ${n} cuadernos iguales y un libro de ${p} €, y he pagado ${total} €. ¿Cuánto cuesta cada cuaderno?`, `اشتريت ${n} دفاتر متماثلة وكتابًا بـ ${p} يورو، ودفعت ${total} يورو. كم ثمن الدفتر الواحد؟`, `I bought ${n} identical notebooks and a book for ${p} €, and paid ${total} €. How much does each notebook cost?`),
+            text: say(`${n} koaderno berdin eta ${p} euroko liburu bat erosi ditut, eta ${total} euro ordaindu ditut. Zenbat balio du koaderno batek?`, `He comprado ${n} cuadernos iguales y un libro de ${p} €, y he pagado ${total} €. ¿Cuánto cuesta cada cuaderno?`, `اشتريت ${n} دفاتر متماثلة وكتابًا بـ ${p} يورو، ودفعت ${total} يورو. كم ثمن الدفتر الواحد؟`, `I bought ${n} identical notebooks and a book for €${p}, and paid €${total}. How much does each notebook cost?`),
             right: `${n}x+${p}=${total}`,
             wrong: [`${n}(x+${p})=${total}`, `x+${n}\\cdot ${p}=${total}`, `${n}x=${total}+${p}`],
             x,
-            answer: say(`Koaderno bakoitzak ${x} euro balio du.`, `Cada cuaderno cuesta ${x} €.`, `ثمن الدفتر الواحد ${x} يورو.`, `Each notebook costs ${x} €.`),
+            answer: say(`Koaderno bakoitzak ${x} euro balio du.`, `Cada cuaderno cuesta ${x} €.`, `ثمن الدفتر الواحد ${x} يورو.`, `Each notebook costs €${x}.`),
             check: `${n}\\cdot ${x}+${p}=${total}`
         }
     },
@@ -163,11 +163,11 @@ const AGES_AND_MONEY: Template[] = [
         const a = randomInt(random, 3, 10)
         const total = 4 * x + a
         return {
-            text: say(`Jonek Pedrok baino bi aldiz diru gehiago du, eta Luisek Pedrok baino ${a} euro gehiago. Hiruren artean ${total} euro dituzte. Zenbat du Pedrok?`, `Jon tiene el doble de dinero que Pedro, y Luis ${a} € más que Pedro. Entre los tres tienen ${total} €. ¿Cuánto tiene Pedro?`, `مع جون ضعف ما مع بيدرو، ومع لويس ${a} يورو أكثر من بيدرو. ومعهم معًا ${total} يورو. كم مع بيدرو؟`, `Jon has twice as much money as Pedro, and Luis has ${a} € more than Pedro. Together they have ${total} €. How much does Pedro have?`),
+            text: say(`Jonek Pedrok baino bi aldiz diru gehiago du, eta Luisek Pedrok baino ${a} euro gehiago. Hiruren artean ${total} euro dituzte. Zenbat du Pedrok?`, `Jon tiene el doble de dinero que Pedro, y Luis ${a} € más que Pedro. Entre los tres tienen ${total} €. ¿Cuánto tiene Pedro?`, `مع جون ضعف ما مع بيدرو، ومع لويس ${a} يورو أكثر من بيدرو. ومعهم معًا ${total} يورو. كم مع بيدرو؟`, `Jon has twice as much money as Pedro, and Luis has €${a} more than Pedro. Together they have €${total}. How much does Pedro have?`),
             right: `x+2x+(x+${a})=${total}`,
             wrong: [`x+2x+${a}x=${total}`, `x+2+(x+${a})=${total}`, `2x+(x+${a})=${total}`],
             x,
-            answer: say(`Pedrok ${x} euro ditu, Jonek ${2 * x} eta Luisek ${x + a}.`, `Pedro tiene ${x} €, Jon ${2 * x} € y Luis ${x + a} €.`, `مع بيدرو ${x} يورو، ومع جون ${2 * x}، ومع لويس ${x + a}.`, `Pedro has ${x} €, Jon ${2 * x} € and Luis ${x + a} €.`),
+            answer: say(`Pedrok ${x} euro ditu, Jonek ${2 * x} eta Luisek ${x + a}.`, `Pedro tiene ${x} €, Jon ${2 * x} € y Luis ${x + a} €.`, `مع بيدرو ${x} يورو، ومع جون ${2 * x}، ومع لويس ${x + a}.`, `Pedro has €${x}, Jon €${2 * x} and Luis €${x + a}.`),
             check: `${x}+${2 * x}+${x + a}=${total}`
         }
     }

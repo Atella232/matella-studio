@@ -188,7 +188,7 @@ export const functions3Topics: UnitTopic[] = [
             'إذا كان مقداران متناسبين طرديًا فدالتهما $y=mx$: مستقيم يمر بالأصل. والعدد $m$ ثابت التناسب، والقسمة $\\frac{y}{x}$ تعطي دائمًا $m$. ولرسمه يكفي الأصل ونقطة أخرى: إذا $x=1$ فإن $y=m$.',
             'If two quantities are in direct proportion, their function is $y=mx$: a line through the origin. The number $m$ is the constant of proportionality, and the ratio $\\frac{y}{x}$ always gives $m$. To draw it you only need the origin and one more point: if $x=1$, $y=m$.'
         ),
-        problem: say('3 kg sagarrek 6 € balio dute. Zein da funtzioa, eta zenbat balio dute 7 kg-k?', '3 kg de manzanas cuestan 6 €. ¿Cuál es la función y cuánto cuestan 7 kg?', '3 كغ تفاح بـ 6 يورو. ما الدالة وكم ثمن 7 كغ؟', '3 kg of apples cost 6 €. What is the function and how much do 7 kg cost?'),
+        problem: say('3 kg sagarrek 6 € balio dute. Zein da funtzioa, eta zenbat balio dute 7 kg-k?', '3 kg de manzanas cuestan 6 €. ¿Cuál es la función y cuánto cuestan 7 kg?', '3 كغ تفاح بـ 6 يورو. ما الدالة وكم ثمن 7 كغ؟', '3 kg of apples cost €6. What is the function and how much do 7 kg cost?'),
         stepsKind: 'steps',
         steps: [
             { text: say('Konstantea.', 'La constante.', 'الثابت.', 'The constant.'), math: same('$m=\\frac{6}{3}=2\\ \\to\\ y=2x$') },
@@ -313,9 +313,9 @@ export const functions3Topics: UnitTopic[] = [
             'Tarifa askok funtzio afin bat jarraitzen dute: zati finko bat ($n$) gehi unitate bakoitzeko prezioa ($m$). Taxi batek 3 € kobratzen ditu hasteko eta 1,50 € km bakoitzeko: $y=1{,}5x+3$. Bi tarifa konparatzeko, berdindu: ebakidura-puntuaren ezkerrean bata merkeagoa da, eta eskuinean bestea.',
             'Muchas tarifas siguen una función afín: una parte fija ($n$) más un precio por cada unidad ($m$). Un taxi cobra 3 € por empezar y 1,50 € por kilómetro: $y=1{,}5x+3$. Para comparar dos tarifas se igualan: a la izquierda del punto de corte una es más barata y a la derecha, la otra.',
             'تتبع تعريفات كثيرة دالة تآلفية: جزء ثابت ($n$) زائد سعر لكل وحدة ($m$). سيارة أجرة تأخذ 3 يورو للانطلاق و1.50 يورو لكل كيلومتر: $y=1{,}5x+3$. ولمقارنة تعريفتين نساويهما: على يسار نقطة التقاطع تكون إحداهما أرخص، وعلى يمينها الأخرى.',
-            'Many prices follow an affine function: a fixed part ($n$) plus a price per unit ($m$). A taxi charges 3 € to start and 1.50 € per kilometre: $y=1{,}5x+3$. To compare two prices, set them equal: to the left of the crossing one is cheaper, to the right the other.'
+            'Many prices follow an affine function: a fixed part ($n$) plus a price per unit ($m$). A taxi charges €3 to start and €1.50 per kilometre: $y=1{,}5x+3$. To compare two prices, set them equal: to the left of the crossing one is cheaper, to the right the other.'
         ),
-        problem: say('A tarifa: 10 € gehi 2 € orduko. B tarifa: 4 € orduko. Zenbat ordutan balio dute berdin?', 'Tarifa A: 10 € más 2 € por hora. Tarifa B: 4 € por hora. ¿A cuántas horas cuestan lo mismo?', 'التعريفة A: 10 يورو زائد 2 يورو للساعة. التعريفة B: 4 يورو للساعة. بعد كم ساعة تتساويان؟', 'Price A: 10 € plus 2 € an hour. Price B: 4 € an hour. After how many hours do they cost the same?'),
+        problem: say('A tarifa: 10 € gehi 2 € orduko. B tarifa: 4 € orduko. Zenbat ordutan balio dute berdin?', 'Tarifa A: 10 € más 2 € por hora. Tarifa B: 4 € por hora. ¿A cuántas horas cuestan lo mismo?', 'التعريفة A: 10 يورو زائد 2 يورو للساعة. التعريفة B: 4 يورو للساعة. بعد كم ساعة تتساويان؟', 'Price A: €10 plus €2 an hour. Price B: €4 an hour. After how many hours do they cost the same?'),
         stepsKind: 'steps',
         steps: [
             { text: say('Funtzioak.', 'Las funciones.', 'الدالتان.', 'The functions.'), math: same('$y=2x+10,\\ y=4x$') },
@@ -323,7 +323,7 @@ export const functions3Topics: UnitTopic[] = [
         ],
         example: same('$1{,}5\\cdot 8+3=15$'),
         mistake: {
-            wrong: say('Taxia: 3 € hasteko eta 1,50 € km-ko. 8 km: $3\\cdot 8+1{,}5=25{,}5$ €.', 'Taxi: 3 € de bajada y 1,50 € el km. 8 km: $3\\cdot 8+1{,}5=25{,}5$ €.', 'سيارة أجرة: 3 يورو انطلاق و1.50 يورو للكيلومتر. 8 كم: $3\\cdot 8+1{,}5=25{,}5$ يورو.', 'Taxi: 3 € to start and 1.50 € per km. 8 km: $3\\cdot 8+1{,}5=25{,}5$ €.'),
+            wrong: say('Taxia: 3 € hasteko eta 1,50 € km-ko. 8 km: $3\\cdot 8+1{,}5=25{,}5$ €.', 'Taxi: 3 € de bajada y 1,50 € el km. 8 km: $3\\cdot 8+1{,}5=25{,}5$ €.', 'سيارة أجرة: 3 يورو انطلاق و1.50 يورو للكيلومتر. 8 كم: $3\\cdot 8+1{,}5=25{,}5$ يورو.', 'Taxi: €3 to start and €1.50 per km. 8 km: $3\\cdot 8+1{,}5=25{,}5$ €.'),
             right: say('Km kopurua prezioaz biderkatzen da, eta zati finkoa batu: $1{,}5\\cdot 8+3=15$ €.', 'Se multiplica el precio por los km y se suma la parte fija: $1{,}5\\cdot 8+3=15$ €.', 'نضرب السعر في الكيلومترات ونضيف الجزء الثابت: $1{,}5\\cdot 8+3=15$ يورو.', 'Multiply the price by the km and add the fixed part: $1{,}5\\cdot 8+3=15$ €.')
         },
         takeaway: say('Tarifa = $M$ · unitateak + $N$ finkoa.', 'Tarifa = $M$ · unidades + $N$ fijo.', 'التعريفة = $M$ · الوحدات + $N$ الثابت.', 'Price = $M$ · units + fixed $N$.'),

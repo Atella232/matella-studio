@@ -402,7 +402,7 @@ function build(random: Random, error: Dbh4EquationAnyError): Built | null {
             const wy = (total + 2 * d) / 5
             if (!Number.isInteger(wy)) return null
             return {
-                problem: say(`2 ogitarteko (x) eta 3 freskagarri (y) ${total} euro dira; ogitarteko batek freskagarri batek baino ${d} euro gehiago balio du.`, `2 bocadillos (x) y 3 refrescos (y) cuestan ${total} €; un bocadillo cuesta ${d} € más que un refresco.`, `شطيرتان (x) و3 مشروبات (y) بـ ${total} يورو؛ والشطيرة أغلى من المشروب بـ ${d} يورو.`, `2 sandwiches (x) and 3 drinks (y) cost ${total} €; a sandwich costs ${d} € more than a drink.`),
+                problem: say(`2 ogitarteko (x) eta 3 freskagarri (y) ${total} euro dira; ogitarteko batek freskagarri batek baino ${d} euro gehiago balio du.`, `2 bocadillos (x) y 3 refrescos (y) cuestan ${total} €; un bocadillo cuesta ${d} € más que un refresco.`, `شطيرتان (x) و3 مشروبات (y) بـ ${total} يورو؛ والشطيرة أغلى من المشروب بـ ${d} يورو.`, `2 sandwiches (x) and 3 drinks (y) cost €${total}; a sandwich costs €${d} more than a drink.`),
                 lines: [line(LABELS.substitute, `2x+3y=${total}`), line(LABELS.substitute, `y-x=${d}`), line(LABELS.solutions, systemLatex(wy - d, wy))],
                 wrong: 1, error, fix: `x-y=${d}\\ \\to\\ ${systemLatex(x, y)}`, right: systemCode(x, y), reached: systemCode(wy - d, wy)
             }
