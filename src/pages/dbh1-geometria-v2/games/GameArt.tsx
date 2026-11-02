@@ -1,8 +1,12 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { GeometryGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { AreaArt } from './OwnGames'
 
 /** Small illustration of each geometry game, in the notebook style */
 export function GeometryGameArt({ game }: { game: GeometryGameId }) {
+    if (game === 'areas') return <AreaArt />
+    if (game === 'detective') return <DetectiveArt lines={['90° − 35° = 55°', 'c² = 3 + 4', 'A = 6 · 4 ÷ 2']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

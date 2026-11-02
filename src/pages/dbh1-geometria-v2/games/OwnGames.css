@@ -1,0 +1,7 @@
+/* Areas on the grid (1. DBH plane geometry): the shape it comes from fades in */
+.fraction-v2-games-card[data-game="areas"] { --game-tint: var(--blue-tint, #dde7f7); }
+.dbh1-source { animation: dbh1-source 0.8s ease-out both; }
+@keyframes dbh1-source { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+    .dbh1-source { animation: none; }
+}

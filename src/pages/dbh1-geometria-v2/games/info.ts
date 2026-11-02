@@ -5,7 +5,7 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
    unit progress id each level earns with its first star.
    ========================================================================== */
 
-export type GeometryGameId = 'race' | 'angles' | 'memory'
+export type GeometryGameId = 'race' | 'angles' | 'memory' | 'areas' | 'detective'
 
 export const GEOMETRY_GAME_RECORDS_KEY = 'matella-geometria-dbh1-game-records'
 
@@ -44,19 +44,43 @@ export const geometryGames: GameInfo<GeometryGameId>[] = [
             { progressId: 10302, stage: 'areas', title: { eu: 'Azalerak', es: 'Áreas', en: 'Areas', ar: 'المساحات' }, description: { eu: '6 · 4 ↔ 24', es: '6 · 4 ↔ 24', en: '6 · 4 ↔ 24', ar: '6 · 4 ↔ 24' } },
             { progressId: 10303, stage: 'pythagoras', title: { eu: 'Hipotenusak', es: 'Hipotenusas', en: 'Hypotenuses', ar: 'الأوتار' }, description: { eu: '√(3² + 4²) ↔ 5', es: '√(3² + 4²) ↔ 5', en: '√(3² + 4²) ↔ 5', ar: '√(3² + 4²) ↔ 5' } }
         ]
+    },
+    {
+        id: 'areas',
+        title: { eu: 'Azalerak sarean', es: 'Áreas en la cuadrícula', en: 'Areas on the grid', ar: 'المساحات على الشبكة' },
+        tagline: { eu: 'Aukeratu irudiaren azalera; gero, irudia nondik datorren: laukizuzena edo paralelogramoa.', es: 'Elige el área de la figura; luego, de dónde sale: el rectángulo o el paralelogramo.', en: 'Choose the area of the shape; then where it comes from: the rectangle or the parallelogram.', ar: 'اختر مساحة الشكل، ثم من أين يأتي: المستطيل أو متوازي الأضلاع.' },
+        skills: { eu: 'Irudi lauen azalerak', es: 'Áreas de figuras planas', en: 'Areas of plane shapes', ar: 'مساحات الأشكال المستوية' },
+        levels: [
+            { progressId: 10401, stage: 'areas', title: { eu: 'Paralelogramoak', es: 'Paralelogramos', en: 'Parallelograms', ar: 'متوازيات الأضلاع' }, description: { eu: 'Laukizuzenak eta paralelogramoak.', es: 'Rectángulos y paralelogramos.', en: 'Rectangles and parallelograms.', ar: 'المستطيلات ومتوازيات الأضلاع.' } },
+            { progressId: 10402, stage: 'areas', title: { eu: 'Triangeluak', es: 'Triángulos', en: 'Triangles', ar: 'المثلثات' }, description: { eu: 'Altuera kanpoan ere bai.', es: 'También con la altura fuera.', en: 'With the height outside too.', ar: 'والارتفاع خارج الشكل أيضًا.' } },
+            { progressId: 10403, stage: 'areas', title: { eu: 'Erronboak eta trapezioak', es: 'Rombos y trapecios', en: 'Rhombuses and trapezoids', ar: 'المعينات وأشباه المنحرف' }, description: { eu: 'Diagonalak eta bi oinarriak.', es: 'Diagonales y las dos bases.', en: 'Diagonals and the two bases.', ar: 'القطران والقاعدتان.' } }
+        ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Geometriaren detektibea', es: 'Detective de geometría', en: 'Geometry detective', ar: 'مخبر الهندسة' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: اكتشفه وقل ما نوع الخطأ.' },
+        skills: { eu: 'Geometrian akats tipikoak', es: 'Errores típicos de geometría', en: 'Common geometry mistakes', ar: 'الأخطاء الشائعة في الهندسة' },
+        levels: [
+            { progressId: 10501, stage: 'angles', title: { eu: 'Angeluak', es: 'Ángulos', en: 'Angles', ar: 'الزوايا' }, description: { eu: 'Osagarriak, betegarriak eta triangelua.', es: 'Complementarios, suplementarios y el triángulo.', en: 'Complementary, supplementary and the triangle.', ar: 'المتتامة والمتكاملة والمثلث.' } },
+            { progressId: 10502, stage: 'pythagoras', title: { eu: 'Pitagoras', es: 'Pitágoras', en: 'Pythagoras', ar: 'فيثاغورس' }, description: { eu: 'Karratuak, kenketa eta erroa.', es: 'Cuadrados, resta y raíz.', en: 'Squares, subtraction and the root.', ar: 'المربعات والطرح والجذر.' } },
+            { progressId: 10503, stage: 'areas', title: { eu: 'Azalerak eta luzerak', es: 'Áreas y longitudes', en: 'Areas and lengths', ar: 'المساحات والأطوال' }, description: { eu: 'Erdia, πr² eta unitate karratuak.', es: 'La mitad, πr² y las unidades cuadradas.', en: 'The half, πr² and square units.', ar: 'النصف وπr² والوحدات المربعة.' } }
+        ]
     }
 ]
 
 export const geometryGameProgressIds: number[] = levelProgressIds(geometryGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const geometryGameSlugs: Record<GeometryGameId, string> = { race: 'lasterketa', angles: 'angeluak', memory: 'memoria' }
+export const geometryGameSlugs: Record<GeometryGameId, string> = { race: 'lasterketa', angles: 'angeluak', memory: 'memoria', areas: 'azalerak', detective: 'detektibea' }
 
 export function geometryGameModeForPath(pathname: string): GeometryGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
     if (!game) return 'hub'
     if (['carrera', 'lasterketa'].includes(game)) return 'race'
     if (['angulos', 'angeluak'].includes(game)) return 'angles'
+    if (['azalerak', 'areas'].includes(game)) return 'areas'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     if (['memoria', 'memory'].includes(game)) return 'memory'
     return 'hub'
 }

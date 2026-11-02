@@ -8,11 +8,16 @@ import { GeometryGameArt } from './GameArt'
 import { GEOMETRY_GAME_RECORDS_KEY, geometryGameModeForPath, geometryGames, geometryGameSlugs, type GeometryGameId } from './info'
 import { GeometryRaceGame } from './RaceGame'
 import './GeometryGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { createGeometryDetectiveCases, GEOMETRY_DETECTIVE_CASES, geometryDetectiveNames, geometryDetectiveTips } from './detective'
+import { AreaGame } from './OwnGames'
 
 const memoryGame = geometryGames.find((game) => game.id === 'memory')!
 
 const components: Record<GeometryGameId, (props: GameProps) => JSX.Element> = {
     race: GeometryRaceGame,
+    areas: (props) => <AreaGame {...props} game={geometryGames.find((game) => game.id === 'areas')!} art={<GeometryGameArt game="areas" />} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: geometryGames.find((game) => game.id === 'detective')!, art: <GeometryGameArt game="detective" />, cases: GEOMETRY_DETECTIVE_CASES, createCases: createGeometryDetectiveCases, names: geometryDetectiveNames, tips: geometryDetectiveTips }} />,
     angles: AngleGame,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <GeometryGameArt game="memory" />, pairs: GEOMETRY_MEMORY_PAIRS, createBoard: createGeometryMemoryBoard }} />
 }

@@ -16,7 +16,7 @@ function evaluate(latex: string): number {
 }
 
 test('geometria 1. DBH games: levels, ids and routes', () => {
-    assert.equal(geometryGames.length, 3)
+    assert.equal(geometryGames.length, 5)
     assert.equal(geometryGames[0].levels.length, GEOMETRY_RACE_CIRCUITS)
     assert.equal(geometryGames.find((game) => game.id === 'angles')!.levels.length, angleLevels.length)
     assert.equal(geometryGames.find((game) => game.id === 'memory')!.levels.length, geometryMemoryLevels.length)

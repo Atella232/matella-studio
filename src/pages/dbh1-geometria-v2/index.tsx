@@ -35,7 +35,7 @@ const geometriaIntroUnit: UnitDefinition = {
         render: (props) => <GeometryIntroLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Hiru joko: lasterketa, angelu-begia eta memoria.', es: 'Tres juegos: carrera, ojo de ángulos y memoria.', en: 'Three games: race, eye for angles and memory.', ar: 'ثلاث ألعاب: السباق وعين الزوايا والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, angeluak, memoria, azalerak sarean eta geometriaren detektibea.', es: 'Cinco juegos: carrera, ángulos, memoria, áreas en la cuadrícula y detective de geometría.', en: 'Five games: race, angles, memory, areas on the grid and geometry detective.', ar: 'خمس ألعاب: السباق والزوايا والذاكرة والمساحات على الشبكة ومخبر الهندسة.' },
         progressIds: geometryGameProgressIds,
         recordsKey: GEOMETRY_GAME_RECORDS_KEY,
         render: (props) => <GeometryIntroGames {...props} />

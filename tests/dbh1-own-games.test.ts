@@ -14,6 +14,8 @@ import { amountFor, createGridRounds, createRecipeRounds, GRID_COLUMNS, GRID_ROU
 import { createProportionDetectiveCases, proportionDetectiveLevels, proportionDetectiveNames, proportionDetectiveTips } from '../src/pages/dbh1-proportzionaltasuna-v2/games/detective.ts'
 import { COEFFICIENT_LIMIT, createTilesRounds, KINDS, LINE_MAX, polyLatex, termsLatex as tilesLatex, tileCounts, TILES_ROUNDS } from '../src/pages/dbh1-aljebra-v2/games/tilesRounds.ts'
 import { ALGEBRA_DETECTIVE_X, algebraDetectiveLevels, algebraDetectiveNames, algebraDetectiveTips, createAlgebraDetectiveCases } from '../src/pages/dbh1-aljebra-v2/games/detective.ts'
+import { AREA_ROUNDS, createAreaRounds, GRID } from '../src/pages/dbh1-geometria-v2/games/areaRounds.ts'
+import { createGeometryDetectiveCases, geometryDetectiveLevels, geometryDetectiveNames, geometryDetectiveTips } from '../src/pages/dbh1-geometria-v2/games/detective.ts'
 import { checkDetective, endValue, renders } from './helpers/ownGamesCheck.ts'
 
 /* The own games of the 1. DBH units */
@@ -247,4 +249,34 @@ test('1. DBH algebra tiles: the answer is the sum of each kind, never all zero, 
 test('1. DBH algebra detective: the errors of each level, the fix and the last line on their values at x = 2', () => {
     const atX = (latex: string) => endValue(latex.replace(/(\d)x/g, `$1\\cdot (${ALGEBRA_DETECTIVE_X})`).replace(/x/g, `(${ALGEBRA_DETECTIVE_X})`))
     checkDetective(createAlgebraDetectiveCases, algebraDetectiveLevels, algebraDetectiveNames, algebraDetectiveTips, 1e-9, undefined, (latex) => (/^x=/.test(latex.split('\\ \\to\\ ').pop()!) ? endValue(latex) : atX(latex)))
+})
+
+test('1. DBH areas on the grid: the area is the shoelace area, the shape and the shape it comes from fit the grid', () => {
+    const shoelace = (points: Array<[number, number]>) => Math.abs(points.reduce((sum, [x, y], index) => {
+        const [nx, ny] = points[(index + 1) % points.length]
+        return sum + x * ny - nx * y
+    }, 0)) / 2
+    for (let level = 0; level < 3; level += 1) {
+        const kinds = new Set<string>()
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const rounds = createAreaRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, AREA_ROUNDS)
+            for (const { kind, points, area, options, base } of rounds) {
+                kinds.add(kind)
+                assert.equal(shoelace(points), area)
+                assert.ok(points.every(([x, y]) => x >= 0 && x <= GRID.columns && y >= 0 && y <= GRID.rows), kind)
+                assert.ok(options.includes(area) && new Set(options).size === options.length && options.length >= 3 && options.every((option) => Number.isInteger(option) && option > 0))
+                if (kind === 'triangle') {
+                    const apex = points[2][0]
+                    assert.ok(apex + base <= GRID.columns || apex - base >= 0)
+                }
+                if (kind === 'trapezoid') assert.ok(points[1][0] + base <= GRID.columns && points[2][0] + (points[1][0] - points[0][0]) <= GRID.columns)
+            }
+        }
+        assert.deepEqual([...kinds].sort(), [['parallelogram', 'rectangle'], ['triangle'], ['rhombus', 'trapezoid']][level])
+    }
+})
+
+test('1. DBH geometry detective: the errors of each level, the fix and the last line on their values', () => {
+    checkDetective(createGeometryDetectiveCases, geometryDetectiveLevels, geometryDetectiveNames, geometryDetectiveTips, 1e-9, undefined, (latex) => endValue(latex.replace(/\^\{\\circ\}/g, '')))
 })
