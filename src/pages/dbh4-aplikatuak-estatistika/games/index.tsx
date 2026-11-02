@@ -7,11 +7,17 @@ import { StatisticsGameArt } from './GameArt'
 import { STATISTICS_GAME_RECORDS_KEY, statisticsGameModeForPath, statisticsGames, statisticsGameSlugs, type StatisticsGameId } from './info'
 import { StatisticsRaceGame } from './RaceGame'
 import '../../dbh1-aljebra-v2/games/AlgebraGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { BoxGame, CloudGame } from '../../dbh4-games/StatisticsGames'
+import { createStatsDetectiveCases, STATS_DETECTIVE_CASES, statsDetectiveNames, statsDetectiveTips } from '../../dbh4-games/statsDetective'
 
 const memoryGame = statisticsGames.find((game) => game.id === 'memory')!
 
 const components: Record<StatisticsGameId, (props: GameProps) => JSX.Element> = {
     race: StatisticsRaceGame,
+    box: (props) => <BoxGame {...props} game={statisticsGames.find((game) => game.id === 'box')!} art={<StatisticsGameArt game="box" />} />,
+    cloud: (props) => <CloudGame {...props} game={statisticsGames.find((game) => game.id === 'cloud')!} art={<StatisticsGameArt game="cloud" />} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: statisticsGames.find((game) => game.id === 'detective')!, art: <StatisticsGameArt game="detective" />, cases: STATS_DETECTIVE_CASES, createCases: createStatsDetectiveCases('applied'), names: statsDetectiveNames, tips: statsDetectiveTips }} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <StatisticsGameArt game="memory" />, pairs: STATISTICS_MEMORY_PAIRS, createBoard: createStatisticsMemoryBoard }} />
 }
 

@@ -12,3 +12,7 @@ Phase 1 e4fc4b5 (diag 6101–6108, practice 1–20, challenges 101–115, bank 1
 Gotchas: lab boards are 640 wide and shrink to ~330 px on phones, so board text needs size ≥ 20; long data lists in race prompts must be one $…$ per item or KaTeX won't wrap.
 
 Next 4. DBH akademikoak units: combinatoria, probabilidad.
+
+## Own games (2026-11-02)
+
+Build the box plot (82301–3), guess the correlation (82401–3) and a statistics detective (82501–3). Details in `dbh4-own-games.md`.

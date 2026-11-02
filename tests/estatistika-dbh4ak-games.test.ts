@@ -68,7 +68,7 @@ function expected(question: StatisticsAkRaceQuestion): number {
 }
 
 test('estatistika 4. DBH ak games: levels, ids and routes', () => {
-    assert.equal(statisticsAkGames.length, 2)
+    assert.equal(statisticsAkGames.length, 5)
     assert.equal(statisticsAkGames[0].levels.length, STATISTICS_AK_RACE_CIRCUITS)
     assert.equal(statisticsAkGames[1].levels.length, statisticsAkMemoryLevels.length)
     assert.equal(new Set(statisticsAkGameProgressIds).size, statisticsAkGameProgressIds.length)

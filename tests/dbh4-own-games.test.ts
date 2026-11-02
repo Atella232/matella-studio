@@ -20,6 +20,8 @@ import { createPourRounds, isRound, POUR_ROUNDS, tripleVolume, volumeLatex, volu
 import { createTilesRounds, floorArea, floorCells, outlineArea, sideLengths, tileArea, TILES_ROUNDS } from '../src/pages/dbh4-games/tiles.ts'
 import { CONTEXT_GROWTH, createMapRounds, createScaleRounds, createTowerRounds, MAP_ROUNDS, mapPrompt, RULER_CM, SCALE_ROUNDS, scaleFactor, scalePrompt, TOWER_MAX, TOWER_ROUNDS, towerLayout } from '../src/pages/dbh4-games/similarity.ts'
 import { createGeometryDetectiveCases, geometryDetectiveLevels, geometryDetectiveNames, geometryDetectiveTips } from '../src/pages/dbh4-games/geometryDetective.ts'
+import { BOX_MAX, BOX_MIN, BOX_ROUNDS, CLOUD_ROUNDS, createBoxRounds, createCloudRounds, estimateRight, kindOf, percentilePlaces } from '../src/pages/dbh4-games/statistics.ts'
+import { createStatsDetectiveCases, statsDetectiveLevels, statsDetectiveNames, statsDetectiveTips } from '../src/pages/dbh4-games/statsDetective.ts'
 import { checkTexts, renders } from './helpers/ownGamesCheck.ts'
 import { evaluate } from './helpers/realsRaceCheck.ts'
 
@@ -525,5 +527,71 @@ test('4. DBH the map scale: the real distance from the scale, B on the ruler, ha
 
 test('4. DBH geometry detective: areas, volumes and similarity, each level with its own errors', () => {
     for (const track of ['areas', 'academic', 'similarity'] as const) checkDetective(createGeometryDetectiveCases(track), geometryDetectiveLevels[track], geometryDetectiveNames, geometryDetectiveTips)
+})
+
+/** The textbook quartile, worked out again: place N·p/100; not whole → the next datum; whole → the mean with the next */
+function bookQuartile(sorted: number[], p: number): number {
+    const place = (sorted.length * p) / 100
+    if (Number.isInteger(place)) return place >= sorted.length ? sorted[sorted.length - 1] : (sorted[place - 1] + sorted[place]) / 2
+    return sorted[Math.ceil(place) - 1]
+}
+
+test('4. DBH build the box plot: the textbook quartiles, the places behind them, five different marks, the data of each level', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createBoxRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, BOX_ROUNDS)
+            for (const { data, q1, median, q3 } of rounds) {
+                const n = data.length
+                assert.deepEqual(data, [...data].sort((a, b) => a - b))
+                assert.ok(data[0] >= BOX_MIN && data[n - 1] <= BOX_MAX)
+                assert.deepEqual([q1, median, q3], [25, 50, 75].map((p) => bookQuartile(data, p)))
+                for (const [p, value] of [[25, q1], [50, median], [75, q3]]) {
+                    const places = percentilePlaces(n, p)
+                    assert.equal(places.reduce((sum, place) => sum + data[place - 1], 0) / places.length, value)
+                }
+                // The steppers start on the smallest datum, which is none of the marks
+                assert.ok(data[0] < q1 && q1 < median && median < q3 && q3 < data[n - 1])
+                for (const value of [q1, median, q3]) assert.ok(Number.isInteger(value * 2))
+                if (level === 0) assert.ok(n % 2 === 1 && [q1, median, q3].every(Number.isInteger))
+                if (level === 1) assert.ok(n % 2 === 0 && n <= 16)
+                if (level === 2) assert.ok(n >= 17)
+            }
+        }
+    }
+})
+
+test('4. DBH guess the correlation: r recomputed, its band, the kinds of each level, the estimate inside the plane', () => {
+    for (let level = 0; level < 3; level += 1) {
+        const kinds = new Set<string>()
+        for (let seed = 1; seed <= 100; seed += 1) {
+            const rounds = createCloudRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, CLOUD_ROUNDS)
+            for (const round of rounds) {
+                kinds.add(round.kind)
+                const n = round.points.length
+                const [mx, my] = [0, 1].map((index) => round.points.reduce((sum, point) => sum + point[index], 0) / n)
+                const sxy = round.points.reduce((sum, [x, y]) => sum + (x - mx) * (y - my), 0)
+                const sxx = round.points.reduce((sum, [x]) => sum + (x - mx) ** 2, 0)
+                const syy = round.points.reduce((sum, [, y]) => sum + (y - my) ** 2, 0)
+                assert.ok(Math.abs(sxy / Math.sqrt(sxx * syy) - round.r) < 1e-9)
+                assert.equal(kindOf(round.r), round.kind)
+                assert.ok(Math.abs(round.slope - sxy / sxx) < 1e-9 && Math.abs(round.intercept - (my - round.slope * mx)) < 1e-9)
+                for (const [x, y] of round.points) assert.ok(x >= 0 && x <= 10 && y >= 0 && y <= 10)
+                if (level < 2) assert.equal(round.ask, null)
+                else {
+                    assert.ok(round.ask !== null && round.ask >= 2 && round.ask <= 8 && round.kind.startsWith('strong'))
+                    const predicted = round.slope * round.ask + round.intercept
+                    assert.ok(predicted >= 1 && predicted <= 9)
+                    assert.ok(estimateRight(round, Math.round(predicted)) && !estimateRight(round, Math.round(predicted) + 3))
+                }
+            }
+        }
+        assert.deepEqual([...kinds].sort(), [['none', 'strong-negative', 'strong-positive'], ['none', 'strong-negative', 'strong-positive', 'weak-negative', 'weak-positive'], ['strong-negative', 'strong-positive']][level])
+    }
+})
+
+test('4. DBH statistics detective: grouped data, quartiles, spread, samples and regression', () => {
+    for (const track of ['applied', 'academic'] as const) checkDetective(createStatsDetectiveCases(track), statsDetectiveLevels[track], statsDetectiveNames, statsDetectiveTips)
 })
 

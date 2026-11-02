@@ -5,7 +5,7 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
    levels and the unit progress id each level earns with its first star.
    ========================================================================== */
 
-export type StatisticsAkGameId = 'race' | 'memory'
+export type StatisticsAkGameId = 'race' | 'memory' | 'box' | 'cloud' | 'detective'
 
 export const STATISTICS_AK_GAME_RECORDS_KEY = 'matella-estatistika-dbh4ak-game-records'
 
@@ -33,18 +33,54 @@ export const statisticsAkGames: GameInfo<StatisticsAkGameId>[] = [
             { progressId: 82202, stage: 'centre', title: { eu: 'Batez bestekoak', es: 'Medias', en: 'Means', ar: 'المتوسطات' }, description: { eu: '3, 5, 10 ↔ 6', es: '3, 5, 10 ↔ 6', en: '3, 5, 10 ↔ 6', ar: '3, 5, 10 ↔ 6' } },
             { progressId: 82203, stage: 'spread', title: { eu: 'Aldakuntza', es: 'Variación', en: 'Variation', ar: 'الاختلاف' }, description: { eu: 'σ = 3, x̄ = 12 ↔ 0,25', es: 'σ = 3, x̄ = 12 ↔ 0,25', en: 'σ = 3, x̄ = 12 ↔ 0.25', ar: 'σ = 3، x̄ = 12 ↔ 0.25' } }
         ]
+    },
+    {
+        id: 'box',
+        title: { eu: 'Eraiki kaxa-diagrama', es: 'Construye el diagrama de caja', en: 'Build the box plot', ar: 'ارسم مخطط الصندوق' },
+        tagline: { eu: 'Datuak puntuetan: jarri Q₁, mediana eta Q₃, eta kaxa mugituko da.', es: 'Datos en puntos: coloca Q₁, la mediana y Q₃, y la caja se moverá.', en: 'Data as dots: place Q₁, the median and Q₃, and the box moves.', ar: 'بيانات على شكل نقاط: ضع Q₁ والوسيط وQ₃ فيتحرك الصندوق.' },
+        skills: { eu: 'Kuartilak eta kaxa-diagramak', es: 'Cuartiles y diagramas de caja', en: 'Quartiles and box plots', ar: 'الربيعيات ومخططات الصندوق' },
+        levels: [
+            { progressId: 82301, stage: 'position', title: { eu: 'Datu kopuru bakoitia', es: 'Número impar de datos', en: 'An odd number of data', ar: 'عدد فردي من البيانات' }, description: { eu: 'Kuartilak datuak dira.', es: 'Los cuartiles son datos.', en: 'The quartiles are data.', ar: 'الربيعيات قيم من البيانات.' } },
+            { progressId: 82302, stage: 'position', title: { eu: 'Datu kopuru bikoitia', es: 'Número par de datos', en: 'An even number of data', ar: 'عدد زوجي من البيانات' }, description: { eu: 'Batzuetan, bi daturen batez bestekoa.', es: 'A veces, la media de dos datos.', en: 'Sometimes the mean of two data.', ar: 'أحيانًا متوسط قيمتين.' } },
+            { progressId: 82303, stage: 'position', title: { eu: 'Datu asko', es: 'Muchos datos', en: 'Many data', ar: 'بيانات كثيرة' }, description: { eu: 'Errepikatutako balioak.', es: 'Valores repetidos.', en: 'Repeated values.', ar: 'قيم متكررة.' } }
+        ]
+    },
+    {
+        id: 'cloud',
+        title: { eu: 'Asmatu korrelazioa', es: 'Adivina la correlación', en: 'Guess the correlation', ar: 'خمّن الارتباط' },
+        tagline: { eu: 'Puntu-hodei bat: nolakoa da korrelazioa? Gero, erregresio-zuzena eta r agertuko dira.', es: 'Una nube de puntos: ¿cómo es la correlación? Luego aparecen la recta de regresión y r.', en: 'A scatter plot: what is the correlation like? Then the regression line and r appear.', ar: 'سحابة نقاط: كيف هو الارتباط؟ ثم يظهر مستقيم الانحدار وr.' },
+        skills: { eu: 'Korrelazioa eta erregresioa', es: 'Correlación y regresión', en: 'Correlation and regression', ar: 'الارتباط والانحدار' },
+        levels: [
+            { progressId: 82401, stage: 'two', title: { eu: 'Zeinua', es: 'El signo', en: 'The sign', ar: 'الإشارة' }, description: { eu: 'Positiboa, ez dago edo negatiboa.', es: 'Positiva, nula o negativa.', en: 'Positive, none or negative.', ar: 'موجب أو لا ارتباط أو سالب.' } },
+            { progressId: 82402, stage: 'two', title: { eu: 'Sendoa ala ahula', es: 'Fuerte o débil', en: 'Strong or weak', ar: 'قوي أم ضعيف' }, description: { eu: 'Bost aukera.', es: 'Cinco opciones.', en: 'Five options.', ar: 'خمسة خيارات.' } },
+            { progressId: 82403, stage: 'two', title: { eu: 'Estimazioak', es: 'Estimaciones', en: 'Estimates', ar: 'التقديرات' }, description: { eu: 'Estimatu ŷ begiz.', es: 'Estima ŷ a ojo.', en: 'Estimate ŷ by eye.', ar: 'قدّر ŷ بالعين.' } }
+        ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Estatistikaren detektibea', es: 'Detective de estadística', en: 'Statistics detective', ar: 'مخبر الإحصاء' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: اكتشفه وقل ما نوع الخطأ.' },
+        skills: { eu: 'Estatistikako akats tipikoak', es: 'Errores típicos de estadística', en: 'Common mistakes in statistics', ar: 'الأخطاء الشائعة في الإحصاء' },
+        levels: [
+            { progressId: 82501, stage: 'centre', title: { eu: 'Zentralizazioa', es: 'Centralización', en: 'Centre', ar: 'النزعة المركزية' }, description: { eu: 'Datu taldekatuak, taldeak eta laginak.', es: 'Datos agrupados, grupos y muestras.', en: 'Grouped data, groups and samples.', ar: 'البيانات المجمّعة والمجموعات والعينات.' } },
+            { progressId: 82502, stage: 'position', title: { eu: 'Posizioa', es: 'Posición', en: 'Position', ar: 'الموقع' }, description: { eu: 'Kuartilak, pertzentilak eta DM.', es: 'Cuartiles, percentiles y DM.', en: 'Quartiles, percentiles and mean deviation.', ar: 'الربيعيات والمئينات والانحراف المتوسط.' } },
+            { progressId: 82503, stage: 'spread', title: { eu: 'Sakabanatzea eta erregresioa', es: 'Dispersión y regresión', en: 'Spread and regression', ar: 'التشتت والانحدار' }, description: { eu: 'Bariantza, CV eta erregresio-zuzena.', es: 'Varianza, CV y recta de regresión.', en: 'Variance, CV and the regression line.', ar: 'التباين وCV ومستقيم الانحدار.' } }
+        ]
     }
 ]
 
 export const statisticsAkGameProgressIds: number[] = levelProgressIds(statisticsAkGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const statisticsAkGameSlugs: Record<StatisticsAkGameId, string> = { race: 'lasterketa', memory: 'memoria' }
+export const statisticsAkGameSlugs: Record<StatisticsAkGameId, string> = { race: 'lasterketa', memory: 'memoria', box: 'kaxa', cloud: 'korrelazioa', detective: 'detektibea' }
 
 export function statisticsAkGameModeForPath(pathname: string): StatisticsAkGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
     if (!game) return 'hub'
     if (['carrera', 'lasterketa'].includes(game)) return 'race'
+    if (['kaxa', 'caja'].includes(game)) return 'box'
+    if (['korrelazioa', 'correlacion'].includes(game)) return 'cloud'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     if (['memoria', 'memory'].includes(game)) return 'memory'
     return 'hub'
 }

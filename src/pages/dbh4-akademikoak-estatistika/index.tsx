@@ -41,7 +41,7 @@ const estatistikaUnit: UnitDefinition = {
         render: (props) => <StatisticsAkLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, eraiki kaxa-diagrama, asmatu korrelazioa, estatistikaren detektibea eta memoria.', es: 'Cinco juegos: carrera, construye el diagrama de caja, adivina la correlación, detective de estadística y memoria.', en: 'Five games: race, build the box plot, guess the correlation, statistics detective and memory.', ar: 'خمس ألعاب: السباق وارسم مخطط الصندوق وخمّن الارتباط ومخبر الإحصاء والذاكرة.' },
         progressIds: statisticsAkGameProgressIds,
         recordsKey: STATISTICS_AK_GAME_RECORDS_KEY,
         render: (props) => <StatisticsAkGames {...props} />

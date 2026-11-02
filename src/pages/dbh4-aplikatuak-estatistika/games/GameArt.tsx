@@ -1,8 +1,13 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { StatisticsGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { StatisticsArt } from '../../dbh4-games/StatisticsGames'
 
 /** Small illustration of each game; the art is the same in every language */
 export function StatisticsGameArt({ game }: { game: StatisticsGameId }) {
+    if (game === 'box') return <StatisticsArt game="box" />
+    if (game === 'cloud') return <StatisticsArt game="cloud" />
+    if (game === 'detective') return <DetectiveArt lines={['Q₁ = x₂ ?', 'σ² = Σx²/N − x̄²', 'CV = σ / x̄']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">
