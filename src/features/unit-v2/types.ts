@@ -45,6 +45,16 @@ export interface LessonNeed {
     title: LocalizedText
 }
 
+/** «Check it»: one quick question at the end of the lesson; answering it right marks the lesson as understood */
+export interface LessonCheck {
+    prompt: LocalizedText
+    /** Three short answers: one right and, as a rule, one that is the lesson's typical mistake */
+    options: LocalizedText[]
+    correctIndex: number
+    /** Why the right answer is right, shown once it is chosen */
+    explanation: LocalizedText
+}
+
 /** A typical slip of the lesson: what students often write, and the right way */
 export interface LessonMistake {
     wrong: LocalizedText
@@ -74,6 +84,8 @@ export interface UnitTopic {
     takeaway: LocalizedText
     /** The typical mistake of the lesson, shown before the key idea */
     mistake?: LessonMistake
+    /** Quick question that replaces «I understand» until it is answered right */
+    check?: LessonCheck
     /** Optional model drawn under the explanation (a number line, a thermometer…) */
     figure?: (language: UnitLanguage) => ReactNode
     /**

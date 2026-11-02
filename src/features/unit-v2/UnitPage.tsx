@@ -5,6 +5,7 @@ import { MathText } from '../../components/MathText'
 import { DiagnosticQuiz } from './Diagnostic'
 import { Icon } from './icons'
 import { FitMath, LessonCases, LessonFigure, LessonMistakeBox, LessonSteps } from './LessonExtras'
+import { LessonCheckCard } from './LessonCheck'
 import { LessonNeeds } from './LessonNeeds'
 import { UnitSummary } from './UnitSummary'
 import { PracticeArea, PracticeDeck } from './Practice'
@@ -488,13 +489,26 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                             <p><MathText text={l(currentTopic.takeaway)} /></p>
                         </div>
                     </aside>
+                    {currentTopic.check && (
+                        <LessonCheckCard
+                            key={currentTopic.id}
+                            check={currentTopic.check}
+                            language={language}
+                            learned={isLearned}
+                            hasMistake={Boolean(currentTopic.mistake)}
+                            onPass={() => learned.addId(currentTopic.id)}
+                        />
+                    )}
                     <div className="fraction-v2-lesson-actions">
-                        <button type="button" className={`fraction-v2-primary ${isLearned ? 'done' : ''}`} onClick={() => learned.addId(currentTopic.id)} disabled={isLearned}>
-                            {isLearned && <Icon name="check" size={18} strokeWidth={3} />}
-                            {isLearned
-                                ? l({ eu: 'Ulertuta', es: 'Entendido', en: 'Got it', ar: 'تم الفهم' })
-                                : l({ eu: 'Ulertu dut', es: 'Lo he entendido', en: 'I understand', ar: 'فهمت' })}
-                        </button>
+                        {/* With a quick question, the lesson is understood when it is answered right */}
+                        {(!currentTopic.check || isLearned) && (
+                            <button type="button" className={`fraction-v2-primary ${isLearned ? 'done' : ''}`} onClick={() => learned.addId(currentTopic.id)} disabled={isLearned}>
+                                {isLearned && <Icon name="check" size={18} strokeWidth={3} />}
+                                {isLearned
+                                    ? l({ eu: 'Ulertuta', es: 'Entendido', en: 'Got it', ar: 'تم الفهم' })
+                                    : l({ eu: 'Ulertu dut', es: 'Lo he entendido', en: 'I understand', ar: 'فهمت' })}
+                            </button>
+                        )}
                         {sections.includes('practice') && (
                             <button type="button" className="fraction-v2-secondary" onClick={() => { setLastTopicId(currentTopic.id); navigate('practice', currentTopic.id) }}>
                                 {l({ eu: 'Praktikatu', es: 'Practicar', en: 'Practice', ar: 'تدرّب' })}

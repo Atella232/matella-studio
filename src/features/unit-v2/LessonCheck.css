@@ -1,0 +1,110 @@
+/* «Check it»: the quick question at the end of a lesson */
+
+.lesson-check {
+    display: grid;
+    gap: 12px;
+    padding: 18px 20px;
+    border: 2px solid var(--stage);
+    border-radius: 16px;
+    background: var(--stage-soft);
+}
+
+.lesson-check-label {
+    color: var(--stage-ink);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.fraction-v2 .lesson-check-prompt {
+    margin: 0;
+    color: var(--ink);
+    font-size: 19px;
+    line-height: 1.5;
+}
+
+/* One answer per row, so each one fits on a phone */
+.lesson-check-options {
+    display: grid;
+    gap: 8px;
+}
+
+.lesson-check-options button {
+    min-height: 48px;
+    padding: 10px 16px;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    color: var(--ink);
+    background: var(--card);
+    font: inherit;
+    font-size: 18px;
+    text-align: start;
+    cursor: pointer;
+}
+
+.lesson-check-options button:hover:not(:disabled) {
+    background: var(--paper-deep);
+}
+
+.lesson-check-options button:disabled {
+    cursor: default;
+}
+
+.lesson-check-options button.wrong {
+    border-color: var(--error);
+    color: var(--ink-soft);
+    background: var(--error-tint);
+    text-decoration: line-through;
+    text-decoration-color: var(--error);
+}
+
+.lesson-check-options button.right {
+    border-color: var(--success);
+    background: var(--success-tint);
+    font-weight: 700;
+}
+
+.fraction-v2 .lesson-check-feedback {
+    margin: 0;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+.lesson-check-feedback.right {
+    color: var(--ink);
+    background: var(--success-tint);
+}
+
+.lesson-check-feedback.wrong {
+    color: var(--ink);
+    background: var(--error-tint);
+}
+
+.lesson-check-link {
+    padding: 0;
+    border: 0;
+    color: var(--error-ink);
+    background: none;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+@media (max-width: 760px) {
+    .lesson-check {
+        padding: 14px;
+    }
+
+    .fraction-v2 .lesson-check-prompt {
+        font-size: 17px;
+    }
+
+    .lesson-check-options button {
+        font-size: 17px;
+    }
+}
