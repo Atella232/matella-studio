@@ -1,3 +1,4 @@
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { MathText } from '../../components/MathText'
 import { Icon } from './icons'
 import { pickMaybeText, pickText, type LessonMistake, type LessonStep, type UnitLanguage } from './types'
@@ -11,7 +12,7 @@ export function LessonCases({ cases, language }: { cases: LessonStep[]; language
                 <li key={index}>
                     {item.title && <strong><MathText text={pickText(language, item.title)} /></strong>}
                     <p><MathText text={pickText(language, item.text)} /></p>
-                    {item.math && <div className="lesson-cases-math"><MathText text={pickMaybeText(language, item.math)} /></div>}
+                    {item.math && <FitMath className="lesson-cases-math" text={pickMaybeText(language, item.math)} />}
                 </li>
             ))}
         </ul>
@@ -33,4 +34,163 @@ export function LessonMistakeBox({ mistake, language }: { mistake: LessonMistake
             </p>
         </aside>
     )
+}
+
+/**
+ * A formula block that never gets cut on a phone: when the formula is wider
+ * than its box, the font shrinks (down to 60 %, never under 12 px); only
+ * then does the box scroll.
+ */
+export function FitMath({ text, className, as: Tag = 'div' }: { text: string; className: string; as?: 'div' | 'figure' }) {
+    const boxRef = useRef<HTMLElement | null>(null)
+
+    useLayoutEffect(() => {
+        const box = boxRef.current
+        if (!box) return
+        let lastWidth = -1
+        const fit = () => {
+            box.style.fontSize = ''
+            const base = parseFloat(getComputedStyle(box).fontSize)
+            const floor = Math.max(base * 0.6, 12)
+            let size = base
+            // Twice: KaTeX keeps some fixed widths, so one proportional step can fall a little short
+            for (let pass = 0; pass < 2; pass++) {
+                const ratio = overflowRatio(box)
+                if (ratio >= 1 || size <= floor) break
+                size = Math.max(floor, size * ratio * 0.98)
+                box.style.fontSize = `${size}px`
+            }
+        }
+        // Only a change of width matters: the shrinking itself changes the height
+        const observer = new ResizeObserver((entries) => {
+            const width = entries[0].contentRect.width
+            if (width === lastWidth) return
+            lastWidth = width
+            fit()
+        })
+        observer.observe(box)
+        // KaTeX fonts change the widths when they arrive
+        let active = true
+        void document.fonts?.ready.then(() => { if (active) fit() })
+        return () => {
+            active = false
+            observer.disconnect()
+        }
+    }, [text])
+
+    return (
+        <Tag className={className} ref={(node: HTMLElement | null) => { boxRef.current = node }}>
+            <MathText text={text} />
+        </Tag>
+    )
+}
+
+/** How much the widest piece of math must shrink to fit its box (1 when it already fits) */
+function overflowRatio(box: HTMLElement): number {
+    const scrollers = [box, ...box.querySelectorAll<HTMLElement>('.math-token')]
+    let ratio = 1
+    for (const element of scrollers) {
+        if (element.clientWidth > 0 && element.scrollWidth > element.clientWidth + 1) {
+            ratio = Math.min(ratio, element.clientWidth / element.scrollWidth)
+        }
+    }
+    return ratio
+}
+
+/**
+ * The drawing of a lesson. It always fits the width of the lesson, so
+ * nothing is hidden; when that makes it much smaller than it was drawn, an
+ * «Enlarge» button opens it full screen, turned sideways on a phone held
+ * upright so that it uses the long side of the screen.
+ */
+export function LessonFigure({ children, language }: { children: ReactNode; language: UnitLanguage }) {
+    const l = (text: { eu: string; es: string; en: string; ar: string }) => pickText(language, text)
+    const boxRef = useRef<HTMLDivElement>(null)
+    const openerRef = useRef<HTMLButtonElement>(null)
+    const closeRef = useRef<HTMLButtonElement>(null)
+    const [small, setSmall] = useState(false)
+    const [zoom, setZoom] = useState<{ width: number; rotated: boolean } | null>(null)
+
+    useEffect(() => {
+        const box = boxRef.current
+        if (!box) return
+        // The first observation arrives right after observe(), so this also measures the first time
+        const observer = new ResizeObserver(() => {
+            const svg = box.querySelector('svg')
+            const drawn = svg?.viewBox.baseVal?.width ?? 0
+            setSmall(svg !== null && drawn > 0 && svg.getBoundingClientRect().width < drawn * 0.8)
+        })
+        observer.observe(box)
+        return () => observer.disconnect()
+    }, [])
+
+    const isOpen = zoom !== null
+
+    useEffect(() => {
+        if (!isOpen) return
+        const opener = openerRef.current
+        const previousOverflow = document.body.style.overflow
+        document.body.style.overflow = 'hidden'
+        closeRef.current?.focus()
+        const onKey = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') setZoom(null)
+        }
+        // Turning the phone or resizing the window lays the drawing out again
+        const onResize = () => setZoom(zoomLayout(boxRef.current))
+        document.addEventListener('keydown', onKey)
+        window.addEventListener('resize', onResize)
+        return () => {
+            document.body.style.overflow = previousOverflow
+            document.removeEventListener('keydown', onKey)
+            window.removeEventListener('resize', onResize)
+            opener?.focus()
+        }
+    }, [isOpen])
+
+    const enlargeLabel = l({ eu: 'Handitu marrazkia', es: 'Ampliar el dibujo', en: 'Enlarge the drawing', ar: 'كبّر الرسم' })
+
+    return (
+        <div className={`fraction-v2-lesson-figure ${small ? 'lesson-figure-small' : ''}`} ref={boxRef}>
+            <div className="lesson-figure-drawing" onClick={small ? () => setZoom(zoomLayout(boxRef.current)) : undefined}>
+                {children}
+            </div>
+            {small && (
+                <button type="button" className="lesson-figure-enlarge" ref={openerRef} onClick={() => setZoom(zoomLayout(boxRef.current))} aria-label={enlargeLabel}>
+                    <Icon name="expand" size={18} strokeWidth={2.4} />
+                    <span>{l({ eu: 'Handitu', es: 'Ampliar', en: 'Enlarge', ar: 'تكبير' })}</span>
+                </button>
+            )}
+            {zoom && (
+                <div className="lesson-figure-zoom" role="dialog" aria-modal="true" aria-label={enlargeLabel} onClick={(event) => { if (event.target === event.currentTarget) setZoom(null) }}>
+                    <button type="button" className="lesson-figure-zoom-close" ref={closeRef} onClick={() => setZoom(null)}>
+                        <Icon name="close" size={20} strokeWidth={2.6} />
+                        <span>{l({ eu: 'Itxi', es: 'Cerrar', en: 'Close', ar: 'إغلاق' })}</span>
+                    </button>
+                    <div
+                        className={`lesson-figure-zoom-drawing ${zoom.rotated ? 'rotated' : ''}`}
+                        style={{ '--zoom-width': `${zoom.width}px` } as CSSProperties}
+                    >
+                        {children}
+                    </div>
+                    {zoom.rotated && (
+                        <p className="lesson-figure-zoom-hint">{l({ eu: 'Biratu mugikorra', es: 'Gira el móvil', en: 'Turn your phone', ar: 'أدِر هاتفك' })}</p>
+                    )}
+                </div>
+            )}
+        </div>
+    )
+}
+
+/** Width of the enlarged drawing, and whether to turn it to use the long side of an upright phone */
+function zoomLayout(box: HTMLElement | null): { width: number; rotated: boolean } {
+    const viewBox = box?.querySelector('svg')?.viewBox.baseVal
+    const aspect = viewBox && viewBox.height > 0 ? viewBox.width / viewBox.height : 2
+    // Room left by the close button above and a margin around
+    const room = { width: window.innerWidth - 24, height: window.innerHeight - 96 }
+    const upright = window.matchMedia('(orientation: portrait)').matches
+    const rotated = upright && aspect > 1.15 && room.width < 640
+    const width = rotated
+        ? Math.min(room.height, room.width * aspect)
+        : Math.min(room.width, room.height * aspect, 1080)
+    return { width: Math.floor(width), rotated }
 }

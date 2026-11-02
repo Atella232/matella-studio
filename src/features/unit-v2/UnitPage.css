@@ -1264,11 +1264,10 @@
     overflow-x: auto;
 }
 
+/* The whole drawing always fits; when it gets small, LessonFigure offers to enlarge it */
 .fraction-v2-lesson-figure svg {
     display: block;
     width: 100%;
-    /* Below this width the labels get too small: scroll instead */
-    min-width: 540px;
     max-width: 720px;
     height: auto;
     margin: 0 auto;
@@ -2267,6 +2266,16 @@
 
     .fraction-v2 .fraction-v2-lesson-body {
         font-size: 17px;
+    }
+
+    /* On a phone the drawing and the example take almost the whole card */
+    .fraction-v2-lesson-figure {
+        margin-inline: -10px;
+        padding: 12px 6px 8px;
+    }
+
+    .fraction-v2-example {
+        padding: 22px 10px;
     }
 
     .fraction-v2-takeaway {

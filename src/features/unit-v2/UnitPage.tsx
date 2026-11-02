@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { MathText } from '../../components/MathText'
 import { DiagnosticQuiz } from './Diagnostic'
 import { Icon } from './icons'
-import { LessonCases, LessonMistakeBox } from './LessonExtras'
+import { FitMath, LessonCases, LessonFigure, LessonMistakeBox } from './LessonExtras'
 import { PracticeArea, PracticeDeck } from './Practice'
 import { parseUnitPath, unitBasePath, unitPathFor, type PracticeMode } from './routing'
 import { useStoredIds, useStoredTopics } from './storage'
@@ -449,15 +449,13 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                                         {step.title && <strong>{l(step.title)}</strong>}
                                         <p><MathText text={l(step.text)} /></p>
                                     </div>
-                                    {step.math && <div className="fraction-v2-lesson-step-math"><MathText text={pickMaybeText(language, step.math)} /></div>}
+                                    {step.math && <FitMath className="fraction-v2-lesson-step-math" text={pickMaybeText(language, step.math)} />}
                                 </li>
                             ))}
                         </ol>
                     )}
-                    {currentTopic.figure && <div className="fraction-v2-lesson-figure">{currentTopic.figure(language)}</div>}
-                    <figure className="fraction-v2-example">
-                        <MathText text={pickMaybeText(language, currentTopic.example)} />
-                    </figure>
+                    {currentTopic.figure && <LessonFigure language={language}>{currentTopic.figure(language)}</LessonFigure>}
+                    <FitMath as="figure" className="fraction-v2-example" text={pickMaybeText(language, currentTopic.example)} />
                     {currentTopic.mistake && <LessonMistakeBox mistake={currentTopic.mistake} language={language} />}
                     <aside className="fraction-v2-takeaway">
                         <span className="fraction-v2-takeaway-icon"><Icon name="bulb" size={22} /></span>

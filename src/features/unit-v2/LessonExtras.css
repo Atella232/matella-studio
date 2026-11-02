@@ -109,3 +109,80 @@
 .lesson-mistake p > .math-text {
     min-width: 0;
 }
+
+/* ---------- The drawing of the lesson: always whole, enlarged on demand ---------- */
+
+.lesson-figure-small .lesson-figure-drawing {
+    cursor: zoom-in;
+}
+
+.lesson-figure-enlarge,
+.lesson-figure-zoom-close {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 40px;
+    padding: 6px 14px;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    color: var(--ink);
+    background: var(--card);
+    box-shadow: 2px 2px 0 var(--ink);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lesson-figure-enlarge {
+    display: flex;
+    margin: 6px auto 2px;
+}
+
+.lesson-figure-enlarge:hover,
+.lesson-figure-zoom-close:hover {
+    background: var(--paper-deep);
+}
+
+.lesson-figure-zoom {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    overflow: hidden;
+    background: var(--paper);
+}
+
+.lesson-figure-zoom-close {
+    position: absolute;
+    inset-block-start: 14px;
+    inset-inline-end: 14px;
+}
+
+/* Centred on the screen; turned a quarter on an upright phone */
+.fraction-v2-lesson-figure .lesson-figure-zoom-drawing {
+    position: absolute;
+    top: calc(50% + 24px);
+    left: 50%;
+    width: var(--zoom-width);
+    transform: translate(-50%, -50%);
+}
+
+.fraction-v2-lesson-figure .lesson-figure-zoom-drawing.rotated {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.fraction-v2-lesson-figure .lesson-figure-zoom-drawing svg {
+    width: 100%;
+    max-width: none;
+}
+
+.fraction-v2 .lesson-figure-zoom-hint {
+    position: absolute;
+    inset-block-start: 22px;
+    inset-inline-start: 18px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 700;
+}
