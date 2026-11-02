@@ -8,11 +8,16 @@ import { AlgebraGameArt } from './GameArt'
 import { ALGEBRA_GAME_RECORDS_KEY, algebraGameModeForPath, algebraGames, algebraGameSlugs, type AlgebraGameId } from './info'
 import { AlgebraRaceGame } from './RaceGame'
 import './AlgebraGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { ALGEBRA_DETECTIVE_CASES, algebraDetectiveNames, algebraDetectiveTips, createAlgebraDetectiveCases } from './detective'
+import { TilesGame } from './OwnGames'
 
 const memoryGame = algebraGames.find((game) => game.id === 'memory')!
 
 const components: Record<AlgebraGameId, (props: GameProps) => JSX.Element> = {
     race: AlgebraRaceGame,
+    tiles: (props) => <TilesGame {...props} game={algebraGames.find((game) => game.id === 'tiles')!} art={<AlgebraGameArt game="tiles" />} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: algebraGames.find((game) => game.id === 'detective')!, art: <AlgebraGameArt game="detective" />, cases: ALGEBRA_DETECTIVE_CASES, createCases: createAlgebraDetectiveCases, names: algebraDetectiveNames, tips: algebraDetectiveTips }} />,
     balance: EquationGame,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <AlgebraGameArt game="memory" />, pairs: MEMORY_PAIRS, createBoard: createAlgebraMemoryBoard }} />
 }

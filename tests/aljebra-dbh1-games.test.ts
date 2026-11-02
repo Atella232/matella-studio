@@ -20,7 +20,7 @@ function evaluate(latex: string, x: number): number {
 }
 
 test('aljebra 1. DBH games: levels, ids and routes', () => {
-    assert.equal(algebraGames.length, 3)
+    assert.equal(algebraGames.length, 5)
     assert.equal(algebraGames[0].levels.length, ALGEBRA_RACE_CIRCUITS)
     assert.equal(algebraGames.find((game) => game.id === 'balance')!.levels.length, equationLevels.length)
     assert.equal(algebraGames.find((game) => game.id === 'memory')!.levels.length, algebraMemoryLevels.length)

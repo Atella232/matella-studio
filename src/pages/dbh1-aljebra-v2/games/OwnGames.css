@@ -1,0 +1,8 @@
+/* Algebra tiles (1. DBH algebra): the cancelled pairs fade, the tiles left stay */
+.fraction-v2-games-card[data-game="tiles"] { --game-tint: var(--success-tint, #d9efe2); }
+.dbh1-cancel { animation: dbh1-cancel 0.7s ease-out 0.5s both; }
+.dbh1-left { stroke-width: 2.6; }
+@keyframes dbh1-cancel { from { opacity: 1; } to { opacity: 0.22; } }
+@media (prefers-reduced-motion: reduce) {
+    .dbh1-cancel { animation: none; opacity: 0.22; }
+}

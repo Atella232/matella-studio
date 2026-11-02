@@ -5,7 +5,7 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
    unit progress id each level earns with its first star.
    ========================================================================== */
 
-export type AlgebraGameId = 'race' | 'balance' | 'memory'
+export type AlgebraGameId = 'race' | 'balance' | 'memory' | 'tiles' | 'detective'
 
 export const ALGEBRA_GAME_RECORDS_KEY = 'matella-aljebra-dbh1-game-records'
 
@@ -44,19 +44,43 @@ export const algebraGames: GameInfo<AlgebraGameId>[] = [
             { progressId: 8302, stage: 'language', title: { eu: 'Zenbakizko balioa', es: 'Valor numérico', en: 'Numerical value', ar: 'القيمة العددية' }, description: { eu: '2x + 1 (x = 3) ↔ 7', es: '2x + 1 (x = 3) ↔ 7', en: '2x + 1 (x = 3) ↔ 7', ar: '2x + 1 (x = 3) ↔ 7' } },
             { progressId: 8303, stage: 'operations', title: { eu: 'Biderketak', es: 'Productos', en: 'Products', ar: 'الضرب' }, description: { eu: '2x · 3x² ↔ 6x³', es: '2x · 3x² ↔ 6x³', en: '2x · 3x² ↔ 6x³', ar: '2x · 3x² ↔ 6x³' } }
         ]
+    },
+    {
+        id: 'tiles',
+        title: { eu: 'Fitxa aljebraikoak', es: 'Fichas algebraicas', en: 'Algebra tiles', ar: 'القطع الجبرية' },
+        tagline: { eu: 'Laburtu adierazpena; gero, fitxak motaka eta bikoteak ezabatuta.', es: 'Reduce la expresión; luego, las fichas por tipos y las parejas anuladas.', en: 'Simplify the expression; then the tiles by kind with the pairs cancelled.', ar: 'اختصر العبارة، ثم القطع حسب النوع مع إلغاء الأزواج.' },
+        skills: { eu: 'Gai antzekoak', es: 'Términos semejantes', en: 'Like terms', ar: 'الحدود المتشابهة' },
+        levels: [
+            { progressId: 8401, stage: 'monomials', title: { eu: 'Batuketak', es: 'Sumas', en: 'Additions', ar: 'الجمع' }, description: { eu: 'x-ak eta zenbakiak.', es: 'Las x y los números.', en: 'The x terms and the numbers.', ar: 'الحدود ذات x والأعداد.' } },
+            { progressId: 8402, stage: 'operations', title: { eu: 'Kenketak ere bai', es: 'También restas', en: 'Subtractions too', ar: 'والطرح أيضًا' }, description: { eu: 'Fitxa negatiboak.', es: 'Fichas negativas.', en: 'Negative tiles.', ar: 'قطع سالبة.' } },
+            { progressId: 8403, stage: 'operations', title: { eu: 'x² ere bai', es: 'También x²', en: 'x² too', ar: 'و x² أيضًا' }, description: { eu: 'Hiru fitxa mota.', es: 'Tres tipos de fichas.', en: 'Three kinds of tiles.', ar: 'ثلاثة أنواع من القطع.' } }
+        ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Aljebraren detektibea', es: 'Detective de álgebra', en: 'Algebra detective', ar: 'مخبر الجبر' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: اكتشفه وقل ما نوع الخطأ.' },
+        skills: { eu: 'Aljebran akats tipikoak', es: 'Errores típicos de álgebra', en: 'Common algebra mistakes', ar: 'الأخطاء الشائعة في الجبر' },
+        levels: [
+            { progressId: 8501, stage: 'language', title: { eu: 'Balioa eta antzekoak', es: 'Valor y semejantes', en: 'Value and like terms', ar: 'القيمة والحدود المتشابهة' }, description: { eu: 'Ordeztu eta laburtu.', es: 'Sustituir y reducir.', en: 'Substituting and simplifying.', ar: 'التعويض والاختصار.' } },
+            { progressId: 8502, stage: 'operations', title: { eu: 'Eragiketak', es: 'Operaciones', en: 'Operations', ar: 'العمليات' }, description: { eu: 'Biderkatu, batu eta parentesiak.', es: 'Multiplicar, sumar y paréntesis.', en: 'Multiplying, adding and brackets.', ar: 'الضرب والجمع والأقواس.' } },
+            { progressId: 8503, stage: 'equations', title: { eu: 'Ekuazioak', es: 'Ecuaciones', en: 'Equations', ar: 'المعادلات' }, description: { eu: 'Gaiak aldez aldatu.', es: 'Transponer términos.', en: 'Moving terms across.', ar: 'نقل الحدود.' } }
+        ]
     }
 ]
 
 export const algebraGameProgressIds: number[] = levelProgressIds(algebraGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const algebraGameSlugs: Record<AlgebraGameId, string> = { race: 'lasterketa', balance: 'balantza', memory: 'memoria' }
+export const algebraGameSlugs: Record<AlgebraGameId, string> = { race: 'lasterketa', balance: 'balantza', memory: 'memoria', tiles: 'fitxak', detective: 'detektibea' }
 
 export function algebraGameModeForPath(pathname: string): AlgebraGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
     if (!game) return 'hub'
     if (['carrera', 'lasterketa'].includes(game)) return 'race'
     if (['balanza', 'balantza'].includes(game)) return 'balance'
+    if (['fitxak', 'fichas'].includes(game)) return 'tiles'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     if (['memoria', 'memory'].includes(game)) return 'memory'
     return 'hub'
 }

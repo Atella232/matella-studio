@@ -35,7 +35,7 @@ const aljebraIntroUnit: UnitDefinition = {
         render: (props) => <AlgebraIntroLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Hiru joko azkar aritzeko: lasterketa, balantza azkarra eta memoria.', es: 'Tres juegos para ganar rapidez: carrera, balanza rápida y memoria.', en: 'Three games to build speed: race, quick balance and memory.', ar: 'ثلاث ألعاب لاكتساب السرعة: السباق والميزان السريع والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, balantza azkarra, memoria, fitxa aljebraikoak eta aljebraren detektibea.', es: 'Cinco juegos: carrera, balanza rápida, memoria, fichas algebraicas y detective de álgebra.', en: 'Five games: race, quick balance, memory, algebra tiles and algebra detective.', ar: 'خمس ألعاب: السباق والميزان السريع والذاكرة والقطع الجبرية ومخبر الجبر.' },
         progressIds: algebraGameProgressIds,
         recordsKey: ALGEBRA_GAME_RECORDS_KEY,
         render: (props) => <AlgebraIntroGames {...props} />

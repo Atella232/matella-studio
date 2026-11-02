@@ -1,8 +1,12 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { AlgebraGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { TilesArt } from './OwnGames'
 
 /** Small illustration of each algebra game, in the notebook style */
 export function AlgebraGameArt({ game }: { game: AlgebraGameId }) {
+    if (game === 'tiles') return <TilesArt />
+    if (game === 'detective') return <DetectiveArt lines={['3x + 2x = 5x', 'x · x = x', 'x + 5 = 12 → x = 7']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

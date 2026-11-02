@@ -12,6 +12,8 @@ import { columns, createCommaRounds, createPodiumRounds, fits, placed, placedLat
 import { createDecimalsDetectiveCases, decimalsDetectiveLevels, decimalsDetectiveNames, decimalsDetectiveTips } from '../src/pages/dbh1-hamartarrak-v2/games/detective.ts'
 import { amountFor, createGridRounds, createRecipeRounds, GRID_COLUMNS, GRID_ROUNDS, RECIPE_ROUNDS } from '../src/pages/dbh1-proportzionaltasuna-v2/games/proportionRounds.ts'
 import { createProportionDetectiveCases, proportionDetectiveLevels, proportionDetectiveNames, proportionDetectiveTips } from '../src/pages/dbh1-proportzionaltasuna-v2/games/detective.ts'
+import { COEFFICIENT_LIMIT, createTilesRounds, KINDS, LINE_MAX, polyLatex, termsLatex as tilesLatex, tileCounts, TILES_ROUNDS } from '../src/pages/dbh1-aljebra-v2/games/tilesRounds.ts'
+import { ALGEBRA_DETECTIVE_X, algebraDetectiveLevels, algebraDetectiveNames, algebraDetectiveTips, createAlgebraDetectiveCases } from '../src/pages/dbh1-aljebra-v2/games/detective.ts'
 import { checkDetective, endValue, renders } from './helpers/ownGamesCheck.ts'
 
 /* The own games of the 1. DBH units */
@@ -215,4 +217,34 @@ test('1. DBH paint the percentage: a whole number of squares that fits the grid,
 
 test('1. DBH proportionality detective: the errors of each level, the fix and the last line on their values', () => {
     checkDetective(createProportionDetectiveCases, proportionDetectiveLevels, proportionDetectiveNames, proportionDetectiveTips)
+})
+
+test('1. DBH algebra tiles: the answer is the sum of each kind, never all zero, rows that fit, the levels as promised', () => {
+    assert.equal(polyLatex({ x2: 1, x: -2, c: 1 }), 'x^{2}-2x+1')
+    assert.equal(tilesLatex([{ kind: 'x', value: 3 }, { kind: 'c', value: -2 }, { kind: 'x', value: -1 }]), '3x-2-x')
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const rounds = createTilesRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, TILES_ROUNDS)
+            for (const { terms, answer } of rounds) {
+                for (const kind of KINDS) {
+                    assert.equal(answer[kind], terms.filter((term) => term.kind === kind).reduce((sum, term) => sum + term.value, 0))
+                    assert.ok(Math.abs(answer[kind]) <= COEFFICIENT_LIMIT)
+                    const [positives, negatives] = tileCounts(terms, kind)
+                    assert.ok(positives <= LINE_MAX[kind] && negatives <= LINE_MAX[kind] && positives - negatives === answer[kind])
+                }
+                assert.ok(answer.x !== 0)
+                renders(tilesLatex(terms))
+                renders(polyLatex(answer))
+                if (level === 0) assert.ok(terms.every((term) => term.value > 0 && term.kind !== 'x2'))
+                if (level === 1) assert.ok(terms.some((term) => term.value < 0) && terms.every((term) => term.kind !== 'x2'))
+                if (level === 2) assert.ok(answer.x2 !== 0)
+            }
+        }
+    }
+})
+
+test('1. DBH algebra detective: the errors of each level, the fix and the last line on their values at x = 2', () => {
+    const atX = (latex: string) => endValue(latex.replace(/(\d)x/g, `$1\\cdot (${ALGEBRA_DETECTIVE_X})`).replace(/x/g, `(${ALGEBRA_DETECTIVE_X})`))
+    checkDetective(createAlgebraDetectiveCases, algebraDetectiveLevels, algebraDetectiveNames, algebraDetectiveTips, 1e-9, undefined, (latex) => (/^x=/.test(latex.split('\\ \\to\\ ').pop()!) ? endValue(latex) : atX(latex)))
 })
