@@ -5,7 +5,7 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
    the unit progress id each level earns with its first star.
    ========================================================================== */
 
-export type StatisticsGameId = 'race' | 'mean' | 'memory'
+export type StatisticsGameId = 'race' | 'mean' | 'memory' | 'bag' | 'detective'
 
 export const STATISTICS_GAME_RECORDS_KEY = 'matella-estatistika-dbh1-game-records'
 
@@ -44,19 +44,43 @@ export const statisticsGames: GameInfo<StatisticsGameId>[] = [
             { progressId: 12302, stage: 'parameters', title: { eu: 'Batez bestekoak', es: 'Medias', en: 'Means', ar: 'المتوسطات' }, description: { eu: '(4 + 8) : 2 ↔ 6', es: '(4 + 8) : 2 ↔ 6', en: '(4 + 8) : 2 ↔ 6', ar: '(4 + 8) : 2 ↔ 6' } },
             { progressId: 12303, stage: 'probability', title: { eu: 'Dadoaren probabilitateak', es: 'Probabilidades del dado', en: 'Probabilities for the die', ar: 'احتمالات النرد' }, description: { eu: 'P({2, 4, 6}) ↔ 1/2', es: 'P({2, 4, 6}) ↔ 1/2', en: 'P({2, 4, 6}) ↔ 1/2', ar: 'P({2, 4, 6}) ↔ 1/2' } }
         ]
+    },
+    {
+        id: 'bag',
+        title: { eu: 'Poltsa', es: 'La bolsa', en: 'The bag', ar: 'الكيس' },
+        tagline: { eu: 'Bolak edo kartak: jarri probabilitatea zatiki gisa; gero, aldeko kasuak markatuta.', es: 'Bolas o cartas: pon la probabilidad como fracción; luego, los casos favorables marcados.', en: 'Balls or cards: set the probability as a fraction; then the favourable cases are marked.', ar: 'كرات أو بطاقات: ضع الاحتمال كسرًا، ثم تظهر الحالات الملائمة.' },
+        skills: { eu: 'Laplaceren erregela', es: 'La regla de Laplace', en: 'Laplace\'s rule', ar: 'قاعدة لابلاس' },
+        levels: [
+            { progressId: 12401, stage: 'probability', title: { eu: 'Kolore bat', es: 'Un color', en: 'One colour', ar: 'لون واحد' }, description: { eu: 'Aldekoak eta posibleak.', es: 'Favorables y posibles.', en: 'Favourable and possible.', ar: 'الملائمة والممكنة.' } },
+            { progressId: 12402, stage: 'probability', title: { eu: 'Ez eta edo', es: 'No y o', en: 'Not and or', ar: 'ليس و أو' }, description: { eu: 'Kolore bat ez, edo bi kolore.', es: 'No ser un color, o uno de dos.', en: 'Not a colour, or one of two.', ar: 'ليس لونًا ما، أو أحد لونين.' } },
+            { progressId: 12403, stage: 'probability', title: { eu: 'Kartak', es: 'Cartas', en: 'Cards', ar: 'البطاقات' }, description: { eu: 'Bikoitiak, lehenak, multiploak…', es: 'Pares, primos, múltiplos…', en: 'Even, prime, multiples…', ar: 'زوجي وأولي ومضاعفات…' } }
+        ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Estatistikaren detektibea', es: 'Detective de estadística', en: 'Statistics detective', ar: 'مخبر الإحصاء' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: اكتشفه وقل ما نوع الخطأ.' },
+        skills: { eu: 'Estatistikan akats tipikoak', es: 'Errores típicos de estadística', en: 'Common statistics mistakes', ar: 'الأخطاء الشائعة في الإحصاء' },
+        levels: [
+            { progressId: 12501, stage: 'parameters', title: { eu: 'Parametroak', es: 'Parámetros', en: 'Measures', ar: 'المقاييس' }, description: { eu: 'Moda, batez bestekoa eta mediana.', es: 'Moda, media y mediana.', en: 'Mode, mean and median.', ar: 'المنوال والمتوسط والوسيط.' } },
+            { progressId: 12502, stage: 'graphs', title: { eu: 'Grafikoak eta ehunekoak', es: 'Gráficos y porcentajes', en: 'Graphs and percentages', ar: 'الرسوم والنسب المئوية' }, description: { eu: 'Sektoreak, ehunekoak eta ibilbidea.', es: 'Sectores, porcentajes y rango.', en: 'Sectors, percentages and range.', ar: 'القطاعات والنسب والمدى.' } },
+            { progressId: 12503, stage: 'probability', title: { eu: 'Probabilitatea', es: 'Probabilidad', en: 'Probability', ar: 'الاحتمال' }, description: { eu: 'Laplace, aurkakoa eta «edo».', es: 'Laplace, el contrario y «o».', en: 'Laplace, the opposite and «or».', ar: 'لابلاس والمعاكس و«أو».' } }
+        ]
     }
 ]
 
 export const statisticsGameProgressIds: number[] = levelProgressIds(statisticsGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const statisticsGameSlugs: Record<StatisticsGameId, string> = { race: 'lasterketa', mean: 'batez-bestekoa', memory: 'memoria' }
+export const statisticsGameSlugs: Record<StatisticsGameId, string> = { race: 'lasterketa', mean: 'batez-bestekoa', memory: 'memoria', bag: 'poltsa', detective: 'detektibea' }
 
 export function statisticsGameModeForPath(pathname: string): StatisticsGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
     if (!game) return 'hub'
     if (['carrera', 'lasterketa'].includes(game)) return 'race'
     if (['media', 'batez-bestekoa'].includes(game)) return 'mean'
+    if (['poltsa', 'bolsa'].includes(game)) return 'bag'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     if (['memoria', 'memory'].includes(game)) return 'memory'
     return 'hub'
 }

@@ -18,6 +18,8 @@ import { AREA_ROUNDS, createAreaRounds, GRID } from '../src/pages/dbh1-geometria
 import { createGeometryDetectiveCases, geometryDetectiveLevels, geometryDetectiveNames, geometryDetectiveTips } from '../src/pages/dbh1-geometria-v2/games/detective.ts'
 import { axesOf, canBuild, createSticksRounds, createSymmetryRounds, SHAPES, STICK_LIMIT, STICKS_ROUNDS, SYMMETRY_ROUNDS, type ShapeName } from '../src/pages/dbh1-figurak-v2/games/figureRounds.ts'
 import { createFiguresDetectiveCases, figuresDetectiveLevels, figuresDetectiveNames, figuresDetectiveTips } from '../src/pages/dbh1-figurak-v2/games/detective.ts'
+import { BAG_LIMIT, BAG_ROUNDS, bagRight, createBagRounds, favours } from '../src/pages/dbh1-estatistika-v2/games/bagRounds.ts'
+import { createStatsDetectiveCases, statsDetectiveLevels, statsDetectiveNames, statsDetectiveTips } from '../src/pages/dbh1-estatistika-v2/games/detective.ts'
 import { checkDetective, endValue, renders } from './helpers/ownGamesCheck.ts'
 
 /* The own games of the 1. DBH units */
@@ -339,4 +341,27 @@ test('1. DBH lines of symmetry: the axes of each shape are right, level 3 counts
 
 test('1. DBH shapes detective: the errors of each level, the fix and the last line on their values', () => {
     checkDetective(createFiguresDetectiveCases, figuresDetectiveLevels, figuresDetectiveNames, figuresDetectiveTips, 1e-9, undefined, (latex) => endValue(latex.replace(/\^\{\\circ\}/g, '')))
+})
+
+test('1. DBH the bag: favourable cases counted, never impossible nor sure, equivalent fractions accepted, the levels as promised', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const rounds = createBagRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, BAG_ROUNDS)
+            for (const round of rounds) {
+                const items = round.balls ?? Array.from({ length: round.cards }, (_, index) => index + 1)
+                assert.equal(round.possible, items.length)
+                assert.equal(round.favourable, items.filter((item) => favours(round.event, item)).length)
+                assert.ok(round.favourable > 0 && round.favourable < round.possible && round.possible <= BAG_LIMIT)
+                assert.ok(bagRight(round, round.favourable * 2, round.possible * 2) && !bagRight(round, 0, 1))
+                if (level === 0) assert.equal(round.event.kind, 'colour')
+                if (level === 1) assert.ok(round.event.kind === 'not' || round.event.kind === 'or')
+                if (level === 2) assert.ok(round.balls === null)
+            }
+        }
+    }
+})
+
+test('1. DBH statistics detective: the errors of each level, the fix and the last line on their values', () => {
+    checkDetective(createStatsDetectiveCases, statsDetectiveLevels, statsDetectiveNames, statsDetectiveTips, 1e-9, undefined, (latex) => endValue(latex.replace(/\^\{\\circ\}/g, '')))
 })

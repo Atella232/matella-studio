@@ -19,7 +19,7 @@ function evaluate(latex: string): number {
 }
 
 test('estatistika 1. DBH games: levels, ids and routes', () => {
-    assert.equal(statisticsGames.length, 3)
+    assert.equal(statisticsGames.length, 5)
     assert.equal(statisticsGames[0].levels.length, STATISTICS_RACE_CIRCUITS)
     assert.equal(statisticsGames.find((game) => game.id === 'mean')!.levels.length, meanLevels.length)
     assert.equal(statisticsGames.find((game) => game.id === 'memory')!.levels.length, statisticsMemoryLevels.length)

@@ -35,7 +35,7 @@ const estatistikaIntroUnit: UnitDefinition = {
         render: (props) => <StatisticsIntroLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Hiru joko: lasterketa, batez bestekoaren begia eta memoria.', es: 'Tres juegos: carrera, ojo para la media y memoria.', en: 'Three games: race, eye for the mean and memory.', ar: 'ثلاث ألعاب: السباق وعين المتوسط والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, batez bestekoa, memoria, poltsa eta estatistikaren detektibea.', es: 'Cinco juegos: carrera, media, memoria, la bolsa y detective de estadística.', en: 'Five games: race, mean, memory, the bag and statistics detective.', ar: 'خمس ألعاب: السباق والمتوسط والذاكرة والكيس ومخبر الإحصاء.' },
         progressIds: statisticsGameProgressIds,
         recordsKey: STATISTICS_GAME_RECORDS_KEY,
         render: (props) => <StatisticsIntroGames {...props} />

@@ -1,8 +1,12 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { StatisticsGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { BagArt } from './OwnGames'
 
 /** Small illustration of each statistics game, in the notebook style */
 export function StatisticsGameArt({ game }: { game: StatisticsGameId }) {
+    if (game === 'bag') return <BagArt />
+    if (game === 'detective') return <DetectiveArt lines={['2, 5, 5, 7 → Mo = 5', 'Me: 9, 2, 6 → 2', 'P = 2/5']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

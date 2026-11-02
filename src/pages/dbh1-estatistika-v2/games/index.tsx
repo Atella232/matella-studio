@@ -8,11 +8,16 @@ import { STATISTICS_GAME_RECORDS_KEY, statisticsGameModeForPath, statisticsGames
 import { MeanGame } from './MeanGame'
 import { StatisticsRaceGame } from './RaceGame'
 import './StatisticsGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { createStatsDetectiveCases, STATS_DETECTIVE_CASES, statsDetectiveNames, statsDetectiveTips } from './detective'
+import { BagGame } from './OwnGames'
 
 const memoryGame = statisticsGames.find((game) => game.id === 'memory')!
 
 const components: Record<StatisticsGameId, (props: GameProps) => JSX.Element> = {
     race: StatisticsRaceGame,
+    bag: (props) => <BagGame {...props} game={statisticsGames.find((game) => game.id === 'bag')!} art={<StatisticsGameArt game="bag" />} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: statisticsGames.find((game) => game.id === 'detective')!, art: <StatisticsGameArt game="detective" />, cases: STATS_DETECTIVE_CASES, createCases: createStatsDetectiveCases, names: statsDetectiveNames, tips: statsDetectiveTips }} />,
     mean: MeanGame,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <StatisticsGameArt game="memory" />, pairs: STATISTICS_MEMORY_PAIRS, createBoard: createStatisticsMemoryBoard }} />
 }
