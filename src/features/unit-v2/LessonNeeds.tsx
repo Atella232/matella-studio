@@ -16,6 +16,9 @@ const nameIn = (language: UnitLanguage, item: Named) =>
  */
 export function LessonNeeds({ needs, language, coursePath }: { needs: LessonNeed[]; language: UnitLanguage; coursePath: string }) {
     const currentCourse = coursePath.split('/').filter(Boolean).pop()
+    // Arabic has its own comma and semicolon
+    const comma = language === 'ar' ? '، ' : ', '
+    const semicolon = language === 'ar' ? '؛ ' : '; '
     return (
         <p className="lesson-needs">
             <span className="lesson-needs-label">{pickText(language, { eu: 'Hasi aurretik, errepasatu:', es: 'Antes de empezar, repasa:', en: 'Before you start, review:', ar: 'قبل أن تبدأ، راجع:' })}</span>{' '}
@@ -23,10 +26,10 @@ export function LessonNeeds({ needs, language, coursePath }: { needs: LessonNeed
                 const [courseId, unitId] = need.unit.split('/')
                 const unit = getTopicById(courseId, unitId)
                 const course = courseId !== currentCourse ? getCourseById(courseId) : undefined
-                const where = [unit && nameIn(language, unit), course && nameIn(language, course)].filter(Boolean).join(', ')
+                const where = [unit && nameIn(language, unit), course && nameIn(language, course)].filter(Boolean).join(comma)
                 return (
                     <Fragment key={`${need.unit}/${need.topic}`}>
-                        {index > 0 && '; '}
+                        {index > 0 && semicolon}
                         {/* Another unit opens where this page was scrolled: start it at the top */}
                         <Link to={`/matematika/${need.unit}/teoria/${need.topic}`} onClick={() => window.scrollTo({ top: 0 })}><MathText text={pickText(language, need.title)} inline /></Link>
                         {where && <span className="lesson-needs-where"> ({where})</span>}
