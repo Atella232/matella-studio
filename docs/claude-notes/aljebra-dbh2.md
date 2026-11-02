@@ -18,3 +18,5 @@ Branch `feat/aljebra-dbh2-games`. Two more games of this topic, besides the quic
 - `detective` (`games/detective.ts`), 27501–27503: 12 typical errors (like terms, powers, negative squared, minus before a bracket, distributive law, products of binomials, quotients, the square without 2ab, the coefficient not squared, the common factor not divided, the lost 1). Lines end on polynomials; right/reached are the polynomials at x = 2.
 
 Shared: `RoundVerdict` now lives in `RoundGame.tsx`; `WorkedDetectiveGame` shows a long fix on two lines, split at `\ \to\ `. Trick: detective lines must stay under ~230 px at 21 px (phone); measure them in the browser with KaTeX before committing.
+
+Deployed 2026-11-02: main fd383b3, bundle `index-NhNlFoWP.js`; checked live at 375 px in eu, es and ar (every new game opens and starts, no overflow, no console errors).

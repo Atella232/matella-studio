@@ -10,3 +10,5 @@ Branch `feat/estatistika-dbh2-games` (stacked on the other 2. DBH game branches)
 - `detective` (`games/detective.ts`), 35501–35503: 12 typical errors (relative frequency over the categories, cumulative not added, sector out of 100, percentage not × 100; mean over the number of values, median unsorted, mode given as its frequency, one middle value with an even count; range of unsorted data, favourable over unfavourable, the complement as the reciprocal, 11 equally likely sums of two dice).
 
 Tricks: a Python heredoc edit turned `\\max` into `\max` in a TS template (lint caught `\m`, but `\t`, `\f` would pass silently): scan new files for control characters. Every stepper game must start on a value that is never the answer.
+
+Deployed 2026-11-02: main fd383b3, bundle `index-NhNlFoWP.js`; checked live at 375 px in eu, es and ar (every new game opens and starts, no overflow, no console errors).

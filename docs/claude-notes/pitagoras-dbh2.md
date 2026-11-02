@@ -10,3 +10,5 @@ Branch `feat/pitagoras-dbh2-games` (stacked on the Aljebra and Ekuazioak game br
 - `detective` (`games/detective.ts`), 24501–24503: 12 typical errors (legs added, root forgotten, square as double, square of the sum; adding for a leg, subtracting for the hypotenuse, the root split, metres and centimetres mixed; the whole base of an isosceles triangle, the whole diagonals of a rhombus, the base diagonal not squared, the distance to the centre as a leg of the tangent). Non-whole lengths end in `\approx` with hundredths.
 
 Tricks: Arabic prose uses «م» for metres; SVG text needs `direction="ltr"`. A CSS rule on `span` inside a box that holds MathText must use `> span`, or it styles every KaTeX span.
+
+Deployed 2026-11-02: main fd383b3, bundle `index-NhNlFoWP.js`; checked live at 375 px in eu, es and ar (every new game opens and starts, no overflow, no console errors).

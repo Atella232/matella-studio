@@ -24,3 +24,5 @@ Branch `feat/funtzioak-dbh2-games` (stacked on the other 2. DBH game branches). 
 - `detective` (`games/detective.ts`), 32801–32803: 12 typical errors (the point substituted the wrong way round, the slope upside down, differences in mixed order, the x-axis cut as the intercept; adding the difference in a proportion, the constant upside down, the rise not divided by the run, the intercept read at x ≠ 0; the fixed charge forgotten, charge and rate swapped, a loss added, hours with a price per minute).
 
 Trick: the game's own CSS imports `../Functions.css` for the plane, which the unit page also loads.
+
+Deployed 2026-11-02: main fd383b3, bundle `index-NhNlFoWP.js`; checked live at 375 px in eu, es and ar (every new game opens and starts, no overflow, no console errors).

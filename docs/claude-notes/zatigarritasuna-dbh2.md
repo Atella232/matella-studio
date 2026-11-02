@@ -16,3 +16,5 @@ Phases like Zenbaki osoak: 1) lessons + route [done 2026-09-27, commit ffc9847, 
 ## Detective (2026-11-02)
 
 Branch `feat/osoak-zatigarritasuna-dbh2-detectives`. Third own game: `detective` (`games/detective.ts`, `games/DetectiveGame.tsx`), 2501–2503, on the shared WorkedDetectiveGame. 12 typical errors: the number itself or 1 left out of the divisors, 1 counted as a prime, an exponent lost; the GCD with the greatest exponents, the LCM with the smallest, the LCM with only the common factors, the product as the LCM; the GCD where the LCM was needed (buses), the LCM where the GCD was needed (ribbons), the length given instead of how many pieces, the minutes instead of the laps. Numbers kept small (at most three divisor pairs, primes below 12) so every line fits a phone.
+
+Deployed 2026-11-02: main fd383b3, bundle `index-NhNlFoWP.js`; checked live at 375 px in eu, es and ar (every new game opens and starts, no overflow, no console errors).

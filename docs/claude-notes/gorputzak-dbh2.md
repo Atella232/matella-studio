@@ -10,3 +10,5 @@ Branch `feat/gorputzak-dbh2-games` (stacked on the Aljebra, Ekuazioak and Pitago
 - `detective` (`games/detective.ts`), 34501–34503: 12 typical errors (one base, the height for the slant height, the diameter as radius, base area × height for a lateral area; the third of pyramids and cones, r² in the sphere, the circumference as base; 1 cm³ = 1 L, 1 m³ = 100 dm³, the height forgotten, 1 L = 100 mL). Units in formulas as `\,\text{cm}^{3}`.
 
 Trick: water colour is a fixed `#7fb0e8`; the theme's blue tint is too pale to read as water.
+
+Deployed 2026-11-02: main fd383b3, bundle `index-NhNlFoWP.js`; checked live at 375 px in eu, es and ar (every new game opens and starts, no overflow, no console errors).

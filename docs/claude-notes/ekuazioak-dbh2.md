@@ -18,3 +18,5 @@ Branch `feat/ekuazioak-dbh2-games` (stacked on `feat/aljebra-dbh2-games`). Two m
 - `detective` (`games/detective.ts`), 29501–29503: 12 typical errors (first degree, denominators, second degree). Lines with two solutions are written `x_{1}=…,\ x_{2}=…`; `solutionsValue` turns a list into one number for right/reached.
 
 Trick: in Arabic text, a number with ° must be isolated (`⁦…°⁩`), or the sign jumps to the other side.
+
+Deployed 2026-11-02: main fd383b3, bundle `index-NhNlFoWP.js`; checked live at 375 px in eu, es and ar (every new game opens and starts, no overflow, no console errors).
