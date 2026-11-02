@@ -27,7 +27,7 @@ export const geometryIntroTopics: UnitTopic[] = [
     {
         id: 'lines',
         stage: 'angles',
-        title: { eu: 'Zuzenak, zuzerdiak eta zuzenkiak', es: 'Rectas, semirrectas y segmentos', en: 'Straight lines, rays and line segments.', ar: 'المستقيمات وأنصافها والقطع' },
+        title: { eu: 'Zuzenak, zuzerdiak eta zuzenkiak', es: 'Rectas, semirrectas y segmentos', en: 'Straight lines, rays and line segments', ar: 'المستقيمات وأنصافها والقطع' },
         goal: {
             eu: 'Zuzena, zuzerdia eta zuzenkia bereiztea eta bi zuzenen posizioak ezagutzea.',
             es: 'Distinguir recta, semirrecta y segmento y conocer las posiciones de dos rectas.',
@@ -58,7 +58,7 @@ export const geometryIntroTopics: UnitTopic[] = [
     {
         id: 'angles',
         stage: 'angles',
-        title: { eu: 'Angeluak eta haien neurria', es: 'Los ángulos y su medida', en: 'Angles and their measure.', ar: 'الزوايا وقياسها' },
+        title: { eu: 'Angeluak eta haien neurria', es: 'Los ángulos y su medida', en: 'Angles and their measure', ar: 'الزوايا وقياسها' },
         goal: {
             eu: 'Angelu baten elementuak ezagutzea eta angeluak neurriaren arabera sailkatzea.',
             es: 'Conocer los elementos de un ángulo y clasificar los ángulos según su medida.',
@@ -90,7 +90,7 @@ export const geometryIntroTopics: UnitTopic[] = [
     {
         id: 'angle-pairs',
         stage: 'angles',
-        title: { eu: 'Angelu osagarriak eta betegarriak', es: 'Ángulos complementarios y suplementarios', en: 'Complementary and supplementary angles.', ar: 'الزوايا المتتامة والمتكاملة' },
+        title: { eu: 'Angelu osagarriak eta betegarriak', es: 'Ángulos complementarios y suplementarios', en: 'Complementary and supplementary angles', ar: 'الزوايا المتتامة والمتكاملة' },
         goal: {
             eu: 'Angelu baten osagarria eta betegarria kalkulatzea, eta erpinez aurkakoak ezagutzea.',
             es: 'Calcular el complementario y el suplementario de un ángulo y reconocer los opuestos por el vértice.',
@@ -185,7 +185,7 @@ export const geometryIntroTopics: UnitTopic[] = [
     {
         id: 'triangle-lines',
         stage: 'polygons',
-        title: { eu: 'Triangelu motak eta zuzen nabarmenak', es: 'Tipos de triángulos y rectas notables', en: 'Types of triangles and special lines.', ar: 'أنواع المثلثات والمستقيمات المهمة' },
+        title: { eu: 'Triangelu motak eta zuzen nabarmenak', es: 'Tipos de triángulos y rectas notables', en: 'Types of triangles and special lines', ar: 'أنواع المثلثات والمستقيمات المهمة' },
         goal: {
             eu: 'Triangelu baten altuerak, erdibidekoak, erdibitzaileak eta erdikariak ezagutzea.',
             es: 'Conocer las alturas, medianas, mediatrices y bisectrices de un triángulo.',
@@ -248,7 +248,7 @@ export const geometryIntroTopics: UnitTopic[] = [
     {
         id: 'circle',
         stage: 'polygons',
-        title: { eu: 'Zirkunferentzia eta zirkulua', es: 'Circunferencia y círculo', en: 'Circumference and circle.', ar: 'الدائرة والقرص' },
+        title: { eu: 'Zirkunferentzia eta zirkulua', es: 'Circunferencia y círculo', en: 'Circumference and circle', ar: 'الدائرة والقرص' },
         goal: {
             eu: 'Zirkunferentzia eta zirkulua bereiztea eta haien elementuak ezagutzea.',
             es: 'Distinguir circunferencia y círculo y conocer sus elementos.',
@@ -310,7 +310,7 @@ export const geometryIntroTopics: UnitTopic[] = [
     {
         id: 'pythagoras-use',
         stage: 'pythagoras',
-        title: { eu: 'Alde bat kalkulatzea Pitagorasekin', es: 'Calcular un lado con Pitágoras', en: 'Calculate a side with Pythagoras.', ar: 'حساب ضلع بفيثاغورس' },
+        title: { eu: 'Alde bat kalkulatzea Pitagorasekin', es: 'Calcular un lado con Pitágoras', en: 'Calculate a side with Pythagoras', ar: 'حساب ضلع بفيثاغورس' },
         goal: {
             eu: 'Triangelu angeluzuzen baten hipotenusa edo katetoa kalkulatzea.',
             es: 'Calcular la hipotenusa o un cateto de un triángulo rectángulo.',
@@ -341,7 +341,7 @@ export const geometryIntroTopics: UnitTopic[] = [
     {
         id: 'units',
         stage: 'perimeters',
-        title: { eu: 'Luzera- eta azalera-unitateak', es: 'Unidades de longitud y superficie', en: 'Units of length and area.', ar: 'وحدات الطول والمساحة' },
+        title: { eu: 'Luzera- eta azalera-unitateak', es: 'Unidades de longitud y superficie', en: 'Units of length and area', ar: 'وحدات الطول والمساحة' },
         goal: {
             eu: 'Luzera- eta azalera-unitateen artean aldatzea.',
             es: 'Cambiar entre unidades de longitud y de superficie.',
@@ -370,7 +370,7 @@ export const geometryIntroTopics: UnitTopic[] = [
     {
         id: 'perimeter',
         stage: 'perimeters',
-        title: { eu: 'Poligonoen perimetroa', es: 'Perímetro de polígonos', en: 'Perimeter of polygons.', ar: 'محيط المضلعات' },
+        title: { eu: 'Poligonoen perimetroa', es: 'Perímetro de polígonos', en: 'Perimeter of polygons', ar: 'محيط المضلعات' },
         goal: {
             eu: 'Poligono baten perimetroa kalkulatzea.',
             es: 'Calcular el perímetro de un polígono.',
@@ -462,7 +462,7 @@ export const geometryIntroTopics: UnitTopic[] = [
     {
         id: 'area-triangle',
         stage: 'areas',
-        title: { eu: 'Triangeluaren, erronboaren eta trapezioaren azalera', es: 'Área del triángulo, del rombo y del trapecio', en: 'Area of the triangle, the rhombus and the trapezium.', ar: 'مساحة المثلث والمعيّن وشبه المنحرف' },
+        title: { eu: 'Triangeluaren, erronboaren eta trapezioaren azalera', es: 'Área del triángulo, del rombo y del trapecio', en: 'Area of the triangle, the rhombus and the trapezium', ar: 'مساحة المثلث والمعيّن وشبه المنحرف' },
         goal: {
             eu: 'Triangeluaren, erronboaren eta trapezioaren azalera kalkulatzea.',
             es: 'Calcular el área del triángulo, del rombo y del trapecio.',
@@ -493,7 +493,7 @@ export const geometryIntroTopics: UnitTopic[] = [
     {
         id: 'area-circle',
         stage: 'areas',
-        title: { eu: 'Poligono erregularren eta zirkuluaren azalera', es: 'Área de polígonos regulares y del círculo', en: 'Area of regular polygons and of the circle.', ar: 'مساحة المضلعات المنتظمة والقرص' },
+        title: { eu: 'Poligono erregularren eta zirkuluaren azalera', es: 'Área de polígonos regulares y del círculo', en: 'Area of regular polygons and of the circle', ar: 'مساحة المضلعات المنتظمة والقرص' },
         goal: {
             eu: 'Poligono erregular baten eta zirkulu baten azalera kalkulatzea.',
             es: 'Calcular el área de un polígono regular y la de un círculo.',
