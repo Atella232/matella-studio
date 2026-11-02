@@ -41,7 +41,7 @@ const probabilitateaUnit: UnitDefinition = {
         render: (props) => <ProbabilityAkLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, zuhaitzaren bideak, kontingentzia-taula, probabilitatearen detektibea eta memoria.', es: 'Cinco juegos: carrera, los caminos del árbol, la tabla de contingencia, detective de probabilidad y memoria.', en: 'Five games: race, the paths of the tree, the contingency table, probability detective and memory.', ar: 'خمس ألعاب: السباق ومسارات الشجرة وجدول التوافق ومخبر الاحتمالات والذاكرة.' },
         progressIds: probabilityAkGameProgressIds,
         recordsKey: PROBABILITY_AK_GAME_RECORDS_KEY,
         render: (props) => <ProbabilityAkGames {...props} />

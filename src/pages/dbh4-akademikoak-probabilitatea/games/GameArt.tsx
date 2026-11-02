@@ -1,8 +1,13 @@
 import { Car } from '../../../features/unit-v2/games/GameKit'
 import type { ProbabilityAkGameId } from './info'
+import { DetectiveArt } from '../../dbh4-games/DetectiveArt'
+import { ProbabilityArt } from '../../dbh4-games/ProbabilityGames'
 
 /** Small illustration of each game; the art is the same in every language */
 export function ProbabilityAkGameArt({ game }: { game: ProbabilityAkGameId }) {
+    if (game === 'tree') return <ProbabilityArt game="tree" />
+    if (game === 'table') return <ProbabilityArt game="table" />
+    if (game === 'detective') return <DetectiveArt lines={['P = 3/4 ?', 'P(A ∪ B) = …', 'P(D/A) = 9/15']} />
     if (game === 'race') {
         return (
             <svg className="fraction-v2-game-art" viewBox="0 0 220 120" aria-hidden="true">

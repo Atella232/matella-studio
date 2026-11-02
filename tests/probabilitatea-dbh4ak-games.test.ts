@@ -88,7 +88,7 @@ function expected(question: ProbabilityAkRaceQuestion): number {
 }
 
 test('probabilitatea 4. DBH ak games: levels, ids and routes', () => {
-    assert.equal(probabilityAkGames.length, 2)
+    assert.equal(probabilityAkGames.length, 5)
     assert.equal(probabilityAkGames[0].levels.length, PROBABILITY_AK_RACE_CIRCUITS)
     assert.equal(probabilityAkGames[1].levels.length, probabilityAkMemoryLevels.length)
     assert.equal(new Set(probabilityAkGameProgressIds).size, probabilityAkGameProgressIds.length)

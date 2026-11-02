@@ -31,6 +31,9 @@ import { createJumpRounds, createLinesRounds, JUMP_ROUNDS, jumpLanding, K_RANGE,
 import { createVectorsDetectiveCases, vectorsDetectiveLevels, vectorsDetectiveNames, vectorsDetectiveTips } from '../src/pages/dbh4-games/vectorsDetective.ts'
 import { binomial, BOXES_ROUNDS, createBoxesRounds, createModelRounds, factorial, MODEL_ANSWERS, MODEL_ROUNDS, modelCount, modelLatex, variations } from '../src/pages/dbh4-games/combinatorics.ts'
 import { combinatoricsDetectiveLevels, combinatoricsDetectiveNames, combinatoricsDetectiveTips, createCombinatoricsDetectiveCases } from '../src/pages/dbh4-games/combinatoricsDetective.ts'
+import { cellValue, createTableRounds, createTreeRounds, eventLeaves, eventProbability, eventText, leafProbability, TABLE_ROUNDS, tableAnswer, tableQuestionLatex, totalValue, TREE_ROUNDS } from '../src/pages/dbh4-games/probability.ts'
+import { createProbabilityDetectiveCases, probabilityDetectiveLevels, probabilityDetectiveNames, probabilityDetectiveTips } from '../src/pages/dbh4-games/probabilityDetective.ts'
+import { toNumber } from '../src/features/unit-v2/math/fraction.ts'
 import { checkTexts, renders } from './helpers/ownGamesCheck.ts'
 import { evaluate } from './helpers/realsRaceCheck.ts'
 
@@ -822,5 +825,59 @@ test('4. DBH the box method: the boxes multiply to the count, every box within t
 
 test('4. DBH combinatorics detective: counting, models and combinations', () => {
     checkDetective(createCombinatoricsDetectiveCases, combinatoricsDetectiveLevels, combinatoricsDetectiveNames, combinatoricsDetectiveTips)
+})
+
+test('4. DBH the paths of the tree: the leaves add up to 1, the event is checked by drawing every pair, the kinds of each level', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createTreeRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, TREE_ROUNDS)
+            for (const round of rounds) {
+                const colours = round.counts.length
+                assert.equal(colours, level === 2 ? 3 : 2)
+                if (level === 0) assert.ok(round.replace)
+                if (level === 1) assert.ok(!round.replace)
+                const leaves = Array.from({ length: colours * colours }, (_, index) => `${Math.floor(index / colours)}-${index % colours}`)
+                assert.ok(Math.abs(leaves.reduce((sum, leaf) => sum + toNumber(leafProbability(round, leaf)), 0) - 1) < 1e-12)
+                assert.deepEqual(round.right, eventLeaves(colours, round.event, round.colour))
+                assert.ok(round.right.length > 0 && round.right.length < colours * colours)
+                // The event probability by listing every ordered pair of balls
+                const balls = round.counts.flatMap((count, colour) => Array<number>(count).fill(colour))
+                let hits = 0
+                let all = 0
+                balls.forEach((first, i) => balls.forEach((second, j) => {
+                    if (!round.replace && i === j) return
+                    all += 1
+                    if (round.right.includes(`${first}-${second}`)) hits += 1
+                }))
+                assert.ok(Math.abs(toNumber(eventProbability(round)) - hits / all) < 1e-12)
+                checkTexts([eventText(round)])
+                checkLanguages([eventText(round)])
+            }
+        }
+    }
+})
+
+test('4. DBH the contingency table: the cells and the total give the probability, as counted from the table', () => {
+    for (let level = 0; level < 3; level += 1) {
+        const questions = new Set<string>()
+        for (let seed = 1; seed <= 150; seed += 1) {
+            const rounds = createTableRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, TABLE_ROUNDS)
+            for (const round of rounds) {
+                questions.add(round.question)
+                const [[a, b], [c, d]] = round.cells
+                const expected = { row: (a + b) / (a + b + c + d), cell: a / (a + b + c + d), union: (a + b + c) / (a + b + c + d), 'given-row': a / (a + b), 'given-column': a / (a + c) }[round.question]
+                assert.ok(Math.abs(toNumber(tableAnswer(round)) - expected) < 1e-12)
+                assert.equal(round.numerator.reduce((sum, cell) => sum + cellValue(round, cell), 0) / totalValue(round, round.denominator), expected)
+                renders(tableQuestionLatex(round))
+            }
+        }
+        assert.deepEqual([...questions].sort(), [['cell', 'row'], ['cell', 'union'], ['given-column', 'given-row']][level])
+    }
+})
+
+test('4. DBH probability detective: Laplace, compound events and conditional probability', () => {
+    checkDetective(createProbabilityDetectiveCases, probabilityDetectiveLevels, probabilityDetectiveNames, probabilityDetectiveTips)
 })
 

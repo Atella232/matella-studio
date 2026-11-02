@@ -12,3 +12,7 @@ Phase 1 5bca638 (diag 6301–6308, practice 1–20, challenges 101–115, bank 1
 Shared fix in bd79cac: `LabKit.css` readout-main got padding-block 4px + overflow-y hidden (KaTeX fractions made a vertical scrollbar in every unit's lab readout), and `.math-token.display` inside it overflow visible (single-formula readouts clipped denominators).
 
 Full suite 804/804, lint and build OK. Merged to main (fast-forward f8ddf34), pushed and deployed 2026-10-21 (bundle index-BX0TEDsp). With it, all 14 units of 4. DBH akademikoak are live.
+
+## Own games (2026-11-02)
+
+The paths of the tree (86301–3), the contingency table (86401–3) and a probability detective (86501–3). Details in `dbh4-own-games.md`.

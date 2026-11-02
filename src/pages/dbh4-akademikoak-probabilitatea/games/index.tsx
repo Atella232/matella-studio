@@ -7,11 +7,17 @@ import { ProbabilityAkGameArt } from './GameArt'
 import { PROBABILITY_AK_GAME_RECORDS_KEY, probabilityAkGameModeForPath, probabilityAkGames, probabilityAkGameSlugs, type ProbabilityAkGameId } from './info'
 import { ProbabilityAkRaceGame } from './RaceGame'
 import '../../dbh1-aljebra-v2/games/AlgebraGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { ContingencyGame, TreePathsGame } from '../../dbh4-games/ProbabilityGames'
+import { createProbabilityDetectiveCases, PROBABILITY_DETECTIVE_CASES, probabilityDetectiveNames, probabilityDetectiveTips } from '../../dbh4-games/probabilityDetective'
 
 const memoryGame = probabilityAkGames.find((game) => game.id === 'memory')!
 
 const components: Record<ProbabilityAkGameId, (props: GameProps) => JSX.Element> = {
     race: ProbabilityAkRaceGame,
+    tree: (props) => <TreePathsGame {...props} game={probabilityAkGames.find((game) => game.id === 'tree')!} art={<ProbabilityAkGameArt game="tree" />} />,
+    table: (props) => <ContingencyGame {...props} game={probabilityAkGames.find((game) => game.id === 'table')!} art={<ProbabilityAkGameArt game="table" />} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: probabilityAkGames.find((game) => game.id === 'detective')!, art: <ProbabilityAkGameArt game="detective" />, cases: PROBABILITY_DETECTIVE_CASES, createCases: createProbabilityDetectiveCases, names: probabilityDetectiveNames, tips: probabilityDetectiveTips }} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <ProbabilityAkGameArt game="memory" />, pairs: PROBABILITY_AK_MEMORY_PAIRS, createBoard: createProbabilityAkMemoryBoard }} />
 }
 
