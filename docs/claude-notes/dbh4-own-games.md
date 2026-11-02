@@ -29,3 +29,11 @@ Code in `dbh4-games/equations.ts`, `EquationGames.tsx`, `equationsDetective.ts`.
 - `detective` (ap 48501–3, ak 66501–3): the applied track reuses the first- and second-degree cases of Ekuazioak 2. DBH (`buildEquationDetectiveCase`, now exported) and adds systems; the academic track has quadratics and biquadratics, radical/fraction/exponential equations and inequalities. Values: lists → `solutionsValue`, systems → x·1000 + y, sets → `setCode`.
 
 Trick: the wiring script once changed the wrong `assert.equal(x.length, n)` in a test; it now only matches `…Games.length`.
+
+## Functions (ap `dbh4-aplikatuak-funtzioak`, ak `dbh4-akademikoak-funtzioak`)
+
+- `domain` (`dbh4-games/functions.ts` + `DomainGame` in `EquationGames.tsx`): paint the domain. A `DomainRound` is a `PaintRound` with the formula `display`; the condition behind it is the radicand ≥ 0, a denominator as (denominator)² > 0, or both > 0. Ids ap 54301–3, ak 76301–3.
+- `slope` (`FunctionGames.tsx`): the mean slope. Choose [a, b] whose mean rate of change is the target; the plane is fitted to the function and capped at 250 px; the secant appears after checking; any right interval counts. Ids ap 54401–3, ak 76401–3.
+- `detective` (`functionsDetective.ts`): images and preimages, domains (sets), the rate of change. Ids ap 54501–3, ak 76501–3.
+
+Trick: several academic hub tests limited the progress ids to `…101–…299`; they now allow up to `…599`.

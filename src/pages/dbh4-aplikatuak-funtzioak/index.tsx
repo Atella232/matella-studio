@@ -42,7 +42,7 @@ const funtzioakUnit: UnitDefinition = {
         render: (props) => <FunctionsLaboratory {...props} />
     },
     games: {
-        description: { eu: 'Bi joko abiadura eta zehaztasuna entrenatzeko: lasterketa eta memoria.', es: 'Dos juegos para entrenar rapidez y precisión: carrera y memoria.', en: 'Two games to train speed and accuracy: race and memory.', ar: 'لعبتان لتدريب السرعة والدقة: السباق والذاكرة.' },
+        description: { eu: 'Bost joko: lasterketa, margotu eremua, batez besteko malda, funtzioen detektibea eta memoria.', es: 'Cinco juegos: carrera, pinta el dominio, la pendiente media, detective de funciones y memoria.', en: 'Five games: race, paint the domain, the mean slope, functions detective and memory.', ar: 'خمس ألعاب: السباق ولوّن المجال والميل المتوسط ومخبر الدوال والذاكرة.' },
         progressIds: functionsGameProgressIds,
         recordsKey: FUNCTIONS_GAME_RECORDS_KEY,
         render: (props) => <FunctionsGames {...props} />

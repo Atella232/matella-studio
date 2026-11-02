@@ -93,7 +93,7 @@ test('probabilitatea 4. DBH ak games: levels, ids and routes', () => {
     assert.equal(probabilityAkGames[1].levels.length, probabilityAkMemoryLevels.length)
     assert.equal(new Set(probabilityAkGameProgressIds).size, probabilityAkGameProgressIds.length)
     assert.ok(!probabilityAkGameProgressIds.some((id) => probabilityAkLabChallengeIds.includes(id)))
-    for (const id of probabilityAkGameProgressIds) assert.ok(id >= 86101 && id <= 86299, `${id}`)
+    for (const id of probabilityAkGameProgressIds) assert.ok(id >= 86101 && id <= 86599, `${id}`)
     const stages = ['events', 'probability', 'compound', 'conditional', 'counting']
     for (const game of probabilityAkGames) for (const level of game.levels) assert.ok(stages.includes(level.stage), `${game.id} ${level.stage}`)
     assert.deepEqual(probabilityAkGames[0].levels.map((level) => level.stage), stages)

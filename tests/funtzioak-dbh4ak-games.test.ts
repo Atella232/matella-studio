@@ -80,12 +80,12 @@ function checkPromptPolynomial(question: FunctionsAkRaceQuestion) {
 }
 
 test('funtzioak 4. DBH ak games: levels, ids and routes', () => {
-    assert.equal(functionsAkGames.length, 2)
+    assert.equal(functionsAkGames.length, 5)
     assert.equal(functionsAkGames[0].levels.length, FUNCTIONS_AK_RACE_CIRCUITS)
     assert.equal(functionsAkGames[1].levels.length, functionsAkMemoryLevels.length)
     assert.equal(new Set(functionsAkGameProgressIds).size, functionsAkGameProgressIds.length)
     assert.ok(!functionsAkGameProgressIds.some((id) => functionsAkLabChallengeIds.includes(id)))
-    for (const id of functionsAkGameProgressIds) assert.ok(id >= 76101 && id <= 76299, `${id}`)
+    for (const id of functionsAkGameProgressIds) assert.ok(id >= 76101 && id <= 76599, `${id}`)
     const stages = ['concept', 'domain', 'continuity', 'features', 'change']
     for (const game of functionsAkGames) for (const level of game.levels) assert.ok(stages.includes(level.stage), `${game.id} ${level.stage}`)
     assert.deepEqual(functionsAkGames[0].levels.map((level) => level.stage), stages)

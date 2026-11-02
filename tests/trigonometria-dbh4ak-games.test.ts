@@ -86,7 +86,7 @@ test('trigonometria 4. DBH ak games: levels, ids and routes', () => {
     assert.equal(trigonometryGames[1].levels.length, trigonometryMemoryLevels.length)
     assert.equal(new Set(trigonometryGameProgressIds).size, trigonometryGameProgressIds.length)
     assert.ok(!trigonometryGameProgressIds.some((id) => trigonometryLabChallengeIds.includes(id)))
-    for (const id of trigonometryGameProgressIds) assert.ok(id >= 72101 && id <= 72299, `${id}`)
+    for (const id of trigonometryGameProgressIds) assert.ok(id >= 72101 && id <= 72599, `${id}`)
     const stages = ['ratios', 'identities', 'solving', 'problems', 'circle']
     for (const game of trigonometryGames) for (const level of game.levels) assert.ok(stages.includes(level.stage), `${game.id} ${level.stage}`)
     assert.deepEqual(trigonometryGames[0].levels.map((level) => level.stage), stages)

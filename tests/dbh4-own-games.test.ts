@@ -11,6 +11,8 @@ import { createPolyDetectiveCases, POLY_DETECTIVE_X, polyDetectiveLevels, polyDe
 import { buildRight, checkRight, createBuildRounds, createCheckRounds, createCrossRounds, createPaintRounds, lineAt, paintRight, pieceCount, pieceSample, pieceSolves, rootSolves, solutionLatex } from '../src/pages/dbh4-games/equations.ts'
 import { createEquationsDetectiveCases, equationsDetectiveLevels, equationsDetectiveNames, equationsDetectiveTips, setCode, systemCode, type Piece } from '../src/pages/dbh4-games/equationsDetective.ts'
 import { solutionsValue } from '../src/pages/dbh2-ekuazioak-v2/games/detective.ts'
+import { createDomainRounds, createSlopeRounds, meanRate, rightIntervals } from '../src/pages/dbh4-games/functions.ts'
+import { createFunctionsDetectiveCases, functionsDetectiveLevels, functionsDetectiveNames, functionsDetectiveTips } from '../src/pages/dbh4-games/functionsDetective.ts'
 import { checkTexts, renders } from './helpers/ownGamesCheck.ts'
 import { evaluate } from './helpers/realsRaceCheck.ts'
 
@@ -238,5 +240,56 @@ test('4. DBH equations detective: both tracks', () => {
             }
             assert.equal(seen.size, 4, `${track} ${level}`)
         }
+    }
+})
+
+/* ---------- Functions ---------- */
+
+test('4. DBH paint the domain: f is defined exactly on the painted pieces and ends', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            for (const round of createDomainRounds(createRandom(seed * 7919 + level), level)) {
+                renders(`f(x)=${round.display}`)
+                const defined = (x: number) => {
+                    const value = evaluate(round.display.replace(/x/g, `(${x})`))
+                    return value !== null && Number.isFinite(value) && !Number.isNaN(value)
+                }
+                for (let piece = 0; piece < pieceCount(round); piece += 1) assert.equal(defined(pieceSample(round, piece)), pieceSolves(round, piece), `${round.display} piece ${piece}`)
+                for (const root of round.roots) assert.equal(defined(root), rootSolves(round), `${round.display} at ${root}`)
+            }
+        }
+    }
+})
+
+test('4. DBH the mean slope: some interval reaches the target, [0, 1] does not', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            for (const round of createSlopeRounds(createRandom(seed * 7919 + level), level)) {
+                const right = rightIntervals(round)
+                assert.ok(right.length > 0)
+                for (const [a, b] of right) assert.ok(Math.abs(meanRate(round.coefficients, a, b) - round.target) < 1e-9)
+                assert.ok(!right.some(([a, b]) => a === 0 && b === 1))
+            }
+        }
+    }
+})
+
+test('4. DBH functions detective', () => {
+    checkTexts([...Object.values(functionsDetectiveNames), ...Object.values(functionsDetectiveTips)])
+    for (let level = 0; level < 3; level += 1) {
+        const seen = new Set<string>()
+        for (let seed = 1; seed <= 100; seed += 1) {
+            for (const item of createFunctionsDetectiveCases(createRandom(seed * 7919 + level), level)) {
+                seen.add(item.error)
+                assert.ok(functionsDetectiveLevels[level].includes(item.error))
+                for (const line of item.lines) renders(line.latex)
+                renders(item.fix)
+                checkTexts([item.problem])
+                const code = (latex: string) => (level === 1 ? equationCode(latex) : endValue(latex))
+                assert.ok(Math.abs(code(item.fix) - item.right) < 1e-6, `${item.error}: ${item.fix} ≠ ${item.right}`)
+                assert.ok(Math.abs(code(item.lines[2].latex) - item.reached) < 1e-6, `${item.error}: ${item.lines[2].latex} ≠ ${item.reached}`)
+            }
+        }
+        assert.equal(seen.size, 4)
     }
 })

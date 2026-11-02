@@ -73,7 +73,7 @@ test('estatistika 4. DBH ak games: levels, ids and routes', () => {
     assert.equal(statisticsAkGames[1].levels.length, statisticsAkMemoryLevels.length)
     assert.equal(new Set(statisticsAkGameProgressIds).size, statisticsAkGameProgressIds.length)
     assert.ok(!statisticsAkGameProgressIds.some((id) => statisticsAkLabChallengeIds.includes(id)))
-    for (const id of statisticsAkGameProgressIds) assert.ok(id >= 82101 && id <= 82299, `${id}`)
+    for (const id of statisticsAkGameProgressIds) assert.ok(id >= 82101 && id <= 82599, `${id}`)
     const stages = ['data', 'centre', 'position', 'spread', 'two']
     for (const game of statisticsAkGames) for (const level of game.levels) assert.ok(stages.includes(level.stage), `${game.id} ${level.stage}`)
     assert.deepEqual(statisticsAkGames[0].levels.map((level) => level.stage), stages)

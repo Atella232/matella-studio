@@ -10,3 +10,7 @@ Stages concept/domain/continuity/features/change; topics what-is, images, range-
 Phase 1+2 DONE 07dfeee (diag 5701–5708, practice 1–20, challenges 101–115, bank 1–50; tests/funtzioak-dbh4ak-content.test.ts). Phase 3 lab DONE 5dd0799 (10 tools: 2. DBH relation/table + aplikatuak domain/explorer/rate/periodic with their ids, new domains builder 751xx, join k 752xx, cubic roots 753xx, parity 754xx). Phase 4 games DONE d761d8a (race 76101–76105, all new generators with `meta` recomputed by the test; every circuit needs at least one writable question for the pit stop; memory 76201–76203: domains, images, T.V.M., cards without «y =»/«f(x) =» to stay under ~90 px). Full suite 713/713, build OK. Merged to main (fast-forward), pushed and deployed 2026-10-18 (bundle index-CZZ0PnRY). Next 4. DBH akademikoak unit: funciones-polinomicas-racionales (Santillana Ac. U10 + Anaya Ac. U5/U9).
 
 Gotchas: in SVG, never put an Arabic word inside an F (ltr) formula, and Label only isolates formula runs without ≥/≠ — write those lines as pure formulas. Step `math` over ~30 chars overflows at 375 px: split into more steps.
+
+## Own games (2026-11-02)
+
+Paint the domain, the mean slope and the functions detective: see [dbh4-own-games](dbh4-own-games.md).

@@ -7,11 +7,18 @@ import { FunctionsAkGameArt } from './GameArt'
 import { FUNCTIONS_AK_GAME_RECORDS_KEY, functionsAkGameModeForPath, functionsAkGames, functionsAkGameSlugs, type FunctionsAkGameId } from './info'
 import { FunctionsAkRaceGame } from './RaceGame'
 import '../../dbh1-aljebra-v2/games/AlgebraGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { DomainGame } from '../../dbh4-games/EquationGames'
+import { MeanSlopeGame } from '../../dbh4-games/FunctionGames'
+import { createFunctionsDetectiveCases, FUNCTIONS_DETECTIVE_CASES, functionsDetectiveNames, functionsDetectiveTips } from '../../dbh4-games/functionsDetective'
 
 const memoryGame = functionsAkGames.find((game) => game.id === 'memory')!
 
 const components: Record<FunctionsAkGameId, (props: GameProps) => JSX.Element> = {
     race: FunctionsAkRaceGame,
+    domain: (props) => <DomainGame {...props} game={functionsAkGames.find((game) => game.id === 'domain')!} art={<FunctionsAkGameArt game="domain" />} />,
+    slope: (props) => <MeanSlopeGame {...props} game={functionsAkGames.find((game) => game.id === 'slope')!} art={<FunctionsAkGameArt game="slope" />} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: functionsAkGames.find((game) => game.id === 'detective')!, art: <FunctionsAkGameArt game="detective" />, cases: FUNCTIONS_DETECTIVE_CASES, createCases: createFunctionsDetectiveCases, names: functionsDetectiveNames, tips: functionsDetectiveTips }} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <FunctionsAkGameArt game="memory" />, pairs: FUNCTIONS_AK_MEMORY_PAIRS, createBoard: createFunctionsAkMemoryBoard }} />
 }
 

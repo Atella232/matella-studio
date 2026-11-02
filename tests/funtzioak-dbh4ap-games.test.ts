@@ -53,7 +53,7 @@ function expected(question: FunctionsRaceQuestion): number {
 }
 
 test('funtzioak 4. DBH ap games: levels, ids and routes', () => {
-    assert.equal(functionsGames.length, 2)
+    assert.equal(functionsGames.length, 5)
     assert.equal(functionsGames[0].levels.length, FUNCTIONS_RACE_CIRCUITS)
     assert.equal(functionsGames[1].levels.length, functionsMemoryLevels.length)
     assert.equal(new Set(functionsGameProgressIds).size, functionsGameProgressIds.length)

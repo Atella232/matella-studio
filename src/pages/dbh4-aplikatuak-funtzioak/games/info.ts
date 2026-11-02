@@ -5,7 +5,7 @@ import { levelProgressIds, type GameInfo } from '../../../features/unit-v2/games
    levels and the unit progress id each level earns with its first star.
    ========================================================================== */
 
-export type FunctionsGameId = 'race' | 'memory'
+export type FunctionsGameId = 'race' | 'memory' | 'domain' | 'slope' | 'detective'
 
 export const FUNCTIONS_GAME_RECORDS_KEY = 'matella-funtzioak-dbh4ap-game-records'
 
@@ -33,18 +33,54 @@ export const functionsGames: GameInfo<FunctionsGameId>[] = [
             { progressId: 54202, stage: 'domain', title: { eu: 'Izate-eremuak', es: 'Dominios', en: 'Domains', ar: 'المجالات' }, description: { eu: '√(x − 2) ↔ [2, +∞)', es: '√(x − 2) ↔ [2, +∞)', en: '√(x − 2) ↔ [2, +∞)', ar: '√(x − 2) ↔ [2, +∞)' } },
             { progressId: 54203, stage: 'change', title: { eu: 'BAT', es: 'T.V.M.', en: 'Average rate of change', ar: 'المعدل' }, description: { eu: 'x², [1, 3] ↔ 4', es: 'x², [1, 3] ↔ 4', en: 'x², [1, 3] ↔ 4', ar: 'x², [1, 3] ↔ 4' } }
         ]
+    },
+    {
+        id: 'domain',
+        title: { eu: 'Margotu eremua', es: 'Pinta el dominio', en: 'Paint the domain', ar: 'لوّن المجال' },
+        tagline: { eu: 'Funtzio bat: piztu zuzenean bere eremuko zatiak eta muturrak.', es: 'Una función: enciende en la recta los trozos y extremos de su dominio.', en: 'A function: switch on the pieces and ends of its domain on the line.', ar: 'دالة: أضئ على المستقيم أجزاء مجالها وأطرافه.' },
+        skills: { eu: 'Funtzio baten eremua', es: 'El dominio de una función', en: 'The domain of a function', ar: 'مجال الدالة' },
+        levels: [
+            { progressId: 54301, stage: 'domain', title: { eu: 'Erroak eta zatikiak', es: 'Raíces y fracciones', en: 'Roots and fractions', ar: 'الجذور والكسور' }, description: { eu: '√(x − a), 1/(x − a)', es: '√(x − a), 1/(x − a)', en: '√(x − a), 1/(x − a)', ar: '√(x − a)، 1/(x − a)' } },
+            { progressId: 54302, stage: 'domain', title: { eu: 'Bigarren mailakoak', es: 'De segundo grado', en: 'Second degree', ar: 'من الدرجة الثانية' }, description: { eu: '√(x² + bx + c), x/(x² + bx + c)', es: '√(x² + bx + c), x/(x² + bx + c)', en: '√(x² + bx + c), x/(x² + bx + c)', ar: '√(x² + bx + c)، x/(x² + bx + c)' } },
+            { progressId: 54303, stage: 'domain', title: { eu: 'Erroa izendatzailean', es: 'Raíz en el denominador', en: 'Root in the denominator', ar: 'الجذر في المقام' }, description: { eu: '1/√(…) eta −x² duten errokizunak.', es: '1/√(…) y radicandos con −x².', en: '1/√(…) and radicands with −x².', ar: '1/√(…) وما تحت الجذر بـ −x².' } }
+        ]
+    },
+    {
+        id: 'slope',
+        title: { eu: 'Batez besteko malda', es: 'La pendiente media', en: 'The mean slope', ar: 'الميل المتوسط' },
+        tagline: { eu: 'Aukeratu batez besteko aldakuntza-tasa jakin bat duen tartea.', es: 'Elige el intervalo con una tasa de variación media dada.', en: 'Choose the interval with a given mean rate of change.', ar: 'اختر الفترة التي لها معدل تغيّر متوسط معطى.' },
+        skills: { eu: 'Batez besteko aldakuntza-tasa', es: 'Tasa de variación media', en: 'Mean rate of change', ar: 'معدل التغير المتوسط' },
+        levels: [
+            { progressId: 54401, stage: 'change', title: { eu: 'x² + c', es: 'x² + c', en: 'x² + c', ar: 'x² + c' }, description: { eu: 'Tasa = a + b.', es: 'Tasa = a + b.', en: 'Rate = a + b.', ar: 'المعدل = a + b.' } },
+            { progressId: 54402, stage: 'change', title: { eu: 'x² + bx + c', es: 'x² + bx + c', en: 'x² + bx + c', ar: 'x² + bx + c' }, description: { eu: 'Tasa = a + b + koefizientea.', es: 'Tasa = a + b + coeficiente.', en: 'Rate = a + b + coefficient.', ar: 'المعدل = a + b + المعامل.' } },
+            { progressId: 54403, stage: 'change', title: { eu: 'Beherantz zabalduta', es: 'Abiertas hacia abajo', en: 'Opening downwards', ar: 'مفتوحة للأسفل' }, description: { eu: '−x² + bx + c', es: '−x² + bx + c', en: '−x² + bx + c', ar: '−x² + bx + c' } }
+        ]
+    },
+    {
+        id: 'detective',
+        title: { eu: 'Funtzioen detektibea', es: 'Detective de funciones', en: 'Functions detective', ar: 'مخبر الدوال' },
+        tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: اكتشفه وقل ما نوع الخطأ.' },
+        skills: { eu: 'Funtzioetako akats tipikoak', es: 'Errores típicos con funciones', en: 'Common mistakes with functions', ar: 'الأخطاء الشائعة في الدوال' },
+        levels: [
+            { progressId: 54501, stage: 'concept', title: { eu: 'Irudiak eta aurreirudiak', es: 'Imágenes y antiimágenes', en: 'Images and preimages', ar: 'الصور والأصول' }, description: { eu: 'f(k), f(−2), zatikakoak eta f(a + b).', es: 'f(k), f(−2), a trozos y f(a + b).', en: 'f(k), f(−2), piecewise and f(a + b).', ar: 'f(k) وf(−2) والمعرّفة بفروع وf(a + b).' } },
+            { progressId: 54502, stage: 'domain', title: { eu: 'Eremuak', es: 'Dominios', en: 'Domains', ar: 'المجالات' }, description: { eu: 'Erroak eta izendatzaileak.', es: 'Raíces y denominadores.', en: 'Roots and denominators.', ar: 'الجذور والمقامات.' } },
+            { progressId: 54503, stage: 'change', title: { eu: 'Aldakuntza-tasa', es: 'Tasa de variación', en: 'Rate of change', ar: 'معدل التغير' }, description: { eu: 'Zatiketa, ordena eta irudiak.', es: 'Cociente, orden e imágenes.', en: 'Quotient, order and images.', ar: 'القسمة والترتيب والصور.' } }
+        ]
     }
 ]
 
 export const functionsGameProgressIds: number[] = levelProgressIds(functionsGames)
 
 /** Address of each game (Basque); the parser below also accepts the Spanish ones */
-export const functionsGameSlugs: Record<FunctionsGameId, string> = { race: 'lasterketa', memory: 'memoria' }
+export const functionsGameSlugs: Record<FunctionsGameId, string> = { race: 'lasterketa', memory: 'memoria', domain: 'eremua', slope: 'malda', detective: 'detektibea' }
 
 export function functionsGameModeForPath(pathname: string): FunctionsGameId | 'hub' {
     const game = pathname.match(/\/(?:juegos|jokuak)\/([a-z-]+)$/)?.[1]
     if (!game) return 'hub'
     if (['carrera', 'lasterketa'].includes(game)) return 'race'
+    if (['eremua', 'dominio'].includes(game)) return 'domain'
+    if (['malda', 'pendiente'].includes(game)) return 'slope'
+    if (['detektibea', 'detective'].includes(game)) return 'detective'
     if (['memoria', 'memory'].includes(game)) return 'memory'
     return 'hub'
 }

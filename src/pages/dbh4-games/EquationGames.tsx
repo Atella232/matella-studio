@@ -12,6 +12,7 @@ import {
     B_LIMIT, buildRight, BUILD_ROUNDS, C_LIMIT, CHECK_ROUNDS, checkRight, createBuildRounds, createCheckRounds, createCrossRounds, createPaintRounds, CROSS_ROUNDS, equationLatex, lineAt,
     PAINT_ROUNDS, paintRight, pieceCount, pieceSolves, relationLatex, rootSolves, solutionLatex, standardStars, type BuildRound, type CheckRound, type CrossRound, type PaintRound
 } from './equations'
+import { createDomainRounds, DOMAIN_ROUNDS, type DomainRound } from './functions'
 import { polyLatex, valueAt } from './polynomials'
 import '../dbh2-funtzioak-v2/Functions.css'
 import './Dbh4Games.css'
@@ -107,7 +108,11 @@ function PaintPlay({ round, language, onAnswer, answered }: RoundProps<PaintRoun
     }
     return (
         <>
-            <p className="prop3-prompt"><strong>{formula(`${polyLatex(round.coefficients)}${relationLatex[round.relation]}0`, language)}</strong></p>
+            <p className="prop3-prompt">
+                {'display' in round
+                    ? <>{l(say('Funtzio honen eremua:', 'El dominio de la función:', 'مجال الدالة:', 'The domain of the function:'))}<strong>{formula(`f(x)=${(round as DomainRound).display}`, language)}</strong></>
+                    : <strong>{formula(`${polyLatex(round.coefficients)}${relationLatex[round.relation]}0`, language)}</strong>}
+            </p>
             <svg className="dbh4-line" viewBox="0 0 340 60" aria-hidden="true">
                 <line x1="8" y1="30" x2="332" y2="30" stroke="var(--ink)" strokeWidth="2" />
                 {shownPieces.map((on, piece) => {
@@ -151,6 +156,19 @@ export const PaintSolutionGame = makeGame<PaintRound>({
     ],
     create: createPaintRounds,
     stars: standardStars(PAINT_ROUNDS),
+    starsNote: say('3 izar: 5 · 2 izar: 4 · izar 1: 3', '3 estrellas: 5 · 2: 4 · 1: 3', '3 نجوم: 5 · 2: 4 · 1: 3', '3 stars: 5 · 2: 4 · 1: 3'),
+    Round: PaintPlay
+})
+
+export const DomainGame = makeGame<PaintRound>({
+    rounds: DOMAIN_ROUNDS,
+    rules: [
+        say('Erro karratuaren barrukoa ≥ 0; izendatzailea ≠ 0; biak batera, > 0.', 'Lo de dentro de una raíz, ≥ 0; un denominador, ≠ 0; las dos cosas a la vez, > 0.', 'ما تحت الجذر ≥ 0، والمقام ≠ 0، ومعًا > 0.', 'Inside a square root, ≥ 0; a denominator, ≠ 0; both at once, > 0.'),
+        say('Zuzena puntu kritikoetan mozten da: piztu eremuko zatiak eta muturrak.', 'La recta se corta en los puntos críticos: enciende los trozos y los extremos del dominio.', 'يُقطع المستقيم عند النقاط الحرجة: أضئ أجزاء المجال وأطرافه.', 'The line is cut at the critical points: switch on the pieces and the ends of the domain.'),
+        say('2. eta 3. mailetan puntuak ezkutuan daude: kalkulatu.', 'En los niveles 2 y 3 los puntos están ocultos: calcúlalos.', 'في المستويين 2 و3 النقاط مخفية: احسبها.', 'In levels 2 and 3 the points are hidden: work them out.')
+    ],
+    create: createDomainRounds,
+    stars: standardStars(DOMAIN_ROUNDS),
     starsNote: say('3 izar: 5 · 2 izar: 4 · izar 1: 3', '3 estrellas: 5 · 2: 4 · 1: 3', '3 نجوم: 5 · 2: 4 · 1: 3', '3 stars: 5 · 2: 4 · 1: 3'),
     Round: PaintPlay
 })

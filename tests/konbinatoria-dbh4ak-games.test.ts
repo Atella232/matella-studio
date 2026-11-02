@@ -66,7 +66,7 @@ test('konbinatoria 4. DBH ak games: levels, ids and routes', () => {
     assert.equal(combinatoricsAkGames[1].levels.length, combinatoricsAkMemoryLevels.length)
     assert.equal(new Set(combinatoricsAkGameProgressIds).size, combinatoricsAkGameProgressIds.length)
     assert.ok(!combinatoricsAkGameProgressIds.some((id) => combinatoricsAkLabChallengeIds.includes(id)))
-    for (const id of combinatoricsAkGameProgressIds) assert.ok(id >= 84101 && id <= 84299, `${id}`)
+    for (const id of combinatoricsAkGameProgressIds) assert.ok(id >= 84101 && id <= 84599, `${id}`)
     const stages = ['counting', 'variations', 'permutations', 'combinations', 'problems']
     for (const game of combinatoricsAkGames) for (const level of game.levels) assert.ok(stages.includes(level.stage), `${game.id} ${level.stage}`)
     assert.deepEqual(combinatoricsAkGames[0].levels.map((level) => level.stage), stages)

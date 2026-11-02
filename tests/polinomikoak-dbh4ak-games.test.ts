@@ -88,7 +88,7 @@ test('polinomikoak 4. DBH ak games: levels, ids and routes', () => {
     assert.equal(polynomialAkGames[1].levels.length, polynomialAkMemoryLevels.length)
     assert.equal(new Set(polynomialAkGameProgressIds).size, polynomialAkGameProgressIds.length)
     assert.ok(!polynomialAkGameProgressIds.some((id) => polynomialAkLabChallengeIds.includes(id)))
-    for (const id of polynomialAkGameProgressIds) assert.ok(id >= 78101 && id <= 78299, `${id}`)
+    for (const id of polynomialAkGameProgressIds) assert.ok(id >= 78101 && id <= 78599, `${id}`)
     const stages = ['lines', 'parabolas', 'shifts', 'absolute', 'rational']
     for (const game of polynomialAkGames) for (const level of game.levels) assert.ok(stages.includes(level.stage), `${game.id} ${level.stage}`)
     assert.deepEqual(polynomialAkGames[0].levels.map((level) => level.stage), stages)

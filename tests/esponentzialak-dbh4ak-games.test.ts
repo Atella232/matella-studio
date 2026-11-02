@@ -61,7 +61,7 @@ test('esponentzialak 4. DBH ak games: levels, ids and routes', () => {
     assert.equal(exponentialAkGames[1].levels.length, exponentialAkMemoryLevels.length)
     assert.equal(new Set(exponentialAkGameProgressIds).size, exponentialAkGameProgressIds.length)
     assert.ok(!exponentialAkGameProgressIds.some((id) => exponentialAkLabChallengeIds.includes(id)))
-    for (const id of exponentialAkGameProgressIds) assert.ok(id >= 80101 && id <= 80299, `${id}`)
+    for (const id of exponentialAkGameProgressIds) assert.ok(id >= 80101 && id <= 80599, `${id}`)
     const stages = ['exponential', 'growth', 'logarithmic', 'trigonometric', 'transforms']
     for (const game of exponentialAkGames) for (const level of game.levels) assert.ok(stages.includes(level.stage), `${game.id} ${level.stage}`)
     assert.deepEqual(exponentialAkGames[0].levels.map((level) => level.stage), stages)

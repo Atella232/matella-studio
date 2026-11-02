@@ -91,7 +91,7 @@ test('bektoreak 4. DBH ak games: levels, ids and routes', () => {
     assert.equal(vectorsGames[1].levels.length, vectorsMemoryLevels.length)
     assert.equal(new Set(vectorsGameProgressIds).size, vectorsGameProgressIds.length)
     assert.ok(!vectorsGameProgressIds.some((id) => vectorsLabChallengeIds.includes(id)))
-    for (const id of vectorsGameProgressIds) assert.ok(id >= 74101 && id <= 74299, `${id}`)
+    for (const id of vectorsGameProgressIds) assert.ok(id >= 74101 && id <= 74599, `${id}`)
     const stages = ['vectors', 'points', 'equations', 'positions', 'applications']
     for (const game of vectorsGames) for (const level of game.levels) assert.ok(stages.includes(level.stage), `${game.id} ${level.stage}`)
     assert.deepEqual(vectorsGames[0].levels.map((level) => level.stage), stages)

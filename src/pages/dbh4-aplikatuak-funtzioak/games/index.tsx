@@ -7,11 +7,18 @@ import { FunctionsGameArt } from './GameArt'
 import { FUNCTIONS_GAME_RECORDS_KEY, functionsGameModeForPath, functionsGames, functionsGameSlugs, type FunctionsGameId } from './info'
 import { FunctionsRaceGame } from './RaceGame'
 import '../../dbh1-aljebra-v2/games/AlgebraGames.css'
+import { WorkedDetectiveGame } from '../../../features/unit-v2/games/WorkedDetectiveGame'
+import { DomainGame } from '../../dbh4-games/EquationGames'
+import { MeanSlopeGame } from '../../dbh4-games/FunctionGames'
+import { createFunctionsDetectiveCases, FUNCTIONS_DETECTIVE_CASES, functionsDetectiveNames, functionsDetectiveTips } from '../../dbh4-games/functionsDetective'
 
 const memoryGame = functionsGames.find((game) => game.id === 'memory')!
 
 const components: Record<FunctionsGameId, (props: GameProps) => JSX.Element> = {
     race: FunctionsRaceGame,
+    domain: (props) => <DomainGame {...props} game={functionsGames.find((game) => game.id === 'domain')!} art={<FunctionsGameArt game="domain" />} />,
+    slope: (props) => <MeanSlopeGame {...props} game={functionsGames.find((game) => game.id === 'slope')!} art={<FunctionsGameArt game="slope" />} />,
+    detective: (props) => <WorkedDetectiveGame {...props} config={{ game: functionsGames.find((game) => game.id === 'detective')!, art: <FunctionsGameArt game="detective" />, cases: FUNCTIONS_DETECTIVE_CASES, createCases: createFunctionsDetectiveCases, names: functionsDetectiveNames, tips: functionsDetectiveTips }} />,
     memory: (props) => <PairsMemoryGame {...props} config={{ game: memoryGame, art: <FunctionsGameArt game="memory" />, pairs: FUNCTIONS_MEMORY_PAIRS, createBoard: createFunctionsMemoryBoard }} />
 }
 
