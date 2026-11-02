@@ -4,6 +4,8 @@ import { createRandom } from '../src/features/unit-v2/games/random.ts'
 import { createNaturalsDetectiveCases, naturalsDetectiveLevels, naturalsDetectiveNames, naturalsDetectiveTips } from '../src/pages/dbh1-zenbaki-naturalak-v2/games/detective.ts'
 import { createZeroRounds, effective, ROW_MAX, sumLatex, termsLatex, ZERO_LIMIT, ZERO_ROUNDS } from '../src/pages/dbh1-zenbaki-osoak-v2/games/zeroPairs.ts'
 import { createIntegersDetectiveCases, integersDetectiveLevels, integersDetectiveNames, integersDetectiveTips } from '../src/pages/dbh1-zenbaki-osoak-v2/games/detective.ts'
+import { createMeetRounds, createRectanglesRounds, departures, divisorsOf, gcd, lcm, MEET_ROUNDS, rectanglePairs, RECTANGLES_MAX, RECTANGLES_ROUNDS } from '../src/pages/dbh1-zatigarritasuna-v2/games/divisibilityRounds.ts'
+import { createDivisibilityDetectiveCases, divisibilityDetectiveLevels, divisibilityDetectiveNames, divisibilityDetectiveTips } from '../src/pages/dbh1-zatigarritasuna-v2/games/detective.ts'
 import { checkDetective, endValue, renders } from './helpers/ownGamesCheck.ts'
 
 /* The own games of the 1. DBH units */
@@ -38,4 +40,48 @@ test('1. DBH zero pairs: the answer is the sum, never 0 nor out of the stepper, 
 
 test('1. DBH integers detective: the errors of each level, the fix and the last line on their values', () => {
     checkDetective(createIntegersDetectiveCases, integersDetectiveLevels, integersDetectiveNames, integersDetectiveTips)
+})
+
+test('1. DBH rectangles: one rectangle per pair of divisors, answers inside the stepper and never its start', () => {
+    assert.deepEqual(rectanglePairs(36), [[1, 36], [2, 18], [3, 12], [4, 9], [6, 6]])
+    assert.deepEqual(divisorsOf(12), [1, 2, 3, 4, 6, 12])
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const rounds = createRectanglesRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, RECTANGLES_ROUNDS)
+            assert.equal(new Set(rounds.map((round) => round.n)).size, RECTANGLES_ROUNDS)
+            for (const { n, ask, answer } of rounds) {
+                assert.ok(answer > 0 && answer <= RECTANGLES_MAX)
+                assert.equal(ask, level < 2 ? 'rectangles' : 'divisors')
+                assert.equal(answer, ask === 'rectangles' ? rectanglePairs(n).length : divisorsOf(n).length)
+                if (level === 0) assert.ok(n <= 24 && answer >= 2)
+                if (level === 1) assert.ok(n <= 60 && answer >= 3)
+            }
+            if (level === 2) assert.ok(rounds.some((round) => round.answer === 2) && rounds.some((round) => round.answer % 2 === 1))
+        }
+    }
+})
+
+test('1. DBH buses and ribbons: the answer is the LCM or the GCD and is among the options, both kinds in level 3', () => {
+    for (let level = 0; level < 3; level += 1) {
+        for (let seed = 1; seed <= 200; seed += 1) {
+            const rounds = createMeetRounds(createRandom(seed * 7919 + level), level)
+            assert.equal(rounds.length, MEET_ROUNDS)
+            for (const { kind, a, b, answer, options } of rounds) {
+                assert.ok(a < b)
+                assert.equal(answer, kind === 'lcm' ? lcm(a, b) : gcd(a, b))
+                assert.ok(options.includes(answer) && new Set(options).size === options.length && options.length >= 4)
+                assert.deepEqual(options, [...options].sort((x, y) => x - y))
+                if (kind === 'lcm') assert.ok(answer !== b && answer !== a * b && answer <= 60 && departures(a, answer).includes(answer))
+                if (kind === 'gcd') assert.ok(answer > 1 && answer !== a && b % answer === 0)
+                if (level === 0) assert.equal(kind, 'lcm')
+                if (level === 1) assert.equal(kind, 'gcd')
+            }
+            if (level === 2) assert.ok(rounds.some((round) => round.kind === 'lcm') && rounds.some((round) => round.kind === 'gcd'))
+        }
+    }
+})
+
+test('1. DBH divisibility detective: the errors of each level, the fix and the last line on their values', () => {
+    checkDetective(createDivisibilityDetectiveCases, divisibilityDetectiveLevels, divisibilityDetectiveNames, divisibilityDetectiveTips)
 })

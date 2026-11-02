@@ -22,7 +22,7 @@ import {
 import { divisibilityIntroLabChallengeIds } from '../src/pages/dbh1-zatigarritasuna-v2/lab/labTools.ts'
 
 test('zatigarritasuna 1. DBH games: levels, ids and routes', () => {
-    assert.equal(introDivisibilityGames.length, 4)
+    assert.equal(introDivisibilityGames.length, 7)
     assert.equal(introDivisibilityGames[0].levels.length, INTRO_RACE_CIRCUITS)
     assert.equal(introHuntLevels.length, introDivisibilityGames.find((game) => game.id === 'hunt')!.levels.length)
     assert.equal(introFactorLevels.length, introDivisibilityGames.find((game) => game.id === 'factor')!.levels.length)

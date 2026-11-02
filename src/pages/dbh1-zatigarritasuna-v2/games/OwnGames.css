@@ -1,0 +1,3 @@
+/* The own games of 1. DBH divisibility */
+.fraction-v2-games-card[data-game="rectangles"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="buses"] { --game-tint: var(--success-tint, #d9efe2); }
