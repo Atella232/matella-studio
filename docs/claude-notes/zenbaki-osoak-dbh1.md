@@ -10,3 +10,5 @@ Sources: owner's Drive `LIBROS/1_ESO/Santillana/Unidad_05_Enteros.pdf` (class te
 Reuse of DBH2 (`src/pages/dbh2-zenbaki-osoak/`) instead of copying: NumberLine/SituationsFigure/SignRuleFigure figures and CSS; the six lab tools accept a `challenges` prop (IntegerToolProps loosened to LabToolProps); PyramidGame/OrderGame accept `config` {game, levels, art}; the DBH1 race reuses DBH2 generators capped at tier ≤1 plus a new situations circuit. New own pieces: ElevatorFigure, CountersFigure, BracketsFigure, lab BracketsTool, ElevatorGame.
 
 Phases: 1) 14 lessons [263762c]; 2) diagnostic 8, practice 19, bank 30 (15 closed with `answer`), challenges 12 [13b3e81]; 3) lab 7 tools × 4 [dc29b3f]; 4) games race/elevator/pyramid/order [done 2026-09-27]. Merged to main (fast-forward, be079da), pushed and deployed to matella.net on 2026-09-27 at the owner's request.
+
+Own games (2026-11-02): see `dbh1-own-games.md` for the new games, their ids and checks.
