@@ -195,7 +195,7 @@ export function InverseShareFigure({ language }: { language: UnitLanguage }) {
                 )
             })}
             <text x={600} y={100} textAnchor="middle" fontSize={18} fontWeight={700} fill={STAGE}>6 + 3 + 2 = 11</text>
-            <text x={600} y={130} textAnchor="middle" fontSize={18} fontWeight={700} fill={STAGE}>22 000 : 11 = 2000</text>
+            <text x={600} y={130} textAnchor="middle" fontSize={18} fontWeight={700} fill={STAGE}>{'22\u00a0000 : 11 = 2000'}</text>
             <Caption y={270} language={language} text={say('Postu handiagoa, zati txikiagoa: alderantzizkoekiko zuzenki', 'Puesto mayor, parte menor: directamente a los inversos', 'ترتيب أكبر، جزء أصغر: طرديًا على المقلوبات', 'Higher position, smaller share: share directly by the reciprocals')} />
         </Figure>
     )
