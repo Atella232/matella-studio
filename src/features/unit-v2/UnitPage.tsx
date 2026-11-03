@@ -7,6 +7,7 @@ import { Icon } from './icons'
 import { FitMath, LessonCases, LessonFigure, LessonMistakeBox, LessonSteps } from './LessonExtras'
 import { LessonCheckCard } from './LessonCheck'
 import { LessonNeeds } from './LessonNeeds'
+import { LessonDefinitions, LessonExample } from './LessonTexts'
 import { UnitSummary } from './UnitSummary'
 import { PracticeArea, PracticeDeck } from './Practice'
 import { isSummaryDetail, parseUnitPath, summarySlugs, summaryTitle, unitBasePath, unitPathFor, type PracticeMode } from './routing'
@@ -459,6 +460,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                     <h1 id="fraction-v2-lesson-title">{l(currentTopic.title)}</h1>
                     <p className="fraction-v2-lesson-goal"><strong>{l({ eu: 'Helburua:', es: 'Objetivo:', en: 'Goal:', ar: 'الهدف:' })}</strong> <MathText text={l(currentTopic.goal)} /></p>
                     {currentTopic.needs && currentTopic.needs.length > 0 && <LessonNeeds needs={currentTopic.needs} language={language} coursePath={unit.coursePath} />}
+                    {currentTopic.definitions && <LessonDefinitions definitions={currentTopic.definitions} language={language} />}
                     <p className="fraction-v2-lesson-body"><MathText text={l(currentTopic.explanation)} /></p>
                     {currentTopic.cases && <LessonCases cases={currentTopic.cases} language={language} />}
                     {/* The drawing right under the explanation it illustrates, before the worked exercise */}
@@ -481,7 +483,9 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                             solution={figureAfterSteps ? figure : undefined}
                         />
                     )}
-                    <FitMath as="figure" className="fraction-v2-example" text={pickMaybeText(language, currentTopic.example)} />
+                    {currentTopic.examplePrompt
+                        ? <LessonExample prompt={currentTopic.examplePrompt} example={currentTopic.example} answer={currentTopic.exampleAnswer} another={Boolean(currentTopic.problem)} language={language} />
+                        : <FitMath as="figure" className="fraction-v2-example" text={pickMaybeText(language, currentTopic.example)} />}
                     {currentTopic.mistake && <LessonMistakeBox mistake={currentTopic.mistake} language={language} />}
                     <aside className="fraction-v2-takeaway">
                         <span className="fraction-v2-takeaway-icon"><Icon name="bulb" size={22} /></span>

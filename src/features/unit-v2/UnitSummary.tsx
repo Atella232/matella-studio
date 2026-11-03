@@ -1,13 +1,14 @@
 import { MathText } from '../../components/MathText'
 import { Icon } from './icons'
 import { LessonMistakeBox } from './LessonExtras'
+import { LessonDefinitions } from './LessonTexts'
 import { summaryTitle } from './routing'
 import { pickText, type LocalizedText, type UnitDefinition, type UnitLanguage } from './types'
 import './UnitSummary.css'
 
 /**
- * The whole unit on one page, to revise or print: stage by stage, every lesson with its key idea and,
- * when it has one, its typical mistake. The example boxes stay in the lessons.
+ * The whole unit on one page, to revise or print: stage by stage, every lesson with its definitions, its key
+ * idea and its typical mistake, when it has them. The example boxes stay in the lessons.
  */
 export function UnitSummary({ unit, language, learnedIds, onOpenTopic }: {
     unit: UnitDefinition
@@ -37,6 +38,7 @@ export function UnitSummary({ unit, language, learnedIds, onOpenTopic }: {
                                     <span className="unit-summary-lesson-title">{l(topic.title)}</span>
                                     {learnedIds.includes(topic.id) && <Icon name="check" size={16} strokeWidth={3} className="unit-summary-done" />}
                                 </button>
+                                {topic.definitions && <LessonDefinitions definitions={topic.definitions} language={language} />}
                                 <p className="unit-summary-idea"><MathText text={l(topic.takeaway)} /></p>
                                 {topic.mistake && <LessonMistakeBox mistake={topic.mistake} language={language} />}
                             </li>

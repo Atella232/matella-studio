@@ -132,7 +132,8 @@
     font-style: normal;
 }
 
-.unit-summary .lesson-mistake {
+.unit-summary .lesson-mistake,
+.unit-summary .lesson-definitions {
     max-width: none;
 }
 
@@ -170,6 +171,10 @@
     .fraction-v2 .unit-summary .lesson-mistake p {
         padding: 6px 8px;
         font-size: 16px;
+    }
+
+    .unit-summary .lesson-definitions {
+        padding: 10px 10px 10px 8px;
     }
 }
 

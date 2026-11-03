@@ -55,6 +55,12 @@ export interface LessonCheck {
     explanation: LocalizedText
 }
 
+/** A word the lesson introduces and what it means, highlighted before the explanation */
+export interface LessonDefinition {
+    term: LocalizedText
+    meaning: LocalizedText
+}
+
 /** A typical slip of the lesson: what students often write, and the right way */
 export interface LessonMistake {
     wrong: LocalizedText
@@ -68,6 +74,8 @@ export interface UnitTopic {
     goal: LocalizedText
     /** Lessons of earlier units to review first, linked under the goal */
     needs?: LessonNeed[]
+    /** The new words of the lesson, so the explanation does not have to define them */
+    definitions?: LessonDefinition[]
     explanation: LocalizedText
     /** The explanation split into cases (direct / inverse, the part / the total…), shown as cards right under it */
     cases?: LessonStep[]
@@ -81,6 +89,13 @@ export interface UnitTopic {
     problem?: LocalizedText
     /** Worked example, in LaTeX between $…$; per language when the notation differs (Div / Zat) */
     example: string | LocalizedText
+    /**
+     * The exercise the example solves, with numbers of its own: the box is then titled «Another example»
+     * (or «Example» when the lesson has no «Let's solve») and shows it above the formula
+     */
+    examplePrompt?: LocalizedText
+    /** The answer in words, under the formula (an obtuse triangle, 12 students…) */
+    exampleAnswer?: LocalizedText
     takeaway: LocalizedText
     /** The typical mistake of the lesson, shown before the key idea */
     mistake?: LessonMistake
@@ -94,6 +109,12 @@ export interface UnitTopic {
      */
     figureAfterSteps?: boolean
 }
+
+/**
+ * What a lesson tells, kept apart from its drawings in the unit's lessonTexts.ts (plain data, so the
+ * tests can read it): definitions, explanation, cases and the example as an exercise
+ */
+export type LessonTexts = Pick<UnitTopic, 'definitions' | 'explanation' | 'cases' | 'example' | 'examplePrompt' | 'exampleAnswer'>
 
 export interface PracticeItem {
     id: number

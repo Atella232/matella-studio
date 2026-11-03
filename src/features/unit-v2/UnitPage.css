@@ -1092,6 +1092,13 @@
     font-size: 14px;
 }
 
+/* A long stage name (Poligono erregularrak eta zirkunferentzia) wraps instead of widening the page */
+.fraction-v2-lesson-meta .fraction-v2-chip {
+    max-width: 100%;
+    border-radius: 16px;
+    white-space: normal;
+}
+
 .fraction-v2-lesson h1 {
     margin: 0;
     font-size: clamp(32px, 4vw, 48px);
