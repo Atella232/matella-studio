@@ -17,3 +17,5 @@ Figure check trick (browser pane hidden, screenshots fail): bundle a renderToSta
 
 How many glasses? (70301–3), grow it k times (70401–3) and a geometry detective (70501–3). Details in `dbh4-own-games.md`.
 Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).
+
+**Sufijos del euskera en el archivo de lecciones (2026-11-03, rama `feat/lessons-eu-suffixes`, commit 817ad3c, sin publicar):** 1 texto de `lessons.tsx`: «3-z zatitzea ahaztea» → «3 zenbakiaz zatitzea ahaztea». Solo cambia el euskera; las fórmulas son las mismas en los cuatro idiomas. Lo vigila `tests/lessons-basque-suffixes.test.ts`, que ahora mira el archivo de lecciones de todas las unidades.

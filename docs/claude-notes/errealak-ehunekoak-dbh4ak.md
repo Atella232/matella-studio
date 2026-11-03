@@ -19,3 +19,5 @@ Build the interval and the reals detective, shared with the other track: see [db
 
 Chained percentages (42601–3) added, so the unit has two own mechanics (intervals, chain) besides the reals detective. Details in `dbh4-own-games.md`.
 Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).
+
+**Sufijos del euskera en el archivo de lecciones (2026-11-03, rama `feat/lessons-eu-suffixes`, commit 817ad3c, sin publicar):** 15 textos de `lessons.tsx` (20 sufijos): «% 3an» → «% 3 interesarekin», «% 20ko deskontua egin diote» → «% 20 deskontatu diote», «1575en % 115aren % 12» → «1575 zenbakiaren % 115, eta emaitzaren % 12», «$\frac{p}{100}$-z» → «$\frac{p}{100}$ zatikiaz», «−1etik 3ra» → «−1 eta 3 artean». Visto de paso, sin tocar (ya pasaba en matella.net): a 375 px la lección `interval-ops` ensancha la página a 405 px; lo que se sale es la capa MathML oculta de KaTeX de una fórmula larga. Solo cambia el euskera; las fórmulas son las mismas en los cuatro idiomas. Lo vigila `tests/lessons-basque-suffixes.test.ts`, que ahora mira el archivo de lecciones de todas las unidades.

@@ -17,3 +17,5 @@ DEPLOYED 2026-10-12 (main 12332da, bundle index-DLz3HLPh). Next unit only when a
 ## Own games (2026-11-02)
 
 Is it a solution?, paint the solution and the equations detective: see [dbh4-own-games](dbh4-own-games.md).
+
+**Sufijos del euskera en el archivo de lecciones (2026-11-03, rama `feat/lessons-eu-suffixes`, commit 817ad3c, sin publicar):** 2 textos de `lessons.tsx`: «$-5$-ez zatitzean» → «$-5$ zenbakiaz zatitzean», «ez da 10era iristen» → «ez da 10 izatera iristen». Solo cambia el euskera; las fórmulas son las mismas en los cuatro idiomas. Lo vigila `tests/lessons-basque-suffixes.test.ts`, que ahora mira el archivo de lecciones de todas las unidades.

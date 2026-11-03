@@ -14,3 +14,5 @@ Phase 1+2 DONE a3617c0 (diag 5101–5108, practice 1–20, challenges 101–115,
 ## Own games (2026-11-02)
 
 Root hunt, simplify the fraction and the polynomials detective (shared with the applied track): see [dbh4-own-games](dbh4-own-games.md).
+
+**Sufijos del euskera en el archivo de lecciones (2026-11-03, rama `feat/lessons-eu-suffixes`, commit 817ad3c, sin publicar):** 6 textos de `lessons.tsx` (12 sufijos): «1ekin hasi» → «1 zenbakiarekin hasi», «n-tik 0ra … 0tik n-ra» → «n baliotik 0 baliora … 0 baliotik n baliora», «$2x-1$-z / $x-\frac{1}{2}$-z» → «… binomioaz», «Ruffinik 2rekin» → «Ruffinik 2 zenbakiarekin». Solo cambia el euskera; las fórmulas son las mismas en los cuatro idiomas. Lo vigila `tests/lessons-basque-suffixes.test.ts`, que ahora mira el archivo de lecciones de todas las unidades.

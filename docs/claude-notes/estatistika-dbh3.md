@@ -30,3 +30,5 @@ Hecha en la rama `feat/estadistica-dbh3`. Revisada a 375 px en eu, es y ar. Publ
 
 ## Publicación
 Publicada en matella.net el 2026-10-31 junto con las otras 7 unidades de 3.º (fusión de avance rápido de `feat/estadistica-dbh3` en `main`, último commit 5042946; bundle `index-DSpCP6ns.js`). Comprobada en vivo a 375 px en eu, es y ar (ruta, laboratorio y juegos de las 8).
+
+**Sufijos del euskera en el archivo de lecciones (2026-11-03, rama `feat/lessons-eu-suffixes`, commit 817ad3c, sin publicar):** 5 textos de `lessons.tsx` (6 sufijos): «0-tik hasten» → «0 balioan hasten» (4 veces en Grafikoak irakurtzea) y en la explicación de `box-plot` «$Q_{1}$-etik $Q_{3}$-ra» → «$Q_{1}$ kuartiletik $Q_{3}$ kuartilera». Solo cambia el euskera; las fórmulas son las mismas en los cuatro idiomas. Lo vigila `tests/lessons-basque-suffixes.test.ts`, que ahora mira el archivo de lecciones de todas las unidades.

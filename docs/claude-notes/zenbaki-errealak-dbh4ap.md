@@ -16,3 +16,5 @@ Next (after the academic unit, see [[errealak-ehunekoak-dbh4ak]]): other courses
 ## Own games (2026-11-02)
 
 Build the interval and the reals detective, shared with the other track: see [dbh4-own-games](dbh4-own-games.md).
+
+**Sufijos del euskera en el archivo de lecciones (2026-11-03, rama `feat/lessons-eu-suffixes`, commit 817ad3c, sin publicar):** 9 textos de `lessons.tsx` (10 sufijos): «zatitu 5ez eta biderkatu 2z» → «zatitu 5 zenbakiaz eta biderkatu 2 zenbakiaz», «berretzaile 0ko berretura» → «berretzailea 0 duen berretura», «5aren / 1aren ondoren» → «5 zifraren / 1 zifraren ondoren», «10en berreturak» → «10 oinarriko berreturak». Visto de paso, sin tocar (ya pasaba en matella.net): a 375 px la lección `powers` ensancha la página a 396 px; lo que se sale es la capa MathML oculta de KaTeX de una fórmula larga. Solo cambia el euskera; las fórmulas son las mismas en los cuatro idiomas. Lo vigila `tests/lessons-basque-suffixes.test.ts`, que ahora mira el archivo de lecciones de todas las unidades.
