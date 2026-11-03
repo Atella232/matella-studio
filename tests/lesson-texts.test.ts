@@ -175,6 +175,11 @@ function askedEquation(prompt: string): [string, string] | null {
     return [left, right]
 }
 
+/** Units whose example equalities with letters are identities (expanding, reducing): they hold for any value of the letters */
+const identityUnits = new Set(['dbh2-aljebra-v2'])
+
+const hasLetters = (latex: string) => /[a-z]/.test(latex.replace(/\\[a-zA-Z]+/g, ''))
+
 test('lesson texts: at least one unit gives its examples a statement', () => {
     assert.ok(units.length > 0)
 })
@@ -262,6 +267,31 @@ for (const unit of units) {
         }
         t.diagnostic(`${read} solutions checked`)
     })
+
+    if (identityUnits.has(unit.folder)) {
+        test(`${unit.folder}: the expressions of the example are equal for any value of the letters`, (t) => {
+            let read = 0
+            for (const [id, entry] of Object.entries(unit.texts)) {
+                const shown = [pick(entry.example, 'es'), entry.exampleAnswer?.es ?? ''].flatMap(formulas)
+                for (const piece of shown.flatMap(pieces)) {
+                    const sides = piece.split('=')
+                    for (let index = 1; index < sides.length; index++) {
+                        const [left, right] = [sides[index - 1], sides[index]]
+                        if (!hasLetters(left) || !hasLetters(right)) continue
+                        for (const trial of [0, 1]) {
+                            const a = evaluate(left, trial)
+                            const b = evaluate(right, trial)
+                            if (a === null || b === null) continue
+                            read++
+                            assert.ok(near(a, b), `${id}: ${left} = ${right} is not an identity (${a} ≠ ${b})`)
+                        }
+                    }
+                }
+            }
+            t.diagnostic(`${read} identities checked`)
+            assert.ok(read > 0)
+        })
+    }
 
     test(`${unit.folder}: texts in four languages, same formulas, all drawn by KaTeX`, () => {
         for (const [id, entry] of Object.entries(unit.texts)) {
