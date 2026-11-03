@@ -1,10 +1,17 @@
+import { useId, useState } from 'react'
 import { MathText } from '../../components/MathText'
 import { FitMath } from './LessonExtras'
+import { WordButton, WordTranslations } from './LessonWords'
 import { pickMaybeText, pickText, type LessonDefinition, type LocalizedText, type UnitLanguage } from './types'
 import './LessonTexts.css'
 
-/** The new words of a lesson, each with what it means, highlighted before the explanation */
-export function LessonDefinitions({ definitions, language }: { definitions: LessonDefinition[]; language: UnitLanguage }) {
+/**
+ * The new words of a lesson, each with what it means, highlighted before the explanation. In a lesson each
+ * term is a button that shows it in the four languages; the summary page (static) shows it as text.
+ */
+export function LessonDefinitions({ definitions, language, translatable = false }: { definitions: LessonDefinition[]; language: UnitLanguage; translatable?: boolean }) {
+    const [open, setOpen] = useState<number | null>(null)
+    const panelId = useId()
     const label = definitions.length > 1
         ? { eu: 'Definizioak', es: 'Definiciones', en: 'Definitions', ar: 'التعريفات' }
         : { eu: 'Definizioa', es: 'Definición', en: 'Definition', ar: 'التعريف' }
@@ -14,7 +21,12 @@ export function LessonDefinitions({ definitions, language }: { definitions: Less
             <dl>
                 {definitions.map((definition, index) => (
                     <div key={index}>
-                        <dt><MathText inline text={pickText(language, definition.term)} /></dt>
+                        <dt>
+                            {translatable
+                                ? <WordButton word={definition.term} language={language} open={open === index} panelId={panelId} onToggle={() => setOpen(open === index ? null : index)} />
+                                : <MathText inline text={pickText(language, definition.term)} />}
+                        </dt>
+                        {open === index && <WordTranslations word={definition.term} language={language} id={panelId} />}
                         <dd><MathText inline text={pickText(language, definition.meaning)} /></dd>
                     </div>
                 ))}

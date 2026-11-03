@@ -8,6 +8,7 @@ import { FitMath, LessonCases, LessonFigure, LessonMistakeBox, LessonSteps } fro
 import { LessonCheckCard } from './LessonCheck'
 import { LessonNeeds } from './LessonNeeds'
 import { LessonDefinitions, LessonExample } from './LessonTexts'
+import { LessonVocabulary, LessonWhyBox } from './LessonWords'
 import { UnitSummary } from './UnitSummary'
 import { PracticeArea, PracticeDeck } from './Practice'
 import { isSummaryDetail, parseUnitPath, summarySlugs, summaryTitle, unitBasePath, unitPathFor, type PracticeMode } from './routing'
@@ -460,7 +461,8 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                     <h1 id="fraction-v2-lesson-title">{l(currentTopic.title)}</h1>
                     <p className="fraction-v2-lesson-goal"><strong>{l({ eu: 'Helburua:', es: 'Objetivo:', en: 'Goal:', ar: 'الهدف:' })}</strong> <MathText text={l(currentTopic.goal)} /></p>
                     {currentTopic.needs && currentTopic.needs.length > 0 && <LessonNeeds needs={currentTopic.needs} language={language} coursePath={unit.coursePath} />}
-                    {currentTopic.definitions && <LessonDefinitions definitions={currentTopic.definitions} language={language} />}
+                    {currentTopic.definitions && <LessonDefinitions key={`definitions-${currentTopic.id}`} definitions={currentTopic.definitions} language={language} translatable />}
+                    {currentTopic.vocabulary && <LessonVocabulary key={`vocabulary-${currentTopic.id}`} words={currentTopic.vocabulary} language={language} />}
                     <p className="fraction-v2-lesson-body"><MathText text={l(currentTopic.explanation)} /></p>
                     {currentTopic.cases && <LessonCases cases={currentTopic.cases} language={language} />}
                     {/* The drawing right under the explanation it illustrates, before the worked exercise */}
@@ -494,6 +496,7 @@ export function UnitPage({ unit }: { unit: UnitDefinition }) {
                             <p><MathText text={l(currentTopic.takeaway)} /></p>
                         </div>
                     </aside>
+                    {currentTopic.why && <LessonWhyBox key={`why-${currentTopic.id}`} why={currentTopic.why} language={language} />}
                     {currentTopic.check && (
                         <LessonCheckCard
                             key={`check-${currentTopic.id}`}

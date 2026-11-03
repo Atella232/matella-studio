@@ -11,6 +11,8 @@ import { evaluate, formulas, near } from './latex-math.ts'
 
 type Texts = {
     definitions?: LessonDefinition[]
+    vocabulary?: LocalizedText[]
+    why?: { text: LocalizedText; math?: string | LocalizedText }
     explanation: LocalizedText
     cases?: LessonStep[]
     problem?: LocalizedText
@@ -32,7 +34,8 @@ const isRecord = (value: unknown, key: string): value is Record<string, Record<s
     typeof value === 'object' && value !== null && Object.values(value).length > 0
     && Object.values(value).every((entry) => typeof entry === 'object' && entry !== null && key in entry)
 
-const units: Array<{ folder: string; texts: Record<string, Texts>; source: string; checks?: Record<string, { check: { prompt: LocalizedText }; mistake: { wrong: LocalizedText; right: LocalizedText } }> }> = []
+type Checks = Record<string, { check: { prompt: LocalizedText; options: LocalizedText[]; explanation: LocalizedText }; mistake: { wrong: LocalizedText; right: LocalizedText } }>
+const units: Array<{ folder: string; texts: Record<string, Texts>; source: string; checks?: Checks }> = []
 for (const folder of readdirSync(pages).sort()) {
     const url = new URL(`${folder}/lessonTexts.ts`, pages)
     if (!existsSync(url)) continue
@@ -98,13 +101,15 @@ function allTexts(entry: Texts): LocalizedText[] {
         ...steps(entry.steps),
         ...(typeof entry.example === 'string' ? [] : [entry.example]),
         ...(entry.examplePrompt ? [entry.examplePrompt] : []),
-        ...(entry.exampleAnswer ? [entry.exampleAnswer] : [])
+        ...(entry.exampleAnswer ? [entry.exampleAnswer] : []),
+        ...(entry.vocabulary ?? []),
+        ...(entry.why ? [entry.why.text, ...(entry.why.math && typeof entry.why.math !== 'string' ? [entry.why.math] : [])] : [])
     ]
 }
 
-/** The formulas of a lesson that work something out: the example and its answer, the cases and the new steps */
+/** The formulas of a lesson that work something out: the example and its answer, the cases, the new steps and «Why» */
 function worked(entry: Texts): string[] {
-    const maths = [entry.example, entry.exampleAnswer, ...(entry.cases ?? []).map((item) => item.math), ...(entry.steps ?? []).map((item) => item.math)]
+    const maths = [entry.example, entry.exampleAnswer, entry.why?.math, ...(entry.cases ?? []).map((item) => item.math), ...(entry.steps ?? []).map((item) => item.math)]
     return maths.flatMap((math) => (math ? formulas(pick(math, 'es')) : []))
 }
 
@@ -179,6 +184,25 @@ function askedEquation(prompt: string): [string, string] | null {
 const identityUnits = new Set(['dbh2-aljebra-v2'])
 
 const hasLetters = (latex: string) => /[a-z]/.test(latex.replace(/\\[a-zA-Z]+/g, ''))
+
+/** At most this many words in «Why does it work?» (Spanish; a formula counts as one word) */
+const whyWords = 60
+
+/**
+ * The beginnings of the words of a term, to find it in a text whatever its ending: hipotenusa in hipotenusaren,
+ * catetos in cateto, الوتر in وتره (the Arabic article and one last letter left out). Short words do not count.
+ */
+function stems(term: string, language: string): string[] {
+    const arabic = language === 'ar'
+    return term.replace(/\$[^$]*\$/g, ' ').replace(/\([^)]*\)/g, ' ').split(/[\s,·/-]+/)
+        .map((word) => plain(word).replace(/[^\p{L}]/gu, ''))
+        .map((word) => (arabic ? word.replace(/^(?:وال|بال|فال|كال|لل|ال)/, '') : word))
+        .filter((word) => word.length >= (arabic ? 3 : 4))
+        .map((word) => word.slice(0, arabic ? Math.max(3, word.length - (word.length >= 6 ? 2 : 1)) : Math.max(4, word.length - 2)))
+}
+
+/** Lower case and without the Arabic short vowels and shadda, which a word may or may not carry */
+const plain = (text: string) => text.toLowerCase().replace(/[\u064B-\u0652]/g, '')
 
 test('lesson texts: at least one unit gives its examples a statement', () => {
     assert.ok(units.length > 0)
@@ -292,6 +316,36 @@ for (const unit of units) {
             assert.ok(read > 0)
         })
     }
+
+    test(`${unit.folder}: vocabulary and «Why does it work?» are short, and each word is the one the lesson uses`, () => {
+        for (const [id, entry] of Object.entries(unit.texts)) {
+            if (entry.why) assert.ok(countWords(entry.why.text.es) <= whyWords, `${id}: «Why» has ${countWords(entry.why.text.es)} words`)
+            const words = entry.vocabulary ?? []
+            if (words.length) assert.ok(words.length >= 2 && words.length <= 5, `${id}: ${words.length} vocabulary words`)
+            const terms = (entry.definitions ?? []).map((definition) => definition.term)
+            const seen = new Set<string>()
+            for (const word of [...terms, ...words]) {
+                const key = word.es.toLowerCase()
+                assert.ok(!seen.has(key), `${id}: «${word.es}» twice (a vocabulary word that is already a definition?)`)
+                seen.add(key)
+            }
+            // A vocabulary word is one the lesson uses, in each language: in its texts (but not the word list itself),
+            // its mistake and question, or its block of the lessons file (title, goal, steps, key idea)
+            const check = unit.checks?.[id]
+            const lessonBlock = lessonSource(unit.source, id)
+            for (const language of languages) {
+                const corpus = plain([
+                    ...allTexts({ ...entry, vocabulary: [] }).map((text) => text[language]),
+                    ...(check ? [check.mistake.wrong, check.mistake.right, check.check.prompt, check.check.explanation, ...check.check.options].map((text) => text[language]) : []),
+                    lessonBlock
+                ].join(' '))
+                for (const word of words) {
+                    const found = stems(word[language], language)
+                    assert.ok(!found.length || found.some((stem) => corpus.includes(stem)), `${id}: the lesson never uses «${word[language]}» (${language})`)
+                }
+            }
+        }
+    })
 
     test(`${unit.folder}: texts in four languages, same formulas, all drawn by KaTeX`, () => {
         for (const [id, entry] of Object.entries(unit.texts)) {
