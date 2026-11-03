@@ -154,6 +154,27 @@ function checkEqualities(formula: string, where: string): number {
     return read
 }
 
+/** The values of x that an example gives as solutions, x=5, x=-2, x=\frac{3}{2}, x=\pm 4, at the start of a piece (not 2x+x=24 nor x=90\mathbin{:}9) */
+function givenSolutions(latex: string): number[] {
+    const found: number[] = []
+    const pattern = /(?<=(?:^|\\to|\\qquad|\\quad|\\\\|,|\\ |\{gathered\}|\{aligned\}|&)\s*)x=(\\pm\s*)?(-?(?:\\frac\{\d+\}\{\d+\}|\d+(?:\{,\}\d+)?))(?=\s*(?:$|,|;|\)|\\\\|\\qquad|\\quad|\\to|\\end|\\ ))/g
+    for (const [, pm, number] of latex.matchAll(pattern)) {
+        const value = evaluate(number)
+        if (value === null) continue
+        found.push(value)
+        if (pm) found.push(-value)
+    }
+    return found
+}
+
+/** The one equation in x of a statement (2x+5=3x+2), or null: other letters, several equations or just x=4 */
+function askedEquation(prompt: string): [string, string] | null {
+    const equations = formulas(prompt).filter((formula) => /x/.test(formula) && formula.split('=').length === 2 && !/[<>]|\\[lg]e|\\neq/.test(formula) && !/^\s*x\s*=/.test(formula))
+    if (equations.length !== 1 || /[a-wyz]/.test(equations[0].replace(/\\[a-zA-Z]+/g, ''))) return null
+    const [left, right] = equations[0].split('=')
+    return [left, right]
+}
+
 test('lesson texts: at least one unit gives its examples a statement', () => {
     assert.ok(units.length > 0)
 })
@@ -223,6 +244,23 @@ for (const unit of units) {
         }
         t.diagnostic(`${read} equalities checked`)
         assert.ok(read > 0)
+    })
+
+    test(`${unit.folder}: the solutions the example gives satisfy the equation it asks about`, (t) => {
+        let read = 0
+        for (const [id, entry] of Object.entries(unit.texts)) {
+            const equation = entry.examplePrompt && askedEquation(entry.examplePrompt.es)
+            if (!equation) continue
+            const shown = [pick(entry.example, 'es'), entry.exampleAnswer?.es ?? ''].flatMap(formulas)
+            for (const value of shown.flatMap(givenSolutions)) {
+                const left = evaluate(equation[0], () => value)
+                const right = evaluate(equation[1], () => value)
+                if (left === null || right === null) continue
+                read++
+                assert.ok(near(left, right), `${id}: x=${value} does not solve ${equation.join('=')} (${left} ≠ ${right})`)
+            }
+        }
+        t.diagnostic(`${read} solutions checked`)
     })
 
     test(`${unit.folder}: texts in four languages, same formulas, all drawn by KaTeX`, () => {
