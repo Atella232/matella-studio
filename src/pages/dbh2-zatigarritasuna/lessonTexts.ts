@@ -19,6 +19,10 @@ const say = (eu: string, es: string, ar: string, en: string): LocalizedText => (
 export const divisibilityLessonTexts: Record<DivisibilityTopicId, LessonTexts> = {
     /* ---------- 1. Multiples and divisors ---------- */
     relation: {
+        vocabulary: [
+            say('hondarra', 'resto', 'الباقي', 'remainder'),
+            say('zatiketa', 'división', 'القسمة', 'division')
+        ],
         definitions: [
             {
                 term: say('Multiploa', 'Múltiplo', 'المضاعف', 'Multiple'),
@@ -40,6 +44,10 @@ export const divisibilityLessonTexts: Record<DivisibilityTopicId, LessonTexts> =
         exampleAnswer: say('91 bai (hondarra 0): 7 zenbakia 91 zenbakiaren zatitzailea da. 93 ez (hondarra 2).', '91 sí (resto 0): 7 es divisor de 91. 93 no (resto 2).', '91 نعم (الباقي 0): فـ7 قاسم لـ91. أما 93 فلا (الباقي 2).', '91 yes (remainder 0): 7 is a divisor of 91. 93 no (remainder 2).')
     },
     multiples: {
+        vocabulary: [
+            say('multiplo komunak', 'múltiplos comunes', 'المضاعفات المشتركة', 'common multiples'),
+            say('zerrenda', 'lista', 'القائمة', 'list')
+        ],
         definitions: [
             {
                 term: say('Zenbaki baten multiploak', 'Múltiplos de un número', 'مضاعفات عدد', 'Multiples of a number'),
@@ -67,6 +75,10 @@ export const divisibilityLessonTexts: Record<DivisibilityTopicId, LessonTexts> =
         exampleAnswer: say('Multiplo komun txikiena 45 da.', 'El menor múltiplo común es 45.', 'أصغر مضاعف مشترك هو 45.', 'The smallest common multiple is 45.')
     },
     divisors: {
+        vocabulary: [
+            say('bikotea', 'pareja', 'زوج', 'pair'),
+            say('zatitu', 'dividir', 'قسمة', 'divide')
+        ],
         definitions: [
             {
                 term: say('Zenbaki baten zatitzaileak', 'Divisores de un número', 'قواسم عدد', 'Divisors of a number'),
@@ -86,12 +98,24 @@ export const divisibilityLessonTexts: Record<DivisibilityTopicId, LessonTexts> =
 
     /* ---------- 2. Divisibility rules ---------- */
     'criteria-digit': {
+        vocabulary: [
+            say('azken zifra', 'última cifra', 'الرقم الأخير', 'last digit'),
+            say('zatigarria', 'divisible', 'قابل للقسمة', 'divisible')
+        ],
         definitions: [
             {
                 term: say('Zatigarritasun-irizpidea', 'Criterio de divisibilidad', 'قاعدة قابلية القسمة', 'Divisibility rule'),
                 meaning: say('Zatiketa egin gabe, zenbaki bat beste batekin zatigarria den esaten duen araua.', 'Una regla que dice, sin hacer la división, si un número es divisible por otro.', 'قاعدة تبيّن، دون إجراء القسمة، هل يقبل عدد القسمة على آخر.', 'A rule that tells you, without dividing, whether one number is divisible by another.')
             }
         ],
+        why: {
+            text: say(
+                'Zenbaki oro bere hamarrekoak bider 10 gehi azken zifra da: $345=34\\cdot 10+5$. 10 zenbakia 2, 5 eta 10 zenbakien multiploa denez, $34\\cdot 10$ zatia beti zati daiteke haien artean. Azken zifrari begiratzea besterik ez da geratzen.',
+                'Todo número es sus decenas por 10 más su última cifra: $345=34\\cdot 10+5$. Como 10 es múltiplo de 2, de 5 y de 10, la parte $34\\cdot 10$ siempre se puede dividir entre ellos. Solo queda mirar la última cifra.',
+                'كل عدد يساوي عشراته مضروبة في 10 زائد رقمه الأخير: $345=34\\cdot 10+5$. وبما أن 10 من مضاعفات 2 و5 و10، فإن الجزء $34\\cdot 10$ يقبل القسمة عليها دائمًا. ولا يبقى إلا النظر إلى الرقم الأخير.',
+                'Every number is its tens times 10 plus its last digit: $345=34\\cdot 10+5$. Since 10 is a multiple of 2, 5 and 10, the part $34\\cdot 10$ can always be divided by them. Only the last digit is left to look at.'
+            )
+        },
         explanation: say(
             '2, 5 eta 10 zenbakietarako nahikoa da azken zifrari begiratzea. 10 zenbakiarekin zatigarria dena 2 eta 5 zenbakiekin ere zatigarria da.',
             'Para 2, 5 y 10 basta con mirar la última cifra. Lo que es divisible por 10 también lo es por 2 y por 5.',
@@ -103,6 +127,19 @@ export const divisibilityLessonTexts: Record<DivisibilityTopicId, LessonTexts> =
         exampleAnswer: say('5 zenbakiarekin bakarrik: 5 zifran amaitzen da. Ez da bikoitia; beraz, ez da zatigarria 2 eta 10 zenbakiekin.', 'Solo por 5: termina en 5. No es par, así que no es divisible por 2 ni por 10.', 'على 5 فقط: آخر رقم فيه 5. وليس زوجيًا، فلا يقبل القسمة على 2 ولا على 10.', 'Only by 5: it ends in 5. It is not even, so it is not divisible by 2 or 10.')
     },
     'criteria-sum': {
+        vocabulary: [
+            say('zifren batura', 'suma de las cifras', 'مجموع الأرقام', 'sum of the digits'),
+            say('zatigarria', 'divisible', 'قابل للقسمة', 'divisible')
+        ],
+        why: {
+            text: say(
+                '$10=9+1$ eta $100=99+1$ direlako. Horrela, $234$ zenbakian, ehunekoek eta hamarrekoek 9 zenbakiaren (eta 3 zenbakiaren) multiploa den zati bat ematen dute, eta zifren batura geratzen da soberan. Batura hori 9 edo 3 zenbakiarekin zati badaiteke, zenbakia ere bai.',
+                'Porque $10=9+1$ y $100=99+1$. Así, en $234$, las centenas y las decenas dan una parte que es múltiplo de 9 (y de 3), y sobra justo la suma de las cifras. Si esa suma se puede dividir entre 9 o entre 3, el número también.',
+                'لأن $10=9+1$ و$100=99+1$. لذلك في $234$ تعطي المئات والعشرات جزءًا من مضاعفات 9 (و3)، ويبقى بالضبط مجموع الأرقام. فإذا قبل هذا المجموع القسمة على 9 أو على 3 قبلها العدد أيضًا.',
+                'Because $10=9+1$ and $100=99+1$. So in $234$ the hundreds and the tens give a part that is a multiple of 9 (and of 3), and what is left over is exactly the sum of the digits. If that sum can be divided by 9 or by 3, so can the number.'
+            ),
+            math: '$\\begin{gathered}2\\cdot 99+3\\cdot 9=225\\\\225+(2+3+4)=234\\end{gathered}$'
+        },
         explanation: say(
             '3 eta 9 zenbakietarako ez da nahikoa azken zifra: zifra guztiak batu behar dira. Batura handia bada, haren zifrak berriro batu daitezke. 9 zenbakiarekin zatigarria dena 3 zenbakiarekin ere zatigarria da.',
             'Para 3 y 9 no basta con la última cifra: hay que sumar todas las cifras. Si la suma es grande, se pueden volver a sumar sus cifras. Lo que es divisible por 9 también lo es por 3.',
@@ -114,10 +151,15 @@ export const divisibilityLessonTexts: Record<DivisibilityTopicId, LessonTexts> =
         exampleAnswer: say('Biekin: 18 zenbakia 9 eta 3 zenbakien multiploa da.', 'Por los dos: 18 es múltiplo de 9 y de 3.', 'على كليهما: 18 مضاعف لـ9 ولـ3.', 'By both: 18 is a multiple of 9 and of 3.')
     },
     'criteria-11-7': {
+        vocabulary: [
+            say('posizioa', 'posición', 'الموقع', 'position'),
+            say('bikoitza', 'doble', 'الضعف', 'double'),
+            say('kendu', 'restar', 'اطرح', 'subtract')
+        ],
         explanation: say(
             'Irizpide luzeagoak dira, baina zenbaki handiekin ere balio dute. 11 zenbakirako, zifrak posizioka bereizten dira; 7 zenbakirako, azken zifra kentzen da eta haren bikoitza kentzen zaio geratzen den zenbakiari.',
             'Son criterios más largos, pero sirven también con números grandes. Para el 11, las cifras se separan según su posición; para el 7, se quita la última cifra y se resta su doble al número que queda.',
-            'هاتان القاعدتان أطول، لكنهما تصلحان للأعداد الكبيرة أيضًا. في قاعدة 11 تُفصل الأرقام حسب مواقعها؛ وفي قاعدة 7 يُحذف الرقم الأخير ويُطرح ضعفه من العدد الباقي.',
+            'هاتان القاعدتان أطول، لكنهما تصلحان للأعداد الكبيرة أيضًا. في قاعدة 11 تُفصل الأرقام حسب موقع كل رقم؛ وفي قاعدة 7 يُحذف الرقم الأخير ويُطرح ضعفه من العدد الباقي.',
             'These rules are longer, but they also work with big numbers. For 11, the digits are split by position; for 7, you remove the last digit and subtract its double from the number that is left.'
         ),
         examplePrompt: say('5291 zenbakia 11 zenbakiarekin zatigarria da? Eta 343 zenbakia 7 zenbakiarekin?', '¿Es 5291 divisible por 11? ¿Y 343 por 7?', 'هل يقبل 5291 القسمة على 11؟ وهل يقبل 343 القسمة على 7؟', 'Is 5,291 divisible by 11? And 343 by 7?'),
@@ -127,6 +169,10 @@ export const divisibilityLessonTexts: Record<DivisibilityTopicId, LessonTexts> =
 
     /* ---------- 3. Primes and factorisation ---------- */
     primes: {
+        vocabulary: [
+            say('zatitzailea', 'divisor', 'القاسم', 'divisor'),
+            say('Eratostenesen bahea', 'criba de Eratóstenes', 'غربال إراتوستينس', 'sieve of Eratosthenes')
+        ],
         definitions: [
             {
                 term: say('Zenbaki lehena', 'Número primo', 'العدد الأولي', 'Prime number'),
@@ -148,6 +194,11 @@ export const divisibilityLessonTexts: Record<DivisibilityTopicId, LessonTexts> =
         exampleAnswer: say('87 konposatua da (zifren batura 15: 3 zenbakiarekin zatigarria). 89 lehena da.', '87 es compuesto (sus cifras suman 15: divisible por 3). 89 es primo.', '87 مؤلف (مجموع أرقامه 15: يقبل القسمة على 3). و89 أولي.', '87 is composite (its digits add up to 15: divisible by 3). 89 is prime.')
     },
     factorization: {
+        vocabulary: [
+            say('biderkagai lehena', 'factor primo', 'العامل الأولي', 'prime factor'),
+            say('berreturak', 'potencias', 'القوى', 'powers'),
+            say('zatidura', 'cociente', 'خارج القسمة', 'quotient')
+        ],
         explanation: say(
             'Zenbaki konposatu oro lehenen biderkadura gisa idatz daiteke, eta modu bakarrean. Zatitu lehen txikienarekin (erabili irizpideak), gero zatidura, eta horrela 1 lortu arte. Biderkagai errepikatuak berretura gisa idazten dira.',
             'Todo número compuesto se puede escribir como producto de primos, y de una única forma. Divide entre el menor primo posible (usa los criterios), después el cociente, y así hasta llegar a 1. Los factores repetidos se escriben como potencias.',
@@ -164,12 +215,25 @@ export const divisibilityLessonTexts: Record<DivisibilityTopicId, LessonTexts> =
         )
     },
     gcd: {
+        vocabulary: [
+            say('zatitzaile komunak', 'divisores comunes', 'القواسم المشتركة', 'common divisors'),
+            say('berretzailea', 'exponente', 'الأس', 'exponent')
+        ],
         definitions: [
             {
                 term: say('Zatitzaile komunetako handiena (ZKH)', 'Máximo común divisor (m.c.d.)', 'القاسم المشترك الأكبر (ق.م.أ)', 'Greatest common divisor (GCD)'),
                 meaning: say('Bi zenbakiren edo gehiagoren zatitzaile komunetatik handiena.', 'El mayor de los divisores comunes de dos o más números.', 'أكبر القواسم المشتركة لعددين أو أكثر.', 'The largest of the common divisors of two or more numbers.')
             }
         ],
+        why: {
+            text: say(
+                'Zatitzaile komun batek bi zenbakietan sartu behar du. $12=2^{2}\\cdot 3$ eta $18=2\\cdot 3^{2}$ zenbakietan, gehienez 2 bat eraman dezake (18 zenbakiak bakarra du) eta 3 bat (12 zenbakiak bakarra du). Horregatik, faktore komun bakoitza berretzaile txikienarekin hartzen da.',
+                'Un divisor común tiene que caber en los dos números. En $12=2^{2}\\cdot 3$ y $18=2\\cdot 3^{2}$ puede llevar como mucho un 2 (el 18 solo tiene uno) y un 3 (el 12 solo tiene uno). Por eso se toma cada factor común con el menor exponente.',
+                'القاسم المشترك يجب أن يدخل في العددين معًا. في $12=2^{2}\\cdot 3$ و$18=2\\cdot 3^{2}$ يمكنه أن يحمل 2 واحدًا على الأكثر (لأن في 18 واحدًا فقط) و3 واحدًا (لأن في 12 واحدًا فقط). لذلك نأخذ كل عامل مشترك بأصغر أس.',
+                'A common divisor has to fit into both numbers. In $12=2^{2}\\cdot 3$ and $18=2\\cdot 3^{2}$ it can carry at most one 2 (18 has only one) and one 3 (12 has only one). That is why each common factor is taken with its smallest exponent.'
+            ),
+            math: notation('$@GCD(12,18)=2\\cdot 3=6$')
+        },
         explanation: say(
             'Zenbaki txikiekin, idatzi zatitzaileen zerrendak eta hartu komunetatik handiena. Zenbaki handiekin, deskonposatu biderkagai lehenetan eta biderkatu biderkagai komunak, berretzaile txikienarekin. Inoiz ez da zenbakirik txikiena baino handiagoa.',
             'Con números pequeños, escribe las listas de divisores y toma el mayor de los comunes. Con números grandes, descompón en factores primos y multiplica los factores comunes con el menor exponente. Nunca es mayor que el menor de los números.',
@@ -181,12 +245,25 @@ export const divisibilityLessonTexts: Record<DivisibilityTopicId, LessonTexts> =
         exampleAnswer: say('ZKH 15 da: biderkagai komunak, 3 eta 5, berretzaile txikienarekin.', 'El m.c.d. es 15: los factores comunes, 3 y 5, con el menor exponente.', 'ق.م.أ هو 15: العاملان المشتركان 3 و5 بأصغر أس.', 'The GCD is 15: the common factors, 3 and 5, with the smallest exponent.')
     },
     lcm: {
+        vocabulary: [
+            say('multiplo komunak', 'múltiplos comunes', 'المضاعفات المشتركة', 'common multiples'),
+            say('lehen erlatiboak', 'primos entre sí', 'أوليان فيما بينهما', 'coprime')
+        ],
         definitions: [
             {
                 term: say('Multiplo komunetako txikiena (MKT)', 'Mínimo común múltiplo (m.c.m.)', 'المضاعف المشترك الأصغر (م.م.أ)', 'Least common multiple (LCM)'),
                 meaning: say('Bi zenbakiren edo gehiagoren multiplo komunetatik txikiena, 0 kontatu gabe.', 'El menor de los múltiplos comunes de dos o más números, sin contar el 0.', 'أصغر المضاعفات المشتركة لعددين أو أكثر، دون احتساب 0.', 'The smallest of the common multiples of two or more numbers, not counting 0.')
             }
         ],
+        why: {
+            text: say(
+                'Multiplo komun batek zenbaki bakoitzaren faktore guztiak eraman behar ditu barruan. $12=2^{2}\\cdot 3$ eramateko $2^{2}$ behar du, eta $18=2\\cdot 3^{2}$ eramateko $3^{2}$. Horregatik, faktore bakoitza, komuna izan ala ez, berretzaile handienarekin hartzen da.',
+                'Un múltiplo común tiene que llevar dentro todos los factores de cada número. Para llevar $12=2^{2}\\cdot 3$ necesita $2^{2}$, y para llevar $18=2\\cdot 3^{2}$ necesita $3^{2}$. Por eso se toma cada factor, común o no, con el mayor exponente.',
+                'المضاعف المشترك يجب أن يحمل في داخله كل عوامل كل عدد. ليحمل $12=2^{2}\\cdot 3$ يحتاج إلى $2^{2}$، وليحمل $18=2\\cdot 3^{2}$ يحتاج إلى $3^{2}$. لذلك نأخذ كل عامل، مشتركًا أو غير مشترك، بأكبر أس.',
+                'A common multiple has to carry all the factors of each number. To carry $12=2^{2}\\cdot 3$ it needs $2^{2}$, and to carry $18=2\\cdot 3^{2}$ it needs $3^{2}$. That is why each factor, common or not, is taken with its greatest exponent.'
+            ),
+            math: notation('$@LCM(12,18)=2^{2}\\cdot 3^{2}=36$')
+        },
         explanation: say(
             'Zenbaki txikiekin, idatzi multiploen zerrendak. Zenbaki handiekin, deskonposatu eta biderkatu biderkagai komunak eta ez-komunak, bakoitza berretzaile handienarekin. Bi zenbakiren ZKH 1 bada, elkarren arteko lehenak dira, eta haien MKT biderkadura da.',
             'Con números pequeños, escribe las listas de múltiplos. Con números grandes, descompón y multiplica los factores comunes y no comunes, cada uno con su mayor exponente. Si el m.c.d. de dos números es 1, son primos entre sí y su m.c.m. es su producto.',
@@ -200,6 +277,10 @@ export const divisibilityLessonTexts: Record<DivisibilityTopicId, LessonTexts> =
 
     /* ---------- 4. Problems ---------- */
     which: {
+        vocabulary: [
+            say('banatu', 'repartir', 'التقسيم', 'share'),
+            say('berriro bat etorri', 'volver a coincidir', 'يلتقيان مجددًا', 'coincide again')
+        ],
         explanation: say(
             'Buruketa bat hasi aurretik, galdetu zeure buruari: kopuruak zati berdinetan banatu behar ditut (zatitzaileak: ZKH), ala zerbait berriro noiz etorriko den batera bilatzen ari naiz (multiploak: MKT)? Galderako hitzek laguntzen dute. ZKH datuak baino txikiagoa da; MKT, handiagoa.',
             'Antes de empezar un problema, pregúntate: ¿tengo que repartir en partes iguales (divisores: m.c.d.) o busco cuándo algo volverá a coincidir (múltiplos: m.c.m.)? Las palabras de la pregunta ayudan. El m.c.d. sale menor que los datos; el m.c.m., mayor.',
@@ -216,6 +297,11 @@ export const divisibilityLessonTexts: Record<DivisibilityTopicId, LessonTexts> =
         exampleAnswer: say('Zati berdinetan banatzea da: ZKH. Zati bakoitzak 30 cm izango ditu.', 'Es un reparto en partes iguales: m.c.d. Cada trozo medirá 30 cm.', 'إنه تقسيم إلى أجزاء متساوية: ق.م.أ. وطول كل قطعة 30 سم.', 'It is sharing into equal parts: GCD. Each piece will be 30 cm.')
     },
     method: {
+        vocabulary: [
+            say('urratsa', 'paso', 'خطوة', 'step'),
+            say('interpretatu', 'interpretar', 'فسّر', 'interpret'),
+            say('unitateak', 'unidades', 'الوحدات', 'units')
+        ],
         explanation: say(
             'Jarraitu lau urratsak: erabaki ZKH ala MKT behar den, faktorizatu, kalkulatu eta interpretatu emaitza, esaldi batekin eta unitateekin.',
             'Sigue los cuatro pasos: decide si hace falta el m.c.d. o el m.c.m., factoriza, calcula e interpreta el resultado con una frase y con unidades.',

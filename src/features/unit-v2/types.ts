@@ -61,6 +61,12 @@ export interface LessonDefinition {
     meaning: LocalizedText
 }
 
+/** «Why does it work?»: the reason behind the rule of the lesson, closed until the student opens it */
+export interface LessonWhy {
+    text: LocalizedText
+    math?: string | LocalizedText
+}
+
 /** A typical slip of the lesson: what students often write, and the right way */
 export interface LessonMistake {
     wrong: LocalizedText
@@ -76,6 +82,8 @@ export interface UnitTopic {
     needs?: LessonNeed[]
     /** The new words of the lesson, so the explanation does not have to define them */
     definitions?: LessonDefinition[]
+    /** Other key words of the lesson (not its definitions): tapping one shows it in the four languages */
+    vocabulary?: LocalizedText[]
     explanation: LocalizedText
     /** The explanation split into cases (direct / inverse, the part / the total…), shown as cards right under it */
     cases?: LessonStep[]
@@ -97,6 +105,8 @@ export interface UnitTopic {
     /** The answer in words, under the formula (an obtuse triangle, 12 students…); alone when the example is '' */
     exampleAnswer?: LocalizedText
     takeaway: LocalizedText
+    /** The reason behind the rule, after the key idea; only where a 2. DBH student can follow it */
+    why?: LessonWhy
     /** The typical mistake of the lesson, shown before the key idea */
     mistake?: LessonMistake
     /** Quick question that replaces «I understand» until it is answered right */
@@ -114,7 +124,7 @@ export interface UnitTopic {
  * What a lesson tells, kept apart from its drawings in the unit's lessonTexts.ts (plain data, so the
  * tests can read it): definitions, explanation, cases and the example as an exercise
  */
-export type LessonTexts = Pick<UnitTopic, 'definitions' | 'explanation' | 'cases' | 'problem' | 'steps' | 'example' | 'examplePrompt' | 'exampleAnswer'>
+export type LessonTexts = Pick<UnitTopic, 'definitions' | 'vocabulary' | 'explanation' | 'cases' | 'problem' | 'steps' | 'example' | 'examplePrompt' | 'exampleAnswer' | 'why'>
 
 export interface PracticeItem {
     id: number

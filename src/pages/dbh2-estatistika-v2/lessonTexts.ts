@@ -21,6 +21,10 @@ const same = (value: string): LocalizedText => say(value, value, value, value)
 export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
     /* ---------- 1. Data and tables ---------- */
     sample: {
+        vocabulary: [
+            say('aldagai kualitatiboa', 'variable cualitativa', 'المتغير النوعي', 'qualitative variable'),
+            say('aldagai kuantitatiboa', 'variable cuantitativa', 'المتغير الكمي', 'quantitative variable')
+        ],
         definitions: [
             {
                 term: say('Populazioa', 'Población', 'المجتمع', 'Population'),
@@ -71,6 +75,10 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
         )
     },
     cumulative: {
+        vocabulary: [
+            say('maiztasuna', 'frecuencia', 'التكرار', 'frequency'),
+            say('ordenatu', 'ordenar', 'ترتيب', 'order')
+        ],
         definitions: [
             {
                 term: say('Maiztasun absolutu metatua', 'Frecuencia absoluta acumulada', 'التكرار المطلق المتجمّع', 'Cumulative frequency'),
@@ -102,6 +110,10 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
         exampleAnswer: say('13 ikasle, % 52.', '13 alumnas, el 52 %.', '13 تلميذة، أي 52 %.', '13 students, 52%.')
     },
     grouped: {
+        vocabulary: [
+            say('zabalera', 'amplitud', 'طول الفئة', 'width'),
+            say('aldagai jarraitua', 'variable continua', 'المتغير المتصل', 'continuous variable')
+        ],
         definitions: [
             {
                 term: say('Tartea (klasea)', 'Intervalo (clase)', 'الفئة', 'Interval (class)'),
@@ -135,6 +147,10 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
 
     /* ---------- 2. Charts ---------- */
     histogram: {
+        vocabulary: [
+            say('barra-diagrama', 'diagrama de barras', 'المخطط بالأعمدة', 'bar chart'),
+            say('laukizuzenak', 'rectángulos', 'المستطيلات', 'rectangles')
+        ],
         definitions: [
             {
                 term: say('Histograma', 'Histograma', 'المدرّج التكراري', 'Histogram'),
@@ -172,6 +188,11 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
         )
     },
     pie: {
+        vocabulary: [
+            say('angelua', 'ángulo', 'الزاوية', 'angle'),
+            say('sektorea', 'sector', 'القطاع', 'sector'),
+            say('zirkulua', 'círculo', 'الدائرة', 'circle')
+        ],
         definitions: [
             {
                 term: say('Sektore-diagrama', 'Diagrama de sectores', 'المخطط الدائري', 'Pie chart'),
@@ -194,6 +215,11 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
         exampleAnswer: say('Datuen % 15 da: 12 pertsona.', 'Es el 15 % de los datos: 12 personas.', 'إنه 15 % من البيانات: 12 شخصًا.', 'It is 15% of the data: 12 people.')
     },
     misleading: {
+        vocabulary: [
+            say('eskala', 'escala', 'المقياس', 'scale'),
+            say('ardatzak', 'ejes', 'المحاور', 'axes'),
+            say('tranpa', 'trampa', 'الفخ', 'trap')
+        ],
         explanation: say(
             'Grafiko batek engaina dezake, nahita edo ez. Irakurtzean, begiratu beti eskala, ardatzak eta unitateak, eta kalkulatu benetako aldaketa. Tranpa ohikoenak:',
             'Un gráfico puede engañar, a propósito o no. Al leerlo, mira siempre la escala, los ejes y las unidades, y calcula el cambio real. Las trampas más habituales:',
@@ -212,6 +238,18 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
 
     /* ---------- 3. Centre and spread ---------- */
     'mean-table': {
+        vocabulary: [
+            say('batez bestekoa', 'media', 'المتوسط', 'mean'),
+            say('zutabea', 'columna', 'العمود', 'column')
+        ],
+        why: {
+            text: say(
+                '3 balioa 4 aldiz agertzen bada, lau aldiz batzea biderkatzea bezala da: $3+3+3+3=3\\cdot 4$. Horregatik, datu guztiak idatzi beharrean, balio bakoitza bere maiztasunaz biderkatzen da eta biderkadurak batzen dira.',
+                'Si el valor 3 aparece 4 veces, sumarlo cuatro veces es lo mismo que multiplicarlo: $3+3+3+3=3\\cdot 4$. Por eso, en vez de escribir todos los datos, se multiplica cada valor por su frecuencia y se suman los productos.',
+                'إذا ظهرت القيمة 3 أربع مرات فجمعها أربع مرات يساوي ضربها: $3+3+3+3=3\\cdot 4$. لذلك بدل كتابة كل البيانات نضرب كل قيمة في تكرارها ونجمع النواتج.',
+                'If the value 3 appears 4 times, adding it four times is the same as multiplying: $3+3+3+3=3\\cdot 4$. That is why, instead of writing out all the data, you multiply each value by its frequency and add the products.'
+            )
+        },
         explanation: say(
             'Batez bestekoa ($\\bar{x}$) datuen batura zati datu kopurua da. Taula batean, biderkatu balio bakoitza bere maiztasunarekin zutabe berri batean, batu zutabea eta zatitu $N$-z: $\\bar{x}=\\frac{\\sum x_i f_i}{N}$. Datu multzokatuekin, $x_i$ klase-marka da, eta batez bestekoa hurbildua ateratzen da.',
             'La media ($\\bar{x}$) es la suma de los datos entre el número de datos. En una tabla, multiplica cada valor por su frecuencia en una columna nueva, suma la columna y divide entre $N$: $\\bar{x}=\\frac{\\sum x_i f_i}{N}$. Con datos agrupados, $x_i$ es la marca de clase y la media sale aproximada.',
@@ -228,6 +266,11 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
         exampleAnswer: say('Batez bestekoa 14,25 urte da. Datu kopurua: $4+7+9=20$.', 'La media es 14,25 años. El número de datos: $4+7+9=20$.', 'المتوسط 14.25 سنة. وعدد البيانات: $4+7+9=20$.', 'The mean is 14.25 years. The number of values: $4+7+9=20$.')
     },
     'median-table': {
+        vocabulary: [
+            say('erdiko posizioa', 'posición central', 'الموقع الأوسط', 'middle position'),
+            say('bakoitia', 'impar', 'فردي', 'odd'),
+            say('bikoitia', 'par', 'زوجي', 'even')
+        ],
         definitions: [
             {
                 term: say('Moda', 'Moda', 'المنوال', 'Mode'),
@@ -259,12 +302,25 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
         )
     },
     symmetry: {
+        vocabulary: [
+            say('asimetrikoa', 'asimétrica', 'غير متماثل', 'asymmetric'),
+            say('muturreko balioa', 'valor extremo', 'القيمة المتطرفة', 'extreme value')
+        ],
         definitions: [
             {
                 term: say('Banaketa simetrikoa', 'Distribución simétrica', 'التوزيع المتماثل', 'Symmetric distribution'),
                 meaning: say('Haren grafikoa erdiko lerro batekiko ispilu bat bezalakoa da; batez bestekoa eta mediana oso hurbil daude.', 'Su gráfico es como un espejo respecto a una línea central; la media y la mediana están muy cerca.', 'تمثيله كالمرآة بالنسبة إلى خط في الوسط، والمتوسط والوسيط متقاربان جدًا.', 'Its graph is like a mirror image across a central line; the mean and the median are very close.')
             }
         ],
+        why: {
+            text: say(
+                'Batez bestekoak datu bakoitzaren tamaina erabiltzen du; medianak, haren posizioa bakarrik. 2, 3 eta 4 datuekin, biek 3 balio dute. 4 datua 40 bihurtzen bada, batez bestekoa 15 izatera igotzen da, baina mediana 3 da oraindik: erdiko datua ez da aldatu.',
+                'La media usa el tamaño de cada dato; la mediana, solo su posición. Con 2, 3 y 4, las dos valen 3. Si el 4 se convierte en 40, la media sube a 15, pero la mediana sigue siendo 3: el dato del centro no ha cambiado.',
+                'المتوسط يستعمل قيمة كل معطى، أما الوسيط فموقعه فقط. مع 2 و3 و4 يساوي كلاهما 3. وإذا صار 4 هو 40 ارتفع المتوسط إلى 15، لكن الوسيط يبقى 3: فالمعطى الذي في الوسط لم يتغير.',
+                'The mean uses the size of every value; the median, only its position. With 2, 3 and 4, both are 3. If the 4 becomes 40, the mean goes up to 15, but the median is still 3: the value in the middle has not changed.'
+            ),
+            math: same('$\\begin{gathered}\\frac{2+3+4}{3}=3\\\\\\frac{2+3+40}{3}=15\\end{gathered}$')
+        },
         explanation: say(
             'Banaketa asimetrikoa denean, batez bestekoa alde luzeenera mugitzen da, mediana baino gehiago. Muturreko balio bakar batek, oso handia edo oso txikia, batez bestekoa asko alda dezake, baina mediana ia ez: orduan mediana da ordezkari hobea.',
             'Cuando la distribución es asimétrica, la media se desplaza hacia el lado más largo, más que la mediana. Un solo valor extremo, muy grande o muy pequeño, puede cambiar mucho la media, pero casi nada la mediana: entonces la mediana representa mejor.',
@@ -286,6 +342,10 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
         )
     },
     deviation: {
+        vocabulary: [
+            say('balio absolutua', 'valor absoluto', 'القيمة المطلقة', 'absolute value'),
+            say('batez bestekoa', 'media', 'المتوسط', 'mean')
+        ],
         definitions: [
             {
                 term: say('Ibiltartea', 'Recorrido', 'المدى', 'Range'),
@@ -296,6 +356,15 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
                 meaning: say('Datu bakoitzetik batez bestekora dagoen distantzien batez bestekoa. Zenbat eta txikiagoa, orduan eta bilduago datuak.', 'La media de las distancias de cada dato a la media. Cuanto menor, más agrupados están los datos.', 'متوسط مسافات كل بيان عن المتوسط. وكلما صغر كانت البيانات أكثر تجمّعًا.', 'The mean of the distances from each value to the mean. The smaller it is, the closer together the data are.')
             }
         ],
+        why: {
+            text: say(
+                'Batez bestekoaren gaineko eta azpiko distantziak beti orekatzen dira: 2, 4 eta 9 datuekin batez bestekoa 5 da, eta $-3-1+4=0$. Zeinuak kenduko ez balira, batura 0 izango litzateke edozein taldetan. Horregatik, batez besteko desbideratzeak balio absolutuak erabiltzen ditu.',
+                'Las distancias a la media por encima y por debajo siempre se compensan: con 2, 4 y 9 la media es 5, y $-3-1+4=0$. Si no se quitaran los signos, la suma daría 0 en cualquier grupo. Por eso la desviación media usa valores absolutos.',
+                'فروق البيانات عن المتوسط فوقه وتحته تتعادل دائمًا: مع 2 و4 و9 يكون المتوسط 5، و$-3-1+4=0$. ولو لم نحذف الإشارات لكان المجموع 0 في أي مجموعة. لذلك يستعمل الانحراف المتوسط القيم المطلقة.',
+                'The distances above and below the mean always balance out: with 2, 4 and 9 the mean is 5, and $-3-1+4=0$. Without removing the signs, the sum would be 0 for any group. That is why the mean deviation uses absolute values.'
+            ),
+            math: same('$\\begin{aligned}&|2-5|+|4-5|+|9-5|\\\\&=3+1+4=8\\end{aligned}$')
+        },
         explanation: say(
             'Bi talderen batez bestekoa berdina izan daiteke eta datuak oso modu desberdinean banatuta egon. Ibiltartea azkarra da, baina bi datu bakarrik begiratzen ditu; batez besteko desbideratzeak denak hartzen ditu kontuan: $\\text{DM}=\\frac{\\sum |x_i-\\bar{x}|\\cdot f_i}{N}$. Distantziak beti positiboak dira.',
             'Dos grupos pueden tener la misma media y los datos repartidos de forma muy distinta. El recorrido es rápido, pero solo mira dos datos; la desviación media los tiene en cuenta todos: $\\text{DM}=\\frac{\\sum |x_i-\\bar{x}|\\cdot f_i}{N}$. Las distancias son siempre positivas.',
@@ -312,6 +381,10 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
         exampleAnswer: say('Ibiltartea 10 da, eta batez besteko desbideratzea 2,8. Distantziak: 5, 2, 0, 2, 5.', 'Recorrido 10 y desviación media 2,8. Las distancias: 5, 2, 0, 2, 5.', 'المدى 10 والانحراف المتوسط 2.8. والمسافات: 5، 2، 0، 2، 5.', 'Range 10 and mean deviation 2.8. The distances: 5, 2, 0, 2, 5.')
     },
     quartiles: {
+        vocabulary: [
+            say('erdia', 'mitad', 'النصف', 'half'),
+            say('mediana', 'mediana', 'الوسيط', 'median')
+        ],
         definitions: [
             {
                 term: say('Kuartilak', 'Cuartiles', 'الربيعيات', 'Quartiles'),
@@ -334,6 +407,11 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
         exampleAnswer: say('8 datu daude, bikoitia: kuartil bakoitza bi daturen batez bestekoa da.', 'Hay 8 datos, un número par: cada cuartil es la media de dos datos.', 'عدد البيانات 8، وهو زوجي: كل ربيع متوسط بيانين.', 'There are 8 values, an even number: each quartile is the mean of two values.')
     },
     'box-plot': {
+        vocabulary: [
+            say('kutxa', 'caja', 'الصندوق', 'box'),
+            say('sakabanatuta', 'dispersos', 'متشتتة', 'spread out'),
+            say('bilduta', 'agrupados', 'متجمّعة', 'close together')
+        ],
         definitions: [
             {
                 term: say('Kutxa-diagrama', 'Diagrama de caja y bigotes', 'مخطط الصندوق', 'Box plot'),
@@ -368,6 +446,11 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
 
     /* ---------- 4. Probability ---------- */
     events: {
+        vocabulary: [
+            say('probabilitatea', 'probabilidad', 'الاحتمال', 'probability'),
+            say('Laplaceren erregela', 'regla de Laplace', 'قاعدة لابلاس', 'Laplace\'s rule'),
+            say('dadoa', 'dado', 'حجر النرد', 'dice')
+        ],
         definitions: [
             {
                 term: say('Gertaera', 'Suceso', 'الحدث', 'Event'),
@@ -394,6 +477,11 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
         exampleAnswer: say('$\\bar{A}$ «3 edo gehiago ateratzea» da: 3, 4, 5 edo 6.', '$\\bar{A}$ es «sacar 3 o más»: 3, 4, 5 o 6.', '$\\bar{A}$ هو «الحصول على 3 أو أكثر»: 3 أو 4 أو 5 أو 6.', '$\\bar{A}$ is “rolling 3 or more”: 3, 4, 5 or 6.')
     },
     tree: {
+        vocabulary: [
+            say('emaitza', 'resultado', 'النتيجة', 'outcome'),
+            say('txanpona', 'moneda', 'قطعة النقود', 'coin'),
+            say('esperimentua', 'experimento', 'التجربة', 'experiment')
+        ],
         definitions: [
             {
                 term: say('Zuhaitz-diagrama', 'Diagrama de árbol', 'المخطط الشجري', 'Tree diagram'),
@@ -416,6 +504,11 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
         exampleAnswer: say('12 emaitza daude, eta 3 dira aldekoak: aurpegia eta 2, 4 edo 6.', 'Hay 12 resultados y 3 favorables: cara con 2, 4 o 6.', 'هناك 12 نتيجة، منها 3 ملائمة: وجه مع 2 أو 4 أو 6.', 'There are 12 outcomes and 3 favourable ones: heads with 2, 4 or 6.')
     },
     'double-table': {
+        vocabulary: [
+            say('gelaxka', 'casilla', 'الخانة', 'cell'),
+            say('errenkada', 'fila', 'الصف', 'row'),
+            say('zutabea', 'columna', 'العمود', 'column')
+        ],
         definitions: [
             {
                 term: say('Sarrera bikoitzeko taula', 'Tabla de doble entrada', 'الجدول ذو المدخلين', 'Two-way table'),

@@ -18,6 +18,11 @@ const same = (value: string): LocalizedText => say(value, value, value, value)
 export const algebraLessonTexts: Record<AlgebraTopicId, LessonTexts> = {
     /* ---------- 1. Algebraic language ---------- */
     language: {
+        vocabulary: [
+            say('letra', 'letra', 'الحرف', 'letter'),
+            say('formula', 'fórmula', 'الصيغة', 'formula'),
+            say('segida', 'serie', 'المتتالية', 'sequence')
+        ],
         definitions: [
             {
                 term: say('Hizkuntza aljebraikoa', 'Lenguaje algebraico', 'اللغة الجبرية', 'Algebraic language'),
@@ -39,12 +44,26 @@ export const algebraLessonTexts: Record<AlgebraTopicId, LessonTexts> = {
         exampleAnswer: say('Gai bakoitzak 4 gehitzen du. Egiaztatu: $a_{1}=4\\cdot 1+3=7$.', 'Cada término suma 4. Comprueba: $a_{1}=4\\cdot 1+3=7$.', 'كل حد يزيد 4. تحقّق: $a_{1}=4\\cdot 1+3=7$.', 'Each term adds 4. Check: $a_{1}=4\\cdot 1+3=7$.')
     },
     value: {
+        vocabulary: [
+            say('ordezkatu', 'sustituir', 'التعويض', 'substitute'),
+            say('parentesia', 'paréntesis', 'الأقواس', 'brackets'),
+            say('hierarkia', 'jerarquía', 'أولوية العمليات', 'order of operations')
+        ],
         definitions: [
             {
                 term: say('Zenbakizko balioa', 'Valor numérico', 'القيمة العددية', 'Numerical value'),
                 meaning: say('Letrak zenbakiez ordeztu eta eragiketak egitean ateratzen den emaitza.', 'El resultado de sustituir las letras por números y hacer las operaciones.', 'الناتج بعد تعويض الحروف بأعداد وإجراء العمليات.', 'The result of replacing the letters with numbers and doing the operations.')
             }
         ],
+        why: {
+            text: say(
+                '$x=-3$ bada, $x^{2}$ adierazpenak $(-3)\\cdot(-3)=9$ balio du. Parentesirik gabe, $-3^{2}$ idazkera $-(3\\cdot 3)=-9$ gisa irakurtzen da, berretura zeinuaren aurretik doalako. Horregatik, zenbaki negatibo bat ordezkatzean, idatzi parentesi artean.',
+                'Si $x=-3$, $x^{2}$ vale $(-3)\\cdot(-3)=9$. Sin paréntesis, $-3^{2}$ se lee como $-(3\\cdot 3)=-9$, porque la potencia va antes que el signo. Por eso, al sustituir un número negativo, escríbelo entre paréntesis.',
+                'إذا كان $x=-3$ فإن $x^{2}$ يساوي $(-3)\\cdot(-3)=9$. أما دون أقواس فيُقرأ $-3^{2}$ على أنه $-(3\\cdot 3)=-9$، لأن القوة تسبق الإشارة. لذلك اكتب العدد السالب بين قوسين عند التعويض.',
+                'If $x=-3$, $x^{2}$ is $(-3)\\cdot(-3)=9$. Without brackets, $-3^{2}$ is read as $-(3\\cdot 3)=-9$, because the power comes before the sign. That is why you write a negative number in brackets when you substitute it.'
+            ),
+            math: same('$\\begin{gathered}(-3)^{2}=9\\\\-3^{2}=-9\\end{gathered}$')
+        },
         explanation: say(
             'Kontuz negatiboekin: jarri parentesi artean eta errespetatu hierarkia: lehenik berreturak, gero biderketak, eta azkenik batuketak eta kenketak.',
             'Cuidado con los negativos: ponlos entre paréntesis y respeta la jerarquía: primero las potencias, luego los productos y al final las sumas y restas.',
@@ -56,6 +75,11 @@ export const algebraLessonTexts: Record<AlgebraTopicId, LessonTexts> = {
         exampleAnswer: say('Balioa 28 da: parentesiekin, $(-2)^{2}=4$.', 'El valor es 28: con los paréntesis, $(-2)^{2}=4$.', 'القيمة 28: مع الأقواس $(-2)^{2}=4$.', 'The value is 28: with the brackets, $(-2)^{2}=4$.')
     },
     monomial: {
+        vocabulary: [
+            say('koefizientea', 'coeficiente', 'المعامل', 'coefficient'),
+            say('letrazko zatia', 'parte literal', 'الجزء الحرفي', 'letter part'),
+            say('berretzailea', 'exponente', 'الأس', 'exponent')
+        ],
         definitions: [
             {
                 term: say('Monomioa', 'Monomio', 'وحيد الحد', 'Monomial'),
@@ -81,6 +105,20 @@ export const algebraLessonTexts: Record<AlgebraTopicId, LessonTexts> = {
         exampleAnswer: say('Koefizientea $-\\frac{2}{3}$, zati literala $ab^{3}$ eta maila 4.', 'Coeficiente $-\\frac{2}{3}$, parte literal $ab^{3}$ y grado 4.', 'المعامل $-\\frac{2}{3}$، والجزء الحرفي $ab^{3}$، والدرجة 4.', 'Coefficient $-\\frac{2}{3}$, literal part $ab^{3}$ and degree 4.')
     },
     'add-monomials': {
+        vocabulary: [
+            say('koefizientea', 'coeficiente', 'المعامل', 'coefficient'),
+            say('letrazko zatia', 'parte literal', 'الجزء الحرفي', 'letter part'),
+            say('laburtu', 'reducir', 'التبسيط', 'simplify')
+        ],
+        why: {
+            text: say(
+                'Monomio batek gauzak zenbatzen ditu: $3x$ hiru aldiz $x$ da, hiru sagar bezala. Horregatik $3x+2x=5x$. Baina $x$ eta $x^{2}$ gauza desberdinak dira, sagarrak eta udareak bezala: $3x+2x^{2}$ ezin da gai bakar batean bildu.',
+                'Un monomio cuenta cosas: $3x$ son tres veces $x$, como tres manzanas. Por eso $3x+2x=5x$. Pero $x$ y $x^{2}$ son cosas distintas, como manzanas y peras: $3x+2x^{2}$ no se puede juntar en un solo término.',
+                'وحيد الحد يعدّ أشياء: $3x$ تعني ثلاث مرات $x$، مثل ثلاث تفاحات. لذلك $3x+2x=5x$. لكن $x$ و$x^{2}$ شيئان مختلفان، مثل التفاح والإجاص: فلا يمكن جمع $3x+2x^{2}$ في حد واحد.',
+                'A monomial counts things: $3x$ is three times $x$, like three apples. That is why $3x+2x=5x$. But $x$ and $x^{2}$ are different things, like apples and pears: $3x+2x^{2}$ cannot be put together into a single term.'
+            ),
+            math: same('$3x+2x=(3+2)x=5x$')
+        },
         explanation: say(
             'Monomio antzekoak bakarrik batu edo ken daitezke: koefizienteak batu edo kentzen dira, eta zati literala berdin geratzen da. Antzekoak ez badira, eragiketa adierazita geratzen da. Adierazpen bat laburtzeko, elkartu gai antzekoak.',
             'Solo se pueden sumar o restar monomios semejantes: se suman o restan los coeficientes y la parte literal se queda igual. Si no son semejantes, la operación queda indicada. Para reducir una expresión, agrupa los términos semejantes.',
@@ -92,6 +130,19 @@ export const algebraLessonTexts: Record<AlgebraTopicId, LessonTexts> = {
         exampleAnswer: say('$ab$ eta $a$ ez dira antzekoak: emaitzak hiru gai ditu.', '$ab$ y $a$ no son semejantes: el resultado tiene tres términos.', '$ab$ و$a$ غير متشابهين: للنتيجة ثلاثة حدود.', '$ab$ and $a$ are not alike: the result has three terms.')
     },
     'multiply-monomials': {
+        vocabulary: [
+            say('koefizienteak', 'coeficientes', 'المعاملات', 'coefficients'),
+            say('berretzaileak', 'exponentes', 'الأسس', 'exponents')
+        ],
+        why: {
+            text: say(
+                'Berretzaileak letra zenbat aldiz biderkatzen den esaten du. $x^{2}$ bi $x$ biderkagai dira eta $x^{3}$ hiru: guztira bost biderkagai, $x^{5}$. Zatitzean, beheko biderkagaiak goikoekin sinplifikatzen dira: horregatik kentzen dira berretzaileak.',
+                'El exponente dice cuántas veces se multiplica la letra. $x^{2}$ son dos factores $x$ y $x^{3}$ son tres: juntos son cinco factores, $x^{5}$. Al dividir, los factores de abajo se simplifican con los de arriba: por eso se restan los exponentes.',
+                'الأس يبيّن كم مرة نضرب الحرف. $x^{2}$ عاملان $x$ و$x^{3}$ ثلاثة: معًا خمسة عوامل، $x^{5}$. وعند القسمة تُختصر عوامل المقام مع عوامل البسط: لذلك نطرح الأسس.',
+                'The exponent says how many times the letter is multiplied. $x^{2}$ is two factors $x$ and $x^{3}$ is three: together, five factors, $x^{5}$. When you divide, the factors below cancel with those above: that is why you subtract the exponents.'
+            ),
+            math: same('$\\begin{gathered}x^{2}\\cdot x^{3}=(x\\cdot x)\\cdot(x\\cdot x\\cdot x)=x^{5}\\\\x^{5}\\mathbin{:}x^{2}=x^{5-2}=x^{3}\\end{gathered}$')
+        },
         explanation: say(
             'Monomioak biderkatzeko, biderkatu koefizienteak eta batu letra berdinen berretzaileak ($x^{2}\\cdot x^{3}=x^{5}$). Zatitzeko, zatitu koefizienteak eta kendu berretzaileak ($x^{5}\\mathbin{:}x^{2}=x^{3}$). Ez dute zertan antzekoak izan.',
             'Para multiplicar monomios, multiplica los coeficientes y suma los exponentes de las letras iguales ($x^{2}\\cdot x^{3}=x^{5}$). Para dividir, divide los coeficientes y resta los exponentes ($x^{5}\\mathbin{:}x^{2}=x^{3}$). No hace falta que sean semejantes.',
@@ -105,6 +156,11 @@ export const algebraLessonTexts: Record<AlgebraTopicId, LessonTexts> = {
 
     /* ---------- 2. Polynomials ---------- */
     polynomial: {
+        vocabulary: [
+            say('aurkakoa', 'opuesto', 'المعاكس', 'opposite'),
+            say('maila', 'grado', 'الدرجة', 'degree'),
+            say('gaia', 'término', 'الحد', 'term')
+        ],
         definitions: [
             {
                 term: say('Polinomioa', 'Polinomio', 'الحدودية', 'Polynomial'),
@@ -126,6 +182,10 @@ export const algebraLessonTexts: Record<AlgebraTopicId, LessonTexts> = {
         exampleAnswer: say('$Q(0)=4$ gai askea da.', '$Q(0)=4$ es el término independiente.', '$Q(0)=4$ هو الحد الثابت.', '$Q(0)=4$ is the constant term.')
     },
     'add-polynomials': {
+        vocabulary: [
+            say('gai antzekoak', 'términos semejantes', 'الحدود المتشابهة', 'like terms'),
+            say('aurkakoa', 'opuesto', 'المعاكس', 'opposite')
+        ],
         explanation: say(
             'Polinomioak batzeko, batu gai antzekoak. Kentzeko, batu lehenengoari bigarrenaren aurkakoa: aurrean minus bat duen parentesia kentzean, barruko gai guztiek zeinua aldatzen dute. Lagungarria da bata bestearen azpian idaztea, mailaka.',
             'Para sumar polinomios, suma los términos semejantes. Para restar, suma al primero el opuesto del segundo: al quitar un paréntesis con un menos delante, cambian de signo todos los términos de dentro. Ayuda escribirlos uno debajo del otro, por grados.',
@@ -137,6 +197,10 @@ export const algebraLessonTexts: Record<AlgebraTopicId, LessonTexts> = {
         exampleAnswer: say('$x$ duen gaia desagertu egiten da: $x-x=0$.', 'El término en $x$ desaparece: $x-x=0$.', 'يختفي حد $x$: $x-x=0$.', 'The $x$ term disappears: $x-x=0$.')
     },
     'multiply-monomial': {
+        vocabulary: [
+            say('banatze-propietatea', 'propiedad distributiva', 'خاصية التوزيع', 'distributive property'),
+            say('gaia', 'término', 'الحد', 'term')
+        ],
         explanation: say(
             'Polinomio bat monomio batez biderkatzeko, aplikatu banaketa-propietatea: monomioak gai bakoitza biderkatzen du. Polinomio bat monomio batez zatitzeko, zatitu gai bakoitza monomioaz.',
             'Para multiplicar un polinomio por un monomio, aplica la propiedad distributiva: el monomio multiplica a cada término. Para dividir un polinomio entre un monomio, divide cada término entre el monomio.',
@@ -148,6 +212,11 @@ export const algebraLessonTexts: Record<AlgebraTopicId, LessonTexts> = {
         exampleAnswer: say('Monomioak gai guztiak biderkatzen (edo zatitzen) ditu.', 'El monomio multiplica (o divide) a todos los términos.', 'يضرب وحيد الحد (أو يقسم) كل الحدود.', 'The monomial multiplies (or divides) every term.')
     },
     'multiply-polynomials': {
+        vocabulary: [
+            say('binomioa', 'binomio', 'ثنائي الحد', 'binomial'),
+            say('azalera', 'área', 'المساحة', 'area'),
+            say('laukizuzena', 'rectángulo', 'المستطيل', 'rectangle')
+        ],
         explanation: say(
             'Bi polinomio biderkatzeko, biderkatu lehenengoaren gai bakoitza bigarrenaren gai guztiez, eta laburtu antzekoak. Bi binomioren biderkadura laukizuzen baten azalera gisa ikus daiteke: lau zatien batura.',
             'Para multiplicar dos polinomios, multiplica cada término del primero por todos los del segundo y reduce los semejantes. El producto de dos binomios se puede ver como el área de un rectángulo: la suma de cuatro partes.',
@@ -161,6 +230,19 @@ export const algebraLessonTexts: Record<AlgebraTopicId, LessonTexts> = {
 
     /* ---------- 3. Special products ---------- */
     'square-sum': {
+        vocabulary: [
+            say('karratua', 'cuadrado', 'المربع', 'square'),
+            say('bikoitza', 'doble', 'الضعف', 'twice')
+        ],
+        why: {
+            text: say(
+                'Pentsatu $a+b$ aldeko karratu batean. Karratu bat ($a^{2}$), beste karratu bat ($b^{2}$) eta $a$ bider $b$ neurriko bi laukizuzen ditu. Horregatik agertzen da $2ab$: ahazten baduzu, bi laukizuzenak falta dira.',
+                'Piensa en un cuadrado de lado $a+b$. Se parte en un cuadrado ($a^{2}$), otro cuadrado ($b^{2}$) y dos rectángulos de $a$ por $b$. Por eso aparece $2ab$: si lo olvidas, faltan los dos rectángulos.',
+                'تخيّل مربعًا طول ضلعه $a+b$. ينقسم إلى مربع ($a^{2}$) ومربع آخر ($b^{2}$) ومستطيلين بُعداهما $a$ و$b$. لذلك يظهر $2ab$: وإذا نسيته نقص المستطيلان.',
+                'Think of a square with side $a+b$. It splits into a square ($a^{2}$), another square ($b^{2}$) and two rectangles of $a$ by $b$. That is why $2ab$ appears: if you forget it, the two rectangles are missing.'
+            ),
+            math: same('$\\begin{aligned}(3+2)^{2}&=3^{2}+2\\cdot 3\\cdot 2+2^{2}\\\\&=9+12+4=25\\end{aligned}$')
+        },
         explanation: say(
             'Batura baten karratua lehenaren karratua da, gehi lehenaren eta bigarrenaren biderkaduraren bikoitza, gehi bigarrenaren karratua: $(a+b)^{2}=a^{2}+2ab+b^{2}$. Ez ahaztu $2ab$: $(a+b)^{2}$ ez da $a^{2}+b^{2}$.',
             'El cuadrado de una suma es el cuadrado del primero, más el doble del primero por el segundo, más el cuadrado del segundo: $(a+b)^{2}=a^{2}+2ab+b^{2}$. No olvides $2ab$: $(a+b)^{2}$ no es $a^{2}+b^{2}$.',
@@ -172,6 +254,10 @@ export const algebraLessonTexts: Record<AlgebraTopicId, LessonTexts> = {
         exampleAnswer: say('Erdiko gaia biderkaduraren bikoitza da: $2\\cdot x\\cdot 7=14x$.', 'El término del medio es el doble del producto: $2\\cdot x\\cdot 7=14x$.', 'الحد الأوسط ضعف الجداء: $2\\cdot x\\cdot 7=14x$.', 'The middle term is twice the product: $2\\cdot x\\cdot 7=14x$.')
     },
     'square-difference': {
+        vocabulary: [
+            say('kendura', 'diferencia', 'الفرق', 'difference'),
+            say('erdiko gaia', 'término del medio', 'الحد الأوسط', 'middle term')
+        ],
         explanation: say(
             'Kendura baten karratua lehenaren karratua da, ken biderkaduraren bikoitza, gehi bigarrenaren karratua: $(a-b)^{2}=a^{2}-2ab+b^{2}$. Erdiko gaia bakarrik da negatiboa: azkena karratu bat da.',
             'El cuadrado de una diferencia es el cuadrado del primero, menos el doble del producto, más el cuadrado del segundo: $(a-b)^{2}=a^{2}-2ab+b^{2}$. Solo el término del medio es negativo: el último es un cuadrado.',
@@ -183,6 +269,10 @@ export const algebraLessonTexts: Record<AlgebraTopicId, LessonTexts> = {
         exampleAnswer: say('Azken gaia, 81 edo 4, beti da positiboa.', 'El último término, 81 o 4, siempre es positivo.', 'الحد الأخير، 81 أو 4، موجب دائمًا.', 'The last term, 81 or 4, is always positive.')
     },
     'sum-difference': {
+        vocabulary: [
+            say('karratuen kendura', 'diferencia de cuadrados', 'فرق مربعين', 'difference of squares'),
+            say('erdiko gaiak', 'términos del medio', 'الحدان الأوسطان', 'middle terms')
+        ],
         explanation: say(
             'Batura bat bider kendura bat karratuen kendura da: $(a+b)(a-b)=a^{2}-b^{2}$, erdiko gaiak, $+ab$ eta $-ab$, ezabatu egiten direlako. Kalkulu mentalerako ere balio du.',
             'Una suma por una diferencia es una diferencia de cuadrados: $(a+b)(a-b)=a^{2}-b^{2}$, porque los términos del medio, $+ab$ y $-ab$, se anulan. También sirve para el cálculo mental.',
@@ -196,6 +286,10 @@ export const algebraLessonTexts: Record<AlgebraTopicId, LessonTexts> = {
 
     /* ---------- 4. Factorising ---------- */
     'common-factor': {
+        vocabulary: [
+            say('berretzaile txikiena', 'menor exponente', 'أصغر أس', 'smallest exponent'),
+            say('parentesia', 'paréntesis', 'القوس', 'brackets')
+        ],
         definitions: [
             {
                 term: say('Faktore komuna ateratzea', 'Sacar factor común', 'إخراج العامل المشترك', 'Taking out a common factor'),
@@ -213,6 +307,10 @@ export const algebraLessonTexts: Record<AlgebraTopicId, LessonTexts> = {
         exampleAnswer: say('Azken gaian 1 geratzen da, gai osoa faktore komuna baita.', 'En el último término queda 1, porque es todo el factor común.', 'يبقى 1 في الحد الأخير لأنه العامل المشترك كله.', 'The last term leaves 1, because it is the whole common factor.')
     },
     'factor-identities': {
+        vocabulary: [
+            say('biderkadura nabarmenak', 'productos notables', 'المتطابقات الشهيرة', 'special products'),
+            say('oinarriak', 'bases', 'الأساسات', 'bases')
+        ],
         explanation: say(
             'Biderkadura nabarmenak alderantziz irakur daitezke. Hiru gai badaude, bi karratuak dira eta erdikoa haien oinarrien biderkaduraren bikoitza, batura edo kendura baten karratua da. Karratuen kendura bat bada, batura bider kendura da.',
             'Los productos notables se pueden leer al revés. Si hay tres términos, dos son cuadrados y el del medio es el doble del producto de sus bases, es el cuadrado de una suma o de una diferencia. Si es una diferencia de cuadrados, es una suma por diferencia.',
@@ -224,6 +322,10 @@ export const algebraLessonTexts: Record<AlgebraTopicId, LessonTexts> = {
         exampleAnswer: say('Erdiko gaiak, $2\\cdot x\\cdot 6=12x$, lehena baieztatzen du.', 'El del medio, $2\\cdot x\\cdot 6=12x$, confirma el primero.', 'الحد الأوسط $2\\cdot x\\cdot 6=12x$ يؤكد الأول.', 'The middle term, $2\\cdot x\\cdot 6=12x$, confirms the first.')
     },
     mental: {
+        vocabulary: [
+            say('zenbaki borobila', 'número redondo', 'عدد مدوّر', 'round number'),
+            say('faktore komuna', 'factor común', 'العامل المشترك', 'common factor')
+        ],
         explanation: say(
             'Biderkadura nabarmenekin eta faktore komunarekin, kalkulu luze asko buruz egiten dira: bilatu zenbaki biribil bat gertu, edo errepikatzen den faktore bat.',
             'Con los productos notables y el factor común, muchos cálculos largos se hacen de cabeza: busca un número redondo cerca o un factor que se repita.',

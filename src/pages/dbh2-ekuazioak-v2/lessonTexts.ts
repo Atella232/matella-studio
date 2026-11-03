@@ -19,6 +19,10 @@ const same = (value: string): LocalizedText => say(value, value, value, value)
 export const equationLessonTexts: Record<EquationTopicId, LessonTexts> = {
     /* ---------- 1. Equations ---------- */
     meaning: {
+        vocabulary: [
+            say('ebazpena', 'solución', 'الحل', 'solution'),
+            say('bi atalak', 'los dos miembros', 'الطرفان', 'both sides')
+        ],
         definitions: [
             {
                 term: say('Identitatea', 'Identidad', 'المتطابقة', 'Identity'),
@@ -40,6 +44,10 @@ export const equationLessonTexts: Record<EquationTopicId, LessonTexts> = {
         exampleAnswer: say('Bai: bi atalek 10 ematen dute.', 'Sí: los dos miembros dan 10.', 'نعم: يعطي الطرفان 10.', 'Yes: both sides give 10.')
     },
     elements: {
+        vocabulary: [
+            say('gaiak pasatu', 'pasar términos', 'نقل الحدود', 'move terms'),
+            say('zenbaki bera', 'mismo número', 'العدد نفسه', 'same number')
+        ],
         definitions: [
             {
                 term: say('Atalak eta gaiak', 'Miembros y términos', 'الطرفان والحدود', 'Sides and terms'),
@@ -65,6 +73,20 @@ export const equationLessonTexts: Record<EquationTopicId, LessonTexts> = {
         exampleAnswer: say('Bai: biek $x=5$ ebazpena dute.', 'Sí: las dos tienen la solución $x=5$.', 'نعم: لكلتيهما الحل $x=5$.', 'Yes: both have the solution $x=5$.')
     },
     simple: {
+        vocabulary: [
+            say('koefizientea', 'coeficiente', 'المعامل', 'coefficient'),
+            say('askatu', 'despejar', 'عزل', 'solve for x'),
+            say('zeinua', 'signo', 'الإشارة', 'sign')
+        ],
+        why: {
+            text: say(
+                'Ekuazio bat balantza bat bezalakoa da: bi plateretatik gauza bera kentzen baduzu, orekan jarraitzen du. $x+5=12$ ekuazioan, bi ataletan 5 kenduta $x=12-5$ geratzen da: badirudi 5 zenbakia beste aldera «pasatzen» dela zeinuz aldatuta, baina bi ataletako kenketa bat da.',
+                'Una ecuación es como una balanza: si quitas lo mismo de los dos platos, sigue equilibrada. En $x+5=12$, restar 5 en los dos miembros da $x=12-5$: parece que el 5 «pasa» al otro lado cambiando de signo, pero es una resta en los dos miembros.',
+                'المعادلة مثل الميزان: إذا أخذت الشيء نفسه من الكفّتين بقي متوازنًا. في $x+5=12$ يعطي طرح 5 من الطرفين $x=12-5$: يبدو أن 5 «ينتقل» إلى الطرف الآخر ويغيّر إشارته، لكنه في الحقيقة طرح من الطرفين.',
+                'An equation is like a balance: if you take the same off both pans, it stays level. In $x+5=12$, subtracting 5 on both sides gives $x=12-5$: it looks as if the 5 «moves» to the other side and changes sign, but it is a subtraction on both sides.'
+            ),
+            math: same('$\\begin{aligned}x+5&=12\\\\x+5-5&=12-5\\\\x&=7\\end{aligned}$')
+        },
         explanation: say(
             'Bildu x duten gaiak atal batean eta zenbakiak bestean: atalez aldatzen den gaiak zeinua aldatzen du. Laburtu bi atalak eta askatu x: x-ren koefizientea zatitzen pasatzen da, bere zeinuarekin.',
             'Agrupa los términos con x en un miembro y los números en el otro: el término que cambia de miembro cambia de signo. Reduce los dos miembros y despeja x: el coeficiente de x pasa dividiendo, con su signo.',
@@ -76,6 +98,10 @@ export const equationLessonTexts: Record<EquationTopicId, LessonTexts> = {
         exampleAnswer: say('$x=-5$. Egiaztatu: $6\\cdot(-5)+2=-28$ eta $3\\cdot(-5)-13=-28$.', '$x=-5$. Comprueba: $6\\cdot(-5)+2=-28$ y $3\\cdot(-5)-13=-28$.', '$x=-5$. تحقّق: $6\\cdot(-5)+2=-28$ و$3\\cdot(-5)-13=-28$.', '$x=-5$. Check: $6\\cdot(-5)+2=-28$ and $3\\cdot(-5)-13=-28$.')
     },
     brackets: {
+        vocabulary: [
+            say('banatze-propietatea', 'propiedad distributiva', 'خاصية التوزيع', 'distributive property'),
+            say('minus zeinua', 'signo menos', 'إشارة السالب', 'minus sign')
+        ],
         explanation: say(
             'Lehenik kendu parentesiak banaketa-propietatearekin. Kontuz minus zeinuarekin: parentesiaren aurrean minus bat badago, barruko gai guztiek zeinua aldatzen dute. Gero bildu, laburtu, askatu x eta egiaztatu.',
             'Primero quita los paréntesis con la propiedad distributiva. Cuidado con el signo menos: si hay un menos delante del paréntesis, todos los términos de dentro cambian de signo. Después agrupa, reduce, despeja x y comprueba.',
@@ -87,6 +113,10 @@ export const equationLessonTexts: Record<EquationTopicId, LessonTexts> = {
         exampleAnswer: say('$x=8$. Egiaztatu: $4\\cdot 7-2\\cdot 11=28-22=6$.', '$x=8$. Comprueba: $4\\cdot 7-2\\cdot 11=28-22=6$.', '$x=8$. تحقّق: $4\\cdot 7-2\\cdot 11=28-22=6$.', '$x=8$. Check: $4\\cdot 7-2\\cdot 11=28-22=6$.')
     },
     special: {
+        vocabulary: [
+            say('ebazpenik gabe', 'sin solución', 'بلا حل', 'no solution'),
+            say('infinitu ebazpen', 'infinitas soluciones', 'عدد لا نهائي من الحلول', 'infinitely many solutions')
+        ],
         explanation: say(
             'Batzuetan, laburtzean x desagertu egiten da. $0x=5$ bezalako zerbait geratzen bada, ez dago ebazpenik: ezein zenbaki bider 0 ez da 5. $0x=0$ geratzen bada, edozein zenbaki da ebazpena: identitate bat da.',
             'A veces, al reducir, la x desaparece. Si queda algo como $0x=5$, no hay solución: ningún número por 0 da 5. Si queda $0x=0$, cualquier número es solución: es una identidad.',
@@ -100,6 +130,10 @@ export const equationLessonTexts: Record<EquationTopicId, LessonTexts> = {
 
     /* ---------- 2. Denominators ---------- */
     denominators: {
+        vocabulary: [
+            say('izendatzailea', 'denominador', 'المقام', 'denominator'),
+            say('zatikia', 'fracción', 'الكسر', 'fraction')
+        ],
         explanation: say(
             'Izendatzaile bat dagoenean, biderkatu bi atalak, gai guztiak, izendatzaile horrekin: zatikirik gabeko ekuazio baliokide bat ateratzen da. Beste modu bat: lehenik askatu zatikia eta gero biderkatu.',
             'Cuando hay un denominador, multiplica los dos miembros, todos los términos, por ese denominador: sale una ecuación equivalente sin fracciones. Otra forma: primero despeja la fracción y después multiplica.',
@@ -111,6 +145,10 @@ export const equationLessonTexts: Record<EquationTopicId, LessonTexts> = {
         exampleAnswer: say('$x=12$: 2 zenbakia ere 4 zenbakiarekin biderkatzen da.', '$x=12$: también el 2 se multiplica por 4.', '$x=12$: ويُضرب العدد 2 أيضًا في 4.', '$x=12$: the 2 is multiplied by 4 too.')
     },
     lcm: {
+        vocabulary: [
+            say('zenbakitzailea', 'numerador', 'البسط', 'numerator'),
+            say('zatikirik gabe', 'sin fracciones', 'بلا كسور', 'without fractions')
+        ],
         explanation: say(
             'Izendatzaile bat baino gehiago daudenean, kalkulatu haien MKT eta biderkatu gai guztiak harekin. Zatiki bakoitzean, MKT zati izendatzaileak esaten du zenbakitzailea zenbatekin biderkatzen den. Horrela, zatikirik gabeko ekuazio bat geratzen da.',
             'Cuando hay varios denominadores, calcula su m.c.m. y multiplica todos los términos por él. En cada fracción, el m.c.m. entre el denominador dice por cuánto se multiplica el numerador. Así queda una ecuación sin fracciones.',
@@ -122,6 +160,10 @@ export const equationLessonTexts: Record<EquationTopicId, LessonTexts> = {
         exampleAnswer: say('MKT 6 da: $6\\mathbin{:}3=2$ eta $6\\mathbin{:}6=1$.', 'El m.c.m. es 6: $6\\mathbin{:}3=2$ y $6\\mathbin{:}6=1$.', 'م.م.أ هو 6: $6\\mathbin{:}3=2$ و$6\\mathbin{:}6=1$.', 'The LCM is 6: $6\\mathbin{:}3=2$ and $6\\mathbin{:}6=1$.')
     },
     mixed: {
+        vocabulary: [
+            say('zenbakitzailea', 'numerador', 'البسط', 'numerator'),
+            say('parentesia', 'paréntesis', 'القوس', 'brackets')
+        ],
         explanation: say(
             'Zatiki baten zenbakitzaileak gai bat baino gehiago baditu, pentsatu parentesi artean dagoela. Horregatik, zatikiaren aurrean minus bat badago, MKT balioarekin biderkatzean zenbakitzaileko gai guztiek zeinua aldatzen dute.',
             'Si el numerador de una fracción tiene varios términos, piensa que está entre paréntesis. Por eso, si delante de la fracción hay un menos, al multiplicar por el m.c.m. cambian de signo todos los términos del numerador.',
@@ -135,6 +177,19 @@ export const equationLessonTexts: Record<EquationTopicId, LessonTexts> = {
 
     /* ---------- 3. Problems ---------- */
     'problem-steps': {
+        vocabulary: [
+            say('enuntziatua', 'enunciado', 'نص المسألة', 'statement'),
+            say('planteatu', 'plantear', 'اكتب المعادلة', 'set up'),
+            say('egiaztatu', 'comprobar', 'تحقّق', 'check')
+        ],
+        why: {
+            text: say(
+                'Ekuazioa gaizki planteatzen baduzu, haren ebazpenak bete egiten du hala ere, eta ekuazioan egiaztatzeak ez du akatsa agerian uzten. Enuntziatuak bakarrik esaten du zenbakiak galderari erantzuten dion: adin bat ezin da negatiboa izan, adibidez, ezta pertsona kopuru bat hamartarra ere.',
+                'Si planteas mal la ecuación, su solución la cumple igual, y comprobarla en la ecuación no descubre el error. Solo el enunciado dice si el número responde a la pregunta: una edad no puede ser negativa, por ejemplo, ni un número de personas puede tener decimales.',
+                'إذا أخطأت في كتابة المعادلة فإن حلها يحققها مع ذلك، والتحقق في المعادلة لا يكشف الخطأ. وحده نص المسألة يخبرك إن كان العدد يجيب عن السؤال: فالعمر مثلًا لا يكون سالبًا، وعدد الأشخاص لا يكون عددًا عشريًا.',
+                'If you set up the equation wrongly, its solution still satisfies it, and checking it in the equation does not show the mistake. Only the statement tells you whether the number answers the question: an age cannot be negative, for example, and a number of people cannot be a decimal.'
+            )
+        },
         explanation: say(
             'Buruketa bat ekuazio batekin ebazteko: ulertu enuntziatua eta erabaki zer izango den x; idatzi datuak x-rekin eta planteatu ekuazioa; ebatzi; eta egiaztatu emaitza enuntziatuan, ez ekuazioan bakarrik. Erantzun esaldi batekin.',
             'Para resolver un problema con una ecuación: comprende el enunciado y decide qué será x; escribe los datos con x y plantea la ecuación; resuélvela; y comprueba el resultado en el enunciado, no solo en la ecuación. Responde con una frase.',
@@ -146,6 +201,11 @@ export const equationLessonTexts: Record<EquationTopicId, LessonTexts> = {
         exampleAnswer: say('Zenbakia 12 da. Egiaztatu enuntziatuan: $2\\cdot 12+7=31$.', 'El número es 12. Comprueba en el enunciado: $2\\cdot 12+7=31$.', 'العدد هو 12. تحقّق في النص: $2\\cdot 12+7=31$.', 'The number is 12. Check it in the problem: $2\\cdot 12+7=31$.')
     },
     'problems-ages': {
+        vocabulary: [
+            say('adina', 'edad', 'العمر', 'age'),
+            say('prezioa', 'precio', 'السعر', 'price'),
+            say('taula', 'tabla', 'الجدول', 'table')
+        ],
         explanation: say(
             'Adin-buruketetan taula bat lagungarria da: gaur, duela $n$ urte eta hemendik $n$ urtera; urteak berdin igarotzen dira pertsona guztientzat. Prezio-buruketetan, idatzi gauza bakoitzaren prezioa x-rekin eta batu kopurua bider prezioa.',
             'En los problemas de edades ayuda una tabla con hoy, hace $n$ años y dentro de $n$ años: los años pasan igual para todas las personas. En los de precios, escribe el precio de cada cosa con x y suma cantidad por precio.',
@@ -162,6 +222,11 @@ export const equationLessonTexts: Record<EquationTopicId, LessonTexts> = {
         exampleAnswer: say('Zukuak 1,70 € balio du, eta ogitartekoak 3,20 €.', 'El zumo cuesta 1,70 € y el bocadillo, 3,20 €.', 'ثمن العصير 1.70 € وثمن الشطيرة 3.20 €.', 'The juice costs €1.70 and the sandwich €3.20.')
     },
     'problems-geometry': {
+        vocabulary: [
+            say('zenbaki jarraituak', 'números consecutivos', 'الأعداد المتتالية', 'consecutive numbers'),
+            say('osoa', 'total', 'الكل', 'whole'),
+            say('aldea', 'lado', 'الضلع', 'side')
+        ],
         explanation: say(
             'Geometrian, marraztu irudia eta idatzi alde bakoitza x-rekin. Zenbaki jarraituak $x$, $x+1$, $x+2$ dira. Osoaren zatiak badira (heren bat, laurden bat…), x osoa da eta zatiak $\\frac{x}{3}$, $\\frac{x}{4}$…: guztiek osoa osatzen dute.',
             'En geometría, dibuja la figura y escribe cada lado con x. Los números consecutivos son $x$, $x+1$, $x+2$. Si son partes de un total (un tercio, un cuarto…), x es el total y las partes, $\\frac{x}{3}$, $\\frac{x}{4}$…: entre todas forman el total.',
@@ -180,6 +245,10 @@ export const equationLessonTexts: Record<EquationTopicId, LessonTexts> = {
 
     /* ---------- 4. Second degree ---------- */
     quadratic: {
+        vocabulary: [
+            say('ordenatu', 'ordenar', 'رتّب', 'order'),
+            say('maila', 'grado', 'الدرجة', 'degree')
+        ],
         definitions: [
             {
                 term: say('Bigarren mailako ekuazioa', 'Ecuación de segundo grado', 'معادلة الدرجة الثانية', 'Quadratic equation'),
@@ -202,6 +271,19 @@ export const equationLessonTexts: Record<EquationTopicId, LessonTexts> = {
         exampleAnswer: say('$a=3$, $b=4$ eta $c=-1$.', '$a=3$, $b=4$ y $c=-1$.', '$a=3$ و$b=4$ و$c=-1$.', '$a=3$, $b=4$ and $c=-1$.')
     },
     incomplete: {
+        vocabulary: [
+            say('faktore komuna', 'factor común', 'العامل المشترك', 'common factor'),
+            say('erro karratua', 'raíz cuadrada', 'الجذر التربيعي', 'square root')
+        ],
+        why: {
+            text: say(
+                'Biderkadura batek 0 ematen badu, biderkagaietako batek 0 izan behar du: 0 ez diren bi zenbakik ez dute inoiz 0 ematen biderkatzean. Horregatik, faktore komuna ateratzean, $x(x-4)=0$ bi ekuaziotan banatzen da: $x=0$ edo $x-4=0$.',
+                'Si un producto da 0, uno de los factores tiene que ser 0: dos números distintos de 0 nunca dan 0 al multiplicarse. Por eso, al sacar factor común, $x(x-4)=0$ se parte en dos ecuaciones: $x=0$ o $x-4=0$.',
+                'إذا كان حاصل الضرب 0 فلا بد أن يكون أحد العاملين 0: فعددان غير صفريين لا يعطيان 0 أبدًا عند ضربهما. لذلك عند إخراج العامل المشترك تنقسم $x(x-4)=0$ إلى معادلتين: $x=0$ أو $x-4=0$.',
+                'If a product is 0, one of the factors has to be 0: two numbers that are not 0 never give 0 when multiplied. That is why, after taking out the common factor, $x(x-4)=0$ splits into two equations: $x=0$ or $x-4=0$.'
+            ),
+            math: same('$\\begin{gathered}x(x-4)=0\\\\x=0\\qquad x=4\\end{gathered}$')
+        },
         explanation: say(
             'Ekuazio osatugabe batean gai bat falta da: x duena ($b=0$) edo zenbaki soltea ($c=0$). Formularik gabe ebazten dira:',
             'En una ecuación incompleta falta un término: el de la x ($b=0$) o el número suelto ($c=0$). Se resuelven sin fórmula:',
@@ -225,12 +307,25 @@ export const equationLessonTexts: Record<EquationTopicId, LessonTexts> = {
         exampleAnswer: say('Lehena: $x=4$ eta $x=-4$. Bigarrena: $x=0$ eta $x=-4$.', 'Primera: $x=4$ y $x=-4$. Segunda: $x=0$ y $x=-4$.', 'الأولى: $x=4$ و$x=-4$. الثانية: $x=0$ و$x=-4$.', 'First: $x=4$ and $x=-4$. Second: $x=0$ and $x=-4$.')
     },
     formula: {
+        vocabulary: [
+            say('erro karratua', 'raíz cuadrada', 'الجذر التربيعي', 'square root'),
+            say('ebazpen bikoitza', 'solución doble', 'الحل المضاعف', 'double solution')
+        ],
         definitions: [
             {
                 term: say('Diskriminatzailea', 'Discriminante', 'المميّز', 'Discriminant'),
                 meaning: say('$\\Delta=b^{2}-4ac$, erroaren barrukoa: zenbat ebazpen dauden esaten du.', '$\\Delta=b^{2}-4ac$, lo de dentro de la raíz: dice cuántas soluciones hay.', '$\\Delta=b^{2}-4ac$، ما تحت الجذر: يبيّن عدد الحلول.', '$\\Delta=b^{2}-4ac$, what is under the root: it tells you how many solutions there are.')
             }
         ],
+        why: {
+            text: say(
+                'Formulak $b^{2}-4ac$ adierazpenaren erro karratua hartzen du. Positiboa bada, erroa batu eta kendu egiten da: bi ebazpen. 0 bada, 0 batzea edo kentzea gauza bera da: ebazpen bat. Negatiboa bada, ez dago karratua negatiboa duen zenbakirik: ez dago ebazpenik.',
+                'La fórmula toma la raíz cuadrada de $b^{2}-4ac$. Si es positivo, la raíz se suma y se resta: dos soluciones. Si es 0, sumar o restar 0 da lo mismo: una solución. Si es negativo, ningún número al cuadrado da un negativo: no hay solución.',
+                'تأخذ الصيغة الجذر التربيعي لـ $b^{2}-4ac$. إذا كان موجبًا نجمع الجذر ونطرحه: حلّان. وإذا كان 0 فجمع 0 أو طرحه سواء: حل واحد. وإذا كان سالبًا فلا يوجد عدد مربعه سالب: لا حل.',
+                'The formula takes the square root of $b^{2}-4ac$. If it is positive, the root is added and subtracted: two solutions. If it is 0, adding or subtracting 0 is the same: one solution. If it is negative, no number squared gives a negative: there is no solution.'
+            ),
+            math: same('$x=\\frac{-b\\pm\\sqrt{b^{2}-4ac}}{2a}$')
+        },
         explanation: say(
             '$ax^{2}+bx+c=0$ ekuazioaren ebazpenak formula honekin ateratzen dira: $x=\\frac{-b\\pm\\sqrt{b^{2}-4ac}}{2a}$. Kalkulatu lehenik diskriminatzailea:',
             'Las soluciones de $ax^{2}+bx+c=0$ salen con la fórmula $x=\\frac{-b\\pm\\sqrt{b^{2}-4ac}}{2a}$. Calcula primero el discriminante:',

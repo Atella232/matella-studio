@@ -1,6 +1,6 @@
 import type { UnitSection as PrototypeSection } from './types'
 
-export type IconName = PrototypeSection | 'more' | 'check' | 'arrow' | 'back' | 'bulb' | 'close' | 'expand'
+export type IconName = PrototypeSection | 'more' | 'check' | 'arrow' | 'back' | 'bulb' | 'close' | 'expand' | 'languages' | 'question'
 
 const paths: Record<IconName, string[]> = {
     route: ['M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z'],
@@ -16,7 +16,9 @@ const paths: Record<IconName, string[]> = {
     back: ['M15 5l-7 7 7 7'],
     bulb: ['M9 18h6', 'M10 21h4', 'M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z'],
     close: ['M6 6l12 12', 'M18 6L6 18'],
-    expand: ['M4 9V4h5', 'M20 9V4h-5', 'M4 15v5h5', 'M20 15v5h-5']
+    expand: ['M4 9V4h5', 'M20 9V4h-5', 'M4 15v5h5', 'M20 15v5h-5'],
+    languages: ['M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z', 'M3 12h18', 'M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9', 'M12 3c-2.5 2.6-3.8 5.6-3.8 9s1.3 6.4 3.8 9'],
+    question: ['M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z', 'M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6', 'M12 17h.01']
 }
 
 export function Icon({ name, size = 20, strokeWidth = 2, className }: { name: IconName; size?: number; strokeWidth?: number; className?: string }) {

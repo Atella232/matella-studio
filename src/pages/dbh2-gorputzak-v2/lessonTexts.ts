@@ -19,6 +19,11 @@ const same = (value: string): LocalizedText => say(value, value, value, value)
 export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
     /* ---------- 1. Polyhedra ---------- */
     elements: {
+        vocabulary: [
+            say('aurpegia', 'cara', 'الوجه', 'face'),
+            say('ertza', 'arista', 'الحرف', 'edge'),
+            say('erpina', 'vértice', 'الرأس', 'vertex')
+        ],
         definitions: [
             {
                 term: say('Poliedroa', 'Poliedro', 'متعدد الأوجه', 'Polyhedron'),
@@ -38,6 +43,14 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
                 meaning: say('Oinarri bakarra duen poliedroa; alboko aurpegiak erpin batean elkartzen diren triangeluak dira.', 'Poliedro con una sola base; sus caras laterales son triángulos que se juntan en un vértice.', 'متعدد أوجه له قاعدة واحدة، وأوجهه الجانبية مثلثات تلتقي في رأس واحد.', 'A polyhedron with only one base; its lateral faces are triangles that meet at a vertex.')
             }
         ],
+        why: {
+            text: say(
+                'Prisma batean, oinarri bakoitzak $n$ ertz ditu, eta $n$ alboko ertz daude, bat oinarriaren erpin bakoitzeko: $3n$. Erpin guztiak bi oinarrietan daude: $2n$. Eta aurpegiak $n$ alboko aurpegi gehi 2 oinarriak dira: $n+2$.',
+                'En un prisma, cada base tiene $n$ aristas y hay $n$ aristas laterales, una por cada vértice de la base: $3n$. Todos sus vértices están en las dos bases: $2n$. Y las caras son $n$ laterales más las 2 bases: $n+2$.',
+                'في المنشور لكل قاعدة $n$ أحرف، وهناك $n$ أحرف جانبية، حرف لكل رأس من رؤوس القاعدة: $3n$. وكل رؤوسه على القاعدتين: $2n$. وأوجهه $n$ أوجه جانبية زائد القاعدتين: $n+2$.',
+                'In a prism, each base has $n$ edges and there are $n$ side edges, one for each vertex of the base: $3n$. All its vertices are on the two bases: $2n$. And the faces are $n$ side faces plus the 2 bases: $n+2$.'
+            )
+        },
         explanation: say(
             'Oinarriko poligonoak ematen dio izena gorputzari: prisma triangeluarra, piramide pentagonala… Oinarriak poligono erregularrak eta alboko aurpegiak berdinak badira, erregularra da. Oinarriak $n$ alde baditu, elementuak honela zenbatzen dira:',
             'El polígono de la base da nombre al cuerpo: prisma triangular, pirámide pentagonal… Si las bases son polígonos regulares y las caras laterales iguales, es regular. Si la base tiene $n$ lados, los elementos se cuentan así:',
@@ -64,6 +77,11 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
         exampleAnswer: say('12 aurpegi, 30 ertz eta 20 erpin.', '12 caras, 30 aristas y 20 vértices.', '12 وجهًا و30 حرفًا و20 رأسًا.', '12 faces, 30 edges and 20 vertices.')
     },
     euler: {
+        vocabulary: [
+            say('aurpegiak', 'caras', 'الأوجه', 'faces'),
+            say('erpinak', 'vértices', 'الرؤوس', 'vertices'),
+            say('ertzak', 'aristas', 'الأحرف', 'edges')
+        ],
         definitions: [
             {
                 term: say('Poliedro ganbila', 'Poliedro convexo', 'متعدد الأوجه المحدّب', 'Convex polyhedron'),
@@ -91,6 +109,12 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
         exampleAnswer: say('24 erpin ditu.', 'Tiene 24 vértices.', 'له 24 رأسًا.', 'It has 24 vertices.')
     },
     regular: {
+        vocabulary: [
+            say('tetraedroa', 'tetraedro', 'رباعي الأوجه', 'tetrahedron'),
+            say('oktaedroa', 'octaedro', 'ثماني الأوجه', 'octahedron'),
+            say('dodekaedroa', 'dodecaedro', 'اثنا عشري الأوجه', 'dodecahedron'),
+            say('ikosaedroa', 'icosaedro', 'عشريني الأوجه', 'icosahedron')
+        ],
         definitions: [
             {
                 term: say('Poliedro erregularra', 'Poliedro regular', 'متعدد الأوجه المنتظم', 'Regular polyhedron'),
@@ -102,6 +126,15 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
                 )
             }
         ],
+        why: {
+            text: say(
+                'Eta hexagonoekin? Hiru hexagonok (120°) 360° egiten dute jada: laua geratzen da, abaraska baten gelaxkak bezala. Alde gehiagorekin, angelua are handiagoa da. Horregatik ez dago bost baino gehiago.',
+                '¿Y con hexágonos? Tres hexágonos (120°) ya suman 360°: queda plano, como las celdas de un panal. Con más lados, el ángulo es aún mayor. Por eso no hay más que cinco.',
+                'وماذا عن السداسيات؟ ثلاثة سداسيات (120°) مجموعها 360° فتبقى مستوية، مثل خلايا قرص العسل. ومع أضلاع أكثر تكبر الزاوية أكثر. لذلك لا يوجد أكثر من خمسة.',
+                'And with hexagons? Three hexagons (120°) already make 360°: they lie flat, like the cells of a honeycomb. With more sides the angle is even bigger. That is why there are only five.'
+            ),
+            math: same('$3\\cdot 120^{\\circ}=360^{\\circ}$')
+        },
         explanation: say(
             'Bost besterik ez daude: tetraedroa, kuboa, oktaedroa, dodekaedroa eta ikosaedroa. Erpin batean gutxienez hiru aurpegi elkartzen dira, eta haien angeluen baturak 360° baino txikiagoa izan behar du: 360° izanez gero, laua geratzen da.',
             'Solo hay cinco: tetraedro, cubo, octaedro, dodecaedro e icosaedro. En un vértice se juntan al menos tres caras, y la suma de sus ángulos tiene que ser menor que 360°: si llega a 360°, queda plano.',
@@ -132,6 +165,11 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
 
     /* ---------- 2. Areas of polyhedra ---------- */
     'prism-area': {
+        vocabulary: [
+            say('alboko azalera', 'área lateral', 'المساحة الجانبية', 'lateral area'),
+            say('azalera osoa', 'área total', 'المساحة الكلية', 'total area'),
+            say('perimetroa', 'perímetro', 'المحيط', 'perimeter')
+        ],
         definitions: [
             {
                 term: say('Garapen laua', 'Desarrollo plano', 'النشر المستوي', 'Net'),
@@ -171,6 +209,10 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
         exampleAnswer: say('Azalera osoa 528 cm² da.', 'El área total es 528 cm².', 'المساحة الكلية 528 سم².', 'The total area is 528 cm².')
     },
     'pyramid-area': {
+        vocabulary: [
+            say('triangelu isoszelea', 'triángulo isósceles', 'المثلث المتساوي الساقين', 'isosceles triangle'),
+            say('oinarriaren apotema', 'apotema de la base', 'عامد القاعدة', 'apothem of the base')
+        ],
         definitions: [
             {
                 term: say('Piramidearen apotema', 'Apotema de la pirámide', 'عامد الهرم', 'Slant height'),
@@ -182,6 +224,15 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
                 )
             }
         ],
+        why: {
+            text: say(
+                'Alboko aurpegi bakoitza triangelu bat da, $l$ oinarria (oinarriaren alde bat) eta $a$ altuera (apotema) dituena: haren azalera $\\frac{l\\cdot a}{2}$ da. $n$ aurpegi berdin daude; beraz, guztira $\\frac{n\\cdot l\\cdot a}{2}$ dira, eta $n\\cdot l$ perimetroa da, $P$.',
+                'Cada cara lateral es un triángulo de base $l$ (un lado de la base) y altura $a$, la apotema: su área es $\\frac{l\\cdot a}{2}$. Hay $n$ caras iguales, así que juntas suman $\\frac{n\\cdot l\\cdot a}{2}$, y $n\\cdot l$ es el perímetro $P$.',
+                'كل وجه جانبي مثلث قاعدته $l$ (ضلع من القاعدة) وارتفاعه $a$، أي العامد: مساحته $\\frac{l\\cdot a}{2}$. وهناك $n$ أوجه متساوية، فمجموعها $\\frac{n\\cdot l\\cdot a}{2}$، و$n\\cdot l$ هو المحيط $P$.',
+                'Each side face is a triangle with base $l$ (one side of the base) and height $a$, the slant height: its area is $\\frac{l\\cdot a}{2}$. There are $n$ equal faces, so together they make $\\frac{n\\cdot l\\cdot a}{2}$, and $n\\cdot l$ is the perimeter $P$.'
+            ),
+            math: same('$A_L=n\\cdot\\frac{l\\cdot a}{2}=\\frac{P\\cdot a}{2}$')
+        },
         explanation: say(
             'Piramide erregular baten garapena oinarria da eta, inguruan, triangelu isoszele berdinak. Beraz, $A_L=\\frac{P\\cdot a}{2}$ eta $A_T=A_L+A_O$. Apotema ematen ez badute, altuera eta oinarriaren apotema triangelu angeluzuzen baten katetoak dira, eta $a$ hipotenusa: $a=\\sqrt{h^{2}+a\'^{2}}$.',
             'El desarrollo de una pirámide regular es la base y, alrededor, triángulos isósceles iguales. Por eso $A_L=\\frac{P\\cdot a}{2}$ y $A_T=A_L+A_B$. Si no dan la apotema, la altura y la apotema de la base son los catetos de un triángulo rectángulo, y $a$ la hipotenusa: $a=\\sqrt{h^{2}+a\'^{2}}$.',
@@ -198,6 +249,10 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
         exampleAnswer: say('Azalera osoa 864 cm² da. Oinarriaren apotema aldearen erdia da, 9.', 'El área total es 864 cm². La apotema de la base es medio lado, 9.', 'المساحة الكلية 864 سم². وعامد القاعدة نصف الضلع، 9.', 'The total area is 864 cm². The apothem of the base is half the side, 9.')
     },
     'frustum-area': {
+        vocabulary: [
+            say('trapezioa', 'trapecio', 'شبه المنحرف', 'trapezium'),
+            say('bi oinarriak', 'las dos bases', 'القاعدتان', 'both bases')
+        ],
         definitions: [
             {
                 term: say('Piramide-enborra', 'Tronco de pirámide', 'جذع الهرم', 'Truncated pyramid'),
@@ -227,6 +282,11 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
 
     /* ---------- 3. Solids of revolution ---------- */
     cylinder: {
+        vocabulary: [
+            say('zirkunferentzia', 'circunferencia', 'المحيط', 'circumference'),
+            say('erradioa', 'radio', 'نصف القطر', 'radius'),
+            say('laukizuzena', 'rectángulo', 'المستطيل', 'rectangle')
+        ],
         definitions: [
             {
                 term: say('Biraketa-gorputza', 'Cuerpo de revolución', 'الجسم الدوراني', 'Solid of revolution'),
@@ -254,6 +314,10 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
         exampleAnswer: say('188,4 cm² paper: alboko azalera bakarrik, oinarririk gabe.', 'Hacen falta 188,4 cm² de papel: solo el área lateral, sin las bases.', 'يلزم 188.4 سم² من الورق: المساحة الجانبية وحدها، دون القاعدتين.', '188.4 cm² of paper: only the lateral area, without the bases.')
     },
     cone: {
+        vocabulary: [
+            say('zirkulu-sektorea', 'sector circular', 'القطاع الدائري', 'sector'),
+            say('altuera', 'altura', 'الارتفاع', 'height')
+        ],
         definitions: [
             {
                 term: say('Sortzailea', 'Generatriz', 'الراسم', 'Slant height'),
@@ -293,6 +357,10 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
         exampleAnswer: say('Alboko azalera 427,04 cm² da. Formulan sortzailea doa, ez altuera.', 'El área lateral es 427,04 cm². En la fórmula va la generatriz, no la altura.', 'المساحة الجانبية 427.04 سم². وفي الصيغة يدخل الراسم لا الارتفاع.', 'The lateral area is 427.04 cm². The formula uses the slant height, not the height.')
     },
     sphere: {
+        vocabulary: [
+            say('diametroa', 'diámetro', 'القطر', 'diameter'),
+            say('zirkulu-erdia', 'semicírculo', 'نصف الدائرة', 'semicircle')
+        ],
         definitions: [
             {
                 term: say('Zirkulu handia', 'Círculo máximo', 'الدائرة العظمى', 'Great circle'),
@@ -328,6 +396,10 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
 
     /* ---------- 4. Volume ---------- */
     'volume-units': {
+        vocabulary: [
+            say('dezimetro kubikoa', 'decímetro cúbico', 'الديسيمتر المكعب', 'cubic decimetre'),
+            say('zentimetro kubikoa', 'centímetro cúbico', 'السنتيمتر المكعب', 'cubic centimetre')
+        ],
         definitions: [
             {
                 term: say('Bolumena', 'Volumen', 'الحجم', 'Volume'),
@@ -345,6 +417,10 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
         exampleAnswer: say('7,2 dm³ eta 800 dm³: igotzeko zatitu egiten da; jaisteko, biderkatu.', '7,2 dm³ y 800 dm³: para subir se divide; para bajar, se multiplica.', '7.2 dm³ و800 dm³: للصعود نقسم، وللنزول نضرب.', '7.2 dm³ and 800 dm³: to go up you divide; to go down, you multiply.')
     },
     capacity: {
+        vocabulary: [
+            say('litroa', 'litro', 'اللتر', 'litre'),
+            say('edukiera-unitateak', 'unidades de capacidad', 'وحدات السعة', 'units of capacity')
+        ],
         definitions: [
             {
                 term: say('Edukiera', 'Capacidad', 'السعة', 'Capacity'),
@@ -362,6 +438,11 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
         exampleAnswer: say('0,75 L dira: 750 cm³ 750 mL baitira.', 'Son 0,75 L: 750 cm³ son 750 mL.', 'إنها 0.75 L: لأن 750 cm³ تساوي 750 mL.', 'It is 0.75 L: 750 cm³ is 750 mL.')
     },
     cavalieri: {
+        vocabulary: [
+            say('unitate-kuboa', 'cubo unidad', 'مكعب الوحدة', 'unit cube'),
+            say('geruza', 'capa', 'الطبقة', 'layer'),
+            say('txanponak', 'monedas', 'القطع النقدية', 'coins')
+        ],
         definitions: [
             {
                 term: say('Cavalieriren printzipioa', 'Principio de Cavalieri', 'مبدأ كافاليري', 'Cavalieri\'s principle'),
@@ -389,6 +470,10 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
         exampleAnswer: say('Biek 216 cm³ dituzte: oinarri bera eta altuera bera.', 'Los dos tienen 216 cm³: misma base y misma altura.', 'لكليهما 216 سم³: القاعدة نفسها والارتفاع نفسه.', 'Both have 216 cm³: same base, same height.')
     },
     'prism-volume': {
+        vocabulary: [
+            say('oinarriaren azalera', 'área de la base', 'مساحة القاعدة', 'area of the base'),
+            say('gorputz konposatua', 'cuerpo compuesto', 'الجسم المركب', 'composite solid')
+        ],
         explanation: say(
             'Cavalieriren printzipioaren arabera, prisma eta zilindro orotan: $V=A_O\\cdot h$, oinarriaren azalera bider altuera. Zilindroan oinarria zirkulua da: $V=\\pi r^{2}h$. Gorputz konposatu batean, batu zatien bolumenak, edo kendu zuloa.',
             'Por el principio de Cavalieri, en todo prisma y cilindro: $V=A_B\\cdot h$, el área de la base por la altura. En el cilindro la base es un círculo: $V=\\pi r^{2}h$. En un cuerpo compuesto, suma los volúmenes de sus partes, o resta el hueco.',
@@ -405,6 +490,10 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
         exampleAnswer: say('360 cm³, hau da, 0,36 L.', '360 cm³, es decir, 0,36 L.', '360 سم³، أي 0.36 L.', '360 cm³, that is, 0.36 L.')
     },
     'pyramid-volume': {
+        vocabulary: [
+            say('ura', 'agua', 'الماء', 'water'),
+            say('altuera', 'altura', 'الارتفاع', 'height')
+        ],
         explanation: say(
             'Piramide bat urez bete eta oinarri eta altuera bereko prisma batera husten baduzu, hiru aldiz egin behar duzu prisma betetzeko. Beraz, $V=\\frac{A_O\\cdot h}{3}$; eta konoan, $V=\\frac{\\pi r^{2}h}{3}$. Formulan altuera doa, ez apotema edo sortzailea: behar bada, Pitagorasekin ateratzen da.',
             'Si llenas de agua una pirámide y la vacías en un prisma de igual base y altura, necesitas tres veces para llenarlo. Por eso $V=\\frac{A_B\\cdot h}{3}$; y en el cono, $V=\\frac{\\pi r^{2}h}{3}$. En la fórmula va la altura, no la apotema ni la generatriz: si hace falta, sale con Pitágoras.',
@@ -421,6 +510,10 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
         exampleAnswer: say('Bolumena 540 cm³ da: oinarri eta altuera bereko prismaren herena.', 'El volumen es 540 cm³: un tercio del prisma de igual base y altura.', 'الحجم 540 سم³: ثلث المنشور الذي له القاعدة والارتفاع نفسهما.', 'The volume is 540 cm³: a third of the prism with the same base and height.')
     },
     'sphere-volume': {
+        vocabulary: [
+            say('erdiesfera', 'semiesfera', 'نصف الكرة', 'hemisphere'),
+            say('zilindroa', 'cilindro', 'الأسطوانة', 'cylinder')
+        ],
         explanation: say(
             'Arkimedesek erakutsi zuen esferak bere zilindro zirkunskribatuaren bi heren hartzen dituela: zilindroak $\\pi r^{2}\\cdot 2r=2\\pi r^{3}$ du, eta esferak $V=\\frac{4}{3}\\pi r^{3}$. Erdiesferak erdia du. Problemetan, idatzi datuak unitate berean, kalkulatu bolumen bakoitza, batu edo kendu, eta eman emaitza eskatutako unitatean.',
             'Arquímedes demostró que la esfera ocupa dos tercios de su cilindro circunscrito: el cilindro tiene $\\pi r^{2}\\cdot 2r=2\\pi r^{3}$ y la esfera, $V=\\frac{4}{3}\\pi r^{3}$. La semiesfera tiene la mitad. En los problemas, escribe los datos en la misma unidad, calcula cada volumen, suma o resta, y da el resultado en la unidad pedida.',
