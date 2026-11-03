@@ -48,22 +48,22 @@ export const divisibilityIntroTopics: UnitTopic[] = [
         steps: [
             {
                 title: { eu: 'Zatiketa zehatza', es: 'División exacta', en: 'Exact division', ar: 'قسمة تامة' },
-                text: { eu: '18 : 3 = 6 eta hondarra 0 da. Beraz, 18 3ren multiploa da, eta 3 18ren zatitzailea.', es: '18 : 3 = 6 y el resto es 0. Por tanto, 18 es múltiplo de 3 y 3 es divisor de 18.', en: '18 : 3 = 6 and the remainder is 0. So 18 is a multiple of 3, and 3 is a divisor of 18.', ar: '18 : 3 = 6 والباقي 0. إذن 18 مضاعف لـ 3، و3 قاسم لـ 18.' },
+                text: { eu: '18 : 3 = 6 eta hondarra 0 da. Beraz, 18 zenbakia 3 zenbakiaren multiploa da, eta 3 zenbakia 18 zenbakiaren zatitzailea.', es: '18 : 3 = 6 y el resto es 0. Por tanto, 18 es múltiplo de 3 y 3 es divisor de 18.', en: '18 : 3 = 6 and the remainder is 0. So 18 is a multiple of 3, and 3 is a divisor of 18.', ar: '18 : 3 = 6 والباقي 0. إذن 18 مضاعف لـ 3، و3 قاسم لـ 18.' },
                 math: '$18=3\\cdot 6$'
             },
             {
                 title: { eu: 'Zatiketa ez-zehatza', es: 'División no exacta', en: 'Non-exact division', ar: 'قسمة غير تامة' },
-                text: { eu: '18 : 4 = 4 eta hondarra 2 da. 18 ez da 4ren multiploa, eta 4 ez da 18ren zatitzailea.', es: '18 : 4 = 4 y el resto es 2. 18 no es múltiplo de 4 y 4 no es divisor de 18.', en: '18 : 4 = 4 and the remainder is 2. 18 is not a multiple of 4, and 4 is not a divisor of 18.', ar: '18 : 4 = 4 والباقي 2. العدد 18 ليس مضاعفًا لـ 4، و4 ليس قاسمًا لـ 18.' },
+                text: { eu: '18 : 4 = 4 eta hondarra 2 da. 18 zenbakia ez da 4 zenbakiaren multiploa, eta 4 zenbakia ez da 18 zenbakiaren zatitzailea.', es: '18 : 4 = 4 y el resto es 2. 18 no es múltiplo de 4 y 4 no es divisor de 18.', en: '18 : 4 = 4 and the remainder is 2. 18 is not a multiple of 4, and 4 is not a divisor of 18.', ar: '18 : 4 = 4 والباقي 2. العدد 18 ليس مضاعفًا لـ 4، و4 ليس قاسمًا لـ 18.' },
                 math: '$18=4\\cdot 4+2$'
             },
             {
                 title: { eu: 'Bi aldeetatik', es: 'Por los dos lados', en: 'From both sides', ar: 'من الجهتين' },
-                text: { eu: '48 : 8 = 6 bada, 48 : 6 = 8 ere bada. Beraz, 48 8ren eta 6ren multiploa da, eta 8 eta 6 48ren zatitzaileak dira.', es: 'Si 48 : 8 = 6, también 48 : 6 = 8. Así que 48 es múltiplo de 8 y de 6, y 8 y 6 son divisores de 48.', en: 'If 48 : 8 = 6, then 48 : 6 = 8 too. So 48 is a multiple of 8 and of 6, and 8 and 6 are divisors of 48.', ar: 'إذا كان 48 : 8 = 6 فإن 48 : 6 = 8 أيضًا. إذن 48 مضاعف لـ 8 ولـ 6، و8 و6 قاسمان لـ 48.' },
+                text: { eu: '48 : 8 = 6 bada, 48 : 6 = 8 ere bada. Beraz, 48 zenbakia 8 eta 6 zenbakien multiploa da, eta 8 eta 6 zenbakiak 48 zenbakiaren zatitzaileak dira.', es: 'Si 48 : 8 = 6, también 48 : 6 = 8. Así que 48 es múltiplo de 8 y de 6, y 8 y 6 son divisores de 48.', en: 'If 48 : 8 = 6, then 48 : 6 = 8 too. So 48 is a multiple of 8 and of 6, and 8 and 6 are divisors of 48.', ar: 'إذا كان 48 : 8 = 6 فإن 48 : 6 = 8 أيضًا. إذن 48 مضاعف لـ 8 ولـ 6، و8 و6 قاسمان لـ 48.' },
                 math: '$48=8\\cdot 6$'
             },
             {
                 title: { eu: 'Hitz berdinak', es: 'Expresiones equivalentes', en: 'Equivalent expressions', ar: 'عبارات متكافئة' },
-                text: { eu: '«18 3ren multiploa da», «3 18ren zatitzailea da» eta «18 3rekin zatigarria da» gauza bera esateko hiru modu dira.', es: '«18 es múltiplo de 3», «3 es divisor de 18» y «18 es divisible por 3» son tres formas de decir lo mismo.', en: '“18 is a multiple of 3”, “3 is a divisor of 18” and “18 is divisible by 3” are three ways of saying the same thing.', ar: '«18 مضاعف لـ 3» و«3 قاسم لـ 18» و«18 يقبل القسمة على 3» ثلاث طرق لقول الشيء نفسه.' }
+                text: { eu: '«18 zenbakia 3 zenbakiaren multiploa da», «3 zenbakia 18 zenbakiaren zatitzailea da» eta «18 zenbakia 3 zenbakiarekin zatigarria da» gauza bera esateko hiru modu dira.', es: '«18 es múltiplo de 3», «3 es divisor de 18» y «18 es divisible por 3» son tres formas de decir lo mismo.', en: '“18 is a multiple of 3”, “3 is a divisor of 18” and “18 is divisible by 3” are three ways of saying the same thing.', ar: '«18 مضاعف لـ 3» و«3 قاسم لـ 18» و«18 يقبل القسمة على 3» ثلاث طرق لقول الشيء نفسه.' }
             }
         ],
         example: '$\\begin{array}{r|l}18&3\\\\\\hline 0&6\\end{array}\\qquad\\begin{array}{r|l}18&4\\\\\\hline 2&4\\end{array}$',
@@ -86,12 +86,12 @@ export const divisibilityIntroTopics: UnitTopic[] = [
             ar: 'حساب مضاعفات عدد وإيجاد المضاعفات الواقعة بين عددين.'
         },
         explanation: {
-            eu: 'Denda batean tenis-pilotak 3ko poteetan saltzen dituzte: 3, 6, 9, 12… pilota eros daitezke. Horiek dira 3ren multiploak. Zenbaki baten multiploak lortzeko, zenbaki hori 1, 2, 3, 4… zenbaki naturalekin biderkatzen da. Multiploak infinituak dira: zerrendak ez du amaierarik. 0 ere multiploa da ($3\\cdot 0=0$), baina zerrendetan 1ez biderkatzen hasten gara.',
+            eu: 'Denda batean tenis-pilotak 3 pilotako poteetan saltzen dituzte: 3, 6, 9, 12… pilota eros daitezke. Horiek dira 3 zenbakiaren multiploak. Zenbaki baten multiploak lortzeko, zenbaki hori 1, 2, 3, 4… zenbaki naturalekin biderkatzen da. Multiploak infinituak dira: zerrendak ez du amaierarik. 0 ere multiploa da ($3\\cdot 0=0$), baina zerrendetan 1 zenbakiaz biderkatzen hasten gara.',
             es: 'En una tienda venden las pelotas de tenis en botes de 3: se pueden comprar 3, 6, 9, 12… pelotas. Esos son los múltiplos de 3. Para obtener los múltiplos de un número, se multiplica por los números naturales 1, 2, 3, 4… Los múltiplos son infinitos: la lista no se acaba nunca. El 0 también es múltiplo ($3\\cdot 0=0$), pero en las listas empezamos multiplicando por 1.',
             en: 'In a shop, tennis balls are sold in tubes of 3: you can buy 3, 6, 9, 12… balls. These are the multiples of 3. To get the multiples of a number, multiply it by the natural numbers 1, 2, 3, 4… Multiples are infinite: the list never ends. 0 is also a multiple ($3\\cdot 0=0$), but in lists we start by multiplying by 1.',
             ar: 'في متجر تُباع كرات التنس في علب من 3: يمكن شراء 3، 6، 9، 12… كرة. هذه هي مضاعفات 3. للحصول على مضاعفات عدد نضربه في الأعداد الطبيعية 1، 2، 3، 4… والمضاعفات غير منتهية: لا تنتهي القائمة أبدًا. والصفر أيضًا مضاعف ($3\\cdot 0=0$)، لكننا نبدأ القوائم بالضرب في 1.'
         },
-        problem: { eu: 'Idatzi 30 eta 90 artean dauden 7ren multiploak.', es: 'Escribe los múltiplos de 7 que hay entre 30 y 90.', en: 'Write the multiples of 7 between 30 and 90.', ar: 'اكتب مضاعفات 7 الواقعة بين 30 و90.' },
+        problem: { eu: 'Idatzi 30 eta 90 artean dauden 7 zenbakiaren multiploak.', es: 'Escribe los múltiplos de 7 que hay entre 30 y 90.', en: 'Write the multiples of 7 between 30 and 90.', ar: 'اكتب مضاعفات 7 الواقعة بين 30 و90.' },
         stepsKind: 'steps',
         steps: [
             { text: { eu: 'Bilatu 30 gainditzen duen lehen biderketa.', es: 'Busca la primera multiplicación que pasa de 30.', en: 'Find the first multiplication that goes past 30.', ar: 'ابحث عن أول ناتج ضرب يتجاوز 30.' }, math: '$7\\cdot 4=28\\qquad 7\\cdot 5=35$' },
@@ -118,7 +118,7 @@ export const divisibilityIntroTopics: UnitTopic[] = [
             ar: 'إيجاد جميع قواسم عدد بإجراء القسمات.'
         },
         explanation: {
-            eu: 'Zenbaki baten zatitzaileak zenbaki hori zehazki zatitzen duten zenbakiak dira. Denak aurkitzeko, zatitu 1ez, 2z, 3z… eta gorde hondarra 0 ematen duten zatitzaileak. Zatitzaileak bikoteka datoz ($18=2\\cdot 9$ bada, 2 eta 9 biak dira zatitzaileak); bikoteak errepikatzen hasten direnean, amaitu duzu. Zatitzaileak ez dira infinituak: txikiena 1 da eta handiena zenbakia bera.',
+            eu: 'Zenbaki baten zatitzaileak zenbaki hori zehazki zatitzen duten zenbakiak dira. Denak aurkitzeko, zatitu 1, 2, 3… zenbakiekin eta gorde hondarra 0 ematen duten zatitzaileak. Zatitzaileak bikoteka datoz ($18=2\\cdot 9$ bada, 2 eta 9 biak dira zatitzaileak); bikoteak errepikatzen hasten direnean, amaitu duzu. Zatitzaileak ez dira infinituak: txikiena 1 da eta handiena zenbakia bera.',
             es: 'Los divisores de un número son los números que lo dividen de forma exacta. Para encontrarlos todos, divide entre 1, 2, 3… y quédate con los que dan resto 0. Los divisores vienen por parejas (si $18=2\\cdot 9$, 2 y 9 son divisores); cuando las parejas empiezan a repetirse, has terminado. Los divisores no son infinitos: el menor es 1 y el mayor, el propio número.',
             en: 'The divisors of a number are the numbers that divide it exactly. To find them all, divide by 1, 2, 3… and keep the ones that leave remainder 0. Divisors come in pairs (if $18=2\\cdot 9$, 2 and 9 are divisors); when the pairs start to repeat, you are done. Divisors are not infinite: the smallest is 1 and the largest is the number itself.',
             ar: 'قواسم عدد هي الأعداد التي تقسمه قسمة تامة. لإيجادها كلها اقسم على 1، 2، 3… واحتفظ بالتي تعطي باقيًا 0. والقواسم تأتي أزواجًا (إذا كان $18=2\\cdot 9$ فإن 2 و9 قاسمان)؛ وعندما تبدأ الأزواج بالتكرار تكون قد انتهيت. والقواسم ليست غير منتهية: أصغرها 1 وأكبرها العدد نفسه.'
@@ -126,8 +126,8 @@ export const divisibilityIntroTopics: UnitTopic[] = [
         problem: { eu: 'Gelan 24 ikasle daude. Zenbat modutan egin daitezke talde berdinak, inor soberan utzi gabe?', es: 'En clase hay 24 alumnos. ¿De cuántas maneras se pueden formar grupos iguales sin que sobre nadie?', en: 'There are 24 students in class. In how many ways can equal groups be made with nobody left over?', ar: 'في الصف 24 تلميذًا. بكم طريقة يمكن تكوين مجموعات متساوية دون أن يبقى أحد؟' },
         stepsKind: 'steps',
         steps: [
-            { text: { eu: 'Zatitu 1ez, 2z, 3z, 4z… eta idatzi bikoteak.', es: 'Divide entre 1, 2, 3, 4… y escribe las parejas.', en: 'Divide by 1, 2, 3, 4… and write down the pairs.', ar: 'اقسم على 1، 2، 3، 4… واكتب الأزواج.' }, math: '$24=1\\cdot 24=2\\cdot 12=3\\cdot 8=4\\cdot 6$' },
-            { text: { eu: '5ez ez da zehatza. 6z hasita bikoteak errepikatzen dira: gelditu.', es: 'Entre 5 no es exacta. A partir de 6 las parejas se repiten: para.', en: 'Dividing by 5 is not exact. From 6 onwards the pairs repeat: stop.', ar: 'القسمة على 5 ليست تامة. ومن 6 فصاعدًا تتكرر الأزواج: توقّف.' }, math: '$24=5\\cdot 4+4\\qquad 24=6\\cdot 4$' },
+            { text: { eu: 'Zatitu 1, 2, 3, 4… zenbakiekin eta idatzi bikoteak.', es: 'Divide entre 1, 2, 3, 4… y escribe las parejas.', en: 'Divide by 1, 2, 3, 4… and write down the pairs.', ar: 'اقسم على 1، 2، 3، 4… واكتب الأزواج.' }, math: '$24=1\\cdot 24=2\\cdot 12=3\\cdot 8=4\\cdot 6$' },
+            { text: { eu: '5 zenbakiaz zatitzean ez da zehatza. 6 zenbakitik aurrera bikoteak errepikatzen dira: gelditu.', es: 'Entre 5 no es exacta. A partir de 6 las parejas se repiten: para.', en: 'Dividing by 5 is not exact. From 6 onwards the pairs repeat: stop.', ar: 'القسمة على 5 ليست تامة. ومن 6 فصاعدًا تتكرر الأزواج: توقّف.' }, math: '$24=5\\cdot 4+4\\qquad 24=6\\cdot 4$' },
             { text: { eu: 'Idatzi zatitzaile guztiak txikienetik handienera.', es: 'Escribe todos los divisores de menor a mayor.', en: 'Write all the divisors from smallest to largest.', ar: 'اكتب كل القواسم من الأصغر إلى الأكبر.' }, math: notation('$@DIV(24)=\\{1,2,3,4,6,8,12,24\\}$') },
             { text: { eu: 'Erantzun: 8 modutan, adibidez 4 taldetan 6 ikasle edo 6 taldetan 4.', es: 'Respuesta: de 8 maneras, por ejemplo 4 grupos de 6 o 6 grupos de 4.', en: 'Answer: in 8 ways, for example 4 groups of 6 or 6 groups of 4.', ar: 'الجواب: بـ 8 طرق، مثل 4 مجموعات من 6 أو 6 مجموعات من 4.' } }
         ],
@@ -145,22 +145,22 @@ export const divisibilityIntroTopics: UnitTopic[] = [
         stage: 'criteria',
         title: { eu: 'Azken zifra: 2, 5 eta 10', es: 'La última cifra: 2, 5 y 10', en: 'The last digit: 2, 5 and 10', ar: 'الرقم الأخير: 2 و5 و10' },
         goal: {
-            eu: 'Zatiketa egin gabe jakitea zenbaki bat 2rekin, 5ekin edo 10ekin zatigarria den.',
+            eu: 'Zatiketa egin gabe jakitea zenbaki bat 2, 5 edo 10 zenbakiarekin zatigarria den.',
             es: 'Saber sin dividir si un número es divisible por 2, 5 o 10.',
             en: 'Knowing without dividing whether a number is divisible by 2, 5 or 10.',
             ar: 'معرفة ما إذا كان العدد يقبل القسمة على 2 أو 5 أو 10 دون إجراء القسمة.'
         },
         explanation: {
-            eu: 'Atleta batek 2 metroko jauziak egiten ditu: 0, 2, 4, 6, 8, 10, 12… Lertsun batek 5ekoak: 0, 5, 10, 15, 20… Kanguru batek 10ekoak: 0, 10, 20, 30… Begiratu azken zifrari: beti errepikatzen da. Horregatik, zatigarritasun irizpideek, zatiketa egin gabe, esaten digute zenbaki bat 2rekin, 5ekin edo 10ekin zatigarria den.',
+            eu: 'Atleta batek 2 metroko jauziak egiten ditu: 0, 2, 4, 6, 8, 10, 12… Lertsun batek 5 metrokoak: 0, 5, 10, 15, 20… Kanguru batek 10 metrokoak: 0, 10, 20, 30… Begiratu azken zifrari: beti errepikatzen da. Horregatik, zatigarritasun irizpideek, zatiketa egin gabe, esaten digute zenbaki bat 2, 5 edo 10 zenbakiarekin zatigarria den.',
             es: 'Un atleta avanza a saltos de 2 metros: 0, 2, 4, 6, 8, 10, 12… Una garza, de 5 en 5: 0, 5, 10, 15, 20… Un canguro, de 10 en 10: 0, 10, 20, 30… Fíjate en la última cifra: siempre se repite. Por eso los criterios de divisibilidad nos dicen, sin hacer la división, si un número es divisible por 2, 5 o 10.',
             en: 'An athlete moves in 2-metre jumps: 0, 2, 4, 6, 8, 10, 12… A heron moves in steps of 5: 0, 5, 10, 15, 20… A kangaroo in steps of 10: 0, 10, 20, 30… Look at the last digit: it always repeats. That is why the divisibility rules tell us, without dividing, whether a number is divisible by 2, 5 or 10.',
             ar: 'يتقدم عدّاء بقفزات من مترين: 0، 2، 4، 6، 8، 10، 12… ومالك الحزين من 5 إلى 5: 0، 5، 10، 15، 20… والكنغر من 10 إلى 10: 0، 10، 20، 30… لاحظ الرقم الأخير: إنه يتكرر دائمًا. لذلك تخبرنا قواعد قابلية القسمة، دون إجراء القسمة، هل يقبل العدد القسمة على 2 أو 5 أو 10.'
         },
         stepsKind: 'facts',
         steps: [
-            { title: { eu: '2rekin', es: 'Por 2', en: 'By 2', ar: 'على 2' }, text: { eu: 'Azken zifra 0, 2, 4, 6 edo 8 bada (zenbaki bikoitiak).', es: 'Si acaba en 0, 2, 4, 6 u 8 (números pares).', en: 'If it ends in 0, 2, 4, 6 or 8 (even numbers).', ar: 'إذا انتهى بـ 0 أو 2 أو 4 أو 6 أو 8 (الأعداد الزوجية).' }, math: '$84\\ \\checkmark\\qquad 35\\ \\times$' },
-            { title: { eu: '5ekin', es: 'Por 5', en: 'By 5', ar: 'على 5' }, text: { eu: 'Azken zifra 0 edo 5 bada.', es: 'Si acaba en 0 o en 5.', en: 'If it ends in 0 or 5.', ar: 'إذا انتهى بـ 0 أو 5.' }, math: '$35\\ \\checkmark\\qquad 84\\ \\times$' },
-            { title: { eu: '10ekin', es: 'Por 10', en: 'By 10', ar: 'على 10' }, text: { eu: 'Azken zifra 0 bada. 10ekin zatigarria dena 2rekin eta 5ekin ere bada.', es: 'Si acaba en 0. Lo que es divisible por 10 también lo es por 2 y por 5.', en: 'If it ends in 0. Anything divisible by 10 is also divisible by 2 and by 5.', ar: 'إذا انتهى بـ 0. وما يقبل القسمة على 10 يقبلها على 2 و5 أيضًا.' }, math: '$150\\ \\checkmark\\qquad 155\\ \\times$' }
+            { title: { eu: '2 zenbakiarekin', es: 'Por 2', en: 'By 2', ar: 'على 2' }, text: { eu: 'Azken zifra 0, 2, 4, 6 edo 8 bada (zenbaki bikoitiak).', es: 'Si acaba en 0, 2, 4, 6 u 8 (números pares).', en: 'If it ends in 0, 2, 4, 6 or 8 (even numbers).', ar: 'إذا انتهى بـ 0 أو 2 أو 4 أو 6 أو 8 (الأعداد الزوجية).' }, math: '$84\\ \\checkmark\\qquad 35\\ \\times$' },
+            { title: { eu: '5 zenbakiarekin', es: 'Por 5', en: 'By 5', ar: 'على 5' }, text: { eu: 'Azken zifra 0 edo 5 bada.', es: 'Si acaba en 0 o en 5.', en: 'If it ends in 0 or 5.', ar: 'إذا انتهى بـ 0 أو 5.' }, math: '$35\\ \\checkmark\\qquad 84\\ \\times$' },
+            { title: { eu: '10 zenbakiarekin', es: 'Por 10', en: 'By 10', ar: 'على 10' }, text: { eu: 'Azken zifra 0 bada. 10 zenbakiarekin zatigarria dena 2 eta 5 zenbakiekin ere bada.', es: 'Si acaba en 0. Lo que es divisible por 10 también lo es por 2 y por 5.', en: 'If it ends in 0. Anything divisible by 10 is also divisible by 2 and by 5.', ar: 'إذا انتهى بـ 0. وما يقبل القسمة على 10 يقبلها على 2 و5 أيضًا.' }, math: '$150\\ \\checkmark\\qquad 155\\ \\times$' }
         ],
         example: '$480\\mathbin{:}\\ \\text{2 } \\checkmark\\quad \\text{5 } \\checkmark\\quad \\text{10 } \\checkmark$',
         takeaway: {
@@ -176,26 +176,26 @@ export const divisibilityIntroTopics: UnitTopic[] = [
         stage: 'criteria',
         title: { eu: 'Zifren batura: 3 eta 9', es: 'La suma de las cifras: 3 y 9', en: 'The sum of the digits: 3 and 9', ar: 'مجموع الأرقام: 3 و9' },
         goal: {
-            eu: '3 eta 9ren irizpideak zifren baturarekin aplikatzea.',
+            eu: '3 eta 9 zenbakien irizpideak zifren baturarekin aplikatzea.',
             es: 'Aplicar los criterios del 3 y del 9 con la suma de las cifras.',
             en: 'Apply the rules for 3 and 9 using the sum of the digits.',
             ar: 'تطبيق قاعدتي 3 و9 باستعمال مجموع الأرقام.'
         },
         explanation: {
-            eu: 'Igel batek 3 metroko jauziak egiten ditu: 3, 6, 9, 12, 15, 18, 21… Azken zifra ez da errepikatzen, baina bai beste gauza bat: zifren batura (1 + 2 = 3, 1 + 5 = 6, 2 + 1 = 3) beti da 3ren multiploa. 3 eta 9ren kasuan, beraz, zifra guztiak batu behar dira. Batura handia bada, haren zifrak berriro batu daitezke.',
+            eu: 'Igel batek 3 metroko jauziak egiten ditu: 3, 6, 9, 12, 15, 18, 21… Azken zifra ez da errepikatzen, baina bai beste gauza bat: zifren batura (1 + 2 = 3, 1 + 5 = 6, 2 + 1 = 3) beti da 3 zenbakiaren multiploa. 3 eta 9 zenbakien kasuan, beraz, zifra guztiak batu behar dira. Batura handia bada, haren zifrak berriro batu daitezke.',
             es: 'Una rana avanza a saltos de 3 metros: 3, 6, 9, 12, 15, 18, 21… La última cifra no se repite, pero hay otra cosa que sí: la suma de las cifras (1 + 2 = 3, 1 + 5 = 6, 2 + 1 = 3) siempre es múltiplo de 3. Para el 3 y el 9, por tanto, hay que sumar todas las cifras. Si la suma es grande, se pueden volver a sumar sus cifras.',
             en: 'A frog moves in 3-metre jumps: 3, 6, 9, 12, 15, 18, 21… The last digit does not repeat, but something else does: the sum of the digits (1 + 2 = 3, 1 + 5 = 6, 2 + 1 = 3) is always a multiple of 3. So for 3 and 9, you have to add all the digits. If the sum is large, you can add its digits again.',
             ar: 'تتقدم ضفدعة بقفزات من 3 أمتار: 3، 6، 9، 12، 15، 18، 21… لا يتكرر الرقم الأخير، لكن شيئًا آخر يتكرر: مجموع الأرقام (1 + 2 = 3، 1 + 5 = 6، 2 + 1 = 3) مضاعف لـ 3 دائمًا. إذن في حالتي 3 و9 يجب جمع كل الأرقام. وإذا كان المجموع كبيرًا يمكن جمع أرقامه من جديد.'
         },
         stepsKind: 'facts',
         steps: [
-            { title: { eu: '3rekin', es: 'Por 3', en: 'By 3', ar: 'على 3' }, text: { eu: 'Zifren batura 3ren multiploa bada: 3, 6, 9, 12, 15…', es: 'Si la suma de sus cifras es múltiplo de 3: 3, 6, 9, 12, 15…', en: 'If the sum of its digits is a multiple of 3: 3, 6, 9, 12, 15…', ar: 'إذا كان مجموع أرقامه مضاعفًا لـ 3: 3، 6، 9، 12، 15…' }, math: '$\\begin{gathered}471\\\\4+7+1=12\\ \\checkmark\\end{gathered}$' },
-            { title: { eu: '9rekin', es: 'Por 9', en: 'By 9', ar: 'على 9' }, text: { eu: 'Zifren batura 9ren multiploa bada: 9, 18, 27…', es: 'Si la suma de sus cifras es múltiplo de 9: 9, 18, 27…', en: 'If the sum of its digits is a multiple of 9: 9, 18, 27…', ar: 'إذا كان مجموع أرقامه مضاعفًا لـ 9: 9، 18، 27…' }, math: '$\\begin{gathered}576\\\\5+7+6=18\\ \\checkmark\\end{gathered}$' },
-            { title: { eu: 'Irizpideak batera', es: 'Criterios juntos', en: 'Combining the rules', ar: 'القواعد معًا' }, text: { eu: 'Zenbaki bat 2rekin eta 3rekin zatigarria bada, 6rekin ere bada.', es: 'Si un número es divisible por 2 y por 3, también lo es por 6.', en: 'If a number is divisible by 2 and by 3, it is also divisible by 6.', ar: 'إذا قبل العدد القسمة على 2 وعلى 3 فإنه يقبلها على 6 أيضًا.' }, math: '$\\begin{gathered}108\\\\\\text{2 } \\checkmark\\quad \\text{3 } \\checkmark\\quad \\text{6 } \\checkmark\\end{gathered}$' }
+            { title: { eu: '3 zenbakiarekin', es: 'Por 3', en: 'By 3', ar: 'على 3' }, text: { eu: 'Zifren batura 3 zenbakiaren multiploa bada: 3, 6, 9, 12, 15…', es: 'Si la suma de sus cifras es múltiplo de 3: 3, 6, 9, 12, 15…', en: 'If the sum of its digits is a multiple of 3: 3, 6, 9, 12, 15…', ar: 'إذا كان مجموع أرقامه مضاعفًا لـ 3: 3، 6، 9، 12، 15…' }, math: '$\\begin{gathered}471\\\\4+7+1=12\\ \\checkmark\\end{gathered}$' },
+            { title: { eu: '9 zenbakiarekin', es: 'Por 9', en: 'By 9', ar: 'على 9' }, text: { eu: 'Zifren batura 9 zenbakiaren multiploa bada: 9, 18, 27…', es: 'Si la suma de sus cifras es múltiplo de 9: 9, 18, 27…', en: 'If the sum of its digits is a multiple of 9: 9, 18, 27…', ar: 'إذا كان مجموع أرقامه مضاعفًا لـ 9: 9، 18، 27…' }, math: '$\\begin{gathered}576\\\\5+7+6=18\\ \\checkmark\\end{gathered}$' },
+            { title: { eu: 'Irizpideak batera', es: 'Criterios juntos', en: 'Combining the rules', ar: 'القواعد معًا' }, text: { eu: 'Zenbaki bat 2 eta 3 zenbakiekin zatigarria bada, 6 zenbakiarekin ere bada.', es: 'Si un número es divisible por 2 y por 3, también lo es por 6.', en: 'If a number is divisible by 2 and by 3, it is also divisible by 6.', ar: 'إذا قبل العدد القسمة على 2 وعلى 3 فإنه يقبلها على 6 أيضًا.' }, math: '$\\begin{gathered}108\\\\\\text{2 } \\checkmark\\quad \\text{3 } \\checkmark\\quad \\text{6 } \\checkmark\\end{gathered}$' }
         ],
         example: '$\\begin{gathered}5{.}027\\mathbin{:}\\ 5+0+2+7=14\\\\\\text{3 } \\times\\quad \\text{9 } \\times\\end{gathered}$',
         takeaway: {
-            eu: '3 eta 9: batu zifrak. 9rekin zatigarria dena 3rekin ere bada.',
+            eu: '3 eta 9: batu zifrak. 9 zenbakiarekin zatigarria dena 3 zenbakiarekin ere bada.',
             es: '3 y 9: suma las cifras. Lo que es divisible por 9 también lo es por 3.',
             en: '3 and 9: add the digits. Anything divisible by 9 is also divisible by 3.',
             ar: '3 و9: اجمع الأرقام. وما يقبل القسمة على 9 يقبلها على 3 أيضًا.'
@@ -212,7 +212,7 @@ export const divisibilityIntroTopics: UnitTopic[] = [
             ar: 'تحديد ما إذا كان العدد أوليًا أم مؤلفًا.'
         },
         explanation: {
-            eu: 'Saskibaloi talde bateko 5 jokalariek talde berdinak egin nahi dituzte entrenatzeko: 1eko edo 5eko taldeak baino ezin dituzte egin. 5ek bi zatitzaile baino ez ditu, 1 eta bera: zenbaki lehena da. Aldiz, 8 liburu 1eko, 2ko, 4ko edo 8ko taldeetan jar daitezke: 8k bi zatitzaile baino gehiago ditu, eta zenbaki konposatua da. 1 zenbakiak zatitzaile bakarra du, eta ez da ez lehena ez konposatua.',
+            eu: 'Saskibaloi talde bateko 5 jokalariek talde berdinak egin nahi dituzte entrenatzeko: 1 edo 5 jokalariko taldeak baino ezin dituzte egin. 5 zenbakiak bi zatitzaile baino ez ditu, 1 eta bera: zenbaki lehena da. Aldiz, 8 liburu 1, 2, 4 edo 8 liburuko taldeetan jar daitezke: 8 zenbakiak bi zatitzaile baino gehiago ditu, eta zenbaki konposatua da. 1 zenbakiak zatitzaile bakarra du, eta ez da ez lehena ez konposatua.',
             es: 'Los 5 jugadores de un equipo de baloncesto quieren formar grupos iguales para entrenar: solo pueden hacer grupos de 1 o de 5. El 5 solo tiene dos divisores, 1 y él mismo: es un número primo. En cambio, 8 libros se pueden colocar en grupos de 1, 2, 4 u 8: el 8 tiene más de dos divisores y es un número compuesto. El 1 solo tiene un divisor y no es ni primo ni compuesto.',
             en: 'The 5 players on a basketball team want to form equal groups to train: they can only make groups of 1 or of 5. 5 has only two divisors, 1 and itself: it is a prime number. By contrast, 8 books can be arranged in groups of 1, 2, 4 or 8: 8 has more than two divisors, so it is a composite number. 1 has only one divisor, and it is neither prime nor composite.',
             ar: 'يريد لاعبو فريق كرة سلة الخمسة تكوين مجموعات متساوية للتدريب: لا يمكنهم إلا مجموعات من 1 أو من 5. للعدد 5 قاسمان فقط، 1 ونفسه: إنه عدد أولي. أما 8 كتب فيمكن وضعها في مجموعات من 1 أو 2 أو 4 أو 8: للعدد 8 أكثر من قاسمين، فهو عدد مؤلف. وللعدد 1 قاسم واحد فقط، فهو ليس أوليًا ولا مؤلفًا.'
@@ -222,7 +222,7 @@ export const divisibilityIntroTopics: UnitTopic[] = [
         steps: [
             { title: { eu: 'Eratostenesen bahea', es: 'Criba de Eratóstenes', en: 'Sieve of Eratosthenes', ar: 'غربال إراتوستينس' }, text: { eu: 'Ratatu 1. Utzi 2 eta ratatu haren multiplo guztiak.', es: 'Tacha el 1. Deja el 2 y tacha todos sus múltiplos.', en: 'Cross out 1. Leave 2 and cross out all its multiples.', ar: 'اشطب 1. أبقِ 2 واشطب كل مضاعفاته.' } },
             { text: { eu: 'Hurrengo ratatu gabea (3) lehena da: ratatu haren multiploak.', es: 'El siguiente sin tachar (3) es primo: tacha sus múltiplos.', en: 'The next uncrossed number (3) is prime: cross out its multiples.', ar: 'العدد التالي غير المشطوب (3) أولي: اشطب مضاعفاته.' } },
-            { text: { eu: 'Errepikatu 5ekin eta 7rekin. Ratatu gabe geratzen direnak lehenak dira.', es: 'Repite con 5 y 7. Los que quedan sin tachar son primos.', en: 'Repeat with 5 and 7. The numbers left uncrossed are prime.', ar: 'كرّر مع 5 و7. والأعداد التي تبقى غير مشطوبة أولية.' }, math: '$\\begin{gathered}2,3,5,7,11,13,17,19\\\\23,29,31,37,41,43,47\\end{gathered}$' }
+            { text: { eu: 'Errepikatu 5 eta 7 zenbakiekin. Ratatu gabe geratzen direnak lehenak dira.', es: 'Repite con 5 y 7. Los que quedan sin tachar son primos.', en: 'Repeat with 5 and 7. The numbers left uncrossed are prime.', ar: 'كرّر مع 5 و7. والأعداد التي تبقى غير مشطوبة أولية.' }, math: '$\\begin{gathered}2,3,5,7,11,13,17,19\\\\23,29,31,37,41,43,47\\end{gathered}$' }
         ],
         example: {
             eu: '$\\begin{gathered}\\mathrm{Zat}(7)=\\{1,7\\}\\quad \\text{lehena}\\\\\\mathrm{Zat}(8)=\\{1,2,4,8\\}\\quad \\text{konposatua}\\end{gathered}$',
@@ -257,9 +257,9 @@ export const divisibilityIntroTopics: UnitTopic[] = [
         problem: { eu: 'Deskonposatu 36 biderkagai lehenetan.', es: 'Descompón 36 en factores primos.', en: 'Factorise 36 into prime factors.', ar: 'حلّل 36 إلى عوامل أولية.' },
         stepsKind: 'steps',
         steps: [
-            { text: { eu: '36 bikoitia da: zatitu 2z.', es: '36 es par: divide entre 2.', en: '36 is even: divide by 2.', ar: '36 زوجي: اقسم على 2.' }, math: '$36\\mathbin{:}2=18$' },
-            { text: { eu: '18 ere bikoitia da: zatitu berriro 2z.', es: '18 también es par: divide otra vez entre 2.', en: '18 is also even: divide by 2 again.', ar: '18 زوجي أيضًا: اقسم مرة أخرى على 2.' }, math: '$18\\mathbin{:}2=9$' },
-            { text: { eu: '9 ez da bikoitia, baina 3rekin zatigarria da.', es: '9 no es par, pero es divisible por 3.', en: '9 is not even, but it is divisible by 3.', ar: '9 ليس زوجيًا، لكنه يقبل القسمة على 3.' }, math: '$9\\mathbin{:}3=3\\qquad 3\\mathbin{:}3=1$' },
+            { text: { eu: '36 bikoitia da: zatitu 2 zenbakiaz.', es: '36 es par: divide entre 2.', en: '36 is even: divide by 2.', ar: '36 زوجي: اقسم على 2.' }, math: '$36\\mathbin{:}2=18$' },
+            { text: { eu: '18 ere bikoitia da: zatitu berriro 2 zenbakiaz.', es: '18 también es par: divide otra vez entre 2.', en: '18 is also even: divide by 2 again.', ar: '18 زوجي أيضًا: اقسم مرة أخرى على 2.' }, math: '$18\\mathbin{:}2=9$' },
+            { text: { eu: '9 ez da bikoitia, baina 3 zenbakiarekin zatigarria da.', es: '9 no es par, pero es divisible por 3.', en: '9 is not even, but it is divisible by 3.', ar: '9 ليس زوجيًا، لكنه يقبل القسمة على 3.' }, math: '$9\\mathbin{:}3=3\\qquad 3\\mathbin{:}3=1$' },
             { text: { eu: 'Bildu eskuineko lehenak berreturetan.', es: 'Agrupa los primos de la derecha en potencias.', en: 'Group the primes on the right into powers.', ar: 'اجمع الأعداد الأولية التي على اليمين في صورة قوى.' }, math: '$36=2\\cdot 2\\cdot 3\\cdot 3=2^{2}\\cdot 3^{2}$' }
         ],
         example: '$45=3^{2}\\cdot 5\\qquad 60=2^{2}\\cdot 3\\cdot 5$',
@@ -287,10 +287,10 @@ export const divisibilityIntroTopics: UnitTopic[] = [
             en: 'When the number is large, you have to do lots of divisions to find all its divisors. There is a shorter way: factorise the number and combine its prime factors in a table. The first row holds 1 and the powers of the first factor; in the following rows, the first row is multiplied by the powers of the second factor.',
             ar: 'عندما يكون العدد كبيرًا يلزم إجراء قسمات كثيرة لإيجاد كل قواسمه. وهناك طريقة أقصر: حلّل العدد واجمع عوامله الأولية في جدول. في الصف الأول نضع 1 وقوى العامل الأول، وفي الصفوف التالية نضرب الصف الأول في قوى العامل الثاني.'
         },
-        problem: { eu: 'Aurkitu 36ren zatitzaile guztiak haren deskonposiziotik: 36 = 2² · 3².', es: 'Encuentra todos los divisores de 36 a partir de su descomposición: 36 = 2² · 3².', en: 'Find all the divisors of 36 from its factorisation: 36 = 2² · 3².', ar: 'أوجد كل قواسم 36 انطلاقًا من تحليله: ‏36 = 2² · 3².' },
+        problem: { eu: 'Aurkitu 36 zenbakiaren zatitzaile guztiak haren deskonposiziotik: 36 = 2² · 3².', es: 'Encuentra todos los divisores de 36 a partir de su descomposición: 36 = 2² · 3².', en: 'Find all the divisors of 36 from its factorisation: 36 = 2² · 3².', ar: 'أوجد كل قواسم 36 انطلاقًا من تحليله: ‏36 = 2² · 3².' },
         stepsKind: 'steps',
         steps: [
-            { text: { eu: 'Lehen errenkada: 1 eta 2ren berreturak, 2² arte.', es: 'Primera fila: el 1 y las potencias de 2, hasta 2².', en: 'First row: 1 and the powers of 2, up to 2².', ar: 'الصف الأول: 1 وقوى 2 حتى 2².' }, math: '$1\\quad 2\\quad 4$' },
+            { text: { eu: 'Lehen errenkada: 1 eta 2 zenbakiaren berreturak, 2² arte.', es: 'Primera fila: el 1 y las potencias de 2, hasta 2².', en: 'First row: 1 and the powers of 2, up to 2².', ar: 'الصف الأول: 1 وقوى 2 حتى 2².' }, math: '$1\\quad 2\\quad 4$' },
             { text: { eu: 'Bigarren errenkada: lehena bider 3.', es: 'Segunda fila: la primera por 3.', en: 'Second row: the first one times 3.', ar: 'الصف الثاني: الأول مضروبًا في 3.' }, math: '$3\\quad 6\\quad 12$' },
             { text: { eu: 'Hirugarren errenkada: lehena bider 3² = 9.', es: 'Tercera fila: la primera por 3² = 9.', en: 'Third row: the first one times 3² = 9.', ar: 'الصف الثالث: الأول مضروبًا في 3² = 9.' }, math: '$9\\quad 18\\quad 36$' },
             { text: { eu: 'Ordenatu taulako zenbaki guztiak.', es: 'Ordena todos los números de la tabla.', en: 'Put all the numbers in the table in order.', ar: 'رتّب كل أعداد الجدول.' }, math: notation('$@DIV(36)=\\{1,2,3,4,6,9,12,18,36\\}$') }
@@ -315,12 +315,12 @@ export const divisibilityIntroTopics: UnitTopic[] = [
             ar: 'إيجاد القواسم المشتركة لعددين وحساب أكبرها (ق.م.أ).'
         },
         explanation: {
-            eu: 'Jonek 12 lokomotora ditu eta Peiok 18 hegazkin. Talde berdinak egin nahi dituzte, jostailu kopuru berarekin talde guztietan. Talde horiek 12ren eta 18ren zatitzaile komunak dira: 1, 2, 3 eta 6. Handiena, 6, zatitzaile komunetako handiena da: ZKH. Zenbaki handiagoekin, deskonposatu biderkagai lehenetan eta biderkatu biderkagai komunak berretzaile txikienarekin.',
+            eu: 'Jonek 12 lokomotora ditu eta Peiok 18 hegazkin. Talde berdinak egin nahi dituzte, jostailu kopuru berarekin talde guztietan. Talde horiek 12 eta 18 zenbakien zatitzaile komunak dira: 1, 2, 3 eta 6. Handiena, 6, zatitzaile komunetako handiena da: ZKH. Zenbaki handiagoekin, deskonposatu biderkagai lehenetan eta biderkatu biderkagai komunak berretzaile txikienarekin.',
             es: 'Juan tiene 12 locomotoras y Pedro 18 aviones. Quieren hacer grupos con el mismo número de juguetes en todos. Esos grupos son los divisores comunes de 12 y 18: 1, 2, 3 y 6. El mayor, 6, es el máximo común divisor: m.c.d. Con números más grandes, descompón en factores primos y multiplica los factores comunes con el menor exponente.',
             en: 'Juan has 12 locomotives and Pedro has 18 planes. They want to make groups with the same number of toys in each. Those groups are the common divisors of 12 and 18: 1, 2, 3 and 6. The largest, 6, is the greatest common divisor: GCD. With bigger numbers, factorise into prime factors and multiply the common factors, each with its smallest exponent.',
             ar: 'لدى خوان 12 قاطرة ولدى بيدرو 18 طائرة. يريدان تكوين مجموعات فيها العدد نفسه من الألعاب. هذه المجموعات هي القواسم المشتركة للعددين 12 و18: 1 و2 و3 و6. وأكبرها، 6، هو القاسم المشترك الأكبر: ق.م.أ. ومع الأعداد الأكبر حلّل إلى عوامل أولية واضرب العوامل المشتركة بأصغر أس.'
         },
-        problem: { eu: 'Kalkulatu 12ren eta 18ren ZKH.', es: 'Calcula el m.c.d. de 12 y 18.', en: 'Calculate the GCD of 12 and 18.', ar: 'احسب ق.م.أ للعددين 12 و18.' },
+        problem: { eu: 'Kalkulatu 12 eta 18 zenbakien ZKH.', es: 'Calcula el m.c.d. de 12 y 18.', en: 'Calculate the GCD of 12 and 18.', ar: 'احسب ق.م.أ للعددين 12 و18.' },
         stepsKind: 'steps',
         steps: [
             { title: { eu: 'Zerrendekin', es: 'Con listas', en: 'Using lists', ar: 'بالقوائم' }, text: { eu: 'Idatzi bi zenbakien zatitzaileak.', es: 'Escribe los divisores de los dos números.', en: 'Write the divisors of both numbers.', ar: 'اكتب قواسم العددين.' }, math: notation('$\\begin{gathered}@DIV(12)=\\{\\mathbf{1},\\mathbf{2},\\mathbf{3},4,\\mathbf{6},12\\}\\\\@DIV(18)=\\{\\mathbf{1},\\mathbf{2},\\mathbf{3},\\mathbf{6},9,18\\}\\end{gathered}$') },
@@ -347,12 +347,12 @@ export const divisibilityIntroTopics: UnitTopic[] = [
             ar: 'إيجاد المضاعفات المشتركة لعددين وحساب أصغرها (م.م.أ).'
         },
         explanation: {
-            eu: 'Ana igerilekura 2 egunean behin joaten da, eta Eva 3 egunean behin. Biak batera 6., 12., 18.… egunetan joaten dira: 2ren eta 3ren multiplo komunak dira. Txikiena, 6, multiplo komunetako txikiena da: MKT. Zenbaki handiagoekin, deskonposatu eta biderkatu biderkagai komunak eta ez-komunak, bakoitza berretzaile handienarekin.',
+            eu: 'Ana igerilekura 2 egunean behin joaten da, eta Eva 3 egunean behin. Biak batera 6., 12., 18.… egunetan joaten dira: 2 eta 3 zenbakien multiplo komunak dira. Txikiena, 6, multiplo komunetako txikiena da: MKT. Zenbaki handiagoekin, deskonposatu eta biderkatu biderkagai komunak eta ez-komunak, bakoitza berretzaile handienarekin.',
             es: 'Ana va a nadar al polideportivo cada 2 días y Eva cada 3. Coinciden los días 6, 12, 18…: son los múltiplos comunes de 2 y 3. El menor, 6, es el mínimo común múltiplo: m.c.m. Con números más grandes, descompón y multiplica los factores comunes y no comunes, cada uno con su mayor exponente.',
             en: 'Ana goes swimming at the sports centre every 2 days and Eva every 3. They coincide on days 6, 12, 18…: these are the common multiples of 2 and 3. The smallest, 6, is the least common multiple: LCM. With bigger numbers, factorise and multiply the common and non-common factors, each with its highest exponent.',
             ar: 'تذهب آنا إلى المسبح كل يومين وإيفا كل 3 أيام. تلتقيان في الأيام 6 و12 و18…: هذه هي المضاعفات المشتركة للعددين 2 و3. وأصغرها، 6، هو المضاعف المشترك الأصغر: م.م.أ. ومع الأعداد الأكبر حلّل واضرب العوامل المشتركة وغير المشتركة، كلًّا منها بأكبر أس.'
         },
-        problem: { eu: 'Kalkulatu 4ren eta 6ren MKT.', es: 'Calcula el m.c.m. de 4 y 6.', en: 'Calculate the LCM of 4 and 6.', ar: 'احسب م.م.أ للعددين 4 و6.' },
+        problem: { eu: 'Kalkulatu 4 eta 6 zenbakien MKT.', es: 'Calcula el m.c.m. de 4 y 6.', en: 'Calculate the LCM of 4 and 6.', ar: 'احسب م.م.أ للعددين 4 و6.' },
         stepsKind: 'steps',
         steps: [
             { title: { eu: 'Zerrendekin', es: 'Con listas', en: 'Using lists', ar: 'بالقوائم' }, text: { eu: 'Idatzi bi zenbakien lehen multiploak.', es: 'Escribe los primeros múltiplos de los dos números.', en: 'Write the first multiples of both numbers.', ar: 'اكتب المضاعفات الأولى للعددين.' }, math: '$\\begin{gathered}\\mathrm{M}(4)=\\{4,8,\\mathbf{12},16,20,\\mathbf{24}\\}\\\\\\mathrm{M}(6)=\\{6,\\mathbf{12},18,\\mathbf{24}\\}\\end{gathered}$' },
@@ -417,7 +417,7 @@ export const divisibilityIntroTopics: UnitTopic[] = [
         problem: { eu: '24 gozoki marrubizko eta 36 limoizko ditugu. Poltsak egin nahi ditugu zaporeak nahastu gabe, poltsa guztietan gozoki kopuru bera jarriz, ahalik eta handienak eta bat ere soberan utzi gabe. Zenbat gozoki sartuko dira poltsa bakoitzean?', es: 'Tenemos 24 caramelos de fresa y 36 de limón. Queremos hacer bolsas sin mezclar sabores, con el mismo número de caramelos en todas, lo más grandes posible y sin que sobre ninguno. ¿Cuántos caramelos irán en cada bolsa?', en: 'We have 24 strawberry sweets and 36 lemon sweets. We want to make bags without mixing flavours, with the same number of sweets in every bag, as big as possible and with none left over. How many sweets will go in each bag?', ar: 'لدينا 24 حلوى بالفراولة و36 بالليمون. نريد صنع أكياس دون خلط النكهات، في كلها العدد نفسه من الحلوى، أكبر ما يمكن، ودون أن تبقى أي حلوى. كم حلوى ستكون في كل كيس؟' },
         stepsKind: 'steps',
         steps: [
-            { title: { eu: 'ZKH ala MKT?', es: '¿m.c.d. o m.c.m.?', en: 'GCD or LCM?', ar: 'ق.م.أ أم م.م.أ؟' }, text: { eu: 'Gozokiak poltsetan banatzen ditugu, soberan utzi gabe: 24ren eta 36ren zatitzaile komuna behar dugu, ahalik eta handiena → ZKH.', es: 'Repartimos caramelos en bolsas, sin que sobren: necesitamos un divisor común de 24 y 36, el mayor posible → m.c.d.', en: 'We share the sweets into bags, with none left over: we need a common divisor of 24 and 36, the largest possible → GCD.', ar: 'نوزّع الحلوى على أكياس دون أن يبقى شيء: نحتاج أكبر قاسم مشترك للعددين 24 و36 ← ق.م.أ.' } },
+            { title: { eu: 'ZKH ala MKT?', es: '¿m.c.d. o m.c.m.?', en: 'GCD or LCM?', ar: 'ق.م.أ أم م.م.أ؟' }, text: { eu: 'Gozokiak poltsetan banatzen ditugu, soberan utzi gabe: 24 eta 36 zenbakien zatitzaile komuna behar dugu, ahalik eta handiena → ZKH.', es: 'Repartimos caramelos en bolsas, sin que sobren: necesitamos un divisor común de 24 y 36, el mayor posible → m.c.d.', en: 'We share the sweets into bags, with none left over: we need a common divisor of 24 and 36, the largest possible → GCD.', ar: 'نوزّع الحلوى على أكياس دون أن يبقى شيء: نحتاج أكبر قاسم مشترك للعددين 24 و36 ← ق.م.أ.' } },
             { title: { eu: 'Deskonposatu', es: 'Descompón', en: 'Factorise', ar: 'حلّل' }, text: { eu: 'Deskonposatu datuak biderkagai lehenetan.', es: 'Descompón los datos en factores primos.', en: 'Factorise the data into prime factors.', ar: 'حلّل المعطيات إلى عوامل أولية.' }, math: '$24=2^{3}\\cdot 3\\qquad 36=2^{2}\\cdot 3^{2}$' },
             { title: { eu: 'Kalkulatu', es: 'Calcula', en: 'Calculate', ar: 'احسب' }, text: { eu: 'Biderkagai komunak, berretzaile txikienarekin.', es: 'Factores comunes, con el menor exponente.', en: 'Common factors, with the smallest exponent.', ar: 'العوامل المشتركة بأصغر أس.' }, math: notation('$@GCD(24,36)=2^{2}\\cdot 3=12$') },
             { title: { eu: 'Erantzun', es: 'Responde', en: 'Answer', ar: 'أجب' }, text: { eu: 'Poltsa bakoitzean 12 gozoki sartuko dira: 2 poltsa marrubizkoak eta 3 limoizkoak.', es: 'En cada bolsa irán 12 caramelos: 2 bolsas de fresa y 3 de limón.', en: 'Each bag will hold 12 sweets: 2 strawberry bags and 3 lemon bags.', ar: 'سيكون في كل كيس 12 حلوى: كيسان بالفراولة و3 أكياس بالليمون.' } }

@@ -104,7 +104,7 @@ export const algebraIntroTopics: UnitTopic[] = [
         problem: { eu: 'Kalkulatu $3x-5$ adierazpenaren balioa $x=2$ denean.', es: 'Halla el valor de $3x-5$ para $x=2$.', en: 'Work out the value of $3x-5$ when $x=2$.', ar: 'احسب قيمة $3x-5$ عندما $x=2$.' },
         stepsKind: 'steps',
         steps: [
-            { text: { eu: 'Ordeztu x 2z.', es: 'Sustituye la x por 2.', en: 'Substitute 2 for x.', ar: 'عوّض x بـ 2.' }, math: '$3\\cdot 2-5$' },
+            { text: { eu: 'Ordeztu x 2 zenbakiaz.', es: 'Sustituye la x por 2.', en: 'Substitute 2 for x.', ar: 'عوّض x بـ 2.' }, math: '$3\\cdot 2-5$' },
             { text: { eu: 'Lehenik biderketa.', es: 'Primero la multiplicación.', en: 'First the multiplication.', ar: 'الضرب أولًا.' }, math: '$6-5$' },
             { text: { eu: 'Gero kenketa.', es: 'Después la resta.', en: 'Then the subtraction.', ar: 'ثم الطرح.' }, math: '$3\\cdot 2-5=1$' }
         ],
@@ -342,7 +342,7 @@ export const algebraIntroTopics: UnitTopic[] = [
             ar: 'حل معادلات بسيطة ذهنيًا وبالتجربة.'
         },
         explanation: {
-            eu: 'Ekuazio erraz asko buruz ebatz daitezke: $5+x=7$ ekuazioan galdetu «zenbat batu behar zaio 5i 7 lortzeko?». Bestela, probatu balioak eta begiratu bi atalak berdinak diren. Balio batekin atal bat handiegia bada, probatu txikiago bat, eta alderantziz.',
+            eu: 'Ekuazio erraz asko buruz ebatz daitezke: $5+x=7$ ekuazioan galdetu «zenbat batu behar zaio 5 zenbakiari 7 lortzeko?». Bestela, probatu balioak eta begiratu bi atalak berdinak diren. Balio batekin atal bat handiegia bada, probatu txikiago bat, eta alderantziz.',
             es: 'Muchas ecuaciones sencillas se resuelven mentalmente: en $5+x=7$ pregúntate «¿cuánto hay que sumar a 5 para obtener 7?». Si no, prueba valores y mira si los dos miembros son iguales. Si con un valor un miembro se pasa, prueba uno menor, y al revés.',
             en: 'Many simple equations can be solved in your head: in $5+x=7$ ask yourself “what do you add to 5 to get 7?”. If not, try values and check whether the two sides are equal. If a value makes one side too big, try a smaller one, and the other way round.',
             ar: 'تُحل معادلات بسيطة كثيرة ذهنيًا: في $5+x=7$ اسأل نفسك «كم نضيف إلى 5 لنحصل على 7؟». وإلا فجرّب قيمًا وانظر هل يتساوى الطرفان. وإذا زاد أحد الطرفين بقيمة ما فجرّب قيمة أصغر، وبالعكس.'
@@ -382,8 +382,8 @@ export const algebraIntroTopics: UnitTopic[] = [
         steps: [
             { title: { eu: 'Batzen → kentzen', es: 'Sumando → restando', en: 'Adding → subtracting', ar: 'مجموع ← مطروح' }, text: { eu: '+2 bigarren atalera kentzen pasatzen da.', es: 'El +2 pasa al segundo miembro restando.', en: 'The +2 moves to the second side as a subtraction.', ar: 'ينتقل +2 إلى الطرف الثاني مطروحًا.' }, math: '$\\begin{gathered}x+2=8\\\\x=8-2=6\\end{gathered}$' },
             { title: { eu: 'Kentzen → batzen', es: 'Restando → sumando', en: 'Subtracting → adding', ar: 'مطروح ← مجموع' }, text: { eu: '−7 batzen pasatzen da.', es: 'El −7 pasa sumando.', en: 'The −7 moves to the other side as an addition.', ar: 'ينتقل −7 مجموعًا.' }, math: '$\\begin{gathered}x-7=3\\\\x=3+7=10\\end{gathered}$' },
-            { title: { eu: 'Biderkatzen → zatitzen', es: 'Multiplicando → dividiendo', en: 'Multiplying → dividing', ar: 'ضارب ← قاسم' }, text: { eu: 'x-ren aurreko 4a zatitzen pasatzen da.', es: 'El 4 que multiplica a la x pasa dividiendo.', en: 'The 4 that multiplies the x moves to the other side as a division.', ar: 'ينتقل 4 الذي يضرب x قاسمًا.' }, math: '$\\begin{gathered}4x=20\\\\x=20\\mathbin{:}4=5\\end{gathered}$' },
-            { title: { eu: 'Zatitzen → biderkatzen', es: 'Dividiendo → multiplicando', en: 'Dividing → multiplying', ar: 'قاسم ← ضارب' }, text: { eu: 'x zatitzen duen 2a biderkatzen pasatzen da.', es: 'El 2 que divide a la x pasa multiplicando.', en: 'The 2 that divides the x moves to the other side as a multiplication.', ar: 'ينتقل 2 الذي يقسم x ضاربًا.' }, math: '$\\begin{gathered}\\frac{x}{2}=6\\\\x=6\\cdot 2=12\\end{gathered}$' }
+            { title: { eu: 'Biderkatzen → zatitzen', es: 'Multiplicando → dividiendo', en: 'Multiplying → dividing', ar: 'ضارب ← قاسم' }, text: { eu: 'x-ren aurreko 4 zenbakia zatitzen pasatzen da.', es: 'El 4 que multiplica a la x pasa dividiendo.', en: 'The 4 that multiplies the x moves to the other side as a division.', ar: 'ينتقل 4 الذي يضرب x قاسمًا.' }, math: '$\\begin{gathered}4x=20\\\\x=20\\mathbin{:}4=5\\end{gathered}$' },
+            { title: { eu: 'Zatitzen → biderkatzen', es: 'Dividiendo → multiplicando', en: 'Dividing → multiplying', ar: 'قاسم ← ضارب' }, text: { eu: 'x zatitzen duen 2 zenbakia biderkatzen pasatzen da.', es: 'El 2 que divide a la x pasa multiplicando.', en: 'The 2 that divides the x moves to the other side as a multiplication.', ar: 'ينتقل 2 الذي يقسم x ضاربًا.' }, math: '$\\begin{gathered}\\frac{x}{2}=6\\\\x=6\\cdot 2=12\\end{gathered}$' }
         ],
         example: '$3x=12\\ \\to\\ x=4$',
         takeaway: {
@@ -415,7 +415,7 @@ export const algebraIntroTopics: UnitTopic[] = [
         steps: [
             { text: { eu: 'x-ak ezkerrera (−x batzen pasatzen da) eta zenbakiak eskuinera (−7 batzen).', es: 'Las x a la izquierda (−x pasa sumando) y los números a la derecha (−7 pasa sumando).', en: 'The x terms on the left (−x moves over as an addition) and the numbers on the right (−7 moves over as an addition).', ar: 'الـ x إلى اليسار (ينتقل −x مجموعًا) والأعداد إلى اليمين (ينتقل −7 مجموعًا).' }, math: '$4x+x=3+7$' },
             { text: { eu: 'Laburtu.', es: 'Reduce.', en: 'Simplify.', ar: 'بسّط.' }, math: '$5x=10$' },
-            { text: { eu: 'Askatu x: 5a zatitzen pasatzen da.', es: 'Despeja la x: el 5 pasa dividiendo.', en: 'Solve for x: the 5 moves over as a division.', ar: 'اعزل x: ينتقل 5 قاسمًا.' }, math: '$x=10\\mathbin{:}5=2$' },
+            { text: { eu: 'Askatu x: 5 zenbakia zatitzen pasatzen da.', es: 'Despeja la x: el 5 pasa dividiendo.', en: 'Solve for x: the 5 moves over as a division.', ar: 'اعزل x: ينتقل 5 قاسمًا.' }, math: '$x=10\\mathbin{:}5=2$' },
             { text: { eu: 'Egiaztatu: bi atalek −1 ematen dute.', es: 'Comprueba: los dos miembros dan −1.', en: 'Check: both sides give −1.', ar: 'تحقّق: يعطي الطرفان −1.' }, math: '$4\\cdot 2-7=3-2$' }
         ],
         example: '$\\begin{gathered}3(x-3)=x+1\\\\3x-9=x+1\\ \\to\\ x=5\\end{gathered}$',
@@ -447,7 +447,7 @@ export const algebraIntroTopics: UnitTopic[] = [
         steps: [
             { title: { eu: 'Ezezaguna', es: 'Incógnita', en: 'Unknown', ar: 'المجهول' }, text: { eu: 'x = zenbakia.', es: 'x = el número.', en: 'x = the number.', ar: 'x = العدد.' } },
             { title: { eu: 'Ekuazioa', es: 'Ecuación', en: 'Equation', ar: 'المعادلة' }, text: { eu: 'Hirukoitza gehi 5 berdin 26.', es: 'El triple más 5 es igual a 26.', en: 'Three times it plus 5 equals 26.', ar: 'ثلاثة الأضعاف زائد 5 يساوي 26.' }, math: '$3x+5=26$' },
-            { title: { eu: 'Ebatzi', es: 'Resuelve', en: 'Solve', ar: 'حلّ' }, text: { eu: '5a kentzen pasatu eta gero 3a zatitzen.', es: 'Pasa el 5 restando y después el 3 dividiendo.', en: 'Move the 5 over as a subtraction, then the 3 as a division.', ar: 'انقل 5 مطروحًا ثم 3 قاسمًا.' }, math: '$3x=21\\ \\to\\ x=7$' },
+            { title: { eu: 'Ebatzi', es: 'Resuelve', en: 'Solve', ar: 'حلّ' }, text: { eu: '5 zenbakia kentzen pasatu eta gero 3 zenbakia zatitzen.', es: 'Pasa el 5 restando y después el 3 dividiendo.', en: 'Move the 5 over as a subtraction, then the 3 as a division.', ar: 'انقل 5 مطروحًا ثم 3 قاسمًا.' }, math: '$3x=21\\ \\to\\ x=7$' },
             { title: { eu: 'Egiaztatu eta erantzun', es: 'Comprueba y responde', en: 'Check and answer', ar: 'تحقّق وأجب' }, text: { eu: 'Zenbakia 7 da.', es: 'El número es 7.', en: 'The number is 7.', ar: 'العدد هو 7.' }, math: '$3\\cdot 7+5=26$' }
         ],
         example: '$x+(x+1)=25\\ \\to\\ x=12$',

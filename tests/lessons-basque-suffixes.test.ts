@@ -1,26 +1,26 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 
 /* CLAUDE.md: a Basque text never glues a suffix to a number («6ren», «2rekin», «% 8an»): how it sounds depends on
    how the number is read. lesson-texts.test.ts and lesson-checks.test.ts check lessonTexts.ts and lessonChecks.ts;
-   this test checks the Basque texts that stayed in the lessons files (titles, goals, «Let's solve», steps, cases,
-   key ideas). The lessons are read as text: the .tsx files hold drawings that node cannot import. */
+   this test checks the Basque texts of the lessons file of every unit (titles, goals, explanations, examples,
+   «Let's solve», steps, cases, key ideas). The lessons are read as text: the .tsx files hold drawings that node
+   cannot import. */
 
 const pages = new URL('../src/pages/', import.meta.url)
 
-const units = [
-    'dbh2-zenbaki-osoak',
-    'dbh2-zatigarritasuna',
-    'dbh2-zatikiak-prototype',
-    'dbh2-proportzionaltasuna-v2',
-    'dbh2-aljebra-v2',
-    'dbh2-ekuazioak-v2',
-    'dbh2-pitagoras-v2',
-    'dbh2-gorputzak-v2',
-    'dbh2-funtzioak-v2',
-    'dbh2-estatistika-v2'
-]
+/** Every unit with a lessons file */
+const units = readdirSync(pages).sort().flatMap((unit) => {
+    const file = ['lessons.tsx', 'lessons.ts'].map((name) => new URL(`${unit}/${name}`, pages)).find(existsSync)
+    return file ? [{ unit, file }] : []
+})
+
+/** Algebra written as plain text with a letter that is also a Basque ending (the -a of «2a»): the vertex of a parabola */
+const algebraInWords: Record<string, string[]> = {
+    'dbh4-akademikoak-polinomikoak': ['x = −b/2a'],
+    'dbh4-aplikatuak-grafikoa': ['x = −b : 2a']
+}
 
 /** A string literal as the page shows it: \\ is \, \' is ' and \u00a0 is the character */
 const unescape = (literal: string) => literal.replace(/\\(u[0-9a-fA-F]{4}|.)/g, (_, escape: string) => (escape.length === 5 ? String.fromCharCode(parseInt(escape.slice(1), 16)) : escape))
@@ -46,7 +46,7 @@ function glued(text: string): string[] {
 }
 
 test('the Basque suffix check finds what it has to', () => {
-    for (const bad of ['24 6ren multiploa da', 'Biderkatu 1ez, 2z, 3z…', '% 8an', '4–5ean', 'Zatitu $N=20$-z.', '$\\frac{3}{4}$-ren erdia', '$Q_1$-etik', 'Zatitu 6-z.', '$x$ren']) {
+    for (const bad of ['24 6ren multiploa da', 'Biderkatu 1ez, 2z, 3z…', '% 8an', '4–5ean', 'Zatitu $N=20$-z.', '$\\frac{3}{4}$-ren erdia', '$Q_1$-etik', 'Zatitu 6-z.', '$x$ren', 'aurreko 4a zatitzen', '% 15eko beherapena', '1986an ikusi zen', '$n$etatik']) {
         assert.ok(glued(bad).length, bad)
     }
     for (const good of ['3n-ri gehitu', 'Batu 2x eta 0x', '$x$-ren ordez', '500 €-ko bizikleta', 'm³-tik cm³-ra', '(4.a) eta (12.a)', '24 zenbakia 6 zenbakiaren multiploa da', '22\u00a0000']) {
@@ -55,13 +55,18 @@ test('the Basque suffix check finds what it has to', () => {
     assert.deepEqual(glued(unescape('22\\u00a0000 €')), [])
 })
 
-for (const unit of units) {
+test('the lessons files of every course are found', () => {
+    for (const course of ['dbh1-', 'dbh2-', 'dbh3-', 'dbh4-akademikoak-', 'dbh4-aplikatuak-']) {
+        assert.ok(units.filter(({ unit }) => unit.startsWith(course)).length >= 8, course)
+    }
+})
+
+for (const { unit, file } of units) {
     test(`${unit}: the Basque texts of the lessons file glue no suffix to a number`, () => {
-        const file = ['lessons.tsx', 'lessons.ts'].map((name) => new URL(`${unit}/${name}`, pages)).find(existsSync)
-        assert.ok(file, `${unit}: no lessons file`)
         const texts = basqueTexts(readFileSync(file, 'utf8'))
         assert.ok(texts.length > 20, `${unit}: only ${texts.length} Basque texts found`)
-        const found = texts.flatMap(({ line, text }) => glued(text).map((word) => `line ${line}: «${word}» in «${text}»`))
+        const algebra = algebraInWords[unit] ?? []
+        const found = texts.flatMap(({ line, text }) => glued(algebra.reduce((rest, term) => rest.split(term).join(' '), text)).map((word) => `line ${line}: «${word}» in «${text}»`))
         assert.deepEqual(found, [])
     })
 }

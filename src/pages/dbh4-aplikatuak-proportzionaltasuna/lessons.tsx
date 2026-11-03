@@ -120,11 +120,11 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
         stage: 'compound',
         title: say('Banaketa alderantziz proportzionala', 'Reparto inversamente proporcional', 'التوزيع العكسي', 'Sharing in inverse proportion'),
         goal: say('Kantitate bat zenbaki batzuekiko alderantziz proportzionalak diren zatitan banatzea.', 'Repartir una cantidad en partes inversamente proporcionales a unos números.', 'توزيع كمية إلى أجزاء متناسبة عكسيًا مع أعداد معطاة.', 'Share an amount into parts in inverse proportion to some numbers.'),
-        problem: say('Banatu 660 alderantziz proportzionalki 1, 2 eta 3rekiko.', 'Reparte 660 en partes inversamente proporcionales a 1, 2 y 3.', 'وزّع 660 عكسيًا على 1 و2 و3.', 'Share 660 into parts that are inversely proportional to 1, 2 and 3.'),
+        problem: say('Banatu 660 alderantziz proportzionalki 1, 2 eta 3 zenbakiekiko.', 'Reparte 660 en partes inversamente proporcionales a 1, 2 y 3.', 'وزّع 660 عكسيًا على 1 و2 و3.', 'Share 660 into parts that are inversely proportional to 1, 2 and 3.'),
         stepsKind: 'steps',
         steps: [
             { text: say('Alderantzizkoak, izendatzaile berarekin.', 'Los inversos, con el mismo denominador.', 'المقلوبات بالمقام نفسه.', 'The inverses, with the same denominator.'), math: same('$\\frac{6}{6},\\ \\frac{3}{6},\\ \\frac{2}{6}$') },
-            { text: say('6, 3 eta 2rekiko: 11 zati.', 'Proporcional a 6, 3 y 2: 11 partes.', 'متناسب مع 6 و3 و2: 11 جزءًا.', 'In proportion to 6, 3 and 2: 11 parts.'), math: same('$660\\mathbin{:}11=60$') },
+            { text: say('6, 3 eta 2 zenbakiekiko: 11 zati.', 'Proporcional a 6, 3 y 2: 11 partes.', 'متناسب مع 6 و3 و2: 11 جزءًا.', 'In proportion to 6, 3 and 2: 11 parts.'), math: same('$660\\mathbin{:}11=60$') },
             { text: say('Zatiak.', 'Las partes.', 'الأجزاء.', 'The parts.'), math: same('$360,\\ 180,\\ 120$') }
         ],
         example: same('$1+\\frac{1}{2}+\\frac{1}{3}=\\frac{11}{6}$'),

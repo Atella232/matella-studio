@@ -75,7 +75,7 @@ export const similarityTopics: UnitTopic[] = [
         stepsKind: 'steps',
         steps: [
             { text: say('Zati guztiak batera.', 'Todas las partes juntas.', 'الأجزاء كلها معًا.', 'All the parts together.'), math: same('$1+3+5=9$') },
-            { text: say('Zati handiena: 9tik 5.', 'La parte mayor: 5 de 9.', 'الجزء الأكبر: 5 من 9.', 'The largest part: 5 out of 9.'), math: same('$\\dfrac{15\\cdot 5}{9}\\approx 8{,}33$') }
+            { text: say('Zati handiena: 9 zatitatik 5.', 'La parte mayor: 5 de 9.', 'الجزء الأكبر: 5 من 9.', 'The largest part: 5 out of 9.'), math: same('$\\dfrac{15\\cdot 5}{9}\\approx 8{,}33$') }
         ],
         example: same('$AB\\mathbin{:}n$'),
         takeaway: say('Marraztu erdizuzen bat, markatu zati berdinak eta marraztu paraleloak.', 'Traza una semirrecta, marca trozos iguales y traza paralelas.', 'ارسم نصف مستقيم وعلّم أجزاء متساوية وارسم متوازيات.', 'Draw a ray, mark equal pieces and draw parallel lines.'),
@@ -241,7 +241,7 @@ export const similarityTopics: UnitTopic[] = [
         stepsKind: 'steps',
         steps: [
             { text: say('Biderkatu n-z.', 'Multiplica por n.', 'اضرب في n.', 'Multiply by n.'), math: same('$4\\cdot 300\\,000=1\\,200\\,000$') },
-            { text: say('cm-tik km-ra: zatitu 100\u00a0000z.', 'De cm a km: divide entre 100\u00a0000.', 'من سم إلى كم: اقسم على 100\u00a0000.', 'From cm to km: divide by 100,000.'), math: same('$1\\,200\\,000\\mathbin{:}100\\,000=12$') }
+            { text: say('cm-tik km-ra: zatitu 100\u00a0000 zenbakiaz.', 'De cm a km: divide entre 100\u00a0000.', 'من سم إلى كم: اقسم على 100\u00a0000.', 'From cm to km: divide by 100,000.'), math: same('$1\\,200\\,000\\mathbin{:}100\\,000=12$') }
         ],
         example: same('$1\\mathbin{:}n$'),
         takeaway: say('Errealitatea = mapa bider n. Gero aldatu unitatea.', 'Realidad = mapa por n. Después cambia la unidad.', 'الواقع = الخريطة في n. ثم غيّر الوحدة.', 'Real = map times n. Then change the unit.'),

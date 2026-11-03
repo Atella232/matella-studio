@@ -68,7 +68,7 @@ export const sequencesTopics: UnitTopic[] = [
         stepsKind: 'steps',
         steps: [
             { text: say('Ordezkatu $n=12$.', 'Sustituye $n=12$.', 'عوّض $n=12$.', 'Substitute $n=12$.'), math: same('$a_{12}=5\\cdot 12-3=57$') },
-            { text: say('Berdindu 77-ri.', 'Iguala a 77.', 'ساوِ بـ 77.', 'Set it equal to 77.'), math: same('$5n-3=77\\ \\to\\ n=16$') },
+            { text: say('Berdindu 77 zenbakiari.', 'Iguala a 77.', 'ساوِ بـ 77.', 'Set it equal to 77.'), math: same('$5n-3=77\\ \\to\\ n=16$') },
             { text: say('$n=16$ zenbaki arrunta da: bai, $a_{16}=77$.', '$n=16$ es natural: sí, $a_{16}=77$.', '$n=16$ عدد طبيعي: نعم، $a_{16}=77$.', '$n=16$ is a natural number: yes, $a_{16}=77$.') }
         ],
         example: same('$a_{n}=\\frac{n}{n+1}\\ \\to\\ a_{4}=\\frac{4}{5}$'),

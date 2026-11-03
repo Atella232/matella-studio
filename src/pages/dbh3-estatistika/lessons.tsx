@@ -155,7 +155,7 @@ export const stats3Topics: UnitTopic[] = [
         title: say('Grafikoak kritikoki irakurri', 'Leer gráficos con sentido crítico', 'قراءة المخططات بعين ناقدة', 'Reading charts critically'),
         goal: say('Grafiko engainagarriak ezagutzea.', 'Reconocer gráficos engañosos.', 'التعرّف على المخططات المضلِّلة.', 'Spot misleading charts.'),
         explanation: say(
-            'Grafiko bat ondo irakurtzeko, begiratu ardatzak zerotik hasten diren eta eskalak berdinak diren. Ardatz bertikala 0-tik hasten ez bada, alde txikiak oso handiak dirudite. Irudiekin eginiko grafikoetan, irudia bi aldiz handiagoa egiten bada luzeran eta zabaleran, haren azalera lau aldiz handiagoa da: aldea puztuta ikusten da.',
+            'Grafiko bat ondo irakurtzeko, begiratu ardatzak zerotik hasten diren eta eskalak berdinak diren. Ardatz bertikala 0 balioan hasten ez bada, alde txikiak oso handiak dirudite. Irudiekin eginiko grafikoetan, irudia bi aldiz handiagoa egiten bada luzeran eta zabaleran, haren azalera lau aldiz handiagoa da: aldea puztuta ikusten da.',
             'Para leer bien un gráfico, mira si los ejes empiezan en cero y si las escalas son iguales. Si el eje vertical no empieza en 0, diferencias pequeñas parecen enormes. En los gráficos con dibujos, si un dibujo se hace el doble de alto y de ancho, su área es cuatro veces mayor: la diferencia se ve inflada.',
             'لقراءة المخطط جيدًا انظر هل يبدأ المحوران من الصفر وهل المقاييس متساوية. فإذا لم يبدأ المحور العمودي من 0 بدت الفروق الصغيرة كبيرة جدًا. وفي المخططات المصوّرة إذا ضوعف الرسم طولًا وعرضًا صارت مساحته أربعة أضعاف: فيبدو الفرق منتفخًا.',
             'To read a chart well, check whether the axes start at zero and whether the scales are equal. If the vertical axis does not start at 0, small differences look huge. In picture charts, if a drawing is made twice as tall and twice as wide, its area is four times as big: the difference looks blown up.'
@@ -164,14 +164,14 @@ export const stats3Topics: UnitTopic[] = [
         stepsKind: 'steps',
         steps: [
             { text: say('Igoera zati hasierakoa.', 'La subida entre lo inicial.', 'الزيادة على القيمة الابتدائية.', 'The rise over the starting value.'), math: same('$\\frac{4}{96}\\cdot 100\\approx 4{,}2$') },
-            { text: say('Ardatza ez da 0-tik hasten: hiru aldiz altuagoa ikusten da, baina % 4 inguru da.', 'El eje no empieza en 0: se ve el triple, pero es un 4 % aproximadamente.', 'المحور لا يبدأ من 0: يبدو ثلاثة أضعاف لكنه نحو 4 %.', 'The axis does not start at 0: it looks three times as tall, but it is about 4%.') }
+            { text: say('Ardatza ez da 0 balioan hasten: hiru aldiz altuagoa ikusten da, baina % 4 inguru da.', 'El eje no empieza en 0: se ve el triple, pero es un 4 % aproximadamente.', 'المحور لا يبدأ من 0: يبدو ثلاثة أضعاف لكنه نحو 4 %.', 'The axis does not start at 0: it looks three times as tall, but it is about 4%.') }
         ],
         example: same('$2\\cdot 2=4$'),
         mistake: {
             wrong: say('Barra bat bestea baino bi aldiz altuagoa bada, balioa bikoitza da beti.', 'Si una barra es el doble de alta que otra, su valor es siempre el doble.', 'إذا كان عمود أعلى من آخر بمرتين فقيمته ضعفها دائمًا.', 'If one bar is twice as tall as another, its value is always double.'),
-            right: say('Ardatza 0-tik hasten bada bakarrik. Bestela, irakurri zenbakiak.', 'Solo si el eje empieza en 0. Si no, lee los números.', 'فقط إذا بدأ المحور من 0. وإلا فاقرأ الأعداد.', 'Only if the axis starts at 0. Otherwise, read the numbers.')
+            right: say('Ardatza 0 balioan hasten bada bakarrik. Bestela, irakurri zenbakiak.', 'Solo si el eje empieza en 0. Si no, lee los números.', 'فقط إذا بدأ المحور من 0. وإلا فاقرأ الأعداد.', 'Only if the axis starts at 0. Otherwise, read the numbers.')
         },
-        takeaway: say('Begiratu ARDATZA: 0-tik hasten al da?', 'Mira el EJE: ¿empieza en 0?', 'انظر إلى المحور: هل يبدأ من 0؟', 'Look at the AXIS: does it start at 0?'),
+        takeaway: say('Begiratu ARDATZA: 0 balioan hasten al da?', 'Mira el EJE: ¿empieza en 0?', 'انظر إلى المحور: هل يبدأ من 0؟', 'Look at the AXIS: does it start at 0?'),
         figure: (language) => <MisleadingFigure language={language} />
     },
     /* ---------- 3. Measures of centre ---------- */
@@ -282,7 +282,7 @@ export const stats3Topics: UnitTopic[] = [
         title: say('Kutxa-diagrama', 'El diagrama de caja', 'مخطط الصندوق', 'The box plot'),
         goal: say('Kutxa-diagrama bat irakurtzea eta marraztea.', 'Leer y dibujar un diagrama de caja y bigotes.', 'قراءة مخطط الصندوق ورسمه.', 'Read and draw a box plot.'),
         explanation: say(
-            'Kutxa-diagramak bost zenbaki erakusten ditu: txikiena, $Q_{1}$, mediana, $Q_{3}$ eta handiena. Kutxa $Q_{1}$-etik $Q_{3}$-ra doa, eta datuen erdia dauka barruan; haren luzera kuartil arteko ibiltartea da, $Q_{3}-Q_{1}$. Biboteak muturretaraino doaz. Kutxa estua bada, erdiko datuak elkarrengandik hurbil daude.',
+            'Kutxa-diagramak bost zenbaki erakusten ditu: txikiena, $Q_{1}$, mediana, $Q_{3}$ eta handiena. Kutxa $Q_{1}$ kuartiletik $Q_{3}$ kuartilera doa, eta datuen erdia dauka barruan; haren luzera kuartil arteko ibiltartea da, $Q_{3}-Q_{1}$. Biboteak muturretaraino doaz. Kutxa estua bada, erdiko datuak elkarrengandik hurbil daude.',
             'El diagrama de caja muestra cinco números: el mínimo, $Q_{1}$, la mediana, $Q_{3}$ y el máximo. La caja va de $Q_{1}$ a $Q_{3}$ y contiene la mitad de los datos; su longitud es el rango intercuartílico, $Q_{3}-Q_{1}$. Los bigotes llegan hasta los extremos. Si la caja es estrecha, los datos centrales están muy juntos.',
             'يُظهر مخطط الصندوق خمسة أعداد: الأصغر و$Q_{1}$ والوسيط و$Q_{3}$ والأكبر. يمتد الصندوق من $Q_{1}$ إلى $Q_{3}$ ويحوي نصف البيانات، وطوله المدى الربيعي $Q_{3}-Q_{1}$. ويصل الشاربان إلى الطرفين. وإذا كان الصندوق ضيقًا فالبيانات الوسطى متقاربة.',
             'A box plot shows five numbers: the minimum, $Q_{1}$, the median, $Q_{3}$ and the maximum. The box goes from $Q_{1}$ to $Q_{3}$ and holds half the data; its length is the interquartile range, $Q_{3}-Q_{1}$. The whiskers reach the extremes. A narrow box means the middle data are close together.'

@@ -84,7 +84,7 @@ export const rationalsTopics: UnitTopic[] = [
         steps: [
             { text: say('Deskonposatu.', 'Descompón.', 'حلّل.', 'Find the prime factorisation.'), math: same('$105=3\\cdot 5\\cdot 7\\qquad 126=2\\cdot 3^{2}\\cdot 7$') },
             { text: say('Faktore komunak, berretzaile txikienarekin.', 'Factores comunes con el menor exponente.', 'العوامل المشتركة بأصغر أس.', 'Common factors with the smallest exponent.'), math: same('$3\\cdot 7=21$') },
-            { text: say('Zatitu bi gaiak 21ez.', 'Divide los dos términos entre 21.', 'اقسم الحدين على 21.', 'Divide both terms by 21.'), math: same('$\\frac{105:21}{126:21}=\\frac{5}{6}$') }
+            { text: say('Zatitu bi gaiak 21 zenbakiaz.', 'Divide los dos términos entre 21.', 'اقسم الحدين على 21.', 'Divide both terms by 21.'), math: same('$\\frac{105:21}{126:21}=\\frac{5}{6}$') }
         ],
         example: same('$\\frac{-120}{165}=\\frac{-8}{11}\\qquad\\frac{242}{726}=\\frac{1}{3}$'),
         takeaway: say('Zatitu z.k.h.-z: zatiki laburtezina pauso bakarrean.', 'Divide entre el m.c.d.: la fracción irreducible en un paso.', 'اقسم على ق.م.أ.: الكسر غير القابل للاختزال بخطوة واحدة.', 'Divide by the GCD: the simplest form in one step.'),
@@ -117,7 +117,7 @@ export const rationalsTopics: UnitTopic[] = [
         title: say('Zatikiak zuzenean', 'Fracciones en la recta', 'الكسور على المستقيم', 'Fractions on the number line'),
         goal: say('Zatiki bat, negatiboa izan arren, zuzenean zehatz kokatzea.', 'Situar exactamente una fracción, también negativa, en la recta.', 'وضع كسر، ولو كان سالبًا، بدقة على المستقيم.', 'Place a fraction exactly on the number line, including negative fractions.'),
         explanation: say(
-            'Zatiki inpropio bat kokatzeko, idatzi zati oso gisa gehi zatiki propio bat: $\\frac{17}{6}=2+\\frac{5}{6}$, beraz 2 eta 3 artean dago. Zatitu tarte hori izendatzaileak adina zati berdinetan (6) eta hartu zenbakitzaileak adina (5). Zatiketa zehatza egiteko, Talesen teorema erabiltzen da: zuzen zeihar batean 6 zati berdin markatu, azken marka 3rekin lotu eta paraleloak marraztu. Negatiboak 0ren ezkerrean daude: $-\\frac{12}{5}=-2-\\frac{2}{5}$, −2 eta −3 artean.',
+            'Zatiki inpropio bat kokatzeko, idatzi zati oso gisa gehi zatiki propio bat: $\\frac{17}{6}=2+\\frac{5}{6}$, beraz 2 eta 3 artean dago. Zatitu tarte hori izendatzaileak adina zati berdinetan (6) eta hartu zenbakitzaileak adina (5). Zatiketa zehatza egiteko, Talesen teorema erabiltzen da: zuzen zeihar batean 6 zati berdin markatu, azken marka 3 puntuarekin lotu eta paraleloak marraztu. Negatiboak 0 puntuaren ezkerrean daude: $-\\frac{12}{5}=-2-\\frac{2}{5}$, −2 eta −3 artean.',
             'Para situar una fracción impropia, escríbela como parte entera más una fracción propia: $\\frac{17}{6}=2+\\frac{5}{6}$, así que está entre 2 y 3. Divide ese tramo en tantas partes iguales como indica el denominador (6) y toma tantas como indica el numerador (5). Para dividir con exactitud se usa el teorema de Tales: marca 6 partes iguales en una recta oblicua, une la última marca con el 3 y traza paralelas. Las negativas quedan a la izquierda del 0: $-\\frac{12}{5}=-2-\\frac{2}{5}$, entre −2 y −3.',
             'لوضع كسر غير حقيقي اكتبه جزءًا صحيحًا مع كسر حقيقي: $\\frac{17}{6}=2+\\frac{5}{6}$ فهو بين 2 و3. قسّم هذا المجال أجزاء متساوية بعدد المقام (6) وخذ منها بعدد البسط (5). وللتقسيم بدقة نستعمل مبرهنة طاليس: علّم 6 أجزاء متساوية على مستقيم مائل، وصِل العلامة الأخيرة بالعدد 3، وارسم مستقيمات موازية. والسالبة تقع يسار الصفر: $-\\frac{12}{5}=-2-\\frac{2}{5}$ بين −2 و−3.', 'To place an improper fraction, write it as a whole number plus a proper fraction: $\\frac{17}{6}=2+\\frac{5}{6}$, so it is between 2 and 3. Divide that segment into as many equal parts as the denominator shows (6) and take as many as the numerator shows (5). To divide exactly, use Thales\' theorem: mark 6 equal parts on a slanted line, join the last mark to 3 and draw parallel lines. Negative fractions go to the left of 0: $-\\frac{12}{5}=-2-\\frac{2}{5}$, between −2 and −3.'
         ),
@@ -138,7 +138,7 @@ export const rationalsTopics: UnitTopic[] = [
         title: say('Bi zatikiren arteko zatikiak', 'Fracciones entre dos fracciones', 'كسور بين كسرين', 'Fractions between two fractions'),
         goal: say('Bi zatikiren artean beste bat aurkitzea: arrazionalen dentsitatea.', 'Encontrar una fracción entre otras dos: la densidad de los racionales.', 'إيجاد كسر بين كسرين: كثافة الأعداد النسبية.', 'Finding a fraction between two others: the density of the rational numbers.'),
         explanation: say(
-            'Bi zatiki desberdinen artean beti dago beste zatiki bat. Modurik errazena erdiko puntua da: batu eta zatitu 2z, $\\frac{1}{2}\\left(\\frac{a}{b}+\\frac{c}{d}\\right)$. Beste modu bat: jarri izendatzaile bera eta, tartean zenbakitzailerik ez badago, anplifikatu biak (adibidez 10ez) hutsunea irekitzeko. Prozesua amaigabe errepika daitekeenez, bi zatikiren artean infinitu zatiki daude.',
+            'Bi zatiki desberdinen artean beti dago beste zatiki bat. Modurik errazena erdiko puntua da: batu eta zatitu 2 zenbakiaz, $\\frac{1}{2}\\left(\\frac{a}{b}+\\frac{c}{d}\\right)$. Beste modu bat: jarri izendatzaile bera eta, tartean zenbakitzailerik ez badago, anplifikatu biak (adibidez, 10 zenbakiaz) hutsunea irekitzeko. Prozesua amaigabe errepika daitekeenez, bi zatikiren artean infinitu zatiki daude.',
             'Entre dos fracciones distintas siempre hay otra fracción. La forma más sencilla es el punto medio: suma y divide entre 2, $\\frac{1}{2}\\left(\\frac{a}{b}+\\frac{c}{d}\\right)$. Otra forma: ponlas con el mismo denominador y, si no hay ningún numerador en medio, amplifica las dos (por ejemplo, por 10) para abrir hueco. Como el proceso se puede repetir sin fin, entre dos fracciones hay infinitas fracciones.',
             'بين كسرين مختلفين يوجد دائمًا كسر آخر. وأبسط طريقة نقطة المنتصف: اجمع واقسم على 2، $\\frac{1}{2}\\left(\\frac{a}{b}+\\frac{c}{d}\\right)$. وطريقة أخرى: وحّد المقامين، فإذا لم يكن بينهما بسط فوسّع الكسرين (مثلًا في 10) لفتح فراغ. ولأن العملية تتكرر بلا نهاية ففي ما بين كسرين كسور لا نهائية.', 'Between two different fractions there is always another fraction. The simplest way is the midpoint: add them and divide by 2, $\\frac{1}{2}\\left(\\frac{a}{b}+\\frac{c}{d}\\right)$. Another way: put them over the same denominator and, if there is no numerator in between, amplify both of them (for example, by 10) to make room. As the process can be repeated endlessly, there are infinitely many fractions between two fractions.'
         ),
@@ -146,11 +146,11 @@ export const rationalsTopics: UnitTopic[] = [
         stepsKind: 'steps',
         steps: [
             { text: say('Batu.', 'Suma.', 'اجمع.', 'Add.'), math: same('$\\frac{4}{5}+\\frac{7}{8}=\\frac{32+35}{40}=\\frac{67}{40}$') },
-            { text: say('Zatitu 2z.', 'Divide entre 2.', 'اقسم على 2.', 'Divide by 2.'), math: same('$\\frac{67}{40}:2=\\frac{67}{80}$') },
+            { text: say('Zatitu 2 zenbakiaz.', 'Divide entre 2.', 'اقسم على 2.', 'Divide by 2.'), math: same('$\\frac{67}{40}:2=\\frac{67}{80}$') },
             { text: say('Egiaztatu.', 'Comprueba.', 'تحقق.', 'Check it.'), math: same('$\\frac{64}{80}<\\frac{67}{80}<\\frac{70}{80}$') }
         ],
         example: same('$\\frac{7}{6}<\\frac{15}{12}<\\frac{8}{6}$'),
-        takeaway: say('Erdiko puntua: batu eta zatitu 2z. Beti dago beste bat.', 'El punto medio: suma y divide entre 2. Siempre hay otra.', 'نقطة المنتصف: اجمع واقسم على 2. يوجد دائمًا كسر آخر.', 'The midpoint: add them and divide by 2. There is always another one.'),
+        takeaway: say('Erdiko puntua: batu eta zatitu 2 zenbakiaz. Beti dago beste bat.', 'El punto medio: suma y divide entre 2. Siempre hay otra.', 'نقطة المنتصف: اجمع واقسم على 2. يوجد دائمًا كسر آخر.', 'The midpoint: add them and divide by 2. There is always another one.'),
         figure: (language) => <OrderDensityFigure language={language} />
     },
     {
@@ -168,7 +168,7 @@ export const rationalsTopics: UnitTopic[] = [
         steps: [
             { text: say('m.k.t.(6, 8, 3) = 24.', 'm.c.m.(6, 8, 3) = 24.', 'م.م.أ.(6، 8، 3) = 24.', 'LCM(6, 8, 3) = 24.'), math: same('$\\frac{100}{24}-\\frac{33}{24}+\\frac{8}{24}$') },
             { text: say('Eragin zenbakitzaileekin.', 'Opera los numeradores.', 'أجرِ العمليات على البسوط.', 'Calculate the numerators.'), math: same('$\\frac{100-33+8}{24}=\\frac{75}{24}$') },
-            { text: say('Sinplifikatu 3z.', 'Simplifica entre 3.', 'اختزل على 3.', 'Simplify by dividing by 3.'), math: same('$\\frac{75}{24}=\\frac{25}{8}$') }
+            { text: say('Sinplifikatu 3 zenbakiaz.', 'Simplifica entre 3.', 'اختزل على 3.', 'Simplify by dividing by 3.'), math: same('$\\frac{75}{24}=\\frac{25}{8}$') }
         ],
         example: same('$-5-\\frac{1}{9}+\\frac{1}{12}=\\frac{-180-4+3}{36}=-\\frac{181}{36}$'),
         takeaway: say('Izendatzaile komuna lehenik; gero zenbakitzaileekin eragin.', 'Primero el denominador común; después opera los numeradores.', 'المقام المشترك أولًا ثم العمليات على البسوط.', 'First the common denominator; then calculate the numerators.'),
@@ -252,7 +252,7 @@ export const rationalsTopics: UnitTopic[] = [
         steps: [
             { text: say('Bi hamartar → 100.', 'Dos decimales → 100.', 'منزلتان ← 100.', 'Two decimal places → 100.'), math: same('$35{,}47=\\frac{3547}{100}$') },
             { text: say('Hiru hamartar → 1000.', 'Tres decimales → 1000.', 'ثلاث منازل ← 1000.', 'Three decimal places → 1,000.'), math: same('$0{,}375=\\frac{375}{1000}$') },
-            { text: say('Sinplifikatu 125ez.', 'Simplifica entre 125.', 'اختزل على 125.', 'Simplify by dividing by 125.'), math: same('$\\frac{375}{1000}=\\frac{3}{8}$') }
+            { text: say('Sinplifikatu 125 zenbakiaz.', 'Simplifica entre 125.', 'اختزل على 125.', 'Simplify by dividing by 125.'), math: same('$\\frac{375}{1000}=\\frac{3}{8}$') }
         ],
         example: same('$-3{,}65=-\\frac{365}{100}=-\\frac{73}{20}$'),
         takeaway: say('Komarik gabeko zenbakia zati 1 eta hamartar adina zero.', 'El número sin coma entre un 1 y tantos ceros como decimales.', 'العدد دون فاصلة على 1 وأصفار بعدد المنازل.', 'The number without the decimal point, over a 1 followed by as many zeros as decimal places.'),
@@ -273,10 +273,10 @@ export const rationalsTopics: UnitTopic[] = [
         steps: [
             { text: say('Zenbakitzailea.', 'Numerador.', 'البسط.', 'Numerator.'), math: same('$1258-12=1246$') },
             { text: say('Periodoa 2 zifra (99), aurreperiodoa 2 zifra (00).', 'Periodo de 2 cifras (99), anteperiodo de 2 (00).', 'دور من رقمين (99) وجزء غير دوري من رقمين (00).', 'Repeating part of 2 digits (99), non-repeating part of 2 digits (00).'), math: same('$\\frac{1246}{9900}$') },
-            { text: say('Sinplifikatu 2z.', 'Simplifica entre 2.', 'اختزل على 2.', 'Simplify by dividing by 2.'), math: same('$\\frac{1246}{9900}=\\frac{623}{4950}$') }
+            { text: say('Sinplifikatu 2 zenbakiaz.', 'Simplifica entre 2.', 'اختزل على 2.', 'Simplify by dividing by 2.'), math: same('$\\frac{1246}{9900}=\\frac{623}{4950}$') }
         ],
         example: same('$0{,}\\overline{08}=\\frac{8}{99}\\qquad 0{,}00\\overline{7}=\\frac{7}{900}$'),
-        takeaway: say('Guztia ken periodoaren aurrekoa; 9ak periodoarentzat, 0ak aurreperiodoarentzat.', 'Todo menos lo anterior al periodo; nueves por el periodo, ceros por el anteperiodo.', 'الكل ناقص ما قبل الدور؛ تسعات للدور وأصفار لما قبله.', 'All of it minus the non-repeating part; nines for the repeating part, zeros for the non-repeating part.'),
+        takeaway: say('Guztia ken periodoaren aurrekoa; 9 zifrak periodoarentzat, 0 zifrak aurreperiodoarentzat.', 'Todo menos lo anterior al periodo; nueves por el periodo, ceros por el anteperiodo.', 'الكل ناقص ما قبل الدور؛ تسعات للدور وأصفار لما قبله.', 'All of it minus the non-repeating part; nines for the repeating part, zeros for the non-repeating part.'),
         figure: (language) => <PeriodicFractionFigure language={language} />
     },
     {
@@ -285,15 +285,15 @@ export const rationalsTopics: UnitTopic[] = [
         title: say('Kantitate baten zatikia', 'Fracción de una cantidad', 'كسر من كمية', 'Fraction of a quantity'),
         goal: say('Kantitate baten zatikia eta zatiki baten zatikia kalkulatzea.', 'Calcular la fracción de una cantidad y la fracción de una fracción.', 'حساب كسر من كمية وكسر من كسر.', 'Work out the fraction of a quantity and the fraction of a fraction.'),
         explanation: say(
-            'Kantitate baten $\\frac{a}{b}$ kalkulatzeko, zatitu kantitatea $b$-z eta biderkatu $a$-z: $\\frac{3}{8}\\cdot 120=45$. Zatiki baten zatikia biderketa bat da: $\\frac{2}{3}$-ren $\\frac{3}{4}$ $\\frac{3}{4}\\cdot\\frac{2}{3}=\\frac{1}{2}$ da. Eguneroko egoeretan asko erabiltzen da: ura, energia, dirua…: $\\frac{3}{7}\\cdot 15\\approx 6{,}43$ m³.',
+            'Kantitate baten $\\frac{a}{b}$ kalkulatzeko, zatitu kantitatea $b$-z eta biderkatu $a$-z: $\\frac{3}{8}\\cdot 120=45$. Zatiki baten zatikia biderketa bat da: $\\frac{2}{3}$ zatikiaren $\\frac{3}{4}$ $\\frac{3}{4}\\cdot\\frac{2}{3}=\\frac{1}{2}$ da. Eguneroko egoeretan asko erabiltzen da: ura, energia, dirua…: $\\frac{3}{7}\\cdot 15\\approx 6{,}43$ m³.',
             'Para calcular $\\frac{a}{b}$ de una cantidad, divide la cantidad entre $b$ y multiplica por $a$: $\\frac{3}{8}\\cdot 120=45$. La fracción de una fracción es un producto: $\\frac{3}{4}$ de $\\frac{2}{3}$ es $\\frac{3}{4}\\cdot\\frac{2}{3}=\\frac{1}{2}$. Se usa mucho en situaciones cotidianas: agua, energía, dinero…: $\\frac{3}{7}\\cdot 15\\approx 6{,}43$ m³.',
             'لحساب $\\frac{a}{b}$ من كمية اقسم الكمية على $b$ واضرب في $a$: $\\frac{3}{8}\\cdot 120=45$. وكسر من كسر حاصل ضرب: $\\frac{3}{4}$ من $\\frac{2}{3}$ هو $\\frac{3}{4}\\cdot\\frac{2}{3}=\\frac{1}{2}$. ويُستعمل كثيرًا في الحياة اليومية: الماء والطاقة والمال…: $\\frac{3}{7}\\cdot 15\\approx 6{,}43$ م³.', 'To work out $\\frac{a}{b}$ of a quantity, divide the quantity by $b$ and multiply by $a$: $\\frac{3}{8}\\cdot 120=45$. A fraction of a fraction is a product: $\\frac{3}{4}$ of $\\frac{2}{3}$ is $\\frac{3}{4}\\cdot\\frac{2}{3}=\\frac{1}{2}$. It is used a lot in everyday situations: water, energy, money…: $\\frac{3}{7}\\cdot 15\\approx 6{,}43$ m³.'
         ),
         problem: say('Etxe batek 9600 kWh kontsumitzen ditu urtean, eta horren $\\frac{3}{5}$ berokuntzan. Zenbat kWh?', 'Una casa consume 9600 kWh al año, y $\\frac{3}{5}$ en calefacción. ¿Cuántos kWh?', 'يستهلك بيت 9600 ك.و.س في السنة، و$\\frac{3}{5}$ منها للتدفئة. كم ك.و.س؟', 'A house uses 9,600 kWh a year, and $\\frac{3}{5}$ of it is for heating. How many kWh go on heating?'),
         stepsKind: 'steps',
         steps: [
-            { text: say('Zatitu 5ez.', 'Divide entre 5.', 'اقسم على 5.', 'Divide by 5.'), math: same('$9600:5=1920$') },
-            { text: say('Biderkatu 3z.', 'Multiplica por 3.', 'اضرب في 3.', 'Multiply by 3.'), math: same('$1920\\cdot 3=5760$') }
+            { text: say('Zatitu 5 zenbakiaz.', 'Divide entre 5.', 'اقسم على 5.', 'Divide by 5.'), math: same('$9600:5=1920$') },
+            { text: say('Biderkatu 3 zenbakiaz.', 'Multiplica por 3.', 'اضرب في 3.', 'Multiply by 3.'), math: same('$1920\\cdot 3=5760$') }
         ],
         example: same('$\\frac{2}{5}\\cdot\\frac{5}{6}\\cdot 60=\\frac{1}{3}\\cdot 60=20$'),
         takeaway: say('"-ren" zatikia → biderkatu.', 'La fracción "de" → multiplica.', 'الكسر "من" ← اضرب.', 'A fraction “of” → multiply.'),

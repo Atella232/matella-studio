@@ -37,7 +37,7 @@ export const naturalsTopics: UnitTopic[] = [
             ar: 'معرفة قيمة كل رقم حسب موقعه وتفكيك الأعداد.'
         },
         explanation: {
-            eu: 'Zenbaki naturalak (zenbaki arruntak ere deituak) 0, 1, 2, 3… dira, eta kantitate osoak zenbatzeko erabiltzen ditugu. Hamar zifrarekin idazten dira, 0tik 9ra. Gure sistema hamartarra da, ordena bateko 10 unitatek hurrengo ordenako unitate 1 osatzen dutelako. Eta posizionala da, zifra baten balioa haren posizioaren araberakoa delako.',
+            eu: 'Zenbaki naturalak (zenbaki arruntak ere deituak) 0, 1, 2, 3… dira, eta kantitate osoak zenbatzeko erabiltzen ditugu. Hamar zifrarekin idazten dira, 0 zifratik 9 zifrara. Gure sistema hamartarra da, ordena bateko 10 unitatek hurrengo ordenako unitate 1 osatzen dutelako. Eta posizionala da, zifra baten balioa haren posizioaren araberakoa delako.',
             es: 'Los números naturales son 0, 1, 2, 3… y sirven para contar cantidades enteras. Se escriben con diez cifras, del 0 al 9. Nuestro sistema es decimal, porque 10 unidades de un orden forman 1 unidad del orden siguiente. Y es posicional, porque el valor de cada cifra depende del lugar que ocupa.',
             en: 'Natural numbers are 0, 1, 2, 3… and are used to count whole quantities. They are written with ten digits, from 0 to 9. Our system is decimal, because 10 units of one place make 1 unit of the next place. And it is positional, because the value of each digit depends on the place it occupies.',
             ar: 'الأعداد الطبيعية هي 0، 1، 2، 3… ونستعملها لعدّ الكميات الكاملة. تُكتب بعشرة أرقام من 0 إلى 9. نظامنا عشري لأن 10 وحدات من مرتبة تكوّن وحدة واحدة من المرتبة التالية، وهو موضعي لأن قيمة الرقم تتعلق بموقعه.'
@@ -61,7 +61,7 @@ export const naturalsTopics: UnitTopic[] = [
             },
             {
                 title: { eu: 'Zero bat eskuinean', es: 'Un cero a la derecha', en: 'A zero on the right', ar: 'صفر على اليمين' },
-                text: { eu: 'Zenbaki baten eskuinean zero bat idaztean, haren balioa 10ez biderkatzen da. Ezkerrean idaztean, ez da aldatzen.', es: 'Al añadir un cero a la derecha de un número, su valor se multiplica por 10. A la izquierda, no cambia.', en: 'When you add a zero to the right of a number, its value is multiplied by 10. Adding a zero on the left does not change it.', ar: 'عند إضافة صفر على يمين العدد تُضرب قيمته في 10. وعلى اليسار لا تتغير.' },
+                text: { eu: 'Zenbaki baten eskuinean zero bat idaztean, haren balioa 10 zenbakiaz biderkatzen da. Ezkerrean idaztean, ez da aldatzen.', es: 'Al añadir un cero a la derecha de un número, su valor se multiplica por 10. A la izquierda, no cambia.', en: 'When you add a zero to the right of a number, its value is multiplied by 10. Adding a zero on the left does not change it.', ar: 'عند إضافة صفر على يمين العدد تُضرب قيمته في 10. وعلى اليسار لا تتغير.' },
                 math: '$57 \\to 570 \\qquad 057=57$'
             }
         ],
@@ -156,7 +156,7 @@ export const naturalsTopics: UnitTopic[] = [
             },
             {
                 title: { eu: 'Zuzeneko saltoak', es: 'Saltos en la recta', en: 'Jumps on the number line', ar: 'القفزات على المستقيم' },
-                text: { eu: 'Zuzenean bi zenbaki ezagun badaude, kalkulatu haien arteko distantzia eta zatitu salto kopuruarekin. 430etik 830era 4 salto daude: salto bakoitza 100 da.', es: 'Si en la recta hay dos números conocidos, calcula la distancia entre ellos y divídela entre el número de saltos. De 430 a 830 hay 4 saltos: cada salto vale 100.', en: 'If there are two known numbers on the number line, work out the distance between them and divide it by the number of jumps. From 430 to 830 there are 4 jumps: each jump is worth 100.', ar: 'إذا عرفنا عددين على المستقيم نحسب المسافة بينهما ونقسمها على عدد القفزات. من 430 إلى 830 توجد 4 قفزات: كل قفزة تساوي 100.' },
+                text: { eu: 'Zuzenean bi zenbaki ezagun badaude, kalkulatu haien arteko distantzia eta zatitu salto kopuruarekin. 430 zenbakitik 830 zenbakira 4 salto daude: salto bakoitza 100 da.', es: 'Si en la recta hay dos números conocidos, calcula la distancia entre ellos y divídela entre el número de saltos. De 430 a 830 hay 4 saltos: cada salto vale 100.', en: 'If there are two known numbers on the number line, work out the distance between them and divide it by the number of jumps. From 430 to 830 there are 4 jumps: each jump is worth 100.', ar: 'إذا عرفنا عددين على المستقيم نحسب المسافة بينهما ونقسمها على عدد القفزات. من 430 إلى 830 توجد 4 قفزات: كل قفزة تساوي 100.' },
                 math: '$(830-430)\\mathbin{:}4=100$'
             }
         ],
@@ -204,7 +204,7 @@ export const naturalsTopics: UnitTopic[] = [
             },
             {
                 title: { eu: 'Marra gainean', es: 'Una raya encima', en: 'A bar above', ar: 'خط فوق الرمز' },
-                text: { eu: 'Ikur baten gaineko marrak haren balioa 1000z biderkatzen du.', es: 'Una raya encima de un símbolo multiplica su valor por 1000.', en: 'A bar above a symbol multiplies its value by 1,000.', ar: `الخط فوق الرمز يضرب قيمته في ${ltr('1000')}.` },
+                text: { eu: 'Ikur baten gaineko marrak haren balioa 1000 zenbakiaz biderkatzen du.', es: 'Una raya encima de un símbolo multiplica su valor por 1000.', en: 'A bar above a symbol multiplies its value by 1,000.', ar: `الخط فوق الرمز يضرب قيمته في ${ltr('1000')}.` },
                 math: '$\\overline{\\mathrm{V}}=5000$'
             }
         ],
@@ -243,7 +243,7 @@ export const naturalsTopics: UnitTopic[] = [
         ],
         example: '$26\\,421\\approx 26\\,000 \\qquad 24\\,963\\approx 25\\,000$',
         takeaway: {
-            eu: 'Eskuineko zifra 5etik 9ra: gora. 0tik 4ra: bere horretan.',
+            eu: 'Eskuineko zifra 5 eta 9 artean: gora. 0 eta 4 artean: bere horretan.',
             es: 'Cifra de la derecha de 5 a 9: hacia arriba. De 0 a 4: se queda igual.',
             en: 'Digit on the right from 5 to 9: round up. From 0 to 4: it stays the same.',
             ar: 'الرقم الذي على اليمين من 5 إلى 9: نرفع. من 0 إلى 4: يبقى كما هو.'
@@ -365,13 +365,13 @@ export const naturalsTopics: UnitTopic[] = [
                 math: '$6\\cdot (8+2)=6\\cdot 8+6\\cdot 2=60$'
             },
             {
-                title: { eu: '10ez, 100ez, 1000z', es: 'Por 10, 100, 1000', en: 'By 10, 100, 1,000', ar: `في 10، 100، ${ltr('1000')}` },
+                title: { eu: '10, 100, 1000 zenbakiez', es: 'Por 10, 100, 1000', en: 'By 10, 100, 1,000', ar: `في 10، 100، ${ltr('1000')}` },
                 text: { eu: 'Zenbakiaren eskuinean zero bat, bi edo hiru idazten dira.', es: 'Se añaden uno, dos o tres ceros a la derecha del número.', en: 'You add one, two or three zeros to the right of the number.', ar: 'نضيف صفرًا أو صفرين أو ثلاثة أصفار على يمين العدد.' },
                 math: '$15\\cdot 1000=15\\,000$'
             },
             {
-                title: { eu: '9z eta 11z buruz', es: 'Por 9 y por 11 mentalmente', en: 'Multiplying by 9 and 11 in your head', ar: 'الضرب في 9 و11 ذهنيًا' },
-                text: { eu: '9z biderkatzeko: 10ez biderkatu eta zenbakia kendu. 11z: 10ez biderkatu eta zenbakia batu.', es: 'Por 9: multiplica por 10 y resta el número. Por 11: multiplica por 10 y suma el número.', en: 'To multiply by 9: multiply by 10 and subtract the number. To multiply by 11: multiply by 10 and add the number.', ar: 'في 9: اضرب في 10 واطرح العدد. في 11: اضرب في 10 وأضف العدد.' },
+                title: { eu: '9 eta 11 zenbakiez buruz', es: 'Por 9 y por 11 mentalmente', en: 'Multiplying by 9 and 11 in your head', ar: 'الضرب في 9 و11 ذهنيًا' },
+                text: { eu: '9 zenbakiaz biderkatzeko: 10 zenbakiaz biderkatu eta zenbakia kendu. 11 zenbakiaz: 10 zenbakiaz biderkatu eta zenbakia batu.', es: 'Por 9: multiplica por 10 y resta el número. Por 11: multiplica por 10 y suma el número.', en: 'To multiply by 9: multiply by 10 and subtract the number. To multiply by 11: multiply by 10 and add the number.', ar: 'في 9: اضرب في 10 واطرح العدد. في 11: اضرب في 10 وأضف العدد.' },
                 math: '$23\\cdot 9=230-23=207$'
             }
         ],
@@ -604,15 +604,15 @@ export const naturalsTopics: UnitTopic[] = [
     {
         id: 'powers-of-ten',
         stage: 'powers',
-        title: { eu: '10en berreturak', es: 'Potencias de base 10', en: 'Powers of 10', ar: 'قوى العدد 10' },
+        title: { eu: '10 oinarriko berreturak', es: 'Potencias de base 10', en: 'Powers of 10', ar: 'قوى العدد 10' },
         goal: {
-            eu: '10en berreturak kalkulatzea eta zenbaki handiak haiekin labur idaztea.',
+            eu: '10 oinarriko berreturak kalkulatzea eta zenbaki handiak haiekin labur idaztea.',
             es: 'Calcular potencias de base 10 y usarlas para escribir números grandes de forma abreviada.',
             en: 'Calculate powers of 10 and use them to write large numbers in a shorter form.',
             ar: 'حساب قوى العدد 10 واستعمالها لكتابة الأعداد الكبيرة باختصار.'
         },
         explanation: {
-            eu: '10en berretura bat 1 eta berretzaileak adina zero da: 10⁶ = 1\u00a0000\u00a0000. Horregatik oso erabilgarriak dira zenbaki handiak labur idazteko, adibidez distantziak edo herrialde bateko biztanleak: 4\u00a0000\u00a0000 = 4 · 10⁶. Zenbaki baten deskonposizioa ere idatz daiteke 10en berreturekin.',
+            eu: '10 oinarriko berretura bat 1 eta berretzaileak adina zero da: 10⁶ = 1\u00a0000\u00a0000. Horregatik oso erabilgarriak dira zenbaki handiak labur idazteko, adibidez distantziak edo herrialde bateko biztanleak: 4\u00a0000\u00a0000 = 4 · 10⁶. Zenbaki baten deskonposizioa ere idatz daiteke 10 oinarriko berreturekin.',
             es: 'Una potencia de base 10 es un 1 seguido de tantos ceros como indica el exponente: 10⁶ = 1\u00a0000\u00a0000. Por eso son muy útiles para escribir números grandes de forma abreviada, como distancias o habitantes de un país: 4\u00a0000\u00a0000 = 4 · 10⁶. También se puede escribir la descomposición de un número con potencias de 10.',
             en: 'A power of 10 is a 1 followed by as many zeros as the exponent shows: 10⁶ = 1,000,000. That is why they are very useful for writing large numbers in a shorter form, such as distances or the population of a country: 4,000,000 = 4 · 10⁶. You can also write a number in expanded form using powers of 10.',
             ar: `قوة العدد 10 هي 1 متبوعًا بعدد من الأصفار يساوي الأسّ: ${ltr('10⁶ = 1\u00a0000\u00a0000')}. لذلك هي مفيدة جدًا لكتابة الأعداد الكبيرة باختصار، مثل المسافات أو عدد سكان بلد: ${ltr('4\u00a0000\u00a0000 = 4 · 10⁶')}. ويمكن أيضًا كتابة تفكيك عدد بقوى العدد 10.`
@@ -626,7 +626,7 @@ export const naturalsTopics: UnitTopic[] = [
             },
             {
                 title: { eu: 'Zenbaki handiak labur', es: 'Números grandes abreviados', en: 'Large numbers in short form', ar: 'الأعداد الكبيرة باختصار' },
-                text: { eu: 'Zenbakia eta 10en berretura baten biderkadura gisa idazten da.', es: 'Se escribe como un número por una potencia de 10.', en: 'It is written as a number times a power of 10.', ar: 'نكتبه عددًا مضروبًا في قوة للعدد 10.' },
+                text: { eu: 'Zenbakia eta 10 oinarriko berretura baten biderkadura gisa idazten da.', es: 'Se escribe como un número por una potencia de 10.', en: 'It is written as a number times a power of 10.', ar: 'نكتبه عددًا مضروبًا في قوة للعدد 10.' },
                 math: '$25\\,000=25\\cdot 10^3$'
             },
             {

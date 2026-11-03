@@ -143,7 +143,7 @@ export const fractionsIntroTopics: UnitTopic[] = [
             ar: 'التمييز هل الكسر أصغر من 1 أم يساويه أم أكبر منه.'
         },
         explanation: {
-            eu: 'Zenbakitzailea eta izendatzailea alderatuz dakigu zatikiak unitatea osatzen duen ala ez. Jonek 8tik 3 zati jaten baditu, kutxa bat baino gutxiago jan du; 8 zati jaten baditu, kutxa osoa; eta kutxa bat eta beste baten 3 zati jaten baditu, $\\frac{11}{8}$: kutxa bat baino gehiago.',
+            eu: 'Zenbakitzailea eta izendatzailea alderatuz dakigu zatikiak unitatea osatzen duen ala ez. Jonek 8 zatitatik 3 jaten baditu, kutxa bat baino gutxiago jan du; 8 zati jaten baditu, kutxa osoa; eta kutxa bat eta beste baten 3 zati jaten baditu, $\\frac{11}{8}$: kutxa bat baino gehiago.',
             es: 'Comparando numerador y denominador sabemos si la fracción completa la unidad o no. Si Juan come 3 porciones de 8, ha comido menos de una caja; si come 8, la caja entera; y si come una caja y 3 porciones de otra, $\\frac{11}{8}$: más de una caja.',
             en: 'By comparing the numerator and the denominator, we know whether the fraction makes up a whole or not. If Juan eats 3 of the 8 portions, he has eaten less than one box; if he eats 8, the whole box; and if he eats one box and 3 portions of another, $\\frac{11}{8}$: more than one box.',
             ar: 'بمقارنة البسط والمقام نعرف هل يُكمل الكسر الوحدة أم لا. إذا أكل خوان 3 قطع من 8 فقد أكل أقل من علبة، وإذا أكل 8 فالعلبة كاملة، وإذا أكل علبة و3 قطع من أخرى فهو $\\frac{11}{8}$: أكثر من علبة.'
@@ -206,7 +206,7 @@ export const fractionsIntroTopics: UnitTopic[] = [
             ar: 'وضع كسر على خط الأعداد.'
         },
         explanation: {
-            eu: 'Zatikiak zenbakiak direnez, zenbaki-zuzenean kokatzen dira. Unitateen arteko distantzia beti berdina izan behar da. Zatiki propioak 0 eta 1 artean daude; unitatea balio dutenak, 1ean; eta inpropioak, 1etik aurrera.',
+            eu: 'Zatikiak zenbakiak direnez, zenbaki-zuzenean kokatzen dira. Unitateen arteko distantzia beti berdina izan behar da. Zatiki propioak 0 eta 1 artean daude; unitatea balio dutenak, 1 puntuan; eta inpropioak, 1 puntutik aurrera.',
             es: 'Como las fracciones son números, se sitúan en la recta. La distancia entre las unidades siempre tiene que ser la misma. Las fracciones propias están entre 0 y 1; las iguales a la unidad, en el 1; y las impropias, a partir del 1.',
             en: 'As fractions are numbers, they are placed on the number line. The distance between the units must always be the same. Proper fractions are between 0 and 1; those equal to one are at 1; and improper fractions are from 1 onwards.',
             ar: 'بما أن الكسور أعداد فهي توضع على خط الأعداد. ويجب أن تكون المسافة بين الوحدات متساوية دائمًا. الكسور الحقيقية بين 0 و1، والتي تساوي الواحد عند 1، وغير الحقيقية بعد 1.'
@@ -278,8 +278,8 @@ export const fractionsIntroTopics: UnitTopic[] = [
         problem: { eu: 'Sinplifikatu $\\frac{30}{40}$.', es: 'Simplifica $\\frac{30}{40}$.', en: 'Simplify $\\frac{30}{40}$.', ar: 'بسّط $\\frac{30}{40}$.' },
         stepsKind: 'steps',
         steps: [
-            { text: { eu: 'Biak 10ez zatitu daitezke (0z amaitzen dira).', es: 'Los dos se pueden dividir entre 10 (acaban en 0).', en: 'Both can be divided by 10 (they end in 0).', ar: 'يمكن قسمة الاثنين على 10 (ينتهيان بـ 0).' }, math: '$\\frac{30}{40}=\\frac{30\\mathbin{:}10}{40\\mathbin{:}10}=\\frac{3}{4}$' },
-            { text: { eu: '3k eta 4k ez dute zatitzaile komunik (1 izan ezik): laburtezina da.', es: '3 y 4 no tienen divisores comunes (salvo el 1): es irreducible.', en: '3 and 4 have no common divisors (except 1): it is in its simplest form.', ar: 'لا قاسم مشتركًا لـ 3 و4 (غير 1): الكسر في أبسط صورة.' }, math: notation('$@GCD(30,40)=10$') },
+            { text: { eu: 'Biak 10 zenbakiaz zatitu daitezke (0 zifrarekin amaitzen dira).', es: 'Los dos se pueden dividir entre 10 (acaban en 0).', en: 'Both can be divided by 10 (they end in 0).', ar: 'يمكن قسمة الاثنين على 10 (ينتهيان بـ 0).' }, math: '$\\frac{30}{40}=\\frac{30\\mathbin{:}10}{40\\mathbin{:}10}=\\frac{3}{4}$' },
+            { text: { eu: '3 eta 4 zenbakiek ez dute zatitzaile komunik (1 izan ezik): laburtezina da.', es: '3 y 4 no tienen divisores comunes (salvo el 1): es irreducible.', en: '3 and 4 have no common divisors (except 1): it is in its simplest form.', ar: 'لا قاسم مشتركًا لـ 3 و4 (غير 1): الكسر في أبسط صورة.' }, math: notation('$@GCD(30,40)=10$') },
             { title: { eu: 'Anplifikatu', es: 'Amplificar', en: 'Expanding', ar: 'التوسيع' }, text: { eu: 'Alderantziz, biderkatuz zatiki baliokide gehiago lortzen dira.', es: 'Al revés, multiplicando se obtienen más fracciones equivalentes.', en: 'The other way round, multiplying gives more equivalent fractions.', ar: 'وبالعكس، بالضرب نحصل على كسور متكافئة أخرى.' }, math: '$\\frac{3}{4}=\\frac{3\\cdot 5}{4\\cdot 5}=\\frac{15}{20}$' }
         ],
         example: '$\\frac{6}{15}=\\frac{6\\mathbin{:}3}{15\\mathbin{:}3}=\\frac{2}{5}$',
@@ -310,7 +310,7 @@ export const fractionsIntroTopics: UnitTopic[] = [
         problem: { eu: 'Ordenatu handienetik txikienera: $\\frac{2}{3}$, $\\frac{1}{2}$ eta $\\frac{3}{4}$.', es: 'Ordena de mayor a menor: $\\frac{2}{3}$, $\\frac{1}{2}$ y $\\frac{3}{4}$.', en: 'Order from greatest to least: $\\frac{2}{3}$, $\\frac{1}{2}$ and $\\frac{3}{4}$.', ar: 'رتّب من الأكبر إلى الأصغر: $\\frac{2}{3}$ و$\\frac{1}{2}$ و$\\frac{3}{4}$.' },
         stepsKind: 'steps',
         steps: [
-            { text: { eu: 'Izendatzaile komuna: 3, 2 eta 4ren MKT.', es: 'Denominador común: el m.c.m. de 3, 2 y 4.', en: 'Common denominator: the LCM of 3, 2 and 4.', ar: 'المقام المشترك: م.م.أ للأعداد 3 و2 و4.' }, math: notation('$@LCM(3,2,4)=12$') },
+            { text: { eu: 'Izendatzaile komuna: 3, 2 eta 4 zenbakien MKT.', es: 'Denominador común: el m.c.m. de 3, 2 y 4.', en: 'Common denominator: the LCM of 3, 2 and 4.', ar: 'المقام المشترك: م.م.أ للأعداد 3 و2 و4.' }, math: notation('$@LCM(3,2,4)=12$') },
             { text: { eu: 'Idatzi zatiki baliokideak 12 izendatzailearekin.', es: 'Escribe las fracciones equivalentes con denominador 12.', en: 'Write the equivalent fractions with denominator 12.', ar: 'اكتب الكسور المكافئة بالمقام 12.' }, math: '$\\frac{2}{3}=\\frac{8}{12}\\quad\\frac{1}{2}=\\frac{6}{12}\\quad\\frac{3}{4}=\\frac{9}{12}$' },
             { text: { eu: 'Alderatu zenbakitzaileak.', es: 'Compara los numeradores.', en: 'Compare the numerators.', ar: 'قارن البسوط.' }, math: '$\\frac{3}{4}>\\frac{2}{3}>\\frac{1}{2}$' }
         ],
@@ -437,7 +437,7 @@ export const fractionsIntroTopics: UnitTopic[] = [
         steps: [
             { text: { eu: 'Zenbakitzaile berria: 3 · 8.', es: 'Nuevo numerador: 3 · 8.', en: 'New numerator: 3 · 8.', ar: 'البسط الجديد: 3 · 8.' }, math: '$3\\cdot 8=24$' },
             { text: { eu: 'Izendatzaile berria: 4 · 1.', es: 'Nuevo denominador: 4 · 1.', en: 'New denominator: 4 · 1.', ar: 'المقام الجديد: 4 · 1.' }, math: '$4\\cdot 1=4$' },
-            { text: { eu: 'Sinplifikatu: 3/4-n sei zortziren sartzen dira.', es: 'Simplifica: en 3/4 caben seis octavos.', en: 'Simplify: six eighths fit into 3/4.', ar: 'بسّط: في 3/4 ستة أثمان.' }, math: '$\\frac{24}{4}=6$' }
+            { text: { eu: 'Sinplifikatu: 3/4 zatikian sei zortziren sartzen dira.', es: 'Simplifica: en 3/4 caben seis octavos.', en: 'Simplify: six eighths fit into 3/4.', ar: 'بسّط: في 3/4 ستة أثمان.' }, math: '$\\frac{24}{4}=6$' }
         ],
         example: '$\\frac{2}{5}\\mathbin{:}\\frac{3}{7}=\\frac{14}{15}\\qquad\\frac{4}{9}\\mathbin{:}2=\\frac{4}{18}=\\frac{2}{9}$',
         takeaway: {
@@ -464,7 +464,7 @@ export const fractionsIntroTopics: UnitTopic[] = [
             en: 'A fraction acts on a quantity: to calculate $\\frac{3}{8}$ of €120, split 120 into 8 parts (each part is 15) and take 3: €45. A shorter way: multiply the quantity by the numerator and divide by the denominator. The order does not matter, but dividing first is usually easier.',
             ar: 'يعمل الكسر على كمية: لحساب $\\frac{3}{8}$ من 120 يورو، اقسم 120 إلى 8 أجزاء (كل جزء 15) وخذ 3: ‏45 €. وباختصار: اضرب الكمية في البسط واقسم على المقام. الترتيب لا يهم، لكن القسمة أولًا أسهل عادة.'
         },
-        problem: { eu: 'Kalkulatu 120ren $\\frac{3}{8}$.', es: 'Calcula $\\frac{3}{8}$ de 120.', en: 'Calculate $\\frac{3}{8}$ of 120.', ar: 'احسب $\\frac{3}{8}$ من 120.' },
+        problem: { eu: 'Kalkulatu 120 zenbakiaren $\\frac{3}{8}$.', es: 'Calcula $\\frac{3}{8}$ de 120.', en: 'Calculate $\\frac{3}{8}$ of 120.', ar: 'احسب $\\frac{3}{8}$ من 120.' },
         stepsKind: 'steps',
         steps: [
             { text: { eu: 'Zatitu kopurua izendatzaileaz: zati baten balioa.', es: 'Divide la cantidad entre el denominador: lo que vale una parte.', en: 'Divide the quantity by the denominator: the value of one part.', ar: 'اقسم الكمية على المقام: قيمة الجزء الواحد.' }, math: '$120\\mathbin{:}8=15$' },

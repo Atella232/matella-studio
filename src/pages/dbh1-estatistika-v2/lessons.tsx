@@ -100,7 +100,7 @@ export const statisticsIntroTopics: UnitTopic[] = [
             en: 'The absolute frequency (fᵢ) of a value is the number of times it appears. The sum of all the absolute frequencies is the number of values (N). The relative frequency (hᵢ) is the absolute frequency divided by N, and it lies between 0 and 1. Multiplied by 100, it gives the percentage.',
             ar: 'التكرار المطلق (fᵢ) لقيمة هو عدد مرات تكرارها. ومجموع كل التكرارات المطلقة هو عدد البيانات (N). والتكرار النسبي (hᵢ) هو المطلق مقسومًا على N، ويقع بين 0 و1. وبضربه في 100 نحصل على النسبة المئوية.'
         },
-        problem: { eu: '20 ikasletatik 8k futbola nahiago dute. Kalkulatu maiztasun erlatiboa eta ehunekoa.', es: 'De 20 alumnos, 8 prefieren el fútbol. Calcula la frecuencia relativa y el porcentaje.', en: 'Of 20 students, 8 prefer football. Calculate the relative frequency and the percentage.', ar: 'من 20 تلميذًا يفضّل 8 كرة القدم. احسب التكرار النسبي والنسبة المئوية.' },
+        problem: { eu: '20 ikasletatik 8 ikaslek futbola nahiago dute. Kalkulatu maiztasun erlatiboa eta ehunekoa.', es: 'De 20 alumnos, 8 prefieren el fútbol. Calcula la frecuencia relativa y el porcentaje.', en: 'Of 20 students, 8 prefer football. Calculate the relative frequency and the percentage.', ar: 'من 20 تلميذًا يفضّل 8 كرة القدم. احسب التكرار النسبي والنسبة المئوية.' },
         stepsKind: 'steps',
         steps: [
             { text: { eu: 'Maiztasun absolutua: 8. Datu kopurua: N = 20.', es: 'Frecuencia absoluta: 8. Número de datos: N = 20.', en: 'Absolute frequency: 8. Number of values: N = 20.', ar: 'التكرار المطلق: 8. عدد البيانات: N = 20.' } },
@@ -194,7 +194,7 @@ export const statisticsIntroTopics: UnitTopic[] = [
             en: 'A pie chart shows the parts of a total, like a pie. The full circle (360°) is all the values. The sector for each value has an angle proportional to its relative frequency: hᵢ · 360°.',
             ar: 'يُظهر المخطط الدائري أجزاء الكل كأنه كعكة. الدائرة كاملة (360°) هي كل البيانات. ولقطاع كل قيمة زاوية تتناسب مع تكرارها النسبي: hᵢ · 360°.'
         },
-        problem: { eu: '20 ikasletatik 5ek saskibaloia nahiago dute. Zenbat gradu ditu bere sektoreak?', es: 'De 20 alumnos, 5 prefieren el baloncesto. ¿Cuántos grados mide su sector?', en: 'Of 20 students, 5 prefer basketball. How many degrees does its sector measure?', ar: 'من 20 تلميذًا يفضّل 5 كرة السلة. كم درجة قطاعها؟' },
+        problem: { eu: '20 ikasletatik 5 ikaslek saskibaloia nahiago dute. Zenbat gradu ditu bere sektoreak?', es: 'De 20 alumnos, 5 prefieren el baloncesto. ¿Cuántos grados mide su sector?', en: 'Of 20 students, 5 prefer basketball. How many degrees does its sector measure?', ar: 'من 20 تلميذًا يفضّل 5 كرة السلة. كم درجة قطاعها؟' },
         stepsKind: 'steps',
         steps: [
             { text: { eu: 'Pertsona bakoitzeko gradua: 360 zati 20.', es: 'Grados por persona: 360 entre 20.', en: 'Degrees per person: 360 divided by 20.', ar: 'درجات كل شخص: 360 على 20.' }, math: '$360\\mathbin{:}20=18$' },
@@ -404,7 +404,7 @@ export const statisticsIntroTopics: UnitTopic[] = [
             ar: 'فهم العلاقة بين التكرار النسبي والاحتمال.'
         },
         explanation: {
-            eu: 'Esperimentu bat askotan errepikatzen bada, gertaera baten maiztasun erlatiboa haren probabilitatetik gero eta hurbilago egoten da. Txanpon bat 10 aldiz botata 7 aurpegi atera daitezke (0,7), baina 1000 aldiz botata 500etik hurbil aterako dira (0,5).',
+            eu: 'Esperimentu bat askotan errepikatzen bada, gertaera baten maiztasun erlatiboa haren probabilitatetik gero eta hurbilago egoten da. Txanpon bat 10 aldiz botata 7 aurpegi atera daitezke (0,7), baina 1000 aldiz botata 500 inguru aterako dira (0,5).',
             es: 'Si un experimento se repite muchas veces, la frecuencia relativa de un suceso se acerca cada vez más a su probabilidad. Al lanzar una moneda 10 veces pueden salir 7 caras (0,7), pero al lanzarla 1000 veces saldrán cerca de 500 (0,5).',
             en: 'If an experiment is repeated many times, the relative frequency of an event gets closer and closer to its probability. When you toss a coin 10 times, you may get 7 heads (0.7), but if you toss it 1,000 times, you will get close to 500 heads (0.5).',
             ar: 'إذا تكررت تجربة مرات كثيرة يقترب التكرار النسبي لحدث أكثر فأكثر من احتماله. عند رمي قطعة نقود 10 مرات قد يظهر الوجه 7 مرات (0.7)، لكن عند رميها 1000 مرة سيظهر قرابة 500 مرة (0.5).'

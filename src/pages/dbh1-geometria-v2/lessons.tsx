@@ -361,7 +361,7 @@ export const geometryIntroTopics: UnitTopic[] = [
         ],
         example: { eu: '$\\begin{gathered}1\\ \\text{km}=1{.}000\\ \\text{m}\\\\1\\ \\text{m}^{2}=100\\ \\text{dm}^{2}\\end{gathered}$', es: '$\\begin{gathered}1\\ \\text{km}=1{.}000\\ \\text{m}\\\\1\\ \\text{m}^{2}=100\\ \\text{dm}^{2}\\end{gathered}$', en: '$\\begin{gathered}1\\ \\text{km}=1{.}000\\ \\text{m}\\\\1\\ \\text{m}^{2}=100\\ \\text{dm}^{2}\\end{gathered}$', ar: '$\\begin{gathered}1\\ \\text{km}=1000\\ \\text{m}\\\\1\\ \\text{m}^{2}=100\\ \\text{dm}^{2}\\end{gathered}$' },
         takeaway: {
-            eu: 'Luzerak: 10ez 10. Azalerak: 100ez 100.',
+            eu: 'Luzerak: urrats bakoitzean 10. Azalerak: urrats bakoitzean 100.',
             es: 'Longitudes: de 10 en 10. Superficies: de 100 en 100.',
             en: 'Lengths: in steps of 10. Areas: in steps of 100.',
             ar: 'الأطوال: من 10 إلى 10. المساحات: من 100 إلى 100.'
