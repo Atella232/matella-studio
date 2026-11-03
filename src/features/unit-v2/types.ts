@@ -114,7 +114,7 @@ export interface UnitTopic {
  * What a lesson tells, kept apart from its drawings in the unit's lessonTexts.ts (plain data, so the
  * tests can read it): definitions, explanation, cases and the example as an exercise
  */
-export type LessonTexts = Pick<UnitTopic, 'definitions' | 'explanation' | 'cases' | 'problem' | 'example' | 'examplePrompt' | 'exampleAnswer'>
+export type LessonTexts = Pick<UnitTopic, 'definitions' | 'explanation' | 'cases' | 'problem' | 'steps' | 'example' | 'examplePrompt' | 'exampleAnswer'>
 
 export interface PracticeItem {
     id: number
