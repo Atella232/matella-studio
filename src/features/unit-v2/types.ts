@@ -94,7 +94,7 @@ export interface UnitTopic {
      * (or «Example» when the lesson has no «Let's solve») and shows it above the formula
      */
     examplePrompt?: LocalizedText
-    /** The answer in words, under the formula (an obtuse triangle, 12 students…) */
+    /** The answer in words, under the formula (an obtuse triangle, 12 students…); alone when the example is '' */
     exampleAnswer?: LocalizedText
     takeaway: LocalizedText
     /** The typical mistake of the lesson, shown before the key idea */
@@ -114,7 +114,7 @@ export interface UnitTopic {
  * What a lesson tells, kept apart from its drawings in the unit's lessonTexts.ts (plain data, so the
  * tests can read it): definitions, explanation, cases and the example as an exercise
  */
-export type LessonTexts = Pick<UnitTopic, 'definitions' | 'explanation' | 'cases' | 'example' | 'examplePrompt' | 'exampleAnswer'>
+export type LessonTexts = Pick<UnitTopic, 'definitions' | 'explanation' | 'cases' | 'problem' | 'example' | 'examplePrompt' | 'exampleAnswer'>
 
 export interface PracticeItem {
     id: number

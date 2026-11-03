@@ -78,12 +78,12 @@ function property(lesson: string, name: string): string {
 const numbers = (text: string) => (text.replace(/\^\{?\d\}?/g, '').replace(/(\d)\\,(?=\d)/g, '$1').replace(/\{,\}/g, ',').match(/\d+(?:[.,]\d+)?/g) ?? []).map((n) => n.replace('.', ','))
 
 /** Words outside the formulas; a formula counts as one word */
-const countWords = (text: string) => text.replace(/\$[^$]+\$/g, ' F ').split(/\s+/).filter(Boolean).length
+const countWords = (text: string) => text.replace(/\$[^$]+\$/g, ' F ').split(/\s+/).filter((word) => /[\p{L}\p{N}]/u.test(word)).length
 
 const words = (text: string) => text.replace(/\$[^$]+\$/g, ' ')
 
 /** A formula with each letter as x, to compare it across languages that name a letter differently */
-const shape = (formula: string) => formula.replace(/\\[a-zA-Z]+|[a-zA-Z]/g, (match) => (match.length > 1 ? match : 'x'))
+const shape = (formula: string) => formula.replace(/\\(?:text|mathrm)\{[^{}]*\}/g, 'T').replace(/\\[a-zA-Z]+|[a-zA-Z]/g, (match) => (match.length > 1 ? match : 'x'))
 
 const pick = (value: string | LocalizedText, language: (typeof languages)[number]) => (typeof value === 'string' ? value : value[language])
 
@@ -189,20 +189,23 @@ for (const unit of units) {
             assert.ok(entry.examplePrompt, `${id}: the example has no statement`)
             assert.ok(countWords(entry.examplePrompt.es) <= shortWords, `${id}: a long statement`)
             const lesson = lessonSource(unit.source, id)
-            const own = new Set(numbers(entry.examplePrompt.es))
+            // one-digit numbers (the values 0, 1, 2 of a table, the 2 of a half) and π ≈ 3,14 are everywhere: they do not count
+            const big = (text: string) => numbers(text).filter((n) => n.length > 1 && n !== '3,14')
+            const own = new Set(big(entry.examplePrompt.es))
             const compare = (other: string, name: string) => {
-                const shared = [...new Set(numbers(other))].filter((n) => own.has(n))
+                const shared = [...new Set(big(other))].filter((n) => own.has(n))
                 assert.ok(shared.length <= 1, `${id}: the example repeats the numbers of ${name}: ${shared.join(', ')}`)
+                const sorted = (text: string) => numbers(text).sort().join(' ')
+                assert.ok(!numbers(other).length || sorted(other) !== sorted(entry.examplePrompt!.es), `${id}: the example has the same numbers as ${name}`)
             }
             compare(entry.problem?.es ?? property(lesson, 'problem'), '«Let\'s solve»')
             const check = unit.checks?.[id]?.check.prompt.es
             if (check) compare(check, '«Check it»')
             const example = pick(entry.example, 'es')
+            if (!example) assert.ok(entry.exampleAnswer, `${id}: an example without a formula needs its answer in words`)
             // Nor the result: a wrong answer of the mistake box that the example gives as right would confuse
             const mistake = unit.checks?.[id]?.mistake
             if (mistake) {
-                // one-digit numbers (the 2 of a half, the 4 of a square) and π ≈ 3,14 are everywhere: they do not count here
-                const big = (text: string) => numbers(text).filter((n) => n.length > 1 && n !== '3,14')
                 const shown = new Set(big(`${entry.examplePrompt.es} ${example}`))
                 const shared = [...new Set(big(`${mistake.wrong.es} ${mistake.right.es}`))].filter((n) => shown.has(n))
                 assert.ok(shared.length <= 1, `${id}: the example repeats the numbers of the typical mistake: ${shared.join(', ')}`)
@@ -227,9 +230,8 @@ for (const unit of units) {
             for (const text of allTexts(entry)) {
                 for (const language of languages) assert.ok(text[language]?.trim(), `${id}: empty ${language}`)
                 const es = formulas(text.es)
-                assert.deepEqual(formulas(text.en), es, `${id}: the formulas of en differ: ${text.en}`)
-                // Basque may name a letter its own way (A_O for the area of the base): same shape and numbers
-                assert.deepEqual(formulas(text.eu).map(shape), es.map(shape), `${id}: the formulas of eu differ: ${text.eu}`)
+                // A language may name a letter its own way (A_O for the area of the base, Med for the median): same shape and numbers
+                for (const language of ['eu', 'en'] as const) assert.deepEqual(formulas(text[language]).map(shape), es.map(shape), `${id}: the formulas of ${language} differ: ${text[language]}`)
                 assert.deepEqual(formulas(text.ar), es.map((formula) => formula.replace(/\{,\}/g, '.')), `${id}: the Arabic formulas differ: ${text.ar}`)
                 for (const language of languages) {
                     for (const formula of formulas(text[language])) katex.renderToString(formula, { throwOnError: true })

@@ -43,7 +43,8 @@ export function LessonExample({ prompt, example, answer, another, language }: {
                 <span className="lesson-example-label">{pickText(language, label)}</span>
                 <MathText text={pickText(language, prompt)} />
             </figcaption>
-            <FitMath className="fraction-v2-example" text={pickMaybeText(language, example)} />
+            {/* An example about words (a sample, a misleading chart) has no formula: only its answer */}
+            {pickMaybeText(language, example) && <FitMath className="fraction-v2-example" text={pickMaybeText(language, example)} />}
             {answer && <p className="lesson-example-answer"><MathText inline text={pickText(language, answer)} /></p>}
         </figure>
     )
