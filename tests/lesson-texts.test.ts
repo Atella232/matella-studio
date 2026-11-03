@@ -102,9 +102,9 @@ function allTexts(entry: Texts): LocalizedText[] {
     ]
 }
 
-/** The formulas of a lesson that work something out: the example, the cases and the new steps */
+/** The formulas of a lesson that work something out: the example and its answer, the cases and the new steps */
 function worked(entry: Texts): string[] {
-    const maths = [entry.example, ...(entry.cases ?? []).map((item) => item.math), ...(entry.steps ?? []).map((item) => item.math)]
+    const maths = [entry.example, entry.exampleAnswer, ...(entry.cases ?? []).map((item) => item.math), ...(entry.steps ?? []).map((item) => item.math)]
     return maths.flatMap((math) => (math ? formulas(pick(math, 'es')) : []))
 }
 
