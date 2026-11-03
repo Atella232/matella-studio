@@ -316,8 +316,20 @@ for (const unit of units) {
                 if (!/[a-zA-Z؀-ۿ]{3}/.test(words(text.es))) continue
                 assert.ok(/[؀-ۿ]/.test(words(text.ar)), `${id}: ar is not Arabic: ${text.ar}`)
                 for (const language of ['eu', 'es', 'en'] as const) assert.ok(!/[؀-ۿ]/.test(text[language]), `${id}: Arabic in ${language}: ${text[language]}`)
+                // KaTeX cannot shape Arabic inside \text{}: the Arabic words go outside the formula
+                assert.ok(!formulas(text.ar).some((formula) => /\\text\{[^}]*[؀-ۿ]/.test(formula)), `${id}: Arabic inside \\text{}: ${text.ar}`)
                 // A term may be the same word (Hipotenusa, Apotema); a sentence may not
                 if (/[a-zA-Z]{5}/.test(words(text.es)) && countWords(text.es) > 2) assert.ok(text.eu !== text.es && text.en !== text.es, `${id}: a text copied from Spanish: ${text.es}`)
+            }
+        }
+    })
+
+    test(`${unit.folder}: numbers in the words as each language groups them (2,918 in English; 15 728 in the others)`, () => {
+        for (const [id, entry] of Object.entries(unit.texts)) {
+            for (const text of allTexts(entry)) {
+                // groupDigits: English groups with a comma from four digits; the others with a space from five
+                assert.ok(!/(?<![\d.,])\d{4,}(?![\d])/.test(words(text.en)), `${id}: group the thousands in English: ${text.en}`)
+                for (const language of ['eu', 'es', 'ar'] as const) assert.ok(!/(?<![\d.,\u00a0 ])\d{5,}/.test(words(text[language])), `${id}: group the thousands in ${language}: ${text[language]}`)
             }
         }
     })

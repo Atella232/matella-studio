@@ -98,7 +98,7 @@ export const divisibilityLessonTexts: Record<DivisibilityTopicId, LessonTexts> =
             'بالنسبة إلى 2 و5 و10 يكفي النظر إلى الرقم الأخير. وما يقبل القسمة على 10 يقبلها على 2 و5 أيضًا.',
             'For 2, 5 and 10, you only need to look at the last digit. Anything divisible by 10 is also divisible by 2 and by 5.'
         ),
-        examplePrompt: say('2, 5 eta 10 zenbakietatik, zeinekin da zatigarria 4385?', '¿Por cuáles de 2, 5 y 10 es divisible 4385?', 'على أي من 2 و5 و10 يقبل 4385 القسمة؟', 'Which of 2, 5 and 10 is 4385 divisible by?'),
+        examplePrompt: say('2, 5 eta 10 zenbakietatik, zeinekin da zatigarria 4385?', '¿Por cuáles de 2, 5 y 10 es divisible 4385?', 'على أي من 2 و5 و10 يقبل 4385 القسمة؟', 'Which of 2, 5 and 10 is 4,385 divisible by?'),
         example: say('$4385\\mathbin{:}5=877$', '$4385\\mathbin{:}5=877$', '$4385\\mathbin{:}5=877$', '$4385\\mathbin{:}5=877$'),
         exampleAnswer: say('5 zenbakiarekin bakarrik: 5 zifran amaitzen da. Ez da bikoitia; beraz, ez da zatigarria 2 eta 10 zenbakiekin.', 'Solo por 5: termina en 5. No es par, así que no es divisible por 2 ni por 10.', 'على 5 فقط: آخر رقم فيه 5. وليس زوجيًا، فلا يقبل القسمة على 2 ولا على 10.', 'Only by 5: it ends in 5. It is not even, so it is not divisible by 2 or 10.')
     },
@@ -109,7 +109,7 @@ export const divisibilityLessonTexts: Record<DivisibilityTopicId, LessonTexts> =
             'بالنسبة إلى 3 و9 لا يكفي الرقم الأخير: يجب جمع كل الأرقام. وإذا كان المجموع كبيرًا يمكن جمع أرقامه من جديد. وما يقبل القسمة على 9 يقبلها على 3 أيضًا.',
             'For 3 and 9 the last digit is not enough: you have to add up all the digits. If the sum is big, you can add its digits again. Anything divisible by 9 is also divisible by 3.'
         ),
-        examplePrompt: say('7524 zenbakia 3 zenbakiarekin zatigarria da? Eta 9 zenbakiarekin?', '¿Es 7524 divisible por 3? ¿Y por 9?', 'هل يقبل 7524 القسمة على 3؟ وعلى 9؟', 'Is 7524 divisible by 3? And by 9?'),
+        examplePrompt: say('7524 zenbakia 3 zenbakiarekin zatigarria da? Eta 9 zenbakiarekin?', '¿Es 7524 divisible por 3? ¿Y por 9?', 'هل يقبل 7524 القسمة على 3؟ وعلى 9؟', 'Is 7,524 divisible by 3? And by 9?'),
         example: say('$7+5+2+4=18$', '$7+5+2+4=18$', '$7+5+2+4=18$', '$7+5+2+4=18$'),
         exampleAnswer: say('Biekin: 18 zenbakia 9 eta 3 zenbakien multiploa da.', 'Por los dos: 18 es múltiplo de 9 y de 3.', 'على كليهما: 18 مضاعف لـ9 ولـ3.', 'By both: 18 is a multiple of 9 and of 3.')
     },
@@ -120,7 +120,7 @@ export const divisibilityLessonTexts: Record<DivisibilityTopicId, LessonTexts> =
             'هاتان القاعدتان أطول، لكنهما تصلحان للأعداد الكبيرة أيضًا. في قاعدة 11 تُفصل الأرقام حسب مواقعها؛ وفي قاعدة 7 يُحذف الرقم الأخير ويُطرح ضعفه من العدد الباقي.',
             'These rules are longer, but they also work with big numbers. For 11, the digits are split by position; for 7, you remove the last digit and subtract its double from the number that is left.'
         ),
-        examplePrompt: say('5291 zenbakia 11 zenbakiarekin zatigarria da? Eta 343 zenbakia 7 zenbakiarekin?', '¿Es 5291 divisible por 11? ¿Y 343 por 7?', 'هل يقبل 5291 القسمة على 11؟ وهل يقبل 343 القسمة على 7؟', 'Is 5291 divisible by 11? And 343 by 7?'),
+        examplePrompt: say('5291 zenbakia 11 zenbakiarekin zatigarria da? Eta 343 zenbakia 7 zenbakiarekin?', '¿Es 5291 divisible por 11? ¿Y 343 por 7?', 'هل يقبل 5291 القسمة على 11؟ وهل يقبل 343 القسمة على 7؟', 'Is 5,291 divisible by 11? And 343 by 7?'),
         example: say('$\\begin{gathered}(5+9)-(2+1)=11\\\\34-2\\cdot 3=28\\end{gathered}$', '$\\begin{gathered}(5+9)-(2+1)=11\\\\34-2\\cdot 3=28\\end{gathered}$', '$\\begin{gathered}(5+9)-(2+1)=11\\\\34-2\\cdot 3=28\\end{gathered}$', '$\\begin{gathered}(5+9)-(2+1)=11\\\\34-2\\cdot 3=28\\end{gathered}$'),
         exampleAnswer: say('Biak: 11 zenbakia 11 zenbakiaren multiploa da, eta 28 zenbakia 7 zenbakiarena.', 'Los dos: 11 es múltiplo de 11, y 28 es múltiplo de 7.', 'كلاهما: 11 مضاعف لـ11، و28 مضاعف لـ7.', 'Both: 11 is a multiple of 11, and 28 is a multiple of 7.')
     },

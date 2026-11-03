@@ -204,7 +204,7 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
             'Barra-grafiko batean, web baten bisitak 4000 ziren eta orain 4400 dira, eta ardatz bertikala 3800 balioan hasten da. Zenbat igo dira benetan?',
             'Un gráfico de barras muestra que las visitas a una web pasan de 4000 a 4400, y el eje vertical empieza en 3800. ¿Cuánto han subido de verdad?',
             'يُظهر مخطط أعمدة أن زيارات موقع ارتفعت من 4000 إلى 4400، والمحور الرأسي يبدأ من 3800. كم ارتفعت فعلًا؟',
-            'A bar chart shows a website\'s visits going from 4000 to 4400, and the vertical axis starts at 3800. How much have they really gone up?'
+            'A bar chart shows a website\'s visits going from 4,000 to 4,400, and the vertical axis starts at 3,800. How much have they really gone up?'
         ),
         example: same('$\\frac{400}{4000}=0{,}1$'),
         exampleAnswer: say('% 10 bakarrik, nahiz eta barrak hirukoitza dirudien.', 'Solo un 10 %, aunque la barra parezca el triple.', '10 % فقط، وإن بدا العمود ثلاثة أضعاف.', 'Only 10%, even though the bar looks three times as tall.')

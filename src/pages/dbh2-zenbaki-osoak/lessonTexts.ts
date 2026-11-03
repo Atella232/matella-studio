@@ -48,7 +48,7 @@ export const integerLessonTexts: Record<IntegerTopicId, LessonTexts> = {
             'Itsaspeko bat 120 m-ko sakoneran dago, eta hegazkin bat 3000 m-ko altueran. Idatzi zenbaki osoekin.',
             'Un submarino está a 120 m de profundidad y un avión vuela a 3000 m de altura. Escríbelo con números enteros.',
             'غوّاصة على عمق 120 م وطائرة على ارتفاع 3000 م. اكتب ذلك بأعداد صحيحة.',
-            'A submarine is 120 m deep and a plane is flying 3000 m high. Write it with integers.'
+            'A submarine is 120 m deep and a plane is flying 3,000 m high. Write it with integers.'
         ),
         example: same('$-120\\ \\mathrm{m}\\qquad +3000\\ \\mathrm{m}$'),
         exampleAnswer: say('Itsas mailaren azpian, negatiboa; gainean, positiboa.', 'Por debajo del nivel del mar, negativo; por encima, positivo.', 'تحت مستوى سطح البحر سالب، وفوقه موجب.', 'Below sea level, negative; above it, positive.')

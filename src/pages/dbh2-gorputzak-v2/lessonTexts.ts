@@ -323,7 +323,7 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
         ],
         examplePrompt: say('Pilota batek 12 cm-ko erradioa du. Kalkulatu haren azalera.', 'Una pelota tiene 12 cm de radio. Calcula su área.', 'كرة نصف قطرها 12 سم. احسب مساحتها.', 'A ball has a 12 cm radius. Work out its area.'),
         example: same('$A=4\\cdot 3{,}14\\cdot 12^{2}=1808{,}64$'),
-        exampleAnswer: say('Azalera 1808,64 cm² da: lau zirkulu handi.', 'El área es 1808,64 cm²: cuatro círculos máximos.', 'المساحة 1808.64 سم²: أربع دوائر عظمى.', 'The area is 1808.64 cm²: four great circles.')
+        exampleAnswer: say('Azalera 1808,64 cm² da: lau zirkulu handi.', 'El área es 1808,64 cm²: cuatro círculos máximos.', 'المساحة 1808.64 سم²: أربع دوائر عظمى.', 'The area is 1,808.64 cm²: four great circles.')
     },
 
     /* ---------- 4. Volume ---------- */
@@ -338,9 +338,9 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
             'Dezimetro kubiko batean $10\\cdot 10\\cdot 10=1000$ zentimetro kubiko sartzen dira. Horregatik, maila bakoitza (km³, hm³, dam³, m³, dm³, cm³, mm³) hurrengoa baino 1000 aldiz handiagoa da: jaisteko, biderkatu 1000 maila bakoitzeko; igotzeko, zatitu.',
             'En un decímetro cúbico caben $10\\cdot 10\\cdot 10=1000$ centímetros cúbicos. Por eso cada escalón (km³, hm³, dam³, m³, dm³, cm³, mm³) es 1000 veces el siguiente: para bajar, multiplica por 1000 en cada escalón; para subir, divide.',
             'في الديسيمتر المكعب $10\\cdot 10\\cdot 10=1000$ سنتيمتر مكعب. لذلك كل درجة (km³، hm³، dam³، m³، dm³، cm³، mm³) تساوي 1000 مرة الدرجة التالية: للنزول اضرب في 1000 لكل درجة؛ وللصعود اقسم.',
-            'A cubic decimetre holds $10\\cdot 10\\cdot 10=1000$ cubic centimetres. So each step (km³, hm³, dam³, m³, dm³, cm³, mm³) is 1000 times the next one: to go down, multiply by 1000 at each step; to go up, divide.'
+            'A cubic decimetre holds $10\\cdot 10\\cdot 10=1000$ cubic centimetres. So each step (km³, hm³, dam³, m³, dm³, cm³, mm³) is 1,000 times the next one: to go down, multiply by 1,000 at each step; to go up, divide.'
         ),
-        examplePrompt: say('Adierazi dm³-tan: 7200 cm³ eta 0,8 m³.', 'Expresa en dm³: 7200 cm³ y 0,8 m³.', 'عبّر بـdm³ عن: 7200 cm³ و0.8 m³.', 'Write in dm³: 7200 cm³ and 0.8 m³.'),
+        examplePrompt: say('Adierazi dm³-tan: 7200 cm³ eta 0,8 m³.', 'Expresa en dm³: 7200 cm³ y 0,8 m³.', 'عبّر بـdm³ عن: 7200 cm³ و0.8 m³.', 'Write in dm³: 7,200 cm³ and 0.8 m³.'),
         example: same('$\\begin{gathered}7200\\mathbin{:}1000=7{,}2\\\\0{,}8\\cdot 1000=800\\end{gathered}$'),
         exampleAnswer: say('7,2 dm³ eta 800 dm³: igotzeko zatitu egiten da; jaisteko, biderkatu.', '7,2 dm³ y 800 dm³: para subir se divide; para bajar, se multiplica.', '7.2 dm³ و800 dm³: للصعود نقسم، وللنزول نضرب.', '7.2 dm³ and 800 dm³: to go up you divide; to go down, you multiply.')
     },
@@ -355,7 +355,7 @@ export const solidsLessonTexts: Record<SolidsTopicId, LessonTexts> = {
             'Litro bat dezimetro bateko ertza duen kubo batean sartzen dena da: $1\\ \\text{dm}^{3}=1\\ \\text{L}$. Hortik, $1\\ \\text{cm}^{3}=1\\ \\text{mL}$ eta $1\\ \\text{m}^{3}=1000\\ \\text{L}$. Edukiera-unitateak hamarnaka doaz, eta bolumenekoak milaka. Ur litro batek ia kilo bat pisatzen du.',
             'Un litro es lo que cabe en un cubo de un decímetro de arista: $1\\ \\text{dm}^{3}=1\\ \\text{L}$. De ahí, $1\\ \\text{cm}^{3}=1\\ \\text{mL}$ y $1\\ \\text{m}^{3}=1000\\ \\text{L}$. Las unidades de capacidad van de 10 en 10, y las de volumen, de 1000 en 1000. Un litro de agua pesa casi un kilo.',
             'اللتر هو ما يتسع له مكعب طول حرفه ديسيمتر: $1\\ \\text{dm}^{3}=1\\ \\text{L}$. ومن ذلك $1\\ \\text{cm}^{3}=1\\ \\text{mL}$ و$1\\ \\text{m}^{3}=1000\\ \\text{L}$. تتدرج وحدات السعة عشرة عشرة، ووحدات الحجم ألفًا ألفًا. ولتر الماء يزن نحو كيلوغرام.',
-            'A litre is what fits in a cube with a one-decimetre edge: $1\\ \\text{dm}^{3}=1\\ \\text{L}$. So $1\\ \\text{cm}^{3}=1\\ \\text{mL}$ and $1\\ \\text{m}^{3}=1000\\ \\text{L}$. Units of capacity go in steps of 10, and units of volume in steps of 1000. A litre of water weighs about a kilogram.'
+            'A litre is what fits in a cube with a one-decimetre edge: $1\\ \\text{dm}^{3}=1\\ \\text{L}$. So $1\\ \\text{cm}^{3}=1\\ \\text{mL}$ and $1\\ \\text{m}^{3}=1000\\ \\text{L}$. Units of capacity go in steps of 10, and units of volume in steps of 1,000. A litre of water weighs about a kilogram.'
         ),
         examplePrompt: say('Botila batek 750 cm³-ko edukiera du. Zenbat litro dira?', 'Una botella tiene 750 cm³ de capacidad. ¿Cuántos litros son?', 'سعة زجاجة 750 cm³. كم لترًا هي؟', 'A bottle holds 750 cm³. How many litres is that?'),
         example: same('$750\\mathbin{:}1000=0{,}75$'),
