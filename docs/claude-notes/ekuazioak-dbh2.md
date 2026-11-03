@@ -20,3 +20,5 @@ Branch `feat/ekuazioak-dbh2-games` (stacked on `feat/aljebra-dbh2-games`). Two m
 Trick: in Arabic text, a number with ° must be isolated (`⁦…°⁩`), or the sign jumps to the other side.
 
 Deployed 2026-11-02: main fd383b3, bundle `index-NhNlFoWP.js`; checked live at 375 px in eu, es and ar (every new game opens and starts, no overflow, no console errors).
+
+**«Error típico» y «Compruébalo» (mejoras 5 y 7 de la teoría, rama `feat/teoria-error-check`, sin publicar):** commit 6fd35b3. Cada lección lleva su error típico y su pregunta en `lessonChecks.ts` (`equationLessonChecks`, sobre `EquationTopicId`), mezclados en `lessons.tsx`. El test resuelve las ecuaciones de las preguntas; en f608932 las fórmulas con flecha llevan cada lado entre llaves para cortarse tras la flecha. Reglas, test y revisión a 375 px en `teoria-dbh2.md`.

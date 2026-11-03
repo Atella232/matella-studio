@@ -12,3 +12,5 @@ Branch `feat/pitagoras-dbh2-games` (stacked on the Aljebra and Ekuazioak game br
 Tricks: Arabic prose uses «م» for metres; SVG text needs `direction="ltr"`. A CSS rule on `span` inside a box that holds MathText must use `> span`, or it styles every KaTeX span.
 
 Deployed 2026-11-02: main fd383b3, bundle `index-NhNlFoWP.js`; checked live at 375 px in eu, es and ar (every new game opens and starts, no overflow, no console errors).
+
+**«Error típico» y «Compruébalo» (mejoras 5 y 7 de la teoría, rama `feat/teoria-error-check`, sin publicar):** commit f717f44. Cada lección lleva su error típico y su pregunta en `lessonChecks.ts` (`pythagorasLessonChecks`, sobre `PythagorasTopicId`), mezclados en `lessons.tsx`. Las cajas de hypotenuse, leg y triangle-height repiten el error que ya nombra la explicación. Reglas, test y revisión a 375 px en `teoria-dbh2.md`.

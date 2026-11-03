@@ -20,3 +20,5 @@ Branch `feat/aljebra-dbh2-games`. Two more games of this topic, besides the quic
 Shared: `RoundVerdict` now lives in `RoundGame.tsx`; `WorkedDetectiveGame` shows a long fix on two lines, split at `\ \to\ `. Trick: detective lines must stay under ~230 px at 21 px (phone); measure them in the browser with KaTeX before committing.
 
 Deployed 2026-11-02: main fd383b3, bundle `index-NhNlFoWP.js`; checked live at 375 px in eu, es and ar (every new game opens and starts, no overflow, no console errors).
+
+**«Error típico» y «Compruébalo» (mejoras 5 y 7 de la teoría, rama `feat/teoria-error-check`, sin publicar):** commit ab339d9. Cada lección lleva su error típico y su pregunta en `lessonChecks.ts` (`algebraLessonChecks`, sobre `AlgebraTopicId`), mezclados en `lessons.tsx`. El test comprueba las expresiones con letras dando números a las letras. Reglas, test y revisión a 375 px en `teoria-dbh2.md`.

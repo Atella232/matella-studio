@@ -19,3 +19,5 @@ New shared pieces, for the rest of 2. DBH: `src/features/unit-v2/games/RoundGame
 Tricks: in Basque, problem numbers go in `$…$` and the words after them carry the case (`$8$ langilek`). Euro amounts in money games are written with `toFixed(2)` and the language's decimal mark, not LaTeX.
 
 Deployed 2026-11-01: main 942edd4, bundle `index-CpeeiNuH.js`; checked live at 375 px in eu, es and ar (four games open and start, no overflow, no console errors).
+
+**«Error típico» y «Compruébalo» (mejoras 5 y 7 de la teoría, rama `feat/teoria-error-check`, sin publicar):** commit 1497ad1. Cada lección lleva su error típico y su pregunta en `lessonChecks.ts` (`proportionLessonChecks`, sobre `ProportionTopicId`), mezclados en `lessons.tsx`. Porcentajes en las palabras («% 12» en euskera); en f608932 las fórmulas con flecha llevan cada lado entre llaves. Reglas, test y revisión a 375 px en `teoria-dbh2.md`.

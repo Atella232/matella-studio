@@ -26,3 +26,5 @@ Branch `feat/funtzioak-dbh2-games` (stacked on the other 2. DBH game branches). 
 Trick: the game's own CSS imports `../Functions.css` for the plane, which the unit page also loads.
 
 Deployed 2026-11-02: main fd383b3, bundle `index-NhNlFoWP.js`; checked live at 375 px in eu, es and ar (every new game opens and starts, no overflow, no console errors).
+
+**«Error típico» y «Compruébalo» (mejoras 5 y 7 de la teoría, rama `feat/teoria-error-check`, sin publicar):** commit 9f8b832. Cada lección lleva su error típico y su pregunta en `lessonChecks.ts` (`functionsLessonChecks`, sobre `FunctionsTopicId`), mezclados en `lessons.tsx`. La tarjeta no tiene dibujo: las gráficas se dan con palabras. Reglas, test y revisión a 375 px en `teoria-dbh2.md`.
