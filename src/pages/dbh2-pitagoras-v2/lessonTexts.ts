@@ -18,6 +18,11 @@ const same = (value: string): LocalizedText => say(value, value, value, value)
 export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
     /* ---------- 1. The theorem ---------- */
     squares: {
+        vocabulary: [
+            say('triangelu angeluzuzena', 'triángulo rectángulo', 'المثلث القائم الزاوية', 'right-angled triangle'),
+            say('karratua', 'cuadrado', 'المربع', 'square'),
+            say('azalera', 'área', 'المساحة', 'area')
+        ],
         definitions: [
             {
                 term: say('Katetoak', 'Catetos', 'الضلعان القائمان', 'Legs'),
@@ -44,6 +49,10 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
         exampleAnswer: say('Beste karratuak 56 cm² ditu: txiki bat falta zen, eta kendu egiten da.', 'El otro cuadrado mide 56 cm²: faltaba uno pequeño, así que se resta.', 'مساحة المربع الآخر 56 سم²: كان الناقص صغيرًا فنطرح.', 'The other square measures 56 cm²: a small one was missing, so you subtract.')
     },
     formula: {
+        vocabulary: [
+            say('katetoak', 'catetos', 'الضلعان القائمان', 'legs'),
+            say('hipotenusa', 'hipotenusa', 'الوتر', 'hypotenuse')
+        ],
         definitions: [
             {
                 term: say('Pitagorasen teorema', 'Teorema de Pitágoras', 'نظرية فيثاغورس', 'Pythagoras\' theorem'),
@@ -71,6 +80,10 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
         exampleAnswer: say('Hipotenusa $DE$ da, $F$ erpinaren aurrean dagoen aldea.', 'La hipotenusa es $DE$, el lado opuesto a $F$.', 'الوتر هو $DE$، الضلع المقابل لـ$F$.', 'The hypotenuse is $DE$, the side opposite $F$.')
     },
     triples: {
+        vocabulary: [
+            say('biderkatu', 'multiplicar', 'الضرب', 'multiply'),
+            say('handiena', 'mayor', 'الأكبر', 'largest')
+        ],
         definitions: [
             {
                 term: say('Hirukote pitagorikoa', 'Terna pitagórica', 'الثلاثية الفيثاغورية', 'Pythagorean triple'),
@@ -82,6 +95,15 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
                 )
             }
         ],
+        why: {
+            text: say(
+                '3, 4 eta 5 zenbakiek $3^{2}+4^{2}=5^{2}$ betetzen badute, hiru aldeak 2 zenbakiaz biderkatzean karratu bakoitza 4 zenbakiaz biderkatzen da, eta berdintzak bere horretan jarraitzen du: $6^{2}+8^{2}=10^{2}$. Triangelu bera da, baina handiagoa.',
+                'Si 3, 4 y 5 cumplen $3^{2}+4^{2}=5^{2}$, al multiplicar los tres lados por 2 cada cuadrado se multiplica por 4, y la igualdad sigue en pie: $6^{2}+8^{2}=10^{2}$. Es el mismo triángulo, pero más grande.',
+                'إذا حققت 3 و4 و5 المساواة $3^{2}+4^{2}=5^{2}$ فإن ضرب الأضلاع الثلاثة في 2 يضرب كل مربع في 4، وتبقى المساواة صحيحة: $6^{2}+8^{2}=10^{2}$. إنه المثلث نفسه لكنه أكبر.',
+                'If 3, 4 and 5 satisfy $3^{2}+4^{2}=5^{2}$, multiplying the three sides by 2 multiplies each square by 4, and the equality still holds: $6^{2}+8^{2}=10^{2}$. It is the same triangle, only bigger.'
+            ),
+            math: same('$6^{2}+8^{2}=36+64=100=10^{2}$')
+        },
         explanation: say(
             'Hiru zenbaki hirukote bat diren jakiteko, batu bi txikienen karratuak eta konparatu handienaren karratuarekin. Ezagunenak: 3, 4, 5 eta 5, 12, 13. Hirukote bat zenbaki batez biderkatuta, beste bat ateratzen da: 3, 4, 5 bider 2, 6, 8, 10 da.',
             'Para comprobar si tres números son una terna, suma los cuadrados de los dos menores y compara con el cuadrado del mayor. Las más conocidas: 3, 4, 5 y 5, 12, 13. Multiplicando una terna por un número sale otra: 3, 4, 5 por 2 es 6, 8, 10.',
@@ -95,6 +117,19 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
 
     /* ---------- 2. Finding a side ---------- */
     hypotenuse: {
+        vocabulary: [
+            say('erro karratua', 'raíz cuadrada', 'الجذر التربيعي', 'square root'),
+            say('katetoak', 'catetos', 'الضلعان القائمان', 'legs')
+        ],
+        why: {
+            text: say(
+                '$a^{2}=b^{2}+c^{2}$ denez, hipotenusaren karratua kateto bakoitzarena baino handiagoa da, eta, beraz, hipotenusa da alderik luzeena. Eta bi katetoen batura baino txikiagoa da, bi punturen arteko bide zuzena laburrena delako.',
+                'Como $a^{2}=b^{2}+c^{2}$, el cuadrado de la hipotenusa es mayor que el de cada cateto, así que la hipotenusa es el lado más largo. Y es menor que la suma de los dos catetos, porque el camino recto entre dos puntos es el más corto.',
+                'بما أن $a^{2}=b^{2}+c^{2}$ فإن مربع الوتر أكبر من مربع كل ضلع قائم، لذلك الوتر هو أطول الأضلاع. وهو أصغر من مجموع الضلعين القائمين، لأن الطريق المستقيم بين نقطتين هو الأقصر.',
+                'Since $a^{2}=b^{2}+c^{2}$, the square of the hypotenuse is bigger than that of each leg, so the hypotenuse is the longest side. And it is shorter than the two legs together, because the straight path between two points is the shortest.'
+            ),
+            math: same('$\\begin{gathered}5^{2}=3^{2}+4^{2}\\\\4<5<3+4\\end{gathered}$')
+        },
         explanation: say(
             'Bi katetoekin, hipotenusa hiru urratsetan ateratzen da: jaso katetoak karratura, batu, eta atera erroa: $a=\\sqrt{b^{2}+c^{2}}$. Hipotenusak katetorik handiena baino handiagoa izan behar du, eta bien batura baino txikiagoa.',
             'Con los dos catetos, la hipotenusa sale en tres pasos: eleva los catetos al cuadrado, súmalos y saca la raíz: $a=\\sqrt{b^{2}+c^{2}}$. La hipotenusa tiene que salir mayor que el cateto mayor y menor que la suma de los dos.',
@@ -123,6 +158,19 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
         exampleAnswer: say('Hipotenusa 34 cm da: 30 baino handiagoa eta 46 baino txikiagoa.', 'La hipotenusa mide 34 cm: más que 30 y menos que 46.', 'طول الوتر 34 سم: أكبر من 30 وأصغر من 46.', 'The hypotenuse is 34 cm: more than 30 and less than 46.')
     },
     leg: {
+        vocabulary: [
+            say('kenketa', 'resta', 'الطرح', 'subtraction'),
+            say('erro karratua', 'raíz cuadrada', 'الجذر التربيعي', 'square root')
+        ],
+        why: {
+            text: say(
+                'Teoremaren formula bera da, askatuta: $a^{2}=b^{2}+c^{2}$ bada, bi ataletan $c^{2}$ kenduta $b^{2}=a^{2}-c^{2}$ geratzen da. Horregatik, kateto baterako kendu egiten da: hipotenusaren karratuari beste katetoaren karratua kentzen zaio.',
+                'Es la misma fórmula del teorema, despejada: si $a^{2}=b^{2}+c^{2}$, restando $c^{2}$ en los dos miembros queda $b^{2}=a^{2}-c^{2}$. Por eso, para un cateto se resta: al cuadrado de la hipotenusa se le quita el cuadrado del otro cateto.',
+                'إنها صيغة النظرية نفسها بعد العزل: إذا كان $a^{2}=b^{2}+c^{2}$ فبطرح $c^{2}$ من الطرفين نحصل على $b^{2}=a^{2}-c^{2}$. لذلك نطرح لحساب ضلع قائم: نأخذ من مربع الوتر مربع الضلع القائم الآخر.',
+                'It is the theorem\'s formula, rearranged: if $a^{2}=b^{2}+c^{2}$, subtracting $c^{2}$ on both sides leaves $b^{2}=a^{2}-c^{2}$. That is why you subtract for a leg: you take the square of the other leg away from the square of the hypotenuse.'
+            ),
+            math: same('$10^{2}-6^{2}=100-36=64=8^{2}$')
+        },
         explanation: say(
             'Hipotenusarekin eta kateto batekin, beste katetoa kenketa batekin ateratzen da: $b=\\sqrt{a^{2}-c^{2}}$. Hipotenusaren karratuari katetoarena kentzen zaio, eta azkenik erroa ateratzen da. 13 hipotenusarekin eta 5 katetoarekin, $\\sqrt{169-25}=\\sqrt{144}=12$. Katetoa beti da hipotenusa baino txikiagoa.',
             'Con la hipotenusa y un cateto, el otro cateto sale con una resta: $b=\\sqrt{a^{2}-c^{2}}$. Al cuadrado de la hipotenusa se le resta el del cateto, y al final se saca la raíz. Con hipotenusa 13 y cateto 5, $\\sqrt{169-25}=\\sqrt{144}=12$. Un cateto siempre es menor que la hipotenusa.',
@@ -139,6 +187,11 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
         exampleAnswer: say('Beste katetoa 40 m da, hipotenusa baino txikiagoa.', 'El otro cateto mide 40 m, menos que la hipotenusa.', 'طول الضلع الآخر 40 م، أصغر من الوتر.', 'The other leg is 40 m, shorter than the hypotenuse.')
     },
     classify: {
+        vocabulary: [
+            say('angelu zuzena', 'ángulo recto', 'الزاوية القائمة', 'right angle'),
+            say('alde handiena', 'lado mayor', 'الضلع الأكبر', 'longest side'),
+            say('aurkako angelua', 'ángulo opuesto', 'الزاوية المقابلة', 'opposite angle')
+        ],
         explanation: say(
             'Teoremak alderantziz ere balio du. Izan bedi $a$ alde handiena: konparatu haren karratua beste bien karratuen baturarekin. Emaitzak esaten du nolakoa den alde handienaren aurreko angelua.',
             'El teorema también sirve al revés. Sea $a$ el lado mayor: compara su cuadrado con la suma de los cuadrados de los otros dos. El resultado dice cómo es el ángulo opuesto al lado mayor.',
@@ -174,6 +227,12 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
 
     /* ---------- 3. Plane figures ---------- */
     'triangle-height': {
+        vocabulary: [
+            say('altuera', 'altura', 'الارتفاع', 'height'),
+            say('oinarria', 'base', 'القاعدة', 'base'),
+            say('triangelu isoszelea', 'triángulo isósceles', 'المثلث المتساوي الساقين', 'isosceles triangle'),
+            say('triangelu aldeberdina', 'triángulo equilátero', 'المثلث المتساوي الأضلاع', 'equilateral triangle')
+        ],
         explanation: say(
             'Triangelu isoszele batean, alde desberdinaren gaineko altuerak oinarria erdibitzen du eta bi triangelu angeluzuzen sortzen ditu. Bakoitzean, alde berdina hipotenusa da, eta oinarri-erdia eta altuera katetoak: $h=\\sqrt{l^{2}-\\left(\\frac{b}{2}\\right)^{2}}$.',
             'En un triángulo isósceles, la altura sobre el lado desigual parte la base por la mitad y forma dos triángulos rectángulos. En cada uno, el lado igual es la hipotenusa, y la media base y la altura son los catetos: $h=\\sqrt{l^{2}-\\left(\\frac{b}{2}\\right)^{2}}$.',
@@ -202,6 +261,11 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
         exampleAnswer: say('Altuera 24 cm da. Kontuz: oinarri-erdia, 7, ez 14.', 'La altura mide 24 cm. Ojo: la media base, 7, no 14.', 'الارتفاع 24 سم. انتبه: نصف القاعدة 7 لا 14.', 'The height is 24 cm. Careful: half the base, 7, not 14.')
     },
     diagonals: {
+        vocabulary: [
+            say('diagonala', 'diagonal', 'القطر', 'diagonal'),
+            say('erronboa', 'rombo', 'المعيّن', 'rhombus'),
+            say('laukizuzena', 'rectángulo', 'المستطيل', 'rectangle')
+        ],
         definitions: [
             {
                 term: say('Diagonal-erdiak', 'Semidiagonales', 'نصفا القطرين', 'Half-diagonals'),
@@ -241,6 +305,10 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
         exampleAnswer: say('Diagonala 52 cm da.', 'La diagonal mide 52 cm.', 'طول القطر 52 سم.', 'The diagonal is 52 cm.')
     },
     trapezoid: {
+        vocabulary: [
+            say('alde zeiharra', 'lado oblicuo', 'الضلع المائل', 'slanted side'),
+            say('oinarri handia', 'base mayor', 'القاعدة الكبرى', 'longer base')
+        ],
         explanation: say(
             'Oinarri txikiaren erpin batetik altuera marrazten baduzu, triangelu angeluzuzen bat ateratzen da: alde zeiharra hipotenusa da, altuera kateto bat, eta beste katetoa oinarri handiaren zati bat. Zati hori trapezio motaren araberakoa da.',
             'Si trazas la altura desde un vértice de la base menor, sale un triángulo rectángulo: el lado oblicuo es la hipotenusa, la altura es un cateto y el otro cateto es un trozo de la base mayor. Ese trozo depende del tipo de trapecio.',
@@ -271,6 +339,10 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
 
     /* ---------- 4. The circle and regular polygons ---------- */
     apothem: {
+        vocabulary: [
+            say('poligono erregularra', 'polígono regular', 'المضلع المنتظم', 'regular polygon'),
+            say('hexagonoa', 'hexágono', 'السداسي', 'hexagon')
+        ],
         definitions: [
             {
                 term: say('Apotema', 'Apotema', 'العامد', 'Apothem'),
@@ -302,6 +374,11 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
         exampleAnswer: say('Apotema 5,2 cm ingurukoa da.', 'La apotema mide unos 5,2 cm.', 'طول العامد نحو 5.2 سم.', 'The apothem is about 5.2 cm.')
     },
     chord: {
+        vocabulary: [
+            say('zentroa', 'centro', 'المركز', 'centre'),
+            say('perpendikularra', 'perpendicular', 'العمودي', 'perpendicular'),
+            say('erradioa', 'radio', 'نصف القطر', 'radius')
+        ],
         definitions: [
             {
                 term: say('Korda', 'Cuerda', 'وتر الدائرة', 'Chord'),
@@ -324,6 +401,10 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
         exampleAnswer: say('Korda zentrotik 8 cm-ra dago. Kontuz: korda-erdia, 15, ez 30.', 'La cuerda está a 8 cm del centro. Ojo: media cuerda, 15, no 30.', 'يبعد الوتر 8 سم عن المركز. انتبه: نصف الوتر 15 لا 30.', 'The chord is 8 cm from the centre. Careful: half the chord, 15, not 30.')
     },
     tangent: {
+        vocabulary: [
+            say('ukipen-puntua', 'punto de tangencia', 'نقطة التماس', 'point of tangency'),
+            say('kanpoko puntua', 'punto exterior', 'نقطة خارجية', 'outside point')
+        ],
         definitions: [
             {
                 term: say('Zuzen ukitzailea', 'Recta tangente', 'المماس', 'Tangent line'),
@@ -348,6 +429,11 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
 
     /* ---------- 5. In space and in real life ---------- */
     box: {
+        vocabulary: [
+            say('ortoedroa', 'ortoedro', 'متوازي المستطيلات', 'cuboid'),
+            say('kuboa', 'cubo', 'المكعب', 'cube'),
+            say('oinarriaren diagonala', 'diagonal de la base', 'قطر القاعدة', 'diagonal of the base')
+        ],
         definitions: [
             {
                 term: say('Ortoedroaren diagonala', 'Diagonal del ortoedro', 'قطر متوازي المستطيلات', 'Space diagonal'),
@@ -382,6 +468,11 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
         exampleAnswer: say('Diagonala 26 dm da: bai, sartzen da.', 'La diagonal mide 26 dm: sí, cabe.', 'طول القطر 26 دسم: نعم، يدخل.', 'The diagonal is 26 dm: yes, it fits.')
     },
     grid: {
+        vocabulary: [
+            say('sarea', 'cuadrícula', 'الشبكة', 'grid'),
+            say('zuzenkia', 'segmento', 'القطعة', 'segment'),
+            say('horizontala', 'horizontal', 'أفقي', 'horizontal')
+        ],
         explanation: say(
             'Sare batean, bi puntu lotzen dituen zuzenkia triangelu angeluzuzen baten hipotenusa da. Katetoak horizontalean eta bertikalean zenbatzen diren laukiak dira: $\\sqrt{(x_2-x_1)^{2}+(y_2-y_1)^{2}}$. $A(1,1)$ puntutik $B(7,9)$ puntura 6 lauki daude horizontalean eta 8 bertikalean: $\\sqrt{36+64}=10$.',
             'En una cuadrícula, el segmento que une dos puntos es la hipotenusa de un triángulo rectángulo. Los catetos son los cuadros que se cuentan en horizontal y en vertical: $\\sqrt{(x_2-x_1)^{2}+(y_2-y_1)^{2}}$. De $A(1,1)$ a $B(7,9)$ hay 6 cuadros en horizontal y 8 en vertical: $\\sqrt{36+64}=10$.',
@@ -398,6 +489,10 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
         exampleAnswer: say('Abiapuntutik 17 km-ra dago.', 'Está a 17 km del punto de partida.', 'تبعد 17 كم عن نقطة الانطلاق.', 'The hiker is 17 km from the starting point.')
     },
     problems: {
+        vocabulary: [
+            say('angelu zuzena', 'ángulo recto', 'الزاوية القائمة', 'right angle'),
+            say('itzala', 'sombra', 'الظل', 'shadow')
+        ],
         explanation: say(
             'Problema askotan triangelu angeluzuzen bat dago ezkutatuta: horma eta lurra, poste bat eta haren itzala, masta baten kablea. Kalkulatu aurretik, bilatu angelu zuzena eta erabaki zein den hipotenusa: angelu zuzenaren aurreko aldea, luzeena.',
             'En muchos problemas hay un triángulo rectángulo escondido: la pared y el suelo, un poste y su sombra, el cable de un mástil. Antes de calcular, busca el ángulo recto y decide cuál es la hipotenusa: el lado frente al ángulo recto, el más largo.',
