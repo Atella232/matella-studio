@@ -18,6 +18,11 @@ const same = (value: string): LocalizedText => say(value, value, value, value)
 export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
     /* ---------- 1. Functions ---------- */
     coordinates: {
+        vocabulary: [
+            say('jatorria', 'origen', 'نقطة الأصل', 'origin'),
+            say('koadrantea', 'cuadrante', 'الربع', 'quadrant'),
+            say('ardatzak', 'ejes', 'المحاور', 'axes')
+        ],
         definitions: [
             {
                 term: say('Plano kartesiarra', 'Plano cartesiano', 'المستوى الإحداثي', 'Cartesian plane'),
@@ -55,6 +60,10 @@ export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
         exampleAnswer: say('Unitate bat ezkerrera eta lau behera: hirugarren koadrantea.', 'Una unidad a la izquierda y cuatro hacia abajo: tercer cuadrante.', 'وحدة إلى اليسار وأربع إلى الأسفل: الربع الثالث.', 'One unit left and four down: the third quadrant.')
     },
     function: {
+        vocabulary: [
+            say('zuzen bertikala', 'recta vertical', 'المستقيم الرأسي', 'vertical line'),
+            say('grafikoa', 'gráfica', 'الرسم', 'graph')
+        ],
         definitions: [
             {
                 term: say('Funtzioa', 'Función', 'الدالة', 'Function'),
@@ -66,6 +75,14 @@ export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
                 )
             }
         ],
+        why: {
+            text: say(
+                'Zuzen bertikal bat $x$ bera duten puntu guztiak dira. Grafikoa bi puntutan ebakitzen badu, $x$ horrek bi $y$ balio ditu, eta hori ezin da gertatu funtzio batean.',
+                'Una recta vertical son todos los puntos con la misma $x$. Si corta la gráfica en dos puntos, esa $x$ tiene dos valores de $y$, y eso no puede pasar en una función.',
+                'المستقيم الرأسي هو كل النقاط التي لها $x$ نفسه. فإذا قطع الرسم في نقطتين كان لهذا $x$ قيمتان لـ $y$، وهذا لا يحدث في دالة.',
+                'A vertical line is all the points with the same $x$. If it cuts the graph at two points, that $x$ has two values of $y$, and that cannot happen in a function.'
+            )
+        },
         explanation: say(
             'Bi $x$ desberdinek $y$ bera izan dezakete; baina $x$ berak ezin ditu bi $y$ izan. Grafiko batean, zuzen bertikal batek ezin du inoiz kurba puntu batean baino gehiagotan ebaki.',
             'Dos valores distintos de $x$ pueden tener la misma $y$; lo que no puede pasar es que una misma $x$ tenga dos $y$. En una gráfica, una recta vertical nunca puede cortar la curva en más de un punto.',
@@ -82,6 +99,10 @@ export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
         exampleAnswer: say('Bai: denbora bakoitzak prezio bakarra du. 3 balioa errepikatzeak ez du axola.', 'Sí: cada tiempo tiene un solo precio. Que el 3 se repita no importa.', 'نعم: لكل زمن سعر واحد. ولا يهم أن تتكرر القيمة 3.', 'Yes: each time has only one price. It does not matter that 3 is repeated.')
     },
     variables: {
+        vocabulary: [
+            say('menpe egon', 'depender', 'يعتمد', 'depend'),
+            say('emaitza', 'resultado', 'النتيجة', 'result')
+        ],
         definitions: [
             {
                 term: say('Aldagai askea', 'Variable independiente', 'المتغير المستقل', 'Independent variable'),
@@ -113,6 +134,11 @@ export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
         )
     },
     tables: {
+        vocabulary: [
+            say('balio-taula', 'tabla de valores', 'جدول القيم', 'table of values'),
+            say('zutabea', 'columna', 'العمود', 'column'),
+            say('puntua', 'punto', 'النقطة', 'point')
+        ],
         explanation: say(
             'Balio-taula batean $x$ balioak eta arauak (formulak) ematen dizkien $y$ emaitzak idazten dira. Zutabe bakoitza $(x, y)$ puntu bat da; puntuak planoan jarrita, grafikoa lortzen da. Funtzio bat denez, $x$ bakoitzak zutabe bakarra du.',
             'En una tabla de valores se escriben los valores de $x$ y los resultados $y$ que les da la regla (la fórmula). Cada columna es un punto $(x, y)$; al situarlos en el plano se obtiene la gráfica. Como es una función, cada $x$ tiene una sola columna.',
@@ -124,6 +150,10 @@ export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
         exampleAnswer: say('$3-(-2)=5$, $3-1=2$ eta $3-4=-1$: puntuak $(-2,\\,5)$, $(1,\\,2)$ eta $(4,\\,-1)$ dira.', '$3-(-2)=5$, $3-1=2$ y $3-4=-1$: los puntos son $(-2,\\,5)$, $(1,\\,2)$ y $(4,\\,-1)$.', '$3-(-2)=5$ و$3-1=2$ و$3-4=-1$: النقاط $(-2,\\,5)$ و$(1,\\,2)$ و$(4,\\,-1)$.', '$3-(-2)=5$, $3-1=2$ and $3-4=-1$: the points are $(-2,\\,5)$, $(1,\\,2)$ and $(4,\\,-1)$.')
     },
     formula: {
+        vocabulary: [
+            say('sarrera', 'entrada', 'المدخل', 'input'),
+            say('emaitza', 'resultado', 'النتيجة', 'output')
+        ],
         explanation: say(
             'Funtzio bat formula batekin ematen da: $y=2x+1$ edo $f(x)=2x+1$. $f(x)$ idazkeran, $x$ sarrera da eta $f(x)$ emaitza. $f(3)$ kalkulatzeko, ordeztu $x$ 3 zenbakiarekin eta egin eragiketak hierarkiaz: lehenik berreturak. $f(a)=b$ esateak $(a, b)$ puntua funtzioarena dela esan nahi du.',
             'Una función se da con una fórmula: $y=2x+1$ o $f(x)=2x+1$. En $f(x)$, $x$ es la entrada y $f(x)$ el resultado. Para calcular $f(3)$, sustituye $x$ por 3 y opera con la jerarquía: primero las potencias. Decir $f(a)=b$ significa que el punto $(a, b)$ es de la función.',
@@ -135,6 +165,11 @@ export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
         exampleAnswer: say('$g(-3)=21$: $(-3,\\,21)$ puntua funtzioarena da.', '$g(-3)=21$: el punto $(-3,\\,21)$ es de la función.', '$g(-3)=21$: النقطة $(-3,\\,21)$ تنتمي إلى الدالة.', '$g(-3)=21$: the point $(-3,\\,21)$ belongs to the function.')
     },
     plot: {
+        vocabulary: [
+            say('eskala', 'escala', 'التدريج', 'scale'),
+            say('zuzena', 'recta', 'المستقيم', 'straight line'),
+            say('kurba', 'curva', 'المنحنى', 'curve')
+        ],
         explanation: say(
             'Funtzio bat marrazteko, egin balio-taula, kokatu puntuak eta elkartu, magnitudeak tarteko balioak hartzen baditu. Zuzen baterako bi puntu nahikoak dira; kurba baterako, zenbat eta puntu gehiago, orduan eta zehatzagoa. Aukeratu ardatz bakoitzaren eskala, aldaketak ondo ikusteko.',
             'Para dibujar una función, haz la tabla de valores, sitúa los puntos y únelos si la magnitud admite valores intermedios. Para una recta bastan dos puntos; para una curva, cuantos más puntos, más precisa sale. Elige la escala de cada eje para que se vean bien los cambios.',
@@ -146,6 +181,10 @@ export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
         exampleAnswer: say('Zuzen bat da: bi puntu nahikoak dira, $(0,\\,-3)$ eta $(2,\\,1)$.', 'Es una recta: bastan dos puntos, $(0,\\,-3)$ y $(2,\\,1)$.', 'إنها خط مستقيم: تكفي نقطتان، $(0,\\,-3)$ و$(2,\\,1)$.', 'It is a straight line: two points are enough, $(0,\\,-3)$ and $(2,\\,1)$.')
     },
     continuity: {
+        vocabulary: [
+            say('tarteko balioak', 'valores intermedios', 'القيم الوسيطة', 'in-between values'),
+            say('denbora', 'tiempo', 'الزمن', 'time')
+        ],
         definitions: [
             {
                 term: say('Grafiko jarraitua', 'Gráfica continua', 'الرسم المتصل', 'Continuous graph'),
@@ -174,6 +213,10 @@ export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
 
     /* ---------- 2. Reading graphs ---------- */
     'graph-reading': {
+        vocabulary: [
+            say('X ardatza', 'eje X', 'المحور X', 'X axis'),
+            say('laukia', 'cuadro', 'الخانة', 'square')
+        ],
         explanation: say(
             'Begiratu lehenik ardatz bakoitzak zer neurtzen duen eta lauki bakoitzak zenbat balio duen. $f(a)$ lortzeko: bilatu $a$ X ardatzean, igo edo jaitsi kurbaraino eta irakurri Y ardatzean. Alderantziz, abiatu $b$ balioaren Y ardatzetik. $y$ balio berak hainbat $x$ izan ditzake.',
             'Mira primero qué mide cada eje y cuánto vale cada cuadro. Para hallar $f(a)$: busca $a$ en el eje X, sube o baja hasta la curva y lee en el eje Y. Al revés, parte de $b$ en el eje Y. Un mismo valor de $y$ puede tener varias $x$.',
@@ -190,12 +233,24 @@ export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
         exampleAnswer: say('$f(3)=6$; eta $y=3$ bi puntutan: $x=1$ eta $x=6$.', '$f(3)=6$; y $y=3$ en dos puntos: $x=1$ y $x=6$.', '$f(3)=6$، و$y=3$ في نقطتين: $x=1$ و$x=6$.', '$f(3)=6$; and $y=3$ at two points: $x=1$ and $x=6$.')
     },
     intercepts: {
+        vocabulary: [
+            say('Y ardatza', 'eje Y', 'المحور Y', 'Y axis'),
+            say('ebazpenak', 'soluciones', 'الحلول', 'solutions')
+        ],
         definitions: [
             {
                 term: say('Ebakidura-puntuak', 'Puntos de corte', 'نقاط التقاطع', 'Intercepts'),
                 meaning: say('Grafikoak ardatzak mozten dituen puntuak. Haietako batean, koordenatuetako bat 0 da.', 'Los puntos donde la gráfica cruza los ejes. En cada uno, una de las coordenadas vale 0.', 'النقاط التي يقطع فيها الرسم المحورين. وفي كل منها يساوي أحد الإحداثيين 0.', 'The points where the graph crosses the axes. At each one, one of the coordinates is 0.')
             }
         ],
+        why: {
+            text: say(
+                'Y ardatzeko puntu guztiek $x=0$ dute, eta funtzio batek balio bakarra ematen du $x$ bakoitzerako: $f(0)$. Horregatik, Y ardatzarekin ebakidura bat dago gehienez. X ardatzean $y=0$ da, eta $x$ askok eman dezakete $y=0$: ebakidura bat baino gehiago egon daitezke.',
+                'Todos los puntos del eje Y tienen $x=0$, y una función da un solo valor para cada $x$: $f(0)$. Por eso hay como mucho un corte con el eje Y. En el eje X es $y=0$, y muchos valores de $x$ pueden dar $y=0$: puede haber varios cortes.',
+                'كل نقاط المحور Y لها $x=0$، والدالة تعطي قيمة واحدة لكل $x$: $f(0)$. لذلك يوجد تقاطع واحد على الأكثر مع المحور Y. أما على المحور X فإن $y=0$، وقد تعطي قيم كثيرة لـ $x$ القيمة $y=0$: فقد توجد عدة نقاط تقاطع.',
+                'All the points on the Y axis have $x=0$, and a function gives only one value for each $x$: $f(0)$. That is why there is at most one Y-intercept. On the X axis $y=0$, and many values of $x$ can give $y=0$: there can be several intercepts.'
+            )
+        },
         explanation: say(
             'Y ardatzarekiko ebakiduran $x=0$ da: $(0, f(0))$ puntua, eta gehienez bat dago. X ardatzarekiko ebakiduretan $y=0$ da: $f(x)=0$ ekuazioaren ebazpenak dira, eta bat, hainbat edo bat ere ez egon daitezke.',
             'En el corte con el eje Y se cumple $x=0$: es el punto $(0, f(0))$, y hay como mucho uno. En los cortes con el eje X se cumple $y=0$: son las soluciones de $f(x)=0$, y puede haber uno, varios o ninguno.',
@@ -207,6 +262,11 @@ export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
         exampleAnswer: say('Y ardatza $(0,\\,-9)$ puntuan ebakitzen du, eta X ardatza $(-3,\\,0)$ eta $(3,\\,0)$ puntuetan.', 'Corta al eje Y en $(0,\\,-9)$ y al eje X en $(-3,\\,0)$ y $(3,\\,0)$.', 'تقطع محور Y في $(0,\\,-9)$ ومحور X في $(-3,\\,0)$ و$(3,\\,0)$.', 'It crosses the y-axis at $(0,\\,-9)$ and the x-axis at $(-3,\\,0)$ and $(3,\\,0)$.')
     },
     variation: {
+        vocabulary: [
+            say('gorakorra', 'creciente', 'متزايدة', 'increasing'),
+            say('beherakorra', 'decreciente', 'متناقصة', 'decreasing'),
+            say('tartea', 'intervalo', 'الفترة', 'interval')
+        ],
         explanation: say(
             'Irakurri grafikoa ezkerretik eskuinera. Gora badoa, funtzioa gorakorra da tarte horretan ($x$ handitzean $y$ handitzen da); behera badoa, beherakorra; horizontala bada, konstantea. Tarteak $x$ balioen tarteekin ematen dira, $(0, 2)$ bezala, inoiz ez $y$ balioekin.',
             'Lee la gráfica de izquierda a derecha. Si sube, la función es creciente en ese tramo (al aumentar $x$, aumenta $y$); si baja, decreciente; si es horizontal, constante. Los tramos se dan con intervalos de valores de $x$, como $(0, 2)$, nunca de $y$.',
@@ -223,6 +283,11 @@ export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
         exampleAnswer: say('Beherakorra $(0,\\,2)$ tartean eta gorakorra $(2,\\,6)$ tartean.', 'Decreciente en $(0,\\,2)$ y creciente en $(2,\\,6)$.', 'متناقصة في $(0,\\,2)$ ومتزايدة في $(2,\\,6)$.', 'Decreasing on $(0,\\,2)$ and increasing on $(2,\\,6)$.')
     },
     extremes: {
+        vocabulary: [
+            say('absolutua', 'absoluto', 'المطلق', 'absolute'),
+            say('puntu altuena', 'punto más alto', 'أعلى نقطة', 'highest point'),
+            say('puntu baxuena', 'punto más bajo', 'أدنى نقطة', 'lowest point')
+        ],
         definitions: [
             {
                 term: say('Maximoa', 'Máximo', 'القيمة العظمى', 'Maximum'),
@@ -256,6 +321,10 @@ export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
 
     /* ---------- 3. Straight lines ---------- */
     'direct-proportion': {
+        vocabulary: [
+            say('jatorria', 'origen', 'نقطة الأصل', 'origin'),
+            say('bikoiztu', 'duplicar', 'المضاعفة', 'double')
+        ],
         definitions: [
             {
                 term: say('Proportzionaltasun zuzeneko funtzioa', 'Función de proporcionalidad directa', 'دالة التناسب الطردي', 'Direct proportion function'),
@@ -278,12 +347,25 @@ export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
         exampleAnswer: say('15 minututan 120 litro botatzen ditu. Zuzena $(0,\\,0)$ puntutik pasatzen da.', 'En 15 minutos echa 120 litros. La recta pasa por $(0,\\,0)$.', 'في 15 دقيقة يصبّ 120 لترًا. ويمر الخط بالنقطة $(0,\\,0)$.', 'In 15 minutes it pours 120 litres. The line passes through $(0,\\,0)$.')
     },
     slope: {
+        vocabulary: [
+            say('aldaketa', 'cambio', 'التغير', 'change'),
+            say('ordena', 'orden', 'الترتيب', 'order')
+        ],
         definitions: [
             {
                 term: say('Malda', 'Pendiente', 'الميل', 'Slope'),
                 meaning: say('$x$ unitate bat aurreratzean $y$ zenbat igotzen edo jaisten den: zuzenaren makurdura.', 'Cuánto sube o baja $y$ por cada unidad que avanza $x$: la inclinación de la recta.', 'مقدار صعود $y$ أو هبوطها لكل وحدة تتقدّمها $x$: انحدار الخط.', 'How much $y$ goes up or down for each unit $x$ moves: how steep the line is.')
             }
         ],
+        why: {
+            text: say(
+                'Zuzen batean, $y$ beti kopuru berean aldatzen da $x$ 1 handitzen den bakoitzean. Horregatik, edozein bi punturen artean, $y$ aldagaiaren aldaketa $x$ aldagaiarenarekiko proportzionala da, eta zatidura berdina ateratzen da. $y=2x+1$ funtzioan:',
+                'En una recta, $y$ cambia siempre lo mismo cada vez que $x$ aumenta 1. Por eso, entre dos puntos cualesquiera, el cambio de $y$ es proporcional al de $x$, y el cociente sale igual. En $y=2x+1$:',
+                'في المستقيم يتغير $y$ دائمًا بالمقدار نفسه كلما زاد $x$ بمقدار 1. لذلك بين أي نقطتين يكون تغير $y$ متناسبًا مع تغير $x$، ويخرج خارج القسمة نفسه. في $y=2x+1$:',
+                'On a straight line, $y$ always changes by the same amount each time $x$ goes up by 1. That is why, between any two points, the change in $y$ is proportional to the change in $x$, and the quotient comes out the same. For $y=2x+1$:'
+            ),
+            math: same('$\\begin{gathered}\\frac{9-3}{4-1}=\\frac{6}{3}=2\\\\\\frac{5-1}{2-0}=\\frac{4}{2}=2\\end{gathered}$')
+        },
         explanation: say(
             'Zuzeneko bi puntu emanda, $(x_1, y_1)$ eta $(x_2, y_2)$, malda $m=\\dfrac{y_2-y_1}{x_2-x_1}$ da: $y$ aldagaiaren aldaketa zati $x$ aldagaiarena. Kendu beti ordena berean. Zuzen baten edozein bi puntuk malda bera ematen dute.',
             'Dados dos puntos de la recta, $(x_1, y_1)$ y $(x_2, y_2)$, la pendiente es $m=\\dfrac{y_2-y_1}{x_2-x_1}$: el cambio de $y$ entre el cambio de $x$. Resta siempre en el mismo orden. Dos puntos cualesquiera de una recta dan la misma pendiente.',
@@ -295,6 +377,10 @@ export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
         exampleAnswer: say('Malda $-\\frac{1}{2}$ da: zuzena unitate erdi jaisten da eskuinerako unitate bakoitzeko.', 'La pendiente es $-\\frac{1}{2}$: la recta baja media unidad por cada unidad a la derecha.', 'الميل $-\\frac{1}{2}$: ينزل الخط نصف وحدة لكل وحدة إلى اليمين.', 'The slope is $-\\frac{1}{2}$: the line goes down half a unit for each unit to the right.')
     },
     'slope-sign': {
+        vocabulary: [
+            say('balio absolutua', 'valor absoluto', 'القيمة المطلقة', 'absolute value'),
+            say('zuzen bertikala', 'recta vertical', 'المستقيم الرأسي', 'vertical line')
+        ],
         explanation: say(
             'Maldaren zeinuak esaten du nora doan zuzena, eta haren balio absolutuak zenbat makurtzen den: $|m|$ zenbat eta handiagoa, orduan eta aldapatsuagoa. Zuzen bertikal batek ez du maldarik ($\\Delta x=0$) eta ez da funtzioa.',
             'El signo de la pendiente dice hacia dónde va la recta, y su valor absoluto, cuánto se inclina: cuanto mayor es $|m|$, más inclinada. Una recta vertical no tiene pendiente ($\\Delta x=0$) y no es una función.',
@@ -321,12 +407,24 @@ export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
         )
     },
     affine: {
+        vocabulary: [
+            say('malda', 'pendiente', 'الميل', 'slope'),
+            say('puntua', 'punto', 'النقطة', 'point')
+        ],
         definitions: [
             {
                 term: say('Funtzio lineala (afina)', 'Función lineal (afín)', 'الدالة الخطية (التآلفية)', 'Linear function'),
                 meaning: say('$y=mx+n$: $m$ maldako zuzena, Y ardatza $(0, n)$ puntuan ebakitzen duena.', '$y=mx+n$: una recta de pendiente $m$ que corta al eje Y en $(0, n)$.', '$y=mx+n$: خط مستقيم ميله $m$ يقطع محور Y في $(0, n)$.', '$y=mx+n$: a straight line with slope $m$ that crosses the y-axis at $(0, n)$.')
             }
         ],
+        why: {
+            text: say(
+                'Y ardatzean $x=0$ da, eta orduan $y=m\\cdot 0+n=n$. Horregatik zuzenak Y ardatza $(0, n)$ puntuan ebakitzen du. Eta $x$ 1 handitzen den bakoitzean, $y$ aldagaia $m$ aldatzen da: malda.',
+                'En el eje Y es $x=0$, y entonces $y=m\\cdot 0+n=n$. Por eso la recta corta el eje Y en $(0, n)$. Y cada vez que $x$ aumenta 1, $y$ cambia $m$: la pendiente.',
+                'على المحور Y يكون $x=0$، وعندها $y=m\\cdot 0+n=n$. لذلك يقطع المستقيم المحور Y في $(0, n)$. وكلما زاد $x$ بمقدار 1 تغيّر $y$ بمقدار $m$: الميل.',
+                'On the Y axis $x=0$, and then $y=m\\cdot 0+n=n$. That is why the line cuts the Y axis at $(0, n)$. And each time $x$ goes up by 1, $y$ changes by $m$: the slope.'
+            )
+        },
         explanation: say(
             'Marrazteko, kokatu $(0, n)$ puntua eta erabili malda beste puntu bat aurkitzeko: $\\Delta x$ eskuinera eta $\\Delta y$ gora. $n=0$ denean, proportzionaltasun zuzeneko funtzioa da, $y=mx$.',
             'Para dibujarla, marca $(0, n)$ y usa la pendiente para hallar otro punto: $\\Delta x$ a la derecha y $\\Delta y$ hacia arriba. Cuando $n=0$ es la función de proporcionalidad directa, $y=mx$.',
@@ -343,6 +441,10 @@ export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
         exampleAnswer: say('9 km-k 22 € balio dute; $n=4$ ezer egin gabe ordaintzen dena da.', '9 km cuestan 22 €; $n=4$ es lo que se paga sin recorrer nada.', '9 كم تكلّف 22 €؛ و$n=4$ هو ما يُدفع دون قطع أي مسافة.', '9 km cost €22; $n=4$ is what you pay before going anywhere.')
     },
     constant: {
+        vocabulary: [
+            say('zuzen horizontala', 'recta horizontal', 'المستقيم الأفقي', 'horizontal line'),
+            say('zuzen bertikalak', 'rectas verticales', 'المستقيمات الرأسية', 'vertical lines')
+        ],
         definitions: [
             {
                 term: say('Funtzio konstantea', 'Función constante', 'الدالة الثابتة', 'Constant function'),
@@ -365,6 +467,11 @@ export const functionsLessonTexts: Record<FunctionsTopicId, LessonTexts> = {
         exampleAnswer: say('Beti 20 €: zuzen horizontal bat da.', 'Siempre 20 €: es una recta horizontal.', 'دائمًا 20 €: إنها خط أفقي.', 'Always €20: it is a horizontal line.')
     },
     'line-equation': {
+        vocabulary: [
+            say('ekuazioa', 'ecuación', 'المعادلة', 'equation'),
+            say('bi puntu', 'dos puntos', 'نقطتان', 'two points'),
+            say('askatu', 'despejar', 'اعزل', 'solve for')
+        ],
         explanation: say(
             'Bi puntu nahikoak dira zuzen bat zehazteko. Lehenik, kalkulatu $m$ bi puntuekin. Gero, aurkitu $n$: ordeztu puntu bat $y=mx+n$ ekuazioan eta askatu $n$, edo irakurri, $x=0$ duen punturen bat badago. Idatzi ekuazioa eta egiaztatu beste puntuarekin.',
             'Dos puntos bastan para determinar una recta. Primero calcula $m$ con los dos puntos. Después halla $n$: sustituye un punto en $y=mx+n$ y despeja $n$, o léela si hay un punto con $x=0$. Escribe la ecuación y comprueba con el otro punto.',
