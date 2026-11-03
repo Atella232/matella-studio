@@ -18,7 +18,7 @@ const same = (value: string): LocalizedText => say(value, value, value, value)
 export const proportionLessonChecks: Record<ProportionTopicId, { mistake: LessonMistake; check: LessonCheck }> = {
     'proportion-review': {
         mistake: {
-            wrong: same('$\\frac{4}{7}=\\frac{x}{21}\\ \\to\\ x=\\frac{7\\cdot 21}{4}$'),
+            wrong: same('${\\frac{4}{7}=\\frac{x}{21}}\\ \\to\\ {x=\\frac{7\\cdot 21}{4}}$'),
             right: say('Biderkadura gurutzatuak: $7\\cdot x=4\\cdot 21=84$; beraz, $x=84\\mathbin{:}7=12$.', 'Productos cruzados: $7\\cdot x=4\\cdot 21=84$, así que $x=84\\mathbin{:}7=12$.', 'الضرب التبادلي: $7\\cdot x=4\\cdot 21=84$، إذن $x=84\\mathbin{:}7=12$.', 'Cross products: $7\\cdot x=4\\cdot 21=84$, so $x=84\\mathbin{:}7=12$.')
         },
         check: {

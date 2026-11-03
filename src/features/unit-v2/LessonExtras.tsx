@@ -26,11 +26,12 @@ export function LessonMistakeBox({ mistake, language }: { mistake: LessonMistake
             <span className="lesson-mistake-label">{pickText(language, { eu: 'Ohiko akatsa', es: 'Error típico', en: 'Common mistake', ar: 'خطأ شائع' })}</span>
             <p className="lesson-mistake-wrong">
                 <span className="lesson-mistake-mark" role="img" aria-label={pickText(language, { eu: 'Gaizki', es: 'Mal', en: 'Wrong', ar: 'خطأ' })}><Icon name="close" size={16} strokeWidth={3} /></span>
-                <MathText text={pickText(language, mistake.wrong)} />
+                {/* Inline even when the line is only a formula, so a long one wraps on a phone instead of overflowing */}
+                <MathText inline text={pickText(language, mistake.wrong)} />
             </p>
             <p className="lesson-mistake-right">
                 <span className="lesson-mistake-mark" role="img" aria-label={pickText(language, { eu: 'Ondo', es: 'Bien', en: 'Right', ar: 'صحيح' })}><Icon name="check" size={16} strokeWidth={3} /></span>
-                <MathText text={pickText(language, mistake.right)} />
+                <MathText inline text={pickText(language, mistake.right)} />
             </p>
         </aside>
     )

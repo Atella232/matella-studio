@@ -28,7 +28,7 @@ export const equationLessonChecks: Record<EquationTopicId, { mistake: LessonMist
     },
     elements: {
         mistake: {
-            wrong: same('$2x=10\\ \\to\\ x=10-2=8$'),
+            wrong: same('${2x=10}\\ \\to\\ {x=10-2=8}$'),
             right: say('2 zenbakiak x biderkatzen du: bi atalak 2 zenbakiaz zatitzen dira, $x=10\\mathbin{:}2=5$.', 'El 2 multiplica a x: se dividen los dos miembros entre 2, $x=10\\mathbin{:}2=5$.', 'العدد 2 يضرب x: نقسم الطرفين على 2، $x=10\\mathbin{:}2=5$.', 'The 2 multiplies x: divide both sides by 2, $x=10\\mathbin{:}2=5$.')
         },
         check: {
@@ -40,7 +40,7 @@ export const equationLessonChecks: Record<EquationTopicId, { mistake: LessonMist
     },
     simple: {
         mistake: {
-            wrong: same('$4x+3=x+9\\ \\to\\ 4x+x=9+3$'),
+            wrong: same('${4x+3=x+9}\\ \\to\\ {4x+x=9+3}$'),
             right: say('Atalez aldatzean, zeinua aldatzen da: $4x-x=9-3$, $3x=6$ eta $x=2$.', 'Al cambiar de miembro, cambia el signo: $4x-x=9-3$, $3x=6$ y $x=2$.', 'عند تغيير الطرف تتغيّر الإشارة: $4x-x=9-3$، و$3x=6$، و$x=2$.', 'When a term changes side, its sign changes: $4x-x=9-3$, $3x=6$ and $x=2$.')
         },
         check: {
@@ -52,7 +52,7 @@ export const equationLessonChecks: Record<EquationTopicId, { mistake: LessonMist
     },
     brackets: {
         mistake: {
-            wrong: same('$5-(x-3)=4\\ \\to\\ 5-x-3=4$'),
+            wrong: same('${5-(x-3)=4}\\ \\to\\ {5-x-3=4}$'),
             right: say('Minusaren atzean zeinu guztiak aldatzen dira: $5-x+3=4$; beraz, $x=4$.', 'Tras el menos cambian todos los signos: $5-x+3=4$, así que $x=4$.', 'بعد الناقص تتغيّر كل الإشارات: $5-x+3=4$، إذن $x=4$.', 'After the minus every sign changes: $5-x+3=4$, so $x=4$.')
         },
         check: {
@@ -64,7 +64,7 @@ export const equationLessonChecks: Record<EquationTopicId, { mistake: LessonMist
     },
     special: {
         mistake: {
-            wrong: same('$3x+2=3x+5\\ \\to\\ 0x=3\\ \\to\\ x=3$'),
+            wrong: same('${3x+2=3x+5}\\ \\to\\ {0x=3}\\ \\to\\ {x=3}$'),
             right: say('Ezein zenbaki bider 0 ez da 3: ekuazioak ez du ebazpenik.', 'Ningún número por 0 da 3: la ecuación no tiene solución.', 'لا يوجد عدد إذا ضُرب في 0 أعطى 3: ليس للمعادلة حل.', 'No number times 0 gives 3: the equation has no solution.')
         },
         check: {
@@ -80,7 +80,7 @@ export const equationLessonChecks: Record<EquationTopicId, { mistake: LessonMist
     },
     denominators: {
         mistake: {
-            wrong: same('$\\frac{x}{4}+3=5\\ \\to\\ x+3=20$'),
+            wrong: same('${\\frac{x}{4}+3=5}\\ \\to\\ {x+3=20}$'),
             right: say('Gai guztiak biderkatu behar dira 4 zenbakiaz, baita 3 ere: $x+12=20$; beraz, $x=8$.', 'Hay que multiplicar todos los términos por 4, también el 3: $x+12=20$, así que $x=8$.', 'يجب ضرب كل الحدود في 4، والعدد 3 أيضًا: $x+12=20$، إذن $x=8$.', 'Every term must be multiplied by 4, the 3 as well: $x+12=20$, so $x=8$.')
         },
         check: {
@@ -92,7 +92,7 @@ export const equationLessonChecks: Record<EquationTopicId, { mistake: LessonMist
     },
     lcm: {
         mistake: {
-            wrong: same('$\\frac{x}{4}+\\frac{x}{6}=5\\ \\to\\ x+x=60$'),
+            wrong: same('${\\frac{x}{4}+\\frac{x}{6}=5}\\ \\to\\ {x+x=60}$'),
             right: say('Zatiki bakoitzean, MKT zati izendatzailea: $12\\mathbin{:}4=3$ eta $12\\mathbin{:}6=2$. $3x+2x=60$ geratzen da, eta $x=12$.', 'En cada fracción, m.c.m. entre denominador: $12\\mathbin{:}4=3$ y $12\\mathbin{:}6=2$. Queda $3x+2x=60$, y $x=12$.', 'في كل كسر نقسم م.م.أ على المقام: $12\\mathbin{:}4=3$ و$12\\mathbin{:}6=2$. فيبقى $3x+2x=60$، و$x=12$.', 'In each fraction, LCM divided by the denominator: $12\\mathbin{:}4=3$ and $12\\mathbin{:}6=2$. That leaves $3x+2x=60$, and $x=12$.')
         },
         check: {
@@ -104,7 +104,7 @@ export const equationLessonChecks: Record<EquationTopicId, { mistake: LessonMist
     },
     mixed: {
         mistake: {
-            wrong: same('$\\frac{x}{2}-\\frac{x-4}{3}=2\\ \\to\\ 3x-2x-8=12$'),
+            wrong: same('${\\frac{x}{2}-\\frac{x-4}{3}=2}\\ \\to\\ {3x-2x-8=12}$'),
             right: say('$x-4$ zenbakitzailea parentesi artean doa: $3x-2(x-4)=12$, hau da, $3x-2x+8=12$, eta $x=4$.', 'El numerador $x-4$ va entre paréntesis: $3x-2(x-4)=12$, es decir, $3x-2x+8=12$, y $x=4$.', 'البسط $x-4$ يوضع بين قوسين: $3x-2(x-4)=12$، أي $3x-2x+8=12$، و$x=4$.', 'The numerator $x-4$ goes in brackets: $3x-2(x-4)=12$, that is $3x-2x+8=12$, and $x=4$.')
         },
         check: {
@@ -164,7 +164,7 @@ export const equationLessonChecks: Record<EquationTopicId, { mistake: LessonMist
     },
     incomplete: {
         mistake: {
-            wrong: same('$x^{2}=6x\\ \\to\\ x=6$'),
+            wrong: same('${x^{2}=6x}\\ \\to\\ {x=6}$'),
             right: say('x-z zatitzean $x=0$ galtzen da. Atera faktore komuna: $x(x-6)=0$; beraz, $x=0$ eta $x=6$.', 'Al dividir entre x se pierde $x=0$. Saca factor común: $x(x-6)=0$, así que $x=0$ y $x=6$.', 'عند القسمة على x يضيع الحل $x=0$. أخرج العامل المشترك: $x(x-6)=0$، إذن $x=0$ و$x=6$.', 'Dividing by x loses $x=0$. Take out the common factor: $x(x-6)=0$, so $x=0$ and $x=6$.')
         },
         check: {
