@@ -318,6 +318,7 @@ for (const unit of units) {
     }
 
     test(`${unit.folder}: vocabulary and «Why does it work?» are short, and each word is the one the lesson uses`, () => {
+        const unused: string[] = []
         for (const [id, entry] of Object.entries(unit.texts)) {
             if (entry.why) assert.ok(countWords(entry.why.text.es) <= whyWords, `${id}: «Why» has ${countWords(entry.why.text.es)} words`)
             const words = entry.vocabulary ?? []
@@ -341,10 +342,11 @@ for (const unit of units) {
                 ].join(' '))
                 for (const word of words) {
                     const found = stems(word[language], language)
-                    assert.ok(!found.length || found.some((stem) => corpus.includes(stem)), `${id}: the lesson never uses «${word[language]}» (${language})`)
+                    if (found.length && !found.some((stem) => corpus.includes(stem))) unused.push(`${id}: «${word[language]}» (${language})`)
                 }
             }
         }
+        assert.deepEqual(unused, [], 'words the lesson never uses')
     })
 
     test(`${unit.folder}: texts in four languages, same formulas, all drawn by KaTeX`, () => {
