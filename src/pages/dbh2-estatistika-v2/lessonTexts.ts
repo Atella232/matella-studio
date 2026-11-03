@@ -363,7 +363,7 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
                 'فروق البيانات عن المتوسط فوقه وتحته تتعادل دائمًا: مع 2 و4 و9 يكون المتوسط 5، و$-3-1+4=0$. ولو لم نحذف الإشارات لكان المجموع 0 في أي مجموعة. لذلك يستعمل الانحراف المتوسط القيم المطلقة.',
                 'The distances above and below the mean always balance out: with 2, 4 and 9 the mean is 5, and $-3-1+4=0$. Without removing the signs, the sum would be 0 for any group. That is why the mean deviation uses absolute values.'
             ),
-            math: same('$|2-5|+|4-5|+|9-5|=3+1+4=8$')
+            math: same('$\\begin{aligned}&|2-5|+|4-5|+|9-5|\\\\&=3+1+4=8\\end{aligned}$')
         },
         explanation: say(
             'Bi talderen batez bestekoa berdina izan daiteke eta datuak oso modu desberdinean banatuta egon. Ibiltartea azkarra da, baina bi datu bakarrik begiratzen ditu; batez besteko desbideratzeak denak hartzen ditu kontuan: $\\text{DM}=\\frac{\\sum |x_i-\\bar{x}|\\cdot f_i}{N}$. Distantziak beti positiboak dira.',

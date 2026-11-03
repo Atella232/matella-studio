@@ -203,7 +203,7 @@ export const integerLessonTexts: Record<IntegerTopicId, LessonTexts> = {
                 'الطرح عكس الجمع: إذا كان $(+5)+(-3)=+2$ فإن الطرح $(+2)-(-3)$ يجب أن يعيدنا إلى $+5$. وللانتقال من $+2$ إلى $+5$ نجمع $+3$: فطرح العدد السالب هو جمع معاكسه.',
                 'Subtracting undoes adding: if $(+5)+(-3)=+2$, then $(+2)-(-3)$ has to take you back to $+5$. And to get from $+2$ to $+5$ you add $+3$: subtracting a negative is adding its opposite.'
             ),
-            math: same('$(+2)-(-3)=(+2)+(+3)=+5$')
+            math: same('$\\begin{aligned}(+2)-(-3)&=(+2)+(+3)\\\\&=+5\\end{aligned}$')
         },
         explanation: say(
             'Bi zenbaki oso kentzeko, lehenengoari bigarrenaren aurkakoa batzen zaio: $a-b=a+(-b)$. Horrela kenketa guztiak batuketa bihurtzen dira. Kontuz: negatibo bat kentzea gora egitea da.',

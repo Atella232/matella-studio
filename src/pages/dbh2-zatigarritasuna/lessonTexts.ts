@@ -138,7 +138,7 @@ export const divisibilityLessonTexts: Record<DivisibilityTopicId, LessonTexts> =
                 'لأن $10=9+1$ و$100=99+1$. لذلك في $234$ تعطي المئات والعشرات جزءًا من مضاعفات 9 (و3)، ويبقى بالضبط مجموع الأرقام. فإذا قبل هذا المجموع القسمة على 9 أو على 3 قبلها العدد أيضًا.',
                 'Because $10=9+1$ and $100=99+1$. So in $234$ the hundreds and the tens give a part that is a multiple of 9 (and of 3), and what is left over is exactly the sum of the digits. If that sum can be divided by 9 or by 3, so can the number.'
             ),
-            math: '$234=2\\cdot 99+3\\cdot 9+(2+3+4)$'
+            math: '$\\begin{gathered}2\\cdot 99+3\\cdot 9=225\\\\225+(2+3+4)=234\\end{gathered}$'
         },
         explanation: say(
             '3 eta 9 zenbakietarako ez da nahikoa azken zifra: zifra guztiak batu behar dira. Batura handia bada, haren zifrak berriro batu daitezke. 9 zenbakiarekin zatigarria dena 3 zenbakiarekin ere zatigarria da.',

@@ -359,7 +359,7 @@ export const proportionLessonTexts: Record<ProportionTopicId, LessonTexts> = {
                 'الزيادة بنسبة 12٪ تعني أن نحتفظ بكل ما كان (100٪) ونضيف 12٪: المجموع 112٪، أي $1{,}12$ عددًا عشريًا. لذلك نضرب في المؤشر، وفي تخفيض بنسبة 15٪ نضرب في $0{,}85$.',
                 'Going up by 12% means keeping all you had (100%) and adding 12%: 112% in total, which as a decimal is $1{,}12$. That is why you multiply by the multiplier; and for a 15% decrease, by $0{,}85$.'
             ),
-            math: same('$750+750\\cdot 0{,}12=750\\cdot 1{,}12=840$')
+            math: same('$\\begin{aligned}750+750\\cdot 0{,}12&=750\\cdot 1{,}12\\\\&=840\\end{aligned}$')
         },
         explanation: say(
             'Amaierakoa = hasierakoa · indizea; beraz, hasierakoa = amaierakoa : indizea. % 12 igo → $\\cdot 1{,}12$; % 15 merkatu → $\\cdot 0{,}85$. Kontuz: hasierakoa lortzeko ez zaio amaierakoari ehunekoa gehitzen edo kentzen; indizearekin zatitzen da.',
