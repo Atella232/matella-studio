@@ -82,6 +82,9 @@ const countWords = (text: string) => text.replace(/\$[^$]+\$/g, ' F ').split(/\s
 
 const words = (text: string) => text.replace(/\$[^$]+\$/g, ' ')
 
+/** A formula with each letter as x, to compare it across languages that name a letter differently */
+const shape = (formula: string) => formula.replace(/\\[a-zA-Z]+|[a-zA-Z]/g, (match) => (match.length > 1 ? match : 'x'))
+
 const pick = (value: string | LocalizedText, language: (typeof languages)[number]) => (typeof value === 'string' ? value : value[language])
 
 /** Every text of a lesson that this file holds */
@@ -105,10 +108,12 @@ function worked(entry: Texts): string[] {
     return maths.flatMap((math) => (math ? formulas(pick(math, 'es')) : []))
 }
 
-/** A formula cut where it starts something new: rows, wide spaces, arrows */
+/** A formula cut where it starts something new: rows (a row that starts with = goes on with the one above), wide spaces, arrows */
 const pieces = (formula: string) => formula
     .replace(/\\begin\{[a-z]+\}(?:\{[^}]*\})?|\\end\{[a-z]+\}|&/g, ' ')
-    .split(/\\\\|\\qquad|\\quad|\\to|\\Rightarrow|\\rightarrow/)
+    .split(/\\\\/)
+    .reduce<string[]>((rows, row) => (/^\s*=/.test(row) && rows.length ? [...rows.slice(0, -1), rows.at(-1) + row] : [...rows, row]), [])
+    .flatMap((row) => row.split(/\\qquad|\\quad|\\to|\\Rightarrow|\\rightarrow/))
 
 /** The decimals of a written number: 5{,}83 has 2 */
 const decimals = (latex: string) => /\{,\}(\d+)\s*(?:\\[ ,;]|\s)*(?:\\(?:text|mathrm)\{[^{}]*\}(?:\^\{?\d\}?)?)?\s*$/.exec(latex.trim())?.[1].length ?? 0
@@ -196,8 +201,10 @@ for (const unit of units) {
             // Nor the result: a wrong answer of the mistake box that the example gives as right would confuse
             const mistake = unit.checks?.[id]?.mistake
             if (mistake) {
-                const shown = new Set(numbers(`${entry.examplePrompt.es} ${example}`))
-                const shared = [...new Set(numbers(`${mistake.wrong.es} ${mistake.right.es}`))].filter((n) => shown.has(n))
+                // one-digit numbers (the 2 of a half, the 4 of a square) and π ≈ 3,14 are everywhere: they do not count here
+                const big = (text: string) => numbers(text).filter((n) => n.length > 1 && n !== '3,14')
+                const shown = new Set(big(`${entry.examplePrompt.es} ${example}`))
+                const shared = [...new Set(big(`${mistake.wrong.es} ${mistake.right.es}`))].filter((n) => shown.has(n))
                 assert.ok(shared.length <= 1, `${id}: the example repeats the numbers of the typical mistake: ${shared.join(', ')}`)
             }
             for (const formula of formulas(example)) {
@@ -220,7 +227,9 @@ for (const unit of units) {
             for (const text of allTexts(entry)) {
                 for (const language of languages) assert.ok(text[language]?.trim(), `${id}: empty ${language}`)
                 const es = formulas(text.es)
-                for (const language of ['eu', 'en'] as const) assert.deepEqual(formulas(text[language]), es, `${id}: the formulas of ${language} differ: ${text[language]}`)
+                assert.deepEqual(formulas(text.en), es, `${id}: the formulas of en differ: ${text.en}`)
+                // Basque may name a letter its own way (A_O for the area of the base): same shape and numbers
+                assert.deepEqual(formulas(text.eu).map(shape), es.map(shape), `${id}: the formulas of eu differ: ${text.eu}`)
                 assert.deepEqual(formulas(text.ar), es.map((formula) => formula.replace(/\{,\}/g, '.')), `${id}: the Arabic formulas differ: ${text.ar}`)
                 for (const language of languages) {
                     for (const formula of formulas(text[language])) katex.renderToString(formula, { throwOnError: true })

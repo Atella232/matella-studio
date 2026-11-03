@@ -67,7 +67,7 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
             'في المثلث $DEF$ الزاوية القائمة عند $F$. اكتب النظرية وصيغة الضلع القائم $DF$.',
             'In triangle $DEF$ the right angle is at $F$. Write the theorem and the formula for the leg $DF$.'
         ),
-        example: same('$DE^{2}=DF^{2}+EF^{2}\\qquad DF^{2}=DE^{2}-EF^{2}$'),
+        example: same('$\\begin{gathered}DE^{2}=DF^{2}+EF^{2}\\\\DF^{2}=DE^{2}-EF^{2}\\end{gathered}$'),
         exampleAnswer: say('Hipotenusa $DE$ da, $F$ erpinaren aurrean dagoen aldea.', 'La hipotenusa es $DE$, el lado opuesto a $F$.', 'الوتر هو $DE$، الضلع المقابل لـ$F$.', 'The hypotenuse is $DE$, the side opposite $F$.')
     },
     triples: {
@@ -89,7 +89,7 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
             'To check whether three numbers are a triple, add the squares of the two smaller ones and compare with the square of the largest. The best-known ones: 3, 4, 5 and 5, 12, 13. Multiplying a triple by a number gives another: 3, 4, 5 times 2 gives 6, 8, 10.'
         ),
         examplePrompt: say('20, 21 eta 29 hirukote pitagorikoa da?', '¿Es 20, 21 y 29 una terna pitagórica?', 'هل 20 و21 و29 ثلاثية فيثاغورية؟', 'Are 20, 21 and 29 a Pythagorean triple?'),
-        example: same('$20^{2}+21^{2}=400+441=841=29^{2}$'),
+        example: same('$\\begin{aligned}20^{2}+21^{2}&=400+441\\\\&=841=29^{2}\\end{aligned}$'),
         exampleAnswer: say('Bai: bi txikienen karratuen batura handienaren karratua da.', 'Sí: la suma de los cuadrados de los menores es el cuadrado del mayor.', 'نعم: مجموع مربعي الأصغرين يساوي مربع الأكبر.', 'Yes: the sum of the squares of the smaller two is the square of the largest.')
     },
 
@@ -119,7 +119,7 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
             'طولا الضلعين القائمين في مثلث قائم 16 سم و30 سم. كم طول الوتر؟',
             'The legs of a right-angled triangle measure 16 cm and 30 cm. How long is the hypotenuse?'
         ),
-        example: same('$\\sqrt{16^{2}+30^{2}}=\\sqrt{256+900}=\\sqrt{1156}=34$'),
+        example: same('$\\begin{aligned}\\sqrt{16^{2}+30^{2}}&=\\sqrt{256+900}\\\\&=\\sqrt{1156}=34\\end{aligned}$'),
         exampleAnswer: say('Hipotenusa 34 cm da: 30 baino handiagoa eta 46 baino txikiagoa.', 'La hipotenusa mide 34 cm: más que 30 y menos que 46.', 'طول الوتر 34 سم: أكبر من 30 وأصغر من 46.', 'The hypotenuse is 34 cm: more than 30 and less than 46.')
     },
     leg: {
@@ -135,7 +135,7 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
             'طول الوتر 41 م وطول أحد الضلعين القائمين 9 م. كم طول الضلع الآخر؟',
             'The hypotenuse measures 41 m and one leg 9 m. How long is the other leg?'
         ),
-        example: same('$\\sqrt{41^{2}-9^{2}}=\\sqrt{1681-81}=\\sqrt{1600}=40$'),
+        example: same('$\\begin{aligned}\\sqrt{41^{2}-9^{2}}&=\\sqrt{1681-81}\\\\&=\\sqrt{1600}=40\\end{aligned}$'),
         exampleAnswer: say('Beste katetoa 40 m da, hipotenusa baino txikiagoa.', 'El otro cateto mide 40 m, menos que la hipotenusa.', 'طول الضلع الآخر 40 م، أصغر من الوتر.', 'The other leg is 40 m, shorter than the hypotenuse.')
     },
     classify: {
@@ -198,7 +198,7 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
             'في مثلث متساوي الساقين طول كل من الضلعين المتساويين 25 سم وطول القاعدة 14 سم. احسب ارتفاعه.',
             'An isosceles triangle has equal sides of 25 cm and a base of 14 cm. Work out its height.'
         ),
-        example: same('$h=\\sqrt{25^{2}-7^{2}}=\\sqrt{625-49}=\\sqrt{576}=24$'),
+        example: same('$\\begin{aligned}h&=\\sqrt{25^{2}-7^{2}}=\\sqrt{625-49}\\\\&=\\sqrt{576}=24\\end{aligned}$'),
         exampleAnswer: say('Altuera 24 cm da. Kontuz: oinarri-erdia, 7, ez 14.', 'La altura mide 24 cm. Ojo: la media base, 7, no 14.', 'الارتفاع 24 سم. انتبه: نصف القاعدة 7 لا 14.', 'The height is 24 cm. Careful: half the base, 7, not 14.')
     },
     diagonals: {
@@ -237,7 +237,7 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
             'شاشة مستطيلة عرضها 48 سم وارتفاعها 20 سم. كم طول قطرها؟',
             'A rectangular screen is 48 cm wide and 20 cm high. How long is its diagonal?'
         ),
-        example: same('$d=\\sqrt{48^{2}+20^{2}}=\\sqrt{2304+400}=\\sqrt{2704}=52$'),
+        example: same('$\\begin{aligned}d&=\\sqrt{48^{2}+20^{2}}=\\sqrt{2304+400}\\\\&=\\sqrt{2704}=52\\end{aligned}$'),
         exampleAnswer: say('Diagonala 52 cm da.', 'La diagonal mide 52 cm.', 'طول القطر 52 سم.', 'The diagonal is 52 cm.')
     },
     trapezoid: {
@@ -265,7 +265,7 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
             'شبه منحرف قائم قاعدتاه 4 م و16 م وارتفاعه 5 م. كم طول ضلعه المائل؟',
             'A right-angled trapezium has bases of 4 m and 16 m and a height of 5 m. How long is the slanted side?'
         ),
-        example: same('$16-4=12\\qquad\\sqrt{12^{2}+5^{2}}=\\sqrt{169}=13$'),
+        example: same('$\\begin{gathered}16-4=12\\\\\\sqrt{12^{2}+5^{2}}=\\sqrt{169}=13\\end{gathered}$'),
         exampleAnswer: say('Alde zeiharra 13 m da.', 'El lado oblicuo mide 13 m.', 'طول الضلع المائل 13 م.', 'The slanted side is 13 m.')
     },
 
@@ -320,7 +320,7 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
             'في دائرة نصف قطرها 17 سم وتر طوله 30 سم. كم يبعد عن المركز؟',
             'In a circle with a 17 cm radius, a chord measures 30 cm. How far is it from the centre?'
         ),
-        example: same('$d=\\sqrt{17^{2}-15^{2}}=\\sqrt{289-225}=\\sqrt{64}=8$'),
+        example: same('$\\begin{aligned}d&=\\sqrt{17^{2}-15^{2}}=\\sqrt{289-225}\\\\&=\\sqrt{64}=8\\end{aligned}$'),
         exampleAnswer: say('Korda zentrotik 8 cm-ra dago. Kontuz: korda-erdia, 15, ez 30.', 'La cuerda está a 8 cm del centro. Ojo: media cuerda, 15, no 30.', 'يبعد الوتر 8 سم عن المركز. انتبه: نصف الوتر 15 لا 30.', 'The chord is 8 cm from the centre. Careful: half the chord, 15, not 30.')
     },
     tangent: {
@@ -342,7 +342,7 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
             'النقطة $P$ تبعد 17 سم عن مركز دائرة نصف قطرها 8 سم. كم طول قطعة المماس $PT$؟',
             'A point $P$ is 17 cm from the centre of a circle with an 8 cm radius. How long is the tangent segment $PT$?'
         ),
-        example: same('$PT=\\sqrt{17^{2}-8^{2}}=\\sqrt{289-64}=\\sqrt{225}=15$'),
+        example: same('$\\begin{aligned}PT&=\\sqrt{17^{2}-8^{2}}=\\sqrt{289-64}\\\\&=\\sqrt{225}=15\\end{aligned}$'),
         exampleAnswer: say('$PT$ zuzenkia 15 cm da: $OP$ hipotenusa denez, kendu egiten da.', 'El segmento $PT$ mide 15 cm: como $OP$ es la hipotenusa, se resta.', 'طول القطعة $PT$ هو 15 سم: وبما أن $OP$ هو الوتر فإننا نطرح.', 'The segment $PT$ is 15 cm: since $OP$ is the hypotenuse, you subtract.')
     },
 
@@ -378,7 +378,7 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
             'صندوق أبعاده 6 دسم و8 دسم و24 دسم. هل يدخل فيه قضيب طوله 25 دسم؟',
             'A box measures 6 dm, 8 dm and 24 dm. Does a 25 dm rod fit inside?'
         ),
-        example: same('$D=\\sqrt{6^{2}+8^{2}+24^{2}}=\\sqrt{676}=26$'),
+        example: same('$\\begin{aligned}D&=\\sqrt{6^{2}+8^{2}+24^{2}}\\\\&=\\sqrt{676}=26\\end{aligned}$'),
         exampleAnswer: say('Diagonala 26 dm da: bai, sartzen da.', 'La diagonal mide 26 dm: sí, cabe.', 'طول القطر 26 دسم: نعم، يدخل.', 'The diagonal is 26 dm: yes, it fits.')
     },
     grid: {
@@ -394,7 +394,7 @@ export const pythagorasLessonTexts: Record<PythagorasTopicId, LessonTexts> = {
             'تمشي متنزهة 8 كم شرقًا ثم 15 كم شمالًا. كم تبعد عن نقطة الانطلاق في خط مستقيم؟',
             'A hiker walks 8 km east and then 15 km north. How far is the hiker from the starting point, in a straight line?'
         ),
-        example: same('$\\sqrt{8^{2}+15^{2}}=\\sqrt{64+225}=\\sqrt{289}=17$'),
+        example: same('$\\begin{aligned}\\sqrt{8^{2}+15^{2}}&=\\sqrt{64+225}\\\\&=\\sqrt{289}=17\\end{aligned}$'),
         exampleAnswer: say('Abiapuntutik 17 km-ra dago.', 'Está a 17 km del punto de partida.', 'تبعد 17 كم عن نقطة الانطلاق.', 'The hiker is 17 km from the starting point.')
     },
     problems: {
