@@ -39,12 +39,12 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         steps: [
             {
                 title: { eu: 'Zatiketa zehatza', es: 'División exacta', en: 'Exact division', ar: 'قسمة تامة' },
-                text: { eu: '24 : 6 = 4 eta hondarra 0 da. Beraz, 24 6ren multiploa da, eta 6 24ren zatitzailea.', es: '24 : 6 = 4 y el resto es 0. Por tanto, 24 es múltiplo de 6 y 6 es divisor de 24.', en: '24 : 6 = 4 and the remainder is 0. So 24 is a multiple of 6 and 6 is a divisor of 24.', ar: '24 : 6 = 4 والباقي 0. إذن 24 مضاعف لـ 6، و6 قاسم لـ 24.' },
+                text: { eu: '24 : 6 = 4 eta hondarra 0 da. Beraz, 24 zenbakia 6 zenbakiaren multiploa da, eta 6 zenbakia 24 zenbakiaren zatitzailea.', es: '24 : 6 = 4 y el resto es 0. Por tanto, 24 es múltiplo de 6 y 6 es divisor de 24.', en: '24 : 6 = 4 and the remainder is 0. So 24 is a multiple of 6 and 6 is a divisor of 24.', ar: '24 : 6 = 4 والباقي 0. إذن 24 مضاعف لـ 6، و6 قاسم لـ 24.' },
                 math: '$24=6\\cdot 4$'
             },
             {
                 title: { eu: 'Zatiketa ez-zehatza', es: 'División no exacta', en: 'Non-exact division', ar: 'قسمة غير تامة' },
-                text: { eu: '25 : 6 = 4 eta hondarra 1 da. 25 ez da 6ren multiploa, eta 6 ez da 25en zatitzailea.', es: '25 : 6 = 4 y el resto es 1. 25 no es múltiplo de 6 y 6 no es divisor de 25.', en: '25 : 6 = 4 and the remainder is 1. 25 is not a multiple of 6, and 6 is not a divisor of 25.', ar: '25 : 6 = 4 والباقي 1. العدد 25 ليس مضاعفًا لـ 6، و6 ليس قاسمًا لـ 25.' },
+                text: { eu: '25 : 6 = 4 eta hondarra 1 da. 25 zenbakia ez da 6 zenbakiaren multiploa, eta 6 zenbakia ez da 25 zenbakiaren zatitzailea.', es: '25 : 6 = 4 y el resto es 1. 25 no es múltiplo de 6 y 6 no es divisor de 25.', en: '25 : 6 = 4 and the remainder is 1. 25 is not a multiple of 6, and 6 is not a divisor of 25.', ar: '25 : 6 = 4 والباقي 1. العدد 25 ليس مضاعفًا لـ 6، و6 ليس قاسمًا لـ 25.' },
                 math: '$25=6\\cdot 4+1$'
             },
             {
@@ -73,7 +73,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         steps: [
             {
                 title: { eu: 'Nola kalkulatu', es: 'Cómo se calculan', en: 'How they are worked out', ar: 'كيف نحسبها' },
-                text: { eu: 'Biderkatu 1ez, 2z, 3z… Multiplo positiboetan, lehena zenbakia bera da.', es: 'Multiplica por 1, 2, 3… De los múltiplos positivos, el primero es el propio número.', en: 'Multiply by 1, 2, 3… The first positive multiple is the number itself.', ar: 'اضرب في 1، 2، 3… وأول مضاعف موجب هو العدد نفسه.' },
+                text: { eu: 'Biderkatu 1, 2, 3… zenbakiekin. Multiplo positiboetan, lehena zenbakia bera da.', es: 'Multiplica por 1, 2, 3… De los múltiplos positivos, el primero es el propio número.', en: 'Multiply by 1, 2, 3… The first positive multiple is the number itself.', ar: 'اضرب في 1، 2، 3… وأول مضاعف موجب هو العدد نفسه.' },
                 math: '$\\mathrm{M}(4)=\\{4,\\ 8,\\ 12,\\ 16,\\ 20,\\ \\dots\\}$'
             },
             {
@@ -82,7 +82,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
             },
             {
                 title: { eu: 'Multiplo komunak', es: 'Múltiplos comunes', en: 'Common multiples', ar: 'المضاعفات المشتركة' },
-                text: { eu: '4ren eta 6ren multiplo komunak: 12, 24, 36… Txikiena 12 da.', es: 'Múltiplos comunes de 4 y 6: 12, 24, 36… El menor es 12.', en: 'Common multiples of 4 and 6: 12, 24, 36… The smallest is 12.', ar: 'المضاعفات المشتركة لـ 4 و6: 12، 24، 36… وأصغرها 12.' },
+                text: { eu: '4 eta 6 zenbakien multiplo komunak: 12, 24, 36… Txikiena 12 da.', es: 'Múltiplos comunes de 4 y 6: 12, 24, 36… El menor es 12.', en: 'Common multiples of 4 and 6: 12, 24, 36… The smallest is 12.', ar: 'المضاعفات المشتركة لـ 4 و6: 12، 24، 36… وأصغرها 12.' },
                 math: '$\\mathrm{M}(6)=\\{6,\\ 12,\\ 18,\\ 24,\\ \\dots\\}$'
             }
         ],
@@ -104,10 +104,10 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
             en: 'Find all the divisors of a number in an orderly way.',
             ar: 'إيجاد جميع قواسم عدد بطريقة منظمة.'
         },
-        problem: { eu: 'Aurkitu 36ren zatitzaile guztiak.', es: 'Encuentra todos los divisores de 36.', en: 'Find all the divisors of 36.', ar: 'أوجد جميع قواسم 36.' },
+        problem: { eu: 'Aurkitu 36 zenbakiaren zatitzaile guztiak.', es: 'Encuentra todos los divisores de 36.', en: 'Find all the divisors of 36.', ar: 'أوجد جميع قواسم 36.' },
         stepsKind: 'steps',
         steps: [
-            { text: { eu: 'Zatitu 1ez eta idatzi bikotea.', es: 'Divide entre 1 y anota la pareja.', en: 'Divide by 1 and write down the pair.', ar: 'اقسم على 1 واكتب الزوج.' }, math: '$36=1\\cdot 36$' },
+            { text: { eu: 'Zatitu 1 zenbakiaz eta idatzi bikotea.', es: 'Divide entre 1 y anota la pareja.', en: 'Divide by 1 and write down the pair.', ar: 'اقسم على 1 واكتب الزوج.' }, math: '$36=1\\cdot 36$' },
             { text: { eu: 'Jarraitu 2, 3, 4… zatiketa zehatzak bilatuz.', es: 'Sigue con 2, 3, 4… buscando divisiones exactas.', en: 'Continue with 2, 3, 4… looking for exact divisions.', ar: 'تابع مع 2، 3، 4… باحثًا عن القسمة التامة.' }, math: '$36=2\\cdot 18=3\\cdot 12=4\\cdot 9$' },
             { text: { eu: 'Gelditu bikoteko bi zenbakiak elkartzen direnean.', es: 'Para cuando los dos números de la pareja se encuentran.', en: 'Stop when the two numbers of the pair meet.', ar: 'توقّف عندما يلتقي عددا الزوج.' }, math: '$36=6\\cdot 6$' },
             { text: { eu: 'Idatzi guztiak txikienetik handienera.', es: 'Escríbelos todos de menor a mayor.', en: 'Write them all from smallest to largest.', ar: 'اكتبها كلها من الأصغر إلى الأكبر.' }, math: notation('$@DIV(36)=\\{1,2,3,4,6,9,12,18,36\\}$') }
@@ -125,16 +125,16 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stage: 'criteria',
         title: { eu: 'Azken zifra: 2, 5 eta 10', es: 'La última cifra: 2, 5 y 10', en: 'The last digit: 2, 5 and 10', ar: 'الرقم الأخير: 2 و5 و10' },
         goal: {
-            eu: 'Zatiketa egin gabe jakitea zenbaki bat 2rekin, 5ekin edo 10ekin zatigarria den.',
+            eu: 'Zatiketa egin gabe jakitea zenbaki bat 2, 5 edo 10 zenbakiarekin zatigarria den.',
             es: 'Saber sin dividir si un número es divisible por 2, 5 o 10.',
             en: 'Knowing without dividing whether a number is divisible by 2, 5 or 10.',
             ar: 'معرفة ما إذا كان العدد يقبل القسمة على 2 أو 5 أو 10 دون إجراء القسمة.'
         },
         stepsKind: 'facts',
         steps: [
-            { title: { eu: '2rekin', es: 'Por 2', en: 'By 2', ar: 'على 2' }, text: { eu: 'Azken zifra bikoitia bada: 0, 2, 4, 6 edo 8.', es: 'Si la última cifra es par: 0, 2, 4, 6 u 8.', en: 'If the last digit is even: 0, 2, 4, 6 or 8.', ar: 'إذا كان الرقم الأخير زوجيًا: 0 أو 2 أو 4 أو 6 أو 8.' }, math: '$3232\\ \\checkmark\\qquad 3235\\ \\times$' },
-            { title: { eu: '5ekin', es: 'Por 5', en: 'By 5', ar: 'على 5' }, text: { eu: 'Azken zifra 0 edo 5 bada.', es: 'Si la última cifra es 0 o 5.', en: 'If the last digit is 0 or 5.', ar: 'إذا كان الرقم الأخير 0 أو 5.' }, math: '$3235\\ \\checkmark\\qquad 3232\\ \\times$' },
-            { title: { eu: '10ekin', es: 'Por 10', en: 'By 10', ar: 'على 10' }, text: { eu: 'Azken zifra 0 bada. 10ekin zatigarria dena 2rekin eta 5ekin ere bada.', es: 'Si la última cifra es 0. Lo que es divisible por 10 también lo es por 2 y por 5.', en: 'If the last digit is 0. Anything divisible by 10 is also divisible by 2 and by 5.', ar: 'إذا كان الرقم الأخير 0. وما يقبل القسمة على 10 يقبلها على 2 و5 أيضًا.' }, math: '$3230\\ \\checkmark\\qquad 3232\\ \\times$' }
+            { title: { eu: '2 zenbakiarekin', es: 'Por 2', en: 'By 2', ar: 'على 2' }, text: { eu: 'Azken zifra bikoitia bada: 0, 2, 4, 6 edo 8.', es: 'Si la última cifra es par: 0, 2, 4, 6 u 8.', en: 'If the last digit is even: 0, 2, 4, 6 or 8.', ar: 'إذا كان الرقم الأخير زوجيًا: 0 أو 2 أو 4 أو 6 أو 8.' }, math: '$3232\\ \\checkmark\\qquad 3235\\ \\times$' },
+            { title: { eu: '5 zenbakiarekin', es: 'Por 5', en: 'By 5', ar: 'على 5' }, text: { eu: 'Azken zifra 0 edo 5 bada.', es: 'Si la última cifra es 0 o 5.', en: 'If the last digit is 0 or 5.', ar: 'إذا كان الرقم الأخير 0 أو 5.' }, math: '$3235\\ \\checkmark\\qquad 3232\\ \\times$' },
+            { title: { eu: '10 zenbakiarekin', es: 'Por 10', en: 'By 10', ar: 'على 10' }, text: { eu: 'Azken zifra 0 bada. 10 zenbakiarekin zatigarria dena 2 eta 5 zenbakiekin ere bada.', es: 'Si la última cifra es 0. Lo que es divisible por 10 también lo es por 2 y por 5.', en: 'If the last digit is 0. Anything divisible by 10 is also divisible by 2 and by 5.', ar: 'إذا كان الرقم الأخير 0. وما يقبل القسمة على 10 يقبلها على 2 و5 أيضًا.' }, math: '$3230\\ \\checkmark\\qquad 3232\\ \\times$' }
         ],
         takeaway: {
             eu: '2, 5 eta 10: begiratu azken zifrari bakarrik.',
@@ -148,19 +148,19 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stage: 'criteria',
         title: { eu: 'Zifren batura: 3 eta 9', es: 'La suma de las cifras: 3 y 9', en: 'The sum of the digits: 3 and 9', ar: 'مجموع الأرقام: 3 و9' },
         goal: {
-            eu: '3 eta 9ren irizpideak zifren baturarekin aplikatzea.',
+            eu: '3 eta 9 zenbakien irizpideak zifren baturarekin aplikatzea.',
             es: 'Aplicar los criterios del 3 y del 9 con la suma de las cifras.',
             en: 'Apply the rules for 3 and 9 using the sum of the digits.',
             ar: 'تطبيق قاعدتي 3 و9 باستعمال مجموع الأرقام.'
         },
         stepsKind: 'facts',
         steps: [
-            { title: { eu: '3rekin', es: 'Por 3', en: 'By 3', ar: 'على 3' }, text: { eu: 'Zifren batura 3ren multiploa bada: 3, 6, 9, 12, 15…', es: 'Si la suma de sus cifras es múltiplo de 3: 3, 6, 9, 12, 15…', en: 'If the sum of its digits is a multiple of 3: 3, 6, 9, 12, 15…', ar: 'إذا كان مجموع أرقامه مضاعفًا لـ 3: 3، 6، 9، 12، 15…' }, math: '$3234\\mathbin{:}\\ 3+2+3+4=12\\ \\checkmark$' },
-            { title: { eu: '9rekin', es: 'Por 9', en: 'By 9', ar: 'على 9' }, text: { eu: 'Zifren batura 9ren multiploa bada: 9, 18, 27…', es: 'Si la suma de sus cifras es múltiplo de 9: 9, 18, 27…', en: 'If the sum of its digits is a multiple of 9: 9, 18, 27…', ar: 'إذا كان مجموع أرقامه مضاعفًا لـ 9: 9، 18، 27…' }, math: '$5013\\mathbin{:}\\ 5+0+1+3=9\\ \\checkmark$' },
-            { title: { eu: '6rekin', es: 'Por 6', en: 'By 6', ar: 'على 6' }, text: { eu: 'Irizpideak konbina daitezke: 6rekin zatigarria da 2rekin eta 3rekin zatigarria bada.', es: 'Los criterios se pueden combinar: es divisible por 6 si lo es por 2 y por 3.', en: 'Rules can be combined: it is divisible by 6 if it is divisible by 2 and by 3.', ar: 'يمكن الجمع بين القواعد: يقبل القسمة على 6 إذا قبلها على 2 و3 معًا.' }, math: '$282\\mathbin{:}\\ \\text{2 } \\checkmark\\ \\ 2+8+2=12\\ \\checkmark$' }
+            { title: { eu: '3 zenbakiarekin', es: 'Por 3', en: 'By 3', ar: 'على 3' }, text: { eu: 'Zifren batura 3 zenbakiaren multiploa bada: 3, 6, 9, 12, 15…', es: 'Si la suma de sus cifras es múltiplo de 3: 3, 6, 9, 12, 15…', en: 'If the sum of its digits is a multiple of 3: 3, 6, 9, 12, 15…', ar: 'إذا كان مجموع أرقامه مضاعفًا لـ 3: 3، 6، 9، 12، 15…' }, math: '$3234\\mathbin{:}\\ 3+2+3+4=12\\ \\checkmark$' },
+            { title: { eu: '9 zenbakiarekin', es: 'Por 9', en: 'By 9', ar: 'على 9' }, text: { eu: 'Zifren batura 9 zenbakiaren multiploa bada: 9, 18, 27…', es: 'Si la suma de sus cifras es múltiplo de 9: 9, 18, 27…', en: 'If the sum of its digits is a multiple of 9: 9, 18, 27…', ar: 'إذا كان مجموع أرقامه مضاعفًا لـ 9: 9، 18، 27…' }, math: '$5013\\mathbin{:}\\ 5+0+1+3=9\\ \\checkmark$' },
+            { title: { eu: '6 zenbakiarekin', es: 'Por 6', en: 'By 6', ar: 'على 6' }, text: { eu: 'Irizpideak konbina daitezke: 6 zenbakiarekin zatigarria da, 2 eta 3 zenbakiekin zatigarria bada.', es: 'Los criterios se pueden combinar: es divisible por 6 si lo es por 2 y por 3.', en: 'Rules can be combined: it is divisible by 6 if it is divisible by 2 and by 3.', ar: 'يمكن الجمع بين القواعد: يقبل القسمة على 6 إذا قبلها على 2 و3 معًا.' }, math: '$282\\mathbin{:}\\ \\text{2 } \\checkmark\\ \\ 2+8+2=12\\ \\checkmark$' }
         ],
         takeaway: {
-            eu: '3 eta 9: batu zifrak. 9rekin zatigarria dena 3rekin ere bada.',
+            eu: '3 eta 9: batu zifrak. 9 zenbakiarekin zatigarria dena 3 zenbakiarekin ere bada.',
             es: '3 y 9: suma las cifras. Lo que es divisible por 9 también lo es por 3.',
             en: '3 and 9: add the digits. Anything divisible by 9 is also divisible by 3.',
             ar: '3 و9: اجمع الأرقام. وما يقبل القسمة على 9 يقبلها على 3 أيضًا.'
@@ -169,9 +169,9 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
     {
         id: 'criteria-11-7',
         stage: 'criteria',
-        title: { eu: '11 eta 7ren irizpideak', es: 'Los criterios del 11 y del 7', en: 'The rules for 11 and 7', ar: 'قاعدتا 11 و7' },
+        title: { eu: '11 eta 7 zenbakien irizpideak', es: 'Los criterios del 11 y del 7', en: 'The rules for 11 and 7', ar: 'قاعدتا 11 و7' },
         goal: {
-            eu: '11 eta 7ren irizpideak urratsez urrats aplikatzea.',
+            eu: '11 eta 7 zenbakien irizpideak urratsez urrats aplikatzea.',
             es: 'Aplicar paso a paso los criterios del 11 y del 7.',
             en: 'Apply the rules for 11 and 7 step by step.',
             ar: 'تطبيق قاعدتي 11 و7 خطوة بخطوة.'
@@ -179,13 +179,13 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stepsKind: 'facts',
         steps: [
             {
-                title: { eu: '11rekin', es: 'Por 11', en: 'By 11', ar: 'على 11' },
-                text: { eu: 'Batu posizio bikoitietako zifrak eta posizio bakoitietakoak. Kendu bi baturak: emaitza 0 edo 11ren multiploa bada, zatigarria da.', es: 'Suma las cifras de lugar par y las de lugar impar. Resta las dos sumas: si da 0 o un múltiplo de 11, es divisible.', en: 'Add the digits in even places and the digits in odd places. Subtract the two sums: if the result is 0 or a multiple of 11, it is divisible.', ar: 'اجمع الأرقام في المواقع الزوجية والأرقام في المواقع الفردية، ثم اطرح المجموعين: إذا كان الناتج 0 أو مضاعفًا لـ 11 فالعدد يقبل القسمة.' },
+                title: { eu: '11 zenbakiarekin', es: 'Por 11', en: 'By 11', ar: 'على 11' },
+                text: { eu: 'Batu posizio bikoitietako zifrak eta posizio bakoitietakoak. Kendu bi baturak: emaitza 0 edo 11 zenbakiaren multiploa bada, zatigarria da.', es: 'Suma las cifras de lugar par y las de lugar impar. Resta las dos sumas: si da 0 o un múltiplo de 11, es divisible.', en: 'Add the digits in even places and the digits in odd places. Subtract the two sums: if the result is 0 or a multiple of 11, it is divisible.', ar: 'اجمع الأرقام في المواقع الزوجية والأرقام في المواقع الفردية، ثم اطرح المجموعين: إذا كان الناتج 0 أو مضاعفًا لـ 11 فالعدد يقبل القسمة.' },
                 math: '$3234\\mathbin{:}\\ (2+4)-(3+3)=0\\ \\checkmark$'
             },
             {
-                title: { eu: '7rekin', es: 'Por 7', en: 'By 7', ar: 'على 7' },
-                text: { eu: 'Kendu unitateen zifra eta kendu haren bikoitza geratzen den zenbakiari. Emaitza 0 edo 7ren multiploa bada, zatigarria da. Handia bada, errepikatu.', es: 'Quita la cifra de las unidades y resta su doble al número que queda. Si da 0 o un múltiplo de 7, es divisible. Si es grande, repite.', en: 'Remove the units digit and subtract its double from the number that is left. If the result is 0 or a multiple of 7, it is divisible. If it is big, repeat.', ar: 'احذف رقم الآحاد واطرح ضعفه من العدد الباقي. إذا كان الناتج 0 أو مضاعفًا لـ 7 فالعدد يقبل القسمة. وإن كان كبيرًا فكرّر.' },
+                title: { eu: '7 zenbakiarekin', es: 'Por 7', en: 'By 7', ar: 'على 7' },
+                text: { eu: 'Kendu unitateen zifra eta kendu haren bikoitza geratzen den zenbakiari. Emaitza 0 edo 7 zenbakiaren multiploa bada, zatigarria da. Handia bada, errepikatu.', es: 'Quita la cifra de las unidades y resta su doble al número que queda. Si da 0 o un múltiplo de 7, es divisible. Si es grande, repite.', en: 'Remove the units digit and subtract its double from the number that is left. If the result is 0 or a multiple of 7, it is divisible. If it is big, repeat.', ar: 'احذف رقم الآحاد واطرح ضعفه من العدد الباقي. إذا كان الناتج 0 أو مضاعفًا لـ 7 فالعدد يقبل القسمة. وإن كان كبيرًا فكرّر.' },
                 math: '$3234\\mathbin{:}\\ 323-8=315;\\ 31-10=21\\ \\checkmark$'
             }
         ],
@@ -212,7 +212,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         steps: [
             { title: { eu: 'Eratostenesen bahea', es: 'Criba de Eratóstenes', en: 'Sieve of Eratosthenes', ar: 'غربال إراتوستينس' }, text: { eu: 'Ratatu 1. Utzi 2 eta ratatu haren multiplo guztiak.', es: 'Tacha el 1. Deja el 2 y tacha todos sus múltiplos.', en: 'Cross out 1. Leave 2 and cross out all its multiples.', ar: 'اشطب 1. أبقِ 2 واشطب كل مضاعفاته.' } },
             { text: { eu: 'Hurrengo ratatu gabea (3) lehena da: ratatu haren multiploak.', es: 'El siguiente sin tachar (3) es primo: tacha sus múltiplos.', en: 'The next uncrossed number (3) is prime: cross out its multiples.', ar: 'العدد التالي غير المشطوب (3) أولي: اشطب مضاعفاته.' } },
-            { text: { eu: 'Errepikatu 5ekin, 7rekin… Ratatu gabe geratzen direnak lehenak dira.', es: 'Repite con 5, 7… Los que quedan sin tachar son primos.', en: 'Repeat with 5, 7… The ones left uncrossed are primes.', ar: 'كرّر مع 5، 7… والأعداد التي تبقى غير مشطوبة أولية.' }, math: '$2,3,5,7,11,13,17,19,23,29,\\dots$' }
+            { text: { eu: 'Errepikatu 5, 7… zenbakiekin. Ratatu gabe geratzen direnak lehenak dira.', es: 'Repite con 5, 7… Los que quedan sin tachar son primos.', en: 'Repeat with 5, 7… The ones left uncrossed are primes.', ar: 'كرّر مع 5، 7… والأعداد التي تبقى غير مشطوبة أولية.' }, math: '$2,3,5,7,11,13,17,19,23,29,\\dots$' }
         ],
         takeaway: {
             eu: 'Lehena: bi zatitzaile bakarrik. 2 da lehen bikoiti bakarra.',
@@ -260,7 +260,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
             en: 'Work out the GCD using lists and by factorisation.',
             ar: 'حساب ق.م.أ بالقوائم وبالتحليل إلى عوامل.'
         },
-        problem: { eu: 'Kalkulatu 24ren eta 36ren ZKH.', es: 'Calcula el m.c.d. de 24 y 36.', en: 'Calculate the GCD of 24 and 36.', ar: 'احسب ق.م.أ للعددين 24 و36.' },
+        problem: { eu: 'Kalkulatu 24 eta 36 zenbakien ZKH.', es: 'Calcula el m.c.d. de 24 y 36.', en: 'Calculate the GCD of 24 and 36.', ar: 'احسب ق.م.أ للعددين 24 و36.' },
         stepsKind: 'steps',
         steps: [
             { text: { eu: 'Deskonposatu zenbaki bakoitza.', es: 'Descompón cada número.', en: 'Factorise each number.', ar: 'حلّل كل عدد.' }, math: '$24=2^{3}\\cdot 3\\qquad 36=2^{2}\\cdot 3^{2}$' },
@@ -285,7 +285,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
             en: 'Work out the LCM and don\'t confuse it with the GCD.',
             ar: 'حساب م.م.أ وعدم الخلط بينه وبين ق.م.أ.'
         },
-        problem: { eu: 'Kalkulatu 24ren eta 36ren MKT.', es: 'Calcula el m.c.m. de 24 y 36.', en: 'Calculate the LCM of 24 and 36.', ar: 'احسب م.م.أ للعددين 24 و36.' },
+        problem: { eu: 'Kalkulatu 24 eta 36 zenbakien MKT.', es: 'Calcula el m.c.m. de 24 y 36.', en: 'Calculate the LCM of 24 and 36.', ar: 'احسب م.م.أ للعددين 24 و36.' },
         stepsKind: 'steps',
         steps: [
             { text: { eu: 'Deskonposatu zenbaki bakoitza.', es: 'Descompón cada número.', en: 'Factorise each number.', ar: 'حلّل كل عدد.' }, math: '$24=2^{3}\\cdot 3\\qquad 36=2^{2}\\cdot 3^{2}$' },
@@ -335,7 +335,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         problem: { eu: '9 bola gorri, 12 berde eta 15 urdin ditugu. Kolore bakarreko lepokoak egin nahi ditugu, denak bola kopuru berarekin, ahalik eta luzeenak eta bolarik soberan utzi gabe. Zenbat bola izango ditu lepoko bakoitzak?', es: 'Tenemos 9 bolas rojas, 12 verdes y 15 azules. Queremos hacer collares de un solo color, todos con el mismo número de bolas, lo más largos posible y sin que sobre ninguna. ¿Cuántas bolas tendrá cada collar?', en: 'We have 9 red beads, 12 green and 15 blue. We want to make necklaces of a single colour, all with the same number of beads, as long as possible and with none left over. How many beads will each necklace have?', ar: 'لدينا 9 كرات حمراء و12 خضراء و15 زرقاء. نريد صنع عقود بلون واحد، كلها بعدد الكرات نفسه، وأطول ما يمكن، دون أن تبقى أي كرة. كم كرة سيكون في كل عقد؟' },
         stepsKind: 'steps',
         steps: [
-            { title: { eu: 'ZKH ala MKT?', es: '¿m.c.d. o m.c.m.?', en: 'GCD or LCM?', ar: 'ق.م.أ أم م.م.أ؟' }, text: { eu: 'Bolak lepokoetan banatzen ditugu, soberakinik gabe: 9, 12 eta 15en zatitzaile komuna behar dugu → ZKH.', es: 'Repartimos bolas en collares, sin que sobren: necesitamos un divisor común de 9, 12 y 15 → m.c.d.', en: 'We share beads into necklaces, with none left over: we need a common divisor of 9, 12 and 15 → GCD.', ar: 'نوزّع الكرات على عقود دون أن يبقى شيء: نحتاج قاسمًا مشتركًا لـ 9 و12 و15 ← ق.م.أ.' } },
+            { title: { eu: 'ZKH ala MKT?', es: '¿m.c.d. o m.c.m.?', en: 'GCD or LCM?', ar: 'ق.م.أ أم م.م.أ؟' }, text: { eu: 'Bolak lepokoetan banatzen ditugu, soberakinik gabe: 9, 12 eta 15 zenbakien zatitzaile komuna behar dugu → ZKH.', es: 'Repartimos bolas en collares, sin que sobren: necesitamos un divisor común de 9, 12 y 15 → m.c.d.', en: 'We share beads into necklaces, with none left over: we need a common divisor of 9, 12 and 15 → GCD.', ar: 'نوزّع الكرات على عقود دون أن يبقى شيء: نحتاج قاسمًا مشتركًا لـ 9 و12 و15 ← ق.م.أ.' } },
             { title: { eu: 'Faktorizatu', es: 'Factoriza', en: 'Factorise', ar: 'حلّل' }, text: { eu: 'Deskonposatu datuak biderkagai lehenetan.', es: 'Descompón los datos en factores primos.', en: 'Factorise the data into prime factors.', ar: 'حلّل المعطيات إلى عوامل أولية.' }, math: '$9=3^{2}\\quad 12=2^{2}\\cdot 3\\quad 15=3\\cdot 5$' },
             { title: { eu: 'Kalkulatu', es: 'Calcula', en: 'Calculate', ar: 'احسب' }, text: { eu: 'Komunean 3 dute, berretzaile txikienarekin.', es: 'Tienen en común el 3, con el menor exponente.', en: 'They have 3 in common, with the smallest exponent.', ar: 'العامل المشترك هو 3 بأصغر أس.' }, math: notation('$@GCD(9,12,15)=3$') },
             { title: { eu: 'Interpretatu', es: 'Interpreta', en: 'Interpret', ar: 'فسّر' }, text: { eu: 'Eman emaitza esaldi gisa, unitateekin: lepoko bakoitzak 3 bola izango ditu (3 gorri, 4 berde eta 5 urdin lepoko).', es: 'Da el resultado como una frase, con unidades: cada collar tendrá 3 bolas (3 collares rojos, 4 verdes y 5 azules).', en: 'Give the result as a sentence, with units: each necklace will have 3 beads (3 red, 4 green and 5 blue necklaces).', ar: 'اكتب النتيجة في جملة مع الوحدات: سيكون في كل عقد 3 كرات (3 عقود حمراء و4 خضراء و5 زرقاء).' } }

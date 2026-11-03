@@ -163,11 +163,11 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         needs: [{ unit: 'dbh2/zatikiak', topic: 'add-subtract', title: { eu: 'Batuketa eta kenketa', es: 'Suma y resta', en: 'Addition and subtraction', ar: 'الجمع والطرح' } }],
         title: say('Banaketak problemetan eta zatikiekin', 'Repartos en problemas y con fracciones', 'التوزيع في المسائل وبالكسور', 'Sharing in problems and with fractions'),
         goal: say('Banaketa proportzionalak egunekin, orduekin edo zatikiekin ebaztea.', 'Resolver repartos proporcionales con días, horas o fracciones.', 'حلّ توزيعات تناسبية بالأيام أو الساعات أو الكسور.', 'Solve proportional shares involving days, hours or fractions.'),
-        problem: say('Banatu 130 zuzenki proportzionalki $\\frac{1}{2}$, $\\frac{1}{3}$ eta $\\frac{1}{4}$-rekiko.', 'Reparte 130 en partes directamente proporcionales a $\\frac{1}{2}$, $\\frac{1}{3}$ y $\\frac{1}{4}$.', 'وزّع 130 طرديًا على $\\frac{1}{2}$ و$\\frac{1}{3}$ و$\\frac{1}{4}$.', 'Share 130 into parts in direct proportion to $\\frac{1}{2}$, $\\frac{1}{3}$ and $\\frac{1}{4}$.'),
+        problem: say('Banatu 130 zuzenki proportzionalki $\\frac{1}{2}$, $\\frac{1}{3}$ eta $\\frac{1}{4}$ zatikiekiko.', 'Reparte 130 en partes directamente proporcionales a $\\frac{1}{2}$, $\\frac{1}{3}$ y $\\frac{1}{4}$.', 'وزّع 130 طرديًا على $\\frac{1}{2}$ و$\\frac{1}{3}$ و$\\frac{1}{4}$.', 'Share 130 into parts in direct proportion to $\\frac{1}{2}$, $\\frac{1}{3}$ and $\\frac{1}{4}$.'),
         stepsKind: 'steps',
         steps: [
             { text: say('Izendatzaile bera.', 'Mismo denominador.', 'المقام نفسه.', 'Same denominator.'), math: same('$\\frac{6}{12},\\ \\frac{4}{12},\\ \\frac{3}{12}$') },
-            { text: say('6, 4 eta 3rekiko: 13 zati.', 'Proporcional a 6, 4 y 3: 13 partes.', 'متناسب مع 6 و4 و3: 13 جزءًا.', 'In proportion to 6, 4 and 3: 13 parts.'), math: same('$130\\mathbin{:}13=10$') },
+            { text: say('6, 4 eta 3 zenbakiekiko: 13 zati.', 'Proporcional a 6, 4 y 3: 13 partes.', 'متناسب مع 6 و4 و3: 13 جزءًا.', 'In proportion to 6, 4 and 3: 13 parts.'), math: same('$130\\mathbin{:}13=10$') },
             { text: say('Zatiak.', 'Las partes.', 'الأجزاء.', 'The parts.'), math: same('$60,\\ 40,\\ 30$') }
         ],
         takeaway: say('Zatikiak: izendatzaile bera, eta banatu zenbakitzaileen arabera.', 'Fracciones: mismo denominador, y reparte según los numeradores.', 'الكسور: المقام نفسه ثم التوزيع حسب البسوط.', 'Fractions: same denominator, then share according to the numerators.'),
@@ -184,7 +184,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stepsKind: 'steps',
         steps: [
             { text: say('Alderantzizkoak, izendatzaile berarekin.', 'Los inversos, con el mismo denominador.', 'المقلوبات بالمقام نفسه.', 'The inverses, with the same denominator.'), math: same('$\\frac{6}{6},\\ \\frac{3}{6},\\ \\frac{2}{6}$') },
-            { text: say('6, 3 eta 2rekiko: 11 zati.', 'Proporcional a 6, 3 y 2: 11 partes.', 'متناسب مع 6 و3 و2: 11 جزءًا.', 'In proportion to 6, 3 and 2: 11 parts.'), math: same('$22\\,000\\mathbin{:}11=2000$') },
+            { text: say('6, 3 eta 2 zenbakiekiko: 11 zati.', 'Proporcional a 6, 3 y 2: 11 partes.', 'متناسب مع 6 و3 و2: 11 جزءًا.', 'In proportion to 6, 3 and 2: 11 parts.'), math: same('$22\\,000\\mathbin{:}11=2000$') },
             { text: say('Sariak.', 'Los premios.', 'الجوائز.', 'The prizes.'), math: same('$12\\,000,\\ 6000,\\ 4000$') }
         ],
         takeaway: say('Alderantzizkoa: banatu alderantzizkoekiko zuzenki.', 'Inverso: reparte directamente a los inversos.', 'العكسي: وزّع طرديًا على المقلوبات.', 'Inverse: share directly in proportion to the inverses.'),
@@ -197,8 +197,8 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stage: 'percent',
         needs: [{ unit: 'dbh2/zatikiak', topic: 'percentages', title: { eu: 'Zatikiak, hamartarrak eta ehunekoak', es: 'Fracciones, decimales y porcentajes', en: 'Fractions, decimals and percentages', ar: 'الكسور والأعداد العشرية والنسب المئوية' } }],
         title: say('Ehunekoa hamartar gisa', 'El porcentaje como decimal', 'النسبة المئوية عددًا عشريًا', 'Percentages as decimals'),
-        goal: say('Ehuneko bat hamartar gisa idaztea eta kantitate baten ehunekoa biderketa bakar batez kalkulatzea, % 100etik gorakoak barne.', 'Escribir un porcentaje como decimal y calcular el porcentaje de una cantidad con una sola multiplicación, también por encima del 100 %.', 'كتابة النسبة المئوية عددًا عشريًا وحساب نسبة من كمية بضربة واحدة، حتى فوق 100٪.', 'Write a percentage as a decimal and calculate a percentage of an amount with a single multiplication, including percentages above 100%.'),
-        problem: say('Kalkulatu 200en % 115.', 'Calcula el 115 % de 200.', 'احسب 115٪ من 200.', 'Calculate 115% of 200.'),
+        goal: say('Ehuneko bat hamartar gisa idaztea eta kantitate baten ehunekoa biderketa bakar batez kalkulatzea, % 100 baino handiagoak barne.', 'Escribir un porcentaje como decimal y calcular el porcentaje de una cantidad con una sola multiplicación, también por encima del 100 %.', 'كتابة النسبة المئوية عددًا عشريًا وحساب نسبة من كمية بضربة واحدة، حتى فوق 100٪.', 'Write a percentage as a decimal and calculate a percentage of an amount with a single multiplication, including percentages above 100%.'),
+        problem: say('Kalkulatu 200 zenbakiaren % 115.', 'Calcula el 115 % de 200.', 'احسب 115٪ من 200.', 'Calculate 115% of 200.'),
         stepsKind: 'steps',
         steps: [
             { text: say('Hamartar gisa.', 'Como decimal.', 'عددًا عشريًا.', 'As a decimal.'), math: same('$115\\mathbin{:}100=1{,}15$') },
@@ -272,7 +272,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stage: 'changes',
         title: say('Interes bakuna', 'El interés simple', 'الفائدة البسيطة', 'Simple interest'),
         goal: say('Kapital batek urte batzuetan sortzen duen interes bakuna kalkulatzea.', 'Calcular el interés simple que produce un capital en unos años.', 'حساب الفائدة البسيطة التي يُنتجها رأس مال في عدة سنوات.', 'Calculate the simple interest that a sum of money earns over some years.'),
-        problem: say('3000 €-ko mailegu bat % 8an hartu eta 2 urtera itzultzen da. Zenbat interes ordaindu behar da?', 'Se pide un préstamo de 3000 € al 8 % y se devuelve a los 2 años. ¿Cuánto interés hay que pagar?', 'اقترضنا 3000 € بفائدة 8٪ وسددناها بعد سنتين. كم فائدة يجب دفعها؟', 'A loan of €3,000 at 8% is taken out and repaid after 2 years. How much interest has to be paid?'),
+        problem: say('3000 €-ko mailegu bat % 8 interesarekin hartu eta 2 urtera itzultzen da. Zenbat interes ordaindu behar da?', 'Se pide un préstamo de 3000 € al 8 % y se devuelve a los 2 años. ¿Cuánto interés hay que pagar?', 'اقترضنا 3000 € بفائدة 8٪ وسددناها بعد سنتين. كم فائدة يجب دفعها؟', 'A loan of €3,000 at 8% is taken out and repaid after 2 years. How much interest has to be paid?'),
         stepsKind: 'steps',
         steps: [
             { text: say('Urte bateko interesa.', 'Interés de un año.', 'فائدة سنة.', 'Interest for one year.'), math: same('$3000\\cdot 8\\mathbin{:}100=240$') },

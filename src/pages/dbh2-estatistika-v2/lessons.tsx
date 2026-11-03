@@ -75,7 +75,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         steps: [
             { text: say('Metatu: aurreko $F_i$ gehi errenkada honetako $f_i$.', 'Acumula: la $F_i$ anterior más la $f_i$ de esta fila.', 'اجمع تراكميًا: $F_i$ السابق زائد $f_i$ هذا السطر.', 'Add up: the previous $F_i$ plus the $f_i$ of this row.'), math: same('$3,\\ 9,\\ 14,\\ 18,\\ 20$') },
             { text: say('Azkena $N$ da: 20 ikasle.', 'La última es $N$: 20 alumnos.', 'الأخير هو $N$: 20 تلميذًا.', 'The last one is $N$: 20 students.') },
-            { text: say('Zatitu bakoitza 20z.', 'Divide cada una entre 20.', 'اقسم كلًّا منها على 20.', 'Divide each one by 20.'), math: same('$0{,}15,\\ 0{,}45,\\ 0{,}7,\\ 0{,}9,\\ 1$') }
+            { text: say('Zatitu bakoitza 20 zenbakiaz.', 'Divide cada una entre 20.', 'اقسم كلًّا منها على 20.', 'Divide each one by 20.'), math: same('$0{,}15,\\ 0{,}45,\\ 0{,}7,\\ 0{,}9,\\ 1$') }
         ],
         takeaway: say('Metatua: zenbat datu dauden balio horretaraino. Azkena datu kopurua da; erlatibo metatuaren azkena, 1.', 'Acumulada: cuántos datos hay hasta ese valor. La última es el número de datos; la última relativa acumulada, 1.', 'المتجمّع: كم بيانًا حتى تلك القيمة. الأخير هو عدد البيانات، وآخر متجمّع نسبي هو 1.', 'Cumulative: how many data values there are up to that value. The last one is the number of data values; the last cumulative relative frequency is 1.'),
         figure: (language) => <CumulativeFigure language={language} />
@@ -90,7 +90,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stepsKind: 'steps',
         steps: [
             { text: say('Klase-marka: muturren erdia.', 'Marca de clase: la mitad de los extremos.', 'مركز الفئة: نصف مجموع الطرفين.', 'Class mark: half the sum of the two ends.'), math: same('$\\frac{140+150}{2}=145$') },
-            { text: say('Besteak, 10na aurrera.', 'Las demás, de 10 en 10.', 'والبقية بخطوة 10.', 'The others go up in steps of 10.'), math: same('$145,\\ 155,\\ 165,\\ 175$') },
+            { text: say('Besteak, 10 gehituz.', 'Las demás, de 10 en 10.', 'والبقية بخطوة 10.', 'The others go up in steps of 10.'), math: same('$145,\\ 155,\\ 165,\\ 175$') },
             { text: say('160 baino gutxiago: lehen bi tarteak.', 'Menos de 160: los dos primeros intervalos.', 'أقل من 160: الفئتان الأوليان.', 'Under 160: the first two intervals.'), math: same('$3+9=12$') }
         ],
         takeaway: say('Tarte batean beheko muturra sartzen da eta goikoa ez. Klase-marka: bi muturren erdia.', 'En un intervalo entra el extremo inferior y no el superior. Marca de clase: la mitad de los dos extremos.', 'في الفئة يدخل الطرف الأدنى ولا يدخل الأعلى. مركز الفئة: منتصف الطرفين.', 'An interval includes the lower end but not the upper end. Class mark: half the sum of the two ends.'),
@@ -125,7 +125,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         steps: [
             { text: say('Ehuneko bakoitza bider 3,6°; autobusa: 108°.', 'Cada porcentaje por 3,6°; autobús: 108°.', 'كل نسبة في 3.6°؛ الحافلة: 108°.', 'Multiply each percentage by 3.6°; bus: 108°.'), math: same('$45\\cdot 3{,}6=162$') },
             { text: say('Besteak: 54° eta 36°. Egiaztatu batura.', 'Los demás: 54° y 36°. Comprueba la suma.', 'والباقيتان: 54° و36°. تحقّق من المجموع.', 'The others: 54° and 36°. Check the total.'), math: same('$162+108+54+36=360$') },
-            { text: say('Autobusez: 40ren % 30.', 'En autobús: el 30 % de 40.', 'بالحافلة: 30 % من 40.', 'By bus: 30% of 40.'), math: same('$0{,}3\\cdot 40=12$') }
+            { text: say('Autobusez: 40 ikasleen % 30.', 'En autobús: el 30 % de 40.', 'بالحافلة: 30 % من 40.', 'By bus: 30% of 40.'), math: same('$0{,}3\\cdot 40=12$') }
         ],
         takeaway: say('% 1 = 3,6°. Angelua zati 360 maiztasun erlatiboa da.', '1 % = 3,6°. El ángulo entre 360 es la frecuencia relativa.', '1 % = 3.6°. والزاوية على 360 هي التكرار النسبي.', '1% = 3.6°. The angle divided by 360 is the relative frequency.'),
         figure: (language) => <PieFigure language={language} />
@@ -137,7 +137,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         goal: say('Grafiko engainagarriak ezagutzea eta grafiko bati buruzko galderak arretaz erantzutea.', 'Reconocer gráficos engañosos y responder con cuidado preguntas sobre un gráfico.', 'التعرّف إلى التمثيلات المضلِّلة والإجابة بعناية عن أسئلة حول تمثيل بياني.', 'Recognise misleading charts and answer questions about a chart carefully.'),
         stepsKind: 'facts',
         steps: [
-            { title: say('Ardatza ez da 0tik hasten', 'El eje no empieza en 0', 'المحور لا يبدأ من 0', 'The axis does not start at 0'), text: say('3000tik 3200era igotzea % 7 besterik ez da, baina ardatza 2900etik hasten bada, barra hirukoitza dirudi.', 'Pasar de 3000 a 3200 es solo un 7 %, pero si el eje empieza en 2900, la barra parece el triple.', 'الانتقال من 3000 إلى 3200 زيادة 7 % فقط، لكن إذا بدأ المحور من 2900 بدا العمود ثلاثة أضعاف.', 'Going from 3000 to 3200 is only 7%, but if the axis starts at 2900, the bar looks three times as tall.'), math: same('$\\frac{200}{3000}\\approx 0{,}07$') },
+            { title: say('Ardatza ez da 0 balioan hasten', 'El eje no empieza en 0', 'المحور لا يبدأ من 0', 'The axis does not start at 0'), text: say('3000 izatetik 3200 izatera igotzea % 7 besterik ez da, baina ardatza 2900 balioan hasten bada, barra hirukoitza dirudi.', 'Pasar de 3000 a 3200 es solo un 7 %, pero si el eje empieza en 2900, la barra parece el triple.', 'الانتقال من 3000 إلى 3200 زيادة 7 % فقط، لكن إذا بدأ المحور من 2900 بدا العمود ثلاثة أضعاف.', 'Going from 3000 to 3200 is only 7%, but if the axis starts at 2900, the bar looks three times as tall.'), math: same('$\\frac{200}{3000}\\approx 0{,}07$') },
             { title: say('Irudi handituak', 'Dibujos agrandados', 'رسوم مكبَّرة', 'Enlarged drawings'), text: say('Bidoi baten altuera bikoizten bada, bolumena 8 aldiz handiagoa dirudi.', 'Si se duplica la altura de un bidón, su volumen parece 8 veces mayor.', 'إذا ضوعف ارتفاع برميل بدا حجمه أكبر بثماني مرات.', 'If you double the height of a barrel, its volume looks 8 times bigger.'), math: same('$2^{3}=8$') },
             { title: say('Ehunekoen batura', 'Suma de porcentajes', 'مجموع النسب', 'Adding up percentages'), text: say('Sektoreek % 38, % 22 eta % 40 badute, ondo dago: 100.', 'Si los sectores son 38 %, 22 % y 40 %, está bien: 100.', 'إذا كانت القطاعات 38 % و22 % و40 % فهو صحيح: 100.', 'If the sectors are 38%, 22% and 40%, that is fine: it adds up to 100.'), math: same('$38+22+40=100$') }
         ],
@@ -158,7 +158,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         steps: [
             { text: say('Zutabe berria: $x_i\\cdot f_i$.', 'Columna nueva: $x_i\\cdot f_i$.', 'عمود جديد: $x_i\\cdot f_i$.', 'New column: $x_i\\cdot f_i$.'), math: same('$0,\\ 6,\\ 10,\\ 12,\\ 8$') },
             { text: say('Batu zutabea.', 'Suma la columna.', 'اجمع العمود.', 'Add up the column.'), math: same('$0+6+10+12+8=36$') },
-            { text: say('Zatitu $N=20$-z.', 'Divide entre $N=20$.', 'اقسم على $N=20$.', 'Divide by $N=20$.'), math: same('$\\bar{x}=\\frac{36}{20}=1{,}8$') }
+            { text: say('Zatitu datu kopuruaz, $N=20$.', 'Divide entre $N=20$.', 'اقسم على $N=20$.', 'Divide by $N=20$.'), math: same('$\\bar{x}=\\frac{36}{20}=1{,}8$') }
         ],
         takeaway: say('Batez bestekoa: balio bakoitza bider bere maiztasuna, batu eta zati datu kopurua. Multzokatuta, klase-markekin.', 'Media: cada valor por su frecuencia, suma y divide entre el número de datos. Agrupados, con las marcas de clase.', 'المتوسط: كل قيمة في تكرارها، ثم الجمع والقسمة على عدد البيانات. وفي المبوّبة بمراكز الفئات.', 'Mean: multiply each value by its frequency, add up and divide by the number of data values. Grouped data: use the class marks.'),
         figure: (language) => <MeanTableFigure language={language} />
@@ -174,7 +174,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stepsKind: 'steps',
         steps: [
             { text: say('Maiztasun metatuak.', 'Frecuencias acumuladas.', 'التكرارات المتجمّعة.', 'Cumulative frequencies.'), math: same('$2,\\ 7,\\ 15,\\ 21,\\ 24$') },
-            { text: say('$N$ bikoitia: 12. eta 13. datuak. Biak $F_i=15$-en barruan: 2.', '$N$ par: datos 12.º y 13.º. Los dos caen dentro de $F_i=15$: 2.', '$N$ زوجي: البيانان 12 و13. كلاهما ضمن $F_i=15$: أي 2.', '$N$ is even: the 12th and 13th values. Both fall within $F_i=15$: 2.'), math: same('$\\frac{2+2}{2}=2$') },
+            { text: say('$N$ bikoitia: 12. eta 13. datuak. Biak $F_i=15$ errenkadan daude: 2.', '$N$ par: datos 12.º y 13.º. Los dos caen dentro de $F_i=15$: 2.', '$N$ زوجي: البيانان 12 و13. كلاهما ضمن $F_i=15$: أي 2.', '$N$ is even: the 12th and 13th values. Both fall within $F_i=15$: 2.'), math: same('$\\frac{2+2}{2}=2$') },
             { text: say('Moda: maiztasun handiena, 8.', 'Moda: la mayor frecuencia, 8.', 'المنوال: أكبر تكرار، 8.', 'Mode: the highest frequency, 8.'), math: say('$\\text{Mo}=2$', '$\\text{Mo}=2$', '$\\text{Mo}=2$', '$\\text{Mo}=2$') }
         ],
         takeaway: say('Mediana: kalkulatu erdiko postua eta bilatu metatuetan. Moda: maiztasun handiena duen balioa.', 'Mediana: calcula la posición central y búscala en las acumuladas. Moda: el valor de mayor frecuencia.', 'الوسيط: احسب الموقع الأوسط وابحث عنه في المتجمّعة. المنوال: القيمة ذات التكرار الأكبر.', 'Median: calculate the middle position and look for it in the cumulative frequencies. Mode: the value with the highest frequency.'),
@@ -208,7 +208,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stepsKind: 'steps',
         steps: [
             { text: say('Ibiltartea: 10 − 4 = 6. Batez bestekoa:', 'Recorrido: 10 − 4 = 6. Media:', 'المدى: 10 − 4 = 6. المتوسط:', 'Range: 10 − 4 = 6. Mean:'), math: same('$\\frac{4+6+7+8+10}{5}=7$') },
-            { text: say('Distantziak 7ra.', 'Distancias a 7.', 'المسافات عن 7.', 'Distances to 7.'), math: same('$3,\\ 1,\\ 0,\\ 1,\\ 3$') },
+            { text: say('Distantziak 7 zenbakira.', 'Distancias a 7.', 'المسافات عن 7.', 'Distances to 7.'), math: same('$3,\\ 1,\\ 0,\\ 1,\\ 3$') },
             { text: say('Distantzien batez bestekoa.', 'Media de las distancias.', 'متوسط المسافات.', 'Mean of the distances.'), math: same('$\\frac{3+1+0+1+3}{5}=1{,}6$') }
         ],
         takeaway: say('Ibiltartea: handiena − txikiena. DM: batez bestekoarekiko distantzien batez bestekoa.', 'Recorrido: mayor − menor. DM: media de las distancias a la media.', 'المدى: الأكبر − الأصغر. DM: متوسط المسافات عن المتوسط.', 'Range: largest − smallest. MD: the mean of the distances to the mean.'),
@@ -225,7 +225,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         steps: [
             { text: say('Ordenatu 15 datuak: 8, 9, 12, 12, 12, 13, 13, 13, 14, 14, 15, 15, 17, 18, 19.', 'Ordena los 15 datos: 8, 9, 12, 12, 12, 13, 13, 13, 14, 14, 15, 15, 17, 18, 19.', 'رتّب البيانات الخمسة عشر: 8، 9، 12، 12، 12، 13، 13، 13، 14، 14، 15، 15، 17، 18، 19.', 'Put the 15 values in order: 8, 9, 12, 12, 12, 13, 13, 13, 14, 14, 15, 15, 17, 18, 19.') },
             { text: say('Mediana: 8. datua.', 'Mediana: el dato 8.º.', 'الوسيط: البيان الثامن.', 'Median: the 8th value.'), math: same('$\\text{Me}=13$') },
-            { text: say('Beheko 7 datuen erdikoa (4.a) eta goiko 7en erdikoa (12.a).', 'El central de los 7 de abajo (el 4.º) y el de los 7 de arriba (el 12.º).', 'أوسط البيانات السبعة الدنيا (الرابع) وأوسط السبعة العليا (الثاني عشر).', 'The middle one of the lower 7 (the 4th) and the middle one of the upper 7 (the 12th).'), math: same('$Q_1=12\\qquad Q_3=15$') }
+            { text: say('Beheko 7 datuen erdikoa (4.a) eta goiko 7 datuen erdikoa (12.a).', 'El central de los 7 de abajo (el 4.º) y el de los 7 de arriba (el 12.º).', 'أوسط البيانات السبعة الدنيا (الرابع) وأوسط السبعة العليا (الثاني عشر).', 'The middle one of the lower 7 (the 4th) and the middle one of the upper 7 (the 12th).'), math: same('$Q_1=12\\qquad Q_3=15$') }
         ],
         takeaway: say('$Q_1$, Me eta $Q_3$: datuen % 25, % 50 eta % 75 haien azpian.', '$Q_1$, Me y $Q_3$: el 25 %, el 50 % y el 75 % de los datos por debajo.', '$Q_1$ وMe و$Q_3$: تحتها 25 % و50 % و75 % من البيانات.', '$Q_1$, Med and $Q_3$: 25%, 50% and 75% of the data below.'),
         figure: (language) => <QuartilesFigure language={language} />
@@ -238,11 +238,11 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         problem: say('30 ikasleren noten kutxa-diagraman: txikiena 1, $Q_1=3{,}5$, $\\text{Me}=5$, $Q_3=6$, handiena 9. Interpretatu.', 'En el diagrama de caja de las notas de 30 alumnos: mínimo 1, $Q_1=3{,}5$, $\\text{Me}=5$, $Q_3=6$, máximo 9. Interprétalo.', 'في مخطط صندوق علامات 30 تلميذًا: الأصغر 1، $Q_1=3{,}5$، $\\text{Me}=5$، $Q_3=6$، الأكبر 9. فسّره.', 'In the box plot of the marks of 30 students: minimum 1, $Q_1=3{,}5$, $\\text{Med}=5$, $Q_3=6$, maximum 9. Interpret it.'),
         stepsKind: 'steps',
         steps: [
-            { text: say('% 25ek 1 eta 3,5 artean atera dute; beste % 25ek 3,5 eta 5 artean.', 'Un 25 % ha sacado entre 1 y 3,5; otro 25 %, entre 3,5 y 5.', '25 % حصلوا على ما بين 1 و3.5، و25 % آخرون بين 3.5 و5.', '25% got between 1 and 3.5; another 25%, between 3.5 and 5.') },
+            { text: say('% 25 batek 1 eta 3,5 artean atera du; beste % 25 batek, 3,5 eta 5 artean.', 'Un 25 % ha sacado entre 1 y 3,5; otro 25 %, entre 3,5 y 5.', '25 % حصلوا على ما بين 1 و3.5، و25 % آخرون بين 3.5 و5.', '25% got between 1 and 3.5; another 25%, between 3.5 and 5.') },
             { text: say('Beste % 25 5 eta 6 artean (zati laburrena: bilduen dauden notak), eta azken % 25 6 eta 9 artean.', 'Otro 25 % entre 5 y 6 (la parte más corta: las notas más agrupadas), y el último 25 % entre 6 y 9.', 'و25 % بين 5 و6 (أقصر جزء: العلامات الأكثر تجمّعًا)، وآخر 25 % بين 6 و9.', 'Another 25% between 5 and 6 (the shortest part: the most tightly grouped marks), and the last 25% between 6 and 9.') },
             { text: say('Erdiak gainditu du: $\\text{Me}=5$. Ibiltartea eta kutxaren luzera:', 'La mitad ha aprobado: $\\text{Me}=5$. Recorrido y longitud de la caja:', 'نصفهم نجحوا: $\\text{Me}=5$. المدى وطول الصندوق:', 'Half have passed: $\\text{Med}=5$. Range and length of the box:'), math: same('$9-1=8\\qquad 6-3{,}5=2{,}5$') }
         ],
-        takeaway: say('Kutxa: $Q_1$-etik $Q_3$-ra, marra medianan; biboteak muturretaraino. Zati bakoitzean % 25.', 'Caja: de $Q_1$ a $Q_3$, raya en la mediana; bigotes hasta los extremos. En cada parte, el 25 %.', 'الصندوق: من $Q_1$ إلى $Q_3$ وخط عند الوسيط، والشاربان حتى الطرفين. في كل جزء 25 %.', 'Box: from $Q_1$ to $Q_3$, line at the median; whiskers to the ends. In each part, 25%.'),
+        takeaway: say('Kutxa: $Q_1$ kuartiletik $Q_3$ kuartilera, marra medianan; biboteak muturretaraino. Zati bakoitzean % 25.', 'Caja: de $Q_1$ a $Q_3$, raya en la mediana; bigotes hasta los extremos. En cada parte, el 25 %.', 'الصندوق: من $Q_1$ إلى $Q_3$ وخط عند الوسيط، والشاربان حتى الطرفين. في كل جزء 25 %.', 'Box: from $Q_1$ to $Q_3$, line at the median; whiskers to the ends. In each part, 25%.'),
         figure: (language) => <BoxPlotFigure language={language} />
     },
 
@@ -254,7 +254,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         figureAfterSteps: true,
         title: say('Gertaerak eta aurkako gertaera', 'Sucesos y suceso contrario', 'الأحداث والحدث المعاكس', 'Events and complementary events'),
         goal: say('Gertaerak lagin-espazioaren zati gisa idaztea, aurkako gertaeraren probabilitatea kalkulatzea eta gailu erregularrak eta irregularrak bereiztea.', 'Escribir sucesos como partes del espacio muestral, calcular la probabilidad del suceso contrario y distinguir instrumentos regulares e irregulares.', 'كتابة الأحداث أجزاءً من فضاء العيّنة، وحساب احتمال الحدث المعاكس، والتمييز بين الأدوات المنتظمة وغير المنتظمة.', 'Write events as parts of the sample space, calculate the probability of the complementary event and tell apart fair and unfair objects.'),
-        problem: say('Poltsa batean 1etik 10era zenbakitutako bolak daude. A = «3ren multiploa». Idatzi A eta $\\bar{A}$, eta kalkulatu haien probabilitateak.', 'En una bolsa hay bolas numeradas del 1 al 10. A = «múltiplo de 3». Escribe A y $\\bar{A}$ y calcula sus probabilidades.', 'في كيس كرات مرقّمة من 1 إلى 10. A = «مضاعف للعدد 3». اكتب A و$\\bar{A}$ واحسب احتماليهما.', 'A bag contains balls numbered 1 to 10. A = “multiple of 3”. Write A and $\\bar{A}$ and calculate their probabilities.'),
+        problem: say('Poltsa batean 1 eta 10 arteko zenbakiak dituzten bolak daude. A = «3 zenbakiaren multiploa». Idatzi A eta $\\bar{A}$, eta kalkulatu haien probabilitateak.', 'En una bolsa hay bolas numeradas del 1 al 10. A = «múltiplo de 3». Escribe A y $\\bar{A}$ y calcula sus probabilidades.', 'في كيس كرات مرقّمة من 1 إلى 10. A = «مضاعف للعدد 3». اكتب A و$\\bar{A}$ واحسب احتماليهما.', 'A bag contains balls numbered 1 to 10. A = “multiple of 3”. Write A and $\\bar{A}$ and calculate their probabilities.'),
         stepsKind: 'steps',
         steps: [
             { text: say('A gertaera.', 'El suceso A.', 'الحدث A.', 'Event A.'), math: same('$A=\\{3,6,9\\}\\qquad P(A)=\\frac{3}{10}$') },
@@ -292,7 +292,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stepsKind: 'steps',
         steps: [
             { text: say('Guztizkoak: 24 txakur, 11 gaixo eta 40 animalia.', 'Totales: 24 perros, 11 enfermos y 40 animales.', 'المجاميع: 24 كلبًا و11 مريضًا و40 حيوانًا.', 'Totals: 24 dogs, 11 sick animals and 40 animals.'), math: same('$12+17+4+7=40$') },
-            { text: say('Txakurra: 40tik 24.', 'Perro: 24 de 40.', 'كلب: 24 من 40.', 'Dog: 24 out of 40.'), math: same('$P=\\frac{24}{40}=\\frac{3}{5}$') },
+            { text: say('Txakurra: 40 kasu posible, 24 txakur.', 'Perro: 24 de 40.', 'كلب: 24 من 40.', 'Dog: 24 out of 40.'), math: same('$P=\\frac{24}{40}=\\frac{3}{5}$') },
             { text: say('Gaixorik dagoela jakinda: 11 kasu posible, 4 katu.', 'Sabiendo que está enfermo: 11 casos posibles, 4 gatos.', 'علمًا أنه مريض: 11 حالة ممكنة، منها 4 قطط.', 'Given that it is sick: 11 possible outcomes, 4 are cats.'), math: same('$P=\\frac{4}{11}$') }
         ],
         takeaway: say('Begiratu ondo kasu posibleak: denak ala errenkada edo zutabe bat bakarrik?', 'Mira bien los casos posibles: ¿todos o solo una fila o columna?', 'انتبه إلى الحالات الممكنة: الكل أم سطر أو عمود فقط؟', 'Look carefully at the possible outcomes: all of them, or only one row or column?'),

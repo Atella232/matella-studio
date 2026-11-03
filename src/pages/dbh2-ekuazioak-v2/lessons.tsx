@@ -63,7 +63,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stepsKind: 'facts',
         steps: [
             { title: { eu: 'Batzen → kentzen', es: 'Sumando → restando', en: 'Adding → subtracting', ar: 'جمع ← طرح' }, text: { eu: 'Bi ataletan 5 kendu.', es: 'Restar 5 en los dos miembros.', en: 'Subtract 5 from both sides.', ar: 'اطرح 5 من الطرفين.' }, math: '$x+5=12\\ \\to\\ x=7$' },
-            { title: { eu: 'Biderkatzen → zatitzen', es: 'Multiplicando → dividiendo', en: 'Multiplying → dividing', ar: 'ضرب ← قسمة' }, text: { eu: 'Bi atalak 3z zatitu.', es: 'Dividir los dos miembros entre 3.', en: 'Divide both sides by 3.', ar: 'اقسم الطرفين على 3.' }, math: '$3x=21\\ \\to\\ x=7$' },
+            { title: { eu: 'Biderkatzen → zatitzen', es: 'Multiplicando → dividiendo', en: 'Multiplying → dividing', ar: 'ضرب ← قسمة' }, text: { eu: 'Bi atalak 3 zenbakiaz zatitu.', es: 'Dividir los dos miembros entre 3.', en: 'Divide both sides by 3.', ar: 'اقسم الطرفين على 3.' }, math: '$3x=21\\ \\to\\ x=7$' },
             { title: { eu: 'Baliokideak', es: 'Equivalentes', en: 'Equivalent', ar: 'متكافئة' }, text: { eu: 'Ebazpen bera: x = 7.', es: 'La misma solución: x = 7.', en: 'The same solution: x = 7.', ar: 'الحل نفسه: x = 7.' }, math: '$x+5=12\\ \\sim\\ 3x=21$' }
         ],
         takeaway: {
@@ -160,7 +160,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         problem: { eu: 'Ebatzi $\\frac{x}{3}+2=7$.', es: 'Resuelve $\\frac{x}{3}+2=7$.', en: 'Solve $\\frac{x}{3}+2=7$.', ar: 'حلّ $\\frac{x}{3}+2=7$.' },
         stepsKind: 'steps',
         steps: [
-            { text: { eu: 'Biderkatu gai guztiak 3z.', es: 'Multiplica todos los términos por 3.', en: 'Multiply all the terms by 3.', ar: 'اضرب كل الحدود في 3.' }, math: '$x+6=21$' },
+            { text: { eu: 'Biderkatu gai guztiak 3 zenbakiaz.', es: 'Multiplica todos los términos por 3.', en: 'Multiply all the terms by 3.', ar: 'اضرب كل الحدود في 3.' }, math: '$x+6=21$' },
             { text: { eu: 'Askatu x.', es: 'Despeja x.', en: 'Solve for x.', ar: 'اعزل x.' }, math: '$x=15$' }
         ],
         takeaway: {
@@ -185,7 +185,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         problem: { eu: 'Ebatzi $\\frac{x}{2}+\\frac{x}{3}=5$.', es: 'Resuelve $\\frac{x}{2}+\\frac{x}{3}=5$.', en: 'Solve $\\frac{x}{2}+\\frac{x}{3}=5$.', ar: 'حلّ $\\frac{x}{2}+\\frac{x}{3}=5$.' },
         stepsKind: 'steps',
         steps: [
-            { text: { eu: 'MKT(2, 3) = 6. Biderkatu gai guztiak 6z.', es: 'm.c.m.(2, 3) = 6. Multiplica todos los términos por 6.', en: 'LCM(2, 3) = 6. Multiply all the terms by 6.', ar: 'م.م.أ(2، 3) = 6. اضرب كل الحدود في 6.' }, math: '$3x+2x=30$' },
+            { text: { eu: 'MKT(2, 3) = 6. Biderkatu gai guztiak 6 zenbakiaz.', es: 'm.c.m.(2, 3) = 6. Multiplica todos los términos por 6.', en: 'LCM(2, 3) = 6. Multiply all the terms by 6.', ar: 'م.م.أ(2، 3) = 6. اضرب كل الحدود في 6.' }, math: '$3x+2x=30$' },
             { text: { eu: 'Laburtu eta askatu x.', es: 'Reduce y despeja x.', en: 'Simplify and solve for x.', ar: 'بسّط واعزل x.' }, math: '$5x=30\\ \\to\\ x=6$' }
         ],
         takeaway: {
@@ -235,7 +235,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stepsKind: 'steps',
         steps: [
             { text: { eu: 'Zenbakia: x.', es: 'El número: x.', en: 'The number: x.', ar: 'العدد: x.' }, math: '$\\frac{x}{2}+13=2x-11$' },
-            { text: { eu: 'Biderkatu 2z eta ebatzi.', es: 'Multiplica por 2 y resuelve.', en: 'Multiply by 2 and solve.', ar: 'اضرب في 2 وحلّ.' }, math: '$x+26=4x-22\\ \\to\\ x=16$' },
+            { text: { eu: 'Biderkatu 2 zenbakiaz eta ebatzi.', es: 'Multiplica por 2 y resuelve.', en: 'Multiply by 2 and solve.', ar: 'اضرب في 2 وحلّ.' }, math: '$x+26=4x-22\\ \\to\\ x=16$' },
             { text: { eu: 'Egiaztatu: 8 + 13 = 21 eta 32 − 11 = 21. Zenbakia 16 da.', es: 'Comprueba: 8 + 13 = 21 y 32 − 11 = 21. El número es 16.', en: 'Check: 8 + 13 = 21 and 32 − 11 = 21. The number is 16.', ar: 'تحقّق: 8 + 13 = 21 و32 − 11 = 21. العدد 16.' } }
         ],
         takeaway: {

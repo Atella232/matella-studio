@@ -114,7 +114,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         problem: { eu: 'Laburtu: $5x^{2}+3x-4x^{2}-2x+1$.', es: 'Reduce: $5x^{2}+3x-4x^{2}-2x+1$.', en: 'Simplify: $5x^{2}+3x-4x^{2}-2x+1$.', ar: 'بسّط: $5x^{2}+3x-4x^{2}-2x+1$.' },
         stepsKind: 'steps',
         steps: [
-            { text: { eu: 'Elkartu $x^{2}$-dun gaiak.', es: 'Agrupa los términos en $x^{2}$.', en: 'Group the terms in $x^{2}$.', ar: 'اجمع حدود $x^{2}$.' }, math: '$5x^{2}-4x^{2}=x^{2}$' },
+            { text: { eu: 'Elkartu $x^{2}$ duten gaiak.', es: 'Agrupa los términos en $x^{2}$.', en: 'Group the terms in $x^{2}$.', ar: 'اجمع حدود $x^{2}$.' }, math: '$5x^{2}-4x^{2}=x^{2}$' },
             { text: { eu: 'Elkartu $x$-dun gaiak.', es: 'Agrupa los términos en $x$.', en: 'Group the terms in $x$.', ar: 'اجمع حدود $x$.' }, math: '$3x-2x=x$' },
             { text: { eu: 'Gai askea bere horretan geratzen da.', es: 'El término independiente se queda igual.', en: 'The constant term stays the same.', ar: 'يبقى الحد الثابت كما هو.' }, math: '$x^{2}+x+1$' }
         ],
@@ -211,7 +211,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         problem: { eu: 'Kalkulatu $3x^{2}\\cdot(2x^{2}-x+4)$ eta $(10x^{3}-4x^{2}+6x)\\mathbin{:}2x$.', es: 'Calcula $3x^{2}\\cdot(2x^{2}-x+4)$ y $(10x^{3}-4x^{2}+6x)\\mathbin{:}2x$.', en: 'Calculate $3x^{2}\\cdot(2x^{2}-x+4)$ and $(10x^{3}-4x^{2}+6x)\\mathbin{:}2x$.', ar: 'احسب $3x^{2}\\cdot(2x^{2}-x+4)$ و$(10x^{3}-4x^{2}+6x)\\mathbin{:}2x$.' },
         stepsKind: 'steps',
         steps: [
-            { text: { eu: 'Biderkatu gai bakoitza $3x^{2}$-z.', es: 'Multiplica cada término por $3x^{2}$.', en: 'Multiply each term by $3x^{2}$.', ar: 'اضرب كل حد في $3x^{2}$.' }, math: '$6x^{4}-3x^{3}+12x^{2}$' },
+            { text: { eu: 'Biderkatu gai bakoitza $3x^{2}$ monomioaz.', es: 'Multiplica cada término por $3x^{2}$.', en: 'Multiply each term by $3x^{2}$.', ar: 'اضرب كل حد في $3x^{2}$.' }, math: '$6x^{4}-3x^{3}+12x^{2}$' },
             { text: { eu: 'Zatitu gai bakoitza $2x$-z.', es: 'Divide cada término entre $2x$.', en: 'Divide each term by $2x$.', ar: 'اقسم كل حد على $2x$.' }, math: '$5x^{2}-2x+3$' }
         ],
         takeaway: {

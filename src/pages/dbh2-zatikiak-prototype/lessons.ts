@@ -43,7 +43,7 @@ const baseTopics: Omit<TheoryTopic, 'explanation' | 'example'>[] = [
             },
             {
                 title: { eu: 'Zenbaki bat', es: 'Un número', en: 'A number', ar: 'عدد' },
-                text: { eu: '$\\frac{3}{4}$ zenbaki-zuzenean dago, 0 eta 1 artean, 1etik hurbilago. Zenbakitzailea izendatzailea baino handiagoa bada, zatikiak 1 baino gehiago balio du.', es: '$\\frac{3}{4}$ ocupa un punto de la recta, entre 0 y 1, más cerca de 1. Si el numerador es mayor que el denominador, la fracción vale más que 1.', en: '$\\frac{3}{4}$ is a point on the number line, between 0 and 1, closer to 1. If the numerator is bigger than the denominator, the fraction is worth more than 1.', ar: 'يقع $\\frac{3}{4}$ على خط الأعداد بين 0 و1، وهو أقرب إلى 1. وإذا كان البسط أكبر من المقام كانت قيمة الكسر أكبر من 1.' },
+                text: { eu: '$\\frac{3}{4}$ zenbaki-zuzenean dago, 0 eta 1 artean, 1 zenbakitik hurbilago. Zenbakitzailea izendatzailea baino handiagoa bada, zatikiak 1 baino gehiago balio du.', es: '$\\frac{3}{4}$ ocupa un punto de la recta, entre 0 y 1, más cerca de 1. Si el numerador es mayor que el denominador, la fracción vale más que 1.', en: '$\\frac{3}{4}$ is a point on the number line, between 0 and 1, closer to 1. If the numerator is bigger than the denominator, the fraction is worth more than 1.', ar: 'يقع $\\frac{3}{4}$ على خط الأعداد بين 0 و1، وهو أقرب إلى 1. وإذا كان البسط أكبر من المقام كانت قيمة الكسر أكبر من 1.' },
                 math: '$0<\\frac{3}{4}<1<\\frac{5}{4}$'
             },
             {
@@ -155,7 +155,7 @@ const baseTopics: Omit<TheoryTopic, 'explanation' | 'example'>[] = [
                 math: '$\\frac{-84}{126}=\\frac{-84\\div 42}{126\\div 42}=\\frac{-2}{3}$'
             },
             {
-                text: { eu: 'Egiaztatu: 2k eta 3k 1 baino ez dute zatitzaile komun. Zatiki laburtezina da.', es: 'Comprueba: 2 y 3 solo tienen el 1 como divisor común. Es irreducible.', en: 'Check: 2 and 3 only have 1 as a common divisor. It is in its simplest form.', ar: 'تحقّق: لا قاسم مشتركًا لـ 2 و3 سوى 1. فالكسر غير قابل للاختزال.' },
+                text: { eu: 'Egiaztatu: 2 eta 3 zenbakiek 1 baino ez dute zatitzaile komun. Zatiki laburtezina da.', es: 'Comprueba: 2 y 3 solo tienen el 1 como divisor común. Es irreducible.', en: 'Check: 2 and 3 only have 1 as a common divisor. It is in its simplest form.', ar: 'تحقّق: لا قاسم مشتركًا لـ 2 و3 سوى 1. فالكسر غير قابل للاختزال.' },
                 math: '$-\\frac{2}{3}$'
             }
         ],
@@ -244,7 +244,7 @@ const baseTopics: Omit<TheoryTopic, 'explanation' | 'example'>[] = [
                 math: '$\\frac{10}{12}-\\frac{3}{12}=\\frac{10-3}{12}=\\frac{7}{12}$'
             },
             {
-                text: { eu: 'Sinplifikatu, ahal bada. 7k eta 12k ez dute zatitzaile komunik: zatiki laburtezina da.', es: 'Simplifica, si se puede. 7 y 12 no tienen divisores comunes: ya es irreducible.', en: 'Simplify, if you can. 7 and 12 have no common divisors: it is already in its simplest form.', ar: 'بسّط إن أمكن. لا قاسم مشتركًا لـ 7 و12، فالكسر في أبسط صورة.' },
+                text: { eu: 'Sinplifikatu, ahal bada. 7 eta 12 zenbakiek ez dute zatitzaile komunik: zatiki laburtezina da.', es: 'Simplifica, si se puede. 7 y 12 no tienen divisores comunes: ya es irreducible.', en: 'Simplify, if you can. 7 and 12 have no common divisors: it is already in its simplest form.', ar: 'بسّط إن أمكن. لا قاسم مشتركًا لـ 7 و12، فالكسر في أبسط صورة.' },
                 math: '$\\frac{7}{12}$'
             }
         ],
@@ -280,12 +280,12 @@ const baseTopics: Omit<TheoryTopic, 'explanation' | 'example'>[] = [
             },
             {
                 title: { eu: 'Alderantzizkoa', es: 'La inversa', en: 'The reciprocal', ar: 'المقلوب' },
-                text: { eu: '$\\frac{a}{b}$-ren alderantzizkoa $\\frac{b}{a}$ da. 0k ez du alderantzizkorik.', es: 'La inversa de $\\frac{a}{b}$ es $\\frac{b}{a}$. El 0 no tiene inversa.', en: 'The reciprocal of $\\frac{a}{b}$ is $\\frac{b}{a}$. Zero has no reciprocal.', ar: 'مقلوب $\\frac{a}{b}$ هو $\\frac{b}{a}$. والصفر ليس له مقلوب.' },
+                text: { eu: '$\\frac{a}{b}$-ren alderantzizkoa $\\frac{b}{a}$ da. 0 zenbakiak ez du alderantzizkorik.', es: 'La inversa de $\\frac{a}{b}$ es $\\frac{b}{a}$. El 0 no tiene inversa.', en: 'The reciprocal of $\\frac{a}{b}$ is $\\frac{b}{a}$. Zero has no reciprocal.', ar: 'مقلوب $\\frac{a}{b}$ هو $\\frac{b}{a}$. والصفر ليس له مقلوب.' },
                 math: '$\\frac{8}{15}\\cdot\\frac{15}{8}=1$'
             },
             {
                 title: { eu: 'Zatitu', es: 'Dividir', en: 'Divide', ar: 'القسمة' },
-                text: { eu: 'Zenbat zortziren sartzen dira $\\frac{3}{4}$-n? Sei. Zatitzea alderantzizkoaz biderkatzea da.', es: '¿Cuántos octavos caben en $\\frac{3}{4}$? Seis. Dividir es multiplicar por la inversa.', en: 'How many eighths fit into $\\frac{3}{4}$? Six. Dividing is multiplying by the reciprocal.', ar: 'كم ثُمنًا في $\\frac{3}{4}$؟ ستة. فالقسمة ضرب في المقلوب.' },
+                text: { eu: 'Zenbat zortziren sartzen dira $\\frac{3}{4}$ zatikian? Sei. Zatitzea alderantzizkoaz biderkatzea da.', es: '¿Cuántos octavos caben en $\\frac{3}{4}$? Seis. Dividir es multiplicar por la inversa.', en: 'How many eighths fit into $\\frac{3}{4}$? Six. Dividing is multiplying by the reciprocal.', ar: 'كم ثُمنًا في $\\frac{3}{4}$؟ ستة. فالقسمة ضرب في المقلوب.' },
                 math: '$\\frac{3}{4}\\div\\frac{1}{8}=\\frac{3}{4}\\cdot\\frac{8}{1}=6$'
             }
         ],
@@ -368,7 +368,7 @@ const baseTopics: Omit<TheoryTopic, 'explanation' | 'example'>[] = [
         steps: [
             {
                 title: { eu: 'Zatia', es: 'La parte', en: 'The part', ar: 'الجزء' },
-                text: { eu: '120ren $\\frac{3}{8}$: zortziren bat 15 da, eta hiru, 45.', es: '$\\frac{3}{8}$ de 120: un octavo es 15 y tres octavos, 45.', en: '$\\frac{3}{8}$ of 120: one eighth is 15 and three eighths are 45.', ar: '$\\frac{3}{8}$ من 120: الثُّمن 15، وثلاثة أثمان 45.' },
+                text: { eu: '120 zenbakiaren $\\frac{3}{8}$: zortziren bat 15 da, eta hiru, 45.', es: '$\\frac{3}{8}$ de 120: un octavo es 15 y tres octavos, 45.', en: '$\\frac{3}{8}$ of 120: one eighth is 15 and three eighths are 45.', ar: '$\\frac{3}{8}$ من 120: الثُّمن 15، وثلاثة أثمان 45.' },
                 math: { eu: '$\\frac{3}{8}\\cdot 120=\\frac{3\\cdot 120}{8}=45$', es: '$\\frac{3}{8}\\text{ de }120=\\frac{3\\cdot 120}{8}=45$', en: '$\\frac{3}{8}\\text{ of }120=\\frac{3\\cdot 120}{8}=45$', ar: '$\\frac{3}{8}\\cdot 120=\\frac{3\\cdot 120}{8}=45$' }
             },
             {
@@ -383,7 +383,7 @@ const baseTopics: Omit<TheoryTopic, 'explanation' | 'example'>[] = [
             },
             {
                 title: { eu: 'Zatiki baten zatikia', es: 'Fracción de una fracción', en: 'Fraction of a fraction', ar: 'كسر من كسر' },
-                text: { eu: '$\\frac{3}{4}$-ren erdia: zatikiak biderkatzen dira.', es: 'La mitad de $\\frac{3}{4}$: se multiplican las fracciones.', en: 'Half of $\\frac{3}{4}$: multiply the fractions.', ar: 'نصف $\\frac{3}{4}$: نضرب الكسرين.' },
+                text: { eu: '$\\frac{3}{4}$ zatikiaren erdia: zatikiak biderkatzen dira.', es: 'La mitad de $\\frac{3}{4}$: se multiplican las fracciones.', en: 'Half of $\\frac{3}{4}$: multiply the fractions.', ar: 'نصف $\\frac{3}{4}$: نضرب الكسرين.' },
                 math: '$\\frac{1}{2}\\cdot\\frac{3}{4}=\\frac{3}{8}$'
             }
         ],
@@ -404,7 +404,7 @@ const baseTopics: Omit<TheoryTopic, 'explanation' | 'example'>[] = [
             },
             {
                 title: { eu: 'Hamartarra → ehunekoa', es: 'Decimal → porcentaje', en: 'Decimal → percentage', ar: 'عدد عشري ← نسبة مئوية' },
-                text: { eu: 'Biderkatu 100ez.', es: 'Multiplica por 100.', en: 'Multiply by 100.', ar: 'اضرب في 100.' },
+                text: { eu: 'Biderkatu 100 zenbakiaz.', es: 'Multiplica por 100.', en: 'Multiply by 100.', ar: 'اضرب في 100.' },
                 math: { eu: '$0{,}375\\cdot 100=\\%\\,37{,}5$', es: '$0{,}375\\cdot 100=37{,}5\\,\\%$', en: '$0{,}375\\cdot 100=37{,}5\\,\\%$', ar: '$0.375\\cdot 100=37.5\\,\\%$' }
             },
             {

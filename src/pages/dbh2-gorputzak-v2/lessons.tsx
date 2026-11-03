@@ -85,7 +85,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stepsKind: 'steps',
         steps: [
             { text: say('Zenbatu triangeluen alde guztiak.', 'Cuenta todos los lados de los triángulos.', 'عُدّ جميع أضلاع المثلثات.', 'Count all the sides of the triangles.'), math: same('$20\\cdot 3=60$') },
-            { text: say('Ertz bakoitza bi aurpegik partekatzen dute: zatitu 2z.', 'Cada arista la comparten dos caras: divide entre 2.', 'كل حرف مشترك بين وجهين: اقسم على 2.', 'Each edge is shared by two faces: divide by 2.'), math: same('$60\\mathbin{:}2=30$') },
+            { text: say('Ertz bakoitza bi aurpegik partekatzen dute: zatitu 2 zenbakiaz.', 'Cada arista la comparten dos caras: divide entre 2.', 'كل حرف مشترك بين وجهين: اقسم على 2.', 'Each edge is shared by two faces: divide by 2.'), math: same('$60\\mathbin{:}2=30$') },
             { text: say('Erpinak: 60 erpin, 5 aurpegitan banatuta.', 'Vértices: 60 esquinas repartidas de 5 en 5.', 'الرؤوس: 60 زاوية موزعة خمسًا خمسًا.', 'Vertices: 60 corners, grouped in fives.'), math: same('$60\\mathbin{:}5=12$') }
         ],
         takeaway: say('Bost poliedro erregular: tetraedroa, kuboa, oktaedroa, dodekaedroa eta ikosaedroa.', 'Cinco poliedros regulares: tetraedro, cubo, octaedro, dodecaedro e icosaedro.', 'خمسة متعددات أوجه منتظمة: رباعي الأوجه، والمكعب، وثماني الأوجه، واثنا عشري الأوجه، وعشريني الأوجه.', 'Five regular polyhedra: tetrahedron, cube, octahedron, dodecahedron and icosahedron.'),
