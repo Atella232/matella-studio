@@ -67,7 +67,7 @@ for (const { unit, lessons, files } of units) {
         const algebra = algebraInWords[unit] ?? []
         const found = files.flatMap((name) => {
             const texts = basqueTexts(readFileSync(new URL(`${unit}/${name}`, pages), 'utf8'))
-            if (name === lessons) assert.ok(texts.length > 20, `${unit}: only ${texts.length} Basque texts found`)
+            assert.ok(texts.length > (name === lessons ? 20 : 0), `${unit}: only ${texts.length} Basque texts found in ${name}`)
             return texts.flatMap(({ line, text }) => glued(algebra.reduce((rest, term) => rest.split(term).join(' '), text)).map((word) => `${name}:${line}: «${word}» in «${text}»`))
         })
         assert.deepEqual(found, [])
