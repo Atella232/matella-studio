@@ -13,4 +13,4 @@ Trick: water colour is a fixed `#7fb0e8`; the theme's blue tint is too pale to r
 
 Deployed 2026-11-02: main fd383b3, bundle `index-NhNlFoWP.js`; checked live at 375 px in eu, es and ar (every new game opens and starts, no overflow, no console errors).
 
-**«Error típico» y «Compruébalo» (mejoras 5 y 7 de la teoría, rama `feat/teoria-error-check`, sin publicar):** commit 802608f. Cada lección lleva su error típico y su pregunta en `lessonChecks.ts` (`solidsLessonChecks`, sobre `SolidsTopicId`), mezclados en `lessons.tsx`. π ≈ 3,14 como en las lecciones; unidades fuera de $…$. Reglas, test y revisión a 375 px en `teoria-dbh2.md`.
+**«Error típico» y «Compruébalo» (mejoras 5 y 7 de la teoría, rama `feat/teoria-error-check`, **publicado el 2026-11-03**: main 4bd962d, bundle `index-B-aBnto3.js`):** commit 802608f. Cada lección lleva su error típico y su pregunta en `lessonChecks.ts` (`solidsLessonChecks`, sobre `SolidsTopicId`), mezclados en `lessons.tsx`. π ≈ 3,14 como en las lecciones; unidades fuera de $…$. Reglas, test y revisión a 375 px en `teoria-dbh2.md`.

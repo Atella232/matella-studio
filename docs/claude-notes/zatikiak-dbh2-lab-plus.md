@@ -179,4 +179,4 @@ M3 «Animaciones en las herramientas» (rounds: 35d2b64, 0321fdf, cf2eb46):
 - Every option of the 2026-10-21 review is now built and live.
 - Tip for Mac sessions: run `git fetch` and check `main...origin/main` before starting, because cloud sessions push to origin.
 
-**«Error típico» y «Compruébalo» (mejoras 5 y 7 de la teoría, rama `feat/teoria-error-check`, sin publicar):** commit ed2e00b. Cada lección lleva su error típico y su pregunta en `lessonChecks.ts` (`fractionLessonChecks`, sobre `TheoryTopicId (content.ts)`), mezclados en `index.tsx (junto a los dibujos)`. Los porcentajes (%35, 35 %, 35٪) van en las palabras. Reglas, test y revisión a 375 px en `teoria-dbh2.md`.
+**«Error típico» y «Compruébalo» (mejoras 5 y 7 de la teoría, rama `feat/teoria-error-check`, **publicado el 2026-11-03**: main 4bd962d, bundle `index-B-aBnto3.js`):** commit ed2e00b. Cada lección lleva su error típico y su pregunta en `lessonChecks.ts` (`fractionLessonChecks`, sobre `TheoryTopicId (content.ts)`), mezclados en `index.tsx (junto a los dibujos)`. Los porcentajes (%35, 35 %, 35٪) van en las palabras. Reglas, test y revisión a 375 px en `teoria-dbh2.md`.
