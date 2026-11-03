@@ -232,7 +232,8 @@ for (const unit of units) {
                 const es = formulas(text.es)
                 // A language may name a letter its own way (A_O for the area of the base, Med for the median): same shape and numbers
                 for (const language of ['eu', 'en'] as const) assert.deepEqual(formulas(text[language]).map(shape), es.map(shape), `${id}: the formulas of ${language} differ: ${text[language]}`)
-                assert.deepEqual(formulas(text.ar), es.map((formula) => formula.replace(/\{,\}/g, '.')), `${id}: the Arabic formulas differ: ${text.ar}`)
+                // Arabic writes the decimal point, and the Basque names where the unit uses them (Zat, ZKH)
+                assert.deepEqual(formulas(text.ar).map(shape), es.map((formula) => shape(formula.replace(/\{,\}/g, '.'))), `${id}: the Arabic formulas differ: ${text.ar}`)
                 for (const language of languages) {
                     for (const formula of formulas(text[language])) katex.renderToString(formula, { throwOnError: true })
                 }
