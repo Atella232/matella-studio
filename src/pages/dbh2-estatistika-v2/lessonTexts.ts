@@ -416,7 +416,7 @@ export const statisticsLessonTexts: Record<StatisticsTopicId, LessonTexts> = {
             {
                 term: say('Kutxa-diagrama', 'Diagrama de caja y bigotes', 'مخطط الصندوق', 'Box plot'),
                 meaning: say(
-                    'Bost balio laburtzen ditu: txikiena, $Q_1$, mediana, $Q_3$ eta handiena. Kutxa $Q_1$-etik $Q_3$-ra doa, marra bat medianan duela.',
+                    'Bost balio laburtzen ditu: txikiena, $Q_1$, mediana, $Q_3$ eta handiena. Kutxa $Q_1$ kuartiletik $Q_3$ kuartilera doa, marra bat medianan duela.',
                     'Resume cinco valores: mínimo, $Q_1$, mediana, $Q_3$ y máximo. La caja va de $Q_1$ a $Q_3$, con una raya en la mediana.',
                     'يلخّص خمس قيم: الأصغر و$Q_1$ والوسيط و$Q_3$ والأكبر. يمتد الصندوق من $Q_1$ إلى $Q_3$ وفيه خط عند الوسيط.',
                     'It summarises five values: minimum, $Q_1$, median, $Q_3$ and maximum. The box goes from $Q_1$ to $Q_3$, with a line at the median.'

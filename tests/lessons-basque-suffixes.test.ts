@@ -3,17 +3,18 @@ import assert from 'node:assert/strict'
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 
 /* CLAUDE.md: a Basque text never glues a suffix to a number («6ren», «2rekin», «% 8an»): how it sounds depends on
-   how the number is read. lesson-texts.test.ts and lesson-checks.test.ts check lessonTexts.ts and lessonChecks.ts;
-   this test checks the Basque texts of the lessons file of every unit (titles, goals, explanations, examples,
-   «Let's solve», steps, cases, key ideas). The lessons are read as text: the .tsx files hold drawings that node
-   cannot import. */
+   how the number is read. This test checks the Basque texts of every unit: its lessons file (titles, goals,
+   explanations, examples, «Let's solve», steps, cases, key ideas) and, when it has them, lessonTexts.ts and
+   lessonChecks.ts, where lesson-texts.test.ts and lesson-checks.test.ts do not see a hyphen ($Q_1$-etik). The files
+   are read as text: the .tsx files hold drawings that node cannot import. */
 
 const pages = new URL('../src/pages/', import.meta.url)
 
-/** Every unit with a lessons file */
+/** Every unit with a lessons file, with the files that hold the texts of its lessons */
 const units = readdirSync(pages).sort().flatMap((unit) => {
-    const file = ['lessons.tsx', 'lessons.ts'].map((name) => new URL(`${unit}/${name}`, pages)).find(existsSync)
-    return file ? [{ unit, file }] : []
+    const lessons = ['lessons.tsx', 'lessons.ts'].find((name) => existsSync(new URL(`${unit}/${name}`, pages)))
+    const others = ['lessonTexts.ts', 'lessonChecks.ts'].filter((name) => existsSync(new URL(`${unit}/${name}`, pages)))
+    return lessons ? [{ unit, lessons, files: [lessons, ...others] }] : []
 })
 
 /** Algebra written as plain text with a letter that is also a Basque ending (the -a of «2a»): the vertex of a parabola */
@@ -61,12 +62,14 @@ test('the lessons files of every course are found', () => {
     }
 })
 
-for (const { unit, file } of units) {
-    test(`${unit}: the Basque texts of the lessons file glue no suffix to a number`, () => {
-        const texts = basqueTexts(readFileSync(file, 'utf8'))
-        assert.ok(texts.length > 20, `${unit}: only ${texts.length} Basque texts found`)
+for (const { unit, lessons, files } of units) {
+    test(`${unit}: the Basque texts of its lessons glue no suffix to a number`, () => {
         const algebra = algebraInWords[unit] ?? []
-        const found = texts.flatMap(({ line, text }) => glued(algebra.reduce((rest, term) => rest.split(term).join(' '), text)).map((word) => `line ${line}: «${word}» in «${text}»`))
+        const found = files.flatMap((name) => {
+            const texts = basqueTexts(readFileSync(new URL(`${unit}/${name}`, pages), 'utf8'))
+            if (name === lessons) assert.ok(texts.length > 20, `${unit}: only ${texts.length} Basque texts found`)
+            return texts.flatMap(({ line, text }) => glued(algebra.reduce((rest, term) => rest.split(term).join(' '), text)).map((word) => `${name}:${line}: «${word}» in «${text}»`))
+        })
         assert.deepEqual(found, [])
     })
 }
