@@ -8,7 +8,7 @@ import { checkAnswer, hasTerminatingDecimal, toExactDecimal, type FractionValue 
 import { isUnitV2Path } from '../src/features/unit-v2/paths.ts'
 import type { LocalizedText } from '../src/features/unit-v2/types.ts'
 import { readTrigonometryAnswer } from '../src/pages/dbh4-akademikoak-trigonometria/answers.ts'
-import { localize } from '../src/pages/dbh4-akademikoak-trigonometria/text.ts'
+import { localize, localizeNames } from '../src/pages/dbh4-akademikoak-trigonometria/text.ts'
 
 import { trigonometryChallenges as realsChallenges, trigonometryDiagnostic as realsDiagnostic, trigonometryExerciseBank as realsExerciseBank, trigonometryPractice as realsPractice } from '../src/pages/dbh4-akademikoak-trigonometria/content.ts'
 
@@ -151,7 +151,8 @@ test('trigonometria 4. DBH ak: answers with units, signs, commas or points are r
 
 test('trigonometria 4. DBH ak: lessons cover every topic and their formulas render', () => {
     // The lessons are TSX: read their source and render every formula in each language
-    const source = readFileSync('src/pages/dbh4-akademikoak-trigonometria/lessons.tsx', 'utf8').replace(/\\\\/g, '\\').replace(/\\'/g, "'")
+    // lessonTexts.ts and lessonChecks.ts hold the explanations, examples, mistakes and questions since 2026-11-04
+    const source = ['lessons.tsx', 'lessonTexts.ts', 'lessonChecks.ts'].map((file) => readFileSync(`src/pages/dbh4-akademikoak-trigonometria/${file}`, 'utf8')).join('\n').replace(/\\\\/g, '\\').replace(/\\'/g, "'")
     assert.deepEqual([...source.matchAll(/id: '([a-z-]+)',\s+stage:/g)].map((match) => match[1]), topics)
     let formulas = 0
     for (const [, formula] of source.matchAll(/\$([^$]+)\$/g)) {
@@ -166,4 +167,13 @@ test('trigonometria 4. DBH ak: each language writes its own names of the ratios'
     assert.equal(localize('eu', '\\sen\\alpha+\\tg\\alpha'), '\\sin\\alpha+\\operatorname{tg}\\alpha')
     assert.equal(localize('ar', '\\sen\\alpha+\\tg\\alpha'), '\\sin\\alpha+\\tan\\alpha')
     for (const text of allTexts()) for (const language of ['eu', 'es', 'en', 'ar'] as const) assert.ok(!/\\(?:sen|tg)(?![a-zA-Z])/.test(text[language]), text[language])
+})
+
+test('trigonometria 4. DBH ak: the shared lesson texts get each language\'s names of the ratios', () => {
+    const named = localizeNames({ text: { eu: '$\\sin\\alpha+\\tan\\alpha$', es: '$\\sin\\alpha+\\tan\\alpha$', en: '$\\sin\\alpha+\\tan\\alpha$', ar: '$\\sin\\alpha+\\tan\\alpha$' }, list: [{ eu: '$\\tan 30°$', es: '$\\tan 30°$', en: '$\\tan 30°$', ar: '$\\tan 30°$' }] })
+    assert.equal(named.text.es, '$\\operatorname{sen}\\alpha+\\operatorname{tg}\\alpha$')
+    assert.equal(named.text.eu, '$\\sin\\alpha+\\operatorname{tg}\\alpha$')
+    assert.equal(named.text.en, '$\\sin\\alpha+\\tan\\alpha$')
+    assert.equal(named.text.ar, '$\\sin\\alpha+\\tan\\alpha$')
+    assert.equal(named.list[0].es, '$\\operatorname{tg} 30°$')
 })
