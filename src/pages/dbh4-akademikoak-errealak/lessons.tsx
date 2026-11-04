@@ -186,7 +186,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         figureAfterSteps: true,
         title: say('Tarteen bildura eta ebakidura', 'Unión e intersección de intervalos', 'اتحاد الفترات وتقاطعها', 'Union and intersection of intervals'),
         goal: say('Bi tarteren bildura eta ebakidura zuzenean irakurtzea.', 'Leer en la recta la unión y la intersección de dos intervalos.', 'قراءة اتحاد فترتين وتقاطعهما على المستقيم.', 'Read the union and the intersection of two intervals on the number line.'),
-        problem: same('$A=[-5,\\,3]\\qquad B=(-1,\\,+\\infty)$'),
+        problem: say('Kalkulatu $A\\cup B$ eta $A\\cap B$, $A=[-5,\\,3]$ eta $B=(-1,\\,+\\infty)$ badira.', 'Halla $A\\cup B$ y $A\\cap B$ si $A=[-5,\\,3]$ y $B=(-1,\\,+\\infty)$.', 'جد $A\\cup B$ و$A\\cap B$ إذا كانت $A=[-5,\\,3]$ و$B=(-1,\\,+\\infty)$.', 'Find $A\\cup B$ and $A\\cap B$ if $A=[-5,\\,3]$ and $B=(-1,\\,+\\infty)$.'),
         stepsKind: 'steps',
         steps: [
             { text: say('Marraztu biak: −1 eta 3 artean gainjartzen dira.', 'Dibuja los dos: se solapan de −1 a 3.', 'ارسمهما: يتداخلان من −1 إلى 3.', 'Draw both: they overlap from −1 to 3.'), math: same('$-1\\notin B\\qquad 3\\in A$') },
@@ -225,8 +225,8 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         problem: say('$1{,}468$ zenbakirako, zein da hobea: $1{,}5$ ala $1{,}4$?', 'Para $1{,}468$, ¿qué aproximación es mejor: $1{,}5$ o $1{,}4$?', 'للعدد $1{,}468$ أي تقريب أفضل: $1{,}5$ أم $1{,}4$؟', 'For $1{,}468$, which approximation is better: $1{,}5$ or $1{,}4$?'),
         stepsKind: 'steps',
         steps: [
-            { text: say('$1{,}5$ hartuta.', 'Tomando $1{,}5$.', 'بأخذ $1{,}5$.', 'Using $1{,}5$.'), math: same('$E_a=|1{,}468-1{,}5|=0{,}032\\qquad E_r=\\frac{0{,}032}{1{,}468}=0{,}0218\\ldots$') },
-            { text: say('$1{,}4$ hartuta.', 'Tomando $1{,}4$.', 'بأخذ $1{,}4$.', 'Using $1{,}4$.'), math: same('$E_a=|1{,}468-1{,}4|=0{,}068\\qquad E_r=0{,}0463\\ldots$') },
+            { text: say('$1{,}5$ hartuta.', 'Tomando $1{,}5$.', 'بأخذ $1{,}5$.', 'Using $1{,}5$.'), math: same('$\\begin{gathered}E_a=|1{,}468-1{,}5|=0{,}032\\\\ E_r=\\frac{0{,}032}{1{,}468}=0{,}0218\\ldots\\end{gathered}$') },
+            { text: say('$1{,}4$ hartuta.', 'Tomando $1{,}4$.', 'بأخذ $1{,}4$.', 'Using $1{,}4$.'), math: same('$\\begin{gathered}E_a=|1{,}468-1{,}4|=0{,}068\\\\ E_r=0{,}0463\\ldots\\end{gathered}$') },
             { text: say('Errore txikiagoak: $1{,}5$ da hobea.', 'Errores menores: es mejor $1{,}5$.', 'أخطاء أصغر: $1{,}5$ أفضل.', 'Smaller error: $1{,}5$ is better.'), math: same('$0{,}032<0{,}068$') }
         ],
         takeaway: say('Absolutua: zenbat huts egin den. Erlatiboa: hutsegitea benetako balioarekiko.', 'Absoluto: cuánto nos equivocamos. Relativo: el error respecto al valor real.', 'المطلق: مقدار الخطأ. النسبي: الخطأ بالنسبة إلى القيمة الحقيقية.', 'Absolute: how far off we are. Relative: the error compared with the true value.'),

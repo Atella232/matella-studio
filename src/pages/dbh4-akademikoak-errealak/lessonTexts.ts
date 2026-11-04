@@ -89,7 +89,7 @@ export const realsPercentLessonTexts: Record<RealsPercentTopicId, LessonTexts> =
                 'سمِّ العدد العشري $x$. إذا كان $x=0{,}\\overline{27}$ فإن الضرب في 100 يزيح الدور منزلتين: $100x=27{,}\\overline{27}$. وعند الطرح يختفي الدور: $99x=27$. لذلك يوجد 9 لكل رقم في الدور.',
                 'Call the decimal $x$. If $x=0{,}\\overline{27}$, multiplying by 100 shifts the recurring part two places: $100x=27{,}\\overline{27}$. When you subtract, the recurring parts cancel: $99x=27$. That is why there is a 9 for each recurring digit.'
             ),
-            math: same('$100x-x=27\\ \\to\\ x=\\frac{27}{99}=\\frac{3}{11}$')
+            math: same('$\\begin{gathered}100x-x=27\\\\ x=\\frac{27}{99}=\\frac{3}{11}\\end{gathered}$')
         }
     },
     'order-density': {
@@ -355,7 +355,7 @@ export const realsPercentLessonTexts: Record<RealsPercentTopicId, LessonTexts> =
             'When an amount rises by $p\\,\\%$, the final amount is $(100+p)\\,\\%$ of the initial one; when it falls, $(100-p)\\,\\%$. So final amount = initial amount · multiplier. Up 21%: times 1.21; down 20%: times 0.80. A multiplier greater than 1 is a rise, and one less than 1, a fall.'
         ),
         examplePrompt: say('120 euroko beroki bat % 8 garestitu da, eta 350 euroko bizikleta bat % 30 merkatu. Zenbat balio dute orain?', 'Un abrigo de 120 € sube un 8 % y una bici de 350 € baja un 30 %. ¿Cuánto cuestan ahora?', 'معطف بسعر 120 € ارتفع 8 %، ودراجة بسعر 350 € انخفضت 30 %. كم سعرهما الآن؟', 'A €120 coat goes up 8% and a €350 bike goes down 30%. How much do they cost now?'),
-        example: same('$120\\cdot 1{,}08=129{,}6\\qquad 350\\cdot 0{,}70=245$'),
+        example: same('$\\begin{gathered}120\\cdot 1{,}08=129{,}6\\\\ 350\\cdot 0{,}70=245\\end{gathered}$'),
         exampleAnswer: say('Berokia 129,60 € eta bizikleta 245 €.', 'El abrigo, 129,60 €; la bici, 245 €.', 'المعطف 129.60 € والدراجة 245 €.', 'The coat, €129.60; the bike, €245.')
     },
     chained: {
