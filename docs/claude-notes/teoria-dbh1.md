@@ -20,3 +20,11 @@ El dueño pidió llevar a 1., 3., 4. académicas y 4. aplicadas el contenido de 
 - Redondear enteros: en `lessonTexts.ts` con flecha (`38\,592\to 38\,600`), no con `\approx`: el test lee `\approx` como redondeo de decimales y falla con 30 de diferencia.
 - `say` de los archivos nuevos cambia `{,}` por `.` en árabe, como el de Hamartarrak.
 - Scripts del trabajo (en la carpeta temporal de la sesión): volcar las lecciones evaluando `lessons.tsx` con los dibujos vacíos; quitar `explanation`/`example` con el analizador de TypeScript; copiar el título exacto de la lección enlazada para `needs`.
+
+## Resultado (2026-11-05)
+
+- 143 lecciones con `lessonTexts.ts` + `lessonChecks.ts`: explicación de 50 palabras como mucho (mediana 57 → 40), 88 definiciones, casos en 12 lecciones, 404 palabras de vocabulario, «Otro ejemplo» en todas (5 solo en palabras), error típico y «Compruébalo» en todas, 31 «¿Por qué funciona?», 51 enlaces «Antes de empezar», 22 dibujos tras los pasos.
+- Commits: Zenbaki naturalak a1d3c63, Zatigarritasuna 20d62b0, Zenbaki osoak 88b7a5f, Zatikiak 44befbb, Hamartarrak 20ce234, Proportzionaltasuna 6731034, Aljebra 5e62ee8, Geometria 9440e74, Figurak 1bf4afd, Estatistika 6099f60.
+- Tests 1577/1577, lint y build en verde. Revisado a 375 px en eu, es y ar: 459 páginas (143 lecciones y 10 resúmenes × 3), pasos abiertos, 93 cajas «¿Por qué?», 1476 palabras abiertas, 429 «Compruébalo» contestados: sin desbordes ni errores de KaTeX; ejemplos en 18,4 px o más.
+- Hoja de repaso (euskera y castellano): `revision-teoria-dbh1.html` en la raíz del worktree, sin commit; enviada al dueño.
+- Visto de paso, sin tocar: etiquetas accesibles de algunos dibujos (`figures.tsx`) con sufijos pegados en euskera (Proportzionaltasuna, Geometria › Pitágoras).
