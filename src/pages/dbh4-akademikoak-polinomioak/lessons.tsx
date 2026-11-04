@@ -200,7 +200,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         problem: say('Kalkulatu $P=x^{2}-4$ eta $Q=x^{2}+4x+4$ polinomioen z.k.h. eta m.k.t.', 'Calcula el m.c.d. y el m.c.m. de $P=x^{2}-4$ y $Q=x^{2}+4x+4$.', 'احسب القاسم المشترك الأكبر والمضاعف المشترك الأصغر لـ$P=x^{2}-4$ و$Q=x^{2}+4x+4$.', 'Calculate the GCD and LCM of $P=x^{2}-4$ and $Q=x^{2}+4x+4$.'),
         stepsKind: 'steps',
         steps: [
-            { text: say('Faktorizatu.', 'Factoriza.', 'حلّل.', 'Factorise.'), math: same('$P=(x+2)(x-2)\\quad Q=(x+2)^{2}$') },
+            { text: say('Faktorizatu.', 'Factoriza.', 'حلّل.', 'Factorise.'), math: same('$\\begin{gathered}P=(x+2)(x-2)\\\\ Q=(x+2)^{2}\\end{gathered}$') },
             { text: say('Z.k.h.: komunak, txikiena.', 'M.c.d.: comunes, el menor.', 'القاسم: المشتركة بالأصغر.', 'GCD: common factors, the smallest.'), math: same('$x+2$') },
             { text: say('M.k.t.: denak, handiena.', 'M.c.m.: todos, el mayor.', 'المضاعف: الكل بالأكبر.', 'LCM: all factors, the largest.'), math: same('$(x+2)^{2}(x-2)$') }
         ],

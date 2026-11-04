@@ -38,8 +38,8 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'To add polynomials, group the terms of the same degree; to subtract, change all the signs of the one being subtracted. To multiply, multiply each term of one by every term of the other, as in the area $(x+2)(x+3)=x^{2}+5x+6$. The degree of the product is the sum of the degrees.'
         ),
         examplePrompt: say('Kalkulatu $(2x-1)(x^{2}+3)$, eta haren balioa $x=2$ denean.', 'Calcula $(2x-1)(x^{2}+3)$ y su valor para $x=2$.', 'احسب $(2x-1)(x^{2}+3)$ وقيمته عندما $x=2$.', 'Work out $(2x-1)(x^{2}+3)$ and its value when $x=2$.'),
-        example: same('$\\begin{gathered}(2x-1)(x^{2}+3)=2x^{3}-x^{2}+6x-3\\\\ 2\\cdot 8-4+12-3=21\\end{gathered}$'),
-        exampleAnswer: say('3 mailakoa da, eta 21 balio du $x=2$ denean.', 'Tiene grado 3 y vale 21 para $x=2$.', 'درجته 3 وقيمته 21 عندما $x=2$.', 'It has degree 3 and is worth 21 when $x=2$.')
+        example: same('$\\begin{aligned}(2x-1)(x^{2}+3)\\\\&=2x^{3}-x^{2}+6x-3\\end{aligned}$'),
+        exampleAnswer: say('3 mailakoa da, eta $x=2$ denean $16-4+12-3=21$ balio du.', 'Tiene grado 3 y, para $x=2$, vale $16-4+12-3=21$.', 'درجته 3، وعندما $x=2$ قيمته $16-4+12-3=21$.', 'It has degree 3 and, when $x=2$, it is worth $16-4+12-3=21$.')
     },
     identities: {
         vocabulary: [
@@ -106,7 +106,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'Divide the first term of the dividend by the first term of the divisor, multiply the divisor by the result and subtract; carry on until the remainder has a lower degree than the divisor. It always holds that $D=d\\cdot c+r$. If the remainder is 0, the division is exact and $d$ is a divisor of $D$.'
         ),
         examplePrompt: say('Zatitu $(x^{3}-2x^{2}+4)\\div(x-3)$.', 'Divide $(x^{3}-2x^{2}+4)\\div(x-3)$.', 'اقسم $(x^{3}-2x^{2}+4)\\div(x-3)$.', 'Divide $(x^{3}-2x^{2}+4)\\div(x-3)$.'),
-        example: same('$x^{3}-2x^{2}+4=(x-3)(x^{2}+x+3)+13$'),
+        example: same('$\\begin{aligned}x^{3}-2x^{2}+4\\\\&=(x-3)(x^{2}+x+3)+13\\end{aligned}$'),
         exampleAnswer: say('Zatidura $x^{2}+x+3$ eta hondarra 13: ez da zehatza.', 'Cociente $x^{2}+x+3$ y resto 13: no es exacta.', 'خارج القسمة $x^{2}+x+3$ والباقي 13: ليست تامة.', 'Quotient $x^{2}+x+3$ and remainder 13: it is not exact.')
     },
     ruffini: {
@@ -122,7 +122,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'If the divisor is $x-a$, you divide using only the coefficients: write them all, with 0 where a degree is missing, and $a$ on the left. Bring down the first, multiply it by $a$, add it to the next one, and repeat. The last number is the remainder; the others are the coefficients of the quotient, one degree lower. If the divisor is $x+4$, $a=-4$.'
         ),
         examplePrompt: say('Zatitu Ruffinirekin $(2x^{3}-5x+7)\\div(x-2)$.', 'Divide con Ruffini $(2x^{3}-5x+7)\\div(x-2)$.', 'اقسم بطريقة روفيني $(2x^{3}-5x+7)\\div(x-2)$.', 'Divide with Ruffini $(2x^{3}-5x+7)\\div(x-2)$.'),
-        example: same('$2x^{3}-5x+7=(x-2)(2x^{2}+4x+3)+13$'),
+        example: same('$\\begin{aligned}2x^{3}-5x+7\\\\&=(x-2)(2x^{2}+4x+3)+13\\end{aligned}$'),
         exampleAnswer: say('Koefizienteak: $2,\\ 0,\\ -5,\\ 7$ (falta den $x^{2}$ gaiaren 0 barne). Zatidura $2x^{2}+4x+3$ eta hondarra 13.', 'Coeficientes: $2,\\ 0,\\ -5,\\ 7$ (con el 0 del $x^{2}$ que falta). Cociente $2x^{2}+4x+3$ y resto 13.', 'المعاملات: $2,\\ 0,\\ -5,\\ 7$ (مع 0 مكان $x^{2}$ الناقص). خارج القسمة $2x^{2}+4x+3$ والباقي 13.', 'Coefficients: $2,\\ 0,\\ -5,\\ 7$ (with the 0 for the missing $x^{2}$). Quotient $2x^{2}+4x+3$ and remainder 13.')
     },
     remainder: {
@@ -174,7 +174,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'The whole-number roots of a polynomial with whole-number coefficients are divisors of the constant term: those of $x^{3}-6x^{2}+11x-6$ are looked for among $\\pm 1$, $\\pm 2$, $\\pm 3$ and $\\pm 6$, and they are 1, 2 and 3. On the graph, they are the points where it crosses the X axis. A polynomial of degree $n$ has at most $n$ roots.'
         ),
         examplePrompt: say('Idatzi 3 mailako polinomio bat, erroak 2, $-1$ eta 4 dituena.', 'Escribe un polinomio de grado 3 con raíces 2, $-1$ y 4.', 'اكتب كثير حدود من الدرجة 3 جذوره 2 و$-1$ و4.', 'Write a polynomial of degree 3 with roots 2, $-1$ and 4.'),
-        example: same('$(x-2)(x+1)(x-4)=x^{3}-5x^{2}+2x+8$'),
+        example: same('$\\begin{aligned}(x-2)(x+1)(x-4)\\\\&=x^{3}-5x^{2}+2x+8\\end{aligned}$'),
         exampleAnswer: say('$a$ erro bakoitzak $x-a$ faktore bat ematen du.', 'Cada raíz $a$ da un factor $x-a$.', 'كل جذر $a$ يعطي عاملًا $x-a$.', 'Each root $a$ gives a factor $x-a$.'),
         why: {
             text: say(
@@ -197,7 +197,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'The order: first, a common factor; then special products; next, Ruffini with the whole-number roots; and if a quotient of degree 2 is left, solve its equation. So $x^{4}+2x^{3}-23x^{2}-60x=x(x-5)(x+3)(x+4)$. If the roots are fractions, do not forget the leading coefficient: $3x^{2}+2x-8=(3x-4)(x+2)$.'
         ),
         examplePrompt: say('Faktorizatu $2x^{3}-8x$ eta $x^{3}-3x^{2}-4x+12$.', 'Factoriza $2x^{3}-8x$ y $x^{3}-3x^{2}-4x+12$.', 'حلّل $2x^{3}-8x$ و$x^{3}-3x^{2}-4x+12$.', 'Factorise $2x^{3}-8x$ and $x^{3}-3x^{2}-4x+12$.'),
-        example: same('$\\begin{gathered}2x^{3}-8x=2x(x+2)(x-2)\\\\ x^{3}-3x^{2}-4x+12=(x-3)(x-2)(x+2)\\end{gathered}$'),
+        example: same('$\\begin{aligned}2x^{3}-8x&=2x(x+2)(x-2)\\\\ x^{3}-3x^{2}-4x+12\\\\&=(x-3)(x-2)(x+2)\\end{aligned}$'),
         exampleAnswer: say('Bigarrenean 3 erroa da, eta $x^{2}-4$ zatidura batura bider kenketa da.', 'En la segunda, 3 es raíz y el cociente $x^{2}-4$ es suma por diferencia.', 'في الثاني 3 جذر، وخارج القسمة $x^{2}-4$ مجموع في فرق.', 'In the second one, 3 is a root and the quotient $x^{2}-4$ is a sum times a difference.')
     },
     'gcd-lcm': {
@@ -218,7 +218,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'As with numbers, factorise first. The GCD has the common factors with the lowest exponent, and the LCM, the common and non-common ones with the highest: if $P=x(x-2)(x-5)$ and $Q=x^{2}(x-5)$, the GCD is $x(x-5)$ and the LCM, $x^{2}(x-2)(x-5)$. $Q$ divides $P$ if the division is exact.'
         ),
         examplePrompt: say('Aurkitu $x^{2}-3x$ eta $x^{2}-9$ polinomioen z.k.h. eta m.k.t.', 'Halla el m.c.d. y el m.c.m. de $x^{2}-3x$ y $x^{2}-9$.', 'جد ق.م.أ وم.م.أ لـ $x^{2}-3x$ و$x^{2}-9$.', 'Find the GCD and the LCM of $x^{2}-3x$ and $x^{2}-9$.'),
-        example: same('$x^{2}-3x=x(x-3)\\qquad x^{2}-9=(x+3)(x-3)$'),
+        example: same('$\\begin{gathered}x^{2}-3x=x(x-3)\\\\ x^{2}-9=(x+3)(x-3)\\end{gathered}$'),
         exampleAnswer: say('Z.k.h.: $x-3$. M.k.t.: $x(x-3)(x+3)$.', 'M.c.d.: $x-3$. M.c.m.: $x(x-3)(x+3)$.', 'ق.م.أ: $x-3$. م.م.أ: $x(x-3)(x+3)$.', 'GCD: $x-3$. LCM: $x(x-3)(x+3)$.')
     },
 
@@ -241,7 +241,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'Its value is found by putting a number in place of $x$: $\\frac{x+1}{x^{2}-4}$ is worth $\\frac{4}{5}$ when $x=3$. It has no value where the denominator is zero: since $x^{2}-4=0$ for $x=2$ and $x=-2$, those two are left out. $\\frac{x+1}{2}$ is not an algebraic fraction but a polynomial.'
         ),
         examplePrompt: say('Non ez dago $\\frac{3x}{x^{2}-5x}$? Zenbat balio du $x=2$ denean?', '¿Dónde no existe $\\frac{3x}{x^{2}-5x}$? ¿Cuánto vale para $x=2$?', 'أين لا يوجد $\\frac{3x}{x^{2}-5x}$؟ وكم قيمته عندما $x=2$؟', 'Where does $\\frac{3x}{x^{2}-5x}$ not exist? What is it worth when $x=2$?'),
-        example: same('$\\begin{gathered}x^{2}-5x=x(x-5)=0\\ \\to\\ x=0,\\ x=5\\\\ \\frac{3\\cdot 2}{4-10}=-1\\end{gathered}$'),
+        example: same('$\\begin{gathered}x^{2}-5x=x(x-5)=0\\\\ x=0,\\ x=5\\\\ \\frac{3\\cdot 2}{4-10}=-1\\end{gathered}$'),
         exampleAnswer: say('Ez dago $x=0$ eta $x=5$ puntuetan; $x=2$ denean, $-1$ balio du.', 'No existe en $x=0$ ni en $x=5$; para $x=2$ vale $-1$.', 'غير موجود عند $x=0$ و$x=5$؛ وعندما $x=2$ قيمته $-1$.', 'It does not exist at $x=0$ or $x=5$; when $x=2$ it is worth $-1$.')
     },
     simplify: {
