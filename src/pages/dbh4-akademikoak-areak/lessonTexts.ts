@@ -54,7 +54,7 @@ export const areasLessonTexts: Record<AreasTopicId, LessonTexts> = {
             { title: say('Sektorea', 'Sector', 'القطاع', 'Sector'), text: say('Zirkuluaren zati bat.', 'Una fracción del círculo.', 'جزء من الدائرة.', 'A fraction of the circle.'), math: same('$A=\\dfrac{\\pi r^{2}\\cdot n}{360}$') }
         ],
         examplePrompt: say('Kalkulatu 5 cm eta 3 cm-ko erradioak dituen koroaren azalera.', 'Calcula el área de una corona de radios 5 cm y 3 cm.', 'احسب مساحة حلقة نصفا قطريها 5 سم و3 سم.', 'Work out the area of an annulus with radii 5 cm and 3 cm.'),
-        example: same('$A=3{,}14\\cdot(5^{2}-3^{2})=3{,}14\\cdot 16=50{,}24$'),
+        example: same('$\\begin{aligned}&A=3{,}14\\cdot(5^{2}-3^{2})\\\\&=3{,}14\\cdot 16=50{,}24\\end{aligned}$'),
         exampleAnswer: say('50,24 cm²: zirkulu handia ken txikia.', '50,24 cm²: el círculo grande menos el pequeño.', '50.24 سم²: الدائرة الكبيرة ناقص الصغيرة.', '50.24 cm²: the big circle minus the small one.')
     },
     segments: {
@@ -92,7 +92,7 @@ export const areasLessonTexts: Record<AreasTopicId, LessonTexts> = {
             'You can see it in the net. The lateral faces of a right prism form a rectangle: $A_L=P\\cdot h$ and $A_T=A_L+2A_B$. Those of a regular pyramid are triangles whose height is the slant height of the pyramid, $a_p$: $A_L=\\dfrac{P\\cdot a_p}{2}$ and $A_T=A_L+A_B$. With a base side of 10 and a height of 12, $a_p=\\sqrt{12^{2}+5^{2}}=13$.'
         ),
         examplePrompt: say('Oinarri karratuko prisma zuzen baten aldeak 5 cm eta altuerak 8 cm neurtzen ditu. Kalkulatu haren azalera osoa.', 'Un prisma recto de base cuadrada tiene 5 cm de lado y 8 cm de altura. Calcula su área total.', 'منشور قائم قاعدته مربعة ضلعها 5 سم وارتفاعه 8 سم. احسب مساحته الكلية.', 'A right prism with a square base has 5 cm sides and is 8 cm high. Work out its total area.'),
-        example: same('$A_L=20\\cdot 8=160\\qquad A_T=160+2\\cdot 25=210$'),
+        example: same('$\\begin{gathered}A_L=20\\cdot 8=160\\\\ A_T=160+2\\cdot 25=210\\end{gathered}$'),
         exampleAnswer: say('210 cm²: lau alboko aurpegiak eta bi oinarriak.', '210 cm²: las cuatro caras laterales y las dos bases.', '210 سم²: الأوجه الجانبية الأربعة والقاعدتان.', '210 cm²: the four lateral faces and the two bases.')
     },
     'round-area': {
