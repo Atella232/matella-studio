@@ -1,5 +1,7 @@
 import type { UnitStage, UnitTopic } from '../../features/unit-v2/types'
 import { DistributiveFigure, DivisionFigure, DpeFigure, NumberLineJumpsFigure, PeriodsFigure, PlaceValueFigure, PowerFigure, RomanFigure, RoundingFigure, SemaphoreFigure } from './figures'
+import { naturalsLessonChecks, type NaturalsTopicId } from './lessonChecks'
+import { naturalsLessonTexts } from './lessonTexts'
 
 /* ==========================================================================
    Zenbaki naturalak · 1. DBH — stages and lessons
@@ -9,7 +11,9 @@ import { DistributiveFigure, DivisionFigure, DpeFigure, NumberLineJumpsFigure, P
    Basque class guide "Zenbaki arruntak eta hamartarrak" (jumps on the
    number line, the "semaforoa" for combined operations and the D-P-E
    structure for problems). Decimals are a separate unit.
-   Large numbers are written with a point every three digits, as in class.
+   Large numbers group their digits with a space from five digits (15 728,
+   but 2918). What each lesson tells lives in lessonTexts.ts; its typical
+   mistake and «Check it» question, in lessonChecks.ts.
    ========================================================================== */
 
 export type NaturalsStageId = 'numbering' | 'rounding' | 'operations' | 'combined' | 'powers'
@@ -25,7 +29,8 @@ export const naturalsStages: UnitStage[] = [
     { id: 'powers', tone: 'green', title: { eu: 'Berreturak', es: 'Potencias', en: 'Powers', ar: 'القوى' } }
 ]
 
-export const naturalsTopics: UnitTopic[] = [
+/** The lessons without what they tell (explanation, example…), which lives in lessonTexts.ts */
+const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
     {
         id: 'place-value',
         stage: 'numbering',
@@ -35,12 +40,6 @@ export const naturalsTopics: UnitTopic[] = [
             es: 'Saber el valor de cada cifra según su posición y descomponer números.',
             en: 'Know the value of each digit according to its position, and break numbers down.',
             ar: 'معرفة قيمة كل رقم حسب موقعه وتفكيك الأعداد.'
-        },
-        explanation: {
-            eu: 'Zenbaki naturalak (zenbaki arruntak ere deituak) 0, 1, 2, 3… dira, eta kantitate osoak zenbatzeko erabiltzen ditugu. Hamar zifrarekin idazten dira, 0 zifratik 9 zifrara. Gure sistema hamartarra da, ordena bateko 10 unitatek hurrengo ordenako unitate 1 osatzen dutelako. Eta posizionala da, zifra baten balioa haren posizioaren araberakoa delako.',
-            es: 'Los números naturales son 0, 1, 2, 3… y sirven para contar cantidades enteras. Se escriben con diez cifras, del 0 al 9. Nuestro sistema es decimal, porque 10 unidades de un orden forman 1 unidad del orden siguiente. Y es posicional, porque el valor de cada cifra depende del lugar que ocupa.',
-            en: 'Natural numbers are 0, 1, 2, 3… and are used to count whole quantities. They are written with ten digits, from 0 to 9. Our system is decimal, because 10 units of one place make 1 unit of the next place. And it is positional, because the value of each digit depends on the place it occupies.',
-            ar: 'الأعداد الطبيعية هي 0، 1، 2، 3… ونستعملها لعدّ الكميات الكاملة. تُكتب بعشرة أرقام من 0 إلى 9. نظامنا عشري لأن 10 وحدات من مرتبة تكوّن وحدة واحدة من المرتبة التالية، وهو موضعي لأن قيمة الرقم تتعلق بموقعه.'
         },
         stepsKind: 'facts',
         steps: [
@@ -52,7 +51,7 @@ export const naturalsTopics: UnitTopic[] = [
             {
                 title: { eu: 'Zifraren balioa', es: 'El valor de una cifra', en: 'The value of a digit', ar: 'قيمة الرقم' },
                 text: { eu: '7 zifrak 700 balio du 15\u00a0728 zenbakian (ehunekoak), baina 7 bakarrik 1967 zenbakian (unitateak).', es: 'La cifra 7 vale 700 en 15\u00a0728 (centenas), pero solo 7 en 1967 (unidades).', en: 'The digit 7 is worth 700 in 15,728 (hundreds), but only 7 in 1,967 (units).', ar: `الرقم 7 قيمته 700 في ${ltr('15\u00a0728')} (مئات)، لكن قيمته 7 فقط في ${ltr('1967')} (آحاد).` },
-                math: '$15.\\underline{7}28 \\to 700 \\qquad 1.96\\underline{7} \\to 7$'
+                math: '$15\\,\\underline{7}28 \\to 700 \\qquad 196\\underline{7} \\to 7$'
             },
             {
                 title: { eu: 'Deskonposizio polinomikoa', es: 'Descomposición polinómica', en: 'Expanded form', ar: 'التفكيك' },
@@ -65,7 +64,6 @@ export const naturalsTopics: UnitTopic[] = [
                 math: '$57 \\to 570 \\qquad 057=57$'
             }
         ],
-        example: '$53\\,068=50\\,000+3000+60+8$',
         takeaway: {
             eu: 'Zifra bera, posizio desberdina, balio desberdina.',
             es: 'Misma cifra, distinta posición, distinto valor.',
@@ -83,12 +81,6 @@ export const naturalsTopics: UnitTopic[] = [
             es: 'Leer y escribir millones, miles de millones y billones.',
             en: 'Read and write millions, billions and trillions.',
             ar: 'قراءة الملايين والمليارات والتريليونات وكتابتها.'
-        },
-        explanation: {
-            eu: 'Zenbaki handiak irakurtzeko, zifrak hiruko taldetan banatzen dira, eskuinetik hasita: unitateak, milakoak, milioiak… Talde bakoitza bere izenarekin irakurtzen da. Mila milako milioi bat dira; mila milioi, 1 eta 9 zero; eta bilioi bat milioi bat milioi da: 1 eta 12 zero.',
-            es: 'Para leer números grandes, se separan las cifras en grupos de tres empezando por la derecha: unidades, millares, millones… Cada grupo se lee con su nombre. Mil millares forman un millón; mil millones son un 1 seguido de 9 ceros; y un billón es un millón de millones: un 1 seguido de 12 ceros.',
-            en: 'To read large numbers, the digits are separated into groups of three, starting from the right: units, thousands, millions… Each group is read with its own name. A thousand thousands make a million; a billion is a 1 followed by 9 zeros; and a trillion is a million million: a 1 followed by 12 zeros.',
-            ar: 'لقراءة الأعداد الكبيرة نقسم الأرقام إلى مجموعات من ثلاثة بدءًا من اليمين: الآحاد، الآلاف، الملايين… ونقرأ كل مجموعة مع اسمها. ألف ألف تساوي مليونًا؛ والمليار هو 1 متبوعًا بـ 9 أصفار؛ والتريليون مليون مليون: 1 متبوعًا بـ 12 صفرًا.'
         },
         stepsKind: 'facts',
         steps: [
@@ -112,12 +104,6 @@ export const naturalsTopics: UnitTopic[] = [
                 text: { eu: '28\u00a0350\u00a0000: hogeita zortzi milioi hirurehun eta berrogeita hamar mila.', es: '28\u00a0350\u00a0000: veintiocho millones trescientos cincuenta mil.', en: '28,350,000: twenty-eight million three hundred and fifty thousand.', ar: `${ltr('28\u00a0350\u00a0000')}: ثمانية وعشرون مليونًا وثلاثمائة وخمسون ألفًا.` }
             }
         ],
-        example: {
-            eu: '$2\\,700\\,000\\,000=2700\\text{ milioi}$',
-            es: '$2\\,700\\,000\\,000=2700\\text{ millones}$',
-            en: '$2.700.000.000=2.700\\text{ million}$',
-            ar: '$2\\,700\\,000\\,000=2700\\cdot 1\\,000\\,000$'
-        },
         takeaway: {
             eu: 'Hiruko taldeak eskuinetik: unitateak, milakoak, milioiak, mila milioiak, bilioiak.',
             es: 'Grupos de tres desde la derecha: unidades, millares, millones, miles de millones, billones.',
@@ -135,12 +121,6 @@ export const naturalsTopics: UnitTopic[] = [
             es: 'Comparar y ordenar números naturales y situarlos en la recta numérica.',
             en: 'Compare and order natural numbers and place them on the number line.',
             ar: 'مقارنة الأعداد الطبيعية وترتيبها وتمثيلها على مستقيم الأعداد.'
-        },
-        explanation: {
-            eu: 'Bi zenbaki konparatzeko, lehenik zifra kopurua begiratzen da: zifra gehiago dituena handiagoa da. Zifra kopuru bera badute, ezkerretik hasita konparatzen dira zifrak, desberdina den lehenengoa aurkitu arte. Zuzen zenbakidunean, handiagoak eskuinean daude. > ikurrak «handiagoa» esan nahi du, eta < ikurrak «txikiagoa».',
-            es: 'Para comparar dos números, primero se mira el número de cifras: el que tiene más cifras es mayor. Si tienen las mismas, se comparan las cifras empezando por la izquierda hasta encontrar la primera distinta. En la recta numérica, los mayores están a la derecha. El símbolo > significa «mayor que» y < significa «menor que».',
-            en: 'To compare two numbers, first look at how many digits each has: the one with more digits is bigger. If they have the same number of digits, compare the digits from the left until you find the first one that is different. On the number line, the bigger numbers are on the right. The symbol > means “greater than” and < means “less than”.',
-            ar: 'لمقارنة عددين ننظر أولًا إلى عدد الأرقام: الذي له أرقام أكثر هو الأكبر. وإذا تساويا نقارن الأرقام بدءًا من اليسار حتى نجد أول رقم مختلف. على مستقيم الأعداد يكون الأكبر إلى اليمين. الرمز > يعني «أكبر من» و< يعني «أصغر من».'
         },
         stepsKind: 'facts',
         steps: [
@@ -160,7 +140,6 @@ export const naturalsTopics: UnitTopic[] = [
                 math: '$(830-430)\\mathbin{:}4=100$'
             }
         ],
-        example: '$17\\,462<19\\,853<24\\,789<26\\,731<30\\,175$',
         takeaway: {
             eu: 'Zifra gehiago → zenbaki handiagoa. Berdin badira, ezkerreko lehen zifra desberdinak erabakitzen du.',
             es: 'Más cifras → número mayor. Si empatan, decide la primera cifra distinta por la izquierda.',
@@ -178,12 +157,6 @@ export const naturalsTopics: UnitTopic[] = [
             es: 'Leer y escribir números romanos y distinguir un sistema aditivo de uno posicional.',
             en: 'Read and write Roman numerals, and tell an additive system apart from a positional one.',
             ar: 'قراءة الأرقام الرومانية وكتابتها، والتمييز بين النظام الجمعي والنظام الموضعي.'
-        },
-        explanation: {
-            eu: 'Erromatarren sistema batukorra da: ikur bakoitzak beti balio bera du, eta balioak batu (edo kendu) egiten dira. Zazpi ikur erabiltzen dira: I = 1, V = 5, X = 10, L = 50, C = 100, D = 500 eta M = 1000. Gure sisteman, aldiz, zifra baten balioa posizioaren araberakoa da.',
-            es: 'El sistema romano es aditivo: cada símbolo vale siempre lo mismo y los valores se suman (o se restan). Usa siete símbolos: I = 1, V = 5, X = 10, L = 50, C = 100, D = 500 y M = 1000. En nuestro sistema, en cambio, el valor de una cifra depende de su posición.',
-            en: 'The Roman system is additive: each symbol always has the same value, and the values are added (or subtracted). It uses seven symbols: I = 1, V = 5, X = 10, L = 50, C = 100, D = 500 and M = 1,000. In our system, on the other hand, the value of a digit depends on its position.',
-            ar: `النظام الروماني نظام جمعي: لكل رمز القيمة نفسها دائمًا، ونجمع القيم (أو نطرحها). يستعمل سبعة رموز: ${ltr('I = 1, V = 5, X = 10, L = 50, C = 100, D = 500, M = 1000')}. أما في نظامنا فقيمة الرقم تتعلق بموقعه.`
         },
         stepsKind: 'facts',
         steps: [
@@ -208,7 +181,6 @@ export const naturalsTopics: UnitTopic[] = [
                 math: '$\\overline{\\mathrm{V}}=5000$'
             }
         ],
-        example: '$\\mathrm{MMXXVI}=2000+20+6=2026$',
         takeaway: {
             eu: 'Erromatarrak: ikurrak batu eta kendu. Gurea: posizioak ematen du balioa.',
             es: 'Romano: se suman y restan símbolos. El nuestro: la posición da el valor.',
@@ -227,27 +199,21 @@ export const naturalsTopics: UnitTopic[] = [
             en: 'Round a number to the nearest ten, hundred, thousand…',
             ar: 'تقريب عدد إلى العشرات أو المئات أو الآلاف…'
         },
-        explanation: {
-            eu: 'Zenbaki bat ordena jakin batera biribiltzeko, begiratu biribildu beharreko zifraren eskuinean dagoen zifrari. 5 edo handiagoa bada, biribildu beharreko zifrari 1 gehitzen zaio; 4 edo txikiagoa bada, bere horretan uzten da. Eskuineko zifra guztiak zero bihurtzen dira. Horrela, jatorrizko zenbakitik hurbilen dagoen zenbaki «biribila» lortzen da.',
-            es: 'Para redondear un número a un orden, mira la cifra que está a la derecha de la que vas a redondear. Si es 5 o mayor, se suma 1 a la cifra que redondeas; si es 4 o menor, se deja igual. Todas las cifras de la derecha pasan a ser ceros. Así se obtiene el número «redondo» más cercano al original.',
-            en: 'To round a number to a certain place value, look at the digit to the right of the one you want to round. If it is 5 or more, add 1 to the digit you are rounding; if it is 4 or less, the digit stays the same. All the digits to the right become zeros. This gives the closest “round” number to the original.',
-            ar: 'لتقريب عدد إلى مرتبة معيّنة ننظر إلى الرقم الذي على يمين الرقم المراد تقريبه. إذا كان 5 أو أكبر نضيف 1 إلى الرقم المقرَّب، وإذا كان 4 أو أصغر نتركه كما هو. وتصبح كل الأرقام التي على اليمين أصفارًا. هكذا نحصل على أقرب عدد «مدوَّر» إلى العدد الأصلي.'
-        },
         problem: { eu: 'Biribildu 14\u00a0823 milakoetara.', es: 'Redondea 14\u00a0823 a los millares.', en: 'Round 14,823 to the nearest thousand.', ar: `قرّب ${ltr('14\u00a0823')} إلى الآلاف.` },
         stepsKind: 'steps',
         steps: [
-            { text: { eu: 'Markatu biribildu beharreko zifra. Milakoetara: 4.', es: 'Marca la cifra que vas a redondear. A los millares: el 4.', en: 'Mark the digit you are going to round. To the nearest thousand: the 4.', ar: 'حدّد الرقم المراد تقريبه. إلى الآلاف: 4.' }, math: '$1\\underline{4}.823$' },
-            { text: { eu: 'Begiratu haren eskuineko zifrari: 8.', es: 'Mira la cifra de su derecha: el 8.', en: 'Look at the digit to its right: the 8.', ar: 'انظر إلى الرقم الذي على يمينه: 8.' }, math: '$14.\\underline{8}23$' },
+            { text: { eu: 'Markatu biribildu beharreko zifra. Milakoetara: 4.', es: 'Marca la cifra que vas a redondear. A los millares: el 4.', en: 'Mark the digit you are going to round. To the nearest thousand: the 4.', ar: 'حدّد الرقم المراد تقريبه. إلى الآلاف: 4.' }, math: '$1\\underline{4}\\,823$' },
+            { text: { eu: 'Begiratu haren eskuineko zifrari: 8.', es: 'Mira la cifra de su derecha: el 8.', en: 'Look at the digit to its right: the 8.', ar: 'انظر إلى الرقم الذي على يمينه: 8.' }, math: '$14\\,\\underline{8}23$' },
             { text: { eu: '5 edo gehiago denez, gehitu 1 milakoari.', es: 'Como es 5 o más, suma 1 a los millares.', en: 'Since it is 5 or more, add 1 to the thousands.', ar: 'بما أنه 5 أو أكثر نضيف 1 إلى الآلاف.' }, math: '$4+1=5$' },
             { text: { eu: 'Eskuineko zifrak zero bihurtu.', es: 'Convierte en ceros las cifras de la derecha.', en: 'Turn the digits on the right into zeros.', ar: 'حوّل الأرقام التي على اليمين إلى أصفار.' }, math: '$14\\,823\\approx 15\\,000$' }
         ],
-        example: '$26\\,421\\approx 26\\,000 \\qquad 24\\,963\\approx 25\\,000$',
         takeaway: {
             eu: 'Eskuineko zifra 5 eta 9 artean: gora. 0 eta 4 artean: bere horretan.',
             es: 'Cifra de la derecha de 5 a 9: hacia arriba. De 0 a 4: se queda igual.',
             en: 'Digit on the right from 5 to 9: round up. From 0 to 4: it stays the same.',
             ar: 'الرقم الذي على اليمين من 5 إلى 9: نرفع. من 0 إلى 4: يبقى كما هو.'
         },
+        figureAfterSteps: true,
         figure: (language) => <RoundingFigure language={language} />
     },
     {
@@ -260,12 +226,6 @@ export const naturalsTopics: UnitTopic[] = [
             en: 'Work out an approximate result and check whether the exact result is reasonable.',
             ar: 'حساب نتيجة تقريبية والتحقق من أن النتيجة الدقيقة معقولة.'
         },
-        explanation: {
-            eu: 'Estimatzea emaitza gutxi gorabehera kalkulatzea da, zenbakiak biribildu ondoren. Buruz egiten da eta bi gauzatarako balio du: zehaztasun handirik behar ez denean erantzun azkar bat emateko, eta kalkulu zehatz bat egin ondoren emaitza zentzuzkoa den egiaztatzeko.',
-            es: 'Estimar es calcular un resultado aproximado después de redondear los números. Se hace mentalmente y sirve para dos cosas: dar una respuesta rápida cuando no hace falta mucha precisión, y comprobar si el resultado de un cálculo exacto es razonable.',
-            en: 'Estimating means working out an approximate result after rounding the numbers. You do it in your head, and it has two uses: giving a quick answer when you do not need much precision, and checking whether the result of an exact calculation is reasonable.',
-            ar: 'التقدير هو حساب نتيجة تقريبية بعد تقريب الأعداد. يتم ذهنيًا ويفيد في أمرين: إعطاء جواب سريع عندما لا نحتاج إلى دقة كبيرة، والتحقق من أن نتيجة الحساب الدقيق معقولة.'
-        },
         problem: { eu: 'Carmenek 167 €, 235 € eta 32 € ordaindu ditu. Gutxi gorabehera, zenbat ordaindu du guztira?', es: 'Carmen ha pagado 167 €, 235 € y 32 €. ¿Cuánto ha pagado en total, aproximadamente?', en: 'Carmen has paid €167, €235 and €32. Roughly how much has she paid in total?', ar: 'دفعت كارمن 167 € و235 € و32 €. كم دفعت في المجموع تقريبًا؟' },
         stepsKind: 'steps',
         steps: [
@@ -276,7 +236,6 @@ export const naturalsTopics: UnitTopic[] = [
             { text: { eu: 'Egin eragiketa buruz.', es: 'Haz la operación mentalmente.', en: 'Do the calculation in your head.', ar: 'أجرِ العملية ذهنيًا.' }, math: '$170+240+30=440$' },
             { text: { eu: 'Konparatu emaitza zehatzarekin: oso gertu dago, beraz zentzuzkoa da.', es: 'Compara con el resultado exacto: está muy cerca, así que es razonable.', en: 'Compare with the exact result: it is very close, so it is reasonable.', ar: 'قارن مع النتيجة الدقيقة: قريبة جدًا، إذن هي معقولة.' }, math: '$167+235+32=434\\approx 440$' }
         ],
-        example: '$49\\cdot 21\\approx 50\\cdot 20=1000$',
         takeaway: {
             eu: 'Biribildu, kalkulatu buruz eta egiaztatu: emaitza zehatzak gertu egon behar du.',
             es: 'Redondea, calcula mentalmente y comprueba: el resultado exacto debe estar cerca.',
@@ -293,12 +252,6 @@ export const naturalsTopics: UnitTopic[] = [
             es: 'Conocer los términos de la suma y la resta y comprobar una resta.',
             en: 'Know the terms of addition and subtraction, and check a subtraction.',
             ar: 'معرفة حدود الجمع والطرح والتحقق من صحة عملية طرح.'
-        },
-        explanation: {
-            eu: 'Batuketan batugaiak batzen dira, eta emaitzari batura esaten zaio. Kenketan kenkizunari kentzailea kentzen zaio, eta emaitza kendura da. Batuketa eta kenketa alderantzizko eragiketak dira: batak bestea desegiten du. Horregatik, kenketa bat egiaztatzeko, kentzailea eta kendura batzen dira, eta kenkizuna lortu behar da.',
-            es: 'En la suma se juntan los sumandos y el resultado se llama suma o total. En la resta, al minuendo se le quita el sustraendo y el resultado es la diferencia. La suma y la resta son operaciones inversas: una deshace la otra. Por eso, para comprobar una resta, se suman el sustraendo y la diferencia y debe salir el minuendo.',
-            en: 'When adding, the addends are put together, and the result is called the sum or total. When subtracting, the subtrahend is taken away from the minuend, and the result is the difference. Addition and subtraction are inverse operations: one undoes the other. So, to check a subtraction, add the subtrahend and the difference, and you should get the minuend.',
-            ar: 'في الجمع نضمّ الحدود، وتسمّى النتيجة المجموع. وفي الطرح نطرح المطروح من المطروح منه، والنتيجة هي الفرق. الجمع والطرح عمليتان عكسيتان: كل منهما تلغي الأخرى. لذلك للتحقق من الطرح نجمع المطروح والفرق فيجب أن نحصل على المطروح منه.'
         },
         stepsKind: 'facts',
         steps: [
@@ -323,7 +276,6 @@ export const naturalsTopics: UnitTopic[] = [
                 math: '$254+136=136+254$'
             }
         ],
-        example: '$628-\\square=199 \\;\\Rightarrow\\; \\square=628-199=429$',
         takeaway: {
             eu: 'Kenketa egiaztatzeko: kentzailea + kendura = kenkizuna.',
             es: 'Para comprobar una resta: sustraendo + diferencia = minuendo.',
@@ -340,12 +292,6 @@ export const naturalsTopics: UnitTopic[] = [
             es: 'Conocer las propiedades de la multiplicación y usarlas para el cálculo mental.',
             en: 'Know the properties of multiplication and use them for mental calculation.',
             ar: 'معرفة خصائص الضرب واستعمالها في الحساب الذهني.'
-        },
-        explanation: {
-            eu: 'Biderketa batugai berdinen batuketa laburtua da: 4 + 4 + 4 + 4 + 4 = 4 · 5. Biderkatzen diren zenbakiak biderkagaiak dira, eta emaitza biderkadura. Hiru propietatek buruzko kalkulua errazten dute: trukatze-propietateak, elkartze-propietateak eta banatze-propietateak.',
-            es: 'La multiplicación es una suma abreviada de sumandos iguales: 4 + 4 + 4 + 4 + 4 = 4 · 5. Los números que se multiplican son los factores y el resultado es el producto. Tres propiedades facilitan el cálculo mental: la conmutativa, la asociativa y la distributiva.',
-            en: 'Multiplication is a shortened way of adding equal numbers: 4 + 4 + 4 + 4 + 4 = 4 · 5. The numbers being multiplied are the factors, and the result is the product. Three properties make mental calculation easier: the commutative, the associative and the distributive property.',
-            ar: `الضرب جمع مختصر لحدود متساوية: ${ltr('4 + 4 + 4 + 4 + 4 = 4 · 5')}. الأعداد المضروبة هي العوامل والنتيجة هي حاصل الضرب. وتسهّل ثلاث خصائص الحساب الذهني: التبديل والتجميع والتوزيع.`
         },
         stepsKind: 'facts',
         steps: [
@@ -375,7 +321,6 @@ export const naturalsTopics: UnitTopic[] = [
                 math: '$23\\cdot 9=230-23=207$'
             }
         ],
-        example: '$25\\cdot 11=25\\cdot 10+25=250+25=275$',
         takeaway: {
             eu: 'Ordenak ez du axola (trukatze), taldekatzeak ere ez (elkartze), eta biderketa batugaien artean bana daiteke (banatze).',
             es: 'El orden no importa (conmutativa), la agrupación tampoco (asociativa) y la multiplicación se reparte entre los sumandos (distributiva).',
@@ -393,12 +338,6 @@ export const naturalsTopics: UnitTopic[] = [
             es: 'Conocer los términos de la división y comprobar una división.',
             en: 'Know the terms of division and check a division.',
             ar: 'معرفة حدود القسمة والتحقق من صحة قسمة.'
-        },
-        explanation: {
-            eu: 'Zatitzea kantitate bat zati berdinetan banatzea da. Zatikizuna banatzen den kantitatea da; zatitzailea, zati kopurua; zatidura, zati bakoitzari dagokiona; eta hondarra, banatu gabe geratzen dena. Zatiketa guztietan betetzen da: zatikizuna = zatitzailea · zatidura + hondarra. Hondarra beti da zatitzailea baino txikiagoa.',
-            es: 'Dividir es repartir una cantidad en partes iguales. El dividendo (D) es lo que se reparte; el divisor (d), el número de partes; el cociente (c), lo que corresponde a cada parte; y el resto (r), lo que queda sin repartir. En toda división se cumple D = d · c + r (propiedad fundamental). El resto siempre es menor que el divisor.',
-            en: 'Dividing is sharing an amount into equal parts. The dividend (D) is the amount being shared; the divisor (d) is the number of parts; the quotient (c) is what each part gets; and the remainder (r) is what is left over. In every division, D = d · c + r (the fundamental property). The remainder is always smaller than the divisor.',
-            ar: `القسمة توزيع كمية على أجزاء متساوية. المقسوم هو ما نوزّعه، والمقسوم عليه عدد الأجزاء، وخارج القسمة نصيب كل جزء، والباقي ما يبقى دون توزيع. في كل قسمة: المقسوم = المقسوم عليه × خارج القسمة + الباقي. والباقي دائمًا أصغر من المقسوم عليه.`
         },
         stepsKind: 'facts',
         steps: [
@@ -423,7 +362,6 @@ export const naturalsTopics: UnitTopic[] = [
                 math: '$(36\\mathbin{:}6)\\mathbin{:}2=3 \\qquad 36\\mathbin{:}(6\\mathbin{:}2)=12$'
             }
         ],
-        example: '$\\begin{array}{r|l}96&25\\\\\\hline 21&3\\end{array}\\qquad 96=25\\cdot 3+21$',
         takeaway: {
             eu: 'Zatikizuna = zatitzailea · zatidura + hondarra, eta hondarra < zatitzailea.',
             es: 'D = d · c + r, y el resto es menor que el divisor.',
@@ -441,12 +379,6 @@ export const naturalsTopics: UnitTopic[] = [
             es: 'Resolver operaciones combinadas en el orden correcto.',
             en: 'Solve combined operations in the correct order.',
             ar: 'حل العمليات المركبة بالترتيب الصحيح.'
-        },
-        explanation: {
-            eu: 'Eragiketa bat baino gehiago daudenean, ezin da ezkerretik eskuinera zuzenean kalkulatu: lehentasun-ordena errespetatu behar da. Lehenik parentesiak; gero biderketak eta zatiketak, agertzen diren ordenan; eta azkenik batuketak eta kenketak, ezkerretik eskuinera. «Semaforoak» laguntzen du: gorria parentesiak (derrigorrezko geldialdia), horia biderketak eta zatiketak, eta berdea batuketak eta kenketak (bide librea, amaieran).',
-            es: 'Cuando hay varias operaciones no se puede calcular de izquierda a derecha sin más: hay que respetar un orden. Primero los paréntesis; después las multiplicaciones y divisiones, en el orden en que aparecen; y por último las sumas y restas, de izquierda a derecha. El «semáforo» ayuda: rojo los paréntesis (parada obligatoria), amarillo las multiplicaciones y divisiones, y verde las sumas y restas (vía libre, al final).',
-            en: 'When there are several operations, you cannot simply calculate from left to right: you must follow a set order. First the brackets; then the multiplications and divisions, in the order they appear; and last the additions and subtractions, from left to right. The “traffic light” helps: red for brackets (compulsory stop), yellow for multiplications and divisions, and green for additions and subtractions (go ahead, at the end).',
-            ar: 'عندما توجد عدة عمليات لا نحسب من اليسار إلى اليمين مباشرة، بل نحترم ترتيبًا: أولًا الأقواس، ثم الضرب والقسمة حسب ظهورهما، وأخيرًا الجمع والطرح من اليسار إلى اليمين. تساعدنا «إشارة المرور»: الأحمر للأقواس (توقّف إلزامي)، والأصفر للضرب والقسمة، والأخضر للجمع والطرح (طريق مفتوح في النهاية).'
         },
         stepsKind: 'facts',
         steps: [
@@ -471,7 +403,6 @@ export const naturalsTopics: UnitTopic[] = [
                 math: '$8+5\\cdot 2=8+10=18$'
             }
         ],
-        example: '$75\\mathbin{:}3+4\\cdot 6-45\\mathbin{:}9=25+24-5=44$',
         takeaway: {
             eu: 'Gorria → horia → berdea: parentesiak, biderketak eta zatiketak, batuketak eta kenketak.',
             es: 'Rojo → amarillo → verde: paréntesis, multiplicaciones y divisiones, sumas y restas.',
@@ -490,12 +421,6 @@ export const naturalsTopics: UnitTopic[] = [
             en: 'Understand how brackets change the result and solve brackets inside square brackets.',
             ar: 'فهم كيف تغيّر الأقواس النتيجة وحل الأقواس داخل الأقواس المعقوفة.'
         },
-        explanation: {
-            eu: 'Parentesiek eragiketen ordena aldatzen dute: barruan dagoena egiten da lehenik. Zenbaki berberekin, parentesiek emaitza guztiz alda dezakete. Parentesi baten barruan beste bat dagoenean, kanpokoa kako zuzenekin [ ] idazten da, eta barrutik kanpora ebazten da: lehenik parentesiak, gero kako zuzenak. Barruan ere hierarkia errespetatzen da.',
-            es: 'Los paréntesis cambian el orden de las operaciones: lo de dentro se hace primero. Con los mismos números, los paréntesis pueden cambiar totalmente el resultado. Cuando hay un paréntesis dentro de otro, el de fuera se escribe con corchetes [ ] y se resuelve de dentro hacia fuera: primero los paréntesis y luego los corchetes. Dentro también se respeta la jerarquía.',
-            en: 'Brackets change the order of operations: whatever is inside them is done first. With the same numbers, brackets can change the result completely. When there is a bracket inside another one, the outer one is written with square brackets [ ], and you solve from the inside out: first the brackets, then the square brackets. Inside the brackets, the usual order of operations still applies.',
-            ar: 'تغيّر الأقواس ترتيب العمليات: ما بداخلها يُحسب أولًا. وبالأعداد نفسها قد تغيّر الأقواس النتيجة تمامًا. وعندما يوجد قوس داخل آخر نكتب الخارجي بأقواس معقوفة [ ] ونحل من الداخل إلى الخارج: الأقواس أولًا ثم الأقواس المعقوفة. وداخلها نحترم الأولوية أيضًا.'
-        },
         problem: { eu: 'Kalkulatu $3\\cdot [13-3\\cdot (5-2)]$.', es: 'Calcula $3\\cdot [13-3\\cdot (5-2)]$.', en: 'Calculate $3\\cdot [13-3\\cdot (5-2)]$.', ar: 'احسب $3\\cdot [13-3\\cdot (5-2)]$.' },
         stepsKind: 'steps',
         steps: [
@@ -503,7 +428,6 @@ export const naturalsTopics: UnitTopic[] = [
             { text: { eu: 'Ebatzi kako zuzenen barrukoa, hierarkia errespetatuz: biderketa lehenik.', es: 'Resuelve lo de dentro del corchete respetando la jerarquía: primero la multiplicación.', en: 'Solve what is inside the square brackets, following the order of operations: do the multiplication first.', ar: 'حلّ ما داخل القوس المعقوف مع احترام الأولوية: الضرب أولًا.' }, math: '$=3\\cdot [13-9]=3\\cdot 4$' },
             { text: { eu: 'Egin azken eragiketa.', es: 'Haz la última operación.', en: 'Do the last operation.', ar: 'أجرِ العملية الأخيرة.' }, math: '$=12$' }
         ],
-        example: '$2+3\\cdot 4=14 \\qquad (2+3)\\cdot 4=20$',
         takeaway: {
             eu: 'Barrutik kanpora: lehenik ( ), gero [ ].',
             es: 'De dentro hacia fuera: primero ( ), luego [ ].',
@@ -520,12 +444,6 @@ export const naturalsTopics: UnitTopic[] = [
             es: 'Resolver problemas con la estructura Datos-Procedimiento-Respuesta y plantearlos en una operación combinada.',
             en: 'Solve problems with the Data-Procedure-Answer structure and set them up as one combined operation.',
             ar: 'حل المسائل ببنية المعطيات-الطريقة-الجواب وكتابتها في عملية مركبة واحدة.'
-        },
-        explanation: {
-            eu: 'Buruketa bat ondo ebazteko, klasean hiru pausoko egitura erabiltzen da. Datuak (D): irakurri testua eta atera beharrezko zenbakiak eta hitz gakoak soilik. Prozedura (P): idatzi eragiketa garbi; ahal bada, eragiketa konbinatu bakar batean. Erantzuna (E): inoiz ez utzi zenbaki bat bakarrik; erantzun esaldi oso batekin eta unitateekin.',
-            es: 'Para resolver bien un problema, en clase se usa una estructura de tres pasos. Datos: lee el enunciado y saca solo los números y las palabras clave necesarias. Procedimiento: escribe la operación con claridad; si puedes, en una sola operación combinada. Respuesta: nunca dejes un número solo; responde con una frase completa y con unidades.',
-            en: 'To solve a problem well, we use a three-step structure in class. Data: read the problem and pull out only the numbers and key words you need. Procedure: write the operation clearly; if you can, write it as a single combined operation. Answer: never leave a number on its own; answer in a full sentence, with units.',
-            ar: 'لحل مسألة جيدًا نستعمل في القسم بنية من ثلاث خطوات. المعطيات: اقرأ النص واستخرج الأعداد والكلمات المفتاحية اللازمة فقط. الطريقة: اكتب العملية بوضوح، ويستحسن في عملية مركبة واحدة. الجواب: لا تترك عددًا وحده أبدًا؛ أجب بجملة كاملة مع الوحدات.'
         },
         problem: { eu: 'Eraikin batek 27 solairu ditu; solairu bakoitzean 12 bizileku daude, eta bizileku bakoitzean 7 leiho. Zenbat leiho ditu eraikinak?', es: 'Un edificio tiene 27 plantas; en cada planta hay 12 viviendas, y en cada vivienda, 7 ventanas. ¿Cuántas ventanas tiene el edificio?', en: 'A building has 27 floors; each floor has 12 flats, and each flat has 7 windows. How many windows does the building have?', ar: 'في مبنى 27 طابقًا؛ في كل طابق 12 شقة، وفي كل شقة 7 نوافذ. كم نافذة في المبنى؟' },
         stepsKind: 'steps',
@@ -544,13 +462,13 @@ export const naturalsTopics: UnitTopic[] = [
                 text: { eu: 'Eraikinak 2268 leiho ditu guztira.', es: 'El edificio tiene 2268 ventanas en total.', en: 'The building has 2,268 windows in total.', ar: `في المبنى ${ltr('2268')} نافذة في المجموع.` }
             }
         ],
-        example: '$(15+55)\\cdot 4+12\\cdot 3=280+36=316$',
         takeaway: {
             eu: 'D-P-E: datuak laburrean, eragiketa garbi eta erantzuna esaldi oso batean.',
             es: 'Datos breves, operación clara y respuesta en una frase completa.',
             en: 'Brief data, a clear operation and an answer in a full sentence.',
             ar: 'معطيات مختصرة، عملية واضحة، وجواب بجملة كاملة.'
         },
+        figureAfterSteps: true,
         figure: (language) => <DpeFigure language={language} />
     },
     {
@@ -562,12 +480,6 @@ export const naturalsTopics: UnitTopic[] = [
             es: 'Reconocer la base y el exponente de una potencia y calcular su valor.',
             en: 'Recognise the base and the exponent of a power and calculate its value.',
             ar: 'التعرّف على أساس القوة وأسّها وحساب قيمتها.'
-        },
-        explanation: {
-            eu: 'Berretura biderkagai berdinen biderketa idazteko modu laburra da. Oinarria errepikatzen den biderkagaia da, eta berretzaileak zenbat aldiz errepikatzen den adierazten du. 4³ irakurtzen da «lau ber hiru» edo «lau kubora». Berretzailea 2 denean karratua esaten zaio, eta 3 denean kuboa.',
-            es: 'Una potencia es una forma abreviada de escribir una multiplicación de factores iguales. La base es el factor que se repite y el exponente indica cuántas veces se repite. 4³ se lee «cuatro elevado a tres» o «cuatro al cubo». Con exponente 2 se dice «al cuadrado» y con exponente 3, «al cubo».',
-            en: 'A power is a shorthand way of writing a multiplication of equal factors. The base is the factor that is repeated, and the exponent shows how many times it is repeated. 4³ is read “four to the power of three” or “four cubed”. With exponent 2 you say “squared”, and with exponent 3, “cubed”.',
-            ar: 'القوة طريقة مختصرة لكتابة ضرب عوامل متساوية. الأساس هو العامل المتكرر، والأسّ يدل على عدد مرات تكراره. تُقرأ 4³ «أربعة أُسّ ثلاثة» أو «أربعة تكعيب». وعندما يكون الأس 2 نقول «مربع»، وعندما يكون 3 نقول «مكعب».'
         },
         stepsKind: 'facts',
         steps: [
@@ -592,7 +504,6 @@ export const naturalsTopics: UnitTopic[] = [
                 math: '$2^3\\cdot 2^2=2^{3+2}=2^5=32$'
             }
         ],
-        example: '$6\\cdot 6\\cdot 6=6^3=216$',
         takeaway: {
             eu: 'Oinarria: zer biderkatzen den. Berretzailea: zenbat aldiz.',
             es: 'La base: qué se multiplica. El exponente: cuántas veces.',
@@ -610,12 +521,6 @@ export const naturalsTopics: UnitTopic[] = [
             es: 'Calcular potencias de base 10 y usarlas para escribir números grandes de forma abreviada.',
             en: 'Calculate powers of 10 and use them to write large numbers in a shorter form.',
             ar: 'حساب قوى العدد 10 واستعمالها لكتابة الأعداد الكبيرة باختصار.'
-        },
-        explanation: {
-            eu: '10 oinarriko berretura bat 1 eta berretzaileak adina zero da: 10⁶ = 1\u00a0000\u00a0000. Horregatik oso erabilgarriak dira zenbaki handiak labur idazteko, adibidez distantziak edo herrialde bateko biztanleak: 4\u00a0000\u00a0000 = 4 · 10⁶. Zenbaki baten deskonposizioa ere idatz daiteke 10 oinarriko berreturekin.',
-            es: 'Una potencia de base 10 es un 1 seguido de tantos ceros como indica el exponente: 10⁶ = 1\u00a0000\u00a0000. Por eso son muy útiles para escribir números grandes de forma abreviada, como distancias o habitantes de un país: 4\u00a0000\u00a0000 = 4 · 10⁶. También se puede escribir la descomposición de un número con potencias de 10.',
-            en: 'A power of 10 is a 1 followed by as many zeros as the exponent shows: 10⁶ = 1,000,000. That is why they are very useful for writing large numbers in a shorter form, such as distances or the population of a country: 4,000,000 = 4 · 10⁶. You can also write a number in expanded form using powers of 10.',
-            ar: `قوة العدد 10 هي 1 متبوعًا بعدد من الأصفار يساوي الأسّ: ${ltr('10⁶ = 1\u00a0000\u00a0000')}. لذلك هي مفيدة جدًا لكتابة الأعداد الكبيرة باختصار، مثل المسافات أو عدد سكان بلد: ${ltr('4\u00a0000\u00a0000 = 4 · 10⁶')}. ويمكن أيضًا كتابة تفكيك عدد بقوى العدد 10.`
         },
         stepsKind: 'facts',
         steps: [
@@ -640,7 +545,6 @@ export const naturalsTopics: UnitTopic[] = [
                 math: '$10^{12}=1\\,000\\,000\\,000\\,000$'
             }
         ],
-        example: '$13\\,000\\,000=13\\cdot 10^6$',
         takeaway: {
             eu: '10ⁿ = 1 eta n zero.',
             es: '10ⁿ = un 1 seguido de n ceros.',
@@ -649,3 +553,6 @@ export const naturalsTopics: UnitTopic[] = [
         }
     }
 ]
+
+/** Each lesson with what it tells (lessonTexts.ts), its typical mistake and its «Check it» question (lessonChecks.ts) */
+export const naturalsTopics: UnitTopic[] = baseTopics.map((topic) => ({ ...topic, ...naturalsLessonTexts[topic.id as NaturalsTopicId], ...naturalsLessonChecks[topic.id as NaturalsTopicId] }))
