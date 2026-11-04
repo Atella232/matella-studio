@@ -38,7 +38,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'To add polynomials, group the terms of the same degree; to subtract, change all the signs of the one being subtracted. To multiply, multiply each term of one by every term of the other, as in the area $(x+2)(x+3)=x^{2}+5x+6$. The degree of the product is the sum of the degrees.'
         ),
         examplePrompt: say('Kalkulatu $(2x-1)(x^{2}+3)$, eta haren balioa $x=2$ denean.', 'Calcula $(2x-1)(x^{2}+3)$ y su valor para $x=2$.', 'احسب $(2x-1)(x^{2}+3)$ وقيمته عندما $x=2$.', 'Work out $(2x-1)(x^{2}+3)$ and its value when $x=2$.'),
-        example: same('$\\begin{aligned}(2x-1)(x^{2}+3)\\\\&=2x^{3}-x^{2}+6x-3\\end{aligned}$'),
+        example: same('$\\begin{aligned}&(2x-1)(x^{2}+3)\\\\&=2x^{3}-x^{2}+6x-3\\end{aligned}$'),
         exampleAnswer: say('3 mailakoa da, eta $x=2$ denean $16-4+12-3=21$ balio du.', 'Tiene grado 3 y, para $x=2$, vale $16-4+12-3=21$.', 'درجته 3، وعندما $x=2$ قيمته $16-4+12-3=21$.', 'It has degree 3 and, when $x=2$, it is worth $16-4+12-3=21$.')
     },
     identities: {
@@ -106,7 +106,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'Divide the first term of the dividend by the first term of the divisor, multiply the divisor by the result and subtract; carry on until the remainder has a lower degree than the divisor. It always holds that $D=d\\cdot c+r$. If the remainder is 0, the division is exact and $d$ is a divisor of $D$.'
         ),
         examplePrompt: say('Zatitu $(x^{3}-2x^{2}+4)\\div(x-3)$.', 'Divide $(x^{3}-2x^{2}+4)\\div(x-3)$.', 'اقسم $(x^{3}-2x^{2}+4)\\div(x-3)$.', 'Divide $(x^{3}-2x^{2}+4)\\div(x-3)$.'),
-        example: same('$\\begin{aligned}x^{3}-2x^{2}+4\\\\&=(x-3)(x^{2}+x+3)+13\\end{aligned}$'),
+        example: same('$\\begin{aligned}&x^{3}-2x^{2}+4\\\\&=(x-3)(x^{2}+x+3)+13\\end{aligned}$'),
         exampleAnswer: say('Zatidura $x^{2}+x+3$ eta hondarra 13: ez da zehatza.', 'Cociente $x^{2}+x+3$ y resto 13: no es exacta.', 'خارج القسمة $x^{2}+x+3$ والباقي 13: ليست تامة.', 'Quotient $x^{2}+x+3$ and remainder 13: it is not exact.')
     },
     ruffini: {
@@ -122,7 +122,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'If the divisor is $x-a$, you divide using only the coefficients: write them all, with 0 where a degree is missing, and $a$ on the left. Bring down the first, multiply it by $a$, add it to the next one, and repeat. The last number is the remainder; the others are the coefficients of the quotient, one degree lower. If the divisor is $x+4$, $a=-4$.'
         ),
         examplePrompt: say('Zatitu Ruffinirekin $(2x^{3}-5x+7)\\div(x-2)$.', 'Divide con Ruffini $(2x^{3}-5x+7)\\div(x-2)$.', 'اقسم بطريقة روفيني $(2x^{3}-5x+7)\\div(x-2)$.', 'Divide with Ruffini $(2x^{3}-5x+7)\\div(x-2)$.'),
-        example: same('$\\begin{aligned}2x^{3}-5x+7\\\\&=(x-2)(2x^{2}+4x+3)+13\\end{aligned}$'),
+        example: same('$\\begin{aligned}&2x^{3}-5x+7\\\\&=(x-2)(2x^{2}+4x+3)+13\\end{aligned}$'),
         exampleAnswer: say('Koefizienteak: $2,\\ 0,\\ -5,\\ 7$ (falta den $x^{2}$ gaiaren 0 barne). Zatidura $2x^{2}+4x+3$ eta hondarra 13.', 'Coeficientes: $2,\\ 0,\\ -5,\\ 7$ (con el 0 del $x^{2}$ que falta). Cociente $2x^{2}+4x+3$ y resto 13.', 'المعاملات: $2,\\ 0,\\ -5,\\ 7$ (مع 0 مكان $x^{2}$ الناقص). خارج القسمة $2x^{2}+4x+3$ والباقي 13.', 'Coefficients: $2,\\ 0,\\ -5,\\ 7$ (with the 0 for the missing $x^{2}$). Quotient $2x^{2}+4x+3$ and remainder 13.')
     },
     remainder: {
@@ -174,7 +174,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'The whole-number roots of a polynomial with whole-number coefficients are divisors of the constant term: those of $x^{3}-6x^{2}+11x-6$ are looked for among $\\pm 1$, $\\pm 2$, $\\pm 3$ and $\\pm 6$, and they are 1, 2 and 3. On the graph, they are the points where it crosses the X axis. A polynomial of degree $n$ has at most $n$ roots.'
         ),
         examplePrompt: say('Idatzi 3 mailako polinomio bat, erroak 2, $-1$ eta 4 dituena.', 'Escribe un polinomio de grado 3 con raíces 2, $-1$ y 4.', 'اكتب كثير حدود من الدرجة 3 جذوره 2 و$-1$ و4.', 'Write a polynomial of degree 3 with roots 2, $-1$ and 4.'),
-        example: same('$\\begin{aligned}(x-2)(x+1)(x-4)\\\\&=x^{3}-5x^{2}+2x+8\\end{aligned}$'),
+        example: same('$\\begin{aligned}&(x-2)(x+1)(x-4)\\\\&=x^{3}-5x^{2}+2x+8\\end{aligned}$'),
         exampleAnswer: say('$a$ erro bakoitzak $x-a$ faktore bat ematen du.', 'Cada raíz $a$ da un factor $x-a$.', 'كل جذر $a$ يعطي عاملًا $x-a$.', 'Each root $a$ gives a factor $x-a$.'),
         why: {
             text: say(
@@ -197,7 +197,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'The order: first, a common factor; then special products; next, Ruffini with the whole-number roots; and if a quotient of degree 2 is left, solve its equation. So $x^{4}+2x^{3}-23x^{2}-60x=x(x-5)(x+3)(x+4)$. If the roots are fractions, do not forget the leading coefficient: $3x^{2}+2x-8=(3x-4)(x+2)$.'
         ),
         examplePrompt: say('Faktorizatu $2x^{3}-8x$ eta $x^{3}-3x^{2}-4x+12$.', 'Factoriza $2x^{3}-8x$ y $x^{3}-3x^{2}-4x+12$.', 'حلّل $2x^{3}-8x$ و$x^{3}-3x^{2}-4x+12$.', 'Factorise $2x^{3}-8x$ and $x^{3}-3x^{2}-4x+12$.'),
-        example: same('$\\begin{aligned}2x^{3}-8x&=2x(x+2)(x-2)\\\\ x^{3}-3x^{2}-4x+12\\\\&=(x-3)(x-2)(x+2)\\end{aligned}$'),
+        example: same('$\\begin{aligned}&2x^{3}-8x=2x(x+2)(x-2)\\\\&x^{3}-3x^{2}-4x+12\\\\&=(x-3)(x-2)(x+2)\\end{aligned}$'),
         exampleAnswer: say('Bigarrenean 3 erroa da, eta $x^{2}-4$ zatidura batura bider kenketa da.', 'En la segunda, 3 es raíz y el cociente $x^{2}-4$ es suma por diferencia.', 'في الثاني 3 جذر، وخارج القسمة $x^{2}-4$ مجموع في فرق.', 'In the second one, 3 is a root and the quotient $x^{2}-4$ is a sum times a difference.')
     },
     'gcd-lcm': {

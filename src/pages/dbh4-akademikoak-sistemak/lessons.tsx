@@ -184,7 +184,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         problem: say('Ebatzi $y=x^{2}-1$ eta $y=x+1$. Zein da y-ren baliorik handiena?', 'Resuelve $y=x^{2}-1$ e $y=x+1$. ¿Cuál es el mayor valor de y?', 'حل $y=x^{2}-1$ و$y=x+1$. ما أكبر قيمة لـ y؟', 'Solve $y=x^{2}-1$ and $y=x+1$. What is the largest value of y?'),
         stepsKind: 'steps',
         steps: [
-            { text: say('Berdindu.', 'Iguala.', 'ساوِ.', 'Set them equal.'), math: same('$x^{2}-1=x+1\\ \\to\\ x^{2}-x-2=0$') },
+            { text: say('Berdindu.', 'Iguala.', 'ساوِ.', 'Set them equal.'), math: same('$\\begin{gathered}x^{2}-1=x+1\\\\ x^{2}-x-2=0\\end{gathered}$') },
             { text: say('Bi x.', 'Dos x.', 'قيمتان لـ x.', 'Two x-values.'), math: same('$x=2,\\ x=-1$') },
             { text: say('Haien y-ak.', 'Sus y.', 'قيمتا y.', 'Their y-values.'), math: same('$(2,3),\\ (-1,0)\\ \\to\\ y=3$') }
         ],

@@ -33,7 +33,7 @@ export const systemsLessonTexts: Record<SystemsTopicId, LessonTexts> = {
             'A linear equation in two unknowns has infinitely many solutions, which form a line on the plane: $x+y=5$ has $(0,5)$, $(1,4)$, $(2,3)$… To see whether a pair is a solution, substitute. To find one, give one unknown a value and solve for the other. To draw the line, two solutions are enough.'
         ),
         examplePrompt: say('Aurkitu $3x-y=6$ ekuazioaren bi ebazpen, eta egiaztatu $(1,-2)$ ebazpena den.', 'Halla dos soluciones de $3x-y=6$ y comprueba si $(1,-2)$ lo es.', 'جد حلين لـ $3x-y=6$ وتحقّق هل $(1,-2)$ حل.', 'Find two solutions of $3x-y=6$ and check whether $(1,-2)$ is one.'),
-        example: same('$\\begin{gathered}x=0\\ \\to\\ y=-6\\qquad x=2\\ \\to\\ y=0\\\\ 3\\cdot 1-(-2)=5\\neq 6\\end{gathered}$'),
+        example: same('$\\begin{gathered}x=0\\ \\to\\ y=-6\\\\ x=2\\ \\to\\ y=0\\\\ 3\\cdot 1-(-2)=5\\neq 6\\end{gathered}$'),
         exampleAnswer: say('$(0,-6)$ eta $(2,0)$ ebazpenak dira; $(1,-2)$ ez.', '$(0,-6)$ y $(2,0)$ son soluciones; $(1,-2)$ no.', '$(0,-6)$ و$(2,0)$ حلان؛ أما $(1,-2)$ فلا.', '$(0,-6)$ and $(2,0)$ are solutions; $(1,-2)$ is not.')
     },
     graphic: {
@@ -104,7 +104,7 @@ export const systemsLessonTexts: Record<SystemsTopicId, LessonTexts> = {
             'Solve one equation for one unknown, substitute it into the other, and you get an equation with a single unknown; with its value, work out the other. It is best to solve for the one with coefficient 1 or $-1$, to avoid fractions. At the end, check the solution in both equations.'
         ),
         examplePrompt: say('Ebatzi ordezkapenez $2x+y=1$ eta $3x-2y=12$.', 'Resuelve por sustitución $2x+y=1$ y $3x-2y=12$.', 'حلّ بالتعويض $2x+y=1$ و$3x-2y=12$.', 'Solve by substitution $2x+y=1$ and $3x-2y=12$.'),
-        example: same('$\\begin{gathered}y=1-2x\\\\ 3x-2(1-2x)=12\\ \\to\\ x=2,\\ y=-3\\end{gathered}$'),
+        example: same('$\\begin{gathered}y=1-2x\\\\ 3x-2(1-2x)=12\\\\ x=2,\\ y=-3\\end{gathered}$'),
         exampleAnswer: say('Ebazpena $(2,-3)$ da: $4-3=1$ eta $6+6=12$.', 'La solución es $(2,-3)$: $4-3=1$ y $6+6=12$.', 'الحل $(2,-3)$: $4-3=1$ و$6+6=12$.', 'The solution is $(2,-3)$: $4-3=1$ and $6+6=12$.')
     },
     equalization: {
@@ -180,7 +180,7 @@ export const systemsLessonTexts: Record<SystemsTopicId, LessonTexts> = {
             'If one equation is linear, solve it for one unknown and substitute into the other: you get a quadratic equation, with two solutions at most. $x^{2}+y^{2}=25$ and $x+y=7$: with $y=7-x$ you get $x^{2}-7x+12=0$, with $x=3$ and $x=4$, so $(3,4)$ and $(4,3)$: where the circle and the line cross.'
         ),
         examplePrompt: say('Ebatzi $y=x^{2}-3x$ eta $y=x-3$.', 'Resuelve $y=x^{2}-3x$ e $y=x-3$.', 'حلّ $y=x^{2}-3x$ و$y=x-3$.', 'Solve $y=x^{2}-3x$ and $y=x-3$.'),
-        example: same('$\\begin{gathered}x^{2}-3x=x-3\\ \\to\\ x^{2}-4x+3=0\\\\ (1,-2)\\qquad(3,0)\\end{gathered}$'),
+        example: same('$\\begin{gathered}x^{2}-3x=x-3\\\\ x^{2}-4x+3=0\\\\ (1,-2)\\qquad(3,0)\\end{gathered}$'),
         exampleAnswer: say('Bi ebazpen: zuzenak parabola bi puntutan mozten du.', 'Dos soluciones: la recta corta a la parábola en dos puntos.', 'حلان: يقطع المستقيم القطع المكافئ في نقطتين.', 'Two solutions: the line crosses the parabola at two points.')
     },
     squares: {
