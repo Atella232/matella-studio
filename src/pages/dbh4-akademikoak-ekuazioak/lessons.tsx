@@ -97,7 +97,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stepsKind: 'steps',
         steps: [
             { text: say('Ekuazioa.', 'La ecuación.', 'المعادلة.', 'The equation.'), math: same('$x(x+4)=60$') },
-            { text: say('Ebatzi.', 'Resuelve.', 'حلّ.', 'Solve.'), math: same('$x^{2}+4x-60=0\\ \\to\\ x=6,\\ x=-10$') },
+            { text: say('Ebatzi.', 'Resuelve.', 'حلّ.', 'Solve.'), math: same('$\\begin{gathered}x^{2}+4x-60=0\\\\ x=6,\\ x=-10\\end{gathered}$') },
             { text: say('$-10$ ez da baliozkoa: 6 cm.', '$-10$ no vale: 6 cm.', '$-10$ لا يصلح: 6 سم.', '$-10$ doesn\'t work: 6 cm.'), math: same('$6\\cdot 10=60$') }
         ],
         takeaway: say('Izendatu, idatzi, ebatzi eta egiaztatu: ebazpen guztiak ez dira baliozkoak.', 'Nombra, escribe, resuelve y comprueba: no todas las soluciones valen.', 'سمِّ واكتب وحلّ وتحقّق: ليست كل الحلول صالحة.', 'Name, write, solve and check: not every solution is valid.'),

@@ -54,7 +54,7 @@ export const equationsLessonTexts: Record<EquationsTopicId, LessonTexts> = {
             'If $x_1$ and $x_2$ are the roots of $ax^{2}+bx+c=0$, then $x_1+x_2=-\\frac{b}{a}$ and $x_1\\cdot x_2=\\frac{c}{a}$. In $x^{2}-7x+10=0$, the roots 2 and 5 add up to 7 and their product is 10. Conversely, the equation whose roots have sum $S$ and product $P$ is $x^{2}-Sx+P=0$.'
         ),
         examplePrompt: say('Idatzi erroak 4 eta $-6$ dituen bigarren mailako ekuazioa.', 'Escribe la ecuación de segundo grado cuyas raíces son 4 y $-6$.', 'اكتب معادلة الدرجة الثانية التي جذراها 4 و$-6$.', 'Write the quadratic equation whose roots are 4 and $-6$.'),
-        example: same('$\\begin{gathered}S=4-6=-2\\qquad P=4\\cdot(-6)=-24\\\\ x^{2}+2x-24=0\\end{gathered}$'),
+        example: same('$\\begin{gathered}S=4-6=-2\\\\ P=4\\cdot(-6)=-24\\\\ x^{2}+2x-24=0\\end{gathered}$'),
         exampleAnswer: say('Egiaztatu $x=4$ denean: $16+8-24=0$.', 'Comprueba con $x=4$: $16+8-24=0$.', 'تحقّق عندما $x=4$: $16+8-24=0$.', 'Check with $x=4$: $16+8-24=0$.'),
         why: {
             text: say(
@@ -77,7 +77,7 @@ export const equationsLessonTexts: Record<EquationsTopicId, LessonTexts> = {
             'The steps are always the same: name the unknown, write the equation, solve it and check. A quadratic equation can give two solutions, and sometimes one does not work: a negative length makes no sense. If the sides of a right-angled triangle are $x$, $x+3$ and $x+6$, Pythagoras gives $x^{2}-6x-27=0$: $x=9$, and $-3$ does not work.'
         ),
         examplePrompt: say('Bi zenbaki arrunt jarraituren biderkadura 132 da. Zein dira?', 'El producto de dos números naturales consecutivos es 132. ¿Cuáles son?', 'جداء عددين طبيعيين متتاليين 132. ما هما؟', 'The product of two consecutive natural numbers is 132. What are they?'),
-        example: same('$x(x+1)=132\\ \\to\\ x^{2}+x-132=0\\ \\to\\ x=11$'),
+        example: same('$\\begin{gathered}x(x+1)=132\\\\ x^{2}+x-132=0\\ \\to\\ x=11\\end{gathered}$'),
         exampleAnswer: say('11 eta 12; $-12$ ez da zenbaki arrunta.', '11 y 12; $-12$ no es natural.', '11 و12؛ و$-12$ ليس عددًا طبيعيًا.', '11 and 12; $-12$ is not a natural number.')
     },
 
@@ -115,7 +115,7 @@ export const equationsLessonTexts: Record<EquationsTopicId, LessonTexts> = {
             'A product is 0 if one of its factors is 0. To solve $P(x)=0$, factorise $P$ and set each factor equal to 0: in $(x+1)(x^{2}-4)=0$, $x=-1$, $x=2$ and $x=-2$. To factorise: common factor, identities and Ruffini. Never divide both sides by $x$: you would lose the solution $x=0$.'
         ),
         examplePrompt: say('Ebatzi $x^{3}-2x^{2}-3x=0$.', 'Resuelve $x^{3}-2x^{2}-3x=0$.', 'حلّ $x^{3}-2x^{2}-3x=0$.', 'Solve $x^{3}-2x^{2}-3x=0$.'),
-        example: same('$x(x-3)(x+1)=0\\ \\to\\ x=0,\\ x=3,\\ x=-1$'),
+        example: same('$\\begin{gathered}x(x-3)(x+1)=0\\\\ x=0,\\ x=3,\\ x=-1\\end{gathered}$'),
         exampleAnswer: say('Hiru ebazpen; $x=0$ faktore komunetik dator.', 'Tres soluciones; la $x=0$ sale del factor común.', 'ثلاثة حلول؛ والحل $x=0$ يأتي من العامل المشترك.', 'Three solutions; $x=0$ comes from the common factor.')
     },
     rational: {
@@ -193,7 +193,7 @@ export const equationsLessonTexts: Record<EquationsTopicId, LessonTexts> = {
     inequalities: {
         definitions: [
             {
-                term: say('Inekuazioa', 'Inecuación', 'المتباينة', 'Inequality'),
+                term: say('Inekuazioa', 'Inecuación', 'المتراجحة', 'Inequality'),
                 meaning: say('Ezezagun bat duen desberdintza bat ($<$, $>$, $\\le$, $\\ge$).', 'Una desigualdad ($<$, $>$, $\\le$, $\\ge$) con una incógnita.', 'متباينة ($<$، $>$، $\\le$، $\\ge$) فيها مجهول.', 'An inequality ($<$, $>$, $\\le$, $\\ge$) with one unknown.')
             }
         ],
@@ -207,7 +207,7 @@ export const equationsLessonTexts: Record<EquationsTopicId, LessonTexts> = {
             'حلولها هي الأعداد التي تجعل المتباينة صحيحة، وغالبًا تكون لا نهائية: تُكتب بالمجالات. $x\\ge -2$ هو $[-2,+\\infty)$؛ و$x<4$ هو $(-\\infty,4)$؛ و$-1\\le x<3$ هو $[-1,3)$. القوس المعقوف يعني أن الطرف داخل (نقطة ممتلئة)، والقوس العادي أنه غير داخل (نقطة فارغة).',
             'Its solutions are the numbers that make the inequality true, and there are usually infinitely many: they are written as intervals. $x\\ge -2$ is $[-2,+\\infty)$; $x<4$ is $(-\\infty,4)$; $-1\\le x<3$ is $[-1,3)$. A square bracket means the endpoint is in (filled dot), and a round bracket that it is not (open dot).'
         ),
-        examplePrompt: say('$-1$, 1 eta 3 zenbakietatik, zein dira $x^{2}-2x<3$ inekuazioaren ebazpenak?', '¿Cuáles de $-1$, 1 y 3 son soluciones de $x^{2}-2x<3$?', 'أيّ الأعداد $-1$ و1 و3 حلول للمتباينة $x^{2}-2x<3$؟', 'Which of $-1$, 1 and 3 are solutions of $x^{2}-2x<3$?'),
+        examplePrompt: say('$-1$, 1 eta 3 zenbakietatik, zein dira $x^{2}-2x<3$ inekuazioaren ebazpenak?', '¿Cuáles de $-1$, 1 y 3 son soluciones de $x^{2}-2x<3$?', 'أيّ الأعداد $-1$ و1 و3 حلول للمتراجحة $x^{2}-2x<3$؟', 'Which of $-1$, 1 and 3 are solutions of $x^{2}-2x<3$?'),
         example: same('$\\begin{gathered}(-1)^{2}+2=3\\qquad 1-2=-1<3\\\\ 9-6=3\\end{gathered}$'),
         exampleAnswer: say('1 bakarrik: $-1$ eta 3 zenbakiekin $3<3$ ateratzen da, eta hori faltsua da.', 'Solo 1: con $-1$ y con 3 sale $3<3$, que es falso.', 'العدد 1 فقط: مع $-1$ ومع 3 نحصل على $3<3$ وهذا خطأ.', 'Only 1: with $-1$ and with 3 you get $3<3$, which is false.')
     },
