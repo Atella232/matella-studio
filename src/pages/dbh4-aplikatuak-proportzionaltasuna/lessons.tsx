@@ -1,4 +1,5 @@
 import type { LocalizedText, UnitStage, UnitTopic } from '../../features/unit-v2/types'
+import { proportionDbh4ApLessonChecks, type ProportionDbh4ApTopicId } from './lessonChecks'
 import { proportionDbh4ApLessonTexts } from './lessonTexts'
 import { ChooseMethodFigure, InverseRuleFigure, RuleOfThreeFigure } from '../dbh1-proportzionaltasuna-v2/figures'
 import { ChainedFigure, CompoundMixedFigure, IndexFigure, InterestFigure, InverseShareFigure, PercentTotalFigure, ShareDaysFigure } from '../dbh2-proportzionaltasuna-v2/figures'
@@ -31,12 +32,13 @@ const say = (eu: string, es: string, ar: string, en: string): LocalizedText => (
 /** The same formula in every language; the decimal comma becomes a point in Arabic */
 const same = (value: string): LocalizedText => ({ eu: value, es: value, en: value, ar: value.replace(/\{,\}/g, '.') })
 
-/** The lessons without their explanation, cases and typical mistake, which live in lessonTexts.ts */
-const lessons: Omit<UnitTopic, 'explanation'>[] = [
+/** The lessons without what they tell (explanation, cases, example…), which lives in lessonTexts.ts */
+const lessons: Omit<UnitTopic, 'explanation' | 'example'>[] = [
     /* ---------- 1. Simple proportionality ---------- */
     {
         id: 'relations',
         stage: 'simple',
+        needs: [{ unit: 'dbh3/proporcionalidad', topic: 'ratio', title: { eu: 'Arrazoia eta proportzioa', es: 'Razón y proporción', en: 'Ratio and proportion', ar: 'النسبة والتناسب' } }],
         title: say('Zuzena, alderantzizkoa ala bat ere ez', 'Directa, inversa o ninguna', 'طردي أم عكسي أم لا شيء', 'Direct, inverse or neither'),
         goal: say('Bi magnitude zuzenki, alderantziz ala ez proportzionalak diren erabakitzea, balioen taula batekin egiaztatuz.', 'Decidir si dos magnitudes son directa o inversamente proporcionales, o ninguna de las dos, comprobándolo con una tabla de valores.', 'تحديد ما إذا كان مقداران متناسبين طرديًا أو عكسيًا أو غير متناسبين، والتحقق بجدول قيم.', 'Decide whether two quantities are directly or inversely proportional, or neither, by checking with a table of values.'),
         problem: say('Ur-txorrota batek 3,5 l botatzen ditu orduko. Litroak eta orduak proportzionalak dira? Nolakoak?', 'Un grifo echa 3,5 l cada hora. ¿Son proporcionales los litros y las horas? ¿De qué tipo?', 'يصبّ صنبور 3.5 ل كل ساعة. هل اللترات والساعات متناسبة؟ من أي نوع؟', 'A tap delivers 3.5 l every hour. Are the litres and the hours proportional? What kind?'),
@@ -46,13 +48,13 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('Zatidura beti bera.', 'El cociente siempre es el mismo.', 'حاصل القسمة ثابت دائمًا.', 'The ratio is always the same.'), math: same('$\\frac{10{,}5}{3}=\\frac{7}{2}=3{,}5$') },
             { text: say('Zuzenki proportzionalak dira.', 'Son directamente proporcionales.', 'متناسبان طرديًا.', 'They are directly proportional.') }
         ],
-        example: same('$\\frac{120}{90}\\cdot 7\\approx 9{,}3\\neq 12$'),
         takeaway: say('Zuzena: zatidura konstantea. Alderantzizkoa: biderkadura konstantea.', 'Directa: cociente constante. Inversa: producto constante.', 'الطردي: حاصل قسمة ثابت. العكسي: حاصل ضرب ثابت.', 'Direct: constant quotient. Inverse: constant product.'),
         figure: (language) => <ChooseMethodFigure language={language} />
     },
     {
         id: 'direct-rule',
         stage: 'simple',
+        needs: [{ unit: 'dbh3/proporcionalidad', topic: 'direct', title: { eu: 'Proportzionaltasun zuzena', es: 'Proporcionalidad directa', en: 'Direct proportion', ar: 'التناسب الطردي' } }],
         title: say('Hiruko erregela zuzena', 'Regla de tres directa', 'قاعدة الثلاثة الطردية', 'Direct rule of three'),
         goal: say('Proportzionaltasun zuzeneko problemak hiruko erregelaz edo unitatera laburtuz ebaztea, hamartarrekin.', 'Resolver problemas de proporcionalidad directa con regla de tres o reduciendo a la unidad, también con decimales.', 'حلّ مسائل التناسب الطردي بقاعدة الثلاثة أو بالإرجاع إلى الوحدة، مع الأعداد العشرية أيضًا.', 'Solve direct proportion problems with the rule of three or the unitary method, including those with decimals.'),
         problem: say('Jogurt baten 100 g-k 54 kcal dituzte. Zenbat kcal ditu 125 g-ko jogurt batek?', '100 g de yogur tienen 54 kcal. ¿Cuántas kcal tiene un yogur de 125 g?', 'في 100 غ من اللبن 54 سعرة حرارية. كم سعرة في لبن وزنه 125 غ؟', '100 g of yoghurt contains 54 kcal. How many kcal does a 125 g yoghurt contain?'),
@@ -62,13 +64,13 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('Gurutzean biderkatu.', 'Multiplica en cruz.', 'اضرب تبادليًا.', 'Cross-multiply.'), math: same('$100\\cdot x=54\\cdot 125=6750$') },
             { text: say('Zatitu: 67,5 kcal.', 'Divide: 67,5 kcal.', 'اقسم: 67.5 سعرة.', 'Divide: 67.5 kcal.'), math: same('$x=6750\\mathbin{:}100=67{,}5$') }
         ],
-        example: same('$\\frac{3{,}60\\cdot 1}{0{,}75}=4{,}8$'),
         takeaway: say('Zuzena: $x=\\frac{b\\cdot c}{a}$; edo lehenik unitate baten balioa.', 'Directa: $x=\\frac{b\\cdot c}{a}$; o primero el valor de 1.', 'الطردي: $x=\\frac{b\\cdot c}{a}$؛ أو قيمة الواحد أولًا.', 'Direct: $x=\\frac{b\\cdot c}{a}$; or first find the value of 1.'),
         figure: (language) => <RuleOfThreeFigure language={language} />
     },
     {
         id: 'inverse-rule',
         stage: 'simple',
+        needs: [{ unit: 'dbh3/proporcionalidad', topic: 'inverse', title: { eu: 'Alderantzizko proportzionaltasuna', es: 'Proporcionalidad inversa', en: 'Inverse proportion', ar: 'التناسب العكسي' } }],
         title: say('Hiruko erregela alderantzizkoa', 'Regla de tres inversa', 'قاعدة الثلاثة العكسية', 'Inverse rule of three'),
         goal: say('Alderantzizko proportzionaltasuneko problemak biderkadura konstantea erabiliz ebaztea.', 'Resolver problemas de proporcionalidad inversa usando el producto constante.', 'حلّ مسائل التناسب العكسي باستعمال حاصل الضرب الثابت.', 'Solve inverse proportion problems using the constant product.'),
         problem: say('Egunean 3,60 € gastatuz, aurrezkiek 15 egun irauten dute. Zenbat egun egunean 4,50 € gastatuz?', 'Gastando 3,60 € al día, los ahorros duran 15 días. ¿Cuántos días duran gastando 4,50 € al día?', 'بإنفاق 3.60 € يوميًا تكفي المدخرات 15 يومًا. كم يومًا تكفي بإنفاق 4.50 € يوميًا؟', 'Spending €3.60 a day, the savings last 15 days. How many days do they last if you spend €4.50 a day?'),
@@ -78,7 +80,6 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('Aurrezki guztiak.', 'Los ahorros totales.', 'المدخرات كلها.', 'The total savings.'), math: same('$3{,}60\\cdot 15=54$') },
             { text: say('Zatitu: 12 egun.', 'Divide: 12 días.', 'اقسم: 12 يومًا.', 'Divide: 12 days.'), math: same('$54\\mathbin{:}4{,}50=12$') }
         ],
-        example: same('$\\frac{35\\cdot 60}{20}=105$'),
         takeaway: say('Alderantzizkoa: $x=\\frac{a\\cdot b}{c}$, biderkadura ez da aldatzen.', 'Inversa: $x=\\frac{a\\cdot b}{c}$, el producto no cambia.', 'العكسي: $x=\\frac{a\\cdot b}{c}$، وحاصل الضرب لا يتغير.', 'Inverse: $x=\\frac{a\\cdot b}{c}$, the product stays the same.'),
         figure: (language) => <InverseRuleFigure language={language} />
     },
@@ -96,7 +97,6 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('Aste gutxiago → sarrera gutxiago: zuzena.', 'Menos semanas → menos entradas: directa.', 'أسابيع أقل ← تذاكر أقل: طردي.', 'Fewer weeks → fewer tickets: direct.'), math: same('$\\frac{1}{3}$') },
             { text: say('Biderkatu.', 'Multiplica.', 'اضرب.', 'Multiply.'), math: same('$15\\,000\\cdot\\frac{7}{5}\\cdot\\frac{1}{3}=7000$') }
         ],
-        example: same('$10\\cdot\\frac{3}{5}\\cdot\\frac{8}{6}=8$'),
         takeaway: say('Zuzena: berria/zaharra. Alderantzizkoa: zaharra/berria.', 'Directa: nuevo/viejo. Inversa: viejo/nuevo.', 'الطردي: الجديد/القديم. العكسي: القديم/الجديد.', 'Direct: new/old. Inverse: old/new.'),
         figure: (language) => <CompoundMixedFigure language={language} />
     },
@@ -111,13 +111,13 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('Joko baten prezioa.', 'Precio de un juego.', 'ثمن المجموعة الواحدة.', 'Price of one set.'), math: same('$175\\mathbin{:}5=35$') },
             { text: say('Bakoitzak.', 'Cada una.', 'كل واحدة.', 'Each one.'), math: same('$3\\cdot 35=105\\qquad 2\\cdot 35=70$') }
         ],
-        example: same('$62{,}40\\mathbin{:}120=0{,}52$'),
         takeaway: say('Zuzena: kantitatea : batura, gero bider zenbaki bakoitza.', 'Directo: cantidad : suma, y luego por cada número.', 'الطردي: الكمية : المجموع ثم في كل عدد.', 'Direct: amount : sum, then multiply by each number.'),
         figure: (language) => <ShareDaysFigure language={language} />
     },
     {
         id: 'inverse-share',
         stage: 'compound',
+        needs: [{ unit: 'dbh3/numeros-racionales', topic: 'add-sub', title: { eu: 'Batuketa eta kenketa', es: 'Suma y resta', en: 'Addition and subtraction', ar: 'الجمع والطرح' } }],
         title: say('Banaketa alderantziz proportzionala', 'Reparto inversamente proporcional', 'التوزيع العكسي', 'Sharing in inverse proportion'),
         goal: say('Kantitate bat zenbaki batzuekiko alderantziz proportzionalak diren zatitan banatzea.', 'Repartir una cantidad en partes inversamente proporcionales a unos números.', 'توزيع كمية إلى أجزاء متناسبة عكسيًا مع أعداد معطاة.', 'Share an amount into parts in inverse proportion to some numbers.'),
         problem: say('Banatu 660 alderantziz proportzionalki 1, 2 eta 3 zenbakiekiko.', 'Reparte 660 en partes inversamente proporcionales a 1, 2 y 3.', 'وزّع 660 عكسيًا على 1 و2 و3.', 'Share 660 into parts that are inversely proportional to 1, 2 and 3.'),
@@ -127,7 +127,6 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('6, 3 eta 2 zenbakiekiko: 11 zati.', 'Proporcional a 6, 3 y 2: 11 partes.', 'متناسب مع 6 و3 و2: 11 جزءًا.', 'In proportion to 6, 3 and 2: 11 parts.'), math: same('$660\\mathbin{:}11=60$') },
             { text: say('Zatiak.', 'Las partes.', 'الأجزاء.', 'The parts.'), math: same('$360,\\ 180,\\ 120$') }
         ],
-        example: same('$1+\\frac{1}{2}+\\frac{1}{3}=\\frac{11}{6}$'),
         takeaway: say('Alderantzizkoa: banatu alderantzizkoekiko zuzenki.', 'Inverso: reparte directamente a los inversos.', 'العكسي: وزّع طرديًا على المقلوبات.', 'Inverse: share directly in proportion to the inverses.'),
         figure: (language) => <InverseShareFigure language={language} />
     },
@@ -136,6 +135,7 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
     {
         id: 'percent-calc',
         stage: 'percent',
+        needs: [{ unit: 'dbh3/proporcionalidad', topic: 'percent-index', title: { eu: 'Ehunekoak eta aldakuntza-indizea', es: 'Porcentajes e índice de variación', en: 'Percentages and the index of change', ar: 'النسب المئوية ومؤشر التغيّر' } }],
         title: say('Zatia, osoa eta ehunekoa', 'La parte, el total y el porcentaje', 'الجزء والكل والنسبة', 'The part, the total and the percentage'),
         goal: say('Hiru kalkuluak ebaztea: kantitate baten ehunekoa, zatitik osoa eta zati batek zer ehuneko den.', 'Resolver los tres cálculos: el porcentaje de una cantidad, el total a partir de la parte y qué porcentaje es una parte.', 'حلّ الحسابات الثلاثة: نسبة من كمية، والكل انطلاقًا من الجزء، ونسبة جزء من الكل.', 'Solve the three calculations: the percentage of an amount, the total from the part, and what percentage a part is.'),
         problem: say('Bernardok bizikleta bat erosi du: gurasoek % 50 ordaindu dute, amonak % 30 eta berak gainerakoa, 108 €. Zenbat balio zuen bizikletak?', 'Bernardo ha comprado una bici: sus padres han pagado el 50 %, su abuela el 30 % y él el resto, 108 €. ¿Cuánto costaba la bici?', 'اشترى برناردو دراجة: دفع والداه 50٪ وجدته 30٪ ودفع هو الباقي 108 €. كم كان ثمن الدراجة؟', 'Bernardo has bought a bike: his parents paid 50%, his grandmother 30%, and he paid the rest, €108. How much did the bike cost?'),
@@ -145,7 +145,6 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('% 20 = 108 €.', '20 % = 108 €.', '20٪ = 108 €.', '20% = €108.'), math: same('$T\\cdot 0{,}2=108$') },
             { text: say('Osoa.', 'El total.', 'الكل.', 'The total.'), math: same('$T=108\\mathbin{:}0{,}2=540$') }
         ],
-        example: same('$24\\,000\\mathbin{:}0{,}8=30\\,000$'),
         takeaway: say('Zatia = osoa · hamartarra; osoa = zatia : hamartarra.', 'Parte = total · decimal; total = parte : decimal.', 'الجزء = الكل · العشري؛ الكل = الجزء : العشري.', 'Part = total · decimal; total = part : decimal.'),
         figure: (language) => <PercentTotalFigure language={language} />
     },
@@ -160,7 +159,6 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('Indizea: % 75.', 'Índice: el 75 %.', 'المؤشر: 75٪.', 'Multiplier: 75%.'), math: same('$1-0{,}25=0{,}75$') },
             { text: say('Hasierakoa = amaierakoa : indizea.', 'Inicial = final : índice.', 'الأصلية = النهائية : المؤشر.', 'Initial = final : multiplier.'), math: same('$84\\mathbin{:}0{,}75=112$') }
         ],
-        example: same('$143{,}99\\mathbin{:}1{,}21=119$'),
         takeaway: say('Amaierakoa = hasierakoa · indizea; atzera, zatitu.', 'Final = inicial · índice; hacia atrás, divide.', 'النهائية = الأصلية · المؤشر؛ وللرجوع اقسم.', 'Final = starting amount · multiplier; working backwards, divide.'),
         figure: (language) => <IndexFigure language={language} />
     },
@@ -175,7 +173,6 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('Indizeak.', 'Los índices.', 'المؤشرات.', 'The multipliers.'), math: same('$0{,}82\\cdot 0{,}9^{3}=0{,}59778$') },
             { text: say('Biderkatu.', 'Multiplica.', 'اضرب.', 'Multiply.'), math: same('$15\\,000\\cdot 0{,}59778=8966{,}7$') }
         ],
-        example: same('$1{,}4\\cdot 0{,}6=0{,}84$'),
         takeaway: say('Kateatuak: indizeak biderkatu, ez ehunekoak batu.', 'Encadenados: multiplica los índices, no sumes los porcentajes.', 'المتتالية: اضرب المؤشرات ولا تجمع النسب.', 'Chained changes: multiply the multipliers, don\'t add the percentages.'),
         figure: (language) => <ChainedFigure language={language} />
     },
@@ -184,6 +181,7 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
     {
         id: 'simple-interest',
         stage: 'interest',
+        needs: [{ unit: 'dbh3/proporcionalidad', topic: 'interest', title: { eu: 'Interes bakuna', es: 'Interés simple', en: 'Simple interest', ar: 'الفائدة البسيطة' } }],
         title: say('Interes bakuna', 'El interés simple', 'الفائدة البسيطة', 'Simple interest'),
         goal: say('Interes bakuna kalkulatzea urtetan, hilabetetan edo egunetan, eta kapitala, tasa edo denbora aurkitzea.', 'Calcular el interés simple en años, meses o días, y hallar el capital, el tipo o el tiempo.', 'حساب الفائدة البسيطة بالسنوات أو الأشهر أو الأيام، وإيجاد رأس المال أو السعر أو المدة.', 'Calculate simple interest in years, months or days, and find the principal, the rate or the time.'),
         problem: say('Kapitala: 6000 €. Interes-tasa: % 3. Denbora: 8 hilabete. Zenbat interes sortzen du?', '¿Qué interés producen 6000 € al 3 % durante 8 meses?', 'ما الفائدة التي تُنتجها 6000 € بنسبة 3٪ مدة 8 أشهر؟', 'How much interest does €6000 earn at 3% over 8 months?'),
@@ -192,7 +190,6 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('Denbora hilabetetan: zatitzailea 1200 da.', 'Tiempo en meses: divide entre 1200.', 'المدة بالأشهر: اقسم على 1200.', 'Time in months: divide by 1200.'), math: same('$I=\\frac{6000\\cdot 3\\cdot 8}{1200}$') },
             { text: say('120 €.', '120 €.', '120 €.', '€120.'), math: same('$\\frac{144\\,000}{1200}=120$') }
         ],
-        example: same('$\\frac{448{,}80\\cdot 1200}{3{,}2\\cdot 9}=18\\,700$'),
         takeaway: say('Zatitzailea: urteak, 100; hilabeteak, 1200; egunak, 36\u00a0000.', 'Años: entre 100. Meses: entre 1200. Días: entre 36\u00a0000.', 'السنوات: على 100. الأشهر: على 1200. الأيام: على 36000.', 'Years: divide by 100. Months: divide by 1200. Days: divide by 36,000.'),
         figure: (language) => <InterestFigure language={language} />
     },
@@ -208,7 +205,6 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('Hiru urte: hiru aldiz.', 'Tres años: tres veces.', 'ثلاث سنوات: ثلاث مرات.', 'Three years: three times.'), math: same('$1{,}05^{3}=1{,}157625$') },
             { text: say('Amaierako kapitala.', 'Capital final.', 'رأس المال النهائي.', 'Final amount.'), math: same('$10\\,000\\cdot 1{,}157625=11\\,576{,}25$') }
         ],
-        example: same('$1000\\cdot 1{,}1^{3}=1331$'),
         takeaway: say('Urtero bider indizea: $C\\cdot\\left(1+\\frac{r}{100}\\right)^{t}$.', 'Cada año por el índice: $C\\cdot\\left(1+\\frac{r}{100}\\right)^{t}$.', 'كل سنة في المؤشر: $C\\cdot\\left(1+\\frac{r}{100}\\right)^{t}$.', 'Multiply by the multiplier each year: $C\\cdot\\left(1+\\frac{r}{100}\\right)^{t}$.'),
         figure: (language) => <CompoundInterestFigure language={language} />
     },
@@ -224,7 +220,6 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('Lau aldi.', 'Cuatro periodos.', 'أربع فترات.', 'Four periods.'), math: same('$1{,}03^{4}=1{,}12550881$') },
             { text: say('Amaierako kapitala.', 'Capital final.', 'رأس المال النهائي.', 'Final amount.'), math: same('$10\\,000\\cdot 1{,}03^{4}\\approx 11\\,255{,}09$') }
         ],
-        example: same('$24\\,000\\cdot 1{,}004^{60}\\approx 30\\,495{,}38$'),
         takeaway: say('Tasa zati $k$; urteak bider $k$.', 'El tipo entre $k$; los años por $k$.', 'السعر على $k$؛ والسنوات في $k$.', 'Divide the rate by $k$; multiply the years by $k$.'),
         figure: (language) => <PeriodsFigure language={language} />
     },
@@ -242,7 +237,6 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('Kantitate berria.', 'La nueva cantidad.', 'الكمية الجديدة.', 'The new quantity.'), math: same('$100+20=120$') },
             { text: say('Prezio ertaina: 3 €/l.', 'Precio medio: 3 €/l.', 'السعر المتوسط: 3 €/ل.', 'Mean price: €3/l.'), math: same('$360\\mathbin{:}120=3$') }
         ],
-        example: same('$\\frac{12\\cdot 12{,}40+8\\cdot 7{,}40}{20}=10{,}4$'),
         takeaway: say('Prezio ertaina = kostu osoa : kantitate osoa.', 'Precio medio = coste total : cantidad total.', 'السعر المتوسط = الكلفة الكلية : الكمية الكلية.', 'Mean price = total cost : total quantity.'),
         figure: (language) => <MixtureFigure language={language} />
     },
@@ -258,13 +252,13 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('Denbora orduetan.', 'Tiempo en horas.', 'الزمن بالساعات.', 'Time in hours.'), math: same('$22\\mathbin{:}24=\\frac{11}{12}$') },
             { text: say('Minututan: 55 min.', 'En minutos: 55 min.', 'بالدقائق: 55 د.', 'In minutes: 55 min.'), math: same('$\\frac{11}{12}\\cdot 60=55$') }
         ],
-        example: same('$240\\mathbin{:}(70+110)=\\frac{4}{3}$'),
         takeaway: say('Elkarrengana: batu. Atzetik: kendu. Denbora = distantzia : abiadura.', 'Al encuentro: suma. Persecución: resta. Tiempo = distancia : velocidad.', 'التلاقي: اجمع. المطاردة: اطرح. الزمن = المسافة : السرعة.', 'Meeting: add. Catching up: subtract. Time = distance : speed.'),
         figure: (language) => <MotionFigure language={language} />
     },
     {
         id: 'taps',
         stage: 'problems',
+        needs: [{ unit: 'dbh3/numeros-racionales', topic: 'add-sub', title: { eu: 'Batuketa eta kenketa', es: 'Suma y resta', en: 'Addition and subtraction', ar: 'الجمع والطرح' } }],
         title: say('Txorrotak eta elkarrekin egindako lanak', 'Grifos y trabajos en común', 'الصنابير والأعمال المشتركة', 'Taps and joint work'),
         goal: say('Bi txorrotak (edo bi langilek) elkarrekin zenbat denbora behar duten kalkulatzea, ordu bateko zatiak batuz.', 'Calcular cuánto tardan juntos dos grifos (o dos trabajadores) sumando las partes que hacen en una hora.', 'حساب الزمن الذي يحتاجه صنبوران (أو عاملان) معًا بجمع ما ينجزه كل منهما في ساعة.', 'Calculate how long two taps (or two workers) take together by adding up the parts they do in one hour.'),
         problem: say('Ur hotzaren txorrotak bainuontzia 8 minututan betetzen du eta beroarenak 12 minututan. Zenbat minutu biak batera?', 'El grifo de agua fría llena la bañera en 8 minutos y el de caliente en 12. ¿Cuántos minutos tardan los dos juntos?', 'يملأ صنبور الماء البارد الحوض في 8 دقائق والساخن في 12. كم دقيقة يحتاجان معًا؟', 'The cold tap fills the bath in 8 minutes and the hot tap in 12. How many minutes do they take together?'),
@@ -274,10 +268,10 @@ const lessons: Omit<UnitTopic, 'explanation'>[] = [
             { text: say('Osoa: alderantzizkoa.', 'El total: el inverso.', 'الكل: المقلوب.', 'Total time: the reciprocal.'), math: same('$\\frac{24}{5}=4{,}8$') },
             { text: say('4 min 48 s.', '4 min 48 s.', '4 د 48 ث.', '4 min 48 s.'), math: same('$0{,}8\\cdot 60=48$') }
         ],
-        example: same('$\\frac{1}{5}+\\frac{1}{7}=\\frac{12}{35}$'),
         takeaway: say('Batu ordu bateko zatiak; denbora = batura horren alderantzizkoa.', 'Suma las partes de una hora; el tiempo es el inverso de esa suma.', 'اجمع أجزاء الساعة؛ والزمن هو مقلوب المجموع.', 'Add up the parts done in one hour; the time is the reciprocal of that sum.'),
         figure: (language) => <TapsFigure language={language} />
     }
 ]
 
-export const proportionDbh4ApTopics: UnitTopic[] = lessons.map((lesson) => ({ ...lesson, ...proportionDbh4ApLessonTexts[lesson.id] }))
+/** Each lesson with what it tells (lessonTexts.ts), its typical mistake and its «Check it» question (lessonChecks.ts) */
+export const proportionDbh4ApTopics: UnitTopic[] = lessons.map((lesson) => ({ ...lesson, ...proportionDbh4ApLessonTexts[lesson.id as ProportionDbh4ApTopicId], ...proportionDbh4ApLessonChecks[lesson.id as ProportionDbh4ApTopicId] }))

@@ -6,18 +6,21 @@ import { evaluate } from './helpers/realsRaceCheck.ts'
 import type { LocalizedText } from '../src/features/unit-v2/types.ts'
 import { formulaFor } from '../src/utils/latexLanguage.ts'
 import { proportionDbh4ApLessonTexts as lessonTexts } from '../src/pages/dbh4-aplikatuak-proportzionaltasuna/lessonTexts.ts'
+import { proportionDbh4ApLessonChecks as lessonChecks } from '../src/pages/dbh4-aplikatuak-proportzionaltasuna/lessonChecks.ts'
 
-/* The lessons of Proportzionaltasuna 4. DBH aplikatuak: a short explanation, its cases and its typical mistake (V1 and V2 of the review) */
+/* The lessons of Proportzionaltasuna 4. DBH aplikatuak: a short explanation, its cases (lessonTexts.ts) and its typical mistake
+   (lessonChecks.ts), V1 and V2 of the review. The rest of the lesson texts is checked by lesson-texts.test.ts */
 
-const topics = ['relations', 'direct-rule', 'inverse-rule', 'compound', 'direct-share', 'inverse-share', 'percent-calc', 'index', 'chained', 'simple-interest', 'compound-interest', 'periods', 'mixtures', 'motion', 'taps']
+const topics: Array<keyof typeof lessonTexts> = ['relations', 'direct-rule', 'inverse-rule', 'compound', 'direct-share', 'inverse-share', 'percent-calc', 'index', 'chained', 'simple-interest', 'compound-interest', 'periods', 'mixtures', 'motion', 'taps']
 const languages = ['eu', 'es', 'en', 'ar'] as const
 /** A case ending glued to a number (8an, 1200ez, 3rekin…), which the Basque texts never write */
 const basqueEnding = /\d-?(an|ean|ra|era|tik|etik|ko|eko|rekin|ekin|en|ren|k|z|ez|tan|etan|ri|eri)\b/
 const words = (text: string) => text.replace(/\$[^$]*\$/g, '')
 
-const lessonParts = (id: string): LocalizedText[] => {
+const lessonParts = (id: keyof typeof lessonTexts): LocalizedText[] => {
     const lesson = lessonTexts[id]
-    return [lesson.explanation, ...lesson.cases.flatMap((item) => [item.title!, item.text, ...(item.math && typeof item.math !== 'string' ? [item.math] : [])]), lesson.mistake.wrong, lesson.mistake.right]
+    const { mistake } = lessonChecks[id]
+    return [lesson.explanation, ...(lesson.cases ?? []).flatMap((item) => [item.title!, item.text, ...(item.math && typeof item.math !== 'string' ? [item.math] : [])]), mistake.wrong, mistake.right]
 }
 
 test('proportzionaltasuna 4. DBH ap lessons: every lesson is short, split into cases and has its typical mistake', () => {
@@ -25,11 +28,12 @@ test('proportzionaltasuna 4. DBH ap lessons: every lesson is short, split into c
     for (const id of topics) {
         const lesson = lessonTexts[id]
         assert.ok(lesson.explanation.es.length <= 250, `${id}: ${lesson.explanation.es.length} characters`)
-        assert.ok(lesson.cases.length >= 2 && lesson.cases.length <= 4, id)
-        for (const item of lesson.cases) assert.ok(item.title, `${id}: a case without a name`)
+        const cases = lesson.cases ?? []
+        assert.ok(cases.length >= 2 && cases.length <= 4, id)
+        for (const item of cases) assert.ok(item.title, `${id}: a case without a name`)
         for (const language of languages) for (const text of lessonParts(id)) assert.ok(text[language].trim().length > 0, `${id} ${language}`)
         // The right way is not the wrong one
-        assert.notEqual(lesson.mistake.wrong.es, lesson.mistake.right.es)
+        assert.notEqual(lessonChecks[id].mistake.wrong.es, lessonChecks[id].mistake.right.es)
     }
 })
 
