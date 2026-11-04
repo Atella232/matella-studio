@@ -6,8 +6,9 @@ El dueño pidió llevar a 1., 3., 4. académicas y 4. aplicadas el contenido de 
 
 - Zenbaki naturalak (14, a1d3c63): «¿Por qué?» en rounding, divide, powers, powers-of-ten. Dibujo tras los pasos: rounding, problems. Arreglado: tres fórmulas de pasos con puntos de miles (15.728, 1.967, 14.823).
 - Zatigarritasuna (12): «¿Por qué?» en divisors (parejas), criteria-sum (cada decena es 9 + 1), divisor-table (3 · 3 combinaciones). Dibujo tras los pasos: primes, factorization, divisor-table, gcd. 3 enlaces a Zenbaki naturalak (divide ×2, powers).
-
 - Zenbaki osoak (14): «¿Por qué?» en compare-absolute (deber 15 € es peor que deber 5 €), subtract (restar deshace sumar) y multiply (el patrón de la tabla del −3). Dibujo tras los pasos: order. 3 enlaces a Zenbaki naturalak (order, brackets, divide). Arreglado: el «Vamos a resolver» de subtract era el submarino (−100 + 55, una suma) y sus pasos calculaban (−6) − (−1): ahora pide «Calcula (−6) − (−1)». La lista de order iba en una sola fórmula y se salía 12 px a 375 px (ya pasaba en la web): ahora una fórmula por número, con «،» en árabe.
+
+- Zatikiak (15): «¿Por qué?» en add-same (el denominador es el tipo de trozo), amplify-simplify (cortar cada trozo en 3) y divide (cuántos octavos caben en 3/4). Dibujo tras los pasos: mixed, line, compare, add-different, divide, fraction-of (todos dibujaban el «Vamos a resolver» resuelto). 4 enlaces (Zenbaki naturalak › divide; Zatigarritasuna › gcd, lcm ×2). Las explicaciones de equivalent, compare y fraction-of daban la respuesta de su «Vamos a resolver» (2/5 = 6/15, el orden de los cromos, 3/8 de 120 = 45): ahora no.
 
 ## Trucos
 
