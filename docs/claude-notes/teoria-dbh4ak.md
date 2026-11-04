@@ -34,3 +34,11 @@ El dueño pidió llevar a 1.º, 3.º, 4.º académicas y 4.º aplicadas el conte
 - **Ekuazioak (15)**, 7612033 y 0556f95: 17 enlaces (3. DBH y Potencias, Polinomios y Reales de 4.º), 3 «¿Por qué?» (suma y producto de raíces, soluciones falsas al elevar al cuadrado, signo constante entre raíces). En árabe la unidad dice «متراجحة» para inecuación. Un paso de «Problemas de segundo grado» se salía 4 px: en dos filas.
 - **Sistemak (15)**, b8a084b y 3396946: 16 enlaces, 3 «¿Por qué?» (punto de corte, sumar igualdades, un punto de prueba basta). `tests/sistemak-dbh4ak-content.test.ts` lee ahora también `lessonTexts.ts` y `lessonChecks.ts`, y comprueba 14 sistemas y 2 semiplanos nuevos (quitado el de «dos números suman 27», que ya no está).
 - **Areak (15)**, a0bbb6e: 8 enlaces a 3. DBH, 3 «¿Por qué?» (tres pirámides en un cubo, teorema de la altura, $k^{2}$ y $k^{3}$), segmento circular tras los pasos.
+- **Trigonometria (15)**, f8bce45: los archivos nuevos escriben `\sin` y `\tan` en los cuatro idiomas (así los tests comparan las mismas fórmulas) y `localizeNames` de `text.ts` los cambia al mezclar (sen y tg en castellano, tg en euskera). `tests/trigonometria-dbh4ak-content.test.ts` dibuja también las fórmulas de los dos archivos nuevos y prueba `localizeNames`. **Falta la revisión a 375 px.**
+- **Bektoreak (15)**, 955ad83: 11 enlaces (3. DBH Movimientos, Geometría plana, Funciones lineales; Trigonometría y Sistemas de 4.º), 3 «¿Por qué?» (vectores paralelos, punto medio, pendiente = tangente), 8 dibujos tras los pasos. `tests/bektoreak-dbh4ak-content.test.ts` lee ahora los tres archivos. **Falta la revisión a 375 px.**
+
+## Pendiente (corte por límite de uso, 2026-11-05)
+
+- Unidades sin hacer: funtzioak, polinomikoak, esponentzialak (funciones trigonométricas: usar `localizeNames`), estatistika, konbinatoria (mirar la notación V/C/P de cada idioma), probabilitatea.
+- Revisión a 375 px pendiente: areak (rehacer tras los arreglos de circle-parts y polyhedra-area), trigonometria, bektoreak y las seis que faltan.
+- Un párrafo en la nota de cada unidad, `npm test`/lint/build completos, hoja de repaso eu/es para el dueño.
