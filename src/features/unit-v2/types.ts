@@ -105,7 +105,7 @@ export interface UnitTopic {
     /** The answer in words, under the formula (an obtuse triangle, 12 students…); alone when the example is '' */
     exampleAnswer?: LocalizedText
     takeaway: LocalizedText
-    /** The reason behind the rule, after the key idea; only where a 2. DBH student can follow it */
+    /** The reason behind the rule, after the key idea; only where a student of that course can follow it */
     why?: LessonWhy
     /** The typical mistake of the lesson, shown before the key idea */
     mistake?: LessonMistake

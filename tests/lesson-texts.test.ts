@@ -25,8 +25,8 @@ type Texts = {
 const pages = new URL('../src/pages/', import.meta.url)
 const languages = ['eu', 'es', 'en', 'ar'] as const
 
-/** At most this many words in the Spanish explanation (a formula counts as one word) */
-const explanationWords = 50
+/** At most this many words in the Spanish explanation (a formula counts as one word); 4. DBH says more */
+const explanationWords = (folder: string) => (folder.startsWith('dbh4') ? 60 : 50)
 /** At most this many words in a case, a definition or the statement of the example */
 const shortWords = 30
 
@@ -181,7 +181,7 @@ function askedEquation(prompt: string): [string, string] | null {
 }
 
 /** Units whose example equalities with letters are identities (expanding, reducing): they hold for any value of the letters */
-const identityUnits = new Set(['dbh2-aljebra-v2'])
+const identityUnits = new Set(['dbh1-aljebra-v2', 'dbh2-aljebra-v2', 'dbh3-polinomioak', 'dbh4-akademikoak-polinomioak', 'dbh4-aplikatuak-polinomioak'])
 
 const hasLetters = (latex: string) => /[a-z]/.test(latex.replace(/\\[a-zA-Z]+/g, ''))
 
@@ -216,9 +216,10 @@ for (const unit of units) {
     })
 
     test(`${unit.folder}: short explanations; definitions and cases short too`, () => {
+        const most = explanationWords(unit.folder)
         for (const [id, entry] of Object.entries(unit.texts)) {
             const count = countWords(entry.explanation.es)
-            assert.ok(count <= explanationWords, `${id}: the explanation has ${count} words (at most ${explanationWords})`)
+            assert.ok(count <= most, `${id}: the explanation has ${count} words (at most ${most})`)
             if (entry.cases) {
                 assert.ok(entry.cases.length >= 2 && entry.cases.length <= 4, `${id}: ${entry.cases.length} cases`)
                 for (const item of entry.cases) {
