@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readTrigonometryAnswer } from '../dbh4-akademikoak-trigonometria/answers'
 import { trianglesChallenges, trianglesDiagnostic, trianglesExerciseBank, trianglesPractice } from './content'
 import { TrianglesHeroArt } from './figures'
+import { TrianglesGames } from './games'
+import { TRIANGLES_GAME_RECORDS_KEY, trianglesGameProgressIds } from './games/info'
 import { TrianglesLaboratory } from './lab'
 import { trianglesLabChallengeIds, trianglesLabToolForTopic, trianglesLabTools } from './lab/labTools'
 import { trianglesStages, trianglesTopics } from './lessons'
@@ -37,6 +39,17 @@ const triangeluakBatx1zUnit: UnitDefinition = {
         progressIds: trianglesLabChallengeIds,
         toolForTopic: trianglesLabToolForTopic,
         render: (props) => <TrianglesLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zortzi joko: lasterketa, zenbat triangelu?, zatika ebatzi, aurkitu igorlea, triangeluen detektibea eta memoria, berriak; eta 4. DBHko zirkunferentzia goniometrikoa eta beste arrazoiak.',
+            es: 'Ocho juegos: carrera, ¿cuántos triángulos?, resuelve por piezas, localiza la emisora, detective de triángulos y memoria, nuevos; y de 4.º ESO, la circunferencia goniométrica y las otras razones.',
+            en: 'Eight games: race, how many triangles?, solve it piece by piece, find the radio station, triangle detective and memory, new; and from 4th ESO, the unit circle and the other ratios.',
+            ar: 'ثماني ألعاب: السباق وكم مثلثًا؟ وحلّ قطعة قطعة وحدّد موقع المحطة ومخبر المثلثات والذاكرة، وهي جديدة؛ ومن الصف الرابع: الدائرة المثلثية والنسب الأخرى.'
+        },
+        progressIds: trianglesGameProgressIds,
+        recordsKey: TRIANGLES_GAME_RECORDS_KEY,
+        render: (props) => <TrianglesGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (0,75 edo 0.75), unitaterik gabe; angeluak gradutan. Negatiboak minus ikurrarekin.', es: 'Escribe un número, con coma o con punto (0,75 o 0.75), sin la unidad; los ángulos, en grados. Los negativos, con signo menos.', en: 'Write a number (a decimal point or a comma both work, e.g. 0.75), without the unit; angles in degrees. Negatives with a minus sign.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (0.75) دون الوحدة؛ والزوايا بالدرجات. والسالب بإشارة الناقص.' },

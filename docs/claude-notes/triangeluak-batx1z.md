@@ -45,6 +45,17 @@ Es la cuarta unidad de Bachillerato (bloque Trigonometría del reparto en parale
 - **Test:** `tests/triangeluak-batx1z-lab.test.ts` (los cortes están a distancia a de C; los ángulos B cumplen el teorema de los senos; el tercer lado cierra el triángulo; los tres vértices están en la circunferencia y los tres cocientes valen 2R en cualquier posición de A).
 - **Revisión:** las 8 herramientas a 375 px en eu, es y ar, antes y después de predecir, y las propias en sus valores extremos: sin desbordes ni texto fuera del tablero.
 
+**Fase 4, juegos:** 8 juegos, récords en `matella-triangeluak-batx1z-game-records`.
+- **Propios (3):**
+  - J1 `count` «¿Cuántos triángulos?», niveles 102501–102503 (`games/count.ts`): a, b y A; se dice si hay 0, 1 o 2 triángulos y después se dibuja el compás de a desde C con sen B y los ángulos. Nivel 1 con la altura dibujada y su valor; nivel 2 con A obtuso, a = b y el compás que solo toca; nivel 3 sin dibujo y con a cerca de la altura. Usa la geometría del laboratorio (`lab/compass.ts`).
+  - J2 `pieces` «Resuelve por piezas», niveles 102601–102603 (`games/pieces.ts`): tres piezas conocidas; se elige la pieza y la herramienta (180°, senos o coseno) y la ronda acaba en el primer paso que no se puede dar. Los senos para un ángulo solo valen si su lado no es mayor que el de la pareja conocida (si no, «peligroso»). Al acabar se ve un buen orden.
+  - J3 `station` «Localiza la emisora», niveles 102701–102703 (`games/station.ts`): dos puestos y sus ángulos; en los niveles 1 y 2 se pone la bandera en el mapa (vale a menos de 1/10 o 1/8 de la base), en el 3 se elige la distancia AE entre la buena, la de la pareja cambiada y la altura. Después, las visuales y AE con el teorema de los senos.
+- **Detective** 102801–102803 (`games/detective.ts`): 12 errores en tres niveles (la parte decimal de las vueltas, sen por cos con 180° − α, el signo del cuadrante, 360° − α para el mismo seno; la pareja cambiada, el obtuso olvidado, un seno mayor que 1, el radio por el diámetro; el coseno olvidado, el signo de un obtuso, Herón con el perímetro, las fuerzas sumadas).
+- **Carrera** 102401–102405 (15 tipos, tres por etapa, con números elegidos para que la respuesta sea entera o una fracción sencilla) y **memoria** 102811–102813 (vueltas, lados, áreas; solo números, sin nombres de razones).
+- **De 4.º académicas, con niveles y etapas de esta unidad:** «La circunferencia goniométrica» 102821–102823 y «Las otras razones» 102831–102833.
+- **Test:** `tests/triangeluak-batx1z-games.test.ts` (cada respuesta de la carrera se calcula otra vez desde sus números; el número de triángulos sale otra vez de sen B; los triángulos de «por piezas» cumplen los dos teoremas y el buen orden siempre se puede seguir; la emisora está donde se cruzan las visuales y AE en el mapa es la del teorema de los senos).
+- **Revisión:** los 8 juegos a 375 px en eu, es y ar, en sus niveles y después de responder: sin desbordes, sin LaTeX sin dibujar y sin texto fuera de los dibujos. El inventario da OK: 5 juegos propios y 4 herramientas propias.
+
 ## Trucos
 
 - En `lessonTexts.ts` y `lessonChecks.ts` se escribe `\sin` y `\tan`; `lessons.tsx` los pasa por `localizeNames` (sen y tg en castellano, tg en euskera). En `lessons.tsx` y `content.ts` se escribe `\sen` y `\tg` con el `say` de 4.º.
@@ -53,8 +64,10 @@ Es la cuarta unidad de Bachillerato (bloque Trigonometría del reparto en parale
 - Al revisar con el navegador, «Ver todos los pasos» mueve la página al último paso un segundo después: espera antes de centrar el dibujo.
 - La comprobación de números salta el lado «mal» del error típico (está mal a propósito).
 - En los resultados del laboratorio, una fórmula con `\\qquad` no cabe a 375 px: una fórmula por línea.
+- En la memoria no van nombres de razones: el motor de parejas no cambia sen/sin por idioma.
+- En el juego «por piezas» los números pueden ser decimales: los triángulos salen de datos enteros y el resto se calcula.
 - La bisagra y la circunferencia se veían diminutas con los valores de partida: la bisagra usa 20 px por unidad y barras a escala de (b + c)²; la circunferencia, 16 px por unidad hasta que R no cabe.
 
 ## En curso
 
-- Fases 1+2 (commit 6a59d1d) y 3 hechas. Siguiente: fase 4, juegos: J1 ¿Cuántos triángulos?, J2 Resuelve por piezas, J3 Localiza la emisora, J4 detective; J5 carrera, memoria y «La circunferencia» y «Las otras razones» de 4.º con niveles nuevos.
+- Fases 1+2 (6a59d1d), 3 (aa00f48) y 4 hechas y revisadas. Falta solo la hoja de euskera para el dueño; después, publicar lo decide la sesión principal.
