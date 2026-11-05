@@ -43,14 +43,30 @@ Es la quinta unidad de Bachillerato y la segunda del bloque Análisis: curso `ba
 - **Test nuevo:** `tests/limiteak-batx1z-content.test.ts`.
 - **Comprobación:** 2235 tests, lint y `tsc -b` en verde. Las 15 lecciones, el resumen, el diagnóstico, la práctica, el banco y los retos a 375 px en eu, es y ar, sin desbordes, errores de KaTeX, LaTeX crudo ni texto cortado en los dibujos.
 
+Commit 316a89c.
+
+**Fase 3, laboratorio (8 herramientas):**
+- **Propias (4):**
+  - L1 «La lupa del límite» (`lens`, 109101–109105): cinco funciones (f₁…f₅: agujero, salto hacia arriba, punto movido, |x|/x, salto hacia abajo) y dos sondas en a − h y a + h con h = 1, 0,1, 0,01 y 0,001. Se predice si el límite por la izquierda es menor, igual o mayor que por la derecha; ▶ acerca las sondas.
+  - L2 «El agujero del 0/0» (`hole`, 109201–109205): f(x) = (x − r)(x − s)/(x − d)ᵖ con r, s, d de −3 a 3 y p = 1 o 2. Se predice qué pasa en x = d: k/0 y asíntota, 0/0 y agujero, o 0/0 pero asíntota (con el denominador al cuadrado). ▶ acerca dos sondas a d.
+  - L3 «Gana el de mayor grado» (`degrees`, 109301–109305): (a·xᵐ + 5xᵐ⁻¹)/(b·xⁿ − 4) con m, n de 1 a 3 y a, b de −3 a 3 (nunca 0), en x = 10, 100, 1000 y 10 000. Dos barras (escala logarítmica) compiten y un punto recorre la recta numérica hacia el límite. Se predice 0, a/b o infinito; ▶ hace crecer x.
+  - L5 «Bolzano encierra la raíz» (`bolzano`, 109351–109355): cinco funciones (x³ − 3x + 1, x² − 2, x³ + x − 3, x³ − x y 1/(x − 1)), extremos enteros y hasta tres mitades. Se predice: raíz dentro, un extremo es raíz o no asegura nada (mismo signo o salto). ▶ enseña las mitades una a una.
+- **Prestadas, con sus retos e ids:** la banda del límite y la máquina de e de Segidak (etapa `infinity`), el taller de transformaciones de Funtzio elementalak (etapa `asymptotes`, para mover las asíntotas de 1/x) y unir dos trozos de 4.º académicas (etapa `continuity`).
+- **Archivos:** `lab/lens.ts`, `hole.ts`, `degrees.ts`, `bolzano.ts` (lógica), `BachLimitsTools.tsx`, `labTools.ts`, `index.tsx`; test `tests/limiteak-batx1z-lab.test.ts`.
+- **Comprobación:** 2240 tests, lint y `tsc -b` en verde. Las 8 herramientas a 375 px en eu, es y ar con predicción y ▶, sin desbordes ni errores de KaTeX.
+- **Pendiente fuera de esta unidad:** en árabe, la «y» del eje de «Une dos trozos» (herramienta de 4.º académicas) se sale 1 px del dibujo.
+
 ## Trucos
 
 - `figureAfterSteps: true` esconde el dibujo hasta ver todos los pasos: para revisarlo en el navegador hay que pulsar «Ikusi urrats guztiak».
 - Un enunciado que empieza por una función a trozos queda feo en el móvil (la llave baja de línea y el «. Kalkulatu…» empieza solo). Va primero el texto y la función al final: «Kalkulatu … funtzio honetan: $f(x)=\begin{cases}…$».
 - El test de cuentas de las lecciones no lee `\frac{3}{0{,}001}` (las llaves de `{,}` rompen la fracción): se escribe `3\div 0{,}001=3000`.
 - Una fórmula larga al final del enunciado deja el punto solo en otra línea a 375 px: en esos enunciados, sin punto final.
+- En el laboratorio, las etiquetas de los botones con fórmulas (`(x − d)²`, `x³ − 3x + 1`) van entre LRI y PDI (`\u2066…\u2069`): en árabe, `(x − d)²` salía `²(x - d)`.
+- Un intervalo con extremos decimales se escribe con punto y coma en eu y es: `(1;1{,}25)`.
+- Para que la predicción tenga sentido, el dibujo (curva, barras, valores) se esconde hasta elegir; los controles cambian el estado sin enseñar nada.
 
 ## En curso
 
-- Fase 3, laboratorio: L1, L2, L3 y L5 propias y las prestadas.
-- Después, fase 4 (juegos), cierre (375 px, hoja de euskera) y el tema siguiente, Derivadas.
+- Fase 4, juegos (ids 109401–109899): J1 «¿Indeterminación o no?», J2 «Caza la asíntota», J3 «¿Qué discontinuidad?», J5 detective; carrera (15 tipos) y memoria; de Segidak «¿Hacia dónde va?» y «Atrapa la banda».
+- Después, cierre (inventario, 375 px, hoja de euskera) y el tema siguiente, Derivadas.

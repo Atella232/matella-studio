@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachLimitsChallenges, bachLimitsDiagnostic, bachLimitsExerciseBank, bachLimitsPractice } from './content'
 import { BachLimitsHeroArt } from './figures'
+import { BachLimitsLaboratory } from './lab'
+import { bachLimitsLabChallengeIds, bachLimitsLabToolForTopic, bachLimitsLabTools } from './lab/labTools'
 import { bachLimitsStages, bachLimitsTopics } from './lessons'
 
 const limiteakBatx1zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const limiteakBatx1zUnit: UnitDefinition = {
     guidedPractice: bachLimitsPractice,
     exerciseBank: bachLimitsExerciseBank,
     challenges: bachLimitsChallenges,
+    lab: {
+        description: {
+            eu: `${bachLimitsLabTools.length} tresna, erronkekin: limitearen lupa, 0/0 zuloa, maila handienak irabazten du eta Bolzanok erroa harrapatzen du, berriak; Segidetako limitearen banda eta e zenbakiaren makina; Funtzio elementaletako transformazioen tailerra; eta 4. DBHko bi zati lotzea.`,
+            es: `${bachLimitsLabTools.length} herramientas con retos: la lupa del límite, el agujero del 0/0, gana el de mayor grado y Bolzano encierra la raíz, nuevas; de Sucesiones, la banda del límite y la máquina de e; de Funciones elementales, el taller de transformaciones; y de 4.º ESO, une dos trozos.`,
+            en: `${bachLimitsLabTools.length} tools with challenges: the lens of the limit, the hole of 0/0, the highest degree wins and Bolzano traps the root, new; from Sequences, the band of the limit and the e machine; from Elementary functions, the transformation workshop; and from 4th ESO, join two pieces.`,
+            ar: `${bachLimitsLabTools.length} أدوات مع تحديات: عدسة النهاية وثقب 0/0 وتفوز الدرجة الأكبر وبولتسانو يحصر الجذر، وهي جديدة؛ ومن المتتاليات: شريط النهاية وآلة العدد e؛ ومن الدوال الأساسية: ورشة التحويلات؛ ومن الصف الرابع: صِل جزأين.`
+        },
+        progressIds: bachLimitsLabChallengeIds,
+        toolForTopic: bachLimitsLabToolForTopic,
+        render: (props) => <BachLimitsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Emaitza eᵃ bada, a bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si el resultado es eᵃ, solo a.', en: 'Write a number: 5, −3, 1.5 or 3/2. If the result is eᵃ, only a.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كانت النتيجة eᵃ فاكتب a وحدها.' },
         defaultForm: 'any',
