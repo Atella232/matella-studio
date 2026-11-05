@@ -322,7 +322,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stepsKind: 'steps',
         steps: [
             { text: say('Logaritmoen batura biderkaduraren logaritmoa da.', 'La suma de logaritmos es el logaritmo del producto.', 'مجموع اللوغاريتمات لوغاريتم الجداء.', 'A sum of logarithms is the logarithm of the product.'), math: same('$\\log(xy)=2\\ \\to\\ xy=100$') },
-            { text: say('Ordeztu $x=y+15$.', 'Sustituye $x=y+15$.', 'عوّض $x=y+15$.', 'Substitute $x=y+15$.'), math: same('$y^2+15y-100=0\\ \\to\\ y=5,\\ y=-20$') },
+            { text: say('Ordeztu $x=y+15$.', 'Sustituye $x=y+15$.', 'عوّض $x=y+15$.', 'Substitute $x=y+15$.'), math: same('$\\begin{gathered}y^2+15y-100=0\\\\ y=5,\\ y=-20\\end{gathered}$') },
             { text: say('Egiaztatu: $y=-20$ balioarekin $\\log(-5)$ ateratzen da, eta ez dago.', 'Comprueba: con $y=-20$ sale $\\log(-5)$, que no existe.', 'تحقق: مع $y=-20$ يظهر $\\log(-5)$، وهو غير موجود.', 'Check: with $y=-20$ you get $\\log(-5)$, which does not exist.'), math: same('$x=20,\\ y=5$') }
         ],
         takeaway: say(
@@ -346,7 +346,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         steps: [
             { text: say('Aldaketa: $u=2^x$, $v=3^y$.', 'Cambio: $u=2^x$, $v=3^y$.', 'التغيير: $u=2^x$ و$v=3^y$.', 'Change: $u=2^x$, $v=3^y$.'), math: same('$\\begin{cases}u+v=11\\\\ u-v=5\\end{cases}$') },
             { text: say('Ebatzi sistema lineala.', 'Resuelve el sistema lineal.', 'حُلّ النظام الخطي.', 'Solve the linear system.'), math: same('$u=8,\\ v=3$') },
-            { text: say('Desegin aldaketa.', 'Deshaz el cambio.', 'اعكس التغيير.', 'Undo the change.'), math: same('$2^x=8\\ \\to\\ x=3\\qquad 3^y=3\\ \\to\\ y=1$') }
+            { text: say('Desegin aldaketa.', 'Deshaz el cambio.', 'اعكس التغيير.', 'Undo the change.'), math: same('$\\begin{gathered}2^x=8\\ \\to\\ x=3\\\\ 3^y=3\\ \\to\\ y=1\\end{gathered}$') }
         ],
         takeaway: say(
             '$u=2^x$, $v=3^y$ aldaketarekin, sistema esponentziala lineal bihurtzen da. Desegitean, $u$ eta $v$ positiboak izan behar dira: $2^x$ ez da inoiz 0 edo negatiboa.',

@@ -34,7 +34,7 @@ export const bachSystemsLessonTexts: Record<BachSystemsTopicId, LessonTexts> = {
             'In a linear equation, each unknown is multiplied by a number, its coefficient, and the constant term stays on the right. An equation in two or more unknowns has infinitely many solutions. A system brings several equations together, and its solution has to satisfy all of them: with three unknowns, it is a triple $(x,y,z)$.'
         ),
         examplePrompt: say('$(3,-1,2)$ hirukoteak betetzen al ditu $x-y+2z=8$ eta $2x+y-z=3$?', '¿Cumple la terna $(3,-1,2)$ las ecuaciones $x-y+2z=8$ y $2x+y-z=3$?', 'هل تحقق الثلاثية $(3,-1,2)$ المعادلتين $x-y+2z=8$ و$2x+y-z=3$؟', 'Does the triple $(3,-1,2)$ satisfy $x-y+2z=8$ and $2x+y-z=3$?'),
-        example: same('$3-(-1)+2\\cdot 2=8\\qquad 2\\cdot 3+(-1)-2=3$'),
+        example: same('$\\begin{gathered}3-(-1)+2\\cdot 2=8\\\\ 2\\cdot 3+(-1)-2=3\\end{gathered}$'),
         exampleAnswer: say('Bai: bi ekuazioak betetzen ditu.', 'Sí: cumple las dos ecuaciones.', 'نعم: تحقق المعادلتين.', 'Yes: it satisfies both equations.')
     },
     'classify-systems': {
@@ -80,7 +80,7 @@ export const bachSystemsLessonTexts: Record<BachSystemsTopicId, LessonTexts> = {
                 'لماذا لا تتغير الحلول؟ إذا حقق زوج $E_1$ و$E_2$ فإنه يحقق $E_2+kE_1$ أيضًا، لأننا نجمع مساواتين صحيحتين. والعكس: من $E_1$ و$E_2+kE_1$ نعود إلى $E_2$ بطرح $kE_1$. ولهذا يُمنع الضرب في 0: لا يمكن الرجوع عنه.',
                 'Why do the solutions not change? If a pair satisfies $E_1$ and $E_2$, it also satisfies $E_2+kE_1$, because true equalities are being added. And the other way round: from $E_1$ and $E_2+kE_1$ you get back to $E_2$ by subtracting $kE_1$. That is why multiplying by 0 is not allowed: it cannot be undone.'
             ),
-            math: same('$(2\\cdot 2+3\\cdot 3)-2\\cdot(2+3)=13-2\\cdot 5$')
+            math: same('$\\begin{gathered}(2\\cdot 2+3\\cdot 3)-2\\cdot(2+3)\\\\ =13-2\\cdot 5\\end{gathered}$')
         }
     },
 

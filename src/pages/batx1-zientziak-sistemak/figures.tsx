@@ -338,8 +338,8 @@ export function CubicLineFigure({ language }: { language: UnitLanguage }) {
         return [x, x ** 3 - 3 * x] as Point
     })
     return (
-        <Figure height={330} label={t(say('y = x³ − 3x kurba eta y = x zuzena (0, 0), (2, 2) eta (−2, −2) puntuetan ebakitzen dira', 'La curva y = x³ − 3x y la recta y = x se cortan en (0, 0), (2, 2) y (−2, −2)', 'يتقاطع المنحنى y = x³ − 3x والمستقيم y = x في (0, 0) و(2, 2) و(−2, −2)', 'The curve y = x³ − 3x and the line y = x meet at (0, 0), (2, 2) and (−2, −2)'))}>
-            <Frame box={box} cell={42} ox={30} oy={30}>
+        <Figure height={344} label={t(say('y = x³ − 3x kurba eta y = x zuzena (0, 0), (2, 2) eta (−2, −2) puntuetan ebakitzen dira', 'La curva y = x³ − 3x y la recta y = x se cortan en (0, 0), (2, 2) y (−2, −2)', 'يتقاطع المنحنى y = x³ − 3x والمستقيم y = x في (0, 0) و(2, 2) و(−2, −2)', 'The curve y = x³ − 3x and the line y = x meet at (0, 0), (2, 2) and (−2, −2)'))}>
+            <Frame box={box} cell={42} ox={30} oy={44}>
                 {(map, clip) => (
                     <g>
                         <PlanePath map={map} points={curve} clip={clip} width={3.2} />
@@ -353,7 +353,7 @@ export function CubicLineFigure({ language }: { language: UnitLanguage }) {
             <F x={330} y={150} size={21}>x³ − 4x = 0</F>
             <F x={330} y={186} size={21}>x(x − 2)(x + 2) = 0</F>
             <F x={330} y={230} size={21} color={GREEN}>(0, 0)  (2, 2)  (−2, −2)</F>
-            <Caption y={310}>{t(say('Ekuazioaren soluzio bakoitza ebaki-puntu bat da', 'Cada solución de la ecuación es un punto de corte', 'كل حل للمعادلة نقطة تقاطع', 'Each solution of the equation is a crossing point'))}</Caption>
+            <Caption y={330}>{t(say('Ekuazioaren soluzio bakoitza ebaki-puntu bat da', 'Cada solución de la ecuación es un punto de corte', 'كل حل للمعادلة نقطة تقاطع', 'Each solution of the equation is a crossing point'))}</Caption>
         </Figure>
     )
 }
@@ -450,7 +450,7 @@ export function TriangleRegionFigure({ language }: { language: UnitLanguage }) {
                         <polygon points={polygonPoints(map, region(box, TRIANGLE))} fill={REGION} stroke={GREEN} strokeWidth={2} />
                         <PlaneLine map={map} m={-1} n={5} color={SECOND} clip={clip} width={2.8} />
                         <PlanePath map={map} points={[[1, -2], [1, 8]]} color={STAGE} width={2.8} clip={clip} />
-                        <PlanePoint map={map} point={[0, 0]} color={INK} radius={6} name="O" dx={-20} dy={20} />
+                        <PlanePoint map={map} point={[0, 0]} color={INK} radius={6} name="O" />
                         {([[1, 0], [5, 0], [1, 4]] as Point[]).map((point) => <PlanePoint key={point.join()} map={map} point={point} color={GREEN} radius={6} />)}
                     </g>
                 )}
@@ -474,10 +474,10 @@ export function RegionCasesFigure({ language }: { language: UnitLanguage }) {
         { ox: 490, halves: [], lines: [{ x: 2 }, { m: 0, n: 3 }, { m: -1, n: 6 }], title: say('Hutsa', 'Vacía', 'خالية', 'Empty'), color: SECOND }
     ]
     return (
-        <Figure height={300} label={t(say('Hiru eskualde: triangelu itxi bat, eskualde ireki bat eta eskualde huts bat', 'Tres regiones: un triángulo cerrado, una región abierta y una región vacía', 'ثلاث مناطق: مثلث مغلق ومنطقة مفتوحة ومنطقة خالية', 'Three regions: a closed triangle, an open region and an empty region'))}>
+        <Figure height={312} label={t(say('Hiru eskualde: triangelu itxi bat, eskualde ireki bat eta eskualde huts bat', 'Tres regiones: un triángulo cerrado, una región abierta y una región vacía', 'ثلاث مناطق: مثلث مغلق ومنطقة مفتوحة ومنطقة خالية', 'Three regions: a closed triangle, an open region and an empty region'))}>
             {panels.map((panel, index) => (
                 <g key={index}>
-                    <Frame box={box} cell={34} ox={panel.ox} oy={28} labels={false}>
+                    <Frame box={box} cell={34} ox={panel.ox} oy={40} labels={false}>
                         {(map, clip) => (
                             <g>
                                 {panel.halves.length > 0 && <polygon points={polygonPoints(map, region(box, panel.halves))} fill={REGION} />}
@@ -487,12 +487,12 @@ export function RegionCasesFigure({ language }: { language: UnitLanguage }) {
                             </g>
                         )}
                     </Frame>
-                    <Label x={panel.ox + 102} y={286} textAnchor="middle" fontSize={21} fontWeight={700} fill={panel.color}>{t(panel.title)}</Label>
+                    <Label x={panel.ox + 102} y={298} textAnchor="middle" fontSize={21} fontWeight={700} fill={panel.color}>{t(panel.title)}</Label>
                 </g>
             ))}
-            <F x={124} y={258} anchor="middle" size={16} color={GREEN}>x + y ≤ 4</F>
-            <F x={358} y={258} anchor="middle" size={16} color={STAGE}>x + 2y ≥ 4</F>
-            <F x={592} y={258} anchor="middle" size={16} color={SECOND}>x ≤ 2, y ≤ 3, x + y ≥ 6</F>
+            <F x={124} y={270} anchor="middle" size={16} color={GREEN}>x + y ≤ 4</F>
+            <F x={358} y={270} anchor="middle" size={16} color={STAGE}>x + 2y ≥ 4</F>
+            <F x={592} y={270} anchor="middle" size={16} color={SECOND}>x ≤ 2, y ≤ 3, x + y ≥ 6</F>
         </Figure>
     )
 }
