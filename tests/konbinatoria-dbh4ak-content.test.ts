@@ -189,7 +189,7 @@ test('konbinatoria 4. DBH ak: the counts quoted by the lessons and figures', () 
 
 test('konbinatoria 4. DBH ak: lessons cover every topic and their formulas render', () => {
     // The lessons are TSX: read their source and render every formula in each language
-    const source = readFileSync('src/pages/dbh4-akademikoak-konbinatoria/lessons.tsx', 'utf8').replace(/\\\\/g, '\\').replace(/\\'/g, "'")
+    const source = ['lessons.tsx', 'lessonTexts.ts', 'lessonChecks.ts'].map((file) => readFileSync(`src/pages/dbh4-akademikoak-konbinatoria/${file}`, 'utf8')).join('\n').replace(/\\\\/g, '\\').replace(/\\'/g, "'")
     assert.deepEqual([...source.matchAll(/id: '([a-z-]+)',\s+stage:/g)].map((match) => match[1]), topics)
     let formulas = 0
     for (const [, formula] of source.matchAll(/\$([^$]+)\$/g)) {
