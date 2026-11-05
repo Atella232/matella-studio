@@ -140,4 +140,4 @@ En la columna «Capítulos», S es Santillana y A es Anaya. «Solo S» o «solo 
   - que `#/matematika/batx1` vuelve a la lista.
 
   No se sale nada de la pantalla.
-- **No está publicado:** espera el visto bueno del dueño, o se publica con la primera unidad.
+- **Publicado el 2026-11-05,** junto con la primera unidad, Números reales de 1.º Ciencias: `main` 3be8b8e, bundle `index-ZB994Q3f.js`. Ver `errealak-batx1z.md`.

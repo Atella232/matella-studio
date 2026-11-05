@@ -80,8 +80,18 @@ La etapa se llama `newton-stage` y no `newton` porque `newton` es el id de una l
 - **Test de «Compruébalo»:** si la pregunta es una ecuación con logaritmos y las opciones son `x=4`, intenta evaluar `\log` y falla. Las opciones van como número suelto (`$4$`).
 - **Árabe en los dibujos:** una fórmula con superíndice suelto, como `(a + b)ⁿ`, se desordena dentro de una frase en árabe. En ese pie se escribe en palabras.
 
-## En curso
+## Publicación
 
-- La unidad está terminada en la rama `feat/errealak-batx1z`, que lleva encima la lista de Bachillerato de `feat/batx-modalidades`.
-- Falta el visto bueno del dueño para fusionar en `main` y publicar las dos cosas juntas.
-- Al publicar, hay que comprobar en vivo a 375 px: la lista de cursos, `batx1-zientziak` y unas cuantas lecciones, herramientas y juegos de la unidad.
+El 2026-11-05 el dueño dijo «Sí, publica», sin leer antes la hoja de euskera (se le envió).
+- **Fusión:** avance rápido de `feat/errealak-batx1z` en `main` (3be8b8e). Lleva también la lista de Bachillerato y la regla de notas «En curso».
+- **Comprobaciones:** tests 2111, lint y build en verde.
+- **Subida:** `git push` y `npm run deploy` desde un worktree limpio en `/tmp/matella-deploy`, porque la carpeta principal tenía archivos sin guardar del dueño.
+- **En vivo:** `index-ZB994Q3f.js` y `index-DWvHYxm_.css`, servidos a los 31 s.
+- **Revisión en matella.net, a 375 px en eu, es y ar (54 vistas):**
+  - la lista de cursos y las cuatro modalidades;
+  - el inicio de la unidad y la práctica;
+  - 5 lecciones, con los pasos y «¿Por qué funciona?» abiertos;
+  - las 3 herramientas propias, con su predicción;
+  - los 3 juegos propios, con el primer nivel empezado.
+
+  No se sale nada de la pantalla, no hay errores de KaTeX ni de consola, y cada página sale en su idioma.
