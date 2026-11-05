@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readVectorsAnswer } from '../dbh4-akademikoak-bektoreak/answers'
 import { bachVectorsChallenges, bachVectorsDiagnostic, bachVectorsExerciseBank, bachVectorsPractice } from './content'
 import { BachVectorsHeroArt } from './figures'
+import { BachVectorsLaboratory } from './lab'
+import { bachVectorsLabChallengeIds, bachVectorsLabToolForTopic, bachVectorsLabTools } from './lab/labTools'
 import { bachVectorsStages, bachVectorsTopics } from './lessons'
 
 const bektoreakBatx1zUnit: UnitDefinition = {
@@ -25,6 +27,17 @@ const bektoreakBatx1zUnit: UnitDefinition = {
     guidedPractice: bachVectorsPractice,
     exerciseBank: bachVectorsExerciseBank,
     challenges: bachVectorsChallenges,
+    lab: {
+        description: {
+            eu: `${bachVectorsLabTools.length} tresna, erronkekin: sare okerra, itzala eta txalupa eta ibaia, berriak; eta 4. DBHko A-tik B-rako bektorea eta a · u + b · v konbinazioa.`,
+            es: `${bachVectorsLabTools.length} herramientas con retos: la cuadrícula torcida, la sombra y el barco y el río, nuevas; y de 4.º ESO, el vector de A a B y la combinación a · u + b · v.`,
+            en: `${bachVectorsLabTools.length} tools with challenges: the skew grid, the shadow and the boat and the river, new; and from 4th ESO, the vector from A to B and the combination a · u + b · v.`,
+            ar: `${bachVectorsLabTools.length} أدوات مع تحديات: الشبكة المائلة والظل والقارب والنهر، وهي جديدة؛ ومن الصف الرابع: المتجه من A إلى B والتركيب a · u + b · v.`
+        },
+        progressIds: bachVectorsLabChallengeIds,
+        toolForTopic: bachVectorsLabToolForTopic,
+        render: (props) => <BachVectorsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bakar bat: eskatzen den koordenatua, modulua, biderkadura eskalarra, angelua gradutan edo parametroa. Adibidez 5, −3, 2,5 edo 3/5.', es: 'Escribe un solo número: la coordenada, el módulo, el producto escalar, el ángulo en grados o el parámetro que se pide. Por ejemplo 5, −3, 2,5 o 3/5.', en: 'Write a single number: the coordinate, magnitude, dot product, angle in degrees or parameter that is asked for. For example 5, −3, 2.5 or 3/5.', ar: 'اكتب عددًا واحدًا: المركّبة أو الطول أو الجداء السلمي أو الزاوية بالدرجات أو الوسيط المطلوب. مثلًا 5 أو ⁦−3⁩ أو 2.5 أو 3/5.' },
         defaultForm: 'any',

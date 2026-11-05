@@ -37,6 +37,15 @@ Primera unidad del bloque Geometría (reparto en paralelo de 1.º Ciencias, ver 
 - **Test nuevo:** `tests/bektoreak-batx1z-content.test.ts` (copia del de Ekuazioak; su `evaluate` ya no admite comas, porque `(2,5)\cdot(-5,2)` se evaluaba con el operador coma de JavaScript).
 - **Comprobación:** 2200 tests, lint y build en verde. Revisado a 375 px en eu, es y ar: las 15 lecciones con todos los pasos abiertos, el resumen, la portada, el diagnóstico, la práctica, los retos y el banco. No se sale nada de la pantalla, no hay errores de KaTeX ni fórmulas de menos de 13 px, y los textos de los dibujos no se cortan ni se pisan.
 
+**Fase 3, laboratorio:** 5 herramientas.
+- **Propias (3),** con predicción antes del resultado y retos infinitos (`freshFrom` de `dbh3-segidak/lab/prediction.ts`):
+  - L1 `skew-grid` «La cuadrícula torcida», retos 105101–105105: u y v (−3…3) dibujan la red de la base y w (−6…6) es un punto. Se predice el signo de la primera coordenada de w en la base; después sale el camino a·u, b·v y `(a,b)_B` (con fracciones si hace falta, por Cramer). Si u y v son paralelos, la red se aplasta en una recta y no hay predicción.
+  - L2 `shadow` «La sombra», retos 105201–105205: u y v con coordenadas enteras (−4…4); la recta de u, y la sombra de v sobre ella (verde hacia delante, roja hacia atrás). Se predice el signo de u·v; después salen u₁v₁ + u₂v₂, la sombra u·v/|u| y el ángulo. Cubre también las lecciones de la etapa `analytic`.
+  - L3 `river` «El barco y el río», retos 105301–105305: río de 12 m, corriente 0–4 m/s, barca (b₁, b₂) con b₂ de 1 a 5. Se predice si llega aguas arriba, justo enfrente o aguas abajo; ▶ hace la travesía (`usePlayback`). Lectura: velocidad real, `t = 12/b₂` y el desvío.
+- **Prestadas (2),** con sus retos e ids de 4.º: «El vector de A a B» y «La combinación a·u + b·v».
+- **Test:** `tests/bektoreak-batx1z-lab.test.ts` (Cramer reconstruye w en 200 bases; retos fijos resueltos por un estado y nunca al abrir; 150 semillas de retos infinitos).
+- **Revisión:** las 5 herramientas a 375 px en eu, es y ar (antes y después de predecir y con ▶), sin desbordes ni texto del tablero cortado. Las dos de 4.º tienen la «x» y la «y» de los ejes medio cortadas (de su unidad; no se ha tocado).
+
 ## Trucos
 
 - En `lesson-texts.test.ts` las fórmulas de cada texto se comparan **en orden** entre idiomas: en euskera hay que mantener el orden del castellano aunque la frase pida otro.
@@ -46,4 +55,4 @@ Primera unidad del bloque Geometría (reparto en paralelo de 1.º Ciencias, ver 
 
 ## En curso
 
-- Fase 1+2 hecha (commit en esta rama). Siguiente: fase 3, laboratorio (L1 cuadrícula torcida, L2 la sombra, L4 el barco y el río, y las dos de 4.º).
+- Fases 1+2 y 3 hechas (commits en esta rama). Siguiente: fase 4, juegos (J1 ¿Número o vector?, J2 Productos en el polígono, J4 detective; carrera, memoria y de 4.º el salto del vector y encuentra k).
