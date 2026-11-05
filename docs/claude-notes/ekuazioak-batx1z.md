@@ -72,6 +72,7 @@ Es la tercera unidad de Bachillerato: curso `batx1-zientziak`, tema `ecuaciones-
 - `createWorkedCases` no evita casos repetidos: `createBachEquationsDetectiveCases` vuelve a sacar los seis si dos son el mismo ejercicio.
 - En los juegos con varios botones que cambian el estado, usa la forma `setState((current) => …)`: si no, dos toques rápidos pisan uno al otro.
 
-## En curso
+## Publicación
 
-- Las cuatro fases están hechas y revisadas en `feat/ekuazioak-batx1z` (juegos en 7f92d1b y el arreglo siguiente). Solo falta el visto bueno del dueño para publicar; la hoja de euskera ya se le ha mandado.
+- **2026-11-05**, con el visto bueno del dueño («Sí, publica»): `main` f7e4b5d (avance rápido desde `feat/ekuazioak-batx1z`), publicada desde un worktree limpio; bundle `index-CdKBqPM7.js`.
+- **Comprobación en vivo:** 51 vistas a 375 px en eu, es y ar (portada, 6 lecciones, las 3 herramientas propias, los juegos propios y la memoria, práctica y retos), sin desbordes, sin LaTeX sin dibujar y sin errores en la consola.
