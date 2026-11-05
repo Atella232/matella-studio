@@ -59,6 +59,8 @@ Detalle, criterios de diseño, patrones de calidad y ejemplos reales en
 6. **Cierra:** `npm test`, `npm run lint` y `npm run build` en verde; el inventario de la unidad debe dar OK
    (si no, explica por qué o añade lo que falta); revisión a 375 px en eu, es y ar; añade a la nota de `docs/claude-notes/` lo hecho (commit, ids nuevos, trucos). Ofrece publicar, pero no
    publiques sin su visto bueno.
+   La hoja de revisión del euskera para el dueño sale con `scripts/hoja-revision.mjs` (euskera y castellano
+   lado a lado, con lecciones, laboratorio, juegos y textos de las pantallas); mándasela con SendUserFile.
 
 Una fase por commit y rama; las unidades modelo para copiar la estructura son
 `src/pages/dbh2-zatikiak-prototype` y `src/pages/dbh4-aplikatuak-proportzionaltasuna`.

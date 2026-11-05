@@ -141,3 +141,33 @@ En la columna «Capítulos», S es Santillana y A es Anaya. «Solo S» o «solo 
 
   No se sale nada de la pantalla.
 - **Publicado el 2026-11-05,** junto con la primera unidad, Números reales de 1.º Ciencias: `main` 3be8b8e, bundle `index-ZB994Q3f.js`. Ver `errealak-batx1z.md`.
+- 1.º Ciencias publicadas el 2026-11-05: Números reales, Sucesiones y Ecuaciones e inecuaciones (ver sus notas).
+
+## Reparto en paralelo de 1.º Ciencias (2026-11-05)
+
+El dueño aceptó hacer los 14 temas que quedan en **4 sesiones a la vez, una por bloque**. Cada sesión hace sus temas en orden, porque cada uno aprovecha las piezas del anterior.
+
+**Reglas comunes:**
+- Cada tema tiene **un bloque de mil ids** para todo: diagnóstico `N001–N008`, laboratorio propio `N101–N399`, juegos `N401–N899`. Nadie usa ids fuera de su bloque.
+- Carpeta `src/pages/batx1-zientziak-<nombre>`, `storagePrefix` `matella-<nombre>-batx1z`, rama `feat/<nombre>-batx1z` y nota `docs/claude-notes/<nombre>-batx1z.md`.
+- El tema siguiente del bloque se corta de la rama del anterior, para poder usar sus piezas.
+- Las sesiones **no publican, no fusionan en `main` y no suben nada**. Tampoco tocan `docs/claude-notes/README.md` ni la memoria de Claude: eso se hace en la sesión principal al fusionar y publicar, de una en una.
+- La hoja de euskera sale con `node .claude/skills/matella-nueva-unidad/scripts/hoja-revision.mjs <carpeta> <salida.html> "<título>" --herramientas … --juegos …`.
+
+| Bloque | Tema (`id` del curso) | Nombre | Bloque de ids |
+|---|---|---|---|
+| Trigonometría | `resolucion-triangulos` | `triangeluak` | 102000–102999 |
+| Trigonometría | `funciones-trigonometricas` | `trigonometria` | 103000–103999 |
+| Trigonometría | `numeros-complejos` | `konplexuak` | 104000–104999 |
+| Geometría | `vectores` | `bektoreak` | 105000–105999 |
+| Geometría | `geometria-analitica` | `geometria` | 106000–106999 |
+| Geometría | `conicas` | `konikak` | 107000–107999 |
+| Análisis | `funciones` | `funtzioak` | 108000–108999 |
+| Análisis | `limites-continuidad` | `limiteak` | 109000–109999 |
+| Análisis | `derivadas` | `deribatuak` | 110000–110999 |
+| Análisis | `aplicaciones-derivada` | `aplikazioak` | 111000–111999 |
+| Análisis | `integrales` | `integralak` | 112000–112999 |
+| Álgebra y estadística | `sistemas` | `sistemak` | 113000–113999 |
+| Álgebra y estadística | `estadistica` | `estatistika` | 114000–114999 |
+| Álgebra y estadística | `estadistica-bidimensional` | `bidimentsionala` | 115000–115999 |
+
