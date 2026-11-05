@@ -8,12 +8,6 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs'
 
 const pages = new URL('../src/pages/', import.meta.url)
 
-/** Rewritten on the 4. DBH academic theory branch, not merged yet: drop this list when it is */
-const pending = new Set([
-    ...['exp-graph', 'log-graph', 'sine', 'cosine', 'period', 'tangent'].map((id) => `dbh4-akademikoak-esponentzialak › ${id}`),
-    ...['parabola-a', 'inverse', 'rational-form'].map((id) => `dbh4-akademikoak-polinomikoak › ${id}`)
-])
-
 test('lessons: no formula in a lesson or stage title', () => {
     const found: string[] = []
     let titles = 0
@@ -26,7 +20,7 @@ test('lessons: no formula in a lesson or stage title', () => {
             const stages = source.matchAll(/\{ id: '([^']+)', tone: '[^']+', title: ([^\n]*)/g)
             for (const [, id, title] of [...lessons, ...stages]) {
                 titles++
-                if (title.includes('$') && !pending.has(`${folder} › ${id}`)) found.push(`${folder} › ${id}`)
+                if (title.includes('$')) found.push(`${folder} › ${id}`)
             }
         }
     }
