@@ -34,11 +34,22 @@ El dueño pidió llevar a 1.º, 3.º, 4.º académicas y 4.º aplicadas el conte
 - **Ekuazioak (15)**, 7612033 y 0556f95: 17 enlaces (3. DBH y Potencias, Polinomios y Reales de 4.º), 3 «¿Por qué?» (suma y producto de raíces, soluciones falsas al elevar al cuadrado, signo constante entre raíces). En árabe la unidad dice «متراجحة» para inecuación. Un paso de «Problemas de segundo grado» se salía 4 px: en dos filas.
 - **Sistemak (15)**, b8a084b y 3396946: 16 enlaces, 3 «¿Por qué?» (punto de corte, sumar igualdades, un punto de prueba basta). `tests/sistemak-dbh4ak-content.test.ts` lee ahora también `lessonTexts.ts` y `lessonChecks.ts`, y comprueba 14 sistemas y 2 semiplanos nuevos (quitado el de «dos números suman 27», que ya no está).
 - **Areak (15)**, a0bbb6e: 8 enlaces a 3. DBH, 3 «¿Por qué?» (tres pirámides en un cubo, teorema de la altura, $k^{2}$ y $k^{3}$), segmento circular tras los pasos.
-- **Trigonometria (15)**, f8bce45: los archivos nuevos escriben `\sin` y `\tan` en los cuatro idiomas (así los tests comparan las mismas fórmulas) y `localizeNames` de `text.ts` los cambia al mezclar (sen y tg en castellano, tg en euskera). `tests/trigonometria-dbh4ak-content.test.ts` dibuja también las fórmulas de los dos archivos nuevos y prueba `localizeNames`. **Falta la revisión a 375 px.**
-- **Bektoreak (15)**, 955ad83: 11 enlaces (3. DBH Movimientos, Geometría plana, Funciones lineales; Trigonometría y Sistemas de 4.º), 3 «¿Por qué?» (vectores paralelos, punto medio, pendiente = tangente), 8 dibujos tras los pasos. `tests/bektoreak-dbh4ak-content.test.ts` lee ahora los tres archivos. **Falta la revisión a 375 px.**
+- **Trigonometria (15)**, f8bce45 y 3c37084: los archivos nuevos escriben `\sin` y `\tan` en los cuatro idiomas (así los tests comparan las mismas fórmulas) y `localizeNames` de `text.ts` los cambia al mezclar (sen y tg en castellano, tg en euskera). `tests/trigonometria-dbh4ak-content.test.ts` dibuja también las fórmulas de los dos archivos nuevos y prueba `localizeNames`. Tres ejemplos (relaciones fundamentales, oblicuángulos, ángulos relacionados) bajaban a 14–16,8 px: en tres filas.
+- **Bektoreak (15)**, 955ad83: 12 enlaces (3. DBH Movimientos, Geometría plana, Funciones lineales; Trigonometría y Sistemas de 4.º), 3 «¿Por qué?» (vectores paralelos, punto medio, pendiente = tangente), 8 dibujos tras los pasos. `tests/bektoreak-dbh4ak-content.test.ts` lee ahora los tres archivos.
+- **Funtzioak (15)**, ac729e2: 15 enlaces, 3 «¿Por qué?» (el signo solo cambia en los cortes, exponentes pares e impares, la T.V.M. es una pendiente), 2 dibujos tras los pasos. Seis «Otro ejemplo» son los que ya dibujaban las figuras de la lección.
+- **Polinomikoak (15)**, 49b2fa5: 15 enlaces, 3 «¿Por qué?» (vértice en medio de las raíces, igualar recta y parábola, asíntota $\frac{a}{c}$), 5 dibujos tras los pasos; varios ejemplos siguen las figuras.
+- **Esponentzialak (15)**, 2df8611: 16 enlaces, 3 «¿Por qué?» (igualar exponentes, simetría con $y=x$, periodo $\frac{2\pi}{k}$), las traslaciones con el dibujo tras los pasos. Usa el `localizeNames` de Trigonometría para sen y tg.
+- **Estatistika (15)**, d7ec2bf: 17 enlaces, 3 «¿Por qué?» (un atípico mueve la media, las desviaciones suman 0, el CV divide entre la media), 9 dibujos tras los pasos. El euskera escribe el porcentaje delante (% 25).
+- **Konbinatoria (15)**, 2850b12: 4 enlaces (casi todo es nuevo en 4.º), 3 «¿Por qué?» (dividir entre $k!$, la regla del triángulo, «al menos una» con el contrario), 10 dibujos tras los pasos. V, VR, P y C, igual en los cuatro idiomas. `lesson-checks.test.ts` pide que la respuesta buena no esté siempre en el mismo sitio.
+- **Probabilitatea (15)**, 72d1d03: 11 enlaces, 3 «¿Por qué?» (restar la intersección, dividir entre $P(B)$, la esperanza como media), 11 dibujos tras los pasos. `takeaway-notation.test.ts` pidió una $E$ en «Compatibles e incompatibles» (la idea clave la usa).
 
-## Pendiente (corte por límite de uso, 2026-11-05)
+## Total
 
-- Unidades sin hacer: funtzioak, polinomikoak, esponentzialak (funciones trigonométricas: usar `localizeNames`), estatistika, konbinatoria (mirar la notación V/C/P de cada idioma), probabilitatea.
-- Revisión a 375 px pendiente: areak (rehacer tras los arreglos de circle-parts y polyhedra-area), trigonometria, bektoreak y las seis que faltan.
-- Un párrafo en la nota de cada unidad, `npm test`/lint/build completos, hoja de repaso eu/es para el dueño.
+213 lecciones: 173 enlaces «Antes de empezar», 44 «¿Por qué funciona?», 59 dibujos tras los pasos. `npm test` 1638/1638, `npm run lint` y `npm run build` en verde (2026-11-05). Hoja de revisión eu/es: `teoria-dbh4ak-revision.html` en la carpeta compartida de notas de la sesión madre, enviada al dueño.
+
+## Más trucos
+
+- El script que mueve los textos no veía el título de las lecciones con `figureAfterSteps` entre `stage` y `title`: si se busca el título, hay que permitir líneas en medio.
+- Navegador: editar un archivo de `src` mientras corre la revisión recarga la página (HMR) y se pierden los resultados; con la pestaña oculta, `setTimeout` va a 1 por segundo o menos: mejor esperar con `MessageChannel`.
+- Una pregunta con intervalos de respuesta y una sola ecuación, como $f(x)=x(x-5)$ con $(0,\,5)$, se lee como un punto que tiene que estar en la curva: añade otra fórmula ($f(x)<0$).
+- En inglés, los miles en palabras van con coma (1,000), pero las fórmulas `same(...)` llevan `\,` en todos los idiomas: no escribas `{,}000` en la fórmula inglesa.
