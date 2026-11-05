@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachRealsChallenges, bachRealsDiagnostic, bachRealsExerciseBank, bachRealsPractice } from './content'
 import { BachRealsHeroArt } from './figures'
+import { BachRealsGames } from './games'
+import { BACH_REALS_GAME_RECORDS_KEY, bachRealsGameProgressIds } from './games/info'
 import { BachRealsLaboratory } from './lab'
 import { bachRealsLabChallengeIds, bachRealsLabToolForTopic, bachRealsLabTools } from './lab/labTools'
 import { bachRealsStages, bachRealsTopics } from './lessons'
@@ -36,6 +38,17 @@ const errealakBatx1zUnit: UnitDefinition = {
         progressIds: bachRealsLabChallengeIds,
         toolForTopic: bachRealsLabToolForTopic,
         render: (props) => <BachRealsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Bederatzi joko: lasterketa, ingurunea jomugan, koefiziente ezkutua, errealen detektibea eta memoria, berriak; eta 4. DBHko zuzenean kokatu, tartea eraiki, sinplifikatu errokizuna eta aurkitu berretzailea.',
+            es: 'Nueve juegos: carrera, entorno al blanco, el coeficiente escondido, detective de los reales y memoria, nuevos; y de 4.º ESO, sitúa en la recta, construye el intervalo, simplifica el radical y encuentra el exponente.',
+            en: 'Nine games: race, neighbourhood on target, the hidden coefficient, real numbers detective and memory, new; and from 4th ESO, place on the line, build the interval, simplify the radical and find the exponent.',
+            ar: 'تسع ألعاب: السباق والجوار في الهدف والمعامل المخفي ومخبر الأعداد الحقيقية والذاكرة، وهي جديدة؛ ومن الصف الرابع: ضع على المستقيم وابنِ الفترة وبسّط الجذر وأوجد الأس.'
+        },
+        progressIds: bachRealsGameProgressIds,
+        recordsKey: BACH_REALS_GAME_RECORDS_KEY,
+        render: (props) => <BachRealsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Emaitza tarte, multzo edo erradikal bat bada, eskatzen den zenbakia bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si el resultado es un intervalo, un conjunto o un radical, solo el número que se pide.', en: 'Write a number: 5, −3, 1.5 or 3/2. If the result is an interval, a set or a radical, only the number asked for.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كانت النتيجة فترة أو مجموعة أو جذرًا فاكتب العدد المطلوب فقط.' },

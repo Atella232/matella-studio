@@ -44,6 +44,20 @@ La etapa se llama `newton-stage` y no `newton` porque `newton` es el id de una l
 
   No se sale nada de la pantalla y no hay errores de KaTeX. Las franjas de tareas que se deslizan de lado son las mismas que en 4.º.
 
+**Fase 3, laboratorio, commit 707b1bc:** 11 herramientas.
+- **Propias (3),** con predicción antes del resultado y retos infinitos (`freshFrom` de `dbh3-segidak/lab/prediction.ts`):
+  - L1 `distance` «Distancia en la recta», retos 99101–99105: entorno E(a, r) y punto x; predice dentro, borde o fuera.
+  - L2 `slide-rule` «La regla de cálculo», retos 99201–99205: dos escalas logarítmicas que se deslizan con ▶; predice si el producto es menor, igual o mayor que la suma.
+  - L3 `error-band` «La banda del error», retos 99301–99305: redondear o truncar π, √2, e, φ, 1/7, 0,045918 o 1234,567; predice si el valor exacto queda por debajo o por encima.
+- **Prestadas (8),** con sus retos e ids de 4.º:
+  - de `dbh4-akademikoak-errealak`: Pitágoras;
+  - de `dbh4-aplikatuak-errealak`: intervalos y redondeo;
+  - de `dbh4-akademikoak-potentziak`: sacar factores, índice común, conjugado y cambio de base;
+  - de `dbh4-akademikoak-konbinatoria`: Tartaglia.
+- **Piezas comunes:** `Board`, `Readout`, `Predict` y `PlayButton` de `dbh3-segidak/lab/LabParts.tsx`, y `usePlayback` de `dbh4-aplikatuak-proportzionaltasuna/lab`.
+- **Test:** `tests/errealak-batx1z-lab.test.ts`. 2105 tests en verde.
+- **Revisión:** las 11 herramientas a 375 px en eu, es y ar, sin desbordes ni texto fuera del tablero.
+
 ## Trucos
 
 - Las funciones `howMuch(formula)` y `calc(formula)` copian el texto de la fórmula a los cuatro idiomas: no se les puede pasar texto en euskera. Para eso, `say()`.
@@ -53,17 +67,7 @@ La etapa se llama `newton-stage` y no `newton` porque `newton` es el id de una l
 
 ## En curso
 
-Lo siguiente es la fase 3, el laboratorio:
-- **Herramientas propias:**
-  - L1 «Distancia en la recta» (entornos);
-  - L2 «La regla de cálculo» (logaritmos);
-  - L3 «La banda del error».
-- **Prestadas de 4.º (M):**
-  - de Errealak: Pitágoras, intervalos y redondeo;
-  - de Potentziak: índice común, sacar factores, conjugado y cambio de base;
-  - de Konbinatoria: Tartaglia.
-
-Después viene la fase 4, los juegos:
+Lo siguiente es la fase 4, los juegos:
 - J1 «Entorno al blanco»;
 - J2 «El coeficiente escondido»;
 - J4, un detective con los errores típicos de la unidad;

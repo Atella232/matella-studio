@@ -1,0 +1,12 @@
+/* Zenbaki errealak (Batxilergoa 1 · Zientziak) games: the answer box of the
+   hidden coefficient reuses the race pit form, but outside the pit it must
+   not take its natural width, or the button leaves a 375 px screen. */
+
+.bach-coefficient-form {
+    max-width: 100%;
+    min-width: 0;
+}
+
+.bach-coefficient-form input {
+    width: 6em;
+}
