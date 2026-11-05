@@ -27,6 +27,12 @@ Segunda unidad del bloque Geometría (reparto en paralelo de 1.º Ciencias, ver 
 - **Test nuevo:** `tests/geometria-batx1z-content.test.ts` (copia del de Bektoreak).
 - **Comprobación:** 2233 tests, lint y tsc en verde. Revisado a 375 px en eu, es y ar: las 15 lecciones con todos los pasos, el resumen, la portada, el diagnóstico, la práctica, los retos y el banco. Cuatro fórmulas de pasos bajaban de 13 px: partidas en dos filas con `gathered`.
 
+**Fase 3, laboratorio:** 8 herramientas.
+- **Propias (3), en `lab/`:** `pencil.ts` «El haz de rectas» (106101–106105: centro P, pendiente de una lista de 11 y un punto Q; se predice si Q está por debajo, sobre o por encima de la recta, y Q se oculta hasta predecir; el haz entero se dibuja en gris), `lineAngle.ts` «El ángulo de dos rectas» (106201–106205: dos rectas por el origen con sus vectores directores; se predice si el ángulo es menor, igual o mayor que 45°, comparando con enteros 2(u·v)² frente a |u|²|v|²) y `shortest.ts` «La distancia más corta» (106301–106305: cuatro rectas, P y un Q que anda por la recta a pasos enteros; se predice si d(P, r) es menor, igual o mayor que |PQ|, y ▶ lleva Q al pie H con el ángulo recto). Retos infinitos en las tres. Componentes en `GeometryTools.tsx`.
+- **Prestadas:** de 4.º académicas el segmento, el tercer punto, las formas de la recta y la segunda recta; de 3.º los puntos notables (con sus ids).
+- **Test nuevo:** `tests/geometria-batx1z-lab.test.ts`.
+- **Comprobación:** 2237 tests y lint en verde; revisado a 375 px en eu, es y ar con la predicción hecha y ▶ pulsado. Las prestadas de 4.º dejan la «x» y la «y» de los ejes pegadas al borde, como en su unidad.
+
 ## En curso
 
-- Fase 1+2 hecha (lecciones y contenido). Siguiente paso: fase 3, laboratorio (L2 haz, L3 ángulo, L4 distancia más corta; ids 106101–106399) y las prestadas.
+- Fases 1+2 y 3 hechas. Siguiente paso: fase 4, juegos (J1 «Rectas gemelas», J2 «El radar», J4 detective, carrera, memoria y «Encuentra k» de 4.º; ids 106401–106899).

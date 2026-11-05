@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readVectorsAnswer } from '../dbh4-akademikoak-bektoreak/answers'
 import { bachGeometryChallenges, bachGeometryDiagnostic, bachGeometryExerciseBank, bachGeometryPractice } from './content'
 import { BachGeometryHeroArt } from './figures'
+import { BachGeometryLaboratory } from './lab'
+import { bachGeometryLabChallengeIds, bachGeometryLabToolForTopic, bachGeometryLabTools } from './lab/labTools'
 import { bachGeometryStages, bachGeometryTopics } from './lessons'
 
 const geometriaBatx1zUnit: UnitDefinition = {
@@ -25,6 +27,17 @@ const geometriaBatx1zUnit: UnitDefinition = {
     guidedPractice: bachGeometryPractice,
     exerciseBank: bachGeometryExerciseBank,
     challenges: bachGeometryChallenges,
+    lab: {
+        description: {
+            eu: `${bachGeometryLabTools.length} tresna, erronkekin: zuzen-sorta, bi zuzenen angelua eta biderik laburrena, berriak; 4. DBHko zuzenkia, hirugarren puntua, zuzenaren formak eta bigarren zuzena; eta 3. DBHko puntu nabarmenak.`,
+            es: `${bachGeometryLabTools.length} herramientas con retos: el haz de rectas, el ángulo de dos rectas y la distancia más corta, nuevas; de 4.º ESO, el segmento, el tercer punto, las formas de la recta y la segunda recta; y de 3.º ESO, los puntos notables.`,
+            en: `${bachGeometryLabTools.length} tools with challenges: the pencil of lines, the angle of two lines and the shortest distance, new; from 4th ESO, the segment, the third point, the forms of a line and the second line; and from 3rd ESO, the notable points.`,
+            ar: `${bachGeometryLabTools.length} أدوات مع تحديات: حزمة المستقيمات وزاوية مستقيمين وأقصر مسافة، وهي جديدة؛ ومن الصف الرابع: القطعة والنقطة الثالثة وصيغ المستقيم والمستقيم الثاني؛ ومن الصف الثالث: النقاط الشهيرة.`
+        },
+        progressIds: bachGeometryLabChallengeIds,
+        toolForTopic: bachGeometryLabToolForTopic,
+        render: (props) => <BachGeometryLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bakar bat: eskatzen den koordenatua, koefizientea, malda, angelua gradutan, distantzia, azalera edo parametroa. Adibidez 5, −3, 2,5 edo 3/5.', es: 'Escribe un solo número: la coordenada, el coeficiente, la pendiente, el ángulo en grados, la distancia, el área o el parámetro que se pide. Por ejemplo 5, −3, 2,5 o 3/5.', en: 'Write a single number: the coordinate, coefficient, slope, angle in degrees, distance, area or parameter that is asked for. For example 5, −3, 2.5 or 3/5.', ar: 'اكتب عددًا واحدًا: الإحداثي أو المعامل أو الميل أو الزاوية بالدرجات أو المسافة أو المساحة أو الوسيط المطلوب. مثلًا 5 أو ⁦−3⁩ أو 2.5 أو 3/5.' },
         defaultForm: 'any',
