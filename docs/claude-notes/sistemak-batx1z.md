@@ -6,6 +6,7 @@ Cuarta unidad de 1.º Ciencias (curso `batx1-zientziak`, tema `sistemas`), prime
 - **`storagePrefix`:** `matella-sistemak-batx1z`
 - **Página:** `SistemakBatx1zIntroPage`
 - **Rama:** `feat/sistemak-batx1z`, cortada de `main` 2ff41c2
+- **Etapas:** la propuesta tenía seis; quedaron cinco (los problemas van con su tipo de sistema), dicho al dueño al cerrar.
 - **Bloque de ids:** 113000–113999 (diagnóstico 113001–113008, laboratorio propio 113101–113399, juegos 113401–113899)
 
 ## Fuentes y alcance
@@ -34,7 +35,7 @@ Cuarta unidad de 1.º Ciencias (curso `batx1-zientziak`, tema `sistemas`), prime
 ## Hecho
 
 **Fase 1+2, lecciones y contenido:**
-- **Lecciones:** las 16 tienen las diez mejoras de la teoría (`lessonTexts.ts`: definiciones, «Otro ejemplo» con números propios, vocabulario y 4 «¿Por qué funciona?» en `equivalent-systems`, `solutions-count`, `parametric-solutions` y `parameter-discussion`; `lessonChecks.ts`: error típico y «Compruébalo»); 16 enlaces «Antes de empezar» a 4.º académicas (Sistemas) y a Ecuaciones de 1.º.
+- **Lecciones:** las 16 tienen las diez mejoras de la teoría (`lessonTexts.ts`: definiciones, «Otro ejemplo» con números propios, vocabulario y 4 «¿Por qué funciona?» en `equivalent-systems`, `solutions-count`, `parametric-solutions` y `parameter-discussion`; `lessonChecks.ts`: error típico y «Compruébalo»); 15 enlaces «Antes de empezar» a 4.º académicas (Sistemas) y a Ecuaciones de 1.º.
 - **Dibujos nuevos (14):** `EquivalentFigure`, `StaircaseFigure`, `EliminationFigure`, `AugmentedMatrixFigure`, `TicketsFigure`, `LastRowFigure`, `ParametricFigure`, `ParameterFigure`, `CubicLineFigure`, `CandidatesFigure`, `ExponentialChangeFigure`, `RightTriangleFigure`, `TriangleRegionFigure`, `RegionCasesFigure`, más `BachSystemsHeroArt`. De 4.º aplicadas: `LinearSolutionsFigure` y `SystemTypesFigure`. La región se recorta con `region()` de `dbh4-akademikoak-sistemak/systems.ts`.
 - **Contenido:** diagnóstico 113001–113008, práctica 1–20, retos 101–115 y banco 1–50 (4, 3 y 10 por etapa). Cada respuesta es un número.
 - **Test nuevo:** `tests/sistemak-batx1z-content.test.ts`. Además de lo de siempre, comprueba cada fila de cada `\begin{cases}` de lecciones, ejemplos, «Compruébalo», práctica, retos y banco en su solución (unas 440 filas), que las respuestas falsas de «Compruébalo» fallan alguna fila y que ninguna fórmula escribe una igualdad imposible como 0 = 5.
