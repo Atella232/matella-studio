@@ -38,7 +38,7 @@ Es la segunda unidad de Bachillerato: curso `batx1-zientziak`, tema `sucesiones`
 - **Arreglo en 3.º:** el pie de `RecursiveFigure` en castellano se salía del dibujo a 375 px; ahora es más corto.
 - **Comprobación:** 2134 tests, lint y build en verde. Revisado a 375 px en eu, es y ar (63 páginas: las 15 lecciones con los pasos abiertos y cada palabra, el resumen, el inicio, la práctica, el banco, los retos y el diagnóstico). No se sale nada de la pantalla y no hay errores de KaTeX.
 
-**Fase 3, laboratorio:** 8 herramientas.
+**Fase 3, laboratorio, commit 48f1f77:** 8 herramientas.
 - **Propias (3),** con predicción antes del resultado y retos infinitos (`freshFrom` de `dbh3-segidak/lab/prediction.ts`):
   - L1 `fibonacci` «Fibonacci y el número de oro», retos 100101–100105: dos términos iniciales y la regla; los cocientes saltan por encima y por debajo de φ. Predice si el último cociente queda por debajo, igual o por encima de φ («igual» nunca pasa: φ es irracional). ▶ dibuja los cocientes de uno en uno.
   - L2 `limit-band` «La banda del límite», retos 100201–100205: tres sucesiones convergentes, ε (0,5; 0,25; 0,1; 0,05) y un término N; predice si N es demasiado pronto, justo el primero o más tarde de lo necesario. La distancia al límite se escribe exacta (1/n, 4/(n + 1)), sin redondeos.
@@ -47,12 +47,23 @@ Es la segunda unidad de Bachillerato: curso `batx1-zientziak`, tema `sucesiones`
 - **Test:** `tests/segidak-batx1z-lab.test.ts`. 2138 tests en verde.
 - **Revisión:** las 8 herramientas a 375 px en eu, es y ar (antes y después de predecir, con ▶, pista y reto infinito), sin desbordes ni texto fuera del tablero.
 
+**Fase 4, juegos:** 8 juegos. `recordsKey` `matella-segidak-batx1z-game-records`.
+- **Propios (3):**
+  - J1 `where` «¿Hacia dónde va?» (`/jokuak/nora`), progreso 100501–100503: una sucesión y cuatro destinos (un número, +∞, −∞ o «no tiene límite»). Niveles: cocientes de polinomios, potencias y signos, el número e. Los distractores son los errores típicos (cociente al revés, términos independientes, 0 para todo, k·e, 1).
+  - J2 `band` «Atrapa la banda» (`/jokuak/banda`), progreso 100601–100603: se escribe el primer término N dentro de la banda. Niveles: L + c/n, cocientes (Ln + c₀)/(n + b), y c/n² o (−1)ⁿ·c/n. ε = p/q y la desigualdad se decide con enteros.
+  - J4 `detective` «Detective de sucesiones», progreso 100701–100703: 12 errores de la unidad en tres niveles (n·d, rⁿ, suma sin dividir entre 2, p/100 como razón; S∞ con |r| ≥ 1, periodo entre 100, términos independientes, grado mayor abajo → ∞; (1 + 1/n)ⁿ → 1, k·e, N = 1/ε, crecimiento continuo sin t).
+- **Carrera** (100401–100405, 15 tipos de pregunta en 5 circuitos) y **memoria** (100801–100803: término, suma infinita, límite).
+- **De 3.º,** con sus pantallas y los ids de progreso de esta unidad (el hub da el id): «El patrón escondido» 100811–100813, «El clasificador» 100821–100823, «La escalera de Gauss» 100831–100833.
+- **Test:** `tests/segidak-batx1z-games.test.ts`: en «¿Hacia dónde va?» cada respuesta se comprueba evaluando la sucesión en n = 200 000.
+- **Inventario:** OK (2 juegos propios más el detective; 3 herramientas propias).
+- **Comprobación:** 2144 tests, lint y build en verde. Revisado a 375 px en eu, es y ar: el hub y los 8 juegos, empezando un nivel (dos en los propios) y contestando tres rondas; sin desbordes ni errores de KaTeX.
+
 ## Trucos
 
 - Las fórmulas con dos o tres cálculos unidos por `\qquad` bajaban a 13 px a 375 px. Se parten en filas con `\begin{gathered}…\\…\end{gathered}`. Las que siguen a 16 px son fórmulas dentro de texto de 16 px, y eso está bien.
+- Los juegos de 3.º (`HiddenGame`, `SorterGame`, `StaircaseGame`) no aceptan otra ficha de juego, pero no hace falta: el hub de esta unidad da el id de progreso al terminar un nivel.
 - En la prueba de «mismas fórmulas en los cuatro idiomas», el orden cuenta y `\varepsilon` no se cambia por x: en euskera hubo que reordenar dos frases para que $\varepsilon$ y $L$ salieran en el mismo orden que en castellano.
 
 ## En curso
 
-- **Fase 4, juegos:** propios J1 «¿Hacia dónde va?», J2 «Atrapa la banda» y J4 detective; carrera y memoria; y de 3.º «El patrón escondido», «El clasificador» y «La escalera de Gauss», con ids de progreso nuevos (100xxx).
-- Después: hoja de revisión en euskera, y publicar solo con el visto bueno del dueño.
+- Hoja de revisión en euskera enviada al dueño. Falta publicar, solo con su visto bueno.

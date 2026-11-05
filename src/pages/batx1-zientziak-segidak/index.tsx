@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachSequencesChallenges, bachSequencesDiagnostic, bachSequencesExerciseBank, bachSequencesPractice } from './content'
 import { BachSequencesHeroArt } from './figures'
+import { BachSequencesGames } from './games'
+import { BACH_SEQUENCES_GAME_RECORDS_KEY, bachSequencesGameProgressIds } from './games/info'
 import { BachSequencesLaboratory } from './lab'
 import { bachSequencesLabChallengeIds, bachSequencesLabToolForTopic, bachSequencesLabTools } from './lab/labTools'
 import { bachSequencesStages, bachSequencesTopics } from './lessons'
@@ -36,6 +38,17 @@ const segidakBatx1zUnit: UnitDefinition = {
         progressIds: bachSequencesLabChallengeIds,
         toolForTopic: bachSequencesLabToolForTopic,
         render: (props) => <BachSequencesLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zortzi joko: lasterketa, nora doa?, harrapatu banda, segiden detektibea eta memoria, berriak; eta 3. DBHko patroi ezkutua, sailkatzailea eta Gaussen eskailera.',
+            es: 'Ocho juegos: carrera, ¿hacia dónde va?, atrapa la banda, detective de sucesiones y memoria, nuevos; y de 3.º ESO, el patrón escondido, el clasificador y la escalera de Gauss.',
+            en: 'Eight games: race, where does it go?, catch the band, sequences detective and memory, new; and from 3rd ESO, the hidden pattern, the sorter and Gauss\'s staircase.',
+            ar: 'ثماني ألعاب: السباق وإلى أين تتجه؟ والتقط الشريط ومخبر المتتاليات والذاكرة، وهي جديدة؛ ومن الصف الثالث: النمط المخفي والمصنِّف ودرج غاوس.'
+        },
+        progressIds: bachSequencesGameProgressIds,
+        recordsKey: BACH_SEQUENCES_GAME_RECORDS_KEY,
+        render: (props) => <BachSequencesGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Gai baten posizioa eskatzen bada, n bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si se pide el lugar de un término, solo n.', en: 'Write a number: 5, −3, 1.5 or 3/2. If the place of a term is asked for, only n.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا طُلبت رتبة حد فاكتب الرتبة فقط.' },
