@@ -47,6 +47,14 @@ El dueño pidió llevar a 1.º, 3.º, 4.º académicas y 4.º aplicadas el conte
 
 213 lecciones: 173 enlaces «Antes de empezar», 44 «¿Por qué funciona?», 59 dibujos tras los pasos. `npm test` 1638/1638, `npm run lint` y `npm run build` en verde (2026-11-05). Hoja de revisión eu/es: `teoria-dbh4ak-revision.html` en la carpeta compartida de notas de la sesión madre, enviada al dueño.
 
+## Revisión a 375 px (2026-11-05)
+
+Las 14 unidades en es, eu y ar, con «Ver todos los pasos», los «¿Por qué funciona?» y cada palabra abierta: Errealak, Potentziak, Polinomioak y Ekuazioak antes (189 páginas); Sistemak otra vez y las nueve últimas ahora (unas 450 páginas, más 48 repasadas tras los arreglos). Sin desbordes de página ni de cajas, sin errores de KaTeX y sin desborde al abrir las palabras. Los ejemplos que bajaban de 17 px (16 lecciones: 3 de Trigonometría, 2 de Bektoreak, 1 de Esponentzialak, 6 de Funtzioak, 2 de Polinomikoak, 1 de Estatistika, 1 de Probabilitatea) van ahora en más filas (commits 3c37084, 6a087ac y e47852f); repasados, el más pequeño queda en 20,5 px. Un paso de «Área del cilindro y del cono» (14,3 px), en dos filas.
+
+## Títulos sin fórmulas (2026-11-05, commit e968047)
+
+Los títulos de las lecciones se dibujan como texto, no con KaTeX, y en matella.net salía «La función $y=a^{x}$» tal cual. La sesión madre lo pidió con el visto bueno del dueño: 9 títulos dicen ahora la fórmula con palabras en los cuatro idiomas. Esponentzialak: la función exponencial, la función logarítmica, la función seno, la función coseno, el periodo de la función seno, la función tangente. Polinomikoak: las parábolas más sencillas ($y=ax^{2}$), proporcionalidad inversa ($y=\frac{k}{x}$), cociente de dos polinomios de primer grado ($y=\frac{ax+b}{cx+d}$). Ningún «Antes de empezar» copiaba esos títulos. La sesión madre añade en main `tests/lesson-titles.test.ts`, que falla con cualquier `$` en un título de lección o de etapa.
+
 ## Más trucos
 
 - El script que mueve los textos no veía el título de las lecciones con `figureAfterSteps` entre `stage` y `title`: si se busca el título, hay que permitir líneas en medio.
