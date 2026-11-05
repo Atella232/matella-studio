@@ -25,6 +25,16 @@ Quinta unidad de 1.º Ciencias (curso `batx1-zientziak`, tema `estadistica`), se
 - **Trucos:** las fórmulas que empiezan por z se escriben `{z}`; en euskera, nada de «50i» o «120ri»: «50 bazkideri». El orden de las fórmulas de una definición debe ser el mismo en los cuatro idiomas.
 - **Revisión:** las 16 lecciones a 375 px en eu, es y ar sin desbordes ni textos que se pisen o se salgan de las figuras (medido con `getBBox`, el panel estaba oculto); en árabe también portada, diagnóstico, práctica, ejercicios y retos.
 
+## Fase 3: laboratorio (commit 5aec662e)
+
+- **Propias** (en `lab/`, con predicción y retos infinitos):
+  - `score` «La puntuación típica» (`standardScore.ts`): dos notas A y B, cada una con su media y su σ; antes de predecir están en una regla de notas 0–10 y después las reglas se alinean en desviaciones típicas (▶ «Alinear en σ»). Todo en mitades, para que z salga exacta. Retos 114101–114103.
+  - `outlier` «¿Atípico o no?» (`outlierBand.ts`): 19 tiempos fijos alrededor de 20 (con el dato en 20, x̄ = 20 y σ² = 8) y un dato que se arrastra de 0 a 50; regla x̄ ± 3σ o de la caja. El dato se esconde a sí mismo: 32 no es atípico y 33 sí; 8 no y 7 sí. Con 10 datos ningún dato puede pasar de 3σ (z máxima (n − 1)/√n ≈ 2,85): por eso hay 20. ▶ mueve el dato de 0 a 50. Retos 114201–114203.
+  - `tail` «La cola del histograma» (`histogramTail.ts`): libros leídos 0–6, una barra por valor (se toca la barra y se cambia su frecuencia); Mo, Me, x̄ y la caja debajo. Retos 114301–114303.
+- **Prestadas** con sus ids: de 4.º ak `cumulative`, `intervals`, `centre`, `histogram`, `balance` (para el dato que falta), `percentile`, `whiskers`, `deviation`, `table`, `transform`; de 3.º `axis` (el eje engañoso, para los gráficos). 14 herramientas en total.
+- **Trucos:** en una lectura de LaTeX, nada de «:» (MathText lo convierte en ÷): `\to`. En euskera, «0 eta 50 artean», no «0tik 50era».
+- **Revisión:** las 14 herramientas a 375 px en eu, es y ar con la predicción hecha: sin desbordes ni textos que se pisen o se salgan del tablero.
+
 ## En curso
 
-- Siguiente: fase 3, laboratorio (L1 «La puntuación típica», L2 «¿Atípico o no?», L3 «La cola del histograma», ids 1141xx–1143xx; después las prestadas de 4.º y el eje engañoso de 3.º).
+- Siguiente: fase 4, juegos (J1 «¿Quién destaca más?», J2 «¿Qué histograma?», J4 detective, J5 carrera, memoria y «Construye el diagrama de caja» de 4.º con niveles nuevos; ids 1144xx–1148xx).
