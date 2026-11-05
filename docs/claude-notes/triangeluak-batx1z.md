@@ -68,6 +68,8 @@ Es la cuarta unidad de Bachillerato (bloque Trigonometría del reparto en parale
 - En el juego «por piezas» los números pueden ser decimales: los triángulos salen de datos enteros y el resto se calcula.
 - La bisagra y la circunferencia se veían diminutas con los valores de partida: la bisagra usa 20 px por unidad y barras a escala de (b + c)²; la circunferencia, 16 px por unidad hasta que R no cabe.
 
-## En curso
+## Cierre
 
-- Fases 1+2 (6a59d1d), 3 (aa00f48) y 4 hechas y revisadas. Falta solo la hoja de euskera para el dueño; después, publicar lo decide la sesión principal.
+- Fases 1+2 (6a59d1d), 3 (aa00f48) y 4 (2ecd615) en `feat/triangeluak-batx1z`. 2215 tests, lint y build en verde; inventario OK.
+- Hoja de euskera: `hoja-revision.mjs` con `--herramientas compass,circumcircle,hinge --juegos count,pieces,station,detective,race,memory`, mandada al dueño el 2026-11-05. La hoja escribe `\sen` tal cual: se pasa a sin (euskera) y sen (castellano) por filas antes de mandarla.
+- Sin publicar: lo hace la sesión principal.
