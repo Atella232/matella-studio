@@ -1,0 +1,1 @@
+const c=(o,n)=>Math.abs(o-n)<1e-9?"=":o<n?"<":">",i=(o,n)=>o.prediction===null?{...o,prediction:n}:o;function t(o,n){return s=>{for(;;){const r=n(s);if(!r.isSolved(o))return r}}}export{c,t as f,i as s};
