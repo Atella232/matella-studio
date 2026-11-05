@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readVectorsAnswer } from '../dbh4-akademikoak-bektoreak/answers'
 import { bachVectorsChallenges, bachVectorsDiagnostic, bachVectorsExerciseBank, bachVectorsPractice } from './content'
 import { BachVectorsHeroArt } from './figures'
+import { BachVectorsGames } from './games'
+import { BACH_VECTORS_GAME_RECORDS_KEY, bachVectorsGameProgressIds } from './games/info'
 import { BachVectorsLaboratory } from './lab'
 import { bachVectorsLabChallengeIds, bachVectorsLabToolForTopic, bachVectorsLabTools } from './lab/labTools'
 import { bachVectorsStages, bachVectorsTopics } from './lessons'
@@ -37,6 +39,17 @@ const bektoreakBatx1zUnit: UnitDefinition = {
         progressIds: bachVectorsLabChallengeIds,
         toolForTopic: bachVectorsLabToolForTopic,
         render: (props) => <BachVectorsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zazpi joko: lasterketa, zenbakia ala bektorea?, biderkadurak poligonoan, bektoreen detektibea eta memoria, berriak; eta 4. DBHko bektore-jauzia eta aurkitu k.',
+            es: 'Siete juegos: carrera, ¿número o vector?, productos en el polígono, detective de vectores y memoria, nuevos; y de 4.º ESO, el salto del vector y encuentra k.',
+            en: 'Seven games: race, number or vector?, products in the polygon, vectors detective and memory, new; and from 4th ESO, the vector jump and find k.',
+            ar: 'سبع ألعاب: السباق وعدد أم متجه؟ والجداءات في المضلع ومخبر المتجهات والذاكرة، وهي جديدة؛ ومن الصف الرابع: قفزة المتجه وأوجد k.'
+        },
+        progressIds: bachVectorsGameProgressIds,
+        recordsKey: BACH_VECTORS_GAME_RECORDS_KEY,
+        render: (props) => <BachVectorsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bakar bat: eskatzen den koordenatua, modulua, biderkadura eskalarra, angelua gradutan edo parametroa. Adibidez 5, −3, 2,5 edo 3/5.', es: 'Escribe un solo número: la coordenada, el módulo, el producto escalar, el ángulo en grados o el parámetro que se pide. Por ejemplo 5, −3, 2,5 o 3/5.', en: 'Write a single number: the coordinate, magnitude, dot product, angle in degrees or parameter that is asked for. For example 5, −3, 2.5 or 3/5.', ar: 'اكتب عددًا واحدًا: المركّبة أو الطول أو الجداء السلمي أو الزاوية بالدرجات أو الوسيط المطلوب. مثلًا 5 أو ⁦−3⁩ أو 2.5 أو 3/5.' },
