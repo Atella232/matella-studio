@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachLimitsChallenges, bachLimitsDiagnostic, bachLimitsExerciseBank, bachLimitsPractice } from './content'
 import { BachLimitsHeroArt } from './figures'
+import { BachLimitsGames } from './games'
+import { BACH_LIMITS_GAME_RECORDS_KEY, bachLimitsGameProgressIds } from './games/info'
 import { BachLimitsLaboratory } from './lab'
 import { bachLimitsLabChallengeIds, bachLimitsLabToolForTopic, bachLimitsLabTools } from './lab/labTools'
 import { bachLimitsStages, bachLimitsTopics } from './lessons'
@@ -36,6 +38,17 @@ const limiteakBatx1zUnit: UnitDefinition = {
         progressIds: bachLimitsLabChallengeIds,
         toolForTopic: bachLimitsLabToolForTopic,
         render: (props) => <BachLimitsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zortzi joko: lasterketa, indeterminazioa ala ez?, ehizatu asintotak, zer etenune?, limiteen detektibea eta memoria, berriak; eta Segidetako nora doa? eta harrapatu banda.',
+            es: 'Ocho juegos: carrera, ¿indeterminación o no?, caza las asíntotas, ¿qué discontinuidad?, detective de límites y memoria, nuevos; y de Sucesiones, ¿hacia dónde va? y atrapa la banda.',
+            en: 'Eight games: race, indeterminate or not?, hunt the asymptotes, which discontinuity?, limits detective and memory, new; and from Sequences, where does it go? and catch the band.',
+            ar: 'ثماني ألعاب: السباق وعدم تعيين أم لا؟ واصطد المقاربات وأي انقطاع؟ ومخبر النهايات والذاكرة، وهي جديدة؛ ومن المتتاليات: إلى أين تتجه؟ والتقط الشريط.'
+        },
+        progressIds: bachLimitsGameProgressIds,
+        recordsKey: BACH_LIMITS_GAME_RECORDS_KEY,
+        render: (props) => <BachLimitsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Emaitza eᵃ bada, a bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si el resultado es eᵃ, solo a.', en: 'Write a number: 5, −3, 1.5 or 3/2. If the result is eᵃ, only a.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كانت النتيجة eᵃ فاكتب a وحدها.' },

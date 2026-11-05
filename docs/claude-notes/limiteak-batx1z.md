@@ -54,7 +54,21 @@ Commit 316a89c.
 - **Prestadas, con sus retos e ids:** la banda del límite y la máquina de e de Segidak (etapa `infinity`), el taller de transformaciones de Funtzio elementalak (etapa `asymptotes`, para mover las asíntotas de 1/x) y unir dos trozos de 4.º académicas (etapa `continuity`).
 - **Archivos:** `lab/lens.ts`, `hole.ts`, `degrees.ts`, `bolzano.ts` (lógica), `BachLimitsTools.tsx`, `labTools.ts`, `index.tsx`; test `tests/limiteak-batx1z-lab.test.ts`.
 - **Comprobación:** 2240 tests, lint y `tsc -b` en verde. Las 8 herramientas a 375 px en eu, es y ar con predicción y ▶, sin desbordes ni errores de KaTeX.
-- **Pendiente fuera de esta unidad:** en árabe, la «y» del eje de «Une dos trozos» (herramienta de 4.º académicas) se sale 1 px del dibujo.
+- En árabe, la comprobación con `getBBox` marca la «y» del eje de «Une dos trozos» (4.º académicas) y de los planos de los juegos: es un falso positivo, porque la fuente árabe da una caja de línea más alta; la letra se ve entera.
+
+Commit 37971fe.
+
+**Fase 4, juegos (8):**
+- **Propios (3 + detective):**
+  - J1 «¿Indeterminación o no?» (`forms`, 109501–109503): un límite; se dice qué sale al sustituir de cabeza: indeterminación, 0, ±∞ u otro número. Nivel 1 en un punto (0/0, k/0, 0/k, número), nivel 2 en el infinito (∞/∞, ∞ − ∞, ∞ + ∞, k/∞, ∞·0, k + 0), nivel 3 potencias (1^∞, b^∞, (1/b)^∞, 1ᵇ, ∞⁰, 0^∞). Ocho rondas con los cuatro tipos de respuesta.
+  - J2 «Caza las asíntotas» (`asymptote`, 109601–109603): una función racional desarrollada y 4–5 cartas con rectas; se marcan todas las asíntotas y ninguna más. Trampas: raíz del numerador, agujero, signo contrario, y = 0 con el mismo grado, y = mx sin n. Al comprobar sale la gráfica con las asíntotas y el agujero.
+  - J3 «¿Qué discontinuidad?» (`discontinuity`, 109651–109653): continua, evitable, salto finito o infinito. Nivel 1 desde la gráfica, nivel 2 a trozos (la gráfica sale después), nivel 3 cocientes, |x − a|/(x − a), E(x) y el pico de |x − a| (continua).
+  - J5 «Detective de límites» (`detective`, 109701–109703): 0/0 = 0, k/0 = 0, límite = f(a), x² − a² = (x − a)²; ∞ − ∞ = 0, 1^∞ = 1, coeficientes equivocados, √x² = x con x → −∞; agujero tomado por asíntota, y = 0 con el mismo grado, signo en la división de la oblicua, Bolzano con un salto.
+- **Carrera** (`race`, 109401–109405): 15 tipos, tres por etapa (lateral, k para que exista el límite, cuántas asíntotas verticales; factorizar, conjugado, sustituir; grados, √(x² + px) − x, la a de eᵃ; horizontal, n y m de la oblicua; k para que sea continua, valor que llena el agujero, Bolzano).
+- **Memoria** (`memory`, 109801–109803): límite en un punto ↔ valor (a² − b², a³ − b³, conjugado), función ↔ límite en +∞ (la carta no lleva «lim»), función ↔ asíntotas (en dos líneas).
+- **De Segidak:** «¿Hacia dónde va?» (`toward`, 109811–109813, etapa `infinity`) y «Atrapa la banda» (`band`, 109821–109823, etapa `point`).
+- **Archivos:** `games/forms.ts`, `asymptotes.ts`, `discontinuity.ts`, `detective.ts`, `race.ts`, `boards.ts`, `info.ts`, `BachLimitsGames.tsx` (+ `.css`), `GameArt.tsx`, `RaceGame.tsx`, `index.tsx`; test `tests/limiteak-batx1z-games.test.ts` (rehace cada respuesta de la carrera con el límite numérico).
+- **Comprobación:** 2247 tests, lint y `tsc -b` en verde; inventario OK (5 juegos propios contando los de Segidak, 7 herramientas). Juegos a 375 px en eu, es y ar sin desbordes ni errores de KaTeX.
 
 ## Trucos
 
@@ -65,8 +79,8 @@ Commit 316a89c.
 - En el laboratorio, las etiquetas de los botones con fórmulas (`(x − d)²`, `x³ − 3x + 1`) van entre LRI y PDI (`\u2066…\u2069`): en árabe, `(x − d)²` salía `²(x - d)`.
 - Un intervalo con extremos decimales se escribe con punto y coma en eu y es: `(1;1{,}25)`.
 - Para que la predicción tenga sentido, el dibujo (curva, barras, valores) se esconde hasta elegir; los controles cambian el estado sin enseñar nada.
+- Las cartas de memoria miden 106 px a 375 px (90 px útiles): `\lim\limits_{x\to a}` pone el «x → a» debajo y ahorra anchura; las asíntotas van en `\begin{gathered}…\end{gathered}`; en el nivel del infinito la carta no lleva «lim» y la explicación sí. Para medir, voltear las cartas de dos en dos y leer `getBoundingClientRect` del `.katex`.
 
 ## En curso
 
-- Fase 4, juegos (ids 109401–109899): J1 «¿Indeterminación o no?», J2 «Caza la asíntota», J3 «¿Qué discontinuidad?», J5 detective; carrera (15 tipos) y memoria; de Segidak «¿Hacia dónde va?» y «Atrapa la banda».
-- Después, cierre (inventario, 375 px, hoja de euskera) y el tema siguiente, Derivadas.
+- Cierre: build, revisión final, hoja de euskera para el dueño y aviso a la sesión principal. Después, el tema siguiente, Derivadas (ids 110000–110999), cortado de esta rama.
