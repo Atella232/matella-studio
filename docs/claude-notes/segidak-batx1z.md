@@ -27,7 +27,7 @@ Es la segunda unidad de Bachillerato: curso `batx1-zientziak`, tema `sucesiones`
 
 ## Hecho
 
-**Fase 1+2, lecciones y contenido:**
+**Fase 1+2, lecciones y contenido, commit aee1b07:**
 - **Lecciones:** las 15 tienen las diez mejoras de la teoría:
   - `lessonTexts.ts`: definiciones, «Otro ejemplo» con números propios, vocabulario y 4 «¿Por qué funciona?» (`fibonacci`, `periodic-decimals`, `squares-sum`, `quotient-limits`);
   - `lessonChecks.ts`: error típico y «Compruébalo»;
@@ -38,6 +38,15 @@ Es la segunda unidad de Bachillerato: curso `batx1-zientziak`, tema `sucesiones`
 - **Arreglo en 3.º:** el pie de `RecursiveFigure` en castellano se salía del dibujo a 375 px; ahora es más corto.
 - **Comprobación:** 2134 tests, lint y build en verde. Revisado a 375 px en eu, es y ar (63 páginas: las 15 lecciones con los pasos abiertos y cada palabra, el resumen, el inicio, la práctica, el banco, los retos y el diagnóstico). No se sale nada de la pantalla y no hay errores de KaTeX.
 
+**Fase 3, laboratorio:** 8 herramientas.
+- **Propias (3),** con predicción antes del resultado y retos infinitos (`freshFrom` de `dbh3-segidak/lab/prediction.ts`):
+  - L1 `fibonacci` «Fibonacci y el número de oro», retos 100101–100105: dos términos iniciales y la regla; los cocientes saltan por encima y por debajo de φ. Predice si el último cociente queda por debajo, igual o por encima de φ («igual» nunca pasa: φ es irracional). ▶ dibuja los cocientes de uno en uno.
+  - L2 `limit-band` «La banda del límite», retos 100201–100205: tres sucesiones convergentes, ε (0,5; 0,25; 0,1; 0,05) y un término N; predice si N es demasiado pronto, justo el primero o más tarde de lo necesario. La distancia al límite se escribe exacta (1/n, 4/(n + 1)), sin redondeos.
+  - L3 `e-machine` «La máquina de e», retos 100301–100305: 1 € con k = 1, 2 o 3 y n pagos al año (1, 2, 4, 12, 52, 365, 1000); la escalera (1 + k/n)ⁿ junto a la curva eᵏᵗ. Predice si el año acaba por debajo o por encima de eᵏ cortado a una cifra (2,7; 7,3; 20). ▶ sube la escalera.
+- **Prestadas (5),** con sus retos e ids de 3.º: palillos, rana, barras de Gauss, pelota y barra.
+- **Test:** `tests/segidak-batx1z-lab.test.ts`. 2138 tests en verde.
+- **Revisión:** las 8 herramientas a 375 px en eu, es y ar (antes y después de predecir, con ▶, pista y reto infinito), sin desbordes ni texto fuera del tablero.
+
 ## Trucos
 
 - Las fórmulas con dos o tres cálculos unidos por `\qquad` bajaban a 13 px a 375 px. Se parten en filas con `\begin{gathered}…\\…\end{gathered}`. Las que siguen a 16 px son fórmulas dentro de texto de 16 px, y eso está bien.
@@ -45,6 +54,5 @@ Es la segunda unidad de Bachillerato: curso `batx1-zientziak`, tema `sucesiones`
 
 ## En curso
 
-- **Fase 3, laboratorio:** propias L1 «Fibonacci y el número de oro», L2 «La banda del límite» y L3 «La máquina de e», con retos 100101–100305; prestadas de 3.º (palillos, rana, barras de Gauss, pelota y barra), con sus ids de 3.º.
 - **Fase 4, juegos:** propios J1 «¿Hacia dónde va?», J2 «Atrapa la banda» y J4 detective; carrera y memoria; y de 3.º «El patrón escondido», «El clasificador» y «La escalera de Gauss», con ids de progreso nuevos (100xxx).
 - Después: hoja de revisión en euskera, y publicar solo con el visto bueno del dueño.

@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachSequencesChallenges, bachSequencesDiagnostic, bachSequencesExerciseBank, bachSequencesPractice } from './content'
 import { BachSequencesHeroArt } from './figures'
+import { BachSequencesLaboratory } from './lab'
+import { bachSequencesLabChallengeIds, bachSequencesLabToolForTopic, bachSequencesLabTools } from './lab/labTools'
 import { bachSequencesStages, bachSequencesTopics } from './lessons'
 
 const segidakBatx1zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const segidakBatx1zUnit: UnitDefinition = {
     guidedPractice: bachSequencesPractice,
     exerciseBank: bachSequencesExerciseBank,
     challenges: bachSequencesChallenges,
+    lab: {
+        description: {
+            eu: `${bachSequencesLabTools.length} tresna, erronkekin: Fibonacci eta zenbaki urrea, limitearen banda eta e zenbakiaren makina, berriak; eta 3. DBHko makilen patroiak, igela, Gaussen barrak, errebotatzen duen pilota eta inoiz betetzen ez den barra.`,
+            es: `${bachSequencesLabTools.length} herramientas con retos: Fibonacci y el número de oro, la banda del límite y la máquina de e, nuevas; y de 3.º ESO, los patrones de palillos, la rana, las barras de Gauss, la pelota que rebota y la barra que nunca se llena.`,
+            en: `${bachSequencesLabTools.length} tools with challenges: Fibonacci and the golden ratio, the band of the limit and the e machine, new; and from 3rd ESO, the stick patterns, the frog, Gauss's bars, the bouncing ball and the bar that never fills up.`,
+            ar: `${bachSequencesLabTools.length} أدوات مع تحديات: فيبوناتشي والعدد الذهبي وشريط النهاية وآلة العدد e، وهي جديدة؛ ومن الصف الثالث: أنماط العيدان والضفدع وأعمدة غاوس والكرة المرتدة والعمود الذي لا يمتلئ.`
+        },
+        progressIds: bachSequencesLabChallengeIds,
+        toolForTopic: bachSequencesLabToolForTopic,
+        render: (props) => <BachSequencesLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Gai baten posizioa eskatzen bada, n bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si se pide el lugar de un término, solo n.', en: 'Write a number: 5, −3, 1.5 or 3/2. If the place of a term is asked for, only n.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا طُلبت رتبة حد فاكتب الرتبة فقط.' },
         defaultForm: 'any',
