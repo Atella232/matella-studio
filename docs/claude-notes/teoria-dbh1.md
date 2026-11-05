@@ -28,3 +28,7 @@ El dueño pidió llevar a 1., 3., 4. académicas y 4. aplicadas el contenido de 
 - Tests 1577/1577, lint y build en verde. Revisado a 375 px en eu, es y ar: 459 páginas (143 lecciones y 10 resúmenes × 3), pasos abiertos, 93 cajas «¿Por qué?», 1476 palabras abiertas, 429 «Compruébalo» contestados: sin desbordes ni errores de KaTeX; ejemplos en 18,4 px o más.
 - Hoja de repaso (euskera y castellano): `revision-teoria-dbh1.html` en la raíz del worktree, sin commit; enviada al dueño.
 - Visto de paso, sin tocar: etiquetas accesibles de algunos dibujos (`figures.tsx`) con sufijos pegados en euskera (Proportzionaltasuna, Geometria › Pitágoras).
+
+## Publicación
+
+**Publicado el 2026-11-05:** main 340d8d5 (avance rápido desde 23a7dbc), bundle `index-BeM_7Dvu.js`, publicado desde un worktree limpio por la sesión madre. Comprobado en matella.net a 375 px en eu, es y ar (10 lecciones, una por unidad).
