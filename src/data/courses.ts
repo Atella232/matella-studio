@@ -167,7 +167,7 @@ export const courses: Course[] = [
       { id: 'resolucion-triangulos', name: 'Resolución de Triángulos', nameEu: 'Triangeluen Ebazpena', nameAr: 'حل المثلثات', nameEn: 'Solving Triangles', icon: '📐' },
       { id: 'funciones-trigonometricas', name: 'Fórmulas y Funciones Trigonométricas', nameEu: 'Formula eta Funtzio Trigonometrikoak', nameAr: 'الصيغ والدوال المثلثية', nameEn: 'Trigonometric Formulas and Functions', icon: '〰️' },
       { id: 'numeros-complejos', name: 'Números Complejos', nameEu: 'Zenbaki Konplexuak', nameAr: 'الأعداد المركبة', nameEn: 'Complex Numbers', icon: 'ℂ' },
-      { id: 'vectores', name: 'Vectores', nameEu: 'Bektoreak', nameAr: 'المتجهات', nameEn: 'Vectors', icon: '➡️' },
+      { id: 'vectores', name: 'Vectores', nameEu: 'Bektoreak', nameAr: 'المتجهات', nameEn: 'Vectors', icon: '➡️', active: true },
       { id: 'geometria-analitica', name: 'Geometría Analítica', nameEu: 'Geometria Analitikoa', nameAr: 'الهندسة التحليلية', nameEn: 'Analytic Geometry', icon: '📏' },
       { id: 'conicas', name: 'Lugares Geométricos y Cónicas', nameEu: 'Leku Geometrikoak eta Konikak', nameAr: 'المحلات الهندسية والقطوع المخروطية', nameEn: 'Loci and Conic Sections', icon: '⭕' },
       { id: 'funciones', name: 'Funciones Elementales', nameEu: 'Funtzio Elementalak', nameAr: 'الدوال الأساسية', nameEn: 'Elementary Functions', icon: '📈' },
