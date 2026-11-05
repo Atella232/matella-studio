@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachSystemsChallenges, bachSystemsDiagnostic, bachSystemsExerciseBank, bachSystemsPractice } from './content'
 import { BachSystemsHeroArt } from './figures'
+import { BachSystemsLaboratory } from './lab'
+import { bachSystemsLabChallengeIds, bachSystemsLabToolForTopic, bachSystemsLabTools } from './lab/labTools'
 import { bachSystemsStages, bachSystemsTopics } from './lessons'
 
 const sistemakBatx1zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const sistemakBatx1zUnit: UnitDefinition = {
     guidedPractice: bachSystemsPractice,
     exerciseBank: bachSystemsExerciseBank,
     challenges: bachSystemsChallenges,
+    lab: {
+        description: {
+            eu: `${bachSystemsLabTools.length} tresna, erronkekin: Gaussen makina, soluzioen familia eta parametroaren graduatzailea, berriak; eta 4. DBHko bigarren zuzena mugitzen, zuzena eta zirkunferentzia, bi karratu, erdiplanoa eta proba-puntua, triangeluaren puntu osoak, eta kopurua eta guztizkoa.`,
+            es: `${bachSystemsLabTools.length} herramientas con retos: la máquina de Gauss, la familia de soluciones y el deslizador del parámetro, nuevas; y de 4.º ESO, mueve la segunda recta, recta y circunferencia, dos cuadrados, semiplano y punto de prueba, los puntos enteros del triángulo, y cuántos y cuánto.`,
+            en: `${bachSystemsLabTools.length} tools with challenges: the Gauss machine, the family of solutions and the parameter slider, new; and from 4th ESO, move the second line, line and circle, two squared terms, half-plane and test point, the integer points of the triangle, and how many and how much.`,
+            ar: `${bachSystemsLabTools.length} أدوات مع تحديات: آلة غاوس وعائلة الحلول ومنزلقة الوسيط، وهي جديدة؛ ومن الصف الرابع: حرّك المستقيم الثاني والمستقيم والدائرة ومربعان ونصف المستوى ونقطة الاختبار والنقاط الصحيحة في المثلث والعدد والمجموع.`
+        },
+        progressIds: bachSystemsLabChallengeIds,
+        toolForTopic: bachSystemsLabToolForTopic,
+        render: (props) => <BachSystemsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Ezezagun bat baino gehiago badago, eskatzen dena bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si hay varias incógnitas, solo la que se pide.', en: 'Write a number: 5, −3, 1.5 or 3/2. If there are several unknowns, only the one asked for.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كانت هناك عدة مجاهيل فاكتب المطلوب فقط.' },
         defaultForm: 'any',
