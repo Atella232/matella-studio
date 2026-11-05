@@ -59,3 +59,7 @@ Script en el navegador sobre las 150 lecciones en eu, es y ar (450 páginas): ab
 - Visto sin tocar (es del motor y de todos los cursos): en árabe, la idea clave de Polinomios › square-diff parte la fórmula `(a-b)^{2}=a^{2}-2ab+b^{2}` al final de la línea y deja «: الإشارات» con los dos puntos al principio.
 
 Hoja de revisión para el dueño (euskera y castellano, las 150 lecciones), hecha con un script que importa los `lessonTexts.ts` y `lessonChecks.ts` y dibuja las fórmulas con KaTeX: en la carpeta de notas compartidas de la sesión, `teoria-dbh3-revision.html`.
+
+## Publicación
+
+**Publicado el 2026-11-05:** fusión 7b3cc52 en main (rama `claude/teoria-dbh3-46f5a5`, último commit 588ff19), bundle `index-coR8a0f7.js`, publicado desde un worktree limpio por la sesión madre. Tests 1728 en main. Comprobado en matella.net a 375 px en eu, es y ar (10 lecciones, una por unidad): nada se sale de la página, sin errores de KaTeX ni de consola. Visto en vivo, ya pasaba antes: los títulos de Segidak › arith-sum y geom-sum muestran `$n$` tal cual (el título se pinta como texto, sin KaTeX); lo mismo en 9 títulos de 4. académicas (Esponentzialak, Polinomikoak).
