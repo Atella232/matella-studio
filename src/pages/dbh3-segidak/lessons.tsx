@@ -141,7 +141,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
     {
         id: 'arith-sum',
         stage: 'sums',
-        title: say('Progresio aritmetikoaren $n$ gaien batura', 'Suma de $n$ términos de una progresión aritmética', 'مجموع $n$ حدًا من متتالية حسابية', 'Sum of $n$ terms of an arithmetic progression'),
+        title: say('Progresio aritmetikoaren lehen gaien batura', 'Suma de los primeros términos de una progresión aritmética', 'مجموع الحدود الأولى من متتالية حسابية', 'Sum of the first terms of an arithmetic progression'),
         goal: say('$S_{n}=\\frac{(a_{1}+a_{n})\\cdot n}{2}$ formula erabiltzea.', 'Usar la fórmula $S_{n}=\\frac{(a_{1}+a_{n})\\cdot n}{2}$.', 'استعمال الصيغة $S_{n}=\\frac{(a_{1}+a_{n})\\cdot n}{2}$.', 'Use the formula $S_{n}=\\frac{(a_{1}+a_{n})\\cdot n}{2}$.'),
         problem: say('$5,\\,8,\\,11,\\ldots$ progresioaren lehen 20 gaien batura.', 'Suma de los 20 primeros términos de $5,\\,8,\\,11,\\ldots$', 'مجموع الحدود العشرين الأولى من $5,\\,8,\\,11,\\ldots$', 'Sum of the first 20 terms of $5,\\,8,\\,11,\\ldots$'),
         stepsKind: 'steps',
@@ -222,7 +222,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
     {
         id: 'geo-sum',
         stage: 'geo-sums',
-        title: say('Progresio geometrikoaren $n$ gaien batura', 'Suma de $n$ términos de una progresión geométrica', 'مجموع $n$ حدًا من متتالية هندسية', 'Sum of $n$ terms of a geometric progression'),
+        title: say('Progresio geometrikoaren lehen gaien batura', 'Suma de los primeros términos de una progresión geométrica', 'مجموع الحدود الأولى من متتالية هندسية', 'Sum of the first terms of a geometric progression'),
         goal: say('$S_{n}=\\frac{a_{1}\\cdot(r^{n}-1)}{r-1}$ formula erabiltzea.', 'Usar la fórmula $S_{n}=\\frac{a_{1}\\cdot(r^{n}-1)}{r-1}$.', 'استعمال الصيغة $S_{n}=\\frac{a_{1}\\cdot(r^{n}-1)}{r-1}$.', 'Use the formula $S_{n}=\\frac{a_{1}\\cdot(r^{n}-1)}{r-1}$.'),
         problem: say('$3,\\,6,\\,12,\\ldots$ progresioaren lehen 6 gaien batura.', 'Suma de los 6 primeros términos de $3,\\,6,\\,12,\\ldots$', 'مجموع الحدود الستة الأولى من $3,\\,6,\\,12,\\ldots$', 'Sum of the first 6 terms of $3,\\,6,\\,12,\\ldots$'),
         stepsKind: 'steps',
