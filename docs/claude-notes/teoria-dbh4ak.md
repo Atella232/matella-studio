@@ -61,3 +61,7 @@ Los títulos de las lecciones se dibujan como texto, no con KaTeX, y en matella.
 - Navegador: editar un archivo de `src` mientras corre la revisión recarga la página (HMR) y se pierden los resultados; con la pestaña oculta, `setTimeout` va a 1 por segundo o menos: mejor esperar con `MessageChannel`.
 - Una pregunta con intervalos de respuesta y una sola ecuación, como $f(x)=x(x-5)$ con $(0,\,5)$, se lee como un punto que tiene que estar en la curva: añade otra fórmula ($f(x)<0$).
 - En inglés, los miles en palabras van con coma (1,000), pero las fórmulas `same(...)` llevan `\,` en todos los idiomas: no escribas `{,}000` en la fórmula inglesa.
+
+## Publicación
+
+**Publicado el 2026-11-05:** fusión d9362336 en main (rama `claude/teoria-dbh4ak-d45b04`, último commit 77f78c9) y 74b9888 (el test de títulos ya sin lista `pending`), bundle `index-BFNIeQZc.js`, publicado desde un worktree limpio por la sesión madre. Tests 2077 en main. Comprobado en matella.net a 375 px en eu, es y ar: 14 lecciones (una por unidad) más Esponentzialak › exp-graph y Polinomikoak › parabola-a, 48 vistas: nada se sale, sin errores de KaTeX, títulos sin `$`.
