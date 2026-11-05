@@ -81,6 +81,9 @@ Commit 37971fe.
 - Para que la predicción tenga sentido, el dibujo (curva, barras, valores) se esconde hasta elegir; los controles cambian el estado sin enseñar nada.
 - Las cartas de memoria miden 106 px a 375 px (90 px útiles): `\lim\limits_{x\to a}` pone el «x → a» debajo y ahorra anchura; las asíntotas van en `\begin{gathered}…\end{gathered}`; en el nivel del infinito la carta no lleva «lim» y la explicación sí. Para medir, voltear las cartas de dos en dos y leer `getBoundingClientRect` del `.katex`.
 
-## En curso
+## Cierre
 
-- Cierre: build, revisión final, hoja de euskera para el dueño y aviso a la sesión principal. Después, el tema siguiente, Derivadas (ids 110000–110999), cortado de esta rama.
+- Fases: 1+2 en 316a89c, 3 en 37971fe, 4 en 72fa7af. Todo en `feat/limiteak-batx1z`, sin fusionar ni publicar.
+- `npm test` (2247), `npm run lint` y `npm run build` en verde; inventario OK (5 juegos propios, 7 herramientas propias; el script cuenta como propias las herramientas prestadas de Segidak y Funciones).
+- Revisión a 375 px en eu, es y ar: lecciones, resumen, diagnóstico, práctica, banco, retos, las 8 herramientas y los 8 juegos.
+- Hoja de revisión del euskera enviada al dueño: `limiteak-batx1z-euskera.html` (con `hoja-revision.mjs`, herramientas y juegos propios).
