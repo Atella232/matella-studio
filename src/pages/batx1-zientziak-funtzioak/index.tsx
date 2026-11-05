@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachFunctionsChallenges, bachFunctionsDiagnostic, bachFunctionsExerciseBank, bachFunctionsPractice } from './content'
 import { BachFunctionsHeroArt } from './figures'
+import { BachFunctionsLaboratory } from './lab'
+import { bachFunctionsLabChallengeIds, bachFunctionsLabToolForTopic, bachFunctionsLabTools } from './lab/labTools'
 import { bachFunctionsStages, bachFunctionsTopics } from './lessons'
 
 const funtzioakBatx1zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const funtzioakBatx1zUnit: UnitDefinition = {
     guidedPractice: bachFunctionsPractice,
     exerciseBank: bachFunctionsExerciseBank,
     challenges: bachFunctionsChallenges,
+    lab: {
+        description: {
+            eu: `${bachFunctionsLabTools.length} tresna, erronkekin: transformazioen tailerra, y = x ispilua, zati osoaren eskailera eta bi makina segidan, berriak; eta 4. DBHko izate-eremua eraikitzea, bikoitia ala bakoitia?, funtzio periodikoak, esponentziala eta logaritmoa mugitzen, bi zati lotzea eta balio absolutua tolestea.`,
+            es: `${bachFunctionsLabTools.length} herramientas con retos: el taller de transformaciones, el espejo y = x, la escalera de la parte entera y dos máquinas en cadena, nuevas; y de 4.º ESO, construye el dominio, ¿par o impar?, funciones periódicas, mueve la exponencial y el logaritmo, une dos trozos y dobla el valor absoluto.`,
+            en: `${bachFunctionsLabTools.length} tools with challenges: the transformation workshop, the mirror y = x, the integer part staircase and two machines in a row, new; and from 4th ESO, build the domain, even or odd?, periodic functions, move the exponential and the logarithm, join two pieces and fold the absolute value.`,
+            ar: `${bachFunctionsLabTools.length} أداة مع تحديات: ورشة التحويلات ومرآة y = x ودرج الجزء الصحيح وآلتان متتاليتان، وهي جديدة؛ ومن الصف الرابع: ابنِ المجال وزوجية أم فردية؟ والدوال الدورية وحرّك الدالة الأسية واللوغاريتم وصِل جزأين واطوِ القيمة المطلقة.`
+        },
+        progressIds: bachFunctionsLabChallengeIds,
+        toolForTopic: bachFunctionsLabToolForTopic,
+        render: (props) => <BachFunctionsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Puntu baten koordenatu bat eskatzen bada, hori bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si se pide una coordenada de un punto, solo esa.', en: 'Write a number: 5, −3, 1.5 or 3/2. If one coordinate of a point is asked for, only that one.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا طُلب أحد إحداثيي نقطة فاكتبه وحده.' },
         defaultForm: 'any',

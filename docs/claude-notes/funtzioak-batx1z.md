@@ -36,7 +36,7 @@ Es la cuarta unidad de Bachillerato y la primera del bloque Análisis: curso `ba
 
 ## Hecho
 
-**Fase 1+2, lecciones y contenido:**
+**Fase 1+2, lecciones y contenido, commit ad83cc8:**
 - **Lecciones:** las 15 tienen las diez mejoras de la teoría (`lessonTexts.ts` con definiciones, «Otro ejemplo», vocabulario y 7 «¿Por qué funciona?»; `lessonChecks.ts` con error típico y «Compruébalo»; 20 enlaces «Antes de empezar» a 4.º académicas y a Números reales de 1.º).
 - **Nombres trigonométricos:** `text.ts` copia la idea de Trigonometría de 4.º y la amplía a los arcos. `lessonTexts.ts` y `lessonChecks.ts` escriben `\sin`, `\tan`, `\arcsin`, `\arctan` igual en los cuatro idiomas (los tests comparan las fórmulas), y `lessons.tsx` los cambia con `localizeNames`: arcsen y arctg en castellano, arcsin y arctg en euskera, arcsin y arctan en inglés y árabe. `content.ts` y los pasos usan el `say` de `text.ts`, que ya los cambia.
 - **Dibujos nuevos (13):** `DomainFigure`, `PeriodicFigure`, `ShiftsFigure`, `ReflectionsFigure`, `StretchFigure`, `MachineFigure`, `MirrorFigure`, `ArcFigure`, `PiecewiseBachFigure`, `AbsoluteGraphFigure`, `StairsFigure`, `OperationsFigure`, `CompositionFigure`, más `BachFunctionsHeroArt`. De 4.º: `SymmetryFigure` (Funciones) y `LogGraphFigure` (Exponenciales).
@@ -45,6 +45,16 @@ Es la cuarta unidad de Bachillerato y la primera del bloque Análisis: curso `ba
 - **Test nuevo:** `tests/funtzioak-batx1z-content.test.ts`.
 - **Comprobación:** 2200 tests, lint y `tsc -b` en verde. Las 15 lecciones a 375 px en eu, es y ar sin desbordes ni errores de KaTeX.
 
+**Fase 3, laboratorio:** 11 herramientas.
+- **Propias (4),** con predicción antes del resultado, retos infinitos (`freshFrom`) y ▶:
+  - L1 `transform` «El taller de transformaciones», retos 108101–108105: una función madre (√x, x², |x|, 2ˣ, 1/x) con un punto P se convierte en $y=A\cdot f(Bx+c)+k$. Se predice si P va a la izquierda, se queda en la misma vertical o va a la derecha; ▶ lleva P a su sitio. Los retos de «construye» comparan la curva, no los números (|−x + 1| es |x − 1|). Lógica en `lab/transform.ts`.
+  - L2 `composition` «Dos máquinas en cadena», retos 108201–108205: máquinas +3, −2, ·2, ·(−1), x²; arriba $f\circ g$, abajo $g\circ f$. Se predice cuál sale mayor; ▶ hace pasar la x. Retos: llegar a un valor, encontrar el x con los dos órdenes iguales, dos máquinas que conmutan, descomponer $(x-2)^2$. Lógica en `lab/composition.ts`.
+  - L3 `mirror` «El espejo y = x», retos 108301–108305: parábola, |x|, 2ˣ o recta (movidas con v y w), un corte (todo, x ≥ c o x ≤ c) y una recta horizontal y = h. Se predice cuántas veces corta la recta a la parte que se guarda; ▶ dobla esa parte sobre y = x (verde si es función, rojo discontinuo si no). Lógica en `lab/mirror.ts`.
+  - L4 `stairs` «La escalera de la parte entera», retos 108351–108355: E(x) o x − E(x), con una sonda en décimas de −4 a 4 (se guarda en décimas para no redondear). Se predice si E(x) es el entero de la izquierda, el mismo o el de la derecha (nunca es el de la derecha); con la parte decimal, si es menor, igual o mayor que 0,5. ▶ recorre la escalera. Lógica en `lab/stairs.ts`.
+- **Prestadas (7),** con sus retos e ids de 4.º académicas: construye el dominio, ¿par o impar?, une dos trozos (Funciones), funciones periódicas (aplicadas), dobla el valor absoluto (Polinómicas), mueve la exponencial y el logaritmo (Exponenciales).
+- **Test:** `tests/funtzioak-batx1z-lab.test.ts`. 2205 tests en verde.
+- **Revisión:** las 4 propias a 375 px en eu, es y ar, antes y después de predecir: sin desbordes ni errores de KaTeX.
+
 ## Trucos
 
 - En las etiquetas de los dibujos en árabe, una fórmula con `∘` se da la vuelta (`f ∘ g` sale `g ∘ f`): `Label` solo aísla los trozos con letras, cifras y signos sencillos. Las fórmulas de composición van en `F` o sin `∘`.
@@ -52,7 +62,10 @@ Es la cuarta unidad de Bachillerato y la primera del bloque Análisis: curso `ba
 - Una palabra del vocabulario tiene que aparecer en la lección con su raíz: «repetir» no casa con «se repite» (la raíz es «repet»); «التقريب» no casa con «تقرّب».
 - Los grados en las fórmulas se escriben `60^\circ`: `°` dentro de `$…$` rompe KaTeX en modo estricto.
 
+- Las etiquetas de los botones de predicción son texto plano (no pasan por MathText): nada de fórmulas ni `∘` en ellas.
+- En `Readout` la fórmula no depende del idioma: en árabe hay que cambiar `{,}` por `.` a mano (el inglés lo cambia el motor).
+
 ## En curso
 
-- Fase 3, laboratorio: L1–L4 propias y las prestadas de 4.º.
-- Después, fase 4 (juegos), cierre (375 px, hoja de euskera) y el tema siguiente, Límites.
+- Fase 4, juegos: J1 «¿Dónde cae el punto?», J2 «Ordena las máquinas», J3 «Deshaz la máquina», detective, carrera, memoria y de 4.º «Pinta el dominio» y «Láser de curvas». Ids 108401–108899.
+- Después, cierre (375 px, hoja de euskera) y el tema siguiente, Límites.
