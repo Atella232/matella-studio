@@ -76,7 +76,7 @@ const allTexts = (): LocalizedText[] => [
     ...bank.flatMap((section) => [section.title, ...section.items.flatMap((item) => [item.question, item.solution])])
 ]
 /** The content and the lessons (read as text: they are TSX), where every equation must appear */
-const everything = () => `${allTexts().map((text) => text.es).join(' ')} ${readFileSync('src/pages/dbh4-akademikoak-sistemak/lessons.tsx', 'utf8').replace(/\\\\/g, '\\')}`
+const everything = () => `${allTexts().map((text) => text.es).join(' ')} ${['lessons.tsx', 'lessonTexts.ts', 'lessonChecks.ts'].map((file) => readFileSync(`src/pages/dbh4-akademikoak-sistemak/${file}`, 'utf8')).join(' ').replace(/\\\\/g, '\\')}`
 
 test('sistemak 4. DBH ak: the unit is active and routed', () => {
     const course = courses.find((item) => item.id === 'dbh4-akademikoak')!
@@ -187,7 +187,21 @@ const systems: Array<[string[], Point[], Point[]]> = [
     [['\\frac{1}{x-y}+\\frac{3}{x}=2', '3x-y-1=0'], [[1, 2], [3 / 4, 5 / 4]], []],
     [['x+y=1', 'x^{2}+xy+y^{2}=21'], [[-4, 5], [5, -4]], []],
     [['x+y=17', 'x^{2}+y^{2}=169'], [[12, 5], [5, 12]], []],
-    [['x+y=27', 'x^{2}-y^{2}=81'], [[15, 12]], []],
+    // The examples, mistakes and «Check it» questions of lessonTexts.ts and lessonChecks.ts
+    [['x+y=4', 'x-y=2'], [[3, 1]], []],
+    [['y=2x-3', 'y=-x+3'], [[2, 1]], []],
+    [['2x+y=1', '3x-2y=12'], [[2, -3]], []],
+    [['y=3x-4', 'y=x+2'], [[3, 5]], []],
+    [['3x+4y=10', '5x-2y=8'], [[2, 1]], []],
+    [['\\frac{x}{2}+y=5', '2(x-y)=x-2'], [[4, 3]], []],
+    [['y=x^{2}-3x', 'y=x-3'], [[1, -2], [3, 0]], []],
+    [['x^{2}+y^{2}=20', 'x^{2}-y^{2}=12'], [[4, 2], [4, -2], [-4, 2], [-4, -2]], []],
+    [['xy=-4', 'x+y=3'], [[4, -1], [-1, 4]], []],
+    [['x-4y=2', '2x+y=13'], [[6, 1]], []],
+    [['x=5-y', 'x=2y-1'], [[3, 2]], []],
+    [['xy=12', 'x-y=1'], [[4, 3], [-3, -4]], [[3, 4], [-4, -3]]],
+    [['x^{2}+y^{2}=5', 'x^{2}-y^{2}=3'], [[2, 1], [2, -1], [-2, 1], [-2, -1]], []],
+    [['x^{2}+y^{2}=10', 'y=3x'], [[1, 3], [-1, -3]], []],
     [['x+y=14', 'xy=48'], [[8, 6], [6, 8]], []],
     [['3x+2y=7', '5x-2y=9'], [[2, 1 / 2]], []],
     [['4x-3y=-1', 'x-2y=-9'], [[5, 7]], []],
@@ -245,7 +259,9 @@ const halfPlanes: Array<[string, Point[], Point[]]> = [
     ['3x+2y\\le 12', [[0, 6], [4, 0], [1, 4]], [[1, 5], [5, 0]]],
     ['3x+2y\\le 20', [[4, 4]], [[5, 5]]],
     ['2x+y\\le 10', [[3, 4]], [[3, 5]]],
-    ['x+y<6', [[1, 4]], [[1, 5]]]
+    ['x+y<6', [[1, 4]], [[1, 5]]],
+    ['x-2y>2', [[4, 0], [0, -2]], [[0, 0]]],
+    ['y>2x+1', [[0, 2]], [[1, 1], [2, 4]]]
 ]
 
 test('sistemak 4. DBH ak: every inequality holds inside its half-plane and fails outside', () => {

@@ -19,3 +19,6 @@ Build the box plot (82301–3), guess the correlation (82401–3) and a statisti
 Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).
 
 **Sufijos del euskera en el archivo de lecciones (2026-11-03, rama `feat/lessons-eu-suffixes`, commit 817ad3c, publicado el 2026-11-03: main fb72223, bundle `index-CWC0dhqi.js`):** 14 textos de `lessons.tsx` (20 sufijos): «60 600etik» → «600 ikasletatik 60», «6,5eko batez bestekoarekin» → «batez bestekoa 6,5 da», «% 80k / % 20k» → «% 80 batek / % 20 batek», «1ean / 3an» → «1 balioan / 3 balioan», «$Q_1$-en azpian» → «$Q_1$ kuartilaren azpian», «0tik hurbil» → «0 baliotik hurbil». Solo cambia el euskera; las fórmulas son las mismas en los cuatro idiomas. Lo vigila `tests/lessons-basque-suffixes.test.ts`, que ahora mira el archivo de lecciones de todas las unidades.
+
+
+**Teoría con las mejoras de 2. DBH (2026-11-05, rama `claude/teoria-dbh4ak-d45b04`, commit d7ec2bf, sin publicar):** `lessonTexts.ts` y `lessonChecks.ts` en las 15 lecciones; 17 enlaces (3. DBH Estadística, Proporcionalidad y Funciones lineales; Reales y Polinómicas de 4.º); 3 «¿Por qué funciona?» (un atípico mueve la media y no la mediana, las desviaciones suman 0, el CV divide entre la media); 9 dibujos tras los pasos. El euskera escribe el porcentaje delante (% 25). Detalles en `teoria-dbh4ak.md`.

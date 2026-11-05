@@ -19,3 +19,6 @@ How many glasses? (70301–3), grow it k times (70401–3) and a geometry detect
 Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).
 
 **Sufijos del euskera en el archivo de lecciones (2026-11-03, rama `feat/lessons-eu-suffixes`, commit 817ad3c, publicado el 2026-11-03: main fb72223, bundle `index-CWC0dhqi.js`):** 1 texto de `lessons.tsx`: «3-z zatitzea ahaztea» → «3 zenbakiaz zatitzea ahaztea». Solo cambia el euskera; las fórmulas son las mismas en los cuatro idiomas. Lo vigila `tests/lessons-basque-suffixes.test.ts`, que ahora mira el archivo de lecciones de todas las unidades.
+
+
+**Teoría con las mejoras de 2. DBH (2026-11-04, rama `claude/teoria-dbh4ak-d45b04`, commits a0bbb6e y ceef7b0, sin publicar):** `lessonTexts.ts` y `lessonChecks.ts` en las 15 lecciones; 8 enlaces a 3. DBH; 3 «¿Por qué funciona?» (tres pirámides en un cubo, teorema de la altura, $k^{2}$ y $k^{3}$); el segmento circular, con el dibujo tras los pasos. Los dos ejemplos largos (partes del círculo, área de poliedros), en dos filas. Detalles en `teoria-dbh4ak.md`.

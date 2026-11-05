@@ -16,3 +16,6 @@ Phase 1+2 DONE a3617c0 (diag 5101–5108, practice 1–20, challenges 101–115,
 Root hunt, simplify the fraction and the polynomials detective (shared with the applied track): see [dbh4-own-games](dbh4-own-games.md).
 
 **Sufijos del euskera en el archivo de lecciones (2026-11-03, rama `feat/lessons-eu-suffixes`, commit 817ad3c, publicado el 2026-11-03: main fb72223, bundle `index-CWC0dhqi.js`):** 6 textos de `lessons.tsx` (12 sufijos): «1ekin hasi» → «1 zenbakiarekin hasi», «n-tik 0ra … 0tik n-ra» → «n baliotik 0 baliora … 0 baliotik n baliora», «$2x-1$-z / $x-\frac{1}{2}$-z» → «… binomioaz», «Ruffinik 2rekin» → «Ruffinik 2 zenbakiarekin». Solo cambia el euskera; las fórmulas son las mismas en los cuatro idiomas. Lo vigila `tests/lessons-basque-suffixes.test.ts`, que ahora mira el archivo de lecciones de todas las unidades.
+
+
+**Teoría con las mejoras de 2. DBH (2026-11-04, rama `claude/teoria-dbh4ak-d45b04`, commits 9430ec1, 0ac8c74 y 3396946, sin publicar):** `lessonTexts.ts` y `lessonChecks.ts` en las 15 lecciones; 13 enlaces a 3. DBH; 3 «¿Por qué funciona?» (cuadrado de una suma, teorema del resto, raíces y factores). Los ejemplos son identidades: la unidad está en `identityUnits` y se comprueban con dos juegos de números. El paso del m.c.d. y el m.c.m. (15,8 px), en dos filas. Detalles en `teoria-dbh4ak.md`.
