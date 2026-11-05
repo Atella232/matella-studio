@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readTrigonometryAnswer } from '../dbh4-akademikoak-trigonometria/answers'
 import { trianglesChallenges, trianglesDiagnostic, trianglesExerciseBank, trianglesPractice } from './content'
 import { TrianglesHeroArt } from './figures'
+import { TrianglesLaboratory } from './lab'
+import { trianglesLabChallengeIds, trianglesLabToolForTopic, trianglesLabTools } from './lab/labTools'
 import { trianglesStages, trianglesTopics } from './lessons'
 
 const triangeluakBatx1zUnit: UnitDefinition = {
@@ -25,6 +27,17 @@ const triangeluakBatx1zUnit: UnitDefinition = {
     guidedPractice: trianglesPractice,
     exerciseBank: trianglesExerciseBank,
     challenges: trianglesChallenges,
+    lab: {
+        description: {
+            eu: `${trianglesLabTools.length} tresna, erronkekin: kasu zalantzazkoaren konpasa, 2R zirkunferentzia eta kosinuaren bisagra, berriak; eta 4. DBHko zirkunferentzia goniometrikoa, kalkulagailua, bi alde ezagututa, behaketa bikoitza eta azalera ½ · b · c · sin A.`,
+            es: `${trianglesLabTools.length} herramientas con retos: el compás del caso dudoso, la circunferencia de 2R y la bisagra del coseno, nuevas; y de 4.º ESO, la circunferencia goniométrica, la calculadora, conociendo dos lados, la doble observación y el área ½ · b · c · sen A.`,
+            en: `${trianglesLabTools.length} tools with challenges: the compass of the ambiguous case, the circle of 2R and the hinge of the cosine rule, new; and from 4th ESO, the unit circle, the calculator, knowing two sides, two observations and the area ½ · b · c · sin A.`,
+            ar: `${trianglesLabTools.length} أدوات مع تحديات: فرجار الحالة الملتبسة ودائرة 2R ومفصل جيب التمام، وهي جديدة؛ ومن الصف الرابع: الدائرة المثلثية والآلة الحاسبة وبمعرفة ضلعين والرصد المزدوج والمساحة ½ · b · c · sin A.`
+        },
+        progressIds: trianglesLabChallengeIds,
+        toolForTopic: trianglesLabToolForTopic,
+        render: (props) => <TrianglesLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat, komarekin edo puntuarekin (0,75 edo 0.75), unitaterik gabe; angeluak gradutan. Negatiboak minus ikurrarekin.', es: 'Escribe un número, con coma o con punto (0,75 o 0.75), sin la unidad; los ángulos, en grados. Los negativos, con signo menos.', en: 'Write a number (a decimal point or a comma both work, e.g. 0.75), without the unit; angles in degrees. Negatives with a minus sign.', ar: 'اكتب عددًا بالنقطة أو بالفاصلة (0.75) دون الوحدة؛ والزوايا بالدرجات. والسالب بإشارة الناقص.' },
         defaultForm: 'any',
