@@ -37,6 +37,7 @@ const EsponentzialakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-es
 const EstatistikaDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-estatistika').then((module) => ({ default: module.EstatistikaDbh4AkIntroPage })))
 const KonbinatoriaDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-konbinatoria').then((module) => ({ default: module.KonbinatoriaDbh4AkIntroPage })))
 const ProbabilitateaDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-probabilitatea').then((module) => ({ default: module.ProbabilitateaDbh4AkIntroPage })))
+const ErrealakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-errealak').then((module) => ({ default: module.ErrealakBatx1zIntroPage })))
 const PolinomikoakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-polinomikoak').then((module) => ({ default: module.PolinomikoakDbh4AkIntroPage })))
 const AreakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-areak').then((module) => ({ default: module.AreakDbh4ApIntroPage })))
 const EkuazioakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-ekuazioak').then((module) => ({ default: module.EkuazioakDbh4ApIntroPage })))
@@ -369,6 +370,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/dbh4-akademikoak/probabilidad/*',
                         element: <ProbabilitateaDBH4AkPage />,
+                    },
+                    // Números reales de 1.º Bachillerato (Ciencias): unidad V2
+                    {
+                        path: 'matematika/batx1-zientziak/numeros-reales/*',
+                        element: <ErrealakBatx1zPage />,
                     },
                     // Números reales y porcentajes de 4.º ESO (matemáticas académicas): unidad V2
                     {

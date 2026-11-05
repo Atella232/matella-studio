@@ -160,7 +160,7 @@ export const courses: Course[] = [
     descriptionEn: 'Mathematics I: analysis, geometry and statistics',
     color: '#267b53',
     topics: [
-      { id: 'numeros-reales', name: 'Números Reales', nameEu: 'Zenbaki Errealak', nameAr: 'الأعداد الحقيقية', nameEn: 'Real Numbers', icon: '∞' },
+      { id: 'numeros-reales', name: 'Números Reales', nameEu: 'Zenbaki Errealak', nameAr: 'الأعداد الحقيقية', nameEn: 'Real Numbers', icon: '∞', active: true },
       { id: 'sucesiones', name: 'Sucesiones', nameEu: 'Segidak', nameAr: 'المتتاليات', nameEn: 'Sequences', icon: '🔢' },
       { id: 'ecuaciones-inecuaciones', name: 'Ecuaciones e Inecuaciones', nameEu: 'Ekuazioak eta Inekuazioak', nameAr: 'المعادلات والمتراجحات', nameEn: 'Equations and Inequalities', icon: '⚖️' },
       { id: 'sistemas', name: 'Sistemas de Ecuaciones', nameEu: 'Ekuazio-sistemak', nameAr: 'أنظمة المعادلات', nameEn: 'Systems of Equations', icon: '📝' },

@@ -25,8 +25,8 @@ type Texts = {
 const pages = new URL('../src/pages/', import.meta.url)
 const languages = ['eu', 'es', 'en', 'ar'] as const
 
-/** At most this many words in the Spanish explanation (a formula counts as one word); 4. DBH says more */
-const explanationWords = (folder: string) => (folder.startsWith('dbh4') ? 60 : 50)
+/** At most this many words in the Spanish explanation (a formula counts as one word); 4. DBH and Bachillerato say more */
+const explanationWords = (folder: string) => (folder.startsWith('dbh4') || folder.startsWith('batx') ? 60 : 50)
 /** At most this many words in a case, a definition or the statement of the example */
 const shortWords = 30
 
