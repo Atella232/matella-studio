@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { bachStatsChallenges, bachStatsDiagnostic, bachStatsExerciseBank, bachStatsPractice } from './content'
 import { BachStatsHeroArt } from './figures'
+import { BachStatsLaboratory } from './lab'
+import { bachStatsLabChallengeIds, bachStatsLabToolForTopic, bachStatsLabTools } from './lab/labTools'
 import { bachStatsStages, bachStatsTopics } from './lessons'
 
 const estatistikaBatx1zUnit: UnitDefinition = {
@@ -25,6 +27,17 @@ const estatistikaBatx1zUnit: UnitDefinition = {
     guidedPractice: bachStatsPractice,
     exerciseBank: bachStatsExerciseBank,
     challenges: bachStatsChallenges,
+    lab: {
+        description: {
+            eu: `${bachStatsLabTools.length} tresna, erronkekin: puntuazio tipikoa, atipikoa ala ez eta histogramaren isatsa, berriak; eta 4. DBHko maiztasun metatuak, tarteak, batez bestekoa, mediana eta moda, histograma, bi taldeen balantza, pertzentilen zinta, biboteak, distantziak eta karratuak, taula baten σ eta a · x + b, eta 3. DBHko ardatz engainagarria.`,
+            es: `${bachStatsLabTools.length} herramientas con retos: la puntuación típica, ¿atípico o no? y la cola del histograma, nuevas; y de 4.º ESO, frecuencias acumuladas, intervalos, media, mediana y moda, histograma, la balanza de dos grupos, la cinta de los percentiles, los bigotes, distancias y cuadrados, la σ de una tabla y a · x + b, y el eje engañoso de 3.º ESO.`,
+            en: `${bachStatsLabTools.length} tools with challenges: the standard score, outlier or not? and the tail of the histogram, new; and from 4th ESO, cumulative frequencies, intervals, mean, median and mode, the histogram, the two-group balance, the percentile tape, the whiskers, distances and squares, the σ of a table and a · x + b, and the misleading axis from 3rd ESO.`,
+            ar: `${bachStatsLabTools.length} أداة مع تحديات: الدرجة المعيارية وشاذ أم لا وذيل المدرّج، وهي جديدة؛ ومن الصف الرابع: التكرارات المتجمّعة والفئات والمتوسط والوسيط والمنوال والمدرّج وميزان المجموعتين وشريط المئينات والشاربان والمسافات والمربعات وσ لجدول وa · x + b؛ والمحور المضلِّل من الصف الثالث.`
+        },
+        progressIds: bachStatsLabChallengeIds,
+        toolForTopic: bachStatsLabToolForTopic,
+        render: (props) => <BachStatsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −2, 0,15 edo 3/4. Ehunekoak, % ikurrik gabe.', es: 'Escribe un número: 5, −2, 0,15 o 3/4. Los porcentajes, sin el signo %.', en: 'Write a number: 5, −2, 0.15 or 3/4. Percentages without the % sign.', ar: 'اكتب عددًا: 5 أو ⁦−2⁩ أو 0.15 أو 3/4. والنسب المئوية بلا علامة ٪.' },
         defaultForm: 'any',
