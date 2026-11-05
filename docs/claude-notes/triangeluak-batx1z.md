@@ -61,6 +61,7 @@ Es la cuarta unidad de Bachillerato (bloque Trigonometría del reparto en parale
 - En `lessonTexts.ts` y `lessonChecks.ts` se escribe `\sin` y `\tan`; `lessons.tsx` los pasa por `localizeNames` (sen y tg en castellano, tg en euskera). En `lessons.tsx` y `content.ts` se escribe `\sen` y `\tg` con el `say` de 4.º.
 - Los dibujos de lección miden 720 de ancho y a 375 px se ven a 0,417: la letra tiene que ser de 21 px o más (8,75 px en pantalla), como en Ekuazioak.
 - Dos fórmulas `b=… \qquad c=…` del ejemplo no cabían a 375 px: van en dos filas con `gathered`.
+- Las soluciones del banco no encogen como las lecciones: a 375 px el cuadro mide 257 px. Toda fórmula con `\qquad` o `\to` de `content.ts` va en filas (`gathered`), y las cadenas largas se parten tras el primer `=`. Para revisarlas hay que escribir un intento y pulsar «Comparar con la resolución»; en práctica y retos, responder (el botón árabe es «تحقق»). El test de la unidad junta las filas que empiezan por = o ≈ con la de arriba.
 - Al revisar con el navegador, «Ver todos los pasos» mueve la página al último paso un segundo después: espera antes de centrar el dibujo.
 - La comprobación de números salta el lado «mal» del error típico (está mal a propósito).
 - En los resultados del laboratorio, una fórmula con `\\qquad` no cabe a 375 px: una fórmula por línea.

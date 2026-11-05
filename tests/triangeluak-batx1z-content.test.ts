@@ -102,7 +102,10 @@ const decimals = (latex: string) => /\{,\}(\d+)\D*$/.exec(latex.trim())?.[1].len
 /** Checks the = and ≈ of a formula whose sides are numbers; returns how many it read */
 function checkFormula(formula: string, where: string): number {
     let read = 0
-    const pieces = formula.replace(/\\begin\{[a-z]+\}|\\end\{[a-z]+\}/g, ' ').split(/\\\\|\\qquad|\\quad|\\ \\to\\ |\\to/)
+    // Rows (a row that starts with = or ≈ goes on with the one above), wide spaces and arrows start something new
+    const pieces = formula.replace(/\\begin\{[a-z]+\}|\\end\{[a-z]+\}/g, ' ').split(/\\\\/)
+        .reduce<string[]>((rows, row) => (/^\s*(?:=|\\approx)/.test(row) && rows.length ? [...rows.slice(0, -1), rows.at(-1) + row] : [...rows, row]), [])
+        .flatMap((row) => row.split(/\\qquad|\\quad|\\ \\to\\ |\\to/))
     for (const piece of pieces) {
         for (const part of piece.split(/<|>|\\le|\\ge|\\neq/)) {
             const sides = part.split(/(=|\\approx)/)
