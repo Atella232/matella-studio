@@ -44,6 +44,7 @@ Segunda unidad del bloque Geometría (reparto en paralelo de 1.º Ciencias, ver 
 
 - Comprobación final: 2244 tests, lint y build en verde.
 - Inventario: 3 juegos propios (Rectas gemelas, El radar y el detective) y 3 herramientas propias (haz, ángulo y distancia más corta) → OK. El script cuenta también «Encuentra k» y «La segunda recta» como propios, pero son de 4.º.
+- Revisión final a 375 px en eu, es y ar con las 50 soluciones del banco y las 35 explicaciones de práctica y retos abiertas: sin desbordes, sin errores de KaTeX ni fórmulas de menos de 13 px. Las 35 respuestas se aceptan escritas con coma o con punto.
 - Hoja de euskera: `hoja-revision.mjs` con `--herramientas pencil,line-angle,shortest --juegos twins,radar,detective,race,memory`, en la carpeta de notas compartidas de la sesión (`geometria-batx1z-revision.html`).
 
 ## Trucos
