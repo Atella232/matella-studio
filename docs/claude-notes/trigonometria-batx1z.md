@@ -38,6 +38,19 @@ V1 repaso corto y lo nuevo a fondo; V2 sec, cosec y cotg aquí; V3 ecuaciones en
 - Prestadas con sus ids: `radian` y `circle` de 4.º trigonometría (71901–71904 y 71001–71004) y `wave` de 4.º funciones exponenciales (79401–79405).
 - Test `tests/trigonometria-batx1z-lab.test.ts`: la fórmula de la suma coincide con la razón de α ± β para todos los pares de la herramienta, `spinSolutions` coincide con una búsqueda fina, y las seis razones cumplen 1 + tg² = sec² y el signo de su razón.
 
+### Fase 4: juegos
+
+- Siete juegos (`games/info.ts`), ids 103401–103823:
+  - `race` (103401–103405): cinco circuitos, uno por etapa, con 16 tipos de pregunta (radianes como «aπ», secante y cosecante con signo, suma de senos, cosenos y tangentes con ternas pitagóricas, sen 2α, cos 2α, coseno del ángulo mitad, cuántas soluciones, la mayor, ecuaciones de segundo grado, periodo, amplitud y noria). Las opciones malas son los errores típicos.
+  - `build` J1 «Monta la fórmula» (103501–103503, `build.ts`): huecos de una fórmula que se rellenan pieza a pieza. Cada pieza lleva su valor numérico y el test comprueba que solo una combinación da el lado izquierdo. Las letras cambian (α, β; x, y; A, B) con `lettered`, que deja un espacio para no pegar `\sen` y `x`.
+  - `hunt` J2 «Caza las soluciones» (103601–103603, `hunt.ts`): circunferencia con un punto cada 15° que se tocan; nivel 2 con nx (solo los casos cuyas soluciones caen en múltiplos de 15°), nivel 3 con 12 ecuaciones de segundo grado y con fórmulas.
+  - `exact` J3 «Valor exacto» (103701–103703, `exact.ts`): cuatro valores con los dos signos y las dos raíces; nivel 3 con ángulos mitad (raíces anidadas).
+  - `detective` J4 (103801–103803, `detective.ts`): 12 errores típicos de la unidad.
+  - `memory` (103811–103813, `boards.ts`): grados ↔ radianes, sec/cosec/cotg de notables ↔ valor, razón de 75°, 15°… ↔ valor exacto. Las cartas llevan `\sen` y `\cosec`: `index.tsx` las pasa por `localize` del idioma antes de dárselas al juego (el motor de memoria no tiene `localize`).
+  - `circle` (103821–103823): «La circunferencia» de 4.º (`UnitCircleGame`) en lugar del láser, que no tiene curvas trigonométricas.
+- Test `tests/trigonometria-batx1z-games.test.ts`.
+- Pendiente fuera de esta unidad: el lector de pantalla de la memoria (`spokenLatex` del motor) lee `\operatorname{cosec}` y `\sqrt{3}` tal cual. No se ha tocado el motor.
+
 ## Trucos
 
 - `text.ts` propio: `say` y `same` envuelven los de 4.º y además cambian `\cosec` y `\cotg` (`\operatorname{cosec}` y `\operatorname{cotg}` en eu y es; `\csc` y `\cot` en en y ar). `localizeNames` pasa `\sin`, `\tan`, `\csc` y `\cot` de `lessonTexts.ts` y `lessonChecks.ts` a esos nombres.
@@ -50,4 +63,4 @@ V1 repaso corto y lo nuevo a fondo; V2 sec, cosec y cotg aquí; V3 ecuaciones en
 
 ## En curso
 
-- Fases 1+2 (72f2ee1a) y 3 hechas. Siguiente: fase 4, juegos: J1 monta la fórmula, J2 caza las soluciones, J3 valor exacto, J4 detective, carrera, memoria y «La circunferencia» de 4.º (ids 1034xx–1038xx).
+- Fases 1+2 (72f2ee1a), 3 (18158e89) y 4 hechas. Siguiente: cierre (revisión a 375 px de ejercicios, práctica, retos y banco en eu, es y ar; hoja de euskera; informe).

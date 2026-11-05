@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readTrigonometryAnswer } from '../dbh4-akademikoak-trigonometria/answers'
 import { trigonometryChallenges, trigonometryDiagnostic, trigonometryExerciseBank, trigonometryPractice } from './content'
 import { TrigonometryHeroArt } from './figures'
+import { TrigonometryBatx1zGames } from './games'
+import { TRIGONOMETRY_BATX1Z_GAME_RECORDS_KEY, trigonometryBatx1zGameProgressIds } from './games/info'
 import { TrigonometryBatx1zLaboratory } from './lab'
 import { trigonometryBatx1zLabChallengeIds, trigonometryBatx1zLabToolForTopic, trigonometryBatx1zLabTools } from './lab/labTools'
 import { trigonometryStages, trigonometryTopics } from './lessons'
@@ -37,6 +39,17 @@ const trigonometriaBatx1zUnit: UnitDefinition = {
         progressIds: trigonometryBatx1zLabChallengeIds,
         toolForTopic: trigonometryBatx1zLabToolForTopic,
         render: (props) => <TrigonometryBatx1zLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zazpi joko: lasterketa, muntatu formula, ehizatu soluzioak, balio zehatza, trigonometriaren detektibea eta memoria, berriak; eta 4. DBHko zirkunferentzia goniometrikoa, radianen mailarekin.',
+            es: 'Siete juegos: carrera, monta la fórmula, caza las soluciones, valor exacto, detective de trigonometría y memoria, nuevos; y de 4.º ESO, la circunferencia goniométrica, con su nivel de radianes.',
+            en: 'Seven games: race, build the formula, hunt the solutions, exact value, trigonometry detective and memory, new; and from 4th ESO, the unit circle, with its radian level.',
+            ar: 'سبع ألعاب: السباق وركّب الصيغة واصطد الحلول والقيمة الدقيقة ومخبر حساب المثلثات والذاكرة، وهي جديدة؛ ومن الصف الرابع: الدائرة المثلثية بمستوى الراديان.'
+        },
+        progressIds: trigonometryBatx1zGameProgressIds,
+        recordsKey: TRIGONOMETRY_BATX1Z_GAME_RECORDS_KEY,
+        render: (props) => <TrigonometryBatx1zGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat edo zatiki bat (3/4), komarekin edo puntuarekin (0,75 edo 0.75); angeluak gradutan. Negatiboak minus ikurrarekin.', es: 'Escribe un número o una fracción (3/4), con coma o con punto (0,75 o 0.75); los ángulos, en grados. Los negativos, con signo menos.', en: 'Write a number or a fraction (3/4); a decimal point or a comma both work (0.75); angles in degrees. Negatives with a minus sign.', ar: 'اكتب عددًا أو كسرًا (3/4) بالنقطة أو بالفاصلة (0.75)؛ والزوايا بالدرجات. والسالب بإشارة الناقص.' },
