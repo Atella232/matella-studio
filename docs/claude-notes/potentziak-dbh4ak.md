@@ -19,3 +19,6 @@ Simplify the radical (62301–3), find the exponent (62401–3) and a powers det
 Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).
 
 **Sufijos del euskera en el archivo de lecciones (2026-11-03, rama `feat/lessons-eu-suffixes`, commit 817ad3c, publicado el 2026-11-03: main fb72223, bundle `index-CWC0dhqi.js`):** 11 textos de `lessons.tsx` (12 sufijos): «2ari» → «2 zenbakiari», «2-ren $3:3=1$» → «2 zenbakiaren $3:3=1$», «10en berretura» → «10 oinarriko berretura», «Osatu 5eraino» → «Osatu 5 arte», «1en desberdina» → «baina ez 1». Solo cambia el euskera; las fórmulas son las mismas en los cuatro idiomas. Lo vigila `tests/lessons-basque-suffixes.test.ts`, que ahora mira el archivo de lecciones de todas las unidades.
+
+
+**Teoría con las mejoras de 2. DBH (2026-11-04, rama `claude/teoria-dbh4ak-d45b04`, commit 2f1fe93, sin publicar):** `lessonTexts.ts` y `lessonChecks.ts` en las 15 lecciones; 9 enlaces a 3. DBH; 4 «¿Por qué funciona?» (exponente 0 y negativo, $a^{1/2}=\sqrt{a}$, logaritmo del producto, cambio de base); «Una raíz cuadrada en el denominador» con el dibujo tras los pasos. Detalles en `teoria-dbh4ak.md`.

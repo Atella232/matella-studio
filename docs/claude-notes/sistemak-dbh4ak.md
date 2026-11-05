@@ -18,3 +18,6 @@ DEPLOYED 2026-10-12 (main 45468d6, bundle index-CgDsm_eM), with the phone-steps 
 ## Own games (2026-11-02)
 
 The crossing point, touch the solution and the systems detective: see [dbh4-own-games](dbh4-own-games.md).
+
+
+**Teoría con las mejoras de 2. DBH (2026-11-04, rama `claude/teoria-dbh4ak-d45b04`, commits b8a084b y 3396946, sin publicar):** `lessonTexts.ts` y `lessonChecks.ts` en las 15 lecciones; 16 enlaces; 3 «¿Por qué funciona?» (punto de corte, sumar igualdades, un punto de prueba basta). `tests/sistemak-dbh4ak-content.test.ts` lee ahora los tres archivos y comprueba 14 sistemas y 2 semiplanos nuevos. Un paso de «Recta y curva», en dos filas. Detalles en `teoria-dbh4ak.md`.

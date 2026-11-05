@@ -15,3 +15,6 @@ The vector jump (74301–3), find k (74401–3) and a vectors detective (74501�
 Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).
 
 **Sufijos del euskera en el archivo de lecciones (2026-11-03, rama `feat/lessons-eu-suffixes`, commit 817ad3c, publicado el 2026-11-03: main fb72223, bundle `index-CWC0dhqi.js`):** 1 texto de `lessons.tsx`: «(1eko modulukoa)» → «(modulua 1 duena)». Solo cambia el euskera; las fórmulas son las mismas en los cuatro idiomas. Lo vigila `tests/lessons-basque-suffixes.test.ts`, que ahora mira el archivo de lecciones de todas las unidades.
+
+
+**Teoría con las mejoras de 2. DBH (2026-11-05, rama `claude/teoria-dbh4ak-d45b04`, commit 955ad83, sin publicar):** `lessonTexts.ts` y `lessonChecks.ts` en las 15 lecciones; 12 enlaces (3. DBH Movimientos, Geometría plana y Funciones lineales; Trigonometría y Sistemas de 4.º); 3 «¿Por qué funciona?» (vectores paralelos, punto medio, pendiente = tangente); 8 dibujos tras los pasos. `tests/bektoreak-dbh4ak-content.test.ts` lee ahora los tres archivos. Detalles en `teoria-dbh4ak.md`.

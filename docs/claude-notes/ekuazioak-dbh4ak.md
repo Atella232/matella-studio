@@ -19,3 +19,6 @@ DEPLOYED 2026-10-12 (main 12332da, bundle index-DLz3HLPh). Next unit only when a
 Is it a solution?, paint the solution and the equations detective: see [dbh4-own-games](dbh4-own-games.md).
 
 **Sufijos del euskera en el archivo de lecciones (2026-11-03, rama `feat/lessons-eu-suffixes`, commit 817ad3c, publicado el 2026-11-03: main fb72223, bundle `index-CWC0dhqi.js`):** 2 textos de `lessons.tsx`: «$-5$-ez zatitzean» → «$-5$ zenbakiaz zatitzean», «ez da 10era iristen» → «ez da 10 izatera iristen». Solo cambia el euskera; las fórmulas son las mismas en los cuatro idiomas. Lo vigila `tests/lessons-basque-suffixes.test.ts`, que ahora mira el archivo de lecciones de todas las unidades.
+
+
+**Teoría con las mejoras de 2. DBH (2026-11-04, rama `claude/teoria-dbh4ak-d45b04`, commits 7612033 y 0556f95, sin publicar):** `lessonTexts.ts` y `lessonChecks.ts` en las 15 lecciones; 17 enlaces (3. DBH y Potencias, Polinomios y Reales de 4.º); 3 «¿Por qué funciona?» (suma y producto de raíces, soluciones falsas al elevar al cuadrado, signo constante entre raíces). En árabe, inecuación es «متراجحة», como en el resto de la unidad. Un paso de «Problemas de segundo grado» se salía 4 px: en dos filas. Las comprobaciones con logaritmos dan las respuestas como números sueltos (el test no lee logaritmos). Detalles en `teoria-dbh4ak.md`.

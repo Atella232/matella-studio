@@ -19,3 +19,6 @@ The paths of the tree (86301–3), the contingency table (86401–3) and a proba
 Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).
 
 **Sufijos del euskera en el archivo de lecciones (2026-11-03, rama `feat/lessons-eu-suffixes`, commit 817ad3c, publicado el 2026-11-03: main fb72223, bundle `index-CWC0dhqi.js`):** 10 textos de `lessons.tsx` (15 sufijos): «1etik 10era zenbakitutako 10 bola» → «10 bola …, 1 eta 10 arteko zenbakiekin», «240k eta 100ek» → «240 ikaslek eta 100 ikaslek», «49tik 6 zenbakirekin» → «49 zenbakitatik 6 aukeratuta», «1etik kentzea» → «1 zenbakiari kentzea». Solo cambia el euskera; las fórmulas son las mismas en los cuatro idiomas. Lo vigila `tests/lessons-basque-suffixes.test.ts`, que ahora mira el archivo de lecciones de todas las unidades.
+
+
+**Teoría con las mejoras de 2. DBH (2026-11-05, rama `claude/teoria-dbh4ak-d45b04`, commit 72d1d03, sin publicar):** `lessonTexts.ts` y `lessonChecks.ts` en las 15 lecciones; 11 enlaces (3. DBH Estadística y probabilidad; Reales, Estadística y Combinatoria de 4.º); 3 «¿Por qué funciona?» (restar la intersección, dividir entre $P(B)$, la esperanza como media); 11 dibujos tras los pasos. Detalles en `teoria-dbh4ak.md`.

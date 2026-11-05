@@ -17,3 +17,6 @@ Does order matter? (84301–3), the box method (84401–3) and a combinatorics d
 Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).
 
 **Sufijos del euskera en el archivo de lecciones (2026-11-03, rama `feat/lessons-eu-suffixes`, commit 817ad3c, publicado el 2026-11-03: main fb72223, bundle `index-CWC0dhqi.js`):** 9 textos de `lessons.tsx` (11 sufijos): «Mutilak: 5etik 2» → «Mutilak: 5 mutiletatik 2», «Neskak: 4tik 3» → «Neskak: 4 nesketatik 3», «$n$etatik» → «$n$ elementutatik», «$n-1$ak» → «$n-1$ elementuak», «3ko nahasketak» → «3 koloreko nahasketak». Solo cambia el euskera; las fórmulas son las mismas en los cuatro idiomas. Lo vigila `tests/lessons-basque-suffixes.test.ts`, que ahora mira el archivo de lecciones de todas las unidades.
+
+
+**Teoría con las mejoras de 2. DBH (2026-11-05, rama `claude/teoria-dbh4ak-d45b04`, commit 2850b12, sin publicar):** `lessonTexts.ts` y `lessonChecks.ts` en las 15 lecciones; 4 enlaces (3. DBH Estadística y Geometría plana; Potencias y Polinomios de 4.º); 3 «¿Por qué funciona?» (dividir entre $k!$, la regla del triángulo, «al menos una» con el contrario); 10 dibujos tras los pasos. La notación V, VR, P y C es la misma en los cuatro idiomas. La respuesta buena de «Compruébalo» cambia de sitio (el test lo pide). Detalles en `teoria-dbh4ak.md`.
