@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readTrigonometryAnswer } from '../dbh4-akademikoak-trigonometria/answers'
 import { trigonometryChallenges, trigonometryDiagnostic, trigonometryExerciseBank, trigonometryPractice } from './content'
 import { TrigonometryHeroArt } from './figures'
+import { TrigonometryBatx1zLaboratory } from './lab'
+import { trigonometryBatx1zLabChallengeIds, trigonometryBatx1zLabToolForTopic, trigonometryBatx1zLabTools } from './lab/labTools'
 import { trigonometryStages, trigonometryTopics } from './lessons'
 
 const trigonometriaBatx1zUnit: UnitDefinition = {
@@ -25,6 +27,17 @@ const trigonometriaBatx1zUnit: UnitDefinition = {
     guidedPractice: trigonometryPractice,
     exerciseBank: trigonometryExerciseBank,
     challenges: trigonometryChallenges,
+    lab: {
+        description: {
+            eu: `${trigonometryBatx1zLabTools.length} tresna, erronkekin: sei arrazoiak zirkunferentzian, batzen diren bi angelu eta birak ematen dituzten soluzioak, berriak; eta 4. DBHko radiana eta arkua, zirkunferentzia goniometrikoa eta uhinen laborategia.`,
+            es: `${trigonometryBatx1zLabTools.length} herramientas con retos: las seis razones en la circunferencia, dos ángulos que se suman y las soluciones que dan vueltas, nuevas; y de 4.º ESO, el radián y el arco, la circunferencia goniométrica y el laboratorio de las ondas.`,
+            en: `${trigonometryBatx1zLabTools.length} tools with challenges: the six ratios on the circle, two angles that add up and the solutions that go round, new; and from 4th ESO, the radian and the arc, the unit circle and the wave lab.`,
+            ar: `${trigonometryBatx1zLabTools.length} أدوات مع تحديات: النسب الست على الدائرة وزاويتان تُجمعان والحلول التي تدور، وهي جديدة؛ ومن الصف الرابع: الراديان والقوس والدائرة المثلثية ومختبر الموجات.`
+        },
+        progressIds: trigonometryBatx1zLabChallengeIds,
+        toolForTopic: trigonometryBatx1zLabToolForTopic,
+        render: (props) => <TrigonometryBatx1zLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat edo zatiki bat (3/4), komarekin edo puntuarekin (0,75 edo 0.75); angeluak gradutan. Negatiboak minus ikurrarekin.', es: 'Escribe un número o una fracción (3/4), con coma o con punto (0,75 o 0.75); los ángulos, en grados. Los negativos, con signo menos.', en: 'Write a number or a fraction (3/4); a decimal point or a comma both work (0.75); angles in degrees. Negatives with a minus sign.', ar: 'اكتب عددًا أو كسرًا (3/4) بالنقطة أو بالفاصلة (0.75)؛ والزوايا بالدرجات. والسالب بإشارة الناقص.' },
         defaultForm: 'any',
