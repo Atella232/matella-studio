@@ -15,10 +15,10 @@ import { slideChallenges } from './slideRule.ts'
    (absolute value and neighbourhoods), the slide rule (logarithms turn
    products into sums) and the band of the error (bounds and relative
    error). The review comes from 4. DBH académicas with its challenges and
-   ids, so what a student did there counts here too: the Pythagoras
-   builder, intervals and rounding, the common index, factors out of the
-   root, the conjugate, change of base and Tartaglia's triangle. Tests in
-   tests/errealak-batx1z-lab.test.ts.
+   ids (progress is kept apart, under this unit's storage prefix): the
+   Pythagoras builder, intervals and rounding, the common index, factors
+   out of the root, the conjugate, change of base and Tartaglia's
+   triangle. Tests in tests/errealak-batx1z-lab.test.ts.
    ========================================================================== */
 
 export type BachRealsLabToolId = 'pythagoras' | 'intervals' | 'distance' | 'rounding' | 'error-band' | 'extract' | 'common' | 'conjugate' | 'slide-rule' | 'change-base' | 'pascal'
