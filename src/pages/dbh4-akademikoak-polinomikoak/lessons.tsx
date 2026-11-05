@@ -100,7 +100,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
     {
         id: 'parabola-a',
         stage: 'parabolas',
-        title: say('$y=ax^{2}$ parabolak', 'Las parábolas $y=ax^{2}$', 'القطوع المكافئة $y=ax^{2}$', 'The parabolas $y=ax^{2}$'),
+        title: say('Parabola sinpleenak', 'Las parábolas más sencillas', 'أبسط القطوع المكافئة', 'The simplest parabolas'),
         goal: say('$a$ koefizienteak parabolaren forman duen eragina ulertzea: irekiera, norabidea eta erpina.', 'Entender cómo influye el coeficiente $a$ en la forma de la parábola: abertura, orientación y vértice.', 'فهم أثر المعامل $a$ في شكل القطع المكافئ: الانفتاح والاتجاه والرأس.', 'Understand how the coefficient $a$ affects the shape of the parabola: how wide it is, which way it opens, and its vertex.'),
         needs: [
             { unit: 'dbh3/funciones-lineales', topic: 'parabola-shape', title: { eu: 'Parabola', es: 'La parábola', en: 'The parabola', ar: 'القطع المكافئ' } }
@@ -268,7 +268,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
     {
         id: 'inverse',
         stage: 'rational',
-        title: say('Alderantzizko proportzionaltasuna: $y=\\frac{k}{x}$', 'Proporcionalidad inversa: $y=\\frac{k}{x}$', 'التناسب العكسي: $y=\\frac{k}{x}$', 'Inverse proportion: $y=\\frac{k}{x}$'),
+        title: say('Alderantzizko proportzionaltasuna', 'Proporcionalidad inversa', 'التناسب العكسي', 'Inverse proportion'),
         goal: say('$y=\\frac{k}{x}$ hiperbolak ezagutzea: $k$ puntu batetik kalkulatzea, adarren koadranteak eta asintotak.', 'Conocer las hipérbolas $y=\\frac{k}{x}$: calcular $k$ a partir de un punto, los cuadrantes de las ramas y las asíntotas.', 'التعرف إلى القطوع الزائدة $y=\\frac{k}{x}$: حساب $k$ من نقطة، وأرباع الفرعين، والمقاربين.', 'Know the hyperbolas $y=\\frac{k}{x}$: work out $k$ from a point, the quadrants of the branches and the asymptotes.'),
         needs: [
             { unit: 'dbh3/proporcionalidad', topic: 'inverse', title: { eu: 'Alderantzizko proportzionaltasuna', es: 'Proporcionalidad inversa', en: 'Inverse proportion', ar: 'التناسب العكسي' } }
@@ -304,7 +304,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         id: 'rational-form',
         stage: 'rational',
         figureAfterSteps: true,
-        title: say('$y=\\frac{ax+b}{cx+d}$ funtzioak', 'Funciones $y=\\frac{ax+b}{cx+d}$', 'الدوال $y=\\frac{ax+b}{cx+d}$', 'Functions $y=\\frac{ax+b}{cx+d}$'),
+        title: say('Lehen mailako bi polinomioren zatidura', 'Cociente de dos polinomios de primer grado', 'خارج قسمة كثيري حدود من الدرجة الأولى', 'Quotient of two first-degree polynomials'),
         goal: say('Funtzio arrazional bat zatiketaren bidez $\\frac{k}{x-a}+b$ forman idaztea eta haren asintotak aurkitzea.', 'Escribir una función racional como $\\frac{k}{x-a}+b$ mediante la división y encontrar sus asíntotas.', 'كتابة دالة كسرية على صورة $\\frac{k}{x-a}+b$ بالقسمة، وإيجاد مقاربيها.', 'Write a rational function as $\\frac{k}{x-a}+b$ by division, and find its asymptotes.'),
         needs: [
             { unit: 'dbh4-akademikoak/polinomios-fracciones', topic: 'long-division', title: { eu: 'Polinomioen zatiketa', es: 'División de polinomios', en: 'Polynomial division', ar: 'قسمة الحدوديات' } }

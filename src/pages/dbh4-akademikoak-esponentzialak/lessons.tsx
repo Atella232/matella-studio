@@ -45,7 +45,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
     {
         id: 'exp-graph',
         stage: 'exponential',
-        title: say('$y=a^{x}$ funtzioa', 'La función $y=a^{x}$', 'الدالة $y=a^{x}$', 'The function $y=a^{x}$'),
+        title: say('Funtzio esponentziala', 'La función exponencial', 'الدالة الأسية', 'The exponential function'),
         goal: say('$y=a^{x}$ funtzioaren propietateak ezagutzea eta $a$-ren arabera gorakorra ala beherakorra den esatea.', 'Conocer las propiedades de $y=a^{x}$ y decir si es creciente o decreciente según $a$.', 'التعرف إلى خصائص $y=a^{x}$ وتحديد تزايدها أو تناقصها بحسب $a$.', 'Know the properties of $y=a^{x}$ and say whether it is increasing or decreasing depending on $a$.'),
         needs: [
             { unit: 'dbh4-akademikoak/potencias-radicales', topic: 'integer-powers', title: { eu: 'Berretzaile osoko berreturak', es: 'Potencias de exponente entero', en: 'Powers with integer exponents', ar: 'القوى ذات الأس الصحيح' } }
@@ -172,7 +172,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
     {
         id: 'log-graph',
         stage: 'logarithmic',
-        title: say('$y=\\log_a x$ funtzioa', 'La función $y=\\log_a x$', 'الدالة $y=\\log_a x$', 'The function $y=\\log_a x$'),
+        title: say('Funtzio logaritmikoa', 'La función logarítmica', 'الدالة اللوغاريتمية', 'The logarithmic function'),
         goal: say('$y=\\log_a x$ funtzioaren grafikoa eta propietateak ezagutzea eta esponentzialarekin erlazionatzea.', 'Conocer la gráfica y las propiedades de $y=\\log_a x$ y relacionarla con la exponencial.', 'التعرف إلى رسم $y=\\log_a x$ وخصائصها وربطها بالأسية.', 'Know the graph and properties of $y=\\log_a x$ and relate it to the exponential function.'),
         needs: [
             { unit: 'dbh4-akademikoak/funciones', topic: 'range-graph', title: { eu: 'Izate-eremua eta ibiltartea grafikoan', es: 'Dominio y recorrido en la gráfica', en: 'Domain and range on a graph', ar: 'المجال والمدى في الرسم' } }
@@ -227,7 +227,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
     {
         id: 'sine',
         stage: 'trigonometric',
-        title: say('$y=\\sen x$ funtzioa', 'La función $y=\\sen x$', 'الدالة $y=\\sen x$', 'The function $y=\\sin x$'),
+        title: say('Sinu funtzioa', 'La función seno', 'دالة الجيب', 'The sine function'),
         goal: say('Sinu funtzioaren grafikoa eta propietateak ezagutzea: periodoa, ibiltartea, zeroak, maximoak eta minimoak.', 'Conocer la gráfica y las propiedades de la función seno: periodo, recorrido, ceros, máximos y mínimos.', 'التعرف إلى رسم دالة الجيب وخصائصها: الدور والمدى والأصفار والقيم العظمى والصغرى.', 'Know the graph and properties of the sine function: period, range, zeros, maxima and minima.'),
         needs: [
             { unit: 'dbh4-akademikoak/funciones', topic: 'periodic', title: { eu: 'Periodikotasuna eta joera', es: 'Periodicidad y tendencia', en: 'Periodicity and trend', ar: 'الدورية والاتجاه' } }
@@ -244,7 +244,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
     {
         id: 'cosine',
         stage: 'trigonometric',
-        title: say('$y=\\cos x$ funtzioa', 'La función $y=\\cos x$', 'الدالة $y=\\cos x$', 'The function $y=\\cos x$'),
+        title: say('Kosinu funtzioa', 'La función coseno', 'دالة جيب التمام', 'The cosine function'),
         goal: say('Kosinu funtzioaren grafikoa eta propietateak ezagutzea eta sinuarekin erlazionatzea.', 'Conocer la gráfica y las propiedades de la función coseno y relacionarla con el seno.', 'التعرف إلى رسم دالة جيب التمام وخصائصها وربطها بالجيب.', 'Know the graph and properties of the cosine function and relate it to the sine.'),
         needs: [
             { unit: 'dbh4-akademikoak/trigonometria', topic: 'fundamental', title: { eu: 'Oinarrizko erlazioak', es: 'Relaciones fundamentales', en: 'Fundamental relationships', ar: 'العلاقات الأساسية' } }
@@ -280,7 +280,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
     {
         id: 'period',
         stage: 'transforms',
-        title: say('$y=\\sen kx$ funtzioaren periodoa', 'El periodo de $y=\\sen kx$', 'دور $y=\\sen kx$', 'The period of $y=\\sin kx$'),
+        title: say('Sinu funtzioaren periodoa', 'El periodo de la función seno', 'دور دالة الجيب', 'The period of the sine function'),
         goal: say('$y=\\sen kx$ eta $y=\\cos kx$ funtzioen periodoa kalkulatzea eta grafikoan irakurtzea.', 'Calcular el periodo de $y=\\sen kx$ y $y=\\cos kx$ y leerlo en la gráfica.', 'حساب دور $y=\\sen kx$ و$y=\\cos kx$ وقراءته على الرسم.', 'Calculate the period of $y=\\sin kx$ and $y=\\cos kx$ and read it from the graph.'),
         needs: [
             { unit: 'dbh4-akademikoak/funciones', topic: 'periodic', title: { eu: 'Periodikotasuna eta joera', es: 'Periodicidad y tendencia', en: 'Periodicity and trend', ar: 'الدورية والاتجاه' } }
@@ -297,7 +297,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
     {
         id: 'tangent',
         stage: 'transforms',
-        title: say('$y=\\tg x$ funtzioa', 'La función $y=\\tg x$', 'الدالة $y=\\tg x$', 'The function $y=\\tan x$'),
+        title: say('Tangente funtzioa', 'La función tangente', 'دالة الظل', 'The tangent function'),
         goal: say('Tangente funtzioaren grafikoa, periodoa, asintotak eta izate-eremua ezagutzea.', 'Conocer la gráfica, el periodo, las asíntotas y el dominio de la función tangente.', 'التعرف إلى رسم دالة الظل ودورها ومقارباتها ومجالها.', 'Know the graph, the period, the asymptotes and the domain of the tangent function.'),
         needs: [
             { unit: 'dbh4-akademikoak/trigonometria', topic: 'right-ratios', title: { eu: 'Sinua, kosinua eta tangentea', es: 'Seno, coseno y tangente', en: 'Sine, cosine and tangent', ar: 'الجيب وجيب التمام والظل' } }
