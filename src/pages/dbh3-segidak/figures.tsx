@@ -89,7 +89,7 @@ export function RecursiveFigure({ language }: { language: UnitLanguage }) {
                 </g>
             ))}
             <text x={x(4)} y={120} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>2 + 3 = 5</text>
-            <Caption y={144} language={language} text={say('Lehen bi gaiak eta araua emanda, segida osoa dago', 'Con los dos primeros términos y la regla, está toda la sucesión', 'بالحدين الأولين والقاعدة تتحدد المتتالية كلها', 'With the first two terms and the rule, the whole sequence is fixed')} />
+            <Caption y={144} language={language} text={say('Lehen bi gaiak eta araua emanda, segida osoa dago', 'Con dos términos y la regla sale toda la sucesión', 'بالحدين الأولين والقاعدة تتحدد المتتالية كلها', 'With the first two terms and the rule, the whole sequence is fixed')} />
         </Board>
     )
 }
