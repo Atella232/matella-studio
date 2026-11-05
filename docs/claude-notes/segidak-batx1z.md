@@ -47,7 +47,7 @@ Es la segunda unidad de Bachillerato: curso `batx1-zientziak`, tema `sucesiones`
 - **Test:** `tests/segidak-batx1z-lab.test.ts`. 2138 tests en verde.
 - **Revisión:** las 8 herramientas a 375 px en eu, es y ar (antes y después de predecir, con ▶, pista y reto infinito), sin desbordes ni texto fuera del tablero.
 
-**Fase 4, juegos:** 8 juegos. `recordsKey` `matella-segidak-batx1z-game-records`.
+**Fase 4, juegos, commits e68f652 y 18da898:** 8 juegos. `recordsKey` `matella-segidak-batx1z-game-records`.
 - **Propios (3):**
   - J1 `where` «¿Hacia dónde va?» (`/jokuak/nora`), progreso 100501–100503: una sucesión y cuatro destinos (un número, +∞, −∞ o «no tiene límite»). Niveles: cocientes de polinomios, potencias y signos, el número e. Los distractores son los errores típicos (cociente al revés, términos independientes, 0 para todo, k·e, 1).
   - J2 `band` «Atrapa la banda» (`/jokuak/banda`), progreso 100601–100603: se escribe el primer término N dentro de la banda. Niveles: L + c/n, cocientes (Ln + c₀)/(n + b), y c/n² o (−1)ⁿ·c/n. ε = p/q y la desigualdad se decide con enteros.
@@ -65,6 +65,8 @@ Es la segunda unidad de Bachillerato: curso `batx1-zientziak`, tema `sucesiones`
 - Los juegos de 3.º (`HiddenGame`, `SorterGame`, `StaircaseGame`) no aceptan otra ficha de juego, pero no hace falta: el hub de esta unidad da el id de progreso al terminar un nivel.
 - En la prueba de «mismas fórmulas en los cuatro idiomas», el orden cuenta y `\varepsilon` no se cambia por x: en euskera hubo que reordenar dos frases para que $\varepsilon$ y $L$ salieran en el mismo orden que en castellano.
 
-## En curso
+## Publicación
 
-- Hoja de revisión en euskera enviada al dueño. Falta publicar, solo con su visto bueno.
+- **2026-11-05**, con el visto bueno del dueño («Sí, publica»): `main` 18da898 (avance rápido desde 1bcf7da), publicado desde un worktree limpio. Bundle `index-DG8lej_T.js` y `index-DWvHYxm_.css`.
+- Con la unidad también se publicó el pie más corto de `RecursiveFigure` de 3.º.
+- Comprobado en vivo en matella.net a 375 px en eu, es y ar: inicio, cinco lecciones, resumen, práctica, banco, retos, diagnóstico, las tres herramientas propias y una prestada, el hub y cuatro juegos (60 vistas). Sin desbordes, sin errores de KaTeX y sin errores en la consola.
