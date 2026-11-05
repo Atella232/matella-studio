@@ -49,7 +49,7 @@ export const functionsAkLessonTexts: Record<FunctionsAkTopicId, LessonTexts> = {
             '$f(a)$ is the image of $a$: put $a$ in place of $x$, in brackets, and work it out. The point $(a,\\,b)$ is on the graph if $f(a)=b$. The other way round, the preimages of $b$ are the solutions of the equation $f(x)=b$: there may be several, one or none, and in a problem you drop those that make no sense.'
         ),
         examplePrompt: say('$g(x)=2x^{2}-5$ bada, kalkulatu $g(-2)$ eta $x$ balioak, $g(x)=13$ betetzen dutenak.', 'Si $g(x)=2x^{2}-5$, calcula $g(-2)$ y las $x$ que cumplen $g(x)=13$.', 'إذا كانت $g(x)=2x^{2}-5$ فاحسب $g(-2)$ وقيم $x$ التي تحقق $g(x)=13$.', 'If $g(x)=2x^{2}-5$, work out $g(-2)$ and the values of $x$ with $g(x)=13$.'),
-        example: same('$\\begin{gathered}g(-2)=2\\cdot 4-5=3\\\\ 2x^{2}-5=13\\ \\to\\ x^{2}=9\\ \\to\\ x=-3,\\ x=3\\end{gathered}$'),
+        example: same('$\\begin{gathered}g(-2)=2\\cdot 4-5=3\\\\ 2x^{2}-5=13\\ \\to\\ x^{2}=9\\\\ x=-3,\\ x=3\\end{gathered}$'),
         exampleAnswer: say('$g(-2)=3$; 13 zenbakiaren aurreirudiak $-3$ eta 3 dira.', '$g(-2)=3$; las antiimágenes de 13 son $-3$ y 3.', '$g(-2)=3$؛ وأصلا 13 هما $-3$ و3.', '$g(-2)=3$; the preimages of 13 are $-3$ and 3.')
     },
     'range-graph': {
@@ -82,7 +82,7 @@ export const functionsAkLessonTexts: Record<FunctionsAkTopicId, LessonTexts> = {
             'A polynomial has domain $\\mathbb{R}$. In a fraction you cannot divide by 0: set the denominator equal to 0, solve the equation and remove those solutions from $\\mathbb{R}$. If the denominator is never 0, like $x^{2}+1$, the domain is all of $\\mathbb{R}$. The numerator removes nothing.'
         ),
         examplePrompt: say('Aurkitu $y=\\dfrac{1}{x^{2}+2x-8}$ funtzioaren izate-eremua.', 'Halla el dominio de $y=\\dfrac{1}{x^{2}+2x-8}$.', 'أوجد مجال $y=\\dfrac{1}{x^{2}+2x-8}$.', 'Find the domain of $y=\\dfrac{1}{x^{2}+2x-8}$.'),
-        example: same('$\\begin{gathered}x^{2}+2x-8=0\\ \\to\\ x=-4,\\ x=2\\\\ \\text{Dom}\\,f=\\mathbb{R}-\\{-4,\\,2\\}\\end{gathered}$'),
+        example: same('$\\begin{gathered}x^{2}+2x-8=0\\\\ x=-4,\\ x=2\\\\ \\text{Dom}\\,f=\\mathbb{R}-\\{-4,\\,2\\}\\end{gathered}$'),
         exampleAnswer: say('$-4$ eta 2 kentzen dira: haietan izendatzailea 0 da.', 'Se quitan $-4$ y 2: en ellos el denominador vale 0.', 'نحذف $-4$ و2: عندهما يساوي المقام 0.', 'Remove $-4$ and 2: there the denominator is 0.')
     },
     'radical-domain': {
@@ -150,7 +150,7 @@ export const functionsAkLessonTexts: Record<FunctionsAkTopicId, LessonTexts> = {
             'A piecewise function has a different formula on each part of its domain. To find an image, first see which piece $x$ is in and use only that piece\'s formula. When drawing it, each piece goes only on its interval: a filled point with $\\le$ or $\\ge$, and an open one with $<$ or $>$.'
         ),
         examplePrompt: say('$f(x)=-x$ $x<0$ denean, $f(x)=x^{2}$ $0\\le x<2$ denean eta $f(x)=1$ $x\\ge 2$ denean, kalkulatu $f(-3)$, $f(1)$ eta $f(2)$.', 'Si $f(x)=-x$ para $x<0$, $f(x)=x^{2}$ para $0\\le x<2$ y $f(x)=1$ para $x\\ge 2$, calcula $f(-3)$, $f(1)$ y $f(2)$.', 'إذا كانت $f(x)=-x$ عندما $x<0$، و$f(x)=x^{2}$ عندما $0\\le x<2$، و$f(x)=1$ عندما $x\\ge 2$، فاحسب $f(-3)$ و$f(1)$ و$f(2)$.', 'If $f(x)=-x$ for $x<0$, $f(x)=x^{2}$ for $0\\le x<2$ and $f(x)=1$ for $x\\ge 2$, work out $f(-3)$, $f(1)$ and $f(2)$.'),
-        example: same('$f(-3)=3\\qquad f(1)=1^{2}=1\\qquad f(2)=1$'),
+        example: same('$\\begin{gathered}f(-3)=3\\qquad f(1)=1^{2}=1\\\\ f(2)=1\\end{gathered}$'),
         exampleAnswer: say('2 hirugarren zatian dago, $x\\ge 2$ delako.', 'El 2 va en el tercer trozo, porque $x\\ge 2$.', 'العدد 2 في الجزء الثالث لأن $x\\ge 2$.', '2 goes in the third piece, because $x\\ge 2$.')
     },
     'piecewise-continuity': {
@@ -165,7 +165,7 @@ export const functionsAkLessonTexts: Record<FunctionsAkTopicId, LessonTexts> = {
             'If each piece is a polynomial, the function can only be discontinuous at the joins. At each join, work out the value of the left piece and of the right one, even if one does not include the point. If they match, it is continuous; if not, there is a finite jump, equal to the difference. To find a parameter, set the two values equal.'
         ),
         examplePrompt: say('Aurkitu $k$, $f(x)=x^{2}-1$ ($x\\le 2$), $f(x)=x+k$ ($x>2$) funtzioa jarraitua izan dadin.', 'Halla $k$ para que $f(x)=x^{2}-1$ ($x\\le 2$), $f(x)=x+k$ ($x>2$) sea continua.', 'أوجد $k$ لتكون $f(x)=x^{2}-1$ ($x\\le 2$)، $f(x)=x+k$ ($x>2$) متصلة.', 'Find $k$ so that $f(x)=x^{2}-1$ ($x\\le 2$), $f(x)=x+k$ ($x>2$) is continuous.'),
-        example: same('$2^{2}-1=2+k\\ \\to\\ 3=2+k\\ \\to\\ k=1$'),
+        example: same('$\\begin{gathered}2^{2}-1=2+k\\\\ 3=2+k\\ \\to\\ k=1\\end{gathered}$'),
         exampleAnswer: say('$k=1$ denean, bi zatiek 3 balio dute 2 puntuan.', 'Con $k=1$, los dos trozos valen 3 en el 2.', 'عندما $k=1$ يعطي الجزءان 3 عند 2.', 'With $k=1$, both pieces give 3 at 2.')
     },
 
@@ -198,7 +198,7 @@ export const functionsAkLessonTexts: Record<FunctionsAkTopicId, LessonTexts> = {
             'A function is positive where its graph is above the X axis, and negative where it is below. A continuous function can only change sign where it cuts the X axis. So: find those points, split the line into intervals and try one number in each. The sign also gives the domain of $\\sqrt{f(x)}$, where $f\\ge 0$.'
         ),
         examplePrompt: say('Aztertu $g(x)=x^{2}-x-6$ funtzioaren zeinua.', 'Estudia el signo de $g(x)=x^{2}-x-6$.', 'ادرس إشارة $g(x)=x^{2}-x-6$.', 'Study the sign of $g(x)=x^{2}-x-6$.'),
-        example: same('$\\begin{gathered}x^{2}-x-6=0\\ \\to\\ x=-2,\\ x=3\\\\ g(-3)=6\\qquad g(0)=-6\\qquad g(4)=6\\end{gathered}$'),
+        example: same('$\\begin{gathered}x^{2}-x-6=0\\\\ x=-2,\\ x=3\\\\ g(-3)=6\\qquad g(0)=-6\\\\ g(4)=6\\end{gathered}$'),
         exampleAnswer: say('Positiboa $(-\\infty,\\,-2)\\cup(3,\\,+\\infty)$ tartean, eta negatiboa $(-2,\\,3)$ tartean.', 'Positiva en $(-\\infty,\\,-2)\\cup(3,\\,+\\infty)$ y negativa en $(-2,\\,3)$.', 'موجبة في $(-\\infty,\\,-2)\\cup(3,\\,+\\infty)$ وسالبة في $(-2,\\,3)$.', 'Positive on $(-\\infty,\\,-2)\\cup(3,\\,+\\infty)$ and negative on $(-2,\\,3)$.'),
         why: {
             text: say(
@@ -294,7 +294,7 @@ export const functionsAkLessonTexts: Record<FunctionsAkTopicId, LessonTexts> = {
             'A function is periodic if its graph repeats every so often; the length of that interval is the period, $T$: $f(x+T)=f(x)$. To find a value, divide by the period and keep the remainder. The tendency is the value $f$ gets close to when $x$ becomes very large; that horizontal line is a horizontal asymptote.'
         ),
         examplePrompt: say('Noria batek bira bat ematen du 8 minuturo, eta 3. minutuan kabina bat 12 m-ko altueran dago. Zein altueratan dago 59. minutuan?', 'Una noria da una vuelta cada 8 minutos, y en el minuto 3 una cabina está a 12 m de altura. ¿A qué altura está en el minuto 59?', 'تدور عجلة دوّارة دورة كل 8 دقائق، وفي الدقيقة 3 تكون مقصورة على ارتفاع 12 م. على أي ارتفاع تكون في الدقيقة 59؟', 'A big wheel turns once every 8 minutes, and at minute 3 a cabin is 12 m high. How high is it at minute 59?'),
-        example: same('$59=7\\cdot 8+3\\ \\to\\ f(59)=f(3)=12$'),
+        example: same('$\\begin{gathered}59=7\\cdot 8+3\\\\ f(59)=f(3)=12\\end{gathered}$'),
         exampleAnswer: say('Altuera 12 m da: 59 minutuan, 3 minutuan bezala.', 'A 12 m: el minuto 59 es como el 3.', 'على ارتفاع 12 م: الدقيقة 59 مثل الدقيقة 3.', 'At 12 m: minute 59 is like minute 3.')
     }
 }

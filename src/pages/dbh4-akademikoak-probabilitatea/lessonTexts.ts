@@ -44,7 +44,7 @@ export const probabilityAkLessonTexts: Record<ProbabilityAkTopicId, LessonTexts>
             'The union $A\\cup B$ happens if $A$ or $B$ (or both) happen; the intersection $A\\cap B$, if both happen at once. The complementary event, $\\overline{A}$, happens when $A$ does not: it is the outcomes of $E$ that are not in $A$. Always $A\\cup\\overline{A}=E$, and $A\\cap\\overline{A}$ is the impossible event, $\\varnothing$.'
         ),
         examplePrompt: say('Dado bat botatzen da. $A$ = «bikoitia» eta $B$ = «3 baino handiagoa». Idatzi $A\\cup B$, $A\\cap B$ eta $\\overline{B}$.', 'Se lanza un dado. $A$ = «par» y $B$ = «mayor que 3». Escribe $A\\cup B$, $A\\cap B$ y $\\overline{B}$.', 'يُرمى نرد. $A$ = «زوجي» و$B$ = «أكبر من 3». اكتب $A\\cup B$ و$A\\cap B$ و$\\overline{B}$.', 'A dice is thrown. $A$ = «even» and $B$ = «greater than 3». Write $A\\cup B$, $A\\cap B$ and $\\overline{B}$.'),
-        example: same('$\\begin{gathered}A\\cup B=\\{2,4,5,6\\}\\qquad A\\cap B=\\{4,6\\}\\\\ \\overline{B}=\\{1,2,3\\}\\end{gathered}$'),
+        example: same('$\\begin{gathered}A\\cup B=\\{2,4,5,6\\}\\\\ A\\cap B=\\{4,6\\}\\\\ \\overline{B}=\\{1,2,3\\}\\end{gathered}$'),
         exampleAnswer: say('Bildurak biak elkartzen ditu; ebakidurak, komunak bakarrik.', 'La unión junta los dos; la intersección, solo los comunes.', 'الاتحاد يجمع الحدثين، والتقاطع المشترك فقط.', 'The union puts both together; the intersection, only the shared ones.')
     },
     compatible: {

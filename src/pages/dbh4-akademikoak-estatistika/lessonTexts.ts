@@ -207,7 +207,7 @@ export const statisticsAkLessonTexts: Record<StatisticsAkTopicId, LessonTexts> =
             'The variance squares the deviations: $\\sigma^2=\\frac{\\sum f_i(x_i-\\bar{x})^2}{N}$, or, shorter, $\\sigma^2=\\frac{\\sum f_i x_i^2}{N}-\\bar{x}^2$: the mean of the squares minus the square of the mean. Since its units are squared, the standard deviation is used, $\\sigma=\\sqrt{\\sigma^2}$, in the units of the data.'
         ),
         examplePrompt: say('Kalkulatu 1, 3, 5 eta 7 datuen bariantza eta desbideratze tipikoa.', 'Calcula la varianza y la desviación típica de 1, 3, 5 y 7.', 'احسب التباين والانحراف المعياري للبيانات 1 و3 و5 و7.', 'Work out the variance and the standard deviation of 1, 3, 5 and 7.'),
-        example: same('$\\begin{gathered}\\frac{1+9+25+49}{4}-4^{2}=21-16=5\\\\ \\sigma=\\sqrt{5}\\approx 2{,}24\\end{gathered}$'),
+        example: same('$\\begin{gathered}1+9+25+49=84\\\\ \\frac{84}{4}-4^{2}=21-16=5\\\\ \\sigma=\\sqrt{5}\\approx 2{,}24\\end{gathered}$'),
         exampleAnswer: say('Batez bestekoa 4, $\\sigma^2=5$ eta $\\sigma\\approx 2{,}24$.', 'Media 4, $\\sigma^2=5$ y $\\sigma\\approx 2{,}24$.', 'المتوسط 4، و$\\sigma^2=5$ و$\\sigma\\approx 2{,}24$.', 'Mean 4, $\\sigma^2=5$ and $\\sigma\\approx 2{,}24$.')
     },
     cv: {

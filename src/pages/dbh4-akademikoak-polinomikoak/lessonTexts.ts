@@ -97,7 +97,7 @@ export const polynomialAkLessonTexts: Record<PolynomialAkTopicId, LessonTexts> =
             'In $y=ax^{2}+bx+c$, the x-coordinate of the vertex is $x_v=\\dfrac{-b}{2a}$, and the y-coordinate, its image: $y_v=f(x_v)$. The axis of symmetry is the line $x=x_v$. If $a>0$, the vertex is a minimum and the range is $[y_v,\\,+\\infty)$; if $a<0$, a maximum and $(-\\infty,\\,y_v]$.'
         ),
         examplePrompt: say('Aurkitu $y=x^{2}-4x+3$ parabolaren erpina eta ibiltartea.', 'Halla el vértice y el recorrido de $y=x^{2}-4x+3$.', 'أوجد رأس $y=x^{2}-4x+3$ ومداه.', 'Find the vertex and the range of $y=x^{2}-4x+3$.'),
-        example: same('$x_v=\\frac{4}{2}=2\\qquad y_v=4-8+3=-1$'),
+        example: same('$\\begin{gathered}x_v=\\frac{4}{2}=2\\\\ y_v=4-8+3=-1\\end{gathered}$'),
         exampleAnswer: say('$V(2,\\,-1)$ minimoa da: Rec $f=[-1,\\,+\\infty)$.', '$V(2,\\,-1)$ es un mínimo: Rec $f=[-1,\\,+\\infty)$.', '$V(2,\\,-1)$ قيمة صغرى: Rec $f=[-1,\\,+\\infty)$.', '$V(2,\\,-1)$ is a minimum: Rec $f=[-1,\\,+\\infty)$.'),
         why: {
             text: say(
@@ -142,7 +142,7 @@ export const polynomialAkLessonTexts: Record<PolynomialAkTopicId, LessonTexts> =
             '$y=a(x-p)^{2}+q$ is the parabola $y=ax^{2}$ translated $p$ units horizontally and $q$ vertically: its vertex is $(p,\\,q)$. Mind the sign: $(x+1)^{2}=(x-(-1))^{2}$ moves to the left. To get the general form, expand the square; the other way round, find the vertex. The $a$ does not change.'
         ),
         examplePrompt: say('Idatzi $y=x^{2}-6x+5$ funtzioa $y=a(x-p)^{2}+q$ eran.', 'Escribe $y=x^{2}-6x+5$ en la forma $y=a(x-p)^{2}+q$.', 'اكتب $y=x^{2}-6x+5$ على الصيغة $y=a(x-p)^{2}+q$.', 'Write $y=x^{2}-6x+5$ in the form $y=a(x-p)^{2}+q$.'),
-        example: same('$\\begin{gathered}x_v=\\frac{6}{2}=3\\qquad y_v=9-18+5=-4\\\\ y=(x-3)^{2}-4\\end{gathered}$'),
+        example: same('$\\begin{gathered}x_v=\\frac{6}{2}=3\\\\ y_v=9-18+5=-4\\\\ y=(x-3)^{2}-4\\end{gathered}$'),
         exampleAnswer: say('Erpina $(3,\\,-4)$: $y=x^{2}$, 3 eskuinera eta 4 behera lekualdatuta.', 'Vértice $(3,\\,-4)$: $y=x^{2}$ movida 3 a la derecha y 4 hacia abajo.', 'الرأس $(3,\\,-4)$: $y=x^{2}$ منسحبة 3 إلى اليمين و4 إلى الأسفل.', 'Vertex $(3,\\,-4)$: $y=x^{2}$ moved 3 to the right and 4 down.')
     },
     'parabola-from': {
