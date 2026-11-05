@@ -55,7 +55,7 @@ Es la cuarta unidad de Bachillerato y la primera del bloque Análisis: curso `ba
 - **Test:** `tests/funtzioak-batx1z-lab.test.ts`. 2205 tests en verde.
 - **Revisión:** las 4 propias a 375 px en eu, es y ar, antes y después de predecir: sin desbordes ni errores de KaTeX.
 
-**Fase 4, juegos:** 8 juegos, récords en `matella-funtzioak-batx1z-game-records`.
+**Fase 4, juegos, commit fd78d02:** 8 juegos, récords en `matella-funtzioak-batx1z-game-records`.
 - **Propios (4):**
   - J1 `where` «¿Dónde cae el punto?», niveles 108501–108503: $f$ pasa por $P(p,q)$ y se da $y=A\cdot f(Bx+c)+k$; se toca en la cuadrícula (`Plane` con `onPick`) el punto que sale de P. Un solo punto vale: $x=\frac{p-c}{B}$ y $y=Aq+k$, enteros y dentro del tablero; mover x al revés ($p+c$) da siempre otro punto. Un cambio; dos; tres o cuatro con un factor 2 o −2. Lógica en `games/where.ts`.
   - J2 `order` «Ordena las máquinas», niveles 108601–108603: tarjetas de máquinas (+n, ·n, x², ·(−1)) que se ponen en fila. Dos máquinas y un número que tiene que salir; tres máquinas; descomponer una fórmula $h(x)$. Solo un orden llega a la meta (se prueban todos). Lógica en `games/order.ts`.
@@ -79,7 +79,9 @@ Es la cuarta unidad de Bachillerato y la primera del bloque Análisis: curso `ba
 - En una frase árabe, las etiquetas de las máquinas (− 4, ÷ 2) van envueltas en LRI/PDI (`\u2066…\u2069`) para que no se den la vuelta.
 - `WorkedDetectiveGame` acepta `localize(latex, language)`: así las líneas pueden llevar nombres trigonométricos.
 
-## En curso
+## Cierre
 
-- Cierre: revisión a 375 px de juegos y práctica en eu, es y ar, hoja de euskera.
-- Después, el tema siguiente, Límites (`limiteak`, ids 109000–109999), cortado de `feat/funtzioak-batx1z`.
+- **2026-11-05:** 2212 tests, lint y build en verde; inventario OK.
+- **Revisión a 375 px en eu, es y ar:** las 15 lecciones (con los pasos y los «¿Por qué funciona?» abiertos), portada, diagnóstico, resumen, práctica, ejercicios, retos, el centro de juegos y cada juego, y las 11 herramientas. Sin desbordes, sin errores de KaTeX y sin LaTeX sin dibujar. «arcsen» sale en castellano y «arcsin», «arctg» en euskera.
+- **Hoja de euskera:** `hoja-revision.mjs batx1-zientziak-funtzioak … --herramientas transform,composition,mirror,stairs --juegos race,where,order,undo,detective,memory`, mandada al dueño (fuera del repositorio).
+- **Sin publicar:** la rama `feat/funtzioak-batx1z` espera a la sesión principal, que fusiona y publica.
