@@ -68,7 +68,7 @@ Commit 37971fe.
 - **Memoria** (`memory`, 109801–109803): límite en un punto ↔ valor (a² − b², a³ − b³, conjugado), función ↔ límite en +∞ (la carta no lleva «lim»), función ↔ asíntotas (en dos líneas).
 - **De Segidak:** «¿Hacia dónde va?» (`toward`, 109811–109813, etapa `infinity`) y «Atrapa la banda» (`band`, 109821–109823, etapa `point`).
 - **Archivos:** `games/forms.ts`, `asymptotes.ts`, `discontinuity.ts`, `detective.ts`, `race.ts`, `boards.ts`, `info.ts`, `BachLimitsGames.tsx` (+ `.css`), `GameArt.tsx`, `RaceGame.tsx`, `index.tsx`; test `tests/limiteak-batx1z-games.test.ts` (rehace cada respuesta de la carrera con el límite numérico).
-- **Comprobación:** 2247 tests, lint y `tsc -b` en verde; inventario OK (5 juegos propios contando los de Segidak, 7 herramientas). Juegos a 375 px en eu, es y ar sin desbordes ni errores de KaTeX.
+- **Comprobación:** 2247 tests, lint y `tsc -b` en verde; inventario OK. Propios de verdad: 3 juegos (`forms`, `asymptote`, `discontinuity`) más el detective, y 4 herramientas; el script cuenta también como propios los prestados de Segidak y Funciones. Juegos a 375 px en eu, es y ar sin desbordes ni errores de KaTeX.
 
 ## Trucos
 
@@ -84,6 +84,8 @@ Commit 37971fe.
 ## Cierre
 
 - Fases: 1+2 en 316a89c, 3 en 37971fe, 4 en 72fa7af. Todo en `feat/limiteak-batx1z`, sin fusionar ni publicar.
-- `npm test` (2247), `npm run lint` y `npm run build` en verde; inventario OK (5 juegos propios, 7 herramientas propias; el script cuenta como propias las herramientas prestadas de Segidak y Funciones).
+- `npm test` (2247), `npm run lint` y `npm run build` en verde; inventario OK: 3 juegos propios más el detective y 4 herramientas propias (el script dice 5 y 7 porque cuenta como propios los prestados de Segidak y Funciones).
 - Revisión a 375 px en eu, es y ar: lecciones, resumen, diagnóstico, práctica, banco, retos, las 8 herramientas y los 8 juegos.
 - Hoja de revisión del euskera enviada al dueño: `limiteak-batx1z-euskera.html` (con `hoja-revision.mjs`, herramientas y juegos propios).
+- La hoja no trae los retos fijos del laboratorio (`lens.ts`, `hole.ts`…) ni los ejercicios de `content.ts`: el script no importa esos archivos. Lo mismo pasaba en Funciones.
+- Motor común: en toda la cadena de ramas desde `main` (2ff41c2) solo cambia `src/features/unit-v2/paths.ts`, que es el registro.
