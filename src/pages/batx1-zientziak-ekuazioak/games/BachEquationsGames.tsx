@@ -104,7 +104,7 @@ export function ValidGame({ game, art, ...props }: GameProps & { game: GameInfo;
                 rounds: VALID_ROUNDS,
                 rules: [
                     say('Ekuazio bakoitza ebatzi da, eta hautagai batzuk atera dira.', 'Cada ecuación ya se ha resuelto y han salido unas candidatas.', 'كل معادلة حُلّت وخرج منها مرشحون.', 'Each equation has been solved and some candidates came out.'),
-                    say('Esan bakoitzak balio duen edo zergatik ez: izendatzailea 0, erro bat negatibo baten berdin edo negatibo baten logaritmoa.', 'Di si cada una vale o por qué no: denominador 0, una raíz igual a un negativo o el logaritmo de un negativo.', 'قل هل يصلح كل واحد أو لماذا لا: مقام 0، أو جذر يساوي عددًا سالبًا، أو لوغاريتم عدد سالب.', 'Say whether each one works or why not: denominator 0, a root equal to a negative number, or the logarithm of a negative number.'),
+                    say('Esan bakoitzak balio duen edo zergatik ez: izendatzailea 0 da, erroa negatibo baten berdina da edo negatibo baten logaritmoa agertzen da.', 'Di si cada una vale o por qué no: denominador 0, una raíz igual a un negativo o el logaritmo de un negativo.', 'قل هل يصلح كل واحد أو لماذا لا: مقام 0، أو جذر يساوي عددًا سالبًا، أو لوغاريتم عدد سالب.', 'Say whether each one works or why not: denominator 0, a root equal to a negative number, or the logarithm of a negative number.'),
                     say('Egiaztatu hasierako ekuazioan, ez ebatzitakoan.', 'Comprueba en la ecuación inicial, no en la que sale al resolver.', 'تحقّق في المعادلة الأصلية لا في الناتجة.', 'Check in the first equation, not in the one you get when solving.')
                 ],
                 create: createValidRounds,

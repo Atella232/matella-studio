@@ -76,7 +76,7 @@ test('ekuazioak batx1 z games: every race question has one right option, worked 
                     radical: () => [-6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7].filter((x) => x + meta.p >= 0 && Math.abs(Math.sqrt(x + meta.p) - (x + meta.q)) < 1e-9)[0],
                     'absolute-sum': () => (meta.a + meta.c) + (meta.a - meta.c),
                     'absolute-largest': () => (meta.b + meta.c) / meta.a,
-                    'same-base': () => [-1, 0, 1, 2, 3].find((x) => Math.abs(meta.base ** (meta.m * x + meta.n) - meta.base ** Math.round(Math.log(meta.base ** (meta.m * value + meta.n)) / Math.log(meta.base))) < 1e-9)!,
+                    'same-base': () => (meta.k - meta.n) / meta.m,
                     'exp-change': () => Math.max(...[0, 1, 2, 3, 4].filter((x) => 4 ** x - (meta.a + meta.b) * 2 ** x + meta.a * meta.b === 0)),
                     log: () => meta.base ** meta.k - meta.a,
                     integers: () => Array.from({ length: 41 }, (_, i) => i - 20).filter((x) => (meta.strict ? (x - meta.a) * (x - meta.b) < 0 : (x - meta.a) * (x - meta.b) <= 0)).length,
@@ -194,6 +194,7 @@ test('ekuazioak batx1 z games: el detective de ecuaciones', () => {
                 seen.add(item.error)
                 assert.ok(errors.includes(item.error))
                 assert.equal(item.lines.length, 3)
+                assert.equal(new Set(item.lines.map((line) => line.latex)).size, 3, item.lines.map((line) => line.latex).join(' | '))
                 assert.ok(item.wrong >= 0 && item.wrong < 3)
                 assert.equal(item.options.length, 3)
                 assert.ok(item.options.includes(item.error))

@@ -138,6 +138,8 @@ function build(random: Random, error: BachEquationsDetectiveError): Built | null
         case 'abs-one-case': {
             const a = randomInt(random, -3, 4)
             const c = randomInt(random, 2, 6)
+            // With a = 0 the three lines would be the same
+            if (a === 0) return null
             return {
                 problem: solveIt(`|x${signed(-a)}|=${c}`),
                 lines: [line(LABELS.step, `x${signed(-a)}=${c}`), line(LABELS.solve, `x=${c}${signed(a)}`), line(LABELS.result, `x=${a + c}`)],

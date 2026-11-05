@@ -203,7 +203,7 @@ function sameBaseQuestion(random: Random): BachEquationsRaceQuestion | null {
     if (n === 0 || k < 1 || base ** k > 243) return null
     const answer = fraction(x)
     const choices = options(random, answer, [whole(k, 'exponent'), ratio(k + n, m, 'sign'), ratio(k, m, 'calculation')])
-    return choices && build(3, 'same-base', solveFor(`${base}^{${m}x${signed(n)}}=${base ** k}`, SOLUTION), choices, answer, same(`${base ** k}=${base}^{${k}}\\ \\to\\ ${m}x${signed(n)}=${k}\\ \\to\\ x=${x}`), { base, m, n })
+    return choices && build(3, 'same-base', solveFor(`${base}^{${m}x${signed(n)}}=${base ** k}`, SOLUTION), choices, answer, same(`${base ** k}=${base}^{${k}}\\ \\to\\ ${m}x${signed(n)}=${k}\\ \\to\\ x=${x}`), { base, m, n, k })
 }
 
 /** 4ˣ − (a + b)·2ˣ + ab = 0 with t = 2ˣ, a = 2ᵖ and b = 2^q */

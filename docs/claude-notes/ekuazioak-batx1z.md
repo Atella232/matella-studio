@@ -74,4 +74,4 @@ Es la tercera unidad de Bachillerato: curso `batx1-zientziak`, tema `ecuaciones-
 
 ## En curso
 
-- Fase 4 hecha y revisada; falta el commit, la hoja de euskera para el dueño y su visto bueno para publicar.
+- Las cuatro fases están hechas y revisadas en `feat/ekuazioak-batx1z` (juegos en 7f92d1b y el arreglo siguiente). Solo falta el visto bueno del dueño para publicar; la hoja de euskera ya se le ha mandado.

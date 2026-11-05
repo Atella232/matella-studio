@@ -45,7 +45,7 @@ export const bachEquationsGames: GameInfo<BachEquationsGameId>[] = [
         skills: { eu: 'Soluzio faltsuak eta zergatik agertzen diren', es: 'Las soluciones falsas y por qué salen', en: 'False solutions and why they appear', ar: 'الحلول الزائفة ولماذا تظهر' },
         levels: [
             { progressId: 101501, stage: 'radical-absolute', title: { eu: 'Zatikiak eta erroak', es: 'Fracciones y radicales', en: 'Fractions and radicals', ar: 'الكسور والجذور' }, description: { eu: 'Izendatzailea 0 edo erro negatiboa.', es: 'Denominador 0 o raíz negativa.', en: 'Denominator 0 or a negative root.', ar: 'مقام 0 أو جذر سالب.' } },
-            { progressId: 101502, stage: 'exp-log', title: { eu: 'Logaritmoak', es: 'Logaritmos', en: 'Logarithms', ar: 'اللوغاريتمات' }, description: { eu: 'Negatibo baten logaritmorik ez dago.', es: 'No hay logaritmo de un negativo.', en: 'There is no logarithm of a negative number.', ar: 'لا لوغاريتم لعدد سالب.' } },
+            { progressId: 101502, stage: 'exp-log', title: { eu: 'Logaritmoak eta erroak', es: 'Logaritmos y radicales', en: 'Logarithms and radicals', ar: 'اللوغاريتمات والجذور' }, description: { eu: 'Negatibo baten logaritmorik ez dago.', es: 'No hay logaritmo de un negativo.', en: 'There is no logarithm of a negative number.', ar: 'لا لوغاريتم لعدد سالب.' } },
             { progressId: 101503, stage: 'exp-log', title: { eu: 'Denak nahastuta', es: 'Todo mezclado', en: 'All mixed up', ar: 'الكل مختلط' }, description: { eu: 'Zatikiak, erroak eta logaritmoak.', es: 'Fracciones, radicales y logaritmos.', en: 'Fractions, radicals and logarithms.', ar: 'الكسور والجذور واللوغاريتمات.' } }
         ]
     },
