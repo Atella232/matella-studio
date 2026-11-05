@@ -56,11 +56,12 @@ Es la segunda unidad de Bachillerato: curso `batx1-zientziak`, tema `sucesiones`
 - **De 3.º,** con sus pantallas y los ids de progreso de esta unidad (el hub da el id): «El patrón escondido» 100811–100813, «El clasificador» 100821–100823, «La escalera de Gauss» 100831–100833.
 - **Test:** `tests/segidak-batx1z-games.test.ts`: en «¿Hacia dónde va?» cada respuesta se comprueba evaluando la sucesión en n = 200 000.
 - **Inventario:** OK (2 juegos propios más el detective; 3 herramientas propias).
-- **Comprobación:** 2144 tests, lint y build en verde. Revisado a 375 px en eu, es y ar: el hub y los 8 juegos, empezando un nivel (dos en los propios) y contestando tres rondas; sin desbordes ni errores de KaTeX.
+- **Comprobación:** 2144 tests, lint y build en verde. Revisado a 375 px en eu, es y ar: el hub y los 8 juegos, empezando un nivel (dos en los propios) y contestando tres rondas, y las 48 cartas de la memoria vueltas en eu y ar; sin desbordes ni errores de KaTeX.
 
 ## Trucos
 
 - Las fórmulas con dos o tres cálculos unidos por `\qquad` bajaban a 13 px a 375 px. Se parten en filas con `\begin{gathered}…\\…\end{gathered}`. Las que siguen a 16 px son fórmulas dentro de texto de 16 px, y eso está bien.
+- En la memoria, una tarjeta como `a_n=6n-4,\ a_{8}` medía 122 px en una tarjeta de 106 px a 375 px: el término va en dos filas con `gathered`. Para revisar la memoria hay que dar la vuelta a las cartas (`.fraction-v2-memory-card`) y comparar cada `.katex` con su tarjeta, no con la pantalla.
 - Los juegos de 3.º (`HiddenGame`, `SorterGame`, `StaircaseGame`) no aceptan otra ficha de juego, pero no hace falta: el hub de esta unidad da el id de progreso al terminar un nivel.
 - En la prueba de «mismas fórmulas en los cuatro idiomas», el orden cuenta y `\varepsilon` no se cambia por x: en euskera hubo que reordenar dos frases para que $\varepsilon$ y $L$ salieran en el mismo orden que en castellano.
 

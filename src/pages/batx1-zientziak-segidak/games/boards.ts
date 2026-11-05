@@ -24,7 +24,7 @@ function termPair(random: Random): Pair | null {
     const q = randomInt(random, -5, 5)
     const n = randomInt(random, 3, 10)
     if (q === 0) return null
-    return { question: `a_n=${p}n${q < 0 ? '-' : '+'}${Math.abs(q)},\\ a_{${n}}`, answer: String(p * n + q) }
+    return { question: `\\begin{gathered}a_n=${p}n${q < 0 ? '-' : '+'}${Math.abs(q)}\\\\ a_{${n}}\\end{gathered}`, answer: String(p * n + q) }
 }
 
 function seriesPair(random: Random): Pair | null {
