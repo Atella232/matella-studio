@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachSystemsChallenges, bachSystemsDiagnostic, bachSystemsExerciseBank, bachSystemsPractice } from './content'
 import { BachSystemsHeroArt } from './figures'
+import { BachSystemsGames } from './games'
+import { BACH_SYSTEMS_GAME_RECORDS_KEY, bachSystemsGameProgressIds } from './games/info'
 import { BachSystemsLaboratory } from './lab'
 import { bachSystemsLabChallengeIds, bachSystemsLabToolForTopic, bachSystemsLabTools } from './lab/labTools'
 import { bachSystemsStages, bachSystemsTopics } from './lessons'
@@ -36,6 +38,17 @@ const sistemakBatx1zUnit: UnitDefinition = {
         progressIds: bachSystemsLabChallengeIds,
         toolForTopic: bachSystemsLabToolForTopic,
         render: (props) => <BachSystemsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zazpi joko: lasterketa, egin zeroa, irakurri azken errenkada, sistemen detektibea eta memoria, berriak; eta 4. DBHko ebaki-puntua eta sakatu soluzioa.',
+            es: 'Siete juegos: carrera, haz el cero, lee la última fila, detective de sistemas y memoria, nuevos; y de 4.º ESO, el punto de corte y toca la solución.',
+            en: 'Seven games: race, make the zero, read the last row, systems detective and memory, new; and from 4th ESO, the crossing point and touch the solution.',
+            ar: 'سبع ألعاب: السباق واصنع الصفر واقرأ الصف الأخير ومخبر الأنظمة والذاكرة، وهي جديدة؛ ومن الصف الرابع: نقطة التقاطع والمس الحل.'
+        },
+        progressIds: bachSystemsGameProgressIds,
+        recordsKey: BACH_SYSTEMS_GAME_RECORDS_KEY,
+        render: (props) => <BachSystemsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Ezezagun bat baino gehiago badago, eskatzen dena bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si hay varias incógnitas, solo la que se pide.', en: 'Write a number: 5, −3, 1.5 or 3/2. If there are several unknowns, only the one asked for.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كانت هناك عدة مجاهيل فاكتب المطلوب فقط.' },

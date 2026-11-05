@@ -48,13 +48,23 @@ Cuarta unidad de 1.º Ciencias (curso `batx1-zientziak`, tema `sistemas`), prime
 - **Test:** `tests/sistemak-batx1z-lab.test.ts` (cada sistema de la máquina se escalona con operaciones permitidas y da la solución o el tipo que toca; cada punto de cada familia cumple las dos ecuaciones; retos fijos e infinitos).
 - **Revisión:** las 9 herramientas a 375 px en eu, es y ar, con la predicción hecha: sin desbordes (la fila de herramientas de arriba se desplaza a propósito) ni texto fuera del tablero; en árabe la «y» del plano sobresale 1 px, como en 4.º.
 
+**Fase 4, juegos:** 7 juegos, récords en `matella-sistemak-batx1z-game-records`.
+- **Propios (3):**
+  - J1 `zero` «Haz el cero», niveles 113501–113503: la matriz ampliada y un número que tiene que pasar a 0; se elige la operación m·Eᵢ + k·Eⱼ entre cuatro (una sola deja el 0; las otras, el signo de k cambiado, el pivote tomado como 1, los números cruzados). Las rondas siguen en la misma matriz y al final sale la solución. Nivel 1: 2 × 2 con pivote 1; nivel 2: 3 × 3, tres pasos por matriz; nivel 3: pivotes que no son 1 (hace falta m). Lógica en `games/zero.ts`.
+  - J2 `last-row` «Lee la última fila», niveles 113601–113603: una matriz ya escalonada; ¿una solución, infinitas o ninguna? El nivel 2 trae trampas (0 0 0 | 5 que no es la última fila, dos filas de ceros, 0 0 −2 | 0 que es z = 0). El nivel 3 pone (a − k)z = d y pide el a que lo hace incompatible o indeterminado. Lógica en `games/lastRow.ts`.
+  - J4 `detective`, niveles 113701–113703: 12 errores en tres niveles (término independiente olvidado, signo al restar filas, signo al sustituir, multiplicar un solo lado; 0z = 0 como «sin solución», z = 0 de 0z = 5, dividir entre a − k para todo a, una sola solución particular; dividir entre x, una sola raíz de x², dejar el log de un negativo, no girar la desigualdad).
+- **Carrera** 113401–113405 (15 tipos, tres por etapa, con `meta`) y **memoria** 113801–113803 (sistema 2 × 2 ↔ (x, y), última fila ↔ z, ∅ o z = λ, suma y producto ↔ los dos números).
+- **De 4.º académicas, con niveles y etapas de esta unidad:** «El punto de corte» 113811–113813 y «Toca la solución» 113821–113823.
+- **Test:** `tests/sistemak-batx1z-games.test.ts` (cada respuesta de la carrera sale de sus números; en «Haz el cero» una sola opción deja el 0, la fila nueva es la fila entera y la solución cumple las filas de antes y de después; en «Lee la última fila» el tipo es el que dicen los números y solo el a crítico cambia el tipo; las cartas de memoria caben).
+- **Revisión:** a 375 px en eu, es y ar, el centro de juegos y los juegos propios con sus niveles (respondiendo): sin desbordes ni LaTeX sin dibujar. Una línea del detective (y² + 3y − 10 = 0 → …) no cabía en su botón: se partió.
+
+**Cierre:** 2214 tests, lint y build en verde; inventario OK (4 juegos y 4 herramientas «propios» para el script; de verdad propios: 3 y 3). Revisado a 375 px en eu, es y ar: las 16 lecciones y el resumen, las 9 herramientas, los juegos, práctica, ejercicios, retos, diagnóstico y portada. Hoja de euskera hecha con `hoja-revision.mjs` (fuera del repositorio) y mandada al dueño.
+
 ## Trucos
 
 - **Fórmulas que empiezan por z en euskera:** el test de sufijos (`/\$(?:…|z|…)/`) no distingue el `$` que abre del que cierra, y `$z=3$` cuenta como «sufijo -z». Se escriben `${z}=3$` (KaTeX lo dibuja igual) en los cuatro idiomas.
 - **Filas imposibles:** se escriben con su letra (`$0z=5$`, `$0x+0y=11$`), nunca `0=5`: los tests evalúan cada igualdad de números.
 - **Sistemas en las preguntas:** dentro de `\begin{cases}`, el test común de «Compruébalo» no los evalúa (ve varias igualdades); los comprueba el test de la unidad.
 - **Orden de las fórmulas:** el test común compara las fórmulas de cada texto en orden; en euskera la frase tiene que nombrarlas en el mismo orden que en castellano.
-
-## En curso
-
-- Fases 1+2 y 3 hechas en `feat/sistemak-batx1z`. Siguiente: fase 4, juegos (J1 «Haz el cero», J2 «Lee la última fila», J4 detective; carrera 1134xx, memoria, y de 4.º «El punto de corte» y «Toca la solución» con niveles nuevos).
+- **Nombres de los juegos en la dirección:** `zeroa`, `azken-errenkada`, `detektibea`, `memoria`, `lasterketa`, `ebaki-puntua`, `sakatu-soluzioa` (también `cero`, `ultima-fila`, `punto-de-corte`, `toca-la-solucion`).
+- **Textos sin fórmula en los juegos:** los títulos y descripciones de los niveles se dibujan como texto plano; en euskera, «0z» suelto parece un sufijo pegado: se escribe «0·z».
