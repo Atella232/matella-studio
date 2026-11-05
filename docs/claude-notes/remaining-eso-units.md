@@ -30,3 +30,14 @@ Progress:
 Gotchas: router is a HASH router (`#/matematika/...`); takeaway CSS uppercases KaTeX, so no lowercase-letter math in takeaways (no longer true since 2026-11-02, see teoria-dbh2.md); keep step `math` short; sed with `\circ` breaks to `\c` in TS strings.
 
 **Sufijos del euskera en el archivo de lecciones (2026-11-03, rama `feat/lessons-eu-suffixes`, commit 817ad3c, publicado el 2026-11-03: main fb72223, bundle `index-CWC0dhqi.js`):** 4. aplicadas sin nota propia, en `lessons.tsx`: Antzekotasuna 2 textos («9tik 5» → «9 zatitatik 5», «100 000z» → «100 000 zenbakiaz»), Ekuazioak 2 (3 sufijos; «2z / 3z» → «2 zenbakiaz / 3 zenbakiaz»), Estatistika 15 (18; «% 90ek» → «% 90 batek», «7ko batez bestekoa» → «batez bestekoa 7 da», «165eko tartean» → «165 klase-marka duen tartean», «$Q_1$-etik» → «$Q_1$ kuartiletik») y Funtzioak 11 (21; «1986an … 2063an» → «1986 urtean … 2063 urtean», «$(0,\,0)$tik $(1,\,3)$ra» → «… puntutik … puntura», «0tik 10 minutura … 45era … 25ean» → «0 eta 10 minutu artean … 45 km/h-ra … 25 minutuan»). En Grafikoa, «Erpina: x = −b : 2a» se queda: el test lo admite (la a es la letra). Solo cambia el euskera; las fórmulas son las mismas en los cuatro idiomas. Lo vigila `tests/lessons-basque-suffixes.test.ts`, que ahora mira el archivo de lecciones de todas las unidades.
+
+**Teoría de 4. DBH aplicadas con las mejoras de 2. DBH (2026-11-04/05, rama `feat/teoria-dbh4ap`, sin publicar):** las 7 unidades sin nota propia tienen ya sus textos en `lessonTexts.ts` y su error típico y «Compruébalo» en `lessonChecks.ts`:
+- Polinomios: 3923e368.
+- Ecuaciones y sistemas: c250af3f. Igualación y Reducción explican ya el sistema de su dibujo.
+- Perímetros, áreas y volúmenes: 9a917792.
+- Semejanza: 82173a8e.
+- Funciones: 223af38f.
+- Gráfica de una función: 7128be5e. El dibujo de La ecuación de una recta va tras los pasos.
+- Estadística y probabilidad: 9acebdf0. Tablas de contingencia ya no da la respuesta en la explicación, 12 dibujos van tras los pasos, y en el CV `2500` va sin espacio.
+
+Ids, «¿Por qué funciona?», enlaces y trucos en [teoria-dbh4ap](teoria-dbh4ap.md).

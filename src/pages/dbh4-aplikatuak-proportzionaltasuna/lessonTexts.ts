@@ -1,4 +1,5 @@
-import type { LessonMistake, LessonStep, LocalizedText } from '../../features/unit-v2/types.ts'
+import type { LessonTexts, LocalizedText } from '../../features/unit-v2/types.ts'
+import type { ProportionDbh4ApTopicId } from './lessonChecks.ts'
 
 /* ==========================================================================
    Proportzionaltasuna · 4. DBH aplikatuak — the explanation of each lesson,
@@ -11,12 +12,6 @@ import type { LessonMistake, LessonStep, LocalizedText } from '../../features/un
    tests/proportzionaltasuna-dbh4ap-lessons.test.ts.
    ========================================================================== */
 
-export interface LessonTexts {
-    explanation: LocalizedText
-    cases: LessonStep[]
-    mistake: LessonMistake
-}
-
 /** In Basque and Spanish a number never breaks from its sign: 3,60 €, 25 %, % 25, and $r$ % after a formula */
 const glue = (text: string) => text.split(/(\$[^$]*\$)/).map((part) => (part.startsWith('$') ? part : part.replace(/(\d) ([€%])/g, '$1\u00a0$2').replace(/% (?=\d)|% $/g, '%\u00a0').replace(/^ ([€%])/, '\u00a0$1'))).join('')
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */
@@ -24,7 +19,7 @@ const say = (eu: string, es: string, ar: string, en: string): LocalizedText => (
 /** The same formula in every language; the decimal comma becomes a point in Arabic */
 const same = (value: string): LocalizedText => ({ eu: value, es: value, en: value, ar: value.replace(/\{,\}/g, '.') })
 
-export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
+export const proportionDbh4ApLessonTexts: Record<ProportionDbh4ApTopicId, LessonTexts> = {
     /* ---------- 1. Simple proportionality ---------- */
     relations: {
         explanation: say(
@@ -55,20 +50,14 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                 math: same('$\\frac{120}{90}\\cdot 7\\approx 9{,}3\\neq 12$')
             }
         ],
-        mistake: {
-            wrong: say(
-                'Abiadura igotzean kontsumoa ere igotzen da; beraz, zuzenki proportzionalak dira.',
-                'Al subir la velocidad sube el consumo, así que son directamente proporcionales.',
-                'إذا زادت السرعة زاد الاستهلاك، إذن هما متناسبان طرديًا.',
-                'When the speed goes up, the fuel use goes up, so they are directly proportional.'
-            ),
-            right: say(
-                'Batera haztea ez da nahikoa: zatidurak berdina izan beharko luke, eta $\\frac{7}{90}\\neq\\frac{12}{120}$.',
-                'Crecer a la vez no basta: el cociente tendría que ser el mismo, y $\\frac{7}{90}\\neq\\frac{12}{120}$.',
-                'لا يكفي أن يزيدا معًا: يجب أن يكون حاصل القسمة نفسه، و$\\frac{7}{90}\\neq\\frac{12}{120}$.',
-                'Growing together is not enough: the quotient would have to be the same, and $\\frac{7}{90}\\neq\\frac{12}{120}$.'
-            )
-        }
+        vocabulary: [
+            say('magnitudea', 'magnitud', 'مقدار', 'quantity'),
+            say('balio-taula', 'tabla de valores', 'جدول قيم', 'table of values'),
+            say('zatidura', 'cociente', 'حاصل القسمة', 'quotient')
+        ],
+        examplePrompt: say('150 km-ko bidaia batean, nolakoak dira abiadura eta denbora: 2 h 75 km/h-ra, 3 h 50 km/h-ra?', 'En un viaje de 150 km, ¿cómo son la velocidad y el tiempo: 2 h a 75 km/h, 3 h a 50 km/h?', 'في رحلة طولها 150 كم، ما العلاقة بين السرعة والزمن: ساعتان بسرعة 75 كم/س، و3 ساعات بسرعة 50 كم/س؟', 'On a 150 km trip, how are the speed and the time related: 2 h at 75 km/h, 3 h at 50 km/h?'),
+        example: same('$75\\cdot 2=50\\cdot 3=150$'),
+        exampleAnswer: say('Biderkadura konstantea da: alderantziz proportzionalak dira.', 'El producto es constante: son inversamente proporcionales.', 'حاصل الضرب ثابت: هما متناسبان عكسيًا.', 'The product is constant: they are inversely proportional.')
     },
     'direct-rule': {
         explanation: say(
@@ -108,20 +97,14 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                 )
             }
         ],
-        mistake: {
-            wrong: say(
-                '0,75 l oliok 3,60 € balio badu, litro batek $3{,}60\\cdot 0{,}75=2{,}70$ € balio du.',
-                'Si 0,75 l cuestan 3,60 €, un litro cuesta $3{,}60\\cdot 0{,}75=2{,}70$ €.',
-                'إذا كان ثمن 0.75 ل هو 3.60 €، فثمن اللتر $3{,}60\\cdot 0{,}75=2{,}70$ €.',
-                'If 0.75 l costs €3.60, one litre costs €$3{,}60\\cdot 0{,}75=2{,}70$.'
-            ),
-            right: say(
-                'Litro bat 0,75 l baino gehiago da; beraz, garestiagoa izan behar du: $3{,}60\\mathbin{:}0{,}75=4{,}80$ €.',
-                'Un litro es más que 0,75 l, así que tiene que costar más: $3{,}60\\mathbin{:}0{,}75=4{,}80$ €.',
-                'اللتر أكثر من 0.75 ل، فيجب أن يكون ثمنه أكبر: $3{,}60\\mathbin{:}0{,}75=4{,}80$ €.',
-                'One litre is more than 0.75 l, so it must cost more: €$3{,}60\\mathbin{:}0{,}75=4{,}80$.'
-            )
-        }
+        vocabulary: [
+            say('hiruko erregela', 'regla de tres', 'قاعدة الثلاثة', 'rule of three'),
+            say('proportzioa', 'proporción', 'التناسب', 'proportion'),
+            say('unitatea', 'unidad', 'الوحدة', 'unit')
+        ],
+        examplePrompt: say('4 kg laranjak $6{,}20$ € balio badute, zenbat balio dute 10 kg?', 'Si 4 kg de naranjas cuestan $6{,}20$ €, ¿cuánto cuestan 10 kg?', 'إذا كان ثمن 4 كغ من البرتقال $6{,}20$ €، فكم ثمن 10 كغ؟', 'If 4 kg of oranges cost €$6{,}20$, how much do 10 kg cost?'),
+        example: same('$x=\\frac{6{,}20\\cdot 10}{4}=15{,}50$'),
+        exampleAnswer: say('Kilo gehiago, euro gehiago: $15{,}50$ €.', 'Más kilos, más euros: $15{,}50$ €.', 'كيلوغرامات أكثر، يوروهات أكثر: $15{,}50$ €.', 'More kilos, more euros: €$15{,}50$.')
     },
     'inverse-rule': {
         explanation: say(
@@ -142,7 +125,7 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                     'Bazka 35 behirentzat 60 egunez: guztira, 2100 «behi-egun». 20 behirekin:',
                     'Pasto para 35 vacas durante 60 días: 2100 «vacas-día» en total. Con 20 vacas:',
                     'علف يكفي 35 بقرة مدة 60 يومًا: 2100 «بقرة-يوم» في المجموع. مع 20 بقرة:',
-                    'Grass for 35 cows for 60 days: 2100 “cow-days” in all. With 20 cows:'
+                    'Grass for 35 cows for 60 days: 2,100 “cow-days” in all. With 20 cows:'
                 ),
                 math: same('$\\frac{35\\cdot 60}{20}=105$')
             },
@@ -156,20 +139,14 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                 )
             }
         ],
-        mistake: {
-            wrong: say(
-                '35 behiren ordez 20 behirekin, bazkak $\\frac{60\\cdot 20}{35}\\approx 34$ egun irauten du.',
-                'Con 20 vacas en lugar de 35, el pasto dura $\\frac{60\\cdot 20}{35}\\approx 34$ días.',
-                'مع 20 بقرة بدل 35 يكفي العلف $\\frac{60\\cdot 20}{35}\\approx 34$ يومًا.',
-                'With 20 cows instead of 35, the grass lasts $\\frac{60\\cdot 20}{35}\\approx 34$ days.'
-            ),
-            right: say(
-                'Behi gutxiago → egun gehiago: alderantzizkoa da, eta biderkadura ez da aldatzen: $\\frac{35\\cdot 60}{20}=105$ egun.',
-                'Menos vacas → más días: es inversa, y el producto no cambia: $\\frac{35\\cdot 60}{20}=105$ días.',
-                'بقر أقل ← أيام أكثر: التناسب عكسي، وحاصل الضرب لا يتغير: $\\frac{35\\cdot 60}{20}=105$ يومًا.',
-                'Fewer cows → more days: it is inverse, and the product does not change: $\\frac{35\\cdot 60}{20}=105$ days.'
-            )
-        }
+        vocabulary: [
+            say('alderantzizkoa', 'inversa', 'عكسية', 'inverse'),
+            say('biderkadura', 'producto', 'حاصل الضرب', 'product'),
+            say('errenkada', 'fila', 'صف', 'row')
+        ],
+        examplePrompt: say('4 txorrotak biltegi bat 9 ordutan betetzen dute. Zenbat behar dute 6 txorrota berdinek?', '4 grifos llenan un depósito en 9 horas. ¿Cuánto tardan 6 grifos iguales?', '4 صنابير تملأ خزانًا في 9 ساعات. كم تحتاج 6 صنابير مماثلة؟', '4 taps fill a tank in 9 hours. How long do 6 identical taps take?'),
+        example: same('$x=\\frac{4\\cdot 9}{6}=6$'),
+        exampleAnswer: say('Txorrota gehiago, ordu gutxiago: 6 ordu.', 'Más grifos, menos horas: 6 horas.', 'صنابير أكثر، ساعات أقل: 6 ساعات.', 'More taps, fewer hours: 6 hours.')
     },
 
     /* ---------- 2. Compound proportionality and shares ---------- */
@@ -202,20 +179,14 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                 math: same('$10\\cdot\\frac{3}{5}\\cdot\\frac{8}{6}=8$')
             }
         ],
-        mistake: {
-            wrong: say(
-                '3 margolariren ordez 5 margolarirekin: $10\\cdot\\frac{3}{5}=6$ egun.',
-                'Con 5 pintores en vez de 3: $10\\cdot\\frac{3}{5}=6$ días.',
-                'مع 5 دهّانين بدل 3: $10\\cdot\\frac{3}{5}=6$ أيام.',
-                'With 5 painters instead of 3: $10\\cdot\\frac{3}{5}=6$ days.'
-            ),
-            right: say(
-                'Eguneko orduak ere aldatzen dira, eta aldaketa bakoitzak bere zatikia du: $10\\cdot\\frac{3}{5}\\cdot\\frac{8}{6}=8$ egun.',
-                'También cambian las horas al día, y cada cambio pone su fracción: $10\\cdot\\frac{3}{5}\\cdot\\frac{8}{6}=8$ días.',
-                'تتغير أيضًا الساعات اليومية، ولكل تغيّر كسره: $10\\cdot\\frac{3}{5}\\cdot\\frac{8}{6}=8$ أيام.',
-                'The hours a day change too, and each change brings its own fraction: $10\\cdot\\frac{3}{5}\\cdot\\frac{8}{6}=8$ days.'
-            )
-        }
+        vocabulary: [
+            say('ezezaguna', 'incógnita', 'المجهول', 'unknown'),
+            say('zatikiak', 'fracciones', 'الكسور', 'fractions'),
+            say('zuzena', 'directa', 'طردي', 'direct')
+        ],
+        examplePrompt: say('6 makinak 900 pieza egiten dituzte 5 ordutan. Zenbat pieza egiten dituzte 4 makinak 8 ordutan?', '6 máquinas fabrican 900 piezas en 5 horas. ¿Cuántas piezas fabrican 4 máquinas en 8 horas?', '6 آلات تصنع 900 قطعة في 5 ساعات. كم قطعة تصنع 4 آلات في 8 ساعات؟', '6 machines make 900 parts in 5 hours. How many parts do 4 machines make in 8 hours?'),
+        example: same('$900\\cdot\\frac{4}{6}\\cdot\\frac{8}{5}=960$'),
+        exampleAnswer: say('Biak zuzenak dira (makina gutxiago → pieza gutxiago; ordu gehiago → pieza gehiago): 960 pieza.', 'Las dos son directas (menos máquinas → menos piezas; más horas → más piezas): 960 piezas.', 'كلاهما طردي (آلات أقل ← قطع أقل؛ ساعات أكثر ← قطع أكثر): 960 قطعة.', 'Both are direct (fewer machines → fewer parts; more hours → more parts): 960 parts.')
     },
     'direct-share': {
         explanation: say(
@@ -246,20 +217,14 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                 math: same('$31{,}20+20{,}80+10{,}40=62{,}40$')
             }
         ],
-        mistake: {
-            wrong: say(
-                'Ameliak 60 egun daramatza etxean, eta $62{,}40\\mathbin{:}120=0{,}52$ € ordaintzen ditu.',
-                'Amelia lleva 60 días en el piso y paga $62{,}40\\mathbin{:}120=0{,}52$ €.',
-                'أمضت أميليا 60 يومًا في الشقة وتدفع $62{,}40\\mathbin{:}120=0{,}52$ €.',
-                'Amelia has lived in the flat for 60 days and pays €$62{,}40\\mathbin{:}120=0{,}52$.'
-            ),
-            right: say(
-                'Hori egun baten balioa da, eta Ameliak 60 egun daramatza: $60\\cdot 0{,}52=31{,}20$ €.',
-                'Eso es lo que vale un día, y Amelia lleva 60: $60\\cdot 0{,}52=31{,}20$ €.',
-                'هذه قيمة يوم واحد، وأميليا أمضت 60 يومًا: $60\\cdot 0{,}52=31{,}20$ €.',
-                'That is what one day is worth, and Amelia has been there for 60 days: €$60\\cdot 0{,}52=31{,}20$.'
-            )
-        }
+        vocabulary: [
+            say('banaketa zuzena', 'reparto directo', 'التوزيع الطردي', 'direct share'),
+            say('zati bakoitza', 'cada parte', 'كل جزء', 'each share'),
+            say('zatiaren balioa', 'valor de una parte', 'قيمة الجزء', 'value of one part')
+        ],
+        examplePrompt: say('Banatu 450 € hiru lagunen artean, egindako 2, 3 eta 4 lan-orduen arabera.', 'Reparte 450 € entre tres amigos en proporción a sus 2, 3 y 4 horas de trabajo.', 'وزّع 450 € على ثلاثة أصدقاء بنسبة ساعات عملهم 2 و3 و4.', 'Share €450 among three friends in proportion to their 2, 3 and 4 hours of work.'),
+        example: same('$\\begin{gathered}450\\div(2+3+4)=50\\\\ 100,\\ 150,\\ 200\\end{gathered}$'),
+        exampleAnswer: say('100 €, 150 € eta 200 €; batuta, 450 €.', '100 €, 150 € y 200 €, que suman 450 €.', '100 € و150 € و200 €، ومجموعها 450 €.', '€100, €150 and €200, which add up to €450.')
     },
     'inverse-share': {
         explanation: say(
@@ -272,12 +237,12 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
             {
                 title: say('Alderantzizkoekin', 'Con los inversos', 'بالمقلوبات', 'With the reciprocals'),
                 text: say(
-                    'Banatu 660 alderantziz; zenbakiak: 1, 2 eta 3. Alderantzizkoen batura $\\frac{11}{6}$ da. Zatiak: 360, 180 eta 120.',
-                    'Repartir 660 inversamente a 1, 2 y 3: la suma de los inversos es $\\frac{11}{6}$. Las partes son 360, 180 y 120.',
-                    'توزيع 660 عكسيًا على 1 و2 و3: مجموع المقلوبات $\\frac{11}{6}$. الأجزاء 360 و180 و120.',
-                    'Share 660 inversely in proportion to 1, 2 and 3: the reciprocals add up to $\\frac{11}{6}$. The shares are 360, 180 and 120.'
+                    'Banatu 22\u00a0000 € alderantziz; zenbakiak: 1, 2 eta 3. Alderantzizkoen batura $\\frac{11}{6}$ da. Zatiak: 12\u00a0000 €, 6000 € eta 4000 €.',
+                    'Repartir 22\u00a0000 € inversamente a 1, 2 y 3: la suma de los inversos es $\\frac{11}{6}$. Las partes son 12\u00a0000 €, 6000 € y 4000 €.',
+                    'توزيع 22\u00a0000 € عكسيًا على 1 و2 و3: مجموع المقلوبات $\\frac{11}{6}$. الأجزاء 12\u00a0000 € و6000 € و4000 €.',
+                    'Share €22,000 inversely in proportion to 1, 2 and 3: the reciprocals add up to $\\frac{11}{6}$. The shares are €12,000, €6,000 and €4,000.'
                 ),
-                math: same('$660\\mathbin{:}\\frac{11}{6}=360$')
+                math: same('$22\\,000\\mathbin{:}\\frac{11}{6}=12\\,000$')
             },
             {
                 title: say('Izendatzaile berarekin', 'Con el mismo denominador', 'بالمقام نفسه', 'With a common denominator'),
@@ -287,23 +252,25 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                     '$\\frac{6}{6}$ و$\\frac{3}{6}$ و$\\frac{2}{6}$: وزّع طرديًا على 6 و3 و2.',
                     '$\\frac{6}{6}$, $\\frac{3}{6}$ and $\\frac{2}{6}$: share directly in proportion to 6, 3 and 2.'
                 ),
-                math: same('$660\\mathbin{:}11=60$')
+                math: same('$22\\,000\\mathbin{:}11=2000$')
             }
         ],
-        mistake: {
-            wrong: say(
-                'Banatu 660 alderantziz; zenbakiak: 1, 2 eta 3. $660\\mathbin{:}6=110$, eta zatiak: 110, 220 eta 330.',
-                'Repartir 660 inversamente a 1, 2 y 3: $660\\mathbin{:}6=110$, y las partes son 110, 220 y 330.',
-                'توزيع 660 عكسيًا على 1 و2 و3: $660\\mathbin{:}6=110$، والأجزاء 110 و220 و330.',
-                'Share 660 inversely in proportion to 1, 2 and 3: $660\\mathbin{:}6=110$, so the shares are 110, 220 and 330.'
-            ),
-            right: say(
-                'Hori banaketa zuzena da: 3 zenbakiari zati handiena. Alderantzizkoan, alderantziz: 360, 180 eta 120.',
-                'Ese es el reparto directo: al 3 le toca la parte mayor. En el inverso es al revés: 360, 180 y 120.',
-                'هذا هو التوزيع الطردي: العدد 3 يأخذ الجزء الأكبر. وفي العكسي العكس: 360 و180 و120.',
-                'That is the direct share: 3 gets the largest share. In the inverse share it is the other way round: 360, 180 and 120.'
+        vocabulary: [
+            say('alderantzizkoak', 'inversos', 'مقلوبات', 'reciprocals'),
+            say('izendatzaile bera', 'mismo denominador', 'المقام نفسه', 'common denominator'),
+            say('banaketa', 'reparto', 'التوزيع', 'share')
+        ],
+        why: {
+            text: say(
+                'Zenbaki handienari gutxien tokatzen zaio; beraz, zenbakia handitzean txikitzen den zerbaiten arabera banatzen da: haren alderantzizkoa. 1, 2 eta 3 zenbakien alderantzizkoak 1, $\\frac{1}{2}$ eta $\\frac{1}{3}$ dira: 3 zenbakiari zatirik txikiena.',
+                'Al número mayor le toca menos, así que se reparte según algo que baje cuando el número sube: su inverso. Los inversos de 1, 2 y 3 son 1, $\\frac{1}{2}$ y $\\frac{1}{3}$: al 3 le toca la parte menor.',
+                'العدد الأكبر يأخذ أقل، لذلك نوزّع حسب شيء يصغر حين يكبر العدد: مقلوبه. مقلوبات 1 و2 و3 هي 1 و$\\frac{1}{2}$ و$\\frac{1}{3}$: فيأخذ 3 الجزء الأصغر.',
+                'The largest number gets the least, so you share by something that goes down when the number goes up: its reciprocal. The reciprocals of 1, 2 and 3 are 1, $\\frac{1}{2}$ and $\\frac{1}{3}$: 3 gets the smallest share.'
             )
-        }
+        },
+        examplePrompt: say('Banatu 260 € 2, 3 eta 4 zenbakiekiko alderantziz proportzionalki.', 'Reparte 260 € en partes inversamente proporcionales a 2, 3 y 4.', 'وزّع 260 € توزيعًا عكسيًا على 2 و3 و4.', 'Share €260 in inverse proportion to 2, 3 and 4.'),
+        example: same('$\\frac{6}{12},\\ \\frac{4}{12},\\ \\frac{3}{12}\\ \\to\\ 260\\div 13=20$'),
+        exampleAnswer: say('Zuzenean 6, 4 eta 3 zenbakiekiko: 120 €, 80 € eta 60 €. 4 zenbakiari zatirik txikiena.', 'Directamente a 6, 4 y 3: 120 €, 80 € y 60 €. Al 4 le toca la parte menor.', 'طرديًا على 6 و4 و3: 120 € و80 € و60 €. ويأخذ 4 الجزء الأصغر.', 'Directly in proportion to 6, 4 and 3: €120, €80 and €60. 4 gets the smallest share.')
     },
 
     /* ---------- 3. Percentages ---------- */
@@ -325,7 +292,7 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                 text: say(
                     'Zatia zati hamartarra: 24\u00a0000 zale estadioaren edukieraren % 80 dira.',
                     'Parte entre decimal: 24\u00a0000 aficionados son el 80 % de la capacidad del estadio.',
-                    'الجزء على العشري: 24000 مشجع هم 80٪ من سعة الملعب.',
+                    'الجزء على العشري: 24\u00a0000 مشجع هم 80٪ من سعة الملعب.',
                     'Part divided by decimal: 24,000 fans are 80% of the stadium\'s capacity.'
                 ),
                 math: same('$24\\,000\\mathbin{:}0{,}8=30\\,000$')
@@ -336,25 +303,19 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                     'Zatia zati osoa, bider 100. Elenak 5000 € zituen, eta 750 € gastatu ditu:',
                     'Parte entre total, por 100. Elena ha gastado 750 € de 5000 €:',
                     'الجزء على الكل، في 100. أنفقت إيلينا 750 € من 5000 €:',
-                    'Part divided by whole, times 100. Elena has spent €750 of €5000:'
+                    'Part divided by whole, times 100. Elena has spent €750 of €5,000:'
                 ),
                 math: same('$750\\mathbin{:}5000\\cdot 100=15$')
             }
         ],
-        mistake: {
-            wrong: say(
-                '24\u00a0000 zale osoaren % 80 dira: $24\\,000\\cdot 0{,}8=19\\,200$.',
-                '24\u00a0000 aficionados son el 80 % del total: $24\\,000\\cdot 0{,}8=19\\,200$.',
-                '24000 مشجع هم 80٪ من الكل: $24\\,000\\cdot 0{,}8=19\\,200$.',
-                '24,000 fans are 80% of the whole: $24\\,000\\cdot 0{,}8=19\\,200$.'
-            ),
-            right: say(
-                'Osoak bere % 80 baino handiagoa izan behar du: zatitu egiten da, $24\\,000\\mathbin{:}0{,}8=30\\,000$.',
-                'El total tiene que ser mayor que su 80 %: se divide, $24\\,000\\mathbin{:}0{,}8=30\\,000$.',
-                'يجب أن يكون الكل أكبر من 80٪ منه: نقسم، $24\\,000\\mathbin{:}0{,}8=30\\,000$.',
-                'The whole must be bigger than 80% of it: you divide, $24\\,000\\mathbin{:}0{,}8=30\\,000$.'
-            )
-        }
+        vocabulary: [
+            say('ehunekoa', 'porcentaje', 'النسبة المئوية', 'percentage'),
+            say('hamartarra', 'decimal', 'العشري', 'decimal'),
+            say('zatia', 'parte', 'الجزء', 'part')
+        ],
+        examplePrompt: say('25 ikasleko gela batean, 7 ikaslek betaurrekoak dituzte. Zer ehuneko da?', 'En una clase de 25 alumnos, 7 llevan gafas. ¿Qué porcentaje es?', 'في صف فيه 25 تلميذًا، 7 منهم يلبسون نظارات. ما النسبة المئوية؟', 'In a class of 25 students, 7 wear glasses. What percentage is that?'),
+        example: same('$7\\div 25\\cdot 100=28$'),
+        exampleAnswer: say('Zatia zati osoa, bider 100: % 28.', 'Parte entre total, por 100: el 28 %.', 'الجزء على الكل في 100: 28٪.', 'Part divided by whole, times 100: 28%.')
     },
     index: {
         explanation: say(
@@ -367,10 +328,10 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
             {
                 title: say('Igoera eta jaitsiera', 'Subida y bajada', 'زيادة ونقصان', 'Increase and decrease'),
                 text: say(
-                    '% $p$ igotzean, $1+\\frac{p}{100}$ (BEZa, % 21 → 1,21). % $p$ jaistean, $1-\\frac{p}{100}$ (beherapena, % 25 → 0,75).',
-                    'Subir un $p$ %: $1+\\frac{p}{100}$ (IVA del 21 % → 1,21). Bajar un $p$ %: $1-\\frac{p}{100}$ (rebaja del 25 % → 0,75).',
-                    'زيادة $p$٪: $1+\\frac{p}{100}$ (ضريبة 21٪ ← 1.21). نقصان $p$٪: $1-\\frac{p}{100}$ (تخفيض 25٪ ← 0.75).',
-                    'Increase by $p$%: $1+\\frac{p}{100}$ (21% VAT → 1.21). Decrease by $p$%: $1-\\frac{p}{100}$ (25% off → 0.75).'
+                    '% $p$ igotzean, $1+\\frac{p}{100}$ (BEZa, % 21 → 1,21). % $p$ jaistean, $1-\\frac{p}{100}$ (beherapena, % 30 → 0,70).',
+                    'Subir un $p$ %: $1+\\frac{p}{100}$ (IVA del 21 % → 1,21). Bajar un $p$ %: $1-\\frac{p}{100}$ (rebaja del 30 % → 0,70).',
+                    'زيادة $p$٪: $1+\\frac{p}{100}$ (ضريبة 21٪ ← 1.21). نقصان $p$٪: $1-\\frac{p}{100}$ (تخفيض 30٪ ← 0.70).',
+                    'Increase by $p$%: $1+\\frac{p}{100}$ (21% VAT → 1.21). Decrease by $p$%: $1-\\frac{p}{100}$ (30% off → 0.70).'
                 )
             },
             {
@@ -394,20 +355,20 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                 math: same('$442\\mathbin{:}520=0{,}85$')
             }
         ],
-        mistake: {
-            wrong: say(
-                '% 21 BEZa kentzeko, % 21 jaisten da: $143{,}99\\cdot 0{,}79\\approx 113{,}75$ €.',
-                'Para quitar el IVA del 21 %, se rebaja un 21 %: $143{,}99\\cdot 0{,}79\\approx 113{,}75$ €.',
-                'لإزالة ضريبة 21٪ نخفّض 21٪: $143{,}99\\cdot 0{,}79\\approx 113{,}75$ €.',
-                'To take off 21% VAT, you take off 21%: €$143{,}99\\cdot 0{,}79\\approx 113{,}75$.'
-            ),
-            right: say(
-                '% 21 hori BEZik gabeko prezioari aplikatu zitzaion, ez faktura osoari: zatitu egiten da, $143{,}99\\mathbin{:}1{,}21=119$ €.',
-                'El 21 % se calculó sobre el precio sin IVA, no sobre la factura: se divide, $143{,}99\\mathbin{:}1{,}21=119$ €.',
-                'حُسبت الـ21٪ على السعر دون ضريبة لا على الفاتورة: نقسم، $143{,}99\\mathbin{:}1{,}21=119$ €.',
-                'The 21% was worked out on the price without VAT, not on the bill: you divide, €$143{,}99\\mathbin{:}1{,}21=119$.'
-            )
-        }
+        definitions: [
+            {
+                term: say('Aldakuntza-indizea', 'Índice de variación', 'مؤشر التغيّر', 'Multiplier'),
+                meaning: say('Hasierako kantitatea zenbakiz biderkatu behar den, amaierakoa lortzeko.', 'El número por el que se multiplica la cantidad inicial para obtener la final.', 'العدد الذي نضرب فيه الكمية الأصلية لنحصل على النهائية.', 'The number you multiply the original amount by to get the final one.')
+            }
+        ],
+        vocabulary: [
+            say('igoera', 'subida', 'زيادة', 'increase'),
+            say('atzera', 'hacia atrás', 'إلى الوراء', 'backwards'),
+            say('ehunekoa', 'porcentaje', 'النسبة', 'percentage')
+        ],
+        examplePrompt: say('80 euroko beroki bat % 12 garestitu da. Zenbat balio du orain?', 'Un abrigo de 80 € sube un 12 %. ¿Cuánto cuesta ahora?', 'معطف ثمنه 80 € ارتفع سعره 12٪. كم ثمنه الآن؟', 'An €80 coat goes up 12%. How much does it cost now?'),
+        example: same('$80\\cdot 1{,}12=89{,}60$'),
+        exampleAnswer: say('Igoera baten indizea $1{,}12$ da: $89{,}60$ €.', 'El índice de la subida es $1{,}12$: $89{,}60$ €.', 'مؤشر الزيادة $1{,}12$: $89{,}60$ €.', 'The multiplier for the increase is $1{,}12$: €$89{,}60$.')
     },
     chained: {
         explanation: say(
@@ -422,7 +383,7 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                 text: say(
                     'Herri batek 25\u00a0000 biztanle ditu; % 18 hazten da, eta gero % 25:',
                     'Un pueblo de 25\u00a0000 habitantes crece un 18 % y luego un 25 %:',
-                    'بلدة فيها 25000 نسمة تنمو 18٪ ثم 25٪:',
+                    'بلدة فيها 25\u00a0000 نسمة تنمو 18٪ ثم 25٪:',
                     'A town of 25,000 people grows by 18% and then by 25%:'
                 ),
                 math: same('$25\\,000\\cdot 1{,}18\\cdot 1{,}25=36\\,875$')
@@ -448,20 +409,23 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                 math: same('$1{,}2\\cdot 0{,}8=0{,}96$')
             }
         ],
-        mistake: {
-            wrong: say(
-                'Saltzaile batek % 40 igo, eta gero % 40 jaisten du: $40-40=0$, prezioa berdin geratzen da.',
-                'Un comerciante sube un 40 % y luego rebaja un 40 %: $40-40=0$, el precio queda igual.',
-                'يرفع تاجر السعر 40٪ ثم يخفّضه 40٪: $40-40=0$، فيبقى السعر كما هو.',
-                'A shopkeeper puts prices up by 40% and then down by 40%: $40-40=0$, so the price stays the same.'
+        vocabulary: [
+            say('indize osoa', 'índice total', 'المؤشر الكلي', 'total multiplier'),
+            say('biderkadura', 'producto', 'حاصل ضرب', 'product'),
+            say('igoera', 'subida', 'زيادة', 'increase')
+        ],
+        why: {
+            text: say(
+                'Bigarren ehunekoa jada aldatutako prezioaren gainean kalkulatzen da. 100 € % 10 igotzen dira: 110 €. 110 euroren % 10 jaistea 11 € kentzea da, ez 10 €: 99 € geratzen dira.',
+                'El segundo porcentaje se calcula sobre el precio ya cambiado. 100 € suben un 10 %: 110 €. Bajar un 10 % de 110 € es quitar 11 €, no 10 €: quedan 99 €.',
+                'تُحسب النسبة الثانية من السعر بعد تغيّره. 100 € تزيد 10٪: 110 €. وإنقاص 10٪ من 110 € هو طرح 11 € لا 10 €: يبقى 99 €.',
+                'The second percentage is worked out on the price that has already changed. €100 goes up 10%: €110. Taking 10% off €110 is taking €11 off, not €10: €99 is left.'
             ),
-            right: say(
-                'Beherapena igotako prezioari aplikatzen zaio: $1{,}4\\cdot 0{,}6=0{,}84$, hasieran baino % 16 gutxiago.',
-                'La rebaja se aplica al precio ya subido: $1{,}4\\cdot 0{,}6=0{,}84$, un 16 % menos que al principio.',
-                'يُطبَّق التخفيض على السعر بعد رفعه: $1{,}4\\cdot 0{,}6=0{,}84$، أي أقل بـ16٪ من البداية.',
-                'The cut is applied to the raised price: $1{,}4\\cdot 0{,}6=0{,}84$, 16% less than at the start.'
-            )
-        }
+            math: same('$100\\cdot 1{,}1\\cdot 0{,}9=99$')
+        },
+        examplePrompt: say('200 euroko prezio bat % 10 jaitsi da, eta gero % 30 igo. Zein da azken prezioa?', 'Un precio de 200 € baja un 10 % y después sube un 30 %. ¿Cuál es el precio final?', 'سعر 200 € انخفض 10٪ ثم ارتفع 30٪. ما السعر النهائي؟', 'A €200 price falls 10% and then rises 30%. What is the final price?'),
+        example: same('$200\\cdot 0{,}9\\cdot 1{,}3=234$'),
+        exampleAnswer: say('Indize osoa $0{,}9\\cdot 1{,}3=1{,}17$ da: 234 €, % 17 gehiago.', 'El índice total es $0{,}9\\cdot 1{,}3=1{,}17$: 234 €, un 17 % más.', 'المؤشر الكلي $0{,}9\\cdot 1{,}3=1{,}17$: 234 €، أي أكثر بـ 17٪.', 'The total multiplier is $0{,}9\\cdot 1{,}3=1{,}17$: €234, 17% more.')
     },
 
     /* ---------- 4. Simple and compound interest ---------- */
@@ -484,7 +448,7 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                     'Hilabete bat urtearen $\\frac{1}{12}$ da: zatitzailea $100\\cdot 12=1200$ da. Kapitala 1000 €, tasa % 4, 4 hilabete:',
                     'Un mes es $\\frac{1}{12}$ de año: se divide entre $100\\cdot 12=1200$. 1000 € al 4 % durante 4 meses:',
                     'الشهر $\\frac{1}{12}$ من السنة: نقسم على $100\\cdot 12=1200$. 1000 € بنسبة 4٪ مدة 4 أشهر:',
-                    'A month is $\\frac{1}{12}$ of a year: divide by $100\\cdot 12=1200$. €1000 at 4% for 4 months:'
+                    'A month is $\\frac{1}{12}$ of a year: divide by $100\\cdot 12=1200$. €1,000 at 4% for 4 months:'
                 ),
                 math: same('$\\frac{1000\\cdot 4\\cdot 4}{1200}\\approx 13{,}33$')
             },
@@ -504,20 +468,14 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                 math: same('$C=\\frac{448{,}80\\cdot 1200}{3{,}2\\cdot 9}=18\\,700$')
             }
         ],
-        mistake: {
-            wrong: say(
-                'Kapitala 1000 €, tasa % 4, 4 hilabete: $\\frac{1000\\cdot 4\\cdot 4}{100}=160$ €.',
-                '1000 € al 4 % durante 4 meses: $\\frac{1000\\cdot 4\\cdot 4}{100}=160$ €.',
-                '1000 € بنسبة 4٪ مدة 4 أشهر: $\\frac{1000\\cdot 4\\cdot 4}{100}=160$ €.',
-                '€1000 at 4% for 4 months: €$\\frac{1000\\cdot 4\\cdot 4}{100}=160$.'
-            ),
-            right: say(
-                'Horrela hilabeteak urte balira bezala hartzen dira, eta 12 aldiz gehiago ateratzen da. Hilabeteekin, zatitzailea 1200 da: $\\frac{1000\\cdot 4\\cdot 4}{1200}\\approx 13{,}33$ €.',
-                'Así se toman los meses como si fueran años, y sale 12 veces más. Con meses se divide entre 1200: $\\frac{1000\\cdot 4\\cdot 4}{1200}\\approx 13{,}33$ €.',
-                'هكذا تُحسب الأشهر كأنها سنوات، فيخرج 12 ضعفًا. بالأشهر نقسم على 1200: $\\frac{1000\\cdot 4\\cdot 4}{1200}\\approx 13{,}33$ €.',
-                'That treats the months as years, and gives 12 times as much. With months, divide by 1200: €$\\frac{1000\\cdot 4\\cdot 4}{1200}\\approx 13{,}33$.'
-            )
-        }
+        vocabulary: [
+            say('kapitala', 'capital', 'رأس المال', 'principal'),
+            say('tasa', 'tipo', 'السعر', 'rate'),
+            say('interes bakuna', 'interés simple', 'الفائدة البسيطة', 'simple interest')
+        ],
+        examplePrompt: say('Zenbat interes ematen dute 2500 eurok, % 4 interesarekin, 3 urtez?', '¿Qué interés producen 2500 € al 4 % durante 3 años?', 'ما الفائدة التي تنتجها 2500 € بسعر 4٪ مدة 3 سنوات؟', 'What interest do €2,500 earn at 4% over 3 years?'),
+        example: same('$I=\\frac{2500\\cdot 4\\cdot 3}{100}=300$'),
+        exampleAnswer: say('Urtetan, 100 zenbakiaz zatitzen da: 300 €.', 'En años se divide entre 100: 300 €.', 'بالسنوات نقسم على 100: 300 €.', 'In years, divide by 100: €300.')
     },
     'compound-interest': {
         explanation: say(
@@ -533,7 +491,7 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                     'Kapitala 1000 €, tasa % 10: bakunean 1100, 1200, 1300; konposatuan 1100, 1210, 1331.',
                     '1000 € al 10 %: en simple, 1100, 1200, 1300; en compuesto, 1100, 1210, 1331.',
                     '1000 € بنسبة 10٪: في البسيطة 1100، 1200، 1300؛ وفي المركّبة 1100، 1210، 1331.',
-                    '€1000 at 10%: simple interest gives 1100, 1200, 1300; compound gives 1100, 1210, 1331.'
+                    '€1,000 at 10%: simple interest gives 1,100, 1,200, 1,300; compound gives 1,100, 1,210, 1,331.'
                 ),
                 math: same('$1000\\cdot 1{,}1^{3}=1331$')
             },
@@ -543,7 +501,7 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                     '$t$ urtetan, $t$ aldiz indizea. Kapitala 5600 €, tasa % 3,8, 10 urte:',
                     'En $t$ años, $t$ veces el índice. 5600 € al 3,8 % durante 10 años:',
                     'في $t$ سنوات نضرب في المؤشر $t$ مرات. 5600 € بنسبة 3.8٪ مدة 10 سنوات:',
-                    'In $t$ years, the multiplier $t$ times. €5600 at 3.8% for 10 years:'
+                    'In $t$ years, the multiplier $t$ times. €5,600 at 3.8% for 10 years:'
                 ),
                 math: same('$5600\\cdot 1{,}038^{10}\\approx 8131{,}33$')
             },
@@ -558,20 +516,23 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                 math: same('$C=C_f\\mathbin{:}\\left(1+\\frac{r}{100}\\right)^{t}$')
             }
         ],
-        mistake: {
-            wrong: say(
-                'Kapitala 1000 €, tasa % 10, 3 urte, interes konposatuan: $1000+3\\cdot 100=1300$ €.',
-                '1000 € al 10 % durante 3 años, a interés compuesto: $1000+3\\cdot 100=1300$ €.',
-                '1000 € بنسبة 10٪ مدة 3 سنوات بفائدة مركّبة: $1000+3\\cdot 100=1300$ €.',
-                '€1000 at 10% for 3 years with compound interest: €$1000+3\\cdot 100=1300$.'
+        vocabulary: [
+            say('interes konposatua', 'interés compuesto', 'الفائدة المركّبة', 'compound interest'),
+            say('kapitala', 'capital', 'رأس المال', 'principal'),
+            say('indizea', 'índice', 'المؤشر', 'multiplier')
+        ],
+        why: {
+            text: say(
+                '% 10 gehitzea $1{,}1$ zenbakiaz biderkatzea da: $1000+100=1000\\cdot 1{,}1$. Hurrengo urtean gauza bera egiten da kapital berriarekin; beraz, urte bakoitzak $\\cdot 1{,}1$ bat gehiago dakar: 3 urtetan, $1{,}1^{3}$.',
+                'Sumar el 10 % es multiplicar por $1{,}1$: $1000+100=1000\\cdot 1{,}1$. Al año siguiente se repite con el capital nuevo, así que cada año añade otro $\\cdot 1{,}1$: en 3 años, $1{,}1^{3}$.',
+                'إضافة 10٪ هي الضرب في $1{,}1$: $1000+100=1000\\cdot 1{,}1$. وفي السنة التالية يتكرر ذلك مع رأس المال الجديد، فكل سنة تضيف $\\cdot 1{,}1$ أخرى: في 3 سنوات $1{,}1^{3}$.',
+                'Adding 10% is multiplying by $1{,}1$: $1000+100=1000\\cdot 1{,}1$. The next year it happens again with the new principal, so each year adds another $\\cdot 1{,}1$: in 3 years, $1{,}1^{3}$.'
             ),
-            right: say(
-                'Hori interes bakuna da. Konposatuan, urtero indizeaz biderkatzen da: $1000\\cdot 1{,}1^{3}=1331$ €.',
-                'Eso es interés simple. En compuesto, cada año se multiplica por el índice: $1000\\cdot 1{,}1^{3}=1331$ €.',
-                'هذه فائدة بسيطة. في المركّبة نضرب كل سنة في المؤشر: $1000\\cdot 1{,}1^{3}=1331$ €.',
-                'That is simple interest. With compound interest, you multiply by the multiplier each year: €$1000\\cdot 1{,}1^{3}=1331$.'
-            )
-        }
+            math: same('$\\begin{aligned}1000\\cdot 1{,}1\\cdot 1{,}1\\cdot 1{,}1&=1000\\cdot 1{,}1^{3}\\\\ &=1331\\end{aligned}$')
+        },
+        examplePrompt: say('2000 € jartzen dira, % 4 interes konposatuarekin, 2 urtez. Zenbat diru egongo da?', 'Se colocan 2000 € al 4 % de interés compuesto durante 2 años. ¿Cuánto dinero habrá?', 'تُودَع 2000 € بفائدة مركّبة 4٪ مدة سنتين. كم سيكون المال؟', '€2,000 is invested at 4% compound interest for 2 years. How much money will there be?'),
+        example: same('$2000\\cdot 1{,}04^{2}=2163{,}20$'),
+        exampleAnswer: say('$2163{,}20$ €; interes bakunarekin, 2160 € izango lirateke.', '$2163{,}20$ €; con interés simple serían 2160 €.', '$2163{,}20$ €؛ وبالفائدة البسيطة تكون 2160 €.', '€$2163{,}20$; with simple interest it would be €2,160.')
     },
     periods: {
         explanation: say(
@@ -593,7 +554,7 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
             },
             {
                 title: say('Urtekoa', 'Anual', 'سنويًا', 'Once a year'),
-                text: say('Kapitala 24\u00a0000 €, tasa % 4,8, 5 urte:', '24\u00a0000 € al 4,8 % durante 5 años:', '24000 € بنسبة 4.8٪ مدة 5 سنوات:', '€24,000 at 4.8% for 5 years:'),
+                text: say('Kapitala 24\u00a0000 €, tasa % 4,8, 5 urte:', '24\u00a0000 € al 4,8 % durante 5 años:', '24\u00a0000 € بنسبة 4.8٪ مدة 5 سنوات:', '€24,000 at 4.8% for 5 years:'),
                 math: same('$24\\,000\\cdot 1{,}048^{5}\\approx 30\\,340{,}15$')
             },
             {
@@ -607,20 +568,20 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                 math: same('$24\\,000\\cdot 1{,}004^{60}\\approx 30\\,495{,}38$')
             }
         ],
-        mistake: {
-            wrong: say(
-                'Hilekoa, tasa % 4,8: hilabete bakoitzean % 4,8, $24\\,000\\cdot 1{,}048^{60}$.',
-                'Mensual al 4,8 %: cada mes un 4,8 %, $24\\,000\\cdot 1{,}048^{60}$.',
-                'شهريًا بنسبة 4.8٪: كل شهر 4.8٪، $24\\,000\\cdot 1{,}048^{60}$.',
-                'Monthly at 4.8%: 4.8% every month, $24\\,000\\cdot 1{,}048^{60}$.'
-            ),
-            right: say(
-                '% 4,8 hori urtekoa da: hilero, % $4{,}8\\mathbin{:}12=0{,}4$, eta indizea $1{,}004$ da.',
-                'El 4,8 % es anual: cada mes, $4{,}8\\mathbin{:}12=0{,}4$ %, y el índice es $1{,}004$.',
-                'الـ4.8٪ سنوية: كل شهر $4{,}8\\mathbin{:}12=0{,}4$٪، والمؤشر $1{,}004$.',
-                'The 4.8% is per year: each month, $4{,}8\\mathbin{:}12=0{,}4$%, so the multiplier is $1{,}004$.'
-            )
-        }
+        definitions: [
+            {
+                term: say('Kapitalizazio-aldia', 'Periodo de capitalización', 'فترة الرسملة', 'Compounding period'),
+                meaning: say('Bankuak interesak kapitalari gehitzen dizkion denbora-tartea: urtea, seihilekoa, hiruhilekoa, hilabetea…', 'Cada cuánto tiempo suma el banco los intereses al capital: año, semestre, trimestre, mes…', 'المدة التي يضيف بعدها المصرف الفوائد إلى رأس المال: سنة أو نصف سنة أو ربع سنة أو شهر…', 'How often the bank adds the interest to the principal: every year, half-year, quarter, month…')
+            }
+        ],
+        vocabulary: [
+            say('urteko tasa', 'tipo anual', 'السعر السنوي', 'annual rate'),
+            say('hilekoa', 'mensual', 'شهريًا', 'monthly'),
+            say('seihilekoa', 'semestre', 'نصف سنة', 'half-year')
+        ],
+        examplePrompt: say('5000 €, % 8 interesarekin, 3 urtez, interesak seihilekoan gehituta. Zenbat diru egongo da?', '5000 € al 8 % durante 3 años, con intereses semestrales. ¿Cuánto dinero habrá?', '5000 € بسعر 8٪ مدة 3 سنوات مع فوائد نصف سنوية. كم سيكون المال؟', '€5,000 at 8% for 3 years, with interest added every half-year. How much money will there be?'),
+        example: same('$5000\\cdot 1{,}04^{6}\\approx 6326{,}60$'),
+        exampleAnswer: say('Seihileko bakoitzean % 4, eta 6 seihileko: $6326{,}60$ €.', 'Cada semestre, un 4 %, y son 6 semestres: $6326{,}60$ €.', 'كل نصف سنة 4٪، وهناك 6 أنصاف سنة: $6326{,}60$ €.', 'Each half-year, 4%, and there are 6 half-years: €$6326{,}60$.')
     },
 
     /* ---------- 5. Other arithmetic problems ---------- */
@@ -662,20 +623,20 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                 )
             }
         ],
-        mistake: {
-            wrong: say(
-                'Kafearen prezio ertaina $\\frac{12{,}40+7{,}40}{2}=9{,}90$ €/kg da.',
-                'El precio medio del café es $\\frac{12{,}40+7{,}40}{2}=9{,}90$ €/kg.',
-                'السعر المتوسط للقهوة $\\frac{12{,}40+7{,}40}{2}=9{,}90$ €/كغ.',
-                'The average price of the coffee is €$\\frac{12{,}40+7{,}40}{2}=9{,}90$/kg.'
-            ),
-            right: say(
-                'Garestiaren kilo gehiago daude: kostu osoa zatitzen da kilo guztien artean, $208\\mathbin{:}20=10{,}40$ €/kg.',
-                'Hay más kilos del caro: se divide el coste total entre todos los kilos, $208\\mathbin{:}20=10{,}40$ €/kg.',
-                'الكيلوغرامات من الغالي أكثر: نقسم الكلفة الكلية على كل الكيلوغرامات، $208\\mathbin{:}20=10{,}40$ €/كغ.',
-                'There are more kilos of the dearer one: divide the total cost by all the kilos, €$208\\mathbin{:}20=10{,}40$/kg.'
-            )
-        }
+        definitions: [
+            {
+                term: say('Aleazio baten legea', 'Ley de una aleación', 'عيار السبيكة', 'Purity of an alloy'),
+                meaning: say('Metal preziatuaren pisua zati pisu osoa: 0,85 legeak esan nahi du pisuaren % 85 urrea dela.', 'El peso del metal precioso entre el peso total: ley 0,85 quiere decir que el 85 % del peso es oro.', 'وزن المعدن الثمين على الوزن الكلي: العيار 0.85 يعني أن 85٪ من الوزن ذهب.', 'The weight of the precious metal divided by the total weight: purity 0.85 means 85% of the weight is gold.')
+            }
+        ],
+        vocabulary: [
+            say('nahasketa', 'mezcla', 'الخليط', 'mixture'),
+            say('prezio ertaina', 'precio medio', 'السعر المتوسط', 'average price'),
+            say('kostu osoa', 'coste total', 'الكلفة الكلية', 'total cost')
+        ],
+        examplePrompt: say('Kiloko $1{,}20$ euroko 30 kg irin eta kiloko 2 euroko 10 kg nahasten dira. Zenbat balio du kiloak?', 'Se mezclan 30 kg de harina a $1{,}20$ €/kg con 10 kg a 2 €/kg. ¿A cuánto sale el kilo?', 'نخلط 30 كغ من الطحين بسعر $1{,}20$ €/كغ مع 10 كغ بسعر 2 €/كغ. كم ثمن الكيلوغرام؟', '30 kg of flour at €$1{,}20$/kg are mixed with 10 kg at €2/kg. How much is a kilo?'),
+        example: same('$\\frac{30\\cdot 1{,}20+10\\cdot 2}{40}=1{,}40$'),
+        exampleAnswer: say('$1{,}40$ €/kg: gehien dagoen irinaren preziotik hurbilago.', '$1{,}40$ €/kg: más cerca del precio de la harina de la que hay más.', '$1{,}40$ €/كغ: أقرب إلى سعر الطحين الأكثر كمية.', '€$1{,}40$/kg: closer to the price of the flour there is more of.')
     },
     motion: {
         explanation: say(
@@ -688,10 +649,10 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
             {
                 title: say('Elkarrengana', 'Al encuentro', 'تلاقٍ', 'Towards each other'),
                 text: say(
-                    'Abiadurak batzen dira. A eta B 240 km-ra daude; kamioi bat A-tik, 70 km/h-ra, eta auto bat B-tik, 110 km/h-ra. Ordubete eta 20 minutu geroago elkartzen dira:',
-                    'Las velocidades se suman. A y B distan 240 km; sale un camión de A a 70 km/h y un coche de B a 110 km/h. Se cruzan al cabo de 1 h 20 min:',
-                    'تُجمع السرعتان. بين A وB مسافة 240 كم؛ تنطلق شاحنة من A بسرعة 70 كم/س وسيارة من B بسرعة 110 كم/س. تلتقيان بعد ساعة و20 دقيقة:',
-                    'The speeds add up. A and B are 240 km apart; a lorry leaves A at 70 km/h and a car leaves B at 110 km/h. They meet after 1 h 20 min:'
+                    'Abiadurak batzen dira. A eta B 240 km-ra daude; kamioi bat A-tik, 70 km/h-ra, eta auto bat B-tik, 110 km/h-ra. Noiz elkartzen dira?',
+                    'Las velocidades se suman. A y B distan 240 km; sale un camión de A a 70 km/h y un coche de B a 110 km/h. ¿Cuándo se cruzan?',
+                    'تُجمع السرعتان. بين A وB مسافة 240 كم؛ تنطلق شاحنة من A بسرعة 70 كم/س وسيارة من B بسرعة 110 كم/س. متى تلتقيان؟',
+                    'The speeds add up. A and B are 240 km apart; a lorry leaves A at 70 km/h and a car leaves B at 110 km/h. When do they meet?'
                 ),
                 math: same('$240\\mathbin{:}(70+110)=\\frac{4}{3}$')
             },
@@ -715,20 +676,23 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                 )
             }
         ],
-        mistake: {
-            wrong: say(
-                'Elkarrengana, kamioia 70 km/h-ra eta autoa 110 km/h-ra: $240\\mathbin{:}(110-70)=6$ h.',
-                'Al encuentro, el camión a 70 km/h y el coche a 110 km/h: $240\\mathbin{:}(110-70)=6$ h.',
-                'في التلاقي، الشاحنة بسرعة 70 كم/س والسيارة بسرعة 110 كم/س: $240\\mathbin{:}(110-70)=6$ س.',
-                'Towards each other, the lorry at 70 km/h and the car at 110 km/h: $240\\mathbin{:}(110-70)=6$ h.'
+        vocabulary: [
+            say('abiadura', 'velocidad', 'السرعة', 'speed'),
+            say('elkartzeko abiadura', 'velocidad de acercamiento', 'سرعة الاقتراب', 'closing speed'),
+            say('distantzia', 'distancia', 'المسافة', 'distance')
+        ],
+        why: {
+            text: say(
+                'Ordu bakoitzean, kamioia 70 km hurbiltzen da autora eta autoa 110 km kamioira: haien arteko distantzia 180 km gutxitzen da. Atzetik doanean, aurrekoak ihes egiten du: aldea bakarrik murrizten da.',
+                'En cada hora, el camión se acerca 70 km al coche y el coche 110 km al camión: la distancia entre ellos baja 180 km. En una persecución, el de delante se escapa: solo se recorta la diferencia.',
+                'في كل ساعة تقترب الشاحنة 70 كم من السيارة والسيارة 110 كم من الشاحنة: تنقص المسافة بينهما 180 كم. وفي المطاردة يبتعد الذي في الأمام: لا يُقلَّص إلا الفرق.',
+                'Each hour, the lorry gets 70 km closer to the car and the car 110 km closer to the lorry: the distance between them drops by 180 km. In a chase, the one in front gets away: only the difference is closed.'
             ),
-            right: say(
-                'Elkarrengana badoaz, $70+110=180$ km/h-ra hurbiltzen dira: $240\\mathbin{:}180=\\frac{4}{3}$ h.',
-                'Si van uno hacia el otro, se acercan a $70+110=180$ km/h: $240\\mathbin{:}180=\\frac{4}{3}$ h.',
-                'إذا اتجه كل منهما نحو الآخر يقتربان بسرعة $70+110=180$ كم/س: $240\\mathbin{:}180=\\frac{4}{3}$ س.',
-                'If they head towards each other, they close in at $70+110=180$ km/h: $240\\mathbin{:}180=\\frac{4}{3}$ h.'
-            )
-        }
+            math: same('$240\\div 180=\\frac{4}{3}$')
+        },
+        examplePrompt: say('Bi hiri 300 km-ra daude. Aldi berean irteten dira tren bat 80 km/h-ra eta beste bat 120 km/h-ra, bata bestearengana. Noiz gurutzatzen dira?', 'Dos ciudades están a 300 km. Salen a la vez un tren a 80 km/h y otro a 120 km/h, uno hacia el otro. ¿Cuándo se cruzan?', 'مدينتان المسافة بينهما 300 كم. ينطلق في الوقت نفسه قطار بسرعة 80 كم/س وآخر بسرعة 120 كم/س، كل منهما نحو الآخر. متى يلتقيان؟', 'Two cities are 300 km apart. A train at 80 km/h and another at 120 km/h set off at the same time towards each other. When do they meet?'),
+        example: same('$300\\div(80+120)=1{,}5$'),
+        exampleAnswer: say('Elkarrengana doaz: abiadurak batzen dira. Ordu eta erdi.', 'Van al encuentro: las velocidades se suman. Hora y media.', 'يتلاقيان: تُجمع السرعتان. ساعة ونصف.', 'They move towards each other: the speeds add up. An hour and a half.')
     },
     taps: {
         explanation: say(
@@ -751,12 +715,12 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
             {
                 title: say('Hustubidearekin', 'Con desagüe', 'مع مصرف', 'With a drain'),
                 text: say(
-                    'Hustubideak kendu egiten du. Ur hotza: 8 min; beroa: 12 min; hustubidea: 4 min. Bainuontzia ez da inoiz betetzen.',
-                    'El desagüe resta. Fría, 8 min; caliente, 12 min; desagüe, 4 min: la bañera no se llena nunca.',
-                    'المصرف يطرح. البارد 8 د، والساخن 12 د، والمصرف 4 د: لا يمتلئ الحوض أبدًا.',
-                    'The drain subtracts. Cold 8 min, hot 12 min and drain 4 min: the bath never fills.'
+                    'Hustubideak kendu egiten du. Ur hotza: 6 min; beroa: 10 min; hustubidea: 3 min. Bainuontzia ez da inoiz betetzen.',
+                    'El desagüe resta. Fría, 6 min; caliente, 10 min; desagüe, 3 min: la bañera no se llena nunca.',
+                    'المصرف يطرح. البارد 6 د، والساخن 10 د، والمصرف 3 د: لا يمتلئ الحوض أبدًا.',
+                    'The drain subtracts. Cold 6 min, hot 10 min and drain 3 min: the bath never fills.'
                 ),
-                math: same('$\\frac{1}{8}+\\frac{1}{12}-\\frac{1}{4}<0$')
+                math: same('$\\frac{1}{6}+\\frac{1}{10}-\\frac{1}{3}<0$')
             },
             {
                 title: say('Atzera', 'Hacia atrás', 'إلى الوراء', 'Backwards'),
@@ -769,19 +733,13 @@ export const proportionDbh4ApLessonTexts: Record<string, LessonTexts> = {
                 math: same('$\\frac{1}{2}-\\frac{1}{3}=\\frac{1}{6}$')
             }
         ],
-        mistake: {
-            wrong: say(
-                'A: 5 h; B: 7 h. Biek batera $5+7=12$ h behar dituzte.',
-                'A en 5 h y B en 7 h: los dos juntos tardan $5+7=12$ h.',
-                'A في 5 س وB في 7 س: معًا يحتاجان $5+7=12$ س.',
-                'A in 5 h and B in 7 h: together they take $5+7=12$ h.'
-            ),
-            right: say(
-                'Batera, bakoitzak bakarrik baino gutxiago behar dute. Ordu bateko zatiak batzen dira: $\\frac{1}{5}+\\frac{1}{7}=\\frac{12}{35}$, eta denbora $\\frac{35}{12}$ h da.',
-                'Juntos tardan menos que cada uno solo. Se suman las partes de una hora: $\\frac{1}{5}+\\frac{1}{7}=\\frac{12}{35}$, y el tiempo es $\\frac{35}{12}$ h.',
-                'معًا يحتاجان أقل من كل واحد وحده. نجمع أجزاء الساعة: $\\frac{1}{5}+\\frac{1}{7}=\\frac{12}{35}$، والزمن $\\frac{35}{12}$ س.',
-                'Together they take less time than either on its own. Add the parts of an hour: $\\frac{1}{5}+\\frac{1}{7}=\\frac{12}{35}$, so the time is $\\frac{35}{12}$ h.'
-            )
-        }
+        vocabulary: [
+            say('txorrota', 'grifo', 'صنبور', 'tap'),
+            say('hustubidea', 'desagüe', 'مصرف', 'drain'),
+            say('alderantzizkoa', 'inverso', 'مقلوب', 'reciprocal')
+        ],
+        examplePrompt: say('Margolari batek 6 egunean margotzen du etxe bat, eta beste batek 3 egunean. Zenbat behar dute biek batera?', 'Un pintor tarda 6 días en pintar una casa y otro, 3 días. ¿Cuánto tardan juntos?', 'يدهن رسام بيتًا في 6 أيام ويدهنه آخر في 3 أيام. كم يحتاجان معًا؟', 'One painter takes 6 days to paint a house and another takes 3 days. How long do they take together?'),
+        example: same('$\\frac{1}{6}+\\frac{1}{3}=\\frac{1}{2}$'),
+        exampleAnswer: say('Egun batean etxearen erdia: 2 egun.', 'En un día, media casa: 2 días.', 'في يوم واحد نصف البيت: يومان.', 'Half the house in one day: 2 days.')
     }
 }
