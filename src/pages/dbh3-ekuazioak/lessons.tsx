@@ -248,7 +248,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         problem: say('Bi zenbaki jarraien biderkadura 132 da. Zeintzuk dira (positiboak)?', 'El producto de dos números consecutivos es 132. ¿Cuáles son (positivos)?', 'جداء عددين متتاليين 132. ما هما (موجبان)؟', 'The product of two consecutive numbers is 132. What are they (positive)?'),
         stepsKind: 'steps',
         steps: [
-            { text: say('Planteatu.', 'Plantea.', 'صُغ المعادلة.', 'Set up.'), math: same('$x(x+1)=132\\ \\to\\ x^{2}+x-132=0$') },
+            { text: say('Planteatu.', 'Plantea.', 'صُغ المعادلة.', 'Set up.'), math: same('$\\begin{gathered}x(x+1)=132\\\\ \\to\\ x^{2}+x-132=0\\end{gathered}$') },
             { text: say('Formula.', 'Fórmula.', 'الصيغة.', 'Formula.'), math: same('$x=\\frac{-1\\pm 23}{2}$') },
             { text: say('$x=11$ edo $x=-12$. Positiboa: 11 eta 12.', '$x=11$ o $x=-12$. El positivo: 11 y 12.', '$x=11$ أو $x=-12$. الموجب: 11 و12.', '$x=11$ or $x=-12$. The positive one: 11 and 12.'), math: same('$11\\cdot 12=132$') }
         ],

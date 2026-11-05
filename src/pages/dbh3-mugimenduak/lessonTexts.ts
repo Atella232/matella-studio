@@ -35,7 +35,7 @@ export const motions3LessonTexts: Record<Motions3TopicId, LessonTexts> = {
             'The components of a vector are the end point minus the start point: $\\vec{AB}=(x_{2}-x_{1},\\ y_{2}-y_{1})$. The first says how far you move right (or left, if negative), and the second, how far up or down. Two vectors with the same components are equivalent.'
         ),
         examplePrompt: say('$C=(-2,4)$ eta $D=(3,1)$. Aurkitu $\\vec{CD}$ eta $\\vec{DC}$.', '$C=(-2,4)$ y $D=(3,1)$. Halla $\\vec{CD}$ y $\\vec{DC}$.', '$C=(-2,4)$ و$D=(3,1)$. جد $\\vec{CD}$ و$\\vec{DC}$.', '$C=(-2,4)$ and $D=(3,1)$. Find $\\vec{CD}$ and $\\vec{DC}$.'),
-        example: same('$\\vec{CD}=(3-(-2),\\ 1-4)=(5,-3)\\qquad\\vec{DC}=(-5,3)$'),
+        example: same('$\\begin{gathered}\\vec{CD}=(3-(-2),\\ 1-4)=(5,-3)\\\\ \\vec{DC}=(-5,3)\\end{gathered}$'),
         exampleAnswer: say('$\\vec{CD}=(5,-3)$: 5 eskuinera eta 3 behera. $\\vec{DC}$ bektoreak aurkako osagaiak ditu.', '$\\vec{CD}=(5,-3)$: 5 a la derecha y 3 hacia abajo. $\\vec{DC}$ tiene las componentes opuestas.', '$\\vec{CD}=(5,-3)$: ‏5 إلى اليمين و3 إلى الأسفل. ومركّبتا $\\vec{DC}$ معاكستان.', '$\\vec{CD}=(5,-3)$: 5 to the right and 3 down. $\\vec{DC}$ has the opposite components.')
     },
     'vector-modulus': {
@@ -57,7 +57,7 @@ export const motions3LessonTexts: Record<Motions3TopicId, LessonTexts> = {
             'The components are the legs of a right triangle and the vector is the hypotenuse: that is why the length comes from Pythagoras, $|(4,3)|=\\sqrt{16+9}=5$. Even if the components are negative, their squares are positive: the length is never negative.'
         ),
         examplePrompt: say('Aurkitu $\\vec{w}=(-9,-12)$ bektorearen modulua.', 'Halla el módulo de $\\vec{w}=(-9,-12)$.', 'جد طول $\\vec{w}=(-9,-12)$.', 'Find the length of $\\vec{w}=(-9,-12)$.'),
-        example: same('$|\\vec{w}|=\\sqrt{(-9)^{2}+(-12)^{2}}=\\sqrt{225}=15$'),
+        example: same('$\\begin{aligned}&|\\vec{w}|=\\sqrt{(-9)^{2}+(-12)^{2}}\\\\&=\\sqrt{225}=15\\end{aligned}$'),
         exampleAnswer: say('15: karratuak positiboak dira.', '15: los cuadrados son positivos.', '15: المربعات موجبة.', '15: the squares are positive.')
     },
     'vector-sum': {
@@ -95,7 +95,7 @@ export const motions3LessonTexts: Record<Motions3TopicId, LessonTexts> = {
             'Every point moves the same distance, in the same direction and sense. The figure does not change shape, size or orientation: it neither turns nor flips, so it is a direct movement. The figure and its image have parallel sides.'
         ),
         examplePrompt: say('$A=(0,0)$, $B=(3,0)$, $C=(0,2)$ triangelua lekualdatzen da $\\vec{v}=(-1,4)$ bektorearekin. Non geratzen dira erpinak?', 'Se traslada el triángulo $A=(0,0)$, $B=(3,0)$, $C=(0,2)$ con $\\vec{v}=(-1,4)$. ¿Dónde quedan sus vértices?', 'يُنقل المثلث $A=(0,0)$ و$B=(3,0)$ و$C=(0,2)$ بالمتجه $\\vec{v}=(-1,4)$. أين تقع رؤوسه؟', 'The triangle $A=(0,0)$, $B=(3,0)$, $C=(0,2)$ is translated by $\\vec{v}=(-1,4)$. Where do its vertices go?'),
-        example: same('$A^{\\prime}=(-1,4)\\qquad B^{\\prime}=(2,4)\\qquad C^{\\prime}=(-1,6)$'),
+        example: same('$\\begin{gathered}A^{\\prime}=(-1,4)\\\\ B^{\\prime}=(2,4)\\\\ C^{\\prime}=(-1,6)\\end{gathered}$'),
         exampleAnswer: say('Erpin bakoitza 1 ezkerrera eta 4 gora mugitzen da.', 'Cada vértice se mueve 1 a la izquierda y 4 hacia arriba.', 'يتحرك كل رأس 1 إلى اليسار و4 إلى الأعلى.', 'Each vertex moves 1 to the left and 4 up.')
     },
     'translation-coordinates': {
@@ -111,7 +111,7 @@ export const motions3LessonTexts: Record<Motions3TopicId, LessonTexts> = {
             'The translation by $\\vec{v}=(a,b)$ takes $(x,y)$ to $(x+a,\\ y+b)$: with $\\vec{v}=(4,2)$, $(3,2)\\to(7,4)$. The other way round, the vector is the image minus the point. To translate a figure, translate its vertices and join them again.'
         ),
         examplePrompt: say('$\\vec{v}=(-3,1)$ bektorearekin, nora doa $(2,-4)$? Zein puntu doa $(0,0)$ puntura?', 'Con $\\vec{v}=(-3,1)$, ¿adónde va $(2,-4)$? ¿Qué punto va a $(0,0)$?', 'مع $\\vec{v}=(-3,1)$ إلى أين تذهب $(2,-4)$؟ وأي نقطة تذهب إلى $(0,0)$؟', 'With $\\vec{v}=(-3,1)$, where does $(2,-4)$ go? Which point goes to $(0,0)$?'),
-        example: same('$(2-3,\\ -4+1)=(-1,-3)\\qquad(0+3,\\ 0-1)=(3,-1)$'),
+        example: same('$\\begin{gathered}(2-3,\\ -4+1)=(-1,-3)\\\\ (0+3,\\ 0-1)=(3,-1)\\end{gathered}$'),
         exampleAnswer: say('$(2,-4)\\to(-1,-3)$, eta $(3,-1)\\to(0,0)$.', '$(2,-4)\\to(-1,-3)$, y $(3,-1)\\to(0,0)$.', '$(2,-4)\\to(-1,-3)$، و$(3,-1)\\to(0,0)$.', '$(2,-4)\\to(-1,-3)$, and $(3,-1)\\to(0,0)$.')
     },
     'translation-composition': {
@@ -170,7 +170,7 @@ export const motions3LessonTexts: Record<Motions3TopicId, LessonTexts> = {
             { title: same('$270°$'), text: say('Hiru laurden', 'Tres cuartos de vuelta', 'ثلاثة أرباع دورة', 'Three quarters of a turn'), math: same('$(x,y)\\to(y,-x)$') }
         ],
         examplePrompt: say('Biratu $Q=(-5,2)$ puntua 90° eta 180°, jatorriaren inguruan.', 'Gira $Q=(-5,2)$ 90° y 180° alrededor del origen.', 'أدر $Q=(-5,2)$ بـ 90° وبـ 180° حول الأصل.', 'Rotate $Q=(-5,2)$ by 90° and by 180° about the origin.'),
-        example: same('$(-5,2)\\xrightarrow{\\ 90°\\ }(-2,-5)\\qquad(-5,2)\\xrightarrow{\\ 180°\\ }(5,-2)$'),
+        example: same('$\\begin{gathered}(-5,2)\\xrightarrow{\\ 90°\\ }(-2,-5)\\\\ (-5,2)\\xrightarrow{\\ 180°\\ }(5,-2)\\end{gathered}$'),
         exampleAnswer: say('$(-2,-5)$ eta $(5,-2)$: jatorrirako distantzia $\\sqrt{29}$ da oraindik.', '$(-2,-5)$ y $(5,-2)$: la distancia al origen sigue siendo $\\sqrt{29}$.', '$(-2,-5)$ و$(5,-2)$: البعد عن الأصل ما زال $\\sqrt{29}$.', '$(-2,-5)$ and $(5,-2)$: the distance to the origin is still $\\sqrt{29}$.'),
         why: {
             text: say(
@@ -179,7 +179,7 @@ export const motions3LessonTexts: Record<Motions3TopicId, LessonTexts> = {
                 'عند الدوران يدور المثلث بين النقطة والأصل مع النقطة: يصير الضلع القائم الأفقي عموديًا، والعمودي أفقيًا نحو اليسار. لذلك يتبادل الإحداثيان وتتغير إشارة.',
                 'When it turns, the triangle between the point and the origin turns with it: the horizontal leg becomes vertical, and the vertical one horizontal, pointing left. That is why the coordinates swap and one sign changes.'
             ),
-            math: same('$(1,0)\\to(0,1)\\qquad(0,1)\\to(-1,0)$')
+            math: same('$\\begin{gathered}(1,0)\\to(0,1)\\\\ (0,1)\\to(-1,0)\\end{gathered}$')
         }
     },
     'central-symmetry': {
@@ -244,7 +244,7 @@ export const motions3LessonTexts: Record<Motions3TopicId, LessonTexts> = {
             { title: same('$y=x$'), text: say('Trukatu egiten dira.', 'Se intercambian.', 'يتبادلان.', 'They swap.'), math: same('$(x,y)\\to(y,x)$') }
         ],
         examplePrompt: say('Aurkitu $(-2,7)$ puntuaren simetrikoa Y ardatzarekiko eta $x=1$ zuzenarekiko.', 'Halla el simétrico de $(-2,7)$ respecto al eje Y y respecto a la recta $x=1$.', 'جد نظير $(-2,7)$ بالنسبة إلى محور Y وبالنسبة إلى المستقيم $x=1$.', 'Find the image of $(-2,7)$ in the Y axis and in the line $x=1$.'),
-        example: same('$(-2,7)\\to(2,7)\\qquad(-2,7)\\xrightarrow{\\ x=1\\ }(4,7)$'),
+        example: same('$\\begin{gathered}(-2,7)\\to(2,7)\\\\ (-2,7)\\xrightarrow{\\ x=1\\ }(4,7)\\end{gathered}$'),
         exampleAnswer: say('$(2,7)$ eta $(4,7)$: $2\\cdot 1-(-2)=4$.', '$(2,7)$ y $(4,7)$: $2\\cdot 1-(-2)=4$.', '$(2,7)$ و$(4,7)$: ‏$2\\cdot 1-(-2)=4$.', '$(2,7)$ and $(4,7)$: $2\\cdot 1-(-2)=4$.')
     },
     'two-mirrors': {

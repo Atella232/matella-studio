@@ -86,7 +86,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         problem: say('Ordenatu txikienetik handienera: $\\frac{2}{7}$, $\\frac{1}{6}$ eta $\\frac{3}{5}$.', 'Ordena de menor a mayor: $\\frac{2}{7}$, $\\frac{1}{6}$ y $\\frac{3}{5}$.', 'رتّب من الأصغر إلى الأكبر: $\\frac{2}{7}$ و$\\frac{1}{6}$ و$\\frac{3}{5}$.', 'Order from smallest to largest: $\\frac{2}{7}$, $\\frac{1}{6}$ and $\\frac{3}{5}$.'),
         stepsKind: 'steps',
         steps: [
-            { text: say('m.k.t.(7, 6, 5) = 210.', 'm.c.m.(7, 6, 5) = 210.', 'م.م.أ.(7، 6، 5) = 210.', 'LCM(7, 6, 5) = 210.'), math: same('$\\frac{2}{7}=\\frac{60}{210}\\qquad\\frac{1}{6}=\\frac{35}{210}\\qquad\\frac{3}{5}=\\frac{126}{210}$') },
+            { text: say('m.k.t.(7, 6, 5) = 210.', 'm.c.m.(7, 6, 5) = 210.', 'م.م.أ.(7، 6، 5) = 210.', 'LCM(7, 6, 5) = 210.'), math: same('$\\begin{gathered}\\frac{2}{7}=\\frac{60}{210}\\\\ \\frac{1}{6}=\\frac{35}{210}\\\\ \\frac{3}{5}=\\frac{126}{210}\\end{gathered}$') },
             { text: say('Konparatu zenbakitzaileak.', 'Compara los numeradores.', 'قارن البسوط.', 'Compare the numerators.'), math: same('$35<60<126$') },
             { text: say('Ordena.', 'El orden.', 'الترتيب.', 'The order.'), math: same('$\\frac{1}{6}<\\frac{2}{7}<\\frac{3}{5}$') }
         ],
@@ -242,7 +242,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         steps: [
             { text: say('Alokairuaren ondoren geratzen dena.', 'Lo que queda tras el alquiler.', 'الباقي بعد الإيجار.', 'What is left after the rent.'), math: same('$1-\\frac{1}{3}=\\frac{2}{3}$') },
             { text: say('Janaria, osoarekiko.', 'La comida, respecto al total.', 'الطعام بالنسبة إلى الكل.', 'Food, as a fraction of the total.'), math: same('$\\frac{1}{4}\\cdot\\frac{2}{3}=\\frac{1}{6}$') },
-            { text: say('Geratzen dena.', 'Lo que queda.', 'الباقي.', 'What is left.'), math: same('$1-\\frac{1}{3}-\\frac{1}{6}=\\frac{1}{2}\\ \\to\\ \\frac{1}{2}\\cdot 1800=900$') }
+            { text: say('Geratzen dena.', 'Lo que queda.', 'الباقي.', 'What is left.'), math: same('$\\begin{gathered}1-\\frac{1}{3}-\\frac{1}{6}=\\frac{1}{2}\\\\ \\to\\ \\frac{1}{2}\\cdot 1800=900\\end{gathered}$') }
         ],
         takeaway: say('"Gainerakoaren" zatikia: biderkatu geratzen den zatiaz.', 'La fracción "de lo que queda": multiplica por la parte que queda.', 'كسر "من الباقي": اضرب في الجزء الباقي.', 'The fraction “of what is left”: multiply by the part that is left.'),
         figure: (language) => <RemainingFigure language={language} />

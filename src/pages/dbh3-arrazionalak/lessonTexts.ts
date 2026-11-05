@@ -38,7 +38,7 @@ export const rationalsLessonTexts: Record<RationalsTopicId, LessonTexts> = {
             'A fraction can be read in three ways: parts of a whole (divide into 4 parts and take 3), a division ($3\\div 4=0{,}75$) and a number on the number line. It can be negative: $\\frac{-3}{4}=\\frac{3}{-4}=-\\frac{3}{4}$. Integers are fractions too: $-2=\\frac{-10}{5}$.'
         ),
         examplePrompt: say('Zerrenda honetako zein zenbaki dira arrazionalak: $-7$, $0{,}25$ eta $\\frac{9}{4}$?', '¿Qué números de esta lista son racionales: $-7$, $0{,}25$ y $\\frac{9}{4}$?', 'أيّ أعداد هذه القائمة نسبية: $-7$ و$0{,}25$ و$\\frac{9}{4}$؟', 'Which numbers in this list are rational: $-7$, $0{,}25$ and $\\frac{9}{4}$?'),
-        example: same('$-7=\\frac{-7}{1}\\qquad 0{,}25=\\frac{1}{4}\\qquad\\frac{9}{4}=2{,}25$'),
+        example: same('$\\begin{gathered}-7=\\frac{-7}{1}\\\\ 0{,}25=\\frac{1}{4}\\\\ \\frac{9}{4}=2{,}25\\end{gathered}$'),
         exampleAnswer: say('Hirurak: hirurak idatz daitezke zatiki gisa.', 'Los tres: todos se pueden escribir como fracción.', 'الثلاثة كلها: يمكن كتابة كل منها كسرًا.', 'All three: each of them can be written as a fraction.')
     },
     equivalent: {
@@ -121,7 +121,7 @@ export const rationalsLessonTexts: Record<RationalsTopicId, LessonTexts> = {
             }
         ],
         examplePrompt: say('Ordenatu txikienetik handienera: $-\\frac{5}{6}$, $\\frac{3}{4}$ eta $-\\frac{7}{9}$.', 'Ordena de menor a mayor: $-\\frac{5}{6}$, $\\frac{3}{4}$ y $-\\frac{7}{9}$.', 'رتّب من الأصغر إلى الأكبر: $-\\frac{5}{6}$ و$\\frac{3}{4}$ و$-\\frac{7}{9}$.', 'Order from smallest to largest: $-\\frac{5}{6}$, $\\frac{3}{4}$ and $-\\frac{7}{9}$.'),
-        example: same('$-\\frac{5}{6}=-\\frac{30}{36}\\qquad -\\frac{7}{9}=-\\frac{28}{36}\\qquad\\frac{3}{4}=\\frac{27}{36}$'),
+        example: same('$\\begin{gathered}-\\frac{5}{6}=-\\frac{30}{36}\\\\ -\\frac{7}{9}=-\\frac{28}{36}\\\\ \\frac{3}{4}=\\frac{27}{36}\\end{gathered}$'),
         exampleAnswer: say('$-\\frac{5}{6}<-\\frac{7}{9}<\\frac{3}{4}$: negatiboen artean, $-\\frac{30}{36}$ dago zerotik urrunen.', '$-\\frac{5}{6}<-\\frac{7}{9}<\\frac{3}{4}$: entre las negativas, $-\\frac{30}{36}$ es la más alejada del cero.', '$-\\frac{5}{6}<-\\frac{7}{9}<\\frac{3}{4}$: بين السالبة يكون $-\\frac{30}{36}$ الأبعد عن الصفر.', '$-\\frac{5}{6}<-\\frac{7}{9}<\\frac{3}{4}$: among the negatives, $-\\frac{30}{36}$ is the furthest from zero.')
     },
     line: {
@@ -355,7 +355,7 @@ export const rationalsLessonTexts: Record<RationalsTopicId, LessonTexts> = {
                 'إذا كان $x=0{,}\\overline{3}$ فإن $10x=3{,}\\overline{3}$. وعند طرح أحدهما من الآخر يختفي الدور: $9x=3$، إذن $x=\\frac{3}{9}$. لذلك تظهر التسعات.',
                 'If $x=0{,}\\overline{3}$, then $10x=3{,}\\overline{3}$. Subtracting one from the other, the repeating part disappears: $9x=3$, so $x=\\frac{3}{9}$. That is where the nines come from.'
             ),
-            math: same('$10x-x=3{,}\\overline{3}-0{,}\\overline{3}=3\\ \\to\\ x=\\frac{3}{9}=\\frac{1}{3}$')
+            math: same('$\\begin{gathered}10x-x=3{,}\\overline{3}-0{,}\\overline{3}=3\\\\ \\to\\ x=\\frac{3}{9}=\\frac{1}{3}\\end{gathered}$')
         }
     },
 

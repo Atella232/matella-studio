@@ -66,7 +66,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             { title: say('Biderkatu', 'Multiplicar', 'الضرب', 'Multiplying'), text: say('Edozein bi monomio; berretzaileak batu.', 'Cualquier par; se suman los exponentes.', 'أي وحيدي حد؛ نجمع الأسس.', 'Any two; add the exponents.'), math: same('$5x\\cdot 2x=10x^{2}$') }
         ],
         examplePrompt: say('Laburtu $7a^{2}b-2ab+3a^{2}b$ eta biderkatu $(-2a)\\cdot 4a^{3}b$.', 'Reduce $7a^{2}b-2ab+3a^{2}b$ y multiplica $(-2a)\\cdot 4a^{3}b$.', 'اختصر $7a^{2}b-2ab+3a^{2}b$ واضرب $(-2a)\\cdot 4a^{3}b$.', 'Reduce $7a^{2}b-2ab+3a^{2}b$ and multiply $(-2a)\\cdot 4a^{3}b$.'),
-        example: same('$7a^{2}b+3a^{2}b-2ab=10a^{2}b-2ab\\qquad(-2a)\\cdot 4a^{3}b=-8a^{4}b$'),
+        example: same('$\\begin{gathered}7a^{2}b+3a^{2}b-2ab=10a^{2}b-2ab\\\\ (-2a)\\cdot 4a^{3}b=-8a^{4}b\\end{gathered}$'),
         exampleAnswer: say('$10a^{2}b-2ab$ eta $-8a^{4}b$: $a^{2}b$ eta $ab$ ez dira antzekoak.', '$10a^{2}b-2ab$ y $-8a^{4}b$: $a^{2}b$ y $ab$ no son semejantes.', '$10a^{2}b-2ab$ و$-8a^{4}b$: ‏$a^{2}b$ و$ab$ غير متشابهين.', '$10a^{2}b-2ab$ and $-8a^{4}b$: $a^{2}b$ and $ab$ are not like terms.'),
         why: {
             text: say(
@@ -101,7 +101,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'In $P(x)=2x^{3}-5x+1$ the degree is 3 and the constant term is 1. To work out $P(a)$, substitute $a$ for $x$; if it is negative, put it in brackets: $P(-2)=2(-2)^{3}-5(-2)+1=-5$.'
         ),
         examplePrompt: say('$Q(x)=x^{3}-4x^{2}+2$ bada, kalkulatu $Q(3)$ eta $Q(-1)$.', 'Si $Q(x)=x^{3}-4x^{2}+2$, calcula $Q(3)$ y $Q(-1)$.', 'إذا كان $Q(x)=x^{3}-4x^{2}+2$ فاحسب $Q(3)$ و$Q(-1)$.', 'If $Q(x)=x^{3}-4x^{2}+2$, work out $Q(3)$ and $Q(-1)$.'),
-        example: same('$Q(3)=27-36+2=-7\\qquad Q(-1)=-1-4+2=-3$'),
+        example: same('$\\begin{gathered}Q(3)=27-36+2=-7\\\\ Q(-1)=-1-4+2=-3\\end{gathered}$'),
         exampleAnswer: say('$Q(3)=-7$ eta $Q(-1)=-3$; $(-1)^{3}=-1$ eta $(-1)^{2}=1$ dira.', '$Q(3)=-7$ y $Q(-1)=-3$; $(-1)^{3}=-1$ y $(-1)^{2}=1$.', '$Q(3)=-7$ و$Q(-1)=-3$؛ ‏$(-1)^{3}=-1$ و$(-1)^{2}=1$.', '$Q(3)=-7$ and $Q(-1)=-3$; $(-1)^{3}=-1$ and $(-1)^{2}=1$.')
     },
     'add-sub': {
@@ -117,7 +117,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'To add, add the terms of the same degree. To subtract, change the sign of every term of the polynomial being subtracted and add: $P-Q=P+(-Q)$. It helps to write one under the other, in columns by degree, leaving a gap if a degree is missing.'
         ),
         examplePrompt: say('Kalkulatu $(5x^{3}-x+2)-(2x^{3}+3x^{2}-x)$.', 'Calcula $(5x^{3}-x+2)-(2x^{3}+3x^{2}-x)$.', 'احسب $(5x^{3}-x+2)-(2x^{3}+3x^{2}-x)$.', 'Work out $(5x^{3}-x+2)-(2x^{3}+3x^{2}-x)$.'),
-        example: same('$5x^{3}-x+2-2x^{3}-3x^{2}+x=3x^{3}-3x^{2}+2$'),
+        example: same('$\\begin{aligned}&5x^{3}-x+2-2x^{3}-3x^{2}+x\\\\&=3x^{3}-3x^{2}+2\\end{aligned}$'),
         exampleAnswer: say('$3x^{3}-3x^{2}+2$: $x$ gaiak ezeztatu egiten dira.', '$3x^{3}-3x^{2}+2$: los términos en $x$ se anulan.', '$3x^{3}-3x^{2}+2$: حدّا $x$ يلغي أحدهما الآخر.', '$3x^{3}-3x^{2}+2$: the $x$ terms cancel out.')
     },
     product: {
@@ -139,7 +139,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'Multiply each term of the first by every term of the second and collect like terms. It is like the area of a rectangle: $(x+2)(x+3)$ splits into four pieces, $x^{2}$, $3x$, $2x$ and $6$. Two binomials give four products.'
         ),
         examplePrompt: say('Kalkulatu $(x-4)(2x+5)$.', 'Calcula $(x-4)(2x+5)$.', 'احسب $(x-4)(2x+5)$.', 'Work out $(x-4)(2x+5)$.'),
-        example: same('$(x-4)(2x+5)=2x^{2}+5x-8x-20=2x^{2}-3x-20$'),
+        example: same('$\\begin{aligned}&(x-4)(2x+5)\\\\&=2x^{2}+5x-8x-20\\\\&=2x^{2}-3x-20\\end{aligned}$'),
         exampleAnswer: say('$2x^{2}-3x-20$: lau biderkadura, eta gero bi antzeko batzen dira.', '$2x^{2}-3x-20$: cuatro productos, y después se juntan los dos semejantes.', '$2x^{2}-3x-20$: أربعة حواصل ضرب، ثم نجمع الحدين المتشابهين.', '$2x^{2}-3x-20$: four products, then the two like terms are collected.')
     },
     division: {
@@ -213,7 +213,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'When a sum is multiplied by the same difference, the middle terms, $+ab$ and $-ab$, cancel out: $(a+b)(a-b)=a^{2}-b^{2}$, a difference of squares. It helps with mental arithmetic, $21\\cdot 19=400-1=399$, and the other way round to factorise.'
         ),
         examplePrompt: say('Kalkulatu $(5x+2)(5x-2)$ eta, buruz, $32\\cdot 28$.', 'Calcula $(5x+2)(5x-2)$ y, de cabeza, $32\\cdot 28$.', 'احسب $(5x+2)(5x-2)$، واحسب ذهنيًا $32\\cdot 28$.', 'Work out $(5x+2)(5x-2)$ and, in your head, $32\\cdot 28$.'),
-        example: same('$(5x+2)(5x-2)=25x^{2}-4\\qquad 32\\cdot 28=30^{2}-2^{2}=896$'),
+        example: same('$\\begin{gathered}(5x+2)(5x-2)=25x^{2}-4\\\\ 32\\cdot 28=30^{2}-2^{2}=896\\end{gathered}$'),
         exampleAnswer: say('$25x^{2}-4$ eta 896: $32\\cdot 28=(30+2)(30-2)$.', '$25x^{2}-4$ y 896: $32\\cdot 28=(30+2)(30-2)$.', '$25x^{2}-4$ و896: ‏$32\\cdot 28=(30+2)(30-2)$.', '$25x^{2}-4$ and 896: $32\\cdot 28=(30+2)(30-2)$.')
     },
     ruffini: {
@@ -229,7 +229,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'If the divisor is $x-a$, the division gets shorter with the coefficients: write all those of the dividend, zeros included, and $a$ on the left. Bring down the first and repeat: multiply by $a$, write it in the next column and add. The last number is the remainder.'
         ),
         examplePrompt: say('Zatitu Ruffinirekin $(x^{3}-4x+1)\\div(x-3)$.', 'Divide con Ruffini $(x^{3}-4x+1)\\div(x-3)$.', 'اقسم بطريقة روفيني $(x^{3}-4x+1)\\div(x-3)$.', 'Divide with Ruffini’s rule $(x^{3}-4x+1)\\div(x-3)$.'),
-        example: same('$x^{3}-4x+1=(x-3)(x^{2}+3x+5)+16$'),
+        example: same('$\\begin{aligned}&x^{3}-4x+1\\\\&=(x-3)(x^{2}+3x+5)+16\\end{aligned}$'),
         exampleAnswer: say('Zatidura $x^{2}+3x+5$ eta hondarra 16. Koefizienteak, 0 zenbakiarekin: $1,\\ 0,\\ -4,\\ 1$.', 'Cociente $x^{2}+3x+5$ y resto 16. Los coeficientes, con el 0: $1,\\ 0,\\ -4,\\ 1$.', 'خارج القسمة $x^{2}+3x+5$ والباقي 16. والمعاملات مع الصفر: $1,\\ 0,\\ -4,\\ 1$.', 'Quotient $x^{2}+3x+5$ and remainder 16. The coefficients, with the 0: $1,\\ 0,\\ -4,\\ 1$.')
     },
     remainder: {
@@ -245,7 +245,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'When $P(x)$ is divided by $x-a$, the remainder is $P(a)$: no need to divide, just work out the value. If $P(a)=0$, the division is exact and $x-a$ is a factor of the polynomial. With the divisor $x+1$, $a=-1$.'
         ),
         examplePrompt: say('Aurkitu $(x^{4}-3x^{2}+2)\\div(x-2)$ zatiketaren hondarra, zatitu gabe.', 'Halla el resto de $(x^{4}-3x^{2}+2)\\div(x-2)$ sin dividir.', 'جد باقي $(x^{4}-3x^{2}+2)\\div(x-2)$ دون قسمة.', 'Find the remainder of $(x^{4}-3x^{2}+2)\\div(x-2)$ without dividing.'),
-        example: same('$P(2)=2^{4}-3\\cdot 2^{2}+2=16-12+2=6$'),
+        example: same('$\\begin{aligned}&P(2)=2^{4}-3\\cdot 2^{2}+2\\\\&=16-12+2=6\\end{aligned}$'),
         exampleAnswer: say('Hondarra 6 da: $a=2$ eta $P(2)=6$.', 'El resto es 6: $a=2$ y $P(2)=6$.', 'الباقي 6: ‏$a=2$ و$P(2)=6$.', 'The remainder is 6: $a=2$ and $P(2)=6$.'),
         why: {
             text: say(
@@ -254,7 +254,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
                 'لأن $P(x)=(x-a)\\cdot C(x)+R$. وإذا وضعنا $x=a$ يصير الحد الأول $(a-a)\\cdot C(a)=0$ ويبقى $P(a)=R$.',
                 'Because $P(x)=(x-a)\\cdot C(x)+R$. Putting $x=a$, the first term is $(a-a)\\cdot C(a)=0$, and $P(a)=R$ is left.'
             ),
-            math: same('$P(x)=(x-2)(x+1)+3\\ \\to\\ P(2)=0+3=3$')
+            math: same('$\\begin{gathered}P(x)=(x-2)(x+1)+3\\\\ \\to\\ P(2)=0+3=3\\end{gathered}$')
         }
     },
     roots: {
@@ -276,7 +276,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'If the polynomial has integer coefficients, its integer roots are divisors of the constant term, positive and negative. In $x^{3}-6x^{2}+11x-6$ you try $\\pm 1,\\pm 2,\\pm 3,\\pm 6$, and get 1, 2 and 3. If the constant term is 0, $x=0$ is a root.'
         ),
         examplePrompt: say('Bilatu $x^{2}+x-12$ polinomioaren erro osoak.', 'Busca las raíces enteras de $x^{2}+x-12$.', 'ابحث عن الجذور الصحيحة لـ $x^{2}+x-12$.', 'Find the integer roots of $x^{2}+x-12$.'),
-        example: same('$P(3)=9+3-12=0\\qquad P(-4)=16-4-12=0$'),
+        example: same('$\\begin{gathered}P(3)=9+3-12=0\\\\ P(-4)=16-4-12=0\\end{gathered}$'),
         exampleAnswer: say('Erroak 3 eta $-4$ dira, biak 12 zenbakiaren zatitzaileak.', 'Las raíces son 3 y $-4$, los dos divisores de 12.', 'الجذران 3 و$-4$، وكلاهما من قواسم 12.', 'The roots are 3 and $-4$, both divisors of 12.')
     },
     'common-factor': {
@@ -292,7 +292,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             'If every term shares a number or a letter, take it out: the GCD of the coefficients and each letter with its lowest power. Inside, each term is left divided by what was taken out: $3x+6=3(x+2)$. To check it, multiply back.'
         ),
         examplePrompt: say('Atera faktore komuna $10x^{3}-15x^{2}+5x$ polinomioan.', 'Saca factor común en $10x^{3}-15x^{2}+5x$.', 'أخرج العامل المشترك في $10x^{3}-15x^{2}+5x$.', 'Take out the common factor in $10x^{3}-15x^{2}+5x$.'),
-        example: same('$10x^{3}-15x^{2}+5x=5x(2x^{2}-3x+1)$'),
+        example: same('$\\begin{aligned}&10x^{3}-15x^{2}+5x\\\\&=5x(2x^{2}-3x+1)\\end{aligned}$'),
         exampleAnswer: say('$5x(2x^{2}-3x+1)$: $5x$ zati $5x$ 1 da, ez zero.', '$5x(2x^{2}-3x+1)$: $5x$ entre $5x$ es 1, no cero.', '$5x(2x^{2}-3x+1)$: ‏$5x$ على $5x$ يساوي 1 لا صفرًا.', '$5x(2x^{2}-3x+1)$: $5x$ divided by $5x$ is 1, not zero.')
     },
     'factor-identities': {
@@ -313,7 +313,7 @@ export const polynomialsLessonTexts: Record<PolynomialsTopicId, LessonTexts> = {
             { title: say('Erroekin', 'Con raíces', 'بالجذور', 'With roots'), text: say('$a$ erroa → $x-a$ faktorea.', 'Raíz $a$ → factor $x-a$.', 'الجذر $a$ ← العامل $x-a$.', 'Root $a$ → factor $x-a$.'), math: same('$x^{2}-x-6=(x-3)(x+2)$') }
         ],
         examplePrompt: say('Faktorizatu $3x^{2}-12$.', 'Factoriza $3x^{2}-12$.', 'حلّل $3x^{2}-12$.', 'Factorise $3x^{2}-12$.'),
-        example: same('$3x^{2}-12=3(x^{2}-4)=3(x+2)(x-2)$'),
+        example: same('$\\begin{aligned}&3x^{2}-12=3(x^{2}-4)\\\\&=3(x+2)(x-2)\\end{aligned}$'),
         exampleAnswer: say('$3(x+2)(x-2)$: lehenik faktore komuna, gero karratuen kendura.', '$3(x+2)(x-2)$: primero el factor común y después la diferencia de cuadrados.', '$3(x+2)(x-2)$: أولًا العامل المشترك ثم فرق مربعين.', '$3(x+2)(x-2)$: first the common factor, then the difference of squares.')
     },
     'algebraic-fractions': {

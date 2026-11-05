@@ -70,7 +70,7 @@ export const stats3LessonTexts: Record<Stats3TopicId, LessonTexts> = {
             'The absolute frequency $f_{i}$ is how many times a value appears, and they all add up to $N$. The relative one is $h_{i}=\\frac{f_{i}}{N}$, also as a percentage, and they all add up to 1. The cumulative frequency $F_{i}$ adds the data up to that value: the previous cumulative plus $f_{i}$. The last one is $N$.'
         ),
         examplePrompt: say('Dado bat 25 aldiz bota da: 1, 2, 3 eta 4 zenbakiak 3, 5, 4 eta 6 aldiz atera dira. Zenbat da 4 zenbakiaren maiztasun metatua?', 'Tiramos un dado 25 veces: el 1, el 2, el 3 y el 4 salen 3, 5, 4 y 6 veces. ¿Cuánto vale la frecuencia acumulada del 4?', 'رمينا نردًا 25 مرة: ظهرت الأعداد 1 و2 و3 و4 على الترتيب 3 و5 و4 و6 مرات. كم التكرار المتجمّع للعدد 4؟', 'A dice is rolled 25 times: 1, 2, 3 and 4 come up 3, 5, 4 and 6 times. What is the cumulative frequency of 4?'),
-        example: same('$F_{4}=3+5+4+6=18\\qquad h_{4}=\\frac{6}{25}=0{,}24$'),
+        example: same('$\\begin{gathered}F_{4}=3+5+4+6=18\\\\ h_{4}=\\frac{6}{25}=0{,}24\\end{gathered}$'),
         exampleAnswer: say('18 jaurtiketatan 4 edo gutxiago atera da; 4 zenbakiaren erlatiboa 0,24 da.', '18 tiradas han dado 4 o menos; la relativa del 4 es 0,24.', 'في 18 رمية ظهر 4 أو أقل؛ والتكرار النسبي للعدد 4 هو 0.24.', '18 rolls gave 4 or less; the relative frequency of 4 is 0.24.')
     },
     'grouped-data': {
@@ -181,7 +181,7 @@ export const stats3LessonTexts: Record<Stats3TopicId, LessonTexts> = {
             'The median is the value left in the middle when the data are in order. If the number of data is odd, it is the middle value; if it is even, the mean of the two middle ones. Extreme values do not move it: sometimes it describes a group better than the mean.'
         ),
         examplePrompt: say('Datuak: $12,\\ 5,\\ 40,\\ 8,\\ 10$. Zein da mediana? Eta batez bestekoa?', 'Datos: $12,\\ 5,\\ 40,\\ 8,\\ 10$. ¿Cuál es la mediana? ¿Y la media?', 'البيانات: $12,\\ 5,\\ 40,\\ 8,\\ 10$. ما الوسيط؟ وما المتوسط؟', 'Data: $12,\\ 5,\\ 40,\\ 8,\\ 10$. What is the median? And the mean?'),
-        example: same('$5,\\ 8,\\ 10,\\ 12,\\ 40\\ \\to\\ Me=10\\qquad\\bar{x}=\\frac{75}{5}=15$'),
+        example: same('$\\begin{gathered}5,\\ 8,\\ 10,\\ 12,\\ 40\\ \\to\\ Me=10\\\\ \\bar{x}=\\frac{75}{5}=15\\end{gathered}$'),
         exampleAnswer: say('Mediana 10 eta batez bestekoa 15: 40 zenbakiak batez bestekoa igotzen du, baina ez mediana.', 'Mediana 10 y media 15: el 40 sube la media, pero no la mediana.', 'الوسيط 10 والمتوسط 15: العدد 40 يرفع المتوسط لا الوسيط.', 'Median 10 and mean 15: the 40 raises the mean, but not the median.')
     },
     mode: {
@@ -287,7 +287,7 @@ export const stats3LessonTexts: Record<Stats3TopicId, LessonTexts> = {
             'In a random experiment you cannot know what will come out, even if you know the possible outcomes. An event is part of the sample space: on a dice, «even» is $A=\\{2,4,6\\}$. Two events are mutually exclusive if they cannot happen at the same time.'
         ),
         examplePrompt: say('Lau kartatatik bat ateratzen da: 1, 2, 3 eta 4. $A$: «bikoitia atera»; $B$: «1 atera». Bateraezinak dira? Zein da $\\bar{A}$?', 'Se saca una carta de cuatro: 1, 2, 3 y 4. $A$: «sale par»; $B$: «sale 1». ¿Son incompatibles? ¿Cuál es $\\bar{A}$?', 'نسحب بطاقة من أربع: 1 و2 و3 و4. $A$: «تظهر زوجية»؛ $B$: «يظهر 1». هل هما متنافيان؟ وما $\\bar{A}$؟', 'A card is drawn from four: 1, 2, 3 and 4. $A$: «even»; $B$: «1». Are they mutually exclusive? What is $\\bar{A}$?'),
-        example: same('$A=\\{2,4\\}\\qquad B=\\{1\\}\\qquad\\bar{A}=\\{1,3\\}$'),
+        example: same('$\\begin{gathered}A=\\{2,4\\}\\\\ B=\\{1\\}\\\\ \\bar{A}=\\{1,3\\}\\end{gathered}$'),
         exampleAnswer: say('Bai, bateraezinak dira: ez dute emaitza komunik.', 'Sí, son incompatibles: no tienen ningún resultado en común.', 'نعم، هما متنافيان: لا نتيجة مشتركة بينهما.', 'Yes, they are mutually exclusive: they have no outcome in common.')
     },
     laplace: {

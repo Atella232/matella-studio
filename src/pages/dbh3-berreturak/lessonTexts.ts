@@ -45,7 +45,7 @@ export const powersLessonTexts: Record<PowersTopicId, LessonTexts> = {
             }
         ],
         examplePrompt: say('Kalkulatu $(-10)^{3}$ eta $(-10)^{4}$.', 'Calcula $(-10)^{3}$ y $(-10)^{4}$.', 'احسب $(-10)^{3}$ و$(-10)^{4}$.', 'Work out $(-10)^{3}$ and $(-10)^{4}$.'),
-        example: same('$(-10)^{3}=-1000\\qquad(-10)^{4}=10\\,000$'),
+        example: same('$\\begin{gathered}(-10)^{3}=-1000\\\\ (-10)^{4}=10\\,000\\end{gathered}$'),
         exampleAnswer: say('Berretzaile bakoitia, negatiboa; bikoitia, positiboa.', 'Exponente impar, negativo; par, positivo.', 'أس فردي: سالب؛ أس زوجي: موجب.', 'Odd exponent, negative; even, positive.')
     },
     'negative-zero': {
@@ -76,7 +76,7 @@ export const powersLessonTexts: Record<PowersTopicId, LessonTexts> = {
                 'في سُلّم القوى نقسم على الأساس كلما نزلنا درجة: $2^{2}=4$ و$2^{1}=2$. وإذا تابعنا النزول، $2^{0}=2\\div 2=1$ و$2^{-1}=1\\div 2=\\frac{1}{2}$.',
                 'On the staircase of powers, going down one step divides by the base: $2^{2}=4$, $2^{1}=2$. Going on down, $2^{0}=2\\div 2=1$ and $2^{-1}=1\\div 2=\\frac{1}{2}$.'
             ),
-            math: same('$2^{1}\\div 2=2^{0}=1\\qquad 2^{0}\\div 2=2^{-1}=\\frac{1}{2}$')
+            math: same('$\\begin{gathered}2^{1}\\div 2=2^{0}=1\\\\ 2^{0}\\div 2=2^{-1}=\\frac{1}{2}\\end{gathered}$')
         }
     },
     'power-rules': {
@@ -142,7 +142,7 @@ export const powersLessonTexts: Record<PowersTopicId, LessonTexts> = {
             'In big numbers the decimal point jumps to the left and the exponent is positive: $83\\,400\\,000=8{,}34\\cdot 10^{7}$. In small ones it jumps to the right and it is negative: $0{,}00052=5{,}2\\cdot 10^{-4}$. The exponent counts the jumps.'
         ),
         examplePrompt: say('Idatzi idazkera zientifikoan Lurretik Eguzkirako distantzia, $150\\,000\\,000$ km, eta $0{,}0009$.', 'Escribe en notación científica la distancia de la Tierra al Sol, $150\\,000\\,000$ km, y $0{,}0009$.', 'اكتب بالترميز العلمي المسافة بين الأرض والشمس، $150\\,000\\,000$ كم، و$0{,}0009$.', 'Write in scientific notation the distance from the Earth to the Sun, $150\\,000\\,000$ km, and $0{,}0009$.'),
-        example: same('$150\\,000\\,000=1{,}5\\cdot 10^{8}\\qquad 0{,}0009=9\\cdot 10^{-4}$'),
+        example: same('$\\begin{gathered}150\\,000\\,000=1{,}5\\cdot 10^{8}\\\\ 0{,}0009=9\\cdot 10^{-4}\\end{gathered}$'),
         exampleAnswer: say('$1{,}5\\cdot 10^{8}$ km (8 jauzi ezkerrera) eta $9\\cdot 10^{-4}$ (4 jauzi eskuinera).', '$1{,}5\\cdot 10^{8}$ km (8 saltos a la izquierda) y $9\\cdot 10^{-4}$ (4 saltos a la derecha).', '$1{,}5\\cdot 10^{8}$ كم (8 قفزات إلى اليسار) و$9\\cdot 10^{-4}$ (4 قفزات إلى اليمين).', '$1{,}5\\cdot 10^{8}$ km (8 jumps to the left) and $9\\cdot 10^{-4}$ (4 jumps to the right).'),
         why: {
             text: say(
@@ -176,7 +176,7 @@ export const powersLessonTexts: Record<PowersTopicId, LessonTexts> = {
             {
                 title: say('Berretzaile desberdinak', 'Exponentes distintos', 'أسس مختلفة', 'Different exponents'),
                 text: say('Handiena berretzaile handiena duena da; negatiboetan ere bai, zerotik hurbilago dagoena.', 'Es mayor el de mayor exponente, también con negativos: el más cercano a cero.', 'الأكبر صاحب الأس الأكبر، ومع الأسس السالبة كذلك: الأقرب إلى الصفر.', 'The one with the greater exponent is greater, with negatives too: the one closer to zero.'),
-                math: same('$2\\cdot 10^{6}>9\\cdot 10^{5}\\qquad 5\\cdot 10^{-3}>5\\cdot 10^{-6}$')
+                math: same('$\\begin{gathered}2\\cdot 10^{6}>9\\cdot 10^{5}\\\\ 5\\cdot 10^{-3}>5\\cdot 10^{-6}\\end{gathered}$')
             },
             {
                 title: say('Berretzaile bera', 'Mismo exponente', 'الأس نفسه', 'Same exponent'),
@@ -328,7 +328,7 @@ export const powersLessonTexts: Record<PowersTopicId, LessonTexts> = {
             }
         ],
         examplePrompt: say('Kalkulatu $\\sqrt{20}+\\sqrt{45}$ eta $\\sqrt{3}\\cdot\\sqrt{27}$.', 'Calcula $\\sqrt{20}+\\sqrt{45}$ y $\\sqrt{3}\\cdot\\sqrt{27}$.', 'احسب $\\sqrt{20}+\\sqrt{45}$ و$\\sqrt{3}\\cdot\\sqrt{27}$.', 'Work out $\\sqrt{20}+\\sqrt{45}$ and $\\sqrt{3}\\cdot\\sqrt{27}$.'),
-        example: same('$2\\sqrt{5}+3\\sqrt{5}=5\\sqrt{5}\\qquad\\sqrt{3}\\cdot\\sqrt{27}=\\sqrt{81}=9$'),
+        example: same('$\\begin{gathered}2\\sqrt{5}+3\\sqrt{5}=5\\sqrt{5}\\\\ \\sqrt{3}\\cdot\\sqrt{27}=\\sqrt{81}=9\\end{gathered}$'),
         exampleAnswer: say('$5\\sqrt{5}$ eta 9: lehenengoan faktoreak atera dira, eta bigarrenean errokizunak biderkatu.', '$5\\sqrt{5}$ y 9: en la primera se sacan factores, y en la segunda se multiplican los radicandos.', '$5\\sqrt{5}$ و9: في الأولى أخرجنا العوامل، وفي الثانية ضربنا ما تحت الجذرين.', '$5\\sqrt{5}$ and 9: in the first, factors are taken out; in the second, the radicands are multiplied.')
     },
 
@@ -356,7 +356,7 @@ export const powersLessonTexts: Record<PowersTopicId, LessonTexts> = {
             'Rational numbers can be written as a fraction and their decimal is terminating or recurring: $\\frac{3}{4}=0{,}75$, $\\frac{1}{3}=0{,}\\overline{3}$. Irrational numbers have infinitely many digits with no repeating part: $\\sqrt{2}=1{,}41421\\ldots$ and $\\pi=3{,}14159\\ldots$ Roots of perfect squares are rational; the others, irrational.'
         ),
         examplePrompt: say('Arrazionalak ala irrazionalak dira $\\sqrt{64}$, $\\sqrt{20}$ eta $1{,}\\overline{2}$?', '¿Son racionales o irracionales $\\sqrt{64}$, $\\sqrt{20}$ y $1{,}\\overline{2}$?', 'هل $\\sqrt{64}$ و$\\sqrt{20}$ و$1{,}\\overline{2}$ نسبية أم غير نسبية؟', 'Are $\\sqrt{64}$, $\\sqrt{20}$ and $1{,}\\overline{2}$ rational or irrational?'),
-        example: same('$\\sqrt{64}=8\\qquad\\sqrt{20}=4{,}472\\ldots\\qquad 1{,}\\overline{2}=\\frac{11}{9}$'),
+        example: same('$\\begin{gathered}\\sqrt{64}=8\\\\ \\sqrt{20}=4{,}472\\ldots\\\\ 1{,}\\overline{2}=\\frac{11}{9}\\end{gathered}$'),
         exampleAnswer: say('Arrazionalak: $\\sqrt{64}$ eta $1{,}\\overline{2}$. Irrazionala: $\\sqrt{20}$, 20 ez delako karratu perfektua.', 'Racionales: $\\sqrt{64}$ y $1{,}\\overline{2}$. Irracional: $\\sqrt{20}$, porque 20 no es un cuadrado perfecto.', 'نسبيان: $\\sqrt{64}$ و$1{,}\\overline{2}$. وغير نسبي: $\\sqrt{20}$ لأن 20 ليس مربعًا كاملًا.', 'Rational: $\\sqrt{64}$ and $1{,}\\overline{2}$. Irrational: $\\sqrt{20}$, because 20 is not a perfect square.')
     },
     'real-line': {
@@ -467,7 +467,7 @@ export const powersLessonTexts: Record<PowersTopicId, LessonTexts> = {
             'The relative error tells how much the error weighs against what is measured, and it can be given as a percentage. If a piece measures $0{,}125$ m and you take $0{,}12$ m, $E_{a}=0{,}005$ m and $E_{r}=\\frac{0{,}005}{0{,}125}=0{,}04$, that is 4%.'
         ),
         examplePrompt: say('$\\frac{1}{3}$ zatikiaren ordez $0{,}33$ hartzen da. Kalkulatu errore absolutua eta erlatiboa.', 'Se aproxima $\\frac{1}{3}$ por $0{,}33$. Calcula el error absoluto y el relativo.', 'نقرّب $\\frac{1}{3}$ بالعدد $0{,}33$. احسب الخطأ المطلق والنسبي.', '$\\frac{1}{3}$ is approximated by $0{,}33$. Work out the absolute and relative errors.'),
-        example: same('$E_{a}=\\frac{1}{3}-0{,}33=\\frac{1}{300}\\qquad E_{r}=\\frac{1}{300}\\div\\frac{1}{3}=0{,}01$'),
+        example: same('$\\begin{gathered}E_{a}=\\frac{1}{3}-0{,}33=\\frac{1}{300}\\\\ E_{r}=\\frac{1}{300}\\div\\frac{1}{3}=0{,}01\\end{gathered}$'),
         exampleAnswer: say('Errore erlatiboa $0{,}01$ da, hau da, % 1.', 'Un error relativo de $0{,}01$, es decir, del 1 %.', 'خطأ نسبي قدره $0{,}01$، أي 1٪.', 'A relative error of $0{,}01$, that is, 1%.')
     }
 }

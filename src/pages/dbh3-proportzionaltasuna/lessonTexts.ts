@@ -36,7 +36,7 @@ export const proportion3LessonTexts: Record<Proportion3TopicId, LessonTexts> = {
             'The ratio of two quantities $a$ and $b$ is their quotient, $\\frac{a}{b}$: how many times one fits into the other. With 12 girls and 16 boys, the ratio is $\\frac{12}{16}=0{,}75$. In every proportion, the product of the extremes equals that of the means: $a\\cdot d=b\\cdot c$.'
         ),
         examplePrompt: say('Errezeta batean 250 g irin daude 100 g azukre bakoitzeko. Proportzionala da 750 g irin eta 300 g azukre erabiltzea?', 'Una receta lleva 250 g de harina por cada 100 g de azúcar. ¿Es proporcional usar 750 g de harina y 300 g de azúcar?', 'في وصفة 250 غ من الطحين لكل 100 غ من السكر. هل استعمال 750 غ من الطحين و300 غ من السكر متناسب؟', 'A recipe uses 250 g of flour for every 100 g of sugar. Is it proportional to use 750 g of flour and 300 g of sugar?'),
-        example: same('$\\frac{250}{100}=\\frac{750}{300}\\ \\to\\ 250\\cdot 300=100\\cdot 750=75\\,000$'),
+        example: same('$\\begin{gathered}\\frac{250}{100}=\\frac{750}{300}\\\\ \\to\\ 250\\cdot 300=100\\cdot 750=75\\,000\\end{gathered}$'),
         exampleAnswer: say('Bai: bi arrazoiek $2{,}5$ balio dute.', 'Sí: las dos razones valen $2{,}5$.', 'نعم: النسبتان تساويان $2{,}5$.', 'Yes: both ratios are $2{,}5$.')
     },
     proportion: {

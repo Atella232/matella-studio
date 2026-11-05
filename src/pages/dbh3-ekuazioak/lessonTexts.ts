@@ -44,7 +44,7 @@ export const equations3LessonTexts: Record<Equations3TopicId, LessonTexts> = {
             'To solve an equation, write equivalent equations until you solve for $x$: you can add or subtract the same on both sides, or multiply or divide both sides by the same number other than 0. On the balance $x+2=8$, if you take 2 off each pan, $x=6$ is left.'
         ),
         examplePrompt: say('Ebatzi $6x+7=2x-5$.', 'Resuelve $6x+7=2x-5$.', 'حلّ $6x+7=2x-5$.', 'Solve $6x+7=2x-5$.'),
-        example: same('$6x-2x=-5-7\\ \\to\\ 4x=-12\\ \\to\\ x=-3$'),
+        example: same('$\\begin{gathered}6x-2x=-5-7\\\\ \\to\\ 4x=-12\\\\ \\to\\ x=-3\\end{gathered}$'),
         exampleAnswer: say('$x=-3$: bi atalek $-11$ balio dute.', '$x=-3$: los dos miembros valen $-11$.', '$x=-3$: الطرفان يساويان $-11$.', '$x=-3$: both sides are worth $-11$.'),
         why: {
             text: say(
@@ -53,7 +53,7 @@ export const equations3LessonTexts: Record<Equations3TopicId, LessonTexts> = {
                 'المعادلة كميزان متوازن: إذا وضعنا الشيء نفسه في الكفتين أو نزعناه منهما يبقى متوازنًا. ولذلك لا يتغير الحل.',
                 'An equation is like a balance in equilibrium: if you put on or take off the same in both pans, it stays balanced. That is why the solution does not change.'
             ),
-            math: same('$x+2=8\\ \\to\\ x+2-2=8-2\\ \\to\\ x=6$')
+            math: same('$\\begin{gathered}x+2=8\\\\ \\to\\ x+2-2=8-2\\\\ \\to\\ x=6\\end{gathered}$')
         }
     },
     brackets: {
@@ -69,7 +69,7 @@ export const equations3LessonTexts: Record<Equations3TopicId, LessonTexts> = {
             'The order is: remove the brackets, multiplying the number by every term; move the $x$ terms to one side and the numbers to the other; collect and solve. If there is a minus before the bracket, every sign inside changes: $-(2x-3)=-2x+3$.'
         ),
         examplePrompt: say('Ebatzi $5-3(x-2)=2(x+1)-1$.', 'Resuelve $5-3(x-2)=2(x+1)-1$.', 'حلّ $5-3(x-2)=2(x+1)-1$.', 'Solve $5-3(x-2)=2(x+1)-1$.'),
-        example: same('$5-3x+6=2x+2-1\\ \\to\\ 10=5x\\ \\to\\ x=2$'),
+        example: same('$\\begin{gathered}5-3x+6=2x+2-1\\\\ \\to\\ 10=5x\\\\ \\to\\ x=2\\end{gathered}$'),
         exampleAnswer: say('$x=2$: $-3$ zenbakiak $-2$ ere biderkatzen du, eta $+6$ ematen du.', '$x=2$: el $-3$ multiplica también al $-2$, y da $+6$.', '$x=2$: العدد $-3$ يضرب $-2$ أيضًا فيعطي $+6$.', '$x=2$: the $-3$ also multiplies the $-2$, giving $+6$.')
     },
     denominators: {
@@ -85,7 +85,7 @@ export const equations3LessonTexts: Record<Equations3TopicId, LessonTexts> = {
             'Multiply both sides by the LCM of the denominators: every term, including those with no denominator. In $\\frac{x}{2}+\\frac{x}{3}=5$, times 6: $3x+2x=30$. If a numerator is a sum, put it in brackets: $-\\frac{x-1}{3}$ times 6 is $-2(x-1)$.'
         ),
         examplePrompt: say('Ebatzi $\\frac{x+3}{4}-\\frac{x}{6}=1$.', 'Resuelve $\\frac{x+3}{4}-\\frac{x}{6}=1$.', 'حلّ $\\frac{x+3}{4}-\\frac{x}{6}=1$.', 'Solve $\\frac{x+3}{4}-\\frac{x}{6}=1$.'),
-        example: same('$3(x+3)-2x=12\\ \\to\\ x+9=12\\ \\to\\ x=3$'),
+        example: same('$\\begin{gathered}3(x+3)-2x=12\\\\ \\to\\ x+9=12\\\\ \\to\\ x=3\\end{gathered}$'),
         exampleAnswer: say('$x=3$: m.k.t. 12 da, eta 1 zenbakia ere biderkatzen da.', '$x=3$: el m.c.m. es 12, y también se multiplica el 1.', '$x=3$: المضاعف المشترك الأصغر 12، ونضرب العدد 1 أيضًا.', '$x=3$: the LCM is 12, and the 1 is multiplied too.')
     },
     incomplete: {
@@ -107,11 +107,11 @@ export const equations3LessonTexts: Record<Equations3TopicId, LessonTexts> = {
             'Incomplete ones are solved without the formula. If $bx$ is missing, isolate $x^{2}$ and take the square root: two solutions, with $+$ and with $-$, or none if $x^{2}$ is negative. If $c$ is missing, take $x$ out as a common factor: $x=0$ is always a solution.'
         ),
         cases: [
-            { title: same('$ax^{2}+c=0$'), text: say('$x^{2}$ bakandu eta erroa atera.', 'Despeja $x^{2}$ y saca la raíz.', 'اعزل $x^{2}$ وخذ الجذر.', 'Isolate $x^{2}$ and take the root.'), math: same('$2x^{2}-18=0\\ \\to\\ x^{2}=9\\ \\to\\ x=\\pm 3$') },
-            { title: same('$ax^{2}+bx=0$'), text: say('$x$ faktore komuna.', 'Factor común $x$.', 'العامل المشترك $x$.', 'Common factor $x$.'), math: same('$x^{2}-5x=0\\ \\to\\ x(x-5)=0\\ \\to\\ x=0,\\ x=5$') }
+            { title: same('$ax^{2}+c=0$'), text: say('$x^{2}$ bakandu eta erroa atera.', 'Despeja $x^{2}$ y saca la raíz.', 'اعزل $x^{2}$ وخذ الجذر.', 'Isolate $x^{2}$ and take the root.'), math: same('$\\begin{gathered}2x^{2}-18=0\\\\ \\to\\ x^{2}=9\\\\ \\to\\ x=\\pm 3\\end{gathered}$') },
+            { title: same('$ax^{2}+bx=0$'), text: say('$x$ faktore komuna.', 'Factor común $x$.', 'العامل المشترك $x$.', 'Common factor $x$.'), math: same('$\\begin{gathered}x^{2}-5x=0\\\\ \\to\\ x(x-5)=0\\\\ \\to\\ x=0,\\ x=5\\end{gathered}$') }
         ],
         examplePrompt: say('Ebatzi $2x^{2}-50=0$ eta $3x^{2}+12x=0$.', 'Resuelve $2x^{2}-50=0$ y $3x^{2}+12x=0$.', 'حلّ $2x^{2}-50=0$ و$3x^{2}+12x=0$.', 'Solve $2x^{2}-50=0$ and $3x^{2}+12x=0$.'),
-        example: same('$x^{2}=25\\ \\to\\ x=\\pm 5\\qquad 3x(x+4)=0\\ \\to\\ x=0,\\ x=-4$'),
+        example: same('$\\begin{gathered}x^{2}=25\\ \\to\\ x=\\pm 5\\\\ 3x(x+4)=0\\ \\to\\ x=0,\\ x=-4\\end{gathered}$'),
         exampleAnswer: say('Lehenengoak $x=5$ eta $x=-5$; bigarrenak $x=0$ eta $x=-4$.', 'La primera, $x=5$ y $x=-5$; la segunda, $x=0$ y $x=-4$.', 'الأولى $x=5$ و$x=-5$، والثانية $x=0$ و$x=-4$.', 'The first, $x=5$ and $x=-5$; the second, $x=0$ and $x=-4$.'),
         why: {
             text: say(
@@ -172,7 +172,7 @@ export const equations3LessonTexts: Record<Equations3TopicId, LessonTexts> = {
             { title: same('$\\Delta<0$'), text: say('Ebazpenik ez.', 'Ninguna solución.', 'لا حل.', 'No solution.'), math: same('$x^{2}+x+5=0$') }
         ],
         examplePrompt: say('Zenbat soluzio ditu $2x^{2}-3x+5=0$ ekuazioak?', '¿Cuántas soluciones tiene $2x^{2}-3x+5=0$?', 'كم حلًا للمعادلة $2x^{2}-3x+5=0$؟', 'How many solutions does $2x^{2}-3x+5=0$ have?'),
-        example: same('$\\Delta=(-3)^{2}-4\\cdot 2\\cdot 5=9-40=-31$'),
+        example: same('$\\begin{aligned}&\\Delta=(-3)^{2}-4\\cdot 2\\cdot 5\\\\&=9-40=-31\\end{aligned}$'),
         exampleAnswer: say('Bat ere ez: $\\Delta<0$, eta parabolak ez du ardatza ukitzen.', 'Ninguna: $\\Delta<0$, y la parábola no toca el eje.', 'لا حل: ‏$\\Delta<0$، والقطع المكافئ لا يمسّ المحور.', 'None: $\\Delta<0$, and the parabola does not touch the axis.')
     },
     pairs: {
@@ -253,7 +253,7 @@ export const equations3LessonTexts: Record<Equations3TopicId, LessonTexts> = {
             'Solve for one unknown in one equation, ideally the one with coefficient 1 or $-1$, and substitute it into the other, in brackets; solve the one-unknown equation and go back to work out the other.'
         ),
         examplePrompt: say('Ebatzi $y=3x-1$, $2x+y=9$.', 'Resuelve $y=3x-1$, $2x+y=9$.', 'حلّ $y=3x-1$، $2x+y=9$.', 'Solve $y=3x-1$, $2x+y=9$.'),
-        example: same('$2x+(3x-1)=9\\ \\to\\ x=2\\qquad y=3\\cdot 2-1=5$'),
+        example: same('$\\begin{gathered}2x+(3x-1)=9\\ \\to\\ x=2\\\\ y=3\\cdot 2-1=5\\end{gathered}$'),
         exampleAnswer: same('$x=2,\\ y=5$')
     },
     equalisation: {
@@ -269,7 +269,7 @@ export const equations3LessonTexts: Record<Equations3TopicId, LessonTexts> = {
             'Solve for the same unknown in both equations, for example $y$. As the two expressions are worth the same, set them equal: an equation with only $x$ is left. After solving it, substitute into either of the rearranged ones.'
         ),
         examplePrompt: say('Ebatzi $y=4x-3$, $y=2x+5$.', 'Resuelve $y=4x-3$, $y=2x+5$.', 'حلّ $y=4x-3$، $y=2x+5$.', 'Solve $y=4x-3$, $y=2x+5$.'),
-        example: same('$4x-3=2x+5\\ \\to\\ x=4\\qquad y=4\\cdot 4-3=13$'),
+        example: same('$\\begin{gathered}4x-3=2x+5\\ \\to\\ x=4\\\\ y=4\\cdot 4-3=13\\end{gathered}$'),
         exampleAnswer: same('$x=4,\\ y=13$')
     },
     elimination: {
@@ -285,7 +285,7 @@ export const equations3LessonTexts: Record<Equations3TopicId, LessonTexts> = {
             'Multiply the equations by some number so that one unknown has opposite coefficients, like $3y$ and $-3y$. Then add the two equations, side by side: that unknown disappears. It is the best method when no unknown has coefficient 1.'
         ),
         examplePrompt: say('Ebatzi $3x+2y=16$, $5x-2y=0$.', 'Resuelve $3x+2y=16$, $5x-2y=0$.', 'حلّ $3x+2y=16$، $5x-2y=0$.', 'Solve $3x+2y=16$, $5x-2y=0$.'),
-        example: same('$8x=16\\ \\to\\ x=2\\qquad 3\\cdot 2+2y=16\\ \\to\\ y=5$'),
+        example: same('$\\begin{gathered}8x=16\\ \\to\\ x=2\\\\ 3\\cdot 2+2y=16\\ \\to\\ y=5\\end{gathered}$'),
         exampleAnswer: say('$x=2$ eta $y=5$: $2y$ eta $-2y$ aurkakoak ziren jada.', '$x=2$ e $y=5$: $2y$ y $-2y$ ya eran opuestos.', '$x=2$ و$y=5$: كان $2y$ و$-2y$ متعاكسين من البداية.', '$x=2$ and $y=5$: $2y$ and $-2y$ were already opposite.'),
         why: {
             text: say(
@@ -294,7 +294,7 @@ export const equations3LessonTexts: Record<Equations3TopicId, LessonTexts> = {
                 'إذا كان $A=B$ و$C=D$ فإن $A+C=B+D$: نجمع أشياء متساوية إلى أشياء متساوية، كما لو جمعنا ميزانين متوازنين. ومع المعاملين المتعاكسين يصير مجموع ذلك المجهول صفرًا.',
                 'If $A=B$ and $C=D$, then $A+C=B+D$: equal things are added to equal things, like putting two balanced scales together. With opposite coefficients, that unknown adds up to zero.'
             ),
-            math: same('$(7+3)+(7-3)=10+4=14=2\\cdot 7$')
+            math: same('$\\begin{aligned}&(7+3)+(7-3)=10+4\\\\&=14=2\\cdot 7\\end{aligned}$')
         }
     },
     'equation-problems': {
@@ -310,7 +310,7 @@ export const equations3LessonTexts: Record<Equations3TopicId, LessonTexts> = {
             'Four steps: decide what $x$ is; write the other amounts with $x$; set up the equation from the equality in the statement; solve it and check that the answer makes sense. With ages, the years go by for everyone: in 10 years, $x$ and $3x$ will be $x+10$ and $3x+10$.'
         ),
         examplePrompt: say('Bi zenbaki jarraiek 85 batzen dute. Zein dira?', 'Dos números consecutivos suman 85. ¿Cuáles son?', 'مجموع عددين متتاليين 85. ما هما؟', 'Two consecutive numbers add up to 85. What are they?'),
-        example: same('$x+(x+1)=85\\ \\to\\ 2x=84\\ \\to\\ x=42$'),
+        example: same('$\\begin{gathered}x+(x+1)=85\\\\ \\to\\ 2x=84\\\\ \\to\\ x=42\\end{gathered}$'),
         exampleAnswer: say('42 eta 43; egiaztatu: $42+43=85$.', '42 y 43; comprueba: $42+43=85$.', '42 و43؛ تحقق: $42+43=85$.', '42 and 43; check: $42+43=85$.')
     },
     'quadratic-problems': {
@@ -326,7 +326,7 @@ export const equations3LessonTexts: Record<Equations3TopicId, LessonTexts> = {
             'Areas and products give quadratic equations. If two solutions come out, study both: a length or an age cannot be negative. A rectangle with sides $x$ and $x+5$ and area 150 gives $x=10$ or $x=-15$: the sides are 10 and 15.'
         ),
         examplePrompt: say('Zenbaki bat gehi haren karratua 56 da. Zein zenbaki da?', 'Un número más su cuadrado da 56. ¿Qué número es?', 'عدد زائد مربعه يساوي 56. ما العدد؟', 'A number plus its square is 56. What is the number?'),
-        example: same('$x^{2}+x-56=0\\ \\to\\ x=\\frac{-1\\pm 15}{2}\\ \\to\\ x=7,\\ x=-8$'),
+        example: same('$\\begin{gathered}x^{2}+x-56=0\\\\ \\to\\ x=\\frac{-1\\pm 15}{2}\\\\ \\to\\ x=7,\\ x=-8\\end{gathered}$'),
         exampleAnswer: say('7 edo $-8$: hemen biek balio dute, zenbaki bat negatiboa izan daitekeelako.', '7 o $-8$: aquí sirven las dos, porque un número puede ser negativo.', '7 أو $-8$: هنا يصلح الحلّان لأن العدد يمكن أن يكون سالبًا.', '7 or $-8$: here both work, because a number can be negative.')
     },
     'system-problems': {
@@ -342,7 +342,7 @@ export const equations3LessonTexts: Record<Equations3TopicId, LessonTexts> = {
             'If there are two unknown amounts and two conditions, call the amounts $x$ and $y$ and write one equation for each condition: with chickens and rabbits, heads and legs, $x+y=20$ and $2x+4y=56$. At the end, answer in words and check both conditions.'
         ),
         examplePrompt: say('Ogitarteko batek eta zuku batek 5 € balio dute; bi ogitartekok eta hiru zukuk, 12 €. Zenbat balio du bakoitzak?', 'Un bocadillo y un zumo cuestan 5 €; dos bocadillos y tres zumos, 12 €. ¿Cuánto cuesta cada cosa?', 'شطيرة وعصير ثمنهما 5 €، وشطيرتان وثلاثة عصائر 12 €. كم ثمن كل منهما؟', 'A sandwich and a juice cost €5; two sandwiches and three juices, €12. How much is each?'),
-        example: same('$x+y=5,\\ 2x+3y=12\\ \\to\\ y=2,\\ x=3$'),
+        example: same('$\\begin{gathered}x+y=5,\\ 2x+3y=12\\\\ \\to\\ y=2,\\ x=3\\end{gathered}$'),
         exampleAnswer: say('Ogitartekoa 3 € eta zukua 2 €: $3+2=5$ eta $2\\cdot 3+3\\cdot 2=12$.', 'El bocadillo, 3 €, y el zumo, 2 €: $3+2=5$ y $2\\cdot 3+3\\cdot 2=12$.', 'الشطيرة 3 € والعصير 2 €: ‏$3+2=5$ و$2\\cdot 3+3\\cdot 2=12$.', 'The sandwich, €3, and the juice, €2: $3+2=5$ and $2\\cdot 3+3\\cdot 2=12$.')
     }
 }

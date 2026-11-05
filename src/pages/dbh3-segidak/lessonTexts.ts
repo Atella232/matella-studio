@@ -61,7 +61,7 @@ export const sequencesLessonTexts: Record<SequencesTopicId, LessonTexts> = {
             { title: say('Lekua aurkitu', 'Hallar el lugar', 'إيجاد الرتبة', 'Find the position'), text: say('Berdindu formula balioari eta ebatzi.', 'Iguala la fórmula al valor y resuelve.', 'ساوِ الصيغة بالقيمة وحلّ.', 'Set the formula equal to the value and solve.'), math: same('$3n-2=40\\ \\to\\ n=14$') }
         ],
         examplePrompt: say('$a_{n}=4n-7$ bada, kalkulatu $a_{9}$. 50 zenbakia segidan dago?', 'Si $a_{n}=4n-7$, calcula $a_{9}$. ¿Está el 50 en la sucesión?', 'إذا كان $a_{n}=4n-7$ فاحسب $a_{9}$. هل العدد 50 في المتتالية؟', 'If $a_{n}=4n-7$, work out $a_{9}$. Is 50 in the sequence?'),
-        example: same('$a_{9}=4\\cdot 9-7=29\\qquad 4n-7=50\\ \\to\\ n=14{,}25$'),
+        example: same('$\\begin{gathered}a_{9}=4\\cdot 9-7=29\\\\ 4n-7=50\\ \\to\\ n=14{,}25\\end{gathered}$'),
         exampleAnswer: say('$a_{9}=29$. 50 ez dago: $n=14{,}25$ ez da naturala.', '$a_{9}=29$. El 50 no está: $n=14{,}25$ no es natural.', '$a_{9}=29$. العدد 50 ليس فيها: $n=14{,}25$ ليس طبيعيًا.', '$a_{9}=29$. 50 is not in it: $n=14{,}25$ is not natural.')
     },
     recursive: {
@@ -122,7 +122,7 @@ export const sequencesLessonTexts: Record<SequencesTopicId, LessonTexts> = {
             }
         ],
         examplePrompt: say('Aritmetikoa da $-8,\\ -5,\\ -2,\\ 1$? Zein da hurrengo gaia?', '¿Es aritmética $-8,\\ -5,\\ -2,\\ 1$? ¿Cuál es el término siguiente?', 'هل $-8,\\ -5,\\ -2,\\ 1$ متتالية حسابية؟ ما الحد التالي؟', 'Is $-8,\\ -5,\\ -2,\\ 1$ arithmetic? What is the next term?'),
-        example: same('$-5-(-8)=3\\qquad -2-(-5)=3\\qquad 1-(-2)=3$'),
+        example: same('$\\begin{gathered}-5-(-8)=3\\\\ -2-(-5)=3\\\\ 1-(-2)=3\\end{gathered}$'),
         exampleAnswer: say('Bai, $d=3$: gorakorra. Hurrengoa $1+3=4$ da.', 'Sí, $d=3$: creciente. El siguiente es $1+3=4$.', 'نعم، $d=3$: متزايدة. والتالي $1+3=4$.', 'Yes, $d=3$: increasing. The next one is $1+3=4$.')
     },
     'arith-general': {
@@ -138,7 +138,7 @@ export const sequencesLessonTexts: Record<SequencesTopicId, LessonTexts> = {
             'To go from $a_{1}$ to $a_{n}$ you make $n-1$ jumps of $d$: $a_{n}=a_{1}+(n-1)\\cdot d$. In $3,\\,7,\\,11,\\ldots$, $a_{5}=3+4\\cdot 4=19$. Simplifying gives a first-degree expression, and the coefficient of $n$ is $d$: $a_{n}=4n-1$.'
         ),
         examplePrompt: say('$a_{1}=-2$ eta $d=7$ badira, aurkitu $a_{30}$ eta gai orokorra.', 'Si $a_{1}=-2$ y $d=7$, halla $a_{30}$ y el término general.', 'إذا كان $a_{1}=-2$ و$d=7$ فجد $a_{30}$ والحد العام.', 'If $a_{1}=-2$ and $d=7$, find $a_{30}$ and the general term.'),
-        example: same('$a_{30}=-2+29\\cdot 7=201\\qquad a_{n}=7n-9$'),
+        example: same('$\\begin{gathered}a_{30}=-2+29\\cdot 7=201\\\\ a_{n}=7n-9\\end{gathered}$'),
         exampleAnswer: say('$a_{30}=201$ eta $a_{n}=7n-9$: 29 jauzi lehenengotik hogeita hamargarrenera.', '$a_{30}=201$ y $a_{n}=7n-9$: del primero al trigésimo hay 29 saltos.', '$a_{30}=201$ و$a_{n}=7n-9$: من الأول إلى الثلاثين 29 قفزة.', '$a_{30}=201$ and $a_{n}=7n-9$: from the first to the thirtieth there are 29 jumps.')
     },
     'arith-find': {
@@ -154,7 +154,7 @@ export const sequencesLessonTexts: Record<SequencesTopicId, LessonTexts> = {
             'If you know two terms, count the jumps between them: from $a_{3}$ to $a_{8}$ there are $8-3=5$. Divide the difference of the values by the jumps and you have $d$; then go back to $a_{1}$. To find the place of a value, set the general term equal to it and solve for $n$.'
         ),
         examplePrompt: say('$a_{4}=10$ eta $a_{10}=28$. Aurkitu $d$ eta $a_{1}$.', '$a_{4}=10$ y $a_{10}=28$. Halla $d$ y $a_{1}$.', '$a_{4}=10$ و$a_{10}=28$. جد $d$ و$a_{1}$.', '$a_{4}=10$ and $a_{10}=28$. Find $d$ and $a_{1}$.'),
-        example: same('$d=\\frac{28-10}{6}=3\\qquad a_{1}=10-3\\cdot 3=1$'),
+        example: same('$\\begin{gathered}d=\\frac{28-10}{6}=3\\\\ a_{1}=10-3\\cdot 3=1\\end{gathered}$'),
         exampleAnswer: say('$d=3$, $a_{1}=1$ eta $a_{n}=3n-2$.', '$d=3$, $a_{1}=1$ y $a_{n}=3n-2$.', '$d=3$ و$a_{1}=1$ و$a_{n}=3n-2$.', '$d=3$, $a_{1}=1$ and $a_{n}=3n-2$.')
     },
     gauss: {
@@ -186,7 +186,7 @@ export const sequencesLessonTexts: Record<SequencesTopicId, LessonTexts> = {
             'Gauss’s idea gives a formula: $S_{n}=\\frac{(a_{1}+a_{n})\\cdot n}{2}$. If you do not know the last term, work it out first with the general term. In $2+4+\\cdots+12$, $S_{6}=\\frac{(2+12)\\cdot 6}{2}=42$. It works with an even or an odd number of terms.'
         ),
         examplePrompt: say('Batu $4,\\,9,\\,14,\\ldots$ progresioaren lehen 15 gaiak.', 'Suma los 15 primeros términos de $4,\\,9,\\,14,\\ldots$', 'اجمع الحدود الخمسة عشر الأولى من $4,\\,9,\\,14,\\ldots$', 'Add the first 15 terms of $4,\\,9,\\,14,\\ldots$'),
-        example: same('$a_{15}=4+14\\cdot 5=74\\qquad S_{15}=\\frac{(4+74)\\cdot 15}{2}=585$'),
+        example: same('$\\begin{gathered}a_{15}=4+14\\cdot 5=74\\\\ S_{15}=\\frac{(4+74)\\cdot 15}{2}=585\\end{gathered}$'),
         exampleAnswer: say('585: lehenik azken gaia, $a_{15}=74$.', '585: primero el último término, $a_{15}=74$.', '585: أولًا الحد الأخير $a_{15}=74$.', '585: first the last term, $a_{15}=74$.'),
         why: {
             text: say(
@@ -211,7 +211,7 @@ export const sequencesLessonTexts: Record<SequencesTopicId, LessonTexts> = {
             'If an amount always goes up or down by the same, there is an arithmetic sequence. Decide what $a_{1}$ is, what $d$ is and how many terms there are; then see whether they ask for a term (the seats in the tenth row) or the sum (all the seats). The first day, the first row… are $a_{1}$.'
         ),
         examplePrompt: say('Norbaitek 5 € gordetzen ditu lehen astean, eta aste bakoitzean 3 € gehiago. Zenbat gorde ditu 12 astetan?', 'Alguien guarda 5 € la primera semana y cada semana 3 € más. ¿Cuánto ha guardado en 12 semanas?', 'يدّخر شخص 5 € في الأسبوع الأول ثم 3 € أكثر كل أسبوع. كم ادّخر في 12 أسبوعًا؟', 'Someone saves €5 in the first week and €3 more each week. How much have they saved in 12 weeks?'),
-        example: same('$a_{12}=5+11\\cdot 3=38\\qquad S_{12}=\\frac{(5+38)\\cdot 12}{2}=258$'),
+        example: same('$\\begin{gathered}a_{12}=5+11\\cdot 3=38\\\\ S_{12}=\\frac{(5+38)\\cdot 12}{2}=258\\end{gathered}$'),
         exampleAnswer: say('258 €: lehen astea $a_{1}$ da, eta 12. astean 38 € gordetzen ditu.', '258 €: la primera semana es $a_{1}$, y la semana 12 guarda 38 €.', '258 €: الأسبوع الأول هو $a_{1}$، وفي الأسبوع 12 يدّخر 38 €.', '€258: the first week is $a_{1}$, and in week 12 they save €38.')
     },
     'geo-ratio': {
@@ -282,7 +282,7 @@ export const sequencesLessonTexts: Record<SequencesTopicId, LessonTexts> = {
             'If you know two terms, count the jumps: from $a_{2}$ to $a_{5}$ there are 3, so $\\frac{a_{5}}{a_{2}}=r^{3}$. Divide the two terms and take the root. Once you know $r$, divide backwards to reach $a_{1}$: $a_{1}=\\frac{a_{2}}{r}$.'
         ),
         examplePrompt: say('$a_{3}=12$ eta $a_{6}=96$. Aurkitu $r$ eta $a_{1}$.', '$a_{3}=12$ y $a_{6}=96$. Halla $r$ y $a_{1}$.', '$a_{3}=12$ و$a_{6}=96$. جد $r$ و$a_{1}$.', '$a_{3}=12$ and $a_{6}=96$. Find $r$ and $a_{1}$.'),
-        example: same('$r^{3}=\\frac{96}{12}=8\\ \\to\\ r=2\\qquad a_{1}=\\frac{12}{2^{2}}=3$'),
+        example: same('$\\begin{gathered}r^{3}=\\frac{96}{12}=8\\ \\to\\ r=2\\\\ a_{1}=\\frac{12}{2^{2}}=3\\end{gathered}$'),
         exampleAnswer: say('$r=2$ eta $a_{1}=3$: $3,\\,6,\\,12,\\,24,\\,48,\\,96,\\ldots$', '$r=2$ y $a_{1}=3$: $3,\\,6,\\,12,\\,24,\\,48,\\,96,\\ldots$', '$r=2$ و$a_{1}=3$: $3,\\,6,\\,12,\\,24,\\,48,\\,96,\\ldots$', '$r=2$ and $a_{1}=3$: $3,\\,6,\\,12,\\,24,\\,48,\\,96,\\ldots$')
     },
     'geo-sum': {
@@ -307,7 +307,7 @@ export const sequencesLessonTexts: Record<SequencesTopicId, LessonTexts> = {
                 'اضرب المجموع في $r$: تنتقل كل الحدود رتبة واحدة. وعند طرح $r\\cdot S_{n}-S_{n}$ يختفي معظمها، ولا يبقى إلا الأخير مضروبًا في $r$ والأول.',
                 'Multiply the sum by $r$: every term moves one place. Subtracting $r\\cdot S_{n}-S_{n}$, almost all of them cancel, and only the last times $r$ and the first are left.'
             ),
-            math: same('$(2+4+8)-(1+2+4)=8-1=7$')
+            math: same('$\\begin{aligned}&(2+4+8)-(1+2+4)\\\\&=8-1=7\\end{aligned}$')
         }
     },
     'geo-infinite': {

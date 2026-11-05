@@ -36,7 +36,7 @@ export const functions3LessonTexts: Record<Functions3TopicId, LessonTexts> = {
             'A function can be given by a table, a graph or a formula, like $y=2x+1$. With the formula, substitute $x$ and work out $y$: $f(3)=2\\cdot 3+1=7$. On a graph, any vertical line cuts it at a single point.'
         ),
         examplePrompt: say('$f(x)=3x-4$ bada, kalkulatu $f(5)$ eta $f(-1)$.', 'Si $f(x)=3x-4$, calcula $f(5)$ y $f(-1)$.', 'إذا كان $f(x)=3x-4$ فاحسب $f(5)$ و$f(-1)$.', 'If $f(x)=3x-4$, work out $f(5)$ and $f(-1)$.'),
-        example: same('$f(5)=3\\cdot 5-4=11\\qquad f(-1)=3\\cdot(-1)-4=-7$'),
+        example: same('$\\begin{gathered}f(5)=3\\cdot 5-4=11\\\\ f(-1)=3\\cdot(-1)-4=-7\\end{gathered}$'),
         exampleAnswer: say('$f(5)=11$ eta $f(-1)=-7$: negatiboa parentesi artean.', '$f(5)=11$ y $f(-1)=-7$: el negativo, entre paréntesis.', '$f(5)=11$ و$f(-1)=-7$: السالب بين قوسين.', '$f(5)=11$ and $f(-1)=-7$: the negative, in brackets.'),
         why: {
             text: say(
@@ -102,7 +102,7 @@ export const functions3LessonTexts: Record<Functions3TopicId, LessonTexts> = {
             'A function is increasing on an interval if, from left to right, the graph goes up: as $x$ grows, $y$ grows. It is decreasing if it goes down, and constant if it is flat. Intervals are read on the $x$ axis, as with the height of the plane.'
         ),
         examplePrompt: say('Gorakorra ala beherakorra da $f(x)=-3x+2$? Probatu $x=0$ eta $x=2$ balioekin.', '¿Es creciente o decreciente $f(x)=-3x+2$? Prueba con $x=0$ y $x=2$.', 'هل $f(x)=-3x+2$ متزايدة أم متناقصة؟ جرّب $x=0$ و$x=2$.', 'Is $f(x)=-3x+2$ increasing or decreasing? Try $x=0$ and $x=2$.'),
-        example: same('$f(0)=2\\qquad f(2)=-3\\cdot 2+2=-4$'),
+        example: same('$\\begin{gathered}f(0)=2\\\\ f(2)=-3\\cdot 2+2=-4\\end{gathered}$'),
         exampleAnswer: say('Beherakorra: $x$ 0 zenbakitik 2 zenbakira handitzean, $y$ 2 zenbakitik $-4$ zenbakira jaisten da.', 'Decreciente: al aumentar $x$ de 0 a 2, $y$ baja de 2 a $-4$.', 'متناقصة: عندما يزداد $x$ من 0 إلى 2 ينزل $y$ من 2 إلى $-4$.', 'Decreasing: as $x$ goes from 0 to 2, $y$ drops from 2 to $-4$.')
     },
     extremes: {
@@ -144,7 +144,7 @@ export const functions3LessonTexts: Record<Functions3TopicId, LessonTexts> = {
             'To cross the Y axis, substitute $x=0$: the point $(0,f(0))$. To cross the X axis, solve the equation $f(x)=0$: each solution gives a point $(x,0)$. A function crosses the Y axis at most once, but it may cross the X axis several times.'
         ),
         examplePrompt: say('Non mozten ditu ardatzak $f(x)=-3x+12$ funtzioak?', '¿Dónde corta a los ejes $f(x)=-3x+12$?', 'أين تقطع $f(x)=-3x+12$ المحورين؟', 'Where does $f(x)=-3x+12$ cross the axes?'),
-        example: same('$f(0)=12\\ \\to\\ (0,12)\\qquad -3x+12=0\\ \\to\\ x=4$'),
+        example: same('$\\begin{gathered}f(0)=12\\ \\to\\ (0,12)\\\\ -3x+12=0\\ \\to\\ x=4\\end{gathered}$'),
         exampleAnswer: say('$(0,12)$ eta $(4,0)$ puntuetan.', 'En $(0,12)$ y en $(4,0)$.', 'في $(0,12)$ و$(4,0)$.', 'At $(0,12)$ and at $(4,0)$.'),
         why: {
             text: say(
@@ -215,7 +215,7 @@ export const functions3LessonTexts: Record<Functions3TopicId, LessonTexts> = {
             'The formula of an affine function is $y=mx+n$, with $m$ the slope. To draw it, mark $(0,n)$ and from there move 1 to the right and $m$ up, or down if $m$ is negative. $y=2x-1$ is the line $y=2x$ moved down 1.'
         ),
         examplePrompt: say('Marraztu $y=\\frac{1}{2}x-3$: zein bi puntu erabiltzen dituzu?', 'Dibuja $y=\\frac{1}{2}x-3$: ¿qué dos puntos usas?', 'ارسم $y=\\frac{1}{2}x-3$: أي نقطتين تستعمل؟', 'Draw $y=\\frac{1}{2}x-3$: which two points do you use?'),
-        example: same('$(0,-3)\\qquad\\frac{1}{2}\\cdot 2-3=-2\\ \\to\\ (2,-2)$'),
+        example: same('$\\begin{gathered}(0,-3)\\\\ \\frac{1}{2}\\cdot 2-3=-2\\ \\to\\ (2,-2)\\end{gathered}$'),
         exampleAnswer: say('$(0,-3)$ eta $(2,-2)$: $m=\\frac{1}{2}$ izanik, 2 aurreratu eta 1 igo.', '$(0,-3)$ y $(2,-2)$: con $m=\\frac{1}{2}$, avanza 2 y sube 1.', '$(0,-3)$ و$(2,-2)$: مع $m=\\frac{1}{2}$ تقدّم 2 واصعد 1.', '$(0,-3)$ and $(2,-2)$: with $m=\\frac{1}{2}$, move on 2 and up 1.')
     },
     'two-points': {
@@ -231,7 +231,7 @@ export const functions3LessonTexts: Record<Functions3TopicId, LessonTexts> = {
             'With two points, first work out the slope. Then substitute one of the points into $y=mx+n$ and solve for $n$. For the line through $(0,1)$ and $(3,7)$, $m=\\frac{7-1}{3-0}=2$ and $n=1$: $y=2x+1$. Check with the other point.'
         ),
         examplePrompt: say('Aurkitu $(2,1)$ eta $(4,-5)$ puntuetatik pasatzen den zuzena.', 'Halla la recta que pasa por $(2,1)$ y $(4,-5)$.', 'جد المستقيم المار بـ $(2,1)$ و$(4,-5)$.', 'Find the line through $(2,1)$ and $(4,-5)$.'),
-        example: same('$m=\\frac{-5-1}{4-2}=-3\\qquad 1=-3\\cdot 2+n\\ \\to\\ n=7$'),
+        example: same('$\\begin{gathered}m=\\frac{-5-1}{4-2}=-3\\\\ 1=-3\\cdot 2+n\\ \\to\\ n=7\\end{gathered}$'),
         exampleAnswer: say('$y=-3x+7$; $(4,-5)$ puntuarekin: $-3\\cdot 4+7=-5$.', '$y=-3x+7$; con $(4,-5)$: $-3\\cdot 4+7=-5$.', '$y=-3x+7$؛ ومع $(4,-5)$: ‏$-3\\cdot 4+7=-5$.', '$y=-3x+7$; with $(4,-5)$: $-3\\cdot 4+7=-5$.')
     },
     'parallel-lines': {
@@ -247,7 +247,7 @@ export const functions3LessonTexts: Record<Functions3TopicId, LessonTexts> = {
             'Two lines are parallel if they have the same slope and a different $n$. If their slopes differ, they cross at one point: to find the crossing point, set the two expressions equal, solve for $x$ and substitute to get $y$. It is solving a system graphically.'
         ),
         examplePrompt: say('Non ebakitzen dira $y=2x+3$ eta $y=-x+9$?', '¿Dónde se cortan $y=2x+3$ e $y=-x+9$?', 'أين يتقاطع $y=2x+3$ و$y=-x+9$؟', 'Where do $y=2x+3$ and $y=-x+9$ cross?'),
-        example: same('$2x+3=-x+9\\ \\to\\ x=2\\qquad y=2\\cdot 2+3=7$'),
+        example: same('$\\begin{gathered}2x+3=-x+9\\ \\to\\ x=2\\\\ y=2\\cdot 2+3=7\\end{gathered}$'),
         exampleAnswer: say('$(2,7)$ puntuan.', 'En $(2,7)$.', 'في $(2,7)$.', 'At $(2,7)$.')
     },
     'linear-problems': {
@@ -301,7 +301,7 @@ export const functions3LessonTexts: Record<Functions3TopicId, LessonTexts> = {
             'The vertex is the lowest, or highest, point of the parabola. Its $x$ coordinate is $x_{v}=\\frac{-b}{2a}$, and the $y$ comes from substituting. In $y=x^{2}-4x+3$, $x_{v}=2$ and $y_{v}=-1$. The axis of symmetry is the vertical line $x=x_{v}$.'
         ),
         examplePrompt: say('Aurkitu $y=-x^{2}+8x-7$ parabolaren erpina.', 'Halla el vértice de $y=-x^{2}+8x-7$.', 'جد رأس $y=-x^{2}+8x-7$.', 'Find the vertex of $y=-x^{2}+8x-7$.'),
-        example: same('$x_{v}=\\frac{-8}{-2}=4\\qquad y_{v}=-16+32-7=9$'),
+        example: same('$\\begin{gathered}x_{v}=\\frac{-8}{-2}=4\\\\ y_{v}=-16+32-7=9\\end{gathered}$'),
         exampleAnswer: say('$(4,9)$: maximo bat da, $a<0$ delako.', '$(4,9)$: es un máximo, porque $a<0$.', '$(4,9)$: إنه قيمة عظمى لأن $a<0$.', '$(4,9)$: it is a maximum, because $a<0$.')
     },
     'parabola-intercepts': {
@@ -317,7 +317,7 @@ export const functions3LessonTexts: Record<Functions3TopicId, LessonTexts> = {
             'Y axis: $(0,c)$. X axis: solve $ax^{2}+bx+c=0$; the discriminant tells whether there are two crossings, one or none. If there are two, the vertex is right in the middle: $x_{v}=\\frac{x_{1}+x_{2}}{2}$. To draw it, use the vertex, the crossings and a symmetric point.'
         ),
         examplePrompt: say('Non mozten du $y=x^{2}-6x+8$ parabolak X ardatza? Non dago erpina?', '¿Dónde corta $y=x^{2}-6x+8$ al eje X? ¿Dónde está el vértice?', 'أين يقطع $y=x^{2}-6x+8$ محور X؟ وأين الرأس؟', 'Where does $y=x^{2}-6x+8$ cross the X axis? Where is the vertex?'),
-        example: same('$x=\\frac{6\\pm 2}{2}\\ \\to\\ (2,0),\\ (4,0)\\qquad x_{v}=\\frac{2+4}{2}=3$'),
+        example: same('$\\begin{gathered}x=\\frac{6\\pm 2}{2}\\ \\to\\ (2,0),\\ (4,0)\\\\ x_{v}=\\frac{2+4}{2}=3\\end{gathered}$'),
         exampleAnswer: say('$(2,0)$ eta $(4,0)$ puntuetan; erpina $(3,-1)$ da.', 'En $(2,0)$ y $(4,0)$; el vértice es $(3,-1)$.', 'في $(2,0)$ و$(4,0)$؛ والرأس $(3,-1)$.', 'At $(2,0)$ and $(4,0)$; the vertex is $(3,-1)$.'),
         why: {
             text: say(

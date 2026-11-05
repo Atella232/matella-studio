@@ -60,7 +60,7 @@ export const geometry3LessonTexts: Record<Geometry3TopicId, LessonTexts> = {
             'In a regular polygon with $n$ sides all the angles are equal. The central angle and the exterior angle measure $360°\\div n$, and the interior angle is its supplement, $180°-\\frac{360°}{n}$. In the regular hexagon: central 60° and interior 120°.'
         ),
         examplePrompt: say('Zenbat neurtzen du dodekagono erregular baten (12 alde) barne-angelu bakoitzak?', '¿Cuánto mide cada ángulo interior de un dodecágono regular (12 lados)?', 'كم قياس كل زاوية داخلية في مضلع منتظم له 12 ضلعًا؟', 'How big is each interior angle of a regular dodecagon (12 sides)?'),
-        example: same('$360°\\div 12=30°\\qquad 180°-30°=150°$'),
+        example: same('$\\begin{gathered}360°\\div 12=30°\\\\ 180°-30°=150°\\end{gathered}$'),
         exampleAnswer: say('150°: kanpo-angelua 30° da, eta barne-angelua haren osagarria.', '150°: el exterior mide 30°, y el interior es su suplementario.', '150°: الخارجية 30° والداخلية مكمّلتها.', '150°: the exterior angle is 30°, and the interior is its supplement.')
     },
     'circle-angles': {
@@ -134,7 +134,7 @@ export const geometry3LessonTexts: Record<Geometry3TopicId, LessonTexts> = {
             'Every point of the angle bisector is the same distance from both sides of the angle: in the drawing, $Q$ is 3 from each side. That distance is measured at right angles to the side. The three angle bisectors of a triangle meet at one point: the incentre.'
         ),
         examplePrompt: say('Angelu batek 128° neurtzen ditu. Zenbat neurtzen du erdikariak sortzen duen erdi bakoitzak?', 'Un ángulo mide 128°. ¿Cuánto mide cada mitad que forma su bisectriz?', 'زاوية قياسها 128°. كم قياس كل نصف يكوّنه منصّفها؟', 'An angle measures 128°. How big is each half made by its bisector?'),
-        example: same('$128°\\div 2=64°\\qquad 64°+64°=128°$'),
+        example: same('$\\begin{gathered}128°\\div 2=64°\\\\ 64°+64°=128°\\end{gathered}$'),
         exampleAnswer: say('64°: bi erdiek berriro 128° batzen dute.', '64°: las dos mitades vuelven a sumar 128°.', '64°: النصفان يعطيان 128° من جديد.', '64°: the two halves add back up to 128°.')
     },
     'notable-points': {
@@ -330,7 +330,7 @@ export const geometry3LessonTexts: Record<Geometry3TopicId, LessonTexts> = {
             'Two triangles are similar if they have equal angles and proportional sides. One of these criteria is enough: two equal angles; all three sides proportional; or two sides proportional and the angle between them equal. All the sides are $k$ times bigger.'
         ),
         examplePrompt: say('Triangelu batek 4, 6 eta 7 cm-ko aldeak ditu. Antzeko batek 10 cm-ko alde txikiena du. Zenbat neurtzen dute besteek?', 'Un triángulo tiene lados de 4, 6 y 7 cm. Otro semejante tiene el lado menor de 10 cm. ¿Cuánto miden los otros?', 'مثلث أضلاعه 4 و6 و7 سم. ومثلث مشابه له أصغر أضلاعه 10 سم. كم طول الضلعين الآخرين؟', 'A triangle has sides of 4, 6 and 7 cm. A similar one has its shortest side 10 cm. How long are the others?'),
-        example: same('$k=\\frac{10}{4}=2{,}5\\qquad 6\\cdot 2{,}5=15\\qquad 7\\cdot 2{,}5=17{,}5$'),
+        example: same('$\\begin{gathered}k=\\frac{10}{4}=2{,}5\\\\ 6\\cdot 2{,}5=15\\\\ 7\\cdot 2{,}5=17{,}5\\end{gathered}$'),
         exampleAnswer: say('15 cm eta 17,5 cm: alde guztiak bider $k$.', '15 cm y 17,5 cm: todos los lados por $k$.', '15 سم و17.5 سم: كل الأضلاع في $k$.', '15 cm and 17.5 cm: every side times $k$.')
     },
     'scale-areas': {

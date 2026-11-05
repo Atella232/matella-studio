@@ -82,7 +82,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stage: 'operations',
         title: say('Polinomioak batu eta kendu', 'Suma y resta de polinomios', 'جمع كثيرات الحدود وطرحها', 'Adding and subtracting polynomials'),
         goal: say('Polinomioak batzea eta kentzea, antzeko gaiak elkartuz eta kenketaren zeinuak ondo aldatuz.', 'Sumar y restar polinomios agrupando términos semejantes y cambiando bien los signos en la resta.', 'جمع كثيرات الحدود وطرحها بجمع الحدود المتشابهة وتغيير الإشارات جيدًا في الطرح.', 'Add and subtract polynomials by grouping like terms and changing the signs correctly when subtracting.'),
-        problem: same('$(3x^{2}-2x+5)-(x^{2}+4x-1)$'),
+        problem: same('$(3x^{2}-2x+5)$ $-\\ (x^{2}+4x-1)$'),
         stepsKind: 'steps',
         steps: [
             { text: say('Aldatu kentzen denaren zeinu guztiak.', 'Cambia todos los signos del que se resta.', 'غيّر كل إشارات المطروح.', 'Change all the signs of the one being subtracted.'), math: same('$3x^{2}-2x+5-x^{2}-4x+1$') },
@@ -115,7 +115,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         problem: same('$(x^{2}+5x+7):(x+2)$'),
         stepsKind: 'steps',
         steps: [
-            { text: say('$x^{2}$ zati $x$: $x$. Biderkatu eta kendu.', '$x^{2}$ entre $x$: $x$. Multiplica y resta.', '$x^{2}$ على $x$: $x$. اضرب واطرح.', '$x^{2}$ divided by $x$: $x$. Multiply and subtract.'), math: same('$x^{2}+5x+7-(x^{2}+2x)=3x+7$') },
+            { text: say('$x^{2}$ zati $x$: $x$. Biderkatu eta kendu.', '$x^{2}$ entre $x$: $x$. Multiplica y resta.', '$x^{2}$ على $x$: $x$. اضرب واطرح.', '$x^{2}$ divided by $x$: $x$. Multiply and subtract.'), math: same('$\\begin{aligned}&x^{2}+5x+7-(x^{2}+2x)\\\\&=3x+7\\end{aligned}$') },
             { text: say('$3x$ zati $x$: $3$. Biderkatu eta kendu.', '$3x$ entre $x$: $3$. Multiplica y resta.', '$3x$ على $x$: $3$. اضرب واطرح.', '$3x$ divided by $x$: $3$. Multiply and subtract.'), math: same('$3x+7-(3x+6)=1$') },
             { text: say('Zatidura eta hondarra.', 'Cociente y resto.', 'الخارج والباقي.', 'Quotient and remainder.'), math: same('$C=x+3,\\ R=1$') }
         ],
@@ -176,11 +176,11 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stage: 'ruffini',
         title: say('Ruffiniren erregela', 'Regla de Ruffini', 'قاعدة روفيني', 'Ruffini\'s rule'),
         goal: say('$x-a$ motako polinomio batez zatitzea Ruffiniren taularekin.', 'Dividir entre un polinomio de la forma $x-a$ con la tabla de Ruffini.', 'القسمة على كثير حدود من الشكل $x-a$ بجدول روفيني.', 'Divide by a polynomial of the form $x-a$ with Ruffini\'s table.'),
-        problem: same('$(2x^{3}-3x^{2}+0x+5):(x-2)$'),
+        problem: same('$(2x^{3}-3x^{2}+0x+5)$ $\\div\\ (x-2)$'),
         stepsKind: 'steps',
         steps: [
             { text: say('Koefizienteak eta $a=2$. Jaitsi 2.', 'Coeficientes y $a=2$. Baja el 2.', 'المعاملات و$a=2$. أنزل 2.', 'Coefficients and $a=2$. Bring down the 2.'), math: same('$2\\quad -3\\quad 0\\quad 5$') },
-            { text: say('Biderkatu eta batu, behin eta berriz.', 'Multiplica y suma, una y otra vez.', 'اضرب واجمع مرة بعد مرة.', 'Multiply and add, again and again.'), math: same('$2\\cdot 2-3=1\\quad 1\\cdot 2+0=2\\quad 2\\cdot 2+5=9$') },
+            { text: say('Biderkatu eta batu, behin eta berriz.', 'Multiplica y suma, una y otra vez.', 'اضرب واجمع مرة بعد مرة.', 'Multiply and add, again and again.'), math: same('$\\begin{gathered}2\\cdot 2-3=1\\\\ 1\\cdot 2+0=2\\\\ 2\\cdot 2+5=9\\end{gathered}$') },
             { text: say('Zatidura eta hondarra.', 'Cociente y resto.', 'الخارج والباقي.', 'Quotient and remainder.'), math: same('$C=2x^{2}+x+2,\\ R=9$') }
         ],
         takeaway: say('$x-a$ zatitzailea: taulan $a$. $x+3$ bada, $a=-3$.', 'Divisor $x-a$: en la tabla, $a$. Si es $x+3$, $a=-3$.', 'المقسوم عليه $x-a$: في الجدول $a$. وإذا كان $x+3$ فإن $a=-3$.', 'Divisor $x-a$: $a$ in the table. If it is $x+3$, $a=-3$.'),
@@ -211,7 +211,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stepsKind: 'steps',
         steps: [
             { text: say('Hautagaiak: 6 zenbakiaren zatitzaileak.', 'Candidatos: divisores de 6.', 'المرشحون: قواسم 6.', 'Candidates: the divisors of 6.'), math: same('$\\pm 1,\\ \\pm 2,\\ \\pm 3,\\ \\pm 6$') },
-            { text: say('Probatu.', 'Prueba.', 'جرّب.', 'Try them.'), math: same('$P(1)=0\\quad P(2)=0\\quad P(-3)=0$') },
+            { text: say('Probatu.', 'Prueba.', 'جرّب.', 'Try them.'), math: same('$\\begin{gathered}P(1)=0\\\\ P(2)=0\\\\ P(-3)=0\\end{gathered}$') },
             { text: say('Hiru erroak: 1, 2 eta −3.', 'Las tres raíces: 1, 2 y −3.', 'الجذور الثلاثة: 1 و2 و−3.', 'The three roots: 1, 2 and −3.') }
         ],
         takeaway: say('Erroa: $P(a)=0$. Hautagaiak: gai askearen zatitzaileak, $\\pm$.', 'Raíz: $P(a)=0$. Candidatos: divisores del término independiente, con $\\pm$.', 'الجذر: $P(a)=0$. المرشحون: قواسم الحد الثابت مع $\\pm$.', 'Root: $P(a)=0$. Candidates: divisors of the constant term, with $\\pm$.'),
