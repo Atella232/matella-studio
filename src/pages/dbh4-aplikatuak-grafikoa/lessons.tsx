@@ -92,7 +92,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
     {
         id: 'slope',
         stage: 'lines',
-needs: [{ unit: 'dbh3/funciones-lineales', topic: 'slope', title: { eu: 'Malda', es: 'La pendiente', en: 'The slope', ar: 'الميل' } }],
+        needs: [{ unit: 'dbh3/funciones-lineales', topic: 'slope', title: { eu: 'Malda', es: 'La pendiente', en: 'The slope', ar: 'الميل' } }],
         title: say('Bi punturen arteko malda', 'La pendiente entre dos puntos', 'الميل بين نقطتين', 'The slope between two points'),
         goal: say('Bi puntutatik pasatzen den zuzenaren malda kalkulatzea eta grafiko batean irakurtzea.', 'Calcular la pendiente de la recta que pasa por dos puntos y leerla en una gráfica.', 'حساب ميل المستقيم المار بنقطتين وقراءته في بيان.', 'Calculate the slope of the line through two points, and read it from a graph.'),
         problem: say('Kalkulatu $(-2,\\,-4)$ eta $(2,\\,-3)$ puntuetatik pasatzen den zuzenaren malda.', 'Calcula la pendiente de la recta que pasa por $(-2,\\,-4)$ y $(2,\\,-3)$.', 'احسب ميل المستقيم المار بـ $(-2,\\,-4)$ و$(2,\\,-3)$.', 'Calculate the slope of the line through $(-2,\\,-4)$ and $(2,\\,-3)$.'),

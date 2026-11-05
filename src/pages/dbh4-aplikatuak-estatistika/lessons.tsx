@@ -52,7 +52,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
     {
         id: 'sampling',
         stage: 'data',
-needs: [{ unit: 'dbh3/estadistica-probabilidad', topic: 'population-sample', title: { eu: 'Populazioa, lagina eta aldagaiak', es: 'Población, muestra y variables', en: 'Population, sample and variables', ar: 'المجتمع والعيّنة والمتغيّرات' } }],
+        needs: [{ unit: 'dbh3/estadistica-probabilidad', topic: 'population-sample', title: { eu: 'Populazioa, lagina eta aldagaiak', es: 'Población, muestra y variables', en: 'Population, sample and variables', ar: 'المجتمع والعيّنة والمتغيّرات' } }],
         title: say('Populazioa, lagina eta aldagaiak', 'Población, muestra y variables', 'المجتمع والعيّنة والمتغيرات', 'Population, sample and variables'),
         goal: say('Noiz behar den lagin bat erabakitzea, lagin bat baliozkoa den epaitzea eta aldagaiak sailkatzea.', 'Decidir cuándo hace falta una muestra, juzgar si una muestra es válida y clasificar las variables.', 'تقرير متى نحتاج إلى عيّنة، والحكم على صلاحية عيّنة، وتصنيف المتغيرات.', 'Decide when a sample is needed, judge whether a sample is valid and classify the variables.'),
         stepsKind: 'facts',

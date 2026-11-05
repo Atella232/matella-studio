@@ -713,3 +713,15 @@ Committed as 5b1ed33 and 49b5db1, fast-forwarded into main, pushed and deployed 
 **With this phase, the review of the unit is complete.**
 
 **Sufijos del euskera en el archivo de lecciones (2026-11-03, rama `feat/lessons-eu-suffixes`, commit 817ad3c, publicado el 2026-11-03: main fb72223, bundle `index-CWC0dhqi.js`):** 2 textos de `lessons.tsx`: «1, 2 eta 3rekiko» → «1, 2 eta 3 zenbakiekiko», «6, 3 eta 2rekiko» → «6, 3 eta 2 zenbakiekiko». Su `lessonTexts.ts` no tenía ninguno (el test lo mira desde el commit 08798df). Solo cambia el euskera; las fórmulas son las mismas en los cuatro idiomas. Lo vigila `tests/lessons-basque-suffixes.test.ts`, que ahora mira el archivo de lecciones de todas las unidades.
+
+**Teoría con las mejoras de 2. DBH (2026-11-04, rama `feat/teoria-dbh4ap`, commit 47fd1ed8, sin publicar):**
+- `lessonTexts.ts` pasa al tipo del motor (`LessonTexts`) y gana «Otro ejemplo», vocabulario y 3 definiciones (index, periods y mixtures).
+- Hay 4 «¿Por qué funciona?» (inverse-share, chained, compound-interest y motion) y 7 enlaces «Antes de empezar, repasa».
+- Los errores típicos se movieron al nuevo `lessonChecks.ts`, junto a las preguntas «Compruébalo». `tests/proportzionaltasuna-dbh4ap-lessons.test.ts` los lee desde ahí.
+- Tres casos daban la respuesta de «Vamos a resolver». Ahora usan:
+  - reparto inverso: los 22 000 € del dibujo;
+  - índice: una rebaja del 30 %;
+  - grifos: 6, 10 y 3 horas.
+- Miles: el inglés lleva coma (€1,000) y el árabe, espacio no separable.
+
+Ver [teoria-dbh4ap](teoria-dbh4ap.md).
