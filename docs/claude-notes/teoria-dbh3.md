@@ -63,3 +63,5 @@ Hoja de revisión para el dueño (euskera y castellano, las 150 lecciones), hech
 ## Publicación
 
 **Publicado el 2026-11-05:** fusión 7b3cc52 en main (rama `claude/teoria-dbh3-46f5a5`, último commit 588ff19), bundle `index-coR8a0f7.js`, publicado desde un worktree limpio por la sesión madre. Tests 1728 en main. Comprobado en matella.net a 375 px en eu, es y ar (10 lecciones, una por unidad): nada se sale de la página, sin errores de KaTeX ni de consola. Visto en vivo, ya pasaba antes: los títulos de Segidak › arith-sum y geom-sum muestran `$n$` tal cual (el título se pinta como texto, sin KaTeX); lo mismo en 9 títulos de 4. académicas (Esponentzialak, Polinomikoak).
+
+**Títulos sin fórmulas (2026-11-05, main 98b0d04, publicado con 4. aplicadas, bundle `index-3ZQ6DDCJ.js`):** Segidak › arith-sum y geo-sum se llaman ahora «Suma de los primeros términos de una progresión aritmética/geométrica» (eu «…lehen gaien batura», ar «مجموع الحدود الأولى من…»). `tests/lesson-titles.test.ts` falla si un título de lección o de etapa lleva `$`; los 9 de 4. académicas esperan en su lista `pending` hasta fusionar esa rama (entonces se borra la lista).

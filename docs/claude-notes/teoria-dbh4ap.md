@@ -79,3 +79,7 @@ En total: 58 lecciones con «Antes de empezar, repasa» (a 3. DBH o a unidades a
 - Proporcionalidad: algunos dibujos vienen de 2. DBH y llevan otros números que la explicación de 4. aplicadas.
 - Polinomios › Suma y resta: un paso se sale en euskera solo mientras carga la fuente.
 - Publicar: la sesión principal fusiona en main y publica.
+
+## Publicación
+
+**Publicado el 2026-11-05:** fusión e0c4ab93 en main (rama `feat/teoria-dbh4ap`, último commit faf2b59), junto con 98b0d04 (títulos sin fórmulas), bundle `index-3ZQ6DDCJ.js`, publicado desde un worktree limpio por la sesión madre. Tests 1865 en main. Comprobado en matella.net a 375 px en eu, es y ar (9 lecciones, una por unidad, y Segidak › arith-sum): nada se sale, sin errores de KaTeX, el título de Segidak ya sin `$`.
