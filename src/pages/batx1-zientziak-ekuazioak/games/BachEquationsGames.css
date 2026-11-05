@@ -1,0 +1,24 @@
+/* ¿Válida o falsa? and the sign table (Ekuazioak eta inekuazioak, Batxilergoa 1 · Zientziak) */
+.fraction-v2-games-card[data-game="valid"] { --game-tint: var(--success-tint, #d9efe2); }
+.fraction-v2-games-card[data-game="signs"] { --game-tint: var(--violet-tint, #e8e0f7); }
+
+.bach-eq-reduced { margin: 0; text-align: center; color: var(--muted); }
+.bach-eq-candidates { display: grid; gap: 10px; }
+.bach-eq-candidate { display: grid; gap: 8px; padding: 10px; border: 2px solid var(--ink); border-radius: 12px; background: var(--card); }
+.bach-eq-candidate-value { font-size: 19px; font-weight: 700; text-align: center; }
+.bach-eq-verdicts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.bach-eq-verdicts button { min-height: 44px; padding: 4px 8px; border: 2px solid var(--ink); border-radius: 10px; background: var(--paper); box-shadow: 0 2px 0 var(--ink); font: inherit; font-size: 15px; font-weight: 700; color: var(--ink); cursor: pointer; }
+.bach-eq-verdicts button[aria-pressed="true"] { background: var(--blue-tint, #dde7f7); border-color: var(--blue, #2f5fb3); }
+.bach-eq-verdicts button:disabled { cursor: default; box-shadow: none; }
+.bach-eq-verdicts button.right, .bach-eq-sign.right { background: var(--success-tint, #d9efe2); border-color: var(--success, #267b53); }
+.bach-eq-verdicts button.wrong, .bach-eq-sign.wrong { background: var(--error-tint, #f6d5cc); border-color: var(--error, #c4432a); }
+
+.bach-eq-strip { display: flex; align-items: flex-start; justify-content: center; padding-bottom: 4px; }
+.bach-eq-stretch { display: flex; align-items: flex-start; }
+.bach-eq-sign { min-width: 50px; min-height: 50px; border: 2px solid var(--ink); border-radius: 12px; background: var(--card); box-shadow: 0 2px 0 var(--ink); font: inherit; font-size: 24px; font-weight: 700; color: var(--ink); cursor: pointer; }
+.bach-eq-sign:disabled { cursor: default; box-shadow: none; }
+.bach-eq-point { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 30px; padding-top: 16px; font-size: 18px; font-weight: 700; }
+.bach-eq-dot { width: 3px; height: 14px; border-radius: 2px; background: var(--ink); }
+.bach-eq-point.hole .bach-eq-dot { width: 12px; height: 12px; border: 2px solid var(--error, #c4432a); border-radius: 50%; background: var(--card); }
+.prop3-options.bach-eq-solutions { grid-template-columns: 1fr; }
+.bach-eq-big { text-align: center; font-size: 24px; }

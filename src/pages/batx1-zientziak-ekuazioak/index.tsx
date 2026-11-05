@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachEquationsChallenges, bachEquationsDiagnostic, bachEquationsExerciseBank, bachEquationsPractice } from './content'
 import { BachEquationsHeroArt } from './figures'
+import { BachEquationsGames } from './games'
+import { BACH_EQUATIONS_GAME_RECORDS_KEY, bachEquationsGameProgressIds } from './games/info'
 import { BachEquationsLaboratory } from './lab'
 import { bachEquationsLabChallengeIds, bachEquationsLabToolForTopic, bachEquationsLabTools } from './lab/labTools'
 import { bachEquationsStages, bachEquationsTopics } from './lessons'
@@ -36,6 +38,17 @@ const ekuazioakBatx1zUnit: UnitDefinition = {
         progressIds: bachEquationsLabChallengeIds,
         toolForTopic: bachEquationsLabToolForTopic,
         render: (props) => <BachEquationsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Bederatzi joko: lasterketa, baliozkoa ala faltsua?, bete zeinuen taula, ekuazioen detektibea eta memoria, berriak; eta 4. DBHko soluzioa al da?, margotu soluzioa, erroen ehiza eta sinplifikatu zatikia.',
+            es: 'Nueve juegos: carrera, ¿válida o falsa?, rellena la tabla de signos, detective de ecuaciones y memoria, nuevos; y de 4.º ESO, ¿es solución?, pinta la solución, caza de raíces y simplifica la fracción.',
+            en: 'Nine games: race, true or false?, fill in the sign table, equations detective and memory, new; and from 4th ESO, is it a solution?, paint the solution, root hunt and simplify the fraction.',
+            ar: 'تسع ألعاب: السباق وصحيح أم زائف؟ واملأ جدول الإشارات ومخبر المعادلات والذاكرة، وهي جديدة؛ ومن الصف الرابع: هل هو حل؟ ولوّن الحل وصيد الجذور واختصر الكسر.'
+        },
+        progressIds: bachEquationsGameProgressIds,
+        recordsKey: BACH_EQUATIONS_GAME_RECORDS_KEY,
+        render: (props) => <BachEquationsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Soluzio bat baino gehiago badago, eskatzen dena bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si hay varias soluciones, solo la que se pide.', en: 'Write a number: 5, −3, 1.5 or 3/2. If there are several solutions, only the one asked for.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كانت هناك عدة حلول فاكتب المطلوب فقط.' },

@@ -51,13 +51,27 @@ Es la tercera unidad de Bachillerato: curso `batx1-zientziak`, tema `ecuaciones-
 - **Test:** `tests/ekuazioak-batx1z-lab.test.ts`. 2171 tests en verde.
 - **Revisión:** las 10 herramientas a 375 px en eu, es y ar (antes y después de predecir, con ▶ y reto infinito), sin desbordes ni texto fuera del tablero.
 
+**Fase 4, juegos:** 9 juegos, récords en `matella-ekuazioak-batx1z-game-records`.
+- **Propios (3):**
+  - J1 `valid` «¿Válida o falsa?», niveles 101501–101503: una ecuación ya resuelta (fracción, radical o logaritmos) con dos candidatas; de cada una se dice si vale o por qué no (denominador 0, √ = negativo, log de un negativo). Lógica en `games/valid.ts`.
+  - J2 `signs` «Rellena la tabla de signos», niveles 101601–101603: se pone + o − en cada tramo y se elige la solución entre tres (la buena, la de los otros tramos y la de los extremos mal puestos: cerrado donde va abierto o el agujero dentro). Dos factores; tres factores o raíz doble; cocientes. Lógica en `games/signs.ts`.
+  - J4 `detective`, niveles 101701–101703: 12 errores en tres niveles (dividir entre x, tachar sumandos, t negativo, dejar el valor que anula el denominador; elevar una suma sumando cuadrados, un solo caso del valor absoluto, despejar el exponente dividiendo, log de una resta; dividir entre x sin saber su signo, multiplicar por el denominador, no girar la desigualdad, |A| < c con un lado).
+- **Carrera** 101401–101405 (15 tipos, tres por etapa) y **memoria** 101801–101803 (segundo grado, exponentes y logaritmos, intervalos).
+- **De 4.º, con niveles y etapas de esta unidad:** «¿Es solución?» 101811–101813 y «Pinta la solución» 101821–101823 (académicas, Ecuaciones); «Caza de raíces» 101831–101833 y «Simplifica la fracción» 101841–101843 (académicas, Polinomios).
+- **Test:** `tests/ekuazioak-batx1z-games.test.ts` (cada respuesta de la carrera sale de sus números; las candidatas se comprueban en la ecuación de partida; los signos se prueban en varios puntos de cada tramo; el agujero nunca va cerrado).
+- **Revisión:** los 9 juegos a 375 px en eu, es y ar, con todos los niveles, respondiendo y dando la vuelta a las cartas de memoria: sin desbordes ni LaTeX sin dibujar.
+
 ## Trucos
 
 - En `lessonChecks.ts`, una ecuación con $\log$, $|x|$ o $2^x$ no se puede evaluar: si la respuesta se escribe `x=2`, el test falla. Se escribe el número solo o con palabras.
 - Las soluciones falsas nunca se escriben como `x=…` en el ejemplo: el test comprueba cada `x=…`.
 - Seis fórmulas como `x^4+x^3-x-1=(x-1)(x^3+2x^2+2x+1)` bajaban a 12–15 px a 375 px: van en dos filas con `gathered` (la fila que empieza por `=` sigue a la de arriba para el test).
 - La idea clave tiene que usar las mismas letras que su lección: en `log-equations`, $\log A+\log B$ y no $\log a+\log b$.
+- `\displaystyle` sale como texto rojo en árabe: para fracciones grandes se usa `\dfrac`.
+- Las tarjetas de memoria miden 106 px: las ecuaciones de segundo grado van en dos filas (`gathered`, con «= 0» abajo) y con coeficientes de una cifra.
+- `createWorkedCases` no evita casos repetidos: `createBachEquationsDetectiveCases` vuelve a sacar los seis si dos son el mismo ejercicio.
+- En los juegos con varios botones que cambian el estado, usa la forma `setState((current) => …)`: si no, dos toques rápidos pisan uno al otro.
 
 ## En curso
 
-- Fase 4, juegos: J1 «¿Válida o falsa?», J2 «Rellena la tabla de signos», J4 detective; carrera y memoria; de 4.º «¿Es solución?», «Pinta la solución», «Caza de raíces» y «Simplifica la fracción».
+- Fase 4 hecha y revisada; falta el commit, la hoja de euskera para el dueño y su visto bueno para publicar.
