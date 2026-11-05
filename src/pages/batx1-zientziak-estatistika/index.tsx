@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { bachStatsChallenges, bachStatsDiagnostic, bachStatsExerciseBank, bachStatsPractice } from './content'
 import { BachStatsHeroArt } from './figures'
+import { BachStatsGames } from './games'
+import { BACH_STATS_GAME_RECORDS_KEY, bachStatsGameProgressIds } from './games/info'
 import { BachStatsLaboratory } from './lab'
 import { bachStatsLabChallengeIds, bachStatsLabToolForTopic, bachStatsLabTools } from './lab/labTools'
 import { bachStatsStages, bachStatsTopics } from './lessons'
@@ -37,6 +39,17 @@ const estatistikaBatx1zUnit: UnitDefinition = {
         progressIds: bachStatsLabChallengeIds,
         toolForTopic: bachStatsLabToolForTopic,
         render: (props) => <BachStatsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko: lasterketa, nork nabarmentzen du gehiago, zein histograma, estatistikaren detektibea eta memoria, berriak; eta 4. DBHko kutxa-diagrama eraikitzea.',
+            es: 'Seis juegos: carrera, ¿quién destaca más?, ¿qué histograma?, detective de estadística y memoria, nuevos; y de 4.º ESO, construye el diagrama de caja.',
+            en: 'Six games: race, who stands out more?, which histogram?, statistics detective and memory, new; and from 4th ESO, build the box plot.',
+            ar: 'ست ألعاب: السباق ومن يتميّز أكثر وأي مدرّج ومخبر الإحصاء والذاكرة، وهي جديدة؛ ومن الصف الرابع: ارسم مخطط الصندوق.'
+        },
+        progressIds: bachStatsGameProgressIds,
+        recordsKey: BACH_STATS_GAME_RECORDS_KEY,
+        render: (props) => <BachStatsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −2, 0,15 edo 3/4. Ehunekoak, % ikurrik gabe.', es: 'Escribe un número: 5, −2, 0,15 o 3/4. Los porcentajes, sin el signo %.', en: 'Write a number: 5, −2, 0.15 or 3/4. Percentages without the % sign.', ar: 'اكتب عددًا: 5 أو ⁦−2⁩ أو 0.15 أو 3/4. والنسب المئوية بلا علامة ٪.' },
