@@ -108,7 +108,7 @@ export const vectorsLessonTexts: Record<VectorsTopicId, LessonTexts> = {
             'The coordinates of the midpoint $M$ of a segment $AB$ are the averages of those of the end points: from $A(2,-3)$ and $B(6,5)$ you get $M=\\left(\\frac{2+6}{2},\\frac{-3+5}{2}\\right)=(4,1)$. Conversely, if you know one end point and the midpoint, the other end is $B=2M-A$. This also gives the reflection of a point in another point.'
         ),
         examplePrompt: say('Zuzenki baten mutur bat $A(3,-1)$ da, eta haren erdiko puntua, $M(5,2)$. Aurkitu beste muturra.', 'Un extremo de un segmento es $A(3,-1)$ y su punto medio, $M(5,2)$. Halla el otro extremo.', 'أحد طرفي قطعة $A(3,-1)$ ومنتصفها $M(5,2)$. جد الطرف الآخر.', 'One end of a segment is $A(3,-1)$ and its midpoint is $M(5,2)$. Find the other end.'),
-        example: same('$B=(2\\cdot 5-3,\\ 2\\cdot 2-(-1))=(7,5)$'),
+        example: same('$\\begin{gathered}B=2M-A\\\\ B=(10-3,\\ 4+1)=(7,5)\\end{gathered}$'),
         exampleAnswer: say('Egiaztatu: $(3,-1)$ eta $(7,5)$ puntuen erdiko puntua $(5,2)$ da.', 'Comprueba: el punto medio de $(3,-1)$ y $(7,5)$ es $(5,2)$.', 'تحقّق: منتصف $(3,-1)$ و$(7,5)$ هو $(5,2)$.', 'Check: the midpoint of $(3,-1)$ and $(7,5)$ is $(5,2)$.'),
         why: {
             text: say(
@@ -229,7 +229,7 @@ export const vectorsLessonTexts: Record<VectorsTopicId, LessonTexts> = {
             'Two non-vertical lines are parallel if they have the same slope, and perpendicular if the product of their slopes is $-1$: $m\\cdot m\'=-1$, that is, $m\'=-\\frac{1}{m}$. In general form, the lines parallel to $Ax+By+C=0$ have the same $A$ and $B$.'
         ),
         examplePrompt: say('Aurkitu $y=\\frac{1}{2}x+3$ zuzenaren perpendikularra, $(4,-1)$ puntutik pasatzen dena.', 'Halla la perpendicular a $y=\\frac{1}{2}x+3$ que pasa por $(4,-1)$.', 'جد المستقيم العمودي على $y=\\frac{1}{2}x+3$ والمار بـ $(4,-1)$.', 'Find the perpendicular to $y=\\frac{1}{2}x+3$ through $(4,-1)$.'),
-        example: same('$\\begin{gathered}m\'=-2\\\\ y+1=-2\\,(x-4)\\ \\to\\ y=-2x+7\\end{gathered}$'),
+        example: same('$\\begin{gathered}m\'=-2\\\\ y+1=-2\\,(x-4)\\\\ y=-2x+7\\end{gathered}$'),
         exampleAnswer: say('$\\frac{1}{2}\\cdot(-2)=-1$: perpendikularrak dira.', '$\\frac{1}{2}\\cdot(-2)=-1$: son perpendiculares.', '$\\frac{1}{2}\\cdot(-2)=-1$: متعامدان.', '$\\frac{1}{2}\\cdot(-2)=-1$: they are perpendicular.')
     },
     'relative-position': {

@@ -114,7 +114,7 @@ export const exponentialAkLessonTexts: Record<ExponentialAkTopicId, LessonTexts>
             'In an exponential equation the unknown is in the exponent. If both sides can be written with the same base, set the exponents equal: $9^{x}=27$ is $3^{2x}=3^{3}$, so $x=\\frac{3}{2}$. If not, take logarithms: $2^{x}=10$ gives $x=\\frac{\\log 10}{\\log 2}$.'
         ),
         examplePrompt: say('Ebatzi $3^{x-1}=\\frac{1}{9}$.', 'Resuelve $3^{x-1}=\\frac{1}{9}$.', 'حُلّ $3^{x-1}=\\frac{1}{9}$.', 'Solve $3^{x-1}=\\frac{1}{9}$.'),
-        example: same('$3^{x-1}=3^{-2}\\ \\to\\ x-1=-2\\ \\to\\ x=-1$'),
+        example: same('$\\begin{gathered}3^{x-1}=3^{-2}\\\\ x-1=-2\\ \\to\\ x=-1\\end{gathered}$'),
         exampleAnswer: say('$\\frac{1}{9}=3^{-2}$: oinarri bera, berretzaile berdinak.', '$\\frac{1}{9}=3^{-2}$: misma base, exponentes iguales.', '$\\frac{1}{9}=3^{-2}$: الأساس نفسه فالأسان متساويان.', '$\\frac{1}{9}=3^{-2}$: same base, equal exponents.'),
         why: {
             text: say(
