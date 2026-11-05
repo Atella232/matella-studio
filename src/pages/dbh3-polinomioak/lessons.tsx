@@ -82,7 +82,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stage: 'operations',
         title: say('Polinomioak batu eta kendu', 'Suma y resta de polinomios', 'جمع كثيرات الحدود وطرحها', 'Adding and subtracting polynomials'),
         goal: say('Polinomioak batzea eta kentzea, antzeko gaiak elkartuz eta kenketaren zeinuak ondo aldatuz.', 'Sumar y restar polinomios agrupando términos semejantes y cambiando bien los signos en la resta.', 'جمع كثيرات الحدود وطرحها بجمع الحدود المتشابهة وتغيير الإشارات جيدًا في الطرح.', 'Add and subtract polynomials by grouping like terms and changing the signs correctly when subtracting.'),
-        problem: same('$(3x^{2}-2x+5)$ $-\\ (x^{2}+4x-1)$'),
+        problem: same('$\\begin{aligned}&(3x^{2}-2x+5)\\\\&-(x^{2}+4x-1)\\end{aligned}$'),
         stepsKind: 'steps',
         steps: [
             { text: say('Aldatu kentzen denaren zeinu guztiak.', 'Cambia todos los signos del que se resta.', 'غيّر كل إشارات المطروح.', 'Change all the signs of the one being subtracted.'), math: same('$3x^{2}-2x+5-x^{2}-4x+1$') },
@@ -176,7 +176,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stage: 'ruffini',
         title: say('Ruffiniren erregela', 'Regla de Ruffini', 'قاعدة روفيني', 'Ruffini\'s rule'),
         goal: say('$x-a$ motako polinomio batez zatitzea Ruffiniren taularekin.', 'Dividir entre un polinomio de la forma $x-a$ con la tabla de Ruffini.', 'القسمة على كثير حدود من الشكل $x-a$ بجدول روفيني.', 'Divide by a polynomial of the form $x-a$ with Ruffini\'s table.'),
-        problem: same('$(2x^{3}-3x^{2}+0x+5)$ $\\div\\ (x-2)$'),
+        problem: same('$\\begin{gathered}(2x^{3}-3x^{2}+0x+5)\\\\ \\div\\ (x-2)\\end{gathered}$'),
         stepsKind: 'steps',
         steps: [
             { text: say('Koefizienteak eta $a=2$. Jaitsi 2.', 'Coeficientes y $a=2$. Baja el 2.', 'المعاملات و$a=2$. أنزل 2.', 'Coefficients and $a=2$. Bring down the 2.'), math: same('$2\\quad -3\\quad 0\\quad 5$') },

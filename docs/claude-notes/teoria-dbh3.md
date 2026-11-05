@@ -33,7 +33,7 @@ Qué lecciones llevan «¿Por qué?» y enlaces, en la nota de cada unidad.
 - Geometría › regular-polygons: la línea buena del error típico ya no da 180°.
 - Proporcionalidad › direct-share e inverse-share: la explicación ya no resuelve el «Vamos a resolver».
 - Estadística › grouped-data: la explicación usaba el mismo $[150,160)$ del problema; ahora $[140,150)$. El inglés dice «class midpoint» y el euskera «parentesi karratua», como los pasos.
-- Polinomios › add-sub y ruffini, Sucesiones › recursive: el enunciado era una sola fórmula y se salía 18–43 px a 375 px (ya pasaba en la web); ahora va en dos o tres fórmulas que se cortan entre ellas.
+- Polinomios › add-sub y ruffini, Sucesiones › recursive: el enunciado era una sola fórmula en una línea y se salía 18–43 px a 375 px (ya pasaba en la web); ahora es una sola fórmula en dos filas (`aligned` / `gathered`). Ojo: no partirla en varias fórmulas sueltas, porque en árabe, si caben en una línea, salen en orden inverso.
 
 Vistos y sin tocar (son de otros cursos): Polinomios › algebraic-fractions usa `SimplifyFigure` de 4. aplicadas, que enseña una expresión y no una fracción algebraica; el dibujo de Mezclas (`MixtureFigure`, 4. aplicadas) lleva en euskera «12,40-an»; `RatiosFigure` escribe $r$ y la lección $k$.
 
@@ -52,8 +52,10 @@ Vistos y sin tocar (son de otros cursos): Polinomios › algebraic-fractions usa
 Script en el navegador sobre las 150 lecciones en eu, es y ar (450 páginas): abre todos los pasos, abre los 35 «¿Por qué?» y una a una las 533 palabras del vocabulario, y mide la página, cada fórmula, párrafo, botón y dibujo, y el tamaño que `FitMath` da a cada fórmula de ejemplo, paso, tarjeta y «¿Por qué?».
 
 - Primera pasada: 3 enunciados se salían (Polinomios › add-sub y ruffini, Sucesiones › recursive) y 72 fórmulas quedaban en 12–16,8 px, 26 de ellas cortadas (con desplazamiento lateral). Casi todas eran «Otro ejemplo» con dos cuentas separadas por `\qquad` o una cadena de `\ \to\ `. Se partieron en filas con un script (`\qquad` → `gathered`; `\ \to\ ` → filas que empiezan por `\to`; cadena de `=` → `aligned` con `&=`) y dos a mano en tres filas. Commit b5b0dde2.
+- Los tres enunciados se partieron primero en fórmulas sueltas; en árabe, en una pantalla ancha, quedarían en orden inverso, así que son una sola fórmula en dos filas (commit siguiente a b5b0dde2).
 - Pasada final: en los tres idiomas, las 150 lecciones con «Otro ejemplo», «Error típico» y «Compruébalo», 78 enlaces, 35 «¿Por qué?», 533 de 533 palabras abiertas; nada se sale de la página, ningún error de KaTeX y todas las fórmulas de caja en 17 px o más.
 - Tests 1577/1577, lint y build en verde (2026-11-05).
+- Resúmenes de las 10 unidades (`teoria/laburpena`) en eu, es y ar (30 páginas), ahora con los 150 errores típicos y las definiciones: nada se sale, sin errores de KaTeX.
 - Visto sin tocar (es del motor y de todos los cursos): en árabe, la idea clave de Polinomios › square-diff parte la fórmula `(a-b)^{2}=a^{2}-2ab+b^{2}` al final de la línea y deja «: الإشارات» con los dos puntos al principio.
 
 Hoja de revisión para el dueño (euskera y castellano, las 150 lecciones), hecha con un script que importa los `lessonTexts.ts` y `lessonChecks.ts` y dibuja las fórmulas con KaTeX: en la carpeta de notas compartidas de la sesión, `teoria-dbh3-revision.html`.

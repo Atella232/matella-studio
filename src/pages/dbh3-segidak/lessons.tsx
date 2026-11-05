@@ -63,7 +63,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stage: 'sequences',
         title: say('Errepikapen-legea', 'Ley de recurrencia', 'العلاقة التراجعية', 'Recursive rules'),
         goal: say('Gai bakoitza aurrekoekin kalkulatzen den segidak eraikitzea, Fibonacci-rena barne.', 'Construir sucesiones en las que cada término se calcula con los anteriores, como la de Fibonacci.', 'بناء متتاليات يُحسب فيها كل حد من الحدود السابقة، مثل متتالية فيبوناتشي.', 'Build sequences in which each term is worked out from the previous ones, such as the Fibonacci sequence.'),
-        problem: same('$a_{1}=2,$ $a_{2}=5,$ $a_{n}=a_{n-1}+a_{n-2}$'),
+        problem: same('$\\begin{gathered}a_{1}=2,\\ a_{2}=5\\\\ a_{n}=a_{n-1}+a_{n-2}\\end{gathered}$'),
         stepsKind: 'steps',
         steps: [
             { text: say('Hirugarrena: aurreko bien batura.', 'El tercero: la suma de los dos anteriores.', 'الثالث: مجموع الحدين السابقين.', 'The third: the sum of the two before.'), math: same('$a_{3}=5+2=7$') },
