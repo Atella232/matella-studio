@@ -165,7 +165,7 @@ export const courses: Course[] = [
       { id: 'ecuaciones-inecuaciones', name: 'Ecuaciones e Inecuaciones', nameEu: 'Ekuazioak eta Inekuazioak', nameAr: 'المعادلات والمتراجحات', nameEn: 'Equations and Inequalities', icon: '⚖️', active: true },
       { id: 'sistemas', name: 'Sistemas de Ecuaciones', nameEu: 'Ekuazio-sistemak', nameAr: 'أنظمة المعادلات', nameEn: 'Systems of Equations', icon: '📝' },
       { id: 'resolucion-triangulos', name: 'Resolución de Triángulos', nameEu: 'Triangeluen Ebazpena', nameAr: 'حل المثلثات', nameEn: 'Solving Triangles', icon: '📐', active: true },
-      { id: 'funciones-trigonometricas', name: 'Fórmulas y Funciones Trigonométricas', nameEu: 'Formula eta Funtzio Trigonometrikoak', nameAr: 'الصيغ والدوال المثلثية', nameEn: 'Trigonometric Formulas and Functions', icon: '〰️' },
+      { id: 'funciones-trigonometricas', name: 'Fórmulas y Funciones Trigonométricas', nameEu: 'Formula eta Funtzio Trigonometrikoak', nameAr: 'الصيغ والدوال المثلثية', nameEn: 'Trigonometric Formulas and Functions', icon: '〰️', active: true },
       { id: 'numeros-complejos', name: 'Números Complejos', nameEu: 'Zenbaki Konplexuak', nameAr: 'الأعداد المركبة', nameEn: 'Complex Numbers', icon: 'ℂ' },
       { id: 'vectores', name: 'Vectores', nameEu: 'Bektoreak', nameAr: 'المتجهات', nameEn: 'Vectors', icon: '➡️' },
       { id: 'geometria-analitica', name: 'Geometría Analítica', nameEu: 'Geometria Analitikoa', nameAr: 'الهندسة التحليلية', nameEn: 'Analytic Geometry', icon: '📏' },
