@@ -58,6 +58,21 @@ La etapa se llama `newton-stage` y no `newton` porque `newton` es el id de una l
 - **Test:** `tests/errealak-batx1z-lab.test.ts`. 2105 tests en verde.
 - **Revisión:** las 11 herramientas a 375 px en eu, es y ar, sin desbordes ni texto fuera del tablero.
 
+**Fase 4, juegos, commit 620ea29:** 9 juegos.
+- **Propios (3):**
+  - `target` «Entorno al blanco», 99501–99503: centro y radio con dos selectores y un solo intento. Niveles: intervalo dibujado con extremos enteros, desigualdad con medios y la parte de fuera |x − a| ≥ r.
+  - `coefficient` «El coeficiente escondido», 99601–99603: desarrollo de (ax + b)ⁿ con un hueco que se escribe con su signo. Niveles: (x + 1)ⁿ, (x ± b)ⁿ y (ax + b)ⁿ.
+  - `detective`, 99701–99703: 12 errores de esta unidad en 3 niveles (`games/detective.ts`).
+- **Carrera:** 99401–99405, 5 circuitos y 18 tipos de pregunta, con `meta` que el test vuelve a calcular.
+- **Parejas:** 99801–99803 (entornos, logaritmos y números combinatorios).
+- **Reutilizados de 4.º:** «Sitúa en la recta», «Construye el intervalo», «Simplifica el radical» y «Encuentra el exponente», con sus textos y niveles pero ids de esta unidad: 99811–99813, 99821–99823, 99831–99833 y 99841–99843.
+- **CSS propio:** `games/BachRealsGames.css`. El campo de respuesta reutiliza el formulario de boxes de la carrera, pero fuera de los boxes tomaba su ancho natural y se salía 32 px a 375 px.
+- **Test:** `tests/errealak-batx1z-games.test.ts`. 2111 tests, lint y build en verde.
+- **Inventario:** OK. El script cuenta 4 herramientas propias porque toma `change-base` como propia, pero es prestada: las propias son 3.
+- **Revisión:** a 375 px en eu, es y ar, el centro de juegos, los 9 juegos al empezar el primer nivel, y el coeficiente jugado y respondido en los niveles 1 y 3. No se sale nada de la pantalla.
+
+**Hoja de revisión del euskera:** `revision-errealak-batx1z.html` en el scratchpad de la sesión, sin commit; enviada al dueño. El generador sirve para otras unidades: `review-sheet.mjs <carpeta> <salida>`.
+
 ## Trucos
 
 - Las funciones `howMuch(formula)` y `calc(formula)` copian el texto de la fórmula a los cuatro idiomas: no se les puede pasar texto en euskera. Para eso, `say()`.
@@ -67,12 +82,6 @@ La etapa se llama `newton-stage` y no `newton` porque `newton` es el id de una l
 
 ## En curso
 
-Lo siguiente es la fase 4, los juegos:
-- J1 «Entorno al blanco»;
-- J2 «El coeficiente escondido»;
-- J4, un detective con los errores típicos de la unidad;
-- la carrera y las parejas, reutilizadas.
-
-Ids de progreso libres desde 99001 (el mayor en uso es 98603).
-
-Publicar necesita el visto bueno del dueño. Se publicará junto con la lista de Bachillerato de `feat/batx-modalidades`.
+- La unidad está terminada en la rama `feat/errealak-batx1z`, que lleva encima la lista de Bachillerato de `feat/batx-modalidades`.
+- Falta el visto bueno del dueño para fusionar en `main` y publicar las dos cosas juntas.
+- Al publicar, hay que comprobar en vivo a 375 px: la lista de cursos, `batx1-zientziak` y unas cuantas lecciones, herramientas y juegos de la unidad.
