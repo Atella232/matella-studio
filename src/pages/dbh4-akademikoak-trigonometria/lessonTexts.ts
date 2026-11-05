@@ -96,7 +96,7 @@ export const trigonometryLessonTexts: Record<TrigonometryTopicId, LessonTexts> =
             'Take a right-angled triangle with hypotenuse 1: its legs are $\\sin\\alpha$ and $\\cos\\alpha$, and Pythagoras gives $\\sin^{2}\\alpha+\\cos^{2}\\alpha=1$, for any angle. Also, $\\tan\\alpha=\\dfrac{\\sin\\alpha}{\\cos\\alpha}$. Dividing the first by $\\cos^{2}\\alpha$ gives $1+\\tan^{2}\\alpha=\\dfrac{1}{\\cos^{2}\\alpha}$.'
         ),
         examplePrompt: say('$\\alpha$ zorrotza da eta $\\cos\\alpha=0{,}28$. Kalkulatu $\\sin\\alpha$ eta $\\tan\\alpha$.', 'Si $\\alpha$ es agudo y $\\cos\\alpha=0{,}28$, calcula $\\sin\\alpha$ y $\\tan\\alpha$.', 'إذا كانت $\\alpha$ حادة و$\\cos\\alpha=0{,}28$ فاحسب $\\sin\\alpha$ و$\\tan\\alpha$.', 'If $\\alpha$ is acute and $\\cos\\alpha=0{,}28$, work out $\\sin\\alpha$ and $\\tan\\alpha$.'),
-        example: same('$\\begin{gathered}\\sin^{2}\\alpha=1-0{,}28^{2}=0{,}9216\\\\ \\sin\\alpha=0{,}96\\qquad\\tan\\alpha=\\frac{0{,}96}{0{,}28}\\approx 3{,}43\\end{gathered}$'),
+        example: same('$\\begin{gathered}\\sin^{2}\\alpha=1-0{,}28^{2}=0{,}9216\\\\ \\sin\\alpha=0{,}96\\\\ \\tan\\alpha=\\frac{0{,}96}{0{,}28}\\approx 3{,}43\\end{gathered}$'),
         exampleAnswer: say('Angelu zorrotza: sinua positiboa da, $0{,}96$.', 'Ángulo agudo: el seno es positivo, $0{,}96$.', 'زاوية حادة: الجيب موجب، $0{,}96$.', 'An acute angle: the sine is positive, $0{,}96$.')
     },
     'one-ratio': {
@@ -223,7 +223,7 @@ export const trigonometryLessonTexts: Record<TrigonometryTopicId, LessonTexts> =
             'If a triangle has no right angle, draw a height: two right-angled triangles appear, and the ratios work in each. Choose well: the height should not split a known angle, and it helps if the known side is the hypotenuse of one of the two triangles. Then Pythagoras or a ratio gives what is missing.'
         ),
         examplePrompt: say('Triangelu batean, $B=60°$, $C=45°$, eta $A$ erpinetik doan altuerak 6 cm neurtzen ditu. Kalkulatu $BC$.', 'En un triángulo, $B=60°$, $C=45°$ y la altura desde $A$ mide 6 cm. Calcula $BC$.', 'في مثلث $B=60°$ و$C=45°$، والارتفاع من $A$ طوله 6 سم. احسب $BC$.', 'In a triangle, $B=60°$, $C=45°$ and the height from $A$ is 6 cm. Work out $BC$.'),
-        example: same('$\\begin{gathered}BH=\\frac{6}{\\tan 60°}\\approx 3{,}46\\qquad HC=\\frac{6}{\\tan 45°}=6\\\\ BC\\approx 9{,}46\\end{gathered}$'),
+        example: same('$\\begin{gathered}BH=\\frac{6}{\\tan 60°}\\approx 3{,}46\\\\ HC=\\frac{6}{\\tan 45°}=6\\\\ BC\\approx 9{,}46\\end{gathered}$'),
         exampleAnswer: say('Altuerak $BC$ bi zatitan banatzen du: 9,46 cm inguru.', 'La altura parte $BC$ en dos trozos: unos 9,46 cm.', 'يقسم الارتفاع $BC$ إلى قطعتين: نحو 9.46 سم.', 'The height splits $BC$ into two pieces: about 9.46 cm.')
     },
     'trig-area': {
@@ -291,7 +291,7 @@ export const trigonometryLessonTexts: Record<TrigonometryTopicId, LessonTexts> =
             'On the unit circle, the points of $\\alpha$, $180°-\\alpha$, $180°+\\alpha$ and $360°-\\alpha$ are symmetric: their ratios have the same absolute value and the quadrant gives the sign. With 30°: $\\sin 150°=\\frac{1}{2}$, $\\sin 210°=-\\frac{1}{2}$ and $\\sin 330°=-\\frac{1}{2}$. For an angle over 360°, take away the full turns.'
         ),
         examplePrompt: say('Kalkulatu $\\cos 240°$ eta $\\sin 495°$, kalkulagailurik gabe.', 'Calcula $\\cos 240°$ y $\\sin 495°$ sin calculadora.', 'احسب $\\cos 240°$ و$\\sin 495°$ دون آلة حاسبة.', 'Work out $\\cos 240°$ and $\\sin 495°$ without a calculator.'),
-        example: same('$\\begin{gathered}\\cos 240°=-\\cos 60°=-\\frac{1}{2}\\\\ \\sin 495°=\\sin 135°=\\sin 45°=\\frac{\\sqrt{2}}{2}\\end{gathered}$'),
+        example: same('$\\begin{gathered}\\cos 240°=-\\cos 60°=-\\frac{1}{2}\\\\ \\sin 495°=\\sin 135°\\\\ \\sin 135°=\\sin 45°=\\frac{\\sqrt{2}}{2}\\end{gathered}$'),
         exampleAnswer: say('240° III. koadrantean dago (kosinua negatiboa); 495° buelta bat gehi 135° da.', '240° está en el III cuadrante (coseno negativo); 495° es una vuelta más 135°.', '240° في الربع الثالث (جيب التمام سالب)؛ و495° دورة زائد 135°.', '240° is in quadrant III (negative cosine); 495° is one turn plus 135°.')
     },
     radians: {

@@ -120,7 +120,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stepsKind: 'steps',
         steps: [
             { text: say('Sortzailea.', 'La generatriz.', 'الراسم.', 'The slant height.'), math: same('$g=\\sqrt{4^{2}+3^{2}}=5$') },
-            { text: say('Alboko azalera eta oinarria.', 'Área lateral y base.', 'المساحة الجانبية والقاعدة.', 'Lateral area and base.'), math: same('$3{,}14\\cdot 3\\cdot 5=47{,}1\\qquad 3{,}14\\cdot 3^{2}=28{,}26$') },
+            { text: say('Alboko azalera eta oinarria.', 'Área lateral y base.', 'المساحة الجانبية والقاعدة.', 'Lateral area and base.'), math: same('$\\begin{gathered}3{,}14\\cdot 3\\cdot 5=47{,}1\\\\ 3{,}14\\cdot 3^{2}=28{,}26\\end{gathered}$') },
             { text: say('Batu: 75,36 cm².', 'Suma: 75,36 cm².', 'اجمع: 75.36 سم².', 'Sum: 75.36 cm².'), math: same('$47{,}1+28{,}26=75{,}36$') }
         ],
         takeaway: say('Zilindroa: 2πrh + 2πr². Konoa: πrg + πr², g = √(h² + r²).', 'Cilindro: 2πrh + 2πr². Cono: πrg + πr², g = √(h² + r²).', 'الأسطوانة: 2πrh + 2πr². المخروط: πrg + πr²، g = √(h² + r²).', 'Cylinder: 2πrh + 2πr². Cone: πrg + πr², g = √(h² + r²).'),
