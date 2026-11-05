@@ -33,6 +33,13 @@ Segunda unidad del bloque Geometría (reparto en paralelo de 1.º Ciencias, ver 
 - **Test nuevo:** `tests/geometria-batx1z-lab.test.ts`.
 - **Comprobación:** 2237 tests y lint en verde; revisado a 375 px en eu, es y ar con la predicción hecha y ▶ pulsado. Las prestadas de 4.º dejan la «x» y la «y» de los ejes pegadas al borde, como en su unidad.
 
+**Fase 4, juegos:** 6 juegos en `games/`.
+- **Propios:** `twins.ts` «Rectas gemelas» (106501–106503: una recta en una forma y cuatro en otra; las falsas son paralela, perpendicular por tomar el normal como director, punto con el signo cambiado y pendiente invertida; al responder se dibujan la recta y la elegida; nivel 1 general ↔ explícita, nivel 2 vectorial, paramétricas y continua ↔ general, nivel 3 las seis formas), `radar.ts` «El radar» (106601–106603: distancia de un radar a la ruta de un barco, con distractores sin raíz, entre A + B, sin C, sin valor absoluto y el signo de y; dibujo con el alcance y la perpendicular; nivel 2 con la ruta como y = mx + n y nivel 3 con dos rutas paralelas, una con los coeficientes dobles) y `detective.ts` «Detective de rectas» (106701–106703, 12 errores típicos de la unidad).
+- **Carrera** `race.ts` (106401–106405, 15 tipos de pregunta con `meta`) y **memoria** `boards.ts` (106801–106803: pendiente, punto medio y distancia). De 4.º, «Encuentra k» (106811–106813).
+- `lines.ts` reúne las formas de la recta en LaTeX (general reducida, explícita, punto-pendiente, vectorial, paramétricas y continua).
+- **Test nuevo:** `tests/geometria-batx1z-games.test.ts`.
+- **Comprobación:** 2244 tests, lint y build en verde; inventario OK; juegos revisados a 375 px en eu, es y ar.
+
 ## En curso
 
-- Fases 1+2 y 3 hechas. Siguiente paso: fase 4, juegos (J1 «Rectas gemelas», J2 «El radar», J4 detective, carrera, memoria y «Encuentra k» de 4.º; ids 106401–106899).
+- Fases 1+2, 3 y 4 hechas. Queda el cierre: hoja de revisión del euskera y aviso a la sesión principal. Después, Konikak (`feat/konikak-batx1z`, cortada de esta rama).

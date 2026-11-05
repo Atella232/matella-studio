@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readVectorsAnswer } from '../dbh4-akademikoak-bektoreak/answers'
 import { bachGeometryChallenges, bachGeometryDiagnostic, bachGeometryExerciseBank, bachGeometryPractice } from './content'
 import { BachGeometryHeroArt } from './figures'
+import { BachGeometryGames } from './games'
+import { BACH_GEOMETRY_GAME_RECORDS_KEY, bachGeometryGameProgressIds } from './games/info'
 import { BachGeometryLaboratory } from './lab'
 import { bachGeometryLabChallengeIds, bachGeometryLabToolForTopic, bachGeometryLabTools } from './lab/labTools'
 import { bachGeometryStages, bachGeometryTopics } from './lessons'
@@ -37,6 +39,17 @@ const geometriaBatx1zUnit: UnitDefinition = {
         progressIds: bachGeometryLabChallengeIds,
         toolForTopic: bachGeometryLabToolForTopic,
         render: (props) => <BachGeometryLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko: lasterketa, zuzen bikiak, radarra, zuzenen detektibea eta memoria, berriak; eta 4. DBHko aurkitu k.',
+            es: 'Seis juegos: carrera, rectas gemelas, el radar, detective de rectas y memoria, nuevos; y de 4.º ESO, encuentra k.',
+            en: 'Six games: race, twin lines, the radar, lines detective and memory, new; and from 4th ESO, find k.',
+            ar: 'ست ألعاب: السباق والمستقيمات التوأم والرادار ومخبر المستقيمات والذاكرة، وهي جديدة؛ ومن الصف الرابع: أوجد k.'
+        },
+        progressIds: bachGeometryGameProgressIds,
+        recordsKey: BACH_GEOMETRY_GAME_RECORDS_KEY,
+        render: (props) => <BachGeometryGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bakar bat: eskatzen den koordenatua, koefizientea, malda, angelua gradutan, distantzia, azalera edo parametroa. Adibidez 5, −3, 2,5 edo 3/5.', es: 'Escribe un solo número: la coordenada, el coeficiente, la pendiente, el ángulo en grados, la distancia, el área o el parámetro que se pide. Por ejemplo 5, −3, 2,5 o 3/5.', en: 'Write a single number: the coordinate, coefficient, slope, angle in degrees, distance, area or parameter that is asked for. For example 5, −3, 2.5 or 3/5.', ar: 'اكتب عددًا واحدًا: الإحداثي أو المعامل أو الميل أو الزاوية بالدرجات أو المسافة أو المساحة أو الوسيط المطلوب. مثلًا 5 أو ⁦−3⁩ أو 2.5 أو 3/5.' },
