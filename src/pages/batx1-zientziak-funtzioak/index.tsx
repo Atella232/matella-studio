@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachFunctionsChallenges, bachFunctionsDiagnostic, bachFunctionsExerciseBank, bachFunctionsPractice } from './content'
 import { BachFunctionsHeroArt } from './figures'
+import { BachFunctionsGames } from './games'
+import { BACH_FUNCTIONS_GAME_RECORDS_KEY, bachFunctionsGameProgressIds } from './games/info'
 import { BachFunctionsLaboratory } from './lab'
 import { bachFunctionsLabChallengeIds, bachFunctionsLabToolForTopic, bachFunctionsLabTools } from './lab/labTools'
 import { bachFunctionsStages, bachFunctionsTopics } from './lessons'
@@ -36,6 +38,17 @@ const funtzioakBatx1zUnit: UnitDefinition = {
         progressIds: bachFunctionsLabChallengeIds,
         toolForTopic: bachFunctionsLabToolForTopic,
         render: (props) => <BachFunctionsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zortzi joko: lasterketa, non erortzen da puntua?, ordenatu makinak, desegin makina, funtzioen detektibea eta memoria, berriak; eta 4. DBHko margotu eremua eta kurben laserra.',
+            es: 'Ocho juegos: carrera, ¿dónde cae el punto?, ordena las máquinas, deshaz la máquina, detective de funciones y memoria, nuevos; y de 4.º ESO, pinta el dominio y láser de curvas.',
+            en: 'Eight games: race, where does the point land?, put the machines in order, undo the machine, functions detective and memory, new; and from 4th ESO, paint the domain and the curve laser.',
+            ar: 'ثماني ألعاب: السباق وأين تقع النقطة؟ ورتّب الآلات واعكس الآلة ومخبر الدوال والذاكرة، وهي جديدة؛ ومن الصف الرابع: لوّن المجال وليزر المنحنيات.'
+        },
+        progressIds: bachFunctionsGameProgressIds,
+        recordsKey: BACH_FUNCTIONS_GAME_RECORDS_KEY,
+        render: (props) => <BachFunctionsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Puntu baten koordenatu bat eskatzen bada, hori bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si se pide una coordenada de un punto, solo esa.', en: 'Write a number: 5, −3, 1.5 or 3/2. If one coordinate of a point is asked for, only that one.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا طُلب أحد إحداثيي نقطة فاكتبه وحده.' },

@@ -45,7 +45,7 @@ Es la cuarta unidad de Bachillerato y la primera del bloque Análisis: curso `ba
 - **Test nuevo:** `tests/funtzioak-batx1z-content.test.ts`.
 - **Comprobación:** 2200 tests, lint y `tsc -b` en verde. Las 15 lecciones a 375 px en eu, es y ar sin desbordes ni errores de KaTeX.
 
-**Fase 3, laboratorio:** 11 herramientas.
+**Fase 3, laboratorio, commit ab39298:** 11 herramientas.
 - **Propias (4),** con predicción antes del resultado, retos infinitos (`freshFrom`) y ▶:
   - L1 `transform` «El taller de transformaciones», retos 108101–108105: una función madre (√x, x², |x|, 2ˣ, 1/x) con un punto P se convierte en $y=A\cdot f(Bx+c)+k$. Se predice si P va a la izquierda, se queda en la misma vertical o va a la derecha; ▶ lleva P a su sitio. Los retos de «construye» comparan la curva, no los números (|−x + 1| es |x − 1|). Lógica en `lab/transform.ts`.
   - L2 `composition` «Dos máquinas en cadena», retos 108201–108205: máquinas +3, −2, ·2, ·(−1), x²; arriba $f\circ g$, abajo $g\circ f$. Se predice cuál sale mayor; ▶ hace pasar la x. Retos: llegar a un valor, encontrar el x con los dos órdenes iguales, dos máquinas que conmutan, descomponer $(x-2)^2$. Lógica en `lab/composition.ts`.
@@ -54,6 +54,17 @@ Es la cuarta unidad de Bachillerato y la primera del bloque Análisis: curso `ba
 - **Prestadas (7),** con sus retos e ids de 4.º académicas: construye el dominio, ¿par o impar?, une dos trozos (Funciones), funciones periódicas (aplicadas), dobla el valor absoluto (Polinómicas), mueve la exponencial y el logaritmo (Exponenciales).
 - **Test:** `tests/funtzioak-batx1z-lab.test.ts`. 2205 tests en verde.
 - **Revisión:** las 4 propias a 375 px en eu, es y ar, antes y después de predecir: sin desbordes ni errores de KaTeX.
+
+**Fase 4, juegos:** 8 juegos, récords en `matella-funtzioak-batx1z-game-records`.
+- **Propios (4):**
+  - J1 `where` «¿Dónde cae el punto?», niveles 108501–108503: $f$ pasa por $P(p,q)$ y se da $y=A\cdot f(Bx+c)+k$; se toca en la cuadrícula (`Plane` con `onPick`) el punto que sale de P. Un solo punto vale: $x=\frac{p-c}{B}$ y $y=Aq+k$, enteros y dentro del tablero; mover x al revés ($p+c$) da siempre otro punto. Un cambio; dos; tres o cuatro con un factor 2 o −2. Lógica en `games/where.ts`.
+  - J2 `order` «Ordena las máquinas», niveles 108601–108603: tarjetas de máquinas (+n, ·n, x², ·(−1)) que se ponen en fila. Dos máquinas y un número que tiene que salir; tres máquinas; descomponer una fórmula $h(x)$. Solo un orden llega a la meta (se prueban todos). Lógica en `games/order.ts`.
+  - J3 `undo` «Deshaz la máquina», niveles 108651–108653: $f$ es una cadena de 2 o 3 máquinas; con las tarjetas (las inversas y las propias máquinas de $f$, que tientan) se construye $f^{-1}$. Vale cualquier cadena que devuelve cada $f(x)$ a $x$. Dos máquinas; tres (con cambio de signo); con x³ o 2ˣ (se deshacen con ∛x y log₂ x). Lógica en `games/undo.ts`; las máquinas y la fórmula de una cadena en `games/machines.ts`.
+  - J4 `detective`, niveles 108701–108703: 12 errores (log con ≥ 0, olvidar el denominador, $x+a$ a la derecha, «impar» por tener $x^3$; $f^{-1}=\frac{1}{f}$, deshacer en mal orden, inversa de $2^x+c$, arco coseno fuera de $[0,\pi]$; $E(x)$ quitando decimales, el trozo que no toca, $f\circ g$ al revés, quitar el cero del numerador en $\frac{f}{g}$).
+- **Carrera** 108401–108405 (15 tipos, tres por etapa) y **memoria** 108801–108803 (parte entera, inversas, dominios).
+- **De 4.º académicas, con niveles y etapas de esta unidad:** «Pinta el dominio» 108811–108813 (Funciones) y «Láser de curvas» 108821–108823 (Polinómicas), con familias propias por nivel: parábolas y |x|; exponenciales y logaritmos; hipérbolas, |x| y logaritmos.
+- **Test:** `tests/funtzioak-batx1z-games.test.ts` (cada respuesta de la carrera se recalcula con `meta`; el punto de J1 sale de P; J2 tiene un solo orden; J3 se deshace con las inversas en orden inverso; los casos del detective se dibujan en KaTeX).
+- **Comprobación:** 2212 tests, lint y build en verde; inventario OK (5 juegos y 6 herramientas que cuenta como propios).
 
 ## Trucos
 
@@ -65,7 +76,10 @@ Es la cuarta unidad de Bachillerato y la primera del bloque Análisis: curso `ba
 - Las etiquetas de los botones de predicción son texto plano (no pasan por MathText): nada de fórmulas ni `∘` en ellas.
 - En `Readout` la fórmula no depende del idioma: en árabe hay que cambiar `{,}` por `.` a mano (el inglés lo cambia el motor).
 
+- En una frase árabe, las etiquetas de las máquinas (− 4, ÷ 2) van envueltas en LRI/PDI (`\u2066…\u2069`) para que no se den la vuelta.
+- `WorkedDetectiveGame` acepta `localize(latex, language)`: así las líneas pueden llevar nombres trigonométricos.
+
 ## En curso
 
-- Fase 4, juegos: J1 «¿Dónde cae el punto?», J2 «Ordena las máquinas», J3 «Deshaz la máquina», detective, carrera, memoria y de 4.º «Pinta el dominio» y «Láser de curvas». Ids 108401–108899.
-- Después, cierre (375 px, hoja de euskera) y el tema siguiente, Límites.
+- Cierre: revisión a 375 px de juegos y práctica en eu, es y ar, hoja de euskera.
+- Después, el tema siguiente, Límites (`limiteak`, ids 109000–109999), cortado de `feat/funtzioak-batx1z`.
