@@ -64,7 +64,7 @@ Es la cuarta unidad de Bachillerato y la primera del bloque Análisis: curso `ba
 - **Carrera** 108401–108405 (15 tipos, tres por etapa) y **memoria** 108801–108803 (parte entera, inversas, dominios).
 - **De 4.º académicas, con niveles y etapas de esta unidad:** «Pinta el dominio» 108811–108813 (Funciones) y «Láser de curvas» 108821–108823 (Polinómicas), con familias propias por nivel: parábolas y |x|; exponenciales y logaritmos; hipérbolas, |x| y logaritmos.
 - **Test:** `tests/funtzioak-batx1z-games.test.ts` (cada respuesta de la carrera se recalcula con `meta`; el punto de J1 sale de P; J2 tiene un solo orden; J3 se deshace con las inversas en orden inverso; los casos del detective se dibujan en KaTeX).
-- **Comprobación:** 2212 tests, lint y build en verde; inventario OK (5 juegos y 6 herramientas que cuenta como propios).
+- **Comprobación:** 2212 tests, lint y build en verde; inventario OK. Ojo: el script cuenta como propios `exp-shift`, `log-shift`, `domain` y `laser`, que son de 4.º. Lo propio de verdad: 4 herramientas (transform, composition, mirror, stairs) y 3 juegos más el detective (where, order, undo).
 
 ## Trucos
 
@@ -83,5 +83,6 @@ Es la cuarta unidad de Bachillerato y la primera del bloque Análisis: curso `ba
 
 - **2026-11-05:** 2212 tests, lint y build en verde; inventario OK.
 - **Revisión a 375 px en eu, es y ar:** las 15 lecciones (con los pasos y los «¿Por qué funciona?» abiertos), portada, diagnóstico, resumen, práctica, ejercicios, retos, el centro de juegos y cada juego, y las 11 herramientas. Sin desbordes, sin errores de KaTeX y sin LaTeX sin dibujar. «arcsen» sale en castellano y «arcsin», «arctg» en euskera.
+- **Textos cortados en los dibujos:** se mide con `getBBox()` cada `<text>` de los dibujos de las lecciones y de las 4 herramientas (el SVG recorta sin cambiar el ancho de la página). Salía el título «y» del eje por arriba en Stretch, Mirror, AbsoluteGraph y Stairs: el marco baja a `oy={32}`.
 - **Hoja de euskera:** `hoja-revision.mjs batx1-zientziak-funtzioak … --herramientas transform,composition,mirror,stairs --juegos race,where,order,undo,detective,memory`, mandada al dueño (fuera del repositorio).
 - **Sin publicar:** la rama `feat/funtzioak-batx1z` espera a la sesión principal, que fusiona y publica.

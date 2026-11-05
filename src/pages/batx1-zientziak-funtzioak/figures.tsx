@@ -212,7 +212,7 @@ export function StretchFigure({ language }: { language: UnitLanguage }) {
     const tent = (scale: number, width: number): [number, number][] => [[0, 0], [width / 2, 3 * scale], [width, 0]]
     return (
         <Figure height={318} label={t(say('f, 2f(x) eta f(2x): altuera bikoiztu edo zabalera erdira', 'f, 2f(x) y f(2x): doble de alto o la mitad de ancho', 'f و2f(x) وf(2x): ضعف الارتفاع أو نصف العرض', 'f, 2f(x) and f(2x): twice as tall or half as wide'))}>
-            <Frame box={{ xMin: -1, xMax: 9, yMin: -1, yMax: 7 }} cell={34} ox={36} oy={22}>
+            <Frame box={{ xMin: -1, xMax: 9, yMin: -1, yMax: 7 }} cell={34} ox={36} oy={32}>
                 {(map, clip) => (
                     <g>
                         <PlanePath map={map} points={tent(1, 8)} color={MUTED} width={3} dashed clip={clip} />
@@ -287,7 +287,7 @@ export function MirrorFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     return (
         <Figure height={330} label={t(say('y = x² − 1 (x ≥ 0) eta haren alderantzizkoa y = √(x + 1), y = x zuzenarekiko simetrikoak', 'y = x² − 1 (x ≥ 0) y su inversa y = √(x + 1), simétricas respecto de y = x', 'y = x² − 1 (x ≥ 0) ودالتها العكسية y = √(x + 1)، متناظرتان بالنسبة إلى y = x', 'y = x² − 1 (x ≥ 0) and its inverse y = √(x + 1), symmetric about y = x'))}>
-            <Frame box={{ xMin: -2, xMax: 5, yMin: -2, yMax: 5 }} cell={40} ox={36} oy={24}>
+            <Frame box={{ xMin: -2, xMax: 5, yMin: -2, yMax: 5 }} cell={40} ox={36} oy={32}>
                 {(map, clip) => (
                     <g>
                         <PlaneLine map={map} m={1} n={0} color={MUTED} width={2.4} dashed clip={clip} />
@@ -389,8 +389,8 @@ export function AbsoluteGraphFigure({ language }: { language: UnitLanguage }) {
     const t = useText(language)
     const f = (x: number) => x * x - 2 * x - 3
     return (
-        <Figure height={330} label={t(say('y = x² − 2x − 3 eta y = |x² − 2x − 3|: −1 eta 3 arteko zatia gora tolesten da', 'y = x² − 2x − 3 e y = |x² − 2x − 3|: el trozo entre −1 y 3 se dobla hacia arriba', 'y = x² − 2x − 3 وy = |x² − 2x − 3|: يُطوى الجزء بين −1 و3 إلى الأعلى', 'y = x² − 2x − 3 and y = |x² − 2x − 3|: the piece between −1 and 3 is folded up'))}>
-            <Frame box={{ xMin: -3, xMax: 5, yMin: -5, yMax: 6 }} cell={26} ox={40} oy={24}>
+        <Figure height={340} label={t(say('y = x² − 2x − 3 eta y = |x² − 2x − 3|: −1 eta 3 arteko zatia gora tolesten da', 'y = x² − 2x − 3 e y = |x² − 2x − 3|: el trozo entre −1 y 3 se dobla hacia arriba', 'y = x² − 2x − 3 وy = |x² − 2x − 3|: يُطوى الجزء بين −1 و3 إلى الأعلى', 'y = x² − 2x − 3 and y = |x² − 2x − 3|: the piece between −1 and 3 is folded up'))}>
+            <Frame box={{ xMin: -3, xMax: 5, yMin: -5, yMax: 6 }} cell={26} ox={40} oy={32}>
                 {(map, clip) => (
                     <g>
                         <PlanePath map={map} points={sampled(f, -1, 3, 0.02)} color={MUTED} width={2.6} dashed clip={clip} />
@@ -423,7 +423,7 @@ export function StairsFigure({ language }: { language: UnitLanguage }) {
     const d = (value: string) => (language === 'en' || language === 'ar' ? value.replace(/,/g, '.') : value)
     return (
         <Figure height={318} label={t(say('y = E(x) eskailera: maila bakoitza ezkerrean itxita eta eskuinean irekita', 'La escalera y = E(x): cada peldaño cerrado a la izquierda y abierto a la derecha', 'درج y = E(x): كل درجة مغلقة من اليسار ومفتوحة من اليمين', 'The staircase y = E(x): each step closed on the left and open on the right'))}>
-            <Frame box={{ xMin: -4, xMax: 4, yMin: -4, yMax: 4 }} cell={34} ox={36} oy={24}>
+            <Frame box={{ xMin: -4, xMax: 4, yMin: -4, yMax: 4 }} cell={34} ox={36} oy={32}>
                 {(map, clip) => (
                     <g>
                         {[-4, -3, -2, -1, 0, 1, 2, 3].map((step) => (
