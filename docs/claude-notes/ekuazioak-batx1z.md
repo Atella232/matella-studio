@@ -32,7 +32,7 @@ Es la tercera unidad de Bachillerato: curso `batx1-zientziak`, tema `ecuaciones-
 
 ## Hecho
 
-**Fase 1+2, lecciones y contenido:**
+**Fase 1+2, lecciones y contenido, commit e7ccbbe:**
 - **Lecciones:** las 15 tienen las diez mejoras de la teoría:
   - `lessonTexts.ts`: definiciones, «Otro ejemplo» con números propios, vocabulario y 4 «¿Por qué funciona?» (`ruffini-roots`, `change-variable`, `radical-equations`, `rational-inequalities`);
   - `lessonChecks.ts`: error típico y «Compruébalo»;
@@ -41,6 +41,15 @@ Es la tercera unidad de Bachillerato: curso `batx1-zientziak`, tema `ecuaciones-
 - **Contenido:** diagnóstico 7901–7908, práctica 1–20, retos 101–115 y banco 1–50. Las respuestas son un número: con varias soluciones se pide una, su suma o cuántas hay; con inecuaciones, un extremo o cuántos enteros la cumplen.
 - **Test nuevo:** `tests/ekuazioak-batx1z-content.test.ts` (pide al menos 10 igualdades comprobadas, no 25: casi todas las soluciones llevan letras).
 - **Comprobación:** 2167 tests, lint y build en verde. Revisado a 375 px en eu, es y ar (63 páginas, con los pasos abiertos y cada palabra). No se sale nada de la pantalla y no hay errores de KaTeX.
+
+**Fase 3, laboratorio:** 10 herramientas.
+- **Propias (3),** con predicción antes del resultado y retos infinitos (`freshFrom` de `dbh3-segidak/lab/prediction.ts`):
+  - L1 `sign-table` «La tabla de signos», retos 101101–101105: dos o tres factores (x − a) cuyas raíces se mueven; el último puede ir al denominador (su raíz es un agujero). Una sonda x: se predice si el signo ahí es negativo, 0 (o no existe) o positivo; después se ve la fila del producto.
+  - L2 `absolute-fold` «El valor absoluto doblado», retos 101201–101205: la V de |mx + q| contra la recta y = c, con =, < o >. Se predice si en la sonda |mx + q| queda por debajo, igual o por encima de c; después se ven los cortes y la parte del eje que es solución.
+  - L3 `change-machine` «La máquina del cambio de variable», retos 101301–101305: t₁ y t₂ con t = x², x³ o 2ˣ; se predice si habrá menos de 2, 2 o más de 2 soluciones en x; ▶ lleva cada t a sus x y tacha los que no dan nada.
+- **Prestadas (7),** con sus retos e ids de 4.º: Ruffini y caza de raíces (aplicadas), fórmula de 2.º grado (2.º ESO), soluciones falsas con radicales (aplicadas), exponentes que se encuentran, signo de la parábola y dos inecuaciones a la vez (académicas).
+- **Test:** `tests/ekuazioak-batx1z-lab.test.ts`. 2171 tests en verde.
+- **Revisión:** las 10 herramientas a 375 px en eu, es y ar (antes y después de predecir, con ▶ y reto infinito), sin desbordes ni texto fuera del tablero.
 
 ## Trucos
 
@@ -51,5 +60,4 @@ Es la tercera unidad de Bachillerato: curso `batx1-zientziak`, tema `ecuaciones-
 
 ## En curso
 
-- Fase 3, laboratorio: propias L1 «La tabla de signos», L2 «El valor absoluto doblado», L3 «La máquina del cambio de variable» (retos 101101–101305); prestadas de 4.º.
 - Fase 4, juegos: J1 «¿Válida o falsa?», J2 «Rellena la tabla de signos», J4 detective; carrera y memoria; de 4.º «¿Es solución?», «Pinta la solución», «Caza de raíces» y «Simplifica la fracción».

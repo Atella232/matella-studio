@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachEquationsChallenges, bachEquationsDiagnostic, bachEquationsExerciseBank, bachEquationsPractice } from './content'
 import { BachEquationsHeroArt } from './figures'
+import { BachEquationsLaboratory } from './lab'
+import { bachEquationsLabChallengeIds, bachEquationsLabToolForTopic, bachEquationsLabTools } from './lab/labTools'
 import { bachEquationsStages, bachEquationsTopics } from './lessons'
 
 const ekuazioakBatx1zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const ekuazioakBatx1zUnit: UnitDefinition = {
     guidedPractice: bachEquationsPractice,
     exerciseBank: bachEquationsExerciseBank,
     challenges: bachEquationsChallenges,
+    lab: {
+        description: {
+            eu: `${bachEquationsLabTools.length} tresna, erronkekin: zeinuen taula, balio absolutu tolestua eta aldagai-aldaketaren makina, berriak; eta 4. DBHko Ruffiniren taula, erroen bila, formula orokorra, soluzio faltsuen ehiza, berretzaileak elkartzen, parabolaren zeinua eta bi inekuazio batera.`,
+            es: `${bachEquationsLabTools.length} herramientas con retos: la tabla de signos, el valor absoluto doblado y la máquina del cambio de variable, nuevas; y de 4.º ESO, la tabla de Ruffini, a la caza de raíces, la fórmula general, a la caza de soluciones falsas, los exponentes se encuentran, el signo de la parábola y dos inecuaciones a la vez.`,
+            en: `${bachEquationsLabTools.length} tools with challenges: the sign table, the folded absolute value and the change of variable machine, new; and from 4th ESO, Ruffini's table, hunting for roots, the quadratic formula, hunting for false solutions, the exponents meet, the sign of the parabola and two inequalities at once.`,
+            ar: `${bachEquationsLabTools.length} أدوات مع تحديات: جدول الإشارات والقيمة المطلقة المطوية وآلة تغيير المتغير، وهي جديدة؛ ومن الصف الرابع: جدول روفيني والبحث عن الجذور والقانون العام وصيد الحلول الزائفة والأسّان يلتقيان وإشارة القطع المكافئ ومتراجحتان معًا.`
+        },
+        progressIds: bachEquationsLabChallengeIds,
+        toolForTopic: bachEquationsLabToolForTopic,
+        render: (props) => <BachEquationsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Soluzio bat baino gehiago badago, eskatzen dena bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si hay varias soluciones, solo la que se pide.', en: 'Write a number: 5, −3, 1.5 or 3/2. If there are several solutions, only the one asked for.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كانت هناك عدة حلول فاكتب المطلوب فقط.' },
         defaultForm: 'any',
