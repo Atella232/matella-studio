@@ -40,6 +40,20 @@ Segunda unidad del bloque Geometría (reparto en paralelo de 1.º Ciencias, ver 
 - **Test nuevo:** `tests/geometria-batx1z-games.test.ts`.
 - **Comprobación:** 2244 tests, lint y build en verde; inventario OK; juegos revisados a 375 px en eu, es y ar.
 
-## En curso
+## Cierre
 
-- Fases 1+2, 3 y 4 hechas. Queda el cierre: hoja de revisión del euskera y aviso a la sesión principal. Después, Konikak (`feat/konikak-batx1z`, cortada de esta rama).
+- Comprobación final: 2244 tests, lint y build en verde.
+- Inventario: 3 juegos propios (Rectas gemelas, El radar y el detective) y 3 herramientas propias (haz, ángulo y distancia más corta) → OK. El script cuenta también «Encuentra k» y «La segunda recta» como propios, pero son de 4.º.
+- Hoja de euskera: `hoja-revision.mjs` con `--herramientas pencil,line-angle,shortest --juegos twins,radar,detective,race,memory`, en la carpeta de notas compartidas de la sesión (`geometria-batx1z-revision.html`).
+
+## Trucos
+
+- Igual que en Bektoreak: las fórmulas de cada texto se comparan en orden entre idiomas (`lesson-texts.test.ts`), y en `lesson-checks` un enunciado con una sola ecuación hace que las opciones se lean como soluciones: se nombra la recta con una segunda fórmula (`$r$: $…$`).
+- Cuatro pasos bajaban de 13 px a 375 px: van en dos filas con `gathered`.
+- Las figuras prestadas de 4.º tienen la «y» del eje pegada arriba y sus números no son los del problema (son ilustraciones de la idea); no se han tocado.
+- En el haz, Q se oculta hasta predecir: con la recta a la vista, la predicción sería obvia.
+- Los consejos de la carrera son texto plano: «2k» seguido de letra lo caza el test de sufijos vascos, así que se escribe «2 · k».
+
+## Publicación
+
+Pendiente: la sesión principal la fusiona en `main` y la publica cuando el dueño dé el visto bueno.
