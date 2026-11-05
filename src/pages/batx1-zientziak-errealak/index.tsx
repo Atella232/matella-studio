@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachRealsChallenges, bachRealsDiagnostic, bachRealsExerciseBank, bachRealsPractice } from './content'
 import { BachRealsHeroArt } from './figures'
+import { BachRealsLaboratory } from './lab'
+import { bachRealsLabChallengeIds, bachRealsLabToolForTopic, bachRealsLabTools } from './lab/labTools'
 import { bachRealsStages, bachRealsTopics } from './lessons'
 
 const errealakBatx1zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const errealakBatx1zUnit: UnitDefinition = {
     guidedPractice: bachRealsPractice,
     exerciseBank: bachRealsExerciseBank,
     challenges: bachRealsChallenges,
+    lab: {
+        description: {
+            eu: `${bachRealsLabTools.length} tresna, erronkekin: distantzia zuzenean, kalkulu-erregela eta errorearen banda, berriak; eta 4. DBHko Pitagorasen eraikitzailea, tarteak, biribiltzea, faktoreak ateratzea, indize komuna, konjokatua, oinarri-aldaketa eta Tartaglia.`,
+            es: `${bachRealsLabTools.length} herramientas con retos: la distancia en la recta, la regla de cálculo y la banda del error, nuevas; y de 4.º ESO, el constructor de Pitágoras, los intervalos, el redondeo, sacar factores, el índice común, el conjugado, el cambio de base y Tartaglia.`,
+            en: `${bachRealsLabTools.length} tools with challenges: distance on the line, the slide rule and the error band, new; and from 4th ESO, the Pythagoras builder, intervals, rounding, taking factors out, the common index, the conjugate, change of base and Tartaglia.`,
+            ar: `${bachRealsLabTools.length} أداة مع تحديات: المسافة على المستقيم ومسطرة الحساب وشريط الخطأ، وهي جديدة؛ ومن الصف الرابع: باني فيثاغورس والفترات والتدوير وإخراج العوامل والدليل المشترك والمرافق وتغيير الأساس ومثلث تارتاليا.`
+        },
+        progressIds: bachRealsLabChallengeIds,
+        toolForTopic: bachRealsLabToolForTopic,
+        render: (props) => <BachRealsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Emaitza tarte, multzo edo erradikal bat bada, eskatzen den zenbakia bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si el resultado es un intervalo, un conjunto o un radical, solo el número que se pide.', en: 'Write a number: 5, −3, 1.5 or 3/2. If the result is an interval, a set or a radical, only the number asked for.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كانت النتيجة فترة أو مجموعة أو جذرًا فاكتب العدد المطلوب فقط.' },
         defaultForm: 'any',
