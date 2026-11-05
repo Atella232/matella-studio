@@ -140,7 +140,8 @@ test('proportzionaltasuna 3. DBH: every answer appears in its worked explanation
     for (const section of realsExerciseBank) for (const item of section.items) if (item.answer) assert.ok(shows(item.solution.es, item.answer.expected), `bank ${item.id}`)
 })
 
-const lessonsSource = readFileSync(new URL('../src/pages/dbh3-proportzionaltasuna/lessons.tsx', import.meta.url), 'utf8').replace(/\\\\/g, '\\')
+// The lessons, with what they tell (lessonTexts.ts) and their mistakes and questions (lessonChecks.ts)
+const lessonsSource = ['lessons.tsx', 'lessonTexts.ts', 'lessonChecks.ts'].map((file) => readFileSync(new URL(`../src/pages/dbh3-proportzionaltasuna/${file}`, import.meta.url), 'utf8')).join('\n').replace(/\\\\/g, '\\')
 
 test('proportzionaltasuna 3. DBH: fifteen lessons in five stages, every formula renders', () => {
     const ids = [...lessonsSource.matchAll(/^ {8}id: '([a-z-]+)',\n {8}stage: '([a-z]+)'/gm)]
