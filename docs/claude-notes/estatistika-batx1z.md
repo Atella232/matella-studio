@@ -35,6 +35,16 @@ Quinta unidad de 1.º Ciencias (curso `batx1-zientziak`, tema `estadistica`), se
 - **Trucos:** en una lectura de LaTeX, nada de «:» (MathText lo convierte en ÷): `\to`. En euskera, «0 eta 50 artean», no «0tik 50era».
 - **Revisión:** las 14 herramientas a 375 px en eu, es y ar con la predicción hecha: sin desbordes ni textos que se pisen o se salgan del tablero.
 
-## En curso
+## Fase 4: juegos (commit 527f19a5)
 
-- Siguiente: fase 4, juegos (J1 «¿Quién destaca más?», J2 «¿Qué histograma?», J4 detective, J5 carrera, memoria y «Construye el diagrama de caja» de 4.º con niveles nuevos; ids 1144xx–1148xx).
+- **Propios:**
+  - `standout` «¿Quién destaca más?» (`games/standout.ts`, niveles 114501–114503): dos notas, después tiempos (gana la z más negativa) y tres notas; en 4 de las 6 rondas el mejor resultado bruto no es el que más destaca. Todo en décimas para que z sea exacta.
+  - `histogram` «¿Qué histograma?» (`games/whichHistogram.ts`, 114601–114603): tres diagramas de diez datos con formas simétricas; mayor (o menor) σ, mayor CV con las medias movidas (la mayor σ no siempre es el mayor CV) y un x̄ y una σ dados con dos señuelos (misma media, misma σ).
+  - `detective` (`games/detective.ts`, 114701–114703): marca de clase, mediana sin ordenar, dividir entre el número de valores, el dato que falta como media; posición no entera redondeada hacia abajo, límite sin el 1,5, varianza sin − x̄², CV al revés; z entre σ², banda con σ², sumar cambia σ, y en tiempos la z más alta como la mejor.
+- **Carrera** (`games/race.ts`, 114401–114405): cinco circuitos con 15 tipos de pregunta; los percentiles nunca caen en posición entera y la mediana se pregunta con N impar.
+- **Memoria** (`games/boards.ts`, 114801–114803): datos ↔ media, (x − x̄)/σ con números ↔ z, x̄ y σ ↔ CV.
+- **Prestado:** `box` «Construye el diagrama de caja» de 4.º con niveles 114811–114813. Ojo: sus niveles con N par usan la regla de la web (media de dos datos) en posiciones enteras.
+- **Trucos:** en la memoria, «x = 5 / x̄ = 6, σ = 1» no cabía en la tarjeta a 375 px: se escribe `\frac{5-6}{1}`. El evaluador de los tests no lee `\frac` con `{,}` dentro: la memoria cambia `{,}` por `.` antes de evaluar.
+- **Revisión:** a 375 px en eu, es y ar, el centro de juegos y los seis juegos con sus niveles (respondiendo): sin desbordes ni LaTeX sin dibujar.
+
+**Cierre:** 2253 tests, lint y build en verde; inventario OK (3 juegos y 3 herramientas propios). Revisado a 375 px en eu, es y ar: las 16 lecciones, las 14 herramientas, los juegos, práctica, ejercicios, retos, diagnóstico y portada. Hoja de euskera hecha con `hoja-revision.mjs` (fuera del repositorio) y mandada al dueño. Pendiente de decidir con el dueño: la regla de percentiles (ver fase 1+2).
