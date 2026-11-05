@@ -170,7 +170,7 @@ export const courses: Course[] = [
       { id: 'vectores', name: 'Vectores', nameEu: 'Bektoreak', nameAr: 'المتجهات', nameEn: 'Vectors', icon: '➡️' },
       { id: 'geometria-analitica', name: 'Geometría Analítica', nameEu: 'Geometria Analitikoa', nameAr: 'الهندسة التحليلية', nameEn: 'Analytic Geometry', icon: '📏' },
       { id: 'conicas', name: 'Lugares Geométricos y Cónicas', nameEu: 'Leku Geometrikoak eta Konikak', nameAr: 'المحلات الهندسية والقطوع المخروطية', nameEn: 'Loci and Conic Sections', icon: '⭕' },
-      { id: 'funciones', name: 'Funciones Elementales', nameEu: 'Funtzio Elementalak', nameAr: 'الدوال الأساسية', nameEn: 'Elementary Functions', icon: '📈' },
+      { id: 'funciones', name: 'Funciones Elementales', nameEu: 'Funtzio Elementalak', nameAr: 'الدوال الأساسية', nameEn: 'Elementary Functions', icon: '📈', active: true },
       { id: 'limites-continuidad', name: 'Límites y Continuidad', nameEu: 'Limiteak eta Jarraitutasuna', nameAr: 'النهايات والاتصال', nameEn: 'Limits and Continuity', icon: '→' },
       { id: 'derivadas', name: 'Derivadas', nameEu: 'Deribatuak', nameAr: 'المشتقات', nameEn: 'Derivatives', icon: '📉' },
       { id: 'aplicaciones-derivada', name: 'Aplicaciones de la Derivada', nameEu: 'Deribatuaren Aplikazioak', nameAr: 'تطبيقات المشتقة', nameEn: 'Applications of the Derivative', icon: '⛰️' },
