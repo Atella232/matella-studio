@@ -118,7 +118,8 @@ test('bidimentsionala batx1 z: every worked equality with numbers is right', () 
     let checked = 0
     for (const text of texts) {
         for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) {
-            for (const part of formula.split(/\\qquad|\\quad|\\ \\to\\ |\\to|,\\ /)) {
+            // Rows of a gathered block are equalities of their own
+            for (const part of formula.replace(/\\(?:begin|end)\{gathered\}/g, '').split(/\\\\|\\qquad|\\quad|\\ \\to\\ |\\to|,\\ /)) {
                 const values = part.split(/\\le|\\ge|\\neq|<|>|\\approx/)[0].split('=').map((side) => evaluate(side)).filter((value): value is number => value !== null)
                 if (values.length < 2) continue
                 assert.ok(values.every((value) => near(value, values[0])), `${part} → ${values.join(' / ')}`)

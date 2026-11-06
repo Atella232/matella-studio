@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { bivarChallenges, bivarDiagnostic, bivarExerciseBank, bivarPractice } from './content'
 import { BivariateHeroArt } from './figures'
+import { BivarGames } from './games'
+import { BIVAR_GAME_RECORDS_KEY, bivarGameProgressIds } from './games/info'
 import { BivarLaboratory } from './lab'
 import { bivarLabChallengeIds, bivarLabToolForTopic, bivarLabTools } from './lab/labTools'
 import { bivarStages, bivarTopics } from './lessons'
@@ -37,6 +39,17 @@ const bidimentsionalaBatx1zUnit: UnitDefinition = {
         progressIds: bivarLabChallengeIds,
         toolForTopic: bivarLabToolForTopic,
         render: (props) => <BivarLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko: lasterketa, kobariantzaren zeinua, zein zuzen, bi aldagaien detektibea eta memoria, berriak; eta 4. DBHko asmatu korrelazioa.',
+            es: 'Seis juegos: carrera, el signo de la covarianza, ¿qué rectas?, detective de dos variables y memoria, nuevos; y de 4.º ESO, adivina la correlación.',
+            en: 'Six games: race, the sign of the covariance, which lines?, two-variable detective and memory, new; and from 4th ESO, guess the correlation.',
+            ar: 'ست ألعاب: السباق وإشارة التغاير وأي مستقيمين ومخبر المتغيرين والذاكرة، وهي جديدة؛ ومن الصف الرابع: خمّن الارتباط.'
+        },
+        progressIds: bivarGameProgressIds,
+        recordsKey: BIVAR_GAME_RECORDS_KEY,
+        render: (props) => <BivarGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −2, 0,15 edo 1/3.', es: 'Escribe un número: 5, −2, 0,15 o 1/3.', en: 'Write a number: 5, −2, 0.15 or 1/3.', ar: 'اكتب عددًا: 5 أو ⁦−2⁩ أو 0.15 أو 1/3.' },
