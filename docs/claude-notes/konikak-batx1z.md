@@ -67,5 +67,8 @@ Tercera unidad del bloque Geometría (reparto en paralelo de 1.º Ciencias, ver 
 
 ## Publicación
 
-- Pendiente: la publica la sesión principal. La rama `feat/konikak-batx1z` va encima de `feat/geometria-batx1z` (y esta, de `feat/bektoreak-batx1z`): fusionarla trae las tres unidades.
 - Registro: `courses.ts` (`active: true` en la línea de `conicas`), `router/index.tsx` (una línea `lazy` tras la de Geometría y un bloque de ruta tras el de `geometria-analitica`) y `paths.ts` (ruta añadida al final de la línea única: choque trivial).
+
+## Publicación
+
+Publicada en matella.net el 2026-11-06 junto con Estadística bidimensional y Aplicaciones de la derivada (`main` 5cec556, bundle `index-DOvfCVKR.js`). Al fusionar solo chocaron las líneas de registro del router y de `paths.ts`; `courses.ts` se resolvió a mano. Antes de publicar: 2607 tests, lint y build en verde, y sin choques de claves de guardado ni de CSS con los otros temas. Comprobado en vivo a 375 px en eu, es y ar (portada, tres lecciones, laboratorio y juegos): sin desbordes, sin errores de KaTeX y sin errores en la consola.

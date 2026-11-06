@@ -143,6 +143,7 @@ En la columna «Capítulos», S es Santillana y A es Anaya. «Solo S» o «solo 
 - **Publicado el 2026-11-05,** junto con la primera unidad, Números reales de 1.º Ciencias: `main` 3be8b8e, bundle `index-ZB994Q3f.js`. Ver `errealak-batx1z.md`.
 - 1.º Ciencias publicadas el 2026-11-05: Números reales, Sucesiones y Ecuaciones e inecuaciones (ver sus notas).
 - **2026-11-06: nueve temas más de 1.º Ciencias publicados a la vez** (`main` 27c197e, bundle `index-7UBtIGbr.js`): Resolución de triángulos, Fórmulas y funciones trigonométricas, Vectores, Geometría analítica, Funciones elementales, Límites y continuidad, Derivadas, Sistemas y Estadística unidimensional. Se fusionaron las cuatro ramas finales de cada bloque (`feat/trigonometria-`, `feat/geometria-`, `feat/deribatuak-` y `feat/estatistika-batx1z`), que ya traen los temas anteriores. Ojo al fusionar: el arreglo automático de `courses.ts` repitió líneas y hubo que dejarlas a mano. Ver la tabla del reparto.
+- **2026-11-06, segunda tanda: Cónicas, Estadística bidimensional y Aplicaciones de la derivada** (`main` 5cec556, bundle `index-DOvfCVKR.js`). Con ellas, 15 de los 17 temas de 1.º Ciencias están en la web. El dueño eligió la regla de percentiles de 4.º para Estadística (la que ya usaba la web) y confirmó ahurra (∪) y ganbila (∩). Quedan Números complejos (a medias) e Integrales (terminado en `feat/integralak-batx1z`, va encima de Aplicaciones, sin publicar).
 
 ## Reparto en paralelo de 1.º Ciencias (2026-11-05)
 
@@ -162,13 +163,13 @@ El dueño aceptó hacer los 14 temas que quedan en **4 sesiones a la vez, una po
 | Trigonometría | `numeros-complejos` | `konplexuak` | 104000–104999 | A medias (3 de 15 lecciones) |
 | Geometría | `vectores` | `bektoreak` | 105000–105999 | Publicado 2026-11-06 |
 | Geometría | `geometria-analitica` | `geometria` | 106000–106999 | Publicado 2026-11-06 |
-| Geometría | `conicas` | `konikak` | 107000–107999 | Laboratorio hecho, faltan juegos |
+| Geometría | `conicas` | `konikak` | 107000–107999 | Publicado 2026-11-06 |
 | Análisis | `funciones` | `funtzioak` | 108000–108999 | Publicado 2026-11-06 |
 | Análisis | `limites-continuidad` | `limiteak` | 109000–109999 | Publicado 2026-11-06 |
 | Análisis | `derivadas` | `deribatuak` | 110000–110999 | Publicado 2026-11-06 |
-| Análisis | `aplicaciones-derivada` | `aplikazioak` | 111000–111999 | Propuesta, espera elección |
-| Análisis | `integrales` | `integralak` | 112000–112999 | Sin empezar |
+| Análisis | `aplicaciones-derivada` | `aplikazioak` | 111000–111999 | Publicado 2026-11-06 |
+| Análisis | `integrales` | `integralak` | 112000–112999 | Terminado, sin publicar |
 | Álgebra y estadística | `sistemas` | `sistemak` | 113000–113999 | Publicado 2026-11-06 |
 | Álgebra y estadística | `estadistica` | `estatistika` | 114000–114999 | Publicado 2026-11-06 |
-| Álgebra y estadística | `estadistica-bidimensional` | `bidimentsionala` | 115000–115999 | Fases 1+2 hechas |
+| Álgebra y estadística | `estadistica-bidimensional` | `bidimentsionala` | 115000–115999 | Publicado 2026-11-06 |
 

@@ -82,7 +82,11 @@ Es la séptima unidad de Bachillerato y la cuarta del bloque Análisis: curso `b
 - **Comprobado:** 2318 tests, lint y build en verde; inventario OK (3 juegos propios más el detective; 4 herramientas propias: el script cuenta 5 porque toma como propia la gráfica de f′, que viene de Derivadas).
 - **Revisión a 375 px en eu, es y ar:** lecciones (con las figuras ampliadas), diagnóstico, práctica, retos, banco, las 6 herramientas y los 6 juegos.
 - **Hoja de euskera:** `aplikazioak-batx1z-euskera.html` en la carpeta de notas compartidas de la sesión principal, con `--herramientas sign,curvature,box,layers --juegos updown,extrema,shape,detective`. Como en las anteriores, no lleva los retos fijos del laboratorio ni `content.ts`.
-- **Pendiente del dueño:** confirmar ahurra (∪) y ganbila (∩) en euskera. Si es al revés, basta cambiar `ahur|ganbil` en la carpeta (lecciones, contenido, laboratorio y juegos).
+- **Euskera confirmado por el dueño (2026-11-06):** ahurra (∪) y ganbila (∩). Si algún día cambia, basta buscar `ahur|ganbil` en la carpeta (lecciones, contenido, laboratorio y juegos).
 - **Portada:** los puntos rojo y verde están en la cima y el valle exactos de la curva; la tarjeta dice «f″ > 0 → ∪» y «f″ < 0 → ∩» por separado (antes parecía una unión de conjuntos).
 - **Derivadas, arreglado aquí:** el detective de Derivadas también se salía a 375 px; se acortaron sus líneas (ver su nota).
 - **Commits:** 7e9127a (fases 1+2), 62bb3e7 (fase 3), 233f490 (fase 4), 8ec84ac (nota) y el de la portada y el detective de Derivadas.
+
+## Publicación
+
+Publicada en matella.net el 2026-11-06 junto con Cónicas y Estadística bidimensional (`main` 5cec556, bundle `index-DOvfCVKR.js`). Al fusionar solo chocaron las líneas de registro del router y de `paths.ts`, y la nota de Derivadas; `courses.ts` se unió solo. Antes de publicar: 2607 tests, lint y build en verde, y sin choques de claves de guardado ni de CSS con los otros temas. Comprobado en vivo a 375 px en eu, es y ar (portada, tres lecciones, laboratorio y juegos): sin desbordes, sin errores de KaTeX y sin errores en la consola. Con ella salieron también los arreglos de Derivadas (detective a 375 px y la frase de `secant` en euskera). Integrales (`feat/integralak-batx1z`) va encima de esta rama y no se ha publicado.

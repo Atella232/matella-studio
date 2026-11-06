@@ -51,3 +51,7 @@ Sexta unidad de 1.º Ciencias (curso `batx1-zientziak`, tema `estadistica-bidime
 - **Revisión:** a 375 px en eu, es y ar, el centro de juegos y los seis juegos con sus niveles (respondiendo), las cinco secciones (portada, diagnóstico, práctica, ejercicios con todas las resoluciones abiertas y retos): sin desbordes ni fórmulas que se deslicen.
 
 **Cierre:** 2289 tests, lint y build en verde; inventario OK (3 juegos y 3 herramientas propios). Revisado a 375 px en eu, es y ar: las 16 lecciones con todos los pasos abiertos, las 5 herramientas antes y después de predecir, los 6 juegos respondiendo, portada, diagnóstico, práctica, ejercicios (con todas las resoluciones) y retos. Hoja de euskera hecha con `hoja-revision.mjs` (fuera del repositorio) y mandada al dueño. Pendiente para más adelante: la versión de Sociales del tema (línea de `batx1-gizarte` en `courses.ts`, sin tocar).
+
+## Publicación
+
+Publicada en matella.net el 2026-11-06 junto con Cónicas y Aplicaciones de la derivada (`main` 5cec556, bundle `index-DOvfCVKR.js`). Al fusionar solo chocaron las líneas de registro del router y de `paths.ts`, y la nota de Estadística (las dos ramas apuntaban la misma decisión de los percentiles: se quedó la de `main`); `courses.ts` se unió solo. Antes de publicar: 2607 tests, lint y build en verde, y sin choques de claves de guardado ni de CSS con los otros temas. Comprobado en vivo a 375 px en eu, es y ar (portada, tres lecciones, laboratorio y juegos): sin desbordes, sin errores de KaTeX y sin errores en la consola.
