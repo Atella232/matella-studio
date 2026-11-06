@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachDerivativesChallenges, bachDerivativesDiagnostic, bachDerivativesExerciseBank, bachDerivativesPractice } from './content'
 import { BachDerivativesHeroArt } from './figures'
+import { BachDerivativesLaboratory } from './lab'
+import { bachDerivativesLabChallengeIds, bachDerivativesLabToolForTopic, bachDerivativesLabTools } from './lab/labTools'
 import { bachDerivativesStages, bachDerivativesTopics } from './lessons'
 
 const deribatuakBatx1zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const deribatuakBatx1zUnit: UnitDefinition = {
     guidedPractice: bachDerivativesPractice,
     exerciseBank: bachDerivativesExerciseBank,
     challenges: bachDerivativesChallenges,
+    lab: {
+        description: {
+            eu: `${bachDerivativesLabTools.length} tresna, erronkekin: ebakitzailetik zuzen ukitzailera, deribagarria hemen?, f′ funtzioaren grafikoa eta makinen katea, berriak; 4. DBHko batez besteko aldakuntza-tasa; eta Funtzio elementaletako bi makina segidan.`,
+            es: `${bachDerivativesLabTools.length} herramientas con retos: de la secante a la tangente, ¿derivable aquí?, la gráfica de f′ y la cadena de máquinas, nuevas; la tasa de variación media de 4.º ESO; y las dos máquinas en cadena de Funciones elementales.`,
+            en: `${bachDerivativesLabTools.length} tools with challenges: from the secant to the tangent, differentiable here?, the graph of f′ and the chain of machines, new; the average rate of change from 4th ESO; and the two machines in a row from Elementary functions.`,
+            ar: `${bachDerivativesLabTools.length} أدوات مع تحديات: من القاطع إلى المماس، وقابلة للاشتقاق هنا؟، ورسم f′، وسلسلة الآلات، وهي جديدة؛ ومعدل التغير المتوسط من الصف الرابع؛ والآلتان المتتاليتان من الدوال الأساسية.`
+        },
+        progressIds: bachDerivativesLabChallengeIds,
+        toolForTopic: bachDerivativesLabToolForTopic,
+        render: (props) => <BachDerivativesLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },
         defaultForm: 'any',

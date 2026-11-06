@@ -52,7 +52,18 @@ Es la sexta unidad de Bachillerato y la tercera del bloque Análisis: curso `bat
 - **Revisión a 375 px:** las 15 lecciones en eu, es y ar sin desbordes ni fórmulas encogidas (la del desarrollo en `definition` va en dos filas con `aligned`), y las 15 figuras sin textos fuera ni encima de otros. En `quotient` y `trig` la figura sale después de los pasos.
 - **Colores de las figuras:** cada etapa pinta `--stage` de su color, así que una segunda curva no puede ser `--success` en la etapa verde ni `--second` en la coral: `ln x` va en violeta propio, `cos x` en gris y la tangente del cociente en verde.
 
+**Fase 3, laboratorio (`lab/`):**
+- **Herramientas propias (4):**
+  - `secant` «De la secante a la tangente» (`secant.ts`, ids 110101–110105): x², x³, √x y sin x; P fijo, Q a distancia h = 1, 0,5, 0,1, 0,01 o 0,001. Predicción: ¿la tangente es menos empinada, igual o más que la secante con h = 1? ▶ acerca Q.
+  - `smooth` «¿Derivable aquí?» (`smooth.ts`, ids 110301–110305): trozo x², x³, 4 − x² o x³ − 3x para x < 1 y la recta mx + n para x ≥ 1; dice salto, pico o suave. Predicción: ¿la recta que lo hace derivable baja, es horizontal o sube? ▶ pasea una tangente por el trozo y la recta.
+  - `slope-graph` «La gráfica de f′» (`slopeGraph.ts`, ids 110201–110205): cinco funciones (dos polinomios, una colina, sin x y eˣ); la sonda recorre f y abajo se dibuja f′. Predicción: en el punto marcado, ¿la tangente baja, es horizontal o sube?
+  - `chain` «La cadena de máquinas» (`chain.ts`, ids 110351–110355): u = 2x, x + 1, x² o x/2 y y = u², u³, 3u o u/2; un trozo Δx se estira g′ y luego h′ veces (barras). Predicción: en x = 1, ¿el trozo final es más corto, igual o más largo?
+- **Prestadas (2), con sus ids:** `rate` de 4.º (T.V.M., `RateTool` de 4.º aplicadas, ficha de 4.º académicas) y `composition` de Funciones de 1.º (dos máquinas en cadena).
+- **Componentes:** `BachDerivativesTools.tsx` (copia `curvePath`, `Grid` y `useClip` de Limiteak, que no los exporta), `index.tsx` con `BachDerivativesLaboratory`, `labTools.ts`.
+- **Test:** `tests/deribatuak-batx1z-lab.test.ts` (además comprueba numéricamente que cada derivada es la pendiente de su función y que la regla de la cadena coincide con la pendiente de la compuesta).
+- **Revisión a 375 px:** las 6 herramientas en eu, es y ar, antes y después de predecir: sin desbordes ni textos fuera del tablero (en árabe, el falso aviso del título «y» de la herramienta prestada de 4.º).
+
 ## En curso
 
-- Fase 1+2 terminada (commit en esta rama). Siguiente: fase 3, el laboratorio (L1, L3, L4, L5 propias y las dos prestadas, ids 1101xx–1103xx).
-- Después: fase 4 (juegos J1, J2, J4, J5, carrera y memoria) y el cierre.
+- Fases 1+2 y 3 terminadas (commits en esta rama). Siguiente: fase 4, los juegos (J1 «¿Qué pendiente?», J2 «Empareja f y f′», J4 «Tangente exacta», J5 detective, carrera y memoria; ids 110401–110899).
+- Después: el cierre (inventario, hoja de euskera, nota sin «En curso»).
