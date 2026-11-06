@@ -40,7 +40,7 @@ export const bachDerivativesLabTools: BachDerivativesLabTool[] = [
         lessonTopic: 'derivative-point',
         title: say('Ebakitzailetik zuzen ukitzailera', 'De la secante a la tangente', 'من القاطع إلى المماس', 'From the secant to the tangent'),
         observe: say(
-            'Q puntua P puntura hurbiltzean, ebakitzaileak biratu egiten du, eta haren malda gero eta gehiago hurbiltzen da balio batera: zuzen ukitzailearen malda, f′(a). Ganbila den kurban, ukitzailea ebakitzailea baino maldatsu gutxiago da; konkaboan, gehiago.',
+            'Q puntua P puntura hurbiltzean, ebakitzaileak biratu egiten du, eta haren malda gero eta gehiago hurbiltzen da balio batera: zuzen ukitzailearen malda, f′(a). Gorantz irekitzen den kurban, zuzen ukitzailea ebakitzailea baino maldatsu gutxiago da; beherantz irekitzen denean, maldatsuago.',
             'Al acercar Q a P, la secante gira y su pendiente se acerca cada vez más a un valor: la pendiente de la tangente, f′(a). En una curva que se abre hacia arriba, la tangente es menos empinada que la secante; si se abre hacia abajo, más.',
             'عند تقريب Q من P يدور القاطع ويقترب ميله شيئًا فشيئًا من قيمة: ميل المماس f′(a). وفي منحنٍ مفتوح إلى الأعلى يكون المماس أقل انحدارًا من القاطع، وفي المفتوح إلى الأسفل أكثر.',
             'As Q moves towards P, the secant turns and its slope gets closer and closer to one value: the slope of the tangent, f′(a). On a curve that opens upwards the tangent is less steep than the secant; on one that opens downwards, steeper.'

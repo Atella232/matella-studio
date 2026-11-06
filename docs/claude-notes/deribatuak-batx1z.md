@@ -90,3 +90,7 @@ Es la sexta unidad de Bachillerato y la tercera del bloque Análisis: curso `bat
 ## Publicación
 
 Publicada en matella.net el 2026-11-06 junto con otros ocho temas de 1.º Ciencias (`main` 27c197e, bundle `index-7UBtIGbr.js`). Al fusionar solo chocaron `courses.ts`, el router y `paths.ts`, en las líneas de registro. Antes de publicar: 2501 tests, lint y build en verde, y sin choques de ids, claves de guardado ni CSS con los otros temas. Comprobado en vivo a 375 px en eu, es y ar (portada, tres lecciones, laboratorio y juegos): sin desbordes, sin errores de KaTeX y sin errores en la consola.
+
+**Arreglos hechos desde Aplicaciones de la derivada (rama `feat/aplikazioak-batx1z`, 2026-11-06):**
+- **Detective a 375 px:** varias líneas se salían de la pantalla (hasta 323 px, y caben unos 255). Ahora ninguna pasa de 250 px: `\quad` en vez de `\qquad`, sin derivadas repetidas en la primera línea del producto y del cociente, arreglos cortos y sin `f((−2))` (ya no se usa `paren` dentro de `f(…)`).
+- **Herramienta `secant`, frase en euskera:** decía «Ganbila den kurban… konkaboan», con ganbila = ∪, al revés que la unidad de Aplicaciones. Ahora dice «gorantz / beherantz irekitzen den», como el castellano. La hoja de euskera enviada para Derivadas tiene todavía la frase vieja.

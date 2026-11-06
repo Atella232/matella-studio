@@ -1,0 +1,11 @@
+/* Sube o baja, Caza los extremos and ¿∪ o ∩? (Deribatuaren aplikazioak, Batxilergoa 1 · Zientziak) */
+.fraction-v2-games-card[data-game="updown"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="extrema"] { --game-tint: var(--coral-tint, #f6d5cc); }
+.fraction-v2-games-card[data-game="shape"] { --game-tint: var(--mustard-tint, #fbebc0); }
+
+.bach-app-strip-box { width: 100%; max-width: 360px; margin: 8px auto 0; }
+.bach-app-strip { display: block; width: 100%; height: auto; }
+
+.bach-app-shapes button { font-size: 18px; font-weight: 700; }
+
+.bach-app-kinds { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; }
