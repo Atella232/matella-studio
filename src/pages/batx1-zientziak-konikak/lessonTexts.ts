@@ -31,7 +31,7 @@ export const bachConicsLessonTexts: Record<BachConicsTopicId, LessonTexts> = {
             'To find the equation of a locus, call any point $P(x,y)$ and write the condition with coordinates. If there are distances, square them to get rid of the roots. For the perpendicular bisector of $AB$ the condition is $d(P,A)=d(P,B)$: when you expand, $x^2$ and $y^2$ cancel and a line is left.'
         ),
         examplePrompt: say('Aurkitu $A(-3,0)$ eta $B(1,4)$ muturreko zuzenkiaren erdibitzailea, leku geometriko gisa.', 'Halla la mediatriz del segmento de extremos $A(-3,0)$ y $B(1,4)$ como lugar geométrico.', 'أوجد محور القطعة التي طرفاها $A(-3,0)$ و$B(1,4)$ بوصفه محلًّا هندسيًّا.', 'Find the perpendicular bisector of the segment with end points $A(-3,0)$ and $B(1,4)$ as a locus.'),
-        example: same('$(x+3)^2+y^2=(x-1)^2+(y-4)^2\\ \\to\\ x+y-1=0$'),
+        example: same('$\\begin{gathered}(x+3)^2+y^2=(x-1)^2+(y-4)^2\\\\ \\to\\ x+y-1=0\\end{gathered}$'),
         exampleAnswer: say('$x+y-1=0$ zuzena, $(-1,2)$ erdiko puntutik pasatzen dena.', 'La recta $x+y-1=0$, que pasa por el punto medio $(-1,2)$.', 'المستقيم $x+y-1=0$ الذي يمر بالمنتصف $(-1,2)$.', 'The line $x+y-1=0$, which passes through the midpoint $(-1,2)$.')
     },
     'angle-bisectors': {
@@ -49,7 +49,7 @@ export const bachConicsLessonTexts: Record<BachConicsTopicId, LessonTexts> = {
             'A point $P(x,y)$ is on a bisector if it is the same distance from both lines. With the distance formula, the condition has two absolute values. Since $|u|=|v|$ means $u=v$ or $u=-v$, two lines come out: the two bisectors, perpendicular to each other.'
         ),
         examplePrompt: say('Aurkitu $x-2y+3=0$ eta $2x+y-4=0$ zuzenen erdikariak.', 'Halla las bisectrices de las rectas $x-2y+3=0$ y $2x+y-4=0$.', 'أوجد منصّفي المستقيمين $x-2y+3=0$ و$2x+y-4=0$.', 'Find the bisectors of the lines $x-2y+3=0$ and $2x+y-4=0$.'),
-        example: same('$x-2y+3=\\pm(2x+y-4)\\ \\to\\ x+3y-7=0\\quad 3x-y-1=0$'),
+        example: same('$\\begin{gathered}x-2y+3=\\pm(2x+y-4)\\\\ \\to\\ x+3y-7=0\\\\ 3x-y-1=0\\end{gathered}$'),
         exampleAnswer: say('Bi zuzenek $\\sqrt{5}$ dute izendatzailean, eta sinplifikatu egiten da. Erdikariak perpendikularrak dira: $(1,3)\\cdot(3,-1)=0$.', 'Las dos rectas tienen $\\sqrt{5}$ en el denominador, que se simplifica. Las bisectrices son perpendiculares: $(1,3)\\cdot(3,-1)=0$.', 'للمستقيمين $\\sqrt{5}$ في المقام فيُختصر. والمنصّفان متعامدان: $(1,3)\\cdot(3,-1)=0$.', 'Both lines have $\\sqrt{5}$ in the denominator, which cancels. The bisectors are perpendicular: $(1,3)\\cdot(3,-1)=0$.'),
         why: {
             text: say(
@@ -77,7 +77,7 @@ export const bachConicsLessonTexts: Record<BachConicsTopicId, LessonTexts> = {
             { title: say('Puntu batetik', 'De un punto', 'عن نقطة', 'From a point'), text: say('Zirkunferentzia bat: zentroa puntua da, eta erradioa, $d$.', 'Una circunferencia de centro el punto y radio $d$.', 'دائرة مركزها النقطة ونصف قطرها $d$.', 'A circle with the point as centre and radius $d$.'), math: same('$(x-a)^2+(y-b)^2=d^2$') }
         ],
         examplePrompt: say('Aurkitu $6x-8y+5=0$ zuzenerako distantzia $3$ duten puntuen leku geometrikoa.', 'Halla el lugar de los puntos cuya distancia a la recta $6x-8y+5=0$ es $3$.', 'أوجد المحل الهندسي للنقاط التي بعدها عن المستقيم $6x-8y+5=0$ يساوي $3$.', 'Find the locus of the points whose distance from the line $6x-8y+5=0$ is $3$.'),
-        example: same('$|6x-8y+5|=30\\ \\to\\ 6x-8y-25=0\\quad 6x-8y+35=0$'),
+        example: same('$\\begin{gathered}|6x-8y+5|=30\\\\ \\to\\ 6x-8y-25=0\\\\ 6x-8y+35=0\\end{gathered}$'),
         exampleAnswer: say('Bi zuzen paralelo, alde bakoitzean $3$ unitatera: $\\sqrt{6^2+8^2}=10$.', 'Dos rectas paralelas, a $3$ unidades a cada lado: $\\sqrt{6^2+8^2}=10$.', 'مستقيمان متوازيان على بعد $3$ وحدات من كل جهة: $\\sqrt{6^2+8^2}=10$.', 'Two parallel lines, $3$ units away on each side: $\\sqrt{6^2+8^2}=10$.')
     },
 
@@ -189,7 +189,7 @@ export const bachConicsLessonTexts: Record<BachConicsTopicId, LessonTexts> = {
             'Picture a string of length $2a$ tied to two nails, the foci $F$ and $F\'$: if you pull it tight with a pencil and move it, you draw an ellipse, because $PF+PF\'$ is always $2a$. If the foci are at $(\\pm c,0)$, the reduced equation is $\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1$, where $b$ comes from $a^2=b^2+c^2$.'
         ),
         examplePrompt: say('Aurkitu $(\\pm 12,0)$ fokuak dituen eta fokuetarako distantzien batura $26$ duen elipsea.', 'Halla la elipse de focos $(\\pm 12,0)$ cuya suma de distancias a los focos es $26$.', 'أوجد القطع الناقص الذي بؤرتاه $(\\pm 12,0)$ ومجموع بعدي نقاطه عن البؤرتين $26$.', 'Find the ellipse with foci $(\\pm 12,0)$ whose sum of distances to the foci is $26$.'),
-        example: same('$a=13\\qquad b^2=169-144=25\\qquad\\frac{x^2}{169}+\\frac{y^2}{25}=1$'),
+        example: same('$\\begin{gathered}a=13\\qquad b^2=169-144=25\\\\ \\frac{x^2}{169}+\\frac{y^2}{25}=1\\end{gathered}$'),
         exampleAnswer: say('Ardatzak $(\\pm 13,0)$ eta $(0,\\pm 5)$ puntuetan ebakitzen ditu.', 'Corta a los ejes en $(\\pm 13,0)$ y $(0,\\pm 5)$.', 'يقطع المحورين في $(\\pm 13,0)$ و$(0,\\pm 5)$.', 'It cuts the axes at $(\\pm 13,0)$ and $(0,\\pm 5)$.')
     },
     'ellipse-elements': {
@@ -256,7 +256,7 @@ export const bachConicsLessonTexts: Record<BachConicsTopicId, LessonTexts> = {
             'In a hyperbola, what stays constant is not the sum but the difference of the distances to the foci: $|PF-PF\'|=2a$. That is why it has two branches, one next to each focus. Its reduced equation looks like the ellipse\'s, with a minus sign, and now the greatest is $c$: $c^2=a^2+b^2$.'
         ),
         examplePrompt: say('Aurkitu $(\\pm 13,0)$ fokuak dituen eta fokuetarako distantzien kendura $10$ duen hiperbola.', 'Halla la hipérbola de focos $(\\pm 13,0)$ cuya diferencia de distancias a los focos es $10$.', 'أوجد القطع الزائد الذي بؤرتاه $(\\pm 13,0)$ وفرق بعدي نقاطه عن البؤرتين $10$.', 'Find the hyperbola with foci $(\\pm 13,0)$ whose difference of distances to the foci is $10$.'),
-        example: same('$a=5\\qquad b^2=169-25=144\\qquad\\frac{x^2}{25}-\\frac{y^2}{144}=1$'),
+        example: same('$\\begin{gathered}a=5\\qquad b^2=169-25=144\\\\ \\frac{x^2}{25}-\\frac{y^2}{144}=1\\end{gathered}$'),
         exampleAnswer: say('Erpinak $(\\pm 5,0)$ dira; kurbak ez du ordenatu-ardatza ebakitzen.', 'Los vértices son $(\\pm 5,0)$; la curva no corta al eje de ordenadas.', 'الرأسان $(\\pm 5,0)$؛ والمنحنى لا يقطع محور الصادات.', 'The vertices are $(\\pm 5,0)$; the curve does not cut the vertical axis.')
     },
     'hyperbola-asymptotes': {
@@ -275,7 +275,7 @@ export const bachConicsLessonTexts: Record<BachConicsTopicId, LessonTexts> = {
             'Draw the rectangle centred at the origin with sides $2a$ and $2b$: its diagonals are the asymptotes, $y=\\pm\\frac{b}{a}x$, and the branches hug them. The eccentricity $e=\\frac{c}{a}$ is greater than $1$, because $c>a$: the greater it is, the more open the branches are.'
         ),
         examplePrompt: say('Aurkitu $\\frac{x^2}{9}-\\frac{y^2}{9}=1$ hiperbolaren asintotak eta eszentrikotasuna.', 'Halla las asíntotas y la excentricidad de la hipérbola $\\frac{x^2}{9}-\\frac{y^2}{9}=1$.', 'أوجد مقاربي القطع الزائد $\\frac{x^2}{9}-\\frac{y^2}{9}=1$ واختلافه المركزي.', 'Find the asymptotes and the eccentricity of the hyperbola $\\frac{x^2}{9}-\\frac{y^2}{9}=1$.'),
-        example: same('$y=\\pm x\\qquad c=\\sqrt{9+9}=3\\sqrt{2}\\qquad e=\\frac{3\\sqrt{2}}{3}=\\sqrt{2}$'),
+        example: same('$\\begin{gathered}y=\\pm x\\qquad c=\\sqrt{9+9}=3\\sqrt{2}\\\\ e=\\frac{3\\sqrt{2}}{3}=\\sqrt{2}\\end{gathered}$'),
         exampleAnswer: say('Aldekidea da, $a=b$: asintotak koadranteen erdikariak dira.', 'Es equilátera, $a=b$: las asíntotas son las bisectrices de los cuadrantes.', 'إنه قائم، $a=b$: المقاربان منصّفا الأرباع.', 'It is rectangular, $a=b$: the asymptotes are the bisectors of the quadrants.'),
         why: {
             text: say(

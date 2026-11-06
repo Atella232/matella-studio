@@ -126,7 +126,8 @@ test('konikak batx1 z: every worked equality with numbers is right', () => {
         for (const [, formula] of text.matchAll(/\$([^$]+)\$/g)) {
             // Approximations (≈) and periodic decimals (\overline) are written rounded: skip them
             if (formula.includes('\\approx') || formula.includes('\\overline') || formula.includes('\\ldots')) continue
-            for (const part of formula.split(/\\qquad|\\quad|\\ \\to\\ |\\to/)) {
+            // Long worked lines come in rows (gathered): each row, and each piece of a row, is checked on its own
+            for (const part of formula.replace(/\\begin\{gathered\}|\\end\{gathered\}/g, '').split(/\\\\|\\qquad|\\quad|\\ \\to\\ |\\to/)) {
                 const values = part.replace(/^[a-z]\)\s*/, '').split('=').map(evaluate).filter((value): value is number => value !== null)
                 if (values.length < 2) continue
                 assert.ok(values.every((value) => Math.abs(value - values[0]) < 1e-9 * Math.max(1, Math.abs(values[0]))), `${part} → ${values.join(' / ')}`)

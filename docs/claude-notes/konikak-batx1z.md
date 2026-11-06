@@ -57,6 +57,14 @@ Tercera unidad del bloque Geometría (reparto en paralelo de 1.º Ciencias, ver 
 - A 375 px: la ecuación grande usa `font-size: clamp(17px, 5.2vw, 24px)` (si no, la general se partía) y las tarjetas de la memoria parten la ecuación en dos renglones con `gathered`.
 - Test `tests/konikak-batx1z-games.test.ts` (comprueba con cuentas propias cada respuesta de la carrera, de la antena, de la memoria y el centro de las ecuaciones generales).
 
-## En curso
+### Cierre (2026-11-06)
 
-- Fases 1+2, 3 y 4 hechas. Siguiente: cierre (inventario, revisión a 375 px de ejercicios en eu/es/ar, hoja de revisión del euskera, nota final).
+- `npm test` (todas), `npm run lint` y `npm run build` en verde; inventario OK (juegos propios: conic, antenna, más el detective; herramientas propias: gardener, eccentricity, directrix).
+- Revisión a 375 px en eu, es y ar: lecciones con todos los pasos abiertos, figuras (sin textos fuera del dibujo), laboratorio, juegos, práctica, retos y banco con todas las soluciones abiertas. Sin desbordes, sin errores de KaTeX y sin fórmulas por debajo de 13 px.
+- Para que nada se desplace de lado en el móvil: `rows()` en `content.ts` parte en renglones (`gathered`) las explicaciones y soluciones largas (en cada `\qquad`/`\quad`, y en las flechas de las líneas de más de 28 caracteres); tres explicaciones van partidas a mano en el signo igual; en las lecciones, seis ejemplos y cuatro pasos van en renglones. El test de contenido revisa cada renglón por separado.
+- Hoja de revisión del euskera: `konikak-batx1z-revision.html` en la carpeta compartida de la sesión (enviada al dueño).
+
+## Publicación
+
+- Pendiente: la publica la sesión principal. La rama `feat/konikak-batx1z` va encima de `feat/geometria-batx1z` (y esta, de `feat/bektoreak-batx1z`): fusionarla trae las tres unidades.
+- Registro: `courses.ts` (`active: true` en la línea de `conicas`), `router/index.tsx` (una línea `lazy` tras la de Geometría y un bloque de ruta tras el de `geometria-analitica`) y `paths.ts` (ruta añadida al final de la línea única: choque trivial).
