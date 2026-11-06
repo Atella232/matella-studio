@@ -169,7 +169,7 @@ export const courses: Course[] = [
       { id: 'numeros-complejos', name: 'Números Complejos', nameEu: 'Zenbaki Konplexuak', nameAr: 'الأعداد المركبة', nameEn: 'Complex Numbers', icon: 'ℂ' },
       { id: 'vectores', name: 'Vectores', nameEu: 'Bektoreak', nameAr: 'المتجهات', nameEn: 'Vectors', icon: '➡️', active: true },
       { id: 'geometria-analitica', name: 'Geometría Analítica', nameEu: 'Geometria Analitikoa', nameAr: 'الهندسة التحليلية', nameEn: 'Analytic Geometry', icon: '📏', active: true },
-      { id: 'conicas', name: 'Lugares Geométricos y Cónicas', nameEu: 'Leku Geometrikoak eta Konikak', nameAr: 'المحلات الهندسية والقطوع المخروطية', nameEn: 'Loci and Conic Sections', icon: '⭕' },
+      { id: 'conicas', name: 'Lugares Geométricos y Cónicas', nameEu: 'Leku Geometrikoak eta Konikak', nameAr: 'المحلات الهندسية والقطوع المخروطية', nameEn: 'Loci and Conic Sections', icon: '⭕', active: true },
       { id: 'funciones', name: 'Funciones Elementales', nameEu: 'Funtzio Elementalak', nameAr: 'الدوال الأساسية', nameEn: 'Elementary Functions', icon: '📈' },
       { id: 'limites-continuidad', name: 'Límites y Continuidad', nameEu: 'Limiteak eta Jarraitutasuna', nameAr: 'النهايات والاتصال', nameEn: 'Limits and Continuity', icon: '→' },
       { id: 'derivadas', name: 'Derivadas', nameEu: 'Deribatuak', nameAr: 'المشتقات', nameEn: 'Derivatives', icon: '📉' },
