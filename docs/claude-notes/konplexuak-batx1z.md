@@ -25,8 +25,15 @@ Cinco etapas y 15 lecciones:
 
 Menú: V1–V4; L1 el plano complejo, L2 multiplicar es girar, L3 las raíces forman un polígono, L4 la espiral de las potencias; M de 4.º y del tema 2; J1 dónde cae el afijo, J2 gira y estira, J3 caza las raíces, J4 detective, J5 carrera y memoria.
 
+## Diseño elegido (2026-11-06: «Las recomendadas»)
+
+V1 polar $r_\alpha$ (subíndice) y también la forma trigonométrica $r(\cos\alpha+i\sen\alpha)$; V2 respuestas numéricas (parte real o imaginaria, módulo, argumento en grados en [0°, 360°), cuántas raíces); sin V3 (familias en el plano) ni V4 (sistemas en ℂ). L1 el plano complejo (opuesto, conjugado, módulo y argumento, con predicción del cuadrante), L2 multiplicar es girar (▶), L3 las raíces forman un polígono (sin L4). M: los vectores de 4.º (suma como paralelogramo), la circunferencia de 4.º y «las soluciones dan vueltas» del tema 2. J1 dónde cae el afijo, J2 gira y estira, J3 caza las raíces, J4 detective, J5 carrera y memoria.
+
 ## En curso
 
-- Esperando la elección del dueño. No hay nada construido.
-- Siguiente paso: con su respuesta, fase 1+2 en esta rama.
+- Fase 1+2 a medias (commit WIP de esta rama): carpeta `src/pages/batx1-zientziak-konplexuak` con `text.ts` (reexporta el de trigonometria), `lessons.tsx`, `lessonTexts.ts` y `lessonChecks.ts` con solo las 3 lecciones de la etapa `binomial`, `figures.tsx` (Plane, 3 figuras y hero), `index.tsx` sin contenido, laboratorio ni juegos. Registro hecho (courses, router, paths).
+- Etapas: `binomial`, `operations`, `polar`, `turns` (antes `polar-operations`), `roots`.
+- Fallan 2 tests compartidos en la unidad: `lesson-texts` «the worked formulas add up» y «texts in four languages, same formulas, all drawn by KaTeX». Mirar el mensaje con `node --test tests/lesson-texts.test.ts 2>&1 | grep -A8 konplexu` y corregir antes de seguir.
+- Siguiente paso: arreglar esos 2 fallos; escribir las 12 lecciones que faltan (plan de lecciones, errores y «Compruébalo» arriba en la propuesta); `content.ts` (diagnóstico 104001–104008, práctica 20, retos 15, banco 50); test propio `tests/konplexuak-batx1z-content.test.ts` con un evaluador de complejos ([re, im], `i`, `\frac`, `\sqrt`, `^n`, `\cos`/`\sen` en grados y la polar `r_{α°}`).
+- Ojo con los tests compartidos: tratan `i` como una letra cualquiera. Un «Compruébalo» cuyo enunciado tenga una sola fórmula de cálculo con `i` y una respuesta de una sola fórmula falla: poner dos fórmulas en el enunciado (`${z}=…$` y `$\overline{z}$`).
 - Truco para empezar: el test de sufijos vascos confunde `$z$` con un «-z» pegado; escribir `${z}$` en los cuatro idiomas (nota compartida `basque-z-suffix-test.md`).

@@ -166,7 +166,7 @@ export const courses: Course[] = [
       { id: 'sistemas', name: 'Sistemas de Ecuaciones', nameEu: 'Ekuazio-sistemak', nameAr: 'أنظمة المعادلات', nameEn: 'Systems of Equations', icon: '📝' },
       { id: 'resolucion-triangulos', name: 'Resolución de Triángulos', nameEu: 'Triangeluen Ebazpena', nameAr: 'حل المثلثات', nameEn: 'Solving Triangles', icon: '📐', active: true },
       { id: 'funciones-trigonometricas', name: 'Fórmulas y Funciones Trigonométricas', nameEu: 'Formula eta Funtzio Trigonometrikoak', nameAr: 'الصيغ والدوال المثلثية', nameEn: 'Trigonometric Formulas and Functions', icon: '〰️', active: true },
-      { id: 'numeros-complejos', name: 'Números Complejos', nameEu: 'Zenbaki Konplexuak', nameAr: 'الأعداد المركبة', nameEn: 'Complex Numbers', icon: 'ℂ' },
+      { id: 'numeros-complejos', name: 'Números Complejos', nameEu: 'Zenbaki Konplexuak', nameAr: 'الأعداد المركبة', nameEn: 'Complex Numbers', icon: 'ℂ', active: true },
       { id: 'vectores', name: 'Vectores', nameEu: 'Bektoreak', nameAr: 'المتجهات', nameEn: 'Vectors', icon: '➡️' },
       { id: 'geometria-analitica', name: 'Geometría Analítica', nameEu: 'Geometria Analitikoa', nameAr: 'الهندسة التحليلية', nameEn: 'Analytic Geometry', icon: '📏' },
       { id: 'conicas', name: 'Lugares Geométricos y Cónicas', nameEu: 'Leku Geometrikoak eta Konikak', nameAr: 'المحلات الهندسية والقطوع المخروطية', nameEn: 'Loci and Conic Sections', icon: '⭕' },
