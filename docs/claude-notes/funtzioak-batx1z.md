@@ -85,4 +85,7 @@ Es la cuarta unidad de Bachillerato y la primera del bloque Análisis: curso `ba
 - **Revisión a 375 px en eu, es y ar:** las 15 lecciones (con los pasos y los «¿Por qué funciona?» abiertos), portada, diagnóstico, resumen, práctica, ejercicios, retos, el centro de juegos y cada juego, y las 11 herramientas. Sin desbordes, sin errores de KaTeX y sin LaTeX sin dibujar. «arcsen» sale en castellano y «arcsin», «arctg» en euskera.
 - **Textos cortados en los dibujos:** se mide con `getBBox()` cada `<text>` de los dibujos de las lecciones y de las 4 herramientas (el SVG recorta sin cambiar el ancho de la página). Salía el título «y» del eje por arriba en Stretch, Mirror, AbsoluteGraph y Stairs: el marco baja a `oy={32}`.
 - **Hoja de euskera:** `hoja-revision.mjs batx1-zientziak-funtzioak … --herramientas transform,composition,mirror,stairs --juegos race,where,order,undo,detective,memory`, mandada al dueño (fuera del repositorio).
-- **Sin publicar:** la rama `feat/funtzioak-batx1z` espera a la sesión principal, que fusiona y publica.
+
+## Publicación
+
+Publicada en matella.net el 2026-11-06 junto con otros ocho temas de 1.º Ciencias (`main` 27c197e, bundle `index-7UBtIGbr.js`). Al fusionar solo chocaron `courses.ts`, el router y `paths.ts`, en las líneas de registro. Antes de publicar: 2501 tests, lint y build en verde, y sin choques de ids, claves de guardado ni CSS con los otros temas. Comprobado en vivo a 375 px en eu, es y ar (portada, tres lecciones, laboratorio y juegos): sin desbordes, sin errores de KaTeX y sin errores en la consola.

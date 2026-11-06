@@ -83,9 +83,13 @@ Commit 37971fe.
 
 ## Cierre
 
-- Fases: 1+2 en 316a89c, 3 en 37971fe, 4 en 72fa7af. Todo en `feat/limiteak-batx1z`, sin fusionar ni publicar.
+- Fases: 1+2 en 316a89c, 3 en 37971fe, 4 en 72fa7af. Todo en `feat/limiteak-batx1z`.
 - `npm test` (2247), `npm run lint` y `npm run build` en verde; inventario OK: 3 juegos propios más el detective y 4 herramientas propias (el script dice 5 y 7 porque cuenta como propios los prestados de Segidak y Funciones).
 - Revisión a 375 px en eu, es y ar: lecciones, resumen, diagnóstico, práctica, banco, retos, las 8 herramientas y los 8 juegos.
 - Hoja de revisión del euskera enviada al dueño: `limiteak-batx1z-euskera.html` (con `hoja-revision.mjs`, herramientas y juegos propios).
 - La hoja no trae los retos fijos del laboratorio (`lens.ts`, `hole.ts`…) ni los ejercicios de `content.ts`: el script no importa esos archivos. Lo mismo pasaba en Funciones.
 - Motor común: en toda la cadena de ramas desde `main` (2ff41c2) solo cambia `src/features/unit-v2/paths.ts`, que es el registro.
+
+## Publicación
+
+Publicada en matella.net el 2026-11-06 junto con otros ocho temas de 1.º Ciencias (`main` 27c197e, bundle `index-7UBtIGbr.js`). Al fusionar solo chocaron `courses.ts`, el router y `paths.ts`, en las líneas de registro. Antes de publicar: 2501 tests, lint y build en verde, y sin choques de ids, claves de guardado ni CSS con los otros temas. Comprobado en vivo a 375 px en eu, es y ar (portada, tres lecciones, laboratorio y juegos): sin desbordes, sin errores de KaTeX y sin errores en la consola.

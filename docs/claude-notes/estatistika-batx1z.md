@@ -48,3 +48,9 @@ Quinta unidad de 1.º Ciencias (curso `batx1-zientziak`, tema `estadistica`), se
 - **Revisión:** a 375 px en eu, es y ar, el centro de juegos y los seis juegos con sus niveles (respondiendo): sin desbordes ni LaTeX sin dibujar.
 
 **Cierre:** 2253 tests, lint y build en verde; inventario OK (3 juegos y 3 herramientas propios). Revisado a 375 px en eu, es y ar: las 16 lecciones, las 14 herramientas, los juegos, práctica, ejercicios, retos, diagnóstico y portada. Hoja de euskera hecha con `hoja-revision.mjs` (fuera del repositorio) y mandada al dueño. Pendiente de decidir con el dueño: la regla de percentiles (ver fase 1+2). Los ejercicios, retos, banco, carrera y detective solo preguntan posiciones donde las dos reglas coinciden, pero la regla de la web sigue a la vista donde no coinciden: la explicación de `quartiles-percentiles`, su error típico (N = 40, Q₁ como media de los datos 10.º y 11.º), la figura prestada `QuartileRuleFigure` (12 · 0,25 = 3 → (3 + 4) : 2), la cinta de percentiles y el juego de la caja de 4.º con N par, y los límites de la caja de la herramienta `outlier` (con el dato en 30, Q₃ = 22,5 con la web y 23 con el libro).
+
+## Publicación
+
+Publicada en matella.net el 2026-11-06 junto con otros ocho temas de 1.º Ciencias (`main` 27c197e, bundle `index-7UBtIGbr.js`). Al fusionar solo chocaron `courses.ts`, el router y `paths.ts`, en las líneas de registro. Antes de publicar: 2501 tests, lint y build en verde, y sin choques de ids, claves de guardado ni CSS con los otros temas. Comprobado en vivo a 375 px en eu, es y ar (portada, tres lecciones, laboratorio y juegos): sin desbordes, sin errores de KaTeX y sin errores en la consola.
+
+Pendiente de decidir con el dueño (preguntado el 2026-11-06): la regla de percentiles, ver «Fase 1+2».

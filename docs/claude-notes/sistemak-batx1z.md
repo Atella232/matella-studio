@@ -69,3 +69,7 @@ Cuarta unidad de 1.º Ciencias (curso `batx1-zientziak`, tema `sistemas`), prime
 - **Orden de las fórmulas:** el test común compara las fórmulas de cada texto en orden; en euskera la frase tiene que nombrarlas en el mismo orden que en castellano.
 - **Nombres de los juegos en la dirección:** `zeroa`, `azken-errenkada`, `detektibea`, `memoria`, `lasterketa`, `ebaki-puntua`, `sakatu-soluzioa` (también `cero`, `ultima-fila`, `punto-de-corte`, `toca-la-solucion`).
 - **Textos sin fórmula en los juegos:** los títulos y descripciones de los niveles se dibujan como texto plano; en euskera, «0z» suelto parece un sufijo pegado: se escribe «0·z».
+
+## Publicación
+
+Publicada en matella.net el 2026-11-06 junto con otros ocho temas de 1.º Ciencias (`main` 27c197e, bundle `index-7UBtIGbr.js`). Al fusionar solo chocaron `courses.ts`, el router y `paths.ts`, en las líneas de registro. Antes de publicar: 2501 tests, lint y build en verde, y sin choques de ids, claves de guardado ni CSS con los otros temas. Comprobado en vivo a 375 px en eu, es y ar (portada, tres lecciones, laboratorio y juegos): sin desbordes, sin errores de KaTeX y sin errores en la consola.

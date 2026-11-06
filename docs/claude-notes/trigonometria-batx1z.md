@@ -69,3 +69,7 @@ V1 repaso corto y lo nuevo a fondo; V2 sec, cosec y cotg aquí; V3 ecuaciones en
 - Hoja de euskera en la carpeta de notas compartidas: `trigonometria-batx1z-revision.html`.
 - Pendientes fuera de la unidad (no tocados): la herramienta `wave` de 4.º saca «6» y «−6» 1–3 px fuera del tablero en árabe; `spokenLatex` de la memoria lee `\operatorname{cosec}` y `\sqrt{3}` tal cual.
 - Para el tema 3 (complejos): el test de sufijos vascos confunde `$z$` con un «-z» pegado; escribir `${z}$` (nota compartida `basque-z-suffix-test.md`).
+
+## Publicación
+
+Publicada en matella.net el 2026-11-06 junto con otros ocho temas de 1.º Ciencias (`main` 27c197e, bundle `index-7UBtIGbr.js`). Al fusionar solo chocaron `courses.ts`, el router y `paths.ts`, en las líneas de registro. Antes de publicar: 2501 tests, lint y build en verde, y sin choques de ids, claves de guardado ni CSS con los otros temas. Comprobado en vivo a 375 px en eu, es y ar (portada, tres lecciones, laboratorio y juegos): sin desbordes, sin errores de KaTeX y sin errores en la consola.

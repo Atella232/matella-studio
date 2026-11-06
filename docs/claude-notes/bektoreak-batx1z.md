@@ -74,4 +74,4 @@ Primera unidad del bloque Geometría (reparto en paralelo de 1.º Ciencias, ver 
 
 ## Publicación
 
-Pendiente: la sesión principal la fusiona en `main` y la publica cuando el dueño dé el visto bueno.
+Publicada en matella.net el 2026-11-06 junto con otros ocho temas de 1.º Ciencias (`main` 27c197e, bundle `index-7UBtIGbr.js`). Al fusionar solo chocaron `courses.ts`, el router y `paths.ts`, en las líneas de registro. Antes de publicar: 2501 tests, lint y build en verde, y sin choques de ids, claves de guardado ni CSS con los otros temas. Comprobado en vivo a 375 px en eu, es y ar (portada, tres lecciones, laboratorio y juegos): sin desbordes, sin errores de KaTeX y sin errores en la consola.

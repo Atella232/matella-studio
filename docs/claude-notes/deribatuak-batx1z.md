@@ -86,4 +86,7 @@ Es la sexta unidad de Bachillerato y la tercera del bloque Análisis: curso `bat
 - **Inventario:** OK (3 juegos propios más el detective; el script cuenta 5 herramientas propias porque `composition` está definida dentro de esta unidad, pero es la de Funciones: las propias de verdad son 4).
 - **Hoja de euskera:** `hoja-revision.mjs` con `--herramientas secant,smooth,slope-graph,chain --juegos slopes,match,tangent,detective`, enviada al dueño. Como en Funciones y Limiteak, no trae los retos fijos del laboratorio ni los ejercicios de `content.ts`.
 - **Motor común:** sin cambios, salvo el registro en `paths.ts`. En Limiteak solo cambia `export` en `PlotFigure`.
-- **Sin publicar:** la rama es `feat/deribatuak-batx1z`; publicar lo decide el dueño desde la sesión principal.
+
+## Publicación
+
+Publicada en matella.net el 2026-11-06 junto con otros ocho temas de 1.º Ciencias (`main` 27c197e, bundle `index-7UBtIGbr.js`). Al fusionar solo chocaron `courses.ts`, el router y `paths.ts`, en las líneas de registro. Antes de publicar: 2501 tests, lint y build en verde, y sin choques de ids, claves de guardado ni CSS con los otros temas. Comprobado en vivo a 375 px en eu, es y ar (portada, tres lecciones, laboratorio y juegos): sin desbordes, sin errores de KaTeX y sin errores en la consola.
