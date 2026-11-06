@@ -13,6 +13,20 @@ Sexta unidad de 1.º Ciencias (curso `batx1-zientziak`, tema `estadistica-bidime
 - **Santillana 1.º Bach Ciencias U14** «Estadística bidimensional» (solucionario; páginas 25, 30, 31 y 36 escaneadas y casi vacías) + **Anaya Matemáticas I Ciencias U13** «Distribuciones bidimensionales» (solucionario «Saber hacer»). Ficha fuera del repositorio, en `~/Documents/Matella-fuentes/batx1z-bidimensional/`.
 - **Solapamiento con 4.º:** 4.º académicas ya tiene nube de puntos, correlación y recta de regresión con la pendiente dada (etapa `two`); 4.º aplicadas tiene la tabla de contingencia con probabilidades. Lo nuevo de 1.º: tablas de doble entrada con marginales, condicionadas e independencia; covarianza; r calculado; recta de Y sobre X y de X sobre Y; las dos rectas (corte en (x̄, ȳ), r² = producto de pendientes, ángulo); cambio de unidades; datos agrupados en las dos variables.
 
+## Elección del dueño (2026-11-06)
+
+«Las recomendadas»: F1 (Santillana marca el orden; Anaya añade las dos rectas, el cambio de unidades y relación funcional frente a estadística), V1 (16 lecciones en 5 etapas con «Repasa antes» a 4.º), L1–L3 propias (cuadrantes, tijeras, ¿independientes?), M (de 4.º ap, «La nube, r y la recta» y «Tabla de contingencia»), J1 (signo de la covarianza), J2 (¿qué rectas?), J4 (detective) y J5 (carrera, memoria y «Adivina la correlación» de 4.º).
+
+## Fase 1+2: lecciones y contenido
+
+- **Etapas y lecciones (16):** tablas (`two-variables`, `marginal`, `conditional`, `independence`), nube (`scatter-dependence`, `quadrants`), parámetros (`covariance`, `correlation-coefficient`, `units-change`), rectas (`regression-yx`, `estimation`, `regression-xy`, `two-lines`) y problemas (`grouped-pairs`, `calculation-table`, `inverse-problems`). «¿Por qué funciona?» en independencia, covarianza, cambio de unidades, X sobre Y y las dos rectas.
+- **Cuentas comunes** en `bivariate.ts` (medias, varianzas, σxy, r, las dos rectas, independencia, corte de dos rectas, si un par de rectas es posible) y **datos de las figuras** en `data.ts`, para que los tests comprueben que cada figura dibuja los números de su lección.
+- **Figuras nuevas** (`figures.tsx`): pares contados en la tabla, márgenes, dos condicionadas en barras, tabla completada para independencia, tres nubes (funcional, fuerte negativa, sin dependencia), cuadrantes con rectángulos con signo, tabla de la covarianza, la misma nube en m y en cm, recta de Y sobre X (distancias verticales) y de X sobre Y (horizontales) con un componente, estimación dentro y fuera de los datos (datos `sunPairs` de 4.º ap), las dos rectas cortándose en (5, 10), tabla con intervalos y la tabla de cálculo. Prestada: `CorrelationFigure` (4.º ap).
+- **Notación:** σxy, σx, σy, r; pendientes $m_{yx}=\frac{\sigma_{xy}}{\sigma_x^2}$ y $m_{xy}=\frac{\sigma_{xy}}{\sigma_y^2}$; la recta de X sobre Y siempre como x = …, para que $r^2=m_{yx}\cdot m_{xy}$ sea directo. En euskera, «Y-ren X-rekiko erregresio-zuzena».
+- **Contenido:** diagnóstico 115001–115008; práctica 1–20; retos 101–115; banco 1–50 (10 por etapa). Respuestas con `readStatisticsAnswer`.
+- **Trucos:** los pares van siempre como fórmula `$(2,\,1)$` para que el árabe no les dé la vuelta. `deviationProducts` suma `+ 0` para no dar −0. A 375 px las figuras se ven pequeñas: la tabla de doble entrada usa números de 24.
+- **Revisión:** las 16 lecciones a 375 px en eu, es y ar con todos los pasos abiertos: sin desbordes, sin textos que se pisen o se salgan de las figuras (medido con `getBBox`) y sin LaTeX sin dibujar.
+
 ## En curso
 
-- 2026-11-06: fuentes leídas y propuesta enviada al dueño (menú F, V, L, M, J). Siguiente paso: esperar su elección; no construir nada antes.
+- Fase 1+2 hecha. Siguiente: fase 3, laboratorio (L1 «Los cuatro cuadrantes», L2 «Las tijeras», L3 «¿Independientes?», y las prestadas `scatter` y `contingency` de 4.º ap), ids 115101–115399.

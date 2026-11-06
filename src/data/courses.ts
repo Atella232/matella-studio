@@ -176,7 +176,7 @@ export const courses: Course[] = [
       { id: 'aplicaciones-derivada', name: 'Aplicaciones de la Derivada', nameEu: 'Deribatuaren Aplikazioak', nameAr: 'تطبيقات المشتقة', nameEn: 'Applications of the Derivative', icon: '⛰️' },
       { id: 'integrales', name: 'Integrales', nameEu: 'Integralak', nameAr: 'التكاملات', nameEn: 'Integrals', icon: '∫' },
       { id: 'estadistica', name: 'Estadística Unidimensional', nameEu: 'Estatistika Unidimentsionala', nameAr: 'الإحصاء أحادي المتغير', nameEn: 'One-Variable Statistics', icon: '📊', active: true },
-      { id: 'estadistica-bidimensional', name: 'Estadística Bidimensional', nameEu: 'Estatistika Bidimentsionala', nameAr: 'الإحصاء ثنائي المتغير', nameEn: 'Two-Variable Statistics', icon: '⁘' },
+      { id: 'estadistica-bidimensional', name: 'Estadística Bidimensional', nameEu: 'Estatistika Bidimentsionala', nameAr: 'الإحصاء ثنائي المتغير', nameEn: 'Two-Variable Statistics', icon: '⁘', active: true },
     ]
   },
   {
