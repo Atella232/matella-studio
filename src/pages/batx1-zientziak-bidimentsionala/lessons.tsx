@@ -232,7 +232,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         ),
         stepsKind: 'steps',
         steps: [
-            { text: say('Batez bestekoak.', 'Las medias.', 'المتوسطان.', 'The means.'), math: same('$\\bar{x}=\\frac{1+2+3+4+5}{5}=3\\qquad\\bar{y}=\\frac{2+3+5+4+6}{5}=4$') },
+            { text: say('Batez bestekoak.', 'Las medias.', 'المتوسطان.', 'The means.'), math: same('$\\begin{gathered}\\bar{x}=\\frac{1+2+3+4+5}{5}=3\\\\ \\bar{y}=\\frac{2+3+5+4+6}{5}=4\\end{gathered}$') },
             { text: say('$x\\cdot y$ biderkaduren batez bestekoa.', 'La media de los productos $x\\cdot y$.', 'متوسط الجداءات $x\\cdot y$.', 'The mean of the products $x\\cdot y$.'), math: same('$\\frac{2+6+15+16+30}{5}=\\frac{69}{5}=13{,}8$') },
             { text: say('Batez bestekoen biderkadura kentzen da.', 'Se resta el producto de las medias.', 'نطرح جداء المتوسطين.', 'Subtract the product of the means.'), math: same('$\\sigma_{xy}=13{,}8-3\\cdot 4=1{,}8$') }
         ],
@@ -390,7 +390,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         ),
         stepsKind: 'steps',
         steps: [
-            { text: say('Biak $(\\bar{x},\\bar{y})$ puntutik pasatzen dira: sistema ebazten da.', 'Las dos pasan por $(\\bar{x},\\bar{y})$: se resuelve el sistema.', 'يمرّ كلاهما بـ $(\\bar{x},\\bar{y})$: نحلّ النظام.', 'Both pass through $(\\bar{x},\\bar{y})$: solve the system.'), math: same('$x=0{,}4\\,(0{,}9x+5{,}5)+1\\ \\to\\ 0{,}64x=3{,}2\\ \\to\\ x=5$') },
+            { text: say('Biak $(\\bar{x},\\bar{y})$ puntutik pasatzen dira: sistema ebazten da.', 'Las dos pasan por $(\\bar{x},\\bar{y})$: se resuelve el sistema.', 'يمرّ كلاهما بـ $(\\bar{x},\\bar{y})$: نحلّ النظام.', 'Both pass through $(\\bar{x},\\bar{y})$: solve the system.'), math: same('$\\begin{gathered}x=0{,}4\\,(0{,}9x+5{,}5)+1\\\\ 0{,}64x=3{,}2\\ \\to\\ x=5\\end{gathered}$') },
             { text: say('y lehenengo zuzenean.', 'La y, en la primera recta.', 'قيمة y من المستقيم الأول.', 'y, from the first line.'), math: same('$y=0{,}9\\cdot 5+5{,}5=10$') },
             { text: say('Koefizienteen biderkadura $r^2$ da, eta r koefizienteak haien zeinua du.', 'El producto de los coeficientes es $r^2$, y r tiene su signo.', 'جداء المعاملين هو $r^2$، وr بإشارتهما.', 'The product of the coefficients is $r^2$, and r has their sign.'), math: same('$r^2=0{,}9\\cdot 0{,}4=0{,}36\\qquad r=\\sqrt{0{,}36}=0{,}6$') }
         ],
@@ -419,8 +419,8 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stepsKind: 'steps',
         steps: [
             { text: say('Klase-markak.', 'Las marcas de clase.', 'مراكز الفئات.', 'The class marks.'), math: same('$x\\in\\{10,\\ 20\\}\\qquad y\\in\\{1,\\ 3\\}$') },
-            { text: say('Batez bestekoak, marjinalekin.', 'Las medias, con las marginales.', 'المتوسطان من التوزيعين الهامشيين.', 'The means, with the marginals.'), math: same('$\\bar{x}=\\frac{8\\cdot 10+12\\cdot 20}{20}=16\\qquad\\bar{y}=\\frac{8\\cdot 1+12\\cdot 3}{20}=2{,}2$') },
-            { text: say('Biderkadura bakoitza, bere gelaxkaren maiztasunaz biderkatuta.', 'Cada producto, por la frecuencia de su casilla.', 'كل جداء مضروبًا في تكرار خانته.', 'Each product, times the frequency of its cell.'), math: same('$\\frac{6\\cdot 10\\cdot 1+2\\cdot 10\\cdot 3+2\\cdot 20\\cdot 1+10\\cdot 20\\cdot 3}{20}-16\\cdot 2{,}2=2{,}8$') }
+            { text: say('Batez bestekoak, marjinalekin.', 'Las medias, con las marginales.', 'المتوسطان من التوزيعين الهامشيين.', 'The means, with the marginals.'), math: same('$\\begin{gathered}\\bar{x}=\\frac{8\\cdot 10+12\\cdot 20}{20}=16\\\\ \\bar{y}=\\frac{8\\cdot 1+12\\cdot 3}{20}=2{,}2\\end{gathered}$') },
+            { text: say('Biderkadura bakoitza, bere gelaxkaren maiztasunaz biderkatuta.', 'Cada producto, por la frecuencia de su casilla.', 'كل جداء مضروبًا في تكرار خانته.', 'Each product, times the frequency of its cell.'), math: same('$\\begin{gathered}\\sum f_{ij}\\,x_i\\,y_j=60+60+40+600=760\\\\ \\sigma_{xy}=\\frac{760}{20}-16\\cdot 2{,}2=2{,}8\\end{gathered}$') }
         ],
         takeaway: say(
             'Datu multzokatuekin, tarte bakoitzaren ordez bere klase-marka hartzen da, eta $x_i\\,y_j$ biderkadura bakoitza bere gelaxkaren $f_{ij}$ maiztasunaz biderkatzen da: $\\sigma_{xy}=\\frac{\\sum f_{ij}\\,x_i\\,y_j}{N}-\\bar{x}\\,\\bar{y}$.',
@@ -444,8 +444,8 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         ),
         stepsKind: 'steps',
         steps: [
-            { text: say('Zutabeen baturak.', 'Las sumas de las columnas.', 'مجاميع الأعمدة.', 'The sums of the columns.'), math: same('$\\sum x=12\\qquad\\sum y=16\\qquad\\sum x^2=46\\qquad\\sum y^2=74\\qquad\\sum xy=56$') },
-            { text: say('Bariantzak eta kobariantza, $\\bar{x}=3$ eta $\\bar{y}=4$ izanik.', 'Varianzas y covarianza, con $\\bar{x}=3$ e $\\bar{y}=4$.', 'التباينان والتغاير، مع $\\bar{x}=3$ و$\\bar{y}=4$.', 'Variances and covariance, with $\\bar{x}=3$ and $\\bar{y}=4$.'), math: same('$\\sigma_x^2=\\frac{46}{4}-3^2=2{,}5\\qquad\\sigma_y^2=\\frac{74}{4}-4^2=2{,}5\\qquad\\sigma_{xy}=\\frac{56}{4}-3\\cdot 4=2$') },
+            { text: say('Zutabeen baturak.', 'Las sumas de las columnas.', 'مجاميع الأعمدة.', 'The sums of the columns.'), math: same('$\\begin{gathered}\\sum x=12\\qquad\\sum y=16\\\\ \\sum x^2=46\\qquad\\sum y^2=74\\\\ \\sum xy=56\\end{gathered}$') },
+            { text: say('Bariantzak eta kobariantza, $\\bar{x}=3$ eta $\\bar{y}=4$ izanik.', 'Varianzas y covarianza, con $\\bar{x}=3$ e $\\bar{y}=4$.', 'التباينان والتغاير، مع $\\bar{x}=3$ و$\\bar{y}=4$.', 'Variances and covariance, with $\\bar{x}=3$ and $\\bar{y}=4$.'), math: same('$\\begin{gathered}\\sigma_x^2=\\frac{46}{4}-3^2=2{,}5\\\\ \\sigma_y^2=\\frac{74}{4}-4^2=2{,}5\\\\ \\sigma_{xy}=\\frac{56}{4}-3\\cdot 4=2\\end{gathered}$') },
             { text: say('r eta zuzena.', 'r y la recta.', 'r والمستقيم.', 'r and the line.'), math: same('$r=\\frac{2}{\\sqrt{2{,}5\\cdot 2{,}5}}=0{,}8\\qquad y-4=0{,}8\\,(x-3)$') }
         ],
         takeaway: say(

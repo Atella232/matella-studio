@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { bivarChallenges, bivarDiagnostic, bivarExerciseBank, bivarPractice } from './content'
 import { BivariateHeroArt } from './figures'
+import { BivarLaboratory } from './lab'
+import { bivarLabChallengeIds, bivarLabToolForTopic, bivarLabTools } from './lab/labTools'
 import { bivarStages, bivarTopics } from './lessons'
 
 const bidimentsionalaBatx1zUnit: UnitDefinition = {
@@ -25,6 +27,17 @@ const bidimentsionalaBatx1zUnit: UnitDefinition = {
     guidedPractice: bivarPractice,
     exerciseBank: bivarExerciseBank,
     challenges: bivarChallenges,
+    lab: {
+        description: {
+            eu: `${bivarLabTools.length} tresna, erronkekin: independenteak?, lau koadranteak eta guraizeak, berriak; eta 4. DBHko kontingentzia-taula eta hodeia, r eta erregresio-zuzena.`,
+            es: `${bivarLabTools.length} herramientas con retos: ¿independientes?, los cuatro cuadrantes y las tijeras, nuevas; y de 4.º ESO, la tabla de contingencia y la nube, r y la recta de regresión.`,
+            en: `${bivarLabTools.length} tools with challenges: independent?, the four quadrants and the scissors, new; and from 4th ESO, the contingency table and the cloud, r and the regression line.`,
+            ar: `${bivarLabTools.length} أدوات مع تحديات: مستقلان؟ والأرباع الأربعة والمقصّ، وهي جديدة؛ ومن الصف الرابع: جدول التوافق والسحابة وr ومستقيم الانحدار.`
+        },
+        progressIds: bivarLabChallengeIds,
+        toolForTopic: bivarLabToolForTopic,
+        render: (props) => <BivarLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −2, 0,15 edo 1/3.', es: 'Escribe un número: 5, −2, 0,15 o 1/3.', en: 'Write a number: 5, −2, 0.15 or 1/3.', ar: 'اكتب عددًا: 5 أو ⁦−2⁩ أو 0.15 أو 1/3.' },
         defaultForm: 'any',
